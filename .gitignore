@@ -1,0 +1,12 @@
+*.pyc
+*~
+bin/
+parts/
+develop-eggs/
+src/ututi.egg-info/
+python/
+development.db
+tags
+TAGS
+ID
+.installed.cfg
