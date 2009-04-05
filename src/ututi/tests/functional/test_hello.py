@@ -3,25 +3,30 @@
 :unittest:
 
 """
-from ututi.tests import *
-
-class TestHelloController(TestController):
-
-    def test_index(self):
-        response = self.app.get(url(controller='hello', action='index'))
-        self.assertEqual(response.body, '')
-
 
 def doctest_foo():
     """
+       :layer: ututi.tests.PylonsLayer
+       :setup: ututi.tests.setUp
+       :teardown: ututi.tests.tearDown
 
+       >>> from ututi.tests import url
        >>> print "lalala"
        lalala
 
-       >>> import pylons.test
-       >>> app = pylons.test.pylonsapp
        >>> response = app.get(url(controller='hello', action='index'))
-       >>> response.body
+       >>> print response.body
+       <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+       <html>
+         <head>
+          <title>OMG it works!</title>
+         </head>
+         <body>
+       <h1>Hello</h1>
+       <p>Lorum ipsum dolor yadda yadda</p>
+         </body>
+       </html>
 
     """
 
