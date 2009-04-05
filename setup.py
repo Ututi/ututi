@@ -16,7 +16,6 @@ setup(
     package_dir={'': 'src'},
     packages=find_packages('src'),
     include_package_data=True,
-    test_suite='nose.collector',
     package_data={'ututi': ['i18n/*/LC_MESSAGES/*.mo']},
     message_extractors={'ututi': [
            ('**.py', 'python', None),
