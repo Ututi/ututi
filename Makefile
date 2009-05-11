@@ -14,11 +14,23 @@ python/bin/python:
 bin/buildout: bootstrap.py
 	$(MAKE) BOOTSTRAP_PYTHON=$(BOOTSTRAP_PYTHON) bootstrap
 
-bin/test: buildout.cfg bin/buildout
+bin/test: buildout.cfg bin/buildout setup.py
 	bin/buildout
 
-bin/paster: buildout.cfg bin/buildout
+bin/paster: buildout.cfg bin/buildout setup.py
 	bin/buildout
+
+bin/tags: buildout.cfg bin/buildout setup.py
+	bin/buildout
+
+tags: buildout.cfg bin/buildout setup.py bin/tags
+	bin/tags
+
+TAGS: buildout.cfg bin/buildout setup.py bin/tags
+	bin/tags
+
+ID: buildout.cfg bin/buildout setup.py bin/tags
+	bin/tags
 
 .PHONY: bootstrap
 bootstrap:
