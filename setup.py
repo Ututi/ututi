@@ -11,7 +11,10 @@ setup(
         "Pylons",
         "SQLAlchemy",
         "grokcore.component",
-        "z3c.testsetup"
+        "z3c.testsetup",
+        "repoze.who",
+        "repoze.what",
+        "psycopg2"
     ],
     package_dir={'': 'src'},
     packages=find_packages('src'),

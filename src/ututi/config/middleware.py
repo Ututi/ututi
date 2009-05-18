@@ -4,12 +4,29 @@ from paste.cascade import Cascade
 from paste.registry import RegistryManager
 from paste.urlparser import StaticURLParser
 from paste.deploy.converters import asbool
-from pylons import config
+from pylons import request, tmpl_context, response, session, config
 from pylons.middleware import ErrorHandler, StatusCodeRedirect
 from pylons.wsgiapp import PylonsApp
 from routes.middleware import RoutesMiddleware
 
+import zope.configuration.config
+
+from ututi.grok.grokker import do_grok
 from ututi.config.environment import load_environment
+
+def grok_app():
+    items = [request, tmpl_context, response, session]
+    for item in items:
+        item._push_object(object())
+
+    zope_config = zope.configuration.config.ConfigurationMachine()
+    do_grok('grokcore.component', zope_config)
+    do_grok('ututi', zope_config)
+    zope_config.execute_actions()
+
+    for item in items:
+        item._pop_object()
+
 
 def make_app(global_conf, full_stack=True, static_files=True, **app_conf):
     """Create a Pylons WSGI application and return it
@@ -37,20 +54,7 @@ def make_app(global_conf, full_stack=True, static_files=True, **app_conf):
     # Configure the Pylons environment
     load_environment(global_conf, app_conf)
 
-    from ututi.grok.grokker import do_grok
-    import zope.configuration.config
-    from pylons import request, tmpl_context, response, session
-    items = [request, tmpl_context, response, session]
-    for item in items:
-        item._push_object(object())
-
-    zope_config = zope.configuration.config.ConfigurationMachine()
-    do_grok('grokcore.component', zope_config)
-    do_grok('ututi', zope_config)
-    zope_config.execute_actions()
-
-    for item in items:
-        item._pop_object()
+    grok_app()
 
     # The Pylons WSGI app
     app = PylonsApp()

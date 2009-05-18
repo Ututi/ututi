@@ -11,6 +11,8 @@ from zope.component.eventtesting import PlacelessSetup as EventPlacelessSetup
 import pylons.test
 from pylons.i18n.translation import _get_translator
 
+from ututi.model import meta
+
 __all__ = ['environ', 'url']
 
 environ = {}
@@ -45,12 +47,14 @@ class PylonsLayer(object):
         pylons.translator._push_object(translator)
         url._push_object(URLGenerator(config['routes.map'], environ))
         # XXX Set up database here
+        meta.metadata.create_all(meta.engine)
 
     @classmethod
     def testTearDown(self):
         url._pop_object()
         pylons.translator._pop_object()
         # XXX Tear down database here
+        meta.Session.remove()
 
 
 def setUp(test):

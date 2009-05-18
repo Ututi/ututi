@@ -15,7 +15,6 @@ def init_model(engine):
     meta.Session.configure(bind=engine)
     meta.engine = engine
 
-
 ## Non-reflected tables may be defined and mapped at module level
 #foo_table = sa.Table("Foo", meta.metadata,
 #    sa.Column("id", sa.types.Integer, primary_key=True),
@@ -34,3 +33,14 @@ def init_model(engine):
 #
 #class Reflected(object):
 #    pass
+
+t_people = sa.Table('people', meta.metadata,
+    sa.Column('id', sa.types.Integer, primary_key=True),
+    sa.Column('name', sa.types.String(100)),
+    sa.Column('email', sa.types.String(100))
+)
+
+class Person(object):
+    pass
+
+orm.mapper(Person, t_people)
