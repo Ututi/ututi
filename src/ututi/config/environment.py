@@ -15,6 +15,13 @@ def load_environment(global_conf, app_conf):
     """Configure the Pylons environment via the ``pylons.config``
     object
     """
+
+    # Perform our own postgress port substitution
+    if 'sqlalchemy.url' in app_conf:
+        alchemy_url = app_conf['sqlalchemy.url']
+        pgport = os.environ.get("PGPORT", "4455")
+        app_conf['sqlalchemy.url'] = alchemy_url.replace("$(pgport)", pgport)
+
     # Pylons paths
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     paths = dict(root=root,
