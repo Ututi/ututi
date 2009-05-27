@@ -1,7 +1,9 @@
 """The application's model objects"""
+import hashlib
 import pkg_resources
 import sqlalchemy as sa
 from sqlalchemy import orm
+from sqlalchemy.orm.exc import NoResultFound
 
 from ututi.model import meta
 
@@ -29,7 +31,10 @@ def initialize_db_defaults(engine):
         if (statement and
             not statement.startswith("/*") and
             not statement.startswith('--')):
-            connection.execute(statement)
+            try:
+                connection.execute(statement)
+            except:
+                pass
     connection.close()
     setup_orm(engine)
 
@@ -51,6 +56,20 @@ def teardown_db_defaults(engine):
 users_table = None
 
 class User(object):
+
+    @classmethod
+    def authenticate(cls, username, password):
+        pwd_hash = hashlib.md5(password + 'ewze1ul6').hexdigest()
+        try:
+            user = meta.Session.query(cls).filter_by(name=username, password=pwd_hash).one()
+            return username
+        except NoResultFound:
+            return None
+        return None
+
+    @classmethod
+    def get(cls, username):
+        return meta.Session.query(cls).filter_by(name=username).one()
 
     def __init__(self, fullname, password):
         self.name = fullname

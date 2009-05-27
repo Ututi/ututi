@@ -12,7 +12,9 @@ log = logging.getLogger(__name__)
 class HomeController(BaseController):
 
     def index(self):
-        return render('/index.mako')
-
-    def login(self):
-        return render('/index.mako')
+        identity = request.environ.get('repoze.who.identity')
+        if identity is not None:
+            user = identity.get('user')
+            return render('/index.mako')
+        else:
+            return render('/anonymous_index.mako')

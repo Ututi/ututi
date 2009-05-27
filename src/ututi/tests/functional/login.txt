@@ -1,7 +1,82 @@
-Our system initially comes with one user, who is also a super user:
+Log in form
+===========
+
+Our system initially comes with one user, who is also a super
+user. Let's try logging in as him.
+
+If user is not logged in login form is shown. Let's fill it in:
 
     >>> response = app.get('/')
     >>> login_form = response.forms['login_form']
-    >>> login_form.set('username', "admin")
+    >>> login_form.set('login', "admin")
     >>> login_form.set('password', "asdasd")
-    >>> result = login_form.submit()
+    >>> response = login_form.submit()
+
+After successful login we get redirected to the index page:
+
+    >>> print response
+    Response: 302 Found
+    Content-Type: text/plain; charset=utf8
+    Location: /
+    ...
+    302 Found
+    The resource was found at /;
+    you should be redirected automatically.
+
+    >>> response = response.follow()
+
+And we are greeted by the welcome page:
+
+    >>> print response
+    Response: 200 OK
+    Cache-Control: no-cache
+    Content-Type: text/html; charset=utf-8
+    Pragma: no-cache
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html>
+      <head>
+      <title>UTUTI – student information online</title>
+      </head>
+      <body>
+    <h1>Welcome!</h1>
+    <a href="/logout">Log out</a>
+      </body>
+    </html>
+
+As we have successfully logged in let's logout and make some typos:
+
+    >>> response = response.click('Log out')
+    >>> response = response.follow()
+    >>> response.request.url
+    'http://localhost/?came_from=%2F'
+
+    >>> "login_form" in response.forms
+    True
+
+If we enter the username wrong - we get redirected back to the login
+form, but not logged in:
+
+    >>> response.form.set('login', "odmin")
+    >>> response.form.set('password', "asdasd")
+    >>> response = response.form.submit()
+    >>> response = response.follow()
+    >>> response.request.url
+    'http://localhost/'
+
+    >>> "login_form" in response.forms
+    True
+
+Let's enter the password wrong:
+
+    >>> response.form.set('login', "admin")
+    >>> response.form.set('password', "asd")
+    >>> response = response.form.submit()
+    >>> response = response.follow()
+    >>> response.request.url
+    'http://localhost/'
+
+    >>> "login_form" in response.forms
+    True
+
+Still permission is denied.
