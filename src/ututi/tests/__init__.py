@@ -1,10 +1,16 @@
 """Pylons application test package
 """
+import sys
+import webbrowser
+import pkg_resources
+
+from wsgiref.simple_server import make_server
 from paste.deploy import loadapp
 from pylons import config, url
 from routes.util import URLGenerator
 from webtest import TestApp
 
+from zope.testing.server import addPortToURL
 from zope.component.testing import setUp as zcSetUp, tearDown as zcTearDown
 from zope.component.eventtesting import PlacelessSetup as EventPlacelessSetup
 
@@ -20,6 +26,33 @@ environ = {}
 import os
 here_dir = os.path.dirname(os.path.abspath(__file__))
 conf_dir = os.path.dirname(os.path.dirname(os.path.dirname(here_dir)))
+
+
+def initialize_db_defaults():
+    initial_db_data = pkg_resources.resource_string(
+        "ututi",
+        "config/defaults.sql").splitlines()
+    connection = meta.engine.connect()
+    for statement in initial_db_data:
+        statement = statement.strip()
+        if (statement and
+            not statement.startswith("/*") and
+            not statement.startswith('--')):
+            connection.execute(statement)
+    connection.close()
+
+
+def teardown_db_defaults():
+    initial_db_data = pkg_resources.resource_string(
+        "ututi",
+        "config/defaults.sql").splitlines()
+    connection = meta.engine.connect()
+    for statement in initial_db_data:
+        statement = statement.strip()
+        if statement.startswith("---"):
+            statement = statement[3:].strip()
+            connection.execute(statement)
+    connection.close()
 
 
 class PylonsLayer(object):
@@ -47,18 +80,40 @@ class PylonsLayer(object):
         pylons.translator._push_object(translator)
         url._push_object(URLGenerator(config['routes.map'], environ))
         # XXX Set up database here
-        meta.metadata.create_all(meta.engine)
+        # meta.metadata.create_all(meta.engine)
+        initialize_db_defaults()
 
     @classmethod
     def testTearDown(self):
         url._pop_object()
         pylons.translator._pop_object()
         # XXX Tear down database here
+        teardown_db_defaults()
         meta.Session.remove()
 
 
+class UtutiTestApp(TestApp):
+
+    request = None
+
+    def do_request(self, req, status, expect_errors):
+        self.request = req
+        return super(UtutiTestApp, self).do_request(req, status, expect_errors)
+
+    def serve(self):
+        try:
+            page_url = getattr(self.request, 'url', 'http://localhost/')
+            # XXX we rely on browser being slower than our server
+            webbrowser.open(addPortToURL(page_url, 5001))
+            print >> sys.stderr, 'Starting HTTP server...'
+            srv = make_server('localhost', 5001, pylons.test.pylonsapp)
+            srv.serve_forever()
+        except KeyboardInterrupt:
+            print >> sys.stderr, 'Stopped HTTP server.'
+
+
 def setUp(test):
-    test.globs['app'] = TestApp(pylons.test.pylonsapp)
+    test.globs['app'] = UtutiTestApp(pylons.test.pylonsapp)
 
 
 def tearDown(test):

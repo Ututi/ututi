@@ -1,0 +1,7 @@
+Our system initially comes with one user, who is also a super user:
+
+    >>> response = app.get('/')
+    >>> login_form = response.forms['login_form']
+    >>> login_form.set('username', "admin")
+    >>> login_form.set('password', "asdasd")
+    >>> result = login_form.submit()

@@ -34,13 +34,17 @@ def init_model(engine):
 #class Reflected(object):
 #    pass
 
-t_people = sa.Table('people', meta.metadata,
+t_users = sa.Table(
+    'users', meta.metadata,
     sa.Column('id', sa.types.Integer, primary_key=True),
-    sa.Column('name', sa.types.String(100)),
-    sa.Column('email', sa.types.String(100))
+    sa.Column('fullname', sa.types.String),
+    sa.Column('password', sa.types.String)
 )
 
-class Person(object):
-    pass
+class User(object):
 
-orm.mapper(Person, t_people)
+    def __init__(self, fullname, password):
+        self.name = fullname
+        self.password = password
+
+orm.mapper(User, t_users)
