@@ -51,6 +51,14 @@ instance/var/run/.s.PGSQL.${PGPORT}:
 	${PG_PATH}/bin/pg_ctl -D instance/var/data -o "-c unix_socket_directory=${PWD}/instance/var/run/" start  -l instance/var/log/pg.log
 	sleep 5
 
+.PHONY: testpsql
+tespsql:
+	psql -h ${PWD}/instance/var/run/ -d test
+
+.PHONY: devpsql
+devpsql:
+	psql -h ${PWD}/instance/var/run/ -d development
+
 .PHONY: instance
 instance: instance/done
 
