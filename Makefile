@@ -100,7 +100,7 @@ ftest: bin/test instance/done instance/var/run/.s.PGSQL.${PGPORT}
 
 .PHONY: run
 run: bin/paster instance/done instance/var/run/.s.PGSQL.${PGPORT}
-	bin/paster serve development.ini
+	bin/paster serve development.ini --reload --monitor-restart
 
 .PHONY: clean
 clean:
