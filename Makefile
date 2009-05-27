@@ -38,13 +38,13 @@ instance/var/data/initialized:
 	${PG_PATH}/bin/createdb --owner admin -E UTF8 development -h ${PWD}/instance/var/run
 	${PG_PATH}/bin/createlang plpgsql development -h ${PWD}/instance/var/run
 	bin/paster setup-app development.ini
-	touch instance/var/data/initialized
+	echo 1 > instance/var/data/initialized
 
 instance/done: instance/var/data/postgresql.conf
 	$(MAKE) start_database
 	$(MAKE) instance/var/data/initialized
 	$(MAKE) stop_database
-	touch instance/done
+	echo 1 > instance/done
 
 instance/var/run/.s.PGSQL.${PGPORT}:
 	mkdir -p instance/var/run
