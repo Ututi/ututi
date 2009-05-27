@@ -17,6 +17,9 @@ from zope.component.eventtesting import PlacelessSetup as EventPlacelessSetup
 import pylons.test
 from pylons.i18n.translation import _get_translator
 
+from ututi.model import teardown_db_defaults
+from ututi.model import setup_orm
+from ututi.model import initialize_db_defaults
 from ututi.model import meta
 
 __all__ = ['environ', 'url']
@@ -26,33 +29,6 @@ environ = {}
 import os
 here_dir = os.path.dirname(os.path.abspath(__file__))
 conf_dir = os.path.dirname(os.path.dirname(os.path.dirname(here_dir)))
-
-
-def initialize_db_defaults():
-    initial_db_data = pkg_resources.resource_string(
-        "ututi",
-        "config/defaults.sql").splitlines()
-    connection = meta.engine.connect()
-    for statement in initial_db_data:
-        statement = statement.strip()
-        if (statement and
-            not statement.startswith("/*") and
-            not statement.startswith('--')):
-            connection.execute(statement)
-    connection.close()
-
-
-def teardown_db_defaults():
-    initial_db_data = pkg_resources.resource_string(
-        "ututi",
-        "config/defaults.sql").splitlines()
-    connection = meta.engine.connect()
-    for statement in initial_db_data:
-        statement = statement.strip()
-        if statement.startswith("---"):
-            statement = statement[3:].strip()
-            connection.execute(statement)
-    connection.close()
 
 
 class PylonsLayer(object):
@@ -66,6 +42,7 @@ class PylonsLayer(object):
         if pylons.test.pylonsapp is None:
             pylons.test.pylonsapp = loadapp('config:test.ini',
                                             relative_to=conf_dir)
+
 
     @classmethod
     def tearDown(self):
@@ -81,14 +58,14 @@ class PylonsLayer(object):
         url._push_object(URLGenerator(config['routes.map'], environ))
         # XXX Set up database here
         # meta.metadata.create_all(meta.engine)
-        initialize_db_defaults()
+        initialize_db_defaults(meta.engine)
 
     @classmethod
     def testTearDown(self):
         url._pop_object()
         pylons.translator._pop_object()
         # XXX Tear down database here
-        teardown_db_defaults()
+        teardown_db_defaults(meta.engine)
         meta.Session.remove()
 
 

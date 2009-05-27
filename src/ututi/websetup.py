@@ -1,6 +1,7 @@
 """Setup the ututi application"""
 import logging
 
+from ututi.model import initialize_db_defaults
 from ututi.config.environment import load_environment
 from ututi.model import meta
 
@@ -11,4 +12,4 @@ def setup_app(command, conf, vars):
     load_environment(conf.global_conf, conf.local_conf)
 
     # Create the tables if they don't already exist
-    meta.metadata.create_all(bind=meta.engine)
+    initialize_db_defaults(meta.engine)

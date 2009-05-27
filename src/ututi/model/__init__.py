@@ -1,4 +1,5 @@
 """The application's model objects"""
+import pkg_resources
 import sqlalchemy as sa
 from sqlalchemy import orm
 
@@ -7,44 +8,50 @@ from ututi.model import meta
 def init_model(engine):
     """Call me before using any of the tables or classes in the model"""
     ## Reflected tables must be defined and mapped here
-    #global reflected_table
-    #reflected_table = sa.Table("Reflected", meta.metadata, autoload=True,
-    #                           autoload_with=engine)
-    #orm.mapper(Reflected, reflected_table)
-    #
     meta.Session.configure(bind=engine)
     meta.engine = engine
 
-## Non-reflected tables may be defined and mapped at module level
-#foo_table = sa.Table("Foo", meta.metadata,
-#    sa.Column("id", sa.types.Integer, primary_key=True),
-#    sa.Column("bar", sa.types.String(255), nullable=False),
-#    )
-#
-#class Foo(object):
-#    pass
-#
-#orm.mapper(Foo, foo_table)
+
+def setup_orm(engine):
+    global users_table
+    users_table = sa.Table("users", meta.metadata, autoload=True,
+                           autoload_with=engine)
+    orm.mapper(User, users_table)
 
 
-## Classes for reflected tables may be defined here, but the table and
-## mapping itself must be done in the init_model function
-#reflected_table = None
-#
-#class Reflected(object):
-#    pass
+def initialize_db_defaults(engine):
+    initial_db_data = pkg_resources.resource_string(
+        "ututi",
+        "config/defaults.sql").splitlines()
+    connection = meta.engine.connect()
+    for statement in initial_db_data:
+        statement = statement.strip()
+        if (statement and
+            not statement.startswith("/*") and
+            not statement.startswith('--')):
+            connection.execute(statement)
+    connection.close()
+    setup_orm(engine)
 
-t_users = sa.Table(
-    'users', meta.metadata,
-    sa.Column('id', sa.types.Integer, primary_key=True),
-    sa.Column('fullname', sa.types.String),
-    sa.Column('password', sa.types.String)
-)
+
+def teardown_db_defaults(engine):
+    orm.clear_mappers()
+    initial_db_data = pkg_resources.resource_string(
+        "ututi",
+        "config/defaults.sql").splitlines()
+    connection = meta.engine.connect()
+    for statement in initial_db_data:
+        statement = statement.strip()
+        if statement.startswith("---"):
+            statement = statement[3:].strip()
+            connection.execute(statement)
+    connection.close()
+
+
+users_table = None
 
 class User(object):
 
     def __init__(self, fullname, password):
         self.name = fullname
         self.password = password
-
-orm.mapper(User, t_users)
