@@ -43,4 +43,30 @@
       </tr>
     </table>
   </form>
+
+
+  <form id="registration_form" method="POST" action="/register">
+    <table>
+      <tr>
+        <td><label for="fullname">Fullname</label></td>
+        <td><input type="text" id="fullname" name="fullname" size="20"/></td>
+      </tr>
+      <tr>
+        <td><label for="email">Email</label></td>
+        <td><input type="text" id="email" name="email" size="20"/></td>
+      </tr>
+      <tr>
+        <td><label for="password">Password</label></td>
+        <td><input type="password" id="password" name="password" size="20"/></td>
+      </tr>
+      <tr>
+        <td><label for="repeat_password">Repeat password</label></td>
+        <td><input type="password" id="repeat_password" name="repeat_password" size="20"/></td>
+      </tr>
+      <tr>
+        <td colspan="2"><input type="submit" value="Register"/></td>
+      </tr>
+    </table>
+
+  </form>
 </div>
