@@ -14,7 +14,8 @@ setup(
         "z3c.testsetup",
         "repoze.who",
         "repoze.what",
-        "psycopg2"
+        "psycopg2",
+        "formencode"
     ],
     package_dir={'': 'src'},
     packages=find_packages('src'),
