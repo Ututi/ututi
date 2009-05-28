@@ -57,9 +57,9 @@ As we have successfully logged in let's logout and make some typos:
 If we enter the username wrong - we get redirected back to the login
 form, but not logged in:
 
-    >>> response.form.set('login', "odmin")
-    >>> response.form.set('password', "asdasd")
-    >>> response = response.form.submit()
+    >>> response.forms['login_form'].set('login', "odmin")
+    >>> response.forms['login_form'].set('password', "asdasd")
+    >>> response = response.forms['login_form'].submit()
     >>> response = response.follow()
     >>> response.request.url
     'http://localhost/'
@@ -69,9 +69,9 @@ form, but not logged in:
 
 Let's enter the password wrong:
 
-    >>> response.form.set('login', "admin")
-    >>> response.form.set('password', "asd")
-    >>> response = response.form.submit()
+    >>> response.forms['login_form'].set('login', "admin")
+    >>> response.forms['login_form'].set('password', "asd")
+    >>> response = response.forms['login_form'].submit()
     >>> response = response.follow()
     >>> response.request.url
     'http://localhost/'
