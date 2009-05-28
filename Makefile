@@ -128,6 +128,7 @@ ubuntu-environment:
 	 echo "I am running as $(shell whoami)"; \
 	 exit 3; \
 	} else { \
-	 apt-get install build-essential python-all python-all-dev postgresql
+	 apt-get build-dep python-psycopg2; \
+	 apt-get install build-essential python-all python-all-dev postgresql; \
 	 echo "Installation Complete: Next... Run 'make'."; \
 	} fi
