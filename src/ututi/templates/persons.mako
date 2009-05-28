@@ -4,7 +4,7 @@
    <title>${c.person}</title>
 </%def>
 
-<h1>Hello</h1>
+<h1>${_('Hello')}</h1>
 
 % for person in c.persons:
 <p>${person.name}</p>

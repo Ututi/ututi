@@ -16,12 +16,19 @@ bin/buildout: bootstrap.py
 
 bin/test: buildout.cfg bin/buildout setup.py
 	bin/buildout
+	touch bin/*
+
+bin/py: buildout.cfg bin/buildout setup.py
+	bin/buildout
+	touch bin/*
 
 bin/paster: buildout.cfg bin/buildout setup.py
 	bin/buildout
+	touch bin/*
 
 bin/tags: buildout.cfg bin/buildout setup.py
 	bin/buildout
+	touch bin/*
 
 instance/var/data/postgresql.conf:
 	mkdir -p instance/var/data
@@ -86,6 +93,7 @@ bootstrap:
 .PHONY: buildout
 buildout:
 	bin/buildout
+	touch bin/*
 
 .PHONY: test
 test: bin/test instance/done instance/var/run/.s.PGSQL.${PGPORT}
@@ -113,6 +121,14 @@ coverage: build
 	bin/test -u --coverage=coverage
 	mv parts/test/coverage .
 	@cd coverage && ls | grep -v tests | xargs grep -c '^>>>>>>' | grep -v ':0$$'
+
+.PHONY: extract-translations
+extract-translations: bin/py
+	bin/py setup.py extract_messages
+
+.PHONY: compile-translations
+compile-translations: bin/py
+	bin/py setup.py compile_catalog
 
 .PHONY: coverage-reports-html
 coverage-reports-html:

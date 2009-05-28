@@ -21,7 +21,7 @@ setup(
     packages=find_packages('src'),
     include_package_data=True,
     package_data={'ututi': ['i18n/*/LC_MESSAGES/*.mo']},
-    message_extractors={'ututi': [
+    message_extractors={'src/ututi': [
            ('**.py', 'python', None),
            ('templates/**.mako', 'mako', {'input_encoding': 'utf-8'}),
            ('public/**', 'ignore', None)]},
