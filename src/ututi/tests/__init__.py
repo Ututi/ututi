@@ -58,7 +58,7 @@ class PylonsLayer(object):
         url._push_object(URLGenerator(config['routes.map'], environ))
         # XXX Set up database here
         # meta.metadata.create_all(meta.engine)
-        teardown_db_defaults(meta.engine)
+        teardown_db_defaults(meta.engine, quiet=True)
         initialize_db_defaults(meta.engine)
 
     @classmethod

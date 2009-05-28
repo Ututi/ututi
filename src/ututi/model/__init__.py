@@ -41,7 +41,7 @@ def initialize_db_defaults(engine):
     connection.close()
 
 
-def teardown_db_defaults(engine):
+def teardown_db_defaults(engine, quiet=False):
     initial_db_data = pkg_resources.resource_string(
         "ututi",
         "config/defaults.sql").splitlines()
@@ -53,7 +53,8 @@ def teardown_db_defaults(engine):
                 statement = statement[3:].strip()
                 connection.execute(statement)
             except DatabaseError, e:
-                print >> sys.stderr, str(e)
+                if not quiet:
+                    print >> sys.stderr, str(e)
     connection.close()
 
 
