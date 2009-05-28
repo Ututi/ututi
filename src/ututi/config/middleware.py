@@ -11,6 +11,7 @@ from routes.middleware import RoutesMiddleware
 
 import zope.configuration.config
 
+from ututi.model import meta, setup_orm
 from ututi.grok.grokker import do_grok
 from ututi.config.environment import load_environment
 from repoze.who.config import make_middleware_with_config as make_who_with_config
@@ -54,6 +55,7 @@ def make_app(global_conf, full_stack=True, static_files=True, **app_conf):
     """
     # Configure the Pylons environment
     load_environment(global_conf, app_conf)
+    setup_orm(meta.engine)
 
     grok_app()
 

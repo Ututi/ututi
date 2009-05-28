@@ -36,11 +36,9 @@ def initialize_db_defaults(engine):
             except:
                 pass
     connection.close()
-    setup_orm(engine)
 
 
 def teardown_db_defaults(engine):
-    orm.clear_mappers()
     initial_db_data = pkg_resources.resource_string(
         "ututi",
         "config/defaults.sql").splitlines()
@@ -48,8 +46,11 @@ def teardown_db_defaults(engine):
     for statement in initial_db_data:
         statement = statement.strip()
         if statement.startswith("---"):
-            statement = statement[3:].strip()
-            connection.execute(statement)
+            try:
+                statement = statement[3:].strip()
+                connection.execute(statement)
+            except:
+                pass
     connection.close()
 
 

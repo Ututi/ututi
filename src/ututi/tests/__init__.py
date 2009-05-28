@@ -2,13 +2,13 @@
 """
 import sys
 import webbrowser
-import pkg_resources
 
 from wsgiref.simple_server import make_server
 from paste.deploy import loadapp
 from pylons import config, url
 from routes.util import URLGenerator
 from webtest import TestApp
+from paste.script.appinstall import SetupCommand
 
 from zope.testing.server import addPortToURL
 from zope.component.testing import setUp as zcSetUp, tearDown as zcTearDown
@@ -18,7 +18,6 @@ import pylons.test
 from pylons.i18n.translation import _get_translator
 
 from ututi.model import teardown_db_defaults
-from ututi.model import setup_orm
 from ututi.model import initialize_db_defaults
 from ututi.model import meta
 
@@ -40,6 +39,7 @@ class PylonsLayer(object):
         EventPlacelessSetup().setUp()
 
         if pylons.test.pylonsapp is None:
+            SetupCommand('setup-app').run([conf_dir + '/test.ini'])
             pylons.test.pylonsapp = loadapp('config:test.ini',
                                             relative_to=conf_dir)
 
@@ -58,6 +58,7 @@ class PylonsLayer(object):
         url._push_object(URLGenerator(config['routes.map'], environ))
         # XXX Set up database here
         # meta.metadata.create_all(meta.engine)
+        teardown_db_defaults(meta.engine)
         initialize_db_defaults(meta.engine)
 
     @classmethod
