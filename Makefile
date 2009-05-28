@@ -120,3 +120,14 @@ coverage-reports-html:
 	mkdir coverage/reports
 	bin/coverage
 	ln -s ututi.html coverage/reports/index.html
+
+.PHONY: ubuntu-environment
+ubuntu-environment:
+	@if [ `whoami` != "root" ]; then { \
+	 echo "You must be root to create an environment."; \
+	 echo "I am running as $(shell whoami)"; \
+	 exit 3; \
+	} else { \
+	 apt-get install build-essential python-all python-all-dev postgresql
+	 echo "Installation Complete: Next... Run 'make'."; \
+	} fi
