@@ -111,6 +111,38 @@ ftest: bin/test instance/done instance/var/run/.s.PGSQL.${PGPORT}
 run: bin/paster instance/done instance/var/run/.s.PGSQL.${PGPORT}
 	bin/paster serve development.ini --reload --monitor-restart
 
+.PHONY: start_testing
+start_testing: bin/paster
+	bin/paster serve ${PWD}/deployment/testing.ini --daemon --pid-file=${PWD}/deployment/testing.pid --log-file=${PWD}/deployment/testing.log
+
+.PHONY: start_debugging
+start_debugging: bin/paster
+	bin/paster serve ${PWD}/deployment/debugging.ini --daemon --pid-file=${PWD}/deployment/debugging.pid --log-file=${PWD}/deployment/testing.log
+
+.PHONY: start_staging
+start_staging: bin/paster
+	bin/paster serve ${PWD}/deployment/staging.ini --daemon --pid-file=${PWD}/deployment/staging.pid --log-file=${PWD}/deployment/testing.log
+
+.PHONY: start_release
+start_release: bin/paster
+	bin/paster serve ${PWD}/deployment/release.ini --daemon --pid-file=${PWD}/deployment/release.pid --log-file=${PWD}/deployment/testing.log
+
+.PHONY: stop_testing
+stop_testing: bin/paster
+	bin/paster serve ${PWD}/deployment/testing.ini --stop-daemon --pid-file=${PWD}/deployment/testing.pid
+
+.PHONY: stop_debugging
+stop_debugging: bin/paster
+	bin/paster serve ${PWD}/deployment/debugging.ini --stop-daemon --pid-file=${PWD}/deployment/debugging.pid
+
+.PHONY: stop_staging
+stop_staging: bin/paster
+	bin/paster serve ${PWD}/deployment/staging.ini --stop-daemon --pid-file=${PWD}/deployment/staging.pid
+
+.PHONY: stop_release
+stop_release: bin/paster
+	bin/paster serve ${PWD}/deployment/release.ini --stop-daemon --pid-file=${PWD}/deployment/release.pid
+
 .PHONY: clean
 clean:
 	rm -rf bin/ parts/ develop-eggs/ src/ututi.egg-info/ python/ tags TAGS ID .installed.cfg
