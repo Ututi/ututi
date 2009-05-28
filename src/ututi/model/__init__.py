@@ -1,11 +1,14 @@
 """The application's model objects"""
+import sys
 import hashlib
 import pkg_resources
 import sqlalchemy as sa
 from sqlalchemy import orm
+from sqlalchemy.exc import DatabaseError
 from sqlalchemy.orm.exc import NoResultFound
 
 from ututi.model import meta
+
 
 def init_model(engine):
     """Call me before using any of the tables or classes in the model"""
@@ -33,8 +36,8 @@ def initialize_db_defaults(engine):
             not statement.startswith('--')):
             try:
                 connection.execute(statement)
-            except:
-                pass
+            except DatabaseError, e:
+                print >> sys.stderr, str(e)
     connection.close()
 
 
@@ -49,8 +52,8 @@ def teardown_db_defaults(engine):
             try:
                 statement = statement[3:].strip()
                 connection.execute(statement)
-            except:
-                pass
+            except DatabaseError, e:
+                print >> sys.stderr, str(e)
     connection.close()
 
 
