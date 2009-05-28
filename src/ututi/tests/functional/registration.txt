@@ -1,0 +1,36 @@
+User registration
+=================
+
+Our new users will be greated by a page that has a registration form
+in it:
+
+    >>> response = app.get('/')
+    >>> form = response.forms['registration_form']
+
+We will only require your email address, name and password:
+
+    >>> form.set('fullname', 'Jonas Petraitis Petrauskas')
+    >>> form.set('email', 'jonas@example.com')
+    >>> form.set('password', 'asdfgh')
+    >>> form.set('repeat_password', 'asdfgh')
+    >>> response = form.submit()
+
+After registration is complete we should be hailed by our welcome
+screen:
+
+    >>> print response
+    Response: 200 OK
+    Cache-Control: no-cache
+    Content-Type: text/html; charset=utf-8
+    Pragma: no-cache
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html>
+      <head>
+      <title>UTUTI – student information online</title>
+      </head>
+      <body>
+    <h1>Welcome!</h1>
+    <a href="/logout">Log out</a>
+      </body>
+    </html>
