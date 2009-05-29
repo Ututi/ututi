@@ -36,13 +36,11 @@ def setup_orm(engine):
 def initialize_db_defaults(engine):
     initial_db_data = pkg_resources.resource_string(
         "ututi",
-        "config/defaults.sql").splitlines()
+        "config/defaults.sql").split(";")
     connection = meta.engine.connect()
     for statement in initial_db_data:
         statement = statement.strip()
-        if (statement and
-            not statement.startswith("/*") and
-            not statement.startswith('--')):
+        if (statement):
             try:
                 connection.execute(statement)
             except DatabaseError, e:
