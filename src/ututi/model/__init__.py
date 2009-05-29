@@ -3,10 +3,10 @@ import sys
 import hashlib
 import pkg_resources
 import sqlalchemy as sa
-from sqlalchemy import orm, Column, Integer, ForeignKey
+from sqlalchemy import orm
 from sqlalchemy.exc import DatabaseError
 from sqlalchemy.orm.exc import NoResultFound
-from sqlalchemy.orm import relation, backref
+from sqlalchemy.orm import relation
 
 from ututi.model import meta
 
@@ -24,15 +24,13 @@ def setup_orm(engine):
                            autoload_with=engine)
     orm.mapper(User, 
                users_table, 
-               properties = {'emails' : relation(Email)})
+               properties = {'emails' : relation(Email, backref='user')})
 
     global emails_table
     emails_table = sa.Table("emails", meta.metadata, 
                             autoload=True,
                             autoload_with=engine)
-    orm.mapper(Email, 
-               emails_table, 
-               properties = {'user' : relation(User)})
+    orm.mapper(Email, emails_table)
 
 
 def initialize_db_defaults(engine):
