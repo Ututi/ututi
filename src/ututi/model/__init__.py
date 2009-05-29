@@ -46,15 +46,10 @@ def teardown_db_defaults(engine, quiet=False):
         "ututi",
         "config/defaults.sql").splitlines()
     connection = meta.engine.connect()
-    for statement in initial_db_data:
-        statement = statement.strip()
-        if statement.startswith("---"):
-            try:
-                statement = statement[3:].strip()
-                connection.execute(statement)
-            except DatabaseError, e:
-                if not quiet:
-                    print >> sys.stderr, str(e)
+    tx = connection.begin()
+    connection.execute("drop schema public cascade")
+    connection.execute("create schema public")
+    tx.commit()
     connection.close()
 
 
