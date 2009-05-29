@@ -3,7 +3,7 @@ import sys
 import hashlib
 import pkg_resources
 import sqlalchemy as sa
-from sqlalchemy import orm
+from sqlalchemy import orm, Column, Integer, Sequence
 from sqlalchemy.exc import DatabaseError
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm import relation
@@ -20,7 +20,9 @@ def init_model(engine):
 
 def setup_orm(engine):
     global users_table
-    users_table = sa.Table("users", meta.metadata, autoload=True,
+    users_table = sa.Table("users", meta.metadata, 
+                           Column('id', Integer, Sequence('users_id_seq'), primary_key=True),
+                           autoload=True,
                            autoload_with=engine)
     orm.mapper(User, 
                users_table, 
@@ -59,13 +61,17 @@ def teardown_db_defaults(engine, quiet=False):
     tx.commit()
     connection.close()
 
+def encode_password(password):
+    pwd_hash = hashlib.md5(password + 'ewze1ul6').hexdigest()
+    return pwd_hash
+
 users_table = None
 
 class User(object):
 
     @classmethod
     def authenticate(cls, username, password):
-        pwd_hash = hashlib.md5(password + 'ewze1ul6').hexdigest()
+        pwd_hash = encode_password(password)
         try:
             user = meta.Session.query(Email).filter_by(email=username).one().user
             if user.password == pwd_hash:
@@ -81,11 +87,14 @@ class User(object):
         return meta.Session.query(Email).filter_by(email=username).one().user
 
     def __init__(self, fullname, password):
-        self.name = fullname
-        self.password = password
+        self.fullname = fullname
+        pwd_hash = encode_password(password)
+        self.password = encode_password(password)
 
 email_table = None
 
 class Email(object):
     """Class representing one email of a user."""
-    pass
+    def __init__(self, email):
+        self.email = email
+
