@@ -17,7 +17,7 @@ We will only require your email address, name and password:
 
 After registration is complete we should be hailed by our welcome
 screen:
-
+    >>> response = response.follow()
     >>> print response
     Response: 200 OK
     Cache-Control: no-cache
