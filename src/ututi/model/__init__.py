@@ -24,15 +24,13 @@ def setup_orm(engine):
                            autoload_with=engine)
     orm.mapper(User, 
                users_table, 
-               properties = {'emails' : relation(Email)})
+               properties = {'emails' : relation(Email, backref='user')})
 
     global emails_table
     emails_table = sa.Table("emails", meta.metadata, 
                             autoload=True,
                             autoload_with=engine)
-    orm.mapper(Email, 
-               emails_table, 
-               properties = {'user' : relation(User)})
+    orm.mapper(Email, emails_table)
 
 
 def initialize_db_defaults(engine):
