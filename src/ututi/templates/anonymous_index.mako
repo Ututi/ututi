@@ -56,8 +56,8 @@
         <td><input type="text" id="email" name="email" size="20"/></td>
       </tr>
       <tr>
-        <td><label for="password">Password</label></td>
-        <td><input type="password" id="password" name="password" size="20"/></td>
+        <td><label for="new_password">Password</label></td>
+        <td><input type="password" id="new_password" name="new_password" size="20"/></td>
       </tr>
       <tr>
         <td><label for="repeat_password">Repeat password</label></td>
