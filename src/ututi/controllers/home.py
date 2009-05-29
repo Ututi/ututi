@@ -6,9 +6,9 @@ from pylons.controllers.util import abort, redirect_to
 from pylons.i18n import get_lang, set_lang, _
 from pylons.decorators import validate
 
-from ututi.model import User
-
 from ututi.lib.base import BaseController, render
+
+from ututi.model import meta, User, Email
 
 log = logging.getLogger(__name__)
 
@@ -31,6 +31,16 @@ class HomeController(BaseController):
 
     @validate(schema=RegistrationForm(), form='index')
     def register(self):
-        #user = User(request.form['
+        fullname = request.POST['fullname']
+        password = request.POST['new_password']
+        email = request.POST['email']
+
+        user = User(fullname, password)
+        user.emails = [Email(email)]
+
+        meta.Session.add(user)
+        meta.Session.commit()
+
+        redirect_to(controller='home', action='index')
 
         pass
