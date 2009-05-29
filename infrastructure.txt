@@ -47,8 +47,19 @@ release
 4x instances
 
 u2ti.com
-
-u2ti.com
 staging.u2ti.com
 testing.u2ti.com
 debugging.u2ti.com
+
+# Dev -> Test, using plain text, cleaning up test
+# /usr/lib/postgresql/8.3/bin/pg_dump development -c -h /home/ignas/src/ututi/u2/instance/var/run/ -p 4455 | /usr/lib/postgresql/8.3/bin/psql -d test -h /home/ignas/src/ututi/u2/instance/var/run/ -p 4455
+
+# Dev -> Test, using binary, cleaning up test
+# /usr/lib/postgresql/8.3/bin/pg_dump development -Fc -O -h /home/ignas/src/ututi/u2/instance/var/run/ -p 4455 | /usr/lib/postgresql/8.3/bin/pg_restore -d test -h /home/ignas/src/ututi/u2/instance/var/run/ -p 4455 -c
+
+
+* Tips and tricks
+
+To debug sql alchemy statements:
+
+meta.engine.echo = True
