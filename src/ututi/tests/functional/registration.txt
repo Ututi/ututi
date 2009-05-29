@@ -11,7 +11,7 @@ We will only require your email address, name and password:
 
     >>> form.set('fullname', 'Jonas Petraitis Petrauskas')
     >>> form.set('email', 'jonas@example.com')
-    >>> form.set('password', 'asdfgh')
+    >>> form.set('new_password', 'asdfgh')
     >>> form.set('repeat_password', 'asdfgh')
     >>> response = form.submit()
 
