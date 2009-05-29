@@ -3,9 +3,10 @@ import sys
 import hashlib
 import pkg_resources
 import sqlalchemy as sa
-from sqlalchemy import orm
+from sqlalchemy import orm, Column, Integer, ForeignKey
 from sqlalchemy.exc import DatabaseError
 from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.orm import relation, backref
 
 from ututi.model import meta
 
@@ -21,7 +22,17 @@ def setup_orm(engine):
     global users_table
     users_table = sa.Table("users", meta.metadata, autoload=True,
                            autoload_with=engine)
-    orm.mapper(User, users_table)
+    orm.mapper(User, 
+               users_table, 
+               properties = {'emails' : relation(Email)})
+
+    global emails_table
+    emails_table = sa.Table("emails", meta.metadata, 
+                            autoload=True,
+                            autoload_with=engine)
+    orm.mapper(Email, 
+               emails_table, 
+               properties = {'user' : relation(User)})
 
 
 def initialize_db_defaults(engine):
@@ -52,7 +63,6 @@ def teardown_db_defaults(engine, quiet=False):
     tx.commit()
     connection.close()
 
-
 users_table = None
 
 class User(object):
@@ -61,16 +71,25 @@ class User(object):
     def authenticate(cls, username, password):
         pwd_hash = hashlib.md5(password + 'ewze1ul6').hexdigest()
         try:
-            user = meta.Session.query(cls).filter_by(name=username, password=pwd_hash).one()
-            return username
+            user = meta.Session.query(Email).filter_by(email=username).one().user
+            if user.password == pwd_hash:
+                return username
+            else:
+                return None
         except NoResultFound:
             return None
         return None
 
     @classmethod
     def get(cls, username):
-        return meta.Session.query(cls).filter_by(name=username).one()
+        return meta.Session.query(Email).filter_by(email=username).one().user
 
     def __init__(self, fullname, password):
         self.name = fullname
         self.password = password
+
+email_table = None
+
+class Email(object):
+    """Class representing one email of a user."""
+    pass
