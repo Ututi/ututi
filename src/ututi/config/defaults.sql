@@ -1,6 +1,6 @@
 /* Create first user=admin and password=asdasd */
 
-create table users (id bigserial not null, fullname char(20), password char(32), primary key (id));
+create table users (id bigserial not null, fullname char(100), password char(32), primary key (id));
 
 insert into users (fullname, password) values ('Adminas Adminovič', '069edb446c4ec937e862bce38ee4c458');
 
