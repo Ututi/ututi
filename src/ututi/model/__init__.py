@@ -3,10 +3,10 @@ import sys
 import hashlib
 import pkg_resources
 import sqlalchemy as sa
-from sqlalchemy import orm, Column, Integer, ForeignKey
+from sqlalchemy import orm
 from sqlalchemy.exc import DatabaseError
 from sqlalchemy.orm.exc import NoResultFound
-from sqlalchemy.orm import relation, backref
+from sqlalchemy.orm import relation
 
 from ututi.model import meta
 
