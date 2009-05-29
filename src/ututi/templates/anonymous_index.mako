@@ -10,7 +10,7 @@
     <table>
       <tr>
         <td>
-          <label for="login">Username:</label>
+          <label for="login">Email:</label>
         </td>
         <td>
           <input type="text" size="20" id="login" name="login" />
