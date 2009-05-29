@@ -41,6 +41,11 @@ class HomeController(BaseController):
         meta.Session.add(user)
         meta.Session.commit()
 
-        redirect_to(controller='home', action='index')
+        identity = {'repoze.who.userid': email}
+        headers = request.environ['repoze.who.plugins']['auth_tkt'].remember(
+            request.environ, 
+            identity)
+        for k, v in headers:
+            response.headers.add(k, v)
 
-        pass
+        redirect_to(controller='home', action='index')
