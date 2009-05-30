@@ -1,9 +1,8 @@
 import logging
 import formencode
 
-from pylons import request, response, session, tmpl_context as c
-from pylons.controllers.util import abort, redirect_to
-from pylons.i18n import get_lang, set_lang, _
+from pylons import request, response
+from pylons.controllers.util import redirect_to
 from pylons.decorators import validate
 
 from ututi.lib.base import BaseController, render
