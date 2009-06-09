@@ -114,8 +114,6 @@ we have forgotten it).
 
     >>> print response.lxml.xpath("//span[@class='error-message']")[0].text
     This email has already been used to register.
-    >>> response.showbrowser()
-
 
 
 
