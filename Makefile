@@ -67,6 +67,11 @@ testpsql:
 devpsql:
 	psql -h ${PWD}/instance/var/run/ -d development
 
+reset_devdb:
+	psql -h ${PWD}/instance/var/run/ -d development -c "drop schema public cascade"
+	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
+	bin/paster setup-app development.ini
+
 .PHONY: instance
 instance: instance/done
 
