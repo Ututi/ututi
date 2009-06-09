@@ -60,7 +60,7 @@ instance/var/run/.s.PGSQL.${PGPORT}:
 	sleep 5
 
 .PHONY: testpsql
-tesptsql:
+testpsql:
 	psql -h ${PWD}/instance/var/run/ -d test
 
 .PHONY: devpsql
