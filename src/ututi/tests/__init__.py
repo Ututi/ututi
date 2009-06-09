@@ -66,7 +66,7 @@ class PylonsLayer(object):
         # meta.metadata.create_all(meta.engine)
         teardown_db_defaults(meta.engine, quiet=True)
         initialize_db_defaults(meta.engine)
-        mail_queue = []
+        mail_queue[:] = []
 
     @classmethod
     def testTearDown(self):
