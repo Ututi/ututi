@@ -60,12 +60,17 @@ instance/var/run/.s.PGSQL.${PGPORT}:
 	sleep 5
 
 .PHONY: testpsql
-tesptsql:
+testpsql:
 	psql -h ${PWD}/instance/var/run/ -d test
 
 .PHONY: devpsql
 devpsql:
 	psql -h ${PWD}/instance/var/run/ -d development
+
+reset_devdb:
+	psql -h ${PWD}/instance/var/run/ -d development -c "drop schema public cascade"
+	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
+	bin/paster setup-app development.ini
 
 .PHONY: instance
 instance: instance/done

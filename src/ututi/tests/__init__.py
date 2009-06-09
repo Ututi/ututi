@@ -1,8 +1,12 @@
 """Pylons application test package
 """
 import sys
+import re
 import webbrowser
+from lxml import etree
+import wsgi_intercept
 
+from wsgi_intercept.zope_testbrowser.wsgi_testbrowser import WSGI_Browser
 from wsgiref.simple_server import make_server
 from paste.deploy import loadapp
 from pylons import config, url
@@ -45,6 +49,10 @@ class PylonsLayer(object):
             SetupCommand('setup-app').run([conf_dir + '/test.ini'])
             pylons.test.pylonsapp = loadapp('config:test.ini',
                                             relative_to=conf_dir)
+            def create_fn():
+                return pylons.test.pylonsapp
+            wsgi_intercept.add_wsgi_intercept('localhost', 80, create_fn)
+
 
 
     @classmethod
@@ -93,8 +101,47 @@ class UtutiTestApp(TestApp):
             print >> sys.stderr, 'Stopped HTTP server.'
 
 
+def to_string(node):
+    if isinstance(node, basestring):
+        return node
+    else:
+        return etree.tostring(node, pretty_print=True)
+
+
+class Browser(WSGI_Browser):
+
+    def __init__(self, url='http://localhost/'):
+        super(Browser, self).__init__()
+        self.handleErrors = False
+        self.open(url)
+
+    def serve(self):
+        try:
+            # XXX we rely on browser being slower than our server
+            webbrowser.open(addPortToURL(self.url, 5001))
+            print >> sys.stderr, 'Starting HTTP server...'
+            srv = make_server('localhost', 5001, pylons.test.pylonsapp)
+            srv.serve_forever()
+        except KeyboardInterrupt:
+            print >> sys.stderr, 'Stopped HTTP server.'
+
+    def printContents(self):
+        normal_body_regex = re.compile(r'[ \n\r\t]+')
+        print normal_body_regex.sub(' ', self.contents)
+
+    def queryHTML(self, query):
+        doc = etree.HTML(self.content)
+        result = [to_string(node) for node in doc.xpath(query)]
+        return result
+
+    def printQuery(self, query):
+        for item in self.queryHTML(query):
+            print item
+
+
 def setUp(test):
     test.globs['app'] = UtutiTestApp(pylons.test.pylonsapp)
+    test.globs['Browser'] = Browser
 
 
 def tearDown(test):

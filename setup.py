@@ -16,6 +16,8 @@ setup(
         "repoze.what",
         "psycopg2",
         "formencode",
+        "wsgi_intercept",
+        "zope.testbrowser",
         "lxml"
     ],
     package_dir={'': 'src'},
@@ -31,6 +33,9 @@ setup(
     entry_points="""
     [paste.app_factory]
     main = ututi.config.middleware:make_app
+
+    [console_scripts]
+    migrate = ututi.migration:main
 
     [paste.app_install]
     main = pylons.util:PylonsInstaller

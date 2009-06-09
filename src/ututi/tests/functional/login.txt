@@ -6,32 +6,15 @@ user. Let's try logging in as him.
 
 If user is not logged in login form is shown. Let's fill it in:
 
-    >>> response = app.get('/')
-    >>> login_form = response.forms['login_form']
-    >>> login_form.set('login', "admin@ututi.lt")
-    >>> login_form.set('password', "asdasd")
-    >>> response = login_form.submit()
-
-After successful login we get redirected to the index page:
-
-    >>> print response
-    Response: 302 Found
-    Content-Type: text/plain; charset=utf8
-    Location: /
-    ...
-    302 Found
-    The resource was found at /;
-    you should be redirected automatically.
-
-    >>> response = response.follow()
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/')
+    >>> browser.getControl('Email:').value = "admin@ututi.lt"
+    >>> browser.getControl('Password:').value = "asdasd"
+    >>> browser.getControl('Login').click()
 
 And we are greeted by the welcome page:
 
-    >>> print response
-    Response: 200 OK
-    Cache-Control: no-cache
-    Content-Type: text/html; charset=utf-8
-    Pragma: no-cache
+    >>> print browser.contents
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html>
@@ -46,37 +29,27 @@ And we are greeted by the welcome page:
 
 As we have successfully logged in let's logout and make some typos:
 
-    >>> response = response.click('Log out')
-    >>> response = response.follow()
-    >>> response.request.url
-    'http://localhost/?came_from=%2F'
-
-    >>> "login_form" in response.forms
-    True
+    >>> browser.getLink('Log out').click()
+    >>> browser.url
+    'http://localhost/?came_from=http%3A%2F%2Flocalhost%2Fdologin'
 
 If we enter the username wrong - we get redirected back to the login
 form, but not logged in:
 
-    >>> response.forms['login_form'].set('login', "odmin@ututi.lt")
-    >>> response.forms['login_form'].set('password', "asdasd")
-    >>> response = response.forms['login_form'].submit()
-    >>> response = response.follow()
-    >>> response.request.url
-    'http://localhost/'
+    >>> browser.getControl('Email:').value = "odmin@ututi.lt"
+    >>> browser.getControl('Password:').value = "asdasd"
+    >>> browser.getControl('Login').click()
 
-    >>> "login_form" in response.forms
-    True
+    >>> browser.url
+    'http://localhost/'
 
 Let's enter the password wrong:
 
-    >>> response.forms['login_form'].set('login', "admin@ututi.lt")
-    >>> response.forms['login_form'].set('password', "asd")
-    >>> response = response.forms['login_form'].submit()
-    >>> response = response.follow()
-    >>> response.request.url
-    'http://localhost/'
+    >>> browser.getControl('Email:').value = "admin@ututi.lt"
+    >>> browser.getControl('Password:').value = "asd"
+    >>> browser.getControl('Login').click()
 
-    >>> "login_form" in response.forms
-    True
+    >>> browser.url
+    'http://localhost/'
 
 Still permission is denied.
