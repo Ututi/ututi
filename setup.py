@@ -15,7 +15,8 @@ setup(
         "repoze.who",
         "repoze.what",
         "psycopg2",
-        "formencode"
+        "formencode",
+        "lxml"
     ],
     package_dir={'': 'src'},
     packages=find_packages('src'),
