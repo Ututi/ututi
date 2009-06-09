@@ -20,16 +20,16 @@ def init_model(engine):
 
 def setup_orm(engine):
     global users_table
-    users_table = sa.Table("users", meta.metadata, 
+    users_table = sa.Table("users", meta.metadata,
                            Column('id', Integer, Sequence('users_id_seq'), primary_key=True),
                            autoload=True,
                            autoload_with=engine)
-    orm.mapper(User, 
-               users_table, 
+    orm.mapper(User,
+               users_table,
                properties = {'emails' : relation(Email, backref='user')})
 
     global emails_table
-    emails_table = sa.Table("emails", meta.metadata, 
+    emails_table = sa.Table("emails", meta.metadata,
                             autoload=True,
                             autoload_with=engine)
     orm.mapper(Email, emails_table)
