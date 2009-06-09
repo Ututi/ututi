@@ -1,5 +1,6 @@
 import logging
-import formencode
+
+from formencode import Schema, validators, Invalid, All
 
 from pylons import request, response
 from pylons.controllers.util import redirect_to
@@ -12,7 +13,8 @@ from ututi.model import meta, User, Email
 
 log = logging.getLogger(__name__)
 
-class UniqueEmail(formencode.validators.FancyValidator):
+
+class UniqueEmail(validators.FancyValidator):
      messages = {
          'empty': _(u"Enter a valid email."),
          'non_unique': _(u"The email already exists."),
@@ -26,34 +28,43 @@ class UniqueEmail(formencode.validators.FancyValidator):
 
      def validate_python(self, value, state):
          if value == '':
-             raise formencode.Invalid(self.message("empty", state), value, state)
+             raise Invalid(self.message("empty", state), value, state)
          elif meta.Session.query(Email).filter_by(email=value).count() > 0:
-             raise formencode.Invalid(self.message("non_unique", state), value, state)
+             raise Invalid(self.message("non_unique", state), value, state)
 
 
-class RegistrationForm(formencode.Schema):
+class RegistrationForm(Schema):
 
     allow_extra_fields = False
-    fullname = formencode.validators.String(not_empty = True,
-                                            messages = {
-            'empty' : _(u"Please enter your name to register."),
-            })
-    email = formencode.All(formencode.validators.Email(not_empty=True),
-                           UniqueEmail(messages = {
-                'non_unique' : _(u"This email has already been used to register.")}))
 
-    psw_msg = {'empty' : _(u"Please enter your password to register."),
-               'tooShort' : _(u"The password must be at least 5 symbols long.")}
-    new_password = formencode.validators.String(min=5, not_empty=True,
-                                                messages = psw_msg)
-    repeat_password = formencode.validators.String(min=5, not_empty=True,
-                                                   messages = psw_msg)
-    chained_validators = [formencode.validators.FieldsMatch('new_password', 'repeat_password',
-                                                            messages = {
-                'invalid' : _(u"Passwords do not match."),
-                'invalidNoMatch' : _(u"Passwords do not match."),
-                'empty' : _(u"Please enter your password to register.")}
-                )]
+    msg = {'empty' : _(u"Please enter your name to register.")}
+    fullname = validators.String(not_empty=True, messages=msg)
+
+    msg = {'non_unique' : _(u"This email has already been used to register.")}
+    email = All(validators.Email(not_empty=True),
+                UniqueEmail(messages=msg))
+
+    msg = {'empty' : _(u"Please enter your password to register."),
+           'tooShort' : _(u"The password must be at least 5 symbols long.")}
+    new_password = validators.String(min=5, not_empty=True, messages=msg)
+    repeat_password = validators.String(min=5, not_empty=True, messages=msg)
+
+    msg = {'invalid' : _(u"Passwords do not match."),
+           'invalidNoMatch' : _(u"Passwords do not match."),
+           'empty' : _(u"Please enter your password to register.")}
+    chained_validators = [validators.FieldsMatch('new_password',
+                                                 'repeat_password',
+                                                 messages=msg)]
+
+
+def sign_in_user(email):
+     identity = {'repoze.who.userid': email}
+     headers = request.environ['repoze.who.plugins']['auth_tkt'].remember(
+          request.environ,
+          identity)
+     for k, v in headers:
+          response.headers.add(k, v)
+
 
 class HomeController(BaseController):
 
@@ -77,11 +88,6 @@ class HomeController(BaseController):
         meta.Session.add(user)
         meta.Session.commit()
 
-        identity = {'repoze.who.userid': email}
-        headers = request.environ['repoze.who.plugins']['auth_tkt'].remember(
-            request.environ,
-            identity)
-        for k, v in headers:
-            response.headers.add(k, v)
+        sign_in_user(email)
 
         redirect_to(controller='home', action='index')
