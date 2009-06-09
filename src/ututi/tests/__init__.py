@@ -38,6 +38,9 @@ class PylonsLayer(object):
         zcSetUp()
         EventPlacelessSetup().setUp()
 
+        translator = _get_translator(pylons.config.get('lang'))
+        pylons.translator._push_object(translator)
+
         if pylons.test.pylonsapp is None:
             SetupCommand('setup-app').run([conf_dir + '/test.ini'])
             pylons.test.pylonsapp = loadapp('config:test.ini',
