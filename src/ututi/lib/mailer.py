@@ -61,5 +61,4 @@ def send_email(sender, recipient, subject, body):
         smtp.sendmail(sender, recipient, msg.as_string())
         smtp.quit()
     else:
-        from ututi.lib.mailer import mail_queue
         mail_queue.append(msg)
