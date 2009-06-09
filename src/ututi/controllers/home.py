@@ -68,26 +68,26 @@ def sign_in_user(email):
 
 class HomeController(BaseController):
 
-    def index(self):
-        identity = request.environ.get('repoze.who.identity')
-        if identity is not None:
-            user = identity.get('user')
-            return render('/index.mako')
-        else:
-            return render('/anonymous_index.mako')
+     def index(self):
+          identity = request.environ.get('repoze.who.identity')
+          if identity is not None:
+               user = identity.get('user')
+               return render('/index.mako')
+          else:
+               return render('/anonymous_index.mako')
 
-    @validate(schema=RegistrationForm(), form='index')
-    def register(self):
-        fullname = request.POST['fullname']
-        password = request.POST['new_password']
-        email = request.POST['email']
+     @validate(schema=RegistrationForm(), form='index')
+     def register(self):
+          fullname = request.POST['fullname']
+          password = request.POST['new_password']
+          email = request.POST['email']
 
-        user = User(fullname, password)
-        user.emails = [Email(email)]
+          user = User(fullname, password)
+          user.emails = [Email(email)]
 
-        meta.Session.add(user)
-        meta.Session.commit()
+          meta.Session.add(user)
+          meta.Session.commit()
 
-        sign_in_user(email)
+          sign_in_user(email)
 
-        redirect_to(controller='home', action='index')
+          redirect_to(controller='home', action='index')
