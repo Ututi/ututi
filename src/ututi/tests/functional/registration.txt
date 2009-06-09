@@ -36,67 +36,67 @@ If we forget to enter the username, we get returned to the registration form, bu
 message is shown:
     >>> form = response.forms['registration_form']
     >>> form.set('email', 'jonas2@example.com')
+    >>> form.set('fullname', '')
     >>> form.set('new_password', 'asdfgh')
     >>> form.set('repeat_password', 'asdfgh')
     >>> response = form.submit()
-    >>> response = response.follow()
     >>> response.request.url
-    'http://localhost/'
+    'http://localhost/register'
 
     >>> 'registration_form' in response.forms
     True
 
-    >>> 'Please enter your name to register.' in response
-    True
+    >>> print response.lxml.xpath("//span[@class='error-message']")[0].text
+    Please enter your name to register.
 
 Ok, now we forget to enter the email when registering. We should be redirected to the
 registration form and shown an error message that we've forgotten the email.
     >>> form = response.forms['registration_form']
     >>> form.set('fullname', 'Domas Monkus')
+    >>> form.set('email', '')
     >>> form.set('new_password', 'asdfgh')
     >>> form.set('repeat_password', 'asdfgh')
     >>> response = form.submit()
-    >>> response = response.follow()
     >>> response.request.url
-    'http://localhost/'
+    'http://localhost/register'
 
     >>> 'registration_form' in response.forms
     True
 
-    >>> 'Please enter your email address to register.' in response
-    True
+    >>> print response.lxml.xpath("//span[@class='error-message']")[0].text
+    Please enter an email address
 
 If we forget to enter the password, we should also get an error message.
     >>> form = response.forms['registration_form']
     >>> form.set('fullname', 'Domas Monkus')
     >>> form.set('email', 'jonas2@example.com')
+    >>> form.set('new_password', '')
+    >>> form.set('repeat_password', '')
     >>> response = form.submit()
-    >>> response = response.follow()
     >>> response.request.url
-    'http://localhost/'
+    'http://localhost/register'
 
     >>> 'registration_form' in response.forms
     True
 
-    >>> 'Please enter your password to register.' in response
-    True
+    >>> print response.lxml.xpath("//span[@class='error-message']")[0].text
+    Please enter your password to register.
 
 If the passwords do not match we also get an error message.
     >>> form = response.forms['registration_form']
     >>> form.set('fullname', 'Domas Monkus')
     >>> form.set('email', 'jonas2@example.com')
     >>> form.set('new_password', 'asdfgh')
-    >>> form.set('repeat_password', 'as')
+    >>> form.set('repeat_password', 'asdfghj')
     >>> response = form.submit()
-    >>> response = response.follow()
     >>> response.request.url
-    'http://localhost/'
+    'http://localhost/register'
 
     >>> 'registration_form' in response.forms
     True
 
-    >>> print response.lxml.xpath('div[@class=message]').text
-    Please enter your password to register.
+    >>> print response.lxml.xpath("//span[@class='error-message']")[0].text
+    Passwords do not match.
 
 If such an email already exists, we also get an error message (later we should get a link to reset the password if
 we have forgotten it).
@@ -106,15 +106,15 @@ we have forgotten it).
     >>> form.set('new_password', 'asdfgh')
     >>> form.set('repeat_password', 'asdfgh')
     >>> response = form.submit()
-    >>> response = response.follow()
     >>> response.request.url
-    'http://localhost/'
+    'http://localhost/register'
 
     >>> 'registration_form' in response.forms
     True
 
-    >>> print response.lxml.xpath('div[@class=message]').text
-    This email has already been registered.
+    >>> print response.lxml.xpath("//span[@class='error-message']")[0].text
+    This email has already been used to register.
+    >>> response.showbrowser()
 
 
 
