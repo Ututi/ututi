@@ -20,10 +20,11 @@ from zope.component.eventtesting import PlacelessSetup as EventPlacelessSetup
 
 import pylons.test
 from pylons.i18n.translation import _get_translator
-
+from pylons import config
 from ututi.model import teardown_db_defaults
 from ututi.model import initialize_db_defaults
 from ututi.model import meta
+from ututi.lib.mailer import mail_queue
 
 __all__ = ['environ', 'url']
 
@@ -65,6 +66,7 @@ class PylonsLayer(object):
         # meta.metadata.create_all(meta.engine)
         teardown_db_defaults(meta.engine, quiet=True)
         initialize_db_defaults(meta.engine)
+        mail_queue = []
 
     @classmethod
     def testTearDown(self):
@@ -73,6 +75,9 @@ class PylonsLayer(object):
         # XXX Tear down database here
         teardown_db_defaults(meta.engine)
         meta.Session.remove()
+
+        if len(mail_queue) > 0:
+            print >> sys.stderr, "Mail queue is NOT EMPTY!"
 
 
 class UtutiTestApp(TestApp):

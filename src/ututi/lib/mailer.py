@@ -4,6 +4,8 @@ from email.MIMEText import MIMEText
 from email.Utils import parseaddr, formataddr
 from pylons import config
 
+mail_queue = []
+
 def send_email(sender, recipient, subject, body):
     """Send an email.
 
@@ -52,9 +54,12 @@ def send_email(sender, recipient, subject, body):
     msg['Subject'] = Header(unicode(subject), header_charset)
 
     # Send the message via SMTP to localhost:25
-    if not config.get('hold_email', False):
+    if not config.get('hold_emails', False):
         # send the email if we are not told to hold it
         server = config.get('smtp_host', 'localhost')
         smtp = SMTP(server)
         smtp.sendmail(sender, recipient, msg.as_string())
         smtp.quit()
+    else:
+        from ututi.lib.mailer import mail_queue
+        mail_queue.append(msg)
