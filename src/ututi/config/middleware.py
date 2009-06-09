@@ -4,7 +4,8 @@ from paste.cascade import Cascade
 from paste.registry import RegistryManager
 from paste.urlparser import StaticURLParser
 from paste.deploy.converters import asbool
-from pylons import request, tmpl_context, response, session, config
+from pylons import request, tmpl_context, response, session, config, translator
+from pylons.i18n.translation import _get_translator
 from pylons.middleware import ErrorHandler, StatusCodeRedirect
 from pylons.wsgiapp import PylonsApp
 from routes.middleware import RoutesMiddleware
@@ -18,6 +19,8 @@ from repoze.who.config import make_middleware_with_config as make_who_with_confi
 
 def grok_app():
     items = [request, tmpl_context, response, session]
+    translator._push_object(_get_translator(config.get('lang')))
+
     for item in items:
         item._push_object(object())
 
@@ -26,6 +29,7 @@ def grok_app():
     do_grok('ututi', zope_config)
     zope_config.execute_actions()
 
+    translator._pop_object()
     for item in items:
         item._pop_object()
 

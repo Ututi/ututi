@@ -42,9 +42,6 @@ class PylonsLayer(object):
         zcSetUp()
         EventPlacelessSetup().setUp()
 
-        translator = _get_translator(pylons.config.get('lang'))
-        pylons.translator._push_object(translator)
-
         if pylons.test.pylonsapp is None:
             SetupCommand('setup-app').run([conf_dir + '/test.ini'])
             pylons.test.pylonsapp = loadapp('config:test.ini',
@@ -53,13 +50,10 @@ class PylonsLayer(object):
                 return pylons.test.pylonsapp
             wsgi_intercept.add_wsgi_intercept('localhost', 80, create_fn)
 
-
-
     @classmethod
     def tearDown(self):
         # Zope component tear down
         zcTearDown()
-
         pylons.test.pylonsapp = None
 
     @classmethod
