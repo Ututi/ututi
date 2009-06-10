@@ -21,6 +21,8 @@ def make_map():
     # CUSTOM ROUTES HERE
     map.connect('/', controller='home')
     map.connect('/register', controller='home', action='register')
+    map.connect('/profile', controller='user')
+    map.connect('/confirm_emails', controller='user', action='confirm_emails')
     map.connect('/{controller}/{action}')
     map.connect('/{controller}/{action}/{id}')
 
