@@ -8,6 +8,7 @@ from sqlalchemy.exc import DatabaseError
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm import relation
 
+from ututi.migration import GreatMigrator
 from ututi.model import meta
 
 
@@ -48,6 +49,8 @@ def initialize_db_defaults(engine):
             except DatabaseError, e:
                 print >> sys.stderr, str(e)
     connection.close()
+    migrator = GreatMigrator(engine)
+    migrator.initializeVersionning()
 
 
 def teardown_db_defaults(engine, quiet=False):
@@ -64,6 +67,7 @@ def teardown_db_defaults(engine, quiet=False):
 def encode_password(password):
     pwd_hash = hashlib.md5(password + 'ewze1ul6').hexdigest()
     return pwd_hash
+
 
 users_table = None
 
@@ -90,6 +94,7 @@ class User(object):
         self.fullname = fullname
         pwd_hash = encode_password(password)
         self.password = encode_password(password)
+
 
 email_table = None
 
