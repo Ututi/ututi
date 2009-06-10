@@ -26,7 +26,7 @@ def email_confirmation_request(user, email):
             user_email.confirmation_key = hash
             meta.Session.commit()
 
-            link = url_for(controller='user', action='confirm_email', key=hash)
+            link = url_for(controller='user', action='confirm_user_email', key=hash, qualified=True)
             text = render('/emails/confirm_email.mako',
                           extra_vars={'fullname' : user.fullname.decode('utf-8'), 'link' : link})
             send_email(config['ututi_email_from'], email, _('Confirm the email for Ututi'), text)
