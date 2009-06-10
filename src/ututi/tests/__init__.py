@@ -145,3 +145,4 @@ def setUp(test):
 
 def tearDown(test):
     del test.globs['app']
+    del test.globs['Browser']
