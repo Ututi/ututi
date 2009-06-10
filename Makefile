@@ -15,19 +15,19 @@ bin/buildout: bootstrap.py
 	$(MAKE) BOOTSTRAP_PYTHON=$(BOOTSTRAP_PYTHON) bootstrap
 
 bin/test: buildout.cfg bin/buildout setup.py
-	bin/buildout
+	bin/buildout -t 1
 	touch bin/*
 
 bin/py: buildout.cfg bin/buildout setup.py
-	bin/buildout
+	bin/buildout -t 1
 	touch bin/*
 
 bin/paster: buildout.cfg bin/buildout setup.py
-	bin/buildout
+	bin/buildout -t 1
 	touch bin/*
 
 bin/tags: buildout.cfg bin/buildout setup.py
-	bin/buildout
+	bin/buildout -t 1
 	touch bin/*
 
 instance/var/data/postgresql.conf:
@@ -97,7 +97,7 @@ bootstrap:
 
 .PHONY: buildout
 buildout:
-	bin/buildout
+	bin/buildout -t 1
 	touch bin/*
 
 .PHONY: test
