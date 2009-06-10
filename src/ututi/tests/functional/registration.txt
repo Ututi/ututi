@@ -21,9 +21,23 @@ screen:
     >>> print response.lxml.xpath("//body/h1")[0].text
     Welcome!
 
+An email, requesting the confirmation of the email address entered is sent:
+    >>> from ututi.lib.mailer import mail_queue
+    >>> email = mail_queue.pop()
+    >>> print email['To']
+    jonas@example.com
+    >>> from ututi.lib.helpers import get_urls
+    >>> urls = get_urls(email.get_payload())
+    >>> len(urls) == 1
+    True
+    >>> response = app.get(urls[0])
+    >>> response = response.follow()
+    >>> print response.lxml.xpath("id('confirmed-emails')/li")[0].text
+    jonas@example.com
 
 We have been logged in after signing up. Now let's log out and test more unfortunate
 scenarios:
+    >>> response = app.get('/')
     >>> response = response.click('Log out')
     >>> response = response.follow()
     >>> response.request.url
