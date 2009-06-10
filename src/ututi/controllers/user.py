@@ -18,7 +18,10 @@ class UserController(BaseController):
         user = current_user()
         if user is not None:
             c.fullname = user.fullname
-            c.emails = [email.email.strip() for email in user.emails]
+            c.emails = [email.email for email in
+                        meta.Session.query(Email).filter_by(id=user.id).filter_by(confirmed=False).all()]
+            c.emails_confirmed = [email.email for email in
+                                  meta.Session.query(Email).filter_by(id=user.id).filter_by(confirmed=True).all()]
             return render('/user.mako')
         else:
             return render('/anonymous_index.mako')
@@ -33,3 +36,9 @@ class UserController(BaseController):
         else:
             redirect_to(controller='home', action='index')
 
+    def confirm_user_email(self, key):
+        email = meta.Session.query(Email).filter_by(confirmation_key=key).first()
+        email.confirmed = True
+        email.confirmation_key = ''
+        meta.Session.commit()
+        redirect_to(controller='user', action='index')
