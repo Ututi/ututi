@@ -86,6 +86,7 @@ class HomeController(BaseController):
 
           meta.Session.add(user)
           meta.Session.commit()
+          email_confirmation_request(user, email)
 
           sign_in_user(email)
 
