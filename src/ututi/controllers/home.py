@@ -8,7 +8,7 @@ from pylons.decorators import validate
 from pylons.i18n import _
 
 from ututi.lib.base import BaseController, render
-
+from ututi.lib import current_user, email_confirmation_request
 from ututi.model import meta, User, Email
 
 log = logging.getLogger(__name__)
@@ -69,9 +69,8 @@ def sign_in_user(email):
 class HomeController(BaseController):
 
      def index(self):
-          identity = request.environ.get('repoze.who.identity')
-          if identity is not None:
-               user = identity.get('user')
+          user = current_user()
+          if user is not None:
                return render('/index.mako')
           else:
                return render('/anonymous_index.mako')
