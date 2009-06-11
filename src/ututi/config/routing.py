@@ -22,6 +22,7 @@ def make_map():
     map.connect('/', controller='home')
     map.connect('/register', controller='home', action='register')
     map.connect('/profile', controller='user')
+    map.connect('/admin', controller='admin', action='index')
     map.connect('/confirm_emails', controller='user', action='confirm_emails')
     map.connect('/confirm_user_email/{key}', controller='user', action='confirm_user_email')
     map.connect('/{controller}/{action}')
