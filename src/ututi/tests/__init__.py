@@ -129,7 +129,7 @@ class Browser(WSGI_Browser):
         print normal_body_regex.sub(' ', self.contents)
 
     def queryHTML(self, query):
-        doc = etree.HTML(self.content)
+        doc = etree.HTML(self.contents)
         result = [to_string(node) for node in doc.xpath(query)]
         return result
 
