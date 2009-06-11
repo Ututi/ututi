@@ -112,9 +112,11 @@ class User(object):
         except NoResultFound:
             return None
 
-    def __init__(self, fullname, password):
+    def __init__(self, fullname, password, gen_password = True):
         self.fullname = fullname
-        self.password = generate_password(password)
+        self.password = password
+        if gen_password:
+            self.password = generate_password(password)
 
 
 email_table = None
