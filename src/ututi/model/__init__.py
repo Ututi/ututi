@@ -1,6 +1,11 @@
 """The application's model objects"""
 import sys
+
 import hashlib
+import sha, binascii
+from binascii import a2b_base64, b2a_base64
+from random import choice, randrange
+
 import pkg_resources
 import sqlalchemy as sa
 from sqlalchemy import orm, Column, Integer, Sequence
@@ -64,10 +69,25 @@ def teardown_db_defaults(engine, quiet=False):
     tx.commit()
     connection.close()
 
-def encode_password(password):
-    pwd_hash = hashlib.md5(password + 'ewze1ul6').hexdigest()
-    return pwd_hash
+def generate_salt():
+    salt = ''
+    for n in range(7):
+        salt += chr(randrange(256))
+    return salt
 
+def generate_password(password):
+    salt = generate_salt()
+    password = str(password)
+    return b2a_base64(sha.new(password + salt).digest() + salt)[:-1]
+
+def validate_password(reference, password):
+    try:
+        ref = a2b_base64(reference)
+    except binascii.Error:
+        return False
+    salt = ref[20:]
+    compare = b2a_base64(sha.new(password + salt).digest() + salt)[:-1]
+    return compare == reference
 
 users_table = None
 
@@ -75,10 +95,9 @@ class User(object):
 
     @classmethod
     def authenticate(cls, username, password):
-        pwd_hash = encode_password(password)
         try:
             user = meta.Session.query(Email).filter_by(email=username).one().user
-            if user.password == pwd_hash:
+            if validate_password(user.password, password):
                 return username
             else:
                 return None
@@ -88,12 +107,14 @@ class User(object):
 
     @classmethod
     def get(cls, username):
-        return meta.Session.query(Email).filter_by(email=username).one().user
+        try:
+            return meta.Session.query(Email).filter_by(email=username).one().user
+        except NoResultFound:
+            return None
 
     def __init__(self, fullname, password):
         self.fullname = fullname
-        pwd_hash = encode_password(password)
-        self.password = encode_password(password)
+        self.password = generate_password(password)
 
 
 email_table = None
