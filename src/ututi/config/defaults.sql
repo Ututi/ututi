@@ -12,3 +12,16 @@ create table emails (id int8 not null references users(id),
        primary key (email));
 
 insert into emails (id, email) values (1, 'admin@ututi.lt');
+
+/* A table for universities and faculties (maybe later even tags) */
+create table locationtags (id bigserial not null,
+       parent int8 references locationtags(id) default null,
+       title varchar(250),
+       title_short varchar(50),
+       description text,
+       primary key (id));
+
+insert into locationtags (title, title_short, description)
+       values ('Vilniaus universitetas', 'vu', 'Seniausias universitetas Lietuvoje.');
+insert into locationtags (title, title_short, description, parent)
+       values ('Ekonomikos fakultetas', 'ef', '', 1);
