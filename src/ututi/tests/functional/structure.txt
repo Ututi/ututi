@@ -1,0 +1,29 @@
+University and faculty structure
+================================
+
+First we log in to be able to see the user list.
+
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/structure')
+
+There is one university and one faculty:
+
+    >>> browser.printQuery("id('location_structure')//li/text()")
+    Vilniaus universitetas
+    Ekonomikos fakultetas
+
+    >>> form = browser.getForm(name='new_structure_form')
+    >>> form.getControl('Title').value = 'Vilniaus Gedimino Technikos Universitetas'
+    >>> form.getControl('Short title').value = 'vgtu'
+    >>> form.getControl('Description').value = ''
+    >>> form.getControl('Parent').displayOptions
+    ['Select a parent', 'Vilniaus universitetas']
+    >>> form.getControl('Parent').value = ['0']
+    >>> form.getControl('Save').click()
+
+The new university is now shown.
+
+    >>> browser.printQuery("id('location_structure')//li/text()")
+    Vilniaus universitetas
+    Ekonomikos fakultetas
+    Vilniaus Gedimino Technikos Universitetas
