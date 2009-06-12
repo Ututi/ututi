@@ -40,6 +40,15 @@ def setup_orm(engine):
                             autoload_with=engine)
     orm.mapper(Email, emails_table)
 
+    global locationtags_table
+    locationtags_table = sa.Table("locationtags", meta.metadata,
+                           Column('id', Integer, Sequence('locationtags_id_seq'), primary_key=True),
+                           autoload=True,
+                           autoload_with=engine)
+    orm.mapper(LocationTag,
+               locationtags_table,
+               properties = {'parent_item' : relation(LocationTag, backref='children')})
+
 
 def initialize_db_defaults(engine):
     initial_db_data = pkg_resources.resource_string(
@@ -50,9 +59,12 @@ def initialize_db_defaults(engine):
         statement = statement.strip()
         if (statement):
             try:
+                txn = connection.begin()
                 connection.execute(statement)
+                txn.commit()
             except DatabaseError, e:
                 print >> sys.stderr, str(e)
+                txn.rollback()
     connection.close()
     migrator = GreatMigrator(engine)
     migrator.initializeVersionning()
