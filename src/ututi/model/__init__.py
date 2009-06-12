@@ -82,17 +82,20 @@ def teardown_db_defaults(engine, quiet=False):
     connection.close()
 
 def generate_salt():
+    """Generate the salt used in passwords."""
     salt = ''
     for n in range(7):
         salt += chr(randrange(256))
     return salt
 
 def generate_password(password):
+    """Generate a hash for a given password."""
     salt = generate_salt()
     password = str(password)
     return b2a_base64(sha.new(password + salt).digest() + salt)[:-1]
 
 def validate_password(reference, password):
+    """Verify a password given the original hash."""
     try:
         ref = a2b_base64(reference)
     except binascii.Error:
