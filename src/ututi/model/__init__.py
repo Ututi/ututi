@@ -141,3 +141,11 @@ class Email(object):
     def __init__(self, email):
         self.email = email
 
+
+class LocationTag(object):
+    """Class representing the university and faculty tags."""
+    def __init__(self, title, title_short, description, parent=None):
+        self.parent = parent
+        self.title = title
+        self.title_short = title_short
+        self.description = description
