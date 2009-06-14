@@ -6,7 +6,12 @@
 
 <h1>${_('Browse the hierarchy')}</h1>
 <%def name="location_tag(tag)">
-  <li>${tag.title}</li>
+  <li>
+        ${tag.title}
+        %if c.user:
+            <a href="${h.url_for(controller='structure', action='edit', id=tag.id)}">${_('Edit')}</a>
+        %endif
+  </li>
   %if tag.children:
       <ul>
       %for child in tag.children:
@@ -23,9 +28,9 @@
     %endfor
 %endif
 
-
+%if c.user:
 <h2>${_('Create new')}</h2>
-<form method="post" action="structure/create_structure" name="new_structure_form">
+<form method="post" action="structure/create_structure" name="new_structure_form" id="new_structure_form">
       <div>
         <label for="title">${_('Title')}</label>
         <input type="text" id="title" name="title"/>
@@ -53,4 +58,4 @@
         <input type="submit" value="${_('Save')}"/>
       </div>
 </form>
-
+%endif
