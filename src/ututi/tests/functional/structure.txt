@@ -12,6 +12,19 @@ There is one university and one faculty:
     Vilniaus universitetas
     Ekonomikos fakultetas
 
+Let's try to add a new element. If we are not logged in, there should be no form visible.
+
+    >>> browser.queryHTML("id('new_structure_form')")
+    []
+
+So we log in first.
+
+    >>> browser.open('http://localhost/')
+    >>> browser.getControl('Email:').value = "admin@ututi.lt"
+    >>> browser.getControl('Password:').value = "asdasd"
+    >>> browser.getControl('Login').click()
+    >>> browser.open('http://localhost/structure')
+
     >>> form = browser.getForm(name='new_structure_form')
     >>> form.getControl('Title').value = 'Vilniaus Gedimino Technikos Universitetas'
     >>> form.getControl('Short title').value = 'vgtu'
@@ -42,3 +55,34 @@ The new university is now shown.
     Ekonomikos fakultetas
     Vilniaus Gedimino Technikos Universitetas
     Architekturos fakultetas
+
+Now we shall try to edit a structural element.
+
+    >>> browser.getLink(text='Edit').click()
+
+    >>> form = browser.getForm(name='edit_structure_form')
+    >>> print form.getControl('Title').value
+    Vilniaus universitetas
+    >>> form.getControl('Title').value = u'Vinco Kapsuko universitetas'
+    >>> print form.getControl('Short title').value
+    vu
+    >>> form.getControl('Short title').value = u'vku'
+    >>> print form.getControl('Description').value
+    Seniausias universitetas Lietuvoje.
+    >>> form.getControl('Description').value = u'Nebeegzistuojantis fakultetas'
+    >>> form.getControl('Parent').displayOptions
+    ['Select a parent', 'Vilniaus Gedimino Technikos Universitetas']
+    >>> form.getControl('Parent').value = ['3']
+
+    >>> form.getControl('Save').click()
+
+Let's log out to see a clean structure list.
+
+    >>> browser.open('http://localhost/')
+    >>> browser.getLink('Log out').click()
+    >>> browser.open('http://localhost/structure')
+    >>> browser.printQuery("id('location_structure')//li/text()")
+    Vilniaus Gedimino Technikos Universitetas
+    Architekturos fakultetas
+    Vinco Kapsuko universitetas
+    Ekonomikos fakultetas
