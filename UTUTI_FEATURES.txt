@@ -1,0 +1,41 @@
+Ututi feature
+-------------
+
+Tai yra dokumentas kur bus aprašoma ką privalo mokėti Ututi. Visos idėjos ir visi pageidavimai bus čia aprašomi.
+
+
+= 1. Nariai =
+
+= 2. Paieška =
+
+= 3. Dalykai =
+
+= 4. Grupės =
+
+= 5. Failai =
+
+
+= 6. Mailinglistai =
+Kiekviena grupė privalo turėti savo el.pašto konferenciją.
+
+== 6.1 El. laiškų gavimas ==
+ - Į el.pašto konferenciją gali rašyti tik grupės nariai.
+ - Galima priskirti el.pašto adresus kurie nėra grupės nariai ir kurie negauna laiškų iš mailinglisto, bet jų laiškai visada automatiškai praleidžiami.
+ - Jei rašo nenarys, moderatorius gauna prašymą patvirtinti arba atmesti laišką.
+   - Pavirtintą laišką galima pridėti į visada priimamų siuntėjų sąrašą.
+   - Atmestus laiškus galima pridėti į visada automatiškai atmetamų siuntėjų sąrašą.
+ - Grupės narys gali nustatyti, kad nori gauti laiškų suvestinę kartą per dieną. Suvestinės laiškas ateina tik tada, jei tą dieną į grupės el.pašto konferenciją buvo siunčiami laiškai.
+ - Grupės narys gali nustatyti, kad niekad negautų laiškų iš šitos el.pašto konferencijos. Jis juos galės skaityti per web sąsają.
+
+== 6.2 Failai el.konferencijoje  ==
+ - Jei naudotojas siunčia failą į el.pašto konferenciją, failas automatiškai atkabinamas ir įdedamas prie grupės privačių failų. Prie laiško pridedama žinutė su nuorodą iš kur galima atsisiųsti failą.
+ - Prie laiško prikabinamo failo dydis negali būti didesnis nei 10Mb.
+ - Kadangi privačių failų vietą ribosime iki 100Mb, jei prikabintas failas viršijo limitą, jis nededamas prie privačių failų. Siuntėjas gauna pranešimą, kad nepavyko išsaugoti failo, nes pritrūko grupėje vietos ir pasiūlo įdėti failą į Ututi rankomis į kokį nors dalyką, patvarkyti privačius failus (ištrinti ko nereikia, perkelti failus prie dalykų ir pan.) arba padidinti grupės privačių failų kvotą už $.
+
+== 6.3. El.konferencijos administravimas ==
+ - Grupės moderatorius gali pakeisti el.konferencijos adresą. Visi nariai gauna pranešimą, kad adresas pasikeitė. (APTARTI ar tai darome)
+ - Grupės moderatorius gali tvirtinti ir atmesti laukiančius patvirtinimo laiškus.
+ - Grupės moderatorius gali valdyti visada praleidžiamų ir visada atmetamų siuntėjų sąrašus.
+
+
+= 7. Priminimai el. paštu =
