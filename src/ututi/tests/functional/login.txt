@@ -22,7 +22,7 @@ And we are greeted by the welcome page:
       <title>UTUTI – student information online</title>
       </head>
       <body>
-    <h1>Welcome!</h1>
+    <h1>Welcome Adminas Adminovix!</h1>
     <a href="/logout">Log out</a>
       </body>
     </html>

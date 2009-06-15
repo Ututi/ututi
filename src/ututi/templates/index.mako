@@ -4,6 +4,6 @@
   <title>UTUTI – student information online</title>
 </%def>
 
-<h1>Welcome!</h1>
+<h1>Welcome ${c.user.fullname}!</h1>
 
 <a href="/logout">Log out</a>

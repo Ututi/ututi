@@ -19,7 +19,7 @@ After registration is complete we should be hailed by our welcome
 screen:
     >>> response = response.follow()
     >>> print response.lxml.xpath("//body/h1")[0].text
-    Welcome!
+    Welcome Jonas Petraitis Petrauskas!
 
 An email, requesting the confirmation of the email address entered is sent:
     >>> from ututi.lib.mailer import mail_queue
