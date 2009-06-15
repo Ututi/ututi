@@ -44,6 +44,7 @@ def make_map():
     map.connect('/got_mail', controller='receivemail', action='index')
     map.connect('/admin', controller='admin', action='index')
     map.connect('/structure', controller='structure', action='index')
+    map.connect('/files', controller='files', action='index')
     map.connect('/confirm_emails', controller='user', action='confirm_emails')
     map.connect('/confirm_user_email/{key}', controller='user', action='confirm_user_email')
     map.connect('/{controller}/{action}')
