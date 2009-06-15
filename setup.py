@@ -18,7 +18,8 @@ setup(
         "formencode",
         "wsgi_intercept",
         "zope.testbrowser",
-        "lxml"
+        "lxml",
+        "nous.mailpost"
     ],
     package_dir={'': 'src'},
     packages=find_packages('src'),
