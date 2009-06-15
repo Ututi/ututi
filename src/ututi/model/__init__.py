@@ -1,13 +1,17 @@
 """The application's model objects"""
 import sys
-
+import os
 import hashlib
 import sha, binascii
 from binascii import a2b_base64, b2a_base64
 from random import choice, randrange
+from StringIO import StringIO
+
+from pylons import config
 
 import pkg_resources
 import sqlalchemy as sa
+
 from sqlalchemy import orm, Column, Integer, Sequence
 from sqlalchemy.exc import DatabaseError
 from sqlalchemy.orm.exc import NoResultFound
@@ -15,7 +19,7 @@ from sqlalchemy.orm import relation, backref
 
 from ututi.migration import GreatMigrator
 from ututi.model import meta
-
+from nous.mailpost import copy_chunked
 
 def init_model(engine):
     """Call me before using any of the tables or classes in the model"""
@@ -49,7 +53,12 @@ def setup_orm(engine):
                locationtags_table,
                properties = {'children' : relation(LocationTag,
                                                    backref=backref('parent_item', remote_side=locationtags_table.c.id))})
-
+    global files_table
+    files_table = sa.Table("files", meta.metadata,
+                           Column('id', Integer, Sequence('files_id_seq'), primary_key=True),
+                           autoload=True,
+                           autoload_with=engine)
+    orm.mapper(File, files_table)
 
 def initialize_db_defaults(engine):
     initial_db_data = pkg_resources.resource_string(
@@ -150,3 +159,46 @@ class LocationTag(object):
         self.title = title
         self.title_short = title_short
         self.description = description
+
+class File(object):
+    """Class representing user-uploaded files."""
+    def __init__(self, filename, title, mimetype=None, created=None, description='', data=None):
+        if data is not None:
+            self.md5 = hashlib.md5(data).hexdigest()
+            self.filesize = len(data)
+        self.filename = filename
+        self.title = title
+        if mimetype is not None:
+            self.mimetype = mimetype
+        if created is not None:
+            self.created = created
+            self.modified = created
+        self.description = description
+
+    def filepath(self):
+        dir_path = [config.get('files_path', '/tmp')]
+        segment = ''
+        for c in list(self.md5):
+            segment += c
+            if len(segment) > 7:
+                dir_path.append(segment)
+                segment = ''
+        if segment:
+            dir_path.append(segment)
+
+        return os.path.join(*dir_path)
+
+    def store(self, filename, data):
+        self.filename = filename
+        self.md5 = hashlib.md5(data).hexdigest()
+        self.filesize = len(data)
+
+        filename = self.filepath()
+        if os.path.exists(filename):
+            return
+
+        if not os.path.exists(os.path.dirname(filename)):
+            os.makedirs(os.path.dirname(filename))
+        f = open(filename, 'w')
+        size = copy_chunked(StringIO(data), f, 4096)
+        f.close()
