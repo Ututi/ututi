@@ -7,6 +7,7 @@ from lxml import etree
 import wsgi_intercept
 
 from wsgi_intercept.zope_testbrowser.wsgi_testbrowser import WSGI_Browser
+from wsgi_intercept.urllib2_intercept import install_opener
 from wsgiref.simple_server import make_server
 from paste.deploy import loadapp
 from pylons import config, url
@@ -49,6 +50,7 @@ class PylonsLayer(object):
                                             relative_to=conf_dir)
             def create_fn():
                 return pylons.test.pylonsapp
+            install_opener()
             wsgi_intercept.add_wsgi_intercept('localhost', 80, create_fn)
 
     @classmethod
