@@ -25,3 +25,18 @@ insert into locationtags (title, title_short, description)
        values ('Vilniaus universitetas', 'vu', 'Seniausias universitetas Lietuvoje.');
 insert into locationtags (title, title_short, description, parent)
        values ('Ekonomikos fakultetas', 'ef', '', 1);
+
+/* A table for files */
+
+create table files (id bigserial not null,
+       md5 char(32) not null,
+       mimetype varchar(255),
+       filesize int8,
+       name varchar(500),
+       title varchar(500),
+       description text,
+       created time,
+       modified time,
+       primary key (id));
+
+create unique index md5 on files (md5);
