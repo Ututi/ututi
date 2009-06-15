@@ -8,7 +8,26 @@ from pylons import config
 from routes import Mapper
 
 def make_map():
-    """Create, configure and return the routes Mapper"""
+    """Create, configure and return the routes Mapper
+
+    Planned routes:
+
+    /group/add
+    /group/{group_id}/[files|pages|forum|admin|subjects]
+    /group/{group_id}/subjects/add_subject
+
+    /subject/add
+    /subject/{l1}/{l2}/{l3}/{pretty_name}/[files|pages|QA|edit]
+
+    /profile/edit
+    /profile/{user_id}
+    /profile/{pretty_name}
+    /register
+    /home
+    /search
+
+    """
+
     map = Mapper(directory=config['pylons.paths']['controllers'],
                  always_scan=config['debug'])
     map.minimization = False
@@ -22,6 +41,7 @@ def make_map():
     map.connect('/', controller='home')
     map.connect('/register', controller='home', action='register')
     map.connect('/profile', controller='user')
+    map.connect('/got_mail', controller='receivemail', action='index')
     map.connect('/admin', controller='admin', action='index')
     map.connect('/structure', controller='structure', action='index')
     map.connect('/confirm_emails', controller='user', action='confirm_emails')

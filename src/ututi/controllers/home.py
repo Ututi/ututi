@@ -2,7 +2,7 @@ import logging
 
 from formencode import Schema, validators, Invalid, All
 
-from pylons import request, response
+from pylons import request, response, c
 from pylons.controllers.util import redirect_to
 from pylons.decorators import validate
 from pylons.i18n import _
@@ -70,6 +70,7 @@ class HomeController(BaseController):
 
      def index(self):
           user = current_user()
+          c.user = user
           if user is not None:
                return render('/index.mako')
           else:

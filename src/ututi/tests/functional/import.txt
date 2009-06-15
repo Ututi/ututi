@@ -19,8 +19,11 @@ We go to the import page. There we have a form to upload a user CSV file:
 
     >>> browser.open('http://localhost/admin')
     >>> form = browser.getForm(name='user_import')
+    >>> csv_data = 'domas, {SSHA}o4nmuRFCZCGxWpvz7FSd4I4wGhTrSfPH4tUc, Domas Monkus, domas@ututi.lt, 2009/05/20, 2009/06/06, '
     >>> import cStringIO
-    >>> form.getControl('CSV File').add_file(cStringIO.StringIO('domas, {SSHA}o4nmuRFCZCGxWpvz7FSd4I4wGhTrSfPH4tUc, Domas Monkus, domas@ututi.lt, 2009/05/20, 2009/06/06, '), 'text/plain', 'users.csv')
+    >>> form.getControl('CSV File').add_file(cStringIO.StringIO(csv_data),
+    ...                                      'text/plain',
+    ...                                       'users.csv')
     >>> form.getControl('Upload').click()
     >>> browser.open('http://localhost/admin/users')
     >>> browser.printQuery("id('user_list')//li/text()")
@@ -43,7 +46,7 @@ Now we will log out and see if we can log back in as the imported user.
       <title>UTUTI – student information online</title>
       </head>
       <body>
-    <h1>Welcome!</h1>
+    <h1>Welcome Domas Monkus!</h1>
     <a href="/logout">Log out</a>
       </body>
     </html>

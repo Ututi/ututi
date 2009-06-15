@@ -11,7 +11,7 @@ import sqlalchemy as sa
 from sqlalchemy import orm, Column, Integer, Sequence
 from sqlalchemy.exc import DatabaseError
 from sqlalchemy.orm.exc import NoResultFound
-from sqlalchemy.orm import relation
+from sqlalchemy.orm import relation, backref
 
 from ututi.migration import GreatMigrator
 from ututi.model import meta
@@ -47,7 +47,8 @@ def setup_orm(engine):
                            autoload_with=engine)
     orm.mapper(LocationTag,
                locationtags_table,
-               properties = {'parent_item' : relation(LocationTag, backref='children')})
+               properties = {'children' : relation(LocationTag,
+                                                   backref=backref('parent_item', remote_side=locationtags_table.c.id))})
 
 
 def initialize_db_defaults(engine):
