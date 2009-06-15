@@ -86,3 +86,25 @@ Let's log out to see a clean structure list.
     Architekturos fakultetas
     Vinco Kapsuko universitetas
     Ekonomikos fakultetas
+
+Let's log back in and try importing new structure information.
+
+    >>> browser.open('http://localhost/')
+    >>> browser.getControl('Email:').value = "admin@ututi.lt"
+    >>> browser.getControl('Password:').value = "asdasd"
+    >>> browser.getControl('Login').click()
+    >>> browser.open('http://localhost/admin')
+    >>> form = browser.getForm(name='structure_import')
+    >>> import cStringIO
+    >>> form.getControl('CSV File').add_file(cStringIO.StringIO('VU, Vilniaus Universitetas, , \ngmf, Gamtos Mokslu Fakultetas, , vu'), 'text/plain', 'structure.csv')
+    >>> form.getControl('Upload').click()
+    >>> browser.open('http://localhost/')
+    >>> browser.getLink('Log out').click()
+    >>> browser.open('http://localhost/structure')
+    >>> browser.printQuery("id('location_structure')//li/text()")
+    Vilniaus Gedimino Technikos Universitetas
+    Architekturos fakultetas
+    Vinco Kapsuko universitetas
+    Ekonomikos fakultetas
+    Vilniaus Universitetas
+    Gamtos Mokslu Fakultetas
