@@ -30,13 +30,13 @@ insert into locationtags (title, title_short, description, parent)
 
 create table files (id bigserial not null,
        md5 char(32) not null,
-       mimetype varchar(255),
+       mimetype varchar(255) default 'application/octet-stream',
        filesize int8,
-       name varchar(500),
+       filename varchar(500),
        title varchar(500),
-       description text,
-       created time,
-       modified time,
+       description text default '',
+       created time default now(),
+       modified time default null,
        primary key (id));
 
-create unique index md5 on files (md5);
+create index md5 on files (md5);
