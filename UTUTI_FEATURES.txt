@@ -6,11 +6,15 @@ Tai yra dokumentas kur bus aprašoma ką privalo mokėti Ututi. Visos idėjos ir
 
 = 1. Nariai =
 
+
 = 2. Paieška =
+
 
 = 3. Dalykai =
 
+
 = 4. Grupės =
+
 
 = 5. Failai =
 
@@ -20,22 +24,111 @@ Kiekviena grupė privalo turėti savo el.pašto konferenciją.
 
 == 6.1 El. laiškų gavimas ==
  - Į el.pašto konferenciją gali rašyti tik grupės nariai.
- - Galima priskirti el.pašto adresus kurie nėra grupės nariai ir kurie negauna laiškų iš mailinglisto, bet jų laiškai visada automatiškai praleidžiami.
- - Jei rašo nenarys, moderatorius gauna prašymą patvirtinti arba atmesti laišką.
-   - Pavirtintą laišką galima pridėti į visada priimamų siuntėjų sąrašą.
-   - Atmestus laiškus galima pridėti į visada automatiškai atmetamų siuntėjų sąrašą.
- - Grupės narys gali nustatyti, kad nori gauti laiškų suvestinę kartą per dieną. Suvestinės laiškas ateina tik tada, jei tą dieną į grupės el.pašto konferenciją buvo siunčiami laiškai.
- - Grupės narys gali nustatyti, kad niekad negautų laiškų iš šitos el.pašto konferencijos. Jis juos galės skaityti per web sąsają.
+
+ - Galima priskirti el.pašto adresus kurie nėra grupės nariai ir kurie
+   negauna laiškų iš mailinglisto, bet jų laiškai visada automatiškai
+   praleidžiami.
+
+ - Jei rašo nenarys, moderatorius gauna prašymą patvirtinti arba
+   atmesti laišką.
+
+   - Pavirtintą laišką galima pridėti į visada priimamų siuntėjų
+     sąrašą.
+
+   - Atmestus laiškus galima pridėti į visada automatiškai atmetamų
+     siuntėjų sąrašą.
+
+ - Grupės narys gali nustatyti, kad nori gauti laiškų suvestinę kartą
+   per dieną. Suvestinės laiškas ateina tik tada, jei tą dieną į
+   grupės el.pašto konferenciją buvo siunčiami laiškai.
+
+ - Grupės narys gali nustatyti, kad niekad negautų laiškų iš šitos
+   el.pašto konferencijos. Jis juos galės skaityti per web sąsają.
 
 == 6.2 Failai el.konferencijoje  ==
- - Jei naudotojas siunčia failą į el.pašto konferenciją, failas automatiškai atkabinamas ir įdedamas prie grupės privačių failų. Prie laiško pridedama žinutė su nuorodą iš kur galima atsisiųsti failą.
+ - Jei naudotojas siunčia failą į el.pašto konferenciją, failas
+   automatiškai atkabinamas ir įdedamas prie grupės privačių
+   failų. Prie laiško pridedama žinutė su nuorodą iš kur galima
+   atsisiųsti failą.
+
  - Prie laiško prikabinamo failo dydis negali būti didesnis nei 10Mb.
- - Kadangi privačių failų vietą ribosime iki 100Mb, jei prikabintas failas viršijo limitą, jis nededamas prie privačių failų. Siuntėjas gauna pranešimą, kad nepavyko išsaugoti failo, nes pritrūko grupėje vietos ir pasiūlo įdėti failą į Ututi rankomis į kokį nors dalyką, patvarkyti privačius failus (ištrinti ko nereikia, perkelti failus prie dalykų ir pan.) arba padidinti grupės privačių failų kvotą už $.
+
+ - Kadangi privačių failų vietą ribosime iki 100Mb, jei prikabintas
+   failas viršijo limitą, jis nededamas prie privačių failų. Siuntėjas
+   gauna pranešimą, kad nepavyko išsaugoti failo, nes pritrūko grupėje
+   vietos ir pasiūlo įdėti failą į Ututi rankomis į kokį nors dalyką,
+   patvarkyti privačius failus (ištrinti ko nereikia, perkelti failus
+   prie dalykų ir pan.) arba padidinti grupės privačių failų kvotą už
+   $.
 
 == 6.3. El.konferencijos administravimas ==
- - Grupės moderatorius gali pakeisti el.konferencijos adresą. Visi nariai gauna pranešimą, kad adresas pasikeitė. (APTARTI ar tai darome)
- - Grupės moderatorius gali tvirtinti ir atmesti laukiančius patvirtinimo laiškus.
- - Grupės moderatorius gali valdyti visada praleidžiamų ir visada atmetamų siuntėjų sąrašus.
+ - Grupės moderatorius gali pakeisti el.konferencijos adresą. Visi
+   nariai gauna pranešimą, kad adresas pasikeitė. (APTARTI ar tai
+   darome)
+
+ - Grupės moderatorius gali tvirtinti ir atmesti laukiančius
+   patvirtinimo laiškus.
+
+ - Grupės moderatorius gali valdyti visada praleidžiamų ir visada
+   atmetamų siuntėjų sąrašus.
 
 
 = 7. Priminimai el. paštu =
+Visus priminimus naudotojai gali konfigūruoti ir negauti nenorimų
+el.laiškų iš Ututi. Visi priminimai pagal nutylėjimą įjungti, nebent
+prie jų pažymėta kitaip.
+
+== 7.1 Asmeniniai priminimai ==
+ - Jei narys savaitę nebuvo prisijungęs prie Ututi, jis gauna
+   el.laišką su Ututi pasikeitimų suvestine. Realiai čia turėtų būti
+   jo feed'as.
+    - Kokie failai ir kur buvo pridėti su nuorodom iki failų. (Jei jų
+      daugiau nei 10, tiesiog rašome kiek failų prie kokio dalyko
+      pridėti ir pateikiam nuorodas į dalykų failų saugyklas.)
+
+    - Informacija apie naujus stebimus dalykus grupėse.
+
+    - Informacija apie naujai prisijungusius grupiokus.
+
+    - Kokiose dalykuose kokie wikiai buvo pakeisti.
+
+    - Kokie yra nauji klausimai prie dalykų.
+
+    - Jei buvo atsakyta į jo užduotus klausimus, paminėti apie tai.
+
+ - Priminimas, kad baigiasi jo mokamo account'o galiojimo laikas.
+
+ - Pranešimas, kad jo statusas pasikeitė. Pvz. gavo daugiau karmos ir
+   dabar jis gali XYZ.
+
+== 7.2 Priminimai grupės nariui ==
+ - Kai į prie grupės stebimų failų pridedamas naujas failas, grupės
+   nariai gauna pranešimą el. paštu, kad buvo pridėtas naujas failas.
+
+ - Pranešimas apie įkeltus failus išsiunčiamas kartą per valandą (ar
+   30 min), tam, kad viename laiške galima būtų pranešti apie kelis
+   įkeltus failus. Negerai spaminti naudotojus 10 el.laiškų iš Ututi.
+
+ - Primename jei grupė pradeda stebėti naujus dalykus. Išjungtas pagal
+   nutylėjimą.
+
+== 7.3 Priminimai grupės moderatoriui ==
+Moderatorius gana visus priminimus kurios gauna grupės nariai. Čia
+pažymėta ką jis gauna papildomai.
+
+ - Priminimas, kad reikia patvirtinti narį laukiantį patvirtinimo. Jei
+   moderatorius to nepadaro, priminimas kartojamas už savaitės. Jei
+   yra keli žmonės laukiantis patvirtinimo, siunčiamas tik vienas
+   laiškas su prašymų patvirtinti visus.
+
+ - Kartą per savaitę ateina priminimas apie patvirtinimo laukiančius
+   laiškus. Administratorius gali pats nustatyti, kad tokie laiškai
+   ateitų kiekvieną dieną ar kartą per savaitę.
+
+ - Kai privačių failų dydis viršija 95Mb moderatorius gauna pranešimą
+   su prašymu ištrinti nereikalingus failus, perkelti failus prie
+   dalykų arba padidinti privačių failų saugyklos talpą už $.
+
+
+= 8. Rekomendacijos naudotojams =
+
