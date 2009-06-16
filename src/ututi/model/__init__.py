@@ -148,24 +148,36 @@ email_table = None
 
 class Email(object):
     """Class representing one email of a user."""
+
     def __init__(self, email):
         self.email = email
 
 
 class LocationTag(object):
     """Class representing the university and faculty tags."""
+
     def __init__(self, title, title_short, description, parent=None):
         self.parent = parent
         self.title = title
         self.title_short = title_short
         self.description = description
 
+
 class File(object):
     """Class representing user-uploaded files."""
-    def __init__(self, filename, title, mimetype=None, created=None, description='', data=None):
+
+    def __init__(self, filename, title, mimetype=None, created=None,
+                 description='', data=None, md5=None):
         if data is not None:
-            self.md5 = hashlib.md5(data).hexdigest()
+            md5_digest = hashlib.md5(data).hexdigest()
+            if md5 is not None:
+                assert md5 == md5_digest
+            self.md5 = md5_digest
             self.filesize = len(data)
+
+        if md5 is not None:
+            self.md5 = md5
+
         self.filename = filename
         self.title = title
         if mimetype is not None:
@@ -176,7 +188,7 @@ class File(object):
         self.description = description
 
     def filepath(self):
-        dir_path = [config.get('files_path', '/tmp')]
+        dir_path = [config.get('files_path')]
         segment = ''
         for c in list(self.md5):
             segment += c

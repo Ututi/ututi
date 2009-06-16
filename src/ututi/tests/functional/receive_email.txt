@@ -1,0 +1,110 @@
+    >>> from textwrap import dedent
+    >>> message = dedent("""\
+    ... Return-Path: <admin@u2ti.com>
+    ... Date: Mon, 15 Jun 2009 17:05:31 +0300
+    ... From: Admin <admin@u2ti.com>
+    ... To: my_special_group@u2ti.com
+    ... Subject: Hello
+    ... Message-ID: <20090615140531.GA23780@my_pc>
+    ... MIME-Version: 1.0
+    ... Content-Disposition: inline
+    ... User-Agent: Mutt/1.5.18 (2008-05-17)
+    ... Content-Type: text/plain; charset=us-ascii
+    ...
+    ... Hi, I am just writing to tell you how wonderful this system is.
+    ...
+    ... Admin
+    ... """)
+
+    >>> message_w_attachment = dedent("""\
+    ... Mail From ignas@pov.lt  Mon Jun 15 17:55:15 2009
+    ... Return-Path: <admin@u2ti.com>
+    ... Date: Mon, 15 Jun 2009 17:55:15 +0300
+    ... From: Admin <admin@u2ti.com>
+    ... To: my_special_group@u2ti.com
+    ... Subject: Also - an attachment
+    ... Message-ID: <20090615145515.GA13471@uka>
+    ... MIME-Version: 1.0
+    ... Content-Type: multipart/mixed; boundary="ZGiS0Q5IWpPtfppv"
+    ... Content-Disposition: inline
+    ... User-Agent: Mutt/1.5.18 (2008-05-17)
+    ...
+    ...
+    ... --ZGiS0Q5IWpPtfppv
+    ... Content-Type: text/plain; charset=us-ascii
+    ... Content-Disposition: inline
+    ...
+    ... Also, I just wanted to send you this file:
+    ...
+    ... --ZGiS0Q5IWpPtfppv
+    ... Content-Type: text/plain; charset=us-ascii
+    ... Content-Disposition: attachment; filename="README.txt"
+    ...
+    ... I am a file!
+    ...
+    ... --ZGiS0Q5IWpPtfppv--
+    ... """)
+
+    >>> from pylons import config
+    >>> files_path = config['files_path']
+
+    >>> from nous.mailpost import processEmailAndPost
+    >>> from ututi.tests.functional import listUploads
+
+Let's send an email to the system:
+
+    >>> processEmailAndPost('http://localhost/got_mail', message, files_path)
+
+As the email had no attachments, we have no new files in our upload directory:
+
+    >>> listUploads()
+
+But if someone would sent an email with an attachment, it sure would get stored:
+
+    >>> processEmailAndPost('http://localhost/got_mail', message_w_attachment, files_path)
+    >>> listUploads()
+    /uploads/cb396bb6/487560f2/6de19949/6051b42e
+
+Not just stored, it should appear in the files list:
+
+    >>> browser = Browser('http://localhost/files')
+
+    >>> browser.printQuery('id("file_list")//a')
+    <a href="/files/get/1" class="file-link">README.txt</a>
+
+If we upload the same file twice - we should see it two times in the
+mailing list, but still only have 1 copy of the file in the files
+repository:
+
+    >>> processEmailAndPost('http://localhost/got_mail', message_w_attachment, files_path)
+    >>> listUploads()
+    /uploads/cb396bb6/487560f2/6de19949/6051b42e
+
+    >>> browser.reload()
+
+    >>> browser.printQuery('id("file_list")//a')
+    <a href="/files/get/1" class="file-link">README.txt</a>
+    <a href="/files/get/2" class="file-link">README.txt</a>
+
+    >>> browser.getLink('README.txt').click()
+    >>> browser.printContents()
+    I am a file!
+
+Now if we upload the same file using our web ui, it still should not
+add any additional files to the repository:
+
+    >>> import os
+    >>> file = open(os.path.join(files_path, 'cb396bb6/487560f2/6de19949/6051b42e'))
+
+    >>> browser.open('http://localhost/files')
+    >>> browser.getControl('Title').value = "file.txt"
+    >>> browser.getControl('Upload').add_file(file, 'text/plain', 'file.txt')
+    >>> browser.getControl('Save').click()
+
+    >>> listUploads()
+    /uploads/cb396bb6/487560f2/6de19949/6051b42e
+
+    >>> browser.printQuery('id("file_list")//a')
+    <a href="/files/get/1" class="file-link">README.txt</a>
+    <a href="/files/get/2" class="file-link">README.txt</a>
+    <a href="/files/get/3" class="file-link">file.txt</a>
