@@ -132,3 +132,20 @@ pažymėta ką jis gauna papildomai.
 
 = 8. Rekomendacijos naudotojams =
 
+
+= 9. Dėstytojo account =
+== 9.1 Dėstytojo dalykai ==
+ - Dėstytojas galės pridėti pasirinkti kokius dalykus jis dėsto ir
+matys savo dykų sąrašą.
+
+ - Studentai dėstytojo viešame profilyje gali matyti visus dėstytojo
+   dėstomus dalykus.
+
+== 9.2 Dėstytojo failų saugykla ==
+ - Dėstytojas gali saugoti neribota failų kiekį.
+
+ - Bet kuri failą jis gali priskirti vienas arba kelėms dalykams.
+
+ - Kitas dalyko dėstytojas gali atkabinti dėstytojo failus, tačiau failas nėra trinamas.
+
+ - Studentai dėstytojo viešame profilyje gali matyti visus dėstytojo failus.
