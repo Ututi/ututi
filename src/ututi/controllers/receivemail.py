@@ -18,7 +18,7 @@ class ReceivemailController(BaseController):
 
     def index(self):
         md5_list = request.POST.getall("md5[]")
-        mime_type_list = request.POST.getall("mimetype[]")
+        mime_type_list = request.POST.getall("mime-type[]")
         file_name_list = request.POST.getall("filename[]")
         for md5, mimetype, filename in zip(md5_list,
                                            mime_type_list,
