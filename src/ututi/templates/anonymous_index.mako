@@ -7,6 +7,9 @@
 <div class="block-content">
   <h1>Log in</h1>
   <form method="POST" id="login_form" action="/dologin">
+    %if request.GET.get('came_from'):
+       <input type="hidden" name="came_from" value="${request.GET.get('came_from')}" />
+    %endif
     <table>
       <tr>
         <td>

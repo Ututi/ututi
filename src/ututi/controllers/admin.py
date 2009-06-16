@@ -1,32 +1,34 @@
 import logging
 
 from pylons import request, response, c
-from pylons.controllers.util import redirect_to
+from pylons.controllers.util import redirect_to, abort
 from pylons.decorators import validate
 from pylons.i18n import _
 from sqlalchemy.orm.exc import NoResultFound
 from ututi.lib.base import BaseController, render
-from ututi.lib import current_user, email_confirmation_request
+from ututi.lib import current_user
 
 from ututi.model import meta, User, Email, LocationTag
 
 log = logging.getLogger(__name__)
 
+
 class AdminController(BaseController):
+    """Controler for system administration."""
+
     def index(self):
         user = current_user()
-        if user is not None:
-            return render('/admin/import.mako')
-        else:
-            return render('/anonymous_index.mako')
+        if user is None:
+            abort(401, 'You are not authenticated')
+        return render('/admin/import.mako')
 
     def users(self):
         user = current_user()
-        if user is not None:
-            c.users = meta.Session.query(User).all()
-            return render('/admin/users.mako')
-        else:
-            return render('/anonymous_index.mako')
+        if user is None:
+            abort(401, 'You are not authenticated')
+
+        c.users = meta.Session.query(User).all()
+        return render('/admin/users.mako')
 
     def import_users(self):
         file = request.POST.get('file_upload', None)

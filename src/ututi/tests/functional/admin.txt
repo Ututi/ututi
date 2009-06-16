@@ -1,0 +1,28 @@
+Seucurity of Administration views
+=================================
+
+Our admin views should only be accessible when you are logged in. So
+if I would just type in the admin url I should get redirected to the
+login form:
+
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/admin')
+    >>> browser.url
+    'http://localhost/?came_from=http%3A%2F%2Flocalhost%2Fadmin'
+
+Now if I type in the admin credentials:
+
+    >>> browser.getControl('Email:').value = "admin@ututi.lt"
+    >>> browser.getControl('Password:').value = "asdasd"
+    >>> browser.getControl('Login').click()
+
+I'd get redirected back to where I was trying to go:
+
+    >>> browser.url
+    'http://localhost/admin'
+
+and even can see some actions:
+
+    >>> browser.printQuery("//h1")
+    <h1>User import</h1>
+    <h1>Structure import</h1>
