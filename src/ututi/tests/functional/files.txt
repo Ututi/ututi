@@ -1,0 +1,29 @@
+File upload and download
+========================
+
+First let's log in.
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/')
+    >>> browser.getControl('Email:').value = "admin@ututi.lt"
+    >>> browser.getControl('Password:').value = "asdasd"
+    >>> browser.getControl('Login').click()
+    >>> browser.open('http://localhost/files')
+    >>> browser.printQuery("//h1/text()")
+    Files
+
+There should be a form to upload a new file.
+
+    >>> form = browser.getForm('file_upload_form')
+    >>> form.getControl('Title').value = "a file"
+    >>> form.getControl('Description').value = "a new file"
+    >>> import cStringIO
+    >>> form.getControl('Upload').add_file(cStringIO.StringIO('The contents of the file.'), 'text/plain', 'file.txt')
+    >>> form.getControl('Save').click()
+
+Having uploaded the file, we should be presented with a list of all files present, with our new file available.
+
+    >>> browser.printQuery('id("file_list")//a/text()')
+    a file
+    >>> browser.getLink("a file").click()
+    >>> browser.contents
+    'The contents of the file.'
