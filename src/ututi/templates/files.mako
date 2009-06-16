@@ -29,7 +29,7 @@
       </div>
       <div>
         <label for="upload">${_("Upload")}</label>
-        <input type="file" name="upload" id="file_upload"/>
+        <input type="file" name="upload" id="upload"/>
       </div>
       <div>
         <input type="submit" value="${_('Save')}"/>
