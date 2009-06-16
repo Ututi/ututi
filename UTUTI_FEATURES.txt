@@ -1,28 +1,25 @@
+# -*- mode: org -*-
+
 Ututi feature
 -------------
 
 Tai yra dokumentas kur bus aprašoma ką privalo mokėti Ututi. Visos idėjos ir visi pageidavimai bus čia aprašomi.
 
 
-= 1. Nariai =
+* Nariai
 
+* Paieška
 
-= 2. Paieška =
+* Dalykai
 
+* Grupės
 
-= 3. Dalykai =
+* Failai
 
-
-= 4. Grupės =
-
-
-= 5. Failai =
-
-
-= 6. Mailinglistai =
+* Mailinglistai
 Kiekviena grupė privalo turėti savo el.pašto konferenciją.
 
-== 6.1 El. laiškų gavimas ==
+** 6.1 El. laiškų gavimas
  - Į el.pašto konferenciją gali rašyti tik grupės nariai.
 
  - Galima priskirti el.pašto adresus kurie nėra grupės nariai ir kurie
@@ -45,7 +42,7 @@ Kiekviena grupė privalo turėti savo el.pašto konferenciją.
  - Grupės narys gali nustatyti, kad niekad negautų laiškų iš šitos
    el.pašto konferencijos. Jis juos galės skaityti per web sąsają.
 
-== 6.2 Failai el.konferencijoje  ==
+** Failai el.konferencijoje
  - Jei naudotojas siunčia failą į el.pašto konferenciją, failas
    automatiškai atkabinamas ir įdedamas prie grupės privačių
    failų. Prie laiško pridedama žinutė su nuorodą iš kur galima
@@ -61,7 +58,7 @@ Kiekviena grupė privalo turėti savo el.pašto konferenciją.
    prie dalykų ir pan.) arba padidinti grupės privačių failų kvotą už
    $.
 
-== 6.3. El.konferencijos administravimas ==
+** El.konferencijos administravimas
  - Grupės moderatorius gali pakeisti el.konferencijos adresą. Visi
    nariai gauna pranešimą, kad adresas pasikeitė. (APTARTI ar tai
    darome)
@@ -73,12 +70,12 @@ Kiekviena grupė privalo turėti savo el.pašto konferenciją.
    atmetamų siuntėjų sąrašus.
 
 
-= 7. Priminimai el. paštu =
+* Priminimai el. paštu
 Visus priminimus naudotojai gali konfigūruoti ir negauti nenorimų
 el.laiškų iš Ututi. Visi priminimai pagal nutylėjimą įjungti, nebent
 prie jų pažymėta kitaip.
 
-== 7.1 Asmeniniai priminimai ==
+** 7.1 Asmeniniai priminimai
  - Jei narys savaitę nebuvo prisijungęs prie Ututi, jis gauna
    el.laišką su Ututi pasikeitimų suvestine. Realiai čia turėtų būti
    jo feed'as.
@@ -101,7 +98,7 @@ prie jų pažymėta kitaip.
  - Pranešimas, kad jo statusas pasikeitė. Pvz. gavo daugiau karmos ir
    dabar jis gali XYZ.
 
-== 7.2 Priminimai grupės nariui ==
+** Priminimai grupės nariui
  - Kai į prie grupės stebimų failų pridedamas naujas failas, grupės
    nariai gauna pranešimą el. paštu, kad buvo pridėtas naujas failas.
 
@@ -112,7 +109,7 @@ prie jų pažymėta kitaip.
  - Primename jei grupė pradeda stebėti naujus dalykus. Išjungtas pagal
    nutylėjimą.
 
-== 7.3 Priminimai grupės moderatoriui ==
+** Priminimai grupės moderatoriui
 Moderatorius gana visus priminimus kurios gauna grupės nariai. Čia
 pažymėta ką jis gauna papildomai.
 
@@ -130,18 +127,17 @@ pažymėta ką jis gauna papildomai.
    dalykų arba padidinti privačių failų saugyklos talpą už $.
 
 
-= 8. Rekomendacijos naudotojams =
+* Rekomendacijos naudotojams
 
-
-= 9. Dėstytojo account =
-== 9.1 Dėstytojo dalykai ==
+* Dėstytojo account
+** Dėstytojo dalykai
  - Dėstytojas galės pridėti pasirinkti kokius dalykus jis dėsto ir
 matys savo dykų sąrašą.
 
  - Studentai dėstytojo viešame profilyje gali matyti visus dėstytojo
    dėstomus dalykus.
 
-== 9.2 Dėstytojo failų saugykla ==
+** Dėstytojo failų saugykla
  - Dėstytojas gali saugoti neribota failų kiekį.
 
  - Bet kuri failą jis gali priskirti vienas arba kelėms dalykams.
