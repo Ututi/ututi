@@ -3,6 +3,8 @@
 import sys
 import re
 import webbrowser
+import tempfile
+import shutil
 from lxml import etree
 import wsgi_intercept
 
@@ -48,6 +50,7 @@ class PylonsLayer(object):
             SetupCommand('setup-app').run([conf_dir + '/test.ini'])
             pylons.test.pylonsapp = loadapp('config:test.ini',
                                             relative_to=conf_dir)
+            config['files_path'] = tempfile.mkdtemp(prefix="uploads_")
             def create_fn():
                 return pylons.test.pylonsapp
             install_opener()
@@ -55,6 +58,10 @@ class PylonsLayer(object):
 
     @classmethod
     def tearDown(self):
+        try:
+            shutil.rmtree(config['files_path'])
+        except OSError:
+            pass
         # Zope component tear down
         zcTearDown()
         pylons.test.pylonsapp = None
@@ -69,6 +76,12 @@ class PylonsLayer(object):
         teardown_db_defaults(meta.engine, quiet=True)
         initialize_db_defaults(meta.engine)
         mail_queue[:] = []
+        try:
+            shutil.rmtree(config['files_path'])
+        except OSError:
+            pass
+        os.makedirs(config['files_path'])
+
 
     @classmethod
     def testTearDown(self):
@@ -80,6 +93,8 @@ class PylonsLayer(object):
 
         if len(mail_queue) > 0:
             print >> sys.stderr, "Mail queue is NOT EMPTY!"
+
+        shutil.rmtree(config['files_path'])
 
 
 class UtutiTestApp(TestApp):

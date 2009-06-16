@@ -34,3 +34,11 @@ def collect_ftests(package=None, level=None, layer=None, filenames=None):
             suite.level = level
         suites.append(suite)
     return unittest.TestSuite(suites)
+
+
+def listUploads(files_path):
+    for dir_name, subdirs, files in os.walk(files_path):
+        if files:
+            for file_name in files:
+                full_name = os.path.join(dir_name, file_name)
+                print full_name.replace(files_path, "/uploads")
