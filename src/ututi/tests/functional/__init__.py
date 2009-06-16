@@ -4,6 +4,8 @@ import unittest
 
 from zope.testing import doctest
 
+from pylons import config
+
 import ututi
 
 
@@ -36,7 +38,9 @@ def collect_ftests(package=None, level=None, layer=None, filenames=None):
     return unittest.TestSuite(suites)
 
 
-def listUploads(files_path):
+def listUploads(files_path=None):
+    if files_path is None:
+        files_path = config['files_path']
     for dir_name, subdirs, files in os.walk(files_path):
         if files:
             for file_name in files:

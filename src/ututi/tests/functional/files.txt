@@ -2,6 +2,7 @@ File upload and download
 ========================
 
 First let's log in.
+
     >>> browser = Browser()
     >>> browser.open('http://localhost/')
     >>> browser.getControl('Email:').value = "admin@ututi.lt"
@@ -27,3 +28,9 @@ Having uploaded the file, we should be presented with a list of all files presen
     >>> browser.getLink("a file").click()
     >>> browser.contents
     'The contents of the file.'
+
+The files is stored in our upload directory:
+
+    >>> from ututi.tests.functional import listUploads
+    >>> listUploads()
+    /uploads/11865bf8/24c684d6/ceb7b850/77e94c7c
