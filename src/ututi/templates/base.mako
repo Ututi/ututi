@@ -54,7 +54,7 @@ ${_('student information online')}
           </div>
         </div>
 
-        <div class="inside">
+        <div class="inside" id="page-content">
           ${self.body()}
         </div>
 
