@@ -19,7 +19,7 @@ Tai yra dokumentas kur bus aprašoma ką privalo mokėti Ututi. Visos idėjos ir
 * Mailinglistai
 Kiekviena grupė privalo turėti savo el.pašto konferenciją.
 
-** 6.1 El. laiškų gavimas
+** El. laiškų gavimas
  - Į el.pašto konferenciją gali rašyti tik grupės nariai.
 
  - Galima priskirti el.pašto adresus kurie nėra grupės nariai ir kurie
@@ -69,6 +69,12 @@ Kiekviena grupė privalo turėti savo el.pašto konferenciją.
  - Grupės moderatorius gali valdyti visada praleidžiamų ir visada
    atmetamų siuntėjų sąrašus.
 
+** Forumas
+ - Ututi mailinglistas veikia ir kaip forumas, todėl visi laiškai yra
+   prieinami grupės forum skiltyje.
+
+ - Forumas paslepia reply žinutes (kaip google), tam, kad žinutės būtų skaitomos, o ne kaip dabar, su labai ilgu reply tekstu.
+
 
 * Priminimai el. paštu
 Visus priminimus naudotojai gali konfigūruoti ir negauti nenorimų
@@ -108,6 +114,9 @@ prie jų pažymėta kitaip.
 
  - Primename jei grupė pradeda stebėti naujus dalykus. Išjungtas pagal
    nutylėjimą.
+
+ - Narys gauna pranešimą el.paštu, kai buvo priimtas į grupę arba jei
+   jo prašymas buvo atmestas. (šito priminimo negalima uždrausti)
 
 ** Priminimai grupės moderatoriui
 Moderatorius gana visus priminimus kurios gauna grupės nariai. Čia
