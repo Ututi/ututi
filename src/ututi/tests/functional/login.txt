@@ -14,18 +14,8 @@ If user is not logged in login form is shown. Let's fill it in:
 
 And we are greeted by the welcome page:
 
-    >>> print browser.contents
-    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-    <html>
-      <head>
-      <title>UTUTI – student information online</title>
-      </head>
-      <body>
-    <h1>Welcome Adminas Adminovix!</h1>
-    <a href="/logout">Log out</a>
-      </body>
-    </html>
+    >>> browser.printQuery('id("page-content")//h1/text()')
+    Welcome Adminas Adminovix!
 
 As we have successfully logged in let's logout and make some typos:
 

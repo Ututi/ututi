@@ -38,15 +38,6 @@ Now we will log out and see if we can log back in as the imported user.
     >>> browser.getControl('Email:').value = "domas@ututi.lt"
     >>> browser.getControl('Password:').value = "asdasd"
     >>> browser.getControl('Login').click()
-    >>> print browser.contents
-    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-    <html>
-      <head>
-      <title>UTUTI – student information online</title>
-      </head>
-      <body>
-    <h1>Welcome Domas Monkus!</h1>
-    <a href="/logout">Log out</a>
-      </body>
-    </html>
+    >>> browser.printQuery('id("page-content")//h1/text()')
+    Welcome Domas Monkus!
+
