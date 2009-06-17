@@ -1,0 +1,209 @@
+/* main layout*/
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-size: 87.5%;
+  font-family: 'Trebuchet MS', Helvetica, sans-serif;
+  background: #e5e5d3;
+}
+
+#header {
+  height: 155px;
+  background: white;
+
+  margin: 0 -12px;
+  padding: 0 12px;
+}
+
+#content-top {
+  height: 35px;
+  margin: 0 -12px;
+  padding: 0 12px;
+  background: #e5e5d3;
+}
+
+#container {
+  min-height: 100%;
+  position: relative;
+  margin: 0 10px;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  background: white;
+}
+
+#content {
+  padding: 30px 30px 135px 0;
+  min-height: 200px;
+}
+
+#footer {
+  height: 135px;
+  bottom: 0;
+  width: 100%;
+  position: absolute;
+  background: #e5e5d3;
+  margin: 0 -12px;
+  padding: 0 12px;
+
+  text-align: center;
+}
+/* end main layout */
+
+/* fonts */
+h1 {
+  font-size: 1.8em;
+  margin: 0.4em;
+}
+
+h2 {
+  font-size: 1.6em;
+}
+
+h3 {
+  font-size: 1.4em;
+  font-weight: normal;
+  margin: 0;
+}
+
+.larger {
+  font-size: 1.2em;
+}
+
+.small {
+  font-size: 0.8em;
+}
+
+/* end fonts */
+
+/* resetting default styles */
+a img {
+  border: 0;
+}
+
+a {
+  color: #ff7800;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* header elements */
+#personal-box {
+  float: right;
+  width: 230px;
+  height: 100px;
+  margin-top: 10px;
+  border: 2px solid #e5e5d3;
+}
+
+/* content borders */
+#content-top {
+  background: #e5e5d3 url("content_border.png") left top no-repeat;
+  padding-left: 50px;
+}
+
+#content-top div {
+  background: #e5e5d3 url("content_border.png") right top no-repeat;
+  height: 35px;
+  margin: 0 -12px;
+  padding: 0 12px;
+}
+
+#content-bottom {
+  background: #e5e5d3 url("content_border.png") left bottom no-repeat;
+  margin: 0 -12px 35px;
+  padding: 0 12px;
+  padding-left: 50px;
+}
+
+#content-bottom div {
+  background: #e5e5d3 url("content_border.png") right bottom no-repeat;
+  height: 35px;
+  margin: 0 -12px;
+  padding: 0 12px;
+}
+
+/* end content borders */
+
+/* personal box */
+#personal-box .rounding,
+#personal-box .rounded-right {
+  height: 10px;
+}
+
+#personal-box .rounding {
+  margin: -2px; /* compensating for the border */
+}
+
+#personal-box .content {
+  height: 88px;
+}
+
+#personal-box .rounded-header {
+  padding-left: 50px;
+  background: white url("personal_border.png") no-repeat left top;
+}
+
+#personal-box .rounded-header .rounded-right{
+  background: white url("personal_border.png") no-repeat right top;
+}
+
+#personal-box .rounded-footer {
+  padding-left: 50px;
+  background: white url("personal_border.png") no-repeat left bottom;
+}
+
+#personal-box .rounded-footer .rounded-right{
+  background: white url("personal_border.png") no-repeat right bottom;
+}
+
+/* end personal box */
+
+/* content */
+#content .inside {
+  padding: 0 30px 0 60px;
+  margin-right: 250px;
+}
+
+/* sidebar */
+#sidebar {
+  float: right;
+}
+
+/* sidebar block */
+.sidebar-block {
+  width: 250px;
+}
+
+.sidebar-block .rounded-header {
+  height: 30px;
+  background: white url("sidebar_border.png") left top no-repeat;
+  padding-left: 30px;
+}
+
+.sidebar-block .rounded-header .rounded-right {
+  height: 26px;
+  text-align: center;
+  background: white url("sidebar_border.png") right top no-repeat;
+  padding-right: 30px;
+  padding-top: 4px;
+}
+
+.sidebar-block .content {
+  padding: 10px 30px;
+  margin-bottom: 20px;
+  border: 2px solid #e5e5d3;
+}
+
+.sidebar-block .rounded-header h3,
+.sidebar-block .rounded-header h3 a {
+  color: black;
+}
+
+/* end sidebar block */

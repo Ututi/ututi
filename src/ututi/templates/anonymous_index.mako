@@ -1,9 +1,5 @@
 <%inherit file="/base.mako" />
 
-<%def name="head_tags()">
-  <title>UTUTI – student information online</title>
-</%def>
-
 <div class="block-content">
   <h1>Log in</h1>
   <form method="POST" id="login_form" action="/dologin">
