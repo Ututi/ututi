@@ -96,9 +96,16 @@ Let's log back in and try importing new structure information.
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
     >>> browser.open('http://localhost/admin')
+
     >>> form = browser.getForm(name='structure_import')
     >>> import cStringIO
-    >>> form.getControl('CSV File').add_file(cStringIO.StringIO('VU, Vilniaus Universitetas, , \ngmf, Gamtos Mokslu Fakultetas, , vu'), 'text/plain', 'structure.csv')
+    >>> from textwrap import dedent
+    >>> csv_file = dedent("""\
+    ... VU, Vilniaus Universitetas, ,
+    ... gmf, Gamtos Mokslu Fakultetas, , vu
+    ... """)
+
+    >>> form.getControl('CSV File').add_file(cStringIO.StringIO(csv_file), 'text/plain', 'structure.csv')
     >>> form.getControl('Upload').click()
     >>> browser.open('http://localhost/')
     >>> browser.getLink('Log out').click()
