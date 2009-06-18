@@ -1,6 +1,7 @@
 from StringIO import StringIO
 import logging
 import mimetools
+from routes.util import url_for
 from nous.mailpost.MailBoxerTools import splitMail
 from formencode import Schema, validators, Invalid, All
 
@@ -24,6 +25,7 @@ class ReceivemailController(BaseController):
         md5_list = request.POST.getall("md5[]")
         mime_type_list = request.POST.getall("mime-type[]")
         file_name_list = request.POST.getall("filename[]")
+        attachments = []
         for md5, mimetype, filename in zip(md5_list,
                                            mime_type_list,
                                            file_name_list):
@@ -32,6 +34,7 @@ class ReceivemailController(BaseController):
                      mimetype=mimetype,
                      md5=md5)
             meta.Session.add(f)
+            attachments.append(f)
 
         email = request.POST['Mail']
         msg = mimetools.Message(StringIO(email))
@@ -39,6 +42,13 @@ class ReceivemailController(BaseController):
         headers = "".join(msg.headers)
         all_emails = [email.email for email in
                       meta.Session.query(Email).filter_by(confirmed=False).all()]
-        raw_send_email(msg['From'], all_emails, str(headers) + "\r\n" + str(body))
+
+        footer = ""
+        for file in attachments:
+            url = url_for(controller='files', action='get', id=file.id,
+                          qualified=True)
+            footer += '<a href="%s">%s</a>' % (url, file.title)
+        new_message = "%s\r\n%s\r\n%s" % (headers, body, footer)
+        raw_send_email(msg['From'], all_emails,  new_message)
         meta.Session.commit()
         return "Ok!"

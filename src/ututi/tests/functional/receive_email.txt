@@ -92,7 +92,8 @@ Not just stored, it should appear in the files list:
     >>> browser.printQuery('id("file_list")//a')
     <a href="/files/get/1" class="file-link">README.txt</a>
 
-Also it would be stripped from the actual email:
+Also it would be stripped from the actual email and replaced with a
+link to the file on our system:
 
     >>> print mail_queue.pop()
     Mail From ignas@pov.lt  Mon Jun 15 17:55:15 2009
@@ -108,14 +109,15 @@ Also it would be stripped from the actual email:
     Content-Type: text/plain; charset=us-ascii
     <BLANKLINE>
     Also, I just wanted to send you this file:
-
+    <BLANKLINE>
+    <a href="http://localhost/files/get/1">README.txt</a>
 
 If we upload the same file twice - we should see it two times in the
 mailing list, but still only have 1 copy of the file in the files
 repository:
 
     >>> processEmailAndPost('http://localhost/got_mail', message_w_attachment, files_path)
-    >>> ignore = mail_queue.pop()
+
     >>> listUploads()
     /uploads/cb396bb6/487560f2/6de19949/6051b42e
 
@@ -124,6 +126,26 @@ repository:
     >>> browser.printQuery('id("file_list")//a')
     <a href="/files/get/1" class="file-link">README.txt</a>
     <a href="/files/get/2" class="file-link">README.txt</a>
+
+But the link in the email will point to the other "file" entry in the
+list of files:
+
+    >>> print mail_queue.pop()
+    Mail From ignas@pov.lt  Mon Jun 15 17:55:15 2009
+    Return-Path: <admin@u2ti.com>
+    Date: Mon, 15 Jun 2009 17:55:15 +0300
+    From: Admin <admin@u2ti.com>
+    To: my_special_group@u2ti.com
+    Subject: Also - an attachment
+    Message-ID: <20090615145515.GA13471@uka>
+    MIME-Version: 1.0
+    Content-Disposition: inline
+    User-Agent: Mutt/1.5.18 (2008-05-17)
+    Content-Type: text/plain; charset=us-ascii
+    <BLANKLINE>
+    Also, I just wanted to send you this file:
+    <BLANKLINE>
+    <a href="http://localhost/files/get/2">README.txt</a>
 
     >>> browser.getLink('README.txt').click()
     >>> browser.printContents()
