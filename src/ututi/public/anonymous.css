@@ -1,0 +1,10 @@
+/* ututi feature list */
+ul#ututi_info li {
+  margin-top: 0.4em;
+  line-height: 1.1em;
+}
+
+/* removing conventional sidebars */
+#page-content {
+  margin-right: 0;
+}

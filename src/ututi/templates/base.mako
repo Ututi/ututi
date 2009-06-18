@@ -41,19 +41,6 @@ ${_('student information online')}
       </div>
 
       <div id="content">
-        <div id="sidebar">
-          <div class="sidebar-block">
-            <div class="rounded-header">
-              <div class="rounded-right">
-                <h3><a href="#">antraštė</a></h3>
-              </div>
-            </div>
-            <div class="content">
-              content
-            </div>
-          </div>
-        </div>
-
         <div class="inside" id="page-content">
           ${self.body()}
         </div>

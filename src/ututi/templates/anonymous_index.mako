@@ -6,7 +6,7 @@
 
 <div id="block-left">
 <h1>${_('UTUTI - student information online')}</h1>
-<ul id="ututi_info">
+<ul id="ututi_info" class="bullets_large">
   <li>${_('What can You find here?')}<br/>
     <span class="small">${_('Mailing lists, academic groups, universities, file sharing.')}</span>
   </li>
