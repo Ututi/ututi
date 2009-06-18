@@ -7,3 +7,8 @@ CREATE USER u2release WITH NOCREATEDB NOCREATEUSER UNENCRYPTED password 'release
 CREATE USER u2testing WITH NOCREATEDB NOCREATEUSER UNENCRYPTED password 'testing';
 CREATE DATABASE ututi_release WITH OWNER = u2release ENCODING = 'UTF-8';
 CREATE DATABASE ututi_testing WITH OWNER = u2testing ENCODING = 'UTF-8';
+
+-- DROP DATABASE ututi_release;
+-- DROP DATABASE ututi_testing;
+-- DROP USER u2release;
+-- DROP USER u2testing;
