@@ -4,6 +4,9 @@
 #
 
 BOOTSTRAP_PYTHON=python2.5
+TIMEOUT=1
+BUILDOUT = bin/buildout -t $(TIMEOUT) && touch bin/*
+
 
 .PHONY: all
 all: python/bin/python bin/buildout bin/paster
@@ -14,21 +17,17 @@ python/bin/python:
 bin/buildout: bootstrap.py
 	$(MAKE) BOOTSTRAP_PYTHON=$(BOOTSTRAP_PYTHON) bootstrap
 
-bin/test: buildout.cfg bin/buildout setup.py
-	bin/buildout -t 1
-	touch bin/*
+bin/test: buildout.cfg bin/buildout setup.py versions.cfg
+	$(BUILDOUT)
 
-bin/py: buildout.cfg bin/buildout setup.py
-	bin/buildout -t 1
-	touch bin/*
+bin/py: buildout.cfg bin/buildout setup.py versions.cfg
+	$(BUILDOUT)
 
-bin/paster: buildout.cfg bin/buildout setup.py
-	bin/buildout -t 1
-	touch bin/*
+bin/paster: buildout.cfg bin/buildout setup.py versions.cfg
+	$(BUILDOUT)
 
-bin/tags: buildout.cfg bin/buildout setup.py
-	bin/buildout -t 1
-	touch bin/*
+bin/tags: buildout.cfg bin/buildout setup.py versions.cfg
+	$(BUILDOUT)
 
 instance/var/data/postgresql.conf:
 	mkdir -p instance/var/data
@@ -97,8 +96,7 @@ bootstrap:
 
 .PHONY: buildout
 buildout:
-	bin/buildout -t 1
-	touch bin/*
+	$(BUILDOUT)
 
 .PHONY: test
 test: bin/test instance/done instance/var/run/.s.PGSQL.${PGPORT}
