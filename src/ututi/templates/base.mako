@@ -8,7 +8,7 @@ ${_('student information online')}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="${h.url_for('style.css')|n}" type="text/css" media="screen" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     ${self.head_tags()}
     <title>
@@ -32,7 +32,7 @@ ${_('student information online')}
         </div>
 
         <a href="#" title="home" id="ulogo">
-          <img src="logo.png" alt="logo"/>
+          <img src="${h.url_for('logo.png')|n}" alt="logo"/>
         </a>
 
         <div id="content-top">
