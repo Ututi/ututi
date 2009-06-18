@@ -26,10 +26,23 @@ An email, requesting the confirmation of the email address entered is sent:
 
     >>> from ututi.lib.mailer import mail_queue
     >>> email = mail_queue.pop()
-    >>> print email['To']
-    jonas@example.com
+    >>> print email
+    MIME-Version: 1.0
+    ...
+    From: info@ututi.lt
+    To: jonas@example.com
+    Subject: Confirm the email for Ututi
+    <BLANKLINE>
+    We have received a request to confirm the ownership of this email
+    by Jonas Petraitis Petrauskas on the Ututi system. If this email
+    belongs to You, confirm it by clicking on this link:
+    <BLANKLINE>
+    http://localhost/confirm_user_email/...
+    <BLANKLINE>
+    Ututi team
+
     >>> from ututi.lib.helpers import get_urls
-    >>> urls = get_urls(email.get_payload())
+    >>> urls = get_urls(email)
     >>> len(urls) == 1
     True
     >>> browser.open(urls[0])

@@ -1,4 +1,6 @@
 from smtplib import SMTP
+from StringIO import StringIO
+import mimetools
 from email.Header import Header
 from email.MIMEText import MIMEText
 from email.Utils import parseaddr, formataddr
@@ -61,4 +63,16 @@ def send_email(sender, recipient, subject, body):
         smtp.sendmail(sender, recipient, msg.as_string())
         smtp.quit()
     else:
-        mail_queue.append(msg)
+        mail_queue.append(msg.as_string())
+
+
+def raw_send_email(sender, recipients, message):
+    # Send the message via SMTP to localhost:25
+    if not config.get('hold_emails', False):
+        # send the email if we are not told to hold it
+        server = config.get('smtp_host', 'localhost')
+        smtp = SMTP(server)
+        smtp.sendmail(sender, recipients, message)
+        smtp.quit()
+    else:
+        mail_queue.append(message)

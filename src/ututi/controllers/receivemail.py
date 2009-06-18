@@ -1,4 +1,7 @@
+from StringIO import StringIO
 import logging
+import mimetools
+from nous.mailpost.MailBoxerTools import splitMail
 from formencode import Schema, validators, Invalid, All
 
 from pylons import request, response
@@ -6,6 +9,7 @@ from pylons.controllers.util import redirect_to
 from pylons.decorators import validate
 from pylons.i18n import _
 
+from ututi.lib.mailer import raw_send_email
 from ututi.lib.base import BaseController, render
 from ututi.lib import current_user, email_confirmation_request
 from ututi.model import File
@@ -28,5 +32,13 @@ class ReceivemailController(BaseController):
                      mimetype=mimetype,
                      md5=md5)
             meta.Session.add(f)
+
+        email = request.POST['Mail']
+        msg = mimetools.Message(StringIO(email))
+        headers, body = splitMail(email.encode("utf-8"))
+        headers = "".join(msg.headers)
+        all_emails = [email.email for email in
+                      meta.Session.query(Email).filter_by(confirmed=False).all()]
+        raw_send_email(msg['From'], all_emails, str(headers) + "\r\n" + str(body))
         meta.Session.commit()
         return "Ok!"
