@@ -196,7 +196,7 @@ a:hover {
 }
 
 .sidebar-block .content {
-  padding: 10px 30px;
+  padding: 2px 10px 5px;
   margin-bottom: 20px;
   border: 2px solid #e5e5d3;
 }
@@ -207,3 +207,20 @@ a:hover {
 }
 
 /* end sidebar block */
+
+/* begin horizontal menu */
+.horizontal-menu {
+  overflow: hidden;
+  padding: 0;
+}
+.horizontal-menu li {
+  display: block;
+  float: left;
+  padding: 0 0.2em 15px;
+  background: white url("horizontal_menu.png") bottom left repeat-x;
+}
+
+.horizontal-menu li.active {
+  background: white url("horizontal_menu_active.png") bottom center repeat-x;
+}
+/* end horizontal menu */
