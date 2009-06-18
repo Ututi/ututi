@@ -95,6 +95,13 @@ a:hover {
   text-decoration: underline;
 }
 
+/* begin lists */
+ul.bullets_large li {
+  list-style-type: none;
+  padding-left: 20px;
+  background: white url('bullet_large.png') left center no-repeat;
+}
+
 /* header elements */
 #personal-box {
   float: right;
