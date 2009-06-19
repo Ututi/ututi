@@ -6,5 +6,30 @@ ul#ututi_info li {
 
 /* removing conventional sidebars */
 #page-content {
-  margin-right: 0;
+  margin-right: 0 !important;
+}
+
+/* registration block */
+.sidebar-block {
+  float: right;
+  width: 320px;
+}
+
+.sidebar-block .rounded-header h3 {
+  color: white;
+}
+
+.sidebar-block .btn {
+  float: right;
+}
+
+/* ututi search area */
+#frontpage-search {
+  clear: both;
+  border-top: 1px solid #bab9b2;
+}
+
+#frontpage-search-form .form-field input,
+#frontpage-search-form .form-field label {
+  float: left;
 }
