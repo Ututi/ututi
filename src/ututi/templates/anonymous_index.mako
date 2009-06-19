@@ -1,8 +1,8 @@
 <%inherit file="/base.mako" />
 
 <%def name="head_tags()">
-${h.stylesheet_link_tag('anonymous')}
-${h.javascript_include_tag('forms')}
+${h.stylesheet_link_tag('anonymous')|n}
+${h.javascript_include_tag('forms')|n}
 </%def>
 
 <%def name="personal_block()">
