@@ -54,16 +54,19 @@ body {
 /* end main layout */
 
 /* fonts */
-h1 {
+h1,
+.immense {
   font-size: 1.8em;
   margin: 0.4em 0;
 }
 
-h2 {
+h2,
+.huge {
   font-size: 1.6em;
 }
 
-h3 {
+h3,
+.large {
   font-size: 1.4em;
   font-weight: normal;
   margin: 0;
@@ -71,6 +74,11 @@ h3 {
 
 .larger {
   font-size: 1.2em;
+}
+
+.smaller,
+label {
+  font-size: 1.1em;
 }
 
 .small {
@@ -101,6 +109,7 @@ ul.bullets_large li {
   padding-left: 20px;
   background: white url('bullet_large.png') left center no-repeat;
 }
+/* end lists */
 
 /* header elements */
 #personal-box {
@@ -151,7 +160,8 @@ ul.bullets_large li {
 }
 
 #personal-box .content {
-  height: 88px;
+  height: 78px;
+  padding: 10px 10px 0;
 }
 
 #personal-box .rounded-header {
@@ -218,19 +228,121 @@ ul.bullets_large li {
 /* end sidebar block */
 
 /* begin horizontal menu */
+
+
+.horizontal-menu a {
+  color: #808080;
+  text-decoration: none;
+}
+
+.horizontal-menu a:hover {
+  text-decoration: none;
+}
+
+.horizontal-menu .active a {
+  color: #ff7800;
+}
+
 .horizontal-menu {
+  margin: 0 0 0.2em;
   overflow: hidden;
   padding: 0;
 }
 .horizontal-menu li {
+  color: #808080;
   display: block;
   float: left;
-  padding: 0 0.2em 15px;
+  padding: 0 0.5em 15px;
   background: white url("horizontal_menu.png") bottom left repeat-x;
 }
 
 .horizontal-menu li.active {
+  color: #ff7800;
   background: white url("horizontal_menu_active.png") bottom center repeat-x;
 }
+
 /* end horizontal menu */
 
+/* begin form */
+form .form-field {
+  margin: 0.1em 0;
+  overflow: hidden; /* to contain floats */
+}
+
+form .form-field input {
+  float: right;
+  width: 150px;
+}
+
+form .form-field input.submit {
+  float: none;
+  width: auto;
+}
+
+form .form-field label {
+  float: right;
+  margin-right: 10px;
+
+  /* font */
+  font-weight: bold;
+  color: #808080;
+}
+
+form .form-field .btn {
+  margin-top: 0.5em;
+}
+
+form input.line {
+  border: 2px solid #ecb481;
+}
+
+form .form-field.overlay {
+  position: relative;
+}
+
+form .form-field.overlay input {
+  float: none;
+}
+
+form .form-field.overlay label {
+  float: none;
+  position: absolute;
+  left: 5px;
+  bottom: 2px;
+  color: #8c8c8c;
+  font-weight: bold;
+}
+/* end form */
+
+/* begin buttons */
+span.btn {
+  background: white url("button_small.png") left top no-repeat;
+  display: inline-block;
+  border: medium none;
+  padding: 0 0 0 5px;
+}
+
+span.btn input {
+  background: white url("button_small.png") right top no-repeat;
+  border: medium none;
+  height: 20px;
+  padding: 0 5px 0 0;
+  margin: 0;
+  color: #808080;
+  font-weight: bold;
+  width: auto;
+}
+/* end buttons */
+
+/* special links */
+a.small-link {
+  font-weight: bold;
+  color: #808080;
+  text-decoration: underline;
+}
+
+a.small-link:hover {
+  text-decoration: none;
+}
+
+/* end special links */
