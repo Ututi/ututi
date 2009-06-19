@@ -22,5 +22,3 @@ jQuery.fn.labelOver = function(overClass) {
  	}
  })
  }
-
- jq(".overlay_label").labelOver('');

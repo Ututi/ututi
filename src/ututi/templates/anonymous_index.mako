@@ -24,6 +24,9 @@
     <a class="small-link small" href="#">Forgotten password?</a>
   </div>
 </form>
+<script lang="javascript">
+  $(".overlay label").labelOver('over');
+</script>
 </%def>
 
 <div id="block-left">
