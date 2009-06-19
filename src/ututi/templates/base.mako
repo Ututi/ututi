@@ -5,9 +5,13 @@ ${_('student information online')}
 <%def name="head_tags()">
 </%def>
 
+<%def name="personal_block()">
+</%def>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
     <link rel="stylesheet" href="${h.url_for('style.css')|n}" type="text/css" media="screen" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     ${self.head_tags()}
@@ -24,7 +28,7 @@ ${_('student information online')}
             <div class="rounded-right"></div>
           </div>
           <div class="content">
-            forma
+            ${self.personal_block()}
           </div>
           <div class="rounding rounded-footer">
             <div class="rounded-right"></div>
