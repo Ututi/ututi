@@ -107,7 +107,7 @@ a:hover {
 ul.bullets_large li {
   list-style-type: none;
   padding-left: 20px;
-  background: white url('bullet_large.png') left center no-repeat;
+  background: white url("../images/bullet_large.png") left center no-repeat;
 }
 /* end lists */
 
@@ -122,26 +122,26 @@ ul.bullets_large li {
 
 /* content borders */
 #content-top {
-  background: #e5e5d3 url("content_border.png") left top no-repeat;
+  background: #e5e5d3 url("../images/content_border.png") left top no-repeat;
   padding-left: 50px;
 }
 
 #content-top div {
-  background: #e5e5d3 url("content_border.png") right top no-repeat;
+  background: #e5e5d3 url("../images/content_border.png") right top no-repeat;
   height: 35px;
   margin: 0 -12px;
   padding: 0 12px;
 }
 
 #content-bottom {
-  background: #e5e5d3 url("content_border.png") left bottom no-repeat;
+  background: #e5e5d3 url("../images/content_border.png") left bottom no-repeat;
   margin: 0 -12px 35px;
   padding: 0 12px;
   padding-left: 50px;
 }
 
 #content-bottom div {
-  background: #e5e5d3 url("content_border.png") right bottom no-repeat;
+  background: #e5e5d3 url("../images/content_border.png") right bottom no-repeat;
   height: 35px;
   margin: 0 -12px;
   padding: 0 12px;
@@ -166,20 +166,20 @@ ul.bullets_large li {
 
 #personal-box .rounded-header {
   padding-left: 50px;
-  background: white url("personal_border.png") no-repeat left top;
+  background: white url("../images/personal_border.png") no-repeat left top;
 }
 
 #personal-box .rounded-header .rounded-right{
-  background: white url("personal_border.png") no-repeat right top;
+  background: white url("../images/personal_border.png") no-repeat right top;
 }
 
 #personal-box .rounded-footer {
   padding-left: 50px;
-  background: white url("personal_border.png") no-repeat left bottom;
+  background: white url("../images/personal_border.png") no-repeat left bottom;
 }
 
 #personal-box .rounded-footer .rounded-right{
-  background: white url("personal_border.png") no-repeat right bottom;
+  background: white url("../images/personal_border.png") no-repeat right bottom;
 }
 
 /* end personal box */
@@ -202,14 +202,14 @@ ul.bullets_large li {
 
 .sidebar-block .rounded-header {
   height: 30px;
-  background: white url("sidebar_border.png") left top no-repeat;
+  background: white url("../images/sidebar_border.png") left top no-repeat;
   padding-left: 30px;
 }
 
 .sidebar-block .rounded-header .rounded-right {
   height: 26px;
   text-align: center;
-  background: white url("sidebar_border.png") right top no-repeat;
+  background: white url("../images/sidebar_border.png") right top no-repeat;
   padding-right: 30px;
   padding-top: 4px;
 }
@@ -253,12 +253,12 @@ ul.bullets_large li {
   display: block;
   float: left;
   padding: 0 0.5em 15px;
-  background: white url("horizontal_menu.png") bottom left repeat-x;
+  background: white url("../images/horizontal_menu.png") bottom left repeat-x;
 }
 
 .horizontal-menu li.active {
   color: #ff7800;
-  background: white url("horizontal_menu_active.png") bottom center repeat-x;
+  background: white url("../images/horizontal_menu_active.png") bottom center repeat-x;
 }
 
 /* end horizontal menu */
@@ -318,14 +318,14 @@ form .form-field.overlay label {
 
 /* begin buttons */
 span.btn {
-  background: white url("button_small.png") left top no-repeat;
+  background: white url("../images/button_small.png") left top no-repeat;
   display: inline-block;
   border: medium none;
   padding: 0 0 0 5px;
 }
 
 span.btn input {
-  background: white url("button_small.png") right top no-repeat;
+  background: white url("../images/button_small.png") right top no-repeat;
   border: medium none;
   height: 20px;
   padding: 0 5px 0 0;
