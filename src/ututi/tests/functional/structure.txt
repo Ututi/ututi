@@ -20,9 +20,10 @@ Let's try to add a new element. If we are not logged in, there should be no form
 So we log in first.
 
     >>> browser.open('http://localhost/')
-    >>> browser.getControl('Email:').value = "admin@ututi.lt"
-    >>> browser.getControl('Password:').value = "asdasd"
-    >>> browser.getControl('Login').click()
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
     >>> browser.open('http://localhost/structure')
 
     >>> form = browser.getForm(name='new_structure_form')
@@ -90,9 +91,10 @@ Let's log out to see a clean structure list.
 Let's log back in and try importing new structure information.
 
     >>> browser.open('http://localhost/')
-    >>> browser.getControl('Email:').value = "admin@ututi.lt"
-    >>> browser.getControl('Password:').value = "asdasd"
-    >>> browser.getControl('Login').click()
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
     >>> browser.open('http://localhost/admin')
     >>> form = browser.getForm(name='structure_import')
     >>> import cStringIO

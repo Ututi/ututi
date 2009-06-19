@@ -5,9 +5,10 @@ First we log in to be able to see the user list.
 
     >>> browser = Browser()
     >>> browser.open('http://localhost/')
-    >>> browser.getControl('Email:').value = "admin@ututi.lt"
-    >>> browser.getControl('Password:').value = "asdasd"
-    >>> browser.getControl('Login').click()
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
     >>> browser.open('http://localhost/admin/users')
 
 There is one initial user:
@@ -35,9 +36,10 @@ Now we will log out and see if we can log back in as the imported user.
     >>> browser.open('http://localhost/')
     >>> browser.getLink('Log out').click()
 
-    >>> browser.getControl('Email:').value = "domas@ututi.lt"
-    >>> browser.getControl('Password:').value = "asdasd"
-    >>> browser.getControl('Login').click()
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Email').value = "domas@ututi.lt"
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
     >>> browser.printQuery('id("page-content")//h1/text()')
     Welcome Domas Monkus!
 
