@@ -36,7 +36,7 @@ ${_('student information online')}
         </div>
 
         <a href="#" title="home" id="ulogo">
-          <img src="${h.url_for('logo.png')|n}" alt="logo"/>
+          ${h.image_tag('logo.png', alt='logo')|n}
         </a>
 
         <div id="content-top">
