@@ -1,8 +1,8 @@
 <%inherit file="/base.mako" />
 
 <%def name="head_tags()">
-<link rel="stylesheet" href="${h.url_for('anonymous.css')}" type="text/css" media="screen" />
-<script type="text/javascript" src="${h.url_for('js/forms.js')}"></script>
+${h.stylesheet_link_tag('anonymous')}
+${h.javascript_include_tag('forms')}
 </%def>
 
 <%def name="personal_block()">
@@ -98,7 +98,7 @@
       <div class="form-field">
         <label for="search-text" style="display: none;">${_('Search text')}</label>
         <input class="line large" type="text" name="search-text" id="search-text"/>
-        <input class="submit" type="image" src="${h.url_for('search.png')}" name="search" value="Search"/>
+        <input class="submit" type="image" src="/images/search.png" name="search" value="Search"/>
       </div>
     </form>
 
