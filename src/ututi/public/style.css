@@ -294,6 +294,8 @@ form .form-field .btn {
 
 form input.line {
   border: 2px solid #ecb481;
+  color: #808080;
+  font-weight: bold;
 }
 
 form .form-field.overlay {
