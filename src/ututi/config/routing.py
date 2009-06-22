@@ -37,6 +37,12 @@ def make_map():
     map.connect('/error/{action}', controller='error')
     map.connect('/error/{action}/{id}', controller='error')
 
+    # essential ututi component routes go here
+
+    map.connect('/group/{id}', controller='group', action='group_home')
+    map.connect('/group/{id}/{action}', controller='group')
+    map.connect('/groups', controller='group', action='index')
+
     # CUSTOM ROUTES HERE
     map.connect('/', controller='home')
     map.connect('/register', controller='home', action='register')
