@@ -12,7 +12,7 @@ ul#ututi_info li {
 /* registration block */
 .sidebar-block {
   float: right;
-  width: 320px;
+  width: 360px;
 }
 
 .sidebar-block .rounded-header h3 {
@@ -21,6 +21,12 @@ ul#ututi_info li {
 
 .sidebar-block .btn {
   float: right;
+}
+
+.sidebar-block form input.line {
+  width: 200px;
+  font-size: 0.8em;
+  font-weight: normal;
 }
 
 /* ututi search area */
@@ -32,4 +38,10 @@ ul#ututi_info li {
 #frontpage-search-form .form-field input,
 #frontpage-search-form .form-field label {
   float: left;
+}
+
+/* login form */
+#login_form label {
+  font-size: 1em;
+  font-weight: bold;
 }

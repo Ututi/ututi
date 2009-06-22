@@ -45,19 +45,19 @@ ${h.javascript_link('/javascripts/forms.js')|n}
 
       <form id="registration_form" method="post" action="/register">
         <div class="form-field">
-          <input class="line" type="text" id="fullname" name="fullname" size="20"/>
+          <input class="line" type="text" id="fullname" name="fullname" size="40"/>
           <label for="fullname">${_('Fullname')}</label>
         </div>
         <div class="form-field">
-          <input class="line" type="text" id="email" name="email" size="20"/>
+          <input class="line" type="text" id="email" name="email" size="40"/>
           <label for="email">${_('Email')}</label>
         </div>
         <div class="form-field">
-          <input class="line" type="password" id="new_password" name="new_password" size="20"/>
+          <input class="line" type="password" id="new_password" name="new_password" size="40"/>
           <label for="new_password">${_('Password')}</label>
         </div>
         <div class="form-field">
-          <input class="line" type="password" id="repeat_password" name="repeat_password" size="20"/>
+          <input class="line" type="password" id="repeat_password" name="repeat_password" size="40"/>
           <label for="repeat_password">${_('Repeat password')}</label>
         </div>
         <div class="form-field">
