@@ -62,7 +62,6 @@ def setup_orm(engine):
 
     global groups_table
     groups_table = sa.Table("groups", meta.metadata,
-                            Column('id', Integer, Sequence('files_id_seq'), primary_key=True),
                             autoload=True,
                             autoload_with=engine)
     orm.mapper(Group, groups_table)
