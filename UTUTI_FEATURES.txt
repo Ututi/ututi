@@ -15,6 +15,9 @@ Tai yra dokumentas kur bus aprašoma ką privalo mokėti Ututi. Visos idėjos ir
 * Grupės
 
 * Failai
+** Failų download ir upload
+Problema - negalime leisti, kad 300Mb failo operacija kainuotų 300 Mb RAM. Sprendžiant tai reikia atsižvelgti ir į
+failo hash skaičiavimą. Reikalingas būdas skaičiuoti hash neužkraunant viso failo į atmintį.
 
 * Mailinglistai
 Kiekviena grupė privalo turėti savo el.pašto konferenciją.
