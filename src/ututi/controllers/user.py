@@ -1,14 +1,12 @@
 import logging
 
-from pylons import request, response, c
+from pylons import request, c
 from pylons.controllers.util import redirect_to
-from pylons.decorators import validate
-from pylons.i18n import _
 
 from ututi.lib.base import BaseController, render
 from ututi.lib import current_user, email_confirmation_request
 
-from ututi.model import meta, User, Email
+from ututi.model import meta, Email
 
 log = logging.getLogger(__name__)
 

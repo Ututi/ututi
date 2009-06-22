@@ -1,9 +1,7 @@
 import logging
 
-from pylons import request, response, c
+from pylons import request, c
 from pylons.controllers.util import redirect_to, abort
-from pylons.decorators import validate
-from pylons.i18n import _
 from sqlalchemy.orm.exc import NoResultFound
 from ututi.lib.base import BaseController, render
 from ututi.lib import current_user

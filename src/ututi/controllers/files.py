@@ -1,16 +1,11 @@
 import logging
 
-from formencode import Schema, validators, Invalid, All
 from pylons.controllers.util import abort
 from pylons import request, response, c
 from pylons.controllers.util import redirect_to
-from pylons.decorators import validate
-from pylons.i18n import _
 from paste.fileapp import _FileIter
 
 from ututi.lib.base import BaseController, render
-from ututi.lib import current_user, email_confirmation_request
-
 from ututi.model import meta, File
 from sqlalchemy.orm.exc import NoResultFound
 

@@ -1,14 +1,14 @@
 import logging
 
-from formencode import Schema, validators, Invalid, All
+from formencode import Schema, validators, Invalid
 from pylons.controllers.util import abort
-from pylons import request, response, c
+from pylons import request, c
 from pylons.controllers.util import redirect_to
 from pylons.decorators import validate
 from pylons.i18n import _
 
 from ututi.lib.base import BaseController, render
-from ututi.lib import current_user, email_confirmation_request
+from ututi.lib import current_user
 
 from ututi.model import meta, LocationTag
 from sqlalchemy.orm.exc import NoResultFound
@@ -69,7 +69,7 @@ class StructureController(BaseController):
             fields = ('title', 'title_short', 'description', 'parent')
             values = {}
             for field in fields:
-                value = request.POST.get(field, None) 
+                value = request.POST.get(field, None)
                 if value is not None:
                     values[field] = value
 
