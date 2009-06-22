@@ -188,6 +188,7 @@ class File(object):
         self.description = description
 
     def filepath(self):
+        """Calculate the path of a file, based on its md5 checksum."""
         dir_path = [config.get('files_path')]
         segment = ''
         for c in list(self.md5):
@@ -201,10 +202,13 @@ class File(object):
         return os.path.join(*dir_path)
 
     def store(self, filename, data):
+        """Store a given file in the database and the filesystem."""
         self.filename = filename
-        self.md5 = hashlib.md5(data).hexdigest()
-        self.filesize = len(data)
 
+        if self.title.strip()  == '':
+            self.title = filename
+
+        self.md5 = self.hash_chunked(data)
         filename = self.filepath()
         if os.path.exists(filename):
             return
@@ -212,5 +216,29 @@ class File(object):
         if not os.path.exists(os.path.dirname(filename)):
             os.makedirs(os.path.dirname(filename))
         f = open(filename, 'w')
-        size = copy_chunked(StringIO(data), f, 4096)
+        size = copy_chunked(data, f, 4096)
+        self.filesize = size
+
         f.close()
+
+    def hash_chunked(self, file):
+        """Calculate the checksum of a file in chunks."""
+        chunk_size = 8 * 1024**2
+        size = 0
+        hash = hashlib.md5()
+
+        while True:
+            if isinstance(file, str):
+                chunk = file[size:(size+chunk_size)]
+            else:
+                chunk = file.read(chunk_size)
+
+            size += len(chunk)
+            hash.update(chunk)
+            if len(chunk) < chunk_size:
+                break
+
+        if not isinstance(file, str):
+            file.seek(0)
+
+        return hash.hexdigest()
