@@ -26,6 +26,18 @@ insert into locationtags (title, title_short, description)
 insert into locationtags (title, title_short, description, parent)
        values ('Ekonomikos fakultetas', 'ef', '', 1);
 
+/* A table for groups */
+create table groups (id varchar(250) not null,
+       title varchar(250) not null,
+       location int8 references locationtags(id) not null,
+       year date not null,
+       description text,
+       primary key (id));
+
+insert into groups (id, title, description, year, location)
+       select 'moderators', 'Moderatoriai', 'U2ti moderatoriai.', date('2009-1-1'), locationtags.id
+              from locationtags where locationtags.title_short='vu' and locationtags.parent is null;
+
 /* A table for files */
 
 create table files (id bigserial not null,
