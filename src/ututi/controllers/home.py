@@ -78,9 +78,9 @@ class HomeController(BaseController):
 
      @validate(schema=RegistrationForm(), form='index')
      def register(self):
-          fullname = request.POST['fullname']
+          fullname = request.POST['fullname'].strip()
           password = request.POST['new_password']
-          email = request.POST['email']
+          email = request.POST['email'].strip().lower()
 
           user = User(fullname, password)
           user.emails = [Email(email)]

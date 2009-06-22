@@ -121,7 +121,7 @@ class User(object):
     @classmethod
     def authenticate(cls, username, password):
         try:
-            user = meta.Session.query(Email).filter_by(email=username).one().user
+            user = meta.Session.query(Email).filter_by(email=username.strip().lower()).one().user
             if validate_password(user.password, password):
                 return username
             else:
