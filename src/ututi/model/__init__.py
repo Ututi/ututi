@@ -60,6 +60,13 @@ def setup_orm(engine):
                            autoload_with=engine)
     orm.mapper(File, files_table)
 
+    global groups_table
+    groups_table = sa.Table("groups", meta.metadata,
+                            Column('id', Integer, Sequence('files_id_seq'), primary_key=True),
+                            autoload=True,
+                            autoload_with=engine)
+    orm.mapper(Group, groups_table)
+
 def initialize_db_defaults(engine):
     initial_db_data = pkg_resources.resource_string(
         "ututi",
@@ -151,6 +158,16 @@ class Email(object):
 
     def __init__(self, email):
         self.email = email
+
+
+groups_table = None
+
+class Group(object):
+    def __init__(self, title, location, year, description):
+        self.title = title
+        self.location = 0 #temporarily, until we get to setting locations
+        self.year = year
+        self.description = description
 
 
 class LocationTag(object):
