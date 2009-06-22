@@ -12,7 +12,7 @@ ${_('student information online')}
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
-    ${h.stylesheet_link_tag('style')|n}
+    ${h.stylesheet_link('/stylesheets/style.css')|n}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     ${self.head_tags()}
     <title>
@@ -36,7 +36,7 @@ ${_('student information online')}
         </div>
 
         <a href="#" title="home" id="ulogo">
-          ${h.image_tag('logo.png', alt='logo')|n}
+          ${h.image('/images/logo.png', alt='logo')|n}
         </a>
 
         <div id="content-top">
