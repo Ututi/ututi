@@ -6,6 +6,7 @@ from pylons import request, response, c
 from pylons.controllers.util import redirect_to
 from pylons.decorators import validate
 from pylons.i18n import _
+from paste.fileapp import _FileIter
 
 from ututi.lib.base import BaseController, render
 from ututi.lib import current_user, email_confirmation_request
@@ -43,10 +44,5 @@ class FilesController(BaseController):
         response.headers['Content-Type'] = file.mimetype
         response.headers['Content-Length'] = file.filesize
         response.headers['Content-Disposition'] = 'attachment; filename=%s' % file.filename
-
         source = open(file.filepath(), 'r')
-        data = source.read()
-        source.close()
-        return data
-
-
+        return _FileIter(source)
