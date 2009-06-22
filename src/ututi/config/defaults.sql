@@ -11,7 +11,7 @@ create table emails (id int8 not null references users(id),
        confirmation_key char(32) default '',
        primary key (email));
 
-insert into emails (id, email) values (1, 'admin@ututi.lt');
+insert into emails (id, email, confirmed) values (1, 'admin@ututi.lt', true);
 
 /* A table for universities and faculties (maybe later even tags) */
 create table locationtags (id bigserial not null,

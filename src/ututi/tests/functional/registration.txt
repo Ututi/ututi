@@ -26,7 +26,7 @@ An email, requesting the confirmation of the email address entered is sent:
 
     >>> from ututi.lib.mailer import mail_queue
     >>> email = mail_queue.pop()
-    >>> print email
+    >>> print email.message
     MIME-Version: 1.0
     ...
     From: info@ututi.lt
@@ -41,8 +41,11 @@ An email, requesting the confirmation of the email address entered is sent:
     <BLANKLINE>
     Ututi team
 
+    >>> print email.recipients
+    jonas@example.com
+
     >>> from ututi.lib.helpers import get_urls
-    >>> urls = get_urls(email)
+    >>> urls = get_urls(email.message)
     >>> len(urls) == 1
     True
     >>> browser.open(urls[0])

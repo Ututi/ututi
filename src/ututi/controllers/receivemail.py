@@ -41,7 +41,7 @@ class ReceivemailController(BaseController):
         headers, body = splitMail(email.encode("utf-8"))
         headers = "".join(msg.headers)
         all_emails = [email.email for email in
-                      meta.Session.query(Email).filter_by(confirmed=False).all()]
+                      meta.Session.query(Email).filter_by(confirmed=True).all()]
 
         footer = ""
         for file in attachments:

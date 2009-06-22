@@ -8,6 +8,13 @@ from pylons import config
 
 mail_queue = []
 
+
+class EmailInfo(object):
+
+    def __init__(self, sender, recipients, message):
+        self.sender, self.recipients, self.message = sender, recipients, message
+
+
 def send_email(sender, recipient, subject, body):
     """Send an email.
 
@@ -63,7 +70,7 @@ def send_email(sender, recipient, subject, body):
         smtp.sendmail(sender, recipient, msg.as_string())
         smtp.quit()
     else:
-        mail_queue.append(msg.as_string())
+        mail_queue.append(EmailInfo(sender, recipient, msg.as_string()))
 
 
 def raw_send_email(sender, recipients, message):
@@ -75,4 +82,4 @@ def raw_send_email(sender, recipients, message):
         smtp.sendmail(sender, recipients, message)
         smtp.quit()
     else:
-        mail_queue.append(message)
+        mail_queue.append(EmailInfo(sender, recipients, message))
