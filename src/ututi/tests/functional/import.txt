@@ -43,3 +43,6 @@ Now we will log out and see if we can log back in as the imported user.
     >>> browser.printQuery('id("page-content")//h1/text()')
     Welcome Domas Monkus!
 
+XXX test more than 1 user import
+XXX test importing the same file twice
+XXX test importing with mixed case emails
