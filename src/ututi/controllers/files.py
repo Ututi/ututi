@@ -8,12 +8,23 @@ from paste.fileapp import _FileIter
 from ututi.lib.base import BaseController, render
 from ututi.model import meta, File
 from sqlalchemy.orm.exc import NoResultFound
+from pylons.i18n import _
+from routes import url_for
 
 log = logging.getLogger(__name__)
 
 class FilesController(BaseController):
+    """A controller for files. Handles listing, uploads and downloads."""
+
+    def __before__(self):
+        c.breadcrumbs = [
+            {'link': url_for(controller='files', action='index'),
+             'title' : _('Files')}
+        ]
+
     def index(self):
         c.files = meta.Session.query(File).all()
+
         return render('files.mako')
 
     def upload(self):
