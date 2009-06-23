@@ -153,7 +153,7 @@ class User(object):
 email_table = None
 
 class Email(object):
-    """Class representing one email of a user."""
+    """Class representing one email address of a user."""
 
     def __init__(self, email):
         self.email = email.strip().lower()
