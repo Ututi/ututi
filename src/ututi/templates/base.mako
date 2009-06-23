@@ -35,9 +35,29 @@ ${_('student information online')}
           </div>
         </div>
 
-        <a href="#" title="home" id="ulogo">
+        %if c.breadcrumbs:
+        <a href="/" title="home" id="ulogo">
+          ${h.image('/images/logo_small.png', alt='logo')|n}
+        </a>
+        <div id="breadcrumbs">
+          <%
+             first = false
+          %>
+          %for breadcrumb in c.breadcrumbs:
+          <a class="breadcrumb" href="${breadcrumb.get('link')}">${breadcrumb.get('title')}</a>
+          %if not first:
+          <%
+             first = true
+          %>
+          <img src="bullet_orange.png"/>
+          %endif
+          %endfor
+        </div>
+        %else:
+        <a href="/" title="home" id="ulogo">
           ${h.image('/images/logo.png', alt='logo')|n}
         </a>
+        %endif
 
         <div id="content-top">
           <div></div>
