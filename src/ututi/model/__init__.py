@@ -156,7 +156,7 @@ class Email(object):
     """Class representing one email of a user."""
 
     def __init__(self, email):
-        self.email = email
+        self.email = email.strip().lower()
 
 
 groups_table = None
