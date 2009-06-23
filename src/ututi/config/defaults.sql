@@ -1,17 +1,35 @@
 /* Create first user=admin and password=asdasd */
 
-create table users (id bigserial not null, fullname varchar(100), password char(36), primary key (id));
+create table users (id bigserial not null, fullname varchar(100), password char(36), primary key (id));;
 
-insert into users (fullname, password) values ('Adminas Adminovix', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7');
+insert into users (fullname, password) values ('Adminas Adminovix', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7');;
 
 /* Storing the emails of the users. */
 create table emails (id int8 not null references users(id),
        email varchar(320),
        confirmed boolean default FALSE,
        confirmation_key char(32) default '',
-       primary key (email));
+       primary key (email));;
 
-insert into emails (id, email, confirmed) values (1, 'admin@ututi.lt', true);
+
+CREATE FUNCTION lowercase_email() RETURNS trigger AS $lowercase_email$
+    BEGIN
+        NEW.email := lower(NEW.email);
+        RETURN NEW;
+    END
+$lowercase_email$ LANGUAGE plpgsql;;
+
+
+CREATE TRIGGER lowercase_email BEFORE INSERT OR UPDATE ON emails
+    FOR EACH ROW EXECUTE PROCEDURE lowercase_email();;
+
+
+CREATE OR REPLACE FUNCTION get_users_by_email(email_address varchar) returns users AS $get_user_by_email$
+        select users.* from users join emails on users.id = emails.id
+                 where emails.email=lower($1)
+$get_user_by_email$ LANGUAGE sql;;
+
+insert into emails (id, email, confirmed) values (1, 'admin@ututi.lt', true);;
 
 /* A table for universities and faculties (maybe later even tags) */
 create table locationtags (id bigserial not null,
@@ -19,12 +37,12 @@ create table locationtags (id bigserial not null,
        title varchar(250),
        title_short varchar(50),
        description text,
-       primary key (id));
+       primary key (id));;
 
 insert into locationtags (title, title_short, description)
-       values ('Vilniaus universitetas', 'vu', 'Seniausias universitetas Lietuvoje.');
+       values ('Vilniaus universitetas', 'vu', 'Seniausias universitetas Lietuvoje.');;
 insert into locationtags (title, title_short, description, parent)
-       values ('Ekonomikos fakultetas', 'ef', '', 1);
+       values ('Ekonomikos fakultetas', 'ef', '', 1);;
 
 /* A table for groups */
 create table groups (id varchar(250) not null,
@@ -32,11 +50,11 @@ create table groups (id varchar(250) not null,
        location int8 references locationtags(id) not null,
        year date not null,
        description text,
-       primary key (id));
+       primary key (id));;
 
 insert into groups (id, title, description, year, location)
        select 'moderators', 'Moderatoriai', 'U2ti moderatoriai.', date('2009-1-1'), locationtags.id
-              from locationtags where locationtags.title_short='vu' and locationtags.parent is null;
+              from locationtags where locationtags.title_short='vu' and locationtags.parent is null;;
 
 /* A table for files */
 
@@ -49,6 +67,6 @@ create table files (id bigserial not null,
        description text default '',
        created time default now(),
        modified time default null,
-       primary key (id));
+       primary key (id));;
 
-create index md5 on files (md5);
+create index md5 on files (md5);;

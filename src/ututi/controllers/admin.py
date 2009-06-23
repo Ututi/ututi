@@ -38,7 +38,7 @@ class AdminController(BaseController):
                 line = line.strip().split(',')
                 fullname = line[2].strip()
                 password = line[1].strip()[6:]
-                email = line[3].strip()
+                email = line[3].strip().lower()
                 try:
                     user = meta.Session.query(Email).filter_by(email = email).one().user
                 except NoResultFound:
