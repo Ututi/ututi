@@ -348,3 +348,22 @@ a.small-link:hover {
 }
 
 /* end special links */
+
+/* begin breadcrumbs */
+#breadcrumbs {
+  display: inline;
+  position: absolute;
+  top: 65px;
+  left: 99px;
+  vertical-align: middle;
+}
+
+#breadcrumbs img {
+  padding: 0 3px;
+}
+
+.breadcrumb {
+  font-size: 2em;
+  color: #333;
+}
+/* end breadcrumbs */
