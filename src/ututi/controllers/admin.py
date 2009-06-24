@@ -1,15 +1,18 @@
 import logging
 
+from datetime import date
 from pylons import request, c
 from pylons.controllers.util import redirect_to, abort
 from sqlalchemy.orm.exc import NoResultFound
 from ututi.lib.base import BaseController, render
 from ututi.lib import current_user
 
-from ututi.model import meta, User, Email, LocationTag
+from ututi.model import meta, User, Email, LocationTag, Group
 
 log = logging.getLogger(__name__)
 
+import csv
+import os
 
 class AdminController(BaseController):
     """Controler for system administration."""
@@ -86,3 +89,28 @@ class AdminController(BaseController):
                         continue
                 meta.Session.commit()
         redirect_to(controller='structure', action='index')
+
+    def import_groups(self):
+        file = request.POST.get('file_upload', None)
+
+        if file is not None and file != '':
+            csv_reader = csv.reader(file.value.split(os.linesep))
+            for row in csv_reader:
+                if len(row) < 4:
+                    continue
+
+                id, title, desc, year = row[:4]
+                try:
+                    group = meta.Session.query(Group).filter_by(id = id).one()
+                except NoResultFound:
+                    group = Group(id = id)
+                    meta.Session.add(group)
+
+                group.title = title
+                group.description = desc
+                if year != '':
+                    group.year = year
+                else:
+                    group.year = date.today()
+                meta.Session.commit()
+        redirect_to(controller='group', action='index')
