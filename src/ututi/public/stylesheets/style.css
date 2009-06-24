@@ -280,7 +280,7 @@ form .form-field .btn {
   margin-top: 0.5em;
 }
 
-form input.line {
+form .line {
   border: 2px solid #ecb481;
   color: #808080;
   font-weight: bold;
