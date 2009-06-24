@@ -162,9 +162,10 @@ class Email(object):
 groups_table = None
 
 class Group(object):
-    def __init__(self, title, location, year, description):
+    def __init__(self, id, title = '', location = None, year = '', description = ''):
+        self.id = id
         self.title = title
-        self.location = 0 #temporarily, until we get to setting locations
+        self.location = None #temporarily, until we get to setting locations
         self.year = year
         self.description = description
 
