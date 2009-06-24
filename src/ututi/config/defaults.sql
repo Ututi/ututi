@@ -56,6 +56,18 @@ insert into groups (id, title, description, year, location)
        select 'moderators', 'Moderatoriai', 'U2ti moderatoriai.', date('2009-1-1'), locationtags.id
               from locationtags where locationtags.title_short='vu' and locationtags.parent is null;;
 
+/* A table for subjects */
+create table subjects (id bigserial not null,
+       text_id varchar(50) default null,
+       title varchar(500) not null,
+       lecturer varchar(500) default null,
+       location int8 references locationtags(id) default null,
+       primary key (id));;
+create unique index text_id on subjects(text_id);;
+
+insert into subjects (text_id, title, lecturer)
+       values ('mat_analize', 'Matematinė analizė', 'prof. E. Misevičius');;
+
 /* A table for files */
 
 create table files (id bigserial not null,

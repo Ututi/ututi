@@ -66,6 +66,14 @@ def setup_orm(engine):
                             autoload_with=engine)
     orm.mapper(Group, groups_table)
 
+    global subjects_table
+    subjects_table = sa.Table("subjects", meta.metadata,
+                              Column('id', Integer, Sequence('subjects_id_seq'), primary_key=True),
+                              autoload=True,
+                              autoload_with=engine)
+    orm.mapper(Subject, subjects_table)
+
+
 def initialize_db_defaults(engine):
     initial_db_data = pkg_resources.resource_string(
         "ututi",
@@ -169,6 +177,13 @@ class Group(object):
         self.year = year
         self.description = description
 
+subjects_table = None
+
+class Subject(object):
+    def __init__(self, title, text_id = None, lecturer = None):
+        self.title = title
+        self.text_id = text_id
+        self.lecturer = lecturer
 
 class LocationTag(object):
     """Class representing the university and faculty tags."""
