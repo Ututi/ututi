@@ -18,6 +18,11 @@ And we are greeted by the welcome page:
     >>> browser.printQuery('id("page-content")//h1/text()')
     Welcome Adminas Adminovix!
 
+After login we are redirected to our home page.
+
+    >>> browser.url
+    'http://localhost/home'
+
 As we have successfully logged in let's logout and make some typos:
 
     >>> browser.getLink('Log out').click()

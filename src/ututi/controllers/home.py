@@ -3,7 +3,7 @@ import logging
 from formencode import Schema, validators, Invalid, All
 
 from pylons import request, response, c
-from pylons.controllers.util import redirect_to
+from pylons.controllers.util import redirect_to, abort
 from pylons.decorators import validate
 from pylons.i18n import _
 
@@ -72,9 +72,18 @@ class HomeController(BaseController):
           user = current_user()
           c.user = user
           if user is not None:
-               return render('/index.mako')
+               redirect_to(controller='home', action='home')
           else:
                return render('/anonymous_index.mako')
+
+     def home(self):
+          user = current_user()
+          if user is not None:
+               c.user = user
+               return render('/index.mako')
+          else:
+               abort(401, 'You are not authenticated')
+
 
      @validate(schema=RegistrationForm(), form='index')
      def register(self):
@@ -94,4 +103,4 @@ class HomeController(BaseController):
 
           sign_in_user(email)
 
-          redirect_to(controller='home', action='index')
+          redirect_to(controller='home', action='home')
