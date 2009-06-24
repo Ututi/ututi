@@ -12,3 +12,9 @@ from webhelpers.html.tags import stylesheet_link, javascript_link, image
 def get_urls(text):
     urls = re.findall("http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+",text)
     return urls
+
+def ellipsis(text, max = 20):
+    if (len(text) > max):
+        return text[0:max] + '...'
+    else:
+        return text

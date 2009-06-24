@@ -44,7 +44,9 @@ ${_('student information online')}
              first = false
           %>
           %for breadcrumb in c.breadcrumbs:
-          <a class="breadcrumb" href="${breadcrumb.get('link')}">${breadcrumb.get('title')}</a>
+          <a class="breadcrumb" title="${breadcrumb.get('title')}" href="${breadcrumb.get('link')}">
+             ${breadcrumb.get('title') | h.ellipsis}
+          </a>
           %if not first:
           <%
              first = true
