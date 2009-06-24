@@ -47,7 +47,7 @@ insert into locationtags (title, title_short, description, parent)
 /* A table for groups */
 create table groups (id varchar(250) not null,
        title varchar(250) not null,
-       location int8 references locationtags(id) not null,
+       location int8 references locationtags(id) default null,
        year date not null,
        description text,
        primary key (id));;
