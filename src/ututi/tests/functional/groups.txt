@@ -1,0 +1,67 @@
+Group adding and import
+=======================
+
+A list of all groups is show at /groups.
+
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/groups')
+    >>> browser.printQuery("id('group_list')//li/a/text()")
+    Moderatoriai
+
+The link of the group leads to its home page.
+
+    >>> browser.getLink('Moderatoriai').click()
+    >>> browser.url
+    'http://localhost/group/moderators'
+    >>> browser.printQuery('//h1/text()')
+    Moderatoriai, 2009
+
+We can add a group at the url /groups/add.
+
+    >>> browser.open('http://localhost/groups/add')
+    >>> browser.getControl('Address').value = 'test'
+    >>> browser.getControl('Title').value = 'Test group'
+    >>> browser.getControl('Save').click()
+    >>> browser.printQuery('//h1/text()')
+    Test group, 2009
+
+However, group ids are checked for uniqueness.
+
+    >>> browser.open('http://localhost/groups/add')
+    >>> browser.getControl('Address').value = 'test'
+    >>> browser.getControl('Title').value = 'Test group'
+    >>> browser.getControl('Save').click()
+    >>> browser.printQuery("//span[@class='error-message']/text()")
+    Such id already exists, choose a different one.
+
+And they must be valid local parts of email addresses.
+
+    >>> browser.getControl('Address').value = 'test test'
+    >>> browser.getControl('Save').click()
+    >>> browser.printQuery("//span[@class='error-message']/text()")
+    Id cannot be used as an email address.
+
+First we log in to be able to see the user list.
+
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/')
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
+
+Groups are imported from the admin interface.
+
+    >>> browser.open('http://localhost/admin')
+    >>> form = browser.getForm(name='groups_import')
+    >>> csv_data = 'exgroup, Imported group, Group imported from the old system, 2008, gmf, vu'
+    >>> import cStringIO
+    >>> form.getControl('CSV File').add_file(cStringIO.StringIO(csv_data),
+    ...                                      'text/plain',
+    ...                                       'users.csv')
+    >>> form.getControl('Upload').click()
+    >>> browser.open('http://localhost/groups')
+    >>> browser.printQuery("id('group_list')//li/a/text()")
+    Moderatoriai
+    Test group
+    Imported group
