@@ -88,4 +88,4 @@ class GroupController(BaseController):
         meta.Session.add(group)
         meta.Session.commit()
 
-        redirect_to(controller='group', action='index')
+        redirect_to(controller='group', action='group_home', id=values['id'])
