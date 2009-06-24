@@ -45,3 +45,19 @@ ul#ututi_info li {
   font-size: 1em;
   font-weight: bold;
 }
+
+/* registration form */
+#registration_form .form-field input {
+  float: right;
+  width: 200px;
+}
+
+#registration_form .form-field input.submit {
+  float: none;
+  width: auto;
+}
+
+#registration_form .form-field label {
+  float: right;
+  margin-right: 10px;
+}

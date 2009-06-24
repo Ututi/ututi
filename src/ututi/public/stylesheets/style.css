@@ -269,20 +269,8 @@ form .form-field {
   overflow: hidden; /* to contain floats */
 }
 
-form .form-field input {
-  float: right;
-  width: 150px;
-}
-
-form .form-field input.submit {
-  float: none;
-  width: auto;
-}
-
 form .form-field label {
-  float: right;
-  margin-right: 10px;
-
+  display: block;
   /* font */
   font-weight: bold;
   color: #808080;
