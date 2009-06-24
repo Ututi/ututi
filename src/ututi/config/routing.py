@@ -44,6 +44,9 @@ def make_map():
     map.connect('/groups', controller='group', action='index')
     map.connect('/groups/{action}', controller='group')
 
+    map.connect('/subject', controller='subject', action='index')
+    map.connect('/subject/{id}', controller='subject', action='subject_home')
+
     # CUSTOM ROUTES HERE
     map.connect('/', controller='home')
     map.connect('/home', controller='home', action='home')
