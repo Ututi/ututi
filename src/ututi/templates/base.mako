@@ -41,18 +41,19 @@ ${_('student information online')}
         </a>
         <div id="breadcrumbs">
           <%
-             first = false
+             first_bc = True
           %>
           %for breadcrumb in c.breadcrumbs:
+          %if not first_bc:
+            <%
+               first_bc = False
+            %>
+            ${h.image('/images/bullet_orange.png', alt='bullet')|n}
+          %endif
           <a class="breadcrumb" title="${breadcrumb.get('title')}" href="${breadcrumb.get('link')}">
              ${breadcrumb.get('title') | h.ellipsis}
           </a>
-          %if not first:
-          <%
-             first = true
-          %>
-          <img src="bullet_orange.png"/>
-          %endif
+
           %endfor
         </div>
         %else:
