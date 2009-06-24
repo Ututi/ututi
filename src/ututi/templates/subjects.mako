@@ -10,7 +10,11 @@
     <ol id="subject_list">
     %for subj in c.subjects:
          <li>
-                <a href="${h.url_for(controller='subject', action='subject_home', id=subj.id)}" class="subject-link">${subj.title}</a>
+          %if subj.text_id:
+            <a href="${h.url_for(controller='subject', action='subject_home', id=subj.text_id)}" class="subject-link">${subj.title}</a>
+          %else:
+            <a href="${h.url_for(controller='subject', action='subject_home', id=subj.id)}" class="subject-link">${subj.title}</a>
+          %endif
          </li>
     %endfor
     </ul>
