@@ -109,7 +109,7 @@ class AdminController(BaseController):
                 group.title = title
                 group.description = desc
                 if year != '':
-                    group.year = year
+                    group.year = date(int(year), 1, 1)
                 else:
                     group.year = date.today()
                 meta.Session.commit()
