@@ -60,14 +60,13 @@ class GroupController(BaseController):
     def group_home(self, id):
         try:
             c.group = meta.Session.query(Group).filter_by(id = id).one()
-            c.breadcrumbs = [
-                {'title' : c.group.title,
-                 'link' : url_for(controller = 'group', action = 'group_home', id = c.group.id)}
-                ]
-
-            return render('group_home.mako')
         except NoResultFound:
             abort(404)
+        c.breadcrumbs = [
+            {'title' : c.group.title,
+             'link' : url_for(controller = 'group', action = 'group_home', id = c.group.id)}
+            ]
+        return render('group_home.mako')
 
     def add(self):
         c.current_year = date.today().year
