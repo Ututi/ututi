@@ -1,10 +1,13 @@
 #
 import os
 import unittest
+from pkg_resources import resource_string
 
 from zope.testing import doctest
 
 from pylons import config
+
+from nous.mailpost import processEmailAndPost
 
 import ututi
 
@@ -46,3 +49,11 @@ def listUploads(files_path=None):
             for file_name in files:
                 full_name = os.path.join(dir_name, file_name)
                 print full_name.replace(files_path, "/uploads")
+
+
+def send_test_message(email_file, message_id):
+    message = resource_string("ututi.tests.functional.emails", email_file)
+    message = message % dict(message_id=message_id)
+    processEmailAndPost('http://localhost/got_mail',
+                        message % {'message_id': message_id},
+                        config['files_path'])

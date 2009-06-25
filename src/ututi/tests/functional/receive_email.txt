@@ -10,18 +10,11 @@ application.
 
     >>> from pylons import config
     >>> files_path = config['files_path']
-
-    >>> from nous.mailpost import processEmailAndPost
-    >>> from ututi.tests.functional import listUploads
-    >>> from pkg_resources import resource_string
-    >>> def test_message(email_file, message_id):
-    ...     message = resource_string("ututi.tests.functional.emails", email_file)
-    ...     return message % dict(message_id=message_id)
+    >>> from ututi.tests.functional import listUploads, send_test_message
 
 Let's send an email to the system:
 
-    >>> message = test_message("simple_email.txt", "20090615140531.GA23780@my_pc")
-    >>> processEmailAndPost('http://localhost/got_mail', message, files_path)
+    >>> send_test_message("simple_email.txt", "20090615140531.GA23780@my_pc")
 
 All emails received will get forwarded to the members who have joined
 ututi:
@@ -53,8 +46,7 @@ As the email had no attachments, we have no new files in our upload directory:
 
 But if someone would sent an email with an attachment, it sure would get stored:
 
-    >>> message_w_attachment = test_message("email_with_attachment.txt", '20090615145515.GA13471@my_pc')
-    >>> processEmailAndPost('http://localhost/got_mail', message_w_attachment , files_path)
+    >>> send_test_message("email_with_attachment.txt", '20090615145515.GA13471@my_pc')
     >>> listUploads()
     /uploads/cb396bb6/487560f2/6de19949/6051b42e
 
@@ -92,8 +84,7 @@ If we upload the same file twice - we should see it two times in the
 mailing list, but still only have 1 copy of the file in the files
 repository:
 
-    >>> message_w_attachment = test_message("email_with_attachment.txt", '20090615145515.GA13472@my_pc')
-    >>> processEmailAndPost('http://localhost/got_mail', message_w_attachment, files_path)
+    >>> send_test_message("email_with_attachment.txt", '20090615145515.GA13472@my_pc')
 
     >>> listUploads()
     /uploads/cb396bb6/487560f2/6de19949/6051b42e
@@ -148,7 +139,7 @@ add any additional files to the repository:
 
 If a message gets posted more than once, it is simply ignored:
 
-    >>> processEmailAndPost('http://localhost/got_mail', message_w_attachment, files_path)
+    >>> send_test_message("email_with_attachment.txt", '20090615145515.GA13472@my_pc')
     >>> browser.open('http://localhost/files')
     >>> browser.printQuery('id("file_list")//a')
     <a href="/files/get/1" class="file-link">README.txt</a>
