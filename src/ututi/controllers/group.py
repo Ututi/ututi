@@ -1,18 +1,21 @@
+import re
 import logging
+from datetime import date
 
-from ututi.lib.base import BaseController, render
-from formencode import Schema, validators, Invalid
 from pylons import c, request
 from pylons.controllers.util import redirect_to, abort
 from pylons.decorators import validate
 from pylons.i18n import _
+
+from formencode import Schema, validators, Invalid
+from sqlalchemy.orm.exc import NoResultFound
+
+from ututi.lib.base import BaseController, render
 from ututi.model import meta, Group
 from routes import url_for
-from sqlalchemy.orm.exc import NoResultFound
-from datetime import date
-import re
 
 log = logging.getLogger(__name__)
+
 
 class GroupIdValidator(validators.FancyValidator):
     """A validator that makes sure the group id is unique."""
@@ -36,6 +39,7 @@ class GroupIdValidator(validators.FancyValidator):
             if not usernameRE.search(value):
                 raise Invalid(self.message('badId', state), value, state)
 
+
 class NewGroupForm(Schema):
     """A schema for validating new group forms."""
     allow_extra_fields = True
@@ -47,6 +51,7 @@ class NewGroupForm(Schema):
 
 class GroupController(BaseController):
     """Controller for group actions."""
+
     def __before__(self):
         c.breadcrumbs = [
             {'title' : _('Groups'),
