@@ -171,6 +171,14 @@ class Email(object):
 groups_table = None
 
 class Group(object):
+
+    @classmethod
+    def get(cls, id):
+        try:
+            return meta.Session.query(cls).filter_by(id=id).one()
+        except NoResultFound:
+            return None
+
     def __init__(self, id, title = '', location = None, year = '', description = ''):
         self.id = id
         self.title = title
