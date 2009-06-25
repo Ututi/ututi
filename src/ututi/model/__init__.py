@@ -18,6 +18,7 @@ from ututi.migration import GreatMigrator
 from ututi.model import meta
 from nous.mailpost import copy_chunked
 
+
 def init_model(engine):
     """Call me before using any of the tables or classes in the model"""
     ## Reflected tables must be defined and mapped here
@@ -70,32 +71,8 @@ def setup_orm(engine):
                            autoload_with=engine)
     orm.mapper(Subject, subjects_table)
 
-    global group_mailing_list_messages_table
-    group_mailing_list_messages_table = Table(
-        "group_mailing_list_messages",
-        meta.metadata,
-        autoload=True,
-        autoload_with=engine)
-    orm.mapper(GroupMailingListMessage,
-               group_mailing_list_messages_table,
-               properties = {'replies' : relation(GroupMailingListMessage,
-                                                  backref=backref('reply_to'),
-                                                  remote_side = (group_mailing_list_messages_table.c.reply_to_group_id,
-                                                                 group_mailing_list_messages_table.c.reply_to_message_id)),
-                             'author' : relation(User,
-                                                 backref=backref('messages'))
-                             })
-
-    global group_mailing_list_attachments_table
-    group_mailing_list_attachments_table = Table(
-        "group_mailing_list_attachments",
-        meta.metadata,
-        autoload=True,
-        autoload_with=engine)
-    orm.mapper(GroupMailingListAttachment, group_mailing_list_attachments_table,
-               properties = {'message' : relation(GroupMailingListMessage,
-                                                  backref=backref('attachments')),
-                             'file' : relation(File)})
+    from ututi.model import mailing
+    mailing.setup_orm(engine)
 
 
 def initialize_db_defaults(engine):
@@ -299,11 +276,5 @@ class File(object):
 
         return hash.hexdigest()
 
-
-class GroupMailingListMessage(object):
-    """Message in the group mailing list."""
-
-
-class GroupMailingListAttachment(object):
-    """Attachment for group mailing list messages."""
-
+# Reimports for convenience
+from ututi.model.mailing import GroupMailingListMessage, GroupMailingListAttachment

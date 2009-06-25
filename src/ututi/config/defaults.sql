@@ -93,7 +93,7 @@ create table group_mailing_list_messages (
        reply_to_group_id varchar(250) references groups(id) default null,
        author_id int8 references users(id) not null,
        subject varchar(500),
-       body text default '',
+       original text not null,
        created time default now(),
        foreign key (reply_to_message_id, reply_to_group_id) references group_mailing_list_messages,
        primary key (message_id, group_id));;
