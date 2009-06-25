@@ -13,6 +13,7 @@ import pkg_resources
 import sqlalchemy as sa
 
 from sqlalchemy import orm, Column, Integer, Sequence
+from sqlalchemy.schema import ForeignKey
 from sqlalchemy.exc import DatabaseError
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm import relation, backref
@@ -72,6 +73,33 @@ def setup_orm(engine):
                               autoload=True,
                               autoload_with=engine)
     orm.mapper(Subject, subjects_table)
+
+    global group_mailing_list_messages_table
+    group_mailing_list_messages_table = sa.Table(
+        "group_mailing_list_messages",
+        meta.metadata,
+        autoload=True,
+        autoload_with=engine)
+    orm.mapper(GroupMailingListMessage,
+               group_mailing_list_messages_table,
+               properties = {'replies' : relation(GroupMailingListMessage,
+                                                  backref=backref('reply_to'),
+                                                  remote_side = (group_mailing_list_messages_table.c.reply_to_group_id,
+                                                                 group_mailing_list_messages_table.c.reply_to_message_id)),
+                             'author' : relation(User,
+                                                 backref=backref('messages'))
+                             })
+
+    global group_mailing_list_attachments_table
+    group_mailing_list_attachments_table = sa.Table(
+        "group_mailing_list_attachments",
+        meta.metadata,
+        autoload=True,
+        autoload_with=engine)
+    orm.mapper(GroupMailingListAttachment, group_mailing_list_attachments_table,
+               properties = {'message' : relation(GroupMailingListMessage,
+                                                  backref=backref('attachments')),
+                             'file' : relation(File)})
 
 
 def initialize_db_defaults(engine):
@@ -274,3 +302,12 @@ class File(object):
             file.seek(0)
 
         return hash.hexdigest()
+
+
+class GroupMailingListMessage(object):
+    """Message in the group mailing list."""
+
+
+class GroupMailingListAttachment(object):
+    """Attachment for group mailing list messages."""
+

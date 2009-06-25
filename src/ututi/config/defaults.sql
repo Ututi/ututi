@@ -82,3 +82,27 @@ create table files (id bigserial not null,
        primary key (id));;
 
 create index md5 on files (md5);;
+
+/* A table for group mailing list emails */
+
+create table group_mailing_list_messages (
+       message_id varchar(320) not null,
+       group_id varchar(250) references groups(id) not null,
+       sender_email varchar(320),
+       reply_to_message_id varchar(320) default null,
+       reply_to_group_id varchar(250) references groups(id) default null,
+       author_id int8 references users(id) not null,
+       subject varchar(500),
+       body text default '',
+       created time default now(),
+       foreign key (reply_to_message_id, reply_to_group_id) references group_mailing_list_messages,
+       primary key (message_id, group_id));;
+
+/* A table that tracks attachments for messages */
+
+create table group_mailing_list_attachments (
+       message_id varchar(320) not null,
+       group_id varchar(250) not null,
+       file_id int8 references files(id) not null,
+       foreign key (message_id, group_id) references group_mailing_list_messages,
+       primary key (message_id, group_id, file_id));;
