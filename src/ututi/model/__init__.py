@@ -4,16 +4,12 @@ import os
 import hashlib
 import sha, binascii
 from binascii import a2b_base64, b2a_base64
-from random import choice, randrange
-from StringIO import StringIO
+from random import randrange
+import pkg_resources
 
 from pylons import config
 
-import pkg_resources
-import sqlalchemy as sa
-
-from sqlalchemy import orm, Column, Integer, Sequence
-from sqlalchemy.schema import ForeignKey
+from sqlalchemy import orm, Column, Integer, Sequence, Table
 from sqlalchemy.exc import DatabaseError
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm import relation, backref
@@ -31,51 +27,51 @@ def init_model(engine):
 
 def setup_orm(engine):
     global users_table
-    users_table = sa.Table("users", meta.metadata,
-                           Column('id', Integer, Sequence('users_id_seq'), primary_key=True),
-                           autoload=True,
-                           autoload_with=engine)
+    users_table = Table("users", meta.metadata,
+                        Column('id', Integer, Sequence('users_id_seq'), primary_key=True),
+                        autoload=True,
+                        autoload_with=engine)
     orm.mapper(User,
                users_table,
                properties = {'emails' : relation(Email, backref='user')})
 
     global emails_table
-    emails_table = sa.Table("emails", meta.metadata,
-                            autoload=True,
-                            autoload_with=engine)
+    emails_table = Table("emails", meta.metadata,
+                         autoload=True,
+                         autoload_with=engine)
     orm.mapper(Email, emails_table)
 
     global locationtags_table
-    locationtags_table = sa.Table("locationtags", meta.metadata,
-                           Column('id', Integer, Sequence('locationtags_id_seq'), primary_key=True),
-                           autoload=True,
-                           autoload_with=engine)
+    locationtags_table = Table("locationtags", meta.metadata,
+                               Column('id', Integer, Sequence('locationtags_id_seq'), primary_key=True),
+                               autoload=True,
+                               autoload_with=engine)
     orm.mapper(LocationTag,
                locationtags_table,
                properties = {'children' : relation(LocationTag,
                                                    backref=backref('parent_item', remote_side=locationtags_table.c.id))})
     global files_table
-    files_table = sa.Table("files", meta.metadata,
-                           Column('id', Integer, Sequence('files_id_seq'), primary_key=True),
-                           autoload=True,
-                           autoload_with=engine)
+    files_table = Table("files", meta.metadata,
+                        Column('id', Integer, Sequence('files_id_seq'), primary_key=True),
+                        autoload=True,
+                        autoload_with=engine)
     orm.mapper(File, files_table)
 
     global groups_table
-    groups_table = sa.Table("groups", meta.metadata,
-                            autoload=True,
-                            autoload_with=engine)
+    groups_table = Table("groups", meta.metadata,
+                         autoload=True,
+                         autoload_with=engine)
     orm.mapper(Group, groups_table)
 
     global subjects_table
-    subjects_table = sa.Table("subjects", meta.metadata,
-                              Column('id', Integer, Sequence('subjects_id_seq'), primary_key=True),
-                              autoload=True,
-                              autoload_with=engine)
+    subjects_table = Table("subjects", meta.metadata,
+                           Column('id', Integer, Sequence('subjects_id_seq'), primary_key=True),
+                           autoload=True,
+                           autoload_with=engine)
     orm.mapper(Subject, subjects_table)
 
     global group_mailing_list_messages_table
-    group_mailing_list_messages_table = sa.Table(
+    group_mailing_list_messages_table = Table(
         "group_mailing_list_messages",
         meta.metadata,
         autoload=True,
@@ -91,7 +87,7 @@ def setup_orm(engine):
                              })
 
     global group_mailing_list_attachments_table
-    group_mailing_list_attachments_table = sa.Table(
+    group_mailing_list_attachments_table = Table(
         "group_mailing_list_attachments",
         meta.metadata,
         autoload=True,
