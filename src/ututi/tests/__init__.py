@@ -9,6 +9,7 @@ from lxml import etree
 import wsgi_intercept
 
 from wsgi_intercept.zope_testbrowser.wsgi_testbrowser import WSGI_Browser
+from wsgi_intercept.urllib2_intercept import uninstall_opener
 from wsgi_intercept.urllib2_intercept import install_opener
 from wsgiref.simple_server import make_server
 from paste.deploy import loadapp
@@ -65,6 +66,8 @@ class PylonsLayer(object):
         # Zope component tear down
         zcTearDown()
         pylons.test.pylonsapp = None
+        wsgi_intercept.remove_wsgi_intercept()
+        uninstall_opener()
 
     @classmethod
     def testSetUp(self):
