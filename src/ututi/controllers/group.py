@@ -69,7 +69,7 @@ class GroupController(BaseController):
             abort(404)
         c.breadcrumbs = [
             {'title' : c.group.title,
-             'link' : url_for(controller = 'group', action = 'group_home', id = c.group.id)}
+             'link' : url_for(controller='group', action='group_home', id=c.group.id)}
             ]
         return render('group_home.mako')
 
