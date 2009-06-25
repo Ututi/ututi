@@ -58,11 +58,18 @@ def setup_orm(engine):
                         autoload_with=engine)
     orm.mapper(File, files_table)
 
+    global group_members_table
+    group_members_table = Table("group_members", meta.metadata,
+                                autoload=True,
+                                autoload_with=engine)
+
     global groups_table
     groups_table = Table("groups", meta.metadata,
                          autoload=True,
                          autoload_with=engine)
-    orm.mapper(Group, groups_table)
+    orm.mapper(Group, groups_table,
+               properties={'members' : relation(User, backref='groups',
+                                                secondary=group_members_table)})
 
     global subjects_table
     subjects_table = Table("subjects", meta.metadata,

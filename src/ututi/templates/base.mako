@@ -8,6 +8,22 @@ ${_('student information online')}
 <%def name="personal_block()">
 </%def>
 
+<%def name="portlets()">
+</%def>
+
+<%def name="portlet(id)">
+<div class="sidebar-block" id="${id}">
+  <div class="rounded-header">
+    <div class="rounded-right">
+      <h3 id="${id + '_header'}">${caller.header()}</h3>
+    </div>
+  </div>
+  <div class="content" id="${id + '_content'}">
+    ${caller.body()}
+  </div>
+</div>
+</%def>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
@@ -69,6 +85,8 @@ ${_('student information online')}
       </div>
 
       <div id="content">
+        ${self.portlets()}
+
         <div class="inside" id="page-content">
           ${self.body()}
         </div>

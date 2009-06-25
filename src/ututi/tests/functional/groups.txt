@@ -41,7 +41,8 @@ And they must be valid local parts of email addresses.
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Id cannot be used as an email address.
 
-First we log in to be able to see the user list.
+If you log in, you should be able to see the groups you are a member
+of in your home page (at least for now):
 
     >>> browser = Browser()
     >>> browser.open('http://localhost/')
@@ -50,7 +51,21 @@ First we log in to be able to see the user list.
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
 
-Groups are imported from the admin interface.
+    >>> browser.printQuery("id('group_portlet_header')")
+    <h3 id="group_portlet_header">
+      Groups
+    </h3>
+
+    >>> browser.printQuery("id('group_portlet_content')")
+    <div class="content" id="group_portlet_content">
+      <ul>
+        <li>
+          <a href="/group/moderators">Moderatoriai</a>
+        </li>
+      </ul>
+    </div>
+
+You can import more groups using the admin interface.
 
     >>> browser.open('http://localhost/admin')
     >>> form = browser.getForm(name='groups_import')

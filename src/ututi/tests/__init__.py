@@ -120,11 +120,32 @@ class UtutiTestApp(TestApp):
             print >> sys.stderr, 'Stopped HTTP server.'
 
 
+def indent(elem, level=0):
+    """Function that properly indents xml.
+
+    Stolen from http://infix.se/2007/02/06/gentlemen-indent-your-xml
+    """
+    i = "\n" + level*"  "
+    if len(elem):
+        if not elem.text or not elem.text.strip():
+            elem.text = i + "  "
+        for e in elem:
+            indent(e, level+1)
+            if not e.tail or not e.tail.strip():
+                e.tail = i + "  "
+        if not e.tail or not e.tail.strip():
+            e.tail = i
+    else:
+        if level and (not elem.tail or not elem.tail.strip()):
+            elem.tail = i
+
+
 def to_string(node):
     if isinstance(node, basestring):
         return node
     else:
-        return etree.tostring(node, pretty_print=True)
+        indent(node)
+        return etree.tostring(node, pretty_print=True).rstrip()
 
 
 class Browser(WSGI_Browser):

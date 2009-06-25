@@ -52,9 +52,32 @@ create table groups (id varchar(250) not null,
        description text,
        primary key (id));;
 
+
+/* An enumerator for membership types in groups */
+create table group_membership_types (
+       membership_type varchar(20) not null,
+       primary key (membership_type));;
+
+
+/* A table that tracks user membership in groups */
+create table group_members (
+       group_id varchar(250) references groups(id) not null,
+       user_id int8 references users(id) not null,
+       membership_type varchar(20) references group_membership_types(membership_type) not null,
+       primary key (group_id, user_id));;
+
+
 insert into groups (id, title, description, year, location)
        select 'moderators', 'Moderatoriai', 'U2ti moderatoriai.', date('2009-1-1'), locationtags.id
               from locationtags where locationtags.title_short='vu' and locationtags.parent is null;;
+
+insert into group_membership_types (membership_type)
+                      values ('administrator');;
+insert into group_membership_types (membership_type)
+                      values ('member');;
+
+insert into group_members (group_id, user_id, membership_type)
+                   values ('moderators', 1, 'administrator');;
 
 /* A table for subjects */
 create table subjects (id bigserial not null,

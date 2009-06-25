@@ -84,7 +84,6 @@ class HomeController(BaseController):
           else:
                abort(401, 'You are not authenticated')
 
-
      @validate(schema=RegistrationForm(), form='index')
      def register(self):
           if len(request.POST.keys()) == 0:
