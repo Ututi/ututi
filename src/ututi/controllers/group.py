@@ -49,6 +49,15 @@ class NewGroupForm(Schema):
     title = validators.String(not_empty = True)
 
 
+def group_action(method):
+    def _group_action(self, id):
+        group = Group.get(id)
+        if group is None:
+            abort(404)
+        return method(self, group)
+    return _group_action
+
+
 class GroupController(BaseController):
     """Controller for group actions."""
 
@@ -62,11 +71,9 @@ class GroupController(BaseController):
         c.groups = meta.Session.query(Group).all()
         return render('groups.mako')
 
-    def group_home(self, id):
-        try:
-            c.group = meta.Session.query(Group).filter_by(id = id).one()
-        except NoResultFound:
-            abort(404)
+    @group_action
+    def group_home(self, group):
+        c.group = group
         c.breadcrumbs = [
             {'title' : c.group.title,
              'link' : url_for(controller='group', action='group_home', id=c.group.id)}
