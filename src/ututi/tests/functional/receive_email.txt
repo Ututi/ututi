@@ -1,9 +1,9 @@
     >>> from textwrap import dedent
     >>> message = dedent("""\
-    ... Return-Path: <admin@u2ti.com>
+    ... Return-Path: <admin@ututi.lt>
     ... Date: Mon, 15 Jun 2009 17:05:31 +0300
-    ... From: Admin <admin@u2ti.com>
-    ... To: my_special_group@u2ti.com
+    ... From: Admin <admin@ututi.lt>
+    ... To: my_special_group@ututi.lt
     ... Subject: Hello
     ... Message-ID: <20090615140531.GA23780@my_pc>
     ... MIME-Version: 1.0
@@ -17,13 +17,12 @@
     ... """)
 
     >>> message_w_attachment = dedent("""\
-    ... Mail From ignas@pov.lt  Mon Jun 15 17:55:15 2009
-    ... Return-Path: <admin@u2ti.com>
+    ... Return-Path: <admin@ututi.lt>
     ... Date: Mon, 15 Jun 2009 17:55:15 +0300
-    ... From: Admin <admin@u2ti.com>
-    ... To: my_special_group@u2ti.com
+    ... From: Admin <admin@ututi.lt>
+    ... To: my_special_group@ututi.lt
     ... Subject: Also - an attachment
-    ... Message-ID: <20090615145515.GA13471@uka>
+    ... Message-ID: <%s@uka>
     ... MIME-Version: 1.0
     ... Content-Type: multipart/mixed; boundary="ZGiS0Q5IWpPtfppv"
     ... Content-Disposition: inline
@@ -61,10 +60,10 @@ ututi:
     >>> from ututi.lib.mailer import mail_queue
     >>> email = mail_queue.pop()
     >>> print email.message
-    Return-Path: <admin@u2ti.com>
+    Return-Path: <admin@ututi.lt>
     Date: Mon, 15 Jun 2009 17:05:31 +0300
-    From: Admin <admin@u2ti.com>
-    To: my_special_group@u2ti.com
+    From: Admin <admin@ututi.lt>
+    To: my_special_group@ututi.lt
     Subject: Hello
     Message-ID: <20090615140531.GA23780@my_pc>
     MIME-Version: 1.0
@@ -85,7 +84,7 @@ As the email had no attachments, we have no new files in our upload directory:
 
 But if someone would sent an email with an attachment, it sure would get stored:
 
-    >>> processEmailAndPost('http://localhost/got_mail', message_w_attachment, files_path)
+    >>> processEmailAndPost('http://localhost/got_mail', message_w_attachment % '20090615145515.GA13471', files_path)
     >>> listUploads()
     /uploads/cb396bb6/487560f2/6de19949/6051b42e
 
@@ -101,11 +100,10 @@ link to the file on our system:
 
     >>> email = mail_queue.pop()
     >>> print email.message
-    Mail From ignas@pov.lt  Mon Jun 15 17:55:15 2009
-    Return-Path: <admin@u2ti.com>
+    Return-Path: <admin@ututi.lt>
     Date: Mon, 15 Jun 2009 17:55:15 +0300
-    From: Admin <admin@u2ti.com>
-    To: my_special_group@u2ti.com
+    From: Admin <admin@ututi.lt>
+    To: my_special_group@ututi.lt
     Subject: Also - an attachment
     Message-ID: <20090615145515.GA13471@uka>
     MIME-Version: 1.0
@@ -124,7 +122,7 @@ If we upload the same file twice - we should see it two times in the
 mailing list, but still only have 1 copy of the file in the files
 repository:
 
-    >>> processEmailAndPost('http://localhost/got_mail', message_w_attachment, files_path)
+    >>> processEmailAndPost('http://localhost/got_mail', message_w_attachment % '20090615145515.GA13472', files_path)
 
     >>> listUploads()
     /uploads/cb396bb6/487560f2/6de19949/6051b42e
@@ -139,13 +137,12 @@ But the link in the email will point to the other "file" entry in the
 list of files:
 
     >>> print mail_queue.pop().message
-    Mail From ignas@pov.lt  Mon Jun 15 17:55:15 2009
-    Return-Path: <admin@u2ti.com>
+    Return-Path: <admin@ututi.lt>
     Date: Mon, 15 Jun 2009 17:55:15 +0300
-    From: Admin <admin@u2ti.com>
-    To: my_special_group@u2ti.com
+    From: Admin <admin@ututi.lt>
+    To: my_special_group@ututi.lt
     Subject: Also - an attachment
-    Message-ID: <20090615145515.GA13471@uka>
+    Message-ID: <20090615145515.GA13472@uka>
     MIME-Version: 1.0
     Content-Disposition: inline
     User-Agent: Mutt/1.5.18 (2008-05-17)
@@ -177,3 +174,6 @@ add any additional files to the repository:
     <a href="/files/get/1" class="file-link">README.txt</a>
     <a href="/files/get/2" class="file-link">README.txt</a>
     <a href="/files/get/3" class="file-link">file.txt</a>
+
+
+# XXX users need primary emails or emails associated with specific groups
