@@ -27,4 +27,5 @@ and even can see some actions:
     >>> browser.printQuery("//h1")
     <h1>User import</h1>
     <h1>Structure import</h1>
-    <h1>Groups import</h1>
+    ...
+
