@@ -100,8 +100,8 @@ create table files (id bigserial not null,
        filename varchar(500),
        title varchar(500),
        description text default '',
-       created time default now(),
-       modified time default null,
+       created timestamp default now(),
+       modified timestamp default null,
        primary key (id));;
 
 create index md5 on files (md5);;
