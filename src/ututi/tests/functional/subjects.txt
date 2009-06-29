@@ -1,0 +1,42 @@
+Subject adding and import
+=======================++
+
+A list of all subjects is show at /subjects.
+
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/subjects')
+    >>> browser.printQuery("id('subject_list')//li/a/text()")
+    Matematinė analizė
+
+The link of the subject leads to its home page.
+
+    >>> browser.getLink('Matematinė analizė').click()
+    >>> browser.url
+    'http://localhost/subject/mat_analize'
+    >>> browser.printQuery('//h1/text()')
+    Matematinė analizė
+
+We can add a subject at the url /subject/add
+
+    >>> browser.open('http://localhost/subjects/add')
+    >>> browser.getControl('Title').value = 'Test subject'
+    >>> browser.getControl('Pretty URL').value = 'test_subject'
+    >>> browser.getControl('Save').click()
+    >>> browser.printQuery('//h1/text()')
+    Test subject
+
+However, pretty urls are checked for uniqueness.
+
+    >>> browser.open('http://localhost/subjects/add')
+    >>> browser.getControl('Title').value = 'Test subject2'
+    >>> browser.getControl('Pretty URL').value = 'test_subject'
+    >>> browser.getControl('Save').click()
+    >>> browser.printQuery("//span[@class='error-message']/text()")
+    Such id already exists, choose a different one.
+
+And they must not contain characters not allowed in urls.
+
+    >>> browser.getControl('Pretty URL').value = '{}test_subject\/'
+    >>> browser.getControl('Save').click()
+    >>> browser.printQuery("//span[@class='error-message']/text()")
+    The text contains invalid characters, only letters, numbers and the symbols - + _ are allowed.
