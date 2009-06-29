@@ -187,7 +187,7 @@ class Group(object):
             return None
 
     def __init__(self, id, title = '', location = None, year = '', description = ''):
-        self.id = id
+        self.id = id.strip().lower()
         self.title = title
         self.location = None #temporarily, until we get to setting locations
         self.year = year
@@ -196,9 +196,19 @@ class Group(object):
 subjects_table = None
 
 class Subject(object):
+    @classmethod
+    def get(cls, id):
+        try:
+            return meta.Session.query(cls).filter_by(id=int(id)).one()
+        except:
+            try:
+                return meta.Session.query(cls).filter_by(text_id=str(id)).one()
+            except NoResultFound:
+                return None
+
     def __init__(self, title, text_id = None, lecturer = None):
         self.title = title
-        self.text_id = text_id
+        self.text_id = text_id.strip().lower()
         self.lecturer = lecturer
 
 class LocationTag(object):
