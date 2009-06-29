@@ -208,7 +208,11 @@ class Subject(object):
 
     def __init__(self, title, text_id = None, lecturer = None):
         self.title = title
-        self.text_id = text_id.strip().lower()
+
+        if text_id != None:
+            text_id = text_id.strip().lower()
+        self.text_id = text_id
+
         self.lecturer = lecturer
 
 class LocationTag(object):
