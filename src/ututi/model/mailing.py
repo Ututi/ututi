@@ -1,4 +1,5 @@
 import mimetools
+from sqlalchemy.sql.expression import and_
 from sqlalchemy.schema import Table
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm import backref
@@ -33,12 +34,25 @@ def setup_orm(engine):
         meta.metadata,
         autoload=True,
         autoload_with=engine)
+    columns = group_mailing_list_messages_table.c
     orm.mapper(GroupMailingListMessage,
                group_mailing_list_messages_table,
-               properties = {'replies' : relation(GroupMailingListMessage,
-                                                  backref=backref('reply_to'),
-                                                  remote_side = (group_mailing_list_messages_table.c.reply_to_group_id,
-                                                                 group_mailing_list_messages_table.c.reply_to_message_id)),
+               properties = {
+                             'reply_to' : relation(GroupMailingListMessage,
+                                                   backref=backref('replies'),
+                                                   foreign_keys=(columns.reply_to_group_id, columns.reply_to_message_id),
+                                                   primaryjoin=and_(columns.group_id == columns.reply_to_group_id,
+                                                                    columns.message_id == columns.reply_to_message_id),
+                                                   remote_side=(columns.group_id,
+                                                                columns.message_id)),
+                             'thread' : relation(GroupMailingListMessage,
+                                                 post_update=True,
+                                                 backref=backref('posts'),
+                                                 foreign_keys=(columns.thread_group_id, columns.thread_message_id),
+                                                 primaryjoin=and_(columns.group_id == columns.thread_group_id,
+                                                                  columns.message_id == columns.thread_message_id),
+                                                 remote_side=(columns.group_id,
+                                                              columns.message_id)),
                              'author' : relation(User,
                                                  backref=backref('messages'))
                              })
@@ -92,10 +106,15 @@ class GroupMailingListMessage(object):
     def fromMessageText(cls, message_text):
         headers_dict, body = splitMail(message_text.encode("utf-8"))
         message_id = headers_dict['message-id']
+        subject = headers_dict['subject']
         group_id = "moderators"
         if cls.get(message_id, group_id):
             raise MessageAlreadyExists(message_id, group_id)
-        return cls(message_text, message_id, group_id)
+
+        reply_to_message_id = headers_dict.get('in-reply-to', None)
+        reply_to = cls.get(reply_to_message_id, group_id)
+
+        return cls(message_text, message_id, group_id, subject, reply_to)
 
     @classmethod
     def get(cls, message_id, group_id):
@@ -105,11 +124,13 @@ class GroupMailingListMessage(object):
         except NoResultFound:
             return None
 
-    def __init__(self, message_text, message_id, group_id):
+    def __init__(self, message_text, message_id, group_id, subject, reply_to=None):
         self.original = message_text
         self.author = self.getAuthor()
         self.message_id = message_id
+        self.subject = subject
         self.group_id = group_id
+        self.reply_to = reply_to
 
 
 class GroupMailingListAttachment(object):

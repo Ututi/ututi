@@ -11,6 +11,7 @@ from formencode import Schema, validators, Invalid
 from sqlalchemy.orm.exc import NoResultFound
 
 from ututi.lib.base import BaseController, render
+from ututi.model.mailing import GroupMailingListMessage
 from ututi.model import meta, Group
 from routes import url_for
 
@@ -79,6 +80,29 @@ class GroupController(BaseController):
              'link' : url_for(controller='group', action='group_home', id=c.group.id)}
             ]
         return render('group_home.mako')
+
+    def _top_level_messages(self, group):
+        messages = []
+        for message in meta.Session.query(GroupMailingListMessage).filter_by(group_id=group.id, reply_to=None).all():
+            msg = {'last_reply_author_id': message.posts[-1].author.id,
+                   'last_reply_author_title': message.posts[-1].author.fullname,
+                   'last_reply_date': message.posts[-1].created,
+                   'reply_count': len(message.posts) - 1,
+                   'subject': message.subject}
+            messages.append(msg)
+        return messages
+
+    @group_action
+    def forum(self, group):
+        c.group = group
+        c.breadcrumbs = [
+            {'title' : c.group.title,
+             'link' : url_for(controller='group', action='group_home', id=c.group.id)},
+            {'title' : _('Forum'),
+             'link' : url_for(controller='group', action='forum', id=c.group.id)}
+            ]
+        c.messages = self._top_level_messages(group)
+        return render('group_forum.mako')
 
     def add(self):
         c.current_year = date.today().year

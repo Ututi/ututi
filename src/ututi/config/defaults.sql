@@ -109,17 +109,48 @@ create index md5 on files (md5);;
 /* A table for group mailing list emails */
 
 create table group_mailing_list_messages (
+       id bigserial not null unique,
        message_id varchar(320) not null,
        group_id varchar(250) references groups(id) not null,
        sender_email varchar(320),
        reply_to_message_id varchar(320) default null,
        reply_to_group_id varchar(250) references groups(id) default null,
+       thread_message_id varchar(320) not null,
+       thread_group_id varchar(250) references groups(id) not null,
        author_id int8 references users(id) not null,
-       subject varchar(500),
+       subject varchar(500) not null,
        original text not null,
-       created time default now(),
-       foreign key (reply_to_message_id, reply_to_group_id) references group_mailing_list_messages,
+       created timestamp default now(),
+       constraint reply_to
+       foreign key (reply_to_message_id, reply_to_group_id) references group_mailing_list_messages(message_id, group_id),
+       constraint thread
+       foreign key (thread_message_id, thread_group_id) references group_mailing_list_messages(message_id, group_id),
        primary key (message_id, group_id));;
+
+
+CREATE FUNCTION set_thread_id() RETURNS trigger AS $$
+    DECLARE
+        new_group_id varchar(320) := NULL;
+        new_message_id varchar(250) := NULL;
+    BEGIN
+        IF NEW.reply_to_message_id is NULL THEN
+          NEW.thread_message_id := NEW.message_id;
+          NEW.thread_group_id := NEW.group_id;
+        ELSE
+          SELECT thread_message_id, thread_group_id INTO new_message_id, new_group_id
+            FROM group_mailing_list_messages
+            WHERE message_id = NEW.reply_to_message_id AND group_id = NEW.reply_to_group_id;
+          NEW.thread_message_id := new_message_id;
+          NEW.thread_group_id := new_group_id;
+        END IF;
+        RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+
+CREATE TRIGGER lowercase_email BEFORE INSERT OR UPDATE ON group_mailing_list_messages
+    FOR EACH ROW EXECUTE PROCEDURE set_thread_id();;
+
 
 /* A table that tracks attachments for messages */
 

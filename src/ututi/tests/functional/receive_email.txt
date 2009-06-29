@@ -14,7 +14,9 @@ application.
 
 Let's send an email to the system:
 
-    >>> send_test_message("simple_email.txt", "20090615140531.GA23780@my_pc")
+    >>> send_test_message("simple_email.txt",
+    ...                   "20090615140531.GA23780@my_pc",
+    ...                   'my_special_group@ututi.lt')
 
 All emails received will get forwarded to the members who have joined
 ututi:
@@ -46,7 +48,9 @@ As the email had no attachments, we have no new files in our upload directory:
 
 But if someone would sent an email with an attachment, it sure would get stored:
 
-    >>> send_test_message("email_with_attachment.txt", '20090615145515.GA13471@my_pc')
+    >>> send_test_message("email_with_attachment.txt",
+    ...                   '20090615145515.GA13471@my_pc',
+    ...                   'my_special_group@ututi.lt')
     >>> listUploads()
     /uploads/cb396bb6/487560f2/6de19949/6051b42e
 
@@ -84,7 +88,9 @@ If we upload the same file twice - we should see it two times in the
 mailing list, but still only have 1 copy of the file in the files
 repository:
 
-    >>> send_test_message("email_with_attachment.txt", '20090615145515.GA13472@my_pc')
+    >>> send_test_message("email_with_attachment.txt",
+    ...                   '20090615145515.GA13472@my_pc',
+    ...                   'my_special_group@ututi.lt')
 
     >>> listUploads()
     /uploads/cb396bb6/487560f2/6de19949/6051b42e
@@ -139,7 +145,9 @@ add any additional files to the repository:
 
 If a message gets posted more than once, it is simply ignored:
 
-    >>> send_test_message("email_with_attachment.txt", '20090615145515.GA13472@my_pc')
+    >>> send_test_message("email_with_attachment.txt",
+    ...                   '20090615145515.GA13472@my_pc',
+    ...                   'my_special_group@ututi.lt')
     >>> browser.open('http://localhost/files')
     >>> browser.printQuery('id("file_list")//a')
     <a href="/files/get/1" class="file-link">README.txt</a>

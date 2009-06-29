@@ -1,0 +1,90 @@
+Test for group mailing list UI
+==============================
+
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/')
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
+
+    >>> browser.getLink('Moderatoriai').click()
+    >>> browser.url
+    'http://localhost/group/moderators'
+
+We don't have a direct link to the mailing list yet:
+
+    >>> browser.open('http://localhost/group/moderators/forum')
+
+There are no threads posted at the moment:
+
+    >>> browser.printQuery("id('forum-thread-list')")
+    <table id="forum-thread-list">
+      <tr>
+        <th>Subject</th>
+        <th>Replies</th>
+        <th>Last post</th>
+      </tr>
+    </table>
+
+Let's send some messages:
+
+    >>> from ututi.tests.functional import send_test_message
+    >>> send_test_message('simple_email.txt', '1', to='moderators@ututi.lt')
+    >>> send_test_message('simple_email.txt', '2', to='moderators@ututi.lt', reply_to='1')
+    >>> send_test_message('simple_email.txt', '3', to='moderators@ututi.lt', reply_to='1')
+    >>> send_test_message('simple_email.txt', '4', to='moderators@ututi.lt', reply_to='2')
+
+And verify that they got properly processed by our email handler:
+
+    >>> from ututi.model.mailing import GroupMailingListMessage
+    >>> from ututi.model import meta
+
+    >>> [msg1, msg2, msg3, msg4] = meta.Session.query(GroupMailingListMessage).all()
+
+    >>> msg1.replies == [msg2, msg3]
+    True
+    >>> msg2.reply_to is msg1
+    True
+    >>> msg3.reply_to is msg1
+    True
+
+    >>> msg2.thread is msg1
+    True
+    >>> msg3.thread is msg1
+    True
+    >>> msg4.thread is msg1
+    True
+    >>> msg1.thread is msg1
+    True
+
+    >>> msg1.posts == [msg1, msg2, msg3, msg4]
+    True
+
+Data structures seem to be ok, let's see if they are displayed
+properly in the forum page:
+
+    >>> browser.open('http://localhost/group/moderators/forum')
+    >>> browser.printQuery("id('forum-thread-list')")
+    <table id="forum-thread-list">
+      <tr>
+        <th>Subject</th>
+        <th>Replies</th>
+        <th>Last post</th>
+      </tr>
+      <tr>
+        <td>Hello</td>
+        <td>3</td>
+        <td>
+          <a class="profile-link XXX" href="/user/index/1">Adminas Adminovix</a>
+          <span class="date">...</span>
+        </td>
+      </tr>
+    </table>
+
+And clean up the email queue:
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> len(mail_queue)
+    4
+    >>> mail_queue[:] = []

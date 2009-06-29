@@ -1,7 +1,7 @@
 Return-Path: <admin@ututi.lt>
 Date: Mon, 15 Jun 2009 17:55:15 +0300
 From: Admin <admin@ututi.lt>
-To: my_special_group@ututi.lt
+To: %(to)s%(reply_to)s
 Subject: Also - an attachment
 Message-ID: <%(message_id)s>
 MIME-Version: 1.0

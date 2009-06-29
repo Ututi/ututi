@@ -355,3 +355,11 @@ a.small-link:hover {
   color: #333;
 }
 /* end breadcrumbs */
+
+/* begin debugging helpers */
+
+.XXX {
+  border: 3px solid red;
+}
+
+/* end debugging helpers */
