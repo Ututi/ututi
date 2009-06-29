@@ -38,7 +38,7 @@ class NewSubjectForm(Schema):
 
     msg = {'invalid' : _('The text contains invalid characters, only letters, numbers and the symbols - + _ are allowed.')}
 
-    text_id = All(UniqueIdValidator(Subject), validators.Regex(r'^[_\+\-a-zA-Z0-9]*$', messages=msg), validators.String(max=20))
+    text_id = All(UniqueIdValidator(Subject), validators.Regex(r'^[_\+\-a-zA-Z0-9]*$', messages=msg), validators.String(max=50))
 
 
 class SubjectController(BaseController):

@@ -81,7 +81,7 @@ insert into group_members (group_id, user_id, membership_type)
 
 /* A table for subjects */
 create table subjects (id bigserial not null,
-       text_id varchar(50) default null,
+       text_id varchar(150) default null,
        title varchar(500) not null,
        lecturer varchar(500) default null,
        location int8 references locationtags(id) default null,
