@@ -7,7 +7,7 @@ from sqlalchemy.orm.exc import NoResultFound
 from ututi.lib.base import BaseController, render
 from ututi.lib import current_user
 
-from ututi.model import meta, User, Email, LocationTag, Group
+from ututi.model import meta, User, Email, LocationTag, Group, Subject
 
 log = logging.getLogger(__name__)
 
@@ -113,3 +113,27 @@ class AdminController(BaseController):
                     group.year = date.today()
                 meta.Session.commit()
         redirect_to(controller='group', action='index')
+
+    def import_subjects(self):
+        file = request.POST.get('file_upload', None)
+
+        if file is not None and file != '':
+            csv_reader = csv.reader(file.value.split(os.linesep))
+            for row in csv_reader:
+                if len(row) < 3:
+                    continue
+
+                id, title, lecturer = row[:3]
+                try:
+                    subj = meta.Session.query(Subject).filter_by(text_id = id).one()
+                    subj = Subject(title) #the pretty url is being used - forget it
+                    meta.Session.add(subj)
+                except NoResultFound:
+                    subj = Subject(title, text_id = id)
+                    meta.Session.add(subj)
+
+                if lecturer is not None:
+                    subj.lecturer = lecturer
+
+                meta.Session.commit()
+        redirect_to(controller='subject', action='index')

@@ -40,3 +40,27 @@ And they must not contain characters not allowed in urls.
     >>> browser.getControl('Save').click()
     >>> browser.printQuery("//span[@class='error-message']/text()")
     The text contains invalid characters, only letters, numbers and the symbols - + _ are allowed.
+
+You can import more subjects using the admin interface.
+
+    >>> browser.open('http://localhost/')
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
+
+
+    >>> browser.open('http://localhost/admin')
+    >>> form = browser.getForm(name='subjects_import')
+    >>> csv_data = 'new_subj, Imported subject, Professor'
+    >>> import cStringIO
+    >>> form.getControl('CSV File').add_file(cStringIO.StringIO(csv_data),
+    ...                                      'text/plain',
+    ...                                       'subjects.csv')
+    >>> form.getControl('Upload').click()
+    >>> browser.url
+    'http://localhost/subjects'
+    >>> browser.printQuery("id('subject_list')//li/a/text()")
+    Matematinė analizė
+    Test subject
+    Imported subject
