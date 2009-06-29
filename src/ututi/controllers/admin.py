@@ -107,7 +107,7 @@ class AdminController(BaseController):
 
                 group.title = title
                 group.description = desc
-                if year != '':
+                if year != '' and year != 'None':
                     group.year = date(int(year), 1, 1)
                 else:
                     group.year = date.today()
