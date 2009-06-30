@@ -1,0 +1,39 @@
+A test of all the import views together with an actual snapshot of ututi
+========================================================================
+
+Let's load our csv files:
+
+    >>> from pkg_resources import resource_stream
+    >>> def make_file(filename):
+    ...     stream = resource_stream("ututi.tests.functional.import", filename)
+    ...     return (stream, 'text/plain', filename)
+
+    >>> def upload(browser, formname, filename):
+    ...     browser.open('http://localhost/admin')
+    ...     form = browser.getForm(name=formname)
+    ...     form.getControl('CSV File').add_file(*make_file(filename))
+    ...     form.getControl('Upload').click()
+
+Log in as admin:
+
+    >>> browser = Browser()
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
+
+Go to admin page:
+
+    >>> browser.open('http://localhost/admin')
+
+And upload all the files one by one:
+
+    >>> upload(browser, 'user_import', 'export_users.csv')
+    >>> upload(browser, 'groups_import', 'export_groups.csv')
+    >>> upload(browser, 'structure_import', 'export_structure.csv')
+    >>> upload(browser, 'subjects_import', 'export_subjects.csv')
+
+    # XXX TODO
+    # >>> upload(browser, 'group_logos_import', 'export_group_logos.csv')
+    # >>> upload(browser, 'structure_logos_import', 'export_structure_logos.csv')
+    # >>> upload(browser, 'user_logos_import', 'export_user_logos.csv')
