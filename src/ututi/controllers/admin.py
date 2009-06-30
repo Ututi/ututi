@@ -7,7 +7,7 @@ from sqlalchemy.orm.exc import NoResultFound
 from ututi.lib.base import BaseController, render
 from ututi.lib import current_user
 
-from ututi.model import meta, User, Email, LocationTag, Group, Subject
+from ututi.model import meta, User, Email, LocationTag, Group, Subject, GroupMember, GroupMembershipType
 
 log = logging.getLogger(__name__)
 
@@ -137,3 +137,33 @@ class AdminController(BaseController):
 
                 meta.Session.commit()
         redirect_to(controller='subject', action='index')
+
+    def import_group_members(self):
+        file = request.POST.get('file_upload', None)
+
+        if file is not None and file != '':
+            csv_reader = csv.reader(file.value.split(os.linesep))
+
+            #group membership types
+            moderator = GroupMembershipType.get('administrator')
+            member = GroupMembershipType.get('member')
+            for row in csv_reader:
+                if len(row) < 3:
+                    continue
+
+                group_id, email, is_moderator = row[:3]
+                is_moderator = moderator == 'True'
+
+                group = Group.get(group_id)
+                user = User.get(email)
+
+                if group is not None and user is not None:
+                    membership = GroupMember()
+                    membership.role = is_moderator and moderator or member
+                    membership.user = user
+                    membership.group = group
+
+                    meta.Session.add(membership)
+                    meta.Session.commit()
+
+        redirect_to(controller='group', action='index')

@@ -208,8 +208,15 @@ group_members_table = None
 class GroupMember(object):
     pass
 
+
 class GroupMembershipType(object):
-    pass
+    @classmethod
+    def get(cls, membership_type):
+        try:
+            return meta.Session.query(cls).filter_by(membership_type=membership_type).one()
+        except NoResultFound:
+            return None
+
 
 subjects_table = None
 

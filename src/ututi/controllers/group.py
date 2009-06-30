@@ -124,3 +124,14 @@ class GroupController(BaseController):
         meta.Session.commit()
 
         redirect_to(controller='group', action='group_home', id=values['id'])
+
+    @group_action
+    def members(self, group):
+        c.group = group
+        c.breadcrumbs = [
+            {'title' : c.group.title,
+             'link' : url_for(controller='group', action='group_home', id=c.group.id)},
+            {'title' : _('Forum'),
+             'link' : url_for(controller='group', action='members', id=c.group.id)}
+            ]
+        return render('group_members.mako')
