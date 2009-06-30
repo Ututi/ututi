@@ -11,12 +11,12 @@
       ${_('Groups')}
     </%def>
     <ul>
-      % for group in c.user.groups:
+      % for membership in c.user.memberships:
       <li>
-        <a href="${h.url_for(controller='group', action='group_home', id=group.id)}">${group.title}</a>
+        <a href="${h.url_for(controller='group', action='group_home', id=membership.group.id)}">${membership.group.title}</a>
       </li>
       % endfor
-      % if not c.user.groups:
+      % if not c.user.memberships:
       ${_('You are not a member of any.')}
       %endif
     </ul>

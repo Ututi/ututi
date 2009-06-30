@@ -58,18 +58,28 @@ def setup_orm(engine):
                         autoload_with=engine)
     orm.mapper(File, files_table)
 
+    global group_membership_types_table
+    group_membership_types_table = Table("group_membership_types", meta.metadata,
+                                         autoload=True,
+                                         autoload_with=engine)
+    orm.mapper(GroupMembershipType,
+               group_membership_types_table)
+
     global group_members_table
     group_members_table = Table("group_members", meta.metadata,
                                 autoload=True,
                                 autoload_with=engine)
+    orm.mapper(GroupMember,
+               group_members_table,
+               properties = {'group' : relation(Group, backref='members'),
+                             'user' : relation(User, backref='memberships'),
+                             'role' : relation(GroupMembershipType)})
 
     global groups_table
     groups_table = Table("groups", meta.metadata,
                          autoload=True,
                          autoload_with=engine)
-    orm.mapper(Group, groups_table,
-               properties={'members' : relation(User, backref='groups',
-                                                secondary=group_members_table)})
+    orm.mapper(Group, groups_table)
 
     global subjects_table
     subjects_table = Table("subjects", meta.metadata,
@@ -192,6 +202,14 @@ class Group(object):
         self.location = None #temporarily, until we get to setting locations
         self.year = year
         self.description = description
+
+group_members_table = None
+
+class GroupMember(object):
+    pass
+
+class GroupMembershipType(object):
+    pass
 
 subjects_table = None
 
