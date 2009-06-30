@@ -38,3 +38,10 @@
       <input type="file" name="file_upload" id="file_upload"/>
       <input type="submit" value="Upload" name="Upload"/>
 </form>
+
+<h1>${_('User logo import')}</h1>
+<form name="user_logos_import" method="post" action="/admin/import_user_logos" enctype="multipart/form-data">
+      <label for="file_upload">CSV File</label>
+      <input type="file" name="file_upload" id="file_upload"/>
+      <input type="submit" value="Upload" name="Upload"/>
+</form>

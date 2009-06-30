@@ -7,6 +7,10 @@
 <h1>${_('Ututi users:')}</h1>
 <ul id="user_list">
 %for user in c.users:
-     <li>${user.fullname}</li>
+    <li>${user.fullname}
+    % if user.logo is not None:
+       <img src="${h.url_for(controller='profile', action='logo', id=user.id)}" />
+    % endif
+    </li>
 %endfor
 </ul>

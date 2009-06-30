@@ -32,9 +32,16 @@ def setup_orm(engine):
                         Column('id', Integer, Sequence('users_id_seq'), primary_key=True),
                         autoload=True,
                         autoload_with=engine)
+    global user_logos_table
+    user_logos_table = Table("user_logos", meta.metadata,
+                             autoload=True,
+                             autoload_with=engine)
     orm.mapper(User,
                users_table,
-               properties = {'emails' : relation(Email, backref='user')})
+               properties = {'emails': relation(Email, backref='user'),
+                             'logo': relation(File,
+                                              secondary=user_logos_table,
+                                              uselist=False)})
 
     global emails_table
     emails_table = Table("emails", meta.metadata,
@@ -55,6 +62,7 @@ def setup_orm(engine):
     files_table = Table("files", meta.metadata,
                         Column('id', Integer, Sequence('files_id_seq'), primary_key=True),
                         autoload=True,
+                        useexisting=True,
                         autoload_with=engine)
     orm.mapper(File, files_table)
 
@@ -288,13 +296,8 @@ class File(object):
 
         return os.path.join(*dir_path)
 
-    def store(self, filename, data):
+    def store(self, data):
         """Store a given file in the database and the filesystem."""
-        self.filename = filename
-
-        if self.title.strip()  == '':
-            self.title = filename
-
         self.md5 = self.hash_chunked(data)
         filename = self.filepath()
         if os.path.exists(filename):

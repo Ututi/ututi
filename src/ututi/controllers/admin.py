@@ -1,5 +1,10 @@
+import csv
+import os
 import logging
+import base64
 
+from magic import from_buffer
+from magic import from_file
 from datetime import date
 from pylons import request, c
 from pylons.controllers.util import redirect_to, abort
@@ -7,12 +12,11 @@ from sqlalchemy.orm.exc import NoResultFound
 from ututi.lib.base import BaseController, render
 from ututi.lib import current_user
 
-from ututi.model import meta, User, Email, LocationTag, Group, Subject, GroupMember, GroupMembershipType
+from ututi.model import (meta, User, Email, LocationTag, Group, Subject,
+                         GroupMember, GroupMembershipType, File)
 
 log = logging.getLogger(__name__)
 
-import csv
-import os
 
 class AdminController(BaseController):
     """Controler for system administration."""
@@ -49,6 +53,31 @@ class AdminController(BaseController):
                     meta.Session.add(user)
 
                 meta.Session.commit()
+        redirect_to(controller='admin', action='users')
+
+    def import_user_logos(self):
+        file = request.POST.get('file_upload', None)
+
+        if file is not None and file != '':
+            for line in file.value.splitlines():
+                if line.strip() == '':
+                    continue
+                line = line.strip().split(',')
+                email = line[0].strip()
+                b64logo = line[1].strip()
+                user = User.get(email)
+                if user is None:
+                    log.error("Failed to import a logo, email %s does not exist!")
+                elif b64logo:
+                    logo_content = base64.b64decode(b64logo)
+                    mime_type = from_buffer(logo_content, mime=True)
+                    logo = File("logo", "Avatar for %s" % user.fullname, mimetype=mime_type)
+                    logo.store(logo_content)
+                    meta.Session.add(logo)
+                    user.logo = logo
+                else:
+                    user.logo = None
+            meta.Session.commit()
         redirect_to(controller='admin', action='users')
 
     def import_structure(self):

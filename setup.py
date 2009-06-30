@@ -19,7 +19,8 @@ setup(
         "wsgi_intercept",
         "zope.testbrowser",
         "lxml",
-        "nous.mailpost"
+        "nous.mailpost",
+        "python_magic"
     ],
     package_dir={'': 'src'},
     packages=find_packages('src'),

@@ -106,6 +106,13 @@ create table files (id bigserial not null,
 
 create index md5 on files (md5);;
 
+/* A table that tracks user logos */
+
+create table user_logos (
+       user_id int8 not null references users(id) unique,
+       file_id int8 references files(id) not null,
+       primary key (user_id, file_id));;
+
 /* A table for group mailing list emails */
 
 create table group_mailing_list_messages (

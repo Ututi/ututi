@@ -34,7 +34,7 @@ class FilesController(BaseController):
 
         if file is not None and file != '':
             f = File(file.filename, title, mimetype=file.type)
-            f.store(file.filename, file.file)
+            f.store(file.file)
 
             meta.Session.add(f)
             meta.Session.commit()
