@@ -140,7 +140,6 @@ class AdminController(BaseController):
 
     def import_group_members(self):
         file = request.POST.get('file_upload', None)
-
         if file is not None and file != '':
             csv_reader = csv.reader(file.value.split(os.linesep))
 
@@ -152,10 +151,10 @@ class AdminController(BaseController):
                     continue
 
                 group_id, email, is_moderator = row[:3]
-                is_moderator = moderator == 'True'
+                is_moderator = is_moderator == 'True'
 
-                group = Group.get(group_id)
-                user = User.get(email)
+                group = Group.get(group_id.strip())
+                user = User.get(email.strip())
 
                 if group is not None and user is not None:
                     membership = GroupMember()
