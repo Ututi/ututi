@@ -34,6 +34,12 @@ def setup_orm(engine):
         meta.metadata,
         autoload=True,
         autoload_with=engine)
+    global group_mailing_list_attachments_table
+    group_mailing_list_attachments_table = Table(
+        "group_mailing_list_attachments",
+        meta.metadata,
+        autoload=True,
+        autoload_with=engine)
     columns = group_mailing_list_messages_table.c
     orm.mapper(GroupMailingListMessage,
                group_mailing_list_messages_table,
@@ -54,19 +60,10 @@ def setup_orm(engine):
                                                  remote_side=(columns.group_id,
                                                               columns.message_id)),
                              'author' : relation(User,
-                                                 backref=backref('messages'))
+                                                 backref=backref('messages')),
+                             'attachments': relation(File,
+                                                     secondary=group_mailing_list_attachments_table)
                              })
-
-    global group_mailing_list_attachments_table
-    group_mailing_list_attachments_table = Table(
-        "group_mailing_list_attachments",
-        meta.metadata,
-        autoload=True,
-        autoload_with=engine)
-    orm.mapper(GroupMailingListAttachment, group_mailing_list_attachments_table,
-               properties = {'message' : relation(GroupMailingListMessage,
-                                                  backref=backref('attachments')),
-                             'file' : relation(File)})
 
 
 class GroupMailingListMessage(object):
@@ -94,9 +91,9 @@ class GroupMailingListMessage(object):
             # XXX can't decide whether this belongs in the model or in
             # the controller, maybe we should have a template, and
             # pass it to this method?
-            url = url_for(controller='files', action='get', id=attachment.file.id,
+            url = url_for(controller='files', action='get', id=attachment.id,
                           qualified=True)
-            footer += '<a href="%s">%s</a>' % (url, attachment.file.title)
+            footer += '<a href="%s">%s</a>' % (url, attachment.title)
         new_message = "%s\r\n%s\r\n%s" % (headers, body, footer)
         raw_send_email(self.mime_message['From'],
                        recipients,
@@ -131,7 +128,3 @@ class GroupMailingListMessage(object):
         self.subject = subject
         self.group_id = group_id
         self.reply_to = reply_to
-
-
-class GroupMailingListAttachment(object):
-    """Attachment for group mailing list messages."""

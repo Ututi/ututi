@@ -6,7 +6,6 @@ from pylons.decorators import validate
 from pylons.i18n import _
 
 from ututi.lib.base import BaseController
-from ututi.model import GroupMailingListAttachment
 from ututi.model import GroupMailingListMessage
 from ututi.model import File
 from ututi.model import meta, Email
@@ -59,12 +58,7 @@ class ReceivemailController(BaseController):
                      mimetype=mimetype,
                      md5=md5)
             meta.Session.add(f)
-
-            attachment = GroupMailingListAttachment()
-            attachment.file = f
-            attachment.message = message
-            meta.Session.add(attachment)
-            attachments.append(attachment)
+            message.attachments.append(f)
 
         self._queueMessage(message)
         meta.Session.commit()

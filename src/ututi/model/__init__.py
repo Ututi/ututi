@@ -306,4 +306,4 @@ class File(object):
         return hash.hexdigest()
 
 # Reimports for convenience
-from ututi.model.mailing import GroupMailingListMessage, GroupMailingListAttachment
+from ututi.model.mailing import GroupMailingListMessage
