@@ -29,12 +29,12 @@ bin/paster: buildout.cfg bin/buildout setup.py versions.cfg
 bin/tags: buildout.cfg bin/buildout setup.py versions.cfg
 	$(BUILDOUT)
 
-instance/var/data/postgresql.conf:
-	mkdir -p instance/var/data
-	/usr/lib/postgresql/8.3/bin/initdb -D instance/var/data -E UNICODE
-
 export PGPORT ?= 4455
 PG_PATH = /usr/lib/postgresql/8.3
+
+instance/var/data/postgresql.conf:
+	mkdir -p instance/var/data
+	${PG_PATH}/bin/initdb -D instance/var/data -E UNICODE
 
 instance/var/data/initialized:
 	${PG_PATH}/bin/createuser --createdb    --no-createrole --no-superuser --login admin -h ${PWD}/instance/var/run
