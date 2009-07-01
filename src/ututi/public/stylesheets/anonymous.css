@@ -61,3 +61,7 @@ ul#ututi_info li {
   float: right;
   margin-right: 10px;
 }
+
+#registration_form .form-field {
+  margin: 0.4em 0;
+}
