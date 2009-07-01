@@ -22,14 +22,12 @@ class AdminController(BaseController):
     """Controler for system administration."""
 
     def index(self):
-        user = current_user()
-        if user is None:
+        if c.user is None:
             abort(401, 'You are not authenticated')
         return render('/admin/import.mako')
 
     def users(self):
-        user = current_user()
-        if user is None:
+        if c.user is None:
             abort(401, 'You are not authenticated')
 
         c.users = meta.Session.query(User).all()

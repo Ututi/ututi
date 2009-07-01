@@ -8,7 +8,6 @@ from pylons.decorators import validate
 from pylons.i18n import _
 
 from ututi.lib.base import BaseController, render
-from ututi.lib import current_user
 from ututi.lib.emails import email_confirmation_request
 from ututi.model import meta, User, Email
 
@@ -70,17 +69,13 @@ def sign_in_user(email):
 class HomeController(BaseController):
 
      def index(self):
-          user = current_user()
-          c.user = user
-          if user is not None:
+          if c.user is not None:
                redirect_to(controller='home', action='home')
           else:
                return render('/anonymous_index.mako')
 
      def home(self):
-          user = current_user()
-          if user is not None:
-               c.user = user
+          if c.user is not None:
                return render('/index.mako')
           else:
                abort(401, 'You are not authenticated')

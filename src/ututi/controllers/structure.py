@@ -42,7 +42,6 @@ class NewStructureForm(Schema):
 class StructureController(BaseController):
     def index(self):
         c.structure = meta.Session.query(LocationTag).filter_by(parent = None).all()
-        c.user = current_user()
         return render('structure.mako')
 
     @validate(schema=NewStructureForm, form='index')
