@@ -18,6 +18,11 @@ And we are greeted by the welcome page:
     >>> browser.printQuery('id("page-content")//h1/text()')
     Welcome Adminas Adminovix!
 
+The personal information portlet shows my name:
+
+    >>> browser.printQuery('id("personal-box")//span[@class="fullname"]/text()')
+    Adminas Adminovix
+
 After login we are redirected to our home page.
 
     >>> browser.url
