@@ -5,30 +5,6 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
 ${h.javascript_link('/javascripts/forms.js')|n}
 </%def>
 
-<%def name="personal_block()">
-<form method="post" id="login_form" action="/dologin">
-  %if request.GET.get('came_from'):
-  <input type="hidden" name="came_from" value="${request.GET.get('came_from')}" />
-  %endif
-
-  <div class="form-field overlay">
-    <label for="login" class="small">${_('Email')}</label>
-    <input class="line" type="text" size="20" id="login" name="login" />
-  </div>
-  <div class="form-field overlay">
-    <label for="password" class="small">${_('Password')}</label>
-    <input class="line" type="password" size="20" name="password" id="password" />
-  </div>
-  <div class="form-field overlay">
-    <input class="submit small" type="submit" name="join" value="Login" />
-    <a class="small-link small" href="#">Forgotten password?</a>
-  </div>
-</form>
-<script lang="javascript">
-  $(".overlay label").labelOver('over');
-</script>
-</%def>
-
 <div id="block-left">
 
   <div class="sidebar-block">

@@ -114,7 +114,7 @@ ul.bullets_large li {
 /* header elements */
 #personal-box {
   float: right;
-  width: 230px;
+  width: 250px;
   height: 100px;
   margin-top: 10px;
   border: 2px solid #e5e5d3;
@@ -160,8 +160,8 @@ ul.bullets_large li {
 }
 
 #personal-box .content {
-  height: 78px;
-  padding: 10px 10px 0;
+  height: 83px;
+  padding: 5px 10px 0;
 }
 
 #personal-box .rounded-header {
@@ -180,6 +180,64 @@ ul.bullets_large li {
 
 #personal-box .rounded-footer .rounded-right{
   background: white url("../images/personal_border.png") no-repeat right bottom;
+}
+
+.personal-logo {
+  float: left;
+  width: 45px;
+  height: 60px;
+  margin-right: 5px;
+}
+
+#personal-box .fullname {
+  font-weight: bold;
+  color: black;
+}
+
+#personal-box .logout {
+  float: right;
+  margin-right: 10px;
+}
+
+.user-rating {
+  color: #ff7800;
+  font-weight: bold;
+  padding-left: 20px;
+}
+
+#personal-box #user-ratings {
+  clear: right;
+  margin-top: 5px;
+}
+
+.user-rating {
+  margin-right: 10px;
+}
+
+#user-rating-good {
+  background: transparent url("../images/icon_good.png") left center no-repeat;
+}
+
+#user-rating-evil {
+  background: transparent url("../images/icon_evil.png") left center no-repeat;
+}
+
+#personal-menu {
+  margin: 4px 5px 0;
+}
+
+#personal-menu .expanding-menu {
+  margin-right: 5px;
+}
+
+#personal-menu a.title {
+  padding: 1px 15px 1px 1px;
+  background: transparent url("../images/icon_expand_small.png") right center no-repeat;
+}
+
+#personal-menu a.title:hover {
+  padding: 0 14px 0 0;
+  border: 1px solid #adaca4;
 }
 
 /* end personal box */
@@ -267,6 +325,16 @@ ul.bullets_large li {
 form .form-field {
   margin: 0.1em 0;
   overflow: hidden; /* to contain floats */
+}
+
+form .form-field input {
+  float: right;
+  width: 150px;
+}
+
+form .form-field input.submit {
+  float: none;
+  width: auto;
 }
 
 form .form-field label {
@@ -359,7 +427,9 @@ a.small-link:hover {
 /* begin debugging helpers */
 
 .XXX {
-  border: 3px solid red;
+  color: red !important;
+  border-color: red !important;
+  background: #e3c5c5;
 }
 
 /* end debugging helpers */

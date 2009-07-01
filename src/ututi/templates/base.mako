@@ -6,6 +6,61 @@ ${_('student information online')}
 </%def>
 
 <%def name="personal_block()">
+%if c.user:
+  <div class="personal-logo">
+    % if c.user.logo is not None:
+       <img src="${h.url_for(controller='profile', action='logo', id=c.user.id)}" />
+    % else:
+       <div class="XXX" style="height: 60px; width: 45px;"> </div>
+    % endif
+  </div>
+  <div class="personal-info">
+    <a class="logout" href="/logout" title="Logout">
+      ${h.image('/images/icon_logout.png', alt='logout')|n}
+    </a>
+    <div>
+      <span class="fullname">${c.user.fullname}</span>
+      <span class="small">${c.user.emails[0].email}</span>
+    </div>
+    <div id="user-ratings">
+      <span id="user-rating-good" class="user-rating XXX">+178</span>
+      <span id="user-rating-evil" class="user-rating XXX">+178</span>
+    </div>
+  </div>
+  <div id="personal-menu" class="XXX">
+    <span class="expanding-menu">
+      <a href="#" class="title">Home</a>
+    </span>
+    <span class="expanding-menu">
+      <a href="#" class="title">Groups</a>
+    </span>
+    <span class="expanding-menu">
+      <a href="#" class="title">Subjects</a>
+    </span>
+  </div>
+%else:
+<form method="post" id="login_form" action="/dologin">
+  %if request.GET.get('came_from'):
+  <input type="hidden" name="came_from" value="${request.GET.get('came_from')}" />
+  %endif
+
+  <div class="form-field overlay">
+    <label for="login" class="small">${_('Email')}</label>
+    <input class="line" type="text" size="20" id="login" name="login" />
+  </div>
+  <div class="form-field overlay">
+    <label for="password" class="small">${_('Password')}</label>
+    <input class="line" type="password" size="20" name="password" id="password" />
+  </div>
+  <div class="form-field overlay">
+    <input class="submit small" type="submit" name="join" value="Login" />
+    <a class="small-link small" href="#">Forgotten password?</a>
+  </div>
+</form>
+<script lang="javascript">
+  $(".overlay label").labelOver('over');
+</script>
+%endif
 </%def>
 
 <%def name="portlets()">
