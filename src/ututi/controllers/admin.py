@@ -143,6 +143,68 @@ class AdminController(BaseController):
                 meta.Session.commit()
         redirect_to(controller='group', action='index')
 
+    def import_group_logos(self):
+        file = request.POST.get('file_upload', None)
+
+        if file is not None and file != '':
+            for line in file.value.splitlines():
+                if line.strip() == '':
+                    continue
+                line = line.strip().split(',')
+                group_id = line[0].strip()
+                b64logo = line[1].strip()
+                group = Group.get(group_id)
+                if group is None:
+                    log.error("Failed to import a logo,"
+                              " group with id %s does not exist!" % group_id)
+                elif b64logo:
+                    logo_content = base64.b64decode(b64logo)
+                    mime_type = from_buffer(logo_content, mime=True)
+                    logo = File("logo", "Logo for group %s" % group.title,
+                                mimetype=mime_type)
+                    logo.store(logo_content)
+                    meta.Session.add(logo)
+                    group.logo = logo
+                else:
+                    group.logo = None
+            meta.Session.commit()
+        redirect_to(controller='admin', action='users')
+
+    def import_structure_logos(self):
+        file = request.POST.get('file_upload', None)
+
+        if file is not None and file != '':
+            for line in file.value.splitlines():
+                if line.strip() == '':
+                    continue
+                line = line.strip().split(',')
+                tag_title = line[0].strip().lower()
+                parent_title = line[1].strip().lower()
+                b64logo = line[2].strip()
+                if parent_title:
+                    parent = meta.Session.query(LocationTag).filter_by(title_short=parent_title,
+                                                                       parent=None).one()
+                    parent_id = parent.id
+                else:
+                    parent_id = None
+                location_tag = meta.Session.query(LocationTag).filter_by(title_short=tag_title,
+                                                                         parent=parent_id).first()
+                if location_tag is None:
+                    log.error("Failed to import a logo,"
+                              " location tag %s does not exist!" % '/'.join((parent_title, tag_title)))
+                elif b64logo:
+                    logo_content = base64.b64decode(b64logo)
+                    mime_type = from_buffer(logo_content, mime=True)
+                    logo = File("logo", "Logo for location tag %s" % location_tag.title,
+                                mimetype=mime_type)
+                    logo.store(logo_content)
+                    meta.Session.add(logo)
+                    location_tag.logo = logo
+                else:
+                    location_tag.logo = None
+            meta.Session.commit()
+        redirect_to(controller='admin', action='users')
+
     def import_subjects(self):
         file = request.POST.get('file_upload', None)
 
