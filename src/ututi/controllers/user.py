@@ -4,7 +4,8 @@ from pylons import request, c
 from pylons.controllers.util import redirect_to
 
 from ututi.lib.base import BaseController, render
-from ututi.lib import current_user, email_confirmation_request
+from ututi.lib import current_user
+from ututi.lib.emails import email_confirmation_request
 
 from ututi.model import meta, Email
 

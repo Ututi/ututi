@@ -8,7 +8,8 @@ from pylons.decorators import validate
 from pylons.i18n import _
 
 from ututi.lib.base import BaseController, render
-from ututi.lib import current_user, email_confirmation_request
+from ututi.lib import current_user
+from ututi.lib.emails import email_confirmation_request
 from ututi.model import meta, User, Email
 
 log = logging.getLogger(__name__)
