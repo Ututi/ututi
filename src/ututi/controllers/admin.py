@@ -4,14 +4,13 @@ import logging
 import base64
 
 from magic import from_buffer
-from magic import from_file
 from datetime import date
+
 from pylons import request, c
 from pylons.controllers.util import redirect_to, abort
 from sqlalchemy.orm.exc import NoResultFound
-from ututi.lib.base import BaseController, render
-from ututi.lib import current_user
 
+from ututi.lib.base import BaseController, render
 from ututi.model import (meta, User, Email, LocationTag, Group, Subject,
                          GroupMember, GroupMembershipType, File)
 
