@@ -16,8 +16,6 @@ class ProfileController(BaseController):
     def logo(self, id, width=None, height=None):
         try:
             user = meta.Session.query(User).filter_by(id = id).one()
-            width = int(width)
-            height = int(height)
         except NoResultFound:
             abort(404)
 

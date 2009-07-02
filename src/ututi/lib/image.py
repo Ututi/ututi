@@ -13,15 +13,22 @@ def serve_image(file, width=None, height=None):
 
 
         if width is not None and height is not None:
+            width = int(width)
+            height = int(height)
+
             img = Image.open(file.filepath())
             if img.size[0] > img.size[1]:
                 img = resize_image(img, width=width)
             else:
                 img = resize_image(img, height=height)
         elif width is not None:
+            width = int(width)
+
             img = Image.open(file.filepath())
             img = resize_image(img, width=width)
         elif height is not None:
+            height = int(height)
+
             img = Image.open(file.filepath())
             img = resize_image(img, height=height)
         else:
