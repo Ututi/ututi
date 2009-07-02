@@ -9,7 +9,7 @@ ${_('student information online')}
 %if c.user:
   <div class="personal-logo">
     % if c.user.logo is not None:
-       <img src="${h.url_for(controller='profile', action='logo', id=c.user.id)}" />
+       <img src="${h.url_for(controller='profile', action='logo', id=c.user.id, width=45, height=60)}" />
     % else:
        <div class="XXX" style="height: 60px; width: 45px;"> </div>
     % endif
