@@ -34,7 +34,5 @@ And upload all the files one by one:
     >>> upload(browser, 'subjects_import', 'export_subjects.csv')
     >>> upload(browser, 'group_members_import', 'export_group_members.csv')
     >>> upload(browser, 'user_logos_import', 'export_user_logos.csv')
-
-    # XXX TODO
-    # >>> upload(browser, 'group_logos_import', 'export_group_logos.csv')
-    # >>> upload(browser, 'structure_logos_import', 'export_structure_logos.csv')
+    >>> upload(browser, 'group_logos_import', 'export_group_logos.csv')
+    >>> upload(browser, 'structure_logos_import', 'export_structure_logos.csv')

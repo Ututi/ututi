@@ -113,6 +113,20 @@ create table user_logos (
        file_id int8 references files(id) not null,
        primary key (user_id, file_id));;
 
+/* A table that tracks group logos */
+
+create table group_logos (
+       group_id varchar(250) references groups(id) not null,
+       file_id int8 references files(id) not null,
+       primary key (group_id, file_id));;
+
+/* A table that tracks locationtags logos */
+
+create table locationtags_logos (
+       locationtag_id int8 not null references locationtags(id) unique,
+       file_id int8 references files(id) not null,
+       primary key (locationtag_id, file_id));;
+
 /* A table for group mailing list emails */
 
 create table group_mailing_list_messages (

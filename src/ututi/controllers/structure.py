@@ -7,6 +7,7 @@ from pylons.controllers.util import redirect_to
 from pylons.decorators import validate
 from pylons.i18n import _
 
+from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
 
 from ututi.model import meta, LocationTag
@@ -86,3 +87,7 @@ class StructureController(BaseController):
             redirect_to(controller='structure', action='index')
         c.structure = meta.Session.query(LocationTag).filter_by(parent = None).filter(LocationTag.id != id).all()
         return render('structure/edit.mako')
+
+    def logo(self, id):
+        tag = meta.Session.query(LocationTag).filter_by(id = id).one()
+        return serve_image(tag.logo)

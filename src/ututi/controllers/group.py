@@ -10,6 +10,7 @@ from pylons.i18n import _
 from formencode import Schema, validators, Invalid
 from sqlalchemy.orm.exc import NoResultFound
 
+from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
 from ututi.model.mailing import GroupMailingListMessage
 from ututi.model import meta, Group
@@ -135,3 +136,7 @@ class GroupController(BaseController):
              'link' : url_for(controller='group', action='members', id=c.group.id)}
             ]
         return render('group_members.mako')
+
+    @group_action
+    def logo(self, group):
+        return serve_image(group.logo)

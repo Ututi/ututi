@@ -49,15 +49,24 @@ def setup_orm(engine):
                          autoload_with=engine)
     orm.mapper(Email, emails_table)
 
+    global locationtags_logos_table
+    locationtags_logos_table = Table("locationtags_logos", meta.metadata,
+                                     autoload=True,
+                                     autoload_with=engine)
+
     global locationtags_table
     locationtags_table = Table("locationtags", meta.metadata,
                                Column('id', Integer, Sequence('locationtags_id_seq'), primary_key=True),
+                               useexisting=True,
                                autoload=True,
                                autoload_with=engine)
     orm.mapper(LocationTag,
                locationtags_table,
                properties = {'children' : relation(LocationTag,
-                                                   backref=backref('parent_item', remote_side=locationtags_table.c.id))})
+                                                   backref=backref('parent_item', remote_side=locationtags_table.c.id)),
+                             'logo': relation(File,
+                                              secondary=locationtags_logos_table,
+                                              uselist=False)})
     global files_table
     files_table = Table("files", meta.metadata,
                         Column('id', Integer, Sequence('files_id_seq'), primary_key=True),
@@ -83,11 +92,19 @@ def setup_orm(engine):
                              'user' : relation(User, backref='memberships'),
                              'role' : relation(GroupMembershipType)})
 
+    global group_logos_table
+    group_logos_table = Table("group_logos", meta.metadata,
+                              autoload=True,
+                              autoload_with=engine)
+
     global groups_table
     groups_table = Table("groups", meta.metadata,
                          autoload=True,
                          autoload_with=engine)
-    orm.mapper(Group, groups_table)
+    orm.mapper(Group, groups_table,
+               properties ={'logo': relation(File,
+                                             secondary=group_logos_table,
+                                             uselist=False)})
 
     global subjects_table
     subjects_table = Table("subjects", meta.metadata,
@@ -131,6 +148,7 @@ def teardown_db_defaults(engine, quiet=False):
     tx.commit()
     connection.close()
 
+
 def generate_salt():
     """Generate the salt used in passwords."""
     salt = ''
@@ -138,11 +156,13 @@ def generate_salt():
         salt += chr(randrange(256))
     return salt
 
+
 def generate_password(password):
     """Generate a hash for a given password."""
     salt = generate_salt()
     password = str(password)
     return b2a_base64(sha.new(password + salt).digest() + salt)[:-1]
+
 
 def validate_password(reference, password):
     """Verify a password given the original hash."""
@@ -153,6 +173,7 @@ def validate_password(reference, password):
     salt = ref[20:]
     compare = b2a_base64(sha.new(password + salt).digest() + salt)[:-1]
     return compare == reference
+
 
 users_table = None
 
@@ -211,6 +232,7 @@ class Group(object):
         self.year = year
         self.description = description
 
+
 group_members_table = None
 
 class GroupMember(object):
@@ -247,6 +269,7 @@ class Subject(object):
         self.text_id = text_id
 
         self.lecturer = lecturer
+
 
 class LocationTag(object):
     """Class representing the university and faculty tags."""
