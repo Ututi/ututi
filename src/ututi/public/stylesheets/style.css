@@ -388,7 +388,7 @@ span.btn input {
   margin: 0;
   color: #808080;
   font-weight: bold;
-  width: auto;
+  display: inline-block;
 }
 /* end buttons */
 
