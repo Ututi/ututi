@@ -1,0 +1,10 @@
+User profiles
+=============
+
+Each user will have a profile that is accessible via the url /profile/{id}.
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/profile/1')
+    >>> browser.printQuery('//h1/text()')
+    Adminas Adminovix
+
+

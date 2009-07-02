@@ -198,6 +198,13 @@ class User(object):
         except NoResultFound:
             return None
 
+    @classmethod
+    def get_byid(cls, id):
+        try:
+            return meta.Session.query(User).filter_by(id=id).one()
+        except NoResultFound:
+            return None
+
     def __init__(self, fullname, password, gen_password = True):
         self.fullname = fullname
         self.password = password
