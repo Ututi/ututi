@@ -41,11 +41,13 @@ def make_map():
 
     map.connect('/group/{id}', controller='group', action='group_home')
     map.connect('/group/{id}/{action}', controller='group')
+    map.connect('/group/{id}/logo/{width}/{height}', controller='group', action='logo')
     map.connect('/groups', controller='group', action='index')
     map.connect('/groups/{action}', controller='group')
 
     map.connect('/subjects', controller='subject', action='index')
     map.connect('/subject/{id}', controller='subject', action='subject_home')
+    map.connect('/subject/{id}/{action}', controller='subject', action='subject_home')
     map.connect('/subjects/{action}', controller='subject')
 
 
@@ -57,7 +59,7 @@ def make_map():
     map.connect('/got_mail', controller='receivemail', action='index')
     map.connect('/admin', controller='admin', action='index')
     map.connect('/structure', controller='structure', action='index')
-    map.connect('/structure/{id}/logo',
+    map.connect('/structure/{id}/logo/{width}/{height}',
                 controller='structure', action='logo')
     map.connect('/files', controller='files', action='index')
     map.connect('/confirm_emails', controller='user', action='confirm_emails')

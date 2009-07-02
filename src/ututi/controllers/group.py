@@ -138,5 +138,5 @@ class GroupController(BaseController):
         return render('group_members.mako')
 
     @group_action
-    def logo(self, group):
-        return serve_image(group.logo)
+    def logo(self, group, width=None, height=None):
+        return serve_image(group.logo, width=width, height=height)

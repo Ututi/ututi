@@ -88,6 +88,6 @@ class StructureController(BaseController):
         c.structure = meta.Session.query(LocationTag).filter_by(parent = None).filter(LocationTag.id != id).all()
         return render('structure/edit.mako')
 
-    def logo(self, id):
+    def logo(self, id, width=None, height=None):
         tag = meta.Session.query(LocationTag).filter_by(id = id).one()
-        return serve_image(tag.logo)
+        return serve_image(tag.logo, width, height)
