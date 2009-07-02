@@ -327,16 +327,6 @@ form .form-field {
   overflow: hidden; /* to contain floats */
 }
 
-form .form-field input {
-  float: right;
-  width: 150px;
-}
-
-form .form-field input.submit {
-  float: none;
-  width: auto;
-}
-
 form .form-field label {
   display: block;
   /* font */
