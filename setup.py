@@ -20,7 +20,8 @@ setup(
         "zope.testbrowser",
         "lxml",
         "nous.mailpost",
-        "python_magic"
+        "python_magic",
+        "PILwoTk"
     ],
     package_dir={'': 'src'},
     packages=find_packages('src'),
