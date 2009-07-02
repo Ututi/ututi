@@ -17,10 +17,16 @@ def serve_image(file, width=None, height=None):
             height = int(height)
 
             img = Image.open(file.filepath())
-            if img.size[0] > img.size[1]:
-                img = resize_image(img, width=width)
+            if width < height:
+                if img.size[0] >= img.size[1]:
+                    img = resize_image(img, width=width)
+                else:
+                    img = resize_image(img, height=height)
             else:
-                img = resize_image(img, height=height)
+                if img.size[0] > img.size[1]:
+                    img = resize_image(img, height=height)
+                else:
+                    img = resize_image(img, width=width)
         elif width is not None:
             width = int(width)
 
