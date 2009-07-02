@@ -62,7 +62,7 @@ def make_map():
     map.connect('/files', controller='files', action='index')
     map.connect('/confirm_emails', controller='user', action='confirm_emails')
     map.connect('/confirm_user_email/{key}', controller='user', action='confirm_user_email')
-    map.connect('/profile/{id}/logo',
+    map.connect('/profile/{id}/logo/{width}/{height}',
                 controller='profile',
                 action='logo')
     map.connect('/{controller}/{action}')
