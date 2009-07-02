@@ -53,7 +53,7 @@ ${_('student information online')}
     <input class="line" type="password" size="20" name="password" id="password" />
   </div>
   <div class="form-field overlay">
-    <input class="submit small" type="submit" name="join" value="Login" />
+    <span class="btn"><input class="submit small" type="submit" name="join" value="Login" /></span>
     <a class="small-link small" href="#">Forgotten password?</a>
   </div>
 </form>
