@@ -57,21 +57,24 @@ def make_map():
                 controller='profile',
                 action='logo')
 
+    #user's information
+    map.connect('/user', controller='user', action='index')
+    map.connect('/confirm_emails', controller='user', action='confirm_emails')
+    map.connect('/confirm_user_email/{key}', controller='user', action='confirm_user_email')
 
     # CUSTOM ROUTES HERE
     map.connect('/', controller='home')
     map.connect('/home', controller='home', action='home')
     map.connect('/register', controller='home', action='register')
-    map.connect('/profile', controller='user')
+
     map.connect('/got_mail', controller='receivemail', action='index')
     map.connect('/admin', controller='admin', action='index')
     map.connect('/structure', controller='structure', action='index')
     map.connect('/structure/{id}/logo/{width}/{height}',
                 controller='structure', action='logo')
     map.connect('/files', controller='files', action='index')
-    map.connect('/confirm_emails', controller='user', action='confirm_emails')
-    map.connect('/confirm_user_email/{key}', controller='user', action='confirm_user_email')
 
+    map.connect('/{controller}', action='index')
     map.connect('/{controller}/{action}')
     map.connect('/{controller}/{action}/{id}')
 
