@@ -2,6 +2,7 @@
 """
 import sys
 import re
+import random
 import webbrowser
 import tempfile
 import shutil
@@ -84,12 +85,14 @@ class PylonsLayer(object):
         except OSError:
             pass
         os.makedirs(config['files_path'])
-
+        # Keep random stable in tests
+        random.seed(123)
 
     @classmethod
     def testTearDown(self):
         url._pop_object()
         pylons.translator._pop_object()
+        meta.Session.close()
         # XXX Tear down database here
         teardown_db_defaults(meta.engine)
         meta.Session.remove()

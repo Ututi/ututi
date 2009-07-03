@@ -151,9 +151,9 @@ clean:
 	rm -rf bin/ parts/ develop-eggs/ src/ututi.egg-info/ python/ tags TAGS ID .installed.cfg
 
 .PHONY: coverage
-coverage: build
+coverage: bin/test
 	rm -rf coverage
-	bin/test -u --coverage=coverage
+	bin/test --all --coverage=coverage
 	mv parts/test/coverage .
 	@cd coverage && ls | grep -v tests | xargs grep -c '^>>>>>>' | grep -v ':0$$'
 
@@ -181,5 +181,6 @@ ubuntu-environment:
 	} else { \
 	 apt-get build-dep python-psycopg2; \
 	 apt-get install build-essential python-all python-all-dev postgresql; \
+	 apt-get install enscript; \
 	 echo "Installation Complete: Next... Run 'make'."; \
 	} fi
