@@ -12,7 +12,8 @@ from nous.mailpost import processEmailAndPost
 import ututi
 
 
-def collect_ftests(package=None, level=None, layer=None, filenames=None):
+def collect_ftests(package=None, level=None, layer=None, filenames=None,
+                   exclude=None):
     """Collect all functional doctest files in a given package.
 
     If `package` is None, looks up the call stack for the right module.
@@ -24,6 +25,9 @@ def collect_ftests(package=None, level=None, layer=None, filenames=None):
     if filenames is None:
         filenames = [fn for fn in os.listdir(testdir)
                      if fn.endswith('.txt') and not fn.startswith('.')]
+    if exclude is not None:
+        for fn in exclude:
+            filenames.remove(fn)
     optionflags = (doctest.ELLIPSIS | doctest.REPORT_NDIFF |
                    doctest.NORMALIZE_WHITESPACE |
                    doctest.REPORT_ONLY_FIRST_FAILURE)
