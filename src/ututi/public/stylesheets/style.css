@@ -397,20 +397,115 @@ a.small-link:hover {
 
 /* begin breadcrumbs */
 #breadcrumbs {
-  display: inline;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
   position: absolute;
-  top: 65px;
+  top: 66px;
   left: 99px;
-  vertical-align: middle;
 }
 
-#breadcrumbs img {
-  padding: 0 3px;
+  /* horizontal list */
+#breadcrumbs li {
+  float: left;
+  list-style-type: none;
+  list-style-image: none;
+  padding: 2px 0;
 }
 
-.breadcrumb {
-  font-size: 2em;
+  /* items separated with bullets */
+#breadcrumbs li a.breadcrumb {
+  padding-left: 18px;
+  margin-left: 3px;
+  background: transparent url("../images/bullet_orange.png") left center no-repeat;
+}
+
+#breadcrumbs li ul.breadcrumb_dropdown li.active {
+  list-style-image: url("../images/bullet_orange.png");
+  list-style-position: outside;
+  padding: 2px 0;
+}
+
+#breadcrumbs li.no-bullet a.breadcrumb {
+  padding-left: 0;
+  margin-left: 0;
+  background: none;
+}
+
+#breadcrumbs li.no-bullet ul.breadcrumb_dropdown li.active {
+  list-style-image: none;
+}
+
+#breadcrumbs li.no-bullet ul.breadcrumb_dropdown {
+  margin-left: 0;
+}
+
+ul.breadcrumb_dropdown {
+  margin-top: -4px;
+  margin-left: 28px;
+}
+
+  /* an arrow indicating the list is expanding */
+#breadcrumbs li ul.breadcrumb_dropdown li.active span {
+  padding-right: 25px;
+  margin-right: 5px;
+  background: url("../images/icon_expand.png") right center no-repeat;
+}
+
+  /* border for the expanded items */
+ul.breadcrumb_dropdown.expanded {
+  border: 2px solid #adaca4;
+  margin: -2px inherit;
+}
+
+ul.expanded li.active {
+  padding-top: 2px;
+  border-bottom: 2px solid #adaca4;
+}
+
+  /* vertical list */
+ul.breadcrumb_dropdown li {
+  float: none;
+}
+
+  /* drop down items are hidden at first */
+ul.breadcrumb_dropdown {
+  padding: 2px;
+}
+
+ul.breadcrumb_dropdown li.alternative {
+  display: none;
+}
+  /* and shown only when the list is expanded */
+ul.breadcrumb_dropdown.expanded li.alternative {
+  display: list-item;
+}
+
+ul.breadcrumb_dropdown.expanded {
+  padding: 0;
+}
+
+#breadcrumbs li ul {
+   background: white;
+}
+
+#breadcrumbs li li {
+  float: none;
+  padding: 0;
+}
+
+#breadcrumbs li li.alternative a {
+  color: black;
+  font-size: 1.4em;
+  padding-left: 0.2em;
+}
+
+.breadcrumb,
+.breadcrumb_dropdown li.active span {
+  font-size: 1.7em;
   color: #333;
+  cursor: pointer;
 }
 /* end breadcrumbs */
 

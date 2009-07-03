@@ -9,7 +9,7 @@ ${_('student information online')}
 %if c.user:
   <div class="personal-logo">
     % if c.user.logo is not None:
-       <img src="${h.url_for(controller='profile', action='logo', id=c.user.id, width=45, height=60)}" />
+       <img src="${h.url_for(controller='profile', action='logo', id=c.user.id, width=45, height=60)}" alt="logo" />
     % else:
        <div class="XXX" style="height: 60px; width: 45px;"> </div>
     % endif
@@ -79,11 +79,52 @@ ${_('student information online')}
 </div>
 </%def>
 
+<%def name="breadcrumbs(breadcrumbs)">
+<ul id="breadcrumbs">
+<%
+   first_bc = True
+%>
+%for breadcrumb in breadcrumbs:
+  %if not first_bc:
+    <li>
+  %else:
+    <li class="no-bullet">
+    <%
+       first_bc = False
+    %>
+  %endif
+  %if isinstance(breadcrumb, dict):
+
+    <a class="breadcrumb" title="${breadcrumb.get('title')}" href="${breadcrumb.get('link')}">
+      ${breadcrumb.get('title') | h.ellipsis}
+    </a>
+  %else:
+    <%
+       selected = h.selected_item(breadcrumb)
+    %>
+
+    <ul class="breadcrumb_dropdown">
+      <li class="active">
+        <span>
+          ${selected.get('title') | h.ellipsis}
+        </span>
+      </li>
+      %for item in breadcrumb:
+        <li class="alternative"><a class="subbreadcrumb" title="${item.get('title')}" href="${item.get('link')}">${item.get('title') | h.ellipsis}</a></li>
+      %endfor
+    </ul>
+  %endif
+  </li>
+%endfor
+</ul>
+</%def>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
     ${h.stylesheet_link('/stylesheets/style.css')|n}
+    ${h.javascript_link('/javascripts/expand.js')|n}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     ${self.head_tags()}
     <title>
@@ -110,24 +151,7 @@ ${_('student information online')}
         <a href="/" title="home" id="ulogo">
           ${h.image('/images/logo_small.png', alt='logo')|n}
         </a>
-        <div id="breadcrumbs">
-          <%
-             first_bc = True
-          %>
-          %for breadcrumb in c.breadcrumbs:
-          %if not first_bc:
-            ${h.image('/images/bullet_orange.png', alt='bullet')|n}
-          %else:
-            <%
-               first_bc = False
-            %>
-          %endif
-          <a class="breadcrumb" title="${breadcrumb.get('title')}" href="${breadcrumb.get('link')}">
-             ${breadcrumb.get('title') | h.ellipsis}
-          </a>
-
-          %endfor
-        </div>
+        ${breadcrumbs(c.breadcrumbs)}
         %else:
         <a href="/" title="home" id="ulogo">
           ${h.image('/images/logo.png', alt='logo')|n}

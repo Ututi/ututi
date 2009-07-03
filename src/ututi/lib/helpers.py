@@ -18,3 +18,8 @@ def ellipsis(text, max = 20):
         return text[0:max-3] + '...'
     else:
         return text
+
+def selected_item(list):
+    for item in list:
+        if item.get('selected', False):
+            return item

@@ -69,6 +69,20 @@ class GroupController(BaseController):
              'link' : url_for(controller = 'group', action = 'index')}
             ]
 
+    def _actions(self, selected):
+        """
+        A method to generate the list of all possible group actions. The selected action is indicated
+        by its name.
+        """
+        return [
+        {'title' : _('Home'),
+         'link' : url_for(controller = 'group', action = 'group_home', id=c.group.id),
+         'selected' : selected == 'group_home'},
+        {'title' : _('Forum'),
+         'link' : url_for(controller = 'group', action = 'forum', id=c.group.id),
+         'selected' : selected == 'forum'}
+        ]
+
     def index(self):
         c.groups = meta.Session.query(Group).all()
         return render('groups.mako')
@@ -76,10 +90,8 @@ class GroupController(BaseController):
     @group_action
     def group_home(self, group):
         c.group = group
-        c.breadcrumbs = [
-            {'title' : c.group.title,
-             'link' : url_for(controller='group', action='group_home', id=c.group.id)}
-            ]
+        c.breadcrumbs.append(self._actions('group_home'))
+
         return render('group_home.mako')
 
     def _top_level_messages(self, group):
@@ -96,12 +108,8 @@ class GroupController(BaseController):
     @group_action
     def forum(self, group):
         c.group = group
-        c.breadcrumbs = [
-            {'title' : c.group.title,
-             'link' : url_for(controller='group', action='group_home', id=c.group.id)},
-            {'title' : _('Forum'),
-             'link' : url_for(controller='group', action='forum', id=c.group.id)}
-            ]
+        c.breadcrumbs.append(self._actions('forum'))
+
         c.messages = self._top_level_messages(group)
         return render('group_forum.mako')
 
