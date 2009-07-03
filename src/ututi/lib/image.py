@@ -8,8 +8,7 @@ from pylons.controllers.util import abort
 
 def serve_image(file, width=None, height=None):
     if file is not None:
-        response.headers['Content-Type'] = file.mimetype
-        response.headers['Content-Disposition'] = 'attachment; filename=%s' % file.filename
+        response.headers['Content-Disposition'] = 'inline'
 
 
         if width is not None and height is not None:
@@ -39,12 +38,14 @@ def serve_image(file, width=None, height=None):
             img = resize_image(img, height=height)
         else:
             source = open(file.filepath(), 'r')
+            response.headers['Content-Type'] = file.type
             response.headers['Content-Length'] = file.filesize
             return source.read()
 
         buffer = StringIO.StringIO()
         img.save(buffer, "PNG")
         response.headers['Content-Length'] = buffer.len
+        response.headers['Content-Type'] = 'image/png'
         return buffer.getvalue()
 
     else:
