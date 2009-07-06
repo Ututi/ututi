@@ -92,7 +92,7 @@ class GroupController(BaseController):
         c.group = group
         c.breadcrumbs.append(self._actions('group_home'))
 
-        return render('group_home.mako')
+        return render('group/home.mako')
 
     def _top_level_messages(self, group):
         messages = []
@@ -111,12 +111,12 @@ class GroupController(BaseController):
         c.breadcrumbs.append(self._actions('forum'))
 
         c.messages = self._top_level_messages(group)
-        return render('group_forum.mako')
+        return render('group/forum.mako')
 
     def add(self):
         c.current_year = date.today().year
         c.years = range(c.current_year - 10, c.current_year + 5)
-        return render('group_add.mako')
+        return render('group/add.mako')
 
     @validate(schema=NewGroupForm, form='add')
     def new_group(self):
@@ -143,7 +143,7 @@ class GroupController(BaseController):
             {'title' : _('Forum'),
              'link' : url_for(controller='group', action='members', id=c.group.id)}
             ]
-        return render('group_members.mako')
+        return render('group/members.mako')
 
     @group_action
     def logo(self, group, width=None, height=None):
