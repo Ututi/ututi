@@ -50,8 +50,10 @@ def resize_image(image, width=None, height=None):
             height = None
 
     if width is not None:
+        width = float(width)
         height = int(image.size[1] * (width / float(image.size[0])))
     elif height is not None:
+        height = float(height)
         width = int(image.size[0] * (height / float(image.size[1])))
 
     return image.resize((int(width), int(height)), PIL.Image.ANTIALIAS)
