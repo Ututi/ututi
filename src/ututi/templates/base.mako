@@ -168,6 +168,7 @@ ${_('student information online')}
 
         <div class="inside" id="page-content">
           ${self.body()}
+          <br style="clear: both;"/>
         </div>
 
       </div>
