@@ -42,6 +42,7 @@ def make_map():
     map.connect('/group/{id}', controller='group', action='group_home')
     map.connect('/group/{id}/{action}', controller='group')
     map.connect('/group/{id}/logo/{width}/{height}', controller='group', action='logo')
+    map.connect('/group/{id}/logo/{width}', controller='group', action='logo')
     map.connect('/groups', controller='group', action='index')
     map.connect('/groups/{action}', controller='group')
 
@@ -54,6 +55,9 @@ def make_map():
     map.connect('/profile/{id}', controller='profile', action='index')
     map.connect('/profile/{id}/{action}', controller='profile')
     map.connect('/profile/{id}/logo/{width}/{height}',
+                controller='profile',
+                action='logo')
+    map.connect('/profile/{id}/logo/{width}',
                 controller='profile',
                 action='logo')
 
