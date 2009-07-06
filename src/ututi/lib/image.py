@@ -38,7 +38,7 @@ def serve_image(file, width=None, height=None):
             img = resize_image(img, height=height)
         else:
             source = open(file.filepath(), 'r')
-            response.headers['Content-Type'] = file.type
+            response.headers['Content-Type'] = file.mimetype
             response.headers['Content-Length'] = file.filesize
             return source.read()
 
