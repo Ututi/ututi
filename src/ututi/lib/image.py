@@ -11,31 +11,11 @@ def serve_image(file, width=None, height=None):
         response.headers['Content-Disposition'] = 'inline'
 
 
-        if width is not None and height is not None:
-            width = int(width)
-            height = int(height)
-
+        if width is not None or height is not None:
             img = Image.open(file.filepath())
-            if width < height:
-                if img.size[0] >= img.size[1]:
-                    img = resize_image(img, width=width)
-                else:
-                    img = resize_image(img, height=height)
-            else:
-                if img.size[0] > img.size[1]:
-                    img = resize_image(img, height=height)
-                else:
-                    img = resize_image(img, width=width)
-        elif width is not None:
-            width = int(width)
 
-            img = Image.open(file.filepath())
-            img = resize_image(img, width=width)
-        elif height is not None:
-            height = int(height)
+            img = resize_image(img, width=width, height=height)
 
-            img = Image.open(file.filepath())
-            img = resize_image(img, height=height)
         else:
             source = open(file.filepath(), 'r')
             response.headers['Content-Type'] = file.mimetype
@@ -52,9 +32,26 @@ def serve_image(file, width=None, height=None):
         abort(404)
 
 def resize_image(image, width=None, height=None):
+    """
+    This function resizes a given PIL.Image to fit in a bounding box if
+    both width and height are specified.
+    If not, the image s resized according to one constraint.
+    """
+    if width is not None and height is not None:
+        width = float(width)
+        height = float(height)
+        limit_x = width / height
+
+        original_x = float(image.size[0]) / image.size[1]
+
+        if limit_x > original_x:
+            width = None
+        elif limit_x <= original_x:
+            height = None
+
     if width is not None:
         height = int(image.size[1] * (width / float(image.size[0])))
     elif height is not None:
         width = int(image.size[0] * (height / float(image.size[1])))
 
-    return image.resize((width, height), PIL.Image.ANTIALIAS)
+    return image.resize((int(width), int(height)), PIL.Image.ANTIALIAS)
