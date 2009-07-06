@@ -2,7 +2,7 @@ import re
 import logging
 from datetime import date
 
-from pylons import c, request
+from pylons import c, request, config
 from pylons.controllers.util import redirect_to, abort
 from pylons.decorators import validate
 from pylons.i18n import _
@@ -68,6 +68,7 @@ class GroupController(BaseController):
             {'title' : _('Groups'),
              'link' : url_for(controller = 'group', action = 'index')}
             ]
+        c.mailing_list_host = config.get('mailing_list_host', '')
 
     def _actions(self, selected):
         """
