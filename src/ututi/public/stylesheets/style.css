@@ -472,7 +472,7 @@ ul.breadcrumb_dropdown {
 
   /* an arrow indicating the list is expanding */
 #breadcrumbs li ul.breadcrumb_dropdown li.active span {
-  padding-right: 25px;
+  padding: 0 25px 0 2px;
   margin-right: 5px;
   background: url("../images/icon_expand.png") right center no-repeat;
 }
@@ -484,8 +484,18 @@ ul.breadcrumb_dropdown.expanded {
 }
 
 ul.expanded li.active {
-  padding-top: 2px;
+  padding: 4px;
   border-bottom: 2px solid #adaca4;
+}
+
+ul.breadcrumb_dropdown li.active:hover span {
+  padding-left: 0 !important;
+  border: 2px solid #adaca4;
+}
+
+ul.expanded li.active:hover span {
+  border: none;
+  padding-left: 2px !important;
 }
 
   /* vertical list */
