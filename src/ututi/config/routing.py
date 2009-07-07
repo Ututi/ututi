@@ -52,17 +52,18 @@ def make_map():
     map.connect('/subjects/{action}', controller='subject')
 
     #user profiles
-    map.connect('/profile/{id}', controller='profile', action='index')
-    map.connect('/profile/{id}/{action}', controller='profile')
-    map.connect('/profile/{id}/logo/{width}/{height}',
+    map.connect('/user/{id}', controller='profile', action='index')
+    map.connect('/user/{id}/{action}', controller='profile')
+    map.connect('/user/{id}/logo/{width}/{height}',
                 controller='profile',
                 action='logo')
-    map.connect('/profile/{id}/logo/{width}',
+    map.connect('/user/{id}/logo/{width}',
                 controller='profile',
                 action='logo')
 
     #user's information
-    map.connect('/user', controller='user', action='index')
+    map.connect('/profile', controller='user', action='index')
+    map.connect('/profile/{action}', controller='user', action='index')
     map.connect('/confirm_emails', controller='user', action='confirm_emails')
     map.connect('/confirm_user_email/{key}', controller='user', action='confirm_user_email')
 
