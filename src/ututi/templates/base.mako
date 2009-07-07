@@ -54,7 +54,7 @@ ${_('student information online')}
   </div>
   <div class="form-field overlay">
     <span class="btn"><input class="submit small" type="submit" name="join" value="Login" /></span>
-    <a class="small-link small" href="#">Forgotten password?</a>
+    <a class="small-link small XXX" href="#">Forgotten password?</a>
   </div>
 </form>
 <script lang="javascript">
