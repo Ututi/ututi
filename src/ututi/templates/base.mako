@@ -66,8 +66,8 @@ ${_('student information online')}
 <%def name="portlets()">
 </%def>
 
-<%def name="portlet(id)">
-<div class="sidebar-block" id="${id}">
+<%def name="portlet(id, portlet_class='')">
+<div class="sidebar-block ${portlet_class}" id="${id}">
   <div class="rounded-header">
     <div class="rounded-right">
       <h3 id="${id + '_header'}">${caller.header()}</h3>
