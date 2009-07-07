@@ -572,4 +572,10 @@ ul.breadcrumb_dropdown.expanded {
   color: #ff7800;
 }
 
+#group_members_portlet .user-link {
+  width: 70px;
+  text-align: center;
+  float: left;
+}
+
 /* end group blocks */

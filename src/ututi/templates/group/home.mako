@@ -51,6 +51,30 @@
     </span>
     <br style="clear: right;" />
   </%self:portlet>
+
+  <%self:portlet id="group_members_portlet" portlet_class="inactive XXX">
+    <%def name="header()">
+      ${_('Recently seen')}
+    </%def>
+    %for member in c.group.members[:3]:
+    <div class="user-link">
+      <a href="${h.url_for(controller='profile', action='index', id=member.user.id)}" title="${member.user.fullname}">
+        %if member.user.logo is not None:
+          <img src="${h.url_for(controller='profile', action='logo', id=member.user.id, width=40)}" alt="${member.user.fullname}"/>
+        %else:
+          ${h.image('/images/user_logo_small.png', alt=member.user.fullname)|n}
+        %endif
+          <span class="small">${member.user.fullname}</span>
+      </a>
+
+    </div>
+    %endfor
+    <br style="clear: both;" />
+    <span class="portlet-link">
+      <a class="small" href="${h.url_for(controller='group', action='changes', id=c.group.id)}" title="${_('More')}">${_('More') | h.ellipsis}</a>
+    </span>
+    <br style="clear: both;" />
+  </%self:portlet>
 </div>
 </%def>
 
