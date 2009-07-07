@@ -91,6 +91,10 @@ class GroupController(BaseController):
     @group_action
     def group_home(self, group):
         c.group = group
+        c.breadcrumbs = [
+            {'title' : c.group.title,
+             'link' : url_for(controller = 'group', action = 'group_home', id = c.group.id)}
+            ]
         c.breadcrumbs.append(self._actions('group_home'))
 
         return render('group/home.mako')
