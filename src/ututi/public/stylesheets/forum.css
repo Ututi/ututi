@@ -1,0 +1,41 @@
+table#forum-thread-list {
+  border: 1px solid #cac5c5;
+  border-collapse: collapse;
+}
+
+table#forum-thread-list th,
+table#forum-thread-list td {
+  border: 1px solid #cac5c5;
+}
+
+table#forum-thread-list th {
+  text-align: left;
+  color: #808080;
+  padding: 2px 5px;
+}
+
+table#forum-thread-list td.subject {
+  width: 70%;
+  padding-left: 35px;
+  background: transparent url("../images/icon_mail.png") 5px center no-repeat;
+}
+
+table#forum-thread-list td.count {
+  width: 10%;
+  text-align: center;
+}
+
+table#forum-thread-list td.author {
+  width: 20%;
+  padding-left: 5px;
+}
+
+table#forum-thread-list td.author .profile-link {
+  font-size: 0.8em;
+  color: #ff7800;
+}
+
+table#forum-thread-list td.author .date {
+  color: #8c8c8c;
+  font-size: 0.8em;
+}
