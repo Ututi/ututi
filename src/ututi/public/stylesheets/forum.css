@@ -1,6 +1,7 @@
 table#forum-thread-list {
   border: 1px solid #cac5c5;
   border-collapse: collapse;
+  width: 100%;
 }
 
 table#forum-thread-list th,
