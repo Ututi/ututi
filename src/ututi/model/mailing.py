@@ -1,4 +1,5 @@
 import mimetools
+import email.Header
 from sqlalchemy.sql.expression import and_
 from sqlalchemy.schema import Table
 from sqlalchemy.orm.exc import NoResultFound
@@ -75,7 +76,7 @@ class GroupMailingListMessage(object):
 
     @property
     def body(self):
-        headers_dict, body = splitMail(self.original.encode("utf-8"))
+        headers_dict, body = splitMail(self.original)
         return body
 
     def getAuthor(self):
@@ -107,7 +108,13 @@ class GroupMailingListMessage(object):
     def fromMessageText(cls, message_text):
         headers_dict, body = splitMail(message_text.encode("utf-8"))
         message_id = headers_dict['message-id']
-        subject = headers_dict['subject']
+        subject_parts = email.Header.decode_header(headers_dict['subject'])
+        subject = ""
+        for part in subject_parts:
+            if part[1]:
+                subject += part[0].decode(part[1])
+            else:
+                subject += part[0]
         group_id = headers_dict["to"].split("@")[0]
         if cls.get(message_id, group_id):
             raise MessageAlreadyExists(message_id, group_id)

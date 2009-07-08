@@ -73,11 +73,14 @@ properly in the forum page:
         <th>Last post</th>
       </tr>
       <tr>
-        <td>Hello</td>
-        <td>3</td>
-        <td>
-          <a class="profile-link XXX" href="/user/index/1">Adminas Adminovix</a>
-          <span class="date">...</span>
+        <td class="subject">
+          <a href="/group/moderators/forum/1">Hello</a>
+        </td>
+        <td class="count">3</td>
+        <td class="author">
+          <a class="profile-link" href="/user/1">Adminas Adminovix</a>
+          <br />
+          <span class="date">2009.07.08 16:42</span>
         </td>
       </tr>
     </table>

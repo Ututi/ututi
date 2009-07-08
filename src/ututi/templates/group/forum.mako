@@ -16,7 +16,7 @@
 </tr>
 % for message in c.messages:
 <tr>
-  <td class="subject">${message['subject']}</td>
+  <td class="subject"><a href="${h.url_for(controller='group', action='forum_thread', id=c.group.id, thread_id=message['thread_id'])}">${message['subject']}</a></td>
   <td class="count">${message['reply_count']}</td>
   <td class="author">
     <a class="profile-link" href="${h.url_for(controller='profile', id=message['last_reply_author_id'])}">${message['last_reply_author_title']}</a>

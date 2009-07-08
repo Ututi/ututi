@@ -17,6 +17,11 @@ Mailing list import
     >>> from nous.mailpost import processEmailAndPost
     >>> from pylons import config
     >>> emails = resource_string("ututi.tests.functional.import", "export_group_forums.txt").split("=" * 55 + '\n')
+    >>> from nous.mailpost.MailBoxerTools import splitMail
+    >>> import rfc822
+    >>> emails = filter(lambda message: message, emails)
+    >>> emails.sort(key=lambda message: rfc822.parsedate(splitMail(message)[0]['date']))
+
     >>> for n, email in enumerate(emails):
     ...     if email:
     ...         try:
@@ -33,6 +38,10 @@ Mailing list import
     Email 177 was ignored, because HTTP Error 404: Not Found
     Email 180 was ignored, because HTTP Error 404: Not Found
     Email 181 was ignored, because HTTP Error 404: Not Found
+
+    >>> browser.open('http://localhost/group/archpio')
+    >>> browser.getLink('Forum').click()
+    >>> browser.getLink('Pilot Post').click()
 
     >>> from ututi.lib.mailer import mail_queue
     >>> len(mail_queue)

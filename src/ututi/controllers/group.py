@@ -83,6 +83,20 @@ def group_action(method):
     return _group_action
 
 
+def group_forum_action(method):
+    def _group_action(self, id, thread_id):
+        group = Group.get(id)
+        if group is None:
+            abort(404)
+        thread = meta.Session.query(GroupMailingListMessage).filter_by(id=thread_id).first()
+        if (thread is None or
+            thread.thread != thread or
+            thread.group != group):
+            abort(404)
+        return method(self, group, thread)
+    return _group_action
+
+
 class GroupController(BaseController):
     """Controller for group actions."""
 
@@ -128,7 +142,8 @@ class GroupController(BaseController):
     def _top_level_messages(self, group):
         messages = []
         for message in meta.Session.query(GroupMailingListMessage).filter_by(group_id=group.id, reply_to=None).all():
-            msg = {'last_reply_author_id': message.posts[-1].author.id,
+            msg = {'thread_id': message.id,
+                   'last_reply_author_id': message.posts[-1].author.id,
                    'last_reply_author_title': message.posts[-1].author.fullname,
                    'last_reply_date': message.posts[-1].created,
                    'reply_count': len(message.posts) - 1,
@@ -147,6 +162,18 @@ class GroupController(BaseController):
 
         c.messages = self._top_level_messages(group)
         return render('group/forum.mako')
+
+    @group_forum_action
+    def forum_thread(self, group, thread):
+        c.group = group
+        c.breadcrumbs = [
+            {'title' : c.group.title,
+             'link' : url_for(controller = 'group', action = 'group_home', id = c.group.id)}
+            ]
+        c.breadcrumbs.append(self._actions('forum'))
+
+        c.messages = thread.posts
+        return render('group/thread.mako')
 
     def add(self):
         c.current_year = date.today().year
