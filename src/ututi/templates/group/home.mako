@@ -71,7 +71,7 @@
     %endfor
     <br style="clear: both;" />
     <span class="portlet-link">
-      <a class="small" href="${h.url_for(controller='group', action='changes', id=c.group.id)}" title="${_('More')}">${_('More') | h.ellipsis}</a>
+      <a class="small" href="${h.url_for(controller='group', action='members', id=c.group.id)}" title="${_('More')}">${_('More') | h.ellipsis}</a>
     </span>
     <br style="clear: both;" />
   </%self:portlet>

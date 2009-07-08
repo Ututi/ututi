@@ -32,6 +32,10 @@ ${_('New group')}
       %endfor
     </select>
   </div>
+  <div class="form-field">
+    <label for="logo_upload">${_('Group logo')}</label>
+    <input type="file" name="logo_upload" id="logo_upload" class="line"/>
+  </div>
   <div>
     <span class="btn">
       <input type="submit" value="${_('Save')}"/>

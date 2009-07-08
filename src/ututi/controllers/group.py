@@ -13,7 +13,7 @@ from sqlalchemy.orm.exc import NoResultFound
 from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
 from ututi.model.mailing import GroupMailingListMessage
-from ututi.model import meta, Group
+from ututi.model import meta, Group, File
 from routes import url_for
 
 log = logging.getLogger(__name__)
@@ -50,6 +50,10 @@ class NewGroupForm(Schema):
 
     title = validators.String(not_empty = True)
 
+class EditGroupForm(Schema):
+    """A schema for validating group edits."""
+    allow_extra_fields = True
+    title = validators.String(not_empty = True)
 
 def group_action(method):
     def _group_action(self, id):
@@ -113,6 +117,10 @@ class GroupController(BaseController):
     @group_action
     def forum(self, group):
         c.group = group
+        c.breadcrumbs = [
+            {'title' : c.group.title,
+             'link' : url_for(controller = 'group', action = 'group_home', id = c.group.id)}
+            ]
         c.breadcrumbs.append(self._actions('forum'))
 
         c.messages = self._top_level_messages(group)
@@ -125,7 +133,7 @@ class GroupController(BaseController):
 
     @validate(schema=NewGroupForm, form='add')
     def new_group(self):
-        fields = ('id', 'title', 'description', 'year')
+        fields = ('id', 'title', 'description', 'year', 'logo_upload')
         values = {}
         for field in fields:
              values[field] = request.POST.get(field, None)
@@ -135,6 +143,14 @@ class GroupController(BaseController):
                       description = values['description'],
                       year = date(int(values['year']), 1, 1))
         meta.Session.add(group)
+
+        if values['logo_upload'] is not None and values['logo_upload'] != '':
+            logo = values['logo_upload']
+            f = File(logo.filename, 'Logo for group %s' % group.title, mimetype=logo.type)
+            f.store(logo.file)
+            meta.Session.add(f)
+            group.logo = f
+
         meta.Session.commit()
 
         redirect_to(controller='group', action='group_home', id=values['id'])
@@ -149,6 +165,49 @@ class GroupController(BaseController):
              'link' : url_for(controller='group', action='members', id=c.group.id)}
             ]
         return render('group/members.mako')
+
+    @group_action
+    def edit(self, group):
+        c.group = group
+        c.breadcrumbs = [
+            {'title' : c.group.title,
+             'link' : url_for(controller = 'group', action = 'group_home', id = group.id)}
+            ]
+        c.breadcrumbs.append(self._actions('group_home'))
+
+        c.current_year = date.today().year
+        c.years = range(c.current_year - 10, c.current_year + 5)
+        return render('group/edit.mako')
+
+    @validate(EditGroupForm, form='edit')
+    @group_action
+    def update(self, group):
+        fields = ('title', 'year', 'description', 'logo_upload', 'logo_delete')
+        values = {}
+
+        for field in fields:
+            values[field] = request.POST.get(field, None)
+
+        group.title = values['title']
+        group.year = date(int(values['year']), 1, 1)
+        group.description = values['description']
+
+        if values['logo_delete'] == 'delete' and group.logo is not None:
+            meta.Session.delete(group.logo)
+            group.logo = None
+
+        if values['logo_upload'] is not None and values['logo_upload'] != '':
+            logo = values['logo_upload']
+            f = File(logo.filename, 'Logo for group %s' % group.title, mimetype=logo.type)
+            f.store(logo.file)
+            meta.Session.add(f)
+            if group.logo is not None:
+                meta.Session.delete(group.logo)
+            group.logo = f
+
+        meta.Session.commit()
+        redirect_to(controller='group', action='group_home', id=group.id)
+
 
     def logo(self, id, width=None, height=None):
         group = Group.get(id)
