@@ -32,7 +32,7 @@
     <%def name="header()">
       ${_('Latest changes')}
     </%def>
-    <table class="group-changes" class="changes-table">
+    <table class="group-changes">
       <tr>
         <td class="change-category">${_('New files')}</td>
         <td class="change-count">2</td>
