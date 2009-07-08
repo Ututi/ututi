@@ -1,6 +1,7 @@
 import re
 import logging
 from datetime import date
+from os.path import splitext
 
 from pylons import c, request, config
 from pylons.controllers.util import redirect_to, abort
@@ -41,19 +42,37 @@ class GroupIdValidator(validators.FancyValidator):
             if not usernameRE.search(value):
                 raise Invalid(self.message('badId', state), value, state)
 
+class FileUploadTypeValidator(validators.FancyValidator):
+    """ A validator to check uploaded file types."""
+    messages = {
+        'bad_type' : _(u"Bad file type, only files of the types '%(allowed)s' are supported.")
+        }
+    __unpackargs__ = ('allowed_types')
+
+    def _to_python(self, value, state):
+        if hasattr(value, 'filename'):
+            return splitext(value.filename)[1].lower()
+        return None
+
+    def validate_python(self, value, state):
+        if value is not None:
+            if value not in self.allowed_types:
+                raise Invalid(self.message('bad_type', state, allowed=', '.join(self.allowed_types)), value, state)
 
 class NewGroupForm(Schema):
     """A schema for validating new group forms."""
     allow_extra_fields = True
 
     id = GroupIdValidator()
-
+    logo_upload = validators.FieldStorageUploadConverter(not_empty = False)
     title = validators.String(not_empty = True)
 
 class EditGroupForm(Schema):
     """A schema for validating group edits."""
     allow_extra_fields = True
     title = validators.String(not_empty = True)
+    logo_upload = FileUploadTypeValidator(allowed_types = ('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
+
 
 def group_action(method):
     def _group_action(self, id):
