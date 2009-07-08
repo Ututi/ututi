@@ -1,7 +1,7 @@
 #
 import os
 import unittest
-from pkg_resources import resource_string
+from pkg_resources import resource_string, resource_stream
 
 from zope.testing import doctest
 
@@ -66,3 +66,15 @@ def send_test_message(email_file, message_id, to, reply_to=None):
                                    'to': to,
                                    'reply_to': reply_to},
                         config['files_path'])
+
+
+def make_file(filename):
+    stream = resource_stream("ututi.tests.functional.import", filename)
+    return (stream, 'text/plain', filename)
+
+
+def import_csv(browser, formname, filename):
+    browser.open('http://localhost/admin')
+    form = browser.getForm(name=formname)
+    form.getControl('CSV File').add_file(*make_file(filename))
+    form.getControl('Upload').click()

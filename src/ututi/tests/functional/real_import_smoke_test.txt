@@ -1,19 +1,6 @@
 A test of all the import views together with an actual snapshot of ututi
 ========================================================================
 
-Let's load our csv files:
-
-    >>> from pkg_resources import resource_stream
-    >>> def make_file(filename):
-    ...     stream = resource_stream("ututi.tests.functional.import", filename)
-    ...     return (stream, 'text/plain', filename)
-
-    >>> def upload(browser, formname, filename):
-    ...     browser.open('http://localhost/admin')
-    ...     form = browser.getForm(name=formname)
-    ...     form.getControl('CSV File').add_file(*make_file(filename))
-    ...     form.getControl('Upload').click()
-
 Log in as admin:
 
     >>> browser = Browser()
@@ -28,17 +15,18 @@ Go to admin page:
 
 And upload all the files one by one:
 
-    >>> upload(browser, 'user_import', 'export_users.csv')
-    >>> upload(browser, 'groups_import', 'export_groups.csv')
-    >>> upload(browser, 'structure_import', 'export_structure.csv')
-    >>> upload(browser, 'subjects_import', 'export_subjects.csv')
-    >>> upload(browser, 'group_members_import', 'export_group_members.csv')
-    >>> upload(browser, 'user_logos_import', 'export_user_logos.csv')
-    >>> upload(browser, 'group_logos_import', 'export_group_logos.csv')
-    >>> upload(browser, 'structure_logos_import', 'export_structure_logos.csv')
+    >>> from ututi.tests.functional import import_csv
+    >>> import_csv(browser, 'user_import', 'export_users.csv')
+    >>> import_csv(browser, 'groups_import', 'export_groups.csv')
+    >>> import_csv(browser, 'structure_import', 'export_structure.csv')
+    >>> import_csv(browser, 'subjects_import', 'export_subjects.csv')
+    >>> import_csv(browser, 'group_members_import', 'export_group_members.csv')
+    >>> import_csv(browser, 'user_logos_import', 'export_user_logos.csv')
+    >>> import_csv(browser, 'group_logos_import', 'export_group_logos.csv')
+    >>> import_csv(browser, 'structure_logos_import', 'export_structure_logos.csv')
 
-    # >>> upload(browser, 'group_pages_import', 'export_group_pages.csv')
-    # >>> upload(browser, 'group_watched_subjects_import', 'export_group_watched_subjects.csv')
-    # >>> upload(browser, 'subject_pages_import', 'export_subject_pages.csv')
-    # >>> upload(browser, 'user_ignored_subjects_import', 'export_user_ignored_subjects.csv')
-    # >>> upload(browser, 'user_watched_subjects_import', 'export_user_watched_subjects.csv')
+    # >>> import_csv(browser, 'group_pages_import', 'export_group_pages.csv')
+    # >>> import_csv(browser, 'group_watched_subjects_import', 'export_group_watched_subjects.csv')
+    # >>> import_csv(browser, 'subject_pages_import', 'export_subject_pages.csv')
+    # >>> import_csv(browser, 'user_ignored_subjects_import', 'export_user_ignored_subjects.csv')
+    # >>> import_csv(browser, 'user_watched_subjects_import', 'export_user_watched_subjects.csv')

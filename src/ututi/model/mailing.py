@@ -11,6 +11,7 @@ from routes.util import url_for
 
 from nous.mailpost.MailBoxerTools import splitMail, parseaddr
 
+from ututi.model import Group
 from ututi.model import meta, User, File
 from ututi.lib.mailer import raw_send_email
 
@@ -28,6 +29,7 @@ group_mailing_list_attachments_table = None
 
 
 def setup_orm(engine):
+    from ututi.model import groups_table
     global group_mailing_list_messages_table
     group_mailing_list_messages_table = Table(
         "group_mailing_list_messages",
@@ -61,6 +63,8 @@ def setup_orm(engine):
                                                               columns.message_id)),
                              'author' : relation(User,
                                                  backref=backref('messages')),
+                             'group' : relation(Group,
+                                                primaryjoin=(columns.group_id == groups_table.c.id)),
                              'attachments': relation(File,
                                                      secondary=group_mailing_list_attachments_table)
                              })
@@ -83,7 +87,7 @@ class GroupMailingListMessage(object):
         return mimetools.Message(StringIO(self.original))
 
     def send(self, recipients):
-        headers_dict, body = splitMail(self.original.encode("utf-8"))
+        headers_dict, body = splitMail(self.original)
         headers = "".join(self.mime_message.headers)
 
         footer = ""
@@ -104,7 +108,7 @@ class GroupMailingListMessage(object):
         headers_dict, body = splitMail(message_text.encode("utf-8"))
         message_id = headers_dict['message-id']
         subject = headers_dict['subject']
-        group_id = "moderators"
+        group_id = headers_dict["to"].split("@")[0]
         if cls.get(message_id, group_id):
             raise MessageAlreadyExists(message_id, group_id)
 

@@ -24,11 +24,16 @@ class ReceivemailController(BaseController):
 
     def _sendQueuedMessages(self):
         for message in self.message_queue:
-            message.send(self._recipients())
+            message.send(self._recipients(message.group))
 
-    def _recipients(self):
-        return [email.email for email in
-                meta.Session.query(Email).filter_by(confirmed=True).all()]
+    def _recipients(self, group):
+        recipients = []
+        for member in group.members:
+            for email in member.user.emails:
+                if email.confirmed:
+                    recipients.append(email.email)
+                    break
+        return recipients
 
     def index(self):
         md5_list = request.POST.getall("md5[]")

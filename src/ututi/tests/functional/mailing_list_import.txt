@@ -1,0 +1,40 @@
+Mailing list import
+===================
+
+    >>> from ututi.tests.functional import import_csv
+    >>> browser = Browser()
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
+
+    >>> import_csv(browser, 'user_import', 'export_users.csv')
+    >>> import_csv(browser, 'groups_import', 'export_groups.csv')
+    >>> import_csv(browser, 'group_members_import', 'export_group_members.csv')
+
+    >>> from urllib2 import HTTPError
+    >>> from pkg_resources import resource_string
+    >>> from nous.mailpost import processEmailAndPost
+    >>> from pylons import config
+    >>> emails = resource_string("ututi.tests.functional.import", "export_group_forums.txt").split("=" * 55 + '\n')
+    >>> for n, email in enumerate(emails):
+    ...     if email:
+    ...         try:
+    ...             processEmailAndPost('http://localhost/got_mail', email, config['files_path'])
+    ...         except HTTPError, e:
+    ...             print "Email %d was ignored, because %s" % (n, e)
+    Email 123 was ignored, because HTTP Error 404: Not Found
+    Email 144 was ignored, because HTTP Error 404: Not Found
+    Email 146 was ignored, because HTTP Error 404: Not Found
+    Email 147 was ignored, because HTTP Error 404: Not Found
+    Email 148 was ignored, because HTTP Error 404: Not Found
+    Email 150 was ignored, because HTTP Error 404: Not Found
+    Email 152 was ignored, because HTTP Error 404: Not Found
+    Email 177 was ignored, because HTTP Error 404: Not Found
+    Email 180 was ignored, because HTTP Error 404: Not Found
+    Email 181 was ignored, because HTTP Error 404: Not Found
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> len(mail_queue)
+    178
+    >>> mail_queue[:] = []

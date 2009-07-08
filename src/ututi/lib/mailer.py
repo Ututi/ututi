@@ -14,6 +14,10 @@ class EmailInfo(object):
     def __init__(self, sender, recipients, message):
         self.sender, self.recipients, self.message = sender, recipients, message
 
+    def __str__(self):
+        return "<EmailInfo sender='%s' recipients=%s>" % (self.sender,
+                                                          self.recipients)
+
 
 def send_email(sender, recipient, subject, body):
     """Send an email.

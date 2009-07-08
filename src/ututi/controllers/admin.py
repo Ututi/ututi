@@ -46,7 +46,9 @@ class AdminController(BaseController):
                 user = User.get(email)
                 if user is None:
                     user = User(fullname, password, False)
-                    user.emails = [Email(email)]
+                    email = Email(email)
+                    user.emails = [email]
+                    email.confirmed = True
                     meta.Session.add(user)
 
                 meta.Session.commit()
