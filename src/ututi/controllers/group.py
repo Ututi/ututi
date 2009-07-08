@@ -104,7 +104,10 @@ class GroupController(BaseController):
          'selected' : selected == 'group_home'},
         {'title' : _('Forum'),
          'link' : url_for(controller = 'group', action = 'forum', id=c.group.id),
-         'selected' : selected == 'forum'}
+         'selected' : selected == 'forum'},
+        {'title' : _('Members'),
+         'link' : url_for(controller = 'group', action = 'members', id=c.group.id),
+         'selected' : selected == 'members'},
         ]
 
     def index(self):
