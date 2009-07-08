@@ -485,7 +485,6 @@ ul.breadcrumb_dropdown {
   /* border for the expanded items */
 ul.breadcrumb_dropdown.expanded {
   border: 2px solid #adaca4;
-  margin: -2px inherit;
 }
 
 ul.expanded li.active {
