@@ -148,14 +148,15 @@ def test_User_get():
 
         >>> User.get('admin@ututi.lt') is admin
         True
+        >>> meta.Session.commit()
+        >>> meta.Session.remove()
 
     Hmm, what happens if 2 users have the same email, but one of them
     has not confirmed it yet:
 
+        >>> petras = User.get_byid(2)
         >>> petras.emails.append(Email("admin@ututi.lt"))
 
-        >>> from sqlalchemy.exc import IntegrityError
-        >>> from sqlalchemy.orm.exc import FlushError
         >>> meta.Session.commit()
         Traceback (most recent call last):
         ...
@@ -169,8 +170,6 @@ def test_User_get():
     We also have a function that gets users by their unique ids:
 
         >>> meta.Session.rollback()
-        >>> User.get_byid(1) is admin
-        True
         >>> User.get_byid(2) is petras
         True
 
