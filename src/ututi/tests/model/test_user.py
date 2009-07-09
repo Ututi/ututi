@@ -161,7 +161,7 @@ def test_User_get():
         Traceback (most recent call last):
         ...
         IntegrityError: (IntegrityError) duplicate key value violates unique constraint "emails_pkey"
-          'INSERT INTO emails (id, email) VALUES (%(id)s, %(email)s)' {'email': 'admin@ututi.lt', 'id': 2L}
+          'INSERT INTO emails (id, email) VALUES (%(id)s, %(email)s)' {...}
 
     XXX Argh, we have no idea which of the two possible errors we will get.
 
