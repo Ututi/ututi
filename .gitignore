@@ -13,3 +13,4 @@ tags
 TAGS
 ID
 .installed.cfg
+coverage/*
