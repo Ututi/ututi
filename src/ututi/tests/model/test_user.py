@@ -153,9 +153,16 @@ def test_User_get():
     has not confirmed it yet:
 
         >>> petras.emails.append(Email("admin@ututi.lt"))
-        >>> meta.Session.commit()
-        Traceback (most recent call last):
-        ...
+
+        >>> from sqlalchemy.exc import IntegrityError
+        >>> from sqlalchemy.orm.exc import FlushError
+        >>> try:
+        ...     meta.Session.commit()
+        ... except IntegrityError:
+        ...     print "Failed!"
+        ... except FlushError:
+        ...     print "Failed!"
+        Failed!
 
     XXX Argh, we have no idea which of the two possible errors we will get.
 
