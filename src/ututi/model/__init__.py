@@ -114,19 +114,19 @@ def setup_orm(engine):
     orm.mapper(Subject, subjects_table)
 
 
-    global group_pages_table
-    group_pages_table = Table("group_pages", meta.metadata,
-                              autoload=True,
-                              autoload_with=engine)
-    global pages_table
-    pages_table = Table("pages", meta.metadata,
-                        autoload=True,
-                        autoload_with=engine)
-    orm.mapper(Page, pages_table,
-               properties={'user': relation(User),
-                           'group': relation(Group,
-                                             secondary=group_pages_table,
-                                             backref='pages')})
+    # global group_pages_table
+    # group_pages_table = Table("group_pages", meta.metadata,
+    #                           autoload=True,
+    #                           autoload_with=engine)
+    # global pages_table
+    # pages_table = Table("pages", meta.metadata,
+    #                     autoload=True,
+    #                     autoload_with=engine)
+    # orm.mapper(Page, pages_table,
+    #            properties={'user': relation(User),
+    #                        'group': relation(Group,
+    #                                          secondary=group_pages_table,
+    #                                          backref='pages')})
 
     from ututi.model import mailing
     mailing.setup_orm(engine)
