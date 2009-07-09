@@ -95,6 +95,7 @@ class PylonsLayer(object):
         meta.Session.close()
         # XXX Tear down database here
         teardown_db_defaults(meta.engine)
+        meta.Session.rollback()
         meta.Session.remove()
 
         if len(mail_queue) > 0:

@@ -156,13 +156,11 @@ def test_User_get():
 
         >>> from sqlalchemy.exc import IntegrityError
         >>> from sqlalchemy.orm.exc import FlushError
-        >>> try:
-        ...     meta.Session.commit()
-        ... except IntegrityError:
-        ...     print "Failed!"
-        ... except FlushError:
-        ...     print "Failed!"
-        Failed!
+        >>> meta.Session.commit()
+        Traceback (most recent call last):
+        ...
+        IntegrityError: (IntegrityError) duplicate key value violates unique constraint "emails_pkey"
+          'INSERT INTO emails (id, email) VALUES (%(id)s, %(email)s)' {'email': 'admin@ututi.lt', 'id': 2L}
 
     XXX Argh, we have no idea which of the two possible errors we will get.
 
