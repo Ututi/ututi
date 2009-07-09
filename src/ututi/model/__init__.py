@@ -113,6 +113,21 @@ def setup_orm(engine):
                            autoload_with=engine)
     orm.mapper(Subject, subjects_table)
 
+
+    global group_pages_table
+    group_pages_table = Table("group_pages", meta.metadata,
+                              autoload=True,
+                              autoload_with=engine)
+    global pages_table
+    pages_table = Table("pages", meta.metadata,
+                        autoload=True,
+                        autoload_with=engine)
+    orm.mapper(Page, pages_table,
+               properties={'user': relation(User),
+                           'group': relation(Group,
+                                             secondary=group_pages_table,
+                                             backref='pages')})
+
     from ututi.model import mailing
     mailing.setup_orm(engine)
 
@@ -276,6 +291,25 @@ class Subject(object):
         self.text_id = text_id
 
         self.lecturer = lecturer
+
+pages_table = None
+
+class Page(object):
+    """Class representing user-editable wiki-like pages."""
+    @classmethod
+    def get(cls, id):
+        try:
+            return meta.Session.query(cls).filter_by(id=int(id)).order_by(pages_table.c.created.desc()).first()
+        except NoResultFound:
+            return None
+
+    def __init__(self, content, author, created=None, id=None):
+        self.content = content
+        self.author = author
+        if created is not None:
+            self.created = created
+        if id is not None:
+            self.id = id
 
 
 class LocationTag(object):

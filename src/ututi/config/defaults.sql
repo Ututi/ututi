@@ -106,6 +106,21 @@ create table files (id bigserial not null,
 
 create index md5 on files (md5);;
 
+/* A table for pages */
+
+create table pages (id bigserial not null,
+       created timestamp not null default now(),
+       content text not null default '',
+       user_id int8 references users(id) not null,
+       primary key (id, created));;
+
+/* A table linking pages and groups */
+
+create table group_pages (
+       group_id varchar(250) not null references groups(id),
+       page_id int8 not null references pages(id),
+       primary key (group_id, page_id));;
+
 /* A table that tracks user logos */
 
 create table user_logos (
