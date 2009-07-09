@@ -9,6 +9,7 @@ from pylons.decorators import validate
 from pylons.i18n import _
 
 from formencode import Schema, validators, Invalid
+from sqlalchemy.sql.expression import desc
 from sqlalchemy.orm.exc import NoResultFound
 
 from ututi.lib.image import serve_image
@@ -141,11 +142,14 @@ class GroupController(BaseController):
 
     def _top_level_messages(self, group):
         messages = []
-        for message in meta.Session.query(GroupMailingListMessage).filter_by(group_id=group.id, reply_to=None).all():
+        for message in meta.Session.query(GroupMailingListMessage)\
+                .filter_by(group_id=group.id, reply_to=None)\
+                .order_by(desc(GroupMailingListMessage.sent))\
+                .all():
             msg = {'thread_id': message.id,
                    'last_reply_author_id': message.posts[-1].author.id,
                    'last_reply_author_title': message.posts[-1].author.fullname,
-                   'last_reply_date': message.posts[-1].created,
+                   'last_reply_date': message.posts[-1].sent,
                    'reply_count': len(message.posts) - 1,
                    'subject': message.subject}
             messages.append(msg)

@@ -22,22 +22,25 @@ Mailing list import
     >>> emails = filter(lambda message: message, emails)
     >>> emails.sort(key=lambda message: rfc822.parsedate(splitMail(message)[0]['date']))
 
-    >>> for n, email in enumerate(emails):
-    ...     if email:
+    >>> from ututi.model.mailing import UtutiEmail
+    >>> import email
+    >>> for n, email_text in enumerate(emails):
+    ...     if email_text:
     ...         try:
-    ...             processEmailAndPost('http://localhost/got_mail', email, config['files_path'])
+    ...             processEmailAndPost('http://localhost/got_mail', email_text, config['files_path'])
     ...         except HTTPError, e:
-    ...             print "Email %d was ignored, because %s" % (n, e)
-    Email 123 was ignored, because HTTP Error 404: Not Found
-    Email 144 was ignored, because HTTP Error 404: Not Found
-    Email 146 was ignored, because HTTP Error 404: Not Found
-    Email 147 was ignored, because HTTP Error 404: Not Found
-    Email 148 was ignored, because HTTP Error 404: Not Found
-    Email 150 was ignored, because HTTP Error 404: Not Found
-    Email 152 was ignored, because HTTP Error 404: Not Found
-    Email 177 was ignored, because HTTP Error 404: Not Found
-    Email 180 was ignored, because HTTP Error 404: Not Found
-    Email 181 was ignored, because HTTP Error 404: Not Found
+    ...             message = email.message_from_string(email_text, UtutiEmail)
+    ...             print "Email %d from %s was ignored" % (n, message.getFrom())
+    Email 0 from Jarekas <jaro@akl.lt> was ignored
+    Email 2 from Jarekas <jaroslav@akl.lt> was ignored
+    Email 7 from JaroslavŠatkevič<jaroslav@akl.lt> was ignored
+    Email 12 from JaroslavŠatkevič<jaroslav@akl.lt> was ignored
+    Email 13 from JaroslavŠatkevič<jaroslav@akl.lt> was ignored
+    Email 15 from JaroslavŠatkevič<jaroslav@akl.lt> was ignored
+    Email 142 from JaroslavŠatkevič<jaroslav@akl.lt> was ignored
+    Email 145 from JaroslavŠatkevič<jaroslav@akl.lt> was ignored
+    Email 146 from JaroslavŠatkevič<jaroslav@akl.lt> was ignored
+    Email 148 from Domas Monkus <domas@ututi.com> was ignored
 
     >>> browser.open('http://localhost/group/archpio')
     >>> browser.getLink('Forum').click()

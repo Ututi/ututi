@@ -141,6 +141,7 @@ create table group_mailing_list_messages (
        author_id int8 references users(id) not null,
        subject varchar(500) not null,
        original text not null,
+       sent timestamp not null,
        created timestamp default now(),
        constraint reply_to
        foreign key (reply_to_message_id, reply_to_group_id) references group_mailing_list_messages(message_id, group_id),

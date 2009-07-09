@@ -1,5 +1,9 @@
 import mimetools
-import email.Header
+import time
+from datetime import datetime
+import email
+
+from sqlalchemy.sql.expression import asc
 from sqlalchemy.sql.expression import and_
 from sqlalchemy.schema import Table
 from sqlalchemy.orm.exc import NoResultFound
@@ -29,6 +33,40 @@ group_mailing_list_messages_table = None
 group_mailing_list_attachments_table = None
 
 
+class UtutiEmail(email.message.Message):
+
+    def getHeader(self, header):
+        for key, value in self._headers:
+            if key.lower() == header.lower():
+                return value
+
+    def getDate(self):
+        return email.utils.parsedate(self.getHeader('date'))
+
+    def getMessageId(self):
+        return self.getHeader('message-id')
+
+    def getFrom(self):
+        from_parts = email.Header.decode_header(self.getHeader("from"))
+        result = ""
+        for part in from_parts:
+            if part[1]:
+                result += part[0].decode(part[1])
+            else:
+                result += part[0]
+        return result
+
+    def getSubject(self):
+        subject_parts = email.Header.decode_header(self.getHeader("subject"))
+        subject = ""
+        for part in subject_parts:
+            if part[1]:
+                subject += part[0].decode(part[1])
+            else:
+                subject += part[0]
+        return subject
+
+
 def setup_orm(engine):
     from ututi.model import groups_table
     global group_mailing_list_messages_table
@@ -56,6 +94,7 @@ def setup_orm(engine):
                                                                 columns.message_id)),
                              'thread' : relation(GroupMailingListMessage,
                                                  post_update=True,
+                                                 order_by=[asc(columns.sent)],
                                                  backref=backref('posts'),
                                                  foreign_keys=(columns.thread_group_id, columns.thread_message_id),
                                                  primaryjoin=and_(columns.group_id == columns.thread_group_id,
@@ -106,23 +145,30 @@ class GroupMailingListMessage(object):
 
     @classmethod
     def fromMessageText(cls, message_text):
-        headers_dict, body = splitMail(message_text.encode("utf-8"))
-        message_id = headers_dict['message-id']
-        subject_parts = email.Header.decode_header(headers_dict['subject'])
-        subject = ""
-        for part in subject_parts:
-            if part[1]:
-                subject += part[0].decode(part[1])
-            else:
-                subject += part[0]
-        group_id = headers_dict["to"].split("@")[0]
+        message = email.message_from_string(message_text.encode('utf-8'), UtutiEmail)
+        message_id = message.getMessageId()
+        group_id = message.getHeader("to").split("@")[0]
         if cls.get(message_id, group_id):
             raise MessageAlreadyExists(message_id, group_id)
 
-        reply_to_message_id = headers_dict.get('in-reply-to', None)
+        reply_to_message_id = message.getHeader('in-reply-to')
         reply_to = cls.get(reply_to_message_id, group_id)
 
-        return cls(message_text, message_id, group_id, subject, reply_to)
+        # XXX Hacky way to find messages this message might be a reply to
+        if not reply_to:
+            sbj = message.getSubject()
+            parts = sbj.split(':')
+            if len(parts) > 1:
+                real_sbj = parts[-1].strip()
+                reply_to = meta.Session.query(cls).filter_by(subject=real_sbj,
+                                                             group_id=group_id).first()
+
+        return cls(message_text,
+                   message_id,
+                   group_id,
+                   message.getSubject(),
+                   message.getDate(),
+                   reply_to)
 
     @classmethod
     def get(cls, message_id, group_id):
@@ -132,10 +178,17 @@ class GroupMailingListMessage(object):
         except NoResultFound:
             return None
 
-    def __init__(self, message_text, message_id, group_id, subject, reply_to=None):
+    def __init__(self,
+                 message_text,
+                 message_id,
+                 group_id,
+                 subject,
+                 sent,
+                 reply_to=None):
         self.original = message_text
         self.author = self.getAuthor()
         self.message_id = message_id
         self.subject = subject
+        self.sent = datetime.fromtimestamp(time.mktime(sent))
         self.group_id = group_id
         self.reply_to = reply_to
