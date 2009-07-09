@@ -33,13 +33,13 @@ Mailing list import
     ...             print "Email %d from %s was ignored" % (n, message.getFrom())
     Email 0 from Jarekas <jaro@akl.lt> was ignored
     Email 2 from Jarekas <jaroslav@akl.lt> was ignored
-    Email 7 from JaroslavŠatkevič<jaroslav@akl.lt> was ignored
-    Email 12 from JaroslavŠatkevič<jaroslav@akl.lt> was ignored
-    Email 13 from JaroslavŠatkevič<jaroslav@akl.lt> was ignored
-    Email 15 from JaroslavŠatkevič<jaroslav@akl.lt> was ignored
-    Email 142 from JaroslavŠatkevič<jaroslav@akl.lt> was ignored
-    Email 145 from JaroslavŠatkevič<jaroslav@akl.lt> was ignored
-    Email 146 from JaroslavŠatkevič<jaroslav@akl.lt> was ignored
+    Email 7 from Jaroslav Šatkevič <jaroslav@akl.lt> was ignored
+    Email 12 from Jaroslav Šatkevič <jaroslav@akl.lt> was ignored
+    Email 13 from Jaroslav Šatkevič <jaroslav@akl.lt> was ignored
+    Email 15 from Jaroslav Šatkevič <jaroslav@akl.lt> was ignored
+    Email 142 from Jaroslav Šatkevič <jaroslav@akl.lt> was ignored
+    Email 145 from Jaroslav Šatkevič <jaroslav@akl.lt> was ignored
+    Email 146 from Jaroslav Šatkevič <jaroslav@akl.lt> was ignored
     Email 148 from Domas Monkus <domas@ututi.com> was ignored
 
     >>> browser.open('http://localhost/group/archpio')

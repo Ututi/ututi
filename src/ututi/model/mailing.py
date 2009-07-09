@@ -33,6 +33,17 @@ group_mailing_list_messages_table = None
 group_mailing_list_attachments_table = None
 
 
+def decode_and_join_header(header):
+    from_parts = email.Header.decode_header(header)
+    result = []
+    for part in from_parts:
+        if part[1]:
+            result.append(part[0].decode(part[1]))
+        else:
+            result.append(part[0])
+    return ' '.join(result)
+
+
 class UtutiEmail(email.message.Message):
 
     def getHeader(self, header):
@@ -47,24 +58,10 @@ class UtutiEmail(email.message.Message):
         return self.getHeader('message-id')
 
     def getFrom(self):
-        from_parts = email.Header.decode_header(self.getHeader("from"))
-        result = ""
-        for part in from_parts:
-            if part[1]:
-                result += part[0].decode(part[1])
-            else:
-                result += part[0]
-        return result
+        return decode_and_join_header(self.getHeader("from"))
 
     def getSubject(self):
-        subject_parts = email.Header.decode_header(self.getHeader("subject"))
-        subject = ""
-        for part in subject_parts:
-            if part[1]:
-                subject += part[0].decode(part[1])
-            else:
-                subject += part[0]
-        return subject
+        return decode_and_join_header(self.getHeader("subject"))
 
 
 def setup_orm(engine):
