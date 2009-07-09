@@ -152,15 +152,12 @@ def test_User_get():
     Hmm, what happens if 2 users have the same email, but one of them
     has not confirmed it yet:
 
-        >>> email = Email("admin@ututi.lt")
-        >>> meta.Session.add(email)
-        >>> petras.email = email
+        >>> petras.emails.append(Email("admin@ututi.lt"))
         >>> meta.Session.commit()
         Traceback (most recent call last):
         ...
-        FlushError: New instance <Email at ...> with
-           identity key (<class 'ututi.model.Email'>, ('admin@ututi.lt',))
-           conflicts with persistent instance <Email at ...>
+        IntegrityError: (IntegrityError) duplicate key value violates unique constraint "emails_pkey"
+          'INSERT INTO emails (id, email) VALUES (%(id)s, %(email)s)' {'email': 'admin@ututi.lt', 'id': 2L}
 
     Well - it fails, and it should get fixed XXX
 
