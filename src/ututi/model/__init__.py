@@ -75,6 +75,35 @@ def setup_orm(engine):
                         autoload_with=engine)
     orm.mapper(File, files_table)
 
+
+    global subjects_table
+    subjects_table = Table("subjects", meta.metadata,
+                           Column('id', Integer, Sequence('subjects_id_seq'), primary_key=True),
+                           autoload=True,
+                           autoload_with=engine)
+    orm.mapper(Subject, subjects_table)
+
+
+    global group_pages_table
+    group_pages_table = Table("group_pages", meta.metadata,
+                              autoload=True,
+                              autoload_with=engine)
+    global pages_table
+    pages_table = Table("pages", meta.metadata,
+                        autoload=True,
+                        autoload_with=engine)
+    orm.mapper(Page, pages_table)
+
+    global page_versions_table
+    page_versions_table = Table("page_versions", meta.metadata,
+                                autoload=True,
+                                autoload_with=engine)
+    orm.mapper(PageVersion, page_versions_table,
+               properties={'user': relation(User),
+                           'page': relation(Page,
+                                            backref=backref('versions',
+                                                            order_by=page_versions_table.c.created.desc()) )})
+
     global group_membership_types_table
     group_membership_types_table = Table("group_membership_types", meta.metadata,
                                          autoload=True,
@@ -97,6 +126,7 @@ def setup_orm(engine):
                               autoload=True,
                               autoload_with=engine)
 
+
     global groups_table
     groups_table = Table("groups", meta.metadata,
                          autoload=True,
@@ -104,29 +134,11 @@ def setup_orm(engine):
     orm.mapper(Group, groups_table,
                properties ={'logo': relation(File,
                                              secondary=group_logos_table,
-                                             uselist=False)})
-
-    global subjects_table
-    subjects_table = Table("subjects", meta.metadata,
-                           Column('id', Integer, Sequence('subjects_id_seq'), primary_key=True),
-                           autoload=True,
-                           autoload_with=engine)
-    orm.mapper(Subject, subjects_table)
-
-
-    # global group_pages_table
-    # group_pages_table = Table("group_pages", meta.metadata,
-    #                           autoload=True,
-    #                           autoload_with=engine)
-    # global pages_table
-    # pages_table = Table("pages", meta.metadata,
-    #                     autoload=True,
-    #                     autoload_with=engine)
-    # orm.mapper(Page, pages_table,
-    #            properties={'user': relation(User),
-    #                        'group': relation(Group,
-    #                                          secondary=group_pages_table,
-    #                                          backref='pages')})
+                                             uselist=False),
+                            'pages': relation(Page,
+                                              secondary=group_pages_table,
+                                              backref='group')
+                            })
 
     from ututi.model import mailing
     mailing.setup_orm(engine)
@@ -299,17 +311,50 @@ class Page(object):
     @classmethod
     def get(cls, id):
         try:
-            return meta.Session.query(cls).filter_by(id=int(id)).order_by(pages_table.c.created.desc()).first()
+            return meta.Session.query(cls).filter_by(id=int(id)).one()
         except NoResultFound:
             return None
 
-    def __init__(self, content, author, created=None, id=None):
+    def __init__(self, content, user, created=None):
+        """The first version of a page is created automatically."""
+        self.add_version(content, user, created)
+
+    @property
+    def content(self):
+        if self.versions != []:
+            return self.versions[0].content
+        else:
+            return None
+
+    def add_version(self, content, user, created=None):
+        version = PageVersion(content, user, created)
+        self.versions.append(version)
+
+    @property
+    def user(self):
+        if self.versions != []:
+            return self.versions[0].user
+        else:
+            return None
+
+    @property
+    def created(self):
+        if self.versions != []:
+            return self.versions[0].created
+        else:
+            return None
+
+
+page_versions_table = None
+
+class PageVersion(object):
+    """Class representing one version of a page."""
+
+    def __init__(self, content, user, created = None):
         self.content = content
-        self.author = author
+        self.user = user
         if created is not None:
             self.created = created
-        if id is not None:
-            self.id = id
 
 
 class LocationTag(object):

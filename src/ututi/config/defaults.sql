@@ -108,18 +108,38 @@ create index md5 on files (md5);;
 
 /* A table for pages */
 
--- create table pages (id bigserial not null,
---        created timestamp not null default now(),
---        content text not null default '',
---        user_id int8 references users(id) not null,
---        primary key (id, created));
+create table pages (id bigserial not null, primary key(id));;
+
+create table page_versions(id bigserial not null,
+       page_id int8 references pages(id) not null,
+       created timestamp not null default now(),
+       content text not null default '',
+       user_id int8 references users(id) not null,
+       primary key (id));;
 
 /* A table linking pages and groups */
 
--- create table group_pages (
---        group_id varchar(250) not null references groups(id),
---        page_id int8 not null references pages(id),
---        primary key (group_id, page_id));
+create table group_pages (
+       group_id varchar(250) not null references groups(id),
+       page_id int8 not null references pages(id),
+       primary key (group_id, page_id));
+
+CREATE FUNCTION check_page_id() RETURNS trigger AS $$
+    DECLARE
+        pg_id int8 := NULL;
+    BEGIN
+        SELECT INTO pg_id id FROM pages WHERE id = NEW.page_id;
+        IF NOT FOUND THEN
+           RAISE EXCEPTION 'Invalid page id.';
+        END IF;
+        RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+
+CREATE TRIGGER check_page_id BEFORE INSERT OR UPDATE ON group_pages
+    FOR EACH ROW EXECUTE PROCEDURE check_page_id();;
+
 
 /* A table that tracks user logos */
 
