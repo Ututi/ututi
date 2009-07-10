@@ -1,6 +1,26 @@
+/* A table for files */
+
+create table files (id bigserial not null,
+       md5 char(32) not null,
+       mimetype varchar(255) default 'application/octet-stream',
+       filesize int8,
+       filename varchar(500),
+       title varchar(500),
+       description text default '',
+       created timestamp default now(),
+       modified timestamp default null,
+       primary key (id));;
+
+create index md5 on files (md5);;
+
 /* Create first user=admin and password=asdasd */
 
-create table users (id bigserial not null, fullname varchar(100), password char(36), primary key (id));;
+create table users (
+       id bigserial not null,
+       fullname varchar(100),
+       password char(36),
+       logo_id int8 references files(id) default null,
+       primary key (id));;
 
 insert into users (fullname, password) values ('Adminas Adminovix', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7');;
 
@@ -37,6 +57,7 @@ create table locationtags (id bigserial not null,
        title varchar(250),
        title_short varchar(50),
        description text,
+       logo_id int8 references files(id) default null,
        primary key (id));;
 
 insert into locationtags (title, title_short, description)
@@ -50,6 +71,7 @@ create table groups (id varchar(250) not null,
        location int8 references locationtags(id) default null,
        year date not null,
        description text,
+       logo_id int8 references files(id) default null,
        primary key (id));;
 
 
@@ -91,21 +113,6 @@ create unique index text_id on subjects(text_id);;
 insert into subjects (text_id, title, lecturer)
        values ('mat_analize', 'Matematinė analizė', 'prof. E. Misevičius');;
 
-/* A table for files */
-
-create table files (id bigserial not null,
-       md5 char(32) not null,
-       mimetype varchar(255) default 'application/octet-stream',
-       filesize int8,
-       filename varchar(500),
-       title varchar(500),
-       description text default '',
-       created timestamp default now(),
-       modified timestamp default null,
-       primary key (id));;
-
-create index md5 on files (md5);;
-
 /* A table for pages */
 
 create table pages (id bigserial not null, primary key(id));;
@@ -140,27 +147,6 @@ $$ LANGUAGE plpgsql;;
 CREATE TRIGGER check_page_id BEFORE INSERT OR UPDATE ON group_pages
     FOR EACH ROW EXECUTE PROCEDURE check_page_id();;
 
-
-/* A table that tracks user logos */
-
-create table user_logos (
-       user_id int8 not null references users(id) unique,
-       file_id int8 references files(id) not null,
-       primary key (user_id, file_id));;
-
-/* A table that tracks group logos */
-
-create table group_logos (
-       group_id varchar(250) references groups(id) not null,
-       file_id int8 references files(id) not null,
-       primary key (group_id, file_id));;
-
-/* A table that tracks locationtags logos */
-
-create table locationtags_logos (
-       locationtag_id int8 not null references locationtags(id) unique,
-       file_id int8 references files(id) not null,
-       primary key (locationtag_id, file_id));;
 
 /* A table for group mailing list emails */
 

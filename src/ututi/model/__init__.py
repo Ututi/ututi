@@ -32,27 +32,17 @@ def setup_orm(engine):
                         Column('id', Integer, Sequence('users_id_seq'), primary_key=True),
                         autoload=True,
                         autoload_with=engine)
-    global user_logos_table
-    user_logos_table = Table("user_logos", meta.metadata,
-                             autoload=True,
-                             autoload_with=engine)
+
     orm.mapper(User,
                users_table,
                properties = {'emails': relation(Email, backref='user'),
-                             'logo': relation(File,
-                                              secondary=user_logos_table,
-                                              uselist=False)})
+                             'logo': relation(File)})
 
     global emails_table
     emails_table = Table("emails", meta.metadata,
                          autoload=True,
                          autoload_with=engine)
     orm.mapper(Email, emails_table)
-
-    global locationtags_logos_table
-    locationtags_logos_table = Table("locationtags_logos", meta.metadata,
-                                     autoload=True,
-                                     autoload_with=engine)
 
     global locationtags_table
     locationtags_table = Table("locationtags", meta.metadata,
@@ -64,9 +54,7 @@ def setup_orm(engine):
                locationtags_table,
                properties = {'children' : relation(LocationTag,
                                                    backref=backref('parent_item', remote_side=locationtags_table.c.id)),
-                             'logo': relation(File,
-                                              secondary=locationtags_logos_table,
-                                              uselist=False)})
+                             'logo': relation(File)})
     global files_table
     files_table = Table("files", meta.metadata,
                         Column('id', Integer, Sequence('files_id_seq'), primary_key=True),
@@ -121,20 +109,13 @@ def setup_orm(engine):
                              'user' : relation(User, backref='memberships'),
                              'role' : relation(GroupMembershipType)})
 
-    global group_logos_table
-    group_logos_table = Table("group_logos", meta.metadata,
-                              autoload=True,
-                              autoload_with=engine)
-
 
     global groups_table
     groups_table = Table("groups", meta.metadata,
                          autoload=True,
                          autoload_with=engine)
     orm.mapper(Group, groups_table,
-               properties ={'logo': relation(File,
-                                             secondary=group_logos_table,
-                                             uselist=False),
+               properties ={'logo': relation(File),
                             'pages': relation(Page,
                                               secondary=group_pages_table,
                                               backref='group')
