@@ -70,6 +70,9 @@ def make_map():
     map.connect('/confirm_emails', controller='user', action='confirm_emails')
     map.connect('/confirm_user_email/{key}', controller='user', action='confirm_user_email')
 
+    #pages (for testing purposes, will be removed) XXX
+    map.connect('/pages/{action}', controller='page')
+
     # CUSTOM ROUTES HERE
     map.connect('/', controller='home')
     map.connect('/home', controller='home', action='home')
