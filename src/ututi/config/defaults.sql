@@ -131,23 +131,6 @@ create table group_pages (
        page_id int8 not null references pages(id),
        primary key (group_id, page_id));
 
-CREATE FUNCTION check_page_id() RETURNS trigger AS $$
-    DECLARE
-        pg_id int8 := NULL;
-    BEGIN
-        SELECT INTO pg_id id FROM pages WHERE id = NEW.page_id;
-        IF NOT FOUND THEN
-           RAISE EXCEPTION 'Invalid page id.';
-        END IF;
-        RETURN NEW;
-    END
-$$ LANGUAGE plpgsql;;
-
-
-CREATE TRIGGER check_page_id BEFORE INSERT OR UPDATE ON group_pages
-    FOR EACH ROW EXECUTE PROCEDURE check_page_id();;
-
-
 /* A table for group mailing list emails */
 
 create table group_mailing_list_messages (
