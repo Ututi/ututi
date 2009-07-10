@@ -1,4 +1,4 @@
-<%inherit file="/base.mako" />
+<%inherit file="/group/home.mako" />
 
 <%def name="title()">
   ${c.group.title}
