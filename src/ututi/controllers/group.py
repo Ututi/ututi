@@ -43,6 +43,7 @@ class GroupIdValidator(validators.FancyValidator):
             if not usernameRE.search(value):
                 raise Invalid(self.message('badId', state), value, state)
 
+
 class FileUploadTypeValidator(validators.FancyValidator):
     """ A validator to check uploaded file types."""
     messages = {
@@ -59,6 +60,7 @@ class FileUploadTypeValidator(validators.FancyValidator):
         if value is not None:
             if value not in self.allowed_types:
                 raise Invalid(self.message('bad_type', state, allowed=', '.join(self.allowed_types)), value, state)
+
 
 class NewGroupForm(Schema):
     """A schema for validating new group forms."""
@@ -123,6 +125,9 @@ class GroupController(BaseController):
         {'title' : _('Members'),
          'link' : url_for(controller = 'group', action = 'members', id=c.group.id),
          'selected' : selected == 'members'},
+        {'title' : _('Files'),
+         'link' : url_for(controller = 'group', action = 'files', id=c.group.id),
+         'selected' : selected == 'files'},
         ]
 
     def index(self):
@@ -178,6 +183,16 @@ class GroupController(BaseController):
 
         c.messages = thread.posts
         return render('group/thread.mako')
+
+    @group_action
+    def files(self, group):
+        c.group = group
+        c.breadcrumbs = [
+            {'title' : c.group.title,
+             'link' : url_for(controller = 'group', action = 'group_home', id = c.group.id)}
+            ]
+        c.breadcrumbs.append(self._actions('files'))
+        return render('group/files.mako')
 
     def add(self):
         c.current_year = date.today().year

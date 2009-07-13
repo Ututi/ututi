@@ -110,6 +110,11 @@ def setup_orm(engine):
                              'role' : relation(GroupMembershipType)})
 
 
+    global group_files_table
+    group_files_table = Table("group_files", meta.metadata,
+                              autoload=True,
+                              autoload_with=engine)
+
     global groups_table
     groups_table = Table("groups", meta.metadata,
                          autoload=True,
@@ -118,7 +123,9 @@ def setup_orm(engine):
                properties ={'logo': relation(File),
                             'pages': relation(Page,
                                               secondary=group_pages_table,
-                                              backref='group')
+                                              backref='group'),
+                            'files': relation(File,
+                                              secondary=group_files_table)
                             })
 
     from ututi.model import mailing
@@ -229,6 +236,12 @@ class Email(object):
         self.email = email.strip().lower()
 
 
+class Folder(list):
+
+    def __init__(self, title):
+        self.title = title
+
+
 groups_table = None
 
 class Group(object):
@@ -239,6 +252,15 @@ class Group(object):
             return meta.Session.query(cls).filter_by(id=id).one()
         except NoResultFound:
             return None
+
+    @property
+    def folders(self):
+        result = {}
+        for file in self.files:
+            result.setdefault(file.folder, Folder(file.folder))
+            if not file.isNullFile():
+                result[file.folder].append(file)
+        return sorted(result.values(), key=lambda f: f.title)
 
     def __init__(self, id, title = '', location = None, year = '', description = ''):
         self.id = id.strip().lower()
@@ -372,6 +394,15 @@ class File(object):
             self.modified = created
         self.description = description
 
+    @classmethod
+    def makeNullFile(cls, folder):
+        result = cls("Null File", "Null File")
+        result.folder = folder
+        return result
+
+    def isNullFile(self):
+        return self.md5 == None
+
     def filepath(self):
         """Calculate the path of a file, based on its md5 checksum."""
         dir_path = [config.get('files_path')]
@@ -422,6 +453,7 @@ class File(object):
             file.seek(0)
 
         return hash.hexdigest()
+
 
 # Reimports for convenience
 from ututi.model.mailing import GroupMailingListMessage

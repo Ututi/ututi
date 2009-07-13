@@ -59,3 +59,10 @@
       <input type="file" name="file_upload" id="file_upload"/>
       <input type="submit" value="Upload" name="Upload"/>
 </form>
+
+<h1>${_('Group file import')}</h1>
+<form name="group_files_import" method="post" action="/admin/import_group_files" enctype="multipart/form-data">
+      <label for="file_upload">CSV File</label>
+      <input type="file" name="file_upload" id="file_upload"/>
+      <input type="submit" value="Upload" name="Upload"/>
+</form>

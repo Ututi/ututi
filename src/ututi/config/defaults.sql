@@ -1,7 +1,8 @@
 /* A table for files */
 
 create table files (id bigserial not null,
-       md5 char(32) not null,
+       md5 char(32),
+       folder varchar(255) default '',
        mimetype varchar(255) default 'application/octet-stream',
        filesize int8,
        filename varchar(500),
@@ -123,6 +124,13 @@ create table page_versions(id bigserial not null,
        content text not null default '',
        user_id int8 references users(id) not null,
        primary key (id));;
+
+/* A table that tracks group files */
+
+create table group_files (
+       group_id varchar(250) references groups(id) not null,
+       file_id int8 references files(id) not null,
+       primary key (group_id, file_id));;
 
 /* A table linking pages and groups */
 

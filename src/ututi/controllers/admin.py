@@ -2,6 +2,7 @@ import csv
 import os
 import logging
 import base64
+from StringIO import StringIO
 
 from magic import from_buffer
 from datetime import date
@@ -256,3 +257,23 @@ class AdminController(BaseController):
                     meta.Session.commit()
 
         redirect_to(controller='group', action='index')
+
+    def import_group_files(self):
+        file = request.POST.get('file_upload', None)
+
+        if file is not None and file != '':
+            for line in file.value.splitlines():
+                if line.strip() == '':
+                    continue
+                line = line.strip().split(',')
+                group_id = line[0]
+                group = Group.get(group_id)
+                f = File(filename=line[3], title=line[4])
+                f.mimetype = line[2]
+                f.folder = line[1]
+                # XXX dummy content at the moment
+                f.store('Whatever!')
+                group.files.append(f)
+
+            meta.Session.commit()
+        redirect_to(controller='admin', action='users')
