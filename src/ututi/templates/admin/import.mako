@@ -66,3 +66,10 @@
       <input type="file" name="file_upload" id="file_upload"/>
       <input type="submit" value="Upload" name="Upload"/>
 </form>
+
+<h1>${_('Subject file import')}</h1>
+<form name="subject_files_import" method="post" action="/admin/import_subject_files" enctype="multipart/form-data">
+      <label for="file_upload">CSV File</label>
+      <input type="file" name="file_upload" id="file_upload"/>
+      <input type="submit" value="Upload" name="Upload"/>
+</form>

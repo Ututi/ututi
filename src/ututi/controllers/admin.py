@@ -277,3 +277,23 @@ class AdminController(BaseController):
 
             meta.Session.commit()
         redirect_to(controller='admin', action='users')
+
+    def import_subject_files(self):
+        file = request.POST.get('file_upload', None)
+
+        if file is not None and file != '':
+            for line in file.value.splitlines():
+                if line.strip() == '':
+                    continue
+                line = line.strip().split(',')
+                subject_id = line[0]
+                subject = Subject.get(subject_id)
+                f = File(filename=line[3], title=line[4])
+                f.mimetype = line[2]
+                f.folder = line[1]
+                # XXX dummy content at the moment
+                f.store('Whatever!')
+                subject.files.append(f)
+
+            meta.Session.commit()
+        redirect_to(controller='admin', action='users')

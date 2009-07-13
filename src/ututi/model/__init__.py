@@ -63,13 +63,20 @@ def setup_orm(engine):
                         autoload_with=engine)
     orm.mapper(File, files_table)
 
+    global subject_files_table
+    subject_files_table = Table("subject_files", meta.metadata,
+                                autoload=True,
+                                autoload_with=engine)
 
     global subjects_table
     subjects_table = Table("subjects", meta.metadata,
                            Column('id', Integer, Sequence('subjects_id_seq'), primary_key=True),
                            autoload=True,
+                           useexisting=True,
                            autoload_with=engine)
-    orm.mapper(Subject, subjects_table)
+    orm.mapper(Subject, subjects_table,
+               properties={'files': relation(File,
+                                             secondary=subject_files_table)})
 
 
     global group_pages_table
@@ -288,6 +295,7 @@ class GroupMembershipType(object):
 subjects_table = None
 
 class Subject(object):
+
     @classmethod
     def get(cls, id):
         try:
@@ -297,6 +305,15 @@ class Subject(object):
                 return meta.Session.query(cls).filter_by(text_id=str(id)).one()
             except NoResultFound:
                 return None
+
+    @property
+    def folders(self):
+        result = {}
+        for file in self.files:
+            result.setdefault(file.folder, Folder(file.folder))
+            if not file.isNullFile():
+                result[file.folder].append(file)
+        return sorted(result.values(), key=lambda f: f.title)
 
     def __init__(self, title, text_id = None, lecturer = None):
         self.title = title

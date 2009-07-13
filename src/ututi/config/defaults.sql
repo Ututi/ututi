@@ -114,6 +114,13 @@ create unique index text_id on subjects(text_id);;
 insert into subjects (text_id, title, lecturer)
        values ('mat_analize', 'Matematinė analizė', 'prof. E. Misevičius');;
 
+/* A table that tracks subject files */
+
+create table subject_files (
+       subject_id int8 references subjects(id) not null,
+       file_id int8 references files(id) not null,
+       primary key (subject_id, file_id));;
+
 /* A table for pages */
 
 create table pages (id bigserial not null, primary key(id));;
