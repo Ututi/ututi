@@ -11,18 +11,20 @@
 <h1>${_('Group Files')}</h1>
 
 % for folder in c.group.folders:
+<ul>
   % if folder.title == '':
     % for file in folder:
+  <li>
       ${file.title}
+  </li>
     % endfor
   % else:
     % for file in folder:
-    <span>
+    <li>
       ${folder.title}
       ${file.title}
-    </span>
+    </li>
     % endfor
   % endif
+</ul>
 % endfor
-
-</table>
