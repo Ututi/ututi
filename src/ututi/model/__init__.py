@@ -63,21 +63,10 @@ def setup_orm(engine):
                         autoload_with=engine)
     orm.mapper(File, files_table)
 
-    global subject_files_table
-    subject_files_table = Table("subject_files", meta.metadata,
+    global subject_pages_table
+    subject_pages_table = Table("subject_pages", meta.metadata,
                                 autoload=True,
                                 autoload_with=engine)
-
-    global subjects_table
-    subjects_table = Table("subjects", meta.metadata,
-                           Column('id', Integer, Sequence('subjects_id_seq'), primary_key=True),
-                           autoload=True,
-                           useexisting=True,
-                           autoload_with=engine)
-    orm.mapper(Subject, subjects_table,
-               properties={'files': relation(File,
-                                             secondary=subject_files_table)})
-
 
     global group_pages_table
     group_pages_table = Table("group_pages", meta.metadata,
@@ -98,6 +87,22 @@ def setup_orm(engine):
                            'page': relation(Page,
                                             backref=backref('versions',
                                                             order_by=page_versions_table.c.created.desc()) )})
+
+    global subject_files_table
+    subject_files_table = Table("subject_files", meta.metadata,
+                                autoload=True,
+                                autoload_with=engine)
+    global subjects_table
+    subjects_table = Table("subjects", meta.metadata,
+                           Column('id', Integer, Sequence('subjects_id_seq'), primary_key=True),
+                           autoload=True,
+                           useexisting=True,
+                           autoload_with=engine)
+    orm.mapper(Subject, subjects_table,
+               properties={'files': relation(File,
+                                             secondary=subject_files_table),
+                           'pages': relation(Page,
+                                             secondary=subject_pages_table)})
 
     global group_membership_types_table
     group_membership_types_table = Table("group_membership_types", meta.metadata,

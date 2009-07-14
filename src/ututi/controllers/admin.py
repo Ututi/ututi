@@ -2,7 +2,6 @@ import csv
 import os
 import logging
 import base64
-from StringIO import StringIO
 
 from magic import from_buffer
 from datetime import date
@@ -12,11 +11,11 @@ from pylons.controllers.util import redirect_to, abort
 from sqlalchemy.orm.exc import NoResultFound
 
 from ututi.lib.base import BaseController, render
+from ututi.model import Page
 from ututi.model import (meta, User, Email, LocationTag, Group, Subject,
                          GroupMember, GroupMembershipType, File)
 
 log = logging.getLogger(__name__)
-
 
 class AdminController(BaseController):
     """Controler for system administration."""
@@ -293,4 +292,39 @@ class AdminController(BaseController):
                 subject.files.append(f)
 
             meta.Session.commit()
-        redirect_to(controller='admin', action='users')
+        redirect_to(controller='admin', action='index')
+
+    def import_group_pages(self):
+        file = request.POST.get('file_upload', None)
+        if file is not None and file != '':
+            csv_reader = csv.reader(file.value.split(os.linesep))
+
+            for row in csv_reader:
+                if len(row) < 4:
+                    continue
+                group_id, page_id, page_title, page_content = row
+
+                group = Group.get(group_id)
+                admin = User.get('admin@ututi.lt')
+                group.pages.append(Page(page_title, page_content, admin))
+                meta.Session.commit()
+
+        redirect_to(controller='admin', action='index')
+
+    def import_subject_pages(self):
+        file = request.POST.get('file_upload', None)
+        if file is not None and file != '':
+            csv_reader = csv.reader(file.value.split(os.linesep))
+
+            for row in csv_reader:
+                if len(row) < 4:
+                    continue
+                subject_id, page_id, page_title, page_content = row
+
+                subject = Subject.get(subject_id)
+                admin = User.get('admin@ututi.lt')
+                subject.pages.append(Page(page_title, page_content, admin))
+                meta.Session.commit()
+
+        redirect_to(controller='admin', action='index')
+

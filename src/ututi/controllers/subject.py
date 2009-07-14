@@ -5,6 +5,7 @@ from pylons import c, request
 from pylons.decorators import validate
 from pylons.controllers.util import redirect_to, abort
 from pylons.i18n import _
+from ututi.model import Page
 from ututi.model import meta, Subject
 from routes import url_for
 from sqlalchemy.orm.exc import NoResultFound
@@ -85,3 +86,16 @@ class SubjectController(BaseController):
         meta.Session.commit()
 
         redirect_to(controller='subject', action='subject_home', id=subj.id)
+
+    def page(self, id, page_id):
+        subject = Subject.get(id)
+        if subject is None:
+            abort(404)
+
+        page = Page.get(int(page_id))
+        if page not in subject.pages:
+            abort(404)
+
+        c.subject = subject
+        c.page = page
+        return render('subject/page.mako')

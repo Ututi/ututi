@@ -1,5 +1,6 @@
 from zope.testing import doctest
 
+from ututi.model import Subject
 from ututi.model import Page, PageVersion, Group, User, meta
 from ututi.tests import PylonsLayer
 
@@ -112,6 +113,39 @@ def test_group_pages():
         'page'
 
         >>> group.pages[0].content
+        'some content'
+
+    """
+
+
+def test_subject_pages():
+    """Test if pages can be linked to subjects.
+
+    We get our subject
+
+        >>> subject = Subject.get('mat_analize')
+
+    But initially it has no pages:
+
+        >>> subject.pages
+        []
+
+    We can easily add one though:
+
+        >>> author = User.get('admin@ututi.lt')
+        >>> subject.pages.append(Page('page', 'some content', author))
+        >>> meta.Session.commit()
+        >>> meta.Session.expire_all()
+
+    The page should appear in the pages list of this subject now:
+
+        >>> subject = Subject.get('mat_analize')
+        >>> len(subject.pages)
+        1
+        >>> subject.pages[0].title
+        'page'
+
+        >>> subject.pages[0].content
         'some content'
 
     """

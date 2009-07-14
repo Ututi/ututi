@@ -30,3 +30,13 @@ ${c.subject.lecturer}
   % endif
 </ul>
 % endfor
+
+<h2>${_('Pages')}</h2>
+
+<ul>
+% for page in c.subject.pages:
+  <li>
+    ${h.link_to(page.title, h.url_for(controller='subject', action='page', page_id=page.id))}
+  </li>
+% endfor
+</ul>

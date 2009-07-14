@@ -131,6 +131,13 @@ create table page_versions(id bigserial not null,
        user_id int8 references users(id) not null,
        primary key (id));;
 
+/* A table linking pages and subjects */
+
+create table subject_pages (
+       subject_id varchar(150) not null references subjects(id),
+       page_id int8 not null references pages(id),
+       primary key (subject_id, page_id));;
+
 /* A table that tracks group files */
 
 create table group_files (

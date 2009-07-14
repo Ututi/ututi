@@ -51,6 +51,7 @@ def make_map():
 
     map.connect('/subjects', controller='subject', action='index')
     map.connect('/subject/{id}', controller='subject', action='subject_home')
+    map.connect('/subject/{id}/page/{page_id}', controller='subject', action='page')
     map.connect('/subject/{id}/{action}', controller='subject', action='subject_home')
     map.connect('/subjects/{action}', controller='subject')
 
