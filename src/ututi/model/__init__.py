@@ -94,7 +94,7 @@ def setup_orm(engine):
                                 autoload=True,
                                 autoload_with=engine)
     orm.mapper(PageVersion, page_versions_table,
-               properties={'user': relation(User),
+               properties={'author': relation(User),
                            'page': relation(Page,
                                             backref=backref('versions',
                                                             order_by=page_versions_table.c.created.desc()) )})
@@ -324,10 +324,12 @@ class Subject(object):
 
         self.lecturer = lecturer
 
+
 pages_table = None
 
 class Page(object):
     """Class representing user-editable wiki-like pages."""
+
     @classmethod
     def get(cls, id):
         try:
@@ -335,34 +337,36 @@ class Page(object):
         except NoResultFound:
             return None
 
-    def __init__(self, content, user, created=None):
+    def __init__(self, title, content, author, created=None):
         """The first version of a page is created automatically."""
-        self.add_version(content, user, created)
+        self.add_version(title, content, author, created)
 
-    @property
-    def content(self):
-        if self.versions != []:
-            return self.versions[0].content
-        else:
-            return None
-
-    def add_version(self, content, user, created=None):
-        version = PageVersion(content, user, created)
+    def add_version(self, title, content, user, created=None):
+        version = PageVersion(title, content, user, created)
         self.versions.append(version)
 
     @property
-    def user(self):
-        if self.versions != []:
-            return self.versions[0].user
+    def last_version(self):
+        if self.versions:
+            return self.versions[0]
         else:
-            return None
+            raise AttributeError("This page has no versions!")
+
+    @property
+    def title(self):
+        return self.last_version.title
+
+    @property
+    def content(self):
+        return self.last_version.content
+
+    @property
+    def author(self):
+        return self.last_version.author
 
     @property
     def created(self):
-        if self.versions != []:
-            return self.versions[0].created
-        else:
-            return None
+        return self.last_version.created
 
 
 page_versions_table = None
@@ -370,9 +374,10 @@ page_versions_table = None
 class PageVersion(object):
     """Class representing one version of a page."""
 
-    def __init__(self, content, user, created = None):
+    def __init__(self, title, content, author, created = None):
+        self.title = title
         self.content = content
-        self.user = user
+        self.author = author
         if created is not None:
             self.created = created
 

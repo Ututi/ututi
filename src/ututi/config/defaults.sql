@@ -128,6 +128,7 @@ create table pages (id bigserial not null, primary key(id));;
 create table page_versions(id bigserial not null,
        page_id int8 references pages(id) not null,
        created timestamp not null default now(),
+       title varchar(255) not null default '',
        content text not null default '',
        user_id int8 references users(id) not null,
        primary key (id));;

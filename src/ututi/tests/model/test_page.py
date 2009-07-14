@@ -3,74 +3,119 @@ from zope.testing import doctest
 from ututi.model import Page, PageVersion, Group, User, meta
 from ututi.tests import PylonsLayer
 
+
 def test_pages():
     """Test if pages are created and retrieved correctly.
 
+    Pages are created by passing the title of the page, the content
+    and the author to it's constructor:
+
         >>> admin = User.get('admin@ututi.lt')
-        >>> admin.id
-        1L
-        >>> page = Page('page1', admin)
+        >>> page = Page('Some coursework', 'Some information about it.', admin)
         >>> meta.Session.add(page)
         >>> meta.Session.commit()
+
+    When added to the database they get ids assigned automatically:
+
         >>> page.id
         1L
 
-        Once created, a page can be retrieved by its id.
+    Once created, a page can be retrieved by its id.
 
-        >>> page_too = Page.get(page.id)
-        >>> page_too.content
-        'page1'
+        >>> page = Page.get(page.id)
 
-        A new version can be appended to an existing page.
+        >>> page.title
+        'Some coursework'
 
-        >>> new_version = PageVersion('page1, but newer', admin)
-        >>> meta.Session.add(new_version)
-        >>> page_too.versions.append(new_version)
-        >>> meta.Session.commit()
-        >>> page_too.content == new_version.content
+        >>> page.content
+        'Some information about it.'
+
+        >>> page.author is admin
         True
 
-        A new version is created by simply modifying the content of a page.
+    Also, the page is not storing the content directly. The moment you
+    create it, a PageVersion object is created and assigned to the
+    page:
 
-        >>> page_too.add_version('totally new', admin)
+        >>> page.versions
+        [<ututi.model.PageVersion object at ...>]
+
+    That version object stores the actual content:
+
+         >>> page.versions[0].title
+         'Some coursework'
+
+         >>> page.versions[0].content
+         'Some information about it.'
+
+    A new version can be appended to the version list of an existing
+    page.
+
+        >>> version = PageVersion('Some coursework (updated)',
+        ...                       'Some more information about it.',
+        ...                       admin)
+        >>> page.versions.append(version)
         >>> meta.Session.commit()
-        >>> page = Page.get(page_too.id)
         >>> page.content
-        'totally  new'
+        'Some more information about it.'
 
-        """
+    If you want to modify the content of a page you can also use a
+    shorthand method instead of creatin a new version object directly:
+
+        >>> page.add_version('Some coursework (new)',
+        ...                  'Some exclusive information about it.',
+        ...                  admin)
+        >>> meta.Session.commit()
+
+        >>> page.title
+        'Some coursework (new)'
+
+        >>> page.content
+        'Some exclusive information about it.'
+
+
+    The version object will be created automatically:
+
+        >>> [(version.title, version.content) for version in page.versions]
+        [('Some coursework (new)', 'Some exclusive information about it.'),
+         ('Some coursework (updated)', 'Some more information about it.'),
+         ('Some coursework', 'Some information about it.')]
+
+    """
+
 
 def test_group_pages():
     """Test if pages can be linked to groups.
 
-    Let's create a page.
-        >>> admin = User.get('admin@ututi.lt')
-        >>> admin.id
-        1L
-        >>> page = Page('page', admin)
-        >>> meta.Session.add(page)
-        >>> meta.Session.commit()
-        >>> page.id
-        1L
+    We get our group
 
-        >>> grp = Group.get('moderators')
-        >>> grp.id
-        'moderators'
+        >>> group = Group.get('moderators')
 
-    The group has no pages.
-        >>> grp.pages
+    But initially it has no pages:
+
+        >>> group.pages
         []
 
+    We can easily add one though:
 
-        >>> grp.pages.append(page)
+        >>> author = User.get('admin@ututi.lt')
+        >>> group.pages.append(Page('page', 'some content', author))
         >>> meta.Session.commit()
+        >>> meta.Session.expire_all()
 
-        >>> grp = Group.get('moderators')
-        >>> len(grp.pages)
+    The page should appear in the pages list of this group now:
+
+        >>> group = Group.get('moderators')
+        >>> len(group.pages)
         1
-        >>> grp.pages[0].content
+        >>> group.pages[0].title
         'page'
+
+        >>> group.pages[0].content
+        'some content'
+
     """
+
 
 def test_suite():
     suite = doctest.DocTestSuite(
