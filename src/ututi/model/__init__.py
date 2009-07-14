@@ -299,12 +299,9 @@ class Subject(object):
     @classmethod
     def get(cls, id):
         try:
-            return meta.Session.query(cls).filter_by(id=int(id)).one()
-        except:
-            try:
-                return meta.Session.query(cls).filter_by(text_id=str(id)).one()
-            except NoResultFound:
-                return None
+            return meta.Session.query(cls).filter_by(id=id).one()
+        except NoResultFound:
+            return None
 
     @property
     def folders(self):
@@ -315,13 +312,10 @@ class Subject(object):
                 result[file.folder].append(file)
         return sorted(result.values(), key=lambda f: f.title)
 
-    def __init__(self, title, text_id = None, lecturer = None):
+
+    def __init__(self, subject_id, title, lecturer = None):
         self.title = title
-
-        if text_id != None:
-            text_id = text_id.strip().lower()
-        self.text_id = text_id
-
+        self.id = subject_id
         self.lecturer = lecturer
 
 

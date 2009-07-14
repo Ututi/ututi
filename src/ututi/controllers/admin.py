@@ -215,16 +215,13 @@ class AdminController(BaseController):
                     continue
 
                 id, title, lecturer = row[:3]
-                try:
-                    subj = meta.Session.query(Subject).filter_by(text_id = id).one()
-                    subj = Subject(title) #the pretty url is being used - forget it
-                    meta.Session.add(subj)
-                except NoResultFound:
-                    subj = Subject(title, text_id = id)
+                subj = Subject.get(id)
+                if subj is None:
+                    subj = Subject(id, title)
                     meta.Session.add(subj)
 
-                if lecturer is not None:
-                    subj.lecturer = lecturer
+                subj.title = title
+                subj.lecturer = lecturer
 
                 meta.Session.commit()
         redirect_to(controller='subject', action='index')

@@ -34,11 +34,14 @@ class NewSubjectForm(Schema):
     """A schema for validating new subject forms."""
     allow_extra_fields = True
 
-    title = validators.String(not_empty = True)
+    title = validators.String(not_empty=True)
 
     msg = {'invalid' : _('The text contains invalid characters, only letters, numbers and the symbols - + _ are allowed.')}
 
-    text_id = All(UniqueIdValidator(Subject), validators.Regex(r'^[_\+\-a-zA-Z0-9]*$', messages=msg), validators.String(max=50))
+    id = All(UniqueIdValidator(Subject),
+             validators.Regex(r'^[_\+\-a-zA-Z0-9]*$',
+                              messages=msg),
+             validators.String(max=50, not_empty=True))
 
 
 class SubjectController(BaseController):
@@ -55,28 +58,13 @@ class SubjectController(BaseController):
         return render('subjects.mako')
 
     def subject_home(self, id):
-        try:
-            id = int(id)
-            #the id is a numeric id
-            subject = meta.Session.query(Subject).filter_by(id = id).one()
-
-        except:
-            #either the id was not numeric or nothing was found
-            id = str(id)
-            try:
-                subject = meta.Session.query(Subject).filter_by(text_id = id).one()
-            except NoResultFound:
-                abort(404)
-
-        #if the subject has a text id, we redirect using it
-        if subject.text_id is not None and subject.text_id != str(id):
-            redirect_to(controller='subject', action='subject_home', id=subject.text_id)
-
-
+        subject = Subject.get(id)
+        if subject is None:
+            abort(404)
 
         c.breadcrumbs.append({'link': url_for(controller='subject',
                                               action='subject_home',
-                                              id=subject.text_id is not None and subject.text_id or subject.id),
+                                              id=subject.id),
                               'title' : subject.title})
         c.subject = subject
         return render('subject_home.mako')
@@ -87,14 +75,12 @@ class SubjectController(BaseController):
     @validate(schema=NewSubjectForm, form='add')
     def new_subject(self):
         title = request.POST.get('title').strip()
-        text_id = request.POST.get('text_id', None).strip().lower()
-        if text_id == '':
-            text_id = None
-        lecturer = request.POST.get('lecturer', None).strip()
+        id = request.POST.get('id').strip().lower()
+        lecturer = request.POST.get('lecturer').strip()
         if lecturer == '':
             lecturer = None
 
-        subj = Subject(title, text_id, lecturer)
+        subj = Subject(id, title, lecturer)
         meta.Session.add(subj)
         meta.Session.commit()
 

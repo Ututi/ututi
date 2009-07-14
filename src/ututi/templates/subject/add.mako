@@ -9,12 +9,12 @@ ${_('New subject')}
 <form method="post" action="${h.url_for(controller='subject', action='new_subject')}"
      id="subject_add_form" enctype="multipart/form-data">
   <div class="form-field">
-    <label for="title">${_('Title')}</label>
-    <input type="text" id="title" name="title" class="line"/>
+    <label for="id">${_('Id')}</label>
+    /subject/<input type="text" id="id" name="id" class="line"/>
   </div>
   <div class="form-field">
-    <label for="text_id">${_('Pretty URL')}</label>
-    /subject/<input type="text" id="text_id" name="text_id" class="line"/>
+    <label for="title">${_('Title')}</label>
+    <input type="text" id="title" name="title" class="line"/>
   </div>
   <div class="form-field">
     <label for="lecturer">${_('Lecturer')}</label>

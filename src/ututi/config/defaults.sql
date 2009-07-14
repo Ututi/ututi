@@ -103,21 +103,19 @@ insert into group_members (group_id, user_id, membership_type)
                    values ('moderators', 1, 'administrator');;
 
 /* A table for subjects */
-create table subjects (id bigserial not null,
-       text_id varchar(150) default null,
+create table subjects (id varchar(150) default null,
        title varchar(500) not null,
        lecturer varchar(500) default null,
        location int8 references locationtags(id) default null,
        primary key (id));;
-create unique index text_id on subjects(text_id);;
 
-insert into subjects (text_id, title, lecturer)
+insert into subjects (id, title, lecturer)
        values ('mat_analize', 'Matematinė analizė', 'prof. E. Misevičius');;
 
 /* A table that tracks subject files */
 
 create table subject_files (
-       subject_id int8 references subjects(id) not null,
+       subject_id varchar(150) references subjects(id) not null,
        file_id int8 references files(id) not null,
        primary key (subject_id, file_id));;
 

@@ -19,24 +19,24 @@ The link of the subject leads to its home page.
 We can add a subject at the url /subject/add
 
     >>> browser.open('http://localhost/subjects/add')
+    >>> browser.getControl('Id').value = 'test_subject'
     >>> browser.getControl('Title').value = 'Test subject'
-    >>> browser.getControl('Pretty URL').value = 'test_subject'
     >>> browser.getControl('Save').click()
     >>> browser.printQuery('//h1/text()')
     Test subject
 
-However, pretty urls are checked for uniqueness.
+The id is checked for uniqueness.
 
     >>> browser.open('http://localhost/subjects/add')
+    >>> browser.getControl('Id').value = 'test_subject'
     >>> browser.getControl('Title').value = 'Test subject2'
-    >>> browser.getControl('Pretty URL').value = 'test_subject'
     >>> browser.getControl('Save').click()
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Such id already exists, choose a different one.
 
 And they must not contain characters not allowed in urls.
 
-    >>> browser.getControl('Pretty URL').value = '{}test_subject\/'
+    >>> browser.getControl('Id').value = '{}test_subject\/'
     >>> browser.getControl('Save').click()
     >>> browser.printQuery("//span[@class='error-message']/text()")
     The text contains invalid characters, only letters, numbers and the symbols - + _ are allowed.
