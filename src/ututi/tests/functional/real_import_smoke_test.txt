@@ -32,3 +32,5 @@ And upload all the files one by one:
     # >>> import_csv(browser, 'group_watched_subjects_import', 'export_group_watched_subjects.csv')
     # >>> import_csv(browser, 'user_ignored_subjects_import', 'export_user_ignored_subjects.csv')
     # >>> import_csv(browser, 'user_watched_subjects_import', 'export_user_watched_subjects.csv')
+
+    >>> browser.open('http://localhost/subject/pastatu-inzinerines-sistemos/page/259')

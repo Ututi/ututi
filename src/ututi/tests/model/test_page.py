@@ -12,7 +12,7 @@ def test_pages():
     and the author to it's constructor:
 
         >>> admin = User.get('admin@ututi.lt')
-        >>> page = Page('Some coursework', 'Some information about it.', admin)
+        >>> page = Page(u'Some coursework', u'Some information about it.', admin)
         >>> meta.Session.add(page)
         >>> meta.Session.commit()
 
@@ -26,10 +26,10 @@ def test_pages():
         >>> page = Page.get(page.id)
 
         >>> page.title
-        'Some coursework'
+        u'Some coursework'
 
         >>> page.content
-        'Some information about it.'
+        u'Some information about it.'
 
         >>> page.author is admin
         True
@@ -44,43 +44,43 @@ def test_pages():
     That version object stores the actual content:
 
          >>> page.versions[0].title
-         'Some coursework'
+         u'Some coursework'
 
          >>> page.versions[0].content
-         'Some information about it.'
+         u'Some information about it.'
 
     A new version can be appended to the version list of an existing
     page.
 
-        >>> version = PageVersion('Some coursework (updated)',
-        ...                       'Some more information about it.',
+        >>> version = PageVersion(u'Some coursework (updated)',
+        ...                       u'Some more information about it.',
         ...                       admin)
         >>> page.versions.append(version)
         >>> meta.Session.commit()
         >>> page.content
-        'Some more information about it.'
+        u'Some more information about it.'
 
     If you want to modify the content of a page you can also use a
     shorthand method instead of creatin a new version object directly:
 
-        >>> page.add_version('Some coursework (new)',
-        ...                  'Some exclusive information about it.',
+        >>> page.add_version(u'Some coursework (new)',
+        ...                  u'Some exclusive information about it.',
         ...                  admin)
         >>> meta.Session.commit()
 
         >>> page.title
-        'Some coursework (new)'
+        u'Some coursework (new)'
 
         >>> page.content
-        'Some exclusive information about it.'
+        u'Some exclusive information about it.'
 
 
     The version object will be created automatically:
 
         >>> [(version.title, version.content) for version in page.versions]
-        [('Some coursework (new)', 'Some exclusive information about it.'),
-         ('Some coursework (updated)', 'Some more information about it.'),
-         ('Some coursework', 'Some information about it.')]
+        [(u'Some coursework (new)', u'Some exclusive information about it.'),
+         (u'Some coursework (updated)', u'Some more information about it.'),
+         (u'Some coursework', u'Some information about it.')]
 
     """
 
@@ -100,7 +100,7 @@ def test_group_pages():
     We can easily add one though:
 
         >>> author = User.get('admin@ututi.lt')
-        >>> group.pages.append(Page('page', 'some content', author))
+        >>> group.pages.append(Page(u'page', u'some content', author))
         >>> meta.Session.commit()
         >>> meta.Session.expire_all()
 
@@ -110,10 +110,10 @@ def test_group_pages():
         >>> len(group.pages)
         1
         >>> group.pages[0].title
-        'page'
+        u'page'
 
         >>> group.pages[0].content
-        'some content'
+        u'some content'
 
     """
 
@@ -133,7 +133,7 @@ def test_subject_pages():
     We can easily add one though:
 
         >>> author = User.get('admin@ututi.lt')
-        >>> subject.pages.append(Page('page', 'some content', author))
+        >>> subject.pages.append(Page(u'page', u'some content', author))
         >>> meta.Session.commit()
         >>> meta.Session.expire_all()
 
@@ -143,10 +143,10 @@ def test_subject_pages():
         >>> len(subject.pages)
         1
         >>> subject.pages[0].title
-        'page'
+        u'page'
 
         >>> subject.pages[0].content
-        'some content'
+        u'some content'
 
     """
 

@@ -88,8 +88,8 @@ def test_User():
 
     Let's create a couple of users:
 
-        >>> petras = User('Petras', 'qwerty', gen_password=True)
-        >>> jonas = User('Jonas', '7jN1UP/WkmnVv/XZb28pFYf9flmlcIxUcoa1', gen_password=False)
+        >>> petras = User(u'Petras', 'qwerty', gen_password=True)
+        >>> jonas = User(u'Jonas', '7jN1UP/WkmnVv/XZb28pFYf9flmlcIxUcoa1', gen_password=False)
 
         >>> meta.Session.add(petras)
         >>> meta.Session.add(jonas)
@@ -132,7 +132,7 @@ def test_User_get():
         <ututi.model.User object at ...>
 
         >>> admin.fullname
-        'Adminas Adminovix'
+        u'Adminas Adminovix'
 
     If we pass an email that does not exist, we should get None:
 
@@ -142,7 +142,7 @@ def test_User_get():
     Let's see if it still works when we have more than one user in our
     database:
 
-        >>> petras = User('Petras', 'asdasd', gen_password=True)
+        >>> petras = User(u'Petras', 'asdasd', gen_password=True)
         >>> meta.Session.add(petras)
         >>> meta.Session.commit()
 

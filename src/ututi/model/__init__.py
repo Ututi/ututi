@@ -10,6 +10,7 @@ import pkg_resources
 from pylons import config
 
 from sqlalchemy import orm, Column, Integer, Sequence, Table
+from sqlalchemy.types import Unicode
 from sqlalchemy.exc import DatabaseError
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm import relation, backref
@@ -30,6 +31,7 @@ def setup_orm(engine):
     global users_table
     users_table = Table("users", meta.metadata,
                         Column('id', Integer, Sequence('users_id_seq'), primary_key=True),
+                        Column('fullname', Unicode(assert_unicode=True)),
                         autoload=True,
                         autoload_with=engine)
 
@@ -80,6 +82,8 @@ def setup_orm(engine):
 
     global page_versions_table
     page_versions_table = Table("page_versions", meta.metadata,
+                                Column('title', Unicode(assert_unicode=True)),
+                                Column('content', Unicode(assert_unicode=True)),
                                 autoload=True,
                                 autoload_with=engine)
     orm.mapper(PageVersion, page_versions_table,

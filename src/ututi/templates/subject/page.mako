@@ -10,5 +10,5 @@
 <h2>${c.page.title}</h2>
 
 <div>
-  ${c.page.content.decode('utf-8')|n}
+  ${c.page.content|n}
 </div>

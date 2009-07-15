@@ -40,7 +40,7 @@ class AdminController(BaseController):
                 if line.strip() == '':
                     continue
                 line = line.strip().split(',')
-                fullname = line[2].strip()
+                fullname = unicode(line[2].strip(), 'utf-8')
                 password = line[1].strip()[6:]
                 email = line[3].strip().lower()
                 user = User.get(email)
@@ -306,7 +306,9 @@ class AdminController(BaseController):
 
                 group = Group.get(group_id)
                 admin = User.get('admin@ututi.lt')
-                group.pages.append(Page(page_title, page_content, admin))
+                group.pages.append(Page(page_title.decode('utf-8'),
+                                        page_content.decode('utf-8'),
+                                        admin))
                 meta.Session.commit()
 
         redirect_to(controller='admin', action='index')
@@ -323,7 +325,8 @@ class AdminController(BaseController):
 
                 subject = Subject.get(subject_id)
                 admin = User.get('admin@ututi.lt')
-                subject.pages.append(Page(page_title, page_content, admin))
+                subject.pages.append(Page(page_title.decode('utf-8'),
+                                          page_content.decode('utf-8'), admin))
                 meta.Session.commit()
 
         redirect_to(controller='admin', action='index')
