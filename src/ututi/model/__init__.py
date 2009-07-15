@@ -49,6 +49,7 @@ def setup_orm(engine):
     global locationtags_table
     locationtags_table = Table("locationtags", meta.metadata,
                                Column('id', Integer, Sequence('locationtags_id_seq'), primary_key=True),
+                               Column('title', Unicode(assert_unicode=True)),
                                Column('description', Unicode(assert_unicode=True)),
                                useexisting=True,
                                autoload=True,
@@ -61,6 +62,8 @@ def setup_orm(engine):
     global files_table
     files_table = Table("files", meta.metadata,
                         Column('id', Integer, Sequence('files_id_seq'), primary_key=True),
+                        Column('folder', Unicode(assert_unicode=True)),
+                        Column('title', Unicode(assert_unicode=True)),
                         Column('description', Unicode(assert_unicode=True)),
                         autoload=True,
                         useexisting=True,
@@ -101,6 +104,8 @@ def setup_orm(engine):
     global subjects_table
     subjects_table = Table("subjects", meta.metadata,
                            Column('id', Integer, Sequence('subjects_id_seq'), primary_key=True),
+                           Column('title', Unicode(assert_unicode=True)),
+                           Column('lecturer', Unicode(assert_unicode=True)),
                            autoload=True,
                            useexisting=True,
                            autoload_with=engine)
@@ -404,7 +409,7 @@ class File(object):
     """Class representing user-uploaded files."""
 
     def __init__(self, filename, title, mimetype=None, created=None,
-                 description=u'', data=None, md5=None):
+                 description=u'', data=None, md5=None, folder=u''):
         if data is not None:
             md5_digest = hashlib.md5(data).hexdigest()
             if md5 is not None:
@@ -423,11 +428,11 @@ class File(object):
             self.created = created
             self.modified = created
         self.description = description
+        self.folder = folder
 
     @classmethod
     def makeNullFile(cls, folder):
-        result = cls("Null File", "Null File")
-        result.folder = folder
+        result = cls(u"Null File", u"Null File", folder=folder)
         return result
 
     def isNullFile(self):

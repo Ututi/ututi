@@ -28,15 +28,14 @@ def test_group_files():
 
         >>> group = Group.get("moderators")
 
-        >>> f = File("some.txt", 'A Text file', mimetype='text/plain', data="Wassup?")
-        >>> f.folder = "some folder"
+        >>> f = File("some.txt", u'A Text file', mimetype='text/plain', data="Wassup?")
+        >>> f.folder = u"some folder"
         >>> group.files.append(f)
 
-        >>> f = File("other.txt", 'Another text file', mimetype='text/plain', data="Wassup2")
+        >>> f = File("other.txt", u'Another text file', mimetype='text/plain', data="Wassup2")
         >>> group.files.append(f)
 
         >>> meta.Session.commit()
-        >>> meta.Session.expire_all()
 
         >>> group = Group.get("moderators")
         >>> group.files
@@ -57,7 +56,7 @@ def test_empty_folders():
     for that.
 
         >>> group = Group.get("moderators")
-        >>> group.files.append(File.makeNullFile("some folder"))
+        >>> group.files.append(File.makeNullFile(u"some folder"))
         >>> meta.Session.commit()
         >>> meta.Session.expire_all()
 

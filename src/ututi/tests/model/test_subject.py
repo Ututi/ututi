@@ -13,7 +13,7 @@ def test_Subject_get():
 
         >>> subject = Subject.get('mat_analize')
         >>> subject.id, subject.title
-        ('mat_analize', 'Matematin\xc4\x97 analiz\xc4\x97')
+        ('mat_analize', u'Matematin\u0117 analiz\u0117')
 
     In the future though, a subject will be uniquely identified by a
     location tag as well which will look like this:

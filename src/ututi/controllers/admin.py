@@ -87,7 +87,7 @@ class AdminController(BaseController):
                 if line.strip() == '':
                     continue
                 line = line.strip().split(',')
-                title = line[1].strip()
+                title = line[1].strip().decode('utf-8')
                 title_short = line[0].strip().lower()
                 description = line[2].strip().decode('utf-8')
                 parent = line[3].strip().lower()
@@ -214,6 +214,8 @@ class AdminController(BaseController):
                     continue
 
                 id, title, lecturer = row[:3]
+                title = title.decode('utf-8')
+                lecturer = lecturer.decode('utf-8')
                 subj = Subject.get(id)
                 if subj is None:
                     subj = Subject(id, title)
@@ -264,9 +266,9 @@ class AdminController(BaseController):
                 line = line.strip().split(',')
                 group_id = line[0]
                 group = Group.get(group_id)
-                f = File(filename=line[3], title=line[4])
+                f = File(filename=line[3], title=line[4].decode('utf-8'))
                 f.mimetype = line[2]
-                f.folder = line[1]
+                f.folder = line[1].decode('utf-8')
                 # XXX dummy content at the moment
                 f.store('Whatever!')
                 group.files.append(f)
@@ -284,9 +286,9 @@ class AdminController(BaseController):
                 line = line.strip().split(',')
                 subject_id = line[0]
                 subject = Subject.get(subject_id)
-                f = File(filename=line[3], title=line[4])
+                f = File(filename=line[3], title=line[4].decode('utf-8'))
                 f.mimetype = line[2]
-                f.folder = line[1]
+                f.folder = line[1].decode('utf-8')
                 # XXX dummy content at the moment
                 f.store('Whatever!')
                 subject.files.append(f)

@@ -2,7 +2,7 @@
 
 create table files (id bigserial not null,
        md5 char(32),
-       folder varchar(255) default '',
+       folder varchar(255) default '' not null,
        mimetype varchar(255) default 'application/octet-stream',
        filesize int8,
        filename varchar(500),
