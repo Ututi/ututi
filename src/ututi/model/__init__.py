@@ -161,7 +161,7 @@ def setup_orm(engine):
 def initialize_db_defaults(engine):
     initial_db_data = pkg_resources.resource_string(
         "ututi",
-        "config/defaults.sql").split(";;")
+        "model/defaults.sql").split(";;")
     connection = meta.engine.connect()
     for statement in initial_db_data:
         statement = statement.strip()
@@ -179,9 +179,6 @@ def initialize_db_defaults(engine):
 
 
 def teardown_db_defaults(engine, quiet=False):
-    initial_db_data = pkg_resources.resource_string(
-        "ututi",
-        "config/defaults.sql").splitlines()
     connection = meta.engine.connect()
     tx = connection.begin()
     connection.execute("drop schema public cascade")
