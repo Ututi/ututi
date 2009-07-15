@@ -89,7 +89,7 @@ class AdminController(BaseController):
                 line = line.strip().split(',')
                 title = line[1].strip()
                 title_short = line[0].strip().lower()
-                description = line[2].strip()
+                description = line[2].strip().decode('utf-8')
                 parent = line[3].strip().lower()
                 try:
                     if parent == '':
@@ -133,8 +133,8 @@ class AdminController(BaseController):
                     group = Group(id = id)
                     meta.Session.add(group)
 
-                group.title = title
-                group.description = desc
+                group.title = title.decode('utf-8')
+                group.description = desc.decode('utf-8')
                 if year != '' and year != 'None':
                     group.year = date(int(year), 1, 1)
                 else:

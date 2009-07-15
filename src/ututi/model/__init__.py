@@ -49,6 +49,7 @@ def setup_orm(engine):
     global locationtags_table
     locationtags_table = Table("locationtags", meta.metadata,
                                Column('id', Integer, Sequence('locationtags_id_seq'), primary_key=True),
+                               Column('description', Unicode(assert_unicode=True)),
                                useexisting=True,
                                autoload=True,
                                autoload_with=engine)
@@ -60,6 +61,7 @@ def setup_orm(engine):
     global files_table
     files_table = Table("files", meta.metadata,
                         Column('id', Integer, Sequence('files_id_seq'), primary_key=True),
+                        Column('description', Unicode(assert_unicode=True)),
                         autoload=True,
                         useexisting=True,
                         autoload_with=engine)
@@ -133,6 +135,9 @@ def setup_orm(engine):
 
     global groups_table
     groups_table = Table("groups", meta.metadata,
+                         Column('title', Unicode(assert_unicode=True)),
+                         Column('description', Unicode(assert_unicode=True)),
+                         useexisting=True,
                          autoload=True,
                          autoload_with=engine)
     orm.mapper(Group, groups_table,
@@ -399,7 +404,7 @@ class File(object):
     """Class representing user-uploaded files."""
 
     def __init__(self, filename, title, mimetype=None, created=None,
-                 description='', data=None, md5=None):
+                 description=u'', data=None, md5=None):
         if data is not None:
             md5_digest = hashlib.md5(data).hexdigest()
             if md5 is not None:

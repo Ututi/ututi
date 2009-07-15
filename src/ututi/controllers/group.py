@@ -266,9 +266,10 @@ class GroupController(BaseController):
 
         if values['logo_upload'] is not None and values['logo_upload'] != '':
             logo = values['logo_upload']
-            f = File(logo.filename, 'Logo for group %s' % group.title, mimetype=logo.type)
+            f = File(logo.filename, u'Logo for group %s' % group.title, mimetype=logo.type)
             f.store(logo.file)
             meta.Session.add(f)
+
             if group.logo is not None:
                 meta.Session.delete(group.logo)
             group.logo = f
