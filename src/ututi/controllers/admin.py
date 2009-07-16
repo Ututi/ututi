@@ -91,15 +91,8 @@ class AdminController(BaseController):
                 title_short = line[0].strip().lower()
                 description = line[2].strip().decode('utf-8')
                 parent = line[3].strip().lower()
-                try:
-                    if parent == '':
-                        tag = meta.Session.query(LocationTag).filter_by(title_short = title_short)\
-                            .filter_by(parent = None).one()
-                    else:
-                        tag = meta.Session.query(LocationTag).filter(LocationTag.title_short==title_short)\
-                            .join('parent', aliased=True).filter(LocationTag.title_short==parent)\
-                            .one()
-                except NoResultFound:
+                tag = LocationTag.get([parent, title_short])
+                if tag is None:
                     tag = LocationTag(title = title,
                                       title_short = title_short,
                                       description = description)
@@ -108,12 +101,9 @@ class AdminController(BaseController):
                 tag.description = description
 
                 meta.Session.add(tag)
-                if parent != '':
-                    try:
-                        parent = meta.Session.query(LocationTag).filter_by(title_short=parent).one()
-                        parent.children.append(tag)
-                    except NoResultFound:
-                        continue
+                if parent:
+                    parent = LocationTag.get([parent])
+                    parent.children.append(tag)
                 meta.Session.commit()
         redirect_to(controller='structure', action='index')
 
