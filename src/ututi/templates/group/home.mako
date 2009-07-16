@@ -75,6 +75,26 @@
     </span>
     <br style="clear: both;" />
   </%self:portlet>
+
+
+  <%self:portlet id="watched_subjects_portlet" portlet_class="inactive XXX">
+    <%def name="header()">
+      ${_('Watched subjects')}
+    </%def>
+    %for subject in c.group.watched_subjects:
+    <div>
+      <a href="${h.url_for(controller='subject', action='subject_home', id=subject.id, **subject.location_path)}">
+          ${subject.title}
+      </a>
+    </div>
+    %endfor
+    <br style="clear: both;" />
+    <span class="portlet-link">
+      <a class="small" href="${h.url_for(controller='group', action='subjects', id=c.group.id)}" title="${_('More')}">${_('More')}</a>
+    </span>
+    <br style="clear: both;" />
+  </%self:portlet>
+
 </div>
 </%def>
 

@@ -147,13 +147,21 @@ def setup_orm(engine):
                          useexisting=True,
                          autoload=True,
                          autoload_with=engine)
+
+    global group_watched_subjects_table
+    group_watched_subjects_table = Table("group_watched_subjects", meta.metadata,
+                                         autoload=True,
+                                         autoload_with=engine)
+
     orm.mapper(Group, groups_table,
                properties ={'logo': relation(File),
                             'pages': relation(Page,
                                               secondary=group_pages_table,
                                               backref='group'),
                             'files': relation(File,
-                                              secondary=group_files_table)
+                                              secondary=group_files_table),
+                            'watched_subjects': relation(Subject,
+                                                         secondary=group_watched_subjects_table)
                             })
 
     from ututi.model import mailing

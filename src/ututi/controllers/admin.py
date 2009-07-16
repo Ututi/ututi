@@ -322,3 +322,35 @@ class AdminController(BaseController):
 
         redirect_to(controller='admin', action='index')
 
+    def _getReader(self):
+        file = request.POST.get('file_upload', None)
+        if file is not None and file != '':
+            return csv.reader(file.value.splitlines())
+        return []
+
+    def import_group_watched_subjects(self):
+        for row in self._getReader():
+            group = Group.get(row[0])
+            location = LocationTag.get(row[1:3])
+            subject = Subject.get(location, row[3])
+            group.watched_subjects.append(subject)
+            meta.Session.commit()
+        redirect_to(controller='admin', action='index')
+
+    def import_user_watched_subjects(self):
+        for row in self._getReader():
+            user = User.get(row[0])
+            location = LocationTag.get(row[1:3])
+            subject = Subject.get(location, row[3])
+            user.watched_subjects.append(subject)
+        meta.Session.commit()
+        redirect_to(controller='admin', action='index')
+
+    def import_user_ignored_subjects(self):
+        for row in self._getReader():
+            user = User.get(row[0])
+            location = LocationTag.get(row[1:3])
+            subject = Subject.get(location, row[3])
+            user.ignored_subjects.append(subject)
+        meta.Session.commit()
+        redirect_to(controller='admin', action='index')

@@ -25,3 +25,6 @@ ${self.import_form(_('Group file import'), 'import_group_files')}
 ${self.import_form(_('Subject file import'), 'import_subject_files')}
 ${self.import_form(_('Group page import'), 'import_group_pages')}
 ${self.import_form(_('Subject page import'), 'import_subject_pages')}
+${self.import_form(_('Group watched subject import'), 'import_group_watched_subjects')}
+${self.import_form(_('User watched subject import'), 'import_user_ignored_subjects')}
+${self.import_form(_('User ignored subject import'), 'import_user_watched_subjects')}

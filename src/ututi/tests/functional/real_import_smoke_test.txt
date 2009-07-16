@@ -28,8 +28,8 @@ And upload all the files one by one:
     >>> import_csv(browser, 'import_subject_files', 'export_subject_files.csv')
     >>> import_csv(browser, 'import_group_pages', 'export_group_pages.csv')
     >>> import_csv(browser, 'import_subject_pages', 'export_subject_pages.csv')
+    >>> import_csv(browser, 'import_group_watched_subjects', 'export_group_watched_subjects.csv')
 
-    # >>> import_csv(browser, 'import_group_watched_subjects', 'export_group_watched_subjects.csv')
     # >>> import_csv(browser, 'import_user_ignored_subjects', 'export_user_ignored_subjects.csv')
     # >>> import_csv(browser, 'import_user_watched_subjects', 'export_user_watched_subjects.csv')
 

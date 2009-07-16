@@ -150,6 +150,15 @@ create table group_files (
        file_id int8 references files(id) not null,
        primary key (group_id, file_id));;
 
+/* A table that tracks subjects watched by a group  */
+
+create table group_watched_subjects (
+       group_id varchar(250) references groups(id) not null,
+       subject_id varchar(150) not null,
+       subject_location_id int8 not null,
+       foreign key (subject_id, subject_location_id) references subjects,
+       primary key (group_id, subject_id, subject_location_id));;
+
 /* A table linking pages and groups */
 
 create table group_pages (
