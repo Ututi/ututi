@@ -1,4 +1,4 @@
-=======================================================
+========================================================================
 From r@toostis.com Sun Apr 19 04:12:41 2009
 From: R <r@toostis.com>
 To: archpio@lists.ututi.lt
@@ -16,7 +16,7 @@ On Apr 19, 2009 04:11 AM, R wrote:
 > naudojimo - tai visai paprasta.
 
 Super idƒója :D:D
-=======================================================
+========================================================================
 From jaro@ututi.com Sun Apr 19 11:27:45 2009
 From: Jaroslav =?utf-8?b?xaBhdGtldmnEjQ==?= <jaro@ututi.com>
 To: archpio@lists.ututi.lt
@@ -29,7 +29,7 @@ In-reply-to: <MailBoxer.1.1240103561.0.archpio@lists.ututi.lt>
 
 .
 
-=======================================================
+========================================================================
 From mildakrup@gmail.com Tue Apr 21 18:21:21 2009
 From: Milda <mildakrup@gmail.com>
 To: archpio@lists.ututi.lt
@@ -54,7 +54,7 @@ On Apr 19, 2009 04:12 AM, R wrote:
 Gera skiltis.. "ArchFAK" :))))) Siulau istrinti yahoo grupsa kad jo ne kvapo
 nebutu ir nekiltu kitiem noras juo naudotis :) priverstine
 prevencija...muhahaha... :))
-=======================================================
+========================================================================
 From r@toostis.com Sun Apr 19 04:11:49 2009
 From: R <r@toostis.com>
 To: archpio@lists.ututi.lt
@@ -65,9 +65,9 @@ Message-id: <MailBoxer.0.1240103509.55.archpio@lists.ututi.lt>
 Geros naujienos!
 
 M≈´s≈≥ grupƒó (taip, A06/2) buvo pasirinkta i≈°bandyti naujƒÖjƒØ projektƒÖ UTUTI. Nuo ≈°iol m≈´s≈≥ groupsas ir failai ir visa kita persikelia ƒçia ;) Gero naudojimo - tai visai paprasta.
-=======================================================
+========================================================================
 From r@toostis.com Tue Apr 21 18:22:22 2009
-Content-Type: multipart/mixed; boundary="===============0363063197=="
+Content-Type: multipart/mixed; boundary="===============1214966918=="
 MIME-Version: 1.0
 From: Ringaile Jurgeleviciute <r@toostis.com>
 To: archpio@lists.ututi.lt
@@ -79,7 +79,7 @@ References: <MailBoxer.0.1240103509.55.archpio@lists.ututi.lt>
 	<MailBoxer.3.1240327281.4.archpio@lists.ututi.lt>
 In-reply-to: <MailBoxer.3.1240327281.4.archpio@lists.ututi.lt>
 
---===============0363063197==
+--===============1214966918==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -119,7 +119,7 @@ jo :) kai visus permesim ƒØ UTUTI, yahoo trinsim
 R.
 
 
---===============0363063197==
+--===============1214966918==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -146,8 +146,8 @@ Archive: <a href="http://alpha.ututi.com/vgtu/archfak/archpio/forum/archive/2009
 </div></div></blockquote></div><br><br clear="all"><br>-- <br>R.<br>
 
 
---===============0363063197==--
-=======================================================
+--===============1214966918==--
+========================================================================
 From martynapilyp@gmail.com Wed Apr 22 16:03:33 2009
 From: Martyna Pilypait <martynapilyp@gmail.com>
 To: archpio@lists.ututi.lt
@@ -156,9 +156,9 @@ Date: 22 Apr 2009 16:03:33
 Message-id: <MailBoxer.4.1240405413.31.archpio@lists.ututi.lt>
 
 Primenu, kad rytoj i architekturos istorija 10.20. 
-=======================================================
+========================================================================
 From mildakrup@gmail.com Wed Apr 22 16:07:09 2009
-Content-Type: multipart/mixed; boundary="===============0771492735=="
+Content-Type: multipart/mixed; boundary="===============1372131710=="
 MIME-Version: 1.0
 From: Milda Krupelyte <mildakrup@gmail.com>
 To: archpio@lists.ututi.lt
@@ -168,7 +168,7 @@ Message-id: <61aa95c00904220607s5a1dca9bwe4cc9f730d241c16@mail.gmail.com>
 References: <MailBoxer.4.1240405413.31.archpio@lists.ututi.lt>
 In-reply-to: <MailBoxer.4.1240405413.31.archpio@lists.ututi.lt>
 
---===============0771492735==
+--===============1372131710==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -188,7 +188,7 @@ labai geras priminimas, dekui :)
 >
 
 
---===============0771492735==
+--===============1372131710==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -199,8 +199,8 @@ To unsubscribe send an email with subject &quot;unsubscribe&quot; to <a href="ma
 </font></blockquote></div><br>
 
 
---===============0771492735==--
-=======================================================
+--===============1372131710==--
+========================================================================
 From r@toostis.com Mon May  4 17:22:18 2009
 From: R <r@toostis.com>
 To: archpio@lists.ututi.lt
@@ -215,7 +215,7 @@ On May 04, 2009 05:16 PM, Jurgis Gecys wrote:
 > aplankala prisegiau.
 
 ƒØ kelis aplankus prisegei, visks okay. aƒçi≈´! :)
-=======================================================
+========================================================================
 From gytte.a@gmail.com Mon May  4 18:45:15 2009
 From: Gytaute Akstinaite <gytte.a@gmail.com>
 To: archpio@lists.ututi.lt
@@ -237,7 +237,7 @@ On May 04, 2009 05:22 PM, R wrote:
 aha, viskas turejo buti inzineriniu sistemu, o ne spec.konstrukciju aplanke :}
 Reiktu viska perkelti, R, gal tu moki? :}
 ir aciu, Jurgi, uz file'us! ;]
-=======================================================
+========================================================================
 From r@toostis.com Tue May  5 12:09:15 2009
 From: R <r@toostis.com>
 To: archpio@lists.ututi.lt
@@ -252,7 +252,7 @@ In-reply-to: <MailBoxer.7.1241451915.93.archpio@lists.ututi.lt>
 sutvarkiau failus, visi vietose.
 
 r
-=======================================================
+========================================================================
 From mildakrup@gmail.com Wed May  6 14:20:05 2009
 From: Milda <mildakrup@gmail.com>
 To: archpio@lists.ututi.lt
@@ -266,9 +266,9 @@ References: <MailBoxer.5.1241446587.08.archpio@lists.ututi.lt>
 In-reply-to: <MailBoxer.8.1241514555.01.archpio@lists.ututi.lt>
 
 Sveiki ikeliau siandienos paskaitu  medziaga.
-=======================================================
+========================================================================
 From domkiz@yahoo.com Wed May  6 22:41:27 2009
-Content-Type: multipart/mixed; boundary="===============0544161109=="
+Content-Type: multipart/mixed; boundary="===============1325819148=="
 MIME-Version: 1.0
 From: DomkiZ <domkiz@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -281,7 +281,7 @@ References: <MailBoxer.5.1241446587.08.archpio@lists.ututi.lt>
 	<MailBoxer.8.1241514555.01.archpio@lists.ututi.lt>
 In-reply-to: <MailBoxer.8.1241514555.01.archpio@lists.ututi.lt>
 
---===============0544161109==
+--===============1325819148==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -294,7 +294,7 @@ DS
 
       
 
---===============0544161109==
+--===============1325819148==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -305,8 +305,8 @@ Content-Type: text/html
 
       </body></html>
 
---===============0544161109==--
-=======================================================
+--===============1325819148==--
+========================================================================
 From arch_jurgis_gecys@yahoo.com Mon May  4 17:16:27 2009
 From: Jurgis Gecys <arch_jurgis_gecys@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -315,9 +315,9 @@ Date: 04 May 2009 17:16:27
 Message-id: <MailBoxer.5.1241446587.08.archpio@lists.ututi.lt>
 
 imeciau visokiu pavydziu inzinerinem sistemom. tik bijau kad ne i ta aplankala prisegiau.
-=======================================================
+========================================================================
 From martynapilyp@gmail.com Wed May  6 22:45:32 2009
-Content-Type: multipart/mixed; boundary="===============0618987455=="
+Content-Type: multipart/mixed; boundary="===============0582422279=="
 MIME-Version: 1.0
 From: Martyna Pilypaite <martynapilyp@gmail.com>
 To: archpio@lists.ututi.lt
@@ -331,7 +331,7 @@ References: <MailBoxer.5.1241446587.08.archpio@lists.ututi.lt>
 	<205442.85291.qm@web32406.mail.mud.yahoo.com>
 In-reply-to: <205442.85291.qm@web32406.mail.mud.yahoo.com>
 
---===============0618987455==
+--===============0582422279==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -355,7 +355,7 @@ TAIP :)
 >
 
 
---===============0618987455==
+--===============0582422279==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -370,8 +370,8 @@ To unsubscribe send an email with subject &quot;unsubscribe&quot; to <a href="ma
 </div></div></div></blockquote></div><br>
 
 
---===============0618987455==--
-=======================================================
+--===============0582422279==--
+========================================================================
 From arch_jurgis_gecys@yahoo.com Thu May  7 19:32:28 2009
 From: Jurgis Gecys <arch_jurgis_gecys@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -384,9 +384,9 @@ In-reply-to: <MailBoxer.10.1241713806.98.archpio@lists.ututi.lt>
 pasitaisau 
 
 Destytoju parasais :)
-=======================================================
+========================================================================
 From r@toostis.com Thu May  7 20:50:47 2009
-Content-Type: multipart/mixed; boundary="===============1368921041=="
+Content-Type: multipart/mixed; boundary="===============1736581901=="
 MIME-Version: 1.0
 From: Ringaile Jurgeleviciute <r@toostis.com>
 To: archpio@lists.ututi.lt
@@ -397,7 +397,7 @@ References: <MailBoxer.10.1241713806.98.archpio@lists.ututi.lt>
 	<MailBoxer.11.1241713948.15.archpio@lists.ututi.lt>
 In-reply-to: <MailBoxer.11.1241713948.15.archpio@lists.ututi.lt>
 
---===============1368921041==
+--===============1736581901==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -424,7 +424,7 @@ student≈≥
 R.
 
 
---===============1368921041==
+--===============1736581901==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -440,10 +440,10 @@ Archive: <a href="http://alpha.ututi.com/vgtu/archfak/archpio/forum/archive/2009
 </div></div></blockquote></div><br><br clear="all"><br>-- <br>R.<br>
 
 
---===============1368921041==--
-=======================================================
+--===============1736581901==--
+========================================================================
 From gytte.a@gmail.com Thu May  7 20:56:03 2009
-Content-Type: multipart/mixed; boundary="===============0889636665=="
+Content-Type: multipart/mixed; boundary="===============1161357538=="
 MIME-Version: 1.0
 From: Gyte <gytte.a@gmail.com>
 To: archpio@lists.ututi.lt
@@ -455,7 +455,7 @@ References: <MailBoxer.10.1241713806.98.archpio@lists.ututi.lt>
 	<3970a7bd0905071050t28149bb6ifced08403453f46e@mail.gmail.com>
 In-reply-to: <3970a7bd0905071050t28149bb6ifced08403453f46e@mail.gmail.com>
 
---===============0889636665==
+--===============1161357538==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -497,7 +497,7 @@ situacijos...:D
 >
 
 
---===============0889636665==
+--===============1161357538==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -524,8 +524,8 @@ Archive: <a href="http://alpha.ututi.com/vgtu/archfak/archpio/forum/archive/2009
 </div></div></blockquote></div><br>
 
 
---===============0889636665==--
-=======================================================
+--===============1161357538==--
+========================================================================
 From arch_jurgis_gecys@yahoo.com Thu May  7 19:30:06 2009
 From: Jurgis Gecys <arch_jurgis_gecys@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -537,9 +537,9 @@ Siaip tai man jau nusibodo klausyti dekanato morala, kodel mano kolegos neatnesa
 Nuo pirmadienio bus israsomi asmeniniai papeikimai ir kvietimai aiskintis su dekanu.
 
 J.
-=======================================================
+========================================================================
 From r@toostis.com Thu May  7 21:05:43 2009
-Content-Type: multipart/mixed; boundary="===============1688936944=="
+Content-Type: multipart/mixed; boundary="===============0334763425=="
 MIME-Version: 1.0
 From: Ringaile Jurgeleviciute <r@toostis.com>
 To: archpio@lists.ututi.lt
@@ -552,7 +552,7 @@ References: <MailBoxer.10.1241713806.98.archpio@lists.ututi.lt>
 	<c1b163570905071055i50356fa3p1459027218180095@mail.gmail.com>
 In-reply-to: <c1b163570905071055i50356fa3p1459027218180095@mail.gmail.com>
 
---===============1688936944==
+--===============0334763425==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -612,7 +612,7 @@ njo. 'daug darb≈≥, nespƒójau pasira≈°yti..'
 R.
 
 
---===============1688936944==
+--===============0334763425==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -647,10 +647,10 @@ Archive: <a href="http://alpha.ututi.com/vgtu/archfak/archpio/forum/archive/2009
 </div></div></blockquote></div><br><br clear="all"><br>-- <br>R.<br>
 
 
---===============1688936944==--
-=======================================================
+--===============0334763425==--
+========================================================================
 From arch_jurgis_gecys@yahoo.com Thu May  7 23:11:40 2009
-Content-Type: multipart/mixed; boundary="===============1901478428=="
+Content-Type: multipart/mixed; boundary="===============1964634161=="
 MIME-Version: 1.0
 From: Jurgis Gecys <arch_jurgis_gecys@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -658,7 +658,7 @@ Subject: Re: Re: Knygutes
 Date: 07 May 2009 23:11:40
 Message-id: <454093.17201.qm@web45705.mail.sp1.yahoo.com>
 
---===============1901478428==
+--===============1964634161==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -669,7 +669,7 @@ Content-Transfer-Encoding: 8bit
 
       
 
---===============1901478428==
+--===============1964634161==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -677,8 +677,8 @@ Content-Type: text/html
 
       
 
---===============1901478428==--
-=======================================================
+--===============1964634161==--
+========================================================================
 From gytte.a@gmail.com Sat May  9 14:39:58 2009
 From: Gytaute Akstinaite <gytte.a@gmail.com>
 To: archpio@lists.ututi.lt
@@ -695,7 +695,7 @@ On May 09, 2009 02:34 PM, Gytaute Akstinaite wrote:
 > tinkamos nuotraukos bus panaudotos turizmo knygoje ir ieis i istorija :P )
 
 emm, tiksliau ne turizmo knygoj, o Vilniaus gide :}
-=======================================================
+========================================================================
 From r@toostis.com Sat May  9 15:45:03 2009
 From: R <r@toostis.com>
 To: archpio@lists.ututi.lt
@@ -712,7 +712,7 @@ i≈° jonini≈≥ tipi≈°kos fotkƒós: lau≈æas, ≈æmonƒós ir kr≈´vos bambali≈≥ aplink.. 
 
 
 
-=======================================================
+========================================================================
 From gytte.a@gmail.com Sat May  9 14:34:53 2009
 From: Gytaute Akstinaite <gytte.a@gmail.com>
 To: archpio@lists.ututi.lt
@@ -721,7 +721,7 @@ Date: 09 May 2009 14:34:53
 Message-id: <MailBoxer.12.1241868893.29.archpio@lists.ututi.lt>
 
 Sveiki, gal kas turite nuotrauku is Joniniu arba Uzgaveniu svenciu? reiktu tokiu, hm, objektyviu gal,  kurios atspindetu tradicijas ir pan. :) jei turite bent viena, gal galetumete atsiusti man per skype? aciu :}  ( tinkamos nuotraukos bus panaudotos turizmo knygoje ir ieis i istorija :P )
-=======================================================
+========================================================================
 From arch_jurgis_gecys@yahoo.com Wed May 13 14:50:35 2009
 From: Jurgis Gecys <arch_jurgis_gecys@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -732,7 +732,7 @@ Message-id: <MailBoxer.15.1242215435.6.archpio@lists.ututi.lt>
 ikeliau zemaicio sukonkretintos uzduoties failiuka. Taip pat jeigu kam pasimete ikeliau aiskinamojo rasto plana projei. O Andres  duotas planas aiskinrasciui labai jau naglas. cia viskas paprasciau.
 
 enjoy :)
-=======================================================
+========================================================================
 From mildakrup@gmail.com Wed May 13 15:21:34 2009
 From: Milda <mildakrup@gmail.com>
 To: archpio@lists.ututi.lt
@@ -741,7 +741,7 @@ Date: 13 May 2009 15:21:34
 Message-id: <MailBoxer.16.1242217294.27.archpio@lists.ututi.lt>
 
 Sveiki, ƒØkƒóliau ≈°iandienos paskaitos med≈æiagƒÖ.
-=======================================================
+========================================================================
 From arch_jurgis_gecys@yahoo.com Fri May 15 12:33:20 2009
 From: Jurgis Gecys <arch_jurgis_gecys@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -752,9 +752,9 @@ References: <MailBoxer.17.1242373328.13.archpio@lists.ututi.lt>
 In-reply-to: <MailBoxer.17.1242373328.13.archpio@lists.ututi.lt>
 
 paskaita atsaukta
-=======================================================
+========================================================================
 From mildakrup@gmail.com Fri May 15 12:33:55 2009
-Content-Type: multipart/mixed; boundary="===============1914950387=="
+Content-Type: multipart/mixed; boundary="===============0795344196=="
 MIME-Version: 1.0
 From: Milda Krupelyte <mildakrup@gmail.com>
 To: archpio@lists.ututi.lt
@@ -765,7 +765,7 @@ References: <MailBoxer.17.1242373328.13.archpio@lists.ututi.lt>
 	<MailBoxer.18.1242380000.88.archpio@lists.ututi.lt>
 In-reply-to: <MailBoxer.18.1242380000.88.archpio@lists.ututi.lt>
 
---===============1914950387==
+--===============0795344196==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -785,7 +785,7 @@ geras, kodel? :)
 >
 
 
---===============1914950387==
+--===============0795344196==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -799,10 +799,10 @@ Archive: <a href="http://alpha.ututi.com/vgtu/archfak/archpio/forum/archive/2009
 </div></div></blockquote></div><br>
 
 
---===============1914950387==--
-=======================================================
+--===============0795344196==--
+========================================================================
 From gytte.a@gmail.com Fri May 15 12:41:23 2009
-Content-Type: multipart/mixed; boundary="===============0342651808=="
+Content-Type: multipart/mixed; boundary="===============0251039320=="
 MIME-Version: 1.0
 From: Gyte <gytte.a@gmail.com>
 To: archpio@lists.ututi.lt
@@ -814,7 +814,7 @@ References: <MailBoxer.17.1242373328.13.archpio@lists.ututi.lt>
 	<61aa95c00905150233i6aef164brdd28e240eda52a96@mail.gmail.com>
 In-reply-to: <61aa95c00905150233i6aef164brdd28e240eda52a96@mail.gmail.com>
 
---===============0342651808==
+--===============0251039320==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -848,7 +848,7 @@ On Fri, May 15, 2009 at 12:33 PM, Milda Krupelyte <mildakrup@gmail.com>wrote:
 >
 
 
---===============0342651808==
+--===============0251039320==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -871,10 +871,10 @@ Archive: <a href="http://alpha.ututi.com/vgtu/archfak/archpio/forum/archive/2009
 </div></div></blockquote></div><br>
 
 
---===============0342651808==--
-=======================================================
+--===============0251039320==--
+========================================================================
 From mildakrup@gmail.com Fri May 15 12:42:42 2009
-Content-Type: multipart/mixed; boundary="===============0807607013=="
+Content-Type: multipart/mixed; boundary="===============0091364473=="
 MIME-Version: 1.0
 From: Milda Krupelyte <mildakrup@gmail.com>
 To: archpio@lists.ututi.lt
@@ -887,7 +887,7 @@ References: <MailBoxer.17.1242373328.13.archpio@lists.ututi.lt>
 	<c1b163570905150241u2d1e9a34ib6ebbf464a17e80e@mail.gmail.com>
 In-reply-to: <c1b163570905150241u2d1e9a34ib6ebbf464a17e80e@mail.gmail.com>
 
---===============0807607013==
+--===============0091364473==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -935,7 +935,7 @@ tai as kiek supratau tai jo iki perziuros nebus..ar ne ? kas tiksliai zinot
 >
 
 
---===============0807607013==
+--===============0091364473==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -967,10 +967,10 @@ Archive: <a href="http://alpha.ututi.com/vgtu/archfak/archpio/forum/archive/2009
 </div></div></blockquote></div><br>
 
 
---===============0807607013==--
-=======================================================
+--===============0091364473==--
+========================================================================
 From r@toostis.com Fri May 15 12:42:50 2009
-Content-Type: multipart/mixed; boundary="===============1308429242=="
+Content-Type: multipart/mixed; boundary="===============0209058880=="
 MIME-Version: 1.0
 From: Ringaile Jurgeleviciute <r@toostis.com>
 To: archpio@lists.ututi.lt
@@ -983,7 +983,7 @@ References: <MailBoxer.17.1242373328.13.archpio@lists.ututi.lt>
 	<c1b163570905150241u2d1e9a34ib6ebbf464a17e80e@mail.gmail.com>
 In-reply-to: <c1b163570905150241u2d1e9a34ib6ebbf464a17e80e@mail.gmail.com>
 
---===============1308429242==
+--===============0209058880==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -1035,7 +1035,7 @@ tai reikia domilei pasakyti, kad neva≈æiuot≈≥.
 R.
 
 
---===============1308429242==
+--===============0209058880==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -1066,8 +1066,8 @@ Archive: <a href="http://alpha.ututi.com/vgtu/archfak/archpio/forum/archive/2009
 </div></div></blockquote></div><br><br clear="all"><br>-- <br>R.<br>
 
 
---===============1308429242==--
-=======================================================
+--===============0209058880==--
+========================================================================
 From agata.slbrt@gmail.com Sat May 16 11:58:06 2009
 From: Agata <agata.slbrt@gmail.com>
 To: archpio@lists.ututi.lt
@@ -1107,9 +1107,9 @@ Taikomosios dailƒós muziejuje nuo 11 val. iki 18 val. lankytojai ne tik gro≈æƒós
 
 
 Einam? :)
-=======================================================
+========================================================================
 From mildakrup@gmail.com Sat May 16 12:43:55 2009
-Content-Type: multipart/mixed; boundary="===============0047308295=="
+Content-Type: multipart/mixed; boundary="===============1749690066=="
 MIME-Version: 1.0
 From: Milda Krupelyte <mildakrup@gmail.com>
 To: archpio@lists.ututi.lt
@@ -1119,7 +1119,7 @@ Message-id: <61aa95c00905160243q6b1778d8y8b2fec7c10faf9ff@mail.gmail.com>
 References: <MailBoxer.19.1242464286.7.archpio@lists.ututi.lt>
 In-reply-to: <MailBoxer.19.1242464286.7.archpio@lists.ututi.lt>
 
---===============0047308295==
+--===============1749690066==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -1227,7 +1227,7 @@ Einam :)
 >
 
 
---===============0047308295==
+--===============1749690066==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -1279,8 +1279,8 @@ To unsubscribe send an email with subject &quot;unsubscribe&quot; to <a href="ma
 </font></blockquote></div><br>
 
 
---===============0047308295==--
-=======================================================
+--===============1749690066==--
+========================================================================
 From giedrejon@gmail.com Sun May 17 15:32:09 2009
 From: Giedre J. <giedrejon@gmail.com>
 To: archpio@lists.ututi.lt
@@ -1290,9 +1290,9 @@ Message-id: <MailBoxer.20.1242563529.56.archpio@lists.ututi.lt>
 
 Googlindama aptikau viena pdf ir pastebejau, kad beveik visus brezinius is jo Stauskis rode per paskaitas. Tai cia gaunasi kaip ir dalis konspektu egzui - viskas aiskiai nubraizyta ir surasyta:
 http://www.betonika.lt/docs/Visos_surenkamos_gelzbetonio_konstrukcijos.pdf
-=======================================================
+========================================================================
 From giedrejon@gmail.com Sun May 17 16:35:15 2009
-Content-Type: multipart/mixed; boundary="===============2098786801=="
+Content-Type: multipart/mixed; boundary="===============0828694832=="
 MIME-Version: 1.0
 From: "Giedre J." <giedrejon@gmail.com>
 To: archpio@lists.ututi.lt
@@ -1302,7 +1302,7 @@ Message-id: <3b5b14060905170635j17d1b6b6tea2f34b55e68b0e9@mail.gmail.com>
 References: <148233.44256.qm@web45715.mail.sp1.yahoo.com>
 In-reply-to: <148233.44256.qm@web45715.mail.sp1.yahoo.com>
 
---===============2098786801==
+--===============0828694832==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -1310,17 +1310,17 @@ Content-Transfer-Encoding: 7bit
 tai tuoj imesiu prie konstrukciju failu
 
 
---===============2098786801==
+--===============0828694832==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
 tai tuoj imesiu prie konstrukciju failu<br>
 
 
---===============2098786801==--
-=======================================================
+--===============0828694832==--
+========================================================================
 From arch_jurgis_gecys@yahoo.com Sun May 17 15:48:27 2009
-Content-Type: multipart/mixed; boundary="===============1391667070=="
+Content-Type: multipart/mixed; boundary="===============1481407664=="
 MIME-Version: 1.0
 From: Jurgis Gecys <arch_jurgis_gecys@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -1328,7 +1328,7 @@ Subject: Re: Stauskio teorijos
 Date: 17 May 2009 15:48:27
 Message-id: <148233.44256.qm@web45715.mail.sp1.yahoo.com>
 
---===============1391667070==
+--===============1481407664==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -1339,7 +1339,7 @@ padeka, tik visa beda, kad to failiuko iki galo neatidaro ir ismeta ERORA :(
 
       
 
---===============1391667070==
+--===============1481407664==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -1347,8 +1347,8 @@ Content-Type: text/html
 
       
 
---===============1391667070==--
-=======================================================
+--===============1481407664==--
+========================================================================
 From arch_jurgis_gecys@yahoo.com Sun May 17 20:42:54 2009
 From: Jurgis Gecys <arch_jurgis_gecys@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -1359,7 +1359,7 @@ Message-id: <MailBoxer.21.1242582174.3.archpio@lists.ututi.lt>
 kam labai tamsu, tai ikƒóliau konstrukciju aiskinamojo rasto pavyzduki.
 
 Geroves visiems :)
-=======================================================
+========================================================================
 From giedrejon@gmail.com Wed May 20 16:37:02 2009
 From: Giedre J. <giedrejon@gmail.com>
 To: archpio@lists.ututi.lt
@@ -1368,7 +1368,7 @@ Date: 20 May 2009 16:37:02
 Message-id: <MailBoxer.23.1242826622.43.archpio@lists.ututi.lt>
 
 prie pastatu inz. sistemu ideta Gerdziuno knyga apie iforminimu reikalavimus, gal kam pravers.
-=======================================================
+========================================================================
 From mildakrup@gmail.com Wed May 20 20:42:52 2009
 From: Milda <mildakrup@gmail.com>
 To: archpio@lists.ututi.lt
@@ -1377,7 +1377,7 @@ Date: 20 May 2009 20:42:52
 Message-id: <MailBoxer.24.1242841372.23.archpio@lists.ututi.lt>
 
 Sveiki ƒØkƒóliau ≈°iandienos paskaitos med≈æiagƒÖ. Skanaus. 
-=======================================================
+========================================================================
 From arch_jurgis_gecys@yahoo.com Thu May 21 22:11:28 2009
 From: Jurgis Gecys <arch_jurgis_gecys@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -1390,9 +1390,9 @@ In-reply-to: <3970a7bd0905211148n1cc6341k8802eacc12a3951b@mail.gmail.com>
 hm ,sakyciau pinigu ir laiko svaistymas.. skechapas yra pati paprasciausia ir
 lengwiausia 3d modeliavimo programa. Naudingiau butu pasimokyt maxo....
 subjektyvu. betkokiu atveju dekui uz info
-=======================================================
+========================================================================
 From r@toostis.com Thu May 21 22:13:32 2009
-Content-Type: multipart/mixed; boundary="===============0754094454=="
+Content-Type: multipart/mixed; boundary="===============0255741194=="
 MIME-Version: 1.0
 From: Ringaile Jurgeleviciute <r@toostis.com>
 To: archpio@lists.ututi.lt
@@ -1403,7 +1403,7 @@ References: <3970a7bd0905211148n1cc6341k8802eacc12a3951b@mail.gmail.com>
 	<MailBoxer.25.1242933088.49.archpio@lists.ututi.lt>
 In-reply-to: <MailBoxer.25.1242933088.49.archpio@lists.ututi.lt>
 
---===============0754094454==
+--===============0255741194==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -1431,7 +1431,7 @@ a≈° irgi nemokƒóƒçiau. tik persiunƒçiau :)
 R.
 
 
---===============0754094454==
+--===============0255741194==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -1447,10 +1447,10 @@ To unsubscribe send an email with subject &quot;unsubscribe&quot; to <a href="ma
 </font></blockquote></div><br><br clear="all"><br>-- <br>R.<br>
 
 
---===============0754094454==--
-=======================================================
+--===============0255741194==--
+========================================================================
 From maly2zajac@yahoo.com Fri May 22 11:42:20 2009
-Content-Type: multipart/mixed; boundary="===============1576243377=="
+Content-Type: multipart/mixed; boundary="===============0114582088=="
 MIME-Version: 1.0
 From: "Miroslav M." <maly2zajac@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -1461,7 +1461,7 @@ References: <3970a7bd0905211148n1cc6341k8802eacc12a3951b@mail.gmail.com>
 	<MailBoxer.25.1242933088.49.archpio@lists.ututi.lt>
 In-reply-to: <MailBoxer.25.1242933088.49.archpio@lists.ututi.lt>
 
---===============1576243377==
+--===============0114582088==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -1494,7 +1494,7 @@ To unsubscribe send an email with subject "unsubscribe" to archpio@lists.ututi.l
 
       
 
---===============1576243377==
+--===============0114582088==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -1506,10 +1506,10 @@ hm ,sakyciau pinigu ir laiko svaistymas.. skechapas yra pati paprasciausia ir<br
 
       </body></html>
 
---===============1576243377==--
-=======================================================
+--===============0114582088==--
+========================================================================
 From r@toostis.com Thu May 21 21:48:12 2009
-Content-Type: multipart/mixed; boundary="===============1821462286=="
+Content-Type: multipart/mixed; boundary="===============1709752682=="
 MIME-Version: 1.0
 From: Ringaile Jurgeleviciute <r@toostis.com>
 To: archpio@lists.ututi.lt
@@ -1517,7 +1517,7 @@ Subject: Mokymai su SKETCHUP'u
 Date: 21 May 2009 21:48:12
 Message-id: <3970a7bd0905211148n1cc6341k8802eacc12a3951b@mail.gmail.com>
 
---===============1821462286==
+--===============1709752682==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -1529,14 +1529,14 @@ Sveiki, ne≈æinau, ar aktualu kam nors, bet i≈° principo aktualu :)
 R.
 
 
---===============1821462286==
+--===============1709752682==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
 Sveiki, ne˛inau, ar aktualu kam nors, bet i principo aktualu :) <br><br clear="all"><br>-- <br>R.<br>
 
 
---===============1821462286==
+--===============1709752682==
 Content-Disposition: attachment; filename="Mokymai.pdf"
 Content-Type: application/pdf
 
@@ -1999,8 +1999,8 @@ startxref
 68634
 %%EOF
 
---===============1821462286==--
-=======================================================
+--===============1709752682==--
+========================================================================
 From martynapilyp@gmail.com Sat May 23 18:56:02 2009
 From: Martyna Pilypait <martynapilyp@gmail.com>
 To: archpio@lists.ututi.lt
@@ -2021,9 +2021,9 @@ O kada galetume tada jums atnesti referatus ir projekta?
 A≈° b≈´siu Trak≈≥ 1 antradienƒØ nuo 8:30 iki 9:40 ir ketvirtadienƒØ nuo 10:20 iki 12 val.
 
 
-=======================================================
+========================================================================
 From gytte.a@gmail.com Sat May 23 19:45:22 2009
-Content-Type: multipart/mixed; boundary="===============2123767849=="
+Content-Type: multipart/mixed; boundary="===============0567701593=="
 MIME-Version: 1.0
 From: Gyte <gytte.a@gmail.com>
 To: archpio@lists.ututi.lt
@@ -2033,7 +2033,7 @@ Message-id: <c1b163570905230945u6be0defawc8daea314ab7950d@mail.gmail.com>
 References: <953453.60630.qm@web45713.mail.sp1.yahoo.com>
 In-reply-to: <953453.60630.qm@web45713.mail.sp1.yahoo.com>
 
---===============2123767849==
+--===============0567701593==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -2056,7 +2056,7 @@ On Sat, May 23, 2009 at 7:42 PM, Jurgis Gecys
 >
 
 
---===============2123767849==
+--===============0567701593==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -2073,10 +2073,10 @@ To unsubscribe send an email with subject &quot;unsubscribe&quot; to <a href="ma
 </div></div></blockquote></div><br>
 
 
---===============2123767849==--
-=======================================================
+--===============0567701593==--
+========================================================================
 From domkiz@yahoo.com Sun May 24 19:24:26 2009
-Content-Type: multipart/mixed; boundary="===============0886196686=="
+Content-Type: multipart/mixed; boundary="===============1073366590=="
 MIME-Version: 1.0
 From: DomkiZ <domkiz@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -2087,7 +2087,7 @@ References: <953453.60630.qm@web45713.mail.sp1.yahoo.com>
 	<c1b163570905230945u6be0defawc8daea314ab7950d@mail.gmail.com>
 In-reply-to: <c1b163570905230945u6be0defawc8daea314ab7950d@mail.gmail.com>
 
---===============0886196686==
+--===============1073366590==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -2130,7 +2130,7 @@ To unsubscribe send an email with subject "unsubscribe" to archpio@lists.ututi.l
 
       
 
---===============0886196686==
+--===============1073366590==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -2154,10 +2154,10 @@ Content-Type: text/html
 
       </body></html>
 
---===============0886196686==--
-=======================================================
+--===============1073366590==--
+========================================================================
 From easy.breeze@yahoo.com Sun May 24 19:45:54 2009
-Content-Type: multipart/mixed; boundary="===============0914178037=="
+Content-Type: multipart/mixed; boundary="===============1366079380=="
 MIME-Version: 1.0
 From: Monika Augaityte <easy.breeze@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -2169,7 +2169,7 @@ References: <953453.60630.qm@web45713.mail.sp1.yahoo.com>
 	<773199.62367.qm@web32402.mail.mud.yahoo.com>
 In-reply-to: <773199.62367.qm@web32402.mail.mud.yahoo.com>
 
---===============0914178037==
+--===============1366079380==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -2231,7 +2231,7 @@ To unsubscribe send an email with subject "unsubscribe" to archpio@lists.ututi.l
 
       
 
---===============0914178037==
+--===============1366079380==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -2260,10 +2260,10 @@ Content-Type: text/html
 
       </body></html>
 
---===============0914178037==--
-=======================================================
+--===============1366079380==--
+========================================================================
 From agata.slbrt@gmail.com Sun May 24 20:18:43 2009
-Content-Type: multipart/mixed; boundary="===============1265598723=="
+Content-Type: multipart/mixed; boundary="===============1546980779=="
 MIME-Version: 1.0
 From: Agata Silobrit <agata.slbrt@gmail.com>
 To: archpio@lists.ututi.lt
@@ -2276,7 +2276,7 @@ References: <953453.60630.qm@web45713.mail.sp1.yahoo.com>
 	<881659.77087.qm@web43510.mail.sp1.yahoo.com>
 In-reply-to: <881659.77087.qm@web43510.mail.sp1.yahoo.com>
 
---===============1265598723==
+--===============1546980779==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -2350,7 +2350,7 @@ Ir as neatsisakyciau :)
 >
 
 
---===============1265598723==
+--===============1546980779==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -2399,10 +2399,10 @@ To unsubscribe send an email with subject &quot;unsubscribe&quot; to <a rel="nof
 </div></div></div></blockquote></div><br>
 
 
---===============1265598723==--
-=======================================================
+--===============1546980779==--
+========================================================================
 From easy.breeze@yahoo.com Sun May 24 20:26:01 2009
-Content-Type: multipart/mixed; boundary="===============0880011122=="
+Content-Type: multipart/mixed; boundary="===============0914967750=="
 MIME-Version: 1.0
 From: Monika Augaityte <easy.breeze@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -2416,7 +2416,7 @@ References: <953453.60630.qm@web45713.mail.sp1.yahoo.com>
 	<a38c5c160905241018i4c219adds1ac1a716ee369c60@mail.gmail.com>
 In-reply-to: <a38c5c160905241018i4c219adds1ac1a716ee369c60@mail.gmail.com>
 
---===============0880011122==
+--===============0914967750==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -2512,7 +2512,7 @@ To unsubscribe send an email with subject "unsubscribe" to archpio@lists.ututi.l
 
       
 
---===============0880011122==
+--===============0914967750==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -2567,10 +2567,10 @@ To unsubscribe send an email with subject "unsubscribe" to <a rel="nofollow">arc
 
       </body></html>
 
---===============0880011122==--
-=======================================================
+--===============0914967750==--
+========================================================================
 From arch_jurgis_gecys@yahoo.com Sat May 23 19:42:14 2009
-Content-Type: multipart/mixed; boundary="===============0985629877=="
+Content-Type: multipart/mixed; boundary="===============0969959870=="
 MIME-Version: 1.0
 From: Jurgis Gecys <arch_jurgis_gecys@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -2578,7 +2578,7 @@ Subject: Re: Elektra
 Date: 23 May 2009 19:42:14
 Message-id: <953453.60630.qm@web45713.mail.sp1.yahoo.com>
 
---===============0985629877==
+--===============0969959870==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -2589,7 +2589,7 @@ cia as blogais supratau ar jis istikro nurode koks klausimas bus pateiktas per e
 
       
 
---===============0985629877==
+--===============0969959870==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -2597,10 +2597,10 @@ Content-Type: text/html
 
       
 
---===============0985629877==--
-=======================================================
+--===============0969959870==--
+========================================================================
 From gytte.a@gmail.com Sun May 24 22:54:48 2009
-Content-Type: multipart/mixed; boundary="===============2030654506=="
+Content-Type: multipart/mixed; boundary="===============0332820613=="
 MIME-Version: 1.0
 From: Gyte <gytte.a@gmail.com>
 To: archpio@lists.ututi.lt
@@ -2615,7 +2615,7 @@ References: <953453.60630.qm@web45713.mail.sp1.yahoo.com>
 	<216523.61394.qm@web43506.mail.sp1.yahoo.com>
 In-reply-to: <216523.61394.qm@web43506.mail.sp1.yahoo.com>
 
---===============2030654506==
+--===============0332820613==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -2731,7 +2731,7 @@ daug, ir viskas priklauso nuo to kur stovi pastatas visu tu laidu atzvilgiu
 >
 
 
---===============2030654506==
+--===============0332820613==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -2827,8 +2827,8 @@ To unsubscribe send an email with subject &quot;unsubscribe&quot; to <a href="ma
 </div></div></div></blockquote></div><br>
 
 
---===============2030654506==--
-=======================================================
+--===============0332820613==--
+========================================================================
 From arch_jurgis_gecys@yahoo.com Mon May 25 22:15:57 2009
 From: Jurgis Gecys <arch_jurgis_gecys@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -2840,7 +2840,7 @@ In-reply-to: <MailBoxer.17.1242373328.13.archpio@lists.ututi.lt>
 
 Kelinta valanda vyks perziura nera zinoma, bet galima manyti kad  12 h.
 Cheikauskas sake pasiimti ir plansetus su maketais
-=======================================================
+========================================================================
 From arch_jurgis_gecys@yahoo.com Mon May 25 22:45:11 2009
 From: Jurgis Gecys <arch_jurgis_gecys@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -2855,9 +2855,9 @@ dalies perziura katedrine jau turejom, o dabar yra techninio projekciuko
 perziura.. ir visa farsha nesim tik per fakultetine. Jeigu kam beda su plansu
 ir maku gabenimu, tai neweskit ir nesiparinkit, atkirsim cheikauskui kad jis
 nusipeza
-=======================================================
+========================================================================
 From r@toostis.com Mon May 25 22:47:57 2009
-Content-Type: multipart/mixed; boundary="===============0455618336=="
+Content-Type: multipart/mixed; boundary="===============0036760962=="
 MIME-Version: 1.0
 From: Ringaile Jurgeleviciute <r@toostis.com>
 To: archpio@lists.ututi.lt
@@ -2868,7 +2868,7 @@ References: <MailBoxer.17.1242373328.13.archpio@lists.ututi.lt>
 	<MailBoxer.29.1243280711.33.archpio@lists.ututi.lt>
 In-reply-to: <MailBoxer.29.1243280711.33.archpio@lists.ututi.lt>
 
---===============0455618336==
+--===============0036760962==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -2899,7 +2899,7 @@ true
 R.
 
 
---===============0455618336==
+--===============0036760962==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -2917,8 +2917,8 @@ Archive: <a href="http://beta.ututi.lt/vgtu/archfak/archpio/forum/archive/2009/0
 </div></div></blockquote></div><br><br clear="all"><br>-- <br>R.<br>
 
 
---===============0455618336==--
-=======================================================
+--===============0036760962==--
+========================================================================
 From arch_jurgis_gecys@yahoo.com Mon May 25 18:37:20 2009
 From: Jurgis Gecys <arch_jurgis_gecys@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -2927,7 +2927,7 @@ Date: 25 May 2009 18:37:20
 Message-id: <MailBoxer.27.1243265840.25.archpio@lists.ututi.lt>
 
 Grunskis rytoj bus 4,9 auditorijoj nuo 18 h. galima bus pasikonsultuot
-=======================================================
+========================================================================
 From arch_jurgis_gecys@yahoo.com Tue May 26 21:17:46 2009
 From: Jurgis Gecys <arch_jurgis_gecys@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -2940,7 +2940,7 @@ In-reply-to: <MailBoxer.27.1243265840.25.archpio@lists.ututi.lt>
 gavau grunskio palaiminima planseto spausdinimui. Jeigu jau ji sumaketuojam,
 tai paprasciau imti ir atspausti, negu dar papildomai maketuot ir spausdinti
 papkute. 
-=======================================================
+========================================================================
 From arch_jurgis_gecys@yahoo.com Wed May 27 22:36:14 2009
 From: Jurgis Gecys <arch_jurgis_gecys@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -2952,9 +2952,9 @@ In-reply-to: <MailBoxer.22.1242726237.21.archpio@lists.ututi.lt>
 
 norejau priminti, kad paskaitos jau baigesi, ir ryt arch history nebus. ja
 pries egzamina galima bus pasigauti birzelio 1 nuo 9 iki 12 katedroj
-=======================================================
+========================================================================
 From neopagone@gmail.com Wed May 27 22:56:34 2009
-Content-Type: multipart/mixed; boundary="===============2116214116=="
+Content-Type: multipart/mixed; boundary="===============2047621833=="
 MIME-Version: 1.0
 From: Ausrine <neopagone@gmail.com>
 To: archpio@lists.ututi.lt
@@ -2964,14 +2964,14 @@ Message-id: <06F1B91BB7AC43E59BF9E1FD1C07C4FA@VIC>
 References: <3b5b14060905271251u205fa7bfv144a7d6c76f95acb@mail.gmail.com>
 In-reply-to: <3b5b14060905271251u205fa7bfv144a7d6c76f95acb@mail.gmail.com>
 
---===============2116214116==
+--===============2047621833==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 
 per klaida uzsiregitravau jusu grupeje. prasau grupes savininku, administratuoriu  istrinti mano naryte.  aciu:)
 
---===============2116214116==
+--===============2047621833==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -2987,8 +2987,8 @@ grupes savininku, administratuoriu&nbsp; istrinti mano naryte.&nbsp;
 aciu:)</FONT></DIV></BODY></HTML>
 
 
---===============2116214116==--
-=======================================================
+--===============2047621833==--
+========================================================================
 From leonidas.opuchovicius@gmail.com Thu May 28 02:50:48 2009
 From: Leonidas <leonidas.opuchovicius@gmail.com>
 To: archpio@lists.ututi.lt
@@ -3000,9 +3000,9 @@ References: <3b5b14060905271251u205fa7bfv144a7d6c76f95acb@mail.gmail.com>
 In-reply-to: <06F1B91BB7AC43E59BF9E1FD1C07C4FA@VIC>
 
 sweet
-=======================================================
+========================================================================
 From giedrejon@gmail.com Wed May 27 22:51:59 2009
-Content-Type: multipart/mixed; boundary="===============0586454638=="
+Content-Type: multipart/mixed; boundary="===============0985372205=="
 MIME-Version: 1.0
 From: "Giedre J." <giedrejon@gmail.com>
 To: archpio@lists.ututi.lt
@@ -3010,7 +3010,7 @@ Subject: Filipavicius
 Date: 27 May 2009 22:51:59
 Message-id: <3b5b14060905271251u205fa7bfv144a7d6c76f95acb@mail.gmail.com>
 
---===============0586454638==
+--===============0985372205==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -3019,15 +3019,15 @@ Tik primenu, kad rytoj (ketvirtadieni, geguzes 28d) Filipavicius fakultete
 bus 10.20-12h, nepamirskit atnest referatu ir brezinio!
 
 
---===============0586454638==
+--===============0985372205==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
 Tik primenu, kad rytoj (ketvirtadieni, geguzes 28d) Filipavicius fakultete bus 10.20-12h, nepamirskit atnest referatu ir brezinio!<br>
 
 
---===============0586454638==--
-=======================================================
+--===============0985372205==--
+========================================================================
 From arch_jurgis_gecys@yahoo.com Thu May 28 18:39:36 2009
 From: Jurgis Gecys <arch_jurgis_gecys@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -3040,9 +3040,9 @@ In-reply-to: <MailBoxer.17.1242373328.13.archpio@lists.ututi.lt>
 tai rytoj 10 h darbai jau turi buti iseksponuoti 3.18 ir 3,19... o gal 3.17
 (susipainiojo) anyway. ryt is ryto kokia 9 jau reiktu pradet kabintis
 tvarkingai ir graziai.
-=======================================================
+========================================================================
 From gytte.a@gmail.com Thu May 28 21:16:30 2009
-Content-Type: multipart/mixed; boundary="===============1473850075=="
+Content-Type: multipart/mixed; boundary="===============1343368791=="
 MIME-Version: 1.0
 From: Gyte <gytte.a@gmail.com>
 To: archpio@lists.ututi.lt
@@ -3053,7 +3053,7 @@ References: <MailBoxer.17.1242373328.13.archpio@lists.ututi.lt>
 	<MailBoxer.33.1243525176.7.archpio@lists.ututi.lt>
 In-reply-to: <MailBoxer.33.1243525176.7.archpio@lists.ututi.lt>
 
---===============1473850075==
+--===============1343368791==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -3077,7 +3077,7 @@ On Thu, May 28, 2009 at 6:39 PM, Jurgis Gecys
 >
 
 
---===============1473850075==
+--===============1343368791==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -3095,8 +3095,8 @@ Archive: <a href="http://beta.ututi.lt/vgtu/archfak/archpio/forum/archive/2009/0
 </div></div></blockquote></div><br>
 
 
---===============1473850075==--
-=======================================================
+--===============1343368791==--
+========================================================================
 From arch_jurgis_gecys@yahoo.com Fri May 15 10:42:08 2009
 From: Jurgis Gecys <arch_jurgis_gecys@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -3105,7 +3105,7 @@ Date: 15 May 2009 10:42:08
 Message-id: <MailBoxer.17.1242373328.13.archpio@lists.ututi.lt>
 
 sian 16;30 vyks papildoma paskaita su mikstu
-=======================================================
+========================================================================
 From gytte.a@gmail.com Sat May 30 15:03:23 2009
 From: Gytaute Akstinaite <gytte.a@gmail.com>
 To: archpio@lists.ututi.lt
@@ -3114,9 +3114,9 @@ Date: 30 May 2009 15:03:23
 Message-id: <MailBoxer.34.1243685003.54.archpio@lists.ututi.lt>
 
 sudƒójau i ututi gamybinƒós praktikos programƒÖ ir anketƒÖ, kurias davƒó ƒåere≈°keviƒçius penktadienƒØ ;}
-=======================================================
+========================================================================
 From r@toostis.com Sun May 31 15:07:33 2009
-Content-Type: multipart/mixed; boundary="===============1335930330=="
+Content-Type: multipart/mixed; boundary="===============1560722870=="
 MIME-Version: 1.0
 From: Ringaile Jurgeleviciute <r@toostis.com>
 To: archpio@lists.ututi.lt
@@ -3124,7 +3124,7 @@ Subject: ARCHIPARTIS
 Date: 31 May 2009 15:07:33
 Message-id: <3970a7bd0905310507t782c3ef0j35e7eac7008fab7a@mail.gmail.com>
 
---===============1335930330==
+--===============1560722870==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -3141,7 +3141,7 @@ ra≈°ykit, kad dalyvaut≈≥, jeigu susirenka min 8 ≈æmonƒós - darom :)
 R.
 
 
---===============1335930330==
+--===============1560722870==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -3149,10 +3149,10 @@ mes taip svarstÎm vakar su leonidu kad reikia padaryti archipart· su alais ar 
 so, who is IN ?<br><br>raykit, kad dalyvaut¯, jeigu susirenka min 8 ˛monÎs - darom :)<br clear="all"><br>-- <br>R.<br>
 
 
---===============1335930330==--
-=======================================================
+--===============1560722870==--
+========================================================================
 From arch_jurgis_gecys@yahoo.com Sun May 31 15:11:21 2009
-Content-Type: multipart/mixed; boundary="===============0115303354=="
+Content-Type: multipart/mixed; boundary="===============0913098640=="
 MIME-Version: 1.0
 From: Jurgis Gecys <arch_jurgis_gecys@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -3160,7 +3160,7 @@ Subject: Re: ARCHIPARTIS
 Date: 31 May 2009 15:11:21
 Message-id: <728565.55072.qm@web45708.mail.sp1.yahoo.com>
 
---===============0115303354==
+--===============0913098640==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -3173,7 +3173,7 @@ ech.. kai butu smagu pokeri palost.
 
       
 
---===============0115303354==
+--===============0913098640==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -3181,10 +3181,10 @@ Content-Type: text/html
 
       
 
---===============0115303354==--
-=======================================================
+--===============0913098640==--
+========================================================================
 From r@toostis.com Sun May 31 15:19:08 2009
-Content-Type: multipart/mixed; boundary="===============0081697881=="
+Content-Type: multipart/mixed; boundary="===============1964258897=="
 MIME-Version: 1.0
 From: Ringaile Jurgeleviciute <r@toostis.com>
 To: archpio@lists.ututi.lt
@@ -3194,7 +3194,7 @@ Message-id: <3970a7bd0905310519s368bafd9p125ead08f4aa02df@mail.gmail.com>
 References: <728565.55072.qm@web45708.mail.sp1.yahoo.com>
 In-reply-to: <728565.55072.qm@web45708.mail.sp1.yahoo.com>
 
---===============0081697881==
+--===============1964258897==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -3223,7 +3223,7 @@ pamir≈°au pridƒóti map
 R.
 
 
---===============0081697881==
+--===============1964258897==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -3236,7 +3236,7 @@ dekui uz kvietima. bet as atsisakysiu, bo antradieni turiu vadybos egza. tai dab
 </div></font></blockquote></div><br><br clear="all"><br>-- <br>R.<br>
 
 
---===============0081697881==
+--===============1964258897==
 Content-Disposition: attachment; filename="47665.png"
 Content-Type: image/png
 
@@ -6129,10 +6129,10 @@ sL¢Ω˜œåÖQ6.
 w4*çrä‹SJ˙?îk.u•O ú°så î¨î}’h®Û|ÿÛ$à5™ ¬8#C—–Œ**’8∞*ä¢g˜¬gú"s*¨ògºø
 oîOΩ¨¢1îø,|ö•¿Yf6 ‘¶ ¥◊≈∆|R´ºV»Hÿ}5ÙéÔN—!q¬©P©^ÅÖA(l@óËπ!¥ØWEn∞’˜ù>‘Á{˜/S˚èo√>M˜[ó.]‚Èßüfee•:ø|˝Î_‡˛˚ÔˆrÜı„c˚0Œh˘»G>≤Á9ì◊ôZØf˚ñ√Ÿ {œp8‹sfõ‰oî¿~»ñ◊π®‘ﬁ4†ºd'în/˙{å≈ô‡w´&®Ôá”ôDVˇi◊˛%5EÊg_ ¿6jDÕî∏¥ƒŒ@Àê©>@Ì»Q˘lî,‰Ü›Ì:gdèYzYﬂåUﬁmWW£”—Èe%Y&˚≥ŸYŸG•Ïùä(•åSvÚÑùB˙ÔŸéÏaÉNB°Á´0_ïﬁW|Ôô^€‘,Á=#?bXåœ©I[÷€∞3ë¡DÁŒy“FL]5"€∫Sn„%˛:rñ»[lÊ™˘8…U0◊èQÍ.ŒÅr~ôQƒ‡|bY™GÚwﬂ_T}Ä}c=íõ
 ÇWø_èï≥"Wåd\˘}cÌ/≥YÕj¥!m≥ª€„‚yôﬂóS…pŒZªNΩuê^∑†◊-0Y*D;ù≠¶6µ©MmjSõ⁄‘¶6µ©MmjSõ⁄‘¶6µ©Ω¶˝°‡ ‰HTLﬁ    IENDÆB`Ç
---===============0081697881==--
-=======================================================
+--===============1964258897==--
+========================================================================
 From gytte.a@gmail.com Sun May 31 17:10:41 2009
-Content-Type: multipart/mixed; boundary="===============1171295151=="
+Content-Type: multipart/mixed; boundary="===============1892001170=="
 MIME-Version: 1.0
 From: Gyte <gytte.a@gmail.com>
 To: archpio@lists.ututi.lt
@@ -6142,7 +6142,7 @@ Message-id: <c1b163570905310710v55b58b6eg1cc2761e859fcc47@mail.gmail.com>
 References: <167003.80025.qm@web37404.mail.mud.yahoo.com>
 In-reply-to: <167003.80025.qm@web37404.mail.mud.yahoo.com>
 
---===============1171295151==
+--===============1892001170==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -6204,7 +6204,7 @@ as ir Giedre Ka busim apie 19:15-19:30 :}
 >
 
 
---===============1171295151==
+--===============1892001170==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -6242,10 +6242,10 @@ To unsubscribe send an email with subject &quot;unsubscribe&quot; to <a href="ma
 </div></div></blockquote></div><br>
 
 
---===============1171295151==--
-=======================================================
+--===============1892001170==--
+========================================================================
 From domkiz@yahoo.com Sun May 31 23:59:57 2009
-Content-Type: multipart/mixed; boundary="===============1636587008=="
+Content-Type: multipart/mixed; boundary="===============0396463611=="
 MIME-Version: 1.0
 From: DomkiZ <domkiz@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -6255,7 +6255,7 @@ Message-id: <139770.9770.qm@web32407.mail.mud.yahoo.com>
 References: <167003.80025.qm@web37404.mail.mud.yahoo.com>
 In-reply-to: <167003.80025.qm@web37404.mail.mud.yahoo.com>
 
---===============1636587008==
+--===============0396463611==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -6321,7 +6321,7 @@ To unsubscribe send an email with subject "unsubscribe" to archpio@lists.ututi.l
 
       
 
---===============1636587008==
+--===============0396463611==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -6348,10 +6348,10 @@ Content-Type: text/html
 
       </body></html>
 
---===============1636587008==--
-=======================================================
+--===============0396463611==--
+========================================================================
 From gytte.a@gmail.com Mon Jun  1 00:08:55 2009
-Content-Type: multipart/mixed; boundary="===============1909319990=="
+Content-Type: multipart/mixed; boundary="===============2131783758=="
 MIME-Version: 1.0
 From: Gyte <gytte.a@gmail.com>
 To: archpio@lists.ututi.lt
@@ -6362,7 +6362,7 @@ References: <167003.80025.qm@web37404.mail.mud.yahoo.com>
 	<139770.9770.qm@web32407.mail.mud.yahoo.com>
 In-reply-to: <139770.9770.qm@web32407.mail.mud.yahoo.com>
 
---===============1909319990==
+--===============2131783758==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -6443,7 +6443,7 @@ pokeris buvo ≈°iandien ;)
 >
 
 
---===============1909319990==
+--===============2131783758==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -6499,10 +6499,10 @@ To unsubscribe send an email with subject &quot;unsubscribe&quot; to <a href="ma
 </div></div></div></blockquote></div><br>
 
 
---===============1909319990==--
-=======================================================
+--===============2131783758==--
+========================================================================
 From domkiz@yahoo.com Mon Jun  1 00:10:47 2009
-Content-Type: multipart/mixed; boundary="===============0805411208=="
+Content-Type: multipart/mixed; boundary="===============0503989421=="
 MIME-Version: 1.0
 From: DomkiZ <domkiz@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -6514,7 +6514,7 @@ References: <167003.80025.qm@web37404.mail.mud.yahoo.com>
 	<c1b163570905311408g2ee8a3e7y65193a55416ae7ab@mail.gmail.com>
 In-reply-to: <c1b163570905311408g2ee8a3e7y65193a55416ae7ab@mail.gmail.com>
 
---===============0805411208==
+--===============0503989421==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -6617,7 +6617,7 @@ To unsubscribe send an email with subject "unsubscribe" to archpio@lists.ututi.l
 
       
 
---===============0805411208==
+--===============0503989421==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -6666,8 +6666,8 @@ Content-Type: text/html
 
       </body></html>
 
---===============0805411208==--
-=======================================================
+--===============0503989421==--
+========================================================================
 From arch_jurgis_gecys@yahoo.com Tue Jun  2 18:04:34 2009
 From: Jurgis Gecys <arch_jurgis_gecys@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -6679,7 +6679,7 @@ References: <MailBoxer.22.1242726237.21.archpio@lists.ututi.lt>
 In-reply-to: <MailBoxer.31.1243452974.7.archpio@lists.ututi.lt>
 
 ryt jureviciene egzaminuos nuo 9,kas nespes ,tada 12 
-=======================================================
+========================================================================
 From arch_jurgis_gecys@yahoo.com Tue May 19 12:43:57 2009
 From: Jurgis Gecys <arch_jurgis_gecys@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -6690,9 +6690,9 @@ Message-id: <MailBoxer.22.1242726237.21.archpio@lists.ututi.lt>
 pranesame, kad architekturos istorijos paskaita ketvirtadieni vyks 11:00.
 
 
-=======================================================
+========================================================================
 From domkiz@yahoo.com Thu Jun  4 10:40:54 2009
-Content-Type: multipart/mixed; boundary="===============1236605220=="
+Content-Type: multipart/mixed; boundary="===============0968890591=="
 MIME-Version: 1.0
 From: DomkiZ <domkiz@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -6704,7 +6704,7 @@ References: <167003.80025.qm@web37404.mail.mud.yahoo.com>
 	<c1b163570905311408g2ee8a3e7y65193a55416ae7ab@mail.gmail.com>
 In-reply-to: <c1b163570905311408g2ee8a3e7y65193a55416ae7ab@mail.gmail.com>
 
---===============1236605220==
+--===============0968890591==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -6815,7 +6815,7 @@ To unsubscribe send an email with subject "unsubscribe" to archpio@lists.ututi.l
 
       
 
---===============1236605220==
+--===============0968890591==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -6872,10 +6872,10 @@ Content-Type: text/html
 
       </body></html>
 
---===============1236605220==--
-=======================================================
+--===============0968890591==--
+========================================================================
 From martynapilyp@gmail.com Fri Jun  5 17:31:59 2009
-Content-Type: multipart/mixed; boundary="===============0969354547=="
+Content-Type: multipart/mixed; boundary="===============1386805893=="
 MIME-Version: 1.0
 From: Martyna Pilypaite <martynapilyp@gmail.com>
 To: archpio@lists.ututi.lt
@@ -6888,7 +6888,7 @@ References: <167003.80025.qm@web37404.mail.mud.yahoo.com>
 	<971274.48278.qm@web32405.mail.mud.yahoo.com>
 In-reply-to: <971274.48278.qm@web32405.mail.mud.yahoo.com>
 
---===============0969354547==
+--===============1386805893==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -7010,7 +7010,7 @@ interneto, tai jei kas taip pasielget tai mastykit pasiteisinima . :)
 >
 
 
---===============0969354547==
+--===============1386805893==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -7083,10 +7083,10 @@ To unsubscribe send an email with subject &quot;unsubscribe&quot; to <a rel="nof
 </div></font></div></blockquote></div><br>
 
 
---===============0969354547==--
-=======================================================
+--===============1386805893==--
+========================================================================
 From netradicine@yahoo.com Sun May 31 17:03:05 2009
-Content-Type: multipart/mixed; boundary="===============2060222228=="
+Content-Type: multipart/mixed; boundary="===============1652658631=="
 MIME-Version: 1.0
 From: Vaida Ragauskaite <netradicine@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -7094,7 +7094,7 @@ Subject: Re: ARCHIPARTIS
 Date: 31 May 2009 17:03:05
 Message-id: <167003.80025.qm@web37404.mail.mud.yahoo.com>
 
---===============2060222228==
+--===============1652658631==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -7142,7 +7142,7 @@ To unsubscribe send an email with subject "unsubscribe" to archpio@lists.ututi.l
 
       
 
---===============2060222228==
+--===============1652658631==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -7157,10 +7157,10 @@ dekui uz kvietima. bet as atsisakysiu, bo antradieni turiu vadybos egza. tai dab
 
       
 
---===============2060222228==--
-=======================================================
+--===============1652658631==--
+========================================================================
 From mildakrup@gmail.com Fri Jun  5 21:36:34 2009
-Content-Type: multipart/mixed; boundary="===============1841928022=="
+Content-Type: multipart/mixed; boundary="===============1085278094=="
 MIME-Version: 1.0
 From: Milda Krupelyte <mildakrup@gmail.com>
 To: archpio@lists.ututi.lt
@@ -7174,7 +7174,7 @@ References: <167003.80025.qm@web37404.mail.mud.yahoo.com>
 	<81da8d450906050731m4647a3adyd2c20aa05741ff23@mail.gmail.com>
 In-reply-to: <81da8d450906050731m4647a3adyd2c20aa05741ff23@mail.gmail.com>
 
---===============1841928022==
+--===============1085278094==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -7306,7 +7306,7 @@ auch kazkam labai nepasiseke.. :)
 >
 
 
---===============1841928022==
+--===============1085278094==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -7388,10 +7388,10 @@ To unsubscribe send an email with subject &quot;unsubscribe&quot; to <a rel="nof
 </div></div></blockquote></div><br>
 
 
---===============1841928022==--
-=======================================================
+--===============1085278094==--
+========================================================================
 From r@toostis.com Sat Jun  6 18:49:26 2009
-Content-Type: multipart/mixed; boundary="===============1762257890=="
+Content-Type: multipart/mixed; boundary="===============1966998950=="
 MIME-Version: 1.0
 From: Ringaile Jurgeleviciute <r@toostis.com>
 To: archpio@lists.ututi.lt
@@ -7399,7 +7399,7 @@ Subject: SPEC konst KONSpektas
 Date: 06 Jun 2009 18:49:26
 Message-id: <3970a7bd0906060849t50eb40b4jc5debc6c78976ec0@mail.gmail.com>
 
---===============1762257890==
+--===============1966998950==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -7410,15 +7410,15 @@ ikeltas.
 R.
 
 
---===============1762257890==
+--===============1966998950==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
 ikeltas. <br clear="all"><br>-- <br>R.<br>
 
 
---===============1762257890==--
-=======================================================
+--===============1966998950==--
+========================================================================
 From arch_jurgis_gecys@yahoo.com Sun Jun  7 21:02:53 2009
 From: Jurgis Gecys <arch_jurgis_gecys@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -7429,7 +7429,7 @@ Message-id: <MailBoxer.36.1244397773.76.archpio@lists.ututi.lt>
 tai konstrukciju egzaminas planuojamas visoms grupems vienu metu.10 berods. kiek jis kalbejo.o auditorija dar neaiski.itariu kad 3,19, bo i 2,19 nesutilpsim .
 
 tai reiktu i egza neveluot 
-=======================================================
+========================================================================
 From arch_jurgis_gecys@yahoo.com Thu Jun 11 11:28:30 2009
 From: Jurgis Gecys <arch_jurgis_gecys@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -7440,9 +7440,9 @@ Message-id: <MailBoxer.37.1244708910.66.archpio@lists.ututi.lt>
 Sveiki,
 Inzinerines anksciau issilaikyti galima 12d (penktadienis), 10val,
 centriniuose rumuose, 2409 kab.
-=======================================================
+========================================================================
 From r@toostis.com Sat Jun 13 21:16:13 2009
-Content-Type: multipart/mixed; boundary="===============1812192372=="
+Content-Type: multipart/mixed; boundary="===============0577781807=="
 MIME-Version: 1.0
 From: Ringaile Jurgeleviciute <r@toostis.com>
 To: archpio@lists.ututi.lt
@@ -7452,7 +7452,7 @@ Message-id: <3970a7bd0906131116k294089bajf66e5b82e84300f2@mail.gmail.com>
 References: <230364.38506.qm@web43510.mail.sp1.yahoo.com>
 In-reply-to: <230364.38506.qm@web43510.mail.sp1.yahoo.com>
 
---===============1812192372==
+--===============0577781807==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -7499,7 +7499,7 @@ konspekte nerado, tai net nekonspektavo is naujo..
 R.
 
 
---===============1812192372==
+--===============0577781807==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -7517,10 +7517,10 @@ To unsubscribe send an email with subject &quot;unsubscribe&quot; to <a href="ma
 </div></div></div></blockquote></div><br><br clear="all"><br>-- <br>R.<br>
 
 
---===============1812192372==--
-=======================================================
+--===============0577781807==--
+========================================================================
 From easy.breeze@yahoo.com Sat Jun 13 21:50:18 2009
-Content-Type: multipart/mixed; boundary="===============0958095673=="
+Content-Type: multipart/mixed; boundary="===============0990317656=="
 MIME-Version: 1.0
 From: Monika Augaityte <easy.breeze@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -7531,7 +7531,7 @@ References: <230364.38506.qm@web43510.mail.sp1.yahoo.com>
 	<3970a7bd0906131116k294089bajf66e5b82e84300f2@mail.gmail.com>
 In-reply-to: <3970a7bd0906131116k294089bajf66e5b82e84300f2@mail.gmail.com>
 
---===============0958095673==
+--===============0990317656==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -7596,7 +7596,7 @@ To unsubscribe send an email with subject "unsubscribe" to archpio@lists.ututi.l
 
       
 
---===============0958095673==
+--===============0990317656==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -7617,10 +7617,10 @@ To unsubscribe send an email with subject "unsubscribe" to <a rel="nofollow" yma
 
       </body></html>
 
---===============0958095673==--
-=======================================================
+--===============0990317656==--
+========================================================================
 From r@toostis.com Sat Jun 13 23:02:31 2009
-Content-Type: multipart/mixed; boundary="===============1110170194=="
+Content-Type: multipart/mixed; boundary="===============0347400216=="
 MIME-Version: 1.0
 From: Ringaile Jurgeleviciute <r@toostis.com>
 To: archpio@lists.ututi.lt
@@ -7632,7 +7632,7 @@ References: <230364.38506.qm@web43510.mail.sp1.yahoo.com>
 	<266062.8106.qm@web43509.mail.sp1.yahoo.com>
 In-reply-to: <266062.8106.qm@web43509.mail.sp1.yahoo.com>
 
---===============1110170194==
+--===============0347400216==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -7715,7 +7715,7 @@ o tai kaip - klausimai buvo tiesiog 'sildymo sistemos', 'vedinimo sistemos'
 R.
 
 
---===============1110170194==
+--===============0347400216==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -7753,10 +7753,10 @@ To unsubscribe send an email with subject &quot;unsubscribe&quot; to <a href="ma
 </div></div></div></blockquote></div><br><br clear="all"><br>-- <br>R.<br>
 
 
---===============1110170194==--
-=======================================================
+--===============0347400216==--
+========================================================================
 From easy.breeze@yahoo.com Sun Jun 14 00:10:46 2009
-Content-Type: multipart/mixed; boundary="===============0043227266=="
+Content-Type: multipart/mixed; boundary="===============1313985413=="
 MIME-Version: 1.0
 From: Monika Augaityte <easy.breeze@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -7769,7 +7769,7 @@ References: <230364.38506.qm@web43510.mail.sp1.yahoo.com>
 	<3970a7bd0906131302m5a9f76c9uf3408dec43556ee0@mail.gmail.com>
 In-reply-to: <3970a7bd0906131302m5a9f76c9uf3408dec43556ee0@mail.gmail.com>
 
---===============0043227266==
+--===============1313985413==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -7872,7 +7872,7 @@ To unsubscribe send an email with subject "unsubscribe" to archpio@lists.ututi.l
 
       
 
---===============0043227266==
+--===============1313985413==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -7913,10 +7913,10 @@ To unsubscribe send an email with subject "unsubscribe" to <a rel="nofollow" yma
 
       </body></html>
 
---===============0043227266==--
-=======================================================
+--===============1313985413==--
+========================================================================
 From easy.breeze@yahoo.com Sun Jun 14 15:30:13 2009
-Content-Type: multipart/mixed; boundary="===============1024389383=="
+Content-Type: multipart/mixed; boundary="===============0980962007=="
 MIME-Version: 1.0
 From: Monika Augaityte <easy.breeze@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -7930,7 +7930,7 @@ References: <230364.38506.qm@web43510.mail.sp1.yahoo.com>
 	<4611.36985.qm@web43508.mail.sp1.yahoo.com>
 In-reply-to: <4611.36985.qm@web43508.mail.sp1.yahoo.com>
 
---===============1024389383==
+--===============0980962007==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -8052,7 +8052,7 @@ To unsubscribe send an email with subject "unsubscribe" to archpio@lists.ututi.l
 
       
 
---===============1024389383==
+--===============0980962007==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -8096,10 +8096,10 @@ To unsubscribe send an email with subject "unsubscribe" to <a rel="nofollow" yma
 
       </body></html>
 
---===============1024389383==--
-=======================================================
+--===============0980962007==--
+========================================================================
 From easy.breeze@yahoo.com Sat Jun 13 16:30:53 2009
-Content-Type: multipart/mixed; boundary="===============0160809738=="
+Content-Type: multipart/mixed; boundary="===============1593444232=="
 MIME-Version: 1.0
 From: Monika Augaityte <easy.breeze@yahoo.com>
 To: archpio@lists.ututi.lt
@@ -8107,7 +8107,7 @@ Subject: Fw: inzinerines
 Date: 13 Jun 2009 16:30:53
 Message-id: <230364.38506.qm@web43510.mail.sp1.yahoo.com>
 
---===============0160809738==
+--===============1593444232==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -8137,7 +8137,7 @@ Sveiki, gal kas turi pirmus 2 elektros klausimus?
 
       
 
---===============0160809738==
+--===============1593444232==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -8146,10 +8146,10 @@ Sveiki,<br>Inzinerines anksciau issilaikyti galima 12d (penktadienis), 10val,<br
 
       </body></html>
 
---===============0160809738==--
-=======================================================
+--===============1593444232==--
+========================================================================
 From r@toostis.com Sun Jun 14 15:38:15 2009
-Content-Type: multipart/mixed; boundary="===============0726180389=="
+Content-Type: multipart/mixed; boundary="===============0833219149=="
 MIME-Version: 1.0
 From: Ringaile Jurgeleviciute <r@toostis.com>
 To: archpio@lists.ututi.lt
@@ -8164,7 +8164,7 @@ References: <230364.38506.qm@web43510.mail.sp1.yahoo.com>
 	<794120.23305.qm@web43516.mail.sp1.yahoo.com>
 In-reply-to: <794120.23305.qm@web43516.mail.sp1.yahoo.com>
 
---===============0726180389==
+--===============0833219149==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -8304,7 +8304,7 @@ cirkuliacijos' ten turetu gal buti 'naturalios gravitacijos'..
 R.
 
 
---===============0726180389==
+--===============0833219149==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -8378,8 +8378,8 @@ To unsubscribe send an email with subject &quot;unsubscribe&quot; to <a href="ma
 </div></div></div></blockquote></div><br><br clear="all"><br>-- <br>R.<br>
 
 
---===============0726180389==--
-=======================================================
+--===============0833219149==--
+========================================================================
 From egleziugzdaite@gmail.com Tue May 26 16:56:03 2009
 From: Egl iugdait <egleziugzdaite@gmail.com>
 To: mediena@lists.ututi.lt
@@ -8388,7 +8388,7 @@ Date: 26 May 2009 16:56:03
 Message-id: <MailBoxer.0.1243346163.05.mediena@lists.ututi.lt>
 
 Sveiki visi, pakvieskite kitu kursu zmoniu prisijungti y si foruma, jeigu jie medinukai :)
-=======================================================
+========================================================================
 From domas@monkus.lt Tue Apr 21 09:53:13 2009
 From: Nedomas Nemonkus <domas@monkus.lt>
 To: biofizikai-bakalaurai-2007@lists.ututi.lt
@@ -8397,7 +8397,7 @@ Date: 21 Apr 2009 09:53:13
 Message-id: <MailBoxer.0.1240296793.76.biofizikai-bakalaurai-2007@lists.ututi.lt>
 
 m?
-=======================================================
+========================================================================
 From domas@monkus.lt Tue Apr 21 08:49:22 2009
 From: Nedomas Nemonkus <domas@monkus.lt>
 To: biofizikai-2007@lists.ututi.lt
@@ -8411,7 +8411,7 @@ In-reply-to: <MailBoxer.0.1240292574.63.biofizikai-2007@lists.ututi.lt>
 On Apr 21, 2009 08:42 AM, Nedomas Nemonkus wrote:
 > m?
 hm
-=======================================================
+========================================================================
 From domas@monkus.lt Tue Apr 21 10:57:58 2009
 From: Domas Monkus <domas@monkus.lt>
 To: biofizikai-2007@lists.ututi.lt
@@ -8428,9 +8428,9 @@ On Tue, 2009-04-21 at 08:42 +0300, Nedomas Nemonkus wrote:
 hm
 
 
-=======================================================
+========================================================================
 From domas@monkus.lt Tue Apr 21 11:09:09 2009
-Content-Type: multipart/mixed; boundary="===============1257448965=="
+Content-Type: multipart/mixed; boundary="===============0806394010=="
 MIME-Version: 1.0
 From: Domas Monkus <domas@monkus.lt>
 To: biofizikai-2007@lists.ututi.lt
@@ -8442,7 +8442,7 @@ References: <MailBoxer.0.1240292574.63.biofizikai-2007@lists.ututi.lt>
 	<1240300666.10623.14.camel@port>
 In-reply-to: <1240300666.10623.14.camel@port>
 
---===============1257448965==
+--===============0806394010==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -8452,7 +8452,7 @@ Prisegtukas.
 Domas
 
 
---===============1257448965==
+--===============0806394010==
 Content-Disposition: attachment; filename="20090325.pdf"
 Content-Type: application/pdf
 
@@ -9712,8 +9712,8 @@ startxref
 47594
 %%EOF
 
---===============1257448965==--
-=======================================================
+--===============0806394010==--
+========================================================================
 From domas@monkus.lt Tue Apr 21 08:42:54 2009
 From: Nedomas Nemonkus <domas@monkus.lt>
 To: biofizikai-2007@lists.ututi.lt
@@ -9723,7 +9723,7 @@ Date: 21 Apr 2009 08:42:54
 Message-id: <MailBoxer.0.1240292574.63.biofizikai-2007@lists.ututi.lt>
 
 m?
-=======================================================
+========================================================================
 From domas.m@gmail.com Tue May  5 15:01:26 2009
 From: =?utf-8?q?Doma=C5=A1as?= Monkus <domas.m@gmail.com>
 To: biofizikai-2007@lists.ututi.lt
@@ -9744,7 +9744,7 @@ asdfasdf
 > 
 
 
-=======================================================
+========================================================================
 From domas.m@gmail.com Tue May  5 14:57:24 2009
 From: Domas Monkus =?utf-8?b?xaHFocSNxJnEl8Sv?= <domas.m@gmail.com>
 To: biofizikai-2007@lists.ututi.lt
@@ -9756,7 +9756,7 @@ Message-id: <1241524641.17622.0.camel@port>
 asfdfasd
 
 
-=======================================================
+========================================================================
 From zedge@gala.net Tue Apr 21 21:29:49 2009
 From: Zedge <zedge@gala.net>
 To: ea08-2@lists.ututi.lt
@@ -9765,7 +9765,7 @@ Date: 21 Apr 2009 21:29:49
 Message-id: <MailBoxer.0.1240338589.13.ea08-2@lists.ututi.lt>
 
 Persikraustom !!
-=======================================================
+========================================================================
 From malpecka@gmail.com Tue Jun  9 08:48:16 2009
 From: Barbara =?utf-8?b?xaBhdGtldmnEjQ==?= <malpecka@gmail.com>
 To: va.satt5@lists.ututi.lt
@@ -9776,7 +9776,7 @@ References: <MailBoxer.0.1244524125.26.va.satt5@lists.ututi.lt>
 In-reply-to: <MailBoxer.0.1244524125.26.va.satt5@lists.ututi.lt>
 
 Sveika :) 
-=======================================================
+========================================================================
 From lina.vismanaite@gmail.com Tue Jun  9 10:11:35 2009
 From: lina vismanaite <lina.vismanaite@gmail.com>
 To: va.satt5@lists.ututi.lt
@@ -9788,7 +9788,7 @@ In-reply-to: <MailBoxer.0.1244524125.26.va.satt5@lists.ututi.lt>
 
 na atorodo visai nieko puslapiukas, manuk, is cia medziaga nedings :)
 
-=======================================================
+========================================================================
 From malpecka@gmail.com Tue Jun  9 10:22:32 2009
 From: Barbara =?utf-8?b?xaBhdGtldmnEjQ==?= <malpecka@gmail.com>
 To: va.satt5@lists.ututi.lt
@@ -9799,7 +9799,7 @@ References: <MailBoxer.0.1244524125.26.va.satt5@lists.ututi.lt>
 In-reply-to: <MailBoxer.0.1244524125.26.va.satt5@lists.ututi.lt>
 
 ƒåia gales trint tik tie kurie ideju failiukus :) 
-=======================================================
+========================================================================
 From g.mazeikyte@gmail.com Tue Jun  9 12:36:12 2009
 From: GM <g.mazeikyte@gmail.com>
 To: va.satt5@lists.ututi.lt
@@ -9810,7 +9810,7 @@ References: <MailBoxer.0.1244524125.26.va.satt5@lists.ututi.lt>
 In-reply-to: <MailBoxer.0.1244524125.26.va.satt5@lists.ututi.lt>
 
 manau bus viskas oky :) ir ten pabandrausim ir cia:)
-=======================================================
+========================================================================
 From g.mazeikyte@gmail.com Tue Jun  9 08:08:45 2009
 From: GM <g.mazeikyte@gmail.com>
 To: va.satt5@lists.ututi.lt
@@ -9820,7 +9820,7 @@ Message-id: <MailBoxer.0.1244524125.26.va.satt5@lists.ututi.lt>
 
 visiems prisijungusiems labas :)
 gal visai ir neblogas puslapiukas, bus matyti ateityje::)
-=======================================================
+========================================================================
 From j.grigaite@bonumpublicum.lt Mon Jun 15 12:12:03 2009
 From: Jovita =?utf-8?b?R3JpZ2FpdMSX?= <j.grigaite@bonumpublicum.lt>
 To: va.satt5@lists.ututi.lt
@@ -9850,9 +9850,9 @@ va.satt5@lists.ututi.lt.  Please contact va.satt5-manager@lists.ututi.lt for
 questions.
 
 
-=======================================================
+========================================================================
 From ramune303@gmail.com Tue Jun 16 15:26:05 2009
-Content-Type: multipart/mixed; boundary="===============1195176589=="
+Content-Type: multipart/mixed; boundary="===============1016095893=="
 MIME-Version: 1.0
 From: =?utf-8?q?Ramun=C4=97?= =?utf-8?q?Kazlauskait=C4=97?=
 	<ramune303@gmail.com>
@@ -9864,7 +9864,7 @@ Message-id: <921bee990906160519n33aad7ber39e91b3aa843da3d@mail.gmail.com>
 References: <MailBoxer.5.1245057010.84.va.satt5@lists.ututi.lt>
 In-reply-to: <MailBoxer.5.1245057010.84.va.satt5@lists.ututi.lt>
 
---===============1195176589==
+--===============1016095893==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -9890,7 +9890,7 @@ Pagarbiai,
 Ramunƒó Kazlauskaitƒó
 
 
---===============1195176589==
+--===============1016095893==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -9901,8 +9901,8 @@ To unsubscribe send an email with subject &quot;unsubscribe&quot; to <a href="ma
 </blockquote></div><br><br clear="all"><br>-- <br>Pagarbiai,<br>RamunÎ KazlauskaitÎ 
 
 
---===============1195176589==--
-=======================================================
+--===============1016095893==--
+========================================================================
 From egletra@yahoo.com Wed Jun 17 10:27:39 2009
 From: Egluze <egletra@yahoo.com>
 To: va.satt5@lists.ututi.lt
@@ -9913,7 +9913,7 @@ References: <MailBoxer.5.1245057010.84.va.satt5@lists.ututi.lt>
 In-reply-to: <MailBoxer.5.1245057010.84.va.satt5@lists.ututi.lt>
 
 gal cia yra kas nors kas rase Laiui del 4 ir 2 gr rezultatu? 
-=======================================================
+========================================================================
 From g.staniunaite@gmail.com Wed Jun 17 10:30:20 2009
 From: =?utf-8?b?R2llZHLEl1N0YW5pxatuYWl0xJc=?= <g.staniunaite@gmail.com>
 To: va.satt5@lists.ututi.lt
@@ -9925,7 +9925,7 @@ References: <MailBoxer.5.1245057010.84.va.satt5@lists.ututi.lt>
 In-reply-to: <MailBoxer.6.1245223659.19.va.satt5@lists.ututi.lt>
 
 As rasiau vakar destytojui Lakiui, bet nesulaukiau is jo jokio atsakymo.
-=======================================================
+========================================================================
 From egletra@yahoo.com Wed Jun 17 10:34:14 2009
 From: Egluze <egletra@yahoo.com>
 To: va.satt5@lists.ututi.lt
@@ -9952,7 +9952,7 @@ Faks.
 snd metodininke atsiunte, jai skambinau tai ji sake siunte visiems... bet jei
 negausim iki rytojaus rezultatu gal reik nueit i perlaikyma ir issiaikint? ka
 manot?
-=======================================================
+========================================================================
 From egletra@yahoo.com Mon Jun 15 12:10:10 2009
 From: Egluze <egletra@yahoo.com>
 To: va.satt5@lists.ututi.lt
@@ -9961,9 +9961,9 @@ Date: 15 Jun 2009 12:10:10
 Message-id: <MailBoxer.5.1245057010.84.va.satt5@lists.ututi.lt>
 
 sveiki, ar jau atsirado pas visus konfliktai? gal dar kokie nors pazymiai atsirado?
-=======================================================
+========================================================================
 From rasa.zulkute@gmail.com Thu Jun 18 09:13:28 2009
-Content-Type: multipart/mixed; boundary="===============1147270040=="
+Content-Type: multipart/mixed; boundary="===============0149718729=="
 MIME-Version: 1.0
 From: Rasa =?utf-8?b?xb11bGt1dMSX?= <rasa.zulkute@gmail.com>
 To: va.satt5@lists.ututi.lt
@@ -9973,7 +9973,7 @@ Message-id: <c9af816c0906172313wf347d9fg18104d39fd454e2b@mail.gmail.com>
 References: <MailBoxer.8.1245223886.53.va.satt5@lists.ututi.lt>
 In-reply-to: <MailBoxer.8.1245223886.53.va.satt5@lists.ututi.lt>
 
---===============1147270040==
+--===============0149718729==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -9994,7 +9994,7 @@ mazai laiko mokytis liko, mes noretume kita savaite
 >
 
 
---===============1147270040==
+--===============0149718729==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -10005,8 +10005,8 @@ To unsubscribe send an email with subject &quot;unsubscribe&quot; to <a href="ma
 </blockquote></div><br>
 
 
---===============1147270040==--
-=======================================================
+--===============0149718729==--
+========================================================================
 From malpecka@gmail.com Thu Jun 18 15:09:55 2009
 From: Barbara =?utf-8?b?xaBhdGtldmnEjQ==?= <malpecka@gmail.com>
 To: va.satt5@lists.ututi.lt
@@ -10017,7 +10017,7 @@ References: <MailBoxer.8.1245223886.53.va.satt5@lists.ututi.lt>
 In-reply-to: <MailBoxer.8.1245223886.53.va.satt5@lists.ututi.lt>
 
 A≈° irgi nusprendiau kita savaite laikit 
-=======================================================
+========================================================================
 From laima.liber@gmail.com Fri Jun 19 22:53:30 2009
 From: braske braskiene <laima.liber@gmail.com>
 To: va.satt5@lists.ututi.lt
@@ -10029,9 +10029,9 @@ In-reply-to: <MailBoxer.8.1245223886.53.va.satt5@lists.ututi.lt>
 
 perlaikymas ivyko... tik deja, rezultatai nera dziuginantys... o gmeilas eili
 karta uzluzes. visai nesiseka....
-=======================================================
+========================================================================
 From vilmutia@gmail.com Fri Jun 19 23:26:42 2009
-Content-Type: multipart/mixed; boundary="===============1148144046=="
+Content-Type: multipart/mixed; boundary="===============0637773235=="
 MIME-Version: 1.0
 From: Vilma Kisieliute <vilmutia@gmail.com>
 To: va.satt5@lists.ututi.lt
@@ -10043,7 +10043,7 @@ References: <MailBoxer.8.1245223886.53.va.satt5@lists.ututi.lt>
 	<MailBoxer.11.1245441210.03.va.satt5@lists.ututi.lt>
 In-reply-to: <MailBoxer.11.1245441210.03.va.satt5@lists.ututi.lt>
 
---===============1148144046==
+--===============0637773235==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -10069,7 +10069,7 @@ o kaip sekesi pats perlaikymas? ar labai krate? kaip pazymiai?
 Vilmutia
 
 
---===============1148144046==
+--===============0637773235==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -10085,8 +10085,8 @@ o kaip sekesi pats perlaikymas? ar labai krate? kaip pazymiai?<br><br>
 <div></div><br>-- <br>Vilmutia<br>
 
 
---===============1148144046==--
-=======================================================
+--===============0637773235==--
+========================================================================
 From laima.liber@gmail.com Sat Jun 20 12:06:42 2009
 From: braske braskiene <laima.liber@gmail.com>
 To: va.satt5@lists.ututi.lt
@@ -10101,7 +10101,7 @@ In-reply-to: <b657759c0906191326i287ebbactd9c499bba8923d2e@mail.gmail.com>
 
 As pati asmneniskai vakar nejau perlaikyti, bandysiu kita karta... bet jeigu
 is 25 zmoniu 4 teislaike, tai daug ka pasako... 
-=======================================================
+========================================================================
 From malpecka@gmail.com Wed Jun 17 10:31:26 2009
 From: Barbara atkevi <malpecka@gmail.com>
 To: va.satt5@lists.ututi.lt
@@ -10110,7 +10110,7 @@ Date: 17 Jun 2009 10:31:26
 Message-id: <MailBoxer.8.1245223886.53.va.satt5@lists.ututi.lt>
 
 Sveiki. Kas ruosiasi penktadieni perlaikynet VP? Ar daug tokiu norinciu bus?
-=======================================================
+========================================================================
 From andrius.dre@gmail.com Tue May 26 03:26:08 2009
 From: Andrius Laurinnas <andrius.dre@gmail.com>
 To: medicina-kmu-28-2008@lists.ututi.lt
@@ -10123,7 +10123,7 @@ Pasid≈æiaukime, kad paleista ututi.com beta versija.
 ≈†iek tiek apie ututi ir kodƒól jis buvo sukurtas:
 jokiu ribu dalintis med≈æiaga, bendrauti ≈°iame forume, kartu kurti wiki (pvz bendrƒÖ konspektƒÖ ar kƒÖ nors nusprƒôsti, sukurti ar pana≈°iai), o jau m≈´s≈≥ nuo rugsƒójo su pertraukomis naudotas kalendorius pasidƒójo ƒçia: http://beta.ututi.lt/kmu/mf/medicina-kmu-28-2008/wiki/default ir man atrodo, kad mes tokiu b≈´du turime beveik viskƒÖ ko reikia vienoje vietoje. Jeigu kas nors veikia ne taip kaip tikitƒós arba ≈æinote kaip b≈´t≈≥ geriau kƒÖ nors padaryti - drƒÖsiai mygt ant "Feedback" ir reik≈°kite savo idƒójas, nes kiekviena pastebƒóta klaida ar i≈°sakyta nuomonƒó labai svarbi portalo k≈´rƒójams ≈°iuo metu.
 Perkelkime savo universitetƒÖ ƒØ internetƒÖ!
-=======================================================
+========================================================================
 From supreme18@gmail.com Thu May  7 15:03:08 2009
 From: Algirdas <supreme18@gmail.com>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10135,7 +10135,7 @@ In-reply-to: <MailBoxer.0.1241676693.88.kmu-mf-iii@lists.ututi.lt>
 
 Andrius taves negirdi :P che, che
 
-=======================================================
+========================================================================
 From r@toostis.com Sat May  9 23:45:13 2009
 From: R <r@toostis.com>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10155,7 +10155,7 @@ pakvietimas.
 
 
 
-=======================================================
+========================================================================
 From andrius.dre@gmail.com Sun May 10 00:02:34 2009
 From: Andrius =?utf-8?q?Laurin=C4=97nas?= <andrius.dre@gmail.com>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10177,7 +10177,7 @@ probleminio mokymosi arba jeigu tiesiog norisi kƒÖ nors pasakyti.
 Tai su pavasariu...
 
 P.S. Kaip jums pasirenkamieji dalykai?
-=======================================================
+========================================================================
 From medicusjustus@yahoo.de Thu May  7 09:11:33 2009
 From: Justinas <medicusjustus@yahoo.de>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10186,7 +10186,7 @@ Date: 07 May 2009 09:11:33
 Message-id: <MailBoxer.0.1241676693.88.kmu-mf-iii@lists.ututi.lt>
 
 Nu ir kodƒól gi ƒçia taip tu≈°ƒçia kaip tundroj ≈æiemƒÖ?.. Kur ≈æmonƒós? Laurinƒónai, daryk kƒÖ nors... ;)
-=======================================================
+========================================================================
 From andrius.dre@gmail.com Tue May 26 11:52:49 2009
 From: Andrius =?utf-8?q?Laurin=C4=97nas?= <andrius.dre@gmail.com>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10205,7 +10205,7 @@ mƒónesƒØ, sukurdami pasirenkam≈≥j≈≥ dalyk≈≥ apra≈°ymus. Dabar viskas dar ≈°aunia
 atrodo ir klaid≈≥ liko ma≈æiau. Kam savo kompe laikyti visƒÖ studij≈≥ med≈æiagƒÖ -
 u≈ætvindykime serverƒØ savo konspektais! Ger≈≥ atostog≈≥, kolegos, ir iki
 pasimatymo genetikoje!
-=======================================================
+========================================================================
 From andrius.dre@gmail.com Tue May 26 15:16:11 2009
 From: Andrius Laurinnas <andrius.dre@gmail.com>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10218,7 +10218,7 @@ Ei kolegos, skelbiu akcijƒÖ - susidƒókime nuotraukas!
 Kaip? Follow the link: http://beta.ututi.lt/personalize_form ir apaƒçioje click Pridƒóti nuotraukƒÖ.
 Nagi nagi pasirodom!
 
-=======================================================
+========================================================================
 From andrius.dre@gmail.com Wed May 27 02:05:19 2009
 From: Andrius Laurinnas <andrius.dre@gmail.com>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10234,7 +10234,7 @@ Dar kartƒÖ PAGARBA tiems, kurie sukƒólƒó fail≈≥. ≈†ƒØvakar i≈°taisyta Internet e
 Linkƒójimai!Gra≈æaus poilsio, pavasario et al.
 P.S. U≈ækim≈°im serverƒØ studij≈≥ med≈æiaga!
 Iki!
-=======================================================
+========================================================================
 From starprobe@gmail.com Sun Jun 14 22:37:59 2009
 From: starprobe <starprobe@gmail.com>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10248,7 +10248,7 @@ Optikos paskaita, A. Galdikas: "O kaip su≈æinoti yra l≈´≈æis ar nƒóra jo? Ai≈°ki
 geriau nuskrosti ir pamatyti, bet kas po to viskƒÖ susi≈≥sti  galƒós?"
 "Rentgenas jau tada ƒØtardavo, kad tie spinduliai gali b≈´ti pavojingi, todƒól
 pirmƒÖ Rentgeno nuotraukƒÖ buvo - ≈æmonos ranka."
-=======================================================
+========================================================================
 From starprobe@gmail.com Sun Jun 14 22:45:27 2009
 From: starprobe <starprobe@gmail.com>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10261,7 +10261,7 @@ In-reply-to: <MailBoxer.7.1244992690.2.kmu-mf-iii@lists.ututi.lt>
 Dar vienas Arvaido Galdiko bajeriukas - "Kadangi ƒØ medicina stoja labai
 protingi ≈æmonƒós, tai visƒÖ optikƒÖ jus praeisit per 3 paskaitas, o ne kaip VU
 fizikos studentai per 2 metus." 
-=======================================================
+========================================================================
 From domas@ututi.com Mon Jun 15 12:10:24 2009
 From: Domas Monkus <domas@ututi.com>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10277,7 +10277,7 @@ Pagarbiai,
 Ututi komanda
 
 
-=======================================================
+========================================================================
 From aushra18@yahoo.com Mon Jun 15 22:59:19 2009
 From: Aushra <aushra18@yahoo.com>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10288,9 +10288,9 @@ References: <MailBoxer.10.1245078403.18.kmu-mf-iii@lists.ututi.lt>
 In-reply-to: <MailBoxer.10.1245078403.18.kmu-mf-iii@lists.ututi.lt>
 
 tai zinoma, kad noresim:D
-=======================================================
+========================================================================
 From juodiz@gmail.com Tue Jun 16 18:09:23 2009
-Content-Type: multipart/mixed; boundary="===============1197273432=="
+Content-Type: multipart/mixed; boundary="===============1317883164=="
 MIME-Version: 1.0
 From: JuoDiz <juodiz@gmail.com>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10301,7 +10301,7 @@ References: <MailBoxer.10.1245078403.18.kmu-mf-iii@lists.ututi.lt>
 	<MailBoxer.11.1245095959.02.kmu-mf-iii@lists.ututi.lt>
 In-reply-to: <MailBoxer.11.1245095959.02.kmu-mf-iii@lists.ututi.lt>
 
---===============1197273432==
+--===============1317883164==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -10324,7 +10324,7 @@ On Mon, Jun 15, 2009 at 10:59 PM, Aushra <aushra18@yahoo.com> wrote:
 >
 
 
---===============1197273432==
+--===============1317883164==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -10338,8 +10338,8 @@ To unsubscribe send an email with subject &quot;unsubscribe&quot; to <a href="ma
 </font></blockquote></div><br>
 
 
---===============1197273432==--
-=======================================================
+--===============1317883164==--
+========================================================================
 From elis1369@gmail.com Wed Jun 17 14:35:29 2009
 From: ele <elis1369@gmail.com>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10350,7 +10350,7 @@ References: <MailBoxer.12.1245173292.15.kmu-mf-iii@lists.ututi.lt>
 In-reply-to: <MailBoxer.12.1245173292.15.kmu-mf-iii@lists.ututi.lt>
 
 zdz as tai vista po viena ikeliau :) sor... :) 
-=======================================================
+========================================================================
 From skimelytemonika@gmail.com Wed Jun 17 15:26:50 2009
 From: monika =?utf-8?b?xaBraW1lbHl0xJc=?= <skimelytemonika@gmail.com>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10362,7 +10362,7 @@ References: <MailBoxer.12.1245173292.15.kmu-mf-iii@lists.ututi.lt>
 In-reply-to: <MailBoxer.13.1245238529.57.kmu-mf-iii@lists.ututi.lt>
 
 aciu.. :) 
-=======================================================
+========================================================================
 From skimelytemonika@gmail.com Tue Jun 16 20:28:12 2009
 From: monika kimelyt <skimelytemonika@gmail.com>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10371,7 +10371,7 @@ Date: 16 Jun 2009 20:28:12
 Message-id: <MailBoxer.12.1245173292.15.kmu-mf-iii@lists.ututi.lt>
 
 gal kas turit 10 temos uzdaviniu atsakymu kompiuteriny varianta.???? idekit jei galit :) aciu... :)
-=======================================================
+========================================================================
 From aushra18@yahoo.com Thu Jun 18 14:30:39 2009
 From: Aushra <aushra18@yahoo.com>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10385,9 +10385,9 @@ In-reply-to: <MailBoxer.11.1245095959.02.kmu-mf-iii@lists.ututi.lt>
 kas musu grupes ideja nukniso?:D
 tai matai, kad daugiau pasisakanciu nera:)
 27 gr visa pasiraso uz palatkes ir vandens telkini:D
-=======================================================
+========================================================================
 From juodiz@gmail.com Thu Jun 18 15:32:18 2009
-Content-Type: multipart/mixed; boundary="===============1291170843=="
+Content-Type: multipart/mixed; boundary="===============0595430616=="
 MIME-Version: 1.0
 From: JuoDiz <juodiz@gmail.com>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10399,7 +10399,7 @@ References: <MailBoxer.10.1245078403.18.kmu-mf-iii@lists.ututi.lt>
 	<MailBoxer.15.1245324639.2.kmu-mf-iii@lists.ututi.lt>
 In-reply-to: <MailBoxer.15.1245324639.2.kmu-mf-iii@lists.ututi.lt>
 
---===============1291170843==
+--===============0595430616==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -10421,7 +10421,7 @@ mldc,o tai koky ezera isirinkot?
 >
 
 
---===============1291170843==
+--===============0595430616==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -10437,8 +10437,8 @@ Archive: <a href="http://beta.ututi.lt/kmu/mf/kmu-mf-iii/kmu-mf-iii/archive/2009
 </div></div></blockquote></div><br>
 
 
---===============1291170843==--
-=======================================================
+--===============0595430616==--
+========================================================================
 From v.gudziunas@gmail.com Thu Jun 18 23:17:48 2009
 From: Vaidotas <v.gudziunas@gmail.com>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10451,7 +10451,7 @@ In-reply-to: <MailBoxer.7.1244992690.2.kmu-mf-iii@lists.ututi.lt>
 ≈†iandien Gutauskas tokƒØ bajerƒØ suskƒólƒó, ai≈°ku i≈° konteksto i≈°traukt frazƒós
 negalima, bet.. :) 
 "Europieƒçiai labai nustebo Afrikoje pamatƒô baltus negrus" 
-=======================================================
+========================================================================
 From aushra18@yahoo.com Sat Jun 20 14:42:42 2009
 From: Aushra <aushra18@yahoo.com>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10465,9 +10465,9 @@ In-reply-to: <MailBoxer.15.1245324639.2.kmu-mf-iii@lists.ututi.lt>
 
 dabar intensyviai sprendziam:D kas nori gali jungtis, kuo daugiau, tuo
 linksmiau:D
-=======================================================
+========================================================================
 From juodiz@gmail.com Mon Jun 22 22:51:02 2009
-Content-Type: multipart/mixed; boundary="===============0246654731=="
+Content-Type: multipart/mixed; boundary="===============1628782311=="
 MIME-Version: 1.0
 From: JuoDiz <juodiz@gmail.com>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10480,7 +10480,7 @@ References: <MailBoxer.10.1245078403.18.kmu-mf-iii@lists.ututi.lt>
 	<MailBoxer.17.1245498162.93.kmu-mf-iii@lists.ututi.lt>
 In-reply-to: <MailBoxer.17.1245498162.93.kmu-mf-iii@lists.ututi.lt>
 
---===============0246654731==
+--===============1628782311==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -10501,7 +10501,7 @@ On Sat, Jun 20, 2009 at 2:42 PM, Aushra <aushra18@yahoo.com> wrote:
 >
 
 
---===============0246654731==
+--===============1628782311==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -10516,8 +10516,8 @@ Archive: <a href="http://beta.ututi.lt/kmu/mf/kmu-mf-iii/kmu-mf-iii/archive/2009
 </div></div></blockquote></div><br>
 
 
---===============0246654731==--
-=======================================================
+--===============1628782311==--
+========================================================================
 From augustinas_t@yahoo.com Tue Jun 23 00:00:47 2009
 From: Augustinas <augustinas_t@yahoo.com>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10529,7 +10529,7 @@ In-reply-to: <MailBoxer.7.1244992690.2.kmu-mf-iii@lists.ututi.lt>
 
 Arba prisimunus fizikos ciklƒÖ ir destytojƒÖ GaldikƒÖ per fizikos konsultacijƒÖ
 prie≈° egzƒÖ: "Man sakƒó kad j≈´s manƒôs norƒójot"...
-=======================================================
+========================================================================
 From andrius.dre@gmail.com Sun Jun 14 18:18:10 2009
 From: Andrius Laurinnas <andrius.dre@gmail.com>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10544,7 +10544,7 @@ Man tai fainiausiai buvo kai per histologijos laboratorinƒØ elektra tai dingdavo
 Arba kurmiuko su ≈´sais pavyzdys: "Tarkime, ≈æinote, apklausiame kokius nors mokinius, tarkime, skirtingo am≈æiaus jie bus, ir mes su ≈°ia formule (pabaksnoja ƒØ per pusƒô lentos i≈°sikerojusiƒÖ pabaisƒÖ) galime patikrinti ar tie vaikai pavyzd≈æiuui skirtingo am≈æiaus".
 KƒÖ J≈´s gera prisimenate, a?
 
-=======================================================
+========================================================================
 From medicusjustus@yahoo.de Tue Jun 23 09:35:42 2009
 From: Justinas <medicusjustus@yahoo.de>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10560,7 +10560,7 @@ Na apie GaldikƒÖ tai matyt daugiausiai galima prisimint... Kad ir -
 18... metais atƒójo toks Paulis ir jiems u≈ædraudƒó...";
 3) "Matavimo vienetas - grƒójus. Gerai, kad ta R raidƒó per vidurƒØ yra..." ir
 t.t.
-=======================================================
+========================================================================
 From juratevilcin@gmail.com Tue Jun 23 15:29:12 2009
 From: jurate vil <juratevilcin@gmail.com>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10581,9 +10581,9 @@ Krc.... chebra nemiegam, susiorganizuojam!!!! Butu gerai kad grupeje vienas
 zmogus surinktu pinigus is norinciu vaziuoti ir sunestu Joanai. Aj dar... butu
 geraj kad kazkas is vaziuojanciu turetu masinas=>
 
-=======================================================
+========================================================================
 From kasyte@gmail.com Tue Jun 23 16:22:05 2009
-Content-Type: multipart/mixed; boundary="===============0118836798=="
+Content-Type: multipart/mixed; boundary="===============1735102831=="
 MIME-Version: 1.0
 From: "Joana P." <kasyte@gmail.com>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10598,7 +10598,7 @@ References: <MailBoxer.10.1245078403.18.kmu-mf-iii@lists.ututi.lt>
 	<MailBoxer.20.1245760152.41.kmu-mf-iii@lists.ututi.lt>
 In-reply-to: <MailBoxer.20.1245760152.41.kmu-mf-iii@lists.ututi.lt>
 
---===============0118836798==
+--===============1735102831==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -10629,7 +10629,7 @@ jei kils klausimu mano skype missdzonis
 >
 
 
---===============0118836798==
+--===============1735102831==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -10646,8 +10646,8 @@ geraj kad kazkas is vaziuojanciu turetu masinas=&gt;<br><font color="#888888"><b
 </div></div></blockquote></div><br>
 
 
---===============0118836798==--
-=======================================================
+--===============1735102831==--
+========================================================================
 From aushra18@yahoo.com Tue Jun 23 16:54:46 2009
 From: Aushra <aushra18@yahoo.com>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10663,9 +10663,9 @@ References: <MailBoxer.10.1245078403.18.kmu-mf-iii@lists.ututi.lt>
 In-reply-to: <MailBoxer.20.1245760152.41.kmu-mf-iii@lists.ututi.lt>
 
 tranzu kaliegos tranzu:D
-=======================================================
+========================================================================
 From juodiz@gmail.com Wed Jun 24 21:16:25 2009
-Content-Type: multipart/mixed; boundary="===============1713987725=="
+Content-Type: multipart/mixed; boundary="===============0230481596=="
 MIME-Version: 1.0
 From: JuoDiz <juodiz@gmail.com>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10681,7 +10681,7 @@ References: <MailBoxer.10.1245078403.18.kmu-mf-iii@lists.ututi.lt>
 	<MailBoxer.21.1245765286.6.kmu-mf-iii@lists.ututi.lt>
 In-reply-to: <MailBoxer.21.1245765286.6.kmu-mf-iii@lists.ututi.lt>
 
---===============1713987725==
+--===============0230481596==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -10701,7 +10701,7 @@ On Tue, Jun 23, 2009 at 4:54 PM, Aushra <aushra18@yahoo.com> wrote:
 >
 
 
---===============1713987725==
+--===============0230481596==
 Content-Disposition: attachment; filename="text.html"
 Content-Type: text/html
 
@@ -10715,8 +10715,8 @@ Archive: <a href="http://beta.ututi.lt/kmu/mf/kmu-mf-iii/kmu-mf-iii/archive/2009
 </div></div></blockquote></div><br>
 
 
---===============1713987725==--
-=======================================================
+--===============0230481596==--
+========================================================================
 From juodiz@gmail.com Mon Jun 15 18:06:43 2009
 From: Jei <juodiz@gmail.com>
 To: kmu-mf-iii@lists.ututi.lt
@@ -10725,7 +10725,7 @@ Date: 15 Jun 2009 18:06:43
 Message-id: <MailBoxer.10.1245078403.18.kmu-mf-iii@lists.ututi.lt>
 
 aisku as nesitikiu, kad cia daug zmoniu atsilieps i mano posta :D , bet tiesiog ar bus norinciu, po egzaminu (29 ar 30 diena) kaip nors pazymeti pirmojo kurso baigima? 
-=======================================================
+========================================================================
 From kiskelis@gmail.com Sun May 10 19:34:20 2009
 From: Jris <kiskelis@gmail.com>
 To: magaiveriai@lists.ututi.lt
@@ -10734,7 +10734,7 @@ Date: 10 May 2009 19:34:20
 Message-id: <MailBoxer.0.1241973260.46.magaiveriai@lists.ututi.lt>
 
 kuku
-=======================================================
+========================================================================
 From jaro@ututi.com Sun Apr 19 03:50:11 2009
 From: Jaroslav =?utf-8?b?xaBhdGtldmnEjQ==?= <jaro@ututi.com>
 To: mif-moderators@lists.ututi.lt
@@ -10747,7 +10747,7 @@ In-reply-to: <MailBoxer.0.1240101048.32.mif-moderators@lists.ututi.lt>
 Ka≈ækas yra ne taip :(
 
 
-=======================================================
+========================================================================
 From jaroslav@akl.lt Sun Apr 19 04:11:18 2009
 From: Jarekas <jaroslav@akl.lt>
 To: mif-moderators@lists.ututi.lt
@@ -10759,7 +10759,7 @@ References: <MailBoxer.0.1240101048.32.mif-moderators@lists.ututi.lt>
 In-reply-to: <MailBoxer.1.1240102211.73.mif-moderators@lists.ututi.lt>
 
 Pirmas prane≈°imas? Kada
-=======================================================
+========================================================================
 From r@toostis.com Sun Apr 19 04:18:03 2009
 From: R <r@toostis.com>
 To: mif-moderators@lists.ututi.lt
@@ -10775,7 +10775,7 @@ On Apr 19, 2009 03:30 AM, Jarekas wrote:
 > Jaro
 
 Kodƒól tu su kate?
-=======================================================
+========================================================================
 From jaro@akl.lt Sun Apr 19 03:30:48 2009
 From: Jarekas <jaro@akl.lt>
 To: mif-moderators@lists.ututi.lt
@@ -10786,7 +10786,7 @@ Message-id: <MailBoxer.0.1240101048.32.mif-moderators@lists.ututi.lt>
 Tikrinam ar veikia mailinglistas,
 
 Jaro
-=======================================================
+========================================================================
 From jaroslav@akl.lt Sun Apr 19 12:41:58 2009
 From: Jaroslav =?utf-8?b?xaBhdGtldmnEjQ==?= <jaroslav@akl.lt>
 To: mif-moderators@lists.ututi.lt
@@ -10798,7 +10798,7 @@ Kas
 
 
 
-=======================================================
+========================================================================
 From jaroslav@akl.lt Tue Apr 21 09:37:14 2009
 From: Jaroslav =?utf-8?b?xaBhdGtldmnEjQ==?= <jaroslav@akl.lt>
 To: mif-moderators@lists.ututi.lt
@@ -10830,7 +10830,7 @@ Jaroslav ≈†atkeviƒç ra≈°ƒó:
 >
 
 
-=======================================================
+========================================================================
 From domas.m@gmail.com Tue Apr 21 09:41:53 2009
 From: Domas Monkus <domas.m@gmail.com>
 To: mif-moderators@lists.ututi.lt
@@ -10845,7 +10845,7 @@ Pana≈°u, kad veikia.
 Domas
 
 
-=======================================================
+========================================================================
 From jaroslav@akl.lt Tue Apr 21 09:41:54 2009
 From: Jaroslav =?utf-8?b?xaBhdGtldmnEjQ==?= <jaroslav@akl.lt>
 To: mif-moderators@lists.ututi.lt
@@ -10880,7 +10880,7 @@ Jaroslav ≈†atkeviƒç ra≈°ƒó:
 >
 
 
-=======================================================
+========================================================================
 From domas.m@gmail.com Tue Apr 21 09:44:31 2009
 From: Domas Monkus <domas.m@gmail.com>
 To: mif-moderators@lists.ututi.lt
@@ -10895,7 +10895,7 @@ Veikia?
 Domas
 
 
-=======================================================
+========================================================================
 From jaroslav@akl.lt Tue Apr 21 09:28:42 2009
 From: Jaroslav =?utf-8?b?xaBhdGtldmnEjQ==?= <jaroslav@akl.lt>
 To: mif-moderators@lists.ututi.lt
@@ -10911,7 +10911,7 @@ Jus pasveikinti prisijungus prie UTUTI.
 --
 Jaro
 
-=======================================================
+========================================================================
 From domas.m@gmail.com Tue Apr 21 09:58:06 2009
 From: Domas Monkus <domas.m@gmail.com>
 To: mif-moderators@lists.ututi.lt
@@ -10927,7 +10927,7 @@ Domashive: http://ututi.com:8090/ututi/vu/mif/mif-moderators/forum/archive/2009/
 > To unsubscribe send an email with subject "unsubscribe" to mif-moderators@lists.ututi.lt.  Please contact mif-moderators-manager@lists.ututi.lt for questions.
 
 
-=======================================================
+========================================================================
 From jaro@ututi.com Mon Jun 15 10:41:20 2009
 From: Jaroslav atkevi <jaro@ututi.com>
 To: mif-moderators@lists.ututi.lt
@@ -10936,7 +10936,7 @@ Date: 15 Jun 2009 10:41:20
 Message-id: <MailBoxer.4.1245051680.86.mif-moderators@lists.ututi.lt>
 
 ir vƒól bandome mailinglistƒÖ :)
-=======================================================
+========================================================================
 From jarekas@gmail.com Mon Jun 15 10:43:01 2009
 From: Jaroslav Satkevic <jarekas@gmail.com>
 To: mif-moderators@lists.ututi.lt
@@ -10960,7 +10960,7 @@ On Mon, Jun 15, 2009 at 10:41 AM, Domas Monkus<domas.m@gmail.com> wrote:
 > To unsubscribe send an email with subject "unsubscribe" to mif-moderators@lists.ututi.lt. ¬†Please contact mif-moderators-manager@lists.ututi.lt for questions.
 >
 
-=======================================================
+========================================================================
 From adomas.paltanavicius@gmail.com Mon Jun 15 10:43:45 2009
 From: Adomas =?utf-8?q?Paltanavi=C4=8Dius?= <adomas.paltanavicius@gmail.com>
 To: mif-moderators@lists.ututi.lt
@@ -10982,7 +10982,7 @@ Kodƒól ƒçia taip?
 
 --
 Adomas
-=======================================================
+========================================================================
 From jarekas@gmail.com Mon Jun 15 10:46:50 2009
 From: Jaroslav Satkevic <jarekas@gmail.com>
 To: mif-moderators@lists.ututi.lt
@@ -11005,7 +11005,7 @@ Manau, kad jau pataisƒóm.
 --
 Jaro
 
-=======================================================
+========================================================================
 From domas.m@gmail.com Mon Jun 15 10:41:33 2009
 From: Domas Monkus <domas.m@gmail.com>
 To: mif-moderators@lists.ututi.lt
@@ -11016,7 +11016,7 @@ Message-id: <1245051688.11734.0.camel@port>
 khasdkfh
 
 
-=======================================================
+========================================================================
 From adomas.paltanavicius@gmail.com Mon Jun 15 10:49:08 2009
 From: Adomas =?utf-8?q?Paltanavi=C4=8Dius?= <adomas.paltanavicius@gmail.com>
 To: mif-moderators@lists.ututi.lt
@@ -11045,7 +11045,7 @@ Adomas
 "It ain't over till it's over."
 
 
-=======================================================
+========================================================================
 From ignas.mikalajunas@gmail.com Tue Jun 23 16:48:43 2009
 From: Ignas Mikalajunas <ignas.mikalajunas@gmail.com>
 To: mif-moderators@lists.ututi.lt
@@ -11057,7 +11057,7 @@ In-reply-to: <1245764425.30993.0.camel@port>
 
 Google atpa≈æino, kad tai ta pati ≈æinutƒó ir rodo man tik vienƒÖ.
 
-=======================================================
+========================================================================
 From domas.m@gmail.com Tue Jun 23 16:40:27 2009
 From: Domas Monkus <domas.m@gmail.com>
 To: mif-moderators@lists.ututi.lt
@@ -11068,7 +11068,7 @@ Message-id: <1245764425.30993.0.camel@port>
 testas
 
 
-=======================================================
+========================================================================
 From ignas.mikalajunas@gmail.com Tue Jun 23 16:50:45 2009
 From: Ignas Mikalajunas <ignas.mikalajunas@gmail.com>
 To: mif-moderators@lists.ututi.lt
@@ -11081,7 +11081,7 @@ In-reply-to: <cc0c36330906230648r4140417ct7bb97be224fc8478@mail.gmail.com>
 
 Dar kartƒÖ tik taip kad.
 
-=======================================================
+========================================================================
 From ignas.mikalajunas@gmail.com Tue Jun 23 17:50:34 2009
 From: Ignas Mikalajunas <ignas.mikalajunas@gmail.com>
 To: mif-moderators@lists.ututi.lt
@@ -11092,7 +11092,7 @@ References: <1245765301.31738.3.camel@port>
 In-reply-to: <1245765301.31738.3.camel@port>
 
 Testuojam threadus.
-=======================================================
+========================================================================
 From ignas.mikalajunas@gmail.com Tue Jun 23 17:50:46 2009
 From: Ignas Mikalajunas <ignas.mikalajunas@gmail.com>
 To: mif-moderators@lists.ututi.lt
@@ -11104,7 +11104,7 @@ References: <1245765301.31738.3.camel@port>
 In-reply-to: <MailBoxer.5.1245768634.75.mif-moderators@lists.ututi.lt>
 
 3
-=======================================================
+========================================================================
 From ignas.mikalajunas@gmail.com Tue Jun 23 17:50:57 2009
 From: Ignas Mikalajunas <ignas.mikalajunas@gmail.com>
 To: mif-moderators@lists.ututi.lt
@@ -11117,7 +11117,7 @@ References: <1245765301.31738.3.camel@port>
 In-reply-to: <MailBoxer.6.1245768646.76.mif-moderators@lists.ututi.lt>
 
 4
-=======================================================
+========================================================================
 From ignas.mikalajunas@gmail.com Tue Jun 23 17:51:22 2009
 From: Ignas Mikalajunas <ignas.mikalajunas@gmail.com>
 To: mif-moderators@lists.ututi.lt
@@ -11128,7 +11128,7 @@ References: <1245765301.31738.3.camel@port>
 In-reply-to: <1245765301.31738.3.camel@port>
 
 -1
-=======================================================
+========================================================================
 From domas.m@gmail.com Tue Jun 23 16:55:05 2009
 From: Domas Monkus <domas.m@gmail.com>
 To: mif-moderators@lists.ututi.lt
@@ -11139,7 +11139,7 @@ Message-id: <1245765301.31738.3.camel@port>
 abra
 
 
-=======================================================
+========================================================================
 From ignas.mikalajunas@gmail.com Tue Jun 23 17:51:34 2009
 From: Ignas Mikalajunas <ignas.mikalajunas@gmail.com>
 To: mif-moderators@lists.ututi.lt
@@ -11153,7 +11153,7 @@ References: <1245765301.31738.3.camel@port>
 In-reply-to: <MailBoxer.7.1245768657.21.mif-moderators@lists.ututi.lt>
 
 5
-=======================================================
+========================================================================
 From jaro@ututi.com Mon Jun 15 10:49:34 2009
 From: Jaroslav =?utf-8?b?xaBhdGtldmnEjQ==?= <jaro@ututi.com>
 To: special@lists.ututi.lt
@@ -11164,7 +11164,7 @@ References: <1245052077.11734.2.camel@port>
 In-reply-to: <1245052077.11734.2.camel@port>
 
 Cool
-=======================================================
+========================================================================
 From domas.m@gmail.com Mon Jun 15 10:48:00 2009
 From: Domas Monkus <domas.m@gmail.com>
 To: special@lists.ututi.lt
@@ -11175,7 +11175,7 @@ Message-id: <1245052077.11734.2.camel@port>
 Testas
 
 
-=======================================================
+========================================================================
 From domas.m@gmail.com Mon Jun 15 10:52:23 2009
 From: Domas Monkus <domas.m@gmail.com>
 To: special@lists.ututi.lt
@@ -11186,7 +11186,7 @@ References: <1245052077.11734.2.camel@port>
 In-reply-to: <1245052077.11734.2.camel@port>
 
 asdf
-=======================================================
+========================================================================
 From domas.m@gmail.com Mon Jun 15 10:53:50 2009
 From: Domas Monkus <domas.m@gmail.com>
 To: special@lists.ututi.lt
@@ -11201,7 +11201,7 @@ Turƒótum gauti
 Domas
 
 
-=======================================================
+========================================================================
 From ignas@pov.lt Mon Jun 15 10:54:11 2009
 From: Ignas =?utf-8?q?Mikalaj=C5=ABnas?= <ignas@pov.lt>
 To: special@lists.ututi.lt
@@ -11212,7 +11212,7 @@ References: <MailBoxer.1.1245052329.05.special@lists.ututi.lt>
 In-reply-to: <MailBoxer.1.1245052329.05.special@lists.ututi.lt>
 
 Aga.
-=======================================================
+========================================================================
 From domas.m@gmail.com Mon Jun 15 10:57:41 2009
 From: Domas Monkus <domas.m@gmail.com>
 To: special@lists.ututi.lt
@@ -11232,7 +11232,7 @@ On Mon, 2009-06-15 at 10:54 +0300, Ignas Mikalaj≈´nas wrote:
 > To unsubscribe send an email with subject "unsubscribe" to special@lists.ututi.lt.  Please contact special-manager@lists.ututi.lt for questions.
 
 
-=======================================================
+========================================================================
 From ignas@pov.lt Mon Jun 15 10:59:33 2009
 From: Ignas Mikalajunas <ignas@pov.lt>
 To: special@lists.ututi.lt
@@ -11242,7 +11242,7 @@ Message-id: <cc0c36330906150059n41ce978do3943a00132619819@mail.gmail.com>
 
 ar matom?
 
-=======================================================
+========================================================================
 From jaro@ututi.com Mon Jun 15 10:52:09 2009
 From: Jaroslav atkevi <jaro@ututi.com>
 To: special@lists.ututi.lt
@@ -11251,7 +11251,7 @@ Date: 15 Jun 2009 10:52:09
 Message-id: <MailBoxer.1.1245052329.05.special@lists.ututi.lt>
 
 Kodƒól pats negaunu?
-=======================================================
+========================================================================
 From jaroslav@akl.lt Mon Jun 15 11:00:14 2009
 From: Jaroslav =?utf-8?b?xaBhdGtldmnEjQ==?= <jaroslav@akl.lt>
 To: special@lists.ututi.lt
@@ -11284,7 +11284,7 @@ Pr, 2009 06 15 10:57 +0300, Domas Monkus ra≈°ƒó:
 > To unsubscribe send an email with subject "unsubscribe" to special@lists.ututi.lt.  Please contact special-manager@lists.ututi.lt for questions.
 
 
-=======================================================
+========================================================================
 From ignas.mikalajunas@gmail.com Mon Jun 15 11:00:14 2009
 From: Ignas Mikalajunas <ignas.mikalajunas@gmail.com>
 To: special@lists.ututi.lt
@@ -11294,7 +11294,7 @@ Message-id: <cc0c36330906150058p7a0bdc56vf05ee0a4eb6e40d3@mail.gmail.com>
 
 Labas labas!
 
-=======================================================
+========================================================================
 From jarekas@gmail.com Mon Jun 15 11:01:33 2009
 From: Jaroslav Satkevic <jarekas@gmail.com>
 To: special@lists.ututi.lt
@@ -11319,7 +11319,7 @@ Mikalajunas<ignas.mikalajunas@gmail.com> wrote:
 > To unsubscribe send an email with subject "unsubscribe" to special@lists.ututi.lt. ¬†Please contact special-manager@lists.ututi.lt for questions.
 >
 
-=======================================================
+========================================================================
 From jaroslav@akl.lt Mon Jun 15 11:08:38 2009
 From: Jaroslav =?utf-8?b?xaBhdGtldmnEjQ==?= <jaroslav@akl.lt>
 To: special@lists.ututi.lt
@@ -11331,7 +11331,7 @@ Ne?
 
 
 
-=======================================================
+========================================================================
 From jaroslav@akl.lt Mon Jun 15 11:10:30 2009
 From: Jaroslav =?utf-8?b?xaBhdGtldmnEjQ==?= <jaroslav@akl.lt>
 To: special@lists.ututi.lt
@@ -11343,7 +11343,7 @@ asd
 
 
 
-=======================================================
+========================================================================
 From ignas@pov.lt Thu Jun 18 14:25:36 2009
 From: Ignas =?utf-8?q?Mikalaj=C5=ABnas?= <ignas@pov.lt>
 To: special@lists.ututi.lt
@@ -11354,7 +11354,7 @@ References: <1245053429.10339.12.camel@angliukas>
 In-reply-to: <1245053429.10339.12.camel@angliukas>
 
 O ar a≈° gaunu lai≈°kus?
-=======================================================
+========================================================================
 From st.dnt.s@gmail.com Sat May 30 23:10:58 2009
 From: Donatas Stonkus <st.dnt.s@gmail.com>
 To: st_doni@lists.ututi.lt
@@ -11363,7 +11363,7 @@ Date: 30 May 2009 23:10:58
 Message-id: <MailBoxer.0.1243714258.83.st_doni@lists.ututi.lt>
 
 test text text
-=======================================================
+========================================================================
 From bloodpainter@gmail.com Fri Jun 19 17:33:54 2009
 From: Darius Zivertas <bloodpainter@gmail.com>
 To: vibn8@lists.ututi.lt
@@ -11372,7 +11372,7 @@ Date: 19 Jun 2009 17:33:54
 Message-id: <MailBoxer.0.1245422034.08.vibn8@lists.ututi.lt>
 
 Sveiki, ƒçia labai pana≈°u ƒØ m≈´s≈≥ naudojama google.groups, tik labiau koncentruota ir pritaikyta mokslams.
-=======================================================
+========================================================================
 From ristinak@gmail.com Mon Apr 20 12:55:23 2009
 From: Kristina Kudriaova <ristinak@gmail.com>
 To: edukologai2007@lists.ututi.lt
@@ -11382,7 +11382,7 @@ Message-id: <MailBoxer.0.1240221323.53.edukologai2007@lists.ututi.lt>
 
 Ka≈æin ar veikia.. ;) Ypaƒç UTF-8...
 ƒÖƒçƒôƒóƒØ≈°≈≥≈´‚Äû‚Äú≈æ
-=======================================================
+========================================================================
 From ristinak@gmail.com Mon Apr 20 17:35:03 2009
 From: Kristina Kudriaova <ristinak@gmail.com>
 To: edukologai2007@lists.ututi.lt
@@ -11419,7 +11419,7 @@ Lietuvos politinƒóje praktikoje vie≈°oji politika yra mƒógƒóji≈°ko saviveiklinio
 ƒåia pridursiu, kad ≈°iuo atveju omenyje turiu tokƒØ protƒÖ, kurio reikia visavertei demokratinei politikai. Tai ir yra dar viena prie≈æastis, apart plaƒçiai m≈´s≈≥ visuomenƒóje i≈°plitusio korupcinio mentaliteto, dƒól kurio dauguma vie≈°ojo sektoriaus reform≈≥ klajoja ≈°unkeliais.
 
 Dar ne vƒólu, mokslo ir studij≈≥ sistemos neƒØstumti ƒØ tokius ≈°unkelius, o imtis jos reformos profesionaliai.
-=======================================================
+========================================================================
 From ristinak@gmail.com Tue May  5 18:30:14 2009
 From: Kristina =?utf-8?q?Kudria=C5=A1ova?= <ristinak@gmail.com>
 To: edukologai2007@lists.ututi.lt
@@ -11434,7 +11434,7 @@ Kristina Kudria≈°ova
 http://ristinak.wordpress.com/
 Phone.: +370 684 29465, e-mail: ristinak@gmail.com
 
-=======================================================
+========================================================================
 From jerube@gmail.com Mon May 25 22:12:57 2009
 From: g <jerube@gmail.com>
 To: vv75@lists.ututi.lt

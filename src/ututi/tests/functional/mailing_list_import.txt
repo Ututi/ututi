@@ -16,7 +16,7 @@ Mailing list import
     >>> from pkg_resources import resource_string
     >>> from nous.mailpost import processEmailAndPost
     >>> from pylons import config
-    >>> emails = resource_string("ututi.tests.functional.import", "export_group_forums.txt").split("=" * 55 + '\n')
+    >>> emails = resource_string("ututi.tests.functional.import", "export_group_forums.txt").split("=" * 72 + '\n')
     >>> from nous.mailpost.MailBoxerTools import splitMail
     >>> import rfc822
     >>> emails = filter(bool, emails)
