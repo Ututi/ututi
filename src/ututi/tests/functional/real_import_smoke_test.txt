@@ -25,18 +25,12 @@ And upload all the files one by one:
     >>> import_csv(browser, 'group_logos_import', 'export_group_logos.csv')
     >>> import_csv(browser, 'structure_logos_import', 'export_structure_logos.csv')
     >>> import_csv(browser, 'group_files_import', 'export_group_files.csv')
-
-    # XXX disabled, because it's missing location tags
-    # >>> import_csv(browser, 'subject_files_import', 'export_subject_files.csv')
-
+    >>> import_csv(browser, 'subject_files_import', 'export_subject_files.csv')
     >>> import_csv(browser, 'group_pages_import', 'export_group_pages.csv')
-
-    # XXX disabled because it's missing location tags
-    # >>> import_csv(browser, 'subject_pages_import', 'export_subject_pages.csv')
+    >>> import_csv(browser, 'subject_pages_import', 'export_subject_pages.csv')
 
     # >>> import_csv(browser, 'group_watched_subjects_import', 'export_group_watched_subjects.csv')
     # >>> import_csv(browser, 'user_ignored_subjects_import', 'export_user_ignored_subjects.csv')
     # >>> import_csv(browser, 'user_watched_subjects_import', 'export_user_watched_subjects.csv')
 
-    # XXX disabled, we don't have a working page import now
-    # >>> browser.open('http://localhost/subject/pastatu-inzinerines-sistemos/page/259')
+    >>> browser.open('http://localhost/subject/vgtu/archfak/pastatu-inzinerines-sistemos/page/259')

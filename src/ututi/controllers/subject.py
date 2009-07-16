@@ -134,8 +134,11 @@ class SubjectController(BaseController):
                     id=subj.id,
                     **subj.location_path)
 
-    def page(self, id, page_id):
-        subject = Subject.get(id)
+    def page(self, id, page_id, l0='', l1='', l2='', l3='', l4=''):
+        location = LocationTag.get(l0, l1, l2, l3, l4)
+        if location is None:
+            abort(404)
+        subject = Subject.get(location, id)
         if subject is None:
             abort(404)
 

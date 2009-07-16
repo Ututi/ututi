@@ -286,9 +286,11 @@ class AdminController(BaseController):
                     continue
                 line = line.strip().split(',')
                 subject_id = line[0]
-                subject = Subject.get(subject_id)
-                f = File(filename=line[3], title=line[4].decode('utf-8'))
-                f.mimetype = line[2]
+                uni_id, fac_id = line[2], line[3]
+                location = LocationTag.get(uni_id, fac_id)
+                subject = Subject.get(location, subject_id)
+                f = File(filename=line[5], title=line[6].decode('utf-8'))
+                f.mimetype = line[4]
                 f.folder = line[1].decode('utf-8')
                 # XXX dummy content at the moment
                 f.store('Whatever!')
@@ -324,9 +326,10 @@ class AdminController(BaseController):
             for row in csv_reader:
                 if len(row) < 4:
                     continue
-                subject_id, page_id, page_title, page_content = row
+                subject_id, uni_id, fac_id, page_id, page_title, page_content = row
 
-                subject = Subject.get(subject_id)
+                location = LocationTag.get(uni_id, fac_id)
+                subject = Subject.get(location, subject_id)
                 admin = User.get('admin@ututi.lt')
                 subject.pages.append(Page(page_title.decode('utf-8'),
                                           page_content.decode('utf-8'), admin))
