@@ -8,9 +8,9 @@ Mailing list import
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
 
-    >>> import_csv(browser, 'user_import', 'export_users.csv')
-    >>> import_csv(browser, 'groups_import', 'export_groups.csv')
-    >>> import_csv(browser, 'group_members_import', 'export_group_members.csv')
+    >>> import_csv(browser, 'import_users', 'export_users.csv')
+    >>> import_csv(browser, 'import_groups', 'export_groups.csv')
+    >>> import_csv(browser, 'import_group_members', 'export_group_members.csv')
 
     >>> from urllib2 import HTTPError
     >>> from pkg_resources import resource_string

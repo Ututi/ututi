@@ -57,7 +57,7 @@ You can import more subjects using the admin interface.
 
 
     >>> browser.open('http://localhost/admin')
-    >>> form = browser.getForm(name='subjects_import')
+    >>> form = browser.getForm(name='import_subjects')
     >>> csv_data = 'new_subj, Imported subject, Professor,, vu'
     >>> import cStringIO
     >>> form.getControl('CSV File').add_file(cStringIO.StringIO(csv_data),

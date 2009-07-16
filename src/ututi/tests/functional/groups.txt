@@ -98,7 +98,7 @@ of in your home page (at least for now):
 You can import more groups using the admin interface.
 
     >>> browser.open('http://localhost/admin')
-    >>> form = browser.getForm(name='groups_import')
+    >>> form = browser.getForm(name='import_groups')
     >>> csv_data = 'exgroup, Imported group, Group imported from the old system, 2008, gmf, vu'
     >>> import cStringIO
     >>> form.getControl('CSV File').add_file(cStringIO.StringIO(csv_data),
@@ -114,7 +114,7 @@ You can import more groups using the admin interface.
 And you can import group memberships using the admin interface too.
 
     >>> browser.open('http://localhost/admin')
-    >>> form = browser.getForm(name='group_members_import')
+    >>> form = browser.getForm(name='import_group_members')
     >>> csv_data = 'exgroup, admin@ututi.lt, True'
     >>> import cStringIO
     >>> form.getControl('CSV File').add_file(cStringIO.StringIO(csv_data),

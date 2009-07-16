@@ -97,7 +97,7 @@ Let's log back in and try importing new structure information.
     >>> form.getControl('Login').click()
     >>> browser.open('http://localhost/admin')
 
-    >>> form = browser.getForm(name='structure_import')
+    >>> form = browser.getForm(name='import_structure')
     >>> import cStringIO
     >>> from textwrap import dedent
     >>> csv_file = dedent("""\
