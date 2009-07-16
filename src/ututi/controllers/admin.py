@@ -170,14 +170,8 @@ class AdminController(BaseController):
                 tag_title = line[0].strip().lower()
                 parent_title = line[1].strip().lower()
                 b64logo = line[2].strip()
-                if parent_title:
-                    parent = meta.Session.query(LocationTag).filter_by(title_short=parent_title,
-                                                                       parent=None).one()
-                    parent_id = parent.id
-                else:
-                    parent_id = None
-                location_tag = meta.Session.query(LocationTag).filter_by(title_short=tag_title,
-                                                                         parent_id=parent_id).first()
+                location_tag = LocationTag.get([parent_title, tag_title])
+
                 if location_tag is None:
                     log.error("Failed to import a logo,"
                               " location tag %s does not exist!" % '/'.join((parent_title, tag_title)))
