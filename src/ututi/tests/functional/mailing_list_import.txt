@@ -19,7 +19,7 @@ Mailing list import
     >>> emails = resource_string("ututi.tests.functional.import", "export_group_forums.txt").split("=" * 55 + '\n')
     >>> from nous.mailpost.MailBoxerTools import splitMail
     >>> import rfc822
-    >>> emails = filter(lambda message: message, emails)
+    >>> emails = filter(bool, emails)
     >>> emails.sort(key=lambda message: rfc822.parsedate(splitMail(message)[0]['date']))
 
     >>> from ututi.model.mailing import UtutiEmail
