@@ -291,13 +291,13 @@ class AdminController(BaseController):
             for row in csv_reader:
                 if len(row) < 4:
                     continue
-                group_id, page_id, page_title, page_content = row
+                group_id, page_id, page_title, page_content, author_email = row
 
                 group = Group.get(group_id)
-                admin = User.get('admin@ututi.lt')
+                author = User.get(author_email)
                 group.pages.append(Page(page_title.decode('utf-8'),
                                         page_content.decode('utf-8'),
-                                        admin))
+                                        author))
                 meta.Session.commit()
 
         redirect_to(controller='admin', action='index')
@@ -310,13 +310,14 @@ class AdminController(BaseController):
             for row in csv_reader:
                 if len(row) < 4:
                     continue
-                subject_id, uni_id, fac_id, page_id, page_title, page_content = row
+                subject_id, uni_id, fac_id, page_id, page_title, page_content, author_email = row
 
                 location = LocationTag.get([uni_id, fac_id])
                 subject = Subject.get(location, subject_id)
-                admin = User.get('admin@ututi.lt')
+                author = User.get(author_email)
                 subject.pages.append(Page(page_title.decode('utf-8'),
-                                          page_content.decode('utf-8'), admin))
+                                          page_content.decode('utf-8'),
+                                          author))
                 meta.Session.commit()
 
         redirect_to(controller='admin', action='index')
