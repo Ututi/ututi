@@ -40,6 +40,7 @@ class NewStructureForm(Schema):
     parent = StructureIdValidator()
 
 class StructureController(BaseController):
+
     def index(self):
         c.structure = meta.Session.query(LocationTag).filter_by(parent = None).all()
         return render('structure.mako')
@@ -55,6 +56,7 @@ class StructureController(BaseController):
                                 title_short = values['title_short'],
                                 description = values['description'])
         meta.Session.add(structure)
+        # XXX why zero?
         if int(values['parent']) != 0:
             parent = meta.Session.query(LocationTag).filter_by(id=values['parent']).one()
             parent.children.append(structure)
