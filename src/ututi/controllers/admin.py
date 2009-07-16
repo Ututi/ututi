@@ -97,7 +97,7 @@ class AdminController(BaseController):
                             .filter_by(parent = None).one()
                     else:
                         tag = meta.Session.query(LocationTag).filter(LocationTag.title_short==title_short)\
-                            .join('parent_item', aliased=True).filter(LocationTag.title_short==parent)\
+                            .join('parent', aliased=True).filter(LocationTag.title_short==parent)\
                             .one()
                 except NoResultFound:
                     tag = LocationTag(title = title,
@@ -187,7 +187,7 @@ class AdminController(BaseController):
                 else:
                     parent_id = None
                 location_tag = meta.Session.query(LocationTag).filter_by(title_short=tag_title,
-                                                                         parent=parent_id).first()
+                                                                         parent_id=parent_id).first()
                 if location_tag is None:
                     log.error("Failed to import a logo,"
                               " location tag %s does not exist!" % '/'.join((parent_title, tag_title)))
@@ -210,20 +210,21 @@ class AdminController(BaseController):
         if file is not None and file != '':
             csv_reader = csv.reader(file.value.split(os.linesep))
             for row in csv_reader:
-                if len(row) < 3:
+                if len(row) < 5:
                     continue
 
                 id, title, lecturer = row[:3]
+                location_path = reversed(filter(bool, [s.strip() for s in row[3:]]))
+                location = LocationTag.get(*location_path)
                 title = title.decode('utf-8')
                 lecturer = lecturer.decode('utf-8')
-                subj = Subject.get(id)
+                subj = Subject.get(location, id)
                 if subj is None:
-                    subj = Subject(id, title)
+                    subj = Subject(id, title, location)
                     meta.Session.add(subj)
 
                 subj.title = title
                 subj.lecturer = lecturer
-
                 meta.Session.commit()
         redirect_to(controller='subject', action='index')
 

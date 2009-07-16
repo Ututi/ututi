@@ -57,7 +57,8 @@ def setup_orm(engine):
     orm.mapper(LocationTag,
                locationtags_table,
                properties = {'children' : relation(LocationTag,
-                                                   backref=backref('parent_item', remote_side=locationtags_table.c.id)),
+                                                   backref=backref('parent',
+                                                                   remote_side=locationtags_table.c.id)),
                              'logo': relation(File)})
     global files_table
     files_table = Table("files", meta.metadata,
@@ -113,7 +114,8 @@ def setup_orm(engine):
                properties={'files': relation(File,
                                              secondary=subject_files_table),
                            'pages': relation(Page,
-                                             secondary=subject_pages_table)})
+                                             secondary=subject_pages_table),
+                           'location': relation(LocationTag)})
 
     global group_membership_types_table
     group_membership_types_table = Table("group_membership_types", meta.metadata,
@@ -313,9 +315,9 @@ subjects_table = None
 class Subject(object):
 
     @classmethod
-    def get(cls, id):
+    def get(cls, location, id):
         try:
-            return meta.Session.query(cls).filter_by(id=id).one()
+            return meta.Session.query(cls).filter_by(id=id, location=location).one()
         except NoResultFound:
             return None
 
@@ -328,8 +330,18 @@ class Subject(object):
                 result[file.folder].append(file)
         return sorted(result.values(), key=lambda f: f.title)
 
+    @property
+    def location_path(self):
+        location = self.location
+        path = []
+        while location:
+            path.append(location.title_short)
+            location = location.parent
+        return dict([('l%s' % n, name)
+                     for n, name in enumerate(reversed(path))])
 
-    def __init__(self, subject_id, title, lecturer = None):
+    def __init__(self, subject_id, title, location, lecturer = None):
+        self.location = location
         self.title = title
         self.id = subject_id
         self.lecturer = lecturer
@@ -400,6 +412,17 @@ class LocationTag(object):
         self.title = title
         self.title_short = title_short
         self.description = description
+
+    @classmethod
+    def get(cls, *args):
+        tag = None
+        for title_short in args:
+            try:
+                tag = meta.Session.query(LocationTag)\
+                    .filter_by(title_short=title_short, parent=tag).one()
+            except NoResultFound:
+                return None
+        return tag
 
 
 class File(object):

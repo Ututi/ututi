@@ -54,7 +54,7 @@ insert into emails (id, email, confirmed) values (1, 'admin@ututi.lt', true);;
 
 /* A table for universities and faculties (maybe later even tags) */
 create table locationtags (id bigserial not null,
-       parent int8 references locationtags(id) default null,
+       parent_id int8 references locationtags(id) default null,
        title varchar(250),
        title_short varchar(50),
        description text,
@@ -63,7 +63,7 @@ create table locationtags (id bigserial not null,
 
 insert into locationtags (title, title_short, description)
        values ('Vilniaus universitetas', 'vu', 'Seniausias universitetas Lietuvoje.');;
-insert into locationtags (title, title_short, description, parent)
+insert into locationtags (title, title_short, description, parent_id)
        values ('Ekonomikos fakultetas', 'ef', '', 1);;
 
 /* A table for groups */
@@ -92,7 +92,7 @@ create table group_members (
 
 insert into groups (id, title, description, year, location)
        select 'moderators', 'Moderatoriai', 'U2ti moderatoriai.', date('2009-1-1'), locationtags.id
-              from locationtags where locationtags.title_short='vu' and locationtags.parent is null;;
+              from locationtags where locationtags.title_short='vu' and locationtags.parent_id is null;;
 
 insert into group_membership_types (membership_type)
                       values ('administrator');;
@@ -106,17 +106,20 @@ insert into group_members (group_id, user_id, membership_type)
 create table subjects (id varchar(150) default null,
        title varchar(500) not null,
        lecturer varchar(500) default null,
-       location int8 references locationtags(id) default null,
-       primary key (id));;
+       location_id int8 references locationtags(id) not null,
+       primary key (id, location_id));;
 
-insert into subjects (id, title, lecturer)
-       values ('mat_analize', 'Matematinė analizė', 'prof. E. Misevičius');;
+insert into subjects (id, title, lecturer, location_id)
+       select 'mat_analize', 'Matematinė analizė', 'prof. E. Misevičius', locationtags.id
+              from locationtags where locationtags.title_short='vu' and locationtags.parent_id is null;;
 
 /* A table that tracks subject files */
 
 create table subject_files (
-       subject_id varchar(150) references subjects(id) not null,
+       subject_id varchar(150) not null,
+       subject_location_id int8 not null,
        file_id int8 references files(id) not null,
+       foreign key (subject_id, subject_location_id) references subjects,
        primary key (subject_id, file_id));;
 
 /* A table for pages */
@@ -134,9 +137,11 @@ create table page_versions(id bigserial not null,
 /* A table linking pages and subjects */
 
 create table subject_pages (
-       subject_id varchar(150) not null references subjects(id),
+       subject_id varchar(150) not null,
+       subject_location_id int8 not null,
        page_id int8 not null references pages(id),
-       primary key (subject_id, page_id));;
+       foreign key (subject_id, subject_location_id) references subjects,
+       primary key (subject_id, subject_location_id, page_id));;
 
 /* A table that tracks group files */
 

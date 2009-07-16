@@ -135,7 +135,7 @@ class GroupMailingListMessage(object):
             url = url_for(controller='files', action='get', id=attachment.id,
                           qualified=True)
             footer += '<a href="%s">%s</a>' % (url, attachment.title)
-        new_message = "%s\r\n%s\r\n%s" % (headers, body, footer)
+        new_message = "%s\r\n%s\r\n%s" % (headers, body.decode('utf-8'), footer)
         raw_send_email(self.mime_message['From'],
                        recipients,
                        new_message)

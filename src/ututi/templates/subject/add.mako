@@ -8,10 +8,19 @@ ${_('New subject')}
 
 <form method="post" action="${h.url_for(controller='subject', action='new_subject')}"
      id="subject_add_form" enctype="multipart/form-data">
+
+  <div class="form-field">
+    <label for="location">${_('Location')}</label>
+    <input type="text" id="location-1" name="location-1" class="line"/>
+    <input type="text" id="location-2" name="location-2" class="line"/>
+    <input type="text" id="location-3" name="location-3" class="line"/>
+  </div>
+
   <div class="form-field">
     <label for="id">${_('Id')}</label>
-    /subject/<input type="text" id="id" name="id" class="line"/>
+    <input type="text" id="id" name="id" class="line"/>
   </div>
+
   <div class="form-field">
     <label for="title">${_('Title')}</label>
     <input type="text" id="title" name="title" class="line"/>

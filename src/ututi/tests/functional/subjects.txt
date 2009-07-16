@@ -10,15 +10,20 @@ A list of all subjects is show at /subjects.
 
 The link of the subject leads to its home page.
 
+    >>> browser.getLink('Matematinė analizė').url
+    'http://localhost/subject/vu/mat_analize'
+
     >>> browser.getLink('Matematinė analizė').click()
     >>> browser.url
-    'http://localhost/subject/mat_analize'
+    'http://localhost/subject/vu/mat_analize'
     >>> browser.printQuery('//h1/text()')
     Matematinė analizė
 
 We can add a subject at the url /subject/add
 
     >>> browser.open('http://localhost/subjects/add')
+
+    >>> browser.getControl(name='location-1').value = 'vu'
     >>> browser.getControl('Id').value = 'test_subject'
     >>> browser.getControl('Title').value = 'Test subject'
     >>> browser.getControl('Save').click()
@@ -28,6 +33,7 @@ We can add a subject at the url /subject/add
 The id is checked for uniqueness.
 
     >>> browser.open('http://localhost/subjects/add')
+    >>> browser.getControl(name='location-1').value = 'vu'
     >>> browser.getControl('Id').value = 'test_subject'
     >>> browser.getControl('Title').value = 'Test subject2'
     >>> browser.getControl('Save').click()
@@ -52,7 +58,7 @@ You can import more subjects using the admin interface.
 
     >>> browser.open('http://localhost/admin')
     >>> form = browser.getForm(name='subjects_import')
-    >>> csv_data = 'new_subj, Imported subject, Professor'
+    >>> csv_data = 'new_subj, Imported subject, Professor,, vu'
     >>> import cStringIO
     >>> form.getControl('CSV File').add_file(cStringIO.StringIO(csv_data),
     ...                                      'text/plain',
