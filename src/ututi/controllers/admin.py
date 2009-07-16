@@ -214,8 +214,8 @@ class AdminController(BaseController):
                     continue
 
                 id, title, lecturer = row[:3]
-                location_path = reversed(filter(bool, [s.strip() for s in row[3:]]))
-                location = LocationTag.get(*location_path)
+                location_path = reversed([s.strip() for s in row[3:]])
+                location = LocationTag.get(location_path)
                 title = title.decode('utf-8')
                 lecturer = lecturer.decode('utf-8')
                 subj = Subject.get(location, id)
@@ -287,7 +287,7 @@ class AdminController(BaseController):
                 line = line.strip().split(',')
                 subject_id = line[0]
                 uni_id, fac_id = line[2], line[3]
-                location = LocationTag.get(uni_id, fac_id)
+                location = LocationTag.get([uni_id, fac_id])
                 subject = Subject.get(location, subject_id)
                 f = File(filename=line[5], title=line[6].decode('utf-8'))
                 f.mimetype = line[4]
@@ -328,7 +328,7 @@ class AdminController(BaseController):
                     continue
                 subject_id, uni_id, fac_id, page_id, page_title, page_content = row
 
-                location = LocationTag.get(uni_id, fac_id)
+                location = LocationTag.get([uni_id, fac_id])
                 subject = Subject.get(location, subject_id)
                 admin = User.get('admin@ututi.lt')
                 subject.pages.append(Page(page_title.decode('utf-8'),

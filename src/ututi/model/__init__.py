@@ -414,9 +414,9 @@ class LocationTag(object):
         self.description = description
 
     @classmethod
-    def get(cls, *args):
+    def get(cls, path):
         tag = None
-        for title_short in filter(bool, args):
+        for title_short in filter(bool, path):
             try:
                 tag = meta.Session.query(LocationTag)\
                     .filter_by(title_short=title_short, parent=tag).one()

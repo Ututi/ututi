@@ -23,12 +23,8 @@ class LocationValidator(validators.FormValidator):
         'location_tag_not_found': _(u"Location tag with such name could not be found."),
     }
 
-    def _getLocation(self, *args):
-        location = filter(bool, args)
-        return LocationTag.get(*location)
-
     def _to_python(self, form_dict, state):
-        tag = self._getLocation(*form_dict['location'])
+        tag = LocationTag.get(form_dict['location'])
         form_dict['location'] = tag
         return form_dict
 
@@ -94,7 +90,7 @@ class SubjectController(BaseController):
             if title_short is None:
                 break
             location_path.append(title_short)
-        return LocationTag.get(*location_path)
+        return LocationTag.get(location_path)
 
     def subject_home(self, **kwargs):
         location = self._getLocation(**kwargs)
@@ -135,7 +131,7 @@ class SubjectController(BaseController):
                     **subj.location_path)
 
     def page(self, id, page_id, l0='', l1='', l2='', l3='', l4=''):
-        location = LocationTag.get(l0, l1, l2, l3, l4)
+        location = LocationTag.get([l0, l1, l2, l3, l4])
         if location is None:
             abort(404)
         subject = Subject.get(location, id)

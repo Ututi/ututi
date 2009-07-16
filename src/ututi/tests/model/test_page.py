@@ -124,7 +124,7 @@ def test_subject_pages():
 
     We get our subject
 
-        >>> subject = Subject.get(LocationTag.get('vu'), 'mat_analize')
+        >>> subject = Subject.get(LocationTag.get(['vu']), 'mat_analize')
 
     But initially it has no pages:
 
@@ -140,7 +140,7 @@ def test_subject_pages():
 
     The page should appear in the pages list of this subject now:
 
-        >>> subject = Subject.get(LocationTag.get('vu'), 'mat_analize')
+        >>> subject = Subject.get(LocationTag.get(['vu']), 'mat_analize')
         >>> len(subject.pages)
         1
         >>> subject.pages[0].title
