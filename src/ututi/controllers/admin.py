@@ -116,19 +116,23 @@ class AdminController(BaseController):
                 if len(row) < 4:
                     continue
 
+                uni_id = row[5].strip()
+                fac_id = row[4].strip()
+                location = LocationTag.get([uni_id, fac_id])
+
                 id, title, desc, year = row[:4]
-                try:
-                    group = meta.Session.query(Group).filter_by(id = id).one()
-                except NoResultFound:
-                    group = Group(id = id)
+                id = id.decode('utf-8')
+                group = Group.get(id)
+                if group is None:
+                    group = Group(id=id)
                     meta.Session.add(group)
 
                 group.title = title.decode('utf-8')
                 group.description = desc.decode('utf-8')
+                group.location = LocationTag.get([uni_id, fac_id])
+
                 if year != '' and year != 'None':
                     group.year = date(int(year), 1, 1)
-                else:
-                    group.year = date.today()
                 meta.Session.commit()
         redirect_to(controller='group', action='index')
 

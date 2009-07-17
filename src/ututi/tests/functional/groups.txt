@@ -99,7 +99,7 @@ You can import more groups using the admin interface.
 
     >>> browser.open('http://localhost/admin')
     >>> form = browser.getForm(name='import_groups')
-    >>> csv_data = 'exgroup, Imported group, Group imported from the old system, 2008, gmf, vu'
+    >>> csv_data = 'exgroup, Imported group, Group imported from the old system, 2008, mf, vu'
     >>> import cStringIO
     >>> form.getControl('CSV File').add_file(cStringIO.StringIO(csv_data),
     ...                                      'text/plain',

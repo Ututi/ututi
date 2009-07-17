@@ -69,7 +69,7 @@ insert into locationtags (title, title_short, description, parent_id)
 /* A table for groups */
 create table groups (id varchar(250) not null,
        title varchar(250) not null,
-       location int8 references locationtags(id) default null,
+       location_id int8 references locationtags(id) default null,
        year date not null,
        description text,
        logo_id int8 references files(id) default null,
@@ -90,7 +90,7 @@ create table group_members (
        primary key (group_id, user_id));;
 
 
-insert into groups (id, title, description, year, location)
+insert into groups (id, title, description, year, location_id)
        select 'moderators', 'Moderatoriai', 'U2ti moderatoriai.', date('2009-1-1'), locationtags.id
               from locationtags where locationtags.title_short='vu' and locationtags.parent_id is null;;
 

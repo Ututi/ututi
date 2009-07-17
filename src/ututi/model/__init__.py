@@ -6,6 +6,7 @@ import sha, binascii
 from binascii import a2b_base64, b2a_base64
 from random import randrange
 import pkg_resources
+from datetime import date
 
 from pylons import config
 
@@ -161,7 +162,8 @@ def setup_orm(engine):
                             'files': relation(File,
                                               secondary=group_files_table),
                             'watched_subjects': relation(Subject,
-                                                         secondary=group_watched_subjects_table)
+                                                         secondary=group_watched_subjects_table),
+                            'location': relation(LocationTag)
                             })
 
     from ututi.model import mailing
@@ -295,10 +297,12 @@ class Group(object):
                 result[file.folder].append(file)
         return sorted(result.values(), key=lambda f: f.title)
 
-    def __init__(self, id, title = '', location = None, year = '', description = ''):
+    def __init__(self, id, title=u'', location=None, year=None, description=u''):
         self.id = id.strip().lower()
         self.title = title
         self.location = None #temporarily, until we get to setting locations
+        if year is None:
+            year = date.today()
         self.year = year
         self.description = description
 
@@ -420,6 +424,15 @@ class LocationTag(object):
         self.title = title
         self.title_short = title_short
         self.description = description
+
+    @property
+    def path(self):
+        location = self
+        path = []
+        while location:
+            path.append(location.title_short)
+            location = location.parent
+        return list(reversed(path))
 
     @classmethod
     def get(cls, path):
