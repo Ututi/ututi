@@ -58,9 +58,9 @@ def setup_orm(engine):
                                autoload_with=engine)
     orm.mapper(LocationTag,
                locationtags_table,
-               properties = {'children' : relation(LocationTag,
-                                                   backref=backref('parent',
-                                                                   remote_side=locationtags_table.c.id)),
+               properties = {'children': relation(LocationTag,
+                                                  backref=backref('parent',
+                                                                  remote_side=locationtags_table.c.id)),
                              'logo': relation(File)})
     global files_table
     files_table = Table("files", meta.metadata,
@@ -132,9 +132,9 @@ def setup_orm(engine):
                                 autoload_with=engine)
     orm.mapper(GroupMember,
                group_members_table,
-               properties = {'group' : relation(Group, backref='members'),
-                             'user' : relation(User, backref='memberships'),
-                             'role' : relation(GroupMembershipType)})
+               properties = {'group': relation(Group, backref='members'),
+                             'user': relation(User, backref='memberships'),
+                             'role': relation(GroupMembershipType)})
 
 
     global group_files_table

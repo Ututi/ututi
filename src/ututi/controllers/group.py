@@ -24,8 +24,8 @@ log = logging.getLogger(__name__)
 class GroupIdValidator(validators.FancyValidator):
     """A validator that makes sure the group id is unique."""
     messages = {
-        'duplicate' : _(u"Such id already exists, choose a different one."),
-        'badId' : _(u"Id cannot be used as an email address.")
+        'duplicate': _(u"Such id already exists, choose a different one."),
+        'badId': _(u"Id cannot be used as an email address.")
         }
 
     def _to_python(self, value, state):
@@ -47,7 +47,7 @@ class GroupIdValidator(validators.FancyValidator):
 class FileUploadTypeValidator(validators.FancyValidator):
     """ A validator to check uploaded file types."""
     messages = {
-        'bad_type' : _(u"Bad file type, only files of the types '%(allowed)s' are supported.")
+        'bad_type': _(u"Bad file type, only files of the types '%(allowed)s' are supported.")
         }
     __unpackargs__ = ('allowed_types')
 
@@ -105,8 +105,8 @@ class GroupController(BaseController):
 
     def __before__(self):
         c.breadcrumbs = [
-            {'title' : _('Groups'),
-             'link' : url_for(controller = 'group', action = 'index')}
+            {'title': _('Groups'),
+             'link': url_for(controller = 'group', action = 'index')}
             ]
         c.mailing_list_host = config.get('mailing_list_host', '')
 
@@ -116,18 +116,18 @@ class GroupController(BaseController):
         by its name.
         """
         return [
-        {'title' : _('Home'),
-         'link' : url_for(controller = 'group', action = 'group_home', id=c.group.id),
-         'selected' : selected == 'group_home'},
-        {'title' : _('Forum'),
-         'link' : url_for(controller = 'group', action = 'forum', id=c.group.id),
-         'selected' : selected == 'forum'},
-        {'title' : _('Members'),
-         'link' : url_for(controller = 'group', action = 'members', id=c.group.id),
-         'selected' : selected == 'members'},
-        {'title' : _('Files'),
-         'link' : url_for(controller = 'group', action = 'files', id=c.group.id),
-         'selected' : selected == 'files'},
+        {'title': _('Home'),
+         'link': url_for(controller = 'group', action = 'group_home', id=c.group.id),
+         'selected': selected == 'group_home'},
+        {'title': _('Forum'),
+         'link': url_for(controller = 'group', action = 'forum', id=c.group.id),
+         'selected': selected == 'forum'},
+        {'title': _('Members'),
+         'link': url_for(controller = 'group', action = 'members', id=c.group.id),
+         'selected': selected == 'members'},
+        {'title': _('Files'),
+         'link': url_for(controller = 'group', action = 'files', id=c.group.id),
+         'selected': selected == 'files'},
         ]
 
     def index(self):
@@ -138,8 +138,8 @@ class GroupController(BaseController):
     def group_home(self, group):
         c.group = group
         c.breadcrumbs = [
-            {'title' : c.group.title,
-             'link' : url_for(controller = 'group', action = 'group_home', id = c.group.id)}
+            {'title': c.group.title,
+             'link': url_for(controller = 'group', action = 'group_home', id = c.group.id)}
             ]
         c.breadcrumbs.append(self._actions('group_home'))
 
@@ -164,8 +164,8 @@ class GroupController(BaseController):
     def forum(self, group):
         c.group = group
         c.breadcrumbs = [
-            {'title' : c.group.title,
-             'link' : url_for(controller = 'group', action = 'group_home', id = c.group.id)}
+            {'title': c.group.title,
+             'link': url_for(controller = 'group', action = 'group_home', id = c.group.id)}
             ]
         c.breadcrumbs.append(self._actions('forum'))
 
@@ -176,8 +176,8 @@ class GroupController(BaseController):
     def forum_thread(self, group, thread):
         c.group = group
         c.breadcrumbs = [
-            {'title' : c.group.title,
-             'link' : url_for(controller = 'group', action = 'group_home', id = c.group.id)}
+            {'title': c.group.title,
+             'link': url_for(controller = 'group', action = 'group_home', id = c.group.id)}
             ]
         c.breadcrumbs.append(self._actions('forum'))
 
@@ -188,8 +188,8 @@ class GroupController(BaseController):
     def files(self, group):
         c.group = group
         c.breadcrumbs = [
-            {'title' : c.group.title,
-             'link' : url_for(controller = 'group', action = 'group_home', id = c.group.id)}
+            {'title': c.group.title,
+             'link': url_for(controller = 'group', action = 'group_home', id = c.group.id)}
             ]
         c.breadcrumbs.append(self._actions('files'))
         return render('group/files.mako')
@@ -227,10 +227,10 @@ class GroupController(BaseController):
     def members(self, group):
         c.group = group
         c.breadcrumbs = [
-            {'title' : c.group.title,
-             'link' : url_for(controller='group', action='group_home', id=c.group.id)},
-            {'title' : _('Forum'),
-             'link' : url_for(controller='group', action='members', id=c.group.id)}
+            {'title': c.group.title,
+             'link': url_for(controller='group', action='group_home', id=c.group.id)},
+            {'title': _('Forum'),
+             'link': url_for(controller='group', action='members', id=c.group.id)}
             ]
         return render('group/members.mako')
 
@@ -238,8 +238,8 @@ class GroupController(BaseController):
     def edit(self, group):
         c.group = group
         c.breadcrumbs = [
-            {'title' : c.group.title,
-             'link' : url_for(controller = 'group', action = 'group_home', id = group.id)}
+            {'title': c.group.title,
+             'link': url_for(controller = 'group', action = 'group_home', id = group.id)}
             ]
         c.breadcrumbs.append(self._actions('group_home'))
 

@@ -37,21 +37,21 @@ class RegistrationForm(Schema):
 
     allow_extra_fields = False
 
-    msg = {'empty' : _(u"Please enter your name to register.")}
+    msg = {'empty': _(u"Please enter your name to register.")}
     fullname = validators.String(not_empty=True, messages=msg)
 
-    msg = {'non_unique' : _(u"This email has already been used to register.")}
+    msg = {'non_unique': _(u"This email has already been used to register.")}
     email = All(validators.Email(not_empty=True),
                 UniqueEmail(messages=msg))
 
-    msg = {'empty' : _(u"Please enter your password to register."),
-           'tooShort' : _(u"The password must be at least 5 symbols long.")}
+    msg = {'empty': _(u"Please enter your password to register."),
+           'tooShort': _(u"The password must be at least 5 symbols long.")}
     new_password = validators.String(min=5, not_empty=True, messages=msg)
     repeat_password = validators.String(min=5, not_empty=True, messages=msg)
 
-    msg = {'invalid' : _(u"Passwords do not match."),
-           'invalidNoMatch' : _(u"Passwords do not match."),
-           'empty' : _(u"Please enter your password to register.")}
+    msg = {'invalid': _(u"Passwords do not match."),
+           'invalidNoMatch': _(u"Passwords do not match."),
+           'empty': _(u"Please enter your password to register.")}
     chained_validators = [validators.FieldsMatch('new_password',
                                                  'repeat_password',
                                                  messages=msg)]

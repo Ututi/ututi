@@ -16,7 +16,7 @@ log = logging.getLogger(__name__)
 
 class StructureIdValidator(validators.FancyValidator):
     messages = {
-        'not_exist' : _(u"The element does not exist.")
+        'not_exist': _(u"The element does not exist.")
         }
 
     def _to_python(self, value, state):

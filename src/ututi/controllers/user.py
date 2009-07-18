@@ -39,10 +39,10 @@ class UserController(BaseController):
             abort(401, 'You are not authenticated')
 
         c.breadcrumbs = [
-            {'title' : c.user.fullname,
-             'link' : url_for(controller = 'user', action = 'index', id=c.user.id)},
-            {'title' : _('Edit'),
-             'link' : url_for(controller = 'user', action = 'edit', id=c.user.id)}
+            {'title': c.user.fullname,
+             'link': url_for(controller = 'user', action = 'index', id=c.user.id)},
+            {'title': _('Edit'),
+             'link': url_for(controller = 'user', action = 'edit', id=c.user.id)}
             ]
 
         return render('user/edit.mako')

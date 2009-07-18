@@ -19,7 +19,7 @@ class FilesController(BaseController):
     def __before__(self):
         c.breadcrumbs = [
             {'link': url_for(controller='files', action='index'),
-             'title' : _('Files')}
+             'title': _('Files')}
         ]
 
     def index(self):

@@ -27,8 +27,8 @@ class ProfileController(BaseController):
     def index(self, user):
         c.user_info = user
         c.breadcrumbs = [
-            {'title' : user.fullname,
-             'link' : url_for(controller = 'profile', action = 'index', id=user.id)}
+            {'title': user.fullname,
+             'link': url_for(controller = 'profile', action = 'index', id=user.id)}
             ]
 
         return render('profile/index.mako')

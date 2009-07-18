@@ -37,7 +37,7 @@ class LocationValidator(validators.FormValidator):
 class SubjectIdValidator(validators.FormValidator):
 
     messages = {
-        'duplicate' : _(u"Such id already exists, choose a different one."),
+        'duplicate': _(u"Such id already exists, choose a different one."),
     }
 
     def validate_python(self, form_dict, state):
@@ -60,7 +60,7 @@ class NewSubjectForm(Schema):
 
     title = validators.String(not_empty=True)
 
-    msg = {'invalid' : _('The text contains invalid characters, only letters, numbers and the symbols - + _ are allowed.')}
+    msg = {'invalid': _('The text contains invalid characters, only letters, numbers and the symbols - + _ are allowed.')}
 
     id = All(validators.Regex(r'^[_\+\-a-zA-Z0-9]*$',
                               messages=msg),
@@ -75,8 +75,8 @@ class SubjectController(BaseController):
 
     def __before__(self):
         c.breadcrumbs = [
-            {'title' : _('Subjects'),
-             'link' : url_for(controller = 'subject', action = 'index')}
+            {'title': _('Subjects'),
+             'link': url_for(controller = 'subject', action = 'index')}
             ]
 
     def index(self):
@@ -103,7 +103,7 @@ class SubjectController(BaseController):
                                               action='subject_home',
                                               id=subject.id,
                                               **subject.location_path),
-                              'title' : subject.title})
+                              'title': subject.title})
         c.subject = subject
         return render('subject_home.mako')
 
