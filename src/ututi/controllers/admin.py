@@ -134,52 +134,40 @@ class AdminController(BaseController):
         redirect_to(controller='group', action='index')
 
     def import_group_logos(self):
-        file = request.POST.get('file_upload', None)
-
-        if file is not None and file != '':
-            for line in file.value.splitlines():
-                if line.strip() == '':
-                    continue
-                line = line.strip().split(',')
-                group_id = line[0].strip()
-                b64logo = line[1].strip()
-                group = Group.get(group_id)
-                if b64logo:
-                    logo_content = base64.b64decode(b64logo)
-                    mime_type = from_buffer(logo_content, mime=True)
-                    logo = File("logo", "Logo for group %s" % group.title,
-                                mimetype=mime_type)
-                    logo.store(logo_content)
-                    meta.Session.add(logo)
-                    group.logo = logo
-                else:
-                    group.logo = None
-            meta.Session.commit()
+        for line in self._getLines():
+            group_id = line[0]
+            b64logo = line[1]
+            group = Group.get(group_id)
+            if b64logo:
+                logo_content = base64.b64decode(b64logo)
+                mime_type = from_buffer(logo_content, mime=True)
+                logo = File("logo", "Logo for group %s" % group.title,
+                            mimetype=mime_type)
+                logo.store(logo_content)
+                meta.Session.add(logo)
+                group.logo = logo
+            else:
+                group.logo = None
+        meta.Session.commit()
         redirect_to(controller='admin', action='users')
 
     def import_structure_logos(self):
-        file = request.POST.get('file_upload', None)
-
-        if file is not None and file != '':
-            for line in file.value.splitlines():
-                if line.strip() == '':
-                    continue
-                line = line.strip().split(',')
-                tag_title = line[0].decode('utf-8').strip().lower()
-                parent_title = line[1].decode('utf-8').strip().lower()
-                b64logo = line[2].strip()
-                location_tag = LocationTag.get([parent_title, tag_title])
-                if b64logo:
-                    logo_content = base64.b64decode(b64logo)
-                    mime_type = from_buffer(logo_content, mime=True)
-                    logo = File("logo", "Logo for location tag %s" % location_tag.title,
-                                mimetype=mime_type)
-                    logo.store(logo_content)
-                    meta.Session.add(logo)
-                    location_tag.logo = logo
-                else:
-                    location_tag.logo = None
-            meta.Session.commit()
+        for line in self._getLines():
+            tag_title = line[0].lower()
+            parent_title = line[1].lower()
+            b64logo = line[2]
+            location_tag = LocationTag.get([parent_title, tag_title])
+            if b64logo:
+                logo_content = base64.b64decode(b64logo)
+                mime_type = from_buffer(logo_content, mime=True)
+                logo = File("logo", "Logo for location tag %s" % location_tag.title,
+                            mimetype=mime_type)
+                logo.store(logo_content)
+                meta.Session.add(logo)
+                location_tag.logo = logo
+            else:
+                location_tag.logo = None
+        meta.Session.commit()
         redirect_to(controller='admin', action='users')
 
     def import_subjects(self):
