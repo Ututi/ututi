@@ -204,23 +204,19 @@ class AdminController(BaseController):
         moderator = GroupMembershipType.get('administrator')
         member = GroupMembershipType.get('member')
         for row in self._getReader():
-            if len(row) < 3:
-                continue
-
             group_id, email, is_moderator = row[:3]
             is_moderator = is_moderator == 'True'
 
             group = Group.get(group_id)
             user = User.get(email)
 
-            if group is not None and user is not None:
-                membership = GroupMember()
-                membership.role = is_moderator and moderator or member
-                membership.user = user
-                membership.group = group
+            membership = GroupMember()
+            membership.role = is_moderator and moderator or member
+            membership.user = user
+            membership.group = group
 
-                meta.Session.add(membership)
-                meta.Session.commit()
+            meta.Session.add(membership)
+            meta.Session.commit()
 
         redirect_to(controller='group', action='index')
 

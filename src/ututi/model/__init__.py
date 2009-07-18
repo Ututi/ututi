@@ -244,7 +244,7 @@ class User(object):
     @classmethod
     def get(cls, username):
         try:
-            return meta.Session.query(Email).filter_by(email=username).one().user
+            return meta.Session.query(Email).filter_by(email=username.lower()).one().user
         except NoResultFound:
             return None
 
