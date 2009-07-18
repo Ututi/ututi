@@ -16,7 +16,7 @@ def get_urls(text):
 
 
 def ellipsis(text, max = 20):
-    if (len(text) > max):
+    if len(text) > max:
         return text[0:max-3] + '...'
     else:
         return text
