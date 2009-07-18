@@ -15,7 +15,7 @@ ${_('student information online')}
     % endif
   </div>
   <div class="personal-info">
-    <a class="logout" href="/logout" title="Logout">
+    <a class="logout" href="${url('/logout')}" title="Logout">
       ${h.image('/images/icon_logout.png', alt='logout')|n}
     </a>
     <div>
@@ -39,7 +39,7 @@ ${_('student information online')}
     </span>
   </div>
 %else:
-<form method="post" id="login_form" action="/dologin">
+<form method="post" id="login_form" action="${url('/dologin')}">
   %if request.GET.get('came_from'):
   <input type="hidden" name="came_from" value="${request.GET.get('came_from')}" />
   %endif
@@ -148,12 +148,12 @@ ${_('student information online')}
         </div>
 
         %if c.breadcrumbs:
-        <a href="/" title="home" id="ulogo">
+        <a href="${url('/')}" title="home" id="ulogo">
           ${h.image('/images/logo_small.png', alt='logo')|n}
         </a>
         ${breadcrumbs(c.breadcrumbs)}
         %else:
-        <a href="/" title="home" id="ulogo">
+        <a href="${url('/')}" title="home" id="ulogo">
           ${h.image('/images/logo.png', alt='logo')|n}
         </a>
         %endif

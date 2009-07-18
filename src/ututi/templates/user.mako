@@ -15,7 +15,7 @@
 %endif
 
 %if c.emails:
-  <form method="post" id="email_confirm_form" action="/confirm_emails">
+  <form method="post" id="email_confirm_form" action="${url('/confirm_emails')}">
   %for email in c.emails:
      <div class="form-field">
           <input type="checkbox" name="email" value="${email}" id="email_${email}"/>
@@ -27,4 +27,4 @@
 </form>
 %endif
 
-<a href="/logout">Log out</a>
+<a href="${url('/logout')}">Log out</a>

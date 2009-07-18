@@ -26,4 +26,4 @@
 
 <h1>Welcome ${c.user.fullname}!</h1>
 
-<a href="/logout">Log out</a>
+<a href="${url('/logout')}">Log out</a>
