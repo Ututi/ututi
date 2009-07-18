@@ -75,7 +75,7 @@ def make_map():
 
     #user's information
     map.connect('/profile', controller='user', action='index')
-    map.connect('/profile/{action}', controller='user', action='index')
+    map.connect('/profile/{action}', controller='user')
     map.connect('/confirm_emails', controller='user', action='confirm_emails')
     map.connect('/confirm_user_email/{key}', controller='user', action='confirm_user_email')
 
