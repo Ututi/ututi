@@ -33,10 +33,14 @@ ${c.subject.lecturer}
 
 <h2>${_('Pages')}</h2>
 
-<ul>
-% for page in c.subject.pages:
-  <li>
-    ${h.link_to(page.title, h.url_for(controller='subject', action='page', page_id=page.id))}
-  </li>
-% endfor
-</ul>
+% if c.subject.pages:
+  <ul>
+  % for page in c.subject.pages:
+    <li>
+      ${h.link_to(page.title, h.url_for(controller='subject', action='page', page_id=page.id))}
+    </li>
+  % endfor
+  </ul>
+% else:
+  <a class="XXX" href="#">Add a page</a>
+% endif
