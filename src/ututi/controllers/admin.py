@@ -18,6 +18,12 @@ log = logging.getLogger(__name__)
 class AdminController(BaseController):
     """Controler for system administration."""
 
+    def _getReader(self):
+        file = request.POST.get('file_upload', None)
+        if file is not None and file != '':
+            return csv.reader(file.value.splitlines())
+        return []
+
     def index(self):
         if c.user is None:
             abort(401, 'You are not authenticated')
@@ -278,12 +284,6 @@ class AdminController(BaseController):
             meta.Session.commit()
 
         redirect_to(controller='admin', action='index')
-
-    def _getReader(self):
-        file = request.POST.get('file_upload', None)
-        if file is not None and file != '':
-            return csv.reader(file.value.splitlines())
-        return []
 
     def import_group_watched_subjects(self):
         for row in self._getReader():
