@@ -256,7 +256,7 @@ class User(object):
         except NoResultFound:
             return None
 
-    def __init__(self, fullname, password, gen_password = True):
+    def __init__(self, fullname, password, gen_password=True):
         self.fullname = fullname
         self.password = password
         if gen_password:
@@ -353,7 +353,7 @@ class Subject(object):
         return dict([('l%s' % n, name)
                      for n, name in enumerate(reversed(path))])
 
-    def __init__(self, subject_id, title, location, lecturer = None):
+    def __init__(self, subject_id, title, location, lecturer=None):
         self.location = location
         self.title = title
         self.id = subject_id
@@ -409,7 +409,7 @@ page_versions_table = None
 class PageVersion(object):
     """Class representing one version of a page."""
 
-    def __init__(self, title, content, author, created = None):
+    def __init__(self, title, content, author, created=None):
         self.title = title
         self.content = content
         self.author = author

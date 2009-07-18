@@ -76,7 +76,7 @@ class SubjectController(BaseController):
     def __before__(self):
         c.breadcrumbs = [
             {'title': _('Subjects'),
-             'link': url_for(controller = 'subject', action = 'index')}
+             'link': url_for(controller='subject', action='index')}
             ]
 
     def index(self):

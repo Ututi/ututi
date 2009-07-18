@@ -43,7 +43,7 @@ class FilesController(BaseController):
 
     def get(self, id):
         try:
-            file = meta.Session.query(File).filter_by(id = id).one()
+            file = meta.Session.query(File).filter_by(id=id).one()
         except NoResultFound:
             abort(404)
 

@@ -34,7 +34,7 @@ class GroupIdValidator(validators.FancyValidator):
     def validate_python(self, value, state):
         if value != 0:
             try:
-                meta.Session.query(Group).filter_by(id = value).one()
+                meta.Session.query(Group).filter_by(id=value).one()
                 raise Invalid(self.message('duplicate', state), value, state)
             except NoResultFound:
                 pass
@@ -67,14 +67,14 @@ class NewGroupForm(Schema):
     allow_extra_fields = True
 
     id = GroupIdValidator()
-    logo_upload = validators.FieldStorageUploadConverter(not_empty = False)
-    title = validators.String(not_empty = True)
+    logo_upload = validators.FieldStorageUploadConverter(not_empty=False)
+    title = validators.String(not_empty=True)
 
 class EditGroupForm(Schema):
     """A schema for validating group edits."""
     allow_extra_fields = True
-    title = validators.String(not_empty = True)
-    logo_upload = FileUploadTypeValidator(allowed_types = ('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
+    title = validators.String(not_empty=True)
+    logo_upload = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
 
 
 def group_action(method):
@@ -106,7 +106,7 @@ class GroupController(BaseController):
     def __before__(self):
         c.breadcrumbs = [
             {'title': _('Groups'),
-             'link': url_for(controller = 'group', action = 'index')}
+             'link': url_for(controller='group', action='index')}
             ]
         c.mailing_list_host = config.get('mailing_list_host', '')
 
@@ -117,16 +117,16 @@ class GroupController(BaseController):
         """
         return [
         {'title': _('Home'),
-         'link': url_for(controller = 'group', action = 'group_home', id=c.group.id),
+         'link': url_for(controller='group', action='group_home', id=c.group.id),
          'selected': selected == 'group_home'},
         {'title': _('Forum'),
-         'link': url_for(controller = 'group', action = 'forum', id=c.group.id),
+         'link': url_for(controller='group', action='forum', id=c.group.id),
          'selected': selected == 'forum'},
         {'title': _('Members'),
-         'link': url_for(controller = 'group', action = 'members', id=c.group.id),
+         'link': url_for(controller='group', action='members', id=c.group.id),
          'selected': selected == 'members'},
         {'title': _('Files'),
-         'link': url_for(controller = 'group', action = 'files', id=c.group.id),
+         'link': url_for(controller='group', action='files', id=c.group.id),
          'selected': selected == 'files'},
         ]
 
@@ -139,7 +139,7 @@ class GroupController(BaseController):
         c.group = group
         c.breadcrumbs = [
             {'title': c.group.title,
-             'link': url_for(controller = 'group', action = 'group_home', id = c.group.id)}
+             'link': url_for(controller='group', action='group_home', id=c.group.id)}
             ]
         c.breadcrumbs.append(self._actions('group_home'))
 
@@ -165,7 +165,7 @@ class GroupController(BaseController):
         c.group = group
         c.breadcrumbs = [
             {'title': c.group.title,
-             'link': url_for(controller = 'group', action = 'group_home', id = c.group.id)}
+             'link': url_for(controller='group', action='group_home', id=c.group.id)}
             ]
         c.breadcrumbs.append(self._actions('forum'))
 
@@ -177,7 +177,7 @@ class GroupController(BaseController):
         c.group = group
         c.breadcrumbs = [
             {'title': c.group.title,
-             'link': url_for(controller = 'group', action = 'group_home', id = c.group.id)}
+             'link': url_for(controller='group', action='group_home', id=c.group.id)}
             ]
         c.breadcrumbs.append(self._actions('forum'))
 
@@ -189,7 +189,7 @@ class GroupController(BaseController):
         c.group = group
         c.breadcrumbs = [
             {'title': c.group.title,
-             'link': url_for(controller = 'group', action = 'group_home', id = c.group.id)}
+             'link': url_for(controller='group', action='group_home', id=c.group.id)}
             ]
         c.breadcrumbs.append(self._actions('files'))
         return render('group/files.mako')
@@ -206,10 +206,10 @@ class GroupController(BaseController):
         for field in fields:
              values[field] = request.POST.get(field, None)
 
-        group = Group(id = values['id'],
-                      title = values['title'],
-                      description = values['description'],
-                      year = date(int(values['year']), 1, 1))
+        group = Group(id=values['id'],
+                      title=values['title'],
+                      description=values['description'],
+                      year=date(int(values['year']), 1, 1))
         meta.Session.add(group)
 
         if values['logo_upload'] is not None and values['logo_upload'] != '':
@@ -239,7 +239,7 @@ class GroupController(BaseController):
         c.group = group
         c.breadcrumbs = [
             {'title': c.group.title,
-             'link': url_for(controller = 'group', action = 'group_home', id = group.id)}
+             'link': url_for(controller='group', action='group_home', id=group.id)}
             ]
         c.breadcrumbs.append(self._actions('group_home'))
 

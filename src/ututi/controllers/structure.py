@@ -25,7 +25,7 @@ class StructureIdValidator(validators.FancyValidator):
     def validate_python(self, value, state):
         if value != 0:
             try:
-                meta.Session.query(LocationTag).filter_by(id = value).one()
+                meta.Session.query(LocationTag).filter_by(id=value).one()
             except:
                 raise Invalid(self.message('not_exist', state), value, state)
 
@@ -33,8 +33,8 @@ class StructureIdValidator(validators.FancyValidator):
 class NewStructureForm(Schema):
     allow_extra_fields = False
 
-    title = validators.String(not_empty = True)
-    title_short = validators.String(not_empty = True, max = 50)
+    title = validators.String(not_empty=True)
+    title_short = validators.String(not_empty=True, max=50)
 
     description = validators.String()
     parent = StructureIdValidator()
@@ -42,7 +42,7 @@ class NewStructureForm(Schema):
 class StructureController(BaseController):
 
     def index(self):
-        c.structure = meta.Session.query(LocationTag).filter_by(parent = None).all()
+        c.structure = meta.Session.query(LocationTag).filter_by(parent=None).all()
         return render('structure.mako')
 
     @validate(schema=NewStructureForm, form='index')
@@ -52,9 +52,9 @@ class StructureController(BaseController):
         for field in fields:
              values[field] = request.POST.get(field, None)
 
-        structure = LocationTag(title = values['title'],
-                                title_short = values['title_short'],
-                                description = values['description'])
+        structure = LocationTag(title=values['title'],
+                                title_short=values['title_short'],
+                                description=values['description'])
         meta.Session.add(structure)
         # XXX why zero?
         if int(values['parent']) != 0:
@@ -65,7 +65,7 @@ class StructureController(BaseController):
 
     def edit(self, id):
         try:
-            c.item = meta.Session.query(LocationTag).filter_by(id = id).one()
+            c.item = meta.Session.query(LocationTag).filter_by(id=id).one()
         except NoResultFound:
             abort(404)
 
@@ -87,9 +87,9 @@ class StructureController(BaseController):
 
             meta.Session.commit()
             redirect_to(controller='structure', action='index')
-        c.structure = meta.Session.query(LocationTag).filter_by(parent = None).filter(LocationTag.id != id).all()
+        c.structure = meta.Session.query(LocationTag).filter_by(parent=None).filter(LocationTag.id != id).all()
         return render('structure/edit.mako')
 
     def logo(self, id, width=None, height=None):
-        tag = meta.Session.query(LocationTag).filter_by(id = id).one()
+        tag = meta.Session.query(LocationTag).filter_by(id=id).one()
         return serve_image(tag.logo, width, height)

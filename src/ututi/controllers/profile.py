@@ -28,14 +28,14 @@ class ProfileController(BaseController):
         c.user_info = user
         c.breadcrumbs = [
             {'title': user.fullname,
-             'link': url_for(controller = 'profile', action = 'index', id=user.id)}
+             'link': url_for(controller='profile', action='index', id=user.id)}
             ]
 
         return render('profile/index.mako')
 
     def logo(self, id, width=None, height=None):
         try:
-            user = meta.Session.query(User).filter_by(id = id).one()
+            user = meta.Session.query(User).filter_by(id=id).one()
         except NoResultFound:
             abort(404)
 

@@ -18,7 +18,7 @@ log = logging.getLogger(__name__)
 class ProfileForm(Schema):
     """A schema for validating user profile forms."""
     allow_extra_fields = True
-    fullname = validators.String(not_empty = True)
+    fullname = validators.String(not_empty=True)
 
 class UserController(BaseController):
     """A controller for the user's information and actions."""
@@ -40,9 +40,9 @@ class UserController(BaseController):
 
         c.breadcrumbs = [
             {'title': c.user.fullname,
-             'link': url_for(controller = 'user', action = 'index', id=c.user.id)},
+             'link': url_for(controller='user', action='index', id=c.user.id)},
             {'title': _('Edit'),
-             'link': url_for(controller = 'user', action = 'edit', id=c.user.id)}
+             'link': url_for(controller='user', action='edit', id=c.user.id)}
             ]
 
         return render('user/edit.mako')
