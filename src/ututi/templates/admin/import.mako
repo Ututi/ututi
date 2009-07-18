@@ -1,9 +1,5 @@
 <%inherit file="/base.mako" />
 
-<%def name="head_tags()">
-  <title>UTUTI – student information online</title>
-</%def>
-
 <%def name="import_form(title, action)">
 <h1>${title}</h1>
 <form name="${action}" method="post" action="${url(controller='admin', action=action)}" enctype="multipart/form-data">

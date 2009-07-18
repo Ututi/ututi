@@ -3,6 +3,7 @@ ${_('student information online')}
 </%def>
 
 <%def name="head_tags()">
+  <title>${_('UTUTI – student information online')}</title>
 </%def>
 
 <%def name="personal_block()">
