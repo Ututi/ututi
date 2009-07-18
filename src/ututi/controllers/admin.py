@@ -1,5 +1,4 @@
 import csv
-import os
 import logging
 import base64
 
@@ -8,7 +7,6 @@ from datetime import date
 
 from pylons import request, c
 from pylons.controllers.util import redirect_to, abort
-from sqlalchemy.orm.exc import NoResultFound
 
 from ututi.lib.base import BaseController, render
 from ututi.model import Page
@@ -33,25 +31,19 @@ class AdminController(BaseController):
         return render('/admin/users.mako')
 
     def import_users(self):
-        file = request.POST.get('file_upload', None)
+        for line in self._getReader():
+            fullname = unicode(line[2].strip(), 'utf-8')
+            password = line[1].strip()[6:]
+            email = line[3].strip().lower()
+            user = User.get(email)
+            if user is None:
+                user = User(fullname, password, False)
+                email = Email(email)
+                user.emails = [email]
+                email.confirmed = True
+                meta.Session.add(user)
 
-        if file is not None and file != '':
-            for line in file.value.split('\n'):
-                if line.strip() == '':
-                    continue
-                line = line.strip().split(',')
-                fullname = unicode(line[2].strip(), 'utf-8')
-                password = line[1].strip()[6:]
-                email = line[3].strip().lower()
-                user = User.get(email)
-                if user is None:
-                    user = User(fullname, password, False)
-                    email = Email(email)
-                    user.emails = [email]
-                    email.confirmed = True
-                    meta.Session.add(user)
-
-                meta.Session.commit()
+            meta.Session.commit()
         redirect_to(controller='admin', action='users')
 
     def import_user_logos(self):
@@ -80,60 +72,50 @@ class AdminController(BaseController):
         redirect_to(controller='admin', action='users')
 
     def import_structure(self):
-        file = request.POST.get('file_upload', None)
+        for line in self._getReader():
+            title = line[1].strip().decode('utf-8')
+            title_short = line[0].strip().lower()
+            description = line[2].strip().decode('utf-8')
+            parent = line[3].strip().lower()
+            tag = LocationTag.get([parent, title_short])
+            if tag is None:
+                tag = LocationTag(title = title,
+                                  title_short = title_short,
+                                  description = description)
+            tag.title = title
+            tag.title_short = title_short
+            tag.description = description
 
-        if file is not None and file != '':
-            for line in file.value.split('\n'):
-                if line.strip() == '':
-                    continue
-                line = line.strip().split(',')
-                title = line[1].strip().decode('utf-8')
-                title_short = line[0].strip().lower()
-                description = line[2].strip().decode('utf-8')
-                parent = line[3].strip().lower()
-                tag = LocationTag.get([parent, title_short])
-                if tag is None:
-                    tag = LocationTag(title = title,
-                                      title_short = title_short,
-                                      description = description)
-                tag.title = title
-                tag.title_short = title_short
-                tag.description = description
-
-                meta.Session.add(tag)
-                if parent:
-                    parent = LocationTag.get([parent])
-                    parent.children.append(tag)
-                meta.Session.commit()
+            meta.Session.add(tag)
+            if parent:
+                parent = LocationTag.get([parent])
+                parent.children.append(tag)
+            meta.Session.commit()
         redirect_to(controller='structure', action='index')
 
     def import_groups(self):
-        file = request.POST.get('file_upload', None)
+        for row in self._getReader():
+            if len(row) < 4:
+                continue
 
-        if file is not None and file != '':
-            csv_reader = csv.reader(file.value.split(os.linesep))
-            for row in csv_reader:
-                if len(row) < 4:
-                    continue
+            uni_id = row[5].strip()
+            fac_id = row[4].strip()
+            location = LocationTag.get([uni_id, fac_id])
 
-                uni_id = row[5].strip()
-                fac_id = row[4].strip()
-                location = LocationTag.get([uni_id, fac_id])
+            id, title, desc, year = row[:4]
+            id = id.decode('utf-8')
+            group = Group.get(id)
+            if group is None:
+                group = Group(id=id)
+                meta.Session.add(group)
 
-                id, title, desc, year = row[:4]
-                id = id.decode('utf-8')
-                group = Group.get(id)
-                if group is None:
-                    group = Group(id=id)
-                    meta.Session.add(group)
+            group.title = title.decode('utf-8')
+            group.description = desc.decode('utf-8')
+            group.location = LocationTag.get([uni_id, fac_id])
 
-                group.title = title.decode('utf-8')
-                group.description = desc.decode('utf-8')
-                group.location = LocationTag.get([uni_id, fac_id])
-
-                if year != '' and year != 'None':
-                    group.year = date(int(year), 1, 1)
-                meta.Session.commit()
+            if year != '' and year != 'None':
+                group.year = date(int(year), 1, 1)
+            meta.Session.commit()
         redirect_to(controller='group', action='index')
 
     def import_group_logos(self):
@@ -193,136 +175,107 @@ class AdminController(BaseController):
         redirect_to(controller='admin', action='users')
 
     def import_subjects(self):
-        file = request.POST.get('file_upload', None)
+        for row in self._getReader():
+            if len(row) < 5:
+                continue
+            id, title, lecturer = row[:3]
+            location_path = reversed([s.strip() for s in row[3:]])
+            location = LocationTag.get(location_path)
+            title = title.decode('utf-8')
+            lecturer = lecturer.decode('utf-8')
+            subj = Subject.get(location, id)
+            if subj is None:
+                subj = Subject(id, title, location)
+                meta.Session.add(subj)
 
-        if file is not None and file != '':
-            csv_reader = csv.reader(file.value.split(os.linesep))
-            for row in csv_reader:
-                if len(row) < 5:
-                    continue
-
-                id, title, lecturer = row[:3]
-                location_path = reversed([s.strip() for s in row[3:]])
-                location = LocationTag.get(location_path)
-                title = title.decode('utf-8')
-                lecturer = lecturer.decode('utf-8')
-                subj = Subject.get(location, id)
-                if subj is None:
-                    subj = Subject(id, title, location)
-                    meta.Session.add(subj)
-
-                subj.title = title
-                subj.lecturer = lecturer
-                meta.Session.commit()
+            subj.title = title
+            subj.lecturer = lecturer
+            meta.Session.commit()
         redirect_to(controller='subject', action='index')
 
     def import_group_members(self):
-        file = request.POST.get('file_upload', None)
-        if file is not None and file != '':
-            csv_reader = csv.reader(file.value.split(os.linesep))
+        #group membership types
+        moderator = GroupMembershipType.get('administrator')
+        member = GroupMembershipType.get('member')
+        for row in self._getReader():
+            if len(row) < 3:
+                continue
 
-            #group membership types
-            moderator = GroupMembershipType.get('administrator')
-            member = GroupMembershipType.get('member')
-            for row in csv_reader:
-                if len(row) < 3:
-                    continue
+            group_id, email, is_moderator = row[:3]
+            is_moderator = is_moderator == 'True'
 
-                group_id, email, is_moderator = row[:3]
-                is_moderator = is_moderator == 'True'
+            group = Group.get(group_id.strip())
+            user = User.get(email.strip())
 
-                group = Group.get(group_id.strip())
-                user = User.get(email.strip())
+            if group is not None and user is not None:
+                membership = GroupMember()
+                membership.role = is_moderator and moderator or member
+                membership.user = user
+                membership.group = group
 
-                if group is not None and user is not None:
-                    membership = GroupMember()
-                    membership.role = is_moderator and moderator or member
-                    membership.user = user
-                    membership.group = group
-
-                    meta.Session.add(membership)
-                    meta.Session.commit()
+                meta.Session.add(membership)
+                meta.Session.commit()
 
         redirect_to(controller='group', action='index')
 
     def import_group_files(self):
-        file = request.POST.get('file_upload', None)
-
-        if file is not None and file != '':
-            for line in file.value.splitlines():
-                if line.strip() == '':
-                    continue
-                line = line.strip().split(',')
-                group_id = line[0]
-                group = Group.get(group_id)
-                f = File(filename=line[3], title=line[4].decode('utf-8'))
-                f.mimetype = line[2]
-                f.folder = line[1].decode('utf-8')
-                # XXX dummy content at the moment
-                f.store('Whatever!')
-                group.files.append(f)
+        for line in self._getReader():
+            group_id = line[0]
+            group = Group.get(group_id)
+            f = File(filename=line[3], title=line[4].decode('utf-8'))
+            f.mimetype = line[2]
+            f.folder = line[1].decode('utf-8')
+            # XXX dummy content at the moment
+            f.store('Whatever!')
+            group.files.append(f)
 
             meta.Session.commit()
         redirect_to(controller='admin', action='users')
 
     def import_subject_files(self):
-        file = request.POST.get('file_upload', None)
-
-        if file is not None and file != '':
-            for line in file.value.splitlines():
-                if line.strip() == '':
-                    continue
-                line = line.strip().split(',')
-                subject_id = line[0]
-                uni_id, fac_id = line[2], line[3]
-                location = LocationTag.get([uni_id, fac_id])
-                subject = Subject.get(location, subject_id)
-                f = File(filename=line[5], title=line[6].decode('utf-8'))
-                f.mimetype = line[4]
-                f.folder = line[1].decode('utf-8')
-                # XXX dummy content at the moment
-                f.store('Whatever!')
-                subject.files.append(f)
+        for line in self._getReader():
+            subject_id = line[0]
+            uni_id, fac_id = line[2], line[3]
+            location = LocationTag.get([uni_id, fac_id])
+            subject = Subject.get(location, subject_id)
+            f = File(filename=line[5], title=line[6].decode('utf-8'))
+            f.mimetype = line[4]
+            f.folder = line[1].decode('utf-8')
+            # XXX dummy content at the moment
+            f.store('Whatever!')
+            subject.files.append(f)
 
             meta.Session.commit()
         redirect_to(controller='admin', action='index')
 
     def import_group_pages(self):
-        file = request.POST.get('file_upload', None)
-        if file is not None and file != '':
-            csv_reader = csv.reader(file.value.split(os.linesep))
+        for row in self._getReader():
+            if len(row) < 4:
+                continue
+            group_id, page_id, page_title, page_content, author_email = row
 
-            for row in csv_reader:
-                if len(row) < 4:
-                    continue
-                group_id, page_id, page_title, page_content, author_email = row
-
-                group = Group.get(group_id)
-                author = User.get(author_email)
-                group.pages.append(Page(page_title.decode('utf-8'),
-                                        page_content.decode('utf-8'),
-                                        author))
-                meta.Session.commit()
+            group = Group.get(group_id)
+            author = User.get(author_email)
+            group.pages.append(Page(page_title.decode('utf-8'),
+                                    page_content.decode('utf-8'),
+                                    author))
+            meta.Session.commit()
 
         redirect_to(controller='admin', action='index')
 
     def import_subject_pages(self):
-        file = request.POST.get('file_upload', None)
-        if file is not None and file != '':
-            csv_reader = csv.reader(file.value.split(os.linesep))
+        for row in self._getReader():
+            if len(row) < 4:
+                continue
+            subject_id, uni_id, fac_id, page_id, page_title, page_content, author_email = row
 
-            for row in csv_reader:
-                if len(row) < 4:
-                    continue
-                subject_id, uni_id, fac_id, page_id, page_title, page_content, author_email = row
-
-                location = LocationTag.get([uni_id, fac_id])
-                subject = Subject.get(location, subject_id)
-                author = User.get(author_email)
-                subject.pages.append(Page(page_title.decode('utf-8'),
-                                          page_content.decode('utf-8'),
-                                          author))
-                meta.Session.commit()
+            location = LocationTag.get([uni_id, fac_id])
+            subject = Subject.get(location, subject_id)
+            author = User.get(author_email)
+            subject.pages.append(Page(page_title.decode('utf-8'),
+                                      page_content.decode('utf-8'),
+                                      author))
+            meta.Session.commit()
 
         redirect_to(controller='admin', action='index')
 
