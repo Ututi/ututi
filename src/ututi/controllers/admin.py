@@ -21,7 +21,8 @@ class AdminController(BaseController):
     def _getReader(self):
         file = request.POST.get('file_upload', None)
         if file is not None and file != '':
-            return csv.reader(file.value.splitlines())
+            return [[column.strip().decode('utf-8') for column in row]
+                    for row in csv.reader(file.value.splitlines())]
         return []
 
     def index(self):
@@ -38,9 +39,9 @@ class AdminController(BaseController):
 
     def import_users(self):
         for line in self._getReader():
-            fullname = unicode(line[2].strip(), 'utf-8')
-            password = line[1].strip()[6:]
-            email = line[3].strip().lower()
+            fullname = line[2]
+            password = line[1][6:]
+            email = line[3].lower()
             user = User.get(email)
             if user is None:
                 user = User(fullname, password, False)
@@ -79,10 +80,10 @@ class AdminController(BaseController):
 
     def import_structure(self):
         for line in self._getReader():
-            title = line[1].strip().decode('utf-8')
-            title_short = line[0].strip().lower()
-            description = line[2].strip().decode('utf-8')
-            parent = line[3].strip().lower()
+            title = line[1]
+            title_short = line[0].lower()
+            description = line[2]
+            parent = line[3].lower()
             tag = LocationTag.get([parent, title_short])
             if tag is None:
                 tag = LocationTag(title = title,
@@ -104,19 +105,18 @@ class AdminController(BaseController):
             if len(row) < 4:
                 continue
 
-            uni_id = row[5].strip()
-            fac_id = row[4].strip()
+            uni_id = row[5]
+            fac_id = row[4]
             location = LocationTag.get([uni_id, fac_id])
 
             id, title, desc, year = row[:4]
-            id = id.decode('utf-8')
             group = Group.get(id)
             if group is None:
                 group = Group(id=id)
                 meta.Session.add(group)
 
-            group.title = title.decode('utf-8')
-            group.description = desc.decode('utf-8')
+            group.title = title
+            group.description = desc
             group.location = LocationTag.get([uni_id, fac_id])
 
             if year != '' and year != 'None':
@@ -185,10 +185,10 @@ class AdminController(BaseController):
             if len(row) < 5:
                 continue
             id, title, lecturer = row[:3]
-            location_path = reversed([s.strip() for s in row[3:]])
+            location_path = reversed(row[3:])
             location = LocationTag.get(location_path)
-            title = title.decode('utf-8')
-            lecturer = lecturer.decode('utf-8')
+            title = title
+            lecturer = lecturer
             subj = Subject.get(location, id)
             if subj is None:
                 subj = Subject(id, title, location)
@@ -210,8 +210,8 @@ class AdminController(BaseController):
             group_id, email, is_moderator = row[:3]
             is_moderator = is_moderator == 'True'
 
-            group = Group.get(group_id.strip())
-            user = User.get(email.strip())
+            group = Group.get(group_id)
+            user = User.get(email)
 
             if group is not None and user is not None:
                 membership = GroupMember()
@@ -228,9 +228,9 @@ class AdminController(BaseController):
         for line in self._getReader():
             group_id = line[0]
             group = Group.get(group_id)
-            f = File(filename=line[3], title=line[4].decode('utf-8'))
+            f = File(filename=line[3], title=line[4])
             f.mimetype = line[2]
-            f.folder = line[1].decode('utf-8')
+            f.folder = line[1]
             # XXX dummy content at the moment
             f.store('Whatever!')
             group.files.append(f)
@@ -244,9 +244,9 @@ class AdminController(BaseController):
             uni_id, fac_id = line[2], line[3]
             location = LocationTag.get([uni_id, fac_id])
             subject = Subject.get(location, subject_id)
-            f = File(filename=line[5], title=line[6].decode('utf-8'))
+            f = File(filename=line[5], title=line[6])
             f.mimetype = line[4]
-            f.folder = line[1].decode('utf-8')
+            f.folder = line[1]
             # XXX dummy content at the moment
             f.store('Whatever!')
             subject.files.append(f)
@@ -262,8 +262,8 @@ class AdminController(BaseController):
 
             group = Group.get(group_id)
             author = User.get(author_email)
-            group.pages.append(Page(page_title.decode('utf-8'),
-                                    page_content.decode('utf-8'),
+            group.pages.append(Page(page_title,
+                                    page_content,
                                     author))
             meta.Session.commit()
 
@@ -278,8 +278,8 @@ class AdminController(BaseController):
             location = LocationTag.get([uni_id, fac_id])
             subject = Subject.get(location, subject_id)
             author = User.get(author_email)
-            subject.pages.append(Page(page_title.decode('utf-8'),
-                                      page_content.decode('utf-8'),
+            subject.pages.append(Page(page_title,
+                                      page_content,
                                       author))
             meta.Session.commit()
 
