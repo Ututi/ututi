@@ -64,9 +64,7 @@ class AdminController(BaseController):
                 email = line[0].strip()
                 b64logo = line[1].strip()
                 user = User.get(email)
-                if user is None:
-                    log.error("Failed to import a logo, email %s does not exist!")
-                elif b64logo:
+                if b64logo:
                     logo_content = base64.b64decode(b64logo)
                     mime_type = from_buffer(logo_content, mime=True)
                     logo = File("logo", "Avatar for %s" % user.fullname, mimetype=mime_type)
@@ -132,10 +130,7 @@ class AdminController(BaseController):
                 group_id = line[0].strip()
                 b64logo = line[1].strip()
                 group = Group.get(group_id)
-                if group is None:
-                    log.error("Failed to import a logo,"
-                              " group with id %s does not exist!" % group_id)
-                elif b64logo:
+                if b64logo:
                     logo_content = base64.b64decode(b64logo)
                     mime_type = from_buffer(logo_content, mime=True)
                     logo = File("logo", "Logo for group %s" % group.title,
@@ -156,15 +151,11 @@ class AdminController(BaseController):
                 if line.strip() == '':
                     continue
                 line = line.strip().split(',')
-                tag_title = line[0].strip().lower()
-                parent_title = line[1].strip().lower()
+                tag_title = line[0].decode('utf-8').strip().lower()
+                parent_title = line[1].decode('utf-8').strip().lower()
                 b64logo = line[2].strip()
                 location_tag = LocationTag.get([parent_title, tag_title])
-
-                if location_tag is None:
-                    log.error("Failed to import a logo,"
-                              " location tag %s does not exist!" % '/'.join((parent_title, tag_title)))
-                elif b64logo:
+                if b64logo:
                     logo_content = base64.b64decode(b64logo)
                     mime_type = from_buffer(logo_content, mime=True)
                     logo = File("logo", "Logo for location tag %s" % location_tag.title,

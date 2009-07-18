@@ -50,6 +50,7 @@ def setup_orm(engine):
     global locationtags_table
     locationtags_table = Table("locationtags", meta.metadata,
                                Column('id', Integer, Sequence('locationtags_id_seq'), primary_key=True),
+                               Column('title_short', Unicode(assert_unicode=True)),
                                Column('title', Unicode(assert_unicode=True)),
                                Column('description', Unicode(assert_unicode=True)),
                                useexisting=True,

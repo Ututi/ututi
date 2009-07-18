@@ -11,7 +11,7 @@ def test_Subject_get():
     Subject get classmethod returns subjects by their id, the id at
     the moment is a string that is shown in the subject url.
 
-        >>> subject = Subject.get(LocationTag.get(['vu']), 'mat_analize')
+        >>> subject = Subject.get(LocationTag.get([u'vu']), 'mat_analize')
         >>> subject.id, subject.title
         ('mat_analize', u'Matematin\u0117 analiz\u0117')
 
