@@ -18,11 +18,31 @@ log = logging.getLogger(__name__)
 class AdminController(BaseController):
     """Controler for system administration."""
 
+    def _stripAndDecode(self, rows):
+        return [[column.strip().decode('utf-8') for column in row]
+                for row in rows]
+
     def _getReader(self):
         file = request.POST.get('file_upload', None)
         if file is not None and file != '':
-            return [[column.strip().decode('utf-8') for column in row]
-                    for row in csv.reader(file.value.splitlines())]
+            return self._stripAndDecode(csv.reader(file.value.splitlines()))
+        return []
+
+    def _getLines(self):
+        """CSV parser especially for logo import.
+
+        We need to split the logo lines ourselves - csv reader is
+        written in C and can't handle very very long lines.
+
+        Only ids and logos are in the file, so we can assume no quoted
+        cells in the csv file.
+        """
+        file = request.POST.get('file_upload', None)
+
+        if file is not None and file != '':
+            return self._stripAndDecode(
+                [line.split(',')
+                 for line in file.value.splitlines()])
         return []
 
     def index(self):
@@ -54,26 +74,20 @@ class AdminController(BaseController):
         redirect_to(controller='admin', action='users')
 
     def import_user_logos(self):
-        file = request.POST.get('file_upload', None)
-
-        if file is not None and file != '':
-            for line in file.value.splitlines():
-                if line.strip() == '':
-                    continue
-                line = line.strip().split(',')
-                email = line[0].strip()
-                b64logo = line[1].strip()
-                user = User.get(email)
-                if b64logo:
-                    logo_content = base64.b64decode(b64logo)
-                    mime_type = from_buffer(logo_content, mime=True)
-                    logo = File("logo", "Avatar for %s" % user.fullname, mimetype=mime_type)
-                    logo.store(logo_content)
-                    meta.Session.add(logo)
-                    user.logo = logo
-                else:
-                    user.logo = None
-            meta.Session.commit()
+        for line in self._getLines():
+            email = line[0]
+            b64logo = line[1]
+            user = User.get(email)
+            if b64logo:
+                logo_content = base64.b64decode(b64logo)
+                mime_type = from_buffer(logo_content, mime=True)
+                logo = File("logo", "Avatar for %s" % user.fullname, mimetype=mime_type)
+                logo.store(logo_content)
+                meta.Session.add(logo)
+                user.logo = logo
+            else:
+                user.logo = None
+        meta.Session.commit()
         redirect_to(controller='admin', action='users')
 
     def import_structure(self):
