@@ -10,7 +10,7 @@
     <ul id="file_list">
     %for file in c.files:
          <li>
-                <a href="${h.url_for(controller='files', action='get', id=file.id)}" class="file-link">${file.title}</a>
+                <a href="${url(controller='files', action='get', id=file.id)}" class="file-link">${file.title}</a>
          </li>
     %endfor
     </ul>
