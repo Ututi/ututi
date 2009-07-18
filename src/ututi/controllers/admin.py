@@ -102,9 +102,6 @@ class AdminController(BaseController):
 
     def import_groups(self):
         for row in self._getReader():
-            if len(row) < 4:
-                continue
-
             uni_id = row[5]
             fac_id = row[4]
             location = LocationTag.get([uni_id, fac_id])
@@ -182,8 +179,6 @@ class AdminController(BaseController):
 
     def import_subjects(self):
         for row in self._getReader():
-            if len(row) < 5:
-                continue
             id, title, lecturer = row[:3]
             location_path = reversed(row[3:])
             location = LocationTag.get(location_path)
@@ -252,8 +247,6 @@ class AdminController(BaseController):
 
     def import_group_pages(self):
         for row in self._getReader():
-            if len(row) < 4:
-                continue
             group_id, page_id, page_title, page_content, author_email = row
 
             group = Group.get(group_id)
@@ -267,8 +260,6 @@ class AdminController(BaseController):
 
     def import_subject_pages(self):
         for row in self._getReader():
-            if len(row) < 4:
-                continue
             subject_id, uni_id, fac_id, page_id, page_title, page_content, author_email = row
 
             location = LocationTag.get([uni_id, fac_id])
