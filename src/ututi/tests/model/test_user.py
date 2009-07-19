@@ -210,9 +210,10 @@ def test_user_watched_subjects():
 
         >>> group = Group.get('moderators')
         >>> group.watched_subjects.append(subjects[3])
+        >>> group.watched_subjects.append(subjects[4])
 
         >>> sorted([s.title for s in user.watched_subjects])
-        [u'Subject 0', u'Subject 1', u'Subject 2', u'Subject 3']
+        [u'Subject 0', u'Subject 1', u'Subject 2', u'Subject 3', u'Subject 4']
 
     Even when group is watching same subjects that the user is, we
     should only see the subject once:
@@ -220,7 +221,14 @@ def test_user_watched_subjects():
         >>> group.watched_subjects.append(subjects[2])
 
         >>> sorted([s.title for s in user.watched_subjects])
-        [u'Subject 0', u'Subject 1', u'Subject 2', u'Subject 3']
+        [u'Subject 0', u'Subject 1', u'Subject 2', u'Subject 3', u'Subject 4']
+
+    Sometimes users don't care about the subjects their group is
+    watching, so we want them to have a way of "ignoring" them.
+
+        >>> user.ignoreSubject(subjects[3])
+        >>> sorted([s.title for s in user.watched_subjects])
+        [u'Subject 0', u'Subject 1', u'Subject 2', u'Subject 4']
 
     """
 

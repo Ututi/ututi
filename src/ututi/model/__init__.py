@@ -286,6 +286,13 @@ class User(object):
             .filter(and_(umst.c.user_id == self.id,
                          umst.c.ignored == False))
 
+        user_ignored_subjects = meta.Session.query(Subject)\
+            .join((umst,
+                   and_(umst.c.subject_id==subjects_table.c.id,
+                        umst.c.subject_id==subjects_table.c.id)))\
+            .filter(and_(umst.c.user_id == self.id,
+                         umst.c.ignored == True))
+
         gwst = group_watched_subjects_table
         gmt = group_members_table
         group_watched_subjects = meta.Session.query(Subject)\
@@ -294,10 +301,15 @@ class User(object):
                         gwst.c.subject_id==subjects_table.c.id)))\
             .join((gmt, gmt.c.group_id == gwst.c.group_id))\
             .filter(gmt.c.user_id == self.id)
-        return directly_watched_subjects.union(group_watched_subjects).all()
+        return directly_watched_subjects.union(group_watched_subjects)\
+            .except_(user_ignored_subjects).all()
 
     def watchSubject(self, subject):
         usm = UserSubjectMonitoring(self, subject, ignored=False)
+        meta.Session.add(usm)
+
+    def ignoreSubject(self, subject):
+        usm = UserSubjectMonitoring(self, subject, ignored=True)
         meta.Session.add(usm)
 
     def __init__(self, fullname, password, gen_password=True):
