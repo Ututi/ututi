@@ -182,7 +182,7 @@ def test_user_watched_subjects():
         >>> user = User.get('admin@ututi.lt')
         >>> location = LocationTag.get([u'vu', u'ef'])
         >>> subjects = []
-        >>> for i in range(10):
+        >>> for i in range(5):
         ...     subject = Subject('subject%d' % i, u'Subject %d' % i, location)
         ...     subjects.append(subject)
         ...     meta.Session.add(subject)
