@@ -4,6 +4,7 @@ import os
 import hashlib
 import sha, binascii
 from binascii import a2b_base64, b2a_base64
+from routes.util import url_for
 from random import randrange
 import pkg_resources
 from datetime import date
@@ -352,6 +353,12 @@ class Subject(object):
             location = location.parent
         return dict([('l%s' % n, name)
                      for n, name in enumerate(reversed(path))])
+
+    def url(self, controller='subject', action='subject_home'):
+        return url_for(controller=controller,
+                       action=action,
+                       id=self.id,
+                       **self.location_path)
 
     def __init__(self, subject_id, title, location, lecturer=None):
         self.location = location

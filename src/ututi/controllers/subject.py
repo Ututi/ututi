@@ -83,26 +83,13 @@ class SubjectController(BaseController):
         c.subjects = meta.Session.query(Subject).all()
         return render('subjects.mako')
 
-    def _getLocation(self, **kwargs):
-        location_path = []
-        for i in range(5):
-            title_short = kwargs.get('l%s' % i, None)
-            if title_short is None:
-                break
-            location_path.append(title_short)
-        return LocationTag.get(location_path)
-
-    def subject_home(self, **kwargs):
-        location = self._getLocation(**kwargs)
-        subject_id = kwargs['id']
-        subject = Subject.get(location, subject_id)
+    def subject_home(self, id, l0='', l1='', l2='', l3='', l4=''):
+        location = LocationTag.get([l0, l1, l2, l3, l4])
+        subject = Subject.get(location, id)
         if subject is None:
             abort(404)
 
-        c.breadcrumbs.append({'link': url_for(controller='subject',
-                                              action='subject_home',
-                                              id=subject.id,
-                                              **subject.location_path),
+        c.breadcrumbs.append({'link': subject.url(),
                               'title': subject.title})
         c.subject = subject
         return render('subject_home.mako')
