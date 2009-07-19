@@ -81,7 +81,7 @@ class AdminController(BaseController):
             if b64logo:
                 logo_content = base64.b64decode(b64logo)
                 mime_type = from_buffer(logo_content, mime=True)
-                logo = File("logo", "Avatar for %s" % user.fullname, mimetype=mime_type)
+                logo = File(u"logo", u"Avatar for %s" % user.fullname, mimetype=mime_type)
                 logo.store(logo_content)
                 meta.Session.add(logo)
                 user.logo = logo
@@ -141,7 +141,7 @@ class AdminController(BaseController):
             if b64logo:
                 logo_content = base64.b64decode(b64logo)
                 mime_type = from_buffer(logo_content, mime=True)
-                logo = File("logo", "Logo for group %s" % group.title,
+                logo = File(u"logo", u"Logo for group %s" % group.title,
                             mimetype=mime_type)
                 logo.store(logo_content)
                 meta.Session.add(logo)
@@ -160,7 +160,7 @@ class AdminController(BaseController):
             if b64logo:
                 logo_content = base64.b64decode(b64logo)
                 mime_type = from_buffer(logo_content, mime=True)
-                logo = File("logo", "Logo for location tag %s" % location_tag.title,
+                logo = File(u"logo", u"Logo for location tag %s" % location_tag.title,
                             mimetype=mime_type)
                 logo.store(logo_content)
                 meta.Session.add(logo)

@@ -28,11 +28,11 @@ def test_group_files():
 
         >>> group = Group.get("moderators")
 
-        >>> f = File("some.txt", u'A Text file', mimetype='text/plain', data="Wassup?")
+        >>> f = File(u"some.txt", u'A Text file', mimetype='text/plain', data="Wassup?")
         >>> f.folder = u"some folder"
         >>> group.files.append(f)
 
-        >>> f = File("other.txt", u'Another text file', mimetype='text/plain', data="Wassup2")
+        >>> f = File(u"other.txt", u'Another text file', mimetype='text/plain', data="Wassup2")
         >>> group.files.append(f)
 
         >>> meta.Session.commit()

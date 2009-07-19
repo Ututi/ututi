@@ -66,6 +66,7 @@ def setup_orm(engine):
     global files_table
     files_table = Table("files", meta.metadata,
                         Column('id', Integer, Sequence('files_id_seq'), primary_key=True),
+                        Column('filename', Unicode(assert_unicode=True)),
                         Column('folder', Unicode(assert_unicode=True)),
                         Column('title', Unicode(assert_unicode=True)),
                         Column('description', Unicode(assert_unicode=True)),

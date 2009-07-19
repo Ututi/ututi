@@ -1,4 +1,5 @@
 import re
+import cgi
 import logging
 from datetime import date
 from os.path import splitext
@@ -51,30 +52,27 @@ class FileUploadTypeValidator(validators.FancyValidator):
         }
     __unpackargs__ = ('allowed_types')
 
-    def _to_python(self, value, state):
-        if hasattr(value, 'filename'):
-            return splitext(value.filename)[1].lower()
-        return None
-
     def validate_python(self, value, state):
         if value is not None:
-            if value not in self.allowed_types:
+            if splitext(value.filename)[1] not in self.allowed_types:
                 raise Invalid(self.message('bad_type', state, allowed=', '.join(self.allowed_types)), value, state)
 
 
-class NewGroupForm(Schema):
-    """A schema for validating new group forms."""
-    allow_extra_fields = True
-
-    id = GroupIdValidator()
-    logo_upload = validators.FieldStorageUploadConverter(not_empty=False)
-    title = validators.String(not_empty=True)
-
 class EditGroupForm(Schema):
     """A schema for validating group edits."""
+
     allow_extra_fields = True
-    title = validators.String(not_empty=True)
+    title = validators.UnicodeString(not_empty=True)
+    description = validators.UnicodeString()
+    year = validators.String()
     logo_upload = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
+    logo_delete = validators.StringBoolean(if_missing=False)
+
+
+class NewGroupForm(EditGroupForm):
+    """A schema for validating new group forms."""
+
+    id = GroupIdValidator()
 
 
 def group_action(method):
@@ -184,10 +182,7 @@ class GroupController(BaseController):
 
     @validate(schema=NewGroupForm, form='add')
     def new_group(self):
-        fields = ('id', 'title', 'description', 'year', 'logo_upload')
-        values = {}
-        for field in fields:
-             values[field] = request.POST.get(field, None)
+        values = self.form_result
 
         group = Group(id=values['id'],
                       title=values['title'],
@@ -195,7 +190,7 @@ class GroupController(BaseController):
                       year=date(int(values['year']), 1, 1))
         meta.Session.add(group)
 
-        if values['logo_upload'] is not None and values['logo_upload'] != '':
+        if values['logo_upload'] is not None:
             logo = values['logo_upload']
             f = File(logo.filename, 'Logo for group %s' % group.title, mimetype=logo.type)
             f.store(logo.file)
@@ -203,7 +198,6 @@ class GroupController(BaseController):
             group.logo = f
 
         meta.Session.commit()
-
         redirect_to(controller='group', action='group_home', id=values['id'])
 
     @group_action
@@ -224,21 +218,16 @@ class GroupController(BaseController):
     @validate(EditGroupForm, form='edit')
     @group_action
     def update(self, group):
-        fields = ('title', 'year', 'description', 'logo_upload', 'logo_delete')
-        values = {}
-
-        for field in fields:
-            values[field] = request.POST.get(field, None)
-
+        values = self.form_result
         group.title = values['title']
         group.year = date(int(values['year']), 1, 1)
         group.description = values['description']
 
-        if values['logo_delete'] == 'delete' and group.logo is not None:
+        if values['logo_delete']:
             meta.Session.delete(group.logo)
             group.logo = None
 
-        if values['logo_upload'] is not None and values['logo_upload'] != '':
+        if values['logo_upload'] is not None:
             logo = values['logo_upload']
             f = File(logo.filename, u'Logo for group %s' % group.title, mimetype=logo.type)
             f.store(logo.file)
