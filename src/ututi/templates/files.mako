@@ -17,7 +17,7 @@
 %endif
 
 <h2>${_('Create new')}</h2>
-<form method="post" action="${h.url_for(controller='files', action='upload')}"
+<form method="post" action="${url(controller='files', action='upload')}"
       name="file_upload_form" id="file_upload_form" enctype="multipart/form-data">
       <div>
         <label for="title">${_('Title')}</label>

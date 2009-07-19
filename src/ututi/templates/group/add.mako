@@ -6,7 +6,7 @@ ${_('New group')}
 
 <h1>${_('New group')}</h1>
 
-<form method="post" action="${h.url_for(controller='group', action='new_group')}"
+<form method="post" action="${url(controller='group', action='new_group')}"
      id="group_add_form" enctype="multipart/form-data">
   <div class="form-field">
     <label for="id">${_('Address')}</label>

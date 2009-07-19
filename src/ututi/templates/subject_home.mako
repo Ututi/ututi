@@ -37,7 +37,7 @@ ${c.subject.lecturer}
   <ul>
   % for page in c.subject.pages:
     <li>
-      ${h.link_to(page.title, h.url_for(controller='subject', action='page', page_id=page.id))}
+      ${h.link_to(page.title, url(controller='subject', action='page', page_id=page.id))}
     </li>
   % endfor
   </ul>

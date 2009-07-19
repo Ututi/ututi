@@ -10,9 +10,9 @@
     <ol id="group_list">
     %for group in c.groups:
          <li>
-                <a href="${h.url_for(controller='group', action='group_home', id=group.id)}" class="group-link">${group.title}</a>
+                <a href="${url(controller='group', action='group_home', id=group.id)}" class="group-link">${group.title}</a>
          % if group.logo is not None:
-                <img src="${h.url_for(controller='group', action='logo', id=group.id)}" />
+                <img src="${url(controller='group', action='logo', id=group.id)}" />
          % endif
          </li>
     %endfor

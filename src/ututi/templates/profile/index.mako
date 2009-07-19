@@ -6,5 +6,5 @@
 
 <h1>${c.user_info.fullname}</h1>
 % if c.user_info.logo is not None:
-  <img src="${h.url_for(controller='profile', action='logo', id=c.user_info.id, width=75, height=100)}" />
+  <img src="${url(controller='profile', action='logo', id=c.user_info.id, width=75, height=100)}" />
 % endif

@@ -11,7 +11,7 @@
       ${_('Group information')}
     </%def>
     %if c.group.logo is not None:
-      <img id="group-logo" src="${h.url_for(controller='group', action='logo', id=c.group.id, width=70)}" alt="logo" />
+      <img id="group-logo" src="${url(controller='group', action='logo', id=c.group.id, width=70)}" alt="logo" />
     %endif
     <div class="structured_info">
       <h4>${c.group.title}</h4>
@@ -23,7 +23,7 @@
       ${c.group.description}
     </div>
     <span class="portlet-link">
-      <a class="small" href="${h.url_for(controller='group', action='edit', id=c.group.id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
+      <a class="small" href="${url(controller='group', action='edit', id=c.group.id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
     </span>
     <br style="clear: right;" />
   </%self:portlet>
@@ -47,7 +47,7 @@
       </tr>
     </table>
     <span class="portlet-link">
-      <a class="small" href="${h.url_for(controller='group', action='changes', id=c.group.id)}" title="${_('More')}">${_('More')}</a>
+      <a class="small" href="${url(controller='group', action='changes', id=c.group.id)}" title="${_('More')}">${_('More')}</a>
     </span>
     <br style="clear: right;" />
   </%self:portlet>
@@ -58,9 +58,9 @@
     </%def>
     %for member in c.group.members[:3]:
     <div class="user-link">
-      <a href="${h.url_for(controller='profile', action='index', id=member.user.id)}" title="${member.user.fullname}">
+      <a href="${url(controller='profile', action='index', id=member.user.id)}" title="${member.user.fullname}">
         %if member.user.logo is not None:
-          <img src="${h.url_for(controller='profile', action='logo', id=member.user.id, width=40)}" alt="${member.user.fullname}"/>
+          <img src="${url(controller='profile', action='logo', id=member.user.id, width=40)}" alt="${member.user.fullname}"/>
         %else:
           ${h.image('/images/user_logo_small.png', alt=member.user.fullname)|n}
         %endif
@@ -71,7 +71,7 @@
     %endfor
     <br style="clear: both;" />
     <span class="portlet-link">
-      <a class="small" href="${h.url_for(controller='group', action='members', id=c.group.id)}" title="${_('More')}">${_('More') | h.ellipsis}</a>
+      <a class="small" href="${url(controller='group', action='members', id=c.group.id)}" title="${_('More')}">${_('More') | h.ellipsis}</a>
     </span>
     <br style="clear: both;" />
   </%self:portlet>
@@ -83,14 +83,14 @@
     </%def>
     %for subject in c.group.watched_subjects:
     <div>
-      <a href="${h.url_for(controller='subject', action='subject_home', id=subject.id, **subject.location_path)}">
+      <a href="${url(controller='subject', action='subject_home', id=subject.id, **subject.location_path)}">
           ${subject.title}
       </a>
     </div>
     %endfor
     <br style="clear: both;" />
     <span class="portlet-link">
-      <a class="small" href="${h.url_for(controller='group', action='subjects', id=c.group.id)}" title="${_('More')}">${_('More')}</a>
+      <a class="small" href="${url(controller='group', action='subjects', id=c.group.id)}" title="${_('More')}">${_('More')}</a>
     </span>
     <br style="clear: both;" />
   </%self:portlet>

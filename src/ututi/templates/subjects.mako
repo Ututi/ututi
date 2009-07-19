@@ -10,7 +10,7 @@
     <ol id="subject_list">
     %for subj in c.subjects:
          <li>
-           <a href="${h.url_for(controller='subject', action='subject_home', id=subj.id, **subj.location_path)}" class="subject-link">${subj.title}</a>
+           <a href="${url(controller='subject', action='subject_home', id=subj.id, **subj.location_path)}" class="subject-link">${subj.title}</a>
          </li>
     %endfor
     </ul>

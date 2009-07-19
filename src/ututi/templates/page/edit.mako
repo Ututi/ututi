@@ -6,7 +6,7 @@ ${_('Edit page')}
 
 <h1>${_('Edit page')}</h1>
 
-<form method="post" action="${h.url_for(controller='page', action='update_page', id=c.page.id)}"
+<form method="post" action="${url(controller='page', action='update_page', id=c.page.id)}"
      id="page_add_form" enctype="multipart/form-data">
   <div class="form-field">
     <label for="page_content">${_('Content')}</label>

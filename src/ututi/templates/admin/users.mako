@@ -9,7 +9,7 @@
 %for user in c.users:
     <li>${user.fullname}
     % if user.logo is not None:
-       <img src="${h.url_for(controller='profile', action='logo', id=user.id, width=45, height=60)}" />
+       <img src="${url(controller='profile', action='logo', id=user.id, width=45, height=60)}" />
     % endif
     </li>
 %endfor

@@ -9,10 +9,10 @@
   <li>
         ${tag.title}
         % if tag.logo is not None:
-           <img src="${h.url_for(controller='structure', action='logo', id=tag.id)}" />
+           <img src="${url(controller='structure', action='logo', id=tag.id)}" />
         % endif
         %if c.user:
-            <a href="${h.url_for(controller='structure', action='edit', id=tag.id)}">${_('Edit')}</a>
+            <a href="${url(controller='structure', action='edit', id=tag.id)}">${_('Edit')}</a>
         %endif
   </li>
   %if tag.children:

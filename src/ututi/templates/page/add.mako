@@ -6,7 +6,7 @@ ${_('New page')}
 
 <h1>${_('New page')}</h1>
 
-<form method="post" action="${h.url_for(controller='page', action='create_page')}"
+<form method="post" action="${url(controller='page', action='create_page')}"
      id="page_add_form" enctype="multipart/form-data">
   <div class="form-field">
     <label for="page_content">${_('Content')}</label>

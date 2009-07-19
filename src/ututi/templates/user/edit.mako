@@ -5,7 +5,7 @@
 </%def>
 
 <h1>${_('Edit')}</h1>
-<form method="post" action="${h.url_for(controller='user', action='update')}" name="edit_profile_form" enctype="multipart/form-data">
+<form method="post" action="${url(controller='user', action='update')}" name="edit_profile_form" enctype="multipart/form-data">
       <div class="form-field">
         <label for="fullname">${_('Full name')}</label>
         <input type="text" class="line" id="fullname" name="fullname" value="${c.user.fullname}"/>

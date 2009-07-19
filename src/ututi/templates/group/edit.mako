@@ -1,7 +1,7 @@
 <%inherit file="/group/home.mako" />
 
 <h1>${_('Edit')}</h1>
-<form method="post" action="${h.url_for(controller='group', action='update', id=c.group.id)}" name="edit_profile_form" enctype="multipart/form-data">
+<form method="post" action="${url(controller='group', action='update', id=c.group.id)}" name="edit_profile_form" enctype="multipart/form-data">
   <div class="form-field">
     <label for="title">${_('Title')}</label>
     <input type="text" class="line" id="title" name="title" value="${c.group.title}"/>
