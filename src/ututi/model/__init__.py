@@ -299,6 +299,9 @@ class Group(object):
                 result[file.folder].append(file)
         return sorted(result.values(), key=lambda f: f.title)
 
+    def url(self, controller='group', action='group_home'):
+        return url_for(controller=controller, action=action, id=self.id)
+
     def __init__(self, id, title=u'', location=None, year=None, description=u''):
         self.id = id.strip().lower()
         self.title = title

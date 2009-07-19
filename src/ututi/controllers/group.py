@@ -82,6 +82,7 @@ def group_action(method):
         group = Group.get(id)
         if group is None:
             abort(404)
+        c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
         return method(self, group)
     return _group_action
 
@@ -96,6 +97,7 @@ def group_forum_action(method):
             thread.thread != thread or
             thread.group != group):
             abort(404)
+        c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
         return method(self, group, thread)
     return _group_action
 
@@ -116,19 +118,19 @@ class GroupController(BaseController):
         by its name.
         """
         return [
-        {'title': _('Home'),
-         'link': url_for(controller='group', action='group_home', id=c.group.id),
-         'selected': selected == 'group_home'},
-        {'title': _('Forum'),
-         'link': url_for(controller='group', action='forum', id=c.group.id),
-         'selected': selected == 'forum'},
-        {'title': _('Members'),
-         'link': url_for(controller='group', action='members', id=c.group.id),
-         'selected': selected == 'members'},
-        {'title': _('Files'),
-         'link': url_for(controller='group', action='files', id=c.group.id),
-         'selected': selected == 'files'},
-        ]
+            {'title': _('Home'),
+             'link': url_for(controller='group', action='group_home', id=c.group.id),
+             'selected': selected == 'group_home'},
+            {'title': _('Forum'),
+             'link': url_for(controller='group', action='forum', id=c.group.id),
+             'selected': selected == 'forum'},
+            {'title': _('Members'),
+             'link': url_for(controller='group', action='members', id=c.group.id),
+             'selected': selected == 'members'},
+            {'title': _('Files'),
+             'link': url_for(controller='group', action='files', id=c.group.id),
+             'selected': selected == 'files'},
+            ]
 
     def index(self):
         c.groups = meta.Session.query(Group).all()
@@ -137,12 +139,7 @@ class GroupController(BaseController):
     @group_action
     def group_home(self, group):
         c.group = group
-        c.breadcrumbs = [
-            {'title': c.group.title,
-             'link': url_for(controller='group', action='group_home', id=c.group.id)}
-            ]
         c.breadcrumbs.append(self._actions('group_home'))
-
         return render('group/home.mako')
 
     def _top_level_messages(self, group):
@@ -163,34 +160,20 @@ class GroupController(BaseController):
     @group_action
     def forum(self, group):
         c.group = group
-        c.breadcrumbs = [
-            {'title': c.group.title,
-             'link': url_for(controller='group', action='group_home', id=c.group.id)}
-            ]
         c.breadcrumbs.append(self._actions('forum'))
-
         c.messages = self._top_level_messages(group)
         return render('group/forum.mako')
 
     @group_forum_action
     def forum_thread(self, group, thread):
         c.group = group
-        c.breadcrumbs = [
-            {'title': c.group.title,
-             'link': url_for(controller='group', action='group_home', id=c.group.id)}
-            ]
         c.breadcrumbs.append(self._actions('forum'))
-
         c.messages = thread.posts
         return render('group/thread.mako')
 
     @group_action
     def files(self, group):
         c.group = group
-        c.breadcrumbs = [
-            {'title': c.group.title,
-             'link': url_for(controller='group', action='group_home', id=c.group.id)}
-            ]
         c.breadcrumbs.append(self._actions('files'))
         return render('group/files.mako')
 
@@ -226,21 +209,12 @@ class GroupController(BaseController):
     @group_action
     def members(self, group):
         c.group = group
-        c.breadcrumbs = [
-            {'title': c.group.title,
-             'link': url_for(controller='group', action='group_home', id=c.group.id)},
-            {'title': _('Forum'),
-             'link': url_for(controller='group', action='members', id=c.group.id)}
-            ]
+        c.breadcrumbs.append(self._actions('members'))
         return render('group/members.mako')
 
     @group_action
     def edit(self, group):
         c.group = group
-        c.breadcrumbs = [
-            {'title': c.group.title,
-             'link': url_for(controller='group', action='group_home', id=group.id)}
-            ]
         c.breadcrumbs.append(self._actions('group_home'))
 
         c.current_year = date.today().year
