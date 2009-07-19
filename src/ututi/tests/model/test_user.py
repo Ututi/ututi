@@ -214,6 +214,14 @@ def test_user_watched_subjects():
         >>> sorted([s.title for s in user.watched_subjects])
         [u'Subject 0', u'Subject 1', u'Subject 2', u'Subject 3']
 
+    Even when group is watching same subjects that the user is, we
+    should only see the subject once:
+
+        >>> group.watched_subjects.append(subjects[2])
+
+        >>> sorted([s.title for s in user.watched_subjects])
+        [u'Subject 0', u'Subject 1', u'Subject 2', u'Subject 3']
+
     """
 
 

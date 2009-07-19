@@ -284,7 +284,7 @@ class User(object):
                    and_(umst.c.subject_id==subjects_table.c.id,
                         umst.c.subject_id==subjects_table.c.id)))\
             .filter(and_(umst.c.user_id == self.id,
-                         umst.c.ignored == False)).all()
+                         umst.c.ignored == False))
 
         gwst = group_watched_subjects_table
         gmt = group_members_table
@@ -293,8 +293,8 @@ class User(object):
                    and_(gwst.c.subject_id==subjects_table.c.id,
                         gwst.c.subject_id==subjects_table.c.id)))\
             .join((gmt, gmt.c.group_id == gwst.c.group_id))\
-            .filter(gmt.c.user_id == self.id).all()
-        return directly_watched_subjects + group_watched_subjects
+            .filter(gmt.c.user_id == self.id)
+        return directly_watched_subjects.union(group_watched_subjects).all()
 
     def watchSubject(self, subject):
         usm = UserSubjectMonitoring(self, subject, ignored=False)
