@@ -279,13 +279,22 @@ class User(object):
     @property
     def watched_subjects(self):
         umst = user_monitored_subjects_table
-        return list(meta.Session.query(Subject)\
-                        .join((umst,
-                               and_(umst.c.subject_id==subjects_table.c.id,
-                                    umst.c.subject_id==subjects_table.c.id)
-                               ))\
-                        .filter(and_(umst.c.user_id == self.id,
-                                     umst.c.ignored == False)).all())
+        directly_watched_subjects = meta.Session.query(Subject)\
+            .join((umst,
+                   and_(umst.c.subject_id==subjects_table.c.id,
+                        umst.c.subject_id==subjects_table.c.id)))\
+            .filter(and_(umst.c.user_id == self.id,
+                         umst.c.ignored == False)).all()
+
+        gwst = group_watched_subjects_table
+        gmt = group_members_table
+        group_watched_subjects = meta.Session.query(Subject)\
+            .join((gwst,
+                   and_(gwst.c.subject_id==subjects_table.c.id,
+                        gwst.c.subject_id==subjects_table.c.id)))\
+            .join((gmt, gmt.c.group_id == gwst.c.group_id))\
+            .filter(gmt.c.user_id == self.id).all()
+        return directly_watched_subjects + group_watched_subjects
 
     def watchSubject(self, subject):
         usm = UserSubjectMonitoring(self, subject, ignored=False)
@@ -313,6 +322,7 @@ class Folder(list):
         self.title = title
 
 
+group_watched_subjects_table = None
 groups_table = None
 
 class Group(object):

@@ -1,5 +1,6 @@
 from zope.testing import doctest
 
+from ututi.model import Group
 from ututi.model import Subject, LocationTag, Email, User
 from ututi.model import generate_salt, generate_password, validate_password
 from ututi.model import meta
@@ -187,8 +188,13 @@ def test_user_watched_subjects():
         ...     meta.Session.add(subject)
         >>> meta.Session.commit()
 
+    Our users can add subjects to their watched_subjects
+    list. Initially the list is empty though:
+
         >>> user.watched_subjects
         []
+
+    All the subjects added to it, are visible in the list:
 
         >>> user.watchSubject(subjects[0])
         >>> user.watchSubject(subjects[1])
@@ -198,6 +204,15 @@ def test_user_watched_subjects():
         >>> user.watchSubject(subjects[2])
         >>> [s.title for s in user.watched_subjects]
         [u'Subject 0', u'Subject 1', u'Subject 2']
+
+    Subjects watched by group our user is in are included in the list
+    together with subjects watched by our user directly:
+
+        >>> group = Group.get('moderators')
+        >>> group.watched_subjects.append(subjects[3])
+
+        >>> sorted([s.title for s in user.watched_subjects])
+        [u'Subject 0', u'Subject 1', u'Subject 2', u'Subject 3']
 
     """
 
