@@ -21,9 +21,6 @@ class UniqueEmail(validators.FancyValidator):
          'non_unique': _(u"The email already exists."),
          }
 
-     def _to_python(self, value, state):
-         return value.strip() # strip the whitespace around email
-
      def validate_python(self, value, state):
          if value == '':
              raise Invalid(self.message("empty", state), value, state)
@@ -36,16 +33,18 @@ class RegistrationForm(Schema):
     allow_extra_fields = False
 
     msg = {'empty': _(u"Please enter your name to register.")}
-    fullname = validators.String(not_empty=True, messages=msg)
+    fullname = validators.String(not_empty=True, strip=True, messages=msg)
 
     msg = {'non_unique': _(u"This email has already been used to register.")}
-    email = All(validators.Email(not_empty=True),
-                UniqueEmail(messages=msg))
+    email = All(validators.Email(not_empty=True, strip=True),
+                UniqueEmail(messages=msg, strip=True))
 
     msg = {'empty': _(u"Please enter your password to register."),
            'tooShort': _(u"The password must be at least 5 symbols long.")}
-    new_password = validators.String(min=5, not_empty=True, messages=msg)
-    repeat_password = validators.String(min=5, not_empty=True, messages=msg)
+    new_password = validators.String(
+         min=5, not_empty=True, strip=True, messages=msg)
+    repeat_password = validators.String(
+         min=5, not_empty=True, strip=True, messages=msg)
 
     msg = {'invalid': _(u"Passwords do not match."),
            'invalidNoMatch': _(u"Passwords do not match."),
@@ -83,9 +82,9 @@ class HomeController(BaseController):
           if len(request.POST.keys()) == 0:
                redirect_to(controller='home', action='index')
 
-          fullname = request.POST['fullname'].strip()
-          password = request.POST['new_password']
-          email = request.POST['email'].strip().lower()
+          fullname = self.form_result['fullname']
+          password = self.form_result['new_password']
+          email = self.form_result['email'].lower()
 
           user = User(fullname, password)
           user.emails = [Email(email)]
