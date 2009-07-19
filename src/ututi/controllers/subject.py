@@ -55,15 +55,16 @@ class NewSubjectForm(Schema):
 
     pre_validators = [NestedVariables()]
 
-    location = ForEach(validators.String())
+    location = ForEach(validators.String(strip=True))
 
-    title = validators.String(not_empty=True)
+    title = validators.UnicodeString(not_empty=True, strip=True)
+    lecturer = validators.UnicodeString(strip=True)
 
     msg = {'invalid': _('The text contains invalid characters, only letters, numbers and the symbols - + _ are allowed.')}
 
     id = All(validators.Regex(r'^[_\+\-a-zA-Z0-9]*$',
                               messages=msg),
-             validators.String(max=50, not_empty=True))
+             validators.String(max=50, strip=True, not_empty=True))
 
     chained_validators = [LocationValidator(),
                           SubjectIdValidator()]
@@ -98,9 +99,9 @@ class SubjectController(BaseController):
 
     @validate(schema=NewSubjectForm, form='add')
     def create(self):
-        title = self.form_result['title'].strip()
-        id = self.form_result['id'].strip().lower()
-        lecturer = self.form_result['lecturer'].strip()
+        title = self.form_result['title']
+        id = self.form_result['id'].lower()
+        lecturer = self.form_result['lecturer']
         location = self.form_result['location']
 
         if lecturer == '':
