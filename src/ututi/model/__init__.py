@@ -305,7 +305,7 @@ class Group(object):
     def __init__(self, id, title=u'', location=None, year=None, description=u''):
         self.id = id.strip().lower()
         self.title = title
-        self.location = None #temporarily, until we get to setting locations
+        self.location = location
         if year is None:
             year = date.today()
         self.year = year
