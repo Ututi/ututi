@@ -9,6 +9,7 @@ from pylons import request, c
 from pylons.controllers.util import redirect_to, abort
 
 from ututi.lib.base import BaseController, render
+from ututi.model import UserSubjectMonitoring
 from ututi.model import Page
 from ututi.model import (meta, User, Email, LocationTag, Group, Subject,
                          GroupMember, GroupMembershipType, File)
@@ -280,7 +281,10 @@ class AdminController(BaseController):
             user = User.get(row[0])
             location = LocationTag.get(row[1:3])
             subject = Subject.get(location, row[3])
-            user.watched_subjects.append(subject)
+
+            usm = UserSubjectMonitoring(user, subject, ignored=False)
+            meta.Session.add(usm)
+
         meta.Session.commit()
         redirect_to(controller='admin', action='index')
 
@@ -289,6 +293,9 @@ class AdminController(BaseController):
             user = User.get(row[0])
             location = LocationTag.get(row[1:3])
             subject = Subject.get(location, row[3])
-            user.ignored_subjects.append(subject)
+
+            usm = UserSubjectMonitoring(user, subject, ignored=True)
+            meta.Session.add(usm)
+
         meta.Session.commit()
         redirect_to(controller='admin', action='index')
