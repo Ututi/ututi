@@ -75,7 +75,6 @@ create table groups (id varchar(250) not null,
        logo_id int8 references files(id) default null,
        primary key (id));;
 
-
 /* An enumerator for membership types in groups */
 create table group_membership_types (
        membership_type varchar(20) not null,
@@ -121,6 +120,16 @@ create table subject_files (
        file_id int8 references files(id) not null,
        foreign key (subject_id, subject_location_id) references subjects,
        primary key (subject_id, file_id));;
+
+/* A table that tracks subjects watched and ignored by a user */
+
+create table user_monitored_subjects (
+       user_id int8 references users(id) not null,
+       subject_id varchar(150) not null,
+       subject_location_id int8 not null,
+       ignored bool default false,
+       foreign key (subject_id, subject_location_id) references subjects,
+       primary key (user_id, subject_id, subject_location_id));;
 
 /* A table for pages */
 

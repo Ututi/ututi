@@ -16,6 +16,7 @@ from sqlalchemy.types import Unicode
 from sqlalchemy.exc import DatabaseError
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm import relation, backref
+from sqlalchemy.sql.expression import and_
 
 from ututi.migration import GreatMigrator
 from ututi.model import meta
@@ -169,6 +170,16 @@ def setup_orm(engine):
                             'location': relation(LocationTag)
                             })
 
+    global user_monitored_subjects_table
+    user_monitored_subjects_table = Table("user_monitored_subjects", meta.metadata,
+                                        autoload=True,
+                                        autoload_with=engine)
+
+    orm.mapper(UserSubjectMonitoring, user_monitored_subjects_table,
+               properties ={'subject': relation(Subject),
+                            'user': relation(User)
+                            })
+
     from ututi.model import mailing
     mailing.setup_orm(engine)
 
@@ -228,7 +239,14 @@ def validate_password(reference, password):
     return compare == reference
 
 
+class UserSubjectMonitoring(object):
+
+    def __init__(self, user, subject, ignored=False):
+        self.user, self.subject, self.ignored = user, subject, ignored
+
+
 users_table = None
+user_monitored_subjects_table = None
 
 class User(object):
 
@@ -257,6 +275,21 @@ class User(object):
             return meta.Session.query(User).filter_by(id=id).one()
         except NoResultFound:
             return None
+
+    @property
+    def watched_subjects(self):
+        umst = user_monitored_subjects_table
+        return list(meta.Session.query(Subject)\
+                        .join((umst,
+                               and_(umst.c.subject_id==subjects_table.c.id,
+                                    umst.c.subject_id==subjects_table.c.id)
+                               ))\
+                        .filter(and_(umst.c.user_id == self.id,
+                                     umst.c.ignored == False)).all())
+
+    def watchSubject(self, subject):
+        usm = UserSubjectMonitoring(self, subject, ignored=False)
+        meta.Session.add(usm)
 
     def __init__(self, fullname, password, gen_password=True):
         self.fullname = fullname

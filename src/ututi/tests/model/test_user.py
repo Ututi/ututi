@@ -1,10 +1,9 @@
 from zope.testing import doctest
 
-from ututi.model import Email
-from ututi.model import generate_salt
-from ututi.model import generate_password
-from ututi.model import validate_password
-from ututi.model import User, meta
+from ututi.model import Subject, LocationTag, Email, User
+from ututi.model import generate_salt, generate_password, validate_password
+from ututi.model import meta
+
 from ututi.tests import PylonsLayer
 
 
@@ -172,6 +171,33 @@ def test_User_get():
         >>> meta.Session.rollback()
         >>> User.get_byid(2) is petras
         True
+
+    """
+
+
+def test_user_watched_subjects():
+    r"""Test for user subject watching and unwatching.
+
+        >>> user = User.get('admin@ututi.lt')
+        >>> location = LocationTag.get([u'vu', u'ef'])
+        >>> subjects = []
+        >>> for i in range(10):
+        ...     subject = Subject('subject%d' % i, u'Subject %d' % i, location)
+        ...     subjects.append(subject)
+        ...     meta.Session.add(subject)
+        >>> meta.Session.commit()
+
+        >>> user.watched_subjects
+        []
+
+        >>> user.watchSubject(subjects[0])
+        >>> user.watchSubject(subjects[1])
+        >>> [s.title for s in user.watched_subjects]
+        [u'Subject 0', u'Subject 1']
+
+        >>> user.watchSubject(subjects[2])
+        >>> [s.title for s in user.watched_subjects]
+        [u'Subject 0', u'Subject 1', u'Subject 2']
 
     """
 
