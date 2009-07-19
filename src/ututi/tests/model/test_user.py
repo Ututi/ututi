@@ -230,6 +230,26 @@ def test_user_watched_subjects():
         >>> sorted([s.title for s in user.watched_subjects])
         [u'Subject 0', u'Subject 1', u'Subject 2', u'Subject 4']
 
+    Ignoring a subject that is watched by a user already is done using
+    the same method:
+
+        >>> user.ignoreSubject(subjects[2])
+        >>> sorted([s.title for s in user.watched_subjects])
+        [u'Subject 0', u'Subject 1', u'Subject 4']
+
+    You can ignore the same subject twice, but it won't do you any
+    good:
+
+        >>> user.ignoreSubject(subjects[2])
+        >>> sorted([s.title for s in user.watched_subjects])
+        [u'Subject 0', u'Subject 1', u'Subject 4']
+
+    Same with watching subjects more than once:
+
+        >>> user.watchSubject(subjects[0])
+        >>> sorted([s.title for s in user.watched_subjects])
+        [u'Subject 0', u'Subject 1', u'Subject 4']
+
     """
 
 

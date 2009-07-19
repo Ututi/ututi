@@ -305,12 +305,22 @@ class User(object):
             .except_(user_ignored_subjects).all()
 
     def watchSubject(self, subject):
-        usm = UserSubjectMonitoring(self, subject, ignored=False)
-        meta.Session.add(usm)
+        usm = meta.Session.query(UserSubjectMonitoring)\
+            .filter_by(user=self, subject=subject).first()
+        if usm is None:
+            usm = UserSubjectMonitoring(self, subject, ignored=False)
+            meta.Session.add(usm)
+        else:
+            usm.ignored = False
 
     def ignoreSubject(self, subject):
-        usm = UserSubjectMonitoring(self, subject, ignored=True)
-        meta.Session.add(usm)
+        usm = meta.Session.query(UserSubjectMonitoring)\
+            .filter_by(user=self, subject=subject).first()
+        if usm is None:
+            usm = UserSubjectMonitoring(self, subject, ignored=True)
+            meta.Session.add(usm)
+        else:
+            usm.ignored = True
 
     def __init__(self, fullname, password, gen_password=True):
         self.fullname = fullname
