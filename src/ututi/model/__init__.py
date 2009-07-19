@@ -612,3 +612,17 @@ class File(object):
 
 # Reimports for convenience
 from ututi.model.mailing import GroupMailingListMessage
+
+# Events:
+#
+#   page added/modified
+#   file added
+#   message added
+#   subject added/modified
+#   member joined, invited, left, invitation accepted
+
+# slicing
+# user -> groups (pages, files, members?, messages) + subjects (pages, files)
+# group -> subjects (pages, files) + group + pages + files + members
+
+#   conversation, comment (feedback)
