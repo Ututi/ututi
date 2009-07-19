@@ -13,6 +13,7 @@ from ututi.model import meta, User
 
 log = logging.getLogger(__name__)
 
+
 def profile_action(method):
     def _profile_action(self, id):
         user = User.get_byid(id)
@@ -20,6 +21,7 @@ def profile_action(method):
             abort(404)
         return method(self, user)
     return _profile_action
+
 
 class ProfileController(BaseController):
 

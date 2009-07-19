@@ -1,10 +1,9 @@
 import re
-import cgi
 import logging
 from datetime import date
 from os.path import splitext
 
-from pylons import c, request, config
+from pylons import c, config
 from pylons.controllers.util import redirect_to, abort
 from pylons.decorators import validate
 from pylons.i18n import _
@@ -24,6 +23,7 @@ log = logging.getLogger(__name__)
 
 class GroupIdValidator(validators.FancyValidator):
     """A validator that makes sure the group id is unique."""
+
     messages = {
         'duplicate': _(u"Such id already exists, choose a different one."),
         'badId': _(u"Id cannot be used as an email address.")
@@ -47,10 +47,12 @@ class GroupIdValidator(validators.FancyValidator):
 
 class FileUploadTypeValidator(validators.FancyValidator):
     """ A validator to check uploaded file types."""
+
+    __unpackargs__ = ('allowed_types')
+
     messages = {
         'bad_type': _(u"Bad file type, only files of the types '%(allowed)s' are supported.")
         }
-    __unpackargs__ = ('allowed_types')
 
     def validate_python(self, value, state):
         if value is not None:
@@ -111,9 +113,10 @@ class GroupController(BaseController):
         c.mailing_list_host = config.get('mailing_list_host', '')
 
     def _actions(self, selected):
-        """
-        A method to generate the list of all possible group actions. The selected action is indicated
-        by its name.
+        """Generate a list of all possible actions.
+
+        The action with the name matching the `selected' parameter is
+        marked as selected.
         """
         return [
             {'title': _('Home'),
@@ -239,7 +242,6 @@ class GroupController(BaseController):
 
         meta.Session.commit()
         redirect_to(controller='group', action='group_home', id=group.id)
-
 
     def logo(self, id, width=None, height=None):
         group = Group.get(id)

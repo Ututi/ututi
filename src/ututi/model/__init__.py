@@ -316,10 +316,15 @@ class Group(object):
 group_members_table = None
 
 class GroupMember(object):
-    pass
+    """A membership object that associates a user with a group.
+
+    It has attributes for `group', `user' and `membership_type',
+    membership types are listed in group_membership_types table.
+    """
 
 
 class GroupMembershipType(object):
+
     @classmethod
     def get(cls, membership_type):
         try:

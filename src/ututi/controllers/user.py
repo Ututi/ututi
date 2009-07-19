@@ -1,12 +1,12 @@
 import logging
 
 from formencode import Schema, validators
+from routes import url_for
 
 from pylons import request, c
 from pylons.controllers.util import redirect_to, abort
 from pylons.decorators import validate
 from pylons.i18n import _
-from routes import url_for
 
 from ututi.lib.base import BaseController, render
 from ututi.lib.emails import email_confirmation_request
@@ -15,10 +15,12 @@ from ututi.model import meta, Email, File
 
 log = logging.getLogger(__name__)
 
+
 class ProfileForm(Schema):
     """A schema for validating user profile forms."""
     allow_extra_fields = True
     fullname = validators.String(not_empty=True)
+
 
 class UserController(BaseController):
     """A controller for the user's information and actions."""

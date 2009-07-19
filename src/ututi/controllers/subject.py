@@ -1,18 +1,17 @@
 import logging
 
-from ututi.lib.base import BaseController, render
-from pylons import c, request
-from pylons.decorators import validate
-from pylons.controllers.util import redirect_to, abort
-from pylons.i18n import _
-from ututi.model import LocationTag
-from ututi.model import Page
-from ututi.model import meta, Subject
-from routes import url_for
-from sqlalchemy.orm.exc import NoResultFound
 from formencode.variabledecode import NestedVariables
 from formencode.foreach import ForEach
 from formencode import Schema, validators, Invalid, All
+from routes import url_for
+
+from pylons import c
+from pylons.decorators import validate
+from pylons.controllers.util import redirect_to, abort
+from pylons.i18n import _
+
+from ututi.model import meta, LocationTag, Page, Subject
+from ututi.lib.base import BaseController, render
 
 log = logging.getLogger(__name__)
 

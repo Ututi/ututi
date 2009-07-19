@@ -1,6 +1,8 @@
 import logging
 
 from formencode import Schema, validators, Invalid
+from sqlalchemy.orm.exc import NoResultFound
+
 from pylons.controllers.util import abort
 from pylons import request, c
 from pylons.controllers.util import redirect_to
@@ -9,12 +11,13 @@ from pylons.i18n import _
 
 from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
-
 from ututi.model import meta, LocationTag
-from sqlalchemy.orm.exc import NoResultFound
+
 log = logging.getLogger(__name__)
 
+
 class StructureIdValidator(validators.FancyValidator):
+
     messages = {
         'not_exist': _(u"The element does not exist.")
         }
@@ -31,6 +34,7 @@ class StructureIdValidator(validators.FancyValidator):
 
 
 class NewStructureForm(Schema):
+
     allow_extra_fields = False
 
     title = validators.String(not_empty=True)
@@ -38,6 +42,7 @@ class NewStructureForm(Schema):
 
     description = validators.String()
     parent = StructureIdValidator()
+
 
 class StructureController(BaseController):
 

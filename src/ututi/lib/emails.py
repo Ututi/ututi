@@ -9,6 +9,7 @@ from ututi.lib.mailer import send_email
 from ututi.lib.base import render
 from ututi.model import meta
 
+
 def email_confirmation_request(user, email):
     for user_email in user.emails:
         if email.strip() == user_email.email.strip():

@@ -1,6 +1,5 @@
 from smtplib import SMTP
-from StringIO import StringIO
-import mimetools
+
 from email.Header import Header
 from email.MIMEText import MIMEText
 from email.Utils import parseaddr, formataddr

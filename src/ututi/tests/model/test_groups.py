@@ -1,6 +1,3 @@
-from datetime import date
-from StringIO import StringIO
-
 from zope.testing import doctest
 
 from ututi.model import Group, File, meta

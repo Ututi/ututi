@@ -15,6 +15,7 @@ from ututi.model import (meta, User, Email, LocationTag, Group, Subject,
 
 log = logging.getLogger(__name__)
 
+
 class AdminController(BaseController):
     """Controler for system administration."""
 

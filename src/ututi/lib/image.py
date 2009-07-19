@@ -10,12 +10,9 @@ def serve_image(file, width=None, height=None):
     if file is not None:
         response.headers['Content-Disposition'] = 'inline'
 
-
         if width is not None or height is not None:
             img = Image.open(file.filepath())
-
             img = resize_image(img, width=width, height=height)
-
         else:
             source = open(file.filepath(), 'r')
             response.headers['Content-Type'] = file.mimetype
@@ -31,11 +28,16 @@ def serve_image(file, width=None, height=None):
     else:
         abort(404)
 
+
 def resize_image(image, width=None, height=None):
-    """
+    """Resize PIL image to fit the necessary dimensions.
+
     This function resizes a given PIL.Image to fit in a bounding box if
     both width and height are specified.
-    If not, the image s resized according to one constraint.
+
+    If only the width or height is passed, the other dimmension is
+    calculated from it. (XXX ignas - it's probably a bad idea, because
+    it makes us vulnerable to malicious extra long/ extra high images)
     """
     if width is not None and height is not None:
         width = float(width)

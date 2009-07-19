@@ -9,6 +9,7 @@ from pylons import c
 from ututi.lib import current_user
 from ututi.model import meta
 
+
 class BaseController(WSGIController):
 
     def __call__(self, environ, start_response):

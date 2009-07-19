@@ -17,6 +17,7 @@ from ututi.grok.grokker import do_grok
 from ututi.config.environment import load_environment
 from repoze.who.config import make_middleware_with_config as make_who_with_config
 
+
 def grok_app():
     items = [request, tmpl_context, response, session]
     translator._push_object(_get_translator(config.get('lang')))

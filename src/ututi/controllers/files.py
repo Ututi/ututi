@@ -13,6 +13,7 @@ from routes import url_for
 
 log = logging.getLogger(__name__)
 
+
 class FilesController(BaseController):
     """A controller for files. Handles listing, uploads and downloads."""
 

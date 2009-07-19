@@ -1,7 +1,6 @@
 from zope.testing import doctest
 
-from ututi.model import LocationTag
-from ututi.model import Subject, meta
+from ututi.model import LocationTag, Subject
 from ututi.tests import PylonsLayer
 
 

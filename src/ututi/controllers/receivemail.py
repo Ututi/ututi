@@ -2,13 +2,11 @@ import logging
 
 from pylons import request
 from pylons.controllers.util import abort
-from pylons.decorators import validate
-from pylons.i18n import _
 
 from ututi.lib.base import BaseController
 from ututi.model import GroupMailingListMessage
 from ututi.model import File
-from ututi.model import meta, Email
+from ututi.model import meta
 from ututi.model.mailing import MessageAlreadyExists
 
 log = logging.getLogger(__name__)

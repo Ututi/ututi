@@ -15,16 +15,14 @@ log = logging.getLogger(__name__)
 
 
 class UniqueEmail(validators.FancyValidator):
+
      messages = {
          'empty': _(u"Enter a valid email."),
          'non_unique': _(u"The email already exists."),
          }
 
      def _to_python(self, value, state):
-         # _to_python gets run before validate_python.  Here we
-         # strip whitespace off the password, because leading and
-         # trailing whitespace in a password is too elite.
-         return value.strip()
+         return value.strip() # strip the whitespace around email
 
      def validate_python(self, value, state):
          if value == '':

@@ -1,19 +1,22 @@
 import logging
 
-from ututi.lib.base import BaseController, render
+from formencode import Schema, validators
+
 from pylons import c, request
 from pylons.decorators import validate
 from pylons.controllers.util import redirect_to, abort
+
+from ututi.model import meta, Page
+from ututi.lib.base import BaseController, render
+
 from pylons.i18n import _
-from ututi.model import meta, Page, PageVersion
-from routes import url_for
-from sqlalchemy.orm.exc import NoResultFound
-from formencode import Schema, validators, Invalid, All
 
 log = logging.getLogger(__name__)
 
+
 class PageForm(Schema):
     """A schema for validating pages."""
+
     allow_extra_fields = True
     page_content = validators.String()
 
@@ -27,9 +30,12 @@ def page_action(method):
     return _page_action
 
 
+# XXX Unused and untested!
 class PageController(BaseController):
     """A base controller for creating, editing and viewing pages.
-    Meant to be extended by cotnrollers serving pages for groups or subjects."""
+
+    Meant to be extended by controllers serving pages for groups or subjects.
+    """
 
     _add_template = 'page/add.mako'
     _edit_template = 'page/edit.mako'
@@ -45,11 +51,9 @@ class PageController(BaseController):
     def _on_view(self, page):
         """A method meant to be overridden by inheriting classes.
         It is called before displaying the page."""
-        pass
 
     def _on_edit(self, page):
         """A method called before displaying the page edit form."""
-        pass
 
     def _on_update(self, page):
         pass
