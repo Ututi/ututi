@@ -5,7 +5,7 @@
 </%def>
 
 <h1>${c.item.title}</h1>
-<form method="post" action="${url(controller='structure', action='edit', id=c.item.id)}" name="edit_structure_form">
+<form method="post" action="${url(controller='structure', action='update', id=c.item.id)}" name="edit_structure_form">
       <div>
         <label for="title">${_('Title')}</label>
         <input type="text" id="title" name="title" value="${c.item.title}"/>

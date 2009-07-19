@@ -37,10 +37,10 @@ class NewStructureForm(Schema):
 
     allow_extra_fields = False
 
-    title = validators.String(not_empty=True)
-    title_short = validators.String(not_empty=True, max=50)
+    title = validators.UnicodeString(not_empty=True, strip=True)
+    title_short = validators.UnicodeString(not_empty=True, strip=True, max=50)
 
-    description = validators.String()
+    description = validators.UnicodeString(strip=True)
     parent = StructureIdValidator()
 
 
@@ -51,16 +51,13 @@ class StructureController(BaseController):
         return render('structure.mako')
 
     @validate(schema=NewStructureForm, form='index')
-    def create_structure(self):
-        fields = ('title', 'title_short', 'description', 'parent')
-        values = {}
-        for field in fields:
-             values[field] = request.POST.get(field, None)
-
+    def create(self):
+        values = self.form_result
         structure = LocationTag(title=values['title'],
                                 title_short=values['title_short'],
                                 description=values['description'])
         meta.Session.add(structure)
+
         # XXX why zero?
         if int(values['parent']) != 0:
             parent = meta.Session.query(LocationTag).filter_by(id=values['parent']).one()
@@ -74,26 +71,26 @@ class StructureController(BaseController):
         except NoResultFound:
             abort(404)
 
-        fields = ('title', 'title_short', 'description', 'parent')
-        values = {}
-        for field in fields:
-            value = request.POST.get(field, None)
-            if value is not None:
-                values[field] = value
-
-        if values.keys() != []:
-            c.item.title = values['title']
-            c.item.title_short = values['title_short']
-            c.item.description = values['description']
-
-            if values.get('parent') is not None and int(values.get('parent', '0')) != 0:
-                parent = meta.Session.query(LocationTag).filter_by(id=values['parent']).one()
-                parent.children.append(c.item)
-
-            meta.Session.commit()
-            redirect_to(controller='structure', action='index')
         c.structure = meta.Session.query(LocationTag).filter_by(parent=None).filter(LocationTag.id != id).all()
         return render('structure/edit.mako')
+
+    @validate(schema=NewStructureForm, form='edit')
+    def update(self, id):
+        try:
+            c.item = meta.Session.query(LocationTag).filter_by(id=id).one()
+        except NoResultFound:
+            abort(404)
+
+        values = self.form_result
+        c.item.title = values['title']
+        c.item.title_short = values['title_short']
+        c.item.description = values['description']
+
+        if values.get('parent') is not None and int(values.get('parent', '0')) != 0:
+            parent = meta.Session.query(LocationTag).filter_by(id=values['parent']).one()
+            parent.children.append(c.item)
+        meta.Session.commit()
+        redirect_to(controller='structure', action='index')
 
     def logo(self, id, width=None, height=None):
         tag = meta.Session.query(LocationTag).filter_by(id=id).one()
