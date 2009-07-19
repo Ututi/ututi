@@ -222,7 +222,7 @@ class AdminController(BaseController):
             group.files.append(f)
 
             meta.Session.commit()
-        redirect_to(controller='admin', action='users')
+        redirect_to(controller='admin', action='index')
 
     def import_subject_files(self):
         for line in self._getReader():
