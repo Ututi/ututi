@@ -6,7 +6,7 @@ ${_('New subject')}
 
 <h1>${_('New subject')}</h1>
 
-<form method="post" action="${url(controller='subject', action='new_subject')}"
+<form method="post" action="${url(controller='subject', action='create')}"
      id="subject_add_form" enctype="multipart/form-data">
 
   <div class="form-field">

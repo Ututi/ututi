@@ -97,7 +97,7 @@ class SubjectController(BaseController):
         return render('subject/add.mako')
 
     @validate(schema=NewSubjectForm, form='add')
-    def new_subject(self):
+    def create(self):
         title = self.form_result['title'].strip()
         id = self.form_result['id'].strip().lower()
         lecturer = self.form_result['lecturer'].strip()
