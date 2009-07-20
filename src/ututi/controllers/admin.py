@@ -56,7 +56,7 @@ class AdminController(BaseController):
         if c.user is None:
             abort(401, 'You are not authenticated')
 
-        c.users = meta.Session.query(User).all()
+        c.users = meta.Session.query(User).order_by(User.id).all()
         return render('/admin/users.mako')
 
     def import_users(self):
