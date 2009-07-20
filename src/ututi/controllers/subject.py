@@ -83,8 +83,8 @@ class SubjectController(BaseController):
         c.subjects = meta.Session.query(Subject).all()
         return render('subjects.mako')
 
-    def subject_home(self, id, l0='', l1='', l2='', l3='', l4=''):
-        location = LocationTag.get([l0, l1, l2, l3, l4])
+    def subject_home(self, id, tags):
+        location = LocationTag.get(tags)
         subject = Subject.get(location, id)
         if subject is None:
             abort(404)
@@ -115,12 +115,14 @@ class SubjectController(BaseController):
         redirect_to(controller='subject',
                     action='subject_home',
                     id=subj.id,
-                    **subj.location_path)
+                    tags=subj.location_path)
 
-    def page(self, id, page_id, l0='', l1='', l2='', l3='', l4=''):
-        location = LocationTag.get([l0, l1, l2, l3, l4])
+    def page(self, id, page_id, tags):
+        location = LocationTag.get(tags)
+
         if location is None:
             abort(404)
+
         subject = Subject.get(location, id)
         if subject is None:
             abort(404)

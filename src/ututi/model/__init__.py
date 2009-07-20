@@ -422,14 +422,13 @@ class Subject(object):
         while location:
             path.append(location.title_short)
             location = location.parent
-        return dict([('l%s' % n, name)
-                     for n, name in enumerate(reversed(path))])
+        return '/'.join(reversed(path))
 
     def url(self, controller='subject', action='subject_home'):
         return url_for(controller=controller,
                        action=action,
                        id=self.id,
-                       **self.location_path)
+                       tags=self.location_path)
 
     def __init__(self, subject_id, title, location, lecturer=None):
         self.location = location
@@ -515,6 +514,10 @@ class LocationTag(object):
 
     @classmethod
     def get(cls, path):
+
+        if isinstance(path, unicode):
+            path = path.split('/')
+
         tag = None
         for title_short in filter(bool, path):
             try:

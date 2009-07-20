@@ -53,16 +53,13 @@ def make_map():
     map.connect('/subjects', controller='subject', action='index')
     map.connect('/subjects/{action}', controller='subject')
 
-    for pattern, action in [('/page/{page_id}', 'page'),
-                            ('', 'subject_home')]:
-        route_template = '/subject%s/{id}' + pattern
-        route_prefix = ''
-        for tag_no in range(5):
-            route_prefix += '/{l%s}' % tag_no
-            route = route_template % route_prefix
-            map.connect(route,
-                        controller='subject',
-                        action=action)
+    map.connect('/subject/*tags/{id}/page/{page_id}',
+                controller='subject',
+                action='page')
+
+    map.connect('/subject/*tags/{id}',
+                controller='subject',
+                action='subject_home')
 
     #user profiles
     map.connect('/user/{id}', controller='profile', action='index')
