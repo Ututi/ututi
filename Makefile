@@ -71,6 +71,24 @@ reset_devdb:
 	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
 	bin/paster setup-app development.ini
 
+import_sample_data:
+	curl -c cookie_jar http://localhost:5000/dologin -F login=admin@ututi.lt -F password=asdasd
+	curl -c cookie_jar http://localhost:5000/admin/import_users -F file_upload=@src/ututi/tests/functional/import/export_users.csv
+	curl -c cookie_jar http://localhost:5000/admin/import_groups -F file_upload=@src/ututi/tests/functional/import/export_groups.csv
+	curl -c cookie_jar http://localhost:5000/admin/import_structure -F file_upload=@src/ututi/tests/functional/import/export_structure.csv
+	curl -c cookie_jar http://localhost:5000/admin/import_subjects -F file_upload=@src/ututi/tests/functional/import/export_subjects.csv
+	curl -c cookie_jar http://localhost:5000/admin/import_group_members -F file_upload=@src/ututi/tests/functional/import/export_group_members.csv
+	curl -c cookie_jar http://localhost:5000/admin/import_user_logos -F file_upload=@src/ututi/tests/functional/import/export_user_logos.csv
+	curl -c cookie_jar http://localhost:5000/admin/import_group_logos -F file_upload=@src/ututi/tests/functional/import/export_group_logos.csv
+	curl -c cookie_jar http://localhost:5000/admin/import_structure_logos -F file_upload=@src/ututi/tests/functional/import/export_structure_logos.csv
+	curl -c cookie_jar http://localhost:5000/admin/import_group_files -F file_upload=@src/ututi/tests/functional/import/export_group_files.csv
+	curl -c cookie_jar http://localhost:5000/admin/import_subject_files -F file_upload=@src/ututi/tests/functional/import/export_subject_files.csv
+	curl -c cookie_jar http://localhost:5000/admin/import_group_pages -F file_upload=@src/ututi/tests/functional/import/export_group_pages.csv
+	curl -c cookie_jar http://localhost:5000/admin/import_subject_pages -F file_upload=@src/ututi/tests/functional/import/export_subject_pages.csv
+	curl -c cookie_jar http://localhost:5000/admin/import_group_watched_subjects -F file_upload=@src/ututi/tests/functional/import/export_group_watched_subjects.csv
+	curl -c cookie_jar http://localhost:5000/admin/import_user_ignored_subjects -F file_upload=@src/ututi/tests/functional/import/export_user_ignored_subjects.csv
+	curl -c cookie_jar http://localhost:5000/admin/import_user_watched_subjects -F file_upload=@src/ututi/tests/functional/import/export_user_watched_subjects.csv
+
 .PHONY: instance
 instance: instance/done
 
