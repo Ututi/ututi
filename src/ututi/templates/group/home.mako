@@ -52,7 +52,7 @@
     <br style="clear: right;" />
   </%self:portlet>
 
-  <%self:portlet id="group_members_portlet" portlet_class="inactive XXX">
+  <%self:portlet id="group_members_portlet" portlet_class="inactive">
     <%def name="header()">
       ${_('Recently seen')}
     </%def>
