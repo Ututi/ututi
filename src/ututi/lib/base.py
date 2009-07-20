@@ -2,6 +2,8 @@
 
 Provides the BaseController class for subclassing.
 """
+from datetime import datetime
+
 from pylons.controllers import WSGIController
 from pylons.templating import render_mako as render
 from pylons import c
@@ -19,6 +21,12 @@ class BaseController(WSGIController):
         # available in environ['pylons.routes_dict']
 
         c.user = current_user()
+
+        # Record the time the user was last seen.
+        if c.user is not None:
+            c.user.last_seen = datetime.utcnow()
+            meta.Session.commit()
+
         try:
             return WSGIController.__call__(self, environ, start_response)
         finally:

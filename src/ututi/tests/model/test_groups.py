@@ -38,6 +38,9 @@ def test_group_files():
         >>> group.files
         [<ututi.model.File object at ...>, <ututi.model.File object at ...>]
 
+        >>> group.last_seen_members
+        [<ututi.model.User object at ...>]
+
         >>> printTree(group)
         Another text file
         some folder:

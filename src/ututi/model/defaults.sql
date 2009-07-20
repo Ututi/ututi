@@ -21,6 +21,7 @@ create table users (
        fullname varchar(100),
        password char(36),
        logo_id int8 references files(id) default null,
+       last_seen timestamp not null default now(),
        primary key (id));;
 
 insert into users (fullname, password) values ('Adminas Adminovix', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7');;

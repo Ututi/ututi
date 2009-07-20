@@ -135,8 +135,8 @@ def setup_orm(engine):
                                 autoload_with=engine)
     orm.mapper(GroupMember,
                group_members_table,
-               properties = {'group': relation(Group, backref='members'),
-                             'user': relation(User, backref='memberships'),
+               properties = {'user': relation(User, backref='memberships'),
+                             'group': relation(Group, backref='members'),
                              'role': relation(GroupMembershipType)})
 
 
@@ -352,6 +352,13 @@ class Group(object):
             return meta.Session.query(cls).filter_by(id=id).one()
         except NoResultFound:
             return None
+
+    @property
+    def last_seen_members(self):
+        gmt = group_members_table
+        return meta.Session.query(User).join((gmt,
+                                      gmt.c.user_id == users_table.c.id))\
+                                .filter(gmt.c.group_id == self.id).all()
 
     @property
     def folders(self):
