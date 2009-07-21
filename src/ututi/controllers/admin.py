@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 import csv
 import logging
 import base64
@@ -246,12 +247,12 @@ class AdminController(BaseController):
         for row in self._getReader():
             group_id, page_id, page_title, page_content, author_email = row
 
-            group = Group.get(group_id)
-            author = User.get(author_email)
-            group.pages.append(Page(page_title,
-                                    page_content,
-                                    author))
-            meta.Session.commit()
+            if page_content not in (u"Welcome, please write something here!",
+                                    u"Sveiki atvykę! Rašykite čia!",
+                                    u"Sveiki, savo aprašymą rašykite čia."):
+                group = Group.get(group_id)
+                group.page = page_content
+                meta.Session.commit()
 
         redirect_to(controller='admin', action='index')
 

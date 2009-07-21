@@ -25,6 +25,7 @@ And upload all the files one by one:
     >>> import_csv(browser, 'import_group_logos', 'export_group_logos.csv')
     >>> import_csv(browser, 'import_structure_logos', 'export_structure_logos.csv')
     >>> import_csv(browser, 'import_group_files', 'export_group_files.csv')
+    >>> import_csv(browser, 'import_group_pages', 'export_group_pages.csv')
     >>> import_csv(browser, 'import_subject_files', 'export_subject_files.csv')
     >>> import_csv(browser, 'import_subject_pages', 'export_subject_pages.csv')
     >>> import_csv(browser, 'import_group_watched_subjects', 'export_group_watched_subjects.csv')
