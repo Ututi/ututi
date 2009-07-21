@@ -151,7 +151,7 @@ ${_('student information online')}
                 theme_advanced_resizing : true,
 
                 // Example content CSS (should be your site CSS)
-                content_css : "css/content.css",
+                content_css : "stylesheets/style.css",
 
                 // Drop lists for link/image/media/template dialogs
                 template_external_list_url : "lists/template_list.js",
@@ -159,11 +159,8 @@ ${_('student information online')}
                 external_image_list_url : "lists/image_list.js",
                 media_external_list_url : "lists/media_list.js",
 
-                // Replace values for the template plugin
-                template_replace_values : {
-                    username : "Some User",
-                    staffid : "991234"
-                }
+                extended_valid_elements : "iframe[src|width|height|name|align]",
+
             });
         });
     </script>
