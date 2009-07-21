@@ -83,7 +83,7 @@ class SubjectController(BaseController):
         c.subjects = meta.Session.query(Subject).all()
         return render('subjects.mako')
 
-    def subject_home(self, id, tags):
+    def home(self, id, tags):
         location = LocationTag.get(tags)
         subject = Subject.get(location, id)
         if subject is None:
@@ -92,7 +92,7 @@ class SubjectController(BaseController):
         c.breadcrumbs.append({'link': subject.url(),
                               'title': subject.title})
         c.subject = subject
-        return render('subject_home.mako')
+        return render('subject/home.mako')
 
     def add(self):
         return render('subject/add.mako')
@@ -113,6 +113,6 @@ class SubjectController(BaseController):
         meta.Session.commit()
 
         redirect_to(controller='subject',
-                    action='subject_home',
+                    action='home',
                     id=subj.id,
                     tags=subj.location_path)

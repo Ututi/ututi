@@ -64,7 +64,7 @@ def make_map():
 
     map.connect('/subject/*tags/{id}',
                 controller='subject',
-                action='subject_home')
+                action='home')
 
     map.connect('/subject/*tags/{id}/{action}',
                 controller='subject')

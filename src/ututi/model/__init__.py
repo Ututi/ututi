@@ -425,7 +425,7 @@ class Subject(object):
             location = location.parent
         return '/'.join(reversed(path))
 
-    def url(self, controller='subject', action='subject_home'):
+    def url(self, controller='subject', action='home'):
         url = request.environ['routes.url']
 
         return url(controller=controller,

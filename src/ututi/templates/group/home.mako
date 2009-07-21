@@ -83,7 +83,7 @@
     </%def>
     %for subject in c.group.watched_subjects:
     <div>
-      <a href="${url(controller='subject', action='subject_home', id=subject.id, tags=subject.location_path)}">
+      <a href="${subject.url()}">
           ${subject.title}
       </a>
     </div>
