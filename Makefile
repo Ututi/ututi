@@ -80,7 +80,7 @@ import_sample_data: parts/test/dbdump instance/var/run/.s.PGSQL.${PGPORT}
 	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
 	rm -rf instance/uploads
 	bin/paster setup-app development.ini
-	cat parts/test/dbdump | /usr/lib/postgresql/8.3/bin/pg_restore -d development -h ${PWD}/instance/var/run -c
+	/usr/lib/postgresql/8.3/bin/pg_restore -d development -h ${PWD}/instance/var/run -c < parts/test/dbdump
 	cp -r parts/test/files_dump instance/uploads
 
 .PHONY: instance
