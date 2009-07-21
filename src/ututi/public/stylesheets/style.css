@@ -632,3 +632,17 @@ ul.breadcrumb_dropdown.expanded {
   margin-top: 0.2em;
 }
 /* end main page blocks */
+
+/* flash messages */
+.flash-message {
+  background: #fdeab1;
+  margin: 0 0 0.8em;
+  padding: 0.3em 0.5em;
+}
+
+.flash-message .close-link {
+  float: right;
+  color: black;
+  text-decoration: underline;
+  cursor: pointer;
+}

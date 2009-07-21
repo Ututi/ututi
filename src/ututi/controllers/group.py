@@ -12,6 +12,7 @@ from formencode import Schema, validators, Invalid
 from sqlalchemy.sql.expression import desc
 from sqlalchemy.orm.exc import NoResultFound
 
+import ututi.lib.helpers as h
 from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import HtmlSanitizeValidator
@@ -165,6 +166,7 @@ class GroupController(BaseController):
             page_content = ''
         group.page = page_content
         meta.Session.commit()
+        h.flash(_("The group's front page was updated."))
         redirect_to(controller='group', action='group_home', id=group.id)
 
     def _top_level_messages(self, group):

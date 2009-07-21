@@ -9,6 +9,9 @@ available to Controllers. This module is available to templates as 'h'.
 from routes import url_for
 from webhelpers.html.tags import stylesheet_link, javascript_link, image, link_to
 
+from webhelpers.pylonslib import Flash as _Flash
+flash = _Flash()
+
 
 def get_urls(text):
     urls = re.findall("http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+",text)

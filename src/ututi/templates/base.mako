@@ -127,7 +127,7 @@ ${_('student information online')}
     ${h.javascript_link('/javascripts/jquery-1.3.2.min.js')|n}
     ${h.stylesheet_link('/stylesheets/style.css')|n}
     ${h.javascript_link('/javascripts/expand.js')|n}
-
+    ${h.javascript_link('/javascripts/hide_parent.js')|n}
     <!-- Load TinyMCE -->
     ${h.javascript_link('/javascripts/tiny_mce/jquery.tinymce.js')|n}
     <script type="text/javascript">
@@ -206,6 +206,12 @@ ${_('student information online')}
         ${self.portlets()}
 
         <div class="inside" id="page-content">
+          <% messages = h.flash.pop_messages() %>
+          % for message in messages:
+          <div class="flash-message"><span class="close-link hide-parent">${_('Close')}</span><span>${message}</span></div>
+          % endfor
+
+
           ${self.body()}
           <br style="clear: both;"/>
         </div>
