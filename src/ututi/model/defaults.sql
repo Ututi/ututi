@@ -73,6 +73,8 @@ create table groups (id varchar(250) not null,
        location_id int8 references locationtags(id) default null,
        year date not null,
        description text,
+       show_page bool default true,
+       page text not null default '',
        logo_id int8 references files(id) default null,
        primary key (id));;
 

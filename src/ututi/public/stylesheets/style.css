@@ -392,21 +392,23 @@ form .form-field.overlay label {
 /* end form */
 
 /* begin buttons */
-span.btn {
+span.btn,
+a.btn {
   background: white url("../images/button_small.png") left top no-repeat;
   display: inline-block;
   border: medium none;
   padding: 0 0 0 5px;
 }
 
-span.btn input {
+span.btn input,
+a.btn span {
   background: white url("../images/button_small.png") right top no-repeat;
   border: medium none;
   height: 20px;
   padding: 0 5px 0 0;
   margin: 0;
-  color: #808080;
-  font-weight: bold;
+  color: black;
+  font-weight: normal;
   display: inline-block;
 }
 /* end buttons */
@@ -593,3 +595,40 @@ ul.breadcrumb_dropdown.expanded {
 }
 
 /* end group blocks */
+
+/* main page blocks */
+.content-block .rounded-header {
+  height: 30px;
+  background: white url("../images/block_header_gray.png") left top no-repeat;
+  padding-left: 20px;
+}
+
+.content-block .rounded-header .header-links {
+  padding-top: 5px;
+  float: right;
+  color: black;
+}
+
+.content-block .rounded-header .header-links a {
+  color: black;
+  text-decoration: underline;
+}
+
+.content-block .rounded-header .rounded-right {
+  height: 26px;
+  text-align: left;
+  background: white url("../images/block_header_gray.png") right top no-repeat;
+  padding-right: 30px;
+  padding-top: 4px;
+}
+
+.content-block .content {
+  padding: 10px 10px 5px;
+  margin-bottom: 20px;
+  border: 2px solid #eaeadb;
+}
+
+.content-block .footer {
+  margin-top: 0.2em;
+}
+/* end main page blocks */

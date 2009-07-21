@@ -98,6 +98,33 @@
 </div>
 </%def>
 
+%if c.group.show_page:
+<div id="group_page" class="content-block">
+  <div class="rounded-header">
+    <div class="rounded-right">
+      <span class="header-links">
+        <a href="${url(controller='group', action='home', id=c.group.id, do='hide_page')}" title="${_('Hide group page')}">
+          ${_('Hide')}
+        </a>
+      </span>
+      <h3>${_("Group front page")}</h3>
+
+    </div>
+  </div>
+  <div class="content">
+    %if c.group.page != '':
+    ${c.group.page|n}
+    %else:
+    ${_("The group's page is empty. Enter your description.")}
+    %endif
+    <div class="footer">
+      <a class="btn" href="${url(controller='group', action='edit_page', id=c.group.id)}" title="${_('Edit group front page')}">
+        <span>${_('Edit')}</span>
+      </a>
+    </div>
+  </div>
+</div>
+%endif
 
 <h1>${c.group.title}, ${c.group.year.year}</h1>
 
