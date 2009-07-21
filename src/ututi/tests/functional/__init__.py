@@ -91,5 +91,5 @@ def dump_database():
     p = subprocess.Popen([executable, "test", "-Fc", "-O", "-h", path],
                          stdout=subprocess.PIPE)
     shutil.copyfileobj(p.stdout, open("dbdump", "w"))
-    shutil.rmtree("files_dump")
+    shutil.rmtree("files_dump", ignore_errors=True)
     shutil.copytree(config["files_path"], "files_dump")
