@@ -81,10 +81,6 @@ def setup_orm(engine):
                                 autoload=True,
                                 autoload_with=engine)
 
-    global group_pages_table
-    group_pages_table = Table("group_pages", meta.metadata,
-                              autoload=True,
-                              autoload_with=engine)
     global pages_table
     pages_table = Table("pages", meta.metadata,
                         autoload=True,
@@ -160,9 +156,6 @@ def setup_orm(engine):
 
     orm.mapper(Group, groups_table,
                properties ={'logo': relation(File),
-                            'pages': relation(Page,
-                                              secondary=group_pages_table,
-                                              backref='group'),
                             'files': relation(File,
                                               secondary=group_files_table),
                             'watched_subjects': relation(Subject,

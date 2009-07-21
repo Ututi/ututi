@@ -85,40 +85,6 @@ def test_pages():
 
     """
 
-
-def test_group_pages():
-    """Test if pages can be linked to groups.
-
-    We get our group
-
-        >>> group = Group.get('moderators')
-
-    But initially it has no pages:
-
-        >>> group.pages
-        []
-
-    We can easily add one though:
-
-        >>> author = User.get('admin@ututi.lt')
-        >>> group.pages.append(Page(u'page', u'some content', author))
-        >>> meta.Session.commit()
-        >>> meta.Session.expire_all()
-
-    The page should appear in the pages list of this group now:
-
-        >>> group = Group.get('moderators')
-        >>> len(group.pages)
-        1
-        >>> group.pages[0].title
-        u'page'
-
-        >>> group.pages[0].content
-        u'some content'
-
-    """
-
-
 def test_subject_pages():
     """Test if pages can be linked to subjects.
 

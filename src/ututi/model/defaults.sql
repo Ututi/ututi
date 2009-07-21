@@ -169,13 +169,6 @@ create table group_watched_subjects (
        foreign key (subject_id, subject_location_id) references subjects,
        primary key (group_id, subject_id, subject_location_id));;
 
-/* A table linking pages and groups */
-
-create table group_pages (
-       group_id varchar(250) not null references groups(id),
-       page_id int8 not null references pages(id),
-       primary key (group_id, page_id));
-
 /* A table for group mailing list emails */
 
 create table group_mailing_list_messages (
