@@ -54,9 +54,25 @@ work on branches most of the time, when done with a feature, merge to master.
 # Dev -> Test, using binary, cleaning up test
 # /usr/lib/postgresql/8.3/bin/pg_dump development -Fc -O -h /home/ignas/src/ututi/u2/instance/var/run/ -p 4455 | /usr/lib/postgresql/8.3/bin/pg_restore -d test -h /home/ignas/src/ututi/u2/instance/var/run/ -p 4455 -c
 
-
 * Tips and tricks
 
 To debug sql alchemy statements:
 
 meta.engine.echo = True
+
+
+* Add/Edit forms
+
++ registration
++ group add
++ group edit
++ profile edit (logo upload at least)
+
+> subject tagging UI
+> group taging UI
+
+  group file upload
+  subject add/edit
+  subject file upload
+  watch subject ignore subject
+  subject page add/edit/list
