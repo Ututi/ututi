@@ -3,7 +3,7 @@ import logging
 from datetime import date
 from os.path import splitext
 
-from pylons import c, config
+from pylons import c, config, request
 from pylons.controllers.util import redirect_to, abort
 from pylons.decorators import validate
 from pylons.i18n import _
@@ -14,6 +14,7 @@ from sqlalchemy.orm.exc import NoResultFound
 
 from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
+from ututi.lib.validators import HtmlSanitizeValidator
 from ututi.model.mailing import GroupMailingListMessage
 from ututi.model import meta, Group, File
 from routes import url_for
@@ -76,6 +77,10 @@ class NewGroupForm(EditGroupForm):
 
     id = GroupIdValidator()
 
+
+class GroupPageForm(Schema):
+    allow_extra_fields = False
+    page_content = HtmlSanitizeValidator()
 
 def group_action(method):
     def _group_action(self, id):
@@ -140,8 +145,27 @@ class GroupController(BaseController):
     @group_action
     def group_home(self, group):
         c.group = group
+        if request.GET.get('do', None) == 'hide_page':
+            group.show_page = False
+        meta.Session.commit()
         c.breadcrumbs.append(self._actions('group_home'))
         return render('group/home.mako')
+
+    @group_action
+    def edit_page(self, group):
+        c.group = group
+        c.breadcrumbs.append(self._actions('group_home'))
+        return render('group/edit_page.mako')
+
+    @group_action
+    @validate(schema=GroupPageForm, form='edit_page')
+    def update_page(self, group):
+        page_content = self.form_result['page_content']
+        if page_content is None:
+            page_content = ''
+        group.page = page_content
+        meta.Session.commit()
+        redirect_to(controller='group', action='group_home', id=group.id)
 
     def _top_level_messages(self, group):
         messages = []

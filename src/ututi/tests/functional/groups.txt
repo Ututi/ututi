@@ -55,6 +55,24 @@ The group's logo is displayed in a portlet.
     >>> browser.printQuery("id('group_info_portlet')//img")
     <img id="group-logo" src="/group/test/logo/70" alt="logo" />
 
+The group's default page is empty at the moment and we are notified of this.
+
+    >>> browser.printQuery("id('group_page')//div[@class='content']/text()")
+    The group's page is empty. Enter your description.
+
+If we click the link to edit the page, we are redirected to a form for this.
+
+    >>> browser.getLink('Edit', url="edit_page").click()
+    >>> browser.getControl('Content').value = 'This is our group'
+    >>> browser.getControl('Save').click()
+    >>> browser.printQuery("id('group_page')//div[@class='content']/text()")
+    <BLANKLINE>
+    This is our group
+
+If we want to, we can hide the group's page by clicking on a link.
+    >>> browser.getLink('Hide').click()
+    >>> browser.printQuery("id('group_page')//div[@class='content']/text()")
+
 However, group ids are checked for uniqueness.
 
     >>> browser.open('http://localhost/groups/add')

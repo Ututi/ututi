@@ -103,7 +103,7 @@
   <div class="rounded-header">
     <div class="rounded-right">
       <span class="header-links">
-        <a href="${url(controller='group', action='home', id=c.group.id, do='hide_page')}" title="${_('Hide group page')}">
+        <a href="${url(controller='group', action='group_home', id=c.group.id, do='hide_page')}" title="${_('Hide group page')}">
           ${_('Hide')}
         </a>
       </span>
@@ -113,7 +113,7 @@
   </div>
   <div class="content">
     %if c.group.page != '':
-    ${c.group.page|n}
+    ${c.group.page|n,decode.utf8}
     %else:
     ${_("The group's page is empty. Enter your description.")}
     %endif
