@@ -30,3 +30,6 @@ And upload all the files one by one:
     >>> import_csv(browser, 'import_group_watched_subjects', 'export_group_watched_subjects.csv')
     >>> import_csv(browser, 'import_user_ignored_subjects', 'export_user_ignored_subjects.csv')
     >>> import_csv(browser, 'import_user_watched_subjects', 'export_user_watched_subjects.csv')
+
+    >>> from ututi.tests.functional import dump_database
+    >>> dump_database()

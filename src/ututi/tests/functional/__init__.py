@@ -1,6 +1,8 @@
 #
 import os
 import unittest
+import subprocess
+import shutil
 from pkg_resources import resource_string, resource_stream
 
 from zope.testing import doctest
@@ -78,3 +80,16 @@ def import_csv(browser, formname, filename):
     form = browser.getForm(name=formname)
     form.getControl('CSV File').add_file(*make_file(filename))
     form.getControl('Upload').click()
+
+
+def dump_database():
+
+    executable = "/usr/lib/postgresql/8.3/bin/pg_dump"
+    path = os.path.join(config['global_conf']['here'], 'instance/var/run')
+    os.environ["PGPORT"] = os.environ.get("PGPORT", "4455")
+
+    p = subprocess.Popen([executable, "test", "-Fc", "-O", "-h", path],
+                         stdout=subprocess.PIPE)
+    shutil.copyfileobj(p.stdout, open("dbdump", "w"))
+    shutil.rmtree("files_dump")
+    shutil.copytree(config["files_path"], "files_dump")
