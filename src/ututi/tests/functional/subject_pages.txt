@@ -1,0 +1,77 @@
+Test for simple subject page management
+=======================================
+
+Let's log in:
+
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/')
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
+
+And go to the subjects list.
+
+    >>> browser.open('http://localhost/subjects')
+
+Pick a subject.
+
+    >>> browser.getLink(u'Matematin\u0117 analiz\u0117'.encode('utf-8')).click()
+
+And add a page for it.
+
+    >>> browser.getLink('Add page').click()
+    >>> browser.getControl('Title').value = "How to be awesome!"
+    >>> browser.getControl('Content').value = "Being Awesome is easy!"
+    >>> browser.getControl('Save').click()
+
+We should get redirected to the index view of the page we just created.
+
+    >>> browser.url
+    'http://localhost/subject/vu/mat_analize/page/1'
+
+    >>> browser.printQuery("id('page_header')")
+    <h1 id="page_header">How to be awesome!</h1>
+
+    >>> browser.printQuery("id('page_content')")
+    <div id="page_content">
+      Being Awesome is easy!
+    </div>
+
+Let's edit the page now.
+
+    >>> browser.getControl('Edit').click()
+    >>> browser.getControl('Content').value = "Being Awesome is very easy!"
+    >>> browser.getControl('Save').click()
+
+And see how it works.
+
+    >>> browser.url
+    'http://localhost/subject/vu/mat_analize/page/1'
+
+    >>> browser.printQuery("id('page_header')")
+    <h1 id="page_header">How to be awesome!</h1>
+
+    >>> browser.printQuery("id('page_content')")
+    <div id="page_content">
+      Being Awesome is very easy!
+    </div>
+
+Let's go back now.
+
+    >>> browser.getLink('Go back to Matematin\xc4\x97 analiz\xc4\x97').click()
+    >>> browser.url
+    'http://localhost/subject/vu/mat_analize'
+
+We should see the list of pages.
+
+    >>> browser.printQuery("id('subject_pages')")
+    <div id="subject_pages">
+      <h2>Pages</h2>
+      <ul>
+        <li>
+          <a href="/subject/vu/mat_analize/page/1">How to be awesome!</a>
+        </li>
+      </ul>
+      <a href="/subject/vu/mat_analize/pages/add">Add page</a>
+    </div>
