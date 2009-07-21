@@ -5,6 +5,7 @@ import hashlib
 import sha, binascii
 from binascii import a2b_base64, b2a_base64
 from routes.util import url_for
+from pylons import request
 from random import randrange
 import pkg_resources
 from datetime import date
@@ -425,10 +426,12 @@ class Subject(object):
         return '/'.join(reversed(path))
 
     def url(self, controller='subject', action='subject_home'):
-        return url_for(controller=controller,
-                       action=action,
-                       id=self.id,
-                       tags=self.location_path)
+        url = request.environ['routes.url']
+
+        return url(controller=controller,
+                   action=action,
+                   id=self.id,
+                   tags=self.location_path)
 
     def __init__(self, subject_id, title, location, lecturer=None):
         self.location = location

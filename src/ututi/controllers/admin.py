@@ -98,6 +98,7 @@ class AdminController(BaseController):
             title_short = line[0].lower()
             description = line[2]
             parent = line[3].lower()
+
             tag = LocationTag.get([parent, title_short])
             if tag is None:
                 tag = LocationTag(title=title,

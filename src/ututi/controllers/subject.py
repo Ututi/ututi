@@ -116,21 +116,3 @@ class SubjectController(BaseController):
                     action='subject_home',
                     id=subj.id,
                     tags=subj.location_path)
-
-    def page(self, id, page_id, tags):
-        location = LocationTag.get(tags)
-
-        if location is None:
-            abort(404)
-
-        subject = Subject.get(location, id)
-        if subject is None:
-            abort(404)
-
-        page = Page.get(int(page_id))
-        if page not in subject.pages:
-            abort(404)
-
-        c.subject = subject
-        c.page = page
-        return render('subject/page.mako')

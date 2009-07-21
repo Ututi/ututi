@@ -53,13 +53,21 @@ def make_map():
     map.connect('/subjects', controller='subject', action='index')
     map.connect('/subjects/{action}', controller='subject')
 
+    map.connect('/subject/*tags/{id}/pages/{action}',
+                controller='subjectpage')
+
     map.connect('/subject/*tags/{id}/page/{page_id}',
-                controller='subject',
-                action='page')
+                controller='subjectpage', action='index')
+
+    map.connect('/subject/*tags/{id}/page/{page_id}/{action}',
+                controller='subjectpage')
 
     map.connect('/subject/*tags/{id}',
                 controller='subject',
                 action='subject_home')
+
+    map.connect('/subject/*tags/{id}/{action}',
+                controller='subject')
 
     #user profiles
     map.connect('/user/{id}', controller='profile', action='index')
@@ -76,9 +84,6 @@ def make_map():
     map.connect('/profile/{action}', controller='user')
     map.connect('/confirm_emails', controller='user', action='confirm_emails')
     map.connect('/confirm_user_email/{key}', controller='user', action='confirm_user_email')
-
-    #pages (for testing purposes, will be removed) XXX
-    map.connect('/pages/{action}', controller='page')
 
     # CUSTOM ROUTES HERE
     map.connect('/', controller='home')

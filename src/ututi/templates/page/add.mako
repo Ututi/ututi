@@ -6,11 +6,15 @@ ${_('New page')}
 
 <h1>${_('New page')}</h1>
 
-<form method="post" action="${url(controller='page', action='create_page')}"
+<form method="post" action="${h.url_for(action='create')}"
      id="page_add_form" enctype="multipart/form-data">
   <div class="form-field">
+    <label for="page_title">${_('Title')}</label>
+    <input class="line" name="page_title" id="page_title" type="text" />
+  </div>
+  <div class="form-field">
     <label for="page_content">${_('Content')}</label>
-    <textarea class="line" name="page_content" id="page_content" cols="80" rows="15"></textarea>
+    <textarea class="tinymce" name="page_content" id="page_content" cols="80" rows="25"></textarea>
   </div>
   <div>
     <span class="btn">
