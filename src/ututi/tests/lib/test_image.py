@@ -76,6 +76,34 @@ def test_resize_image():
         >>> result.size
         (150, 50)
 
+    We are capping the dimmensions to 300, so you can't make an image
+    that is larger than 300 x 300. This protects us from extremely
+    long images:
+
+        >>> img = Image.new("RGB", (1000, 4))
+        >>> result = resize_image(img, None, 30)
+        >>> result.size
+        (300, 1)
+
+    And extremely wide images:
+
+        >>> img = Image.new("RGB", (4, 1000))
+        >>> result = resize_image(img, 30)
+        >>> result.size
+        (1, 300)
+
+    Or just users trying to hack our system by passing very very very
+    large dimmensions through URL:
+
+        >>> img = Image.new("RGB", (10, 10))
+        >>> result = resize_image(img, 1000000)
+        >>> result.size
+        (300, 300)
+
+        >>> result = resize_image(img, None, 1000000)
+        >>> result.size
+        (300, 300)
+
     """
 
 

@@ -29,7 +29,7 @@ def serve_image(file, width=None, height=None):
         abort(404)
 
 
-def resize_image(image, width=None, height=None):
+def resize_image(image, width=300, height=300):
     """Resize PIL image to fit the necessary dimensions.
 
     This function resizes a given PIL.Image to fit in a bounding box if
@@ -39,23 +39,21 @@ def resize_image(image, width=None, height=None):
     calculated from it. (XXX ignas - it's probably a bad idea, because
     it makes us vulnerable to malicious extra long/ extra high images)
     """
-    if width is not None and height is not None:
-        width = float(width)
-        height = float(height)
-        limit_x = width / height
+    width = width or 300
+    height = height or 300
 
-        original_x = float(image.size[0]) / image.size[1]
+    width = min(300, width)
+    height = min(300, height)
 
-        if limit_x > original_x:
-            width = None
-        elif limit_x <= original_x:
-            height = None
+    width = float(width)
+    height = float(height)
+    limit_x = width / height
 
-    if width is not None:
-        width = float(width)
-        height = int(image.size[1] * (width / float(image.size[0])))
-    elif height is not None:
-        height = float(height)
-        width = int(image.size[0] * (height / float(image.size[1])))
+    original_x = float(image.size[0]) / image.size[1]
+
+    if limit_x > original_x:
+        width = height * original_x
+    elif limit_x <= original_x:
+        height = width / original_x
 
     return image.resize((int(width), int(height)), PIL.Image.ANTIALIAS)
