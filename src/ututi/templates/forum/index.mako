@@ -10,13 +10,15 @@
 
 <h1>${c.group.title}, ${c.group.year.year}</h1>
 
+<a href="${url(controller='groupforum', action='new_thread', id=c.group.id)}">${_("Post new topic")}</a>
+
 <table id="forum-thread-list">
 <tr>
   <th>${_('Subject')}</th><th>${_('Replies')}</th><th>${_('Last post')}</th>
 </tr>
 % for message in c.messages:
 <tr>
-  <td class="subject"><a href="${url(controller='group', action='forum_thread', id=c.group.id, thread_id=message['thread_id'])}">${message['subject']}</a></td>
+  <td class="subject"><a href="${url(controller='groupforum', action='thread', id=c.group.id, thread_id=message['thread_id'])}">${message['subject']}</a></td>
   <td class="count">${message['reply_count']}</td>
   <td class="author">
     <a class="profile-link" href="${url(controller='user', id=message['last_reply_author_id'])}">${message['last_reply_author_title']}</a>

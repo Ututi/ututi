@@ -3,7 +3,7 @@ import logging
 from datetime import date
 from os.path import splitext
 
-from pylons import c, config, request
+from pylons import c, config, request, url
 from pylons.controllers.util import redirect_to, abort
 from pylons.decorators import validate
 from pylons.i18n import _
@@ -94,23 +94,7 @@ def group_action(method):
     return _group_action
 
 
-def group_forum_action(method):
-    def _group_action(self, id, thread_id):
-        group = Group.get(id)
-        if group is None:
-            abort(404)
-        thread = meta.Session.query(GroupMailingListMessage).filter_by(id=thread_id).first()
-        if (thread is None or
-            thread.thread != thread or
-            thread.group != group):
-            abort(404)
-        c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
-        return method(self, group, thread)
-    return _group_action
-
-
-class GroupController(BaseController):
-    """Controller for group actions."""
+class GroupControllerBase(BaseController):
 
     def __before__(self):
         c.breadcrumbs = [
@@ -127,18 +111,22 @@ class GroupController(BaseController):
         """
         return [
             {'title': _('Home'),
-             'link': url_for(controller='group', action='group_home', id=c.group.id),
+             'link': url(controller='group', action='group_home', id=c.group.id),
              'selected': selected == 'group_home'},
             {'title': _('Forum'),
-             'link': url_for(controller='group', action='forum', id=c.group.id),
+             'link': url(controller='group', action='forum', id=c.group.id),
              'selected': selected == 'forum'},
             {'title': _('Members'),
-             'link': url_for(controller='group', action='members', id=c.group.id),
+             'link': url(controller='group', action='members', id=c.group.id),
              'selected': selected == 'members'},
             {'title': _('Files'),
-             'link': url_for(controller='group', action='files', id=c.group.id),
+             'link': url(controller='group', action='files', id=c.group.id),
              'selected': selected == 'files'},
             ]
+
+
+class GroupController(GroupControllerBase):
+    """Controller for group actions."""
 
     def index(self):
         c.groups = meta.Session.query(Group).all()
@@ -169,35 +157,6 @@ class GroupController(BaseController):
         meta.Session.commit()
         h.flash(_("The group's front page was updated."))
         redirect_to(controller='group', action='group_home', id=group.id)
-
-    def _top_level_messages(self, group):
-        messages = []
-        for message in meta.Session.query(GroupMailingListMessage)\
-                .filter_by(group_id=group.id, reply_to=None)\
-                .order_by(desc(GroupMailingListMessage.sent))\
-                .all():
-            msg = {'thread_id': message.id,
-                   'last_reply_author_id': message.posts[-1].author.id,
-                   'last_reply_author_title': message.posts[-1].author.fullname,
-                   'last_reply_date': message.posts[-1].sent,
-                   'reply_count': len(message.posts) - 1,
-                   'subject': message.subject}
-            messages.append(msg)
-        return messages
-
-    @group_action
-    def forum(self, group):
-        c.group = group
-        c.breadcrumbs.append(self._actions('forum'))
-        c.messages = self._top_level_messages(group)
-        return render('group/forum.mako')
-
-    @group_forum_action
-    def forum_thread(self, group, thread):
-        c.group = group
-        c.breadcrumbs.append(self._actions('forum'))
-        c.messages = thread.posts
-        return render('group/thread.mako')
 
     @group_action
     def files(self, group):

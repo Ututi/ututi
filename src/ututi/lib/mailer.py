@@ -18,7 +18,7 @@ class EmailInfo(object):
                                                           self.recipients)
 
 
-def send_email(sender, recipient, subject, body):
+def send_email(sender, recipient, subject, body, message_id=None):
     """Send an email.
 
     All arguments should be Unicode strings (plain ASCII works as well).
@@ -64,6 +64,8 @@ def send_email(sender, recipient, subject, body):
     msg['From'] = formataddr((sender_name, sender_addr))
     msg['To'] = formataddr((recipient_name, recipient_addr))
     msg['Subject'] = Header(unicode(subject), header_charset)
+    if message_id is not None:
+        msg['Message-ID'] = "<%s>" % message_id
 
     # Send the message via SMTP to localhost:25
     if not config.get('hold_emails', False):
@@ -74,6 +76,8 @@ def send_email(sender, recipient, subject, body):
         smtp.quit()
     else:
         mail_queue.append(EmailInfo(sender, recipient, msg.as_string()))
+
+    return msg.as_string()
 
 
 def raw_send_email(sender, recipients, message):

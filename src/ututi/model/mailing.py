@@ -52,7 +52,10 @@ class UtutiEmail(email.message.Message):
                 return value
 
     def getDate(self):
-        return email.utils.parsedate(self.getHeader('date'))
+        date = self.getHeader('date')
+        if date is None:
+            return datetime.utcnow()
+        return datetime.utcfromtimestamp(time.mktime(email.utils.parsedate(date)))
 
     def getMessageId(self):
         return self.getHeader('message-id')
@@ -186,6 +189,6 @@ class GroupMailingListMessage(object):
         self.author = self.getAuthor()
         self.message_id = message_id
         self.subject = subject
-        self.sent = datetime.fromtimestamp(time.mktime(sent))
+        self.sent = sent
         self.group_id = group_id
         self.reply_to = reply_to

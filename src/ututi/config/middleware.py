@@ -4,7 +4,7 @@ from paste.cascade import Cascade
 from paste.registry import RegistryManager
 from paste.urlparser import StaticURLParser
 from paste.deploy.converters import asbool
-from pylons import request, tmpl_context, response, session, config, translator
+from pylons import request, tmpl_context, response, session, config, translator, url
 from pylons.i18n.translation import _get_translator
 from pylons.middleware import ErrorHandler, StatusCodeRedirect
 from pylons.wsgiapp import PylonsApp
@@ -19,7 +19,7 @@ from repoze.who.config import make_middleware_with_config as make_who_with_confi
 
 
 def grok_app():
-    items = [request, tmpl_context, response, session]
+    items = [request, tmpl_context, response, session, url]
     translator._push_object(_get_translator(config.get('lang')))
 
     for item in items:

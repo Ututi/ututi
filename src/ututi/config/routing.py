@@ -41,10 +41,23 @@ def make_map():
     # essential ututi component routes go here
 
     map.connect('/group/{id}', controller='group', action='group_home')
+
+    map.connect('/group/{id}/forum',
+                controller='groupforum',
+                action='index')
+
+    map.connect('/group/{id}/forum/{action}',
+                controller='groupforum')
+
+    map.connect('/group/{id}/forum/thread/{thread_id}',
+                controller='groupforum',
+                action='thread')
+
+    map.connect('/group/{id}/forum/thread/{thread_id}/reply',
+                controller='groupforum',
+                action='reply')
+
     map.connect('/group/{id}/{action}', controller='group')
-    map.connect('/group/{id}/forum/{thread_id}',
-                controller='group',
-                action='forum_thread')
     map.connect('/group/{id}/logo/{width}/{height}', controller='group', action='logo')
     map.connect('/group/{id}/logo/{width}', controller='group', action='logo')
     map.connect('/groups', controller='group', action='index')
