@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 import csv
 import logging
 import base64
@@ -247,9 +246,9 @@ class AdminController(BaseController):
         for row in self._getReader():
             group_id, page_id, page_title, page_content, author_email = row
 
-            if page_content not in (u"Welcome, please write something here!",
-                                    u"Sveiki atvykę! Rašykite čia!",
-                                    u"Sveiki, savo aprašymą rašykite čia."):
+            if page_content not in (u'Welcome, please write something here!',
+                                    u'Sveiki atvyk\u0119! Ra\u0161ykite \u010dia!',
+                                    u'Sveiki, savo apra\u0161ym\u0105 ra\u0161ykite \u010dia.'):
                 group = Group.get(group_id)
                 group.page = page_content
                 meta.Session.commit()
