@@ -36,8 +36,10 @@ def resize_image(image, width=300, height=300):
     both width and height are specified.
 
     If only the width or height is passed, the other dimmension is
-    calculated from it. (XXX ignas - it's probably a bad idea, because
-    it makes us vulnerable to malicious extra long/ extra high images)
+    calculated from it.
+
+    Both dimmensions are capped at 300 unless the image is not
+    resized.
     """
     if width is None and height is None:
         return image
