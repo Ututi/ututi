@@ -19,7 +19,7 @@
   <td class="subject"><a href="${url(controller='group', action='forum_thread', id=c.group.id, thread_id=message['thread_id'])}">${message['subject']}</a></td>
   <td class="count">${message['reply_count']}</td>
   <td class="author">
-    <a class="profile-link" href="${url(controller='profile', id=message['last_reply_author_id'])}">${message['last_reply_author_title']}</a>
+    <a class="profile-link" href="${url(controller='user', id=message['last_reply_author_id'])}">${message['last_reply_author_title']}</a>
     <br/>
     <span class="date">${message['last_reply_date'].strftime("%Y.%m.%d %H:%M")}</span>
   </td>

@@ -9,9 +9,9 @@ ${_('student information online')}
 %if c.user:
   <div class="personal-logo">
     % if c.user.logo is not None:
-       <img src="${url(controller='profile', action='logo', id=c.user.id, width=45, height=60)}" alt="logo" />
+       <img src="${url(controller='user', action='logo', id=c.user.id, width=45, height=60)}" alt="logo" />
     % else:
-       <a href="${url(controller='user', action='edit')}" title="${_('Upload your personal logo')}">
+       <a href="${url(controller='profile', action='edit')}" title="${_('Upload your personal logo')}">
            ${h.image('/images/user_logo_45x60.png', alt='logo')|n}
        </a>
     % endif

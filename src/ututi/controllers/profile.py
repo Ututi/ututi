@@ -1,44 +1,92 @@
 import logging
 
-from sqlalchemy.orm.exc import NoResultFound
-from pylons.controllers.util import abort
-from pylons import c
-from pylons.i18n import _
+from formencode import Schema, validators
 from routes import url_for
 
-from ututi.lib.image import serve_image
-from ututi.lib.base import BaseController, render
+from pylons import request, c
+from pylons.controllers.util import redirect_to, abort
+from pylons.decorators import validate
+from pylons.i18n import _
 
-from ututi.model import meta, User
+from ututi.lib.base import BaseController, render
+from ututi.lib.emails import email_confirmation_request
+
+from ututi.model import meta, Email, File
 
 log = logging.getLogger(__name__)
 
 
-def profile_action(method):
-    def _profile_action(self, id):
-        user = User.get_byid(id)
-        if user is None:
-            abort(404)
-        return method(self, user)
-    return _profile_action
+class ProfileForm(Schema):
+    """A schema for validating user profile forms."""
+    allow_extra_fields = True
+    fullname = validators.String(not_empty=True)
 
 
 class ProfileController(BaseController):
+    """A controller for the user's personal information and actions."""
 
-    @profile_action
-    def index(self, user):
-        c.user_info = user
+    def index(self):
+        if c.user is not None:
+            c.fullname = c.user.fullname
+            c.emails = [email.email for email in
+                        meta.Session.query(Email).filter_by(id=c.user.id).filter_by(confirmed=False).all()]
+            c.emails_confirmed = [email.email for email in
+                                  meta.Session.query(Email).filter_by(id=c.user.id).filter_by(confirmed=True).all()]
+            return render('profile/profile.mako')
+        else:
+            abort(401, 'You are not authenticated')
+
+    def edit(self):
+        if c.user is None:
+            abort(401, 'You are not authenticated')
+
         c.breadcrumbs = [
-            {'title': user.fullname,
-             'link': url_for(controller='profile', action='index', id=user.id)}
+            {'title': c.user.fullname,
+             'link': url_for(controller='profile', action='index', id=c.user.id)},
+            {'title': _('Edit'),
+             'link': url_for(controller='profile', action='edit', id=c.user.id)}
             ]
 
-        return render('profile/index.mako')
+        return render('profile/edit.mako')
 
-    def logo(self, id, width=None, height=None):
-        try:
-            user = meta.Session.query(User).filter_by(id=id).one()
-        except NoResultFound:
-            abort(404)
+    @validate(ProfileForm, form='edit')
+    def update(self):
+        fields = ('fullname', 'logo_upload', 'logo_delete')
+        values = {}
 
-        return serve_image(user.logo, width, height)
+        for field in fields:
+            values[field] = request.POST.get(field, None)
+
+        c.user.fullname = values['fullname']
+
+        if values['logo_delete'] == 'delete' and c.user.logo is not None:
+            meta.Session.delete(c.user.logo)
+            c.user.logo = None
+
+        if values['logo_upload'] is not None and values['logo_upload'] != '':
+            logo = values['logo_upload']
+            f = File(logo.filename, 'Avatar for %s' % c.user.fullname, mimetype=logo.type)
+            f.store(logo.file)
+            meta.Session.add(f)
+            if c.user.logo is not None:
+                meta.Session.delete(c.user.logo)
+            c.user.logo = f
+
+        meta.Session.commit()
+        redirect_to(controller='profile', action='index')
+
+    def confirm_emails(self):
+        if c.user is not None:
+            emails = request.POST.getall('email')
+            for email in emails:
+                email_confirmation_request(c.user, email)
+            redirect_to(controller='profile', action='index')
+        else:
+            redirect_to(controller='home', action='index')
+
+    def confirm_user_email(self, key):
+        email = meta.Session.query(Email).filter_by(confirmation_key=key).first()
+        email.confirmed = True
+        email.confirmation_key = ''
+        meta.Session.commit()
+        redirect_to(controller='profile', action='index')

@@ -58,9 +58,9 @@
     </%def>
     %for member in c.group.last_seen_members[:3]:
     <div class="user-link">
-      <a href="${url(controller='profile', action='index', id=member.id)}" title="${member.fullname}">
+      <a href="${url(controller='user', action='index', id=member.id)}" title="${member.fullname}">
         %if member.logo is not None:
-          <img src="${url(controller='profile', action='logo', id=member.id, width=40)}" alt="${member.fullname}"/>
+          <img src="${url(controller='user', action='logo', id=member.id, width=40)}" alt="${member.fullname}"/>
         %else:
           ${h.image('/images/user_logo_small.png', alt=member.fullname)|n}
         %endif
