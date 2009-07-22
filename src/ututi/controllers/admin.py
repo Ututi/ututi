@@ -242,7 +242,6 @@ class AdminController(BaseController):
         redirect_to(controller='admin', action='index')
 
     def import_group_pages(self):
-        # XXX will be changed to import only one page as the group's page.
         for row in self._getReader():
             group_id, page_id, page_title, page_content, author_email = row
 
