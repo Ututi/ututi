@@ -104,6 +104,15 @@ def test_resize_image():
         >>> result.size
         (300, 300)
 
+
+    If we do not pass any dimmensions we should get the original image
+    back:
+
+        >>> img = Image.new("RGB", (45, 60))
+        >>> result = resize_image(img, None, None)
+        >>> result.size
+        (45, 60)
+
     """
 
 

@@ -41,4 +41,4 @@ class UserController(BaseController):
         except NoResultFound:
             abort(404)
 
-        return serve_image(user.logo, width, height)
+        return serve_image(user.logo, int(width), int(height))

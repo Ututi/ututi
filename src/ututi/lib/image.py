@@ -39,6 +39,9 @@ def resize_image(image, width=300, height=300):
     calculated from it. (XXX ignas - it's probably a bad idea, because
     it makes us vulnerable to malicious extra long/ extra high images)
     """
+    if width is None and height is None:
+        return image
+
     width = width or 300
     height = height or 300
 
