@@ -1,6 +1,7 @@
 import logging
 
 from formencode import Schema, validators, Invalid, All
+from datetime import date
 
 from pylons import request, response, c
 from pylons.controllers.util import redirect_to, abort
@@ -95,4 +96,11 @@ class HomeController(BaseController):
 
           sign_in_user(email)
 
-          redirect_to(controller='home', action='home')
+          redirect_to(controller='home', action='welcome')
+
+     def welcome(self):
+          if c.user is None:
+               abort(401, 'You are not authenticated')
+          c.current_year = date.today().year
+          c.years = range(c.current_year - 10, c.current_year + 5)
+          return  render('home/welcome.mako')

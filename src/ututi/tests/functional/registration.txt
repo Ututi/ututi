@@ -19,8 +19,9 @@ We will only require your email address, name and password:
 After registration is complete we should be hailed by our welcome
 screen:
 
-    >>> browser.printQuery("id('page-content')//h1/text()")
-    Welcome Jonas Petraitis Petrauskas!
+    >>> browser.printQuery("id('page-content')//h3/text()")
+    Join a group
+    Review and edit your profile
 
 An email, requesting the confirmation of the email address entered is sent:
 

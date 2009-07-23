@@ -1,0 +1,27 @@
+.hidden {
+  display: none;
+}
+
+.ac_results {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: none;
+}
+
+.ac_results ul {
+  margin: 0;
+  padding: 0;
+  border: 2px solid #adaca4;
+}
+
+.ac_results li {
+  list-style-type: none;
+  padding: 2px 0 5px 5px;
+  color: #aa5500;
+}
+
+.ac_over {
+  background: #f2ebe3;
+}
+

@@ -2,11 +2,12 @@ import logging
 
 from formencode import Schema, validators, Invalid
 from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy import or_
 
 from pylons.controllers.util import abort
 from pylons import request, c
 from pylons.controllers.util import redirect_to
-from pylons.decorators import validate
+from pylons.decorators import validate, jsonify
 from pylons.i18n import _
 
 from ututi.lib.image import serve_image
@@ -95,3 +96,22 @@ class StructureController(BaseController):
     def logo(self, id, width=None, height=None):
         tag = meta.Session.query(LocationTag).filter_by(id=id).one()
         return serve_image(tag.logo, width, height)
+
+    @jsonify
+    def completions(self):
+        text = request.GET.get('q', '')
+        parent = request.GET.get('parent', None)
+
+        meta.engine.echo = True
+        query = meta.Session.query(LocationTag).filter(or_(LocationTag.title_short.op('ILIKE')('%s%%' % text),
+                                                           LocationTag.title.op('ILIKE')('%s%%' % text)))
+        parent = LocationTag.get(parent)
+        query = query.filter(LocationTag.parent==parent)
+
+        results = []
+
+        for tag in query.all():
+            has_children = meta.Session.query(LocationTag).filter(LocationTag.parent==tag).all() != []
+            results.append({'id': tag.title_short, 'title': tag.title, 'path': '/'.join(tag.path), 'has_children': has_children})
+
+        return {'values' : results}

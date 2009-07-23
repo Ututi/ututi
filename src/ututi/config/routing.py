@@ -85,6 +85,9 @@ def make_map():
     map.connect('/confirm_emails', controller='profile', action='confirm_emails')
     map.connect('/confirm_user_email/{key}', controller='profile', action='confirm_user_email')
 
+    #user registration path
+    map.connect('/welcome', controller='home', action='welcome')
+
     # CUSTOM ROUTES HERE
     map.connect('/', controller='home')
     map.connect('/home', controller='home', action='home')
@@ -92,6 +95,7 @@ def make_map():
 
     map.connect('/got_mail', controller='receivemail', action='index')
     map.connect('/admin', controller='admin', action='index')
+    map.connect('/structure/completions/{text}', controller='structure', action='completions')
     map.connect('/structure', controller='structure', action='index')
     map.connect('/structure/{id}/logo/{width}/{height}',
                 controller='structure', action='logo')

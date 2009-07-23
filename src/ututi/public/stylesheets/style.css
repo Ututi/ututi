@@ -646,3 +646,7 @@ ul.breadcrumb_dropdown.expanded {
   text-decoration: underline;
   cursor: pointer;
 }
+
+.message {
+  color: #808080
+}
