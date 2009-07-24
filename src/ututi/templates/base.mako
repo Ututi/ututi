@@ -41,6 +41,7 @@ ${_('student information online')}
     </span>
   </div>
 %else:
+${h.javascript_link('/javascripts/forms.js')|n}
 <form method="post" id="login_form" action="${url('/dologin')}">
   %if request.GET.get('came_from'):
   <input type="hidden" name="came_from" value="${request.GET.get('came_from')}" />

@@ -2,7 +2,7 @@
 
 <%def name="head_tags()">
 ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
-${h.javascript_link('/javascripts/forms.js')|n}
+
 </%def>
 
 <div id="block-left">
