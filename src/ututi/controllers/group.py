@@ -8,7 +8,7 @@ from pylons.controllers.util import redirect_to, abort
 from pylons.decorators import validate
 from pylons.i18n import _
 
-from formencode import Schema, validators, Invalid
+from formencode import Schema, validators, Invalid, variabledecode
 from sqlalchemy.sql.expression import desc
 from sqlalchemy.orm.exc import NoResultFound
 
@@ -17,7 +17,7 @@ from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import HtmlSanitizeValidator
 from ututi.model.mailing import GroupMailingListMessage
-from ututi.model import meta, Group, File
+from ututi.model import meta, Group, File, LocationTag
 from routes import url_for
 
 log = logging.getLogger(__name__)
@@ -75,6 +75,7 @@ class EditGroupForm(Schema):
 
 class NewGroupForm(EditGroupForm):
     """A schema for validating new group forms."""
+    pre_validators = [variabledecode.NestedVariables()]
 
     id = GroupIdValidator()
 
@@ -217,6 +218,11 @@ class GroupController(BaseController):
                       title=values['title'],
                       description=values['description'],
                       year=date(int(values['year']), 1, 1))
+
+        location = values.get('schoolsearch', [])
+        tag = LocationTag.get_by_title(location)
+        group.location = tag
+
         meta.Session.add(group)
 
         if values['logo_upload'] is not None:

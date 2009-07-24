@@ -1,4 +1,5 @@
 <%inherit file="/base.mako" />
+<%namespace file="/widgets/locationtag.mako" import="*"/>
 
 <%def name="title()">
 ${_('New group')}
@@ -17,8 +18,8 @@ ${_('New group')}
     <input type="text" id="title" name="title" class="line"/>
   </div>
   <div class="form-field">
-    <label for="description">${_('Description')}</label>
-    <textarea class="line" name="description" id="description" cols="25" rows="5"></textarea>
+    <label>${_('School')}</label>
+    ${location_widget(3)}
   </div>
   <div class="form-field">
     <label for="year">${_("Year")}</label>
@@ -32,6 +33,11 @@ ${_('New group')}
       %endfor
     </select>
   </div>
+  <div class="form-field">
+    <label for="description">${_('Description')}</label>
+    <textarea class="line" name="description" id="description" cols="25" rows="5"></textarea>
+  </div>
+
   <div class="form-field">
     <label for="logo_upload">${_('Group logo')}</label>
     <input type="file" name="logo_upload" id="logo_upload" class="line"/>

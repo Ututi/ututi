@@ -12,7 +12,7 @@
 </div>
 ${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
 ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
-<script lang="javascript">
+<script type="text/javascript">
   var paths = []
   var top_path = 0
   $(".structure-complete").each(function(i) {
@@ -28,7 +28,7 @@ ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
       parse: function(data){
         var alts = new Array();
         var vals = data['values']
-        for(var i=0;i<vals.length;i++){
+        for(var i=0;i < vals.length();i++){
           alts[alts.length] = { data:vals[i], value:vals[i].id, result:vals[i].title };
         }
         return alts;
