@@ -530,6 +530,20 @@ class LocationTag(object):
                 return None
         return tag
 
+    @classmethod
+    def get_by_title(cls, title):
+        """A method to return the tag by its full title. A list can be passed for hierarchical traversal."""
+        if not isinstance(title, list):
+            title = [title]
+
+        tag = None
+        for title_full in filter(bool, title):
+            try:
+                tag = meta.Session.query(LocationTag)\
+                    .filter_by(title=title_full, parent=tag).one()
+            except NoResultFound:
+                return None
+        return tag
 
 class File(object):
     """Class representing user-uploaded files."""
