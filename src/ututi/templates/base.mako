@@ -60,7 +60,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
     <a class="small-link small XXX" href="#">Forgotten password?</a>
   </div>
 </form>
-<script lang="javascript">
+<script type="text/javascript">
   $(".overlay label").labelOver('over');
 </script>
 %endif

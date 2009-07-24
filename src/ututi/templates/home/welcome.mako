@@ -7,6 +7,7 @@
 <%def name="head_tags()">
 ${h.stylesheet_link('/stylesheets/home.css')|n}
 ${h.stylesheet_link('/stylesheets/suggestions.css')|n}
+${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
 
 </%def>
 

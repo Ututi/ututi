@@ -1,6 +1,10 @@
 <%inherit file="/base.mako" />
 <%namespace file="/widgets/locationtag.mako" import="*"/>
 
+<%def name="head_tags()">
+${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
+</%def>
+
 <%def name="title()">
 ${_('New group')}
 </%def>
