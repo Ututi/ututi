@@ -1,0 +1,20 @@
+# -*- mode: org -*-
+
+* text search
+
+** postgresql-based options
+http://www.postgresql.org/docs/8.3/static/textsearch.html
+http://www.sai.msu.su/~megera/postgres/gist/tsearch/V2/ (tsearch2, integrated into postgresql >=8.3)
+
+** python-based
+http://www.arnebrodowski.de/blog/add-full-text-search-to-your-django-project-with-whoosh.html (whoosh)
+http://trac.whoosh.ca/ (whoosh, stemming will probably be an issue)
+http://pypi.python.org/pypi/GrassyKnoll/0.3 (grassyknoll, still in alpha)
+http://freshmeat.net/projects/magpy/?branch_id=60124&release_id=205199 (magpy, only a wrapper for mg)
+http://lucene.apache.org/pylucene/ (pylucene, an extension for accessing lucene from python)
+...
+
+** opinions
+Currently I am thinking of going the postgresql way. Especially since it supports using ispell for stemming 
+and stop-word lists.
+
