@@ -6,8 +6,7 @@
   %for i in rng:
     <% cls = i > 0 and 'hidden' or '' %>
     <div class="location-tag-field ${cls}">
-      <input type="hidden" name="location-path-${i}" id="location-path-${i}" class="location-path" value=""/>
-      <input type="text" name="school-search-${i}" id="school-search-${i}" class="line structure-complete"/>
+      <input type="text" name="schoolsearch-${i}" id="schoolsearch-${i}" class="line structure-complete"/>
     </div>
   %endfor
 </div>
