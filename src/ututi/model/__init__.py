@@ -532,7 +532,7 @@ class LocationTag(object):
 
     @classmethod
     def get_by_title(cls, title):
-        """A method to return the tag by its full title.
+        """A method to return the tag either by its full title or its short title.
 
         A list can be passed for hierarchical traversal.
         """
@@ -545,7 +545,12 @@ class LocationTag(object):
                 tag = meta.Session.query(LocationTag)\
                     .filter_by(title=title_full, parent=tag).one()
             except NoResultFound:
-                return None
+                try:
+                    tag = meta.Session.query(LocationTag)\
+                        .filter_by(title_short=title_full, parent=tag).one()
+                except NoResultFound:
+                    tag = None
+                    break
         return tag
 
 
