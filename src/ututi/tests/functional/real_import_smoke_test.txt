@@ -17,8 +17,8 @@ And upload all the files one by one:
 
     >>> from ututi.tests.functional import import_csv
     >>> import_csv(browser, 'import_users', 'export_users.csv')
-    >>> import_csv(browser, 'import_groups', 'export_groups.csv')
     >>> import_csv(browser, 'import_structure', 'export_structure.csv')
+    >>> import_csv(browser, 'import_groups', 'export_groups.csv')
     >>> import_csv(browser, 'import_subjects', 'export_subjects.csv')
     >>> import_csv(browser, 'import_group_members', 'export_group_members.csv')
     >>> import_csv(browser, 'import_user_logos', 'export_user_logos.csv')
