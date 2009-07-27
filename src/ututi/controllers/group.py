@@ -75,6 +75,7 @@ class EditGroupForm(Schema):
 
 class NewGroupForm(EditGroupForm):
     """A schema for validating new group forms."""
+
     pre_validators = [variabledecode.NestedVariables()]
 
     id = GroupIdValidator()
