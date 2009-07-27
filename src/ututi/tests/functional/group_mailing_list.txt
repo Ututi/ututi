@@ -1,4 +1,5 @@
 Test for group mailing list UI
+from ututi.tests import printQuery
 ==============================
 
     >>> browser = Browser()
@@ -106,7 +107,7 @@ The email gets sent to all the members of the group:
     From: admin@ututi.lt
     To: admin@ututi.lt
     Subject: Hi mom
-    Message-ID: <@fake_host>
+    Message-ID: <...@fake_host>
     <BLANKLINE>
     I am doing fine. Send more cash.
 
@@ -115,13 +116,16 @@ And we get redirected to our newly created thread
     >>> browser.url
     'http://localhost/group/moderators/forum/thread/5'
 
-    >>> browser.printQuery("id('page-content')/div")
-    <div>
-      <div>Adminas Adminovix -- Hi mom</div>
-      <pre>
+    >>> browser.printQuery("id('page-content')//div[@class='thread-post']")
+    <div class="thread-post">
+      <div class="post-title">Adminas Adminovix -- Hi mom</div>
+      <pre class="post-body">
         I am doing fine. Send more cash.
       </pre>
     </div>
+
+If we go back to the forum, we should see the new thread in the list
+of threads:
 
     >>> browser.getLink('Forum').click()
     >>> browser.printQuery("id('forum-thread-list')")
@@ -154,6 +158,48 @@ And we get redirected to our newly created thread
         </td>
       </tr>
     </table>
+
+Let's go back to it now, and post a reply:
+
+    >>> browser.getLink('Hi mom').click()
+    >>> browser.getControl('Message').value = "Oh, and don't forget to feed the fish!"
+    >>> browser.getControl('Reply').click()
+
+The email gets sent.
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> print mail_queue.pop().message
+    MIME-Version: 1.0
+    Content-Type: text/plain; charset="us-ascii"
+    Content-Transfer-Encoding: 7bit
+    From: admin@ututi.lt
+    To: admin@ututi.lt
+    Subject: Re: Hi mom
+    Message-ID: <...@fake_host>
+    In-reply-to: <...@fake_host>
+    <BLANKLINE>
+    Oh, and don't forget to feed the fish!
+
+We still should be looking at the thread:
+
+    >>> browser.url
+    'http://localhost/group/moderators/forum/thread/5'
+
+And our new message should be in the list:
+
+    >>> browser.printQuery("id('page-content')//div[@class='thread-post']")
+    <div class="thread-post">
+      <div class="post-title">Adminas Adminovix -- Hi mom</div>
+      <pre class="post-body">
+        I am doing fine. Send more cash.
+      </pre>
+    </div>
+    <div class="thread-post">
+      <div class="post-title">Adminas Adminovix -- Re: Hi mom</div>
+      <pre class="post-body">
+        Oh, and don't forget to feed the fish!
+      </pre>
+    </div>
 
 And clean up the email queue:
 

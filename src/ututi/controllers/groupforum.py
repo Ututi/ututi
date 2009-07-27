@@ -1,11 +1,15 @@
 #
+from datetime import datetime
+
 from sqlalchemy.sql.expression import desc
 from formencode import Schema, validators
+
 from pylons.decorators import validate
 from pylons.controllers.util import redirect_to
 from pylons.controllers.util import abort
 from pylons import c, config
 
+from mimetools import choose_boundary
 from ututi.lib.mailer import send_email
 from ututi.lib.base import render
 from ututi.controllers.group import group_action
@@ -29,13 +33,18 @@ def group_forum_action(method):
     return _group_action
 
 
-class NewMailForm(Schema):
+class NewReplyForm(Schema):
     """A schema for validating group edits."""
 
     allow_extra_fields = True
 
-    subject = validators.UnicodeString(not_empty=True, strip=True)
     message = validators.UnicodeString(not_empty=True, strip=True)
+
+
+class NewMailForm(NewReplyForm):
+    """A schema for validating group edits."""
+
+    subject = validators.UnicodeString(not_empty=True, strip=True)
 
 
 class GroupforumController(GroupControllerBase):
@@ -66,14 +75,28 @@ class GroupforumController(GroupControllerBase):
     @group_forum_action
     def thread(self, group, thread):
         c.group = group
+        c.thread = thread
         c.breadcrumbs.append(self._actions('forum'))
         c.messages = thread.posts
         return render('forum/thread.mako')
 
     @group_forum_action
-    @validate(NewMailForm)
+    @validate(NewReplyForm)
     def reply(self, group, thread):
-        pass
+        last_post = thread.posts[-1]
+        message = send_email(c.user.emails[0].email,
+                             self._recipients(group),
+                             u"Re: %s" % thread.subject,
+                             self.form_result['message'],
+                             message_id=self._generateMessageId(),
+                             reply_to=last_post.message_id)
+        post = GroupMailingListMessage.fromMessageText(message)
+        post.group = group
+        post.reply_to = last_post
+        meta.Session.commit()
+        redirect_to(controller='groupforum',
+                    action='thread',
+                    id=group.id, thread_id=thread.id)
 
     @group_action
     def new_thread(self, group):
@@ -91,7 +114,7 @@ class GroupforumController(GroupControllerBase):
 
     def _generateMessageId(self):
         host = config.get('mailing_list_host', '')
-        return "@%s" % host
+        return "%s@%s" % (choose_boundary(), host)
 
     @group_action
     @validate(NewMailForm, form='new_thread')
