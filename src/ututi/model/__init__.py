@@ -532,7 +532,10 @@ class LocationTag(object):
 
     @classmethod
     def get_by_title(cls, title):
-        """A method to return the tag by its full title. A list can be passed for hierarchical traversal."""
+        """A method to return the tag by its full title.
+
+        A list can be passed for hierarchical traversal.
+        """
         if not isinstance(title, list):
             title = [title]
 
@@ -544,6 +547,7 @@ class LocationTag(object):
             except NoResultFound:
                 return None
         return tag
+
 
 class File(object):
     """Class representing user-uploaded files."""
