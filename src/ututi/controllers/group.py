@@ -8,6 +8,7 @@ from pylons.controllers.util import redirect_to, abort
 from pylons.decorators import validate
 from pylons.i18n import _
 
+from formencode.foreach import ForEach
 from formencode import Schema, validators, Invalid, variabledecode
 from sqlalchemy.sql.expression import desc
 from sqlalchemy.orm.exc import NoResultFound
@@ -71,6 +72,7 @@ class EditGroupForm(Schema):
     year = validators.String()
     logo_upload = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
     logo_delete = validators.StringBoolean(if_missing=False)
+    schoolsearch = ForEach(validators.String(strip=True))
 
 
 class NewGroupForm(EditGroupForm):
