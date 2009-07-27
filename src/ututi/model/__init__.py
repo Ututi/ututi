@@ -525,7 +525,7 @@ class LocationTag(object):
         for title_short in filter(bool, path):
             try:
                 tag = meta.Session.query(LocationTag)\
-                    .filter_by(title_short=title_short, parent=tag).one()
+                    .filter_by(title_short=title_short.lower(), parent=tag).one()
             except NoResultFound:
                 return None
         return tag

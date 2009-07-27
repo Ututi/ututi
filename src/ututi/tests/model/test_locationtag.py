@@ -20,6 +20,31 @@ def test_LocationTag_getbytitle():
         >>> tag.title_short, tag.title
         (u'ef', u'Ekonomikos fakultetas')
 
+    """
+
+
+def test_LocationTag_get():
+    r"""Tests for location tag retrieval by the short title.
+
+    The defualt LocationTag getter retrieves location tags by their
+    short title. (a parent == None is assumed)
+
+        >>> tag = LocationTag.get(u'vu')
+        >>> tag.title
+        u'Vilniaus universitetas'
+
+    Or if passed a list of tags, the first tag is considered to be a
+    parent, of the second one and so on...
+
+        >>> tag = LocationTag.get([u'vu', u'ef'])
+        >>> tag.title_short, tag.title
+        (u'ef', u'Ekonomikos fakultetas')
+
+    The lookup is case insensitive.
+
+        >>> tag = LocationTag.get([u'Vu', u'eF'])
+        >>> tag.title_short, tag.title
+        (u'ef', u'Ekonomikos fakultetas')
 
     """
 
