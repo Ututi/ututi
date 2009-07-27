@@ -9,7 +9,7 @@ from pylons.decorators import validate
 from pylons.i18n import _
 
 from formencode.foreach import ForEach
-from formencode import Schema, validators, Invalid, variabledecode
+from formencode import Schema, validators, Invalid, All, variabledecode
 from sqlalchemy.sql.expression import desc
 from sqlalchemy.orm.exc import NoResultFound
 
@@ -48,6 +48,22 @@ class GroupIdValidator(validators.FancyValidator):
                 raise Invalid(self.message('badId', state), value, state)
 
 
+class LocationTagsValidator(validators.FancyValidator):
+    """A validator that tests if the specified location tags are correct."""
+
+    messages = {
+        'badTag': _(u"Location does not exist.")
+        }
+
+    def _to_python(self, value, state):
+        return value
+
+    def validate_python(self, value, state):
+        tag = LocationTag.get_by_title(value)
+        if tag is None:
+            raise Invalid(self.message('badTag', state), value, state)
+
+
 class FileUploadTypeValidator(validators.FancyValidator):
     """ A validator to check uploaded file types."""
 
@@ -79,7 +95,8 @@ class NewGroupForm(EditGroupForm):
     """A schema for validating new group forms."""
 
     pre_validators = [variabledecode.NestedVariables()]
-
+    schoolsearch = All(ForEach(validators.String(strip=True)),
+                                  LocationTagsValidator())
     id = GroupIdValidator()
 
 

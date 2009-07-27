@@ -1,7 +1,7 @@
 <%def name="location_widget(number)">
 
 <div class="location-tag-widget">
-
+<form:error name="schoolsearch">
   <% rng = range(number) %>
   %for i in rng:
     <% cls = i > 0 and 'hidden' or '' %>
