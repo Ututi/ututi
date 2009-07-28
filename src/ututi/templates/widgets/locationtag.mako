@@ -1,11 +1,15 @@
-<%def name="location_widget(number)">
+<%def name="location_widget(number, values=[])">
 
 <div class="location-tag-widget">
 <form:error name="schoolsearch">
   <% rng = range(number) %>
   %for i in rng:
     <div class="location-tag-field">
-      <input type="text" name="schoolsearch-${i}" id="schoolsearch-${i}" class="line structure-complete"/>
+      %if len(values) > i:
+        <input type="text" name="schoolsearch-${i}" id="schoolsearch-${i}" class="line structure-complete" value="${values[i]}"/>
+      %else:
+        <input type="text" name="schoolsearch-${i}" id="schoolsearch-${i}" class="line structure-complete" value=""/>
+      %endif
     </div>
   %endfor
 </div>
@@ -15,7 +19,7 @@ ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
   /* hide extra inputs */
   var flr = 0;
   $(".location-tag-field").each(function(i) {
-    if ($(this).val() != '') {
+    if ($(this).children('input').val() != '') {
       flr = flr + 1;
     }
     if (i > flr) {
@@ -23,17 +27,28 @@ ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
     }
   });
 
-  var paths = []
-  var top_path = 0
   $(".structure-complete").each(function(i) {
-    paths[i] = '';
-    $(this).autocomplete("${url(controller='structure', action='completions')}", {
+    $(this).autocomplete("${url(controller='structure', action='completions')}", {\
+      cacheLength: 0,
       dataType:"json",
-      highlight: null,
+      highlight: false,
       max: 10,
+      matchCase: false,
+      matchSubset: false,
+      matchContains: false,
+      mustMatch: true,
       selectFirst: true,
       formatItem: function(data,i,value,result){
         return data.title;
+      },
+      before: function(input) {
+        var ind = $(".structure-complete").index(input);
+        var options = this.extraParams;
+        $(".structure-complete").each(function(i) {
+          if (i < ind) {
+            options['parent-'+i] = $(this).val();
+          }
+        });
       },
       parse: function(data){
         var alts = new Array();
@@ -44,9 +59,6 @@ ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
         return alts;
       },
       extraParams: {
-        parent: function(input) {
-          return paths[top_path];
-        }
       }
     });
 
@@ -61,10 +73,10 @@ ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
           }
         });
 
-        paths[ind] = data.path
-        top_path = ind
-        if (data.has_children) {
-          $(".location-tag-field").eq(ind+1).removeClass("hidden");
+        if (data.has_children == true) {
+          var next_item = $(".location-tag-field").eq(ind+1);
+          $(next_item).removeClass("hidden");
+          $(next_item).children('input').val('').focus();
         } else {
           $(".form-field.hidden:first").removeClass("hidden");
         }

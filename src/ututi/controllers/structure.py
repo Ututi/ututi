@@ -1,6 +1,6 @@
 import logging
 
-from formencode import Schema, validators, Invalid
+from formencode import Schema, validators, Invalid, variabledecode
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy import or_
 
@@ -44,6 +44,10 @@ class NewStructureForm(Schema):
     description = validators.UnicodeString(strip=True)
     parent = StructureIdValidator()
 
+
+class AutoCompletionForm(Schema):
+    allow_extra_fields = True
+    pre_validators = [variabledecode.NestedVariables()]
 
 class StructureController(BaseController):
 
@@ -97,15 +101,16 @@ class StructureController(BaseController):
         tag = meta.Session.query(LocationTag).filter_by(id=id).one()
         return serve_image(tag.logo, width, height)
 
+    @validate(schema=AutoCompletionForm)
     @jsonify
     def completions(self):
-        text = request.GET.get('q', '')
-        parent = request.GET.get('parent', None)
+        text = self.form_result.get('q', '')
+        parent = self.form_result.get('parent', '')
 
         meta.engine.echo = True
         query = meta.Session.query(LocationTag).filter(or_(LocationTag.title_short.op('ILIKE')('%s%%' % text),
                                                            LocationTag.title.op('ILIKE')('%s%%' % text)))
-        parent = LocationTag.get(parent)
+        parent = LocationTag.get_by_title(parent)
         query = query.filter(LocationTag.parent==parent)
 
         results = []
