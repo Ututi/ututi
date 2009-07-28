@@ -104,7 +104,6 @@ def test_resize_image():
         >>> result.size
         (300, 300)
 
-
     If we do not pass any dimmensions we should get the original image
     back:
 
@@ -112,6 +111,25 @@ def test_resize_image():
         >>> result = resize_image(img, None, None)
         >>> result.size
         (45, 60)
+
+    None, empty string or a string contianing an integer are handled
+    as inputs too:
+
+        >>> result = resize_image(img, None, 120)
+        >>> result.size
+        (90, 120)
+
+        >>> result = resize_image(img, 90, None)
+        >>> result.size
+        (90, 120)
+
+        >>> result = resize_image(img, '180')
+        >>> result.size
+        (180, 240)
+
+        >>> result = resize_image(img, None, '180')
+        >>> result.size
+        (135, 180)
 
     """
 

@@ -47,8 +47,8 @@ def resize_image(image, width=300, height=300):
     width = width or 300
     height = height or 300
 
-    width = min(300, width)
-    height = min(300, height)
+    width = min(300, int(width))
+    height = min(300, int(height))
 
     width = float(width)
     height = float(height)
