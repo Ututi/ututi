@@ -3,7 +3,7 @@
 * text search
 
 ** postgresql-based options
-http://www.postgresql.org/docs/8.3/static/textsearch.html
+http://www.postgresql.org/docs/8        .3/static/textsearch.html
 http://www.sai.msu.su/~megera/postgres/gist/tsearch/V2/ (tsearch2, integrated into postgresql >=8.3)
 
 ** python-based
@@ -18,3 +18,30 @@ http://lucene.apache.org/pylucene/ (pylucene, an extension for accessing lucene 
 Currently I am thinking of going the postgresql way. Especially since it supports using ispell for stemming 
 and stop-word lists.
 
+
+* implementation - postgresql
+
+Diegiam žodyną.
+sudo apt-get install myspell-lt
+
+Įdiegus turėtų automatiškai pasileisti pg_updatedicts.
+
+Sukuriame naują žodyną:
+CREATE TEXT SEARCH DICTIONARY lithuanian (
+    TEMPLATE = ispell,
+    DictFile = system_lt_lt,
+    AffFile = system_lt_lt
+);
+
+Sukuriame naują text search konfigūraciją:
+CREATE TEXT SEARCH CONFIGURATION public.lt ( COPY = pg_catalog.english );
+ALTER TEXT SEARCH CONFIGURATION lt
+    ALTER MAPPING FOR asciiword, asciihword, hword_asciipart,
+                      word, hword, hword_part
+    WITH lithuanian
+
+Nustatome kaip default:
+SET default_text_search_config = 'public.pg';
+
+Pabandome:
+select plainto_tsquery('aukštesnioji mokytojas');
