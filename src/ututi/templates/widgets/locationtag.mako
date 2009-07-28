@@ -4,8 +4,7 @@
 <form:error name="schoolsearch">
   <% rng = range(number) %>
   %for i in rng:
-    <% cls = i > 0 and 'hidden' or '' %>
-    <div class="location-tag-field ${cls}">
+    <div class="location-tag-field">
       <input type="text" name="schoolsearch-${i}" id="schoolsearch-${i}" class="line structure-complete"/>
     </div>
   %endfor
@@ -13,6 +12,17 @@
 ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
 <script type="text/javascript">
 //<![CDATA[
+  /* hide extra inputs */
+  var flr = 0;
+  $(".location-tag-field").each(function(i) {
+    if ($(this).val() != '') {
+      flr = flr + 1;
+    }
+    if (i > flr) {
+      $(this).addClass("hidden");
+    }
+  });
+
   var paths = []
   var top_path = 0
   $(".structure-complete").each(function(i) {
