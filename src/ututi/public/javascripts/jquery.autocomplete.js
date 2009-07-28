@@ -330,7 +330,9 @@ $.Autocompleter = function(input, options) {
 			success(term, data);
 		// if an AJAX url has been supplied, try loading the data now
 		} else if( (typeof options.url == "string") && (options.url.length > 0) ){
-
+            if (typeof options.before == "function") {
+              options.before(input);
+            }
 			var extraParams = {
 				timestamp: +new Date()
 			};
@@ -340,6 +342,7 @@ $.Autocompleter = function(input, options) {
 
 			$.ajax({
 				// try to leverage ajaxQueue plugin to abort previous requests
+                type: "POST",
 				mode: "abort",
 				// limit abortion to this input
 				port: "autocomplete" + input.name,
@@ -397,6 +400,7 @@ $.Autocompleter.defaults = {
 	cacheLength: 10,
 	max: 100,
 	mustMatch: false,
+    before: null,
 	extraParams: {},
 	selectFirst: true,
 	formatItem: function(row) { return row[0]; },
