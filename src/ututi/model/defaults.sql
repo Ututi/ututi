@@ -1,3 +1,18 @@
+/* Language - specific configuration for full text search */
+CREATE TEXT SEARCH DICTIONARY lithuanian (
+    TEMPLATE = ispell,
+    DictFile = system_lt_lt,
+    AffFile = system_lt_lt
+);;
+
+CREATE TEXT SEARCH CONFIGURATION public.lt ( COPY = pg_catalog.english );
+ALTER TEXT SEARCH CONFIGURATION lt
+    ALTER MAPPING FOR asciiword, asciihword, hword_asciipart,
+                      word, hword, hword_part
+    WITH lithuanian;;
+
+SET default_text_search_config = 'public.lt';;
+
 /* A table for files */
 
 create table files (id bigserial not null,
