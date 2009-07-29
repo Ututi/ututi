@@ -226,3 +226,81 @@ create table group_mailing_list_attachments (
        file_id int8 references files(id) not null,
        foreign key (message_id, group_id) references group_mailing_list_messages,
        primary key (message_id, group_id, file_id));;
+
+/* A table for search indexing */
+create table search_items (
+       id bigserial not null,
+       terms tsvector,
+       group_id varchar(250) references groups(id) on delete cascade default null,
+       page_id int8 references pages(id) on delete cascade default null,
+       subject_id varchar(150) default null,
+       subject_location_id int8 default null,
+       foreign key (subject_id, subject_location_id) references subjects on delete cascade,
+       primary key (id));;
+
+create index search_items_idx on search_items using gin(terms);;
+
+CREATE FUNCTION update_group_search() RETURNS trigger AS $$
+    DECLARE
+        search_id int8 := NULL;
+    BEGIN
+      SELECT id INTO search_id  FROM search_items WHERE group_id = NEW.id;
+      IF FOUND THEN
+        UPDATE search_items SET terms = to_tsvector(coalesce(NEW.id,''))
+          || to_tsvector(coalesce(NEW.title,''))
+          || to_tsvector(coalesce(NEW.description, ''))
+          || to_tsvector(coalesce(NEW.page, ''))
+          WHERE id=search_id;
+      ELSE
+        INSERT INTO search_items (group_id, terms) VALUES (NEW.id,
+          to_tsvector(coalesce(NEW.id,''))
+          || to_tsvector(coalesce(NEW.title,''))
+          || to_tsvector(coalesce(NEW.description, ''))
+          || to_tsvector(coalesce(NEW.page, '')));
+      END IF;
+      RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+
+CREATE TRIGGER update_group_search AFTER INSERT OR UPDATE ON groups
+    FOR EACH ROW EXECUTE PROCEDURE update_group_search();;
+
+CREATE FUNCTION update_page_search() RETURNS trigger AS $$
+    DECLARE
+        search_id int8 := NULL;
+    BEGIN
+      SELECT id INTO search_id  FROM search_items WHERE page_id = NEW.page_id;
+      IF FOUND THEN
+        UPDATE search_items SET terms = to_tsvector(coalesce(NEW.title,''))
+          || to_tsvector(coalesce(NEW.content,'')) WHERE id=search_id;
+      ELSE
+        INSERT INTO search_items (page_id, terms) VALUES (NEW.page_id,
+          to_tsvector(coalesce(NEW.title,'')) || to_tsvector(coalesce(NEW.content, '')));
+      END IF;
+      RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+CREATE TRIGGER update_page_search AFTER INSERT OR UPDATE ON page_versions
+    FOR EACH ROW EXECUTE PROCEDURE update_page_search();;
+
+CREATE FUNCTION update_subject_search() RETURNS trigger AS $$
+    DECLARE
+        search_id int8 := NULL;
+    BEGIN
+      SELECT id INTO search_id  FROM search_items WHERE subject_id = NEW.id and subject_location_id = NEW.location_id;
+      IF FOUND THEN
+        UPDATE search_items SET terms = to_tsvector(coalesce(NEW.title,''))
+          || to_tsvector(coalesce(NEW.lecturer,'')) WHERE id=search_id;
+      ELSE
+        INSERT INTO search_items (subject_id, subject_location_id, terms) VALUES (NEW.id, NEW.location_id,
+          to_tsvector(coalesce(NEW.title,''))
+          || to_tsvector(coalesce(NEW.lecturer, '')));
+      END IF;
+      RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+CREATE TRIGGER update_subject_search AFTER INSERT OR UPDATE ON subjects
+    FOR EACH ROW EXECUTE PROCEDURE update_subject_search();;
