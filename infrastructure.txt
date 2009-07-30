@@ -60,6 +60,10 @@ To debug sql alchemy statements:
 
 meta.engine.echo = True
 
+Shell:
+
+bin/paster --plugin=Pylons shell development.ini
+
 
 * Add/Edit forms
 
