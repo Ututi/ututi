@@ -67,23 +67,24 @@ $get_user_by_email$ LANGUAGE sql;;
 insert into emails (id, email, confirmed) values (1, 'admin@ututi.lt', true);;
 
 /* A table for universities and faculties (maybe later even tags) */
-create table locationtags (id bigserial not null,
-       parent_id int8 references locationtags(id) default null,
+create table tags (id bigserial not null,
+       parent_id int8 references tags(id) default null,
        title varchar(250),
        title_short varchar(50),
        description text,
        logo_id int8 references files(id) default null,
+       location_tag bool default false,
        primary key (id));;
 
-insert into locationtags (title, title_short, description)
+insert into tags (title, title_short, description)
        values ('Vilniaus universitetas', 'vu', 'Seniausias universitetas Lietuvoje.');;
-insert into locationtags (title, title_short, description, parent_id)
+insert into tags (title, title_short, description, parent_id)
        values ('Ekonomikos fakultetas', 'ef', '', 1);;
 
 /* A table for groups */
 create table groups (id varchar(250) not null,
        title varchar(250) not null,
-       location_id int8 references locationtags(id) default null,
+       location_id int8 references tags(id) default null,
        year date not null,
        description text,
        show_page bool default true,
@@ -106,8 +107,8 @@ create table group_members (
 
 
 insert into groups (id, title, description, year, location_id)
-       select 'moderators', 'Moderatoriai', 'U2ti moderatoriai.', date('2009-1-1'), locationtags.id
-              from locationtags where locationtags.title_short='vu' and locationtags.parent_id is null;;
+       select 'moderators', 'Moderatoriai', 'U2ti moderatoriai.', date('2009-1-1'), tags.id
+              from tags where tags.title_short='vu' and tags.parent_id is null;;
 
 insert into group_membership_types (membership_type)
                       values ('administrator');;
@@ -121,12 +122,12 @@ insert into group_members (group_id, user_id, membership_type)
 create table subjects (id varchar(150) default null,
        title varchar(500) not null,
        lecturer varchar(500) default null,
-       location_id int8 references locationtags(id) not null,
+       location_id int8 references tags(id) not null,
        primary key (id, location_id));;
 
 insert into subjects (id, title, lecturer, location_id)
-       select 'mat_analize', 'Matematinė analizė', 'prof. E. Misevičius', locationtags.id
-              from locationtags where locationtags.title_short='vu' and locationtags.parent_id is null;;
+       select 'mat_analize', 'Matematinė analizė', 'prof. E. Misevičius', tags.id
+              from tags where tags.title_short='vu' and tags.parent_id is null;;
 
 /* A table that tracks subject files */
 

@@ -51,8 +51,8 @@ def setup_orm(engine):
     orm.mapper(Email, emails_table)
 
     global locationtags_table
-    locationtags_table = Table("locationtags", meta.metadata,
-                               Column('id', Integer, Sequence('locationtags_id_seq'), primary_key=True),
+    locationtags_table = Table("tags", meta.metadata,
+                               Column('id', Integer, Sequence('tags_id_seq'), primary_key=True),
                                Column('title_short', Unicode(assert_unicode=True)),
                                Column('title', Unicode(assert_unicode=True)),
                                Column('description', Unicode(assert_unicode=True)),
