@@ -50,8 +50,8 @@ def setup_orm(engine):
                          autoload_with=engine)
     orm.mapper(Email, emails_table)
 
-    global locationtags_table
-    locationtags_table = Table("tags", meta.metadata,
+    global tags_table
+    tags_table = Table("tags", meta.metadata,
                                Column('id', Integer, Sequence('tags_id_seq'), primary_key=True),
                                Column('title_short', Unicode(assert_unicode=True)),
                                Column('title', Unicode(assert_unicode=True)),
@@ -59,12 +59,16 @@ def setup_orm(engine):
                                useexisting=True,
                                autoload=True,
                                autoload_with=engine)
+    tag_mapper = orm.mapper(Tag,
+                            tags_table,
+                            properties = {'logo': relation(File)})
+
     orm.mapper(LocationTag,
-               locationtags_table,
-               properties = {'children': relation(LocationTag,
-                                                  backref=backref('parent',
-                                                                  remote_side=locationtags_table.c.id)),
-                             'logo': relation(File)})
+               inherits=tag_mapper,
+               polymorphic_on=tags_table.c.tag_type,
+               polymorphic_identity='location',
+               properties = {'children': relation(LocationTag, backref=backref('parent', remote_side=tags_table.c.id))})
+
     global files_table
     files_table = Table("files", meta.metadata,
                         Column('id', Integer, Sequence('files_id_seq'), primary_key=True),
@@ -496,8 +500,27 @@ class PageVersion(object):
         if created is not None:
             self.created = created
 
+class Tag(object):
+    """Class representing tags in general."""
 
-class LocationTag(object):
+    def __init__(self, title, title_short, description):
+        self.title = title
+        self.description = description
+
+    @classmethod
+    def get(cls, id):
+        tag = meta.Session.query(Tag)
+        if isinstance(id, unicode):
+            tag.filter_by(title=id.lower())
+        else:
+            tag.filter_by(id=id)
+        try:
+            return tag.one()
+        except NoResultFound:
+            return None
+
+
+class LocationTag(Tag):
     """Class representing the university and faculty tags."""
 
     def __init__(self, title, title_short, description, parent=None):

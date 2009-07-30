@@ -70,16 +70,16 @@ insert into emails (id, email, confirmed) values (1, 'admin@ututi.lt', true);;
 create table tags (id bigserial not null,
        parent_id int8 references tags(id) default null,
        title varchar(250),
-       title_short varchar(50),
+       title_short varchar(50) default null,
        description text,
        logo_id int8 references files(id) default null,
-       location_tag bool default false,
+       tag_type varchar(10) default null,
        primary key (id));;
 
-insert into tags (title, title_short, description)
-       values ('Vilniaus universitetas', 'vu', 'Seniausias universitetas Lietuvoje.');;
-insert into tags (title, title_short, description, parent_id)
-       values ('Ekonomikos fakultetas', 'ef', '', 1);;
+insert into tags (title, title_short, description, tag_type)
+       values ('Vilniaus universitetas', 'vu', 'Seniausias universitetas Lietuvoje.', 'location');;
+insert into tags (title, title_short, description, parent_id, tag_type)
+       values ('Ekonomikos fakultetas', 'ef', '', 1, 'location');;
 
 /* A table for groups */
 create table groups (id varchar(250) not null,
