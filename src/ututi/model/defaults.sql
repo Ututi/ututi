@@ -11,8 +11,6 @@ ALTER TEXT SEARCH CONFIGURATION lt
                       word, hword, hword_part
     WITH lithuanian;;
 
-SET default_text_search_config = 'public.lt';;
-
 /* A table for files */
 
 create table files (id bigserial not null,
