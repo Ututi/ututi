@@ -3,6 +3,7 @@ import sys
 import os
 import hashlib
 import sha, binascii
+import warnings
 from binascii import a2b_base64, b2a_base64
 from routes.util import url_for
 from pylons import request
@@ -12,9 +13,9 @@ from datetime import date
 
 from pylons import config
 
-from sqlalchemy import orm, Column, Integer, Sequence, Table
+from sqlalchemy import orm, Column, Integer, Sequence, Table, select
 from sqlalchemy.types import Unicode
-from sqlalchemy.exc import DatabaseError
+from sqlalchemy.exc import DatabaseError, SAWarning
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm import relation, backref
 from sqlalchemy.sql.expression import and_
@@ -177,6 +178,23 @@ def setup_orm(engine):
                properties ={'subject': relation(Subject),
                             'user': relation(User)
                             })
+
+    # ignoring error about unknown column type for now
+    warnings.simplefilter("ignore", SAWarning)
+
+    search_items_table = Table("search_items", meta.metadata,
+                               autoload=True,
+                               autoload_with=engine)
+
+    warnings.simplefilter("default", SAWarning)
+
+    search_items_select = select([search_items_table.c.id,
+                                  search_items_table.c.group_id,
+                                  search_items_table.c.page_id,
+                                  search_items_table.c.subject_id,
+                                  search_items_table.c.subject_location_id]).alias('search_items_limited')
+
+    orm.mapper(SearchItem, search_items_select)
 
     from ututi.model import mailing
     mailing.setup_orm(engine)
@@ -671,6 +689,9 @@ class File(object):
 
         return hash.hexdigest()
 
+
+class SearchItem(object):
+    pass
 
 # Reimports for convenience
 from ututi.model.mailing import GroupMailingListMessage
