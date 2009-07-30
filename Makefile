@@ -194,6 +194,7 @@ ubuntu-environment:
 	 apt-get build-dep python-psycopg2; \
 	 apt-get install build-essential python-all python-all-dev postgresql; \
 	 apt-get install enscript; \
+	 apt-get install myspell-lt; \
 	 echo "Installation Complete: Next... Run 'make'."; \
 	} fi
 
