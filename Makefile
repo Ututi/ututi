@@ -196,3 +196,7 @@ ubuntu-environment:
 	 apt-get install enscript; \
 	 echo "Installation Complete: Next... Run 'make'."; \
 	} fi
+
+.PHONY: shell
+shell: bin/paster instance/done instance/var/run/.s.PGSQL.${PGPORT}
+	bin/paster --plugin=Pylons shell development.ini
