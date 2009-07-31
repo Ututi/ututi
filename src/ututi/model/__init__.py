@@ -188,13 +188,10 @@ def setup_orm(engine):
 
     warnings.simplefilter("default", SAWarning)
 
-    search_items_select = select([search_items_table.c.id,
-                                  search_items_table.c.group_id,
-                                  search_items_table.c.page_id,
-                                  search_items_table.c.subject_id,
-                                  search_items_table.c.subject_location_id]).alias('search_items_limited')
-
-    orm.mapper(SearchItem, search_items_select)
+    orm.mapper(SearchItem, search_items_table,
+               properties={'subject' : relation(Subject),
+                           'group' : relation(Group),
+                           'page' : relation(Page)})
 
     from ututi.model import mailing
     mailing.setup_orm(engine)
@@ -691,7 +688,17 @@ class File(object):
 
 
 class SearchItem(object):
-    pass
+    @property
+    def object(self):
+        if self.group_id is not None:
+            return self.group
+        elif self.subject_id is not None:
+            return self.subject
+        elif self.page_id is not None:
+            return self.page
+        else:
+            return None
+
 
 # Reimports for convenience
 from ututi.model.mailing import GroupMailingListMessage
