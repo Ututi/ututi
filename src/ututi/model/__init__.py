@@ -70,6 +70,12 @@ def setup_orm(engine):
                polymorphic_identity='location',
                properties = {'children': relation(LocationTag, backref=backref('parent', remote_side=tags_table.c.id))})
 
+    orm.mapper(SimpleTag,
+               inherits=tag_mapper,
+               polymorphic_on=tags_table.c.tag_type,
+               polymorphic_identity='')
+
+
     global files_table
     files_table = Table("files", meta.metadata,
                         Column('id', Integer, Sequence('files_id_seq'), primary_key=True),
@@ -533,6 +539,11 @@ class Tag(object):
             return tag.one()
         except NoResultFound:
             return None
+
+class SimpleTag(Tag):
+    """Class for simple (i.e. not location or hierarchy -aware) tags."""
+    def __init__(self, title):
+        self.title = title.lower()
 
 
 class LocationTag(Tag):

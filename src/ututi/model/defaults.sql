@@ -66,12 +66,12 @@ $get_user_by_email$ LANGUAGE sql;;
 
 insert into emails (id, email, confirmed) values (1, 'admin@ututi.lt', true);;
 
-/* A table for universities and faculties (maybe later even tags) */
+/* A table for tags (location and simple tags) */
 create table tags (id bigserial not null,
        parent_id int8 references tags(id) default null,
-       title varchar(250),
+       title varchar(250) not null,
        title_short varchar(50) default null,
-       description text,
+       description text default null,
        logo_id int8 references files(id) default null,
        tag_type varchar(10) default null,
        primary key (id));;
