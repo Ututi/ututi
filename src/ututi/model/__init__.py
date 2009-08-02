@@ -51,6 +51,12 @@ def setup_orm(engine):
                          autoload_with=engine)
     orm.mapper(Email, emails_table)
 
+    #relationships between content items and tags
+    global content_tags_table
+    content_tags_table = Table("content_tags", meta.metadata,
+                               autoload=True,
+                               autoload_with=engine)
+
     global tags_table
     tags_table = Table("tags", meta.metadata,
                                Column('id', Integer, Sequence('tags_id_seq'), primary_key=True),
@@ -97,7 +103,9 @@ def setup_orm(engine):
     pages_table = Table("pages", meta.metadata,
                         autoload=True,
                         autoload_with=engine)
-    orm.mapper(Page, pages_table)
+    orm.mapper(Page, pages_table,
+               properties={'tags': relation(SimpleTag,
+                                            secondary=content_tags_table)})
 
     global page_versions_table
     page_versions_table = Table("page_versions", meta.metadata,
@@ -128,7 +136,9 @@ def setup_orm(engine):
                                              secondary=subject_files_table),
                            'pages': relation(Page,
                                              secondary=subject_pages_table),
-                           'location': relation(LocationTag)})
+                           'location': relation(LocationTag),
+                           'tags' : relation(SimpleTag,
+                                             secondary=content_tags_table)})
 
     global group_membership_types_table
     group_membership_types_table = Table("group_membership_types", meta.metadata,
@@ -172,8 +182,10 @@ def setup_orm(engine):
                                               secondary=group_files_table),
                             'watched_subjects': relation(Subject,
                                                          secondary=group_watched_subjects_table),
-                            'location': relation(LocationTag)
-                            })
+                            'location': relation(LocationTag),
+                            'tags' : relation(SimpleTag,
+                                              secondary=content_tags_table)})
+
 
     global user_monitored_subjects_table
     user_monitored_subjects_table = Table("user_monitored_subjects", meta.metadata,

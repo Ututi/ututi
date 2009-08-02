@@ -318,3 +318,13 @@ $$ LANGUAGE plpgsql;;
 
 CREATE TRIGGER update_subject_search AFTER INSERT OR UPDATE ON subjects
     FOR EACH ROW EXECUTE PROCEDURE update_subject_search();;
+
+/* A table for connecting tags and the tagged content */
+create table content_tags (id bigserial not null,
+       group_id varchar(250) references groups(id) on delete cascade default null,
+       page_id int8 references pages(id) on delete cascade default null,
+       subject_id varchar(150) default null,
+       subject_location_id int8 default null,
+       tag_id int8 references tags(id) not null,
+       foreign key (subject_id, subject_location_id) references subjects on delete cascade,
+       primary key (id));;
