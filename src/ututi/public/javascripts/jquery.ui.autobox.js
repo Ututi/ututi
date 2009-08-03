@@ -75,7 +75,7 @@
   };
 
   function addBox(input, text, name){
-    var ii = $('<input type="hidden"></input>');ii.attr('name', name+'-'+count++);ii.val(text);
+    var ii = $('<input type="hidden"></input>');ii.attr('name', name+'item-'+count++);ii.val(text);
     var li=$('<li class="bit-box"></li>').attr('id', 'bit-' + count).text(text);
     li.append($('<a href="#" class="closebutton"></a>')
           .bind('click', function(e) {
