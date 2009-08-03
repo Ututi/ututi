@@ -60,7 +60,7 @@
      });
   };
 
-  $.ui=$.ui || {}; $.ui.autobox=$.ui.autobox || {}; var active; var count=0;
+  $.ui=$.ui || {}; $.ui.autobox=$.ui.autobox || {}; var active; var count=0; var original_input;
 
   var KEY={
     ESC: 27,
@@ -75,8 +75,8 @@
   };
 
   function addBox(input, text, name){
-    var ii = $('<input type="hidden"></input>');ii.attr('name', name);ii.val(text);
-    var li=$('<li class="bit-box"></li>').attr('id', 'bit-' + count++).text(text);
+    var ii = $('<input type="hidden"></input>');ii.attr('name', name+'-'+count++);ii.val(text);
+    var li=$('<li class="bit-box"></li>').attr('id', 'bit-' + count).text(text);
     li.append($('<a href="#" class="closebutton"></a>')
           .bind('click', function(e) {
               li.remove();
@@ -85,6 +85,12 @@
       .append(ii);
     input.parent().before(li);
     input.val('');
+    /* storing the string in the original input too */
+    if (original_input.val() == '') {
+      original_input.val(text);
+    } else {
+      original_input.val(original_input.val() + ", "  + text);
+    }
   }
 
   $.fn.autoboxMode=function(container, input, size, opt){
@@ -102,7 +108,7 @@
       // Try hitting return to activate autobox and then hitting it again on blank input
       // to close it.  w/o checking the active object first this input.trigger() will barf.
       if(active && active[0] && $.data(active[0], "originalObject")){
-        addBox(input, $.data(active[0], "originalObject").text, opt.name);
+        addBox(input, $.data(active[0], "originalObject").toString(), opt.name);
       }
       else if(input.val()){ addBox(input, input.val(), opt.name); }
 
@@ -291,7 +297,8 @@
       var input=createHolder(self);
       input=input.find('input');
       opt.name=this.name;
-      self.removeAttr('name');
+      //self.removeAttr('name');
+      original_input = self;
       self.hide();
 
       if(opt.prevals){ for(var i in opt.prevals){ addBox(input, opt.prevals[i], opt.name); } }

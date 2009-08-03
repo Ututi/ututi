@@ -12,7 +12,7 @@ from pylons.i18n import _
 
 from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
-from ututi.model import meta, LocationTag
+from ututi.model import meta, LocationTag, SimpleTag
 
 log = logging.getLogger(__name__)
 
@@ -120,3 +120,18 @@ class StructureController(BaseController):
             results.append({'id': tag.title_short, 'title': tag.title, 'path': '/'.join(tag.path), 'has_children': has_children})
 
         return {'values' : results}
+
+    @jsonify
+    def autocomplete_tags(self):
+        text = request.GET.get('val', None)
+
+        # filter warnings
+        import warnings
+        warnings.filterwarnings('ignore', module='pylons.decorators')
+
+        if text:
+            query = meta.Session.query(SimpleTag).filter(SimpleTag.title.op('ILIKE')(u'%s%%' % text))
+            results = [tag.title for tag in query.all()]
+            return results
+
+        return None
