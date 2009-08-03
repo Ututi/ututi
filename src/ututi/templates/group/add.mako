@@ -1,8 +1,11 @@
 <%inherit file="/base.mako" />
+
 <%namespace file="/widgets/locationtag.mako" import="*"/>
+<%namespace file="/widgets/tags.mako" import="*"/>
 
 <%def name="head_tags()">
 ${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
+${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
 </%def>
 
 <%def name="title()">
@@ -37,6 +40,11 @@ ${_('New group')}
       %endfor
     </select>
   </div>
+  <div class="form-field">
+    <label for="tags">${_('Tags')}</label>
+    ${tags_widget()}
+  </div>
+
   <div class="form-field">
     <label for="description">${_('Description')}</label>
     <textarea class="line" name="description" id="description" cols="25" rows="5"></textarea>

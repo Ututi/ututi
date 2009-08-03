@@ -1,8 +1,10 @@
 <%inherit file="/group/home.mako" />
 <%namespace file="/widgets/locationtag.mako" import="*"/>
+<%namespace file="/widgets/tags.mako" import="*"/>
 
 <%def name="head_tags()">
 ${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
+${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
 </%def>
 
 
@@ -13,13 +15,18 @@ ${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
     <input type="text" class="line" id="title" name="title" value="${c.group.title}"/>
   </div>
   <div class="form-field">
+    <label for="description">${_('Description')}</label>
+    <textarea class="line" name="description" id="description" cols="25" rows="5">${c.group.description}</textarea>
+  </div>
+  <div class="form-field">
     <label for="location-0">${_('School')}</label>
     ${location_widget(3, c.group.location.hierarchy())}
   </div>
   <div class="form-field">
-    <label for="description">${_('Description')}</label>
-    <textarea class="line" name="description" id="description" cols="25" rows="5">${c.group.description}</textarea>
+    <label for="tags">${_('Tags')}</label>
+    ${tags_widget(c.group.tags_list)}
   </div>
+
   <div class="form-field">
     <label for="year">${_("Year")}</label>
     <select name="year" id="year">

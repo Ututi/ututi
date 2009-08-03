@@ -22,7 +22,7 @@ from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator
 
-from ututi.model import meta, Group, File
+from ututi.model import meta, Group, File, SimpleTag
 
 from routes import url_for
 
@@ -193,6 +193,15 @@ class GroupController(GroupControllerBase, FileViewMixin):
         tag = values.get('location', None)
         group.location = tag
 
+        #check to see what kind of tags we have got
+        tags = [tag.strip().lower() for tag in self.form_result.get('tagsitem', [])]
+        if tags == []:
+            tags = [tag.strip().lower() for tag in self.form_result.get('tags', '').split(',')]
+
+        group.tags = []
+        for tag in tags:
+            group.tags.append(SimpleTag.get(tag))
+
         meta.Session.add(group)
 
         if values['logo_upload'] is not None:
@@ -214,6 +223,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
     @group_action
     def edit(self, group):
         c.group = group
+        c.group.tags_list = ', '.join([tag.title for tag in c.group.tags])
         c.breadcrumbs.append(self._actions('group_home'))
 
         c.current_year = date.today().year
@@ -241,6 +251,16 @@ class GroupController(GroupControllerBase, FileViewMixin):
             if group.logo is not None:
                 meta.Session.delete(group.logo)
             group.logo = f
+
+        #check to see what kind of tags we have got
+        tags = [tag.strip().lower() for tag in self.form_result.get('tagsitem', [])]
+        if tags == []:
+            tags = [tag.strip().lower() for tag in self.form_result.get('tags', '').split(',')]
+
+        group.tags = []
+        for tag in tags:
+            group.tags.append(SimpleTag.get(tag))
+
 
         meta.Session.commit()
         redirect_to(controller='group', action='group_home', id=group.id)
