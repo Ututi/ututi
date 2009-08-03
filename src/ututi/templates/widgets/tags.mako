@@ -10,9 +10,13 @@ ${h.javascript_link('/javascripts/jquery.ui.autobox.ext.js')|n}
 //<![CDATA[
 $(document).ready(function() {
   $('input.tags').each(function() {
-    values = $(this).val().split(', ');
-    $(this).val('');
+    if ($(this).val() != '') {
+      values = $(this).val().split(', ');
+    } else {
+      values = [];
+    }
 
+    $(this).val('');
 
     $(this).autobox({
         ajax: "${url(controller='structure', action='autocomplete_tags')}",
