@@ -100,8 +100,8 @@ class SubjectController(BaseController, FileViewMixin):
         subj = Subject(id, title, location, lecturer)
 
         #check to see what kind of tags we have got
-        tags = [tag.strip().lower() for tag in self.form_result.get('tagsitem', None)]
-        if tags is None:
+        tags = [tag.strip().lower() for tag in self.form_result.get('tagsitem', [])]
+        if tags == []:
             tags = [tag.strip().lower() for tag in self.form_result.get('tags', '').split(',')]
 
         subj.tags = []
