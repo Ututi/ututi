@@ -1,0 +1,35 @@
+Subject and group tagging
+=========================
+
+Subjects can be tagged upon creation or when being edited.
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/subjects/add')
+
+    >>> browser.getControl(name='location-1').value = 'vu'
+    >>> browser.getControl(name='location-2').value = 'ef'
+    >>> browser.getControl('Id').value = 'mat_analize'
+    >>> browser.getControl('Title').value = 'Testing subject'
+    >>> browser.getControl('Tags').value = 'tag1, tag2, tag 3'
+    >>> browser.getControl('Save').click()
+    >>> browser.printQuery('//h1/text()')
+    Testing subject
+
+    >>> browser.url
+    'http://localhost/subject/vu/ef/mat_analize'
+
+Let's open the edit view and see if the tags were saved:
+
+    >>> browser.open('http://localhost/subject/vu/ef/mat_analize/edit')
+    >>> browser.getControl('Tags').value
+    'tag1, tag2, tag 3'
+    >>> browser.getControl('Tags').value = 'tag2, tag 3, new tag'
+    >>> browser.getControl('Save').click()
+    >>> browser.url
+    'http://localhost/subject/vu/ef/mat_analize'
+
+Once again, to check if the tags were saved:
+
+    >>> browser.open('http://localhost/subject/vu/ef/mat_analize/edit')
+    >>> browser.getControl('Tags').value
+    'tag2, tag 3, new tag'
+
