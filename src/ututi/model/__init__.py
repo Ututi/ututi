@@ -304,7 +304,7 @@ class User(object):
     @classmethod
     def get_byid(cls, id):
         try:
-            return meta.Session.query(User).filter_by(id=id).one()
+            return meta.Session.query(cls).filter_by(id=id).one()
         except NoResultFound:
             return None
 
@@ -542,7 +542,7 @@ class Tag(object):
 
     @classmethod
     def get(cls, id):
-        tag = meta.Session.query(Tag)
+        tag = meta.Session.query(cls)
         if isinstance(id, unicode):
             tag.filter_by(title=id.lower())
         else:
@@ -605,7 +605,7 @@ class LocationTag(Tag):
         tag = None
         for title_short in filter(bool, path):
             try:
-                tag = meta.Session.query(LocationTag)\
+                tag = meta.Session.query(cls)\
                     .filter(func.lower(LocationTag.title_short)==title_short.lower()).filter_by(parent=tag).one()
             except NoResultFound:
                 return None
@@ -623,11 +623,11 @@ class LocationTag(Tag):
         tag = None
         for title_full in filter(bool, title):
             try:
-                tag = meta.Session.query(LocationTag)\
+                tag = meta.Session.query(cls)\
                     .filter_by(title=title_full, parent=tag).one()
             except NoResultFound:
                 try:
-                    tag = meta.Session.query(LocationTag)\
+                    tag = meta.Session.query(cls)\
                         .filter_by(title_short=title_full, parent=tag).one()
                 except NoResultFound:
                     tag = None
