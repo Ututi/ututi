@@ -6,7 +6,7 @@ import sha, binascii
 import warnings
 from binascii import a2b_base64, b2a_base64
 from routes.util import url_for
-from pylons import request
+from pylons import url
 from random import randrange
 import pkg_resources
 from datetime import date
@@ -464,8 +464,6 @@ class Subject(object):
         return '/'.join(reversed(path))
 
     def url(self, controller='subject', action='home'):
-        url = request.environ['routes.url']
-
         return url(controller=controller,
                    action=action,
                    id=self.id,
@@ -687,6 +685,11 @@ class File(object):
         self.filesize = size
 
         f.close()
+
+    def url(self, controller='files', action='get'):
+        return url(controller=controller,
+                   action=action,
+                   id=self.id)
 
     def hash_chunked(self, file):
         """Calculate the checksum of a file in chunks."""
