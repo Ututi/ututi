@@ -1,9 +1,9 @@
-<%def name="tags_widget(value='')">
+<%def name="tags_widget(value='', name='tags')">
 ${h.javascript_link('/javascripts/jquery.ui.autobox.js')|n}
 ${h.javascript_link('/javascripts/jquery.ui.autobox.ext.js')|n}
 
 <div class="tag-widget">
-  <input type="text" class="tags line" value="${value}" name="tags"/>
+  <input type="text" class="tags line" value="${value}" name="${name}" id="${name}"/>
 </div>
 
 <script type="text/javascript">
