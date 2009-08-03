@@ -28,10 +28,12 @@ class SubjectIdValidator(validators.FormValidator):
     }
 
     def validate_python(self, form_dict, state):
+        old_subject = Subject.get(LocationTag.get(form_dict.get('old_location', '')),
+                                  form_dict.get('id', 0))
         # XXX test for id matching a tag
         location = form_dict['location']
         subject = Subject.get(location, form_dict['id'])
-        if subject is not None:
+        if subject is not None and not subject is old_subject:
             raise Invalid(self.message('duplicate', state),
                           form_dict, state)
 
@@ -48,6 +50,7 @@ class SubjectForm(Schema):
 
     title = validators.UnicodeString(not_empty=True, strip=True)
     lecturer = validators.UnicodeString(strip=True)
+    chained_validators = [SubjectIdValidator()]
 
 
 class NewSubjectForm(SubjectForm):
@@ -55,9 +58,6 @@ class NewSubjectForm(SubjectForm):
     id = All(validators.Regex(r'^[_\+\-a-zA-Z0-9]*$',
                               messages=msg),
              validators.String(max=50, strip=True, not_empty=True))
-
-    chained_validators = [SubjectIdValidator()]
-
 
 
 class SubjectController(BaseController, FileViewMixin):

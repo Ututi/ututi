@@ -17,7 +17,8 @@ ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
 
 <form method="post" action="${url(controller='subject', action='update', id=c.subject.id, tags=c.subject.location_path)}"
      id="subject_add_form" enctype="multipart/form-data">
-
+  <input type="hidden" name="id" value="${c.subject.id}"/>
+  <input type="hidden" name="old_location" value="${c.subject.location_path}"/>
   <div class="form-field">
     <label for="title">${_('Title')}</label>
     <input type="text" id="title" name="title" class="line" value="${c.subject.title}"/>
