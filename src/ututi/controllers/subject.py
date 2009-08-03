@@ -132,8 +132,8 @@ class SubjectController(BaseController, FileViewMixin):
         subject.location = self.form_result['location']
 
         #check to see what kind of tags we have got
-        tags = [tag.strip().lower() for tag in self.form_result.get('tagsitem', None)]
-        if tags is None:
+        tags = [tag.strip().lower() for tag in self.form_result.get('tagsitem', [])]
+        if tags == []:
             tags = [tag.strip().lower() for tag in self.form_result.get('tags', '').split(',')]
 
         subject.tags = []
