@@ -557,6 +557,16 @@ class SimpleTag(Tag):
     def __init__(self, title):
         self.title = title.lower()
 
+    @classmethod
+    def get(cls, title):
+        """The method queries for a matching tag, if not found, creates one."""
+        try:
+            tag = meta.Session.query(cls).filter_by(title=title.lower()).one()
+        except NoResultFound:
+            tag = cls(title)
+            meta.Session.add(tag)
+        return tag
+
 
 class LocationTag(Tag):
     """Class representing the university and faculty tags."""
