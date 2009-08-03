@@ -1,17 +1,21 @@
 import logging
 
+from webhelpers.html.tags import link_to
 from formencode.variabledecode import NestedVariables
 from formencode.foreach import ForEach
 from formencode.compound import Pipe
 from formencode import Schema, validators, Invalid, All
 from routes import url_for
 
-from pylons import c
+from pylons import c, request, url
+from pylons.templating import render_mako_def
 from pylons.decorators import validate
 from pylons.controllers.util import redirect_to, abort
 from pylons.i18n import _
 
-from ututi.model import meta, LocationTag, Page, Subject
+from ututi.model import File
+from ututi.model import meta, LocationTag, Subject
+from ututi.lib.fileview import FileViewMixin
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import LocationTagsValidator
 
@@ -55,7 +59,7 @@ class NewSubjectForm(Schema):
     chained_validators = [SubjectIdValidator()]
 
 
-class SubjectController(BaseController):
+class SubjectController(BaseController, FileViewMixin):
     """A controller for subjects."""
 
     def __before__(self):
@@ -101,3 +105,24 @@ class SubjectController(BaseController):
                     action='home',
                     id=subj.id,
                     tags=subj.location_path)
+
+    def upload_file(self, id, tags):
+        location = LocationTag.get(tags)
+        subject = Subject.get(location, id)
+        if subject is None:
+            abort(404)
+        return self._upload_file(subject)
+
+    def create_folder(self, id, tags):
+        location = LocationTag.get(tags)
+        subject = Subject.get(location, id)
+        if subject is None:
+            abort(404)
+        return self._create_folder(subject)
+
+    def delete_folder(self, id, tags):
+        location = LocationTag.get(tags)
+        subject = Subject.get(location, id)
+        if subject is None:
+            abort(404)
+        return self._delete_folder(subject)

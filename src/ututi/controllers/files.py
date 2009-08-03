@@ -6,7 +6,7 @@ from pylons.controllers.util import redirect_to
 from paste.fileapp import _FileIter
 
 from ututi.lib.base import BaseController, render
-from ututi.model import meta, File
+from ututi.model import meta, File, LocationTag, Subject, Group
 from sqlalchemy.orm.exc import NoResultFound
 from pylons.i18n import _
 from routes import url_for
@@ -53,3 +53,43 @@ class FilesController(BaseController):
         response.headers['Content-Disposition'] = 'attachment; filename=%s' % file.filename
         source = open(file.filepath(), 'r')
         return _FileIter(source)
+
+    def delete(self, id):
+        try:
+            file = meta.Session.query(File).filter_by(id=id).one()
+        except NoResultFound:
+            abort(404)
+        meta.Session.delete(file)
+        meta.Session.commit()
+
+    def move(self, id):
+        try:
+            file = meta.Session.query(File).filter_by(id=id).one()
+        except NoResultFound:
+            abort(404)
+
+        source_type = request.POST['source-type']
+        if source_type == 'group':
+            source = Group.get(request.POST['source-id'])
+        else:
+            source = Subject.get(LocationTag.get(request.POST['source-tags']),
+                                 request.POST['source-id'])
+
+        target_type = request.POST['target-type']
+        if target_type == 'group':
+            target = Group.get(request.POST['target-id'])
+        else:
+            target = Subject.get(LocationTag.get(request.POST['target-tags']),
+                                 request.POST['target-id'])
+
+        source_folder = file.folder
+
+        if source is not target:
+            source.files.remove(file)
+            target.files.append(file)
+        file.folder = request.POST['target-folder']
+
+        if source_folder and source.getFolder(source_folder) is None:
+            source.files.append(File.makeNullFile(source_folder))
+
+        meta.Session.commit()

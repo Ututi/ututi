@@ -373,10 +373,29 @@ class Folder(list):
         self.title = title
 
 
+class FolderMixin(object):
+
+    @property
+    def folders_dict(self):
+        result = {}
+        for file in self.files:
+            result.setdefault(file.folder, Folder(file.folder))
+            if not file.isNullFile():
+                result[file.folder].append(file)
+        return result
+
+    def getFolder(self, title):
+        return self.folders_dict.get(title, None)
+
+    @property
+    def folders(self):
+        return sorted(self.folders_dict.values(), key=lambda f: f.title)
+
+
 group_watched_subjects_table = None
 groups_table = None
 
-class Group(object):
+class Group(FolderMixin):
 
     @classmethod
     def get(cls, id):
@@ -391,15 +410,6 @@ class Group(object):
         return meta.Session.query(User).join((gmt,
                                       gmt.c.user_id == users_table.c.id))\
                                 .filter(gmt.c.group_id == self.id).all()
-
-    @property
-    def folders(self):
-        result = {}
-        for file in self.files:
-            result.setdefault(file.folder, Folder(file.folder))
-            if not file.isNullFile():
-                result[file.folder].append(file)
-        return sorted(result.values(), key=lambda f: f.title)
 
     def url(self, controller='group', action='group_home'):
         return url_for(controller=controller, action=action, id=self.id)
@@ -436,7 +446,7 @@ class GroupMembershipType(object):
 
 subjects_table = None
 
-class Subject(object):
+class Subject(FolderMixin):
 
     @classmethod
     def get(cls, location, id):
@@ -444,15 +454,6 @@ class Subject(object):
             return meta.Session.query(cls).filter_by(id=id, location=location).one()
         except NoResultFound:
             return None
-
-    @property
-    def folders(self):
-        result = {}
-        for file in self.files:
-            result.setdefault(file.folder, Folder(file.folder))
-            if not file.isNullFile():
-                result[file.folder].append(file)
-        return sorted(result.values(), key=lambda f: f.title)
 
     @property
     def location_path(self):

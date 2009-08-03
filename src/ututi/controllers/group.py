@@ -11,15 +11,19 @@ from pylons.i18n import _
 from formencode import Schema, validators, Invalid, variabledecode
 from formencode.compound import Pipe
 from formencode.foreach import ForEach
+
 from formencode.variabledecode import NestedVariables
+
 from sqlalchemy.orm.exc import NoResultFound
 
 import ututi.lib.helpers as h
+from ututi.lib.fileview import FileViewMixin
 from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator
-from ututi.model.mailing import GroupMailingListMessage
+
 from ututi.model import meta, Group, File
+
 from routes import url_for
 
 log = logging.getLogger(__name__)
@@ -133,7 +137,7 @@ class GroupControllerBase(BaseController):
             ]
 
 
-class GroupController(GroupControllerBase):
+class GroupController(GroupControllerBase, FileViewMixin):
     """Controller for group actions."""
 
     def index(self):
@@ -244,3 +248,15 @@ class GroupController(GroupControllerBase):
     def logo(self, id, width=None, height=None):
         group = Group.get(id)
         return serve_image(group.logo, width=width, height=height)
+
+    @group_action
+    def upload_file(self, group):
+        return self._upload_file(group)
+
+    @group_action
+    def create_folder(self, group):
+        return self._create_folder(group)
+
+    @group_action
+    def delete_folder(self, group):
+        return self._delete_folder(group)
