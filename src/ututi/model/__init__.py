@@ -6,7 +6,7 @@ import sha, binascii
 import warnings
 from binascii import a2b_base64, b2a_base64
 from routes.util import url_for
-from pylons import request
+from pylons import url
 from random import randrange
 import pkg_resources
 from datetime import date
@@ -18,6 +18,7 @@ from sqlalchemy.types import Unicode
 from sqlalchemy.exc import DatabaseError, SAWarning
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm import relation, backref
+from sqlalchemy import func
 from sqlalchemy.sql.expression import and_
 
 from ututi.migration import GreatMigrator
@@ -463,8 +464,6 @@ class Subject(object):
         return '/'.join(reversed(path))
 
     def url(self, controller='subject', action='home'):
-        url = request.environ['routes.url']
-
         return url(controller=controller,
                    action=action,
                    id=self.id,
@@ -596,7 +595,7 @@ class LocationTag(Tag):
         for title_short in filter(bool, path):
             try:
                 tag = meta.Session.query(LocationTag)\
-                    .filter_by(title_short=title_short.lower(), parent=tag).one()
+                    .filter(func.lower(LocationTag.title_short)==title_short.lower()).filter_by(parent=tag).one()
             except NoResultFound:
                 return None
         return tag
@@ -686,6 +685,11 @@ class File(object):
         self.filesize = size
 
         f.close()
+
+    def url(self, controller='files', action='get'):
+        return url(controller=controller,
+                   action=action,
+                   id=self.id)
 
     def hash_chunked(self, file):
         """Calculate the checksum of a file in chunks."""

@@ -1,4 +1,5 @@
 import csv
+import os
 import logging
 import base64
 
@@ -95,9 +96,9 @@ class AdminController(BaseController):
     def import_structure(self):
         for line in self._getReader():
             title = line[1]
-            title_short = line[0].lower()
+            title_short = line[0]
             description = line[2]
-            parent = line[3].lower()
+            parent = line[3]
 
             tag = LocationTag.get([parent, title_short])
             if tag is None:
@@ -220,6 +221,7 @@ class AdminController(BaseController):
             f.folder = line[1]
             # XXX dummy content at the moment
             f.store('Whatever!')
+            # f.store(open(os.path.join('/home/ignas/src/ututi/ututi/', line[5])))
             group.files.append(f)
 
             meta.Session.commit()
@@ -236,6 +238,7 @@ class AdminController(BaseController):
             f.folder = line[1]
             # XXX dummy content at the moment
             f.store('Whatever!')
+            # f.store(open(os.path.join('/home/ignas/src/ututi/ututi/', line[7])))
             subject.files.append(f)
 
             meta.Session.commit()
