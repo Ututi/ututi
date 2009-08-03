@@ -12,25 +12,9 @@ from pylons.i18n import _
 
 from ututi.model import meta, LocationTag, Page, Subject
 from ututi.lib.base import BaseController, render
+from ututi.lib.validators import LocationTagsValidator
 
 log = logging.getLogger(__name__)
-
-
-class LocationValidator(validators.FormValidator):
-
-    messages = {
-        'location_tag_not_found': _(u"Location tag with such name could not be found."),
-    }
-
-    def _to_python(self, form_dict, state):
-        tag = LocationTag.get(form_dict['location'])
-        form_dict['location'] = tag
-        return form_dict
-
-    def validate_python(self, form_dict, state):
-        if form_dict['location'] is None:
-            raise Invalid(self.message('location_tag_not_found', state),
-                          form_dict, state)
 
 
 class SubjectIdValidator(validators.FormValidator):
@@ -41,7 +25,7 @@ class SubjectIdValidator(validators.FormValidator):
 
     def validate_python(self, form_dict, state):
         # XXX test for id matching a tag
-        location = form_dict['location']
+        location = LocationTag.get_by_title((form_dict['schoolsearch']))
         subject = Subject.get(location, form_dict['id'])
         if subject is not None:
             raise Invalid(self.message('duplicate', state),
@@ -55,7 +39,8 @@ class NewSubjectForm(Schema):
 
     pre_validators = [NestedVariables()]
 
-    location = ForEach(validators.String(strip=True))
+    schoolsearch = All(ForEach(validators.String(strip=True)),
+                                  LocationTagsValidator())
 
     title = validators.UnicodeString(not_empty=True, strip=True)
     lecturer = validators.UnicodeString(strip=True)
@@ -66,8 +51,7 @@ class NewSubjectForm(Schema):
                               messages=msg),
              validators.String(max=50, strip=True, not_empty=True))
 
-    chained_validators = [LocationValidator(),
-                          SubjectIdValidator()]
+    chained_validators = [SubjectIdValidator()]
 
 
 class SubjectController(BaseController):
@@ -99,10 +83,11 @@ class SubjectController(BaseController):
 
     @validate(schema=NewSubjectForm, form='add')
     def create(self):
+        import pdb; pdb.set_trace()
         title = self.form_result['title']
         id = self.form_result['id'].lower()
         lecturer = self.form_result['lecturer']
-        location = self.form_result['location']
+        location = LocationTag.get_by_title(self.form_result['schoolsearch'])
 
         if lecturer == '':
             lecturer = None

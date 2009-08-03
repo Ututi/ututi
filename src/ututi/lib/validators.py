@@ -1,6 +1,9 @@
 from lxml.html.clean import Cleaner
 
-from formencode import validators
+from formencode import validators, Invalid
+from pylons.i18n import _
+
+from ututi.model import LocationTag
 
 def html_cleanup(input):
     cleaner = Cleaner(
@@ -33,3 +36,18 @@ class HtmlSanitizeValidator(validators.FancyValidator):
 
     def _to_python(self, value, state):
         return html_cleanup(value.strip())
+
+class LocationTagsValidator(validators.FancyValidator):
+    """A validator that tests if the specified location tags are correct."""
+
+    messages = {
+        'badTag': _(u"Location does not exist.")
+        }
+
+    def _to_python(self, value, state):
+        return value
+
+    def validate_python(self, value, state):
+        tag = LocationTag.get_by_title(value)
+        if tag is None:
+            raise Invalid(self.message('badTag', state), value, state)

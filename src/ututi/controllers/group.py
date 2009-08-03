@@ -16,7 +16,7 @@ from sqlalchemy.orm.exc import NoResultFound
 import ututi.lib.helpers as h
 from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
-from ututi.lib.validators import HtmlSanitizeValidator
+from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator
 from ututi.model.mailing import GroupMailingListMessage
 from ututi.model import meta, Group, File, LocationTag
 from routes import url_for
@@ -46,22 +46,6 @@ class GroupIdValidator(validators.FancyValidator):
             usernameRE = re.compile(r"^[^ \t\n\r@<>()]+$", re.I)
             if not usernameRE.search(value):
                 raise Invalid(self.message('badId', state), value, state)
-
-
-class LocationTagsValidator(validators.FancyValidator):
-    """A validator that tests if the specified location tags are correct."""
-
-    messages = {
-        'badTag': _(u"Location does not exist.")
-        }
-
-    def _to_python(self, value, state):
-        return value
-
-    def validate_python(self, value, state):
-        tag = LocationTag.get_by_title(value)
-        if tag is None:
-            raise Invalid(self.message('badTag', state), value, state)
 
 
 class FileUploadTypeValidator(validators.FancyValidator):
