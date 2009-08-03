@@ -24,6 +24,7 @@ Let's open the edit view and see if the tags were saved:
     'tag1, tag2, tag 3'
     >>> browser.getControl('Tags').value = 'tag2, tag 3, new tag'
     >>> browser.getControl('Save').click()
+
     >>> browser.url
     'http://localhost/subject/vu/ef/mat_analize'
 
@@ -32,4 +33,13 @@ Once again, to check if the tags were saved:
     >>> browser.open('http://localhost/subject/vu/ef/mat_analize/edit')
     >>> browser.getControl('Tags').value
     'tag2, tag 3, new tag'
+
+Let's try changing the location of the subject to get a clash with another subject:
+    >>> browser.getControl(name='location-0').value = 'vu'
+    >>> browser.getControl(name='location-1').value = ''
+    >>> browser.getControl('Save').click()
+    >>> browser.url
+    'http://localhost/subject/vu/ef/mat_analize/update'
+    >>> browser.printQuery("//span[@class='error-message']/text()")
+    Such id already exists, choose a different one.
 
