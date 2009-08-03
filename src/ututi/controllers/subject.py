@@ -79,8 +79,8 @@ class SubjectController(BaseController, FileViewMixin):
         if subject is None:
             abort(404)
 
-        c.breadcrumbs.append({'link': subject.url(),
-                              'title': subject.title})
+        c.breadcrumbs = [{'link': subject.url(),
+                              'title': subject.title}]
         c.subject = subject
         return render('subject/home.mako')
 
@@ -119,6 +119,8 @@ class SubjectController(BaseController, FileViewMixin):
     def edit(self, id, tags):
         location = LocationTag.get(tags)
         c.subject = Subject.get(location, id)
+        c.breadcrumbs = [{'link': c.subject.url(),
+                              'title': c.subject.title}]
         c.subject.tags_list = ', '.join([tag.title for tag in c.subject.tags])
         return render('subject/edit.mako')
 
