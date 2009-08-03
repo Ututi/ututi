@@ -1,21 +1,22 @@
 <%inherit file="/base.mako" />
 
+<%namespace file="/widgets/locationtag.mako" import="*"/>
+
+<%namespace file="/widgets/tags.mako" import="*"/>
+
 <%def name="title()">
 ${_('New subject')}
+</%def>
+
+<%def name="head_tags()">
+${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
+${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
 </%def>
 
 <h1>${_('New subject')}</h1>
 
 <form method="post" action="${url(controller='subject', action='create')}"
      id="subject_add_form" enctype="multipart/form-data">
-
-  <div class="form-field">
-    <label for="location">${_('Location')}</label>
-    <input type="text" id="location-1" name="location-1" class="line"/>
-    <input type="text" id="location-2" name="location-2" class="line"/>
-    <input type="text" id="location-3" name="location-3" class="line"/>
-  </div>
-
   <div class="form-field">
     <label for="id">${_('Id')}</label>
     <input type="text" id="id" name="id" class="line"/>
@@ -29,6 +30,15 @@ ${_('New subject')}
     <label for="lecturer">${_('Lecturer')}</label>
     <input type="text" id="lecturer" name="lecturer" class="line"/>
   </div>
+  <div class="form-field">
+    <label for="location-0">${_('School')}</label>
+    ${location_widget(3)}
+  </div>
+  <div class="form-field">
+    <label for="tags">${_('Tags')}</label>
+    ${tags_widget('abra, kadabra, brrr')}
+  </div>
+
   <div>
     <span class="btn">
       <input type="submit" value="${_('Save')}"/>

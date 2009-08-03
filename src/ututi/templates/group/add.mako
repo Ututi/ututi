@@ -22,7 +22,7 @@ ${_('New group')}
     <input type="text" id="title" name="title" class="line"/>
   </div>
   <div class="form-field">
-    <label for="schoolsearch-0">${_('School')}</label>
+    <label for="location-0">${_('School')}</label>
     ${location_widget(3)}
   </div>
   <div class="form-field">

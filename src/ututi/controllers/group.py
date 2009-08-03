@@ -72,14 +72,14 @@ class EditGroupForm(Schema):
     year = validators.String()
     logo_upload = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
     logo_delete = validators.StringBoolean(if_missing=False)
-    schoolsearch = ForEach(validators.String(strip=True))
+    location = ForEach(validators.String(strip=True))
 
 
 class NewGroupForm(EditGroupForm):
     """A schema for validating new group forms."""
 
     pre_validators = [variabledecode.NestedVariables()]
-    schoolsearch = All(ForEach(validators.String(strip=True)),
+    location = All(ForEach(validators.String(strip=True)),
                                   LocationTagsValidator())
     id = GroupIdValidator()
 
@@ -182,7 +182,7 @@ class GroupController(GroupControllerBase):
                       description=values['description'],
                       year=date(int(values['year']), 1, 1))
 
-        location = values.get('schoolsearch', [])
+        location = values.get('location', [])
         tag = LocationTag.get_by_title(location)
         group.location = tag
 

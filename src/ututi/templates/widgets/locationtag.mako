@@ -1,14 +1,14 @@
 <%def name="location_widget(number, values=[])">
 
 <div class="location-tag-widget">
-<form:error name="schoolsearch">
+<form:error name="location">
   <% rng = range(number) %>
   %for i in rng:
     <div class="location-tag-field">
       %if len(values) > i:
-        <input type="text" name="schoolsearch-${i}" id="schoolsearch-${i}" class="line structure-complete" value="${values[i]}"/>
+        <input type="text" name="location-${i}" id="location-${i}" class="line structure-complete" value="${values[i]}"/>
       %else:
-        <input type="text" name="schoolsearch-${i}" id="schoolsearch-${i}" class="line structure-complete" value=""/>
+        <input type="text" name="location-${i}" id="location-${i}" class="line structure-complete" value=""/>
       %endif
     </div>
   %endfor

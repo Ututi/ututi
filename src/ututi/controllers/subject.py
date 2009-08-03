@@ -25,7 +25,7 @@ class SubjectIdValidator(validators.FormValidator):
 
     def validate_python(self, form_dict, state):
         # XXX test for id matching a tag
-        location = LocationTag.get_by_title((form_dict['schoolsearch']))
+        location = LocationTag.get_by_title((form_dict['location']))
         subject = Subject.get(location, form_dict['id'])
         if subject is not None:
             raise Invalid(self.message('duplicate', state),
@@ -39,7 +39,7 @@ class NewSubjectForm(Schema):
 
     pre_validators = [NestedVariables()]
 
-    schoolsearch = All(ForEach(validators.String(strip=True)),
+    location = All(ForEach(validators.String(strip=True)),
                                   LocationTagsValidator())
 
     title = validators.UnicodeString(not_empty=True, strip=True)
@@ -83,11 +83,10 @@ class SubjectController(BaseController):
 
     @validate(schema=NewSubjectForm, form='add')
     def create(self):
-        import pdb; pdb.set_trace()
         title = self.form_result['title']
         id = self.form_result['id'].lower()
         lecturer = self.form_result['lecturer']
-        location = LocationTag.get_by_title(self.form_result['schoolsearch'])
+        location = LocationTag.get_by_title(self.form_result['location'])
 
         if lecturer == '':
             lecturer = None

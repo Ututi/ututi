@@ -13,7 +13,7 @@ ${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
     <input type="text" class="line" id="title" name="title" value="${c.group.title}"/>
   </div>
   <div class="form-field">
-    <label>${_('School')}</label>
+    <label for="location-0">${_('School')}</label>
     ${location_widget(3, c.group.location.hierarchy())}
   </div>
   <div class="form-field">
