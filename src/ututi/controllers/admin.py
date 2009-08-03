@@ -96,9 +96,9 @@ class AdminController(BaseController):
     def import_structure(self):
         for line in self._getReader():
             title = line[1]
-            title_short = line[0].lower()
+            title_short = line[0]
             description = line[2]
-            parent = line[3].lower()
+            parent = line[3]
 
             tag = LocationTag.get([parent, title_short])
             if tag is None:

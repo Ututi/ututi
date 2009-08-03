@@ -1,6 +1,6 @@
 from zope.testing import doctest
 
-from ututi.model import LocationTag
+from ututi.model import LocationTag, meta
 from ututi.tests import PylonsLayer
 
 
@@ -45,6 +45,16 @@ def test_LocationTag_get():
         >>> tag = LocationTag.get([u'Vu', u'eF'])
         >>> tag.title_short, tag.title
         (u'ef', u'Ekonomikos fakultetas')
+
+    Even though tags themselves can have varying cases in their short
+    titles:
+
+        >>> meta.Session.add(LocationTag(u'Kauno Technologijos Universitetas', u'KTU', u''))
+        >>> meta.Session.commit()
+
+        >>> tag = LocationTag.get(u'ktu')
+        >>> tag.title_short, tag.title
+        (u'KTU', u'Kauno Technologijos Universitetas')
 
     """
 

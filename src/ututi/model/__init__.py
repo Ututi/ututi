@@ -18,6 +18,7 @@ from sqlalchemy.types import Unicode
 from sqlalchemy.exc import DatabaseError, SAWarning
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm import relation, backref
+from sqlalchemy import func
 from sqlalchemy.sql.expression import and_
 
 from ututi.migration import GreatMigrator
@@ -596,7 +597,7 @@ class LocationTag(Tag):
         for title_short in filter(bool, path):
             try:
                 tag = meta.Session.query(LocationTag)\
-                    .filter_by(title_short=title_short.lower(), parent=tag).one()
+                    .filter(func.lower(LocationTag.title_short)==title_short.lower()).filter_by(parent=tag).one()
             except NoResultFound:
                 return None
         return tag

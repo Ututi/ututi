@@ -15,7 +15,7 @@
     %endif
     <div class="structured_info">
       <h4>${c.group.title}</h4>
-      <span class="small XXX">VU | ArchFak</span><br/>
+      <span class="small">${c.group.location and ' | '.join(c.group.location.path)}</span><br/>
       <a class="small" href="mailto:${c.group.id}@${c.mailing_list_host}" title="${_('Mailing list address')}">${c.group.id}@${c.mailing_list_host}</a><br/>
       <span class="small">${len(c.group.members)} ${_('members')}</span>
     </div>
