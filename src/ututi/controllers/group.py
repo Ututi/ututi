@@ -8,9 +8,10 @@ from pylons.controllers.util import redirect_to, abort
 from pylons.decorators import validate
 from pylons.i18n import _
 
+from formencode import Schema, validators, Invalid, variabledecode
+from formencode.compound import Pipe
 from formencode.foreach import ForEach
-from formencode import Schema, validators, Invalid, All, variabledecode
-from sqlalchemy.sql.expression import desc
+from formencode.variabledecode import NestedVariables
 from sqlalchemy.orm.exc import NoResultFound
 
 import ututi.lib.helpers as h
@@ -18,7 +19,7 @@ from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator
 from ututi.model.mailing import GroupMailingListMessage
-from ututi.model import meta, Group, File, LocationTag
+from ututi.model import meta, Group, File
 from routes import url_for
 
 log = logging.getLogger(__name__)
@@ -65,6 +66,7 @@ class FileUploadTypeValidator(validators.FancyValidator):
 
 class EditGroupForm(Schema):
     """A schema for validating group edits."""
+    pre_validators = [NestedVariables()]
 
     allow_extra_fields = True
     title = validators.UnicodeString(not_empty=True)
@@ -72,15 +74,17 @@ class EditGroupForm(Schema):
     year = validators.String()
     logo_upload = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
     logo_delete = validators.StringBoolean(if_missing=False)
-    location = ForEach(validators.String(strip=True))
+    location = Pipe(ForEach(validators.String(strip=True)),
+                    LocationTagsValidator())
 
 
 class NewGroupForm(EditGroupForm):
     """A schema for validating new group forms."""
 
     pre_validators = [variabledecode.NestedVariables()]
-    location = All(ForEach(validators.String(strip=True)),
-                                  LocationTagsValidator())
+    location = Pipe(ForEach(validators.String(strip=True)),
+                    LocationTagsValidator())
+
     id = GroupIdValidator()
 
 
@@ -182,8 +186,7 @@ class GroupController(GroupControllerBase):
                       description=values['description'],
                       year=date(int(values['year']), 1, 1))
 
-        location = values.get('location', [])
-        tag = LocationTag.get_by_title(location)
+        tag = values.get('location', None)
         group.location = tag
 
         meta.Session.add(group)

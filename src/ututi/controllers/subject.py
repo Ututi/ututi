@@ -2,6 +2,7 @@ import logging
 
 from formencode.variabledecode import NestedVariables
 from formencode.foreach import ForEach
+from formencode.compound import Pipe
 from formencode import Schema, validators, Invalid, All
 from routes import url_for
 
@@ -25,7 +26,7 @@ class SubjectIdValidator(validators.FormValidator):
 
     def validate_python(self, form_dict, state):
         # XXX test for id matching a tag
-        location = LocationTag.get_by_title((form_dict['location']))
+        location = form_dict['location']
         subject = Subject.get(location, form_dict['id'])
         if subject is not None:
             raise Invalid(self.message('duplicate', state),
@@ -39,8 +40,8 @@ class NewSubjectForm(Schema):
 
     pre_validators = [NestedVariables()]
 
-    location = All(ForEach(validators.String(strip=True)),
-                                  LocationTagsValidator())
+    location = Pipe(ForEach(validators.String(strip=True)),
+                    LocationTagsValidator())
 
     title = validators.UnicodeString(not_empty=True, strip=True)
     lecturer = validators.UnicodeString(strip=True)
@@ -86,7 +87,7 @@ class SubjectController(BaseController):
         title = self.form_result['title']
         id = self.form_result['id'].lower()
         lecturer = self.form_result['lecturer']
-        location = LocationTag.get_by_title(self.form_result['location'])
+        location = self.form_result['location']
 
         if lecturer == '':
             lecturer = None

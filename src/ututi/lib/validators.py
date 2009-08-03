@@ -45,9 +45,8 @@ class LocationTagsValidator(validators.FancyValidator):
         }
 
     def _to_python(self, value, state):
-        return value
+        return LocationTag.get_by_title(value)
 
     def validate_python(self, value, state):
-        tag = LocationTag.get_by_title(value)
-        if tag is None:
+        if value is None:
             raise Invalid(self.message('badTag', state), value, state)
