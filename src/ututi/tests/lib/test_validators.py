@@ -1,14 +1,12 @@
 from zope.testing import doctest
 from ututi.tests import PylonsLayer
 
-from ututi.lib.validators import html_cleanup
-
-
 def test_html_cleanup():
     """Tests the html cleanup code.
 
     The cleanup should remove script tags.
 
+        >>> from ututi.lib.validators import html_cleanup
         >>> input = '<script lang="javascript">a = 54;</script> <span onclick="a=54;">Normal text</span>'
         >>> html_cleanup(input)
         '<span>Normal text</span>'
