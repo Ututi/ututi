@@ -249,7 +249,7 @@ create table search_items (
        page_id int8 references pages(id) on delete cascade default null,
        subject_id varchar(150) default null,
        subject_location_id int8 default null,
-       foreign key (subject_id, subject_location_id) references subjects on delete cascade,
+       foreign key (subject_id, subject_location_id) references subjects on delete cascade on update cascade,
        primary key (id));;
 
 create index search_items_idx on search_items using gin(terms);;
@@ -326,5 +326,5 @@ create table content_tags (id bigserial not null,
        subject_id varchar(150) default null,
        subject_location_id int8 default null,
        tag_id int8 references tags(id) not null,
-       foreign key (subject_id, subject_location_id) references subjects on delete cascade,
+       foreign key (subject_id, subject_location_id) references subjects on delete cascade on update cascade,
        primary key (id));;
