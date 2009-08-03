@@ -45,3 +45,15 @@ SET default_text_search_config = 'public.lt';
 
 Pabandome:
 select plainto_tsquery('aukštesnioji mokytojas');
+
+
+* permission checking
+The roles we will probably need:
+- Administrator
+- Moderator
+- Registered user (creating new subjects, groups, etc.)
+- Group member
+- Group moderator
+- File owner
+
+What is the best way to implement this? Decorators?
