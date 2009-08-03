@@ -10,7 +10,7 @@ def test_basic_search():
     A basic test: we set up a group and search for its text.
     Set the indexing language first, something the controllers always do for us.
         >>> t = meta.Session.execute("SET default_text_search_config = 'public.lt';;");
-        >>> g = Group('new_group', u'Bioinformatikai', description=u'Grup\xc4\x97 kurioje domimasi biologija ir informatika')
+        >>> g = Group('new_group', u'Bioinformatikai', description=u'Grup\u0117 kurioje domimasi biologija ir informatika')
         >>> meta.Session.add(g)
         >>> meta.Session.commit()
         >>> results = search(u'biologija')
