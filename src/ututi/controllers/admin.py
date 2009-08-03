@@ -1,4 +1,5 @@
 import csv
+import os
 import logging
 import base64
 
@@ -220,6 +221,7 @@ class AdminController(BaseController):
             f.folder = line[1]
             # XXX dummy content at the moment
             f.store('Whatever!')
+            # f.store(open(os.path.join('/home/ignas/src/ututi/ututi/', line[5])))
             group.files.append(f)
 
             meta.Session.commit()
@@ -236,6 +238,7 @@ class AdminController(BaseController):
             f.folder = line[1]
             # XXX dummy content at the moment
             f.store('Whatever!')
+            # f.store(open(os.path.join('/home/ignas/src/ututi/ututi/', line[7])))
             subject.files.append(f)
 
             meta.Session.commit()
