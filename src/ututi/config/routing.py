@@ -75,6 +75,12 @@ def make_map():
     map.connect('/subject/*tags/{id}/page/{page_id}/{action}',
                 controller='subjectpage')
 
+    map.connect('/subject/*tags/{id}/edit',
+                controller='subject', action='edit')
+
+    map.connect('/subject/*tags/{id}/update',
+                controller='subject', action='update')
+
     map.connect('/subject/*tags/{id}/create_folder',
                 controller='subject', action='create_folder')
 

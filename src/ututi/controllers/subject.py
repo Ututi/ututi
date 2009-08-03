@@ -36,7 +36,7 @@ class SubjectIdValidator(validators.FormValidator):
                           form_dict, state)
 
 
-class NewSubjectForm(Schema):
+class SubjectForm(Schema):
     """A schema for validating new subject forms."""
 
     allow_extra_fields = True
@@ -49,13 +49,15 @@ class NewSubjectForm(Schema):
     title = validators.UnicodeString(not_empty=True, strip=True)
     lecturer = validators.UnicodeString(strip=True)
 
-    msg = {'invalid': _('The text contains invalid characters, only letters, numbers and the symbols - + _ are allowed.')}
 
+class NewSubjectForm(SubjectForm):
+    msg = {'invalid': _('The text contains invalid characters, only letters, numbers and the symbols - + _ are allowed.')}
     id = All(validators.Regex(r'^[_\+\-a-zA-Z0-9]*$',
                               messages=msg),
              validators.String(max=50, strip=True, not_empty=True))
 
     chained_validators = [SubjectIdValidator()]
+
 
 
 class SubjectController(BaseController, FileViewMixin):
@@ -113,6 +115,39 @@ class SubjectController(BaseController, FileViewMixin):
                     action='home',
                     id=subj.id,
                     tags=subj.location_path)
+
+    def edit(self, id, tags):
+        location = LocationTag.get(tags)
+        c.subject = Subject.get(location, id)
+        c.subject.tags_list = ', '.join([tag.title for tag in c.subject.tags])
+        return render('subject/edit.mako')
+
+    @validate(schema=SubjectForm, form='edit')
+    def update(self, id, tags):
+        location = LocationTag.get(tags)
+        subject = Subject.get(location, id)
+
+        subject.title = self.form_result['title']
+        subject.lecturer = self.form_result['lecturer']
+        subject.location = self.form_result['location']
+
+        #check to see what kind of tags we have got
+        tags = [tag.strip().lower() for tag in self.form_result.get('tagsitem', None)]
+        if tags is None:
+            tags = [tag.strip().lower() for tag in self.form_result.get('tags', '').split(',')]
+
+        subject.tags = []
+        for tag in tags:
+            subject.tags.append(SimpleTag.get(tag))
+
+        meta.Session.commit()
+
+        redirect_to(controller='subject',
+                    action='home',
+                    id=subject.id,
+                    tags=subject.location_path)
+
+
 
     def upload_file(self, id, tags):
         location = LocationTag.get(tags)
