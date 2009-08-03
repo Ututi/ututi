@@ -13,8 +13,7 @@ from pylons.decorators import validate
 from pylons.controllers.util import redirect_to, abort
 from pylons.i18n import _
 
-from ututi.model import File
-from ututi.model import meta, LocationTag, Subject
+from ututi.model import meta, LocationTag, Subject, File, SimpleTag
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import LocationTagsValidator
@@ -97,6 +96,15 @@ class SubjectController(BaseController, FileViewMixin):
             lecturer = None
 
         subj = Subject(id, title, location, lecturer)
+
+        #check to see what kind of tags we have got
+        tags = [tag.strip().lower() for tag in self.form_result.get('tagsitem', None)]
+        if tags is None:
+            tags = [tag.strip().lower() for tag in self.form_result.get('tags', '').split(',')]
+
+        subj.tags = []
+        for tag in tags:
+            subj.tags.append(SimpleTag.get(tag))
 
         meta.Session.add(subj)
         meta.Session.commit()

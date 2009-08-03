@@ -36,7 +36,7 @@ ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
   </div>
   <div class="form-field">
     <label for="tags">${_('Tags')}</label>
-    ${tags_widget('abra, kadabra, brrr')}
+    ${tags_widget()}
   </div>
 
   <div>
