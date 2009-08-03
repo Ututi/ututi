@@ -134,7 +134,7 @@ insert into subjects (id, title, lecturer, location_id)
 create table subject_files (
        subject_id varchar(150) not null,
        subject_location_id int8 not null,
-       file_id int8 references files(id) not null,
+       file_id int8 references files(id) on delete cascade not null,
        foreign key (subject_id, subject_location_id) references subjects,
        primary key (subject_id, file_id));;
 
@@ -173,7 +173,7 @@ create table subject_pages (
 
 create table group_files (
        group_id varchar(250) references groups(id) not null,
-       file_id int8 references files(id) not null,
+       file_id int8 references files(id) on delete cascade not null,
        primary key (group_id, file_id));;
 
 /* A table that tracks subjects watched by a group  */

@@ -125,7 +125,8 @@ ${h.javascript_link('/javascripts/forms.js')|n}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    ${h.javascript_link('/javascripts/jquery-1.3.2.js')|n}
+    ${h.javascript_link('/javascripts/jquery-1.3.2.min.js')|n}
+    ${h.javascript_link('/javascripts/ajaxupload.3.5.js')|n}
     ${h.stylesheet_link('/stylesheets/style.css')|n}
     ${h.javascript_link('/javascripts/expand.js')|n}
     ${h.javascript_link('/javascripts/hide_parent.js')|n}

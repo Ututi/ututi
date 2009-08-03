@@ -75,12 +75,18 @@ def make_map():
     map.connect('/subject/*tags/{id}/page/{page_id}/{action}',
                 controller='subjectpage')
 
+    map.connect('/subject/*tags/{id}/create_folder',
+                controller='subject', action='create_folder')
+
+    map.connect('/subject/*tags/{id}/delete_folder',
+                controller='subject', action='delete_folder')
+
+    map.connect('/subject/*tags/{id}/upload_file',
+                controller='subject', action='upload_file')
+
     map.connect('/subject/*tags/{id}',
                 controller='subject',
                 action='home')
-
-    map.connect('/subject/*tags/{id}/{action}',
-                controller='subject')
 
     #user profiles
     map.connect('/user/{id}', controller='user', action='index')
