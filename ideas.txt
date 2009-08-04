@@ -57,3 +57,8 @@ The roles we will probably need:
 - File owner
 
 What is the best way to implement this? Decorators?
+
+* model properties, case insensitive search
+- [[http://www.sqlalchemy.org/docs/05/mappers.html#custom-comparators][Custom comparators]]
+- [[http://www.postgresql.org/docs/8.1/interactive/indexes-expressional.html][Function indexes in postgresql]]
+- 
