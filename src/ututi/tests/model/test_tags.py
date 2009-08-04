@@ -7,9 +7,15 @@ from ututi.tests import PylonsLayer
 
 def test_page_tags():
     """Test that page tags are always kept up to date with subject tags.
+    The update work is done by database triggers, so we are basically testing
+    them here.
 
     Create a subject, add a page to it.
+
         >>> s = Subject(u'subj_id', u'Test subject', LocationTag.get(u'VU'))
+        >>> t = SimpleTag(u'old tag')
+        >>> meta.Session.add(t)
+        >>> s.tags.append(t)
         >>> meta.Session.add(s)
         >>> u = User.get(u'admin@ututi.lt')
         >>> p = Page(u'page title', u'Page text', u)
@@ -17,13 +23,29 @@ def test_page_tags():
         >>> s.pages.append(p)
         >>> meta.Session.commit()
 
+    Does the new page already have tags its subject had?
+
+        >>> p = Page.get(p.id)
+        >>> [tag.title for tag in p.tags]
+        [u'old tag']
+
+    Let's add a new tag to the subject and see if the page reacts:
+
         >>> t = SimpleTag(u'a tag')
         >>> meta.Session.add(t)
         >>> s.tags.append(t)
         >>> meta.Session.commit()
         >>> p = Page.get(p.id)
         >>> [tag.title for tag in p.tags]
-        [u'a tag']
+        [u'old tag', u'a tag']
+
+    Let's try removing the tags from the subject:
+
+        >>> s.tags = []
+        >>> meta.Session.commit()
+        >>> p = Page.get(p.id)
+        >>> [tag.title for tag in p.tags]
+        []
 
     """
 

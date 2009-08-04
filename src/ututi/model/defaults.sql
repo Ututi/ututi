@@ -365,3 +365,15 @@ $$ LANGUAGE plpgsql;;
 
 CREATE TRIGGER update_page_tags BEFORE INSERT OR DELETE ON content_tags
     FOR EACH ROW EXECUTE PROCEDURE update_page_tags();;
+
+/* a trigger to set the page's tags to the parent subject's tags on page creation */
+CREATE FUNCTION set_page_tags() RETURNS trigger AS $$
+    BEGIN
+      INSERT INTO content_tags (page_id, tag_id) SELECT NEW.page_id, tag_id FROM content_tags
+        WHERE subject_id = NEW.subject_id AND subject_location_id = NEW.subject_location_id;
+      RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+CREATE TRIGGER set_page_tags BEFORE INSERT OR DELETE ON subject_pages
+    FOR EACH ROW EXECUTE PROCEDURE set_page_tags();;
