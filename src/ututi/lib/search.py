@@ -1,5 +1,7 @@
-from ututi.model import meta, SearchItem
-from sqlalchemy.sql.expression import and_
+from ututi.model import meta, SearchItem, SimpleTag, LocationTag
+
+from sqlalchemy.sql import select, func
+from sqlalchemy.sql.expression import and_, or_
 
 def search(text=None, tags=None, type=None):
     """
@@ -11,6 +13,7 @@ def search(text=None, tags=None, type=None):
     type - the type to search for (accepted values: 'group', 'page', 'subject').
     """
     #XXX: filtering by tags is not implemented yet.
+    from ututi.model import content_tags_table as ttbl, search_items_table as stbl
 
     query = meta.Session.query(SearchItem)
 
@@ -25,5 +28,36 @@ def search(text=None, tags=None, type=None):
             query = query.filter(and_("not subject_id is null", "not subject_location_id is null"))
         elif type == 'page':
             query = query.filter("not page_id is null")
+
+    if tags is not None:
+        stags = []
+        for tag_name in tags:
+            tag = SimpleTag.get(tag_name, False)
+            ltag = LocationTag.get_by_title(tag_name)
+            if tag is not None:
+                stags.append(tag.id)
+            elif ltag is not None:
+                pass
+            else:
+                return []
+
+        if len(stags) > 0:
+            tag_query = select([ttbl.c.page_id,
+                                ttbl.c.group_id,
+                                ttbl.c.subject_id,
+                                ttbl.c.subject_location_id])
+
+            tag_query = tag_query.where(ttbl.c.tag_id.in_(stags))
+            tag_query = tag_query.group_by(tag_query.c.group_id,
+                                           tag_query.c.page_id,
+                                           tag_query.c.subject_id,
+                                           tag_query.c.subject_location_id)
+            tag_query = tag_query.having(func.count(ttbl.c.id) == len(stags)).alias()
+
+            query = query.join((tag_query,
+                                or_(stbl.c.group_id == tag_query.c.group_id,
+                                     stbl.c.page_id == tag_query.c.page_id,
+                                    and_(stbl.c.subject_id == tag_query.c.subject_id,
+                                         stbl.c.subject_location_id == tag_query.c.subject_location_id))))
 
     return query.all()

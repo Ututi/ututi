@@ -1,7 +1,7 @@
 from zope.testing import doctest
 from ututi.tests import PylonsLayer
 
-from ututi.model import meta, SearchItem, Subject, Page, Group, LocationTag
+from ututi.model import meta, SearchItem, Subject, Page, Group, LocationTag, SimpleTag
 from ututi.lib.search import search
 
 def test_basic_search():
@@ -34,6 +34,34 @@ def test_basic_search():
     No pages have been added yet:
         >>> [result.object.title for result in search(u'biologija', type='page')]
         []
+    """
+
+def test_tag_search():
+    """Tests searching with tags.
+
+    First, let's create a few items that we can search for.
+
+        >>> g = Group('new_grp', u'Biology students', description=u'biologija matematika infortikos mokslas')
+        >>> meta.Session.add(g)
+        >>> tg = SimpleTag(u'test tag')
+        >>> g.tags.append(tg)
+        >>> meta.Session.commit()
+
+    Now let's try searching for them by tags only
+
+        >>> [result.object.title for result in search(tags=[u'test tag'])]
+        [u'Biology students']
+
+    Let's add another tag and try searching for it.
+        >>> tg = SimpleTag(u'empty tag')
+        >>> meta.Session.add(tg)
+        >>> meta.Session.commit()
+        >>> [result.object.title for result in search(tags=[u'test tag', u'empty tag'])]
+        []
+
+        >>> [result.object.title for result in search(tags=[u'test tag', u'empty new tag'])]
+        []
+
     """
 
 def test_suite():
