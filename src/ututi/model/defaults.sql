@@ -168,7 +168,7 @@ create table subject_pages (
        subject_id varchar(150) not null,
        subject_location_id int8 not null,
        page_id int8 not null references pages(id),
-       foreign key (subject_id, subject_location_id) references subjects,
+       foreign key (subject_id, subject_location_id) references subjects on update cascade,
        primary key (subject_id, subject_location_id, page_id));;
 
 /* A table that tracks group files */
@@ -375,5 +375,32 @@ CREATE FUNCTION set_page_tags() RETURNS trigger AS $$
     END
 $$ LANGUAGE plpgsql;;
 
-CREATE TRIGGER set_page_tags BEFORE INSERT OR DELETE ON subject_pages
+CREATE TRIGGER set_page_tags BEFORE INSERT ON subject_pages
     FOR EACH ROW EXECUTE PROCEDURE set_page_tags();;
+
+/* a trigger to set the page's location based on the location of the subject the page belongs to*/
+/* a trigger to set the page's tags to the parent subject's tags on page creation */
+CREATE FUNCTION set_page_location() RETURNS trigger AS $$
+    BEGIN
+      UPDATE pages SET location_id = NEW.subject_location_id WHERE id = NEW.page_id;
+      RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+CREATE TRIGGER set_page_location AFTER INSERT ON subject_pages
+    FOR EACH ROW EXECUTE PROCEDURE set_page_location();;
+
+/* a trigger to update the page's tags when the subject's location changes */
+CREATE FUNCTION update_page_location() RETURNS trigger AS $$
+    BEGIN
+      UPDATE pages SET location_id = NEW.location_id
+        FROM pages p JOIN subject_pages s
+        ON p.id = s.page_id
+        WHERE s.subject_id = NEW.id
+        AND s.subject_location_id = NEW.location_id;
+      RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+CREATE TRIGGER update_page_location AFTER UPDATE ON subjects
+    FOR EACH ROW EXECUTE PROCEDURE update_page_location();;

@@ -49,6 +49,35 @@ def test_page_tags():
 
     """
 
+def test_page_location():
+    """Test the synchronization between page locations and the locations of the subjects
+    the pages belong to.
+
+        >>> s = Subject(u'subj_id', u'Test subject', LocationTag.get(u'VU'))
+        >>> meta.Session.add(s)
+        >>> u = User.get(u'admin@ututi.lt')
+        >>> p = Page(u'page title', u'Page text', u)
+        >>> meta.Session.add(p)
+        >>> s.pages.append(p)
+        >>> meta.Session.commit()
+
+    Does the new page already have tags its subject had?
+
+        >>> p = Page.get(p.id)
+        >>> p.location.title
+        u'Vilniaus universitetas'
+
+    Let's change the subject's location and see what the page does:
+
+        >>> s.location = LocationTag.get(u'vu/ef')
+        >>> meta.Session.commit()
+        >>> p = Page.get(p.id)
+        >>> p.location.title
+        u'Ekonomikos fakultetas'
+
+    """
+
+
 def test_suite():
     suite = doctest.DocTestSuite(
         optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |

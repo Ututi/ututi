@@ -106,7 +106,8 @@ def setup_orm(engine):
                         autoload_with=engine)
     orm.mapper(Page, pages_table,
                properties={'tags': relation(SimpleTag,
-                                            secondary=content_tags_table)})
+                                            secondary=content_tags_table),
+                           'location': relation(LocationTag)})
 
     global page_versions_table
     page_versions_table = Table("page_versions", meta.metadata,
