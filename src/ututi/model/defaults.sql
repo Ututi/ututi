@@ -150,7 +150,9 @@ create table user_monitored_subjects (
 
 /* A table for pages */
 
-create table pages (id bigserial not null, primary key(id));;
+create table pages (
+       id bigserial not null, primary key(id),
+       location_id int8 references tags(id) default null);;
 
 create table page_versions(id bigserial not null,
        page_id int8 references pages(id) not null,
@@ -328,3 +330,38 @@ create table content_tags (id bigserial not null,
        tag_id int8 references tags(id) not null,
        foreign key (subject_id, subject_location_id) references subjects on delete cascade on update cascade,
        primary key (id));;
+
+/* A trigger for updating page tags and location tags - they are taken from their parent subject */
+CREATE FUNCTION update_page_tags() RETURNS trigger AS $$
+    DECLARE
+      mtag_id int8 := NULL;
+      mpage_id int8 := NULL;
+    BEGIN
+      IF TG_OP = 'DELETE' THEN
+        IF OLD.subject_id IS NULL THEN
+          RETURN OLD;
+        END IF;
+        /* the tag was deleted, unalias it from all the subject's pages */
+        DELETE FROM content_tags t USING subject_pages p
+          WHERE t.page_id = p.page_id
+          AND p.subject_id = OLD.subject_id
+          AND p.subject_location_id = OLD.subject_location_id
+          AND t.tag_id = OLD.tag_id;
+        RETURN OLD;
+      ELSIF TG_OP = 'INSERT' THEN
+        IF NEW.subject_id IS NULL THEN
+          RETURN NEW;
+        END IF;
+        FOR mpage_id IN SELECT page_id FROM subject_pages WHERE subject_id = NEW.subject_id AND subject_location_id = NEW.subject_location_id LOOP
+          SELECT id INTO mtag_id FROM content_tags WHERE page_id = mpage_id AND tag_id = NEW.tag_id;
+          IF NOT FOUND THEN
+            INSERT INTO content_tags (page_id, tag_id) VALUES (mpage_id, NEW.tag_id);
+          END IF;
+        END LOOP;
+        RETURN NEW;
+      END IF;
+    END
+$$ LANGUAGE plpgsql;;
+
+CREATE TRIGGER update_page_tags BEFORE INSERT OR DELETE ON content_tags
+    FOR EACH ROW EXECUTE PROCEDURE update_page_tags();;
