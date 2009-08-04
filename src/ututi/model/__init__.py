@@ -201,6 +201,7 @@ def setup_orm(engine):
     # ignoring error about unknown column type for now
     warnings.simplefilter("ignore", SAWarning)
 
+    global search_items_table
     search_items_table = Table("search_items", meta.metadata,
                                autoload=True,
                                autoload_with=engine)
@@ -533,6 +534,7 @@ class PageVersion(object):
         if created is not None:
             self.created = created
 
+content_tags_table = None
 class Tag(object):
     """Class representing tags in general."""
 
@@ -558,13 +560,17 @@ class SimpleTag(Tag):
         self.title = title.lower()
 
     @classmethod
-    def get(cls, title):
+    def get(cls, title, create=True):
         """The method queries for a matching tag, if not found, creates one."""
         try:
             tag = meta.Session.query(cls).filter_by(title=title.lower()).one()
         except NoResultFound:
-            tag = cls(title)
-            meta.Session.add(tag)
+            if create:
+                tag = cls(title)
+                meta.Session.add(tag)
+            else:
+                tag = None
+
         return tag
 
 
@@ -724,7 +730,7 @@ class File(object):
 
         return hash.hexdigest()
 
-
+search_items_table = None
 class SearchItem(object):
     @property
     def object(self):
