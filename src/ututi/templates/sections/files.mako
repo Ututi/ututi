@@ -162,10 +162,6 @@ $(document).ready(function(){
 </script>
 </%def>
 
-<%
-    self.n = 0
-%>
-
 <%def name="file(file)">
             <li class="file">
               <img src="${url('/images/mimetypes_icons/unknown.png')}" />
@@ -217,41 +213,38 @@ $(document).ready(function(){
       </div>
 </%def>
 
-<%def name="file_browser(obj)">
-  <fieldset class="section" id="file_section-${self.n}">
+<%def name="file_browser(obj, section_id=0)">
+  <fieldset class="section" id="file_section-${section_id}">
     <legend>${obj.title}</legend>
-    <input type="hidden" id="file_upload_url-${self.n}"
+    <input type="hidden" id="file_upload_url-${section_id}"
            value="${obj.url(action='upload_file')}" />
-    <input type="hidden" id="create_folder_url-${self.n}"
+    <input type="hidden" id="create_folder_url-${section_id}"
            value="${obj.url(action='create_folder')}" />
-    <input type="hidden" id="delete_folder_url-${self.n}"
+    <input type="hidden" id="delete_folder_url-${section_id}"
            value="${obj.url(action='delete_folder')}" />
     <input type="hidden" class="type" value="${type(obj).__name__.lower()}" />
     <input type="hidden" class="id" value="${obj.id}" />
     <input type="hidden" class="location" value="${obj.location.id}" />
-    <div id="file_upload_progress-${self.n}">
+    <div id="file_upload_progress-${section_id}">
     </div>
-    <ul class="file_upload_dropdown" id="file_upload_dropdown-${self.n}">
+    <ul class="file_upload_dropdown" id="file_upload_dropdown-${section_id}">
       <li class="active">
         <span>
           Upload file
         </span>
       </li>
       % for fid, folder in enumerate(obj.folders):
-        <%self:folder_button folder="${folder}" section_id="${self.n}" fid="${fid}" />
+        <%self:folder_button folder="${folder}" section_id="${section_id}" fid="${fid}" />
       % endfor
     </ul>
     <div>
       <form action="${obj.url(action='create_folder')}">
-        <input name="folder" id="new_folder_input-${self.n}" type="text" value="" />
-        <input id="new_folder_button-${self.n}" class="new_folder_button" type="submit" value="New folder" />
+        <input name="folder" id="new_folder_input-${section_id}" type="text" value="" />
+        <input id="new_folder_button-${section_id}" class="new_folder_button" type="submit" value="New folder" />
       </form>
     </div>
     % for fid, folder in enumerate(obj.folders):
-        <%self:folder folder="${folder}" section_id="${self.n}" fid="${fid}" />
+        <%self:folder folder="${folder}" section_id="${section_id}" fid="${fid}" />
     % endfor
   </fieldset>
-  <%
-      self.n += 1
-  %>
 </%def>

@@ -16,10 +16,6 @@
 ${c.subject.lecturer}
 </div>
 
-<%
-    files.n = 0
-%>
-
 <%files:file_browser obj="${c.subject}" />
 
 <div id="subject_pages">
