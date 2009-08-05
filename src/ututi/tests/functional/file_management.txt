@@ -11,6 +11,8 @@ File upload:
     <li class="file">
       <img src="/images/mimetypes_icons/unknown.png" />
       <a href="/files/get/1">text.txt</a>
+      <input class="move_url" type="hidden" value="/files/move/1" />
+      <input class="delete_url" type="hidden" value="/files/delete/1" />
       <img src="/images/delete.png" class="delete_button" />
     </li>
 
@@ -21,7 +23,7 @@ File upload:
     <li class="file">
       <img src="/images/mimetypes_icons/unknown.png" />
       <a href="/files/get/2">image.png</a>
-      <img src="/images/delete.png" class="delete_button" />
+      ...
     </li>
 
     >>> res = app.post("/group/moderators/upload_file",
@@ -31,7 +33,7 @@ File upload:
     <li class="file">
       <img src="/images/mimetypes_icons/unknown.png" />
       <a href="/files/get/3">other_text.txt</a>
-      <img src="/images/delete.png" class="delete_button" />
+      ...
     </li>
 
     >>> res = app.post("/group/moderators/upload_file",
@@ -41,7 +43,7 @@ File upload:
     <li class="file">
       <img src="/images/mimetypes_icons/unknown.png" />
       <a href="/files/get/4">more_text.txt</a>
-      <img src="/images/delete.png" class="delete_button" />
+      ...
     </li>
 
 Empty folder creation:
@@ -52,11 +54,11 @@ Empty folder creation:
     >>> print dedent(res.body)
     <li class="alternative upload" id="file_upload_button-7-...">Buga Buga</li>
     <BLANKLINE>
-    <div id="file_area-7-...">
-      <input id="file_folder_name-7-..." type="hidden" value="Buga Buga" />
+    <div class="folder_file_area" id="file_area-7-...">
+      <input class="folder_name" id="file_folder_name-7-..." type="hidden" value="Buga Buga" />
         <h4>
           <img src="/images/folder.png" />
-          Buga Buga (<a href="">trinti</a>)
+          Buga Buga (<a href="#" id="delete_folder_button-7-..." class="delete_folder_button">trinti</a>)
         </h4>
         <ul class="folder">
             <li class="message">There are no files here, this folder is empty!</li>
@@ -69,11 +71,11 @@ Empty folder creation:
     >>> print dedent(res.body)
     <li class="alternative upload" id="file_upload_button-8-...">Uga Buga</li>
     <BLANKLINE>
-    <div id="file_area-8-...">
-      <input id="file_folder_name-8-..." type="hidden" value="Uga Buga" />
+    <div class="folder_file_area" id="file_area-8-...">
+      <input class="folder_name" id="file_folder_name-8-..." type="hidden" value="Uga Buga" />
         <h4>
           <img src="/images/folder.png" />
-          Uga Buga (<a href="">trinti</a>)
+          Uga Buga (<a href="#" id="delete_folder_button-8-..." class="delete_folder_button">trinti</a>)
         </h4>
         <ul class="folder">
             <li class="message">There are no files here, this folder is empty!</li>
@@ -89,7 +91,7 @@ Deleting folders:
     <li class="file">
       <img src="/images/mimetypes_icons/unknown.png" />
       <a href="/files/get/...">image.png</a>
-      <img src="/images/delete.png" class="delete_button" />
+      ...
     </li>
 
     >>> res = app.post("/group/moderators/upload_file",
@@ -99,7 +101,7 @@ Deleting folders:
     <li class="file">
       <img src="/images/mimetypes_icons/unknown.png" />
       <a href="/files/get/...">more_text.txt</a>
-      <img src="/images/delete.png" class="delete_button" />
+      ...
     </li>
 
     >>> res = app.post("/subject/vu/mat_analize/delete_folder",
@@ -117,20 +119,26 @@ Both folders should be gone:
     >>> browser = Browser()
     >>> browser.open('http://localhost/subject/vu/mat_analize')
     >>> browser.printQuery('//h4')
-
-    # XXX subjects don't have their file listing working yet
+    <h4>
+      <img src="/images/folder.png" />
+                Buga Buga (...)
+    </h4>
+    <h4>
+      <img src="/images/folder.png" />
+                Some folder (...)
+    </h4>
 
     >>> browser.open('http://localhost/group/moderators/files')
     >>> browser.printQuery('//h4')
     <h4>Moderatoriai</h4>
     <h4>
       <img src="/images/folder.png" />
-                Also a folder (<a href="">trinti</a>)
-              </h4>
+                Also a folder (...)
+    </h4>
     <h4>
       <img src="/images/folder.png" />
-                Uga Buga (<a href="">trinti</a>)
-              </h4>
+                Uga Buga (...)
+    </h4>
 
 Deleting files:
 
@@ -147,11 +155,11 @@ Deleting files:
     '404 Not Found'
 
     >>> app.post('/files/move/4',
-    ...          params={'source-type': 'group',
-    ...                  'source-id': 'moderators',
-    ...                  'target-type': 'group',
-    ...                  'target-id': 'moderators',
-    ...                  'target-folder': 'Uga Buga'}).status
+    ...          params={'source_type': 'group',
+    ...                  'source_id': 'moderators',
+    ...                  'target_type': 'group',
+    ...                  'target_id': 'moderators',
+    ...                  'target_folder': 'Uga Buga'}).status
     '200 OK'
 
 Moving files:
@@ -159,18 +167,20 @@ Moving files:
     >>> from ututi.tests.model.test_groups import printTree
     >>> from ututi.model import Group, LocationTag, Subject
 
+    >>> l1 = str(LocationTag.get(u'vu').id)
+
     >>> printTree(Group.get('moderators'))
     Also a folder:
     Uga Buga:
        more_text.txt
 
     >>> app.post('/files/move/4',
-    ...          params={'source-type': 'group',
-    ...                  'source-id': 'moderators',
-    ...                  'target-type': 'subject',
-    ...                  'target-id': 'mat_analize',
-    ...                  'target-tags': 'vu',
-    ...                  'target-folder': 'Some folder'}).status
+    ...          params={'source_type': 'group',
+    ...                  'source_id': 'moderators',
+    ...                  'target_type': 'subject',
+    ...                  'target_id': 'mat_analize',
+    ...                  'target_location': l1,
+    ...                  'target_folder': 'Some folder'}).status
     '200 OK'
 
     >>> printTree(Group.get('moderators'))
@@ -184,12 +194,12 @@ Moving files:
        more_text.txt
 
     >>> app.post('/files/move/2',
-    ...          params={'source-type': 'subject',
-    ...                  'source-id': 'mat_analize',
-    ...                  'source-tags': 'vu',
-    ...                  'target-type': 'group',
-    ...                  'target-id': 'moderators',
-    ...                  'target-folder': ''}).status
+    ...          params={'source_type': 'subject',
+    ...                  'source_id': 'mat_analize',
+    ...                  'source_location': l1,
+    ...                  'target_type': 'group',
+    ...                  'target_id': 'moderators',
+    ...                  'target_folder': ''}).status
     '200 OK'
 
     >>> printTree(Group.get('moderators'))

@@ -1,7 +1,13 @@
 <%inherit file="/base.mako" />
+<%namespace name="files" file="/sections/files.mako" />
 
 <%def name="title()">
   ${c.subject.title}
+</%def>
+
+<%def name="head_tags()">
+    ${parent.head_tags()}
+   <%files:head_tags />
 </%def>
 
 <h1>${c.subject.title}</h1>
@@ -10,26 +16,11 @@
 ${c.subject.lecturer}
 </div>
 
-<h2>${_('Files')}</h2>
+<%
+    files.n = 0
+%>
 
-% for folder in c.subject.folders:
-<ul>
-  % if folder.title == '':
-    % for file in folder:
-  <li>
-      ${file.title}
-  </li>
-    % endfor
-  % else:
-    % for file in folder:
-    <li>
-      ${folder.title}
-      ${file.title}
-    </li>
-    % endfor
-  % endif
-</ul>
-% endfor
+<%files:file_browser obj="${c.subject}" />
 
 <div id="subject_pages">
   <h2>${_('Pages')}</h2>
