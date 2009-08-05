@@ -3,6 +3,14 @@ from zope.testing import doctest
 from ututi.model import LocationTag, meta
 from ututi.tests import PylonsLayer
 
+def test_LocationTag_flatten():
+    """Test if location tags are flattened correctly.
+
+        >>> tag = LocationTag.get(u'vu')
+        >>> [t.title for t in tag.flatten()]
+        [u'Vilniaus universitetas', u'Ekonomikos fakultetas']
+
+    """
 
 def test_LocationTag_getbytitle():
     r"""Tests for location tag retrieval by the full title.

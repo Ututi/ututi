@@ -602,6 +602,12 @@ class LocationTag(Tag):
             location = location.parent
         return list(reversed(path))
 
+    def flatten(self):
+        """Return a list of the tag's children and the tag's children's children, etc."""
+        flat = [self]
+        for child in self.children:
+            flat.extend(child.flatten())
+        return flat
 
     @classmethod
     def get(cls, path):
