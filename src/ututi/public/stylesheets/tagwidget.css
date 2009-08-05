@@ -59,14 +59,12 @@ ul.autobox-hldr li.autobox-input input {
 } /* no left/right padding here please */
 ul.autobox-hldr li.bit-box a.closebutton {
   position: absolute;
-  right: 4px; top: 5px;
+  right: 2px; top: 2px;
   display: block;
-  width: 7px; height: 7px;
+  width: 10px; height: 10px;
   font-size: 1px;
-  background: url('close.gif'); }
-ul.autobox-hldr li.bit-box a.closebutton:hover {
-  background-position: 7px;
-}
+  background: url('/images/icon_close.png'); }
+
 ul.autobox-hldr li.bit-box-focus a.closebutton,
 ul.autobox-hldr li.bit-box-focus a.closebutton:hover {
   background-position: bottom;
