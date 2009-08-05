@@ -3,14 +3,15 @@ from ututi.model import meta, SearchItem, SimpleTag, LocationTag
 from sqlalchemy.sql import select, func
 from sqlalchemy.sql.expression import and_, or_
 
-def search(text=None, tags=None, type=None):
+def search(text=None, tags=None, type=None, extra=None):
     """
     A function that implements searching in the search_items table.
 
     The parameters are:
     text - the text string to search,
     tags - a list of tag titles,
-    type - the type to search for (accepted values: 'group', 'page', 'subject').
+    type - the type to search for (accepted values: 'group', 'page', 'subject'),
+    external - external callback to run on the query before fetching results.
     """
     #XXX: filtering by tags is not implemented yet.
     from ututi.model import content_tags_table as ttbl, search_items_table as stbl
@@ -66,5 +67,8 @@ def search(text=None, tags=None, type=None):
 
         if len(ltags) > 0:
             query = query.filter(stbl.c.location_id.in_(ltags))
+
+    if extra is not None:
+        query = extra(query)
 
     return query.all()

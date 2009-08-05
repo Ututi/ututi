@@ -4,6 +4,11 @@ from ututi.tests import PylonsLayer
 from ututi.model import meta, Subject, Page, Group, LocationTag, SimpleTag, User
 from ututi.lib.search import search
 
+def _query_filter(query):
+    """A simple callback that limits the query to one result"""
+    return query.limit(1)
+
+
 def test_basic_search():
     """Tests basic searching by text contents.
 
@@ -18,14 +23,21 @@ def test_basic_search():
         [u'Bioinformatikai']
 
     Let's try out the lithuanian spelling:
+
         >>> [result.group.title for result in search(u'informatikos')]
         [u'Bioinformatikai']
 
     Let's add a subject and see what we get:
+
         >>> s = Subject('biologija', u'Biologijos pagrindai', LocationTag.get(u'vu'))
         >>> meta.Session.add(s)
         >>> [result.object.title for result in search(u'biologija')]
         [u'Bioinformatikai', u'Biologijos pagrindai']
+
+    Let's try out the external query callback support:
+
+        >>> [result.object.title for result in search(u'biologija', extra=_query_filter)]
+        [u'Bioinformatikai']
 
     Let's filter by type:
         >>> [result.object.title for result in search(u'biologija', type='group')]
