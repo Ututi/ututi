@@ -251,6 +251,7 @@ create table search_items (
        page_id int8 references pages(id) on delete cascade default null,
        subject_id varchar(150) default null,
        subject_location_id int8 default null,
+       location_id int8 references tags(id) default null,
        foreign key (subject_id, subject_location_id) references subjects on delete cascade on update cascade,
        primary key (id));;
 
@@ -265,14 +266,16 @@ CREATE FUNCTION update_group_search() RETURNS trigger AS $$
         UPDATE search_items SET terms = to_tsvector(coalesce(NEW.id,''))
           || to_tsvector(coalesce(NEW.title,''))
           || to_tsvector(coalesce(NEW.description, ''))
-          || to_tsvector(coalesce(NEW.page, ''))
+          || to_tsvector(coalesce(NEW.page, '')),
+          location_id = NEW.location_id
           WHERE id=search_id;
       ELSE
-        INSERT INTO search_items (group_id, terms) VALUES (NEW.id,
+        INSERT INTO search_items (group_id, terms, location_id) VALUES (NEW.id,
           to_tsvector(coalesce(NEW.id,''))
           || to_tsvector(coalesce(NEW.title,''))
           || to_tsvector(coalesce(NEW.description, ''))
-          || to_tsvector(coalesce(NEW.page, '')));
+          || to_tsvector(coalesce(NEW.page, '')),
+          NEW.location_id);
       END IF;
       RETURN NEW;
     END
@@ -308,11 +311,13 @@ CREATE FUNCTION update_subject_search() RETURNS trigger AS $$
       SELECT id INTO search_id  FROM search_items WHERE subject_id = NEW.id and subject_location_id = NEW.location_id;
       IF FOUND THEN
         UPDATE search_items SET terms = to_tsvector(coalesce(NEW.title,''))
-          || to_tsvector(coalesce(NEW.lecturer,'')) WHERE id=search_id;
+          || to_tsvector(coalesce(NEW.lecturer,'')),
+          location_id = NEW.location_id WHERE id=search_id;
       ELSE
-        INSERT INTO search_items (subject_id, subject_location_id, terms) VALUES (NEW.id, NEW.location_id,
+        INSERT INTO search_items (subject_id, subject_location_id, terms, location_id) VALUES (NEW.id, NEW.location_id,
           to_tsvector(coalesce(NEW.title,''))
-          || to_tsvector(coalesce(NEW.lecturer, '')));
+          || to_tsvector(coalesce(NEW.lecturer, '')),
+          NEW.location_id);
       END IF;
       RETURN NEW;
     END
@@ -369,6 +374,7 @@ CREATE TRIGGER update_page_tags BEFORE INSERT OR DELETE ON content_tags
 /* a trigger to set the page's tags to the parent subject's tags on page creation */
 CREATE FUNCTION set_page_tags() RETURNS trigger AS $$
     BEGIN
+      DELETE FROM content_tags WHERE page_id = NEW.page_id;
       INSERT INTO content_tags (page_id, tag_id) SELECT NEW.page_id, tag_id FROM content_tags
         WHERE subject_id = NEW.subject_id AND subject_location_id = NEW.subject_location_id;
       RETURN NEW;
@@ -383,6 +389,7 @@ CREATE TRIGGER set_page_tags BEFORE INSERT ON subject_pages
 CREATE FUNCTION set_page_location() RETURNS trigger AS $$
     BEGIN
       UPDATE pages SET location_id = NEW.subject_location_id WHERE id = NEW.page_id;
+      UPDATE search_items SET location_id = NEW.subject_location_id WHERE page_id = NEW.page_id;
       RETURN NEW;
     END
 $$ LANGUAGE plpgsql;;
@@ -399,6 +406,7 @@ CREATE FUNCTION update_page_location() RETURNS trigger AS $$
         WHERE s.subject_id = NEW.id
         AND s.subject_location_id = NEW.location_id;
       RETURN NEW;
+      UPDATE search_items SET location_id = NEW.subject_location_id WHERE page_id = NEW.page_id;
     END
 $$ LANGUAGE plpgsql;;
 
