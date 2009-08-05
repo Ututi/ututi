@@ -68,26 +68,28 @@ class FilesController(BaseController):
         except NoResultFound:
             abort(404)
 
-        source_type = request.POST['source-type']
+        source_type = request.POST['source_type']
         if source_type == 'group':
-            source = Group.get(request.POST['source-id'])
+            source = Group.get(request.POST['source_id'])
         else:
-            source = Subject.get(LocationTag.get(request.POST['source-tags']),
-                                 request.POST['source-id'])
+            id = int(request.POST['source_location'])
+            location = meta.Session.query(LocationTag).filter_by(id=id).one()
+            source = Subject.get(location, request.POST['source_id'])
 
-        target_type = request.POST['target-type']
+        target_type = request.POST['target_type']
         if target_type == 'group':
-            target = Group.get(request.POST['target-id'])
+            target = Group.get(request.POST['target_id'])
         else:
-            target = Subject.get(LocationTag.get(request.POST['target-tags']),
-                                 request.POST['target-id'])
+            id = int(request.POST['target_location'])
+            location = meta.Session.query(LocationTag).filter_by(id=id).one()
+            target = Subject.get(location, request.POST['target_id'])
 
         source_folder = file.folder
 
         if source is not target:
             source.files.remove(file)
             target.files.append(file)
-        file.folder = request.POST['target-folder']
+        file.folder = request.POST['target_folder']
 
         if source_folder and source.getFolder(source_folder) is None:
             source.files.append(File.makeNullFile(source_folder))

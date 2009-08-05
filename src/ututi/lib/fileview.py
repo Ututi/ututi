@@ -1,23 +1,10 @@
-
 from pylons.templating import render_mako_def
-from pylons.controllers.util import abort
+
 from pylons import request
-from ututi.model import File
-from ututi.model import Subject, meta
-from ututi.model import LocationTag
-
-# file/move
-# file/delete
-
-# group/archpio/files/delete_folder
-# group/archpio/files/create_folder
-# group/archpio/files/upload_file
-
-# subject/vu/mif/matana/files/create_folder
-# subject/vu/mif/matana/files/delete_folder
-# subject/vu/mif/matana/files/upload_file
+from ututi.model import File, meta
 
 from mimetools import choose_boundary
+
 
 class FileViewMixin(object):
 
@@ -29,10 +16,10 @@ class FileViewMixin(object):
         for f in obj.folders:
             if f.title == folder_name:
                 folder = f
-        fid = ".".join(choose_boundary().split(".")[-3:])
-        return (render_mako_def('/group/files.mako','folder_button',
+        fid = "_".join(choose_boundary().split(".")[-3:])
+        return (render_mako_def('/sections/files.mako','folder_button',
                                 folder=folder, section_id=section_id, fid=fid) +
-                render_mako_def('/group/files.mako','folder',
+                render_mako_def('/sections/files.mako','folder',
                                 folder=folder, section_id=section_id, fid=fid))
 
     def _delete_folder(self, obj):
@@ -55,4 +42,4 @@ class FileViewMixin(object):
             obj.files.append(f)
             meta.Session.add(f)
             meta.Session.commit()
-        return render_mako_def('/group/files.mako','file', file=f)
+        return render_mako_def('/sections/files.mako','file', file=f)
