@@ -181,17 +181,17 @@ $(document).ready(function(){
         % if folder.title != '':
           <h4>
             <img src="${url('/images/folder.png')}" />
-            ${folder.title} (<a href="#" id="delete_folder_button-${section_id}-${fid}" class="delete_folder_button">trinti</a>)
+            ${folder.title} (<a href="#" id="delete_folder_button-${section_id}-${fid}" class="delete_folder_button">${_("Delete")}</a>)
           </h4>
         % endif
           <ul class="folder">
         % if folder:
-              <li style="display: none;" class="message">There are no files here, this folder is empty!</li>
+              <li style="display: none;" class="message">${_("There are no files here, this folder is empty!")}</li>
               % for file in folder:
                 <%self:file file="${file}" />
               % endfor
         % else:
-              <li class="message">There are no files here, this folder is empty!</li>
+              <li class="message">${_("There are no files here, this folder is empty!")}</li>
         % endif
           </ul>
       </div>
