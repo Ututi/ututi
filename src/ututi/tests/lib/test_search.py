@@ -86,6 +86,29 @@ def test_tag_search():
         [u'page title']
     """
 
+def test_location_search():
+    """Testing filtering by location.
+
+    First let's create a few content items.
+        >>> t = meta.Session.execute("SET default_text_search_config = 'public.lt';;");
+        >>> g = Group('new_group', u'Bioinformatikai', description=u'Grup\u0117 kurioje domimasi biologija ir informatika')
+        >>> g.location = LocationTag.get(u'vu/ef')
+        >>> s = Subject('biologija', u'Biologijos pagrindai', LocationTag.get(u'vu'))
+        >>> u = User.get(u'admin@ututi.lt')
+        >>> p = Page(u'page title', u'Puslapio tekstas', u)
+        >>> s.pages.append(p)
+        >>> meta.Session.add(g)
+        >>> meta.Session.add(s)
+        >>> meta.Session.add(p)
+        >>> meta.Session.commit()
+        >>> sorted([result.object.title for result in search(tags=[u'vu'])])
+        [u'Bioinformatikai', u'Biologijos pagrindai', u'page title']
+
+        >>> [result.object.title for result in search(tags=[u'ef'])]
+        [u'Bioinformatikai']
+
+    """
+
 def test_suite():
     suite = doctest.DocTestSuite(
         optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |

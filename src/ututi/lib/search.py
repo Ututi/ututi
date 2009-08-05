@@ -30,15 +30,19 @@ def search(text=None, tags=None, type=None):
             query = query.filter("not page_id is null")
 
     if tags is not None:
-        stags = []
+        stags = [] #simple tags
+        ltags = [] #location tags
         for tag_name in tags:
+            #let's check each tag and see what we've got: a location tag or a simpletag
             tag = SimpleTag.get(tag_name, False)
             ltag = LocationTag.get_by_title(tag_name)
             if tag is not None:
                 stags.append(tag.id)
             elif ltag is not None:
-                pass
+                # if it is a location tag, add not only it, but also its children
+                ltags.extend([lt.id for lt in ltag.flatten()])
             else:
+                #a tag name that is not in the database was entered. Return empty list.
                 return []
 
         if len(stags) > 0:
@@ -59,5 +63,8 @@ def search(text=None, tags=None, type=None):
                                      stbl.c.page_id == tag_query.c.page_id,
                                     and_(stbl.c.subject_id == tag_query.c.subject_id,
                                          stbl.c.subject_location_id == tag_query.c.subject_location_id))))
+
+        if len(ltags) > 0:
+            query = query.filter(stbl.c.location_id.in_(ltags))
 
     return query.all()
