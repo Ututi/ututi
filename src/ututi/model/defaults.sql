@@ -387,9 +387,18 @@ CREATE TRIGGER set_page_tags BEFORE INSERT ON subject_pages
 /* a trigger to set the page's location based on the location of the subject the page belongs to*/
 /* a trigger to set the page's tags to the parent subject's tags on page creation */
 CREATE FUNCTION set_page_location() RETURNS trigger AS $$
+    DECLARE
+        search_id int8 := NULL;
     BEGIN
       UPDATE pages SET location_id = NEW.subject_location_id WHERE id = NEW.page_id;
-      UPDATE search_items SET location_id = NEW.subject_location_id WHERE page_id = NEW.page_id;
+
+      SELECT id INTO search_id  FROM search_items WHERE page_id = NEW.page_id;
+      IF FOUND THEN
+        UPDATE search_items SET location_id = NEW.subject_location_id WHERE page_id = NEW.page_id;
+      ELSE
+        INSERT INTO search_items (page_id, location_id) VALUES (NEW.page_id, NEW.subject_location_id);
+      END IF;
+
       RETURN NEW;
     END
 $$ LANGUAGE plpgsql;;
