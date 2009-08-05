@@ -1,7 +1,7 @@
 from zope.testing import doctest
 from ututi.tests import PylonsLayer
 
-from ututi.model import meta, SearchItem, Subject, Page, Group, LocationTag, SimpleTag
+from ututi.model import meta, Subject, Page, Group, LocationTag, SimpleTag, User
 from ututi.lib.search import search
 
 def test_basic_search():
@@ -34,6 +34,7 @@ def test_basic_search():
     No pages have been added yet:
         >>> [result.object.title for result in search(u'biologija', type='page')]
         []
+
     """
 
 def test_tag_search():
@@ -52,7 +53,9 @@ def test_tag_search():
         >>> [result.object.title for result in search(tags=[u'test tag'])]
         [u'Biology students']
 
-    Let's add another tag and try searching for it.
+    Let's add another tag and try searching for it. Nothing has been tagged with it, so we should
+    get an empty list.
+
         >>> tg = SimpleTag(u'empty tag')
         >>> meta.Session.add(tg)
         >>> meta.Session.commit()
@@ -62,6 +65,25 @@ def test_tag_search():
         >>> [result.object.title for result in search(tags=[u'test tag', u'empty new tag'])]
         []
 
+    What about pages? They inherit their tags from the subjects they belong to. Let's see if they show up in
+    search results.
+
+        >>> s = Subject(u'subj_id', u'Test subject', LocationTag.get(u'VU'))
+        >>> t = SimpleTag(u'a tag')
+        >>> meta.Session.add(t)
+        >>> s.tags.append(t)
+        >>> meta.Session.add(s)
+        >>> u = User.get(u'admin@ututi.lt')
+        >>> p = Page(u'page title', u'Puslapio tekstas', u)
+        >>> meta.Session.add(p)
+        >>> s.pages.append(p)
+        >>> meta.Session.commit()
+
+        >>> [result.object.title for result in search(tags=[u'a tag'])]
+        [u'Test subject', u'page title']
+
+        >>> [result.object.title for result in search(text=u'puslapis', tags=[u'a tag'])]
+        [u'page title']
     """
 
 def test_suite():
