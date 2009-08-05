@@ -152,11 +152,6 @@ $(document).ready(function(){
         return false;
     });
 
-//    $('.delete_folder_button').click(function (event) {
-//        deleteFolder(event.target);
-//        return false;
-//    });
-
 });
 //]]>
 </script>
