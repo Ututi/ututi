@@ -630,18 +630,24 @@ class LocationTag(Tag):
 
         A list can be passed for hierarchical traversal.
         """
+        hierarchy = True
         if not isinstance(title, list):
             title = [title]
+            hierarchy = False
 
         tag = None
         for title_full in filter(bool, title):
             try:
-                tag = meta.Session.query(cls)\
-                    .filter_by(title=title_full, parent=tag).one()
+                q = meta.Session.query(cls).filter_by(title=title_full)
+                if hierarchy:
+                    q = q.filter_by(parent=tag)
+                tag =  q.one()
             except NoResultFound:
                 try:
-                    tag = meta.Session.query(cls)\
-                        .filter_by(title_short=title_full, parent=tag).one()
+                    q = meta.Session.query(cls).filter_by(title_short=title_full)
+                    if hierarchy:
+                        q = q.filter_by(parent=tag)
+                    tag =  q.one()
                 except NoResultFound:
                     tag = None
                     break
