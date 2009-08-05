@@ -178,33 +178,22 @@ $(document).ready(function(){
 <%def name="folder(folder, section_id, fid)">
       <div class="folder_file_area" id="file_area-${section_id}-${fid}">
         <input class="folder_name" id="file_folder_name-${section_id}-${fid}" type="hidden" value="${folder.title}" />
-        % if folder.title == '':
-          <ul class="folder">
-          % if folder:
-              <li style="display: none;" class="message">There are no files here, this folder is empty!</li>
-              % for file in folder:
-                <%self:file file="${file}" />
-              % endfor
-          % else:
-              <li class="message">There are no files here, this folder is empty!</li>
-          % endif
-          </ul>
-        % else:
+        % if folder.title != '':
           <h4>
             <img src="${url('/images/folder.png')}" />
             ${folder.title} (<a href="#" id="delete_folder_button-${section_id}-${fid}" class="delete_folder_button">trinti</a>)
           </h4>
-          <ul class="folder">
-          % if folder:
-              <li style="display: none;" class="message">There are no files here, this folder is empty!</li>
-            % for file in folder:
-              <%self:file file="${file}" />
-            % endfor
-          % else:
-              <li class="message">There are no files here, this folder is empty!</li>
-          % endif
-          </ul>
         % endif
+          <ul class="folder">
+        % if folder:
+              <li style="display: none;" class="message">There are no files here, this folder is empty!</li>
+              % for file in folder:
+                <%self:file file="${file}" />
+              % endfor
+        % else:
+              <li class="message">There are no files here, this folder is empty!</li>
+        % endif
+          </ul>
       </div>
 </%def>
 
