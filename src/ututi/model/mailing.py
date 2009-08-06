@@ -148,6 +148,13 @@ class GroupMailingListMessage(object):
         message = email.message_from_string(message_text.encode('utf-8'), UtutiEmail)
         message_id = message.getMessageId()
         group_id = message.getHeader("to").split("@")[0]
+        #use the numerical group id
+        g = Group.get(group_id)
+        if g is not None:
+            group_id = g.id
+        else:
+            group_id = None #??? is this right?
+
         if cls.get(message_id, group_id):
             raise MessageAlreadyExists(message_id, group_id)
 
@@ -174,6 +181,8 @@ class GroupMailingListMessage(object):
     def get(cls, message_id, group_id):
         try:
             g = Group.get(group_id)
+            if g is None:
+                return None #??? is the way it is supposed to be?
             return meta.Session.query(cls).filter_by(message_id=message_id,
                                                      group_id=g.id).one()
         except NoResultFound:

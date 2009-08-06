@@ -96,7 +96,7 @@ class GroupforumController(GroupControllerBase):
         meta.Session.commit()
         redirect_to(controller='groupforum',
                     action='thread',
-                    id=group.id, thread_id=thread.id)
+                    id=group.group_id, thread_id=thread.id)
 
     @group_action
     def new_thread(self, group):
@@ -129,4 +129,4 @@ class GroupforumController(GroupControllerBase):
         meta.Session.commit()
         redirect_to(controller='groupforum',
                     action='thread',
-                    id=group.id, thread_id=post.id)
+                    id=group.group_id, thread_id=post.id)

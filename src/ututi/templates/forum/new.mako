@@ -6,7 +6,7 @@ ${_('New topic')}
 
 <h1>${_('New topic')}</h1>
 
-<form method="post" action="${url(controller='groupforum', action='post', id=c.group.id)}"
+<form method="post" action="${url(controller='groupforum', action='post', id=c.group.group_id)}"
      id="group_add_form" enctype="multipart/form-data">
   <div class="form-field">
     <label for="subject">${_('Subject')}</label>

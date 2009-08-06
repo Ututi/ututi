@@ -23,7 +23,7 @@
   % endif
 </div>
 % endfor
-<form method="post" action="${url(controller='groupforum', action='reply', thread_id=c.thread.id, id=c.group.id)}"
+<form method="post" action="${url(controller='groupforum', action='reply', thread_id=c.thread.id, id=c.group.group_id)}"
      id="group_add_form" enctype="multipart/form-data">
   <div class="form-field">
     <label for="message">${_('Message')}</label>
