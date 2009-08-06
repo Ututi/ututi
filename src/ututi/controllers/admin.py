@@ -125,7 +125,7 @@ class AdminController(BaseController):
             id, title, desc, year = row[:4]
             group = Group.get(id)
             if group is None:
-                group = Group(id=id)
+                group = Group(group_id=id)
                 meta.Session.add(group)
 
             group.title = title

@@ -13,7 +13,7 @@
     <ul>
       % for membership in c.user.memberships:
       <li>
-        <a href="${url(controller='group', action='group_home', id=membership.group.id)}">${membership.group.title}</a>
+        <a href="${url(controller='group', action='group_home', id=membership.group.group_id)}">${membership.group.title}</a>
       </li>
       % endfor
       % if not c.user.memberships:

@@ -24,8 +24,6 @@ from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator
 
 from ututi.model import meta, Group, File, SimpleTag
 
-from routes import url_for
-
 log = logging.getLogger(__name__)
 
 
@@ -42,11 +40,9 @@ class GroupIdValidator(validators.FancyValidator):
 
     def validate_python(self, value, state):
         if value != 0:
-            try:
-                meta.Session.query(Group).filter_by(id=value).one()
+            g = Group.get(value)
+            if g is not None:
                 raise Invalid(self.message('duplicate', state), value, state)
-            except NoResultFound:
-                pass
 
             usernameRE = re.compile(r"^[^ \t\n\r@<>()]+$", re.I)
             if not usernameRE.search(value):
@@ -111,7 +107,7 @@ class GroupControllerBase(BaseController):
     def __before__(self):
         c.breadcrumbs = [
             {'title': _('Groups'),
-             'link': url_for(controller='group', action='index')}
+             'link': url(controller='group', action='index')}
             ]
         c.mailing_list_host = config.get('mailing_list_host', '')
 
@@ -123,16 +119,16 @@ class GroupControllerBase(BaseController):
         """
         return [
             {'title': _('Home'),
-             'link': url(controller='group', action='group_home', id=c.group.id),
+             'link': url(controller='group', action='group_home', id=c.group.group_id),
              'selected': selected == 'group_home'},
             {'title': _('Forum'),
-             'link': url(controller='group', action='forum', id=c.group.id),
+             'link': url(controller='group', action='forum', id=c.group.group_id),
              'selected': selected == 'forum'},
             {'title': _('Members'),
-             'link': url(controller='group', action='members', id=c.group.id),
+             'link': url(controller='group', action='members', id=c.group.group_id),
              'selected': selected == 'members'},
             {'title': _('Files'),
-             'link': url(controller='group', action='files', id=c.group.id),
+             'link': url(controller='group', action='files', id=c.group.group_id),
              'selected': selected == 'files'},
             ]
 
@@ -168,7 +164,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
         group.page = page_content
         meta.Session.commit()
         h.flash(_("The group's front page was updated."))
-        redirect_to(controller='group', action='group_home', id=group.id)
+        redirect_to(controller='group', action='group_home', id=group.group_id)
 
     @group_action
     def files(self, group):
@@ -185,7 +181,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
     def new_group(self):
         values = self.form_result
 
-        group = Group(id=values['id'],
+        group = Group(group_id=values['id'],
                       title=values['title'],
                       description=values['description'],
                       year=date(int(values['year']), 1, 1))
@@ -263,7 +259,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
 
 
         meta.Session.commit()
-        redirect_to(controller='group', action='group_home', id=group.id)
+        redirect_to(controller='group', action='group_home', id=group.group_id)
 
     def logo(self, id, width=None, height=None):
         group = Group.get(id)

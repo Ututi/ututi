@@ -11,19 +11,19 @@
       ${_('Group information')}
     </%def>
     %if c.group.logo is not None:
-      <img id="group-logo" src="${url(controller='group', action='logo', id=c.group.id, width=70)}" alt="logo" />
+      <img id="group-logo" src="${url(controller='group', action='logo', id=c.group.group_id, width=70)}" alt="logo" />
     %endif
     <div class="structured_info">
       <h4>${c.group.title}</h4>
       <span class="small">${c.group.location and ' | '.join(c.group.location.path)}</span><br/>
-      <a class="small" href="mailto:${c.group.id}@${c.mailing_list_host}" title="${_('Mailing list address')}">${c.group.id}@${c.mailing_list_host}</a><br/>
+      <a class="small" href="mailto:${c.group.group_id}@${c.mailing_list_host}" title="${_('Mailing list address')}">${c.group.group_id}@${c.mailing_list_host}</a><br/>
       <span class="small">${len(c.group.members)} ${_('members')}</span>
     </div>
     <div class="description small">
       ${c.group.description}
     </div>
     <span class="portlet-link">
-      <a class="small" href="${url(controller='group', action='edit', id=c.group.id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
+      <a class="small" href="${url(controller='group', action='edit', id=c.group.group_id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
     </span>
     <br style="clear: right;" />
   </%self:portlet>
@@ -47,7 +47,7 @@
       </tr>
     </table>
     <span class="portlet-link">
-      <a class="small" href="${url(controller='group', action='changes', id=c.group.id)}" title="${_('More')}">${_('More')}</a>
+      <a class="small" href="${url(controller='group', action='changes', id=c.group.group_id)}" title="${_('More')}">${_('More')}</a>
     </span>
     <br style="clear: right;" />
   </%self:portlet>
@@ -71,7 +71,7 @@
     %endfor
     <br style="clear: both;" />
     <span class="portlet-link">
-      <a class="small" href="${url(controller='group', action='members', id=c.group.id)}" title="${_('More')}">${_('More') | h.ellipsis}</a>
+      <a class="small" href="${url(controller='group', action='members', id=c.group.group_id)}" title="${_('More')}">${_('More') | h.ellipsis}</a>
     </span>
     <br style="clear: both;" />
   </%self:portlet>
@@ -90,7 +90,7 @@
     %endfor
     <br style="clear: both;" />
     <span class="portlet-link">
-      <a class="small" href="${url(controller='group', action='subjects', id=c.group.id)}" title="${_('More')}">${_('More')}</a>
+      <a class="small" href="${url(controller='group', action='subjects', id=c.group.group_id)}" title="${_('More')}">${_('More')}</a>
     </span>
     <br style="clear: both;" />
   </%self:portlet>
@@ -103,7 +103,7 @@
   <div class="rounded-header">
     <div class="rounded-right">
       <span class="header-links">
-        <a href="${url(controller='group', action='group_home', id=c.group.id, do='hide_page')}" title="${_('Hide group page')}">
+        <a href="${url(controller='group', action='group_home', id=c.group.group_id, do='hide_page')}" title="${_('Hide group page')}">
           ${_('Hide')}
         </a>
       </span>
@@ -118,7 +118,7 @@
     ${_("The group's page is empty. Enter your description.")}
     %endif
     <div class="footer">
-      <a class="btn" href="${url(controller='group', action='edit_page', id=c.group.id)}" title="${_('Edit group front page')}">
+      <a class="btn" href="${url(controller='group', action='edit_page', id=c.group.group_id)}" title="${_('Edit group front page')}">
         <span>${_('Edit')}</span>
       </a>
     </div>
