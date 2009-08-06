@@ -336,13 +336,10 @@ CREATE FUNCTION update_page_tags() RETURNS trigger AS $$
           AND t.tag_id = OLD.tag_id;
         RETURN OLD;
       ELSIF TG_OP = 'INSERT' THEN
-        IF NEW.subject_id IS NULL THEN
-          RETURN NEW;
-        END IF;
-        FOR mpage_id IN SELECT page_id FROM subject_pages WHERE subject_id = NEW.subject_id LOOP
-          SELECT id INTO mtag_id FROM content_tags WHERE page_id = mpage_id AND tag_id = NEW.tag_id;
+        FOR mpage_id IN SELECT page_id FROM subject_pages WHERE subject_id = NEW.content_item_id LOOP
+          SELECT id INTO mtag_id FROM content_tags WHERE content_item_id = mpage_id AND tag_id = NEW.tag_id;
           IF NOT FOUND THEN
-            INSERT INTO content_tags (page_id, tag_id) VALUES (mpage_id, NEW.tag_id);
+            INSERT INTO content_tags (content_item_id, tag_id) VALUES (mpage_id, NEW.tag_id);
           END IF;
         END LOOP;
         RETURN NEW;
