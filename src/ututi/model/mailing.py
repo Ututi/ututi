@@ -173,8 +173,9 @@ class GroupMailingListMessage(object):
     @classmethod
     def get(cls, message_id, group_id):
         try:
+            g = Group.get(group_id)
             return meta.Session.query(cls).filter_by(message_id=message_id,
-                                                     group_id=group_id).one()
+                                                     group_id=g.id).one()
         except NoResultFound:
             return None
 

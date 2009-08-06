@@ -11,6 +11,12 @@ ALTER TEXT SEARCH CONFIGURATION lt
                       word, hword, hword_part
     WITH lithuanian;;
 
+/* A generic table for Ututi objects */
+create table content_items (id bigserial not null,
+       parent_id int8 default null references content_items(id),
+       content_type varchar(20) not null default '',
+       primary key (id));;
+
 /* A table for files */
 
 create table files (id bigserial not null,
@@ -82,7 +88,9 @@ insert into tags (title, title_short, description, parent_id, tag_type)
        values ('Ekonomikos fakultetas', 'ef', '', 1, 'location');;
 
 /* A table for groups */
-create table groups (id varchar(250) not null,
+create table groups (
+       id int8 references content_items(id),
+       group_id varchar(250) not null unique,
        title varchar(250) not null,
        location_id int8 references tags(id) default null,
        year date not null,
@@ -100,23 +108,16 @@ create table group_membership_types (
 
 /* A table that tracks user membership in groups */
 create table group_members (
-       group_id varchar(250) references groups(id) not null,
+       group_id int8 references groups(id) not null,
        user_id int8 references users(id) not null,
        membership_type varchar(20) references group_membership_types(membership_type) not null,
        primary key (group_id, user_id));;
 
 
-insert into groups (id, title, description, year, location_id)
-       select 'moderators', 'Moderatoriai', 'U2ti moderatoriai.', date('2009-1-1'), tags.id
-              from tags where tags.title_short='vu' and tags.parent_id is null;;
-
 insert into group_membership_types (membership_type)
                       values ('administrator');;
 insert into group_membership_types (membership_type)
                       values ('member');;
-
-insert into group_members (group_id, user_id, membership_type)
-                   values ('moderators', 1, 'administrator');;
 
 /* A table for subjects */
 create table subjects (id varchar(150) default null,
@@ -174,14 +175,14 @@ create table subject_pages (
 /* A table that tracks group files */
 
 create table group_files (
-       group_id varchar(250) references groups(id) not null,
+       group_id int8 references groups(id) not null,
        file_id int8 references files(id) on delete cascade not null,
        primary key (group_id, file_id));;
 
 /* A table that tracks subjects watched by a group  */
 
 create table group_watched_subjects (
-       group_id varchar(250) references groups(id) not null,
+       group_id int8 references groups(id) not null,
        subject_id varchar(150) not null,
        subject_location_id int8 not null,
        foreign key (subject_id, subject_location_id) references subjects,
@@ -192,12 +193,12 @@ create table group_watched_subjects (
 create table group_mailing_list_messages (
        id bigserial not null unique,
        message_id varchar(320) not null,
-       group_id varchar(250) references groups(id) not null,
+       group_id int8 references groups(id) not null,
        sender_email varchar(320),
        reply_to_message_id varchar(320) default null,
-       reply_to_group_id varchar(250) references groups(id) default null,
+       reply_to_group_id int8 references groups(id) default null,
        thread_message_id varchar(320) not null,
-       thread_group_id varchar(250) references groups(id) not null,
+       thread_group_id int8 references groups(id) not null,
        author_id int8 references users(id) not null,
        subject varchar(500) not null,
        original text not null,
@@ -212,7 +213,7 @@ create table group_mailing_list_messages (
 
 CREATE FUNCTION set_thread_id() RETURNS trigger AS $$
     DECLARE
-        new_group_id varchar(320) := NULL;
+        new_group_id int8 := NULL;
         new_message_id varchar(250) := NULL;
     BEGIN
         IF NEW.reply_to_message_id is NULL THEN
@@ -238,7 +239,7 @@ CREATE TRIGGER lowercase_email BEFORE INSERT OR UPDATE ON group_mailing_list_mes
 
 create table group_mailing_list_attachments (
        message_id varchar(320) not null,
-       group_id varchar(250) not null,
+       group_id int8 not null,
        file_id int8 references files(id) not null,
        foreign key (message_id, group_id) references group_mailing_list_messages,
        primary key (message_id, group_id, file_id));;
@@ -246,13 +247,9 @@ create table group_mailing_list_attachments (
 /* A table for search indexing */
 create table search_items (
        id bigserial not null,
+       content_item_id int8 not null references content_items(id),
        terms tsvector,
-       group_id varchar(250) references groups(id) on delete cascade default null,
-       page_id int8 references pages(id) on delete cascade default null,
-       subject_id varchar(150) default null,
-       subject_location_id int8 default null,
        location_id int8 references tags(id) default null,
-       foreign key (subject_id, subject_location_id) references subjects on delete cascade on update cascade,
        primary key (id));;
 
 create index search_items_idx on search_items using gin(terms);;
@@ -261,18 +258,16 @@ CREATE FUNCTION update_group_search() RETURNS trigger AS $$
     DECLARE
         search_id int8 := NULL;
     BEGIN
-      SELECT id INTO search_id  FROM search_items WHERE group_id = NEW.id;
+      SELECT id INTO search_id  FROM search_items WHERE content_item_id = NEW.id;
       IF FOUND THEN
-        UPDATE search_items SET terms = to_tsvector(coalesce(NEW.id,''))
-          || to_tsvector(coalesce(NEW.title,''))
+        UPDATE search_items SET terms = to_tsvector(coalesce(NEW.title,''))
           || to_tsvector(coalesce(NEW.description, ''))
           || to_tsvector(coalesce(NEW.page, '')),
           location_id = NEW.location_id
           WHERE id=search_id;
       ELSE
-        INSERT INTO search_items (group_id, terms, location_id) VALUES (NEW.id,
-          to_tsvector(coalesce(NEW.id,''))
-          || to_tsvector(coalesce(NEW.title,''))
+        INSERT INTO search_items (content_item_id, terms, location_id) VALUES (NEW.id,
+          to_tsvector(coalesce(NEW.title,''))
           || to_tsvector(coalesce(NEW.description, ''))
           || to_tsvector(coalesce(NEW.page, '')),
           NEW.location_id);
@@ -289,12 +284,12 @@ CREATE FUNCTION update_page_search() RETURNS trigger AS $$
     DECLARE
         search_id int8 := NULL;
     BEGIN
-      SELECT id INTO search_id  FROM search_items WHERE page_id = NEW.page_id;
+      SELECT id INTO search_id  FROM search_items WHERE content_item_id = NEW.page_id;
       IF FOUND THEN
         UPDATE search_items SET terms = to_tsvector(coalesce(NEW.title,''))
           || to_tsvector(coalesce(NEW.content,'')) WHERE id=search_id;
       ELSE
-        INSERT INTO search_items (page_id, terms) VALUES (NEW.page_id,
+        INSERT INTO search_items (content_item_id, terms) VALUES (NEW.page_id,
           to_tsvector(coalesce(NEW.title,'')) || to_tsvector(coalesce(NEW.content, '')));
       END IF;
       RETURN NEW;
@@ -308,13 +303,13 @@ CREATE FUNCTION update_subject_search() RETURNS trigger AS $$
     DECLARE
         search_id int8 := NULL;
     BEGIN
-      SELECT id INTO search_id  FROM search_items WHERE subject_id = NEW.id and subject_location_id = NEW.location_id;
+      SELECT id INTO search_id  FROM search_items WHERE content_item_id = NEW.id;
       IF FOUND THEN
         UPDATE search_items SET terms = to_tsvector(coalesce(NEW.title,''))
           || to_tsvector(coalesce(NEW.lecturer,'')),
           location_id = NEW.location_id WHERE id=search_id;
       ELSE
-        INSERT INTO search_items (subject_id, subject_location_id, terms, location_id) VALUES (NEW.id, NEW.location_id,
+        INSERT INTO search_items (content_item_id, terms, location_id) VALUES (NEW.id, NEW.location_id,
           to_tsvector(coalesce(NEW.title,''))
           || to_tsvector(coalesce(NEW.lecturer, '')),
           NEW.location_id);
@@ -328,7 +323,7 @@ CREATE TRIGGER update_subject_search AFTER INSERT OR UPDATE ON subjects
 
 /* A table for connecting tags and the tagged content */
 create table content_tags (id bigserial not null,
-       group_id varchar(250) references groups(id) on delete cascade default null,
+       group_id int8 references groups(id) on delete cascade default null,
        page_id int8 references pages(id) on delete cascade default null,
        subject_id varchar(150) default null,
        subject_location_id int8 default null,

@@ -34,6 +34,18 @@ def init_model(engine):
 
 
 def setup_orm(engine):
+    global content_items_table
+    content_items_table = Table("content_items", meta.metadata,
+                                autoload=True,
+                                autoload_with=engine)
+
+    orm.mapper(ContentItem,
+               content_items_table,
+               polymorphic_on=content_items_table.c.content_type,
+               polymorphic_identity='generic',
+               properties = {'parent': relation(ContentItem, backref='children')})
+
+
     global users_table
     users_table = Table("users", meta.metadata,
                         Column('id', Integer, Sequence('users_id_seq'), primary_key=True),
@@ -179,6 +191,9 @@ def setup_orm(engine):
                                          autoload_with=engine)
 
     orm.mapper(Group, groups_table,
+               inherits=ContentItem,
+               polymorphic_identity='group',
+               polymorphic_on=content_items_table.c.content_type,
                properties ={'logo': relation(File),
                             'files': relation(File,
                                               secondary=group_files_table),
@@ -210,9 +225,7 @@ def setup_orm(engine):
     warnings.simplefilter("default", SAWarning)
 
     orm.mapper(SearchItem, search_items_table,
-               properties={'subject' : relation(Subject),
-                           'group' : relation(Group),
-                           'page' : relation(Page)})
+               properties={'object' : relation(ContentItem)})
 
     from ututi.model import mailing
     mailing.setup_orm(engine)
@@ -245,6 +258,11 @@ def teardown_db_defaults(engine, quiet=False):
     connection.execute("create schema public")
     tx.commit()
     connection.close()
+
+content_items_table = None
+class ContentItem(object):
+    """A generic class for content items."""
+    pass
 
 
 def generate_salt():
@@ -397,12 +415,12 @@ class FolderMixin(object):
 group_watched_subjects_table = None
 groups_table = None
 
-class Group(FolderMixin):
+class Group(ContentItem, FolderMixin):
 
     @classmethod
     def get(cls, id):
         try:
-            return meta.Session.query(cls).filter_by(id=id).one()
+            return meta.Session.query(cls).filter_by(group_id=id).one()
         except NoResultFound:
             return None
 
@@ -414,10 +432,10 @@ class Group(FolderMixin):
                                 .filter(gmt.c.group_id == self.id).all()
 
     def url(self, controller='group', action='group_home'):
-        return url_for(controller=controller, action=action, id=self.id)
+        return url_for(controller=controller, action=action, id=self.group_id)
 
-    def __init__(self, id, title=u'', location=None, year=None, description=u''):
-        self.id = id.strip().lower()
+    def __init__(self, group_id, title=u'', location=None, year=None, description=u''):
+        self.group_id = group_id.strip().lower()
         self.title = title
         self.location = location
         if year is None:
@@ -747,14 +765,7 @@ search_items_table = None
 class SearchItem(object):
     @property
     def object(self):
-        if self.group_id is not None:
-            return self.group
-        elif self.subject_id is not None:
-            return self.subject
-        elif self.page_id is not None:
-            return self.page
-        else:
-            return None
+        return None
 
 
 # Reimports for convenience
