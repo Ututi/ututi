@@ -14,6 +14,7 @@ from formencode.foreach import ForEach
 
 from formencode.variabledecode import NestedVariables
 
+from sqlalchemy.sql.expression import not_
 from sqlalchemy.orm.exc import NoResultFound
 
 import ututi.lib.helpers as h
@@ -22,7 +23,8 @@ from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator
 
-from ututi.model import meta, Group, File, SimpleTag
+from ututi.model import LocationTag
+from ututi.model import meta, Group, File, SimpleTag, Subject, subjects_table
 
 log = logging.getLogger(__name__)
 
@@ -130,6 +132,9 @@ class GroupControllerBase(BaseController):
             {'title': _('Files'),
              'link': url(controller='group', action='files', id=c.group.group_id),
              'selected': selected == 'files'},
+            {'title': _('Subjects'),
+             'link': url(controller='group', action='subjects', id=c.group.id),
+             'selected': selected == 'subjects'},
             ]
 
 
@@ -276,3 +281,31 @@ class GroupController(GroupControllerBase, FileViewMixin):
     @group_action
     def delete_folder(self, group):
         return self._delete_folder(group)
+
+    def _watch_subject(self, group):
+        location_id = request.GET['subject_location_id']
+        location = meta.Session.query(LocationTag).filter_by(id=location_id).one()
+        subject_id = request.GET['subject_id']
+        subject = Subject.get(location, subject_id)
+        group.watched_subjects.append(subject)
+        meta.Session.commit()
+
+    @group_action
+    def watch_subject(self, group):
+        self._watch_subject(group)
+        redirect_to(request.referrer)
+
+    @group_action
+    def js_watch_subject(self, group):
+        self._watch_subject(group)
+        return "OK"
+
+    @group_action
+    def subjects(self, group):
+        c.group = group
+        sids = [s.id for s in group.watched_subjects]
+        c.recomended_subjects = meta.Session.query(Subject)\
+            .filter_by(location=group.location)\
+            .filter(not_(subjects_table.c.id.in_(sids))).all()
+        c.breadcrumbs.append(self._actions('subjects'))
+        return render('group/subjects.mako')

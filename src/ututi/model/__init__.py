@@ -433,8 +433,8 @@ class Group(ContentItem, FolderMixin):
                                       gmt.c.user_id == users_table.c.id))\
                                 .filter(gmt.c.group_id == self.id).all()
 
-    def url(self, controller='group', action='group_home'):
-        return url_for(controller=controller, action=action, id=self.group_id)
+    def url(self, controller='group', action='group_home', **kwargs):
+        return url_for(controller=controller, action=action, id=self.group_id, **kwargs)
 
     def __init__(self, group_id, title=u'', location=None, year=None, description=u''):
         self.group_id = group_id.strip().lower()
