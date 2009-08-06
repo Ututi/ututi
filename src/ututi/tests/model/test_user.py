@@ -1,3 +1,5 @@
+from datetime import date
+
 from zope.testing import doctest
 
 from ututi.model import Group
@@ -5,7 +7,10 @@ from ututi.model import Subject, LocationTag, Email, User
 from ututi.model import generate_salt, generate_password, validate_password
 from ututi.model import meta
 
+from ututi.model import GroupMembershipType, GroupMember
+
 from ututi.tests import PylonsLayer
+import ututi
 
 
 def test_generate_salt():
@@ -256,6 +261,22 @@ def test_user_watched_subjects():
 def test_suite():
     suite = doctest.DocTestSuite(
         optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |
-        doctest.NORMALIZE_WHITESPACE)
+        doctest.NORMALIZE_WHITESPACE,
+        setUp=test_setup)
     suite.layer = PylonsLayer
     return suite
+
+def test_setup(test):
+    """Create some models needed for the tests."""
+    ututi.tests.setUp(test)
+    g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date.today(), u'U2ti moderatoriai.')
+    u = User.get('admin@ututi.lt')
+
+    role = GroupMembershipType.get('administrator')
+    gm = GroupMember()
+    gm.user = u
+    gm.group = g
+    gm.role = role
+    meta.Session.add(g)
+    meta.Session.add(gm)
+    meta.Session.commit()
