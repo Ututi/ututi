@@ -25,10 +25,10 @@ ${c.subject.lecturer}
     <ul>
     % for page in c.subject.pages:
       <li>
-        ${h.link_to(page.title, url(controller='subjectpage', page_id=page.id, id=c.subject.id, tags=c.subject.location_path))}
+        ${h.link_to(page.title, url(controller='subjectpage', page_id=page.id, id=c.subject.subject_id, tags=c.subject.location_path))}
       </li>
     % endfor
     </ul>
   % endif
-  ${h.link_to(_('Add page'), url(controller='subjectpage', action='add', id=c.subject.id, tags=c.subject.location_path))}
+  ${h.link_to(_('Add page'), url(controller='subjectpage', action='add', id=c.subject.subject_id, tags=c.subject.location_path))}
 </div>

@@ -146,7 +146,7 @@ class SubjectController(BaseController, FileViewMixin):
 
         redirect_to(controller='subject',
                     action='home',
-                    id=subject.id,
+                    id=subject.subject_id,
                     tags=subject.location_path)
 
 
