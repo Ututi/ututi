@@ -14,7 +14,7 @@ from pylons import config
 from nous.mailpost import processEmailAndPost
 
 import ututi
-from ututi.model import Group, meta, LocationTag, User, GroupMember, GroupMembershipType
+from ututi.model import Group, meta, LocationTag, User, GroupMember, GroupMembershipType, Subject
 
 def ftest_setUp(test):
     ututi.tests.setUp(test)
@@ -28,6 +28,9 @@ def ftest_setUp(test):
     gm.role = role
     meta.Session.add(g)
     meta.Session.add(gm)
+
+    meta.Session.add(Subject(u'mat_analize', u'Matematin\u0117analiz\u0117', LocationTag.get(u'vu'), u'prof. E. Misevi\u010dius'))
+
     meta.Session.commit()
 
 
