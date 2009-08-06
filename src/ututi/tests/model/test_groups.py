@@ -1,8 +1,10 @@
+from datetime import date
 from zope.testing import doctest
 
-from ututi.model import Group, File, meta
+from ututi.model import LocationTag, GroupMembershipType, GroupMember, Group, File, User, meta
 
 from ututi.tests import PylonsLayer
+import ututi
 
 
 def printTree(group):
@@ -90,7 +92,22 @@ def test_empty_folders():
 def test_suite():
     suite = doctest.DocTestSuite(
         optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |
-        doctest.NORMALIZE_WHITESPACE)
+        doctest.NORMALIZE_WHITESPACE,
+        setUp=test_setup)
     suite.layer = PylonsLayer
     return suite
 
+def test_setup(test):
+    """Create some models needed for the tests."""
+    ututi.tests.setUp(test)
+    g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date.today(), u'U2ti moderatoriai.')
+    u = User.get('admin@ututi.lt')
+
+    role = GroupMembershipType.get('administrator')
+    gm = GroupMember()
+    gm.user = u
+    gm.group = g
+    gm.role = role
+    meta.Session.add(g)
+    meta.Session.add(gm)
+    meta.Session.commit()
