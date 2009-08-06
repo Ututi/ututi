@@ -120,40 +120,37 @@ insert into group_membership_types (membership_type)
                       values ('member');;
 
 /* A table for subjects */
-create table subjects (id varchar(150) default null,
+create table subjects (id int8 not null references content_items(id),
+       subject_id varchar(150) default null,
        title varchar(500) not null,
        lecturer varchar(500) default null,
        location_id int8 references tags(id) not null,
-       primary key (id, location_id));;
+       primary key (id));;
 
-insert into subjects (id, title, lecturer, location_id)
-       select 'mat_analize', 'Matematinė analizė', 'prof. E. Misevičius', tags.id
-              from tags where tags.title_short='vu' and tags.parent_id is null;;
+create unique index subject_identifier on subjects (subject_id, location_id);
+
 
 /* A table that tracks subject files */
 
 create table subject_files (
-       subject_id varchar(150) not null,
-       subject_location_id int8 not null,
+       subject_id int8 not null references subjects(id),
        file_id int8 references files(id) on delete cascade not null,
-       foreign key (subject_id, subject_location_id) references subjects,
        primary key (subject_id, file_id));;
 
 /* A table that tracks subjects watched and ignored by a user */
 
 create table user_monitored_subjects (
        user_id int8 references users(id) not null,
-       subject_id varchar(150) not null,
-       subject_location_id int8 not null,
+       subject_id int8 not null references subjects(id),
        ignored bool default false,
-       foreign key (subject_id, subject_location_id) references subjects,
-       primary key (user_id, subject_id, subject_location_id));;
+       primary key (user_id, subject_id));;
 
 /* A table for pages */
 
 create table pages (
-       id bigserial not null, primary key(id),
-       location_id int8 references tags(id) default null);;
+       id int8 not null references content_items(id),
+       location_id int8 references tags(id) default null,
+       primary key(id));;
 
 create table page_versions(id bigserial not null,
        page_id int8 references pages(id) not null,
@@ -166,11 +163,9 @@ create table page_versions(id bigserial not null,
 /* A table linking pages and subjects */
 
 create table subject_pages (
-       subject_id varchar(150) not null,
-       subject_location_id int8 not null,
+       subject_id int8 not null references subjects(id),
        page_id int8 not null references pages(id),
-       foreign key (subject_id, subject_location_id) references subjects on update cascade,
-       primary key (subject_id, subject_location_id, page_id));;
+       primary key (subject_id, page_id));;
 
 /* A table that tracks group files */
 
@@ -183,10 +178,8 @@ create table group_files (
 
 create table group_watched_subjects (
        group_id int8 references groups(id) not null,
-       subject_id varchar(150) not null,
-       subject_location_id int8 not null,
-       foreign key (subject_id, subject_location_id) references subjects,
-       primary key (group_id, subject_id, subject_location_id));;
+       subject_id int8 not null references subjects(id),
+       primary key (group_id, subject_id));;
 
 /* A table for group mailing list emails */
 
@@ -309,10 +302,9 @@ CREATE FUNCTION update_subject_search() RETURNS trigger AS $$
           || to_tsvector(coalesce(NEW.lecturer,'')),
           location_id = NEW.location_id WHERE id=search_id;
       ELSE
-        INSERT INTO search_items (content_item_id, terms, location_id) VALUES (NEW.id, NEW.location_id,
+        INSERT INTO search_items (content_item_id, location_id, terms) VALUES (NEW.id, NEW.location_id,
           to_tsvector(coalesce(NEW.title,''))
-          || to_tsvector(coalesce(NEW.lecturer, '')),
-          NEW.location_id);
+          || to_tsvector(coalesce(NEW.lecturer, '')));
       END IF;
       RETURN NEW;
     END
@@ -323,12 +315,8 @@ CREATE TRIGGER update_subject_search AFTER INSERT OR UPDATE ON subjects
 
 /* A table for connecting tags and the tagged content */
 create table content_tags (id bigserial not null,
-       group_id int8 references groups(id) on delete cascade default null,
-       page_id int8 references pages(id) on delete cascade default null,
-       subject_id varchar(150) default null,
-       subject_location_id int8 default null,
+       content_item_id int8 not null references content_items(id) on delete cascade,
        tag_id int8 references tags(id) not null,
-       foreign key (subject_id, subject_location_id) references subjects on delete cascade on update cascade,
        primary key (id));;
 
 /* A trigger for updating page tags and location tags - they are taken from their parent subject */
@@ -343,16 +331,15 @@ CREATE FUNCTION update_page_tags() RETURNS trigger AS $$
         END IF;
         /* the tag was deleted, unalias it from all the subject's pages */
         DELETE FROM content_tags t USING subject_pages p
-          WHERE t.page_id = p.page_id
+          WHERE t.content_item_id = p.id
           AND p.subject_id = OLD.subject_id
-          AND p.subject_location_id = OLD.subject_location_id
           AND t.tag_id = OLD.tag_id;
         RETURN OLD;
       ELSIF TG_OP = 'INSERT' THEN
         IF NEW.subject_id IS NULL THEN
           RETURN NEW;
         END IF;
-        FOR mpage_id IN SELECT page_id FROM subject_pages WHERE subject_id = NEW.subject_id AND subject_location_id = NEW.subject_location_id LOOP
+        FOR mpage_id IN SELECT page_id FROM subject_pages WHERE subject_id = NEW.subject_id LOOP
           SELECT id INTO mtag_id FROM content_tags WHERE page_id = mpage_id AND tag_id = NEW.tag_id;
           IF NOT FOUND THEN
             INSERT INTO content_tags (page_id, tag_id) VALUES (mpage_id, NEW.tag_id);
@@ -371,7 +358,7 @@ CREATE FUNCTION set_page_tags() RETURNS trigger AS $$
     BEGIN
       DELETE FROM content_tags WHERE page_id = NEW.page_id;
       INSERT INTO content_tags (page_id, tag_id) SELECT NEW.page_id, tag_id FROM content_tags
-        WHERE subject_id = NEW.subject_id AND subject_location_id = NEW.subject_location_id;
+        WHERE subject_id = NEW.subject_id;
       RETURN NEW;
     END
 $$ LANGUAGE plpgsql;;
@@ -384,14 +371,16 @@ CREATE TRIGGER set_page_tags BEFORE INSERT ON subject_pages
 CREATE FUNCTION set_page_location() RETURNS trigger AS $$
     DECLARE
         search_id int8 := NULL;
+        subject_location_id int8 := NULL;
     BEGIN
-      UPDATE pages SET location_id = NEW.subject_location_id WHERE id = NEW.page_id;
+      SELECT location_id FROM subjects WHERE id = NEW.subject_id;
+      UPDATE pages SET location_id = subject_location_id WHERE id = NEW.page_id;
 
       SELECT id INTO search_id  FROM search_items WHERE page_id = NEW.page_id;
       IF FOUND THEN
-        UPDATE search_items SET location_id = NEW.subject_location_id WHERE page_id = NEW.page_id;
+        UPDATE search_items SET location_id = subject_location_id WHERE page_id = NEW.page_id;
       ELSE
-        INSERT INTO search_items (page_id, location_id) VALUES (NEW.page_id, NEW.subject_location_id);
+        INSERT INTO search_items (page_id, location_id) VALUES (NEW.page_id, subject_location_id);
       END IF;
 
       RETURN NEW;
@@ -407,10 +396,13 @@ CREATE FUNCTION update_page_location() RETURNS trigger AS $$
       UPDATE pages SET location_id = NEW.location_id
         FROM pages p JOIN subject_pages s
         ON p.id = s.page_id
-        WHERE s.subject_id = NEW.id
-        AND s.subject_location_id = NEW.location_id;
+        WHERE s.subject_id = NEW.id;
       RETURN NEW;
-      UPDATE search_items SET location_id = NEW.subject_location_id WHERE page_id = NEW.page_id;
+      UPDATE search_items SET location_id = NEW.location_id
+        FROM search_items si
+        JOIN subject_pages sp
+        ON si.id = sp.page_id
+        WHERE sp.subject_id = NEW.id;
     END
 $$ LANGUAGE plpgsql;;
 

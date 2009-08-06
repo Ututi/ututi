@@ -34,36 +34,6 @@ def init_model(engine):
 
 
 def setup_orm(engine):
-    global content_items_table
-    content_items_table = Table("content_items", meta.metadata,
-                                autoload=True,
-                                autoload_with=engine)
-
-    orm.mapper(ContentItem,
-               content_items_table,
-               polymorphic_on=content_items_table.c.content_type,
-               polymorphic_identity='generic',
-               properties = {'parent': relation(ContentItem, backref='children')})
-
-
-    global users_table
-    users_table = Table("users", meta.metadata,
-                        Column('id', Integer, Sequence('users_id_seq'), primary_key=True),
-                        Column('fullname', Unicode(assert_unicode=True)),
-                        autoload=True,
-                        autoload_with=engine)
-
-    orm.mapper(User,
-               users_table,
-               properties = {'emails': relation(Email, backref='user'),
-                             'logo': relation(File)})
-
-    global emails_table
-    emails_table = Table("emails", meta.metadata,
-                         autoload=True,
-                         autoload_with=engine)
-    orm.mapper(Email, emails_table)
-
     #relationships between content items and tags
     global content_tags_table
     content_tags_table = Table("content_tags", meta.metadata,
@@ -95,6 +65,38 @@ def setup_orm(engine):
                polymorphic_identity='')
 
 
+    global content_items_table
+    content_items_table = Table("content_items", meta.metadata,
+                                autoload=True,
+                                autoload_with=engine)
+
+    orm.mapper(ContentItem,
+               content_items_table,
+               polymorphic_on=content_items_table.c.content_type,
+               polymorphic_identity='generic',
+               properties = {'parent': relation(ContentItem, backref='children'),
+                             'tags': relation(SimpleTag,
+                                              secondary=content_tags_table)})
+
+
+    global users_table
+    users_table = Table("users", meta.metadata,
+                        Column('id', Integer, Sequence('users_id_seq'), primary_key=True),
+                        Column('fullname', Unicode(assert_unicode=True)),
+                        autoload=True,
+                        autoload_with=engine)
+
+    orm.mapper(User,
+               users_table,
+               properties = {'emails': relation(Email, backref='user'),
+                             'logo': relation(File)})
+
+    global emails_table
+    emails_table = Table("emails", meta.metadata,
+                         autoload=True,
+                         autoload_with=engine)
+    orm.mapper(Email, emails_table)
+
     global files_table
     files_table = Table("files", meta.metadata,
                         Column('id', Integer, Sequence('files_id_seq'), primary_key=True),
@@ -117,9 +119,10 @@ def setup_orm(engine):
                         autoload=True,
                         autoload_with=engine)
     orm.mapper(Page, pages_table,
-               properties={'tags': relation(SimpleTag,
-                                            secondary=content_tags_table),
-                           'location': relation(LocationTag)})
+               inherits=ContentItem,
+               polymorphic_identity='page',
+               polymorphic_on=content_items_table.c.content_type,
+               properties={'location': relation(LocationTag)})
 
     global page_versions_table
     page_versions_table = Table("page_versions", meta.metadata,
@@ -139,20 +142,20 @@ def setup_orm(engine):
                                 autoload_with=engine)
     global subjects_table
     subjects_table = Table("subjects", meta.metadata,
-                           Column('id', Integer, Sequence('subjects_id_seq'), primary_key=True),
                            Column('title', Unicode(assert_unicode=True)),
                            Column('lecturer', Unicode(assert_unicode=True)),
                            autoload=True,
                            useexisting=True,
                            autoload_with=engine)
     orm.mapper(Subject, subjects_table,
+               inherits=ContentItem,
+               polymorphic_identity='subject',
+               polymorphic_on=content_items_table.c.content_type,
                properties={'files': relation(File,
                                              secondary=subject_files_table),
                            'pages': relation(Page,
                                              secondary=subject_pages_table),
-                           'location': relation(LocationTag),
-                           'tags' : relation(SimpleTag,
-                                             secondary=content_tags_table)})
+                           'location': relation(LocationTag)})
 
     global group_membership_types_table
     group_membership_types_table = Table("group_membership_types", meta.metadata,
@@ -199,10 +202,7 @@ def setup_orm(engine):
                                               secondary=group_files_table),
                             'watched_subjects': relation(Subject,
                                                          secondary=group_watched_subjects_table),
-                            'location': relation(LocationTag),
-                            'tags' : relation(SimpleTag,
-                                              secondary=content_tags_table)})
-
+                            'location': relation(LocationTag)})
 
     global user_monitored_subjects_table
     user_monitored_subjects_table = Table("user_monitored_subjects", meta.metadata,
@@ -466,12 +466,12 @@ class GroupMembershipType(object):
 
 subjects_table = None
 
-class Subject(FolderMixin):
+class Subject(ContentItem, FolderMixin):
 
     @classmethod
     def get(cls, location, id):
         try:
-            return meta.Session.query(cls).filter_by(id=id, location=location).one()
+            return meta.Session.query(cls).filter_by(subject_id=id, location=location).one()
         except NoResultFound:
             return None
 
@@ -487,19 +487,19 @@ class Subject(FolderMixin):
     def url(self, controller='subject', action='home'):
         return url(controller=controller,
                    action=action,
-                   id=self.id,
+                   id=self.subject_id,
                    tags=self.location_path)
 
     def __init__(self, subject_id, title, location, lecturer=None):
         self.location = location
         self.title = title
-        self.id = subject_id
+        self.subject_id = subject_id
         self.lecturer = lecturer
 
 
 pages_table = None
 
-class Page(object):
+class Page(ContentItem):
     """Class representing user-editable wiki-like pages."""
 
     @classmethod
