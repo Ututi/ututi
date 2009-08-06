@@ -356,9 +356,9 @@ CREATE TRIGGER update_page_tags BEFORE INSERT OR DELETE ON content_tags
 /* a trigger to set the page's tags to the parent subject's tags on page creation */
 CREATE FUNCTION set_page_tags() RETURNS trigger AS $$
     BEGIN
-      DELETE FROM content_tags WHERE page_id = NEW.page_id;
-      INSERT INTO content_tags (page_id, tag_id) SELECT NEW.page_id, tag_id FROM content_tags
-        WHERE subject_id = NEW.subject_id;
+      DELETE FROM content_tags WHERE content_item_id = NEW.page_id;
+      INSERT INTO content_tags (content_item_id, tag_id) SELECT NEW.page_id, tag_id FROM content_tags
+        WHERE content_item_id = NEW.subject_id;
       RETURN NEW;
     END
 $$ LANGUAGE plpgsql;;
@@ -373,14 +373,14 @@ CREATE FUNCTION set_page_location() RETURNS trigger AS $$
         search_id int8 := NULL;
         subject_location_id int8 := NULL;
     BEGIN
-      SELECT location_id FROM subjects WHERE id = NEW.subject_id;
+      SELECT location_id INTO subject_location_id FROM subjects WHERE id = NEW.subject_id;
       UPDATE pages SET location_id = subject_location_id WHERE id = NEW.page_id;
 
-      SELECT id INTO search_id  FROM search_items WHERE page_id = NEW.page_id;
+      SELECT id INTO search_id  FROM search_items WHERE content_item_id = NEW.page_id;
       IF FOUND THEN
-        UPDATE search_items SET location_id = subject_location_id WHERE page_id = NEW.page_id;
+        UPDATE search_items SET location_id = subject_location_id WHERE content_item_id = NEW.page_id;
       ELSE
-        INSERT INTO search_items (page_id, location_id) VALUES (NEW.page_id, subject_location_id);
+        INSERT INTO search_items (content_item_id, location_id) VALUES (NEW.page_id, subject_location_id);
       END IF;
 
       RETURN NEW;
