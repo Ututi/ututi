@@ -113,7 +113,7 @@ class SubjectController(BaseController, FileViewMixin):
 
         redirect_to(controller='subject',
                     action='home',
-                    id=subj.id,
+                    id=subj.subject_id,
                     tags=subj.location_path)
 
     def edit(self, id, tags):
