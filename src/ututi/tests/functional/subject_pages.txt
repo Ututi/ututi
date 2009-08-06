@@ -28,7 +28,7 @@ And add a page for it.
 We should get redirected to the index view of the page we just created.
 
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize/page/1'
+    'http://localhost/subject/vu/mat_analize/page/3'
 
     >>> browser.printQuery("id('page_header')")
     <h1 id="page_header">How to be awesome!</h1>
@@ -47,7 +47,7 @@ Let's edit the page now.
 And see how it works.
 
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize/page/1'
+    'http://localhost/subject/vu/mat_analize/page/3'
 
     >>> browser.printQuery("id('page_header')")
     <h1 id="page_header">How to be awesome!</h1>
@@ -70,7 +70,7 @@ We should see the list of pages.
       <h2>Pages</h2>
       <ul>
         <li>
-          <a href="/subject/vu/mat_analize/page/1">How to be awesome!</a>
+          <a href="/subject/vu/mat_analize/page/3">How to be awesome!</a>
         </li>
       </ul>
       <a href="/subject/vu/mat_analize/pages/add">Add page</a>
