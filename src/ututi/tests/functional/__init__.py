@@ -29,7 +29,7 @@ def ftest_setUp(test):
     meta.Session.add(g)
     meta.Session.add(gm)
 
-    meta.Session.add(Subject(u'mat_analize', u'Matematin\u0117analiz\u0117', LocationTag.get(u'vu'), u'prof. E. Misevi\u010dius'))
+    meta.Session.add(Subject(u'mat_analize', u'Matematin\u0117 analiz\u0117', LocationTag.get(u'vu'), u'prof. E. Misevi\u010dius'))
 
     meta.Session.commit()
 
