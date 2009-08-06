@@ -3,6 +3,8 @@ import os
 import unittest
 import subprocess
 import shutil
+from datetime import date
+
 from pkg_resources import resource_string, resource_stream
 
 from zope.testing import doctest
@@ -12,6 +14,21 @@ from pylons import config
 from nous.mailpost import processEmailAndPost
 
 import ututi
+from ututi.model import Group, meta, LocationTag, User, GroupMember, GroupMembershipType
+
+def ftest_setUp(test):
+    ututi.tests.setUp(test)
+    g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date.today(), u'U2ti moderatoriai.')
+    u = User.get('admin@ututi.lt')
+
+    role = GroupMembershipType.get('administrator')
+    gm = GroupMember()
+    gm.user = u
+    gm.group = g
+    gm.role = role
+    meta.Session.add(g)
+    meta.Session.add(gm)
+    meta.Session.commit()
 
 
 def collect_ftests(package=None, level=None, layer=None, filenames=None,
@@ -38,7 +55,7 @@ def collect_ftests(package=None, level=None, layer=None, filenames=None,
         suite = doctest.DocFileSuite(filename,
                                      package=package,
                                      optionflags=optionflags,
-                                     setUp=ututi.tests.setUp,
+                                     setUp=ftest_setUp,
                                      tearDown=ututi.tests.tearDown)
         suite.layer = ututi.tests.PylonsLayer
         if level is not None:
