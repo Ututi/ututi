@@ -419,8 +419,12 @@ class Group(ContentItem, FolderMixin):
 
     @classmethod
     def get(cls, id):
+        query = meta.Session.query(cls)
         try:
-            return meta.Session.query(cls).filter_by(group_id=id).one()
+            if isinstance (id, (long, int)):
+                return query.filter_by(id=id).one()
+            else:
+                return query.filter_by(group_id=id).one()
         except NoResultFound:
             return None
 
