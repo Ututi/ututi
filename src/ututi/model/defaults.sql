@@ -326,13 +326,10 @@ CREATE FUNCTION update_page_tags() RETURNS trigger AS $$
       mpage_id int8 := NULL;
     BEGIN
       IF TG_OP = 'DELETE' THEN
-        IF OLD.subject_id IS NULL THEN
-          RETURN OLD;
-        END IF;
         /* the tag was deleted, unalias it from all the subject's pages */
         DELETE FROM content_tags t USING subject_pages p
-          WHERE t.content_item_id = p.id
-          AND p.subject_id = OLD.subject_id
+          WHERE t.content_item_id = p.page_id
+          AND p.subject_id = OLD.content_item_id
           AND t.tag_id = OLD.tag_id;
         RETURN OLD;
       ELSIF TG_OP = 'INSERT' THEN
