@@ -1,5 +1,4 @@
 Test for group mailing list UI
-from ututi.tests import printQuery
 ==============================
 
     >>> browser = Browser()
