@@ -85,6 +85,7 @@ $(document).ready(function(){
 			  iframe['progress_ticker'].text('Done');
 			  window.clearInterval(iframe['interval']);
 			  $('.folder', result_area).append(response);
+              $('.delete_button', result_area).click(deleteFile);
               $('.folder .message', result_area).hide();
 		  }
       });
@@ -134,7 +135,7 @@ $(document).ready(function(){
                 }});
     }
 
-    $('.delete_button').click(function(event) {
+    function deleteFile(event) {
         var folder = $(event.target).parent().parent();
         var url = $(event.target).prev('.delete_url').val();
         $.ajax({type: "GET",
@@ -145,7 +146,9 @@ $(document).ready(function(){
                         $('.message', folder).show();
                     }
         }});
-    });
+    }
+
+    $('.delete_button').click(deleteFile);
 
 	$('.new_folder_button').click(function (event) {
         newFolder(event.target);

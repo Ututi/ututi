@@ -395,7 +395,7 @@ class FolderMixin(object):
 
     @property
     def folders_dict(self):
-        result = {}
+        result = {'': Folder('')}
         for file in self.files:
             result.setdefault(file.folder, Folder(file.folder))
             if not file.isNullFile():

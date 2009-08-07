@@ -278,7 +278,7 @@ AjaxUpload.prototype = {
 		input.setAttribute('name', this._settings.name);
 		var styles = {
 			'position' : 'absolute'
-			,'margin': '-5px 0 0 -175px'
+			,'margin': '-15px 0 0 -250px'
 			,'padding': 0
 			,'width': '220px'
 			,'height': '30px'
