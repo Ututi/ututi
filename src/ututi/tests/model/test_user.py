@@ -203,7 +203,7 @@ def test_user_watched_subjects():
 
         >>> user.watchSubject(subjects[0])
         >>> user.watchSubject(subjects[1])
-        >>> [s.title for s in user.watched_subjects]
+        >>> sorted([s.title for s in user.watched_subjects])
         [u'Subject 0', u'Subject 1']
 
         >>> user.watchSubject(subjects[2])

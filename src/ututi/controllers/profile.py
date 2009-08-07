@@ -38,7 +38,7 @@ class ProfileController(BaseController):
 
     def home(self):
         if c.user is not None:
-            return render('/index.mako')
+            return render('/profile/home.mako')
         else:
             abort(401, 'You are not authenticated')
 
