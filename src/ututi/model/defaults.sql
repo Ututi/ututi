@@ -234,11 +234,9 @@ create table group_mailing_list_attachments (
 
 /* A table for search indexing */
 create table search_items (
-       id bigserial not null,
        content_item_id int8 not null references content_items(id),
        terms tsvector,
-       location_id int8 references tags(id) default null,
-       primary key (id));;
+       primary key (content_item_id));;
 
 create index search_items_idx on search_items using gin(terms);;
 
@@ -246,12 +244,12 @@ CREATE FUNCTION update_group_search() RETURNS trigger AS $$
     DECLARE
         search_id int8 := NULL;
     BEGIN
-      SELECT id INTO search_id  FROM search_items WHERE content_item_id = NEW.id;
+      SELECT content_item_id INTO search_id  FROM search_items WHERE content_item_id = NEW.id;
       IF FOUND THEN
         UPDATE search_items SET terms = to_tsvector(coalesce(NEW.title,''))
           || to_tsvector(coalesce(NEW.description, ''))
           || to_tsvector(coalesce(NEW.page, ''))
-           WHERE id=search_id;
+           WHERE content_item_id=search_id;
       ELSE
         INSERT INTO search_items (content_item_id, terms) VALUES (NEW.id,
           to_tsvector(coalesce(NEW.title,''))
@@ -270,10 +268,10 @@ CREATE FUNCTION update_page_search() RETURNS trigger AS $$
     DECLARE
         search_id int8 := NULL;
     BEGIN
-      SELECT id INTO search_id  FROM search_items WHERE content_item_id = NEW.page_id;
+      SELECT content_item_id INTO search_id  FROM search_items WHERE content_item_id = NEW.page_id;
       IF FOUND THEN
         UPDATE search_items SET terms = to_tsvector(coalesce(NEW.title,''))
-          || to_tsvector(coalesce(NEW.content,'')) WHERE id=search_id;
+          || to_tsvector(coalesce(NEW.content,'')) WHERE content_item_id=search_id;
       ELSE
         INSERT INTO search_items (content_item_id, terms) VALUES (NEW.page_id,
           to_tsvector(coalesce(NEW.title,'')) || to_tsvector(coalesce(NEW.content, '')));
@@ -289,11 +287,11 @@ CREATE FUNCTION update_subject_search() RETURNS trigger AS $$
     DECLARE
         search_id int8 := NULL;
     BEGIN
-      SELECT id INTO search_id  FROM search_items WHERE content_item_id = NEW.id;
+      SELECT content_item_id INTO search_id  FROM search_items WHERE content_item_id = NEW.id;
       IF FOUND THEN
         UPDATE search_items SET terms = to_tsvector(coalesce(NEW.title,''))
           || to_tsvector(coalesce(NEW.lecturer,''))
-          WHERE id=search_id;
+          WHERE content_item_id=search_id;
       ELSE
         INSERT INTO search_items (content_item_id, terms) VALUES (NEW.id,
           to_tsvector(coalesce(NEW.title,''))
@@ -362,9 +360,6 @@ CREATE FUNCTION set_page_location() RETURNS trigger AS $$
     BEGIN
       SELECT location_id INTO subject_location_id FROM content_items WHERE id = NEW.subject_id;
       UPDATE content_items SET location_id = subject_location_id WHERE id = NEW.page_id;
-
-      SELECT id INTO search_id  FROM search_items WHERE content_item_id = NEW.page_id;
-
       RETURN NEW;
     END
 $$ LANGUAGE plpgsql;;
