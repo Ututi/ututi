@@ -127,7 +127,7 @@ create table subjects (id int8 not null references content_items(id),
        location_id int8 references tags(id) not null,
        primary key (id));;
 
-create unique index subject_identifier on subjects (subject_id, location_id);
+create unique index subject_identifier on subjects (subject_id, location_id);;
 
 
 /* A table that tracks subject files */
