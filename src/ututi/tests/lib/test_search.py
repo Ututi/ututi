@@ -21,12 +21,12 @@ def test_basic_search():
         >>> meta.Session.add(g)
         >>> meta.Session.commit()
         >>> results = search(u'biologija')
-        >>> [result.group.title for result in results]
+        >>> [result.object.title for result in results]
         [u'Bioinformatikai']
 
     Let's try out the lithuanian spelling:
 
-        >>> [result.group.title for result in search(u'informatikos')]
+        >>> [result.object.title for result in search(u'informatikos')]
         [u'Bioinformatikai']
 
     Let's add a subject and see what we get:
@@ -57,6 +57,7 @@ def test_tag_search():
     First, let's create a few items that we can search for.
 
         >>> g = Group('new_grp', u'Biology students', description=u'biologija matematika infortikos mokslas')
+        >>> g.location = LocationTag.get(u'vu/ef')
         >>> meta.Session.add(g)
         >>> tg = SimpleTag(u'test tag')
         >>> g.tags.append(tg)
@@ -65,6 +66,11 @@ def test_tag_search():
     Now let's try searching for them by tags only
 
         >>> [result.object.title for result in search(tags=[u'test tag'])]
+        [u'Biology students']
+
+    We can combine location and simple tags
+
+        >>> [result.object.title for result in search(tags=[u'test tag', u'vu'])]
         [u'Biology students']
 
     Let's add another tag and try searching for it. Nothing has been tagged with it, so we should
