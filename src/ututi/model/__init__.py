@@ -765,9 +765,7 @@ class File(object):
 
 search_items_table = None
 class SearchItem(object):
-    @property
-    def object(self):
-        return None
+    pass
 
 
 # Reimports for convenience
