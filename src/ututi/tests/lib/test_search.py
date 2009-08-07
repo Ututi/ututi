@@ -124,9 +124,9 @@ def test_location_search():
     """
 
 def test_suite():
-    suite = unittest.TestSuite()
-#     suite = doctest.DocTestSuite(
-#         optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |
-#         doctest.NORMALIZE_WHITESPACE)
-#     suite.layer = PylonsLayer
+#    suite = unittest.TestSuite()
+    suite = doctest.DocTestSuite(
+        optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |
+        doctest.NORMALIZE_WHITESPACE)
+    suite.layer = PylonsLayer
     return suite
