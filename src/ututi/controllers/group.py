@@ -133,7 +133,7 @@ class GroupControllerBase(BaseController):
              'link': url(controller='group', action='files', id=c.group.group_id),
              'selected': selected == 'files'},
             {'title': _('Subjects'),
-             'link': url(controller='group', action='subjects', id=c.group.id),
+             'link': url(controller='group', action='subjects', id=c.group.group_id),
              'selected': selected == 'subjects'},
             ]
 

@@ -66,7 +66,7 @@ $(document).ready(function(){
       </a>
       <h4>
         <a href="${subject.url()}">${subject.title}</a>
-        <a href="${c.group.url(action='watch_subject', subject_id=subject.id, subject_location_id=subject.location.id)}" class="select_subject_button">${_('Pick')}</a>
+        <a href="${c.group.url(action='watch_subject', subject_id=subject.subject_id, subject_location_id=subject.location.id)}" class="select_subject_button">${_('Pick')}</a>
       </h4>
       % if subject.lecturer:
       <p class="smaller"><a href="#">${subject.lecturer}</a></p>

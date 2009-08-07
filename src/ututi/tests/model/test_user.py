@@ -207,7 +207,7 @@ def test_user_watched_subjects():
         [u'Subject 0', u'Subject 1']
 
         >>> user.watchSubject(subjects[2])
-        >>> [s.title for s in user.watched_subjects]
+        >>> sorted([s.title for s in user.watched_subjects])
         [u'Subject 0', u'Subject 1', u'Subject 2']
 
     Subjects watched by group our user is in are included in the list
