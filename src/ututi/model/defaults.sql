@@ -11,14 +11,7 @@ ALTER TEXT SEARCH CONFIGURATION lt
                       word, hword, hword_part
     WITH lithuanian;;
 
-/* A generic table for Ututi objects */
-create table content_items (id bigserial not null,
-       parent_id int8 default null references content_items(id),
-       content_type varchar(20) not null default '',
-       primary key (id));;
-
 /* A table for files */
-
 create table files (id bigserial not null,
        md5 char(32),
        folder varchar(255) default '' not null,
@@ -32,6 +25,28 @@ create table files (id bigserial not null,
        primary key (id));;
 
 create index md5 on files (md5);;
+
+/* A table for tags (location and simple tags) */
+create table tags (id bigserial not null,
+       parent_id int8 references tags(id) default null,
+       title varchar(250) not null,
+       title_short varchar(50) default null,
+       description text default null,
+       logo_id int8 references files(id) default null,
+       tag_type varchar(10) default null,
+       primary key (id));;
+
+insert into tags (title, title_short, description, tag_type)
+       values ('Vilniaus universitetas', 'vu', 'Seniausias universitetas Lietuvoje.', 'location');;
+insert into tags (title, title_short, description, parent_id, tag_type)
+       values ('Ekonomikos fakultetas', 'ef', '', 1, 'location');;
+
+/* A generic table for Ututi objects */
+create table content_items (id bigserial not null,
+       parent_id int8 default null references content_items(id),
+       content_type varchar(20) not null default '',
+       location_id int8 default null references tags(id),
+       primary key (id));;
 
 /* Create first user=admin and password=asdasd */
 
@@ -72,27 +87,11 @@ $get_user_by_email$ LANGUAGE sql;;
 
 insert into emails (id, email, confirmed) values (1, 'admin@ututi.lt', true);;
 
-/* A table for tags (location and simple tags) */
-create table tags (id bigserial not null,
-       parent_id int8 references tags(id) default null,
-       title varchar(250) not null,
-       title_short varchar(50) default null,
-       description text default null,
-       logo_id int8 references files(id) default null,
-       tag_type varchar(10) default null,
-       primary key (id));;
-
-insert into tags (title, title_short, description, tag_type)
-       values ('Vilniaus universitetas', 'vu', 'Seniausias universitetas Lietuvoje.', 'location');;
-insert into tags (title, title_short, description, parent_id, tag_type)
-       values ('Ekonomikos fakultetas', 'ef', '', 1, 'location');;
-
 /* A table for groups */
 create table groups (
        id int8 references content_items(id),
        group_id varchar(250) not null unique,
        title varchar(250) not null,
-       location_id int8 references tags(id) default null,
        year date not null,
        description text,
        show_page bool default true,
@@ -124,10 +123,7 @@ create table subjects (id int8 not null references content_items(id),
        subject_id varchar(150) default null,
        title varchar(500) not null,
        lecturer varchar(500) default null,
-       location_id int8 references tags(id) not null,
        primary key (id));;
-
-create unique index subject_identifier on subjects (subject_id, location_id);;
 
 
 /* A table that tracks subject files */
@@ -149,7 +145,6 @@ create table user_monitored_subjects (
 
 create table pages (
        id int8 not null references content_items(id),
-       location_id int8 references tags(id) default null,
        primary key(id));;
 
 create table page_versions(id bigserial not null,
@@ -255,15 +250,13 @@ CREATE FUNCTION update_group_search() RETURNS trigger AS $$
       IF FOUND THEN
         UPDATE search_items SET terms = to_tsvector(coalesce(NEW.title,''))
           || to_tsvector(coalesce(NEW.description, ''))
-          || to_tsvector(coalesce(NEW.page, '')),
-          location_id = NEW.location_id
-          WHERE id=search_id;
+          || to_tsvector(coalesce(NEW.page, ''))
+           WHERE id=search_id;
       ELSE
-        INSERT INTO search_items (content_item_id, terms, location_id) VALUES (NEW.id,
+        INSERT INTO search_items (content_item_id, terms) VALUES (NEW.id,
           to_tsvector(coalesce(NEW.title,''))
           || to_tsvector(coalesce(NEW.description, ''))
-          || to_tsvector(coalesce(NEW.page, '')),
-          NEW.location_id);
+          || to_tsvector(coalesce(NEW.page, '')));
       END IF;
       RETURN NEW;
     END
@@ -299,10 +292,10 @@ CREATE FUNCTION update_subject_search() RETURNS trigger AS $$
       SELECT id INTO search_id  FROM search_items WHERE content_item_id = NEW.id;
       IF FOUND THEN
         UPDATE search_items SET terms = to_tsvector(coalesce(NEW.title,''))
-          || to_tsvector(coalesce(NEW.lecturer,'')),
-          location_id = NEW.location_id WHERE id=search_id;
+          || to_tsvector(coalesce(NEW.lecturer,''))
+          WHERE id=search_id;
       ELSE
-        INSERT INTO search_items (content_item_id, location_id, terms) VALUES (NEW.id, NEW.location_id,
+        INSERT INTO search_items (content_item_id, terms) VALUES (NEW.id,
           to_tsvector(coalesce(NEW.title,''))
           || to_tsvector(coalesce(NEW.lecturer, '')));
       END IF;
@@ -367,15 +360,10 @@ CREATE FUNCTION set_page_location() RETURNS trigger AS $$
         search_id int8 := NULL;
         subject_location_id int8 := NULL;
     BEGIN
-      SELECT location_id INTO subject_location_id FROM subjects WHERE id = NEW.subject_id;
-      UPDATE pages SET location_id = subject_location_id WHERE id = NEW.page_id;
+      SELECT location_id INTO subject_location_id FROM content_items WHERE id = NEW.subject_id;
+      UPDATE content_items SET location_id = subject_location_id WHERE id = NEW.page_id;
 
       SELECT id INTO search_id  FROM search_items WHERE content_item_id = NEW.page_id;
-      IF FOUND THEN
-        UPDATE search_items SET location_id = subject_location_id WHERE content_item_id = NEW.page_id;
-      ELSE
-        INSERT INTO search_items (content_item_id, location_id) VALUES (NEW.page_id, subject_location_id);
-      END IF;
 
       RETURN NEW;
     END
@@ -387,18 +375,17 @@ CREATE TRIGGER set_page_location AFTER INSERT ON subject_pages
 /* a trigger to update the page's tags when the subject's location changes */
 CREATE FUNCTION update_page_location() RETURNS trigger AS $$
     BEGIN
-      UPDATE pages SET location_id = NEW.location_id
-        FROM pages p JOIN subject_pages s
-        ON p.id = s.page_id
-        WHERE s.subject_id = NEW.id;
+      IF NEW.content_type <> 'subject' THEN
+        RETURN NEW;
+      END IF;
+      UPDATE content_items SET location_id = NEW.location_id
+             FROM subject_pages s
+             WHERE s.page_id = id
+             AND s.subject_id = NEW.id;
+
       RETURN NEW;
-      UPDATE search_items SET location_id = NEW.location_id
-        FROM search_items si
-        JOIN subject_pages sp
-        ON si.id = sp.page_id
-        WHERE sp.subject_id = NEW.id;
     END
 $$ LANGUAGE plpgsql;;
 
-CREATE TRIGGER update_page_location AFTER UPDATE ON subjects
+CREATE TRIGGER update_page_location AFTER UPDATE ON content_items
     FOR EACH ROW EXECUTE PROCEDURE update_page_location();;

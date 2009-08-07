@@ -76,7 +76,8 @@ def setup_orm(engine):
                polymorphic_identity='generic',
                properties = {'parent': relation(ContentItem, backref='children'),
                              'tags': relation(SimpleTag,
-                                              secondary=content_tags_table)})
+                                              secondary=content_tags_table),
+                             'location': relation(LocationTag)})
 
 
     global users_table
@@ -121,8 +122,7 @@ def setup_orm(engine):
     orm.mapper(Page, pages_table,
                inherits=ContentItem,
                polymorphic_identity='page',
-               polymorphic_on=content_items_table.c.content_type,
-               properties={'location': relation(LocationTag)})
+               polymorphic_on=content_items_table.c.content_type)
 
     global page_versions_table
     page_versions_table = Table("page_versions", meta.metadata,
@@ -154,8 +154,7 @@ def setup_orm(engine):
                properties={'files': relation(File,
                                              secondary=subject_files_table),
                            'pages': relation(Page,
-                                             secondary=subject_pages_table),
-                           'location': relation(LocationTag)})
+                                             secondary=subject_pages_table)})
 
     global group_membership_types_table
     group_membership_types_table = Table("group_membership_types", meta.metadata,
@@ -201,8 +200,7 @@ def setup_orm(engine):
                             'files': relation(File,
                                               secondary=group_files_table),
                             'watched_subjects': relation(Subject,
-                                                         secondary=group_watched_subjects_table),
-                            'location': relation(LocationTag)})
+                                                         secondary=group_watched_subjects_table)})
 
     global user_monitored_subjects_table
     user_monitored_subjects_table = Table("user_monitored_subjects", meta.metadata,
