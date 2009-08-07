@@ -1,7 +1,22 @@
-from ututi.model import meta, SearchItem, SimpleTag, LocationTag
+from ututi.model import meta, SearchItem, SimpleTag, LocationTag, ContentItem
 
-from sqlalchemy.sql import select, func
-from sqlalchemy.sql.expression import and_, or_
+from sqlalchemy.sql import func
+
+def search_query(text=None, tags=None, obj_type=None, extra=None):
+    """Prepare the search query according to the parameters given."""
+
+    query = meta.Session.query(SearchItem).join(ContentItem)
+
+    query = _search_query_text(query, text)
+
+    query = _search_query_type(query, obj_type)
+
+    query = _search_query_tags(query, tags)
+
+    if extra is not None:
+        query = extra(query)
+    return query
+
 
 def search(text=None, tags=None, type=None, extra=None):
     """
@@ -13,22 +28,28 @@ def search(text=None, tags=None, type=None, extra=None):
     type - the type to search for (accepted values: 'group', 'page', 'subject'),
     external - external callback to run on the query before fetching results.
     """
-    #XXX: filtering by tags is not implemented yet.
-    from ututi.model import content_tags_table as ttbl, search_items_table as stbl
 
-    query = meta.Session.query(SearchItem)
+    query = search_query(text, tags, type, extra)
+    return query.all()
 
-    if text is not None and isinstance(text, unicode):
-        ts = "terms @@ plainto_tsquery('%s')" % text
-        query = query.filter(ts)
 
-    if type is not None:
-        if type == 'group':
-            query = query.filter("not group_id is null")
-        elif type == 'subject':
-            query = query.filter(and_("not subject_id is null", "not subject_location_id is null"))
-        elif type == 'page':
-            query = query.filter("not page_id is null")
+def _search_query_text(query, text=None):
+    """Prepare the initial query, searching by text and ranking by the proximity."""
+
+    if text is not None:
+        query = query.filter("terms @@ plainto_tsquery('%s')" % text)\
+            .order_by("ts_rank_cd(terms, plainto_tsquery('%s'))" % text)
+    return query
+
+def _search_query_type(query, obj_type):
+    """Filter the query by object type."""
+    if obj_type is not None:
+        query = query.filter(ContentItem.content_type == obj_type)
+
+    return query
+
+def _search_query_tags(query, tags):
+    """Filter the query by tags."""
 
     if tags is not None:
         stags = [] #simple tags
@@ -44,31 +65,11 @@ def search(text=None, tags=None, type=None, extra=None):
                 ltags.extend([lt.id for lt in ltag.flatten()])
             else:
                 #a tag name that is not in the database was entered. Return empty list.
-                return []
+                return query.filter("false")
 
         if len(stags) > 0:
-            tag_query = select([ttbl.c.page_id,
-                                ttbl.c.group_id,
-                                ttbl.c.subject_id,
-                                ttbl.c.subject_location_id])
-
-            tag_query = tag_query.where(ttbl.c.tag_id.in_(stags))
-            tag_query = tag_query.group_by(tag_query.c.group_id,
-                                           tag_query.c.page_id,
-                                           tag_query.c.subject_id,
-                                           tag_query.c.subject_location_id)
-            tag_query = tag_query.having(func.count(ttbl.c.id) == len(stags)).alias()
-
-            query = query.join((tag_query,
-                                or_(stbl.c.group_id == tag_query.c.group_id,
-                                     stbl.c.page_id == tag_query.c.page_id,
-                                    and_(stbl.c.subject_id == tag_query.c.subject_id,
-                                         stbl.c.subject_location_id == tag_query.c.subject_location_id))))
+            query = query.join(ContentItem.tags).filter(SimpleTag.id.in_(stags)).group_by(SearchItem).having(func.count(SearchItem.content_item_id) == len(stags))
 
         if len(ltags) > 0:
-            query = query.filter(stbl.c.location_id.in_(ltags))
-
-    if extra is not None:
-        query = extra(query)
-
-    return query.all()
+            query = query.filter(ContentItem.location_id.in_(ltags))
+    return query
