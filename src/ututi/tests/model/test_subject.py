@@ -1,7 +1,8 @@
 from zope.testing import doctest
 
-from ututi.model import LocationTag, Subject
+from ututi.model import LocationTag, Subject, meta
 from ututi.tests import PylonsLayer
+import ututi
 
 
 def test_Subject_get():
@@ -11,7 +12,7 @@ def test_Subject_get():
     the moment is a string that is shown in the subject url.
 
         >>> subject = Subject.get(LocationTag.get([u'vu']), 'mat_analize')
-        >>> subject.id, subject.title
+        >>> subject.subject_id, subject.title
         ('mat_analize', u'Matematin\u0117 analiz\u0117')
 
     In the future though, a subject will be uniquely identified by a
@@ -41,6 +42,14 @@ def test_Subject_get():
 def test_suite():
     suite = doctest.DocTestSuite(
         optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |
-        doctest.NORMALIZE_WHITESPACE)
+        doctest.NORMALIZE_WHITESPACE,
+        setUp=test_setup)
     suite.layer = PylonsLayer
     return suite
+
+def test_setup(test):
+    """Create some models needed for the tests."""
+    ututi.tests.setUp(test)
+    meta.Session.add(Subject(u'mat_analize', u'Matematin\u0117 analiz\u0117', LocationTag.get(u'vu'), u'prof. E. Misevi\u010dius'))
+
+    meta.Session.commit()

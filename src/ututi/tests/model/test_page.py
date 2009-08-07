@@ -2,9 +2,10 @@ from zope.testing import doctest
 
 from ututi.model import LocationTag
 from ututi.model import Subject
-from ututi.model import Page, PageVersion, Group, User, meta
+from ututi.model import Page, PageVersion, User, meta
 from ututi.tests import PylonsLayer
 
+import ututi
 
 def test_pages():
     """Test if pages are created and retrieved correctly.
@@ -20,7 +21,7 @@ def test_pages():
     When added to the database they get ids assigned automatically:
 
         >>> page.id
-        1L
+        2L
 
     Once created, a page can be retrieved by its id.
 
@@ -121,6 +122,14 @@ def test_subject_pages():
 def test_suite():
     suite = doctest.DocTestSuite(
         optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |
-        doctest.NORMALIZE_WHITESPACE)
+        doctest.NORMALIZE_WHITESPACE,
+        setUp=test_setup)
     suite.layer = PylonsLayer
     return suite
+
+def test_setup(test):
+    """Create some models needed for the tests."""
+    ututi.tests.setUp(test)
+    meta.Session.add(Subject(u'mat_analize', u'Matematin\u0117 analiz\u0117', LocationTag.get(u'vu'), u'prof. E. Misevi\u010dius'))
+
+    meta.Session.commit()
