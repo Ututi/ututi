@@ -105,6 +105,7 @@ def make_map():
                 action='logo')
 
     #user's information
+    map.connect('/home', controller='profile', action='home')
     map.connect('/profile', controller='profile', action='index')
     map.connect('/profile/{action}', controller='profile')
     map.connect('/confirm_emails', controller='profile', action='confirm_emails')
@@ -115,7 +116,6 @@ def make_map():
 
     # CUSTOM ROUTES HERE
     map.connect('/', controller='home')
-    map.connect('/home', controller='home', action='home')
     map.connect('/register', controller='home', action='register')
 
     map.connect('/got_mail', controller='receivemail', action='index')

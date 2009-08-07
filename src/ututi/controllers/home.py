@@ -68,15 +68,9 @@ class HomeController(BaseController):
 
      def index(self):
           if c.user is not None:
-               redirect_to(controller='home', action='home')
+               redirect_to(controller='profile', action='home')
           else:
                return render('/anonymous_index.mako')
-
-     def home(self):
-          if c.user is not None:
-               return render('/index.mako')
-          else:
-               abort(401, 'You are not authenticated')
 
      @validate(schema=RegistrationForm(), form='index')
      def register(self):
