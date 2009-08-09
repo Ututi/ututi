@@ -41,15 +41,6 @@ insert into tags (title, title_short, description, tag_type)
 insert into tags (title, title_short, description, parent_id, tag_type)
        values ('Ekonomikos fakultetas', 'ef', '', 1, 'location');;
 
-/* A generic table for Ututi objects */
-create table content_items (id bigserial not null,
-       parent_id int8 default null references content_items(id),
-       content_type varchar(20) not null default '',
-       location_id int8 default null references tags(id),
-       primary key (id));;
-
-/* Create first user=admin and password=asdasd */
-
 create table users (
        id bigserial not null,
        fullname varchar(100),
@@ -58,7 +49,19 @@ create table users (
        last_seen timestamp not null default now(),
        primary key (id));;
 
+/* Create first user=admin and password=asdasd */
 insert into users (fullname, password) values ('Adminas Adminovix', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7');;
+
+/* A generic table for Ututi objects */
+create table content_items (id bigserial not null,
+       parent_id int8 default null references content_items(id),
+       content_type varchar(20) not null default '',
+       created_by int8 references users(id) not null,
+       created_on timestamp not null default now(),
+       modified_by int8 references users(id) default null,
+       modified_on timestamp not null default now(),
+       location_id int8 default null references tags(id),
+       primary key (id));;
 
 /* Storing the emails of the users. */
 create table emails (id int8 not null references users(id),
@@ -384,3 +387,27 @@ $$ LANGUAGE plpgsql;;
 
 CREATE TRIGGER update_page_location AFTER UPDATE ON content_items
     FOR EACH ROW EXECUTE PROCEDURE update_page_location();;
+
+/* a trigger to update the date and user who created the object */
+CREATE FUNCTION on_content_create() RETURNS trigger AS $$
+    BEGIN
+      NEW.created_by = current_setting('ututi.active_user');
+      NEW.created_on = now();
+      RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+CREATE TRIGGER on_content_create BEFORE INSERT ON content_items
+    FOR EACH ROW EXECUTE PROCEDURE on_content_create();;
+
+/* a trigger to update the date and user who modified the object */
+CREATE FUNCTION on_content_update() RETURNS trigger AS $$
+    BEGIN
+      NEW.modified_by = current_setting('ututi.active_user');
+      NEW.modified_on = now();
+      RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+CREATE TRIGGER on_content_update AFTER UPDATE ON content_items
+    FOR EACH ROW EXECUTE PROCEDURE on_content_update();;

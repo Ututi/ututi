@@ -134,7 +134,7 @@ class AdminController(BaseController):
 
             if year != '' and year != 'None':
                 group.year = date(int(year), 1, 1)
-            meta.Session.commit()
+        meta.Session.commit()
         redirect_to(controller='group', action='index')
 
     def import_group_logos(self):
@@ -188,7 +188,7 @@ class AdminController(BaseController):
 
             subj.title = title
             subj.lecturer = lecturer
-            meta.Session.commit()
+        meta.Session.commit()
         redirect_to(controller='subject', action='index')
 
     def import_group_members(self):
@@ -267,8 +267,7 @@ class AdminController(BaseController):
             subject.pages.append(Page(page_title,
                                       page_content,
                                       author))
-            meta.Session.commit()
-
+        meta.Session.commit()
         redirect_to(controller='admin', action='index')
 
     def import_group_watched_subjects(self):

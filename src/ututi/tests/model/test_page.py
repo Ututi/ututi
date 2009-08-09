@@ -79,10 +79,10 @@ def test_pages():
 
     The version object will be created automatically:
 
-        >>> [(version.title, version.content) for version in page.versions]
-        [(u'Some coursework (new)', u'Some exclusive information about it.'),
-         (u'Some coursework (updated)', u'Some more information about it.'),
-         (u'Some coursework', u'Some information about it.')]
+        >>> sorted([(version.title, version.content) for version in page.versions])
+        [(u'Some coursework', u'Some information about it.'),
+         (u'Some coursework (new)', u'Some exclusive information about it.'),
+         (u'Some coursework (updated)', u'Some more information about it.')]
 
     """
 
@@ -127,9 +127,15 @@ def test_suite():
     suite.layer = PylonsLayer
     return suite
 
+
 def test_setup(test):
     """Create some models needed for the tests."""
     ututi.tests.setUp(test)
+
+    u = User.get('admin@ututi.lt')
+    meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+
     meta.Session.add(Subject(u'mat_analize', u'Matematin\u0117 analiz\u0117', LocationTag.get(u'vu'), u'prof. E. Misevi\u010dius'))
 
     meta.Session.commit()
+    meta.Session.execute("SET ututi.active_user TO %d" % u.id)

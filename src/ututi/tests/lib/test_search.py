@@ -4,17 +4,23 @@ from ututi.tests import PylonsLayer
 from ututi.model import meta, Subject, Page, Group, LocationTag, SimpleTag, User
 from ututi.lib.search import search
 
+
 def _query_filter(query):
     """A simple callback that limits the query to one result"""
     return query.limit(1)
 
 
 def test_basic_search():
-    """Tests basic searching by text contents.
+    r"""Tests basic searching by text contents.
 
     A basic test: we set up a group and search for its text.
     Set the indexing language first, something the controllers always do for us.
-        >>> t = meta.Session.execute("SET default_text_search_config = 'public.lt';;");
+
+        >>> u = User.get(u'admin@ututi.lt')
+        >>> res = meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+
+        >>> t = meta.Session.execute("SET default_text_search_config = 'public.lt'");
+
         >>> g = Group('new_group', u'Bioinformatikai', description=u'Grup\u0117 kurioje domimasi biologija ir informatika')
         >>> meta.Session.add(g)
         >>> meta.Session.commit()
@@ -49,10 +55,14 @@ def test_basic_search():
 
     """
 
+
 def test_tag_search():
-    """Tests searching with tags.
+    r"""Tests searching with tags.
 
     First, let's create a few items that we can search for.
+
+        >>> u = User.get(u'admin@ututi.lt')
+        >>> res = meta.Session.execute("SET ututi.active_user TO %d" % u.id)
 
         >>> g = Group('new_grp', u'Biology students', description=u'biologija matematika infortikos mokslas')
         >>> g.location = LocationTag.get(u'vu/ef')
@@ -104,15 +114,20 @@ def test_tag_search():
         [u'page title']
     """
 
+
 def test_location_search():
-    """Testing filtering by location.
+    r"""Testing filtering by location.
 
     First let's create a few content items.
-        >>> t = meta.Session.execute("SET default_text_search_config = 'public.lt';;");
+
+        >>> u = User.get(u'admin@ututi.lt')
+        >>> res = meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+
+        >>> t = meta.Session.execute("SET default_text_search_config = 'public.lt'");
+
         >>> g = Group('new_group', u'Bioinformatikai', description=u'Grup\u0117 kurioje domimasi biologija ir informatika')
         >>> g.location = LocationTag.get(u'vu/ef')
         >>> s = Subject('biologija', u'Biologijos pagrindai', LocationTag.get(u'vu'))
-        >>> u = User.get(u'admin@ututi.lt')
         >>> p = Page(u'page title', u'Puslapio tekstas', u)
         >>> s.pages.append(p)
         >>> meta.Session.add(g)
@@ -126,6 +141,7 @@ def test_location_search():
         [u'Bioinformatikai']
 
     """
+
 
 def test_suite():
     suite = doctest.DocTestSuite(

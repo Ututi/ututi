@@ -266,12 +266,15 @@ def test_suite():
     suite.layer = PylonsLayer
     return suite
 
+
 def test_setup(test):
     """Create some models needed for the tests."""
     ututi.tests.setUp(test)
-    g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date.today(), u'U2ti moderatoriai.')
-    u = User.get('admin@ututi.lt')
 
+    u = User.get('admin@ututi.lt')
+    meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+
+    g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date.today(), u'U2ti moderatoriai.')
     role = GroupMembershipType.get('administrator')
     gm = GroupMember()
     gm.user = u

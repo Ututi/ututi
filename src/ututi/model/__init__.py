@@ -85,6 +85,7 @@ def setup_orm(engine):
                         Column('id', Integer, Sequence('users_id_seq'), primary_key=True),
                         Column('fullname', Unicode(assert_unicode=True)),
                         autoload=True,
+                        useexisting=True,
                         autoload_with=engine)
 
     orm.mapper(User,

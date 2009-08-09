@@ -18,8 +18,10 @@ from ututi.model import Group, meta, LocationTag, User, GroupMember, GroupMember
 
 def ftest_setUp(test):
     ututi.tests.setUp(test)
-    g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date.today(), u'U2ti moderatoriai.')
+
     u = User.get('admin@ututi.lt')
+    meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+    g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date.today(), u'U2ti moderatoriai.')
 
     role = GroupMembershipType.get('administrator')
     gm = GroupMember()
@@ -30,8 +32,8 @@ def ftest_setUp(test):
     meta.Session.add(gm)
 
     meta.Session.add(Subject(u'mat_analize', u'Matematin\u0117 analiz\u0117', LocationTag.get(u'vu'), u'prof. E. Misevi\u010dius'))
-
     meta.Session.commit()
+    meta.Session.execute("SET ututi.active_user TO 0")
 
 
 def collect_ftests(package=None, level=None, layer=None, filenames=None,

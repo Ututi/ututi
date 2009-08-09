@@ -78,6 +78,7 @@ class PylonsLayer(object):
         # XXX Set up database here
         # meta.metadata.create_all(meta.engine)
         teardown_db_defaults(meta.engine, quiet=True)
+        meta.Session.execute("SET ututi.active_user TO 0")
         initialize_db_defaults(meta.engine)
         mail_queue[:] = []
         try:
@@ -92,6 +93,7 @@ class PylonsLayer(object):
     def testTearDown(self):
         url._pop_object()
         pylons.translator._pop_object()
+        meta.Session.execute("SET ututi.active_user TO 0")
         meta.Session.close()
         # XXX Tear down database here
         teardown_db_defaults(meta.engine)

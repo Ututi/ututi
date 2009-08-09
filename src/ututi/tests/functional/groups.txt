@@ -9,6 +9,12 @@ Group adding and import
 A list of all groups is show at /groups.
 
     >>> browser = Browser()
+    >>> browser.open('http://localhost/')
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
+
     >>> browser.open('http://localhost/groups')
     >>> browser.printQuery("id('group_list')//li/a/text()")
     Moderatoriai

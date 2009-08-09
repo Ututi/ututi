@@ -55,7 +55,7 @@ instance/done: instance/var/data/postgresql.conf
 instance/var/run/.s.PGSQL.${PGPORT}:
 	mkdir -p instance/var/run
 	mkdir -p instance/var/log
-	${PG_PATH}/bin/pg_ctl -D instance/var/data -o "-c unix_socket_directory=${PWD}/instance/var/run/" start  -l instance/var/log/pg.log
+	${PG_PATH}/bin/pg_ctl -D instance/var/data -o "-c unix_socket_directory=${PWD}/instance/var/run/ -c custom_variable_classes='ututi' -c ututi.active_user=''" start  -l instance/var/log/pg.log
 	sleep 5
 
 .PHONY: testpsql

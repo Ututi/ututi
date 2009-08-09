@@ -4,6 +4,8 @@ Provides the BaseController class for subclassing.
 """
 from datetime import datetime
 
+from sqlalchemy.exc import InvalidRequestError
+
 from pylons.controllers import WSGIController
 from pylons.templating import render_mako as render
 from pylons import c
@@ -21,11 +23,13 @@ class BaseController(WSGIController):
         # available in environ['pylons.routes_dict']
 
         c.user = current_user()
+        meta.Session.execute("SET ututi.active_user TO 0")
 
         # Record the time the user was last seen.
         if c.user is not None:
             c.user.last_seen = datetime.utcnow()
             meta.Session.commit()
+            meta.Session.execute("SET ututi.active_user TO %d" % c.user.id)
 
         # Set the DB text search language
         meta.Session.execute("SET default_text_search_config = 'public.lt'");
@@ -33,4 +37,10 @@ class BaseController(WSGIController):
         try:
             return WSGIController.__call__(self, environ, start_response)
         finally:
+            try:
+                meta.Session.execute("SET ututi.active_user TO 0")
+            except InvalidRequestError:
+                # Ignore the error, if we got an error in the
+                # controller this call raises an error
+                pass
             meta.Session.remove()
