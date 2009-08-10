@@ -31,9 +31,6 @@ class BaseController(WSGIController):
             meta.Session.commit()
             meta.Session.execute("SET ututi.active_user TO %d" % c.user.id)
 
-        # Set the DB text search language
-        meta.Session.execute("SET default_text_search_config = 'public.lt'");
-
         try:
             return WSGIController.__call__(self, environ, start_response)
         finally:

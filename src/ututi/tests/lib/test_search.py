@@ -19,8 +19,6 @@ def test_basic_search():
         >>> u = User.get(u'admin@ututi.lt')
         >>> res = meta.Session.execute("SET ututi.active_user TO %d" % u.id)
 
-        >>> t = meta.Session.execute("SET default_text_search_config = 'public.lt'");
-
         >>> g = Group('new_group', u'Bioinformatikai', description=u'Grup\u0117 kurioje domimasi biologija ir informatika')
         >>> meta.Session.add(g)
         >>> meta.Session.commit()
@@ -30,7 +28,6 @@ def test_basic_search():
 
     Let's try out the lithuanian spelling:
 
-        >>> t = meta.Session.execute("SET default_text_search_config = 'public.lt'");
         >>> res = meta.Session.execute("SET ututi.active_user TO %d" % u.id)
 
         >>> [result.object.title for result in search(u'informatikos')]
@@ -110,8 +107,6 @@ def test_tag_search():
         >>> s.pages.append(p)
         >>> meta.Session.commit()
 
-        >>> t = meta.Session.execute("SET default_text_search_config = 'public.lt'");
-
         >>> [result.object.title for result in search(tags=[u'a tag'])]
         [u'Test subject', u'page title']
 
@@ -127,8 +122,6 @@ def test_location_search():
 
         >>> u = User.get(u'admin@ututi.lt')
         >>> res = meta.Session.execute("SET ututi.active_user TO %d" % u.id)
-
-        >>> t = meta.Session.execute("SET default_text_search_config = 'public.lt'");
 
         >>> g = Group('new_group', u'Bioinformatikai', description=u'Grup\u0117 kurioje domimasi biologija ir informatika')
         >>> g.location = LocationTag.get(u'vu/ef')
