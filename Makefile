@@ -165,7 +165,7 @@ clean:
 .PHONY: coverage
 coverage: bin/test
 	rm -rf coverage
-	bin/test --all --coverage=coverage
+	bin/test --coverage=coverage
 	mv parts/test/coverage .
 	@cd coverage && ls | grep -v tests | xargs grep -c '^>>>>>>' | grep -v ':0$$'
 
