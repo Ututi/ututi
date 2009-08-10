@@ -47,6 +47,8 @@ class ReceivemailController(BaseController):
         if message.author is None:
             abort(404)
 
+        meta.Session.execute("SET ututi.active_user TO %d" % message.author.id)
+
         meta.Session.add(message)
 
         attachments = []

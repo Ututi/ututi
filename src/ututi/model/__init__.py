@@ -35,6 +35,21 @@ def init_model(engine):
 
 def setup_orm(engine):
     #relationships between content items and tags
+    global files_table
+    files_table = Table("files", meta.metadata,
+                        Column('filename', Unicode(assert_unicode=True)),
+                        Column('folder', Unicode(assert_unicode=True)),
+                        Column('title', Unicode(assert_unicode=True)),
+                        Column('description', Unicode(assert_unicode=True)),
+                        autoload=True,
+                        useexisting=True,
+                        autoload_with=engine)
+
+    global content_items_table
+    content_items_table = Table("content_items", meta.metadata,
+                                autoload=True,
+                                autoload_with=engine)
+
     global content_tags_table
     content_tags_table = Table("content_tags", meta.metadata,
                                autoload=True,
@@ -51,8 +66,8 @@ def setup_orm(engine):
                                autoload_with=engine)
     tag_mapper = orm.mapper(Tag,
                             tags_table,
-                            properties = {'logo': relation(File)})
-
+                            properties = {'logo': relation(File,
+                                                           primaryjoin=files_table.c.id==tags_table.c.logo_id)})
     orm.mapper(LocationTag,
                inherits=tag_mapper,
                polymorphic_on=tags_table.c.tag_type,
@@ -64,12 +79,6 @@ def setup_orm(engine):
                polymorphic_on=tags_table.c.tag_type,
                polymorphic_identity='')
 
-
-    global content_items_table
-    content_items_table = Table("content_items", meta.metadata,
-                                autoload=True,
-                                autoload_with=engine)
-
     orm.mapper(ContentItem,
                content_items_table,
                polymorphic_on=content_items_table.c.content_type,
@@ -79,6 +88,10 @@ def setup_orm(engine):
                                               secondary=content_tags_table),
                              'location': relation(LocationTag)})
 
+    orm.mapper(File, files_table,
+               inherits=ContentItem,
+               polymorphic_identity='fileu',
+               polymorphic_on=content_items_table.c.content_type)
 
     global users_table
     users_table = Table("users", meta.metadata,
@@ -98,18 +111,6 @@ def setup_orm(engine):
                          autoload=True,
                          autoload_with=engine)
     orm.mapper(Email, emails_table)
-
-    global files_table
-    files_table = Table("files", meta.metadata,
-                        Column('id', Integer, Sequence('files_id_seq'), primary_key=True),
-                        Column('filename', Unicode(assert_unicode=True)),
-                        Column('folder', Unicode(assert_unicode=True)),
-                        Column('title', Unicode(assert_unicode=True)),
-                        Column('description', Unicode(assert_unicode=True)),
-                        autoload=True,
-                        useexisting=True,
-                        autoload_with=engine)
-    orm.mapper(File, files_table)
 
     global subject_pages_table
     subject_pages_table = Table("subject_pages", meta.metadata,
@@ -197,7 +198,8 @@ def setup_orm(engine):
                inherits=ContentItem,
                polymorphic_identity='group',
                polymorphic_on=content_items_table.c.content_type,
-               properties ={'logo': relation(File),
+               properties ={'logo': relation(File,
+                                             primaryjoin=files_table.c.id==groups_table.c.logo_id),
                             'files': relation(File,
                                               secondary=group_files_table),
                             'watched_subjects': relation(Subject,
@@ -675,7 +677,7 @@ class LocationTag(Tag):
         return tag
 
 
-class File(object):
+class File(ContentItem):
     """Class representing user-uploaded files."""
 
     def __init__(self, filename, title, mimetype=None, created=None,

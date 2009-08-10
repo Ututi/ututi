@@ -56,10 +56,15 @@ But if someone would sent an email with an attachment, it sure would get stored:
 
 Not just stored, it should appear in the files list:
 
-    >>> browser = Browser('http://localhost/files')
+    >>> browser = Browser()
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
+    >>> browser.open('http://localhost/files')
 
     >>> browser.printQuery('id("file_list")//a')
-    <a href="/files/get/1" class="file-link">README.txt</a>
+    <a href="/files/get/..." class="file-link">README.txt</a>
 
 Also it would be stripped from the actual email and replaced with a
 link to the file on our system:
@@ -79,7 +84,7 @@ link to the file on our system:
     <BLANKLINE>
     Also, I just wanted to send you this file:
     <BLANKLINE>
-    <a href="http://localhost/files/get/1">README.txt</a>
+    <a href="http://localhost/files/get/...">README.txt</a>
 
     >>> print email.recipients
     ['admin@ututi.lt']
@@ -98,8 +103,8 @@ repository:
     >>> browser.reload()
 
     >>> browser.printQuery('id("file_list")//a')
-    <a href="/files/get/1" class="file-link">README.txt</a>
-    <a href="/files/get/2" class="file-link">README.txt</a>
+    <a href="/files/get/..." class="file-link">README.txt</a>
+    <a href="/files/get/..." class="file-link">README.txt</a>
 
 But the link in the email will point to the other "file" entry in the
 list of files:
@@ -118,7 +123,7 @@ list of files:
     <BLANKLINE>
     Also, I just wanted to send you this file:
     <BLANKLINE>
-    <a href="http://localhost/files/get/2">README.txt</a>
+    <a href="http://localhost/files/get/...">README.txt</a>
 
     >>> browser.getLink('README.txt').click()
     >>> browser.printContents()
@@ -139,9 +144,9 @@ add any additional files to the repository:
     /uploads/cb396bb6/487560f2/6de19949/6051b42e
 
     >>> browser.printQuery('id("file_list")//a')
-    <a href="/files/get/1" class="file-link">README.txt</a>
-    <a href="/files/get/2" class="file-link">README.txt</a>
-    <a href="/files/get/3" class="file-link">file.txt</a>
+    <a href="/files/get/..." class="file-link">README.txt</a>
+    <a href="/files/get/..." class="file-link">README.txt</a>
+    <a href="/files/get/..." class="file-link">file.txt</a>
 
 If a message gets posted more than once, it is simply ignored:
 
@@ -150,9 +155,9 @@ If a message gets posted more than once, it is simply ignored:
     ...                   'moderators@ututi.lt')
     >>> browser.open('http://localhost/files')
     >>> browser.printQuery('id("file_list")//a')
-    <a href="/files/get/1" class="file-link">README.txt</a>
-    <a href="/files/get/2" class="file-link">README.txt</a>
-    <a href="/files/get/3" class="file-link">file.txt</a>
+    <a href="/files/get/..." class="file-link">README.txt</a>
+    <a href="/files/get/..." class="file-link">README.txt</a>
+    <a href="/files/get/..." class="file-link">file.txt</a>
 
     >>> mail_queue
     []

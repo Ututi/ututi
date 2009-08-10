@@ -3,6 +3,9 @@ Tests for ajax file management views
 
 File upload:
 
+    >>> res = app.post("/dologin",
+    ...                params={'login': 'admin@ututi.lt', 'password': 'asdasd'})
+
     >>> from textwrap import dedent
     >>> res = app.post("/subject/vu/mat_analize/upload_file",
     ...                params={'folder': ''},
@@ -10,9 +13,9 @@ File upload:
     >>> print dedent(res.body)
     <li class="file">
       <img src="/images/mimetypes_icons/unknown.png" />
-      <a href="/files/get/1">text.txt</a>
-      <input class="move_url" type="hidden" value="/files/move/1" />
-      <input class="delete_url" type="hidden" value="/files/delete/1" />
+      <a href="/files/get/3">text.txt</a>
+      <input class="move_url" type="hidden" value="/files/move/3" />
+      <input class="delete_url" type="hidden" value="/files/delete/3" />
       <img src="/images/delete.png" class="delete_button" />
     </li>
 
@@ -22,7 +25,7 @@ File upload:
     >>> print dedent(res.body)
     <li class="file">
       <img src="/images/mimetypes_icons/unknown.png" />
-      <a href="/files/get/2">image.png</a>
+      <a href="/files/get/4">image.png</a>
       ...
     </li>
 
@@ -32,7 +35,7 @@ File upload:
     >>> print dedent(res.body)
     <li class="file">
       <img src="/images/mimetypes_icons/unknown.png" />
-      <a href="/files/get/3">other_text.txt</a>
+      <a href="/files/get/5">other_text.txt</a>
       ...
     </li>
 
@@ -42,7 +45,7 @@ File upload:
     >>> print dedent(res.body)
     <li class="file">
       <img src="/images/mimetypes_icons/unknown.png" />
-      <a href="/files/get/4">more_text.txt</a>
+      <a href="/files/get/6">more_text.txt</a>
       ...
     </li>
 
@@ -142,19 +145,19 @@ Both folders should be gone:
 
 Deleting files:
 
-    >>> app.get('/files/delete/1').status
-    '200 OK'
-
     >>> app.get('/files/delete/3').status
     '200 OK'
 
-    >>> app.get('/files/get/1', expect_errors=True).status
-    '404 Not Found'
+    >>> app.get('/files/delete/5').status
+    '200 OK'
 
     >>> app.get('/files/get/3', expect_errors=True).status
     '404 Not Found'
 
-    >>> app.post('/files/move/4',
+    >>> app.get('/files/get/5', expect_errors=True).status
+    '404 Not Found'
+
+    >>> app.post('/files/move/6',
     ...          params={'source_type': 'group',
     ...                  'source_id': 'moderators',
     ...                  'target_type': 'group',
@@ -174,7 +177,7 @@ Moving files:
     Uga Buga:
        more_text.txt
 
-    >>> app.post('/files/move/4',
+    >>> app.post('/files/move/6',
     ...          params={'source_type': 'group',
     ...                  'source_id': 'moderators',
     ...                  'target_type': 'subject',
@@ -193,7 +196,7 @@ Moving files:
        image.png
        more_text.txt
 
-    >>> app.post('/files/move/2',
+    >>> app.post('/files/move/4',
     ...          params={'source_type': 'subject',
     ...                  'source_id': 'mat_analize',
     ...                  'source_location': l1,

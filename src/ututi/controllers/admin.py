@@ -224,7 +224,7 @@ class AdminController(BaseController):
             # f.store(open(os.path.join('/home/ignas/src/ututi/ututi/', line[5])))
             group.files.append(f)
 
-            meta.Session.commit()
+        meta.Session.commit()
         redirect_to(controller='admin', action='index')
 
     def import_subject_files(self):
@@ -241,7 +241,7 @@ class AdminController(BaseController):
             # f.store(open(os.path.join('/home/ignas/src/ututi/ututi/', line[7])))
             subject.files.append(f)
 
-            meta.Session.commit()
+        meta.Session.commit()
         redirect_to(controller='admin', action='index')
 
     def import_group_pages(self):

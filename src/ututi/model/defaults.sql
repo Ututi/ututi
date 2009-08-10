@@ -11,57 +11,16 @@ ALTER TEXT SEARCH CONFIGURATION lt
                       word, hword, hword_part
     WITH lithuanian;;
 
-/* A table for files */
-create table files (id bigserial not null,
-       md5 char(32),
-       folder varchar(255) default '' not null,
-       mimetype varchar(255) default 'application/octet-stream',
-       filesize int8,
-       filename varchar(500),
-       title varchar(500),
-       description text default '',
-       created timestamp default now(),
-       modified timestamp default null,
-       primary key (id));;
-
-create index md5 on files (md5);;
-
-/* A table for tags (location and simple tags) */
-create table tags (id bigserial not null,
-       parent_id int8 references tags(id) default null,
-       title varchar(250) not null,
-       title_short varchar(50) default null,
-       description text default null,
-       logo_id int8 references files(id) default null,
-       tag_type varchar(10) default null,
-       primary key (id));;
-
-insert into tags (title, title_short, description, tag_type)
-       values ('Vilniaus universitetas', 'vu', 'Seniausias universitetas Lietuvoje.', 'location');;
-insert into tags (title, title_short, description, parent_id, tag_type)
-       values ('Ekonomikos fakultetas', 'ef', '', 1, 'location');;
 
 create table users (
        id bigserial not null,
        fullname varchar(100),
        password char(36),
-       logo_id int8 references files(id) default null,
        last_seen timestamp not null default now(),
        primary key (id));;
 
 /* Create first user=admin and password=asdasd */
 insert into users (fullname, password) values ('Adminas Adminovix', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7');;
-
-/* A generic table for Ututi objects */
-create table content_items (id bigserial not null,
-       parent_id int8 default null references content_items(id),
-       content_type varchar(20) not null default '',
-       created_by int8 references users(id) not null,
-       created_on timestamp not null default now(),
-       modified_by int8 references users(id) default null,
-       modified_on timestamp not null default now(),
-       location_id int8 default null references tags(id),
-       primary key (id));;
 
 /* Storing the emails of the users. */
 create table emails (id int8 not null references users(id),
@@ -89,6 +48,52 @@ CREATE OR REPLACE FUNCTION get_users_by_email(email_address varchar) returns use
 $get_user_by_email$ LANGUAGE sql;;
 
 insert into emails (id, email, confirmed) values (1, 'admin@ututi.lt', true);;
+
+/* A generic table for Ututi objects */
+create table content_items (id bigserial not null,
+       parent_id int8 default null references content_items(id),
+       content_type varchar(20) not null default '',
+       created_by int8 references users(id) not null,
+       created_on timestamp not null default now(),
+       modified_by int8 references users(id) default null,
+       modified_on timestamp not null default now(),
+       primary key (id));;
+
+/* A table for files */
+create table files (id int8 references content_items(id),
+       md5 char(32),
+       folder varchar(255) default '' not null,
+       mimetype varchar(255) default 'application/octet-stream',
+       filesize int8,
+       filename varchar(500),
+       title varchar(500),
+       description text default '',
+       created timestamp default now(),
+       modified timestamp default null,
+       primary key (id));;
+
+create index md5 on files (md5);;
+
+/* Add logo field to the users table */
+alter table users add column logo_id int8 references files(id) default null;;
+
+/* A table for tags (location and simple tags) */
+create table tags (id bigserial not null,
+       parent_id int8 references tags(id) default null,
+       title varchar(250) not null,
+       title_short varchar(50) default null,
+       description text default null,
+       logo_id int8 references files(id) default null,
+       tag_type varchar(10) default null,
+       primary key (id));;
+
+insert into tags (title, title_short, description, tag_type)
+       values ('Vilniaus universitetas', 'vu', 'Seniausias universitetas Lietuvoje.', 'location');;
+insert into tags (title, title_short, description, parent_id, tag_type)
+       values ('Ekonomikos fakultetas', 'ef', '', 1, 'location');;
+
+/* Add location field to the content item table */
+alter table content_items add column location_id int8 default null references tags(id);;
 
 /* A table for groups */
 create table groups (
