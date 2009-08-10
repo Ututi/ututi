@@ -97,7 +97,9 @@ def test_User():
         >>> jonas = User(u'Jonas', '7jN1UP/WkmnVv/XZb28pFYf9flmlcIxUcoa1', gen_password=False)
 
         >>> meta.Session.add(petras)
+        >>> meta.Session.flush()
         >>> meta.Session.add(jonas)
+        >>> meta.Session.flush()
 
     The password for petras should have been encoded, as we don't want
     our administrators knowing the actual passwords our users are
@@ -116,7 +118,6 @@ def test_User():
 
     Both users got assigned an id by the database:
 
-         >>> meta.Session.flush()
          >>> petras.id, jonas.id
          (2L, 3L)
 
