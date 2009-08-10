@@ -187,7 +187,7 @@ create table group_watched_subjects (
 /* A table for group mailing list emails */
 
 create table group_mailing_list_messages (
-       id bigserial not null unique,
+       id int8 references content_items(id),
        message_id varchar(320) not null,
        group_id int8 references groups(id) not null,
        sender_email varchar(320),
@@ -227,7 +227,7 @@ CREATE FUNCTION set_thread_id() RETURNS trigger AS $$
 $$ LANGUAGE plpgsql;;
 
 
-CREATE TRIGGER lowercase_email BEFORE INSERT OR UPDATE ON group_mailing_list_messages
+CREATE TRIGGER set_thread_id BEFORE INSERT OR UPDATE ON group_mailing_list_messages
     FOR EACH ROW EXECUTE PROCEDURE set_thread_id();;
 
 

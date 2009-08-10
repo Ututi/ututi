@@ -16,6 +16,7 @@ from routes.util import url_for
 
 from nous.mailpost.MailBoxerTools import splitMail, parseaddr
 
+from ututi.model import ContentItem
 from ututi.model import Group
 from ututi.model import meta, User, File
 from ututi.lib.mailer import raw_send_email
@@ -68,7 +69,7 @@ class UtutiEmail(email.message.Message):
 
 
 def setup_orm(engine):
-    from ututi.model import groups_table
+    from ututi.model import groups_table, content_items_table
     global group_mailing_list_messages_table
     group_mailing_list_messages_table = Table(
         "group_mailing_list_messages",
@@ -84,6 +85,9 @@ def setup_orm(engine):
     columns = group_mailing_list_messages_table.c
     orm.mapper(GroupMailingListMessage,
                group_mailing_list_messages_table,
+               inherits=ContentItem,
+               polymorphic_identity='mailing_list_message',
+               polymorphic_on=content_items_table.c.content_type,
                properties = {
                              'reply_to': relation(GroupMailingListMessage,
                                                   backref=backref('replies'),
@@ -110,7 +114,7 @@ def setup_orm(engine):
                              })
 
 
-class GroupMailingListMessage(object):
+class GroupMailingListMessage(ContentItem):
     """Message in the group mailing list."""
 
     @property

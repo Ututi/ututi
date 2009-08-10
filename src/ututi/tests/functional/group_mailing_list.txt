@@ -74,7 +74,7 @@ properly in the forum page:
       </tr>
       <tr>
         <td class="subject">
-          <a href="/group/moderators/forum/thread/1">Hello</a>
+          <a href="/group/moderators/forum/thread/3">Hello</a>
         </td>
         <td class="count">3</td>
         <td class="author">
@@ -113,7 +113,7 @@ The email gets sent to all the members of the group:
 And we get redirected to our newly created thread
 
     >>> browser.url
-    'http://localhost/group/moderators/forum/thread/5'
+    'http://localhost/group/moderators/forum/thread/7'
 
     >>> browser.printQuery("id('page-content')//div[@class='thread-post']")
     <div class="thread-post">
@@ -136,7 +136,7 @@ of threads:
       </tr>
       <tr>
         <td class="subject">
-          <a href="/group/moderators/forum/thread/5">Hi mom</a>
+          <a href="/group/moderators/forum/thread/7">Hi mom</a>
         </td>
         <td class="count">0</td>
         <td class="author">
@@ -147,7 +147,7 @@ of threads:
       </tr>
       <tr>
         <td class="subject">
-          <a href="/group/moderators/forum/thread/1">Hello</a>
+          <a href="/group/moderators/forum/thread/3">Hello</a>
         </td>
         <td class="count">3</td>
         <td class="author">
@@ -182,7 +182,7 @@ The email gets sent.
 We still should be looking at the thread:
 
     >>> browser.url
-    'http://localhost/group/moderators/forum/thread/5'
+    'http://localhost/group/moderators/forum/thread/7'
 
 And our new message should be in the list:
 
