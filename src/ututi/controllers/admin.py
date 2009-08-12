@@ -217,6 +217,8 @@ class AdminController(BaseController):
 
     def import_group_files(self):
         for line in self._getReader():
+            author = User.get(line[-1])
+            meta.Session.execute("SET ututi.active_user TO %d" % author.id)
             group_id = line[0]
             group = Group.get(group_id)
             f = File(filename=line[3], title=line[4])
@@ -232,6 +234,8 @@ class AdminController(BaseController):
 
     def import_subject_files(self):
         for line in self._getReader():
+            author = User.get(line[-1])
+            meta.Session.execute("SET ututi.active_user TO %d" % author.id)
             subject_id = line[0]
             uni_id, fac_id = line[2], line[3]
             location = LocationTag.get([uni_id, fac_id])
@@ -267,9 +271,9 @@ class AdminController(BaseController):
             location = LocationTag.get([uni_id, fac_id])
             subject = Subject.get(location, subject_id)
             author = User.get(author_email)
+            meta.Session.execute("SET ututi.active_user TO %d" % author.id)
             subject.pages.append(Page(page_title,
-                                      page_content,
-                                      author))
+                                      page_content))
         meta.Session.commit()
         redirect_to(controller='admin', action='index')
 

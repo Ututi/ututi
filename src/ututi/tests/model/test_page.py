@@ -7,6 +7,7 @@ from ututi.tests import PylonsLayer
 
 import ututi
 
+
 def test_pages():
     """Test if pages are created and retrieved correctly.
 
@@ -14,9 +15,10 @@ def test_pages():
     and the author to it's constructor:
 
         >>> admin = User.get('admin@ututi.lt')
-        >>> page = Page(u'Some coursework', u'Some information about it.', admin)
+        >>> page = Page(u'Some coursework', u'Some information about it.')
         >>> meta.Session.add(page)
         >>> meta.Session.commit()
+        >>> res = meta.Session.execute("SET ututi.active_user TO %d" % admin.id)
 
     When added to the database they get ids assigned automatically:
 
@@ -33,7 +35,7 @@ def test_pages():
         >>> page.content
         u'Some information about it.'
 
-        >>> page.author is admin
+        >>> page.created is admin
         True
 
     Also, the page is not storing the content directly. The moment you
@@ -55,8 +57,7 @@ def test_pages():
     page.
 
         >>> version = PageVersion(u'Some coursework (updated)',
-        ...                       u'Some more information about it.',
-        ...                       admin)
+        ...                       u'Some more information about it.')
         >>> page.versions.append(version)
         >>> meta.Session.commit()
         >>> page.content
@@ -66,8 +67,7 @@ def test_pages():
     shorthand method instead of creatin a new version object directly:
 
         >>> page.add_version(u'Some coursework (new)',
-        ...                  u'Some exclusive information about it.',
-        ...                  admin)
+        ...                  u'Some exclusive information about it.')
         >>> meta.Session.commit()
 
         >>> page.title
@@ -86,6 +86,7 @@ def test_pages():
 
     """
 
+
 def test_subject_pages():
     """Test if pages can be linked to subjects.
 
@@ -100,8 +101,7 @@ def test_subject_pages():
 
     We can easily add one though:
 
-        >>> author = User.get('admin@ututi.lt')
-        >>> subject.pages.append(Page(u'page', u'some content', author))
+        >>> subject.pages.append(Page(u'page', u'some content'))
         >>> meta.Session.commit()
         >>> meta.Session.expire_all()
 

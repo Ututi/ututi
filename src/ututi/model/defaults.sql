@@ -68,8 +68,6 @@ create table files (id int8 references content_items(id),
        filename varchar(500),
        title varchar(500),
        description text default '',
-       created timestamp default now(),
-       modified timestamp default null,
        primary key (id));;
 
 create index md5 on files (md5);;
@@ -155,12 +153,10 @@ create table pages (
        id int8 not null references content_items(id),
        primary key(id));;
 
-create table page_versions(id bigserial not null,
+create table page_versions(id int8 not null references content_items(id),
        page_id int8 references pages(id) not null,
-       created timestamp not null default now(),
        title varchar(255) not null default '',
        content text not null default '',
-       user_id int8 references users(id) not null,
        primary key (id));;
 
 /* A table linking pages and subjects */
@@ -199,7 +195,6 @@ create table group_mailing_list_messages (
        subject varchar(500) not null,
        original text not null,
        sent timestamp not null,
-       created timestamp default now(),
        constraint reply_to
        foreign key (reply_to_message_id, reply_to_group_id) references group_mailing_list_messages(message_id, group_id),
        constraint thread

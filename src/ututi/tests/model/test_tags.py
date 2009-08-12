@@ -22,7 +22,7 @@ def test_page_tags():
         >>> s.tags.append(t)
         >>> meta.Session.add(s)
         >>> u = User.get(u'admin@ututi.lt')
-        >>> p = Page(u'page title', u'Page text', u)
+        >>> p = Page(u'page title', u'Page text')
         >>> meta.Session.add(p)
         >>> s.pages.append(p)
         >>> meta.Session.commit()
@@ -62,7 +62,7 @@ def test_page_location():
 
         >>> s = Subject(u'subj_id', u'Test subject', LocationTag.get(u'VU'))
         >>> meta.Session.add(s)
-        >>> p = Page(u'page title', u'Page text', u)
+        >>> p = Page(u'page title', u'Page text')
         >>> meta.Session.add(p)
         >>> s.pages.append(p)
         >>> meta.Session.commit()

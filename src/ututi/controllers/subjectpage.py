@@ -62,8 +62,7 @@ class SubjectpageController(BaseController):
         location = LocationTag.get(tags)
         subject = Subject.get(location, id)
         page = Page(self.form_result['page_title'],
-                    self.form_result['page_content'],
-                    c.user)
+                    self.form_result['page_content'])
         subject.pages.append(page)
         meta.Session.add(page)
         meta.Session.commit()
@@ -78,7 +77,6 @@ class SubjectpageController(BaseController):
     @validate(schema=PageForm, form='edit')
     def update(self, subject, page):
         page.add_version(self.form_result['page_title'],
-                         self.form_result['page_content'],
-                         c.user)
+                         self.form_result['page_content'])
         meta.Session.commit()
         redirect_to(url_for(action='index'))

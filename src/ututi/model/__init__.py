@@ -45,6 +45,14 @@ def setup_orm(engine):
                         useexisting=True,
                         autoload_with=engine)
 
+    global users_table
+    users_table = Table("users", meta.metadata,
+                        Column('id', Integer, Sequence('users_id_seq'), primary_key=True),
+                        Column('fullname', Unicode(assert_unicode=True)),
+                        autoload=True,
+                        useexisting=True,
+                        autoload_with=engine)
+
     global content_items_table
     content_items_table = Table("content_items", meta.metadata,
                                 autoload=True,
@@ -87,27 +95,23 @@ def setup_orm(engine):
                polymorphic_on=content_items_table.c.content_type,
                polymorphic_identity='generic',
                properties = {'parent': relation(ContentItem, backref='children'),
+                             'created': relation(User,
+                                                 primaryjoin=content_items_table.c.created_by==users_table.c.id),
+                             'modified': relation(User,
+                                                  primaryjoin=content_items_table.c.modified_by==users_table.c.id),
                              'tags': relation(SimpleTag,
                                               secondary=content_tags_table),
                              'location': relation(LocationTag)})
 
     orm.mapper(File, files_table,
                inherits=ContentItem,
-               polymorphic_identity='fileu',
+               polymorphic_identity='file',
                polymorphic_on=content_items_table.c.content_type)
-
-    global users_table
-    users_table = Table("users", meta.metadata,
-                        Column('id', Integer, Sequence('users_id_seq'), primary_key=True),
-                        Column('fullname', Unicode(assert_unicode=True)),
-                        autoload=True,
-                        useexisting=True,
-                        autoload_with=engine)
 
     orm.mapper(User,
                users_table,
                properties = {'emails': relation(Email, backref='user'),
-                             'logo': relation(File)})
+                             'logo': relation(File, primaryjoin=files_table.c.id==users_table.c.logo_id)})
 
     global emails_table
     emails_table = Table("emails", meta.metadata,
@@ -136,10 +140,14 @@ def setup_orm(engine):
                                 autoload=True,
                                 autoload_with=engine)
     orm.mapper(PageVersion, page_versions_table,
-               properties={'author': relation(User),
-                           'page': relation(Page,
+               inherits=ContentItem,
+               polymorphic_identity='page_version',
+               polymorphic_on=content_items_table.c.content_type,
+               inherit_condition=page_versions_table.c.id == content_items_table.c.id,
+               properties={'page': relation(Page,
+                                            primaryjoin=pages_table.c.id==page_versions_table.c.page_id,
                                             backref=backref('versions',
-                                                            order_by=page_versions_table.c.created.desc()) )})
+                                                            order_by=content_items_table.c.created_on.desc()))})
 
     global subject_files_table
     subject_files_table = Table("subject_files", meta.metadata,
@@ -520,12 +528,12 @@ class Page(ContentItem):
         except NoResultFound:
             return None
 
-    def __init__(self, title, content, author, created=None):
+    def __init__(self, title, content):
         """The first version of a page is created automatically."""
-        self.add_version(title, content, author, created)
+        self.add_version(title, content)
 
-    def add_version(self, title, content, user, created=None):
-        version = PageVersion(title, content, user, created)
+    def add_version(self, title, content):
+        version = PageVersion(title, content)
         self.versions.append(version)
 
     @property
@@ -556,15 +564,13 @@ class Page(ContentItem):
 
 page_versions_table = None
 
-class PageVersion(object):
+class PageVersion(ContentItem):
     """Class representing one version of a page."""
 
-    def __init__(self, title, content, author, created=None):
+    def __init__(self, title, content):
         self.title = title
         self.content = content
-        self.author = author
-        if created is not None:
-            self.created = created
+
 
 content_tags_table = None
 class Tag(object):
