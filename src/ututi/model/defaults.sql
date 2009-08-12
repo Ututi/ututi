@@ -411,3 +411,128 @@ $$ LANGUAGE plpgsql;;
 
 CREATE TRIGGER on_content_update AFTER UPDATE ON content_items
     FOR EACH ROW EXECUTE PROCEDURE on_content_update();;
+
+
+/* Events */
+create table events (
+       id bigserial not null,
+       object_id int8 default null references content_items(id) on delete cascade not null,
+       author_id int8 references users(id) not null,
+       created timestamp not null default now(),
+       event_type varchar(30),
+       primary key (id));;
+
+
+CREATE FUNCTION add_event(id int8, evtype varchar) RETURNS void AS $$
+    BEGIN
+      INSERT INTO events (object_id, author_id, event_type)
+             VALUES (id, cast(current_setting('ututi.active_user') as int8), evtype);
+    END
+$$ LANGUAGE plpgsql;;
+
+
+/* page events */
+CREATE FUNCTION page_event_trigger() RETURNS trigger AS $$
+    DECLARE
+      event_id int8 := NULL;
+    BEGIN
+      SELECT events.id into event_id FROM events WHERE events.object_id = NEW.page_id AND events.event_type = 'page_created';
+      IF NOT FOUND THEN
+         EXECUTE add_event(NEW.page_id, cast('page_created' as varchar));
+      ELSE
+         EXECUTE add_event(NEW.page_id, cast('page_modified' as varchar));
+      END IF;
+      RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+
+CREATE TRIGGER page_event_trigger AFTER INSERT OR UPDATE ON page_versions
+    FOR EACH ROW EXECUTE PROCEDURE page_event_trigger();;
+
+
+CREATE FUNCTION file_event_trigger() RETURNS trigger AS $$
+    BEGIN
+      EXECUTE add_event(NEW.id, cast('file_created' as varchar));
+      RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+
+CREATE TRIGGER file_event_trigger AFTER INSERT OR UPDATE ON files
+    FOR EACH ROW EXECUTE PROCEDURE file_event_trigger();;
+
+
+CREATE FUNCTION subject_event_trigger() RETURNS trigger AS $$
+    BEGIN
+      EXECUTE add_event(NEW.id, cast('subject_created' as varchar));
+      RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+
+CREATE TRIGGER subject_event_trigger AFTER INSERT OR UPDATE ON subjects
+    FOR EACH ROW EXECUTE PROCEDURE subject_event_trigger();;
+
+
+CREATE FUNCTION group_mailing_list_message_event_trigger() RETURNS trigger AS $$
+    BEGIN
+      EXECUTE add_event(NEW.id, cast('forum_post_created' as varchar));
+      RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+
+CREATE TRIGGER group_mailing_list_message_event_trigger AFTER INSERT OR UPDATE ON group_mailing_list_messages
+    FOR EACH ROW EXECUTE PROCEDURE group_mailing_list_message_event_trigger();;
+
+
+CREATE FUNCTION member_joined_group_event_trigger() RETURNS trigger AS $$
+    BEGIN
+      INSERT INTO events (object_id, author_id, event_type)
+             VALUES (NEW.group_id, NEW.user_id, 'member_joined');
+      RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+
+CREATE TRIGGER member_joined_group_event_trigger AFTER INSERT ON group_members
+    FOR EACH ROW EXECUTE PROCEDURE member_joined_group_event_trigger();;
+
+
+CREATE FUNCTION member_group_event_trigger() RETURNS trigger AS $$
+    BEGIN
+      IF TG_OP = 'DELETE' THEN
+        INSERT INTO events (object_id, author_id, event_type)
+               VALUES (NEW.group_id, NEW.user_id, 'member_left');
+      ELSIF TG_OP = 'INSERT' THEN
+        INSERT INTO events (object_id, author_id, event_type)
+               VALUES (NEW.group_id, NEW.user_id, 'member_joined');
+      END IF;
+      RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+
+CREATE TRIGGER member_group_event_trigger AFTER DELETE ON group_members
+    FOR EACH ROW EXECUTE PROCEDURE member_group_event_trigger();;
+
+
+-- slicing
+-- user -> groups (pages, files, members?, messages) + subjects (pages, files)
+-- group -> subjects (pages, files) + group + page + files + members
+-- subject -> pages, files
+
+-- select all watched_subjects
+--   for each subject:
+--       select all events where object_id ==  subject_id or object.parent.id == subject_id
+-- select all groups i am a member of:
+--       select all events where object_id ==  group_id or object.parent.id == group_id
+
+-- group
+-- select all events where object_id ==  group_id or object.parent.id == group_id
+-- select all watched_subjects
+--   for each subject:
+--       select all events where object_id ==  subject_id or object.parent.id == subject_id
+
+SHOW ututi.active_user;;
