@@ -66,10 +66,13 @@ def setup_orm(engine):
                                autoload_with=engine)
     tag_mapper = orm.mapper(Tag,
                             tags_table,
+                            polymorphic_on=tags_table.c.tag_type,
+                            polymorphic_identity='',
                             properties = {'logo': relation(File,
                                                            primaryjoin=files_table.c.id==tags_table.c.logo_id)})
+
     orm.mapper(LocationTag,
-               inherits=tag_mapper,
+               inherits=Tag,
                polymorphic_on=tags_table.c.tag_type,
                polymorphic_identity='location',
                properties = {'children': relation(LocationTag, backref=backref('parent', remote_side=tags_table.c.id))})
@@ -77,7 +80,7 @@ def setup_orm(engine):
     orm.mapper(SimpleTag,
                inherits=tag_mapper,
                polymorphic_on=tags_table.c.tag_type,
-               polymorphic_identity='')
+               polymorphic_identity='tag')
 
     orm.mapper(ContentItem,
                content_items_table,
@@ -156,7 +159,8 @@ def setup_orm(engine):
                properties={'files': relation(File,
                                              secondary=subject_files_table),
                            'pages': relation(Page,
-                                             secondary=subject_pages_table)})
+                                             secondary=subject_pages_table,
+                                             backref="subject")})
 
     global group_membership_types_table
     group_membership_types_table = Table("group_membership_types", meta.metadata,
