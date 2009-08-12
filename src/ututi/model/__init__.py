@@ -267,7 +267,9 @@ def teardown_db_defaults(engine, quiet=False):
 content_items_table = None
 class ContentItem(object):
     """A generic class for content items."""
-    pass
+    def url(self):
+        """A method to be overridden by content objects to provide their urls."""
+        pass
 
 
 def generate_salt():
@@ -549,6 +551,8 @@ class Page(ContentItem):
     def created(self):
         return self.last_version.created
 
+    def url(self):
+        return url(controller='subjectpage', action='index', page_id=self.id, id=self.subject[0].subject_id, tags=self.subject[0].location_path)
 
 page_versions_table = None
 
