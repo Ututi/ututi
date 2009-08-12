@@ -27,6 +27,7 @@ $(document).ready(function(){
       </a>
       <h4>
         <a href="${subject.url()}">${subject.title}</a>
+        <a href="${c.group.url(action='unwatch_subject', subject_id=subject.subject_id, subject_location_id=subject.location.id)}" class="remove_subject_button">${_('Remove')}</a>
       </h4>
       % if subject.lecturer:
       <p class="smaller"><a href="#">${subject.lecturer}</a></p>

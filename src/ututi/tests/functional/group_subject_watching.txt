@@ -39,6 +39,7 @@ Group subject watching
           </a>
           <h4>
             <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a>
+            <a href="/group/moderators/unwatch_subject?subject_location_id=1&amp;subject_id=mat_analize" class="remove_subject_button">Remove</a>
           </h4>
           <p class="smaller">
             <a href="#">prof. E. Misevi&#269;ius</a>
@@ -52,3 +53,31 @@ Group subject watching
 
     >>> browser.printQuery("id('search-results')")
     <ul id="search-results"></ul>
+
+    >>> browser.open(browser.url)
+
+    >>> browser.getLink('Remove', url='mat_analize').click()
+
+    >>> browser.printQuery("id('watched-subjects')")
+    <ul id="watched-subjects"></ul>
+
+    >>> browser.printQuery("id('search-results')")
+    <ul id="search-results">
+      <li>
+        <div>
+          <a href="/subject/vu/mat_analize">
+            <img src="/images/bullet_small.png" />
+          </a>
+          <h4>
+            <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a>
+            <a href="/group/moderators/watch_subject?subject_location_id=1&amp;subject_id=mat_analize" class="select_subject_button">Pick</a>
+          </h4>
+          <p class="smaller">
+            <a href="#">prof. E. Misevi&#269;ius</a>
+          </p>
+          <div>
+            <span class="tag">Vilniaus universitetas</span>
+          </div>
+        </div>
+      </li>
+    </ul>

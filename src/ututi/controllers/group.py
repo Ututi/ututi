@@ -273,12 +273,18 @@ class GroupController(GroupControllerBase, FileViewMixin):
     def delete_folder(self, group):
         return self._delete_folder(group)
 
-    def _watch_subject(self, group):
+    def _getSubject(self):
         location_id = request.GET['subject_location_id']
         location = meta.Session.query(LocationTag).filter_by(id=location_id).one()
         subject_id = request.GET['subject_id']
-        subject = Subject.get(location, subject_id)
-        group.watched_subjects.append(subject)
+        return Subject.get(location, subject_id)
+
+    def _watch_subject(self, group):
+        group.watched_subjects.append(self._getSubject())
+        meta.Session.commit()
+
+    def _unwatch_subject(self, group):
+        group.watched_subjects.remove(self._getSubject())
         meta.Session.commit()
 
     @group_action
@@ -289,6 +295,16 @@ class GroupController(GroupControllerBase, FileViewMixin):
     @group_action
     def js_watch_subject(self, group):
         self._watch_subject(group)
+        return "OK"
+
+    @group_action
+    def unwatch_subject(self, group):
+        self._unwatch_subject(group)
+        redirect_to(request.referrer)
+
+    @group_action
+    def js_unwatch_subject(self, group):
+        self._unwatch_subject(group)
         return "OK"
 
     @group_action

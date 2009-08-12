@@ -109,7 +109,7 @@ of in your home page (at least for now):
 
     >>> browser.printQuery("id('group_portlet_header')")
     <h3 id="group_portlet_header">
-      Groups
+      My groups
     </h3>
 
     >>> browser.printQuery("id('group_portlet_content')")

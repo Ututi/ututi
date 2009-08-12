@@ -6,14 +6,21 @@
 
 <%def name="portlets()">
 <div id="sidebar">
-  <%self:portlet id="group_portlet">
+  <%self:portlet id="search_portlet">
     <%def name="header()">
-      ${_('Groups')}
+      ${_('Search')}
+    </%def>
+    There are searches here!
+  </%self:portlet>
+
+  <%self:portlet id="group_portlet" portlet_class="inactive">
+    <%def name="header()">
+      ${_('My groups')}
     </%def>
     <ul>
       % for membership in c.user.memberships:
       <li>
-        <a href="${url(controller='group', action='group_home', id=membership.group.group_id)}">${membership.group.title}</a>
+        <a href="${membership.group.url()}">${membership.group.title}</a>
       </li>
       % endfor
       % if not c.user.memberships:
@@ -21,6 +28,24 @@
       %endif
     </ul>
   </%self:portlet>
+
+  <%self:portlet id="subject_portlet" portlet_class="inactive">
+    <%def name="header()">
+      ${_('My subjects')}
+    </%def>
+    <ul>
+      % for subject in c.user.watched_subjects:
+      <li>
+        <a href="${subject.url()}">${subject.title}</a>
+      </li>
+      % endfor
+      % if not c.user.watched_subjects:
+      ${_('You are not watching any subjects.')}
+      %endif
+      <a href="${h.url_for(action='subjects')}">Watch subjects</a>
+    </ul>
+  </%self:portlet>
+
 </div>
 </%def>
 
