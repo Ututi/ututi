@@ -79,6 +79,12 @@
     var li=$('<li class="bit-box"></li>').attr('id', 'bit-' + count).text(text);
     li.append($('<a href="#" class="closebutton"></a>')
           .bind('click', function(e) {
+
+              //remove the item from the hidden input too
+              vals = original_input.val().split(', ');
+              item = $(this).children('input').val();
+              vals.splice($.inArray(item, vals), 1);
+              original_input.val(vals.join(', '));
               li.remove();
               e.preventDefault();
           }))
