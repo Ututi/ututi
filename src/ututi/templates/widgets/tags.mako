@@ -1,4 +1,4 @@
-<%def name="tags_widget(value='', name='tags')">
+<%def name="tags_widget(value='', name='tags', all_tags=False)">
 ${h.javascript_link('/javascripts/jquery.ui.autobox.js')|n}
 ${h.javascript_link('/javascripts/jquery.ui.autobox.ext.js')|n}
 
@@ -19,7 +19,11 @@ $(document).ready(function() {
     $(this).val('');
 
     $(this).autobox({
-        ajax: "${url(controller='structure', action='autocomplete_tags')}",
+        %if all_tags:
+          ajax: "${url(controller='structure', action='autocomplete_all_tags')}",
+        %else:
+          ajax: "${url(controller='structure', action='autocomplete_tags')}",
+        %endif
         match: function(typed) { return this.match(new RegExp(typed)); },
         insertText: function(obj) { return obj },
         prevals : values
