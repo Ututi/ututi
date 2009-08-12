@@ -650,3 +650,28 @@ ul.breadcrumb_dropdown.expanded {
 .message {
   color: #808080
 }
+
+/* begin pager */
+div#pager {
+    text-align: center;
+}
+
+/* end pager */
+
+/* tags */
+span.tag {
+  background: #fdeab1;
+  padding: 0.3em;
+  margin: 0.2em 0.7em 0.2em 0;
+  font-size: 0.9em;
+  color: black;
+}
+
+/* search results */
+div#search-results div.search-item {
+  margin: 0.5em 0;
+}
+
+div#search-results div.search-item a.item-title {
+  margin-bottom: 0.3em;
+}
