@@ -24,7 +24,7 @@ $(document).ready(function() {
         %else:
           ajax: "${url(controller='structure', action='autocomplete_tags')}",
         %endif
-        match: function(typed) { return this.match(new RegExp(typed)); },
+        match: function(typed) { return true; },
         insertText: function(obj) { return obj },
         prevals : values
     });
