@@ -1,0 +1,23 @@
+Search
+======
+
+A very basic test for search.
+
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/search')
+    >>> form = browser.getForm('search_form')
+
+Let's fill out the search form.
+    >>> form.getControl(name="text").value = "moderatoriai"
+    >>> form.getControl('Search').click()
+
+    >>> browser.printQuery("id('search-results')//a/text()")
+    Moderatoriai
+
+Let's see if tags work too.
+    >>> form = browser.getForm('search_form')
+    >>> form.getControl('Filter by tags').value = 'vu'
+    >>> form.getControl('Search').click()
+
+    >>> browser.printQuery("id('search-results')//a/text()")
+    Moderatoriai
