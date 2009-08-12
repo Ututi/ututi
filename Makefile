@@ -195,6 +195,7 @@ ubuntu-environment:
 	 apt-get install build-essential python-all python-all-dev postgresql; \
 	 apt-get install enscript; \
 	 apt-get install myspell-lt; \
+	 apt-get remove  python-egenix-mx-base-dev; \
 	 echo "Installation Complete: Next... Run 'make'."; \
 	} fi
 
