@@ -64,7 +64,7 @@ def test_tag_search():
         >>> u = User.get(u'admin@ututi.lt')
         >>> res = meta.Session.execute("SET ututi.active_user TO %d" % u.id)
 
-        >>> g = Group('new_grp', u'Biology students', description=u'biologija matematika infortikos mokslas')
+        >>> g = Group('new_grp', u'Biology students', description=u'biologija matematika informatikos mokslas')
         >>> g.location = LocationTag.get(u'vu/ef')
         >>> meta.Session.add(g)
         >>> tg = SimpleTag(u'test tag')
