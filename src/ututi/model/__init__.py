@@ -684,6 +684,11 @@ class LocationTag(Tag):
                     break
         return tag
 
+    @classmethod
+    def get_all(cls, title):
+        items = meta.Session.query(cls).filter_by(title=title).all()
+        items.extend(meta.Session.query(cls).filter_by(title_short=title).all())
+        return items
 
 class File(ContentItem):
     """Class representing user-uploaded files."""
