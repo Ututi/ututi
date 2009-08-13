@@ -1,5 +1,26 @@
 <%inherit file="/group/home.mako" />
 <%namespace file="/widgets/tags.mako" import="*"/>
+<%namespace file="/search/index.mako" import="search_form"/>
+<%namespace file="/search/index.mako" import="search_results"/>
+
+## overriding the search result item definition
+<%def name="search_subject(item)">
+  <div class="search-item">
+    <a href="${item.object.url()}" title="${item.object.title}" class="item-title larger">${item.object.title}</a>
+    <a href="${c.group.url(action='watch_subject', subject_id=item.object.subject_id, subject_location_id=item.object.location.id)}" class="select_subject_button">${_('Pick')}</a>
+    <div>
+    % if item.object.lecturer:
+      <span class="small">${item.object.lecturer}</span>
+    % endif
+    </div>
+    <div class="item-tags">
+      %for tag in item.object.tags:
+      <span class="tag">${tag.title}</span>
+      %endfor
+    </div>
+  </div>
+</%def>
+
 
 <%def name="head_tags()">
 ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
@@ -16,8 +37,8 @@ $(document).ready(function(){
 
 <h1>${_('Group Subjects')}</h1>
 
-<h2 class="subjects-suggestions">Pasirinkti dalykai</h2>
-<hr>
+<h2 class="subjects-suggestions">${_('Chosen subjects')}</h2>
+<hr/>
 <ul id="watched-subjects">
 % for subject in c.group.watched_subjects:
   <li>
@@ -30,7 +51,7 @@ $(document).ready(function(){
         <a href="${c.group.url(action='unwatch_subject', subject_id=subject.subject_id, subject_location_id=subject.location.id)}" class="remove_subject_button">${_('Remove')}</a>
       </h4>
       % if subject.lecturer:
-      <p class="smaller"><a href="#">${subject.lecturer}</a></p>
+      <p class="smaller">${subject.lecturer}</a></p>
       % endif
       <div>
       % for title in subject.location.hierarchy():
@@ -42,9 +63,11 @@ $(document).ready(function(){
 % endfor
 </ul>
 
-<h2 class="subjects-suggestions">Stebėti dalykus</h2>
-<hr>
+<h2 class="subjects-suggestions">${_('Watch subjects')}</h2>
+<hr/>
 
+${search_form(obj_type='subject', tags=c.tags, parts=['text', 'tags'], target=url(controller='group', action='subjects', id=c.group.id))}
+<!--
 <div id="frontpage-search">
   <form id="frontpage-search-form" method="post" action="">
     <div class="form-field">
@@ -57,27 +80,7 @@ $(document).ready(function(){
     </div>
   </form>
 </div>
-
-<ul id="search-results">
-% for subject in c.recomended_subjects:
-  <li>
-    <div>
-      <a href="${subject.url()}">
-        <img src="${url('/images/bullet_small.png')}">
-      </a>
-      <h4>
-        <a href="${subject.url()}">${subject.title}</a>
-        <a href="${c.group.url(action='watch_subject', subject_id=subject.subject_id, subject_location_id=subject.location.id)}" class="select_subject_button">${_('Pick')}</a>
-      </h4>
-      % if subject.lecturer:
-      <p class="smaller"><a href="#">${subject.lecturer}</a></p>
-      % endif
-      <div>
-      % for title in subject.location.hierarchy():
-        <span class="tag">${title}</span>
-      % endfor
-      </div>
-    </div>
-  </li>
-% endfor
-</ul>
+-->
+%if c.results:
+${search_results(c.results, display=search_subject)}
+%endif

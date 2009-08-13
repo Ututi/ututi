@@ -8,6 +8,8 @@ from pylons.controllers.util import redirect_to, abort
 from pylons.decorators import validate
 from pylons.i18n import _
 
+from webhelpers import paginate
+
 from formencode import Schema, validators, Invalid, variabledecode
 from formencode.compound import Pipe
 from formencode.foreach import ForEach
@@ -15,7 +17,6 @@ from formencode.foreach import ForEach
 from formencode.variabledecode import NestedVariables
 
 from sqlalchemy.sql.expression import not_
-from sqlalchemy.orm.exc import NoResultFound
 
 import ututi.lib.helpers as h
 from ututi.lib.fileview import FileViewMixin
@@ -24,9 +25,18 @@ from ututi.lib.base import BaseController, render
 from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator
 
 from ututi.model import LocationTag
-from ututi.model import meta, Group, File, SimpleTag, Subject, subjects_table
+from ututi.model import meta, Group, File, SimpleTag, Subject, ContentItem
+from ututi.controllers.search import SearchSubmit
+from ututi.lib.search import search_query
 
 log = logging.getLogger(__name__)
+
+
+def _filter_watched_subjects(sids):
+    """A modifier for the subjects query, which excludes subjects already being watched."""
+    def _filter(query):
+        return query.filter(not_(ContentItem.id.in_(sids)))
+    return _filter
 
 
 class GroupIdValidator(validators.FancyValidator):
@@ -297,6 +307,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
         self._watch_subject(group)
         return "OK"
 
+    @validate(schema=SearchSubmit, form='subjects', post_only = False, on_get = True)
     @group_action
     def unwatch_subject(self, group):
         self._unwatch_subject(group)
@@ -309,10 +320,39 @@ class GroupController(GroupControllerBase, FileViewMixin):
 
     @group_action
     def subjects(self, group):
+        """
+        A view displaying all the subjects the group is already watching and allowing
+        members to choose new subjects for the group.
+        """
         c.group = group
+
+        #retrieve search parameters
+        c.text = self.form_result.get('text', '')
+
+        if 'tagsitem' in self.form_result or 'tags' in self.form_result:
+            c.tags = self.form_result.get('tagsitem', None)
+            if c.tags is None:
+                c.tags = self.form_result.get('tags', None).split(', ')
+        else:
+            c.tags = c.group.location.hierarchy()
+        c.tags = ', '.join(filter(bool, c.tags))
+
         sids = [s.id for s in group.watched_subjects]
-        c.recomended_subjects = meta.Session.query(Subject)\
-            .filter_by(location=group.location)\
-            .filter(not_(subjects_table.c.id.in_(sids))).all()
+
+        search_params = {}
+        if c.text:
+            search_params['text'] = c.text
+        if c.tags:
+            search_params['tags'] = c.tags
+        search_params['obj_type'] = 'subject'
+
+        if search_params != {}:
+            c.results = paginate.Page(
+                search_query(extra=_filter_watched_subjects(sids), **search_params),
+                page=int(request.params.get('page', 1)),
+                items_per_page = 10,
+                **search_params)
+
+
         c.breadcrumbs.append(self._actions('subjects'))
         return render('group/subjects.mako')

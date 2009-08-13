@@ -9,25 +9,17 @@ Group subject watching
     <ul id="watched-subjects"></ul>
 
     >>> browser.printQuery("id('search-results')")
-    <ul id="search-results">
-      <li>
+    <div id="search-results">
+      <div class="search-item">
+        <a href="/subject/vu/mat_analize" title="Matematin&#279; analiz&#279;" class="item-title larger">Matematin&#279; analiz&#279;</a>
+        <a href="/group/moderators/watch_subject?subject_location_id=1&amp;subject_id=mat_analize" class="select_subject_button">Pick</a>
         <div>
-          <a href="/subject/vu/mat_analize">
-            <img src="/images/bullet_small.png" />
-          </a>
-          <h4>
-            <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a>
-            <a href="/group/moderators/watch_subject?subject_location_id=1&amp;subject_id=mat_analize" class="select_subject_button">Pick</a>
-          </h4>
-          <p class="smaller">
-            <a href="#">prof. E. Misevi&#269;ius</a>
-          </p>
-          <div>
-            <span class="tag">Vilniaus universitetas</span>
-          </div>
+          <span class="small">prof. E. Misevi&#269;ius</span>
         </div>
-      </li>
-    </ul>
+        <div class="item-tags">
+        </div>
+      </div>
+    </div>
 
     >>> browser.getLink('Pick', url='mat_analize').click()
     >>> browser.printQuery("id('watched-subjects')")
@@ -41,9 +33,7 @@ Group subject watching
             <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a>
             <a href="/group/moderators/unwatch_subject?subject_location_id=1&amp;subject_id=mat_analize" class="remove_subject_button">Remove</a>
           </h4>
-          <p class="smaller">
-            <a href="#">prof. E. Misevi&#269;ius</a>
-          </p>
+          <p class="smaller">prof. E. Misevi&#269;ius</p>
           <div>
             <span class="tag">Vilniaus universitetas</span>
           </div>
@@ -52,7 +42,6 @@ Group subject watching
     </ul>
 
     >>> browser.printQuery("id('search-results')")
-    <ul id="search-results"></ul>
 
     >>> browser.open(browser.url)
 
@@ -62,22 +51,14 @@ Group subject watching
     <ul id="watched-subjects"></ul>
 
     >>> browser.printQuery("id('search-results')")
-    <ul id="search-results">
-      <li>
+    <div id="search-results">
+      <div class="search-item">
+        <a href="/subject/vu/mat_analize" title="Matematin&#279; analiz&#279;" class="item-title larger">Matematin&#279; analiz&#279;</a>
+        <a href="/group/moderators/watch_subject?subject_location_id=1&amp;subject_id=mat_analize" class="select_subject_button">Pick</a>
         <div>
-          <a href="/subject/vu/mat_analize">
-            <img src="/images/bullet_small.png" />
-          </a>
-          <h4>
-            <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a>
-            <a href="/group/moderators/watch_subject?subject_location_id=1&amp;subject_id=mat_analize" class="select_subject_button">Pick</a>
-          </h4>
-          <p class="smaller">
-            <a href="#">prof. E. Misevi&#269;ius</a>
-          </p>
-          <div>
-            <span class="tag">Vilniaus universitetas</span>
-          </div>
+          <span class="small">prof. E. Misevi&#269;ius</span>
         </div>
-      </li>
-    </ul>
+        <div class="item-tags">
+        </div>
+      </div>
+    </div>
