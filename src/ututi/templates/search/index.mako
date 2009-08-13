@@ -11,9 +11,9 @@ ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
 ${_('Search')}
 </%def>
 
-<%def name="search_form(text='', obj_type='*', tags='', parts=['obj_type', 'text', 'tags'])">
+<%def name="search_form(text='', obj_type='*', tags='', parts=['obj_type', 'text', 'tags'], target=url(controller='search', action='index'))">
 <div id="search-controls">
-  <form method="post" action="${url(controller='search', action='index')}" id="search_form">
+  <form method="post" action="${target}" id="search_form">
     <div class="form-field">
       %if 'obj_type' in parts:
       <select name="obj_type">
