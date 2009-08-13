@@ -675,3 +675,12 @@ div#search-results div.search-item {
 div#search-results div.search-item a.item-title {
   margin-bottom: 0.3em;
 }
+
+div.group-item {
+  padding-left: 70px;
+  background: url("../images/group_ico.png") left top no-repeat;
+}
+
+div.search-item div.description {
+  margin: 0.1em 0;
+}

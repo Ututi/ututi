@@ -57,12 +57,15 @@ def _search_query_tags(query, tags):
         for tag_name in tags:
             #let's check each tag and see what we've got: a location tag or a simpletag
             tag = SimpleTag.get(tag_name, False)
-            ltag = LocationTag.get_by_title(tag_name)
+            ltag = LocationTag.get_all(tag_name)
             if tag is not None:
                 stags.append(tag.id)
-            elif ltag is not None:
+            elif ltag != []:
                 # if it is a location tag, add not only it, but also its children
-                ltags.extend([lt.id for lt in ltag.flatten()])
+                location = []
+                for ltag_item in ltag:
+                    location.extend([lt.id for lt in ltag_item.flatten()])
+                ltags.append(location)
             else:
                 #a tag name that is not in the database was entered. Return empty list.
                 return query.filter("false")
@@ -71,5 +74,6 @@ def _search_query_tags(query, tags):
             query = query.join(ContentItem.tags).filter(SimpleTag.id.in_(stags)).group_by(SearchItem).having(func.count(SearchItem.content_item_id) == len(stags))
 
         if len(ltags) > 0:
-            query = query.filter(ContentItem.location_id.in_(ltags))
+            for location in ltags:
+                query = query.filter(ContentItem.location_id.in_(location))
     return query

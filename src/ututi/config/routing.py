@@ -113,6 +113,7 @@ def make_map():
 
     #user registration path
     map.connect('/welcome', controller='home', action='welcome')
+    map.connect('/findgroup', controller='home', action='findgroup')
 
     # CUSTOM ROUTES HERE
     map.connect('/', controller='home')
