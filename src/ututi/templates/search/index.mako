@@ -11,7 +11,11 @@ ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
 ${_('Search')}
 </%def>
 
-<%def name="search_form(text='', obj_type='*', tags='', parts=['obj_type', 'text', 'tags'], target=url(controller='search', action='index'))">
+<%def name="search_form(text='', obj_type='*', tags='', parts=['obj_type', 'text', 'tags'], target=None)">
+<%
+   if target is None:
+       target = url(controller='search', action='index')
+%>
 <div id="search-controls">
   <form method="post" action="${target}" id="search_form">
     <div class="form-field">
@@ -27,7 +31,7 @@ ${_('Search')}
       </select>
       %endif
       %if 'text' in parts:
-      <input type="text" name="text" id="text" value="${text}"/>
+      <input type="text" name="text" id="text" value="${text}" size="60"/>
       %endif
     </div>
     %if 'tags' in parts:
@@ -45,10 +49,7 @@ ${_('Search')}
 </div>
 </%def>
 
-<%def name="search_results(results=None)">
-<h1>Results:</h1>
-<div id="search-results">
-  %for item in results:
+<%def name="search_results_item(item)">
   <div class="search-item">
     <a href="${item.object.url()}" title="${item.object.title}" class="item-title larger">${item.object.title}</a>
     <div class="item-tags">
@@ -57,7 +58,18 @@ ${_('Search')}
       %endfor
     </div>
   </div>
-%endfor
+</%def>
+
+<%def name="search_results(results=None, display=None)">
+<%
+   if display is None:
+       display = search_results_item
+%>
+<h1>Results:</h1>
+<div id="search-results">
+  %for item in results:
+  ${display(item)}
+  %endfor
 </div>
 
 %if len(results):
