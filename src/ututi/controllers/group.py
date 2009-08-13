@@ -318,6 +318,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
         self._unwatch_subject(group)
         return "OK"
 
+    @validate(schema=SearchSubmit, form='subjects', post_only = False, on_get = True)
     @group_action
     def subjects(self, group):
         """
