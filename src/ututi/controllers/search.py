@@ -17,14 +17,13 @@ class SearchSubmit(Schema):
 
 
 class SearchController(BaseController):
-    @validate(schema=SearchSubmit, form='test', post_only = False, on_get = True)
+    @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
     def index(self):
         c.text = self.form_result.get('text', '')
         c.tags = self.form_result.get('tagsitem', None)
         if c.tags is None:
-            c.tags = self.form_result.get('tags', '')
-        else:
-            c.tags = ', '.join(c.tags)
+            c.tags = self.form_result.get('tags', '').split(', ')
+        c.tags = ', '.join(filter(bool, c.tags))
 
         c.obj_type = self.form_result.get('obj_type', '*')
 
@@ -32,7 +31,7 @@ class SearchController(BaseController):
         if c.text:
             search_params['text'] = c.text
         if c.tags:
-            search_params['tags'] = self.form_result.get('tagsitem', c.tags.split(', '))
+            search_params['tags'] = c.tags
         if c.obj_type != '*' and c.obj_type in ('group', 'page', 'subject'):
             search_params['obj_type'] = c.obj_type
         if search_params != {}:
