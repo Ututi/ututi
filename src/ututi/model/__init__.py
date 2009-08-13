@@ -243,6 +243,9 @@ def setup_orm(engine):
     from ututi.model import mailing
     mailing.setup_orm(engine)
 
+    from ututi.model import events
+    events.setup_orm(engine)
+
 
 def initialize_db_defaults(engine):
     initial_db_data = pkg_resources.resource_string(

@@ -183,7 +183,7 @@ create table group_watched_subjects (
 /* A table for group mailing list emails */
 
 create table group_mailing_list_messages (
-       id int8 references content_items(id),
+       id int8 references content_items(id) unique,
        message_id varchar(320) not null,
        group_id int8 references groups(id) not null,
        sender_email varchar(320),
@@ -420,6 +420,9 @@ create table events (
        author_id int8 references users(id) not null,
        created timestamp not null default now(),
        event_type varchar(30),
+       file_id int8 references files(id) on delete cascade default null,
+       page_id int8 references pages(id) on delete cascade default null,
+       message_id int8 references group_mailing_list_messages(id) on delete cascade default null,
        primary key (id));;
 
 
@@ -432,35 +435,64 @@ $$ LANGUAGE plpgsql;;
 
 
 /* page events */
-CREATE FUNCTION page_event_trigger() RETURNS trigger AS $$
+CREATE FUNCTION page_modified_trigger() RETURNS trigger AS $$
     DECLARE
-      event_id int8 := NULL;
+      version_count int8 := NULL;
+      sid int8 := NULL;
     BEGIN
-      SELECT events.id into event_id FROM events WHERE events.object_id = NEW.page_id AND events.event_type = 'page_created';
-      IF NOT FOUND THEN
-         EXECUTE add_event(NEW.page_id, cast('page_created' as varchar));
-      ELSE
-         EXECUTE add_event(NEW.page_id, cast('page_modified' as varchar));
+      SELECT count(*) INTO version_count FROM page_versions WHERE page_id = NEW.page_id;
+      IF version_count > 1 THEN
+        SELECT subject_id INTO sid FROM subject_pages WHERE page_id = NEW.page_id;
+        IF FOUND THEN
+          INSERT INTO events (object_id, author_id, event_type, page_id)
+                 VALUES (sid, cast(current_setting('ututi.active_user') as int8), 'page_modified', NEW.page_id);
+        END IF;
       END IF;
       RETURN NEW;
     END
 $$ LANGUAGE plpgsql;;
 
 
-CREATE TRIGGER page_event_trigger AFTER INSERT OR UPDATE ON page_versions
-    FOR EACH ROW EXECUTE PROCEDURE page_event_trigger();;
+CREATE TRIGGER page_modified_trigger AFTER INSERT OR UPDATE ON page_versions
+    FOR EACH ROW EXECUTE PROCEDURE page_modified_trigger();;
 
 
-CREATE FUNCTION file_event_trigger() RETURNS trigger AS $$
+CREATE FUNCTION subject_page_event_trigger() RETURNS trigger AS $$
     BEGIN
-      EXECUTE add_event(NEW.id, cast('file_created' as varchar));
+      INSERT INTO events (object_id, author_id, event_type, page_id)
+             VALUES (NEW.subject_id, cast(current_setting('ututi.active_user') as int8), 'page_created', NEW.page_id);
       RETURN NEW;
     END
 $$ LANGUAGE plpgsql;;
 
 
-CREATE TRIGGER file_event_trigger AFTER INSERT OR UPDATE ON files
-    FOR EACH ROW EXECUTE PROCEDURE file_event_trigger();;
+CREATE TRIGGER subject_page_event_trigger AFTER INSERT OR UPDATE ON subject_pages
+    FOR EACH ROW EXECUTE PROCEDURE subject_page_event_trigger();;
+
+
+CREATE FUNCTION subject_file_event_trigger() RETURNS trigger AS $$
+    BEGIN
+      INSERT INTO events (object_id, author_id, event_type, file_id)
+             VALUES (NEW.subject_id, cast(current_setting('ututi.active_user') as int8), 'file_uploaded', NEW.file_id);
+      RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+
+CREATE TRIGGER subject_file_event_trigger AFTER INSERT OR UPDATE ON subject_files
+    FOR EACH ROW EXECUTE PROCEDURE subject_file_event_trigger();;
+
+
+CREATE FUNCTION group_file_event_trigger() RETURNS trigger AS $$
+    BEGIN
+      INSERT INTO events (object_id, author_id, event_type, file_id)
+             VALUES (NEW.group_id, cast(current_setting('ututi.active_user') as int8), 'file_uploaded', NEW.file_id);
+      RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+CREATE TRIGGER group_file_event_trigger AFTER INSERT OR UPDATE ON group_files
+    FOR EACH ROW EXECUTE PROCEDURE group_file_event_trigger();;
 
 
 CREATE FUNCTION subject_event_trigger() RETURNS trigger AS $$
@@ -477,7 +509,8 @@ CREATE TRIGGER subject_event_trigger AFTER INSERT OR UPDATE ON subjects
 
 CREATE FUNCTION group_mailing_list_message_event_trigger() RETURNS trigger AS $$
     BEGIN
-      EXECUTE add_event(NEW.id, cast('forum_post_created' as varchar));
+      INSERT INTO events (object_id, author_id, event_type, message_id)
+             VALUES (NEW.group_id, cast(current_setting('ututi.active_user') as int8), 'forum_post_created', NEW.id);
       RETURN NEW;
     END
 $$ LANGUAGE plpgsql;;
@@ -485,19 +518,6 @@ $$ LANGUAGE plpgsql;;
 
 CREATE TRIGGER group_mailing_list_message_event_trigger AFTER INSERT OR UPDATE ON group_mailing_list_messages
     FOR EACH ROW EXECUTE PROCEDURE group_mailing_list_message_event_trigger();;
-
-
-CREATE FUNCTION member_joined_group_event_trigger() RETURNS trigger AS $$
-    BEGIN
-      INSERT INTO events (object_id, author_id, event_type)
-             VALUES (NEW.group_id, NEW.user_id, 'member_joined');
-      RETURN NEW;
-    END
-$$ LANGUAGE plpgsql;;
-
-
-CREATE TRIGGER member_joined_group_event_trigger AFTER INSERT ON group_members
-    FOR EACH ROW EXECUTE PROCEDURE member_joined_group_event_trigger();;
 
 
 CREATE FUNCTION member_group_event_trigger() RETURNS trigger AS $$
@@ -514,9 +534,8 @@ CREATE FUNCTION member_group_event_trigger() RETURNS trigger AS $$
 $$ LANGUAGE plpgsql;;
 
 
-CREATE TRIGGER member_group_event_trigger AFTER DELETE ON group_members
+CREATE TRIGGER member_group_event_trigger AFTER INSERT OR DELETE ON group_members
     FOR EACH ROW EXECUTE PROCEDURE member_group_event_trigger();;
-
 
 -- slicing
 -- user -> groups (pages, files, members?, messages) + subjects (pages, files)
