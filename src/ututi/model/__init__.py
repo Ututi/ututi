@@ -450,7 +450,7 @@ class Group(ContentItem, FolderMixin):
         self.title = title
         self.location = location
         if year is None:
-            year = date.today()
+            year = date(date.today().year, 1, 1)
         self.year = year
         self.description = description
 
