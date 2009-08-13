@@ -134,6 +134,9 @@ class AdminController(BaseController):
 
             if year != '' and year != 'None':
                 group.year = date(int(year), 1, 1)
+            else:
+                group.year = date(2008, 1, 1)
+
         meta.Session.commit()
         redirect_to(controller='group', action='index')
 
