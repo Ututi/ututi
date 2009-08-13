@@ -21,7 +21,7 @@ def ftest_setUp(test):
 
     u = User.get('admin@ututi.lt')
     meta.Session.execute("SET ututi.active_user TO %d" % u.id)
-    g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date.today(), u'U2ti moderatoriai.')
+    g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date(date.today().year, 1, 1), u'U2ti moderatoriai.')
 
     role = GroupMembershipType.get('administrator')
     gm = GroupMember()

@@ -23,6 +23,13 @@ screen:
     Join a group
     Review and edit your profile
 
+    >>> browser.getControl(name='location-0').value = 'vu'
+    >>> browser.getControl(name='year').value = ['2009']
+    >>> browser.getControl('Search').click()
+    >>> browser.printQuery("id('search-results')//a/text()")
+    Moderatoriai
+
+
 An email, requesting the confirmation of the email address entered is sent:
 
     >>> from ututi.lib.mailer import mail_queue
