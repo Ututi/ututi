@@ -194,15 +194,6 @@ class GroupController(GroupControllerBase, FileViewMixin):
         tag = values.get('location', None)
         group.location = tag
 
-        #check to see what kind of tags we have got
-        tags = [tag.strip().lower() for tag in self.form_result.get('tagsitem', [])]
-        if tags == []:
-            tags = [tag.strip().lower() for tag in self.form_result.get('tags', '').split(',')]
-
-        group.tags = []
-        for tag in tags:
-            group.tags.append(SimpleTag.get(tag))
-
         meta.Session.add(group)
 
         if values['logo_upload'] is not None:

@@ -50,28 +50,3 @@ Let's try changing the location of the subject to get a clash with another subje
     'http://localhost/subject/vu/ef/mat_analize/update'
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Such id already exists, choose a different one.
-
-Groups can also be tagged.
-
-    >>> browser.open('http://localhost/groups/add')
-    >>> browser.getControl('Address').value = 'testing'
-    >>> browser.getControl('Title').value = 'Test group'
-    >>> browser.getControl('School').value = 'Vilniaus universitetas'
-    >>> browser.getControl('Tags').value = 'tag1, tag2, tag 3 and 4'
-    >>> browser.getControl('Save').click()
-    >>> browser.printQuery('//h1/text()')
-    Test group, 2009
-
-Let's see if the tags are still there:
-
-    >>> browser.getLink('Edit').click()
-    >>> browser.getControl('Tags').value
-    'tag1, tag2, tag 3 and 4'
-
-Modifying these tags works in the edit view too.
-
-    >>> browser.getControl('Tags').value =  'new tags'
-    >>> browser.getControl('Save').click()
-    >>> browser.getLink('Edit').click()
-    >>> browser.getControl('Tags').value
-    'new tags'

@@ -49,9 +49,9 @@ We can edit the group's information.
 We can add a group at the url /groups/add.
 
     >>> browser.open('http://localhost/groups/add')
-    >>> browser.getControl('Address').value = 'test'
-    >>> browser.getControl('Title').value = 'Test group'
-    >>> browser.getControl('School').value = 'Vilniaus universitetas'
+    >>> browser.getControl('Group email address').value = 'test'
+    >>> browser.getControl('Group title').value = 'Test group'
+    >>> browser.getControl('Specify the school').value = 'Vilniaus universitetas'
     >>> browser.getControl('Group logo').add_file(*make_file('test_logo.png'))
     >>> browser.getControl('Save').click()
     >>> browser.printQuery('//h1/text()')
@@ -83,16 +83,16 @@ If we want to, we can hide the group's page by clicking on a link.
 However, group ids are checked for uniqueness.
 
     >>> browser.open('http://localhost/groups/add')
-    >>> browser.getControl('Address').value = 'test'
-    >>> browser.getControl('School').value = 'Vilniaus universitetas'
-    >>> browser.getControl('Title').value = 'Test group'
+    >>> browser.getControl('Group email address').value = 'test'
+    >>> browser.getControl('Specify the school').value = 'Vilniaus universitetas'
+    >>> browser.getControl('Group title').value = 'Test group'
     >>> browser.getControl('Save').click()
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Such id already exists, choose a different one.
 
 And they must be valid local parts of email addresses.
 
-    >>> browser.getControl('Address').value = 'test test'
+    >>> browser.getControl('Group email address').value = 'test test'
     >>> browser.getControl('Save').click()
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Id cannot be used as an email address.

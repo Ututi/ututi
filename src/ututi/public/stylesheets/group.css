@@ -1,0 +1,29 @@
+#steps span {
+  color: #000;
+}
+
+#steps .step .number {
+  border: 3px solid #808080;
+  padding: 0 5px;
+  margin-right: 5px;
+}
+
+#steps .step .title {
+  margin-right: 10px;
+}
+
+#steps .step.active .number {
+  border: 3px solid #ff7800;
+  color: #ff7800;
+  font-weight: bold;
+  padding: 0 5px;
+  margin-right: 5px;
+}
+
+#steps .step.active .title {
+  color: #ff7800;
+}
+
+#steps {
+  margin-bottom: 20px;
+}
