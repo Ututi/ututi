@@ -555,3 +555,19 @@ CREATE TRIGGER member_group_event_trigger AFTER INSERT OR DELETE ON group_member
 --       select all events where object_id ==  subject_id or object.parent.id == subject_id
 
 SHOW ututi.active_user;;
+
+/* Table for storing invitations to a group */
+CREATE TABLE group_invitations (
+       created date not null default now(),
+       email varchar(320) default null,
+       user_id int8 references users(id) default null,
+       group_id int8 not null references groups(id),
+       hash char(8) not null unique,
+       primary key (hash));;
+/* Table for storing requests to join a group */
+CREATE TABLE group_requests (
+       created date not null default now(),
+       user_id int8 references users(id) default null,
+       group_id int8 not null references groups(id),
+       hash char(8) not null unique,
+       primary key (hash));;

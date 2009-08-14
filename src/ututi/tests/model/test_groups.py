@@ -88,6 +88,26 @@ def test_empty_folders():
 
     """
 
+def test_invitations():
+    """Test group invitations and membership requests.
+
+    Let's say a user wants to join a group.
+        >>> g = Group.get("moderators")
+        >>> u = User.get("admin@ututi.lt")
+        >>> g.request_join(u)
+
+    The new reqest to join should appear in group's request collection:
+        >>> g.requests
+        [<ututi.model.PendingRequest object at ...>]
+
+        >>> len(g.requests)
+        1
+
+    But invitations should remain empty:
+        >>> g.invitations
+        []
+
+    """
 
 def test_suite():
     suite = doctest.DocTestSuite(

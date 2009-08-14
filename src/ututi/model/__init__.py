@@ -4,6 +4,8 @@ import os
 import hashlib
 import sha, binascii
 import warnings
+import string
+from random import Random
 from binascii import a2b_base64, b2a_base64
 from routes.util import url_for
 from pylons import url
@@ -217,6 +219,24 @@ def setup_orm(engine):
                             'watched_subjects': relation(Subject,
                                                          secondary=group_watched_subjects_table)})
 
+    global group_invitations_table
+    group_invitations_table = Table("group_invitations", meta.metadata,
+                                    autoload=True,
+                                    autoload_with=engine)
+
+    global group_requests_table
+    group_requests_table = Table("group_requests", meta.metadata,
+                                    autoload=True,
+                                    autoload_with=engine)
+
+    orm.mapper(PendingRequest, group_requests_table,
+               properties = {'group': relation(Group, backref='requests'),
+                             'user': relation(User, backref='requests')})
+
+    orm.mapper(PendingInvitation, group_invitations_table,
+               properties = {'user': relation(User, backref='invitations'),
+                             'group': relation(Group, backref='invitations')})
+
     global user_monitored_subjects_table
     user_monitored_subjects_table = Table("user_monitored_subjects", meta.metadata,
                                         autoload=True,
@@ -334,6 +354,7 @@ class User(object):
 
     @classmethod
     def get(cls, username):
+        """Get a user by his email."""
         try:
             return meta.Session.query(Email).filter_by(email=username.lower()).one().user
         except NoResultFound:
@@ -456,6 +477,12 @@ class Group(ContentItem, FolderMixin):
     def url(self, controller='group', action='group_home', **kwargs):
         return url_for(controller=controller, action=action, id=self.group_id, **kwargs)
 
+    def invite_user(self, email):
+        self.invitations.append(PendingInvitation(email))
+
+    def request_join(self, user):
+        self.requests.append(PendingRequest(user))
+
     def __init__(self, group_id, title=u'', location=None, year=None, description=u''):
         self.group_id = group_id.strip().lower()
         self.title = title
@@ -484,6 +511,35 @@ class GroupMembershipType(object):
             return meta.Session.query(cls).filter_by(membership_type=membership_type).one()
         except NoResultFound:
             return None
+
+
+group_requests_table = None
+
+class PendingInvitation(object):
+    """The group invites a user."""
+    def __init__(self, email, group = None):
+        self.hash = ''.join(Random().sample(string.ascii_lowercase, 8))
+        if group is not None:
+            self.group = group
+
+        user = User.get(email)
+        if user is not None:
+            self.user = user
+        elif email is not None:
+            self.email = email
+
+
+group_invitations_table = None
+
+class PendingRequest(object):
+    """The user requests to join a group."""
+    def __init__(self, user, group = None):
+        self.hash = ''.join(Random().sample(string.ascii_lowercase, 8))
+        if group is not None:
+            self.group = group
+
+        if user is not None:
+            self.user = user
 
 
 subjects_table = None
