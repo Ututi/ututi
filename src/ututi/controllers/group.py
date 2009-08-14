@@ -214,7 +214,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
             group.logo = f
 
         meta.Session.commit()
-        redirect_to(controller='group', action='group_home', id=values['id'])
+        redirect_to(controller='group', action='subjects_step', id=values['id'])
 
     @group_action
     def members(self, group):
@@ -317,6 +317,12 @@ class GroupController(GroupControllerBase, FileViewMixin):
     def js_unwatch_subject(self, group):
         self._unwatch_subject(group)
         return "OK"
+
+    @validate(schema=SearchSubmit, form='subjects', post_only = False, on_get = True)
+    @group_action
+    def subjects_step(self, group):
+        c.step = True
+        return self.subjects(group.group_id)
 
     @validate(schema=SearchSubmit, form='subjects', post_only = False, on_get = True)
     @group_action
