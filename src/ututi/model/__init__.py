@@ -231,10 +231,16 @@ def setup_orm(engine):
 
     orm.mapper(PendingRequest, group_requests_table,
                properties = {'group': relation(Group, backref='requests'),
-                             'user': relation(User, backref='requests')})
+                             'user': relation(User,
+                                              primaryjoin=group_requests_table.c.user_id==users_table.c.id,
+                                              backref='requests')})
 
     orm.mapper(PendingInvitation, group_invitations_table,
-               properties = {'user': relation(User, backref='invitations'),
+               properties = {'user': relation(User,
+                                              primaryjoin=group_invitations_table.c.user_id==users_table.c.id,
+                                              backref='invitations'),
+                             'author': relation(User,
+                                                primaryjoin=group_invitations_table.c.author_id==users_table.c.id),
                              'group': relation(Group, backref='invitations')})
 
     global user_monitored_subjects_table
@@ -477,8 +483,8 @@ class Group(ContentItem, FolderMixin):
     def url(self, controller='group', action='group_home', **kwargs):
         return url_for(controller=controller, action=action, id=self.group_id, **kwargs)
 
-    def invite_user(self, email):
-        self.invitations.append(PendingInvitation(email))
+    def invite_user(self, email, author):
+        self.invitations.append(PendingInvitation(email, author=author))
 
     def request_join(self, user):
         self.requests.append(PendingRequest(user))
@@ -517,7 +523,8 @@ group_requests_table = None
 
 class PendingInvitation(object):
     """The group invites a user."""
-    def __init__(self, email, group = None):
+    def __init__(self, email, group = None, author=None):
+        self.author = author
         self.hash = ''.join(Random().sample(string.ascii_lowercase, 8))
         if group is not None:
             self.group = group

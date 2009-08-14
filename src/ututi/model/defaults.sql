@@ -562,6 +562,7 @@ CREATE TABLE group_invitations (
        email varchar(320) default null,
        user_id int8 references users(id) default null,
        group_id int8 not null references groups(id),
+       author_id int8 not null references users(id),
        hash char(8) not null unique,
        primary key (hash));;
 /* Table for storing requests to join a group */
