@@ -73,7 +73,7 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
 <h2 class="subjects-suggestions">${_('Watch subjects')}</h2>
 <hr/>
 
-${search_form(obj_type='subject', tags=c.tags, parts=['text', 'tags'], target="")}
+${search_form(obj_type='subject', tags=c.tags, parts=['text', 'tags'], target=c.subjects)}
 <!--
 <div id="frontpage-search">
   <form id="frontpage-search-form" method="post" action="">

@@ -54,13 +54,21 @@ We can add a group at the url /groups/add.
     >>> browser.getControl('Specify the school').value = 'Vilniaus universitetas'
     >>> browser.getControl('Group logo').add_file(*make_file('test_logo.png'))
     >>> browser.getControl('Save').click()
+
+After creating the group we should be redirected to the subject selection view:
+
     >>> browser.printQuery('//h1/text()')
-    Test group, 2009
+    Group Subjects
+    Results:
 
 The group's logo is displayed in a portlet.
 
     >>> browser.printQuery("id('group_info_portlet')//img")
     <img id="group-logo" src="/group/test/logo/70" alt="logo" />
+
+Let's see what the group's default home page looks like:
+
+    >>> browser.open('http://localhost/group/test')
 
 The group's default page is empty at the moment and we are notified of this.
 

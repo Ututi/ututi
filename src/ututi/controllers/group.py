@@ -322,6 +322,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
     @group_action
     def subjects_step(self, group):
         c.step = True
+        c.search_target = url(controller = 'group', action='subjects_step', id = group.group_id)
         return self.subjects(group.group_id)
 
     @validate(schema=SearchSubmit, form='subjects', post_only = False, on_get = True)
@@ -332,6 +333,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
         members to choose new subjects for the group.
         """
         c.group = group
+        c.search_target = url(controller = 'group', action='subjects', id = group.group_id)
 
         #retrieve search parameters
         c.text = self.form_result.get('text', '')
