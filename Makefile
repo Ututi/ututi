@@ -172,6 +172,7 @@ coverage: bin/test
 .PHONY: extract-translations
 extract-translations: bin/py
 	bin/py setup.py extract_messages
+	bin/py setup.py update_catalog
 
 .PHONY: compile-translations
 compile-translations: bin/py
