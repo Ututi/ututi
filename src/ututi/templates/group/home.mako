@@ -126,8 +126,12 @@
 </div>
 %endif
 
-<h1>${c.group.title}, ${c.group.year.year}</h1>
+<h1>${_("What's new?")}</h1>
 
-<div>
-${c.group.description}
-</div>
+<ul id="event_list">
+% for event in c.events:
+<li>
+  ${event.render()|n} <span class="event_time">(${event.when()})</span>
+</li>
+% endfor
+</ul>

@@ -17,16 +17,10 @@ ${_('student information online')}
     % endif
   </div>
   <div class="personal-info">
-    <a class="logout" href="${url('/logout')}" title="Logout">
-      ${h.image('/images/icon_logout.png', alt='logout')|n}
-    </a>
+    ${h.link_to(_("Log out"), url('/logout'))}
     <div>
       <span class="fullname">${c.user.fullname}</span>
       <span class="small">${c.user.emails[0].email}</span>
-    </div>
-    <div id="user-ratings">
-      <span id="user-rating-good" class="user-rating XXX">+178</span>
-      <span id="user-rating-evil" class="user-rating XXX">+178</span>
     </div>
   </div>
   <div id="personal-menu" class="XXX">

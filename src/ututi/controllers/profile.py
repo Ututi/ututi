@@ -1,5 +1,6 @@
 import logging
 
+from sqlalchemy.sql.expression import desc
 from formencode import Schema, validators
 from routes import url_for
 
@@ -11,6 +12,7 @@ from pylons.i18n import _
 from ututi.lib.base import BaseController, render
 from ututi.lib.emails import email_confirmation_request
 
+from ututi.model.events import Event
 from ututi.model import meta, Email, File
 
 log = logging.getLogger(__name__)
@@ -37,10 +39,17 @@ class ProfileController(BaseController):
             abort(401, 'You are not authenticated')
 
     def home(self):
-        if c.user is not None:
-            return render('/profile/home.mako')
-        else:
+        if c.user is None:
             abort(401, 'You are not authenticated')
+            return
+
+        c.events = meta.Session.query(Event)\
+            .filter(Event.object_id.in_([s.id for s in c.user.watched_subjects]))\
+            .filter(Event.author_id != c.user.id)\
+            .order_by(desc(Event.created))\
+            .limit(20).all()
+
+        return render('/profile/home.mako')
 
     def edit(self):
         if c.user is None:

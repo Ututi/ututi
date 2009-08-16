@@ -16,7 +16,7 @@ create table users (
        id bigserial not null,
        fullname varchar(100),
        password char(36),
-       last_seen timestamp not null default now(),
+       last_seen timestamp not null default (now() at time zone 'UTC'),
        primary key (id));;
 
 /* Create first user=admin and password=asdasd */
@@ -54,9 +54,9 @@ create table content_items (id bigserial not null,
        parent_id int8 default null references content_items(id),
        content_type varchar(20) not null default '',
        created_by int8 references users(id) not null,
-       created_on timestamp not null default now(),
+       created_on timestamp not null default (now() at time zone 'UTC'),
        modified_by int8 references users(id) default null,
-       modified_on timestamp not null default now(),
+       modified_on timestamp not null default (now() at time zone 'UTC'),
        primary key (id));;
 
 /* A table for files */
@@ -392,7 +392,7 @@ CREATE TRIGGER update_page_location AFTER UPDATE ON content_items
 CREATE FUNCTION on_content_create() RETURNS trigger AS $$
     BEGIN
       NEW.created_by = current_setting('ututi.active_user');
-      NEW.created_on = now();
+      NEW.created_on = (now() at time zone 'UTC');
       RETURN NEW;
     END
 $$ LANGUAGE plpgsql;;
@@ -404,7 +404,7 @@ CREATE TRIGGER on_content_create BEFORE INSERT ON content_items
 CREATE FUNCTION on_content_update() RETURNS trigger AS $$
     BEGIN
       NEW.modified_by = current_setting('ututi.active_user');
-      NEW.modified_on = now();
+      NEW.modified_on = (now() at time zone 'UTC');
       RETURN NEW;
     END
 $$ LANGUAGE plpgsql;;
@@ -418,10 +418,11 @@ create table events (
        id bigserial not null,
        object_id int8 default null references content_items(id) on delete cascade not null,
        author_id int8 references users(id) not null,
-       created timestamp not null default now(),
+       created timestamp not null default (now() at time zone 'UTC'),
        event_type varchar(30),
        file_id int8 references files(id) on delete cascade default null,
        page_id int8 references pages(id) on delete cascade default null,
+       subject_id int8 references subjects(id) on delete cascade default null,
        message_id int8 references group_mailing_list_messages(id) on delete cascade default null,
        primary key (id));;
 
@@ -524,7 +525,7 @@ CREATE FUNCTION member_group_event_trigger() RETURNS trigger AS $$
     BEGIN
       IF TG_OP = 'DELETE' THEN
         INSERT INTO events (object_id, author_id, event_type)
-               VALUES (NEW.group_id, NEW.user_id, 'member_left');
+               VALUES (OLD.group_id, OLD.user_id, 'member_left');
       ELSIF TG_OP = 'INSERT' THEN
         INSERT INTO events (object_id, author_id, event_type)
                VALUES (NEW.group_id, NEW.user_id, 'member_joined');
@@ -537,28 +538,27 @@ $$ LANGUAGE plpgsql;;
 CREATE TRIGGER member_group_event_trigger AFTER INSERT OR DELETE ON group_members
     FOR EACH ROW EXECUTE PROCEDURE member_group_event_trigger();;
 
--- slicing
--- user -> groups (pages, files, members?, messages) + subjects (pages, files)
--- group -> subjects (pages, files) + group + page + files + members
--- subject -> pages, files
+CREATE FUNCTION group_subject_event_trigger() RETURNS trigger AS $$
+    BEGIN
+      IF TG_OP = 'DELETE' THEN
+        INSERT INTO events (object_id, subject_id, author_id, event_type)
+               VALUES (OLD.group_id, OLD.subject_id, cast(current_setting('ututi.active_user') as int8), 'group_stopped_watching_subject');
+      ELSIF TG_OP = 'INSERT' THEN
+        INSERT INTO events (object_id, subject_id, author_id, event_type)
+               VALUES (NEW.group_id, NEW.subject_id, cast(current_setting('ututi.active_user') as int8), 'group_started_watching_subject');
+      END IF;
+      RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
 
--- select all watched_subjects
---   for each subject:
---       select all events where object_id ==  subject_id or object.parent.id == subject_id
--- select all groups i am a member of:
---       select all events where object_id ==  group_id or object.parent.id == group_id
 
--- group
--- select all events where object_id ==  group_id or object.parent.id == group_id
--- select all watched_subjects
---   for each subject:
---       select all events where object_id ==  subject_id or object.parent.id == subject_id
+CREATE TRIGGER group_subject_event_trigger AFTER INSERT OR DELETE ON group_watched_subjects
+    FOR EACH ROW EXECUTE PROCEDURE group_subject_event_trigger();;
 
-SHOW ututi.active_user;;
 
 /* Table for storing invitations to a group */
 CREATE TABLE group_invitations (
-       created date not null default now(),
+       created date not null default (now() at time zone 'UTC'),
        email varchar(320) default null,
        user_id int8 references users(id) default null,
        group_id int8 not null references groups(id),
@@ -567,7 +567,7 @@ CREATE TABLE group_invitations (
        primary key (hash));;
 /* Table for storing requests to join a group */
 CREATE TABLE group_requests (
-       created date not null default now(),
+       created date not null default (now() at time zone 'UTC'),
        user_id int8 references users(id) default null,
        group_id int8 not null references groups(id),
        hash char(8) not null unique,

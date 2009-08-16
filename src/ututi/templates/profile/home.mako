@@ -13,6 +13,23 @@
     There are searches here!
   </%self:portlet>
 
+  <%self:portlet id="subject_portlet" portlet_class="inactive">
+    <%def name="header()">
+      ${_('Watched subjects')}
+    </%def>
+    <ul>
+      % for subject in c.user.watched_subjects:
+      <li>
+        <a href="${subject.url()}">${subject.title}</a>
+      </li>
+      % endfor
+      % if not c.user.watched_subjects:
+      ${_('You are not watching any subjects.')}
+      %endif
+    </ul>
+    ${h.button_to(_('Watch subjects'), h.url_for(action='subjects'))} ${h.link_to(_('More subjects'), url(controller='search', action='index', obj_type='subject'))}
+  </%self:portlet>
+
   <%self:portlet id="group_portlet" portlet_class="inactive">
     <%def name="header()">
       ${_('My groups')}
@@ -27,28 +44,18 @@
       ${_('You are not a member of any.')}
       %endif
     </ul>
-  </%self:portlet>
-
-  <%self:portlet id="subject_portlet" portlet_class="inactive">
-    <%def name="header()">
-      ${_('My subjects')}
-    </%def>
-    <ul>
-      % for subject in c.user.watched_subjects:
-      <li>
-        <a href="${subject.url()}">${subject.title}</a>
-      </li>
-      % endfor
-      % if not c.user.watched_subjects:
-      ${_('You are not watching any subjects.')}
-      %endif
-      <a href="${h.url_for(action='subjects')}">Watch subjects</a>
-    </ul>
+    ${h.button_to(_('Create group'), h.url_for(controller='group', action='add'))} ${h.link_to(_('More groups'), url(controller='search', action='index', obj_type='group'))}
   </%self:portlet>
 
 </div>
 </%def>
 
-<h1>Welcome ${c.user.fullname}!</h1>
+<h1>${_("What's new?")}</h1>
 
-<a href="${url('/logout')}">Log out</a>
+<ul id="event_list">
+% for event in c.events:
+<li>
+  ${event.render()|n} <span class="event_time">(${event.when()})</span>
+</li>
+% endfor
+</ul>

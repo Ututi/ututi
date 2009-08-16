@@ -416,6 +416,11 @@ class User(object):
     def ignoreSubject(self, subject):
         self._setWatchedSubject(subject, ignored=True)
 
+    def url(self, controller='user', action='index'):
+        return url(controller=controller,
+                   action=action,
+                   id=self.id)
+
     def __init__(self, fullname, password, gen_password=True):
         self.fullname = fullname
         self.password = password

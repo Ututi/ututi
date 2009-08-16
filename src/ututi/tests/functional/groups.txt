@@ -25,24 +25,30 @@ The link of the group leads to its home page.
     >>> browser.url
     'http://localhost/group/moderators'
     >>> browser.printQuery('//h1/text()')
-    Moderatoriai, 2009
+    What's new?
 
 We can edit the group's information.
+
    >>> browser.getLink('Edit').click()
    >>> browser.url
    'http://localhost/group/moderators/edit'
+
    >>> browser.getControl('Title').value
    'Moderatoriai'
+
    >>> browser.getControl('Title').value = 'Ututi moderatoriai'
    >>> browser.getControl('Description').value = 'Ututi moderatorių grupė'
    >>> browser.getControl('Group logo').add_file(*make_file('test_logo.png'))
    >>> browser.getControl('Save').click()
    >>> browser.printQuery('//h1/text()')
-   Ututi moderatoriai, 1999
+   What's new?
+
    >>> browser.printQuery("id('group_info_portlet')//img")
    <img id="group-logo" src="/group/moderators/logo/70" alt="logo" />
+
    >>> browser.printQuery("id('group_info_portlet')//h4/text()")
    Ututi moderatoriai
+
    >>> browser.printQuery("id('group_info_portlet')//div[@class='description small']/text()")
    Ututi moderatorių grupė
 
@@ -127,6 +133,12 @@ of in your home page (at least for now):
           <a href="/group/moderators">Ututi moderatoriai</a>
         </li>
       </ul>
+      <form action="/groups/add" class="button-to" method="POST">
+        <div>
+          <input type="submit" value="Create group" />
+        </div>
+      </form>
+      <a href="/search?obj_type=group">More groups</a>
     </div>
 
 You can import more groups using the admin interface.

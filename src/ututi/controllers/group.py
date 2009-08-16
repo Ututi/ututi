@@ -16,6 +16,8 @@ from formencode.foreach import ForEach
 
 from formencode.variabledecode import NestedVariables
 
+from sqlalchemy.sql.expression import or_
+from sqlalchemy.sql.expression import desc
 from sqlalchemy.sql.expression import not_
 
 import ututi.lib.helpers as h
@@ -24,6 +26,7 @@ from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator
 
+from ututi.model.events import Event
 from ututi.model import LocationTag
 from ututi.model import meta, Group, File, SimpleTag, Subject, ContentItem
 from ututi.controllers.search import SearchSubmit
@@ -162,6 +165,11 @@ class GroupController(GroupControllerBase, FileViewMixin):
             group.show_page = False
         meta.Session.commit()
         c.breadcrumbs.append(self._actions('group_home'))
+        c.events = meta.Session.query(Event)\
+            .filter(or_(Event.object_id.in_([s.id for s in group.watched_subjects]),
+                        Event.object_id == group.id))\
+            .order_by(desc(Event.created))\
+            .limit(20).all()
         return render('group/home.mako')
 
     @group_action

@@ -1,9 +1,15 @@
 Group subject watching
 ======================
 
-    >>> browser = Browser('http://localhost/group/moderators')
+    >>> browser = Browser()
 
-    >>> browser.getLink('Subjects').click()
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
+
+    >>> browser.open('http://localhost/group/moderators')
+    >>> browser.getLink('Subjects', url='moderators').click()
 
     >>> browser.printQuery("id('watched-subjects')")
     <ul id="watched-subjects"></ul>
@@ -62,3 +68,22 @@ Group subject watching
         </div>
       </div>
     </div>
+
+These actions should have left an event trail on the group home page:
+
+    >>> browser.getLink('Home', url='group').click()
+    >>> browser.printQuery("id('event_list')")
+    <ul id="event_list">
+      <li>
+      Group <a href="/group/moderators">Moderatoriai</a> stopped watching subject <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a>
+        <span class="event_time">(... second... ago)</span>
+      </li>
+      <li>
+      Group <a href="/group/moderators">Moderatoriai</a> started watching subject <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a>
+        <span class="event_time">(... second... ago)</span>
+      </li>
+      <li>
+      Member <a href="/user/1">Adminas Adminovix</a> joined the group <a href="/group/moderators">Moderatoriai</a>
+        <span class="event_time">(... second... ago)</span>
+      </li>
+    </ul>

@@ -16,7 +16,7 @@ If user is not logged in login form is shown. Let's fill it in:
 And we are greeted by the welcome page:
 
     >>> browser.printQuery('id("page-content")//h1/text()')
-    Welcome Adminas Adminovix!
+    What's new?
 
 The personal information portlet shows my name:
 

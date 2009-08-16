@@ -283,7 +283,7 @@ class AdminController(BaseController):
             location = LocationTag.get(row[1:3])
             subject = Subject.get(location, row[3])
             group.watched_subjects.append(subject)
-            meta.Session.commit()
+        meta.Session.commit()
         redirect_to(controller='admin', action='index')
 
     def import_user_watched_subjects(self):

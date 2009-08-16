@@ -7,6 +7,7 @@ available to Controllers. This module is available to templates as 'h'.
 # Import helpers as desired, or define your own, ie:
 #from webhelpers.html.tags import checkbox, password
 from routes import url_for
+from webhelpers.html.tools import button_to
 from webhelpers.html.tags import stylesheet_link, javascript_link, image, link_to
 
 from webhelpers.pylonslib import Flash as _Flash
