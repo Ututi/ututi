@@ -492,6 +492,22 @@ class Group(ContentItem, FolderMixin):
                                       gmt.c.user_id == users_table.c.id))\
                                 .filter(gmt.c.group_id == self.id).all()
 
+    def is_member(self, user):
+        """Is the user a member of the group?"""
+        members = [membership.user for membership in self.members]
+        return user in members
+
+    def is_admin(self, user):
+        """Is the user an administrator of the group?"""
+        admin_type = GroupMembershipType.get('administrator')
+        admins = [membership.user for membership in self.members if membership.role == admin_type]
+        return user in admins
+
+    def add_member(self, user, admin=False):
+        if not self.is_member(user):
+            membership = GroupMember(user, self, admin)
+            meta.Session.add(membership)
+
     def url(self, controller='group', action='group_home', **kwargs):
         return url_for(controller=controller, action=action, id=self.group_id, **kwargs)
 
