@@ -31,6 +31,7 @@ from ututi.model.events import Event
 from ututi.model import LocationTag
 from ututi.model import meta, Group, File, SimpleTag, Subject, ContentItem, Email
 from ututi.controllers.search import SearchSubmit
+from ututi.lib.security import ActionProtector
 from ututi.lib.search import search_query
 
 log = logging.getLogger(__name__)
@@ -120,6 +121,7 @@ def group_action(method):
         group = Group.get(id)
         if group is None:
             abort(404)
+        c.security_context = group
         c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
         return method(self, group)
     return _group_action
@@ -162,11 +164,13 @@ class GroupControllerBase(BaseController):
 class GroupController(GroupControllerBase, FileViewMixin):
     """Controller for group actions."""
 
+    @ActionProtector("root")
     def index(self):
         c.groups = meta.Session.query(Group).all()
         return render('groups.mako')
 
     @group_action
+    @ActionProtector("member", "admin", "moderator")
     def group_home(self, group):
         c.group = group
         if request.GET.get('do', None) == 'hide_page':
@@ -181,6 +185,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
         return render('group/home.mako')
 
     @group_action
+    @ActionProtector("admin", "moderator")
     def edit_page(self, group):
         c.group = group
         c.breadcrumbs.append(self._actions('group_home'))
@@ -188,6 +193,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
 
     @group_action
     @validate(schema=GroupPageForm, form='edit_page')
+    @ActionProtector("admin", "moderator")
     def update_page(self, group):
         page_content = self.form_result['page_content']
         if page_content is None:
@@ -198,17 +204,20 @@ class GroupController(GroupControllerBase, FileViewMixin):
         redirect_to(controller='group', action='group_home', id=group.group_id)
 
     @group_action
+    @ActionProtector("member", "admin", "moderator")
     def files(self, group):
         c.group = group
         c.breadcrumbs.append(self._actions('files'))
         return render('group/files.mako')
 
+    @ActionProtector("user")
     def add(self):
         c.current_year = date.today().year
         c.years = range(c.current_year - 10, c.current_year + 5)
         return render('group/add.mako')
 
     @validate(schema=NewGroupForm, form='add')
+    @ActionProtector("user")
     def new_group(self):
         values = self.form_result
 
@@ -234,12 +243,14 @@ class GroupController(GroupControllerBase, FileViewMixin):
         redirect_to(controller='group', action='subjects_step', id=values['id'])
 
     @group_action
+    @ActionProtector("member", "admin", "moderator")
     def members(self, group):
         c.group = group
         c.breadcrumbs.append(self._actions('members'))
         return render('group/members.mako')
 
     @group_action
+    @ActionProtector("admin", "moderator")
     def edit(self, group):
         c.group = group
         c.group.tags_list = ', '.join([tag.title for tag in c.group.tags])
@@ -251,6 +262,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
 
     @validate(EditGroupForm, form='edit')
     @group_action
+    @ActionProtector("admin", "moderator")
     def update(self, group):
         values = self.form_result
         group.title = values['title']
@@ -289,14 +301,17 @@ class GroupController(GroupControllerBase, FileViewMixin):
         return serve_image(group.logo, width=width, height=height)
 
     @group_action
+    @ActionProtector("member", "admin", "moderator")
     def upload_file(self, group):
         return self._upload_file(group)
 
     @group_action
+    @ActionProtector("member", "admin", "moderator")
     def create_folder(self, group):
         return self._create_folder(group)
 
     @group_action
+    @ActionProtector("admin", "moderator")
     def delete_folder(self, group):
         return self._delete_folder(group)
 
@@ -315,28 +330,33 @@ class GroupController(GroupControllerBase, FileViewMixin):
         meta.Session.commit()
 
     @group_action
+    @ActionProtector("admin", "moderator")
     def watch_subject(self, group):
         self._watch_subject(group)
         redirect_to(request.referrer)
 
     @group_action
+    @ActionProtector("admin", "moderator")
     def js_watch_subject(self, group):
         self._watch_subject(group)
         return "OK"
 
     @validate(schema=SearchSubmit, form='subjects', post_only = False, on_get = True)
     @group_action
+    @ActionProtector("admin", "moderator")
     def unwatch_subject(self, group):
         self._unwatch_subject(group)
         redirect_to(request.referrer)
 
     @group_action
+    @ActionProtector("admin", "moderator")
     def js_unwatch_subject(self, group):
         self._unwatch_subject(group)
         return "OK"
 
     @validate(schema=SearchSubmit, form='subjects', post_only = False, on_get = True)
     @group_action
+    @ActionProtector("member", "admin", "moderator")
     def subjects_step(self, group):
         c.step = True
         c.search_target = url(controller = 'group', action='subjects_step', id = group.group_id)
@@ -344,6 +364,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
 
     @validate(schema=SearchSubmit, form='subjects', post_only = False, on_get = True)
     @group_action
+    @ActionProtector("member", "admin", "moderator")
     def subjects(self, group):
         """
         A view displaying all the subjects the group is already watching and allowing
@@ -385,6 +406,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
 
     @validate(schema=GroupInviteForm, form='invite_members_step')
     @group_action
+    @ActionProtector("member", "admin", "moderator")
     def invite_members_step(self, group):
         c.group = group
 

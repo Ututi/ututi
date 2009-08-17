@@ -4,7 +4,7 @@ from repoze.what.plugins.pylonshq.protectors import ActionProtector as BaseActio
 
 
 def is_root(context, user):
-    return user.id == 1
+    return user is not None and user.id == 1
 
 
 def is_moderator(context, user):
@@ -30,10 +30,10 @@ def is_owner(context, user):
 crowd_checkers = {
     "root": is_root,
     "moderator": is_moderator,
-    "member": is_member,
     "admin": is_admin,
+    "member": is_member,
+    "owner": is_owner,
     "user": is_user,
-    "owner": is_owner
     }
 
 
@@ -42,6 +42,8 @@ def check_crowds(crowds, context=None, user=None):
         context = c.security_context
     if user is None:
         user = c.user
+    if is_root(context, user):
+        return True
     for crowd in crowds:
         if crowd_checkers[crowd](context, user):
             return True
