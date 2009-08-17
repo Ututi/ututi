@@ -141,7 +141,3 @@ we have forgotten it).
     >>> browser.printQuery("//span[@class='error-message']/text()")
     This email has already been used to register.
 
-One more thing. If we go directly to /register, we should be redirected back to the frontpage.
-    >>> browser.open('http://localhost/register')
-    >>> browser.url
-    'http://localhost/'
