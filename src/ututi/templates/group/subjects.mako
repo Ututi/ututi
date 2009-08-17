@@ -95,7 +95,7 @@ ${search_results(c.results, display=search_subject)}
 % if c.step:
 <br/>
 <hr/>
-<a class="btn" href="${url(controller='group', action='invite_members_step', id=c.group_id)}" title="${_('Invite group members')}">
+<a class="btn" href="${url(controller='group', action='invite_members_step', id=c.group.group_id)}" title="${_('Invite group members')}">
   <span>${_('Finish choosing subjects')}</span>
 </a>
 % endif
