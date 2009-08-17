@@ -13,7 +13,7 @@ setup(
         "grokcore.component",
         "z3c.testsetup",
         "repoze.who",
-        "repoze.what",
+        "repoze.what-pylons",
         "psycopg2",
         "formencode",
         "wsgi_intercept",

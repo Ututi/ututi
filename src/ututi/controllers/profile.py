@@ -13,6 +13,7 @@ from pylons.i18n import _
 
 from ututi.lib.base import BaseController, render
 from ututi.lib.emails import email_confirmation_request
+from ututi.lib.security import ActionProtector
 from ututi.lib.search import search_query
 
 from ututi.model.events import Event
@@ -31,22 +32,17 @@ class ProfileForm(Schema):
 class ProfileController(BaseController):
     """A controller for the user's personal information and actions."""
 
+    @ActionProtector("user")
     def index(self):
-        if c.user is not None:
-            c.fullname = c.user.fullname
-            c.emails = [email.email for email in
-                        meta.Session.query(Email).filter_by(id=c.user.id).filter_by(confirmed=False).all()]
-            c.emails_confirmed = [email.email for email in
-                                  meta.Session.query(Email).filter_by(id=c.user.id).filter_by(confirmed=True).all()]
-            return render('profile/profile.mako')
-        else:
-            abort(401, 'You are not authenticated')
+        c.fullname = c.user.fullname
+        c.emails = [email.email for email in
+                    meta.Session.query(Email).filter_by(id=c.user.id).filter_by(confirmed=False).all()]
+        c.emails_confirmed = [email.email for email in
+                              meta.Session.query(Email).filter_by(id=c.user.id).filter_by(confirmed=True).all()]
+        return render('profile/profile.mako')
 
+    @ActionProtector("user")
     def home(self):
-        if c.user is None:
-            abort(401, 'You are not authenticated')
-            return
-
         c.events = meta.Session.query(Event)\
             .filter(Event.object_id.in_([s.id for s in c.user.watched_subjects]))\
             .filter(Event.author_id != c.user.id)\
@@ -58,10 +54,8 @@ class ProfileController(BaseController):
 
         return render('/profile/home.mako')
 
+    @ActionProtector("user")
     def edit(self):
-        if c.user is None:
-            abort(401, 'You are not authenticated')
-
         c.breadcrumbs = [
             {'title': c.user.fullname,
              'link': url_for(controller='profile', action='index', id=c.user.id)},
@@ -72,6 +66,7 @@ class ProfileController(BaseController):
         return render('profile/edit.mako')
 
     @validate(ProfileForm, form='edit')
+    @ActionProtector("user")
     def update(self):
         fields = ('fullname', 'logo_upload', 'logo_delete')
         values = {}
@@ -113,17 +108,18 @@ class ProfileController(BaseController):
         meta.Session.commit()
         redirect_to(controller='profile', action='index')
 
+    @ActionProtector("user")
     def subjects(self):
         return ''
 
+    @ActionProtector("user")
     def welcome(self):
-        if c.user is None:
-            abort(401, 'You are not authenticated')
         c.current_year = date.today().year
         c.years = range(c.current_year - 10, c.current_year + 5)
         return  render('profile/welcome.mako')
 
     @validate(schema=SearchSubmit, form='test', post_only = False, on_get = True)
+    @ActionProtector("user")
     def findgroup(self):
         """Find the requested group, filtering by location id and year."""
         #collect default search parameters
