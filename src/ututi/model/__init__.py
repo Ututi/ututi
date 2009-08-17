@@ -519,6 +519,15 @@ class GroupMember(object):
     It has attributes for `group', `user' and `membership_type',
     membership types are listed in group_membership_types table.
     """
+    def __init__(self, user=None, group=None, admin=False):
+        """Create a group membership object."""
+        role_admin = GroupMembershipType.get('administrator')
+        role_member = GroupMembershipType.get('member')
+        self.user = user
+        self.group = group
+        self.role = role_member
+        if admin:
+            self.role = role_admin
 
 
 class GroupMembershipType(object):
