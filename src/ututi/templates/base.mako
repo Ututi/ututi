@@ -207,6 +207,33 @@ ${h.javascript_link('/javascripts/forms.js')|n}
           <div class="flash-message"><span class="close-link hide-parent">${_('Close')}</span><span>${message}</span></div>
           % endfor
 
+          %if c.user:
+            %for invitation in c.user.invitations:
+              <div class="flash-message">
+                <span>
+                  ${_(u"%(author)s has sent you an invitation to group %(group)s. Do You want to become a member of this group?") % dict(author=invitation.author.fullname, group=invitation.group.title)}
+                </span>
+                <form method="post"
+                      action="${url(controller='group', action='invitation', id=invitation.group.group_id)}"
+                      id="${invitation.group.group_id}_invitation_accept"
+                      class="inline-form">
+                  <input type="hidden" name="action" value="accept"/>
+                  <span class="btn">
+                    <input type="submit" value="${_('Accept')}"/>
+                  </span>
+                </form>
+                <form method="post"
+                      action="${url(controller='group', action='invitation', id=invitation.group.group_id)}"
+                      id="${invitation.group.group_id}_invitation_reject"
+                      class="inline-form">
+                  <input type="hidden" name="action" value="reject"/>
+                  <span class="btn">
+                    <input type="submit" value="${_('Reject')}"/>
+                  </span>
+                </form>
+              </div>
+            %endfor
+          %endif
 
           ${self.body()}
           <br style="clear: both;"/>

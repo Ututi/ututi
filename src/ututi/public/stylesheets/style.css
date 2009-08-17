@@ -351,6 +351,10 @@ ul.bullets_large li {
 /* end horizontal menu */
 
 /* begin form */
+form.inline-form {
+  display: inline;
+}
+
 form .form-field {
   margin: 0.2em 0;
   overflow: hidden; /* to contain floats */
