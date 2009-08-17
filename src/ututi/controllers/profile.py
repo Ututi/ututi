@@ -109,6 +109,10 @@ class ProfileController(BaseController):
         email.confirmation_key = ''
         meta.Session.commit()
         redirect_to(controller='profile', action='index')
+
+    def subjects(self):
+        return ''
+
     def welcome(self):
         if c.user is None:
             abort(401, 'You are not authenticated')

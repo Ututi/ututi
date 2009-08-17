@@ -38,6 +38,15 @@ ${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
     </form>
   </div>
 
+  <div id="browse-subjects">
+	<h3>${_('Browse subjects')}</h3>
+	<div class="message">
+      ${_('You can browse the %(link_to_list_of_subjects)s, look for information and share coursework. Also you can %(link_to_subject_watching_view)s, so you would not miss anything.') % dict(
+           link_to_list_of_subjects=h.link_to(_("list of subjects"), url(controller='search', action='index', obj_type='subject')),
+           link_to_subject_watching_view=h.link_to(_("select watched subjects"), url(controller='profile', action='subjects')))|n}
+    </div>
+  </div>
+
   <div id="edit-profile">
 	<h3>${_('Review and edit your profile')}</h3>
 	<div class="message">${_('Fill in your information, upload your photo so that others can recognize you.')}</div>

@@ -21,6 +21,7 @@ screen:
 
     >>> browser.printQuery("id('page-content')//h3/text()")
     Join a group
+    Browse subjects
     Review and edit your profile
 
     >>> browser.getControl(name='location-0').value = 'vu'

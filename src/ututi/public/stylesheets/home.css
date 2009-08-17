@@ -35,6 +35,13 @@ form {
   background: white url("../images/group_ico.png") left top no-repeat;
   margin: 20px;
 }
+
+#browse-subjects {
+  padding-left: 85px;
+  background: white url("../images/subject_ico.png") left top no-repeat;
+  margin: 20px;
+}
+
 #edit-profile {
   padding-left: 85px;
   height: 50px;
