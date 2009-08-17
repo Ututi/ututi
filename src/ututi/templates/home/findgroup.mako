@@ -13,7 +13,7 @@ ${_('Search')}
 
 <%def name="search_form(text='', obj_type='*', tags='', parts=['obj_type', 'text', 'tags'])">
 <div id="search-controls">
-  <form method="post" action="${url(controller='home', action='findgroup')}" id="search_form">
+  <form method="post" action="${url(controller='profile', action='findgroup')}" id="search_form">
     <div class="form-field">
       %if 'obj_type' in parts:
       <select name="obj_type">

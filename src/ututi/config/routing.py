@@ -112,8 +112,8 @@ def make_map():
     map.connect('/confirm_user_email/{key}', controller='profile', action='confirm_user_email')
 
     #user registration path
-    map.connect('/welcome', controller='home', action='welcome')
-    map.connect('/findgroup', controller='home', action='findgroup')
+    map.connect('/welcome', controller='profile', action='welcome')
+    map.connect('/findgroup', controller='profile', action='findgroup')
 
     # CUSTOM ROUTES HERE
     map.connect('/', controller='home')
