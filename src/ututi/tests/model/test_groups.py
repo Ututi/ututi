@@ -95,6 +95,7 @@ def test_invitations():
         >>> g = Group.get("moderators")
         >>> u = User.get("admin@ututi.lt")
         >>> g.request_join(u)
+        <ututi.model.PendingRequest object ...>
 
     The new reqest to join should appear in group's request collection:
         >>> g.requests

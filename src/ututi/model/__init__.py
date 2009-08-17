@@ -15,7 +15,7 @@ from datetime import date
 
 from pylons import config
 
-from sqlalchemy import orm, Column, Integer, Sequence, Table, select
+from sqlalchemy import orm, Column, Integer, Sequence, Table
 from sqlalchemy.types import Unicode
 from sqlalchemy.exc import DatabaseError, SAWarning
 from sqlalchemy.orm.exc import NoResultFound
@@ -25,6 +25,7 @@ from sqlalchemy.sql.expression import and_
 
 from ututi.migration import GreatMigrator
 from ututi.model import meta
+from ututi.lib.emails import group_invitation_email
 from nous.mailpost import copy_chunked
 
 
@@ -512,10 +513,19 @@ class Group(ContentItem, FolderMixin):
         return url_for(controller=controller, action=action, id=self.group_id, **kwargs)
 
     def invite_user(self, email, author):
-        self.invitations.append(PendingInvitation(email, author=author))
+        user = User.get(email)
+        if user is None or not self.is_member(user):
+            invitation = PendingInvitation(email, author=author, group=self)
+            meta.Session.add(invitation)
+            group_invitation_email(invitation, email)
+            return invitation
+        else:
+            return None
 
     def request_join(self, user):
-        self.requests.append(PendingRequest(user))
+        request = PendingRequest(user, group=self)
+        meta.Session.add(request)
+        return request
 
     def __init__(self, group_id, title=u'', location=None, year=None, description=u''):
         self.group_id = group_id.strip().lower()

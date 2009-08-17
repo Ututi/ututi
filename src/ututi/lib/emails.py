@@ -21,3 +21,23 @@ def email_confirmation_request(user, email):
             text = render('/emails/confirm_email.mako',
                           extra_vars={'fullname': user.fullname.decode('utf-8'), 'link': link})
             send_email(config['ututi_email_from'], email, _('Confirm the email for Ututi'), text)
+
+def group_invitation_email(invitation, email):
+    """ A method for handling user invitation to group emails."""
+    from ututi.model import Email
+    if invitation.user is not None:
+        email_instance = Email.get(email)
+        if email_instance.confirmed:
+            #the user is already using ututi, send a message inviting him to join the group
+            text = render('/emails/invitation_user.mako',
+                          extra_vars={'invitation': invitation})
+            send_email(config['ututi_email_from'], email, _('Ututi group invitation'), text)
+        #if the email is not confirmed, nothing will be sent for now
+        #XXX: if the user has several emails, send the invitation to one that is confirmed
+    else:
+        #the person invited is not a ututi user
+
+        text = render('/emails/invitation_nonuser.mako',
+                      extra_vars={'invitation': invitation})
+
+        send_email(config['ututi_email_from'], email, _('Ututi group invitation'), text)
