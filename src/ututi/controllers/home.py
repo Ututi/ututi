@@ -13,7 +13,7 @@ from webhelpers import paginate
 from ututi.lib.base import BaseController, render
 from ututi.lib.emails import email_confirmation_request
 from ututi.lib.search import search_query
-from ututi.model import meta, User, Email, Group, SearchItem, ContentItem, LocationTag
+from ututi.model import meta, User, Email, Group, SearchItem, ContentItem, LocationTag, PendingInvitation
 from ututi.controllers.search import SearchSubmit
 
 log = logging.getLogger(__name__)
@@ -39,7 +39,7 @@ class UniqueEmail(validators.FancyValidator):
 
 class RegistrationForm(Schema):
 
-    allow_extra_fields = False
+    allow_extra_fields = True
 
     msg = {'empty': _(u"Please enter your name to register.")}
     fullname = validators.String(not_empty=True, strip=True, messages=msg)
@@ -80,25 +80,34 @@ class HomeController(BaseController):
           else:
                return render('/anonymous_index.mako')
 
-     @validate(schema=RegistrationForm(), form='index')
-     def register(self):
-          if len(request.POST.keys()) == 0:
-               redirect_to(controller='home', action='index')
+     @validate(schema=RegistrationForm(), form='register')
+     def register(self, hash=None):
+          if hasattr(self, 'form_result'):
+               fullname = self.form_result['fullname']
+               password = self.form_result['new_password']
+               email = self.form_result['email'].lower()
 
-          fullname = self.form_result['fullname']
-          password = self.form_result['new_password']
-          email = self.form_result['email'].lower()
+               user = User(fullname, password)
+               user.emails = [Email(email)]
 
-          user = User(fullname, password)
-          user.emails = [Email(email)]
+               meta.Session.add(user)
+               meta.Session.commit()
+               email_confirmation_request(user, email)
 
-          meta.Session.add(user)
-          meta.Session.commit()
-          email_confirmation_request(user, email)
-
-          sign_in_user(email)
-
-          redirect_to(controller='home', action='welcome')
+               sign_in_user(email)
+               hash = self.form_result.get('hash', None)
+               if hash is not None:
+                    invitation = PendingInvitation.get(hash)
+                    if invitation is not None and invitation.email == email:
+                         invitation.group.add_member(user)
+                         meta.Session.delete(invitation)
+                         redirect_to(controller='group', action='group_home', id=invitation.group.group_id)
+               else:
+                    redirect_to(controller='home', action='welcome')
+          else:
+               if hash is not None:
+                    c.hash = hash
+               return render('register.mako')
 
      def welcome(self):
           if c.user is None:
