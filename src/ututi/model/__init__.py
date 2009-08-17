@@ -582,6 +582,13 @@ class PendingInvitation(object):
         elif email is not None:
             self.email = email
 
+    @classmethod
+    def get(cls, hash):
+        try:
+            return meta.Session.query(cls).filter(cls.hash == hash).one()
+        except NoResultFound:
+            return None
+
 
 group_invitations_table = None
 
