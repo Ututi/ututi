@@ -25,10 +25,11 @@ from ututi.lib.fileview import FileViewMixin
 from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator
+from ututi.lib.mailer import send_email
 
 from ututi.model.events import Event
 from ututi.model import LocationTag
-from ututi.model import meta, Group, File, SimpleTag, Subject, ContentItem
+from ututi.model import meta, Group, File, SimpleTag, Subject, ContentItem, Email
 from ututi.controllers.search import SearchSubmit
 from ututi.lib.search import search_query
 
@@ -106,6 +107,13 @@ class NewGroupForm(EditGroupForm):
 class GroupPageForm(Schema):
     allow_extra_fields = False
     page_content = HtmlSanitizeValidator()
+
+
+class GroupInviteForm(Schema):
+    """A schema for validating group member invitations"""
+
+    emails = validators.UnicodeString(not_empty=True)
+
 
 def group_action(method):
     def _group_action(self, id):
@@ -221,6 +229,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
             meta.Session.add(f)
             group.logo = f
 
+        group.add_member(c.user, True)
         meta.Session.commit()
         redirect_to(controller='group', action='subjects_step', id=values['id'])
 
@@ -373,3 +382,29 @@ class GroupController(GroupControllerBase, FileViewMixin):
 
         c.breadcrumbs.append(self._actions('subjects'))
         return render('group/subjects.mako')
+
+    @validate(schema=GroupInviteForm, form='invite_members_step')
+    @group_action
+    def invite_members_step(self, group):
+        c.group = group
+
+        if hasattr(self, 'form_result'):
+            emails = self.form_result.get('emails', '').split()
+            count = 0
+            failed = []
+            for line in emails:
+                for email in filter(bool, line.split(',')):
+                    #XXX : need to validate emails
+                    try:
+                        validators.Email.to_python(email)
+                        count = count + 1
+                        group.invite_user(email, c.user)
+                    except:
+                        failed.append(email)
+            if count > 0:
+                h.flash(_("Users invited."))
+            if failed != []:
+                h.flash(_("Invalid email addresses detected: %s") % ', '.join(failed))
+            redirect_to(controller='group', action='invite_members_step', id=group.group_id)
+
+        return render('group/members_step.mako')

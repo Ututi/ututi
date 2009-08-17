@@ -132,6 +132,9 @@ of in your home page (at least for now):
         <li>
           <a href="/group/moderators">Ututi moderatoriai</a>
         </li>
+        <li>
+          <a href="/group/test">Test group</a>
+        </li>
       </ul>
       <form action="/groups/add" class="button-to" method="POST">
         <div>

@@ -1,0 +1,53 @@
+Group creation path
+===================
+
+First of all let's log in;
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/')
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
+
+We can add a group at the url /groups/add.
+
+    >>> browser.open('http://localhost/groups/add')
+    >>> browser.getControl('Group email address').value = 'test'
+    >>> browser.getControl('Group title').value = 'Test group'
+    >>> browser.getControl('Specify the school').value = 'Vilniaus universitetas'
+    >>> browser.getControl('Save').click()
+
+After creating the group we should be redirected to the subject selection view:
+
+    >>> browser.printQuery('//h1/text()')
+    Group Subjects
+    Results:
+
+We will skip this view for now, but it is an integral part of the group creation path.
+    >>> browser.getLink('Finish choosing subjects').click()
+    >>> browser.printQuery('//h1/text()')
+    Group members
+
+Let us fill in several email to be invited.
+    >>> browser.getControl('Enter emails of the people You would like to invite to the group.').value='domas@monkus.lt, admin@ututi.lt'
+    >>> browser.getControl('Invite').click()
+
+The users should get emails:
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> print mail_queue.pop().message
+    MIME-Version: 1.0
+    Content-Type: text/plain; charset="us-ascii"
+    Content-Transfer-Encoding: 7bit
+    From: info@ututi.lt
+    To: domas@monkus.lt
+    Subject: Ututi group invitation
+    <BLANKLINE>
+    Adminas Adminovix has invited You to join the group Test group.
+    <BLANKLINE>
+    Since You do not appear to be a Ututi user at the moment, to become a member of this group, You will have to register first.
+    <BLANKLINE>
+    You can do this by following this link: http://localhost/home/registration?hash=...
+    <BLANKLINE>
+    The Ututi team
+    <BLANKLINE>
