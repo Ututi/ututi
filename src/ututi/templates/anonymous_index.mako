@@ -14,11 +14,12 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
       </div>
     </div>
     <div class="content">
+<!--
       <ul class="horizontal-menu">
         <li class="active"><a href="#" class="larger">${_('New account')}</a></li>
         <li><a href="#" class="larger">${_('OpenID')}</a></li>
       </ul>
-
+-->
       <form id="registration_form" method="post" action="${url('/register')}">
         <div class="form-field">
           <input class="line" type="text" id="fullname" name="fullname" size="40"/>
