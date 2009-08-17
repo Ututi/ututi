@@ -436,6 +436,13 @@ class Email(object):
     def __init__(self, email):
         self.email = email.strip().lower()
 
+    @classmethod
+    def get(cls, email):
+        try:
+            return meta.Session.query(Email).filter(Email.email == email.lower()).one()
+        except NoResultFound:
+            return None
+
 
 class Folder(list):
 
