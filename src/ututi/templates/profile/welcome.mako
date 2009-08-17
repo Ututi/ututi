@@ -1,14 +1,9 @@
-<%inherit file="/base.mako" />
-
-<%def name="head_tags()">
-<title>UTUTI – student information online</title>
-</%def>
+<%inherit file="/profile/base.mako" />
 
 <%def name="head_tags()">
 ${h.stylesheet_link('/stylesheets/home.css')|n}
 ${h.stylesheet_link('/stylesheets/suggestions.css')|n}
 ${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
-
 </%def>
 
 <%namespace file="/widgets/locationtag.mako" import="*"/>
