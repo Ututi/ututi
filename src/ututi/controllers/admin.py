@@ -9,6 +9,7 @@ from datetime import date
 from pylons import request, c
 from pylons.controllers.util import redirect_to, abort
 
+from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
 from ututi.model import UserSubjectMonitoring
 from ututi.model import Page
@@ -48,18 +49,16 @@ class AdminController(BaseController):
                  for line in file.value.splitlines()])
         return []
 
+    @ActionProtector("root")
     def index(self):
-        if c.user is None:
-            abort(401, 'You are not authenticated')
         return render('/admin/import.mako')
 
+    @ActionProtector("root")
     def users(self):
-        if c.user is None:
-            abort(401, 'You are not authenticated')
-
         c.users = meta.Session.query(User).order_by(User.id).all()
         return render('/admin/users.mako')
 
+    @ActionProtector("root")
     def import_users(self):
         for line in self._getReader():
             fullname = line[2]
@@ -76,6 +75,7 @@ class AdminController(BaseController):
             meta.Session.commit()
         redirect_to(controller='admin', action='users')
 
+    @ActionProtector("root")
     def import_user_logos(self):
         for line in self._getLines():
             email = line[0]
@@ -93,6 +93,7 @@ class AdminController(BaseController):
         meta.Session.commit()
         redirect_to(controller='admin', action='users')
 
+    @ActionProtector("root")
     def import_structure(self):
         for line in self._getReader():
             title = line[1]
@@ -116,6 +117,7 @@ class AdminController(BaseController):
             meta.Session.commit()
         redirect_to(controller='structure', action='index')
 
+    @ActionProtector("root")
     def import_groups(self):
         for row in self._getReader():
             uni_id = row[5]
@@ -140,6 +142,7 @@ class AdminController(BaseController):
         meta.Session.commit()
         redirect_to(controller='group', action='index')
 
+    @ActionProtector("root")
     def import_group_logos(self):
         for line in self._getLines():
             group_id = line[0]
@@ -158,6 +161,7 @@ class AdminController(BaseController):
         meta.Session.commit()
         redirect_to(controller='admin', action='users')
 
+    @ActionProtector("root")
     def import_structure_logos(self):
         for line in self._getLines():
             tag_title = line[0].lower()
@@ -177,6 +181,7 @@ class AdminController(BaseController):
         meta.Session.commit()
         redirect_to(controller='admin', action='users')
 
+    @ActionProtector("root")
     def import_subjects(self):
         for row in self._getReader():
             id, title, lecturer = row[:3]
@@ -194,6 +199,7 @@ class AdminController(BaseController):
         meta.Session.commit()
         redirect_to(controller='subject', action='index')
 
+    @ActionProtector("root")
     def import_group_members(self):
         #group membership types
         moderator = GroupMembershipType.get('administrator')
@@ -215,6 +221,7 @@ class AdminController(BaseController):
 
         redirect_to(controller='group', action='index')
 
+    @ActionProtector("root")
     def import_group_files(self):
         for line in self._getReader():
             author = User.get(line[-1])
@@ -232,6 +239,7 @@ class AdminController(BaseController):
         meta.Session.commit()
         redirect_to(controller='admin', action='index')
 
+    @ActionProtector("root")
     def import_subject_files(self):
         for line in self._getReader():
             author = User.get(line[-1])
@@ -251,6 +259,7 @@ class AdminController(BaseController):
         meta.Session.commit()
         redirect_to(controller='admin', action='index')
 
+    @ActionProtector("root")
     def import_group_pages(self):
         for row in self._getReader():
             group_id, page_id, page_title, page_content, author_email = row
@@ -264,6 +273,7 @@ class AdminController(BaseController):
 
         redirect_to(controller='admin', action='index')
 
+    @ActionProtector("root")
     def import_subject_pages(self):
         for row in self._getReader():
             subject_id, uni_id, fac_id, page_id, page_title, page_content, author_email = row
@@ -277,6 +287,7 @@ class AdminController(BaseController):
         meta.Session.commit()
         redirect_to(controller='admin', action='index')
 
+    @ActionProtector("root")
     def import_group_watched_subjects(self):
         for row in self._getReader():
             group = Group.get(row[0])
@@ -286,6 +297,7 @@ class AdminController(BaseController):
         meta.Session.commit()
         redirect_to(controller='admin', action='index')
 
+    @ActionProtector("root")
     def import_user_watched_subjects(self):
         for row in self._getReader():
             user = User.get(row[0])
@@ -298,6 +310,7 @@ class AdminController(BaseController):
         meta.Session.commit()
         redirect_to(controller='admin', action='index')
 
+    @ActionProtector("root")
     def import_user_ignored_subjects(self):
         for row in self._getReader():
             user = User.get(row[0])
