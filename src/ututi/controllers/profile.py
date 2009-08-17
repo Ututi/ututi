@@ -114,7 +114,7 @@ class ProfileController(BaseController):
             abort(401, 'You are not authenticated')
         c.current_year = date.today().year
         c.years = range(c.current_year - 10, c.current_year + 5)
-        return  render('home/welcome.mako')
+        return  render('profile/welcome.mako')
 
     @validate(schema=SearchSubmit, form='test', post_only = False, on_get = True)
     def findgroup(self):
@@ -158,4 +158,4 @@ class ProfileController(BaseController):
             items_per_page = 10,
             **search_params)
 
-        return render('home/findgroup.mako')
+        return render('profile/findgroup.mako')
