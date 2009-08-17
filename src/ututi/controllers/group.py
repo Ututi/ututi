@@ -405,6 +405,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
                 h.flash(_("Users invited."))
             if failed != []:
                 h.flash(_("Invalid email addresses detected: %s") % ', '.join(failed))
+            meta.Session.commit()
             redirect_to(controller='group', action='invite_members_step', id=group.group_id)
 
         return render('group/members_step.mako')
