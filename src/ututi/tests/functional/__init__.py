@@ -14,7 +14,7 @@ from pylons import config
 from nous.mailpost import processEmailAndPost
 
 import ututi
-from ututi.model import Group, meta, LocationTag, User, Subject
+from ututi.model import Group, meta, LocationTag, User, Subject, Email
 
 def ftest_setUp(test):
     ututi.tests.setUp(test)
@@ -25,6 +25,12 @@ def ftest_setUp(test):
     meta.Session.add(g)
     g.add_member(u, True)
 
+    #add an alternative user
+    alt_user = User(u'Alternative user', 'password', True)
+    meta.Session.add(alt_user)
+    email = Email('user@ututi.lt')
+    email.confirmed = True
+    alt_user.emails.append(email)
 
     meta.Session.add(Subject(u'mat_analize', u'Matematin\u0117 analiz\u0117', LocationTag.get(u'vu'), u'prof. E. Misevi\u010dius'))
     meta.Session.commit()
