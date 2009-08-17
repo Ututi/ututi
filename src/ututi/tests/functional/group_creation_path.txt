@@ -24,6 +24,7 @@ After creating the group we should be redirected to the subject selection view:
     Results:
 
 We will skip this view for now, but it is an integral part of the group creation path.
+
     >>> browser.getLink('Finish choosing subjects').click()
     >>> browser.printQuery('//h1/text()')
     Group members

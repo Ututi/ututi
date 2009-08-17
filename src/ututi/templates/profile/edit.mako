@@ -1,4 +1,4 @@
-<%inherit file="/base.mako" />
+<%inherit file="/profile/base.mako" />
 
 <%def name="title()">
   ${c.user.fullname}

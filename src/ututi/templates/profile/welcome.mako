@@ -1,14 +1,9 @@
-<%inherit file="/base.mako" />
-
-<%def name="head_tags()">
-<title>UTUTI – student information online</title>
-</%def>
+<%inherit file="/profile/base.mako" />
 
 <%def name="head_tags()">
 ${h.stylesheet_link('/stylesheets/home.css')|n}
 ${h.stylesheet_link('/stylesheets/suggestions.css')|n}
 ${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
-
 </%def>
 
 <%namespace file="/widgets/locationtag.mako" import="*"/>
@@ -18,7 +13,7 @@ ${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
   <div id="add-group">
 	<h3>${_('Join a group')}</h3>
 	<div class="message">${_('You can join your academic group to make communicating and sharing materials with your class mates easier.')}</div>
-    <form method="post" action="${url(controller='home', action='findgroup')}">
+    <form method="post" action="${url(controller='profile', action='findgroup')}">
       ${location_widget(3)}
 
 
@@ -41,6 +36,15 @@ ${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
         </span>
       </div>
     </form>
+  </div>
+
+  <div id="browse-subjects">
+	<h3>${_('Browse subjects')}</h3>
+	<div class="message">
+      ${_('You can browse the %(link_to_list_of_subjects)s, look for information and share coursework. Also you can %(link_to_subject_watching_view)s, so you would not miss anything.') % dict(
+           link_to_list_of_subjects=h.link_to(_("list of subjects"), url(controller='search', action='index', obj_type='subject')),
+           link_to_subject_watching_view=h.link_to(_("select watched subjects"), url(controller='profile', action='subjects')))|n}
+    </div>
   </div>
 
   <div id="edit-profile">
