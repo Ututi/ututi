@@ -68,7 +68,7 @@ And another message, this time to somebody who already is a ututi user:
     <BLANKLINE>
     Adminas Adminovix has invited You to join the group Test group.
     <BLANKLINE>
-    You can accept or reject this invitation by following this link: /group/test/invitation.
+    You can accept or reject this invitation by following this link: http://localhost/group/test/invitation .
     <BLANKLINE>
     The Ututi team
     <BLANKLINE>
