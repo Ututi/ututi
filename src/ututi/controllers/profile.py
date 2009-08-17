@@ -53,6 +53,9 @@ class ProfileController(BaseController):
             .order_by(desc(Event.created))\
             .limit(20).all()
 
+        if not c.events:
+            redirect_to(controller='profile', action='welcome')
+
         return render('/profile/home.mako')
 
     def edit(self):

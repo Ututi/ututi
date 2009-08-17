@@ -15,18 +15,19 @@ If user is not logged in login form is shown. Let's fill it in:
 
 And we are greeted by the welcome page:
 
-    >>> browser.printQuery('id("page-content")//h1/text()')
-    What's new?
+    >>> browser.printQuery("id('page-content')/fieldset/legend/text()")
+    Welcome to Ututi!
 
 The personal information portlet shows my name:
 
     >>> browser.printQuery('id("personal-box")//span[@class="fullname"]/text()')
     Adminas Adminovix
 
-After login we are redirected to our home page.
+Because it's our first time in the system we are in the welcome page
+and not the home page:
 
     >>> browser.url
-    'http://localhost/home'
+    'http://localhost/welcome'
 
 As we have successfully logged in let's logout and make some typos:
 

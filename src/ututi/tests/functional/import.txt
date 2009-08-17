@@ -44,8 +44,9 @@ Now we will log out and see if we can log back in as the imported user.
     >>> form.getControl('Email').value = "domas@ututi.lt"
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
-    >>> browser.printQuery('id("page-content")//h1/text()')
-    What's new?
+
+    >>> browser.printQuery("id('page-content')/fieldset/legend/text()")
+    Welcome to Ututi!
 
 XXX test more than 1 user import
 XXX test importing the same file twice

@@ -94,7 +94,7 @@ def make_map():
                 controller='subject',
                 action='home')
 
-    #user profiles
+    # user profiles
     map.connect('/user/{id}', controller='user', action='index')
     map.connect('/user/{id}/{action}', controller='user')
     map.connect('/user/{id}/logo/{width}/{height}',
@@ -104,16 +104,18 @@ def make_map():
                 controller='user',
                 action='logo')
 
-    #user's information
+    # user's information
     map.connect('/home', controller='profile', action='home')
-    map.connect('/profile', controller='profile', action='index')
-    map.connect('/profile/{action}', controller='profile')
-    map.connect('/confirm_emails', controller='profile', action='confirm_emails')
-    map.connect('/confirm_user_email/{key}', controller='profile', action='confirm_user_email')
 
     #user registration path
     map.connect('/welcome', controller='profile', action='welcome')
     map.connect('/findgroup', controller='profile', action='findgroup')
+
+    # other user views
+    map.connect('/confirm_emails', controller='profile', action='confirm_emails')
+    map.connect('/confirm_user_email/{key}', controller='profile', action='confirm_user_email')
+    map.connect('/profile', controller='profile', action='index')
+    map.connect('/profile/{action}', controller='profile')
 
     # CUSTOM ROUTES HERE
     map.connect('/', controller='home')
