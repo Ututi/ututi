@@ -563,7 +563,7 @@ CREATE TABLE group_invitations (
        user_id int8 references users(id) default null,
        group_id int8 not null references groups(id),
        author_id int8 not null references users(id),
-       hash char(8) not null unique,
+       hash varchar(32) not null unique,
        primary key (hash));;
 /* Table for storing requests to join a group */
 CREATE TABLE group_requests (
