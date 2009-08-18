@@ -7,33 +7,33 @@ ${_('student information online')}
 
 <%def name="personal_block()">
 %if c.user:
-  <div class="personal-logo">
-    % if c.user.logo is not None:
-       <img src="${url(controller='user', action='logo', id=c.user.id, width=45, height=60)}" alt="logo" />
-    % else:
-       <a href="${url(controller='profile', action='edit')}" title="${_('Upload your personal logo')}">
-           ${h.image('/images/user_logo_45x60.png', alt='logo')|n}
-       </a>
-    % endif
+<div class="personal-logo">
+  % if c.user.logo is not None:
+  <img src="${url(controller='user', action='logo', id=c.user.id, width=45, height=60)}" alt="logo" />
+  % else:
+  <a href="${url(controller='profile', action='edit')}" title="${_('Upload your personal logo')}">
+    ${h.image('/images/user_logo_45x60.png', alt='logo')|n}
+  </a>
+  % endif
+</div>
+<div class="personal-info">
+  ${h.link_to(_("Log out"), url('/logout'))}
+  <div>
+    <span class="fullname">${c.user.fullname}</span>
+    <span class="small">${c.user.emails[0].email}</span>
   </div>
-  <div class="personal-info">
-    ${h.link_to(_("Log out"), url('/logout'))}
-    <div>
-      <span class="fullname">${c.user.fullname}</span>
-      <span class="small">${c.user.emails[0].email}</span>
-    </div>
-  </div>
-  <div id="personal-menu" class="XXX">
-    <span class="expanding-menu">
-      <a href="#" class="title">Home</a>
-    </span>
-    <span class="expanding-menu">
-      <a href="#" class="title">Groups</a>
-    </span>
-    <span class="expanding-menu">
-      <a href="#" class="title">Subjects</a>
-    </span>
-  </div>
+</div>
+<div id="personal-menu" class="XXX">
+  <span class="expanding-menu">
+    <a href="#" class="title">Home</a>
+  </span>
+  <span class="expanding-menu">
+    <a href="#" class="title">Groups</a>
+  </span>
+  <span class="expanding-menu">
+    <a href="#" class="title">Subjects</a>
+  </span>
+</div>
 %else:
 ${h.javascript_link('/javascripts/forms.js')|n}
 <form method="post" id="login_form" action="${url('/dologin')}">
@@ -78,27 +78,27 @@ ${h.javascript_link('/javascripts/forms.js')|n}
 
 <%def name="breadcrumbs(breadcrumbs)">
 <ul id="breadcrumbs">
-<%
-   first_bc = True
-%>
-%for breadcrumb in breadcrumbs:
+  <%
+     first_bc = True
+     %>
+  %for breadcrumb in breadcrumbs:
   %if not first_bc:
-    <li>
-  %else:
-    <li class="no-bullet">
+  <li>
+    %else:
+  <li class="no-bullet">
     <%
        first_bc = False
-    %>
-  %endif
-  %if isinstance(breadcrumb, dict):
+       %>
+    %endif
+    %if isinstance(breadcrumb, dict):
 
     <a class="breadcrumb" title="${breadcrumb.get('title')}" href="${breadcrumb.get('link')}">
       ${breadcrumb.get('title') | h.ellipsis}
     </a>
-  %else:
+    %else:
     <%
        selected = h.selected_item(breadcrumb)
-    %>
+       %>
 
     <ul class="breadcrumb_dropdown">
       <li class="active">
@@ -107,13 +107,13 @@ ${h.javascript_link('/javascripts/forms.js')|n}
         </span>
       </li>
       %for item in breadcrumb:
-        <li class="alternative"><a class="subbreadcrumb" title="${item.get('title')}" href="${item.get('link')}">${item.get('title') | h.ellipsis}</a></li>
+      <li class="alternative"><a class="subbreadcrumb" title="${item.get('title')}" href="${item.get('link')}">${item.get('title') | h.ellipsis}</a></li>
       %endfor
     </ul>
-  %endif
+    %endif
   </li>
-%endfor
-</ul>
+  %endfor
+  </ul>
 </%def>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -127,38 +127,38 @@ ${h.javascript_link('/javascripts/forms.js')|n}
     <!-- Load TinyMCE -->
     ${h.javascript_link('/javascripts/tiny_mce/jquery.tinymce.js')|n}
     <script type="text/javascript">
-        $().ready(function() {
-            $('textarea.tinymce').tinymce({
-                // Location of TinyMCE script
-                script_url : '${url('/javascripts/tiny_mce/tiny_mce.js')}',
+      $().ready(function() {
+      $('textarea.tinymce').tinymce({
+      // Location of TinyMCE script
+      script_url : '${url('/javascripts/tiny_mce/tiny_mce.js')}',
 
-                // General options
-                theme : "advanced",
-                plugins : "safari,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
+      // General options
+      theme : "advanced",
+      plugins : "safari,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
 
-                // Theme options
-                theme_advanced_buttons1 : "bold,italic,underline,strikethrough,formatselect,fontsizeselect,tablecontrols,|,hr,sub,sup,|,media,advhr",
-                theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,code",
-                theme_advanced_buttons3 : "",
-                theme_advanced_buttons4 : "",
-                theme_advanced_toolbar_location : "top",
-                theme_advanced_toolbar_align : "left",
-                theme_advanced_statusbar_location : "bottom",
-                theme_advanced_resizing : true,
+      // Theme options
+      theme_advanced_buttons1 : "bold,italic,underline,strikethrough,formatselect,fontsizeselect,tablecontrols,|,hr,sub,sup,|,media,advhr",
+      theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,code",
+      theme_advanced_buttons3 : "",
+      theme_advanced_buttons4 : "",
+      theme_advanced_toolbar_location : "top",
+      theme_advanced_toolbar_align : "left",
+      theme_advanced_statusbar_location : "bottom",
+      theme_advanced_resizing : true,
 
-                // Example content CSS (should be your site CSS)
-                content_css : "stylesheets/style.css",
+      // Example content CSS (should be your site CSS)
+      content_css : "stylesheets/style.css",
 
-                // Drop lists for link/image/media/template dialogs
-                template_external_list_url : "lists/template_list.js",
-                external_link_list_url : "lists/link_list.js",
-                external_image_list_url : "lists/image_list.js",
-                media_external_list_url : "lists/media_list.js",
+      // Drop lists for link/image/media/template dialogs
+      template_external_list_url : "lists/template_list.js",
+      external_link_list_url : "lists/link_list.js",
+      external_image_list_url : "lists/image_list.js",
+      media_external_list_url : "lists/media_list.js",
 
-                extended_valid_elements : "iframe[src|width|height|name|align]",
+      extended_valid_elements : "iframe[src|width|height|name|align]",
 
-            });
-        });
+      });
+      });
     </script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     ${self.head_tags()}
@@ -208,31 +208,40 @@ ${h.javascript_link('/javascripts/forms.js')|n}
           % endfor
 
           %if c.user:
-            %for invitation in c.user.invitations:
-              <div class="flash-message">
-                <span>
-                  ${_(u"%(author)s has sent you an invitation to group %(group)s. Do You want to become a member of this group?") % dict(author=invitation.author.fullname, group=invitation.group.title)}
+          %for invitation in c.user.invitations:
+          <div class="flash-message">
+            <span>
+              ${_(u"%(author)s has sent you an invitation to group %(group)s. Do You want to become a member of this group?") % dict(author=invitation.author.fullname, group=invitation.group.title)}
+            </span>
+            <br/>
+            <form method="post"
+                  action="${url(controller='group', action='invitation', id=invitation.group.group_id)}"
+                  id="${invitation.group.group_id}_invitation_reject"
+                  class="inline-form">
+              <div style="display: inline;">
+                <input type="hidden" name="action" value="reject"/>
+                <input type="hidden" name="came_from" value="${request.url}"/>
+                <span class="btn">
+                  <input type="submit" name="invitation_reject" value="${_('Reject')}"/>
                 </span>
-                <form method="post"
-                      action="${url(controller='group', action='invitation', id=invitation.group.group_id)}"
-                      id="${invitation.group.group_id}_invitation_accept"
-                      class="inline-form">
-                  <input type="hidden" name="action" value="accept"/>
-                  <span class="btn">
-                    <input type="submit" value="${_('Accept')}"/>
-                  </span>
-                </form>
-                <form method="post"
-                      action="${url(controller='group', action='invitation', id=invitation.group.group_id)}"
-                      id="${invitation.group.group_id}_invitation_reject"
-                      class="inline-form">
-                  <input type="hidden" name="action" value="reject"/>
-                  <span class="btn">
-                    <input type="submit" value="${_('Reject')}"/>
-                  </span>
-                </form>
               </div>
-            %endfor
+            </form>
+
+            <form method="post"
+                  action="${url(controller='group', action='invitation', id=invitation.group.group_id)}"
+                  id="${invitation.group.group_id}_invitation_accept"
+                  class="inline-form">
+              <div style="display: inline;">
+                <input type="hidden" name="action" value="accept"/>
+                <input type="hidden" name="came_from" value="${request.url}"/>
+                <span class="btn">
+                  <input type="submit" name="invitation_accept" value="${_('Accept')}"/>
+                </span>
+              </div>
+            </form>
+
+          </div>
+          %endfor
           %endif
 
           ${self.body()}

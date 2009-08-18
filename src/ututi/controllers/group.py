@@ -19,17 +19,17 @@ from formencode.variabledecode import NestedVariables
 from sqlalchemy.sql.expression import or_
 from sqlalchemy.sql.expression import desc
 from sqlalchemy.sql.expression import not_
+from sqlalchemy.orm.exc import NoResultFound
 
 import ututi.lib.helpers as h
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator
-from ututi.lib.mailer import send_email
 
 from ututi.model.events import Event
 from ututi.model import LocationTag
-from ututi.model import meta, Group, File, SimpleTag, Subject, ContentItem, Email
+from ututi.model import meta, Group, File, SimpleTag, Subject, ContentItem, PendingInvitation
 from ututi.controllers.search import SearchSubmit
 from ututi.lib.security import ActionProtector
 from ututi.lib.search import search_query
@@ -108,6 +108,12 @@ class NewGroupForm(EditGroupForm):
 class GroupPageForm(Schema):
     allow_extra_fields = False
     page_content = HtmlSanitizeValidator()
+
+
+class GroupInvitationActionForm(Schema):
+    allow_extra_fields = True
+    action = validators.OneOf(['accept', 'reject'])
+    came_from = validators.URL(require_tld=False, )
 
 
 class GroupInviteForm(Schema):
@@ -431,3 +437,29 @@ class GroupController(GroupControllerBase, FileViewMixin):
             redirect_to(controller='group', action='invite_members_step', id=group.group_id)
 
         return render('group/members_step.mako')
+
+    @validate(schema=GroupInvitationActionForm)
+    @group_action
+    def invitation(self, group):
+        """Act on the invitation of the current user to this group."""
+        if hasattr(self, 'form_result'):
+            try:
+                invitation = meta.Session.query(PendingInvitation).filter(PendingInvitation.group == group)\
+                    .filter(PendingInvitation.user == c.user).one()
+                meta.Session.delete(invitation)
+                if self.form_result.get('action', '') == 'accept':
+                    group.add_member(c.user)
+                    h.flash(_("Congratulations! You are now a member of the group '%s'") % group.title)
+                else:
+                    h.flash(_("Invitation to group '%s' rejected.") % group.title)
+                meta.Session.commit()
+            except NoResultFound:
+                pass
+
+            url = self.form_result.get('came_from', None)
+            if url is None:
+                redirect_to(controller='group', action='group_home', id=group.group_id)
+            else:
+                redirect_to(url.encode('utf-8'))
+        else:
+            redirect_to(controller='group', action='group_home', id=group.group_id)
