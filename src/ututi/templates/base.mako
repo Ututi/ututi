@@ -43,14 +43,16 @@ ${h.javascript_link('/javascripts/forms.js')|n}
 
   <div class="form-field overlay">
     <label for="login" class="small">${_('Email')}</label>
-    <input class="line" type="text" size="20" id="login" name="login" />
+    <input type="text" size="20" id="login" name="login" class="small"/>
   </div>
   <div class="form-field overlay">
     <label for="password" class="small">${_('Password')}</label>
-    <input class="line" type="password" size="20" name="password" id="password" />
+    <input type="password" size="20" name="password" id="password" class="small"/>
   </div>
-  <div class="form-field overlay">
+  <div class="form-field">
     <span class="btn"><input class="submit small" type="submit" name="join" value="Login" /></span>
+  </div>
+  <div class="form-field" style="clear: right;">
     <a class="small-link small XXX" href="#">Forgotten password?</a>
   </div>
 </form>
@@ -183,15 +185,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
     <div id="container">
       <div id="header">
         <div id="personal-box" class="rounded-block">
-          <div class="rounding rounded-header">
-            <div class="rounded-right"></div>
-          </div>
-          <div class="content">
-            ${self.personal_block()}
-          </div>
-          <div class="rounding rounded-footer">
-            <div class="rounded-right"></div>
-          </div>
+          ${self.personal_block()}
         </div>
 
         ${breadcrumbs(c.breadcrumbs)}

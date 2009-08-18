@@ -118,41 +118,12 @@ ul.bullets_large li {
 #personal-box {
   float: right;
   width: 250px;
-  height: 100px;
-  margin-top: 10px;
-  border: 2px solid #e5e5d3;
+  margin-top: 5px;
 }
 
-#personal-box .rounding,
-#personal-box .rounded-right {
-  height: 10px;
-}
-
-#personal-box .rounding {
-  margin: -2px; /* compensating for the border */
-}
-
-#personal-box .content {
-  height: 83px;
-  padding: 5px 10px 0;
-}
-
-#personal-box .rounded-header {
-  padding-left: 50px;
-  background: white url("../images/personal_border.png") no-repeat left top;
-}
-
-#personal-box .rounded-header .rounded-right{
-  background: white url("../images/personal_border.png") no-repeat right top;
-}
-
-#personal-box .rounded-footer {
-  padding-left: 50px;
-  background: white url("../images/personal_border.png") no-repeat left bottom;
-}
-
-#personal-box .rounded-footer .rounded-right{
-  background: white url("../images/personal_border.png") no-repeat right bottom;
+#personal-box div.form-field {
+  float: right;
+  margin: 0 15px 0 0;
 }
 
 .personal-logo {
