@@ -93,6 +93,7 @@ class HomeController(BaseController):
                     if invitation is not None and invitation.email == email:
                          invitation.group.add_member(user)
                          meta.Session.delete(invitation)
+                         meta.Session.commit()
                          redirect_to(controller='group', action='group_home', id=invitation.group.group_id)
                else:
                     redirect_to(controller='profile', action='welcome')
