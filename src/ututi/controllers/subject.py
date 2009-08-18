@@ -14,6 +14,7 @@ from pylons.controllers.util import redirect_to, abort
 from pylons.i18n import _
 
 from ututi.model import meta, LocationTag, Subject, File, SimpleTag
+from ututi.lib.security import ActionProtector
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import LocationTagsValidator
@@ -69,6 +70,7 @@ class SubjectController(BaseController, FileViewMixin):
              'link': url_for(controller='subject', action='index')}
             ]
 
+    @ActionProtector("root")
     def index(self):
         c.subjects = meta.Session.query(Subject).all()
         return render('subjects.mako')
@@ -84,10 +86,12 @@ class SubjectController(BaseController, FileViewMixin):
         c.subject = subject
         return render('subject/home.mako')
 
+    @ActionProtector("user")
     def add(self):
         return render('subject/add.mako')
 
     @validate(schema=NewSubjectForm, form='add')
+    @ActionProtector("user")
     def create(self):
         title = self.form_result['title']
         id = self.form_result['id'].lower()
@@ -116,6 +120,7 @@ class SubjectController(BaseController, FileViewMixin):
                     id=subj.subject_id,
                     tags=subj.location_path)
 
+    @ActionProtector("user")
     def edit(self, id, tags):
         location = LocationTag.get(tags)
         c.subject = Subject.get(location, id)
@@ -125,6 +130,7 @@ class SubjectController(BaseController, FileViewMixin):
         return render('subject/edit.mako')
 
     @validate(schema=SubjectForm, form='edit')
+    @ActionProtector("user")
     def update(self, id, tags):
         location = LocationTag.get(tags)
         subject = Subject.get(location, id)
@@ -149,8 +155,7 @@ class SubjectController(BaseController, FileViewMixin):
                     id=subject.subject_id,
                     tags=subject.location_path)
 
-
-
+    @ActionProtector("user")
     def upload_file(self, id, tags):
         location = LocationTag.get(tags)
         subject = Subject.get(location, id)
@@ -158,6 +163,7 @@ class SubjectController(BaseController, FileViewMixin):
             abort(404)
         return self._upload_file(subject)
 
+    @ActionProtector("user")
     def create_folder(self, id, tags):
         location = LocationTag.get(tags)
         subject = Subject.get(location, id)
@@ -165,6 +171,7 @@ class SubjectController(BaseController, FileViewMixin):
             abort(404)
         return self._create_folder(subject)
 
+    @ActionProtector("moderator", "root")
     def delete_folder(self, id, tags):
         location = LocationTag.get(tags)
         subject = Subject.get(location, id)

@@ -4,6 +4,10 @@ University and faculty structure
 First we log in to be able to see the user list.
 
     >>> browser = Browser()
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
     >>> browser.open('http://localhost/structure')
 
 There is one university and one faculty:
@@ -12,19 +16,7 @@ There is one university and one faculty:
     Vilniaus universitetas
     Ekonomikos fakultetas
 
-Let's try to add a new element. If we are not logged in, there should be no form visible.
-
-    >>> browser.queryHTML("id('new_structure_form')")
-    []
-
-So we log in first.
-
-    >>> browser.open('http://localhost/')
-    >>> form = browser.getForm('login_form')
-    >>> form.getControl('Email').value = "admin@ututi.lt"
-    >>> form.getControl('Password').value = "asdasd"
-    >>> form.getControl('Login').click()
-    >>> browser.open('http://localhost/structure')
+Let's try to add a new element.
 
     >>> form = browser.getForm(name='new_structure_form')
     >>> form.getControl('Title').value = 'Vilniaus Gedimino Technikos Universitetas'
@@ -77,10 +69,8 @@ Now we shall try to edit a structural element.
 
     >>> form.getControl('Save').click()
 
-Let's log out to see a clean structure list.
+Let's look at the list:
 
-    >>> browser.open('http://localhost/')
-    >>> browser.getLink('Log out').click()
     >>> browser.open('http://localhost/structure')
     >>> browser.printQuery("id('location_structure')//li/text()")
     Vilniaus Gedimino Technikos Universitetas
@@ -88,15 +78,9 @@ Let's log out to see a clean structure list.
     Vinco Kapsuko universitetas
     Ekonomikos fakultetas
 
-Let's log back in and try importing new structure information.
+You can import the structure tags from csv too:
 
-    >>> browser.open('http://localhost/')
-    >>> form = browser.getForm('login_form')
-    >>> form.getControl('Email').value = "admin@ututi.lt"
-    >>> form.getControl('Password').value = "asdasd"
-    >>> form.getControl('Login').click()
     >>> browser.open('http://localhost/admin')
-
     >>> form = browser.getForm(name='import_structure')
     >>> import cStringIO
     >>> from textwrap import dedent
@@ -107,8 +91,8 @@ Let's log back in and try importing new structure information.
 
     >>> form.getControl('CSV File').add_file(cStringIO.StringIO(csv_file), 'text/plain', 'structure.csv')
     >>> form.getControl('Upload').click()
-    >>> browser.open('http://localhost/')
-    >>> browser.getLink('Log out').click()
+
+
     >>> browser.open('http://localhost/structure')
     >>> browser.printQuery("id('location_structure')//li/text()")
     Vilniaus Gedimino Technikos Universitetas

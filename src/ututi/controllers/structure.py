@@ -10,6 +10,7 @@ from pylons.controllers.util import redirect_to
 from pylons.decorators import validate, jsonify
 from pylons.i18n import _
 
+from ututi.lib.security import ActionProtector
 from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
 from ututi.model import meta, LocationTag, SimpleTag, Tag
@@ -49,13 +50,16 @@ class AutoCompletionForm(Schema):
     allow_extra_fields = True
     pre_validators = [variabledecode.NestedVariables()]
 
+
 class StructureController(BaseController):
 
+    @ActionProtector("root")
     def index(self):
         c.structure = meta.Session.query(LocationTag).filter_by(parent=None).all()
         return render('structure.mako')
 
     @validate(schema=NewStructureForm, form='index')
+    @ActionProtector("root")
     def create(self):
         values = self.form_result
         structure = LocationTag(title=values['title'],
@@ -70,6 +74,7 @@ class StructureController(BaseController):
         meta.Session.commit()
         redirect_to(controller='structure', action='index')
 
+    @ActionProtector("root")
     def edit(self, id):
         try:
             c.item = meta.Session.query(LocationTag).filter_by(id=id).one()
@@ -80,6 +85,7 @@ class StructureController(BaseController):
         return render('structure/edit.mako')
 
     @validate(schema=NewStructureForm, form='edit')
+    @ActionProtector("root")
     def update(self, id):
         try:
             c.item = meta.Session.query(LocationTag).filter_by(id=id).one()

@@ -10,6 +10,7 @@ from pylons.controllers.util import redirect_to, abort
 from ututi.model import Subject
 from ututi.model import LocationTag
 from ututi.model import meta, Page
+from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
 
 from pylons.i18n import _
@@ -58,6 +59,7 @@ class SubjectpageController(BaseController):
         return render('page/add.mako')
 
     @validate(schema=PageForm, form='add')
+    @ActionProtector("user")
     def create(self, id, tags):
         location = LocationTag.get(tags)
         subject = Subject.get(location, id)
@@ -70,11 +72,13 @@ class SubjectpageController(BaseController):
 
     @page_action
     @validate(schema=PageForm, form='edit')
+    @ActionProtector("user")
     def edit(self, subject, page):
         return render('page/edit.mako')
 
     @page_action
     @validate(schema=PageForm, form='edit')
+    @ActionProtector("user")
     def update(self, subject, page):
         page.add_version(self.form_result['page_title'],
                          self.form_result['page_content'])
