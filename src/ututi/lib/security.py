@@ -3,27 +3,27 @@ from repoze.what.predicates import NotAuthorizedError
 from repoze.what.plugins.pylonshq.protectors import ActionProtector as BaseActionProtector
 
 
-def is_root(context, user):
+def is_root(user, context=None):
     return user is not None and user.id == 1
 
 
-def is_moderator(context, user):
+def is_moderator(user, context=None):
     return False
 
 
-def is_member(context, user):
+def is_member(user, context=None):
     return context.is_member(user)
 
 
-def is_admin(context, user):
+def is_admin(user, context=None):
     return context.is_admin(user)
 
 
-def is_user(context, user):
+def is_user(user, context=None):
     return user is not None
 
 
-def is_owner(context, user):
+def is_owner(user, context=None):
     return context.created_by is user
 
 
@@ -37,15 +37,15 @@ crowd_checkers = {
     }
 
 
-def check_crowds(crowds, context=None, user=None):
+def check_crowds(crowds, user=None, context=None):
     if context is None:
         context = c.security_context
     if user is None:
         user = c.user
-    if is_root(context, user):
+    if is_root(user, context):
         return True
     for crowd in crowds:
-        if crowd_checkers[crowd](context, user):
+        if crowd_checkers[crowd](user, context):
             return True
     return False
 
