@@ -13,16 +13,17 @@
     <%def name="header()">
       ${_('Watched subjects')}
     </%def>
+    %if not c.user.watched_subjects:
+      ${_('You are not watching any subjects.')}
+    %else:
     <ul>
       % for subject in c.user.watched_subjects:
       <li>
         <a href="${subject.url()}">${subject.title}</a>
       </li>
       % endfor
-      % if not c.user.watched_subjects:
-      ${_('You are not watching any subjects.')}
-      %endif
     </ul>
+    %endif
     ${h.button_to(_('Watch subjects'), h.url_for(action='subjects'))} ${h.link_to(_('More subjects'), url(controller='search', action='index', obj_type='subject'))}
   </%self:portlet>
 
