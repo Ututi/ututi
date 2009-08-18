@@ -1,7 +1,7 @@
 <%def name="location_widget(number, values=[])">
 
 <div class="location-tag-widget">
-<form:error name="location">
+<form:error name="location"/>
   <% rng = range(number) %>
   %for i in rng:
     <div class="location-tag-field">
