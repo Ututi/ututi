@@ -103,38 +103,38 @@ Let's get the url from the first message
 
 First let us log out.
 
-     >>> browser.getLink('Log out').click()
-     >>> browser.open(get_urls(msg)[0])
-     >>> browser.printQuery('//h1/text()')
-     UTUTI - student information online
+    >>> browser.getLink('Log out').click()
+    >>> browser.open(get_urls(msg)[0])
+    >>> browser.printQuery('//h1/text()')
+    UTUTI - student information online
 
 Let us fill out the registration form
 
-     >>> form = browser.getForm(id='registration_form')
-     >>> form.getControl('Fullname').value = 'Jonas Petraitis Petrauskas'
-     >>> form.getControl('Email').value = 'jonas@example.com'
-     >>> form.getControl('Password').value = 'asdfgh'
-     >>> form.getControl('Repeat password').value = 'asdfgh'
-     >>> form.getControl('Register').click()
+    >>> form = browser.getForm(id='registration_form')
+    >>> form.getControl('Fullname').value = 'Jonas Petraitis Petrauskas'
+    >>> form.getControl('Email').value = 'jonas@example.com'
+    >>> form.getControl('Password').value = 'asdfgh'
+    >>> form.getControl('Repeat password').value = 'asdfgh'
+    >>> form.getControl('Register').click()
 
 We should get an email confirmation request:
-     >>> print mail_queue.pop().message
-     MIME-Version: 1.0
-     Content-Type: text/plain; charset="us-ascii"
-     Content-Transfer-Encoding: 7bit
-     From: info@ututi.lt
-     To: jonas@example.com
-     Subject: Confirm the email for Ututi
-     <BLANKLINE>
-     We have received a request to confirm the ownership of this email by Jonas Petraitis Petrauskas on the Ututi system. If this email belongs to You, confirm it by clicking on this link:
-     <BLANKLINE>
-     http://localhost/confirm_user_email/...
-     <BLANKLINE>
-     Ututi team
-     <BLANKLINE>
+
+    >>> print mail_queue.pop().message
+    MIME-Version: 1.0
+    Content-Type: text/plain; charset="us-ascii"
+    Content-Transfer-Encoding: 7bit
+    From: info@ututi.lt
+    To: jonas@example.com
+    Subject: Confirm the email for Ututi
+    <BLANKLINE>
+    We have received a request to confirm the ownership of this email by Jonas Petraitis Petrauskas on the Ututi system. If this email belongs to You, confirm it by clicking on this link:
+    <BLANKLINE>
+    http://localhost/confirm_user_email/...
+    <BLANKLINE>
+    Ututi team
+    <BLANKLINE>
 
 And we are redirected to the group that invited us.
 
-     >>> browser.url
-     'http://localhost/group/test'
-
+    >>> browser.url
+    'http://localhost/group/test'
