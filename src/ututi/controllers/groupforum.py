@@ -10,6 +10,7 @@ from pylons.controllers.util import abort
 from pylons import c, config
 
 from mimetools import choose_boundary
+from ututi.lib.security import ActionProtector
 from ututi.lib.mailer import send_email
 from ututi.lib.base import render
 from ututi.controllers.group import group_action
@@ -68,12 +69,14 @@ class GroupforumController(GroupControllerBase):
         return messages
 
     @group_action
+    @ActionProtector("member", "admin", "moderator")
     def index(self, group):
         c.breadcrumbs.append(self._actions('forum'))
         c.messages = self._top_level_messages(group)
         return render('forum/index.mako')
 
     @group_forum_action
+    @ActionProtector("member", "admin", "moderator")
     def thread(self, group, thread):
         c.thread = thread
         c.breadcrumbs.append(self._actions('forum'))
@@ -98,7 +101,10 @@ class GroupforumController(GroupControllerBase):
                     action='thread',
                     id=group.group_id, thread_id=thread.id)
 
+    # XXX Currently we don't allow moderators to post, as ututi just
+    # drops emails from non-members
     @group_action
+    @ActionProtector("member")
     def new_thread(self, group):
         return render('forum/new.mako')
 
@@ -117,6 +123,7 @@ class GroupforumController(GroupControllerBase):
 
     @group_action
     @validate(NewMailForm, form='new_thread')
+    @ActionProtector("member")
     def post(self, group):
         message = send_email(c.user.emails[0].email,
                              self._recipients(group),
