@@ -52,7 +52,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
   <div class="form-field">
     <span class="btn"><input class="submit small" type="submit" name="join" value="Login" /></span>
   </div>
-  <div class="form-field" style="clear: right;">
+  <div class="form-field">
     <a class="small-link small XXX" href="#">Forgotten password?</a>
   </div>
 </form>
