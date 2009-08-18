@@ -1,22 +1,26 @@
 import logging
 
+from formencode import Schema, variabledecode
+from webhelpers import paginate
+
 from pylons.decorators import validate
 from pylons import request, c
-from formencode import Schema, validators, Invalid, variabledecode
-from webhelpers import paginate
 
 from ututi.lib.base import BaseController, render
 from ututi.lib.search import search_query
 
 log = logging.getLogger(__name__)
 
+
 class SearchSubmit(Schema):
     """Search form input validation."""
+
     allow_extra_fields = True
     pre_validators = [variabledecode.NestedVariables()]
 
 
 class SearchController(BaseController):
+
     @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
     def index(self):
         c.text = self.form_result.get('text', '')
@@ -41,7 +45,4 @@ class SearchController(BaseController):
                 items_per_page = 10,
                 **search_params)
 
-        return render('/search/index.mako')
-
-    def test(self):
         return render('/search/index.mako')
