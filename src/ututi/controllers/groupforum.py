@@ -28,6 +28,8 @@ def group_forum_action(method):
             thread.thread != thread or
             thread.group != group):
             abort(404)
+        c.security_context = group
+        c.group = group
         c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
         return method(self, group, thread)
     return _group_action
@@ -67,14 +69,12 @@ class GroupforumController(GroupControllerBase):
 
     @group_action
     def index(self, group):
-        c.group = group
         c.breadcrumbs.append(self._actions('forum'))
         c.messages = self._top_level_messages(group)
         return render('forum/index.mako')
 
     @group_forum_action
     def thread(self, group, thread):
-        c.group = group
         c.thread = thread
         c.breadcrumbs.append(self._actions('forum'))
         c.messages = thread.posts
@@ -100,7 +100,6 @@ class GroupforumController(GroupControllerBase):
 
     @group_action
     def new_thread(self, group):
-        c.group = group
         return render('forum/new.mako')
 
     def _recipients(self, group):

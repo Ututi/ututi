@@ -128,6 +128,7 @@ def group_action(method):
         if group is None:
             abort(404)
         c.security_context = group
+        c.group = group
         c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
         return method(self, group)
     return _group_action
@@ -178,7 +179,6 @@ class GroupController(GroupControllerBase, FileViewMixin):
     @group_action
     @ActionProtector("member", "admin", "moderator")
     def group_home(self, group):
-        c.group = group
         if request.GET.get('do', None) == 'hide_page':
             group.show_page = False
         meta.Session.commit()
@@ -193,7 +193,6 @@ class GroupController(GroupControllerBase, FileViewMixin):
     @group_action
     @ActionProtector("admin", "moderator")
     def edit_page(self, group):
-        c.group = group
         c.breadcrumbs.append(self._actions('group_home'))
         return render('group/edit_page.mako')
 
@@ -212,7 +211,6 @@ class GroupController(GroupControllerBase, FileViewMixin):
     @group_action
     @ActionProtector("member", "admin", "moderator")
     def files(self, group):
-        c.group = group
         c.breadcrumbs.append(self._actions('files'))
         return render('group/files.mako')
 
@@ -251,14 +249,12 @@ class GroupController(GroupControllerBase, FileViewMixin):
     @group_action
     @ActionProtector("member", "admin", "moderator")
     def members(self, group):
-        c.group = group
         c.breadcrumbs.append(self._actions('members'))
         return render('group/members.mako')
 
     @group_action
     @ActionProtector("admin", "moderator")
     def edit(self, group):
-        c.group = group
         c.group.tags_list = ', '.join([tag.title for tag in c.group.tags])
         c.breadcrumbs.append(self._actions('group_home'))
 
@@ -376,7 +372,6 @@ class GroupController(GroupControllerBase, FileViewMixin):
         A view displaying all the subjects the group is already watching and allowing
         members to choose new subjects for the group.
         """
-        c.group = group
         c.search_target = url(controller = 'group', action='subjects', id = group.group_id)
 
         #retrieve search parameters
@@ -414,7 +409,6 @@ class GroupController(GroupControllerBase, FileViewMixin):
     @group_action
     @ActionProtector("member", "admin", "moderator")
     def invite_members_step(self, group):
-        c.group = group
 
         if hasattr(self, 'form_result'):
             emails = self.form_result.get('emails', '').split()
