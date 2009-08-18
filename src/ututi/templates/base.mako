@@ -249,7 +249,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
 
       </div>
 
-      <div id="footer">
+      <div id="footer" class="small">
         Copyright <a href="#">UAB „Nous“</a>
         <div id="footer-links">
           <a href="#">aaaaa</a> |

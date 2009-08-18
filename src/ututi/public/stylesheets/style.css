@@ -9,6 +9,7 @@ body {
   font-size: 87.5%;
   font-family: 'Trebuchet MS', Helvetica, sans-serif;
   background: white;
+  padding-bottom: 5px;
 }
 
 
@@ -16,9 +17,10 @@ body {
   min-height: 100%;
   width: 980px;
   position: relative;
-  margin: 5px auto 0;
+  margin: 5px auto;
   border-left: 1px solid #e3dddd;
   border-right: 1px solid #e3dddd;
+  border-bottom: 1px solid #e3dddd;
   background: white;
 }
 
@@ -35,14 +37,14 @@ body {
 }
 
 #footer {
-  height: 135px;
+  height: 40px;
   bottom: 0;
-  width: 100%;
   position: absolute;
-  background: #e5e5d3;
-  margin: 0 -12px;
-  padding: 0 12px;
-
+  width: 960px;
+  margin: 5px 10px;
+  padding: 10px 0 0;
+  background: #f5f5f5;
+  border: 1px solid #ded8d8;
   text-align: center;
 }
 /* end main layout */
