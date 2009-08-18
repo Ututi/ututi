@@ -8,31 +8,25 @@ html, body {
 body {
   font-size: 87.5%;
   font-family: 'Trebuchet MS', Helvetica, sans-serif;
-  background: #e5e5d3;
-}
-
-#header {
-  height: 155px;
   background: white;
-
-  margin: 0 -12px;
-  padding: 0 12px;
 }
 
-#content-top {
-  height: 35px;
-  margin: 0 -12px;
-  padding: 0 12px;
-  background: #e5e5d3;
-}
 
 #container {
   min-height: 100%;
+  width: 980px;
   position: relative;
-  margin: 0 10px;
-  border-left: 2px solid black;
-  border-right: 2px solid black;
+  margin: 5px auto 0;
+  border-left: 1px solid #e3dddd;
+  border-right: 1px solid #e3dddd;
   background: white;
+}
+
+
+#header {
+  height: 106px;
+  background: #f9f9f9 url("../images/block_header.png") left center no-repeat;
+  padding: 1px 0;
 }
 
 #content {
@@ -114,6 +108,11 @@ ul.bullets_large li {
 /* end lists */
 
 /* header elements */
+#breadcrumb-container {
+  margin: 5px 0 0 20px;
+}
+
+/* personal box */
 #personal-box {
   float: right;
   width: 250px;
@@ -122,36 +121,6 @@ ul.bullets_large li {
   border: 2px solid #e5e5d3;
 }
 
-/* content borders */
-#content-top {
-  background: #e5e5d3 url("../images/content_border.png") left top no-repeat;
-  padding-left: 50px;
-}
-
-#content-top div {
-  background: #e5e5d3 url("../images/content_border.png") right top no-repeat;
-  height: 35px;
-  margin: 0 -12px;
-  padding: 0 12px;
-}
-
-#content-bottom {
-  background: #e5e5d3 url("../images/content_border.png") left bottom no-repeat;
-  margin: 0 -12px 35px;
-  padding: 0 12px;
-  padding-left: 50px;
-}
-
-#content-bottom div {
-  background: #e5e5d3 url("../images/content_border.png") right bottom no-repeat;
-  height: 35px;
-  margin: 0 -12px;
-  padding: 0 12px;
-}
-
-/* end content borders */
-
-/* personal box */
 #personal-box .rounding,
 #personal-box .rounded-right {
   height: 10px;

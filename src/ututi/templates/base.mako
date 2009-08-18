@@ -77,6 +77,17 @@ ${h.javascript_link('/javascripts/forms.js')|n}
 </%def>
 
 <%def name="breadcrumbs(breadcrumbs)">
+<div id="breadcrumb-container">
+  %if breadcrumbs:
+  <a href="${url('/')}" title="home" id="ulogo">
+    ${h.image('/images/logo_small.png', alt='logo')|n}
+  </a>
+  %else:
+  <a href="${url('/')}" title="home" id="ulogo">
+    ${h.image('/images/logo.png', alt='logo')|n}
+  </a>
+  %endif
+
 <ul id="breadcrumbs">
   <%
      first_bc = True
@@ -114,6 +125,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
   </li>
   %endfor
   </ul>
+</div>
 </%def>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -182,20 +194,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
           </div>
         </div>
 
-        %if c.breadcrumbs:
-        <a href="${url('/')}" title="home" id="ulogo">
-          ${h.image('/images/logo_small.png', alt='logo')|n}
-        </a>
         ${breadcrumbs(c.breadcrumbs)}
-        %else:
-        <a href="${url('/')}" title="home" id="ulogo">
-          ${h.image('/images/logo.png', alt='logo')|n}
-        </a>
-        %endif
-
-        <div id="content-top">
-          <div></div>
-        </div>
       </div>
 
       <div id="content">
@@ -251,10 +250,6 @@ ${h.javascript_link('/javascripts/forms.js')|n}
       </div>
 
       <div id="footer">
-        <div id="content-bottom">
-          <div></div>
-        </div>
-
         Copyright <a href="#">UAB „Nous“</a>
         <div id="footer-links">
           <a href="#">aaaaa</a> |
