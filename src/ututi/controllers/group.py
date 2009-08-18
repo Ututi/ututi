@@ -31,6 +31,7 @@ from ututi.model.events import Event
 from ututi.model import LocationTag
 from ututi.model import meta, Group, File, SimpleTag, Subject, ContentItem, PendingInvitation
 from ututi.controllers.search import SearchSubmit
+from ututi.lib.security import is_root
 from ututi.lib.security import ActionProtector
 from ututi.lib.search import search_query
 
@@ -89,6 +90,7 @@ class EditGroupForm(Schema):
     title = validators.UnicodeString(not_empty=True)
     description = validators.UnicodeString()
     year = validators.String()
+    moderators = validators.StringBoolean(if_missing=False)
     logo_upload = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
     logo_delete = validators.StringBoolean(if_missing=False)
     location = Pipe(ForEach(validators.String(strip=True)),
@@ -242,7 +244,11 @@ class GroupController(GroupControllerBase, FileViewMixin):
             meta.Session.add(f)
             group.logo = f
 
-        group.add_member(c.user, True)
+        group.add_member(c.user, admin=True)
+
+        if is_root(c.user):
+            group.moderators = values['moderators']
+
         meta.Session.commit()
         redirect_to(controller='group', action='subjects_step', id=values['id'])
 
@@ -294,6 +300,8 @@ class GroupController(GroupControllerBase, FileViewMixin):
         for tag in tags:
             group.tags.append(SimpleTag.get(tag))
 
+        if is_root(c.user):
+            group.moderators = values['moderators']
 
         meta.Session.commit()
         redirect_to(controller='group', action='group_home', id=group.group_id)

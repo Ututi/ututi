@@ -39,6 +39,19 @@ ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
       %endfor
     </select>
   </div>
+<%
+from ututi.lib.security import is_root
+%>
+% if is_root(c.user):
+  <div class="form-field">
+    <label for="moderators">${_("Moderators")}</label>
+    % if c.group.moderators:
+       <input name="moderators" id="moderators" type="checkbox" value="true" checked="checked" />
+    % else:
+       <input name="moderators" id="moderators" type="checkbox" value="true" />
+    % endif
+  </div>
+% endif
   <div class="form-field">
     <label for="logo_upload">${_('Group logo')}</label>
     <input type="file" name="logo_upload" id="logo_upload" class="line"/>

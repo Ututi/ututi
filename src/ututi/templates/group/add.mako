@@ -60,6 +60,16 @@ ${path_steps()}
     </select>
   </div>
 
+<%
+from ututi.lib.security import is_root
+%>
+% if is_root(c.user):
+  <div class="form-field">
+    <label for="moderators">${_("Moderators")}</label>
+    <input name="moderators" id="moderators" type="checkbox" />
+  </div>
+% endif
+
   <div class="form-field">
     <label for="description">${_('Description')}</label>
     <textarea class="line" name="description" id="description" cols="60" rows="5"></textarea>

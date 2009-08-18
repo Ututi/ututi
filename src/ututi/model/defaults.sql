@@ -103,6 +103,7 @@ create table groups (
        show_page bool default true,
        page text not null default '',
        logo_id int8 references files(id) default null,
+       moderators bool default false,
        primary key (id));;
 
 /* An enumerator for membership types in groups */
@@ -565,6 +566,8 @@ CREATE TABLE group_invitations (
        author_id int8 not null references users(id),
        hash varchar(32) not null unique,
        primary key (hash));;
+
+
 /* Table for storing requests to join a group */
 CREATE TABLE group_requests (
        created date not null default (now() at time zone 'UTC'),
