@@ -138,10 +138,12 @@ of in your home page (at least for now):
       </ul>
       <form action="/groups/add" class="button-to" method="POST">
         <div>
-          <input type="submit" value="Create group" />
+          <span class="btn">
+            <input type="submit" value="Create group" />
+          </span>
         </div>
       </form>
-      <a href="/search?obj_type=group">More groups</a>
+      <a class="more" href="/search?obj_type=group">More groups</a>
     </div>
 
 You can import more groups using the admin interface.

@@ -20,7 +20,7 @@ And we are greeted by the welcome page:
 
 The personal information portlet shows my name:
 
-    >>> browser.printQuery('id("personal-box")//span[@class="fullname"]/text()')
+    >>> browser.printQuery('id("personal-box")//div[@class="fullname"]/text()')
     Adminas Adminovix
 
 Because it's our first time in the system we are in the welcome page

@@ -21,7 +21,7 @@ Now we'll try editing our profile information. First we need to log in.
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
 
-    >>> browser.printQuery("id('personal-box')//span[@class='fullname']/text()")
+    >>> browser.printQuery("id('personal-box')//div[@class='fullname']/text()")
     Adminas Adminovix
 
 We'll go to our profile edit page. And change our name as well as upload a logo.
@@ -30,10 +30,10 @@ We'll go to our profile edit page. And change our name as well as upload a logo.
     >>> browser.getControl('Full name').value = 'Adminas Adminas'
     >>> browser.getControl('Personal logo').add_file(*make_file('test_logo.png'))
     >>> browser.getControl('Save').click()
-    >>> browser.printQuery("id('personal-box')//span[@class='fullname']/text()")
+    >>> browser.printQuery("id('personal-box')//div[@class='fullname']/text()")
     Adminas Adminas
     >>> browser.printQuery("id('personal-box')//div[@class='personal-logo']/img")
-    <img src="/user/1/logo/45/60" alt="logo" />
+    <img src="/user/1/logo/60/60" alt="logo" />
 
 Let's check out the logo.
     >>> browser.open('http://localhost/user/1/logo/45/60')
