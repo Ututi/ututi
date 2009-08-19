@@ -93,7 +93,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
     ${h.image('/images/logo.png', alt='logo')|n}
   </a>
   %endif
-
+  %if breadcrumbs:
 <ul id="breadcrumbs">
   <%
      first_bc = True
@@ -131,6 +131,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
   </li>
   %endfor
   </ul>
+%endif
 </div>
 </%def>
 
