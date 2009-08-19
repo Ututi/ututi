@@ -42,7 +42,7 @@
       ${_('You are not a member of any.')}
       %endif
     </ul>
-    ${h.button_to(_('Create group'), h.url_for(controller='group', action='add'))} 
+    ${h.button_to(_('Create group'), h.url_for(controller='group', action='add'))}
     ${h.link_to(_('More groups'), url(controller='search', action='index', obj_type='group'), class_="more")}
   </%self:portlet>
 
