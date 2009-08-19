@@ -93,7 +93,7 @@ a img {
 }
 
 a {
-  color: #ff7800;
+  color: #d45500;
   text-decoration: none;
 }
 
@@ -192,44 +192,39 @@ ul.bullets_large li {
 }
 
 .sidebar-block .rounded-header {
-  height: 30px;
-  background: white url("../images/sidebar_border.png") left top no-repeat;
-  padding-left: 20px;
+  height: 23px;
+  background: white url("../images/borders/portlet-top.png") left top no-repeat;
+  padding-left: 10px;
 }
 
 .sidebar-block .rounded-header .rounded-right {
-  height: 26px;
-  text-align: center;
-  background: white url("../images/sidebar_border.png") right top no-repeat;
-  padding-right: 30px;
+  height: 19px;
+  background: white url("../images/borders/portlet-top.png") right top no-repeat;
+  padding-right: 10px;
   padding-top: 4px;
-}
-
-.inactive .rounded-header {
-  background: white url("../images/sidebar_border_gray.png") left top no-repeat !important;
-}
-
-.inactive .rounded-header .rounded-right {
-  background: white url("../images/sidebar_border_gray.png") right top no-repeat !important;
-}
-
-.inactive .rounded-header h3 {
-  color: black !important;
 }
 
 .sidebar-block .content {
   padding: 10px 10px 5px;
   margin-bottom: 20px;
   border: 2px solid #e5e5d3;
+  overflow: auto;
 }
 
 .sidebar-block .content a {
-  color: #ff7800;
+  color: #d45500;
 }
+
+.sidebar-block .content a.more {
+  float: right;
+}
+
 
 .sidebar-block .rounded-header h3,
 .sidebar-block .rounded-header h3 a {
-  color: white;
+  color: #666666;
+  font-weight: normal;
+  font-size: 1.1em;
   text-align: left;
 }
 
@@ -349,6 +344,12 @@ a.btn span {
 /* end buttons */
 
 /* special links */
+a.more {
+  font-size: 0.9em;
+  padding-right: 15px;
+  background: url("../images/details/link_arrow.png") right center no-repeat;
+}
+
 a.small-link {
   font-weight: bold;
   color: #808080;

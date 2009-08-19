@@ -24,7 +24,8 @@
       % endfor
     </ul>
     %endif
-    ${h.button_to(_('Watch subjects'), h.url_for(action='subjects'))} ${h.link_to(_('More subjects'), url(controller='search', action='index', obj_type='subject'))}
+    ${h.button_to(_('Watch subjects'), h.url_for(action='subjects'))}
+    ${h.link_to(_('More subjects'), url(controller='search', action='index', obj_type='subject'), class_="more")}
   </%self:portlet>
 
   <%self:portlet id="group_portlet" portlet_class="inactive">
@@ -41,7 +42,8 @@
       ${_('You are not a member of any.')}
       %endif
     </ul>
-    ${h.button_to(_('Create group'), h.url_for(controller='group', action='add'))} ${h.link_to(_('More groups'), url(controller='search', action='index', obj_type='group'))}
+    ${h.button_to(_('Create group'), h.url_for(controller='group', action='add'))} 
+    ${h.link_to(_('More groups'), url(controller='search', action='index', obj_type='group'), class_="more")}
   </%self:portlet>
 
 </div>
