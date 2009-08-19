@@ -7,22 +7,6 @@ ${_('student information online')}
 
 <%def name="personal_block()">
 %if c.user:
-<div class="personal-logo">
-  % if c.user.logo is not None:
-  <img src="${url(controller='user', action='logo', id=c.user.id, width=45, height=60)}" alt="logo" />
-  % else:
-  <a href="${url(controller='profile', action='edit')}" title="${_('Upload your personal logo')}">
-    ${h.image('/images/user_logo_45x60.png', alt='logo')|n}
-  </a>
-  % endif
-</div>
-<div class="personal-info">
-  ${h.link_to(_("Log out"), url('/logout'))}
-  <div>
-    <span class="fullname">${c.user.fullname}</span>
-    <span class="small">${c.user.emails[0].email}</span>
-  </div>
-</div>
 <div id="personal-menu" class="XXX">
   <span class="expanding-menu">
     <a href="#" class="title">Home</a>
@@ -33,6 +17,26 @@ ${_('student information online')}
   <span class="expanding-menu">
     <a href="#" class="title">Subjects</a>
   </span>
+  <span>
+    ${h.link_to(_("Log out"), url('/logout'))}
+  </span>
+</div>
+
+<div class="personal-info">
+  <div class="personal-logo">
+    % if c.user.logo is not None:
+    <img src="${url(controller='user', action='logo', id=c.user.id, width=60, height=60)}" alt="logo" />
+    % else:
+    <a href="${url(controller='profile', action='edit')}" title="${_('Upload your personal logo')}">
+      ${h.image('/images/user_logo_45x60.png', alt='logo')|n}
+    </a>
+    % endif
+  </div>
+  <div id="personal-data">
+    <div class="fullname">${c.user.fullname}</div>
+    <div class="small email">${c.user.emails[0].email}</div>
+  </div>
+  <br style="clear: right; height: 1px;"/>
 </div>
 %else:
 ${h.javascript_link('/javascripts/forms.js')|n}
