@@ -102,7 +102,7 @@ class NewGroupForm(EditGroupForm):
     location = Pipe(ForEach(validators.String(strip=True)),
                     LocationTagsValidator())
 
-    id = GroupIdValidator()
+    id = Pipe(validators.String(strip=True, min=4, max=20), GroupIdValidator())
 
 
 class GroupPageForm(Schema):
