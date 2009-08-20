@@ -121,7 +121,11 @@ def ellipsis(text, max=20):
         return text
 
 
-def selected_item(list):
-    for item in list:
+def selected_item(items):
+    for item in items:
         if item.get('selected', False):
             return item
+
+def marked_list(items):
+    items[-1]['last_item'] = True
+    return items
