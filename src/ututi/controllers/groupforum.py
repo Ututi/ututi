@@ -88,11 +88,12 @@ class GroupforumController(GroupControllerBase):
     def reply(self, group, thread):
         last_post = thread.posts[-1]
         message = send_email(c.user.emails[0].email,
-                             self._recipients(group),
+                             c.group.list_address,
                              u"Re: %s" % thread.subject,
                              self.form_result['message'],
                              message_id=self._generateMessageId(),
-                             reply_to=last_post.message_id)
+                             reply_to=last_post.message_id,
+                             send_to= self._recipients(group))
         post = GroupMailingListMessage.fromMessageText(message)
         post.group = group
         post.reply_to = last_post
@@ -126,10 +127,11 @@ class GroupforumController(GroupControllerBase):
     @ActionProtector("member")
     def post(self, group):
         message = send_email(c.user.emails[0].email,
-                             self._recipients(group),
+                             c.group.list_address,
                              self.form_result['subject'],
                              self.form_result['message'],
-                             self._generateMessageId())
+                             self._generateMessageId(),
+                             send_to=self._recipients(group))
         post = GroupMailingListMessage.fromMessageText(message)
         post.group = group
         meta.Session.commit()

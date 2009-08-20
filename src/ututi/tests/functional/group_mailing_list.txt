@@ -99,16 +99,20 @@ Let's post a new topic now:
 The email gets sent to all the members of the group:
 
     >>> from ututi.lib.mailer import mail_queue
-    >>> print mail_queue.pop().message
+    >>> msg = mail_queue.pop()
+    >>> print msg.message
     MIME-Version: 1.0
     Content-Type: text/plain; charset="us-ascii"
     Content-Transfer-Encoding: 7bit
     From: admin@ututi.lt
-    To: admin@ututi.lt
+    To: moderators@fake_host
     Subject: Hi mom
     Message-ID: <...@fake_host>
     <BLANKLINE>
     I am doing fine. Send more cash.
+
+    >>> msg.recipients
+    ['admin@ututi.lt']
 
 And we get redirected to our newly created thread
 
@@ -172,7 +176,7 @@ The email gets sent.
     Content-Type: text/plain; charset="us-ascii"
     Content-Transfer-Encoding: 7bit
     From: admin@ututi.lt
-    To: admin@ututi.lt
+    To: moderators@fake_host
     Subject: Re: Hi mom
     Message-ID: <...@fake_host>
     In-reply-to: <...@fake_host>
@@ -199,6 +203,34 @@ And our new message should be in the list:
         Oh, and don't forget to feed the fish!
       </pre>
     </div>
+
+If there is more than one member in the group, all of them get the
+email:
+
+    >>> from ututi.model import Group, User, meta
+    >>> group = Group.get('moderators')
+    >>> user = User.get('user@ututi.lt')
+    >>> group.add_member(user)
+    >>> meta.Session.commit()
+
+    >>> browser.getControl('Message').value = "Let's welcome our new member!"
+    >>> browser.getControl('Reply').click()
+
+    >>> msg = mail_queue.pop()
+    >>> print msg.message
+    MIME-Version: 1.0
+    Content-Type: text/plain; charset="us-ascii"
+    Content-Transfer-Encoding: 7bit
+    From: admin@ututi.lt
+    To: moderators@fake_host
+    Subject: Re: Hi mom
+    Message-ID: <...@fake_host>
+    In-reply-to: <...@fake_host>
+    <BLANKLINE>
+    Let's welcome our new member!
+
+    >>> msg.recipients
+    ['admin@ututi.lt', 'user@ututi.lt']
 
 And clean up the email queue:
 

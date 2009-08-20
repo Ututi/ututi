@@ -18,7 +18,7 @@ class EmailInfo(object):
                                                           self.recipients)
 
 
-def send_email(sender, recipient, subject, body, message_id=None, reply_to=None):
+def send_email(sender, recipient, subject, body, message_id=None, reply_to=None, send_to=None):
     """Send an email.
 
     All arguments should be Unicode strings (plain ASCII works as well).
@@ -69,15 +69,18 @@ def send_email(sender, recipient, subject, body, message_id=None, reply_to=None)
     if reply_to is not None:
         msg['In-reply-to'] = reply_to
 
+    if send_to is None:
+        send_to = recipient
+
     # Send the message via SMTP to localhost:25
     if not config.get('hold_emails', False):
         # send the email if we are not told to hold it
         server = config.get('smtp_host', 'localhost')
         smtp = SMTP(server)
-        smtp.sendmail(sender, recipient, msg.as_string())
+        smtp.sendmail(sender, send_to, msg.as_string())
         smtp.quit()
     else:
-        mail_queue.append(EmailInfo(sender, recipient, msg.as_string()))
+        mail_queue.append(EmailInfo(sender, send_to, msg.as_string()))
 
     return msg.as_string()
 

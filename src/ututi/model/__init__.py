@@ -487,6 +487,10 @@ class Group(ContentItem, FolderMixin):
             return None
 
     @property
+    def list_address(self):
+        return "%s@%s" % (self.group_id, config.get('mailing_list_host', ''))
+
+    @property
     def last_seen_members(self):
         gmt = group_members_table
         return meta.Session.query(User).join((gmt,
