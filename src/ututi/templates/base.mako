@@ -100,7 +100,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
      %>
   %for breadcrumb in breadcrumbs:
   %if not first_bc:
-  <li>
+  <li class="breadcrumb">
     %else:
   <li class="no-bullet">
     <%
@@ -108,10 +108,11 @@ ${h.javascript_link('/javascripts/forms.js')|n}
        %>
     %endif
     %if isinstance(breadcrumb, dict):
-
-    <a class="breadcrumb" title="${breadcrumb.get('title')}" href="${breadcrumb.get('link')}">
-      ${breadcrumb.get('title') | h.ellipsis}
-    </a>
+    <div>
+      <a class="breadcrumb" title="${breadcrumb.get('title')}" href="${breadcrumb.get('link')}">
+        ${breadcrumb.get('title') | h.ellipsis}
+      </a>
+    </div>
     %else:
     <%
        selected = h.selected_item(breadcrumb)

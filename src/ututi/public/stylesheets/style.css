@@ -368,20 +368,22 @@ a.small-link:hover {
   list-style: none;
 
   position: absolute;
-  top: 66px;
-  left: 99px;
+  top: 43px;
+  left: 110px;
 }
 
   /* horizontal list */
-.breadcrumb,
+.breadcrumb a,
+.no-bullet a,
 .breadcrumb_dropdown div span,
+
 #breadcrumbs li li a {
   font-size: 1.7em;
   color: #666;
   cursor: pointer;
 }
 
-.breadcrumb_dropdown li.active div,
+.breadcrumb_dropdown li.active div span,
 #breadcrumbs li li a {
   color: #d45500;
 }
@@ -393,44 +395,94 @@ a.small-link:hover {
   padding: 2px 0;
 }
 
+#breadcrumbs li.no-bullet {
+  padding-right: 5px;
+}
+
+#breadcrumbs li.breadcrumb {
+  padding-right: 5px;
+  padding-left: 18px;
+  background: transparent url("../images/bullet_orange.png") left 12px no-repeat;
+}
+
+#breadcrumbs li.breadcrumb div,
+#breadcrumbs li.no-bullet div {
+  padding-top: 4px;
+}
+
 #breadcrumbs ul.breadcrumb_dropdown li {
   float: none;
 }
 
+#breadcrumbs ul.breadcrumb_dropdown {
+  padding-left: 5px;
+}
+
+/* default state */
+#breadcrumbs ul.breadcrumb_dropdown li.alternative,
+#breadcrumbs ul.breadcrumb_dropdown li.last {
+  display: none;
+}
+
 #breadcrumbs ul.breadcrumb_dropdown li.active {
   height: 36px;
-  background: url("../images/borders/breadcrumb-top.png") left top no-repeat;
+  background: transparent url("../images/details/icon_branches.png") left center no-repeat;
   padding: 0;
-  padding-left: 25px;
+  padding-left: 30px;
 }
 
 #breadcrumbs ul.breadcrumb_dropdown li.active div {
+  height: 32px;
+  background: transparent;                                                   ;
+  padding: 4px 25px 0 0;
+}
+
+/* hover */
+#breadcrumbs ul.breadcrumb_dropdown li.active:hover {
+  background: transparent url("../images/details/icon_down.png") left center no-repeat;
+}
+
+/* expanded state */
+
+#breadcrumbs ul.breadcrumb_dropdown.expanded li.alternative,
+#breadcrumbs ul.breadcrumb_dropdown.expanded li.last {
+  display: list-item;
+}
+
+#breadcrumbs ul.breadcrumb_dropdown.expanded li.active {
+  height: 36px;
+  background: url("../images/borders/breadcrumb-top.png") left top no-repeat;
+  padding: 0;
+  padding-left: 30px;
+}
+
+#breadcrumbs ul.breadcrumb_dropdown.expanded li.active div {
   height: 32px;
   background: url("../images/borders/breadcrumb-top.png") right top no-repeat;
   padding: 4px 25px 0 0;
 }
 
-#breadcrumbs ul.breadcrumb_dropdown li.alternative {
+#breadcrumbs ul.breadcrumb_dropdown.expanded li.alternative {
   height: 32px;
   background: url("../images/borders/breadcrumb-middle.png") left top no-repeat;
   padding: 0;
-  padding-left: 25px;
+  padding-left: 30px;
 }
 
-#breadcrumbs ul.breadcrumb_dropdown li.alternative div {
+#breadcrumbs ul.breadcrumb_dropdown.expanded li.alternative div {
   height: 28px;
   background: url("../images/borders/breadcrumb-middle.png") right top no-repeat;
   padding: 4px 25px 0 0;
 }
 
-#breadcrumbs ul.breadcrumb_dropdown li.last {
+#breadcrumbs ul.breadcrumb_dropdown.expanded li.last {
   height: 35px;
   background: url("../images/borders/breadcrumb-last.png") left top no-repeat;
   padding: 0;
-  padding-left: 25px;
+  padding-left: 30px;
 }
 
-#breadcrumbs ul.breadcrumb_dropdown li.last div {
+#breadcrumbs ul.breadcrumb_dropdown.expanded li.last div {
   height: 31px;
   background: url("../images/borders/breadcrumb-last.png") right top no-repeat;
   padding: 4px 25px 0 0;
