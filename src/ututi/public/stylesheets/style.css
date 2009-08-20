@@ -8,7 +8,7 @@ html, body {
 body {
   font-size: 87.5%;
   font-family: 'Trebuchet MS', Helvetica, sans-serif;
-  background: white;
+  background: white url("../images/block_header_background.png") center 5px no-repeat;
   padding-bottom: 5px;
 }
 
