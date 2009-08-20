@@ -3,8 +3,10 @@ import time
 from datetime import datetime
 import email
 
+from sqlalchemy.types import Unicode
 from sqlalchemy.sql.expression import asc
 from sqlalchemy.sql.expression import and_
+from sqlalchemy.schema import Column
 from sqlalchemy.schema import Table
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm import backref
@@ -42,7 +44,7 @@ def decode_and_join_header(header):
             result.append(part[0].decode(part[1]))
         else:
             result.append(part[0])
-    return ' '.join(result)
+    return u' '.join(result)
 
 
 class UtutiEmail(email.message.Message):
@@ -74,6 +76,7 @@ def setup_orm(engine):
     group_mailing_list_messages_table = Table(
         "group_mailing_list_messages",
         meta.metadata,
+        Column('subject', Unicode(assert_unicode=True)),
         autoload=True,
         autoload_with=engine)
     global group_mailing_list_attachments_table
@@ -119,8 +122,8 @@ class GroupMailingListMessage(ContentItem):
 
     @property
     def body(self):
-        headers_dict, body = splitMail(self.original)
-        return body
+        message = email.message_from_string(self.original, UtutiEmail)
+        return message.get_payload(decode=True).decode('utf-8')
 
     def getAuthor(self):
         author_name, author_address = parseaddr(self.mime_message['From'])
