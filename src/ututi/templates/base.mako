@@ -115,16 +115,26 @@ ${h.javascript_link('/javascripts/forms.js')|n}
     %else:
     <%
        selected = h.selected_item(breadcrumb)
-       %>
+     %>
 
     <ul class="breadcrumb_dropdown">
       <li class="active">
-        <span>
-          ${selected.get('title') | h.ellipsis}
-        </span>
+        <div>
+          <span>${selected.get('title') | h.ellipsis}</span>
+        </div>
       </li>
-      %for item in breadcrumb:
-      <li class="alternative"><a class="subbreadcrumb" title="${item.get('title')}" href="${item.get('link')}">${item.get('title') | h.ellipsis}</a></li>
+      %for item in h.marked_list(breadcrumb):
+      <%
+         if item.get('last_item', False):
+             cls = 'last'
+         else:
+             cls = 'alternative'
+      %>
+      <li class="${cls}">
+        <div>
+          <a class="subbreadcrumb" title="${item.get('title')}" href="${item.get('link')}">${item.get('title') | h.ellipsis}</a>
+        </div>
+      </li>
       %endfor
     </ul>
     %endif
