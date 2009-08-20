@@ -1,5 +1,5 @@
 $(document).ready(function() {
-        $(".breadcrumb_dropdown .active span").click(
+        $(".breadcrumb_dropdown .active").click(
             function() {
                 $(this).parents('.breadcrumb_dropdown').toggleClass('expanded');
             });

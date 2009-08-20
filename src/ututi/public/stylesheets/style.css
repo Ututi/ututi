@@ -373,8 +373,7 @@ a.small-link:hover {
   /* horizontal list */
 .breadcrumb a,
 .no-bullet a,
-.breadcrumb_dropdown div span,
-
+.breadcrumb_dropdown li.active,
 #breadcrumbs li li a {
   font-size: 1.7em;
   color: #666;
