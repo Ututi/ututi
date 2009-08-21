@@ -143,8 +143,6 @@ class GroupMailingListMessage(ContentItem):
         return mimetools.Message(StringIO(self.original))
 
     def send(self, recipients):
-        headers = "".join(self.mime_message.headers)
-
         footer = ""
         for attachment in self.attachments:
             # XXX can't decide whether this belongs in the model or in
@@ -152,11 +150,17 @@ class GroupMailingListMessage(ContentItem):
             # pass it to this method?
             url = url_for(controller='files', action='get', id=attachment.id,
                           qualified=True)
-            footer += '<a href="%s">%s</a>' % (url, attachment.title)
-        new_message = "%s\r\n%s\r\n%s" % (headers, self.body, footer)
+            footer += '\n<a href="%s">%s</a>' % (url, attachment.title)
+
+        message = email.message_from_string(self.original.encode('utf-8'), UtutiEmail)
+        if footer:
+            payload = self.body + footer
+            payload = payload.encode('utf-8')
+            message.set_payload(payload, charset='utf-8')
+
         raw_send_email(self.mime_message['From'],
                        recipients,
-                       new_message)
+                       message.as_string())
 
     @classmethod
     def fromMessageText(cls, message_text):

@@ -51,6 +51,7 @@ class ReceivemailController(BaseController):
 
         meta.Session.add(message)
 
+        meta.Session.commit() # to keep message and attachment ids stable
         attachments = []
         for md5, mimetype, filename in zip(md5_list,
                                            mime_type_list,
@@ -63,7 +64,10 @@ class ReceivemailController(BaseController):
                      mimetype=mimetype,
                      md5=md5)
             meta.Session.add(f)
-            message.attachments.append(f)
+            attachments.append(f)
+            meta.Session.commit() # to keep attachment ids stable
+
+        message.attachments.extend(attachments)
 
         self._queueMessage(message)
         meta.Session.commit()

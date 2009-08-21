@@ -70,6 +70,7 @@ Also it would be stripped from the actual email and replaced with a
 link to the file on our system:
 
     >>> email = mail_queue.pop()
+
     >>> print email.message
     Return-Path: <admin@ututi.lt>
     Date: Mon, 15 Jun 2009 17:55:15 +0300
@@ -80,11 +81,17 @@ link to the file on our system:
     MIME-Version: 1.0
     Content-Disposition: inline
     User-Agent: Mutt/1.5.18 (2008-05-17)
-    Content-Type: text/plain; charset=us-ascii
+    Content-Type: text/plain; charset="utf-8"
+    Content-Transfer-Encoding: base64
     <BLANKLINE>
+    QWxzbywgSSBqdXN0IHdhbnRlZCB0byBzZW5kIHlvdSB0aGlzIGZpbGU6CgoKPGEgaHJlZj0iaHR0
+    cDovL2xvY2FsaG9zdC9maWxlcy9nZXQvNSI+UkVBRE1FLnR4dDwvYT4=
+    <BLANKLINE>
+
+    >>> print email.payload()
     Also, I just wanted to send you this file:
     <BLANKLINE>
-    <a href="http://localhost/files/get/...">README.txt</a>
+    <a href="http://localhost/files/get/5">README.txt</a>
 
     >>> print email.recipients
     ['admin@ututi.lt']
@@ -103,13 +110,14 @@ repository:
     >>> browser.reload()
 
     >>> browser.printQuery('id("file_list")//a')
-    <a href="/files/get/..." class="file-link">README.txt</a>
-    <a href="/files/get/..." class="file-link">README.txt</a>
+    <a href="/files/get/5" class="file-link">README.txt</a>
+    <a href="/files/get/7" class="file-link">README.txt</a>
 
 But the link in the email will point to the other "file" entry in the
 list of files:
 
-    >>> print mail_queue.pop().message
+    >>> email = mail_queue.pop()
+    >>> print email.message
     Return-Path: <admin@ututi.lt>
     Date: Mon, 15 Jun 2009 17:55:15 +0300
     From: Admin <admin@ututi.lt>
@@ -119,11 +127,16 @@ list of files:
     MIME-Version: 1.0
     Content-Disposition: inline
     User-Agent: Mutt/1.5.18 (2008-05-17)
-    Content-Type: text/plain; charset=us-ascii
+    Content-Type: text/plain; charset="utf-8"
+    Content-Transfer-Encoding: base64
     <BLANKLINE>
+    QWxzbywgSSBqdXN0IHdhbnRlZCB0byBzZW5kIHlvdSB0aGlzIGZpbGU6CgoKPGEgaHJlZj0iaHR0
+    cDovL2xvY2FsaG9zdC9maWxlcy9nZXQvNyI+UkVBRE1FLnR4dDwvYT4=
+
+    >>> print email.payload()
     Also, I just wanted to send you this file:
     <BLANKLINE>
-    <a href="http://localhost/files/get/...">README.txt</a>
+    <a href="http://localhost/files/get/7">README.txt</a>
 
     >>> browser.getLink('README.txt').click()
     >>> browser.printContents()

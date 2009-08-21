@@ -3,6 +3,7 @@ from smtplib import SMTP
 from email.Header import Header
 from email.MIMEText import MIMEText
 from email.Utils import parseaddr, formataddr
+from email import message_from_string
 from pylons import config
 
 mail_queue = []
@@ -12,6 +13,10 @@ class EmailInfo(object):
 
     def __init__(self, sender, recipients, message):
         self.sender, self.recipients, self.message = sender, recipients, message
+
+    def payload(self):
+        message = message_from_string(self.message.encode('utf-8'))
+        return message.get_payload(decode=True)
 
     def __str__(self):
         return "<EmailInfo sender='%s' recipients=%s>" % (self.sender,
