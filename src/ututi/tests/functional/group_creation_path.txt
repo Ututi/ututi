@@ -138,3 +138,23 @@ And we are redirected to the group that invited us.
 
     >>> browser.url
     'http://localhost/group/test'
+
+    >>> browser.open("http://localhost/group/test/members")
+    >>> browser.getControl('Enter emails of the people You would like to invite to the group.').value = 'user3@ututi.com'
+    >>> browser.getControl('Invite').click()
+    >>> print mail_queue.pop().message
+    MIME-Version: 1.0
+    Content-Type: text/plain; charset="us-ascii"
+    Content-Transfer-Encoding: 7bit
+    From: info@ututi.lt
+    To: user3@ututi.com
+    Subject: Ututi group invitation
+    <BLANKLINE>
+    Jonas Petraitis Petrauskas has invited You to join the group Test group.
+    <BLANKLINE>
+    Since You do not appear to be a Ututi user at the moment, to become a member of this group, You will have to register first.
+    <BLANKLINE>
+    You can do this by following this link: http://localhost/register/...
+    <BLANKLINE>
+    The Ututi team
+    <BLANKLINE>
