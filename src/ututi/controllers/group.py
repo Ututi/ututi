@@ -257,7 +257,10 @@ class GroupController(GroupControllerBase, FileViewMixin):
     @ActionProtector("member", "admin", "moderator")
     def members(self, group):
         c.breadcrumbs.append(self._actions('members'))
-        return render('group/members.mako')
+        if group.is_admin(c.user):
+            return render('group/members_admin.mako')
+        else:
+            return render('group/members.mako')
 
     @group_action
     @ActionProtector("admin", "moderator")
@@ -418,6 +421,18 @@ class GroupController(GroupControllerBase, FileViewMixin):
         c.breadcrumbs.append(self._actions('subjects'))
         return render('group/subjects.mako')
 
+    @validate(schema=GroupInviteForm, form='members')
+    @group_action
+    @ActionProtector("member", "admin", "moderator")
+    def invite_members(self, group):
+        """Invite new members to the group."""
+        if hasattr(self, 'form_result'):
+            emails = self.form_result.get('emails', '').split()
+            self._send_invitations(group, emails)
+            redirect_to(controller='group', action='invite_members_step', id=group.group_id)
+
+        return render('group/members_step.mako')
+
     @validate(schema=GroupInviteForm, form='invite_members_step')
     @group_action
     @ActionProtector("member", "admin", "moderator")
@@ -425,25 +440,29 @@ class GroupController(GroupControllerBase, FileViewMixin):
 
         if hasattr(self, 'form_result'):
             emails = self.form_result.get('emails', '').split()
-            count = 0
-            failed = []
-            for line in emails:
-                for email in filter(bool, line.split(',')):
-                    #XXX : need to validate emails
-                    try:
-                        validators.Email.to_python(email)
-                        count = count + 1
-                        group.invite_user(email, c.user)
-                    except:
-                        failed.append(email)
-            if count > 0:
-                h.flash(_("Users invited."))
-            if failed != []:
-                h.flash(_("Invalid email addresses detected: %s") % ', '.join(failed))
-            meta.Session.commit()
+            self._send_invitations(group, emails)
             redirect_to(controller='group', action='invite_members_step', id=group.group_id)
 
         return render('group/members_step.mako')
+
+    def _send_invitations(self, group, emails):
+        count = 0
+        failed = []
+        for line in emails:
+            for email in filter(bool, line.split(',')):
+                #XXX : need to validate emails
+                try:
+                    validators.Email.to_python(email)
+                    count = count + 1
+                    group.invite_user(email, c.user)
+                except:
+                    failed.append(email)
+        if count > 0:
+            h.flash(_("Users invited."))
+        if failed != []:
+            h.flash(_("Invalid email addresses detected: %s") % ', '.join(failed))
+        meta.Session.commit()
+
 
     @validate(schema=GroupInvitationActionForm)
     @group_action

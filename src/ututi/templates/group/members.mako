@@ -6,10 +6,32 @@
 
 <h1>${_('Members')}</h1>
 
-% if c.group.members:
-<ul id="group_member_list">
 % for member in c.group.members:
-  <li>${member.user.fullname}</li>
+  <div class="user-logo-link">
+    %if member.user.logo is not None:
+      <img src="${url(controller='user', action='logo', id=member.user.id, width=60, height=60)}" alt="logo" />
+    %else:
+      ${h.image('/images/user_logo_45x60.png', alt='logo')|n}
+    %endif
+    <div>
+      <a href="${url(controller="user", action="index", id=member.user.id)}" title="${member.user.fullname}">
+        ${member.user.fullname}
+      </a>
+    </div>
+  </div>
 % endfor
-</ul>
-%endif
+
+<div style="clear: left;">
+  <h2>${_('Invite your group mates')}</h2>
+  <form method="post" action="${url(controller='group', action='invite_members', id=c.group.group_id)}" id="member_invitation_form">
+
+    <div class="form-field">
+      <label for="emails">${_('Enter emails of the people You would like to invite to the group.')}</label>
+      <textarea name="emails" id="emails" rows="8" cols="60"></textarea>
+    </div>
+
+    <div class="form-field">
+      <span class="btn"><input type="submit" value="${_('Invite')}"/></span>
+    </div>
+  </form>
+</div>
