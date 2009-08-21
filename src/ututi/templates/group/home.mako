@@ -64,9 +64,12 @@
         %else:
           ${h.image('/images/user_logo_small.png', alt=member.fullname)|n}
         %endif
-          <span class="small">${member.fullname}</span>
       </a>
-
+      <div>
+        <a href="${url(controller='user', action='index', id=member.id)}" title="${member.fullname}">
+          <span class="small">${member.fullname}</span>
+        </a>
+      </div>
     </div>
     %endfor
     <br style="clear: both;" />
