@@ -14,7 +14,7 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
 
 ${path_steps(2)}
 
-<form method="POST" action="${url(controller='group', action='invite_members_step', id=c.group.group_id)}" id="member_invitation_form">
+<form method="post" action="${url(controller='group', action='invite_members_step', id=c.group.group_id)}" id="member_invitation_form">
 
   <div class="form-field">
     <label for="emails">${_('Enter emails of the people You would like to invite to the group.')}</label>

@@ -136,7 +136,7 @@ of in your home page (at least for now):
           <a href="/group/test">Test group</a>
         </li>
       </ul>
-      <form action="/groups/add" class="button-to" method="POST">
+      <form action="/groups/add" class="button-to" method="post">
         <div>
           <span class="btn">
             <input type="submit" value="Create group" />

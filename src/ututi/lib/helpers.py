@@ -92,7 +92,7 @@ def button_to(name, url='', **html_options):
         method_tag = HTML.input(
             type='hidden', id='_method', name_='_method', value=method)
 
-    form_method = (method.upper() == 'GET' and method) or 'POST'
+    form_method = (method.upper() == 'GET' and method.lower()) or 'post'
 
     url, name = url, name or url
 
