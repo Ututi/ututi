@@ -121,6 +121,9 @@ def setup_orm(engine):
 class GroupMailingListMessage(ContentItem):
     """Message in the group mailing list."""
 
+    def url(self):
+        return self.group.url(controller='groupforum', action='thread', thread_id=self.thread.id)
+
     @property
     def body(self):
         message = email.message_from_string(self.original.encode('utf-8'), UtutiEmail)

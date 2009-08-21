@@ -302,12 +302,14 @@ def teardown_db_defaults(engine, quiet=False):
     tx.commit()
     connection.close()
 
+
 content_items_table = None
 class ContentItem(object):
     """A generic class for content items."""
+
     def url(self):
-        """A method to be overridden by content objects to provide their urls."""
-        pass
+        raise NotImplementedError("This method should be overridden by content"
+                                  " objects to provide their urls.")
 
 
 def generate_salt():
