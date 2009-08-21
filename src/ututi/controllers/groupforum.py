@@ -94,7 +94,7 @@ class GroupforumController(GroupControllerBase):
                              message_id=self._generateMessageId(),
                              reply_to=last_post.message_id,
                              send_to= self._recipients(group))
-        post = GroupMailingListMessage.fromMessageText(message)
+        post = GroupMailingListMessage.fromMessageText(unicode(message))
         post.group = group
         post.reply_to = last_post
         meta.Session.commit()
@@ -132,7 +132,7 @@ class GroupforumController(GroupControllerBase):
                              self.form_result['message'],
                              self._generateMessageId(),
                              send_to=self._recipients(group))
-        post = GroupMailingListMessage.fromMessageText(message)
+        post = GroupMailingListMessage.fromMessageText(unicode(message))
         post.group = group
         meta.Session.commit()
         redirect_to(controller='groupforum',

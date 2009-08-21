@@ -77,6 +77,7 @@ def setup_orm(engine):
         "group_mailing_list_messages",
         meta.metadata,
         Column('subject', Unicode(assert_unicode=True)),
+        Column('original', Unicode(assert_unicode=True)),
         autoload=True,
         autoload_with=engine)
     global group_mailing_list_attachments_table
@@ -122,8 +123,13 @@ class GroupMailingListMessage(ContentItem):
 
     @property
     def body(self):
-        message = email.message_from_string(self.original, UtutiEmail)
-        return message.get_payload(decode=True).decode('utf-8')
+        message = email.message_from_string(self.original.encode('utf-8'), UtutiEmail)
+        charset = message.get_content_charset('utf-8')
+        # fall back, in case we are being tricked
+        if charset == 'us-ascii':
+            charset = 'utf-8'
+        payload = message.get_payload(decode=True)
+        return payload.decode(charset)
 
     def getAuthor(self):
         author_name, author_address = parseaddr(self.mime_message['From'])
@@ -134,7 +140,6 @@ class GroupMailingListMessage(ContentItem):
         return mimetools.Message(StringIO(self.original))
 
     def send(self, recipients):
-        headers_dict, body = splitMail(self.original)
         headers = "".join(self.mime_message.headers)
 
         footer = ""
@@ -145,7 +150,7 @@ class GroupMailingListMessage(ContentItem):
             url = url_for(controller='files', action='get', id=attachment.id,
                           qualified=True)
             footer += '<a href="%s">%s</a>' % (url, attachment.title)
-        new_message = "%s\r\n%s\r\n%s" % (headers, body.decode('utf-8'), footer)
+        new_message = "%s\r\n%s\r\n%s" % (headers, self.body, footer)
         raw_send_email(self.mime_message['From'],
                        recipients,
                        new_message)
@@ -176,7 +181,6 @@ class GroupMailingListMessage(ContentItem):
                 real_sbj = parts[-1].strip()
                 reply_to = meta.Session.query(cls).filter_by(subject=real_sbj,
                                                              group_id=group_id).first()
-
         return cls(message_text,
                    message_id,
                    group_id,
@@ -209,3 +213,4 @@ class GroupMailingListMessage(ContentItem):
         self.sent = sent
         self.group_id = group_id
         self.reply_to = reply_to
+        self.body

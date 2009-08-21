@@ -232,8 +232,13 @@ email:
     >>> msg.recipients
     ['admin@ututi.lt', 'user@ututi.lt']
 
+# XXX a regression test for a bug, move it to a separate test.
+
+    >>> send_test_message('google_lt_bug_1.txt', '1', to='moderators@ututi.lt')
+    >>> browser.open('http://localhost/group/moderators/forum/thread/10')
+
 And clean up the email queue:
 
     >>> len(mail_queue)
-    4
+    5
     >>> mail_queue[:] = []

@@ -1,0 +1,44 @@
+From ignas.mikalajunas@gmail.com  Fri Aug 21 03:24:34 2009
+Return-Path: <ignas.mikalajunas@gmail.com>
+Received: from mail-ew0-f210.google.com (mail-ew0-f210.google.com [209.85.219.210])
+        by bmw.evitaminai.lt (Postfix) with ESMTP id 0A4C63E0B3
+        for <special@u2ti.com>; Fri, 21 Aug 2009 03:24:33 +0300 (EEST)
+Received: by ewy6 with SMTP id 6so346632ewy.10
+        for <special@u2ti.com>; Thu, 20 Aug 2009 17:11:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=gamma;
+        h=domainkey-signature:mime-version:sender:received:in-reply-to
+         :references:date:x-google-sender-auth:message-id:subject:from:to
+         :content-type:content-transfer-encoding;
+        bh=sNElhIj+V9K439gu/QiBhZ0lo7//LNNsY9fFjK2X8bM=;
+        b=fqXuTCmY6e3TbAXW5/otN4ZA584zNRT6+z4wZxr4ei+i/XOeVyVGLrTZT1E3+lkfzT
+         F6B5St9Oob4ajfALXHyaOnp9B24+UfH3cOGauKbikl72UgAVMGfmidXk+D365i5P9091
+         0W+5wr9Gyd8+6NlIxJAQ1zFpeA4ftZyqcyINQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws;
+        d=gmail.com; s=gamma;
+        h=mime-version:sender:in-reply-to:references:date
+         :x-google-sender-auth:message-id:subject:from:to:content-type
+         :content-transfer-encoding;
+        b=UrjuHoXkVlS2KqF4HqzDee5Zw6Djr0AwIT7KvE9mpzX1BWsvLMww/35JuYjXh15etO
+         j6e36QievcXTQgsYbYFvJ/2ZGsFv+FMn26SqhSk5OzyEpwBv+MJPX3ec8uNuS3dMPfMA
+         YU3RCRschfUDMXSJLT0pHSyqUma8KU9G0w3mM=
+MIME-Version: 1.0
+Sender: ignas.mikalajunas@gmail.com
+Received: by 10.216.26.82 with SMTP id b60mr77717wea.177.1250813513410; Thu, 
+        20 Aug 2009 17:11:53 -0700 (PDT)
+In-Reply-To: <193.219.55.5.33.635.1250814224.790.2@u2ti.com>
+References: <193.219.55.5.33.635.1250814194.630.1@u2ti.com>
+         <193.219.55.5.33.635.1250814224.790.2@u2ti.com>
+Date: Fri, 21 Aug 2009 03:11:53 +0300
+X-Google-Sender-Auth: ef0ea838d0c18bd4
+Message-ID: <cc0c36330908201711g32cd65eavca93a1777a7b11c7@mail.gmail.com>
+Subject: =?ISO-8859-13?Q?Re=3A_Sveiki_visi=2E_Bandau_Lietuvi=F8_kalb=E0_subjecte?=
+From: Admin <admin@ututi.lt>
+To: %(to)s
+Content-Type: text/plain; charset=ISO-8859-13
+Content-Transfer-Encoding: quoted-printable
+
+Hmm, j=EBga, google mailas mato visk=E0 kaip priklauso.
+
+2009/8/21  <ignas@pov.lt>:
+> Na, vaizdas lyg ir nieko. =DEi=FBr=EBsim kaip google mailui tai patiks.
