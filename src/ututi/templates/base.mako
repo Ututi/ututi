@@ -93,57 +93,77 @@ ${h.javascript_link('/javascripts/forms.js')|n}
     ${h.image('/images/logo.png', alt='logo')|n}
   </a>
   %endif
-  %if breadcrumbs:
-<ul id="breadcrumbs">
-  <%
-     first_bc = True
-     %>
-  %for breadcrumb in breadcrumbs:
-  %if not first_bc:
-  <li class="breadcrumb">
-    %else:
-  <li class="no-bullet">
+  %if c.object_location:
+  <div id="location">
+    %for (index, tag) in enumerate(c.object_location.hierarchy(True)):
     <%
-       first_bc = False
-       %>
-    %endif
-    %if isinstance(breadcrumb, dict):
-    <div>
-      <a class="breadcrumb" title="${breadcrumb.get('title')}" href="${breadcrumb.get('link')}">
-        ${breadcrumb.get('title') | h.ellipsis}
-      </a>
-    </div>
-    %else:
-    <%
-       selected = h.selected_item(breadcrumb)
-     %>
+       if index > 0:
+           cls = 'bullet-small'
+       else:
+           cls = ''
+    %>
 
-    <ul class="breadcrumb_dropdown">
-      <li class="active">
-        <div>
-          <span>${selected.get('title') | h.ellipsis}</span>
-        </div>
-      </li>
-      %for item in h.marked_list(breadcrumb):
+    <div class="location-tag ${cls}">
+      %if tag.logo:
+      <img src="${url(controller='structure', action='logo', id=tag.id, height=20, width=40)}" alt="location tag logo"/>
+      %endif
+      <div class="title">${tag.title_short}</div>
+    </div>
+    %endfor
+  </div>
+  %endif
+
+  %if breadcrumbs:
+  <ul id="breadcrumbs">
+    <%
+       first_bc = True
+       %>
+    %for breadcrumb in breadcrumbs:
+    %if not first_bc:
+    <li class="breadcrumb">
+      %else:
+    <li class="no-bullet">
       <%
-         if item.get('last_item', False):
-             cls = 'last'
-         else:
-             cls = 'alternative'
-      %>
-      <li class="${cls}">
-        <div>
-          <a class="subbreadcrumb" title="${item.get('title')}" href="${item.get('link')}">${item.get('title') | h.ellipsis}</a>
-        </div>
-      </li>
-      %endfor
+         first_bc = False
+         %>
+      %endif
+      %if isinstance(breadcrumb, dict):
+      <div>
+        <a class="breadcrumb" title="${breadcrumb.get('title')}" href="${breadcrumb.get('link')}">
+          ${breadcrumb.get('title') | h.ellipsis}
+        </a>
+      </div>
+      %else:
+      <%
+         selected = h.selected_item(breadcrumb)
+         %>
+
+      <ul class="breadcrumb_dropdown">
+        <li class="active">
+          <div>
+            <span>${selected.get('title') | h.ellipsis}</span>
+          </div>
+        </li>
+        %for item in h.marked_list(breadcrumb):
+        <%
+           if item.get('last_item', False):
+               cls = 'last'
+           else:
+               cls = 'alternative'
+           %>
+        <li class="${cls}">
+          <div>
+            <a class="subbreadcrumb" title="${item.get('title')}" href="${item.get('link')}">${item.get('title') | h.ellipsis}</a>
+          </div>
+        </li>
+        %endfor
+      </ul>
+      %endif
+    </li>
+    %endfor
     </ul>
     %endif
-  </li>
-  %endfor
-  </ul>
-%endif
-</div>
+  </div>
 </%def>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">

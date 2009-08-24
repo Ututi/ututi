@@ -389,6 +389,40 @@ a.small-link:hover {
 /* end special links */
 
 /* begin breadcrumbs */
+#location {
+  margin: 0;
+  padding: 0;
+  left: 110px;
+  top: 25px;
+  position: absolute;
+  height: 20px;
+}
+
+#location div.location-tag {
+  float: left;
+  height: 20px;
+  margin-right: 3px;
+}
+
+#location .location-tag .title {
+  float: left;
+  height: 20px;
+  line-height: 20px;
+  text-transform: uppercase;
+  color: #666;
+  font-size: 1.1em;
+}
+
+#location .location-tag img {
+  float: left;
+  margin: 0 3px 0 0;
+}
+
+#location .bullet-small {
+  padding-left: 13px;
+  background: url("../images/details/bullet_orange_small.png") left center no-repeat;
+}
+
 #breadcrumbs {
   margin: 0;
   padding: 0;
