@@ -1,0 +1,27 @@
+Location breadcrumbs
+===================
+
+Test if location portion of the breadcrumbs is rendered correctly.
+
+
+Log in first.
+
+    >>> browser =  Browser()
+    >>> browser.open('http://localhost/')
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
+
+The subject:
+
+
+    >>> browser.open('http://localhost/subject/vu/mat_analize')
+    >>> browser.printQuery('id("location")//div[@class="title"]/text()')
+    vu
+
+The group:
+
+    >>> browser.open('http://localhost/group/moderators')
+    >>> browser.printQuery('id("location")//div[@class="title"]/text()')
+    vu
