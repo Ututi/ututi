@@ -6,7 +6,8 @@ from formencode import Schema, validators
 from routes import url_for
 from webhelpers import paginate
 
-from pylons import request, c
+from pylons import request, c, url
+from pylons.templating import render_mako_def
 from pylons.controllers.util import redirect_to, abort
 from pylons.decorators import validate
 from pylons.i18n import _
@@ -17,7 +18,10 @@ from ututi.lib.security import ActionProtector
 from ututi.lib.search import search_query
 
 from ututi.model.events import Event
+from ututi.model import Subject
+from ututi.model import LocationTag
 from ututi.model import meta, Email, File, Group, SearchItem
+from ututi.controllers.group import _filter_watched_subjects
 from ututi.controllers.search import SearchSubmit
 
 log = logging.getLogger(__name__)
@@ -108,9 +112,78 @@ class ProfileController(BaseController):
         meta.Session.commit()
         redirect_to(controller='profile', action='index')
 
+    @validate(schema=SearchSubmit, form='subjects', post_only = False, on_get = True)
     @ActionProtector("user")
     def subjects(self):
-        return ''
+        c.search_target = url(controller='profile', action='subjects')
+
+        #retrieve search parameters
+        c.text = self.form_result.get('text', '')
+
+        if 'tagsitem' in self.form_result or 'tags' in self.form_result:
+            c.tags = self.form_result.get('tagsitem', None)
+            if c.tags is None:
+                c.tags = self.form_result.get('tags', None).split(', ')
+        c.tags = ', '.join(filter(bool, c.tags))
+
+        sids = [s.id for s in c.user.watched_subjects]
+
+        search_params = {}
+        if c.text:
+            search_params['text'] = c.text
+        if c.tags:
+            search_params['tags'] = c.tags
+        search_params['obj_type'] = 'subject'
+
+        if search_params != {}:
+            c.results = paginate.Page(
+                search_query(extra=_filter_watched_subjects(sids), **search_params),
+                page=int(request.params.get('page', 1)),
+                items_per_page = 10,
+                **search_params)
+
+        c.watched_subjects = c.user.watched_subjects
+
+        return render('profile/subjects.mako')
+
+    def _getSubject(self):
+        location_id = request.GET['subject_location_id']
+        location = meta.Session.query(LocationTag).filter_by(id=location_id).one()
+        subject_id = request.GET['subject_id']
+        return Subject.get(location, subject_id)
+
+    def _watch_subject(self):
+        c.user.watchSubject(self._getSubject())
+        meta.Session.commit()
+
+    def _unwatch_subject(self):
+        c.user.ignoreSubject(self._getSubject())
+        meta.Session.commit()
+
+    @ActionProtector("user")
+    def watch_subject(self):
+        self._watch_subject()
+        redirect_to(request.referrer)
+
+    @ActionProtector("user")
+    def js_watch_subject(self):
+        self._watch_subject()
+        return render_mako_def('profile/subjects.mako',
+                               'subject_flash_message',
+                               subject=self._getSubject()) +\
+            render_mako_def('profile/subjects.mako',
+                            'watched_subject',
+                            subject=self._getSubject())
+
+    @ActionProtector("user")
+    def unwatch_subject(self):
+        self._unwatch_subject()
+        redirect_to(request.referrer)
+
+    @ActionProtector("user")
+    def js_unwatch_subject(self):
+        self._unwatch_subject()
+        return "OK"
 
     @ActionProtector("user")
     def welcome(self):

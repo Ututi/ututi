@@ -4,6 +4,7 @@ from datetime import date
 from os.path import splitext
 
 from pylons import c, config, request, url
+from pylons.templating import render_mako_def
 from pylons.controllers.util import redirect_to, abort
 from pylons.decorators import validate
 from pylons.i18n import _
@@ -349,9 +350,13 @@ class GroupController(GroupControllerBase, FileViewMixin):
     @ActionProtector("admin", "moderator")
     def js_watch_subject(self, group):
         self._watch_subject(group)
-        return "OK"
+        return render_mako_def('group/subjects.mako',
+                               'subject_flash_message',
+                               subject=self._getSubject()) +\
+            render_mako_def('group/subjects.mako',
+                            'watched_subject',
+                            subject=self._getSubject())
 
-    @validate(schema=SearchSubmit, form='subjects', post_only = False, on_get = True)
     @group_action
     @ActionProtector("admin", "moderator")
     def unwatch_subject(self, group):
