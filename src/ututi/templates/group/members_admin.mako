@@ -106,7 +106,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
       ${h.fmt_dt(member.user.last_seen)}
     </td>
     <td>
-      <form method="post" action="${url(controller='group', action='update_membership', id=c.group.group_id)}" class="autosubmit-form">
+      <form method="post" action="${url(controller='group', action='update_membership', id=c.group.group_id)}" class="autosubmit-form" id="update-membership-${member.user.id}">
         <div>
           <input type="hidden" name="user_id" value="${member.user.id}"/>
           <%
