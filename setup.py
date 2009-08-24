@@ -21,7 +21,8 @@ setup(
         "lxml",
         "nous.mailpost",
         "python_magic",
-        "PILwoTk"
+        "PILwoTk",
+        "Babel"
     ],
     package_dir={'': 'src'},
     packages=find_packages('src'),
