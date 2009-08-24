@@ -9,7 +9,7 @@ body {
   font-size: 87.5%;
   font-family: 'Trebuchet MS', Helvetica, sans-serif;
   color: #1a1a1a;
-  background: white url("../images/block_header_background.png") center 5px no-repeat;
+  background: white url("../images/block_header_background.png") center 5px repeat-x;
   padding-bottom: 5px;
 }
 
