@@ -5,11 +5,6 @@
 ${c.group.title}
 </%def>
 
-<%def name="head_tags()">
-${parent.head_tags()}
-${h.stylesheet_link('/stylesheets/group.css')|n}
-</%def>
-
 <h1>${_('Group members')}</h1>
 
 ${path_steps(2)}
