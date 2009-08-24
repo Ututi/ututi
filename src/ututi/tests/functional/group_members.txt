@@ -1,0 +1,104 @@
+Group members views
+===================
+    >>> from ututi.lib.mailer import mail_queue
+
+First of all let's log in;
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/')
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
+
+Let's find the group.
+
+    >>> browser.open('http://localhost/group/moderators')
+    >>> browser.getLink('Members').click()
+    >>> print browser.url
+    http://localhost/group/moderators/members
+
+Let's try and invite a new member to the group.
+
+    >>> browser.getControl('Enter emails of the people You would like to invite to the group.').value = 'user@ututi.lt'
+    >>> browser.getControl('Invite').click()
+    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
+    Close
+    Users invited.
+
+The user should be listed in the invited users table.
+    >>> browser.printQuery("//table[@class='group-invitations']/tr/td[@class='email']/text()")
+    user@ututi.lt
+
+The link to send another invitation should send another invitation email.
+
+    >>> browser.getLink('Send invitation again').click()
+    >>> len(mail_queue)
+    2
+
+There is also a table listing all the group's members:
+
+    >>> browser.printQuery("//table[@class='group-members']/tr/td/a/text()")
+    Adminas Adminovix
+
+    >>> mail_queue[:] = []
+
+We need another member in the group, so let's join as the invited user.
+
+    >>> browser2 = Browser()
+    >>> browser2.open('http://localhost/')
+    >>> form = browser2.getForm('login_form')
+    >>> form.getControl('Email').value = "user@ututi.lt"
+    >>> form.getControl('Password').value = "password"
+    >>> form.getControl('Login').click()
+
+The user should be presented with a flash message inviting him to join the group.
+    >>> browser2.printQuery("//div[@class='flash-message']/span/text()")
+    Adminas Adminovix has sent you an invitation to group Moderatoriai. Do You want to become a member of this group?
+
+Let's accept this invitation.
+
+    >>> browser2.getControl("Accept").click()
+    >>> browser2.printQuery("//div[@class='flash-message']/span/text()")
+    Close
+    Congratulations! You are now a member of the group 'Moderatoriai'
+
+    >>> browser2.getLink('Moderatoriai').click()
+    >>> browser2.getLink('Members').click()
+    >>> browser2.printQuery("//div[@class='user-logo-link']/div/a/text()")
+    Adminas Adminovix
+    Alternative user
+
+Now let's return to the admin session and see if we can set the role of the new user.
+
+    >>> browser.reload()
+    >>> browser.printQuery("//table[@class='group-members']/tr/td/a/text()")
+    Adminas Adminovix
+    Alternative user
+
+For kicks, let's try to make ourself a non-admin.
+    >>> form = browser.getForm(id='update-membership-1')
+    >>> form.getControl(name='role').value
+    ['administrator']
+    >>> form.getControl(name='role').value = ['member']
+    >>> form.getControl('Update').click()
+    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
+    Close
+    The group must have at least one administrator!
+
+And let's set the role of the other guy:
+
+    >>> form = browser.getForm(id='update-membership-2')
+    >>> form.getControl(name='role').value
+    ['member']
+    >>> form.getControl(name='role').value = ['administrator']
+    >>> form.getControl('Update').click()
+    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
+    Close
+    The status of the user Alternative user was updated.
+
+Now let's see if the view for the user has changed.
+
+    >>> browser2.reload()
+    >>> browser2.printQuery('//h2/text()')
+    Invite your group mates
+    Group members
