@@ -606,8 +606,8 @@ class PendingInvitation(object):
         user = User.get(email)
         if user is not None:
             self.user = user
-        elif email is not None:
-            self.email = email
+
+        self.email = email
 
     @classmethod
     def get(cls, hash):
