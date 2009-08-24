@@ -141,12 +141,16 @@ ul.bullets_large li {
 }
 
 #personal-box .personal-info {
-  border: 1px solid #ded8d8;
+  border: 0;
   margin-top: 5px;
+  margin: 0;
+  padding: 5px;
+  height: 60px;
+  width: 283px;
+  background: url("../images/borders/personal-box.png") 0 0 no-repeat;
 }
 .personal-logo {
   float: right;
-  width: 45px;
   height: 60px;
   margin: 0;
 }
@@ -157,7 +161,7 @@ ul.bullets_large li {
 }
 
 #personal-box div.personal-info {
-  clear: right;
+  float: right;
 }
 
 #personal-data div {
