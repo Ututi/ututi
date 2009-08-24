@@ -357,15 +357,16 @@ a.btn {
   background: white url("../images/button_small.png") left top no-repeat;
   display: inline-block;
   border: medium none;
-  padding: 0 0 0 5px;
+  padding: 0 0 0 10px;
 }
 
 span.btn input,
 a.btn span {
   background: white url("../images/button_small.png") right top no-repeat;
   border: medium none;
-  height: 20px;
-  padding: 0 5px 0 0;
+  height: 22px;
+  line-height: 22px;
+  padding: 0 10px 0 0;
   margin: 0;
   color: black;
   font-weight: normal;
