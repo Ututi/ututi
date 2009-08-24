@@ -12,6 +12,9 @@ from webhelpers.html.tags import stylesheet_link, javascript_link, image, link_t
 from webhelpers.html import HTML
 from webhelpers.html.tags import convert_boolean_attrs
 
+from datetime import datetime
+
+
 from webhelpers.pylonslib import Flash as _Flash
 flash = _Flash()
 
@@ -129,3 +132,9 @@ def selected_item(items):
 def marked_list(items):
     items[-1]['last_item'] = True
     return items
+
+def fmt_dt(dt):
+    """Format date and time for output."""
+    from babel import dates
+    fmt = "yyyy MMM dd, HH:mm"
+    return dates.format_datetime(dt, fmt)
