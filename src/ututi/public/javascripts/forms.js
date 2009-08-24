@@ -22,3 +22,13 @@ jQuery.fn.labelOver = function(overClass) {
  	}
  })
  }
+
+$(document).ready(function() {
+  $('form.autosubmit-form').each(function() {
+    $(this).find("span.btn").hide();
+    $(this).find("input, select").change(function() {
+      $(this).addClass("changed");
+      $(this).parents("form").submit();
+    })
+  })
+})

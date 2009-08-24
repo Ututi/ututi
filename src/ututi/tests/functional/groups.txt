@@ -173,5 +173,5 @@ And you can import group memberships using the admin interface too.
     ...                                       'group_members.csv')
     >>> form.getControl('Upload').click()
     >>> browser.open('http://localhost/group/exgroup/members')
-    >>> browser.printQuery("//div[@class='user-logo-link']/div/a/text()")
+    >>> browser.printQuery("//table[@class='group-members']/tr/td/a/text()")
     Adminas Adminovix

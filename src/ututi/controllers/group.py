@@ -29,8 +29,8 @@ from ututi.lib.base import BaseController, render
 from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator
 
 from ututi.model.events import Event
-from ututi.model import LocationTag
-from ututi.model import meta, Group, File, SimpleTag, Subject, ContentItem, PendingInvitation
+from ututi.model import LocationTag, User, GroupMember, GroupMembershipType
+from ututi.model import meta, Group, File, SimpleTag, Subject, ContentItem, PendingInvitation, PendingRequest
 from ututi.controllers.search import SearchSubmit
 from ututi.lib.security import is_root
 from ututi.lib.security import ActionProtector
@@ -118,6 +118,15 @@ class GroupInvitationActionForm(Schema):
     action = validators.OneOf(['accept', 'reject'])
     came_from = validators.URL(require_tld=False, )
 
+class GroupRequestActionForm(Schema):
+    allow_extra_fields = True
+    action = validators.OneOf(['confirm', 'deny'])
+    hash_code = validators.String(strip=True)
+
+class GroupMemberUpdateForm(Schema):
+    allow_extra_fields = True
+    role = validators.OneOf(['administrator', 'member'])
+    user_id = validators.Int()
 
 class GroupInviteForm(Schema):
     """A schema for validating group member invitations"""
@@ -421,7 +430,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
         c.breadcrumbs.append(self._actions('subjects'))
         return render('group/subjects.mako')
 
-    @validate(schema=GroupInviteForm, form='members')
+    @validate(schema=GroupInviteForm, form='members', post_only = False, on_get = True)
     @group_action
     @ActionProtector("member", "admin", "moderator")
     def invite_members(self, group):
@@ -429,9 +438,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
         if hasattr(self, 'form_result'):
             emails = self.form_result.get('emails', '').split()
             self._send_invitations(group, emails)
-            redirect_to(controller='group', action='invite_members_step', id=group.group_id)
-
-        return render('group/members_step.mako')
+        redirect_to(controller='group', action='members', id=group.group_id)
 
     @validate(schema=GroupInviteForm, form='invite_members_step')
     @group_action
@@ -489,3 +496,45 @@ class GroupController(GroupControllerBase, FileViewMixin):
                 redirect_to(url.encode('utf-8'))
         else:
             redirect_to(controller='group', action='group_home', id=group.group_id)
+
+    @validate(schema=GroupRequestActionForm)
+    @group_action
+    def request(self, group):
+        if hasattr(self, 'form_result'):
+            try:
+                request = meta.Session.query(PendingRequest).filter_by(hash=self.form_result.get('hash_code', '')).one()
+                if (self.form_result.get('action', 'deny') == 'confirm'):
+                    c.group.add_member(request.user)
+                    h.flash(_(u"New member %s added.") % request.user.fullname)
+                else:
+                    h.flash(_(u"Group membership denied to %s.") % request.user.fullname)
+                meta.Session.delete(request)
+                meta.Session.commit()
+            except NoResultFound:
+                h.flash(_("Error confirming membership request."))
+                pass
+        redirect_to(controller='group', action='members', id=c.group.group_id)
+
+    @validate(schema=GroupMemberUpdateForm)
+    @group_action
+    def update_membership(self, group):
+        if hasattr(self, 'form_result'):
+            user = User.get_byid(self.form_result.get('user_id', None))
+            membership = GroupMember.get(user, group)
+            if membership is not None:
+                role = self.form_result.get('role', 'member')
+                if role == 'member' and len(group.administrators) == 1:
+                    # possibly an administrator is being stripped of his privileges -
+                    # must check to see if there are any more admins
+                    h.flash(_('The group must have at least one administrator!'))
+                else:
+                    role = GroupMembershipType.get(role)
+                    if role is not None:
+                        membership.role = role
+                        meta.Session.commit()
+                        h.flash(_("The status of the user %s was updated.") % user.fullname)
+                    else:
+                        h.flash(_("Problem updating the status of the user."))
+            else:
+                h.flash(_("Problem updating the status of the user. Cannot find such user."))
+        redirect_to(controller="group", action="members", id=group.group_id)

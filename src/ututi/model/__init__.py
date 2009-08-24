@@ -11,7 +11,7 @@ from routes.util import url_for
 from pylons import url
 from random import randrange
 import pkg_resources
-from datetime import date
+from datetime import date, datetime
 
 from pylons import config
 
@@ -187,7 +187,7 @@ def setup_orm(engine):
     orm.mapper(GroupMember,
                group_members_table,
                properties = {'user': relation(User, backref='memberships'),
-                             'group': relation(Group, backref='members'),
+                             'group': relation(Group, backref=backref('members')),
                              'role': relation(GroupMembershipType)})
 
 
@@ -510,6 +510,12 @@ class Group(ContentItem, FolderMixin):
         admins = [membership.user for membership in self.members if membership.role == admin_type]
         return user in admins
 
+    @property
+    def administrators(self):
+        """List of all the administrators of the group."""
+        admin_type = GroupMembershipType.get('administrator')
+        return [membership.user for membership in self.members if membership.role == admin_type]
+
     def add_member(self, user, admin=False):
         if not self.is_member(user):
             membership = GroupMember(user, self, admin)
@@ -521,8 +527,12 @@ class Group(ContentItem, FolderMixin):
     def invite_user(self, email, author):
         user = User.get(email)
         if user is None or not self.is_member(user):
-            invitation = PendingInvitation(email, author=author, group=self)
-            meta.Session.add(invitation)
+            try:
+                invitation = meta.Session.query(PendingInvitation).filter_by(email=email, group=self).one()
+                invitation.created = datetime.today()
+            except NoResultFound:
+                invitation = PendingInvitation(email, author=author, group=self)
+                meta.Session.add(invitation)
             group_invitation_email(invitation, email)
             return invitation
         else:
@@ -560,6 +570,17 @@ class GroupMember(object):
         self.role = role_member
         if admin:
             self.role = role_admin
+
+    @classmethod
+    def get(cls, user, group):
+        try:
+            return meta.Session.query(cls).filter(GroupMember.user == user).filter(GroupMember.group == group).one()
+        except NoResultFound:
+            return None
+
+    @property
+    def is_admin(self):
+        return self.role == GroupMembershipType.get('administrator')
 
 
 class GroupMembershipType(object):

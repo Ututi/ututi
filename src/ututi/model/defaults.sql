@@ -559,18 +559,18 @@ CREATE TRIGGER group_subject_event_trigger AFTER INSERT OR DELETE ON group_watch
 
 /* Table for storing invitations to a group */
 CREATE TABLE group_invitations (
-       created date not null default (now() at time zone 'UTC'),
+       created timestamp not null default (now() at time zone 'UTC'),
        email varchar(320) default null,
        user_id int8 references users(id) default null,
        group_id int8 not null references groups(id),
        author_id int8 not null references users(id),
        hash varchar(32) not null unique,
-       primary key (hash));;
-
+       primary key (hash),
+       unique(group_id, email));;
 
 /* Table for storing requests to join a group */
 CREATE TABLE group_requests (
-       created date not null default (now() at time zone 'UTC'),
+       created timestamp not null default (now() at time zone 'UTC'),
        user_id int8 references users(id) default null,
        group_id int8 not null references groups(id),
        hash char(8) not null unique,

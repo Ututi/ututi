@@ -57,6 +57,9 @@ def make_map():
                 controller='groupforum',
                 action='reply')
 
+    #act on group membership request
+    map.connect('/group/{id}/request/{hash_code}/{do}', controller='group', action='request')
+
     map.connect('/group/{id}/{action}', controller='group')
     map.connect('/group/{id}/logo/{width}/{height}', controller='group', action='logo')
     map.connect('/group/{id}/logo/{width}', controller='group', action='logo')
