@@ -777,12 +777,15 @@ class LocationTag(Tag):
             location = location.parent
         return list(reversed(path))
 
-    def hierarchy(self):
-        """Return a list of titles of all the parents of the tag, including the tag itself."""
+    def hierarchy(self, full=False):
+        """Return a list of titles (or the full tags) of all the parents of the tag, including the tag itself."""
         location = self
         path = []
         while location:
-            path.append(location.title)
+            if full:
+                path.append(location)
+            else:
+                path.append(location.title)
             location = location.parent
         return list(reversed(path))
 
