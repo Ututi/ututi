@@ -140,6 +140,7 @@ def group_action(method):
         if group is None:
             abort(404)
         c.security_context = group
+        c.object_location = group.location
         c.group = group
         c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
         return method(self, group)

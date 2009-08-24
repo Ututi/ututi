@@ -42,6 +42,7 @@ def page_action(method):
 
         c.page = page
         c.subject = subject
+        c.object_location = subject.location
         return method(self, subject, page)
     return _page_action
 

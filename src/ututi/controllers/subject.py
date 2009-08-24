@@ -21,6 +21,17 @@ from ututi.lib.validators import LocationTagsValidator
 
 log = logging.getLogger(__name__)
 
+def subject_action(method):
+    def _subject_action(self, id, tags):
+        location = LocationTag.get(tags)
+        subject = Subject.get(location, id)
+
+        if subject is None:
+            abort(404)
+        c.object_location = subject.location
+        c.subject = subject
+        return method(self, subject)
+    return _subject_action
 
 class SubjectIdValidator(validators.FormValidator):
 
@@ -75,15 +86,10 @@ class SubjectController(BaseController, FileViewMixin):
         c.subjects = meta.Session.query(Subject).all()
         return render('subjects.mako')
 
-    def home(self, id, tags):
-        location = LocationTag.get(tags)
-        subject = Subject.get(location, id)
-        if subject is None:
-            abort(404)
-
+    @subject_action
+    def home(self, subject):
         c.breadcrumbs = [{'link': subject.url(),
                               'title': subject.title}]
-        c.subject = subject
         return render('subject/home.mako')
 
     @ActionProtector("user")
@@ -121,9 +127,8 @@ class SubjectController(BaseController, FileViewMixin):
                     tags=subj.location_path)
 
     @ActionProtector("user")
-    def edit(self, id, tags):
-        location = LocationTag.get(tags)
-        c.subject = Subject.get(location, id)
+    @subject_action
+    def edit(self, subject):
         c.breadcrumbs = [{'link': c.subject.url(),
                               'title': c.subject.title}]
         c.subject.tags_list = ', '.join([tag.title for tag in c.subject.tags])
@@ -131,9 +136,8 @@ class SubjectController(BaseController, FileViewMixin):
 
     @validate(schema=SubjectForm, form='edit')
     @ActionProtector("user")
-    def update(self, id, tags):
-        location = LocationTag.get(tags)
-        subject = Subject.get(location, id)
+    @subject_action
+    def update(self, subject):
 
         subject.title = self.form_result['title']
         subject.lecturer = self.form_result['lecturer']
@@ -156,25 +160,16 @@ class SubjectController(BaseController, FileViewMixin):
                     tags=subject.location_path)
 
     @ActionProtector("user")
-    def upload_file(self, id, tags):
-        location = LocationTag.get(tags)
-        subject = Subject.get(location, id)
-        if subject is None:
-            abort(404)
+    @subject_action
+    def upload_file(self, subject):
         return self._upload_file(subject)
 
     @ActionProtector("user")
-    def create_folder(self, id, tags):
-        location = LocationTag.get(tags)
-        subject = Subject.get(location, id)
-        if subject is None:
-            abort(404)
+    @subject_action
+    def create_folder(self, subject):
         return self._create_folder(subject)
 
     @ActionProtector("moderator", "root")
-    def delete_folder(self, id, tags):
-        location = LocationTag.get(tags)
-        subject = Subject.get(location, id)
-        if subject is None:
-            abort(404)
+    @subject_action
+    def delete_folder(self, subject):
         return self._delete_folder(subject)
