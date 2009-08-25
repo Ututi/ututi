@@ -123,6 +123,9 @@ def make_map():
     # CUSTOM ROUTES HERE
     map.connect('/', controller='home')
     map.connect('/register', controller='home', action='register')
+    map.connect('/password', controller='home', action='pswrecovery')
+    map.connect('/recovery/{key}', controller='home', action='recovery')
+    map.connect('/recovery', controller='home', action='recovery')
     map.connect('/register/{hash}', controller='home', action='register')
 
     map.connect('/got_mail', controller='receivemail', action='index')

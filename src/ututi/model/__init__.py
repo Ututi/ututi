@@ -426,6 +426,9 @@ class User(object):
 
     def __init__(self, fullname, password, gen_password=True):
         self.fullname = fullname
+        self.update_password(password, gen_password)
+
+    def update_password(self, password, gen_password=True):
         self.password = password
         if gen_password:
             self.password = generate_password(password)

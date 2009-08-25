@@ -41,3 +41,11 @@ def group_invitation_email(invitation, email):
                       extra_vars={'invitation': invitation})
 
         send_email(config['ututi_email_from'], email, _('Ututi group invitation'), text)
+
+
+def email_password_reset(user, email):
+    """Send an email to the user with a link to reset his password."""
+    text = render('/emails/password_recovery.mako',
+                  extra_vars={'user' : user})
+
+    send_email(config['ututi_email_from'], email, _('Ututi password recovery'), text)

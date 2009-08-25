@@ -57,7 +57,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
     <span class="btn"><input class="submit small" type="submit" name="join" value="Login" /></span>
   </div>
   <div class="form-field">
-    <a class="small-link small XXX" href="#">Forgotten password?</a>
+    <a class="small-link small" href="${url(controller='home', action='pswrecovery')}">Forgotten password?</a>
   </div>
 </form>
 <script type="text/javascript">

@@ -17,6 +17,7 @@ create table users (
        fullname varchar(100),
        password char(36),
        last_seen timestamp not null default (now() at time zone 'UTC'),
+       recovery_key varchar(10) default null,
        primary key (id));;
 
 /* Create first user=admin and password=asdasd */
