@@ -1,25 +1,19 @@
 <%inherit file="/base.mako" />
 
-<%def name="head_tags()">
-${h.stylesheet_link('/stylesheets/anonymous.css')|n}
+<%namespace file="/search/index.mako" import="search_form"/>
 
+<%def name="head_tags()">
+${parent.head_tags()}
+${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
+${h.stylesheet_link('/stylesheets/anonymous.css')|n}
 </%def>
 
-<div id="block-left">
-
-  <div class="sidebar-block">
-    <div class="rounded-header">
-      <div class="rounded-right">
-        <h3>${_('Become a part of Ututi')}</h3>
-      </div>
-    </div>
-    <div class="content">
-<!--
-      <ul class="horizontal-menu">
-        <li class="active"><a href="#" class="larger">${_('New account')}</a></li>
-        <li><a href="#" class="larger">${_('OpenID')}</a></li>
-      </ul>
--->
+<%def name="portlets()">
+<div id="sidebar">
+  <%self:portlet id="ututi_join_portlet">
+    <%def name="header()">
+      ${_('Become a part of Ututi')}
+    </%def>
       <form id="registration_form" method="post" action="${url('/register')}">
         <div class="form-field">
           <input class="line" type="text" id="fullname" name="fullname" size="40"/>
@@ -43,8 +37,11 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
           </span>
         </div>
       </form>
-    </div>
-  </div>
+      <br style="clear: right;" />
+  </%self:portlet>
+</div>
+</%def>
+
 
 
   <h1>${_('UTUTI - student information online')}</h1>
@@ -65,21 +62,8 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
 
   <div id="frontpage-search">
     <h1>${_('Ututi search')}</h1>
-    <ul class="horizontal-menu larger">
-      <li class="active">${_('Subjects')}</li>
-      <li>${_('Groups')}</li>
-      <li>${_('Answers')}</li>
-      <li>${_('Everything')}</li>
-    </ul>
-    <form id="frontpage-search-form" method="post" action="#">
-      <div class="form-field">
-        <label for="search-text" style="display: none;">${_('Search text')}</label>
-        <input class="line large" type="text" name="search-text" id="search-text"/>
-        <input class="submit" type="image" src="/images/search.png" name="search" value="Search"/>
-      </div>
-    </form>
+
+    ${search_form()}
 
   </div>
-
-</div>
 

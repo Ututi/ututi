@@ -5,18 +5,13 @@ ul#ututi_info li {
 }
 
 /* removing conventional sidebars */
-#page-content {
-  margin-right: 0 !important;
+#content .inside {
+  margin-right: 350px !important;
 }
 
 /* registration block */
 .sidebar-block {
-  float: right;
-  width: 400px;
-}
-
-.sidebar-block .rounded-header h3 {
-  color: white;
+  width: 350px;
 }
 
 .sidebar-block .btn {
@@ -27,17 +22,6 @@ ul#ututi_info li {
   width: 200px;
   font-size: 0.8em;
   font-weight: normal;
-}
-
-/* ututi search area */
-#frontpage-search {
-  clear: both;
-  border-top: 1px solid #bab9b2;
-}
-
-#frontpage-search-form .form-field input,
-#frontpage-search-form .form-field label {
-  float: left;
 }
 
 /* login form */
