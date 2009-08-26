@@ -45,6 +45,18 @@ Tests for logging in, logging out, access denied and all related things
 
     >>> browser.getLink('Log out').click()
 
+
+    >>> browser.open('http://localhost/search')
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
+
+    >>> browser.url
+    'http://localhost/search'
+
+    >>> browser.getLink('Log out').click()
+
     >>> form = browser.getForm('login_form')
     >>> form.getControl('Email').value = "user@ututi.lt"
     >>> form.getControl('Password').value = "password"

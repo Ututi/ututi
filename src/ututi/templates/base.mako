@@ -41,9 +41,7 @@ ${_('student information online')}
 %else:
 ${h.javascript_link('/javascripts/forms.js')|n}
 <form method="post" id="login_form" action="${url('/login')}">
-  %if request.params.get('came_from'):
-  <input type="hidden" name="came_from" value="${request.params.get('came_from')}" />
-  %endif
+  <input type="hidden" name="came_from" value="${request.params.get('came_from', request.url)}" />
 
   <div class="form-field overlay">
     % if request.params.get('login'):
