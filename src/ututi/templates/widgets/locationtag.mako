@@ -36,7 +36,7 @@ ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
       matchCase: false,
       matchSubset: false,
       matchContains: false,
-      mustMatch: true,
+      mustMatch: false,
       selectFirst: true,
       formatItem: function(data,i,value,result){
         return data.title;
