@@ -68,14 +68,14 @@ These actions should have left an event trail on the group home page:
     <ul id="event_list">
       <li>
       Group <a href="/group/moderators">Moderatoriai</a> stopped watching subject <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a>
-        <span class="event_time">(... seconds ago)</span>
+        <span class="event_time">(...seconds ago)</span>
       </li>
       <li>
       Group <a href="/group/moderators">Moderatoriai</a> started watching subject <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a>
-        <span class="event_time">(... seconds ago)</span>
+        <span class="event_time">(...seconds ago)</span>
       </li>
       <li>
       Member <a href="/user/1">Adminas Adminovix</a> joined the group <a href="/group/moderators">Moderatoriai</a>
-        <span class="event_time">(... second ago)</span>
+        <span class="event_time">(...second ago)</span>
       </li>
     </ul>
