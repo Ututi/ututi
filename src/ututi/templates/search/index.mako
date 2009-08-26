@@ -12,39 +12,63 @@ ${_('Search')}
 </%def>
 
 <%def name="search_form(text='', obj_type='*', tags='', parts=['obj_type', 'text', 'tags'], target=None)">
+${h.javascript_link('/javascripts/js-alternatives.js')|n}
+${h.javascript_link('/javascripts/search.js')|n}
 <%
    if target is None:
        target = url(controller='search', action='index')
 %>
-<div id="search-controls">
+<div class="search-controls">
   <form method="post" action="${target}" id="search_form">
-    <div class="form-field">
-      %if 'obj_type' in parts:
-      <select name="obj_type">
-        %for value, title in [(u'*', _('Everywhere')), (u'group', _('Groups')), (u'subject', _('Subjects')), (u'page', _('Pages'))]:
-        %if value == obj_type:
-        <option value="${value}" selected="selected">${title}</option>
-        %else:
-        <option value="${value}">${title}</option>
-        %endif
+    %if 'obj_type' in parts:
+    <%
+       types = [('*', _('Everywhere')), ('group', _('Groups')), ('subject', _('Subjects'))]
+    %>
+    <div class="search-type js-alternatives">
+      <div class="js">
+        %for value, title in types:
+          <%
+             cls = value == obj_type and 'active' or ''
+             id = value == '*' and 'any' or value
+          %>
+          <div id="search-type-${id}" class="search-type-item ${cls}">${title}</div>
         %endfor
-      </select>
-      %endif
-      %if 'text' in parts:
-      <input type="text" name="text" id="text" value="${text}" size="60"/>
-      %endif
-    </div>
-    %if 'tags' in parts:
-    <div id="search-tags" class="form-field">
-      <label for="tags">${_('Filter by tags')}</label>
-      ${tags_widget(tags, all_tags=True)}
+      </div>
+      <div class="non-js">
+        <select name="obj_type">
+          %for value, title in types:
+            %if value == obj_type:
+              <option value="${value}" selected="selected">${title}</option>
+            %else:
+              <option value="${value}">${title}</option>
+            %endif
+          %endfor
+        </select>
+      </div>
     </div>
     %endif
-    <div class="form-field">
-      <span class="btn">
-        <input type="submit" value="${_('Search')}"/>
-      </span>
+    <div class="search-text-submit">
+      %if 'text' in parts:
+        <div class="search-text">
+          <div>
+            <input type="text" name="text" id="text" value="${text}" size="60"/>
+          </div>
+        </div>
+      %endif
+      <div class="search-submit">
+        <span class="btn-large">
+          <input type="submit" value="${_('Search')}"/>
+        </span>
+      </div>
+      <br style="clear: both;"/>
     </div>
+    %if 'tags' in parts:
+      <div class="search-tags">
+          <label for="tags">${_('Tags')}</label>
+          ${tags_widget(tags, all_tags=True)}
+      </div>
+    %endif
+
   </form>
 </div>
 </%def>

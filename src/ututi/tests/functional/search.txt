@@ -16,7 +16,7 @@ Let's fill out the search form.
 
 Let's see if tags work too.
     >>> form = browser.getForm('search_form')
-    >>> form.getControl('Filter by tags').value = 'vu'
+    >>> form.getControl('Tags').value = 'vu'
     >>> form.getControl('Search').click()
 
     >>> browser.printQuery("id('search-results')//a/text()")

@@ -372,6 +372,28 @@ a.btn span {
   font-weight: normal;
   display: inline-block;
 }
+
+span.btn-large,
+a.btn-large {
+  background: white url("../images/button_large.png") left top no-repeat;
+  display: inline-block;
+  border: medium none;
+  padding: 0 0 0 10px;
+}
+
+span.btn-large input,
+a.btn-large span {
+  background: white url("../images/button_large.png") right top no-repeat;
+  border: medium none;
+  height: 28px;
+  line-height: 28px;
+  padding: 0 10px 0 0;
+  margin: 0;
+  color: black;
+  font-weight: normal;
+  display: inline-block;
+}
+
 /* end buttons */
 
 /* special links */
@@ -679,6 +701,82 @@ span.tag {
   color: black;
 }
 
+/* search form */
+#page-content .search-controls {
+  width: 400px;
+}
+
+.search-controls .search-text {
+  width: 80%;
+  float: left;
+  height: 30px;
+  background: url("../images/borders/search-text.png") left center no-repeat;
+  padding-left: 5px;
+}
+
+.search-controls .search-text div {
+  height: 28px;
+  padding: 1px 0;
+  background: url("../images/borders/search-text.png") right center no-repeat;
+  padding-right: 5px;
+  line-height: 28px;
+}
+
+.search-controls .search-text input {
+  width: 100%;
+  font-size: 1.2em;
+  border: 0;
+}
+
+.search-controls .search-submit {
+  float: right;
+}
+
+.search-type {
+  margin: 0;
+  padding: 0;
+  padding-left: 20px;
+  height: 35px;
+  overflow: auto;
+  z-index: 100;
+  position: relative;
+  top: 1px;
+}
+
+.search-type .search-type-item {
+  float: left;
+  padding: 0 5px;
+  margin: 0;
+  font-size: 1.2em;
+  height: 35px;
+  line-height: 35px;
+  background: transparent url("../images/borders/search-type.png") bottom center repeat-x;
+  color: #d45500;
+  cursor: pointer;
+}
+
+.search-type .active {
+  color: #333;
+  background: transparent url("../images/borders/search-type-active.png") bottom center no-repeat;
+  z-index: 1000;
+}
+
+.search-text-submit {
+  z-index: -100;
+}
+
+.search-tags {
+  margin-top: 5px;
+}
+
+.search-tags label {
+  text-transform: uppercase;
+  color: #888;
+  font-size: 1.2em;
+  padding-left: 25px;
+  background: transparent url("../images/details/icon_tag.png") left center no-repeat;
+}
+
 /* search results */
 div#search-results div.search-item {
   margin: 0.5em 0;
@@ -713,4 +811,9 @@ div.user-logo-link img {
 
 div.user-logo-link div {
   text-align: center;
+}
+
+/* js alternatives */
+.js {
+    display: none;
 }

@@ -23,13 +23,14 @@ ul.autobox-list li.active {
 
 /* autobx-hldr is the selected list */
 ul.autobox-hldr {
-  width: 500px;
+  width: 100%;
   border: 1px solid #999;
   overflow: hidden;
   height: auto !important;
   height: 1%;
   padding: 4px 5px 0;
   font: 11px "Lucida Grande", "Verdana";
+  margin: 0;
 }
 ul.autobox-hldr li {
   float: left;
