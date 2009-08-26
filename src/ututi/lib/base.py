@@ -30,6 +30,7 @@ class BaseController(WSGIController):
             c.user.last_seen = datetime.utcnow()
             meta.Session.commit()
             meta.Session.execute("SET ututi.active_user TO %d" % c.user.id)
+            environ['repoze.who.identity'] = c.user.id
 
         try:
             return WSGIController.__call__(self, environ, start_response)

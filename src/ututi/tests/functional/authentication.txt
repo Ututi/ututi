@@ -63,5 +63,6 @@ Tests for logging in, logging out, access denied and all related things
     >>> form.getControl('Login').click()
 
     >>> browser.open('http://localhost/group/moderators')
-    >>> browser.url
-    'http://localhost/welcome'
+    Traceback (most recent call last):
+    ...
+    HTTPError: HTTP Error 403: Forbidden
