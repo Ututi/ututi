@@ -365,8 +365,8 @@ a.btn span {
   background: white url("../images/button_small.png") right top no-repeat;
   border: medium none;
   height: 22px;
-  line-height: 22px;
-  padding: 0 10px 0 0;
+  line-height: 20px;
+  padding: 0 10px 2px 0;
   margin: 0;
   color: black;
   font-weight: normal;
@@ -385,9 +385,9 @@ span.btn-large input,
 a.btn-large span {
   background: white url("../images/button_large.png") right top no-repeat;
   border: medium none;
-  height: 28px;
+  height: 30px;
   line-height: 28px;
-  padding: 0 10px 0 0;
+  padding: 0 10px 2px 0;
   margin: 0;
   color: black;
   font-weight: normal;
