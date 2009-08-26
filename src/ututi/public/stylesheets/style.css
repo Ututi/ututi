@@ -726,6 +726,7 @@ span.tag {
   width: 100%;
   font-size: 1.2em;
   border: 0;
+  background: transparent url("../images/details/icon_eyes.png") right center no-repeat;
 }
 
 .search-controls .search-submit {
