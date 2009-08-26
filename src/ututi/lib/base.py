@@ -10,7 +10,7 @@ from pylons.controllers import WSGIController
 from pylons.templating import render_mako as render
 from pylons import c
 
-from ututi.lib import current_user
+from ututi.lib.security import current_user
 from ututi.model import meta
 
 

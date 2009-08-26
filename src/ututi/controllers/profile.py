@@ -8,7 +8,7 @@ from webhelpers import paginate
 
 from pylons import request, c, url
 from pylons.templating import render_mako_def
-from pylons.controllers.util import redirect_to, abort
+from pylons.controllers.util import redirect_to
 from pylons.decorators import validate
 from pylons.i18n import _
 

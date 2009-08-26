@@ -1,6 +1,15 @@
-from pylons import c
+from pylons import response, url, request, session, c
+from pylons.controllers.util import redirect_to
+
 from repoze.what.predicates import NotAuthorizedError
 from repoze.what.plugins.pylonshq.protectors import ActionProtector as BaseActionProtector
+
+
+def current_user():
+    from ututi.model import User
+    login = session.get('login', '')
+    password = session.get('password', '')
+    return User.get(login)
 
 
 def is_root(user, context=None):
@@ -61,6 +70,11 @@ class CrowdPredicate(object):
 
 
 class ActionProtector(BaseActionProtector):
+
+    def default_denial_handler(self, reason):
+        if response.status_int == 401:
+            redirect_to(url(controller='home', action='index',
+                            came_from=request.url))
 
     def __init__(self, *crowds, **kwargs):
         self.predicate = CrowdPredicate(*crowds)

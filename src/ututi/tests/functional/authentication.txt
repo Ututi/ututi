@@ -1,0 +1,55 @@
+Tests for logging in, logging out, access denied and all related things
+=======================================================================
+
+    >>> browser = Browser()
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
+
+    >>> browser.url
+    'http://localhost/welcome'
+
+    >>> browser.getLink('Log out').click()
+    >>> browser.url
+    'http://localhost/'
+
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Password').value = "asd"
+    >>> form.getControl('Login').click()
+
+    >>> browser.url
+    'http://localhost/login'
+
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Email').value
+    'admin@ututi.lt'
+
+    >>> 'Wrong password or username!' in browser.contents
+    True
+
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
+
+    >>> browser.getLink('Log out').click()
+
+    >>> browser.open('http://localhost/group/moderators')
+    >>> browser.url
+    'http://localhost/?came_from=http%3A%2F%2Flocalhost%2Fgroup%2Fmoderators'
+
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
+
+    >>> browser.getLink('Log out').click()
+
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Email').value = "user@ututi.lt"
+    >>> form.getControl('Password').value = "password"
+    >>> form.getControl('Login').click()
+
+    >>> browser.open('http://localhost/group/moderators')
+    >>> browser.url
+    'http://localhost/welcome'

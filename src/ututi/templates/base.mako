@@ -40,14 +40,17 @@ ${_('student information online')}
 </div>
 %else:
 ${h.javascript_link('/javascripts/forms.js')|n}
-<form method="post" id="login_form" action="${url('/dologin')}">
-  %if request.GET.get('came_from'):
-  <input type="hidden" name="came_from" value="${request.GET.get('came_from')}" />
+<form method="post" id="login_form" action="${url('/login')}">
+  %if request.params.get('came_from'):
+  <input type="hidden" name="came_from" value="${request.params.get('came_from')}" />
   %endif
 
   <div class="form-field overlay">
+    % if request.params.get('login'):
+    <span class="error">${_('Wrong password or username!')}</span>
+    % endif
     <label for="login" class="small">${_('Email')}</label>
-    <input type="text" size="20" id="login" name="login" class="small"/>
+    <input type="text" size="20" id="login" name="login" class="small" value="${request.params.get('login')}" />
   </div>
   <div class="form-field overlay">
     <label for="password" class="small">${_('Password')}</label>
@@ -288,6 +291,5 @@ ${h.javascript_link('/javascripts/forms.js')|n}
 
       </div>
     </div>
-
   </body>
 </html>

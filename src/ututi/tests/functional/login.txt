@@ -7,7 +7,6 @@ user. Let's try logging in as him.
 If user is not logged in login form is shown. Let's fill it in:
 
     >>> browser = Browser()
-    >>> browser.open('http://localhost/')
     >>> form = browser.getForm('login_form')
     >>> form.getControl('Email').value = "admin@ututi.lt"
     >>> form.getControl('Password').value = "asdasd"
@@ -33,7 +32,7 @@ As we have successfully logged in let's logout and make some typos:
 
     >>> browser.getLink('Log out').click()
     >>> browser.url
-    'http://localhost/?came_from=http%3A%2F%2Flocalhost%2Fdologin'
+    'http://localhost/'
 
 If we enter the username wrong - we get redirected back to the login
 form, but not logged in:
@@ -44,7 +43,7 @@ form, but not logged in:
     >>> form.getControl('Login').click()
 
     >>> browser.url
-    'http://localhost/'
+    'http://localhost/login'
 
 Let's enter the password wrong:
 
@@ -54,6 +53,6 @@ Let's enter the password wrong:
     >>> form.getControl('Login').click()
 
     >>> browser.url
-    'http://localhost/'
+    'http://localhost/login'
 
 Still permission is denied.

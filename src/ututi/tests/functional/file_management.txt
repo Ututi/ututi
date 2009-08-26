@@ -3,7 +3,7 @@ Tests for ajax file management views
 
 File upload:
 
-    >>> res = app.post("/dologin",
+    >>> res = app.post("/login",
     ...                params={'login': 'admin@ututi.lt', 'password': 'asdasd'})
 
     >>> from textwrap import dedent

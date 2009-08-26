@@ -5,7 +5,7 @@ import string
 from routes.util import redirect_to
 from formencode import Schema, validators, Invalid, All
 
-from pylons import request, response, c
+from pylons import request, response, c, url, session
 from pylons.decorators import validate
 from pylons.controllers.util import redirect_to, abort
 from pylons.i18n import _
@@ -83,12 +83,8 @@ class RegistrationForm(Schema):
 
 
 def sign_in_user(email):
-     identity = {'repoze.who.userid': email}
-     headers = request.environ['repoze.who.plugins']['auth_tkt'].remember(
-          request.environ,
-          identity)
-     for k, v in headers:
-          response.headers.add(k, v)
+     session['login'] = email
+     session.save()
 
 
 class HomeController(BaseController):
@@ -99,6 +95,27 @@ class HomeController(BaseController):
           else:
                return render('/anonymous_index.mako')
 
+     def login(self):
+          email = request.POST.get('login')
+          password = request.POST.get('password')
+          destination = request.params.get('came_from',
+                                           url(controller='profile',
+                                               action='home'))
+          user = None
+          if password is not None:
+               user = User.authenticate(email, password.encode('utf-8'))
+
+          if user is not None:
+               sign_in_user(email)
+               redirect_to(str(destination))
+
+          return render('/anonymous_index.mako')
+
+     def logout(self):
+          if 'login' in session:
+               del session['login']
+          session.save()
+          redirect_to(controller='home', action='index')
 
      @validate(schema=RegistrationForm(), form='register')
      def register(self, hash=None):

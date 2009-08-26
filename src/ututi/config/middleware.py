@@ -15,7 +15,6 @@ import zope.configuration.config
 from ututi.model import meta, setup_orm
 from ututi.grok.grokker import do_grok
 from ututi.config.environment import load_environment
-from repoze.who.config import make_middleware_with_config as make_who_with_config
 
 
 def grok_app():
@@ -93,6 +92,4 @@ def make_app(global_conf, full_stack=True, static_files=True, **app_conf):
         static_app = StaticURLParser(config['pylons.paths']['static_files'])
         app = Cascade([static_app, app])
 
-    return make_who_with_config(app,
-                                global_conf,
-                                app_conf['who.config_file'])
+    return app

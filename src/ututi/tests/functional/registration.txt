@@ -67,7 +67,7 @@ scenarios:
     >>> browser.open('http://localhost/')
     >>> browser.getLink('Log out').click()
     >>> browser.url
-    'http://localhost/?came_from=http%3A%2F%2Flocalhost%2F'
+    'http://localhost/'
 
 If we forget to enter the username, we get returned to the registration form, but an error
 message is shown:
