@@ -12,7 +12,6 @@ setup(
         "SQLAlchemy",
         "grokcore.component",
         "z3c.testsetup",
-        "repoze.who",
         "repoze.what-pylons",
         "psycopg2",
         "formencode",
