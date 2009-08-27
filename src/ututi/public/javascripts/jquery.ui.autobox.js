@@ -76,8 +76,10 @@
 
   function addBox(input, text, name){
     var ii = $('<input type="hidden"></input>');ii.attr('name', name+'item-'+count++);ii.val(text);
-    var li=$('<li class="bit-box"></li>').attr('id', 'bit-' + count).text(text);
-    li.append($('<a href="#" class="closebutton"></a>')
+    var li=$('<li class="bit-box"></li>').attr('id', 'bit-' + count)
+    var inside = $('<div></div>').text(text);
+    console.log(li);
+    inside.append($('<a href="#" class="closebutton"></a>')
           .bind('click', function(e) {
 
               //remove the item from the hidden input too
@@ -89,8 +91,10 @@
               e.preventDefault();
           }))
       .append(ii);
+    li.append(inside);
     input.parent().before(li);
     input.val('');
+
     /* storing the string in the original input too */
     if (original_input.val() == '') {
       original_input.val(text);
