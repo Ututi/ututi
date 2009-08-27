@@ -24,9 +24,10 @@ screen:
     Browse subjects
     Review and edit your profile
 
-    >>> browser.getControl(name='location-0').value = 'vu'
-    >>> browser.getControl(name='year').value = ['2009']
-    >>> browser.getControl('Search').click()
+    >>> form = browser.getForm(id="findgroup-form")
+    >>> form.getControl(name='location-0').value = 'vu'
+    >>> form.getControl(name='year').value = ['2009']
+    >>> form.getControl('Search').click()
     >>> browser.printQuery("id('search-results')//a/text()")
     Moderatoriai
 
