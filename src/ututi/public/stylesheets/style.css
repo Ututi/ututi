@@ -778,6 +778,44 @@ span.tag {
   background: transparent url("../images/details/icon_tag.png") left center no-repeat;
 }
 
+/* search portlet */
+#search_portlet .rounded-header {
+  display: none;
+}
+
+#search_portlet .content {
+  border: 0;
+}
+
+#search_portlet .search-text {
+  width: 180px;
+  height: 20px;
+  background: url("../images/borders/input-small.png") left center no-repeat;
+  line-height: 20px;
+}
+
+#search_portlet .search-text div {
+  height: 18px;
+  padding: 1px 0;
+  background: url("../images/borders/input-small.png") right center no-repeat;
+  padding-right: 5px;
+  line-height: 18px;
+}
+
+#search_portlet .search-text input {
+  width: 100%;
+  font-size: 1em;
+  border: 0;
+  background: transparent none;
+}
+
+
+#search_portlet .autobox-hldr {
+  width: 270px;
+}
+
+/* end search portlet */
+
 /* search results */
 div#search-results div.search-item {
   margin: 0.5em 0;

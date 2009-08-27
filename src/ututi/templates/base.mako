@@ -70,19 +70,6 @@ ${h.javascript_link('/javascripts/forms.js')|n}
 <%def name="portlets()">
 </%def>
 
-<%def name="portlet(id, portlet_class='')">
-<div class="sidebar-block ${portlet_class}" id="${id}">
-  <div class="rounded-header">
-    <div class="rounded-right">
-      <h3 id="${id + '_header'}">${caller.header()}</h3>
-    </div>
-  </div>
-  <div class="content" id="${id + '_content'}">
-    ${caller.body()}
-  </div>
-</div>
-</%def>
-
 <%def name="breadcrumbs(breadcrumbs)">
 <div id="breadcrumb-container">
   %if breadcrumbs:
@@ -173,6 +160,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
     ${h.javascript_link('/javascripts/jquery-1.3.2.min.js')|n}
     ${h.javascript_link('/javascripts/ajaxupload.3.5.js')|n}
     ${h.stylesheet_link('/stylesheets/style.css')|n}
+    ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
     ${h.javascript_link('/javascripts/expand.js')|n}
     ${h.javascript_link('/javascripts/hide_parent.js')|n}
     <!-- Load TinyMCE -->
