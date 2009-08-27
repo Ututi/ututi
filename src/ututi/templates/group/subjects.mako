@@ -78,7 +78,7 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
 <h2 class="subjects-suggestions">${_('Watch subjects')}</h2>
 <hr/>
 
-${search_form(obj_type='subject', tags=c.tags, parts=['text', 'tags'], target=c.subjects)}
+${search_form(text=c.text, obj_type='subject', tags=c.tags, parts=['text', 'tags'], target=c.subjects)}
 
 ## overriding the search result item definition
 <%def name="search_subject(item)">

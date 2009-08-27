@@ -60,7 +60,7 @@ ${h.javascript_link('/javascripts/search.js')|n}
           <input type="submit" value="${_('Search')}"/>
         </span>
       </div>
-      <br style="clear: both;"/>
+      <br style="clear: left;"/>
     </div>
     %if 'tags' in parts:
       <div class="search-tags">
