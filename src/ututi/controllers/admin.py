@@ -82,12 +82,7 @@ class AdminController(BaseController):
             b64logo = line[1]
             user = User.get(email)
             if b64logo:
-                logo_content = base64.b64decode(b64logo)
-                mime_type = from_buffer(logo_content, mime=True)
-                logo = File(u"logo", u"Avatar for %s" % user.fullname, mimetype=mime_type)
-                logo.store(logo_content)
-                meta.Session.add(logo)
-                user.logo = logo
+                user.logo = base64.b64decode(b64logo)
             else:
                 user.logo = None
         meta.Session.commit()
@@ -149,13 +144,7 @@ class AdminController(BaseController):
             b64logo = line[1]
             group = Group.get(group_id)
             if b64logo:
-                logo_content = base64.b64decode(b64logo)
-                mime_type = from_buffer(logo_content, mime=True)
-                logo = File(u"logo", u"Logo for group %s" % group.title,
-                            mimetype=mime_type)
-                logo.store(logo_content)
-                meta.Session.add(logo)
-                group.logo = logo
+                group.logo = base64.b64decode(b64logo)
             else:
                 group.logo = None
         meta.Session.commit()
@@ -169,13 +158,7 @@ class AdminController(BaseController):
             b64logo = line[2]
             location_tag = LocationTag.get([parent_title, tag_title])
             if b64logo:
-                logo_content = base64.b64decode(b64logo)
-                mime_type = from_buffer(logo_content, mime=True)
-                logo = File(u"logo", u"Logo for location tag %s" % location_tag.title,
-                            mimetype=mime_type)
-                logo.store(logo_content)
-                meta.Session.add(logo)
-                location_tag.logo = logo
+                location_tag.logo = base64.b64decode(b64logo)
             else:
                 location_tag.logo = None
         meta.Session.commit()

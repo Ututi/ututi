@@ -6,25 +6,23 @@ from pylons import response
 from pylons.controllers.util import abort
 
 
-def serve_image(file, width=None, height=None):
-    if file is not None:
+def serve_image(image, width=None, height=None):
+    if image is not None:
         response.headers['Content-Disposition'] = 'inline'
 
         if width is not None or height is not None:
-            img = Image.open(file.filepath())
+            img = Image.open(StringIO.StringIO(image))
             img = resize_image(img, width=width, height=height)
         else:
-            source = open(file.filepath(), 'r')
             response.headers['Content-Type'] = file.mimetype
             response.headers['Content-Length'] = file.filesize
-            return source.read()
+            return image
 
         buffer = StringIO.StringIO()
         img.save(buffer, "PNG")
         response.headers['Content-Length'] = buffer.len
         response.headers['Content-Type'] = 'image/png'
         return buffer.getvalue()
-
     else:
         abort(404)
 

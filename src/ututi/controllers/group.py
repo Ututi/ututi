@@ -250,10 +250,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
 
         if values['logo_upload'] is not None:
             logo = values['logo_upload']
-            f = File(logo.filename, 'Logo for group %s' % group.title, mimetype=logo.type)
-            f.store(logo.file)
-            meta.Session.add(f)
-            group.logo = f
+            group.logo = logo.file.getvalue()
 
         group.add_member(c.user, admin=True)
 
@@ -292,18 +289,11 @@ class GroupController(GroupControllerBase, FileViewMixin):
         group.description = values['description']
 
         if values['logo_delete']:
-            meta.Session.delete(group.logo)
             group.logo = None
 
         if values['logo_upload'] is not None:
             logo = values['logo_upload']
-            f = File(logo.filename, u'Logo for group %s' % group.title, mimetype=logo.type)
-            f.store(logo.file)
-            meta.Session.add(f)
-
-            if group.logo is not None:
-                meta.Session.delete(group.logo)
-            group.logo = f
+            group.logo = logo.file.getvalue()
 
         #check to see what kind of tags we have got
         tags = [tag.strip().lower() for tag in self.form_result.get('tagsitem', [])]

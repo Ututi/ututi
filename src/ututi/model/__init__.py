@@ -78,9 +78,7 @@ def setup_orm(engine):
     tag_mapper = orm.mapper(Tag,
                             tags_table,
                             polymorphic_on=tags_table.c.tag_type,
-                            polymorphic_identity='',
-                            properties = {'logo': relation(File,
-                                                           primaryjoin=files_table.c.id==tags_table.c.logo_id)})
+                            polymorphic_identity='')
 
     orm.mapper(LocationTag,
                inherits=Tag,
@@ -113,8 +111,7 @@ def setup_orm(engine):
 
     orm.mapper(User,
                users_table,
-               properties = {'emails': relation(Email, backref='user'),
-                             'logo': relation(File, primaryjoin=files_table.c.id==users_table.c.logo_id)})
+               properties = {'emails': relation(Email, backref='user')})
 
     global emails_table
     emails_table = Table("emails", meta.metadata,
@@ -213,9 +210,7 @@ def setup_orm(engine):
                inherits=ContentItem,
                polymorphic_identity='group',
                polymorphic_on=content_items_table.c.content_type,
-               properties ={'logo': relation(File,
-                                             primaryjoin=files_table.c.id==groups_table.c.logo_id),
-                            'files': relation(File,
+               properties ={'files': relation(File,
                                               secondary=group_files_table),
                             'watched_subjects': relation(Subject,
                                                          secondary=group_watched_subjects_table)})

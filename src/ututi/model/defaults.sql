@@ -18,6 +18,7 @@ create table users (
        password char(36),
        last_seen timestamp not null default (now() at time zone 'UTC'),
        recovery_key varchar(10) default null,
+       logo bytea default null,
        primary key (id));;
 
 /* Create first user=admin and password=asdasd */
@@ -73,16 +74,13 @@ create table files (id int8 references content_items(id),
 
 create index md5 on files (md5);;
 
-/* Add logo field to the users table */
-alter table users add column logo_id int8 references files(id) default null;;
-
 /* A table for tags (location and simple tags) */
 create table tags (id bigserial not null,
        parent_id int8 references tags(id) default null,
        title varchar(250) not null,
        title_short varchar(50) default null,
        description text default null,
-       logo_id int8 references files(id) default null,
+       logo bytea default null,
        tag_type varchar(10) default null,
        primary key (id));;
 
@@ -103,7 +101,7 @@ create table groups (
        description text,
        show_page bool default true,
        page text not null default '',
-       logo_id int8 references files(id) default null,
+       logo bytea default null,
        moderators bool default false,
        primary key (id));;
 

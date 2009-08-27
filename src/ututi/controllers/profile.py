@@ -81,17 +81,11 @@ class ProfileController(BaseController):
         c.user.fullname = values['fullname']
 
         if values['logo_delete'] == 'delete' and c.user.logo is not None:
-            meta.Session.delete(c.user.logo)
             c.user.logo = None
 
         if values['logo_upload'] is not None and values['logo_upload'] != '':
             logo = values['logo_upload']
-            f = File(logo.filename, 'Avatar for %s' % c.user.fullname, mimetype=logo.type)
-            f.store(logo.file)
-            meta.Session.add(f)
-            if c.user.logo is not None:
-                meta.Session.delete(c.user.logo)
-            c.user.logo = f
+            c.user.logo = logo.file.getvalue()
 
         meta.Session.commit()
         redirect_to(controller='profile', action='index')
