@@ -49,6 +49,7 @@ ul.autobox-hldr li.bit-box div {
   line-height: 15px;
   padding: 0 15px 2px 0;
   margin: 0;
+  color: #333;
   background: white url("../images/borders/tag.png") right center no-repeat;
   position: relative;
 }
