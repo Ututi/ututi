@@ -1,5 +1,7 @@
 <%def name="head_tags()">
+${h.stylesheet_link('/stylesheets/files.css')|n}
 ${h.javascript_link('/javascripts/jquery-ui-1.7.2.custom.min.js')|n}
+
 <script type="text/javascript">
 //<![CDATA[
 $(document).ready(function(){
@@ -162,8 +164,11 @@ $(document).ready(function(){
 
 <%def name="file(file)">
             <li class="file">
-              <img src="${url('/images/mimetypes_icons/unknown.png')}" />
               ${h.link_to(file.title, file.url())}
+              <span class="date">${h.fmt_dt(file.created_on)}</span>
+              <a href="${url(controller='user', action='index', id=file.created_by)}" class="author">
+                ${file.created.fullname}
+              </a>
               <input class="move_url" type="hidden" value="${file.url(action='move')}" />
               <input class="delete_url" type="hidden" value="${file.url(action='delete')}" />
               <img src="${url('/images/delete.png')}" class="delete_button" />
@@ -172,19 +177,21 @@ $(document).ready(function(){
 
 <%def name="folder_button(folder, section_id, fid)">
         % if folder.title == '':
-      <li class="alternative upload" id="file_upload_button-${section_id}-${fid}"><span>Here</span></li>
+      <li class="alternative upload show" id="file_upload_button-${section_id}-${fid}"><div>Here</div></li>
         % else:
-      <li class="alternative upload" id="file_upload_button-${section_id}-${fid}">${folder.title}</li>
+      <li class="alternative upload show" id="file_upload_button-${section_id}-${fid}"><div>${folder.title}</div></li>
         % endif
 </%def>
 
 <%def name="folder(folder, section_id, fid)">
-      <div class="folder_file_area" id="file_area-${section_id}-${fid}">
+      <%
+         cls = folder.title == '' and 'root_folder' or 'subfolder'
+      %>
+      <div class="folder_file_area ${cls}" id="file_area-${section_id}-${fid}">
         <input class="folder_name" id="file_folder_name-${section_id}-${fid}" type="hidden" value="${folder.title}" />
         % if folder.title != '':
           <h4>
-            <img src="${url('/images/folder.png')}" />
-            ${folder.title} (<a href="#" id="delete_folder_button-${section_id}-${fid}" class="delete_folder_button">${_("Delete")}</a>)
+            ${folder.title} <a href="#" id="delete_folder_button-${section_id}-${fid}" class="delete_folder_button">${_("(Delete)")}</a>
           </h4>
         % endif
           <ul class="folder">
@@ -201,8 +208,8 @@ $(document).ready(function(){
 </%def>
 
 <%def name="file_browser(obj, section_id=0)">
-  <fieldset class="section" id="file_section-${section_id}">
-    <legend>${obj.title}</legend>
+  <div class="section" id="file_section-${section_id}">
+    <h2>${obj.title}</h2>
     <input type="hidden" id="file_upload_url-${section_id}"
            value="${obj.url(action='upload_file')}" />
     <input type="hidden" id="create_folder_url-${section_id}"
@@ -212,26 +219,39 @@ $(document).ready(function(){
     <input type="hidden" class="type" value="${type(obj).__name__.lower()}" />
     <input type="hidden" class="id" value="${obj.id}" />
     <input type="hidden" class="location" value="${obj.location.id}" />
-    <div id="file_upload_progress-${section_id}">
-    </div>
-    <ul class="file_upload_dropdown" id="file_upload_dropdown-${section_id}">
-      <li class="active">
-        <span>
-          Upload file
-        </span>
-      </li>
-      % for fid, folder in enumerate(obj.folders):
-        <%self:folder_button folder="${folder}" section_id="${section_id}" fid="${fid}" />
-      % endfor
-    </ul>
-    <div>
-      <form action="${obj.url(action='create_folder')}">
-        <input name="folder" id="new_folder_input-${section_id}" type="text" value="" />
-        <input id="new_folder_button-${section_id}" class="new_folder_button" type="submit" value="New folder" />
-      </form>
+    <div class="controls">
+      <div id="file_upload_progress-${section_id}">
+      </div>
+      <div class="file_upload">
+        <div class="contain">
+          <ul class="file_upload_dropdown click2show" id="file_upload_dropdown-${section_id}">
+            <li class="active click">
+              <div>
+                Upload file
+              </div>
+            </li>
+            % for fid, folder in enumerate(obj.folders):
+              <%self:folder_button folder="${folder}" section_id="${section_id}" fid="${fid}" />
+            % endfor
+            <li class="last_item"><div>&nbsp;</div></li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <form action="${obj.url(action='create_folder')}">
+          <div>
+            <label for="folder">${_('New folder:')}</label>
+            <input name="folder" id="new_folder_input-${section_id}" type="text" value="" />
+            <span class="btn">
+              <input id="new_folder_button-${section_id}" class="new_folder_button" type="submit" value="New folder" />
+            </span>
+          </div>
+        </form>
+      </div>
+      <br style="clear: left;"/>
     </div>
     % for fid, folder in enumerate(obj.folders):
         <%self:folder folder="${folder}" section_id="${section_id}" fid="${fid}" />
     % endfor
-  </fieldset>
+  </div>
 </%def>

@@ -12,8 +12,11 @@ File upload:
     ...                upload_files=[("attachment", "text.txt", "Test")])
     >>> print dedent(res.body)
     <li class="file">
-      <img src="/images/mimetypes_icons/unknown.png" />
       <a href="/files/get/3">text.txt</a>
+      <span class="date">...</span>
+      <a href="/user/1" class="author">
+        Adminas Adminovix
+      </a>
       <input class="move_url" type="hidden" value="/files/move/3" />
       <input class="delete_url" type="hidden" value="/files/delete/3" />
       <img src="/images/delete.png" class="delete_button" />
@@ -24,7 +27,6 @@ File upload:
     ...                upload_files=[("attachment", "image.png", "Test")])
     >>> print dedent(res.body)
     <li class="file">
-      <img src="/images/mimetypes_icons/unknown.png" />
       <a href="/files/get/4">image.png</a>
       ...
     </li>
@@ -34,7 +36,6 @@ File upload:
     ...                upload_files=[("attachment", "other_text.txt", "Test Test")])
     >>> print dedent(res.body)
     <li class="file">
-      <img src="/images/mimetypes_icons/unknown.png" />
       <a href="/files/get/5">other_text.txt</a>
       ...
     </li>
@@ -44,7 +45,6 @@ File upload:
     ...                upload_files=[("attachment", "more_text.txt", "Test Test")])
     >>> print dedent(res.body)
     <li class="file">
-      <img src="/images/mimetypes_icons/unknown.png" />
       <a href="/files/get/6">more_text.txt</a>
       ...
     </li>
@@ -55,13 +55,12 @@ Empty folder creation:
     ...                params={'folder': 'Buga Buga',
     ...                        'section_id': '7'})
     >>> print dedent(res.body)
-    <li class="alternative upload" id="file_upload_button-7-...">Buga Buga</li>
+    <li class="alternative upload show" id="file_upload_button-7-..."><div>Buga Buga</div></li>
     <BLANKLINE>
-    <div class="folder_file_area" id="file_area-7-...">
+    <div class="folder_file_area subfolder" id="file_area-7-...">
       <input class="folder_name" id="file_folder_name-7-..." type="hidden" value="Buga Buga" />
         <h4>
-          <img src="/images/folder.png" />
-          Buga Buga (<a href="#" id="delete_folder_button-7-..." class="delete_folder_button">Delete</a>)
+          Buga Buga <a href="#" id="delete_folder_button-7-..." class="delete_folder_button">(Delete)</a>
         </h4>
         <ul class="folder">
             <li class="message">There are no files here, this folder is empty!</li>
@@ -72,13 +71,12 @@ Empty folder creation:
     ...                params={'folder': 'Uga Buga',
     ...                        'section_id': '8'})
     >>> print dedent(res.body)
-    <li class="alternative upload" id="file_upload_button-8-...">Uga Buga</li>
+    <li class="alternative upload show" id="file_upload_button-8-..."><div>Uga Buga</div></li>
     <BLANKLINE>
-    <div class="folder_file_area" id="file_area-8-...">
+    <div class="folder_file_area subfolder" id="file_area-8-...">
       <input class="folder_name" id="file_folder_name-8-..." type="hidden" value="Uga Buga" />
         <h4>
-          <img src="/images/folder.png" />
-          Uga Buga (<a href="#" id="delete_folder_button-8-..." class="delete_folder_button">Delete</a>)
+          Uga Buga <a href="#" id="delete_folder_button-8-..." class="delete_folder_button">(Delete)</a>
         </h4>
         <ul class="folder">
             <li class="message">There are no files here, this folder is empty!</li>
@@ -92,7 +90,6 @@ Deleting folders:
     ...                upload_files=[("attachment", "image.png", "Test")])
     >>> print dedent(res.body)
     <li class="file">
-      <img src="/images/mimetypes_icons/unknown.png" />
       <a href="/files/get/...">image.png</a>
       ...
     </li>
@@ -102,7 +99,6 @@ Deleting folders:
     ...                upload_files=[("attachment", "more_text.txt", "Test Test")])
     >>> print dedent(res.body)
     <li class="file">
-      <img src="/images/mimetypes_icons/unknown.png" />
       <a href="/files/get/...">more_text.txt</a>
       ...
     </li>
@@ -128,24 +124,20 @@ Both folders should be gone:
     >>> browser.open('http://localhost/subject/vu/mat_analize')
     >>> browser.printQuery('//h4')
     <h4>
-      <img src="/images/folder.png" />
-                Buga Buga (...)
+                Buga Buga ...
     </h4>
     <h4>
-      <img src="/images/folder.png" />
-                Some folder (...)
+                Some folder ...
     </h4>
 
     >>> browser.open('http://localhost/group/moderators/files')
     >>> browser.printQuery('//h4')
     <h4>Moderatoriai</h4>
     <h4>
-      <img src="/images/folder.png" />
-                Also a folder (...)
+                Also a folder ...
     </h4>
     <h4>
-      <img src="/images/folder.png" />
-                Uga Buga (...)
+                Uga Buga ...
     </h4>
 
 Deleting files:

@@ -1,0 +1,127 @@
+/* files section */
+div.section h2 {
+  color: black;
+  padding-bottom: 0.1em;
+  border-bottom: 2px solid #828282;
+}
+
+/* files section controls */
+div.section div.controls label {
+  color: #888;
+}
+
+div.section div.controls div.file_upload {
+  float: left;
+  margin: 0;
+  margin-right: 40px;
+  width: 150px;
+  height: 20px;
+}
+
+ul.file_upload_dropdown {
+  position: absolute;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+
+}
+
+ul.file_upload_dropdown li {
+  display: none;
+  height: 20px;
+  line-height: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  background: white url("../images/borders/dropdown_green.png") left -40px no-repeat;
+  padding-left: 10px;
+}
+
+ul.file_upload_dropdown li div {
+  background: white url("../images/borders/dropdown_green.png") right -40px no-repeat;
+  padding-right: 10px;
+}
+
+ul.file_upload_dropdown li.active {
+  cursor: pointer;
+  display: list-item;
+  background: white url("../images/borders/dropdown_green.png") left top no-repeat;
+  padding-left: 10px;
+}
+
+ul.file_upload_dropdown li.active div {
+  height: 20px;
+  padding-right: 25px;
+  font-weight: bold;
+  background: white url("../images/borders/dropdown_green.png") top right no-repeat;
+}
+
+ul.file_upload_dropdown li.last_item {
+  display: list-item;
+  padding-left: 10px;
+  height: 5px;
+  background: white url("../images/borders/dropdown_green.png") bottom left no-repeat;
+}
+
+ul.file_upload_dropdown li.last_item div {
+  display: list-item;
+  height: 5px;
+  padding-right: 10px;
+  background: white url("../images/borders/dropdown_green.png") bottom right no-repeat;
+}
+
+/* end controls section */
+
+/* files */
+ul.folder {
+  padding: 0;
+}
+
+li.file {
+  height: 20px;
+  line-height: 20px;
+  list-style-type: none;
+  padding: 0 0 0 25px;
+  margin: 3px 0;
+  background: url("../images/details/icon_file.png") left center no-repeat;
+  cursor: move;
+}
+
+li.file a {
+  cursor: pointer;
+}
+
+li.file .date {
+  font-size: 0.8em;
+  color: #888;
+}
+
+li.file .author {
+  font-size: 0.8em;
+}
+
+li.file img.delete_button {
+  vertical-align: middle;
+}
+
+/* end files */
+
+/* folders */
+.folder_file_area h4 {
+  height: 1.4em;
+  line-height: 1.4em;
+  padding: 0 0 0 25px;
+  margin: 3px 0;
+  background: url("../images/details/icon_folder.png") left center no-repeat;
+}
+
+.folder_file_area h4 .delete_folder_button {
+  font-size: 0.8em;
+  vertical-align: top;
+}
+
+.subfolder .folder {
+  padding-left: 25px;
+}
+
+/* end folders */
