@@ -77,6 +77,10 @@ ul.folder {
   padding: 0;
 }
 
+li.message {
+  list-style-type: none;
+}
+
 li.file {
   line-height: 20px;
   list-style-type: none;
