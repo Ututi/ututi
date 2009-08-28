@@ -78,7 +78,6 @@ ul.folder {
 }
 
 li.file {
-  height: 20px;
   line-height: 20px;
   list-style-type: none;
   padding: 0 0 0 25px;
@@ -125,3 +124,22 @@ li.file img.delete_button {
 }
 
 /* end folders */
+
+/* upload messages */
+div.file_upload_progress {
+  padding: 5px;
+}
+
+div.file_upload_progress div span {
+  padding-left: 1em;
+}
+
+div.file_upload_progress div {
+  padding-left: 25px;
+  background: url("../images/details/icon_progress.gif") left center no-repeat;
+  color: #888;
+}
+
+div.file_upload_progress div.done {
+  background: url("../images/details/icon_done.png") left center no-repeat;
+}

@@ -84,7 +84,7 @@ $(document).ready(function(){
 			  iframe['interval'] = interval;
 		  },
 		  onComplete: function(file, response, iframe){
-			  iframe['progress_ticker'].text('Done');
+			  iframe['progress_ticker'].text('Done').parent().addClass('done');
 			  window.clearInterval(iframe['interval']);
 			  $('.folder', result_area).append(response);
               $('.delete_button', result_area).click(deleteFile);
@@ -220,7 +220,7 @@ $(document).ready(function(){
     <input type="hidden" class="id" value="${obj.id}" />
     <input type="hidden" class="location" value="${obj.location.id}" />
     <div class="controls">
-      <div id="file_upload_progress-${section_id}">
+      <div id="file_upload_progress-${section_id}" class="file_upload_progress">
       </div>
       <div class="file_upload">
         <div class="contain">
