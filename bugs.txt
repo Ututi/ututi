@@ -1,3 +1,5 @@
 # -*- mode: org -*-
 
 * Turinio tipo ikonos paieškoje
+
+* Paieškos tipo widgetas - pilka linija po trikampiu
