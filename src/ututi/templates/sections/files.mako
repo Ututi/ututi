@@ -112,7 +112,7 @@ $(document).ready(function(){
                 success: function(msg){
                     if (msg != '') {
                         $('#file_section-' + section_id).append($(msg)[2]);
-                        $('#file_upload_dropdown-' + section_id).append($(msg)[0]);
+                        $('#file_upload_dropdown-' + section_id).find('li.upload:last').after($(msg)[0]);
                         setUpFolder(0, $('#file_upload_dropdown-' + section_id + ' .upload:last')[0]);
                         $(".folder").sortable({
                           connectWith: ['.folder'],
