@@ -9,7 +9,18 @@ Nerandu norimos grupės todėl spaudžiu "create group". Čia mokymo įstaiga
 turi būti pasirinkta, tokia kaip paieškoje.
 * Baigiant kurti grupę permeta į group/group_name/home.
 home view'as neegzistuoja, todėl permetinėti reikia į grupės / o ne į grupės /home
-* Grupės personal page galima paslėpti, bet nėra būdo jo gražinti. 
+* Grupės personal page galima paslėpti, bet nėra būdo jo gražinti.
 Reikia, kad atrirastų užrašas unhide.
 
 * You can't move file up one folder
+
+* Paieška - kaip tvarkytis su nerastais tag'ais?
+Keli variantai:
+- Tago tekstą dedame prie paieškos teksto
+- Nefiltruojame pagal tag'ą
+- Nerodome tag'ų paieškoje
+
+* Neieškoma pagal tag'o short title
+Paieškoje prie tag'ų įvedus 'vu' turėtų būti randamas atitinkamas tag'as.
+
+* Location tag'ų autocomplete turėtų ieškoti visame tago tekste, ne tik pagal pradžią
