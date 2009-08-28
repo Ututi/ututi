@@ -277,5 +277,25 @@ ${h.javascript_link('/javascripts/forms.js')|n}
 
       </div>
     </div>
+
+    <script type="text/javascript">
+      var uservoiceJsHost = ("https:" == document.location.protocol) ? "https://uservoice.com" : "http://cdn.uservoice.com";
+      document.write(unescape("%3Cscript src='" + uservoiceJsHost + "/javascripts/widgets/tab.js' type='text/javascript'%3E%3C/script%3E"))
+    </script>
+    <script type="text/javascript">
+    UserVoice.Tab.show({
+      /* required */
+      key: 'ututi',
+      host: 'ututi.uservoice.com',
+      forum: '26068',
+      /* optional */
+      alignment: 'left',
+      background_color:'#ff7800',
+      text_color: 'white',
+      hover_color: '#9d9d9d',
+      lang: 'en'
+    })
+    </script>
+
   </body>
 </html>
