@@ -4,6 +4,7 @@ Provides the BaseController class for subclassing.
 """
 from datetime import datetime
 
+from sqlalchemy.exc import InternalError
 from sqlalchemy.exc import InvalidRequestError
 
 from pylons.controllers import WSGIController
@@ -37,7 +38,7 @@ class BaseController(WSGIController):
         finally:
             try:
                 meta.Session.execute("SET ututi.active_user TO 0")
-            except InvalidRequestError:
+            except (InvalidRequestError, InternalError):
                 # Ignore the error, if we got an error in the
                 # controller this call raises an error
                 pass
