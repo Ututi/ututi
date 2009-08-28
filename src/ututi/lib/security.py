@@ -33,7 +33,7 @@ def is_user(user, context=None):
 
 
 def is_owner(user, context=None):
-    return context.created_by is user
+    return context.created is user
 
 
 crowd_checkers = {
