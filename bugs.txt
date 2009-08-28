@@ -11,3 +11,5 @@ turi būti pasirinkta, tokia kaip paieškoje.
 home view'as neegzistuoja, todėl permetinėti reikia į grupės / o ne į grupės /home
 * Grupės personal page galima paslėpti, bet nėra būdo jo gražinti. 
 Reikia, kad atrirastų užrašas unhide.
+
+* You can't move file up one folder
