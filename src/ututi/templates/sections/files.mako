@@ -171,7 +171,9 @@ $(document).ready(function(){
               </a>
               <input class="move_url" type="hidden" value="${file.url(action='move')}" />
               <input class="delete_url" type="hidden" value="${file.url(action='delete')}" />
-              <img src="${url('/images/delete.png')}" class="delete_button" />
+              %if file.can_write():
+                <img src="${url('/images/delete.png')}" class="delete_button" />
+              %endif
             </li>
 </%def>
 
@@ -191,7 +193,10 @@ $(document).ready(function(){
         <input class="folder_name" id="file_folder_name-${section_id}-${fid}" type="hidden" value="${folder.title}" />
         % if folder.title != '':
           <h4>
-            ${folder.title} <a href="#" id="delete_folder_button-${section_id}-${fid}" class="delete_folder_button">${_("(Delete)")}</a>
+            ${folder.title}
+            % if folder.can_write():
+              <a href="#" id="delete_folder_button-${section_id}-${fid}" class="delete_folder_button">${_("(Delete)")}</a>
+            % endif
           </h4>
         % endif
           <ul class="folder">

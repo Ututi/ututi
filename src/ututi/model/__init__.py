@@ -26,6 +26,7 @@ from sqlalchemy.sql.expression import and_
 from ututi.migration import GreatMigrator
 from ututi.model import meta
 from ututi.lib.emails import group_invitation_email
+from ututi.lib.security import check_crowds
 from nous.mailpost import copy_chunked
 
 
@@ -450,6 +451,11 @@ class Folder(list):
     def __init__(self, title):
         self.title = title
 
+    def can_write(self, user=None):
+        can_write = True
+        for file in self:
+            can_write = can_write and file.can_write(user)
+        return can_write
 
 class FolderMixin(object):
 
@@ -846,6 +852,13 @@ class LocationTag(Tag):
 
 class File(ContentItem):
     """Class representing user-uploaded files."""
+
+    def can_write(self, user=None):
+
+        can_write = False
+        if isinstance(self.parent, Subject):
+            can_write = check_crowds(['moderator'], context=self.parent, user=user)
+        return can_write or check_crowds(['owner'], context=self, user=user)
 
     def __init__(self, filename, title, mimetype=None, created=None,
                  description=u'', data=None, md5=None, folder=u''):
