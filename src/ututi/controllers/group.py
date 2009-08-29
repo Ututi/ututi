@@ -30,9 +30,9 @@ from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator
 
 from ututi.model.events import Event
 from ututi.model import LocationTag, User, GroupMember, GroupMembershipType
-from ututi.model import meta, Group, File, SimpleTag, Subject, ContentItem, PendingInvitation, PendingRequest
+from ututi.model import meta, Group, SimpleTag, Subject, ContentItem, PendingInvitation, PendingRequest
 from ututi.controllers.search import SearchSubmit
-from ututi.lib.security import is_root
+from ututi.lib.security import is_root, check_crowds
 from ututi.lib.security import ActionProtector
 from ututi.lib.search import search_query
 
@@ -190,18 +190,34 @@ class GroupController(GroupControllerBase, FileViewMixin):
         return render('groups.mako')
 
     @group_action
-    @ActionProtector("member", "admin", "moderator")
     def group_home(self, group):
-        if request.GET.get('do', None) == 'hide_page':
-            group.show_page = False
-        meta.Session.commit()
-        c.breadcrumbs.append(self._actions('group_home'))
-        c.events = meta.Session.query(Event)\
-            .filter(or_(Event.object_id.in_([s.id for s in group.watched_subjects]),
-                        Event.object_id == group.id))\
-            .order_by(desc(Event.created))\
-            .limit(20).all()
-        return render('group/home.mako')
+        if check_crowds(["member", "admin", "moderator"]):
+            if request.GET.get('do', None) == 'hide_page':
+                group.show_page = False
+            meta.Session.commit()
+            c.breadcrumbs.append(self._actions('group_home'))
+            c.events = meta.Session.query(Event)\
+                .filter(or_(Event.object_id.in_([s.id for s in group.watched_subjects]),
+                            Event.object_id == group.id))\
+                .order_by(desc(Event.created))\
+                .limit(20).all()
+            return render('group/home.mako')
+        else:
+            return render('group/home_public.mako')
+
+    @group_action
+    @ActionProtector("user")
+    def request_join(self, group):
+        request = PendingRequest.get(c.user, group)
+        if request is None and not group.is_member(c.user):
+            group.request_join(c.user)
+            meta.Session.commit()
+            h.flash(_("Your request to join the group was forwarded to the group's administrators. Thank You!"))
+        elif group.is_member(c.user):
+            h.flash(_("You already are a member of this group."))
+        else:
+            h.flash(_("Your request to join the group is still being processed."))
+        redirect_to(controller='group', action='group_home', id=group.group_id)
 
     @group_action
     @ActionProtector("admin", "moderator")

@@ -633,6 +633,14 @@ class PendingRequest(object):
         if user is not None:
             self.user = user
 
+    @classmethod
+    def get(cls, user, group):
+        """Return a a group request matching the user and the group."""
+        try:
+            return meta.Session.query(PendingRequest).filter(and_(PendingRequest.user == user, PendingRequest.group == group)).one()
+        except NoResultFound:
+            return None
+
 
 subjects_table = None
 

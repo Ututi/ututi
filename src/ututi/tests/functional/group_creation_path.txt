@@ -158,3 +158,43 @@ And we are redirected to the group that invited us.
     <BLANKLINE>
     The Ututi team
     <BLANKLINE>
+
+Let's try requesting to join the group:
+    >>> browser3 = Browser()
+    >>> browser3.open('http://localhost/')
+    >>> form = browser3.getForm('login_form')
+    >>> form.getControl('Email').value = "user2@ututi.lt"
+    >>> form.getControl('Password').value = "password"
+    >>> form.getControl('Login').click()
+
+    >>> browser3.open('http://localhost/group/test')
+    >>> browser3.getControl('Join the group').click()
+    >>> browser3.printQuery("//div[@class='flash-message']/span/text()")
+    Close
+    Your request to join the group was forwarded to the group's administrators. Thank You!
+
+The group's administrator should now see the request in the members view.
+
+    >>> browser.getLink('Log out').click()
+    >>> browser.open('http://localhost/')
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
+
+    >>> browser.getLink('Test group').click()
+    >>> browser.getLink('Members').click()
+
+    >>> print browser.url
+    http://localhost/group/test/members
+
+    >>> browser.getControl('Confirm').click()
+
+And the new member should be able to access the group now.
+    >>> browser3.open('http://localhost/group/test/members')
+    >>> browser3.printQuery("//div[@class='user-logo-link']/div/a/text()")
+    Adminas Adminovix
+    Alternative user
+    Jonas Petraitis Petrauskas
+    Second user
+

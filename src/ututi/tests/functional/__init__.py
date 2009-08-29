@@ -32,6 +32,13 @@ def ftest_setUp(test):
     email.confirmed = True
     alt_user.emails.append(email)
 
+    #and a second one
+    alt_user = User(u'Second user', 'password', True)
+    meta.Session.add(alt_user)
+    email = Email('user2@ututi.lt')
+    email.confirmed = True
+    alt_user.emails.append(email)
+
     meta.Session.add(Subject(u'mat_analize', u'Matematin\u0117 analiz\u0117', LocationTag.get(u'vu'), u'prof. E. Misevi\u010dius'))
     meta.Session.commit()
     meta.Session.execute("SET ututi.active_user TO 0")

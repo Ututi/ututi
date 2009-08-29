@@ -34,9 +34,9 @@ Tests for logging in, logging out, access denied and all related things
 
     >>> browser.getLink('Log out').click()
 
-    >>> browser.open('http://localhost/group/moderators')
+    >>> browser.open('http://localhost/group/moderators/members')
     >>> browser.url
-    'http://localhost/?came_from=http%3A%2F%2Flocalhost%2Fgroup%2Fmoderators'
+    'http://localhost/?came_from=http%3A%2F%2Flocalhost%2Fgroup%2Fmoderators%2Fmembers'
 
     >>> form = browser.getForm('login_form')
     >>> form.getControl('Email').value = "admin@ututi.lt"
@@ -62,7 +62,7 @@ Tests for logging in, logging out, access denied and all related things
     >>> form.getControl('Password').value = "password"
     >>> form.getControl('Login').click()
 
-    >>> browser.open('http://localhost/group/moderators')
+    >>> browser.open('http://localhost/group/moderators/members')
     Traceback (most recent call last):
     ...
     HTTPError: HTTP Error 403: Forbidden

@@ -6,7 +6,12 @@
 
 <h1>${_('Members')}</h1>
 
-% for member in c.group.members:
+<%def name="group_members(group=None)">
+<%
+   if group is None:
+       group = c.group
+%>
+% for member in group.members:
   <div class="user-logo-link">
     <a href="${url(controller="user", action="index", id=member.user.id)}" title="${member.user.fullname}">
       %if member.user.logo is not None:
@@ -22,7 +27,10 @@
     </div>
   </div>
 % endfor
+</%def>
 
+
+${group_members(c.group)}
 <div style="clear: left;">
   <h2>${_('Invite your group mates')}</h2>
   <form method="post" action="${url(controller='group', action='invite_members', id=c.group.group_id)}" id="member_invitation_form">

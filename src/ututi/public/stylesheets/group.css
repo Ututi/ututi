@@ -46,3 +46,8 @@ table.group-members td, th {
   border-bottom: 1px solid #ded8d8;
   padding: 3px 5px;
 }
+
+.description {
+  font-size: 0.9em;
+  color: #888;
+}
