@@ -60,7 +60,7 @@
   </%self:portlet>
 </%def>
 
-<%def name="group_members_portlet(group)">
+<%def name="group_members_portlet(group=None)">
   <%
      if group is None:
          group = c.group
