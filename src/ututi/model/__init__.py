@@ -21,7 +21,7 @@ from sqlalchemy.exc import DatabaseError, SAWarning
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm import relation, backref
 from sqlalchemy import func
-from sqlalchemy.sql.expression import and_
+from sqlalchemy.sql.expression import and_, or_
 
 from ututi.migration import GreatMigrator
 from ututi.model import meta
@@ -854,7 +854,7 @@ class LocationTag(Tag):
 
     @classmethod
     def get_all(cls, title):
-        items = meta.Session.query(cls).filter_by(title=title).all()
+        items = meta.Session.query(cls).filter(or_(LocationTag.title==title, LocationTag.title_short==title.upper())).all()
         items.extend(meta.Session.query(cls).filter_by(title_short=title).all())
         return items
 

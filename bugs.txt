@@ -18,7 +18,4 @@ Keli variantai:
 - Nefiltruojame pagal tag'ą
 - Nerodome tag'ų paieškoje
 
-* Neieškoma pagal tag'o short title
-Paieškoje prie tag'ų įvedus 'vu' turėtų būti randamas atitinkamas tag'as.
-
 * Location tag'ų autocomplete turėtų ieškoti visame tago tekste, ne tik pagal pradžią
