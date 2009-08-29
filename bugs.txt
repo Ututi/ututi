@@ -2,7 +2,6 @@
 
 * Turinio tipo ikonos paieškoje
 
-* Paieškos tipo widgetas - pilka linija po trikampiu
 * Kuriant grupę neįsimena universiteto ir fakulteto iš paieškos užklausos
 Esu naujas naudotojas. Suvedu universitetą ir ieškau grupęs.
 Nerandu norimos grupės todėl spaudžiu "create group". Čia mokymo įstaiga
