@@ -18,7 +18,7 @@ ${path_steps(2)}
 
   <div class="form-field">
     <span class="btn"><input type="submit" value="${_('Invite')}"/></span>
-    <a href="${url(controller='group', action='home', id=c.group.group_id)}" title="${_('Group home')}" class="btn">
+    <a href="${url(controller='group', action='group_home', id=c.group.group_id)}" title="${_('Group home')}" class="btn">
       <span>
         ${_("Finish and go to group's main page")}
       </span>
