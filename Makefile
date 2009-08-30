@@ -206,4 +206,4 @@ shell: bin/paster instance/done instance/var/run/.s.PGSQL.${PGPORT}
 
 .PHONY: package_release
 package_release:
-	git archive origin/master --prefix=ututi${BUILD_ID}/ | gzip > ututi${BUILD_ID}.tar.gz
+	git archive --prefix=ututi${BUILD_ID}/ origin/master | gzip > ututi${BUILD_ID}.tar.gz
