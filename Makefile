@@ -203,3 +203,7 @@ ubuntu-environment:
 .PHONY: shell
 shell: bin/paster instance/done instance/var/run/.s.PGSQL.${PGPORT}
 	bin/paster --plugin=Pylons shell development.ini
+
+.PHONY: package_release
+package_release:
+	git archive origin/master --prefix=ututi$BUILD_ID/ | gzip > ututi$BUILD_ID.tar.gz
