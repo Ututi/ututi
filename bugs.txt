@@ -6,6 +6,7 @@
 Esu naujas naudotojas. Suvedu universitetą ir ieškau grupęs.
 Nerandu norimos grupės todėl spaudžiu "create group". Čia mokymo įstaiga
 turi būti pasirinkta, tokia kaip paieškoje.
+
 * Grupės personal page galima paslėpti, bet nėra būdo jo gražinti.
 Reikia, kad atrirastų užrašas unhide.
 
@@ -21,3 +22,18 @@ Keli variantai:
 
 * search does not quote search parameters properly
 
+* You can't move the file that you have just moved, again
+
+* Group public view is missing, and generated urls are pointing to group internal page
+
+* 403 page is missing
+
+* TODO Launch u2ti on korys.org
+
+* Search does not work if you enter a short tag name instead of selecting the full tag
+
+* Search is showing only 10 items in the search list
+
+* Group search is not too good at handling Year that was entered incorrectly
+
+* DONE Move git repositories to git.nous.lt
