@@ -33,6 +33,9 @@ def make_map():
                  always_scan=config['debug'])
     map.minimization = False
 
+    map.redirect('/*path/?*get', '/{path}?{get}', _redirect_code='301 Moved Permanently')
+    map.redirect('/*path/', '/{path}', _redirect_code='301 Moved Permanently')
+
     # The ErrorController route (handles 404/500 error pages); it should
     # likely stay at the top, ensuring it can always be resolved
     map.connect('/error/{action}', controller='error')
