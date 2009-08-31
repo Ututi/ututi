@@ -39,8 +39,8 @@ def _search_query_text(query, text=None):
     """Prepare the initial query, searching by text and ranking by the proximity."""
 
     if text is not None:
-        query = query.filter("terms @@ plainto_tsquery('%s')" % text)\
-            .order_by("ts_rank_cd(terms, plainto_tsquery('%s'))" % text)
+        query = query.filter(SearchItem.terms.op('@@')(func.plainto_tsquery(text)))\
+            .order_by(func.ts_rank_cd(SearchItem.terms, func.plainto_tsquery(text)))
     return query
 
 def _search_query_type(query, obj_type):

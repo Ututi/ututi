@@ -96,6 +96,10 @@ label {
 }
 
 /* resetting default styles */
+.show {
+  display: none;
+}
+
 table {
   border-collapse: collapse;
 }
@@ -129,7 +133,7 @@ ul.bullets_large li {
 /* personal box */
 #personal-box {
   float: right;
-  width: 300px;
+  width: 350px;
   margin-top: 5px;
   margin-right: 15px;
 }
@@ -142,8 +146,8 @@ ul.bullets_large li {
 
 #personal-box .personal-info {
   border: 0;
-  margin-top: 5px;
   margin: 0;
+  margin-top: 5px;
   padding: 5px;
   height: 60px;
   width: 283px;
@@ -180,13 +184,67 @@ ul.bullets_large li {
 }
 
 #personal-menu {
-  float: right;
-  padding-bottom: 5px;
+  margin: 0 0 5px;
 }
 
-#personal-menu a.title {
-  padding: 1px 15px 1px 1px;
+#personal-menu div.item {
+  float: right;
+  margin: 0  0 0 10px;
+  position: relative;
+}
+
+#personal-menu span.title {
+  padding: 1px 20px 1px 1px;
   background: transparent url("../images/details/expand_down.png") right center no-repeat;
+  cursor: pointer;
+}
+
+#personal-menu .expanding-menu {
+  position: absolute;
+  right: 0;
+  margin: 0;
+}
+
+#personal-menu .open span.title {
+  background-image: url("../images/details/personal_menu_open.png");
+}
+
+#personal-menu ul.expanding-menu li {
+  list-style-type: none;
+  height: 19px;
+  line-height: 18px;
+  background: url("../images/borders/personal_menu.png") left -19px no-repeat;
+  padding-left: 5px;
+  margin: 0;
+}
+
+#personal-menu ul.expanding-menu li div {
+  width: 90px;
+  overflow: hidden;
+  background: url("../images/borders/personal_menu.png") right -19px no-repeat;
+  padding-right: 5px;
+  padding-bottom: 1px;
+  margin: 0;
+}
+
+#personal-menu ul.expanding-menu li.top {
+  height: 2px;
+  background: url("../images/borders/personal_menu.png") top left no-repeat;
+  padding-left: 5px;
+}
+
+#personal-menu ul.expanding-menu li.top div {
+  background: url("../images/borders/personal_menu.png") top right no-repeat;
+  padding-right: 5px;
+  height: 2px;
+}
+
+#personal-menu ul.expanding-menu li.bottom {
+  background: url("../images/borders/personal_menu.png") left -38px no-repeat;
+}
+
+#personal-menu ul.expanding-menu li.bottom div {
+  background: url("../images/borders/personal_menu.png") right -38px no-repeat;
 }
 
 /* end personal box */

@@ -42,7 +42,7 @@ class SearchController(BaseController):
             c.results = paginate.Page(
                 search_query(**search_params),
                 page=int(request.params.get('page', 1)),
-                items_per_page = 10,
+                items_per_page = 20,
                 **search_params)
 
         return render('/search/index.mako')

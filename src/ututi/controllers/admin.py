@@ -19,6 +19,14 @@ from ututi.model import (meta, User, Email, LocationTag, Group, Subject,
 log = logging.getLogger(__name__)
 
 
+def store_file(file_obj, file_name):
+    path = os.environ.get("upload_import_path", None)
+    if path is not None:
+        file_obj.store(open(os.path.join(path, file_name)))
+    else:
+        file_obj.store('Whatever!')
+
+
 class AdminController(BaseController):
     """Controler for system administration."""
 
@@ -214,9 +222,7 @@ class AdminController(BaseController):
             f = File(filename=line[3], title=line[4])
             f.mimetype = line[2]
             f.folder = line[1]
-            # XXX dummy content at the moment
-            f.store('Whatever!')
-            # f.store(open(os.path.join('/home/ignas/src/ututi/ututi/', line[5])))
+            store_file(f, line[5])
             group.files.append(f)
 
         meta.Session.commit()
@@ -234,9 +240,7 @@ class AdminController(BaseController):
             f = File(filename=line[5], title=line[6])
             f.mimetype = line[4]
             f.folder = line[1]
-            # XXX dummy content at the moment
-            f.store('Whatever!')
-            # f.store(open(os.path.join('/home/ignas/src/ututi/ututi/', line[7])))
+            store_file(f, line[7])
             subject.files.append(f)
 
         meta.Session.commit()

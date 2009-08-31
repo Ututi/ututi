@@ -85,7 +85,7 @@ class ProfileController(BaseController):
 
         if values['logo_upload'] is not None and values['logo_upload'] != '':
             logo = values['logo_upload']
-            c.user.logo = logo.file.getvalue()
+            c.user.logo = logo.file.read()
 
         meta.Session.commit()
         redirect_to(controller='profile', action='index')

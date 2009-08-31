@@ -12,13 +12,13 @@ File upload:
     ...                upload_files=[("attachment", "text.txt", "Test")])
     >>> print dedent(res.body)
     <li class="file">
-      <a href="/files/get/3">text.txt</a>
+      <a href="/subject/vu/mat_analize/file/3/get">text.txt</a>
       <span class="date">...</span>
       <a href="/user/1" class="author">
         Adminas Adminovix
       </a>
-      <input class="move_url" type="hidden" value="/files/move/3" />
-      <input class="delete_url" type="hidden" value="/files/delete/3" />
+      <input class="move_url" type="hidden" value="/subject/vu/mat_analize/file/3/move" />
+      <input class="delete_url" type="hidden" value="/subject/vu/mat_analize/file/3/delete" />
       <img src="/images/delete.png" class="delete_button" />
     </li>
 
@@ -27,7 +27,7 @@ File upload:
     ...                upload_files=[("attachment", "image.png", "Test")])
     >>> print dedent(res.body)
     <li class="file">
-      <a href="/files/get/4">image.png</a>
+      <a href="/subject/vu/mat_analize/file/4/get">image.png</a>
       ...
     </li>
 
@@ -36,7 +36,7 @@ File upload:
     ...                upload_files=[("attachment", "other_text.txt", "Test Test")])
     >>> print dedent(res.body)
     <li class="file">
-      <a href="/files/get/5">other_text.txt</a>
+      <a href="/group/moderators/file/5/get">other_text.txt</a>
       ...
     </li>
 
@@ -45,7 +45,7 @@ File upload:
     ...                upload_files=[("attachment", "more_text.txt", "Test Test")])
     >>> print dedent(res.body)
     <li class="file">
-      <a href="/files/get/6">more_text.txt</a>
+      <a href="/group/moderators/file/6/get">more_text.txt</a>
       ...
     </li>
 
@@ -90,7 +90,7 @@ Deleting folders:
     ...                upload_files=[("attachment", "image.png", "Test")])
     >>> print dedent(res.body)
     <li class="file">
-      <a href="/files/get/...">image.png</a>
+      <a href="/subject/vu/mat_analize/file/.../get">image.png</a>
       ...
     </li>
 
@@ -99,7 +99,7 @@ Deleting folders:
     ...                upload_files=[("attachment", "more_text.txt", "Test Test")])
     >>> print dedent(res.body)
     <li class="file">
-      <a href="/files/get/...">more_text.txt</a>
+      <a href="/group/moderators/file/.../get">more_text.txt</a>
       ...
     </li>
 
@@ -142,19 +142,19 @@ Both folders should be gone:
 
 Deleting files:
 
-    >>> app.get('/files/delete/3').status
+    >>> app.get('/subject/vu/mat_analize/file/3/delete').status
     '200 OK'
 
-    >>> app.get('/files/delete/5').status
+    >>> app.get('/group/moderators/file/5/delete').status
     '200 OK'
 
-    >>> app.get('/files/get/3', expect_errors=True).status
+    >>> app.get('/subject/vu/mat_analize/file/3/get', expect_errors=True).status
     '404 Not Found'
 
-    >>> app.get('/files/get/5', expect_errors=True).status
+    >>> app.get('/group/moderators/file/5/get', expect_errors=True).status
     '404 Not Found'
 
-    >>> app.post('/files/move/6',
+    >>> app.post('/group/moderators/file/6/move',
     ...          params={'source_type': 'group',
     ...                  'source_id': 'moderators',
     ...                  'target_type': 'group',
@@ -174,7 +174,7 @@ Moving files:
     Uga Buga:
        more_text.txt
 
-    >>> app.post('/files/move/6',
+    >>> app.post('/group/moderators/file/6/move',
     ...          params={'source_type': 'group',
     ...                  'source_id': 'moderators',
     ...                  'target_type': 'subject',
@@ -193,7 +193,7 @@ Moving files:
        image.png
        more_text.txt
 
-    >>> app.post('/files/move/4',
+    >>> app.post('/subject/vu/mat_analize/file/4/move',
     ...          params={'source_type': 'subject',
     ...                  'source_id': 'mat_analize',
     ...                  'source_location': l1,
@@ -211,4 +211,3 @@ Moving files:
     Buga Buga:
     Some folder:
        more_text.txt
-

@@ -1,6 +1,9 @@
 Tests for logging in, logging out, access denied and all related things
 =======================================================================
 
+
+-------------------------
+
     >>> browser = Browser()
     >>> form = browser.getForm('login_form')
     >>> form.getControl('Email').value = "admin@ututi.lt"
@@ -13,6 +16,9 @@ Tests for logging in, logging out, access denied and all related things
     >>> browser.getLink('Log out').click()
     >>> browser.url
     'http://localhost/'
+
+
+-------------------------
 
     >>> form = browser.getForm('login_form')
     >>> form.getControl('Email').value = "admin@ututi.lt"
@@ -34,6 +40,8 @@ Tests for logging in, logging out, access denied and all related things
 
     >>> browser.getLink('Log out').click()
 
+-------------------------
+
     >>> browser.open('http://localhost/group/moderators/members')
     >>> browser.url
     'http://localhost/?came_from=http%3A%2F%2Flocalhost%2Fgroup%2Fmoderators%2Fmembers'
@@ -46,6 +54,8 @@ Tests for logging in, logging out, access denied and all related things
     >>> browser.getLink('Log out').click()
 
 
+-------------------------
+
     >>> browser.open('http://localhost/search')
     >>> form = browser.getForm('login_form')
     >>> form.getControl('Email').value = "admin@ututi.lt"
@@ -56,6 +66,57 @@ Tests for logging in, logging out, access denied and all related things
     'http://localhost/search'
 
     >>> browser.getLink('Log out').click()
+
+-------------------------
+
+    >>> browser.open('http://localhost/search')
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Password').value = "asd"
+    >>> form.getControl('Login').click()
+
+    >>> 'Wrong password or username!' in browser.contents
+    True
+
+    # XXX which one do we want?
+    >>> browser.url
+    'http://localhost/login'
+
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
+
+    >>> browser.url
+    'http://localhost/search'
+
+    >>> browser.getLink('Log out').click()
+
+-------------------------
+
+    >>> res = app.post("/login",
+    ...                params={'login': 'admin@ututi.lt', 'password': 'asdasd'})
+
+    >>> from textwrap import dedent
+    >>> res = app.post("/subject/vu/mat_analize/upload_file",
+    ...                params={'folder': ''},
+    ...                upload_files=[("attachment", "text.txt", "Test")])
+
+    >>> browser.open('http://localhost/subject/vu/mat_analize')
+    >>> browser.getLink('text.txt').click()
+    >>> browser.url
+    'http://localhost/?came_from=%2Fsubject%2Fvu%2Fmat_analize%3Fserve_file%3D3'
+
+    >>> form = browser.getForm('login_form')
+    >>> form.getControl('Email').value = "user@ututi.lt"
+    >>> form.getControl('Password').value = "password"
+    >>> form.getControl('Login').click()
+
+    >>> browser.url
+    'http://localhost/subject/vu/mat_analize?serve_file=3'
+
+    >>> browser.getLink('Log out').click()
+
+-------------------------
 
     >>> form = browser.getForm('login_form')
     >>> form.getControl('Email').value = "user@ututi.lt"

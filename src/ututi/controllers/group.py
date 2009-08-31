@@ -266,7 +266,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
 
         if values['logo_upload'] is not None:
             logo = values['logo_upload']
-            group.logo = logo.file.getvalue()
+            group.logo = logo.file.read()
 
         group.add_member(c.user, admin=True)
 
@@ -309,7 +309,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
 
         if values['logo_upload'] is not None:
             logo = values['logo_upload']
-            group.logo = logo.file.getvalue()
+            group.logo = logo.file.read()
 
         #check to see what kind of tags we have got
         tags = [tag.strip().lower() for tag in self.form_result.get('tagsitem', [])]

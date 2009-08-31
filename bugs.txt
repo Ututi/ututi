@@ -16,15 +16,7 @@ Reikia, kad atrirastų užrašas unhide.
 
 * You can't move file up one folder
 
-* Paieška - kaip tvarkytis su nerastais tag'ais?
-Keli variantai:
-- Tago tekstą dedame prie paieškos teksto
-- Nefiltruojame pagal tag'ą
-- Nerodome tag'ų paieškoje
-
 * Location tag'ų autocomplete turėtų ieškoti visame tago tekste, ne tik pagal pradžią
-
-* search does not quote search parameters properly
 
 * You can't move the file that you have just moved, again
 
@@ -36,9 +28,13 @@ Keli variantai:
 
 * Search does not work if you enter a short tag name instead of selecting the full tag
 
-* Search is showing only 10 items in the search list
-
 * Group search is not too good at handling Year that was entered incorrectly
 
 
 * DONE Move git repositories to git.nous.lt
+
+* move tag widget jasvascript to avoid running it twice
+
+* Files view is slow when there are a lot of files in linux firefox
+
+* Events for group join actions are missing.

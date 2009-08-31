@@ -7,19 +7,35 @@ ${_('student information online')}
 
 <%def name="personal_block()">
 %if c.user:
-<div id="personal-menu" class="XXX">
-  <span class="expanding-menu">
-    <a href="#" class="title">Home</a>
-  </span>
-  <span class="expanding-menu">
-    <a href="#" class="title">Groups</a>
-  </span>
-  <span class="expanding-menu">
-    <a href="#" class="title">Subjects</a>
-  </span>
-  <span>
+<div id="personal-menu">
+  <div class="item">
     ${h.link_to(_("Log out"), url('/logout'))}
-  </span>
+  </div>
+  <div class="click2show item">
+    <span class="click title">${_('Groups')}</span>
+    <ul class="expanding-menu show">
+      <li class="top"><div>&nbsp;</div></li>
+      %for mship in c.user.memberships:
+        <li>
+          <div>
+            <a href="${url(controller='group', action='group_home', id=mship.group.group_id)}">
+              ${mship.group.title|h.ellipsis}
+            </a>
+          </div>
+        </li>
+      %endfor
+      <li class="bottom"><div><a href="${url(controller='group', action='add')}" title="${_('Create a new group')}">${_('New group')}</a></div></li>
+    </ul>
+  </div>
+  <div class="click2show item">
+    <span class="click title">${_('Home')}</span>
+    <ul class="expanding-menu show">
+      <li class="top"><div>&nbsp;</div></li>
+      <li><div><a href="${url(controller='profile', action='home')}">${_("What's new?")}</a></div></li>
+      <li><div><a href="${url(controller='profile', action='index')}">${_("Profile")}</a></div></li>
+      <li class="bottom"><div><a href="${url(controller='search', action='index')}">${_("Search")}</a></div></li>
+    </ul>
+  </div>
 </div>
 
 <div class="personal-info">
@@ -277,7 +293,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
 
       </div>
     </div>
-
+<!--
     <script type="text/javascript">
       var uservoiceJsHost = ("https:" == document.location.protocol) ? "https://uservoice.com" : "http://cdn.uservoice.com";
       document.write(unescape("%3Cscript src='" + uservoiceJsHost + "/javascripts/widgets/tab.js' type='text/javascript'%3E%3C/script%3E"))
@@ -296,6 +312,6 @@ ${h.javascript_link('/javascripts/forms.js')|n}
       lang: 'en'
     })
     </script>
-
+-->
   </body>
 </html>

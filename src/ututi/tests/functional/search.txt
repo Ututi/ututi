@@ -14,21 +14,9 @@ Let's fill out the search form.
     >>> browser.printQuery("id('search-results')//a/text()")
     Moderatoriai
 
-Let's see if tags work too.
-    >>> form = browser.getForm('search_form')
-    >>> form.getControl(name="text").value = ""
-    >>> form.getControl('Tags').value = 'vu'
-    >>> form.getControl('Search').click()
-
-    >>> browser.printQuery("id('search-results')//a/text()")
-    Moderatoriai
-    Matematinė analizė
-
-
 And does type selection work?
     >>> form = browser.getForm('search_form')
     >>> form.getControl(name="obj_type").value = ["group"]
-    >>> form.getControl('Tags').value = ''
     >>> form.getControl('Search').click()
     >>> browser.printQuery("id('search-results')//a/text()")
     Moderatoriai
