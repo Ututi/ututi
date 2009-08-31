@@ -37,3 +37,5 @@ Keli variantai:
 * Group search is not too good at handling Year that was entered incorrectly
 
 * DONE Move git repositories to git.nous.lt
+
+* move tag widget jasvascript to avoid running it twice
