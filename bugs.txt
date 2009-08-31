@@ -12,12 +12,6 @@ Reikia, kad atrirastų užrašas unhide.
 
 * You can't move file up one folder
 
-* Paieška - kaip tvarkytis su nerastais tag'ais?
-Keli variantai:
-- Tago tekstą dedame prie paieškos teksto
-- Nefiltruojame pagal tag'ą
-- Nerodome tag'ų paieškoje
-
 * Location tag'ų autocomplete turėtų ieškoti visame tago tekste, ne tik pagal pradžią
 
 * search does not quote search parameters properly

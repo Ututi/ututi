@@ -102,7 +102,7 @@ ${h.javascript_link('/javascripts/search.js')|n}
 </%def>
 
 <h1>${_('Search')}</h1>
-${search_form(c.text, c.obj_type, c.tags)}
+${search_form(c.text, c.obj_type, c.tags, parts=['obj_type', 'text'])}
 
 %if c.results:
 ${search_results(c.results)}

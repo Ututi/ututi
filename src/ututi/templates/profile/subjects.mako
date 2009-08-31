@@ -71,7 +71,7 @@ ${parent.head_tags()}
 
 <h2>${_('Search results')}</h2>
 
-${search_form(obj_type='subject', tags=c.tags, parts=['text', 'tags'], target=c.subjects)}
+${search_form(obj_type='subject', tags=c.tags, parts=['text'], target=c.subjects)}
 
 ## overriding the search result item definition
 <%def name="search_subject(item)">
