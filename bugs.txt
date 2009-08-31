@@ -14,8 +14,6 @@ Reikia, kad atrirastų užrašas unhide.
 
 * Location tag'ų autocomplete turėtų ieškoti visame tago tekste, ne tik pagal pradžią
 
-* search does not quote search parameters properly
-
 * You can't move the file that you have just moved, again
 
 * Group public view is missing, and generated urls are pointing to group internal page
