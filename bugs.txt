@@ -33,3 +33,7 @@ Reikia, kad atrirastų užrašas unhide.
 * DONE Move git repositories to git.nous.lt
 
 * move tag widget jasvascript to avoid running it twice
+
+* Files view is slow when there are a lot of files in linux firefox
+
+* Events for group join actions are missing.
