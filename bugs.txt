@@ -24,8 +24,6 @@ Reikia, kad atrirastų užrašas unhide.
 
 * Search does not work if you enter a short tag name instead of selecting the full tag
 
-* Search is showing only 10 items in the search list
-
 * Group search is not too good at handling Year that was entered incorrectly
 
 * DONE Move git repositories to git.nous.lt
