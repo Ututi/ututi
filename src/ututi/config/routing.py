@@ -60,6 +60,9 @@ def make_map():
                 controller='groupforum',
                 action='reply')
 
+    map.connect('/group/{id}/file/{file_id}/{action}',
+                controller='groupfile')
+
     #act on group membership request
     map.connect('/group/{id}/request/{hash_code}/{do}', controller='group', action='request')
 
@@ -80,6 +83,9 @@ def make_map():
 
     map.connect('/subject/*tags/{id}/page/{page_id}/{action}',
                 controller='subjectpage')
+
+    map.connect('/subject/*tags/{id}/file/{file_id}/{action}',
+                controller='subjectfile')
 
     map.connect('/subject/*tags/{id}/edit',
                 controller='subject', action='edit')

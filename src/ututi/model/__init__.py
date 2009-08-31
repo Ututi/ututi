@@ -643,7 +643,7 @@ class PendingRequest(object):
 
 
 subjects_table = None
-
+subject_files_table = None
 class Subject(ContentItem, FolderMixin):
 
     @classmethod
@@ -662,11 +662,12 @@ class Subject(ContentItem, FolderMixin):
             location = location.parent
         return '/'.join(reversed(path))
 
-    def url(self, controller='subject', action='home'):
+    def url(self, controller='subject', action='home', **kwargs):
         return url(controller=controller,
                    action=action,
                    id=self.subject_id,
-                   tags=self.location_path)
+                   tags=self.location_path,
+                   **kwargs)
 
     def __init__(self, subject_id, title, location, lecturer=None):
         self.location = location
@@ -928,6 +929,26 @@ class File(ContentItem):
         f.close()
 
     def url(self, controller='files', action='get'):
+        sft = subject_files_table
+        subject = meta.Session.query(Subject)\
+            .join((sft, sft.c.subject_id==subjects_table.c.id))\
+            .filter(sft.c.file_id==self.id).first()
+
+        gft = group_files_table
+        group = meta.Session.query(Group)\
+            .join((gft, gft.c.group_id==groups_table.c.id))\
+            .filter(gft.c.file_id==self.id).first()
+
+        if subject:
+            return subject.url(controller='subjectfile',
+                               action=action,
+                               file_id=self.id)
+
+        if group:
+            return group.url(controller='groupfile',
+                             action=action,
+                             file_id=self.id)
+
         return url(controller=controller,
                    action=action,
                    id=self.id)
