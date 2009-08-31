@@ -107,3 +107,16 @@ ${search_form(c.text, c.obj_type, c.tags, parts=['obj_type', 'text'])}
 %if c.results:
 ${search_results(c.results)}
 %endif
+
+%if c.obj_type == 'group':
+  <div class="create_item">
+    ${_('Did not find what you were looking for?')}
+    ${h.button_to(_('Create a new group'), url(controller='group', action='add'))}
+  </div>
+%elif c.obj_type == 'subject':
+  <div class="create_item">
+    ${_('Did not find what you were looking for?')}
+    ${h.button_to(_('Create a new subject'), url(controller='subject', action='add'))}
+  </div>
+%endif
+
