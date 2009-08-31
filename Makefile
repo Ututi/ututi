@@ -33,8 +33,8 @@ export PGPORT ?= 4455
 PG_PATH = /usr/lib/postgresql/8.3
 
 instance/var/data/postgresql.conf:
-	mkdir -p instance/var/data
-	${PG_PATH}/bin/initdb -D instance/var/data -E UNICODE
+	mkdir -p ${PWD}/instance/var/data
+	${PG_PATH}/bin/initdb -D ${PWD}/instance/var/data -E UNICODE
 
 instance/var/data/initialized:
 	${PG_PATH}/bin/createuser --createdb    --no-createrole --no-superuser --login admin -h ${PWD}/instance/var/run
@@ -44,18 +44,18 @@ instance/var/data/initialized:
 	${PG_PATH}/bin/createdb --owner admin -E UTF8 development -h ${PWD}/instance/var/run
 	${PG_PATH}/bin/createlang plpgsql development -h ${PWD}/instance/var/run
 	bin/paster setup-app development.ini
-	echo 1 > instance/var/data/initialized
+	echo 1 > ${PWD}/instance/var/data/initialized
 
 instance/done: instance/var/data/postgresql.conf
 	$(MAKE) start_database
 	$(MAKE) instance/var/data/initialized
 	$(MAKE) stop_database
-	echo 1 > instance/done
+	echo 1 > ${PWD}/instance/done
 
 instance/var/run/.s.PGSQL.${PGPORT}:
-	mkdir -p instance/var/run
-	mkdir -p instance/var/log
-	${PG_PATH}/bin/pg_ctl -D instance/var/data -o "-c unix_socket_directory=${PWD}/instance/var/run/ -c custom_variable_classes='ututi' -c ututi.active_user=0 -c default_text_search_config='public.lt'" start  -l instance/var/log/pg.log
+	mkdir -p ${PWD}/instance/var/run
+	mkdir -p ${PWD}/instance/var/log
+	${PG_PATH}/bin/pg_ctl -D ${PWD}/instance/var/data -o "-c unix_socket_directory=${PWD}/instance/var/run/ -c custom_variable_classes='ututi' -c ututi.active_user=0 -c default_text_search_config='public.lt'" start  -l ${PWD}/instance/var/log/pg.log
 	sleep 5
 
 .PHONY: testpsql
@@ -69,7 +69,7 @@ devpsql:
 reset_devdb: instance/var/run/.s.PGSQL.${PGPORT}
 	psql -h ${PWD}/instance/var/run/ -d development -c "drop schema public cascade"
 	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
-	rm -rf instance/uploads
+	rm -rf ${PWD}/instance/uploads
 	bin/paster setup-app development.ini
 
 parts/test/dbdump: bin/test
@@ -78,10 +78,10 @@ parts/test/dbdump: bin/test
 import_sample_data: parts/test/dbdump instance/var/run/.s.PGSQL.${PGPORT}
 	psql -h ${PWD}/instance/var/run/ -d development -c "drop schema public cascade"
 	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
-	rm -rf instance/uploads
+	rm -rf ${PWD}/instance/uploads
 	bin/paster setup-app development.ini
 	/usr/lib/postgresql/8.3/bin/pg_restore -d development -h ${PWD}/instance/var/run -c < parts/test/dbdump
-	cp -r parts/test/files_dump instance/uploads
+	cp -r ${PWD}/parts/test/files_dump ${PWD}/instance/uploads
 
 .PHONY: instance
 instance: instance/done
@@ -91,7 +91,7 @@ start_database: instance/var/data/postgresql.conf instance/var/run/.s.PGSQL.${PG
 
 .PHONY: stop_database
 stop_database:
-	test -f instance/var/data/postmaster.pid && ${PG_PATH}/bin/pg_ctl -D instance/var/data stop -o "-c unix_socket_directory=${PWD}/instance/var/run/" || true
+	test -f ${PWD}/instance/var/data/postmaster.pid && ${PG_PATH}/bin/pg_ctl -D ${PWD}/instance/var/data stop -o "-c unix_socket_directory=${PWD}/instance/var/run/" || true
 
 tags: buildout.cfg bin/buildout setup.py bin/tags
 	bin/tags
@@ -192,7 +192,7 @@ ubuntu-environment:
 	 echo "I am running as $(shell whoami)"; \
 	 exit 3; \
 	} else { \
-	 apt-get build-dep python-psycopg2; \
+	 apt-get build-dep python-psycopg2 python-imaging python-lxml; \
 	 apt-get install build-essential python-all python-all-dev postgresql; \
 	 apt-get install enscript; \
 	 apt-get install myspell-lt; \
@@ -206,4 +206,4 @@ shell: bin/paster instance/done instance/var/run/.s.PGSQL.${PGPORT}
 
 .PHONY: package_release
 package_release:
-	git archive --prefix=ututi${BUILD_ID}/ origin/master | gzip > ututi${BUILD_ID}.tar.gz
+	git archive --prefix=ututi${BUILD_ID}/ HEAD | gzip > ututi${BUILD_ID}.tar.gz
