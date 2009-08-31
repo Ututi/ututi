@@ -1,5 +1,9 @@
 # -*- mode: org -*-
 
+* Kai esu group creation view'e paspaudus ant breadcrumb rodo error'ą
+Viewas: http://u2ti.com/groups/add
+Breadcrumbs nuveda į http://u2ti.com/groups
+
 * Turinio tipo ikonos paieškoje
 
 * Kuriant grupę neįsimena universiteto ir fakulteto iš paieškos užklausos
@@ -35,5 +39,6 @@ Keli variantai:
 * Search is showing only 10 items in the search list
 
 * Group search is not too good at handling Year that was entered incorrectly
+
 
 * DONE Move git repositories to git.nous.lt
