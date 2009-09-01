@@ -172,7 +172,7 @@ $(document).ready(function(){
               <input class="move_url" type="hidden" value="${file.url(action='move')}" />
               <input class="delete_url" type="hidden" value="${file.url(action='delete')}" />
               %if file.can_write():
-                <img src="${url('/images/delete.png')}" class="delete_button" />
+                <img src="${url('/images/delete.png')}" alt="delete file" class="delete_button" />
               %endif
             </li>
 </%def>
