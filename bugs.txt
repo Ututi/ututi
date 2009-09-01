@@ -8,6 +8,12 @@
 
 * TODO Events for group join actions are missing.
 
+* Group public page - balck lines under logos
+
+* Default logo size should be 60x60 not 60x45
+
+* Logos should be in a container that is 60x60 so that they would line up in views and portlets
+
 * Kai esu group creation view'e paspaudus ant breadcrumb rodo error'ą
 Viewas: http://u2ti.com/groups/add
 Breadcrumbs nuveda į http://u2ti.com/groups
