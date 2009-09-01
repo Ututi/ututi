@@ -19,7 +19,7 @@ File upload:
       </a>
       <input class="move_url" type="hidden" value="/subject/vu/mat_analize/file/3/move" />
       <input class="delete_url" type="hidden" value="/subject/vu/mat_analize/file/3/delete" />
-      <img src="/images/delete.png" class="delete_button" />
+      <img src="/images/delete.png" alt="delete file" class="delete_button" />
     </li>
 
     >>> res = app.post("/subject/vu/mat_analize/upload_file",
