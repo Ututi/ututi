@@ -20,8 +20,8 @@ ${_('student information online')}
       %for mship in c.user.memberships:
         <li>
           <div>
-            <a href="${url(controller='group', action='group_home', id=mship.group.group_id)}">
-              ${mship.group.title|h.ellipsis}
+            <a href="${url(controller='group', action='group_home', id=mship.group.group_id)}" title="${mship.group.title}">
+              ${h.ellipsis(mship.group.title, 20)}
             </a>
           </div>
         </li>
