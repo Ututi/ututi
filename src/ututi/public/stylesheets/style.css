@@ -914,3 +914,12 @@ div.user-logo-link div {
 .js {
     display: none;
 }
+
+/* end js alternatives */
+
+/* events listing */
+ul#event_list li {
+  list-style-type: none;
+  padding: 0 0 5px 20px;
+  background: transparent url("../images/details/icon_event.png") left top no-repeat;
+}

@@ -1,7 +1,7 @@
 from datetime import date
 import logging
 
-from sqlalchemy.sql.expression import desc
+from sqlalchemy.sql.expression import desc, or_
 from formencode import Schema, validators
 from routes import url_for
 from webhelpers import paginate
@@ -12,6 +12,7 @@ from pylons.controllers.util import redirect_to
 from pylons.decorators import validate
 from pylons.i18n import _
 
+import ututi.lib.helpers as h
 from ututi.lib.base import BaseController, render
 from ututi.lib.emails import email_confirmation_request
 from ututi.lib.security import ActionProtector
@@ -35,9 +36,29 @@ class ProfileForm(Schema):
 
 class ProfileController(BaseController):
     """A controller for the user's personal information and actions."""
+    def __before__(self):
+        c.breadcrumbs = []
+
+    def _actions(self, selected):
+        return [ {'title': _('Profile'),
+               'link': url(controller='profile', action='index'),
+               'selected': selected == 'profile'},
+              {'title': _('Edit profile'),
+               'link': url(controller='profile', action='edit'),
+               'selected': selected == 'edit'},
+              {'title': _("What's new?"),
+               'link': url(controller='profile', action='home'),
+               'selected': selected == 'home'}
+              ]
 
     @ActionProtector("user")
     def index(self):
+        c.breadcrumbs.append(self._actions('profile'))
+        c.events = meta.Session.query(Event)\
+            .filter(Event.author_id == c.user.id)\
+            .order_by(desc(Event.created))\
+            .limit(20).all()
+
         c.fullname = c.user.fullname
         c.emails = [email.email for email in
                     meta.Session.query(Email).filter_by(id=c.user.id).filter_by(confirmed=False).all()]
@@ -47,8 +68,10 @@ class ProfileController(BaseController):
 
     @ActionProtector("user")
     def home(self):
+        c.breadcrumbs.append(self._actions('home'))
         c.events = meta.Session.query(Event)\
-            .filter(Event.object_id.in_([s.id for s in c.user.watched_subjects]))\
+            .filter(or_(Event.object_id.in_([s.id for s in c.user.watched_subjects]),
+                        Event.object_id.in_([m.group.id for m in c.user.memberships])))\
             .filter(Event.author_id != c.user.id)\
             .order_by(desc(Event.created))\
             .limit(20).all()
@@ -60,12 +83,7 @@ class ProfileController(BaseController):
 
     @ActionProtector("user")
     def edit(self):
-        c.breadcrumbs = [
-            {'title': c.user.fullname,
-             'link': url_for(controller='profile', action='index', id=c.user.id)},
-            {'title': _('Edit'),
-             'link': url_for(controller='profile', action='edit', id=c.user.id)}
-            ]
+        c.breadcrumbs.append(self._actions('edit'))
 
         return render('profile/edit.mako')
 
@@ -104,6 +122,7 @@ class ProfileController(BaseController):
         email.confirmed = True
         email.confirmation_key = ''
         meta.Session.commit()
+        h.flash(_("Your email %s was confirmed. Thank You." % email.email))
         redirect_to(controller='profile', action='index')
 
     @validate(schema=SearchSubmit, form='subjects', post_only = False, on_get = True)

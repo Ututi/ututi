@@ -59,8 +59,11 @@ An email, requesting the confirmation of the email address entered is sent:
     >>> len(urls) == 1
     True
     >>> browser.open(urls[0])
-    >>> browser.printQuery("id('confirmed-emails')/li/text()")
-    jonas@example.com
+    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
+    Close
+    Your email jonas@example.com was confirmed. Thank You.
+
+
 
 We have been logged in after signing up. Now let's log out and test more unfortunate
 scenarios:
