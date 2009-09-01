@@ -1,5 +1,13 @@
 # -*- mode: org -*-
 
+* TODO 403 page is missing
+
+* TODO You can't move file up one folder
+
+* TODO You can't move the file that you have just moved, again
+
+* TODO Events for group join actions are missing.
+
 * Kai esu group creation view'e paspaudus ant breadcrumb rodo error'ą
 Viewas: http://u2ti.com/groups/add
 Breadcrumbs nuveda į http://u2ti.com/groups
@@ -14,33 +22,24 @@ turi būti pasirinkta, tokia kaip paieškoje.
 * Grupės personal page galima paslėpti, bet nėra būdo jo gražinti.
 Reikia, kad atrirastų užrašas unhide.
 
-* You can't move file up one folder
-
 * Location tag'ų autocomplete turėtų ieškoti visame tago tekste, ne tik pagal pradžią
 
-* You can't move the file that you have just moved, again
-
 * Group public view is missing, and generated urls are pointing to group internal page
-
-* 403 page is missing
-
-* TODO Launch u2ti on korys.org
 
 * Search does not work if you enter a short tag name instead of selecting the full tag
 
 * Group search is not too good at handling Year that was entered incorrectly
 
-
-* DONE Move git repositories to git.nous.lt
-
 * move tag widget jasvascript to avoid running it twice
 
 * Files view is slow when there are a lot of files in linux firefox
-
-* Events for group join actions are missing.
 
 * Footer linkai - reikia sukurti puslapius
 
 * Sumažinti failų drag-n-drop target'ą
 
 * WebApp Error: <class 'sqlalchemy.exc.DataError'>: (DataError) value too long for type character varying(100) 'UPDATE users SET fullname=%(fullname)s WHERE users.id = %(users_id)s' {'users_id': 531L, 'fullname': 'Adomasjh gigkj gkjhj gjhgkj gkjgkjhg kjgkjhgkj gkjgk jgkjhg kjhg kjhg kjhg kjgkjh gkj gkjg kg kj gkjhg kjgkjgkjhg kjgjk g jk gkjgkjgkjhgk jg kjhg kjhgkjhg kjh gkjgkj hgkjh'}
+
+* DONE Launch u2ti on korys.org
+
+* DONE Move git repositories to git.nous.lt
