@@ -1,12 +1,12 @@
 # -*- mode: org -*-
 
-* TODO 403 page is missing
-
 * TODO You can't move file up one folder
 
 * TODO You can't move the file that you have just moved, again
 
 * TODO Events for group join actions are missing.
+
+* Folder created events are looking funny in the event list
 
 * Group public page - balck lines under logos
 
@@ -45,6 +45,8 @@ Reikia, kad atrirastų užrašas unhide.
 * Sumažinti failų drag-n-drop target'ą
 
 * WebApp Error: <class 'sqlalchemy.exc.DataError'>: (DataError) value too long for type character varying(100) 'UPDATE users SET fullname=%(fullname)s WHERE users.id = %(users_id)s' {'users_id': 531L, 'fullname': 'Adomasjh gigkj gkjhj gjhgkj gkjgkjhg kjgkjhgkj gkjgk jgkjhg kjhg kjhg kjhg kjgkjh gkj gkjg kg kj gkjhg kjgkjgkjhg kjgjk g jk gkjgkjgkjhgk jg kjhg kjhgkjhg kjh gkjgkj hgkjh'}
+
+* DONE 403 page is missing
 
 * DONE Launch u2ti on korys.org
 
