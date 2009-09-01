@@ -10,23 +10,15 @@ $(document).ready(function(){
 
           var url = ui.item.children('.move_url').val();
 
-          var source_type = ui.sender.parents('.section').children('.type').val();
           var source_id = ui.sender.parents('.section').children('.id').val();
-          var source_location = ui.sender.parents('.section').children('.location').val();
 
-          var target_type = ui.item.parents('.section').children('.type').val();
           var target_id = ui.item.parents('.section').children('.id').val();
-          var target_location = ui.item.parents('.section').children('.location').val();
           var target_folder = ui.item.parents('.folder_file_area').children('.folder_name').val();
 
           $.ajax({type: "POST",
                   url: url,
-                  data: ({source_type: source_type,
-                          source_id: source_id,
-                          source_location: source_location,
-                          target_type: target_type,
+                  data: ({source_id: source_id,
                           target_id: target_id,
-                          target_location: target_location,
                           target_folder: target_folder}),
                   success: function(msg){
                       if (ui.sender.children('.file').size() == 0) {
@@ -221,9 +213,7 @@ $(document).ready(function(){
            value="${obj.url(action='create_folder')}" />
     <input type="hidden" id="delete_folder_url-${section_id}"
            value="${obj.url(action='delete_folder')}" />
-    <input type="hidden" class="type" value="${type(obj).__name__.lower()}" />
     <input type="hidden" class="id" value="${obj.id}" />
-    <input type="hidden" class="location" value="${obj.location.id}" />
     <div class="controls">
       <div id="file_upload_progress-${section_id}" class="file_upload_progress">
       </div>

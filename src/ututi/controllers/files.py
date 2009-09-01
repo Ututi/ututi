@@ -6,7 +6,7 @@ from pylons.controllers.util import redirect_to
 from paste.fileapp import _FileIter
 
 from ututi.lib.base import BaseController, render
-from ututi.model import meta, File, LocationTag, Subject, Group
+from ututi.model import meta, File, ContentItem
 from sqlalchemy.orm.exc import NoResultFound
 from pylons.i18n import _
 from routes import url_for
@@ -30,13 +30,8 @@ class BasefilesController(BaseController):
     def _move(self, source, file):
         # XXX make sure person performing this operation can do it
         # with the target object
-        target_type = request.POST['target_type']
-        if target_type == 'group':
-            target = Group.get(request.POST['target_id'])
-        else:
-            id = int(request.POST['target_location'])
-            location = meta.Session.query(LocationTag).filter_by(id=id).one()
-            target = Subject.get(location, request.POST['target_id'])
+        target_id = int(request.POST['target_id'])
+        target = meta.Session.query(ContentItem).filter_by(id=target_id).one()
 
         source_folder = file.folder
 

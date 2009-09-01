@@ -155,10 +155,8 @@ Deleting files:
     '404 Not Found'
 
     >>> app.post('/group/moderators/file/6/move',
-    ...          params={'source_type': 'group',
-    ...                  'source_id': 'moderators',
-    ...                  'target_type': 'group',
-    ...                  'target_id': 'moderators',
+    ...          params={'source_id': '1',
+    ...                  'target_id': '1',
     ...                  'target_folder': 'Uga Buga'}).status
     '200 OK'
 
@@ -167,19 +165,14 @@ Moving files:
     >>> from ututi.tests.model.test_groups import printTree
     >>> from ututi.model import Group, LocationTag, Subject
 
-    >>> l1 = str(LocationTag.get(u'vu').id)
-
     >>> printTree(Group.get('moderators'))
     Also a folder:
     Uga Buga:
        more_text.txt
 
     >>> app.post('/group/moderators/file/6/move',
-    ...          params={'source_type': 'group',
-    ...                  'source_id': 'moderators',
-    ...                  'target_type': 'subject',
-    ...                  'target_id': 'mat_analize',
-    ...                  'target_location': l1,
+    ...          params={'source_id': '1',
+    ...                  'target_id': '2',
     ...                  'target_folder': 'Some folder'}).status
     '200 OK'
 
@@ -194,11 +187,8 @@ Moving files:
        more_text.txt
 
     >>> app.post('/subject/vu/mat_analize/file/4/move',
-    ...          params={'source_type': 'subject',
-    ...                  'source_id': 'mat_analize',
-    ...                  'source_location': l1,
-    ...                  'target_type': 'group',
-    ...                  'target_id': 'moderators',
+    ...          params={'source_id': '2',
+    ...                  'target_id': '1',
     ...                  'target_folder': ''}).status
     '200 OK'
 
