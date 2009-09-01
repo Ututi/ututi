@@ -109,7 +109,7 @@ class HomeController(BaseController):
                sign_in_user(email)
                redirect_to(str(destination))
 
-          return render('/anonymous_index.mako')
+          return render('/login.mako')
 
      def logout(self):
           if 'login' in session:
