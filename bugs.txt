@@ -40,3 +40,5 @@ Reikia, kad atrirastų užrašas unhide.
 * Events for group join actions are missing.
 
 * Footer linkai - reikia sukurti puslapius
+
+* Sumažinti failų drag-n-drop target'ą
