@@ -41,7 +41,7 @@ def subject_file_action(method):
             abort(404)
 
         c.object_location = subject.location
-        c.security_context = subject
+        c.security_context = file
         c.subject = subject
         return method(self, subject, file)
     return _subject_action
@@ -56,7 +56,7 @@ class SubjectfileController(BasefilesController):
         return self._get(file)
 
     @subject_file_action
-    @ActionProtector('moderator', 'author')
+    @ActionProtector('owner', 'moderator')
     def delete(self, subject, file):
         return self._delete(file)
 

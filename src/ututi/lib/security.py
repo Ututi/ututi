@@ -4,7 +4,6 @@ from pylons.controllers.util import redirect_to
 from repoze.what.predicates import NotAuthorizedError
 from repoze.what.plugins.pylonshq.protectors import ActionProtector as BaseActionProtector
 
-
 def current_user():
     from ututi.model import User
     login = session.get('login', '')
@@ -25,7 +24,12 @@ def is_member(user, context=None):
 
 
 def is_admin(user, context=None):
-    return context.is_admin(user)
+    """The user is the group's administrator."""
+    from ututi.model import Group, File
+    if isinstance(context, File) and isinstance(context.file_parent, Group):
+        return context.file_parent.is_admin(user)
+    else:
+        return context.is_admin(user)
 
 
 def is_user(user, context=None):

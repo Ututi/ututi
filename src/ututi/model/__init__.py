@@ -859,14 +859,34 @@ class LocationTag(Tag):
         items.extend(meta.Session.query(cls).filter_by(title_short=title).all())
         return items
 
+
+group_files_table = None
+
 class File(ContentItem):
     """Class representing user-uploaded files."""
+
+    @property
+    def file_parent(self):
+        sft = subject_files_table
+        subject = meta.Session.query(Subject)\
+            .join((sft, sft.c.subject_id==subjects_table.c.id))\
+            .filter(sft.c.file_id==self.id).first()
+
+        gft = group_files_table
+        group = meta.Session.query(Group)\
+            .join((gft, gft.c.group_id==groups_table.c.id))\
+            .filter(gft.c.file_id==self.id).first()
+
+        if subject:
+            return subject
+        if group:
+            return group
 
     def can_write(self, user=None):
 
         can_write = False
-        if isinstance(self.parent, Subject):
-            can_write = check_crowds(['moderator'], context=self.parent, user=user)
+        if isinstance(self.file_parent, Subject):
+            can_write = check_crowds(['moderator'], context=self.file_parent, user=user)
         return can_write or check_crowds(['owner'], context=self, user=user)
 
     def __init__(self, filename, title, mimetype=None, created=None,
@@ -929,25 +949,14 @@ class File(ContentItem):
         f.close()
 
     def url(self, controller='files', action='get'):
-        sft = subject_files_table
-        subject = meta.Session.query(Subject)\
-            .join((sft, sft.c.subject_id==subjects_table.c.id))\
-            .filter(sft.c.file_id==self.id).first()
-
-        gft = group_files_table
-        group = meta.Session.query(Group)\
-            .join((gft, gft.c.group_id==groups_table.c.id))\
-            .filter(gft.c.file_id==self.id).first()
-
-        if subject:
-            return subject.url(controller='subjectfile',
-                               action=action,
-                               file_id=self.id)
-
-        if group:
-            return group.url(controller='groupfile',
-                             action=action,
-                             file_id=self.id)
+        if isinstance(self.file_parent, Subject):
+            return self.file_parent.url(controller='subjectfile',
+                                   action=action,
+                                   file_id=self.id)
+        elif isinstance(self.file_parent, Group):
+            return self.file_parent.url(controller='groupfile',
+                                   action=action,
+                                   file_id=self.id)
 
         return url(controller=controller,
                    action=action,
