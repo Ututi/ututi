@@ -95,6 +95,9 @@ class HomeController(BaseController):
           else:
                return render('/anonymous_index.mako')
 
+     def terms(self):
+          return render('/terms.mako')
+
      def login(self):
           email = request.POST.get('login')
           password = request.POST.get('password')

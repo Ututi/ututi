@@ -45,6 +45,11 @@ body {
   border: 1px solid #ded8d8;
   text-align: center;
 }
+
+#footer .small {
+  font-weight: normal;
+}
+
 /* end main layout */
 
 /* fonts */

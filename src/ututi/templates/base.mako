@@ -252,11 +252,11 @@ ${h.javascript_link('/javascripts/forms.js')|n}
       </div>
 
       <div id="footer" class="small">
-        Copyright <a href="#">UAB „Nous“</a>
+        Copyright <a href="http://www.nous.lt">UAB „Nous“</a>
         <div id="footer-links">
-          <a href="#">aaaaa</a> |
-          <a href="#">aaasdfasdaa</a> |
-          <a href="#">aaa dasfaa</a>
+          <a href="http://blog.ututi.lt/apie">${_('Apie Ututi')}</a> |
+          <a href="http://blog.ututi.lt">${_('U-blog')}</a> |
+          <a href="${url(controller='home', action='terms')}">${_('Terms of use')}</a>
         </div>
 
       </div>
