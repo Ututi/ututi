@@ -9,14 +9,9 @@ from pylons.controllers.util import abort
 def serve_image(image, width=None, height=None):
     if image is not None:
         response.headers['Content-Disposition'] = 'inline'
-
+        img = Image.open(StringIO.StringIO(image))
         if width is not None or height is not None:
-            img = Image.open(StringIO.StringIO(image))
             img = resize_image(img, width=width, height=height)
-        else:
-            response.headers['Content-Type'] = file.mimetype
-            response.headers['Content-Length'] = file.filesize
-            return image
 
         buffer = StringIO.StringIO()
         img.save(buffer, "PNG")
