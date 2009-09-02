@@ -4,7 +4,15 @@
   ${c.user_info.fullname}
 </%def>
 
-<h1>${c.user_info.fullname}</h1>
-% if c.user_info.logo is not None:
-  <img src="${url(controller='user', action='logo', id=c.user_info.id, width=75, height=100)}" />
+<h1>${_('Latest actions')}</h1>
+% if c.events:
+  <ul id="event_list">
+    % for event in c.events:
+    <li>
+      ${event.render()|n} <span class="event_time">(${event.when()})</span>
+    </li>
+    % endfor
+  </ul>
+% else:
+  ${_("Nothing yet.")}
 % endif

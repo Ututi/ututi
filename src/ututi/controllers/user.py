@@ -1,6 +1,7 @@
 import logging
 
 from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.sql.expression import desc, or_
 from pylons.controllers.util import abort
 from pylons import c
 from pylons.i18n import _
@@ -9,7 +10,8 @@ from routes import url_for
 from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
 
-from ututi.model import meta, User
+from ututi.model import meta, User, ContentItem
+from ututi.model.events import Event
 
 log = logging.getLogger(__name__)
 
@@ -32,6 +34,13 @@ class UserController(BaseController):
             {'title': user.fullname,
              'link': url_for(controller='user', action='index', id=user.id)}
             ]
+        c.events = meta.Session.query(Event)\
+            .join(Event.context)\
+            .filter(Event.author_id == user.id)\
+            .filter(ContentItem.content_type == 'subject')\
+            .order_by(desc(Event.created))\
+            .limit(20).all()
+
 
         return render('user/index.mako')
 
