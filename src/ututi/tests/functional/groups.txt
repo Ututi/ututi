@@ -8,12 +8,7 @@ Group adding and import
 
 A list of all groups is show at /groups.
 
-    >>> browser = Browser()
-    >>> browser.open('http://localhost/')
-    >>> form = browser.getForm('login_form')
-    >>> form.getControl('Email').value = "admin@ututi.lt"
-    >>> form.getControl('Password').value = "asdasd"
-    >>> form.getControl('Login').click()
+    >>> browser = Browser.logIn()
 
     >>> browser.open('http://localhost/groups')
     >>> browser.printQuery("id('group_list')//li/a/text()")
@@ -114,12 +109,7 @@ And they must be valid local parts of email addresses.
 If you log in, you should be able to see the groups you are a member
 of in your home page (at least for now):
 
-    >>> browser = Browser()
-    >>> browser.open('http://localhost/')
-    >>> form = browser.getForm('login_form')
-    >>> form.getControl('Email').value = "admin@ututi.lt"
-    >>> form.getControl('Password').value = "asdasd"
-    >>> form.getControl('Login').click()
+    >>> browser = Browser.logIn()
 
     >>> browser.printQuery("id('group_portlet_header')")
     <h3 id="group_portlet_header">

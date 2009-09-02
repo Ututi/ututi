@@ -15,11 +15,7 @@ Each user will have a profile that is accessible via the url /profile/{id}.
 
 Now we'll try editing our profile information. First we need to log in.
 
-    >>> browser.open('http://localhost/')
-    >>> form = browser.getForm('login_form')
-    >>> form.getControl('Email').value = "admin@ututi.lt"
-    >>> form.getControl('Password').value = "asdasd"
-    >>> form.getControl('Login').click()
+    >>> browser = Browser.logIn()
 
     >>> browser.printQuery("id('personal-box')//div[@class='fullname']/text()")
     Adminas Adminovix

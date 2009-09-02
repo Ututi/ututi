@@ -56,11 +56,7 @@ But if someone would sent an email with an attachment, it sure would get stored:
 
 Not just stored, it should appear in the files list:
 
-    >>> browser = Browser()
-    >>> form = browser.getForm('login_form')
-    >>> form.getControl('Email').value = "admin@ututi.lt"
-    >>> form.getControl('Password').value = "asdasd"
-    >>> form.getControl('Login').click()
+    >>> browser = Browser.logIn()
     >>> browser.open('http://localhost/files')
 
     >>> browser.printQuery('id("file_list")//a')

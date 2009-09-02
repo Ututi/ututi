@@ -3,12 +3,7 @@ User information import
 
 First we log in to be able to see the user list.
 
-    >>> browser = Browser()
-    >>> browser.open('http://localhost/')
-    >>> form = browser.getForm('login_form')
-    >>> form.getControl('Email').value = "admin@ututi.lt"
-    >>> form.getControl('Password').value = "asdasd"
-    >>> form.getControl('Login').click()
+    >>> browser = Browser.logIn()
 
     >>> browser.open('http://localhost/admin')
     >>> browser.printQuery('//h2')

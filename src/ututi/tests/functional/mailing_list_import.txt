@@ -2,11 +2,7 @@ Mailing list import
 ===================
 
     >>> from ututi.tests.functional import import_csv
-    >>> browser = Browser()
-    >>> form = browser.getForm('login_form')
-    >>> form.getControl('Email').value = "admin@ututi.lt"
-    >>> form.getControl('Password').value = "asdasd"
-    >>> form.getControl('Login').click()
+    >>> browser = Browser.logIn()
 
     >>> import_csv(browser, 'import_users', 'export_users.csv')
     >>> import_csv(browser, 'import_groups', 'export_groups.csv')

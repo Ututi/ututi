@@ -3,11 +3,7 @@ A test of all the import views with a reduced set of sample data
 
 Log in as admin:
 
-    >>> browser = Browser()
-    >>> form = browser.getForm('login_form')
-    >>> form.getControl('Email').value = "admin@ututi.lt"
-    >>> form.getControl('Password').value = "asdasd"
-    >>> form.getControl('Login').click()
+    >>> browser = Browser.logIn()
 
 Go to admin page:
 
