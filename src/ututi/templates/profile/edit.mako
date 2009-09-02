@@ -1,4 +1,16 @@
 <%inherit file="/profile/base.mako" />
+<%namespace file="/portlets/user.mako" import="*"/>
+
+<%def name="portlets()">
+<div id="sidebar">
+  ${user_information_portlet()}
+
+  ${user_subjects_portlet()}
+  ${user_groups_portlet()}
+
+</div>
+</%def>
+
 
 <%def name="title()">
   ${c.user.fullname}
