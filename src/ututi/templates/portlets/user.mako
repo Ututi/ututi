@@ -25,14 +25,17 @@
   </%self:portlet>
 </%def>
 
-<%def name="user_groups_portlet(user=None)">
+<%def name="user_groups_portlet(user=None, title=None, full=True)">
   <%
      if user is None:
          user = c.user
+
+     if title is None:
+       title = _('My groups')
   %>
   <%self:portlet id="group_portlet" portlet_class="inactive">
     <%def name="header()">
-      ${_('My groups')}
+      ${title}
     </%def>
     % if not user.memberships:
       ${_('You are not a member of any.')}
@@ -45,7 +48,58 @@
       % endfor
     </ul>
     %endif
-    ${h.button_to(_('Create group'), url(controller='group', action='add'))}
-    ${h.link_to(_('More groups'), url(controller='search', action='index', obj_type='group'), class_="more")}
+    %if full:
+      ${h.button_to(_('Create group'), url(controller='group', action='add'))}
+      ${h.link_to(_('More groups'), url(controller='search', action='index', obj_type='group'), class_="more")}
+    %endif
+  </%self:portlet>
+</%def>
+
+<%def name="user_information_portlet(user=None, full=True, title=None)">
+  <%
+     if user is None:
+         user = c.user
+
+     if title is None:
+         title = _('My information')
+  %>
+  <%self:portlet id="user_information_portlet" portlet_class="inactive">
+    <%def name="header()">
+      ${title}
+    </%def>
+
+    <div>
+      <div class="user-logo">
+
+        %if user.logo is not None:
+          <img src="${url(controller='user', action='logo', id=user.id, width=45, height=60)}" alt="logo" />
+        %else:
+          ${h.image('/images/user_logo_45x60.png', alt='logo')|n}
+        %endif
+      </div>
+      <div class="user-information">
+        <h3>${user.fullname}</h3>
+        %if full:
+          <div class="email">
+            <a href="mailto:${user.emails[0].email}">${user.emails[0].email}</a>
+          </div>
+        %endif
+        %if user.site_url:
+          <div class="user-link">
+            <a href="${user.site_url}">${user.site_url}</a>
+          </div>
+        %endif
+      </div>
+    </div>
+    %if user.description:
+      <div class="user-description">
+        ${user.description}
+      </div>
+    %else:
+      <br style="clear: left;"/>
+    %endif
+    %if full:
+      <a href="${url(controller='profile', action='edit')}" class="more">${_('Edit profile')}</a>
+    %endif
   </%self:portlet>
 </%def>
