@@ -6,6 +6,7 @@ from pylons.controllers.util import abort
 from pylons import c
 from pylons.i18n import _
 from routes import url_for
+from routes.util import redirect_to
 
 from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
@@ -41,7 +42,8 @@ class UserController(BaseController):
             .order_by(desc(Event.created))\
             .limit(20).all()
 
-
+        if user is c.user:
+            redirect_to(controller='profile', action='index')
         return render('user/index.mako')
 
     def logo(self, id, width=None, height=None):
