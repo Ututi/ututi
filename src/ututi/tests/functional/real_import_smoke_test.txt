@@ -28,5 +28,45 @@ And upload all the files one by one:
     >>> import_csv(browser, 'import_user_ignored_subjects', 'export_user_ignored_subjects.csv')
     >>> import_csv(browser, 'import_user_watched_subjects', 'export_user_watched_subjects.csv')
 
+    >>> from urllib2 import HTTPError
+    >>> from pkg_resources import resource_string
+    >>> from nous.mailpost import processEmailAndPost
+    >>> from pylons import config
+    >>> emails = resource_string("ututi.tests.functional.import", "export_group_forums.txt").split("=" * 72 + '\n')
+    >>> from nous.mailpost.MailBoxerTools import splitMail
+    >>> import rfc822
+    >>> emails = filter(bool, emails)
+    >>> emails.sort(key=lambda message: rfc822.parsedate(splitMail(message)[0]['date']))
+
+    >>> from ututi.model.mailing import UtutiEmail
+    >>> import email
+    >>> for n, email_text in enumerate(emails):
+    ...     if email_text:
+    ...         try:
+    ...             processEmailAndPost('http://localhost/got_mail', email_text, config['files_path'])
+    ...         except HTTPError, e:
+    ...             message = email.message_from_string(email_text, UtutiEmail)
+    ...             print "Email %d from %s was ignored" % (n, message.getFrom())
+    Email 0 from Jarekas <jaro@akl.lt> was ignored
+    Email 2 from Jarekas <jaroslav@akl.lt> was ignored
+    Email 7 from Jaroslav Šatkevič <jaroslav@akl.lt> was ignored
+    Email 12 from Jaroslav Šatkevič <jaroslav@akl.lt> was ignored
+    Email 13 from Jaroslav Šatkevič <jaroslav@akl.lt> was ignored
+    Email 15 from Jaroslav Šatkevič <jaroslav@akl.lt> was ignored
+    Email 142 from Jaroslav Šatkevič <jaroslav@akl.lt> was ignored
+    Email 145 from Jaroslav Šatkevič <jaroslav@akl.lt> was ignored
+    Email 146 from Jaroslav Šatkevič <jaroslav@akl.lt> was ignored
+    Email 148 from Domas Monkus <domas@ututi.com> was ignored
+    Email 190 from Jaroslav Šatkevič <jaroslav@akl.lt> was ignored
+
+    >>> browser.open('http://localhost/group/archpio')
+    >>> browser.getLink('Forum').click()
+    >>> browser.getLink('Pilot Post').click()
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> len(mail_queue)
+    180
+    >>> mail_queue[:] = []
+
     >>> from ututi.tests.functional import dump_database
     >>> dump_database()
