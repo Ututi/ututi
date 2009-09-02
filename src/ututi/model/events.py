@@ -81,14 +81,24 @@ class FileUploadedEvent(Event):
     """
 
     def render(self):
-        if isinstance(self.context, Subject):
-            return _("A new file %(link_to_file)s for a subject %(link_to_subject)s was uploaded") % {
-                'link_to_subject': link_to(self.context.title, self.context.url()),
-                'link_to_file': link_to(self.file.title, self.file.url())}
-        elif isinstance(self.context, Group):
-            return _("A new file %(link_to_file)s for a group %(link_to_group)s was uploaded") % {
-                'link_to_group': link_to(self.context.title, self.context.url()),
-                'link_to_file': link_to(self.file.title, self.file.url())}
+        if self.file.md5 is not None:
+            if isinstance(self.context, Subject):
+                return _("A new file %(link_to_file)s for a subject %(link_to_subject)s was uploaded") % {
+                    'link_to_subject': link_to(self.context.title, self.context.url()),
+                    'link_to_file': link_to(self.file.title, self.file.url())}
+            elif isinstance(self.context, Group):
+                return _("A new file %(link_to_file)s for a group %(link_to_group)s was uploaded") % {
+                    'link_to_group': link_to(self.context.title, self.context.url()),
+                    'link_to_file': link_to(self.file.title, self.file.url())}
+        else:
+            if isinstance(self.context, Subject):
+                return _("A new folder '%(folder_title)s' for a subject %(link_to_subject)s was created") % {
+                    'link_to_subject': link_to(self.context.title, self.context.url()),
+                    'folder_title': self.file.folder}
+            elif isinstance(self.context, Group):
+                return _("A new folder '%(folder_title)s' for a group %(link_to_group)s was uploaded") % {
+                    'link_to_group': link_to(self.context.title, self.context.url()),
+                    'folder_title': self.file.folder}
 
 
 class SubjectCreatedEvent(Event):
