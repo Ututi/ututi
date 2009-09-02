@@ -10,7 +10,7 @@ ${parent.head_tags()}
 <img src="${url('/images/nope.png')}" />
 
 <div>
-${_('Oops, an error happened, please don't leave us, go back and try doing something else or look for information.')}
+${_("Oops, an error happened, please don't leave us, go back and try doing something else or look for information.")}
 </div>
 
 % if request.referrer.startswith(url("/", qualified=True)):
