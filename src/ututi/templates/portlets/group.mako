@@ -71,14 +71,16 @@
       ${_('Recently seen')}
     </%def>
     %for member in group.last_seen_members[:3]:
-    <div class="user-link">
-      <a href="${url(controller='user', action='index', id=member.id)}" title="${member.fullname}">
-        %if member.logo is not None:
-          <img src="${url(controller='user', action='logo', id=member.id, width=40)}" alt="${member.fullname}"/>
-        %else:
-          ${h.image('/images/user_logo_small.png', alt=member.fullname)|n}
-        %endif
-      </a>
+    <div class="user-logo-link">
+      <div class="user-logo">
+        <a href="${url(controller='user', action='index', id=member.id)}" title="${member.fullname}">
+          %if member.logo is not None:
+            <img src="${url(controller='user', action='logo', id=member.id, width=40, height=40)}" alt="${member.fullname}"/>
+          %else:
+            ${h.image('/images/user_logo_small.png', alt=member.fullname)|n}
+          %endif
+        </a>
+      </div>
       <div>
         <a href="${url(controller='user', action='index', id=member.id)}" title="${member.fullname}">
           <span class="small">${member.fullname}</span>

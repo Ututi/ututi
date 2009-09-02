@@ -5,14 +5,9 @@
 * TODO You can't move the file that you have just moved, again
 
 * TODO Events for group join actions are missing.
+??? Can you be more specific? Events such as 'user x has joined group y' seem to work.
 
 * Folder created events are looking funny in the event list
-
-* Group public page - balck lines under logos
-
-* Default logo size should be 60x60 not 60x45
-
-* Logos should be in a container that is 60x60 so that they would line up in views and portlets
 
 * Kai esu group creation view'e paspaudus ant breadcrumb rodo error'ą
 Viewas: http://u2ti.com/groups/add
@@ -51,3 +46,10 @@ Reikia, kad atrirastų užrašas unhide.
 * DONE Launch u2ti on korys.org
 
 * DONE Move git repositories to git.nous.lt
+
+* DONE (could not reproduce) Group public page - balck lines under logos
+
+* DONE Default logo size should be 60x60 not 60x45
+
+* DONE Logos should be in a container that is 60x60 so that they would line up in views and portlets
+

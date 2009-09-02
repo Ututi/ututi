@@ -688,11 +688,17 @@ a.small-link:hover {
   color: #ff7800;
 }
 
-#group_members_portlet .user-link {
+#group_members_portlet .user-logo-link {
   width: 70px;
+  height: auto;
   text-align: center;
   float: left;
   margin: 0 5px;
+}
+
+#group_members_portlet .user-logo-link div.user-logo {
+  width: 40px;
+  height: 40px;
 }
 
 #group_members_portlet .user-link div {
@@ -931,8 +937,13 @@ div.user-logo-link {
   text-align: center;
 }
 
-div.user-logo-link img {
+div.user-logo-link div.user-logo {
+  height: 60px;
   width: 60px;
+  margin: 0 auto;
+}
+
+div.user-logo-link img {
   margin: 0 auto;
 }
 
