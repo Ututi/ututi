@@ -29,6 +29,26 @@
         $(img_id).attr('src', img_src+'?'+timestamp);
       }
     });
+    new AjaxUpload('#user-logo-button', {
+      action: '${url(controller="profile", action="logo_upload")}',
+      name: 'logo',
+      // Submit file after selection
+      autoSubmit: true,
+      responseType: false,
+      onSubmit: function(file, extension) {
+        if (! (extension && /^(jpg|png|jpeg|gif|tiff|bmp)$/.test(extension))){
+          alert('${_("The file type is not supported.")}');
+          return false;
+        }
+      },
+      onComplete: function(file, response) {
+        var img_id = '#user-logo-editable';
+        var img_src = "${url(controller='profile', action='logo', width='120', height='200')}";
+        var timestamp = new Date().getTime();
+        $(img_id).attr('src', img_src+'?'+timestamp);
+      }
+    });
+
    });
   </script>
 </%def>
@@ -40,11 +60,11 @@
     <tr>
       <td style="width: 220px;">
         <div class="js-alternatives" id="user-logo">
-          <span id="user-logo-msg" class="message js">${_('Click to change your logo')}</span>
           <img src="${url(controller='profile', action='logo', width='120', height='200')}" alt="User logo" id="user-logo-editable"/>
+          <a href="#" id="user-logo-button" class="btn"><span>${_('Change logo')}</span></a>
         </div>
         <br style="clear: left;"/>
-        <div class="form-field no-break">
+        <div class="form-field no-break" style="text-align: center;">
           <input type="checkbox" name="logo_delete" id="logo_delete" value="delete" class="line"/>
           <label for="logo_delete">${_('Delete current logo')}</label>
         </div>
