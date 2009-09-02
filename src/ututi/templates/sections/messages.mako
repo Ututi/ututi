@@ -39,3 +39,49 @@
 %endif
 
 </%def>
+
+<%def name="request_messages(user=None)">
+<%
+   if user is None and c.user is not None:
+       user = c.user
+%>
+%if user:
+  <%
+     groups = [mship.group for mship in user.memberships if mship.membership_type == 'administrator' and mship.group.requests != []]
+     requests = []
+     for group in groups:
+       requests.extend(group.requests)
+  %>
+  %for rq in requests:
+  <div class="flash-message">
+    <span>
+      ${_(u"%(user)s wants to join the group %(group)s. Do You want to confirm his membership?") % dict(user=rq.user.fullname, group=rq.group.title)}
+    </span>
+    <br/>
+    <form style="display: inline;" method="post" action="${url(controller='group', action='request', id=rq.group.group_id)}">
+      <div style="display: inline;">
+        <input type="hidden" name="hash_code" value="${rq.hash}"/>
+        <input type="hidden" name="action" value="confirm"/>
+        <input type="hidden" name="came_from" value="${request.url}"/>
+        <span class="btn">
+          <input type="submit" value="${_('Confirm')}"/>
+        </span>
+      </div>
+    </form>
+    <form style="display: inline;" method="post" action="${url(controller='group', action='request', id=rq.group.group_id)}">
+      <div style="display: inline;">
+        <input type="hidden" name="hash_code" value="${rq.hash}"/>
+        <input type="hidden" name="action" value="deny"/>
+                <input type="hidden" name="came_from" value="${request.url}"/>
+        <span class="btn">
+          <input type="submit" style="color: #888;" value="${_('Deny')}"/>
+        </span>
+      </div>
+    </form>
+
+
+  </div>
+  %endfor
+%endif
+
+</%def>

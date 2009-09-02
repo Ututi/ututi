@@ -520,7 +520,12 @@ class GroupController(GroupControllerBase, FileViewMixin):
             except NoResultFound:
                 h.flash(_("Error confirming membership request."))
                 pass
-        redirect_to(controller='group', action='members', id=c.group.group_id)
+
+        url = self.form_result.get('came_from', None)
+        if url is None:
+            redirect_to(controller='group', action='members', id=c.group.group_id)
+        else:
+            redirect_to(url.encode('utf-8'))
 
     @validate(schema=GroupMemberUpdateForm)
     @group_action

@@ -244,6 +244,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
             <div class="flash-message"><span class="close-link hide-parent">${_('Close')}</span><span>${message}</span></div>
             % endfor
             ${invitation_messages(c.user)}
+            ${request_messages(c.user)}
           </div>
           ${self.body()}
           <br style="clear: both;"/>
