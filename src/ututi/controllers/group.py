@@ -322,7 +322,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
         if is_root(c.user):
             group.moderators = values['moderators']
 
-        group.show_page = values['show_page'] is None and False or True
+        group.show_page = bool(values.get('show_page', False))
 
         meta.Session.commit()
         redirect_to(controller='group', action='home', id=group.group_id)
