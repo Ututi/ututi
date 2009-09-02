@@ -60,6 +60,10 @@ from ututi.lib.security import is_root
     <label for="logo_delete">${_('Delete current logo')}</label>
     <input type="checkbox" name="logo_delete" id="logo_delete" value="delete" class="line"/>
   </div>
+  <div class="form-field">
+    <label for="show_page">${_('Show group page')}</label>
+    <input type="checkbox" name="show_page" id="show_page" value="true" class="line"/>
+  </div>
 
 
   <div>

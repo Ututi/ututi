@@ -7,19 +7,12 @@
 * TODO Events for group join actions are missing.
 ??? Can you be more specific? Events such as 'user x has joined group y' seem to work.
 
-* Kai esu group creation view'e paspaudus ant breadcrumb rodo error'ą
-Viewas: http://u2ti.com/groups/add
-Breadcrumbs nuveda į http://u2ti.com/groups
-
 * Turinio tipo ikonos paieškoje
 
 * Kuriant grupę neįsimena universiteto ir fakulteto iš paieškos užklausos
 Esu naujas naudotojas. Suvedu universitetą ir ieškau grupęs.
 Nerandu norimos grupės todėl spaudžiu "create group". Čia mokymo įstaiga
 turi būti pasirinkta, tokia kaip paieškoje.
-
-* Grupės personal page galima paslėpti, bet nėra būdo jo gražinti.
-Reikia, kad atrirastų užrašas unhide.
 
 * Location tag'ų autocomplete turėtų ieškoti visame tago tekste, ne tik pagal pradžią
 
@@ -53,3 +46,12 @@ Reikia, kad atrirastų užrašas unhide.
 
 * DONE Folder created events are looking funny in the event list
 Did not add a link to the folder though - not sure where the link would have been supposed to be pointing.
+
+* DONE Kai esu group creation view'e paspaudus ant breadcrumb rodo error'ą
+Viewas: http://u2ti.com/groups/add
+Breadcrumbs nuveda į http://u2ti.com/groups
+Išmestas groups breadcrumbas - ten jam ne vieta.
+
+* DONE Grupės personal page galima paslėpti, bet nėra būdo jo gražinti.
+Reikia, kad atrirastų užrašas unhide.
+Pridėtas checkboxas grupės edit view'e.

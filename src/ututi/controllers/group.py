@@ -150,10 +150,8 @@ def group_action(method):
 class GroupControllerBase(BaseController):
 
     def __before__(self):
-        c.breadcrumbs = [
-            {'title': _('Groups'),
-             'link': url(controller='group', action='index')}
-            ]
+        c.breadcrumbs = []
+
         c.mailing_list_host = config.get('mailing_list_host', '')
 
     def _actions(self, selected):
@@ -194,6 +192,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
         if check_crowds(["member", "admin", "moderator"]):
             if request.GET.get('do', None) == 'hide_page':
                 group.show_page = False
+                h.flash(_("The group's page was hidden. You can show it again by editing the group's settings."))
             meta.Session.commit()
             c.breadcrumbs.append(self._actions('home'))
             c.events = meta.Session.query(Event)\
@@ -322,6 +321,8 @@ class GroupController(GroupControllerBase, FileViewMixin):
 
         if is_root(c.user):
             group.moderators = values['moderators']
+
+        group.show_page = values['show_page'] is None and False or True
 
         meta.Session.commit()
         redirect_to(controller='group', action='home', id=group.group_id)
