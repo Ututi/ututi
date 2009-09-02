@@ -142,7 +142,7 @@ class HomeController(BaseController):
                          invitation.group.add_member(user)
                          meta.Session.delete(invitation)
                          meta.Session.commit()
-                         redirect_to(controller='group', action='group_home', id=invitation.group.group_id)
+                         redirect_to(controller='group', action='home', id=invitation.group.group_id)
                else:
                     redirect_to(controller='profile', action='welcome')
           else:

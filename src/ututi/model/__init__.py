@@ -525,7 +525,7 @@ class Group(ContentItem, FolderMixin):
             membership = GroupMember(user, self, admin)
             meta.Session.add(membership)
 
-    def url(self, controller='group', action='group_home', **kwargs):
+    def url(self, controller='group', action='home', **kwargs):
         return url_for(controller=controller, action=action, id=self.group_id, **kwargs)
 
     def invite_user(self, email, author):

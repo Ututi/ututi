@@ -46,7 +46,7 @@ def make_map():
 
     # essential ututi component routes go here
 
-    map.connect('/group/{id}', controller='group', action='group_home')
+    map.connect('/group/{id}', controller='group', action='home')
 
     map.connect('/group/{id}/forum',
                 controller='groupforum',

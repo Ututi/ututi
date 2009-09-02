@@ -164,8 +164,8 @@ class GroupControllerBase(BaseController):
         """
         return [
             {'title': _('Home'),
-             'link': url(controller='group', action='group_home', id=c.group.group_id),
-             'selected': selected == 'group_home'},
+             'link': url(controller='group', action='home', id=c.group.group_id),
+             'selected': selected == 'home'},
             {'title': _('Forum'),
              'link': url(controller='group', action='forum', id=c.group.group_id),
              'selected': selected == 'forum'},
@@ -190,12 +190,12 @@ class GroupController(GroupControllerBase, FileViewMixin):
         return render('groups.mako')
 
     @group_action
-    def group_home(self, group):
+    def home(self, group):
         if check_crowds(["member", "admin", "moderator"]):
             if request.GET.get('do', None) == 'hide_page':
                 group.show_page = False
             meta.Session.commit()
-            c.breadcrumbs.append(self._actions('group_home'))
+            c.breadcrumbs.append(self._actions('home'))
             c.events = meta.Session.query(Event)\
                 .filter(or_(Event.object_id.in_([s.id for s in group.watched_subjects]),
                             Event.object_id == group.id))\
@@ -217,12 +217,12 @@ class GroupController(GroupControllerBase, FileViewMixin):
             h.flash(_("You already are a member of this group."))
         else:
             h.flash(_("Your request to join the group is still being processed."))
-        redirect_to(controller='group', action='group_home', id=group.group_id)
+        redirect_to(controller='group', action='home', id=group.group_id)
 
     @group_action
     @ActionProtector("admin", "moderator")
     def edit_page(self, group):
-        c.breadcrumbs.append(self._actions('group_home'))
+        c.breadcrumbs.append(self._actions('home'))
         return render('group/edit_page.mako')
 
     @group_action
@@ -235,7 +235,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
         group.page = page_content
         meta.Session.commit()
         h.flash(_("The group's front page was updated."))
-        redirect_to(controller='group', action='group_home', id=group.group_id)
+        redirect_to(controller='group', action='home', id=group.group_id)
 
     @group_action
     @ActionProtector("member", "admin", "moderator")
@@ -289,7 +289,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
     @ActionProtector("admin", "moderator")
     def edit(self, group):
         c.group.tags_list = ', '.join([tag.title for tag in c.group.tags])
-        c.breadcrumbs.append(self._actions('group_home'))
+        c.breadcrumbs.append(self._actions('home'))
 
         c.current_year = date.today().year
         c.years = range(c.current_year - 10, c.current_year + 5)
@@ -324,7 +324,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
             group.moderators = values['moderators']
 
         meta.Session.commit()
-        redirect_to(controller='group', action='group_home', id=group.group_id)
+        redirect_to(controller='group', action='home', id=group.group_id)
 
     def logo(self, id, width=None, height=None):
         group = Group.get(id)
@@ -498,11 +498,11 @@ class GroupController(GroupControllerBase, FileViewMixin):
 
             url = self.form_result.get('came_from', None)
             if url is None:
-                redirect_to(controller='group', action='group_home', id=group.group_id)
+                redirect_to(controller='group', action='home', id=group.group_id)
             else:
                 redirect_to(url.encode('utf-8'))
         else:
-            redirect_to(controller='group', action='group_home', id=group.group_id)
+            redirect_to(controller='group', action='home', id=group.group_id)
 
     @validate(schema=GroupRequestActionForm)
     @group_action
