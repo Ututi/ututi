@@ -70,6 +70,10 @@ ul.file_upload_dropdown li.last_item div {
   background: white url("../images/borders/dropdown_green.png") bottom right no-repeat;
 }
 
+ul.file_upload_dropdown li.hover div {
+  color: #aa4400;
+}
+
 /* end controls section */
 
 /* files */
