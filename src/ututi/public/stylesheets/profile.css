@@ -1,0 +1,15 @@
+#user-logo {
+  text-align: center;
+  margin: 0 auto;
+  position: relative;
+  float: left;
+}
+
+#user-logo-msg {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  margin-left: -50%;
+  background: #1f1f1f;
+  color: white;
+}

@@ -1,9 +1,10 @@
 from datetime import date
 import logging
 
+from pkg_resources import resource_stream
+
 from sqlalchemy.sql.expression import desc, or_
 from formencode import Schema, validators
-from routes import url_for
 from webhelpers import paginate
 
 from pylons import request, c, url
@@ -17,12 +18,13 @@ from ututi.lib.base import BaseController, render
 from ututi.lib.emails import email_confirmation_request
 from ututi.lib.security import ActionProtector
 from ututi.lib.search import search_query
+from ututi.lib.image import serve_image
 
 from ututi.model.events import Event
 from ututi.model import Subject
 from ututi.model import LocationTag
-from ututi.model import meta, Email, File, Group, SearchItem
-from ututi.controllers.group import _filter_watched_subjects
+from ututi.model import meta, Email, Group, SearchItem
+from ututi.controllers.group import _filter_watched_subjects, FileUploadTypeValidator
 from ututi.controllers.search import SearchSubmit
 
 log = logging.getLogger(__name__)
@@ -32,6 +34,12 @@ class ProfileForm(Schema):
     """A schema for validating user profile forms."""
     allow_extra_fields = True
     fullname = validators.String(not_empty=True)
+    site_url = validators.URL()
+
+
+class LogoUpload(Schema):
+    """A schema for validating logo uploads."""
+    logo = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
 
 
 class ProfileController(BaseController):
@@ -41,15 +49,15 @@ class ProfileController(BaseController):
 
     def _actions(self, selected):
         return [ {'title': _('Profile'),
-               'link': url(controller='profile', action='index'),
-               'selected': selected == 'profile'},
-              {'title': _('Edit profile'),
-               'link': url(controller='profile', action='edit'),
-               'selected': selected == 'edit'},
-              {'title': _("What's new?"),
-               'link': url(controller='profile', action='home'),
-               'selected': selected == 'home'}
-              ]
+                  'link': url(controller='profile', action='index'),
+                  'selected': selected == 'profile'},
+                 {'title': _('Edit profile'),
+                  'link': url(controller='profile', action='edit'),
+                  'selected': selected == 'edit'},
+                 {'title': _("What's new?"),
+                  'link': url(controller='profile', action='home'),
+                  'selected': selected == 'home'}
+                 ]
 
     @ActionProtector("user")
     def index(self):
@@ -87,16 +95,27 @@ class ProfileController(BaseController):
 
         return render('profile/edit.mako')
 
+    @validate(LogoUpload)
+    @ActionProtector("user")
+    def logo_upload(self):
+        if self.form_result['logo'] is not None:
+            logo = self.form_result['logo']
+            c.user.logo = logo.file.read()
+            meta.Session.commit()
+            return ''
+
     @validate(ProfileForm, form='edit')
     @ActionProtector("user")
     def update(self):
-        fields = ('fullname', 'logo_upload', 'logo_delete')
+        fields = ('fullname', 'logo_upload', 'logo_delete', 'site_url', 'description')
         values = {}
 
         for field in fields:
-            values[field] = request.POST.get(field, None)
+            values[field] = self.form_result.get(field, None)
 
         c.user.fullname = values['fullname']
+        c.user.site_url = values['site_url']
+        c.user.description = values['description']
 
         if values['logo_delete'] == 'delete' and c.user.logo is not None:
             c.user.logo = None
@@ -106,6 +125,7 @@ class ProfileController(BaseController):
             c.user.logo = logo.file.read()
 
         meta.Session.commit()
+        h.flash(_('Your profile was updated.'))
         redirect_to(controller='profile', action='index')
 
     def confirm_emails(self):
@@ -248,3 +268,11 @@ class ProfileController(BaseController):
             **search_params)
 
         return render('profile/findgroup.mako')
+
+    @ActionProtector("user")
+    def logo(self, width=None, height=None):
+        if c.user.logo is not None:
+            return serve_image(c.user.logo, width, height)
+        else:
+            stream = resource_stream("ututi", "public/images/user_logo_45x60.png").read()
+            return serve_image(stream, width, height)

@@ -100,6 +100,10 @@ label {
   display: none;
 }
 
+.clickable {
+   cursor: pointer;
+}
+
 table {
   border-collapse: collapse;
 }
@@ -366,6 +370,10 @@ form .form-field label {
   /* font */
   font-weight: bold;
   color: #808080;
+}
+
+form .form-field.no-break label {
+  display: inline;
 }
 
 form .form-field .btn {

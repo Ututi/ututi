@@ -123,6 +123,10 @@ def make_map():
     map.connect('/welcome', controller='profile', action='welcome')
     map.connect('/findgroup', controller='profile', action='findgroup')
 
+    map.connect('/profile/logo/{width}/{height}',
+                controller='profile',
+                action='logo')
+
     # other user views
     map.connect('/confirm_emails', controller='profile', action='confirm_emails')
     map.connect('/confirm_user_email/{key}', controller='profile', action='confirm_user_email')

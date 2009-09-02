@@ -16,6 +16,8 @@ create table users (
        id bigserial not null,
        fullname varchar(100),
        password char(36),
+       site_url varchar(200) default null,
+       description text default null,
        last_seen timestamp not null default (now() at time zone 'UTC'),
        recovery_key varchar(10) default null,
        logo bytea default null,
