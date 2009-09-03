@@ -20,16 +20,21 @@ def is_moderator(user, context=None):
 
 
 def is_member(user, context=None):
+    """The user is a member of the group."""
+    from ututi.model import Group, File
+    if isinstance(context, File) and isinstance(context.file_parent, Group):
+        context = context.file_parent
+
     return context.is_member(user)
 
 
 def is_admin(user, context=None):
-    """The user is the group's administrator."""
+    """The user is an administrator of the group."""
     from ututi.model import Group, File
     if isinstance(context, File) and isinstance(context.file_parent, Group):
-        return context.file_parent.is_admin(user)
-    else:
-        return context.is_admin(user)
+        context = context.file_parent
+
+    return context.is_admin(user)
 
 
 def is_user(user, context=None):
