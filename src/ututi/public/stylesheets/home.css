@@ -1,12 +1,3 @@
-fieldset {
-  margin-right: 40px;
-}
-
-legend {
-  font-size: 1.8em;
-  margin: 0.4em 0;
-}
-
 input.selected {
   background: #ffd0a1;
 }
@@ -32,19 +23,23 @@ form {
 
 #add-group {
   padding-left: 85px;
-  background: white url("../images/group_ico.png") left top no-repeat;
-  margin: 20px;
+  background: white url("../images/details/icon_group.png") left top no-repeat;
+  margin: 20px 0;
+}
+
+#add-group .form-field {
+  float: left;
 }
 
 #browse-subjects {
   padding-left: 85px;
-  background: white url("../images/subject_ico.png") left top no-repeat;
-  margin: 20px;
+  background: white url("../images/details/icon_subject.png") left top no-repeat;
+  margin: 20px 0;
 }
 
 #edit-profile {
   padding-left: 85px;
   height: 50px;
-  background: white url("../images/user_ico.png") left top no-repeat;
-  margin: 40px 20px;
+  background: white url("../images/details/icon_profile.png") left top no-repeat;
+  margin: 20px 0;
 }

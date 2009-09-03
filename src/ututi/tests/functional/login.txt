@@ -14,8 +14,10 @@ If user is not logged in login form is shown. Let's fill it in:
 
 And we are greeted by the welcome page:
 
-    >>> browser.printQuery("id('page-content')/fieldset/legend/text()")
-    Welcome to Ututi!
+    >>> browser.printQuery("id('page-content')//h3/text()")
+    Join a group
+    Browse subjects
+    Review and edit your profile
 
 The personal information portlet shows my name:
 
@@ -30,7 +32,7 @@ and not the home page:
 
 As we have successfully logged in let's logout and make some typos:
 
-    >>> browser.getLink('Log out').click()
+    >>> browser.getLink('log out').click()
     >>> browser.url
     'http://localhost/'
 

@@ -8,8 +8,7 @@ ${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
 
 <%namespace file="/widgets/locationtag.mako" import="*"/>
 
-<fieldset>
-  <legend>${_('Welcome to Ututi!')}</legend>
+  <h1>${_('Welcome to Ututi!')}</h1>
   <div id="add-group">
 	<h3>${_('Join a group')}</h3>
 	<div class="message">${_('You can join your academic group to make communicating and sharing materials with your class mates easier.')}</div>
@@ -29,12 +28,13 @@ ${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
           %endfor
         </select>
       </div>
-
+      <br style="clear: left; margin: 0; height: 0; padding: 0;"/>
       <div class="form-field">
         <span class="btn">
 	      <input type="submit" value="${_('Search')}" name="search" id="search" />
         </span>
       </div>
+      <br style="clear: left; margin: 0; height: 0; padding: 0;"/>
     </form>
   </div>
 
@@ -53,7 +53,5 @@ ${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
     <br/>
     <a class="btn" href="${url(controller='profile', action='edit')}" title="${_('Edit your profile')}"><span>${_('Edit your profile')}</span></a>
   </div>
-
-</fieldset>
 
 

@@ -70,7 +70,7 @@ We have been logged in after signing up. Now let's log out and test more unfortu
 scenarios:
 
     >>> browser.open('http://localhost/')
-    >>> browser.getLink('Log out').click()
+    >>> browser.getLink('log out').click()
     >>> browser.url
     'http://localhost/'
 

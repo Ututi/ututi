@@ -99,7 +99,7 @@ Let's get the url from the first message
 
 First let us log out.
 
-    >>> browser.getLink('Log out').click()
+    >>> browser.getLink('log out').click()
     >>> browser.open(get_urls(msg)[0])
     >>> browser.printQuery('//h1/text()')
     UTUTI - student information online
@@ -173,7 +173,7 @@ Let's try requesting to join the group:
 
 The group's administrator should now see the request in the members view.
 
-    >>> browser.getLink('Log out').click()
+    >>> browser.getLink('log out').click()
     >>> browser.open('http://localhost/')
     >>> form = browser.getForm('login_form')
     >>> form.getControl('Email').value = "admin@ututi.lt"

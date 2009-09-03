@@ -4,7 +4,7 @@
 
 <%def name="portlets()">
 <div id="sidebar">
-  ${search_portlet()}
+  ${search_portlet(parts=['text'])}
 
   ${user_subjects_portlet()}
   ${user_groups_portlet()}

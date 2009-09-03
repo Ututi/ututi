@@ -11,10 +11,10 @@ ${_('student information online')}
 %if c.user:
 <div id="personal-menu">
   <div class="item">
-    ${h.link_to(_("Log out"), url('/logout'))}
+    ${h.link_to(_("log out"), url('/logout'))}
   </div>
   <div class="click2show item">
-    <span class="click title">${_('Groups')}</span>
+    <span class="click title">${_('groups')}</span>
     <ul class="expanding-menu show">
       <li class="top"><div>&nbsp;</div></li>
       %for mship in c.user.memberships:
@@ -30,7 +30,7 @@ ${_('student information online')}
     </ul>
   </div>
   <div class="click2show item">
-    <span class="click title">${_('Home')}</span>
+    <span class="click title">${_('home')}</span>
     <ul class="expanding-menu show">
       <li class="top"><div>&nbsp;</div></li>
       <li><div><a href="${url(controller='profile', action='home')}">${_("What's new?")}</a></div></li>

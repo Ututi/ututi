@@ -112,6 +112,10 @@ h1, h2, h3, h4 {
 }
 
 /* resetting default styles */
+ul {
+  margin: 5px 0;
+}
+
 h3 {
   font-weight: bold;
 }
@@ -233,12 +237,15 @@ ul.bullets_large li {
 
 #personal-menu div.item {
   float: right;
-  margin: 0  0 0 10px;
+  margin: 0  0 0 5px;
   position: relative;
+  font-weight: bold;
 }
 
 #personal-menu span.title {
   padding: 1px 20px 1px 1px;
+  color: #666;
+  font-weight: bold;
   background: transparent url("../images/details/expand_down.png") right center no-repeat;
   cursor: pointer;
 }
@@ -401,7 +408,6 @@ form.inline-form {
 
 form .form-field {
   margin: 0.2em 0;
-  overflow: hidden; /* to contain floats */
 }
 
 form .form-field label {
@@ -487,8 +493,9 @@ span.btn,
 a.btn {
   background: white url("../images/button_small.png") left top no-repeat;
   display: inline-block;
-  border: medium none;
+  overflow: auto;
   padding: 0 0 0 10px;
+  position: relative;
 }
 
 span.btn input,
@@ -499,9 +506,10 @@ a.btn span {
   line-height: 20px;
   padding: 0 10px 2px 0;
   margin: 0;
-  color: black;
+  color: #333;
   font-weight: normal;
   display: inline-block;
+  text-transform: lowercase;
 }
 
 span.btn-large,
@@ -937,6 +945,7 @@ span.tag {
 
 #search_portlet .content {
   border: 0;
+  margin-bottom: 0;
 }
 
 #search_portlet .search-text {
@@ -1007,6 +1016,36 @@ div.user-logo-link img {
 
 div.user-logo-link div {
   text-align: center;
+}
+
+/* end user block */
+
+/* groups portlet */
+#group_portlet_content ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#group_portlet_content img#group-logo {
+  margin-right: 5px;
+}
+
+#group_portlet_content .group-listing-item {
+  padding: 3px;
+  border-bottom: 1px solid #ded8d8;
+  vertical-align: middle;
+}
+
+/* end groups portlet */
+
+/* subjects portlet */
+#subject_portlet_content #user-subjects {
+  list-style-type: none;
+  height: 16px;
+  line-height: 16px;
+  padding-left: 20px;
+  background: transparent url("../images/details/icon_subject_small.png") left center no-repeat;
+  margin-bottom: 10px;
 }
 
 /* js alternatives */

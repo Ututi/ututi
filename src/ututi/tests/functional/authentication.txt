@@ -13,7 +13,7 @@ Tests for logging in, logging out, access denied and all related things
     >>> browser.url
     'http://localhost/welcome'
 
-    >>> browser.getLink('Log out').click()
+    >>> browser.getLink('log out').click()
     >>> browser.url
     'http://localhost/'
 
@@ -38,7 +38,7 @@ Tests for logging in, logging out, access denied and all related things
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
 
-    >>> browser.getLink('Log out').click()
+    >>> browser.getLink('log out').click()
 
 -------------------------
 
@@ -51,7 +51,7 @@ Tests for logging in, logging out, access denied and all related things
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
 
-    >>> browser.getLink('Log out').click()
+    >>> browser.getLink('log out').click()
 
 
 -------------------------
@@ -65,7 +65,7 @@ Tests for logging in, logging out, access denied and all related things
     >>> browser.url
     'http://localhost/search'
 
-    >>> browser.getLink('Log out').click()
+    >>> browser.getLink('log out').click()
 
 -------------------------
 
@@ -89,7 +89,7 @@ Tests for logging in, logging out, access denied and all related things
     >>> browser.url
     'http://localhost/search'
 
-    >>> browser.getLink('Log out').click()
+    >>> browser.getLink('log out').click()
 
 -------------------------
 
@@ -114,7 +114,7 @@ Tests for logging in, logging out, access denied and all related things
     >>> browser.url
     'http://localhost/subject/vu/mat_analize?serve_file=3'
 
-    >>> browser.getLink('Log out').click()
+    >>> browser.getLink('log out').click()
 
 -------------------------
 

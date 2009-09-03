@@ -12,10 +12,10 @@
     %if not user.watched_subjects:
       ${_('You are not watching any subjects.')}
     %else:
-    <ul>
+    <ul id="user-subjects">
       % for subject in user.watched_subjects:
       <li>
-        <a href="${subject.url()}">${subject.title}</a>
+        <a href="${subject.url()}" title="${subject.title}">${h.ellipsis(subject.title, 35)}</a>
       </li>
       % endfor
     </ul>
@@ -43,7 +43,16 @@
     <ul>
       % for membership in user.memberships:
       <li>
-        <a href="${membership.group.url()}">${membership.group.title}</a>
+        <div class="group-listing-item">
+          %if membership.group.logo is not None:
+            <img id="group-logo" src="${url(controller='group', action='logo', id=membership.group.group_id, width=25, height=25)}" alt="logo" />
+          %else:
+            <img id="group-logo" src="images/details/icon_group.png"  style="width: 25px;" alt="logo" />
+          %endif
+
+            <a href="${membership.group.url()}">${membership.group.title}</a>
+            (${ungettext("%(count)s member", "%(count)s members", len(membership.group.members)) % dict(count = len(membership.group.members))})
+        </div>
       </li>
       % endfor
     </ul>

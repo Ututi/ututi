@@ -120,10 +120,18 @@ of in your home page (at least for now):
     <div class="content" id="group_portlet_content">
       <ul>
         <li>
-          <a href="/group/moderators">Ututi moderatoriai</a>
+          <div class="group-listing-item">
+            <img id="group-logo" src="/group/moderators/logo/25/25" alt="logo" />
+            <a href="/group/moderators">Ututi moderatoriai</a>
+                (1 member)
+            </div>
         </li>
         <li>
-          <a href="/group/test">Test group</a>
+          <div class="group-listing-item">
+            <img id="group-logo" src="/group/test/logo/25/25" alt="logo" />
+            <a href="/group/test">Test group</a>
+                (1 member)
+            </div>
         </li>
       </ul>
       <form action="/groups/add" class="button-to" method="post">

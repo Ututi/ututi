@@ -39,15 +39,18 @@ We go to the import page. There we have a form to upload a user CSV file:
 Now we will log out and see if we can log back in as the imported user.
 
     >>> browser.open('http://localhost/')
-    >>> browser.getLink('Log out').click()
+    >>> browser.getLink('log out').click()
 
     >>> form = browser.getForm('login_form')
     >>> form.getControl('Email').value = "domas@ututi.lt"
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
 
-    >>> browser.printQuery("id('page-content')/fieldset/legend/text()")
-    Welcome to Ututi!
+    >>> browser.printQuery("id('page-content')//h3/text()")
+    Join a group
+    Browse subjects
+    Review and edit your profile
+
 
 XXX test more than 1 user import
 XXX test importing the same file twice
