@@ -1,4 +1,5 @@
 from pylons import response, url, request, session, c
+from pylons.controllers.util import abort
 from pylons.controllers.util import redirect_to
 
 from repoze.what.predicates import NotAuthorizedError
@@ -78,14 +79,23 @@ class CrowdPredicate(object):
             raise NotAuthorizedError()
 
 
+def deny(reason, code=None):
+    if code is not None:
+        response.status_int = code
+
+    if response.status_int == 401:
+        login_form_url =  c.login_form_url or url(controller='home',
+                                                  action='index',
+                                                  came_from=request.url)
+        redirect_to(login_form_url)
+
+    abort(response.status_int, comment=reason)
+
+
 class ActionProtector(BaseActionProtector):
 
     def default_denial_handler(self, reason):
-        if response.status_int == 401:
-            login_form_url =  c.login_form_url or url(controller='home',
-                                                      action='index',
-                                                      came_from=request.url)
-            redirect_to(login_form_url)
+        deny(reason)
 
     def __init__(self, *crowds, **kwargs):
         self.predicate = CrowdPredicate(*crowds)
