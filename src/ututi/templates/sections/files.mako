@@ -8,80 +8,103 @@ $(document).ready(function(){
 
     function folderReceive(event, ui) {
 
-          var url = ui.item.children('.move_url').val();
+          var move_url = ui.item.children('.move_url').val();
+          var copy_url = ui.item.children('.copy_url').val();
 
           var source_id = ui.sender.parents('.section').children('.id').val();
-
           var target_id = ui.item.parents('.section').children('.id').val();
           var target_folder = ui.item.parents('.folder_file_area').children('.folder_name').val();
 
-          $.ajax({type: "POST",
-                  url: url,
-                  data: ({source_id: source_id,
-                          target_id: target_id,
-                          target_folder: target_folder}),
-                  success: function(msg){
-                      if (ui.sender.children('.file').size() == 0) {
-                         ui.sender.children('.message').show();
-                      } else {
-                          ui.sender.children('.message').hide();
+          if (source_id != target_id) {
+              $.ajax({type: "POST",
+                      url: copy_url,
+                      data: ({source_id: source_id,
+                              target_id: target_id,
+                              target_folder: target_folder}),
+                      success: function(msg){
+                          var new_item = $(msg).insertAfter($(ui.item));
+                          $(ui.sender).sortable('cancel');
+                          new_item.parents('.folder').children('.message').hide();
+                          $('.delete_button', new_item).click(deleteFile);
+                      },
+                      error: function(msg){
+                          $(ui.sender).sortable('cancel');
                       }
-                      if (ui.item.parents('.folder').children('.file').size() == 0) {
-                          ui.item.parents('.folder').children('.message').show();
-                      } else {
-                          ui.item.parents('.folder').children('.message').hide();
+              })
+          }
+          else {
+              $.ajax({type: "POST",
+                      url: move_url,
+                      data: ({target_folder: target_folder}),
+                      success: function(msg){
+
+                          if (ui.sender.children('.file').size() == 0) {
+                             ui.sender.children('.message').show();
+                          } else {
+                              ui.sender.children('.message').hide();
+                          }
+                          if (ui.item.parents('.folder').children('.file').size() == 0) {
+                              ui.item.parents('.folder').children('.message').show();
+                          } else {
+                              ui.item.parents('.folder').children('.message').hide();
+                          }
+                      },
+                      error: function(msg){
+                          $(ui.sender).sortable('cancel');
                       }
-           }});
+              })
+          }
     }
 
 
     $(".folder").sortable({
       connectWith: ['.folder'],
       cancel: '.message',
+      helper: 'clone',
       receive: folderReceive
     });
 
     function setUpFolder(i, btn) {
       var button = $(btn);
 
-	  [ign, i1, i2] = button[0].id.split('-');
-	  var progress_area = $('#file_upload_progress-' + i1);
+      [ign, i1, i2] = button[0].id.split('-');
+      var progress_area = $('#file_upload_progress-' + i1);
       var folder_name_input_id = '#file_folder_name-' + i1 + '-' + i2;
-	  var folder = $(folder_name_input_id).val();
+      var folder = $(folder_name_input_id).val();
       var result_area_id = '#file_area-' + i1 + '-' + i2;
-	  var result_area = $(result_area_id);
-	  var upload_url = $('#file_upload_url-' + i1).val();
+      var result_area = $(result_area_id);
+      var upload_url = $('#file_upload_url-' + i1).val();
 
-	  new AjaxUpload(button,{
-		  action: upload_url,
-		  name: 'attachment',
-		  data: {folder: folder},
-		  onSubmit : function(file, ext, iframe){
-			  iframe['progress_indicator'] = $(document.createElement('div'));
-			  iframe['progress_indicator'].appendTo(progress_area).text(file);
-			  iframe['progress_ticker'] = $(document.createElement('span'));
-			  iframe['progress_ticker'].appendTo(iframe['progress_indicator']).text('Uploading');
-			  var progress_ticker = iframe['progress_ticker'];
-			  var interval;
+      new AjaxUpload(button,{
+          action: upload_url,
+          name: 'attachment',
+          data: {folder: folder},
+          onSubmit : function(file, ext, iframe){
+              iframe['progress_indicator'] = $(document.createElement('div'));
+              iframe['progress_indicator'].appendTo(progress_area).text(file);
+              iframe['progress_ticker'] = $(document.createElement('span'));
+              iframe['progress_ticker'].appendTo(iframe['progress_indicator']).text('Uploading');
+              var progress_ticker = iframe['progress_ticker'];
+              var interval;
 
-			  // Uploding -> Uploading. -- Uploading...
-			  interval = window.setInterval(function(){
-				  var text = progress_ticker.text();
-				  if (text.length < 13){
-					  progress_ticker.text(text + '.');
-				  } else {
-					  progress_ticker.text('Uploading');
-				  }
-			  }, 200);
-			  iframe['interval'] = interval;
-		  },
-		  onComplete: function(file, response, iframe){
-			  iframe['progress_ticker'].text('Done').parent().addClass('done');
-			  window.clearInterval(iframe['interval']);
-			  $('.folder', result_area).append(response);
+              // Uploding -> Uploading. -- Uploading...
+              interval = window.setInterval(function(){
+                  var text = progress_ticker.text();
+                  if (text.length < 13){
+                      progress_ticker.text(text + '.');
+                  } else {
+                      progress_ticker.text('Uploading');
+                  }
+              }, 200);
+              iframe['interval'] = interval;
+          },
+          onComplete: function(file, response, iframe){
+              iframe['progress_ticker'].text('Done').parent().addClass('done');
+              window.clearInterval(iframe['interval']);
+              $('.folder', result_area).append(response);
               $('.delete_button', result_area).click(deleteFile);
               $('.folder .message', result_area).hide();
-		  }
+          }
       });
 
       $('.delete_folder_button', result_area).click(function (event) {
@@ -90,7 +113,7 @@ $(document).ready(function(){
       });
     }
 
-	var buttons = $('.file_upload_dropdown .upload');
+    var buttons = $('.file_upload_dropdown .upload');
     buttons.each(setUpFolder);
 
     function newFolder(target) {
@@ -144,7 +167,7 @@ $(document).ready(function(){
 
     $('.delete_button').click(deleteFile);
 
-	$('.new_folder_button').click(function (event) {
+    $('.new_folder_button').click(function (event) {
         newFolder(event.target);
         return false;
     });
@@ -162,6 +185,7 @@ $(document).ready(function(){
                 ${file.created.fullname}
               </a>
               <input class="move_url" type="hidden" value="${file.url(action='move')}" />
+              <input class="copy_url" type="hidden" value="${file.url(action='copy')}" />
               <input class="delete_url" type="hidden" value="${file.url(action='delete')}" />
               %if file.can_write():
                 <img src="${url('/images/delete.png')}" alt="delete file" class="delete_button" />

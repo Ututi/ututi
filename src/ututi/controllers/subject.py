@@ -29,6 +29,8 @@ def subject_action(method):
 
         if subject is None:
             abort(404)
+
+        c.security_context = subject
         c.object_location = subject.location
         c.subject = subject
         return method(self, subject)
@@ -127,8 +129,8 @@ class SubjectController(BaseController, FileViewMixin):
                     id=subj.subject_id,
                     tags=subj.location_path)
 
-    @ActionProtector("user")
     @subject_action
+    @ActionProtector("user")
     def edit(self, subject):
         c.breadcrumbs = [{'link': c.subject.url(),
                               'title': c.subject.title}]
@@ -136,8 +138,8 @@ class SubjectController(BaseController, FileViewMixin):
         return render('subject/edit.mako')
 
     @validate(schema=SubjectForm, form='edit')
-    @ActionProtector("user")
     @subject_action
+    @ActionProtector("user")
     def update(self, subject):
 
         subject.title = self.form_result['title']
@@ -160,17 +162,17 @@ class SubjectController(BaseController, FileViewMixin):
                     id=subject.subject_id,
                     tags=subject.location_path)
 
-    @ActionProtector("user")
     @subject_action
+    @ActionProtector("user")
     def upload_file(self, subject):
         return self._upload_file(subject)
 
-    @ActionProtector("user")
     @subject_action
+    @ActionProtector("user")
     def create_folder(self, subject):
         return self._create_folder(subject)
 
-    @ActionProtector("moderator", "root")
     @subject_action
+    @ActionProtector("moderator", "root")
     def delete_folder(self, subject):
         return self._delete_folder(subject)

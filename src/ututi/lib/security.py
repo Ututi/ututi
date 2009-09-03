@@ -17,6 +17,21 @@ def is_root(user, context=None):
 
 
 def is_moderator(user, context=None):
+    if user is None:
+        return False
+
+    from ututi.model import File
+    if isinstance(context, File):
+        context = context.file_parent
+
+    moderator_tags = [group.location for group in user.groups
+                      if group.moderators]
+
+    location = getattr(context, 'location')
+    for tag in moderator_tags:
+        if location in tag.flatten():
+            return True
+
     return False
 
 

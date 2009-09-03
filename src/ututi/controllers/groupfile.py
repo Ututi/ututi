@@ -63,3 +63,8 @@ class GroupfileController(BasefilesController):
     @ActionProtector('member', 'admin', 'moderator')
     def move(self, group, file):
         return self._move(group, file)
+
+    @group_file_action
+    @ActionProtector('member', 'admin', 'moderator')
+    def copy(self, group, file):
+        return self._copy(group, file)

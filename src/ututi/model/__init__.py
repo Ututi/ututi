@@ -420,6 +420,11 @@ class User(object):
                    action=action,
                    id=self.id)
 
+    @property
+    def groups(self):
+        return [membership.group
+                for membership in self.memberships]
+
     def __init__(self, fullname, password, gen_password=True):
         self.fullname = fullname
         self.update_password(password, gen_password)
@@ -456,6 +461,7 @@ class Folder(list):
         for file in self:
             can_write = can_write and file.can_write(user)
         return can_write
+
 
 class FolderMixin(object):
 
@@ -883,11 +889,21 @@ class File(ContentItem):
             return group
 
     def can_write(self, user=None):
-
         can_write = False
         if isinstance(self.file_parent, Subject):
             can_write = check_crowds(['moderator'], context=self.file_parent, user=user)
         return can_write or check_crowds(['owner'], context=self, user=user)
+
+    def copy(self):
+        """Copy the file."""
+        new_file = File(self.filename, self.title,
+                        mimetype=self.mimetype,
+                        description=self.description,
+                        md5=self.md5,
+                        folder=self.folder)
+        from ututi.lib.security import current_user
+        new_file.created = current_user()
+        return new_file
 
     def __init__(self, filename, title, mimetype=None, created=None,
                  description=u'', data=None, md5=None, folder=u''):
@@ -949,6 +965,7 @@ class File(ContentItem):
         f.close()
 
     def url(self, controller='files', action='get'):
+
         if isinstance(self.file_parent, Subject):
             return self.file_parent.url(controller='subjectfile',
                                    action=action,

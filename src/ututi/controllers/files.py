@@ -1,5 +1,6 @@
 import logging
 
+from pylons.templating import render_mako_def
 from pylons.controllers.util import abort
 from pylons import request, response, c
 from pylons.controllers.util import redirect_to
@@ -28,22 +29,27 @@ class BasefilesController(BaseController):
         meta.Session.commit()
 
     def _move(self, source, file):
-        # XXX make sure person performing this operation can do it
-        # with the target object
-        target_id = int(request.POST['target_id'])
-        target = meta.Session.query(ContentItem).filter_by(id=target_id).one()
-
         source_folder = file.folder
 
-        if source is not target:
-            source.files.remove(file)
-            target.files.append(file)
         file.folder = request.POST['target_folder']
 
         if source_folder and source.getFolder(source_folder) is None:
             source.files.append(File.makeNullFile(source_folder))
 
         meta.Session.commit()
+
+    def _copy(self, source, file_to_copy):
+        target_id = int(request.POST['target_id'])
+        target = meta.Session.query(ContentItem).filter_by(id=target_id).one()
+
+
+        new_file = file_to_copy.copy()
+        new_file.folder = request.POST['target_folder']
+
+        target.files.append(new_file)
+        meta.Session.commit()
+
+        return render_mako_def('/sections/files.mako','file', file=new_file)
 
 
 class FilesController(BasefilesController):

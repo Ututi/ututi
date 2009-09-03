@@ -18,6 +18,7 @@ File upload:
         Adminas Adminovix
       </a>
       <input class="move_url" type="hidden" value="/subject/vu/mat_analize/file/3/move" />
+      <input class="copy_url" type="hidden" value="/subject/vu/mat_analize/file/3/copy" />
       <input class="delete_url" type="hidden" value="/subject/vu/mat_analize/file/3/delete" />
       <img src="/images/delete.png" alt="delete file" class="delete_button" />
     </li>
@@ -149,50 +150,3 @@ Deleting files:
     >>> app.get('/group/moderators/file/5/get', expect_errors=True).status
     '404 Not Found'
 
-    >>> app.post('/group/moderators/file/6/move',
-    ...          params={'source_id': '1',
-    ...                  'target_id': '1',
-    ...                  'target_folder': 'Uga Buga'}).status
-    '200 OK'
-
-Moving files:
-
-    >>> from ututi.tests.model.test_groups import printTree
-    >>> from ututi.model import Group, LocationTag, Subject
-
-    >>> printTree(Group.get('moderators'))
-    Also a folder:
-    Uga Buga:
-       more_text.txt
-
-    >>> app.post('/group/moderators/file/6/move',
-    ...          params={'source_id': '1',
-    ...                  'target_id': '2',
-    ...                  'target_folder': 'Some folder'}).status
-    '200 OK'
-
-    >>> printTree(Group.get('moderators'))
-    Also a folder:
-    Uga Buga:
-
-    >>> printTree(Subject.get(LocationTag.get(u'vu'), u'mat_analize'))
-    Buga Buga:
-    Some folder:
-       image.png
-       more_text.txt
-
-    >>> app.post('/subject/vu/mat_analize/file/4/move',
-    ...          params={'source_id': '2',
-    ...                  'target_id': '1',
-    ...                  'target_folder': ''}).status
-    '200 OK'
-
-    >>> printTree(Group.get('moderators'))
-    image.png
-    Also a folder:
-    Uga Buga:
-
-    >>> printTree(Subject.get(LocationTag.get(u'vu'), u'mat_analize'))
-    Buga Buga:
-    Some folder:
-       more_text.txt

@@ -37,7 +37,8 @@ def subject_file_action(method):
         except NoResultFound:
             abort(404)
 
-        if file not in subject.files:
+        if (file not in subject.files
+            and not file.can_write()):
             abort(404)
 
         c.object_location = subject.location
@@ -51,7 +52,7 @@ class SubjectfileController(BasefilesController):
 
     @subject_file_action
     @set_login_url
-    @ActionProtector('user', 'moderator')
+    @ActionProtector('user')
     def get(self, subject, file):
         return self._get(file)
 
@@ -61,7 +62,12 @@ class SubjectfileController(BasefilesController):
         return self._delete(file)
 
     @subject_file_action
-    @ActionProtector('user', 'admin', 'moderator')
+    @ActionProtector('user')
     def move(self, subject, file):
         return self._move(subject, file)
+
+    @subject_file_action
+    @ActionProtector('user')
+    def copy(self, subject, file):
+        return self._copy(subject, file)
 
