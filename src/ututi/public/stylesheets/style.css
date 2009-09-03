@@ -181,8 +181,11 @@ ul.bullets_large li {
 
 #personal-box div.form-field {
   float: right;
-  clear: right;
   margin: 0;
+}
+
+#personal-box div.form-field.overlay {
+  width: 190px;
 }
 
 #personal-box .personal-info {
@@ -418,6 +421,7 @@ form .form-field div.input-rounded {
   border: medium none;
   padding: 0 0 0 10px;
   margin: 0;
+  width: auto;
 }
 
 form .form-field div.input-rounded div {
@@ -855,7 +859,7 @@ span.tag {
 }
 
 .search-controls .search-text {
-  width: 80%;
+  width: 75%;
   float: left;
   height: 30px;
   background: url("../images/borders/search-text.png") left center no-repeat;

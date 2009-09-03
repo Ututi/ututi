@@ -39,11 +39,11 @@
           <label for="repeat_password">${_('Repeat password')}</label>
         </div>
         <form:error name="agree"/>
-        <div class="form-field">
+        <div class="form-field" style="clear: right;">
           <label for="agree">${_('I agree to the ')} <a href="${url(controller='home', action='terms')}">${_('terms of use')}</a></label>
           <input type="checkbox" name="agree" value="true" style="float: right;"/>
         </div>
-        <div class="form-field">
+        <div class="form-field" style="clear: right;">
           <span class="btn">
             <input type="submit" value="${_('Register')}"/>
           </span>

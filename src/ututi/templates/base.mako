@@ -69,15 +69,18 @@ ${h.javascript_link('/javascripts/forms.js')|n}
         <input type="text" size="20" id="login" name="login" class="small" value="${request.params.get('login')}" />
     </div></div>
   </div>
+  <br style="clear: right; height: 0; margin: 0; padding: 0;"/>
   <div class="form-field overlay">
     <label for="password" class="small">${_('Password')}</label>
     <div class="input-rounded"><div>
         <input type="password" size="20" name="password" id="password" class="small"/>
     </div></div>
   </div>
+  <br style="clear: right; height: 0; margin: 0; padding: 0;"/>
   <div class="form-field">
     <span class="btn"><input class="submit small" type="submit" name="join" value="Login" /></span>
   </div>
+  <br style="clear: right; height: 0; margin: 0; padding: 0;"/>
   <div class="form-field">
     <a class="small-link small" href="${url(controller='home', action='pswrecovery')}">${_('forgotten password?')}</a>
   </div>
@@ -95,11 +98,11 @@ ${h.javascript_link('/javascripts/forms.js')|n}
 <div id="breadcrumb-container">
   %if breadcrumbs:
   <a href="${url('/')}" title="home" id="ulogo">
-    ${h.image('/images/logo_small.png', alt='logo')|n}
+    ${h.image('/images/logo_small.gif', alt='logo')|n}
   </a>
   %else:
   <a href="${url('/')}" title="home" id="ulogo">
-    ${h.image('/images/logo.png', alt='logo')|n}
+    ${h.image('/images/logo.gif', alt='logo')|n}
   </a>
   %endif
   %if c.object_location:
