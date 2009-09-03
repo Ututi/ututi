@@ -134,6 +134,7 @@ of in your home page (at least for now):
         </div>
       </form>
       <a class="more" href="/search?obj_type=group">More groups</a>
+      <br style="clear: both; height: 1px;" />
     </div>
 
 You can import more groups using the admin interface.

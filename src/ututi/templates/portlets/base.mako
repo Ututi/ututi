@@ -7,6 +7,7 @@
   </div>
   <div class="content" id="${id + '_content'}">
     ${caller.body()}
+    <br style="clear: both; height: 1px;"/>
   </div>
 </div>
 </%def>

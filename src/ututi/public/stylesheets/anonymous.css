@@ -1,7 +1,23 @@
 /* ututi feature list */
-ul#ututi_info li {
-  margin-top: 0.4em;
-  line-height: 1.1em;
+#can_find {
+  margin-top: 20px;
+  padding-left: 80px;
+  background: white url("../images/details/image_door.png") left center no-repeat;
+}
+
+#can_do {
+  margin-top: 20px;
+  padding-left: 80px;
+  background: white url("../images/details/image_man.png") left center no-repeat;
+}
+
+#ututi_features {
+  margin: 20px 0 50px 0;
+}
+
+#ututi_features em {
+  color: #d45500;
+  font-style: normal;
 }
 
 /* removing conventional sidebars */
@@ -24,16 +40,34 @@ ul#ututi_info li {
   font-weight: normal;
 }
 
-/* login form */
-#login_form label {
-  font-size: 1em;
-  font-weight: bold;
+/* registration form */
+#ututi_join_portlet .rounded-header,
+#ututi_join_portlet .rounded-right {
+  background: white;
+  height: 35px;
+  padding: 0;
 }
 
-/* registration form */
-#registration_form .form-field input {
+#ututi_join_portlet .rounded-right h3 {
+  color: #333;
+  margin: 0;
+  text-transform: uppercase;
+  padding-bottom: 10px;
+  height: 25px;
+  background: white url("../images/borders/registration_form.png") top center no-repeat;
+}
+
+#ututi_join_portlet .content {
+  border: 0px;
+  background: white url("../images/borders/registration_form.png") center bottom no-repeat;
+}
+
+#registration_form .form-field div.input-rounded {
   float: right;
-  width: 200px;
+}
+
+#registration_form .form-field .input-rounded input {
+  width: 150px;
 }
 
 #registration_form .form-field input.submit {

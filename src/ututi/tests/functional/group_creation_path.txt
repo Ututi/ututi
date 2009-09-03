@@ -103,6 +103,7 @@ First let us log out.
     >>> browser.open(get_urls(msg)[0])
     >>> browser.printQuery('//h1/text()')
     UTUTI - student information online
+    Ututi search
 
 Let us fill out the registration form
 
@@ -111,6 +112,7 @@ Let us fill out the registration form
     >>> form.getControl('Email').value = 'jonas@example.com'
     >>> form.getControl('Password').value = 'asdfgh'
     >>> form.getControl('Repeat password').value = 'asdfgh'
+    >>> form.getControl(name='agree').value = True
     >>> form.getControl('Register').click()
 
 We should get an email confirmation request:

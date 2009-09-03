@@ -24,15 +24,17 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
 ${_('Only registered users can perform this action. Please log in, or register an account on our system.')}
 </div>
 
-
-<h2>Why should I join?</h2>
-<hr />
-<ul id="ututi_info" class="bullets_large">
-  <li>${_('What can You find here?')}<br/>
-    <span class="small">${_('Mailing lists, academic groups, universities, file sharing.')}</span>
-  </li>
-  <li>${_('What can You do here?')}<br/>
-    <span class="small">${_('Create lecture notes, keep Your study materials, upload and store files.')}</span>
-  </li>
-</ul>
+  <h1>${_('UTUTI - student information online')}</h1>
+  <div id="ututi_features">
+    <div id="can_find">
+      <h3>${_('What can You find here?')}</h3>
+      ${_('Group <em>forums</em>, subject <em>wikis</em>, <em>files</em>, lecture notes and <em>answers</em> to \
+      questions that matter for your studies.')|n}
+    </div>
+    <div id="can_do">
+      <h3>${_('What can you do here?')}</h3>
+      ${_('Store <em>study materials</em> and pass them on for future generations, create <em>academic groups</em> \
+      and communicate with groupmates.')|n}
+    </div>
+  </div>
 

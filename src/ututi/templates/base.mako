@@ -60,23 +60,26 @@ ${_('student information online')}
 ${h.javascript_link('/javascripts/forms.js')|n}
 <form method="post" id="login_form" action="${url('/login')}">
   <input type="hidden" name="came_from" value="${request.params.get('came_from', request.url)}" />
-
+  % if request.params.get('login'):
+    <div class="error">${_('Wrong password or username!')}</div>
+  % endif
   <div class="form-field overlay">
-    % if request.params.get('login'):
-    <span class="error">${_('Wrong password or username!')}</span>
-    % endif
     <label for="login" class="small">${_('Email')}</label>
-    <input type="text" size="20" id="login" name="login" class="small" value="${request.params.get('login')}" />
+    <div class="input-rounded"><div>
+        <input type="text" size="20" id="login" name="login" class="small" value="${request.params.get('login')}" />
+    </div></div>
   </div>
   <div class="form-field overlay">
     <label for="password" class="small">${_('Password')}</label>
-    <input type="password" size="20" name="password" id="password" class="small"/>
+    <div class="input-rounded"><div>
+        <input type="password" size="20" name="password" id="password" class="small"/>
+    </div></div>
   </div>
   <div class="form-field">
     <span class="btn"><input class="submit small" type="submit" name="join" value="Login" /></span>
   </div>
   <div class="form-field">
-    <a class="small-link small" href="${url(controller='home', action='pswrecovery')}">Forgotten password?</a>
+    <a class="small-link small" href="${url(controller='home', action='pswrecovery')}">${_('forgotten password?')}</a>
   </div>
 </form>
 <script type="text/javascript">

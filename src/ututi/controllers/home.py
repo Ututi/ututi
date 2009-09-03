@@ -60,6 +60,9 @@ class RegistrationForm(Schema):
 
     allow_extra_fields = True
 
+    msg = {'missing': _(u"You must agree to the terms of use.")}
+    agree = validators.StringBool(messages=msg)
+
     msg = {'empty': _(u"Please enter your name to register.")}
     fullname = validators.String(not_empty=True, strip=True, messages=msg)
 
@@ -148,7 +151,7 @@ class HomeController(BaseController):
           else:
                if hash is not None:
                     c.hash = hash
-               return render('register.mako')
+               return render('anonymous_index.mako')
 
      @validate(PasswordRecoveryForm, form='pswrecovery')
      def pswrecovery(self):

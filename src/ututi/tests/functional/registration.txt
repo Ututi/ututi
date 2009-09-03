@@ -14,6 +14,7 @@ We will only require your email address, name and password:
     >>> form.getControl('Email').value = 'jonas@example.com'
     >>> form.getControl('Password').value = 'asdfgh'
     >>> form.getControl('Repeat password').value = 'asdfgh'
+    >>> form.getControl(name='agree').value = True
     >>> form.getControl('Register').click()
 
 After registration is complete we should be hailed by our welcome
@@ -80,6 +81,7 @@ message is shown:
     >>> form.getControl('Email').value = 'jonas2@example.com'
     >>> form.getControl('Password').value = 'asdfgh'
     >>> form.getControl('Repeat password').value = 'asdfgh'
+    >>> form.getControl(name='agree').value = True
     >>> form.getControl('Register').click()
     >>> browser.url
     'http://localhost/register'
@@ -95,6 +97,7 @@ registration form and shown an error message that we've forgotten the email.
     >>> form.getControl('Password').value = 'asdfgh'
     >>> form.getControl('Repeat password').value = 'asdfgh'
     >>> form.getControl('Email').value = ''
+    >>> form.getControl(name='agree').value = True
     >>> form.getControl('Register').click()
     >>> browser.url
     'http://localhost/register'
@@ -109,6 +112,7 @@ If we forget to enter the password, we should also get an error message.
     >>> form.getControl('Email').value = 'domas@ututi.com'
     >>> form.getControl('Password').value = ''
     >>> form.getControl('Repeat password').value = ''
+    >>> form.getControl(name='agree').value = True
     >>> form.getControl('Register').click()
     >>> browser.url
     'http://localhost/register'
@@ -124,6 +128,7 @@ If the passwords do not match we also get an error message.
     >>> form.getControl('Password').value = 'abcdefgh'
     >>> form.getControl('Repeat password').value = 'abcdef'
     >>> form.getControl('Email').value = 'jonas3@example.com'
+    >>> form.getControl(name='agree').value = True
     >>> form.getControl('Register').click()
     >>> browser.url
     'http://localhost/register'
@@ -139,6 +144,7 @@ we have forgotten it).
     >>> form.getControl('Password').value = 'abcdefgh'
     >>> form.getControl('Repeat password').value = 'abcdefgh'
     >>> form.getControl('Email').value = 'jonas@example.com'
+    >>> form.getControl(name='agree').value = True
     >>> form.getControl('Register').click()
     >>> browser.url
     'http://localhost/register'
