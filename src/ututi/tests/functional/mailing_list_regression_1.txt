@@ -1,0 +1,15 @@
+Regression test for unicode characters in the subject of a message
+==================================================================
+
+    >>> browser = Browser.logIn()
+
+    >>> from ututi.tests.functional import send_test_message
+
+    >>> send_test_message('google_lt_bug_1.txt', '1', to='moderators@lists.ututi.lt')
+    >>> browser.open("http://localhost/group/moderators/forum/thread/3")
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> len(mail_queue)
+    1
+    >>> mail_queue[:] = []
+

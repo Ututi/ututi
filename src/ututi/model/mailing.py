@@ -1,3 +1,4 @@
+from rfc822 import AddressList
 import mimetools
 import time
 from datetime import datetime
@@ -15,6 +16,8 @@ from sqlalchemy import orm
 from StringIO import StringIO
 
 from routes.util import url_for
+
+from pylons import config
 
 from nous.mailpost.MailBoxerTools import splitMail, parseaddr
 
@@ -62,6 +65,11 @@ class UtutiEmail(email.message.Message):
 
     def getMessageId(self):
         return self.getHeader('message-id')
+
+    def getToAddresses(self):
+        to_addrs = AddressList(self.getHeader('to')).addresslist
+        cc_addrs = AddressList(self.getHeader('cc')).addresslist
+        return to_addrs + cc_addrs
 
     def getFrom(self):
         return decode_and_join_header(self.getHeader("from"))
@@ -166,9 +174,22 @@ class GroupMailingListMessage(ContentItem):
     def fromMessageText(cls, message_text):
         message = email.message_from_string(message_text.encode('utf-8'), UtutiEmail)
         message_id = message.getMessageId()
-        group_id = message.getHeader("to").split("@")[0]
+
+        mailing_list_host = config.get('mailing_list_host')
+
+        group_ids = [prefix
+                     for prefix, suffix in [address.split('@')
+                                            for name, address in message.getToAddresses()]
+                     if suffix == mailing_list_host]
+
+        g = None
+        if group_ids:
+            for group_id in group_ids:
+                g = Group.get(group_id)
+                if g is not None:
+                    break
+
         #use the numerical group id
-        g = Group.get(group_id)
         if g is not None:
             group_id = g.id
         else:
