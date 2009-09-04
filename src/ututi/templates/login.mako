@@ -18,13 +18,11 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
 
 <h1>${_('Permission denied!')}</h1>
 
-<img src="${url('/images/nope.png')}" />
-
-<div>
+<div class="permission-denied">
 ${_('Only registered users can perform this action. Please log in, or register an account on our system.')}
 </div>
 
-  <h1>${_('UTUTI - student information online')}</h1>
+  <h3 class="underline">${_('Why should I join?')}</h3>
   <div id="ututi_features">
     <div id="can_find">
       <h3>${_('What can You find here?')}</h3>

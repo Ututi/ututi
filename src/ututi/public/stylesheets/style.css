@@ -77,6 +77,10 @@ h3,
   margin: 0;
 }
 
+h1.underline, h2.underline, h3.underline {
+  border-bottom: 1px solid #ded8d8;
+}
+
 h4,
 .larger {
   margin: 0;
@@ -1071,3 +1075,15 @@ ul#event_list li {
   padding: 0 0 5px 20px;
   background: transparent url("../images/details/icon_event.png") left top no-repeat;
 }
+
+
+/* misc */
+div.permission-denied {
+  margin-top: 10px;
+  padding-left: 140px;
+  padding-top: 5px;
+  background: white url("../images/details/icon_nope.png") left top no-repeat;
+  height: 80px;
+}
+
+/* end misc */
