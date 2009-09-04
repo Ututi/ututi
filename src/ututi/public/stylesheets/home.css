@@ -1,3 +1,14 @@
+#year-input {
+  width: 80px;
+  padding-left: 20px;
+  background: white url("../images/details/arrow.png") left bottom no-repeat;
+}
+
+#year-input div,
+#year-input input {
+  width: 80px;
+}
+
 input.selected {
   background: #ffd0a1;
 }

@@ -572,7 +572,7 @@ $.Autocompleter.Select = function (options, input, select, config) {
 		element = $("<div/>")
 		.hide()
 		.addClass(options.resultsClass)
-		.appendTo($(input).parent());
+		.appendTo($(input).parent().parent().parent());
 
 		list = $("<ul/>").appendTo(element).mouseover( function(event) {
 			if(target(event).nodeName && target(event).nodeName.toUpperCase() == 'LI') {

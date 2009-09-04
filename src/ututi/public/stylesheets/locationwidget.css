@@ -7,21 +7,34 @@
   padding: 0;
   list-style: none;
   display: none;
+  position: absolute;
+  z-index: 10000;
+  width: 200px;
 }
 
 .ac_results ul {
   margin: 0;
   padding: 0;
-  border: 2px solid #adaca4;
 }
 
 .ac_results li {
   list-style-type: none;
   padding: 2px 0 5px 5px;
   color: #aa5500;
+  background: white;
 }
 
-.ac_over {
+.ac_results .ac_over {
   background: #f2ebe3;
 }
 
+.location-tag-field {
+  float: left;
+  margin: 0;
+  width: 200px;
+}
+
+#location-tag-field-1, #location-tag-field-2, #location-tag-field-3, #location-tag-field-4 {
+  padding-left: 20px;
+  background: white url("../images/details/arrow.png") left bottom no-repeat;
+}

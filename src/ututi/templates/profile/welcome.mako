@@ -16,17 +16,32 @@ ${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
       ${location_widget(3)}
 
 
-      <div class="form-field hidden">
-        <label style="display: inline;" for="year">${_("Year of entry:")}</label>
-        <select name="year" id="year">
-          %for year in c.years:
-          %if year == c.current_year:
-          <option value="${year}" selected="selected">${year}</option>
-          %else:
-          <option value="${year}">${year}</option>
-          %endif
-          %endfor
-        </select>
+      <div class="form-field hidden" id="year-input">
+        <label for="year" class="inline-label">${_('entrance year')}</label>
+        <div class="input-rounded">
+          <div>
+            <input type="text" name="year" id="year" value=""/>
+          </div>
+        </div>
+
+        <script type="text/javascript">
+        //<![CDATA[
+        var years = [\
+        %for year in range(c.current_year - 10, c.current_year+1):
+          "${year}",
+        %endfor
+        ];
+        $('#year').autocomplete(years, {\
+          cacheLength: 200,
+          max: 10,
+          matchCase: false,
+          matchSubset: true,
+          matchContains: false,
+          mustMatch: true,
+          selectFirst: true,
+        });
+        //]]>
+        </script>
       </div>
       <br style="clear: left; margin: 0; height: 0; padding: 0;"/>
       <div class="form-field">

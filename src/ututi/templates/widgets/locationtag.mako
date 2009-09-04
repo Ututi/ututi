@@ -1,17 +1,30 @@
-<%def name="location_widget(number, values=[])">
+<%def name="location_widget(number, values=[], titles=[])">
+<%
+   if titles == []:
+       titles = [_('University'), _('Department'), _('Section')]
+%>
 
 <div class="location-tag-widget">
-<form:error name="location"/>
-  <% rng = range(number) %>
-  %for i in rng:
-    <div class="location-tag-field">
-      %if len(values) > i:
-        <input type="text" name="location-${i}" id="location-${i}" class="line structure-complete" value="${values[i]}"/>
-      %else:
-        <input type="text" name="location-${i}" id="location-${i}" class="line structure-complete" value=""/>
-      %endif
-    </div>
-  %endfor
+  <div class="form-field">
+    <form:error name="location"/>
+    <% rng = range(number) %>
+    %for i in rng:
+      <div class="location-tag-field" id="location-tag-field-${i}">
+        %if i < len(titles):
+            <label for="location-${i}" class="inline-label">${titles[i]}</label>
+        %endif
+        <div class="input-rounded">
+          <div>
+            %if len(values) > i:
+              <input type="text" name="location-${i}" id="location-${i}" class="structure-complete" value="${values[i]}"/>
+            %else:
+              <input type="text" name="location-${i}" id="location-${i}" class="structure-complete" value=""/>
+            %endif
+          </div>
+        </div>
+      </div>
+    %endfor
+  </div>
 </div>
 ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
 <script type="text/javascript">
@@ -19,7 +32,7 @@ ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
   /* hide extra inputs */
   var flr = 0;
   $(".location-tag-field").each(function(i) {
-    if ($(this).children('input').val() != '') {
+    if ($(this).find('input').val() != '') {
       flr = flr + 1;
     }
     if (i > flr) {
@@ -28,14 +41,13 @@ ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
   });
 
   $(".structure-complete").each(function(i) {
-    $(this).autocomplete("${url(controller='structure', action='completions')}", {\
-      cacheLength: 0,
+    $(this).autocomplete([], {\
+      cacheLength: 200,
       dataType:"json",
-      highlight: false,
       max: 10,
       matchCase: false,
-      matchSubset: false,
-      matchContains: false,
+      matchSubset: true,
+      matchContains: true,
       mustMatch: false,
       selectFirst: true,
       formatItem: function(data,i,value,result){
@@ -75,14 +87,39 @@ ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
 
         if (data.has_children == true) {
           var next_item = $(".location-tag-field").eq(ind+1);
-          $(next_item).removeClass("hidden");
+          $(next_item).removeClass("hidden").addClass("json-target");
+          var parameters = {};
+
+          $(".structure-complete").each(function(i) {
+              if (i < ind+1) {
+                  parameters['parent-'+i] = $(this).val();
+              }
+          });
+          jQuery.getJSON("${url(controller='structure', action='completions')}",
+                          parameters,
+                          function(jdata) {
+                              var item = $(".json-target").eq(0);
+                              item.find("input").setOptions({
+                                  data: jdata.values
+                              });
+                              item.removeClass("json-target");
+                   });
+
           $(next_item).children('input').val('').focus();
         } else {
           $(".form-field.hidden:first").removeClass("hidden");
         }
       }
     });
-  });
+   });
+   jQuery.getJSON("${url(controller='structure', action='completions')}",
+                   function(jdata) {
+                     var item = $(".structure-complete").eq(0);
+                     item.setOptions({
+                       data: jdata.values
+                     });
+                   });
+
 //]]>
 </script>
 </%def>

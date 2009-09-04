@@ -107,17 +107,23 @@ class StructureController(BaseController):
         tag = meta.Session.query(LocationTag).filter_by(id=id).one()
         return serve_image(tag.logo, width, height)
 
-    @validate(schema=AutoCompletionForm)
+    @validate(schema=AutoCompletionForm, post_only=False, on_get=True)
     @jsonify
     def completions(self):
-        text = self.form_result.get('q', '')
-        parent = self.form_result.get('parent', '')
-
         meta.engine.echo = True
-        query = meta.Session.query(LocationTag).filter(or_(LocationTag.title_short.op('ILIKE')('%s%%' % text),
-                                                           LocationTag.title.op('ILIKE')('%s%%' % text)))
-        parent = LocationTag.get_by_title(parent)
-        query = query.filter(LocationTag.parent==parent)
+        query = meta.Session.query(LocationTag)
+        if hasattr(self, 'form_result'):
+            text = self.form_result.get('q', None)
+            parent = self.form_result.get('parent', '')
+            if text is not None:
+                query = query.filter(or_(LocationTag.title_short.op('ILIKE')('%s%%' % text),
+                                         LocationTag.title.op('ILIKE')('%s%%' % text)))
+
+            parent = LocationTag.get_by_title(parent)
+            query = query.filter(LocationTag.parent==parent)
+        else:
+            query = query.filter(LocationTag.parent==None)
+
 
         results = []
 

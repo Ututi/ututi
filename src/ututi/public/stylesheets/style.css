@@ -402,6 +402,12 @@ ul.bullets_large li {
 /* end horizontal menu */
 
 /* begin form */
+form .form-field .inline-label {
+  font-weight: bold;
+  font-size: 0.8em;
+  color: #666;
+}
+
 form.inline-form {
   display: inline;
 }
@@ -1041,13 +1047,17 @@ div.user-logo-link div {
 /* subjects portlet */
 #subject_portlet_content #user-subjects {
   list-style-type: none;
+  margin-bottom: 10px;
+  padding: 0;
+}
+
+#subject_portlet_content #user-subjects li {
   height: 16px;
   line-height: 16px;
   padding-left: 20px;
   background: transparent url("../images/details/icon_subject_small.png") left center no-repeat;
-  margin-bottom: 10px;
+  margin: 2px 0;
 }
-
 /* js alternatives */
 .js {
     display: none;
