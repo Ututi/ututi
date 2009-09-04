@@ -1,10 +1,17 @@
 <%inherit file="/base.mako" />
 <%namespace file="/widgets/tags.mako" import="*"/>
+<%namespace file="/portlets/anonymous.mako" import="*"/>
 
 <%def name="head_tags()">
 ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
+${h.stylesheet_link('/stylesheets/anonymous.css')|n}
 </%def>
 
+<%def name="portlets()">
+<div id="sidebar">
+  ${ututi_join_portlet()}
+</div>
+</%def>
 
 
 <%def name="title()">

@@ -65,6 +65,7 @@
 #registration_form .form-field div.input-rounded {
   float: right;
   width: 160px;
+  clear: right;
 }
 
 #registration_form .form-field .input-rounded input {
