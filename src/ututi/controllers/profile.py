@@ -25,7 +25,7 @@ from ututi.model import Subject
 from ututi.model import LocationTag
 from ututi.model import meta, Email, Group, SearchItem
 from ututi.controllers.group import _filter_watched_subjects, FileUploadTypeValidator
-from ututi.controllers.search import SearchSubmit
+from ututi.controllers.search import SearchSubmit, SearchBaseController
 
 log = logging.getLogger(__name__)
 
@@ -42,7 +42,7 @@ class LogoUpload(Schema):
     logo = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
 
 
-class ProfileController(BaseController):
+class ProfileController(SearchBaseController):
     """A controller for the user's personal information and actions."""
     def __before__(self):
         c.breadcrumbs = []
@@ -51,13 +51,20 @@ class ProfileController(BaseController):
         return [ {'title': _('Profile'),
                   'link': url(controller='profile', action='index'),
                   'selected': selected == 'profile'},
-                 {'title': _('Edit profile'),
-                  'link': url(controller='profile', action='edit'),
-                  'selected': selected == 'edit'},
                  {'title': _("What's new?"),
                   'link': url(controller='profile', action='home'),
-                  'selected': selected == 'home'}
+                  'selected': selected == 'home'},
+                 {'title': _("Search"),
+                  'link': url(controller='profile', action='search'),
+                  'selected': selected == 'search'},
                  ]
+
+    @ActionProtector("user")
+    @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
+    def search(self):
+        c.breadcrumbs.append(self._actions('search'))
+        self._search()
+        return render('/profile/search.mako')
 
     @ActionProtector("user")
     def index(self):
@@ -91,7 +98,7 @@ class ProfileController(BaseController):
 
     @ActionProtector("user")
     def edit(self):
-        c.breadcrumbs.append(self._actions('edit'))
+        c.breadcrumbs.append(self._actions('profile'))
 
         return render('profile/edit.mako')
 

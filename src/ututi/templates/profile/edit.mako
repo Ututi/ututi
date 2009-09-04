@@ -1,17 +1,6 @@
 <%inherit file="/profile/base.mako" />
 <%namespace file="/portlets/user.mako" import="*"/>
 
-<%def name="portlets()">
-<div id="sidebar">
-  ${user_information_portlet()}
-
-  ${user_subjects_portlet()}
-  ${user_groups_portlet()}
-
-</div>
-</%def>
-
-
 <%def name="title()">
   ${c.user.fullname}
 </%def>
@@ -73,6 +62,7 @@
       <td style="width: 220px;">
         <div class="js-alternatives" id="user-logo">
           <img src="${url(controller='profile', action='logo', width='120', height='200')}" alt="User logo" id="user-logo-editable"/>
+          <br/>
           <a href="#" id="user-logo-button" class="btn"><span>${_('Change logo')}</span></a>
         </div>
         <br style="clear: left;"/>
@@ -84,12 +74,20 @@
       <td class="js-alternatives">
         <div class="form-field">
           <label for="fullname">${_('Full name')}</label>
-          <input type="text" id="fullname" name="fullname" value="${c.user.fullname}"/>
+          <div class="input-rounded">
+            <div>
+              <input type="text" id="fullname" name="fullname" value="${c.user.fullname}"/>
+            </div>
+          </div>
         </div>
 
         <div class="form-field">
           <label for="site_url">${_('Address of your website or blog')}</label>
-          <input type="text" id="site_url" name="site_url" value="${c.user.site_url}"/>
+          <div class="input-rounded">
+            <div>
+              <input type="text" id="site_url" name="site_url" value="${c.user.site_url}"/>
+            </div>
+          </div>
         </div>
 
         <div class="form-field">

@@ -19,10 +19,10 @@ class SearchSubmit(Schema):
     pre_validators = [variabledecode.NestedVariables()]
 
 
-class SearchController(BaseController):
+class SearchBaseController(BaseController):
+    """ A base controller for searching."""
 
-    @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
-    def index(self):
+    def _search(self):
         c.text = self.form_result.get('text', '')
         c.tags = self.form_result.get('tagsitem', None)
         if c.tags is None:
@@ -45,4 +45,10 @@ class SearchController(BaseController):
                 items_per_page = 20,
                 **search_params)
 
+class SearchController(SearchBaseController):
+
+    @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
+    def index(self):
+        self._search()
         return render('/search/index.mako')
+

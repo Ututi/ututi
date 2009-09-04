@@ -423,7 +423,7 @@ form .form-field {
 form .form-field label {
   display: block;
   /* font */
-  color: #1a1a1a;
+  color: #666;
   font-size: 12px;
   height: 20px;
   line-height: 20px;
@@ -1038,6 +1038,7 @@ div.user-logo-link div {
 
 #group_portlet_content img#group-logo {
   margin-right: 5px;
+  float: left;
 }
 
 #group_portlet_content .group-listing-item {
@@ -1085,5 +1086,20 @@ div.permission-denied {
   background: white url("../images/details/icon_nope.png") left top no-repeat;
   height: 80px;
 }
+
+.clear-left, .clear-right {
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.clear-left {
+  clear: left;
+}
+
+.clear-right {
+  clear: right;
+}
+
 
 /* end misc */

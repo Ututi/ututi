@@ -124,6 +124,7 @@ of in your home page (at least for now):
             <img id="group-logo" src="/group/moderators/logo/25/25" alt="logo" />
             <a href="/group/moderators">Ututi moderatoriai</a>
                 (1 member)
+                <br class="clear-left" />
             </div>
         </li>
         <li>
@@ -131,6 +132,7 @@ of in your home page (at least for now):
             <img id="group-logo" src="/group/test/logo/25/25" alt="logo" />
             <a href="/group/test">Test group</a>
                 (1 member)
+                <br class="clear-left" />
             </div>
         </li>
       </ul>
