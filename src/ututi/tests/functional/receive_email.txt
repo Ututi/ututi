@@ -34,6 +34,9 @@ ututi:
     Content-Disposition: inline
     User-Agent: Mutt/1.5.18 (2008-05-17)
     Content-Type: text/plain; charset=us-ascii
+    Reply-To: moderators@lists.ututi.lt
+    Errors-To: errors@ututi.lt
+    List-Id: moderators@lists.ututi.lt
     <BLANKLINE>
     Hi, I am just writing to tell you how wonderful this system is.
     <BLANKLINE>
@@ -77,6 +80,9 @@ link to the file on our system:
     MIME-Version: 1.0
     Content-Disposition: inline
     User-Agent: Mutt/1.5.18 (2008-05-17)
+    Reply-To: moderators@lists.ututi.lt
+    Errors-To: errors@ututi.lt
+    List-Id: moderators@lists.ututi.lt
     Content-Type: text/plain; charset="utf-8"
     Content-Transfer-Encoding: base64
     <BLANKLINE>
@@ -123,6 +129,9 @@ list of files:
     MIME-Version: 1.0
     Content-Disposition: inline
     User-Agent: Mutt/1.5.18 (2008-05-17)
+    Reply-To: moderators@lists.ututi.lt
+    Errors-To: errors@ututi.lt
+    List-Id: moderators@lists.ututi.lt
     Content-Type: text/plain; charset="utf-8"
     Content-Transfer-Encoding: base64
     <BLANKLINE>

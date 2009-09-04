@@ -161,6 +161,14 @@ class GroupMailingListMessage(ContentItem):
             footer += '\n<a href="%s">%s</a>' % (url, attachment.title)
 
         message = email.message_from_string(self.original.encode('utf-8'), UtutiEmail)
+
+        address = "%s@%s" % (self.group.group_id,
+                             config.get('mailing_list_host'))
+
+        message.add_header('Reply-To', address)
+        message.add_header('Errors-To', config.get('email_to', 'errors@ututi.lt'))
+        message.add_header('List-Id', address)
+
         if footer:
             payload = self.body + footer
             payload = payload.encode('utf-8')
