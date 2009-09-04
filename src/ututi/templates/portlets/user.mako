@@ -20,8 +20,10 @@
       % endfor
     </ul>
     %endif
-    ${h.button_to(_('Watch subjects'), url(controller='profile', action='subjects', id=user.id))}
-    ${h.link_to(_('More subjects'), url(controller='search', action='index', obj_type='subject'), class_="more")}
+    <div>
+      ${h.button_to(_('Watch subjects'), url(controller='profile', action='subjects', id=user.id))}
+      ${h.link_to(_('More subjects'), url(controller='search', action='index', obj_type='subject'), class_="more")}
+    </div>
   </%self:portlet>
 </%def>
 
