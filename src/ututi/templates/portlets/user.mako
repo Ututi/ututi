@@ -49,11 +49,11 @@
           %if membership.group.logo is not None:
             <img id="group-logo" src="${url(controller='group', action='logo', id=membership.group.group_id, width=25, height=25)}" alt="logo" />
           %else:
-            <img id="group-logo" src="images/details/icon_group.png"  style="width: 25px;" alt="logo" />
+            ${h.image('/images/details/icon_group.png', alt='logo', id='group-logo')|n}
           %endif
-
             <a href="${membership.group.url()}">${membership.group.title}</a>
             (${ungettext("%(count)s member", "%(count)s members", len(membership.group.members)) % dict(count = len(membership.group.members))})
+            <br class="clear-left"/>
         </div>
       </li>
       % endfor
