@@ -42,13 +42,13 @@ ${_('student information online')}
 
 <div class="personal-info">
   <div class="personal-logo">
-    % if c.user.logo is not None:
-    <img src="${url(controller='user', action='logo', id=c.user.id, width=60, height=60)}" alt="logo" />
-    % else:
     <a href="${url(controller='profile', action='edit')}" title="${_('Upload your personal logo')}">
-      ${h.image('/images/user_logo_45x60.png', alt='logo')|n}
+      % if c.user.logo is not None:
+        <img src="${url(controller='user', action='logo', id=c.user.id, width=60, height=60)}" alt="logo" />
+      % else:
+        ${h.image('/images/user_logo_45x60.png', alt='logo')|n}
+      % endif
     </a>
-    % endif
   </div>
   <div id="personal-data">
     <div class="fullname">${c.user.fullname}</div>
