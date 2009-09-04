@@ -161,6 +161,8 @@ informacijos-sistemos-1,,KTU,IF,application/vnd.ms-powerpoint,9pask.ppt,9pask.pp
 informacijos-sistemos-1,,KTU,IF,application/vnd.ms-powerpoint,10pask.ppt,10pask.ppt,var/upload/4e/application/vnd.ms-powerpoint/10pask.ppt/4ed17994d4fe98bf114914226487c18f,vaidasru@gmail.com
 informacijos-sistemos-1,,KTU,IF,text/plain,11_pask.rar,11_pask.rar,var/upload/49/text/plain/11_pask.rar/49da71af3010aa6f2631ba3e058c3f47,vaidasru@gmail.com
 interjeras,,VGTU,ArchFak,application/octet-stream,interneto-kavines-interjeras-j_ingelevicius-2006.zip,Interneto kavines interjeras J_ingelevicius 2006.zip,var/upload/d5/application/octet-stream/interneto-kavines-interjeras-j_ingelevicius-2006.zip/d509a9f11eefda9d3a9e7ccf01e41a1e,justas@zvejone.lt
+interjeras-praktikos-uzsiemimai,PROGRAMA,VGTU,ArchFak,image/pjpeg,tvarkarastis.jpg,tvarkarastis.jpg,var/upload/17/image/pjpeg/tvarkarastis.jpg/17488ecf0316a60f32753d5e9ffe5d87,Lyzdeika@gmail.com
+interjeras-praktikos-uzsiemimai,PROGRAMA,VGTU,ArchFak,image/pjpeg,programa.jpg,programa.jpg,var/upload/d8/image/pjpeg/programa.jpg/d8f94d956d4f34789a3cf5ebd87c26c7,Lyzdeika@gmail.com
 interneto-technologijos-programu-sistemos,Konspektai,VU,MIF,application/msword,1-networkxmlnamespaces.doc,1-NetworkXMLNamespaces.doc,var/upload/e0/application/msword/1-networkxmlnamespaces.doc/e007501bb86ed6d2c4e32e02fee76577,jaro@ututi.com
 interneto-technologijos-programu-sistemos,Konspektai,VU,MIF,application/msword,2-xmlschema.doc,2-XMLSchema.doc,var/upload/50/application/msword/2-xmlschema.doc/50e2fca83fe4bae9c7497688048cfaac,jaro@ututi.com
 interneto-technologijos-programu-sistemos,Konspektai,VU,MIF,application/msword,3-xpath.doc,3-XPath.doc,var/upload/18/application/msword/3-xpath.doc/18b216cb745b0994e7182088ae675491,jaro@ututi.com
@@ -177,6 +179,15 @@ kieto-kuno-fizika,,VU,FF,application/pdf,kieto-kuno-konspekto-1dalis-r.-aleksiej
 kieto-kuno-fizika,,VU,FF,application/pdf,silumine-talpa_kk-konsp.-r.-aleksiejunas.pdf,Silumine talpa_KK konsp. R. Aleksiejunas.pdf,var/upload/99/application/pdf/silumine-talpa_kk-konsp.-r.-aleksiejunas.pdf/993bda7fe476d0fb7a541b089bf3ae6d,kiskelis@gmail.com
 kieto-kuno-fizika,,VU,FF,application/pdf,siluminis-pletimasis-laidumas-difuzija_kk-konsp.-r.-aleksiejunas.pdf,Siluminis pletimasis-laidumas-difuzija_KK konsp. R. Aleksiejunas.pdf,var/upload/b6/application/pdf/siluminis-pletimasis-laidumas-difuzija_kk-konsp.-r.-aleksiejunas.pdf/b6d1b29268b54a0d5188c4a45215d6e9,kiskelis@gmail.com
 kieto-kuno-fizika,,VU,FF,application/pdf,gardeles-virpesiai_kk-konsp.-r.-aleksiejunas.pdf,Gardeles virpesiai_KK konsp. R. Aleksiejunas.pdf,var/upload/34/application/pdf/gardeles-virpesiai_kk-konsp.-r.-aleksiejunas.pdf/3401811ab985db19167dd9451f5f7837,kiskelis@gmail.com
+kietuju-kunu-fizika,Teorija,ŠU,GMF,application/pdf,teorija-1,Teorija 1,var/upload/3d/application/pdf/teorija-1/3d861c5233ab23394bde4842e6314108,ramulis@gmail.com
+kietuju-kunu-fizika,Teorija,ŠU,GMF,application/pdf,teorija-2,Teorija 2,var/upload/ea/application/pdf/teorija-2/ea4d87830afcfec851662cb3e6f7995a,ramulis@gmail.com
+kietuju-kunu-fizika,Teorija,ŠU,GMF,application/pdf,teorija-3,Teorija 3,var/upload/5d/application/pdf/teorija-3/5d7af9a8c9a2e8bdb23d36c7029e55b8,ramulis@gmail.com
+kietuju-kunu-fizika,Teorija,ŠU,GMF,application/pdf,teorija-4,Teorija 4,var/upload/e6/application/pdf/teorija-4/e6b707f965e3edb478b4d4e7134793b0,ramulis@gmail.com
+kietuju-kunu-fizika,Teorija,ŠU,GMF,application/pdf,teorija-5,Teorija 5,var/upload/00/application/pdf/teorija-5/00a6a962c965d390dbd95a3313161240,ramulis@gmail.com
+kietuju-kunu-fizika,Teorija,ŠU,GMF,application/pdf,teorija-6,Teorija 6,var/upload/c1/application/pdf/teorija-6/c1b9dd920053f6db49be688794344b7c,ramulis@gmail.com
+kietuju-kunu-fizika,Teorija,ŠU,GMF,application/pdf,teorija-7,Teorija 7,var/upload/8b/application/pdf/teorija-7/8b147cb36737706ac80cc20aa2fbc9a4,ramulis@gmail.com
+kietuju-kunu-fizika,Teorija,ŠU,GMF,application/pdf,teorija-8,Teorija 8,var/upload/36/application/pdf/teorija-8/36097d93d0295eb35b1f00b3253eaf2c,ramulis@gmail.com
+kietuju-kunu-fizika,Teorija/Laboratoriniai,ŠU,GMF,application/msword,holo-efekto-tyrimas,Holo efekto tyrimas,var/upload/ee/application/msword/holo-efekto-tyrimas/eef4318bb56eef121f6b8d57b727e464,ramulis@gmail.com
 kompiuterine-technika,,VU,MIF,application/pdf,kompiutrinetechnika.pdf,KompiutrineTechnika.pdf,var/upload/3c/application/pdf/kompiutrinetechnika.pdf/3cfbe3fbf40d927c2d2250198fb2c51e,jaro@ututi.com
 kompiuterine-technika,,VU,MIF,application/msword,ep_egzamino_klausimai_2005.doc,EP_egzamino_klausimai_2005.doc,var/upload/7f/application/msword/ep_egzamino_klausimai_2005.doc/7f4dc20cc2d13c17bce654f3cbe7b1b7,jaro@ututi.com
 kompiuterine-technika,,VU,MIF,application/msword,kt-klausimai-atsiskaitymui.doc,KT klausimai atsiskaitymui.doc,var/upload/74/application/msword/kt-klausimai-atsiskaitymui.doc/7444ed3c37c447a1fe8a293559581469,jaro@ututi.com

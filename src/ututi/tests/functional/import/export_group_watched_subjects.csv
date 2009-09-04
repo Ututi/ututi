@@ -1,15 +1,19 @@
+tuberositas,KMU,MF,studiju-ivadas
+tuberositas,KMU,MF,anatomija
 a06-1,VGTU,ArchFak,architekturos-istorija-2
 a06-1,VGTU,ArchFak,gamybine-praktika
 a06-1,VGTU,ArchFak,pastatu-inzinerines-sistemos
 a06-1,VGTU,ArchFak,specialiosios-konstrukcijos
 a06-1,VGTU,ArchFak,vadyba
 a06-1,VGTU,ArchFak,visuomeninio-pastato-techninis-projektas
-archpio,VGTU,ArchFak,architekturos-istorija-2
-archpio,VGTU,ArchFak,vadyba
-archpio,VGTU,ArchFak,visuomeninio-pastato-techninis-projektas
-archpio,VGTU,ArchFak,urbanistine-kompozicija
-archpio,VGTU,ArchFak,specialiosios-konstrukcijos
-archpio,VGTU,ArchFak,pastatu-inzinerines-sistemos
+archpio,VGTU,ArchFak,gamybine-praktika
+archpio,VGTU,ArchFak,daugiafunkcinio-objekto-projektas-kompleksinis-projektas
+archpio,VGTU,ArchFak,interjeras-praktikos-uzsiemimai
+archpio,VGTU,ArchFak,interjeras
+archpio,VGTU,ArchFak,paminklosauga-ir-regeneracija
+archpio,VGTU,ArchFak,pastatu-konstrukciju-skaiciavimas
+archpio,VGTU,ArchFak,specialybes-kalbos-kultura
+archpio,VGTU,ArchFak,urbanistikos-istorija-ir-filosofija
 a07-2,VGTU,ArchFak,urbanistine-kompozicija
 a07-2,VGTU,ArchFak,urbanistikos-teorija
 a07-2,VGTU,ArchFak,specialiosios-konstrukcijos
@@ -19,6 +23,7 @@ a07-2,VGTU,ArchFak,miestelio-pletros-projektas
 a07-2,VGTU,ArchFak,gamybine-praktika
 biofizikai-2007,VU,FF,sinergetika
 ea08-2,VGTU,EF,teorine-elektrotechnika-1
+fi,ŠU,GMF,kietuju-kunu-fizika
 iarch,VGTU,SF,architekturos-projektavimas-2
 iarch,VGTU,SF,ekonomikos-pagrindai
 iarch,VGTU,SF,pastataa3-konstrukcijos
@@ -69,6 +74,8 @@ kmu-mf-visas-srautas-ii-2008,KMU,MF,pasirenkamasis-optiniai-metodai-siuolaikinej
 kmu-mf-visas-srautas-ii-2008,KMU,MF,pasirenkamasis-palyginamosios-anatomijos-pagrindai-ir-patologju-susijusiu-su-embriogenezes-sutrikimais-kilme
 kmu-mf-visas-srautas-ii-2008,KMU,MF,pasirenkamasis-regos-neurofiziologijos-ir-psichofizikos-pagrindai
 kmu-mf-visas-srautas-ii-2008,KMU,MF,pasirenkamasis-taikomoji-genetika-augalai-gyvunai-zmogus
+lituanistai,VU,FLF,lietuviu-kalbos-normos-teorija-ir-praktika
+lituanistai,VU,FLF,sociolingvistikos-ivadas
 magaiveriai,VU,FF,biologiniu-objektu-tyrimo-metodai
 magaiveriai,VU,FF,kieto-kuno-fizika
 magaiveriai,VU,FF,statistine-fizika

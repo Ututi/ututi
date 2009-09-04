@@ -58,6 +58,7 @@ And upload all the files one by one:
     Email 146 from Jaroslav Šatkevič <jaroslav@akl.lt> was ignored
     Email 148 from Domas Monkus <domas@ututi.com> was ignored
     Email 190 from Jaroslav Šatkevič <jaroslav@akl.lt> was ignored
+    Email 193 from Virginija.Cibarauske@flf.stud.vu.lt was ignored
 
     >>> browser.open('http://localhost/group/archpio')
     >>> browser.getLink('Forum').click()

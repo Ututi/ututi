@@ -748,6 +748,20 @@ Daugiabučio gyvenamojo namo projektas (kompleksinis projektas)
 </ul>
 </p>
 ",justas@zvejone.lt
+daugiafunkcinio-objekto-projektas-kompleksinis-projektas,VGTU,ArchFak,default,Daugiafunkcinio objekto projektas (kompleksinis projektas),"
+<p><strong>Dėstytojas:</strong> S. Mikštas, S. Kuncevičius</p>
+
+<p>
+7 semestras, projektavimas
+</p>
+
+<h3><strong>Literatūros sąrašas:</strong></h3>
+<p>
+<ul>
+<li>Įrašykite knygas, susijusias su šiuo dalyku.</li>
+</ul>
+</p>
+",r@toostis.com
 daugiamate-rinkos-analize,VU,EF,default,Daugiamatė rinkos analizė,"
 <p><strong>Dėstytojas:</strong> Doc. Vytautas Kėdaitis</p>
 
@@ -1683,6 +1697,20 @@ farmacine-botanika,KMU,FF,default,Farmacinė botanika,"
 </ul>
 </p>
 ",andrius.dre@gmail.com
+farmakologija,KMU,MF,default,Farmakologija,"
+<p><strong>Dėstytojas:</strong> Doc. Rimas JankÅ«nas ir kt.</p>
+
+<p>
+Po truputÄ¯ iÅ¡ visÅ³ ciklÅ³...
+</p>
+
+<h3><strong>Literatūros sąrašas:</strong></h3>
+<p>
+<ul>
+<li>Bus...</li>
+</ul>
+</p>
+",medicusjustus@yahoo.de
 finansine-analize,VU,EF,default,Finansinė analizė,"
 <p><strong>Dėstytojas:</strong> Asist. Nerijus Činčikas</p>
 
@@ -2518,11 +2546,31 @@ Pridėkite aprašymą
 </ul>
 </p>
 ",jaro@ututi.com
+interjeras-1,VGTU,ArchFak,default,Interjeras_netikras,"
+<p><strong>Dėstytojas:</strong> R. Palekas</p>
+<p>
+Pridėkite dalyko aprašymą.</p>
+<h3><strong>Literatūros sąrašas:</strong></h3>
+<p>&nbsp;</p>
+<ul>
+<li>Įrašykite knygas, susijusias su šiuo dalyku.</li></ul>
+<p>&nbsp;</p>
+",jaro@ututi.com
 interjeras,VGTU,ArchFak,default,Interjeras,"
-<p><strong>Dėstytojas:</strong> i</p>
+<p><strong>Dėstytojas:</strong> R. Palekas</p>
+<p>
+Interjeras 7 sem.</p>
+<h3><strong>Literatūros sąrašas:</strong></h3>
+<p>&nbsp;</p>
+<ul>
+<li>Įrašykite knygas, susijusias su šiuo dalyku.</li></ul>
+<p>&nbsp;</p>
+",justas@zvejone.lt
+interjeras-praktikos-uzsiemimai,VGTU,ArchFak,default,Interjeras [praktikos užsiėmimai],"
+<p><strong>Dėstytojas:</strong> A. Baldišiūtė, A. Ambrasas</p>
 
 <p>
-Interjeras 7 sem.
+tuoj
 </p>
 
 <h3><strong>Literatūros sąrašas:</strong></h3>
@@ -2531,7 +2579,7 @@ Interjeras 7 sem.
 <li>Įrašykite knygas, susijusias su šiuo dalyku.</li>
 </ul>
 </p>
-",justas@zvejone.lt
+",r@toostis.com
 interneto-technologijos-informatika,VU,MIF,default,Interneto technologijos (informatika),Default wiki page with wiki ((syntax)) example.,jaro@ututi.com
 interneto-technologijos-programu-sistemos,VU,MIF,default,Interneto technologijos (programų sistemos),"
 <p><strong>Dėstytojas:</strong> <a class=""external-link"" href=""http://uosis.mif.vu.lt/~donatas/"">Donatas Čiukšys</a></p>
@@ -2770,6 +2818,20 @@ keliones-ir-sveikata,KMU,VSF,default,Kelionės ir sveikata,"
 ",andrius.dre@gmail.com
 kieto-kuno-fizika,VU,FF,default,Kieto kūno fizika,Default wiki page with wiki ((syntax)) example.,kiskelis@gmail.com
 kieto-kuno-fizika,VU,FF,syntax,syntax,,pi@homedir.eu
+kietuju-kunu-fizika,ŠU,GMF,default,Kietųjų kūnų fizika,"
+<p><strong>Dėstytojas:</strong> Violeta Šlekienė</p>
+
+<p>
+http://su.lt/article/articleview/1054/1/516/
+</p>
+
+<h3><strong>Literatūros sąrašas:</strong></h3>
+<p>
+<ul>
+<li>Įrašykite knygas, susijusias su šiuo dalyku.</li>
+</ul>
+</p>
+",ramulis@gmail.com
 kineziologijos-ir-reabilitacijos-pagrindai,KMU,VSF,default,Kineziologijos ir reabilitacijos pagrindai,"
 <p><strong>Dėstytojas:</strong>  </p>
 
@@ -3138,6 +3200,20 @@ LENKIJOS ISTORIJA
 </ul>
 </p>
 ",vytautas.rauluskevicius@gmail.com
+lietuviu-kalbos-normos-teorija-ir-praktika,VU,FLF,default,Lietuvių kalbos normos teorija ir praktika,"
+<p><strong>Dėstytojas:</strong> doc. I. Smetonienė</p>
+
+<p>
+Kalbos kultūra
+</p>
+
+<h3><strong>Literatūros sąrašas:</strong></h3>
+<p>
+<ul>
+<li>Jono Šukio „Linksnių ir prielinksnių vartojimas“</li>
+</ul>
+</p>
+",skyalx@gmail.com
 lietuvos-istorijos-istoriografija,VU,IF,default,LIETUVOS ISTORIJOS ISTORIOGRAFIJA,"
 <p><strong>Dėstytojas:</strong> doc. I. Valikonytė</p>
 
@@ -3864,6 +3940,20 @@ paliatyvioji-edukologija,KMU,VSF,default,Paliatyvioji edukologija,"
 </ul>
 </p>
 ",andrius.dre@gmail.com
+paminklosauga-ir-regeneracija,VGTU,ArchFak,default,Paminklosauga ir regeneracija,"
+<p><strong>Dėstytojas:</strong> Dalius Vrubliauskas</p>
+
+<p>
+Apie tai, kaip saugoti langus medinėse gryčiose ir nenukrapštinėti klasicistinės ir barokinės tapybos bažnyčiose
+</p>
+
+<h3><strong>Literatūros sąrašas:</strong></h3>
+<p>
+<ul>
+<li>Įrašykite knygas, susijusias su šiuo dalyku.</li>
+</ul>
+</p>
+",r@toostis.com
 pardavimu-ir-pirkimu-grandines-analize-ir-planavimas,VU,EF,default,Pardavimų ir pirkimų grandinės analizė ir planavimas,"
 <p><strong>Dėstytojas:</strong>  Prof., habil. dr. Vytautas Vengrauskas, doc. dr. Vytautas Mackevičius</p>
 
@@ -4862,6 +4952,20 @@ Pastatų projektavimo pagrindai. Pastatų konstrukciniai elementai (savokos, s
 <li>A.Nakas ir kt. Civilinių pastatų konstrukcijos. V.: Mokslas. 1992</li><li>STR 1.05.08:2003. Statinio projekto architektūrinės ir konstrukcinės dalių brėžinių braižymo taisyklės ir grafiniai žymėjimai.</li></ul>
 <p>&nbsp;</p>
 ",erephas@gmail.com
+pastatu-konstrukciju-skaiciavimas,VGTU,ArchFak,default,Pastatų konstrukcijų skaičiavimas,"
+<p><strong>Dėstytojas:</strong> M. Mickaitis</p>
+
+<p>
+7 semestras
+</p>
+
+<h3><strong>Literatūros sąrašas:</strong></h3>
+<p>
+<ul>
+<li>Įrašykite knygas, susijusias su šiuo dalyku.</li>
+</ul>
+</p>
+",r@toostis.com
 patalogine-anatomija,KMU,MF,default,Patologinė anatomija,"
 <p><strong>Dėstytojas:</strong> prof. R. Gailys</p>
 <p>
@@ -6004,6 +6108,20 @@ SOCIOKULTŪRINĖ APLINKA LDK MIESTUOSE IR MIESTELIUOSE XIV-XVIII a.
 </ul>
 </p>
 ",vytautas.rauluskevicius@gmail.com
+sociolingvistikos-ivadas,VU,FLF,default,Sociolingvistikos įvadas ,"
+<p><strong>Dėstytojas:</strong> doc. M. Ramonienė</p>
+
+<p>
+Sociolingvistika
+</p>
+
+<h3><strong>Literatūros sąrašas:</strong></h3>
+<p>
+<ul>
+<li>Įrašykite knygas, susijusias su šiuo dalyku.</li>
+</ul>
+</p>
+",skyalx@gmail.com
 specialioji-pedagogika,KMU,VSF,default,Specialioji pedagogika,"
 <p><strong>Dėstytojas:</strong>  </p>
 
@@ -6034,6 +6152,20 @@ specialioji-pedagogika,KMU,SF,default,Specialioji pedagogika,"
 ",andrius.dre@gmail.com
 specialiosios-konstrukcijos,VGTU,ArchFak,default,Specialiosios konstrukcijos,Default wiki page with wiki ((syntax)) example.,gytte.a@gmail.com
 specialiosios-konstrukcijos,VGTU,ArchFak,musu-bendras-konspektas,MUSU BENDRAS KONSPEKTAS,,r@toostis.com
+specialybes-kalbos-kultura,VGTU,ArchFak,default,Specialybės kalbos kultūra,"
+<p><strong>Dėstytojas:</strong> R. Žukienė</p>
+
+<p>
+lietuviųkalba
+</p>
+
+<h3><strong>Literatūros sąrašas:</strong></h3>
+<p>
+<ul>
+<li>Įrašykite knygas, susijusias su šiuo dalyku.</li>
+</ul>
+</p>
+",r@toostis.com
 sprendimu-paramos-ir-derinimo-sistemos,VU,EF,default,Sprendimų paramos ir derinimo sistemos,"
 <p><strong>Dėstytojas:</strong>  Doc. dr. T. Brazaitienė, doc. dr. Z. Brazaitis</p>
 
@@ -6611,6 +6743,34 @@ ugdymo-filosofija-1,KMU,VSF,default,Ugdymo filosofija,"
 </ul>
 </p>
 ",andrius.dre@gmail.com
+urbanistikos-istorija-ir-filosofija,VGTU,ArchFak,default,Urbanistikos istorija ir filosofija,"
+<p><strong>Dėstytojas:</strong> E. K. Staniūnas</p>
+
+<p>
+7 semestras
+</p>
+
+<h3><strong>Literatūros sąrašas:</strong></h3>
+<p>
+<ul>
+<li>Įrašykite knygas, susijusias su šiuo dalyku.</li>
+</ul>
+</p>
+",r@toostis.com
+urbanistikos-praktika,VGTU,ArchFak,default,Urbanistikos praktika,"
+<p><strong>Dėstytojas:</strong> S. Čereškevičius</p>
+
+<p>
+urbanistikos praktika po 2 kurso. Reikia padaryti miestelio analizę
+</p>
+
+<h3><strong>Literatūros sąrašas:</strong></h3>
+<p>
+<ul>
+<li>Įrašykite knygas, susijusias su šiuo dalyku.</li>
+</ul>
+</p>
+",r@toostis.com
 urbanistikos-teorija,VGTU,ArchFak,default,Urbanistikos teorija,"
 <p><strong>Dėstytojas:</strong> P.Juškevičius</p>
 <p>
