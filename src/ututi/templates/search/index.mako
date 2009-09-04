@@ -71,7 +71,7 @@ ${h.javascript_link('/javascripts/search.js')|n}
     </div>
     %if 'tags' in parts:
       <div class="search-tags">
-          <label for="tags">${_('Tags')}</label>
+          <label for="tags">${_('Filter by school:')}</label>
           ${tags_widget(tags, all_tags=True)}
       </div>
     %endif
@@ -81,14 +81,7 @@ ${h.javascript_link('/javascripts/search.js')|n}
 </%def>
 
 <%def name="search_results_item(item)">
-  <div class="search-item">
-    <a href="${item.object.url()}" title="${item.object.title}" class="item-title larger">${item.object.title}</a>
-    <div class="item-tags">
-      %for tag in item.object.tags:
-      <span class="tag">${tag.title}</span>
-      %endfor
-    </div>
-  </div>
+  ${item.object.snippet()}
 </%def>
 
 <%def name="search_results(results=None, display=None)">
@@ -96,7 +89,10 @@ ${h.javascript_link('/javascripts/search.js')|n}
    if display is None:
        display = search_results_item
 %>
-<h1>Results:</h1>
+<h3 class="underline search-results-title">
+  <span>results:</span>
+  <span class="result-count">(${ungettext("found %(count)s result", "found %(count)s results", results.item_count) % dict(count = results.item_count)})</span>
+</h3>
 <div id="search-results">
   %for item in results:
   ${display(item)}
@@ -109,7 +105,7 @@ ${h.javascript_link('/javascripts/search.js')|n}
 </%def>
 
 <h1>${_('Search')}</h1>
-${search_form(c.text, c.obj_type, c.tags, parts=['obj_type', 'text'])}
+${search_form(c.text, c.obj_type, c.tags, parts=['obj_type', 'text', 'tags'])}
 
 %if c.results:
 ${search_results(c.results)}

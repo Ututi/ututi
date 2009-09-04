@@ -3,6 +3,7 @@ import sys
 import os
 import hashlib
 import sha, binascii
+import lxml
 import warnings
 import string
 from random import Random
@@ -14,6 +15,7 @@ import pkg_resources
 from datetime import date, datetime
 
 from pylons import config
+from pylons.templating import render_mako_def
 
 from sqlalchemy import orm, Column, Integer, Sequence, Table
 from sqlalchemy.types import Unicode
@@ -307,6 +309,10 @@ class ContentItem(object):
         raise NotImplementedError("This method should be overridden by content"
                                   " objects to provide their urls.")
 
+    def snippet(self):
+        """Render a short snippet with the basic item's information. Used in search to render the results."""
+        return render_mako_def('/sections/content_snippets.mako','generic', object=self)
+
 
 def generate_salt():
     """Generate the salt used in passwords."""
@@ -553,6 +559,11 @@ class Group(ContentItem, FolderMixin):
         meta.Session.add(request)
         return request
 
+    def snippet(self):
+        """Render the group's information."""
+        return render_mako_def('/sections/content_snippets.mako','group', object=self)
+
+
     def __init__(self, group_id, title=u'', location=None, year=None, description=u''):
         self.group_id = group_id.strip().lower()
         self.title = title
@@ -675,6 +686,10 @@ class Subject(ContentItem, FolderMixin):
                    tags=self.location_path,
                    **kwargs)
 
+    def snippet(self):
+        """Render a short snippet with the basic item's information. Used in search to render the results."""
+        return render_mako_def('/sections/content_snippets.mako','subject', object=self)
+
     def __init__(self, subject_id, title, location, lecturer=None):
         self.location = location
         self.title = title
@@ -728,6 +743,11 @@ class Page(ContentItem):
     def url(self):
         return url(controller='subjectpage', action='index', page_id=self.id, id=self.subject[0].subject_id, tags=self.subject[0].location_path)
 
+    def snippet(self):
+        """Render a short snippet with the basic item's information. Used in search to render the results."""
+        return render_mako_def('/sections/content_snippets.mako','page', object=self)
+
+
 page_versions_table = None
 
 class PageVersion(ContentItem):
@@ -736,6 +756,12 @@ class PageVersion(ContentItem):
     def __init__(self, title, content):
         self.title = title
         self.content = content
+
+    @property
+    def plain_text(self):
+        doc = lxml.html.fragment_fromstring(self.content, create_parent=True)
+        texts = doc.xpath('//text()')
+        return ' '.join(texts)
 
 
 content_tags_table = None

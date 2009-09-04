@@ -111,6 +111,10 @@ h1, h2, h3, h4 {
   font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
+.tag:hover {
+  text-decoration: underline;
+}
+
 .comment {
   color: #808080;
 }
@@ -862,15 +866,6 @@ div#pager {
 
 /* end pager */
 
-/* tags */
-span.tag {
-  background: #fdeab1;
-  padding: 0.3em;
-  margin: 0.2em 0.7em 0.2em 0;
-  font-size: 0.9em;
-  color: black;
-}
-
 /* search form */
 #page-content .search-controls {
   width: 400px;
@@ -900,13 +895,14 @@ span.tag {
 }
 
 .search-controls .search-submit {
-  float: right;
+  float: left;
+  margin-left: 3px;
 }
 
 .search-type {
   margin: 0;
   padding: 0;
-  padding-left: 20px;
+  padding-left: 10px;
   height: 35px;
   overflow: auto;
   z-index: 100;
@@ -988,6 +984,43 @@ span.tag {
 /* end search portlet */
 
 /* search results */
+div.search-item .item-tags {
+  padding-left: 25px;
+  background: white url("../images/details/icon_tag.png") left top no-repeat;
+  margin-top: 5px;
+}
+
+div.search-item {
+  padding-left: 40px;
+}
+
+div.snippet-page {
+  background: white url("../images/details/icon_type_page.png") left top no-repeat;
+}
+
+div.snippet-group {
+  background: white url("../images/details/icon_type_group.png") left top no-repeat;
+}
+
+div.snippet-subject {
+  background: white url("../images/details/icon_type_subject.png") left top no-repeat;
+}
+
+h3.search-results-title {
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+h3.search-results-title span {
+ float: left;
+}
+
+h3.search-results-title span.result-count {
+  float: right;
+  color: #666;
+  font-size: 0.8em;
+}
+
 div#search-results div.search-item {
   margin: 0.5em 0;
 }

@@ -20,7 +20,7 @@ ${parent.head_tags()}
 
 
 <h1>${_('Search')}</h1>
-${search_form(c.text, c.obj_type, c.tags, parts=['obj_type', 'text'], target=url(controller='profile', action='search'))}
+${search_form(c.text, c.obj_type, c.tags, parts=['obj_type', 'text', 'tags'], target=url(controller='profile', action='search'))}
 
 %if c.results:
 ${search_results(c.results)}
