@@ -1,6 +1,7 @@
 import logging
 from random import Random
 import string
+from datetime import datetime
 
 from routes.util import redirect_to
 from formencode import Schema, validators, Invalid, All
@@ -132,6 +133,8 @@ class HomeController(BaseController):
 
                user = User(fullname, password)
                user.emails = [Email(email)]
+               user.accepted_terms = datetime.today()
+               #all newly registered users are marked when they agree to the terms of use
 
                meta.Session.add(user)
                meta.Session.commit()

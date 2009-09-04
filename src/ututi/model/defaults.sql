@@ -21,6 +21,7 @@ create table users (
        last_seen timestamp not null default (now() at time zone 'UTC'),
        recovery_key varchar(10) default null,
        logo bytea default null,
+       accepted_terms timestamp default null,
        primary key (id));;
 
 /* Create first user=admin and password=asdasd */
