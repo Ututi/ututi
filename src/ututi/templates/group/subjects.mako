@@ -17,11 +17,12 @@
 
 <%def name="head_tags()">
 ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
+${h.stylesheet_link('/stylesheets/subject_selection.css')|n}
 <script type="text/javascript">
 //<![CDATA[
 $(document).ready(function(){
   function unselectSubject(event) {
-    var url = $(event.target).parent().sibbling('.remove_url').val();
+    var url = $(event.target).parent().prev('.remove_url').val();
     $.ajax({type: "GET",
             url: url,
             success: function(msg){
@@ -93,7 +94,7 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
 
 ${search_form(text=c.text, obj_type='subject', tags=c.tags, parts=['text', 'tags'], target=c.subjects)}
 
-#overriding tag link definition
+##overriding tag link definition
 <%def name="item_tags(object)">
   <div class="item-tags">
     %for tag in object.location.hierarchy(full=True):
