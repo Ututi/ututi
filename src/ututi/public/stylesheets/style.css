@@ -512,6 +512,12 @@ a.btn {
   position: relative;
 }
 
+span.btn.inactive,
+a.btn.inactive,
+span.btn.inactive input,
+a.btn.inactive span {
+    background-image: url("../images/button_small_inactive.png") !important;
+}
 span.btn input,
 a.btn span {
   background: white url("../images/button_small.png") right top no-repeat;

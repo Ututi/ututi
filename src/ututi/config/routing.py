@@ -93,6 +93,12 @@ def make_map():
     map.connect('/subject/*tags/{id}/edit',
                 controller='subject', action='edit')
 
+    map.connect('/subject/*tags/{id}/watch',
+                controller='subject', action='watch')
+
+    map.connect('/subject/*tags/{id}/js_watch',
+                controller='subject', action='js_watch')
+
     map.connect('/subject/*tags/{id}/update',
                 controller='subject', action='update')
 

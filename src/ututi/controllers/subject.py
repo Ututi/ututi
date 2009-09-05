@@ -19,6 +19,7 @@ from ututi.lib.security import ActionProtector
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import LocationTagsValidator
+import ututi.lib.helpers as h
 
 log = logging.getLogger(__name__)
 
@@ -139,6 +140,24 @@ class SubjectController(BaseController, FileViewMixin):
         c.subject.tags_list = ', '.join([tag.title for tag in c.subject.tags])
         return render('subject/edit.mako')
 
+    @subject_action
+    @ActionProtector("user")
+    def watch(self, subject):
+        if not c.user.watches(subject):
+            c.user.watchSubject(subject)
+            h.flash(_("The subject has been added to your watched subjects list."))
+        else:
+            c.user.ignoreSubject(subject)
+            h.flash(_("The subject has been removed from your watched subjects list."))
+
+        meta.Session.commit()
+
+        redirect_to(controller='subject',
+                    action='home',
+                    id=subject.subject_id,
+                    tags=subject.location_path)
+
+
     @validate(schema=SubjectForm, form='edit')
     @subject_action
     @ActionProtector("user")
@@ -147,6 +166,7 @@ class SubjectController(BaseController, FileViewMixin):
         subject.title = self.form_result['title']
         subject.lecturer = self.form_result['lecturer']
         subject.location = self.form_result['location']
+        subject.description = self.form_result.get('description', None)
 
         #check to see what kind of tags we have got
         tags = [tag.strip().lower() for tag in self.form_result.get('tagsitem', [])]

@@ -1,5 +1,6 @@
 <%inherit file="/base.mako" />
 <%namespace name="files" file="/sections/files.mako" />
+<%namespace file="/portlets/subject.mako" import="*"/>
 
 <%def name="title()">
   ${c.subject.title}
@@ -9,6 +10,13 @@
     ${parent.head_tags()}
    <%files:head_tags />
 </%def>
+
+<%def name="portlets()">
+<div id="sidebar">
+  ${subject_info_portlet()}
+</div>
+</%def>
+
 
 <h1>${c.subject.title}</h1>
 
