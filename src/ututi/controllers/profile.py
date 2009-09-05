@@ -155,6 +155,7 @@ class ProfileController(SearchBaseController):
     @validate(schema=SearchSubmit, form='subjects', post_only = False, on_get = True)
     @ActionProtector("user")
     def subjects(self):
+        c.breadcrumbs.append(self._actions('home'))
         c.search_target = url(controller='profile', action='subjects')
 
         #retrieve search parameters
