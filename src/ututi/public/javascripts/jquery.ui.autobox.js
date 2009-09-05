@@ -78,7 +78,6 @@
     var ii = $('<input type="hidden"></input>');ii.attr('name', name+'item-'+count++);ii.val(text);
     var li=$('<li class="bit-box"></li>').attr('id', 'bit-' + count)
     var inside = $('<div></div>').text(text);
-    console.log(li);
     inside.append($('<a href="#" class="closebutton"></a>')
           .bind('click', function(e) {
 
