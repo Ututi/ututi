@@ -23,7 +23,7 @@ Let's send some messages:
     >>> send_test_message('simple_email.txt', '1', to='moderators@lists.ututi.lt')
     >>> send_test_message('simple_email.txt', '2', to='moderators@lists.ututi.lt', reply_to='1')
     >>> send_test_message('simple_email.txt', '3', to='moderators@lists.ututi.lt', reply_to='1')
-    >>> send_test_message('simple_email.txt', '4', to='moderators@lists.ututi.lt', reply_to='2')
+    >>> send_test_message('email_with_attachment.txt', '4', to='moderators@lists.ututi.lt', reply_to='2')
 
 And verify that they got properly processed by our email handler:
 
@@ -70,10 +70,18 @@ properly in the forum page:
         <td class="author">
           <a class="profile-link" href="/user/1">Adminas Adminovix</a>
           <br />
-          <span class="date">2009.06.15 14:05</span>
+          <span class="date">2009.06.15 14:55</span>
         </td>
       </tr>
     </table>
+
+Let's look at the attachment in the thread:
+
+    >>> browser.getLink('Hello').click()
+    >>> browser.getLink('README.txt')
+    <Link text='README.txt' url='http://localhost/group/moderators/forum/file/6/7'>
+
+    >>> browser.getLink('Forum').click()
 
 Let's post a new topic now:
 
@@ -107,7 +115,7 @@ The email gets sent to all the members of the group:
 And we get redirected to our newly created thread
 
     >>> browser.url
-    'http://localhost/group/moderators/forum/thread/7'
+    'http://localhost/group/moderators/forum/thread/8'
 
     >>> browser.printQuery("id('page-content')//div[@class='thread-post']")
     <div class="thread-post">
@@ -130,7 +138,7 @@ of threads:
       </tr>
       <tr>
         <td class="subject">
-          <a href="/group/moderators/forum/thread/7">Hi mom</a>
+          <a href="/group/moderators/forum/thread/8">Hi mom</a>
         </td>
         <td class="count">0</td>
         <td class="author">
@@ -147,7 +155,7 @@ of threads:
         <td class="author">
           <a class="profile-link" href="/user/1">Adminas Adminovix</a>
           <br />
-          <span class="date">2009.06.15 14:05</span>
+          <span class="date">2009.06.15 14:55</span>
         </td>
       </tr>
     </table>
@@ -176,7 +184,7 @@ The email gets sent.
 We still should be looking at the thread:
 
     >>> browser.url
-    'http://localhost/group/moderators/forum/thread/7'
+    'http://localhost/group/moderators/forum/thread/8'
 
 And our new message should be in the list:
 

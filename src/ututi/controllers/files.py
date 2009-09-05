@@ -6,6 +6,7 @@ from pylons import request, response, c
 from pylons.controllers.util import redirect_to
 from paste.fileapp import _FileIter
 
+from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
 from ututi.model import meta, File, ContentItem
 from sqlalchemy.orm.exc import NoResultFound
@@ -61,10 +62,12 @@ class FilesController(BasefilesController):
              'title': _('Files')}
         ]
 
+    @ActionProtector('root')
     def index(self):
         c.files = meta.Session.query(File).all()
         return render('files.mako')
 
+    @ActionProtector('root')
     def upload(self):
         title = request.POST['title']
         description = request.POST['description']
@@ -79,6 +82,7 @@ class FilesController(BasefilesController):
 
         redirect_to(controller='files', action='index')
 
+    @ActionProtector('root')
     def get(self, id):
         try:
             file = meta.Session.query(File).filter_by(id=id).one()
@@ -86,6 +90,7 @@ class FilesController(BasefilesController):
             abort(404)
         return self._get(file)
 
+    @ActionProtector('root')
     def delete(self, id):
         try:
             file = meta.Session.query(File).filter_by(id=id).one()

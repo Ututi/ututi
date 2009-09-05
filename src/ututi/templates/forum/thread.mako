@@ -16,7 +16,7 @@
   <ul class="post-attachments">
     % for file in message.attachments:
       <li>
-         <a href="${url(controller='files', action='get', id=file.id)}" class="file-link">${file.title}</a>
+         <a href="${file.url()}" class="file-link">${file.title}</a>
       </li>
     % endfor
   </ul>

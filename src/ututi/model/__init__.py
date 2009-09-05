@@ -8,7 +8,6 @@ import warnings
 import string
 from random import Random
 from binascii import a2b_base64, b2a_base64
-from routes.util import url_for
 from pylons import url
 from random import randrange
 import pkg_resources
@@ -541,7 +540,7 @@ class Group(ContentItem, FolderMixin):
             meta.Session.add(membership)
 
     def url(self, controller='group', action='home', **kwargs):
-        return url_for(controller=controller, action=action, id=self.group_id, **kwargs)
+        return url(controller=controller, action=action, id=self.group_id, **kwargs)
 
     def invite_user(self, email, author):
         user = User.get(email)
@@ -930,10 +929,18 @@ class File(ContentItem):
             .join((gft, gft.c.group_id==groups_table.c.id))\
             .filter(gft.c.file_id==self.id).first()
 
+        from ututi.model.mailing import group_mailing_list_attachments_table as mft
+        from ututi.model.mailing import group_mailing_list_messages_table
+        message = meta.Session.query(GroupMailingListMessage)\
+            .join(mft)\
+            .filter(mft.c.file_id==self.id).first()
+
         if subject:
             return subject
         if group:
             return group
+        if message:
+            return message
 
     def can_write(self, user=None):
         can_write = False
@@ -1012,6 +1019,7 @@ class File(ContentItem):
         f.close()
 
     def url(self, controller='files', action='get'):
+        from ututi.model.mailing import GroupMailingListMessage
 
         if isinstance(self.file_parent, Subject):
             return self.file_parent.url(controller='subjectfile',
@@ -1021,10 +1029,13 @@ class File(ContentItem):
             return self.file_parent.url(controller='groupfile',
                                    action=action,
                                    file_id=self.id)
-
-        return url(controller=controller,
-                   action=action,
-                   id=self.id)
+        elif isinstance(self.file_parent, GroupMailingListMessage):
+            message = self.file_parent
+            return message.group.url(controller='groupforum',
+                                     action='file',
+                                     message_id=message.id,
+                                     file_id=self.id)
+        raise AttributeError("Can't generate url for the file without a parent!")
 
     def hash_chunked(self, file):
         """Calculate the checksum of a file in chunks."""

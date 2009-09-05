@@ -63,6 +63,10 @@ def make_map():
                 controller='groupforum',
                 action='reply')
 
+    map.connect('/group/{id}/forum/file/{message_id}/{file_id}',
+                controller='groupforum',
+                action='file')
+
     map.connect('/group/{id}/file/{file_id}/{action}',
                 controller='groupfile')
 
