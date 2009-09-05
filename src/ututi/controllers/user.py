@@ -19,6 +19,11 @@ log = logging.getLogger(__name__)
 
 def profile_action(method):
     def _profile_action(self, id):
+        try:
+            id = int(id)
+        except ValueError:
+            abort(404)
+
         user = User.get_byid(id)
         if user is None:
             abort(404)
