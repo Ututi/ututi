@@ -1112,6 +1112,11 @@ ul#event_list li {
 
 
 /* misc */
+a.back-link {
+  padding-left: 15px;
+  background: white url("../images/details/link_back.png") left center no-repeat;
+}
+
 div.permission-denied {
   margin-top: 10px;
   padding-left: 140px;

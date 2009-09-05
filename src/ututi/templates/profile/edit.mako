@@ -54,6 +54,8 @@
   </script>
 </%def>
 
+<a class="back-link" href="${url(controller='profile', action='index')}">${_('back to the profile')}</a>
+
 <h1>${_('Edit your profile')}</h1>
 
 <form method="post" action="${url(controller='profile', action='update')}" name="edit_profile_form" enctype="multipart/form-data">
