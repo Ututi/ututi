@@ -83,11 +83,11 @@ link to the file on our system:
     Reply-To: moderators@lists.ututi.lt
     Errors-To: errors@ututi.lt
     List-Id: moderators@lists.ututi.lt
-    Content-Type: text/plain; charset="utf-8"
+    Content-Type: multipart/mixed; boundary="ZGiS0Q5IWpPtfppv"; charset="utf-8"
     Content-Transfer-Encoding: base64
     <BLANKLINE>
-    QWxzbywgSSBqdXN0IHdhbnRlZCB0byBzZW5kIHlvdSB0aGlzIGZpbGU6CgoKPGEgaHJlZj0iaHR0
-    cDovL2xvY2FsaG9zdC9maWxlcy9nZXQvNSI+UkVBRE1FLnR4dDwvYT4=
+    QWxzbywgSSBqdXN0IHdhbnRlZCB0byBzZW5kIHlvdSB0aGlzIGZpbGU6Cgo8YSBocmVmPSJodHRw
+    Oi8vbG9jYWxob3N0L2ZpbGVzL2dldC81Ij5SRUFETUUudHh0PC9hPg==
     <BLANKLINE>
 
     >>> print email.payload()
@@ -132,11 +132,12 @@ list of files:
     Reply-To: moderators@lists.ututi.lt
     Errors-To: errors@ututi.lt
     List-Id: moderators@lists.ututi.lt
-    Content-Type: text/plain; charset="utf-8"
+    Content-Type: multipart/mixed; boundary="ZGiS0Q5IWpPtfppv"; charset="utf-8"
     Content-Transfer-Encoding: base64
     <BLANKLINE>
-    QWxzbywgSSBqdXN0IHdhbnRlZCB0byBzZW5kIHlvdSB0aGlzIGZpbGU6CgoKPGEgaHJlZj0iaHR0
-    cDovL2xvY2FsaG9zdC9maWxlcy9nZXQvNyI+UkVBRE1FLnR4dDwvYT4=
+    QWxzbywgSSBqdXN0IHdhbnRlZCB0byBzZW5kIHlvdSB0aGlzIGZpbGU6Cgo8YSBocmVmPSJodHRw
+    Oi8vbG9jYWxob3N0L2ZpbGVzL2dldC83Ij5SRUFETUUudHh0PC9hPg==
+    <BLANKLINE>
 
     >>> print email.payload()
     Also, I just wanted to send you this file:

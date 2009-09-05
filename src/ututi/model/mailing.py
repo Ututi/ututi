@@ -135,6 +135,9 @@ class GroupMailingListMessage(ContentItem):
     @property
     def body(self):
         message = email.message_from_string(self.original.encode('utf-8'), UtutiEmail)
+        if message.is_multipart():
+            message = message.get_payload()[0]
+
         charset = message.get_content_charset('utf-8')
         # fall back, in case we are being tricked
         if charset == 'us-ascii':
