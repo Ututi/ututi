@@ -794,8 +794,15 @@ class Tag(object):
 
 class SimpleTag(Tag):
     """Class for simple (i.e. not location or hierarchy -aware) tags."""
+
     def __init__(self, title):
         self.title = title.lower()
+
+    def hierarchy(self, full=False):
+        if full:
+            return [self]
+        else:
+            return [self.title]
 
     @classmethod
     def get(cls, title, create=True):
