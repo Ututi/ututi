@@ -18,6 +18,18 @@ from ututi.model import (meta, User, Email, LocationTag, Group, Subject,
 
 log = logging.getLogger(__name__)
 
+email_map = {'inf@mytutor.lt'             : 'info@mytutor.lt',
+             'indremilukaite@gmai.com'    : 'indremilukaite@gmail.com',
+             'svaras456@gmai.com'         : 'svaras456@gmail.com',
+             'veju.mote@gmsil.com'        : 'dainius1989@gmail.com',
+             'dainius1989@gnail.com'      : 'veju.mote@gmail.com',
+             'jurgis.pragauskis@gmail.com': 'jurgis.pralgauskis@gmail.com',
+             'jarekass+petras@takas.lt'   : '',
+             'asta.samulionyte@khf.vu.lt' : '',
+             'jana89@one.lt'              : '',
+             'info@ututi.lt'              : '',
+             'ted.bing@gmail.com'         : ''}
+
 
 def store_file(file_obj, file_name):
     path = os.environ.get("upload_import_path", None)
@@ -72,6 +84,9 @@ class AdminController(BaseController):
             fullname = line[2]
             password = line[1][6:]
             email = line[3].lower()
+            email = email_map.get(email, email)
+            if not email:
+                continue
             user = User.get(email)
             if user is None:
                 user = User(fullname, password, False)
@@ -87,6 +102,9 @@ class AdminController(BaseController):
     def import_user_logos(self):
         for line in self._getLines():
             email = line[0]
+            email = email_map.get(email, email)
+            if not email:
+                continue
             b64logo = line[1]
             user = User.get(email)
             if b64logo:
@@ -197,6 +215,7 @@ class AdminController(BaseController):
         member = GroupMembershipType.get('member')
         for row in self._getReader():
             group_id, email, is_moderator = row[:3]
+            email = email_map.get(email, email)
             is_moderator = is_moderator == 'True'
 
             group = Group.get(group_id)
@@ -231,7 +250,9 @@ class AdminController(BaseController):
     @ActionProtector("root")
     def import_subject_files(self):
         for line in self._getReader():
-            author = User.get(line[-1])
+            email = line[-1]
+            email = email_map.get(email, email)
+            author = User.get(email)
             meta.Session.execute("SET ututi.active_user TO %d" % author.id)
             subject_id = line[0]
             uni_id, fac_id = line[2], line[3]
@@ -267,6 +288,7 @@ class AdminController(BaseController):
 
             location = LocationTag.get([uni_id, fac_id])
             subject = Subject.get(location, subject_id)
+            author_email = email_map.get(author_email, author_email)
             author = User.get(author_email)
             meta.Session.execute("SET ututi.active_user TO %d" % author.id)
             subject.pages.append(Page(page_title,
