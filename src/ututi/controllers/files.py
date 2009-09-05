@@ -16,14 +16,18 @@ from routes import url_for
 log = logging.getLogger(__name__)
 
 
+def serve_file(file):
+    response.headers['Content-Type'] = file.mimetype
+    response.headers['Content-Length'] = file.filesize
+    response.headers['Content-Disposition'] = 'attachment; filename=%s' % file.filename
+    source = open(file.filepath(), 'r')
+    return _FileIter(source)
+
+
 class BasefilesController(BaseController):
 
     def _get(self, file):
-        response.headers['Content-Type'] = file.mimetype
-        response.headers['Content-Length'] = file.filesize
-        response.headers['Content-Disposition'] = 'attachment; filename=%s' % file.filename
-        source = open(file.filepath(), 'r')
-        return _FileIter(source)
+        return serve_file(file)
 
     def _delete(self, file):
         meta.Session.delete(file)

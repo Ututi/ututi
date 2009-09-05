@@ -1,6 +1,7 @@
 #
 from datetime import datetime
 
+from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql.expression import desc
 from formencode import Schema, validators
 
@@ -10,9 +11,13 @@ from pylons.controllers.util import abort
 from pylons import c, config
 
 from mimetools import choose_boundary
+from ututi.model import File
+from ututi.lib.security import deny
+from ututi.lib.security import check_crowds
 from ututi.lib.security import ActionProtector
 from ututi.lib.mailer import send_email
 from ututi.lib.base import render
+from ututi.controllers.files import serve_file
 from ututi.controllers.group import group_action
 from ututi.controllers.group import GroupControllerBase
 from ututi.model.mailing import GroupMailingListMessage
@@ -138,3 +143,33 @@ class GroupforumController(GroupControllerBase):
         redirect_to(controller='groupforum',
                     action='thread',
                     id=group.group_id, thread_id=post.id)
+
+
+    def file(self, id, message_id, file_id):
+
+        group = Group.get(id)
+        if group is None:
+            abort(404)
+
+        message = meta.Session.query(GroupMailingListMessage).filter_by(id=message_id).first()
+        if message is None:
+            abort(404)
+
+        try:
+            file = meta.Session.query(File).filter_by(id=file_id).one()
+        except NoResultFound:
+            abort(404)
+
+        if file is None:
+            abort(404)
+
+        # XXX kind of stupid to do this here
+        if c.user is None:
+            code = 401
+        else:
+            code = 403
+
+        if not check_crowds(['member', 'admin', 'moderator'], context=group):
+            deny('Only group members can download attachments!', code)
+
+        return serve_file(file)

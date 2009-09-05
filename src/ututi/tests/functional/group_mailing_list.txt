@@ -81,6 +81,13 @@ Let's look at the attachment in the thread:
     >>> browser.getLink('README.txt')
     <Link text='README.txt' url='http://localhost/group/moderators/forum/file/6/7'>
 
+    >>> url = browser.url
+    >>> browser.getLink('README.txt').click()
+
+    >>> print browser.contents
+    I am a file!
+
+    >>> browser.open(url)
     >>> browser.getLink('Forum').click()
 
 Let's post a new topic now:
