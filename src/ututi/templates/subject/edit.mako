@@ -1,4 +1,4 @@
-<%inherit file="/base.mako" />
+<%inherit file="/subject/home.mako" />
 
 <%namespace file="/widgets/locationtag.mako" import="*"/>
 
@@ -12,7 +12,7 @@ ${_('New subject')}
 ${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
 ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
 </%def>
-
+<a class="back-link" href="${url(controller='subject', action='home', id=c.subject.subject_id, tags=c.subject.location_path)}">${_('back to the subject')}</a>
 <h1>${_('Edit subject')}</h1>
 
 <form method="post" action="${url(controller='subject', action='update', id=c.subject.subject_id, tags=c.subject.location_path)}"
@@ -21,19 +21,28 @@ ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
   <input type="hidden" name="old_location" value="${c.subject.location_path}"/>
   <div class="form-field">
     <label for="title">${_('Title')}</label>
-    <input type="text" id="title" name="title" class="line" value="${c.subject.title}"/>
+    <div class="input-rounded"><div>
+        <input type="text" id="title" name="title" class="line" value="${c.subject.title}"/>
+    </div></div>
   </div>
   <div class="form-field">
     <label for="lecturer">${_('Lecturer')}</label>
-    <input type="text" id="lecturer" name="lecturer" class="line" value="${c.subject.lecturer}"/>
+    <div class="input-rounded"><div>
+        <input type="text" id="lecturer" name="lecturer" class="line" value="${c.subject.lecturer}"/>
+    </div></div>
   </div>
   <div class="form-field">
-    <label for="location-0">${_('School')}</label>
     ${location_widget(3, c.subject.location.hierarchy())}
   </div>
+  <br class="clear-left"/>
   <div class="form-field">
     <label for="tags">${_('Tags')}</label>
     ${tags_widget(c.subject.tags_list)}
+  </div>
+
+  <div class="form-field">
+    <label for="description">${_('Brief description of the subject')}</label>
+    <textarea class="line" name="description" id="description" cols="60" rows="5">${c.subject.description}</textarea>
   </div>
 
   <div>
