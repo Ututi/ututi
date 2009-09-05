@@ -10,7 +10,7 @@
   %endif
 </%def>
 
-<%def name="item_tags(item)">
+<%def name="item_tags(object)">
   <div class="item-tags">
     %for tag in object.location.hierarchy(full=True):
       ${tag_link(tag)}

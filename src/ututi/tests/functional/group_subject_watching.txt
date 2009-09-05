@@ -9,52 +9,24 @@ Group subject watching
     >>> browser.printQuery("id('watched-subjects')")
     <ul id="watched-subjects"></ul>
 
-    >>> browser.printQuery("id('search-results')")
-    <div id="search-results">
-      <div class="search-item">
-        <a href="/subject/vu/mat_analize" title="Matematin&#279; analiz&#279;" class="item-title larger">Matematin&#279; analiz&#279;</a>
-        <input type="hidden" class="select_url" value="/group/moderators/js_watch_subject?subject_location_id=1&amp;subject_id=mat_analize" />
-        <a href="/group/moderators/watch_subject?subject_location_id=1&amp;subject_id=mat_analize" class="select_subject_button">Pick</a>
-        <div>
-          <span class="small">prof. E. Misevi&#269;ius</span>
-        </div>
-        <div class="item-tags">
-        </div>
-      </div>
-    </div>
+    >>> browser.printQuery("id('search-results')//a[@class='item-title larger']/text()")
+    Matematinė analizė
 
-    >>> browser.getLink('Pick', url='mat_analize').click()
-    >>> browser.printQuery("id('watched-subjects')")
-    <ul id="watched-subjects">
-      <li>
-        <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a>
-        <input type="hidden" class="remove_url" value="/group/moderators/js_unwatch_subject?subject_location_id=1&amp;subject_id=mat_analize" />
-        <a href="/group/moderators/unwatch_subject?subject_location_id=1&amp;subject_id=mat_analize" class="remove_subject_button">X</a>
-      </li>
-    </ul>
+    >>> browser.getLink('Watch', url='mat_analize').click()
+    >>> browser.printQuery("id('watched-subjects')//a/text()")
+    Matematinė analizė
 
     >>> browser.printQuery("id('search-results')")
 
     >>> browser.open(browser.url)
 
-    >>> browser.getLink('X', url='mat_analize').click()
+    >>> browser.getLink(url='unwatch_subject').click()
 
     >>> browser.printQuery("id('watched-subjects')")
     <ul id="watched-subjects"></ul>
 
-    >>> browser.printQuery("id('search-results')")
-    <div id="search-results">
-      <div class="search-item">
-        <a href="/subject/vu/mat_analize" title="Matematin&#279; analiz&#279;" class="item-title larger">Matematin&#279; analiz&#279;</a>
-        <input type="hidden" class="select_url" value="/group/moderators/js_watch_subject?subject_location_id=1&amp;subject_id=mat_analize" />
-        <a href="/group/moderators/watch_subject?subject_location_id=1&amp;subject_id=mat_analize" class="select_subject_button">Pick</a>
-        <div>
-          <span class="small">prof. E. Misevi&#269;ius</span>
-        </div>
-        <div class="item-tags">
-        </div>
-      </div>
-    </div>
+    >>> browser.printQuery("id('search-results')//a[@class='item-title larger']/text()")
+    Matematinė analizė
 
 These actions should have left an event trail on the group home page:
 

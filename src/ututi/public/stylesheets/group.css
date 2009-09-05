@@ -51,3 +51,30 @@ table.group-members td, th {
   font-size: 0.9em;
   color: #888;
 }
+
+/* watched subjects view */
+ul#watched-subjects {
+  margin-top: 20px;
+  list-style-type: none;
+  padding: 0;
+  padding-left: 10px;
+  padding-bottom: 50px;
+  border-bottom: 1px solid #c4c4c4;
+}
+
+ul#watched-subjects li {
+  padding: 2px 0 2px 10px;
+  background: white url("../images/details/bullet_small.png") left center no-repeat;
+}
+
+div.snippet-subject div.title a {
+  float: left;
+}
+
+div.snippet-subject div.title a.btn {
+  margin-left: 10px;
+}
+
+div.snippet-subject div.description {
+  clear: left;
+}

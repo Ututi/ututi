@@ -436,7 +436,10 @@ class GroupController(GroupControllerBase, FileViewMixin):
 
 
         c.breadcrumbs.append(self._actions('subjects'))
-        return render('group/subjects.mako')
+        if check_crowds(["admin", "moderator"]):
+            return render('group/subjects.mako')
+        else:
+            return render('group/subjects_member.mako')
 
     @validate(schema=GroupInviteForm, form='members', post_only = False, on_get = True)
     @group_action
