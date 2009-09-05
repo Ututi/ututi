@@ -161,11 +161,16 @@ class ProfileController(SearchBaseController):
         #retrieve search parameters
         c.text = self.form_result.get('text', '')
 
-        if 'tagsitem' in self.form_result or 'tags' in self.form_result:
-            c.tags = self.form_result.get('tagsitem', None)
-            if c.tags is None:
-                c.tags = self.form_result.get('tags', None).split(', ')
-        c.tags = ', '.join(filter(bool, c.tags))
+        tags = []
+
+        if 'tagsitem' in self.form_result:
+            tags = self.form_result.get('tagsitem', None)
+        elif 'tags' in self.form_result:
+            tags = self.form_result.get('tags', [])
+            if isinstance(tags, str):
+                tags = tags.split(', ')
+
+        c.tags = ', '.join(filter(bool, tags))
 
         sids = [s.id for s in c.user.watched_subjects]
 
@@ -238,9 +243,18 @@ class ProfileController(SearchBaseController):
         """Find the requested group, filtering by location id and year."""
         #collect default search parameters
         c.text = self.form_result.get('text', '')
-        c.tags = self.form_result.get('tagsitem', None)
-        if c.tags is None:
-            c.tags = self.form_result.get('tags', '').split(', ')
+
+        tags = []
+
+        if 'tagsitem' in self.form_result:
+            tags = self.form_result.get('tagsitem', None)
+        elif 'tags' in self.form_result:
+            tags = self.form_result.get('tags', [])
+            if isinstance(tags, str):
+                tags = tags.split(', ')
+
+        c.tags = tags
+
         c.tags.extend(self.form_result.get('location', []))
         c.tags = filter(bool, c.tags)
 
