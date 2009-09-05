@@ -22,9 +22,11 @@
     <div class="description small">
       ${group.description}
     </div>
-    <span class="portlet-link">
-      <a class="small" href="${url(controller='group', action='edit', id=group.group_id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
-    </span>
+    %if group.is_admin(c.user):
+      <span class="portlet-link">
+        <a class="small" href="${url(controller='group', action='edit', id=group.group_id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
+      </span>
+    %endif
     <br style="clear: right;" />
   </%self:portlet>
 </%def>
