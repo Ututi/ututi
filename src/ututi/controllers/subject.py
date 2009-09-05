@@ -106,11 +106,13 @@ class SubjectController(BaseController, FileViewMixin):
         id = self.form_result['id'].lower()
         lecturer = self.form_result['lecturer']
         location = self.form_result['location']
+        description = self.form_result['description']
 
         if lecturer == '':
             lecturer = None
 
         subj = Subject(id, title, location, lecturer)
+        subj.description = description
 
         #check to see what kind of tags we have got
         tags = [tag.strip().lower() for tag in self.form_result.get('tagsitem', [])]

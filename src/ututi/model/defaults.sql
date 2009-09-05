@@ -132,6 +132,7 @@ create table subjects (id int8 not null references content_items(id),
        subject_id varchar(150) default null,
        title varchar(500) not null,
        lecturer varchar(500) default null,
+       description text default null,
        primary key (id));;
 
 
