@@ -119,3 +119,30 @@
     <br style="clear: both;" />
   </%self:portlet>
 </%def>
+
+<%def name="group_forum_portlet(group=None)">
+  <%
+     if group is None:
+         group = c.group
+  %>
+  <%self:portlet id="forum_portlet" portlet_class="inactive">
+    <%def name="header()">
+      ${_('Group messages')}
+    </%def>
+    <table id="group_latest_messages">
+      %for message in group.all_messages[:5]:
+      <tr>
+        <td class="time">${h.fmt_shortdate(message.sent)}</td>
+        <td class="subject"><a href="${message.url()}" title="${message.subject}, ${message.author.fullname}">${h.ellipsis(message.subject, 35)}</a></td>
+      </tr>
+      %endfor
+    </table>
+    <br style="clear: both;" />
+    <span class="portlet-link">
+      <a class="small" href="${url(controller='group', action='forum', id=group.group_id)}" title="${_('More')}">${_('More')}</a>
+    </span>
+
+    <a href="${url(controller='groupforum', action='new_thread', id=c.group.group_id)}" class="btn"><span>${_("New topic")}</span></a>
+    <br style="clear: both;" />
+  </%self:portlet>
+</%def>

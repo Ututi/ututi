@@ -78,3 +78,22 @@ div.snippet-subject div.title a.btn {
 div.snippet-subject div.description {
   clear: left;
 }
+
+/* forum portlet */
+#group_latest_messages td {
+  margins: 0;
+  padding: 0 1px;
+  overflow: hidden;
+}
+
+#group_latest_messages td.time {
+  width: 70px;
+  color: #808080;
+  font-size: 0.8em;
+  padding-left: 15px;
+  background: white url("../images/details/icon_message.png") left center no-repeat;
+}
+
+#group_latest_messages td.subject a {
+  color: #1a1a1a;
+}

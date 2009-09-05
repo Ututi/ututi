@@ -138,3 +138,9 @@ def fmt_dt(dt):
     from babel import dates
     fmt = "yyyy MMM dd, HH:mm"
     return dates.format_datetime(dt, fmt)
+
+def fmt_shortdate(dt):
+    """Format date and time for output."""
+    from babel import dates
+    fmt = "MMM dd, HH:mm"
+    return dates.format_datetime(dt, fmt)

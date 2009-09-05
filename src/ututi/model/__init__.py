@@ -573,6 +573,14 @@ class Group(ContentItem, FolderMixin):
         self.year = year
         self.description = description
 
+    @property
+    def all_messages(self):
+        return meta.Session.query(GroupMailingListMessage)\
+            .filter_by(group_id=self.id)\
+            .order_by(GroupMailingListMessage.sent.desc())\
+            .all()
+
+
 
 group_members_table = None
 
