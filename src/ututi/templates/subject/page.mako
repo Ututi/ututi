@@ -1,4 +1,4 @@
-<%inherit file="/base.mako" />
+<%inherit file="/subject/home.mako" />
 
 <%def name="title()">
   ${c.subject.title}
