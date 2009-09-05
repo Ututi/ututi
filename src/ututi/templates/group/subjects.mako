@@ -122,7 +122,7 @@ ${search_form(text=c.text, obj_type='subject', tags=c.tags, parts=['text', 'tags
       <a href="${object.url()}" title="${object.title}" class="item-title larger">${object.title}</a>
       <input type="hidden" class="select_url"
              value="${c.group.url(action='js_watch_subject', subject_id=item.object.subject_id, subject_location_id=item.object.location.id)}" />
-      <a href="${c.group.url(action='watch_subject', subject_id=item.object.subject_id, subject_location_id=item.object.location.id)}" 
+      <a href="${c.group.url(action='watch_subject', subject_id=item.object.subject_id, subject_location_id=item.object.location.id)}"
          class="select_subject_button btn"><span>${_('Watch')}</span></a>
     </div>
 
