@@ -35,7 +35,7 @@ ${_('student information online')}
       <li class="top"><div>&nbsp;</div></li>
       <li><div><a href="${url(controller='profile', action='home')}">${_("What's new?")}</a></div></li>
       <li><div><a href="${url(controller='profile', action='index')}">${_("Profile")}</a></div></li>
-      <li class="bottom"><div><a href="${url(controller='search', action='index')}">${_("Search")}</a></div></li>
+      <li class="bottom"><div><a href="${url(controller='profile', action='search')}">${_("Search")}</a></div></li>
     </ul>
   </div>
 </div>
