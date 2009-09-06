@@ -2,24 +2,6 @@
 
 * Password reset form should reuse the old key if it's already present
 
-* Folders in file views
-
-** Dalykų view'e spaudžiant "new folder" button'o kai jis yra tuščias, atsiranda visų failų kopija.
-
-** Failų įkėlimo sąrašas (įkelti į button) neatsinaujina po folderio ištrinimo.
-
-T.y.po "here" matomas jau ištrinto folderio pavadinimas.
-
-Folderių šiaip nelabai eina trinti :/
-
-
-** Grupės failų view'e, dalyke ne visada pavyksta ištrinti sukurtą folderį.
-
-Ajax event is not bound to the folder properly.
-
-Also - we need some error handling for when you move a file created by
-someone into your folder and then try removing it.
-
 * Group find view
 
 ** Group search is not too good at handling Year that was entered incorrectly
@@ -39,6 +21,24 @@ prie įvestos formos. Panašiai kaip su neįvestu slaptažodžiu loginantis.
 * What's new rodo tik eventus iš vienos grupės (nors naudotojas priklausi dviem)
 
 * WebApp Error: <class 'sqlalchemy.exc.DataError'>: (DataError) value too long for type character varying(100) 'UPDATE users SET fullname=%(fullname)s WHERE users.id = %(users_id)s' {'users_id': 531L, 'fullname': 'Adomasjh gigkj gkjhj gjhgkj gkjgkjhg kjgkjhgkj gkjgk jgkjhg kjhg kjhg kjhg kjgkjh gkj gkjg kg kj gkjhg kjgkjgkjhg kjgjk g jk gkjgkjgkjhgk jg kjhg kjhgkjhg kjh gkjgkj hgkjh'}
+
+* DONE Folders in file views
+
+** DONE Dalykų view'e spaudžiant "new folder" button'o kai jis yra tuščias, atsiranda visų failų kopija.
+
+** DONE Failų įkėlimo sąrašas (įkelti į button) neatsinaujina po folderio ištrinimo.
+
+T.y.po "here" matomas jau ištrinto folderio pavadinimas.
+
+Folderių šiaip nelabai eina trinti :/
+
+
+** DONE Grupės failų view'e, dalyke ne visada pavyksta ištrinti sukurtą folderį.
+
+Ajax event is not bound to the folder properly.
+
+Also - we need some error handling for when you move a file created by
+someone into your folder and then try removing it.
 
 * DONE Paieškos view'e, kai useris yra prisiloginęs, nereikia rodyti registracijos formos.
 
