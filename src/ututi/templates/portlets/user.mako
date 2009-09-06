@@ -22,7 +22,7 @@
     %endif
     <div>
       ${h.button_to(_('Watch subjects'), url(controller='profile', action='subjects', id=user.id))}
-      ${h.link_to(_('More subjects'), url(controller='search', action='index', obj_type='subject'), class_="more")}
+      ${h.link_to(_('More subjects'), url(controller='profile', action='search', obj_type='subject'), class_="more")}
     </div>
   </%self:portlet>
 </%def>
@@ -61,7 +61,7 @@
     %endif
     %if full:
       ${h.button_to(_('Create group'), url(controller='group', action='add'))}
-      ${h.link_to(_('More groups'), url(controller='search', action='index', obj_type='group'), class_="more")}
+      ${h.link_to(_('More groups'), url(controller='profile', action='search', obj_type='group'), class_="more")}
     %endif
   </%self:portlet>
 </%def>
