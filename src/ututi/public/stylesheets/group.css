@@ -79,3 +79,14 @@ table.group-members td, th {
 }
 
 /* end group edit page */
+
+/* group changes portlet */
+ul.event-list {
+  padding: 0;
+}
+ul.event-list li {
+  list-style-type: none;
+  padding: 0 0 5px 20px;
+  background: transparent url("../images/details/icon_event.png") left top no-repeat;
+}
+/* end group changes portlet */

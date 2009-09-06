@@ -202,11 +202,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
                 h.flash(_("The group's page was hidden. You can show it again by editing the group's settings."))
             meta.Session.commit()
             c.breadcrumbs.append(self._actions('home'))
-            c.events = meta.Session.query(Event)\
-                .filter(or_(Event.object_id.in_([s.id for s in group.watched_subjects]),
-                            Event.object_id == group.id))\
-                .order_by(desc(Event.created))\
-                .limit(20).all()
+            c.events = group.group_events
             return render('group/home.mako')
         else:
             c.breadcrumbs = [{'title': group.title,
