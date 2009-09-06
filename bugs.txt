@@ -1,15 +1,18 @@
 # -*- mode: org -*-
 
+* Eventai - subjecto redagavimo eventas
+Paredagavus subject'ą, eventuose rašoma, kad jis buvo sukurtas.
+
 * Group find view
 
-** Group search is not too good at handling Year that was entered incorrectly
+** DONE Group search is not too good at handling Year that was entered incorrectly
 
 ** Kuriant grupę neįsimena universiteto ir fakulteto iš paieškos užklausos
 Esu naujas naudotojas. Suvedu universitetą ir ieškau grupęs.
 Nerandu norimos grupės todėl spaudžiu "create group". Čia mokymo įstaiga
 turi būti pasirinkta, tokia kaip paieškoje.
 
-** User dashboard first time reikia rodyti visą sąrašą universitetų kai tik input laukas tampa aktyvus.
+** DONE User dashboard first time reikia rodyti visą sąrašą universitetų kai tik input laukas tampa aktyvus.
 
 Kodėl? Nes useris pamato lauką, ten iškarto įveda vu (hinto pamatyti nes nespėja) ir spaudžia enter. 
 Tada pamato error page, o ne search view'ą su pranešimu, kad grupė nerasta.
