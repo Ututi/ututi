@@ -179,7 +179,8 @@ class HomeController(BaseController):
                email = self.form_result.get('email', None)
                user = User.get(email)
                if user is not None:
-                    user.recovery_key = ''.join(Random().sample(string.ascii_lowercase, 8))
+                    if not user.recovery_key:
+                         user.recovery_key = ''.join(Random().sample(string.ascii_lowercase, 8))
                     email_password_reset(user, email)
                     meta.Session.commit()
                     h.flash(_('Password recovery email sent. Please check You inbox.'))
