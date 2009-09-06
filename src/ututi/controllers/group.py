@@ -161,7 +161,7 @@ class GroupControllerBase(BaseController):
         marked as selected.
         """
         return [
-            {'title': _('Home'),
+            {'title': _("What's new?"),
              'link': url(controller='group', action='home', id=c.group.group_id),
              'selected': selected == 'home'},
             {'title': _('Forum'),
@@ -202,6 +202,9 @@ class GroupController(GroupControllerBase, FileViewMixin):
                 .limit(20).all()
             return render('group/home.mako')
         else:
+            c.breadcrumbs = [{'title': group.title,
+                              'link': url(controller='group', action='home', id=c.group.group_id)}]
+
             return render('group/home_public.mako')
 
     @group_action

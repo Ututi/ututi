@@ -135,7 +135,7 @@
       %for message in group.all_messages[:5]:
       <tr>
         <td class="time">${h.fmt_shortdate(message.sent)}</td>
-        <td class="subject"><a href="${message.url()}" title="${message.subject}, ${message.author.fullname}">${h.ellipsis(message.subject, 35)}</a></td>
+        <td class="subject"><a href="${message.url()}" title="${message.subject}, ${message.author.fullname}">${h.ellipsis(message.subject, 25)}</a></td>
       </tr>
       %endfor
     </table>
