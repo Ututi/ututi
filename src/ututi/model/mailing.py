@@ -168,7 +168,10 @@ class GroupMailingListMessage(ContentItem):
         address = "%s@%s" % (self.group.group_id,
                              config.get('mailing_list_host'))
 
-        message.add_header('Reply-To', address)
+        try:
+            message.replace_header('Reply-To', address)
+        except KeyError:
+            message.add_header('Reply-To', address)
         message.add_header('Errors-To', config.get('email_to', 'errors@ututi.lt'))
         message.add_header('List-Id', address)
 

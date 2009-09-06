@@ -28,13 +28,13 @@ ututi:
     Date: Mon, 15 Jun 2009 17:05:31 +0300
     From: Admin <admin@ututi.lt>
     To: moderators@lists.ututi.lt
+    Reply-To: moderators@lists.ututi.lt
     Subject: Hello
     Message-ID: <20090615140531.GA23780@my_pc>
     MIME-Version: 1.0
     Content-Disposition: inline
     User-Agent: Mutt/1.5.18 (2008-05-17)
     Content-Type: text/plain; charset=us-ascii
-    Reply-To: moderators@lists.ututi.lt
     Errors-To: errors@ututi.lt
     List-Id: moderators@lists.ututi.lt
     <BLANKLINE>
