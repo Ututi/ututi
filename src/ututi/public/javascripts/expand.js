@@ -6,7 +6,7 @@ $(document).ready(function() {
 
     $(".click2show .click").each(function() {
         $(this).click(function() {
-            $(this).parents(".click2show").toggleClass("open").find(".show").toggle();
+            $(this).parents(".click2show").toggleClass("open").find(".show:first").toggle();
         });
     });
 });

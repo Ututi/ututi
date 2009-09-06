@@ -3,7 +3,23 @@ div.section h2 {
   color: black;
   padding-bottom: 0.1em;
   border-bottom: 2px solid #828282;
+  font-size: 1.3em;
+  cursor: pointer;
 }
+
+/* expanding sectipon headings  */
+.click2show h2.click {
+  padding-left: 13px;
+  background: white url("../images/details/arrow_expand_right.png") left center no-repeat;
+}
+
+.click2show.open h2.click {
+  padding-left: 13px;
+  background: white url("../images/details/arrow_expand_down.png") left center no-repeat;
+}
+
+
+/* end expanding section headings */
 
 /* files section controls */
 div.section div.controls label {

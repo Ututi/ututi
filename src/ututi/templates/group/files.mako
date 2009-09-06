@@ -15,5 +15,5 @@
 <%files:file_browser obj="${c.group}" />
 
 % for n, subject in enumerate(c.group.watched_subjects):
-  <%files:file_browser obj="${subject}" section_id="${n + 1}" />
+  <%files:file_browser obj="${subject}" section_id="${n + 1}" collapsible="True"/>
 % endfor

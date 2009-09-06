@@ -11,8 +11,8 @@ $(document).ready(function(){
           var move_url = ui.item.children('.move_url').val();
           var copy_url = ui.item.children('.copy_url').val();
 
-          var source_id = ui.sender.parents('.section').children('.id').val();
-          var target_id = ui.item.parents('.section').children('.id').val();
+          var source_id = ui.sender.parents('.section').children('.container').children('.id').val();
+          var target_id = ui.item.parents('.section').children('.container').children('.id').val();
           var target_folder = ui.item.parents('.folder_file_area').children('.folder_name').val();
 
           if (source_id != target_id) {
@@ -231,49 +231,57 @@ $(document).ready(function(){
       </div>
 </%def>
 
-<%def name="file_browser(obj, section_id=0)">
-  <div class="section" id="file_section-${section_id}">
-    <h2>${obj.title}</h2>
-    <input type="hidden" id="file_upload_url-${section_id}"
-           value="${obj.url(action='upload_file')}" />
-    <input type="hidden" id="create_folder_url-${section_id}"
-           value="${obj.url(action='create_folder')}" />
-    <input type="hidden" id="delete_folder_url-${section_id}"
-           value="${obj.url(action='delete_folder')}" />
-    <input type="hidden" class="id" value="${obj.id}" />
-    <div class="controls">
-      <div id="file_upload_progress-${section_id}" class="file_upload_progress">
-      </div>
-      <div class="file_upload">
-        <div class="contain">
-          <ul class="file_upload_dropdown click2show" id="file_upload_dropdown-${section_id}">
-            <li class="active click">
-              <div>
-                Upload file
-              </div>
-            </li>
-            % for fid, folder in enumerate(obj.folders):
-              <%self:folder_button folder="${folder}" section_id="${section_id}" fid="${fid}" />
-            % endfor
-            <li class="last_item"><div>&nbsp;</div></li>
-          </ul>
+<%def name="file_browser(obj, section_id=0, collapsible=False)">
+  <div class="section click2show" id="file_section-${section_id}">
+    <%
+       cls_head = cls_container = ''
+       if collapsible:
+           cls_head = 'click'
+           cls_container = 'show'
+    %>
+    <h2 class="${cls_head}">${h.ellipsis(obj.title, 80)} <span class="small">(${ungettext("%(count)s file", "%(count)s files", len(obj.files)) % dict(count = len(obj.files))})</span></h2>
+    <div class="container ${cls_container}">
+      <input type="hidden" id="file_upload_url-${section_id}"
+             value="${obj.url(action='upload_file')}" />
+      <input type="hidden" id="create_folder_url-${section_id}"
+             value="${obj.url(action='create_folder')}" />
+      <input type="hidden" id="delete_folder_url-${section_id}"
+             value="${obj.url(action='delete_folder')}" />
+      <input type="hidden" class="id" value="${obj.id}" />
+      <div class="controls">
+        <div id="file_upload_progress-${section_id}" class="file_upload_progress">
         </div>
-      </div>
-      <div>
-        <form action="${obj.url(action='create_folder')}">
-          <div>
-            <label for="folder">${_('New folder:')}</label>
-            <input name="folder" id="new_folder_input-${section_id}" type="text" value="" />
-            <span class="btn">
-              <input id="new_folder_button-${section_id}" class="new_folder_button" type="submit" value="New folder" />
-            </span>
+        <div class="file_upload">
+          <div class="contain">
+            <ul class="file_upload_dropdown click2show" id="file_upload_dropdown-${section_id}">
+              <li class="active click">
+                <div>
+                  Upload file
+                </div>
+              </li>
+              % for fid, folder in enumerate(obj.folders):
+                <%self:folder_button folder="${folder}" section_id="${section_id}" fid="${fid}" />
+              % endfor
+              <li class="last_item"><div>&nbsp;</div></li>
+            </ul>
           </div>
-        </form>
+        </div>
+        <div>
+          <form action="${obj.url(action='create_folder')}">
+            <div>
+              <label for="folder">${_('New folder:')}</label>
+              <input name="folder" id="new_folder_input-${section_id}" type="text" value="" />
+              <span class="btn">
+                <input id="new_folder_button-${section_id}" class="new_folder_button" type="submit" value="New folder" />
+              </span>
+            </div>
+          </form>
+        </div>
+        <br style="clear: left;"/>
       </div>
-      <br style="clear: left;"/>
-    </div>
-    % for fid, folder in enumerate(obj.folders):
+      % for fid, folder in enumerate(obj.folders):
         <%self:folder folder="${folder}" section_id="${section_id}" fid="${fid}" />
-    % endfor
+      % endfor
+    </div>
   </div>
 </%def>
