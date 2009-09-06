@@ -82,7 +82,7 @@ class FileUploadTypeValidator(validators.FancyValidator):
 
     def validate_python(self, value, state):
         if value is not None:
-            if splitext(value.filename)[1] not in self.allowed_types:
+            if splitext(value.filename)[1].lower() not in self.allowed_types:
                 raise Invalid(self.message('bad_type', state, allowed=', '.join(self.allowed_types)), value, state)
 
 
