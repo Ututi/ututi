@@ -11,6 +11,7 @@
 </%def>
 
 <h1>${_('Group Files')}</h1>
+<br/>
 
 <%files:file_browser obj="${c.group}" />
 

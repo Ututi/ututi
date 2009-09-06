@@ -121,23 +121,28 @@ $(document).ready(function(){
     function newFolder(target) {
         var section_id = target.id.split('-')[1];
         var folder_name = $('#new_folder_input-' + section_id).val();
-        $('#new_folder_input-' + section_id).val('');
-        var url = $('#create_folder_url-' + section_id).val();
-        $.ajax({type: "POST",
-                url: url,
-                data: ({section_id: section_id, folder: folder_name}),
-                success: function(msg){
-                    if (msg != '') {
-                        $('#file_section-' + section_id).append($(msg)[2]);
-                        $('#file_upload_dropdown-' + section_id).find('li.upload:last').after($(msg)[0]);
-                        setUpFolder(0, $('#file_upload_dropdown-' + section_id + ' .upload:last')[0]);
-                        $(".folder").sortable({
-                          connectWith: ['.folder'],
-                          cancel: '.message',
-                          receive: folderReceive
-                        });
-                    }
-                }});
+        if ($.trim(folder_name) != '') {
+           $('#new_folder_input-' + section_id).val('');
+            var url = $('#create_folder_url-' + section_id).val();
+            $.ajax({type: "POST",
+                  url: url,
+                  data: ({section_id: section_id, folder: folder_name}),
+                  success: function(msg){
+                      if (msg != '') {
+                          $('#file_section-' + section_id + ' .container').append($(msg)[2]);
+                          if ($('#file_upload_dropdown-' + section_id).hasClass('open')) {
+                              $('#file_upload_dropdown-' + section_id).children('.click').click();
+                          }
+                          $('#file_upload_dropdown-' + section_id).find('li.upload:last').after($(msg)[0]);
+                          setUpFolder(0, $('#file_upload_dropdown-' + section_id + ' .upload:last')[0]);
+                          $(".folder").sortable({
+                            connectWith: ['.folder'],
+                            cancel: '.message',
+                            receive: folderReceive
+                          });
+                        }
+                  }});
+        }
     }
 
     function deleteFolder(target) {
@@ -270,14 +275,14 @@ $(document).ready(function(){
           <form action="${obj.url(action='create_folder')}">
             <div>
               <label for="folder">${_('New folder:')}</label>
-              <input name="folder" id="new_folder_input-${section_id}" type="text" value="" />
+              <input name="folder" id="new_folder_input-${section_id}" type="text" value="" class="new-folder-name" />
               <span class="btn">
                 <input id="new_folder_button-${section_id}" class="new_folder_button" type="submit" value="New folder" />
               </span>
             </div>
           </form>
         </div>
-        <br style="clear: left;"/>
+        <br class="clear-left"/>
       </div>
       % for fid, folder in enumerate(obj.folders):
         <%self:folder folder="${folder}" section_id="${section_id}" fid="${fid}" />

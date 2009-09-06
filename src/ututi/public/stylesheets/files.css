@@ -9,12 +9,12 @@ div.section h2 {
 
 /* expanding sectipon headings  */
 .click2show h2.click {
-  padding-left: 13px;
+  padding-left: 16px;
   background: white url("../images/details/arrow_expand_right.png") left center no-repeat;
 }
 
 .click2show.open h2.click {
-  padding-left: 13px;
+  padding-left: 16px;
   background: white url("../images/details/arrow_expand_down.png") left center no-repeat;
 }
 
@@ -24,6 +24,11 @@ div.section h2 {
 /* files section controls */
 div.section div.controls label {
   color: #888;
+  vertical-align: top;
+}
+
+div.section div.controls .new-folder-name {
+  vertical-align: top;
 }
 
 div.section div.controls div.file_upload {
@@ -147,6 +152,10 @@ li.file img.delete_button {
   vertical-align: top;
 }
 
+.subfolder {
+  margin-top: 10px;
+}
+
 .subfolder .folder {
   padding-left: 25px;
 }
@@ -170,4 +179,11 @@ div.file_upload_progress div {
 
 div.file_upload_progress div.done {
   background: url("../images/details/icon_done.png") left center no-repeat;
+}
+
+/* misc */
+
+.section .container {
+  padding-left: 20px;
+  margin-bottom: 15px;
 }
