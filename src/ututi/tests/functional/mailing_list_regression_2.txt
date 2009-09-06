@@ -10,7 +10,7 @@ Regression test for unicode characters in the message with attachment
     >>> from ututi.lib.mailer import mail_queue
 
     >>> mail_queue[0].payload().decode('utf-8')
-    u'AAAA, tiesa, u\u017emir\u0161au k\u0105 nors prikabinti!\n\n<a href="http://localhost/files/get/4">4aJcvJ.jpeg</a>'
+    u'AAAA, tiesa, u\u017emir\u0161au k\u0105 nors prikabinti!\n\n4aJcvJ.jpeg - http://localhost/files/get/4'
 
     >>> len(mail_queue)
     1

@@ -161,7 +161,7 @@ class GroupMailingListMessage(ContentItem):
             # pass it to this method?
             url = url_for(controller='files', action='get', id=attachment.id,
                           qualified=True)
-            footer += '\n<a href="%s">%s</a>' % (url, attachment.title)
+            footer += '\n%s - %s' % (attachment.title, url)
 
         message = email.message_from_string(self.original.encode('utf-8'), UtutiEmail)
 

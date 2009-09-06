@@ -33,8 +33,7 @@ Regression test for group attachment handling in evolution generated emails
     Content-Type: text/plain; charset="utf-8"
     Content-Transfer-Encoding: base64
     <BLANKLINE>
-    TGFiYXMuCgo8YSBocmVmPSJodHRwOi8vbG9jYWxob3N0L2ZpbGVzL2dldC80Ij5wbGFrYXRhczIu
-    c3ZnPC9hPg==
+    TGFiYXMuCgpwbGFrYXRhczIuc3ZnIC0gaHR0cDovL2xvY2FsaG9zdC9maWxlcy9nZXQvNA==
     <BLANKLINE>
     --=-AiCycqkJF+NJt7Ar8KJW--
     <BLANKLINE>

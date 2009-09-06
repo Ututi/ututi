@@ -91,8 +91,8 @@ link to the file on our system:
     Content-Type: text/plain; charset="utf-8"
     Content-Transfer-Encoding: base64
     <BLANKLINE>
-    QWxzbywgSSBqdXN0IHdhbnRlZCB0byBzZW5kIHlvdSB0aGlzIGZpbGU6Cgo8YSBocmVmPSJodHRw
-    Oi8vbG9jYWxob3N0L2ZpbGVzL2dldC81Ij5SRUFETUUudHh0PC9hPg==
+    QWxzbywgSSBqdXN0IHdhbnRlZCB0byBzZW5kIHlvdSB0aGlzIGZpbGU6CgpSRUFETUUudHh0IC0g
+    aHR0cDovL2xvY2FsaG9zdC9maWxlcy9nZXQvNQ==
     <BLANKLINE>
     --ZGiS0Q5IWpPtfppv--
     <BLANKLINE>
@@ -100,7 +100,7 @@ link to the file on our system:
     >>> print email.payload()
     Also, I just wanted to send you this file:
     <BLANKLINE>
-    <a href="http://localhost/files/get/5">README.txt</a>
+    README.txt - http://localhost/files/get/5
 
     >>> print email.recipients
     ['admin@ututi.lt']
@@ -147,8 +147,8 @@ list of files:
     Content-Type: text/plain; charset="utf-8"
     Content-Transfer-Encoding: base64
     <BLANKLINE>
-    QWxzbywgSSBqdXN0IHdhbnRlZCB0byBzZW5kIHlvdSB0aGlzIGZpbGU6Cgo8YSBocmVmPSJodHRw
-    Oi8vbG9jYWxob3N0L2ZpbGVzL2dldC83Ij5SRUFETUUudHh0PC9hPg==
+    QWxzbywgSSBqdXN0IHdhbnRlZCB0byBzZW5kIHlvdSB0aGlzIGZpbGU6CgpSRUFETUUudHh0IC0g
+    aHR0cDovL2xvY2FsaG9zdC9maWxlcy9nZXQvNw==
     <BLANKLINE>
     --ZGiS0Q5IWpPtfppv--
     <BLANKLINE>
@@ -156,7 +156,7 @@ list of files:
     >>> print email.payload()
     Also, I just wanted to send you this file:
     <BLANKLINE>
-    <a href="http://localhost/files/get/7">README.txt</a>
+    README.txt - http://localhost/files/get/7
 
     >>> browser.getLink('README.txt').click()
     >>> browser.printContents()
