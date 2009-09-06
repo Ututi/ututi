@@ -13,9 +13,7 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
 <%def name="portlets()">
 <div id="sidebar">
   ${group_info_portlet()}
-  ${group_changes_portlet()}
-  ${group_watched_subjects_portlet()}
-  ${group_members_portlet()}
+  ${group_forum_portlet()}
 </div>
 </%def>
 
@@ -23,11 +21,13 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
 <div id="group_page" class="content-block">
   <div class="rounded-header">
     <div class="rounded-right">
-      <span class="header-links">
-        <a href="${url(controller='group', action='home', id=c.group.group_id, do='hide_page')}" title="${_('Hide group page')}">
-          ${_('Hide')}
-        </a>
-      </span>
+      %if c.group.is_admin(c.user):
+        <span class="header-links">
+          <a href="${url(controller='group', action='home', id=c.group.group_id, do='hide_page')}" title="${_('Hide group page')}">
+            ${_('Hide')}
+          </a>
+        </span>
+      %endif
       <h3>${_("Group front page")}</h3>
 
     </div>
@@ -36,13 +36,15 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
     %if c.group.page != '':
     ${c.group.page|n,decode.utf8}
     %else:
-    ${_("The group's page is empty. Enter your description.")}
+      ${_("The group's page is empty. Enter your description.")}
     %endif
-    <div class="footer">
-      <a class="btn" href="${url(controller='group', action='edit_page', id=c.group.group_id)}" title="${_('Edit group front page')}">
-        <span>${_('Edit')}</span>
-      </a>
-    </div>
+    %if c.group.is_member(c.user):
+      <div class="footer">
+        <a class="btn" href="${url(controller='group', action='edit_page', id=c.group.group_id)}" title="${_('Edit group front page')}">
+          <span>${_('Edit')}</span>
+        </a>
+      </div>
+    %endif
   </div>
 </div>
 %endif

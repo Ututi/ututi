@@ -509,7 +509,6 @@ a.btn {
   display: inline-block;
   overflow: auto;
   padding: 0 0 0 10px;
-  position: relative;
 }
 
 span.btn.inactive,

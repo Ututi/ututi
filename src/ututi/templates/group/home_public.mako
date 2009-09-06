@@ -6,6 +6,12 @@
   ${c.group.title}
 </%def>
 
+<%def name="portlets()">
+<div id="sidebar">
+  ${group_info_portlet()}
+</div>
+</%def>
+
 <%def name="head_tags()">
 ${parent.head_tags()}
 ${h.stylesheet_link('/stylesheets/group.css')|n}

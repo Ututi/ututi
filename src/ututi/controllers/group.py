@@ -3,6 +3,8 @@ import logging
 from datetime import date
 from os.path import splitext
 
+from pkg_resources import resource_stream
+
 from pylons import c, config, request, url
 from pylons.templating import render_mako_def
 from pylons.controllers.util import redirect_to, abort
@@ -83,6 +85,11 @@ class FileUploadTypeValidator(validators.FancyValidator):
                 raise Invalid(self.message('bad_type', state, allowed=', '.join(self.allowed_types)), value, state)
 
 
+class LogoUpload(Schema):
+    """A schema for validating logo uploads."""
+    logo = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
+
+
 class EditGroupForm(Schema):
     """A schema for validating group edits."""
     pre_validators = [NestedVariables()]
@@ -161,7 +168,7 @@ class GroupControllerBase(BaseController):
         marked as selected.
         """
         return [
-            {'title': _('Home'),
+            {'title': _("What's new?"),
              'link': url(controller='group', action='home', id=c.group.group_id),
              'selected': selected == 'home'},
             {'title': _('Forum'),
@@ -195,13 +202,12 @@ class GroupController(GroupControllerBase, FileViewMixin):
                 h.flash(_("The group's page was hidden. You can show it again by editing the group's settings."))
             meta.Session.commit()
             c.breadcrumbs.append(self._actions('home'))
-            c.events = meta.Session.query(Event)\
-                .filter(or_(Event.object_id.in_([s.id for s in group.watched_subjects]),
-                            Event.object_id == group.id))\
-                .order_by(desc(Event.created))\
-                .limit(20).all()
+            c.events = group.group_events
             return render('group/home.mako')
         else:
+            c.breadcrumbs = [{'title': group.title,
+                              'link': url(controller='group', action='home', id=c.group.group_id)}]
+
             return render('group/home_public.mako')
 
     @group_action
@@ -219,14 +225,14 @@ class GroupController(GroupControllerBase, FileViewMixin):
         redirect_to(controller='group', action='home', id=group.group_id)
 
     @group_action
-    @ActionProtector("admin", "moderator")
+    @ActionProtector("admin", "moderator", "member")
     def edit_page(self, group):
         c.breadcrumbs.append(self._actions('home'))
         return render('group/edit_page.mako')
 
     @group_action
     @validate(schema=GroupPageForm, form='edit_page')
-    @ActionProtector("admin", "moderator")
+    @ActionProtector("admin", "moderator", "member")
     def update_page(self, group):
         page_content = self.form_result['page_content']
         if page_content is None:
@@ -329,7 +335,11 @@ class GroupController(GroupControllerBase, FileViewMixin):
 
     def logo(self, id, width=None, height=None):
         group = Group.get(id)
-        return serve_image(group.logo, width=width, height=height)
+        if group.logo is not None:
+            return serve_image(group.logo, width=width, height=height)
+        else:
+            stream = resource_stream("ututi", "public/images/details/icon_group.png").read()
+            return serve_image(stream, width, height)
 
     @group_action
     @ActionProtector("member", "admin", "moderator")
@@ -554,3 +564,13 @@ class GroupController(GroupControllerBase, FileViewMixin):
             else:
                 h.flash(_("Problem updating the status of the user. Cannot find such user."))
         redirect_to(controller="group", action="members", id=group.group_id)
+
+    @group_action
+    @validate(LogoUpload)
+    @ActionProtector("user")
+    def logo_upload(self, group):
+        if self.form_result['logo'] is not None:
+            logo = self.form_result['logo']
+            group.logo = logo.file.read()
+            meta.Session.commit()
+            return ''

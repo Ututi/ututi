@@ -1,34 +1,45 @@
 table#forum-thread-list {
-  border: 1px solid #cac5c5;
+  margin-top: 15px;
+  border: 0;
   border-collapse: collapse;
   width: 100%;
-}
-
-table#forum-thread-list th,
-table#forum-thread-list td {
-  border: 1px solid #cac5c5;
-}
-
-table#forum-thread-list th {
-  text-align: left;
   color: #808080;
-  padding: 2px 5px;
 }
+
+table#forum-thread-list tr {
+  border-bottom: 1px solid #cac5c5;
+}
+
 
 table#forum-thread-list td.subject {
-  width: 70%;
-  padding-left: 35px;
-  background: transparent url("../images/icon_mail.png") 5px center no-repeat;
+  width: 50%;
+}
+
+table#forum-thread-list td.subject a {
+  padding-right: 17px;
+  color: #1a1a1a;
+  font-size: 1.2em;
+  background: transparent url("../images/details/arrow.png") right center no-repeat;
 }
 
 table#forum-thread-list td.count {
   width: 10%;
   text-align: center;
+  font-size: 0.9em;
+  border-right: 1px solid #cac5c5;
 }
 
 table#forum-thread-list td.author {
-  width: 20%;
+  width: 15%;
   padding-left: 5px;
+  font-size: 0.9em;
+}
+
+table#forum-thread-list td.date {
+  width: 25%;
+  padding-left: 5px;
+  font-size: 0.9em;
+  border-right: 1px solid #cac5c5;
 }
 
 table#forum-thread-list td.author .profile-link {

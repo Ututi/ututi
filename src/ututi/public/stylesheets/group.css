@@ -70,3 +70,23 @@ table.group-members td, th {
 #group_latest_messages td.subject a {
   color: #1a1a1a;
 }
+
+/* group edit page */
+#group-logo {
+  text-align: center;
+  vertical-align: top;
+  margin: 0 auto;
+}
+
+/* end group edit page */
+
+/* group changes portlet */
+ul.event-list {
+  padding: 0;
+}
+ul.event-list li {
+  list-style-type: none;
+  padding: 0 0 5px 20px;
+  background: transparent url("../images/details/icon_event.png") left top no-repeat;
+}
+/* end group changes portlet */

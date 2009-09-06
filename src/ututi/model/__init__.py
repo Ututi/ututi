@@ -582,6 +582,15 @@ class Group(ContentItem, FolderMixin):
             .order_by(GroupMailingListMessage.sent.desc())\
             .all()
 
+    @property
+    def group_events(self):
+        from ututi.model.events import Event
+        events = meta.Session.query(Event)\
+            .filter(or_(Event.object_id.in_([s.id for s in self.watched_subjects]),
+                        Event.object_id == self.id))\
+                        .order_by(Event.created.desc())\
+                        .limit(20).all()
+        return events
 
 
 group_members_table = None

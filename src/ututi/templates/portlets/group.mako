@@ -37,28 +37,16 @@
          group = c.group
   %>
 
-  <%self:portlet id="group_changes_portlet" portlet_class="inactive XXX">
+  <%self:portlet id="group_changes_portlet" portlet_class="inactive">
     <%def name="header()">
       ${_('Latest changes')}
     </%def>
-    <table class="group-changes">
-      <tr>
-        <td class="change-category">${_('New files')}</td>
-        <td class="change-count">2</td>
-      </tr>
-      <tr>
-        <td class="change-category">${_('New messages')}</td>
-        <td class="change-count">123</td>
-      </tr>
-      <tr>
-        <td class="change-category">${_('Wiki edits')}</td>
-        <td class="change-count">0</td>
-      </tr>
-    </table>
-    <span class="portlet-link">
-      <a class="small" href="${url(controller='group', action='changes', id=group.group_id)}" title="${_('More')}">${_('More')}</a>
-    </span>
-    <br style="clear: right;" />
+    <ul class="event-list">
+      %for event in group.group_events[:5]:
+        <li>${event.render()|n}</li>
+      %endfor
+    </ul>
+    <a class="more" href="${url(controller='group', action='home', id=group.group_id)}" title="${_('More')}">${_('More')}</a>
   </%self:portlet>
 </%def>
 
@@ -135,7 +123,7 @@
       %for message in group.all_messages[:5]:
       <tr>
         <td class="time">${h.fmt_shortdate(message.sent)}</td>
-        <td class="subject"><a href="${message.url()}" title="${message.subject}, ${message.author.fullname}">${h.ellipsis(message.subject, 35)}</a></td>
+        <td class="subject"><a href="${message.url()}" title="${message.subject}, ${message.author.fullname}">${h.ellipsis(message.subject, 25)}</a></td>
       </tr>
       %endfor
     </table>
