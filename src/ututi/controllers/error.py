@@ -28,6 +28,8 @@ class ErrorController(SearchController):
             from pylons.i18n import _
             h.flash(_("Document at %(url)s was not found, but maybe you are interested in something else?") % {
                     'url': req.url})
-            return self.index()
+            self.form_result = {}
+            self._search()
+            return render('/search/index.mako')
 
         return render("/error.mako")
