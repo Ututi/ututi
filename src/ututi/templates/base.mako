@@ -33,14 +33,8 @@ ${_('student information online')}
       <li class="bottom"><div><a href="${url(controller='group', action='add')}" title="${_('Create a new group')}">${_('New group')}</a></div></li>
     </ul>
   </div>
-  <div class="click2show item">
-    <span class="click title">${_('home')}</span>
-    <ul class="expanding-menu show">
-      <li class="top"><div>&nbsp;</div></li>
-      <li><div><a href="${url(controller='profile', action='home')}">${_("What's new?")}</a></div></li>
-      <li><div><a href="${url(controller='profile', action='index')}">${_("Profile")}</a></div></li>
-      <li class="bottom"><div><a href="${url(controller='profile', action='search')}">${_("Search")}</a></div></li>
-    </ul>
+  <div class="item">
+    <a href="${url(controller='profile', action='home')}">${_("home")}</a>
   </div>
 </div>
 
