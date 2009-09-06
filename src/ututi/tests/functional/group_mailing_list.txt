@@ -14,10 +14,10 @@ There are no threads posted at the moment:
 Let's send some messages:
 
     >>> from ututi.tests.functional import send_test_message
-    >>> send_test_message('simple_email.txt', '1', to='moderators@lists.ututi.lt')
-    >>> send_test_message('simple_email.txt', '2', to='moderators@lists.ututi.lt', reply_to='1')
-    >>> send_test_message('simple_email.txt', '3', to='moderators@lists.ututi.lt', reply_to='1')
-    >>> send_test_message('email_with_attachment.txt', '4', to='moderators@lists.ututi.lt', reply_to='2')
+    >>> send_test_message('simple_email.txt', '1', to='moderators@groups.ututi.lt')
+    >>> send_test_message('simple_email.txt', '2', to='moderators@groups.ututi.lt', reply_to='1')
+    >>> send_test_message('simple_email.txt', '3', to='moderators@groups.ututi.lt', reply_to='1')
+    >>> send_test_message('email_with_attachment.txt', '4', to='moderators@groups.ututi.lt', reply_to='2')
 
 And verify that they got properly processed by our email handler:
 
@@ -91,9 +91,9 @@ The email gets sent to all the members of the group:
     Content-Type: text/plain; charset="us-ascii"
     Content-Transfer-Encoding: 7bit
     From: admin@ututi.lt
-    To: moderators@lists.ututi.lt
+    To: moderators@groups.ututi.lt
     Subject: Hi mom
-    Message-ID: <...@lists.ututi.lt>
+    Message-ID: <...@groups.ututi.lt>
     <BLANKLINE>
     I am doing fine. Send more cash.
 
@@ -141,10 +141,10 @@ The email gets sent.
     Content-Type: text/plain; charset="us-ascii"
     Content-Transfer-Encoding: 7bit
     From: admin@ututi.lt
-    To: moderators@lists.ututi.lt
+    To: moderators@groups.ututi.lt
     Subject: Re: Hi mom
-    Message-ID: <...@lists.ututi.lt>
-    In-reply-to: <...@lists.ututi.lt>
+    Message-ID: <...@groups.ututi.lt>
+    In-reply-to: <...@groups.ututi.lt>
     <BLANKLINE>
     Oh, and don't forget to feed the fish!
 
@@ -187,10 +187,10 @@ email:
     Content-Type: text/plain; charset="us-ascii"
     Content-Transfer-Encoding: 7bit
     From: admin@ututi.lt
-    To: moderators@lists.ututi.lt
+    To: moderators@groups.ututi.lt
     Subject: Re: Hi mom
-    Message-ID: <...@lists.ututi.lt>
-    In-reply-to: <...@lists.ututi.lt>
+    Message-ID: <...@groups.ututi.lt>
+    In-reply-to: <...@groups.ututi.lt>
     <BLANKLINE>
     Let's welcome our new member!
 

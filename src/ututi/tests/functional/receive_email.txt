@@ -16,7 +16,7 @@ Let's send an email to the system:
 
     >>> send_test_message("simple_email.txt",
     ...                   "20090615140531.GA23780@my_pc",
-    ...                   'moderators@lists.ututi.lt')
+    ...                   'moderators@groups.ututi.lt')
 
 All emails received will get forwarded to the members who have joined
 ututi:
@@ -27,8 +27,8 @@ ututi:
     Return-Path: <admin@ututi.lt>
     Date: Mon, 15 Jun 2009 17:05:31 +0300
     From: Admin <admin@ututi.lt>
-    To: moderators@lists.ututi.lt
-    Reply-To: moderators@lists.ututi.lt
+    To: moderators@groups.ututi.lt
+    Reply-To: moderators@groups.ututi.lt
     Subject: Hello
     Message-ID: <20090615140531.GA23780@my_pc>
     MIME-Version: 1.0
@@ -36,7 +36,7 @@ ututi:
     User-Agent: Mutt/1.5.18 (2008-05-17)
     Content-Type: text/plain; charset=us-ascii
     Errors-To: errors@ututi.lt
-    List-Id: moderators@lists.ututi.lt
+    List-Id: moderators@groups.ututi.lt
     <BLANKLINE>
     Hi, I am just writing to tell you how wonderful this system is.
     <BLANKLINE>
@@ -53,7 +53,7 @@ But if someone would sent an email with an attachment, it sure would get stored:
 
     >>> send_test_message("email_with_attachment.txt",
     ...                   '20090615145515.GA13471@my_pc',
-    ...                   'moderators@lists.ututi.lt')
+    ...                   'moderators@groups.ututi.lt')
     >>> listUploads()
     /uploads/cb396bb6/487560f2/6de19949/6051b42e
 
@@ -74,15 +74,15 @@ link to the file on our system:
     Return-Path: <admin@ututi.lt>
     Date: Mon, 15 Jun 2009 17:55:15 +0300
     From: Admin <admin@ututi.lt>
-    To: moderators@lists.ututi.lt
+    To: moderators@groups.ututi.lt
     Subject: Also - an attachment
     Message-ID: <20090615145515.GA13471@my_pc>
     MIME-Version: 1.0
     Content-Disposition: inline
     User-Agent: Mutt/1.5.18 (2008-05-17)
-    Reply-To: moderators@lists.ututi.lt
+    Reply-To: moderators@groups.ututi.lt
     Errors-To: errors@ututi.lt
-    List-Id: moderators@lists.ututi.lt
+    List-Id: moderators@groups.ututi.lt
     Content-Type: multipart/mixed; boundary="ZGiS0Q5IWpPtfppv"; charset="utf-8"
     Content-Transfer-Encoding: base64
     <BLANKLINE>
@@ -104,7 +104,7 @@ repository:
 
     >>> send_test_message("email_with_attachment.txt",
     ...                   '20090615145515.GA13472@my_pc',
-    ...                   'moderators@lists.ututi.lt')
+    ...                   'moderators@groups.ututi.lt')
 
     >>> listUploads()
     /uploads/cb396bb6/487560f2/6de19949/6051b42e
@@ -123,15 +123,15 @@ list of files:
     Return-Path: <admin@ututi.lt>
     Date: Mon, 15 Jun 2009 17:55:15 +0300
     From: Admin <admin@ututi.lt>
-    To: moderators@lists.ututi.lt
+    To: moderators@groups.ututi.lt
     Subject: Also - an attachment
     Message-ID: <20090615145515.GA13472@my_pc>
     MIME-Version: 1.0
     Content-Disposition: inline
     User-Agent: Mutt/1.5.18 (2008-05-17)
-    Reply-To: moderators@lists.ututi.lt
+    Reply-To: moderators@groups.ututi.lt
     Errors-To: errors@ututi.lt
-    List-Id: moderators@lists.ututi.lt
+    List-Id: moderators@groups.ututi.lt
     Content-Type: multipart/mixed; boundary="ZGiS0Q5IWpPtfppv"; charset="utf-8"
     Content-Transfer-Encoding: base64
     <BLANKLINE>
@@ -171,7 +171,7 @@ If a message gets posted more than once, it is simply ignored:
 
     >>> send_test_message("email_with_attachment.txt",
     ...                   '20090615145515.GA13472@my_pc',
-    ...                   'moderators@lists.ututi.lt')
+    ...                   'moderators@groups.ututi.lt')
     >>> browser.open('http://localhost/files')
     >>> browser.printQuery('id("file_list")//a')
     <a href="/files/get/..." class="file-link">README.txt</a>

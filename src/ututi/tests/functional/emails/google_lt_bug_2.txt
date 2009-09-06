@@ -2,7 +2,7 @@ Sender: ignas.mikalajunas@gmail.com
 Received: by 10.216.49.200 with HTTP; Fri, 4 Sep 2009 06:11:09 -0700 (PDT)
 In-Reply-To: <cc0c36330909040610i540f536cldf016a7a2a38fb71@mail.gmail.com>
 References: <cc0c36330909040608kbbe08bcne4332904f70ef80c@mail.gmail.com>
-	 <127.0.1.1.1003.30033.1252069823.385.1@lists.ututi.lt>
+	 <127.0.1.1.1003.30033.1252069823.385.1@groups.ututi.lt>
 	 <cc0c36330909040610i540f536cldf016a7a2a38fb71@mail.gmail.com>
 Date: Fri, 4 Sep 2009 16:11:09 +0300
 Delivered-To: ignas.mikalajunas@gmail.com

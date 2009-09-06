@@ -5,7 +5,7 @@ Regression test for unicode characters in the message with attachment
 
     >>> from ututi.tests.functional import send_test_message
 
-    >>> send_test_message('google_lt_bug_2.txt', '1', to='moderators@lists.ututi.lt')
+    >>> send_test_message('google_lt_bug_2.txt', '1', to='moderators@groups.ututi.lt')
 
     >>> from ututi.lib.mailer import mail_queue
 

@@ -190,11 +190,13 @@ class GroupMailingListMessage(ContentItem):
         message_id = message.getMessageId()
 
         mailing_list_host = config.get('mailing_list_host')
+        mailing_list_hosts = [mailing_list_host,
+                              'lists.ututi.lt']
 
         group_ids = [prefix
                      for prefix, suffix in [address.split('@')
                                             for name, address in message.getToAddresses()]
-                     if suffix == mailing_list_host]
+                     if suffix in mailing_list_hosts]
 
         g = None
         if group_ids:
