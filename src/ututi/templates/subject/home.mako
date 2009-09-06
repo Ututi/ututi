@@ -1,6 +1,7 @@
 <%inherit file="/base.mako" />
 <%namespace name="files" file="/sections/files.mako" />
 <%namespace file="/portlets/subject.mako" import="*"/>
+<%namespace file="/sections/content_snippets.mako" import="*"/>
 
 <%def name="title()">
   ${c.subject.title}
@@ -17,26 +18,18 @@
 </div>
 </%def>
 
+<%files:file_browser obj="${c.subject}", title="${_('Subject files')}" />
 
-<h1>${c.subject.title}</h1>
-
-<div>
-${c.subject.lecturer}
-</div>
-
-<%files:file_browser obj="${c.subject}" />
-
-<div id="subject_pages">
+<div id="subject_pages" class="section">
   <h2>${_('Pages')}</h2>
-
-  % if c.subject.pages:
-    <ul>
-    % for page in c.subject.pages:
-      <li>
-        ${h.link_to(page.title, url(controller='subjectpage', page_id=page.id, id=c.subject.subject_id, tags=c.subject.location_path))}
-      </li>
-    % endfor
-    </ul>
-  % endif
-  ${h.link_to(_('Add page'), url(controller='subjectpage', action='add', id=c.subject.subject_id, tags=c.subject.location_path))}
+  <div class="container">
+    <a class="btn" href="${url(controller='subjectpage', action='add', id=c.subject.subject_id, tags=c.subject.location_path)}">
+      <span>${_('New page')}</span>
+    </a>
+    % if c.subject.pages:
+      % for page in c.subject.pages:
+        ${page_extra(page)}
+      % endfor
+    % endif
+  </div>
 </div>

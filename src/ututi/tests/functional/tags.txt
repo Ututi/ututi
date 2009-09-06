@@ -13,8 +13,9 @@ Subjects can be tagged upon creation or when being edited.
     >>> browser.getControl('Title').value = 'Testing subject'
     >>> browser.getControl('Tags').value = 'tag1, tag2, tag 3'
     >>> browser.getControl('Save').click()
-    >>> browser.printQuery('//h1/text()')
-    Testing subject
+    >>> browser.printQuery('//h2/text()')
+    Subject files
+    Pages
 
     >>> browser.url
     'http://localhost/subject/vu/ef/mat_analize'

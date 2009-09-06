@@ -15,7 +15,7 @@ Pick a subject.
 
 And add a page for it.
 
-    >>> browser.getLink('Add page').click()
+    >>> browser.getLink('New page').click()
     >>> browser.getControl('Title').value = "How to be awesome!"
     >>> browser.getControl('Content').value = "Being Awesome is easy!"
     >>> browser.getControl('Save').click()
@@ -61,12 +61,24 @@ Let's go back now.
 We should see the list of pages.
 
     >>> browser.printQuery("id('subject_pages')")
-    <div id="subject_pages">
+    <div id="subject_pages" class="section">
       <h2>Pages</h2>
-      <ul>
-        <li>
-          <a href="/subject/vu/mat_analize/page/3">How to be awesome!</a>
-        </li>
-      </ul>
-      <a href="/subject/vu/mat_analize/pages/add">Add page</a>
+      <div class="container">
+        <a class="btn" href="/subject/vu/mat_analize/pages/add">
+          <span>New page</span>
+        </a>
+        <div class="search-item snippet-page">
+          <a href="/subject/vu/mat_analize/page/3" title="How to be awesome!" class="item-title larger">How to be awesome!</a>
+          <span class="small" style="margin-left: 10px;">...</span>
+          <a style="font-size: 0.9em;" href="/user/1">Adminas Adminovix</a>
+          <div class="description">
+          Being Awesome is very easy!
+        </div>
+          <div class="item-tags">
+            <a class="tag" title="Vilniaus universitetas" href="/profile/search?tags=Vilniaus+universitetas">
+          Vilniaus universitetas
+        </a>
+          </div>
+        </div>
+      </div>
     </div>

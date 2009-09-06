@@ -236,7 +236,7 @@ $(document).ready(function(){
       </div>
 </%def>
 
-<%def name="file_browser(obj, section_id=0, collapsible=False)">
+<%def name="file_browser(obj, section_id=0, collapsible=False, title=None)">
   <div class="section click2show" id="file_section-${section_id}">
     <%
        cls_head = cls_container = ''
@@ -244,7 +244,14 @@ $(document).ready(function(){
            cls_head = 'click'
            cls_container = 'show'
     %>
-    <h2 class="${cls_head}">${h.ellipsis(obj.title, 80)} <span class="small">(${ungettext("%(count)s file", "%(count)s files", obj.file_count) % dict(count = obj.file_count)})</span></h2>
+    <h2 class="${cls_head}">
+      %if title is None:
+        ${h.ellipsis(obj.title, 80)}
+      %else:
+        ${h.ellipsis(title, 80)}
+      %endif
+      <span class="small">(${ungettext("%(count)s file", "%(count)s files", obj.file_count) % dict(count = obj.file_count)})</span>
+    </h2>
     <div class="container ${cls_container}">
       <input type="hidden" id="file_upload_url-${section_id}"
              value="${obj.url(action='upload_file')}" />
