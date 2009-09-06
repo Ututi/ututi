@@ -88,10 +88,13 @@ li.message {
 li.file {
   line-height: 20px;
   list-style-type: none;
-  padding: 0 0 0 25px;
+  padding: 0;
   margin: 3px 0;
-  background: url("../images/details/icon_file.png") left center no-repeat;
+}
+
+li.file img.drag-target {
   cursor: move;
+  vertical-align: middle;
 }
 
 li.file a {

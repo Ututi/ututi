@@ -61,7 +61,9 @@ $(document).ready(function(){
       connectWith: ['.folder'],
       cancel: '.message',
       helper: 'clone',
-      receive: folderReceive
+      receive: folderReceive,
+      handle: 'img.drag-target',
+      axis: 'y',
     });
 
     function setUpFolder(i, btn) {
@@ -179,6 +181,7 @@ $(document).ready(function(){
 
 <%def name="file(file)">
             <li class="file">
+              ${h.image('/images/details/icon_drag_file.png', alt='file icon', class_='drag-target')|n}
               ${h.link_to(file.title, file.url())}
               <span class="date">${h.fmt_dt(file.created_on)}</span>
               <a href="${url(controller='user', action='index', id=file.created_by)}" class="author">
