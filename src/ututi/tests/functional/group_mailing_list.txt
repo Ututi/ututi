@@ -9,13 +9,7 @@ Test for group mailing list UI
 There are no threads posted at the moment:
 
     >>> browser.printQuery("id('forum-thread-list')")
-    <table id="forum-thread-list">
-      <tr>
-        <th>Subject</th>
-        <th>Replies</th>
-        <th>Last post</th>
-      </tr>
-    </table>
+    <table id="forum-thread-list"></table>
 
 Let's send some messages:
 
@@ -55,25 +49,12 @@ Data structures seem to be ok, let's see if they are displayed
 properly in the forum page:
 
     >>> browser.open('http://localhost/group/moderators/forum')
-    >>> browser.printQuery("id('forum-thread-list')")
-    <table id="forum-thread-list">
-      <tr>
-        <th>Subject</th>
-        <th>Replies</th>
-        <th>Last post</th>
-      </tr>
-      <tr>
-        <td class="subject">
-          <a href="/group/moderators/forum/thread/3">Hello</a>
-        </td>
-        <td class="count">3</td>
-        <td class="author">
-          <a class="profile-link" href="/user/1">Adminas Adminovix</a>
-          <br />
-          <span class="date">2009.06.15 14:55</span>
-        </td>
-      </tr>
-    </table>
+    >>> browser.printQuery("id('forum-thread-list')//td//text()")
+    Hello
+    3 replies
+    2009 Jun 15, 14:05
+    Adminas Adminovix
+
 
 Let's look at the attachment in the thread:
 
@@ -92,7 +73,7 @@ Let's look at the attachment in the thread:
 
 Let's post a new topic now:
 
-    >>> browser.getLink('Post new topic').click()
+    >>> browser.getLink('New topic').click()
 
     >>> browser.url
     'http://localhost/group/moderators/forum/new_thread'
@@ -136,36 +117,15 @@ If we go back to the forum, we should see the new thread in the list
 of threads:
 
     >>> browser.getLink('Forum').click()
-    >>> browser.printQuery("id('forum-thread-list')")
-    <table id="forum-thread-list">
-      <tr>
-        <th>Subject</th>
-        <th>Replies</th>
-        <th>Last post</th>
-      </tr>
-      <tr>
-        <td class="subject">
-          <a href="/group/moderators/forum/thread/8">Hi mom</a>
-        </td>
-        <td class="count">0</td>
-        <td class="author">
-          <a class="profile-link" href="/user/1">Adminas Adminovix</a>
-          <br />
-          <span class="date">...</span>
-        </td>
-      </tr>
-      <tr>
-        <td class="subject">
-          <a href="/group/moderators/forum/thread/3">Hello</a>
-        </td>
-        <td class="count">3</td>
-        <td class="author">
-          <a class="profile-link" href="/user/1">Adminas Adminovix</a>
-          <br />
-          <span class="date">2009.06.15 14:55</span>
-        </td>
-      </tr>
-    </table>
+    >>> browser.printQuery("id('forum-thread-list')//td//text()")
+    Hi mom
+    0 replies
+    ...
+    Adminas Adminovix
+    Hello
+    3 replies
+    ...
+    Adminas Adminovix
 
 Let's go back to it now, and post a reply:
 

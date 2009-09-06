@@ -65,9 +65,11 @@ class GroupforumController(GroupControllerBase):
                 .order_by(desc(GroupMailingListMessage.sent))\
                 .all():
             msg = {'thread_id': message.id,
-                   'last_reply_author_id': message.posts[-1].author.id,
+                   'last_reply_author_id': message.posts[-1].author,
                    'last_reply_author_title': message.posts[-1].author.fullname,
                    'last_reply_date': message.posts[-1].sent,
+                   'send': message.sent,
+                   'author': message.author,
                    'reply_count': len(message.posts) - 1,
                    'subject': message.subject}
             messages.append(msg)
