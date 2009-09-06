@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-09-07 00:55+0300\n"
+"PO-Revision-Date: 2009-09-07 01:13+0300\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -978,9 +978,9 @@ msgstr "Žinučių nėra"
 #: src/ututi/templates/forum/index.mako:44
 msgid "%(count)s reply"
 msgid_plural "%(count)s replies"
-msgstr[0] "%(count)s atsakymų"
-msgstr[1] "%(count)s atsakymas"
-msgstr[2] "%(count)s atsakymai"
+msgstr[0] "%(count)s atsakymas"
+msgstr[1] "%(count)s atsakymai"
+msgstr[2] "%(count)s atsakymų"
 
 #: src/ututi/template_py/forum/new.mako.py:48
 #: src/ututi/template_py/forum/thread.mako.py:119
@@ -1506,9 +1506,9 @@ msgstr "Mano grupės"
 #: src/ututi/template_py/portlets/user.mako.py:121
 msgid "%(count)s member"
 msgid_plural "%(count)s members"
-msgstr[0] "%(count)s narių"
-msgstr[1] "%(count)s narys"
-msgstr[2] "%(count)s nariai"
+msgstr[0] "%(count)s narys"
+msgstr[1] "%(count)s nariai"
+msgstr[2] "%(count)s narių"
 
 #: src/ututi/template_py/portlets/user.mako.py:129
 msgid "Create group"
@@ -1630,9 +1630,9 @@ msgstr "stebėti studijuojamus dalykus"
 #: src/ututi/templates/search/index.mako:94
 msgid "found %(count)s result"
 msgid_plural "found %(count)s results"
-msgstr[0] "rasta %(count)s rezultatų"
-msgstr[1] "rastas %(count)s rezultatas"
-msgstr[2] "rasti %(count)s rezultatai"
+msgstr[0] "rasta %(count)s rezultatas"
+msgstr[1] "rastas %(count)s rezultatai"
+msgstr[2] "rasti %(count)s rezultatų"
 
 #: src/ututi/template_py/search/index.mako.py:268
 #: src/ututi/templates/search/index.mako:74
@@ -1643,9 +1643,9 @@ msgstr "Filtruoti pagal mokymo įstaigą"
 #: src/ututi/templates/sections/files.mako:253
 msgid "%(count)s file"
 msgid_plural "%(count)s files"
-msgstr[0] "%(count)s failų"
-msgstr[1] "%(count)s failas"
-msgstr[2] "%(count)s failai"
+msgstr[0] "%(count)s failas"
+msgstr[1] "%(count)s failai"
+msgstr[2] "%(count)s failų"
 
 #: src/ututi/template_py/sections/files.mako.py:160
 #: src/ututi/templates/sections/files.mako:284
