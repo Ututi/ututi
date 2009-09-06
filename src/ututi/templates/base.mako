@@ -25,7 +25,7 @@ ${_('student information online')}
         <li>
           <div>
             <a href="${url(controller='group', action='home', id=mship.group.group_id)}" title="${mship.group.title}">
-              ${h.ellipsis(mship.group.title, 20)}
+              ${h.ellipsis(mship.group.title, 18)}
             </a>
           </div>
         </li>

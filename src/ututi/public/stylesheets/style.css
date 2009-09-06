@@ -250,7 +250,6 @@ ul.bullets_large li {
   position: relative;
   font-weight: bold;
   white-space: nowrap;
-  overflow: hidden;
 }
 
 #personal-menu span.title {
