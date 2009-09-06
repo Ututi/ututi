@@ -121,6 +121,9 @@ And we get redirected to our newly created thread
           <div class="post-body">
             I am doing fine. Send more cash.
           </div>
+          <a class="btn" href="#reply">
+            <span>Reply</span>
+          </a>
         </div>
       </td>
     </tr>
@@ -183,6 +186,9 @@ And our new message should be in the list:
           <div class="post-body">
             I am doing fine. Send more cash.
           </div>
+          <a class="btn" href="#reply">
+            <span>Reply</span>
+          </a>
         </div>
       </td>
     </tr>
@@ -201,6 +207,9 @@ And our new message should be in the list:
           <div class="post-body">
             Oh, and don't forget to feed the fish!
           </div>
+          <a class="btn" href="#reply">
+            <span>Reply</span>
+          </a>
         </div>
       </td>
     </tr>

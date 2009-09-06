@@ -24,7 +24,7 @@
     <a class="btn" href="${url(controller='groupforum', action='new_thread', id=c.group.group_id)}"><span>${_("New topic")}</span></a>
   </div>
 </div>
-<br style="clear-left"/>
+<br class="clear-left"/>
 
 
 

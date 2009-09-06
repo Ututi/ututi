@@ -42,6 +42,7 @@ ${h.stylesheet_link('/stylesheets/forum.css')|n}
       <div class="post-body">
         ${h.nl2br(message.body)|n}
       </div>
+      <a class="btn" href="#reply"><span>${_('Reply')}</span></a>
       % if message.attachments:
       <ul class="post-attachments">
         % for file in message.attachments:
@@ -57,12 +58,13 @@ ${h.stylesheet_link('/stylesheets/forum.css')|n}
 % endfor
 </table>
 <br/>
+<a name="reply"/>
 <h2>${_('Reply')}</h2>
 <form method="post" action="${url(controller='groupforum', action='reply', thread_id=c.thread.id, id=c.group.group_id)}"
      id="group_add_form" enctype="multipart/form-data">
   <div class="form-field">
     <label for="message">${_('Message')}</label>
-    <textarea class="line" name="message" id="message" cols="80" rows="25"></textarea>
+    <textarea class="line" name="message" id="message" cols="80" rows="10"></textarea>
   </div>
   <div>
     <span class="btn">
