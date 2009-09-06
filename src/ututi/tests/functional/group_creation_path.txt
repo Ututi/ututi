@@ -100,15 +100,25 @@ First let us log out.
 
     >>> browser.getLink('log out').click()
     >>> browser.open(get_urls(msg)[0])
-    >>> browser.printQuery('//h1/text()')
-    UTUTI - student information online
-    Ututi search
+
+    >>> browser.queryHTML('//h1/text()')
+    ['Please register!']
+
+    >>> browser.printQuery("id('login_message')")
+    <div id="login_message" class="please-register">
+    Only registered users can become members of a group, please register first.
+    </div>
 
 Let us fill out the registration form
 
     >>> form = browser.getForm(id='registration_form')
     >>> form.getControl('Fullname').value = 'Jonas Petraitis Petrauskas'
-    >>> form.getControl('Email').value = 'jonas@example.com'
+
+Email is filled in for us already:
+
+    >>> form.getControl('Email').value
+    'jonas@example.com'
+
     >>> form.getControl('Password').value = 'asdfgh'
     >>> form.getControl('Repeat password').value = 'asdfgh'
     >>> form.getControl(name='agree').value = True

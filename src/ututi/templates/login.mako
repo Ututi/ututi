@@ -16,10 +16,10 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
 </%def>
 
 
-<h1>${_('Permission denied!')}</h1>
+<h1>${c.header}</h1>
 
-<div class="permission-denied">
-${_('Only registered users can perform this action. Please log in, or register an account on our system.')}
+<div id="login_message" class="${c.message_class or 'permission-denied'}">
+${c.message}
 </div>
 
   <h3 class="underline">${_('Why should I join?')}</h3>

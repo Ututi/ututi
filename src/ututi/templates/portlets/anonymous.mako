@@ -20,7 +20,12 @@
         <form:error name="email"/>
         <div class="form-field">
           <div class="input-rounded"><div>
-            <input  type="text" id="email" name="email" size="40"/>
+            % if c.email:
+              <input  type="text" id="email" name="email" size="40" value="${c.email}" disabled="disabled" />
+              <input  type="hidden" name="email" value="${c.email}" />
+            % else:
+              <input  type="text" id="email" name="email" size="40" />
+            % endif
           </div></div>
           <label for="email">${_('Email')}</label>
         </div>

@@ -1131,6 +1131,14 @@ div.permission-denied {
   height: 80px;
 }
 
+div.please-register {
+  margin-top: 10px;
+  padding-left: 140px;
+  padding-top: 5px;
+  background: white url("../images/details/icon_labas.png") left top no-repeat;
+  height: 80px;
+}
+
 .clear-left, .clear-right {
   height: 0;
   margin: 0;

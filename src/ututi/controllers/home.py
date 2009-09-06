@@ -108,13 +108,19 @@ class HomeController(BaseController):
           destination = request.params.get('came_from',
                                            url(controller='profile',
                                                action='home'))
-          user = None
-          if password is not None:
-               user = User.authenticate(email, password.encode('utf-8'))
 
-          if user is not None:
-               sign_in_user(email)
-               redirect_to(str(destination))
+          c.header = _('Permission denied!')
+          c.message = _('Only registered users can perform this action. Please log in, or register an account on our system.')
+
+          if password is not None:
+               user = None
+               user = User.authenticate(email, password.encode('utf-8'))
+               c.header = _('Wrong username or password!')
+               c.message = _('You seem to have entered your username and password wrong, please try again!')
+
+               if user is not None:
+                    sign_in_user(email)
+                    redirect_to(str(destination))
 
           return render('/login.mako')
 
@@ -149,11 +155,22 @@ class HomeController(BaseController):
                          meta.Session.delete(invitation)
                          meta.Session.commit()
                          redirect_to(controller='group', action='home', id=invitation.group.group_id)
+                    else:
+                         c.email = invitation.email
+                         c.header = _('Invalid email!')
+                         c.message = _('You can only use the email this invitation was sent for to register.')
+                         return render('/login.mako')
                else:
                     redirect_to(controller='profile', action='welcome')
           else:
                if hash is not None:
                     c.hash = hash
+                    invitation = PendingInvitation.get(hash)
+                    c.email = invitation.email
+                    c.message_class = 'please-register'
+                    c.header = _('Please register!')
+                    c.message = _('Only registered users can become members of a group, please register first.')
+                    return render('/login.mako')
                return render('anonymous_index.mako')
 
      @validate(PasswordRecoveryForm, form='pswrecovery')
