@@ -249,6 +249,8 @@ ul.bullets_large li {
   margin: 0  0 0 10px;
   position: relative;
   font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 #personal-menu span.title {
