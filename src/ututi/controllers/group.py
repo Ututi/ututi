@@ -34,6 +34,7 @@ from ututi.model.events import Event
 from ututi.model import LocationTag, User, GroupMember, GroupMembershipType
 from ututi.model import meta, Group, SimpleTag, Subject, ContentItem, PendingInvitation, PendingRequest
 from ututi.controllers.search import SearchSubmit
+from ututi.lib.security import check_crowds
 from ututi.lib.security import is_root, check_crowds
 from ututi.lib.security import ActionProtector
 from ututi.lib.search import search_query
@@ -285,7 +286,7 @@ class GroupController(GroupControllerBase, FileViewMixin):
     @ActionProtector("member", "admin", "moderator")
     def members(self, group):
         c.breadcrumbs.append(self._actions('members'))
-        if group.is_admin(c.user):
+        if check_crowds(['admin', 'moderator'], context=group):
             return render('group/members_admin.mako')
         else:
             return render('group/members.mako')

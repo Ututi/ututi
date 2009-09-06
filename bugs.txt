@@ -16,9 +16,9 @@ Tada pamato error page, o ne search view'ą su pranešimu, kad grupė nerasta.
 Kaip alternatyva, kai žmogus įveda neegzistuojantį location tag'ą, jam galėtų pasirodyti error'as 
 prie įvestos formos. Panašiai kaip su neįvestu slaptažodžiu loginantis.
 
-* What's new rodo tik eventus iš vienos grupės (nors naudotojas priklausi dviem)
-
 * WebApp Error: <class 'sqlalchemy.exc.DataError'>: (DataError) value too long for type character varying(100) 'UPDATE users SET fullname=%(fullname)s WHERE users.id = %(users_id)s' {'users_id': 531L, 'fullname': 'Adomasjh gigkj gkjhj gjhgkj gkjgkjhg kjgkjhgkj gkjgk jgkjhg kjhg kjhg kjhg kjgkjh gkj gkjg kg kj gkjhg kjgkjgkjhg kjgjk g jk gkjgkjgkjhgk jg kjhg kjhgkjhg kjh gkjgkj hgkjh'}
+
+* DONE What's new rodo tik eventus iš vienos grupės (nors naudotojas priklausi dviem)
 
 * DONE Password reset form should reuse the old key if it's already present
 
