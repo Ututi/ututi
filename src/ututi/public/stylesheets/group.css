@@ -70,3 +70,12 @@ table.group-members td, th {
 #group_latest_messages td.subject a {
   color: #1a1a1a;
 }
+
+/* group edit page */
+#group-logo {
+  text-align: center;
+  vertical-align: top;
+  margin: 0 auto;
+}
+
+/* end group edit page */

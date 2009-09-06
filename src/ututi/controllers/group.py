@@ -3,6 +3,8 @@ import logging
 from datetime import date
 from os.path import splitext
 
+from pkg_resources import resource_stream
+
 from pylons import c, config, request, url
 from pylons.templating import render_mako_def
 from pylons.controllers.util import redirect_to, abort
@@ -81,6 +83,11 @@ class FileUploadTypeValidator(validators.FancyValidator):
         if value is not None:
             if splitext(value.filename)[1] not in self.allowed_types:
                 raise Invalid(self.message('bad_type', state, allowed=', '.join(self.allowed_types)), value, state)
+
+
+class LogoUpload(Schema):
+    """A schema for validating logo uploads."""
+    logo = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
 
 
 class EditGroupForm(Schema):
@@ -332,7 +339,11 @@ class GroupController(GroupControllerBase, FileViewMixin):
 
     def logo(self, id, width=None, height=None):
         group = Group.get(id)
-        return serve_image(group.logo, width=width, height=height)
+        if group.logo is not None:
+            return serve_image(group.logo, width=width, height=height)
+        else:
+            stream = resource_stream("ututi", "public/images/details/icon_group.png").read()
+            return serve_image(stream, width, height)
 
     @group_action
     @ActionProtector("member", "admin", "moderator")
@@ -557,3 +568,13 @@ class GroupController(GroupControllerBase, FileViewMixin):
             else:
                 h.flash(_("Problem updating the status of the user. Cannot find such user."))
         redirect_to(controller="group", action="members", id=group.group_id)
+
+    @group_action
+    @validate(LogoUpload)
+    @ActionProtector("user")
+    def logo_upload(self, group):
+        if self.form_result['logo'] is not None:
+            logo = self.form_result['logo']
+            group.logo = logo.file.read()
+            meta.Session.commit()
+            return ''
