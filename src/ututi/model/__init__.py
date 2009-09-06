@@ -482,6 +482,10 @@ class FolderMixin(object):
                 result[file.folder].append(file)
         return result
 
+    @property
+    def file_count(self):
+        return len([file for file in self.files if not file.isNullFile()])
+
     def getFolder(self, title):
         return self.folders_dict.get(title, None)
 

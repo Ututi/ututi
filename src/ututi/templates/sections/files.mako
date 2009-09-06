@@ -155,7 +155,7 @@ $(document).ready(function(){
                 data: ({folder: folder_name}),
                 success: function(msg){
                     $('#file_area-' + section_id + '-' + fid).hide()
-                    $('#file_upload_button-' + section_id + '-' + fid).hide()
+                    $('#file_upload_button-' + section_id + '-' + fid).remove()
                 }});
     }
 
@@ -244,7 +244,7 @@ $(document).ready(function(){
            cls_head = 'click'
            cls_container = 'show'
     %>
-    <h2 class="${cls_head}">${h.ellipsis(obj.title, 80)} <span class="small">(${ungettext("%(count)s file", "%(count)s files", len(obj.files)) % dict(count = len(obj.files))})</span></h2>
+    <h2 class="${cls_head}">${h.ellipsis(obj.title, 80)} <span class="small">(${ungettext("%(count)s file", "%(count)s files", obj.file_count) % dict(count = obj.file_count)})</span></h2>
     <div class="container ${cls_container}">
       <input type="hidden" id="file_upload_url-${section_id}"
              value="${obj.url(action='upload_file')}" />
