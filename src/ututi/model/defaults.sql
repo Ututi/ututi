@@ -9,7 +9,7 @@ CREATE TEXT SEARCH CONFIGURATION public.lt ( COPY = pg_catalog.english );
 ALTER TEXT SEARCH CONFIGURATION lt
     ALTER MAPPING FOR asciiword, asciihword, hword_asciipart,
                       word, hword, hword_part
-    WITH lithuanian;;
+    WITH lithuanian, simple;;
 
 
 create table users (
@@ -256,11 +256,13 @@ CREATE FUNCTION update_group_search() RETURNS trigger AS $$
         UPDATE search_items SET terms = to_tsvector(coalesce(NEW.title,''))
           || to_tsvector(coalesce(NEW.description, ''))
           || to_tsvector(coalesce(NEW.page, ''))
+          || to_tsvector(coalesce(NEW.group_id, ''))
            WHERE content_item_id=search_id;
       ELSE
         INSERT INTO search_items (content_item_id, terms) VALUES (NEW.id,
           to_tsvector(coalesce(NEW.title,''))
           || to_tsvector(coalesce(NEW.description, ''))
+          || to_tsvector(coalesce(NEW.group_id, ''))
           || to_tsvector(coalesce(NEW.page, '')));
       END IF;
       RETURN NEW;
@@ -298,10 +300,12 @@ CREATE FUNCTION update_subject_search() RETURNS trigger AS $$
       IF FOUND THEN
         UPDATE search_items SET terms = to_tsvector(coalesce(NEW.title,''))
           || to_tsvector(coalesce(NEW.lecturer,''))
+          || to_tsvector(coalesce(NEW.description,''))
           WHERE content_item_id=search_id;
       ELSE
         INSERT INTO search_items (content_item_id, terms) VALUES (NEW.id,
           to_tsvector(coalesce(NEW.title,''))
+          || to_tsvector(coalesce(NEW.description,''))
           || to_tsvector(coalesce(NEW.lecturer, '')));
       END IF;
       RETURN NEW;
