@@ -8,6 +8,7 @@
 
   ${user_subjects_portlet()}
   ${user_groups_portlet()}
+  ${user_message_portlet()}
 
 </div>
 </%def>

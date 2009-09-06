@@ -114,3 +114,18 @@
     %endif
   </%self:portlet>
 </%def>
+
+<%def name="user_message_portlet(user=None)">
+  <%self:portlet id="subject_portlet" portlet_class="inactive">
+    <%def name="header()">
+      ${'Naujas Ututi!'}
+    </%def>
+Kol Tu mėgavaisi vasaros atostogomis, <a
+href="http://ututi.lt">ututi.lt</a> komanda parengė atnaujintą,
+patobulintą ir Tavo poreikiams geriau pritaikytą portalo <a
+href="http://ututi.lt">ututi.lt</a> versiją. Laukiame Jūsų <a
+href="http://ututi.uservoice.com">atsiliepimų</a>, <a
+href="http://ututi.uservoice.com">pasiūlymų</a> ir <a
+href="http://ututi.uservoice.com">pageidavimų</a>!
+  </%self:portlet>
+</%def>
