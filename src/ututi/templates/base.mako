@@ -274,7 +274,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
 
       </div>
     </div>
-<!--
+
     <script type="text/javascript">
       var uservoiceJsHost = ("https:" == document.location.protocol) ? "https://uservoice.com" : "http://cdn.uservoice.com";
       document.write(unescape("%3Cscript src='" + uservoiceJsHost + "/javascripts/widgets/tab.js' type='text/javascript'%3E%3C/script%3E"))
@@ -293,6 +293,15 @@ ${h.javascript_link('/javascripts/forms.js')|n}
       lang: 'en'
     })
     </script>
--->
+    <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+      try {
+      var pageTracker = _gat._getTracker("UA-7073371-1");
+      pageTracker._trackPageview();
+      } catch(err) {}
+    </script>
   </body>
 </html>
