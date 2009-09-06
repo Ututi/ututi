@@ -109,6 +109,7 @@ h1, h2, h3, h4 {
 .tag {
   color: #4d4d4d;
   font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 0.9em;
 }
 
 .tag:hover {
@@ -976,7 +977,7 @@ div#pager {
 
 #search_portlet .search-text input {
   width: 100%;
-  font-size: 1em;
+  font-size: 0.9em;
   border: 0;
   background: transparent none;
 }
@@ -996,19 +997,19 @@ div.search-item .item-tags {
 }
 
 div.search-item {
-  padding-left: 40px;
+  padding-left: 35px;
 }
 
 div.snippet-page {
-  background: white url("../images/details/icon_type_page.png") left top no-repeat;
+  background: white url("../images/details/icon_type_page.png") left 5px no-repeat;
 }
 
 div.snippet-group {
-  background: white url("../images/details/icon_type_group.png") left top no-repeat;
+  background: white url("../images/details/icon_type_group.png") left 5px no-repeat;
 }
 
 div.snippet-subject {
-  background: white url("../images/details/icon_type_subject.png") left top no-repeat;
+  background: white url("../images/details/icon_type_subject.png") left 5px no-repeat;
 }
 
 h3.search-results-title {
@@ -1100,7 +1101,7 @@ div.user-logo-link div {
   line-height: 16px;
   padding-left: 20px;
   background: transparent url("../images/details/icon_subject_small.png") left center no-repeat;
-  margin: 2px 0;
+  margin: 7px 0;
 }
 /* js alternatives */
 .js {
