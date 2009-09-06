@@ -1,0 +1,44 @@
+Regression test for group attachment handling in evolution generated emails
+===========================================================================
+
+    >>> browser = Browser.logIn()
+
+    >>> from ututi.tests.functional import send_test_message
+
+    >>> send_test_message('evolution_attachment_bug.txt')
+    >>> browser.open("http://localhost/group/moderators/forum/thread/3")
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> print mail_queue[0].message
+    Subject: Lists
+    From: Ignas <admin@ututi.lt>
+    Reply-To: moderators@groups.ututi.lt
+    To: moderators@lists.ututi.lt
+    Content-Type: multipart/mixed; boundary="=-AiCycqkJF+NJt7Ar8KJW"
+    Message-Id: <111251946.148542.56.camel@angliukas>
+    Mime-Version: 1.0
+    X-Mailer: Evolution 2.26.1
+    Date: Sun, 06 Sep 2009 18:32:30 +0300
+    X-Evolution-Format: text/plain
+    X-Evolution-Account: 1242642934.7451.2@angliukas
+    X-Evolution-Transport: smtp://jaro%40ututi.com; auth=PLAIN@smtp.zebra.lt/;
+        use_ssl=when-possible
+    X-Evolution-Fcc: mbox:/home/jaro/.evolution/mail/local#Sent
+    Errors-To: errors@ututi.lt
+    List-Id: moderators@groups.ututi.lt
+    <BLANKLINE>
+    <BLANKLINE>
+    --=-AiCycqkJF+NJt7Ar8KJW
+    MIME-Version: 1.0
+    Content-Type: text/plain; charset="utf-8"
+    Content-Transfer-Encoding: base64
+    <BLANKLINE>
+    TGFiYXMuCgo8YSBocmVmPSJodHRwOi8vbG9jYWxob3N0L2ZpbGVzL2dldC80Ij5wbGFrYXRhczIu
+    c3ZnPC9hPg==
+    <BLANKLINE>
+    --=-AiCycqkJF+NJt7Ar8KJW--
+    <BLANKLINE>
+
+    >>> len(mail_queue)
+    1
+    >>> mail_queue[:] = []

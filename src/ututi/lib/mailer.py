@@ -16,6 +16,8 @@ class EmailInfo(object):
 
     def payload(self):
         message = message_from_string(self.message.encode('utf-8'))
+        if message.is_multipart():
+            message = message.get_payload()[0]
         return message.get_payload(decode=True)
 
     def __str__(self):

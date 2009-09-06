@@ -78,16 +78,23 @@ link to the file on our system:
     Subject: Also - an attachment
     Message-ID: <20090615145515.GA13471@my_pc>
     MIME-Version: 1.0
+    Content-Type: multipart/mixed; boundary="ZGiS0Q5IWpPtfppv"
     Content-Disposition: inline
     User-Agent: Mutt/1.5.18 (2008-05-17)
     Reply-To: moderators@groups.ututi.lt
     Errors-To: errors@ututi.lt
     List-Id: moderators@groups.ututi.lt
-    Content-Type: multipart/mixed; boundary="ZGiS0Q5IWpPtfppv"; charset="utf-8"
+    <BLANKLINE>
+    <BLANKLINE>
+    --ZGiS0Q5IWpPtfppv
+    MIME-Version: 1.0
+    Content-Type: text/plain; charset="utf-8"
     Content-Transfer-Encoding: base64
     <BLANKLINE>
     QWxzbywgSSBqdXN0IHdhbnRlZCB0byBzZW5kIHlvdSB0aGlzIGZpbGU6Cgo8YSBocmVmPSJodHRw
     Oi8vbG9jYWxob3N0L2ZpbGVzL2dldC81Ij5SRUFETUUudHh0PC9hPg==
+    <BLANKLINE>
+    --ZGiS0Q5IWpPtfppv--
     <BLANKLINE>
 
     >>> print email.payload()
@@ -127,16 +134,23 @@ list of files:
     Subject: Also - an attachment
     Message-ID: <20090615145515.GA13472@my_pc>
     MIME-Version: 1.0
+    Content-Type: multipart/mixed; boundary="ZGiS0Q5IWpPtfppv"
     Content-Disposition: inline
     User-Agent: Mutt/1.5.18 (2008-05-17)
     Reply-To: moderators@groups.ututi.lt
     Errors-To: errors@ututi.lt
     List-Id: moderators@groups.ututi.lt
-    Content-Type: multipart/mixed; boundary="ZGiS0Q5IWpPtfppv"; charset="utf-8"
+    <BLANKLINE>
+    <BLANKLINE>
+    --ZGiS0Q5IWpPtfppv
+    MIME-Version: 1.0
+    Content-Type: text/plain; charset="utf-8"
     Content-Transfer-Encoding: base64
     <BLANKLINE>
     QWxzbywgSSBqdXN0IHdhbnRlZCB0byBzZW5kIHlvdSB0aGlzIGZpbGU6Cgo8YSBocmVmPSJodHRw
     Oi8vbG9jYWxob3N0L2ZpbGVzL2dldC83Ij5SRUFETUUudHh0PC9hPg==
+    <BLANKLINE>
+    --ZGiS0Q5IWpPtfppv--
     <BLANKLINE>
 
     >>> print email.payload()

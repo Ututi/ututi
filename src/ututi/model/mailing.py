@@ -178,7 +178,12 @@ class GroupMailingListMessage(ContentItem):
         if footer:
             payload = self.body + footer
             payload = payload.encode('utf-8')
-            message.set_payload(payload, charset='utf-8')
+            if message.is_multipart():
+                original_payload = message.get_payload()[0]
+                original_payload._headers = []
+                original_payload.set_payload(payload, charset='utf-8')
+            else:
+                message.set_payload(payload, charset='utf-8')
 
         raw_send_email(self.mime_message['From'],
                        recipients,
