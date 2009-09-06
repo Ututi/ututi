@@ -144,3 +144,6 @@ def fmt_shortdate(dt):
     from babel import dates
     fmt = "MMM dd, HH:mm"
     return dates.format_datetime(dt, fmt)
+
+def nl2br(text):
+    return '<br/>'.join(text.split("\n"))
