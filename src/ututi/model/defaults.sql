@@ -5,11 +5,17 @@ CREATE TEXT SEARCH DICTIONARY lithuanian (
     AffFile = system_lt_lt
 );;
 
+CREATE TEXT SEARCH DICTIONARY english (
+    TEMPLATE = ispell,
+    DictFile = system_en_gb,
+    AffFile = system_en_gb
+);;
+
 CREATE TEXT SEARCH CONFIGURATION public.lt ( COPY = pg_catalog.english );
 ALTER TEXT SEARCH CONFIGURATION lt
     ALTER MAPPING FOR asciiword, asciihword, hword_asciipart,
                       word, hword, hword_part
-    WITH lithuanian, simple;;
+    WITH lithuanian, english, simple;;
 
 
 create table users (
