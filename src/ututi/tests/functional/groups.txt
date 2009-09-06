@@ -52,7 +52,7 @@ We can add a group at the url /groups/add.
     >>> browser.open('http://localhost/groups/add')
     >>> browser.getControl('Group email address').value = 'test'
     >>> browser.getControl('Group title').value = 'Test group'
-    >>> browser.getControl('Specify the school').value = 'Vilniaus universitetas'
+    >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
     >>> browser.getControl('Group logo').add_file(*make_file('test_logo.png'))
     >>> browser.getControl('Save').click()
 
@@ -92,7 +92,7 @@ However, group ids are checked for uniqueness.
 
     >>> browser.open('http://localhost/groups/add')
     >>> browser.getControl('Group email address').value = 'test'
-    >>> browser.getControl('Specify the school').value = 'Vilniaus universitetas'
+    >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
     >>> browser.getControl('Group title').value = 'Test group'
     >>> browser.getControl('Save').click()
     >>> browser.printQuery("//span[@class='error-message']/text()")

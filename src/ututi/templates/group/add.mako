@@ -36,9 +36,9 @@ ${path_steps()}
      id="group_add_form" enctype="multipart/form-data">
 
   <div class="form-field">
-    <label for="location-0">${_('Specify the school')}</label>
     ${location_widget(3)}
   </div>
+  <br class="clear-left"/>
   <div class="form-field">
     <label for="title">${_('Group title')}</label>
     <input type="text" id="title" name="title" class="line"/>
