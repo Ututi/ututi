@@ -1,7 +1,8 @@
 # -*- mode: org -*-
 
-* TODO Events for group join actions are missing.
-??? Can you be more specific? Events such as 'user x has joined group y' seem to work.
+* Password reset form should reuse the old key if it's already present
+
+* Paieškos view'e, kai useris yra prisiloginęs, nereikia rodyti registracijos formos.
 
 * Folders in file views
 
@@ -44,8 +45,6 @@ Kodėl? Nes useris pamato lauką, ten iškarto įveda vu (hinto pamatyti nes nes
 Tada pamato error page, o ne search view'ą su pranešimu, kad grupė nerasta.
 Kaip alternatyva, kai žmogus įveda neegzistuojantį location tag'ą, jam galėtų pasirodyti error'as 
 prie įvestos formos. Panašiai kaip su neįvestu slaptažodžiu loginantis.
-
-* Paieškos view'e, kai useris yra prisiloginęs, nereikia rodyti registracijos formos.
 
 * Kuriant grupę neįsimena universiteto ir fakulteto iš paieškos užklausos
 Esu naujas naudotojas. Suvedu universitetą ir ieškau grupęs.
