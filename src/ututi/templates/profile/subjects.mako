@@ -79,7 +79,7 @@ ${parent.head_tags()}
 
 <h2>${_('Watched subjects')}</h2>
 
-<ul id="watched-subjects">
+<ul id="watched_subjects">
 % for subject in c.watched_subjects:
     ${watched_subject(subject)}
 % endfor
