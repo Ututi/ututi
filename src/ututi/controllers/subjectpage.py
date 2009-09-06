@@ -35,7 +35,6 @@ def page_action(method):
         subject = Subject.get(location, id)
         if subject is None:
             abort(404)
-
         page = Page.get(page_id)
         if page is None:
             abort(404)
@@ -52,11 +51,23 @@ class SubjectpageController(BaseController):
 
     @page_action
     def index(self, subject, page):
+        c.breadcrumbs = [{'link': subject.url(),
+                          'title': subject.title},
+                         {'link': page.url(),
+                          'title': page.title}]
+
         if page not in subject.pages:
             abort(404)
         return render('page/view.mako')
 
-    def add(self):
+    def add(self, id, tags):
+        location = LocationTag.get(tags)
+        c.subject = Subject.get(location, id)
+        c.breadcrumbs = [{'link': c.subject.url(),
+                          'title': c.subject.title},
+                         {'link': url_for(controller='subjectpage', action='add', id=id, tags=tags),
+                          'title': _('New page')}]
+
         return render('page/add.mako')
 
     @validate(schema=PageForm, form='add')
@@ -75,6 +86,12 @@ class SubjectpageController(BaseController):
     @validate(schema=PageForm, form='edit')
     @ActionProtector("user")
     def edit(self, subject, page):
+        c.subject = subject
+        c.breadcrumbs = [{'link': subject.url(),
+                          'title': subject.title},
+                         {'link': page.url(),
+                          'title': page.title}]
+
         return render('page/edit.mako')
 
     @page_action

@@ -1,16 +1,18 @@
-<%inherit file="/base.mako" />
+<%inherit file="/page/view.mako" />
 
 <%def name="title()">
 ${_('Edit page')}
 </%def>
-
+<a class="back-link" href="${c.page.url()}">${_('Back to %(page_title)s') % dict(page_title=c.page.title)}</a>
 <h1>${_('Edit page')}</h1>
 
 <form method="post" action="${h.url_for(action='update')}"
      id="page_add_form" enctype="multipart/form-data">
   <div class="form-field">
     <label for="page_title">${_('Title')}</label>
-    <input class="line" name="page_title" id="page_title" type="text" value="${c.page.title}" />
+    <div class="input-rounded"><div>
+        <input class="line" name="page_title" id="page_title" type="text" value="${c.page.title}" />
+    </div></div>
   </div>
   <div class="form-field">
     <label for="page_content">${_('Content')}</label>

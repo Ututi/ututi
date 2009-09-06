@@ -79,12 +79,6 @@ class NewSubjectForm(SubjectForm):
 class SubjectController(BaseController, FileViewMixin):
     """A controller for subjects."""
 
-    def __before__(self):
-        c.breadcrumbs = [
-            {'title': _('Subjects'),
-             'link': url_for(controller='subject', action='index')}
-            ]
-
     @ActionProtector("root")
     def index(self):
         c.subjects = meta.Session.query(Subject).all()
