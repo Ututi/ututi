@@ -35,6 +35,7 @@ ${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
           cacheLength: 200,
           max: 10,
           matchCase: false,
+          minChars: 0,
           matchSubset: true,
           matchContains: false,
           mustMatch: true,

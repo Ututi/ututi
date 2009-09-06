@@ -127,7 +127,7 @@ class StructureController(BaseController):
 
         results = []
 
-        for tag in query.all():
+        for tag in query.order_by(LocationTag.title.asc()).all():
             has_children = meta.Session.query(LocationTag).filter(LocationTag.parent==tag).all() != []
             results.append({'id': tag.title_short, 'title': tag.title, 'path': '/'.join(tag.path), 'has_children': has_children})
 

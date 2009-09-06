@@ -275,9 +275,13 @@ class ProfileController(SearchBaseController):
             results = search_query(**search_params)
 
             if c.year is not None:
-                search_params['year'] = c.year
-                results = results.join((Group, SearchItem.content_item_id == Group.id))\
-                    .filter(Group.year == date(int(c.year), 1, 1))
+                try:
+                    c.year = int(c.year)
+                    search_params['year'] = c.year
+                    results = results.join((Group, SearchItem.content_item_id == Group.id))\
+                        .filter(Group.year == date(int(c.year), 1, 1))
+                except:
+                    pass
 
         c.year = c.year and int(c.year) or date.today().year
         c.years = range(date.today().year - 10, date.today().year + 5)

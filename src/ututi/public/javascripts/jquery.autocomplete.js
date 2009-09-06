@@ -162,7 +162,7 @@ $.Autocompleter = function(input, options) {
 		}
 	}).click(function() {
 		// show select when clicking in a focused field
-		if ( hasFocus++ > 1 && !select.visible() ) {
+		if ( hasFocus++ > 0 && !select.visible() ) {
 			onChange(0, true);
 		}
 	}).bind("search", function() {
