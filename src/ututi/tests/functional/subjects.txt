@@ -29,7 +29,18 @@ The changed information should  be visible in the sidebar block.
     >>> browser.printQuery('id("subject_info_portlet_content")//div/text()')
     Some other guy
 
+The subject's portlet contains a link that can be used to start watching the subject.
+    >>> browser.getLink('Watch subject').click()
+    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
+    Close
+    The subject has been added to your watched subjects list.
+
+If we click the link again, we stop watching the subject
 We can add a subject at the url /subject/add
+    >>> browser.getLink('Stop watching the subject').click()
+    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
+    Close
+    The subject has been removed from your watched subjects list.
 
     >>> browser.open('http://localhost/subjects/add')
 
