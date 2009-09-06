@@ -222,14 +222,14 @@ class GroupController(GroupControllerBase, FileViewMixin):
         redirect_to(controller='group', action='home', id=group.group_id)
 
     @group_action
-    @ActionProtector("admin", "moderator")
+    @ActionProtector("admin", "moderator", "member")
     def edit_page(self, group):
         c.breadcrumbs.append(self._actions('home'))
         return render('group/edit_page.mako')
 
     @group_action
     @validate(schema=GroupPageForm, form='edit_page')
-    @ActionProtector("admin", "moderator")
+    @ActionProtector("admin", "moderator", "member")
     def update_page(self, group):
         page_content = self.form_result['page_content']
         if page_content is None:
