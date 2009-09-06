@@ -33,7 +33,7 @@ form {
 }
 
 #add-group {
-  padding-left: 85px;
+  padding-left: 65px;
   background: white url("../images/details/icon_group.png") left top no-repeat;
   margin: 20px 0;
 }
@@ -43,13 +43,13 @@ form {
 }
 
 #browse-subjects {
-  padding-left: 85px;
+  padding-left: 65px;
   background: white url("../images/details/icon_subject.png") left top no-repeat;
   margin: 20px 0;
 }
 
 #edit-profile {
-  padding-left: 85px;
+  padding-left: 65px;
   height: 50px;
   background: white url("../images/details/icon_profile.png") left top no-repeat;
   margin: 20px 0;
