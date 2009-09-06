@@ -22,9 +22,9 @@
     </div>
     <br/>
     %if subject.can_write(c.user):
-      <a class="more" href="${url(controller='subject', action='edit', id=subject.subject_id, tags=c.subject.location_path)}">
-        ${_('Edit')}
-      </a>
+      <a id="subject_edit_link"
+         class="more" 
+         href="${url(controller='subject', action='edit', id=subject.subject_id, tags=c.subject.location_path)}">${_('Edit')}</a>
     %endif
 
     %if c.user:

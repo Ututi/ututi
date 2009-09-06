@@ -20,6 +20,15 @@ The link of the subject leads to its home page.
     >>> browser.printQuery('//h1/text()')
     Matematinė analizė
 
+From there we can edit the subject.
+    >>> browser.open('http://localhost/subject/vu/mat_analize/edit')
+    >>> browser.getControl('Lecturer').value = 'Some other guy'
+    >>> browser.getControl('Save').click()
+
+The changed information should  be visible in the sidebar block.
+    >>> browser.printQuery('id("subject_info_portlet_content")//div/text()')
+    Some other guy
+
 We can add a subject at the url /subject/add
 
     >>> browser.open('http://localhost/subjects/add')
