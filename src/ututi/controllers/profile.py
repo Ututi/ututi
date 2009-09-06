@@ -296,5 +296,5 @@ class ProfileController(SearchBaseController):
         if c.user.logo is not None:
             return serve_image(c.user.logo, width, height)
         else:
-            stream = resource_stream("ututi", "public/images/user_logo_45x60.png").read()
+            stream = resource_stream("ututi", "public/images/user_ico.png").read()
             return serve_image(stream, width, height)
