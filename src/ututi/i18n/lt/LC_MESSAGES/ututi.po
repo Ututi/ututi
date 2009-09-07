@@ -319,7 +319,6 @@ msgid "Location does not exist."
 msgstr "Tokios vietos nėra."
 
 #: src/ututi/model/events.py:28
-#, fuzzy, python-format
 msgid "%(num)s second ago"
 msgid_plural "%(num)s seconds ago"
 msgstr[0] "prieš %(num)s sekundę"
@@ -327,7 +326,6 @@ msgstr[1] "prieš %(num)s sekundes"
 msgstr[2] "prieš %(num)s sekundžių"
 
 #: src/ututi/model/events.py:33
-#, fuzzy, python-format
 msgid "%(num)s minute ago"
 msgid_plural "%(num)s minutes ago"
 msgstr[0] "prieš %(num)s minutę"
@@ -335,7 +333,6 @@ msgstr[1] "prieš %(num)s minutes"
 msgstr[2] "prieš %(num)s minučių"
 
 #: src/ututi/model/events.py:38
-#, fuzzy, python-format
 msgid "%(num)s hour ago"
 msgid_plural "%(num)s hours ago"
 msgstr[0] "prieš %(num)s valandą"
@@ -343,7 +340,6 @@ msgstr[1] "prieš %(num)s valandas"
 msgstr[2] "prieš %(num)s valandų"
 
 #: src/ututi/model/events.py:43
-#, fuzzy, python-format
 msgid "%(num)s day ago"
 msgid_plural "%(num)s days ago"
 msgstr[0] "prieš %(num)s dieną"
@@ -456,7 +452,7 @@ msgid ""
 "Store <em>study materials</em> and pass them on for future generations, "
 "create <em>academic groups</em>       and communicate with groupmates."
 msgstr ""
-"Kelti <em>studijų medžiagą</em>, perduoti tai ateties kartoms, kurti "
+"Kelti <em>studijų medžiagą</em>, perduoti tai ateities kartoms, kurti "
 "<em>akademines grupes</em> ir bendrauti su grupės draugais."
 
 #: src/ututi/template_py/anonymous_index.mako.py:73
@@ -1512,7 +1508,6 @@ msgid "My groups"
 msgstr "Mano grupės"
 
 #: src/ututi/template_py/portlets/user.mako.py:121
-#, fuzzy, python-format
 msgid "%(count)s member"
 msgid_plural "%(count)s members"
 msgstr[0] "%(count)s narys"
@@ -1651,7 +1646,6 @@ msgstr "Filtruoti pagal mokymo įstaigą"
 
 #: src/ututi/template_py/sections/files.mako.py:106
 #: src/ututi/templates/sections/files.mako:253
-#, fuzzy, python-format
 msgid "%(count)s file"
 msgid_plural "%(count)s files"
 msgstr[0] "%(count)s failas"
