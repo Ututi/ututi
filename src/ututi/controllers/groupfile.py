@@ -30,11 +30,7 @@ def group_file_action(method):
         if group is None:
             abort(404)
 
-        try:
-            file = meta.Session.query(File).filter_by(id=file_id).one()
-        except NoResultFound:
-            abort(404)
-
+        file = File.get(file_id)
         if file not in group.files:
             abort(404)
 

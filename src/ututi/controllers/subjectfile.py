@@ -18,7 +18,7 @@ log = logging.getLogger(__name__)
 def set_login_url(method):
     def _set_login_url(self, subject, file):
         c.login_form_url = url(controller='home',
-                               action='index',
+                               action='login',
                                came_from=subject.url(serve_file=file.id))
         return method(self, subject, file)
     return _set_login_url
@@ -32,9 +32,8 @@ def subject_file_action(method):
         if subject is None:
             abort(404)
 
-        try:
-            file = meta.Session.query(File).filter_by(id=file_id).one()
-        except NoResultFound:
+        file = File.get(file_id)
+        if file is None:
             abort(404)
 
         if (file not in subject.files

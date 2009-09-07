@@ -157,11 +157,7 @@ class GroupforumController(GroupControllerBase):
         if message is None:
             abort(404)
 
-        try:
-            file = meta.Session.query(File).filter_by(id=file_id).one()
-        except NoResultFound:
-            abort(404)
-
+        file = File.get(file_id)
         if file is None:
             abort(404)
 

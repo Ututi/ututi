@@ -1072,6 +1072,13 @@ class File(ContentItem):
 
         return hash.hexdigest()
 
+    @classmethod
+    def get(self, file_id):
+        try:
+            return meta.Session.query(File).filter_by(id=file_id).one()
+        except NoResultFound:
+            return None
+
 search_items_table = None
 class SearchItem(object):
     pass

@@ -86,6 +86,9 @@ class SubjectController(BaseController, FileViewMixin):
 
     @subject_action
     def home(self, subject):
+        file_id = request.GET.get('serve_file')
+        file = File.get(file_id)
+        c.serve_file = file
         c.breadcrumbs = [{'link': subject.url(),
                               'title': subject.title}]
         return render('subject/home.mako')

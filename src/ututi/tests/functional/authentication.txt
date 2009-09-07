@@ -104,7 +104,7 @@ Tests for logging in, logging out, access denied and all related things
     >>> browser.open('http://localhost/subject/vu/mat_analize')
     >>> browser.getLink('text.txt').click()
     >>> browser.url
-    'http://localhost/?came_from=%2Fsubject%2Fvu%2Fmat_analize%3Fserve_file%3D3'
+    'http://localhost/login?came_from=%2Fsubject%2Fvu%2Fmat_analize%3Fserve_file%3D3'
 
     >>> form = browser.getForm('login_form')
     >>> form.getControl('Email').value = "user@ututi.lt"

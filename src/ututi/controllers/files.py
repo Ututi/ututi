@@ -88,16 +88,14 @@ class FilesController(BasefilesController):
 
     @ActionProtector('root')
     def get(self, id):
-        try:
-            file = meta.Session.query(File).filter_by(id=id).one()
-        except NoResultFound:
+        file = File.get(id)
+        if file is None:
             abort(404)
         return self._get(file)
 
     @ActionProtector('root')
     def delete(self, id):
-        try:
-            file = meta.Session.query(File).filter_by(id=id).one()
-        except NoResultFound:
+        file = File.get(id)
+        if file is None:
             abort(404)
         return self._delete(file)

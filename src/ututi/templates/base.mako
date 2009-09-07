@@ -251,6 +251,9 @@ ${h.javascript_link('/javascripts/forms.js')|n}
 
         <div class="inside" id="page-content">
           <div id="flash-messages">
+            % if c.serve_file:
+            <iframe style="display: none;" src="${c.serve_file.url()}"> </iframe>
+            % endif
             <% messages = h.flash.pop_messages() %>
             % for message in messages:
             <div class="flash-message"><span class="close-link hide-parent">${_('Close')}</span><span>${message}</span></div>
