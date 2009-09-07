@@ -1143,7 +1143,7 @@ msgstr "Grupės nariai"
 #: src/ututi/template_py/group/home_public.mako.py:74
 #: src/ututi/templates/group/home_public.mako:28
 msgid "Join the group"
-msgstr "Akademinės grupės"
+msgstr "Prisijungti prie grupės"
 
 #: src/ututi/template_py/group/members.mako.py:49
 #: src/ututi/template_py/group/members_admin.mako.py:45
