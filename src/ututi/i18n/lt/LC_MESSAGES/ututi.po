@@ -204,7 +204,7 @@ msgstr "Neteisingas el. pašto adresas ar slaptažodis!"
 msgid ""
 "You seem to have entered your username and password wrong, please try "
 "again!"
-msgstr "Jūs įvedėte netesingą vartotojo vardą ar slaptažody, bandykite dar kartą!"
+msgstr "Jūs įvedėte netesingą naudotojo vardą ar slaptažodį, bandykite dar kartą!"
 
 #: src/ututi/controllers/home.py:160
 msgid "Invalid email!"
