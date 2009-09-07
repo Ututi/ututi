@@ -32,6 +32,18 @@ screen:
     >>> browser.printQuery("id('search-results')//a/text()")
     Moderatoriai
 
+There was a bug, where searching without anything specified and then pressing search again in the group find view
+would cause a crash. Is it still there?
+    >>> browser.open('http://localhost/welcome')
+    >>> browser.getControl(name='location-0').value = ''
+    >>> browser.getControl(name='year').value = ''
+    >>> browser.getControl('Search', index=1).click()
+
+    >>> browser.getControl('Search', index=1).click()
+    >>> print browser.url
+    http://localhost/findgroup
+    >>> browser.printQuery("//div[@class='search-item group-item']/a/text()")
+    Moderatoriai
 
 An email, requesting the confirmation of the email address entered is sent:
 

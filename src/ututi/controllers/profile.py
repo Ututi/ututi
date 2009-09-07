@@ -3,7 +3,7 @@ import logging
 
 from pkg_resources import resource_stream
 
-from sqlalchemy.sql.expression import desc, or_
+from sqlalchemy.sql.expression import desc, or_, asc, func
 from formencode import Schema, validators
 from webhelpers import paginate
 
@@ -250,7 +250,7 @@ class ProfileController(SearchBaseController):
             tags = self.form_result.get('tagsitem', None)
         elif 'tags' in self.form_result:
             tags = self.form_result.get('tags', [])
-            if isinstance(tags, str):
+            if isinstance(tags, str) or isinstance(tags, unicode):
                 tags = tags.split(', ')
 
         c.tags = tags
@@ -279,7 +279,7 @@ class ProfileController(SearchBaseController):
                     c.year = int(c.year)
                     search_params['year'] = c.year
                     results = results.join((Group, SearchItem.content_item_id == Group.id))\
-                        .filter(Group.year == date(int(c.year), 1, 1))
+                        .order_by(asc(func.abs(Group.year - date(int(c.year), 1, 1))))
                 except:
                     pass
 
