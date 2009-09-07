@@ -3,6 +3,7 @@ import logging
 
 from pkg_resources import resource_stream
 
+from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql.expression import desc, or_, asc, func
 from formencode import Schema, validators
 from webhelpers import paginate
@@ -145,12 +146,16 @@ class ProfileController(SearchBaseController):
             redirect_to(controller='home', action='index')
 
     def confirm_user_email(self, key):
-        email = meta.Session.query(Email).filter_by(confirmation_key=key).first()
-        email.confirmed = True
-        email.confirmation_key = ''
-        meta.Session.commit()
-        h.flash(_("Your email %s was confirmed. Thank You." % email.email))
-        redirect_to(controller='profile', action='index')
+        try:
+            email = meta.Session.query(Email).filter_by(confirmation_key=key).one()
+            email.confirmed = True
+            email.confirmation_key = ''
+            meta.Session.commit()
+            h.flash(_("Your email %s was confirmed. Thank You." % email.email))
+        except NoResultFound:
+            h.flash(_("Could not confirm email - invalid confirmation key."))
+
+        redirect_to(url(controller='profile', action='index'))
 
     @validate(schema=SearchSubmit, form='subjects', post_only = False, on_get = True)
     @ActionProtector("user")

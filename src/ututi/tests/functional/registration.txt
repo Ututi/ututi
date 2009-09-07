@@ -76,7 +76,14 @@ An email, requesting the confirmation of the email address entered is sent:
     Close
     Your email jonas@example.com was confirmed. Thank You.
 
+What if we clicked the link again?
+     >>> browser.open(urls[0])
+     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
+     Close
+     Could not confirm email - invalid confirmation key.
 
+     >>> print browser.url
+     http://localhost/profile
 
 We have been logged in after signing up. Now let's log out and test more unfortunate
 scenarios:
