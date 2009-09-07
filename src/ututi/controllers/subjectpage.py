@@ -28,6 +28,12 @@ class PageForm(Schema):
 
 def page_action(method):
     def _page_action(self, id, tags, page_id):
+        try:
+            page_id = int(page_id)
+        except ValueError:
+            abort(404)
+
+
         location = LocationTag.get(tags)
         if location is None:
             abort(404)

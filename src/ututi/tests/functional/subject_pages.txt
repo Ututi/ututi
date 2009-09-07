@@ -82,3 +82,10 @@ We should see the list of pages.
         </div>
       </div>
     </div>
+
+Confirming bug fix: requesting page with a non-integer as its id was resulting in a crash.
+    >>> browser.open('http://localhost/subject/vu/mat_analize/page/abrakadabra')
+    Traceback (most recent call last):
+    ...
+    HTTPError: HTTP Error 404: Not Found
+
