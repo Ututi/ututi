@@ -36,7 +36,7 @@ We should get redirected to the index view of the page we just created.
 Let's edit the page now.
 
     >>> browser.getLink('Edit').click()
-    >>> browser.getControl('Content').value = "Being Awesome is very easy!"
+    >>> browser.getControl('Content').value = "<script>Yeah!</script>Being Awesome is very easy!"
     >>> browser.getControl('Save').click()
 
 And see how it works.
@@ -72,7 +72,7 @@ We should see the list of pages.
           <span class="small" style="margin-left: 10px;">...</span>
           <a style="font-size: 0.9em;" href="/user/1">Adminas Adminovix</a>
           <div class="description">
-          Being Awesome is very easy!
+          Yeah! Being Awesome is very easy!
         </div>
           <div class="item-tags">
             <a class="tag" title="Vilniaus universitetas" href="/profile/search?tags=Vilniaus+universitetas">

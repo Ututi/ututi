@@ -27,5 +27,5 @@
 </div>
 <br/>
 <div id="page_content">
-  ${c.page.content|n}
+  ${h.html_cleanup(c.page.content)|n}
 </div>

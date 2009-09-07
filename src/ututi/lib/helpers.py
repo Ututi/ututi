@@ -147,3 +147,8 @@ def fmt_shortdate(dt):
 
 def nl2br(text):
     return '<br/>'.join(text.split("\n"))
+
+
+def html_cleanup(*args, **kwargs):
+    from ututi.lib.validators import html_cleanup
+    return html_cleanup(*args, **kwargs)
