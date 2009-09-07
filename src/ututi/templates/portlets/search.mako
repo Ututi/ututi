@@ -14,7 +14,7 @@
       <form method="post" action="${target}" id="search_form_portlet">
         %if 'obj_type' in parts:
         <%
-           types = [('*', _('Everywhere')), ('group', _('Groups')), ('subject', _('Subjects'))]
+           types = [('*', _('Everywhere')), ('group', _('Groups')), ('subject', _('in-Subjects'))]
            %>
         <div class="search-type js-alternatives">
           <div class="js">

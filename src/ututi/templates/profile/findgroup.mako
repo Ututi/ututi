@@ -17,7 +17,7 @@ ${_('Search')}
     <div class="form-field">
       %if 'obj_type' in parts:
       <select name="obj_type">
-        %for value, title in [(u'*', _('Everywhere')), (u'group', _('Groups')), (u'subject', _('Subjects')), (u'page', _('Pages'))]:
+        %for value, title in [(u'*', _('Everywhere')), (u'group', _('Groups')), (u'subject', _('in-Subjects')), (u'page', _('Pages'))]:
         %if value == obj_type:
         <option value="${value}" selected="selected">${title}</option>
         %else:

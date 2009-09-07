@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-09-07 01:13+0300\n"
+"PO-Revision-Date: 2009-09-07 02:49+0300\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -68,14 +68,9 @@ msgstr "Nariai"
 
 #: src/ututi/controllers/group.py:184 src/ututi/template_py/subjects.mako.py:38
 #: src/ututi/template_py/home/findgroup.mako.py:103
-#: src/ututi/template_py/portlets/search.mako.py:95
-#: src/ututi/template_py/profile/findgroup.mako.py:103
-#: src/ututi/template_py/search/index.mako.py:204
 #: src/ututi/templates/subjects.mako:7
-#: src/ututi/templates/profile/findgroup.mako:20
-#: src/ututi/templates/search/index.mako:32
 msgid "Subjects"
-msgstr "dalykuose"
+msgstr "Dalykai"
 
 #: src/ututi/controllers/group.py:203
 msgid ""
@@ -264,7 +259,7 @@ msgstr "Profilis"
 #: src/ututi/templates/profile/findgroup.mako:53
 #: src/ututi/templates/profile/findgroup.mako:87
 #: src/ututi/templates/profile/search.mako:22
-#: src/ututi/templates/profile/welcome.mako:49
+#: src/ututi/templates/profile/welcome.mako:50
 #: src/ututi/templates/search/index.mako:18
 #: src/ututi/templates/search/index.mako:67
 #: src/ututi/templates/search/index.mako:107
@@ -324,6 +319,7 @@ msgid "Location does not exist."
 msgstr "Tokios vietos nėra."
 
 #: src/ututi/model/events.py:28
+#, fuzzy, python-format
 msgid "%(num)s second ago"
 msgid_plural "%(num)s seconds ago"
 msgstr[0] "prieš %(num)s sekundę"
@@ -331,6 +327,7 @@ msgstr[1] "prieš %(num)s sekundes"
 msgstr[2] "prieš %(num)s sekundžių"
 
 #: src/ututi/model/events.py:33
+#, fuzzy, python-format
 msgid "%(num)s minute ago"
 msgid_plural "%(num)s minutes ago"
 msgstr[0] "prieš %(num)s minutę"
@@ -338,6 +335,7 @@ msgstr[1] "prieš %(num)s minutes"
 msgstr[2] "prieš %(num)s minučių"
 
 #: src/ututi/model/events.py:38
+#, fuzzy, python-format
 msgid "%(num)s hour ago"
 msgid_plural "%(num)s hours ago"
 msgstr[0] "prieš %(num)s valandą"
@@ -345,6 +343,7 @@ msgstr[1] "prieš %(num)s valandas"
 msgstr[2] "prieš %(num)s valandų"
 
 #: src/ututi/model/events.py:43
+#, fuzzy, python-format
 msgid "%(num)s day ago"
 msgid_plural "%(num)s days ago"
 msgstr[0] "prieš %(num)s dieną"
@@ -976,6 +975,7 @@ msgstr "Žinučių nėra"
 
 #: src/ututi/template_py/forum/index.mako.py:79
 #: src/ututi/templates/forum/index.mako:44
+#, fuzzy, python-format
 msgid "%(count)s reply"
 msgid_plural "%(count)s replies"
 msgstr[0] "%(count)s atsakymas"
@@ -1378,13 +1378,13 @@ msgstr "Įstojimo metai:"
 
 #: src/ututi/template_py/home/welcome.mako.py:90
 #: src/ututi/template_py/profile/welcome.mako.py:90
-#: src/ututi/templates/profile/welcome.mako:66
+#: src/ututi/templates/profile/welcome.mako:67
 msgid "Review and edit your profile"
 msgstr "Gražus ir tvarkingas profilis"
 
 #: src/ututi/template_py/home/welcome.mako.py:93
 #: src/ututi/template_py/profile/welcome.mako.py:93
-#: src/ututi/templates/profile/welcome.mako:67
+#: src/ututi/templates/profile/welcome.mako:68
 msgid ""
 "Fill in your information, upload your photo so that others can recognize "
 "you."
@@ -1398,7 +1398,7 @@ msgstr ""
 #: src/ututi/template_py/profile/welcome.mako.py:98
 #: src/ututi/template_py/profile/welcome.mako.py:100
 #: src/ututi/templates/profile/edit.mako:59
-#: src/ututi/templates/profile/welcome.mako:69
+#: src/ututi/templates/profile/welcome.mako:70
 msgid "Edit your profile"
 msgstr "redaguoti profilį"
 
@@ -1478,6 +1478,14 @@ msgstr "nariai"
 msgid "Edit group settings"
 msgstr "Keisti grupės nustatymus"
 
+#: src/ututi/template_py/portlets/search.mako.py:95
+#: src/ututi/template_py/profile/findgroup.mako.py:103
+#: src/ututi/template_py/search/index.mako.py:204
+#: src/ututi/templates/profile/findgroup.mako:20
+#: src/ututi/templates/search/index.mako:32
+msgid "in-Subjects"
+msgstr "dalykuose"
+
 #: src/ututi/template_py/portlets/subject.mako.py:65
 msgid "Subject information"
 msgstr "Informacija apie dalyką"
@@ -1504,6 +1512,7 @@ msgid "My groups"
 msgstr "Mano grupės"
 
 #: src/ututi/template_py/portlets/user.mako.py:121
+#, fuzzy, python-format
 msgid "%(count)s member"
 msgid_plural "%(count)s members"
 msgstr[0] "%(count)s narys"
@@ -1600,12 +1609,12 @@ msgid "entrance year"
 msgstr "Įstojimo metai"
 
 #: src/ututi/template_py/profile/welcome.mako.py:81
-#: src/ututi/templates/profile/welcome.mako:57
+#: src/ututi/templates/profile/welcome.mako:58
 msgid "Browse subjects"
 msgstr "Studijuojami dalykai"
 
 #: src/ututi/template_py/profile/welcome.mako.py:84
-#: src/ututi/templates/profile/welcome.mako:59
+#: src/ututi/templates/profile/welcome.mako:60
 #, python-format
 msgid ""
 "You can browse the %(link_to_list_of_subjects)s, look for information and"
@@ -1617,17 +1626,18 @@ msgstr ""
 "niekas neliktų nepastebėta."
 
 #: src/ututi/template_py/profile/welcome.mako.py:85
-#: src/ututi/templates/profile/welcome.mako:60
+#: src/ututi/templates/profile/welcome.mako:61
 msgid "list of subjects"
 msgstr "dalykų katalogus"
 
 #: src/ututi/template_py/profile/welcome.mako.py:86
-#: src/ututi/templates/profile/welcome.mako:61
+#: src/ututi/templates/profile/welcome.mako:62
 msgid "select watched subjects"
 msgstr "stebėti studijuojamus dalykus"
 
 #: src/ututi/template_py/search/index.mako.py:130
 #: src/ututi/templates/search/index.mako:94
+#, fuzzy, python-format
 msgid "found %(count)s result"
 msgid_plural "found %(count)s results"
 msgstr[0] "rasta %(count)s rezultatas"
@@ -1641,6 +1651,7 @@ msgstr "Filtruoti pagal mokymo įstaigą"
 
 #: src/ututi/template_py/sections/files.mako.py:106
 #: src/ututi/templates/sections/files.mako:253
+#, fuzzy, python-format
 msgid "%(count)s file"
 msgid_plural "%(count)s files"
 msgstr[0] "%(count)s failas"
@@ -1768,7 +1779,4 @@ msgstr "Filialas"
 #: src/ututi/templates/persons.mako:7
 msgid "Hello"
 msgstr "Labas"
-
-#~ msgid "Specify the school"
-#~ msgstr "Nurodyti mokymo įstaigą"
 

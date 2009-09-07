@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-09-07 00:55+0300\n"
+"PO-Revision-Date: 2009-09-07 02:49+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -67,12 +67,7 @@ msgstr ""
 
 #: src/ututi/controllers/group.py:184 src/ututi/template_py/subjects.mako.py:38
 #: src/ututi/template_py/home/findgroup.mako.py:103
-#: src/ututi/template_py/portlets/search.mako.py:95
-#: src/ututi/template_py/profile/findgroup.mako.py:103
-#: src/ututi/template_py/search/index.mako.py:204
 #: src/ututi/templates/subjects.mako:7
-#: src/ututi/templates/profile/findgroup.mako:20
-#: src/ututi/templates/search/index.mako:32
 msgid "Subjects"
 msgstr ""
 
@@ -259,7 +254,7 @@ msgstr ""
 #: src/ututi/templates/profile/findgroup.mako:53
 #: src/ututi/templates/profile/findgroup.mako:87
 #: src/ututi/templates/profile/search.mako:22
-#: src/ututi/templates/profile/welcome.mako:49
+#: src/ututi/templates/profile/welcome.mako:50
 #: src/ututi/templates/search/index.mako:18
 #: src/ututi/templates/search/index.mako:67
 #: src/ututi/templates/search/index.mako:107
@@ -1359,13 +1354,13 @@ msgstr ""
 
 #: src/ututi/template_py/home/welcome.mako.py:90
 #: src/ututi/template_py/profile/welcome.mako.py:90
-#: src/ututi/templates/profile/welcome.mako:66
+#: src/ututi/templates/profile/welcome.mako:67
 msgid "Review and edit your profile"
 msgstr ""
 
 #: src/ututi/template_py/home/welcome.mako.py:93
 #: src/ututi/template_py/profile/welcome.mako.py:93
-#: src/ututi/templates/profile/welcome.mako:67
+#: src/ututi/templates/profile/welcome.mako:68
 msgid ""
 "Fill in your information, upload your photo so that others can recognize "
 "you."
@@ -1377,7 +1372,7 @@ msgstr ""
 #: src/ututi/template_py/profile/welcome.mako.py:98
 #: src/ututi/template_py/profile/welcome.mako.py:100
 #: src/ututi/templates/profile/edit.mako:59
-#: src/ututi/templates/profile/welcome.mako:69
+#: src/ututi/templates/profile/welcome.mako:70
 msgid "Edit your profile"
 msgstr ""
 
@@ -1456,6 +1451,14 @@ msgstr ""
 #: src/ututi/template_py/portlets/group.mako.py:449
 msgid "Edit group settings"
 msgstr ""
+
+#: src/ututi/template_py/portlets/search.mako.py:95
+#: src/ututi/template_py/profile/findgroup.mako.py:103
+#: src/ututi/template_py/search/index.mako.py:204
+#: src/ututi/templates/profile/findgroup.mako:20
+#: src/ututi/templates/search/index.mako:32
+msgid "in-Subjects"
+msgstr "Subjects"
 
 #: src/ututi/template_py/portlets/subject.mako.py:65
 msgid "Subject information"
@@ -1579,12 +1582,12 @@ msgid "entrance year"
 msgstr ""
 
 #: src/ututi/template_py/profile/welcome.mako.py:81
-#: src/ututi/templates/profile/welcome.mako:57
+#: src/ututi/templates/profile/welcome.mako:58
 msgid "Browse subjects"
 msgstr ""
 
 #: src/ututi/template_py/profile/welcome.mako.py:84
-#: src/ututi/templates/profile/welcome.mako:59
+#: src/ututi/templates/profile/welcome.mako:60
 #, python-format
 msgid ""
 "You can browse the %(link_to_list_of_subjects)s, look for information and"
@@ -1593,12 +1596,12 @@ msgid ""
 msgstr ""
 
 #: src/ututi/template_py/profile/welcome.mako.py:85
-#: src/ututi/templates/profile/welcome.mako:60
+#: src/ututi/templates/profile/welcome.mako:61
 msgid "list of subjects"
 msgstr ""
 
 #: src/ututi/template_py/profile/welcome.mako.py:86
-#: src/ututi/templates/profile/welcome.mako:61
+#: src/ututi/templates/profile/welcome.mako:62
 msgid "select watched subjects"
 msgstr ""
 
@@ -1618,8 +1621,6 @@ msgstr ""
 #: src/ututi/template_py/sections/files.mako.py:106
 #: src/ututi/templates/sections/files.mako:253
 #, fuzzy, python-format
-#| msgid "%(count)s reply"
-#| msgid_plural "%(count)s replies"
 msgid "%(count)s file"
 msgid_plural "%(count)s files"
 msgstr[0] ""
@@ -1746,7 +1747,4 @@ msgstr ""
 #: src/ututi/templates/persons.mako:7
 msgid "Hello"
 msgstr ""
-
-#~ msgid "Specify the school"
-#~ msgstr ""
 
