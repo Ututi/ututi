@@ -1738,7 +1738,7 @@ msgstr "Dalyko failai"
 #: src/ututi/template_py/user/index.mako.py:47
 #: src/ututi/templates/user/index.mako:18
 msgid "Latest actions"
-msgstr "Paskutiniai pasikeitimai"
+msgstr "Naudotojo darbai"
 
 #: src/ututi/template_py/user/index.mako.py:68
 #: src/ututi/templates/user/index.mako:28
