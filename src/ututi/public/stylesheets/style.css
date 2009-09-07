@@ -103,7 +103,7 @@ label {
 /* text colors */
 h1, h2, h3, h4 {
   color: #1a1a1a;
-  margin: 0.1em 0;
+  margin: 0.1em 0 0 0.3em;
 }
 
 .tag {
@@ -359,8 +359,9 @@ ul.bullets_large li {
   color: #666666;
   font-weight: normal;
   font-family: Verdana, Arial, Helvetica, sans-serif;
-  font-size: 1.1em;
+  font-size: 0.9em;
   text-align: left;
+  text-transform: uppercase;
 }
 
 .sidebar-block .portlet-link {
@@ -946,7 +947,7 @@ div#pager {
 .search-tags label {
   text-transform: uppercase;
   color: #888;
-  font-size: 1.2em;
+  font-size: 0.9em;
   padding-left: 25px;
   background: transparent url("../images/details/icon_tag.png") left center no-repeat;
 }
@@ -1019,13 +1020,17 @@ h3.search-results-title {
 }
 
 h3.search-results-title span {
- float: left;
+  float: left;
+  color: #808080;
+  font-size: 0.8em;
+  font-weight: normal;
 }
 
 h3.search-results-title span.result-count {
   float: right;
-  color: #666;
+  color: #808080;
   font-size: 0.8em;
+  font-weight: normal;
 }
 
 div#search-results div.search-item {
@@ -1112,6 +1117,11 @@ div.user-logo-link div {
 /* end js alternatives */
 
 /* events listing */
+ul#event_list {
+  margin-top: 15px;
+  padding-left: 25px;
+}
+
 ul#event_list li {
   list-style-type: none;
   padding: 0 0 5px 20px;
