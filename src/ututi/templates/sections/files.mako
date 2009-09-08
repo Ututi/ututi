@@ -203,7 +203,7 @@ $(document).ready(function(){
 
 <%def name="folder_button(folder, section_id, fid)">
         % if folder.title == '':
-      <li class="alternative upload show" id="file_upload_button-${section_id}-${fid}"><div>Here</div></li>
+      <li class="alternative upload show" id="file_upload_button-${section_id}-${fid}"><div>${_('Here')}</div></li>
         % else:
       <li class="alternative upload show" id="file_upload_button-${section_id}-${fid}"><div>${folder.title}</div></li>
         % endif
@@ -268,7 +268,7 @@ $(document).ready(function(){
             <ul class="file_upload_dropdown click2show" id="file_upload_dropdown-${section_id}">
               <li class="active click">
                 <div>
-                  Upload file
+                  ${_('Upload file')}
                 </div>
               </li>
               % for fid, folder in enumerate(obj.folders):
