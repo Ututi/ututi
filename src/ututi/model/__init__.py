@@ -324,7 +324,7 @@ def generate_salt():
 def generate_password(password):
     """Generate a hash for a given password."""
     salt = generate_salt()
-    password = str(password)
+    password = password.encode('utf-8')
     return b2a_base64(sha.new(password + salt).digest() + salt)[:-1]
 
 
