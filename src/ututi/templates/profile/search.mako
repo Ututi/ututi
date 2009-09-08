@@ -22,19 +22,18 @@ ${parent.head_tags()}
 <h1>${_('Search')}</h1>
 ${search_form(c.text, c.obj_type, c.tags, parts=['obj_type', 'text', 'tags'], target=url(controller='profile', action='search'))}
 
-%if c.results:
-${search_results(c.results)}
-%endif
+%if c.searched:
+  ${search_results(c.results)}
 
-
-%if c.obj_type == 'group':
+  %if c.obj_type == 'group':
   <div class="create_item">
-    <span class="small">${_('Did not find what you were looking for?')}</span>
+    <span class="notice">${_('Did not find what you were looking for?')}</span>
     ${h.button_to(_('Create a new group'), url(controller='group', action='add'))}
   </div>
-%else:
+  %else:
   <div class="create_item">
-    <span class="small">${_('Did not find what you were looking for?')}</span>
+    <span class="notice">${_('Did not find what you were looking for?')}</span>
     ${h.button_to(_('Create a new subject'), url(controller='subject', action='add'))}
   </div>
+  %endif
 %endif

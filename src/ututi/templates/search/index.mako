@@ -93,11 +93,16 @@ ${h.javascript_link('/javascripts/search.js')|n}
   <span>results:</span>
   <span class="result-count">(${ungettext("found %(count)s result", "found %(count)s results", results.item_count) % dict(count = results.item_count)})</span>
 </h3>
-<div id="search-results">
-  %for item in results:
-  ${display(item)}
-  %endfor
-</div>
+%if c.results.item_count > 0:
+  <div id="search-results">
+    %for item in results:
+      ${display(item)}
+    %endfor
+  </div>
+%else:
+  <div class="notice">${_('No results found.')}</div>
+  <br/>
+%endif
 
 %if len(results):
 <div id="pager">${results.pager(format='~3~') }</div>
@@ -107,6 +112,6 @@ ${h.javascript_link('/javascripts/search.js')|n}
 <h1>${_('Search')}</h1>
 ${search_form(c.text, c.obj_type, c.tags, parts=['obj_type', 'text', 'tags'])}
 
-%if c.results:
+%if c.searched :
 ${search_results(c.results)}
 %endif

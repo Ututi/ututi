@@ -45,6 +45,7 @@ class SearchBaseController(BaseController):
                 page=int(request.params.get('page', 1)),
                 items_per_page = 20,
                 **search_params)
+            c.searched = True
 
 class SearchController(SearchBaseController):
 
