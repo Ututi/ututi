@@ -686,9 +686,6 @@ subjects_table = None
 subject_files_table = None
 class Subject(ContentItem, FolderMixin):
 
-    def can_write(self, user=None):
-        return check_crowds(['owner', 'root'], context=self, user=user)
-
     @classmethod
     def get(cls, location, id):
         try:

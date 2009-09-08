@@ -21,13 +21,12 @@
       </div>
     </div>
     <br/>
-    %if subject.can_write(c.user):
+
+    %if c.user:
       <a id="subject_edit_link"
          class="more"
          href="${url(controller='subject', action='edit', id=subject.subject_id, tags=c.subject.location_path)}">${_('Edit')}</a>
-    %endif
 
-    %if c.user:
       <%
          cls = ''
          text = _('Watch subject')
