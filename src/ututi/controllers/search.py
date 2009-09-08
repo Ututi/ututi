@@ -3,8 +3,9 @@ import logging
 from formencode import Schema, variabledecode
 from webhelpers import paginate
 
+from pylons.controllers.util import redirect_to
 from pylons.decorators import validate
-from pylons import request, c
+from pylons import request, c, url
 
 from ututi.lib.base import BaseController, render
 from ututi.lib.search import search_query
@@ -49,6 +50,9 @@ class SearchController(SearchBaseController):
 
     @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
     def index(self):
+        if c.user is not None and self.form_result == {}:
+            redirect_to(url(controller='profile', action='search'))
+
         self._search()
         return render('/search/index.mako')
 

@@ -63,7 +63,7 @@ Tests for logging in, logging out, access denied and all related things
     >>> form.getControl('Login').click()
 
     >>> browser.url
-    'http://localhost/search'
+    'http://localhost/profile/search'
 
     >>> browser.getLink('log out').click()
 
@@ -87,7 +87,7 @@ Tests for logging in, logging out, access denied and all related things
     >>> form.getControl('Login').click()
 
     >>> browser.url
-    'http://localhost/search'
+    'http://localhost/profile/search'
 
     >>> browser.getLink('log out').click()
 
