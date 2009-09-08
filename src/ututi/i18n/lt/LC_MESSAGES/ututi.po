@@ -1714,7 +1714,7 @@ msgstr "Naudojimosi sistema taisyklės"
 
 #: src/ututi/templates_py/portlets/group.mako.py:73
 msgid "Group messages"
-msgstr "Grupės pranešimai"
+msgstr "Grupės forumas"
 
 #: src/ututi/templates_py/portlets/group.mako.py:108
 #: src/ututi/templates_py/portlets/group.mako.py:110
