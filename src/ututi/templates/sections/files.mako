@@ -220,7 +220,7 @@ $(document).ready(function(){
           <h4>
             ${folder.title}
             % if folder.can_write():
-              <a href="#" id="delete_folder_button-${section_id}-${fid}" class="delete_folder_button">${_("(Delete)")}</a>
+              <a href="${folder.parent.url(action='delete_folder', folder=folder.title)}" id="delete_folder_button-${section_id}-${fid}" class="delete_folder_button">${_("(Delete)")}</a>
             % endif
           </h4>
         % endif
@@ -257,9 +257,9 @@ $(document).ready(function(){
       <input type="hidden" id="file_upload_url-${section_id}"
              value="${obj.url(action='upload_file')}" />
       <input type="hidden" id="create_folder_url-${section_id}"
-             value="${obj.url(action='create_folder')}" />
+             value="${obj.url(action='js_create_folder')}" />
       <input type="hidden" id="delete_folder_url-${section_id}"
-             value="${obj.url(action='delete_folder')}" />
+             value="${obj.url(action='js_delete_folder')}" />
       <input type="hidden" class="id" value="${obj.id}" />
       <div class="controls">
         <div id="file_upload_progress-${section_id}" class="file_upload_progress">

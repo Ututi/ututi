@@ -461,8 +461,9 @@ class Email(object):
 
 class Folder(list):
 
-    def __init__(self, title):
+    def __init__(self, title, parent):
         self.title = title
+        self.parent = parent
 
     def can_write(self, user=None):
         can_write = True
@@ -475,9 +476,9 @@ class FolderMixin(object):
 
     @property
     def folders_dict(self):
-        result = {'': Folder('')}
+        result = {'': Folder('', parent=self)}
         for file in self.files:
-            result.setdefault(file.folder, Folder(file.folder))
+            result.setdefault(file.folder, Folder(file.folder, parent=self))
             if not file.isNullFile():
                 result[file.folder].append(file)
         return result

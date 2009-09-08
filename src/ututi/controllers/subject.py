@@ -192,9 +192,21 @@ class SubjectController(BaseController, FileViewMixin):
     @subject_action
     @ActionProtector("user")
     def create_folder(self, subject):
-        return self._create_folder(subject)
+        self._create_folder(subject)
+        redirect_to(request.referrer)
 
     @subject_action
     @ActionProtector("moderator", "root")
     def delete_folder(self, subject):
+        self._delete_folder(subject)
+        redirect_to(request.referrer)
+
+    @subject_action
+    @ActionProtector("user")
+    def js_create_folder(self, subject):
+        return self._create_folder(subject)
+
+    @subject_action
+    @ActionProtector("moderator", "root")
+    def js_delete_folder(self, subject):
         return self._delete_folder(subject)

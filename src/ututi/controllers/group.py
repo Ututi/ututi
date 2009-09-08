@@ -350,11 +350,23 @@ class GroupController(GroupControllerBase, FileViewMixin):
     @group_action
     @ActionProtector("member", "admin", "moderator")
     def create_folder(self, group):
-        return self._create_folder(group)
+        self._create_folder(group)
+        redirect_to(request.referrer)
 
     @group_action
     @ActionProtector("admin", "moderator")
     def delete_folder(self, group):
+        self._delete_folder(group)
+        redirect_to(request.referrer)
+
+    @group_action
+    @ActionProtector("member", "admin", "moderator")
+    def js_create_folder(self, group):
+        return self._create_folder(group)
+
+    @group_action
+    @ActionProtector("admin", "moderator")
+    def js_delete_folder(self, group):
         return self._delete_folder(group)
 
     def _getSubject(self):

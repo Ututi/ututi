@@ -9,8 +9,10 @@ from mimetools import choose_boundary
 class FileViewMixin(object):
 
     def _create_folder(self, obj):
-        folder_name = request.POST['folder']
-        section_id = request.POST['section_id']
+        folder_name = request.params['folder']
+        if not folder_name:
+            return None
+        section_id = request.params.get('section_id', '')
         obj.files.append(File.makeNullFile(folder_name))
         meta.Session.commit()
         for f in obj.folders:
@@ -23,7 +25,7 @@ class FileViewMixin(object):
                                 folder=folder, section_id=section_id, fid=fid))
 
     def _delete_folder(self, obj):
-        folder_name = request.POST['folder']
+        folder_name = request.params['folder']
         for file in list(obj.files):
             if file.folder == folder_name:
                 obj.files.remove(file)
@@ -31,8 +33,8 @@ class FileViewMixin(object):
         meta.Session.commit()
 
     def _upload_file(self, obj):
-        file = request.POST['attachment']
-        folder = request.POST['folder']
+        file = request.params['attachment']
+        folder = request.params['folder']
         if file is not None and file != '':
             f = File(file.filename,
                      file.filename,

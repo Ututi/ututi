@@ -112,6 +112,12 @@ def make_map():
     map.connect('/subject/*tags/{id}/delete_folder',
                 controller='subject', action='delete_folder')
 
+    map.connect('/subject/*tags/{id}/js_create_folder',
+                controller='subject', action='js_create_folder')
+
+    map.connect('/subject/*tags/{id}/js_delete_folder',
+                controller='subject', action='js_delete_folder')
+
     map.connect('/subject/*tags/{id}/upload_file',
                 controller='subject', action='upload_file')
 
