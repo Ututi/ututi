@@ -69,7 +69,10 @@ $(document).ready(function(){
     function setUpFolder(i, btn) {
       var button = $(btn);
 
-      [ign, i1, i2] = button[0].id.split('-');
+      var ids = button[0].id.split('-');
+      var ign = ids[0];
+      var i1 = ids[1];
+      var i2 = ids[2];
       var progress_area = $('#file_upload_progress-' + i1);
       var folder_name_input_id = '#file_folder_name-' + i1 + '-' + i2;
       var folder = $(folder_name_input_id).val();
