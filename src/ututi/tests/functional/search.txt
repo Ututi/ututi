@@ -8,6 +8,7 @@ A very basic test for search.
     >>> form = browser.getForm('search_form')
 
 Let's fill out the search form.
+
     >>> form.getControl(name="text").value = "moderatoriai"
     >>> form.getControl('Search').click()
 
