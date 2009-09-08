@@ -100,6 +100,9 @@ class SubjectController(BaseController, FileViewMixin):
     @validate(schema=NewSubjectForm, form='add')
     @ActionProtector("user")
     def create(self):
+        if not hasattr(self, 'form_result'):
+            redirect_to(controller='subject', action='add')
+
         title = self.form_result['title']
         id = self.form_result['id'].lower()
         lecturer = self.form_result['lecturer']

@@ -88,3 +88,9 @@ You can import more subjects using the admin interface.
     Matematinė analizė
     Test subject
     Imported subject
+
+Bug fix confirmation: going to subjects/create directly (e.g. refreshing a failed subject form)
+would cause a crash
+    >>> browser.open('http://localhost/subjects/create')
+    >>> print browser.url
+    http://localhost/subjects/add
