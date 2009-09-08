@@ -119,14 +119,18 @@
     <%def name="header()">
       ${_('Group messages')}
     </%def>
-    <table id="group_latest_messages">
-      %for message in group.all_messages[:5]:
-      <tr>
-        <td class="time">${h.fmt_shortdate(message.sent)}</td>
-        <td class="subject"><a href="${message.url()}" title="${message.subject}, ${message.author.fullname}">${h.ellipsis(message.subject, 25)}</a></td>
-      </tr>
-      %endfor
-    </table>
+    %if group.all_messages:
+      <table id="group_latest_messages">
+        %for message in group.all_messages[:5]:
+        <tr>
+          <td class="time">${h.fmt_shortdate(message.sent)}</td>
+          <td class="subject"><a href="${message.url()}" title="${message.subject}, ${message.author.fullname}">${h.ellipsis(message.subject, 25)}</a></td>
+        </tr>
+        %endfor
+      </table>
+    %else:
+      <div class="notice">${_("The groups's forum is empty.")}</div>
+    %endif
     <br style="clear: both;" />
     <span class="portlet-link">
       <a class="small" href="${url(controller='group', action='forum', id=group.group_id)}" title="${_('More')}">${_('More')}</a>
