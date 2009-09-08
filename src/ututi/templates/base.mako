@@ -230,6 +230,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
       });
     </script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="verify-v1" content="TSVWuU2veWvlR1F0wRgzprUz3gMtHFWbGKmOLQ3cmWQ=" />
     ${self.head_tags()}
     <title>
       ${_('UTUTI')} - ${self.title()}
