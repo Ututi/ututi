@@ -188,7 +188,7 @@ $(document).ready(function(){
             <li class="file">
               ${h.image('/images/details/icon_drag_file.png', alt='file icon', class_='drag-target')|n}
               ${h.link_to(file.title, file.url())}
-              <span class="size">(${file.size})</span>
+              <span class="size">(${h.file_size(file.size)})</span>
               <span class="date">${h.fmt_dt(file.created_on)}</span>
               <a href="${url(controller='user', action='index', id=file.created_by)}" class="author">
                 ${file.created.fullname}

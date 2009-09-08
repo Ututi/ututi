@@ -1075,20 +1075,9 @@ class File(ContentItem):
     @property
     def size(self):
         if self.filesize is not None:
-            size = self.filesize
+            return self.filesize
         else:
-            size = os.path.getsize(self.filepath())
-
-        suffixes = [("", 2**10),
-                    ("k", 2**20),
-                    ("M", 2**30),
-                    ("G", 2**40),
-                    ("T", 2**50)]
-        for suf, lim in suffixes:
-            if size > lim:
-                continue
-            else:
-                return "%s %sb" % (round(size / float(lim/2**10), 2), suf)
+            return os.path.getsize(self.filepath())
 
     @classmethod
     def get(self, file_id):

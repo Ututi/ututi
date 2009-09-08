@@ -1,10 +1,12 @@
 import logging
 
+from paste.fileapp import FileApp
+
 from pylons.templating import render_mako_def
 from pylons.controllers.util import abort
 from pylons import request, response, c
 from pylons.controllers.util import redirect_to
-from paste.fileapp import _FileIter
+from pylons.controllers.util import forward
 
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
@@ -17,11 +19,8 @@ log = logging.getLogger(__name__)
 
 
 def serve_file(file):
-    response.headers['Content-Type'] = file.mimetype
-    response.headers['Content-Length'] = file.filesize
-    response.headers['Content-Disposition'] = 'attachment; filename=%s' % file.filename
-    source = open(file.filepath(), 'r')
-    return _FileIter(source)
+    headers = [('Content-Disposition', 'attachment; filename=%s' % file.filename)]
+    return forward(FileApp(file.filepath(), headers=headers))
 
 
 class BasefilesController(BaseController):
