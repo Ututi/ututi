@@ -132,7 +132,7 @@ $(document).ready(function(){
                   data: ({section_id: section_id, folder: folder_name}),
                   success: function(msg){
                       if (msg != '') {
-                          $('#file_section-' + section_id + ' .container').append($(msg)[2]);
+                          $('#file_section-' + section_id + ' .container').append($(msg, '.folder_file_area'));
                           if ($('#file_upload_dropdown-' + section_id).hasClass('open')) {
                               $('#file_upload_dropdown-' + section_id).children('.click').click();
                           }
