@@ -155,6 +155,10 @@ class HomeController(BaseController):
                          meta.Session.delete(invitation)
                          meta.Session.commit()
                          redirect_to(controller='group', action='home', id=invitation.group.group_id)
+                    elif invitation is None:
+                         c.header = _('Invalid invitation!')
+                         c.message = _('The invitation link you have followed was either already used or invalid.')
+                         return render('/login.mako')
                     else:
                          c.email = invitation.email
                          c.header = _('Invalid email!')
@@ -166,11 +170,16 @@ class HomeController(BaseController):
                if hash is not None:
                     c.hash = hash
                     invitation = PendingInvitation.get(hash)
-                    c.email = invitation.email
-                    c.message_class = 'please-register'
-                    c.header = _('Please register!')
-                    c.message = _('Only registered users can become members of a group, please register first.')
+                    if invitation is not None:
+                         c.email = invitation.email
+                         c.message_class = 'please-register'
+                         c.header = _('Please register!')
+                         c.message = _('Only registered users can become members of a group, please register first.')
+                    else:
+                         c.header = _('Invalid invitation!')
+                         c.message = _('The invitation link you have followed was either already used or invalid.')
                     return render('/login.mako')
+
                return render('anonymous_index.mako')
 
      @validate(PasswordRecoveryForm, form='pswrecovery')

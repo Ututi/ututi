@@ -166,6 +166,11 @@ And we are redirected to the group that invited us.
     The Ututi team
     <BLANKLINE>
 
+However, if we click the link again, we should get a message:
+    >>> browser.open(get_urls(msg)[0])
+    >>> print browser.url
+    http://localhost/register/...
+
 Let's try requesting to join the group:
     >>> browser3 = Browser()
     >>> browser3.open('http://localhost/')
