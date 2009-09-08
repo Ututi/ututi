@@ -14,7 +14,6 @@ Pick a subject.
     >>> browser.getLink(u'Matematin\u0117 analiz\u0117'.encode('utf-8')).click()
 
 And add a page for it.
-
     >>> browser.getLink('New page').click()
     >>> browser.getControl('Title').value = "How to be awesome!"
     >>> browser.getControl('Content').value = "Being Awesome is easy!"
@@ -64,6 +63,7 @@ We should see the list of pages.
     <div id="subject_pages" class="section">
       <h2>Pages</h2>
       <div class="container">
+        <br />
         <a class="btn" href="/subject/vu/mat_analize/pages/add">
           <span>New page</span>
         </a>
