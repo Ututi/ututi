@@ -14,6 +14,7 @@ File upload:
     <li class="file">
       <img alt="file icon" class="drag-target" src="/images/details/icon_drag_file.png" />
       <a href="/subject/vu/mat_analize/file/3/get">text.txt</a>
+      <span class="size">(4.0 b)</span>
       <span class="date">...</span>
       <a href="/user/1" class="author">
         Adminas Adminovix

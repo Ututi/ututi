@@ -122,6 +122,7 @@ li.file a {
   cursor: pointer;
 }
 
+li.file .size,
 li.file .date {
   font-size: 0.8em;
   color: #888;
