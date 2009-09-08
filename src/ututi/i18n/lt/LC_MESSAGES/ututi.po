@@ -676,7 +676,7 @@ msgstr "Kodėl turėčiau jungtis?"
 #: src/ututi/template_py/portlets/anonymous.mako.py:56
 #: src/ututi/templates/register.mako:13
 msgid "Become a part of Ututi"
-msgstr "Prisijunk"
+msgstr "Tapk Ututi dalimi"
 
 #: src/ututi/template_py/register.mako.py:42
 #: src/ututi/templates/register.mako:19
