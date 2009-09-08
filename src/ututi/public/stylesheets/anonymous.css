@@ -85,3 +85,7 @@
 #registration_form .form-field {
   margin: 0.4em 0;
 }
+
+#registration_form .error-message {
+  float: right;
+}
