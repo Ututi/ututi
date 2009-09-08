@@ -57,7 +57,7 @@ File upload:
 
 Empty folder creation:
 
-    >>> res = app.post("/subject/vu/mat_analize/create_folder",
+    >>> res = app.post("/subject/vu/mat_analize/js_create_folder",
     ...                params={'folder': 'Buga Buga',
     ...                        'section_id': '7'})
     >>> print dedent(res.body)
@@ -66,14 +66,15 @@ Empty folder creation:
     <div class="folder_file_area subfolder" id="file_area-7-...">
       <input class="folder_name" id="file_folder_name-7-..." type="hidden" value="Buga Buga" />
         <h4>
-          Buga Buga <a href="#" id="delete_folder_button-7-..." class="delete_folder_button">(Delete)</a>
+          Buga Buga <a href="/subject/vu/mat_analize/delete_folder?folder=Buga+Buga"
+                       id="delete_folder_button-7-..." class="delete_folder_button">(Delete)</a>
         </h4>
         <ul class="folder">
             <li class="message">There are no files here, this folder is empty!</li>
         </ul>
     </div>
 
-    >>> res = app.post("/group/moderators/create_folder",
+    >>> res = app.post("/group/moderators/js_create_folder",
     ...                params={'folder': 'Uga Buga',
     ...                        'section_id': '8'})
     >>> print dedent(res.body)
@@ -82,7 +83,8 @@ Empty folder creation:
     <div class="folder_file_area subfolder" id="file_area-8-...">
       <input class="folder_name" id="file_folder_name-8-..." type="hidden" value="Uga Buga" />
         <h4>
-          Uga Buga <a href="#" id="delete_folder_button-8-..." class="delete_folder_button">(Delete)</a>
+          Uga Buga <a href="/group/moderators/delete_folder?folder=Uga+Buga"
+                      id="delete_folder_button-8-..." class="delete_folder_button">(Delete)</a>
         </h4>
         <ul class="folder">
             <li class="message">There are no files here, this folder is empty!</li>
@@ -111,12 +113,12 @@ Deleting folders:
       ...
     </li>
 
-    >>> res = app.post("/subject/vu/mat_analize/delete_folder",
+    >>> res = app.post("/subject/vu/mat_analize/js_delete_folder",
     ...                params={'folder': 'Folder to delete'})
     >>> res.status
     '200 OK'
 
-    >>> res = app.post("/group/moderators/delete_folder",
+    >>> res = app.post("/group/moderators/js_delete_folder",
     ...                params={'folder': 'Also a folder to delete'})
     >>> res.status
     '200 OK'
