@@ -23,6 +23,7 @@
 <div id="subject_pages" class="section">
   <h2>${_('Pages')}</h2>
   <div class="container">
+    <br/>
     <a class="btn" href="${url(controller='subjectpage', action='add', id=c.subject.subject_id, tags=c.subject.location_path)}">
       <span>${_('New page')}</span>
     </a>
@@ -30,6 +31,9 @@
       % for page in c.subject.pages:
         ${page_extra(page)}
       % endfor
+    % else:
+      <br/>
+      <span class="notice">${_('The subject has no pages yet - create one!')}</span>
     % endif
   </div>
 </div>

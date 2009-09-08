@@ -1130,6 +1130,10 @@ ul#event_list li {
 
 
 /* misc */
+.notice {
+  color: #333;
+}
+
 a.back-link {
   padding-left: 15px;
   background: white url("../images/details/link_back.png") left center no-repeat;
