@@ -15,7 +15,7 @@
   ${c.user_info.fullname}
 </%def>
 
-<h1>${_('Latest actions')}</h1>
+<h1>${_('What has %(user)s been up to?') % dict(user=c.user_info.fullname)}</h1>
 % if c.events:
   <ul id="event_list">
     % for event in c.events:
