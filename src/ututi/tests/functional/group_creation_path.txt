@@ -28,6 +28,13 @@ Let us fill in several email to be invited.
     >>> browser.getControl('Enter emails of the people You would like to invite to the group.').value='user@ututi.lt, jonas@example.com, admin@ututi.lt'
     >>> browser.getControl('Invite').click()
 
+    >>> print browser.url
+    http://localhost/group/test/invite_members_step
+
+    >>> browser.getControl("Finish and go to group's main page").click()
+    >>> print browser.url
+    http://localhost/group/test
+
 The users should get emails:
 
     >>> from ututi.lib.mailer import mail_queue

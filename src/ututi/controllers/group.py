@@ -138,8 +138,8 @@ class GroupMemberUpdateForm(Schema):
 
 class GroupInviteForm(Schema):
     """A schema for validating group member invitations"""
-
-    emails = validators.UnicodeString(not_empty=True)
+    allow_extra_fields = True
+    emails = validators.UnicodeString(not_empty=False)
 
 
 def group_action(method):
@@ -482,7 +482,10 @@ class GroupController(GroupControllerBase, FileViewMixin):
         if hasattr(self, 'form_result'):
             emails = self.form_result.get('emails', '').split()
             self._send_invitations(group, emails)
-            redirect_to(controller='group', action='invite_members_step', id=group.group_id)
+            if self.form_result.get('final_submit', None) is not None:
+                redirect_to(controller='group', action='home', id=group.group_id)
+            else:
+                redirect_to(controller='group', action='invite_members_step', id=group.group_id)
 
         return render('group/members_step.mako')
 
