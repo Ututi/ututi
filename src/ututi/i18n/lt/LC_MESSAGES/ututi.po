@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-09-09 10:31+0300\n"
+"PO-Revision-Date: 2009-09-09 16:14+0300\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -993,7 +993,7 @@ msgstr "Grupės nustatymai"
 #: src/ututi/templates/group/add.mako:17
 #: src/ututi/templates_py/group/add.mako.py:138
 msgid "Subject selection"
-msgstr "Dalyko pasirinkimas"
+msgstr "Dalykų pasirinkimas"
 
 #: src/ututi/templates/group/add.mako:17
 #: src/ututi/templates_py/group/add.mako.py:138
@@ -1267,7 +1267,7 @@ msgstr "pakviesti grupiokų"
 #: src/ututi/templates_py/group/subjects.mako.py:147
 #: src/ututi/templates_py/group/subjects_admin.mako.py:124
 msgid "Finish choosing subjects"
-msgstr "patvirtinti pasirinktus dalykus"
+msgstr "baigti rinktis dalykus"
 
 #: src/ututi/templates/home/password_resetform.mako:7
 #: src/ututi/templates_py/home/password_resetform.mako.py:39
