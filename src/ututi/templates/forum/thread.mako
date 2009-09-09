@@ -64,7 +64,7 @@ ${h.stylesheet_link('/stylesheets/forum.css')|n}
      id="group_add_form" enctype="multipart/form-data">
   <div class="form-field">
     <label for="message">${_('Message')}</label>
-    <textarea class="line" name="message" id="message" cols="80" rows="10"></textarea>
+    <textarea class="line" name="message" id="message" cols="80" rows="10" style="width: 620px;"></textarea>
   </div>
   <div>
     <span class="btn">
