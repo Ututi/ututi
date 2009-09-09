@@ -14,6 +14,8 @@ from webhelpers.html.tags import convert_boolean_attrs
 
 from datetime import datetime
 
+import pytz
+
 
 from webhelpers.pylonslib import Flash as _Flash
 flash = _Flash()
@@ -137,13 +139,16 @@ def fmt_dt(dt):
     """Format date and time for output."""
     from babel import dates
     fmt = "yyyy MMM dd, HH:mm"
-    return dates.format_datetime(dt, fmt)
+    localtime = pytz.utc.localize(dt).astimezone(pytz.timezone('Europe/Vilnius'))
+    return dates.format_datetime(localtime, fmt)
 
 def fmt_shortdate(dt):
     """Format date and time for output."""
     from babel import dates
+
     fmt = "MMM dd, HH:mm"
-    return dates.format_datetime(dt, fmt)
+    localtime = pytz.utc.localize(dt).astimezone(pytz.timezone('Europe/Vilnius'))
+    return dates.format_datetime(localtime, fmt)
 
 def nl2br(text):
     return '<br/>'.join(text.split("\n"))
