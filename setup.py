@@ -21,7 +21,9 @@ setup(
         "nous.mailpost",
         "python_magic",
         "PILwoTk",
-        "Babel"
+        "Babel",
+        "translitcodec",
+        "trans"
     ],
     package_dir={'': 'src'},
     packages=find_packages('src'),
