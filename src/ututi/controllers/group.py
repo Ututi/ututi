@@ -258,29 +258,32 @@ class GroupController(GroupControllerBase, FileViewMixin):
     @validate(schema=NewGroupForm, form='add')
     @ActionProtector("user")
     def new_group(self):
-        values = self.form_result
+        if hasattr(self, 'form_result'):
+            values = self.form_result
 
-        group = Group(group_id=values['id'],
-                      title=values['title'],
-                      description=values['description'],
-                      year=date(int(values['year']), 1, 1))
+            group = Group(group_id=values['id'],
+                          title=values['title'],
+                          description=values['description'],
+                          year=date(int(values['year']), 1, 1))
 
-        tag = values.get('location', None)
-        group.location = tag
+            tag = values.get('location', None)
+            group.location = tag
 
-        meta.Session.add(group)
+            meta.Session.add(group)
 
-        if values['logo_upload'] is not None:
-            logo = values['logo_upload']
-            group.logo = logo.file.read()
+            if values['logo_upload'] is not None:
+                logo = values['logo_upload']
+                group.logo = logo.file.read()
 
-        group.add_member(c.user, admin=True)
+            group.add_member(c.user, admin=True)
 
-        if is_root(c.user):
-            group.moderators = values['moderators']
+            if is_root(c.user):
+                group.moderators = values['moderators']
 
-        meta.Session.commit()
-        redirect_to(controller='group', action='subjects_step', id=values['id'])
+                meta.Session.commit()
+                redirect_to(controller='group', action='subjects_step', id=values['id'])
+        else:
+            redirect_to(controller='group', action='add')
 
     @group_action
     @ActionProtector("member", "admin", "moderator")
