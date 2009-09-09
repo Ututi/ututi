@@ -1,4 +1,4 @@
-<%inherit file="/profile/base.mako" />
+ <%inherit file="/profile/base.mako" />
 <%namespace file="/widgets/tags.mako" import="*"/>
 
 <%def name="head_tags()">
@@ -116,9 +116,9 @@ ${h.javascript_link('/javascripts/search.js')|n}
 ${search_form(c.text, c.obj_type, c.tags, parts=['text', 'tags'])}
 
 %if c.results:
-<br/>
+<br />
 ${search_results(c.results)}
 %endif
-<br/>
+<br />
 ${_('Did not find the group you were looking for?')}
 <a class="btn" href="${url(controller='group', action='add')}" title="${_('New group')}"><span>${_('Create your group!')}</span></a>

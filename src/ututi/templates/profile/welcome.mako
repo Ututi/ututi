@@ -66,7 +66,7 @@ ${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
   <div id="edit-profile">
 	<h3>${_('Review and edit your profile')}</h3>
 	<div class="message">${_('Fill in your information, upload your photo so that others can recognize you.')}</div>
-    <br/>
+    <br />
     <a class="btn" href="${url(controller='profile', action='edit')}" title="${_('Edit your profile')}"><span>${_('Edit your profile')}</span></a>
   </div>
 

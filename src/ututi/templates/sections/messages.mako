@@ -9,7 +9,7 @@
     <span>
       ${_(u"%(author)s has sent you an invitation to group %(group)s. Do You want to become a member of this group?") % dict(author=invitation.author.fullname, group=invitation.group.title)}
     </span>
-    <br/>
+    <br />
     <form method="post"
           action="${url(controller='group', action='invitation', id=invitation.group.group_id)}"
           id="${invitation.group.group_id}_invitation_reject"
@@ -57,7 +57,7 @@
     <span>
       ${_(u"%(user)s wants to join the group %(group)s. Do You want to confirm his membership?") % dict(user=rq.user.fullname, group=rq.group.title)}
     </span>
-    <br/>
+    <br />
     <form style="display: inline;" method="post" action="${url(controller='group', action='request', id=rq.group.group_id)}">
       <div style="display: inline;">
         <input type="hidden" name="hash_code" value="${rq.hash}"/>

@@ -25,7 +25,7 @@
     <a href="${c.page.last_version.created.url()}">${c.page.last_version.created.fullname}</a>
   %endif
 </div>
-<br/>
+<br />
 <div id="page_content">
   ${h.html_cleanup(c.page.content)|n}
 </div>

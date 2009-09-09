@@ -64,7 +64,7 @@
       <td style="width: 220px;">
         <div class="js-alternatives" id="user-logo">
           <img src="${url(controller='profile', action='logo', width='120', height='200')}" alt="User logo" id="user-logo-editable"/>
-          <br/>
+          <br />
           <a href="#" id="user-logo-button" class="btn"><span>${_('Change logo')}</span></a>
         </div>
         <br style="clear: left;"/>

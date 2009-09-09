@@ -101,7 +101,7 @@ ${h.javascript_link('/javascripts/search.js')|n}
   </div>
 %else:
   <div class="notice">${_('No results found.')}</div>
-  <br/>
+  <br />
 %endif
 
 %if len(results):

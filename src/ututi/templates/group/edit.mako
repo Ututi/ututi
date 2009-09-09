@@ -62,7 +62,7 @@ ${h.javascript_link('/javascripts/js-alternatives.js')|n}
       <td style="width: 180px; padding-top: 30px; vertical-align: top;">
         <div class="js-alternatives" id="group-logo">
           <img src="${url(controller='group', id=c.group.group_id, action='logo', width='120', height='200')}" alt="Group logo" id="group-logo-editable"/>
-          <br/>
+          <br />
           <a href="#" id="group-logo-button" class="btn js"><span>${_('Change logo')}</span></a>
         </div>
         <br class="clear-left"/>

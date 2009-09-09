@@ -32,7 +32,7 @@
         ${page_extra(page)}
       % endfor
     % else:
-      <br/>
+      <br />
       <span class="notice">${_('The subject has no pages yet - create one!')}</span>
     % endif
   </div>

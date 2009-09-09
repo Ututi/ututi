@@ -53,7 +53,7 @@
     5str.), todėl naudotojas gali talpinti į svetainę <a href="http://ututi.lt" class="external-link">UTUTI</a>. Pvz. Paskaitos metu lentoje pateiktą
     informaciją Jus galite perrašyti ir patalpinti į  <a href="http://ututi.lt/" class="external-link">UTUTI</a>. Arba pamatę kokį nors naudingą
     brėžinį arba gražią kompoziciją nuotraukoje, galite perpaišyti
-    panašu brėžinį, padaryti panašią nuotrauką ir įdėti savo kūrinį į <a href="http://ututi.lt" class="external-link">UTUTI</a>.<br/></strong>
+    panašu brėžinį, padaryti panašią nuotrauką ir įdėti savo kūrinį į <a href="http://ututi.lt" class="external-link">UTUTI</a>.<br /></strong>
   <h2>3. Garantijos atsisakymas</h2>
   JŪS SUTINKATE,
   KAD JŪS NAUDOJATĖS ŠIA SVETAINE SAVO RIZIKA.
