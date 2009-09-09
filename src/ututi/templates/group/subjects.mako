@@ -140,7 +140,7 @@ ${search_form(text=c.text, obj_type='subject', tags=c.tags, parts=['text', 'tags
    if display is None:
        display = search_results_item
 %>
-<br/>
+<br />
 <div id="search-results">
   %for item in results:
   ${display(item)}
@@ -152,14 +152,18 @@ ${search_form(text=c.text, obj_type='subject', tags=c.tags, parts=['text', 'tags
 %endif
 </%def>
 
-
 %if c.results:
 ${search_results(c.results, display=search_subject)}
 %endif
 
+<div class="create_item">
+  <span class="notice">${_('Did not find what you were looking for?')}</span>
+  ${h.button_to(_('Create a new subject'), c.group.url(action='add_subject_step'))}
+</div>
+
 % if c.step:
-<br/>
-<hr/>
+<br />
+<hr />
 <a class="btn" href="${url(controller='group', action='invite_members_step', id=c.group.group_id)}" title="${_('Invite group members')}">
   <span>${_('Finish choosing subjects')}</span>
 </a>

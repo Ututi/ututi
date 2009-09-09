@@ -2,16 +2,12 @@ import logging
 from random import Random
 import string
 
-from sqlalchemy.orm.exc import NoResultFound
-from webhelpers.html.tags import link_to
 from formencode.variabledecode import NestedVariables
 from formencode.foreach import ForEach
 from formencode.compound import Pipe
-from formencode import Schema, validators, Invalid, All
-from routes import url_for
+from formencode import Schema, validators, Invalid
 
-from pylons import c, request, url, response
-from pylons.templating import render_mako_def
+from pylons import c, request
 from pylons.decorators import validate
 from pylons.controllers.util import redirect_to, abort
 from pylons.i18n import _
@@ -74,26 +70,8 @@ class SubjectForm(Schema):
 class NewSubjectForm(SubjectForm):
     pass
 
-class SubjectController(BaseController, FileViewMixin):
-    """A controller for subjects."""
 
-    @ActionProtector("root")
-    def index(self):
-        c.subjects = meta.Session.query(Subject).all()
-        return render('subjects.mako')
-
-    @subject_action
-    def home(self, subject):
-        file_id = request.GET.get('serve_file')
-        file = File.get(file_id)
-        c.serve_file = file
-        c.breadcrumbs = [{'link': subject.url(),
-                              'title': subject.title}]
-        return render('subject/home.mako')
-
-    @ActionProtector("user")
-    def add(self):
-        return render('subject/add.mako')
+class SubjectAddMixin(object):
 
     def _generate_subject_id(self, subject):
         title = urlify(subject.title, 20)
@@ -114,12 +92,7 @@ class SubjectController(BaseController, FileViewMixin):
                 return sid
         return None
 
-    @validate(schema=NewSubjectForm, form='add')
-    @ActionProtector("user")
-    def create(self):
-        if not hasattr(self, 'form_result'):
-            redirect_to(controller='subject', action='add')
-
+    def _create_subject(self):
         title = self.form_result['title']
         id = ''.join(Random().sample(string.ascii_lowercase, 8)) # use random id first
         lecturer = self.form_result['lecturer']
@@ -148,6 +121,37 @@ class SubjectController(BaseController, FileViewMixin):
         if newid is not None:
             subj.subject_id = newid
 
+        return subj
+
+
+class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
+    """A controller for subjects."""
+
+    @ActionProtector("root")
+    def index(self):
+        c.subjects = meta.Session.query(Subject).all()
+        return render('subjects.mako')
+
+    @subject_action
+    def home(self, subject):
+        file_id = request.GET.get('serve_file')
+        file = File.get(file_id)
+        c.serve_file = file
+        c.breadcrumbs = [{'link': subject.url(),
+                              'title': subject.title}]
+        return render('subject/home.mako')
+
+    @ActionProtector("user")
+    def add(self):
+        return render('subject/add.mako')
+
+    @validate(schema=NewSubjectForm, form='add')
+    @ActionProtector("user")
+    def create(self):
+        if not hasattr(self, 'form_result'):
+            redirect_to(controller='subject', action='add')
+
+        subj = self._create_subject()
         meta.Session.commit()
 
         redirect_to(controller='subject',

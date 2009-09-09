@@ -18,7 +18,28 @@ After creating the group we should be redirected to the subject selection view:
     >>> browser.printQuery('//h1/text()')
     Group Subjects
 
-We will skip this view for now, but it is an integral part of the group creation path.
+    >>> browser.getLink('Watch').url
+    'http://localhost/group/test/watch_subject?subject_location_id=1&subject_id=mat_analize'
+
+We can create a new subject without leaving the subject form:
+
+    >>> browser.getControl('Create a new subject').click()
+    >>> browser.getControl(name='location-1').value = 'vu'
+    >>> browser.getControl('Title').value = 'Test subject'
+    >>> browser.getControl('Lecturer').value = 'Some guy'
+    >>> browser.getControl('Save').click()
+    >>> print browser.url
+    http://localhost/group/test/subjects_step
+
+The subject is added to the watched subject list automatically:
+
+    >>> browser.printQuery("id('watched-subjects')")
+    <ul id="watched-subjects">
+      <li>
+        <a href="/subject/vu/test_subject">Test subject</a>
+        ...
+      </li>
+    </ul>
 
     >>> browser.getLink('Finish choosing subjects').click()
     >>> browser.printQuery('//h1/text()')
@@ -207,7 +228,7 @@ The group's administrator should now see the request in the members view.
     >>> print browser.url
     http://localhost/group/test/members
 
-    >>> browser.getControl('Confirm').click()
+    >>> browser.getControl('Confirm', index=0).click()
 
 And the new member should be able to access the group now.
     >>> browser3.open('http://localhost/group/test/members')

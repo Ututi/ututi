@@ -12,10 +12,12 @@ ${_('New subject')}
 ${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
 ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
 </%def>
+
 <a class="back-link" href="${url(controller='profile', action='search')}">${_('back to the search')}</a>
 <h1>${_('New subject')}</h1>
 
-<form method="post" action="${url(controller='subject', action='create')}"
+<%def name="form(action)">
+<form method="post" action="${action}"
      id="subject_add_form" enctype="multipart/form-data">
   <div class="form-field">
     <label for="title">${_('Title')}</label>
@@ -49,3 +51,6 @@ ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
     </span>
   </div>
 </form>
+</%def>
+
+<%self:form action="${url(controller='subject', action='create')}" />

@@ -33,6 +33,8 @@ from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator
 from ututi.model.events import Event
 from ututi.model import LocationTag, User, GroupMember, GroupMembershipType
 from ututi.model import meta, Group, SimpleTag, Subject, ContentItem, PendingInvitation, PendingRequest
+from ututi.controllers.subject import SubjectAddMixin
+from ututi.controllers.subject import NewSubjectForm
 from ututi.controllers.search import SearchSubmit
 from ututi.lib.security import check_crowds
 from ututi.lib.security import is_root, check_crowds
@@ -187,7 +189,7 @@ class GroupControllerBase(BaseController):
             ]
 
 
-class GroupController(GroupControllerBase, FileViewMixin):
+class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     """Controller for group actions."""
 
     @ActionProtector("root")
@@ -422,6 +424,26 @@ class GroupController(GroupControllerBase, FileViewMixin):
         c.step = True
         c.search_target = url(controller = 'group', action='subjects_step', id = group.group_id)
         return self.subjects(group.group_id)
+
+    @group_action
+    @ActionProtector("member", "admin", "moderator")
+    def add_subject_step(self, group):
+        c.step = True
+        return render('group/add_subject.mako')
+
+    @validate(schema=NewSubjectForm, form='add_subject_step')
+    @group_action
+    @ActionProtector("member", "admin", "moderator")
+    def create_subject(self, group):
+        if not hasattr(self, 'form_result'):
+            redirect_to(group.url(action='add_subject_step'))
+
+        subject = self._create_subject()
+        group.watched_subjects.append(subject)
+
+        meta.Session.commit()
+        redirect_to(group.url(action='subjects_step'))
+
 
     @validate(schema=SearchSubmit, form='subjects', post_only = False, on_get = True)
     @group_action

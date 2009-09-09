@@ -499,11 +499,12 @@ input.text_button {
   border: 0;
   cursor: pointer;
   color: #d45500;
-  padding: 0;
+  padding: 0 0 1px 0;
 }
 
 input.text_button:hover {
   text-decoration: underline;
+  padding: 0;
   border-bottom: 1px solid #d45500;
 }
 
