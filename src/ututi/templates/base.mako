@@ -193,42 +193,6 @@ ${h.javascript_link('/javascripts/forms.js')|n}
     ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
     ${h.javascript_link('/javascripts/expand.js')|n}
     ${h.javascript_link('/javascripts/hide_parent.js')|n}
-    <!-- Load TinyMCE -->
-    ${h.javascript_link('/javascripts/tiny_mce/jquery.tinymce.js')|n}
-    <script type="text/javascript">
-      $().ready(function() {
-      $('textarea.tinymce').tinymce({
-      // Location of TinyMCE script
-      script_url : '${url('/javascripts/tiny_mce/tiny_mce.js')}',
-
-      // General options
-      theme : "advanced",
-      plugins : "safari,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
-
-      // Theme options
-      theme_advanced_buttons1 : "bold,italic,underline,strikethrough,formatselect,fontsizeselect",
-      theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,code",
-      theme_advanced_buttons3 : "tablecontrols,|,hr,sub,sup,|,media,advhr",
-      theme_advanced_buttons4 : "",
-      theme_advanced_toolbar_location : "top",
-      theme_advanced_toolbar_align : "center",
-      theme_advanced_statusbar_location : "bottom",
-      theme_advanced_resizing : true,
-
-      // Example content CSS (should be your site CSS)
-      content_css : "stylesheets/style.css",
-
-      // Drop lists for link/image/media/template dialogs
-      template_external_list_url : "lists/template_list.js",
-      external_link_list_url : "lists/link_list.js",
-      external_image_list_url : "lists/image_list.js",
-      media_external_list_url : "lists/media_list.js",
-
-      extended_valid_elements : "iframe[src|width|height|name|align]",
-
-      });
-      });
-    </script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="verify-v1" content="TSVWuU2veWvlR1F0wRgzprUz3gMtHFWbGKmOLQ3cmWQ=" />
     ${self.head_tags()}
