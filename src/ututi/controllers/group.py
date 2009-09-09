@@ -282,8 +282,8 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             if is_root(c.user):
                 group.moderators = values['moderators']
 
-                meta.Session.commit()
-                redirect_to(controller='group', action='subjects_step', id=values['id'])
+            meta.Session.commit()
+            redirect_to(controller='group', action='subjects_step', id=values['id'])
         else:
             redirect_to(controller='group', action='add')
 
