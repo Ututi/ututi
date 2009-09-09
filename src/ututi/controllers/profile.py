@@ -186,11 +186,13 @@ class ProfileController(SearchBaseController):
             search_params['tags'] = c.tags
         search_params['obj_type'] = 'subject'
 
+        query = search_query(extra=_filter_watched_subjects(sids), **search_params)
         if search_params != {}:
             c.results = paginate.Page(
-                search_query(extra=_filter_watched_subjects(sids), **search_params),
+                query,
                 page=int(request.params.get('page', 1)),
                 items_per_page = 10,
+                item_count = query.count(),
                 **search_params)
 
         c.watched_subjects = c.user.watched_subjects
@@ -295,6 +297,7 @@ class ProfileController(SearchBaseController):
         c.results = paginate.Page(
             results,
             page=int(request.params.get('page', 1)),
+            item_count = results.count() or 0,
             items_per_page = 10,
             **search_params)
 

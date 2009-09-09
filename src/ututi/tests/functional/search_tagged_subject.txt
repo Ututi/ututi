@@ -21,4 +21,4 @@ Try looking for a subject that does not exist, while passing a tag that exists.
    >>> browser.getControl(name='tags').value = 'matematika'
 
 # XXX failing test
-#   >>> browser.getControl('Search').click()
+   >>> browser.getControl('Search').click()
