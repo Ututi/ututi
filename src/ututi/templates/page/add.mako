@@ -18,7 +18,7 @@ ${_('New page')}
   </div>
   <div class="form-field">
     <label for="page_content">${_('Content')}</label>
-    <textarea class="tinymce" name="page_content" id="page_content" cols="80" rows="25"></textarea>
+    <textarea class="ckeditor" name="page_content" id="page_content" cols="80" rows="25"></textarea>
   </div>
   <div>
     <span class="btn">

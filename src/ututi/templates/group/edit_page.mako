@@ -6,7 +6,7 @@
      id="group_page_edit_form" enctype="multipart/form-data">
   <div class="form-field">
     <label for="page_content">${_('Content')}</label>
-    <textarea class="line tinymce" name="page_content" id="page_content" cols="80" rows="15">${c.group.page}</textarea>
+    <textarea class="ckeditor" name="page_content" id="page_content" cols="80" rows="15">${c.group.page}</textarea>
   </div>
   <div>
     <span class="btn">

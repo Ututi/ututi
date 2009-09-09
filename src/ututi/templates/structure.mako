@@ -44,7 +44,7 @@
       </div>
       <div>
         <label for="description">${_('Description')}</label>
-        <textarea class="tinymce" name="description" id="description" cols="80" rows="25"></textarea>
+        <textarea class="ckeditor" name="description" id="description" cols="80" rows="25"></textarea>
       </div>
       <div>
         <label for="parent">${_('Parent')}</label>

@@ -193,6 +193,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
     ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
     ${h.javascript_link('/javascripts/expand.js')|n}
     ${h.javascript_link('/javascripts/hide_parent.js')|n}
+    ${h.javascript_link('/javascripts/ckeditor/ckeditor.js')|n}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="verify-v1" content="TSVWuU2veWvlR1F0wRgzprUz3gMtHFWbGKmOLQ3cmWQ=" />
     ${self.head_tags()}
