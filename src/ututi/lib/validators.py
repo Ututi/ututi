@@ -19,7 +19,10 @@ def html_cleanup(input):
         frames = False,
         forms = True,
         annoying_tags = True,
-        allow_tags = ['a', 'img', 'span', 'div', 'p', 'br', 'iframe'],
+        allow_tags = ['a', 'img', 'span', 'div', 'p', 'br', 'iframe', # for google cal
+                      'strong', 'em', 'u', 'strike', 'blockquote', 'sub', 'sup',
+                      'ul', 'ol', 'li', 'table', 'tdata', 'tr', 'th', 'td',
+                      'h1', 'h2', 'h3', 'h4'],
         remove_unknown_tags = False,
         safe_attrs_only = True,
         host_whitelist = ['youtube.com', 'www.google.com'],
