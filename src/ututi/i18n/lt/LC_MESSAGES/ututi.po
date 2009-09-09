@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-09-08 18:01+0300\n"
+"PO-Revision-Date: 2009-09-09 10:31+0300\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -25,7 +25,7 @@ msgid ""
 "something else?"
 msgstr "Dokumentas pagal nuorodą %(url)s nerastas, bet galbūt reikia dar ko nors?"
 
-#: src/ututi/controllers/files.py:66 src/ututi/controllers/group.py:181
+#: src/ututi/controllers/files.py:65 src/ututi/controllers/group.py:181
 #: src/ututi/templates/files.mako:7 src/ututi/templates_py/files.mako.py:39
 #: src/ututi/templates_py/subject_home.mako.py:46
 msgid "Files"
@@ -96,53 +96,53 @@ msgstr "Prašymas prisijungti prie grupės vis dar svarstomas. Kantrybės."
 msgid "The group's front page was updated."
 msgstr "Grupės puslapis buvo atnaujintas."
 
-#: src/ututi/controllers/group.py:490
+#: src/ututi/controllers/group.py:508
 msgid "Users invited."
 msgstr "Nariai pakviesti."
 
-#: src/ututi/controllers/group.py:492
+#: src/ututi/controllers/group.py:510
 #, python-format
 msgid "Invalid email addresses detected: %s"
 msgstr "Rasta neteisingų el. pašto adresų: %s"
 
-#: src/ututi/controllers/group.py:507
+#: src/ututi/controllers/group.py:525
 #, python-format
 msgid "Congratulations! You are now a member of the group '%s'"
 msgstr "Sveikiname prisijungus prie grupės '%s'"
 
-#: src/ututi/controllers/group.py:509
+#: src/ututi/controllers/group.py:527
 #, python-format
 msgid "Invitation to group '%s' rejected."
 msgstr "Kvietimas į grupę '%s' atmestas. Liūdna."
 
-#: src/ututi/controllers/group.py:530
+#: src/ututi/controllers/group.py:548
 #, python-format
 msgid "New member %s added."
 msgstr "Pridėtas naujas narys %s."
 
-#: src/ututi/controllers/group.py:532
+#: src/ututi/controllers/group.py:550
 #, python-format
 msgid "Group membership denied to %s."
 msgstr "Iš grupės pašalintas narys %s."
 
-#: src/ututi/controllers/group.py:536
+#: src/ututi/controllers/group.py:554
 msgid "Error confirming membership request."
 msgstr "Klaidelė tvirtinant narystės prašymą"
 
-#: src/ututi/controllers/group.py:556
+#: src/ututi/controllers/group.py:574
 msgid "The group must have at least one administrator!"
 msgstr "Grupėje administratorius būti privalo!"
 
-#: src/ututi/controllers/group.py:562
+#: src/ututi/controllers/group.py:580
 #, python-format
 msgid "The status of the user %s was updated."
 msgstr "Pasikeitė naudotojo %s statusas."
 
-#: src/ututi/controllers/group.py:564
+#: src/ututi/controllers/group.py:582
 msgid "Problem updating the status of the user."
 msgstr "Klaidelė atnaujinant naudotojo statusą."
 
-#: src/ututi/controllers/group.py:566
+#: src/ututi/controllers/group.py:584
 msgid "Problem updating the status of the user. Cannot find such user."
 msgstr "Klaidelė atnaujinant naudotojo statusą: tokio naudotojo nėra."
 
@@ -217,7 +217,9 @@ msgstr "Neteisingas el. pašto adresas!"
 
 #: src/ututi/controllers/home.py:165
 msgid "You can only use the email this invitation was sent for to register."
-msgstr "Registruotis galite tik tuo el. pašto adresu, kuriam buvo išsiųstas pakvietimas."
+msgstr ""
+"Registruotis galite tik tuo el. pašto adresu, kuriam buvo išsiųstas "
+"pakvietimas."
 
 #: src/ututi/controllers/home.py:176
 msgid "Please register!"
@@ -294,11 +296,11 @@ msgid ""
 "symbols - + _ are allowed."
 msgstr "Galima naudoti tik raides, skaitmenis ir simbolius - +_."
 
-#: src/ututi/controllers/subject.py:145
+#: src/ututi/controllers/subject.py:148
 msgid "The subject has been added to your watched subjects list."
 msgstr "Dalykas pridėtas prie stebimų dalykų sąrašo."
 
-#: src/ututi/controllers/subject.py:148
+#: src/ututi/controllers/subject.py:151
 msgid "The subject has been removed from your watched subjects list."
 msgstr "Dalykas pašalintas iš stebimų dalykų sąrašo."
 
@@ -421,6 +423,16 @@ msgid ""
 "You do not have the rights to see this page, or perform this action. Go "
 "back or go to the search page please."
 msgstr "Nepakankamos privilegijos peržiūrėti šį puslapį. Prašome grįžti į paiešką."
+
+#: src/ututi/templates/access_denied.mako:16
+#: src/ututi/templates_py/access_denied.mako.py:51
+msgid "go back"
+msgstr "grįžti atgal"
+
+#: src/ututi/templates/access_denied.mako:18
+#: src/ututi/templates_py/access_denied.mako.py:59
+msgid "go find something else"
+msgstr "ieškoti ko nors kitko"
 
 #: src/ututi/templates/anonymous_index.mako:20
 #: src/ututi/templates/register.mako:53
@@ -1208,12 +1220,7 @@ msgid "Update"
 msgstr "atnaujinti"
 
 #: src/ututi/templates/group/members_step.mako:21
-#: src/ututi/templates_py/group/members_step.mako.py:64
-msgid "Group home"
-msgstr "Grupės namai"
-
-#: src/ututi/templates/group/members_step.mako:23
-#: src/ututi/templates_py/group/members_step.mako.py:67
+#: src/ututi/templates_py/group/members_step.mako.py:62
 msgid "Finish and go to group's main page"
 msgstr "baigti ir grįžti į grupės puslapį"
 
@@ -1515,24 +1522,24 @@ msgstr[2] "rasti %(count)s rezultatų"
 msgid "No results found."
 msgstr "Nerasta jokių rezultatų."
 
-#: src/ututi/templates/sections/files.mako:206
+#: src/ututi/templates/sections/files.mako:210
 #: src/ututi/templates_py/sections/files.mako.py:50
 msgid "Here"
 msgstr "Čia"
 
-#: src/ututi/templates/sections/files.mako:222
-#: src/ututi/templates_py/sections/files.mako.py:241
+#: src/ututi/templates/sections/files.mako:226
+#: src/ututi/templates_py/sections/files.mako.py:243
 msgid "(Delete)"
 msgstr "(Trinti)"
 
-#: src/ututi/templates/sections/files.mako:228
-#: src/ututi/templates/sections/files.mako:233
-#: src/ututi/templates_py/sections/files.mako.py:251
-#: src/ututi/templates_py/sections/files.mako.py:273
+#: src/ututi/templates/sections/files.mako:232
+#: src/ututi/templates/sections/files.mako:237
+#: src/ututi/templates_py/sections/files.mako.py:253
+#: src/ututi/templates_py/sections/files.mako.py:275
 msgid "There are no files here, this folder is empty!"
 msgstr "Čia failų nėra, aplankas tuščias!"
 
-#: src/ututi/templates/sections/files.mako:253
+#: src/ututi/templates/sections/files.mako:257
 #: src/ututi/templates_py/sections/files.mako.py:109
 #, python-format
 msgid "%(count)s file"
@@ -1541,12 +1548,12 @@ msgstr[0] "%(count)s failas"
 msgstr[1] "%(count)s failai"
 msgstr[2] "%(count)s failų"
 
-#: src/ututi/templates/sections/files.mako:271
+#: src/ututi/templates/sections/files.mako:275
 #: src/ututi/templates_py/sections/files.mako.py:142
 msgid "Upload file"
 msgstr "Atsiųsti failą"
 
-#: src/ututi/templates/sections/files.mako:284
+#: src/ututi/templates/sections/files.mako:288
 #: src/ututi/templates_py/sections/files.mako.py:166
 msgid "New folder:"
 msgstr "Kurti aplanką"
@@ -1721,7 +1728,6 @@ msgid "Group messages"
 msgstr "Grupės forumas"
 
 #: src/ututi/templates_py/portlets/group.mako.py:113
-#| msgid "The group's front page was updated."
 msgid "The groups's forum is empty."
 msgstr "Grupės forumas tuščias."
 
@@ -1764,11 +1770,11 @@ msgstr "Keisti grupės nustatymus"
 msgid "Subject information"
 msgstr "Informacija apie dalyką"
 
-#: src/ututi/templates_py/portlets/subject.mako.py:107
+#: src/ututi/templates_py/portlets/subject.mako.py:102
 msgid "Watch subject"
 msgstr "stebėti dalyką"
 
-#: src/ututi/templates_py/portlets/subject.mako.py:110
+#: src/ututi/templates_py/portlets/subject.mako.py:105
 msgid "Stop watching the subject"
 msgstr "Nebestebėti dalyko"
 
@@ -1808,9 +1814,6 @@ msgstr "Daugiau dalykų"
 msgid "Subject files"
 msgstr "Dalyko failai"
 
-#~ msgid "Latest actions"
-#~ msgstr "Naudotojo darbai"
-
-#~ msgid "Post new topic"
-#~ msgstr "Nauja tema"
+#~ msgid "Group home"
+#~ msgstr "Grupės namai"
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2009-09-08 17:21+0300\n"
+"POT-Creation-Date: 2009-09-09 10:29+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,7 +24,7 @@ msgid ""
 "else?"
 msgstr ""
 
-#: src/ututi/controllers/files.py:66 src/ututi/controllers/group.py:181
+#: src/ututi/controllers/files.py:65 src/ututi/controllers/group.py:181
 #: src/ututi/templates/files.mako:7 src/ututi/templates_py/files.mako.py:39
 #: src/ututi/templates_py/subject_home.mako.py:46
 msgid "Files"
@@ -92,53 +92,53 @@ msgstr ""
 msgid "The group's front page was updated."
 msgstr ""
 
-#: src/ututi/controllers/group.py:490
+#: src/ututi/controllers/group.py:508
 msgid "Users invited."
 msgstr ""
 
-#: src/ututi/controllers/group.py:492
+#: src/ututi/controllers/group.py:510
 #, python-format
 msgid "Invalid email addresses detected: %s"
 msgstr ""
 
-#: src/ututi/controllers/group.py:507
+#: src/ututi/controllers/group.py:525
 #, python-format
 msgid "Congratulations! You are now a member of the group '%s'"
 msgstr ""
 
-#: src/ututi/controllers/group.py:509
+#: src/ututi/controllers/group.py:527
 #, python-format
 msgid "Invitation to group '%s' rejected."
 msgstr ""
 
-#: src/ututi/controllers/group.py:530
+#: src/ututi/controllers/group.py:548
 #, python-format
 msgid "New member %s added."
 msgstr ""
 
-#: src/ututi/controllers/group.py:532
+#: src/ututi/controllers/group.py:550
 #, python-format
 msgid "Group membership denied to %s."
 msgstr ""
 
-#: src/ututi/controllers/group.py:536
+#: src/ututi/controllers/group.py:554
 msgid "Error confirming membership request."
 msgstr ""
 
-#: src/ututi/controllers/group.py:556
+#: src/ututi/controllers/group.py:574
 msgid "The group must have at least one administrator!"
 msgstr ""
 
-#: src/ututi/controllers/group.py:562
+#: src/ututi/controllers/group.py:580
 #, python-format
 msgid "The status of the user %s was updated."
 msgstr ""
 
-#: src/ututi/controllers/group.py:564
+#: src/ututi/controllers/group.py:582
 msgid "Problem updating the status of the user."
 msgstr ""
 
-#: src/ututi/controllers/group.py:566
+#: src/ututi/controllers/group.py:584
 msgid "Problem updating the status of the user. Cannot find such user."
 msgstr ""
 
@@ -284,11 +284,11 @@ msgid ""
 " + _ are allowed."
 msgstr ""
 
-#: src/ututi/controllers/subject.py:145
+#: src/ututi/controllers/subject.py:148
 msgid "The subject has been added to your watched subjects list."
 msgstr ""
 
-#: src/ututi/controllers/subject.py:148
+#: src/ututi/controllers/subject.py:151
 msgid "The subject has been removed from your watched subjects list."
 msgstr ""
 
@@ -404,6 +404,16 @@ msgstr ""
 msgid ""
 "You do not have the rights to see this page, or perform this action. Go back "
 "or go to the search page please."
+msgstr ""
+
+#: src/ututi/templates/access_denied.mako:16
+#: src/ututi/templates_py/access_denied.mako.py:51
+msgid "go back"
+msgstr ""
+
+#: src/ututi/templates/access_denied.mako:18
+#: src/ututi/templates_py/access_denied.mako.py:59
+msgid "go find something else"
 msgstr ""
 
 #: src/ututi/templates/anonymous_index.mako:20 src/ututi/templates/register.mako:53
@@ -1143,12 +1153,7 @@ msgid "Update"
 msgstr ""
 
 #: src/ututi/templates/group/members_step.mako:21
-#: src/ututi/templates_py/group/members_step.mako.py:64
-msgid "Group home"
-msgstr ""
-
-#: src/ututi/templates/group/members_step.mako:23
-#: src/ututi/templates_py/group/members_step.mako.py:67
+#: src/ututi/templates_py/group/members_step.mako.py:62
 msgid "Finish and go to group's main page"
 msgstr ""
 
@@ -1438,24 +1443,24 @@ msgstr[1] ""
 msgid "No results found."
 msgstr ""
 
-#: src/ututi/templates/sections/files.mako:206
+#: src/ututi/templates/sections/files.mako:210
 #: src/ututi/templates_py/sections/files.mako.py:50
 msgid "Here"
 msgstr ""
 
-#: src/ututi/templates/sections/files.mako:222
-#: src/ututi/templates_py/sections/files.mako.py:241
+#: src/ututi/templates/sections/files.mako:226
+#: src/ututi/templates_py/sections/files.mako.py:243
 msgid "(Delete)"
 msgstr ""
 
-#: src/ututi/templates/sections/files.mako:228
-#: src/ututi/templates/sections/files.mako:233
-#: src/ututi/templates_py/sections/files.mako.py:251
-#: src/ututi/templates_py/sections/files.mako.py:273
+#: src/ututi/templates/sections/files.mako:232
+#: src/ututi/templates/sections/files.mako:237
+#: src/ututi/templates_py/sections/files.mako.py:253
+#: src/ututi/templates_py/sections/files.mako.py:275
 msgid "There are no files here, this folder is empty!"
 msgstr ""
 
-#: src/ututi/templates/sections/files.mako:253
+#: src/ututi/templates/sections/files.mako:257
 #: src/ututi/templates_py/sections/files.mako.py:109
 #, python-format
 msgid "%(count)s file"
@@ -1463,12 +1468,12 @@ msgid_plural "%(count)s files"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ututi/templates/sections/files.mako:271
+#: src/ututi/templates/sections/files.mako:275
 #: src/ututi/templates_py/sections/files.mako.py:142
 msgid "Upload file"
 msgstr ""
 
-#: src/ututi/templates/sections/files.mako:284
+#: src/ututi/templates/sections/files.mako:288
 #: src/ututi/templates_py/sections/files.mako.py:166
 msgid "New folder:"
 msgstr ""
@@ -1682,11 +1687,11 @@ msgstr ""
 msgid "Subject information"
 msgstr ""
 
-#: src/ututi/templates_py/portlets/subject.mako.py:107
+#: src/ututi/templates_py/portlets/subject.mako.py:102
 msgid "Watch subject"
 msgstr ""
 
-#: src/ututi/templates_py/portlets/subject.mako.py:110
+#: src/ututi/templates_py/portlets/subject.mako.py:105
 msgid "Stop watching the subject"
 msgstr ""
 
