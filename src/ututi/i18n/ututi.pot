@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2009-09-09 10:29+0300\n"
+"POT-Creation-Date: 2009-09-09 16:47+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,37 +24,37 @@ msgid ""
 "else?"
 msgstr ""
 
-#: src/ututi/controllers/files.py:65 src/ututi/controllers/group.py:181
+#: src/ututi/controllers/files.py:65 src/ututi/controllers/group.py:183
 #: src/ututi/templates/files.mako:7 src/ututi/templates_py/files.mako.py:39
 #: src/ututi/templates_py/subject_home.mako.py:46
 msgid "Files"
 msgstr ""
 
-#: src/ututi/controllers/group.py:56 src/ututi/controllers/subject.py:43
+#: src/ututi/controllers/group.py:58 src/ututi/controllers/subject.py:42
 msgid "Such id already exists, choose a different one."
 msgstr ""
 
-#: src/ututi/controllers/group.py:57
+#: src/ututi/controllers/group.py:59
 msgid "Id cannot be used as an email address."
 msgstr ""
 
-#: src/ututi/controllers/group.py:80
+#: src/ututi/controllers/group.py:82
 #, python-format
 msgid "Bad file type, only files of the types '%(allowed)s' are supported."
 msgstr ""
 
-#: src/ututi/controllers/group.py:172 src/ututi/controllers/profile.py:55
+#: src/ututi/controllers/group.py:174 src/ututi/controllers/profile.py:55
 #: src/ututi/templates/group/home.mako:52 src/ututi/templates/profile/home.mako:7
 #: src/ututi/templates_py/group/home.mako.py:98
 #: src/ututi/templates_py/profile/home.mako.py:38
 msgid "What's new?"
 msgstr ""
 
-#: src/ututi/controllers/group.py:175
+#: src/ututi/controllers/group.py:177
 msgid "Forum"
 msgstr ""
 
-#: src/ututi/controllers/group.py:178 src/ututi/templates/group/members.mako:7
+#: src/ututi/controllers/group.py:180 src/ututi/templates/group/members.mako:7
 #: src/ututi/templates/group/members_admin.mako:14
 #: src/ututi/templates_py/group_members.mako.py:38
 #: src/ututi/templates_py/group/members.mako.py:41
@@ -62,83 +62,83 @@ msgstr ""
 msgid "Members"
 msgstr ""
 
-#: src/ututi/controllers/group.py:184 src/ututi/templates/subjects.mako:7
+#: src/ututi/controllers/group.py:186 src/ututi/templates/subjects.mako:7
 #: src/ututi/templates_py/subjects.mako.py:38
 #: src/ututi/templates_py/home/findgroup.mako.py:103
 msgid "Subjects"
 msgstr ""
 
-#: src/ututi/controllers/group.py:203
+#: src/ututi/controllers/group.py:205
 msgid ""
 "The group's page was hidden. You can show it again by editing the group's "
 "settings."
 msgstr ""
 
-#: src/ututi/controllers/group.py:221
+#: src/ututi/controllers/group.py:223
 msgid ""
 "Your request to join the group was forwarded to the group's administrators. "
 "Thank You!"
 msgstr ""
 
-#: src/ututi/controllers/group.py:223
+#: src/ututi/controllers/group.py:225
 msgid "You already are a member of this group."
 msgstr ""
 
-#: src/ututi/controllers/group.py:225
+#: src/ututi/controllers/group.py:227
 msgid "Your request to join the group is still being processed."
 msgstr ""
 
-#: src/ututi/controllers/group.py:243
+#: src/ututi/controllers/group.py:245
 msgid "The group's front page was updated."
 msgstr ""
 
-#: src/ututi/controllers/group.py:508
+#: src/ututi/controllers/group.py:530
 msgid "Users invited."
 msgstr ""
 
-#: src/ututi/controllers/group.py:510
+#: src/ututi/controllers/group.py:532
 #, python-format
 msgid "Invalid email addresses detected: %s"
 msgstr ""
 
-#: src/ututi/controllers/group.py:525
+#: src/ututi/controllers/group.py:547
 #, python-format
 msgid "Congratulations! You are now a member of the group '%s'"
 msgstr ""
 
-#: src/ututi/controllers/group.py:527
+#: src/ututi/controllers/group.py:549
 #, python-format
 msgid "Invitation to group '%s' rejected."
 msgstr ""
 
-#: src/ututi/controllers/group.py:548
+#: src/ututi/controllers/group.py:570
 #, python-format
 msgid "New member %s added."
 msgstr ""
 
-#: src/ututi/controllers/group.py:550
+#: src/ututi/controllers/group.py:572
 #, python-format
 msgid "Group membership denied to %s."
 msgstr ""
 
-#: src/ututi/controllers/group.py:554
+#: src/ututi/controllers/group.py:576
 msgid "Error confirming membership request."
 msgstr ""
 
-#: src/ututi/controllers/group.py:574
+#: src/ututi/controllers/group.py:596
 msgid "The group must have at least one administrator!"
 msgstr ""
 
-#: src/ututi/controllers/group.py:580
+#: src/ututi/controllers/group.py:602
 #, python-format
 msgid "The status of the user %s was updated."
 msgstr ""
 
-#: src/ututi/controllers/group.py:582
+#: src/ututi/controllers/group.py:604
 msgid "Problem updating the status of the user."
 msgstr ""
 
-#: src/ututi/controllers/group.py:584
+#: src/ututi/controllers/group.py:606
 msgid "Problem updating the status of the user. Cannot find such user."
 msgstr ""
 
@@ -278,17 +278,11 @@ msgstr ""
 msgid "The element does not exist."
 msgstr ""
 
-#: src/ututi/controllers/subject.py:73
-msgid ""
-"The text contains invalid characters, only letters, numbers and the symbols -"
-" + _ are allowed."
-msgstr ""
-
-#: src/ututi/controllers/subject.py:148
+#: src/ututi/controllers/subject.py:174
 msgid "The subject has been added to your watched subjects list."
 msgstr ""
 
-#: src/ututi/controllers/subject.py:151
+#: src/ututi/controllers/subject.py:177
 msgid "The subject has been removed from your watched subjects list."
 msgstr ""
 
@@ -406,13 +400,11 @@ msgid ""
 "or go to the search page please."
 msgstr ""
 
-#: src/ututi/templates/access_denied.mako:16
-#: src/ututi/templates_py/access_denied.mako.py:51
+#: src/ututi/templates/access_denied.mako:16 src/ututi/templates/error.mako:17
 msgid "go back"
 msgstr ""
 
 #: src/ututi/templates/access_denied.mako:18
-#: src/ututi/templates_py/access_denied.mako.py:59
 msgid "go find something else"
 msgstr ""
 
@@ -457,20 +449,20 @@ msgstr ""
 msgid "Ututi search"
 msgstr ""
 
-#: src/ututi/templates/base.mako:8 src/ututi/templates_py/base.mako.py:485
+#: src/ututi/templates/base.mako:8 src/ututi/templates_py/base.mako.py:486
 msgid "student information online"
 msgstr ""
 
-#: src/ututi/templates/base.mako:18 src/ututi/templates_py/base.mako.py:174
+#: src/ututi/templates/base.mako:18 src/ututi/templates_py/base.mako.py:175
 msgid "log out"
 msgstr ""
 
-#: src/ututi/templates/base.mako:21 src/ututi/templates_py/base.mako.py:177
+#: src/ututi/templates/base.mako:21 src/ututi/templates_py/base.mako.py:178
 msgid "groups"
 msgstr ""
 
 #: src/ututi/templates/base.mako:33 src/ututi/templates/profile/search.mako:31
-#: src/ututi/templates_py/base.mako.py:195
+#: src/ututi/templates_py/base.mako.py:196
 #: src/ututi/templates_py/profile/search.mako.py:91
 msgid "Create a new group"
 msgstr ""
@@ -478,7 +470,7 @@ msgstr ""
 #: src/ututi/templates/base.mako:33 src/ututi/templates/group/add.mako:12
 #: src/ututi/templates/group/add.mako:31
 #: src/ututi/templates/profile/findgroup.mako:124
-#: src/ututi/templates_py/base.mako.py:197
+#: src/ututi/templates_py/base.mako.py:198
 #: src/ututi/templates_py/group_add.mako.py:39
 #: src/ututi/templates_py/group_add.mako.py:95
 #: src/ututi/templates_py/group/add.mako.py:53
@@ -488,21 +480,21 @@ msgstr ""
 msgid "New group"
 msgstr ""
 
-#: src/ututi/templates/base.mako:37 src/ututi/templates_py/base.mako.py:202
+#: src/ututi/templates/base.mako:37 src/ututi/templates_py/base.mako.py:203
 msgid "home"
 msgstr ""
 
-#: src/ututi/templates/base.mako:43 src/ututi/templates_py/base.mako.py:207
+#: src/ututi/templates/base.mako:43 src/ututi/templates_py/base.mako.py:208
 msgid "Upload your personal logo"
 msgstr ""
 
-#: src/ututi/templates/base.mako:62 src/ututi/templates_py/base.mako.py:244
+#: src/ututi/templates/base.mako:62 src/ututi/templates_py/base.mako.py:245
 msgid "Wrong password or username!"
 msgstr ""
 
 #: src/ututi/templates/base.mako:65 src/ututi/templates/register.mako:33
 #: src/ututi/templates/group/members_admin.mako:91
-#: src/ututi/templates_py/base.mako.py:249
+#: src/ututi/templates_py/base.mako.py:250
 #: src/ututi/templates_py/register.mako.py:62
 #: src/ututi/templates_py/group/members_admin.mako.py:136
 #: src/ututi/templates_py/portlets/anonymous.mako.py:100
@@ -510,44 +502,48 @@ msgid "Email"
 msgstr ""
 
 #: src/ututi/templates/base.mako:72 src/ututi/templates/register.mako:37
-#: src/ututi/templates_py/base.mako.py:255
+#: src/ututi/templates_py/base.mako.py:256
 #: src/ututi/templates_py/register.mako.py:65
 #: src/ututi/templates_py/portlets/anonymous.mako.py:103
 msgid "Password"
 msgstr ""
 
-#: src/ututi/templates/base.mako:83 src/ututi/templates_py/base.mako.py:260
+#: src/ututi/templates/base.mako:83 src/ututi/templates_py/base.mako.py:261
 msgid "forgotten password?"
 msgstr ""
 
-#: src/ututi/templates/base.mako:236 src/ututi/templates_py/base.mako.py:95
+#: src/ututi/templates/base.mako:236 src/ututi/templates_py/base.mako.py:96
 msgid "UTUTI"
 msgstr ""
 
-#: src/ututi/templates/base.mako:260 src/ututi/templates_py/base.mako.py:124
+#: src/ututi/templates/base.mako:260 src/ututi/templates_py/base.mako.py:125
 msgid "Close"
 msgstr ""
 
-#: src/ututi/templates/base.mako:274 src/ututi/templates_py/base.mako.py:139
+#: src/ututi/templates/base.mako:274 src/ututi/templates_py/base.mako.py:140
 msgid "Apie Ututi"
 msgstr ""
 
-#: src/ututi/templates/base.mako:275 src/ututi/templates_py/base.mako.py:142
+#: src/ututi/templates/base.mako:275 src/ututi/templates_py/base.mako.py:143
 msgid "U-blog"
 msgstr ""
 
-#: src/ututi/templates/base.mako:276 src/ututi/templates_py/base.mako.py:147
+#: src/ututi/templates/base.mako:276 src/ututi/templates_py/base.mako.py:148
 msgid "Terms of use"
 msgstr ""
 
-#: src/ututi/templates/error.mako:8
+#: src/ututi/templates/error.mako:8 src/ututi/templates_py/error.mako.py:39
 msgid "Error!"
 msgstr ""
 
-#: src/ututi/templates/error.mako:13
+#: src/ututi/templates/error.mako:13 src/ututi/templates_py/error.mako.py:45
 msgid ""
 "Oops, an error happened, please don't leave us, go back and try doing "
 "something else or look for information."
+msgstr ""
+
+#: src/ututi/templates/error.mako:19
+msgid "go find something"
 msgstr ""
 
 #: src/ututi/templates/files.mako:19 src/ututi/templates/structure.mako:35
@@ -559,7 +555,7 @@ msgstr ""
 #: src/ututi/templates/files.mako:23 src/ututi/templates/structure.mako:38
 #: src/ututi/templates/group/edit.mako:76 src/ututi/templates/page/add.mako:14
 #: src/ututi/templates/page/edit.mako:12 src/ututi/templates/structure/edit.mako:10
-#: src/ututi/templates/subject/add.mako:28 src/ututi/templates/subject/edit.mako:23
+#: src/ututi/templates/subject/add.mako:23 src/ututi/templates/subject/edit.mako:23
 #: src/ututi/templates_py/files.mako.py:65
 #: src/ututi/templates_py/group_add.mako.py:51
 #: src/ututi/templates_py/structure.mako.py:67
@@ -567,7 +563,7 @@ msgstr ""
 #: src/ututi/templates_py/page/add.mako.py:51
 #: src/ututi/templates_py/page/edit.mako.py:51
 #: src/ututi/templates_py/structure/edit.mako.py:45
-#: src/ututi/templates_py/subject/add.mako.py:70
+#: src/ututi/templates_py/subject/add.mako.py:119
 #: src/ututi/templates_py/subject/edit.mako.py:74
 msgid "Title"
 msgstr ""
@@ -594,7 +590,7 @@ msgstr ""
 #: src/ututi/templates/group/edit_page.mako:13 src/ututi/templates/page/add.mako:25
 #: src/ututi/templates/page/edit.mako:23 src/ututi/templates/profile/edit.mako:106
 #: src/ututi/templates/structure/edit.mako:37
-#: src/ututi/templates/subject/add.mako:55 src/ututi/templates/subject/edit.mako:50
+#: src/ututi/templates/subject/add.mako:50 src/ututi/templates/subject/edit.mako:50
 #: src/ututi/templates_py/files.mako.py:74
 #: src/ututi/templates_py/group_add.mako.py:80
 #: src/ututi/templates_py/structure.mako.py:94
@@ -605,7 +601,7 @@ msgstr ""
 #: src/ututi/templates_py/page/edit.mako.py:63
 #: src/ututi/templates_py/profile/edit.mako.py:89
 #: src/ututi/templates_py/structure/edit.mako.py:87
-#: src/ututi/templates_py/subject/add.mako.py:88
+#: src/ututi/templates_py/subject/add.mako.py:137
 #: src/ututi/templates_py/subject/edit.mako.py:101
 #: src/ututi/templates_py/user/edit.mako.py:57
 msgid "Save"
@@ -896,7 +892,7 @@ msgstr[1] ""
 #: src/ututi/templates/forum/new.mako:12
 #: src/ututi/templates_py/group_forum.mako.py:44
 #: src/ututi/templates_py/forum/new.mako.py:45
-#: src/ututi/templates_py/group/forum.mako.py:46
+#: src/ututi/templates_py/group/forum.mako.py:51
 msgid "Subject"
 msgstr ""
 
@@ -972,6 +968,46 @@ msgstr ""
 msgid "Group logo"
 msgstr ""
 
+#: src/ututi/templates/group/add_subject.mako:6
+#: src/ututi/templates/group/add_subject.mako:21
+#: src/ututi/templates/subject/add.mako:8 src/ututi/templates/subject/add.mako:17
+#: src/ututi/templates/subject/edit.mako:8
+#: src/ututi/templates_py/group/add_subject.mako.py:72
+#: src/ututi/templates_py/group/add_subject.mako.py:133
+#: src/ututi/templates_py/subject/add.mako.py:60
+#: src/ututi/templates_py/subject/add.mako.py:155
+#: src/ututi/templates_py/subject/edit.mako.py:140
+msgid "New subject"
+msgstr ""
+
+#: src/ututi/templates/group/add_subject.mako:16
+#: src/ututi/templates/group/subjects.mako:58
+#: src/ututi/templates/group/subjects_member.mako:9
+#: src/ututi/templates_py/group/add_subject.mako.py:59
+#: src/ututi/templates_py/group/subjects.mako.py:95
+#: src/ututi/templates_py/group/subjects_member.mako.py:44
+msgid "Group Subjects"
+msgstr ""
+
+#: src/ututi/templates/group/add_subject.mako:20
+#: src/ututi/templates_py/group/add_subject.mako.py:69
+msgid "back to Subject selection"
+msgstr ""
+
+#: src/ututi/templates/group/add_subject.mako:27
+#: src/ututi/templates/group/subjects.mako:167
+#: src/ututi/templates_py/group/add_subject.mako.py:90
+#: src/ututi/templates_py/group/subjects.mako.py:151
+msgid "Invite group members"
+msgstr ""
+
+#: src/ututi/templates/group/add_subject.mako:28
+#: src/ututi/templates/group/subjects.mako:168
+#: src/ututi/templates_py/group/add_subject.mako.py:93
+#: src/ututi/templates_py/group/subjects.mako.py:154
+msgid "Finish choosing subjects"
+msgstr ""
+
 #: src/ututi/templates/group/edit.mako:22 src/ututi/templates/group/edit.mako:41
 #: src/ututi/templates/profile/edit.mako:22
 #: src/ututi/templates/profile/edit.mako:41
@@ -995,11 +1031,11 @@ msgstr ""
 msgid "Delete current logo"
 msgstr ""
 
-#: src/ututi/templates/group/edit.mako:108 src/ututi/templates/subject/add.mako:44
+#: src/ututi/templates/group/edit.mako:108 src/ututi/templates/subject/add.mako:39
 #: src/ututi/templates/subject/edit.mako:39
 #: src/ututi/templates_py/group/edit.mako.py:111
 #: src/ututi/templates_py/portlets/search.mako.py:159
-#: src/ututi/templates_py/subject/add.mako.py:79
+#: src/ututi/templates_py/subject/add.mako.py:128
 #: src/ututi/templates_py/subject/edit.mako.py:89
 msgid "Tags"
 msgstr ""
@@ -1157,18 +1193,11 @@ msgstr ""
 msgid "Finish and go to group's main page"
 msgstr ""
 
-#: src/ututi/templates/group/subjects.mako:58
-#: src/ututi/templates/group/subjects_member.mako:9
-#: src/ututi/templates_py/group/subjects.mako.py:94
-#: src/ututi/templates_py/group/subjects_admin.mako.py:77
-msgid "Group Subjects"
-msgstr ""
-
 #: src/ututi/templates/group/subjects.mako:86
 #: src/ututi/templates/group/subjects_member.mako:19
 #: src/ututi/templates/profile/subjects.mako:80
-#: src/ututi/templates_py/group/subjects.mako.py:106
-#: src/ututi/templates_py/group/subjects_admin.mako.py:89
+#: src/ututi/templates_py/group/subjects.mako.py:107
+#: src/ututi/templates_py/group/subjects_member.mako.py:54
 #: src/ututi/templates_py/portlets/group.mako.py:336
 #: src/ututi/templates_py/portlets/user.mako.py:336
 #: src/ututi/templates_py/profile/subjects.mako.py:85
@@ -1177,29 +1206,32 @@ msgstr ""
 
 #: src/ututi/templates/group/subjects.mako:93
 #: src/ututi/templates/profile/subjects.mako:88
-#: src/ututi/templates_py/group/subjects.mako.py:117
-#: src/ututi/templates_py/group/subjects_admin.mako.py:100
+#: src/ututi/templates_py/group/subjects.mako.py:118
 #: src/ututi/templates_py/profile/subjects.mako.py:96
 msgid "Recommended subjects"
 msgstr ""
 
 #: src/ututi/templates/group/subjects.mako:126
 #: src/ututi/templates/profile/subjects.mako:121
-#: src/ututi/templates_py/group/subjects.mako.py:294
+#: src/ututi/templates_py/group/subjects.mako.py:301
 #: src/ututi/templates_py/profile/subjects.mako.py:213
 msgid "Watch"
 msgstr ""
 
-#: src/ututi/templates/group/subjects.mako:163
-#: src/ututi/templates_py/group/subjects.mako.py:144
-#: src/ututi/templates_py/group/subjects_admin.mako.py:121
-msgid "Invite group members"
+#: src/ututi/templates/group/subjects.mako:160
+#: src/ututi/templates/profile/search.mako:30
+#: src/ututi/templates/profile/search.mako:35
+#: src/ututi/templates_py/group/subjects.mako.py:139
+#: src/ututi/templates_py/profile/search.mako.py:88
+#: src/ututi/templates_py/profile/search.mako.py:98
+msgid "Did not find what you were looking for?"
 msgstr ""
 
-#: src/ututi/templates/group/subjects.mako:164
-#: src/ututi/templates_py/group/subjects.mako.py:147
-#: src/ututi/templates_py/group/subjects_admin.mako.py:124
-msgid "Finish choosing subjects"
+#: src/ututi/templates/group/subjects.mako:161
+#: src/ututi/templates/profile/search.mako:36
+#: src/ututi/templates_py/group/subjects.mako.py:142
+#: src/ututi/templates_py/profile/search.mako.py:101
+msgid "Create a new subject"
 msgstr ""
 
 #: src/ututi/templates/home/password_resetform.mako:7
@@ -1357,18 +1389,6 @@ msgstr ""
 msgid "You haven't contributed much, have you?"
 msgstr ""
 
-#: src/ututi/templates/profile/search.mako:30
-#: src/ututi/templates/profile/search.mako:35
-#: src/ututi/templates_py/profile/search.mako.py:88
-#: src/ututi/templates_py/profile/search.mako.py:98
-msgid "Did not find what you were looking for?"
-msgstr ""
-
-#: src/ututi/templates/profile/search.mako:36
-#: src/ututi/templates_py/profile/search.mako.py:101
-msgid "Create a new subject"
-msgstr ""
-
 #: src/ututi/templates/profile/welcome.mako:11
 #: src/ututi/templates_py/home/welcome.mako.py:49
 #: src/ututi/templates_py/profile/welcome.mako.py:50
@@ -1504,33 +1524,20 @@ msgid ""
 "membership?"
 msgstr ""
 
-#: src/ututi/templates/subject/add.mako:8 src/ututi/templates/subject/add.mako:16
-#: src/ututi/templates/subject/edit.mako:8
-#: src/ututi/templates_py/subject/add.mako.py:61
-#: src/ututi/templates_py/subject/add.mako.py:127
-#: src/ututi/templates_py/subject/edit.mako.py:140
-msgid "New subject"
-msgstr ""
-
-#: src/ututi/templates/subject/add.mako:15
-#: src/ututi/templates_py/subject/add.mako.py:58
+#: src/ututi/templates/subject/add.mako:16
+#: src/ututi/templates_py/subject/add.mako.py:57
 msgid "back to the search"
 msgstr ""
 
-#: src/ututi/templates/subject/add.mako:21
-#: src/ututi/templates_py/subject/add.mako.py:67
-msgid "Id"
-msgstr ""
-
-#: src/ututi/templates/subject/add.mako:34 src/ututi/templates/subject/edit.mako:29
+#: src/ututi/templates/subject/add.mako:29 src/ututi/templates/subject/edit.mako:29
 #: src/ututi/templates_py/portlets/subject.mako.py:85
-#: src/ututi/templates_py/subject/add.mako.py:73
+#: src/ututi/templates_py/subject/add.mako.py:122
 #: src/ututi/templates_py/subject/edit.mako.py:80
 msgid "Lecturer"
 msgstr ""
 
-#: src/ututi/templates/subject/add.mako:49 src/ututi/templates/subject/edit.mako:44
-#: src/ututi/templates_py/subject/add.mako.py:85
+#: src/ututi/templates/subject/add.mako:44 src/ututi/templates/subject/edit.mako:44
+#: src/ututi/templates_py/subject/add.mako.py:134
 #: src/ututi/templates_py/subject/edit.mako.py:95
 msgid "Brief description of the subject"
 msgstr ""
@@ -1598,12 +1605,12 @@ msgid "Address"
 msgstr ""
 
 #: src/ututi/templates_py/group_forum.mako.py:46
-#: src/ututi/templates_py/group/forum.mako.py:48
+#: src/ututi/templates_py/group/forum.mako.py:53
 msgid "Replies"
 msgstr ""
 
 #: src/ututi/templates_py/group_forum.mako.py:48
-#: src/ututi/templates_py/group/forum.mako.py:50
+#: src/ututi/templates_py/group/forum.mako.py:55
 msgid "Last post"
 msgstr ""
 
@@ -1620,8 +1627,8 @@ msgstr ""
 msgid "Your confirmed emails:"
 msgstr ""
 
-#: src/ututi/templates_py/group/subjects_admin.mako.py:189
-msgid "Pick"
+#: src/ututi/templates_py/group/forum.mako.py:48
+msgid "Post new topic"
 msgstr ""
 
 #: src/ututi/templates_py/home/findgroup.mako.py:135
