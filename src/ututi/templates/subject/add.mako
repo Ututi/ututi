@@ -18,13 +18,6 @@ ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
 <form method="post" action="${url(controller='subject', action='create')}"
      id="subject_add_form" enctype="multipart/form-data">
   <div class="form-field">
-    <label for="id">${_('Id')}</label>
-    <div class="input-rounded"><div>
-        <input type="text" id="id" name="id" class="line"/>
-    </div></div>
-  </div>
-
-  <div class="form-field">
     <label for="title">${_('Title')}</label>
     <div class="input-rounded"><div>
         <input type="text" id="title" name="title" class="line"/>

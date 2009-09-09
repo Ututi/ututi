@@ -34,7 +34,7 @@ We should get redirected to the index view of the page we just created.
 
 Let's edit the page now.
 
-    >>> browser.getLink('Edit').click()
+    >>> browser.getLink('Edit', index=1).click()
     >>> browser.getControl('Content').value = "<script>Yeah!</script>Being Awesome is very easy!"
     >>> browser.getControl('Save').click()
 

@@ -20,7 +20,7 @@
         ${subject.lecturer}
       </div>
     </div>
-    <br/>
+    <br />
 
     %if c.user:
       <a id="subject_edit_link"

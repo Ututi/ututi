@@ -46,7 +46,6 @@ We can add a subject at the url /subject/add
     >>> browser.open('http://localhost/subjects/add')
 
     >>> browser.getControl(name='location-1').value = 'vu'
-    >>> browser.getControl('Id').value = 'test_subject'
     >>> browser.getControl('Title').value = 'Test subject'
     >>> browser.getControl('Save').click()
     >>> browser.printQuery('//h2/text()')
@@ -59,18 +58,11 @@ The id is checked for uniqueness.
 
     >>> browser.open('http://localhost/subjects/add')
     >>> browser.getControl(name='location-1').value = 'vu'
-    >>> browser.getControl('Id').value = 'test_subject'
-    >>> browser.getControl('Title').value = 'Test subject2'
+    >>> browser.getControl('Title').value = 'Test subject'
+    >>> browser.getControl('Lecturer').value = 'Some guy'
     >>> browser.getControl('Save').click()
-    >>> browser.printQuery("//span[@class='error-message']/text()")
-    Such id already exists, choose a different one.
-
-And they must not contain characters not allowed in urls.
-
-    >>> browser.getControl('Id').value = '{}test_subject\/'
-    >>> browser.getControl('Save').click()
-    >>> browser.printQuery("//span[@class='error-message']/text()")
-    The text contains invalid characters, only letters, numbers and the symbols - + _ are allowed.
+    >>> print browser.url
+    http://localhost/subject/vu/test_subject-some_guy
 
 You can import more subjects using the admin interface.
 
@@ -86,6 +78,7 @@ You can import more subjects using the admin interface.
     'http://localhost/subjects'
     >>> browser.printQuery("id('subject_list')//li/a/text()")
     Matematinė analizė
+    Test subject
     Test subject
     Imported subject
 

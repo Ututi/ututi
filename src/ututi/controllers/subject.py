@@ -1,4 +1,6 @@
 import logging
+from random import Random
+import string
 
 from sqlalchemy.orm.exc import NoResultFound
 from webhelpers.html.tags import link_to
@@ -20,6 +22,7 @@ from ututi.lib.fileview import FileViewMixin
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import LocationTagsValidator
 import ututi.lib.helpers as h
+from ututi.lib import urlify
 
 log = logging.getLogger(__name__)
 
@@ -66,15 +69,10 @@ class SubjectForm(Schema):
 
     title = validators.UnicodeString(not_empty=True, strip=True)
     lecturer = validators.UnicodeString(strip=True)
-    chained_validators = [SubjectIdValidator()]
 
 
 class NewSubjectForm(SubjectForm):
-    msg = {'invalid': _('The text contains invalid characters, only letters, numbers and the symbols - + _ are allowed.')}
-    id = All(validators.Regex(r'^[_\+\-a-zA-Z0-9]*$',
-                              messages=msg),
-             validators.String(max=50, strip=True, not_empty=True))
-
+    pass
 
 class SubjectController(BaseController, FileViewMixin):
     """A controller for subjects."""
@@ -97,6 +95,25 @@ class SubjectController(BaseController, FileViewMixin):
     def add(self):
         return render('subject/add.mako')
 
+    def _generate_subject_id(self, subject):
+        title = urlify(subject.title, 20)
+        lecturer = urlify(subject.lecturer or '', 10)
+
+        alternative_ids = [
+            '%(title)s' % dict(title=title),
+            '%(title)s-%(lecturer)s' % dict(title=title, lecturer=lecturer),
+            '%(title)s-%(id)i' % dict(title=title, id=subject.id),
+            '%(title)s-%(lecturer)s-%(id)i' % dict(title=title, lecturer=lecturer, id=subject.id)]
+        if subject.lecturer is None or subject.lecturer.strip() == u'':
+            del(alternative_ids[3])
+            del(alternative_ids[1])
+
+        for sid in alternative_ids:
+            exist = Subject.get(subject.location, sid)
+            if exist is None:
+                return sid
+        return None
+
     @validate(schema=NewSubjectForm, form='add')
     @ActionProtector("user")
     def create(self):
@@ -104,7 +121,7 @@ class SubjectController(BaseController, FileViewMixin):
             redirect_to(controller='subject', action='add')
 
         title = self.form_result['title']
-        id = self.form_result['id'].lower()
+        id = ''.join(Random().sample(string.ascii_lowercase, 8)) # use random id first
         lecturer = self.form_result['lecturer']
         location = self.form_result['location']
         description = self.form_result['description']
@@ -125,6 +142,12 @@ class SubjectController(BaseController, FileViewMixin):
             subj.tags.append(SimpleTag.get(tag))
 
         meta.Session.add(subj)
+        meta.Session.flush()
+
+        newid = self._generate_subject_id(subj)
+        if newid is not None:
+            subj.subject_id = newid
+
         meta.Session.commit()
 
         redirect_to(controller='subject',
@@ -163,6 +186,12 @@ class SubjectController(BaseController, FileViewMixin):
     @ActionProtector("user")
     def update(self, subject):
 
+        #check if we need to regenerate the id
+        clash = Subject.get(self.form_result.get('location', None), subject.subject_id)
+        if clash is not None and clash is not subject:
+            subject.subject_id = self._generate_subject_id(subject)
+
+
         subject.title = self.form_result['title']
         subject.lecturer = self.form_result['lecturer']
         subject.location = self.form_result['location']
@@ -176,6 +205,7 @@ class SubjectController(BaseController, FileViewMixin):
         subject.tags = []
         for tag in tags:
             subject.tags.append(SimpleTag.get(tag))
+
 
         meta.Session.commit()
 

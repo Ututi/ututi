@@ -110,6 +110,7 @@ h1, h2, h3, h4 {
   color: #4d4d4d;
   font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 0.9em;
+  margin-right: 5px;
 }
 
 .tag:hover {
