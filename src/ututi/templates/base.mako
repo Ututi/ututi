@@ -255,7 +255,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
       host: 'ututi.uservoice.com',
       forum: '26068',
       /* optional */
-      alignment: 'left',
+      alignment: 'top',
       background_color:'#ff7800',
       text_color: 'white',
       hover_color: '#9d9d9d',
