@@ -69,7 +69,7 @@ Let's look at the attachment in the thread:
     I am a file!
 
     >>> browser.open(url)
-    >>> browser.getLink('Forum').click()
+    >>> browser.getLink('Back to the topic list').click()
 
 Let's post a new topic now:
 
@@ -131,7 +131,7 @@ And we get redirected to our newly created thread
 If we go back to the forum, we should see the new thread in the list
 of threads:
 
-    >>> browser.getLink('Forum').click()
+    >>> browser.getLink('Back to the topic list').click()
     >>> browser.printQuery("id('forum-thread-list')//td//text()")
     Hi mom
     0 replies

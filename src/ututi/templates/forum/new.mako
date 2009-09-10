@@ -4,6 +4,8 @@
 ${_('New topic')}
 </%def>
 
+<a class="back-link" href="${h.url_for(action='index')}">${_('Back to the topic list')}</a>
+
 <h1>${_('New topic')}</h1>
 
 <form method="post" action="${url(controller='groupforum', action='post', id=c.group.group_id)}"

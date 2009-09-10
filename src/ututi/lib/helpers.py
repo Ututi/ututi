@@ -131,6 +131,9 @@ def selected_item(items):
         if item.get('selected', False):
             return item
 
+def unselected_items(items):
+    return [item for item in items if not item.get('selected', False)]
+
 def marked_list(items):
     items[-1]['last_item'] = True
     return items

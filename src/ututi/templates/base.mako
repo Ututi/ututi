@@ -162,7 +162,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
             <span>${selected.get('title') | h.ellipsis}</span>
           </div>
         </li>
-        %for item in h.marked_list(breadcrumb):
+        %for item in h.marked_list(h.unselected_items(breadcrumb)):
         <%
            if item.get('last_item', False):
                cls = 'last'
