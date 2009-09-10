@@ -87,6 +87,13 @@ h4,
   font-size: 1.2em;
 }
 
+#sidebar h1,
+#sidebar h2,
+#sidebar h3,
+#sidebar h4 {
+  margin-left: 0;
+}
+
 .smaller,
 label {
   font-size: 1.1em;
