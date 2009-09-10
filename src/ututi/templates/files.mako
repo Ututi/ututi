@@ -7,13 +7,13 @@
 <h1>${_('Files')}</h1>
 
 %if c.files:
-    <ul id="file_list">
+    <ol id="file_list">
     %for file in c.files:
          <li>
-                <a href="${url(controller='files', action='get', id=file.id)}" class="file-link">${file.title}</a>
+           <a href="${url(controller='files', action='get', id=file.id)}" class="file-link">${file.title}</a>
          </li>
     %endfor
-    </ul>
+    </ol>
 %endif
 
 <h2>${_('Create new')}</h2>

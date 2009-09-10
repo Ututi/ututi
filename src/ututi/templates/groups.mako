@@ -12,7 +12,7 @@
          <li>
                 <a href="${url(controller='group', action='home', id=group.group_id)}" class="group-link">${group.title}</a>
          % if group.logo is not None:
-                <img src="${url(controller='group', action='logo', id=group.group_id)}" />
+                <img src="${url(controller='group', action='logo', id=group.group_id, width=100)}" />
          % endif
          </li>
     %endfor

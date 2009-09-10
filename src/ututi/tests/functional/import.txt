@@ -12,7 +12,7 @@ First we log in to be able to see the user list.
 
 There is one initial user:
 
-    >>> browser.printQuery("id('user_list')//li/text()")
+    >>> browser.printQuery("id('user_list')//li/a/text()")
     Adminas Adminovix
     <BLANKLINE>
     Alternative user
@@ -30,7 +30,7 @@ We go to the import page. There we have a form to upload a user CSV file:
     ...                                       'users.csv')
     >>> form.getControl('Upload').click()
     >>> browser.open('http://localhost/admin/users')
-    >>> browser.printQuery("id('user_list')//li/text()")
+    >>> browser.printQuery("id('user_list')//li/a/text()")
     Adminas Adminovix
     Alternative user
     Second user
