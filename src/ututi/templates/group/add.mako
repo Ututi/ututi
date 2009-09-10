@@ -36,7 +36,7 @@ ${path_steps()}
      id="group_add_form" enctype="multipart/form-data">
 
   <div class="form-field">
-    ${location_widget(3)}
+    ${location_widget(2)}
   </div>
   <br class="clear-left"/>
   <div class="form-field">

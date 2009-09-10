@@ -32,7 +32,7 @@ ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
     </div></div>
   </div>
   <div class="form-field">
-    ${location_widget(3)}
+    ${location_widget(2)}
   </div>
   <br class="clear-left"/>
   <div class="form-field">

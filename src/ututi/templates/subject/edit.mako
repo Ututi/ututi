@@ -5,7 +5,7 @@
 <%namespace file="/widgets/tags.mako" import="*"/>
 
 <%def name="title()">
-${_('New subject')}
+${_('Edit subject')}
 </%def>
 
 <%def name="head_tags()">
@@ -32,7 +32,7 @@ ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
     </div></div>
   </div>
   <div class="form-field">
-    ${location_widget(3, c.subject.location.hierarchy())}
+    ${location_widget(2, c.subject.location.hierarchy())}
   </div>
   <br class="clear-left"/>
   <div class="form-field">

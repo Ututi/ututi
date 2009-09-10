@@ -13,7 +13,7 @@ ${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
 	<h3>${_('Join a group')}</h3>
 	<div class="message">${_('You can join your academic group to make communicating and sharing materials with your class mates easier.')}</div>
     <form method="post" action="${url(controller='profile', action='findgroup')}" id="findgroup-form">
-      ${location_widget(3)}
+      ${location_widget(2)}
 
 
       <div class="form-field hidden" id="year-input">
