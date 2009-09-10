@@ -10,6 +10,7 @@ ${parent.head_tags()}
 
 ${h.javascript_link('/javascripts/js-alternatives.js')|n}
   <script type="text/javascript">
+  //<![CDATA[
   $(document).ready(function() {
     new AjaxUpload('#group-logo-editable', {
       action: '${url(controller="group", id=c.group.group_id, action="logo_upload")}',
@@ -51,6 +52,7 @@ ${h.javascript_link('/javascripts/js-alternatives.js')|n}
     });
 
    });
+  //]]>
   </script>
 </%def>
 
@@ -135,4 +137,6 @@ from ututi.lib.security import is_root
   <div>
     <span class="btn"><input type="submit" value="${_('Save')}"/></span>
   </div>
+      </td>
+  </tr></table>
 </form>
