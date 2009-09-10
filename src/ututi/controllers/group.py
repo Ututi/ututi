@@ -331,6 +331,10 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         for tag in tags:
             group.tags.append(SimpleTag.get(tag))
 
+        if not group.moderators or is_root(c.user):
+            tag = values.get('location', None)
+            group.location = tag
+
         if is_root(c.user):
             group.moderators = values['moderators']
 
