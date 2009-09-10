@@ -114,6 +114,10 @@ ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
                   parameters['parent-'+i] = $(this).val();
               }
           });
+          $(next_item).find("input").setOptions({
+                data: []
+          });
+
           jQuery.getJSON("${url(controller='structure', action='completions')}",
                           parameters,
                           function(jdata) {
@@ -122,9 +126,10 @@ ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
                                   data: jdata.values
                               });
                               item.removeClass("json-target");
+                              item.find("input").focus().click();
                    });
 
-          $(next_item).find('input').val('').focus().click();
+          $(next_item).find('input').val('');
         } else {
           $(this).parents('form').find(".form-field.hidden:first").removeClass("hidden").find('input:first').focus().click();
           // show the next form element if there was one hidden
