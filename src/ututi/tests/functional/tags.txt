@@ -7,8 +7,8 @@ Subjects can be tagged upon creation or when being edited.
 
     >>> browser.open('http://localhost/subjects/add')
 
-    >>> browser.getControl(name='location-1').value = 'vu'
-    >>> browser.getControl(name='location-2').value = 'ef'
+    >>> browser.getControl(name='location-0').value = 'vu'
+    >>> browser.getControl(name='location-1').value = 'ef'
     >>> browser.getControl('Title').value = u'Mat.analiz\u0117'.encode('utf-8')
     >>> browser.getControl('Tags').value = 'tag1, tag2, tag 3'
     >>> browser.getControl('Save').click()

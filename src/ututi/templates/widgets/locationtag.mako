@@ -75,6 +75,24 @@ ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
       }
     });
 
+    var parameters = {};
+    $(this).addClass('preloadData');
+    $(".structure-complete").each(function(ii) {
+        if (ii < i) {
+           parameters['parent-'+ii] = $(this).val();
+        }
+    });
+    jQuery.getJSON("${url(controller='structure', action='completions')}",
+          parameters,
+          function(jdata, status) {
+             var item = $(jdata.id);
+             item.setOptions({
+                 data: jdata.values
+             });
+             item.removeClass("preloadData");
+    });
+
+
     $(this).result(function(event, data, formatted) {
       if (data) {
         var ind = $(".structure-complete").index(this);
@@ -106,13 +124,15 @@ ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
                               item.removeClass("json-target");
                    });
 
-          $(next_item).children('input').val('').focus();
+          $(next_item).find('input').val('').focus().click();
         } else {
-          $(".form-field.hidden:first").removeClass("hidden");
+          $(this).parents('form').find(".form-field.hidden:first").removeClass("hidden").find('input:first').focus().click();
+          // show the next form element if there was one hidden
         }
       }
     });
    });
+/*
    jQuery.getJSON("${url(controller='structure', action='completions')}",
                    function(jdata) {
                      var item = $(".structure-complete").eq(0);
@@ -120,7 +140,7 @@ ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
                        data: jdata.values
                      });
                    });
-
+*/
 //]]>
 </script>
 </%def>

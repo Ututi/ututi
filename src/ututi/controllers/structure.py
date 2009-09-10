@@ -112,13 +112,14 @@ class StructureController(BaseController):
     def completions(self):
         meta.engine.echo = True
         query = meta.Session.query(LocationTag)
+        depth = 0
         if hasattr(self, 'form_result'):
             text = self.form_result.get('q', None)
             parent = self.form_result.get('parent', '')
             if text is not None:
                 query = query.filter(or_(LocationTag.title_short.op('ILIKE')('%s%%' % text),
                                          LocationTag.title.op('ILIKE')('%s%%' % text)))
-
+            depth = len(parent)
             parent = LocationTag.get_by_title(parent)
             query = query.filter(LocationTag.parent==parent)
         else:
@@ -131,7 +132,7 @@ class StructureController(BaseController):
             has_children = meta.Session.query(LocationTag).filter(LocationTag.parent==tag).all() != []
             results.append({'id': tag.title_short, 'title': tag.title, 'path': '/'.join(tag.path), 'has_children': has_children})
 
-        return {'values' : results}
+        return {'values' : results, 'depth' : depth, 'id' : '#location-%i' % depth}
 
     def autocomplete_all_tags(self, all=False):
         return self.autocomplete_tags(True)
