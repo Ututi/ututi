@@ -18,7 +18,6 @@ from ututi.lib.fileview import FileViewMixin
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import LocationTagsValidator
 import ututi.lib.helpers as h
-from ututi.lib import urlify
 
 log = logging.getLogger(__name__)
 
@@ -73,25 +72,6 @@ class NewSubjectForm(SubjectForm):
 
 class SubjectAddMixin(object):
 
-    def _generate_subject_id(self, subject):
-        title = urlify(subject.title, 20)
-        lecturer = urlify(subject.lecturer or '', 10)
-
-        alternative_ids = [
-            '%(title)s' % dict(title=title),
-            '%(title)s-%(lecturer)s' % dict(title=title, lecturer=lecturer),
-            '%(title)s-%(id)i' % dict(title=title, id=subject.id),
-            '%(title)s-%(lecturer)s-%(id)i' % dict(title=title, lecturer=lecturer, id=subject.id)]
-        if subject.lecturer is None or subject.lecturer.strip() == u'':
-            del(alternative_ids[3])
-            del(alternative_ids[1])
-
-        for sid in alternative_ids:
-            exist = Subject.get(subject.location, sid)
-            if exist is None:
-                return sid
-        return None
-
     def _create_subject(self):
         title = self.form_result['title']
         id = ''.join(Random().sample(string.ascii_lowercase, 8)) # use random id first
@@ -117,7 +97,7 @@ class SubjectAddMixin(object):
         meta.Session.add(subj)
         meta.Session.flush()
 
-        newid = self._generate_subject_id(subj)
+        newid = subj.generate_new_id()
         if newid is not None:
             subj.subject_id = newid
 
@@ -193,7 +173,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
         #check if we need to regenerate the id
         clash = Subject.get(self.form_result.get('location', None), subject.subject_id)
         if clash is not None and clash is not subject:
-            subject.subject_id = self._generate_subject_id(subject)
+            subject.subject_id = subject.generate_new_id()
 
 
         subject.title = self.form_result['title']

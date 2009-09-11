@@ -1,4 +1,5 @@
 import csv
+import string
 import os
 import logging
 import base64
@@ -9,8 +10,10 @@ from datetime import date
 from pylons import request, c
 from pylons.controllers.util import redirect_to, abort
 
+from random import Random
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
+from ututi.model import SimpleTag
 from ututi.model import UserSubjectMonitoring
 from ututi.model import Page
 from ututi.model import (meta, User, Email, LocationTag, Group, Subject,
@@ -205,6 +208,28 @@ class AdminController(BaseController):
 
             subj.title = title
             subj.lecturer = lecturer
+        meta.Session.commit()
+        redirect_to(controller='subject', action='index')
+
+    @ActionProtector("root")
+    def import_subjects_without_ids(self):
+        for row in self._getReader():
+            title, lecturer = row[:2]
+            location_path = reversed(row[2:4])
+            tags = filter(bool, [tag.strip() for tag in row[-1].split(',')])
+            description = row[-2]
+            id = ''.join(Random().sample(string.ascii_lowercase, 8)) # use random id first
+            location = LocationTag.get(location_path)
+            title = title
+            lecturer = lecturer
+            subj = Subject('', title, location)
+            subj.lecturer = lecturer
+            subj.description = description
+            meta.Session.add(subj)
+            meta.Session.flush()
+            subj.subject_id = subj.generate_new_id()
+            for tag in tags:
+                subj.tags.append(SimpleTag.get(tag))
         meta.Session.commit()
         redirect_to(controller='subject', action='index')
 
