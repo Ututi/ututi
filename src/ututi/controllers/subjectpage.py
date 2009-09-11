@@ -104,7 +104,7 @@ class SubjectpageController(BaseController):
     @validate(schema=PageForm, form='edit')
     @ActionProtector("user")
     def update(self, subject, page):
-        page.add_version(self.form_result['page_title'],
-                         self.form_result['page_content'])
+        page.save(self.form_result['page_title'],
+                  self.form_result['page_content'])
         meta.Session.commit()
         redirect_to(url_for(action='index'))

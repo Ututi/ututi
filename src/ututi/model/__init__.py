@@ -741,6 +741,11 @@ class Page(ContentItem):
         version = PageVersion(title, content)
         self.versions.append(version)
 
+    def save(self, title, content):
+        if title != self.title or content != self.content:
+            version = PageVersion(title, content)
+            self.versions.append(version)
+
     @property
     def last_version(self):
         if self.versions:

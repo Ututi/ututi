@@ -76,6 +76,13 @@ def test_pages():
         >>> page.content
         u'Some exclusive information about it.'
 
+    If the contents of the page have not changed, do not add a new version.
+
+        >>> current_version = page.last_version.id
+        >>> page.save(u'Some coursework (new)',
+        ...           u'Some exclusive information about it.')
+        >>> current_version == page.last_version.id
+        True
 
     The version object will be created automatically:
 
