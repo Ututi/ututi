@@ -68,7 +68,7 @@ class GroupIdValidator(validators.FancyValidator):
             if g is not None:
                 raise Invalid(self.message('duplicate', state), value, state)
 
-            usernameRE = re.compile(r"^[^ \t\n\r@<>()]+$", re.I)
+            usernameRE = re.compile(r"^[^ \t\n\r@<>()\\/+]+$", re.I)
             if not usernameRE.search(value):
                 raise Invalid(self.message('badId', state), value, state)
 
