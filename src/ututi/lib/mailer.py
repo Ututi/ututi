@@ -97,7 +97,7 @@ def send_email(sender, recipient, subject, body, message_id=None, reply_to=None,
         except SMTPRecipientsRefused:
             log.warn(sender)
             log.warn(send_to)
-            log.warn(msg.as_string())
+            log.warn(repr(msg.as_string()))
         finally:
             smtp.quit()
     else:
