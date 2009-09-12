@@ -105,6 +105,24 @@ And they must be valid local parts of email addresses.
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Id cannot be used as an email address.
 
+Slashes are also not allowed
+    >>> browser.getControl('Group email address').value = 'test/test'
+    >>> browser.getControl('Save').click()
+    >>> browser.printQuery("//span[@class='error-message']/text()")
+    Id cannot be used as an email address.
+
+    >>> browser.getControl('Group email address').value = 'test\test'
+    >>> browser.getControl('Save').click()
+    >>> browser.printQuery("//span[@class='error-message']/text()")
+    Id cannot be used as an email address.
+
+And plus signs for that matter
+    >>> browser.getControl('Group email address').value = 'test+test'
+    >>> browser.getControl('Save').click()
+    >>> browser.printQuery("//span[@class='error-message']/text()")
+    Id cannot be used as an email address.
+
+
 If you log in, you should be able to see the groups you are a member
 of in your home page (at least for now):
 

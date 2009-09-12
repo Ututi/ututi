@@ -12,6 +12,7 @@ from pylons import url
 from random import randrange
 import pkg_resources
 from datetime import date, datetime
+from ututi.lib import urlify
 
 from pylons import config
 from pylons.templating import render_mako_def
@@ -713,6 +714,25 @@ class Subject(ContentItem, FolderMixin):
     def snippet(self):
         """Render a short snippet with the basic item's information. Used in search to render the results."""
         return render_mako_def('/sections/content_snippets.mako','subject', object=self)
+
+    def generate_new_id(self):
+        title = urlify(self.title, 20)
+        lecturer = urlify(self.lecturer or '', 10)
+
+        alternative_ids = [
+            '%(title)s' % dict(title=title),
+            '%(title)s-%(lecturer)s' % dict(title=title, lecturer=lecturer),
+            '%(title)s-%(id)i' % dict(title=title, id=self.id),
+            '%(title)s-%(lecturer)s-%(id)i' % dict(title=title, lecturer=lecturer, id=self.id)]
+        if self.lecturer is None or self.lecturer.strip() == u'':
+            del(alternative_ids[3])
+            del(alternative_ids[1])
+
+        for sid in alternative_ids:
+            exist = Subject.get(self.location, sid)
+            if exist is None:
+                return sid
+        return None
 
     def __init__(self, subject_id, title, location, lecturer=None):
         self.location = location

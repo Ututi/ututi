@@ -16,7 +16,7 @@ class EvolutionScript(object):
 
 class GreatMigrator(object):
 
-    min_version = 1
+    min_version = 3
 
     def __init__(self, engine):
         self.engine = engine
@@ -81,6 +81,23 @@ class GreatMigrator(object):
         tx.commit()
         connection.close()
 
+    def run_downgrade_scripts(self, start):
+        connection = self.engine.connect()
+        tx = connection.begin()
+
+        down = start - 1
+
+        script = self.evolution_scripts[start-1]
+        print "Running:", script.title
+        script.downgrade(connection)
+
+        print "Setting database version to:", down
+        connection.execute("update db_versions set version=%d" % down)
+
+        tx.commit()
+        connection.close()
+
+
     def upgrade_min(self):
         if self.min_version > self.db_version:
             self.run_scripts(self.db_version, self.min_version)
@@ -89,9 +106,17 @@ class GreatMigrator(object):
         if self.last_version > self.db_version:
             self.run_scripts(self.db_version, self.last_version)
 
+    def downgrade(self):
+        import pdb; pdb.set_trace()
+        if self.db_version > 1:
+            self.run_downgrade_scripts(self.db_version)
 
 def main():
     config_file = sys.argv[1]
+    action = 'upgrade'
+    if len(sys.argv) > 2:
+        action = sys.argv[2]
+
     config_name = 'config:%s' % config_file
 
     here_dir = os.getcwd()
@@ -100,4 +125,8 @@ def main():
     # XXX Avoid circular import
     from ututi.model import meta
     migrator = GreatMigrator(meta.engine)
-    migrator.upgrade_min()
+
+    if action == 'upgrade':
+        migrator.upgrade_min()
+    if action == 'downgrade':
+        migrator.downgrade()
