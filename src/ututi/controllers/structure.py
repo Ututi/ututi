@@ -110,7 +110,6 @@ class StructureController(BaseController):
     @validate(schema=AutoCompletionForm, post_only=False, on_get=True)
     @jsonify
     def completions(self):
-        meta.engine.echo = True
         query = meta.Session.query(LocationTag)
         depth = 0
         if hasattr(self, 'form_result'):
