@@ -1,9 +1,63 @@
 # -*- mode: org -*-
 
-* Eventai - subjecto redagavimo eventas
-Paredagavus subject'ą, eventuose rašoma, kad jis buvo sukurtas.
+* Features
+** Fakulteto puslapis
+** Daugiau trinimo
+*** Galimybė mesti narius iš grupės bei pačiam atsijungti
+*** Moderatorius privalo galėti ištrinti daugiau
+- dalykus
+- puslapius
+- grupęs
+Beje, visą tai ištrinti privalo galėti ir autorius (puslapius autorius gali trinti tol, kol kas nors kitas jų neparedagavo)
 
-* Group find view
+*** Grupės adminas privalo galėti trinti forumo žinutes
+** Moderavimas
+*** Žymėti kaip kaip netinkama
+Reikalingos vėliavėlės prie failų, puslapių bei dalykų, paspaudus ant jų atsiranda AJAX
+forma (fomas kažkokią rodė) kur žmogus galės įrašyti priežasti kodėl šitas tūrinys netinkamas.
+Vėliau moderatoriai savo panelėję pamatys pareportintus pranešimus.
+*** Pilotų (moderatorių) panelė
+Bus nupiešta pirmadienį arba antradienį
+
+** Reklamuokim blog'ą ir Facebook
+*** Blogo naujienas dedam į Ututi front-page
+*** Dashboarde vietoje "Naujas Ututi" portleto, dedame "Find us on Facebook" logo.
+
+** Mailinglist'o tobulinimas
+*** Pridėti narius prie grupės
+Galimybė ne vien pakviesti userius, bet juos tiesiog įrašyti į grupsą, kad iškarto po
+pakvietimo, jie galėtų rašyti ir gauti mailus. Jie galėtų atsisakyti Ututi, bet neturėtų patvirtinti narystės.
+*** Grupės svečias
+Grupės adminas gali įvesti email'ą, kuris gali rašyti į mailinglist'ą, tačiau
+negautų grupės laiškų ir negalėtų matyti grupės tūrinio. Čia tam, kad dėstytojai
+galėtų rašyti į mailinglist'ą.
+*** Grulės laiškų moderavimas
+Kaip alternatyva "Grupės svečias" funkcionalumui, galime grupės adminui leisti pasakyti,
+kad grupė yra vieša ir į ją rašyti gali visi. Tačiau, jei laišką rašo ne grupės narys,
+grupės adminas privalo jį patvirtinti.
+
+** Priminimai el.paštu
+Reikia, kad naudotojai gautų priminimus:
+ - Kai įkeliamas naujas failas prie grupės ar naudotojo stebimų dalykų.
+ - Kai patvirtimo Tavo narustę grupėję.
+ - Grupės adminui, kad kažkas nori tapti grupės nariu.
+
+** Google ads
+*** Google ads prie paieškos rezultatų
+*** Google ads dalykuose ir puslapiuose kai ateinama iš Google search
+
+** What is this? funckionalumas
+Klaustukai ant kurių paspaudus aprašoma ką šitas feature daro.
+
+
+* Bugai
+** Eventai - subjecto redagavimo eventas
+Paredagavus subject'ą, eventuose rašoma, kad jis buvo sukurtas.
+** Viršuje prie "Home" reikia tiesioginio linko į paiešką arba paieškos bar rodome visur.
+** Po Wiki puslapiais privalo rodyti tik paprastus tagus, nereikia rodyti location tagų.
+Beje, kaip pridėti tagą puslapiui?
+** Spaudžiant ant U turėčiau patekti į paiešką
+** Group find view
 
 ** DONE Group search is not too good at handling Year that was entered incorrectly
 
@@ -19,88 +73,6 @@ Tada pamato error page, o ne search view'ą su pranešimu, kad grupė nerasta.
 Kaip alternatyva, kai žmogus įveda neegzistuojantį location tag'ą, jam galėtų pasirodyti error'as 
 prie įvestos formos. Panašiai kaip su neįvestu slaptažodžiu loginantis.
 
-* WebApp Error: <class 'sqlalchemy.exc.DataError'>: (DataError) value too long for type character varying(100) 'UPDATE users SET fullname=%(fullname)s WHERE users.id = %(users_id)s' {'users_id': 531L, 'fullname': 'Adomasjh gigkj gkjhj gjhgkj gkjgkjhg kjgkjhgkj gkjgk jgkjhg kjhg kjhg kjhg kjgkjh gkj gkjg kg kj gkjhg kjgkjgkjhg kjgjk g jk gkjgkjgkjhgk jg kjhg kjhgkjhg kjh gkjgkj hgkjh'}
-
-* DONE What's new rodo tik eventus iš vienos grupės (nors naudotojas priklausi dviem)
-
-* DONE Password reset form should reuse the old key if it's already present
-
-* DONE Folders in file views
-
-** DONE Dalykų view'e spaudžiant "new folder" button'o kai jis yra tuščias, atsiranda visų failų kopija.
-
-** DONE Failų įkėlimo sąrašas (įkelti į button) neatsinaujina po folderio ištrinimo.
-
-T.y.po "here" matomas jau ištrinto folderio pavadinimas.
-
-Folderių šiaip nelabai eina trinti :/
+** WebApp Error: <class 'sqlalchemy.exc.DataError'>: (DataError) value too long for type character varying(100) 'UPDATE users SET fullname=%(fullname)s WHERE users.id = %(users_id)s' {'users_id': 531L, 'fullname': 'Adomasjh gigkj gkjhj gjhgkj gkjgkjhg kjgkjhgkj gkjgk jgkjhg kjhg kjhg kjhg kjgkjh gkj gkjg kg kj gkjhg kjgkjgkjhg kjgjk g jk gkjgkjgkjhgk jg kjhg kjhgkjhg kjh gkjgkj hgkjh'}
 
 
-** DONE Grupės failų view'e, dalyke ne visada pavyksta ištrinti sukurtą folderį.
-
-Ajax event is not bound to the folder properly.
-
-Also - we need some error handling for when you move a file created by
-someone into your folder and then try removing it.
-
-* DONE Paieškos view'e, kai useris yra prisiloginęs, nereikia rodyti registracijos formos.
-
-* DONE Invitation to group for new users don't work correctly
-
-Naudotojas sukuria grupę ir kviečia grupiokus. Jie dar nėra ututi memberiais.
-Useriai gauna invitation'ą į mailą. Spaudžia ant nuorodos ir patenka į
-ututi fornt page (ar tai login page). Jau čia nesijaučia, ką toliau daryti,
-bet tarkim žmogus supranta, kad reikia sukurti naują paskyrą ir sukuria.
-Įsilogina į sistemą, bet nemato jokio pranešimo prisijungti prie grupės,
-bei nepriklauso nei vienai grupei :(
-
-
-
-
-* DONE Mailo reply-to privalo būti mailinglisto adresas, o ne siuntėjo adresas.
-
-Paprasti naudotojai nėra pripratę spausti reply to all.
-
-Taip jau yra, bet mes neišimam seno "reply-to" headerio.
-
-* DONE Search does not work if you enter a short tag name instead of selecting the full tag
-
-* DONE Sumažinti failų drag-n-drop target'ą
-
-* DONE Group public view is missing, and generated urls are pointing to group internal page
-
-* DONE? move tag widget jasvascript to avoid running it twice
-
-* DONE (can not repro) Files view is slow when there are a lot of files in linux firefox
-
-* DONE You can't move file up one folder
-
-* DONE You can't move the file that you have just moved, again
-
-
-* DONE 403 page is missing
-
-* DONE Launch u2ti on korys.org
-
-* DONE Move git repositories to git.nous.lt
-
-* DONE (could not reproduce) Group public page - balck lines under logos
-
-* DONE Default logo size should be 60x60 not 60x45
-
-* DONE Logos should be in a container that is 60x60 so that they would line up in views and portlets
-
-* DONE Folder created events are looking funny in the event list
-Did not add a link to the folder though - not sure where the link would have been supposed to be pointing.
-
-* DONE Kai esu group creation view'e paspaudus ant breadcrumb rodo error'ą
-Viewas: http://u2ti.com/groups/add
-Breadcrumbs nuveda į http://u2ti.com/groups
-Išmestas groups breadcrumbas - ten jam ne vieta.
-
-* DONE Grupės personal page galima paslėpti, bet nėra būdo jo gražinti.
-Reikia, kad atrirastų užrašas unhide.
-Pridėtas checkboxas grupės edit view'e.
-* DONE Turinio tipo ikonos paieškoje
-* DONE Location tag'ų autocomplete turėtų ieškoti visame tago tekste, ne tik pagal pradžią
-* DONE Footer linkai - reikia sukurti puslapius
