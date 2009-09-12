@@ -1,3 +1,5 @@
+import logging
+from smtplib import SMTPRecipientsRefused
 from smtplib import SMTP
 
 from email.Header import Header
@@ -5,6 +7,8 @@ from email.MIMEText import MIMEText
 from email.Utils import parseaddr, formataddr
 from email import message_from_string
 from pylons import config
+
+log = logging.getLogger(__name__)
 
 mail_queue = []
 
@@ -79,13 +83,23 @@ def send_email(sender, recipient, subject, body, message_id=None, reply_to=None,
     if send_to is None:
         send_to = recipient
 
+    log.debug(sender)
+    log.debug(send_to)
+    log.debug(msg.as_string())
+
     # Send the message via SMTP to localhost:25
     if not config.get('hold_emails', False):
         # send the email if we are not told to hold it
         server = config.get('smtp_host', 'localhost')
         smtp = SMTP(server)
-        smtp.sendmail(sender, send_to, msg.as_string())
-        smtp.quit()
+        try:
+            smtp.sendmail(sender, send_to, msg.as_string())
+        except SMTPRecipientsRefused:
+            log.warn(sender)
+            log.warn(send_to)
+            log.warn(msg.as_string())
+        finally:
+            smtp.quit()
     else:
         mail_queue.append(EmailInfo(sender, send_to, msg.as_string()))
 
