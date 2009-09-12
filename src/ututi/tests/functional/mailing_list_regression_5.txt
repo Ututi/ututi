@@ -1,0 +1,38 @@
+Regression test for emails with forwarded messages
+==================================================
+
+    >>> browser = Browser.logIn()
+
+    >>> from ututi.tests.functional import send_test_message
+
+    >>> send_test_message('google_bug_3.txt')
+    >>> browser.open("http://localhost/group/moderators/forum/thread/3")
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> print mail_queue[0].payload()
+    sveiki,
+    <BLANKLINE>
+    persiunčiu doktorantų konferencijos, kurią rekomendavo dėstytoja Vidugirytė,
+    programą. jei bus noro eiti, bet reiks pagalbos rasti institutą - galėsim
+    susitikti, nes aš eisiu :)
+    <BLANKLINE>
+    r.
+    <BLANKLINE>
+    ---------- Forwarded message ----------
+    From: <Taisija.Kovrigina@flf.vu.lt>
+    Date: 2009/9/4
+    Subject: Doktorantu konferencija (LLTI, rugsejo 24 d.)
+    To: laiskelis.rimai@gmail.com, giedre.olseviciute@gmail.com,
+    andrius.grigorjevas@gmail.com, kbaublys@gmail.com, dangvyde@yahoo.com
+    <BLANKLINE>
+    <BLANKLINE>
+    <BLANKLINE>
+    <BLANKLINE>
+    Kvieciu visus, kam idomu :)
+    <BLANKLINE>
+    text.html - http://localhost/files/get/4
+    agoros programa.doc - http://localhost/files/get/5
+
+    >>> len(mail_queue)
+    1
+    >>> mail_queue[:] = []
