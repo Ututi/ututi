@@ -92,6 +92,7 @@ class GroupforumController(GroupControllerBase):
 
     @group_forum_action
     @validate(NewReplyForm)
+    @ActionProtector("member", "admin", "moderator")
     def reply(self, group, thread):
         last_post = thread.posts[-1]
         message = send_email(c.user.emails[0].email,
@@ -109,10 +110,8 @@ class GroupforumController(GroupControllerBase):
                     action='thread',
                     id=group.group_id, thread_id=thread.id)
 
-    # XXX Currently we don't allow moderators to post, as ututi just
-    # drops emails from non-members
     @group_action
-    @ActionProtector("member")
+    @ActionProtector("member", "admin", "moderator")
     def new_thread(self, group):
         return render('forum/new.mako')
 
@@ -131,7 +130,7 @@ class GroupforumController(GroupControllerBase):
 
     @group_action
     @validate(NewMailForm, form='new_thread')
-    @ActionProtector("member")
+    @ActionProtector("member", "admin", "moderator")
     def post(self, group):
         message = send_email(c.user.emails[0].email,
                              c.group.list_address,
