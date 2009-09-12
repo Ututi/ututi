@@ -19,7 +19,7 @@ log = logging.getLogger(__name__)
 
 
 def serve_file(file):
-    headers = [('Content-Disposition', 'attachment; filename=%s' % file.filename)]
+    headers = [('Content-Disposition', 'attachment; filename="%s"' % file.filename)]
     return forward(FileApp(file.filepath(), headers=headers))
 
 
