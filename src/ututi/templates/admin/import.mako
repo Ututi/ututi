@@ -12,3 +12,4 @@
 ${self.import_form(_('User import'), 'import_users')}
 ${self.import_form(_('Structure import'), 'import_structure')}
 ${self.import_form(_('Groups import'), 'import_groups')}
+${self.import_form(_('Subjects import'), 'import_subjects_without_ids')}
