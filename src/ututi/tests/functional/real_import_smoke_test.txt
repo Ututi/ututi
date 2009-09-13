@@ -15,18 +15,6 @@ And upload all the files one by one:
     >>> import_csv(browser, 'import_users', 'export_users.csv')
     >>> import_csv(browser, 'import_structure', 'export_structure.csv')
     >>> import_csv(browser, 'import_groups', 'export_groups.csv')
-    >>> import_csv(browser, 'import_subjects', 'export_subjects.csv')
-    >>> import_csv(browser, 'import_group_members', 'export_group_members.csv')
-    >>> import_csv(browser, 'import_user_logos', 'export_user_logos.csv')
-    >>> import_csv(browser, 'import_group_logos', 'export_group_logos.csv')
-    >>> import_csv(browser, 'import_structure_logos', 'export_structure_logos.csv')
-    >>> import_csv(browser, 'import_group_files', 'export_group_files.csv')
-    >>> import_csv(browser, 'import_group_pages', 'export_group_pages.csv')
-    >>> import_csv(browser, 'import_subject_files', 'export_subject_files.csv')
-    >>> import_csv(browser, 'import_subject_pages', 'export_subject_pages.csv')
-    >>> import_csv(browser, 'import_group_watched_subjects', 'export_group_watched_subjects.csv')
-    >>> import_csv(browser, 'import_user_ignored_subjects', 'export_user_ignored_subjects.csv')
-    >>> import_csv(browser, 'import_user_watched_subjects', 'export_user_watched_subjects.csv')
 
     >>> from urllib2 import HTTPError
     >>> from pkg_resources import resource_string
@@ -68,6 +56,3 @@ And upload all the files one by one:
     >>> len(mail_queue)
     184
     >>> mail_queue[:] = []
-
-    >>> from ututi.tests.functional import dump_database
-    >>> dump_database()
