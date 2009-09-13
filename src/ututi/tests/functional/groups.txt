@@ -179,17 +179,3 @@ You can import more groups using the admin interface.
     Ututi moderatoriai
     Test group
     Imported group
-
-And you can import group memberships using the admin interface too.
-
-    >>> browser.open('http://localhost/admin')
-    >>> form = browser.getForm(name='import_group_members')
-    >>> csv_data = 'exgroup, admin@ututi.lt, True'
-    >>> import cStringIO
-    >>> form.getControl('CSV File').add_file(cStringIO.StringIO(csv_data),
-    ...                                      'text/plain',
-    ...                                       'group_members.csv')
-    >>> form.getControl('Upload').click()
-    >>> browser.open('http://localhost/group/exgroup/members')
-    >>> browser.printQuery("//table[@class='group-members']/tr/td/a/text()")
-    Adminas Adminovix
