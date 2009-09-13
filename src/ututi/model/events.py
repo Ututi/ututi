@@ -44,7 +44,7 @@ class Event(object):
                              "%(num)s days ago",
                              num) % {'num': num}
         else:
-            return self.created.strftime("%Y-%M-%d")
+            return self.created.strftime("%Y-%m-%d")
 
     def render(self):
         raise NotImplementedError()
