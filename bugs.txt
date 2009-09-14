@@ -11,6 +11,8 @@
 Beje, visą tai ištrinti privalo galėti ir autorius (puslapius autorius gali trinti tol, kol kas nors kitas jų neparedagavo)
 
 *** Grupės adminas privalo galėti trinti forumo žinutes
+*** Grupės narys turėtų galėti pasirinkti, ar jis nori gauti emailus.
+
 ** Moderavimas
 *** Žymėti kaip kaip netinkama
 Reikalingos vėliavėlės prie failų, puslapių bei dalykų, paspaudus ant jų atsiranda AJAX
@@ -51,6 +53,7 @@ Klaustukai ant kurių paspaudus aprašoma ką šitas feature daro.
 
 
 * Bugai
+** TODO Lūžta, jei registruojamasi su jau egzistuojančiu emailu.
 ** Eventai - subjecto redagavimo eventas
 Paredagavus subject'ą, eventuose rašoma, kad jis buvo sukurtas.
 ** Viršuje prie "Home" reikia tiesioginio linko į paiešką arba paieškos bar rodome visur.
@@ -58,6 +61,8 @@ Paredagavus subject'ą, eventuose rašoma, kad jis buvo sukurtas.
 Beje, kaip pridėti tagą puslapiui?
 ** Spaudžiant ant U turėčiau patekti į paiešką
 ** Group find view
+
+
 
 ** DONE Group search is not too good at handling Year that was entered incorrectly
 
