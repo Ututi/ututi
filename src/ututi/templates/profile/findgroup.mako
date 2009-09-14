@@ -121,4 +121,10 @@ ${search_results(c.results)}
 %endif
 <br />
 ${_('Did not find the group you were looking for?')}
-<a class="btn" href="${url(controller='group', action='add')}" title="${_('New group')}"><span>${_('Create your group!')}</span></a>
+%if c.location and c.year:
+  <a class="btn" href="${url(controller='group', action='add', location=c.location, year=c.year)}" title="${_('New group')}"><span>${_('Create your group!')}</span></a>
+%elif c.year:
+  <a class="btn" href="${url(controller='group', action='add', year=c.year)}" title="${_('New group')}"><span>${_('Create your group!')}</span></a>
+%else:
+  <a class="btn" href="${url(controller='group', action='add')}" title="${_('New group')}"><span>${_('Create your group!')}</span></a>
+%endif

@@ -36,7 +36,11 @@ ${path_steps()}
      id="group_add_form" enctype="multipart/form-data">
 
   <div class="form-field">
-    ${location_widget(2)}
+    %if c.location:
+      ${location_widget(2, c.location.hierarchy())}
+    %else:
+      ${location_widget(2)}
+    %endif
   </div>
   <br class="clear-left"/>
   <div class="form-field">

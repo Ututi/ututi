@@ -118,6 +118,10 @@ class NewGroupForm(EditGroupForm):
     id = Pipe(validators.String(strip=True, min=4, max=20), GroupIdValidator())
 
 
+class GroupAddingForm(Schema):
+    allow_extra_fields = True
+
+
 class GroupPageForm(Schema):
     allow_extra_fields = False
     page_content = HtmlSanitizeValidator()
@@ -251,10 +255,16 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         c.breadcrumbs.append(self._actions('files'))
         return render('group/files.mako')
 
+    @validate(schema=GroupAddingForm, post_only = False, on_get = True)
     @ActionProtector("user")
     def add(self):
         c.current_year = date.today().year
         c.years = range(c.current_year - 10, c.current_year + 5)
+        #some initial date may be submitted as a get request
+        if hasattr(self, 'form_result'):
+            c.location = LocationTag.get(self.form_result.get('location', ''))
+            c.current_year = int(self.form_result.get('year', c.current_year))
+
         return render('group/add.mako')
 
     @validate(schema=NewGroupForm, form='add')

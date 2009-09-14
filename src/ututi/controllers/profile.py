@@ -265,6 +265,11 @@ class ProfileController(SearchBaseController):
         c.tags.extend(self.form_result.get('location', []))
         c.tags = filter(bool, c.tags)
 
+        #keep location information for group creation view
+        c.location = LocationTag.get_by_title(filter(bool, self.form_result.get('location', [])))
+        if c.location is not None:
+            c.location = '/'.join(c.location.path)
+
         #extra search parameters
         c.year = self.form_result.get('year', None)
 
