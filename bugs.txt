@@ -56,7 +56,6 @@ Klaustukai ant kurių paspaudus aprašoma ką šitas feature daro.
 ** TODO Lūžta, jei registruojamasi su jau egzistuojančiu emailu.
 ** Eventai - subjecto redagavimo eventas
 Paredagavus subject'ą, eventuose rašoma, kad jis buvo sukurtas.
-** Viršuje prie "Home" reikia tiesioginio linko į paiešką arba paieškos bar rodome visur.
 ** Po Wiki puslapiais privalo rodyti tik paprastus tagus, nereikia rodyti location tagų.
 Beje, kaip pridėti tagą puslapiui?
 ** Spaudžiant ant U turėčiau patekti į paiešką
