@@ -115,7 +115,7 @@ ${h.javascript_link('/javascripts/js-alternatives.js')|n}
           %if c.group.show_page:
             <input type="checkbox" name="show_page" id="show_page" value="true" checked="checked"/>
           %else:
-            <input type="checkbox" name="show_page" id="show_page" value="true" checked="checked"/>
+            <input type="checkbox" name="show_page" id="show_page" value="true"/>
           %endif
         </div>
 

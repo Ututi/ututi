@@ -19,31 +19,22 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
 
 %if c.group.show_page:
 <div id="group_page" class="content-block">
-  <div class="rounded-header">
-    <div class="rounded-right">
-      %if c.group.is_admin(c.user):
-        <span class="header-links">
-          <a href="${url(controller='group', action='home', id=c.group.group_id, do='hide_page')}" title="${_('Hide group page')}">
-            ${_('Hide')}
-          </a>
-        </span>
-      %endif
-      <h3>${_("Group front page")}</h3>
-
+  <div class="hdr">
+    <span class="huge" style="float: left;">${_("Group front page")}</span>
+    %if c.group.is_member(c.user):
+    <div style="float: left; margin-top: 4px; margin-left: 20px;">
+      <a class="btn" href="${url(controller='group', action='edit_page', id=c.group.group_id)}" title="${_('Edit group front page')}">
+        <span>${_('Edit')}</span>
+      </a>
     </div>
+    %endif
+    <br class="clear-left" />
   </div>
   <div class="content">
     %if c.group.page != '':
     ${c.group.page|n,decode.utf8}
     %else:
       ${_("The group's page is empty. Enter your description.")}
-    %endif
-    %if c.group.is_member(c.user):
-      <div class="footer">
-        <a class="btn" href="${url(controller='group', action='edit_page', id=c.group.group_id)}" title="${_('Edit group front page')}">
-          <span>${_('Edit')}</span>
-        </a>
-      </div>
     %endif
   </div>
 </div>

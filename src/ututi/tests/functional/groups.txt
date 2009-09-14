@@ -84,10 +84,6 @@ If we click the link to edit the page, we are redirected to a form for this.
     <BLANKLINE>
     This is our group
 
-If we want to, we can hide the group's page by clicking on a link.
-    >>> browser.getLink('Hide').click()
-    >>> browser.printQuery("id('group_page')//div[@class='content']/text()")
-
 However, group ids are checked for uniqueness.
 
     >>> browser.open('http://localhost/groups/add')
