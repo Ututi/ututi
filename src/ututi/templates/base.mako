@@ -36,6 +36,10 @@ ${_('student information online')}
   <div class="item">
     <a href="${url(controller='profile', action='home')}">${_("home")}</a>
   </div>
+  <div class="item">
+    <a href="${url(controller='profile', action='search')}">${_("search")}</a>
+  </div>
+
 </div>
 
 <div class="personal-info">
