@@ -87,7 +87,7 @@ ${parent.head_tags()}
 
 <h2 class="subjects-suggestions">${_('Recommended subjects')}</h2>
 
-${search_form(text=c.text, obj_type='subject', tags=c.tags, parts=['text', 'tags'], target=c.subjects)}
+${search_form(text=c.text, obj_type='subject', tags=c.tags, parts=['text', 'tags'], target=c.search_target)}
 
 ##overriding tag link definition
 <%def name="item_tags(object)">
