@@ -72,17 +72,6 @@ reset_devdb: instance/var/run/.s.PGSQL.${PGPORT}
 	rm -rf ${PWD}/instance/uploads
 	bin/paster setup-app development.ini
 
-parts/test/dbdump: bin/test
-	bin/test --all . real_import_smoke_test.txt
-
-import_sample_data: parts/test/dbdump instance/var/run/.s.PGSQL.${PGPORT}
-	psql -h ${PWD}/instance/var/run/ -d development -c "drop schema public cascade"
-	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
-	rm -rf ${PWD}/instance/uploads
-	bin/paster setup-app development.ini
-	/usr/lib/postgresql/8.3/bin/pg_restore -d development -h ${PWD}/instance/var/run -c < parts/test/dbdump
-	cp -r ${PWD}/parts/test/files_dump ${PWD}/instance/uploads
-
 .PHONY: instance
 instance: instance/done
 
@@ -210,3 +199,15 @@ shell: bin/paster instance/done instance/var/run/.s.PGSQL.${PGPORT}
 .PHONY: package_release
 package_release:
 	git archive --prefix=ututi${BUILD_ID}/ HEAD | gzip > ututi${BUILD_ID}.tar.gz
+
+.PHONY: download_backup
+download_backup:
+	rsync -rtv ututi.lt:/srv/u2ti.com/backup/ ./backup/
+
+.PHONY: import_backup
+import_backup: instance/var/run/.s.PGSQL.${PGPORT}
+	psql -h ${PWD}/instance/var/run/ -d development -c "drop schema public cascade"
+	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
+	bin/paster setup-app development.ini
+	/usr/lib/postgresql/8.3/bin/pg_restore -d development -h ${PWD}/instance/var/run --no-owner -c < backup/dbdump
+	rsync -rtv ${PWD}/backup/files_dump/ ${PWD}/instance/uploads/

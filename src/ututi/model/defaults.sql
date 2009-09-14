@@ -588,3 +588,5 @@ CREATE TABLE group_requests (
        group_id int8 not null references groups(id),
        hash char(8) not null unique,
        primary key (hash));;
+
+create table groups_fixed (id int8, group_id varchar(250) not null);;
