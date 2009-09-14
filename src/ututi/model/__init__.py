@@ -926,13 +926,13 @@ class LocationTag(Tag):
         tag = None
         for title_full in filter(bool, title):
             try:
-                q = meta.Session.query(cls).filter_by(title=title_full)
+                q = meta.Session.query(cls).filter(func.lower(LocationTag.title)==title_full.lower())
                 if hierarchy:
                     q = q.filter_by(parent=tag)
                 tag =  q.one()
             except NoResultFound:
                 try:
-                    q = meta.Session.query(cls).filter_by(title_short=title_full)
+                    q = meta.Session.query(cls).filter(func.lower(LocationTag.title_short)==title_full.lower())
                     if hierarchy:
                         q = q.filter_by(parent=tag)
                     tag =  q.one()
