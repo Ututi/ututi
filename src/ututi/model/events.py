@@ -109,6 +109,14 @@ class SubjectCreatedEvent(Event):
             'link_to_subject': link_to(self.context.title, self.context.url())}
 
 
+class SubjectModifiedEvent(Event):
+    """Event fired when a subject is modified."""
+
+    def render(self):
+        return _("Subject %(link_to_subject)s was modified") % {
+            'link_to_subject': link_to(self.context.title, self.context.url())}
+
+
 class ForumPostCreatedEvent(Event):
     """Event fired when someone posts a message on group forums.
 
@@ -199,6 +207,12 @@ def setup_orm(engine):
                inherits=Event,
                polymorphic_on=events_table.c.event_type,
                polymorphic_identity='subject_created')
+
+    orm.mapper(SubjectModifiedEvent, events_table,
+               inherits=Event,
+               polymorphic_on=events_table.c.event_type,
+               polymorphic_identity='subject_modified')
+
 
     orm.mapper(ForumPostCreatedEvent, events_table,
                inherits=Event,

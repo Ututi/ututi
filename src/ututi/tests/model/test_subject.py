@@ -2,6 +2,7 @@ from zope.testing import doctest
 
 from ututi.model import User
 from ututi.model import LocationTag, Subject, meta
+from ututi.model.events import Event
 from ututi.tests import PylonsLayer
 import ututi
 
@@ -40,6 +41,27 @@ def test_Subject_get():
     """
 
 
+def test_subject_create():
+    r"""Test subject creation and events
+
+        >>> s = Subject('some_id', u'Subject title', LocationTag.get([u'vu']))
+        >>> meta.Session.add(s)
+        >>> meta.Session.commit()
+        >>> evt = meta.Session.query(Event).filter(Event.context == s).all()
+        >>> [e.render() for e in evt]
+        [u'New subject ... was created']
+
+    If we modify the subject, we should get a subject modification event.
+
+        >>> s.description = u'New description'
+        >>> meta.Session.commit()
+        >>> evt = meta.Session.query(Event).filter(Event.context == s).all()
+        >>> [e.render() for e in evt]
+        [u'New subject ... was created', u'Subject ... was modified']
+
+    """
+
+
 def test_suite():
     suite = doctest.DocTestSuite(
         optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |
@@ -58,3 +80,7 @@ def test_setup(test):
     meta.Session.add(Subject(u'mat_analize', u'Matematin\u0117 analiz\u0117', LocationTag.get(u'vu'), u'prof. E. Misevi\u010dius'))
 
     meta.Session.commit()
+
+    u = User.get('admin@ututi.lt')
+    meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+

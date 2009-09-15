@@ -511,16 +511,21 @@ CREATE TRIGGER group_file_event_trigger AFTER INSERT OR UPDATE ON group_files
 
 
 CREATE FUNCTION subject_event_trigger() RETURNS trigger AS $$
+    DECLARE
+      sid int8 := NULL;
     BEGIN
-      EXECUTE add_event(NEW.id, cast('subject_created' as varchar));
+      SELECT id INTO sid FROM subjects WHERE subject_id = NEW.subject_id;
+      IF NOT FOUND THEN
+          EXECUTE add_event(NEW.id, cast('subject_created' as varchar));
+      ELSE
+         EXECUTE add_event(NEW.id, cast('subject_modified' as varchar));
+      END IF;
       RETURN NEW;
     END
 $$ LANGUAGE plpgsql;;
 
-
-CREATE TRIGGER subject_event_trigger AFTER INSERT OR UPDATE ON subjects
+CREATE TRIGGER subject_event_trigger BEFORE INSERT OR UPDATE ON subjects
     FOR EACH ROW EXECUTE PROCEDURE subject_event_trigger();;
-
 
 CREATE FUNCTION group_mailing_list_message_event_trigger() RETURNS trigger AS $$
     BEGIN
