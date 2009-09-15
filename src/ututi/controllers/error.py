@@ -27,7 +27,7 @@ class ErrorController(SearchController):
             from ututi.lib import helpers as h
             from pylons.i18n import _
             h.flash(_("Document at %(url)s was not found, but maybe you are interested in something else?") % {
-                    'url': req.url})
+                    'url': req.url.encode('ascii', 'ignore')})
             self.form_result = {}
             self._search()
             return render('/search/index.mako')
