@@ -107,7 +107,6 @@ class GreatMigrator(object):
             self.run_scripts(self.db_version, self.last_version)
 
     def downgrade(self):
-        import pdb; pdb.set_trace()
         if self.db_version > 1:
             self.run_downgrade_scripts(self.db_version)
 
