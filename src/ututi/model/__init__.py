@@ -735,11 +735,13 @@ class Subject(ContentItem, FolderMixin):
                 return sid
         return None
 
-    def __init__(self, subject_id, title, location, lecturer=None):
+    def __init__(self, subject_id, title, location, lecturer=None, description=None, tags=[]):
         self.location = location
         self.title = title
         self.subject_id = subject_id
         self.lecturer = lecturer
+        self.description = description
+        self.tags = tags
 
 
 pages_table = None

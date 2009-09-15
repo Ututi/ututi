@@ -453,6 +453,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             redirect_to(group.url(action='add_subject_step'))
 
         subject = self._create_subject()
+        meta.Session.flush()
         group.watched_subjects.append(subject)
 
         meta.Session.commit()
