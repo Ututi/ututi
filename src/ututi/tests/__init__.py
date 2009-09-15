@@ -186,7 +186,7 @@ class Browser(WSGI_Browser):
 
     def queryHTML(self, query):
         doc = etree.HTML(self.contents)
-        result = [to_string(node) for node in doc.xpath(query)]
+        result = [to_string(node).strip() for node in doc.xpath(query)]
         return result
 
     def printQuery(self, query):

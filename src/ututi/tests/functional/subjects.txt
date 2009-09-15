@@ -30,7 +30,7 @@ From there we can edit the subject.
 The changed information should  be visible in the sidebar block.
 
     >>> browser.printQuery('id("subject_info_portlet_content")//div/text()')
-    Some other guy
+    Lecturer: Some other guy
 
 The subject's portlet contains a link that can be used to start watching the subject.
 
@@ -72,7 +72,7 @@ You can import more subjects using the admin interface.
 
     >>> browser.open('http://localhost/admin')
     >>> form = browser.getForm(name='import_subjects_without_ids')
-    >>> csv_data = 'Imported subject, Professor,, vu, Description of the subject, "imported, subject"'
+    >>> csv_data = '"Imported subject","Some Professor",,"VU","Description of the subject","imported, subject"'
     >>> import cStringIO
     >>> form.getControl('CSV File').add_file(cStringIO.StringIO(csv_data),
     ...                                      'text/plain',
@@ -86,8 +86,24 @@ You can import more subjects using the admin interface.
     Test subject
     Imported subject
 
+    >>> browser.getLink('Imported subject').click()
+    >>> browser.queryHTML("id('subject_description')//*[@class='content']/text()")
+    ['Description of the subject']
+
+    >>> browser.printQuery("id('subject_info_portlet_content')//h4")
+    <h4>Imported subject</h4>
+
+    >>> browser.printQuery("id('subject_info_portlet_content')//*[@class='item-tags']/a")
+    <a class="tag" title="imported" href="/profile/search?tags=imported">
+      imported
+    </a>
+    <a class="tag" title="subject" href="/profile/search?tags=subject">
+      subject
+    </a>
+
 Bug fix confirmation: going to subjects/create directly (e.g. refreshing a failed subject form)
 would cause a crash
+
     >>> browser.open('http://localhost/subjects/create')
     >>> print browser.url
     http://localhost/subjects/add

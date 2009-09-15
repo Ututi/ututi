@@ -42,7 +42,7 @@ ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
 
   <div class="form-field">
     <label for="description">${_('Brief description of the subject')}</label>
-    <textarea class="line" name="description" id="description" cols="60" rows="5">${c.subject.description}</textarea>
+    <textarea class="line ckeditor" name="description" id="description" cols="60" rows="5">${c.subject.description}</textarea>
   </div>
 
   <div>

@@ -113,6 +113,7 @@ h1, h2, h3, h4 {
   margin: 0.1em 0 0 0.3em;
 }
 
+.sidebar-block .content a.tag,
 .tag {
   color: #4d4d4d;
   font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -1004,12 +1005,16 @@ div#pager {
 
 /* end search portlet */
 
-/* search results */
+/* tags */
+
+div.sidebar-block .item-tags,
 div.search-item .item-tags {
   padding-left: 25px;
   background: white url("../images/details/icon_tag.png") left top no-repeat;
   margin-top: 5px;
 }
+
+/* search results */
 
 div.search-item {
   padding-left: 35px;

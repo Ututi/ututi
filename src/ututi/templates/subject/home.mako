@@ -18,6 +18,25 @@
 </div>
 </%def>
 
+<div id="subject_description" class="content-block">
+  <div class="hdr">
+    <span class="huge" style="float: left;">${_("Subject's description")}</span>
+    <div style="float: left; margin-top: 4px; margin-left: 20px;">
+      <a class="btn" href="${c.subject.url(action='edit')}" title="${_('Edit subject front page')}">
+        <span>${_('Edit')}</span>
+      </a>
+    </div>
+    <br class="clear-left" />
+  </div>
+  <div class="content">
+    %if c.subject.description:
+      ${h.html_cleanup(c.subject.description)|n,decode.utf8}
+    %else:
+      ${_("The subject's description is empty.")}
+    %endif
+  </div>
+</div>
+
 <%files:file_browser obj="${c.subject}", title="${_('Subject files')}" />
 
 <div id="subject_pages" class="section">

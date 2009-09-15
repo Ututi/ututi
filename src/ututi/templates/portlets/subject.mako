@@ -1,4 +1,5 @@
 <%inherit file="/portlets/base.mako"/>
+<%namespace file="/sections/content_snippets.mako" import="*"/>
 
 <%def name="subject_info_portlet(subject=None)">
   <%
@@ -11,14 +12,18 @@
       ${_('Subject information')}
     </%def>
     <div class="structured_info">
-      <h4>${_('Description')}</h4>
+      <h4>${subject.title}</h4>
       <div class="small">
-        ${subject.description}
+        ${_('Lecturer')}: ${subject.lecturer}
       </div>
-      <h4>${_('Lecturer')}</h4>
-      <div class="small">
-        ${subject.lecturer}
+      % if subject.tags:
+      <hr />
+      <div class="item-tags">
+        %for tag in subject.tags:
+          ${tag_link(tag)}
+        %endfor
       </div>
+      % endif
     </div>
     <br />
 

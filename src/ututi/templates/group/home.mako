@@ -21,13 +21,11 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
 <div id="group_page" class="content-block">
   <div class="hdr">
     <span class="huge" style="float: left;">${_("Group front page")}</span>
-    %if c.group.is_member(c.user):
     <div style="float: left; margin-top: 4px; margin-left: 20px;">
       <a class="btn" href="${url(controller='group', action='edit_page', id=c.group.group_id)}" title="${_('Edit group front page')}">
         <span>${_('Edit')}</span>
       </a>
     </div>
-    %endif
     <br class="clear-left" />
   </div>
   <div class="content">

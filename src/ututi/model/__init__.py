@@ -160,6 +160,7 @@ def setup_orm(engine):
     subjects_table = Table("subjects", meta.metadata,
                            Column('title', Unicode(assert_unicode=True)),
                            Column('lecturer', Unicode(assert_unicode=True)),
+                           Column('description', Unicode(assert_unicode=True)),
                            autoload=True,
                            useexisting=True,
                            autoload_with=engine)
