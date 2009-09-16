@@ -34,10 +34,10 @@ ${_('student information online')}
     </ul>
   </div>
   <div class="item">
-    <a href="${url(controller='profile', action='home')}">${_("home")}</a>
+    <a href="${url(controller='profile', action='search')}">${_("search")}</a>
   </div>
   <div class="item">
-    <a href="${url(controller='profile', action='search')}">${_("search")}</a>
+    <a href="${url(controller='profile', action='home')}">${_("home")}</a>
   </div>
 
 </div>
