@@ -196,6 +196,8 @@ ubuntu-environment:
 shell: bin/paster instance/done instance/var/run/.s.PGSQL.${PGPORT}
 	bin/paster --plugin=Pylons shell development.ini
 
+export BUILD_ID ?= `date +%Y-%m-%d_%H-%M-%S`
+
 .PHONY: package_release
 package_release:
 	git archive --prefix=ututi${BUILD_ID}/ HEAD | gzip > ututi${BUILD_ID}.tar.gz
