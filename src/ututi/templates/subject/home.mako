@@ -22,7 +22,7 @@
   <div class="hdr">
     <span class="huge" style="float: left;">${_("Subject's description")}</span>
     <div style="float: left; margin-top: 4px; margin-left: 20px;">
-      <a class="btn" href="${c.subject.url(action='edit')}" title="${_('Edit subject front page')}">
+      <a class="btn" href="${c.subject.url(action='edit')}" title="${_('Edit subject description')}">
         <span>${_('Edit')}</span>
       </a>
     </div>
