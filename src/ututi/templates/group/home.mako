@@ -30,7 +30,7 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
   </div>
   <div class="content">
     %if c.group.page != '':
-    ${c.group.page|n,decode.utf8}
+    ${h.html_cleanup(c.group.page)|n,decode.utf8}
     %else:
       ${_("The group's page is empty. Enter your description.")}
     %endif
