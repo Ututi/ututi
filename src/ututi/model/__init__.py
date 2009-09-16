@@ -201,6 +201,7 @@ def setup_orm(engine):
     groups_table = Table("groups", meta.metadata,
                          Column('title', Unicode(assert_unicode=True)),
                          Column('description', Unicode(assert_unicode=True)),
+                         Column('page', Unicode(assert_unicode=True)),
                          useexisting=True,
                          autoload=True,
                          autoload_with=engine)
