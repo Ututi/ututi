@@ -578,6 +578,7 @@ class Group(ContentItem, FolderMixin):
         self.group_id = group_id.strip().lower()
         self.title = title
         self.location = location
+        self.page = u''
         if year is None:
             year = date(date.today().year, 1, 1)
         self.year = year
