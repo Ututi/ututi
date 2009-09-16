@@ -40,14 +40,10 @@ There is also a table listing all the group's members:
 
 We need another member in the group, so let's join as the invited user.
 
-    >>> browser2 = Browser()
-    >>> browser2.open('http://localhost/')
-    >>> form = browser2.getForm('login_form')
-    >>> form.getControl('Email').value = "user@ututi.lt"
-    >>> form.getControl('Password').value = "password"
-    >>> form.getControl('Login').click()
+    >>> browser2 = Browser.logIn("user@ututi.lt", "password")
 
 The user should be presented with a flash message inviting him to join the group.
+
     >>> browser2.printQuery("//div[@class='flash-message']/span/text()")
     Adminas Adminovix has sent you an invitation to group Moderatoriai. Do You want to become a member of this group?
 
@@ -72,16 +68,16 @@ Now let's return to the admin session and see if we can set the role of the new 
     Alternative user
 
 For kicks, let's try to make ourself a non-admin.
+
     >>> form = browser.getForm(id='update-membership-1')
     >>> form.getControl(name='role').value
     ['administrator']
-    >>> form.getControl(name='role').value = ['member']
-    >>> form.getControl('Update').click()
-    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
-    Close
-    The group must have at least one administrator!
 
-And let's set the role of the other guy:
+    >>> form.getControl(name='role').displayOptions
+    ['Administrator']
+
+Aww, we can't do that, because the system does not allow us to change
+our status. Now let's set the role of the other guy:
 
     >>> form = browser.getForm(id='update-membership-2')
     >>> form.getControl(name='role').value
@@ -98,3 +94,19 @@ Now let's see if the view for the user has changed.
     >>> browser2.printQuery('//h2/text()')
     Invite your group mates
     Group members
+
+Let's use this ui to leave the group:
+
+    >>> form = browser.getForm(id='update-membership-2')
+    >>> form.getControl(name='role').displayOptions
+    ['Administrator', 'Member', 'Leave group']
+
+    >>> form.getControl(name='role').displayValue = ['Leave group']
+    >>> form.getControl('Update').click()
+
+And the user is not a member of this group anymore:
+
+    >>> browser2.reload()
+    Traceback (most recent call last):
+    ...
+    httperror_seek_wrapper: HTTP Error 403: Forbidden

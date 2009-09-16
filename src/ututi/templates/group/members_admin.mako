@@ -92,31 +92,26 @@ ${h.javascript_link('/javascripts/forms.js')|n}
     <th>${_('Last seen')}</th>
     <th>${_('Status')}</th>
   </tr>
-% for member in c.group.members:
+% for member in c.members:
   <tr>
     <td>
-      <a href="${url(controller='user', action='index', id=member.user.id)}" title="${member.user.fullname}">
-        ${member.user.fullname}
+      <a href="${member['user'].url()}" title="${member['title']}">
+        ${member['title']}
       </a>
     </td>
     <td>
-      ${member.user.emails[0].email}
+      ${member['user'].emails[0].email}
     </td>
     <td>
-      ${h.fmt_dt(member.user.last_seen)}
+      ${member['last_seen']}
     </td>
     <td>
-      <form method="post" action="${url(controller='group', action='update_membership', id=c.group.group_id)}" class="autosubmit-form" id="update-membership-${member.user.id}">
+      <form method="post" action="${c.group.url(action='update_membership')}" class="autosubmit-form" id="update-membership-${member['user'].id}">
         <div>
-          <input type="hidden" name="user_id" value="${member.user.id}"/>
-          <%
-             roles = ({'type' : 'administrator', 'title' : _('Administrator')},
-                        {'type' : 'member', 'title' : _('Member')})
-             active_role = member.is_admin and 'administrator' or 'member'
-          %>
+          <input type="hidden" name="user_id" value="${member['user'].id}"/>
           <select name="role">
-            %for role in roles:
-              %if role['type'] == active_role:
+            %for role in member['roles']:
+              %if role['selected']:
                 <option value="${role['type']}" selected="selected">${role['title']}</option>
               %else:
                 <option value="${role['type']}">${role['title']}</option>

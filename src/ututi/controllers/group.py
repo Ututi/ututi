@@ -139,7 +139,7 @@ class GroupRequestActionForm(Schema):
 
 class GroupMemberUpdateForm(Schema):
     allow_extra_fields = True
-    role = validators.OneOf(['administrator', 'member'])
+    role = validators.OneOf(['administrator', 'member', 'not-member'])
     user_id = validators.Int()
 
 class GroupInviteForm(Schema):
@@ -297,10 +297,30 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         else:
             redirect_to(controller='group', action='add')
 
+    def _get_available_roles(self, member):
+        roles = ({'type' : 'administrator', 'title' : _('Administrator')},
+                 {'type' : 'member', 'title' : _('Member')},
+                 {'type' : 'not-member', 'title': _('Leave group')})
+        active_role = member.is_admin and 'administrator' or 'member'
+        for role in roles:
+            role['selected'] = role['type'] == active_role
+        if member.is_admin and len(c.group.administrators) == 1:
+            roles = [role for role in roles
+                     if role['type'] == 'administrator']
+        return roles
+
     @group_action
     @ActionProtector("member", "admin", "moderator")
     def members(self, group):
         c.breadcrumbs.append(self._actions('members'))
+        c.members = []
+        for member in group.members:
+            c.members.append({'roles': self._get_available_roles(member),
+                              'user': member.user,
+                              'title': member.user.fullname,
+                              'last_seen': h.fmt_dt(member.user.last_seen),
+                              })
+        c.members.sort(key=lambda member: member['title'])
         if check_crowds(['admin', 'moderator'], context=group):
             return render('group/members_admin.mako')
         else:
@@ -608,18 +628,20 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             membership = GroupMember.get(user, group)
             if membership is not None:
                 role = self.form_result.get('role', 'member')
-                if role == 'member' and len(group.administrators) == 1:
-                    # possibly an administrator is being stripped of his privileges -
-                    # must check to see if there are any more admins
-                    h.flash(_('The group must have at least one administrator!'))
-                else:
+                if role == 'not-member':
+                    meta.Session.delete(membership)
+                elif role in ['members', 'administrator']:
                     role = GroupMembershipType.get(role)
-                    if role is not None:
-                        membership.role = role
-                        meta.Session.commit()
-                        h.flash(_("The status of the user %s was updated.") % user.fullname)
-                    else:
-                        h.flash(_("Problem updating the status of the user."))
+                    membership.role = role
+                    h.flash(_("The status of the user %(fullname)s was updated.") % {'fullname': user.fullname})
+                else:
+                    h.flash(_("Problem updating the status of the user."))
+
+                if group.administrators == 0:
+                    h.flash(_('The group must have at least one administrator!'))
+                    meta.Session.rollback()
+                else:
+                    meta.Session.commit()
             else:
                 h.flash(_("Problem updating the status of the user. Cannot find such user."))
         redirect_to(controller="group", action="members", id=group.group_id)
@@ -633,3 +655,18 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             group.logo = logo.file.read()
             meta.Session.commit()
             return ''
+
+    @group_action
+    @ActionProtector("admin")
+    def do_delete(self, group):
+        if len(group.members) > 1:
+            redirect_to(controller='group', action='delete')
+
+
+    @group_action
+    @ActionProtector("admin")
+    def delete(self, group):
+        if len(group.members) > 1:
+            return render('group/cant_delete.mako')
+        else:
+            return render('group/confirm_delete.mako')
