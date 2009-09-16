@@ -98,8 +98,7 @@ def setup_orm(engine):
                content_items_table,
                polymorphic_on=content_items_table.c.content_type,
                polymorphic_identity='generic',
-               properties = {'parent': relation(ContentItem, backref='children'),
-                             'created': relation(User,
+               properties = {'created': relation(User,
                                                  primaryjoin=content_items_table.c.created_by==users_table.c.id),
                              'modified': relation(User,
                                                   primaryjoin=content_items_table.c.modified_by==users_table.c.id),
@@ -109,8 +108,12 @@ def setup_orm(engine):
 
     orm.mapper(File, files_table,
                inherits=ContentItem,
+               inherit_condition=files_table.c.id==ContentItem.id,
                polymorphic_identity='file',
-               polymorphic_on=content_items_table.c.content_type)
+               polymorphic_on=content_items_table.c.content_type,
+               properties = {'parent': relation(ContentItem,
+                                                primaryjoin=files_table.c.parent_id==content_items_table.c.id,
+                                                backref="files")})
 
     orm.mapper(User,
                users_table,
@@ -168,9 +171,7 @@ def setup_orm(engine):
                inherits=ContentItem,
                polymorphic_identity='subject',
                polymorphic_on=content_items_table.c.content_type,
-               properties={'files': relation(File,
-                                             secondary=subject_files_table),
-                           'pages': relation(Page,
+               properties={'pages': relation(Page,
                                              secondary=subject_pages_table,
                                              backref="subject")})
 
@@ -215,9 +216,7 @@ def setup_orm(engine):
                inherits=ContentItem,
                polymorphic_identity='group',
                polymorphic_on=content_items_table.c.content_type,
-               properties ={'files': relation(File,
-                                              secondary=group_files_table),
-                            'watched_subjects': relation(Subject,
+               properties ={'watched_subjects': relation(Subject,
                                                          secondary=group_watched_subjects_table)})
 
     global group_invitations_table
@@ -958,35 +957,10 @@ group_files_table = None
 class File(ContentItem):
     """Class representing user-uploaded files."""
 
-    @property
-    def file_parent(self):
-        sft = subject_files_table
-        subject = meta.Session.query(Subject)\
-            .join((sft, sft.c.subject_id==subjects_table.c.id))\
-            .filter(sft.c.file_id==self.id).first()
-
-        gft = group_files_table
-        group = meta.Session.query(Group)\
-            .join((gft, gft.c.group_id==groups_table.c.id))\
-            .filter(gft.c.file_id==self.id).first()
-
-        from ututi.model.mailing import group_mailing_list_attachments_table as mft
-        from ututi.model.mailing import group_mailing_list_messages_table
-        message = meta.Session.query(GroupMailingListMessage)\
-            .join(mft)\
-            .filter(mft.c.file_id==self.id).first()
-
-        if subject:
-            return subject
-        if group:
-            return group
-        if message:
-            return message
-
     def can_write(self, user=None):
         can_write = False
-        if isinstance(self.file_parent, Subject):
-            can_write = check_crowds(['moderator'], context=self.file_parent, user=user)
+        if isinstance(self.parent, Subject):
+            can_write = check_crowds(['moderator'], context=self.parent, user=user)
         return can_write or check_crowds(['owner'], context=self, user=user)
 
     def copy(self):
@@ -1062,16 +1036,16 @@ class File(ContentItem):
     def url(self, controller='files', action='get'):
         from ututi.model.mailing import GroupMailingListMessage
 
-        if isinstance(self.file_parent, Subject):
-            return self.file_parent.url(controller='subjectfile',
+        if isinstance(self.parent, Subject):
+            return self.parent.url(controller='subjectfile',
                                    action=action,
                                    file_id=self.id)
-        elif isinstance(self.file_parent, Group):
-            return self.file_parent.url(controller='groupfile',
+        elif isinstance(self.parent, Group):
+            return self.parent.url(controller='groupfile',
                                    action=action,
                                    file_id=self.id)
-        elif isinstance(self.file_parent, GroupMailingListMessage):
-            message = self.file_parent
+        elif isinstance(self.parent, GroupMailingListMessage):
+            message = self.parent
             return message.group.url(controller='groupforum',
                                      action='file',
                                      message_id=message.id,

@@ -11,7 +11,7 @@ from sqlalchemy.schema import Column
 from sqlalchemy.schema import Table
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm import backref
-from sqlalchemy.orm import relation
+from sqlalchemy.orm import relation, synonym
 from sqlalchemy import orm
 from StringIO import StringIO
 
@@ -121,8 +121,7 @@ def setup_orm(engine):
                                                 backref=backref('messages')),
                              'group': relation(Group,
                                                primaryjoin=(columns.group_id == groups_table.c.id)),
-                             'attachments': relation(File,
-                                                     secondary=group_mailing_list_attachments_table)
+                             'attachments': synonym("files")
                              })
 
 

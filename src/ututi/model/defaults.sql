@@ -62,7 +62,6 @@ insert into emails (id, email, confirmed) values (1, 'admin@ututi.lt', true);;
 
 /* A generic table for Ututi objects */
 create table content_items (id bigserial not null,
-       parent_id int8 default null references content_items(id),
        content_type varchar(20) not null default '',
        created_by int8 references users(id) not null,
        created_on timestamp not null default (now() at time zone 'UTC'),
@@ -79,6 +78,7 @@ create table files (id int8 references content_items(id),
        filename varchar(500),
        title varchar(500),
        description text default '',
+       parent_id int8 default null references content_items(id),
        primary key (id));;
 
 create index md5 on files (md5);;
