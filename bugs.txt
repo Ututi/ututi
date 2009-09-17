@@ -53,6 +53,7 @@ Klaustukai ant kurių paspaudus aprašoma ką šitas feature daro.
 
 
 * Bugai
+** Anonimams rodomi failų viewo controls'ai.
 ** TODO Lūžta, jei registruojamasi su jau egzistuojančiu emailu.
 ** Eventai - subjecto redagavimo eventas
 Paredagavus subject'ą, eventuose rašoma, kad jis buvo sukurtas.
