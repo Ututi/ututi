@@ -204,12 +204,14 @@ package_release:
 
 .PHONY: download_backup
 download_backup:
-	rsync -rtv ututi.lt:/srv/u2ti.com/backup/ ./backup/
+	scp ututi.lt:/srv/u2ti.com/backup/dbdump ./backup/dbdump
 
 .PHONY: import_backup
 import_backup: instance/var/run/.s.PGSQL.${PGPORT}
 	psql -h ${PWD}/instance/var/run/ -d development -c "drop schema public cascade"
 	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
-	bin/paster setup-app development.ini
-	/usr/lib/postgresql/8.3/bin/pg_restore -d development -h ${PWD}/instance/var/run --no-owner -c < backup/dbdump
-	rsync -rtv ${PWD}/backup/files_dump/ ${PWD}/instance/uploads/
+	/usr/lib/postgresql/8.3/bin/pg_restore -d development -h ${PWD}/instance/var/run --no-owner < backup/dbdump
+
+.PHONY: download_backup_files
+download_backup_files:
+	rsync -rtv ututi.lt:/srv/u2ti.com/backup/files_dump/ ./backup/files_dump/
