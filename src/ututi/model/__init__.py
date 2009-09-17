@@ -273,6 +273,13 @@ def setup_orm(engine):
     events.setup_orm(engine)
 
 
+def reset_db(engine):
+    connection = meta.engine.connect()
+    connection.execute("drop schema public cascade;")
+    connection.execute("create schema public;")
+    connection.close()
+
+
 def initialize_db_defaults(engine):
     initial_db_data = pkg_resources.resource_string(
         "ututi",
@@ -286,8 +293,11 @@ def initialize_db_defaults(engine):
                 connection.execute(statement)
                 txn.commit()
             except DatabaseError, e:
-                print >> sys.stderr, str(e)
+                print >> sys.stderr, ""
+                print >> sys.stderr, e.message
+                print >> sys.stderr, e.statement
                 txn.rollback()
+                return
     connection.close()
     migrator = GreatMigrator(engine)
     migrator.initializeVersionning()
