@@ -10,7 +10,12 @@ ${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
 
   <h1>${_('Welcome to Ututi!')}</h1>
   <div id="add-group">
-	<h3>${_('Join a group')}</h3>
+	<h3>${_('Join a group')}
+      <span class="tooltip">
+        ?
+        <span class="content">${_('Create your group, invite your classmates and use the mailing list, upload private group files')}</span>
+      </span>
+    </h3>
 	<div class="message">${_('You can join your academic group to make communicating and sharing materials with your class mates easier.')}</div>
     <form method="post" action="${url(controller='profile', action='findgroup')}" id="findgroup-form">
       ${location_widget(2)}

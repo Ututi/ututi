@@ -177,7 +177,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
           <div>
             <a class="subbreadcrumb" title="${item.get('title')}" href="${item.get('link')}">${item.get('title') | h.ellipsis}</a>
           </div>
-        </li>
+G        </li>
         %endfor
       </ul>
       %endif
@@ -193,6 +193,8 @@ ${h.javascript_link('/javascripts/forms.js')|n}
   <head>
     ${h.javascript_link('/javascripts/jquery-1.3.2.min.js')|n}
     ${h.javascript_link('/javascripts/ajaxupload.3.5.js')|n}
+    ${h.javascript_link('/javascripts/jquery.qtip.min.js')|n}
+    ${h.javascript_link('/javascripts/tooltips.js')|n}
     ${h.stylesheet_link('/stylesheets/style.css')|n}
     ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
     ${h.javascript_link('/javascripts/expand.js')|n}
