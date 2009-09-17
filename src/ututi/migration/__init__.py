@@ -119,11 +119,22 @@ def main():
     config_name = 'config:%s' % config_file
 
     here_dir = os.getcwd()
-    wsgiapp = loadapp(config_name, relative_to=here_dir)
+
+    from sqlalchemy import engine_from_config
+    from paste.deploy.loadwsgi import ConfigLoader
+
+    conf_dict = ConfigLoader(config_file).parser._sections['app:main']
+
+    # migrate supports passing url as an existing Engine instance (since 0.6.0)
+    # usage: migrate -c path/to/config.ini COMMANDS
+    pgport = os.environ.get("PGPORT", "4455")
+    os.environ["PGPORT"] = pgport
+
+    conf_dict['sqlalchemy.url'] = conf_dict['sqlalchemy.url'] % dict(here=here_dir)
+    engine = engine_from_config(conf_dict)
 
     # XXX Avoid circular import
-    from ututi.model import meta
-    migrator = GreatMigrator(meta.engine)
+    migrator = GreatMigrator(engine)
 
     if action == 'upgrade':
         migrator.upgrade_min()
