@@ -192,7 +192,7 @@ class ProfileController(SearchBaseController):
                 query,
                 page=int(request.params.get('page', 1)),
                 items_per_page = 10,
-                item_count = query.count(),
+                item_count = query.count() or 0,
                 **search_params)
 
         c.watched_subjects = c.user.watched_subjects
