@@ -122,15 +122,13 @@ def main():
     from paste.deploy.loadwsgi import ConfigLoader
 
     clo = ConfigLoader(config_file)
-    conf_dict = clo.parser._sections['app:main']
 
     # migrate supports passing url as an existing Engine instance (since 0.6.0)
     # usage: migrate -c path/to/config.ini COMMANDS
     pgport = os.environ.get("PGPORT", "4455")
     os.environ["PGPORT"] = pgport
 
-    conf_dict['sqlalchemy.url'] = clo.parser.get('app:main', 'sqlalchemy.url')
-    engine = engine_from_config(conf_dict)
+    engine = engine_from_config(dict(clo.parser.items('app:main')))
 
     # XXX Avoid circular import
     migrator = GreatMigrator(engine)
