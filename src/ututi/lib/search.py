@@ -76,6 +76,11 @@ def _search_query_tags(query, tags):
             query = query.join(ContentItem.tags).filter(SimpleTag.id.in_(stags)).group_by(SearchItem).having(func.count(SearchItem.content_item_id) == len(stags))
 
         if len(ltags) > 0:
+            intersect = None
             for location in ltags:
-                query = query.filter(ContentItem.location_id.in_(location))
+                if intersect is None:
+                    intersect = set(location)
+                else:
+                    intersect = intersect & set(location)
+                query = query.filter(ContentItem.location_id.in_(list(location)))
     return query

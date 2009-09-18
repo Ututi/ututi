@@ -1,7 +1,12 @@
+from datetime import date
 from zope.testing import doctest
-from ututi.tests import PylonsLayer
 
-from ututi.model import meta, Subject, Page, Group, LocationTag, SimpleTag, User
+from ututi.model import LocationTag, GroupMembershipType, GroupMember, Group, User, meta
+from ututi.model import meta, Subject, Page, SimpleTag
+
+from ututi.tests import PylonsLayer
+import ututi
+
 from ututi.lib.search import search
 
 
@@ -16,29 +21,19 @@ def test_basic_search():
     A basic test: we set up a group and search for its text.
     Set the indexing language first, something the controllers always do for us.
 
-        >>> u = User.get(u'admin@ututi.lt')
-        >>> res = meta.Session.execute("SET ututi.active_user TO %d" % u.id)
-
-        >>> g = Group('new_group', u'Bioinformatikai', description=u'Grup\u0117 kurioje domimasi biologija ir informatika')
-        >>> meta.Session.add(g)
-        >>> meta.Session.commit()
         >>> results = search(u'biologija')
         >>> [result.object.title for result in results]
-        [u'Bioinformatikai']
+        [u'Bioinformatikai', u'Biology students', u'Biologijos pagrindai']
 
     Let's try out the lithuanian spelling:
 
-        >>> res = meta.Session.execute("SET ututi.active_user TO %d" % u.id)
-
         >>> [result.object.title for result in search(u'informatikos')]
-        [u'Bioinformatikai']
+        [u'Bioinformatikai', u'Biology students']
 
-    Let's add a subject and see what we get:
+    Let's search for a subject and see what we get:
 
-        >>> s = Subject('biologija', u'Biologijos pagrindai', LocationTag.get(u'vu'))
-        >>> meta.Session.add(s)
-        >>> [result.object.title for result in search(u'biologija')]
-        [u'Bioinformatikai', u'Biologijos pagrindai']
+        >>> [result.object.title for result in search(u'biologija', type='subject')]
+        [u'Biologijos pagrindai']
 
     Let's try out the external query callback support:
 
@@ -47,7 +42,7 @@ def test_basic_search():
 
     Let's filter by type:
         >>> [result.object.title for result in search(u'biologija', type='group')]
-        [u'Bioinformatikai']
+        [u'Bioinformatikai', u'Biology students']
 
     No pages have been added yet:
         >>> [result.object.title for result in search(u'biologija', type='page')]
@@ -60,16 +55,6 @@ def test_tag_search():
     r"""Tests searching with tags.
 
     First, let's create a few items that we can search for.
-
-        >>> u = User.get(u'admin@ututi.lt')
-        >>> res = meta.Session.execute("SET ututi.active_user TO %d" % u.id)
-
-        >>> g = Group('new_grp', u'Biology students', description=u'biologija matematika informatikos mokslas')
-        >>> g.location = LocationTag.get(u'vu/ef')
-        >>> meta.Session.add(g)
-        >>> tg = SimpleTag(u'test tag')
-        >>> g.tags.append(tg)
-        >>> meta.Session.commit()
 
     Now let's try searching for them by tags only
 
@@ -96,18 +81,7 @@ def test_tag_search():
     What about pages? They inherit their tags from the subjects they belong to. Let's see if they show up in
     search results.
 
-        >>> s = Subject(u'subj_id', u'Test subject', LocationTag.get(u'VU'))
-        >>> t = SimpleTag(u'a tag')
-        >>> meta.Session.add(t)
-        >>> s.tags.append(t)
-        >>> meta.Session.add(s)
-        >>> u = User.get(u'admin@ututi.lt')
-        >>> p = Page(u'page title', u'Puslapio tekstas')
-        >>> meta.Session.add(p)
-        >>> s.pages.append(p)
-        >>> meta.Session.commit()
-
-        >>> [result.object.title for result in search(tags=[u'a tag'])]
+        >>> sorted([result.object.title for result in search(tags=[u'a tag'])])
         [u'Test subject', u'page title']
 
         >>> [result.object.title for result in search(text=u'puslapis', tags=[u'a tag'])]
@@ -118,32 +92,69 @@ def test_tag_search():
 def test_location_search():
     r"""Testing filtering by location.
 
-    First let's create a few content items.
-
-        >>> u = User.get(u'admin@ututi.lt')
-        >>> res = meta.Session.execute("SET ututi.active_user TO %d" % u.id)
-
-        >>> g = Group('new_group', u'Bioinformatikai', description=u'Grup\u0117 kurioje domimasi biologija ir informatika')
-        >>> g.location = LocationTag.get(u'vu/ef')
-        >>> s = Subject('biologija', u'Biologijos pagrindai', LocationTag.get(u'vu'))
-        >>> p = Page(u'page title', u'Puslapio tekstas')
-        >>> s.pages.append(p)
-        >>> meta.Session.add(g)
-        >>> meta.Session.add(s)
-        >>> meta.Session.add(p)
-        >>> meta.Session.commit()
         >>> sorted([result.object.title for result in search(tags=[u'vu'])])
-        [u'Bioinformatikai', u'Biologijos pagrindai', u'page title']
+        [u'Biologijos pagrindai', u'Biology students', u'Test subject', u'page title', u'page title']
 
-        >>> [result.object.title for result in search(tags=[u'ef'])]
-        [u'Bioinformatikai']
+        >>> sorted([result.object.title for result in search(tags=[u'ef'])])
+        [u'Biology students', u'Ekologai']
 
+    Intersecting this tag with its parent tag should get us only the intersection.
+        >>> sorted([result.object.title for result in search(tags=[u'vu', u'ef'])])
+        [u'Biology students']
+
+        >>> sorted([result.object.title for result in search(tags=[u'ef', u'ktu'])])
+        [u'Ekologai']
     """
-
 
 def test_suite():
     suite = doctest.DocTestSuite(
         optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |
-        doctest.NORMALIZE_WHITESPACE)
+        doctest.NORMALIZE_WHITESPACE,
+        setUp=test_setup)
     suite.layer = PylonsLayer
     return suite
+
+def test_setup(test):
+    """Create some models needed for the tests."""
+    ututi.tests.setUp(test)
+
+    u = User.get(u'admin@ututi.lt')
+    res = meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+
+    l = LocationTag(u'Kauno technologijos universitetas', u'ktu', u'')
+    f = LocationTag(u'Ekologijos fakultetas', u'ef', u'', l)
+
+    meta.Session.add(l)
+    meta.Session.add(f)
+
+    g = Group('agroup', u'Ekologai', description=u'testas')
+    g.location = f
+    meta.Session.add(g)
+
+    g = Group('new_group', u'Bioinformatikai', description=u'Grup\u0117 kurioje domimasi biologija ir informatika')
+    meta.Session.add(g)
+
+    # a tagged group
+    g2 = Group('new_grp', u'Biology students', description=u'biologija matematika informatikos mokslas')
+    g2.location = LocationTag.get(u'vu/ef')
+
+    meta.Session.add(g2)
+    tg = SimpleTag(u'test tag')
+    g2.tags.append(tg)
+
+    s = Subject(u'subj_id', u'Test subject', LocationTag.get(u'VU'))
+    t = SimpleTag(u'a tag')
+    meta.Session.add(t)
+    s.tags.append(t)
+    meta.Session.add(s)
+    p = Page(u'page title', u'Puslapio tekstas')
+    meta.Session.add(p)
+    s.pages.append(p)
+
+    s = Subject('biologija', u'Biologijos pagrindai', LocationTag.get(u'vu'))
+    p = Page(u'page title', u'Puslapio tekstas')
+    s.pages.append(p)
+    meta.Session.add(s)
+    meta.Session.add(p)
+
+    meta.Session.commit()

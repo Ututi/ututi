@@ -958,8 +958,8 @@ class LocationTag(Tag):
 
     @classmethod
     def get_all(cls, title):
-        items = meta.Session.query(cls).filter(or_(LocationTag.title==title, LocationTag.title_short==title.upper())).all()
-        items.extend(meta.Session.query(cls).filter_by(title_short=title).all())
+        items = meta.Session.query(cls).filter(or_(func.lower(LocationTag.title)==title.lower(), func.lower(LocationTag.title_short)==title.lower())).all()
+        #items.extend(meta.Session.query(cls).filter_by(title_short=title).all())
         return items
 
 

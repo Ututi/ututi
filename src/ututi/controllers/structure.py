@@ -2,6 +2,7 @@ import logging
 
 from formencode import Schema, validators, Invalid, variabledecode
 from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.sql import expression
 from sqlalchemy import or_
 
 from pylons.controllers.util import abort
@@ -147,14 +148,14 @@ class StructureController(BaseController):
 
         if text:
             if all:
-                query = meta.Session.query(Tag)
+                query = meta.Session.query(expression.distinct(expression.func.lower(Tag.title)))
             else:
-                query = meta.Session.query(SimpleTag)
+                query = meta.Session.query(expression.distinct(expression.func.lower(SimpleTag.title)))
 
             query = query.filter(or_(Tag.title_short.op('ILIKE')('%s%%' % text),
                                      Tag.title.op('ILIKE')('%s%%' % text)))
 
-            results = [tag.title for tag in query.all()]
+            results = [title for title in query.all()]
             return results
 
         return None
