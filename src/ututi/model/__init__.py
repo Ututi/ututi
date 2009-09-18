@@ -189,7 +189,7 @@ def setup_orm(engine):
     orm.mapper(GroupMember,
                group_members_table,
                properties = {'user': relation(User, backref='memberships'),
-                             'group': relation(Group, backref=backref('members')),
+                             'group': relation(Group, backref=backref('members', cascade='save-update, merge, delete')),
                              'role': relation(GroupMembershipType)})
 
 
@@ -217,7 +217,8 @@ def setup_orm(engine):
                polymorphic_identity='group',
                polymorphic_on=content_items_table.c.content_type,
                properties ={'watched_subjects': relation(Subject,
-                                                         secondary=group_watched_subjects_table)})
+                                                         secondary=group_watched_subjects_table,
+                                                         cascade='save-update, merge, delete')})
 
     global group_invitations_table
     group_invitations_table = Table("group_invitations", meta.metadata,
@@ -230,7 +231,7 @@ def setup_orm(engine):
                                     autoload_with=engine)
 
     orm.mapper(PendingRequest, group_requests_table,
-               properties = {'group': relation(Group, backref='requests'),
+               properties = {'group': relation(Group, backref=backref('requests', cascade='save-update, merge, delete')),
                              'user': relation(User,
                                               primaryjoin=group_requests_table.c.user_id==users_table.c.id,
                                               backref='requests')})
@@ -241,7 +242,7 @@ def setup_orm(engine):
                                               backref='invitations'),
                              'author': relation(User,
                                                 primaryjoin=group_invitations_table.c.author_id==users_table.c.id),
-                             'group': relation(Group, backref='invitations')})
+                             'group': relation(Group, backref=backref('invitations', cascade='save-update, merge, delete'))})
 
     global user_monitored_subjects_table
     user_monitored_subjects_table = Table("user_monitored_subjects", meta.metadata,

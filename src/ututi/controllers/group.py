@@ -667,9 +667,13 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @ActionProtector("admin")
     def delete(self, group):
         if len(group.members) > 1:
-            return render('group/cant_delete.mako')
+            h.flash(_("You can't delete a group while it has members!"))
+            redirect_to(request.referrer)
         else:
-            return render('group/confirm_delete.mako')
+            h.flash(_("Group '%(group_title)s' has been deleted!" % {'group_title': group.title}))
+            meta.Session.delete(group)
+            meta.Session.commit()
+            redirect_to(url(controller='profile', action='home'))
 
     @group_action
     @ActionProtector("member", "admin")

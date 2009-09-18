@@ -127,3 +127,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
   </tr>
 % endfor
 </table>
+%if len(c.group.members) == 1:
+<br />
+${h.button_to(_('Delete group'), c.group.url(action='delete'))}
+%endif

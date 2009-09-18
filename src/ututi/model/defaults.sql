@@ -78,7 +78,7 @@ create table files (id int8 references content_items(id),
        filename varchar(500),
        title varchar(500),
        description text default '',
-       parent_id int8 default null references content_items(id),
+       parent_id int8 default null references content_items(id) on delete set null,
        primary key (id));;
 
 create index md5 on files (md5);;
@@ -122,7 +122,7 @@ create table group_membership_types (
 
 /* A table that tracks user membership in groups */
 create table group_members (
-       group_id int8 references groups(id) not null,
+       group_id int8 references groups(id) on delete cascade not null,
        user_id int8 references users(id) not null,
        membership_type varchar(20) references group_membership_types(membership_type) not null,
        primary key (group_id, user_id));;
@@ -179,14 +179,14 @@ create table subject_pages (
 /* A table that tracks group files */
 
 create table group_files (
-       group_id int8 references groups(id) not null,
+       group_id int8 references groups(id) on delete cascade not null,
        file_id int8 references files(id) on delete cascade not null,
        primary key (group_id, file_id));;
 
 /* A table that tracks subjects watched by a group  */
 
 create table group_watched_subjects (
-       group_id int8 references groups(id) not null,
+       group_id int8 references groups(id) on delete cascade not null,
        subject_id int8 not null references subjects(id),
        primary key (group_id, subject_id));;
 
@@ -195,12 +195,12 @@ create table group_watched_subjects (
 create table group_mailing_list_messages (
        id int8 references content_items(id) unique,
        message_id varchar(320) not null,
-       group_id int8 references groups(id) not null,
+       group_id int8 references groups(id) on delete cascade not null,
        sender_email varchar(320),
        reply_to_message_id varchar(320) default null,
-       reply_to_group_id int8 references groups(id) default null,
+       reply_to_group_id int8 references groups(id) on delete cascade default null,
        thread_message_id varchar(320) not null,
-       thread_group_id int8 references groups(id) not null,
+       thread_group_id int8 references groups(id) on delete cascade not null,
        author_id int8 references users(id) not null,
        subject varchar(500) not null,
        original text not null,
@@ -242,12 +242,12 @@ create table group_mailing_list_attachments (
        message_id varchar(320) not null,
        group_id int8 not null,
        file_id int8 references files(id) not null,
-       foreign key (message_id, group_id) references group_mailing_list_messages,
+       foreign key (message_id, group_id) references group_mailing_list_messages on delete cascade,
        primary key (message_id, group_id, file_id));;
 
 /* A table for search indexing */
 create table search_items (
-       content_item_id int8 not null references content_items(id),
+       content_item_id int8 not null references content_items(id) on delete cascade,
        terms tsvector,
        primary key (content_item_id));;
 
@@ -584,7 +584,7 @@ CREATE TABLE group_invitations (
        created timestamp not null default (now() at time zone 'UTC'),
        email varchar(320) default null,
        user_id int8 references users(id) default null,
-       group_id int8 not null references groups(id),
+       group_id int8 not null references groups(id) on delete cascade,
        author_id int8 not null references users(id),
        hash varchar(32) not null unique,
        primary key (hash),
@@ -594,7 +594,7 @@ CREATE TABLE group_invitations (
 CREATE TABLE group_requests (
        created timestamp not null default (now() at time zone 'UTC'),
        user_id int8 references users(id) default null,
-       group_id int8 not null references groups(id),
+       group_id int8 not null references groups(id) on delete cascade,
        hash char(8) not null unique,
        primary key (hash));;
 

@@ -2,6 +2,7 @@ import datetime
 
 from sqlalchemy.schema import Table
 from webhelpers.html.tags import link_to
+from sqlalchemy.orm import backref
 from sqlalchemy.orm import relation
 from sqlalchemy import orm
 from pylons.i18n import ungettext, _
@@ -179,7 +180,7 @@ def setup_orm(engine):
                events_table,
                polymorphic_on=events_table.c.event_type,
                polymorphic_identity='generic',
-               properties = {'context': relation(ContentItem, backref='events'),
+               properties = {'context': relation(ContentItem, backref=backref('events', cascade='save-update, merge, delete')),
                              'user': relation(User, backref='events')})
 
     orm.mapper(PageCreatedEvent, events_table,

@@ -200,11 +200,13 @@ And we are redirected to the group that invited us.
     <BLANKLINE>
 
 However, if we click the link again, we should get a message:
+
     >>> browser.open(get_urls(msg)[0])
     >>> print browser.url
     http://localhost/register/...
 
 Let's try requesting to join the group:
+
     >>> browser3 = Browser()
     >>> browser3.open('http://localhost/')
     >>> form = browser3.getForm('login_form')
@@ -236,9 +238,31 @@ The group's administrator should now see the request in the members view.
     >>> browser.getControl('Confirm', index=0).click()
 
 And the new member should be able to access the group now.
+
     >>> browser3.open('http://localhost/group/test/members')
     >>> browser3.printQuery("//div[@class='user-logo-link']/div/a/text()")
     Adminas Adminovix
     Alternative user
     Jonas Petraitis Petrauskas
     Second user
+
+XXX Should be in a separate test
+
+Now let's kick out all of the members and delete the group:
+
+    >>> browser.open('http://localhost/group/test')
+    >>> browser.getLink('Members').click()
+
+    >>> form = browser.getForm(id='update-membership-2')
+    >>> form.getControl(name='role').displayValue = ['Leave group']
+    >>> form.getControl('Update').click()
+
+    >>> form = browser.getForm(id='update-membership-3')
+    >>> form.getControl(name='role').displayValue = ['Leave group']
+    >>> form.getControl('Update').click()
+
+    >>> form = browser.getForm(id='update-membership-4')
+    >>> form.getControl(name='role').displayValue = ['Leave group']
+    >>> form.getControl('Update').click()
+
+    >>> browser.getControl('Delete group').click()
