@@ -44,6 +44,9 @@
         <a class="btn ${cls}" href="${url(controller='subject', action='watch', id=subject.subject_id, tags=subject.location_path)}">
           <span>${text}</span>
         </a>
+        <div class="tooltip">
+          <span class="content">${_('By watching a subject, you will be informed about all the changes in it.')}</span>
+        </div>
       </span>
     %endif
   </%self:portlet>

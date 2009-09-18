@@ -177,7 +177,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
           <div>
             <a class="subbreadcrumb" title="${item.get('title')}" href="${item.get('link')}">${item.get('title') | h.ellipsis}</a>
           </div>
-G        </li>
+        </li>
         %endfor
       </ul>
       %endif

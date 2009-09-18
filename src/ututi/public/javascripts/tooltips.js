@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $("span.tooltip").each(function() {
+    $("div.tooltip").each(function() {
         $(this).qtip({
               content: $(this).children('.content').text(),
               show: 'mouseover',
@@ -13,9 +13,14 @@ $(document).ready(function() {
               },
               style: {
                   name: 'cream',
+                  background: '#F9F9F9',
+                  color: '#d45500',
+                  'font-size': '12px',
+                  'font-weight': 'normal',
                   border: {
-                      width: 3,
-                      radius: 8,
+                      width: 1,
+                      radius: 3,
+                      color: '#cacabb'
                   },
                   tip: 'bottomMiddle'
               }

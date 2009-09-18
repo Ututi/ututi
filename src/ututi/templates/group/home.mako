@@ -38,7 +38,11 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
 </div>
 %endif
 
-<h1>${_("What's new?")}</h1>
+<h1>${_("What's new?")}
+  <div class="tooltip">
+    <span class="content">${_('A group can watch subjects that it is studying at the moment. Changes in watched subjects are shown to all classmates.')}</span>
+  </div>
+</h1>
 
 <ul id="event_list">
 % for event in c.events:

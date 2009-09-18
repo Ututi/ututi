@@ -20,10 +20,15 @@
       % endfor
     </ul>
     %endif
-    <div>
+
+    ${h.link_to(_('More subjects'), url(controller='profile', action='search', obj_type='subject'), class_="more")}
+    <span>
       ${h.button_to(_('Watch subjects'), url(controller='profile', action='subjects', id=user.id))}
-      ${h.link_to(_('More subjects'), url(controller='profile', action='search', obj_type='subject'), class_="more")}
-    </div>
+      <div class="tooltip">
+        <span class="content">${_("Add watched subjects to your watched subjects' list and receive notifications about changes in these subjects")}</span>
+      </div>
+    </span>
+
   </%self:portlet>
 </%def>
 

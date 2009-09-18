@@ -267,6 +267,9 @@ $(document).ready(function(){
       <div class="controls">
         <div id="file_upload_progress-${section_id}" class="file_upload_progress">
         </div>
+        <div class="tooltip">
+          <span class="content">${_('Upload the file to any folder.')}</span>
+        </div>
         <div class="file_upload">
           <div class="contain">
             <ul class="file_upload_dropdown click2show" id="file_upload_dropdown-${section_id}">

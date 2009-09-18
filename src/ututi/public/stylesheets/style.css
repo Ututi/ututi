@@ -569,6 +569,10 @@ a.btn-large span {
   display: inline-block;
 }
 
+.button-to div {
+  float: left;
+}
+
 /* end buttons */
 
 /* special links */
@@ -1190,11 +1194,29 @@ div.please-register {
 
 .tooltip {
   cursor: pointer;
-  border: 1px solid black;
-  padding: 2px;
-  font-size: 14px;
-  font-weight: bold;
-  color: #d45500;
+  width: 16px;
+  height: 16px;
+  background: transparent url("../images/details/icon_question.png") center center no-repeat;
+  /* hackety hack */
+  display:-moz-inline-box;
+  display:inline-block;
+  zoom:1;
+  *display:inline;
+}
+
+div.form-field .tooltip {
+  float: right;
+  margin: 10px;
+}
+
+.controls .tooltip {
+  float: left;
+  margin: 5px;
+}
+
+div.create_item .tooltip,
+span .tooltip {
+  margin: 5px;
 }
 
 .tooltip .content {
