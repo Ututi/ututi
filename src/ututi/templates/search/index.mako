@@ -90,7 +90,7 @@ ${h.javascript_link('/javascripts/search.js')|n}
        display = search_results_item
 %>
 <h3 class="underline search-results-title">
-  <span>results:</span>
+  <span>${_('results')}:</span>
   <span class="result-count">(${ungettext("found %(count)s result", "found %(count)s results", results.item_count) % dict(count = results.item_count)})</span>
 </h3>
 %if c.results.item_count > 0:
