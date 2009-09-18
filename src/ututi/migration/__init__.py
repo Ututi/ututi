@@ -97,6 +97,9 @@ class GreatMigrator(object):
         tx.commit()
         connection.close()
 
+    def upgrade_once(self):
+        if self.db_version < self.min_version:
+            self.run_scripts(self.db_version, self.db_version + 1)
 
     def upgrade_min(self):
         if self.min_version > self.db_version:
@@ -135,5 +138,7 @@ def main():
 
     if action == 'upgrade':
         migrator.upgrade_min()
+    if action == 'upgrade_once':
+        migrator.upgrade_once()
     if action == 'downgrade':
         migrator.downgrade()

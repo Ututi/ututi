@@ -210,8 +210,19 @@ download_backup:
 import_backup: instance/var/run/.s.PGSQL.${PGPORT}
 	psql -h ${PWD}/instance/var/run/ -d development -c "drop schema public cascade"
 	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
-	/usr/lib/postgresql/8.3/bin/pg_restore -d development -h ${PWD}/instance/var/run --no-owner < backup/dbdump
+	/usr/lib/postgresql/8.3/bin/pg_restore -d development -h ${PWD}/instance/var/run --no-owner < backup/dbdump || true
 
 .PHONY: download_backup_files
 download_backup_files:
 	rsync -rtv ututi.lt:/srv/u2ti.com/backup/files_dump/ ./backup/files_dump/
+
+.PHONY: test_migration
+test_migration: instance/var/run/.s.PGSQL.${PGPORT}
+	psql -h ${PWD}/instance/var/run/ -d development -c "drop schema public cascade"
+	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
+	/usr/lib/postgresql/8.3/bin/pg_restore -d development -h ${PWD}/instance/var/run --no-owner < backup/dbdump || true
+	/usr/lib/postgresql/8.3/bin/pg_dump --format=p -h /home/ignas/src/ututi/u2/instance/var/run/ -p 4455 -d development -s > before_migration.txt
+	${PWD}/bin/migrate development.ini upgrade_once
+	/usr/lib/postgresql/8.3/bin/pg_dump --format=p -h /home/ignas/src/ututi/u2/instance/var/run/ -p 4455 -d development -s > after_migration.txt
+	${PWD}/bin/migrate development.ini downgrade
+	/usr/lib/postgresql/8.3/bin/pg_dump --format=p -h /home/ignas/src/ututi/u2/instance/var/run/ -p 4455 -d development -s > after_downgrade.txt
