@@ -670,3 +670,16 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             return render('group/cant_delete.mako')
         else:
             return render('group/confirm_delete.mako')
+
+    @group_action
+    @ActionProtector("member", "admin")
+    def leave(self, group):
+        membership = GroupMember.get(c.user, group)
+        if membership is not None:
+            meta.Session.delete(membership)
+        if len(group.administrators) < 1:
+            h.flash(_('The group must have at least one administrator!'))
+            meta.Session.rollback()
+            redirect_to(request.referrer)
+        meta.Session.commit()
+        redirect_to(group.url())
