@@ -51,6 +51,12 @@ Reikia, kad naudotojai gautų priminimus:
 ** What is this? funckionalumas
 Klaustukai ant kurių paspaudus aprašoma ką šitas feature daro.
 
+** Live search
+Pradėkim nuo to, kad suvedus naują tag'ą, paieškos rezultatai iš karto atsinaujina.
+** Update tags widget
+Be to, reikėtų padaryti, kad ant to tag ženkliuko galima būtų spausti, nes daugelis nesupranta, kad reikia spausti enter.
+Vietoje filtruoti pagal mokyklas, reikėtų gražinti užrašą žymos (tags), nes jau atsiranda patagintų dalykų.
+
 
 * Bugai
 ** Anonimams rodomi failų viewo controls'ai.
