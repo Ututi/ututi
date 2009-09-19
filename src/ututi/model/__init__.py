@@ -23,6 +23,7 @@ from sqlalchemy.exc import DatabaseError, SAWarning
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm import relation, backref
 from sqlalchemy import func
+from sqlalchemy.sql.expression import desc
 from sqlalchemy.sql.expression import and_, or_
 
 from ututi.migration import GreatMigrator
@@ -610,6 +611,14 @@ class Group(ContentItem, FolderMixin):
                         .order_by(Event.created.desc())\
                         .limit(20).all()
         return events
+
+    @property
+    def message_count(self):
+        from ututi.model.mailing import GroupMailingListMessage
+        return meta.Session.query(GroupMailingListMessage)\
+            .filter_by(group_id=self.id, reply_to=None)\
+            .order_by(desc(GroupMailingListMessage.sent))\
+            .count()
 
 
 group_members_table = None
