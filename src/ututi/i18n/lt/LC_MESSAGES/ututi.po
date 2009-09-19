@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-09-18 14:51+0300\n"
+"PO-Revision-Date: 2009-09-19 03:13+0300\n"
 "Last-Translator: r <r@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -60,7 +60,7 @@ msgstr "Forumas"
 #: src/ututi/templates/group/members_admin.mako:14
 #: src/ututi/templates_py/group_members.mako.py:38
 #: src/ututi/templates_py/group/members.mako.py:41
-#: src/ututi/templates_py/group/members_admin.mako.py:42
+#: src/ututi/templates_py/group/members_admin.mako.py:43
 msgid "Members"
 msgstr "Nariai"
 
@@ -105,6 +105,7 @@ msgid "Member"
 msgstr "Narys"
 
 #: src/ututi/controllers/group.py:303
+#: src/ututi/templates_py/portlets/group.mako.py:473
 msgid "Leave group"
 msgstr "Išeiti iš grupės"
 
@@ -150,13 +151,22 @@ msgstr "Pasikeitė naudotojo %(fullname)s statusas."
 msgid "Problem updating the status of the user."
 msgstr "Klaidelė atnaujinant naudotojo statusą."
 
-#: src/ututi/controllers/group.py:641
+#: src/ututi/controllers/group.py:641 src/ututi/controllers/group.py:685
 msgid "The group must have at least one administrator!"
 msgstr "Grupėje administratorius būti privalo!"
 
 #: src/ututi/controllers/group.py:646
 msgid "Problem updating the status of the user. Cannot find such user."
 msgstr "Klaidelė atnaujinant naudotojo statusą: tokio naudotojo nėra."
+
+#: src/ututi/controllers/group.py:670
+msgid "You can't delete a group while it has members!"
+msgstr "Negalite ištrinti šios grupės kol joje yra narių!"
+
+#: src/ututi/controllers/group.py:673
+#, python-format
+msgid "Group '%(group_title)s' has been deleted!"
+msgstr "Grupė '%(group_title)s' buvo ištrinta."
 
 #: src/ututi/controllers/home.py:27
 msgid "Enter a valid email."
@@ -278,7 +288,7 @@ msgstr "Profilis"
 #: src/ututi/templates_py/profile/findgroup.mako.py:201
 #: src/ututi/templates_py/profile/findgroup.mako.py:253
 #: src/ututi/templates_py/profile/search.mako.py:72
-#: src/ututi/templates_py/profile/welcome.mako.py:81
+#: src/ututi/templates_py/profile/welcome.mako.py:78
 #: src/ututi/templates_py/search/index.mako.py:66
 #: src/ututi/templates_py/search/index.mako.py:150
 #: src/ututi/templates_py/search/index.mako.py:249
@@ -334,96 +344,96 @@ msgstr "Ututi slaptažodžio atstatymas"
 msgid "Location does not exist."
 msgstr "Tokios vietos nėra."
 
-#: src/ututi/model/events.py:28
-#, fuzzy, python-format
+#: src/ututi/model/events.py:29
+#, python-format
 msgid "%(num)s second ago"
 msgid_plural "%(num)s seconds ago"
 msgstr[0] "prieš %(num)s sekundę"
 msgstr[1] "prieš %(num)s sekundes"
 msgstr[2] "prieš %(num)s sekundžių"
 
-#: src/ututi/model/events.py:33
-#, fuzzy, python-format
+#: src/ututi/model/events.py:34
+#, python-format
 msgid "%(num)s minute ago"
 msgid_plural "%(num)s minutes ago"
 msgstr[0] "prieš %(num)s minutę"
 msgstr[1] "prieš %(num)s minutes"
 msgstr[2] "prieš %(num)s minučių"
 
-#: src/ututi/model/events.py:38
-#, fuzzy, python-format
+#: src/ututi/model/events.py:39
+#, python-format
 msgid "%(num)s hour ago"
 msgid_plural "%(num)s hours ago"
 msgstr[0] "prieš %(num)s valandą"
 msgstr[1] "prieš %(num)s valandas"
 msgstr[2] "prieš %(num)s valandų"
 
-#: src/ututi/model/events.py:43
-#, fuzzy, python-format
+#: src/ututi/model/events.py:44
+#, python-format
 msgid "%(num)s day ago"
 msgid_plural "%(num)s days ago"
 msgstr[0] "prieš %(num)s dieną"
 msgstr[1] "prieš %(num)s dienas"
 msgstr[2] "prieš %(num)s dienų"
 
-#: src/ututi/model/events.py:60
+#: src/ututi/model/events.py:61
 #, python-format
 msgid "New page %(link_to_page)s of a subject %(link_to_subject)s was created"
 msgstr "Dalyke %(link_to_subject)s sukurtas naujas puslapis %(link_to_page)s."
 
-#: src/ututi/model/events.py:72
+#: src/ututi/model/events.py:73
 #, python-format
 msgid "Page %(link_to_page)s of a subject %(link_to_subject)s was updated"
 msgstr "Dalyke %(link_to_subject)s atnaujintas puslapis %(link_to_page)s."
 
-#: src/ututi/model/events.py:86
+#: src/ututi/model/events.py:87
 #, python-format
 msgid "A new file %(link_to_file)s for a subject %(link_to_subject)s was uploaded"
 msgstr "Dalyke %(link_to_subject)s įkeltas naujas failas %(link_to_file)s."
 
-#: src/ututi/model/events.py:90
+#: src/ututi/model/events.py:91
 #, python-format
 msgid "A new file %(link_to_file)s for a group %(link_to_group)s was uploaded"
 msgstr "Grupėje %(link_to_group)s įkeltas naujas failas %(link_to_file)s."
 
-#: src/ututi/model/events.py:95
+#: src/ututi/model/events.py:96
 #, python-format
 msgid ""
 "A new folder '%(folder_title)s' for a subject %(link_to_subject)s was "
 "created"
 msgstr "Dalyke %(link_to_subject)s sukurtas aplankas '%(folder_title)s'."
 
-#: src/ututi/model/events.py:99
+#: src/ututi/model/events.py:100
 #, python-format
 msgid "A new folder '%(folder_title)s' for a group %(link_to_group)s was uploaded"
 msgstr "Grupėje %(link_to_group)s sukurtas aplankas '%(folder_title)s'."
 
-#: src/ututi/model/events.py:108
+#: src/ututi/model/events.py:109
 #, python-format
 msgid "New subject %(link_to_subject)s was created"
 msgstr "Sukurtas naujas dalykas %(link_to_subject)s"
 
-#: src/ututi/model/events.py:116
+#: src/ututi/model/events.py:117
 #, python-format
 msgid "Subject %(link_to_subject)s was modified"
 msgstr "Dalykas %(link_to_subject)s buvo redaguotas."
 
-#: src/ututi/model/events.py:127
+#: src/ututi/model/events.py:128
 #, python-format
 msgid "New forum post %(link_to_message)s was posted on %(link_to_group)s forums"
 msgstr "Grupės %(link_to_group)s forume yra naujas pranešimas %(link_to_message)s."
 
-#: src/ututi/model/events.py:136 src/ututi/model/events.py:145
+#: src/ututi/model/events.py:137 src/ututi/model/events.py:146
 #, python-format
 msgid "Member %(link_to_user)s joined the group %(link_to_group)s"
 msgstr "Prie grupės %(link_to_group)s prisijungė narys %(link_to_user)s."
 
-#: src/ututi/model/events.py:154
+#: src/ututi/model/events.py:155
 #, python-format
 msgid "Group %(link_to_group)s started watching subject %(link_to_subject)s"
 msgstr "Grupė %(link_to_group)s nuo šiol stebi dalyką %(link_to_subject)s."
 
-#: src/ututi/model/events.py:163
+#: src/ututi/model/events.py:164
 #, python-format
 msgid "Group %(link_to_group)s stopped watching subject %(link_to_subject)s"
 msgstr "Grupė %(link_to_group)s nuo šiol nebestebi dalyko %(link_to_subject)s."
@@ -439,6 +449,7 @@ msgstr ""
 
 #: src/ututi/templates/access_denied.mako:16 src/ututi/templates/error.mako:17
 #: src/ututi/templates_py/access_denied.mako.py:51
+#: src/ututi/templates_py/error.mako.py:51
 msgid "go back"
 msgstr "atgal į"
 
@@ -500,20 +511,20 @@ msgstr ""
 msgid "Ututi search"
 msgstr "Ututi paieška"
 
-#: src/ututi/templates/base.mako:8 src/ututi/templates_py/base.mako.py:494
+#: src/ututi/templates/base.mako:8 src/ututi/templates_py/base.mako.py:488
 msgid "student information online"
 msgstr "studentų žinios tinkle"
 
-#: src/ututi/templates/base.mako:18 src/ututi/templates_py/base.mako.py:178
+#: src/ututi/templates/base.mako:18 src/ututi/templates_py/base.mako.py:172
 msgid "log out"
 msgstr "išeiti"
 
-#: src/ututi/templates/base.mako:21 src/ututi/templates_py/base.mako.py:181
+#: src/ututi/templates/base.mako:21 src/ututi/templates_py/base.mako.py:175
 msgid "groups"
 msgstr "grupės"
 
 #: src/ututi/templates/base.mako:33 src/ututi/templates/profile/search.mako:31
-#: src/ututi/templates_py/base.mako.py:199
+#: src/ututi/templates_py/base.mako.py:193
 #: src/ututi/templates_py/profile/search.mako.py:91
 msgid "Create a new group"
 msgstr "sukurti naują grupę"
@@ -523,11 +534,11 @@ msgstr "sukurti naują grupę"
 #: src/ututi/templates/profile/findgroup.mako:125
 #: src/ututi/templates/profile/findgroup.mako:127
 #: src/ututi/templates/profile/findgroup.mako:129
-#: src/ututi/templates_py/base.mako.py:201
+#: src/ututi/templates_py/base.mako.py:195
 #: src/ututi/templates_py/group_add.mako.py:39
 #: src/ututi/templates_py/group_add.mako.py:95
 #: src/ututi/templates_py/group/add.mako.py:53
-#: src/ututi/templates_py/group/add.mako.py:187
+#: src/ututi/templates_py/group/add.mako.py:184
 #: src/ututi/templates_py/home/findgroup.mako.py:74
 #: src/ututi/templates_py/profile/findgroup.mako.py:80
 #: src/ututi/templates_py/profile/findgroup.mako.py:90
@@ -535,73 +546,73 @@ msgstr "sukurti naują grupę"
 msgid "New group"
 msgstr "nauja grupė"
 
-#: src/ututi/templates/base.mako:37 src/ututi/templates_py/base.mako.py:206
+#: src/ututi/templates/base.mako:37 src/ututi/templates_py/base.mako.py:200
 msgid "search"
 msgstr "paieška"
 
-#: src/ututi/templates/base.mako:40 src/ututi/templates_py/base.mako.py:211
+#: src/ututi/templates/base.mako:40 src/ututi/templates_py/base.mako.py:205
 msgid "home"
 msgstr "namai"
 
-#: src/ututi/templates/base.mako:47 src/ututi/templates_py/base.mako.py:216
+#: src/ututi/templates/base.mako:47 src/ututi/templates_py/base.mako.py:210
 msgid "Upload your personal logo"
 msgstr "įkelti asmeninį logo"
 
-#: src/ututi/templates/base.mako:66 src/ututi/templates_py/base.mako.py:253
+#: src/ututi/templates/base.mako:66 src/ututi/templates_py/base.mako.py:247
 msgid "Wrong password or username!"
 msgstr "Neteisingas el. paštas arba slaptažodis"
 
 #: src/ututi/templates/base.mako:69 src/ututi/templates/register.mako:33
 #: src/ututi/templates/group/members_admin.mako:91
-#: src/ututi/templates_py/base.mako.py:258
+#: src/ututi/templates_py/base.mako.py:252
 #: src/ututi/templates_py/register.mako.py:62
-#: src/ututi/templates_py/group/members_admin.mako.py:136
+#: src/ututi/templates_py/group/members_admin.mako.py:137
 #: src/ututi/templates_py/portlets/anonymous.mako.py:100
 msgid "Email"
 msgstr "El. paštas"
 
 #: src/ututi/templates/base.mako:76 src/ututi/templates/register.mako:37
-#: src/ututi/templates_py/base.mako.py:264
+#: src/ututi/templates_py/base.mako.py:258
 #: src/ututi/templates_py/register.mako.py:65
 #: src/ututi/templates_py/portlets/anonymous.mako.py:103
 msgid "Password"
 msgstr "Slaptažodis"
 
-#: src/ututi/templates/base.mako:87 src/ututi/templates_py/base.mako.py:269
+#: src/ututi/templates/base.mako:87 src/ututi/templates_py/base.mako.py:263
 msgid "forgotten password?"
 msgstr "Pamirštas slaptažodis?"
 
-#: src/ututi/templates/base.mako:207 src/ututi/templates_py/base.mako.py:99
+#: src/ututi/templates/base.mako:207 src/ututi/templates_py/base.mako.py:93
 msgid "UTUTI"
 msgstr "UTUTI"
 
-#: src/ututi/templates/base.mako:231 src/ututi/templates_py/base.mako.py:128
+#: src/ututi/templates/base.mako:231 src/ututi/templates_py/base.mako.py:122
 msgid "Close"
 msgstr "Uždaryti"
 
-#: src/ututi/templates/base.mako:245 src/ututi/templates_py/base.mako.py:143
+#: src/ututi/templates/base.mako:245 src/ututi/templates_py/base.mako.py:137
 msgid "Apie Ututi"
 msgstr "Apie Ututi"
 
-#: src/ututi/templates/base.mako:246 src/ututi/templates_py/base.mako.py:146
+#: src/ututi/templates/base.mako:246 src/ututi/templates_py/base.mako.py:140
 msgid "U-blog"
 msgstr "U-blogas"
 
-#: src/ututi/templates/base.mako:247 src/ututi/templates_py/base.mako.py:151
+#: src/ututi/templates/base.mako:247 src/ututi/templates_py/base.mako.py:145
 msgid "Terms of use"
 msgstr "Naudojimosi sistema taisyklės"
 
-#: src/ututi/templates/error.mako:8
+#: src/ututi/templates/error.mako:8 src/ututi/templates_py/error.mako.py:39
 msgid "Error!"
 msgstr "Klaidelė..."
 
-#: src/ututi/templates/error.mako:13
+#: src/ututi/templates/error.mako:13 src/ututi/templates_py/error.mako.py:45
 msgid ""
 "Oops, an error happened, please don't leave us, go back and try doing "
 "something else or look for information."
 msgstr "Uoj, klaidelė... Prašome grįžti atgal ir pabandyti paspausti kitur. "
 
-#: src/ututi/templates/error.mako:19
+#: src/ututi/templates/error.mako:19 src/ututi/templates_py/error.mako.py:59
 msgid "go find something"
 msgstr "ieškoti ko nors kito"
 
@@ -635,7 +646,7 @@ msgstr "Pavadinimas"
 #: src/ututi/templates_py/files.mako.py:68
 #: src/ututi/templates_py/group_add.mako.py:54
 #: src/ututi/templates_py/structure.mako.py:73
-#: src/ututi/templates_py/group/add.mako.py:128
+#: src/ututi/templates_py/group/add.mako.py:125
 #: src/ututi/templates_py/group/edit.mako.py:76
 #: src/ututi/templates_py/structure/edit.mako.py:57
 msgid "Description"
@@ -657,7 +668,7 @@ msgstr "Įkelti"
 #: src/ututi/templates_py/files.mako.py:74
 #: src/ututi/templates_py/group_add.mako.py:80
 #: src/ututi/templates_py/structure.mako.py:94
-#: src/ututi/templates_py/group/add.mako.py:134
+#: src/ututi/templates_py/group/add.mako.py:131
 #: src/ututi/templates_py/group/edit.mako.py:157
 #: src/ututi/templates_py/group/edit_page.mako.py:49
 #: src/ututi/templates_py/page/add.mako.py:57
@@ -939,7 +950,7 @@ msgstr "Žinučių kol kas nėra"
 
 #: src/ututi/templates/forum/index.mako:44
 #: src/ututi/templates_py/forum/index.mako.py:79
-#, fuzzy, python-format
+#, python-format
 msgid "%(count)s reply"
 msgid_plural "%(count)s replies"
 msgstr[0] "%(count)s atsakymas"
@@ -956,7 +967,7 @@ msgstr "Grįžti į temų sąrašą"
 #: src/ututi/templates/forum/new.mako:14
 #: src/ututi/templates_py/group_forum.mako.py:44
 #: src/ututi/templates_py/forum/new.mako.py:51
-#: src/ututi/templates_py/group/forum.mako.py:46
+#: src/ututi/templates_py/group/forum.mako.py:51
 msgid "Subject"
 msgstr "Temos antraštė"
 
@@ -982,26 +993,23 @@ msgid "Reply"
 msgstr "Atsakyti"
 
 #: src/ututi/templates/group/add.mako:17
-#: src/ututi/templates_py/group/add.mako.py:152
+#: src/ututi/templates_py/group/add.mako.py:149
 msgid "Group settings"
 msgstr "Grupės nustatymai"
 
 #: src/ututi/templates/group/add.mako:17
-#: src/ututi/templates_py/group/add.mako.py:152
+#: src/ututi/templates_py/group/add.mako.py:149
 msgid "Subject selection"
 msgstr "Dalykų pasirinkimas"
 
 #: src/ututi/templates/group/add.mako:17
-#: src/ututi/templates_py/group/add.mako.py:152
+#: src/ututi/templates_py/group/add.mako.py:149
 msgid "Member invitations"
 msgstr "Narių kvietimas"
 
 #: src/ututi/templates/group/add.mako:33
 #: src/ututi/templates/profile/search.mako:33
 #: src/ututi/templates/profile/welcome.mako:50
-#: src/ututi/templates_py/group/add.mako.py:56
-#: src/ututi/templates_py/profile/search.mako.py:94
-#: src/ututi/templates_py/profile/welcome.mako.py:78
 msgid ""
 "Create your group, invite your classmates and use the mailing list, "
 "upload private group files"
@@ -1010,19 +1018,19 @@ msgstr ""
 "konferencija bei privačių grupės failų saugykla."
 
 #: src/ututi/templates/group/add.mako:51
-#: src/ututi/templates_py/group/add.mako.py:79
+#: src/ututi/templates_py/group/add.mako.py:76
 msgid "Group title"
 msgstr "Grupės pavadinimas"
 
 #: src/ututi/templates/group/add.mako:55
-#: src/ututi/templates_py/group/add.mako.py:82
+#: src/ututi/templates_py/group/add.mako.py:79
 msgid "Group email address"
 msgstr "Grupės el. konferencijos adresas"
 
 #: src/ututi/templates/group/add.mako:59 src/ututi/templates/group/edit.mako:97
 #: src/ututi/templates/profile/findgroup.mako:71
 #: src/ututi/templates_py/group_add.mako.py:57
-#: src/ututi/templates_py/group/add.mako.py:88
+#: src/ututi/templates_py/group/add.mako.py:85
 #: src/ututi/templates_py/group/edit.mako.py:88
 #: src/ututi/templates_py/home/findgroup.mako.py:143
 #: src/ututi/templates_py/profile/findgroup.mako.py:216
@@ -1031,13 +1039,13 @@ msgstr "Metai"
 
 #: src/ututi/templates/group/add.mako:76
 #: src/ututi/templates/group/edit.mako:127
-#: src/ututi/templates_py/group/add.mako.py:123
+#: src/ututi/templates_py/group/add.mako.py:120
 #: src/ututi/templates_py/group/edit.mako.py:142
 msgid "Moderators"
 msgstr "Grupės pilotai"
 
 #: src/ututi/templates/group/add.mako:87 src/ututi/templates/group/edit.mako:88
-#: src/ututi/templates_py/group/add.mako.py:131
+#: src/ututi/templates_py/group/add.mako.py:128
 #: src/ututi/templates_py/group/edit.mako.py:82
 msgid "Group logo"
 msgstr "Grupės logo"
@@ -1058,7 +1066,7 @@ msgstr "Naujas dalykas"
 #: src/ututi/templates/group/subjects_member.mako:9
 #: src/ututi/templates_py/group/add_subject.mako.py:59
 #: src/ututi/templates_py/group/subjects.mako.py:95
-#: src/ututi/templates_py/group/subjects_admin.mako.py:77
+#: src/ututi/templates_py/group/subjects_member.mako.py:44
 msgid "Group Subjects"
 msgstr "Grupės dalykai"
 
@@ -1071,7 +1079,6 @@ msgstr "grįžti į dalykų pasirinkimą"
 #: src/ututi/templates/group/subjects.mako:167
 #: src/ututi/templates_py/group/add_subject.mako.py:90
 #: src/ututi/templates_py/group/subjects.mako.py:151
-#: src/ututi/templates_py/group/subjects_admin.mako.py:121
 msgid "Invite group members"
 msgstr "pakviesti grupės draugus"
 
@@ -1079,7 +1086,6 @@ msgstr "pakviesti grupės draugus"
 #: src/ututi/templates/group/subjects.mako:168
 #: src/ututi/templates_py/group/add_subject.mako.py:93
 #: src/ututi/templates_py/group/subjects.mako.py:154
-#: src/ututi/templates_py/group/subjects_admin.mako.py:124
 msgid "Finish choosing subjects"
 msgstr "patvirtinti pasirinktus dalykus"
 
@@ -1155,17 +1161,18 @@ msgid "The group's page is empty. Enter your description."
 msgstr "Grupės puslapis vis dar tuščias. Reikėtų ką nors parašyti..."
 
 #: src/ututi/templates/group/home.mako:43
-#: src/ututi/templates_py/group/home.mako.py:85
 msgid ""
 "A group can watch subjects that it is studying at the moment. Changes in "
 "watched subjects are shown to all classmates."
-msgstr "Grupė gali stebėti dalykus, kuriuos studijuoja. Stebint dalykus pranešimai apie pasikeitimus šiuose dalykuose rodomo visiems grupiokams."
+msgstr ""
+"Grupė gali stebėti dalykus, kuriuos studijuoja. Stebint dalykus "
+"pranešimai apie pasikeitimus šiuose dalykuose rodomo visiems grupiokams."
 
 #: src/ututi/templates/group/home_public.mako:23
 #: src/ututi/templates/group/members_admin.mako:87
 #: src/ututi/templates/group/members_step.mako:8
 #: src/ututi/templates_py/group/home_public.mako.py:65
-#: src/ututi/templates_py/group/members_admin.mako.py:130
+#: src/ututi/templates_py/group/members_admin.mako.py:131
 #: src/ututi/templates_py/group/members_step.mako.py:47
 msgid "Group members"
 msgstr "Grupės nariai"
@@ -1178,7 +1185,7 @@ msgstr "Prisijungti prie grupės"
 #: src/ututi/templates/group/members.mako:37
 #: src/ututi/templates/group/members_admin.mako:17
 #: src/ututi/templates_py/group/members.mako.py:49
-#: src/ututi/templates_py/group/members_admin.mako.py:45
+#: src/ututi/templates_py/group/members_admin.mako.py:46
 msgid "Invite your group mates"
 msgstr "Pakviesti grupės draugus"
 
@@ -1186,7 +1193,7 @@ msgstr "Pakviesti grupės draugus"
 #: src/ututi/templates/group/members_admin.mako:21
 #: src/ututi/templates/group/members_step.mako:15
 #: src/ututi/templates_py/group/members.mako.py:55
-#: src/ututi/templates_py/group/members_admin.mako.py:51
+#: src/ututi/templates_py/group/members_admin.mako.py:52
 #: src/ututi/templates_py/group/members_step.mako.py:56
 msgid "Enter emails of the people You would like to invite to the group."
 msgstr ""
@@ -1197,64 +1204,70 @@ msgstr ""
 #: src/ututi/templates/group/members_admin.mako:26
 #: src/ututi/templates/group/members_step.mako:20
 #: src/ututi/templates_py/group/members.mako.py:58
-#: src/ututi/templates_py/group/members_admin.mako.py:54
+#: src/ututi/templates_py/group/members_admin.mako.py:55
 #: src/ututi/templates_py/group/members_step.mako.py:59
 msgid "Invite"
 msgstr "pakviesti"
 
 #: src/ututi/templates/group/members_admin.mako:33
-#: src/ututi/templates_py/group/members_admin.mako.py:61
+#: src/ututi/templates_py/group/members_admin.mako.py:62
 msgid "Invited users (have not accepted yet)"
 msgstr "Pakviesti draugai (bet dar neprisijungę)"
 
 #: src/ututi/templates/group/members_admin.mako:45
-#: src/ututi/templates_py/group/members_admin.mako.py:77
+#: src/ututi/templates_py/group/members_admin.mako.py:78
 msgid "Send again"
 msgstr "Siųsti dar kartą"
 
 #: src/ututi/templates/group/members_admin.mako:45
-#: src/ututi/templates_py/group/members_admin.mako.py:79
+#: src/ututi/templates_py/group/members_admin.mako.py:80
 msgid "Send invitation again"
 msgstr "Siųsti pakvietimą dar kartą"
 
 #: src/ututi/templates/group/members_admin.mako:55
-#: src/ututi/templates_py/group/members_admin.mako.py:90
+#: src/ututi/templates_py/group/members_admin.mako.py:91
 msgid "Awaiting confirmation"
 msgstr "Laukiama patvirtinimo"
 
 #: src/ututi/templates/group/members_admin.mako:70
 #: src/ututi/templates/sections/messages.mako:67
-#: src/ututi/templates_py/group/members_admin.mako.py:114
+#: src/ututi/templates_py/group/members_admin.mako.py:115
 #: src/ututi/templates_py/sections/messages.mako.py:78
 msgid "Confirm"
 msgstr "Patvirtinti"
 
 #: src/ututi/templates/group/members_admin.mako:77
 #: src/ututi/templates/sections/messages.mako:77
-#: src/ututi/templates_py/group/members_admin.mako.py:123
+#: src/ututi/templates_py/group/members_admin.mako.py:124
 #: src/ututi/templates_py/sections/messages.mako.py:90
 msgid "Deny"
 msgstr "Atmesti"
 
 #: src/ututi/templates/group/members_admin.mako:90
-#: src/ututi/templates_py/group/members_admin.mako.py:133
+#: src/ututi/templates_py/group/members_admin.mako.py:134
 msgid "Name"
 msgstr "Vardas"
 
 #: src/ututi/templates/group/members_admin.mako:92
-#: src/ututi/templates_py/group/members_admin.mako.py:139
+#: src/ututi/templates_py/group/members_admin.mako.py:140
 msgid "Last seen"
 msgstr "Paskutinį sykį matytas"
 
 #: src/ututi/templates/group/members_admin.mako:93
-#: src/ututi/templates_py/group/members_admin.mako.py:142
+#: src/ututi/templates_py/group/members_admin.mako.py:143
 msgid "Status"
 msgstr "Statusas"
 
 #: src/ututi/templates/group/members_admin.mako:122
-#: src/ututi/templates_py/group/members_admin.mako.py:191
+#: src/ututi/templates_py/group/members_admin.mako.py:192
 msgid "Update"
 msgstr "atnaujinti"
+
+#: src/ututi/templates/group/members_admin.mako:132
+#: src/ututi/templates_py/group/members_admin.mako.py:201
+#| msgid "Create group"
+msgid "Delete group"
+msgstr "Ištrinti grupę"
 
 #: src/ututi/templates/group/members_step.mako:21
 #: src/ututi/templates_py/group/members_step.mako.py:62
@@ -1265,7 +1278,7 @@ msgstr "baigti ir grįžti į grupės puslapį"
 #: src/ututi/templates/group/subjects_member.mako:19
 #: src/ututi/templates/profile/subjects.mako:80
 #: src/ututi/templates_py/group/subjects.mako.py:107
-#: src/ututi/templates_py/group/subjects_admin.mako.py:89
+#: src/ututi/templates_py/group/subjects_member.mako.py:54
 #: src/ututi/templates_py/portlets/group.mako.py:336
 #: src/ututi/templates_py/portlets/user.mako.py:336
 #: src/ututi/templates_py/profile/subjects.mako.py:85
@@ -1275,7 +1288,6 @@ msgstr "Stebimi dalykai"
 #: src/ututi/templates/group/subjects.mako:93
 #: src/ututi/templates/profile/subjects.mako:88
 #: src/ututi/templates_py/group/subjects.mako.py:118
-#: src/ututi/templates_py/group/subjects_admin.mako.py:100
 #: src/ututi/templates_py/profile/subjects.mako.py:96
 msgid "Recommended subjects"
 msgstr "Dalykų paieška"
@@ -1292,14 +1304,14 @@ msgstr "stebėti"
 #: src/ututi/templates/profile/search.mako:40
 #: src/ututi/templates_py/group/subjects.mako.py:139
 #: src/ututi/templates_py/profile/search.mako.py:88
-#: src/ututi/templates_py/profile/search.mako.py:101
+#: src/ututi/templates_py/profile/search.mako.py:98
 msgid "Did not find what you were looking for?"
 msgstr "Nėra to, ko ieškojote? "
 
 #: src/ututi/templates/group/subjects.mako:161
 #: src/ututi/templates/profile/search.mako:41
 #: src/ututi/templates_py/group/subjects.mako.py:142
-#: src/ututi/templates_py/profile/search.mako.py:104
+#: src/ututi/templates_py/profile/search.mako.py:101
 msgid "Create a new subject"
 msgstr "kurti naują dalyką"
 
@@ -1387,8 +1399,8 @@ msgstr "grįžti į profilį"
 #: src/ututi/templates_py/home/welcome.mako.py:98
 #: src/ututi/templates_py/home/welcome.mako.py:100
 #: src/ututi/templates_py/profile/edit.mako.py:53
-#: src/ututi/templates_py/profile/welcome.mako.py:101
-#: src/ututi/templates_py/profile/welcome.mako.py:103
+#: src/ututi/templates_py/profile/welcome.mako.py:98
+#: src/ututi/templates_py/profile/welcome.mako.py:100
 msgid "Edit your profile"
 msgstr "redaguoti profilį"
 
@@ -1492,12 +1504,12 @@ msgid "entrance year"
 msgstr "Įstojimo metai"
 
 #: src/ututi/templates/profile/welcome.mako:63
-#: src/ututi/templates_py/profile/welcome.mako.py:84
+#: src/ututi/templates_py/profile/welcome.mako.py:81
 msgid "Browse subjects"
 msgstr "Studijuojami dalykai"
 
 #: src/ututi/templates/profile/welcome.mako:65
-#: src/ututi/templates_py/profile/welcome.mako.py:87
+#: src/ututi/templates_py/profile/welcome.mako.py:84
 #, python-format
 msgid ""
 "You can browse the %(link_to_list_of_subjects)s, look for information and"
@@ -1509,24 +1521,24 @@ msgstr ""
 "niekas neliktų nepastebėta."
 
 #: src/ututi/templates/profile/welcome.mako:66
-#: src/ututi/templates_py/profile/welcome.mako.py:88
+#: src/ututi/templates_py/profile/welcome.mako.py:85
 msgid "list of subjects"
 msgstr "dalykų katalogus"
 
 #: src/ututi/templates/profile/welcome.mako:67
-#: src/ututi/templates_py/profile/welcome.mako.py:89
+#: src/ututi/templates_py/profile/welcome.mako.py:86
 msgid "select watched subjects"
 msgstr "stebėti studijuojamus dalykus"
 
 #: src/ututi/templates/profile/welcome.mako:72
 #: src/ututi/templates_py/home/welcome.mako.py:90
-#: src/ututi/templates_py/profile/welcome.mako.py:93
+#: src/ututi/templates_py/profile/welcome.mako.py:90
 msgid "Review and edit your profile"
 msgstr "Gražus ir tvarkingas profilis"
 
 #: src/ututi/templates/profile/welcome.mako:73
 #: src/ututi/templates_py/home/welcome.mako.py:93
-#: src/ututi/templates_py/profile/welcome.mako.py:96
+#: src/ututi/templates_py/profile/welcome.mako.py:93
 msgid ""
 "Fill in your information, upload your photo so that others can recognize "
 "you."
@@ -1540,7 +1552,7 @@ msgstr "rezultatai"
 
 #: src/ututi/templates/search/index.mako:94
 #: src/ututi/templates_py/search/index.mako.py:106
-#, fuzzy, python-format
+#, python-format
 msgid "found %(count)s result"
 msgid_plural "found %(count)s results"
 msgstr[0] "rasta %(count)s rezultatas"
@@ -1558,20 +1570,20 @@ msgid "Here"
 msgstr "Čia"
 
 #: src/ututi/templates/sections/files.mako:226
-#: src/ututi/templates_py/sections/files.mako.py:246
+#: src/ututi/templates_py/sections/files.mako.py:243
 msgid "(Delete)"
 msgstr "(Trinti)"
 
 #: src/ututi/templates/sections/files.mako:232
 #: src/ututi/templates/sections/files.mako:237
-#: src/ututi/templates_py/sections/files.mako.py:256
-#: src/ututi/templates_py/sections/files.mako.py:278
+#: src/ututi/templates_py/sections/files.mako.py:253
+#: src/ututi/templates_py/sections/files.mako.py:275
 msgid "There are no files here, this folder is empty!"
 msgstr "Čia failų nėra, aplankas tuščias!"
 
 #: src/ututi/templates/sections/files.mako:257
 #: src/ututi/templates_py/sections/files.mako.py:109
-#, fuzzy, python-format
+#, python-format
 msgid "%(count)s file"
 msgid_plural "%(count)s files"
 msgstr[0] "%(count)s failas"
@@ -1579,17 +1591,16 @@ msgstr[1] "%(count)s failai"
 msgstr[2] "%(count)s failų"
 
 #: src/ututi/templates/sections/files.mako:271
-#: src/ututi/templates_py/sections/files.mako.py:139
 msgid "Upload the file to any folder."
 msgstr "Įkelkite failą į norimą katalogą."
 
 #: src/ututi/templates/sections/files.mako:278
-#: src/ututi/templates_py/sections/files.mako.py:145
+#: src/ututi/templates_py/sections/files.mako.py:142
 msgid "Upload file"
 msgstr "įkelti failą"
 
 #: src/ututi/templates/sections/files.mako:291
-#: src/ututi/templates_py/sections/files.mako.py:169
+#: src/ututi/templates_py/sections/files.mako.py:166
 msgid "New folder:"
 msgstr "Kurti aplanką"
 
@@ -1719,12 +1730,12 @@ msgid "Address"
 msgstr "Adresas"
 
 #: src/ututi/templates_py/group_forum.mako.py:46
-#: src/ututi/templates_py/group/forum.mako.py:48
+#: src/ututi/templates_py/group/forum.mako.py:53
 msgid "Replies"
 msgstr "Atsakymai"
 
 #: src/ututi/templates_py/group_forum.mako.py:48
-#: src/ututi/templates_py/group/forum.mako.py:50
+#: src/ututi/templates_py/group/forum.mako.py:55
 msgid "Last post"
 msgstr "Paskutinis pranešimas"
 
@@ -1743,9 +1754,10 @@ msgstr "Pridėti puslapį"
 msgid "Your confirmed emails:"
 msgstr "Jūsų patvirtinti el. pašto adresai:"
 
-#: src/ututi/templates_py/group/subjects_admin.mako.py:189
-msgid "Pick"
-msgstr "Pasirinkti"
+#: src/ututi/templates_py/group/forum.mako.py:48
+#| msgid "New topic"
+msgid "Post new topic"
+msgstr "Nauja tema"
 
 #: src/ututi/templates_py/home/findgroup.mako.py:135
 msgid "Filter by tags"
@@ -1818,12 +1830,8 @@ msgstr "stebėti dalyką"
 msgid "Stop watching the subject"
 msgstr "nebestebėti dalyko"
 
-#: src/ututi/templates_py/portlets/subject.mako.py:140
-msgid "By watching a subject, you will be informed about all the changes in it."
-msgstr "Paspaudę stebėti dalyką Jūs gausite pranešimus apie visus pasikeitimus šiame dalyke."
-
 #: src/ututi/templates_py/portlets/user.mako.py:123
-#, fuzzy, python-format
+#, python-format
 msgid "%(count)s member"
 msgid_plural "%(count)s members"
 msgstr[0] "%(count)s narys"
@@ -1849,20 +1857,13 @@ msgstr ""
 "dalykų sąrašo."
 
 #: src/ututi/templates_py/portlets/user.mako.py:376
-msgid "More subjects"
-msgstr "Daugiau dalykų"
-
-#: src/ututi/templates_py/portlets/user.mako.py:379
 msgid "Watch subjects"
 msgstr "Stebėti dalykus"
 
-#: src/ututi/templates_py/portlets/user.mako.py:382
-msgid ""
-"Add watched subjects to your watched subjects' list and receive "
-"notifications about changes in these subjects"
-msgstr "Prisidėkite studijuojamus dalykus prie stebimų dalykų sąrašo ir gaukite pranešimus apie pasiketimus šiuose dalykuose."
+#: src/ututi/templates_py/portlets/user.mako.py:379
+msgid "More subjects"
+msgstr "Daugiau dalykų"
 
 #: src/ututi/templates_py/subject/home.mako.py:99
 msgid "Subject files"
 msgstr "Dalyko failai"
-

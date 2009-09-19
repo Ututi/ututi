@@ -670,7 +670,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             h.flash(_("You can't delete a group while it has members!"))
             redirect_to(request.referrer)
         else:
-            h.flash(_("Group '%(group_title)s' has been deleted!" % {'group_title': group.title}))
+            h.flash(_("Group '%(group_title)s' has been deleted!" % dict(group_title=group.title)))
             meta.Session.delete(group)
             meta.Session.commit()
             redirect_to(url(controller='profile', action='home'))
