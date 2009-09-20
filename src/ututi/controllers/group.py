@@ -637,6 +637,8 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
                 else:
                     h.flash(_("Problem updating the status of the user."))
 
+                meta.Session.flush()
+                meta.Session.expire(group)
                 if group.administrators == 0:
                     h.flash(_('The group must have at least one administrator!'))
                     meta.Session.rollback()
