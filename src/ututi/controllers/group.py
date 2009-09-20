@@ -681,6 +681,8 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         membership = GroupMember.get(c.user, group)
         if membership is not None:
             meta.Session.delete(membership)
+            meta.Session.flush()
+            meta.Session.expire(group)
         if len(group.administrators) < 1:
             h.flash(_('The group must have at least one administrator!'))
             meta.Session.rollback()
