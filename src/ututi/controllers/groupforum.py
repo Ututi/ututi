@@ -36,6 +36,7 @@ def group_forum_action(method):
             abort(404)
         c.security_context = group
         c.group = group
+        c.object_location = group.location
         c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
         return method(self, group, thread)
     return _group_action
