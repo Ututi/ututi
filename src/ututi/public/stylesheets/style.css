@@ -690,7 +690,7 @@ a.small-link:hover {
 
 #breadcrumbs ul.breadcrumb_dropdown li.active {
   height: 36px;
-  background: transparent url("../images/details/icon_branches.png") left center no-repeat;
+  background: transparent url("../images/details/icon_down.png") left center no-repeat;
   padding: 0;
   padding-left: 30px;
 }
