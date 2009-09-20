@@ -143,7 +143,7 @@ class GroupMemberLeftEvent(Event):
     """Event fired when members leave groups."""
 
     def render(self):
-        return _("Member %(link_to_user)s joined the group %(link_to_group)s") % {
+        return _("Member %(link_to_user)s left the group %(link_to_group)s") % {
             'link_to_group': link_to(self.context.title, self.context.url()),
             'link_to_user': link_to(self.user.fullname, self.user.url())}
 
