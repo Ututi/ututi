@@ -9,7 +9,7 @@
   <li>
         ${tag.title}
         % if tag.logo is not None:
-           <img src="${url(controller='structure', action='logo', id=tag.id)}" />
+           <img src="${url(controller='structure', action='logo', id=tag.id, width=60, height=60)}" />
         % endif
         %if c.user:
             <a href="${url(controller='structure', action='edit', id=tag.id)}">${_('Edit')}</a>
