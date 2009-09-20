@@ -103,6 +103,8 @@ def setup_orm(engine):
                                                  primaryjoin=content_items_table.c.created_by==users_table.c.id),
                              'modified': relation(User,
                                                   primaryjoin=content_items_table.c.modified_by==users_table.c.id),
+                             'deleted': relation(User,
+                                                 primaryjoin=content_items_table.c.deleted_by==users_table.c.id),
                              'tags': relation(SimpleTag,
                                               secondary=content_tags_table),
                              'location': relation(LocationTag)})

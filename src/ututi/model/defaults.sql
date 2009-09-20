@@ -67,6 +67,8 @@ create table content_items (id bigserial not null,
        created_on timestamp not null default (now() at time zone 'UTC'),
        modified_by int8 references users(id) default null,
        modified_on timestamp not null default (now() at time zone 'UTC'),
+       deleted_by int8 references users(id) default null,
+       deleted_on timestamp default null,
        primary key (id));;
 
 /* A table for files */
