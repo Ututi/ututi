@@ -85,7 +85,7 @@ create index md5 on files (md5);;
 
 /* A table for tags (location and simple tags) */
 create table tags (id bigserial not null,
-       parent_id int8 references tags(id) default null,
+       parent_id int8 default null references tags(id) on delete cascade,
        title varchar(250) not null,
        title_short varchar(50) default null,
        description text default null,
@@ -99,7 +99,7 @@ insert into tags (title, title_short, description, parent_id, tag_type)
        values ('Ekonomikos fakultetas', 'ef', '', 1, 'location');;
 
 /* Add location field to the content item table */
-alter table content_items add column location_id int8 default null references tags(id);;
+alter table content_items add column location_id int8 default null references tags(id) on delete set null;;
 
 /* A table for groups */
 create table groups (

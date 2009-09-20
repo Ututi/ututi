@@ -38,7 +38,7 @@ class StructureIdValidator(validators.FancyValidator):
 
 class NewStructureForm(Schema):
 
-    allow_extra_fields = False
+    allow_extra_fields = True
 
     title = validators.UnicodeString(not_empty=True, strip=True)
     title_short = validators.UnicodeString(not_empty=True, strip=True, max=50)
@@ -94,13 +94,17 @@ class StructureController(BaseController):
             abort(404)
 
         values = self.form_result
-        c.item.title = values['title']
-        c.item.title_short = values['title_short']
-        c.item.description = values['description']
+        if values.get('action', None) == _('Delete'):
+            meta.Session.delete(c.item)
+        else:
+            c.item.title = values['title']
+            c.item.title_short = values['title_short']
+            c.item.description = values['description']
 
-        if values.get('parent') is not None and int(values.get('parent', '0')) != 0:
-            parent = meta.Session.query(LocationTag).filter_by(id=values['parent']).one()
-            parent.children.append(c.item)
+            if values.get('parent') is not None and int(values.get('parent', '0')) != 0:
+                parent = meta.Session.query(LocationTag).filter_by(id=values['parent']).one()
+                parent.children.append(c.item)
+
         meta.Session.commit()
         redirect_to(controller='structure', action='index')
 

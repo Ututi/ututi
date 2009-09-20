@@ -97,3 +97,15 @@ You can import the structure tags from csv too:
     Ekonomikos fakultetas
     Vilniaus Universitetas
     Gamtos Mokslu Fakultetas
+
+Let's delete one item:
+    >>> browser.getLink(text='Edit', index=2).click()
+    >>> browser.getControl('Delete').click()
+
+Its children should be gone too:
+    >>> browser.printQuery("id('location_structure')//li/text()")
+    Vilniaus Gedimino Technikos Universitetas
+    Architekturos fakultetas
+    Vilniaus Universitetas
+    Gamtos Mokslu Fakultetas
+

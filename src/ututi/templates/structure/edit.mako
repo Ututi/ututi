@@ -34,6 +34,7 @@
         </select>
       </div>
       <div>
-        <input type="submit" value="${_('Save')}"/>
+        <span class="btn"><input type="submit" name="action" value="${_('Save')}"/></span>
+        <span class="btn"><input type="submit" name="action" value="${_('Delete')}"/></span>
       </div>
 </form>
