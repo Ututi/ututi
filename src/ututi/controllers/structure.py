@@ -15,6 +15,7 @@ from ututi.lib.security import ActionProtector
 from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
 from ututi.model import meta, LocationTag, SimpleTag, Tag
+from ututi.controllers.group import FileUploadTypeValidator
 
 log = logging.getLogger(__name__)
 
@@ -37,14 +38,16 @@ class StructureIdValidator(validators.FancyValidator):
 
 
 class NewStructureForm(Schema):
-
     allow_extra_fields = True
-
     title = validators.UnicodeString(not_empty=True, strip=True)
     title_short = validators.UnicodeString(not_empty=True, strip=True, max=50)
-
+    logo_upload = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
     description = validators.UnicodeString(strip=True)
     parent = StructureIdValidator()
+
+
+class EditStructureForm(NewStructureForm):
+    logo_delete = validators.StringBoolean(if_missing=False)
 
 
 class AutoCompletionForm(Schema):
@@ -63,9 +66,15 @@ class StructureController(BaseController):
     @ActionProtector("root")
     def create(self):
         values = self.form_result
+
         structure = LocationTag(title=values['title'],
                                 title_short=values['title_short'],
                                 description=values['description'])
+
+        if values.get('logo_upload', None) is not None:
+            logo = values['logo_upload']
+            structure.logo = logo.file.read()
+
         meta.Session.add(structure)
 
         # XXX why zero?
@@ -85,7 +94,7 @@ class StructureController(BaseController):
         c.structure = meta.Session.query(LocationTag).filter_by(parent=None).filter(LocationTag.id != id).all()
         return render('structure/edit.mako')
 
-    @validate(schema=NewStructureForm, form='edit')
+    @validate(schema=EditStructureForm, form='edit')
     @ActionProtector("root")
     def update(self, id):
         try:
@@ -100,6 +109,13 @@ class StructureController(BaseController):
             c.item.title = values['title']
             c.item.title_short = values['title_short']
             c.item.description = values['description']
+
+            if values['logo_delete']:
+                c.item.logo = None
+
+            if values.get('logo_upload', None) is not None:
+                logo = values['logo_upload']
+                c.item.logo = logo.file.read()
 
             if values.get('parent') is not None and int(values.get('parent', '0')) != 0:
                 parent = meta.Session.query(LocationTag).filter_by(id=values['parent']).one()

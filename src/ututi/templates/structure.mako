@@ -33,7 +33,7 @@
 
 %if c.user:
 <h2>${_('Create new')}</h2>
-<form method="post" action="${url(controller='structure', action='create')}" name="new_structure_form" id="new_structure_form">
+<form method="post" action="${url(controller='structure', action='create')}" name="new_structure_form" id="new_structure_form" enctype="multipart/form-data">
       <div>
         <label for="title">${_('Title')}</label>
         <input type="text" id="title" name="title"/>
@@ -57,6 +57,11 @@
                %endif
         </select>
       </div>
+      <div>
+        <label for="logo_upload">${_('Logo')}</label>
+        <input type="file" name="logo_upload" id="logo_upload"/>
+      </div>
+
       <div>
         <input type="submit" value="${_('Save')}"/>
       </div>

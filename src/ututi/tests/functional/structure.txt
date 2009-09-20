@@ -1,6 +1,11 @@
 University and faculty structure
 ================================
 
+    >>> from pkg_resources import resource_stream
+    >>> def make_file(filename):
+    ...     stream = resource_stream("ututi.tests.functional.import", filename)
+    ...     return (stream, 'text/plain', filename)
+
 First we log in to be able to see the user list.
 
     >>> browser = Browser.logIn()
@@ -21,6 +26,7 @@ Let's try to add a new element.
     >>> form.getControl('Parent').displayOptions
     ['Select a parent', 'Vilniaus universitetas']
     >>> form.getControl('Parent').value = ['0']
+    >>> browser.getControl('Logo').add_file(*make_file('test_logo.png'))
     >>> form.getControl('Save').click()
 
 The new university is now shown.
@@ -100,7 +106,7 @@ You can import the structure tags from csv too:
 
 Let's delete one item:
     >>> browser.getLink(text='Edit', index=2).click()
-    >>> browser.getControl('Delete').click()
+    >>> browser.getControl('Delete', index=1).click()
 
 Its children should be gone too:
     >>> browser.printQuery("id('location_structure')//li/text()")
