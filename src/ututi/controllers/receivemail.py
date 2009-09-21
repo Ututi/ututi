@@ -27,6 +27,8 @@ class ReceivemailController(BaseController):
     def _recipients(self, group):
         recipients = []
         for member in group.members:
+            if not member.subscribed:
+                continue
             for email in member.user.emails:
                 if email.confirmed:
                     recipients.append(email.email)

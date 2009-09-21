@@ -127,6 +127,7 @@ create table group_members (
        group_id int8 references groups(id) on delete cascade not null,
        user_id int8 references users(id) not null,
        membership_type varchar(20) references group_membership_types(membership_type) not null,
+       subscribed bool default true,
        primary key (group_id, user_id));;
 
 

@@ -29,7 +29,17 @@
       </span>
     %endif
     %if group.is_member(c.user):
-      <a href="${group.url(action='leave')}" class="btn"><span>${_("Leave group")}</span></a>
+      <div class="click2show">
+        <span class="click">${_("My group settings")}</span>
+        <div class="show">
+          %if group.is_subscribed(c.user):
+            <a href="${group.url(action='unsubscribe')}" class="btn inactive"><span>${_("Do not get email")}</span></a>
+          %else:
+            <a href="${group.url(action='subscribe')}" class="btn"><span>${_("Get email")}</span></a>
+          %endif
+          <a href="${group.url(action='leave')}" class="btn inactive"><span>${_("Leave group")}</span></a>
+        </div>
+      </div>
       <br style="clear: both;" />
     %endif
   </%self:portlet>

@@ -242,6 +242,20 @@ email:
     >>> msg.recipients
     ['admin@ututi.lt', 'user@ututi.lt']
 
+Now let's unsubscribe from the mailing list as an administrator:
+
+    >>> browser.open(browser.url)
+    >>> browser.getLink('Do not get email').click()
+
+And post one more message:
+
+    >>> browser.getControl('Message').value = "I won't see this!"
+    >>> browser.getControl('Reply').click()
+
+    >>> msg = mail_queue.pop()
+    >>> msg.recipients
+    ['user@ututi.lt']
+
 And clean up the email queue:
 
     >>> len(mail_queue)

@@ -679,6 +679,24 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
 
     @group_action
     @ActionProtector("member", "admin")
+    def unsubscribe(self, group):
+        membership = GroupMember.get(c.user, group)
+        if membership is not None:
+            membership.subscribed = False
+        meta.Session.commit()
+        redirect_to(request.referrer)
+
+    @group_action
+    @ActionProtector("member", "admin")
+    def subscribe(self, group):
+        membership = GroupMember.get(c.user, group)
+        if membership is not None:
+            membership.subscribed = True
+        meta.Session.commit()
+        redirect_to(request.referrer)
+
+    @group_action
+    @ActionProtector("member", "admin")
     def leave(self, group):
         membership = GroupMember.get(c.user, group)
         if membership is not None:

@@ -538,16 +538,18 @@ class Group(ContentItem, FolderMixin):
                                       gmt.c.user_id == users_table.c.id))\
                                 .filter(gmt.c.group_id == self.id).all()
 
+    def is_subscribed(self, user):
+        membership = GroupMember.get(user, self)
+        return membership and membership.subscribed
+
     def is_member(self, user):
         """Is the user a member of the group?"""
-        members = [membership.user for membership in self.members]
-        return user in members
+        return GroupMember.get(user, self)
 
     def is_admin(self, user):
         """Is the user an administrator of the group?"""
-        admin_type = GroupMembershipType.get('administrator')
-        admins = [membership.user for membership in self.members if membership.role == admin_type]
-        return user in admins
+        membership = GroupMember.get(user, self)
+        return membership and membership.is_admin
 
     @property
     def administrators(self):
