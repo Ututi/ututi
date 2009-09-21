@@ -12,9 +12,11 @@
 
 <%def name="item_tags(object)">
   <div class="item-tags">
-    %for tag in object.location.hierarchy(full=True):
-      ${tag_link(tag)}
-    %endfor
+    %if object.location:
+      %for tag in object.location.hierarchy(full=True):
+        ${tag_link(tag)}
+      %endfor
+    %endif 
     %for tag in object.tags:
       ${tag_link(tag)}
     %endfor
