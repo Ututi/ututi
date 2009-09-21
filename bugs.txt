@@ -67,36 +67,25 @@ Taip pat reikėtų rodyti kiek failų, pusapių ir dalykų sukūrė naudotojas.
 
 ** TAGS for files and pages
 
+** Paieška failuose
+
+
 * Bugai
-** Kai išmeti žmogų iš grupės, rašo kad narys prisijungė prie grupės, o ne kad narys X buvo pašalintas iš grupės.
+** Iš watched subjects blokelio neeina išmesti dalyko, tenka eiti į dalykų viewą.
+Reikėtų kryžiuko pačiame portlete.
 ** Naudotojo profilio What's new nesimato jo įkeltų failų.
 Pvz. naudotojas http://ututi.lt/user/272 įkėlė apie 200 failų, bet rodo tik jo sukurtus dalykus.
 ** Anonimui neprivalo matytis grupėl el.pašto konferencijos adresas
 ** Kai žmogus sukuria dalyką, privalo iškarto jį stebėti
-** Privalo ieškoti failus (pagal pavadinimą)
 ** Ne visi What is this pranešimai yra išversti bei kartais negražiai atvaizduojami
-** Anonimams rodomi failų viewo controls'ai.
+** TODO Anonimams rodomi failų viewo controls'ai.
 ** TODO Lūžta, jei registruojamasi su jau egzistuojančiu emailu.
-** Eventai - subjecto redagavimo eventas
-Paredagavus subject'ą, eventuose rašoma, kad jis buvo sukurtas.
 ** Po Wiki puslapiais privalo rodyti tik paprastus tagus, nereikia rodyti location tagų.
 Beje, kaip pridėti tagą puslapiui?
 ** Spaudžiant ant U turėčiau patekti į paiešką
 ** Group find view
 
-** DONE Group search is not too good at handling Year that was entered incorrectly
-
-** DONE Kuriant grupę neįsimena universiteto ir fakulteto iš paieškos užklausos
-Esu naujas naudotojas. Suvedu universitetą ir ieškau grupęs.
-Nerandu norimos grupės todėl spaudžiu "create group". Čia mokymo įstaiga
-turi būti pasirinkta, tokia kaip paieškoje.
-
-** DONE User dashboard first time reikia rodyti visą sąrašą universitetų kai tik input laukas tampa aktyvus.
-
-Kodėl? Nes useris pamato lauką, ten iškarto įveda vu (hinto pamatyti nes nespėja) ir spaudžia enter. 
-Tada pamato error page, o ne search view'ą su pranešimu, kad grupė nerasta.
-Kaip alternatyva, kai žmogus įveda neegzistuojantį location tag'ą, jam galėtų pasirodyti error'as 
-prie įvestos formos. Panašiai kaip su neįvestu slaptažodžiu loginantis.
+** DONE Kai išmeti žmogų iš grupės, rašo kad narys prisijungė prie grupės, o ne kad narys X buvo pašalintas iš grupės.
 
 ** WebApp Error: <class 'sqlalchemy.exc.DataError'>: (DataError) value too long for type character varying(100) 'UPDATE users SET fullname=%(fullname)s WHERE users.id = %(users_id)s' {'users_id': 531L, 'fullname': 'Adomasjh gigkj gkjhj gjhgkj gkjgkjhg kjgkjhgkj gkjgk jgkjhg kjhg kjhg kjhg kjgkjh gkj gkjg kg kj gkjhg kjgkjgkjhg kjgjk g jk gkjgkjgkjhgk jg kjhg kjhgkjhg kjh gkjgkj hgkjh'}
 
