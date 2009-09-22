@@ -7,6 +7,10 @@ div.section h2 {
   cursor: pointer;
 }
 
+.root_folder {
+  margin-top: 5px;
+}
+
 /* expanding sectipon headings  */
 .click2show h2.click {
   padding-left: 16px;

@@ -264,6 +264,7 @@ $(document).ready(function(){
       <input type="hidden" id="delete_folder_url-${section_id}"
              value="${obj.url(action='js_delete_folder')}" />
       <input type="hidden" class="id" value="${obj.id}" />
+      %if c.user:
       <div class="controls">
         <div id="file_upload_progress-${section_id}" class="file_upload_progress">
         </div>
@@ -298,6 +299,7 @@ $(document).ready(function(){
         </div>
         <br class="clear-left"/>
       </div>
+      %endif
       % for fid, folder in enumerate(obj.folders):
         <%self:folder folder="${folder}" section_id="${section_id}" fid="${fid}" />
       % endfor
