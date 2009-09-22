@@ -205,6 +205,11 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
 
     @subject_action
     @ActionProtector("user")
+    def upload_file_short(self, subject):
+        return self._upload_file_short(subject)
+
+    @subject_action
+    @ActionProtector("user")
     def create_folder(self, subject):
         self._create_folder(subject)
         redirect_to(request.referrer)

@@ -606,6 +606,15 @@ class Group(ContentItem, FolderMixin):
             .order_by(GroupMailingListMessage.sent.desc())\
             .all()
 
+    def all_files(self, limit=None):
+        ids = [subject.id for subject in self.watched_subjects]
+        ids.append(self.id)
+
+        files = meta.Session.query(File).filter(File.parent_id.in_(ids)).order_by(File.created_on.desc())
+        if limit is not None:
+            files = files.limit(limit)
+        return files.all()
+
     @property
     def group_events(self):
         from ututi.model.events import Event

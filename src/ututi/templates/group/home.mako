@@ -14,6 +14,7 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
 <div id="sidebar">
   ${group_info_portlet()}
   ${group_forum_portlet()}
+  ${group_files_portlet()}
 </div>
 </%def>
 

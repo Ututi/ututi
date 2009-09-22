@@ -192,7 +192,6 @@ class GroupControllerBase(BaseController):
              'selected': selected == 'subjects'},
             ]
 
-
 class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     """Controller for group actions."""
 
@@ -385,6 +384,12 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @ActionProtector("member", "admin", "moderator")
     def upload_file(self, group):
         return self._upload_file(group)
+
+    @group_action
+    @ActionProtector("member", "admin", "moderator")
+    def upload_file_short(self, group):
+        return self._upload_file_short(group)
+
 
     @group_action
     @ActionProtector("member", "admin", "moderator")

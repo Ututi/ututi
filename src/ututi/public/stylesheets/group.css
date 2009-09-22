@@ -91,3 +91,26 @@ ul.event-list li {
   background: transparent url("../images/details/icon_event.png") left top no-repeat;
 }
 /* end group changes portlet */
+
+/* group files portlet */
+.delete_button {
+  cursor: pointer;
+}
+
+#group_files_portlet_content ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+#group_files_portlet_content ul li {
+  color: #d45500;
+  padding-left: 13px;
+  background: transparent url("../images/details/icon_file.png") left center no-repeat;
+}
+
+#group_files_portlet_content ul li span {
+  color: #b3b3b3;
+  padding-left: 10px;
+}
+
+/* end group files portlet */

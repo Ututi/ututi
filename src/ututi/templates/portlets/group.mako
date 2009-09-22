@@ -1,5 +1,15 @@
 <%inherit file="/portlets/base.mako"/>
 
+<%def name="portlet_file(file)">
+  <li>
+    <a href="${file.url()}" title="${file.title}">${h.ellipsis(file.title, 30)}</a>
+    <input class="delete_url" type="hidden" value="${file.url(action='delete')}" />
+    %if file.can_write():
+      <img src="${url('/images/delete.png')}" alt="delete file" class="delete_button" />
+    %endif
+  </li>
+</%def>
+
 <%def name="group_info_portlet(group=None)">
   <%
      if group is None:
@@ -60,7 +70,9 @@
         <li>${event.render()|n}</li>
       %endfor
     </ul>
-    <a class="more" href="${url(controller='group', action='home', id=group.group_id)}" title="${_('More')}">${_('More')}</a>
+    <div class="footer">
+      <a class="more" href="${url(controller='group', action='home', id=group.group_id)}" title="${_('More')}">${_('More')}</a>
+    </div>
   </%self:portlet>
 </%def>
 
@@ -93,10 +105,9 @@
     </div>
     %endfor
     <br style="clear: both;" />
-    <span class="portlet-link">
-      <a class="small" href="${url(controller='group', action='members', id=group.group_id)}" title="${_('More')}">${_('More') | h.ellipsis}</a>
-    </span>
-    <br style="clear: both;" />
+    <div class="footer">
+      <a class="more" href="${url(controller='group', action='members', id=group.group_id)}" title="${_('More')}">${_('More') | h.ellipsis}</a>
+    </div>
   </%self:portlet>
 </%def>
 
@@ -117,10 +128,9 @@
     </div>
     %endfor
     <br style="clear: both;" />
-    <span class="portlet-link">
-      <a class="small" href="${url(controller='group', action='subjects', id=group.group_id)}" title="${_('More')}">${_('More')}</a>
-    </span>
-    <br style="clear: both;" />
+    <div class="footer">
+      <a class="more" href="${url(controller='group', action='subjects', id=group.group_id)}" title="${_('More')}">${_('More')}</a>
+    </div>
   </%self:portlet>
 </%def>
 
@@ -146,11 +156,119 @@
       <div class="notice">${_("The groups's forum is empty.")}</div>
     %endif
     <br style="clear: both;" />
-    <span class="portlet-link">
-      <a class="small" href="${url(controller='group', action='forum', id=group.group_id)}" title="${_('More')}">${_('More')}</a>
-    </span>
+    <div class="footer">
+      <a class="more" href="${url(controller='group', action='forum', id=group.group_id)}" title="${_('More')}">${_('More')}</a>
+      <a href="${url(controller='groupforum', action='new_thread', id=c.group.group_id)}" class="btn"><span>${_("New topic")}</span></a>
+    </div>
+  </%self:portlet>
+</%def>
 
-    <a href="${url(controller='groupforum', action='new_thread', id=c.group.group_id)}" class="btn"><span>${_("New topic")}</span></a>
-    <br style="clear: both;" />
+<%def name="group_files_portlet(group=None)">
+  <%
+     if group is None:
+         group = c.group
+     files = group.all_files(5)
+  %>
+  <%self:portlet id="group_files_portlet" portlet_class="inactive">
+    <%def name="header()">
+      ${_('Fast file upload')}
+    </%def>
+   <script type="text/javascript">
+   //<![CDATA[
+   function deleteFile(event) {
+       var folder = $(event.target).parent().parent();
+       var url = $(event.target).prev('.delete_url').val();
+       $.ajax({type: "GET",
+               url: url,
+               success: function(msg){
+                   $(event.target).parent().remove();
+                   if ($('.file', folder).size() == 0) {
+                       $('.message', folder).show();
+                   }
+       }});
+   }
+
+   $(document).ready(function(){
+    $('.delete_button').click(deleteFile);
+
+    function setUpUpload(i, btn) {
+      var button = $(btn);
+      var upload_url = $(btn).siblings('input').val();
+      var list = $(btn).parents('#group_files_portlet_content').children('ul');
+      new AjaxUpload(button,{
+          action: upload_url,
+          name: 'attachment',
+          data: {folder: ''},
+          onSubmit : function(file, ext, iframe){
+              iframe['progress_indicator'] = $(document.createElement('li'));
+              $('li:first', list).before(iframe['progress_indicator']);
+              iframe['progress_indicator'].text(file);
+              iframe['progress_ticker'] = $(document.createElement('span'));
+              iframe['progress_ticker'].appendTo(iframe['progress_indicator']).text('Uploading');
+              var progress_ticker = iframe['progress_ticker'];
+              var interval;
+
+              // Uploding -> Uploading. -- Uploading...
+              interval = window.setInterval(function(){
+                  var text = progress_ticker.text();
+                  if (text.length < 13){
+                      progress_ticker.text(text + '.');
+                  } else {
+                      progress_ticker.text('Uploading');
+                  }
+              }, 200);
+              iframe['interval'] = interval;
+          },
+          onComplete: function(file, response, iframe){
+              iframe['progress_indicator'].replaceWith(response);
+              window.clearInterval(iframe['interval']);
+              $('.delete_button').click(deleteFile);
+          }
+      });
+    };
+    $('.upload .target').each(setUpUpload);
+   });
+   //]]>
+   </script>
+    %if files:
+      <ul>
+        %for f in files:
+        ${portlet_file(f)}
+        %endfor
+      </ul>
+    %else:
+      <div class="notice">${_("There are no files yet.")}</div>
+    %endif
+    <br />
+    <div class="footer">
+      <a class="more" href="${url(controller='group', action='files', id=group.group_id)}" title="${_('All group files')}">${_('All group files')}</a>
+
+      <div class="upload_dropdown click2show">
+      <div class="click button">
+        <div>
+          ${_('upload file to...')}
+        </div>
+      </div>
+      <div class="show target_list">
+        <%
+           items = [group] + group.watched_subjects
+           n = len(items)
+        %>
+        %for i, obj in enumerate(items):
+          <%
+             cls = ''
+             if i == 0:
+                 cls = 'first'
+             if i == n - 1:
+                 cls = 'last'
+          %>
+        <div class="upload target_item ${cls}">
+          <input type="hidden" name="upload_url" value="${obj.url(action='upload_file_short')}"/>
+          <div class="target">${h.ellipsis(obj.title, 17)}</div>
+        </div>
+        %endfor
+      </div>
+    </div>
+    </div>
   </%self:portlet>
 </%def>

@@ -362,6 +362,10 @@ ul.bullets_large li {
   color: #d45500;
 }
 
+.sidebar-block .content footer {
+  vertical-align: bottom;
+}
+
 .sidebar-block .content a.more {
   float: right;
 }
@@ -579,6 +583,7 @@ a.btn-large span {
 a.more {
   font-size: 0.9em;
   padding-right: 15px;
+  margin-top: 6px;
   background: url("../images/details/link_arrow.png") right center no-repeat;
 }
 
@@ -1223,3 +1228,61 @@ span .tooltip {
   display: none;
 }
 /* end misc */
+
+/* upload drop down (group files portlet, files view) */
+div.upload_dropdown {
+  width: 150px;
+}
+
+div.upload_dropdown .button {
+  height: 19px;
+  background: transparent url("../images/file_dropdown.png") left center no-repeat;
+  padding: 0;
+  padding-left: 4px;
+  color: #1a1a1a;
+}
+
+div.upload_dropdown .button div {
+  height: 19px;
+  background: transparent url("../images/file_dropdown.png") right center no-repeat;
+  padding: 0;
+  padding-right: 20px;
+  margin: 0;
+  cursor: pointer;
+}
+
+div.upload_dropdown .target_item {
+  height: 20px;
+  background: transparent url("../images/file_dropdown_block.png") 0 -20px no-repeat;
+  padding: 0;
+  padding-left: 25px;
+  margin: 0;
+  color: #d45500;
+}
+
+div.upload_dropdown .target_item .target.hover {
+  text-decoration: underline;
+}
+
+div.upload_dropdown .target_item div {
+  height: 20px;
+  background: transparent url("../images/file_dropdown_block.png") right -20px no-repeat;
+  padding: 0;
+  margin: 0;
+}
+
+div.upload_dropdown .target_item.first {
+  background: transparent url("../images/file_dropdown_block.png") left 0 no-repeat;
+}
+
+div.upload_dropdown .target_item.first div {
+  background: transparent url("../images/file_dropdown_block.png") right 0 no-repeat;
+}
+
+div.upload_dropdown .target_item.last {
+  background: transparent url("../images/file_dropdown_block.png") left -40px no-repeat;
+}
+
+div.upload_dropdown .target_item.last div {
+  background: transparent url("../images/file_dropdown_block.png") right -40px no-repeat;
+}

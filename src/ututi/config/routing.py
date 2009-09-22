@@ -121,6 +121,9 @@ def make_map():
     map.connect('/subject/*tags/{id}/upload_file',
                 controller='subject', action='upload_file')
 
+    map.connect('/subject/*tags/{id}/upload_file_short',
+                controller='subject', action='upload_file_short')
+
     map.connect('/subject/*tags/{id}',
                 controller='subject',
                 action='home')

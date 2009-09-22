@@ -32,7 +32,7 @@ class FileViewMixin(object):
                 meta.Session.delete(file)
         meta.Session.commit()
 
-    def _upload_file(self, obj):
+    def _upload_file_basic(self, obj):
         file = request.params['attachment']
         folder = request.params['folder']
         if file is not None and file != '':
@@ -44,4 +44,12 @@ class FileViewMixin(object):
             obj.files.append(f)
             meta.Session.add(f)
             meta.Session.commit()
+            return f
+
+    def _upload_file(self, obj):
+        f = self._upload_file_basic(obj)
         return render_mako_def('/sections/files.mako','file', file=f)
+
+    def _upload_file_short(self, obj):
+        f = self._upload_file_basic(obj)
+        return render_mako_def('/portlets/group.mako','portlet_file', file=f)
