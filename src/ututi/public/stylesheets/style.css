@@ -362,8 +362,8 @@ ul.bullets_large li {
   color: #d45500;
 }
 
-.sidebar-block .content footer {
-  vertical-align: bottom;
+.sidebar-block .content .footer {
+  padding-top: 5px;
 }
 
 .sidebar-block .content a.more {
@@ -376,7 +376,7 @@ ul.bullets_large li {
   color: #666666;
   font-weight: normal;
   font-family: Verdana, Arial, Helvetica, sans-serif;
-  font-size: 0.9em;
+  font-size: 13px;
   text-align: left;
   text-transform: uppercase;
 }
@@ -1123,13 +1123,13 @@ div.user-logo-link div {
 /* end groups portlet */
 
 /* subjects portlet */
-#subject_portlet_content #user-subjects {
+#subject_portlet_content .subjects-list {
   list-style-type: none;
   margin-bottom: 10px;
   padding: 0;
 }
 
-#subject_portlet_content #user-subjects li {
+#subject_portlet_content .subjects-list li {
   height: 16px;
   line-height: 16px;
   padding-left: 20px;

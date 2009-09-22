@@ -114,3 +114,15 @@ ul.event-list li {
 }
 
 /* end group files portlet */
+
+/* misc */
+#group_settings_toggle {
+  color: #d45500;
+  padding-right: 18px;
+  background: transparent url("../images/details/expand_down.png") right center no-repeat;
+  cursor: pointer;
+}
+
+#group_settings_block {
+  padding-top: 5px;
+}

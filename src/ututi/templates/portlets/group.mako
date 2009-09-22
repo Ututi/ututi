@@ -18,7 +18,7 @@
 
   <%self:portlet id="group_info_portlet">
     <%def name="header()">
-      ${_('Group information')}
+      <a href="${group.url()}" title="${group.title}">${_('Group information')}</a>
     </%def>
     %if group.logo is not None:
       <img id="group-logo" src="${url(controller='group', action='logo', id=group.group_id, width=70)}" alt="logo" />
@@ -32,26 +32,25 @@
     <div class="description small">
       ${group.description}
     </div>
-    <br style="clear: both;" />
-    %if group.is_admin(c.user):
-      <span class="portlet-link">
-        <a class="small" href="${url(controller='group', action='edit', id=group.group_id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
-      </span>
-    %endif
-    %if group.is_member(c.user):
-      <div class="click2show">
-        <span class="click">${_("My group settings")}</span>
-        <div class="show">
-          %if group.is_subscribed(c.user):
-            <a href="${group.url(action='unsubscribe')}" class="btn inactive"><span>${_("Do not get email")}</span></a>
-          %else:
-            <a href="${group.url(action='subscribe')}" class="btn"><span>${_("Get email")}</span></a>
-          %endif
-          <a href="${group.url(action='leave')}" class="btn inactive"><span>${_("Leave group")}</span></a>
+
+    <div class="footer">
+      %if group.is_admin(c.user):
+        <a class="more" href="${url(controller='group', action='edit', id=group.group_id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
+      %endif
+      %if group.is_member(c.user):
+        <div class="click2show">
+          <span id="group_settings_toggle" class="click">${_("My group settings")}</span>
+          <div class="show" id="group_settings_block">
+            %if group.is_subscribed(c.user):
+              <a href="${group.url(action='unsubscribe')}" class="btn inactive"><span>${_("Do not get email")}</span></a>
+            %else:
+              <a href="${group.url(action='subscribe')}" class="btn"><span>${_("Get email")}</span></a>
+            %endif
+            <a href="${group.url(action='leave')}" class="btn inactive"><span>${_("Leave group")}</span></a>
+          </div>
         </div>
-      </div>
-      <br style="clear: both;" />
-    %endif
+      %endif
+    </div>
   </%self:portlet>
 </%def>
 
@@ -63,7 +62,7 @@
 
   <%self:portlet id="group_changes_portlet" portlet_class="inactive">
     <%def name="header()">
-      ${_('Latest changes')}
+      <a href="${group.url()}" title="${_('Latest changes')}">${_('Latest changes')}</a>
     </%def>
     <ul class="event-list">
       %for event in group.group_events[:5]:
@@ -84,7 +83,7 @@
 
   <%self:portlet id="group_members_portlet" portlet_class="inactive">
     <%def name="header()">
-      ${_('Recently seen')}
+      <a href="${group.url(action='members')}" title="${_('Group members')}">${_('Recently seen')}</a>
     </%def>
     %for member in group.last_seen_members[:3]:
     <div class="user-logo-link">
@@ -116,20 +115,23 @@
      if group is None:
          group = c.group
   %>
-  <%self:portlet id="watched_subjects_portlet" portlet_class="inactive XXX">
+  <%self:portlet id="subject_portlet" portlet_class="inactive">
     <%def name="header()">
-      ${_('Watched subjects')}
+      <a href="${group.url(action='subjects')}" title="${_('All watched subjects')}">${_('Watched subjects')}</a>
     </%def>
-    %for subject in group.watched_subjects:
-    <div>
-      <a href="${subject.url()}">
-          ${subject.title}
-      </a>
-    </div>
-    %endfor
-    <br style="clear: both;" />
+    %if not group.watched_subjects:
+      ${_('Your group is not watching any subjects!')}
+    %else:
+    <ul id="group-subjects" class="subjects-list">
+      % for subject in group.watched_subjects[:5]:
+      <li>
+        <a href="${subject.url()}" title="${subject.title}">${h.ellipsis(subject.title, 35)}</a>
+      </li>
+      % endfor
+    </ul>
+    %endif
     <div class="footer">
-      <a class="more" href="${url(controller='group', action='subjects', id=group.group_id)}" title="${_('More')}">${_('More')}</a>
+      <a class="more" href="${url(controller='group', action='subjects', id=group.group_id)}" title="${_('All watched subjects')}">${_('All watched subjects')}</a>
     </div>
   </%self:portlet>
 </%def>
@@ -141,7 +143,7 @@
   %>
   <%self:portlet id="forum_portlet" portlet_class="inactive">
     <%def name="header()">
-      ${_('Group messages')}
+      <a href="${group.url(action='forum')}" title="${_('Group forum')}">${_('Group messages')}</a>
     </%def>
     %if group.all_messages:
       <table id="group_latest_messages">
@@ -171,7 +173,7 @@
   %>
   <%self:portlet id="group_files_portlet" portlet_class="inactive">
     <%def name="header()">
-      ${_('Fast file upload')}
+      <a href="${group.url(action='files')}" title="${_('Group files')}">${_('Fast file upload')}</a>
     </%def>
    <script type="text/javascript">
    //<![CDATA[
