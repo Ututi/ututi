@@ -71,7 +71,7 @@
       %endfor
     </ul>
     <div class="footer">
-      <a class="more" href="${url(controller='group', action='home', id=group.group_id)}" title="${_('More')}">${_('More')}</a>
+      <a class="more" href="${url(controller='group', action='home', id=group.group_id)}" title="${_('All changes')}">${_('All changes')}</a>
     </div>
   </%self:portlet>
 </%def>
@@ -106,7 +106,7 @@
     %endfor
     <br style="clear: both;" />
     <div class="footer">
-      <a class="more" href="${url(controller='group', action='members', id=group.group_id)}" title="${_('More')}">${_('More') | h.ellipsis}</a>
+      <a class="more" href="${url(controller='group', action='members', id=group.group_id)}" title="${_('All group members')}">${_('All group members')}</a>
     </div>
   </%self:portlet>
 </%def>
@@ -157,7 +157,7 @@
     %endif
     <br style="clear: both;" />
     <div class="footer">
-      <a class="more" href="${url(controller='group', action='forum', id=group.group_id)}" title="${_('More')}">${_('More')}</a>
+      <a class="more" href="${url(controller='group', action='forum', id=group.group_id)}" title="${_('Group forum')}">${_('Group forum')}</a>
       <a href="${url(controller='groupforum', action='new_thread', id=c.group.group_id)}" class="btn"><span>${_("New topic")}</span></a>
     </div>
   </%self:portlet>

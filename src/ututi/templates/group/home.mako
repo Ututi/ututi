@@ -15,6 +15,8 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
   ${group_info_portlet()}
   ${group_forum_portlet()}
   ${group_files_portlet()}
+##  ${group_watched_subjects_portlet()}
+  ${group_members_portlet()}
 </div>
 </%def>
 

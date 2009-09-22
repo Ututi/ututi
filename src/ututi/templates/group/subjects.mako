@@ -10,7 +10,7 @@
 <%def name="portlets()">
 <div id="sidebar">
   ${group_info_portlet()}
-  ${group_forum_portlet()}
+  ${group_changes_portlet()}
 </div>
 </%def>
 
