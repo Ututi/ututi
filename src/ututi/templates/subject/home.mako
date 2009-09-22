@@ -43,9 +43,11 @@
   <h2>${_('Pages')}</h2>
   <div class="container">
     <br />
+    %if c.user:
     <a class="btn" href="${url(controller='subjectpage', action='add', id=c.subject.subject_id, tags=c.subject.location_path)}">
       <span>${_('New page')}</span>
     </a>
+    %endif
     % if c.subject.pages:
       % for page in c.subject.pages:
         ${page_extra(page)}
