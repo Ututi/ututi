@@ -177,19 +177,24 @@ class GroupControllerBase(BaseController):
         return [
             {'title': _("What's new?"),
              'link': url(controller='group', action='home', id=c.group.group_id),
-             'selected': selected == 'home'},
+             'selected': selected == 'home',
+             'event': h.trackEvent(c.group, 'home', 'breadcrumb')},
             {'title': _('Forum'),
              'link': url(controller='group', action='forum', id=c.group.group_id),
-             'selected': selected == 'forum'},
+             'selected': selected == 'forum',
+             'event': h.trackEvent(c.group, 'forum', 'breadcrumb')},
             {'title': _('Members'),
              'link': url(controller='group', action='members', id=c.group.group_id),
-             'selected': selected == 'members'},
+             'selected': selected == 'members',
+             'event': h.trackEvent(c.group, 'members', 'breadcrumb')},
             {'title': _('Files'),
              'link': url(controller='group', action='files', id=c.group.group_id),
-             'selected': selected == 'files'},
+             'selected': selected == 'files',
+             'event': h.trackEvent(c.group, 'files', 'breadcrumb')},
             {'title': _('Subjects'),
              'link': url(controller='group', action='subjects', id=c.group.group_id),
-             'selected': selected == 'subjects'},
+             'selected': selected == 'subjects',
+             'event': h.trackEvent(c.group, 'subjects', 'breadcrumb')},
             ]
 
 class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
@@ -228,6 +233,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             h.flash(_("You already are a member of this group."))
         else:
             h.flash(_("Your request to join the group is still being processed."))
+
         redirect_to(controller='group', action='home', id=group.group_id)
 
     @group_action

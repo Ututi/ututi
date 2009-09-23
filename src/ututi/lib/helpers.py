@@ -173,3 +173,11 @@ def file_size(size):
             continue
         else:
             return "%s %sb" % (round(size / float(lim/2**10), 2), suf)
+
+def trackEvent(obj, action, label, category='navigation'):
+    # _trackEvent(category, action, optional_label, optional_value)
+    return """onclick="pageTracker._trackEvent('%s', '%s', '%s');" """ % (
+        category,
+        action,
+        label)
+

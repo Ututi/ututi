@@ -18,7 +18,7 @@
 
   <%self:portlet id="group_info_portlet">
     <%def name="header()">
-      <a href="${group.url()}" title="${group.title}">${_('Group information')}</a>
+      <a ${h.trackEvent(c.group, 'home', 'portlet_header')|n} href="${group.url()}" title="${group.title}">${_('Group information')}</a>
     </%def>
     %if group.logo is not None:
       <img id="group-logo" src="${url(controller='group', action='logo', id=group.group_id, width=70)}" alt="logo" />
@@ -62,7 +62,7 @@
 
   <%self:portlet id="group_changes_portlet" portlet_class="inactive">
     <%def name="header()">
-      <a href="${group.url()}" title="${_('Latest changes')}">${_('Latest changes')}</a>
+      <a ${h.trackEvent(c.group, 'events', 'portlet_header')|n} href="${group.url()}" title="${_('Latest changes')}">${_('Latest changes')}</a>
     </%def>
     <ul class="event-list">
       %for event in group.group_events[:5]:
@@ -70,7 +70,7 @@
       %endfor
     </ul>
     <div class="footer">
-      <a class="more" href="${url(controller='group', action='home', id=group.group_id)}" title="${_('All changes')}">${_('All changes')}</a>
+      <a ${h.trackEvent(c.group, 'events', 'portlet_footer')|n} class="more" href="${url(controller='group', action='home', id=group.group_id)}" title="${_('All changes')}">${_('All changes')}</a>
     </div>
   </%self:portlet>
 </%def>
@@ -83,7 +83,7 @@
 
   <%self:portlet id="group_members_portlet" portlet_class="inactive">
     <%def name="header()">
-      <a href="${group.url(action='members')}" title="${_('Group members')}">${_('Recently seen')}</a>
+      <a ${h.trackEvent(c.group, 'members', 'portlet_header')|n} href="${group.url(action='members')}" title="${_('Group members')}">${_('Recently seen')}</a>
     </%def>
     %for member in group.last_seen_members[:3]:
     <div class="user-logo-link">
@@ -105,7 +105,7 @@
     %endfor
     <br style="clear: both;" />
     <div class="footer">
-      <a class="more" href="${url(controller='group', action='members', id=group.group_id)}" title="${_('All group members')}">${_('All group members')}</a>
+      <a ${h.trackEvent(c.group, 'members', 'portlet_footer')|n} class="more" href="${url(controller='group', action='members', id=group.group_id)}" title="${_('All group members')}">${_('All group members')}</a>
     </div>
   </%self:portlet>
 </%def>
@@ -117,7 +117,7 @@
   %>
   <%self:portlet id="subject_portlet" portlet_class="inactive">
     <%def name="header()">
-      <a href="${group.url(action='subjects')}" title="${_('All watched subjects')}">${_('Watched subjects')}</a>
+      <a ${h.trackEvent(c.group, 'subjects', 'portlet_header')|n} href="${group.url(action='subjects')}" title="${_('All watched subjects')}">${_('Watched subjects')}</a>
     </%def>
     %if not group.watched_subjects:
       ${_('Your group is not watching any subjects!')}
@@ -131,7 +131,10 @@
     </ul>
     %endif
     <div class="footer">
-      <a class="more" href="${url(controller='group', action='subjects', id=group.group_id)}" title="${_('All watched subjects')}">${_('All watched subjects')}</a>
+      <a ${h.trackEvent(c.group, 'subjects', 'portlet_footer')|n}
+         class="more"
+         href="${url(controller='group', action='subjects', id=group.group_id)}"
+         title="${_('All watched subjects')}">${_('All watched subjects')}</a>
     </div>
   </%self:portlet>
 </%def>
@@ -143,7 +146,7 @@
   %>
   <%self:portlet id="forum_portlet" portlet_class="inactive">
     <%def name="header()">
-      <a href="${group.url(action='forum')}" title="${_('Group forum')}">${_('Group messages')}</a>
+      <a ${h.trackEvent(c.group, 'forum', 'portlet_header')|n} href="${group.url(action='forum')}" title="${_('Group forum')}">${_('Group messages')}</a>
     </%def>
     %if group.all_messages:
       <table id="group_latest_messages">
@@ -159,7 +162,8 @@
     %endif
     <br style="clear: both;" />
     <div class="footer">
-      <a class="more" href="${url(controller='group', action='forum', id=group.group_id)}" title="${_('Group forum')}">${_('Group forum')}</a>
+      <a ${h.trackEvent(c.group, 'forum', 'portlet_footer')|n}
+         class="more" href="${url(controller='group', action='forum', id=group.group_id)}" title="${_('Group forum')}">${_('Group forum')}</a>
       <a href="${url(controller='groupforum', action='new_thread', id=c.group.group_id)}" class="btn"><span>${_("New topic")}</span></a>
     </div>
   </%self:portlet>
@@ -173,7 +177,7 @@
   %>
   <%self:portlet id="group_files_portlet" portlet_class="inactive">
     <%def name="header()">
-      <a href="${group.url(action='files')}" title="${_('Group files')}">${_('Fast file upload')}</a>
+      <a ${h.trackEvent(c.group, 'files', 'portlet_header')|n} href="${group.url(action='files')}" title="${_('Group files')}">${_('Fast file upload')}</a>
     </%def>
    <script type="text/javascript">
    //<![CDATA[
@@ -243,7 +247,8 @@
     %endif
     <br />
     <div class="footer">
-      <a class="more" href="${url(controller='group', action='files', id=group.group_id)}" title="${_('All group files')}">${_('All group files')}</a>
+      <a ${h.trackEvent(c.group, 'files', 'portlet_footer')|n}
+         class="more" href="${group.url(action='files')}" title="${_('All group files')}">${_('All group files')}</a>
 
       <div class="upload_dropdown click2show">
       <div class="click button">
