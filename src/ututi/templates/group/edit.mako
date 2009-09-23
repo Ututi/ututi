@@ -76,9 +76,7 @@ ${h.javascript_link('/javascripts/js-alternatives.js')|n}
       <td class="js-alternatives">
         <div class="form-field">
           <label for="title">${_('Title')}</label>
-          <div class="input-rounded"><div>
-              <input type="text" class="line" id="title" name="title" value="${c.group.title}"/>
-          </div></div>
+          <input type="text" class="line" id="title" name="title" value="${c.group.title}"/>
         </div>
         <div class="form-field">
           <label for="description">${_('Description')}</label>

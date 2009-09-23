@@ -449,39 +449,23 @@ form .form-field label {
   /* font */
   color: #666;
   font-size: 12px;
-  height: 20px;
-  line-height: 20px;
+  height: 24px;
+  line-height: 24px;
   vertical-align: middle;
   text-transform: lowercase;
 }
 
-form .form-field div.input-rounded {
-  background: white url("../images/borders/input-small.png") left top no-repeat;
-  display: inline-block;
-  border: medium none;
-  padding: 0 0 0 5px;
-  margin: 0;
-  width: auto;
-}
-
-form .form-field div.input-rounded div {
-  background: white url("../images/borders/input-small.png") right top no-repeat;
-  border: 0px;
-  height: 20px;
-  padding: 0 10px 2px 0;
-  margin: 0;
-  color: #1a1a1a;
-  display: inline-block;
-}
-
-form .form-field div.input-rounded div input {
-  border: 0px;
-  background: transparent;
+form .form-field input.line {
+  border: 0;
+  background: transparent url("../images/borders/input-small-180.png") center center no-repeat;
+  padding: 2px;
+  margin: 2px 0;
+  width: 176px;
+  height: 16px;
   font-weight: normal;
   font-size: 12px;
-  line-height: 18px;
+  line-height: 20px;
 }
-
 
 form .form-field.no-break label {
   display: inline;

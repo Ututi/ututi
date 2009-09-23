@@ -35,7 +35,8 @@
 }
 
 .sidebar-block form input.line {
-  width: 200px;
+  background-image: url("../images/borders/input-small-160.png");
+  width: 156px;
   font-size: 0.8em;
   font-weight: normal;
 }
@@ -62,15 +63,12 @@
   background: white url("../images/borders/registration_form.png") center bottom no-repeat;
 }
 
-#registration_form .form-field div.input-rounded {
+#registration_form .form-field div {
   float: right;
   width: 160px;
   clear: right;
 }
 
-#registration_form .form-field .input-rounded input {
-  width: 150px;
-}
 
 #registration_form .form-field input.submit {
   float: none;

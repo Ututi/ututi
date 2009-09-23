@@ -76,20 +76,12 @@
       <td class="js-alternatives">
         <div class="form-field">
           <label for="fullname">${_('Full name')}</label>
-          <div class="input-rounded">
-            <div>
-              <input type="text" id="fullname" name="fullname" value="${c.user.fullname}"/>
-            </div>
-          </div>
+          <input class="line" type="text" id="fullname" name="fullname" value="${c.user.fullname}"/>
         </div>
 
         <div class="form-field">
           <label for="site_url">${_('Address of your website or blog')}</label>
-          <div class="input-rounded">
-            <div>
-              <input type="text" id="site_url" name="site_url" value="${c.user.site_url}"/>
-            </div>
-          </div>
+          <input class="line" type="text" id="site_url" name="site_url" value="${c.user.site_url}"/>
         </div>
 
         <div class="form-field">

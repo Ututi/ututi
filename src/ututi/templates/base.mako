@@ -67,16 +67,16 @@ ${h.javascript_link('/javascripts/forms.js')|n}
   % endif
   <div class="form-field overlay">
     <label for="login" class="small">${_('Email')}</label>
-    <div class="input-rounded"><div>
-        <input type="text" size="20" id="login" name="login" class="small" value="${request.params.get('login')}" />
-    </div></div>
+    <div>
+        <input type="text" size="20" id="login" name="login" class="small line" value="${request.params.get('login')}" />
+    </div>
   </div>
   <br style="clear: right; height: 0; margin: 0; padding: 0;"/>
   <div class="form-field overlay">
     <label for="password" class="small">${_('Password')}</label>
-    <div class="input-rounded"><div>
-        <input type="password" size="20" name="password" id="password" class="small"/>
-    </div></div>
+    <div>
+        <input type="password" size="20" name="password" id="password" class="small line"/>
+    </div>
   </div>
   <br style="clear: right; height: 0; margin: 0; padding: 0;"/>
   <div class="form-field">

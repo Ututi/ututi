@@ -4,6 +4,7 @@
 ${h.stylesheet_link('/stylesheets/home.css')|n}
 ${h.stylesheet_link('/stylesheets/suggestions.css')|n}
 ${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
+${h.stylesheet_link('/stylesheets/profile.css')|n}
 </%def>
 
 <%namespace file="/widgets/locationtag.mako" import="*"/>
@@ -20,7 +21,7 @@ ${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
         <label for="year" class="inline-label">${_('entrance year')}</label>
         <div class="input-rounded">
           <div>
-            <input type="text" name="year" id="year" value=""/>
+            <input type="text" name="year" id="year" class="line" value=""/>
           </div>
         </div>
 

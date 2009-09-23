@@ -11,3 +11,8 @@
   background: #1f1f1f;
   color: white;
 }
+
+input#year.line {
+  background-image: url("../images/borders/input-small-80.png");
+  width: 76px;
+}

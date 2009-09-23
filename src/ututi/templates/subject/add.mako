@@ -21,15 +21,11 @@ ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
      id="subject_add_form" enctype="multipart/form-data">
   <div class="form-field">
     <label for="title">${_('Title')}</label>
-    <div class="input-rounded"><div>
-        <input type="text" id="title" name="title" class="line"/>
-    </div></div>
+    <input type="text" id="title" name="title" class="line"/>
   </div>
   <div class="form-field">
     <label for="lecturer">${_('Lecturer')}</label>
-    <div class="input-rounded"><div>
-        <input type="text" id="lecturer" name="lecturer" class="line"/>
-    </div></div>
+    <input type="text" id="lecturer" name="lecturer" class="line"/>
   </div>
   <div class="form-field">
     ${location_widget(2)}

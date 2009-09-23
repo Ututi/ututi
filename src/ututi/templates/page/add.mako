@@ -12,9 +12,7 @@ ${_('New page')}
      id="page_add_form" enctype="multipart/form-data">
   <div class="form-field">
     <label for="page_title">${_('Title')}</label>
-    <div class="input-rounded"><div>
-        <input class="line" name="page_title" id="page_title" type="text" />
-    </div></div>
+    <input class="line" name="page_title" id="page_title" type="text" />
   </div>
   <div class="form-field">
     <label for="page_content">${_('Content')}</label>
