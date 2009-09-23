@@ -2,13 +2,13 @@
 #can_find {
   margin-top: 20px;
   padding-left: 80px;
-  background: white url("../images/details/image_door.png") left center no-repeat;
+  background: transparent url("../images/details/image_door.png") left center no-repeat;
 }
 
 #can_do {
   margin-top: 20px;
   padding-left: 80px;
-  background: white url("../images/details/image_man.png") left center no-repeat;
+  background: transparent url("../images/details/image_man.png") left center no-repeat;
 }
 
 #ututi_features {
@@ -81,7 +81,8 @@
 }
 
 #registration_form .form-field {
-  margin: 0.4em 0;
+  margin: 2px 0;
+  height: 24px;
 }
 
 #registration_form .error-message {

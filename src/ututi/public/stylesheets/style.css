@@ -211,7 +211,7 @@ ul.bullets_large li {
 }
 
 #personal-box div.form-field.overlay {
-  width: 190px;
+  width: 180px;
 }
 
 #personal-box .personal-info {
@@ -464,7 +464,7 @@ form .form-field input.line {
   height: 16px;
   font-weight: normal;
   font-size: 12px;
-  line-height: 20px;
+  line-height: 16px;
 }
 
 form .form-field.no-break label {
@@ -487,6 +487,7 @@ form .form-field.overlay label {
   float: none;
   position: absolute;
   left: 5px;
+  top: 0;
   bottom: 2px;
   color: #8c8c8c;
   font-weight: bold;
@@ -665,10 +666,17 @@ a.small-link:hover {
 
 #breadcrumbs ul.breadcrumb_dropdown li {
   float: none;
+  display: block;
+}
+
+/* ie6 hack */
+* html #breadcrumbs ul.breadcrumb_dropdown li {
+  width: 250px;
 }
 
 #breadcrumbs ul.breadcrumb_dropdown {
   padding-left: 5px;
+  width: auto;
 }
 
 /* default state */
@@ -699,7 +707,7 @@ a.small-link:hover {
 
 #breadcrumbs ul.breadcrumb_dropdown.expanded li.alternative,
 #breadcrumbs ul.breadcrumb_dropdown.expanded li.last {
-  display: list-item;
+  display: block;
 }
 
 #breadcrumbs ul.breadcrumb_dropdown.expanded li.active {
