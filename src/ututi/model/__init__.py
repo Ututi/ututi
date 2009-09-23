@@ -610,7 +610,7 @@ class Group(ContentItem, FolderMixin):
         ids = [subject.id for subject in self.watched_subjects]
         ids.append(self.id)
 
-        files = meta.Session.query(File).filter(File.parent_id.in_(ids)).order_by(File.created_on.desc())
+        files = meta.Session.query(File).filter(File.parent_id.in_(ids)).filter(File.md5 != None).order_by(File.created_on.desc())
         if limit is not None:
             files = files.limit(limit)
         return files.all()
