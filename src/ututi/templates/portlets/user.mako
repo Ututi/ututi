@@ -12,7 +12,7 @@
     %if not user.watched_subjects:
       ${_('You are not watching any subjects.')}
     %else:
-    <ul id="user-subjects">
+    <ul id="user-subjects" class="subjects-list">
       % for subject in user.watched_subjects[:5]:
       <li>
         <a href="${subject.url()}" title="${subject.title}">${h.ellipsis(subject.title, 35)}</a>
