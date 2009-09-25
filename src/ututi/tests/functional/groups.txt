@@ -134,29 +134,34 @@ of in your home page (at least for now):
       <ul>
         <li>
           <div class="group-listing-item">
-            <img id="group-logo" src="/group/moderators/logo/25/25" alt="logo" />
+            <img class="group-logo" src="/group/moderators/logo/25/25" alt="logo" />
             <a href="/group/moderators">Ututi moderatoriai</a>
                 (1 member)
                 <br class="clear-left" />
-            </div>
+          </div>
         </li>
         <li>
           <div class="group-listing-item">
-            <img id="group-logo" src="/group/test/logo/25/25" alt="logo" />
+            <img class="group-logo" src="/group/test/logo/25/25" alt="logo" />
             <a href="/group/test">Test group</a>
                 (1 member)
                 <br class="clear-left" />
-            </div>
+          </div>
         </li>
       </ul>
-      <form action="/groups/add" class="button-to" method="post">
-        <div>
-          <span class="btn">
-            <input type="submit" value="Create group" />
-          </span>
-        </div>
-      </form>
-      <a class="more" href="/profile/search?obj_type=group">More groups</a>
+      <div class="footer">
+        <a class="more" href="/profile/search?obj_type=group">More groups</a>
+        <span>
+          <form action="/groups/add" class="button-to" method="post">
+            <div>
+              <span class="btn">
+                <input type="submit" value="Create group" />
+              </span>
+            </div>
+          </form>
+          <img alt="Create your group, invite your classmates and use the mailing list, upload private group files" class="tooltip" src="/images/details/icon_question.png" />
+        </span>
+      </div>
       <br style="clear: both; height: 1px;" />
     </div>
 
