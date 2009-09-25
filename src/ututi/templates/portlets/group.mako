@@ -26,8 +26,12 @@
     <div class="structured_info">
       <h4>${group.title}</h4>
       <span class="small">${group.location and ' | '.join(group.location.path)}</span><span class="small year"> | ${group.year.year}</span><br />
-      <a class="small" href="${url(controller='groupforum', action='new_thread', id=c.group.group_id)}" title="${_('Mailing list address')}">${group.group_id}@${c.mailing_list_host}</a><br />
-      <span class="small">${len(group.members)} ${_('members')}</span>
+      %if group.is_member(c.user):
+        <a class="small" href="${url(controller='groupforum', action='new_thread', id=c.group.group_id)}" title="${_('Mailing list address')}">${group.group_id}@${c.mailing_list_host}</a><br />
+      %endif
+      <span class="small">
+        ${ungettext("%(count)s member", "%(count)s members", len(group.members)) % dict(count = len(group.members))}
+      </span>
     </div>
     <div class="description small">
       ${group.description}
