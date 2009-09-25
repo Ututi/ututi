@@ -132,11 +132,12 @@ $(document).ready(function(){
                   data: ({section_id: section_id, folder: folder_name}),
                   success: function(msg){
                       if (msg != '') {
-                          $('#file_section-' + section_id + ' .container').append($(msg, '.folder_file_area'));
+                          $('#file_section-' + section_id + ' .container').append($(msg).filter('.folder_file_area'));
                           if ($('#file_upload_dropdown-' + section_id).hasClass('open')) {
                               $('#file_upload_dropdown-' + section_id).children('.click').click();
                           }
-                          $('#file_upload_dropdown-' + section_id).find('li.upload:last').after($(msg)[0]);
+                          $('#file_upload_dropdown-' + section_id).find('.target_item:last').removeClass('last').after($(msg)[0]);
+                          $('#file_upload_dropdown-' + section_id).find('.target_item:last').addClass('last');
                           setUpFolder(0, $('#file_upload_dropdown-' + section_id + ' .upload:last')[0]);
                           $(".folder").sortable({
                             connectWith: ['.folder'],
@@ -158,7 +159,7 @@ $(document).ready(function(){
                 data: ({folder: folder_name}),
                 success: function(msg){
                     $('#file_area-' + section_id + '-' + fid).hide()
-                    $('#file_upload_button-' + section_id + '-' + fid).remove()
+                    $('#file_upload_button-' + section_id + '-' + fid).parent().remove()
                 }});
     }
 
@@ -206,15 +207,10 @@ $(document).ready(function(){
 </%def>
 
 <%def name="folder_button(folder, section_id, fid, cls='')">
-
   % if folder.title == '':
-    <div class="target_item ${cls}">
-      <div class="upload target" id="file_upload_button-${section_id}-${fid}">${_('Here')}</div>
-    </div>
+    <div class="target_item ${cls}"><div class="upload target" id="file_upload_button-${section_id}-${fid}">${_('Here')}</div></div>
   % else:
-    <div class="target_item ${cls}">
-      <div class="upload target" id="file_upload_button-${section_id}-${fid}">${h.ellipsis(folder.title, 17)}</div>
-    </div>
+    <div class="target_item ${cls}"><div class="upload target" id="file_upload_button-${section_id}-${fid}">${h.ellipsis(folder.title, 17)}</div></div>
   % endif
 </%def>
 
@@ -279,7 +275,7 @@ $(document).ready(function(){
            ${_('upload file to...')}
          </div>
        </div>
-       <div class="show target_list file_upload_dropdown">
+       <div class="show target_list file_upload_dropdown" id="file_upload_dropdown-${section_id}">
         <%
            n = len(obj.folders)
         %>
