@@ -61,7 +61,8 @@ Empty folder creation:
     ...                params={'folder': 'Buga Buga',
     ...                        'section_id': '7'})
     >>> print dedent(res.body)
-    <li class="alternative upload show" id="file_upload_button-7-..."><div>Buga Buga</div></li>
+    <BLANKLINE>
+    <div class="target_item "><div class="upload target" id="file_upload_button-7-...">Buga Buga</div></div>
     <BLANKLINE>
     <div class="folder_file_area subfolder" id="file_area-7-...">
       <input class="folder_name" id="file_folder_name-7-..." type="hidden" value="Buga Buga" />
@@ -78,7 +79,8 @@ Empty folder creation:
     ...                params={'folder': 'Uga Buga',
     ...                        'section_id': '8'})
     >>> print dedent(res.body)
-    <li class="alternative upload show" id="file_upload_button-8-..."><div>Uga Buga</div></li>
+    <BLANKLINE>
+    <div class="target_item "><div class="upload target" id="file_upload_button-8-...">Uga Buga</div></div>
     <BLANKLINE>
     <div class="folder_file_area subfolder" id="file_area-8-...">
       <input class="folder_name" id="file_folder_name-8-..." type="hidden" value="Uga Buga" />
