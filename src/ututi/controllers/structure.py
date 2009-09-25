@@ -176,6 +176,6 @@ class StructureController(BaseController):
                                      Tag.title.op('ILIKE')('%s%%' % text)))
 
             results = [title for title in query.all()]
-            return results
+            return dict(values = results)
 
         return None

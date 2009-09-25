@@ -20,6 +20,7 @@
     return { getList: function(input, hash) {
       if (input.val().match(/^\s*$/)) return false;
       $.getJSON(ajax, "val=" + input.val(), function(json) {
+          json = json.values;
           if(hash){ json=$(json).filter(function(){  return !hash[this.text]; }); }
           input.trigger("updateList", [json]);
       });
