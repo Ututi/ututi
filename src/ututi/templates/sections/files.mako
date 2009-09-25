@@ -213,7 +213,7 @@ $(document).ready(function(){
     </div>
   % else:
     <div class="target_item ${cls}">
-      <div class="upload target" id="file_upload_button-${section_id}-${fid}">${h.ellipsis(folder, 17)}</div>
+      <div class="upload target" id="file_upload_button-${section_id}-${fid}">${h.ellipsis(folder.title, 17)}</div>
     </div>
   % endif
 </%def>
@@ -273,7 +273,7 @@ $(document).ready(function(){
       <div class="controls">
         <div id="file_upload_progress-${section_id}" class="file_upload_progress">
         </div>
-      <div class="upload_dropdown click2show">
+      <div class="file_upload upload_dropdown click2show">
        <div class="click button">
          <div>
            ${_('upload file to...')}
@@ -299,7 +299,7 @@ $(document).ready(function(){
         <span class="content">${_('Upload the file to any folder.')}</span>
       </div>
 
-        <div>
+        <div style="float: left; margin-left: 20px;">
           <form action="${obj.url(action='create_folder')}">
             <div>
               <label for="folder">${_('New folder:')}</label>

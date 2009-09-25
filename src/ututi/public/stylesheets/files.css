@@ -11,7 +11,7 @@ div.section h2 {
   margin-top: 5px;
 }
 
-/* expanding sectipon headings  */
+/* expanding section headings  */
 .click2show h2.click {
   padding-left: 16px;
   background: white url("../images/details/arrow_expand_right.png") left center no-repeat;
@@ -38,67 +38,17 @@ div.section div.controls .new-folder-name {
 div.section div.controls div.file_upload {
   float: left;
   margin: 0;
-  margin-right: 40px;
+  margin-right: 5px;
+  height: 20px;
+  z-index: 10000;
   width: 150px;
-  height: 20px;
+  background: white;
 }
 
-ul.file_upload_dropdown {
+div.section div.controls div.file_upload div.file_upload_dropdown {
   position: absolute;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
-
+  width: 150px;
 }
-
-ul.file_upload_dropdown li {
-  display: none;
-  height: 20px;
-  line-height: 20px;
-  font-size: 14px;
-  cursor: pointer;
-  background: white url("../images/borders/dropdown_green.png") left -40px no-repeat;
-  padding-left: 10px;
-}
-
-ul.file_upload_dropdown li div {
-  background: white url("../images/borders/dropdown_green.png") right -40px no-repeat;
-  padding-right: 10px;
-}
-
-ul.file_upload_dropdown li.active {
-  cursor: pointer;
-  display: list-item;
-  background: white url("../images/borders/dropdown_green.png") left top no-repeat;
-  padding-left: 10px;
-}
-
-ul.file_upload_dropdown li.active div {
-  height: 20px;
-  padding-right: 25px;
-  font-weight: bold;
-  background: white url("../images/borders/dropdown_green.png") top right no-repeat;
-}
-
-ul.file_upload_dropdown li.last_item {
-  display: list-item;
-  padding-left: 10px;
-  height: 5px;
-  background: white url("../images/borders/dropdown_green.png") bottom left no-repeat;
-}
-
-ul.file_upload_dropdown li.last_item div {
-  display: list-item;
-  height: 5px;
-  padding-right: 10px;
-  background: white url("../images/borders/dropdown_green.png") bottom right no-repeat;
-}
-
-ul.file_upload_dropdown li.hover div {
-  color: #aa4400;
-}
-
 /* end controls section */
 
 /* files */
