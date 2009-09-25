@@ -291,9 +291,7 @@ $(document).ready(function(){
         %endfor
       </div>
     </div>
-      <div class="tooltip">
-        <span class="content">${_('Upload the file to any folder.')}</span>
-      </div>
+      ${h.image('/images/details/icon_question.png', alt=_('Upload the file to any folder.'), class_='tooltip')|n}
 
         <div style="float: left; margin-left: 20px;">
           <form action="${obj.url(action='create_folder')}">

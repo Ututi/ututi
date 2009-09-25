@@ -29,9 +29,9 @@ ${_('New group')}
 </%def>
 
 <h1>${_('New group')}
-  <div class="tooltip">
-    <span class="content">${_('Create your group, invite your classmates and use the mailing list, upload private group files')}</span>
-  </div>
+  ${h.image('/images/details/icon_question.png',
+            alt=_('Create your group, invite your classmates and use the mailing list, upload private group files'),
+            class_='tooltip')|n}
 </h1>
 
 ${path_steps()}

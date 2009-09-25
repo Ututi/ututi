@@ -24,9 +24,9 @@
     ${h.link_to(_('More subjects'), url(controller='profile', action='search', obj_type='subject'), class_="more")}
     <span>
       ${h.button_to(_('Watch subjects'), url(controller='profile', action='subjects', id=user.id))}
-      <div class="tooltip">
-        <span class="content">${_("Add watched subjects to your watched subjects' list and receive notifications about changes in these subjects")}</span>
-      </div>
+      ${h.image('/images/details/icon_question.png',
+                alt=_("Add watched subjects to your watched subjects' list and receive notifications about changes in these subjects"),
+                class_='tooltip')|n}
     </span>
 
   </%self:portlet>
@@ -52,9 +52,9 @@
       <li>
         <div class="group-listing-item">
           %if membership.group.logo is not None:
-            <img id="group-logo" src="${url(controller='group', action='logo', id=membership.group.group_id, width=25, height=25)}" alt="logo" />
+            <img class="group-logo" src="${url(controller='group', action='logo', id=membership.group.group_id, width=25, height=25)}" alt="logo" />
           %else:
-            ${h.image('/images/details/icon_group_25x25.png', alt='logo', id='group-logo')|n}
+            ${h.image('/images/details/icon_group_25x25.png', alt='logo', class_='group-logo')|n}
           %endif
             <a href="${membership.group.url()}">${membership.group.title}</a>
             (${ungettext("%(count)s member", "%(count)s members", len(membership.group.members)) % dict(count = len(membership.group.members))})
@@ -65,8 +65,14 @@
     </ul>
     %endif
     %if full:
-      ${h.button_to(_('Create group'), url(controller='group', action='add'))}
+    <div class="footer">
       ${h.link_to(_('More groups'), url(controller='profile', action='search', obj_type='group'), class_="more")}
+      <span>
+        ${h.button_to(_('Create group'), url(controller='group', action='add'))}
+        ${h.image('/images/details/icon_question.png', alt=_('Create your group, invite your classmates and use the mailing list, upload private group files'), class_='tooltip')|n}
+      </span>
+    </div>
+
     %endif
   </%self:portlet>
 </%def>
@@ -121,7 +127,7 @@
 </%def>
 
 <%def name="user_message_portlet(user=None)">
-  <%self:portlet id="subject_portlet" portlet_class="inactive">
+  <%self:portlet id="message_portlet" portlet_class="inactive">
     <%def name="header()">
       ${'Naujas Ututi!'}
     </%def>

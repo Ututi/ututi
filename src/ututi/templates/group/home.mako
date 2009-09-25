@@ -42,9 +42,9 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
 %endif
 
 <h1>${_("What's new?")}
-  <div class="tooltip">
-    <span class="content">${_('A group can watch subjects that it is studying at the moment. Changes in watched subjects are shown to all classmates.')}</span>
-  </div>
+  ${h.image('/images/details/icon_question.png',
+            alt=_('A group can watch subjects that it is studying at the moment. Changes in watched subjects are shown to all classmates.'),
+            class_='tooltip')|n}
 </h1>
 
 <ul id="event_list">

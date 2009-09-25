@@ -367,6 +367,10 @@ ul.bullets_large li {
   padding-top: 5px;
 }
 
+.sidebar-block .content .footer a.btn {
+  float: left;
+}
+
 .sidebar-block .content a.more {
   float: right;
 }
@@ -1177,14 +1181,6 @@ div.please-register {
 
 .tooltip {
   cursor: pointer;
-  width: 16px;
-  height: 16px;
-  background: transparent url("../images/details/icon_question.png") center center no-repeat;
-  /* hackety hack */
-  display:-moz-inline-box;
-  display:inline-block;
-  zoom:1;
-  *display:inline;
 }
 
 div.form-field .tooltip {
@@ -1194,17 +1190,14 @@ div.form-field .tooltip {
 
 .controls .tooltip {
   float: left;
-  margin: 5px;
+  margin: 2px;
 }
 
 div.create_item .tooltip,
 span .tooltip {
-  margin: 5px;
+  margin: 3px 0 3px 10px;
 }
 
-.tooltip .content {
-  display: none;
-}
 /* end misc */
 
 /* upload drop down (group files portlet, files view) */
@@ -1281,12 +1274,13 @@ a.btn, span.btn {
   text-decoration:none;
   color:#333;
   font-style:normal;
-  padding:0 10px 0 0;
+  padding:0 0 0 5px;
   vertical-align:middle;
 
   _position:relative;
   _width:10px;
   _overflow-y:hidden;
+  _font-size: 0;
 }
 
 a.btn, span.btn,
@@ -1307,18 +1301,16 @@ a.btn span, span.btn input {
   background-position:100% 0;
   background-repeat:no-repeat;
   height:22px;
-  padding:0 20px 4px 10px;
-  margin:0 -16px 0 10px;
+  padding:0 5px 4px 0;
+  margin:0;
   border:none;
   vertical-align:text-top;
+  text-transform: lowercase;
   zoom:1;
   _position:relative;
   _padding-left:0px;
-  _padding-right:12px;
-  _margin-right:-10px;
   _display:block;
   _top:0;
-  _right:-5px;
 }
 
 html.safari a.btn span,

@@ -46,9 +46,9 @@ ${h.stylesheet_link('/stylesheets/profile.css')|n}
       </div>
       <br style="clear: left; margin: 0; height: 0; padding: 0;"/>
       <div class="form-field">
-        <div class="tooltip">
-          <span class="content">${_('Create your group, invite your classmates and use the mailing list, upload private group files')}</span>
-        </div>
+        ${h.image('/images/details/icon_question.png',
+            alt=_('Create your group, invite your classmates and use the mailing list, upload private group files'),
+            class_='tooltip')|n}
         <span class="btn">
 	      <input type="submit" value="${_('Search')}" name="search" id="search" />
         </span>

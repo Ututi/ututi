@@ -26,8 +26,8 @@
       % endif
     </div>
     <br />
-
     %if c.user:
+    <div class="footer">
       <a id="subject_edit_link"
          class="more"
          href="${url(controller='subject', action='edit', id=subject.subject_id, tags=c.subject.location_path)}">${_('Edit')}</a>
@@ -44,10 +44,11 @@
         <a class="btn ${cls}" href="${url(controller='subject', action='watch', id=subject.subject_id, tags=subject.location_path)}">
           <span>${text}</span>
         </a>
-        <div class="tooltip">
-          <span class="content">${_('By watching a subject, you will be informed about all the changes in it.')}</span>
-        </div>
+        ${h.image('/images/details/icon_question.png',
+            alt=_('By watching a subject, you will be informed about all the changes in it.'),
+            class_='tooltip')|n}
       </span>
+    </div>
     %endif
   </%self:portlet>
 </%def>
