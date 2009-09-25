@@ -63,7 +63,7 @@ $(document).ready(function(){
       helper: 'clone',
       receive: folderReceive,
       handle: 'img.drag-target',
-      axis: 'y',
+      axis: 'y'
     });
 
     function setUpFolder(i, btn) {
@@ -205,12 +205,17 @@ $(document).ready(function(){
             </li>
 </%def>
 
-<%def name="folder_button(folder, section_id, fid)">
-        % if folder.title == '':
-      <li class="alternative upload show" id="file_upload_button-${section_id}-${fid}"><div>${_('Here')}</div></li>
-        % else:
-      <li class="alternative upload show" id="file_upload_button-${section_id}-${fid}"><div>${folder.title}</div></li>
-        % endif
+<%def name="folder_button(folder, section_id, fid, cls='')">
+
+  % if folder.title == '':
+    <div class="target_item ${cls}">
+      <div class="upload target" id="file_upload_button-${section_id}-${fid}">${_('Here')}</div>
+    </div>
+  % else:
+    <div class="target_item ${cls}">
+      <div class="upload target" id="file_upload_button-${section_id}-${fid}">${h.ellipsis(folder, 17)}</div>
+    </div>
+  % endif
 </%def>
 
 <%def name="folder(folder, section_id, fid)">
@@ -268,24 +273,32 @@ $(document).ready(function(){
       <div class="controls">
         <div id="file_upload_progress-${section_id}" class="file_upload_progress">
         </div>
-        <div class="tooltip">
-          <span class="content">${_('Upload the file to any folder.')}</span>
-        </div>
-        <div class="file_upload">
-          <div class="contain">
-            <ul class="file_upload_dropdown click2show" id="file_upload_dropdown-${section_id}">
-              <li class="active click">
-                <div>
-                  ${_('Upload file')}
-                </div>
-              </li>
-              % for fid, folder in enumerate(obj.folders):
-                <%self:folder_button folder="${folder}" section_id="${section_id}" fid="${fid}" />
-              % endfor
-              <li class="last_item"><div>&nbsp;</div></li>
-            </ul>
-          </div>
-        </div>
+      <div class="upload_dropdown click2show">
+       <div class="click button">
+         <div>
+           ${_('upload file to...')}
+         </div>
+       </div>
+       <div class="show target_list file_upload_dropdown">
+        <%
+           n = len(obj.folders)
+        %>
+        %for fid, folder in enumerate(obj.folders):
+          <%
+             cls = ''
+             if fid == 0:
+                 cls = 'first'
+             if fid == n - 1:
+                 cls = 'last'
+          %>
+          <%self:folder_button folder="${folder}" section_id="${section_id}" fid="${fid}" cls="${cls}"/>
+        %endfor
+      </div>
+    </div>
+      <div class="tooltip">
+        <span class="content">${_('Upload the file to any folder.')}</span>
+      </div>
+
         <div>
           <form action="${obj.url(action='create_folder')}">
             <div>
