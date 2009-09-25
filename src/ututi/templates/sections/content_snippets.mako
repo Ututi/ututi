@@ -10,13 +10,13 @@
   %endif
 </%def>
 
-<%def name="item_tags(object)">
+<%def name="item_tags(object, all=True)">
   <div class="item-tags">
-    %if object.location:
+    %if object.location and all:
       %for tag in object.location.hierarchy(full=True):
         ${tag_link(tag)}
       %endfor
-    %endif 
+    %endif
     %for tag in object.tags:
       ${tag_link(tag)}
     %endfor
@@ -69,6 +69,6 @@
     <div class="description">
       ${h.ellipsis(object.last_version.plain_text, 250)}
     </div>
-    ${item_tags(object)}
+    ${item_tags(object, all=False)}
   </div>
 </%def>

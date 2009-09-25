@@ -75,9 +75,6 @@ We should see the list of pages.
           Yeah! Being Awesome is very easy!
         </div>
           <div class="item-tags">
-            <a class="tag" title="Vilniaus universitetas" href="/profile/search?tags=Vilniaus+universitetas">
-          Vilniaus universitetas
-        </a>
           </div>
         </div>
       </div>

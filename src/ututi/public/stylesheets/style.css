@@ -1011,6 +1011,10 @@ div.search-item {
   padding-left: 35px;
 }
 
+div.search-item { min-height:40px; }
+
+* html div.search-item { height:40px; }
+
 div.snippet-page {
   background: white url("../images/details/icon_type_page.png") left 5px no-repeat;
 }
