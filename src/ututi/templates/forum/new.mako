@@ -12,7 +12,9 @@ ${_('New topic')}
      id="group_add_form" enctype="multipart/form-data">
   <div class="form-field">
     <label for="subject">${_('Subject')}</label>
-    <input type="text" id="subject" name="subject" class="line"/>
+    <div class="input-line"><div>
+        <input type="text" id="subject" name="subject" class="line"/>
+    </div></div>
   </div>
   <div class="form-field">
     <label for="message">${_('Message')}</label>

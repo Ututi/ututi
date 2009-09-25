@@ -34,9 +34,8 @@
   float: right;
 }
 
-.sidebar-block form input.line {
-  background-image: url("../images/borders/input-small-160.png");
-  width: 156px;
+.sidebar-block form .input-line {
+  width: 165px;
   font-size: 0.8em;
   font-weight: normal;
 }
@@ -65,7 +64,6 @@
 
 #registration_form .form-field div {
   float: right;
-  width: 160px;
   clear: right;
 }
 

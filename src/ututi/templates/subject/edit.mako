@@ -21,11 +21,15 @@ ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
   <input type="hidden" name="old_location" value="${c.subject.location_path}"/>
   <div class="form-field">
     <label for="title">${_('Title')}</label>
-    <input type="text" id="title" name="title" class="line" value="${c.subject.title}"/>
+    <div class="input-line"><div>
+        <input type="text" id="title" name="title" class="line" value="${c.subject.title}"/>
+    </div></div>
   </div>
   <div class="form-field">
     <label for="lecturer">${_('Lecturer')}</label>
-    <input type="text" id="lecturer" name="lecturer" class="line" value="${c.subject.lecturer}"/>
+    <div class="input-line"><div>
+        <input type="text" id="lecturer" name="lecturer" class="line" value="${c.subject.lecturer}"/>
+    </div></div>
   </div>
   <div class="form-field">
     ${location_widget(2, c.subject.location.hierarchy())}

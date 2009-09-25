@@ -12,7 +12,10 @@
   color: white;
 }
 
-input#year.line {
-  background-image: url("../images/borders/input-small-80.png");
-  width: 76px;
+#year-input div.input-line {
+  width: 80px;
+}
+
+#year-input {
+  clear: none;
 }

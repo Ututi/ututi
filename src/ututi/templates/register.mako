@@ -25,19 +25,27 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
           <input type="hidden" name="hash" value="${c.hash}"/>
         %endif
         <div class="form-field">
-          <input class="line" type="text" id="fullname" name="fullname" size="40"/>
+          <div class="input-line"><div>
+              <input class="line" type="text" id="fullname" name="fullname" size="40"/>
+          </div></div>
           <label for="fullname">${_('Fullname')}</label>
         </div>
         <div class="form-field">
-          <input class="line" type="text" id="email" name="email" size="40"/>
+          <div class="input-line"><div>
+              <input class="line" type="text" id="email" name="email" size="40"/>
+          </div></div>
           <label for="email">${_('Email')}</label>
         </div>
         <div class="form-field">
-          <input class="line" type="password" id="new_password" name="new_password" size="40"/>
+          <div class="input-line"><div>
+              <input class="line" type="password" id="new_password" name="new_password" size="40"/>
+          </div></div>
           <label for="new_password">${_('Password')}</label>
         </div>
         <div class="form-field">
-          <input class="line" type="password" id="repeat_password" name="repeat_password" size="40"/>
+          <div class="input-line"><div>
+              <input class="line" type="password" id="repeat_password" name="repeat_password" size="40"/>
+          </div></div>
           <label for="repeat_password">${_('Repeat password')}</label>
         </div>
         <div class="form-field">

@@ -19,18 +19,17 @@ ${h.stylesheet_link('/stylesheets/profile.css')|n}
 
       <div class="form-field hidden" id="year-input">
         <label for="year" class="inline-label">${_('entrance year')}</label>
-        <div class="input-rounded">
-          <div>
+        <div class="input-line"><div>
             <input type="text" name="year" id="year" class="line" value=""/>
-          </div>
-        </div>
+        </div></div>
 
         <script type="text/javascript">
         //<![CDATA[
         var years = [\
-        %for year in range(c.current_year - 10, c.current_year+1):
-          "${year}",
-        %endfor
+        <%
+           years = ', '.join(["'%s'" % y for y in map(str, range(c.current_year - 10, c.current_year+1))])
+        %>
+        ${years}
         ];
         $('#year').autocomplete(years, {\
           cacheLength: 200,
@@ -40,7 +39,7 @@ ${h.stylesheet_link('/stylesheets/profile.css')|n}
           matchSubset: true,
           matchContains: false,
           mustMatch: true,
-          selectFirst: true,
+          selectFirst: true
         });
         //]]>
         </script>

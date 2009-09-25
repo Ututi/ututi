@@ -76,7 +76,9 @@ ${h.javascript_link('/javascripts/js-alternatives.js')|n}
       <td class="js-alternatives">
         <div class="form-field">
           <label for="title">${_('Title')}</label>
-          <input type="text" class="line" id="title" name="title" value="${c.group.title}"/>
+          <div class="input-line"><div>
+              <input type="text" class="line" id="title" name="title" value="${c.group.title}"/>
+          </div></div>
         </div>
         <div class="form-field">
           <label for="description">${_('Description')}</label>
@@ -86,11 +88,6 @@ ${h.javascript_link('/javascripts/js-alternatives.js')|n}
           <label for="logo_upload">${_('Group logo')}</label>
           <input type="file" name="logo_upload" id="logo_upload" class="line"/>
         </div>
-
-        <div class="form-field">
-          ${location_widget(2, c.group.location.hierarchy())}
-        </div>
-        <br class="clear-left"/>
         <div class="form-field">
           <label for="year">${_("Year")}</label>
           <select name="year" id="year">
@@ -103,6 +100,11 @@ ${h.javascript_link('/javascripts/js-alternatives.js')|n}
             %endfor
           </select>
         </div>
+
+        <div class="form-field">
+          ${location_widget(2, c.group.location.hierarchy())}
+        </div>
+        <br class="clear-left"/>
 
         <div class="form-field">
           <label for="tags">${_('Tags')}</label>

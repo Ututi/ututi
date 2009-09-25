@@ -8,11 +8,15 @@
 <form method="post" action="${url(controller='structure', action='update', id=c.item.id)}" name="edit_structure_form" enctype="multipart/form-data">
       <div>
         <label for="title">${_('Title')}</label>
-        <input type="text" id="title" name="title" value="${c.item.title}"/>
+        <div class="input-line"><div>
+            <input type="text" id="title" name="title" value="${c.item.title}"/>
+        </div></div>
       </div>
       <div>
         <label for="title_short">${_('Short title')}</label>
-        <input type="text" id="title_short" name="title_short" value="${c.item.title_short}"/>
+        <div class="input-line"><div>
+            <input type="text" id="title_short" name="title_short" value="${c.item.title_short}"/>
+        </div></div>
       </div>
       <div>
         <label for="description">${_('Description')}</label>

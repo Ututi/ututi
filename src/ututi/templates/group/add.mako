@@ -49,11 +49,16 @@ ${path_steps()}
   <br class="clear-left"/>
   <div class="form-field">
     <label for="title">${_('Group title')}</label>
-    <input type="text" id="title" name="title" class="line"/>
+    <div class="input-line"><div>
+        <input type="text" id="title" name="title" class="line"/>
+    </div></div>
   </div>
   <div class="form-field">
     <label for="id">${_("Group email address")}</label>
-    <input type="text" id="id" name="id" class="line"/>@${c.mailing_list_host}
+    <div class="input-line"><div>
+        <input type="text" id="id" name="id" class="line"/>
+    </div></div>
+    @${c.mailing_list_host}
   </div>
   <div class="form-field">
     <label for="year">${_("Year")}</label>

@@ -13,7 +13,7 @@
         %if i < len(titles):
             <label for="location-${i}" class="inline-label">${titles[i]}</label>
         %endif
-        <div class="input-rounded">
+        <div class="input-line">
           <div>
             %if len(values) > i:
               <input type="text" name="location-${i}" id="location-${i}" class="line structure-complete" value="${values[i]}"/>

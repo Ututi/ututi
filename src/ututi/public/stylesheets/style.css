@@ -212,6 +212,7 @@ ul.bullets_large li {
 
 #personal-box div.form-field.overlay {
   width: 180px;
+  padding: 2px 0;
 }
 
 #personal-box .personal-info {
@@ -442,6 +443,7 @@ form.inline-form {
 
 form .form-field {
   margin: 0.2em 0;
+  clear: left;
 }
 
 form .form-field label {
@@ -455,16 +457,28 @@ form .form-field label {
   text-transform: lowercase;
 }
 
-form .form-field input.line {
+form .form-field div.input-line {
+  width: 180px;
+  height: 20px;
+  background: url("../images/borders/input-small.png") left center no-repeat;
+  line-height: 20px;
+  padding-left: 5px;
+  float: left;
+}
+
+form .form-field div.input-line div {
+  height: 18px;
+  padding: 1px 0;
+  background: url("../images/borders/input-small.png") right center no-repeat;
+  padding-right: 5px;
+  line-height: 18px;
+}
+
+form .form-field div.input-line input {
+  width: 100%;
+  font-size: 0.9em;
   border: 0;
-  background: transparent url("../images/borders/input-small-180.png") fixed center center no-repeat;
-  padding: 2px;
-  margin: 2px 0;
-  width: 176px;
-  height: 16px;
-  font-weight: normal;
-  font-size: 12px;
-  line-height: 16px;
+  background: transparent none;
 }
 
 form .form-field.no-break label {
