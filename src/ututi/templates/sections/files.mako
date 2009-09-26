@@ -299,7 +299,7 @@ $(document).ready(function(){
               <label for="folder">${_('New folder:')}</label>
               <input name="folder" id="new_folder_input-${section_id}" type="text" value="" class="new-folder-name" />
               <span class="btn">
-                <input id="new_folder_button-${section_id}" class="new_folder_button" type="submit" value="New folder" />
+                <input id="new_folder_button-${section_id}" class="new_folder_button" type="submit" value="${_('create')}" />
               </span>
             </div>
           </form>
