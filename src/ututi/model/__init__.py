@@ -984,6 +984,13 @@ class LocationTag(Tag):
         #items.extend(meta.Session.query(cls).filter_by(title_short=title).all())
         return items
 
+    def url(self, controller='structureview', action='index'):
+        return url(controller=controller,
+                   action=action,
+                   path='/'.join(self.path))
+
+    def count(self, obj=Subject):
+        return meta.Session.query(obj).filter(obj.location == self).count()
 
 group_files_table = None
 

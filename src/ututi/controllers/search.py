@@ -40,8 +40,8 @@ class SearchBaseController(BaseController):
         if c.obj_type != '*' and c.obj_type in ('group', 'page', 'subject'):
             search_params['obj_type'] = c.obj_type
 
-        query = search_query(**search_params)
         if search_params != {}:
+            query = search_query(**search_params)
             c.results = paginate.Page(
                 query,
                 page=int(request.params.get('page', 1)),

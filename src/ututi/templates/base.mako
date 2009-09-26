@@ -151,6 +151,10 @@ ${h.javascript_link('/javascripts/forms.js')|n}
       %endif
       %if isinstance(breadcrumb, dict):
       <div>
+        %if breadcrumb.get('logo', None) is not None:
+          <img src="${breadcrumb['logo']}" alt="${_('logo')}"/>
+        %endif
+
         <a class="breadcrumb" title="${breadcrumb.get('title')}" href="${breadcrumb.get('link')}">
           ${breadcrumb.get('title') | h.ellipsis}
         </a>

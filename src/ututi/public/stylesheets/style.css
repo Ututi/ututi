@@ -110,7 +110,7 @@ label {
 /* text colors */
 h1, h2, h3, h4 {
   color: #1a1a1a;
-  margin: 0.1em 0 0 0.3em;
+  margin: 0.1em 0 0 0em;
 }
 
 .sidebar-block .content a.tag,
@@ -168,6 +168,18 @@ a:hover {
 }
 
 /* begin lists */
+ul.u-list {
+  list-style-type: none;
+  padding-left: 0;
+  list-style-image: none;
+}
+ul.u-list li {
+  padding-left: 8px;
+  background: url("../images/details/bullet_orange_tiny.png") left center no-repeat;
+  color: #4d4d4d;
+}
+
+
 ul.bullets_large li {
   list-style-type: none;
   padding-left: 20px;
@@ -625,6 +637,11 @@ a.small-link:hover {
   font-size: 1.7em;
   color: #666;
   cursor: pointer;
+}
+
+#breadcrumbs a.breadcrumb,
+#breadcrumbs img {
+  vertical-align: middle;
 }
 
 .breadcrumb_dropdown li.active div span,
