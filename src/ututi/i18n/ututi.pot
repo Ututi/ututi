@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2009-09-25 23:28+0300\n"
+"POT-Creation-Date: 2009-09-26 10:15+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1517,14 +1517,14 @@ msgid "Here"
 msgstr ""
 
 #: src/ututi/templates/sections/files.mako:227
-#: src/ututi/templates_py/sections/files.mako.py:275
+#: src/ututi/templates_py/sections/files.mako.py:277
 msgid "(Delete)"
 msgstr ""
 
 #: src/ututi/templates/sections/files.mako:233
 #: src/ututi/templates/sections/files.mako:238
-#: src/ututi/templates_py/sections/files.mako.py:285
-#: src/ututi/templates_py/sections/files.mako.py:307
+#: src/ututi/templates_py/sections/files.mako.py:287
+#: src/ututi/templates_py/sections/files.mako.py:309
 msgid "There are no files here, this folder is empty!"
 msgstr ""
 
@@ -1550,6 +1550,11 @@ msgstr ""
 #: src/ututi/templates/sections/files.mako:299
 #: src/ututi/templates_py/sections/files.mako.py:198
 msgid "New folder:"
+msgstr ""
+
+#: src/ututi/templates/sections/files.mako:302
+#: src/ututi/templates_py/sections/files.mako.py:206
+msgid "create"
 msgstr ""
 
 #: src/ututi/templates/sections/messages.mako:10

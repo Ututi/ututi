@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-09-25 23:32+0300\n"
+"PO-Revision-Date: 2009-09-26 10:17+0300\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -1506,7 +1506,9 @@ msgid ""
 " If Your group is watching this subject, it will not affect Your "
 "classmates."
 msgstr ""
-"Čia rodomas Jūsų stebimų dalykų sąrašas. Paspaudę ant kryžiuko šalia kurio nors dalyko, Jūs nebegausite pranešimų apie pasikeitimus jame. Jeigu šį\n"
+"Čia rodomas Jūsų stebimų dalykų sąrašas. Paspaudę ant kryžiuko šalia "
+"kurio nors dalyko, Jūs nebegausite pranešimų apie pasikeitimus jame. "
+"Jeigu šį\n"
 "dalyką stebi Jūsų grupė, dalyko nebestebėsite tik Jūs."
 
 #: src/ututi/templates/profile/profile.mako:19
@@ -1619,14 +1621,14 @@ msgid "Here"
 msgstr "tiesiog čia"
 
 #: src/ututi/templates/sections/files.mako:227
-#: src/ututi/templates_py/sections/files.mako.py:275
+#: src/ututi/templates_py/sections/files.mako.py:277
 msgid "(Delete)"
 msgstr "(Trinti)"
 
 #: src/ututi/templates/sections/files.mako:233
 #: src/ututi/templates/sections/files.mako:238
-#: src/ututi/templates_py/sections/files.mako.py:285
-#: src/ututi/templates_py/sections/files.mako.py:307
+#: src/ututi/templates_py/sections/files.mako.py:287
+#: src/ututi/templates_py/sections/files.mako.py:309
 msgid "There are no files here, this folder is empty!"
 msgstr "Čia failų nėra, aplankas tuščias!"
 
@@ -1654,6 +1656,12 @@ msgstr "Įkelkite failą į norimą katalogą."
 #: src/ututi/templates_py/sections/files.mako.py:198
 msgid "New folder:"
 msgstr "Kurti aplanką"
+
+#: src/ututi/templates/sections/files.mako:302
+#: src/ututi/templates_py/sections/files.mako.py:206
+#| msgid "Create new"
+msgid "create"
+msgstr "sukurti"
 
 #: src/ututi/templates/sections/messages.mako:10
 #: src/ututi/templates_py/sections/messages.mako.py:125
@@ -1819,11 +1827,11 @@ msgstr "Įstojimo metai:"
 
 #: src/ututi/templates_py/portlets/anonymous.mako.py:109
 msgid "I agree to the "
-msgstr "Sutinku"
+msgstr "Sutinku su"
 
 #: src/ututi/templates_py/portlets/anonymous.mako.py:113
 msgid "terms of use"
-msgstr "Naudojimosi sistema taisyklės"
+msgstr "naudojimosi sistema taisyklėmis"
 
 #: src/ututi/templates_py/portlets/group.mako.py:84
 msgid "Recently seen"
@@ -1969,13 +1977,4 @@ msgstr ""
 #: src/ututi/templates_py/subject/home.mako.py:99
 msgid "Subject files"
 msgstr "Dalyko failai"
-
-#~ msgid "Upload file"
-#~ msgstr "įkelti failą"
-
-#~ msgid "Post new topic"
-#~ msgstr "Nauja tema"
-
-#~ msgid "members"
-#~ msgstr "nariai"
 
