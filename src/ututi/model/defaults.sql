@@ -91,6 +91,7 @@ create table tags (id bigserial not null,
        title varchar(250) not null,
        title_short varchar(50) default null,
        description text default null,
+       site_url varchar(200) default null,
        logo bytea default null,
        tag_type varchar(10) default null,
        primary key (id));;
