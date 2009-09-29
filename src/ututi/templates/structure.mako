@@ -7,7 +7,7 @@
 <h1>${_('Browse the hierarchy')}</h1>
 <%def name="location_tag(tag)">
   <li>
-        ${tag.title}
+    <a href="${tag.url()}" class="tag_link">${tag.title}</a>
         % if tag.logo is not None:
            <img src="${url(controller='structure', action='logo', id=tag.id, width=60, height=60)}" />
         % endif
