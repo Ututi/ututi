@@ -1,0 +1,131 @@
+University and faculty pages
+============================
+
+    >>> from pkg_resources import resource_stream
+    >>> def make_file(filename):
+    ...     stream = resource_stream("ututi.tests.functional.import", filename)
+    ...     return (stream, 'text/plain', filename)
+
+Let's log in first.
+
+    >>> browser = Browser.logIn()
+    >>> browser.open('http://localhost/structure')
+
+    >>> browser.printQuery("id('location_structure')//li/a[@class='tag_link']/text()")
+    Vilniaus universitetas
+    Ekonomikos fakultetas
+    Geografijos fakultetas
+
+We should be able to click on a link that leads us to the page of the faculty.
+    >>> browser.getLink('Vilniaus universitetas').click()
+    >>> browser.url
+    'http://localhost/school/vu'
+
+    >>> browser.printQuery('//h2/text()')
+    vu department list
+    Search
+
+    >>> browser.printQuery("//ul[@class='u-list']/li/a/text()")
+    Geografijos fakultetas
+    Ekonomikos fakultetas
+
+There is a search form on this page and we should be able to use it.
+    >>> browser.getControl(name='text').value = 'prof.'
+    >>> browser.getControl('Search').click()
+    >>> browser.url
+    'http://localhost/school/vu'
+
+    >>> browser.printQuery("//div[@class='search-item snippet-subject']/a/text()")
+     Matematinė analizė
+
+The information portlet should show the most important information about the university:
+    >>> browser.printQuery("id('location_info_portlet')//h4/text()")
+    Vilniaus universitetas
+    >>> browser.printQuery("id('location-stats')//span")
+    <span>
+            1 <em>subject</em>
+    </span>
+    <span>
+            1 <em>group</em>
+    </span>
+    <span>
+            0 <em>files</em>
+    </span>
+
+We should be able to edit the information of the location tag.
+    >>> browser.getLink('Edit').click()
+    >>> browser.getControl('Title').value = 'Kapsuko universitetas'
+    >>> browser.getControl('Short title').value = 'KU'
+    >>> browser.getControl('Website').value = 'http://ku.lt'
+    >>> browser.getControl('Save').click()
+
+    >>> browser.url
+     'http://localhost/school/ku'
+
+And the updated information should be visible in the info portlet
+    >>> browser.printQuery("id('location_info_portlet')//h4/text()")
+    Kapsuko universitetas
+    >>> browser.printQuery("id('location_info_portlet')//span[@class='small']/a/text()")
+    http://ku.lt
+    >>> browser.printQuery("id('location-stats')//span")
+    <span>
+            1 <em>subject</em>
+    </span>
+    <span>
+            1 <em>group</em>
+    </span>
+    <span>
+            0 <em>files</em>
+    </span>
+
+Let's see if the faculty page looks ok.
+    >>> browser.getLink('Geografijos fakultetas').click()
+    >>> browser.url
+    'http://localhost/school/ku/gf'
+
+    >>> browser.printQuery("id('location_info_portlet')//h4/text()")
+    Geografijos fakultetas
+    >>> browser.printQuery("id('location-stats')//span")
+    <span>
+            0 <em>subjects</em>
+    </span>
+    <span>
+            0 <em>groups</em>
+    </span>
+    <span>
+            0 <em>files</em>
+    </span>
+
+Let's try to edit it.
+    >>> browser.getLink('Edit').click()
+
+We should only be able to enter URL-ready short titles:
+
+    >>> browser.getControl('Short title').value = 'Text with breaks'
+    >>> browser.getControl('Save').click()
+    >>> browser.printQuery("//span[@class='error-message']/text()")
+    The field may only contain letters, numbers and the characters + - _
+
+What is more, these fields should be allowed to clash with existing ones:
+    >>> browser.getControl('Short title').value = 'ef'
+    >>> browser.getControl('Save').click()
+    >>> browser.printQuery("//span[@class='error-message']/text()")
+    Such short title already exists, choose a different one.
+
+Even with a different case:
+    >>> browser.getControl('Short title').value = 'EF'
+    >>> browser.getControl('Save').click()
+    >>> browser.printQuery("//span[@class='error-message']/text()")
+    Such short title already exists, choose a different one.
+
+They need to be unique.
+
+    >>> browser.getControl('Short title').value = 'ggf'
+    >>> browser.getControl('Logo').add_file(*make_file('test_logo.png'))
+    >>> browser.getControl('Save').click()
+    >>> browser.printQuery("//span[@class='error-message']/text()")
+
+Oh, and we can upload logos too
+
+    >>> browser.printQuery("id('structure-logo')")
+    <img class="portlet-logo" id="structure-logo" src="/structure/3/logo/70" alt="logo" />

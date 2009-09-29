@@ -16,6 +16,7 @@ There is one university and one faculty:
     >>> browser.printQuery("id('location_structure')//li/a[@class='tag_link']/text()")
     Vilniaus universitetas
     Ekonomikos fakultetas
+    Geografijos fakultetas
 
 Let's try to add a new element.
 
@@ -34,6 +35,7 @@ The new university is now shown.
     >>> browser.printQuery("id('location_structure')//li/a[@class='tag_link']/text()")
     Vilniaus universitetas
     Ekonomikos fakultetas
+    Geografijos fakultetas
     Vilniaus Gedimino Technikos Universitetas
 
     >>> form = browser.getForm(name='new_structure_form')
@@ -42,12 +44,13 @@ The new university is now shown.
     >>> form.getControl('Description').value = ''
     >>> form.getControl('Parent').displayOptions
     ['Select a parent', 'Vilniaus universitetas', 'Vilniaus Gedimino Technikos Universitetas']
-    >>> form.getControl('Parent').value = ['3']
+    >>> form.getControl('Parent').value = ['4']
     >>> form.getControl('Save').click()
 
     >>> browser.printQuery("id('location_structure')//li/a[@class='tag_link']/text()")
     Vilniaus universitetas
     Ekonomikos fakultetas
+    Geografijos fakultetas
     Vilniaus Gedimino Technikos Universitetas
     Architekturos fakultetas
 
@@ -67,7 +70,7 @@ Now we shall try to edit a structural element.
     >>> form.getControl('Description').value = u'Nebeegzistuojantis fakultetas'
     >>> form.getControl('Parent').displayOptions
     ['Select a parent', 'Vilniaus Gedimino Technikos Universitetas']
-    >>> form.getControl('Parent').value = ['3']
+    >>> form.getControl('Parent').value = ['4']
 
     >>> form.getControl('Save').click()
 
@@ -79,6 +82,7 @@ Let's look at the list:
     Architekturos fakultetas
     Vinco Kapsuko universitetas
     Ekonomikos fakultetas
+    Geografijos fakultetas
 
 You can import the structure tags from csv too:
 
@@ -101,6 +105,7 @@ You can import the structure tags from csv too:
     Architekturos fakultetas
     Vinco Kapsuko universitetas
     Ekonomikos fakultetas
+    Geografijos fakultetas
     Vilniaus Universitetas
     Gamtos Mokslu Fakultetas
 

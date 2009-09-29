@@ -59,6 +59,8 @@ class StructureviewController(SearchBaseController):
         self._breadcrumbs(location)
 
         self.form_result['tagsitem'] = location.hierarchy()
+        if self.form_result.get('obj_type', None) is None:
+            self.form_result['obj_type'] = 'subject'
         self._search()
 
         if location.parent is None:

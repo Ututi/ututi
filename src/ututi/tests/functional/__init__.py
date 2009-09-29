@@ -19,6 +19,10 @@ from ututi.model import Group, meta, LocationTag, User, Subject, Email
 def ftest_setUp(test):
     ututi.tests.setUp(test)
 
+    l = LocationTag.get(u'vu')
+    f = LocationTag(u'Geografijos fakultetas', u'gf', u'', l)
+    meta.Session.add(f)
+
     u = User.get('admin@ututi.lt')
     meta.Session.execute("SET ututi.active_user TO %d" % u.id)
     g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date(date.today().year, 1, 1), u'U2ti moderatoriai.')
