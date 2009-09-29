@@ -125,6 +125,7 @@ def ellipsis(text, max=20):
     else:
         return text
 
+from ututi.lib.security import check_crowds
 
 def selected_item(items):
     for item in items:
