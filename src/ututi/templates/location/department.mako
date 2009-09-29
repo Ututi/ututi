@@ -1,12 +1,22 @@
 <%inherit file="/base.mako" />
 <%namespace file="/search/index.mako" import="search_form"/>
 <%namespace file="/search/index.mako" import="search_results"/>
+<%namespace file="/portlets/structure.mako" import="*"/>
 
+<%def name="portlets()">
+<div id="sidebar">
+  ${struct_info_portlet()}
+</div>
+</%def>
 
 <%def name="title()">
   Ututi: ${c.location.title}
 </%def>
 
+<%def name="head_tags()">
+${parent.head_tags()}
+${h.stylesheet_link('/stylesheets/location.css')|n}
+</%def>
 
 ${search_form(c.text, c.obj_type, c.location.hierarchy, parts=['obj_type', 'text'], target=c.location.url())}
 

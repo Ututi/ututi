@@ -408,6 +408,13 @@ ul.bullets_large li {
   color: black;
 }
 
+.sidebar-block .portlet-logo {
+  float: left;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+
 /* end sidebar block */
 
 /* begin horizontal menu */

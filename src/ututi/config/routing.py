@@ -173,6 +173,8 @@ def make_map():
     map.connect('/structure', controller='structure', action='index')
     map.connect('/structure/{id}/logo/{width}/{height}',
                 controller='structure', action='logo')
+    map.connect('/structure/{id}/logo/{width}',
+                controller='structure', action='logo')
     map.connect('/files', controller='files', action='index')
 
     map.connect('/{controller}', action='index')

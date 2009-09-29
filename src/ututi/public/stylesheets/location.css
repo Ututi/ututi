@@ -1,0 +1,10 @@
+/* location info portlet */
+#location_info_portlet #location-stats span {
+  color: #1a1a1a;
+  margin-right: 1.5em;
+}
+
+#location_info_portlet #location-stats span em {
+  font-style: normal;
+  color: #d45500;
+}
