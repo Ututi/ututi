@@ -35,23 +35,6 @@ def subject_action(method):
         return method(self, subject)
     return _subject_action
 
-class SubjectIdValidator(validators.FormValidator):
-
-    messages = {
-        'duplicate': _(u"Such id already exists, choose a different one."),
-    }
-
-    def validate_python(self, form_dict, state):
-        old_subject = Subject.get(LocationTag.get(form_dict.get('old_location', '')),
-                                  form_dict.get('id', 0))
-        # XXX test for id matching a tag
-        location = form_dict['location']
-        subject = Subject.get(location, form_dict['id'])
-        if subject is not None and not subject is old_subject:
-            raise Invalid(self.message('duplicate', state),
-                          form_dict, state)
-
-
 class SubjectForm(Schema):
     """A schema for validating new subject forms."""
 
