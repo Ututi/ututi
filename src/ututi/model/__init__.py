@@ -991,7 +991,15 @@ class LocationTag(Tag):
                    path='/'.join(self.path))
 
     def count(self, obj=Subject):
+        if isinstance(obj, str) or isinstance(obj, unicode):
+            obj_types = {
+                'subject' : Subject,
+                'group' : Group,
+                'file' : File,
+                }
+            obj = obj_types[obj.lower()]
         return meta.Session.query(obj).filter(obj.location == self).count()
+
 
 group_files_table = None
 
