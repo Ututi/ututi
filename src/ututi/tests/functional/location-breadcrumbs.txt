@@ -12,11 +12,11 @@ The subject:
 
 
     >>> browser.open('http://localhost/subject/vu/mat_analize')
-    >>> browser.printQuery('id("location")//div[@class="title"]/text()')
+    >>> browser.printQuery('id("location")//div[@class="title"]/a/text()')
     vu
 
 The group:
 
     >>> browser.open('http://localhost/group/moderators')
-    >>> browser.printQuery('id("location")//div[@class="title"]/text()')
+    >>> browser.printQuery('id("location")//div[@class="title"]/a/text()')
     vu
