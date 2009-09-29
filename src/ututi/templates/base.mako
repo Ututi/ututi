@@ -129,7 +129,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
       %if tag.logo:
       <img src="${url(controller='structure', action='logo', id=tag.id, height=20, width=40)}" alt="location tag logo"/>
       %endif
-      <div class="title">${tag.title_short}</div>
+      <div class="title"><a href="${tag.url()}" title="${tag.title}">${tag.title_short}</a></div>
     </div>
     %endfor
   </div>

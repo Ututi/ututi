@@ -615,6 +615,9 @@ a.small-link:hover {
   float: left;
   height: 20px;
   line-height: 20px;
+}
+
+#location .location-tag .title a {
   text-transform: uppercase;
   color: #666;
   font-size: 1.1em;
