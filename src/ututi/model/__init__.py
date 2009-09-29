@@ -76,6 +76,7 @@ def setup_orm(engine):
                                Column('title_short', Unicode(assert_unicode=True)),
                                Column('title', Unicode(assert_unicode=True)),
                                Column('description', Unicode(assert_unicode=True)),
+                               Column('site_url', Unicode(assert_unicode=True)),
                                useexisting=True,
                                autoload=True,
                                autoload_with=engine)
