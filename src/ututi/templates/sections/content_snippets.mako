@@ -1,3 +1,9 @@
+<%def name="location_tag_link(tag)">
+  <a class="tag" title="${tag.title}" href="${tag.url()}">
+    ${tag.title}
+  </a>
+</%def>
+
 <%def name="tag_link(tag)">
   %if c.user:
     <a class="tag" title="${tag.title}" href="${url(controller='profile', action='search', tags=', '.join(tag.hierarchy()))}">
@@ -14,7 +20,7 @@
   <div class="item-tags">
     %if object.location and all:
       %for tag in object.location.hierarchy(full=True):
-        ${tag_link(tag)}
+        ${location_tag_link(tag)}
       %endfor
     %endif
     %for tag in object.tags:
