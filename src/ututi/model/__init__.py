@@ -912,7 +912,7 @@ class LocationTag(Tag):
         location = self
         path = []
         while location:
-            path.append(location.title_short)
+            path.append(location.title_short.lower())
             location = location.parent
         return list(reversed(path))
 
