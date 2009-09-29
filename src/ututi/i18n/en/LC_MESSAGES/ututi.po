@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-09-26 10:15+0300\n"
+"PO-Revision-Date: 2009-09-29 21:37+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "Files"
 msgstr ""
 
-#: src/ututi/controllers/group.py:58 src/ututi/controllers/subject.py:41
+#: src/ututi/controllers/group.py:58
 msgid "Such id already exists, choose a different one."
 msgstr ""
 
@@ -263,6 +263,7 @@ msgid "Profile"
 msgstr ""
 
 #: src/ututi/controllers/profile.py:58
+#: src/ututi/templates/location/university.mako:42
 #: src/ututi/templates/profile/findgroup.mako:11
 #: src/ututi/templates/profile/findgroup.mako:59
 #: src/ututi/templates/profile/findgroup.mako:115
@@ -275,6 +276,7 @@ msgstr ""
 #: src/ututi/templates_py/home/findgroup.mako.py:166
 #: src/ututi/templates_py/home/findgroup.mako.py:183
 #: src/ututi/templates_py/home/welcome.mako.py:87
+#: src/ututi/templates_py/location/university.mako.py:103
 #: src/ututi/templates_py/portlets/search.mako.py:74
 #: src/ututi/templates_py/portlets/search.mako.py:152
 #: src/ututi/templates_py/profile/findgroup.mako.py:57
@@ -311,11 +313,15 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: src/ututi/controllers/subject.py:155
+#: src/ututi/controllers/structureview.py:91
+msgid "Information updated."
+msgstr ""
+
+#: src/ututi/controllers/subject.py:138
 msgid "The subject has been added to your watched subjects list."
 msgstr ""
 
-#: src/ututi/controllers/subject.py:158
+#: src/ututi/controllers/subject.py:141
 msgid "The subject has been removed from your watched subjects list."
 msgstr ""
 
@@ -339,8 +345,20 @@ msgstr ""
 msgid "Ututi password recovery"
 msgstr ""
 
-#: src/ututi/lib/validators.py:47
+#: src/ututi/lib/validators.py:48
 msgid "Location does not exist."
+msgstr ""
+
+#: src/ututi/lib/validators.py:61
+msgid "Such short title already exists, choose a different one."
+msgstr ""
+
+#: src/ututi/lib/validators.py:82
+msgid "The field may only contain letters, numbers and the characters + - _"
+msgstr ""
+
+#: src/ututi/lib/validators.py:83
+msgid "The field may not be left empty."
 msgstr ""
 
 #: src/ututi/model/events.py:29
@@ -501,20 +519,25 @@ msgstr ""
 msgid "Ututi search"
 msgstr ""
 
-#: src/ututi/templates/base.mako:8 src/ututi/templates_py/base.mako.py:495
+#: src/ututi/templates/base.mako:8 src/ututi/templates_py/base.mako.py:507
 msgid "student information online"
 msgstr ""
 
-#: src/ututi/templates/base.mako:18 src/ututi/templates_py/base.mako.py:177
+#: src/ututi/templates/base.mako:18 src/ututi/templates_py/base.mako.py:178
 msgid "log out"
 msgstr ""
 
-#: src/ututi/templates/base.mako:21 src/ututi/templates_py/base.mako.py:180
+#: src/ututi/templates/base.mako:21 src/ututi/templates_py/base.mako.py:181
 msgid "groups"
 msgstr ""
 
-#: src/ututi/templates/base.mako:33 src/ututi/templates/profile/search.mako:31
-#: src/ututi/templates_py/base.mako.py:198
+#: src/ututi/templates/base.mako:33
+#: src/ututi/templates/location/department.mako:30
+#: src/ututi/templates/location/university.mako:52
+#: src/ututi/templates/profile/search.mako:31
+#: src/ututi/templates_py/base.mako.py:199
+#: src/ututi/templates_py/location/department.mako.py:85
+#: src/ututi/templates_py/location/university.mako.py:124
 #: src/ututi/templates_py/profile/search.mako.py:91
 msgid "Create a new group"
 msgstr ""
@@ -524,7 +547,7 @@ msgstr ""
 #: src/ututi/templates/profile/findgroup.mako:125
 #: src/ututi/templates/profile/findgroup.mako:127
 #: src/ututi/templates/profile/findgroup.mako:129
-#: src/ututi/templates_py/base.mako.py:200
+#: src/ututi/templates_py/base.mako.py:201
 #: src/ututi/templates_py/group_add.mako.py:39
 #: src/ututi/templates_py/group_add.mako.py:95
 #: src/ututi/templates_py/group/add.mako.py:54
@@ -536,25 +559,25 @@ msgstr ""
 msgid "New group"
 msgstr ""
 
-#: src/ututi/templates/base.mako:37 src/ututi/templates_py/base.mako.py:205
+#: src/ututi/templates/base.mako:37 src/ututi/templates_py/base.mako.py:206
 msgid "search"
 msgstr ""
 
-#: src/ututi/templates/base.mako:40 src/ututi/templates_py/base.mako.py:210
+#: src/ututi/templates/base.mako:40 src/ututi/templates_py/base.mako.py:211
 msgid "home"
 msgstr ""
 
-#: src/ututi/templates/base.mako:47 src/ututi/templates_py/base.mako.py:215
+#: src/ututi/templates/base.mako:47 src/ututi/templates_py/base.mako.py:216
 msgid "Upload your personal logo"
 msgstr ""
 
-#: src/ututi/templates/base.mako:66 src/ututi/templates_py/base.mako.py:252
+#: src/ututi/templates/base.mako:66 src/ututi/templates_py/base.mako.py:253
 msgid "Wrong password or username!"
 msgstr ""
 
 #: src/ututi/templates/base.mako:69 src/ututi/templates/register.mako:37
 #: src/ututi/templates/group/members_admin.mako:99
-#: src/ututi/templates_py/base.mako.py:257
+#: src/ututi/templates_py/base.mako.py:258
 #: src/ututi/templates_py/register.mako.py:62
 #: src/ututi/templates_py/group/members_admin.mako.py:146
 #: src/ututi/templates_py/portlets/anonymous.mako.py:100
@@ -562,33 +585,37 @@ msgid "Email"
 msgstr ""
 
 #: src/ututi/templates/base.mako:76 src/ututi/templates/register.mako:43
-#: src/ututi/templates_py/base.mako.py:263
+#: src/ututi/templates_py/base.mako.py:264
 #: src/ututi/templates_py/register.mako.py:65
 #: src/ututi/templates_py/portlets/anonymous.mako.py:103
 msgid "Password"
 msgstr ""
 
-#: src/ututi/templates/base.mako:87 src/ututi/templates_py/base.mako.py:268
+#: src/ututi/templates/base.mako:87 src/ututi/templates_py/base.mako.py:269
 msgid "forgotten password?"
 msgstr ""
 
-#: src/ututi/templates/base.mako:207 src/ututi/templates_py/base.mako.py:98
+#: src/ututi/templates/base.mako:155 src/ututi/templates_py/base.mako.py:432
+msgid "logo"
+msgstr ""
+
+#: src/ututi/templates/base.mako:211 src/ututi/templates_py/base.mako.py:99
 msgid "UTUTI"
 msgstr ""
 
-#: src/ututi/templates/base.mako:231 src/ututi/templates_py/base.mako.py:127
+#: src/ututi/templates/base.mako:235 src/ututi/templates_py/base.mako.py:128
 msgid "Close"
 msgstr ""
 
-#: src/ututi/templates/base.mako:245 src/ututi/templates_py/base.mako.py:142
+#: src/ututi/templates/base.mako:249 src/ututi/templates_py/base.mako.py:143
 msgid "Apie Ututi"
 msgstr ""
 
-#: src/ututi/templates/base.mako:246 src/ututi/templates_py/base.mako.py:145
+#: src/ututi/templates/base.mako:250 src/ututi/templates_py/base.mako.py:146
 msgid "U-blog"
 msgstr ""
 
-#: src/ututi/templates/base.mako:247 src/ututi/templates_py/base.mako.py:150
+#: src/ututi/templates/base.mako:251 src/ututi/templates_py/base.mako.py:151
 msgid "Terms of use"
 msgstr ""
 
@@ -613,8 +640,9 @@ msgid "Create new"
 msgstr ""
 
 #: src/ututi/templates/files.mako:23 src/ututi/templates/structure.mako:38
-#: src/ututi/templates/group/edit.mako:78 src/ututi/templates/page/add.mako:14
-#: src/ututi/templates/page/edit.mako:12
+#: src/ututi/templates/group/edit.mako:78
+#: src/ututi/templates/location/edit.mako:23
+#: src/ututi/templates/page/add.mako:14 src/ututi/templates/page/edit.mako:12
 #: src/ututi/templates/structure/edit.mako:10
 #: src/ututi/templates/subject/add.mako:23
 #: src/ututi/templates/subject/edit.mako:23
@@ -622,6 +650,7 @@ msgstr ""
 #: src/ututi/templates_py/group_add.mako.py:51
 #: src/ututi/templates_py/structure.mako.py:67
 #: src/ututi/templates_py/group/edit.mako.py:70
+#: src/ututi/templates_py/location/edit.mako.py:58
 #: src/ututi/templates_py/page/add.mako.py:51
 #: src/ututi/templates_py/page/edit.mako.py:51
 #: src/ututi/templates_py/structure/edit.mako.py:45
@@ -650,6 +679,7 @@ msgstr ""
 #: src/ututi/templates/group/add.mako:98
 #: src/ututi/templates/group/edit.mako:138
 #: src/ututi/templates/group/edit_page.mako:13
+#: src/ututi/templates/location/edit.mako:53
 #: src/ututi/templates/page/add.mako:25 src/ututi/templates/page/edit.mako:23
 #: src/ututi/templates/profile/edit.mako:102
 #: src/ututi/templates/structure/edit.mako:49
@@ -661,6 +691,7 @@ msgstr ""
 #: src/ututi/templates_py/group/add.mako.py:138
 #: src/ututi/templates_py/group/edit.mako.py:157
 #: src/ututi/templates_py/group/edit_page.mako.py:49
+#: src/ututi/templates_py/location/edit.mako.py:82
 #: src/ututi/templates_py/page/add.mako.py:57
 #: src/ututi/templates_py/page/edit.mako.py:63
 #: src/ututi/templates_py/profile/edit.mako.py:89
@@ -786,6 +817,8 @@ msgstr ""
 #: src/ututi/templates_py/group/home.mako.py:63
 #: src/ututi/templates_py/page/view.mako.py:59
 #: src/ututi/templates_py/portlets/group.mako.py:587
+#: src/ututi/templates_py/portlets/structure.mako.py:164
+#: src/ututi/templates_py/portlets/structure.mako.py:166
 #: src/ututi/templates_py/portlets/subject.mako.py:118
 #: src/ututi/templates_py/subject/home.mako.py:74
 #: src/ututi/templates_py/user/edit.mako.py:39
@@ -793,8 +826,10 @@ msgid "Edit"
 msgstr ""
 
 #: src/ututi/templates/structure.mako:42
+#: src/ututi/templates/location/edit.mako:30
 #: src/ututi/templates/structure/edit.mako:16
 #: src/ututi/templates_py/structure.mako.py:70
+#: src/ututi/templates_py/location/edit.mako.py:64
 #: src/ututi/templates_py/structure/edit.mako.py:51
 msgid "Short title"
 msgstr ""
@@ -814,8 +849,10 @@ msgid "Select a parent"
 msgstr ""
 
 #: src/ututi/templates/structure.mako:61
+#: src/ututi/templates/location/edit.mako:44
 #: src/ututi/templates/structure/edit.mako:41
 #: src/ututi/templates_py/structure.mako.py:94
+#: src/ututi/templates_py/location/edit.mako.py:76
 #: src/ututi/templates_py/structure/edit.mako.py:87
 msgid "Logo"
 msgstr ""
@@ -994,9 +1031,13 @@ msgid "Member invitations"
 msgstr ""
 
 #: src/ututi/templates/group/add.mako:33
+#: src/ututi/templates/location/department.mako:31
+#: src/ututi/templates/location/university.mako:53
 #: src/ututi/templates/profile/search.mako:32
 #: src/ututi/templates/profile/welcome.mako:50
 #: src/ututi/templates_py/group/add.mako.py:58
+#: src/ututi/templates_py/location/department.mako.py:88
+#: src/ututi/templates_py/location/university.mako.py:127
 #: src/ututi/templates_py/portlets/user.mako.py:138
 #: src/ututi/templates_py/profile/search.mako.py:94
 #: src/ututi/templates_py/profile/welcome.mako.py:85
@@ -1098,9 +1139,11 @@ msgid "Change logo"
 msgstr ""
 
 #: src/ututi/templates/group/edit.mako:73
+#: src/ututi/templates/location/edit.mako:50
 #: src/ututi/templates/profile/edit.mako:73
 #: src/ututi/templates/structure/edit.mako:46
 #: src/ututi/templates_py/group/edit.mako.py:67
+#: src/ututi/templates_py/location/edit.mako.py:79
 #: src/ututi/templates_py/profile/edit.mako.py:65
 #: src/ututi/templates_py/structure/edit.mako.py:90
 #: src/ututi/templates_py/user/edit.mako.py:54
@@ -1290,17 +1333,29 @@ msgid "Watch"
 msgstr ""
 
 #: src/ututi/templates/group/subjects.mako:160
+#: src/ututi/templates/location/department.mako:29
+#: src/ututi/templates/location/department.mako:35
+#: src/ututi/templates/location/university.mako:51
+#: src/ututi/templates/location/university.mako:57
 #: src/ututi/templates/profile/search.mako:30
 #: src/ututi/templates/profile/search.mako:38
 #: src/ututi/templates_py/group/subjects.mako.py:139
+#: src/ututi/templates_py/location/department.mako.py:82
+#: src/ututi/templates_py/location/department.mako.py:95
+#: src/ututi/templates_py/location/university.mako.py:121
+#: src/ututi/templates_py/location/university.mako.py:134
 #: src/ututi/templates_py/profile/search.mako.py:88
 #: src/ututi/templates_py/profile/search.mako.py:101
 msgid "Did not find what you were looking for?"
 msgstr ""
 
 #: src/ututi/templates/group/subjects.mako:161
+#: src/ututi/templates/location/department.mako:36
+#: src/ututi/templates/location/university.mako:58
 #: src/ututi/templates/profile/search.mako:39
 #: src/ututi/templates_py/group/subjects.mako.py:142
+#: src/ututi/templates_py/location/department.mako.py:98
+#: src/ututi/templates_py/location/university.mako.py:137
 #: src/ututi/templates_py/profile/search.mako.py:104
 msgid "Create a new subject"
 msgstr ""
@@ -1338,6 +1393,25 @@ msgstr ""
 #: src/ututi/templates/home/recoveryform.mako:19
 #: src/ututi/templates_py/home/recoveryform.mako.py:47
 msgid "Recover password"
+msgstr ""
+
+#: src/ututi/templates/location/department.mako:38
+#: src/ututi/templates/location/university.mako:60
+#: src/ututi/templates/profile/search.mako:41
+#: src/ututi/templates_py/location/department.mako.py:102
+#: src/ututi/templates_py/location/university.mako.py:141
+#: src/ututi/templates_py/profile/search.mako.py:108
+msgid "Store all the subject's files and notes in one place."
+msgstr ""
+
+#: src/ututi/templates/location/edit.mako:37
+#: src/ututi/templates_py/location/edit.mako.py:70
+msgid "Website"
+msgstr ""
+
+#: src/ututi/templates/location/university.mako:21
+#: src/ututi/templates_py/location/university.mako.py:70
+msgid "department list"
 msgstr ""
 
 #: src/ututi/templates/page/add.mako:7
@@ -1473,11 +1547,6 @@ msgstr ""
 #: src/ututi/templates/profile/profile.mako:29
 #: src/ututi/templates_py/profile/profile.mako.py:68
 msgid "You haven't contributed much, have you?"
-msgstr ""
-
-#: src/ututi/templates/profile/search.mako:41
-#: src/ututi/templates_py/profile/search.mako.py:108
-msgid "Store all the subject's files and notes in one place."
 msgstr ""
 
 #: src/ututi/templates/profile/welcome.mako:12
@@ -1860,6 +1929,41 @@ msgstr ""
 #: src/ututi/templates_py/portlets/group.mako.py:728
 msgid "All changes"
 msgstr ""
+
+#: src/ututi/templates_py/portlets/structure.mako.py:75
+msgid "University information"
+msgstr ""
+
+#: src/ututi/templates_py/portlets/structure.mako.py:87
+msgid "Faculty information"
+msgstr ""
+
+#: src/ututi/templates_py/portlets/structure.mako.py:136
+#, fuzzy, python-format
+#| msgid "%(count)s member"
+#| msgid_plural "%(count)s members"
+msgid "%(count)s <em>subject</em>"
+msgid_plural "%(count)s <em>subjects</em>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/ututi/templates_py/portlets/structure.mako.py:146
+#, fuzzy, python-format
+#| msgid "%(count)s member"
+#| msgid_plural "%(count)s members"
+msgid "%(count)s <em>group</em>"
+msgid_plural "%(count)s <em>groups</em>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/ututi/templates_py/portlets/structure.mako.py:156
+#, fuzzy, python-format
+#| msgid "%(count)s file"
+#| msgid_plural "%(count)s files"
+msgid "%(count)s <em>file</em>"
+msgid_plural "%(count)s <em>files</em>"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/ututi/templates_py/portlets/subject.mako.py:74
 msgid "Subject information"
