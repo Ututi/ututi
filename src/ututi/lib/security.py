@@ -26,8 +26,12 @@ def is_moderator(user, context=None):
 
     moderator_tags = [group.location for group in user.groups
                       if group.moderators]
+    from ututi.model import LocationTag
+    if isinstance(context, LocationTag):
+        location = context
+    else:
+        location = getattr(context, 'location')
 
-    location = getattr(context, 'location')
     for tag in moderator_tags:
         if location in tag.flatten():
             return True
