@@ -489,6 +489,10 @@ form .form-field div.input-line {
   float: left;
 }
 
+form.edit-form .form-field div.input-line {
+  width: 350px;
+}
+
 form .form-field div.input-line div {
   height: 18px;
   padding: 1px 0;
