@@ -6,6 +6,7 @@
 <%def name="portlets()">
 <div id="sidebar">
   ${struct_info_portlet()}
+  ${struct_groups_portlet()}
 </div>
 </%def>
 

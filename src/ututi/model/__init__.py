@@ -985,10 +985,11 @@ class LocationTag(Tag):
         #items.extend(meta.Session.query(cls).filter_by(title_short=title).all())
         return items
 
-    def url(self, controller='structureview', action='index'):
+    def url(self, controller='structureview', action='index', **kwargs):
         return url(controller=controller,
                    action=action,
-                   path='/'.join(self.path))
+                   path='/'.join(self.path),
+                   **kwargs)
 
     def count(self, obj=Subject):
         if isinstance(obj, str) or isinstance(obj, unicode):
@@ -999,6 +1000,11 @@ class LocationTag(Tag):
                 }
             obj = obj_types[obj.lower()]
         return meta.Session.query(obj).filter(obj.location == self).count()
+
+    def latest_groups(self):
+        ids = [t.id for t in self.flatten()]
+        grps =  meta.Session.query(Group).filter(Group.location_id.in_(ids)).order_by(Group.created_on.desc()).limit(5).all()
+        return grps
 
 
 group_files_table = None
