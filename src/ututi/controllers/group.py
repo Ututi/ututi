@@ -13,7 +13,7 @@ from pylons.i18n import _
 
 from webhelpers import paginate
 
-from formencode import Schema, validators, Invalid, variabledecode
+from formencode import Schema, validators, Invalid, variabledecode, htmlfill
 from formencode.compound import Pipe
 from formencode.foreach import ForEach
 
@@ -255,19 +255,33 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         c.breadcrumbs.append(self._actions('files'))
         return render('group/files.mako')
 
+    def _add_form(self):
+        current_year = date.today().year
+        c.years = range(current_year - 10, current_year + 5)
+        return render('group/add.mako')
+
     @validate(schema=GroupAddingForm, post_only = False, on_get = True)
     @ActionProtector("user")
     def add(self):
-        c.current_year = date.today().year
-        c.years = range(c.current_year - 10, c.current_year + 5)
         #some initial date may be submitted as a get request
         if hasattr(self, 'form_result'):
-            c.location = LocationTag.get(self.form_result.get('location', ''))
-            c.current_year = int(self.form_result.get('year', c.current_year))
+            location = LocationTag.get(self.form_result.get('location', ''))
+            if location is not None:
+                location = dict([('location-%d' % n, tag)
+                                 for n, tag in enumerate(location.hierarchy())])
+            else:
+                location = []
+        else:
+            location = []
 
-        return render('group/add.mako')
+        defaults = {
+            'year': int(self.form_result.get('year',  date.today().year))
+            }
+        defaults.update(location)
 
-    @validate(schema=NewGroupForm, form='add')
+        return htmlfill.render(self._add_form(), defaults=defaults)
+
+    @validate(schema=NewGroupForm, form='_add_form')
     @ActionProtector("user")
     def new_group(self):
         if hasattr(self, 'form_result'):

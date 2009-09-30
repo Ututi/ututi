@@ -64,11 +64,7 @@ ${path_steps()}
     <label for="year">${_("Year")}</label>
     <select name="year" id="year">
       %for year in c.years:
-        %if year == c.current_year:
-          <option value="${year}" selected="selected">${year}</option>
-        %else:
-          <option value="${year}">${year}</option>
-        %endif
+      <option value="${year}">${year}</option>
       %endfor
     </select>
   </div>
