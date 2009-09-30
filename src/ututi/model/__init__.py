@@ -999,7 +999,8 @@ class LocationTag(Tag):
                 'file' : File,
                 }
             obj = obj_types[obj.lower()]
-        return meta.Session.query(obj).filter(obj.location == self).count()
+        ids = [t.id for t in self.flatten()]
+        return meta.Session.query(obj).filter(obj.location_id.in_(ids)).count()
 
     def latest_groups(self):
         ids = [t.id for t in self.flatten()]
