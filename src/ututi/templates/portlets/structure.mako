@@ -23,7 +23,8 @@
         <span class="small"><a href="${location.site_url}" title="${location.title}">${location.site_url}</a></span>
       %endif
     </div>
-    <div id="location-stats" class="clear-left">
+    <br class="clear-left" />
+    <div id="location-stats">
       <span>
         <%
            cnt = location.count('subject')

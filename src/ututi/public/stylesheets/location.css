@@ -2,6 +2,7 @@
 #location_info_portlet #location-stats span {
   color: #1a1a1a;
   margin-right: 1.5em;
+  padding-bottom: 5px;
 }
 
 #location_info_portlet #location-stats span em {
