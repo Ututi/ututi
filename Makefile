@@ -221,8 +221,8 @@ test_migration: instance/var/run/.s.PGSQL.${PGPORT}
 	psql -h ${PWD}/instance/var/run/ -d development -c "drop schema public cascade"
 	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
 	/usr/lib/postgresql/8.3/bin/pg_restore -d development -h ${PWD}/instance/var/run --no-owner < backup/dbdump || true
-	/usr/lib/postgresql/8.3/bin/pg_dump --format=p -h /home/ignas/src/ututi/u2/instance/var/run/ -p 4455 -d development -s > before_migration.txt
+	/usr/lib/postgresql/8.3/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > before_migration.txt
 	${PWD}/bin/migrate development.ini upgrade_once
-	/usr/lib/postgresql/8.3/bin/pg_dump --format=p -h /home/ignas/src/ututi/u2/instance/var/run/ -p 4455 -d development -s > after_migration.txt
+	/usr/lib/postgresql/8.3/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > after_migration.txt
 	${PWD}/bin/migrate development.ini downgrade
-	/usr/lib/postgresql/8.3/bin/pg_dump --format=p -h /home/ignas/src/ututi/u2/instance/var/run/ -p 4455 -d development -s > after_downgrade.txt
+	/usr/lib/postgresql/8.3/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > after_downgrade.txt
