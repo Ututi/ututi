@@ -61,13 +61,9 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
 
 <%def name="subject_flash_message(subject)">
   <div class="selected_subject_flash_message flash-message">
-    <span class="close-link" onclick="$(event.target).parent().remove();">close</span>
+    <span class="close-link" onclick="$(event.target).parent().remove();">${_('Close')}</span>
     <span>
-      Subject
-      <a href="${subject.url()}" title="${subject.title}">
-        ${subject.title}
-      </a>
-      was selected.
+      ${_('Subject %(subj)s was selected.') % dict(subj = h.link_to(subject.title, subject.url()))|n}
     </span>
   </div>
 </%def>
