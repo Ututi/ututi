@@ -25,13 +25,13 @@ ${h.stylesheet_link('/stylesheets/location.css')|n}
    l = len(children)
    children = [children[l/2:], children[:l/2]]
 %>
-<table style="margin-top: 15px; margin-bottom: 20px;">
+<table id="faculties-list">
   <tr>
     %for group in children:
       <td style="width: 50%;">
         <ul class="u-list">
         %for department in group:
-        <li><a href="${department.url()}" title="${department.title}">${department.title}</a> (${department.count()})</li>
+        <li><a href="${department.url()}" title="${department.title}">${department.title}</a></li>
         %endfor
         </ul>
       </td>

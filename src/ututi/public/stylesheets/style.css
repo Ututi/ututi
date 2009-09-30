@@ -174,9 +174,9 @@ ul.u-list {
   list-style-image: none;
 }
 ul.u-list li {
-  padding-left: 8px;
-  background: url("../images/details/bullet_orange_tiny.png") left center no-repeat;
   color: #4d4d4d;
+  padding-left: 10px;
+  background: url("../images/details/bullet_orange_tiny.png") left 7px no-repeat;
 }
 
 

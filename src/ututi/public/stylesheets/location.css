@@ -8,3 +8,12 @@
 #location_info_portlet #location-stats span em {
   font-style: normal;
 }
+
+#faculties-list {
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+#faculties-list tr td {
+  padding-left: 10px;
+}
