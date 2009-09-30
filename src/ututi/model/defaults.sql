@@ -331,6 +331,20 @@ create table content_tags (id bigserial not null,
        tag_id int8 references tags(id) not null,
        primary key (id));;
 
+/* a trigger to set the page's location based on the location of the subject the page belongs to*/
+CREATE FUNCTION set_file_location() RETURNS trigger AS $$
+    DECLARE
+        parent_location_id int8 := NULL;
+    BEGIN
+      SELECT location_id INTO parent_location_id FROM content_items WHERE id = NEW.parent_id;
+      UPDATE content_items SET location_id = parent_location_id WHERE id = NEW.id;
+      RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+CREATE TRIGGER set_file_location AFTER INSERT OR UPDATE ON files
+    FOR EACH ROW EXECUTE PROCEDURE set_file_location();;
+
 /* A trigger for updating page tags and location tags - they are taken from their parent subject */
 CREATE FUNCTION update_page_tags() RETURNS trigger AS $$
     DECLARE
