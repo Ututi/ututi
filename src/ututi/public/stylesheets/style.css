@@ -1323,6 +1323,16 @@ a.btn span, span.btn input {
   background-image:url("../images/button_small.png");
 }
 
+a.btn.warning, span.btn.warning,
+a.btn.warning span, span.btn.warning input {
+  background-image:url("../images/button_small_red.png");
+}
+
+a.btn.inactive, span.btn.inactive,
+a.btn.inactive span, span.btn.inactive input {
+  background-image:url("../images/button_small_inactive.png");
+}
+
 a.btn span, span.btn input {
   white-space:nowrap;
   cursor:pointer;

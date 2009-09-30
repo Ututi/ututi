@@ -50,7 +50,7 @@
             %else:
               <a href="${group.url(action='subscribe')}" class="btn"><span>${_("Get email")}</span></a>
             %endif
-            <a href="${group.url(action='leave')}" class="btn inactive"><span>${_("Leave group")}</span></a>
+            <a href="${group.url(action='leave')}" class="btn warning"><span>${_("Leave group")}</span></a>
           </div>
         </div>
       %endif
