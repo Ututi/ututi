@@ -266,3 +266,7 @@ Now let's kick out all of the members and delete the group:
     >>> form.getControl('Update').click()
 
     >>> browser.getControl('Delete group').click()
+
+Let's make sure our subjects are still in here:
+
+    >>> browser.open('http://localhost/subject/vu/test_subject')

@@ -221,8 +221,7 @@ def setup_orm(engine):
                polymorphic_identity='group',
                polymorphic_on=content_items_table.c.content_type,
                properties ={'watched_subjects': relation(Subject,
-                                                         secondary=group_watched_subjects_table,
-                                                         cascade='save-update, merge, delete')})
+                                                         secondary=group_watched_subjects_table)})
 
     global group_invitations_table
     group_invitations_table = Table("group_invitations", meta.metadata,
@@ -458,7 +457,6 @@ class User(object):
         self.password = password
         if gen_password:
             self.password = generate_password(password)
-
 
 email_table = None
 
