@@ -19,25 +19,25 @@ ${h.stylesheet_link('/stylesheets/location.css')|n}
 <h1>${c.location.title}</h1>
 <form method="post" action="${c.location.url(action='update')}" name="edit_structure_form" enctype="multipart/form-data" class="edit-form">
       <div class="form-field">
-        <input type="hidden" name="old_path" value="${'/'.join(c.location.path)}"/>
+        <input type="hidden" name="old_path" value=""/>
         <label for="title">${_('Title')}</label>
         <form:error name="title"/>
         <div class="input-line"><div>
-            <input type="text" id="title" name="title" value="${c.location.title}"/>
+            <input type="text" id="title" name="title" value=""/>
         </div></div>
       </div>
       <div class="form-field">
         <label for="title_short">${_('Short title')}</label>
         <form:error name="title_short"/>
         <div class="input-line"><div>
-            <input type="text" id="title_short" name="title_short" value="${c.location.title_short}"/>
+            <input type="text" id="title_short" name="title_short" value=""/>
         </div></div>
       </div>
       <div class="form-field">
         <label for="site_url">${_('Website')}</label>
         <form:error name="site_url"/>
         <div class="input-line"><div>
-            <input type="text" id="site_url" name="site_url" value="${c.location.site_url}"/>
+            <input type="text" id="site_url" name="site_url" value=""/>
         </div></div>
       </div>
       <div class="form-field">

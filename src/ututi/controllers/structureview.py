@@ -1,6 +1,6 @@
 import logging
 
-from formencode import Schema, validators, compound
+from formencode import Schema, validators, compound, htmlfill
 from pylons.controllers.util import redirect_to, abort
 from pylons import c, url
 from pylons.i18n import _
@@ -68,13 +68,22 @@ class StructureviewController(SearchBaseController):
         else:
             return render('location/department.mako')
 
-    @location_action
-    def edit(self, location):
-        self._breadcrumbs(location)
+    def _edit_form(self):
         return render('location/edit.mako')
 
     @location_action
-    @validate(schema=LocationEditForm, form='edit')
+    def edit(self, location):
+        defaults = {
+            'old_path': '/'.join(location.path),
+            'title': location.title,
+            'title_short': location.title_short,
+            'site_url': location.site_url
+            }
+        self._breadcrumbs(location)
+        return htmlfill.render(self._edit_form(), defaults=defaults, force_defaults=False)
+
+    @location_action
+    @validate(schema=LocationEditForm, form='_edit_form')
     def update(self, location):
         self._breadcrumbs(location)
 
