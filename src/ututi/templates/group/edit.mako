@@ -77,12 +77,12 @@ ${h.javascript_link('/javascripts/js-alternatives.js')|n}
         <div class="form-field">
           <label for="title">${_('Title')}</label>
           <div class="input-line"><div>
-              <input type="text" class="line" id="title" name="title" value="${c.group.title}"/>
+              <input type="text" class="line" id="title" name="title" value=""/>
           </div></div>
         </div>
         <div class="form-field">
           <label for="description">${_('Description')}</label>
-          <textarea class="line" name="description" id="description" cols="25" rows="5">${c.group.description}</textarea>
+          <textarea class="line" name="description" id="description" cols="25" rows="5"></textarea>
         </div>
         <div class="form-field non-js">
           <label for="logo_upload">${_('Group logo')}</label>
@@ -92,31 +92,23 @@ ${h.javascript_link('/javascripts/js-alternatives.js')|n}
           <label for="year">${_("Year")}</label>
           <select name="year" id="year">
             %for year in c.years:
-            %if year == c.group.year:
-            <option value="${year}" selected="selected">${year}</option>
-            %else:
             <option value="${year}">${year}</option>
-            %endif
             %endfor
           </select>
         </div>
 
         <div class="form-field">
-          ${location_widget(2, c.group.location.hierarchy())}
+          ${location_widget(2)}
         </div>
         <br class="clear-left"/>
 
         <div class="form-field">
           <label for="tags">${_('Tags')}</label>
-          ${tags_widget(c.group.tags_list)}
+          ${tags_widget([])}
         </div>
         <div class="form-field">
           <label for="show_page">${_('Show group page')}</label>
-          %if c.group.show_page:
-            <input type="checkbox" name="show_page" id="show_page" value="true" checked="checked"/>
-          %else:
-            <input type="checkbox" name="show_page" id="show_page" value="true"/>
-          %endif
+          <input type="checkbox" name="show_page" id="show_page"/>
         </div>
 
 <%

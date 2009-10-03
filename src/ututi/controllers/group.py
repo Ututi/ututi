@@ -340,18 +340,42 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         else:
             return render('group/members.mako')
 
+    def _edit_form(self):
+        c.current_year = date.today().year
+        c.years = range(c.current_year - 10, c.current_year + 5)
+
+        return render('group/edit.mako')
+
     @group_action
     @ActionProtector("admin", "moderator")
     def edit(self, group):
-        c.group.tags_list = ', '.join([tag.title for tag in c.group.tags])
+        defaults = {
+            'title': group.title,
+            'description': group.description,
+            'tags': ', '.join([tag.title for tag in c.group.tags]),
+            'show_page': group.show_page,
+            'year': group.year.year
+            }
+
+        tags = dict([('tagsitem-%d' % n, tag.title)
+                     for n, tag in enumerate(c.group.tags)])
+
+        defaults.update(tags)
+
+        if group.location is not None:
+            location = dict([('location-%d' % n, tag)
+                             for n, tag in enumerate(group.location.hierarchy())])
+        else:
+            location = []
+
+        defaults.update(location)
+
         c.breadcrumbs.append(self._actions('home'))
 
-        c.current_year = date.today().year
-        c.years = range(c.current_year - 10, c.current_year + 5)
-        return render('group/edit.mako')
+        return htmlfill.render(self._edit_form(), defaults=defaults)
 
-    @validate(EditGroupForm, form='edit')
     @group_action
+    @validate(EditGroupForm, form='_edit_form')
     @ActionProtector("admin", "moderator")
     def update(self, group):
         values = self.form_result
