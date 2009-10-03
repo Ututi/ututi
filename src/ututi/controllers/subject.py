@@ -5,7 +5,7 @@ import string
 from formencode.variabledecode import NestedVariables
 from formencode.foreach import ForEach
 from formencode.compound import Pipe
-from formencode import Schema, validators, Invalid
+from formencode import Schema, validators, htmlfill
 
 from pylons import c, request
 from pylons.decorators import validate
@@ -99,11 +99,14 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
                               'title': subject.title}]
         return render('subject/home.mako')
 
-    @ActionProtector("user")
-    def add(self):
+    def _add_form(self):
         return render('subject/add.mako')
 
-    @validate(schema=NewSubjectForm, form='add')
+    @ActionProtector("user")
+    def add(self):
+        return self._add_form()
+
+    @validate(schema=NewSubjectForm, form='_add_form')
     @ActionProtector("user")
     def create(self):
         if not hasattr(self, 'form_result'):
@@ -117,13 +120,31 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
                     id=subj.subject_id,
                     tags=subj.location_path)
 
+    def _edit_form(self):
+        return render('subject/edit.mako')
     @subject_action
     @ActionProtector("user")
     def edit(self, subject):
         c.breadcrumbs = [{'link': c.subject.url(),
-                              'title': c.subject.title}]
-        c.subject.tags_list = ', '.join([tag.title for tag in c.subject.tags])
-        return render('subject/edit.mako')
+                          'title': c.subject.title}]
+
+        defaults = {
+            'id': subject.subject_id,
+            'old_location': '/'.join(subject.location.path),
+            'title': subject.title,
+            'lecturer': subject.lecturer,
+            'tags': ', '.join([tag.title for tag in subject.tags]),
+            'description': subject.description,
+            }
+
+        if subject.location is not None:
+            location = dict([('location-%d' % n, tag)
+                             for n, tag in enumerate(subject.location.hierarchy())])
+        else:
+            location = []
+
+        defaults.update(location)
+        return htmlfill.render(self._edit_form(), defaults=defaults)
 
     @subject_action
     @ActionProtector("user")
@@ -143,8 +164,8 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
                     tags=subject.location_path)
 
 
-    @validate(schema=SubjectForm, form='edit')
     @subject_action
+    @validate(schema=SubjectForm, form='_edit_form')
     @ActionProtector("user")
     def update(self, subject):
 

@@ -17,32 +17,32 @@ ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
 
 <form method="post" action="${url(controller='subject', action='update', id=c.subject.subject_id, tags=c.subject.location_path)}"
      id="subject_add_form" enctype="multipart/form-data">
-  <input type="hidden" name="id" value="${c.subject.subject_id}"/>
-  <input type="hidden" name="old_location" value="${c.subject.location_path}"/>
+  <input type="hidden" name="id" value=""/>
+  <input type="hidden" name="old_location" value=""/>
   <div class="form-field">
     <label for="title">${_('Title')}</label>
     <div class="input-line"><div>
-        <input type="text" id="title" name="title" class="line" value="${c.subject.title}"/>
+        <input type="text" id="title" name="title" class="line" value=""/>
     </div></div>
   </div>
   <div class="form-field">
     <label for="lecturer">${_('Lecturer')}</label>
     <div class="input-line"><div>
-        <input type="text" id="lecturer" name="lecturer" class="line" value="${c.subject.lecturer}"/>
+        <input type="text" id="lecturer" name="lecturer" class="line" value=""/>
     </div></div>
   </div>
   <div class="form-field">
-    ${location_widget(2, c.subject.location.hierarchy())}
+    ${location_widget(2)}
   </div>
   <br class="clear-left"/>
   <div class="form-field">
     <label for="tags">${_('Tags')}</label>
-    ${tags_widget(c.subject.tags_list)}
+    ${tags_widget()}
   </div>
 
   <div class="form-field">
     <label for="description">${_('Brief description of the subject')}</label>
-    <textarea class="line ckeditor" name="description" id="description" cols="60" rows="5">${c.subject.description}</textarea>
+    <textarea class="line ckeditor" name="description" id="description" cols="60" rows="5"></textarea>
   </div>
 
   <div>
