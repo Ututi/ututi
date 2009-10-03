@@ -4,7 +4,7 @@ import string
 from datetime import datetime
 
 from routes.util import redirect_to
-from formencode import Schema, validators, Invalid, All
+from formencode import Schema, validators, Invalid, All, htmlfill
 
 from pylons import request, response, c, url, session
 from pylons.decorators import validate
@@ -180,7 +180,7 @@ class HomeController(BaseController):
                          c.message = _('The invitation link you have followed was either already used or invalid.')
                     return render('/login.mako')
 
-               return render('anonymous_index.mako')
+               return htmlfill.render(render('anonymous_index.mako'))
 
      @validate(PasswordRecoveryForm, form='pswrecovery')
      def pswrecovery(self):
@@ -195,13 +195,13 @@ class HomeController(BaseController):
                     h.flash(_('Password recovery email sent. Please check You inbox.'))
                else:
                     h.flash(_('User account not found.'))
-          return render('home/recoveryform.mako')
+          return htmlfill.render(render('home/recoveryform.mako'))
 
      @validate(PasswordResetForm, form='recovery')
      def recovery(self, key=None):
           try:
                if hasattr(self, 'form_result'):
-                    c.key = self.form_result.get('recovery_key', '')
+                    defaults = {'key': self.form_result.get('recovery_key', '')}
                     user = meta.Session.query(User).filter(User.recovery_key == c.key).one()
                     user.update_password(self.form_result.get('new_password'))
                     user.recovery_key = None
@@ -212,9 +212,9 @@ class HomeController(BaseController):
                     sign_in_user(user.emails[0].email)
                     redirect_to(controller='profile', action='index')
                else:
-                    c.key = key
-                    user = meta.Session.query(User).filter(User.recovery_key == c.key).one()
+                    defaults={'key': key}
+                    #user = meta.Session.query(User).filter(User.recovery_key == c.key).one()
 
-               return render('home/password_resetform.mako')
+               return htmlfill.render(render('home/password_resetform.mako'), defaults=defaults)
           except NoResultFound:
                abort(404)
