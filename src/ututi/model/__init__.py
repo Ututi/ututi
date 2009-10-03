@@ -1087,23 +1087,26 @@ class File(ContentItem):
 
         f.close()
 
-    def url(self, controller='files', action='get'):
+    def url(self, controller='files', action='get', **kwargs):
         from ututi.model.mailing import GroupMailingListMessage
 
         if isinstance(self.parent, Subject):
             return self.parent.url(controller='subjectfile',
                                    action=action,
-                                   file_id=self.id)
+                                   file_id=self.id,
+                                   **kwargs)
         elif isinstance(self.parent, Group):
             return self.parent.url(controller='groupfile',
                                    action=action,
-                                   file_id=self.id)
+                                   file_id=self.id,
+                                   **kwargs)
         elif isinstance(self.parent, GroupMailingListMessage):
             message = self.parent
             return message.group.url(controller='groupforum',
                                      action='file',
                                      message_id=message.id,
-                                     file_id=self.id)
+                                     file_id=self.id,
+                                     **kwargs)
         raise AttributeError("Can't generate url for the file without a parent!")
 
     def hash_chunked(self, file):

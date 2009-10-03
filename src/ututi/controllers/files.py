@@ -8,6 +8,8 @@ from pylons import request, response, c
 from pylons.controllers.util import redirect_to
 from pylons.controllers.util import forward
 
+from ututi.lib.security import deny
+from ututi.lib.security import is_root
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
 from ututi.model import meta, File, ContentItem
@@ -80,12 +82,16 @@ class FilesController(BasefilesController):
 
         redirect_to(controller='admin', action='files')
 
-    @ActionProtector('root')
     def get(self, id):
         file = File.get(id)
         if file is None:
             abort(404)
-        return self._get(file)
+        if file.parent is not None:
+            redirect_to(file.url())
+        elif is_root(c.user):
+            return self._get(file)
+        else:
+            deny(_('You have no right to download this file.'), 403)
 
     @ActionProtector('root')
     def delete(self, id):

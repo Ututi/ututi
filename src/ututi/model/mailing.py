@@ -15,9 +15,7 @@ from sqlalchemy.orm import relation, synonym
 from sqlalchemy import orm
 from StringIO import StringIO
 
-from routes.util import url_for
-
-from pylons import config
+from pylons import config, url
 
 from nous.mailpost.MailBoxerTools import splitMail, parseaddr
 
@@ -159,9 +157,10 @@ class GroupMailingListMessage(ContentItem):
             # XXX can't decide whether this belongs in the model or in
             # the controller, maybe we should have a template, and
             # pass it to this method?
-            url = url_for(controller='files', action='get', id=attachment.id,
-                          qualified=True)
-            footer += '\n%s - %s' % (attachment.title, url)
+            attachment_url = attachment.url(qualified=True)
+            if attachment.title == 'text.html':
+                continue
+            footer += '\n%s - %s' % (attachment.title, attachment_url)
 
         message = email.message_from_string(self.original.encode('utf-8'), UtutiEmail)
 

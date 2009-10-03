@@ -30,8 +30,7 @@ Regression test for emails with forwarded messages
     <BLANKLINE>
     Kvieciu visus, kam idomu :)
     <BLANKLINE>
-    text.html - http://localhost/files/get/4
-    agoros programa.doc - http://localhost/files/get/5
+    agoros programa.doc - http://localhost/group/moderators/forum/file/3/5
 
     >>> len(mail_queue)
     1
