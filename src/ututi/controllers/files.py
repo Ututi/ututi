@@ -66,11 +66,6 @@ class FilesController(BasefilesController):
         ]
 
     @ActionProtector('root')
-    def index(self):
-        c.files = meta.Session.query(File).all()
-        return render('files.mako')
-
-    @ActionProtector('root')
     def upload(self):
         title = request.POST['title']
         description = request.POST['description']
@@ -83,7 +78,7 @@ class FilesController(BasefilesController):
             meta.Session.add(f)
             meta.Session.commit()
 
-        redirect_to(controller='files', action='index')
+        redirect_to(controller='admin', action='files')
 
     @ActionProtector('root')
     def get(self, id):

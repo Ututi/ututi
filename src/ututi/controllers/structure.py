@@ -60,7 +60,7 @@ class StructureController(BaseController):
     @ActionProtector("root")
     def index(self):
         c.structure = meta.Session.query(LocationTag).filter_by(parent=None).all()
-        return render('structure.mako')
+        return render('structure/index.mako')
 
     @validate(schema=NewStructureForm, form='index')
     @ActionProtector("root")

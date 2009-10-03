@@ -148,7 +148,7 @@ class AdminController(BaseController):
                 group.year = date(2008, 1, 1)
 
         meta.Session.commit()
-        redirect_to(controller='group', action='index')
+        redirect_to(controller='admin', action='groups')
 
     @ActionProtector("root")
     def import_subjects_without_ids(self):
@@ -170,4 +170,19 @@ class AdminController(BaseController):
             for tag in tags:
                 subj.tags.append(SimpleTag.get(tag))
         meta.Session.commit()
-        redirect_to(controller='subject', action='index')
+        redirect_to(controller='admin', action='subjects')
+
+    @ActionProtector('root')
+    def files(self):
+        c.files = meta.Session.query(File).all()
+        return render('admin/files.mako')
+
+    @ActionProtector("root")
+    def groups(self):
+        c.groups = meta.Session.query(Group).all()
+        return render('admin/groups.mako')
+
+    @ActionProtector("root")
+    def subjects(self):
+        c.subjects = meta.Session.query(Subject).all()
+        return render('admin/subjects.mako')

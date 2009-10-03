@@ -90,11 +90,6 @@ class SubjectAddMixin(object):
 class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
     """A controller for subjects."""
 
-    @ActionProtector("root")
-    def index(self):
-        c.subjects = meta.Session.query(Subject).all()
-        return render('subjects.mako')
-
     @subject_action
     def home(self, subject):
         file_id = request.GET.get('serve_file')

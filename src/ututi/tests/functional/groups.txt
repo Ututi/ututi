@@ -10,7 +10,7 @@ A list of all groups is show at /groups.
 
     >>> browser = Browser.logIn()
 
-    >>> browser.open('http://localhost/groups')
+    >>> browser.open('http://localhost/admin/groups')
     >>> browser.printQuery("id('group_list')//li/a/text()")
     Moderatoriai (1)
 
@@ -175,7 +175,7 @@ You can import more groups using the admin interface.
     ...                                      'text/plain',
     ...                                       'users.csv')
     >>> form.getControl('Upload').click()
-    >>> browser.open('http://localhost/groups')
+    >>> browser.open('http://localhost/admin/groups')
     >>> browser.printQuery("id('group_list')//li/a/text()")
     Ututi moderatoriai (1)
     Test group (1)

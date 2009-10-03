@@ -76,10 +76,8 @@ def make_map():
     map.connect('/group/{id}/{action}', controller='group')
     map.connect('/group/{id}/logo/{width}/{height}', controller='group', action='logo')
     map.connect('/group/{id}/logo/{width}', controller='group', action='logo')
-    map.connect('/groups', controller='group', action='index')
     map.connect('/groups/{action}', controller='group')
 
-    map.connect('/subjects', controller='subject', action='index')
     map.connect('/subjects/{action}', controller='subject')
 
     map.connect('/subject/*tags/{id}/pages/{action}',
@@ -105,6 +103,9 @@ def make_map():
 
     map.connect('/subject/*tags/{id}/update',
                 controller='subject', action='update')
+
+    map.connect('/subject/*tags/{id}/delete',
+                controller='subject', action='delete')
 
     map.connect('/subject/*tags/{id}/create_folder',
                 controller='subject', action='create_folder')
@@ -177,7 +178,6 @@ def make_map():
                 controller='structure', action='logo')
     map.connect('/structure/{id}/logo/{width}',
                 controller='structure', action='logo')
-    map.connect('/files', controller='files', action='index')
 
     map.connect('/{controller}', action='index')
     map.connect('/{controller}/{action}')

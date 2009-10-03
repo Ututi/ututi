@@ -7,7 +7,7 @@ Let's log in:
 
 And go to the subjects list.
 
-    >>> browser.open('http://localhost/subjects')
+    >>> browser.open('http://localhost/admin/subjects')
 
 Pick a subject.
 

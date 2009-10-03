@@ -200,11 +200,6 @@ class GroupControllerBase(BaseController):
 class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     """Controller for group actions."""
 
-    @ActionProtector("root")
-    def index(self):
-        c.groups = meta.Session.query(Group).all()
-        return render('groups.mako')
-
     @group_action
     def home(self, group):
         if check_crowds(["member", "admin", "moderator"]):

@@ -60,7 +60,7 @@ But if someone would sent an email with an attachment, it sure would get stored:
 Not just stored, it should appear in the files list:
 
     >>> browser = Browser.logIn()
-    >>> browser.open('http://localhost/files')
+    >>> browser.open('http://localhost/admin/files')
 
     >>> browser.printQuery('id("file_list")//a')
     <a href="/files/get/..." class="file-link">README.txt</a>
@@ -168,7 +168,7 @@ add any additional files to the repository:
     >>> import os
     >>> file = open(os.path.join(files_path, 'cb396bb6/487560f2/6de19949/6051b42e'))
 
-    >>> browser.open('http://localhost/files')
+    >>> browser.open('http://localhost/admin/files')
     >>> browser.getControl('Title').value = "file.txt"
     >>> browser.getControl('Upload').add_file(file, 'text/plain', 'file.txt')
     >>> browser.getControl('Save').click()
@@ -186,7 +186,7 @@ If a message gets posted more than once, it is simply ignored:
     >>> send_test_message("email_with_attachment.txt",
     ...                   '20090615145515.GA13472@my_pc',
     ...                   'moderators@groups.ututi.lt')
-    >>> browser.open('http://localhost/files')
+    >>> browser.open('http://localhost/admin/files')
     >>> browser.printQuery('id("file_list")//a')
     <a href="/files/get/..." class="file-link">README.txt</a>
     <a href="/files/get/..." class="file-link">README.txt</a>

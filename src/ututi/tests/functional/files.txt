@@ -4,7 +4,7 @@ File upload and download
 First let's log in.
 
     >>> browser = Browser.logIn()
-    >>> browser.open('http://localhost/files')
+    >>> browser.open('http://localhost/admin/files')
     >>> browser.printQuery("//h1/text()")
     Files
 
