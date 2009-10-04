@@ -1,9 +1,27 @@
 import sys
 import os
 import re
+import pkg_resources
 
 from martian.scan import module_info_from_dotted_name
-from paste.deploy import loadapp
+
+
+def sql_migrate(name):
+    base_name = name.split('.')[-1]
+    upgrade_file = "%s_upgrade.sql" % base_name
+    downgrade_file = "%s_downgrade.sql" % base_name
+
+    def upgrade(engine):
+        connection = engine.connect()
+        statements = pkg_resources.resource_string('ututi.migration', upgrade_file)
+        connection.execute(statements)
+
+    def downgrade(engine):
+        connection = engine.connect()
+        statements = pkg_resources.resource_string('ututi.migration', downgrade_file)
+        connection.execute(statements)
+
+    return upgrade, downgrade
 
 
 class EvolutionScript(object):
@@ -16,7 +34,7 @@ class EvolutionScript(object):
 
 class GreatMigrator(object):
 
-    min_version = 11
+    min_version = 12
 
     def __init__(self, engine):
         self.engine = engine
