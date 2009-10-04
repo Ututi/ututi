@@ -11,12 +11,12 @@ ${_('Edit page')}
   <div class="form-field">
     <label for="page_title">${_('Title')}</label>
     <div class="input-line"><div>
-        <input class="line" name="page_title" id="page_title" type="text" value="${c.page.title}" />
+        <input class="line" name="page_title" id="page_title" type="text" value="" />
     </div></div>
   </div>
   <div class="form-field">
     <label for="page_content">${_('Content')}</label>
-    <textarea class="ckeditor" name="page_content" id="page_content" cols="80" rows="25">${c.page.content}</textarea>
+    <textarea class="ckeditor" name="page_content" id="page_content" cols="80" rows="25"></textarea>
   </div>
   <div>
     <span class="btn">

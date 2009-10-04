@@ -1,7 +1,7 @@
 import logging
 
 from routes.util import url_for
-from formencode import Schema, validators
+from formencode import Schema, validators, htmlfill
 
 from pylons import c, request
 from pylons.decorators import validate
@@ -88,6 +88,9 @@ class SubjectpageController(BaseController):
         meta.Session.commit()
         redirect_to(url_for(action='index', page_id=page.id))
 
+    def _edit_form(self):
+        return render('page/edit.mako')
+
     @page_action
     @validate(schema=PageForm, form='edit')
     @ActionProtector("user")
@@ -98,10 +101,15 @@ class SubjectpageController(BaseController):
                          {'link': page.url(),
                           'title': page.title}]
 
-        return render('page/edit.mako')
+        defaults = {
+            'page_title': page.title,
+            'page_content': page.content
+            }
+
+        return htmlfill.render(self._edit_form(), defaults=defaults)
 
     @page_action
-    @validate(schema=PageForm, form='edit')
+    @validate(schema=PageForm, form='_edit_form')
     @ActionProtector("user")
     def update(self, subject, page):
         page.save(self.form_result['page_title'],
