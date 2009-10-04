@@ -56,6 +56,8 @@ def setup_orm(engine):
     users_table = Table("users", meta.metadata,
                         Column('id', Integer, Sequence('users_id_seq'), primary_key=True),
                         Column('fullname', Unicode(assert_unicode=True)),
+                        Column('description', Unicode(assert_unicode=True)),
+                        Column('site_url', Unicode(assert_unicode=True)),
                         autoload=True,
                         useexisting=True,
                         autoload_with=engine)

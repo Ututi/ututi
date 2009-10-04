@@ -5,7 +5,7 @@ from pkg_resources import resource_stream
 
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql.expression import desc, or_, asc, func
-from formencode import Schema, validators
+from formencode import Schema, validators, htmlfill
 from webhelpers import paginate
 
 from pylons import request, c, url
@@ -15,7 +15,7 @@ from pylons.decorators import validate
 from pylons.i18n import _
 
 import ututi.lib.helpers as h
-from ututi.lib.base import BaseController, render
+from ututi.lib.base import render
 from ututi.lib.emails import email_confirmation_request
 from ututi.lib.security import ActionProtector
 from ututi.lib.search import search_query
@@ -97,11 +97,20 @@ class ProfileController(SearchBaseController):
 
         return render('/profile/home.mako')
 
+    def _edit_form(self):
+        return render('profile/edit.mako')
+
     @ActionProtector("user")
     def edit(self):
         c.breadcrumbs.append(self._actions('profile'))
 
-        return render('profile/edit.mako')
+        defaults = {
+            'fullname': c.user.fullname,
+            'site_url': c.user.site_url,
+            'description': c.user.description,
+            }
+
+        return htmlfill.render(self._edit_form(), defaults=defaults)
 
     @validate(LogoUpload)
     @ActionProtector("user")
@@ -112,7 +121,7 @@ class ProfileController(SearchBaseController):
             meta.Session.commit()
             return ''
 
-    @validate(ProfileForm, form='edit')
+    @validate(ProfileForm, form='_edit_form')
     @ActionProtector("user")
     def update(self):
         fields = ('fullname', 'logo_upload', 'logo_delete', 'site_url', 'description')

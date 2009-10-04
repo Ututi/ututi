@@ -77,20 +77,20 @@
         <div class="form-field">
           <label for="fullname">${_('Full name')}</label>
           <div class="input-line"><div>
-              <input class="line" type="text" id="fullname" name="fullname" value="${c.user.fullname}"/>
+              <input class="line" type="text" id="fullname" name="fullname" value=""/>
           </div></div>
         </div>
 
         <div class="form-field">
           <label for="site_url">${_('Address of your website or blog')}</label>
           <div class="input-line"><div>
-              <input class="line" type="text" id="site_url" name="site_url" value="${c.user.site_url}"/>
+              <input class="line" type="text" id="site_url" name="site_url" value=""/>
           </div></div>
         </div>
 
         <div class="form-field">
           <label for="description">${_('About yourself')}</label>
-          <textarea rows="6" cols="50" name="description" id="description">${c.user.description}</textarea>
+          <textarea rows="6" cols="50" name="description" id="description"></textarea>
         </div>
 
         <div class="form-field non-js">
