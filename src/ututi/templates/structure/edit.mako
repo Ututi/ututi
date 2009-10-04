@@ -9,30 +9,26 @@
       <div>
         <label for="title">${_('Title')}</label>
         <div class="input-line"><div>
-            <input type="text" id="title" name="title" value="${c.item.title}"/>
+            <input type="text" id="title" name="title" value=""/>
         </div></div>
       </div>
       <div>
         <label for="title_short">${_('Short title')}</label>
         <div class="input-line"><div>
-            <input type="text" id="title_short" name="title_short" value="${c.item.title_short}"/>
+            <input type="text" id="title_short" name="title_short" value=""/>
         </div></div>
       </div>
       <div>
         <label for="description">${_('Description')}</label>
-        <textarea class="ckeditor" name="description" id="description" cols="80" rows="25">${c.item.description}</textarea>
+        <textarea class="ckeditor" name="description" id="description" cols="80" rows="25"></textarea>
       </div>
-      <div
+      <div>
         <label for="parent">${_('Parent')}</label>
         <select id="parent" name="parent">
                <option value="0">${_('Select a parent')}</option>
                %if c.structure:
                    %for parent in c.structure:
-                        <option value="${parent.id}"
-                        %if c.item.parent == parent.id:
-                        selected="selected"
-                        %endif
-                        >${parent.title}</option>
+                        <option value="${parent.id}">${parent.title}</option>
                    %endfor
                %endif
         </select>

@@ -1,6 +1,6 @@
 import logging
 
-from formencode import Schema, validators, Invalid, variabledecode
+from formencode import Schema, validators, Invalid, variabledecode, htmlfill
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql import expression
 from sqlalchemy import or_
@@ -84,17 +84,27 @@ class StructureController(BaseController):
         meta.Session.commit()
         redirect_to(controller='structure', action='index')
 
+    def _edit_form(self):
+        return render('structure/edit.mako')
+
     @ActionProtector("root")
     def edit(self, id):
         try:
             c.item = meta.Session.query(LocationTag).filter_by(id=id).one()
+            defaults = {
+                'title' : c.item.title,
+                'title_short': c.item.title_short,
+                'description': c.item.description,
+                'parent': c.item.parent,
+                }
+            c.structure = meta.Session.query(LocationTag).filter_by(parent=None).filter(LocationTag.id != id).all()
+            return htmlfill.render(self._edit_form(), defaults=defaults)
+
         except NoResultFound:
             abort(404)
 
-        c.structure = meta.Session.query(LocationTag).filter_by(parent=None).filter(LocationTag.id != id).all()
-        return render('structure/edit.mako')
 
-    @validate(schema=EditStructureForm, form='edit')
+    @validate(schema=EditStructureForm, form='_edit_form')
     @ActionProtector("root")
     def update(self, id):
         try:
