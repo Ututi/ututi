@@ -69,6 +69,7 @@ class ReceivemailController(BaseController):
                      filename,
                      mimetype=mimetype,
                      md5=md5)
+            f.parent = message
             meta.Session.add(f)
             attachments.append(f)
             meta.Session.commit() # to keep attachment ids stable
