@@ -18,6 +18,22 @@
 </div>
 </%def>
 
+%if c.subject.deleted:
+<div id="note" style="margin-bottom: 25px; margin-top: 6px;">
+  %if h.check_crowds(['moderator']):
+  <div style="float: left;"><span class="message"><span>${_('Subject has been deleted, you can restore it if you want to.')}</span></span></div>
+  <div style="float: left; margin-left: 6px;">
+    <a class="btn" href="${c.subject.url(action='undelete')}" title="${_('Restore deleted subject')}">
+      <span>${_('Restore subject')}</span>
+    </a>
+  </div>
+  %else:
+  <span class="message"><span>${_('Subject has been deleted, it will soon disappear from your watched subjects list.')}</span></span>
+  %endif
+  <br style="clear: left;" />
+</div>
+%endif
+
 <div id="subject_description" class="content-block">
   <div class="hdr">
     <span class="huge" style="float: left;">${_("Subject's description")}</span>
@@ -26,6 +42,13 @@
         <span>${_('Edit')}</span>
       </a>
     </div>
+    %if h.check_crowds(['moderator']) and not c.subject.deleted:
+    <div style="float: left; margin-top: 4px; margin-left: 4px;">
+      <a class="btn warning" href="${c.subject.url(action='delete')}" title="${_('Delete subject')}">
+        <span>${_('Delete')}</span>
+      </a>
+    </div>
+    %endif
     <br class="clear-left" />
   </div>
   <div class="content">

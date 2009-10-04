@@ -5,7 +5,9 @@ from sqlalchemy.sql import func
 def search_query(text=None, tags=None, obj_type=None, extra=None):
     """Prepare the search query according to the parameters given."""
 
-    query = meta.Session.query(SearchItem).join(ContentItem)
+    query = meta.Session.query(SearchItem)\
+        .join(ContentItem)\
+        .filter_by(deleted_by=None)
 
     query = _search_query_text(query, text)
 

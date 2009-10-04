@@ -92,38 +92,14 @@ def make_map():
     map.connect('/subject/*tags/{id}/file/{file_id}/{action}',
                 controller='subjectfile')
 
-    map.connect('/subject/*tags/{id}/edit',
-                controller='subject', action='edit')
+    subject_actions = ['edit', 'watch', 'js_watch', 'update', 'delete',
+                       'undelete', 'create_folder', 'delete_folder',
+                       'js_create_folder', 'js_delete_folder', 'upload_file',
+                       'upload_file_short']
 
-    map.connect('/subject/*tags/{id}/watch',
-                controller='subject', action='watch')
-
-    map.connect('/subject/*tags/{id}/js_watch',
-                controller='subject', action='js_watch')
-
-    map.connect('/subject/*tags/{id}/update',
-                controller='subject', action='update')
-
-    map.connect('/subject/*tags/{id}/delete',
-                controller='subject', action='delete')
-
-    map.connect('/subject/*tags/{id}/create_folder',
-                controller='subject', action='create_folder')
-
-    map.connect('/subject/*tags/{id}/delete_folder',
-                controller='subject', action='delete_folder')
-
-    map.connect('/subject/*tags/{id}/js_create_folder',
-                controller='subject', action='js_create_folder')
-
-    map.connect('/subject/*tags/{id}/js_delete_folder',
-                controller='subject', action='js_delete_folder')
-
-    map.connect('/subject/*tags/{id}/upload_file',
-                controller='subject', action='upload_file')
-
-    map.connect('/subject/*tags/{id}/upload_file_short',
-                controller='subject', action='upload_file_short')
+    for action in subject_actions:
+        map.connect('/subject/*tags/{id}/%s' % action,
+                    controller='subject', action=action)
 
     map.connect('/subject/*tags/{id}',
                 controller='subject',

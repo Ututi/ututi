@@ -1294,10 +1294,9 @@ div.upload_dropdown .target_item.last div {
 }
 
 /* buttons - experiment */
-a.btn, span.btn {
+span.message, a.btn, span.btn {
   display:-moz-inline-box;
   display:inline-block;
-  cursor:pointer;
   border:none;
   /*
     for Safari, read this first
@@ -1318,6 +1317,10 @@ a.btn, span.btn {
   _font-size: 0;
 }
 
+a.btn, span.btn {
+  cursor:pointer;
+}
+
 a.btn, span.btn,
 a.btn span, span.btn input {
   background-image:url("../images/button_small.png");
@@ -1333,9 +1336,14 @@ a.btn.inactive span, span.btn.inactive input {
   background-image:url("../images/button_small_inactive.png");
 }
 
+span.message span,
+span.message {
+  background-image:url("../images/message.png");
+}
+
+span.message span,
 a.btn span, span.btn input {
   white-space:nowrap;
-  cursor:pointer;
   color:#333;
   display:-moz-inline-box;
   display:inline-block;
@@ -1350,7 +1358,6 @@ a.btn span, span.btn input {
   margin:0;
   border:none;
   vertical-align:text-top;
-  text-transform: lowercase;
   zoom:1;
   _position:relative;
   _padding-left:0px;
@@ -1358,6 +1365,12 @@ a.btn span, span.btn input {
   _top:0;
 }
 
+a.btn span, span.btn input {
+  cursor:pointer;
+  text-transform: lowercase;
+}
+
+html.safari span.btn span,
 html.safari a.btn span,
 html.safari del.btn span{
   line-height:1.3;

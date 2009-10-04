@@ -207,3 +207,17 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
     @ActionProtector("moderator", "root")
     def js_delete_folder(self, subject):
         return self._delete_folder(subject)
+
+    @subject_action
+    @ActionProtector("moderator", "root")
+    def delete(self, subject):
+        c.subject.deleted = c.user
+        meta.Session.commit()
+        redirect_to(request.referrer)
+
+    @subject_action
+    @ActionProtector("moderator", "root")
+    def undelete(self, subject):
+        c.subject.deleted = None
+        meta.Session.commit()
+        redirect_to(request.referrer)
