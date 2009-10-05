@@ -161,10 +161,6 @@ def setup_orm(engine):
                                             backref=backref('versions',
                                                             order_by=content_items_table.c.created_on.desc()))})
 
-    global subject_files_table
-    subject_files_table = Table("subject_files", meta.metadata,
-                                autoload=True,
-                                autoload_with=engine)
     global subjects_table
     subjects_table = Table("subjects", meta.metadata,
                            Column('title', Unicode(assert_unicode=True)),
@@ -198,11 +194,6 @@ def setup_orm(engine):
                              'group': relation(Group, backref=backref('members', cascade='save-update, merge, delete')),
                              'role': relation(GroupMembershipType)})
 
-
-    global group_files_table
-    group_files_table = Table("group_files", meta.metadata,
-                              autoload=True,
-                              autoload_with=engine)
 
     global groups_table
     groups_table = Table("groups", meta.metadata,
@@ -721,7 +712,6 @@ class PendingRequest(object):
 
 
 subjects_table = None
-subject_files_table = None
 class Subject(ContentItem, FolderMixin):
 
     @classmethod
@@ -1007,8 +997,6 @@ class LocationTag(Tag):
         grps =  meta.Session.query(Group).filter(Group.location_id.in_(ids)).order_by(Group.created_on.desc()).limit(5).all()
         return grps
 
-
-group_files_table = None
 
 class File(ContentItem):
     """Class representing user-uploaded files."""

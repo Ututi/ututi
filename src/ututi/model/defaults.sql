@@ -145,14 +145,6 @@ create table subjects (id int8 not null references content_items(id),
        description text default null,
        primary key (id));;
 
-
-/* A table that tracks subject files */
-
-create table subject_files (
-       subject_id int8 not null references subjects(id),
-       file_id int8 references files(id) on delete cascade not null,
-       primary key (subject_id, file_id));;
-
 /* A table that tracks subjects watched and ignored by a user */
 
 create table user_monitored_subjects (
@@ -179,13 +171,6 @@ create table subject_pages (
        subject_id int8 not null references subjects(id),
        page_id int8 not null references pages(id),
        primary key (subject_id, page_id));;
-
-/* A table that tracks group files */
-
-create table group_files (
-       group_id int8 references groups(id) on delete cascade not null,
-       file_id int8 references files(id) on delete cascade not null,
-       primary key (group_id, file_id));;
 
 /* A table that tracks subjects watched by a group  */
 
@@ -609,5 +594,3 @@ CREATE TABLE group_requests (
        group_id int8 not null references groups(id) on delete cascade,
        hash char(8) not null unique,
        primary key (hash));;
-
-create table groups_fixed (id int8, group_id varchar(250) not null);;
