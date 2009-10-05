@@ -47,14 +47,10 @@ ${path_steps()}
     %endif
   </div>
   <br class="clear-left"/>
-  <div class="form-field">
-    <label for="title">${_('Group title')}</label>
-    <div class="input-line"><div>
-        <input type="text" id="title" name="title" class="line"/>
-    </div></div>
-  </div>
+  ${h.input_line('title', _('Group title'))}
   <div class="form-field">
     <label for="id">${_("Group email address")}</label>
+    <form:error name="id" />
     <div class="input-line"><div>
         <input type="text" id="id" name="id" class="line"/>
     </div></div>
@@ -62,6 +58,7 @@ ${path_steps()}
   </div>
   <div class="form-field">
     <label for="year">${_("Year")}</label>
+    <form:error name="year" />
     <select name="year" id="year">
       %for year in c.years:
       <option value="${year}">${year}</option>
@@ -79,19 +76,12 @@ from ututi.lib.security import is_root
   </div>
 % endif
 
-  <div class="form-field">
-    <label for="description">${_('Description')}</label>
-    <textarea class="line" name="description" id="description" cols="60" rows="5"></textarea>
-  </div>
-
+  ${h.input_area('description', _('Description'))}
   <div class="form-field">
     <label for="logo_upload">${_('Group logo')}</label>
+    <form:error name="logo_upload" />
     <input type="file" name="logo_upload" id="logo_upload" class="line"/>
   </div>
 
-  <div>
-    <span class="btn">
-      <input type="submit" value="${_('Save')}"/>
-    </span>
-  </div>
+  ${h.input_submit()}
 </form>

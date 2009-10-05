@@ -74,22 +74,16 @@ ${h.javascript_link('/javascripts/js-alternatives.js')|n}
         </div>
       </td>
       <td class="js-alternatives">
-        <div class="form-field">
-          <label for="title">${_('Title')}</label>
-          <div class="input-line"><div>
-              <input type="text" class="line" id="title" name="title" value=""/>
-          </div></div>
-        </div>
-        <div class="form-field">
-          <label for="description">${_('Description')}</label>
-          <textarea class="line" name="description" id="description" cols="25" rows="5"></textarea>
-        </div>
+        ${h.input_line('title', _('Title'))}
+        ${h.input_area('description', _('Description'))}
         <div class="form-field non-js">
           <label for="logo_upload">${_('Group logo')}</label>
+          <form:error name="logo_upload" />
           <input type="file" name="logo_upload" id="logo_upload" class="line"/>
         </div>
         <div class="form-field">
           <label for="year">${_("Year")}</label>
+          <form:error name="year" />
           <select name="year" id="year">
             %for year in c.years:
             <option value="${year}">${year}</option>
@@ -126,9 +120,7 @@ from ututi.lib.security import is_root
 % endif
 
 
-  <div>
-    <span class="btn"><input type="submit" value="${_('Save')}"/></span>
-  </div>
+  ${h.input_submit()}
       </td>
   </tr></table>
 </form>
