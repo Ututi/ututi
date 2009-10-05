@@ -62,14 +62,14 @@ def _search_query_tags(query, tags):
             #let's check each tag and see what we've got: a location tag or a simpletag
             tag = SimpleTag.get(tag_name, False)
             ltag = LocationTag.get_all(tag_name)
-            if tag is not None:
-                stags.append(tag.id)
-            elif ltag != []:
+            if ltag != []:
                 # if it is a location tag, add not only it, but also its children
                 location = []
                 for ltag_item in ltag:
                     location.extend([lt.id for lt in ltag_item.flatten()])
                 ltags.append(location)
+            elif tag is not None:
+                stags.append(tag.id)
             else:
                 #a tag name that is not in the database was entered. Return empty list.
                 return query.filter("false")
