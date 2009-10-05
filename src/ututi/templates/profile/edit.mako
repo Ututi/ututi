@@ -74,33 +74,16 @@
         </div>
       </td>
       <td class="js-alternatives">
-        <div class="form-field">
-          <label for="fullname">${_('Full name')}</label>
-          <div class="input-line"><div>
-              <input class="line" type="text" id="fullname" name="fullname" value=""/>
-          </div></div>
-        </div>
-
-        <div class="form-field">
-          <label for="site_url">${_('Address of your website or blog')}</label>
-          <div class="input-line"><div>
-              <input class="line" type="text" id="site_url" name="site_url" value=""/>
-          </div></div>
-        </div>
-
-        <div class="form-field">
-          <label for="description">${_('About yourself')}</label>
-          <textarea rows="6" cols="50" name="description" id="description"></textarea>
-        </div>
+        ${h.input_line('fullname', _('Full name'))}
+        ${h.input_line('site_url', _('Address of your website or blog'))}
+        ${h.input_area('description', _('About yourself'), rows='6', cols='50')}
 
         <div class="form-field non-js">
           <label for="logo_upload">${_('Personal logo')}</label>
           <input type="file" name="logo_upload" id="logo_upload" class="line"/>
         </div>
 
-        <div>
-          <span class="btn"><input type="submit" value="${_('Save')}"/></span>
-        </div>
+        ${h.input_submit()}
       </td>
     </tr>
   </table>
