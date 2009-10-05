@@ -209,7 +209,7 @@ def input_submit(text=None):
     if text is None:
         from pylons.i18n import _
         text = _('Save')
-    return HTML.div(c=[
+    return HTML.div(class_='form-field', c=[
             HTML.span(class_='btn', c=[
                 HTML.input(type_='submit', value=text)
                 ])
