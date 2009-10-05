@@ -12,18 +12,20 @@
     <label for="new_password">
       ${_('Enter Your new password.')}
     </label>
-    <input type="password" size="60" name="new_password" id="new_password"/>
+    <form:error name='new_password' />
+    <div class="input-line"><div>
+        <input type="password" size="60" name="new_password" id="new_password" class="line"/>
+    </div></div>
   </div>
   <div class="form-field">
     <label for="repeat_password">
       ${_('Repeat Your new password.')}
     </label>
-    <input type="password" size="60" name="repeat_password" id="repeat_password"/>
+    <form:error name='repeat_password' />
+    <div class="input-line"><div>
+        <input type="password" size="60" name="repeat_password" id="repeat_password" class="line"/>
+    </div></div>
   </div>
 
-  <div class="form-field">
-    <span class="btn">
-      <input type="submit" value="${_('Change password')}"/>
-    </span>
-  </div>
+  ${h.input_submit(_('Change password'))}
 </form>

@@ -201,8 +201,9 @@ class HomeController(BaseController):
      def recovery(self, key=None):
           try:
                if hasattr(self, 'form_result'):
-                    defaults = {'key': self.form_result.get('recovery_key', '')}
-                    user = meta.Session.query(User).filter(User.recovery_key == c.key).one()
+                    key = self.form_result.get('recovery_key', '')
+                    defaults = {'recovery_key': key}
+                    user = meta.Session.query(User).filter(User.recovery_key == key).one()
                     user.update_password(self.form_result.get('new_password'))
                     user.recovery_key = None
                     #password reset is actually a confirmation of the email
@@ -212,7 +213,7 @@ class HomeController(BaseController):
                     sign_in_user(user.emails[0].email)
                     redirect_to(controller='profile', action='index')
                else:
-                    defaults={'key': key}
+                    defaults={'recovery_key': key}
                     #user = meta.Session.query(User).filter(User.recovery_key == c.key).one()
 
                return htmlfill.render(render('home/password_resetform.mako'), defaults=defaults)

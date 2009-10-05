@@ -8,15 +8,6 @@
 
 
 <form method="post" action="${url(controller='home', action='pswrecovery')}">
-  <div class="form-field">
-    <label for="email">
-      ${_('Enter your email:')}
-    </label>
-    <input type="text" size="60" name="email" id="email"/>
-  </div>
-  <div class="form-field">
-    <span class="btn">
-      <input type="submit" value="${_('Recover password')}"/>
-    </span>
-  </div>
+  ${h.input_line('email', _('Enter your email:'))}
+  ${h.input_submit(_('Recover password'))}
 </form>
