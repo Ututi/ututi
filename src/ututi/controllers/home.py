@@ -31,7 +31,7 @@ class UniqueEmail(validators.FancyValidator):
      def validate_python(self, value, state):
          if value == '':
              raise Invalid(self.message("empty", state), value, state)
-         elif meta.Session.query(Email).filter_by(email=value).count() > 0:
+         elif meta.Session.query(Email).filter_by(email=value.strip().lower()).count() > 0:
              raise Invalid(self.message("non_unique", state), value, state)
 
 
@@ -180,7 +180,7 @@ class HomeController(BaseController):
                          c.message = _('The invitation link you have followed was either already used or invalid.')
                     return render('/login.mako')
 
-               return htmlfill.render(render('anonymous_index.mako'))
+               return render('anonymous_index.mako')
 
      @validate(PasswordRecoveryForm, form='pswrecovery')
      def pswrecovery(self):
