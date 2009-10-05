@@ -48,6 +48,12 @@
             alt=_('By watching a subject, you will be informed about all the changes in it.'),
             class_='tooltip')|n}
       </span>
+      <br />
+      %if h.check_crowds(['moderator']) and not c.subject.deleted:
+      <a class="btn warning" href="${c.subject.url(action='delete')}" title="${_('Delete subject')}">
+        <span>${_('Delete')}</span>
+      </a>
+      %endif
     </div>
     %endif
   </%self:portlet>

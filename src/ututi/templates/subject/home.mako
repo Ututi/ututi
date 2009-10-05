@@ -42,13 +42,6 @@
         <span>${_('Edit')}</span>
       </a>
     </div>
-    %if h.check_crowds(['moderator']) and not c.subject.deleted:
-    <div style="float: left; margin-top: 4px; margin-left: 4px;">
-      <a class="btn warning" href="${c.subject.url(action='delete')}" title="${_('Delete subject')}">
-        <span>${_('Delete')}</span>
-      </a>
-    </div>
-    %endif
     <br class="clear-left" />
   </div>
   <div class="content">
