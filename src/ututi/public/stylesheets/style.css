@@ -367,7 +367,7 @@ ul.bullets_large li {
 
 .sidebar-block .content {
   padding: 10px 10px 5px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   border: 2px solid #e5e5d3;
 }
 
@@ -1391,3 +1391,23 @@ span.btn btn, span.btn input{
 }
 
 /* end btns experiment */
+
+/* a border-less portlet */
+#sidebar .border-less .rounded-header {
+  display: none;
+}
+
+#sidebar .border-less .content {
+  border: 0;
+  margin-bottom: 0;
+}
+
+#banners_portlet_content .structured_info {
+  text-align: right;
+  float: right;
+}
+
+#banners_portlet_content img {
+  margin: 0;
+  padding: 0;
+}

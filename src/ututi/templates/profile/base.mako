@@ -1,6 +1,7 @@
 <%inherit file="/base.mako" />
 <%namespace file="/portlets/user.mako" import="*"/>
 <%namespace file="/portlets/search.mako" import="*"/>
+<%namespace file="/portlets/banners.mako" import="*"/>
 
 <%def name="portlets()">
 <div id="sidebar">
@@ -8,7 +9,7 @@
 
   ${user_subjects_portlet()}
   ${user_groups_portlet()}
-  ${user_message_portlet()}
+  ${ututi_banners_portlet()}
 
 </div>
 </%def>
