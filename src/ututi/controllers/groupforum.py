@@ -1,9 +1,6 @@
 #
-from datetime import datetime
-
-from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql.expression import desc
-from formencode import Schema, validators
+from formencode import Schema, validators, htmlfill
 
 from pylons.decorators import validate
 from pylons.controllers.util import redirect_to
@@ -111,10 +108,13 @@ class GroupforumController(GroupControllerBase):
                     action='thread',
                     id=group.group_id, thread_id=thread.id)
 
+    def _new_thread_form(self):
+        return render('forum/new.mako')
+
     @group_action
     @ActionProtector("member", "admin", "moderator")
     def new_thread(self, group):
-        return render('forum/new.mako')
+        return htmlfill.render(self._new_thread_form())
 
     def _recipients(self, group):
         recipients = []
@@ -132,7 +132,7 @@ class GroupforumController(GroupControllerBase):
         return "%s@%s" % (choose_boundary(), host)
 
     @group_action
-    @validate(NewMailForm, form='new_thread')
+    @validate(NewMailForm, form='_new_thread_form')
     @ActionProtector("member", "admin", "moderator")
     def post(self, group):
         message = send_email(c.user.emails[0].email,

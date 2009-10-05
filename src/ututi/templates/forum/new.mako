@@ -10,19 +10,7 @@ ${_('New topic')}
 
 <form method="post" action="${url(controller='groupforum', action='post', id=c.group.group_id)}"
      id="group_add_form" enctype="multipart/form-data">
-  <div class="form-field">
-    <label for="subject">${_('Subject')}</label>
-    <div class="input-line"><div>
-        <input type="text" id="subject" name="subject" class="line"/>
-    </div></div>
-  </div>
-  <div class="form-field">
-    <label for="message">${_('Message')}</label>
-    <textarea class="line" name="message" id="message" cols="80" rows="25"></textarea>
-  </div>
-  <div>
-    <span class="btn">
-      <input type="submit" value="${_('Post')}"/>
-    </span>
-  </div>
+  ${h.input_line('subject', _('Subject'))}
+  ${h.input_area('message', _('Message'))}
+  ${h.input_submit(_('Post'))}
 </form>

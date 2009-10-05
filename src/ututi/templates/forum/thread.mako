@@ -66,10 +66,6 @@ ${h.stylesheet_link('/stylesheets/forum.css')|n}
     <label for="message">${_('Message')}</label>
     <textarea class="line" name="message" id="message" cols="80" rows="10" style="width: 620px;"></textarea>
   </div>
-  <div>
-    <span class="btn">
-      <input type="submit" value="${_('Reply')}"/>
-    </span>
-  </div>
+  ${h.input_submit(_('Reply'))}
 </form>
 </table>
