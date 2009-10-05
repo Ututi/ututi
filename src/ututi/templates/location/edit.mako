@@ -18,28 +18,12 @@ ${h.stylesheet_link('/stylesheets/location.css')|n}
 
 <h1>${c.location.title}</h1>
 <form method="post" action="${c.location.url(action='update')}" name="edit_structure_form" enctype="multipart/form-data" class="edit-form">
-      <div class="form-field">
+      <div style="display: none;">
         <input type="hidden" name="old_path" value=""/>
-        <label for="title">${_('Title')}</label>
-        <form:error name="title"/>
-        <div class="input-line"><div>
-            <input type="text" id="title" name="title" value=""/>
-        </div></div>
       </div>
-      <div class="form-field">
-        <label for="title_short">${_('Short title')}</label>
-        <form:error name="title_short"/>
-        <div class="input-line"><div>
-            <input type="text" id="title_short" name="title_short" value=""/>
-        </div></div>
-      </div>
-      <div class="form-field">
-        <label for="site_url">${_('Website')}</label>
-        <form:error name="site_url"/>
-        <div class="input-line"><div>
-            <input type="text" id="site_url" name="site_url" value=""/>
-        </div></div>
-      </div>
+      ${h.input_line('title', _('Title'))}
+      ${h.input_line('title_short', _('Short title'))}
+      ${h.input_line('site_url', _('Website'))}
       <div class="form-field">
         <label for="logo_upload">${_('Logo')}</label>
         <form:error name="logo_upload"/>
@@ -49,7 +33,5 @@ ${h.stylesheet_link('/stylesheets/location.css')|n}
         <input type="checkbox" name="logo_delete" id="logo_delete" value="true"/>
         <label for="logo_delete">${_('Delete current logo')}</label>
       </div>
-      <div class="form-field">
-        <span class="btn"><input type="submit" name="action" value="${_('Save')}"/></span>
-      </div>
+      ${h.input_submit(_('Save'))}
 </form>
