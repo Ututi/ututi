@@ -226,3 +226,15 @@ test_migration: instance/var/run/.s.PGSQL.${PGPORT}
 	/usr/lib/postgresql/8.3/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > after_migration.txt
 	${PWD}/bin/migrate development.ini downgrade
 	/usr/lib/postgresql/8.3/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > after_downgrade.txt
+
+.PHONY: test_migration_2
+test_migration_2: instance/var/run/.s.PGSQL.${PGPORT}
+	psql -h ${PWD}/instance/var/run/ -d development -c "drop schema public cascade"
+	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
+	${PWD}/bin/paster setup-app development.ini
+	/usr/lib/postgresql/8.3/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > default.txt
+	psql -h ${PWD}/instance/var/run/ -d development -c "drop schema public cascade"
+	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
+	/usr/lib/postgresql/8.3/bin/pg_restore -d development -h ${PWD}/instance/var/run --no-owner < backup/dbdump || true
+	${PWD}/bin/migrate development.ini
+	/usr/lib/postgresql/8.3/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > actual.txt
