@@ -183,7 +183,7 @@ def trackEvent(obj, action, label, category='navigation'):
         label)
 
 def input_line(name, title, value=''):
-    return HTML.div(class_='form_field', c=[
+    return HTML.div(class_='form-field', c=[
             HTML.label(for_=name, c=[title]),
             HTML.tag('form:error', name_=name),
             HTML.div(class_='input-line', c=[
@@ -192,14 +192,14 @@ def input_line(name, title, value=''):
             ])
 
 def input_area(name, title, value='', cols='50', rows='5'):
-    return HTML.div(class_='form_field', c=[
+    return HTML.div(class_='form-field', c=[
             HTML.label(for_=name, c=[title]),
             HTML.tag('form:error', name_=name),
             HTML.textarea(class_='line', name_=name, id_=name, cols=cols, rows=rows, c=[value])
             ])
 
 def input_wysiwyg(name, title, value='', cols='80', rows='15'):
-    return HTML.div(class_='form_field', c=[
+    return HTML.div(class_='form-field', c=[
             HTML.label(for_=name, c=[title]),
             HTML.tag('form:error', name_=name),
             HTML.textarea(class_='ckeditor', name_=name, id_=name, cols=cols, rows=rows, c=[value])
