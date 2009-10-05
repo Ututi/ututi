@@ -9,6 +9,7 @@ from formencode import Schema, validators, Invalid, All, htmlfill
 from pylons import request, response, c, url, session
 from pylons.decorators import validate
 from pylons.controllers.util import redirect_to, abort
+from pylons.i18n.translation import get_lang
 from pylons.i18n import _
 
 from sqlalchemy.orm.exc import NoResultFound
@@ -99,8 +100,21 @@ class HomeController(BaseController):
           else:
                return render('/anonymous_index.mako')
 
+     def about(self):
+          lang = get_lang()
+          if not lang:
+               lang = 'lt'
+          else:
+               lang = lang[0]
+          return render('/about/%s.mako' % lang)
+
      def terms(self):
-          return render('/terms.mako')
+          lang = get_lang()
+          if not lang:
+               lang = 'lt'
+          else:
+               lang = lang[0]
+          return render('/terms/%s.mako' % lang)
 
      def login(self):
           email = request.POST.get('login')

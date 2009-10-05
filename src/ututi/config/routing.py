@@ -41,8 +41,9 @@ def make_map():
     map.connect('/error/{action}', controller='error')
     map.connect('/error/{action}/{id}', controller='error')
 
-    # static terms page
+    # static terms and about pages
     map.connect('/terms', controller='home', action='terms')
+    map.connect('/about', controller='home', action='about')
 
     # essential ututi component routes go here
 
