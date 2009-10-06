@@ -515,7 +515,7 @@ class Group(ContentItem, FolderMixin):
             if isinstance (id, (long, int)):
                 return query.filter_by(id=id).one()
             else:
-                return query.filter_by(group_id=id).one()
+                return query.filter(func.lower(cls.group_id)==id.strip().lower()).one()
         except NoResultFound:
             return None
 

@@ -87,7 +87,7 @@ If we click the link to edit the page, we are redirected to a form for this.
 However, group ids are checked for uniqueness.
 
     >>> browser.open('http://localhost/groups/add')
-    >>> browser.getControl('Group email address').value = 'test'
+    >>> browser.getControl('Group email address').value = 'Test'
     >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
     >>> browser.getControl('Group title').value = 'Test group'
     >>> browser.getControl('Save').click()
