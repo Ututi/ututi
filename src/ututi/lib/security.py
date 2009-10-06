@@ -27,6 +27,7 @@ def is_moderator(user, context=None):
     moderator_tags = [group.location for group in user.groups
                       if group.moderators]
     from ututi.model import LocationTag
+
     if isinstance(context, LocationTag):
         location = context
     else:
@@ -80,11 +81,11 @@ def check_crowds(crowds, user=None, context=None):
         context = c.security_context
     if user is None:
         user = c.user
-    if is_root(user, context):
-        return True
     for crowd in crowds:
         if crowd_checkers[crowd](user, context):
             return True
+    if is_root(user, context):
+        return True
     return False
 
 
