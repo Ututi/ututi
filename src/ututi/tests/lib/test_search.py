@@ -86,6 +86,10 @@ def test_tag_search():
 
         >>> [result.object.title for result in search(text=u'puslapis', tags=[u'a tag'])]
         [u'page title']
+
+    Mixed tags are the tags that are matched by both location tags and simple tags.
+        >>> sorted([(result.object.title, result.object.content_type) for result in search(tags=[u'Ekologijos fakultetas'])])
+        [(u'Ekologai', 'group'), (u'Test subject', 'subject'), (u'page title', 'page')]
     """
 
 
@@ -124,6 +128,8 @@ def test_setup(test):
     l = LocationTag(u'Kauno technologijos universitetas', u'ktu', u'')
     f = LocationTag(u'Ekologijos fakultetas', u'ef', u'', l)
 
+    mtag = SimpleTag(u'Ekologijos fakultetas') #a mixed tag
+
     meta.Session.add(l)
     meta.Session.add(f)
 
@@ -146,6 +152,7 @@ def test_setup(test):
     t = SimpleTag(u'a tag')
     meta.Session.add(t)
     s.tags.append(t)
+    s.tags.append(mtag)
     meta.Session.add(s)
     p = Page(u'page title', u'Puslapio tekstas')
     meta.Session.add(p)

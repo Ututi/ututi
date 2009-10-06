@@ -1,6 +1,7 @@
 from ututi.model import meta, SearchItem, SimpleTag, LocationTag, ContentItem
 
 from sqlalchemy.sql import func
+from sqlalchemy.sql.expression import or_
 
 def search_query(text=None, tags=None, obj_type=None, extra=None):
     """Prepare the search query according to the parameters given."""
@@ -58,11 +59,19 @@ def _search_query_tags(query, tags):
     if tags is not None:
         stags = [] #simple tags
         ltags = [] #location tags
+        mtags = [] #mixed tags - an unconvenient reality, tags that match bot locations and simple tags by title
         for tag_name in tags:
             #let's check each tag and see what we've got: a location tag or a simpletag
             tag = SimpleTag.get(tag_name, False)
             ltag = LocationTag.get_all(tag_name)
-            if ltag != []:
+            if ltag != [] and tag is not None:
+                #we have a mixed tag - one that matches both a location tag and a simple tag
+                location = []
+                for ltag_item in ltag:
+                    location.extend([lt.id for lt in ltag_item.flatten()])
+
+                mtags.append(dict(ltag=location, tag=tag.id))
+            elif ltag != []:
                 # if it is a location tag, add not only it, but also its children
                 location = []
                 for ltag_item in ltag:
@@ -85,4 +94,10 @@ def _search_query_tags(query, tags):
                 else:
                     intersect = intersect & set(location)
                 query = query.filter(ContentItem.location_id.in_(list(location)))
+
+        if len(mtags) > 0:
+            query = query.outerjoin(ContentItem.tags)
+            for mtag in mtags:
+                query = query.filter(or_(SimpleTag.id == mtag['tag'], ContentItem.location_id.in_(list(mtag['ltag']))))
+
     return query
