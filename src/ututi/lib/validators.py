@@ -90,3 +90,26 @@ class InURLValidator(validators.FancyValidator):
         valueRE = re.compile("^[\w+-]+$", re.I)
         if not valueRE.search(value):
             raise Invalid(self.message('badId', state), value, state)
+
+class TagsValidator(validators.FormValidator):
+
+    messages = {
+        'too_long': _(u"The tag is too long."),
+    }
+
+    def validate_python(self, form_dict, state):
+        tags = form_dict.get('tags', '')
+        tags_js = form_dict.get('tagsitem', [])
+
+        if tags_js != []:
+            for tag in tags_js:
+                if len(tag.strip()) >= 250:
+                    raise Invalid(self.message('too_long', state),
+                                  form_dict, state,
+                                  error_dict={'tags' : Invalid(self.message('too_long', state), form_dict, state)})
+        elif tags != '':
+            for tag in tags.split(','):
+                if len(tag.strip()) >= 250:
+                    raise Invalid(self.message('too_long', state),
+                                  form_dict, state,
+                                  error_dict={'tags' : Invalid(self.message('too_long', state), form_dict, state)})

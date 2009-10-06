@@ -16,7 +16,7 @@ from ututi.model import meta, LocationTag, Subject, File, SimpleTag
 from ututi.lib.security import ActionProtector
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.base import BaseController, render
-from ututi.lib.validators import LocationTagsValidator
+from ututi.lib.validators import LocationTagsValidator, TagsValidator
 import ututi.lib.helpers as h
 
 log = logging.getLogger(__name__)
@@ -42,11 +42,14 @@ class SubjectForm(Schema):
 
     pre_validators = [NestedVariables()]
 
-    location = Pipe(ForEach(validators.String(strip=True)),
+    location = Pipe(ForEach(validators.UnicodeString(strip=True, max=250)),
                     LocationTagsValidator())
 
     title = validators.UnicodeString(not_empty=True, strip=True)
     lecturer = validators.UnicodeString(strip=True)
+    chained_validators = [
+        TagsValidator()
+        ]
 
 
 class NewSubjectForm(SubjectForm):
@@ -168,6 +171,8 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
     @validate(schema=SubjectForm, form='_edit_form')
     @ActionProtector("user")
     def update(self, subject):
+        if not hasattr(self, 'form_result'):
+            redirect_to(controller='subject', action='add')
 
         #check if we need to regenerate the id
         clash = Subject.get(self.form_result.get('location', None), subject.subject_id)
@@ -181,9 +186,9 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
         subject.description = self.form_result.get('description', None)
 
         #check to see what kind of tags we have got
-        tags = [tag.strip().lower() for tag in self.form_result.get('tagsitem', [])]
+        tags = [tag.strip().lower() for tag in self.form_result.get('tagsitem', []) if len(tag.strip().lower()) < 250]
         if tags == []:
-            tags = [tag.strip().lower() for tag in self.form_result.get('tags', '').split(',')]
+            tags = [tag.strip().lower() for tag in self.form_result.get('tags', '').split(',') if len(tag.strip()) < 250]
 
         subject.tags = []
         for tag in tags:

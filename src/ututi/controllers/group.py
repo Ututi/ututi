@@ -28,7 +28,7 @@ import ututi.lib.helpers as h
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
-from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator
+from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator, TagsValidator
 
 from ututi.model.events import Event
 from ututi.model import LocationTag, User, GroupMember, GroupMembershipType
@@ -101,11 +101,15 @@ class EditGroupForm(Schema):
     title = validators.UnicodeString(not_empty=True)
     description = validators.UnicodeString()
     year = validators.String()
+
     moderators = validators.StringBoolean(if_missing=False)
     logo_upload = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
     logo_delete = validators.StringBoolean(if_missing=False)
     location = Pipe(ForEach(validators.String(strip=True)),
                     LocationTagsValidator())
+    chained_validators = [
+        TagsValidator()
+        ]
 
 
 class NewGroupForm(EditGroupForm):
@@ -397,9 +401,9 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             group.logo = logo.file.read()
 
         #check to see what kind of tags we have got
-        tags = [tag.strip().lower() for tag in self.form_result.get('tagsitem', [])]
+        tags = [tag.strip().lower() for tag in self.form_result.get('tagsitem', []) if len(tag.strip()) < 250]
         if tags == []:
-            tags = [tag.strip().lower() for tag in self.form_result.get('tags', '').split(',')]
+            tags = [tag.strip().lower() for tag in self.form_result.get('tags', '').split(',') if len(tag.strip()) < 250]
 
         group.tags = []
         for tag in tags:

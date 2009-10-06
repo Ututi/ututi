@@ -3,6 +3,7 @@ ${h.javascript_link('/javascripts/jquery.ui.autobox.js')|n}
 ${h.javascript_link('/javascripts/jquery.ui.autobox.ext.js')|n}
 
 <div class="tag-widget">
+  <form:error name="tags" />
   <input type="text" class="tags line" value="${value}" name="${name}" id="${name}"/>
 </div>
 
