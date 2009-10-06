@@ -9,7 +9,7 @@ from sqlalchemy.exc import InvalidRequestError
 
 from pylons.controllers import WSGIController
 from pylons.templating import render_mako as render
-from pylons import c
+from pylons import c, config
 
 from ututi.lib.security import current_user
 from ututi.model import meta
@@ -24,6 +24,7 @@ class BaseController(WSGIController):
         # available in environ['pylons.routes_dict']
 
         c.user = current_user()
+        c.google_tracker = config['google_tracker']
 
         # Record the time the user was last seen.
         if c.user is not None:

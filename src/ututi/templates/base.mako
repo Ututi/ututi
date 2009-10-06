@@ -278,7 +278,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
     </script>
     <script type="text/javascript">
       try {
-      var pageTracker = _gat._getTracker("UA-7073371-1");
+      var pageTracker = _gat._getTracker("${c.google_tracker}");
       pageTracker._trackPageview();
       } catch(err) {}
     </script>
