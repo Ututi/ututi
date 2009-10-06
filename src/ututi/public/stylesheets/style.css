@@ -1402,6 +1402,10 @@ span.btn btn, span.btn input{
   margin-bottom: 0;
 }
 
+#banners_portlet_content {
+  padding: 0;
+}
+
 #banners_portlet_content .structured_info {
   text-align: right;
   float: right;

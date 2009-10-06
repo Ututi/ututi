@@ -4,8 +4,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Banners</title>
   </head>
-  <body>
+  <body style="text-align: right;">
     <style>
+      html, body {
+        padding: 0;
+        margin: 0;
+      }
       a {
          text-decoration: none;
       }
