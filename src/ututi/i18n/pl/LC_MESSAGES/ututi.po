@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-10-04 23:10+0300\n"
+"PO-Revision-Date: 2009-10-06 12:20+0300\n"
 "Last-Translator: Jaroslav Šatkevič <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -399,7 +399,7 @@ msgstr "Do grupy %(link_to_group)s został dodany nowy dokument %(link_to_file)s
 #: src/ututi/model/events.py:96
 #, python-format
 msgid "A new folder '%(folder_title)s' for a subject %(link_to_subject)s was created"
-msgstr "Do przedmiotu %(link_to_subject)s został utworzony nowy folder %(link_to_file)s "
+msgstr "Do przedmiotu %(link_to_subject)s został utworzony nowy folder %(folder_title)s "
 
 #: src/ututi/model/events.py:100
 #, python-format
