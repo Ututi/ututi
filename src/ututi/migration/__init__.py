@@ -36,7 +36,7 @@ class GreatMigrator(object):
 
     min_version = 14
 
-    def __init__(self, engine, language):
+    def __init__(self, engine, language=None):
         self.engine = engine
         self.language = language
 
