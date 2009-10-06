@@ -36,8 +36,9 @@ class GreatMigrator(object):
 
     min_version = 14
 
-    def __init__(self, engine):
+    def __init__(self, engine, language):
         self.engine = engine
+        self.language = language
 
     @property
     def evolution_scripts(self):
@@ -88,6 +89,9 @@ class GreatMigrator(object):
     def run_scripts(self, start, end):
         connection = self.engine.connect()
         tx = connection.begin()
+        res = list(connection.execute("select * from pg_ts_config where cfgname='%s'" % self.language))
+        if res:
+            connection.execute("SET default_text_search_config TO 'public.%s'" % self.language)
 
         for script in self.evolution_scripts[start:end]:
             print "Running:", script.title
@@ -152,7 +156,7 @@ def main():
     engine = engine_from_config(dict(clo.parser.items('app:main')))
 
     # XXX Avoid circular import
-    migrator = GreatMigrator(engine)
+    migrator = GreatMigrator(engine, language=clo.parser.get('app:main', 'lang'))
 
     if action == 'upgrade':
         migrator.upgrade_min()
