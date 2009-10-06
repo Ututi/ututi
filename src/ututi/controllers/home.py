@@ -38,7 +38,10 @@ class UniqueEmail(validators.FancyValidator):
 
 class PasswordRecoveryForm(Schema):
     allow_extra_fields = False
-    email = validators.Email()
+    email = All(
+         validators.String(not_empty=True, strip=True),
+         validators.Email()
+         )
 
 
 class PasswordResetForm(Schema):
@@ -196,7 +199,10 @@ class HomeController(BaseController):
 
             return render('anonymous_index.mako')
 
-    @validate(PasswordRecoveryForm, form='pswrecovery')
+    def _pswrecovery_form(self):
+        return render('home/recoveryform.mako')
+
+    @validate(PasswordRecoveryForm, form='_pswrecovery_form')
     def pswrecovery(self):
         if hasattr(self, 'form_result'):
             email = self.form_result.get('email', None)
@@ -209,9 +215,13 @@ class HomeController(BaseController):
                 h.flash(_('Password recovery email sent. Please check You inbox.'))
             else:
                 h.flash(_('User account not found.'))
-        return htmlfill.render(render('home/recoveryform.mako'))
 
-    @validate(PasswordResetForm, form='recovery')
+        return htmlfill.render(self._pswrecovery_form())
+
+    def _pswreset_form(self):
+        return render('home/password_resetform.mako')
+
+    @validate(PasswordResetForm, form='_pswreset_form')
     def recovery(self, key=None):
         try:
             if hasattr(self, 'form_result'):
@@ -230,6 +240,6 @@ class HomeController(BaseController):
                 defaults={'recovery_key': key}
                 #user = meta.Session.query(User).filter(User.recovery_key == c.key).one()
 
-            return htmlfill.render(render('home/password_resetform.mako'), defaults=defaults)
+            return htmlfill.render(self._pswreset_form(), defaults=defaults)
         except NoResultFound:
             abort(404)
