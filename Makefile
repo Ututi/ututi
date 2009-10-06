@@ -55,7 +55,7 @@ instance/done: instance/var/data/postgresql.conf
 instance/var/run/.s.PGSQL.${PGPORT}:
 	mkdir -p ${PWD}/instance/var/run
 	mkdir -p ${PWD}/instance/var/log
-	${PG_PATH}/bin/pg_ctl -D ${PWD}/instance/var/data -o "-c unix_socket_directory=${PWD}/instance/var/run/ -c custom_variable_classes='ututi' -c ututi.active_user=0 -c default_text_search_config='public.lt'" start  -l ${PWD}/instance/var/log/pg.log
+	${PG_PATH}/bin/pg_ctl -D ${PWD}/instance/var/data -o "-c unix_socket_directory=${PWD}/instance/var/run/ -c custom_variable_classes='ututi' -c ututi.active_user=0" start  -l ${PWD}/instance/var/log/pg.log
 	sleep 5
 
 .PHONY: testpsql

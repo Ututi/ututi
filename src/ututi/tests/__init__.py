@@ -78,7 +78,6 @@ class PylonsLayer(object):
         # XXX Set up database here
         # meta.metadata.create_all(meta.engine)
         teardown_db_defaults(meta.engine, quiet=True)
-        meta.Session.execute("SET ututi.active_user TO 0")
         initialize_db_defaults(meta.engine)
         mail_queue[:] = []
         try:

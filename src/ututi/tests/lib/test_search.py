@@ -1,6 +1,8 @@
 from datetime import date
 from zope.testing import doctest
 
+from pylons import config
+
 from ututi.model import LocationTag, GroupMembershipType, GroupMember, Group, User, meta
 from ututi.model import meta, Subject, Page, SimpleTag
 
@@ -114,16 +116,19 @@ def test_suite():
     suite = doctest.DocTestSuite(
         optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |
         doctest.NORMALIZE_WHITESPACE,
-        setUp=test_setup)
+        setUp=test_setup,
+        tearDown=tear_down)
     suite.layer = PylonsLayer
     return suite
+
 
 def test_setup(test):
     """Create some models needed for the tests."""
     ututi.tests.setUp(test)
 
     u = User.get(u'admin@ututi.lt')
-    res = meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+    meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+    meta.Session.execute("SET default_text_search_config TO 'public.lt'")
 
     l = LocationTag(u'Kauno technologijos universitetas', u'ktu', u'')
     f = LocationTag(u'Ekologijos fakultetas', u'ef', u'', l)
@@ -165,3 +170,8 @@ def test_setup(test):
     meta.Session.add(p)
 
     meta.Session.commit()
+    meta.Session.execute("SET default_text_search_config TO 'public.lt'")
+
+
+def tear_down(test):
+    ututi.tests.tearDown(test)

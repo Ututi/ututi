@@ -53,11 +53,11 @@ class ReceivemailController(BaseController):
             abort(404)
 
         meta.Session.execute("SET ututi.active_user TO %d" % message.author.id)
+        request.environ['repoze.who.identity'] = message.author.id
 
         meta.Session.add(message)
 
         meta.Session.commit() # to keep message and attachment ids stable
-        meta.Session.execute("SET ututi.active_user TO %d" % message.author.id)
         attachments = []
         for md5, mimetype, filename in zip(md5_list,
                                            mime_type_list,
@@ -73,7 +73,6 @@ class ReceivemailController(BaseController):
             meta.Session.add(f)
             attachments.append(f)
             meta.Session.commit() # to keep attachment ids stable
-            meta.Session.execute("SET ututi.active_user TO %d" % message.author.id)
 
         message.attachments.extend(attachments)
 
