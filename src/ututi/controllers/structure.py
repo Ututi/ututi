@@ -39,7 +39,7 @@ class StructureIdValidator(validators.FancyValidator):
 
 class NewStructureForm(Schema):
     allow_extra_fields = True
-    title = validators.UnicodeString(not_empty=True, strip=True)
+    title = validators.UnicodeString(not_empty=True, strip=True, max=250)
     title_short = validators.UnicodeString(not_empty=True, strip=True, max=50)
     logo_upload = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
     description = validators.UnicodeString(strip=True)
@@ -53,6 +53,17 @@ class EditStructureForm(NewStructureForm):
 class AutoCompletionForm(Schema):
     allow_extra_fields = True
     pre_validators = [variabledecode.NestedVariables()]
+
+def structure_action(method):
+    def _structure_action(self, id):
+        try:
+            item = meta.Session.query(LocationTag).filter_by(id=id).one()
+        except NoResultFound:
+            abort(404)
+
+        c.item = item
+        return method(self, item)
+    return _structure_action
 
 
 class StructureController(BaseController):
@@ -87,30 +98,22 @@ class StructureController(BaseController):
     def _edit_form(self):
         return render('structure/edit.mako')
 
+    @structure_action
     @ActionProtector("root")
-    def edit(self, id):
-        try:
-            c.item = meta.Session.query(LocationTag).filter_by(id=id).one()
-            defaults = {
-                'title' : c.item.title,
-                'title_short': c.item.title_short,
-                'description': c.item.description,
-                'parent': c.item.parent,
-                }
-            c.structure = meta.Session.query(LocationTag).filter_by(parent=None).filter(LocationTag.id != id).all()
-            return htmlfill.render(self._edit_form(), defaults=defaults)
+    def edit(self, item):
+        defaults = {
+            'title' : c.item.title,
+            'title_short': c.item.title_short,
+            'description': c.item.description,
+            'parent': c.item.parent,
+            }
+        c.structure = meta.Session.query(LocationTag).filter_by(parent=None).filter(LocationTag.id != item.id).all()
+        return htmlfill.render(self._edit_form(), defaults=defaults)
 
-        except NoResultFound:
-            abort(404)
-
-
+    @structure_action
     @validate(schema=EditStructureForm, form='_edit_form')
     @ActionProtector("root")
-    def update(self, id):
-        try:
-            c.item = meta.Session.query(LocationTag).filter_by(id=id).one()
-        except NoResultFound:
-            abort(404)
+    def update(self, item):
 
         values = self.form_result
         if values.get('action', None) == _('Delete'):

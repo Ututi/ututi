@@ -74,6 +74,16 @@ Now we shall try to edit a structural element.
 
     >>> form.getControl('Save').click()
 
+Let's try to enter a title that is way too long:
+    >>> browser.getLink(text='Edit').click()
+
+    >>> form = browser.getForm(name='edit_structure_form')
+    >>> form.getControl('Title').value = u'40 characters are not that much text rly'*10
+    >>> form.getControl('Save').click()
+    >>> browser.printQuery("//span[@class='error-message']/text()")
+    Enter a value less than 250 characters long
+
+
 Let's look at the list:
 
     >>> browser.open('http://localhost/structure')
