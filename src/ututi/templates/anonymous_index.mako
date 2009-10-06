@@ -2,7 +2,7 @@
 
 <%namespace file="/search/index.mako" import="search_form"/>
 <%namespace file="/portlets/anonymous.mako" import="*"/>
-<%namespace file="/portlets/banners.mako" import="*"/>
+<%namespace file="/portlets/banners/base.mako" import="*"/>
 
 <%def name="head_tags()">
 ${parent.head_tags()}

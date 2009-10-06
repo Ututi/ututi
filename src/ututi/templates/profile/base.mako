@@ -1,7 +1,7 @@
 <%inherit file="/base.mako" />
 <%namespace file="/portlets/user.mako" import="*"/>
 <%namespace file="/portlets/search.mako" import="*"/>
-<%namespace file="/portlets/banners.mako" import="*"/>
+<%namespace file="/portlets/banners/base.mako" import="*"/>
 
 <%def name="portlets()">
 <div id="sidebar">

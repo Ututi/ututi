@@ -103,6 +103,14 @@ class HomeController(BaseController):
         else:
             return render('/anonymous_index.mako')
 
+    def banners(self):
+        lang = get_lang()
+        if not lang:
+            lang = 'lt'
+        else:
+            lang = lang[0]
+        return render('/portlets/banners/%s.mako' % lang)
+
     def about(self):
         lang = get_lang()
         if not lang:
