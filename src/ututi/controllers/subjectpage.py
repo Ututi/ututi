@@ -48,6 +48,7 @@ def page_action(method):
         c.page = page
         c.subject = subject
         c.object_location = subject.location
+        c.security_context = subject
         return method(self, subject, page)
     return _page_action
 
