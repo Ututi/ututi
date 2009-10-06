@@ -13,10 +13,10 @@
          border: 0;
       }
     </style>
-    <a href="http://blog.ututi.pl" title="U-blog">
+    <a target="_main" href="http://blog.ututi.pl" title="U-blog">
       <img src="${url('/images/bunners/ublog.jpeg')}" alt="U-blog" />
     </a>
-    <a href="http://www.facebook.com/pages/Ututipl/117010656858" title="Facebook">
+    <a target="_main" href="http://www.facebook.com/pages/Ututipl/117010656858" title="Facebook">
       <img src="${url('/images/bunners/facebook.jpeg')}" alt="facebook" />
     </a>
   </body>

@@ -13,17 +13,17 @@
          border: 0;
       }
     </style>
-    <a href="http://blog.ututi.lt" title="U-blog">
+    <a target="_main" href="http://blog.ututi.lt" title="U-blog">
       <img src="${url('/images/bunners/ublog.jpeg')}" alt="U-blog" />
     </a>
-    <a href="http://facebook.com/ututi" title="Facebook">
+    <a target="_main" href="http://facebook.com/ututi" title="Facebook">
       <img src="${url('/images/bunners/facebook.jpeg')}" alt="facebook" />
     </a>
     <br/>
-    <a href="http://aukok.lt" title="aukok.lt">
+    <a target="_main" href="http://aukok.lt" title="aukok.lt">
       <img src="${url('/images/bunners/aukoklogo.png')}" alt="aukok.lt" />
     </a>
-    <a href="http://www.15min.lt/naujienos/ziniosgyvai/studentu-blogas" title="15 min">
+    <a target="_main" href="http://www.15min.lt/naujienos/ziniosgyvai/studentu-blogas" title="15 min">
       <img src="${url('/images/bunners/15minlogo.jpeg')}" alt="15 min" />
     </a>
   </body>
