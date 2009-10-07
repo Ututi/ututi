@@ -80,6 +80,8 @@ class SubjectpageController(BaseController):
     @validate(schema=PageForm, form='add')
     @ActionProtector("user")
     def create(self, id, tags):
+        if not hasattr(self, 'form_result'):
+            redirect_to(url_for(action='add'))
         location = LocationTag.get(tags)
         subject = Subject.get(location, id)
         page = Page(self.form_result['page_title'],
