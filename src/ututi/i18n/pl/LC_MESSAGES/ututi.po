@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-10-07 18:56+0300\n"
+"PO-Revision-Date: 2009-10-07 19:02+0300\n"
 "Last-Translator: Jaroslav Šatkevič <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -429,7 +429,7 @@ msgstr[1] "%(num)s h. temu "
 #, python-format
 msgid "%(num)s day ago"
 msgid_plural "%(num)s days ago"
-msgstr[0] " wczoraj"
+msgstr[0] "wczoraj"
 msgstr[1] "%(num)s dni temu"
 
 #: src/ututi/model/events.py:61
