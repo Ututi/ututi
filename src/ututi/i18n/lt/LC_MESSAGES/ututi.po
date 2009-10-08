@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-10-07 18:45+0300\n"
+"PO-Revision-Date: 2009-10-08 09:36+0300\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -25,7 +25,7 @@ msgid ""
 "something else?"
 msgstr "Dokumentas pagal nuorodą %(url)s nerastas, bet galbūt ieškote ko nors dar?"
 
-#: src/ututi/controllers/files.py:67 src/ututi/controllers/group.py:194
+#: src/ututi/controllers/files.py:67 src/ututi/controllers/group.py:191
 #: src/ututi/templates/admin/files.mako:7
 #: src/ututi/templates_py/files.mako.py:39
 #: src/ututi/templates_py/subject_home.mako.py:46
@@ -37,20 +37,20 @@ msgstr "Failai"
 msgid "You have no right to download this file."
 msgstr "Jūs neturite teisės siųstis šį failą."
 
-#: src/ututi/controllers/group.py:58
+#: src/ututi/controllers/group.py:55
 msgid "Such id already exists, choose a different one."
 msgstr "Toks ID jau egzistuoja. Reikia naujo."
 
-#: src/ututi/controllers/group.py:59
+#: src/ututi/controllers/group.py:56
 msgid "Id cannot be used as an email address."
 msgstr "ID nėra el. paštas. Ar ne?"
 
-#: src/ututi/controllers/group.py:82
+#: src/ututi/controllers/group.py:79
 #, python-format
 msgid "Bad file type, only files of the types '%(allowed)s' are supported."
 msgstr "Netinkamas failo tipas. Tik '%(allowed)s' failai yra palaikomi."
 
-#: src/ututi/controllers/group.py:182 src/ututi/controllers/profile.py:55
+#: src/ututi/controllers/group.py:179 src/ututi/controllers/profile.py:55
 #: src/ututi/templates/group/home.mako:44
 #: src/ututi/templates/profile/home.mako:7
 #: src/ututi/templates_py/group/home.mako.py:82
@@ -58,11 +58,11 @@ msgstr "Netinkamas failo tipas. Tik '%(allowed)s' failai yra palaikomi."
 msgid "What's new?"
 msgstr "Kas naujo?"
 
-#: src/ututi/controllers/group.py:186
+#: src/ututi/controllers/group.py:183
 msgid "Forum"
 msgstr "Grupės paštas"
 
-#: src/ututi/controllers/group.py:190 src/ututi/templates/group/members.mako:17
+#: src/ututi/controllers/group.py:187 src/ututi/templates/group/members.mako:17
 #: src/ututi/templates/group/members_admin.mako:22
 #: src/ututi/templates_py/group_members.mako.py:38
 #: src/ututi/templates_py/group/members.mako.py:50
@@ -70,14 +70,14 @@ msgstr "Grupės paštas"
 msgid "Members"
 msgstr "Nariai"
 
-#: src/ututi/controllers/group.py:198 src/ututi/templates/admin/subjects.mako:7
+#: src/ututi/controllers/group.py:195 src/ututi/templates/admin/subjects.mako:7
 #: src/ututi/templates_py/subjects.mako.py:38
 #: src/ututi/templates_py/admin/subjects.mako.py:38
 #: src/ututi/templates_py/home/findgroup.mako.py:103
 msgid "Subjects"
 msgstr "Dalykai"
 
-#: src/ututi/controllers/group.py:212
+#: src/ututi/controllers/group.py:209
 msgid ""
 "The group's page was hidden. You can show it again by editing the group's"
 " settings."
@@ -85,57 +85,57 @@ msgstr ""
 "Grupės puslapis buvo paslėptas. Jį galima vėl parodyti keičiant grupės "
 "nustatymus."
 
-#: src/ututi/controllers/group.py:230
+#: src/ututi/controllers/group.py:228
 msgid ""
 "Your request to join the group was forwarded to the group's "
 "administrators. Thank You!"
 msgstr "Prašymas prisijungti prie grupės perduotas grupės administratoriams. Ačiū!"
 
-#: src/ututi/controllers/group.py:232
+#: src/ututi/controllers/group.py:230
 msgid "You already are a member of this group."
 msgstr "Jūs jau priklausote šiai grupei. "
 
-#: src/ututi/controllers/group.py:234
+#: src/ututi/controllers/group.py:232
 msgid "Your request to join the group is still being processed."
 msgstr "Jūsų prašymas prisijungti prie grupės vis dar svarstomas. Kantrybės."
 
-#: src/ututi/controllers/group.py:259
+#: src/ututi/controllers/group.py:257
 msgid "The group's front page was updated."
 msgstr "Grupės puslapis buvo atnaujintas."
 
-#: src/ututi/controllers/group.py:325
+#: src/ututi/controllers/group.py:323
 msgid "Administrator"
 msgstr "Administratorius"
 
-#: src/ututi/controllers/group.py:326
+#: src/ututi/controllers/group.py:324
 msgid "Member"
 msgstr "Narys"
 
-#: src/ututi/controllers/group.py:327
+#: src/ututi/controllers/group.py:325
 #: src/ututi/templates_py/portlets/group.mako.py:616
 msgid "Leave group"
 msgstr "Palikti šią grupę"
 
-#: src/ututi/controllers/group.py:622
+#: src/ututi/controllers/group.py:620
 msgid "Users invited."
 msgstr "Nariai pakviesti."
 
-#: src/ututi/controllers/group.py:624
+#: src/ututi/controllers/group.py:622
 #, python-format
 msgid "Invalid email addresses detected: %s"
 msgstr "Rasta neteisingų el. pašto adresų: %s"
 
-#: src/ututi/controllers/group.py:639
+#: src/ututi/controllers/group.py:637
 #, python-format
 msgid "Congratulations! You are now a member of the group '%s'"
 msgstr "Sveikiname prisijungus prie grupės '%s' !"
 
-#: src/ututi/controllers/group.py:641
+#: src/ututi/controllers/group.py:639
 #, python-format
 msgid "Invitation to group '%s' rejected."
 msgstr "Kvietimas į grupę '%s' atmestas. Liūdna.."
 
-#: src/ututi/controllers/group.py:662
+#: src/ututi/controllers/group.py:661
 #, python-format
 msgid "New member %s added."
 msgstr "Pridėtas naujas narys %s."
@@ -361,6 +361,16 @@ msgstr "Ututi - pakvietimas į grupę"
 #: src/ututi/lib/emails.py:51
 msgid "Ututi password recovery"
 msgstr "Ututi slaptažodžio atstatymas"
+
+#: src/ututi/lib/emails.py:57
+#| msgid "Error confirming membership request."
+msgid "Ututi group membership request"
+msgstr "Prašymas tapti grupės nariu"
+
+#: src/ututi/lib/emails.py:66
+#| msgid "Ututi group invitation"
+msgid "Ututi group membership confirmation"
+msgstr "Ututi - narystės grupėje patvirtinimas"
 
 #: src/ututi/lib/helpers.py:211 src/ututi/templates/admin/files.mako:35
 #: src/ututi/templates/location/edit.mako:36
@@ -828,6 +838,50 @@ msgstr ""
 msgid "Ututi team"
 msgstr "Ututi komanda"
 
+#: src/ututi/templates/emails/group_confirmation.mako:3
+#: src/ututi/templates_py/emails/group_confirmation.mako.py:29
+#, python-format
+#| msgid "Your request to join the group is still being processed."
+msgid "Your request to join the group %(groupname)s has been confirmed."
+msgstr "Jūsų prašymas prisijungti prie grupės %(groupname)s buvo patvirtintas."
+
+#: src/ututi/templates/emails/group_confirmation.mako:5
+#: src/ututi/templates_py/emails/group_confirmation.mako.py:32
+#, python-format
+msgid "You can visit the group's page at this url: %(url)s ."
+msgstr "Grupės puslapį galite pasiekti šiuo adresu: %(url)s ."
+
+#: src/ututi/templates/emails/group_confirmation.mako:7
+#: src/ututi/templates/emails/group_confirmation_deny.mako:5
+#: src/ututi/templates/emails/group_request.mako:5
+#: src/ututi/templates/emails/invitation_nonuser.mako:7
+#: src/ututi/templates/emails/invitation_user.mako:7
+#: src/ututi/templates_py/emails/group_confirmation.mako.py:35
+#: src/ututi/templates_py/emails/group_request.mako.py:32
+#: src/ututi/templates_py/emails/invitation_nonuser.mako.py:34
+#: src/ututi/templates_py/emails/invitation_user.mako.py:34
+msgid "The Ututi team"
+msgstr "Ututi komanda"
+
+#: src/ututi/templates/emails/group_confirmation_deny.mako:3
+#, python-format
+#| msgid "Your request to join the group is still being processed."
+msgid "Your request to join the group %(groupname)s has been denied."
+msgstr "Jūsų prašymas prisijungti prie grupės %(groupname)s buvo atmestas."
+
+#: src/ututi/templates/emails/group_request.mako:1
+#: src/ututi/templates_py/emails/group_request.mako.py:26
+#, python-format
+#| msgid "%(author)s has invited You to join the group %(group)s."
+msgid "%(fullname)s has requested to become a member of the group %(groupname)s."
+msgstr "%(fullname)s nori tapti grupės %(groupname)s nariu."
+
+#: src/ututi/templates/emails/group_request.mako:3
+#: src/ututi/templates_py/emails/group_request.mako.py:29
+#, python-format
+msgid "You can confirm or deny this request at this url: %(url)s ."
+msgstr "Šį prašymą priimti arba atmesti galite adresu: %(url)s ."
+
 #: src/ututi/templates/emails/invitation_nonuser.mako:1
 #: src/ututi/templates/emails/invitation_user.mako:3
 #: src/ututi/templates_py/emails/invitation_nonuser.mako.py:25
@@ -848,13 +902,6 @@ msgstr "Norint patekti į grupę reikia būti registruotam Ututi naudotojui. "
 #, python-format
 msgid "You can do this by following this link: %(link)s ."
 msgstr "Tai galima padaryti paspaudus %(link)s ."
-
-#: src/ututi/templates/emails/invitation_nonuser.mako:7
-#: src/ututi/templates/emails/invitation_user.mako:7
-#: src/ututi/templates_py/emails/invitation_nonuser.mako.py:34
-#: src/ututi/templates_py/emails/invitation_user.mako.py:34
-msgid "The Ututi team"
-msgstr "Ututi komanda"
 
 #: src/ututi/templates/emails/invitation_user.mako:5
 #: src/ututi/templates_py/emails/invitation_user.mako.py:31
@@ -2136,10 +2183,4 @@ msgstr ""
 #: src/ututi/templates_py/subject/home.mako.py:127
 msgid "Subject files"
 msgstr "Dalyko failai"
-
-#~ msgid "Ututi user wants to join your group."
-#~ msgstr "Vartotojas nori prisijungti prie jūsų administruojamos grupės."
-
-#~ msgid "Post new topic"
-#~ msgstr "Nauja tema"
 

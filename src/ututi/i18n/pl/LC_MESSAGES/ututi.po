@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-10-07 19:02+0300\n"
+"PO-Revision-Date: 2009-10-08 09:37+0300\n"
 "Last-Translator: Jaroslav Šatkevič <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -24,7 +24,7 @@ msgid ""
 "something else?"
 msgstr ""
 
-#: src/ututi/controllers/files.py:67 src/ututi/controllers/group.py:194
+#: src/ututi/controllers/files.py:67 src/ututi/controllers/group.py:191
 #: src/ututi/templates/admin/files.mako:7
 #: src/ututi/templates_py/files.mako.py:39
 #: src/ututi/templates_py/subject_home.mako.py:46
@@ -36,20 +36,20 @@ msgstr "Dokumenty"
 msgid "You have no right to download this file."
 msgstr ""
 
-#: src/ututi/controllers/group.py:58
+#: src/ututi/controllers/group.py:55
 msgid "Such id already exists, choose a different one."
 msgstr "Takie ID już istnieje. Wybierz inne."
 
-#: src/ututi/controllers/group.py:59
+#: src/ututi/controllers/group.py:56
 msgid "Id cannot be used as an email address."
 msgstr "ID nie może być wykorzystywane jako adres e-mail"
 
-#: src/ututi/controllers/group.py:82
+#: src/ututi/controllers/group.py:79
 #, python-format
 msgid "Bad file type, only files of the types '%(allowed)s' are supported."
 msgstr "Niewłaściwy rodzaj pliku. Dozwolone formaty:'%(allowed)s'"
 
-#: src/ututi/controllers/group.py:182 src/ututi/controllers/profile.py:55
+#: src/ututi/controllers/group.py:179 src/ututi/controllers/profile.py:55
 #: src/ututi/templates/group/home.mako:44
 #: src/ututi/templates/profile/home.mako:7
 #: src/ututi/templates_py/group/home.mako.py:82
@@ -57,11 +57,11 @@ msgstr "Niewłaściwy rodzaj pliku. Dozwolone formaty:'%(allowed)s'"
 msgid "What's new?"
 msgstr "Nowości"
 
-#: src/ututi/controllers/group.py:186
+#: src/ututi/controllers/group.py:183
 msgid "Forum"
 msgstr "Forum"
 
-#: src/ututi/controllers/group.py:190 src/ututi/templates/group/members.mako:17
+#: src/ututi/controllers/group.py:187 src/ututi/templates/group/members.mako:17
 #: src/ututi/templates/group/members_admin.mako:22
 #: src/ututi/templates_py/group_members.mako.py:38
 #: src/ututi/templates_py/group/members.mako.py:50
@@ -69,14 +69,14 @@ msgstr "Forum"
 msgid "Members"
 msgstr "Użytkownicy"
 
-#: src/ututi/controllers/group.py:198 src/ututi/templates/admin/subjects.mako:7
+#: src/ututi/controllers/group.py:195 src/ututi/templates/admin/subjects.mako:7
 #: src/ututi/templates_py/subjects.mako.py:38
 #: src/ututi/templates_py/admin/subjects.mako.py:38
 #: src/ututi/templates_py/home/findgroup.mako.py:103
 msgid "Subjects"
 msgstr "Przedmioty"
 
-#: src/ututi/controllers/group.py:212
+#: src/ututi/controllers/group.py:209
 msgid ""
 "The group's page was hidden. You can show it again by editing the group's"
 " settings."
@@ -84,57 +84,57 @@ msgstr ""
 "Strona grupy została ukryta. Żeby pokazać ją innym - zmień ustawienia "
 "grupy"
 
-#: src/ututi/controllers/group.py:230
+#: src/ututi/controllers/group.py:228
 msgid ""
 "Your request to join the group was forwarded to the group's "
 "administrators. Thank You!"
 msgstr "Twoje zgłoszenie zostało wysłane do administratora grupy. Dziękujemy!"
 
-#: src/ututi/controllers/group.py:232
+#: src/ututi/controllers/group.py:230
 msgid "You already are a member of this group."
 msgstr "Już należysz do tej grupy."
 
-#: src/ututi/controllers/group.py:234
+#: src/ututi/controllers/group.py:232
 msgid "Your request to join the group is still being processed."
 msgstr "Twoje zgłoszenie do grupy jeszcze nie zostało zaakceptowane."
 
-#: src/ututi/controllers/group.py:259
+#: src/ututi/controllers/group.py:257
 msgid "The group's front page was updated."
 msgstr "Strona główna grupy została zaktualizowana."
 
-#: src/ututi/controllers/group.py:325
+#: src/ututi/controllers/group.py:323
 msgid "Administrator"
 msgstr "Administrator"
 
-#: src/ututi/controllers/group.py:326
+#: src/ututi/controllers/group.py:324
 msgid "Member"
 msgstr "Członek"
 
-#: src/ututi/controllers/group.py:327
+#: src/ututi/controllers/group.py:325
 #: src/ututi/templates_py/portlets/group.mako.py:616
 msgid "Leave group"
 msgstr "Wyjdź z grupy"
 
-#: src/ututi/controllers/group.py:622
+#: src/ututi/controllers/group.py:620
 msgid "Users invited."
 msgstr "Zaproszeni użytkownicy"
 
-#: src/ututi/controllers/group.py:624
+#: src/ututi/controllers/group.py:622
 #, python-format
 msgid "Invalid email addresses detected: %s"
 msgstr "Adresy %s są nieprawidłowe"
 
-#: src/ututi/controllers/group.py:639
+#: src/ututi/controllers/group.py:637
 #, python-format
 msgid "Congratulations! You are now a member of the group '%s'"
 msgstr "Gratulujemy! Właśnie dołączyłeś do grupy '%s'"
 
-#: src/ututi/controllers/group.py:641
+#: src/ututi/controllers/group.py:639
 #, python-format
 msgid "Invitation to group '%s' rejected."
 msgstr "Zaproszenie do grupy '%s' zostało odrzucone"
 
-#: src/ututi/controllers/group.py:662
+#: src/ututi/controllers/group.py:661
 #, python-format
 msgid "New member %s added."
 msgstr "Dodał nowy członek %s."
@@ -331,7 +331,6 @@ msgstr "Usuń"
 
 #: src/ututi/controllers/structureview.py:102
 #, fuzzy
-#| msgid "My information"
 msgid "Information updated."
 msgstr "Moje dane"
 
@@ -363,6 +362,18 @@ msgstr "Zaproszenie Ututi grupy"
 msgid "Ututi password recovery"
 msgstr "Odzyskiwanie hasła Ututi"
 
+#: src/ututi/lib/emails.py:57
+#, fuzzy
+#| msgid "Error confirming membership request."
+msgid "Ututi group membership request"
+msgstr "Błąd w potwierdzeniu prośby o przyjęcie do grupy."
+
+#: src/ututi/lib/emails.py:66
+#, fuzzy
+#| msgid "Ututi group invitation"
+msgid "Ututi group membership confirmation"
+msgstr "Zaproszenie Ututi grupy"
+
 #: src/ututi/lib/helpers.py:211 src/ututi/templates/admin/files.mako:35
 #: src/ututi/templates/location/edit.mako:36
 #: src/ututi/templates/structure/edit.mako:45
@@ -388,7 +399,6 @@ msgstr "Lokalizacja nie istnieje."
 
 #: src/ututi/lib/validators.py:61
 #, fuzzy
-#| msgid "Such id already exists, choose a different one."
 msgid "Such short title already exists, choose a different one."
 msgstr "Takie ID już istnieje. Wybierz inne."
 
@@ -648,7 +658,6 @@ msgstr "zapomniałeś hasła?"
 
 #: src/ututi/templates/base.mako:155 src/ututi/templates_py/base.mako.py:441
 #, fuzzy
-#| msgid "Logo"
 msgid "logo"
 msgstr "Logo"
 
@@ -821,6 +830,50 @@ msgstr ""
 msgid "Ututi team"
 msgstr "Załoga Ututi"
 
+#: src/ututi/templates/emails/group_confirmation.mako:3
+#: src/ututi/templates_py/emails/group_confirmation.mako.py:29
+#, fuzzy, python-format
+#| msgid "Your request to join the group is still being processed."
+msgid "Your request to join the group %(groupname)s has been confirmed."
+msgstr "Twoje zgłoszenie do grupy jeszcze nie zostało zaakceptowane."
+
+#: src/ututi/templates/emails/group_confirmation.mako:5
+#: src/ututi/templates_py/emails/group_confirmation.mako.py:32
+#, python-format
+msgid "You can visit the group's page at this url: %(url)s ."
+msgstr ""
+
+#: src/ututi/templates/emails/group_confirmation.mako:7
+#: src/ututi/templates/emails/group_confirmation_deny.mako:5
+#: src/ututi/templates/emails/group_request.mako:5
+#: src/ututi/templates/emails/invitation_nonuser.mako:7
+#: src/ututi/templates/emails/invitation_user.mako:7
+#: src/ututi/templates_py/emails/group_confirmation.mako.py:35
+#: src/ututi/templates_py/emails/group_request.mako.py:32
+#: src/ututi/templates_py/emails/invitation_nonuser.mako.py:34
+#: src/ututi/templates_py/emails/invitation_user.mako.py:34
+msgid "The Ututi team"
+msgstr "Załoga Ututi"
+
+#: src/ututi/templates/emails/group_confirmation_deny.mako:3
+#, fuzzy, python-format
+#| msgid "Your request to join the group is still being processed."
+msgid "Your request to join the group %(groupname)s has been denied."
+msgstr "Twoje zgłoszenie do grupy jeszcze nie zostało zaakceptowane."
+
+#: src/ututi/templates/emails/group_request.mako:1
+#: src/ututi/templates_py/emails/group_request.mako.py:26
+#, fuzzy, python-format
+#| msgid "%(author)s has invited You to join the group %(group)s."
+msgid "%(fullname)s has requested to become a member of the group %(groupname)s."
+msgstr ""
+
+#: src/ututi/templates/emails/group_request.mako:3
+#: src/ututi/templates_py/emails/group_request.mako.py:29
+#, python-format
+msgid "You can confirm or deny this request at this url: %(url)s ."
+msgstr ""
+
 #: src/ututi/templates/emails/invitation_nonuser.mako:1
 #: src/ututi/templates/emails/invitation_user.mako:3
 #: src/ututi/templates_py/emails/invitation_nonuser.mako.py:25
@@ -841,13 +894,6 @@ msgstr "Nie jesteś użytkownikiem Ututi. Żeby dołączyć do grupy zaloguj si�
 #, python-format
 msgid "You can do this by following this link: %(link)s ."
 msgstr "Możesz to zrobić aktywując następujący link:%(link)s "
-
-#: src/ututi/templates/emails/invitation_nonuser.mako:7
-#: src/ututi/templates/emails/invitation_user.mako:7
-#: src/ututi/templates_py/emails/invitation_nonuser.mako.py:34
-#: src/ututi/templates_py/emails/invitation_user.mako.py:34
-msgid "The Ututi team"
-msgstr "Załoga Ututi"
 
 #: src/ututi/templates/emails/invitation_user.mako:5
 #: src/ututi/templates_py/emails/invitation_user.mako.py:31
@@ -1256,7 +1302,6 @@ msgstr "Zakończ i idź do strony startowej grupy"
 #: src/ututi/templates_py/group/subjects.mako.py:396
 #: src/ututi/templates_py/profile/subjects.mako.py:304
 #, fuzzy, python-format
-#| msgid "New subject %(link_to_subject)s was created"
 msgid "Subject %(subj)s was selected."
 msgstr "Został dodany nowy przedmiot %(subj)s"
 
@@ -1386,7 +1431,6 @@ msgstr "Logo"
 #: src/ututi/templates/location/university.mako:22
 #: src/ututi/templates_py/location/university.mako.py:70
 #, fuzzy
-#| msgid "Department"
 msgid "department list"
 msgstr "Wydział"
 
@@ -1637,7 +1681,6 @@ msgstr[1] "%(count)s dokumentów"
 #: src/ututi/templates_py/portlets/group.mako.py:346
 #: src/ututi/templates_py/sections/files.mako.py:150
 #, fuzzy
-#| msgid "Upload file"
 msgid "upload file to..."
 msgstr "Dodaj dokument"
 
@@ -1654,7 +1697,6 @@ msgstr "Nowy folder:"
 #: src/ututi/templates/sections/files.mako:302
 #: src/ututi/templates_py/sections/files.mako.py:206
 #, fuzzy
-#| msgid "Create new"
 msgid "create"
 msgstr "Utwórz"
 
@@ -1748,21 +1790,18 @@ msgstr ""
 #: src/ututi/templates/subject/home.mako:26
 #: src/ututi/templates_py/subject/home.mako.py:78
 #, fuzzy
-#| msgid "select watched subjects"
 msgid "Restore deleted subject"
 msgstr "wybierz obserwowane przedmioty"
 
 #: src/ututi/templates/subject/home.mako:27
 #: src/ututi/templates_py/subject/home.mako.py:81
 #, fuzzy
-#| msgid "More subjects"
 msgid "Restore subject"
 msgstr "Więcej przedmiotów"
 
 #: src/ututi/templates/subject/home.mako:31
 #: src/ututi/templates_py/subject/home.mako.py:87
 #, fuzzy
-#| msgid "The subject has been removed from your watched subjects list."
 msgid ""
 "Subject has been deleted, it will soon disappear from your watched "
 "subjects list."
@@ -1941,7 +1980,6 @@ msgstr ""
 #: src/ututi/templates_py/portlets/group.mako.py:138
 #: src/ututi/templates_py/portlets/group.mako.py:140
 #, fuzzy
-#| msgid "Group members"
 msgid "All group members"
 msgstr "Członkowie grupy"
 
@@ -1955,7 +1993,6 @@ msgstr "Forum grupy jest puste."
 
 #: src/ututi/templates_py/portlets/group.mako.py:296
 #, fuzzy
-#| msgid "Group Files"
 msgid "Group files"
 msgstr "Dokumenty grupy"
 
@@ -1970,7 +2007,6 @@ msgstr ""
 #: src/ututi/templates_py/portlets/group.mako.py:341
 #: src/ututi/templates_py/portlets/group.mako.py:343
 #, fuzzy
-#| msgid "Group Files"
 msgid "All group files"
 msgstr "Dokumenty grupy"
 
@@ -1978,13 +2014,11 @@ msgstr "Dokumenty grupy"
 #: src/ututi/templates_py/portlets/group.mako.py:475
 #: src/ututi/templates_py/portlets/group.mako.py:477
 #, fuzzy
-#| msgid "select watched subjects"
 msgid "All watched subjects"
 msgstr "wybierz obserwowane przedmioty"
 
 #: src/ututi/templates_py/portlets/group.mako.py:447
 #, fuzzy
-#| msgid "You are not watching any subjects."
 msgid "Your group is not watching any subjects!"
 msgstr "Nie obserwujesz żadnego przedmiotu"
 
@@ -2011,7 +2045,6 @@ msgstr "Zmień ustawienia grupy"
 
 #: src/ututi/templates_py/portlets/group.mako.py:594
 #, fuzzy
-#| msgid "Group settings"
 msgid "My group settings"
 msgstr "Ustawienia grupy"
 
@@ -2031,13 +2064,11 @@ msgstr "Ostatnie zmiany"
 #: src/ututi/templates_py/portlets/group.mako.py:726
 #: src/ututi/templates_py/portlets/group.mako.py:728
 #, fuzzy
-#| msgid "Latest changes"
 msgid "All changes"
 msgstr "Ostatnie zmiany"
 
 #: src/ututi/templates_py/portlets/structure.mako.py:67
 #, fuzzy
-#| msgid "Delete group"
 msgid "Latest groups"
 msgstr "Usuń grupę"
 
@@ -2047,7 +2078,6 @@ msgstr ""
 
 #: src/ututi/templates_py/portlets/structure.mako.py:131
 #, fuzzy
-#| msgid "groups"
 msgid "All groups"
 msgstr "grupy"
 
@@ -2058,20 +2088,16 @@ msgstr "Utwórz grupę"
 
 #: src/ututi/templates_py/portlets/structure.mako.py:190
 #, fuzzy
-#| msgid "Subject information"
 msgid "University information"
 msgstr "Informacje o przedmiocie"
 
 #: src/ututi/templates_py/portlets/structure.mako.py:202
 #, fuzzy
-#| msgid "My information"
 msgid "Faculty information"
 msgstr "Moje dane"
 
 #: src/ututi/templates_py/portlets/structure.mako.py:251
 #, fuzzy, python-format
-#| msgid "%(count)s member"
-#| msgid_plural "%(count)s members"
 msgid "%(count)s <em>subject</em>"
 msgid_plural "%(count)s <em>subjects</em>"
 msgstr[0] "%(count)s członek"
@@ -2079,8 +2105,6 @@ msgstr[1] ""
 
 #: src/ututi/templates_py/portlets/structure.mako.py:261
 #, fuzzy, python-format
-#| msgid "%(count)s member"
-#| msgid_plural "%(count)s members"
 msgid "%(count)s <em>group</em>"
 msgid_plural "%(count)s <em>groups</em>"
 msgstr[0] "%(count)s członek"
@@ -2088,8 +2112,6 @@ msgstr[1] ""
 
 #: src/ututi/templates_py/portlets/structure.mako.py:271
 #, fuzzy, python-format
-#| msgid "%(count)s file"
-#| msgid_plural "%(count)s files"
 msgid "%(count)s <em>file</em>"
 msgid_plural "%(count)s <em>files</em>"
 msgstr[0] " %(count)s dokument"
@@ -2115,7 +2137,6 @@ msgstr ""
 
 #: src/ututi/templates_py/portlets/subject.mako.py:152
 #, fuzzy
-#| msgid "Edit subject"
 msgid "Delete subject"
 msgstr "Edytuj przedmiot"
 
@@ -2150,16 +2171,4 @@ msgstr ""
 #: src/ututi/templates_py/subject/home.mako.py:127
 msgid "Subject files"
 msgstr "Dokumenty przedmiotu"
-
-#~ msgid "Hello"
-#~ msgstr "Witaj"
-
-#~ msgid "Post new topic"
-#~ msgstr "Zamieść nowy temat"
-
-#~ msgid "More"
-#~ msgstr "Więcej"
-
-#~ msgid "members"
-#~ msgstr "członkowie"
 

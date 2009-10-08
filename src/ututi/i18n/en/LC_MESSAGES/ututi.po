@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-10-07 18:44+0300\n"
+"PO-Revision-Date: 2009-10-08 09:31+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -24,7 +24,7 @@ msgid ""
 "something else?"
 msgstr ""
 
-#: src/ututi/controllers/files.py:67 src/ututi/controllers/group.py:194
+#: src/ututi/controllers/files.py:67 src/ututi/controllers/group.py:191
 #: src/ututi/templates/admin/files.mako:7
 #: src/ututi/templates_py/files.mako.py:39
 #: src/ututi/templates_py/subject_home.mako.py:46
@@ -36,20 +36,20 @@ msgstr ""
 msgid "You have no right to download this file."
 msgstr ""
 
-#: src/ututi/controllers/group.py:58
+#: src/ututi/controllers/group.py:55
 msgid "Such id already exists, choose a different one."
 msgstr ""
 
-#: src/ututi/controllers/group.py:59
+#: src/ututi/controllers/group.py:56
 msgid "Id cannot be used as an email address."
 msgstr ""
 
-#: src/ututi/controllers/group.py:82
+#: src/ututi/controllers/group.py:79
 #, python-format
 msgid "Bad file type, only files of the types '%(allowed)s' are supported."
 msgstr ""
 
-#: src/ututi/controllers/group.py:182 src/ututi/controllers/profile.py:55
+#: src/ututi/controllers/group.py:179 src/ututi/controllers/profile.py:55
 #: src/ututi/templates/group/home.mako:44
 #: src/ututi/templates/profile/home.mako:7
 #: src/ututi/templates_py/group/home.mako.py:82
@@ -57,11 +57,11 @@ msgstr ""
 msgid "What's new?"
 msgstr ""
 
-#: src/ututi/controllers/group.py:186
+#: src/ututi/controllers/group.py:183
 msgid "Forum"
 msgstr ""
 
-#: src/ututi/controllers/group.py:190 src/ututi/templates/group/members.mako:17
+#: src/ututi/controllers/group.py:187 src/ututi/templates/group/members.mako:17
 #: src/ututi/templates/group/members_admin.mako:22
 #: src/ututi/templates_py/group_members.mako.py:38
 #: src/ututi/templates_py/group/members.mako.py:50
@@ -69,70 +69,70 @@ msgstr ""
 msgid "Members"
 msgstr ""
 
-#: src/ututi/controllers/group.py:198 src/ututi/templates/admin/subjects.mako:7
+#: src/ututi/controllers/group.py:195 src/ututi/templates/admin/subjects.mako:7
 #: src/ututi/templates_py/subjects.mako.py:38
 #: src/ututi/templates_py/admin/subjects.mako.py:38
 #: src/ututi/templates_py/home/findgroup.mako.py:103
 msgid "Subjects"
 msgstr ""
 
-#: src/ututi/controllers/group.py:212
+#: src/ututi/controllers/group.py:209
 msgid ""
 "The group's page was hidden. You can show it again by editing the group's"
 " settings."
 msgstr ""
 
-#: src/ututi/controllers/group.py:230
+#: src/ututi/controllers/group.py:228
 msgid ""
 "Your request to join the group was forwarded to the group's "
 "administrators. Thank You!"
 msgstr ""
 
-#: src/ututi/controllers/group.py:232
+#: src/ututi/controllers/group.py:230
 msgid "You already are a member of this group."
 msgstr ""
 
-#: src/ututi/controllers/group.py:234
+#: src/ututi/controllers/group.py:232
 msgid "Your request to join the group is still being processed."
 msgstr ""
 
-#: src/ututi/controllers/group.py:259
+#: src/ututi/controllers/group.py:257
 msgid "The group's front page was updated."
 msgstr ""
 
-#: src/ututi/controllers/group.py:325
+#: src/ututi/controllers/group.py:323
 msgid "Administrator"
 msgstr ""
 
-#: src/ututi/controllers/group.py:326
+#: src/ututi/controllers/group.py:324
 msgid "Member"
 msgstr ""
 
-#: src/ututi/controllers/group.py:327
+#: src/ututi/controllers/group.py:325
 #: src/ututi/templates_py/portlets/group.mako.py:616
 msgid "Leave group"
 msgstr ""
 
-#: src/ututi/controllers/group.py:622
+#: src/ututi/controllers/group.py:620
 msgid "Users invited."
 msgstr ""
 
-#: src/ututi/controllers/group.py:624
+#: src/ututi/controllers/group.py:622
 #, python-format
 msgid "Invalid email addresses detected: %s"
 msgstr ""
 
-#: src/ututi/controllers/group.py:639
+#: src/ututi/controllers/group.py:637
 #, python-format
 msgid "Congratulations! You are now a member of the group '%s'"
 msgstr ""
 
-#: src/ututi/controllers/group.py:641
+#: src/ututi/controllers/group.py:639
 #, python-format
 msgid "Invitation to group '%s' rejected."
 msgstr ""
 
-#: src/ututi/controllers/group.py:662
+#: src/ututi/controllers/group.py:661
 #, python-format
 msgid "New member %s added."
 msgstr ""
@@ -351,6 +351,14 @@ msgstr ""
 
 #: src/ututi/lib/emails.py:51
 msgid "Ututi password recovery"
+msgstr ""
+
+#: src/ututi/lib/emails.py:57
+msgid "Ututi group membership request"
+msgstr ""
+
+#: src/ututi/lib/emails.py:66
+msgid "Ututi group membership confirmation"
 msgstr ""
 
 #: src/ututi/lib/helpers.py:211 src/ututi/templates/admin/files.mako:35
@@ -795,6 +803,47 @@ msgstr ""
 msgid "Ututi team"
 msgstr ""
 
+#: src/ututi/templates/emails/group_confirmation.mako:3
+#: src/ututi/templates_py/emails/group_confirmation.mako.py:29
+#, python-format
+msgid "Your request to join the group %(groupname)s has been confirmed."
+msgstr ""
+
+#: src/ututi/templates/emails/group_confirmation.mako:5
+#: src/ututi/templates_py/emails/group_confirmation.mako.py:32
+#, python-format
+msgid "You can visit the group's page at this url: %(url)s ."
+msgstr ""
+
+#: src/ututi/templates/emails/group_confirmation.mako:7
+#: src/ututi/templates/emails/group_confirmation_deny.mako:5
+#: src/ututi/templates/emails/group_request.mako:5
+#: src/ututi/templates/emails/invitation_nonuser.mako:7
+#: src/ututi/templates/emails/invitation_user.mako:7
+#: src/ututi/templates_py/emails/group_confirmation.mako.py:35
+#: src/ututi/templates_py/emails/group_request.mako.py:32
+#: src/ututi/templates_py/emails/invitation_nonuser.mako.py:34
+#: src/ututi/templates_py/emails/invitation_user.mako.py:34
+msgid "The Ututi team"
+msgstr ""
+
+#: src/ututi/templates/emails/group_confirmation_deny.mako:3
+#, python-format
+msgid "Your request to join the group %(groupname)s has been denied."
+msgstr ""
+
+#: src/ututi/templates/emails/group_request.mako:1
+#: src/ututi/templates_py/emails/group_request.mako.py:26
+#, python-format
+msgid "%(fullname)s has requested to become a member of the group %(groupname)s."
+msgstr ""
+
+#: src/ututi/templates/emails/group_request.mako:3
+#: src/ututi/templates_py/emails/group_request.mako.py:29
+#, python-format
+msgid "You can confirm or deny this request at this url: %(url)s ."
+msgstr ""
+
 #: src/ututi/templates/emails/invitation_nonuser.mako:1
 #: src/ututi/templates/emails/invitation_user.mako:3
 #: src/ututi/templates_py/emails/invitation_nonuser.mako.py:25
@@ -814,13 +863,6 @@ msgstr ""
 #: src/ututi/templates_py/emails/invitation_nonuser.mako.py:31
 #, python-format
 msgid "You can do this by following this link: %(link)s ."
-msgstr ""
-
-#: src/ututi/templates/emails/invitation_nonuser.mako:7
-#: src/ututi/templates/emails/invitation_user.mako:7
-#: src/ututi/templates_py/emails/invitation_nonuser.mako.py:34
-#: src/ututi/templates_py/emails/invitation_user.mako.py:34
-msgid "The Ututi team"
 msgstr ""
 
 #: src/ututi/templates/emails/invitation_user.mako:5
@@ -2065,10 +2107,4 @@ msgstr ""
 #: src/ututi/templates_py/subject/home.mako.py:127
 msgid "Subject files"
 msgstr ""
-
-#~ msgid "Ututi user wants to join your group."
-#~ msgstr ""
-
-#~ msgid "Post new topic"
-#~ msgstr ""
 
