@@ -220,6 +220,21 @@ Let's try requesting to join the group:
     Close
     Your request to join the group was forwarded to the group's administrators. Thank You!
 
+The group's administrator should receive an email:
+    >>> print mail_queue.pop().message
+    MIME-Version: 1.0
+    Content-Type: text/plain; charset="us-ascii"
+    Content-Transfer-Encoding: 7bit
+    From: info@ututi.lt
+    To: admin@ututi.lt
+    Subject: Ututi group membership request
+    <BLANKLINE>
+    Second user has requested to become a member of the group Test group.
+    <BLANKLINE>
+    You can confirm or deny this request at this url: http://localhost/group/test/members .
+    <BLANKLINE>
+    The Ututi team
+
 The group's administrator should now see the request in the members view.
 
     >>> browser.getLink('log out').click()

@@ -49,3 +49,14 @@ def email_password_reset(user, email):
                   extra_vars={'user' : user})
 
     send_email(config['ututi_email_from'], email, _('Ututi password recovery'), text)
+
+def group_request_email(group, user):
+    """Send an email to administrators of a group, informing of a membership request."""
+    text = render('/emails/group_request.mako', extra_vars={'group': group, 'user': user})
+    for admin in group.administrators:
+        send_email(config['ututi_email_from'], admin.emails[0].email, _('Ututi group membership request'), text)
+
+def group_confirmation_email(group, user):
+    """Send an email to the user when his request to join a group is confirmed."""
+    text = render('/emails/group_confirm.mako', extra_vars={'group': group, 'user': user})
+    send_email(config['ututi_email_from'], user.emails[0].email, _('Ututi group membership request'), text)

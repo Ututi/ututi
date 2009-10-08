@@ -19,8 +19,6 @@ from formencode.foreach import ForEach
 
 from formencode.variabledecode import NestedVariables
 
-from sqlalchemy.sql.expression import or_
-from sqlalchemy.sql.expression import desc
 from sqlalchemy.sql.expression import not_
 from sqlalchemy.orm.exc import NoResultFound
 
@@ -30,16 +28,15 @@ from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator, TagsValidator
 
-from ututi.model.events import Event
 from ututi.model import LocationTag, User, GroupMember, GroupMembershipType
 from ututi.model import meta, Group, SimpleTag, Subject, ContentItem, PendingInvitation, PendingRequest
 from ututi.controllers.subject import SubjectAddMixin
 from ututi.controllers.subject import NewSubjectForm
 from ututi.controllers.search import SearchSubmit
-from ututi.lib.security import check_crowds
 from ututi.lib.security import is_root, check_crowds
 from ututi.lib.security import ActionProtector
 from ututi.lib.search import search_query
+from ututi.lib.emails import group_request_email
 
 log = logging.getLogger(__name__)
 
@@ -226,6 +223,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         request = PendingRequest.get(c.user, group)
         if request is None and not group.is_member(c.user):
             group.request_join(c.user)
+            group_request_email(group, c.user)
             meta.Session.commit()
             h.flash(_("Your request to join the group was forwarded to the group's administrators. Thank You!"))
         elif group.is_member(c.user):
