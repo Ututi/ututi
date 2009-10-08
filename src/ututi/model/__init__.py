@@ -4,6 +4,7 @@ import os
 import hashlib
 import sha, binascii
 import lxml
+import logging
 import warnings
 import string
 from random import Random
@@ -32,6 +33,7 @@ from ututi.lib.emails import group_invitation_email
 from ututi.lib.security import check_crowds
 from nous.mailpost import copy_chunked
 
+log = logging.getLogger(__name__)
 
 def init_model(engine):
     """Call me before using any of the tables or classes in the model"""
@@ -359,6 +361,14 @@ user_monitored_subjects_table = None
 
 class User(object):
 
+    def send(self, msg):
+        """Send a message to the user."""
+        email = self.emails[0]
+        if email.confirmed or msg.force:
+            msg.send(email.email)
+        else:
+            log.info("Could not send message to uncofirmed email %(email)s" % dict(email=email.email))
+
     @classmethod
     def authenticate(cls, username, password):
         try:
@@ -507,6 +517,9 @@ group_watched_subjects_table = None
 groups_table = None
 
 class Group(ContentItem, FolderMixin):
+
+    def send(self, msg):
+        msg.send([mship.user for mship in self.members])
 
     @classmethod
     def get(cls, id):
