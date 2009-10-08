@@ -56,7 +56,11 @@ def group_request_email(group, user):
     for admin in group.administrators:
         send_email(config['ututi_email_from'], admin.emails[0].email, _('Ututi group membership request'), text)
 
-def group_confirmation_email(group, user):
+def group_confirmation_email(group, user, status):
     """Send an email to the user when his request to join a group is confirmed."""
-    text = render('/emails/group_confirm.mako', extra_vars={'group': group, 'user': user})
-    send_email(config['ututi_email_from'], user.emails[0].email, _('Ututi group membership request'), text)
+    if status:
+        #the request has been confirmed
+        text = render('/emails/group_confirmation.mako', extra_vars={'group': group, 'user': user})
+    else:
+        text = render('/emails/group_confirmation_deny.mako', extra_vars={'group': group, 'user': user})
+    send_email(config['ututi_email_from'], user.emails[0].email, _('Ututi group membership confirmation'), text)

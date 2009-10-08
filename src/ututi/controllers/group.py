@@ -36,7 +36,7 @@ from ututi.controllers.search import SearchSubmit
 from ututi.lib.security import is_root, check_crowds
 from ututi.lib.security import ActionProtector
 from ututi.lib.search import search_query
-from ututi.lib.emails import group_request_email
+from ututi.lib.emails import group_request_email, group_confirmation_email
 
 log = logging.getLogger(__name__)
 
@@ -657,8 +657,10 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
                 request = meta.Session.query(PendingRequest).filter_by(hash=self.form_result.get('hash_code', '')).one()
                 if (self.form_result.get('action', 'deny') == 'confirm'):
                     c.group.add_member(request.user)
+                    group_confirmation_email(group, request.user, True)
                     h.flash(_(u"New member %s added.") % request.user.fullname)
                 else:
+                    group_confirmation_email(group, request.user, False)
                     h.flash(_(u"Group membership denied to %s.") % request.user.fullname)
                 meta.Session.delete(request)
                 meta.Session.commit()

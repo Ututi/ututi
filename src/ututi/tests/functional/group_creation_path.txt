@@ -252,6 +252,24 @@ The group's administrator should now see the request in the members view.
 
     >>> browser.getControl('Confirm', index=0).click()
 
+
+After the confirmation, the new member should receive an email:
+    >>> print mail_queue.pop().message
+    MIME-Version: 1.0
+    Content-Type: text/plain; charset="us-ascii"
+    Content-Transfer-Encoding: 7bit
+    From: info@ututi.lt
+    To: user2@ututi.lt
+    Subject: Ututi group membership confirmation
+    <BLANKLINE>
+    Second user,
+    <BLANKLINE>
+    Your request to join the group Test group has been confirmed.
+    <BLANKLINE>
+    You can visit the group's page at this url: http://localhost/group/test .
+    <BLANKLINE>
+    The Ututi team
+
 And the new member should be able to access the group now.
 
     >>> browser3.open('http://localhost/group/test/members')
