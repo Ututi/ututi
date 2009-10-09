@@ -4,6 +4,7 @@ import os
 import logging
 import base64
 
+from sqlalchemy.sql.expression import not_
 from magic import from_buffer
 from datetime import date
 
@@ -174,7 +175,11 @@ class AdminController(BaseController):
 
     @ActionProtector('root')
     def files(self):
-        c.files = meta.Session.query(File).all()
+        c.files = meta.Session.query(File)\
+            .order_by(File.created_on)\
+            .filter(File.title != u'text.html')\
+            .filter(File.title != u'Null File')\
+            .all()
         return render('admin/files.mako')
 
     @ActionProtector("root")
@@ -184,5 +189,6 @@ class AdminController(BaseController):
 
     @ActionProtector("root")
     def subjects(self):
-        c.subjects = meta.Session.query(Subject).all()
+        c.subjects = meta.Session.query(Subject)\
+            .order_by(Subject.created_on).all()
         return render('admin/subjects.mako')

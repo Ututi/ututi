@@ -11,6 +11,7 @@
     %for file in c.files:
          <li>
            <a href="${url(controller='files', action='get', id=file.id)}" class="file-link">${file.title}</a>
+           (<a href="${file.parent.url()}" class="file-link">${getattr(file.parent, 'title', 'email')}</a>)
          </li>
     %endfor
     </ol>
