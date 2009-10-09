@@ -68,6 +68,12 @@ class ProfileController(SearchBaseController):
         return render('/profile/search.mako')
 
     @ActionProtector("user")
+    @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
+    def search_js(self):
+        self._search()
+        return render_mako_def('/search/index.mako','search_results', results=c.results, controller='profile', action='search')
+
+    @ActionProtector("user")
     def index(self):
         c.breadcrumbs.append(self._actions('profile'))
         c.events = meta.Session.query(Event)\

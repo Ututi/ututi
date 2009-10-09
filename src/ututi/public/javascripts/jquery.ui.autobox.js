@@ -76,7 +76,7 @@
 
   function addBox(input, text, name){
     var ii = $('<input type="hidden"></input>');ii.attr('name', name+'item-'+count++);ii.val(text);
-    var li=$('<li class="bit-box"></li>').attr('id', 'bit-' + count)
+    var li=$('<li class="bit-box"></li>').attr('id', 'bit-' + count);
     var inside = $('<div></div>').text(text);
     inside.append($('<a href="#" class="closebutton"></a>')
           .bind('click', function(e) {
@@ -88,6 +88,7 @@
               original_input.val(vals.join(', '));
               li.remove();
               e.preventDefault();
+              $(original_input).change();
           }))
       .append(ii);
     li.append(inside);
@@ -100,6 +101,7 @@
     } else {
       original_input.val(original_input.val() + ", "  + text);
     }
+    $(original_input).change();
   }
 
   $.fn.autoboxMode=function(container, input, size, opt){

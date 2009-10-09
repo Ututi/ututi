@@ -6,6 +6,7 @@ from webhelpers import paginate
 from pylons.controllers.util import redirect_to
 from pylons.decorators import validate
 from pylons import request, c, url
+from pylons.templating import render_mako_def
 
 from ututi.lib.base import BaseController, render
 from ututi.lib.search import search_query
@@ -59,4 +60,9 @@ class SearchController(SearchBaseController):
 
         self._search()
         return render('/search/index.mako')
+
+    @validate(schema=SearchSubmit, post_only = False, on_get = True)
+    def search_js(self):
+        self._search()
+        return render_mako_def('/search/index.mako','search_results', results=c.results, controller='search', action='index')
 

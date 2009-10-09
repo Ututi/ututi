@@ -18,10 +18,13 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
 ${_('Search')}
 </%def>
 
-<%def name="search_form(text='', obj_type='*', tags='', parts=['obj_type', 'text', 'tags'], target=None)">
+<%def name="search_form(text='', obj_type='*', tags='', parts=['obj_type', 'text', 'tags'], target=None, js_target=None, js=False)">
 ${h.javascript_link('/javascripts/js-alternatives.js')|n}
 ${h.javascript_link('/javascripts/search.js')|n}
 <%
+   if js and js_target is None:
+       js = False
+
    if target is None:
        target = url(controller='search', action='index')
 %>
@@ -42,7 +45,7 @@ ${h.javascript_link('/javascripts/search.js')|n}
         %endfor
       </div>
       <div class="non-js">
-        <select name="obj_type">
+        <select name="obj_type" id="obj_type">
           %for value, title in types:
             %if value == obj_type:
               <option value="${value}" selected="selected">${title}</option>
@@ -77,6 +80,28 @@ ${h.javascript_link('/javascripts/search.js')|n}
     %endif
 
   </form>
+  %if js:
+  <script type="text/javascript">
+  //<![CDATA[
+    $(document).ready(function() {
+      %if 'tags' in parts:
+      $('#tags').change(function() {
+         $.post("${js_target}", $(this).parents('form').serialize(), function(data) {
+                $('#search-results-container').replaceWith(data);
+         });
+      });
+      %endif
+      %if 'obj_type' in parts:
+      $('#obj_type').change(function() {
+         $.post("${js_target}", $(this).parents('form').serialize(), function(data) {
+                $('#search-results-container').replaceWith(data);
+         });
+      });
+      %endif
+    });
+  //]]>
+  </script>
+  %endif
 </div>
 </%def>
 
@@ -84,34 +109,46 @@ ${h.javascript_link('/javascripts/search.js')|n}
   ${item.object.snippet()}
 </%def>
 
-<%def name="search_results(results=None, display=None)">
+<%def name="search_results(results=None, display=None, controller=None, action=None)">
 <%
    if display is None:
        display = search_results_item
+   if results == '':
+       results = None
 %>
-<h3 class="underline search-results-title">
-  <span>${_('results')}:</span>
-  <span class="result-count">(${ungettext("found %(count)s result", "found %(count)s results", results.item_count) % dict(count = results.item_count)})</span>
-</h3>
-%if c.results.item_count > 0:
-  <div id="search-results">
-    %for item in results:
-      ${display(item)}
-    %endfor
-  </div>
-%else:
-  <div class="notice">${_('No results found.')}</div>
-  <br />
-%endif
+%if results is not None:
+<div id="search-results-container">
+  <h3 class="underline search-results-title">
+    <span>${_('results')}:</span>
+    <span class="result-count">(${ungettext("found %(count)s result", "found %(count)s results", results.item_count) % dict(count = results.item_count)})</span>
+  </h3>
+  %if c.results.item_count > 0:
+    <div id="search-results">
+      %for item in results:
+        ${display(item)}
+      %endfor
+    </div>
+  %else:
+    <div class="notice">${_('No results found.')}</div>
+    <br />
+  %endif
 
-%if len(results):
-<div id="pager">${results.pager(format='~3~') }</div>
+  %if len(results):
+    %if controller is not None and action is not None:
+    <div id="pager">${results.pager(format='~3~', controller=controller, action=action) }</div>
+    %else:
+    <div id="pager">${results.pager(format='~3~') }</div>
+    %endif
+  %endif
+</div>
+%else:
+<div id="search-results-container"></div>
 %endif
 </%def>
 
 <h1>${_('Search')}</h1>
-${search_form(c.text, c.obj_type, c.tags, parts=['obj_type', 'text', 'tags'])}
-
+${search_form(c.text, c.obj_type, c.tags, parts=['obj_type', 'text', 'tags'], js=True,  js_target=url(controller='search', action='search_js'))}
 %if c.searched :
 ${search_results(c.results)}
 %endif
+
