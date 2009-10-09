@@ -6,7 +6,7 @@ A list of all subjects is show at /subjects.
     >>> browser = Browser.logIn()
 
     >>> browser.open('http://localhost/admin/subjects')
-    >>> browser.printQuery("id('subject_list')//li/a/text()")
+    >>> browser.printQuery("id('subject_list')//li/a[@class='subject-link']/text()")
     Matematinė analizė
 
 The link of the subject leads to its home page.
@@ -80,7 +80,7 @@ You can import more subjects using the admin interface.
     >>> form.getControl('Upload').click()
     >>> browser.url
     'http://localhost/admin/subjects'
-    >>> browser.printQuery("id('subject_list')//li/a/text()")
+    >>> browser.printQuery("id('subject_list')//li/a[@class='subject-link']/text()")
     Matematinė analizė
     Test subject
     Test subject

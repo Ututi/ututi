@@ -62,8 +62,10 @@ Not just stored, it should appear in the files list:
     >>> browser = Browser.logIn()
     >>> browser.open('http://localhost/admin/files')
 
-    >>> browser.printQuery('id("file_list")//a')
-    <a href="/files/get/..." class="file-link">README.txt</a>
+    >>> def listFiles(browser):
+    ...     browser.printQuery('id("file_list")//a[@class="file-link"]/text()')
+    >>> listFiles(browser)
+    README.txt
 
 Also it would be stripped from the actual email and replaced with a
 link to the file on our system:
@@ -118,9 +120,9 @@ repository:
 
     >>> browser.reload()
 
-    >>> browser.printQuery('id("file_list")//a')
-    <a href="/files/get/5" class="file-link">README.txt</a>
-    <a href="/files/get/7" class="file-link">README.txt</a>
+    >>> listFiles(browser)
+    README.txt
+    README.txt
 
 But the link in the email will point to the other "file" entry in the
 list of files:
@@ -176,10 +178,10 @@ add any additional files to the repository:
     >>> listUploads()
     /uploads/cb396bb6/487560f2/6de19949/6051b42e
 
-    >>> browser.printQuery('id("file_list")//a')
-    <a href="/files/get/..." class="file-link">README.txt</a>
-    <a href="/files/get/..." class="file-link">README.txt</a>
-    <a href="/files/get/..." class="file-link">file.txt</a>
+    >>> listFiles(browser)
+    README.txt
+    README.txt
+    file.txt
 
 If a message gets posted more than once, it is simply ignored:
 
@@ -187,10 +189,10 @@ If a message gets posted more than once, it is simply ignored:
     ...                   '20090615145515.GA13472@my_pc',
     ...                   'moderators@groups.ututi.lt')
     >>> browser.open('http://localhost/admin/files')
-    >>> browser.printQuery('id("file_list")//a')
-    <a href="/files/get/..." class="file-link">README.txt</a>
-    <a href="/files/get/..." class="file-link">README.txt</a>
-    <a href="/files/get/..." class="file-link">file.txt</a>
+    >>> listFiles(browser)
+    README.txt
+    README.txt
+    file.txt
 
     >>> mail_queue
     []
