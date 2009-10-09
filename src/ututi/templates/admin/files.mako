@@ -12,8 +12,9 @@
          <li>
            <a href="${url(controller='files', action='get', id=file.id)}" class="file-link">${file.title}</a>
            %if file.parent is not None:
-              (<a href="${file.parent.url()}" class="parent-link">${getattr(file.parent, 'title', 'email')}</a>)
+           (<a href="${file.parent.url()}" class="parent-link">${getattr(file.parent, 'title', 'email')}</a>)
            %endif
+           (<a href="${file.created.url()}" class="author-link">${file.created.fullname}</a>)
          </li>
     %endfor
     </ol>

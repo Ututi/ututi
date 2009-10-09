@@ -4,6 +4,7 @@ import os
 import logging
 import base64
 
+from sqlalchemy.sql.expression import desc
 from sqlalchemy.sql.expression import not_
 from magic import from_buffer
 from datetime import date
@@ -14,6 +15,7 @@ from pylons.controllers.util import redirect_to, abort
 from random import Random
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
+from ututi.model.events import Event
 from ututi.model import SimpleTag
 from ututi.model import UserSubjectMonitoring
 from ututi.model import Page
@@ -192,3 +194,10 @@ class AdminController(BaseController):
         c.subjects = meta.Session.query(Subject)\
             .order_by(Subject.created_on).all()
         return render('admin/subjects.mako')
+
+    @ActionProtector("root")
+    def events(self):
+        c.events = meta.Session.query(Event)\
+            .order_by(desc(Event.created))\
+            .limit(500).all()
+        return render('admin/events.mako')
