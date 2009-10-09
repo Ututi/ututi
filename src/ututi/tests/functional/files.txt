@@ -19,7 +19,7 @@ There should be a form to upload a new file.
 
 Having uploaded the file, we should be presented with a list of all files present, with our new file available.
 
-    >>> browser.printQuery('id("file_list")//a/text()')
+    >>> browser.printQuery('id("file_list")//a[@class="file-link"]/text()')
     a file
     >>> browser.getLink("a file").click()
     >>> browser.contents
