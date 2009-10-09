@@ -179,7 +179,7 @@ class AdminController(BaseController):
 
     @ActionProtector("root")
     def groups(self):
-        c.groups = meta.Session.query(Group).all()
+        c.groups = meta.Session.query(Group).order_by(Group.created_on).all()
         return render('admin/groups.mako')
 
     @ActionProtector("root")

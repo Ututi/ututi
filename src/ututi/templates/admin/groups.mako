@@ -11,6 +11,7 @@
     %for group in c.groups:
          <li>
                 <a href="${url(controller='group', action='home', id=group.group_id)}" class="group-link">${group.title} (${len(group.members)})</a>
+                <div>${h.fmt_dt(group.created_on)}</div>
                 <div>Emails: ${group.message_count}</div>
                 <div>Files: ${len(group.files)}</div>
                 <div>Watched subjects: ${len(group.watched_subjects)}</div>
