@@ -913,6 +913,11 @@ div#pager {
 /* search form */
 #page-content .search-controls {
   width: 400px;
+  padding-right: 90px;
+}
+
+#page-content .search-controls.loading {
+  background: url("../images/details/search-loader.gif") right 40px no-repeat;
 }
 
 .search-controls .search-text {

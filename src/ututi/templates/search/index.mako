@@ -86,15 +86,19 @@ ${h.javascript_link('/javascripts/search.js')|n}
     $(document).ready(function() {
       %if 'tags' in parts:
       $('#tags').change(function() {
+         $(this).parents('.search-controls').addClass('loading');
          $.post("${js_target}", $(this).parents('form').serialize(), function(data) {
                 $('#search-results-container').replaceWith(data);
+                $('.search-controls').removeClass('loading');
          });
       });
       %endif
       %if 'obj_type' in parts:
       $('#obj_type').change(function() {
+         $(this).parents('.search-controls').addClass('loading');
          $.post("${js_target}", $(this).parents('form').serialize(), function(data) {
                 $('#search-results-container').replaceWith(data);
+                $('.search-controls').removeClass('loading');
          });
       });
       %endif
