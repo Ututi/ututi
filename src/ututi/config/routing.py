@@ -157,6 +157,24 @@ def make_map():
     map.connect('/structure/{id}/logo/{width}',
                 controller='structure', action='logo')
 
+    map.connect('/community',
+                controller='forum', action='index', forum_id='community')
+    map.connect('/community/{action}',
+                controller='forum', forum_id='community')
+    map.connect('/community/thread/{thread_id}',
+                controller='forum', forum_id='community', action='thread')
+    map.connect('/community/thread/{thread_id}/reply',
+                controller='forum', forum_id='community', action='reply')
+
+    map.connect('/bugs',
+                controller='forum', action='index', forum_id='bugs')
+    map.connect('/bugs/{action}',
+                controller='forum', forum_id='bugs')
+    map.connect('/bugs/thread/{thread_id}',
+                controller='forum', forum_id='bugs', action='thread')
+    map.connect('/bugs/thread/{thread_id}/reply',
+                controller='forum', forum_id='bugs', action='reply')
+
     map.connect('/{controller}', action='index')
     map.connect('/{controller}/{action}')
     map.connect('/{controller}/{action}/{id}')

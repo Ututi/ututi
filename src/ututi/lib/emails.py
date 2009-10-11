@@ -22,8 +22,9 @@ def email_confirmation_request(user, email):
             msg = Message(_('Confirm the email for Ututi'), text, force=True)
             msg.send(email)
 
+
 def group_invitation_email(invitation, email):
-    """ A method for handling user invitation to group emails."""
+    """A method for handling user invitation to group emails."""
     from ututi.model import Email
     if invitation.user is not None:
         email_instance = Email.get(email)
@@ -43,6 +44,23 @@ def group_invitation_email(invitation, email):
 
         msg = Message(_('Ututi group invitation'), text)
         msg.send(email)
+
+
+def group_join_request_notification(group, email):
+    """Send email notifying that someone is asking to join the group.
+
+    The message is sent to all the administrators of the group who
+    have their emails confirmed set.
+    """
+
+    text = render('/emails/group_join_request.mako',
+                  extra_vars={'group': group})
+
+    for user in group.administrators:
+        send_email(config['ututi_email_from'],
+                   email,
+                   _('Ututi user wants to join your group.'),
+                   text)
 
 
 def email_password_reset(user, email):

@@ -78,7 +78,7 @@ class GroupforumController(GroupControllerBase):
     def index(self, group):
         c.breadcrumbs.append(self._actions('forum'))
         c.messages = self._top_level_messages(group)
-        return render('forum/index.mako')
+        return render('groupforum/index.mako')
 
     @group_forum_action
     @ActionProtector("member", "admin", "moderator")
@@ -86,7 +86,7 @@ class GroupforumController(GroupControllerBase):
         c.thread = thread
         c.breadcrumbs.append(self._actions('forum'))
         c.messages = thread.posts
-        return render('forum/thread.mako')
+        return render('groupforum/thread.mako')
 
     @group_forum_action
     @validate(NewReplyForm)
@@ -109,7 +109,7 @@ class GroupforumController(GroupControllerBase):
                     id=group.group_id, thread_id=thread.id)
 
     def _new_thread_form(self):
-        return render('forum/new.mako')
+        return render('groupforum/new.mako')
 
     @group_action
     @ActionProtector("member", "admin", "moderator")

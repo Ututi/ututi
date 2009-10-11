@@ -54,6 +54,14 @@ def setup_orm(engine):
                         useexisting=True,
                         autoload_with=engine)
 
+    global forum_posts_table
+    forum_posts_table = Table("forum_posts", meta.metadata,
+                              Column('title', Unicode(assert_unicode=True)),
+                              Column('message', Unicode(assert_unicode=True)),
+                              autoload=True,
+                              useexisting=True,
+                              autoload_with=engine)
+
     global users_table
     users_table = Table("users", meta.metadata,
                         Column('id', Integer, Sequence('users_id_seq'), primary_key=True),
@@ -122,6 +130,15 @@ def setup_orm(engine):
                properties = {'parent': relation(ContentItem,
                                                 primaryjoin=files_table.c.parent_id==content_items_table.c.id,
                                                 backref="files")})
+
+    orm.mapper(ForumPost, forum_posts_table,
+               inherits=ContentItem,
+               inherit_condition=forum_posts_table.c.id==ContentItem.id,
+               polymorphic_identity='forum_post',
+               polymorphic_on=content_items_table.c.content_type,
+               properties = {'parent': relation(ContentItem,
+                                                primaryjoin=forum_posts_table.c.parent_id==content_items_table.c.id,
+                                                backref="forum_posts")})
 
     orm.mapper(User,
                users_table,
@@ -1147,6 +1164,21 @@ class File(ContentItem):
             return meta.Session.query(File).filter_by(id=file_id).one()
         except NoResultFound:
             return None
+
+
+class ForumPost(ContentItem):
+    """ """
+
+    def __init__(self, title, message, forum_id=None, thread_id=None):
+        self.title = title
+        self.message = message
+        self.forum_id = forum_id
+        self.thread_id = thread_id
+
+    def url(self):
+        return url(controller='forum', action='thread',
+                   forum_id=self.forum_id, thread_id=self.thread_id)
+
 
 search_items_table = None
 class SearchItem(object):

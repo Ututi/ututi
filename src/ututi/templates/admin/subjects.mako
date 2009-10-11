@@ -14,5 +14,5 @@
            (<a href="${subj.created.url()}" class="author-link">${subj.created.fullname}</a>)
          </li>
     %endfor
-    </ul>
+    </ol>
 %endif
