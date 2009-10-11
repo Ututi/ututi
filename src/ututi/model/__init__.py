@@ -22,7 +22,7 @@ from sqlalchemy import orm, Column, Integer, Sequence, Table
 from sqlalchemy.types import Unicode
 from sqlalchemy.exc import DatabaseError, SAWarning
 from sqlalchemy.orm.exc import NoResultFound
-from sqlalchemy.orm import relation, backref
+from sqlalchemy.orm import relation, backref, deferred
 from sqlalchemy import func
 from sqlalchemy.sql.expression import desc
 from sqlalchemy.sql.expression import and_, or_
@@ -101,7 +101,8 @@ def setup_orm(engine):
                inherits=Tag,
                polymorphic_on=tags_table.c.tag_type,
                polymorphic_identity='location',
-               properties = {'children': relation(LocationTag, backref=backref('parent', remote_side=tags_table.c.id))})
+               properties = {'children': relation(LocationTag, backref=backref('parent', remote_side=tags_table.c.id)),
+                             'logo': deferred(tags_table.c.logo)})
 
     orm.mapper(SimpleTag,
                inherits=tag_mapper,
@@ -142,7 +143,8 @@ def setup_orm(engine):
 
     orm.mapper(User,
                users_table,
-               properties = {'emails': relation(Email, backref='user')})
+               properties = {'emails': relation(Email, backref='user'),
+                             'logo': deferred(users_table.c.logo)})
 
     global emails_table
     emails_table = Table("emails", meta.metadata,
@@ -233,7 +235,8 @@ def setup_orm(engine):
                polymorphic_identity='group',
                polymorphic_on=content_items_table.c.content_type,
                properties ={'watched_subjects': relation(Subject,
-                                                         secondary=group_watched_subjects_table)})
+                                                         secondary=group_watched_subjects_table),
+                            'logo': deferred(groups_table.c.logo)})
 
     global group_invitations_table
     group_invitations_table = Table("group_invitations", meta.metadata,
