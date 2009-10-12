@@ -517,10 +517,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         c.step = True
         return render('group/add_subject.mako')
 
-    @validate(schema=NewSubjectForm, form='add_subject_step')
-    @group_action
-    @ActionProtector("member", "admin", "moderator")
-    def create_subject(self, group):
+    def _createSubject(self, group):
         if not hasattr(self, 'form_result'):
             redirect_to(group.url(action='add_subject_step'))
 
@@ -529,8 +526,25 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         group.watched_subjects.append(subject)
 
         meta.Session.commit()
+
+    @validate(schema=NewSubjectForm, form='add_subject_step')
+    @group_action
+    @ActionProtector("member", "admin", "moderator")
+    def create_subject_step(self, group):
+        self._createSubject(group)
         redirect_to(group.url(action='subjects_step'))
 
+    @group_action
+    @ActionProtector("member", "admin", "moderator")
+    def add_subject(self, group):
+        return render('group/add_subject.mako')
+
+    @validate(schema=NewSubjectForm, form='add_subject')
+    @group_action
+    @ActionProtector("member", "admin", "moderator")
+    def create_subject(self, group):
+        self._createSubject(group)
+        redirect_to(group.url(action='subjects'))
 
     @validate(schema=SearchSubmit, form='subjects', post_only = False, on_get = True)
     @group_action

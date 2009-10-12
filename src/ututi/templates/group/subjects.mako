@@ -153,15 +153,19 @@ ${search_form(text=c.text, obj_type='subject', tags=c.tags, parts=['text', 'tags
 ${search_results(c.results, display=search_subject)}
 %endif
 
+% if c.step:
 <div class="create_item">
   <span class="notice">${_('Did not find what you were looking for?')}</span>
   ${h.button_to(_('Create a new subject'), c.group.url(action='add_subject_step'))}
 </div>
-
-% if c.step:
 <br />
 <hr />
 <a class="btn" href="${url(controller='group', action='invite_members_step', id=c.group.group_id)}" title="${_('Invite group members')}">
   <span>${_('Finish choosing subjects')}</span>
 </a>
+% else:
+<div class="create_item">
+  <span class="notice">${_('Did not find what you were looking for?')}</span>
+  ${h.button_to(_('Create a new subject'), c.group.url(action='add_subject'))}
+</div>
 % endif
