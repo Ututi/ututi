@@ -95,14 +95,14 @@ def setup_orm(engine):
     tag_mapper = orm.mapper(Tag,
                             tags_table,
                             polymorphic_on=tags_table.c.tag_type,
-                            polymorphic_identity='')
+                            polymorphic_identity='',
+                            properties={'logo': deferred(tags_table.c.logo)})
 
     orm.mapper(LocationTag,
                inherits=Tag,
                polymorphic_on=tags_table.c.tag_type,
                polymorphic_identity='location',
-               properties = {'children': relation(LocationTag, backref=backref('parent', remote_side=tags_table.c.id)),
-                             'logo': deferred(tags_table.c.logo)})
+               properties = {'children': relation(LocationTag, backref=backref('parent', remote_side=tags_table.c.id))})
 
     orm.mapper(SimpleTag,
                inherits=tag_mapper,
