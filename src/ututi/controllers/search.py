@@ -43,12 +43,11 @@ class SearchBaseController(BaseController):
 
         if search_params != {}:
             query = search_query(**search_params)
-            items = query.all()
             c.results = paginate.Page(
-                items,
+                query,
                 page=int(request.params.get('page', 1)),
                 items_per_page = 20,
-                item_count = len(items),
+                item_count = search_query_count(query),
                 **search_params)
             c.searched = True
 

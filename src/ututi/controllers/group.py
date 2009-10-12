@@ -35,7 +35,7 @@ from ututi.controllers.subject import NewSubjectForm
 from ututi.controllers.search import SearchSubmit
 from ututi.lib.security import is_root, check_crowds
 from ututi.lib.security import ActionProtector
-from ututi.lib.search import search_query
+from ututi.lib.search import search_query, search_query_count
 from ututi.lib.emails import group_request_email, group_confirmation_email
 
 log = logging.getLogger(__name__)
@@ -565,11 +565,10 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         query = search_query(extra=_filter_watched_subjects(sids), **search_params)
 
         if search_params != {}:
-            items = query.all()
             c.results = paginate.Page(
-                items,
+                query,
                 page=int(request.params.get('page', 1)),
-                item_count = len(items),
+                item_count = search_query_count(query),
                 items_per_page = 10,
                 **search_params)
 

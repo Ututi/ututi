@@ -1,10 +1,11 @@
 from ututi.model import meta, SearchItem, SimpleTag, LocationTag, ContentItem
 
-from sqlalchemy.sql import func
+from sqlalchemy.sql import func, select
 from sqlalchemy.sql.expression import or_
 
 def search_query_count(query):
-    return meta.Session.query(func.count(ContentItem.id)).join(query).count()
+    count = meta.Session.execute(select([func.count()], from_obj=query.subquery())).scalar()
+    return count
 
 def search_query(text=None, tags=None, obj_type=None, extra=None):
     """Prepare the search query according to the parameters given."""
