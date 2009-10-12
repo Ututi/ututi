@@ -155,8 +155,8 @@ def fmt_shortdate(dt):
     return dates.format_datetime(localtime, fmt)
 
 def nl2br(text):
-    return '<br/>'.join(text.split("\n"))
-
+    import cgi
+    return '<br/>'.join(cgi.escape(text).split("\n"))
 
 def html_cleanup(*args, **kwargs):
     from ututi.lib.validators import html_cleanup
