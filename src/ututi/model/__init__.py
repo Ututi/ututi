@@ -130,7 +130,7 @@ def setup_orm(engine):
                polymorphic_on=content_items_table.c.content_type,
                properties = {'parent': relation(ContentItem,
                                                 primaryjoin=files_table.c.parent_id==content_items_table.c.id,
-                                                backref="files")})
+                                                backref=backref("files", order_by=files_table.c.filename.asc()))})
 
     orm.mapper(ForumPost, forum_posts_table,
                inherits=ContentItem,
