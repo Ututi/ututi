@@ -20,7 +20,7 @@ def setup_title(forum_id):
     forum_titles = {'bugs': _('Report a bugs'),
                     'community': _('Community page')}
     forum_logos = {'bugs': 'report_bug.png',
-                   'community': 'communitypng.png'}
+                   'community': 'community.png'}
 
     forum_descriptions = {'bugs': _("This is ututi bugs forum"),
                           'community': _("This is ututi community forum.")}
@@ -30,9 +30,13 @@ def setup_title(forum_id):
     c.forum_description = forum_descriptions[c.forum_id]
     c.poster_count = 0
     c.bugs_forum_messages = meta.Session.query(ForumPost)\
-        .filter_by(forum_id='bugs').limit(5).all()
+        .filter_by(forum_id='bugs')\
+        .filter(ForumPost.thread_id == ForumPost.id)\
+        .limit(5).all()
     c.community_forum_messages = meta.Session.query(ForumPost)\
-        .filter_by(forum_id='community').limit(5).all()
+        .filter_by(forum_id='community')\
+        .filter(ForumPost.thread_id == ForumPost.id)\
+        .limit(5).all()
 
     c.post_count = meta.Session.query(ForumPost).filter_by(forum_id=forum_id).count() or 0
     c.topic_count = meta.Session.query(ForumPost)\
