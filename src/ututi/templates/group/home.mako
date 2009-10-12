@@ -17,6 +17,7 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
   ${group_files_portlet()}
   ${group_watched_subjects_portlet()}
   ${group_members_portlet()}
+  ${mif_banner_portlet()}
 </div>
 </%def>
 

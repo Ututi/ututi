@@ -9,6 +9,7 @@
 <%def name="portlets()">
 <div id="sidebar">
   ${group_info_portlet()}
+  ${mif_banner_portlet()}
 </div>
 </%def>
 

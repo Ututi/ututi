@@ -6,6 +6,7 @@
 <div id="sidebar">
   ${group_info_portlet()}
   ${group_changes_portlet()}
+  ${mif_banner_portlet()}
 </div>
 </%def>
 
