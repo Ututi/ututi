@@ -1,7 +1,11 @@
 from ututi.model import meta, SearchItem, SimpleTag, LocationTag, ContentItem
+import logging
 
 from sqlalchemy.sql import func, select
 from sqlalchemy.sql.expression import or_
+import pylons
+
+log = logging.getLogger(__name__)
 
 def search_query_count(query):
     count = meta.Session.execute(select([func.count()], from_obj=query.subquery())).scalar()
@@ -24,6 +28,16 @@ def search_query(text=None, tags=None, obj_type=None, extra=None):
 
     if extra is not None:
         query = extra(query)
+
+    cnt = search_query_count(query)
+
+    log.info(u"%(empty)s%(url)s \t %(text)s \t %(tags)s \t %(type)s \t %(count)i" % { "empty": cnt == 0 and '!!! ' or '',
+                                                                            "url": pylons.url.current(),
+                                                                            "text": text is not None and text or '',
+                                                                            "tags": tags is not None and ', '.join(tags) or '',
+                                                                            "type": obj_type is not None or '*',
+                                                                            "count": cnt })
+
     return query
 
 
