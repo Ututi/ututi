@@ -46,7 +46,7 @@
     <br style="clear: both;" />
     <div class="footer">
       <a class="more" href="${url(controller='forum', forum_id=forum_id)}" title="${_('more')}">${_('more')}</a>
-      <a href="${url(controller='forum', action='post', forum_id=forum_id)}" class="btn"><span>${new_post_title}</span></a>
+      <a href="${url(controller='forum', action='new_thread', forum_id=forum_id)}" class="btn"><span>${new_post_title}</span></a>
     </div>
   </%self:portlet>
 </%def>
