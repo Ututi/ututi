@@ -375,6 +375,11 @@ ul.bullets_large li {
   color: #d45500;
 }
 
+.sidebar-block .content .logo {
+  float: left;
+  margin-right: 5px;
+}
+
 .sidebar-block .content .footer {
   padding-top: 5px;
 }

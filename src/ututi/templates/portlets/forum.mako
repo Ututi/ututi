@@ -5,20 +5,21 @@
     <%def name="header()">
       <a href="${url(controller='forum', forum_id=c.forum_id)}" title="${c.forum_title}">${c.forum_title}</a>
     </%def>
+    <img id="forum-logo"  class="logo" src="${url('/images/%s' % c.forum_logo) }" alt="logo" />
     <div class="structured_info">
-      <img id="group-logo" src="${url('/images/%s' % c.forum_logo) }" alt="logo" />
       <span class="small">
-        ${ungettext("%(count)s active poster", "%(count)s active posters", c.poster_count) % dict(count=c.poster_count)}
+        ${ungettext("<em>%(count)s</em> active poster", "<em>%(count)s</em> active posters", c.poster_count) % dict(count=c.poster_count)|n}
       </span>
       <br />
       <span class="small">
-        ${ungettext("%(count)s topic", "%(count)s topics", c.topic_count) % dict(count=c.topic_count)}
+        ${ungettext("<em>%(count)s</em> topic", "<em>%(count)s</em> topics", c.topic_count) % dict(count=c.topic_count)|n}
       </span>
       <br />
       <span class="small">
-        ${ungettext("%(count)s post", "%(count)s posts", c.post_count) % dict(count=c.post_count)}
+        ${ungettext("<em>%(count)s</em> post", "<em>%(count)s</em> posts", c.post_count) % dict(count=c.post_count)|n}
       </span>
     </div>
+    <br />
     <hr />
     <div class="description small">
       ${c.forum_description}

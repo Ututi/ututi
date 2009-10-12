@@ -89,3 +89,8 @@ ul.post-attachments li {
   list-style-type: none;
   background: white url("../images/details/icon_file.png") left center no-repeat;
 }
+
+#forum_info_portlet .structured_info span em {
+  color: #d45500;
+  font-style: normal;
+}
