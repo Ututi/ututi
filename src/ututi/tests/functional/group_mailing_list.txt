@@ -94,6 +94,9 @@ The email gets sent to all the members of the group:
     To: moderators@groups.ututi.lt
     Subject: Hi mom
     Message-ID: <...@groups.ututi.lt>
+    Reply-To: moderators@groups.ututi.lt
+    Errors-To: errors@ututi.lt
+    List-Id: moderators@groups.ututi.lt
     <BLANKLINE>
     I am doing fine. Send more cash.
 
@@ -160,6 +163,9 @@ The email gets sent.
     Subject: Re: Hi mom
     Message-ID: <...@groups.ututi.lt>
     In-reply-to: <...@groups.ututi.lt>
+    Reply-To: moderators@groups.ututi.lt
+    Errors-To: errors@ututi.lt
+    List-Id: moderators@groups.ututi.lt
     <BLANKLINE>
     Oh, and don't forget to feed the fish!
 
@@ -236,6 +242,9 @@ email:
     Subject: Re: Hi mom
     Message-ID: <...@groups.ututi.lt>
     In-reply-to: <...@groups.ututi.lt>
+    Reply-To: moderators@groups.ututi.lt
+    Errors-To: errors@ututi.lt
+    List-Id: moderators@groups.ututi.lt
     <BLANKLINE>
     Let's welcome our new member!
 

@@ -29,7 +29,9 @@ class EmailInfo(object):
                                                           self.recipients)
 
 
-def send_email(sender, recipient, subject, body, message_id=None, reply_to=None, send_to=None):
+def send_email(sender, recipient, subject, body, message_id=None, reply_to=None,
+               send_to=None,
+               list_id=None):
     """Send an email.
 
     All arguments should be Unicode strings (plain ASCII works as well).
@@ -79,6 +81,11 @@ def send_email(sender, recipient, subject, body, message_id=None, reply_to=None,
         msg['Message-ID'] = "<%s>" % message_id
     if reply_to is not None:
         msg['In-reply-to'] = reply_to
+
+    if list_id is not None:
+        msg['Reply-To'] = list_id
+        msg['Errors-To'] = config.get('email_to', 'errors@ututi.lt')
+        msg['List-Id'] = list_id
 
     if send_to is None:
         send_to = recipient
