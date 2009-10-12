@@ -17,7 +17,7 @@ from ututi.model import meta
 
 def setup_title(forum_id):
     c.forum_id = forum_id
-    forum_titles = {'bugs': _('Report a bugs'),
+    forum_titles = {'bugs': _('Report a bug'),
                     'community': _('Community page')}
     forum_logos = {'bugs': 'report_bug.png',
                    'community': 'community.png'}
