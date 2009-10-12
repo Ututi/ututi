@@ -30,7 +30,7 @@
 <%def name="forum_posts_portlet(forum_id, new_post_subtitle, messages, portlet_title, new_post_title)">
   <%self:portlet id="group_latest_messages" portlet_class="inactive">
     <%def name="header()">
-      <a href="${url(controller='forum', action='index', forum_id=forum_id)}" title="${portlet_title}">${portlet_title}</a>
+      <a href="${url(controller='forum', action='index', forum_id=forum_id)}">${portlet_title|n}</a>
     </%def>
     %if messages:
       <table id="group_latest_messages">
