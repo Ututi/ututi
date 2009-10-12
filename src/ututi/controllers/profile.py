@@ -203,11 +203,12 @@ class ProfileController(SearchBaseController):
 
         query = search_query(extra=_filter_watched_subjects(sids), **search_params)
         if search_params != {}:
+            items = query.all()
             c.results = paginate.Page(
-                query,
+                items,
                 page=int(request.params.get('page', 1)),
                 items_per_page = 10,
-                item_count = query.count() or 0,
+                item_count = len(items),
                 **search_params)
 
         c.watched_subjects = c.user.watched_subjects
@@ -314,10 +315,11 @@ class ProfileController(SearchBaseController):
         c.years = range(date.today().year - 10, date.today().year + 5)
         c.tags = ', '.join(c.tags)
 
+        items = results.all()
         c.results = paginate.Page(
-            results,
+            items,
             page=int(request.params.get('page', 1)),
-            item_count = results.count() or 0,
+            item_count = len(items),
             items_per_page = 10,
             **search_params)
 

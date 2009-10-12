@@ -9,7 +9,7 @@ from pylons import request, c, url
 from pylons.templating import render_mako_def
 
 from ututi.lib.base import BaseController, render
-from ututi.lib.search import search_query
+from ututi.lib.search import search_query, search_query_count
 
 log = logging.getLogger(__name__)
 
@@ -43,11 +43,12 @@ class SearchBaseController(BaseController):
 
         if search_params != {}:
             query = search_query(**search_params)
+            items = query.all()
             c.results = paginate.Page(
-                query,
+                items,
                 page=int(request.params.get('page', 1)),
                 items_per_page = 20,
-                item_count = query.count() or 0,
+                item_count = len(items),
                 **search_params)
             c.searched = True
 

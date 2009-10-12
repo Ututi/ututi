@@ -565,10 +565,11 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         query = search_query(extra=_filter_watched_subjects(sids), **search_params)
 
         if search_params != {}:
+            items = query.all()
             c.results = paginate.Page(
-                query,
+                items,
                 page=int(request.params.get('page', 1)),
-                item_count = query.count() or 0,
+                item_count = len(items),
                 items_per_page = 10,
                 **search_params)
 
