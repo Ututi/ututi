@@ -17,3 +17,7 @@
 #faculties-list tr td {
   padding-left: 10px;
 }
+
+#page-content .search-controls.loading {
+  background: url("../images/details/search-loader-small.gif") right 40px no-repeat !important;
+}

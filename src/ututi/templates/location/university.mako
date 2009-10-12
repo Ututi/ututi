@@ -41,9 +41,10 @@ ${h.stylesheet_link('/stylesheets/location.css')|n}
 
 
 <h2 class="underline">${_('Search')}</h2>
-${search_form(c.text, c.obj_type, c.location.hierarchy, parts=['obj_type', 'text'], target=c.location.url())}
+${search_form(c.text, c.obj_type, c.location.hierarchy,
+  parts=['obj_type', 'text'], target=c.location.url(), js=True,
+  js_target=c.location.url(action='search_js'))}
 
-%if c.searched:
   ${search_results(c.results)}
 
   %if c.user:
@@ -63,4 +64,3 @@ ${search_form(c.text, c.obj_type, c.location.hierarchy, parts=['obj_type', 'text
     </div>
     %endif
   %endif
-%endif

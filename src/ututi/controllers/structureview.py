@@ -5,7 +5,7 @@ from pylons.controllers.util import redirect_to, abort
 from pylons import c, url
 from pylons.i18n import _
 from pylons.decorators import validate
-
+from pylons.templating import render_mako_def
 
 import ututi.lib.helpers as h
 from ututi.lib.base import render
@@ -52,6 +52,16 @@ class StructureviewController(SearchBaseController):
             if tag.logo is not None:
                 bc['logo'] = url(controller='structure', action='logo', width=30, height=30, id=tag.id)
             c.breadcrumbs.append(bc)
+
+    @location_action
+    @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
+    def search_js(self, location):
+        self.form_result['tagsitem'] = location.hierarchy()
+        if self.form_result.get('obj_type', None) is None:
+            self.form_result['obj_type'] = 'subject'
+        self._search()
+
+        return render_mako_def('/search/index.mako','search_results', results=c.results, controller='structureview', action='index')
 
     @location_action
     @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
