@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-10-12 15:28+0300\n"
+"PO-Revision-Date: 2009-10-12 16:22+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -575,7 +575,7 @@ msgstr ""
 msgid "No messages yet."
 msgstr ""
 
-#, fuzzy, python-format
+#, python-format
 msgid "%(count)s reply"
 msgid_plural "%(count)s replies"
 msgstr[0] ""
@@ -925,7 +925,7 @@ msgstr ""
 msgid "There are no files here, this folder is empty!"
 msgstr ""
 
-#, fuzzy, python-format
+#, python-format
 msgid "%(count)s file"
 msgid_plural "%(count)s files"
 msgstr[0] ""
@@ -1168,7 +1168,7 @@ msgstr ""
 msgid "Mailing list address"
 msgstr ""
 
-#, fuzzy, python-format
+#, python-format
 msgid "%(count)s member"
 msgid_plural "%(count)s members"
 msgstr[0] ""
@@ -1210,19 +1210,19 @@ msgstr ""
 msgid "Faculty information"
 msgstr ""
 
-#, fuzzy, python-format
+#, python-format
 msgid "%(count)s <em>subject</em>"
 msgid_plural "%(count)s <em>subjects</em>"
 msgstr[0] ""
 msgstr[1] ""
 
-#, fuzzy, python-format
+#, python-format
 msgid "%(count)s <em>group</em>"
 msgid_plural "%(count)s <em>groups</em>"
 msgstr[0] ""
 msgstr[1] ""
 
-#, fuzzy, python-format
+#, python-format
 msgid "%(count)s <em>file</em>"
 msgid_plural "%(count)s <em>files</em>"
 msgstr[0] ""

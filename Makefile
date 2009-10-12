@@ -165,6 +165,11 @@ extract-translations: bin/py
 	bin/py setup.py extract_messages --no-location
 	rm -rf src/ututi/templates_py
 	bin/py setup.py update_catalog --ignore-obsolete=yes --no-fuzzy-matching
+	for file in $$(find src/ututi/i18n -name *.po -type f); do \
+	   sed -e "s/#, fuzzy, python-format/#, python-format/ig" $$file > /tmp/tempfile.tmp; \
+	   mv /tmp/tempfile.tmp $$file; \
+	   echo "Modified: " $$file; \
+	done
 
 .PHONY: compile-translations
 compile-translations: bin/py
