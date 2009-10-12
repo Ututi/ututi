@@ -162,9 +162,9 @@ coverage: bin/test
 extract-translations: bin/py
 	rm -rf src/ututi/templates_py
 	cp -r data/templates src/ututi/templates_py
-	bin/py setup.py extract_messages
+	bin/py setup.py extract_messages --no-location
 	rm -rf src/ututi/templates_py
-	bin/py setup.py update_catalog
+	bin/py setup.py update_catalog --ignore-obsolete=yes --no-fuzzy-matching
 
 .PHONY: compile-translations
 compile-translations: bin/py
