@@ -2,6 +2,7 @@
 <%namespace name="files" file="/sections/files.mako" />
 <%namespace file="/portlets/subject.mako" import="*"/>
 <%namespace file="/sections/content_snippets.mako" import="*"/>
+<%namespace file="/portlets/banners/base.mako" import="*"/>
 
 <%def name="title()">
   ${c.subject.title}
@@ -15,6 +16,7 @@
 <%def name="portlets()">
 <div id="sidebar">
   ${subject_info_portlet()}
+  ${mif_banner_portlet(c.subject.location)}
 </div>
 </%def>
 

@@ -1,6 +1,7 @@
 <%inherit file="/base.mako" />
 <%namespace file="/portlets/group.mako" import="*"/>
 <%namespace file="/group/members.mako" import="group_members"/>
+<%namespace file="/portlets/banners/base.mako" import="*"/>
 
 <%def name="title()">
   ${c.group.title}
@@ -9,7 +10,7 @@
 <%def name="portlets()">
 <div id="sidebar">
   ${group_info_portlet()}
-  ${mif_banner_portlet()}
+  ${mif_banner_portlet(c.group.location)}
 </div>
 </%def>
 
