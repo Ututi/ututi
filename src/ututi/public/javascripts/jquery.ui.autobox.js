@@ -71,7 +71,9 @@
     LEFT: 37,
     RIGHT: 39,
     UP: 38,
-    DOWN: 40
+    DOWN: 40,
+    COMMA: 188,
+    COMMA2: 44
   };
 
   function addBox(input, text, name){
@@ -160,7 +162,7 @@
       .bind("keydown.autobox", function(e){
         var k=e.which || e.keyCode;
         if(k == KEY.ESC){ $("body").trigger("cancel.autobox"); }
-        else if(k == KEY.RETURN){ $("body").trigger("activate.autobox"); e.preventDefault(); }
+        else if((k == KEY.RETURN) || (k == KEY.COMMA)){ $("body").trigger("activate.autobox"); e.preventDefault(); }
         else if(k == KEY.UP || k == KEY.TAB || k == KEY.DOWN){
           switch(k){
             case KEY.DOWN:
@@ -228,6 +230,12 @@
     function createInput(){
       var input=$('<input type="text"></input>')
       input
+        .blur(function() {
+            if(input.val()){ addBox(input, input.val(), opt.name); }
+            //$("body").trigger("activate.autobox");
+            //input.trigger("cancel.autobox");
+            $("body").trigger("off.autobox");
+        })
         .keydown(function(e){
           preventTabInAutocompleteMode(e);
         })
@@ -250,8 +258,8 @@
             //note that IE does not generate keypress for arrow/tab keys
             if(k == KEY.TAB || k == KEY.UP || k == KEY.DOWN) return false;
           }
-          if($.data(document.body, "autoboxMode") && k < 32 && k != KEY.BS && k != KEY.DEL) return false;
-          else if(k == KEY.RETURN){
+          if($.data(document.body, "autoboxMode") && k < 32 && k != KEY.BS && k != KEY.COMMA && k != KEY.DEL) return false;
+          else if((k == KEY.RETURN) || (k == KEY.COMMA2)) {
             if(input.val()){ addBox(input, input.val(), opt.name); }
             e.preventDefault();
           }
