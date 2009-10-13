@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-10-13 03:17+0300\n"
+"PO-Revision-Date: 2009-10-13 16:19+0300\n"
 "Last-Translator: Eri\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -557,7 +557,7 @@ msgstr "Załoga Ututi"
 
 #, python-format
 msgid "Your request to join the group %(groupname)s has been confirmed."
-msgstr "Twoja prośba o przyjęcie do grupy %(groupname) zostało zaakceptowane."
+msgstr "Twoja prośba o przyjęcie do grupy %(groupname)s zostało zaakceptowane."
 
 #, python-format
 msgid "You can visit the group's page at this url: %(url)s ."
@@ -568,7 +568,7 @@ msgstr "Załoga Ututi"
 
 #, python-format
 msgid "Your request to join the group %(groupname)s has been denied."
-msgstr "Twoja prośba o przyjęcie do grupy %(groupname) zostało odrzucone."
+msgstr "Twoja prośba o przyjęcie do grupy %(groupname)s zostało odrzucone."
 
 #, python-format
 msgid "%(fullname)s has requested to become a member of the group %(groupname)s."
