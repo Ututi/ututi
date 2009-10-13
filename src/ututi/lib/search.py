@@ -30,12 +30,11 @@ def search_query(text=None, tags=None, obj_type=None, extra=None):
         query = extra(query)
 
     cnt = search_query_count(query)
-    log_msg = u"%(empty)s%(url)s \t %(text)s \t %(tags)s \t %(type)s \t %(count)i" % { "empty": cnt == 0 and '!!! ' or '',
-                                                                                       "url": pylons.url.current(),
-                                                                                       "text": text is not None and text or '',
-                                                                                       "tags": tags is not None and ', '.join(tags) or '',
-                                                                                       "type": obj_type is not None or '*',
-                                                                                       "count": cnt }
+    log_msg = u"%(url)s \t %(text)s \t %(tags)s \t %(type)s \t %(count)i" % {"url": pylons.url.current(),
+                                                                             "text": text is not None and text or '',
+                                                                             "tags": tags is not None and ', '.join(tags) or '',
+                                                                             "type": obj_type is not None or '*',
+                                                                             "count": cnt }
     if cnt == 0:
         log.warn(log_msg)
     else:
