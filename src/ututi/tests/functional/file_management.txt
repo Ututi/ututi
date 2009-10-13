@@ -9,11 +9,11 @@ File upload:
     >>> from textwrap import dedent
     >>> res = app.post("/subject/vu/mat_analize/upload_file",
     ...                params={'folder': ''},
-    ...                upload_files=[("attachment", "text.txt", "Test")])
+    ...                upload_files=[("attachment", "text;for you.txt", "Test")])
     >>> print dedent(res.body)
     <li class="file">
       <img alt="file icon" class="drag-target" src="/images/details/icon_drag_file.png" />
-      <a href="/subject/vu/mat_analize/file/3/get">text.txt</a>
+      <a href="/subject/vu/mat_analize/file/3/get">text;for you.txt</a>
       <span class="size">(4.0 b)</span>
       <span class="date">...</span>
       <a href="/user/1" class="author">
