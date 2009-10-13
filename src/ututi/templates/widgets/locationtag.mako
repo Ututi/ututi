@@ -82,6 +82,7 @@ ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
            parameters['parent-'+ii] = $(this).val();
         }
     });
+    if ((i == 0) || ((i > 1) && (parameters['parent-'+(i-1)] != ''))) {
     jQuery.getJSON("${url(controller='structure', action='completions')}",
           parameters,
           function(jdata, status) {
@@ -91,7 +92,7 @@ ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
              });
              item.removeClass("preloadData");
     });
-
+    };
 
     $(this).result(function(event, data, formatted) {
       if (data) {
