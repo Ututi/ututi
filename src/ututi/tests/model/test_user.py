@@ -186,6 +186,7 @@ def test_user_watched_subjects():
     r"""Test for user subject watching and unwatching.
 
         >>> user = User.get('admin@ututi.lt')
+        >>> res = meta.Session.execute("SET ututi.active_user TO %s" % user.id)
         >>> location = LocationTag.get([u'vu', u'ef'])
         >>> subjects = []
         >>> for i in range(5):
@@ -193,6 +194,7 @@ def test_user_watched_subjects():
         ...     subjects.append(subject)
         ...     meta.Session.add(subject)
         >>> meta.Session.commit()
+        >>> res = meta.Session.execute("SET ututi.active_user TO %s" % user.id)
 
     Our users can add subjects to their watched_subjects
     list. Initially the list is empty though:

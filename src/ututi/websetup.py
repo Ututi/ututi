@@ -2,7 +2,7 @@
 import logging
 
 from paste.util.converters import asbool
-from ututi.model import initialize_db_defaults, reset_db
+from ututi.model import initialize_db_defaults, reset_db, initialize_dictionaries
 from ututi.config.environment import load_environment
 from ututi.model import meta
 
@@ -14,4 +14,7 @@ def setup_app(command, conf, vars):
 
     if asbool(conf.get('reset_database', 'false')):
         reset_db(meta.engine)
+    else:
+        initialize_dictionaries(meta.engine)
+
     initialize_db_defaults(meta.engine)

@@ -60,6 +60,7 @@ def test_pages():
         ...                       u'Some more information about it.')
         >>> page.versions.append(version)
         >>> meta.Session.commit()
+        >>> res = meta.Session.execute("SET ututi.active_user TO %d" % admin.id)
         >>> page.content
         u'Some more information about it.'
 
@@ -69,6 +70,7 @@ def test_pages():
         >>> page.add_version(u'Some coursework (new)',
         ...                  u'Some exclusive information about it.')
         >>> meta.Session.commit()
+        >>> res = meta.Session.execute("SET ututi.active_user TO %d" % admin.id)
 
         >>> page.title
         u'Some coursework (new)'

@@ -74,6 +74,8 @@ def test_tag_search():
         >>> tg = SimpleTag(u'empty tag')
         >>> meta.Session.add(tg)
         >>> meta.Session.commit()
+        >>> res = meta.Session.execute("SET default_text_search_config TO 'public.lt'")
+
         >>> [result.object.title for result in search(tags=[u'test tag', u'empty tag'])]
         []
 
@@ -127,6 +129,8 @@ def test_setup(test):
     ututi.tests.setUp(test)
 
     u = User.get(u'admin@ututi.lt')
+    from ututi.model import initialize_dictionaries
+    initialize_dictionaries(meta.engine)
     meta.Session.execute("SET ututi.active_user TO %d" % u.id)
     meta.Session.execute("SET default_text_search_config TO 'public.lt'")
 

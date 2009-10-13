@@ -299,6 +299,27 @@ def reset_db(engine):
     connection.close()
 
 
+def initialize_dictionaries(engine):
+    initial_db_data = pkg_resources.resource_string(
+        "ututi",
+        "model/stemming.sql").split(";;")
+    connection = meta.engine.connect()
+    for statement in initial_db_data:
+        statement = statement.strip()
+        if (statement):
+            try:
+                txn = connection.begin()
+                connection.execute(statement)
+                txn.commit()
+            except DatabaseError, e:
+                print >> sys.stderr, ""
+                print >> sys.stderr, e.message
+                print >> sys.stderr, e.statement
+                txn.rollback()
+                return
+    connection.close()
+
+
 def initialize_db_defaults(engine):
     initial_db_data = pkg_resources.resource_string(
         "ututi",

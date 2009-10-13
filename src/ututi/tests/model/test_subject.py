@@ -47,6 +47,7 @@ def test_subject_create():
         >>> s = Subject('some_id', u'Subject title', LocationTag.get([u'vu']))
         >>> meta.Session.add(s)
         >>> meta.Session.commit()
+        >>> res = meta.Session.execute("SET ututi.active_user TO 1")
         >>> evt = meta.Session.query(Event).filter(Event.context == s).all()
         >>> [e.render() for e in evt]
         [u'New subject ... was created']
