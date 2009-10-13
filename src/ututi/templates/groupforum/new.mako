@@ -1,4 +1,4 @@
-<%inherit file="/forum/thread.mako" />
+<%inherit file="/groupforum/thread.mako" />
 
 <%def name="title()">
 ${_('New topic')}
