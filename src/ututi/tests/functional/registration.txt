@@ -65,7 +65,7 @@ An email, requesting the confirmation of the email address entered is sent:
     Ututi team
 
     >>> print email.recipients
-    jonas@example.com
+    [u'jonas@example.com']
 
     >>> from ututi.lib.helpers import get_urls
     >>> urls = get_urls(email.message)

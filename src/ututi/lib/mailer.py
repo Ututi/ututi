@@ -94,32 +94,25 @@ def send_email(sender, recipient, subject, body, message_id=None, reply_to=None,
     log.debug(send_to)
     log.debug(msg.as_string())
 
+    raw_send_email(sender, send_to, msg.as_string())
+    return msg.as_string()
+
+
+def raw_send_email(sender, recipients, message):
+    if isinstance(recipients, (unicode, str)):
+        recipients = [recipients]
     # Send the message via SMTP to localhost:25
     if not config.get('hold_emails', False):
         # send the email if we are not told to hold it
         server = config.get('smtp_host', 'localhost')
         smtp = SMTP(server)
         try:
-            smtp.sendmail(sender, send_to, msg.as_string())
+            smtp.sendmail(sender, recipients, message)
         except SMTPRecipientsRefused:
             log.warn(sender)
-            log.warn(send_to)
-            log.warn(repr(msg.as_string()))
+            log.warn(recipients)
+            log.warn(repr(message))
         finally:
             smtp.quit()
-    else:
-        mail_queue.append(EmailInfo(sender, send_to, msg.as_string()))
-
-    return msg.as_string()
-
-
-def raw_send_email(sender, recipients, message):
-    # Send the message via SMTP to localhost:25
-    if not config.get('hold_emails', False):
-        # send the email if we are not told to hold it
-        server = config.get('smtp_host', 'localhost')
-        smtp = SMTP(server)
-        smtp.sendmail(sender, recipients, message)
-        smtp.quit()
     else:
         mail_queue.append(EmailInfo(sender, recipients, message))
