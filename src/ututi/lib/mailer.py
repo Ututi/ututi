@@ -6,6 +6,7 @@ from email.Header import Header
 from email.MIMEText import MIMEText
 from email.Utils import parseaddr, formataddr
 from email import message_from_string
+from paste.util.converters import asbool
 from pylons import config
 
 log = logging.getLogger(__name__)
@@ -101,8 +102,11 @@ def send_email(sender, recipient, subject, body, message_id=None, reply_to=None,
 def raw_send_email(sender, recipients, message):
     if isinstance(recipients, (unicode, str)):
         recipients = [recipients]
+
+    hold_emails = asbool(config.get('hold_emails', False))
+
     # Send the message via SMTP to localhost:25
-    if not config.get('hold_emails', False):
+    if not hold_emails:
         # send the email if we are not told to hold it
         server = config.get('smtp_host', 'localhost')
         smtp = SMTP(server)
