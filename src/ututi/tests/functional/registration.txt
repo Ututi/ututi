@@ -57,22 +57,7 @@ An email, requesting the confirmation of the email address entered is sent:
     Subject: Confirm the email for Ututi
     <BLANKLINE>
     This is a multi-part message in MIME format.
-    --...
-    Content-Type: multipart/alternative; boundary="..."
-    MIME-Version: 1.0
-    <BLANKLINE>
-    --...
-    MIME-Version: 1.0
-    Content-Type: text/html; charset="us-ascii"
-    Content-Transfer-Encoding: 7bit
-    <BLANKLINE>
-    We have received a request to confirm the ownership of this email by Jonas Petraitis Petrauskas on the Ututi system. If this email belongs to You, confirm it by clicking on this link:
-    <BLANKLINE>
-    <a href="http://localhost/confirm_user_email/...">Confirm email</a>
-    <BLANKLINE>
-    Ututi team
-    <BLANKLINE>
-    --...
+    ...
     MIME-Version: 1.0
     Content-Type: text/plain; charset="us-ascii"
     Content-Transfer-Encoding: 7bit
@@ -84,7 +69,7 @@ An email, requesting the confirmation of the email address entered is sent:
     Ututi team
     <BLANKLINE>
     --...--
-    --...--
+    ...
 
 
     >>> print email.recipients

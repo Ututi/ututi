@@ -84,10 +84,10 @@ def send_email(sender, recipient, subject, body, html_body=None,
         msgAlternative = MIMEMultipart('alternative')
         msg.attach(msgAlternative)
 
-        msgText = MIMEText(html_body.encode(body_charset), 'html', body_charset)
+        msgText = MIMEText(body.encode(body_charset), 'plain', body_charset)
         msgAlternative.attach(msgText)
 
-        msgText = MIMEText(body.encode(body_charset), 'plain', body_charset)
+        msgText = MIMEText(html_body.encode(body_charset), 'html', body_charset)
         msgAlternative.attach(msgText)
     else:
         # Create the message ('plain' stands for Content-Type: text/plain)
