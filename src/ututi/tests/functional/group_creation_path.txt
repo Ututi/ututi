@@ -15,8 +15,9 @@ We can add a group at the url /groups/add.
 
 After creating the group we should be redirected to the subject selection view:
 
-    >>> browser.printQuery('//h1/text()')
-    Group Subjects
+    >>> browser.printQuery('//h2/text()')
+    Watched subjects
+    Recommended subjects
 
     >>> browser.getLink('Watch').url
     'http://localhost/group/test/watch_subject?subject_location_id=1&subject_id=mat_analize'

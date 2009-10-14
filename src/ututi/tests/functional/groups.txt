@@ -19,7 +19,7 @@ The link of the group leads to its home page.
     >>> browser.getLink('Moderatoriai').click()
     >>> browser.url
     'http://localhost/group/moderators'
-    >>> browser.printQuery('//h1/text()')
+    >>> browser.printQuery('id("tabs")//div[@class="tab active"]//a/text()')
     What's new?
 
 We can edit the group's information.
@@ -35,7 +35,7 @@ We can edit the group's information.
    >>> browser.getControl('Description').value = 'Ututi moderatorių grupė'
    >>> browser.getControl('Group logo').add_file(*make_file('test_logo.png'))
    >>> browser.getControl('Save').click()
-   >>> browser.printQuery('//h1/text()')
+   >>> browser.printQuery('id("tabs")//div[@class="tab active"]//a/text()')
    What's new?
 
    >>> browser.printQuery("id('group_info_portlet')//img")
@@ -58,8 +58,9 @@ We can add a group at the url /groups/add.
 
 After creating the group we should be redirected to the subject selection view:
 
-    >>> browser.printQuery('//h1/text()')
-    Group Subjects
+    >>> browser.printQuery('//h2/text()')
+    Watched subjects
+    Recommended subjects
 
 The group's logo is displayed in a portlet.
 
