@@ -107,6 +107,24 @@ ${h.javascript_link('/javascripts/forms.js')|n}
 </div>
 </%def>
 
+
+<%def name="tabs(tabs)">
+  %if isinstance(tabs, list):
+  <div id="tabs">
+    %for tab in tabs:
+      <%
+         cls = tab.get('selected', False) and 'active' or ''
+      %>
+      <div class="tab ${cls}">
+        <div>
+          <a ${tab.get('event', '')|n} class="subbreadcrumb" title="${tab.get('title')}" href="${tab.get('link')}">${tab.get('title')}</a>
+        </div>
+      </div>
+    %endfor
+  </div>
+  %endif
+</%def>
+
 <%def name="breadcrumbs(breadcrumbs)">
 <div id="breadcrumb-container">
   %if breadcrumbs:
@@ -162,31 +180,6 @@ ${h.javascript_link('/javascripts/forms.js')|n}
           ${breadcrumb.get('title') | h.ellipsis}
         </a>
       </div>
-      %else:
-      <%
-         selected = h.selected_item(breadcrumb)
-         %>
-
-      <ul class="breadcrumb_dropdown">
-        <li class="active">
-          <div>
-            <span>${selected.get('title') | h.ellipsis}</span>
-          </div>
-        </li>
-        %for item in h.marked_list(h.unselected_items(breadcrumb)):
-        <%
-           if item.get('last_item', False):
-               cls = 'last'
-           else:
-               cls = 'alternative'
-           %>
-        <li class="${cls}">
-          <div>
-            <a ${item.get('event', '')|n} class="subbreadcrumb" title="${item.get('title')}" href="${item.get('link')}">${item.get('title') | h.ellipsis}</a>
-          </div>
-        </li>
-        %endfor
-      </ul>
       %endif
     </li>
     %endfor
@@ -229,6 +222,10 @@ ${h.javascript_link('/javascripts/forms.js')|n}
         ${self.portlets()}
 
         <div class="inside" id="page-content">
+          %if c.breadcrumbs:
+            ${tabs(c.breadcrumbs.pop())}
+          %endif
+
           <div id="flash-messages">
             % if c.serve_file:
             <iframe style="display: none;" src="${c.serve_file.url()}"> </iframe>

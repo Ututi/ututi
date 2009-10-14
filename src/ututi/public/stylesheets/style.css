@@ -600,6 +600,42 @@ a.small-link:hover {
 
 /* end special links */
 
+/* begin tabs */
+#tabs {
+  background: #f2f2f2;
+  height: 22px;
+  padding: 0 10px;
+  border-top: 5px solid #f2f2f2;
+}
+
+#tabs .tab {
+  float: left;
+  height: 22px;
+  margin: 0 4px;
+  padding-left: 10px;
+}
+
+#tabs .tab div {
+  height: 22px;
+  padding-top: 2px;
+  padding-right: 10px;
+}
+
+#tabs .tab div a {
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+#tabs .tab.active {
+  background: url("../images/borders/tab-active.png") left top no-repeat;
+}
+
+#tabs .tab.active div {
+  background: url("../images/borders/tab-active.png") right top no-repeat;
+}
+
+/* end tabs */
+
 /* begin breadcrumbs */
 #location {
   margin: 0;
