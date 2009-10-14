@@ -90,8 +90,8 @@ class LogoUpload(Schema):
     logo = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
 
 
-class EditGroupForm(Schema):
-    """A schema for validating group edits."""
+class GroupForm(Schema):
+    """A schema for validating group edits and submits."""
     pre_validators = [NestedVariables()]
 
     allow_extra_fields = True
@@ -104,12 +104,16 @@ class EditGroupForm(Schema):
     logo_delete = validators.StringBoolean(if_missing=False)
     location = Pipe(ForEach(validators.String(strip=True)),
                     LocationTagsValidator())
+
     chained_validators = [
         TagsValidator()
         ]
 
+class EditGroupForm(GroupForm):
+    """A schema for validating group edits."""
+    default_tab = validators.OneOf(['home', 'forum', 'members', 'files', 'subjects', 'page'])
 
-class NewGroupForm(EditGroupForm):
+class NewGroupForm(GroupForm):
     """A schema for validating new group forms."""
 
     pre_validators = [variabledecode.NestedVariables()]
@@ -207,6 +211,13 @@ class GroupControllerBase(BaseController):
 
 class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     """Controller for group actions."""
+
+    @group_action
+    def index(self, group):
+        if check_crowds(["member", "admin", "moderator"]):
+            redirect_to(controller='group', action=c.group.default_tab, id=group.group_id)
+        else:
+            redirect_to(controller='group', action='home', id=group.group_id)
 
     @group_action
     def home(self, group):
@@ -358,6 +369,12 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     def _edit_form(self):
         c.current_year = date.today().year
         c.years = range(c.current_year - 10, c.current_year + 5)
+        c.tabs = [('home', _("What's new?")),
+                  ('forum', _('Forum')),
+                  ('members', _('Members')),
+                  ('files', _('Files')),
+                  ('subjects', _('Subjects')),
+                  ('page', _('Page'))]
 
         return render('group/edit.mako')
 
@@ -369,7 +386,8 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             'description': group.description,
             'tags': ', '.join([tag.title for tag in c.group.tags]),
             'show_page': group.show_page,
-            'year': group.year.year
+            'year': group.year.year,
+            'default_tab': group.default_tab
             }
 
         tags = dict([('tagsitem-%d' % n, tag.title)
@@ -397,6 +415,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         group.title = values['title']
         group.year = date(int(values['year']), 1, 1)
         group.description = values['description']
+        group.default_tab = values['default_tab']
 
         if values['logo_delete']:
             group.logo = None
@@ -424,6 +443,8 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         group.show_page = bool(values.get('show_page', False))
 
         meta.Session.commit()
+        h.flash(_('Group information and settings updated.'))
+
         redirect_to(controller='group', action='home', id=group.group_id)
 
     def logo(self, id, width=None, height=None):

@@ -100,10 +100,16 @@ ${h.javascript_link('/javascripts/js-alternatives.js')|n}
           <label for="tags">${_('Tags')}</label>
           ${tags_widget([])}
         </div>
+        <hr />
         <div class="form-field">
           <label for="show_page">${_('Show group page')}</label>
           <input type="checkbox" name="show_page" id="show_page"/>
         </div>
+        <div class="form-field">
+          <label for="default_tab">${_('Default group tab')}</label>
+          ${h.select("default_tab", c.group.default_tab, c.tabs)}
+        </div>
+
 
 <%
 from ututi.lib.security import is_root

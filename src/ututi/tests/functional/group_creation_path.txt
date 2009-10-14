@@ -55,7 +55,7 @@ Let us fill in several email to be invited.
 
     >>> browser.getControl("Finish and go to group's main page").click()
     >>> print browser.url
-    http://localhost/group/test
+    http://localhost/group/test/home
 
 The users should get emails:
 
@@ -178,7 +178,7 @@ We should get an email confirmation request:
 And we are redirected to the group that invited us.
 
     >>> browser.url
-    'http://localhost/group/test'
+    'http://localhost/group/test/home'
 
     >>> browser.open("http://localhost/group/test/members")
     >>> browser.getControl('Enter emails of the people You would like to invite to the group.').value = 'user3@ututi.com'
