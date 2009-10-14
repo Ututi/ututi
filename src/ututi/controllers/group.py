@@ -175,7 +175,7 @@ class GroupControllerBase(BaseController):
         The action with the name matching the `selected' parameter is
         marked as selected.
         """
-        return [
+        bcs = [
             {'title': _("What's new?"),
              'link': url(controller='group', action='home', id=c.group.group_id),
              'selected': selected == 'home',
@@ -196,7 +196,14 @@ class GroupControllerBase(BaseController):
              'link': url(controller='group', action='subjects', id=c.group.group_id),
              'selected': selected == 'subjects',
              'event': h.trackEvent(c.group, 'subjects', 'breadcrumb')},
+            {'title': _('Page'),
+             'link': url(controller='group', action='page', id=c.group.group_id),
+             'selected': selected == 'page',
+             'event': h.trackEvent(c.group, 'page', 'breadcrumb')},
             ]
+        if not c.group.show_page:
+            del bcs[-1]
+        return bcs
 
 class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     """Controller for group actions."""
@@ -239,7 +246,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @group_action
     @ActionProtector("admin", "moderator", "member")
     def edit_page(self, group):
-        c.breadcrumbs.append(self._actions('home'))
+        c.breadcrumbs.append(self._actions('page'))
         defaults = {
             'page_content': c.group.page
             }
@@ -255,7 +262,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         group.page = page_content
         meta.Session.commit()
         h.flash(_("The group's front page was updated."))
-        redirect_to(controller='group', action='home', id=group.group_id)
+        redirect_to(controller='group', action='page', id=group.group_id)
 
     @group_action
     @ActionProtector("member", "admin", "moderator")
@@ -779,3 +786,9 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             redirect_to(request.referrer)
         meta.Session.commit()
         redirect_to(group.url())
+
+    @group_action
+    @ActionProtector("member", "admin")
+    def page(self, group):
+        c.breadcrumbs.append(self._actions('page'))
+        return render('group/page.mako')

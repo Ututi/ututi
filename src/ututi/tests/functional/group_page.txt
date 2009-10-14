@@ -1,0 +1,28 @@
+Group page view
+===============
+
+First of all let's log in;
+
+    >>> browser = Browser.logIn()
+
+Let's find the group.
+
+    >>> browser.open('http://localhost/group/moderators')
+    >>> browser.getLink('Page').click()
+    >>> print browser.url
+    http://localhost/group/moderators/page
+
+At first the page should be empty.
+    >>> browser.printQuery('id("page-content")/text()')
+    The group's page is empty. Enter your description.
+
+We can edit it. of course:
+    >>> browser.getLink('Edit', index=1).click()
+    >>> browser.url
+    'http://localhost/group/moderators/edit_page'
+
+    >>> browser.getControl('Content').value = 'This is our group'
+    >>> browser.getControl('Save').click()
+
+    >>> browser.printQuery('id("page-content")/text()')
+    This is our group

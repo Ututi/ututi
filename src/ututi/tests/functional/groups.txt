@@ -71,20 +71,6 @@ Let's see what the group's default home page looks like:
 
     >>> browser.open('http://localhost/group/test')
 
-The group's default page is empty at the moment and we are notified of this.
-
-    >>> browser.printQuery("id('group_page')//div[@class='content']/text()")
-    The group's page is empty. Enter your description.
-
-If we click the link to edit the page, we are redirected to a form for this.
-
-    >>> browser.getLink('Edit', url="edit_page").click()
-    >>> browser.getControl('Content').value = 'This is our group'
-    >>> browser.getControl('Save').click()
-    >>> browser.printQuery("id('group_page')//div[@class='content']/text()")
-    <BLANKLINE>
-    This is our group
-
 However, group ids are checked for uniqueness.
 
     >>> browser.open('http://localhost/groups/add')

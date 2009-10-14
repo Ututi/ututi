@@ -22,27 +22,6 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
 </div>
 </%def>
 
-%if c.group.show_page:
-<div id="group_page" class="content-block">
-  <div class="hdr">
-    <span class="huge" style="float: left;">${_("Group front page")}</span>
-    <div style="float: left; margin-top: 4px; margin-left: 20px;">
-      <a class="btn" href="${url(controller='group', action='edit_page', id=c.group.group_id)}" title="${_('Edit group front page')}">
-        <span>${_('Edit')}</span>
-      </a>
-    </div>
-    <br class="clear-left" />
-  </div>
-  <div class="content">
-    %if c.group.page != '':
-    ${h.html_cleanup(c.group.page)|n,decode.utf8}
-    %else:
-      ${_("The group's page is empty. Enter your description.")}
-    %endif
-  </div>
-</div>
-%endif
-
 <ul id="event_list">
 % for event in c.events:
 <li>
