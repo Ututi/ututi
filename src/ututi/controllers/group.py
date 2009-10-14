@@ -503,14 +503,6 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         self._unwatch_subject(group)
         return "OK"
 
-    @validate(schema=SearchSubmit, form='subjects', post_only = False, on_get = True)
-    @group_action
-    @ActionProtector("member", "admin", "moderator")
-    def subjects_step(self, group):
-        c.step = True
-        c.search_target = url(controller = 'group', action='subjects_step', id = group.group_id)
-        return self.subjects(group.group_id)
-
     @group_action
     @ActionProtector("member", "admin", "moderator")
     def add_subject_step(self, group):
@@ -549,46 +541,56 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @validate(schema=SearchSubmit, form='subjects', post_only = False, on_get = True)
     @group_action
     @ActionProtector("member", "admin", "moderator")
+    def subjects_step(self, group):
+        c.step = True
+        c.search_target = url(controller = 'group', action='subjects_step', id = group.group_id)
+        return self._subjects(group)
+
+    @validate(schema=SearchSubmit, form='subjects', post_only = False, on_get = True)
+    @group_action
+    @ActionProtector("member", "admin", "moderator")
     def subjects(self, group):
+        c.breadcrumbs.append(self._actions('subjects'))
+        return self._subjects(group)
+
+    def _subjects(self, group):
         """
-        A view displaying all the subjects the group is already watching and allowing
+        The basis for views displaying all the subjects the group is already watching and allowing
         members to choose new subjects for the group.
         """
-        c.search_target = url(controller = 'group', action='subjects', id = group.group_id)
-
-        #retrieve search parameters
-        c.text = self.form_result.get('text', '')
-
-        if 'tagsitem' in self.form_result or 'tags' in self.form_result:
-            c.tags = self.form_result.get('tagsitem', None)
-            if c.tags is None:
-                c.tags = self.form_result.get('tags', None).split(', ')
-        else:
-            c.tags = c.group.location.hierarchy()
-        c.tags = ', '.join(filter(bool, c.tags))
-
-        sids = [s.id for s in group.watched_subjects]
-
-        search_params = {}
-        if c.text:
-            search_params['text'] = c.text
-        if c.tags:
-            search_params['tags'] = c.tags
-        search_params['obj_type'] = 'subject'
-
-        query = search_query(extra=_filter_watched_subjects(sids), **search_params)
-
-        if search_params != {}:
-            c.results = paginate.Page(
-                query,
-                page=int(request.params.get('page', 1)),
-                item_count = search_query_count(query),
-                items_per_page = 10,
-                **search_params)
-
-
-        c.breadcrumbs.append(self._actions('subjects'))
         if check_crowds(["admin", "moderator"]):
+            c.search_target = url(controller = 'group', action='subjects', id = group.group_id)
+
+            #retrieve search parameters
+            c.text = self.form_result.get('text', '')
+
+            if 'tagsitem' in self.form_result or 'tags' in self.form_result:
+                c.tags = self.form_result.get('tagsitem', None)
+                if c.tags is None:
+                    c.tags = self.form_result.get('tags', None).split(', ')
+            else:
+                c.tags = c.group.location.hierarchy()
+            c.tags = ', '.join(filter(bool, c.tags))
+
+            sids = [s.id for s in group.watched_subjects]
+
+            search_params = {}
+            if c.text:
+                search_params['text'] = c.text
+            if c.tags:
+                search_params['tags'] = c.tags
+            search_params['obj_type'] = 'subject'
+
+            query = search_query(extra=_filter_watched_subjects(sids), **search_params)
+
+            if search_params != {}:
+                c.results = paginate.Page(
+                    query,
+                    page=int(request.params.get('page', 1)),
+                    item_count = search_query_count(query),
+                    items_per_page = 10,
+                    **search_params)
+
             return render('group/subjects.mako')
         else:
             return render('group/subjects_member.mako')
