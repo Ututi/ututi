@@ -107,7 +107,8 @@ def raw_send_email(sender, recipients, message):
 
     hold_emails = asbool(config.get('hold_emails', False))
 
-    force_emails_to = aslist(os.environ.get("ututi_force_emails_to", []))
+    force_emails_to = aslist(os.environ.get("ututi_force_emails_to", []), ',',
+                             strip=True)
     force_emails_to = [e for e in force_emails_to if e]
 
     if hold_emails and force_emails_to:
