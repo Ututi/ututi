@@ -1,4 +1,5 @@
 import logging
+import os
 from smtplib import SMTPRecipientsRefused
 from smtplib import SMTP
 
@@ -6,6 +7,7 @@ from email.Header import Header
 from email.MIMEText import MIMEText
 from email.Utils import parseaddr, formataddr
 from email import message_from_string
+from paste.util.converters import aslist
 from paste.util.converters import asbool
 from pylons import config
 
@@ -104,6 +106,15 @@ def raw_send_email(sender, recipients, message):
         recipients = [recipients]
 
     hold_emails = asbool(config.get('hold_emails', False))
+
+    force_emails_to = aslist(os.environ.get("ututi_force_emails_to", []))
+    force_emails_to = [e for e in force_emails_to if e]
+
+    if hold_emails and force_emails_to:
+        recipients = [address for address in recipients
+                      if address in force_emails_to]
+        if recipients:
+            hold_emails = False
 
     # Send the message via SMTP to localhost:25
     if not hold_emails:
