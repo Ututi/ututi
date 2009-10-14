@@ -1,0 +1,28 @@
+Group default tab
+===============
+
+First of all let's log in;
+
+    >>> browser = Browser.logIn()
+
+Let's find the group and change its default tab:
+
+    >>> browser.open('http://localhost/group/moderators')
+    >>> browser.url
+    'http://localhost/group/moderators/home'
+
+    >>> browser.getLink('Edit').click()
+
+    >>> browser.getControl('Default group tab').value=['files']
+    >>> browser.getControl('Save').click()
+
+After the update we should be redirected to the group's home page.
+
+    >>> browser.url
+    'http://localhost/group/moderators/home'
+
+However, next time going to the group (if I am a member) will lead me to the new default page.
+
+    >>> browser.open('http://localhost/group/moderators')
+    >>> browser.url
+    'http://localhost/group/moderators/files'
