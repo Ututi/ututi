@@ -21,12 +21,7 @@ def email_confirmation_request(user, email):
                                       'link': link,
                                       'html': False})
 
-            html = render('/emails/confirm_email.mako',
-                          extra_vars={'fullname': user.fullname,
-                                      'link': link,
-                                      'html': True})
-
-            msg = Message(_('Confirm the email for Ututi'), text, html, force=True)
+            msg = Message(_('Confirm the email for Ututi'), text, force=True)
             msg.send(email)
 
 

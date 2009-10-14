@@ -86,9 +86,11 @@ def send_email(sender, recipient, subject, body, html_body=None,
 
         msgText = MIMEText(body.encode(body_charset), 'plain', body_charset)
         msgAlternative.attach(msgText)
+        msgAlternative['Content-Disposition'] = 'inline'
 
         msgText = MIMEText(html_body.encode(body_charset), 'html', body_charset)
         msgAlternative.attach(msgText)
+        msgAlternative['Content-Disposition'] = 'inline'
     else:
         # Create the message ('plain' stands for Content-Type: text/plain)
         msg = MIMEText(body.encode(body_charset), 'plain', body_charset)
