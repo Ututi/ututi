@@ -21,8 +21,6 @@ ${h.javascript_link('/javascripts/forms.js')|n}
 </%def>
 
 
-<h1>${_('Members')}</h1>
-
 <div>
   <h2>${_('Invite your group mates')}</h2>
   <form method="post" action="${url(controller='group', action='invite_members', id=c.group.group_id)}" id="member_invitation_form">

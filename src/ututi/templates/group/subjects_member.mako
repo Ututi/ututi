@@ -6,7 +6,6 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
 </%def>
 
 % if c.step:
-  <h1>${_('Group Subjects')}</h1>
   ${path_steps(1)}
 % endif
 

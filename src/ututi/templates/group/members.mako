@@ -16,8 +16,6 @@
   ${c.group.title}
 </%def>
 
-<h1>${_('Members')}</h1>
-
 <%def name="group_members(group=None)">
 <%
    if group is None:

@@ -20,9 +20,6 @@
    <%files:head_tags />
 </%def>
 
-<h1>${_('Group Files')}</h1>
-<br />
-
 <%files:file_browser obj="${c.group}" />
 
 % for n, subject in enumerate(c.group.watched_subjects):
