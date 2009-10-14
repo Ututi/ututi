@@ -158,12 +158,15 @@ confirm it?
 We should get an email confirmation request:
 
     >>> print mail_queue.pop().message
-    MIME-Version: 1.0
-    Content-Type: text/plain; charset="us-ascii"
-    Content-Transfer-Encoding: 7bit
+    Content-Type: multipart/related; boundary="..."
+    ...
     From: info@ututi.lt
     To: jonas@example.com
     Subject: Confirm the email for Ututi
+    ...
+    MIME-Version: 1.0
+    Content-Type: text/plain; charset="us-ascii"
+    Content-Transfer-Encoding: 7bit
     <BLANKLINE>
     We have received a request to confirm the ownership of this email
     by Jonas Petraitis Petrauskas on the Ututi system. If this email
@@ -173,6 +176,8 @@ We should get an email confirmation request:
     <BLANKLINE>
     Ututi team
     <BLANKLINE>
+    --...--
+    --...--
 
 And we are redirected to the group that invited us.
 

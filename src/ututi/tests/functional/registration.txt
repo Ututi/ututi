@@ -50,26 +50,49 @@ An email, requesting the confirmation of the email address entered is sent:
     >>> from ututi.lib.mailer import mail_queue
     >>> email = mail_queue.pop()
     >>> print email.message
+    Content-Type: multipart/related; boundary="..."
     MIME-Version: 1.0
-    ...
     From: info@ututi.lt
     To: jonas@example.com
     Subject: Confirm the email for Ututi
     <BLANKLINE>
-    We have received a request to confirm the ownership of this email
-    by Jonas Petraitis Petrauskas on the Ututi system. If this email
-    belongs to You, confirm it by clicking on this link:
+    This is a multi-part message in MIME format.
+    --...
+    Content-Type: multipart/alternative; boundary="..."
+    MIME-Version: 1.0
+    <BLANKLINE>
+    --...
+    MIME-Version: 1.0
+    Content-Type: text/html; charset="us-ascii"
+    Content-Transfer-Encoding: 7bit
+    <BLANKLINE>
+    We have received a request to confirm the ownership of this email by Jonas Petraitis Petrauskas on the Ututi system. If this email belongs to You, confirm it by clicking on this link:
+    <BLANKLINE>
+    <a href="http://localhost/confirm_user_email/...">Confirm email</a>
+    <BLANKLINE>
+    Ututi team
+    <BLANKLINE>
+    --...
+    MIME-Version: 1.0
+    Content-Type: text/plain; charset="us-ascii"
+    Content-Transfer-Encoding: 7bit
+    <BLANKLINE>
+    We have received a request to confirm the ownership of this email by Jonas Petraitis Petrauskas on the Ututi system. If this email belongs to You, confirm it by clicking on this link:
     <BLANKLINE>
     http://localhost/confirm_user_email/...
     <BLANKLINE>
     Ututi team
+    <BLANKLINE>
+    --...--
+    --...--
+
 
     >>> print email.recipients
     [u'jonas@example.com']
 
     >>> from ututi.lib.helpers import get_urls
     >>> urls = get_urls(email.message)
-    >>> len(urls) == 1
+    >>> len(urls) == 2
     True
     >>> browser.open(urls[0])
     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
@@ -77,6 +100,7 @@ An email, requesting the confirmation of the email address entered is sent:
     Your email jonas@example.com was confirmed. Thank You.
 
 What if we clicked the link again?
+
      >>> browser.open(urls[0])
      >>> browser.printQuery("//div[@class='flash-message']/span/text()")
      Close

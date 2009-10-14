@@ -3,6 +3,7 @@ import os
 from smtplib import SMTPRecipientsRefused
 from smtplib import SMTP
 
+from email.mime.multipart import MIMEMultipart
 from email.Header import Header
 from email.MIMEText import MIMEText
 from email.Utils import parseaddr, formataddr
@@ -32,9 +33,8 @@ class EmailInfo(object):
                                                           self.recipients)
 
 
-def send_email(sender, recipient, subject, body, message_id=None, reply_to=None,
-               send_to=None,
-               list_id=None):
+def send_email(sender, recipient, subject, body, html_body=None,
+               message_id=None, reply_to=None, send_to=None, list_id=None):
     """Send an email.
 
     All arguments should be Unicode strings (plain ASCII works as well).
@@ -53,15 +53,6 @@ def send_email(sender, recipient, subject, body, message_id=None, reply_to=None,
     # provide, then fall back to UTF-8.
     header_charset = 'ISO-8859-1'
 
-    # We must choose the body charset manually
-    for body_charset in 'US-ASCII', 'ISO-8859-1', 'UTF-8':
-        try:
-            body.encode(body_charset)
-        except UnicodeError:
-            pass
-        else:
-            break
-
     # Split real name (which is optional) and email address parts
     sender_name, sender_addr = parseaddr(sender)
     recipient_name, recipient_addr = parseaddr(recipient)
@@ -75,8 +66,33 @@ def send_email(sender, recipient, subject, body, message_id=None, reply_to=None,
     sender_addr = sender_addr.encode('ascii')
     recipient_addr = recipient_addr.encode('ascii')
 
-    # Create the message ('plain' stands for Content-Type: text/plain)
-    msg = MIMEText(body.encode(body_charset), 'plain', body_charset)
+    # We must choose the body charset manually
+    for body_charset in 'US-ASCII', 'ISO-8859-1', 'UTF-8':
+        try:
+            body.encode(body_charset)
+            if html_body is not None:
+                html_body.encode(body_charset)
+        except UnicodeError:
+            pass
+        else:
+            break
+
+    if body and html_body:
+        msg = MIMEMultipart('related')
+        msg.preamble = 'This is a multi-part message in MIME format.'
+
+        msgAlternative = MIMEMultipart('alternative')
+        msg.attach(msgAlternative)
+
+        msgText = MIMEText(html_body.encode(body_charset), 'html', body_charset)
+        msgAlternative.attach(msgText)
+
+        msgText = MIMEText(body.encode(body_charset), 'plain', body_charset)
+        msgAlternative.attach(msgText)
+    else:
+        # Create the message ('plain' stands for Content-Type: text/plain)
+        msg = MIMEText(body.encode(body_charset), 'plain', body_charset)
+
     msg['From'] = formataddr((sender_name, sender_addr))
     msg['To'] = formataddr((recipient_name, recipient_addr))
     msg['Subject'] = Header(unicode(subject), header_charset)

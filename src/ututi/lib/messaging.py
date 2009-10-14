@@ -8,13 +8,15 @@ from pylons import config
 log = logging.getLogger(__name__)
 
 class Message(object):
-    def __init__(self, subject, text, sender=None, force=False):
+
+    def __init__(self, subject, text, html=None, sender=None, force=False):
         if sender is None:
             self.sender = config['ututi_email_from']
         else:
             self.sender = sender
         self.subject = subject
         self.text = text
+        self.html = html
         self.force = False
 
     def send(self, recipient):
@@ -32,7 +34,8 @@ class Message(object):
                 try:
                     #XXX : need to validate emails
                     EmailValidator.to_python(recipient)
-                    send_email(self.sender, recipient, self.subject, self.text)
+                    send_email(self.sender, recipient, self.subject, self.text,
+                               html_body=self.html)
                 except:
                     log.debug("Invalid email %(email)s" % dict(email=recipient))
         else:

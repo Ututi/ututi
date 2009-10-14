@@ -17,9 +17,16 @@ def email_confirmation_request(user, email):
 
             link = url_for(controller='profile', action='confirm_user_email', key=hash, qualified=True)
             text = render('/emails/confirm_email.mako',
-                          extra_vars={'fullname': user.fullname, 'link': link})
+                          extra_vars={'fullname': user.fullname,
+                                      'link': link,
+                                      'html': False})
 
-            msg = Message(_('Confirm the email for Ututi'), text, force=True)
+            html = render('/emails/confirm_email.mako',
+                          extra_vars={'fullname': user.fullname,
+                                      'link': link,
+                                      'html': True})
+
+            msg = Message(_('Confirm the email for Ututi'), text, html, force=True)
             msg.send(email)
 
 

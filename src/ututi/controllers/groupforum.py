@@ -140,7 +140,7 @@ class GroupforumController(GroupControllerBase):
                              c.group.list_address,
                              self.form_result['subject'],
                              self.form_result['message'],
-                             self._generateMessageId(),
+                             message_id=self._generateMessageId(),
                              send_to=self._recipients(group),
                              list_id=group.list_address)
         post = GroupMailingListMessage.fromMessageText(unicode(message))
