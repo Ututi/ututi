@@ -1180,7 +1180,10 @@ class File(ContentItem):
         if self.filesize is not None:
             return self.filesize
         else:
-            return os.path.getsize(self.filepath())
+            try:
+                return os.path.getsize(self.filepath())
+            except:
+                return 0
 
     @classmethod
     def get(self, file_id):
