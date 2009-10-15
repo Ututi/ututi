@@ -222,10 +222,6 @@ ${h.javascript_link('/javascripts/forms.js')|n}
         ${self.portlets()}
 
         <div class="inside" id="page-content">
-          %if c.breadcrumbs:
-            ${tabs(c.breadcrumbs.pop())}
-          %endif
-
           <div id="flash-messages">
             % if c.serve_file:
             <iframe style="display: none;" src="${c.serve_file.url()}"> </iframe>
@@ -237,7 +233,13 @@ ${h.javascript_link('/javascripts/forms.js')|n}
             ${invitation_messages(c.user)}
             ${request_messages(c.user)}
           </div>
-          ${self.body()}
+
+          %if c.breadcrumbs:
+            ${tabs(c.breadcrumbs.pop())}
+          %endif
+          <div id="body-container">
+            ${self.body()}
+          </div>
           <br style="clear: both;"/>
         </div>
 
