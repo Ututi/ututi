@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-10-13 16:19+0300\n"
+"PO-Revision-Date: 2009-10-15 13:44+0300\n"
 "Last-Translator: Eri\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -63,6 +63,9 @@ msgstr "Użytkownicy"
 msgid "Subjects"
 msgstr "Przedmioty"
 
+msgid "Page"
+msgstr ""
+
 msgid ""
 "The group's page was hidden. You can show it again by editing the group's"
 " settings."
@@ -92,6 +95,9 @@ msgstr "Członek"
 
 msgid "Leave group"
 msgstr "Wyjdź z grupy"
+
+msgid "Group information and settings updated."
+msgstr ""
 
 msgid "Users invited."
 msgstr "Zaproszeni użytkownicy"
@@ -214,12 +220,6 @@ msgstr "Taki profil użytkownika nie istnieje."
 msgid "Your password has been updated. Welcome back!"
 msgstr "Twoje hasło zostało zaktualizowane. Witaj ponownie!"
 
-msgid "Profile"
-msgstr "Profil"
-
-msgid "Search"
-msgstr "Szukaj"
-
 msgid "Your profile was updated."
 msgstr "Twój profil został zaktualizowany."
 
@@ -253,9 +253,6 @@ msgstr "Zaakceptuj e-mail Ututi"
 
 msgid "Ututi group invitation"
 msgstr "Zaproszenie Ututi grupy"
-
-msgid "Ututi user wants to join your group."
-msgstr "Użytkownik Ututi chce dołączyć do Twojej grupy."
 
 msgid "Ututi password recovery"
 msgstr "Odzyskiwanie hasła Ututi"
@@ -699,27 +696,14 @@ msgstr "Tagi"
 msgid "Show group page"
 msgstr "Pokaż stronę grupy"
 
+msgid "Default group tab"
+msgstr ""
+
 msgid "Edit group front page"
 msgstr "Edytuj stronę startową grupy"
 
 msgid "Content"
 msgstr "Zawartość"
-
-msgid "Group Files"
-msgstr "Dokumenty grupy"
-
-msgid "Group front page"
-msgstr "Strona startowa grupy"
-
-msgid "The group's page is empty. Enter your description."
-msgstr "Strona grupy jest pusta. Dodaj opis."
-
-msgid ""
-"A group can watch subjects that it is studying at the moment. Changes in "
-"watched subjects are shown to all classmates."
-msgstr ""
-"Grupa może śledzić przedmioty, których się aktualnie uczy. Zmiany "
-"wobserwowanych przedmiotach są widoczne dla wszystkich członków grupy."
 
 msgid "Group members"
 msgstr "Członkowie grupy"
@@ -772,6 +756,9 @@ msgstr "Usuń grupę"
 msgid "Finish and go to group's main page"
 msgstr "Zakończ i idź do strony startowej grupy"
 
+msgid "The group's page is empty. Enter your description."
+msgstr "Strona grupy jest pusta. Dodaj opis."
+
 #, python-format
 msgid "Subject %(subj)s was selected."
 msgstr "Wybrano przedmiot %(subj)s."
@@ -791,8 +778,17 @@ msgstr "Nie znalazłeś tego, czego szukałeś?"
 msgid "Create a new subject"
 msgstr "Utwórz nowy przedmiot"
 
-msgid "Group forum"
-msgstr "Forum grupy"
+msgid "email subject"
+msgstr ""
+
+msgid "replies"
+msgstr ""
+
+msgid "latest email"
+msgstr ""
+
+msgid "last author"
+msgstr ""
 
 msgid "Reset your password"
 msgstr "Zmień hasło"
@@ -829,6 +825,9 @@ msgstr "Logo"
 
 msgid "department list"
 msgstr "lista wydziałów"
+
+msgid "Search"
+msgstr "Szukaj"
 
 #, python-format
 msgid "Back to %(subject_title)s"
@@ -1149,8 +1148,8 @@ msgstr "Dodaj stronę"
 msgid "Your confirmed emails:"
 msgstr "Zaakceptowałeś e-maile:"
 
-msgid "Post new topic"
-msgstr "Zamieść nowy temat"
+msgid "Pick"
+msgstr ""
 
 msgid "Filter by tags"
 msgstr "Filtruj według tagów"
@@ -1193,6 +1192,9 @@ msgstr "Ostatnio widziany"
 
 msgid "All group members"
 msgstr "Wszyscy członkowie grupy"
+
+msgid "Group forum"
+msgstr "Forum grupy"
 
 msgid "Group messages"
 msgstr "Wiadomości grupy"

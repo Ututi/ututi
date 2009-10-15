@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-10-12 16:56+0300\n"
+"PO-Revision-Date: 2009-10-15 13:52+0300\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -69,6 +69,9 @@ msgstr "Nariai"
 msgid "Subjects"
 msgstr "Dalykai"
 
+msgid "Page"
+msgstr "Puslapis"
+
 msgid ""
 "The group's page was hidden. You can show it again by editing the group's"
 " settings."
@@ -98,6 +101,9 @@ msgstr "Narys"
 
 msgid "Leave group"
 msgstr "Palikti šią grupę"
+
+msgid "Group information and settings updated."
+msgstr "Grupės informacija ir nustatymai atnaujinti."
 
 msgid "Users invited."
 msgstr "Nariai pakviesti."
@@ -220,12 +226,6 @@ msgstr "Naudotojo profilis nerastas."
 msgid "Your password has been updated. Welcome back!"
 msgstr "Slaptažodis atnaujintas. Sveikiname sugrįžus :)"
 
-msgid "Profile"
-msgstr "Profilis"
-
-msgid "Search"
-msgstr "Paieška"
-
 msgid "Your profile was updated."
 msgstr "Profilis atnaujintas!"
 
@@ -259,9 +259,6 @@ msgstr "Patvirtinti  el. pašto adresą"
 
 msgid "Ututi group invitation"
 msgstr "Ututi - pakvietimas į grupę"
-
-msgid "Ututi user wants to join your group."
-msgstr "Ututi vartotojas nori prisijungti prie jūsų grupės."
 
 msgid "Ututi password recovery"
 msgstr "Ututi slaptažodžio atstatymas"
@@ -701,27 +698,14 @@ msgstr "Žymos"
 msgid "Show group page"
 msgstr "Rodyti grupės puslapį"
 
+msgid "Default group tab"
+msgstr "Pradinis grupės skirtukas"
+
 msgid "Edit group front page"
 msgstr "Redaguoti grupės pagrindinį puslapį"
 
 msgid "Content"
 msgstr "Turinys"
-
-msgid "Group Files"
-msgstr "Grupės failai"
-
-msgid "Group front page"
-msgstr "Grupės puslapis"
-
-msgid "The group's page is empty. Enter your description."
-msgstr "Grupės puslapis vis dar tuščias. Reikėtų ką nors parašyti..."
-
-msgid ""
-"A group can watch subjects that it is studying at the moment. Changes in "
-"watched subjects are shown to all classmates."
-msgstr ""
-"Grupė gali stebėti dalykus, kuriuos studijuoja. Stebint dalykus "
-"pranešimai apie pasikeitimus šiuose dalykuose rodomi visiems grupiokams."
 
 msgid "Group members"
 msgstr "Grupės nariai"
@@ -776,6 +760,9 @@ msgstr "Ištrinti grupę"
 msgid "Finish and go to group's main page"
 msgstr "baigti ir grįžti į grupės puslapį"
 
+msgid "The group's page is empty. Enter your description."
+msgstr "Grupės puslapis vis dar tuščias. Reikėtų ką nors parašyti..."
+
 #, python-format
 msgid "Subject %(subj)s was selected."
 msgstr "Dalykas %(subj)s buvo pasirinktas."
@@ -795,8 +782,17 @@ msgstr "Nėra to, ko ieškojote? "
 msgid "Create a new subject"
 msgstr "kurti naują dalyką"
 
-msgid "Group forum"
-msgstr "Grupės paštas"
+msgid "email subject"
+msgstr "laiško tema"
+
+msgid "replies"
+msgstr "atsakymai"
+
+msgid "latest email"
+msgstr "naujausias laiškas"
+
+msgid "last author"
+msgstr "paskutinis parašė"
 
 msgid "Reset your password"
 msgstr "Atstatyti slaptažodį"
@@ -833,6 +829,9 @@ msgstr "Logotipas"
 
 msgid "department list"
 msgstr "fakultetų sąrašas"
+
+msgid "Search"
+msgstr "Paieška"
 
 #, python-format
 msgid "Back to %(subject_title)s"
@@ -1157,8 +1156,8 @@ msgstr "Pridėti puslapį"
 msgid "Your confirmed emails:"
 msgstr "Jūsų patvirtinti el. pašto adresai:"
 
-msgid "Post new topic"
-msgstr "Rašyti pranešimą"
+msgid "Pick"
+msgstr "Pasirinkti"
 
 msgid "Filter by tags"
 msgstr "Filtruoti pagal žymas"
@@ -1204,6 +1203,9 @@ msgstr "Neseniai matyti"
 
 msgid "All group members"
 msgstr "Visi grupės nariai"
+
+msgid "Group forum"
+msgstr "Grupės paštas"
 
 msgid "Group messages"
 msgstr "Grupės paštas"

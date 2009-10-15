@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2009-10-12 16:45+0300\n"
+"POT-Creation-Date: 2009-10-15 13:44+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,6 +63,9 @@ msgstr ""
 msgid "Subjects"
 msgstr ""
 
+msgid "Page"
+msgstr ""
+
 msgid ""
 "The group's page was hidden. You can show it again by editing the group's "
 "settings."
@@ -89,6 +92,9 @@ msgid "Member"
 msgstr ""
 
 msgid "Leave group"
+msgstr ""
+
+msgid "Group information and settings updated."
 msgstr ""
 
 msgid "Users invited."
@@ -202,12 +208,6 @@ msgstr ""
 msgid "Your password has been updated. Welcome back!"
 msgstr ""
 
-msgid "Profile"
-msgstr ""
-
-msgid "Search"
-msgstr ""
-
 msgid "Your profile was updated."
 msgstr ""
 
@@ -240,9 +240,6 @@ msgid "Confirm the email for Ututi"
 msgstr ""
 
 msgid "Ututi group invitation"
-msgstr ""
-
-msgid "Ututi user wants to join your group."
 msgstr ""
 
 msgid "Ututi password recovery"
@@ -650,24 +647,13 @@ msgstr ""
 msgid "Show group page"
 msgstr ""
 
+msgid "Default group tab"
+msgstr ""
+
 msgid "Edit group front page"
 msgstr ""
 
 msgid "Content"
-msgstr ""
-
-msgid "Group Files"
-msgstr ""
-
-msgid "Group front page"
-msgstr ""
-
-msgid "The group's page is empty. Enter your description."
-msgstr ""
-
-msgid ""
-"A group can watch subjects that it is studying at the moment. Changes in "
-"watched subjects are shown to all classmates."
 msgstr ""
 
 msgid "Group members"
@@ -721,6 +707,9 @@ msgstr ""
 msgid "Finish and go to group's main page"
 msgstr ""
 
+msgid "The group's page is empty. Enter your description."
+msgstr ""
+
 #, python-format
 msgid "Subject %(subj)s was selected."
 msgstr ""
@@ -740,7 +729,16 @@ msgstr ""
 msgid "Create a new subject"
 msgstr ""
 
-msgid "Group forum"
+msgid "email subject"
+msgstr ""
+
+msgid "replies"
+msgstr ""
+
+msgid "latest email"
+msgstr ""
+
+msgid "last author"
 msgstr ""
 
 msgid "Reset your password"
@@ -777,6 +775,9 @@ msgid "Logo"
 msgstr ""
 
 msgid "department list"
+msgstr ""
+
+msgid "Search"
 msgstr ""
 
 #, python-format
@@ -1082,7 +1083,7 @@ msgstr ""
 msgid "Your confirmed emails:"
 msgstr ""
 
-msgid "Post new topic"
+msgid "Pick"
 msgstr ""
 
 msgid "Filter by tags"
@@ -1125,6 +1126,9 @@ msgid "Recently seen"
 msgstr ""
 
 msgid "All group members"
+msgstr ""
+
+msgid "Group forum"
 msgstr ""
 
 msgid "Group messages"
