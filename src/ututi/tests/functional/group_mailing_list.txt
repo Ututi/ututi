@@ -9,7 +9,6 @@ Test for group mailing list UI
 There are no threads posted at the moment:
 
     >>> browser.printQuery("id('forum-thread-list')")
-    <table id="forum-thread-list"></table>
 
 Let's send some messages:
 

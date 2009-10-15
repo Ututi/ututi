@@ -13,7 +13,7 @@ Let's find the group.
     http://localhost/group/moderators/page
 
 At first the page should be empty.
-    >>> browser.printQuery('id("page-content")/text()')
+    >>> browser.printQuery('id("body-container")/text()')
     The group's page is empty. Enter your description.
 
 We can edit it. of course:
@@ -24,5 +24,5 @@ We can edit it. of course:
     >>> browser.getControl('Content').value = 'This is our group'
     >>> browser.getControl('Save').click()
 
-    >>> browser.printQuery('id("page-content")/text()')
+    >>> browser.printQuery('id("body-container")/text()')
     This is our group
