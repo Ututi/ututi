@@ -48,22 +48,9 @@ class ProfileController(SearchBaseController):
     def __before__(self):
         c.breadcrumbs = [{'title': c.user.fullname, 'link': url(controller='profile', action='index')}]
 
-    def _actions(self, selected):
-        return [ {'title': _('Profile'),
-                  'link': url(controller='profile', action='index'),
-                  'selected': selected == 'profile'},
-                 {'title': _("What's new?"),
-                  'link': url(controller='profile', action='home'),
-                  'selected': selected == 'home'},
-                 {'title': _("Search"),
-                  'link': url(controller='profile', action='search'),
-                  'selected': selected == 'search'},
-                 ]
-
     @ActionProtector("user")
     @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
     def search(self):
-        c.breadcrumbs.append(self._actions('search'))
         self._search()
         return render('/profile/search.mako')
 
@@ -75,7 +62,6 @@ class ProfileController(SearchBaseController):
 
     @ActionProtector("user")
     def index(self):
-        c.breadcrumbs.append(self._actions('profile'))
         c.events = meta.Session.query(Event)\
             .filter(Event.author_id == c.user.id)\
             .order_by(desc(Event.created))\
@@ -90,7 +76,6 @@ class ProfileController(SearchBaseController):
 
     @ActionProtector("user")
     def home(self):
-        c.breadcrumbs.append(self._actions('home'))
         c.events = meta.Session.query(Event)\
             .filter(or_(Event.object_id.in_([s.id for s in c.user.watched_subjects]),
                         Event.object_id.in_([m.group.id for m in c.user.memberships])))\
@@ -108,8 +93,6 @@ class ProfileController(SearchBaseController):
 
     @ActionProtector("user")
     def edit(self):
-        c.breadcrumbs.append(self._actions('profile'))
-
         defaults = {
             'fullname': c.user.fullname,
             'site_url': c.user.site_url,
@@ -175,7 +158,6 @@ class ProfileController(SearchBaseController):
     @validate(schema=SearchSubmit, form='subjects', post_only = False, on_get = True)
     @ActionProtector("user")
     def subjects(self):
-        c.breadcrumbs.append(self._actions('home'))
         c.search_target = url(controller='profile', action='subjects')
 
         #retrieve search parameters
