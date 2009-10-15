@@ -139,20 +139,28 @@ def marked_list(items):
     items[-1]['last_item'] = True
     return items
 
+def get_timezone():
+    from pylons import config
+    tz = config.get('timezone')
+    return pytz.timezone(tz)
+
+def get_locale():
+    from pylons import config
+    return config.get('locale')
+
 def fmt_dt(dt):
     """Format date and time for output."""
     from babel import dates
     fmt = "yyyy MMM dd, HH:mm"
-    localtime = pytz.utc.localize(dt).astimezone(pytz.timezone('Europe/Vilnius'))
-    return dates.format_datetime(localtime, fmt)
+    localtime = pytz.utc.localize(dt).astimezone(get_timezone())
+    return dates.format_datetime(localtime, fmt, locale=get_locale())
 
 def fmt_shortdate(dt):
     """Format date and time for output."""
     from babel import dates
-
     fmt = "MMM dd, HH:mm"
-    localtime = pytz.utc.localize(dt).astimezone(pytz.timezone('Europe/Vilnius'))
-    return dates.format_datetime(localtime, fmt)
+    localtime = pytz.utc.localize(dt).astimezone(get_timezone())
+    return dates.format_datetime(localtime, fmt, locale=get_locale())
 
 def nl2br(text):
     import cgi

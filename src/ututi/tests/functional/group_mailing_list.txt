@@ -51,7 +51,7 @@ properly in the forum page:
     >>> browser.printQuery("id('forum-thread-list')//td//text()")
     Hello
     3 replies
-    2009 Jun 15, 17:05
+    2009 Jun 15, 14:05
     Adminas Adminovix
 
 
