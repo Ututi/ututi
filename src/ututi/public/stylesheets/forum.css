@@ -52,6 +52,13 @@ table#forum-thread-list td.author .date {
   font-size: 0.8em;
 }
 
+table#forum-thread-list tr th {
+  font-weight: normal;
+  font-size: 12px;
+  text-align: left;
+  padding: 2px 5px;
+}
+
 /* forum thread */
 
 table#forum-thread {

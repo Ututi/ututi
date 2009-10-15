@@ -21,10 +21,7 @@
 </%def>
 
 <div id="page_header">
-  <h1 style="float: left;">${_('Group forum')}</h1>
-  <div style="float: left; margin-top: 8px; margin-left: 10px;">
-    <a class="btn" href="${url(controller='groupforum', action='new_thread', id=c.group.group_id)}"><span>${_("New topic")}</span></a>
-  </div>
+  <a class="btn" href="${url(controller='groupforum', action='new_thread', id=c.group.group_id)}"><span>${_("New topic")}</span></a>
 </div>
 <br class="clear-left"/>
 
@@ -33,8 +30,15 @@
 
 %if not c.messages:
   <span class="small">${_('No messages yet.')}</span>
-%endif
+%else:
 <table id="forum-thread-list">
+<tr>
+  <th>${_('email subject')}</th>
+  <th>${_('replies')}</th>
+  <th>${_('latest email')}</th>
+  <th>${_('last author')}</th>
+</tr>
+
 % for message in c.messages:
 <tr>
   <td class="subject">
@@ -54,3 +58,4 @@
 </tr>
 % endfor
 </table>
+%endif
