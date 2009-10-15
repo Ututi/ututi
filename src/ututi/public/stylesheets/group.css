@@ -43,7 +43,8 @@ table.group-members th {
   color: #888;
 }
 
-table.group-members td, th {
+table.group-members td,
+table.group-members th {
   border-bottom: 1px solid #ded8d8;
   padding: 3px 5px;
 }
