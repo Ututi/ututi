@@ -17,6 +17,7 @@ setup(
         "formencode",
         "wsgi_intercept",
         "zope.testbrowser",
+        "zope.cachedescriptors",
         "lxml",
         "nous.mailpost",
         "python_magic",

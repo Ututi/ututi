@@ -33,6 +33,8 @@ from ututi.lib.emails import group_invitation_email
 from ututi.lib.security import check_crowds
 from nous.mailpost import copy_chunked
 
+from zope.cachedescriptors.property import Lazy
+
 log = logging.getLogger(__name__)
 
 def init_model(engine):
@@ -980,11 +982,12 @@ class LocationTag(Tag):
             location = location.parent
         return list(reversed(path))
 
+    @Lazy
     def flatten(self):
         """Return a list of the tag's children and the tag's children's children, etc."""
         flat = [self]
         for child in self.children:
-            flat.extend(child.flatten())
+            flat.extend(child.flatten)
         return flat
 
     @classmethod
@@ -1051,11 +1054,26 @@ class LocationTag(Tag):
                 'file' : File,
                 }
             obj = obj_types[obj.lower()]
-        ids = [t.id for t in self.flatten()]
+        ids = [t.id for t in self.flatten]
         return meta.Session.query(obj).filter(obj.location_id.in_(ids)).count()
 
+    @Lazy
+    def stats(self):
+        ids = [t.id for t in self.flatten]
+        counts = meta.Session.query(ContentItem.content_type, func.count(ContentItem.id))\
+            .filter(ContentItem.location_id.in_(ids)).group_by(ContentItem.content_type).all()
+        res = {'subject': 0, 'group': 0, 'file': 0}
+        res.update(dict(counts))
+        return res
+
+    @Lazy
+    def rating(self):
+        """Calculate the rating of a university."""
+        stats = self.stats
+        return stats["subject"] * stats["file"] * stats["group"]
+
     def latest_groups(self):
-        ids = [t.id for t in self.flatten()]
+        ids = [t.id for t in self.flatten]
         grps =  meta.Session.query(Group).filter(Group.location_id.in_(ids)).order_by(Group.created_on.desc()).limit(5).all()
         return grps
 
