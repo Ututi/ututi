@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-10-15 13:52+0300\n"
+"PO-Revision-Date: 2009-10-16 16:20+0300\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -225,6 +225,12 @@ msgstr "Naudotojo profilis nerastas."
 
 msgid "Your password has been updated. Welcome back!"
 msgstr "Slaptažodis atnaujintas. Sveikiname sugrįžus :)"
+
+msgid "Daily Ututi news!"
+msgstr ""
+
+msgid "Weekly Ututi news!"
+msgstr ""
 
 msgid "Your profile was updated."
 msgstr "Profilis atnaujintas!"
@@ -465,11 +471,19 @@ msgstr "Logotipas"
 msgid "UTUTI"
 msgstr "UTUTI"
 
+msgid ""
+"This is a testing version - this is just a copy of the information! "
+"Changes you make will not be persisted!"
+msgstr "Čia bandomoji versija - duomenys netikri! Tik peržiūrėjimui!"
+
 msgid "Close"
 msgstr "Uždaryti"
 
 msgid "Apie Ututi"
 msgstr "Apie Ututi"
+
+msgid "ututi_blog_url"
+msgstr "http://blog.ututi.lt"
 
 msgid "U-blog"
 msgstr "U-blogas"
@@ -1156,8 +1170,8 @@ msgstr "Pridėti puslapį"
 msgid "Your confirmed emails:"
 msgstr "Jūsų patvirtinti el. pašto adresai:"
 
-msgid "Pick"
-msgstr "Pasirinkti"
+msgid "Post new topic"
+msgstr "Nauja tema"
 
 msgid "Filter by tags"
 msgstr "Filtruoti pagal žymas"

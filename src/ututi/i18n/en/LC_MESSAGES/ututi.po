@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-10-15 13:44+0300\n"
+"PO-Revision-Date: 2009-10-16 16:18+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -210,6 +210,12 @@ msgid "User account not found."
 msgstr ""
 
 msgid "Your password has been updated. Welcome back!"
+msgstr ""
+
+msgid "Daily Ututi news!"
+msgstr ""
+
+msgid "Weekly Ututi news!"
 msgstr ""
 
 msgid "Your profile was updated."
@@ -434,10 +440,18 @@ msgstr ""
 msgid "UTUTI"
 msgstr ""
 
+msgid ""
+"This is a testing version - this is just a copy of the information! "
+"Changes you make will not be persisted!"
+msgstr ""
+
 msgid "Close"
 msgstr ""
 
 msgid "Apie Ututi"
+msgstr ""
+
+msgid "ututi_blog_url"
 msgstr ""
 
 msgid "U-blog"
@@ -1094,7 +1108,7 @@ msgstr ""
 msgid "Your confirmed emails:"
 msgstr ""
 
-msgid "Pick"
+msgid "Post new topic"
 msgstr ""
 
 msgid "Filter by tags"

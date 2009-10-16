@@ -252,7 +252,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
         Copyright <a href="http://www.nous.lt">UAB „Nous“</a>
         <div id="footer-links">
           <a href="${url(controller='home', action='about')}">${_('Apie Ututi')}</a> |
-          <a href="http://blog.ututi.lt">${_('U-blog')}</a> |
+          <a href="${_('ututi_blog_url')}">${_('U-blog')}</a> |
           <a href="${url(controller='home', action='terms')}">${_('Terms of use')}</a>
         </div>
 

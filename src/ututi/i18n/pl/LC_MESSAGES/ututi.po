@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-10-15 13:44+0300\n"
+"PO-Revision-Date: 2009-10-16 16:21+0300\n"
 "Last-Translator: Eri\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -219,6 +219,12 @@ msgstr "Taki profil użytkownika nie istnieje."
 
 msgid "Your password has been updated. Welcome back!"
 msgstr "Twoje hasło zostało zaktualizowane. Witaj ponownie!"
+
+msgid "Daily Ututi news!"
+msgstr ""
+
+msgid "Weekly Ututi news!"
+msgstr ""
 
 msgid "Your profile was updated."
 msgstr "Twój profil został zaktualizowany."
@@ -459,11 +465,19 @@ msgstr "logo"
 msgid "UTUTI"
 msgstr "UTUTI"
 
+msgid ""
+"This is a testing version - this is just a copy of the information! "
+"Changes you make will not be persisted!"
+msgstr ""
+
 msgid "Close"
 msgstr "Zamknij"
 
 msgid "Apie Ututi"
 msgstr "O Ututi"
+
+msgid "ututi_blog_url"
+msgstr "http://blog.ututi.pl"
 
 msgid "U-blog"
 msgstr "U-blog"
@@ -1148,7 +1162,7 @@ msgstr "Dodaj stronę"
 msgid "Your confirmed emails:"
 msgstr "Zaakceptowałeś e-maile:"
 
-msgid "Pick"
+msgid "Post new topic"
 msgstr ""
 
 msgid "Filter by tags"
