@@ -17,9 +17,100 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
 </div>
 </%def>
 
+<%def name="university(uni)">
+<div class="university_block">
+  %if uni.logo is not None:
+  <div class="logo">
+    <img src="${url(controller='structure', action='logo', id=uni.id, width=26, height=26)}" alt="logo" />
+  </div>
+  %endif
+  <div class="title">
+    <a href="${uni.url()}" title="${uni.title}">${uni.title}</a>
+  </div>
+  <div class="stats">
+    <span>
+        <%
+           cnt = uni.count('subject')
+        %>
+        ${ungettext("%(count)s <em>subject</em>", "%(count)s <em>subjects</em>", cnt) % dict(count = cnt)|n}
+    </span>
+    <span>
+        <%
+           cnt = uni.count('group')
+        %>
+        ${ungettext("%(count)s <em>group</em>", "%(count)s <em>groups</em>", cnt) % dict(count = cnt)|n}
+    </span>
+    <span>
+        <%
+           cnt = uni.count('file')
+        %>
+        ${ungettext("%(count)s <em>file</em>", "%(count)s <em>files</em>", cnt) % dict(count = cnt)|n}
+    </span>
+  </div>
+</div>
+</%def>
 
+<%def name="universities(unis)">
+    %for uni in unis:
+      ${university(uni)}
+    %endfor
+    <div id="pager">
+      ${unis.pager(format='~3~',
+                     partial_param='js',
+                     onclick="$('#pager').addClass('loading'); $('#university-list').load('%s'); return false;") }
+    </div>
+    <div id="sorting">
+      ${_('Sort  by: ')}
+      <a id="sort-alpha" href="${url(controller='home', action='index', sort='alpha')}">${'alphabetically'}</a>
+      <input type="hidden" id="sort-alpha-url" name="sort-alpha-url" value="${url(controller='home', action='index', sort='alpha', js=True)}" />
+      <a id="sort-popular" href="${url(controller='home', action='index', sort='popular')}">${'by popularity'}</a>
+      <input type="hidden" id="sort-popular-url" name="sort-popular-url" value="${url(controller='home', action='index', sort='popular', js=True)}" />
+    </div>
+</%def>
 
   <h1>${_('UTUTI - student information online')}</h1>
+  <div id="frontpage-search">
+    ${search_form(parts=['obj_type', 'text'])}
+  </div>
+
+  <div id="university-list" class="${c.teaser and 'collapsed_list' or ''}">
+    ${universities(c.unis)}
+  </div>
+  %if c.teaser:
+    <div id="teaser_switch" style="display: none;">
+      <a href="#" class="more">${_('More universities')}</a>
+    </div>
+  %endif
+  <script type="text/javascript">
+  //<![CDATA[
+    $(document).ready(function() {
+      $('#university-list.collapsed_list').data("preheight", $('#university-list.collapsed_list').height()).css('height', '100px');
+      $('#teaser_switch').show();
+      $('#teaser_switch a').click(function() {
+        $('#teaser_switch').hide();
+        $('#university-list').animate({
+          height: $('#university-list').data("preheight")},
+          200, "linear",
+          function() {
+            $('#university-list').css('height', 'auto');
+          });
+        return false;
+      });
+      $('#sort-alpha,#sort-popular').live("click", function() {
+        var url = $('#'+$(this).attr('id')+'-url').val();
+        console.log('#'+$(this).attr('id')+'-url');
+        console.log(url);
+        $('#sorting').addClass('loading');
+        $('#university-list').load(url);
+        return false;
+      });
+
+    });
+  //]]>
+  </script>
+
+  <br class="clear-left" />
+
   <div id="ututi_features">
     <div id="can_find">
       <h3>${_('What can You find here?')}</h3>
@@ -34,11 +125,5 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
       and communicate with groupmates.') % dict(subjects=url(controller='search', action='index', obj_type='subject'),\
                                                 groups=url(controller='search', action='index', obj_type='group'))|n}
     </div>
-  </div>
-  <div id="frontpage-search">
-    <h1>${_('Ututi search')}</h1>
-
-    ${search_form(parts=['obj_type', 'text'])}
-
   </div>
 

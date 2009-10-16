@@ -5,11 +5,13 @@ from datetime import datetime
 
 from routes.util import redirect_to
 from formencode import Schema, validators, Invalid, All, htmlfill
+from webhelpers import paginate
 
 from pylons import request, response, c, url, session
 from pylons.decorators import validate
 from pylons.controllers.util import redirect_to, abort
 from pylons.i18n import _
+from pylons.templating import render_mako_def
 
 from sqlalchemy.orm.exc import NoResultFound
 
@@ -17,7 +19,7 @@ from ututi.lib.base import BaseController, render
 import ututi.lib.helpers as h
 from ututi.lib.emails import email_confirmation_request, email_password_reset
 
-from ututi.model import meta, User, Email, PendingInvitation
+from ututi.model import meta, User, Email, PendingInvitation, LocationTag
 
 log = logging.getLogger(__name__)
 
@@ -96,10 +98,30 @@ def sign_in_user(email):
 
 class HomeController(BaseController):
 
+    def _universities(self, sort_popularity=True):
+        unis = meta.Session.query(LocationTag).filter(LocationTag.parent == None).all()
+        if sort_popularity:
+            unis.sort(key=lambda obj: obj.rating, reverse=True)
+        else:
+            unis.sort(key=lambda obj: obj.title)
+        return unis
+
     def index(self):
         if c.user is not None:
             redirect_to(controller='profile', action='home')
         else:
+            sort = request.params.get('sort', 'popular')
+            unis = self._universities(sort == 'popular')
+            c.unis = paginate.Page(
+                unis,
+                page=int(request.params.get('page', 1)),
+                items_per_page = 16,
+                item_count = len(unis),
+                **{'sort': sort}
+                )
+            if request.params.has_key('js'):
+                return render_mako_def('/anonymous_index.mako','universities', unis=c.unis)
+            c.teaser = not (request.params.has_key('page') or request.params.has_key('sort'))
             return render('/anonymous_index.mako')
 
     def banners(self):
