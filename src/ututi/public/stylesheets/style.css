@@ -629,7 +629,7 @@ a.small-link:hover {
 #tabs .tab div {
   float: left;
   height: 17px;
-  padding-top: 2px;
+  padding-top: 1px;
   padding-right: 10px;
 }
 
