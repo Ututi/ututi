@@ -210,6 +210,9 @@ ${h.javascript_link('/javascripts/forms.js')|n}
 
   <body>
     <div id="container">
+      %if c.testing:
+      <div style="background: #F7FF00">${_('This is a testing version - this is just a copy of the information! Changes you make will not be persisted!')}</div>
+      %endif
       <div id="header">
         <div id="personal-box" class="rounded-block">
           ${self.personal_block()}

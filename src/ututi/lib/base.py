@@ -7,6 +7,7 @@ from datetime import datetime
 from sqlalchemy.exc import InternalError
 from sqlalchemy.exc import InvalidRequestError
 
+from paste.util.converters import asbool
 from pylons.controllers import WSGIController
 from pylons.templating import render_mako as render
 from pylons import c, config
@@ -26,6 +27,7 @@ class BaseController(WSGIController):
 
         c.user = current_user()
         c.google_tracker = config['google_tracker']
+        c.testing = asbool(config.get('testing', False))
 
         lang = get_lang()
         if not lang:
