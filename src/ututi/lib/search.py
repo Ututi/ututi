@@ -87,14 +87,14 @@ def _search_query_tags(query, tags):
                 #we have a mixed tag - one that matches both a location tag and a simple tag
                 location = []
                 for ltag_item in ltag:
-                    location.extend([lt.id for lt in ltag_item.flatten()])
+                    location.extend([lt.id for lt in ltag_item.flatten])
 
                 mtags.append(dict(ltag=location, tag=tag.id))
             elif ltag != []:
                 # if it is a location tag, add not only it, but also its children
                 location = []
                 for ltag_item in ltag:
-                    location.extend([lt.id for lt in ltag_item.flatten()])
+                    location.extend([lt.id for lt in ltag_item.flatten])
                 ltags.append(location)
             elif tag is not None:
                 stags.append(tag.id)
