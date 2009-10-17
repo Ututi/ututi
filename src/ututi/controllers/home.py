@@ -106,22 +106,26 @@ class HomeController(BaseController):
             unis.sort(key=lambda obj: obj.title)
         return unis
 
+    def _get_unis(self):
+        sort = request.params.get('sort', 'popular')
+        unis = self._universities(sort == 'popular')
+        c.unis = paginate.Page(
+            unis,
+            page=int(request.params.get('page', 1)),
+            items_per_page = 16,
+            item_count = len(unis),
+            **{'sort': sort}
+            )
+        c.teaser = not (request.params.has_key('page') or request.params.has_key('sort'))
+
+
     def index(self):
         if c.user is not None:
             redirect_to(controller='profile', action='home')
         else:
-            sort = request.params.get('sort', 'popular')
-            unis = self._universities(sort == 'popular')
-            c.unis = paginate.Page(
-                unis,
-                page=int(request.params.get('page', 1)),
-                items_per_page = 16,
-                item_count = len(unis),
-                **{'sort': sort}
-                )
+            self._get_unis()
             if request.params.has_key('js'):
                 return render_mako_def('/anonymous_index.mako','universities', unis=c.unis)
-            c.teaser = not (request.params.has_key('page') or request.params.has_key('sort'))
             return render('/anonymous_index.mako')
 
     def banners(self):
@@ -211,7 +215,8 @@ class HomeController(BaseController):
                     c.message = _('The invitation link you have followed was either already used or invalid.')
                 return render('/login.mako')
 
-            return render('anonymous_index.mako')
+            self._get_unis()
+            return render('/anonymous_index.mako')
 
     def _pswrecovery_form(self):
         return render('home/recoveryform.mako')
