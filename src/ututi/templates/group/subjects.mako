@@ -5,13 +5,11 @@
 <%namespace file="/sections/content_snippets.mako" import="item_tags, tag_link"/>
 <%namespace file="/group/add.mako" import="path_steps"/>
 <%namespace file="/portlets/group.mako" import="*"/>
-<%namespace file="/portlets/banners/base.mako" import="*"/>
 
 <%def name="portlets()">
 <div id="sidebar">
   ${group_info_portlet()}
   ${group_changes_portlet()}
-  ${mif_banner_portlet(c.group.location)}
 </div>
 </%def>
 
