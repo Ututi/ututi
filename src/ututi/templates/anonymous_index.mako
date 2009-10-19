@@ -110,20 +110,32 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
   </script>
 
   <br class="clear-left" />
-
-  <div id="ututi_features">
-    <div id="can_find">
-      <h3>${_('What can You find here?')}</h3>
-      ${_('Group mailing lists, <a href="%(link)s" title="Subject list">subject</a> wikis, files, lecture notes and answers to questions that matter for your studies.') %\
-        dict(link=url(controller='search', action='index', obj_type='subject'))|n}
-    </div>
-    <div id="can_do">
-      <h3>${_('What can you do here?')}</h3>
-      ${_('Store <a href="%(subjects)s" title="Subject list">study materials</a>\
-      and pass them on for future generations, create\
-      <a href="%(groups)s" title="Group list">academic groups</a>\
-      and communicate with groupmates.') % dict(subjects=url(controller='search', action='index', obj_type='subject'),\
-                                                groups=url(controller='search', action='index', obj_type='group'))|n}
-    </div>
+  <div id="infoblock">
+      <div id="presentation">
+        <div style="width:260px;text-align:left" id="__ss_2264988">
+          <object style="margin:0px" width="260" height="200">
+            <param name="movie"
+                   value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=prs-091018104812-phpapp02&rel=0&stripped_title=prs-2264988" />
+            <param name="allowFullScreen" value="true"/>
+            <param name="allowScriptAccess" value="always"/>
+            <embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=prs-091018104812-phpapp02&rel=0&stripped_title=prs-2264988"
+                   type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="260" height="200"></embed>
+          </object>
+        </div>
+      </div>
+      <div id="ututi_features">
+        <div id="can_find">
+          <h3>${_('What can You find here?')}</h3>
+          ${_('Group mailing lists, <a href="%(link)s" title="Subject list">subject</a> wikis, files, lecture notes and answers to questions that matter for your studies.') %\
+            dict(link=url(controller='search', action='index', obj_type='subject'))|n}
+        </div>
+        <div id="can_do">
+          <h3>${_('What can you do here?')}</h3>
+          ${_('Store <a href="%(subjects)s" title="Subject list">study materials</a>\
+          and pass them on for future generations, create\
+          <a href="%(groups)s" title="Group list">academic groups</a>\
+          and communicate with groupmates.') % dict(subjects=url(controller='search', action='index', obj_type='subject'),\
+                                                    groups=url(controller='search', action='index', obj_type='group'))|n}
+        </div>
+      </div>
   </div>
-
