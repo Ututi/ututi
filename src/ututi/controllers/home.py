@@ -99,22 +99,21 @@ def sign_in_user(email):
 class HomeController(BaseController):
 
     def _universities(self, sort_popularity=True):
-        unis = meta.Session.query(LocationTag).filter(LocationTag.parent == None).all()
+        unis = meta.Session.query(LocationTag).filter(LocationTag.parent == None).order_by(LocationTag.title.asc()).all()
         if sort_popularity:
             unis.sort(key=lambda obj: obj.rating, reverse=True)
-        else:
-            unis.sort(key=lambda obj: obj.title)
+
         return unis
 
     def _get_unis(self):
-        sort = request.params.get('sort', 'popular')
-        unis = self._universities(sort == 'popular')
+        c.sort = request.params.get('sort', 'popular')
+        unis = self._universities(c.sort == 'popular')
         c.unis = paginate.Page(
             unis,
             page=int(request.params.get('page', 1)),
             items_per_page = 16,
             item_count = len(unis),
-            **{'sort': sort}
+            **{'sort': c.sort}
             )
         c.teaser = not (request.params.has_key('page') or request.params.has_key('sort'))
 

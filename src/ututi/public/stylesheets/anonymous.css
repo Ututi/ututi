@@ -43,6 +43,10 @@ h1 {
   text-align: right;
 }
 
+#sorting a.active {
+  color: #4b4b4b;
+}
+
 /* end university list */
 
 /* search */

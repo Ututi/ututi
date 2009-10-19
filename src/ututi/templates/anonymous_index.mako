@@ -61,9 +61,9 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
     </div>
     <div id="sorting">
       ${_('Sort  by: ')}
-      <a id="sort-alpha" href="${url(controller='home', action='index', sort='alpha')}">${'alphabetically'}</a>
+      <a id="sort-alpha" class="${c.sort == 'alpha' and 'active' or ''}" href="${url(controller='home', action='index', sort='alpha')}">${'alphabetically'}</a>
       <input type="hidden" id="sort-alpha-url" name="sort-alpha-url" value="${url(controller='home', action='index', sort='alpha', js=True)}" />
-      <a id="sort-popular" href="${url(controller='home', action='index', sort='popular')}">${'by popularity'}</a>
+      <a id="sort-popular" class="${c.sort == 'popular' and 'active' or ''}" href="${url(controller='home', action='index', sort='popular')}">${'by popularity'}</a>
       <input type="hidden" id="sort-popular-url" name="sort-popular-url" value="${url(controller='home', action='index', sort='popular', js=True)}" />
     </div>
 </%def>
