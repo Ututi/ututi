@@ -1052,6 +1052,10 @@ class LocationTag(Tag):
         return grps
 
 
+def cleanupFileName(filename):
+    return filename.split('\\')[-1].split('/')[-1]
+
+
 class File(ContentItem):
     """Class representing user-uploaded files."""
 
@@ -1084,8 +1088,8 @@ class File(ContentItem):
         if md5 is not None:
             self.md5 = md5
 
-        self.filename = filename
-        self.title = title
+        self.filename = cleanupFileName(filename)
+        self.title = cleanupFileName(title)
         if mimetype is not None:
             self.mimetype = mimetype
         if created is not None:

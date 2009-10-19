@@ -27,7 +27,7 @@ File upload:
 
     >>> res = app.post("/subject/vu/mat_analize/upload_file",
     ...                params={'folder': 'Some folder'},
-    ...                upload_files=[("attachment", "image.png", "Test")])
+    ...                upload_files=[("attachment", r"c:\My Home\image.png", "Test")])
     >>> print dedent(res.body)
     <li class="file">
       ...
