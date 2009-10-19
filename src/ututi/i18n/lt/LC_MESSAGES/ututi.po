@@ -421,7 +421,7 @@ msgstr ""
 "Įkelti <a href=\"%(subjects)s\" title=\"Dalykų sąrašas\">studijų "
 "medžiagą</a>, perduoti tai ateities kartoms, kurti <a href=\"%(groups)s\""
 " title=\"Grupių sąrašas\">akademines grupes</a> ir bendrauti su grupės "
-"draugai."
+"draugais."
 
 msgid "Ututi search"
 msgstr "Ututi paieška"
