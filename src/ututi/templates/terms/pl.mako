@@ -2,7 +2,7 @@
 
 <h1>Regulamin korzystania z portalu</h1>
 
-<div>
+<div class="text">
 
 <h2>1.Licencja treści w serwisie</h2>
 <p>

@@ -2,7 +2,7 @@
 
 <h1>Czym jest Ututi?</h1>
 
-<div>
+<div class="lt">
   <p>
     <a href="${url('/')}">Ututi</a> – to wirtualna przestrzeń
     komunikacyjna dla studentów. Służy do wygodnej i szybkiej wymiany

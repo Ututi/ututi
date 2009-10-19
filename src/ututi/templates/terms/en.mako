@@ -2,7 +2,7 @@
 
 <h1>Susitarimai ir sąlygos</h1>
 
-<div>
+<div class="text">
 
   <h2>1. Turinio licencija</h2>
   <p>Viešas svetainės
