@@ -622,6 +622,7 @@ a.small-link:hover {
 }
 
 #tabs .tab div {
+  float: left;
   height: 17px;
   padding-top: 2px;
   padding-right: 10px;
@@ -1366,7 +1367,7 @@ span.message, a.btn, span.btn {
   _position:relative;
   _width:10px;
   _overflow-y:hidden;
-  _font-size: 0;
+
 }
 
 a.btn, span.btn {
