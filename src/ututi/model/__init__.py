@@ -1070,7 +1070,7 @@ class LocationTag(Tag):
     def rating(self):
         """Calculate the rating of a university."""
         stats = self.stats
-        return stats["subject"] * stats["file"] * stats["group"]
+        return (stats["subject"] + 1) * (stats["file"] + 1) * (stats["group"] + 1)
 
     def latest_groups(self):
         ids = [t.id for t in self.flatten]
