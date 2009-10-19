@@ -1465,6 +1465,17 @@ span.btn btn, span.btn input{
   border: 0;
   margin-bottom: 0;
 }
+/*end border-less portlet */
+
+
+/* banners */
+#links_portlet_content .structured_info {
+  text-align: right;
+}
+
+#links_portlet_content .structured_info a {
+  margin-left: 15px;
+}
 
 #banners_portlet_content {
   padding: 0;
