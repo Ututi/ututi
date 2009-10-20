@@ -67,7 +67,7 @@ ${h.javascript_link('/javascripts/search.js')|n}
       %endif
       <div class="search-submit">
         <span class="btn-large">
-          <input type="submit" value="${_('Search')}"/>
+          <input type="submit" id="search-btn" value="${_('Search')}"/>
         </span>
       </div>
       <br style="clear: left;"/>
@@ -83,25 +83,25 @@ ${h.javascript_link('/javascripts/search.js')|n}
   %if js:
   <script type="text/javascript">
   //<![CDATA[
+    function submit_search(element) {
+         $(element).parents('.search-controls').addClass('loading');
+         $.post("${js_target}", $(element).parents('form').serialize(), function(data) {
+                $('#search-results-container').replaceWith(data);
+                $('.search-controls').removeClass('loading');
+         });
+    };
+
     $(document).ready(function() {
       %if 'tags' in parts:
-      $('#tags').change(function() {
-         $(this).parents('.search-controls').addClass('loading');
-         $.post("${js_target}", $(this).parents('form').serialize(), function(data) {
-                $('#search-results-container').replaceWith(data);
-                $('.search-controls').removeClass('loading');
-         });
-      });
+      $('#tags').change(function() {submit_search(this);});
       %endif
       %if 'obj_type' in parts:
-      $('#obj_type').change(function() {
-         $(this).parents('.search-controls').addClass('loading');
-         $.post("${js_target}", $(this).parents('form').serialize(), function(data) {
-                $('#search-results-container').replaceWith(data);
-                $('.search-controls').removeClass('loading');
-         });
-      });
+      $('#obj_type').change(function() {submit_search(this);});
       %endif
+      $('#search-btn').click(function() {
+        submit_search(this);
+        return false;
+      });
     });
   //]]>
   </script>
