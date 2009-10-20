@@ -5,23 +5,5 @@
     <title>Banners</title>
   </head>
   <body style="text-align: right;">
-    <style>
-      html, body {
-        padding: 0;
-        margin: 0;
-      }
-      a {
-         text-decoration: none;
-      }
-      img {
-         border: 0;
-      }
-    </style>
-    <a target="_main" href="http://blog.ututi.pl" title="U-blog">
-      <img src="${url('/images/bunners/ublog.jpeg')}" alt="U-blog" />
-    </a>
-    <a target="_main" href="http://www.facebook.com/pages/Ututipl/117010656858" title="Facebook">
-      <img src="${url('/images/bunners/facebook.jpeg')}" alt="facebook" />
-    </a>
   </body>
 </html>

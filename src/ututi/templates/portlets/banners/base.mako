@@ -15,7 +15,7 @@
 <%def name="header()">
 </%def>
 <div class="structured_info">
-  <iframe src="${url('/bunners', qualified=True)}" frameborder="0" style="height: 160px; border: none; overflow: visible;">
+  <iframe src="${url('/bunners', qualified=True)}" frameborder="0" style="height: 180px; border: none; overflow: visible;">
   </iframe>
 </div>
 </%self:portlet>
