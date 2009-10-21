@@ -9,7 +9,7 @@
 
   ${user_subjects_portlet()}
   ${user_groups_portlet()}
+  ${ututi_links_portlet()}
   ${ututi_banners_portlet()}
-
 </div>
 </%def>
