@@ -111,17 +111,41 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
   </script>
 
   <br class="clear-left" />
+  <script type="text/javascript">
+  //<![CDATA[
+    $(document).ready(function() {
+      $('#presentation-img').click(function() {
+        $('#ututi_features').hide();
+        $('#presentation-img img').animate({
+          width: '570px',
+          height: '225px'
+        },
+        700,
+        'linear',
+        function() {
+          $(this).hide();
+          $('#presentation-actual').show();
+        });
+      });
+    });
+  //]]>
+  </script>
   <div id="infoblock">
       <div id="presentation">
-        <div style="width:260px;text-align:left" id="__ss_2264988">
-          <object style="margin:0px" width="260" height="200">
-            <param name="movie"
-                   value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=prs-091018104812-phpapp02&rel=0&stripped_title=prs-2264988" />
-            <param name="allowFullScreen" value="true"/>
-            <param name="allowScriptAccess" value="always"/>
-            <embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=prs-091018104812-phpapp02&rel=0&stripped_title=prs-2264988"
-                   type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="260" height="200"></embed>
-          </object>
+        <div id="presentation-img">
+          <img src="${url('/images/slideshow_lt.png')}" alt="${_('About ututi')}"/>
+        </div>
+        <div id="presentation-actual">
+          <div style="width:570px;text-align:left" id="__ss_2264988">
+            <object style="margin:0px" width="570" height="225">
+              <param name="movie"
+                     value="${url('/images/presentation/lt.swf')}" />
+              <param name="allowFullScreen" value="true"/>
+              <param name="allowScriptAccess" value="always"/>
+              <embed src="${url('/images/presentation/lt.swf')}"
+                     type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="570" height="225"></embed>
+            </object>
+          </div>
         </div>
       </div>
       <div id="ututi_features">

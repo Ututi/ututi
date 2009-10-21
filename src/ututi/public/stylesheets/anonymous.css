@@ -152,11 +152,6 @@ h1 {
   padding-top: 10px;
 }
 
-#presentation {
-  width: 260px;
-  float: left;
-}
-
 #infoblock #ututi_features {
   float: left;
   width: 300px;
@@ -174,4 +169,19 @@ h1 {
   margin-top: 20px;
   padding-left: 60px;
   background: transparent url("../images/details/fp_image_man.png") left center no-repeat;
+}
+/* end information block */
+
+/* presentation */
+#presentation {
+  width: 260px;
+  float: left;
+}
+
+#presentation-actual {
+  display: none;
+}
+
+#presentation-img {
+  cursor: pointer;
 }
