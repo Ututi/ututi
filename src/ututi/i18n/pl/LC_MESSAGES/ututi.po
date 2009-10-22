@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-10-16 17:25+0300\n"
+"PO-Revision-Date: 2009-10-22 14:06+0300\n"
 "Last-Translator: Eri\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -219,12 +219,6 @@ msgstr "Taki profil użytkownika nie istnieje."
 
 msgid "Your password has been updated. Welcome back!"
 msgstr "Twoje hasło zostało zaktualizowane. Witaj ponownie!"
-
-msgid "Daily Ututi news!"
-msgstr ""
-
-msgid "Weekly Ututi news!"
-msgstr ""
 
 msgid "Your profile was updated."
 msgstr "Twój profil został zaktualizowany."
@@ -894,6 +888,9 @@ msgstr "O Tobie"
 msgid "Personal logo"
 msgstr "Twoje logo"
 
+msgid "These are the files from the the subjects you or your group are watching."
+msgstr ""
+
 msgid "Everywhere"
 msgstr "Wszędzie"
 
@@ -1103,26 +1100,8 @@ msgstr "Wydział"
 msgid "Section"
 msgstr "Dział"
 
-msgid "Address"
-msgstr "Adres"
-
-msgid "Replies"
-msgstr "Odpowiedzi"
-
-msgid "Last post"
-msgstr "Ostatni post"
-
-msgid "You are not a member of any."
-msgstr "Nie nalezysz do żadnej"
-
 msgid "Become a part of Ututi"
 msgstr "Dołącz do Ututi"
-
-msgid "New account"
-msgstr "Nowe konto"
-
-msgid "OpenID"
-msgstr "Open ID"
 
 msgid "Fullname"
 msgstr "Imię, nazwisko"
@@ -1130,76 +1109,14 @@ msgstr "Imię, nazwisko"
 msgid "Repeat password"
 msgstr "Powtórz hasło"
 
-msgid "Register"
-msgstr "Zaloguj się"
-
-msgid "Mailing lists, academic groups, universities, file sharing."
-msgstr "Listy mailingowe, grupy studyjne, uczelnie, dzielenie się dokumentami."
-
-msgid "What can You do here?"
-msgstr "Co tu można robić?"
-
-msgid "Create lecture notes, keep Your study materials, upload and store files."
-msgstr ""
-"Twórz notatki, przechowuj materiały ze studiów, dodawaj i przechowuj "
-"pliki."
-
-msgid "Why here?"
-msgstr "Dlaczego tu?"
-
-msgid "Because it's convenient."
-msgstr "Bo to najwygodniej."
-
-msgid "What is convenient?"
-msgstr "Dlaczego najwygodniej?"
-
-msgid "Everything is in one place."
-msgstr "Wszystko jest w jednym miejscu."
-
-msgid "Add page"
-msgstr "Dodaj stronę"
-
-msgid "Your confirmed emails:"
-msgstr "Zaakceptowałeś e-maile:"
-
-msgid "Post new topic"
-msgstr ""
-
-msgid "Filter by tags"
-msgstr "Filtruj według tagów"
-
-msgid "Year of entry:"
-msgstr "Rok dodania:"
-
 msgid "I agree to the "
 msgstr "Akceptuję"
 
 msgid "terms of use"
 msgstr "regulamin"
 
-msgid "There are no messages."
-msgstr "Brak wiadomości."
-
-msgid "more"
-msgstr "więcej"
-
-#, python-format
-msgid "<em>%(count)s</em> active poster"
-msgid_plural "<em>%(count)s</em> active posters"
-msgstr[0] "<em>%(count)s</em> pisze często"
-msgstr[1] "<em>%(count)s</em>piszą często"
-
-#, python-format
-msgid "<em>%(count)s</em> topic"
-msgid_plural "<em>%(count)s</em> topics"
-msgstr[0] "<em>%(count)s</em> temat"
-msgstr[1] "<em>%(count)s</em> tematy"
-
-#, python-format
-msgid "<em>%(count)s</em> post"
-msgid_plural "<em>%(count)s</em> posts"
-msgstr[0] "<em>%(count)s</em> post"
-msgstr[1] "<em>%(count)s</em> posty"
+msgid "Register"
+msgstr "Zaloguj się"
 
 msgid "Recently seen"
 msgstr "Ostatnio widziany"
@@ -1316,6 +1233,9 @@ msgstr ""
 
 msgid "Delete subject"
 msgstr "Usuń przedmiot"
+
+msgid "You are not a member of any."
+msgstr "Nie nalezysz do żadnej"
 
 msgid "More groups"
 msgstr "Więcej grup"

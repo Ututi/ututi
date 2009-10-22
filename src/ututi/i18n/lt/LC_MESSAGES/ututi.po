@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-10-16 16:20+0300\n"
+"PO-Revision-Date: 2009-10-22 14:08+0300\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -225,12 +225,6 @@ msgstr "Naudotojo profilis nerastas."
 
 msgid "Your password has been updated. Welcome back!"
 msgstr "Slaptažodis atnaujintas. Sveikiname sugrįžus :)"
-
-msgid "Daily Ututi news!"
-msgstr ""
-
-msgid "Weekly Ututi news!"
-msgstr ""
 
 msgid "Your profile was updated."
 msgstr "Profilis atnaujintas!"
@@ -898,6 +892,9 @@ msgstr "Šiek tiek informacijos apie save"
 msgid "Personal logo"
 msgstr "Asmeninis logo"
 
+msgid "These are the files from the the subjects you or your group are watching."
+msgstr "Tai yra tavo stebimų dalykų ir grupių failai."
+
 msgid "Everywhere"
 msgstr "visur"
 
@@ -1109,28 +1106,8 @@ msgstr "Fakultetas"
 msgid "Section"
 msgstr "Filialas"
 
-msgid "Address"
-msgstr "Adresas"
-
-msgid "Replies"
-msgstr "Atsakymai"
-
-msgid "Last post"
-msgstr "Paskutinis pranešimas"
-
-msgid "You are not a member of any."
-msgstr ""
-"Suraskite Ututi savo akademinę grupę ir prijunkite prie jos savo grupės "
-"draugus. "
-
 msgid "Become a part of Ututi"
 msgstr "Tapkite Ututi dalimi"
-
-msgid "New account"
-msgstr "Nauja paskyra"
-
-msgid "OpenID"
-msgstr "OpenID"
 
 msgid "Fullname"
 msgstr "Vardas Pavardė"
@@ -1138,79 +1115,14 @@ msgstr "Vardas Pavardė"
 msgid "Repeat password"
 msgstr "Pakartoti slaptažodį"
 
-msgid "Register"
-msgstr "registruotis"
-
-msgid "Mailing lists, academic groups, universities, file sharing."
-msgstr "el. pašto konferencijos, akademinės grupės, universistetai, failai"
-
-msgid "What can You do here?"
-msgstr "Ką čia galima veiki?"
-
-msgid "Create lecture notes, keep Your study materials, upload and store files."
-msgstr ""
-"Kurti paskaitų konspektus, dalintis studijų medžiaga, kelti ir laikyti "
-"failus"
-
-msgid "Why here?"
-msgstr "Kodėl čia?"
-
-msgid "Because it's convenient."
-msgstr "Nes tai patogu"
-
-msgid "What is convenient?"
-msgstr "Kodėl patogu?"
-
-msgid "Everything is in one place."
-msgstr "Viskas vienoje vietoje"
-
-msgid "Add page"
-msgstr "Pridėti puslapį"
-
-msgid "Your confirmed emails:"
-msgstr "Jūsų patvirtinti el. pašto adresai:"
-
-msgid "Post new topic"
-msgstr "Nauja tema"
-
-msgid "Filter by tags"
-msgstr "Filtruoti pagal žymas"
-
-msgid "Year of entry:"
-msgstr "Įstojimo metai:"
-
 msgid "I agree to the "
 msgstr "Sutinku su"
 
 msgid "terms of use"
 msgstr "naudojimosi sistema taisyklėmis"
 
-msgid "There are no messages."
-msgstr "Pranešimų nėra."
-
-msgid "more"
-msgstr "daugiau"
-
-#, python-format
-msgid "<em>%(count)s</em> active poster"
-msgid_plural "<em>%(count)s</em> active posters"
-msgstr[0] "<em>%(count)s</em> aktyvus naudotojas"
-msgstr[1] "<em>%(count)s</em> aktyvūs naudotojai"
-msgstr[2] "<em>%(count)s</em> aktyvių naudotojų"
-
-#, python-format
-msgid "<em>%(count)s</em> topic"
-msgid_plural "<em>%(count)s</em> topics"
-msgstr[0] "<em>%(count)s</em> tema"
-msgstr[1] "<em>%(count)s</em> temos"
-msgstr[2] "<em>%(count)s</em> temų"
-
-#, python-format
-msgid "<em>%(count)s</em> post"
-msgid_plural "<em>%(count)s</em> posts"
-msgstr[0] "<em>%(count)s</em> pranešimas"
-msgstr[1] "<em>%(count)s</em> pranešimai"
-msgstr[2] "<em>%(count)s</em> pranešimų"
+msgid "Register"
+msgstr "registruotis"
 
 msgid "Recently seen"
 msgstr "Neseniai matyti"
@@ -1333,6 +1245,11 @@ msgstr ""
 
 msgid "Delete subject"
 msgstr "Ištrinti dalyką"
+
+msgid "You are not a member of any."
+msgstr ""
+"Suraskite Ututi savo akademinę grupę ir prijunkite prie jos savo grupės "
+"draugus. "
 
 msgid "More groups"
 msgstr "Daugiau grupių"

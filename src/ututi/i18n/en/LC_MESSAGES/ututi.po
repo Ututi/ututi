@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-10-16 16:18+0300\n"
+"PO-Revision-Date: 2009-10-22 14:06+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -210,12 +210,6 @@ msgid "User account not found."
 msgstr ""
 
 msgid "Your password has been updated. Welcome back!"
-msgstr ""
-
-msgid "Daily Ututi news!"
-msgstr ""
-
-msgid "Weekly Ututi news!"
 msgstr ""
 
 msgid "Your profile was updated."
@@ -853,6 +847,9 @@ msgstr ""
 msgid "Personal logo"
 msgstr ""
 
+msgid "These are the files from the the subjects you or your group are watching."
+msgstr ""
+
 msgid "Everywhere"
 msgstr ""
 
@@ -1051,25 +1048,7 @@ msgstr ""
 msgid "Section"
 msgstr ""
 
-msgid "Address"
-msgstr ""
-
-msgid "Replies"
-msgstr ""
-
-msgid "Last post"
-msgstr ""
-
-msgid "You are not a member of any."
-msgstr ""
-
 msgid "Become a part of Ututi"
-msgstr ""
-
-msgid "New account"
-msgstr ""
-
-msgid "OpenID"
 msgstr ""
 
 msgid "Fullname"
@@ -1078,74 +1057,14 @@ msgstr ""
 msgid "Repeat password"
 msgstr ""
 
-msgid "Register"
-msgstr ""
-
-msgid "Mailing lists, academic groups, universities, file sharing."
-msgstr ""
-
-msgid "What can You do here?"
-msgstr ""
-
-msgid "Create lecture notes, keep Your study materials, upload and store files."
-msgstr ""
-
-msgid "Why here?"
-msgstr ""
-
-msgid "Because it's convenient."
-msgstr ""
-
-msgid "What is convenient?"
-msgstr ""
-
-msgid "Everything is in one place."
-msgstr ""
-
-msgid "Add page"
-msgstr ""
-
-msgid "Your confirmed emails:"
-msgstr ""
-
-msgid "Post new topic"
-msgstr ""
-
-msgid "Filter by tags"
-msgstr ""
-
-msgid "Year of entry:"
-msgstr ""
-
 msgid "I agree to the "
 msgstr ""
 
 msgid "terms of use"
 msgstr ""
 
-msgid "There are no messages."
+msgid "Register"
 msgstr ""
-
-msgid "more"
-msgstr ""
-
-#, python-format
-msgid "<em>%(count)s</em> active poster"
-msgid_plural "<em>%(count)s</em> active posters"
-msgstr[0] ""
-msgstr[1] ""
-
-#, python-format
-msgid "<em>%(count)s</em> topic"
-msgid_plural "<em>%(count)s</em> topics"
-msgstr[0] ""
-msgstr[1] ""
-
-#, python-format
-msgid "<em>%(count)s</em> post"
-msgid_plural "<em>%(count)s</em> posts"
-msgstr[0] ""
-msgstr[1] ""
 
 msgid "Recently seen"
 msgstr ""
@@ -1259,6 +1178,9 @@ msgid "By watching a subject, you will be informed about all the changes in it."
 msgstr ""
 
 msgid "Delete subject"
+msgstr ""
+
+msgid "You are not a member of any."
 msgstr ""
 
 msgid "More groups"
