@@ -1275,6 +1275,7 @@ div.please-register {
 .tip {
   font-size: 0.8em;
   color: #808080;
+  padding-bottom: 5px;
 }
 
 .tooltip {
