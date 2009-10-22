@@ -114,11 +114,11 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
   <script type="text/javascript">
   //<![CDATA[
     $(document).ready(function() {
-      $('#presentation-img').click(function() {
+      $('#presentation-img a').click(function() {
         $('#ututi_features').hide();
         $('#presentation-img img').animate({
           width: '570px',
-          height: '225px'
+          height: '325px'
         },
         700,
         'linear',
@@ -126,29 +126,33 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
           $(this).hide();
           $('#presentation-actual').show();
         });
+        return false;
       });
     });
   //]]>
   </script>
   <div id="infoblock">
       <div id="presentation">
-        <div id="presentation-img">
-          <img src="${url('/images/slideshow_lt.png')}" alt="${_('About ututi')}"/>
+        <div id="presentation-img" class="${c.slideshow and 'hidden' or ''}">
+          <a href="${url(controller='home', action='index', slide='show')}">
+            <img src="${url('/images/slideshow_lt.png')}" alt="${_('About ututi')}"/>
+          </a>
         </div>
-        <div id="presentation-actual">
-          <div style="width:570px;text-align:left" id="__ss_2264988">
-            <object style="margin:0px" width="570" height="225">
-              <param name="movie"
-                     value="${url('/images/presentation/lt.swf')}" />
-              <param name="allowFullScreen" value="true"/>
-              <param name="allowScriptAccess" value="always"/>
-              <embed src="${url('/images/presentation/lt.swf')}"
-                     type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="570" height="225"></embed>
-            </object>
-          </div>
+        <div id="presentation-actual" class="${(not c.slideshow) and 'hidden' or ''}">
+          <object id='stV09QR0JIR1xZQVhbWltYU1NQ'
+                  width='570'
+                  height='325'
+                  type='application/x-shockwave-flash'
+                  data='http://www.screentoaster.com/swf/STPlayer.swf'
+                  codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,115,0'>
+            <param name='movie' value='http://www.screentoaster.com/swf/STPlayer.swf'/>
+            <param name='allowFullScreen' value='true'/>
+            <param name='allowScriptAccess' value='always'/>
+            <param name='flashvars' value='video=stV09QR0JIR1xZQVhbWltYU1NQ'/>
+          </object>
         </div>
       </div>
-      <div id="ututi_features">
+      <div id="ututi_features" class="${c.slideshow and 'hidden' or ''}">
         <div id="can_find">
           <h3>${_('What can You find here?')}</h3>
           ${_('Group mailing lists, <a href="%(link)s" title="Subject list">subject</a> wikis, files, lecture notes and answers to questions that matter for your studies.') %\

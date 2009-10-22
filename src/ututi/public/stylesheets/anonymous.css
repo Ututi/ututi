@@ -173,13 +173,13 @@ h1 {
 /* end information block */
 
 /* presentation */
+#infoblock .hidden {
+  display: none;
+}
+
 #presentation {
   width: 260px;
   float: left;
-}
-
-#presentation-actual {
-  display: none;
 }
 
 #presentation-img {
