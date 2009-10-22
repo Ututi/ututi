@@ -6,9 +6,7 @@
 
 
 <div class="tip">
-${_('This is a list of the subjects You are watching. By clicking on the cross next to any subject,\
- You will not get any messages of the changes in it. If Your group is watching this subject, it will not affect Your classmates.')}
-</div>
+${_('This is a list of all the recent events in the subjects you are watching and the groups you belong to.')}
 
 <ul id="event_list">
 % for event in c.events:

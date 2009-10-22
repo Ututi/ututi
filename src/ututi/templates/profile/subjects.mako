@@ -73,7 +73,13 @@ ${parent.head_tags()}
   </li>
 </%def>
 
-<h2>${_('Watched subjects')}</h2>
+<h2>
+  ${_('Watched subjects')}
+  ${h.image('/images/details/icon_question.png',
+            alt=_('This is a list of the subjects You are watching. By clicking on the cross next to any subject,\
+ You will not get any messages of the changes in it. If Your group is watching this subject, it will not affect Your classmates.'),
+            class_='tooltip')|n}
+</h2>
 
 <ul id="watched_subjects">
 % for subject in c.watched_subjects:
