@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-10-22 15:33+0300\n"
+"PO-Revision-Date: 2009-10-22 16:15+0300\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -913,7 +913,9 @@ msgstr "Sukurti savo grupę"
 msgid ""
 "This is a list of all the recent events in the subjects you are watching "
 "and the groups you belong to."
-msgstr "Tai yra sąrašas visų naujausių įvykių tavo stebimuose dalykuose ir grupėse, kurioms priklausai."
+msgstr ""
+"Tai yra sąrašas visų naujausių įvykių tavo stebimuose dalykuose ir "
+"grupėse, kurioms priklausai."
 
 msgid "What have I been doing?"
 msgstr "Ir ką gi aš nuveikiau?"
@@ -1128,6 +1130,33 @@ msgstr "naudojimosi sistema taisyklėmis"
 
 msgid "Register"
 msgstr "registruotis"
+
+msgid "There are no messages."
+msgstr ""
+
+msgid "more"
+msgstr ""
+
+#, python-format
+msgid "<em>%(count)s</em> active poster"
+msgid_plural "<em>%(count)s</em> active posters"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, python-format
+msgid "<em>%(count)s</em> topic"
+msgid_plural "<em>%(count)s</em> topics"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, python-format
+msgid "<em>%(count)s</em> post"
+msgid_plural "<em>%(count)s</em> posts"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "Recently seen"
 msgstr "Neseniai matyti"

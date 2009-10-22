@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-10-22 15:31+0300\n"
+"PO-Revision-Date: 2009-10-22 16:15+0300\n"
 "Last-Translator: Eri\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -64,7 +64,7 @@ msgid "Subjects"
 msgstr "Przedmioty"
 
 msgid "Page"
-msgstr ""
+msgstr "Strona"
 
 msgid ""
 "The group's page was hidden. You can show it again by editing the group's"
@@ -97,7 +97,7 @@ msgid "Leave group"
 msgstr "Wyjdź z grupy"
 
 msgid "Group information and settings updated."
-msgstr ""
+msgstr "Informacje o grupie oraz ustawienia zostały zaktualizowane."
 
 msgid "Users invited."
 msgstr "Zaproszeni użytkownicy"
@@ -463,6 +463,8 @@ msgid ""
 "This is a testing version - this is just a copy of the information! "
 "Changes you make will not be persisted!"
 msgstr ""
+"To jest wersja testowa - to jest tylko kopia informacji! Zmiany przez "
+"Ciebie wprowadzone nie zostaną uwzględnione!"
 
 msgid "Close"
 msgstr "Zamknij"
@@ -477,7 +479,7 @@ msgid "U-blog"
 msgstr "U-blog"
 
 msgid "Terms of use"
-msgstr "Regulanim"
+msgstr "Regulamin"
 
 msgid "Error!"
 msgstr "Błąd!"
@@ -553,16 +555,16 @@ msgid ""
 "%(fullname)s on the Ututi system. If this email belongs to You, confirm "
 "it by clicking on this link:"
 msgstr ""
-"Otrzymaliśmy prośbę o potwierdzenie informacji, że w systemie ten Ututi "
-"e-mail należy do %(fullname)s. Jeżeli jesteś właścicielem tego e-maila, "
-"zgłoś to poprzez kliknięcie następującego linku: "
+"Otrzymaliśmy prośbę o potwierdzenie informacji, że w naszym systemie ten "
+"Ututi e-mail należy do %(fullname)s. Jeżeli jesteś właścicielem tego "
+"e-maila, zgłoś to poprzez kliknięcie następującego linku: "
 
 msgid "Ututi team"
 msgstr "Załoga Ututi"
 
 #, python-format
 msgid "Your request to join the group %(groupname)s has been confirmed."
-msgstr "Twoja prośba o przyjęcie do grupy %(groupname)s zostało zaakceptowane."
+msgstr "Twoja prośba o przyjęcie do grupy %(groupname)s została zaakceptowana."
 
 #, python-format
 msgid "You can visit the group's page at this url: %(url)s ."
@@ -573,7 +575,7 @@ msgstr "Załoga Ututi"
 
 #, python-format
 msgid "Your request to join the group %(groupname)s has been denied."
-msgstr "Twoja prośba o przyjęcie do grupy %(groupname)s zostało odrzucone."
+msgstr "Twoja prośba o przyjęcie do grupy %(groupname)s została odrzucona."
 
 #, python-format
 msgid "%(fullname)s has requested to become a member of the group %(groupname)s."
@@ -629,7 +631,7 @@ msgid "Back to the topic list"
 msgstr "Powrót do listy tematów"
 
 msgid "Subject"
-msgstr "Przedmiot"
+msgstr "Temat"
 
 msgid "Message"
 msgstr "Wiadomość"
@@ -647,7 +649,7 @@ msgid "Subject selection"
 msgstr "Wybór przedmiotu"
 
 msgid "Member invitations"
-msgstr "Zaproszenia członka"
+msgstr "Zaproszenia użytkownika"
 
 msgid ""
 "Create your group, invite your classmates and use the mailing list, "
@@ -787,16 +789,16 @@ msgid "Create a new subject"
 msgstr "Utwórz nowy przedmiot"
 
 msgid "email subject"
-msgstr ""
+msgstr "temat e-maila"
 
 msgid "replies"
-msgstr ""
+msgstr "odpowiedzi"
 
 msgid "latest email"
-msgstr ""
+msgstr "najnowsze wiadomości e-mail"
 
 msgid "last author"
-msgstr ""
+msgstr "ostatni autor"
 
 msgid "Reset your password"
 msgstr "Zmień hasło"
@@ -984,7 +986,7 @@ msgid "No results found."
 msgstr "Brak wyników."
 
 msgid "Here"
-msgstr "Tu"
+msgstr "bieżący folder"
 
 msgid "(Delete)"
 msgstr "(Usuń)"
@@ -1091,7 +1093,7 @@ msgstr "Grupy użytkownika"
 
 #, python-format
 msgid "What has %(user)s been up to?"
-msgstr ""
+msgstr "Co zdziałał użytkownik %(user)s?"
 
 msgid "Nothing yet."
 msgstr "Na razie brak."
@@ -1123,6 +1125,30 @@ msgstr "regulamin"
 msgid "Register"
 msgstr "Zaloguj się"
 
+msgid "There are no messages."
+msgstr "Brak wiadomości."
+
+msgid "more"
+msgstr "więcej"
+
+#, python-format
+msgid "<em>%(count)s</em> active poster"
+msgid_plural "<em>%(count)s</em> active posters"
+msgstr[0] "<em>%(count)s</em> pisze często"
+msgstr[1] "<em>%(count)s</em>piszą często"
+
+#, python-format
+msgid "<em>%(count)s</em> topic"
+msgid_plural "<em>%(count)s</em> topics"
+msgstr[0] "<em>%(count)s</em> temat"
+msgstr[1] "<em>%(count)s</em> tematy"
+
+#, python-format
+msgid "<em>%(count)s</em> post"
+msgid_plural "<em>%(count)s</em> posts"
+msgstr[0] "<em>%(count)s</em> post"
+msgstr[1] "<em>%(count)s</em> posty"
+
 msgid "Recently seen"
 msgstr "Ostatnio widziany"
 
@@ -1145,7 +1171,7 @@ msgid "Fast file upload"
 msgstr "Szybkie ładowanie pliku"
 
 msgid "There are no files yet."
-msgstr "Nie ma jeszcze plików."
+msgstr "Tutaj jeszcze nie ma plików."
 
 msgid "All group files"
 msgstr "Wszystkie pliki grupy"
@@ -1187,7 +1213,7 @@ msgid "All changes"
 msgstr "Wszystkie zmiany"
 
 msgid "Latest groups"
-msgstr "Ostatnio utworzone grupy"
+msgstr "Najnowsze grupy"
 
 msgid "There are no groups yet."
 msgstr "Nie ma jeszcze grup."
@@ -1229,18 +1255,18 @@ msgid "Watch subject"
 msgstr "Obserwuj przedmiot"
 
 msgid "Stop watching the subject"
-msgstr "Nie obserwuj już przedmiotu"
+msgstr "Usuń z obserwowanych"
 
 msgid "By watching a subject, you will be informed about all the changes in it."
 msgstr ""
-"Obserwowanie przedmiotu pozwoli Ci śledzić wszystkie zachodzące w nim "
-"zmiany na bieżąco."
+"Obserwacja przedmiotu pozwala na śledzenie zmian dotyczących przedmiotu "
+"na bieżąco."
 
 msgid "Delete subject"
 msgstr "Usuń przedmiot"
 
 msgid "You are not a member of any."
-msgstr "Nie nalezysz do żadnej"
+msgstr "Nie należysz do żadnej"
 
 msgid "More groups"
 msgstr "Więcej grup"
@@ -1261,13 +1287,13 @@ msgid ""
 "Add watched subjects to your watched subjects' list and receive "
 "notifications about changes in these subjects"
 msgstr ""
-"Dodaj przedmioty, które chcesz obserwować do listy obserwowanych i "
-"otrzymujpowiadomienia o zmianach w tych przedmiotach"
+"Dodanie przedmiotu do obserwowanych skutkuje otrzymywaniem powiadomień o "
+"zmianach w tym przedmiocie."
 
 #, python-format
 msgid "Private files of the group %s"
 msgstr ""
 
 msgid "Subject files"
-msgstr "Dokumenty przedmiotu"
+msgstr "Pliki do tego przedmiotu"
 
