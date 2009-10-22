@@ -7,7 +7,7 @@
 
 <div class="tip">
 ${_('This is a list of all the recent events in the subjects you are watching and the groups you belong to.')}
-
+</div>
 <ul id="event_list">
 % for event in c.events:
 <li>
