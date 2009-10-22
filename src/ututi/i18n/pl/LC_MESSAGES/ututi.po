@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-10-22 16:31+0300\n"
+"PO-Revision-Date: 2009-10-22 17:31+0300\n"
 "Last-Translator: Jaroslav Šatkevič <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -354,7 +354,7 @@ msgstr "Co tu znajdziesz?"
 
 #, python-format
 msgid "Group mailing lists, <a href=\"%(link)s\" title=\"Subject list\">subject</a> wikis, files, lecture notes and answers to questions that matter for your studies."
-msgstr "Listy mailingowe grup, <a href=\"%(link)s\" title=\"Lista przedmiotów\">subject</a>, dokumenty do pobrania, notatki ze studiów, odpowiedzi na ważne dla studenta pytania."
+msgstr "Listy mailingowe grup, <a href=\"%(link)s\" title=\"Lista przedmiotów\">przedmioty</a>, dokumenty do pobrania, notatki ze studiów, odpowiedzi na ważne dla studenta pytania."
 
 msgid "What can you do here?"
 msgstr "Co tu można robić?"
