@@ -46,7 +46,8 @@ class LogoUpload(Schema):
 class ProfileController(SearchBaseController):
     """A controller for the user's personal information and actions."""
     def __before__(self):
-        c.breadcrumbs = [{'title': c.user.fullname, 'link': url(controller='profile', action='index')}]
+        if c.user is not None:
+            c.breadcrumbs = [{'title': c.user.fullname, 'link': url(controller='profile', action='index')}]
 
     def _actions(self, selected):
         """Generate a list of all possible actions.
