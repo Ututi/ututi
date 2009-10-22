@@ -6,7 +6,7 @@
    <%files:head_tags />
 </%def>
 
-<div class="description small">
+<div class="tip">
 ${_('These are the files from the the subjects you or your group are watching.')}
 </div>
 

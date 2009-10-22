@@ -1272,6 +1272,11 @@ div.please-register {
   clear: right;
 }
 
+.tip {
+  font-size: 0.8em;
+  color: #808080;
+}
+
 .tooltip {
   cursor: pointer;
 }
