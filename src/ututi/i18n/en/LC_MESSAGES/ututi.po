@@ -362,7 +362,37 @@ msgstr ""
 msgid "go find something else"
 msgstr ""
 
+#, python-format
+msgid "%(count)s <em>subject</em>"
+msgid_plural "%(count)s <em>subjects</em>"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(count)s <em>group</em>"
+msgid_plural "%(count)s <em>groups</em>"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(count)s <em>file</em>"
+msgid_plural "%(count)s <em>files</em>"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Sort  by: "
+msgstr ""
+
 msgid "UTUTI - student information online"
+msgstr ""
+
+msgid "More universities"
+msgstr ""
+
+msgid "About ututi"
+msgstr ""
+
+msgid "ututi_video_id"
 msgstr ""
 
 msgid "What can You find here?"
@@ -381,12 +411,9 @@ msgstr ""
 #, python-format
 msgid ""
 "Store <a href=\"%(subjects)s\" title=\"Subject list\">study materials</a>"
-"      and pass them on for future generations, create      <a "
-"href=\"%(groups)s\" title=\"Group list\">academic groups</a>      and "
-"communicate with groupmates."
-msgstr ""
-
-msgid "Ututi search"
+"          and pass them on for future generations, create          <a "
+"href=\"%(groups)s\" title=\"Group list\">academic groups</a>          and"
+" communicate with groupmates."
 msgstr ""
 
 msgid "student information online"
@@ -829,6 +856,9 @@ msgstr ""
 msgid "My information"
 msgstr ""
 
+msgid "Friends of ututi"
+msgstr ""
+
 msgid "back to the profile"
 msgstr ""
 
@@ -1176,24 +1206,6 @@ msgstr ""
 msgid "Faculty information"
 msgstr ""
 
-#, python-format
-msgid "%(count)s <em>subject</em>"
-msgid_plural "%(count)s <em>subjects</em>"
-msgstr[0] ""
-msgstr[1] ""
-
-#, python-format
-msgid "%(count)s <em>group</em>"
-msgid_plural "%(count)s <em>groups</em>"
-msgstr[0] ""
-msgstr[1] ""
-
-#, python-format
-msgid "%(count)s <em>file</em>"
-msgid_plural "%(count)s <em>files</em>"
-msgstr[0] ""
-msgstr[1] ""
-
 msgid "Subject information"
 msgstr ""
 
@@ -1230,6 +1242,12 @@ msgstr ""
 msgid ""
 "Add watched subjects to your watched subjects' list and receive "
 "notifications about changes in these subjects"
+msgstr ""
+
+msgid "Find us on Facebook"
+msgstr ""
+
+msgid "Read our blog"
 msgstr ""
 
 #, python-format

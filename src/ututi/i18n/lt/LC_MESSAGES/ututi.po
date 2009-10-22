@@ -386,8 +386,41 @@ msgstr "atgal"
 msgid "go find something else"
 msgstr "Prašome ieškoti ko nors kito."
 
+#, python-format
+msgid "%(count)s <em>subject</em>"
+msgid_plural "%(count)s <em>subjects</em>"
+msgstr[0] "%(count)s <em>dalykas</em>"
+msgstr[1] "%(count)s <em>dalykai</em>"
+msgstr[2] "%(count)s <em>dalykų</em>"
+
+#, python-format
+msgid "%(count)s <em>group</em>"
+msgid_plural "%(count)s <em>groups</em>"
+msgstr[0] "%(count)s <em>grupė</em>"
+msgstr[1] "%(count)s <em>grupės</em>"
+msgstr[2] "%(count)s <em>grupių</em>"
+
+#, python-format
+msgid "%(count)s <em>file</em>"
+msgid_plural "%(count)s <em>files</em>"
+msgstr[0] "%(count)s <em>failas</em>"
+msgstr[1] "%(count)s <em>failai</em>"
+msgstr[2] "%(count)s <em>failų</em>"
+
+msgid "Sort  by: "
+msgstr "Rūšiuoti pagal: "
+
 msgid "UTUTI - student information online"
 msgstr "Ututi - studentų žinios tinkle"
+
+msgid "More universities"
+msgstr "Daugiau universitetų"
+
+msgid "About ututi"
+msgstr "Apie ututi"
+
+msgid "ututi_video_id"
+msgstr "stV09QR0JIR1xZQVhbWltYU1NQ"
 
 msgid "What can You find here?"
 msgstr "Ką čia galima rasti?"
@@ -408,17 +441,10 @@ msgstr "Ką čia galima veikti?"
 #, python-format
 msgid ""
 "Store <a href=\"%(subjects)s\" title=\"Subject list\">study materials</a>"
-"      and pass them on for future generations, create      <a "
-"href=\"%(groups)s\" title=\"Group list\">academic groups</a>      and "
-"communicate with groupmates."
-msgstr ""
-"Įkelti <a href=\"%(subjects)s\" title=\"Dalykų sąrašas\">studijų "
-"medžiagą</a>, perduoti tai ateities kartoms, kurti <a href=\"%(groups)s\""
-" title=\"Grupių sąrašas\">akademines grupes</a> ir bendrauti su grupės "
-"draugais."
-
-msgid "Ututi search"
-msgstr "Ututi paieška"
+"          and pass them on for future generations, create          <a "
+"href=\"%(groups)s\" title=\"Group list\">academic groups</a>          and"
+" communicate with groupmates."
+msgstr "Kaupkite <a href=\"%(subjects)s\" title=\"Dalykų sąrašas\">studijų medžiagą</a> ir perduokite ją ateities kartoms, kurkite <a href=\"%(groups)s\" title=\"Grupių sąrašas\">akademines grupes</a> ir bendraukite su grupiokais."
 
 msgid "student information online"
 msgstr "studentų žinios tinkle"
@@ -874,6 +900,9 @@ msgstr "Mano grupės"
 msgid "My information"
 msgstr "Apie mane"
 
+msgid "Friends of ututi"
+msgstr "Ututi draugai"
+
 msgid "back to the profile"
 msgstr "grįžti į profilį"
 
@@ -1242,27 +1271,6 @@ msgstr "Universiteto informacija"
 msgid "Faculty information"
 msgstr "Fakulteto informacija"
 
-#, python-format
-msgid "%(count)s <em>subject</em>"
-msgid_plural "%(count)s <em>subjects</em>"
-msgstr[0] "%(count)s <em>dalykas</em>"
-msgstr[1] "%(count)s <em>dalykai</em>"
-msgstr[2] "%(count)s <em>dalykų</em>"
-
-#, python-format
-msgid "%(count)s <em>group</em>"
-msgid_plural "%(count)s <em>groups</em>"
-msgstr[0] "%(count)s <em>grupė</em>"
-msgstr[1] "%(count)s <em>grupės</em>"
-msgstr[2] "%(count)s <em>grupių</em>"
-
-#, python-format
-msgid "%(count)s <em>file</em>"
-msgid_plural "%(count)s <em>files</em>"
-msgstr[0] "%(count)s <em>failas</em>"
-msgstr[1] "%(count)s <em>failai</em>"
-msgstr[2] "%(count)s <em>failų</em>"
-
 msgid "Subject information"
 msgstr "Informacija apie dalyką"
 
@@ -1308,6 +1316,12 @@ msgid ""
 msgstr ""
 "Prisidėkite studijuojamus dalykus prie stebimų dalykų sąrašo ir gaukite "
 "pranešimus apie pasiketimus šiuose dalykuose."
+
+msgid "Find us on Facebook"
+msgstr "Mūsų erdvė Facebook"
+
+msgid "Read our blog"
+msgstr "Mūsų blogas"
 
 #, python-format
 msgid "Private files of the group %s"

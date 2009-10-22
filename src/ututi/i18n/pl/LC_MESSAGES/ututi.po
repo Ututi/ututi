@@ -346,8 +346,38 @@ msgstr "wróć"
 msgid "go find something else"
 msgstr "poszukaj czegoś innego"
 
+#, python-format
+msgid "%(count)s <em>subject</em>"
+msgid_plural "%(count)s <em>subjects</em>"
+msgstr[0] "%(count)s <em>przedmiot</em>"
+msgstr[1] "%(count)s <em>przedmioty</em>"
+
+#, python-format
+msgid "%(count)s <em>group</em>"
+msgid_plural "%(count)s <em>groups</em>"
+msgstr[0] "%(count)s <em>grupa</em>"
+msgstr[1] "%(count)s <em>grupy</em>"
+
+#, python-format
+msgid "%(count)s <em>file</em>"
+msgid_plural "%(count)s <em>files</em>"
+msgstr[0] "%(count)s <em>plik</em>"
+msgstr[1] "%(count)s <em>pliki</em>"
+
+msgid "Sort  by: "
+msgstr ""
+
 msgid "UTUTI - student information online"
 msgstr "UTUTI - studencka wiedza w sieci"
+
+msgid "More universities"
+msgstr ""
+
+msgid "About ututi"
+msgstr ""
+
+msgid "ututi_video_id"
+msgstr ""
 
 msgid "What can You find here?"
 msgstr "Co tu znajdziesz?"
@@ -787,6 +817,9 @@ msgstr "Moje grupy"
 msgid "My information"
 msgstr "Moje dane"
 
+msgid "Friends of ututi"
+msgstr ""
+
 msgid "back to the profile"
 msgstr "wróć do profilu"
 
@@ -1115,24 +1148,6 @@ msgstr "Informacje o uczelni"
 msgid "Faculty information"
 msgstr "Informacje o wydziale"
 
-#, python-format
-msgid "%(count)s <em>subject</em>"
-msgid_plural "%(count)s <em>subjects</em>"
-msgstr[0] "%(count)s <em>przedmiot</em>"
-msgstr[1] "%(count)s <em>przedmioty</em>"
-
-#, python-format
-msgid "%(count)s <em>group</em>"
-msgid_plural "%(count)s <em>groups</em>"
-msgstr[0] "%(count)s <em>grupa</em>"
-msgstr[1] "%(count)s <em>grupy</em>"
-
-#, python-format
-msgid "%(count)s <em>file</em>"
-msgid_plural "%(count)s <em>files</em>"
-msgstr[0] "%(count)s <em>plik</em>"
-msgstr[1] "%(count)s <em>pliki</em>"
-
 msgid "Subject information"
 msgstr "Informacje o przedmiocie"
 
@@ -1168,6 +1183,12 @@ msgstr "Obserwuj przedmioty"
 
 msgid "Add watched subjects to your watched subjects' list and receive notifications about changes in these subjects"
 msgstr "Dodanie przedmiotu do obserwowanych skutkuje otrzymywaniem powiadomień o zmianach w tym przedmiocie."
+
+msgid "Find us on Facebook"
+msgstr ""
+
+msgid "Read our blog"
+msgstr ""
 
 #, python-format
 msgid "Private files of the group %s"
