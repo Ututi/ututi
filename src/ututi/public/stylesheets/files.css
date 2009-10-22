@@ -4,6 +4,9 @@ div.section h2 {
   padding-bottom: 0.1em;
   border-bottom: 2px solid #828282;
   font-size: 1.3em;
+}
+
+div.section h2.click {
   cursor: pointer;
 }
 
