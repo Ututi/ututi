@@ -10,7 +10,12 @@
 ${_('These are the files from the the subjects you or your group are watching.')}
 </div>
 
-% for n, subject in enumerate(c.user.watched_subjects):
-  <%files:file_browser obj="${subject}" section_id="${n + 1}" collapsible="True"/>
+% for n, object in enumerate(c.user.watched_subjects):
+  <%files:file_browser obj="${object}" section_id="${n}" collapsible="True"/>
 % endfor
-
+<%
+   start = len(c.user.watched_subjects)
+%>
+% for n, object in enumerate(c.user.groups):
+  <%files:file_browser obj="${object}" section_id="${n + start}" collapsible="True" title="${_('Private files of the group %s') % object.title}"/>
+% endfor
