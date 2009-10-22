@@ -139,7 +139,7 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
           </a>
         </div>
         <div id="presentation-actual" class="${(not c.slideshow) and 'hidden' or ''}">
-          <object id='stV09QR0JIR1xZQVhbWltYU1NQ'
+          <object id='${_("ututi_video_id")}'
                   width='570'
                   height='325'
                   type='application/x-shockwave-flash'
@@ -148,7 +148,7 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
             <param name='movie' value='http://www.screentoaster.com/swf/STPlayer.swf'/>
             <param name='allowFullScreen' value='true'/>
             <param name='allowScriptAccess' value='always'/>
-            <param name='flashvars' value='video=stV09QR0JIR1xZQVhbWltYU1NQ'/>
+            <param name='flashvars' value='video=${_("ututi_video_id")}'/>
           </object>
         </div>
       </div>
