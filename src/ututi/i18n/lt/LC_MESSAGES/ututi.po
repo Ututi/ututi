@@ -1132,31 +1132,31 @@ msgid "Register"
 msgstr "registruotis"
 
 msgid "There are no messages."
-msgstr ""
+msgstr "Pranešimų nėra."
 
 msgid "more"
-msgstr ""
+msgstr "daugiau"
 
 #, python-format
 msgid "<em>%(count)s</em> active poster"
 msgid_plural "<em>%(count)s</em> active posters"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "<em>%(count)s</em> aktyvus naudotojas"
+msgstr[1] "<em>%(count)s</em> aktyvūs naudotojai"
+msgstr[2] "<em>%(count)s</em> aktyvių naudotojų"
 
 #, python-format
 msgid "<em>%(count)s</em> topic"
 msgid_plural "<em>%(count)s</em> topics"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "<em>%(count)s</em> tema"
+msgstr[1] "<em>%(count)s</em> temos"
+msgstr[2] "<em>%(count)s</em> temų"
 
 #, python-format
 msgid "<em>%(count)s</em> post"
 msgid_plural "<em>%(count)s</em> posts"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "<em>%(count)s</em> pranešimas"
+msgstr[1] "<em>%(count)s</em> pranešimai"
+msgstr[2] "<em>%(count)s</em> pranešimų"
 
 msgid "Recently seen"
 msgstr "Neseniai matyti"
