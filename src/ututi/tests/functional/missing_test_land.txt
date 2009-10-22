@@ -6,4 +6,4 @@ I am visiting them so they would get translated properly.
     >>> browser = Browser.logIn()
     >>> browser.open('http://localhost/bugs')
     >>> browser.open('http://localhost/group/moderators/files')
-    >>> browser.serve()
+    >>> browser.open('http://localhost/profile/files')
