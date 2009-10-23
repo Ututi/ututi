@@ -34,7 +34,7 @@ class EvolutionScript(object):
 
 class GreatMigrator(object):
 
-    min_version = 19
+    min_version = 20
 
     def __init__(self, engine, language=None):
         self.engine = engine

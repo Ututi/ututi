@@ -9,6 +9,7 @@ create table users (
        recovery_key varchar(10) default null,
        logo bytea default null,
        accepted_terms timestamp default null,
+       receive_email_each varchar(30) default 'day',
        primary key (id));;
 
 /* Create first user=admin and password=asdasd */
@@ -111,6 +112,7 @@ create table group_members (
        user_id int8 references users(id) not null,
        membership_type varchar(20) references group_membership_types(membership_type) not null,
        subscribed bool default true,
+       receive_email_each varchar(30) default 'day',
        primary key (group_id, user_id));;
 
 

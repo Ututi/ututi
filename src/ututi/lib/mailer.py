@@ -24,7 +24,7 @@ class EmailInfo(object):
 
     def payload(self):
         message = message_from_string(self.message.encode('utf-8'))
-        if message.is_multipart():
+        while message.is_multipart():
             message = message.get_payload()[0]
         return message.get_payload(decode=True)
 
@@ -111,12 +111,13 @@ def send_email(sender, recipient, subject, body, html_body=None,
     if send_to is None:
         send_to = recipient
 
+    msgstr = msg.as_string()
     log.debug(sender)
     log.debug(send_to)
-    log.debug(msg.as_string())
+    log.debug(msgstr)
 
-    raw_send_email(sender, send_to, msg.as_string())
-    return msg.as_string()
+    raw_send_email(sender, send_to, msgstr)
+    return msgstr
 
 
 def raw_send_email(sender, recipients, message):

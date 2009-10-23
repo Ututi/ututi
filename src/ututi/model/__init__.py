@@ -456,11 +456,14 @@ class User(object):
 
         gwst = group_watched_subjects_table
         gmt = group_members_table
+        gt = groups_table
         group_watched_subjects = meta.Session.query(Subject)\
             .join((gwst,
                    and_(gwst.c.subject_id==subjects_table.c.id,
                         gwst.c.subject_id==subjects_table.c.id)))\
             .join((gmt, gmt.c.group_id == gwst.c.group_id))\
+            .join((gt, gmt.c.group_id == gt.c.id))\
+            .filter(gt.c.moderators == False)\
             .filter(gmt.c.user_id == self.id)
         return directly_watched_subjects.union(group_watched_subjects)\
             .except_(user_ignored_subjects).all()
@@ -871,8 +874,13 @@ class Page(ContentItem):
     def created(self):
         return self.last_version.created
 
-    def url(self):
-        return url(controller='subjectpage', action='index', page_id=self.id, id=self.subject[0].subject_id, tags=self.subject[0].location_path)
+    def url(self, **kwargs):
+        return url(controller='subjectpage',
+                   action='index',
+                   page_id=self.id,
+                   id=self.subject[0].subject_id,
+                   tags=self.subject[0].location_path,
+                   **kwargs)
 
     def snippet(self):
         """Render a short snippet with the basic item's information. Used in search to render the results."""

@@ -57,6 +57,16 @@ class PageCreatedEvent(Event):
     Has an attribute `page' pointing to the page that was added.
     """
 
+    def text_news(self):
+        return _('Page %(page_title)s (%(page_url)s) was created.') % {
+            'page_title': self.page.title,
+            'page_url': self.page.url(qualified=True)}
+
+    def html_news(self):
+        return _('Page %(page_title)s was created.') % {
+            'page_title': link_to(self.context.title,
+                                  self.context.url(qualified=True))}
+
     def render(self):
         return _("New page %(link_to_page)s of a subject %(link_to_subject)s was created") % {
             'link_to_subject': link_to(self.context.title, self.context.url()),
@@ -69,6 +79,16 @@ class PageModifiedEvent(Event):
     Has an attribute `page' pointing to the page that was modified.
     """
 
+    def text_news(self):
+        return _('Page %(page_title)s (%(page_url)s) was updated.') % {
+            'page_title': self.page.title,
+            'page_url': self.page.url(qualified=True)}
+
+    def html_news(self):
+        return _('Page %(page_title)s was updated.') % {
+            'page_title': link_to(self.page.title,
+                                  self.page.url(qualified=True))}
+
     def render(self):
         return _("Page %(link_to_page)s of a subject %(link_to_subject)s was updated") % {
             'link_to_subject': link_to(self.context.title, self.context.url()),
@@ -80,6 +100,16 @@ class FileUploadedEvent(Event):
 
     Has an attribute `file' pointing to the file that was uploaded.
     """
+
+    def text_news(self):
+        return _('File %(file_title)s (%(file_url)s) was uploaded.') % {
+            'file_title': self.file.title,
+            'file_url': self.file.url(qualified=True)}
+
+    def html_news(self):
+        return _('File %(file_title)s was uploaded.') % {
+            'file_title': link_to(self.file.title,
+                                  self.file.url(qualified=True))}
 
     def render(self):
         if self.file.md5 is not None:

@@ -1,0 +1,174 @@
+
+Some helper functions to list all the emails sent, and to set the
+times of the events:
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> import datetime
+    >>> from ututi.model import meta
+    >>> from ututi.model.events import Event
+
+    >>> def setEventTime(dt):
+    ...     for event in meta.Session.query(Event).all():
+    ...         event.created = dt
+
+    >>> def printEmails():
+    ...     for email in mail_queue:
+    ...         print email.recipients
+    ...         print email.payload()
+
+We log in:
+
+    >>> browser = Browser.logIn()
+
+Let's invite a couple of users into our group:
+
+    >>> browser.getLink('Moderatoriai').click()
+    >>> browser.getLink('Members').click()
+    >>> browser.getControl(name='emails').value = ('user@ututi.lt\nuser2@ututi.lt')
+    >>> browser.getControl('Invite').click()
+
+    >>> Browser.logIn('user@ututi.lt', 'password').getControl('Accept').click()
+    >>> Browser.logIn('user2@ututi.lt', 'password').getControl('Accept').click()
+
+    >>> mail_queue[:] = []
+
+Make some noise:
+
+    >>> browser.getLink('Subjects').click()
+    >>> browser.getLink(url="/group/moderators/watch_subject").click()
+
+    >>> browser.getLink(url='mat_analize').click()
+    >>> browser.getLink('Edit').click()
+    >>> browser.getControl('Tags').value = 'mat, analize'
+    >>> browser.getControl('Save').click()
+
+Let's look at the emails:
+
+    >>> setEventTime(datetime.datetime(2009, 10, 10, 10, 15))
+    >>> Browser.logIn().open('http://localhost/news/daily?date=2009-10-10')
+    >>> printEmails()
+    >>> mail_queue[:] = []
+
+    >>> browser2 = Browser.logIn('user2@ututi.lt', 'password')
+    >>> browser2.open(browser.url)
+
+    >>> browser2.getLink('New page').click()
+    >>> browser2.getControl('Title').value = "How to be awesome!"
+    >>> browser2.getControl('Content').value = "Being Awesome is easy!"
+    >>> browser2.getControl('Save').click()
+
+    >>> browser3 = Browser.logIn('user@ututi.lt', 'password')
+    >>> browser3.open(browser.url)
+
+    >>> browser3.getLink('New page').click()
+    >>> browser3.getControl('Title').value = "How to be more awesome!"
+    >>> browser3.getControl('Content').value = "Being more Awesome is easy too!"
+    >>> browser3.getControl('Save').click()
+
+    >>> browser.reload()
+    >>> browser.getLink('How to be awesome!').click()
+    >>> browser.getLink('Edit', url='page').click()
+    >>> browser.getControl('Content').value = "Being Awesome is hard!"
+    >>> browser.getControl('Save').click()
+
+    >>> browser.getLink('How to be awesome!').click()
+    >>> browser.getLink('Edit', url='page').click()
+    >>> browser.getControl('Content').value = "Being Awesome is very hard!"
+    >>> browser.getControl('Save').click()
+
+Let's turn the time:
+
+    >>> setEventTime(datetime.datetime(2009, 10, 10, 10, 15))
+
+And look at the emails:
+
+    >>> browser.open('http://localhost/news/daily?date=2009-10-10')
+
+    >>> printEmails()
+    ['user2@ututi.lt']
+    Ututi news: 2 new pages
+    <BLANKLINE>
+    Matematinė analizė
+    <BLANKLINE>
+    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
+    <BLANKLINE>
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    <BLANKLINE>
+    ['user@ututi.lt']
+    Ututi news: 2 new pages
+    <BLANKLINE>
+    Matematinė analizė
+    <BLANKLINE>
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
+    <BLANKLINE>
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    <BLANKLINE>
+    ['admin@ututi.lt']
+    Ututi news: 2 new pages
+    <BLANKLINE>
+    Matematinė analizė
+    <BLANKLINE>
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
+    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
+    <BLANKLINE>
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    <BLANKLINE>
+
+
+    >>> mail_queue[:] = []
+
+Now let's upload a couple of files:
+
+    >>> res = app.post("/login",
+    ...                params={'login': 'admin@ututi.lt', 'password': 'asdasd'})
+
+    >>> res = app.post("/subject/vu/mat_analize/upload_file",
+    ...                params={'folder': ''},
+    ...                upload_files=[("attachment", "f1.txt", "Test")])
+
+    >>> res = app.post("/subject/vu/mat_analize/upload_file",
+    ...                params={'folder': ''},
+    ...                upload_files=[("attachment", "f2.txt", "Test")])
+
+    >>> setEventTime(datetime.datetime(2009, 10, 10, 10, 15))
+    >>> browser.open('http://localhost/news/daily?date=2009-10-10')
+
+    >>> printEmails()
+    ['user2@ututi.lt']
+    Ututi news: 2 new files and 2 new pages
+    <BLANKLINE>
+    Matematinė analizė
+    <BLANKLINE>
+    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
+    - File f1.txt (http://localhost/subject/vu/mat_analize/file/9/get) was uploaded.
+    - File f2.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
+    <BLANKLINE>
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    <BLANKLINE>
+    ['user@ututi.lt']
+    Ututi news: 2 new files and 2 new pages
+    <BLANKLINE>
+    Matematinė analizė
+    <BLANKLINE>
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
+    - File f1.txt (http://localhost/subject/vu/mat_analize/file/9/get) was uploaded.
+    - File f2.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
+    <BLANKLINE>
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    <BLANKLINE>
+    ['admin@ututi.lt']
+    Ututi news: 2 new pages
+    <BLANKLINE>
+    Matematinė analizė
+    <BLANKLINE>
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
+    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
+    <BLANKLINE>
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    <BLANKLINE>
+
+    >>> mail_queue[:] = []
