@@ -25,11 +25,13 @@ class NewsController(BaseController):
                         Event.object_id.in_([m.group.id
                                              for m in user.memberships])))\
             .filter(Event.author_id != user.id)\
-            .filter(from_time <= Event.created < to_time)\
+            .filter(Event.created < to_time)\
+            .filter(Event.created >= from_time)\
             .filter(or_(Event.file_id != None,
                         Event.page_id != None))\
             .order_by(desc(Event.created))\
             .all()
+
 
         return events
 

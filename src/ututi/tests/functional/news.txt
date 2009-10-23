@@ -172,3 +172,9 @@ Now let's upload a couple of files:
     <BLANKLINE>
 
     >>> mail_queue[:] = []
+
+    >>> setEventTime(datetime.datetime(2009, 10, 8, 10, 15))
+    >>> browser.open('http://localhost/news/daily?date=2009-10-10')
+
+    >>> printEmails()
+    >>> mail_queue[:] = []
