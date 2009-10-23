@@ -78,7 +78,7 @@ Let's look at the emails:
 
 Let's turn the time:
 
-    >>> setEventTime(datetime.datetime(2009, 10, 10, 10, 15))
+    >>> setEventTime(datetime.datetime(2009, 10, 9, 10, 15))
 
 And look at the emails:
 
@@ -132,7 +132,7 @@ Now let's upload a couple of files:
     ...                params={'folder': ''},
     ...                upload_files=[("attachment", "f2.txt", "Test")])
 
-    >>> setEventTime(datetime.datetime(2009, 10, 10, 10, 15))
+    >>> setEventTime(datetime.datetime(2009, 10, 9, 10, 15))
     >>> browser.open('http://localhost/news/daily?date=2009-10-10')
 
     >>> printEmails()

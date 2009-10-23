@@ -11,4 +11,4 @@
 %endfor
 
 ${_('If you want to stop getting these emails - you can change your subscription settings in your <a href="%(url)s">watched subject page</a>.') % dict(
-    url=url(controller='profile', action='subjects', qualified=True)) }
+    url=url(controller='profile', action='subjects', qualified=True))|n}

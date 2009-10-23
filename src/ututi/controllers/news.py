@@ -47,9 +47,9 @@ class NewsController(BaseController):
 
         hour = request.params.get('hour', '0')
         hour = int(hour)
-        dtstart = datetime.datetime.combine(date, datetime.time(hour))
+        dtend = datetime.datetime.combine(date, datetime.time(hour))
         dt = datetime.timedelta(days=days, hours=hours)
-        return (dtstart, dtstart + dt)
+        return (dtend - dt, dtend)
 
     def _subject(self, sections):
         pages = files = 0
