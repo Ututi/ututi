@@ -728,7 +728,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
                 role = self.form_result.get('role', 'member')
                 if role == 'not-member':
                     meta.Session.delete(membership)
-                elif role in ['members', 'administrator']:
+                elif role in ['member', 'administrator']:
                     role = GroupMembershipType.get(role)
                     membership.role = role
                     h.flash(_("The status of the user %(fullname)s was updated.") % {'fullname': user.fullname})
