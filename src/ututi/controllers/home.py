@@ -124,7 +124,7 @@ class HomeController(BaseController):
         else:
             self._get_unis()
             if request.params.has_key('js'):
-                return render_mako_def('/anonymous_index.mako','universities', unis=c.unis)
+                return render_mako_def('/anonymous_index.mako','universities', unis=c.unis, ajax_url=url(controller='home', action='index'))
             c.slideshow = request.params.has_key('slide')
             return render('/anonymous_index.mako')
 

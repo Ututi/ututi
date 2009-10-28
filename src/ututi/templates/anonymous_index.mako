@@ -51,7 +51,7 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
 </div>
 </%def>
 
-<%def name="universities(unis)">
+<%def name="universities(unis, ajax_url)">
     %for uni in unis:
       ${university(uni)}
     %endfor
@@ -62,20 +62,16 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
     </div>
     <div id="sorting">
       ${_('Sort  by: ')}
-      <a id="sort-alpha" class="${c.sort == 'alpha' and 'active' or ''}" href="${url(controller='home', action='index', sort='alpha')}">${'alphabetically'}</a>
-      <input type="hidden" id="sort-alpha-url" name="sort-alpha-url" value="${url(controller='home', action='index', sort='alpha', js=True)}" />
-      <a id="sort-popular" class="${c.sort == 'popular' and 'active' or ''}" href="${url(controller='home', action='index', sort='popular')}">${'by popularity'}</a>
-      <input type="hidden" id="sort-popular-url" name="sort-popular-url" value="${url(controller='home', action='index', sort='popular', js=True)}" />
+      <a id="sort-alpha" class="${c.sort == 'alpha' and 'active' or ''}" href="${url(ajax_url, sort='alpha')}">${'alphabetically'}</a>
+      <input type="hidden" id="sort-alpha-url" name="sort-alpha-url" value="${url(ajax_url, sort='alpha', js=True)}" />
+      <a id="sort-popular" class="${c.sort == 'popular' and 'active' or ''}" href="${url(ajax_url, sort='popular')}">${'by popularity'}</a>
+      <input type="hidden" id="sort-popular-url" name="sort-popular-url" value="${url(ajax_url, sort='popular', js=True)}" />
     </div>
 </%def>
 
-  <h1>${_('UTUTI - student information online')}</h1>
-  <div id="frontpage-search">
-    ${search_form(parts=['obj_type', 'text'])}
-  </div>
-
+<%def name="universities_section(unis, ajax_url)">
   <div id="university-list" class="${c.teaser and 'collapsed_list' or ''}">
-    ${universities(c.unis)}
+    ${universities(unis, ajax_url)}
   </div>
   %if c.teaser:
     <div id="teaser_switch" style="display: none;">
@@ -109,7 +105,14 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
     });
   //]]>
   </script>
+</%def>
 
+  <h1>${_('UTUTI - student information online')}</h1>
+  <div id="frontpage-search">
+    ${search_form(parts=['obj_type', 'text'])}
+  </div>
+
+  ${universities_section(c.unis, url(controller='home', action='index', js=1))}
   <br class="clear-left" />
   <script type="text/javascript">
   //<![CDATA[
