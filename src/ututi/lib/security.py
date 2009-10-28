@@ -34,7 +34,7 @@ def is_moderator(user, context=None):
         location = getattr(context, 'location')
 
     for tag in moderator_tags:
-        if location in tag.flatten():
+        if location in tag.flatten:
             return True
 
     return False
