@@ -95,17 +95,17 @@ def sign_in_user(email):
     session['login'] = email
     session.save()
 
-
-class HomeController(BaseController):
+class UniversityListMixin(BaseController):
+    """ A mix-in for listing all the universitites (first level location tags) in the system."""
 
     def _universities(self, sort_popularity=True):
         unis = meta.Session.query(LocationTag).filter(LocationTag.parent == None).order_by(LocationTag.title.asc()).all()
         if sort_popularity:
             unis.sort(key=lambda obj: obj.rating, reverse=True)
-
         return unis
 
     def _get_unis(self):
+        """List all the universities in the system, paging and sorting according to request parameters."""
         c.sort = request.params.get('sort', 'popular')
         unis = self._universities(c.sort == 'popular')
         c.unis = paginate.Page(
@@ -117,6 +117,8 @@ class HomeController(BaseController):
             )
         c.teaser = not (request.params.has_key('page') or request.params.has_key('sort'))
 
+
+class HomeController(UniversityListMixin):
 
     def index(self):
         if c.user is not None:
