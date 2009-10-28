@@ -56,7 +56,7 @@ class SearchController(SearchBaseController):
     @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
     def index(self):
         if c.user is not None and self.form_result == {}:
-            redirect_to(url(controller='profile', action='search'))
+            redirect_to(url(controller='profile', action='browse'))
 
         self._search()
         return render('/search/index.mako')
