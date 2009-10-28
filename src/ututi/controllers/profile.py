@@ -156,16 +156,16 @@ class ProfileController(SearchBaseController):
 
         meta.Session.commit()
         h.flash(_('Your profile was updated.'))
-        redirect_to(controller='profile', action='index')
+        redirect_to(controller='profile', action='home')
 
     def confirm_emails(self):
         if c.user is not None:
             emails = request.POST.getall('email')
             for email in emails:
                 email_confirmation_request(c.user, email)
-            redirect_to(controller='profile', action='index')
+            redirect_to(controller='profile', action='home')
         else:
-            redirect_to(controller='home', action='index')
+            redirect_to(controller='home', action='home')
 
     def confirm_user_email(self, key):
         try:
@@ -177,7 +177,7 @@ class ProfileController(SearchBaseController):
         except NoResultFound:
             h.flash(_("Could not confirm email - invalid confirmation key."))
 
-        redirect_to(url(controller='profile', action='index'))
+        redirect_to(url(controller='profile', action='home'))
 
     @validate(schema=SearchSubmit, form='subjects', post_only = False, on_get = True)
     @ActionProtector("user")

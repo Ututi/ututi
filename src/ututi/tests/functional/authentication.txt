@@ -70,7 +70,7 @@ Visiting a profile-related page should not crash if the user is not logged in.
     >>> form.getControl('Login').click()
 
     >>> browser.url
-    'http://localhost/profile/search'
+    'http://localhost/profile/browse'
 
     >>> browser.getLink('log out').click()
 
@@ -94,7 +94,7 @@ Visiting a profile-related page should not crash if the user is not logged in.
     >>> form.getControl('Login').click()
 
     >>> browser.url
-    'http://localhost/profile/search'
+    'http://localhost/profile/browse'
 
     >>> browser.getLink('log out').click()
 

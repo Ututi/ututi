@@ -35,15 +35,6 @@ We'll go to our profile edit page. And change our name as well as upload a logo.
     >>> browser.printQuery("id('personal-box')//div[@class='personal-logo']//img")
     <img src="/user/1/logo/60/60" alt="logo" />
 
-    >>> browser.printQuery("id('user_information_portlet')//div[@class='user-information']/h3/text()")
-    Adminas Adminas
-
-    >>> browser.printQuery("id('user_information_portlet')//div[@class='email']/a/text()")
-    admin@ututi.lt
-
-    >>> browser.printQuery("id('user_information_portlet')//div[@class='user-link']/a/text()")
-    http://ututi.lt
-
 Let's check out the logo.
     >>> browser.open('http://localhost/user/1/logo/45/60')
 
