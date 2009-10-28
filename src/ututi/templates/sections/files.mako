@@ -223,7 +223,7 @@ $(document).ready(function(){
         % if folder.title != '':
           <h4>
             ${folder.title}
-            % if folder.can_write():
+            % if folder.can_write(c.user):
               <a href="${folder.parent.url(action='delete_folder', folder=folder.title)}" id="delete_folder_button-${section_id}-${fid}" class="delete_folder_button">${_("(Delete)")}</a>
             % endif
           </h4>

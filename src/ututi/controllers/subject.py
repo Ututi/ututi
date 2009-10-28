@@ -13,7 +13,7 @@ from pylons.controllers.util import redirect_to, abort
 from pylons.i18n import _
 
 from ututi.model import meta, LocationTag, Subject, File, SimpleTag
-from ututi.lib.security import ActionProtector
+from ututi.lib.security import ActionProtector, deny
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import LocationTagsValidator, TagsValidator
@@ -219,10 +219,14 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
         redirect_to(request.referrer)
 
     @subject_action
-    @ActionProtector("moderator", "root")
+    @ActionProtector("user")
     def delete_folder(self, subject):
-        self._delete_folder(subject)
-        redirect_to(request.referrer)
+        folder_name = request.params['folder']
+        if not subject.getFolder(folder_name).can_write(c.user):
+            deny(_('You have no right to delete this folder.'), 403)
+        else:
+            self._delete_folder(subject)
+            redirect_to(request.referrer)
 
     @subject_action
     @ActionProtector("user")
@@ -232,7 +236,11 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
     @subject_action
     @ActionProtector("moderator", "root")
     def js_delete_folder(self, subject):
-        return self._delete_folder(subject)
+        folder_name = request.params['folder']
+        if not subject.getFolder(folder_name).can_write(c.user):
+            deny(_('You have no right to delete this folder.'), 403)
+        else:
+            return self._delete_folder(subject)
 
     @subject_action
     @ActionProtector("moderator", "root")

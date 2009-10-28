@@ -530,6 +530,8 @@ class Folder(list):
         self.parent = parent
 
     def can_write(self, user=None):
+        if len(self) == 0 and user is None:
+            return False
         can_write = True
         for file in self:
             can_write = can_write and file.can_write(user)
