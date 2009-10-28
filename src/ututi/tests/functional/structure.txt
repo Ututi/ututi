@@ -44,7 +44,7 @@ The new university is now shown.
     >>> form.getControl('Description').value = ''
     >>> form.getControl('Parent').displayOptions
     ['Select a parent', 'Vilniaus universitetas', 'Vilniaus Gedimino Technikos Universitetas']
-    >>> form.getControl('Parent').value = ['4']
+    >>> form.getControl('Parent').value = ['5']
     >>> form.getControl('Save').click()
 
     >>> browser.printQuery("id('location_structure')//li/a[@class='tag_link']/text()")
@@ -70,7 +70,7 @@ Now we shall try to edit a structural element.
     >>> form.getControl('Description').value = u'Nebeegzistuojantis fakultetas'
     >>> form.getControl('Parent').displayOptions
     ['Select a parent', 'Vilniaus Gedimino Technikos Universitetas']
-    >>> form.getControl('Parent').value = ['4']
+    >>> form.getControl('Parent').value = ['5']
 
     >>> form.getControl('Save').click()
 

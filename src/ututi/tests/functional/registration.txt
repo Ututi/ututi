@@ -32,6 +32,10 @@ screen:
     >>> browser.printQuery("id('search-results')//a/text()")
     Moderatoriai
 
+Another bug in the group search: adding a simple tag to the search's parameters would cause a crash.
+    >>> browser.getControl(name='tags').value = 'vu, simple_tag'
+    >>> browser.getControl('Search', index=1).click()
+
 There was a bug, where searching without anything specified and then pressing search again in the group find view
 would cause a crash. Is it still there?
     >>> browser.open('http://localhost/welcome')

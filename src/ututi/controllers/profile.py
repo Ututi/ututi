@@ -324,6 +324,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
                     search_params['year'] = c.year
                     results = results.join((Group, SearchItem.content_item_id == Group.id))\
                         .order_by(asc(func.abs(Group.year - date(int(c.year), 1, 1))))
+
                 except:
                     pass
 
@@ -334,7 +335,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         c.results = paginate.Page(
             results,
             page=int(request.params.get('page', 1)),
-            item_count = search_query_count(results),
+            item_count = results.count() or 0,
             items_per_page = 10,
             **search_params)
 

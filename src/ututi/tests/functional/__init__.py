@@ -14,7 +14,7 @@ from pylons import config
 from nous.mailpost import processEmailAndPost
 
 import ututi
-from ututi.model import Group, meta, LocationTag, User, Subject, Email
+from ututi.model import Group, meta, LocationTag, SimpleTag, User, Subject, Email
 
 def ftest_setUp(test):
     ututi.tests.setUp(test)
@@ -44,6 +44,9 @@ def ftest_setUp(test):
     alt_user.emails.append(email)
 
     meta.Session.add(Subject(u'mat_analize', u'Matematin\u0117 analiz\u0117', LocationTag.get(u'vu'), u'prof. E. Misevi\u010dius'))
+    t = SimpleTag(u'simple_tag')
+    meta.Session.add(t)
+
     meta.Session.commit()
     meta.Session.execute("SET ututi.active_user TO 0")
 
