@@ -27,6 +27,7 @@ from ututi.model import LocationTag
 from ututi.model import meta, Email, Group, SearchItem
 from ututi.controllers.group import _filter_watched_subjects, FileUploadTypeValidator
 from ututi.controllers.search import SearchSubmit, SearchBaseController
+from ututi.controllers.home import UniversityListMixin
 
 log = logging.getLogger(__name__)
 
@@ -43,7 +44,7 @@ class LogoUpload(Schema):
     logo = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
 
 
-class ProfileController(SearchBaseController):
+class ProfileController(SearchBaseController, UniversityListMixin):
     """A controller for the user's personal information and actions."""
     def __before__(self):
         if c.user is not None:
@@ -64,6 +65,16 @@ class ProfileController(SearchBaseController):
              'selected': selected == 'files'},
             ]
         return bcs
+
+    @ActionProtector("user")
+    def browse(self):
+        self._get_unis()
+
+        c.obj_type = '*'
+        if request.params.has_key('js'):
+            return render_mako_def('/anonymous_index.mako','universities', unis=c.unis, ajax_url=url(controller='profile', action='browse'))
+
+        return render('/profile/browse.mako')
 
     @ActionProtector("user")
     @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)

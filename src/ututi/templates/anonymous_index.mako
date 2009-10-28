@@ -112,7 +112,7 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
     ${search_form(parts=['obj_type', 'text'])}
   </div>
 
-  ${universities_section(c.unis, url(controller='home', action='index', js=1))}
+  ${universities_section(c.unis, url(controller='home', action='index'))}
   <br class="clear-left" />
   <script type="text/javascript">
   //<![CDATA[

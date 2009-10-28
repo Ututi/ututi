@@ -3,52 +3,6 @@ h1 {
   font-weight: normal;
 }
 
-/* university list */
-#university-list {
-  margin-top: 30px;
-  overflow: hidden;
-}
-
-.university_block {
-  padding-left: 36px;
-  width: 240px;
-  float: left;
-  font-size: 12px;
-  margin-top: 3px;
-}
-
-.university_block div.logo {
-  float: left;
-  margin-left: -36px;
-  height: 28px;
-  width: 26px;
-  vertical-align: middle;
-  line-height: 28px;
-}
-
-.university_block div.logo img {
-  vertical-align: middle;
-}
-
-#pager {
-  clear: left;
-}
-
-#pager.loading,
-#sorting.loading {
-  background: url("../images/details/icon_progress.gif") right center no-repeat;
-}
-
-#teaser_switch {
-  text-align: right;
-}
-
-#sorting a.active {
-  color: #4b4b4b;
-}
-
-/* end university list */
-
 /* search */
 #frontpage-search {
   margin-top: 15px;
