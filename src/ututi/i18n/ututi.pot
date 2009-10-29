@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2009-10-22 16:15+0300\n"
+"POT-Creation-Date: 2009-10-29 14:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -208,6 +208,26 @@ msgstr ""
 msgid "Your password has been updated. Welcome back!"
 msgstr ""
 
+#, python-format
+msgid "Ututi news: %(changes)s"
+msgstr ""
+
+#, python-format
+msgid "%(file_count)d new file"
+msgid_plural "%(file_count)d new files"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(page_count)d new page"
+msgid_plural "%(page_count)d new pages"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "Ututi news: %(file_changes)s and %(page_changes)s"
+msgstr ""
+
 msgid "Your profile was updated."
 msgstr ""
 
@@ -231,6 +251,9 @@ msgid "The subject has been added to your watched subjects list."
 msgstr ""
 
 msgid "The subject has been removed from your watched subjects list."
+msgstr ""
+
+msgid "You have no right to delete this folder."
 msgstr ""
 
 msgid "New page"
@@ -294,11 +317,35 @@ msgstr[0] ""
 msgstr[1] ""
 
 #, python-format
+msgid "Page %(page_title)s (%(page_url)s) was created."
+msgstr ""
+
+#, python-format
+msgid "Page %(page_title)s was created."
+msgstr ""
+
+#, python-format
 msgid "New page %(link_to_page)s of a subject %(link_to_subject)s was created"
 msgstr ""
 
 #, python-format
+msgid "Page %(page_title)s (%(page_url)s) was updated."
+msgstr ""
+
+#, python-format
+msgid "Page %(page_title)s was updated."
+msgstr ""
+
+#, python-format
 msgid "Page %(link_to_page)s of a subject %(link_to_subject)s was updated"
+msgstr ""
+
+#, python-format
+msgid "File %(file_title)s (%(file_url)s) was uploaded."
+msgstr ""
+
+#, python-format
+msgid "File %(file_title)s was uploaded."
 msgstr ""
 
 #, python-format
@@ -377,10 +424,10 @@ msgstr[1] ""
 msgid "Sort  by: "
 msgstr ""
 
-msgid "UTUTI - student information online"
+msgid "More universities"
 msgstr ""
 
-msgid "More universities"
+msgid "UTUTI - student information online"
 msgstr ""
 
 msgid "About ututi"
@@ -394,9 +441,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Group mailing lists, <a href=\"%(link)s\" title=\"Subject list\">subject</a> "
-"wikis, files, lecture notes and answers to questions that matter for your "
-"studies."
+"Group mailing lists, <a href=\"%(link)s\" title=\"Subject list\">subjects</a>"
+" files and lecture notes."
 msgstr ""
 
 msgid "What can you do here?"
@@ -404,10 +450,9 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Store <a href=\"%(subjects)s\" title=\"Subject list\">study materials</a>"
-"          and pass them on for future generations, create          <a "
-"href=\"%(groups)s\" title=\"Group list\">academic groups</a>          and "
-"communicate with groupmates."
+"Share <a href=\"%(subjects)s\" title=\"Subject list\">study materials</a>"
+"          create <a href=\"%(groups)s\" title=\"Group list\">academic "
+"groups</a>          and communicate with groupmates."
 msgstr ""
 
 msgid "student information online"
@@ -583,6 +628,18 @@ msgstr ""
 
 #, python-format
 msgid "You can accept or reject this invitation by following this link: %(url)s ."
+msgstr ""
+
+#, python-format
+msgid ""
+"If you want to stop getting these emails - you can change your subscription "
+"settings in your <a href=\"%(url)s\">watched subject page</a>."
+msgstr ""
+
+#, python-format
+msgid ""
+"If you want to stop getting these emails - you can change your subscription "
+"settings in your watched subject page (%(url)s)."
 msgstr ""
 
 msgid ""
@@ -1072,7 +1129,7 @@ msgstr ""
 msgid "Section"
 msgstr ""
 
-msgid "Become a part of Ututi"
+msgid "Join Ututi"
 msgstr ""
 
 msgid "Fullname"
