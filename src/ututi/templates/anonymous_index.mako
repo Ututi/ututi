@@ -26,7 +26,7 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
   </div>
   %endif
   <div class="title">
-    <a href="${uni.url()}" title="${uni.title}">${uni.title}</a>
+    <a href="${uni.url()}" title="${uni.title}">${h.ellipsis(uni.title, 30)}</a>
   </div>
   <div class="stats">
     <span>
@@ -81,7 +81,7 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
   <script type="text/javascript">
   //<![CDATA[
     $(document).ready(function() {
-      $('#university-list.collapsed_list').data("preheight", $('#university-list.collapsed_list').height()).css('height', '100px');
+      $('#university-list.collapsed_list').data("preheight", $('#university-list.collapsed_list').height()).css('height', '108px');
       $('#teaser_switch').show();
       $('#teaser_switch a').click(function() {
         $('#teaser_switch').hide();
@@ -120,8 +120,8 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
       $('#presentation-img a').click(function() {
         $('#ututi_features').hide();
         $('#presentation-img img').animate({
-          width: '570px',
-          height: '325px'
+          width: '550px',
+          height: '308px'
         },
         700,
         'linear',
@@ -138,13 +138,13 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
       <div id="presentation">
         <div id="presentation-img" class="${c.slideshow and 'hidden' or ''}">
           <a href="${url(controller='home', action='index', slide='show')}">
-            <img src="${url('/images/slideshow_lt.png')}" alt="${_('About ututi')}"/>
+            <img src="${url('/images/slideshow_%(lang)s.png' % dict(lang=c.lang))}" alt="${_('About ututi')}"/>
           </a>
         </div>
         <div id="presentation-actual" class="${(not c.slideshow) and 'hidden' or ''}">
           <object id='${_("ututi_video_id")}'
-                  width='570'
-                  height='325'
+                  width='550'
+                  height='308'
                   type='application/x-shockwave-flash'
                   data='http://www.screentoaster.com/swf/STPlayer.swf'
                   codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,115,0'>
@@ -158,14 +158,13 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
       <div id="ututi_features" class="${c.slideshow and 'hidden' or ''}">
         <div id="can_find">
           <h3>${_('What can You find here?')}</h3>
-          ${_('Group mailing lists, <a href="%(link)s" title="Subject list">subject</a> wikis, files, lecture notes and answers to questions that matter for your studies.') %\
+          ${_('Group mailing lists, <a href="%(link)s" title="Subject list">subjects</a> files and lecture notes.') %\
             dict(link=url(controller='search', action='index', obj_type='subject'))|n}
         </div>
         <div id="can_do">
           <h3>${_('What can you do here?')}</h3>
-          ${_('Store <a href="%(subjects)s" title="Subject list">study materials</a>\
-          and pass them on for future generations, create\
-          <a href="%(groups)s" title="Group list">academic groups</a>\
+          ${_('Share <a href="%(subjects)s" title="Subject list">study materials</a>\
+          create <a href="%(groups)s" title="Group list">academic groups</a>\
           and communicate with groupmates.') % dict(subjects=url(controller='search', action='index', obj_type='subject'),\
                                                     groups=url(controller='search', action='index', obj_type='group'))|n}
         </div>

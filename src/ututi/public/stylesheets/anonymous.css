@@ -1,6 +1,11 @@
 h1 {
-  font-size: 27px;
+  font-size: 26px;
   font-weight: normal;
+  margin-left: -20px;
+}
+
+#body-container {
+  padding-left: 20px !important;
 }
 
 /* search */
@@ -63,7 +68,8 @@ h1 {
   margin: 0;
   text-transform: uppercase;
   padding-bottom: 10px;
-  height: 25px;
+  height: 30px;
+  font-size: 16px;
   background: white url("../images/borders/registration_form.png") top center no-repeat;
 }
 
@@ -102,15 +108,16 @@ h1 {
 /* information block */
 #infoblock {
   border-top: 1px solid #ded8d8;
-  margin-top: 10px;
-  padding-top: 10px;
+  margin-top: 25px;
+  padding-top: 20px;
 }
 
 #infoblock #ututi_features {
   float: left;
-  width: 300px;
+  width: 280px;
   padding-left: 10px;
   margin-top: 0;
+  font-size: 12px;
 }
 
 #infoblock #can_find {

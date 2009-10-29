@@ -3,7 +3,7 @@
 <%def name="ututi_join_portlet()">
   <%self:portlet id="ututi_join_portlet">
     <%def name="header()">
-      ${_('Become a part of Ututi')}
+      ${_('Join Ututi')}
     </%def>
       <form id="registration_form" method="post" action="${url('/register')}">
         %if c.hash:
