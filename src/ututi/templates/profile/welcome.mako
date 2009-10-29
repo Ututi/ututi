@@ -4,7 +4,7 @@
 ${h.stylesheet_link('/stylesheets/home.css')|n}
 ${h.stylesheet_link('/stylesheets/suggestions.css')|n}
 ${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
-${h.stylesheet_link('/stylesheets/profile.css')|n}
+${parent.head_tags()}
 </%def>
 
 <%namespace file="/widgets/locationtag.mako" import="*"/>
