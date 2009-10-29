@@ -126,17 +126,68 @@
   </%self:portlet>
 </%def>
 
-<%def name="user_message_portlet(user=None)">
-  <%self:portlet id="message_portlet" portlet_class="inactive">
+<%def name="user_file_upload_portlet(user=None)">
+  <%
+     if user is None:
+         user = c.user
+  %>
+  <%self:action_portlet id="file_upload_portlet" expanding="True">
     <%def name="header()">
-      ${'Naujas Ututi!'}
+      <span>${_('upload a file to..')}</span>
     </%def>
-Kol Tu mėgavaisi vasaros atostogomis, <a
-href="http://ututi.lt">ututi.lt</a> komanda parengė atnaujintą,
-patobulintą ir Tavo poreikiams geriau pritaikytą portalo <a
-href="http://ututi.lt">ututi.lt</a> versiją. Laukiame Jūsų <a
-href="http://ututi.uservoice.com">atsiliepimų</a>, <a
-href="http://ututi.uservoice.com">pasiūlymų</a> ir <a
-href="http://ututi.uservoice.com">pageidavimų</a>!
-  </%self:portlet>
+    <div id="completed">
+    </div>
+    <script type="text/javascript">
+    //<![CDATA[
+    $(document).ready(function(){
+
+      function setUpUpload(i, btn) {
+        var button = $(btn);
+        var upload_url = $(btn).siblings('input').val();
+        var list = $('#completed');
+        new AjaxUpload(button,{
+          action: upload_url,
+          name: 'attachment',
+          data: {folder: ''},
+          onSubmit : function(file, ext, iframe){
+              iframe['progress_indicator'] = $(document.createElement('div'));
+              $(list).append(iframe['progress_indicator']);
+              iframe['progress_indicator'].text(file);
+              iframe['progress_ticker'] = $(document.createElement('span'));
+              iframe['progress_ticker'].appendTo(iframe['progress_indicator']).text('Uploading');
+              var progress_ticker = iframe['progress_ticker'];
+              var interval;
+
+              // Uploding -> Uploading. -- Uploading...
+              interval = window.setInterval(function(){
+                  var text = progress_ticker.text();
+                  if (text.length < 13){
+                      progress_ticker.text(text + '.');
+                  } else {
+                      progress_ticker.text('Uploading');
+                  }
+              }, 200);
+              iframe['interval'] = interval;
+          },
+          onComplete: function(file, response, iframe){
+              iframe['progress_indicator'].replaceWith($('<div></div>').append($(response).children('a')));
+              window.clearInterval(iframe['interval']);
+          }
+      });
+    };
+     $('.upload .target').each(setUpUpload);
+    });
+    //]]>
+    </script>
+    <%
+       items = user.groups + user.watched_subjects
+       n = len(items)
+    %>
+    %for obj in items:
+    <div class="upload target_item">
+      <input type="hidden" name="upload_url" value="${obj.url(action='upload_file_short')}"/>
+      <div class="target">${h.ellipsis(obj.title, 25)}</div>
+    </div>
+    %endfor
+  </%self:action_portlet>
 </%def>

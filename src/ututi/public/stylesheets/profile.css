@@ -19,3 +19,26 @@
 #year-input {
   clear: none;
 }
+
+/* file upload portlet */
+
+#file_upload_portlet_content .header span {
+  padding-right: 20px;
+  background: url("../images/details/expand_down.png") right center no-repeat;
+}
+
+#file_upload_portlet_content #completed a {
+  padding-left: 18px;
+  background: url("../images/details/icon_done.gif") left center no-repeat;
+}
+
+#file_upload_portlet_content .target {
+  color: #d45500;
+  padding-left: 23px;
+  background: url("../images/details/icon_folder.gif") left center no-repeat;
+  cursor: pointer;
+}
+
+#file_upload_portlet_content .target.hover {
+  text-decoration: underline;
+}
