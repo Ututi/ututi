@@ -191,3 +191,20 @@
     %endfor
   </%self:action_portlet>
 </%def>
+
+<%def name="user_create_subject_portlet(user=None)">
+  <%
+     if user is None:
+         user = c.user
+  %>
+  <%self:action_portlet id="subject_create_portlet">
+    <%def name="header()">
+    <div style="float: right; height: 20px; padding-top: 3px;">
+      ${h.image('/images/details/icon_question.png',
+                alt=_("Store all the subject's files and notes in one place."),
+                class_='tooltip')|n}
+    </div>
+    <a href="${url(controller='subject', action='add')}">${_('create new subject')}</a>
+    </%def>
+  </%self:action_portlet>
+</%def>

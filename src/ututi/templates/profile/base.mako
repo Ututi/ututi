@@ -13,6 +13,7 @@ ${parent.head_tags()}
 <%def name="portlets()">
 <div id="sidebar">
   ${user_file_upload_portlet()}
+  ${user_create_subject_portlet()}
   ${search_portlet(parts=['text'], target=url(controller='profile', action='search'))}
 
   ${user_subjects_portlet()}
