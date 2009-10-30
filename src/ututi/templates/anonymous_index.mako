@@ -81,7 +81,7 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
   <script type="text/javascript">
   //<![CDATA[
     $(document).ready(function() {
-      $('#university-list.collapsed_list').data("preheight", $('#university-list.collapsed_list').height()).css('height', '108px');
+      $('#university-list.collapsed_list').data("preheight", $('#university-list.collapsed_list').height()).css('height', '115px');
       $('#teaser_switch').show();
       $('#teaser_switch a').click(function() {
         $('#teaser_switch').hide();
