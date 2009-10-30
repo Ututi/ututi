@@ -208,3 +208,54 @@
     </%def>
   </%self:action_portlet>
 </%def>
+
+<%def name="user_recommend_portlet(user=None)">
+  <%
+     if user is None:
+         user = c.user
+  %>
+  <%self:action_portlet id="user_recommend_portlet" expanding="True">
+    <%def name="header()">
+    <div style="float: right; height: 20px; padding-top: 3px;">
+      ${h.image('/images/details/icon_question.png',
+                alt=_("Send invitations to Ututi - help us grow!"),
+                class_='tooltip')|n}
+    </div>
+
+    ${_('recommend Ututi to your friends')}
+    </%def>
+
+    <div id="recommendation_status"></div>
+    <form method="post"
+          action="${url(controller='home', action='send_recommendations')}" id="ututi_recommendation_form">
+      <div class="form-field">
+        <input type="hidden" name="came_from" value="${request.url}" />
+        <label for="recommend_emails">${_('Enter the emails of your groupmates, separated by commas or new lines.')}</label>
+        <textarea name="recommend_emails" id="recommend_emails" rows="4" cols="30"></textarea>
+      </div>
+
+      <div class="form-field">
+        <span class="btn"><input id="recommendation_submit" type="submit" value="${_('Send invitation')}"/></span>
+      </div>
+    </form>
+  <script type="text/javascript">
+  //<![CDATA[
+    $(document).ready(function() {
+      $('#recommendation_submit').click(function() {
+        $(this).parents('.form-field').addClass('loading');
+        $.post("${url(controller='home', action='send_recommendations', js=1)}",
+            $(this).parents('form').serialize(),
+            function(data) {
+              $('#recommendation_status').text('').append(data);
+              $('#recommendation_submit').parents('.form-field').removeClass('loading');
+              $('#recommend_emails').val('');
+            });
+        return false;
+      });
+    });
+  //]]>
+  </script>
+
+
+  </%self:action_portlet>
+</%def>

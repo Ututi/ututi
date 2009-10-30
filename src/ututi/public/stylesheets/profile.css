@@ -42,3 +42,27 @@
 #file_upload_portlet_content .target.hover {
   text-decoration: underline;
 }
+
+/* end file upload portlet */
+
+/* invitation portlet */
+
+#ututi_recommendation_form label {
+  font-size: 11px;
+  height: auto;
+  line-height: 13px;
+}
+
+#ututi_recommendation_form textarea {
+  width: 270px;
+  border: 1px solid gray;
+}
+
+#ututi_recommendation_form .form-field.loading {
+  background: url("../images/details/icon_progress.gif") right center no-repeat;
+}
+
+#recommendation_status span {
+  padding-left: 18px;
+  background: url("../images/details/icon_done.gif") left center no-repeat;
+}

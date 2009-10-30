@@ -455,6 +455,12 @@ div.action-portlet .content .header {
   line-height: 24px;
 }
 
+/* buttons - a different image to cope with the backgrounds */
+div.action-portlet a.btn, div.action-portlet span.btn,
+div.action-portlet a.btn span, div.action-portlet span.btn input {
+  background-image: url("../images/button_small_action_portlet.png");
+}
+
 /* end action portlets */
 
 /* begin horizontal menu */

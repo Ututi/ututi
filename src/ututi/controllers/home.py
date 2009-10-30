@@ -7,10 +7,10 @@ from routes.util import redirect_to
 from formencode import Schema, validators, Invalid, All, htmlfill
 from webhelpers import paginate
 
-from pylons import request, response, c, url, session
+from pylons import request, c, url, session
 from pylons.decorators import validate
-from pylons.controllers.util import redirect_to, abort
-from pylons.i18n import _
+from pylons.controllers.util import abort
+from pylons.i18n import _, ungettext
 from pylons.templating import render_mako_def
 
 from sqlalchemy.orm.exc import NoResultFound
@@ -18,6 +18,8 @@ from sqlalchemy.orm.exc import NoResultFound
 from ututi.lib.base import BaseController, render
 import ututi.lib.helpers as h
 from ututi.lib.emails import email_confirmation_request, email_password_reset
+from ututi.lib.messaging import Message
+from ututi.lib.security import ActionProtector
 
 from ututi.model import meta, User, Email, PendingInvitation, LocationTag
 
@@ -89,6 +91,13 @@ class RegistrationForm(Schema):
     chained_validators = [validators.FieldsMatch('new_password',
                                                  'repeat_password',
                                                  messages=msg)]
+
+
+class RecommendationForm(Schema):
+    """A schema for validating ututi recommendation submissions"""
+    allow_extra_fields = True
+    recommend_emails = validators.UnicodeString(not_empty=False)
+    came_from = validators.URL(require_tld=False)
 
 
 def sign_in_user(email):
@@ -264,3 +273,56 @@ class HomeController(UniversityListMixin):
             return htmlfill.render(self._pswreset_form(), defaults=defaults)
         except NoResultFound:
             abort(404)
+
+    @validate(schema=RecommendationForm)
+    @ActionProtector("user")
+    def send_recommendations(self):
+        if hasattr(self, 'form_result'):
+            count = 0
+            failed = []
+            rcpt = []
+
+            #constructing the message
+            extra_vars = {'user_name': c.user.fullname}
+            text = render('/emails/recommendation_text.mako',
+                          extra_vars=extra_vars)
+            html = render('/emails/recommendation_html.mako',
+                          extra_vars=extra_vars)
+            msg = Message(_('%(fullname)s wants You to join Ututi') % dict(fullname = c.user.fullname), text, html)
+
+            emails = self.form_result.get('recommend_emails', '').split()
+            for line in emails:
+                for email in filter(bool, line.split(',')):
+                    try:
+                        validators.Email.to_python(email)
+                        exists = meta.Session.query(Email).filter(Email.email == email).first()
+                        if exists is None:
+                            count = count + 1
+                            rcpt.append(email)
+                    except:
+                        failed.append(email)
+            if rcpt != []:
+                msg.send(rcpt)
+
+            status = ''
+            if count > 0:
+                status = ungettext('%(count)d invitation sent.',
+                                   '%(count)d invitations sent.', count) % {
+                    'count': count}
+            else:
+                status = _('No invitations we sent.')
+
+            if len(failed) > 0:
+                if status != '':
+                    status = status + ' '
+                status = status + _('Some of the emails entered seem to be invalid.')
+
+            if request.params.has_key('js'):
+                return "<span>%s</span>" % status
+            else:
+                h.flash(status)
+                url = self.form_result.get('came_from', None)
+                if url is None:
+                    redirect_to(url(controller='profile', action='index'))
+                else:
+                    redirect_to(url.encode('utf-8'))
