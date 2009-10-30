@@ -310,7 +310,7 @@ class HomeController(UniversityListMixin):
                                    '%(count)d invitations sent.', count) % {
                     'count': count}
             else:
-                status = _('No invitations we sent.')
+                status = _('No invitations were sent.')
 
             if len(failed) > 0:
                 if status != '':

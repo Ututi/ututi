@@ -22,7 +22,7 @@ There should be a portlet with a form that let's us enter email addresses the re
    <BLANKLINE>
    Adminas Adminovix has been using Ututi - the portal for students - for some time now and is recommending you to try it.
    <BLANKLINE>
-   Ututi is a system for student that encourages collaboration and sharing of study materials. We provide tools that makestoring lecture notes, sharing files and communicating with your class mates much, much easier.
+   Ututi is a system for students that encourages collaboration and sharing of study materials. We provide tools that make storing lecture notes, sharing files and communicating with your class mates much, much easier.
    <BLANKLINE>
    If You would like to join Ututi now, please follow this link:
    http://localhost/
@@ -58,7 +58,7 @@ What if some of the emails were mistyped?
    <BLANKLINE>
    Adminas Adminovix has been using Ututi - the portal for students - for some time now and is recommending you to try it.
    <BLANKLINE>
-   Ututi is a system for student that encourages collaboration and sharing of study materials. We provide tools that makestoring lecture notes, sharing files and communicating with your class mates much, much easier.
+   Ututi is a system for students that encourages collaboration and sharing of study materials. We provide tools that make storing lecture notes, sharing files and communicating with your class mates much, much easier.
    <BLANKLINE>
    If You would like to join Ututi now, please follow this link:
    http://localhost/
@@ -71,7 +71,7 @@ What if some of the emails were mistyped?
    <BLANKLINE>
    Adminas Adminovix has been using Ututi - the portal for students - for some time now and is recommending you to try it.
    <BLANKLINE>
-   Ututi is a system for student that encourages collaboration and sharing of study materials. We provide tools that makestoring lecture notes, sharing files and communicating with your class mates much, much easier.
+   Ututi is a system for students that encourages collaboration and sharing of study materials. We provide tools that make storing lecture notes, sharing files and communicating with your class mates much, much easier.
    <BLANKLINE>
    If You would like to join Ututi now, please follow this link:
    http://localhost/
