@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-10-29 14:23+0200\n"
+"PO-Revision-Date: 2009-10-30 12:25+0200\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -225,6 +225,23 @@ msgstr "Naudotojo profilis nerastas."
 
 msgid "Your password has been updated. Welcome back!"
 msgstr "Slaptažodis atnaujintas. Sveikiname sugrįžus :)"
+
+#, python-format
+msgid "%(fullname)s wants You to join Ututi"
+msgstr "%(fullname)s kviečia tave prisijungti prie Ututi"
+
+#, python-format
+msgid "%(count)d invitation sent."
+msgid_plural "%(count)d invitations sent."
+msgstr[0] "Išsiųstas %(count)d pakvietimas."
+msgstr[1] "Išsiųsti %(count)d pakvietimai."
+msgstr[2] "Išsiųsta %(count)d pakvietimų."
+
+msgid "No invitations were sent."
+msgstr "Pakvietimai neišsiųsti."
+
+msgid "Some of the emails entered seem to be invalid."
+msgstr "Kai kurie el. pašto adresai netinkami."
 
 #, python-format
 msgid "Ututi news: %(changes)s"
@@ -702,6 +719,32 @@ msgstr ""
 
 msgid "If You did forget Your password, follow this link to recover it:"
 msgstr "Pamiršus slaptažodį spausti: "
+
+msgid "Hello!"
+msgstr "Sveiki!"
+
+#, python-format
+msgid ""
+"%(user_name)s has been using Ututi - the portal for students - for some "
+"time now and is recommending you to try it."
+msgstr ""
+"%(user_name)s jau kurį laiką naudojasi Utiti - portalu studentams - ir "
+"siūlo tau jį išbandyti."
+
+msgid ""
+"Ututi is a system for students that encourages collaboration and sharing "
+"of study materials. We provide tools that make storing lecture notes, "
+"sharing files and communicating with your class mates much, much easier."
+msgstr "Ututi yra sistema, skirta studentams - ji skatina bendradarbiauti kuriant ir dalintis studijų medžiaga. Čia rasi įrankius, kurie leidžia lengvai kaupti paskaitų konspektus, dalintis failais ir bendrauti su grupiokais."
+
+#, python-format
+msgid ""
+"If You would like to join Ututi now, please follow this <a "
+"href=\"%(link)s\">link</a>."
+msgstr "Jei norėtum išbandyti Ututi, spausk <a href=\"%(link)s\">čia</a>."
+
+msgid "If You would like to join Ututi now, please follow this link:"
+msgstr "Jeigu norėtum išbandyti Ututi, mus rasi šiuo adresu:"
 
 msgid "New topic"
 msgstr "Nauja tema"
@@ -1351,17 +1394,6 @@ msgstr ""
 msgid "Delete subject"
 msgstr "Ištrinti dalyką"
 
-msgid "You are not a member of any."
-msgstr ""
-"Suraskite Ututi savo akademinę grupę ir prijunkite prie jos savo grupės "
-"draugus. "
-
-msgid "More groups"
-msgstr "Daugiau grupių"
-
-msgid "Edit profile"
-msgstr "redaguoti profilį"
-
 msgid "You are not watching any subjects."
 msgstr ""
 "Raskite dalykus, kuriuos studijuojate ir pridėkite prie savo stebimų "
@@ -1379,6 +1411,37 @@ msgid ""
 msgstr ""
 "Prisidėkite studijuojamus dalykus prie stebimų dalykų sąrašo ir gaukite "
 "pranešimus apie pasiketimus šiuose dalykuose."
+
+msgid "upload a file to.."
+msgstr "įkelti failą į.."
+
+msgid "Send invitations to Ututi - help us grow!"
+msgstr "Rekomenduok Ututi draugams - padėk mums augti!"
+
+msgid "recommend Ututi to your friends"
+msgstr "rekomenduok Ututi draugams"
+
+msgid "Enter the emails of your groupmates, separated by commas or new lines."
+msgstr ""
+"Įvesk grupiokų el. pašto adresus, po vieną į eilutę arba atskirtus "
+"kableliais"
+
+msgid "Send invitation"
+msgstr "Siųsti pakvietimą"
+
+msgid "Edit profile"
+msgstr "redaguoti profilį"
+
+msgid "You are not a member of any."
+msgstr ""
+"Suraskite Ututi savo akademinę grupę ir prijunkite prie jos savo grupės "
+"draugus. "
+
+msgid "More groups"
+msgstr "Daugiau grupių"
+
+msgid "create new subject"
+msgstr "kurti naują dalyką"
 
 msgid "Find us on Facebook"
 msgstr "Mūsų erdvė Facebook"

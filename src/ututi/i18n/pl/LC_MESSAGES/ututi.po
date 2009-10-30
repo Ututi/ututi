@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-10-29 14:23+0200\n"
+"PO-Revision-Date: 2009-10-30 12:23+0200\n"
 "Last-Translator: Jaroslav Šatkevič <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -219,6 +219,22 @@ msgstr "Taki profil użytkownika nie istnieje."
 
 msgid "Your password has been updated. Welcome back!"
 msgstr "Twoje hasło zostało zaktualizowane. Witaj ponownie!"
+
+#, python-format
+msgid "%(fullname)s wants You to join Ututi"
+msgstr ""
+
+#, python-format
+msgid "%(count)d invitation sent."
+msgid_plural "%(count)d invitations sent."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "No invitations were sent."
+msgstr ""
+
+msgid "Some of the emails entered seem to be invalid."
+msgstr ""
 
 #, python-format
 msgid "Ututi news: %(changes)s"
@@ -692,6 +708,30 @@ msgstr ""
 
 msgid "If You did forget Your password, follow this link to recover it:"
 msgstr "Zapomniałeś hasła? Odzyskaj je aktywując ten następujący odnośnik:"
+
+msgid "Hello!"
+msgstr ""
+
+#, python-format
+msgid ""
+"%(user_name)s has been using Ututi - the portal for students - for some "
+"time now and is recommending you to try it."
+msgstr ""
+
+msgid ""
+"Ututi is a system for students that encourages collaboration and sharing "
+"of study materials. We provide tools that make storing lecture notes, "
+"sharing files and communicating with your class mates much, much easier."
+msgstr ""
+
+#, python-format
+msgid ""
+"If You would like to join Ututi now, please follow this <a "
+"href=\"%(link)s\">link</a>."
+msgstr ""
+
+msgid "If You would like to join Ututi now, please follow this link:"
+msgstr ""
 
 msgid "New topic"
 msgstr "Nowy temat"
@@ -1330,15 +1370,6 @@ msgstr ""
 msgid "Delete subject"
 msgstr "Usuń przedmiot"
 
-msgid "You are not a member of any."
-msgstr "Nie należysz do żadnej"
-
-msgid "More groups"
-msgstr "Więcej grup"
-
-msgid "Edit profile"
-msgstr "Edytuj profil"
-
 msgid "You are not watching any subjects."
 msgstr "Nie obserwujesz żadnego przedmiotu"
 
@@ -1354,6 +1385,33 @@ msgid ""
 msgstr ""
 "Dodanie przedmiotu do obserwowanych skutkuje otrzymywaniem powiadomień o "
 "zmianach w tym przedmiocie."
+
+msgid "upload a file to.."
+msgstr ""
+
+msgid "Send invitations to Ututi - help us grow!"
+msgstr ""
+
+msgid "recommend Ututi to your friends"
+msgstr ""
+
+msgid "Enter the emails of your groupmates, separated by commas or new lines."
+msgstr ""
+
+msgid "Send invitation"
+msgstr ""
+
+msgid "Edit profile"
+msgstr "Edytuj profil"
+
+msgid "You are not a member of any."
+msgstr "Nie należysz do żadnej"
+
+msgid "More groups"
+msgstr "Więcej grup"
+
+msgid "create new subject"
+msgstr ""
 
 msgid "Find us on Facebook"
 msgstr ""

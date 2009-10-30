@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-10-29 14:23+0200\n"
+"PO-Revision-Date: 2009-10-30 12:23+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -210,6 +210,22 @@ msgid "User account not found."
 msgstr ""
 
 msgid "Your password has been updated. Welcome back!"
+msgstr ""
+
+#, python-format
+msgid "%(fullname)s wants You to join Ututi"
+msgstr ""
+
+#, python-format
+msgid "%(count)d invitation sent."
+msgid_plural "%(count)d invitations sent."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "No invitations were sent."
+msgstr ""
+
+msgid "Some of the emails entered seem to be invalid."
 msgstr ""
 
 #, python-format
@@ -657,6 +673,30 @@ msgid ""
 msgstr ""
 
 msgid "If You did forget Your password, follow this link to recover it:"
+msgstr ""
+
+msgid "Hello!"
+msgstr ""
+
+#, python-format
+msgid ""
+"%(user_name)s has been using Ututi - the portal for students - for some "
+"time now and is recommending you to try it."
+msgstr ""
+
+msgid ""
+"Ututi is a system for students that encourages collaboration and sharing "
+"of study materials. We provide tools that make storing lecture notes, "
+"sharing files and communicating with your class mates much, much easier."
+msgstr ""
+
+#, python-format
+msgid ""
+"If You would like to join Ututi now, please follow this <a "
+"href=\"%(link)s\">link</a>."
+msgstr ""
+
+msgid "If You would like to join Ututi now, please follow this link:"
 msgstr ""
 
 msgid "New topic"
@@ -1279,15 +1319,6 @@ msgstr ""
 msgid "Delete subject"
 msgstr ""
 
-msgid "You are not a member of any."
-msgstr ""
-
-msgid "More groups"
-msgstr ""
-
-msgid "Edit profile"
-msgstr ""
-
 msgid "You are not watching any subjects."
 msgstr ""
 
@@ -1300,6 +1331,33 @@ msgstr ""
 msgid ""
 "Add watched subjects to your watched subjects' list and receive "
 "notifications about changes in these subjects"
+msgstr ""
+
+msgid "upload a file to.."
+msgstr ""
+
+msgid "Send invitations to Ututi - help us grow!"
+msgstr ""
+
+msgid "recommend Ututi to your friends"
+msgstr ""
+
+msgid "Enter the emails of your groupmates, separated by commas or new lines."
+msgstr ""
+
+msgid "Send invitation"
+msgstr ""
+
+msgid "Edit profile"
+msgstr ""
+
+msgid "You are not a member of any."
+msgstr ""
+
+msgid "More groups"
+msgstr ""
+
+msgid "create new subject"
 msgstr ""
 
 msgid "Find us on Facebook"
