@@ -2,25 +2,21 @@
 <%namespace file="/portlets/user.mako" import="*"/>
 <%namespace file="/portlets/search.mako" import="*"/>
 
-<%namespace file="/widgets/tags.mako" import="*"/>
-<%namespace file="/search/index.mako" import="search_form"/>
-<%namespace file="/search/index.mako" import="search_results"/>
-
 <%def name="portlets()">
 <div id="sidebar">
   ${search_portlet(parts=['text'], target=url(controller='profile', action='search'))}
-
   ${user_groups_portlet()}
-
 </div>
 </%def>
 
 
 <%def name="head_tags()">
 ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
-${h.stylesheet_link('/stylesheets/subject_selection.css')|n}
+${h.stylesheet_link('/stylesheets/profile.css')|n}
+
 <script type="text/javascript">
 //<![CDATA[
+
 $(document).ready(function(){
   function unselectSubject(event) {
     var url = $(event.target).parent().prev('.remove_url').val();
@@ -34,15 +30,24 @@ $(document).ready(function(){
 
   $('.remove_subject_button').click(unselectSubject);
 
-  $('.select_subject_button').click(function (event) {
-    var url = $(event.target).parent().prev('.select_url').val();
+  $('.ignore_subject_button').click(function (event) {
+    var url = $(event.target).parents("li:first").children(".ignore_url").val();
+    console.log(url);
     $.ajax({type: "GET",
             url: url,
             success: function(msg){
-                $(event.target).parent().parent().parent().after($(msg)[0]).remove();
-                var selected_subject = $(msg)[2];
-                $('#watched_subjects').append(selected_subject);
-                $('.remove_subject_button', selected_subject).click(unselectSubject);
+                $(event.target).parents("li:first").removeClass("enabled").addClass("disabled");
+    }});
+    return false;
+  });
+
+  $('.unignore_subject_button').click(function (event) {
+    var url = $(event.target).parents("li:first").children(".unignore_url").val();
+    console.log(url);
+    $.ajax({type: "GET",
+            url: url,
+            success: function(msg){
+                $(event.target).parent().parent().removeClass("disabled").addClass("enabled");
     }});
     return false;
   });
@@ -53,84 +58,90 @@ $(document).ready(function(){
 ${parent.head_tags()}
 </%def>
 
-<%def name="subject_flash_message(subject)">
-  <div class="selected_subject_flash_message flash-message">
-    <span class="close-link" onclick="$(event.target).parent().remove();">${_('Close')}</span>
-    <span>
-      ${_('Subject %(subj)s was selected.') % dict(subj = h.link_to(subject.title, subject.url()))|n}
-    </span>
+<%def name="header(title, update_url='')">
+<div class="hdr">
+  <span class="larger">${title|n}</span>
+  <div style="float:right;" class="small">
+    ${_('Receive messages about updates in subjects')}
+    <br />
+    <form class="select_interval_form" action="${update_url}">
+      <span class="btn" style="float: right;">
+        <input type="submit" value="${_('Confirm')}" />
+      </span>
+      <script type="text/javascript">
+        //<![CDATA[
+         $('.select_interval_form .btn').hide();
+        //]]>
+      </script>
+      <select style="float:right; font-size: 1em;">
+        <option value="immediatelly">${_('immediatelly')}</option>
+        <option value="daily">${_('at the end of the day')}</option>
+        <option value="never">${_('never')}</option>
+      </select>
+    </form>
+    <img style="float:right;" src="${url('/images/details/icon_done.png')}" />
+    <img style="float:right;" src="${url('/images/details/icon_progress.gif')}" />
   </div>
+</div>
 </%def>
 
-<%def name="watched_subject(subject)">
-  <li>
-    <a href="${subject.url()}">${subject.title}</a>
-    <input type="hidden" class="remove_url"
-           value="${url(controller='profile', action='js_unwatch_subject', subject_id=subject.subject_id, subject_location_id=subject.location.id)}" />
-    <a href="${url(controller='profile', action='unwatch_subject', subject_id=subject.subject_id, subject_location_id=subject.location.id)}" class="remove_subject_button">
-      ${h.image('/images/details/icon_cross_larger.png', alt='unwatch')|n}
-    </a>
-  </li>
-</%def>
+${header(_('Personally watched subjects'))}
 
-<h2>
-  ${_('Watched subjects')}
-  ${h.image('/images/details/icon_question.png',
-            alt=_('This is a list of the subjects You are watching. By clicking on the cross next to any subject,\
- You will not get any messages of the changes in it. If Your group is watching this subject, it will not affect Your classmates.'),
-            class_='tooltip')|n}
-</h2>
-
-<ul id="watched_subjects">
-% for subject in c.watched_subjects:
-    ${watched_subject(subject)}
-% endfor
+<ul class="personal_watched_subjects">
+%if c.subjects:
+  %for subject in c.subjects:
+    <li class="enabled">
+      ${h.link_to(subject.title, subject.url(), 35)}
+      <input type="hidden" class="remove_url"
+             value="${url(controller='profile', action='js_unwatch_subject', subject_id=subject.id)}" />
+      <a href="${url(controller='profile', action='unwatch_subject', subject_id=subject.id)}" class="remove_subject_button">
+        ${h.image('/images/details/icon_cross_subjects.png', alt='unwatch')|n}
+      </a>
+    </li>
+  %endfor
+%else:
+    <li>
+      ${_('You are not watching any subjects.')}
+    </li>
+%endif
 </ul>
 
-<h2 class="subjects-suggestions">${_('Recommended subjects')}</h2>
+<div style="padding-top: 10px; padding-bottom: 10px;">
+<a href="${url(controller='profile', action='watch_subjects')}" class="btn"><span>${_('Watch more subjects')}</span></a>
+</div>
 
-${search_form(text=c.text, obj_type='subject', tags=c.tags, parts=['text', 'tags'], target=c.search_target)}
+%for group in c.groups:
+${header(_('Subjects watched by %(group_title)s') % dict(group_title=h.link_to(group.title, group.url())))}
 
-##overriding tag link definition
-<%def name="item_tags(object)">
-  <div class="item-tags">
-    %for tag in object.location.hierarchy(full=True):
-      ${tag_link(tag)}
-    %endfor
-    %for tag in object.tags:
-      ${tag_link(tag)}
-    %endfor
-  </div>
-</%def>
-
-<%def name="tag_link(tag)">
-    <a class="tag" title="${tag.title}" href="${url(controller='profile', action='subjects', tags=', '.join(tag.hierarchy()))}">
-      ${tag.title}
-    </a>
-</%def>
-
-## overriding the search result item definition
-<%def name="search_subject(item)">
-  <%
-     object = item.object
-  %>
-  <div class="search-item snippet-subject">
-    <div class="title">
-      <a href="${object.url()}" title="${object.title}" class="item-title larger">${object.title}</a>
-      <input type="hidden" class="select_url"
-             value="${url(controller='profile', action='js_watch_subject', subject_id=item.object.subject_id, subject_location_id=item.object.location.id)}" />
-      <a href="${url(controller='profile', action='watch_subject', subject_id=item.object.subject_id, subject_location_id=item.object.location.id)}" class="select_subject_button btn">
-        <span>${_('Watch')}</span>
+<ul class="personal_watched_subjects">
+%if group.watched_subjects:
+  %for subject in group.watched_subjects:
+    %if subject in c.user.ignored_subjects:
+      <% cls = 'disabled' %>
+    %else:
+      <% cls = 'enabled' %>
+    %endif
+    <li class="${cls}">
+      ${h.link_to(subject.title, subject.url(), 35)}
+      <input type="hidden" class="ignore_url"
+             value="${url(controller='profile', action='js_ignore_subject', subject_id=subject.id)}" />
+      <input type="hidden" class="unignore_url"
+             value="${url(controller='profile', action='js_unignore_subject', subject_id=subject.id)}" />
+      <a class="ignore_subject_button"
+         href="${url(controller='profile', action='ignore_subject', subject_id=subject.id)}">
+        ${h.image('/images/details/eye_open.png', alt='unwatch')|n}
       </a>
-    </div>
-
-    <div class="description">
-      ${object.lecturer}
-    </div>
-    ${item_tags(object)}
-  </div>
-</%def>
-
-%if c.results:
-${search_results(c.results, display=search_subject)}
+      <a class="unignore_subject_button"
+         href="${url(controller='profile', action='unignore_subject', subject_id=subject.id)}">
+        ${h.image('/images/details/eye_closed.png', alt='unwatch')|n}
+      </a>
+    </li>
+  %endfor
+%else:
+    <li>
+      ${_('This group is not watching any subjects.')}
+    </li>
 %endif
+</ul>
+<br />
+%endfor

@@ -21,7 +21,7 @@ class NewsController(BaseController):
     def _events(self, user, from_time, to_time):
         events = meta.Session.query(Event)\
             .filter(or_(Event.object_id.in_([s.id
-                                             for s in user.watched_subjects]),
+                                             for s in user.all_watched_subjects]),
                         Event.object_id.in_([m.group.id
                                              for m in user.memberships])))\
             .filter(Event.author_id != user.id)\
@@ -38,8 +38,7 @@ class NewsController(BaseController):
     def _users_for_hourly_news(self):
         return meta.Session.query(User).filter_by(receive_email_each='hour')
 
-    def _users_for_daily_news(self):
-        return meta.Session.query(User).filter_by(receive_email_each='day')
+    def _users_for_daily_news(self):        return meta.Session.query(User).filter_by(receive_email_each='day')
 
     def range(self, days=0, hours = 0):
         date = request.params.get('date')

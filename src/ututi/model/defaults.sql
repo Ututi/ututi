@@ -135,7 +135,7 @@ create table user_monitored_subjects (
        user_id int8 references users(id) not null,
        subject_id int8 not null references subjects(id),
        ignored bool default false,
-       primary key (user_id, subject_id));;
+       primary key (user_id, subject_id, ignored));;
 
 /* A table for pages */
 

@@ -182,7 +182,7 @@ def test_User_get():
     """
 
 
-def test_user_watched_subjects():
+def test_user_subject_watching():
     r"""Test for user subject watching and unwatching.
 
         >>> user = User.get('admin@ututi.lt')
@@ -195,12 +195,6 @@ def test_user_watched_subjects():
         ...     meta.Session.add(subject)
         >>> meta.Session.commit()
         >>> res = meta.Session.execute("SET ututi.active_user TO %s" % user.id)
-
-    Our users can add subjects to their watched_subjects
-    list. Initially the list is empty though:
-
-        >>> user.watched_subjects
-        []
 
     All the subjects added to it, are visible in the list:
 
@@ -220,43 +214,61 @@ def test_user_watched_subjects():
         >>> group.watched_subjects.append(subjects[3])
         >>> group.watched_subjects.append(subjects[4])
 
-        >>> sorted([s.title for s in user.watched_subjects])
+        >>> sorted([s.title for s in user.all_watched_subjects])
         [u'Subject 0', u'Subject 1', u'Subject 2', u'Subject 3', u'Subject 4']
 
     Even when group is watching same subjects that the user is, we
     should only see the subject once:
 
         >>> group.watched_subjects.append(subjects[2])
+        >>> group.watched_subjects.append(subjects[0])
 
-        >>> sorted([s.title for s in user.watched_subjects])
+        >>> sorted([s.title for s in user.all_watched_subjects])
         [u'Subject 0', u'Subject 1', u'Subject 2', u'Subject 3', u'Subject 4']
 
-    Sometimes users don't care about the subjects their group is
-    watching, so we want them to have a way of "ignoring" them.
+    User can "unwatch" subjects, but that will only remove the subject
+    from his watched subjects list:
 
-        >>> user.ignoreSubject(subjects[3])
+        >>> user.unwatchSubject(subjects[2])
+
+        >>> sorted([s.title for s in user.all_watched_subjects])
+        [u'Subject 0', u'Subject 1', u'Subject 2', u'Subject 3', u'Subject 4']
+
         >>> sorted([s.title for s in user.watched_subjects])
-        [u'Subject 0', u'Subject 1', u'Subject 2', u'Subject 4']
+        [u'Subject 0', u'Subject 1']
 
-    Ignoring a subject that is watched by a user already is done using
-    the same method:
+    On the other hand - user can ignore subjects:
 
-        >>> user.ignoreSubject(subjects[2])
+        >>> user.ignoreSubject(subjects[0])
+
+    The subject will stay in all watched subjects, because I am
+    watching it directly.
+
+        >>> sorted([s.title for s in user.all_watched_subjects])
+        [u'Subject 0', u'Subject 1', u'Subject 2', u'Subject 3', u'Subject 4']
+
         >>> sorted([s.title for s in user.watched_subjects])
-        [u'Subject 0', u'Subject 1', u'Subject 4']
+        [u'Subject 0', u'Subject 1']
 
-    You can ignore the same subject twice, but it won't do you any
-    good:
+    It will also be in the ignored_subjects list:
 
-        >>> user.ignoreSubject(subjects[2])
-        >>> sorted([s.title for s in user.watched_subjects])
-        [u'Subject 0', u'Subject 1', u'Subject 4']
+        >>> sorted([s.title for s in user.ignored_subjects])
+        [u'Subject 0']
 
-    Same with watching subjects more than once:
+    And if I will stop watching it, it will disappear the
+    all_watched_subjects list:
 
-        >>> user.watchSubject(subjects[0])
-        >>> sorted([s.title for s in user.watched_subjects])
-        [u'Subject 0', u'Subject 1', u'Subject 4']
+        >>> user.unwatchSubject(subjects[0])
+
+        >>> sorted([s.title for s in user.all_watched_subjects])
+        [u'Subject 1', u'Subject 2', u'Subject 3', u'Subject 4']
+
+    Unless I stop ignoring it:
+
+        >>> user.unignoreSubject(subjects[0])
+
+        >>> sorted([s.title for s in user.all_watched_subjects])
+        [u'Subject 0', u'Subject 1', u'Subject 2', u'Subject 3', u'Subject 4']
 
     """
 

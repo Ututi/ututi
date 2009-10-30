@@ -65,4 +65,42 @@
 #recommendation_status span {
   padding-left: 18px;
   background: url("../images/details/icon_done.gif") left center no-repeat;
+
+.personal_watched_subjects {
+  padding-left: 10px;
+}
+
+.personal_watched_subjects li.enabled {
+  list-style-type: none;
+  padding: 0 0 5px 20px;
+  background: transparent url("../images/details/icon_subject_small.png") left top no-repeat;
+}
+
+.personal_watched_subjects li.disabled {
+  list-style-type: none;
+  padding: 0 0 5px 20px;
+  background: transparent url("../images/details/dalykas_disabled.png") left top no-repeat;
+}
+
+.personal_watched_subjects li.enabled a {
+  color: #000;
+  text-size: 1em;
+}
+
+.personal_watched_subjects li.disabled a {
+  color: #999;
+  text-size: 1em;
+}
+
+.hdr {
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+
+.enabled .unignore_subject_button {
+  display: none;
+}
+
+.disabled .ignore_subject_button {
+  display: none;
 }

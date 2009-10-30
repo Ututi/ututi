@@ -1,7 +1,7 @@
 import logging
 
 from sqlalchemy.orm.exc import NoResultFound
-from sqlalchemy.sql.expression import desc, or_
+from sqlalchemy.sql.expression import desc
 from pylons.controllers.util import abort
 from pylons import c
 from pylons.i18n import _

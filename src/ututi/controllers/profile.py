@@ -46,6 +46,7 @@ class LogoUpload(Schema):
 
 class ProfileController(SearchBaseController, UniversityListMixin):
     """A controller for the user's personal information and actions."""
+
     def __before__(self):
         if c.user is not None:
             c.breadcrumbs = [{'title': c.user.fullname, 'link': url(controller='profile', action='home')}]
@@ -63,6 +64,9 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             {'title': _("Files"),
              'link': url(controller='profile', action='files'),
              'selected': selected == 'files'},
+            {'title': _("Subjects"),
+             'link': url(controller='profile', action='subjects'),
+             'selected': selected == 'subjects'},
             ]
         return bcs
 
@@ -112,7 +116,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     def home(self):
         c.breadcrumbs.append(self._actions('home'))
         c.events = meta.Session.query(Event)\
-            .filter(or_(Event.object_id.in_([s.id for s in c.user.watched_subjects]),
+            .filter(or_(Event.object_id.in_([s.id for s in c.user.all_watched_subjects]),
                         Event.object_id.in_([m.group.id for m in c.user.memberships])))\
             .filter(Event.author_id != c.user.id)\
             .order_by(desc(Event.created))\
@@ -190,9 +194,19 @@ class ProfileController(SearchBaseController, UniversityListMixin):
 
         redirect_to(url(controller='profile', action='home'))
 
-    @validate(schema=SearchSubmit, form='subjects', post_only = False, on_get = True)
     @ActionProtector("user")
     def subjects(self):
+        c.breadcrumbs.append(self._actions('subjects'))
+        c.subjects = c.user.watched_subjects
+        c.groups = c.user.groups
+        return render('profile/subjects.mako')
+
+    @validate(schema=SearchSubmit, form='subjects', post_only=False, on_get=True)
+    @ActionProtector("user")
+    def watch_subjects(self):
+
+        c.breadcrumbs.append(self._actions('subjects'))
+
         c.search_target = url(controller='profile', action='subjects')
 
         #retrieve search parameters
@@ -229,20 +243,18 @@ class ProfileController(SearchBaseController, UniversityListMixin):
 
         c.watched_subjects = c.user.watched_subjects
 
-        return render('profile/subjects.mako')
+        return render('profile/watch_subjects.mako')
 
     def _getSubject(self):
-        location_id = request.GET['subject_location_id']
-        location = meta.Session.query(LocationTag).filter_by(id=location_id).one()
         subject_id = request.GET['subject_id']
-        return Subject.get(location, subject_id)
+        return Subject.get_by_id(int(subject_id))
 
     def _watch_subject(self):
         c.user.watchSubject(self._getSubject())
         meta.Session.commit()
 
     def _unwatch_subject(self):
-        c.user.ignoreSubject(self._getSubject())
+        c.user.unwatchSubject(self._getSubject())
         meta.Session.commit()
 
     @ActionProtector("user")
@@ -253,10 +265,10 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     @ActionProtector("user")
     def js_watch_subject(self):
         self._watch_subject()
-        return render_mako_def('profile/subjects.mako',
+        return render_mako_def('profile/watch_subjects.mako',
                                'subject_flash_message',
                                subject=self._getSubject()) +\
-            render_mako_def('profile/subjects.mako',
+            render_mako_def('profile/watch_subjects.mako',
                             'watched_subject',
                             subject=self._getSubject())
 
@@ -268,6 +280,34 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     @ActionProtector("user")
     def js_unwatch_subject(self):
         self._unwatch_subject()
+        return "OK"
+
+    def _ignore_subject(self):
+        c.user.ignoreSubject(self._getSubject())
+        meta.Session.commit()
+
+    def _unignore_subject(self):
+        c.user.unignoreSubject(self._getSubject())
+        meta.Session.commit()
+
+    @ActionProtector("user")
+    def ignore_subject(self):
+        self._ignore_subject()
+        redirect_to(request.referrer)
+
+    @ActionProtector("user")
+    def js_ignore_subject(self):
+        self._ignore_subject()
+        return "OK"
+
+    @ActionProtector("user")
+    def unignore_subject(self):
+        self._unignore_subject()
+        redirect_to(request.referrer)
+
+    @ActionProtector("user")
+    def js_unignore_subject(self):
+        self._unignore_subject()
         return "OK"
 
     @ActionProtector("user")

@@ -7,7 +7,8 @@ available to Controllers. This module is available to templates as 'h'.
 # Import helpers as desired, or define your own, ie:
 #from webhelpers.html.tags import checkbox, password
 from routes import url_for
-from webhelpers.html.tags import stylesheet_link, javascript_link, image, link_to, select
+from webhelpers.html.tags import stylesheet_link, javascript_link, image, select
+from webhelpers.html.tags import link_to as orig_link_to
 
 from webhelpers.html import HTML
 from webhelpers.html.tags import convert_boolean_attrs
@@ -222,3 +223,10 @@ def input_submit(text=None):
                 HTML.input(type_='submit', value=text)
                 ])
             ])
+
+def link_to(label, url='', max_length=None, **attrs):
+    if max_length is not None:
+        attrs['title'] = label
+        label = ellipsis(label, max_length)
+
+    return orig_link_to(label, url, **attrs)

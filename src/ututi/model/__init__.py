@@ -440,7 +440,29 @@ class User(object):
             return None
 
     @property
+    def ignored_subjects(self):
+        umst = user_monitored_subjects_table
+        user_ignored_subjects = meta.Session.query(Subject)\
+            .join((umst,
+                   and_(umst.c.subject_id==subjects_table.c.id,
+                        umst.c.subject_id==subjects_table.c.id)))\
+            .filter(and_(umst.c.user_id == self.id,
+                         umst.c.ignored == True))
+        return user_ignored_subjects.all()
+
+    @property
     def watched_subjects(self):
+        umst = user_monitored_subjects_table
+        directly_watched_subjects = meta.Session.query(Subject)\
+            .join((umst,
+                   and_(umst.c.subject_id==subjects_table.c.id,
+                        umst.c.subject_id==subjects_table.c.id)))\
+            .filter(and_(umst.c.user_id == self.id,
+                         umst.c.ignored == False))
+        return directly_watched_subjects.all()
+
+    @property
+    def all_watched_subjects(self):
         umst = user_monitored_subjects_table
         directly_watched_subjects = meta.Session.query(Subject)\
             .join((umst,
@@ -465,25 +487,35 @@ class User(object):
                         gwst.c.subject_id==subjects_table.c.id)))\
             .join((gmt, gmt.c.group_id == gwst.c.group_id))\
             .join((gt, gmt.c.group_id == gt.c.id))\
-            .filter(gt.c.moderators == False)\
             .filter(gmt.c.user_id == self.id)
-        return directly_watched_subjects.union(group_watched_subjects)\
-            .except_(user_ignored_subjects).all()
+        return directly_watched_subjects.union(
+            group_watched_subjects.except_(user_ignored_subjects))\
+            .all()
 
     def _setWatchedSubject(self, subject, ignored):
         usm = meta.Session.query(UserSubjectMonitoring)\
-            .filter_by(user=self, subject=subject).first()
+            .filter_by(user=self, subject=subject, ignored=ignored).first()
         if usm is None:
             usm = UserSubjectMonitoring(self, subject, ignored=ignored)
             meta.Session.add(usm)
-        else:
-            usm.ignored = ignored
+
+    def _unsetWatchedSubject(self, subject, ignored):
+        usm = meta.Session.query(UserSubjectMonitoring)\
+            .filter_by(user=self, subject=subject, ignored=ignored).first()
+        if usm is not None:
+            meta.Session.delete(usm)
 
     def watchSubject(self, subject):
         self._setWatchedSubject(subject, ignored=False)
 
+    def unwatchSubject(self, subject):
+        self._unsetWatchedSubject(subject, ignored=False)
+
     def ignoreSubject(self, subject):
         self._setWatchedSubject(subject, ignored=True)
+
+    def unignoreSubject(self, subject):
+        self._unsetWatchedSubject(subject, ignored=True)
 
     def url(self, controller='user', action='index'):
         return url(controller=controller,
@@ -779,6 +811,13 @@ class Subject(ContentItem, FolderMixin):
     def get(cls, location, id):
         try:
             return meta.Session.query(cls).filter_by(subject_id=id, location=location).one()
+        except NoResultFound:
+            return None
+
+    @classmethod
+    def get_by_id(cls, id):
+        try:
+            return meta.Session.query(cls).filter_by(id=id).one()
         except NoResultFound:
             return None
 
