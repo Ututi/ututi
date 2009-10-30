@@ -33,19 +33,19 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
         <%
            cnt = uni.count('subject')
         %>
-        ${ungettext("%(count)s <em>subject</em>", "%(count)s <em>subjects</em>", cnt) % dict(count = cnt)|n}
+        ${ungettext("%(count)s subject", "%(count)s subjects", cnt) % dict(count = cnt)|n}
     </span>
     <span>
         <%
            cnt = uni.count('group')
         %>
-        ${ungettext("%(count)s <em>group</em>", "%(count)s <em>groups</em>", cnt) % dict(count = cnt)|n}
+        ${ungettext("%(count)s group", "%(count)s groups", cnt) % dict(count = cnt)|n}
     </span>
     <span>
         <%
            cnt = uni.count('file')
         %>
-        ${ungettext("%(count)s <em>file</em>", "%(count)s <em>files</em>", cnt) % dict(count = cnt)|n}
+        ${ungettext("%(count)s file", "%(count)s files", cnt) % dict(count = cnt)|n}
     </span>
   </div>
 </div>
