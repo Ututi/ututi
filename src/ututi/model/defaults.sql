@@ -625,3 +625,11 @@ $$ LANGUAGE plpgsql;;
 
 CREATE TRIGGER set_forum_thread_id BEFORE INSERT OR UPDATE ON forum_posts
     FOR EACH ROW EXECUTE PROCEDURE set_forum_thread_id();;
+
+/* blog entries */
+create table blog (
+       id bigserial not null,
+       title varchar(50) not null default '',
+       content text not null default '',
+       url varchar(200) default null,
+       primary key (id));;

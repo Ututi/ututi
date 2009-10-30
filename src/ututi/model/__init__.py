@@ -287,6 +287,15 @@ def setup_orm(engine):
     orm.mapper(SearchItem, search_items_table,
                properties={'object' : relation(ContentItem)})
 
+    global blog_table
+    blog_table = Table("blog", meta.metadata,
+                       Column('title', Unicode(assert_unicode=True)),
+                       Column('content', Unicode(assert_unicode=True)),
+                       Column('url', Unicode(assert_unicode=True)),
+                       autoload=True,
+                       useexisting=True,
+                       autoload_with=engine)
+
     from ututi.model import mailing
     mailing.setup_orm(engine)
 
@@ -1276,6 +1285,10 @@ class ForumPost(ContentItem):
     def url(self):
         return url(controller='forum', action='thread',
                    forum_id=self.forum_id, thread_id=self.thread_id)
+
+blog_table = None
+class BlogEntry(object):
+    pass
 
 
 search_items_table = None
