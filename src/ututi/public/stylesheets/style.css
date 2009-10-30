@@ -1534,6 +1534,7 @@ span.btn btn, span.btn input{
 /* university list */
 #university-list {
   margin-top: 30px;
+  margin-left: -20px;
   overflow: hidden;
 }
 

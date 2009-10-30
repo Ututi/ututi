@@ -109,6 +109,7 @@ h1 {
 #infoblock {
   border-top: 1px solid #ded8d8;
   margin-top: 25px;
+  margin-left: -20px;
   padding-top: 20px;
 }
 
@@ -116,7 +117,6 @@ h1 {
   float: left;
   width: 280px;
   padding-left: 10px;
-  margin-top: 0;
   font-size: 12px;
 }
 
