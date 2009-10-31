@@ -59,6 +59,7 @@ Taip pat reikėtų rodyti kiek failų, pusapių ir dalykų sukūrė naudotojas.
 - Revertinimas iki senos versijos (tik moderatoriams)
 - Supaprastinti img įkėlimą
 - Supaprastinti surišimą su kitais puslapiais bei naujo puslapio kurimas redaguojant esamą.
+- Save and continue edit su autosave (kas 5 sek.) and locking kol kažkas editina. Atidarius dokumentą kuriama naują versija ir autosave saugo viską į tą versiją.
 ** Paleisti Polish feedback sistemą for ututi.pl. vietoje uservoice.
 ** DONE Fakulteto puslapis
 
