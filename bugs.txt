@@ -81,18 +81,6 @@ Reikėtų kryžiuko pačiame portlete.
 Pvz. naudotojas http://ututi.lt/user/272 įkėlė apie 200 failų, bet rodo tik jo sukurtus dalykus.
 ** Anonimui neprivalo matytis grupėl el.pašto konferencijos adresas
 ** Kai žmogus sukuria dalyką, privalo iškarto jį stebėti
-** DONE Ne visi What is this pranešimai yra išversti bei kartais negražiai atvaizduojami
-** DONE Anonimams rodomi failų viewo controls'ai.
-** TODO Lūžta, jei registruojamasi su jau egzistuojančiu emailu.
-** DONE Po Wiki puslapiais privalo rodyti tik paprastus tagus, nereikia rodyti location tagų.
-Beje, kaip pridėti tagą puslapiui?
-** DONE Spaudžiant ant U turėčiau patekti į paiešką
-** DONE Group find view
-
-** DONE Kai išmeti žmogų iš grupės, rašo kad narys prisijungė prie grupės, o ne kad narys X buvo pašalintas iš grupės.
-
-** DONE WebApp Error: <class 'sqlalchemy.exc.DataError'>: (DataError) value too long for type character varying(100) 'UPDATE users SET fullname=%(fullname)s WHERE users.id = %(users_id)s' {'users_id': 531L, 'fullname': 'Adomasjh gigkj gkjhj gjhgkj gkjgkjhg kjgkjhgkj gkjgk jgkjhg kjhg kjhg kjhg kjgkjh gkj gkjg kg kj gkjhg kjgkjgkjhg kjgjk g jk gkjgkjgkjhgk jg kjhg kjhgkjhg kjh gkjgkj hgkjh'}
-
 
 * Future features
 ** Teacher account
