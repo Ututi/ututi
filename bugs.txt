@@ -54,6 +54,11 @@ Taip pat reikėtų rodyti kiek failų, pusapių ir dalykų sukūrė naudotojas.
 ** TAGS for files and pages
 ** Paieška failuose
 ** Feed refactoring
+** Puslapių tobulinimas
+- Istorijos peržiūrėjimas ir track changes
+- Revertinimas iki senos versijos (tik moderatoriams)
+- Supaprastinti img įkėlimą
+- Supaprastinti surišimą su kitais puslapiais bei naujo puslapio kurimas redaguojant esamą.
 ** Paleisti Polish feedback sistemą for ututi.pl. vietoje uservoice.
 ** DONE Fakulteto puslapis
 
@@ -92,6 +97,7 @@ Pvz. naudotojas http://ututi.lt/user/272 įkėlė apie 200 failų, bet rodo tik 
 ** Klausimai/atsakimai
 ** Žinutė kitam Ututi naudotojui
 ** Grupės chatas
+** Send SMS to group friends
 ** Naudotojų karma
 ** Apklausos
 ** Bendras univero forumas
@@ -108,6 +114,9 @@ Tagu abc taip pat pažymėtas dalykas efg.
 ** Dalyko reitingas
 Mes galima kaupti info kiek žmonių/grupių stebi X dalyką.
 Kiek jame yra failų bei puslapių ir taip nurodyti jo reitingą/aktyvumą.
+*** Pilniausių dalykų sąrašas
+Dalykai dešimtukui
+
 ** UerSearch log failo analizatorius
 Bent minimalus, kad surašytų kokios frazės yra populiariausios.
 ** Google analytics events
@@ -126,3 +135,4 @@ Grupės adminas po sesijos gauna pranešima, kad reikia suarchivuoti dalykus ir 
 ** m.ututi.lt
 Mobilioji Ututi versija su pagrindinėmis funkcijomis.
 ** Integration with Google groups
+** Failų, puslapių, dalykų, Q&A reitingavimas
