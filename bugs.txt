@@ -1,17 +1,22 @@
 # -*- mode: org -*-
 
 * Features
-** Fakulteto puslapis
+** TODO Priminimai el.paštu
+Reikia, kad naudotojai gautų priminimus:
+ - Kai įkeliamas naujas failas prie grupės ar naudotojo stebimų dalykų.
+ - Kai patvirtimo Tavo narustę grupėję.
+ - Grupės adminui, kad kažkas nori tapti grupės nariu.
+
 ** Daugiau trinimo
 *** DONE Galimybė mesti narius iš grupės bei pačiam atsijungti
-*** Moderatorius privalo galėti ištrinti daugiau
+*** DONE Moderatorius privalo galėti ištrinti daugiau
 - dalykus
 - puslapius
 - grupęs
 Beje, visą tai ištrinti privalo galėti ir autorius (puslapius autorius gali trinti tol, kol kas nors kitas jų neparedagavo)
 
 *** Grupės adminas privalo galėti trinti forumo žinutes
-*** Grupės narys turėtų galėti pasirinkti, ar jis nori gauti emailus.
+*** DONE Grupės narys turėtų galėti pasirinkti, ar jis nori gauti emailus.
 
 ** Moderavimas
 *** Žymėti kaip kaip netinkama
@@ -20,10 +25,6 @@ forma (fomas kažkokią rodė) kur žmogus galės įrašyti priežasti kodėl š
 Vėliau moderatoriai savo panelėję pamatys pareportintus pranešimus.
 *** Pilotų (moderatorių) panelė
 Bus nupiešta pirmadienį arba antradienį
-
-** Reklamuokim blog'ą ir Facebook
-*** Blogo naujienas dedam į Ututi front-page
-*** Dashboarde vietoje "Naujas Ututi" portleto, dedame "Find us on Facebook" logo.
 
 ** Mailinglist'o tobulinimas
 *** Pridėti narius prie grupės
@@ -38,24 +39,9 @@ Kaip alternatyva "Grupės svečias" funkcionalumui, galime grupės adminui leist
 kad grupė yra vieša ir į ją rašyti gali visi. Tačiau, jei laišką rašo ne grupės narys,
 grupės adminas privalo jį patvirtinti.
 
-** Priminimai el.paštu
-Reikia, kad naudotojai gautų priminimus:
- - Kai įkeliamas naujas failas prie grupės ar naudotojo stebimų dalykų.
- - Kai patvirtimo Tavo narustę grupėję.
- - Grupės adminui, kad kažkas nori tapti grupės nariu.
-
 ** Google ads
 *** Google ads prie paieškos rezultatų
 *** Google ads dalykuose ir puslapiuose kai ateinama iš Google search
-
-** What is this? funckionalumas
-Klaustukai ant kurių paspaudus aprašoma ką šitas feature daro.
-
-** Live search
-Pradėkim nuo to, kad suvedus naują tag'ą, paieškos rezultatai iš karto atsinaujina.
-** Update tags widget
-Be to, reikėtų padaryti, kad ant to tag ženkliuko galima būtų spausti, nes daugelis nesupranta, kad reikia spausti enter.
-Vietoje filtruoti pagal mokyklas, reikėtų gražinti užrašą žymos (tags), nes jau atsiranda patagintų dalykų.
 
 ** Paieškos redesign, bei naršymo tarp dalykų supaprastinimas
 ** User profile redesign
@@ -66,8 +52,23 @@ Reikia user profilyje įkeltos medžiagos filtravimo pagal:
 Taip pat reikėtų rodyti kiek failų, pusapių ir dalykų sukūrė naudotojas.
 
 ** TAGS for files and pages
-
 ** Paieška failuose
+** DONE Fakulteto puslapis
+
+
+** DONE Reklamuokim blog'ą ir Facebook
+*** DONE Blogo naujienas dedam į Ututi front-page
+*** DONE Dashboarde vietoje "Naujas Ututi" portleto, dedame "Find us on Facebook" logo.
+
+** DONE Live search
+Pradėkim nuo to, kad suvedus naują tag'ą, paieškos rezultatai iš karto atsinaujina.
+
+** DONE Update tags widget
+Be to, reikėtų padaryti, kad ant to tag ženkliuko galima būtų spausti, nes daugelis nesupranta, kad reikia spausti enter.
+Vietoje filtruoti pagal mokyklas, reikėtų gražinti užrašą žymos (tags), nes jau atsiranda patagintų dalykų.
+
+
+
 
 
 * Bugai
