@@ -53,6 +53,8 @@ Taip pat reikėtų rodyti kiek failų, pusapių ir dalykų sukūrė naudotojas.
 
 ** TAGS for files and pages
 ** Paieška failuose
+** Feed refactoring
+** Paleisti Polish feedback sistemą for ututi.pl. vietoje uservoice.
 ** DONE Fakulteto puslapis
 
 
@@ -66,7 +68,6 @@ Pradėkim nuo to, kad suvedus naują tag'ą, paieškos rezultatai iš karto atsi
 ** DONE Update tags widget
 Be to, reikėtų padaryti, kad ant to tag ženkliuko galima būtų spausti, nes daugelis nesupranta, kad reikia spausti enter.
 Vietoje filtruoti pagal mokyklas, reikėtų gražinti užrašą žymos (tags), nes jau atsiranda patagintų dalykų.
-
 
 
 
@@ -95,8 +96,45 @@ Beje, kaip pridėti tagą puslapiui?
 
 * Future features
 ** Teacher account
+- Dėstytojas turi patobulintą profilį su pasirinktu adresu.
+- Dėstytojas gali pasirinkti kokius dalykus dėsto.
+- Kiti naudotojai gali stebėti dėstytoj.
+- Dėstytojo įkelti failai yra išskirti.
 ** OpenID
 ** Klausimai/atsakimai
 ** Žinutė kitam Ututi naudotojui
 ** Grupės chatas
 ** Naudotojų karma
+** Apklausos
+** Bendras univero forumas
+** Dėstytojo puslapis
+Galimybė balsuoti už dėstytoją.
+Pasirinkti dalykus kuriuos dėstytoas dėsto.
+Įkelti dėstytojo nuotrauką.
+Kai dėstytojas susikuria savo profilį, jo puslapio taisymą perima jis pats.
+
+** Rekomenduojami/panašus dalykai
+Kas stebi X taip pat stebi Y.
+Tagu abc taip pat pažymėtas dalykas efg.
+
+** Dalyko reitingas
+Mes galima kaupti info kiek žmonių/grupių stebi X dalyką.
+Kiek jame yra failų bei puslapių ir taip nurodyti jo reitingą/aktyvumą.
+** UerSearch log failo analizatorius
+Bent minimalus, kad surašytų kokios frazės yra populiariausios.
+** Google analytics events
+Reikėtų sekti kiek žmonių lankosi grupėse, kiek profilyje, kiek paieškoje o kiek dalykų puslapiuose.
+** Naudotojų stebėjimas
+** Banerių valdymo panelis
+Galima įkelti banerį ir nurodyti nuo kada ir iki kada, bei kuriose puslapiuose jis bus rodomas.
+Pvz. rodysim banerį tik MIF'o dalykuose ir grupėse
+
+** Mark as innoprietare
+** Invite by skype and gadugadu
+** Pridėti failą anonimiškai
+** Mokslo metai (ciklai)
+Galimybę pasakyti kokie dalykai yra šiuo metu studijuojami, o kurie yra iš paeities.
+Grupės adminas po sesijos gauna pranešima, kad reikia suarchivuoti dalykus ir pasirinkti naujus.
+** m.ututi.lt
+Mobilioji Ututi versija su pagrindinėmis funkcijomis.
+** Integration with Google groups
