@@ -388,3 +388,10 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         else:
             stream = resource_stream("ututi", "public/images/user_ico.png").read()
             return serve_image(stream, width, height)
+
+    @ActionProtector("user")
+    def set_receive_email_each(self):
+        if request.params.get('each') in ('day', 'hour', 'never'):
+            c.user.receive_email_each = request.params.get('each')
+            meta.Session.commit()
+        return 'OK'

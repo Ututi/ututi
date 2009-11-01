@@ -11,8 +11,8 @@
 
 
 <%def name="head_tags()">
+${parent.head_tags()}
 ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
-${h.stylesheet_link('/stylesheets/profile.css')|n}
 
 <script type="text/javascript">
 //<![CDATA[
@@ -51,14 +51,27 @@ $(document).ready(function(){
     }});
     return false;
   });
+
+  $('.select_interval_form .each').change(function (event) {
+    var url = event.target.form.action;
+    $(event.target.form).removeClass('select_interval_form')
+                        .removeClass('select_interval_form_done')
+                        .addClass('select_interval_form_in_progress');
+    console.log(event.target.form.action);
+    console.log($(event.target.form));
+    $.ajax({type: "GET",
+            url: url,
+            success: function(msg){
+            $(event.target.form).removeClass('select_interval_form_in_progress')
+                                .addClass('select_interval_form_done');
+    }});
+  });
 });
 //]]>
 </script>
-
-${parent.head_tags()}
 </%def>
 
-<%def name="header(title, update_url='')">
+<%def name="header(title, update_url)">
 <div class="hdr">
   <span class="larger">${title|n}</span>
   <div style="float:right;" class="small">
@@ -73,19 +86,19 @@ ${parent.head_tags()}
          $('.select_interval_form .btn').hide();
         //]]>
       </script>
-      <select style="float:right; font-size: 1em;">
+      <select name="each" class="each" style="float:right; font-size: 1em;">
         <option value="immediatelly">${_('immediatelly')}</option>
         <option value="daily">${_('at the end of the day')}</option>
         <option value="never">${_('never')}</option>
       </select>
+      <img class="done_icon" src="${url('/images/details/icon_done.png')}" />
+      <img class="in_progress_icon" src="${url('/images/details/icon_progress.gif')}" />
     </form>
-    <img style="float:right;" src="${url('/images/details/icon_done.png')}" />
-    <img style="float:right;" src="${url('/images/details/icon_progress.gif')}" />
   </div>
 </div>
 </%def>
 
-${header(_('Personally watched subjects'))}
+${header(_('Personally watched subjects'), url(controller='profile', action='set_receive_email_each'))}
 
 <ul class="personal_watched_subjects">
 %if c.subjects:
@@ -111,7 +124,8 @@ ${header(_('Personally watched subjects'))}
 </div>
 
 %for group in c.groups:
-${header(_('Subjects watched by %(group_title)s') % dict(group_title=h.link_to(group.title, group.url())))}
+${header(_('Subjects watched by %(group_title)s') % dict(group_title=h.link_to(group.title, group.url())),
+         group.url(action='set_receive_email_each'))}
 
 <ul class="personal_watched_subjects">
 %if group.watched_subjects:

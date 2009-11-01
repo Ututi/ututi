@@ -65,6 +65,7 @@
 #recommendation_status span {
   padding-left: 18px;
   background: url("../images/details/icon_done.gif") left center no-repeat;
+}
 
 .personal_watched_subjects {
   padding-left: 10px;
@@ -103,4 +104,24 @@
 
 .disabled .ignore_subject_button {
   display: none;
+}
+
+.select_interval_form_done .in_progress_icon,
+.select_interval_form .in_progress_icon {
+  float: right;
+  display: none;
+}
+
+.select_interval_form_in_progress .done_icon,
+.select_interval_form .done_icon {
+  float: right;
+  display: none;
+}
+
+.select_interval_form_in_progress .in_progress_icon {
+  float: right;
+}
+
+.select_interval_form_done .done_icon{
+  float: right;
 }

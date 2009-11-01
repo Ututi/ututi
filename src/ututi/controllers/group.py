@@ -813,3 +813,14 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     def page(self, group):
         c.breadcrumbs.append(self._actions('page'))
         return render('group/page.mako')
+
+    @group_action
+    @ActionProtector("user", "member", "admin")
+    def set_receive_email_each(self, group):
+        new_value = request.params.get('each')
+        if  new_value in ('day', 'hour', 'never'):
+            meta.Session.query(GroupMember)\
+                .filter_by(user=c.user, group=group)\
+                .receive_email_each = new_value
+            meta.Session.commit()
+        return 'OK'
