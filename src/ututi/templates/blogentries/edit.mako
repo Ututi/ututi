@@ -14,14 +14,6 @@
       id="new_snippet_form" enctype="multipart/form-data">
       <div class="form-field">
         <input type="hidden" name="id" value="" />
-        <label for="title">${_('Title')}</label>
-        <input type="text" id="title" name="title"/>
-      </div>
-      <div class="form-field">
-        <label for="url">${_('URL')}</label>
-        <input type="text" id="url" name="url"/>
-      </div>
-      <div class="form-field">
         <label for="date">${_('Date')}</label>
         <input type="text" id="date" name="date"/>
       </div>

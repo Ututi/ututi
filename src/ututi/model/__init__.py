@@ -289,9 +289,7 @@ def setup_orm(engine):
 
     global blog_table
     blog_table = Table("blog", meta.metadata,
-                       Column('title', Unicode(assert_unicode=True)),
                        Column('content', Unicode(assert_unicode=True)),
-                       Column('url', Unicode(assert_unicode=True)),
                        autoload=True,
                        useexisting=True,
                        autoload_with=engine)

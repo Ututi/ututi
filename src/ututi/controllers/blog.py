@@ -16,8 +16,6 @@ from ututi.lib import helpers as h
 
 class SnippetForm(Schema):
     allow_extra_fields = True
-    title = validators.UnicodeString(not_empty=True, max=50)
-    url = validators.URL()
     date = validators.UnicodeString(not_empty=True, max=11)
     content = validators.UnicodeString(not_empty=True)
 
@@ -47,8 +45,6 @@ class BlogController(BaseController):
     def create(self):
         if hasattr(self, 'form_result'):
             blog = BlogEntry()
-            blog.title = self.form_result.get('title')
-            blog.url = self.form_result.get('url')
             blog.date = self.form_result.get('date')
             blog.content = self.form_result.get('content')
             meta.Session.add(blog)
@@ -67,9 +63,7 @@ class BlogController(BaseController):
             snippet = meta.Session.query(BlogEntry).filter(BlogEntry.id == id).one()
             defaults = {
                 'id' : snippet.id,
-                'title': snippet.title,
                 'date': snippet.created,
-                'url': snippet.url,
                 'content': snippet.content}
             return htmlfill.render(self._snippet_edit_form(), defaults=defaults)
         except NoResultFound:
@@ -86,9 +80,7 @@ class BlogController(BaseController):
                 meta.Session.delete(snippet)
                 h.flash(_('Blog snippet deleted.'))
             else:
-                snippet.title = self.form_result.get('title', snippet.title)
                 snippet.created = self.form_result.get('date', snippet.created)
-                snippet.url = self.form_result.get('url', snippet.url)
                 snippet.content = self.form_result.get('content', snippet.content)
                 h.flash(_('Blog snippet updated.'))
 

@@ -21,7 +21,7 @@
 %if c.items:
   <ol id="entry_list">
     %for entry in c.items:
-    <li><a href="${url(controller='blog', action='edit', id=entry.id)}">${entry.title}</a></li>
+    <li>${entry.content}<a href="${url(controller='blog', action='edit', id=entry.id)}">${_('Edit')}</a></li>
     %endfor
   </ol>
 %else:
