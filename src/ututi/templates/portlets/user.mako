@@ -183,6 +183,7 @@
        items = user.groups + user.watched_subjects
        n = len(items)
     %>
+    <div class="comment">${_('Quickly upload files to your groups and subjects.')}</div>
     %for obj in items:
     <div class="upload target_item">
       <input type="hidden" name="upload_url" value="${obj.url(action='upload_file_short')}"/>

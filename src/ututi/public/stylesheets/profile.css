@@ -47,10 +47,13 @@
 
 /* invitation portlet */
 
-#ututi_recommendation_form label {
+#ututi_recommendation_form label,
+#file_upload_portlet .comment {
+  color: #666;
   font-size: 11px;
   height: auto;
   line-height: 13px;
+  margin-bottom: 3px;
 }
 
 #ututi_recommendation_form textarea {
