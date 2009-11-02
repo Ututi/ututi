@@ -136,6 +136,11 @@
   float: right;
 }
 
+li.empty_note {
+  list-style-type: none;
+  color: #999;
+  text-size: 1em;
+}
 
 /* blog portlet */
 #blog_portlet {
@@ -201,3 +206,4 @@
 }
 
 /* end blog portlet */
+

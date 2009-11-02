@@ -95,6 +95,8 @@ $(document).ready(function(){
 </div>
 </%def>
 
+<div class="tip">${_('This is a list of the subjects You are watching.')}</div>
+
 ${header(_('Personally watched subjects'), url(controller='profile', action='set_receive_email_each'), c.user.receive_email_each)}
 
 <ul class="personal_watched_subjects">
@@ -110,7 +112,7 @@ ${header(_('Personally watched subjects'), url(controller='profile', action='set
     </li>
   %endfor
 %else:
-    <li>
+    <li class="empty_note">
       ${_('You are not watching any subjects.')}
     </li>
 %endif
@@ -150,7 +152,7 @@ ${header(_('Subjects watched by %(group_title)s') % dict(group_title=h.link_to(g
     </li>
   %endfor
 %else:
-    <li>
+    <li class="empty_note">
       ${_('This group is not watching any subjects.')}
     </li>
 %endif

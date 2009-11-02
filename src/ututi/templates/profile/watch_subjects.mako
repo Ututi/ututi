@@ -62,18 +62,23 @@ ${parent.head_tags()}
   </li>
 </%def>
 
+<div class="tip">${_('This is a list of the subjects You are watching. By clicking on the cross next to any subject,\
+ You will not get any messages of the changes in it. If Your group is watching this subject, it will not affect Your classmates.')}</div>
+
 <div class="hdr">
   <span class="larger">${_('Personally watched subjects')}</span>
-  ${h.image('/images/details/icon_question.png',
-            alt=_('This is a list of the subjects You are watching. By clicking on the cross next to any subject,\
- You will not get any messages of the changes in it. If Your group is watching this subject, it will not affect Your classmates.'),
-            class_='tooltip')|n}
 </div>
 
 <ul id="watched_subjects" class="personal_watched_subjects">
-% for subject in c.watched_subjects:
-    ${watched_subject(subject)}
-% endfor
+%if c.watched_subjects:
+  % for subject in c.watched_subjects:
+      ${watched_subject(subject)}
+  % endfor
+%else:
+  <li class="empty_note">
+    ${_('You are not watching any subjects.')}
+  </li>
+%endif
 </ul>
 
 <div style="padding-top: 5px; padding-bottom: 10px;">
