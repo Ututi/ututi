@@ -120,9 +120,10 @@ ${header(_('Personally watched subjects'), url(controller='profile', action='set
 %endif
 </ul>
 
-<div style="padding-top: 10px; padding-bottom: 10px;">
-<a href="${url(controller='profile', action='watch_subjects')}" class="btn"><span>${_('Watch more subjects')}</span></a>
+<div style="padding-top: 5px; padding-bottom: 10px;">
+  <a class="forward-link" href="${url(controller='profile', action='watch_subjects')}">${_('Watch more subjects')}</a>
 </div>
+
 
 %for group in c.groups:
 ${header(_('Subjects watched by %(group_title)s') % dict(group_title=h.link_to(group.title, group.url())),

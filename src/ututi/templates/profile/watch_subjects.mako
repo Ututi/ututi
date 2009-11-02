@@ -78,9 +78,6 @@ ${parent.head_tags()}
             alt=_('This is a list of the subjects You are watching. By clicking on the cross next to any subject,\
  You will not get any messages of the changes in it. If Your group is watching this subject, it will not affect Your classmates.'),
             class_='tooltip')|n}
-  <div style="float: right;">
-    <a class="back-link" href="${url(controller='profile', action='subjects')}">${_('Back to subject list')}</a>
-  </div>
 </div>
 
 <ul id="watched_subjects" class="personal_watched_subjects">
@@ -89,8 +86,8 @@ ${parent.head_tags()}
 % endfor
 </ul>
 
-<div class="hdr" style="padding-top: 20px">
-  <span class="larger">${_('Recommended subjects')}</span>
+<div style="padding-top: 5px; padding-bottom: 10px;">
+  <a class="back-link" href="${url(controller='profile', action='subjects')}">${_('Back to subject list')}</a>
 </div>
 
 ${search_form(text=c.text, obj_type='subject', tags=c.tags, parts=['text', 'tags'], target=c.search_target)}

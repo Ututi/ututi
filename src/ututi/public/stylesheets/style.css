@@ -1273,6 +1273,11 @@ ul#event_list li {
   color: #333;
 }
 
+a.forward-link {
+  padding-right: 15px;
+  background: url("../images/details/link_arrow.png") right center no-repeat;
+}
+
 a.back-link {
   padding-left: 15px;
   background: white url("../images/details/link_back.png") left center no-repeat;
