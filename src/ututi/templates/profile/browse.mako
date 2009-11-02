@@ -1,5 +1,5 @@
 <%inherit file="/profile/base.mako" />
-<%namespace file="/portlets/user.mako" import="*"/>
+<%namespace file="/portlets/sections.mako" import="*"/>
 <%namespace file="/widgets/tags.mako" import="*"/>
 <%namespace file="/search/index.mako" import="search_form"/>
 <%namespace file="/anonymous_index.mako" import="*"/>
@@ -11,11 +11,7 @@ ${parent.head_tags()}
 </%def>
 
 <%def name="portlets()">
-<div id="sidebar">
-  ${user_subjects_portlet()}
-  ${user_groups_portlet()}
-
-</div>
+  ${user_sidebar(['search'])}
 </%def>
 
 

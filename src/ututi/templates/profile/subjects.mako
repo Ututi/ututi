@@ -1,12 +1,8 @@
 <%inherit file="/profile/base.mako" />
-<%namespace file="/portlets/user.mako" import="*"/>
-<%namespace file="/portlets/search.mako" import="*"/>
+<%namespace file="/portlets/sections.mako" import="*"/>
 
 <%def name="portlets()">
-<div id="sidebar">
-  ${search_portlet(parts=['text'], target=url(controller='profile', action='search'))}
-  ${user_groups_portlet()}
-</div>
+${user_sidebar()}
 </%def>
 
 

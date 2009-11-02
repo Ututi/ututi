@@ -1,11 +1,9 @@
- <%inherit file="/profile/base.mako" />
+<%inherit file="/profile/base.mako" />
 <%namespace file="/widgets/tags.mako" import="*"/>
 
 <%def name="head_tags()">
 ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
 </%def>
-
-
 
 <%def name="title()">
 ${_('Search')}

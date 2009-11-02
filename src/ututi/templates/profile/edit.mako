@@ -1,5 +1,4 @@
 <%inherit file="/profile/base.mako" />
-<%namespace file="/portlets/user.mako" import="*"/>
 
 <%def name="title()">
   ${c.user.fullname}

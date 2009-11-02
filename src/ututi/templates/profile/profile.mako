@@ -5,16 +5,6 @@
   <title>UTUTI – student information online</title>
 </%def>
 
-<%def name="portlets()">
-<div id="sidebar">
-  ${user_information_portlet()}
-
-  ${user_subjects_portlet()}
-  ${user_groups_portlet()}
-
-</div>
-</%def>
-
 
 <h1>${_('What have I been doing?')}</h1>
 % if c.events:

@@ -1,18 +1,8 @@
 <%inherit file="/profile/base.mako" />
-<%namespace file="/portlets/user.mako" import="*"/>
-<%namespace file="/portlets/search.mako" import="*"/>
 
 <%namespace file="/widgets/tags.mako" import="*"/>
 <%namespace file="/search/index.mako" import="search_form"/>
 <%namespace file="/search/index.mako" import="search_results"/>
-
-<%def name="portlets()">
-<div id="sidebar">
-  ${search_portlet(parts=['text'], target=url(controller='profile', action='search'))}
-  ${user_groups_portlet()}
-</div>
-</%def>
-
 
 <%def name="head_tags()">
 ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}

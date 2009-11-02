@@ -1,9 +1,14 @@
 <%inherit file="/profile/base.mako" />
 <%namespace name="files" file="/sections/files.mako" />
+<%namespace file="/portlets/sections.mako" import="*"/>
 
 <%def name="head_tags()">
    ${parent.head_tags()}
    <%files:head_tags />
+</%def>
+
+<%def name="portlets()">
+  ${user_sidebar(['files'])}
 </%def>
 
 <div class="tip">
