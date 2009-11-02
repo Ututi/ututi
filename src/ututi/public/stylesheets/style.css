@@ -359,6 +359,7 @@ ul.bullets_large li {
 /* sidebar block */
 .sidebar-block {
   width: 300px;
+  margin-top: 5px;
 }
 
 .sidebar-block .rounded-header {
