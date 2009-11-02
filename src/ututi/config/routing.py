@@ -151,6 +151,12 @@ def make_map():
 
     map.connect('/got_mail', controller='receivemail', action='index')
     map.connect('/admin', controller='admin', action='index')
+
+    map.connect('/admin/blog', controller='blog', action='index')
+    map.connect('/admin/blog/{action}', controller='blog')
+    map.connect('/admin/blog/{action}/{id}', controller='blog', action='edit')
+
+
     map.connect('/structure/completions/{text}', controller='structure', action='completions')
     map.connect('/structure', controller='structure', action='index')
     map.connect('/structure/{id}/logo/{width}/{height}',

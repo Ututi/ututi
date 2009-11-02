@@ -296,6 +296,8 @@ def setup_orm(engine):
                        useexisting=True,
                        autoload_with=engine)
 
+    orm.mapper(BlogEntry, blog_table)
+
     from ututi.model import mailing
     mailing.setup_orm(engine)
 

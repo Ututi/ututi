@@ -26,3 +26,11 @@
   </div>
 </div>
 </%def>
+
+<%def name="border_portlet(id, portlet_class='')">
+<div class="border-portlet ${portlet_class}" id="${id}">
+  <div class="body">
+    ${caller.body()}
+  </div>
+</div>
+</%def>

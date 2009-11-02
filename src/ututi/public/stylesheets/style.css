@@ -455,6 +455,18 @@ div.action-portlet .content .header {
   line-height: 24px;
 }
 
+/* end action portlets */
+
+/* border portlets */
+div.border-portlet {
+  border: 1px solid #ded8d8;
+  padding: 5px 5px 0 5px;
+  width: 280px;
+  margin-left: 10px;
+  margin-bottom: 6px;
+}
+/* end border portlets */
+
 /* buttons - a different image to cope with the backgrounds */
 div.action-portlet a.btn, div.action-portlet span.btn,
 div.action-portlet a.btn span, div.action-portlet span.btn input {

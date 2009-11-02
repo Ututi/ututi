@@ -259,3 +259,45 @@
 
   </%self:action_portlet>
 </%def>
+
+<%def name="blog_portlet()">
+  <%def name="entry(entry)">
+    <div class="teaser">
+      <a href="${entry.url}">
+        ${entry.content|n}
+      </a>
+    </div>
+  </%def>
+  %if c.blog_entries:
+    <%self:border_portlet id="blog_portlet">
+    <div class="header">
+      <div class="blog_pager" id="blog_fwd"></div>
+      <div class="blog_pager" id="blog_bk"></div>
+      ${_('Ututi news')}
+    </div>
+    <div id="entries">
+      %for blog_entry in c.blog_entries:
+      ${entry(blog_entry)}
+      %endfor
+    </div>
+
+    ${h.javascript_link('/javascripts/jquery.cycle.all.js')|n}
+    <script type="text/javascript">
+    //<![CDATA[
+    $(document).ready(function() {
+      $('#entries').cycle({
+          'fx': 'scrollHorz',
+          'next': '#blog_fwd',
+          'prev': '#blog_bk',
+          'timeout': 0,
+        });
+    });
+    //]]>
+    </script>
+
+    <div class="footer">
+      <a class="more" href="${_('blog_link')}">${_('More news')}</a>
+    </div>
+    </%self:border_portlet>
+  %endif
+</%def>

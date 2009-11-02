@@ -125,3 +125,68 @@
 .select_interval_form_done .done_icon{
   float: right;
 }
+
+
+/* blog portlet */
+#blog_portlet {
+  padding-right: 15px;
+  width: 270px;
+}
+
+#blog_portlet .header {
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  height: 16px;
+  overflow: hidden;
+  line-height: 16px;
+  color: #666;
+}
+
+#blog_portlet .header .blog_pager {
+  float: right;
+  width: 6px;
+  height: 10px;
+  background: url("../images/details/arrows.png") 0 0 no-repeat;
+  cursor: pointer;
+  margin: 3px;
+}
+
+#blog_portlet .header #blog_bk {
+  background-position: 0 0;
+}
+
+#blog_portlet .header #blog_fwd {
+  background-position: -6px 0;
+}
+
+#blog_portlet #entries {
+  font-size: 12px;
+  line-height: 14px;
+  height: 30px;
+  overflow: hidden;
+  padding: 0;
+}
+
+#blog_portlet #entries .teaser {
+  height: 30px;
+  width: 270px;
+  margin: 0;
+}
+
+#blog_portlet .teaser a {
+  color: #333;
+  font-size: 14px;
+}
+
+#blog_portlet .teaser a:hover {
+  color: #d45500;
+  text-decoration: none;
+}
+
+#blog_portlet .footer {
+  text-align: right;
+  padding-bottom: 3px;
+}
+
+/* end blog portlet */

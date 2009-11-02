@@ -23,7 +23,7 @@ from ututi.lib.image import serve_image
 
 from ututi.model.events import Event
 from ututi.model import Subject
-from ututi.model import LocationTag
+from ututi.model import LocationTag, BlogEntry
 from ututi.model import meta, Email, Group, SearchItem
 from ututi.controllers.group import _filter_watched_subjects, FileUploadTypeValidator
 from ututi.controllers.search import SearchSubmit, SearchBaseController
@@ -50,6 +50,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     def __before__(self):
         if c.user is not None:
             c.breadcrumbs = [{'title': c.user.fullname, 'link': url(controller='profile', action='home')}]
+            c.blog_entries = meta.Session.query(BlogEntry).order_by(BlogEntry.created.desc()).limit(10).all()
 
     def _actions(self, selected):
         """Generate a list of all possible actions.

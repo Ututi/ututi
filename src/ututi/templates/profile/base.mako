@@ -12,6 +12,7 @@ ${parent.head_tags()}
 
 <%def name="portlets()">
 <div id="sidebar">
+  ${blog_portlet()}
   ${user_file_upload_portlet()}
   ${user_create_subject_portlet()}
   ${user_recommend_portlet()}
