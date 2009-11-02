@@ -12,7 +12,7 @@ times of the events:
     ...         event.created = dt
 
     >>> def printEmails():
-    ...     for email in mail_queue:
+    ...     for email in sorted(mail_queue, key=lambda e: e.recipients):
     ...         print email.recipients
     ...         print email.payload()
 
@@ -85,6 +85,16 @@ And look at the emails:
     >>> browser.open('http://localhost/news/daily?date=2009-10-10')
 
     >>> printEmails()
+    ['admin@ututi.lt']
+    Ututi news: 2 new pages
+    <BLANKLINE>
+    Matematinė analizė
+    <BLANKLINE>
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
+    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
+    <BLANKLINE>
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    <BLANKLINE>
     ['user2@ututi.lt']
     Ututi news: 2 new pages
     <BLANKLINE>
@@ -102,16 +112,6 @@ And look at the emails:
     <BLANKLINE>
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
-    <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
-    <BLANKLINE>
-    ['admin@ututi.lt']
-    Ututi news: 2 new pages
-    <BLANKLINE>
-    Matematinė analizė
-    <BLANKLINE>
-    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
-    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
     <BLANKLINE>
     If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
     <BLANKLINE>
@@ -136,6 +136,16 @@ Now let's upload a couple of files:
     >>> browser.open('http://localhost/news/daily?date=2009-10-10')
 
     >>> printEmails()
+    ['admin@ututi.lt']
+    Ututi news: 2 new pages
+    <BLANKLINE>
+    Matematinė analizė
+    <BLANKLINE>
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
+    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
+    <BLANKLINE>
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    <BLANKLINE>
     ['user2@ututi.lt']
     Ututi news: 2 new files and 2 new pages
     <BLANKLINE>
@@ -160,16 +170,6 @@ Now let's upload a couple of files:
     <BLANKLINE>
     If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
     <BLANKLINE>
-    ['admin@ututi.lt']
-    Ututi news: 2 new pages
-    <BLANKLINE>
-    Matematinė analizė
-    <BLANKLINE>
-    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
-    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
-    <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
-    <BLANKLINE>
 
     >>> mail_queue[:] = []
 
@@ -181,8 +181,8 @@ Now let's upload a couple of files:
 
 Let's try hourly now:
 
-    >>> from ututi.model import User
-    >>> User.get('admin@ututi.lt').receive_email_each = 'hour'
+    >>> from ututi.model import User, Group, GroupMember
+    >>> GroupMember.get(group=Group.get('moderators'), user=User.get('admin@ututi.lt')).receive_email_each = 'hour'
     >>> meta.Session.commit()
     >>> browser.open('http://localhost/news/hourly?date=2009-10-08&hour=11')
 
