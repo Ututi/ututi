@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2009-10-30 12:23+0200\n"
+"POT-Creation-Date: 2009-11-02 19:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,15 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.4\n"
+
+msgid "Blog snippet created."
+msgstr ""
+
+msgid "Blog snippet deleted."
+msgstr ""
+
+msgid "Blog snippet updated."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -244,6 +253,9 @@ msgstr[1] ""
 msgid "Ututi news: %(file_changes)s and %(page_changes)s"
 msgstr ""
 
+msgid "Search"
+msgstr ""
+
 msgid "Your profile was updated."
 msgstr ""
 
@@ -420,20 +432,20 @@ msgid "go find something else"
 msgstr ""
 
 #, python-format
-msgid "%(count)s <em>subject</em>"
-msgid_plural "%(count)s <em>subjects</em>"
+msgid "%(count)s subject"
+msgid_plural "%(count)s subjects"
 msgstr[0] ""
 msgstr[1] ""
 
 #, python-format
-msgid "%(count)s <em>group</em>"
-msgid_plural "%(count)s <em>groups</em>"
+msgid "%(count)s group"
+msgid_plural "%(count)s groups"
 msgstr[0] ""
 msgstr[1] ""
 
 #, python-format
-msgid "%(count)s <em>file</em>"
-msgid_plural "%(count)s <em>files</em>"
+msgid "%(count)s file"
+msgid_plural "%(count)s files"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -594,6 +606,27 @@ msgid "Subjects import"
 msgstr ""
 
 msgid "Ututi users:"
+msgstr ""
+
+msgid "New blog snippet:"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Content"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "Blog snippets:"
+msgstr ""
+
+msgid "New entry"
+msgstr ""
+
+msgid "Edit"
 msgstr ""
 
 #, python-format
@@ -764,9 +797,6 @@ msgstr ""
 msgid "The file type is not supported."
 msgstr ""
 
-msgid "Edit"
-msgstr ""
-
 msgid "Change logo"
 msgstr ""
 
@@ -783,9 +813,6 @@ msgid "Default group tab"
 msgstr ""
 
 msgid "Edit group front page"
-msgstr ""
-
-msgid "Content"
 msgstr ""
 
 msgid "Group members"
@@ -828,9 +855,6 @@ msgid "Last seen"
 msgstr ""
 
 msgid "Status"
-msgstr ""
-
-msgid "Update"
 msgstr ""
 
 msgid "Delete group"
@@ -907,9 +931,6 @@ msgid "Logo"
 msgstr ""
 
 msgid "department list"
-msgstr ""
-
-msgid "Search"
 msgstr ""
 
 #, python-format
@@ -995,10 +1016,44 @@ msgstr ""
 msgid "You haven't contributed much, have you?"
 msgstr ""
 
+msgid "Receive messages about updates in subjects"
+msgstr ""
+
+msgid "immediatelly"
+msgstr ""
+
+msgid "at the end of the day"
+msgstr ""
+
+msgid "never"
+msgstr ""
+
+msgid "This is a list of the subjects You are watching."
+msgstr ""
+
+msgid "Personally watched subjects"
+msgstr ""
+
+msgid "You are not watching any subjects."
+msgstr ""
+
+msgid "Watch more subjects"
+msgstr ""
+
+#, python-format
+msgid "Subjects watched by %(group_title)s"
+msgstr ""
+
+msgid "This group is not watching any subjects."
+msgstr ""
+
 msgid ""
 "This is a list of the subjects You are watching. By clicking on the cross "
 "next to any subject, You will not get any messages of the changes in it. If "
 "Your group is watching this subject, it will not affect Your classmates."
+msgstr ""
+
+msgid "Back to subject list"
 msgstr ""
 
 msgid "Welcome to Ututi!"
@@ -1057,12 +1112,6 @@ msgstr ""
 
 msgid "There are no files here, this folder is empty!"
 msgstr ""
-
-#, python-format
-msgid "%(count)s file"
-msgid_plural "%(count)s files"
-msgstr[0] ""
-msgstr[1] ""
 
 msgid "upload file to..."
 msgstr ""
@@ -1292,6 +1341,24 @@ msgstr ""
 msgid "Faculty information"
 msgstr ""
 
+#, python-format
+msgid "%(count)s <em>subject</em>"
+msgid_plural "%(count)s <em>subjects</em>"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(count)s <em>group</em>"
+msgid_plural "%(count)s <em>groups</em>"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(count)s <em>file</em>"
+msgid_plural "%(count)s <em>files</em>"
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "Subject information"
 msgstr ""
 
@@ -1305,9 +1372,6 @@ msgid "By watching a subject, you will be informed about all the changes in it."
 msgstr ""
 
 msgid "Delete subject"
-msgstr ""
-
-msgid "You are not watching any subjects."
 msgstr ""
 
 msgid "More subjects"
@@ -1324,10 +1388,13 @@ msgstr ""
 msgid "upload a file to.."
 msgstr ""
 
-msgid "Send invitations to Ututi - help us grow!"
+msgid "Quickly upload files to your groups and subjects."
 msgstr ""
 
 msgid "recommend Ututi to your friends"
+msgstr ""
+
+msgid "Send invitations to Ututi - help us grow!"
 msgstr ""
 
 msgid "Enter the emails of your groupmates, separated by commas or new lines."
@@ -1346,6 +1413,15 @@ msgid "More groups"
 msgstr ""
 
 msgid "create new subject"
+msgstr ""
+
+msgid "Ututi news"
+msgstr ""
+
+msgid "blog_link"
+msgstr ""
+
+msgid "More news"
 msgstr ""
 
 msgid "Find us on Facebook"

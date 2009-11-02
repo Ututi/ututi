@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-10-30 12:25+0200\n"
+"PO-Revision-Date: 2009-11-02 19:34+0200\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -17,6 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.4\n"
+
+msgid "Blog snippet created."
+msgstr ""
+
+msgid "Blog snippet deleted."
+msgstr ""
+
+msgid "Blog snippet updated."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -265,6 +274,9 @@ msgstr[2] ""
 msgid "Ututi news: %(file_changes)s and %(page_changes)s"
 msgstr ""
 
+msgid "Search"
+msgstr "Paieška"
+
 msgid "Your profile was updated."
 msgstr "Profilis atnaujintas!"
 
@@ -453,25 +465,25 @@ msgid "go find something else"
 msgstr "Prašome ieškoti ko nors kito."
 
 #, python-format
-msgid "%(count)s <em>subject</em>"
-msgid_plural "%(count)s <em>subjects</em>"
-msgstr[0] "%(count)s <em>dalykas</em>"
-msgstr[1] "%(count)s <em>dalykai</em>"
-msgstr[2] "%(count)s <em>dalykų</em>"
+msgid "%(count)s subject"
+msgid_plural "%(count)s subjects"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #, python-format
-msgid "%(count)s <em>group</em>"
-msgid_plural "%(count)s <em>groups</em>"
-msgstr[0] "%(count)s <em>grupė</em>"
-msgstr[1] "%(count)s <em>grupės</em>"
-msgstr[2] "%(count)s <em>grupių</em>"
+msgid "%(count)s group"
+msgid_plural "%(count)s groups"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #, python-format
-msgid "%(count)s <em>file</em>"
-msgid_plural "%(count)s <em>files</em>"
-msgstr[0] "%(count)s <em>failas</em>"
-msgstr[1] "%(count)s <em>failai</em>"
-msgstr[2] "%(count)s <em>failų</em>"
+msgid "%(count)s file"
+msgid_plural "%(count)s files"
+msgstr[0] "%(count)s failas"
+msgstr[1] "%(count)s failai"
+msgstr[2] "%(count)s failų"
 
 msgid "Sort  by: "
 msgstr "Rūšiuoti pagal: "
@@ -643,6 +655,27 @@ msgstr "Dalykų importavimas"
 msgid "Ututi users:"
 msgstr "Ututi naudotojai:"
 
+msgid "New blog snippet:"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Content"
+msgstr "Turinys"
+
+msgid "Update"
+msgstr "atnaujinti"
+
+msgid "Blog snippets:"
+msgstr ""
+
+msgid "New entry"
+msgstr ""
+
+msgid "Edit"
+msgstr "Keisti"
+
 #, python-format
 msgid ""
 "We have received a request to confirm the ownership of this email by "
@@ -735,7 +768,10 @@ msgid ""
 "Ututi is a system for students that encourages collaboration and sharing "
 "of study materials. We provide tools that make storing lecture notes, "
 "sharing files and communicating with your class mates much, much easier."
-msgstr "Ututi yra sistema, skirta studentams - ji skatina bendradarbiauti kuriant ir dalintis studijų medžiaga. Čia rasi įrankius, kurie leidžia lengvai kaupti paskaitų konspektus, dalintis failais ir bendrauti su grupiokais."
+msgstr ""
+"Ututi yra sistema, skirta studentams - ji skatina bendradarbiauti kuriant"
+" ir dalintis studijų medžiaga. Čia rasi įrankius, kurie leidžia lengvai "
+"kaupti paskaitų konspektus, dalintis failais ir bendrauti su grupiokais."
 
 #, python-format
 msgid ""
@@ -823,9 +859,6 @@ msgstr "patvirtinti pasirinktus dalykus"
 msgid "The file type is not supported."
 msgstr "Failo tipas neleidžiamas"
 
-msgid "Edit"
-msgstr "Keisti"
-
 msgid "Change logo"
 msgstr "Pakeisti logo"
 
@@ -843,9 +876,6 @@ msgstr "Pradinis grupės skirtukas"
 
 msgid "Edit group front page"
 msgstr "Redaguoti grupės pagrindinį puslapį"
-
-msgid "Content"
-msgstr "Turinys"
 
 msgid "Group members"
 msgstr "Grupės nariai"
@@ -890,9 +920,6 @@ msgstr "Paskutinį sykį matytas"
 
 msgid "Status"
 msgstr "Statusas"
-
-msgid "Update"
-msgstr "atnaujinti"
 
 msgid "Delete group"
 msgstr "Ištrinti grupę"
@@ -969,9 +996,6 @@ msgstr "Logotipas"
 
 msgid "department list"
 msgstr "fakultetų sąrašas"
-
-msgid "Search"
-msgstr "Paieška"
 
 #, python-format
 msgid "Back to %(subject_title)s"
@@ -1058,6 +1082,39 @@ msgstr "Ir ką gi aš nuveikiau?"
 msgid "You haven't contributed much, have you?"
 msgstr "Ne itin daug padaryta, ką?"
 
+msgid "Receive messages about updates in subjects"
+msgstr ""
+
+msgid "immediatelly"
+msgstr ""
+
+msgid "at the end of the day"
+msgstr ""
+
+msgid "never"
+msgstr ""
+
+msgid "This is a list of the subjects You are watching."
+msgstr ""
+
+msgid "Personally watched subjects"
+msgstr ""
+
+msgid "You are not watching any subjects."
+msgstr ""
+"Raskite dalykus, kuriuos studijuojate ir pridėkite prie savo stebimų "
+"dalykų sąrašo."
+
+msgid "Watch more subjects"
+msgstr ""
+
+#, python-format
+msgid "Subjects watched by %(group_title)s"
+msgstr ""
+
+msgid "This group is not watching any subjects."
+msgstr ""
+
 msgid ""
 "This is a list of the subjects You are watching. By clicking on the cross"
 " next to any subject, You will not get any messages of the changes in it."
@@ -1068,6 +1125,9 @@ msgstr ""
 "kurio nors dalyko, Jūs nebegausite pranešimų apie pasikeitimus jame. "
 "Jeigu šį\n"
 "dalyką stebi Jūsų grupė, dalyko nebestebėsite tik Jūs."
+
+msgid "Back to subject list"
+msgstr ""
 
 msgid "Welcome to Ututi!"
 msgstr "Sveiki prisijungę prie Ututi!"
@@ -1135,13 +1195,6 @@ msgstr "(Trinti)"
 
 msgid "There are no files here, this folder is empty!"
 msgstr "Čia failų nėra, aplankas tuščias!"
-
-#, python-format
-msgid "%(count)s file"
-msgid_plural "%(count)s files"
-msgstr[0] "%(count)s failas"
-msgstr[1] "%(count)s failai"
-msgstr[2] "%(count)s failų"
 
 msgid "upload file to..."
 msgstr "įkelti failą į..."
@@ -1377,6 +1430,27 @@ msgstr "Universiteto informacija"
 msgid "Faculty information"
 msgstr "Fakulteto informacija"
 
+#, python-format
+msgid "%(count)s <em>subject</em>"
+msgid_plural "%(count)s <em>subjects</em>"
+msgstr[0] "%(count)s <em>dalykas</em>"
+msgstr[1] "%(count)s <em>dalykai</em>"
+msgstr[2] "%(count)s <em>dalykų</em>"
+
+#, python-format
+msgid "%(count)s <em>group</em>"
+msgid_plural "%(count)s <em>groups</em>"
+msgstr[0] "%(count)s <em>grupė</em>"
+msgstr[1] "%(count)s <em>grupės</em>"
+msgstr[2] "%(count)s <em>grupių</em>"
+
+#, python-format
+msgid "%(count)s <em>file</em>"
+msgid_plural "%(count)s <em>files</em>"
+msgstr[0] "%(count)s <em>failas</em>"
+msgstr[1] "%(count)s <em>failai</em>"
+msgstr[2] "%(count)s <em>failų</em>"
+
 msgid "Subject information"
 msgstr "Informacija apie dalyką"
 
@@ -1394,11 +1468,6 @@ msgstr ""
 msgid "Delete subject"
 msgstr "Ištrinti dalyką"
 
-msgid "You are not watching any subjects."
-msgstr ""
-"Raskite dalykus, kuriuos studijuojate ir pridėkite prie savo stebimų "
-"dalykų sąrašo."
-
 msgid "More subjects"
 msgstr "Daugiau dalykų"
 
@@ -1415,11 +1484,14 @@ msgstr ""
 msgid "upload a file to.."
 msgstr "įkelti failą į.."
 
-msgid "Send invitations to Ututi - help us grow!"
-msgstr "Rekomenduok Ututi draugams - padėk mums augti!"
+msgid "Quickly upload files to your groups and subjects."
+msgstr ""
 
 msgid "recommend Ututi to your friends"
 msgstr "rekomenduok Ututi draugams"
+
+msgid "Send invitations to Ututi - help us grow!"
+msgstr "Rekomenduok Ututi draugams - padėk mums augti!"
 
 msgid "Enter the emails of your groupmates, separated by commas or new lines."
 msgstr ""
@@ -1442,6 +1514,15 @@ msgstr "Daugiau grupių"
 
 msgid "create new subject"
 msgstr "kurti naują dalyką"
+
+msgid "Ututi news"
+msgstr ""
+
+msgid "blog_link"
+msgstr ""
+
+msgid "More news"
+msgstr ""
 
 msgid "Find us on Facebook"
 msgstr "Mūsų erdvė Facebook"

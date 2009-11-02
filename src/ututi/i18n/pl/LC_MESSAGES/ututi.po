@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-10-30 12:23+0200\n"
+"PO-Revision-Date: 2009-11-02 19:34+0200\n"
 "Last-Translator: Jaroslav Šatkevič <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -16,6 +16,15 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.4\n"
+
+msgid "Blog snippet created."
+msgstr ""
+
+msgid "Blog snippet deleted."
+msgstr ""
+
+msgid "Blog snippet updated."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -256,6 +265,9 @@ msgstr[1] ""
 msgid "Ututi news: %(file_changes)s and %(page_changes)s"
 msgstr ""
 
+msgid "Search"
+msgstr "Szukaj"
+
 msgid "Your profile was updated."
 msgstr "Twój profil został zaktualizowany."
 
@@ -444,22 +456,22 @@ msgid "go find something else"
 msgstr "poszukaj czegoś innego"
 
 #, python-format
-msgid "%(count)s <em>subject</em>"
-msgid_plural "%(count)s <em>subjects</em>"
-msgstr[0] "%(count)s <em>przedmiot</em>"
-msgstr[1] "%(count)s <em>przedmioty</em>"
+msgid "%(count)s subject"
+msgid_plural "%(count)s subjects"
+msgstr[0] ""
+msgstr[1] ""
 
 #, python-format
-msgid "%(count)s <em>group</em>"
-msgid_plural "%(count)s <em>groups</em>"
-msgstr[0] "%(count)s <em>grupa</em>"
-msgstr[1] "%(count)s <em>grupy</em>"
+msgid "%(count)s group"
+msgid_plural "%(count)s groups"
+msgstr[0] ""
+msgstr[1] ""
 
 #, python-format
-msgid "%(count)s <em>file</em>"
-msgid_plural "%(count)s <em>files</em>"
-msgstr[0] "%(count)s <em>plik</em>"
-msgstr[1] "%(count)s <em>pliki</em>"
+msgid "%(count)s file"
+msgid_plural "%(count)s files"
+msgstr[0] " %(count)s dokument"
+msgstr[1] "%(count)s dokumentów"
 
 msgid "Sort  by: "
 msgstr ""
@@ -629,6 +641,27 @@ msgstr "Importuj przedmioty"
 
 msgid "Ututi users:"
 msgstr "Użytkownicy Ututi:"
+
+msgid "New blog snippet:"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Content"
+msgstr "Zawartość"
+
+msgid "Update"
+msgstr "Odśwież"
+
+msgid "Blog snippets:"
+msgstr ""
+
+msgid "New entry"
+msgstr ""
+
+msgid "Edit"
+msgstr "Popraw"
 
 #, python-format
 msgid ""
@@ -809,9 +842,6 @@ msgstr "Zakończ wybór przedmiotów"
 msgid "The file type is not supported."
 msgstr "Niewłaściwy rodzaj dokumentu."
 
-msgid "Edit"
-msgstr "Popraw"
-
 msgid "Change logo"
 msgstr "Zmień logo"
 
@@ -829,9 +859,6 @@ msgstr "Podstawowy widok"
 
 msgid "Edit group front page"
 msgstr "Edytuj stronę startową grupy"
-
-msgid "Content"
-msgstr "Zawartość"
 
 msgid "Group members"
 msgstr "Członkowie grupy"
@@ -874,9 +901,6 @@ msgstr "Ostatnie logowanie"
 
 msgid "Status"
 msgstr "Status"
-
-msgid "Update"
-msgstr "Odśwież"
 
 msgid "Delete group"
 msgstr "Usuń grupę"
@@ -953,9 +977,6 @@ msgstr "Logo"
 
 msgid "department list"
 msgstr "lista wydziałów"
-
-msgid "Search"
-msgstr "Szukaj"
 
 #, python-format
 msgid "Back to %(subject_title)s"
@@ -1042,6 +1063,37 @@ msgstr "Co zdziałałem?"
 msgid "You haven't contributed much, have you?"
 msgstr "Za dużo tu raczej nie zdziałałeś..."
 
+msgid "Receive messages about updates in subjects"
+msgstr ""
+
+msgid "immediatelly"
+msgstr ""
+
+msgid "at the end of the day"
+msgstr ""
+
+msgid "never"
+msgstr ""
+
+msgid "This is a list of the subjects You are watching."
+msgstr ""
+
+msgid "Personally watched subjects"
+msgstr ""
+
+msgid "You are not watching any subjects."
+msgstr "Nie obserwujesz żadnego przedmiotu"
+
+msgid "Watch more subjects"
+msgstr ""
+
+#, python-format
+msgid "Subjects watched by %(group_title)s"
+msgstr ""
+
+msgid "This group is not watching any subjects."
+msgstr ""
+
 msgid ""
 "This is a list of the subjects You are watching. By clicking on the cross"
 " next to any subject, You will not get any messages of the changes in it."
@@ -1052,6 +1104,9 @@ msgstr ""
 "krzyżyk przy nazwie przedmiotu, nie będziesz informowany o zmianach w "
 "przedmiocie. Jeśli nalezysz do grupy, która obserwuje ten przedmiot - "
 "Twoja decyzja nie wpłynie na przedmioty obserwowane przez Twoich kolegów."
+
+msgid "Back to subject list"
+msgstr ""
 
 msgid "Welcome to Ututi!"
 msgstr "Witaj w Ututi!"
@@ -1116,12 +1171,6 @@ msgstr "(Usuń)"
 
 msgid "There are no files here, this folder is empty!"
 msgstr "Brak dokumentów. Folder jest pusty."
-
-#, python-format
-msgid "%(count)s file"
-msgid_plural "%(count)s files"
-msgstr[0] " %(count)s dokument"
-msgstr[1] "%(count)s dokumentów"
 
 msgid "upload file to..."
 msgstr "dodaj plik do..."
@@ -1353,6 +1402,24 @@ msgstr "Informacje o uczelni"
 msgid "Faculty information"
 msgstr "Informacje o wydziale"
 
+#, python-format
+msgid "%(count)s <em>subject</em>"
+msgid_plural "%(count)s <em>subjects</em>"
+msgstr[0] "%(count)s <em>przedmiot</em>"
+msgstr[1] "%(count)s <em>przedmioty</em>"
+
+#, python-format
+msgid "%(count)s <em>group</em>"
+msgid_plural "%(count)s <em>groups</em>"
+msgstr[0] "%(count)s <em>grupa</em>"
+msgstr[1] "%(count)s <em>grupy</em>"
+
+#, python-format
+msgid "%(count)s <em>file</em>"
+msgid_plural "%(count)s <em>files</em>"
+msgstr[0] "%(count)s <em>plik</em>"
+msgstr[1] "%(count)s <em>pliki</em>"
+
 msgid "Subject information"
 msgstr "Informacje o przedmiocie"
 
@@ -1370,9 +1437,6 @@ msgstr ""
 msgid "Delete subject"
 msgstr "Usuń przedmiot"
 
-msgid "You are not watching any subjects."
-msgstr "Nie obserwujesz żadnego przedmiotu"
-
 msgid "More subjects"
 msgstr "Więcej przedmiotów"
 
@@ -1389,10 +1453,13 @@ msgstr ""
 msgid "upload a file to.."
 msgstr ""
 
-msgid "Send invitations to Ututi - help us grow!"
+msgid "Quickly upload files to your groups and subjects."
 msgstr ""
 
 msgid "recommend Ututi to your friends"
+msgstr ""
+
+msgid "Send invitations to Ututi - help us grow!"
 msgstr ""
 
 msgid "Enter the emails of your groupmates, separated by commas or new lines."
@@ -1411,6 +1478,15 @@ msgid "More groups"
 msgstr "Więcej grup"
 
 msgid "create new subject"
+msgstr ""
+
+msgid "Ututi news"
+msgstr ""
+
+msgid "blog_link"
+msgstr ""
+
+msgid "More news"
 msgstr ""
 
 msgid "Find us on Facebook"
