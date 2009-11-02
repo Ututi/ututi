@@ -88,6 +88,7 @@ Pvz. naudotojas http://ututi.lt/user/272 įkėlė apie 200 failų, bet rodo tik 
 ** Anonimui neprivalo matytis grupėl el.pašto konferencijos adresas
 ** Kai žmogus sukuria dalyką, privalo iškarto jį stebėti
 
+
 * Future features
 ** Teacher account
 - Dėstytojas turi patobulintą profilį su pasirinktu adresu.
@@ -137,3 +138,9 @@ Grupės adminas po sesijos gauna pranešima, kad reikia suarchivuoti dalykus ir 
 Mobilioji Ututi versija su pagrindinėmis funkcijomis.
 ** Integration with Google groups
 ** Failų, puslapių, dalykų, Q&A reitingavimas
+** Darbo su failais tobulinimas
+- Failų pervadinimas
+- Failų preview
+- Failų aprašymas
+- Failo vertinimas
+- Failo atsisiųntimų skaičius
