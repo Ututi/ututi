@@ -394,4 +394,6 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         if request.params.get('each') in ('day', 'hour', 'never'):
             c.user.receive_email_each = request.params.get('each')
             meta.Session.commit()
-        return 'OK'
+        if request.params.get('ajax'):
+            return 'OK'
+        redirect_to(controller='profile', action='subjects')

@@ -821,6 +821,9 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         if  new_value in ('day', 'hour', 'never'):
             meta.Session.query(GroupMember)\
                 .filter_by(user=c.user, group=group)\
+                .one()\
                 .receive_email_each = new_value
             meta.Session.commit()
-        return 'OK'
+        if request.params.get('ajax'):
+            return 'OK'
+        redirect_to(controller='profile', action='subjects')

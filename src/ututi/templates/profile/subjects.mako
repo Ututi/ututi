@@ -32,7 +32,6 @@ $(document).ready(function(){
 
   $('.ignore_subject_button').click(function (event) {
     var url = $(event.target).parents("li:first").children(".ignore_url").val();
-    console.log(url);
     $.ajax({type: "GET",
             url: url,
             success: function(msg){
@@ -43,7 +42,6 @@ $(document).ready(function(){
 
   $('.unignore_subject_button').click(function (event) {
     var url = $(event.target).parents("li:first").children(".unignore_url").val();
-    console.log(url);
     $.ajax({type: "GET",
             url: url,
             success: function(msg){
@@ -57,10 +55,9 @@ $(document).ready(function(){
     $(event.target.form).removeClass('select_interval_form')
                         .removeClass('select_interval_form_done')
                         .addClass('select_interval_form_in_progress');
-    console.log(event.target.form.action);
-    console.log($(event.target.form));
     $.ajax({type: "GET",
             url: url,
+            data: {'each': event.target.value, 'ajax': 'yes'},
             success: function(msg){
             $(event.target.form).removeClass('select_interval_form_in_progress')
                                 .addClass('select_interval_form_done');
@@ -71,7 +68,7 @@ $(document).ready(function(){
 </script>
 </%def>
 
-<%def name="header(title, update_url)">
+<%def name="header(title, update_url, selected)">
 <div class="hdr">
   <span class="larger">${title|n}</span>
   <div style="float:right;" class="small">
@@ -87,9 +84,13 @@ $(document).ready(function(){
         //]]>
       </script>
       <select name="each" class="each" style="float:right; font-size: 1em;">
-        <option value="immediatelly">${_('immediatelly')}</option>
-        <option value="daily">${_('at the end of the day')}</option>
-        <option value="never">${_('never')}</option>
+        %for v, t in [('hour', _('immediatelly')), ('day', _('at the end of the day')), ('never', _('never'))]:
+          %if v == selected:
+            <option selected="selected" value="${v}">${t}</option>
+          %else:
+            <option value="${v}">${t}</option>
+          %endif
+        %endfor
       </select>
       <img class="done_icon" src="${url('/images/details/icon_done.png')}" />
       <img class="in_progress_icon" src="${url('/images/details/icon_progress.gif')}" />
@@ -98,7 +99,7 @@ $(document).ready(function(){
 </div>
 </%def>
 
-${header(_('Personally watched subjects'), url(controller='profile', action='set_receive_email_each'))}
+${header(_('Personally watched subjects'), url(controller='profile', action='set_receive_email_each'), c.user.receive_email_each)}
 
 <ul class="personal_watched_subjects">
 %if c.subjects:
@@ -125,7 +126,7 @@ ${header(_('Personally watched subjects'), url(controller='profile', action='set
 
 %for group in c.groups:
 ${header(_('Subjects watched by %(group_title)s') % dict(group_title=h.link_to(group.title, group.url())),
-         group.url(action='set_receive_email_each'))}
+         group.url(action='set_receive_email_each'), group.is_member(c.user).receive_email_each)}
 
 <ul class="personal_watched_subjects">
 %if group.watched_subjects:

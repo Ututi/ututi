@@ -181,8 +181,15 @@ Now let's upload a couple of files:
 
 Let's try hourly now:
 
-    >>> from ututi.model import User, Group, GroupMember
-    >>> GroupMember.get(group=Group.get('moderators'), user=User.get('admin@ututi.lt')).receive_email_each = 'hour'
+    >>> browser.open('http://localhost/profile/subjects')
+    >>> browser.getControl(name='each', index=1).displayValue
+    ['at the end of the day']
+    >>> browser.getControl(name='each', index=1).displayValue = ['immediatelly']
+    >>> browser.getControl('Confirm', index=1).click()
+
+    >>> browser.getControl(name='each', index=1).displayValue
+    ['immediatelly']
+
     >>> meta.Session.commit()
     >>> browser.open('http://localhost/news/hourly?date=2009-10-08&hour=11')
 
@@ -207,3 +214,113 @@ Let's try hourly now:
 
     >>> browser.open('http://localhost/news/hourly?date=2009-10-08&hour=12')
     >>> printEmails()
+
+Admin should stop getting events in his daily news:
+
+    >>> browser.open('http://localhost/news/daily?date=2009-10-09')
+
+    >>> printEmails()
+    ['user2@ututi.lt']
+    Ututi news: 2 new files and 2 new pages
+    <BLANKLINE>
+    Matematinė analizė
+    <BLANKLINE>
+    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
+    - File f1.txt (http://localhost/subject/vu/mat_analize/file/9/get) was uploaded.
+    - File f2.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
+    <BLANKLINE>
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    <BLANKLINE>
+    ['user@ututi.lt']
+    Ututi news: 2 new files and 2 new pages
+    <BLANKLINE>
+    Matematinė analizė
+    <BLANKLINE>
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
+    - File f1.txt (http://localhost/subject/vu/mat_analize/file/9/get) was uploaded.
+    - File f2.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
+    <BLANKLINE>
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    <BLANKLINE>
+
+    >>> mail_queue[:] = []
+
+Unless he starts watching the subject himself:
+
+    >>> browser.open('http://localhost/profile/subjects')
+    >>> browser.getLink('Watch more subjects').click()
+    >>> browser.getLink('Watch').click()
+
+    >>> browser.open('http://localhost/news/daily?date=2009-10-09')
+
+    >>> printEmails()
+    ['admin@ututi.lt']
+    Ututi news: 2 new pages
+    <BLANKLINE>
+    Matematinė analizė
+    <BLANKLINE>
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
+    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
+    <BLANKLINE>
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    <BLANKLINE>
+    ['user2@ututi.lt']
+    Ututi news: 2 new files and 2 new pages
+    <BLANKLINE>
+    Matematinė analizė
+    <BLANKLINE>
+    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
+    - File f1.txt (http://localhost/subject/vu/mat_analize/file/9/get) was uploaded.
+    - File f2.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
+    <BLANKLINE>
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    <BLANKLINE>
+    ['user@ututi.lt']
+    Ututi news: 2 new files and 2 new pages
+    <BLANKLINE>
+    Matematinė analizė
+    <BLANKLINE>
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
+    - File f1.txt (http://localhost/subject/vu/mat_analize/file/9/get) was uploaded.
+    - File f2.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
+    <BLANKLINE>
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    <BLANKLINE>
+
+    >>> mail_queue[:] = []
+
+Hmm, now what happens if user2 starts ignoring the subject:
+
+    >>> browser2.open('http://localhost/profile/subjects')
+    >>> browser2.getLink(url='ignore_subject').click()
+
+    >>> browser.open('http://localhost/news/daily?date=2009-10-09')
+    >>> printEmails()
+    ['admin@ututi.lt']
+    Ututi news: 2 new pages
+    <BLANKLINE>
+    Matematinė analizė
+    <BLANKLINE>
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
+    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
+    <BLANKLINE>
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    <BLANKLINE>
+    ['user@ututi.lt']
+    Ututi news: 2 new files and 2 new pages
+    <BLANKLINE>
+    Matematinė analizė
+    <BLANKLINE>
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
+    - File f1.txt (http://localhost/subject/vu/mat_analize/file/9/get) was uploaded.
+    - File f2.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
+    <BLANKLINE>
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    <BLANKLINE>
+
+    >>> mail_queue[:] = []

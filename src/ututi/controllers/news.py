@@ -121,8 +121,10 @@ class NewsController(BaseController):
                 events = recipient_to_events.setdefault(recipient.id, [])
                 events.append(event)
         for uid, events in recipient_to_events.items():
+            user = User.get_byid(uid)
             events = [ev for ev in events
-                      if ev.user.id != uid]
+                      if (ev.user.id != uid and
+                          ev.context not in user.ignored_subjects)]
 
             if not events:
                 continue
@@ -135,7 +137,7 @@ class NewsController(BaseController):
             html = render('/emails/news_html.mako',
                           extra_vars=extra_vars)
             msg = Message(subject, text, html)
-            user = User.get_byid(uid).send(msg)
+            user = user.send(msg)
 
     def hourly(self):
         self._send_news('hour', hours=1)
