@@ -5,6 +5,7 @@ from formencode import Schema, validators, htmlfill
 from pylons.decorators import validate
 from pylons.controllers.util import redirect_to
 from pylons.controllers.util import abort
+from pylons import url
 from pylons import c, config
 
 from mimetools import choose_boundary
@@ -171,6 +172,9 @@ class GroupforumController(GroupControllerBase):
         else:
             code = 403
 
+        c.login_form_url = url(controller='home',
+                               action='login',
+                               came_from=file.url())
         if not check_crowds(['member', 'admin', 'moderator'], context=group):
             deny('Only group members can download attachments!', code)
 
