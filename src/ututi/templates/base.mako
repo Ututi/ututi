@@ -38,7 +38,7 @@ ${_('student information online')}
     <a href="${url(controller='profile', action='browse')}">${_("search")}</a>
   </div>
   <div class="item">
-    <a href="${url(controller='profile', action='home')}">${_("home")}</a>
+    <a href="${url(controller='profile', action='home')}" ${h.trackEvent(None, 'user_home', 'menu')|n}>${_("home")}</a>
   </div>
 
 </div>
@@ -122,12 +122,22 @@ ${h.javascript_link('/javascripts/forms.js')|n}
 
 <%def name="breadcrumbs(breadcrumbs)">
 <div id="breadcrumb-container">
+  <%
+     
+     if c.user:
+         u_url = url(controller='profile', action='home')
+         track_event = h.trackEvent(None, 'user_home', 'logo')
+     else:
+         track_event = ''
+         u_url = url('/')
+    
+  %>
   %if breadcrumbs:
-  <a href="${url('/')}" title="home" id="ulogo">
+  <a ${track_event|n} href="${u_url}" title="home" id="ulogo">
     ${h.image('/images/logo_small.gif', alt='logo')|n}
   </a>
   %else:
-  <a href="${url('/')}" title="home" id="ulogo">
+  <a href="${u_url}" title="home" id="ulogo">
     ${h.image('/images/logo.gif', alt='logo')|n}
   </a>
   %endif
