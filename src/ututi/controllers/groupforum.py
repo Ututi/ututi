@@ -151,7 +151,6 @@ class GroupforumController(GroupControllerBase):
                     action='thread',
                     id=group.group_id, thread_id=post.id)
 
-
     def file(self, id, message_id, file_id):
 
         group = Group.get(id)
