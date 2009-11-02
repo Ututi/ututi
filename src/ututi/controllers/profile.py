@@ -73,6 +73,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
 
     @ActionProtector("user")
     def browse(self):
+        c.breadcrumbs = [{'title': _('Search'), 'link': url(controller='profile', action='browse')}]
         self._get_unis()
 
         c.obj_type = '*'
@@ -84,6 +85,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     @ActionProtector("user")
     @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
     def search(self):
+        c.breadcrumbs = [{'title': _('Search'), 'link': url(controller='profile', action='browse')}]
         self._search()
         return render('/profile/search.mako')
 
