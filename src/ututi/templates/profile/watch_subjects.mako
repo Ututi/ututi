@@ -63,7 +63,7 @@ ${parent.head_tags()}
 </%def>
 
 <div class="tip">${_('This is a list of the subjects You are watching. By clicking on the cross next to any subject,\
- You will not get any messages of the changes in it. If Your group is watching this subject, it will not affect Your classmates.')}</div>
+ You will not get any messages of the changes in it.')}</div>
 
 <div class="hdr">
   <span class="larger">${_('Personally watched subjects')}</span>

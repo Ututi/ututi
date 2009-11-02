@@ -95,7 +95,7 @@ $(document).ready(function(){
 </div>
 </%def>
 
-<div class="tip">${_('This is a list of the subjects You are watching.')}</div>
+<div class="tip">${_('This is a list of the subjects You and/or groups You are in are watching.')}</div>
 
 ${header(_('Personally watched subjects'), url(controller='profile', action='set_receive_email_each'), c.user.receive_email_each)}
 
