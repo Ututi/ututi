@@ -49,7 +49,7 @@
           %endif
           <div class="search-submit">
             <span class="btn">
-              <input type="submit" value="${_('Search')}"/>
+              <input type="submit" value="${_('Search-btn')}"/>
             </span>
           </div>
           <br style="clear: left;"/>

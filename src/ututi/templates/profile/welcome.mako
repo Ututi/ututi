@@ -50,7 +50,7 @@ ${parent.head_tags()}
             alt=_('Create your group, invite your classmates and use the mailing list, upload private group files'),
             class_='tooltip')|n}
         <span class="btn">
-	      <input type="submit" value="${_('Search')}" name="search" id="search" />
+	      <input type="submit" value="${_('Search-btn')}" name="search" id="search" />
         </span>
 
       </div>
