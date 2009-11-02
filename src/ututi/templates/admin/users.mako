@@ -7,7 +7,7 @@
 <h1>${_('Ututi users:')}</h1>
 <ol id="user_list">
 %for user in c.users:
-    <li><a href="${user.url()}">${user.fullname}</a>
+    <li><a href="${user.url()}">${user.fullname}</a> joined ${user.accepted_terms}
     % if user.logo is not None:
        <img src="${url(controller='user', action='logo', id=user.id, width=45, height=60)}" />
     % endif
