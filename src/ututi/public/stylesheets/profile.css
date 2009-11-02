@@ -147,7 +147,7 @@
 }
 
 #blog_portlet .header .blog_pager {
-  float: right;
+  float: left;
   width: 6px;
   height: 10px;
   background: url("../images/details/arrows.png") 0 0 no-repeat;
@@ -156,6 +156,7 @@
 }
 
 #blog_portlet .header #blog_bk {
+  margin-left: 6px;
   background-position: 0 0;
 }
 

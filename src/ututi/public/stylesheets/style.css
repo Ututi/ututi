@@ -402,6 +402,9 @@ ul.bullets_large li {
   float: right;
 }
 
+#sidebar .header {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+}
 
 .sidebar-block .rounded-header h3,
 .sidebar-block .rounded-header h3 a {

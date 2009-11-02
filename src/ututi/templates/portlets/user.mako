@@ -272,9 +272,9 @@
   %if c.blog_entries:
     <%self:border_portlet id="blog_portlet">
     <div class="header">
-      <div class="blog_pager" id="blog_fwd"></div>
+      <span style="float: left;">${_('Ututi news')}</span>
       <div class="blog_pager" id="blog_bk"></div>
-      ${_('Ututi news')}
+      <div class="blog_pager" id="blog_fwd"></div>
     </div>
     <div id="entries">
       %for blog_entry in c.blog_entries:
