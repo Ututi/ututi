@@ -200,12 +200,11 @@
   %>
   <%self:action_portlet id="subject_create_portlet">
     <%def name="header()">
-    <div style="float: right; height: 20px; padding-top: 3px;">
-      ${h.image('/images/details/icon_question.png',
-                alt=_("Store all the subject's files and notes in one place."),
-                class_='tooltip')|n}
-    </div>
     <a href="${url(controller='subject', action='add')}">${_('create new subject')}</a>
+    ${h.image('/images/details/icon_question.png',
+            alt=_("Store all the subject's files and notes in one place."),
+             class_='tooltip', style='margin-top: 4px;')|n}
+
     </%def>
   </%self:action_portlet>
 </%def>
@@ -217,13 +216,10 @@
   %>
   <%self:action_portlet id="user_recommend_portlet" expanding="True">
     <%def name="header()">
-    <div style="float: right; height: 20px; padding-top: 3px;">
-      ${h.image('/images/details/icon_question.png',
-                alt=_("Send invitations to Ututi - help us grow!"),
-                class_='tooltip')|n}
-    </div>
-
     ${_('recommend Ututi to your friends')}
+    ${h.image('/images/details/icon_question.png',
+             alt=_("Send invitations to Ututi - help us grow!"),
+             class_='tooltip', style='margin-top: 5px;')|n}
     </%def>
 
     <div id="recommendation_status"></div>
@@ -264,9 +260,7 @@
 <%def name="blog_portlet()">
   <%def name="entry(entry)">
     <div class="teaser">
-      <a href="${entry.url}">
-        ${entry.content|n}
-      </a>
+      ${entry.content|n}
     </div>
   </%def>
   %if c.blog_entries:
