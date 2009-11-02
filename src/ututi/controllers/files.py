@@ -4,6 +4,7 @@ from paste.fileapp import FileApp
 
 from pylons.templating import render_mako_def
 from pylons.controllers.util import abort
+from pylons import url
 from pylons import request, response, c
 from pylons.controllers.util import redirect_to
 from pylons.controllers.util import forward
@@ -91,6 +92,9 @@ class FilesController(BasefilesController):
         elif is_root(c.user):
             return self._get(file)
         else:
+            c.login_form_url = url(controller='home',
+                                   action='login',
+                                   came_from=file.url())
             deny(_('You have no right to download this file.'), 403)
 
     @ActionProtector('root')
