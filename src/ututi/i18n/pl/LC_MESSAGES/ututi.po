@@ -1033,9 +1033,7 @@ msgid "Personal logo"
 msgstr "Twoje logo"
 
 msgid "These are the files from the the subjects you or your group are watching."
-msgstr ""
-"Tutaj są zamieszczone pliki z przedmotów które obserwujesz ty i twoja "
-"grypa."
+msgstr "Tutaj są zamieszczone pliki z przedmotów które obserwujesz ty i twoja grupa."
 
 msgid "Everywhere"
 msgstr "Wszędzie"
