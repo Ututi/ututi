@@ -1,5 +1,10 @@
 <%inherit file="/page/view.mako" />
 
+<%def name="head_tags()">
+${parent.head_tags()}
+${h.javascript_link('/javascripts/ckeditor/ckeditor.js')|n}
+</%def>
+
 <%def name="title()">
 ${_('Edit page')}
 </%def>
