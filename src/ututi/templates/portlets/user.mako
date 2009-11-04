@@ -222,7 +222,8 @@
              class_='tooltip', style='margin-top: 5px;')|n}
     </%def>
 
-    <div id="recommendation_status"></div>
+    <div id="recommendation_status">
+    </div>
     <form method="post"
           action="${url(controller='home', action='send_recommendations')}" id="ututi_recommendation_form">
       <div class="form-field">
@@ -243,7 +244,7 @@
         $.post("${url(controller='home', action='send_recommendations', js=1)}",
             $(this).parents('form').serialize(),
             function(data) {
-              $('#recommendation_status').text('').append(data);
+              status = $('#recommendation_status').text('').append(data);
               $('#recommendation_submit').parents('.form-field').removeClass('loading');
               $('#recommend_emails').val('');
             });

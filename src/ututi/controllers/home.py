@@ -2,6 +2,7 @@ import logging
 from random import Random
 import string
 from datetime import datetime
+import simplejson
 
 from routes.util import redirect_to
 from formencode import Schema, validators, Invalid, All, htmlfill
@@ -281,6 +282,7 @@ class HomeController(UniversityListMixin):
             count = 0
             failed = []
             rcpt = []
+            using = [] #already members of ututi
 
             #constructing the message
             extra_vars = {'user_name': c.user.fullname}
@@ -299,28 +301,31 @@ class HomeController(UniversityListMixin):
                         if exists is None:
                             count = count + 1
                             rcpt.append(email)
+                        else:
+                            using.append(email)
                     except:
                         failed.append(email)
             if rcpt != []:
                 msg.send(rcpt)
 
-            status = ''
+            status = {}
             if count > 0:
-                status = ungettext('%(count)d invitation sent.',
-                                   '%(count)d invitations sent.', count) % {
-                    'count': count}
-            else:
-                status = _('No invitations were sent.')
+                status['ok'] = ungettext('%(count)d invitation sent.',
+                                         '%(count)d invitations sent.', count) % {'count': count}
+
+            if len(using) > 0:
+                status['members'] = _('Already using ututi: %s.') % ', '.join(using)
 
             if len(failed) > 0:
-                if status != '':
-                    status = status + ' '
-                status = status + _('Some of the emails entered seem to be invalid.')
+                status['fail'] = _('Invalid emails: %s') % ', '.join(failed)
 
             if request.params.has_key('js'):
-                return "<span>%s</span>" % status
+                for k in status:
+                    status[k] = '<div class="%(cls)s">%(val)s</div>' % dict(cls=k, val=status[k])
+                return ''.join([v for v in status.values()])
             else:
-                h.flash(status)
+                for v in status.values():
+                    h.flash(v)
                 url = self.form_result.get('came_from', None)
                 if url is None:
                     redirect_to(url(controller='profile', action='index'))

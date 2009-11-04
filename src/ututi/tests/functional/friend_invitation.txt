@@ -27,7 +27,6 @@ There should be a portlet with a form that let's us enter email addresses the re
    If You would like to join Ututi now, please follow this link:
    http://localhost/
    <BLANKLINE>
-   Looking forward to meeting You,
    The Ututi team
    <BLANKLINE>
 
@@ -63,7 +62,6 @@ What if some of the emails were mistyped?
    If You would like to join Ututi now, please follow this link:
    http://localhost/
    <BLANKLINE>
-   Looking forward to meeting You,
    The Ututi team
    <BLANKLINE>
    [u'user@example.com']
@@ -76,7 +74,6 @@ What if some of the emails were mistyped?
    If You would like to join Ututi now, please follow this link:
    http://localhost/
    <BLANKLINE>
-   Looking forward to meeting You,
    The Ututi team
    <BLANKLINE>
 
@@ -85,7 +82,9 @@ What if some of the emails were mistyped?
 
    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
    Close
-   2 invitations sent. Some of the emails entered seem to be invalid.
+   Invalid emails: abra, bram, /n
+   Close
+   2 invitations sent.
 
    >>> mail_queue[:] = []
 

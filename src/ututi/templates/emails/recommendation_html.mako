@@ -7,7 +7,6 @@ ${_('Ututi is a system for students that encourages collaboration and sharing of
 storing lecture notes, sharing files and communicating with your class mates much, much easier.')}
 </p>
 <br />
-${_('If You would like to join Ututi now, please follow this <a href="%(link)s">link</a>.') % dict(link=url('/', qualified=True))}
+${_('If You would like to join Ututi now, please follow this <a href="%(link)s">link</a>.') % dict(link=url('/', qualified=True))|n}
 <br />
-Looking forward to meeting You,
-The Ututi team
+${_('Looking forward to meeting You,<br/>The Ututi team')|n}

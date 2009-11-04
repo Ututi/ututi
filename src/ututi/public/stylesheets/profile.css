@@ -24,58 +24,7 @@
   margin-top: 10px;
 }
 
-/* file upload portlet */
 
-#file_upload_portlet_content .header {
-  background: url("../images/details/expand_down.png") right center no-repeat;
-}
-
-#file_upload_portlet_content #completed a {
-  padding-left: 18px;
-  background: url("../images/details/icon_done.gif") left center no-repeat;
-}
-
-#file_upload_portlet_content .target {
-  color: #d45500;
-  padding-left: 23px;
-  background: url("../images/details/icon_folder.gif") left center no-repeat;
-  cursor: pointer;
-}
-
-#file_upload_portlet_content .target.hover {
-  text-decoration: underline;
-}
-
-/* end file upload portlet */
-
-/* invitation portlet */
-
-#user_recommend_portlet_content .header {
-  background: url("../images/details/expand_down.png") right center no-repeat;
-}
-
-#ututi_recommendation_form label,
-#file_upload_portlet .comment {
-  color: #666;
-  font-size: 11px;
-  height: auto;
-  line-height: 13px;
-  margin-bottom: 3px;
-}
-
-#ututi_recommendation_form textarea {
-  width: 270px;
-  border: 1px solid gray;
-}
-
-#ututi_recommendation_form .form-field.loading {
-  background: url("../images/details/icon_progress.gif") right center no-repeat;
-}
-
-#recommendation_status span {
-  padding-left: 18px;
-  background: url("../images/details/icon_done.gif") left center no-repeat;
-}
 
 .personal_watched_subjects {
   padding-left: 10px;
@@ -142,69 +91,4 @@ li.empty_note {
   text-size: 1em;
 }
 
-/* blog portlet */
-#blog_portlet {
-  padding-right: 15px;
-  width: 270px;
-}
-
-#blog_portlet .header {
-  font-size: 14px;
-  font-weight: bold;
-  text-transform: uppercase;
-  height: 16px;
-  overflow: hidden;
-  line-height: 16px;
-  color: #666;
-}
-
-#blog_portlet .header .blog_pager {
-  float: left;
-  width: 6px;
-  height: 10px;
-  background: url("../images/details/arrows.png") 0 0 no-repeat;
-  cursor: pointer;
-  margin: 3px;
-}
-
-#blog_portlet .header #blog_bk {
-  margin-left: 6px;
-  background-position: 0 0;
-}
-
-#blog_portlet .header #blog_fwd {
-  background-position: -6px 0;
-}
-
-#blog_portlet #entries {
-  font-size: 14px;
-  line-height: 14px;
-  height: 30px;
-  overflow: visible;
-  padding: 0;
-}
-
-#blog_portlet #entries .teaser {
-  height: 30px;
-  width: 270px;
-  margin: 0;
-  margin-top:5px;
-}
-
-#blog_portlet .teaser a {
-  color: #333;
-  font-size: 14px;
-}
-
-#blog_portlet .teaser a:hover {
-  color: #d45500;
-  text-decoration: none;
-}
-
-#blog_portlet .footer {
-  text-align: right;
-  padding-bottom: 3px;
-}
-
-/* end blog portlet */
 

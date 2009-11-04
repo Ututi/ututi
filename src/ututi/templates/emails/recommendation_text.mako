@@ -8,5 +8,4 @@ storing lecture notes, sharing files and communicating with your class mates muc
 ${_('If You would like to join Ututi now, please follow this link:')}
 ${url('/', qualified=True)}
 
-Looking forward to meeting You,
-The Ututi team
+${_('The Ututi team')}
