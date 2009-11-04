@@ -46,8 +46,7 @@ def setup_title(forum_id):
     query = """select count(distinct content_items.created_by)
                    from content_items
                    join forum_posts on forum_posts.id = content_items.id
-                   where forum_id = '%s'
-                   group by created_by""" % forum_id
+                   where forum_id = '%s'""" % forum_id
     c.poster_count = meta.Session.execute(query).scalar() or 0
 
     c.breadcrumbs = [{'title': c.forum_title, 'link': url(controller='forum', forum_id=c.forum_id)}]
@@ -135,7 +134,6 @@ class ForumController(BaseController):
     @ActionProtector("user")
     def new_thread(self, forum_id):
         return htmlfill.render(self._new_thread_form())
-
 
     @forum_action
     @validate(NewTopicForm, form='_new_thread_form')
