@@ -291,7 +291,7 @@
     </script>
 
     <div class="footer">
-      <a class="more" href="${_('blog_link')}">${_('More news')}</a>
+      <a class="more" href="${_('ututi_blog_url')}">${_('More news')}</a>
     </div>
     </%self:border_portlet>
   %endif
