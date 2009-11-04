@@ -204,13 +204,13 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         c.groups = c.user.groups
         return render('profile/subjects.mako')
 
-    @validate(schema=SearchSubmit, form='subjects', post_only=False, on_get=True)
+    @validate(schema=SearchSubmit, form='watch_subjects', post_only=False, on_get=True)
     @ActionProtector("user")
     def watch_subjects(self):
 
         c.breadcrumbs.append(self._actions('subjects'))
 
-        c.search_target = url(controller='profile', action='subjects')
+        c.search_target = url(controller='profile', action='watch_subjects')
 
         #retrieve search parameters
         c.text = self.form_result.get('text', '')

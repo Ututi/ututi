@@ -100,7 +100,7 @@ ${search_form(text=c.text, obj_type='subject', tags=c.tags, parts=['text', 'tags
 </%def>
 
 <%def name="tag_link(tag)">
-    <a class="tag" title="${tag.title}" href="${url(controller='profile', action='subjects', tags=', '.join(tag.hierarchy()))}">
+    <a class="tag" title="${tag.title}" href="${url(controller='profile', action='watch_subjects', tags=', '.join(tag.hierarchy()))}">
       ${tag.title}
     </a>
 </%def>
