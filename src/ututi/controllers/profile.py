@@ -221,7 +221,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             tags = self.form_result.get('tagsitem', None)
         elif 'tags' in self.form_result:
             tags = self.form_result.get('tags', [])
-            if isinstance(tags, str):
+            if isinstance(tags, basestring):
                 tags = tags.split(', ')
 
         c.tags = ', '.join(filter(bool, tags))
@@ -332,7 +332,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             tags = self.form_result.get('tagsitem', None)
         elif 'tags' in self.form_result:
             tags = self.form_result.get('tags', [])
-            if isinstance(tags, str) or isinstance(tags, unicode):
+            if isinstance(tags, basestring):
                 tags = tags.split(', ')
 
         c.tags = tags

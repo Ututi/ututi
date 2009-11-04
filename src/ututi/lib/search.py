@@ -22,7 +22,7 @@ def search_query(text=None, tags=None, obj_type=None, extra=None):
 
     query = _search_query_type(query, obj_type)
 
-    if isinstance(tags, unicode):
+    if isinstance(tags, basestring):
         tags = tags.split(', ')
     query = _search_query_tags(query, tags)
 

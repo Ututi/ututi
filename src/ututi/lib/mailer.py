@@ -121,7 +121,7 @@ def send_email(sender, recipient, subject, body, html_body=None,
 
 
 def raw_send_email(sender, recipients, message):
-    if isinstance(recipients, (unicode, str)):
+    if isinstance(recipients, basestring):
         recipients = [recipients]
 
     hold_emails = asbool(config.get('hold_emails', False))

@@ -30,7 +30,7 @@ class Message(object):
                 #send the message to a user
                 #XXX the method of choosing the email of the user needs to be revised
                 recipient.send(self)
-            elif isinstance(recipient, str) or isinstance(recipient, unicode):
+            elif isinstance(recipient, basestring):
                 try:
                     #XXX : need to validate emails
                     EmailValidator.to_python(recipient)

@@ -966,7 +966,7 @@ class Tag(object):
     @classmethod
     def get(cls, id):
         tag = meta.Session.query(cls)
-        if isinstance(id, unicode):
+        if isinstance(id, basestring):
             tag.filter_by(title=id.lower())
         else:
             tag.filter_by(id=id)
@@ -1043,7 +1043,7 @@ class LocationTag(Tag):
     @classmethod
     def get(cls, path):
 
-        if isinstance(path, unicode):
+        if isinstance(path, basestring):
             path = path.split('/')
 
         tag = None
@@ -1097,7 +1097,7 @@ class LocationTag(Tag):
                    **kwargs)
 
     def count(self, obj=Subject):
-        if isinstance(obj, str) or isinstance(obj, unicode):
+        if isinstance(obj, basestring):
             obj_types = {
                 'subject' : Subject,
                 'group' : Group,
@@ -1240,7 +1240,7 @@ class File(ContentItem):
         hash = hashlib.md5()
 
         while True:
-            if isinstance(file, str):
+            if isinstance(file, basestring):
                 chunk = file[size:(size+chunk_size)]
             else:
                 chunk = file.read(chunk_size)
@@ -1250,7 +1250,7 @@ class File(ContentItem):
             if len(chunk) < chunk_size:
                 break
 
-        if not isinstance(file, str):
+        if not isinstance(file, basestring):
             file.seek(0)
 
         return hash.hexdigest()
