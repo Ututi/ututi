@@ -140,7 +140,7 @@ class NewsController(BaseController):
             html = render('/emails/news_html.mako',
                           extra_vars=extra_vars)
             msg = Message(subject, text, html)
-            log.info("Sent to <%s> to %s", (subject,  user.fullname))
+            log.info("Sent to <%s> to %s" % (subject,  user.fullname))
             user = user.send(msg)
 
     def hourly(self):
