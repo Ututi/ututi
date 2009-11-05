@@ -22,16 +22,6 @@ form {
   color: #808080;
 }
 
-#breadcrumbs {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-
-  position: absolute;
-  top: 66px;
-  left: 240px;
-}
-
 #add-group {
   padding-left: 65px;
   background: white url("../images/details/icon_group.png") left top no-repeat;
