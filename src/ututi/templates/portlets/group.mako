@@ -37,13 +37,10 @@
       ${group.description}
     </div>
 
-    <div class="footer">
-      %if group.is_admin(c.user):
-        <a class="more" href="${url(controller='group', action='edit', id=group.group_id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
-      %endif
+    <div class="footer click2show">
       %if group.is_member(c.user):
-        <div class="click2show">
-          <span id="group_settings_toggle" class="click">${_("My group settings")}</span>
+        <div>
+          <div id="group_settings_toggle" class="click">${_("more settings")}</div>
           <div class="show" id="group_settings_block">
             %if group.is_subscribed(c.user):
               <a href="${group.url(action='unsubscribe')}" class="btn inactive"><span>${_("Do not get email")}</span></a>
@@ -51,6 +48,11 @@
               <a href="${group.url(action='subscribe')}" class="btn"><span>${_("Get email")}</span></a>
             %endif
             <a href="${group.url(action='leave')}" class="btn warning"><span>${_("Leave group")}</span></a>
+
+            %if group.is_admin(c.user):
+            <a class="more" href="${url(controller='group', action='edit', id=group.group_id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
+            %endif
+
           </div>
         </div>
       %endif

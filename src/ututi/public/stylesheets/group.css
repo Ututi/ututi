@@ -119,9 +119,11 @@ ul.event-list li {
 /* misc */
 #group_settings_toggle {
   color: #d45500;
-  padding-right: 18px;
-  background: transparent url("../images/details/expand_down.png") right center no-repeat;
+  padding-left: 10px;
+  background: transparent url("../images/details/icon_expand_down_small.png") left center no-repeat;
   cursor: pointer;
+  border-bottom: 1px solid #ded8d8;
+  margin-bottom: 5px;
 }
 
 #group_settings_block {
