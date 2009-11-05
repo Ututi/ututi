@@ -11,7 +11,9 @@ ${_('Edit subject')}
 <%def name="head_tags()">
 ${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
 ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
+${h.javascript_link('/javascripts/ckeditor/ckeditor.js')|n}
 </%def>
+
 <a class="back-link" href="${url(controller='subject', action='home', id=c.subject.subject_id, tags=c.subject.location_path)}">${_('back to the subject')}</a>
 <h1>${_('Edit subject')}</h1>
 

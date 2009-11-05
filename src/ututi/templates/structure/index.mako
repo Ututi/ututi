@@ -2,6 +2,7 @@
 
 <%def name="head_tags()">
   <title>UTUTI – student information online</title>
+  ${h.javascript_link('/javascripts/ckeditor/ckeditor.js')|n}
 </%def>
 
 <h1>${_('Browse the hierarchy')}</h1>
