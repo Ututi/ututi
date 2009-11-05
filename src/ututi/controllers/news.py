@@ -1,4 +1,5 @@
 import datetime
+import logging
 
 from sqlalchemy.sql.expression import desc
 from sqlalchemy.sql.expression import or_
@@ -18,6 +19,8 @@ from ututi.model import Group
 from ututi.model import GroupMember
 from ututi.model import UserSubjectMonitoring
 from ututi.model import User, meta
+
+log = logging.getLogger(__name__)
 
 
 class NewsController(BaseController):
@@ -137,6 +140,7 @@ class NewsController(BaseController):
             html = render('/emails/news_html.mako',
                           extra_vars=extra_vars)
             msg = Message(subject, text, html)
+            log.info("Sent to <%s> to %s", (subject,  user.fullname))
             user = user.send(msg)
 
     def hourly(self):
