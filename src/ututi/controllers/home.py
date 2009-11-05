@@ -16,7 +16,7 @@ from pylons.templating import render_mako_def
 
 from sqlalchemy.orm.exc import NoResultFound
 
-from ututi.lib.base import BaseController, render
+from ututi.lib.base import BaseController, render, render_lang
 import ututi.lib.helpers as h
 from ututi.lib.emails import email_confirmation_request, email_password_reset
 from ututi.lib.messaging import Message
@@ -136,9 +136,9 @@ class HomeController(UniversityListMixin):
         else:
             self._get_unis()
             if request.params.has_key('js'):
-                return render_mako_def('/anonymous_index.mako','universities', unis=c.unis, ajax_url=url(controller='home', action='index'))
+                return render_mako_def('/anonymous_index/lt.mako','universities', unis=c.unis, ajax_url=url(controller='home', action='index'))
             c.slideshow = request.params.has_key('slide')
-            return render('/anonymous_index.mako')
+            return render_lang('/anonymous_index.mako')
 
     def banners(self):
         return render('/portlets/banners/%s.mako' % c.lang)
@@ -228,7 +228,7 @@ class HomeController(UniversityListMixin):
                 return render('/login.mako')
 
             self._get_unis()
-            return render('/anonymous_index.mako')
+            return render_lang('/anonymous_index.mako')
 
     def _pswrecovery_form(self):
         return render('home/recoveryform.mako')

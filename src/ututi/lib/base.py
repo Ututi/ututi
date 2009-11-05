@@ -9,7 +9,7 @@ from sqlalchemy.exc import InvalidRequestError
 
 from paste.util.converters import asbool
 from pylons.controllers import WSGIController
-from pylons.templating import render_mako as render
+from pylons.templating import pylons_globals, render_mako as render
 from pylons import c, config
 from pylons.i18n.translation import get_lang
 
@@ -51,3 +51,39 @@ class BaseController(WSGIController):
                 # controller this call raises an error
                 pass
             meta.Session.remove()
+
+def render_lang(template_name, extra_vars=None, cache_key=None,
+                cache_type=None, cache_expire=None):
+    """
+    Render a template depending on its language. What this does is it tries 3 alternatives.
+    Assuming the template name specified is template.mako, this function will try to render (in that order):
+    template/[current_lang].mako
+    template/[default_lang].mako (now it is lt.mako, hardcoded)
+    template.mako
+    """
+    glob = pylons_globals()
+    template_base = template_name[:-5] #remove the mako ending
+
+    lang = get_lang()
+    if not lang:
+        lang = 'lt'
+    else:
+        lang = lang[0]
+
+    templates = [
+        '/'.join([template_base, '%s.mako' % lang]), #active language
+        '/'.join([template_base, 'lt.mako']), #default lang
+        template_name]
+
+    templates = reversed(list(enumerate(reversed(templates))))
+    #needed to reverse-enumerate, found no better way
+    #(2, template1), (1, template2), (0, template3)
+
+    for n, template in templates:
+        try:
+            return render(template, extra_vars, cache_key, cache_type, cache_expire)
+        except:
+            if n > 0:
+                pass
+            else:
+                raise #raise an exception if it's the last template in the list
