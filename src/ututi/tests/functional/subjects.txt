@@ -17,9 +17,8 @@ The link of the subject leads to its home page.
     >>> browser.getLink('Matematinė analizė').click()
     >>> browser.url
     'http://localhost/subject/vu/mat_analize'
-    >>> browser.printQuery('//h2/text()')
+    >>> browser.printQuery('//h2/span/text()')
     Subject files
-    Pages
 
 From there we can edit the subject.
 
@@ -52,9 +51,8 @@ We can add a subject at the url /subject/add
     >>> browser.getControl(name='location-1').value = 'vu'
     >>> browser.getControl('Title').value = 'Test subject'
     >>> browser.getControl('Save').click()
-    >>> browser.printQuery('//h2/text()')
+    >>> browser.printQuery('//h2/span/text()')
     Subject files
-    Pages
     >>> print browser.url
     http://localhost/subject/vu/test_subject
 

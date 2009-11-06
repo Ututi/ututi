@@ -56,7 +56,7 @@ class BasefilesController(BaseController):
         target.files.append(new_file)
         meta.Session.commit()
 
-        return render_mako_def('/sections/files.mako','file', file=new_file)
+        return render_mako_def('/sections/files.mako','file', file=new_file, new_file=True)
 
 
 class FilesController(BasefilesController):

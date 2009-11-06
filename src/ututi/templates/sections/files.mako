@@ -188,9 +188,13 @@ $(document).ready(function(){
 </script>
 </%def>
 
-<%def name="file(file)">
+<%def name="file(file, new_file=False)">
             <li class="file">
-              ${h.image('/images/details/icon_drag_file.png', alt='file icon', class_='drag-target')|n}
+              %if new_file:
+                ${h.image('/images/details/icon_drag_file_new.png', alt='file icon', class_='drag-target')|n}
+              %else:
+                ${h.image('/images/details/icon_drag_file.png', alt='file icon', class_='drag-target')|n}
+              %endif
               ${h.link_to(file.title, file.url())}
               <span class="size">(${h.file_size(file.size)})</span>
               <span class="date">${h.fmt_dt(file.created_on)}</span>

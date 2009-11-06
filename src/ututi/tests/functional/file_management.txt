@@ -12,7 +12,7 @@ File upload:
     ...                upload_files=[("attachment", "text;for you.txt", "Test")])
     >>> print dedent(res.body)
     <li class="file">
-      <img alt="file icon" class="drag-target" src="/images/details/icon_drag_file.png" />
+      <img alt="file icon" class="drag-target" src="/images/details/icon_drag_file_new.png" />
       <a href="/subject/vu/mat_analize/file/3/get">text;for you.txt</a>
       <span class="size">(4.0 b)</span>
       <span class="date">...</span>

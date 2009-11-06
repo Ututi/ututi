@@ -48,7 +48,7 @@ class FileViewMixin(object):
 
     def _upload_file(self, obj):
         f = self._upload_file_basic(obj)
-        return render_mako_def('/sections/files.mako','file', file=f)
+        return render_mako_def('/sections/files.mako','file', file=f, new_file=True)
 
     def _upload_file_short(self, obj):
         f = self._upload_file_basic(obj)
