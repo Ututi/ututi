@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-11-06 08:44+0200\n"
+"PO-Revision-Date: 2009-11-06 13:03+0200\n"
 "Last-Translator: Jaroslav Šatkevič <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -1323,38 +1323,31 @@ msgid_plural "<em>%(count)s</em> posts"
 msgstr[0] "<em>%(count)s</em> post"
 msgstr[1] "<em>%(count)s</em> posty"
 
-msgid "Recently seen"
-msgstr "Ostatnio widziany"
+msgid "email your group"
+msgstr ""
 
-msgid "All group members"
-msgstr "Wszyscy członkowie grupy"
-
-msgid "Group forum"
-msgstr "Forum grupy"
-
-msgid "Group messages"
-msgstr "Wiadomości grupy"
-
-msgid "The groups's forum is empty."
-msgstr "Forum grupy jest puste."
-
-msgid "Group files"
-msgstr "Pliki grupy"
-
-msgid "Fast file upload"
-msgstr "Szybkie ładowanie pliku"
-
-msgid "There are no files yet."
-msgstr "Tutaj jeszcze nie ma plików."
-
-msgid "All group files"
-msgstr "Wszystkie pliki grupy"
+msgid "Write an email to the group's forum - accessible by all your groupmates."
+msgstr ""
 
 msgid "All watched subjects"
 msgstr "Wszystkie obserwowane przedmioty"
 
 msgid "Your group is not watching any subjects!"
 msgstr "Twoja grupa nie śledzi żadnego przedmiotu!"
+
+msgid "choose subjects"
+msgstr ""
+
+msgid ""
+"Watching subjects means your group will be informed of all the changes "
+"that happen in these subjects: new files, new pages etc."
+msgstr ""
+
+msgid "invite groupmates"
+msgstr ""
+
+msgid "Invite your groupmates to use Ututi with you."
+msgstr ""
 
 msgid "Group information"
 msgstr "O grupie"
@@ -1379,12 +1372,6 @@ msgstr "Wyślij  e-mail"
 
 msgid "Edit group settings"
 msgstr "Zmień ustawienia grupy"
-
-msgid "Latest changes"
-msgstr "Ostatnie zmiany"
-
-msgid "All changes"
-msgstr "Wszystkie zmiany"
 
 msgid "Latest groups"
 msgstr "Najnowsze grupy"
@@ -1439,6 +1426,12 @@ msgstr ""
 msgid "Delete subject"
 msgstr "Usuń przedmiot"
 
+msgid "upload a file to.."
+msgstr ""
+
+msgid "Quickly upload files to your groups and subjects."
+msgstr ""
+
 msgid "More subjects"
 msgstr "Więcej przedmiotów"
 
@@ -1451,12 +1444,6 @@ msgid ""
 msgstr ""
 "Dodanie przedmiotu do obserwowanych skutkuje otrzymywaniem powiadomień o "
 "zmianach w tym przedmiocie."
-
-msgid "upload a file to.."
-msgstr ""
-
-msgid "Quickly upload files to your groups and subjects."
-msgstr ""
 
 msgid "recommend Ututi to your friends"
 msgstr ""

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-11-06 08:51+0200\n"
+"PO-Revision-Date: 2009-11-06 14:05+0200\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -766,13 +766,18 @@ msgstr "Sveiki!"
 msgid ""
 "%(user_name)s has been using Ututi - the portal for students - for some "
 "time now and is recommending you to try it."
-msgstr "%(user_name)s jau kurį laiką naudojasi Ututi - portalu studentams - ir siūlo tau jį išbandyti."
+msgstr ""
+"%(user_name)s jau kurį laiką naudojasi Ututi - portalu studentams - ir "
+"siūlo tau jį išbandyti."
 
 msgid ""
 "Ututi is a system for students that encourages collaboration and sharing "
 "of study materials. We provide tools that make storing lecture notes, "
 "sharing files and communicating with your class mates much, much easier."
-msgstr "Ututi yra sistema, skirta studentams - ji skatina bendradarbiauti kuriant ir dalinantis studijų medžiaga. Čia rasi įrankius, kurie leidžia lengvai kaupti paskaitų konspektus, dalintis failais ir bendrauti su grupiokais."
+msgstr ""
+"Ututi yra sistema, skirta studentams - ji skatina bendradarbiauti kuriant"
+" ir dalinantis studijų medžiaga. Čia rasi įrankius, kurie leidžia lengvai"
+" kaupti paskaitų konspektus, dalintis failais ir bendrauti su grupiokais."
 
 #, python-format
 msgid ""
@@ -1351,32 +1356,11 @@ msgstr[0] "<em>%(count)s</em> pranešimas"
 msgstr[1] "<em>%(count)s</em> pranešimai"
 msgstr[2] "<em>%(count)s</em> pranešimų"
 
-msgid "Recently seen"
-msgstr "Neseniai matyti"
+msgid "email your group"
+msgstr "rašyti laišką grupei"
 
-msgid "All group members"
-msgstr "Visi grupės nariai"
-
-msgid "Group forum"
-msgstr "Grupės paštas"
-
-msgid "Group messages"
-msgstr "Grupės paštas"
-
-msgid "The groups's forum is empty."
-msgstr "Grupės pašto dėžutė tuščia."
-
-msgid "Group files"
-msgstr "Grupės failai"
-
-msgid "Fast file upload"
-msgstr "Greitas failų įkėlimas"
-
-msgid "There are no files yet."
-msgstr "Failų dar nėra."
-
-msgid "All group files"
-msgstr "Visi grupės failai"
+msgid "Write an email to the group's forum - accessible by all your groupmates."
+msgstr "Parašyk laišką į grupės forumą, kurį skaito visi tavo grupiokai."
 
 msgid "All watched subjects"
 msgstr "Visi stebimi dalykai"
@@ -1385,6 +1369,20 @@ msgid "Your group is not watching any subjects!"
 msgstr ""
 "Raskite dalykus, kuriuos studijuojate ir pridėkite prie grupės stebimų "
 "dalykų sąrašo."
+
+msgid "choose subjects"
+msgstr "pasirinkti dalykus"
+
+msgid ""
+"Watching subjects means your group will be informed of all the changes "
+"that happen in these subjects: new files, new pages etc."
+msgstr "Visi grupės nariai gaus pranešimus apie įvykius stebimuose dalykuose: naujus failus, puslapius ir t.t."
+
+msgid "invite groupmates"
+msgstr "pakviesti grupiokus"
+
+msgid "Invite your groupmates to use Ututi with you."
+msgstr "Pakviesk grupiokus į Ututi!"
 
 msgid "Group information"
 msgstr "Informacija apie grupę"
@@ -1410,12 +1408,6 @@ msgstr "Gauti el. laiškus"
 
 msgid "Edit group settings"
 msgstr "Keisti grupės nustatymus"
-
-msgid "Latest changes"
-msgstr "Paskutiniai pasikeitimai"
-
-msgid "All changes"
-msgstr "Visi pasikeitimai"
 
 msgid "Latest groups"
 msgstr "Naujausios grupės"
@@ -1473,6 +1465,12 @@ msgstr ""
 msgid "Delete subject"
 msgstr "Ištrinti dalyką"
 
+msgid "upload a file to.."
+msgstr "įkelti failą į.."
+
+msgid "Quickly upload files to your groups and subjects."
+msgstr "Greitas failų įkėliamas į grupes ir dalykus."
+
 msgid "More subjects"
 msgstr "Daugiau dalykų"
 
@@ -1485,12 +1483,6 @@ msgid ""
 msgstr ""
 "Prisidėkite studijuojamus dalykus prie stebimų dalykų sąrašo ir gaukite "
 "pranešimus apie pasiketimus šiuose dalykuose."
-
-msgid "upload a file to.."
-msgstr "įkelti failą į.."
-
-msgid "Quickly upload files to your groups and subjects."
-msgstr "Greitas failų įkėliamas į grupes ir dalykus."
 
 msgid "recommend Ututi to your friends"
 msgstr "rekomenduok Ututi draugams"

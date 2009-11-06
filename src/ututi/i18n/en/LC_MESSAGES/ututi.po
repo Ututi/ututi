@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-11-06 08:44+0200\n"
+"PO-Revision-Date: 2009-11-06 13:03+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -1278,37 +1278,30 @@ msgid_plural "<em>%(count)s</em> posts"
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "Recently seen"
+msgid "email your group"
 msgstr ""
 
-msgid "All group members"
-msgstr ""
-
-msgid "Group forum"
-msgstr ""
-
-msgid "Group messages"
-msgstr ""
-
-msgid "The groups's forum is empty."
-msgstr ""
-
-msgid "Group files"
-msgstr ""
-
-msgid "Fast file upload"
-msgstr ""
-
-msgid "There are no files yet."
-msgstr ""
-
-msgid "All group files"
+msgid "Write an email to the group's forum - accessible by all your groupmates."
 msgstr ""
 
 msgid "All watched subjects"
 msgstr ""
 
 msgid "Your group is not watching any subjects!"
+msgstr ""
+
+msgid "choose subjects"
+msgstr ""
+
+msgid ""
+"Watching subjects means your group will be informed of all the changes "
+"that happen in these subjects: new files, new pages etc."
+msgstr ""
+
+msgid "invite groupmates"
+msgstr ""
+
+msgid "Invite your groupmates to use Ututi with you."
 msgstr ""
 
 msgid "Group information"
@@ -1333,12 +1326,6 @@ msgid "Get email"
 msgstr ""
 
 msgid "Edit group settings"
-msgstr ""
-
-msgid "Latest changes"
-msgstr ""
-
-msgid "All changes"
 msgstr ""
 
 msgid "Latest groups"
@@ -1392,6 +1379,12 @@ msgstr ""
 msgid "Delete subject"
 msgstr ""
 
+msgid "upload a file to.."
+msgstr ""
+
+msgid "Quickly upload files to your groups and subjects."
+msgstr ""
+
 msgid "More subjects"
 msgstr ""
 
@@ -1401,12 +1394,6 @@ msgstr ""
 msgid ""
 "Add watched subjects to your watched subjects' list and receive "
 "notifications about changes in these subjects"
-msgstr ""
-
-msgid "upload a file to.."
-msgstr ""
-
-msgid "Quickly upload files to your groups and subjects."
 msgstr ""
 
 msgid "recommend Ututi to your friends"
