@@ -250,12 +250,14 @@ $(document).ready(function(){
            cls_container = 'show'
     %>
     <h2 class="${cls_head}">
-      %if title is None:
+      <span class="cont">
+        %if title is None:
         ${h.ellipsis(obj.title, 80)}
-      %else:
+        %else:
         ${h.ellipsis(title, 80)}
-      %endif
-      <span class="small">(${ungettext("%(count)s file", "%(count)s files", obj.file_count) % dict(count = obj.file_count)})</span>
+        %endif
+        <span class="small">(${ungettext("%(count)s file", "%(count)s files", obj.file_count) % dict(count = obj.file_count)})</span>
+      </span>
     </h2>
     <div class="container ${cls_container}">
       <input type="hidden" id="file_upload_url-${section_id}"

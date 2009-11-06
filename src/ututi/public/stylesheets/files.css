@@ -15,14 +15,14 @@ div.section h2.click {
 }
 
 /* expanding section headings  */
-.click2show h2.click {
-  padding-left: 16px;
-  background: white url("../images/details/arrow_expand_right.png") left center no-repeat;
+.click2show h2.click .cont {
+  padding-right: 15px;
+  background: white url("../images/details/arrow_expand_right.png") right center no-repeat;
 }
 
-.click2show.open h2.click {
-  padding-left: 16px;
-  background: white url("../images/details/arrow_expand_down.png") left center no-repeat;
+.click2show.open h2.click .cont {
+  padding-right: 15px;
+  background: white url("../images/details/arrow_expand_down.png") right center no-repeat;
 }
 
 
