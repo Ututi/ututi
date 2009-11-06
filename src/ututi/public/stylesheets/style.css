@@ -886,6 +886,12 @@ a.small-link:hover {
 /* end debugging helpers */
 
 /* group blocks */
+#group_info_portlet .structured_info h4 {
+  font-size: 18px;
+  font-weight: normal;
+  color: #4d4d4d;
+}
+
 #group_info_portlet .description {
   border-top: 1px solid #ded8d8;
   padding-top: 5px;
@@ -896,7 +902,8 @@ a.small-link:hover {
 
 #group_info_portlet #group-logo {
   float: left;
-  margin-right: 5px;
+  margin-right: 10px;
+  margin-bottom: 5px;
 }
 
 #group_info_portlet .structured_info span {
@@ -905,6 +912,16 @@ a.small-link:hover {
 
 #group_changes_portlet table.group-changes {
   color: #808080;
+}
+
+#group_info_portlet span.school-link {
+  font-size: 16px;
+}
+
+#group_info_portlet span.school-link a {
+  padding-right: 14px;
+  background: url("../images/details/link_arrow.png") right center no-repeat;
+  text-transform: uppercase;
 }
 
 #group_changes_portlet table.group-changes td.change-category {
