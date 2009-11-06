@@ -216,7 +216,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
     @ActionProtector("user")
     def create_folder(self, subject):
         self._create_folder(subject)
-        redirect_to(request.referrer)
+        redirect_to(subject.url())
 
     @subject_action
     @ActionProtector("user")

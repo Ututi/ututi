@@ -1,7 +1,7 @@
-<h1>${subject}</h1>
+<h3>${subject}</h3>
 
 %for section in sections:
-<h2>${section['title']}</h2>
+<h4>${section['title']}</h4>
 
 <ul>
   %for event in section['events']:

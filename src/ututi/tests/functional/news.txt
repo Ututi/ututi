@@ -132,6 +132,10 @@ Now let's upload a couple of files:
     ...                params={'folder': ''},
     ...                upload_files=[("attachment", "f2.txt", "Test")])
 
+    >>> browser.open('http://localhost/subject/vu/mat_analize')
+    >>> browser.getControl(name='folder').value = 'A folder'
+    >>> browser.getControl('create').click()
+
     >>> setEventTime(datetime.datetime(2009, 10, 9, 10, 15))
     >>> browser.open('http://localhost/news/daily?date=2009-10-10')
 

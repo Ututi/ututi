@@ -47,6 +47,9 @@ class Event(object):
         else:
             return self.created.strftime("%Y-%m-%d")
 
+    def isEmptyFile(object):
+        return False
+
     def render(self):
         raise NotImplementedError()
 
@@ -100,6 +103,9 @@ class FileUploadedEvent(Event):
 
     Has an attribute `file' pointing to the file that was uploaded.
     """
+
+    def isEmptyFile(self):
+        return self.file.isNullFile()
 
     def text_news(self):
         return _('File %(file_title)s (%(file_url)s) was uploaded.') % {

@@ -127,7 +127,8 @@ class NewsController(BaseController):
             user = User.get_byid(uid)
             events = [ev for ev in events
                       if (ev.user.id != uid and
-                          ev.context not in user.ignored_subjects)]
+                          ev.context not in user.ignored_subjects
+                          and not ev.isEmptyFile())]
 
             if not events:
                 continue
