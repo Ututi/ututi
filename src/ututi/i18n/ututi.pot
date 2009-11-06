@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2009-11-03 13:08+0200\n"
+"POT-Creation-Date: 2009-11-06 04:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -227,10 +227,12 @@ msgid_plural "%(count)d invitations sent."
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "No invitations were sent."
+#, python-format
+msgid "Already using ututi: %s."
 msgstr ""
 
-msgid "Some of the emails entered seem to be invalid."
+#, python-format
+msgid "Invalid emails: %s"
 msgstr ""
 
 #, python-format
@@ -718,6 +720,9 @@ msgstr ""
 msgid ""
 "If You would like to join Ututi now, please follow this <a "
 "href=\"%(link)s\">link</a>."
+msgstr ""
+
+msgid "Looking forward to meeting You,<br/>The Ututi team"
 msgstr ""
 
 msgid "If You would like to join Ututi now, please follow this link:"
@@ -1418,9 +1423,6 @@ msgid "create new subject"
 msgstr ""
 
 msgid "Ututi news"
-msgstr ""
-
-msgid "blog_link"
 msgstr ""
 
 msgid "More news"

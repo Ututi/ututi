@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-11-03 13:08+0200\n"
+"PO-Revision-Date: 2009-11-06 04:55+0200\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -246,11 +246,13 @@ msgstr[0] "Išsiųstas %(count)d pakvietimas."
 msgstr[1] "Išsiųsti %(count)d pakvietimai."
 msgstr[2] "Išsiųsta %(count)d pakvietimų."
 
-msgid "No invitations were sent."
-msgstr "Pakvietimai neišsiųsti."
+#, python-format
+msgid "Already using ututi: %s."
+msgstr "%s jau naudojasi Ututi."
 
-msgid "Some of the emails entered seem to be invalid."
-msgstr "Kai kurie el. pašto adresai netinkami."
+#, python-format
+msgid "Invalid emails: %s"
+msgstr "%s yra netinkamas el. pašto adresas."
 
 #, python-format
 msgid "Ututi news: %(changes)s"
@@ -735,8 +737,8 @@ msgid ""
 "subscription settings in your <a href=\"%(url)s\">watched subject "
 "page</a>."
 msgstr ""
-"Jeigu nebenorite gauti šių laiškų, galite pakeisti nustatymus paspaudę <a"
-" href=\"%(url)s\">watched subject page</a>."
+"Jeigu nebenorite gauti šių laiškų, galite pakeisti nustatymus savo <a "
+"href=\"%(url)s\">stebimų dalykų puslapyje</a>."
 
 #, python-format
 msgid ""
@@ -782,6 +784,11 @@ msgid ""
 "If You would like to join Ututi now, please follow this <a "
 "href=\"%(link)s\">link</a>."
 msgstr "Jei norėtum išbandyti Ututi, spausk <a href=\"%(link)s\">čia</a>."
+
+msgid "Looking forward to meeting You,<br/>The Ututi team"
+msgstr ""
+"Nekantriai laukiame kol jūs pradėsite naudotis mųsų sistema,<br />Ututi "
+"komanda"
 
 msgid "If You would like to join Ututi now, please follow this link:"
 msgstr "Jeigu norėtum išbandyti Ututi, mus rasi šiuo adresu:"
@@ -1522,9 +1529,6 @@ msgstr "kurti naują dalyką"
 
 msgid "Ututi news"
 msgstr "Ututi naujienos"
-
-msgid "blog_link"
-msgstr "blogo_linkas"
 
 msgid "More news"
 msgstr "Daugiau naujienų"

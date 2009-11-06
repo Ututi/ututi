@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-11-03 13:08+0200\n"
+"PO-Revision-Date: 2009-11-06 04:55+0200\n"
 "Last-Translator: Jaroslav Šatkevič <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -239,10 +239,12 @@ msgid_plural "%(count)d invitations sent."
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "No invitations were sent."
+#, python-format
+msgid "Already using ututi: %s."
 msgstr ""
 
-msgid "Some of the emails entered seem to be invalid."
+#, python-format
+msgid "Invalid emails: %s"
 msgstr ""
 
 #, python-format
@@ -763,6 +765,9 @@ msgid ""
 "href=\"%(link)s\">link</a>."
 msgstr ""
 
+msgid "Looking forward to meeting You,<br/>The Ututi team"
+msgstr ""
+
 msgid "If You would like to join Ututi now, please follow this link:"
 msgstr ""
 
@@ -1033,7 +1038,9 @@ msgid "Personal logo"
 msgstr "Twoje logo"
 
 msgid "These are the files from the the subjects you or your group are watching."
-msgstr "Tutaj są zamieszczone pliki z przedmotów które obserwujesz ty i twoja grupa."
+msgstr ""
+"Tutaj są zamieszczone pliki z przedmotów które obserwujesz ty i twoja "
+"grupa."
 
 msgid "Everywhere"
 msgstr "Wszędzie"
@@ -1476,9 +1483,6 @@ msgid "create new subject"
 msgstr ""
 
 msgid "Ututi news"
-msgstr ""
-
-msgid "blog_link"
 msgstr ""
 
 msgid "More news"
