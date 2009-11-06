@@ -4,15 +4,6 @@
 <%namespace file="/search/index.mako" import="search_results"/>
 <%namespace file="/sections/content_snippets.mako" import="item_tags, tag_link"/>
 <%namespace file="/group/add.mako" import="path_steps"/>
-<%namespace file="/portlets/group.mako" import="*"/>
-
-<%def name="portlets()">
-<div id="sidebar">
-  ${group_info_portlet()}
-  ${group_changes_portlet()}
-</div>
-</%def>
-
 
 <%def name="head_tags()">
 ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}

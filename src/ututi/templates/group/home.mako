@@ -1,5 +1,5 @@
 <%inherit file="/base.mako" />
-<%namespace file="/portlets/group.mako" import="*"/>
+<%namespace file="/portlets/sections.mako" import="*"/>
 
 <%def name="title()">
   ${c.group.title}
@@ -11,13 +11,7 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
 </%def>
 
 <%def name="portlets()">
-<div id="sidebar">
-  ${group_info_portlet()}
-  ${group_forum_portlet()}
-  ${group_files_portlet()}
-  ${group_watched_subjects_portlet()}
-  ${group_members_portlet()}
-</div>
+${group_sidebar()}
 </%def>
 
 <ul id="event_list">

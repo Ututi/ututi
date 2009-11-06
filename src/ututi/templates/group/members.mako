@@ -1,14 +1,4 @@
 <%inherit file="/group/home.mako" />
-<%namespace file="/portlets/group.mako" import="*"/>
-
-<%def name="portlets()">
-<div id="sidebar">
-  ${group_info_portlet()}
-  ${group_changes_portlet()}
-</div>
-</%def>
-
-
 
 <%def name="title()">
   ${c.group.title}

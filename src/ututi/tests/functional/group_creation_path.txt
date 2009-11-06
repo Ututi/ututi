@@ -14,12 +14,11 @@ We can add a group at the url /groups/add.
     >>> browser.getControl('Save').click()
 
 After creating the group we should be redirected to the subject selection view:
-
     >>> browser.printQuery('//h2/text()')
     Watched subjects
     Recommended subjects
 
-    >>> browser.getLink('Watch').url
+    >>> browser.getLink('Watch', index=1).url
     'http://localhost/group/test/watch_subject?subject_location_id=1&subject_id=mat_analize'
 
 We can create a new subject without leaving the subject form:
