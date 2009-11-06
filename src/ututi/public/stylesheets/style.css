@@ -7,7 +7,7 @@ html, body {
 
 body {
   font-size: 14px;
-  font-family: Arial,Helvetica,sans-serif;
+  font-family: Tahoma,Arial,Helvetica,sans-serif;
   color: #1a1a1a;
   background: white url("../images/block_header_background.png") center 5px repeat-x;
   padding-bottom: 5px;
@@ -630,7 +630,7 @@ a.btn-large span {
   margin: 0;
   color: black;
   font-weight: normal;
-  font-family: Arial,Helvetica,sans-serif;
+  font-family: Tahoma,Arial,Helvetica,sans-serif;
   font-size: 16px;
   display: inline-block;
 }
@@ -1505,7 +1505,7 @@ a.btn span, span.btn input {
   _padding-left:0px;
   _display:block;
   _top:0;
-  font-family: Arial,Helvetica,sans-serif;
+  font-family: Tahoma,Arial,Helvetica,sans-serif;
   font-size: 12px;
 }
 
