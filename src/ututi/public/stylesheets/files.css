@@ -25,7 +25,10 @@ div.section h2.click {
   background: white url("../images/details/arrow_expand_down.png") right center no-repeat;
 }
 
-
+.section h2 .comment {
+  font-size: 12px;
+  font-weight: normal;
+}
 /* end expanding section headings */
 
 /* files section controls */
