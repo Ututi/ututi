@@ -7,7 +7,7 @@
   </div>
   <div class="content" id="${id + '_content'}">
     ${caller.body()}
-    <br style="clear: both; height: 1px;"/>
+    <br style="clear: both; line-height: 0; display: block;"/>
   </div>
 </div>
 </%def>
