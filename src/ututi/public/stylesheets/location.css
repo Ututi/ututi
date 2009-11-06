@@ -16,6 +16,7 @@
 
 #faculties-list tr td {
   padding-left: 10px;
+  vertical-align: top;
 }
 
 #page-content .search-controls.loading {

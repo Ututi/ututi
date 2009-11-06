@@ -23,7 +23,7 @@ ${h.stylesheet_link('/stylesheets/location.css')|n}
 <%
    children = c.location.children
    l = len(children)
-   children = [children[l/2:], children[:l/2]]
+   children = [children[:l/2], children[l/2:]]
 %>
 <table id="faculties-list">
   <tr>

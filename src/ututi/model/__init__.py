@@ -104,7 +104,7 @@ def setup_orm(engine):
                inherits=Tag,
                polymorphic_on=tags_table.c.tag_type,
                polymorphic_identity='location',
-               properties = {'children': relation(LocationTag, backref=backref('parent', remote_side=tags_table.c.id))})
+               properties = {'children': relation(LocationTag, order_by=LocationTag.title.asc(), backref=backref('parent', remote_side=tags_table.c.id))})
 
     orm.mapper(SimpleTag,
                inherits=tag_mapper,

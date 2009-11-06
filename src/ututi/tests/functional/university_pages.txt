@@ -26,8 +26,8 @@ We should be able to click on a link that leads us to the page of the faculty.
     Search
 
     >>> browser.printQuery("//ul[@class='u-list']/li/a/text()")
-    Geografijos fakultetas
     Ekonomikos fakultetas
+    Geografijos fakultetas
 
 There is a search form on this page and we should be able to use it.
     >>> browser.getControl(name='text').value = 'prof.'
