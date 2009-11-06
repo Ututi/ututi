@@ -1,10 +1,4 @@
 <%inherit file="/profile/base.mako" />
-<%namespace file="/portlets/sections.mako" import="*"/>
-
-<%def name="portlets()">
-${user_sidebar()}
-</%def>
-
 
 <%def name="head_tags()">
 ${parent.head_tags()}
