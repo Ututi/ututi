@@ -24,7 +24,7 @@
               $(list).append(iframe['progress_indicator']);
               iframe['progress_indicator'].text(file);
               iframe['progress_ticker'] = $(document.createElement('span'));
-              iframe['progress_ticker'].appendTo(iframe['progress_indicator']).text('Uploading');
+              iframe['progress_ticker'].appendTo(iframe['progress_indicator']).text(' Uploading');
               var progress_ticker = iframe['progress_ticker'];
               var interval;
 
