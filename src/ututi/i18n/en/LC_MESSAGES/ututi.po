@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-11-06 04:55+0200\n"
+"PO-Revision-Date: 2009-11-06 08:44+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -439,58 +439,6 @@ msgstr ""
 msgid "go find something else"
 msgstr ""
 
-#, python-format
-msgid "%(count)s subject"
-msgid_plural "%(count)s subjects"
-msgstr[0] ""
-msgstr[1] ""
-
-#, python-format
-msgid "%(count)s group"
-msgid_plural "%(count)s groups"
-msgstr[0] ""
-msgstr[1] ""
-
-#, python-format
-msgid "%(count)s file"
-msgid_plural "%(count)s files"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "Sort  by: "
-msgstr ""
-
-msgid "More universities"
-msgstr ""
-
-msgid "UTUTI - student information online"
-msgstr ""
-
-msgid "About ututi"
-msgstr ""
-
-msgid "ututi_video_id"
-msgstr ""
-
-msgid "What can You find here?"
-msgstr ""
-
-#, python-format
-msgid ""
-"Group mailing lists, <a href=\"%(link)s\" title=\"Subject "
-"list\">subjects</a> files and lecture notes."
-msgstr ""
-
-msgid "What can you do here?"
-msgstr ""
-
-#, python-format
-msgid ""
-"Share <a href=\"%(subjects)s\" title=\"Subject list\">study materials</a>"
-"          create <a href=\"%(groups)s\" title=\"Group list\">academic "
-"groups</a>          and communicate with groupmates."
-msgstr ""
-
 msgid "student information online"
 msgstr ""
 
@@ -570,10 +518,16 @@ msgstr ""
 msgid "Why should I join?"
 msgstr ""
 
+msgid "What can You find here?"
+msgstr ""
+
 msgid ""
 "Group <em>forums</em>, subject <em>wikis</em>, <em>files</em>, lecture "
 "notes and <em>answers</em> to       questions that matter for your "
 "studies."
+msgstr ""
+
+msgid "What can you do here?"
 msgstr ""
 
 msgid ""
@@ -615,6 +569,52 @@ msgid "Subjects import"
 msgstr ""
 
 msgid "Ututi users:"
+msgstr ""
+
+#, python-format
+msgid "%(count)s subject"
+msgid_plural "%(count)s subjects"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(count)s group"
+msgid_plural "%(count)s groups"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(count)s file"
+msgid_plural "%(count)s files"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Sort  by: "
+msgstr ""
+
+msgid "More universities"
+msgstr ""
+
+msgid "UTUTI - student information online"
+msgstr ""
+
+msgid "About ututi"
+msgstr ""
+
+msgid "ututi_video_id"
+msgstr ""
+
+#, python-format
+msgid ""
+"Group mailing lists, <a href=\"%(link)s\" title=\"Subject "
+"list\">subjects</a> files and lecture notes."
+msgstr ""
+
+#, python-format
+msgid ""
+"Share <a href=\"%(subjects)s\" title=\"Subject list\">study materials</a>"
+"          create <a href=\"%(groups)s\" title=\"Group list\">academic "
+"groups</a>          and communicate with groupmates."
 msgstr ""
 
 msgid "New blog snippet:"
@@ -1323,16 +1323,16 @@ msgid_plural "%(count)s members"
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "Edit group settings"
-msgstr ""
-
-msgid "My group settings"
+msgid "more settings"
 msgstr ""
 
 msgid "Do not get email"
 msgstr ""
 
 msgid "Get email"
+msgstr ""
+
+msgid "Edit group settings"
 msgstr ""
 
 msgid "Latest changes"

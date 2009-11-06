@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-11-06 04:55+0200\n"
+"PO-Revision-Date: 2009-11-06 08:51+0200\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -466,67 +466,6 @@ msgstr "atgal"
 msgid "go find something else"
 msgstr "Prašome ieškoti ko nors kito."
 
-#, python-format
-msgid "%(count)s subject"
-msgid_plural "%(count)s subjects"
-msgstr[0] "%(count)s dalykas"
-msgstr[1] "%(count)s dalykai"
-msgstr[2] "%(count)s dalykų"
-
-#, python-format
-msgid "%(count)s group"
-msgid_plural "%(count)s groups"
-msgstr[0] "%(count)s grupė"
-msgstr[1] "%(count)s grupės"
-msgstr[2] "%(count)s grupių"
-
-#, python-format
-msgid "%(count)s file"
-msgid_plural "%(count)s files"
-msgstr[0] "%(count)s failas"
-msgstr[1] "%(count)s failai"
-msgstr[2] "%(count)s failų"
-
-msgid "Sort  by: "
-msgstr "Rūšiuoti pagal: "
-
-msgid "More universities"
-msgstr "Daugiau universitetų"
-
-msgid "UTUTI - student information online"
-msgstr "Ututi - studentų žinios tinkle"
-
-msgid "About ututi"
-msgstr "Apie ututi"
-
-msgid "ututi_video_id"
-msgstr "stV09QR0JIR1xZQVhbWltYU1NQ"
-
-msgid "What can You find here?"
-msgstr "Ką čia galima rasti?"
-
-#, python-format
-msgid ""
-"Group mailing lists, <a href=\"%(link)s\" title=\"Subject "
-"list\">subjects</a> files and lecture notes."
-msgstr ""
-"Grupių forumus, mokomus <a href=\"%(link)s\" title=\"Dalykų "
-"sąrašas\">dalykus</a> failus ir konspektus."
-
-msgid "What can you do here?"
-msgstr "Ką čia galima veikti?"
-
-#, python-format
-msgid ""
-"Share <a href=\"%(subjects)s\" title=\"Subject list\">study materials</a>"
-"          create <a href=\"%(groups)s\" title=\"Group list\">academic "
-"groups</a>          and communicate with groupmates."
-msgstr ""
-"Dalintis <a href=\"%(subjects)s\" title=\"Dalykų sąrašsa\">studijų "
-"medžiaga</a>, kurti <a href=\"%(groups)s\" title=\"Grupių "
-"sąrašas\">akademines grupes</a>\n"
-"ir bendrauti su grupiokais."
-
 msgid "student information online"
 msgstr "studentų žinios tinkle"
 
@@ -606,6 +545,9 @@ msgstr "ieškoti ko nors kito"
 msgid "Why should I join?"
 msgstr "Kodėl turėčiau jungtis?"
 
+msgid "What can You find here?"
+msgstr "Ką čia galima rasti?"
+
 msgid ""
 "Group <em>forums</em>, subject <em>wikis</em>, <em>files</em>, lecture "
 "notes and <em>answers</em> to       questions that matter for your "
@@ -613,6 +555,9 @@ msgid ""
 msgstr ""
 "Grupės <em>el. paštą</em>, dalykų <em>puslapius</em>, <em>failus</em>, "
 "paskaitų užrašus ir <em>atsakymus</em> į klausimus, kurie rūpi."
+
+msgid "What can you do here?"
+msgstr "Ką čia galima veikti?"
 
 msgid ""
 "Store <em>study materials</em> and pass them on for future generations, "
@@ -656,6 +601,61 @@ msgstr "Dalykų importavimas"
 
 msgid "Ututi users:"
 msgstr "Ututi naudotojai:"
+
+#, python-format
+msgid "%(count)s subject"
+msgid_plural "%(count)s subjects"
+msgstr[0] "%(count)s dalykas"
+msgstr[1] "%(count)s dalykai"
+msgstr[2] "%(count)s dalykų"
+
+#, python-format
+msgid "%(count)s group"
+msgid_plural "%(count)s groups"
+msgstr[0] "%(count)s grupė"
+msgstr[1] "%(count)s grupės"
+msgstr[2] "%(count)s grupių"
+
+#, python-format
+msgid "%(count)s file"
+msgid_plural "%(count)s files"
+msgstr[0] "%(count)s failas"
+msgstr[1] "%(count)s failai"
+msgstr[2] "%(count)s failų"
+
+msgid "Sort  by: "
+msgstr "Rūšiuoti pagal: "
+
+msgid "More universities"
+msgstr "Daugiau universitetų"
+
+msgid "UTUTI - student information online"
+msgstr "Ututi - studentų žinios tinkle"
+
+msgid "About ututi"
+msgstr "Apie ututi"
+
+msgid "ututi_video_id"
+msgstr "stV09QR0JIR1xZQVhbWltYU1NQ"
+
+#, python-format
+msgid ""
+"Group mailing lists, <a href=\"%(link)s\" title=\"Subject "
+"list\">subjects</a> files and lecture notes."
+msgstr ""
+"Grupių forumus, mokomus <a href=\"%(link)s\" title=\"Dalykų "
+"sąrašas\">dalykus</a> failus ir konspektus."
+
+#, python-format
+msgid ""
+"Share <a href=\"%(subjects)s\" title=\"Subject list\">study materials</a>"
+"          create <a href=\"%(groups)s\" title=\"Group list\">academic "
+"groups</a>          and communicate with groupmates."
+msgstr ""
+"Dalintis <a href=\"%(subjects)s\" title=\"Dalykų sąrašsa\">studijų "
+"medžiaga</a>, kurti <a href=\"%(groups)s\" title=\"Grupių "
+"sąrašas\">akademines grupes</a>\n"
+"ir bendrauti su grupiokais."
 
 msgid "New blog snippet:"
 msgstr "Nauja blogo ištrauka:"
@@ -766,18 +766,13 @@ msgstr "Sveiki!"
 msgid ""
 "%(user_name)s has been using Ututi - the portal for students - for some "
 "time now and is recommending you to try it."
-msgstr ""
-"%(user_name)s jau kurį laiką naudojasi Utiti - portalu studentams - ir "
-"siūlo tau jį išbandyti."
+msgstr "%(user_name)s jau kurį laiką naudojasi Ututi - portalu studentams - ir siūlo tau jį išbandyti."
 
 msgid ""
 "Ututi is a system for students that encourages collaboration and sharing "
 "of study materials. We provide tools that make storing lecture notes, "
 "sharing files and communicating with your class mates much, much easier."
-msgstr ""
-"Ututi yra sistema, skirta studentams - ji skatina bendradarbiauti kuriant"
-" ir dalintis studijų medžiaga. Čia rasi įrankius, kurie leidžia lengvai "
-"kaupti paskaitų konspektus, dalintis failais ir bendrauti su grupiokais."
+msgstr "Ututi yra sistema, skirta studentams - ji skatina bendradarbiauti kuriant ir dalinantis studijų medžiaga. Čia rasi įrankius, kurie leidžia lengvai kaupti paskaitų konspektus, dalintis failais ir bendrauti su grupiokais."
 
 #, python-format
 msgid ""
@@ -786,9 +781,7 @@ msgid ""
 msgstr "Jei norėtum išbandyti Ututi, spausk <a href=\"%(link)s\">čia</a>."
 
 msgid "Looking forward to meeting You,<br/>The Ututi team"
-msgstr ""
-"Nekantriai laukiame kol jūs pradėsite naudotis mųsų sistema,<br />Ututi "
-"komanda"
+msgstr "Nekantriai laukiame tavęs prisijungiant,<br />Ututi komanda"
 
 msgid "If You would like to join Ututi now, please follow this link:"
 msgstr "Jeigu norėtum išbandyti Ututi, mus rasi šiuo adresu:"
@@ -1406,17 +1399,17 @@ msgstr[0] "%(count)s narys"
 msgstr[1] "%(count)s nariai"
 msgstr[2] "%(count)s narių"
 
-msgid "Edit group settings"
-msgstr "Keisti grupės nustatymus"
-
-msgid "My group settings"
-msgstr "Mano grupės nustatymai"
+msgid "more settings"
+msgstr "daugiau nustatymų"
 
 msgid "Do not get email"
 msgstr "Negauti el. laiškų"
 
 msgid "Get email"
 msgstr "Gauti el. laiškus"
+
+msgid "Edit group settings"
+msgstr "Keisti grupės nustatymus"
 
 msgid "Latest changes"
 msgstr "Paskutiniai pasikeitimai"
