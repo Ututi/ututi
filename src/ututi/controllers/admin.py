@@ -6,6 +6,7 @@ import base64
 
 from sqlalchemy.sql.expression import desc
 from sqlalchemy.sql.expression import not_
+from sqlalchemy import func
 from magic import from_buffer
 from datetime import date
 
@@ -158,10 +159,17 @@ class AdminController(BaseController):
         for row in self._getReader():
             title, lecturer = row[:2]
             location_path = reversed(row[2:4])
-            tags = filter(bool, [tag.strip() for tag in row[-1].split(',')])
+            tags = filter(bool, [tag.strip() for tag in row[5].split(',')])
             description = row[-2]
             id = ''.join(Random().sample(string.ascii_lowercase, 8)) # use random id first
             location = LocationTag.get(location_path)
+
+            #do not import duplicates
+            existing = meta.Session.query(Subject).filter(Subject.location_id == location.id).filter(func.upper(Subject.title) == func.upper(title)).first()
+            if existing:
+                log.info('Subject exists: %s' % row)
+                continue
+
             title = title
             lecturer = lecturer
             subj = Subject('', title, location)
