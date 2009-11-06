@@ -149,7 +149,7 @@ of in your home page (at least for now):
           <img alt="Create your group, invite your classmates and use the mailing list, upload private group files" class="tooltip" src="/images/details/icon_question.png" />
         </span>
       </div>
-      <br style="clear: both; height: 1px;" />
+      <br style="clear: both; line-height: 0; display: block;" />
     </div>
 
 You can import more groups using the admin interface.

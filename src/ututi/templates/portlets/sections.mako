@@ -38,6 +38,12 @@
   %if not 'files' in exclude:
   ${quick_file_upload_portlet([c.group] + c.group.watched_subjects)}
   %endif
+  %if not 'forum' in exclude:
+  ${group_forum_post_portlet()}
+  %endif
+  %if not 'members' in exclude:
+  ${group_invite_member_portlet()}
+  %endif
   %if not 'subjects' in exclude:
   ${group_watched_subjects_portlet()}
   %endif

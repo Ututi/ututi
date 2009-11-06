@@ -67,10 +67,42 @@
     </ul>
     %endif
     <div class="footer">
-      <a ${h.trackEvent(c.group, 'subjects', 'portlet_footer')|n}
-         class="more"
-         href="${url(controller='group', action='subjects', id=group.group_id)}"
-         title="${_('All watched subjects')}">${_('All watched subjects')}</a>
+      <span>
+        ${h.button_to(_('choose subjects'), group.url(action='subjects'))}
+        ${h.image('/images/details/icon_question.png', alt=_('Watching subjects means your group will be informed of all the changes that happen in these subjects: new files, new pages etc.'), class_='tooltip')|n}
+      </span>
     </div>
   </%self:portlet>
+</%def>
+
+<%def name="group_forum_post_portlet(group=None)">
+  <%
+     if group is None:
+         group = c.group
+  %>
+  <%self:action_portlet id="forum_post_portlet">
+    <%def name="header()">
+    <a href="${url(controller='groupforum', action='new_thread', id=group.group_id)}">${_('email your group')}</a>
+    ${h.image('/images/details/icon_question.png',
+            alt=_("Write an email to the group's forum - accessible by all your groupmates."),
+             class_='tooltip', style='margin-top: 4px;')|n}
+
+    </%def>
+  </%self:action_portlet>
+</%def>
+
+<%def name="group_invite_member_portlet(group=None)">
+  <%
+     if group is None:
+         group = c.group
+  %>
+  <%self:action_portlet id="invite_member_portlet">
+    <%def name="header()">
+    <a href="${group.url(action='members')}">${_('invite groupmates')}</a>
+    ${h.image('/images/details/icon_question.png',
+            alt=_("Invite your groupmates to use Ututi with you."),
+             class_='tooltip', style='margin-top: 4px;')|n}
+
+    </%def>
+  </%self:action_portlet>
 </%def>
