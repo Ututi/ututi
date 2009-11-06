@@ -31,13 +31,13 @@ ${_('student information online')}
       <li class="bottom"><div><a href="${url(controller='group', action='add')}" title="${_('Create a new group')}">${_('New group')}</a></div></li>
     </ul>
   </div>
-  <div class="item">
+  <div class="item menuitem">
     <a href="${url(controller='forum', forum_id='community')}">${_("community")}</a>
   </div>
-  <div class="item">
+  <div class="item menuitem">
     <a href="${url(controller='profile', action='browse')}">${_("search")}</a>
   </div>
-  <div class="item">
+  <div class="item menuitem">
     <a href="${url(controller='profile', action='home')}" ${h.trackEvent(None, 'user_home', 'menu')|n}>${_("home")}</a>
   </div>
 
