@@ -136,6 +136,7 @@ h1, h2, h3, h4 {
 
 .comment {
   color: #808080;
+  font-size: 12px;
 }
 
 /* resetting default styles */
