@@ -6,7 +6,7 @@ html, body {
 }
 
 body {
-  font-size: 14px;
+  font-size: 13px;
   font-family: Tahoma,Arial,Helvetica,sans-serif;
   color: #1a1a1a;
   background: white url("../images/block_header_background.png") center 5px repeat-x;
@@ -267,11 +267,12 @@ ul.bullets_large li {
 
 #personal-box .fullname {
   font-weight: bold;
-  font-size: 1.2em;
-  color: black;
+  font-size: 1.1em;
+  color: #666666;
 }
 
 #personal-box .email {
+  font-size: 0.9em;
   color: #aa4400;
 }
 
@@ -378,7 +379,7 @@ ul.bullets_large li {
 .sidebar-block .content {
   padding: 10px 10px 5px;
   margin-bottom: 15px;
-  border: 2px solid #e5e5d3;
+  border: 1px solid #ded8d8;
 }
 
 .sidebar-block .content a {
@@ -454,6 +455,7 @@ div.action-portlet .content {
 
 div.action-portlet .content .header {
   font-size: 14px;
+  font-weight: bold;
   color: #d45500;
   height: 24px;
   line-height: 24px;
@@ -1351,7 +1353,7 @@ div.please-register {
 }
 
 .tip {
-  font-size: 0.8em;
+  font-size: 0.85em;
   color: #808080;
   padding-bottom: 5px;
 }
@@ -1722,26 +1724,26 @@ span.btn btn, span.btn input{
 #blog_portlet #entries {
   font-size: 14px;
   line-height: 14px;
-  height: 60px;
+  height: 40px;
   overflow: visible;
   padding: 0;
 }
 
 #blog_portlet #entries .teaser {
-  height: 60px;
+  height: 40px;
   width: 270px;
   margin: 0;
   margin-top:5px;
 }
 
 #blog_portlet .teaser a {
-  color: #333;
+  color: #d45500;
   font-size: 14px;
 }
 
 #blog_portlet .teaser a:hover {
   color: #d45500;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 #blog_portlet .footer {
