@@ -150,9 +150,6 @@
   <%self:action_portlet id="user_recommend_portlet" expanding="True">
     <%def name="header()">
     ${_('recommend Ututi to your friends')}
-    ${h.image('/images/details/icon_question.png',
-             alt=_("Send invitations to Ututi - help us grow!"),
-             class_='tooltip', style='margin-top: 5px;')|n}
     </%def>
 
     <div id="recommendation_status">
