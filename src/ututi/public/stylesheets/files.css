@@ -2,8 +2,10 @@
 div.section h2 {
   color: black;
   padding-bottom: 0.1em;
-  border-bottom: 2px solid #828282;
-  font-size: 1.3em;
+  border-bottom: 1px solid #ded8d8;
+  font-size: 1.2em;
+  font-weight: normal;
+  margin-top: 5px;
 }
 
 div.section h2.click {
@@ -89,7 +91,7 @@ li.file .date {
 }
 
 li.file .author {
-  font-size: 0.8em;
+  font-size: 0.85em;
 }
 
 li.file img.delete_button {
