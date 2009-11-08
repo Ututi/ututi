@@ -1,5 +1,12 @@
 <%inherit file="/portlets/base.mako"/>
 
+<%def name="portlet_file(file)">
+  <li>
+    <a href="${file.url()}" title="${file.title}">${h.ellipsis(file.title, 30)}</a>
+    <input class="delete_url" type="hidden" value="${file.url(action='delete')}" />
+  </li>
+</%def>
+
 <%def name="group_info_portlet(group=None)">
   <%
      if group is None:
