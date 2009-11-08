@@ -138,7 +138,7 @@ class HomeController(UniversityListMixin):
             if request.params.has_key('js'):
                 return render_mako_def('/anonymous_index/lt.mako','universities', unis=c.unis, ajax_url=url(controller='home', action='index'))
             c.slideshow = request.params.has_key('slide')
-            return render_lang('/anonymous_index.mako')
+            return render_lang('/anonymous_index/lt.mako')
 
     def banners(self):
         return render('/portlets/banners/%s.mako' % c.lang)
@@ -228,7 +228,7 @@ class HomeController(UniversityListMixin):
                 return render('/login.mako')
 
             self._get_unis()
-            return render_lang('/anonymous_index.mako')
+            return render_lang('/anonymous_index/lt.mako')
 
     def _pswrecovery_form(self):
         return render('home/recoveryform.mako')
