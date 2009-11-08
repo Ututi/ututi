@@ -1,4 +1,5 @@
 import logging
+import re
 
 from paste.fileapp import FileApp
 
@@ -84,6 +85,12 @@ class FilesController(BasefilesController):
         redirect_to(controller='admin', action='files')
 
     def get(self, id):
+        if isinstance(id, basestring):
+            id = re.search(r"\d*", id).group()
+
+        if not id:
+            abort(404)
+
         file = File.get(id)
         if file is None:
             abort(404)
