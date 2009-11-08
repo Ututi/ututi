@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-11-06 14:09+0200\n"
+"PO-Revision-Date: 2009-11-08 05:37+0200\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -656,6 +656,24 @@ msgstr ""
 "medžiaga</a>, kurti <a href=\"%(groups)s\" title=\"Grupių "
 "sąrašas\">akademines grupes</a>\n"
 "ir bendrauti su grupiokais."
+
+#, python-format
+msgid ""
+"Group mailing lists, <a href=\"%(link)s\" title=\"Subject "
+"list\">subject</a> wikis, files, lecture notes and answers to questions "
+"that matter for your studies."
+msgstr ""
+
+#, python-format
+msgid ""
+"Store <a href=\"%(subjects)s\" title=\"Subject list\">study materials</a>"
+"      and pass them on for future generations, create      <a "
+"href=\"%(groups)s\" title=\"Group list\">academic groups</a>      and "
+"communicate with groupmates."
+msgstr ""
+
+msgid "Ututi search"
+msgstr ""
 
 msgid "New blog snippet:"
 msgstr "Nauja blogo ištrauka:"
@@ -1488,9 +1506,6 @@ msgstr ""
 
 msgid "recommend Ututi to your friends"
 msgstr "rekomenduok Ututi draugams"
-
-msgid "Send invitations to Ututi - help us grow!"
-msgstr "Rekomenduok Ututi draugams - padėk mums augti!"
 
 msgid "Enter the emails of your groupmates, separated by commas or new lines."
 msgstr ""

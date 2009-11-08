@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2009-11-06 14:09+0200\n"
+"POT-Creation-Date: 2009-11-08 05:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -608,6 +608,24 @@ msgid ""
 "Share <a href=\"%(subjects)s\" title=\"Subject list\">study materials</a>"
 "          create <a href=\"%(groups)s\" title=\"Group list\">academic "
 "groups</a>          and communicate with groupmates."
+msgstr ""
+
+#, python-format
+msgid ""
+"Group mailing lists, <a href=\"%(link)s\" title=\"Subject list\">subject</a> "
+"wikis, files, lecture notes and answers to questions that matter for your "
+"studies."
+msgstr ""
+
+#, python-format
+msgid ""
+"Store <a href=\"%(subjects)s\" title=\"Subject list\">study materials</a>"
+"      and pass them on for future generations, create      <a "
+"href=\"%(groups)s\" title=\"Group list\">academic groups</a>      and "
+"communicate with groupmates."
+msgstr ""
+
+msgid "Ututi search"
 msgstr ""
 
 msgid "New blog snippet:"
@@ -1386,9 +1404,6 @@ msgid ""
 msgstr ""
 
 msgid "recommend Ututi to your friends"
-msgstr ""
-
-msgid "Send invitations to Ututi - help us grow!"
 msgstr ""
 
 msgid "Enter the emails of your groupmates, separated by commas or new lines."

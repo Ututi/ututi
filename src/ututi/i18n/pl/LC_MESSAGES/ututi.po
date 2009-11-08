@@ -8,11 +8,11 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-11-08 05:34+0200\n"
+"PO-Revision-Date: 2009-11-08 05:37+0200\n"
 "Last-Translator: Jaroslav Šatkevič <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
-"Plural-Forms:  nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%"
-"100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && "
+"(n%100<10 || n%100>=20) ? 1 : 2)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -239,6 +239,7 @@ msgid "%(count)d invitation sent."
 msgid_plural "%(count)d invitations sent."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #, python-format
 msgid "Already using ututi: %s."
@@ -257,12 +258,14 @@ msgid "%(file_count)d new file"
 msgid_plural "%(file_count)d new files"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #, python-format
 msgid "%(page_count)d new page"
 msgid_plural "%(page_count)d new pages"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #, python-format
 msgid "Ututi news: %(file_changes)s and %(page_changes)s"
@@ -340,24 +343,28 @@ msgid "%(num)s second ago"
 msgid_plural "%(num)s seconds ago"
 msgstr[0] "przed sekundą"
 msgstr[1] "%(num)s s. temu"
+msgstr[2] ""
 
 #, python-format
 msgid "%(num)s minute ago"
 msgid_plural "%(num)s minutes ago"
 msgstr[0] "przed minutą"
 msgstr[1] "%(num)s min. temu"
+msgstr[2] ""
 
 #, python-format
 msgid "%(num)s hour ago"
 msgid_plural "%(num)s hours ago"
 msgstr[0] "przed godziną"
 msgstr[1] "%(num)s h. temu "
+msgstr[2] ""
 
 #, python-format
 msgid "%(num)s day ago"
 msgid_plural "%(num)s days ago"
 msgstr[0] " wczoraj"
 msgstr[1] "%(num)s dni temu"
+msgstr[2] ""
 
 #, python-format
 msgid "Page %(page_title)s (%(page_url)s) was created."
@@ -604,18 +611,21 @@ msgid "%(count)s subject"
 msgid_plural "%(count)s subjects"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #, python-format
 msgid "%(count)s group"
 msgid_plural "%(count)s groups"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #, python-format
 msgid "%(count)s file"
 msgid_plural "%(count)s files"
 msgstr[0] " %(count)s dokument"
 msgstr[1] "%(count)s dokumentów"
+msgstr[2] ""
 
 msgid "Sort  by: "
 msgstr ""
@@ -643,6 +653,24 @@ msgid ""
 "Share <a href=\"%(subjects)s\" title=\"Subject list\">study materials</a>"
 "          create <a href=\"%(groups)s\" title=\"Group list\">academic "
 "groups</a>          and communicate with groupmates."
+msgstr ""
+
+#, python-format
+msgid ""
+"Group mailing lists, <a href=\"%(link)s\" title=\"Subject "
+"list\">subject</a> wikis, files, lecture notes and answers to questions "
+"that matter for your studies."
+msgstr ""
+
+#, python-format
+msgid ""
+"Store <a href=\"%(subjects)s\" title=\"Subject list\">study materials</a>"
+"      and pass them on for future generations, create      <a "
+"href=\"%(groups)s\" title=\"Group list\">academic groups</a>      and "
+"communicate with groupmates."
+msgstr ""
+
+msgid "Ututi search"
 msgstr ""
 
 msgid "New blog snippet:"
@@ -783,6 +811,7 @@ msgid "%(count)s reply"
 msgid_plural "%(count)s replies"
 msgstr[0] "%(count)s odpowiedź"
 msgstr[1] "%(count)s odzpowiedzi"
+msgstr[2] ""
 
 msgid "Back to the topic list"
 msgstr "Powrót do listy tematów"
@@ -1162,6 +1191,7 @@ msgid "found %(count)s result"
 msgid_plural "found %(count)s results"
 msgstr[0] "znaleziono %(count)s wynik"
 msgstr[1] "znaleziono %(count)s wyników"
+msgstr[2] ""
 
 msgid "No results found."
 msgstr "Brak wyników."
@@ -1311,18 +1341,21 @@ msgid "<em>%(count)s</em> active poster"
 msgid_plural "<em>%(count)s</em> active posters"
 msgstr[0] "<em>%(count)s</em> pisze często"
 msgstr[1] "<em>%(count)s</em>piszą często"
+msgstr[2] ""
 
 #, python-format
 msgid "<em>%(count)s</em> topic"
 msgid_plural "<em>%(count)s</em> topics"
 msgstr[0] "<em>%(count)s</em> temat"
 msgstr[1] "<em>%(count)s</em> tematy"
+msgstr[2] ""
 
 #, python-format
 msgid "<em>%(count)s</em> post"
 msgid_plural "<em>%(count)s</em> posts"
 msgstr[0] "<em>%(count)s</em> post"
 msgstr[1] "<em>%(count)s</em> posty"
+msgstr[2] ""
 
 msgid "email your group"
 msgstr ""
@@ -1361,6 +1394,7 @@ msgid "%(count)s member"
 msgid_plural "%(count)s members"
 msgstr[0] "%(count)s członek"
 msgstr[1] "%(count)s członków"
+msgstr[2] ""
 
 msgid "more settings"
 msgstr ""
@@ -1397,18 +1431,21 @@ msgid "%(count)s <em>subject</em>"
 msgid_plural "%(count)s <em>subjects</em>"
 msgstr[0] "%(count)s <em>przedmiot</em>"
 msgstr[1] "%(count)s <em>przedmioty</em>"
+msgstr[2] ""
 
 #, python-format
 msgid "%(count)s <em>group</em>"
 msgid_plural "%(count)s <em>groups</em>"
 msgstr[0] "%(count)s <em>grupa</em>"
 msgstr[1] "%(count)s <em>grupy</em>"
+msgstr[2] ""
 
 #, python-format
 msgid "%(count)s <em>file</em>"
 msgid_plural "%(count)s <em>files</em>"
 msgstr[0] "%(count)s <em>plik</em>"
 msgstr[1] "%(count)s <em>pliki</em>"
+msgstr[2] ""
 
 msgid "Subject information"
 msgstr "Informacje o przedmiocie"
@@ -1447,9 +1484,6 @@ msgstr ""
 "zmianach w tym przedmiocie."
 
 msgid "recommend Ututi to your friends"
-msgstr ""
-
-msgid "Send invitations to Ututi - help us grow!"
 msgstr ""
 
 msgid "Enter the emails of your groupmates, separated by commas or new lines."
