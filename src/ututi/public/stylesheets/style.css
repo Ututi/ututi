@@ -459,8 +459,8 @@ div.action-portlet .content {
 }
 
 div.action-portlet .content .header {
-  font-size: 13px;
-  font-weight: bold;
+  font-size: 14px;
+  font-weight: normal;
   color: #d45500;
   height: 24px;
   line-height: 24px;
