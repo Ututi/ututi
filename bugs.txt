@@ -81,11 +81,6 @@ Vietoje filtruoti pagal mokyklas, reikėtų gražinti užrašą žymos (tags), n
 * Bugai
 ** Grupės pakvietimai:
 prisijungus prie grupės kitu būdu turėtų būti panaikinamas tavo pakvietimas. Taip pat reikėtų galimybės atšaukti pakvietimą.
-** Iš watched subjects blokelio neeina išmesti dalyko, tenka eiti į dalykų viewą.
-Reikėtų kryžiuko pačiame portlete.
-** Naudotojo profilio What's new nesimato jo įkeltų failų.
-Pvz. naudotojas http://ututi.lt/user/272 įkėlė apie 200 failų, bet rodo tik jo sukurtus dalykus.
-** Anonimui neprivalo matytis grupėl el.pašto konferencijos adresas
 ** Kai žmogus sukuria dalyką, privalo iškarto jį stebėti
 
 
