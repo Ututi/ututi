@@ -1,4 +1,5 @@
 import logging
+import mimetypes
 import re
 
 from paste.fileapp import FileApp
@@ -24,7 +25,11 @@ log = logging.getLogger(__name__)
 
 def serve_file(file):
     headers = [('Content-Disposition', 'attachment; filename="%s"' % file.filename.encode('utf-8'))]
-    return forward(FileApp(file.filepath(), headers=headers))
+    content_type, content_encoding = mimetypes.guess_type(file.filename.encode('utf-8'))
+    kwargs = {'content_type': content_type}
+    if content_type in ['image/png', 'image/jpeg']:
+        headers = [('Content-Disposition', 'inline; filename="%s"' % file.filename.encode('utf-8'))]
+    return forward(FileApp(file.filepath(), headers=headers, **kwargs))
 
 
 class BasefilesController(BaseController):
