@@ -263,6 +263,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
       </div>
     </div>
 
+    %if c.lang in ['lt', 'en']:
     <script type="text/javascript">
       var uservoiceJsHost = ("https:" == document.location.protocol) ? "https://uservoice.com" : "http://cdn.uservoice.com";
       document.write(unescape("%3Cscript src='" + uservoiceJsHost + "/javascripts/widgets/tab.js' type='text/javascript'%3E%3C/script%3E"))
@@ -281,6 +282,9 @@ ${h.javascript_link('/javascripts/forms.js')|n}
       lang: 'en'
     })
     </script>
+    %else:
+      <script type="text/javascript" src="http://app.sugester.pl/ututi/widget.js"></script>
+    %endif
     <script type="text/javascript">
       var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
       document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
