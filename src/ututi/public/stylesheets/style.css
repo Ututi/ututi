@@ -125,7 +125,7 @@ h1, h2, h3, h4 {
 .sidebar-block .content a.tag,
 .tag {
   color: #4d4d4d;
-  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 0.9em;
   margin-right: 5px;
 }
@@ -404,14 +404,14 @@ ul.bullets_large li {
 }
 
 #sidebar .header {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .sidebar-block .rounded-header h3,
 .sidebar-block .rounded-header h3 a {
   color: #666666;
   font-weight: normal;
-  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 13px;
   text-align: left;
   text-transform: uppercase;
