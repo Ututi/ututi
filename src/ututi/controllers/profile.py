@@ -273,7 +273,8 @@ class ProfileController(SearchBaseController, UniversityListMixin):
                                subject=self._getSubject()) +\
             render_mako_def('profile/watch_subjects.mako',
                             'watched_subject',
-                            subject=self._getSubject())
+                            subject=self._getSubject(),
+                            new = True)
 
     @ActionProtector("user")
     def unwatch_subject(self):

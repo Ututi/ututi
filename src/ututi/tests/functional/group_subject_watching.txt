@@ -7,7 +7,11 @@ Group subject watching
     >>> browser.getLink('Subjects', url='moderators').click()
 
     >>> browser.printQuery("id('watched-subjects')")
-    <ul id="watched-subjects"></ul>
+    <ul id="watched-subjects">
+      <li id="empty_subjects_msg" class="empty_msg ">
+      Your group is not watching any subjects. Add them by using the search.
+    </li>
+    </ul>
 
     >>> browser.printQuery("id('search-results')//a[@class='item-title larger']/text()")
     Matematinė analizė
@@ -23,7 +27,11 @@ Group subject watching
     >>> browser.getLink(url='unwatch_subject').click()
 
     >>> browser.printQuery("id('watched-subjects')")
-    <ul id="watched-subjects"></ul>
+    <ul id="watched-subjects">
+      <li id="empty_subjects_msg" class="empty_msg ">
+      Your group is not watching any subjects. Add them by using the search.
+    </li>
+    </ul>
 
     >>> browser.printQuery("id('search-results')//a[@class='item-title larger']/text()")
     Matematinė analizė

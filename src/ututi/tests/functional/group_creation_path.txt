@@ -15,7 +15,6 @@ We can add a group at the url /groups/add.
 
 After creating the group we should be redirected to the subject selection view:
     >>> browser.printQuery('//h2/text()')
-    Watched subjects
     Recommended subjects
 
     >>> browser.getLink('Watch', index=1).url
@@ -35,10 +34,13 @@ The subject is added to the watched subject list automatically:
 
     >>> browser.printQuery("id('watched-subjects')")
     <ul id="watched-subjects">
-      <li>
+      <li class="">
         <a href="/subject/vu/test_subject">Test subject</a>
         ...
       </li>
+      <li id="empty_subjects_msg" class="empty_msg hidden">
+      Your group is not watching any subjects. Add them by using the search.
+    </li>
     </ul>
 
     >>> browser.getLink('Finish choosing subjects').click()

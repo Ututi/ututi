@@ -1308,6 +1308,10 @@ ul#event_list li {
 
 
 /* misc */
+#watched_subjects li.new {
+  background-image: url("../images/details/icon_subject_small_new.png") !important;
+}
+
 #links_portlet_content {
   padding-top: 2px;
 }

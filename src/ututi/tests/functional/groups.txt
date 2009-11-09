@@ -59,7 +59,6 @@ We can add a group at the url /groups/add.
 After creating the group we should be redirected to the subject selection view:
 
     >>> browser.printQuery('//h2/text()')
-    Watched subjects
     Recommended subjects
 
 The group's logo is displayed in a portlet.

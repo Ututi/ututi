@@ -17,6 +17,10 @@ $(document).ready(function(){
             url: url,
             success: function(msg){
                 $(event.target).parent().parent().remove();
+                if ($('#watched-subjects').children().size() == 1) {
+                  $('#empty_subjects_msg').toggleClass('hidden');
+                }
+
     }});
     return false;
   }
@@ -31,6 +35,9 @@ $(document).ready(function(){
                 $(event.target).parent().parent().parent().after($(msg)[0]).remove();
                 var selected_subject = $(msg)[2];
                 $('#watched-subjects').append(selected_subject);
+                if (($('#watched-subjects').children().size() > 1) && (! $('#empty_subjects_msg').hasClass('hidden'))) {
+                  $('#empty_subjects_msg').toggleClass('hidden');
+                }
                 $('.remove_subject_button', selected_subject).click(unselectSubject);
     }});
     return false;
@@ -57,8 +64,8 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
   </div>
 </%def>
 
-<%def name="watched_subject(subject)">
-  <li>
+<%def name="watched_subject(subject, new=False)">
+  <li class="${new and 'new' or ''}">
     <a href="${subject.url()}">${subject.title}</a>
     <input type="hidden" class="remove_url"
            value="${c.group.url(action='js_unwatch_subject', subject_id=subject.subject_id, subject_location_id=subject.location.id)}" />
@@ -67,17 +74,6 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
     </a>
   </li>
 </%def>
-
-<h2 class="subjects-suggestions">${_('Watched subjects')}</h2>
-<ul id="watched-subjects">
-% for subject in c.group.watched_subjects:
-  ${watched_subject(subject)}
-% endfor
-</ul>
-
-<h2 class="subjects-suggestions">${_('Recommended subjects')}</h2>
-
-${search_form(text=c.text, obj_type='subject', tags=c.tags, parts=['text', 'tags'], target=c.search_target)}
 
 ##overriding tag link definition
 <%def name="item_tags(object)">
@@ -137,23 +133,55 @@ ${search_form(text=c.text, obj_type='subject', tags=c.tags, parts=['text', 'tags
 %endif
 </%def>
 
-%if c.results:
-${search_results(c.results, display=search_subject)}
+<div class="comment">${_('This is the list of subjects watched by this group. By selecting to watch subjects, the group will always be notified of any changes in them.')}</div>
+<ul id="watched-subjects">
+%if c.group.watched_subjects:
+% for subject in c.group.watched_subjects:
+  ${watched_subject(subject)}
+% endfor
 %endif
 
-% if c.step:
-<div class="create_item">
-  <span class="notice">${_('Did not find what you were looking for?')}</span>
-  ${h.button_to(_('Create a new subject'), c.group.url(action='add_subject_step'))}
+<%
+   if len(c.group.watched_subjects) == 0:
+     cls = ''
+   else:
+     cls = 'hidden'
+%>
+
+<li id="empty_subjects_msg" class="empty_msg ${cls}">
+  ${_('Your group is not watching any subjects. Add them by using the search.')}
+</li>
+</ul>
+
+<div class="click2show">
+  <div class="click" id="expand-search">
+    ${_('recommended subjects')}
+  </div>
+  <div class="show">
+
+    <h2 class="subjects-suggestions">${_('Recommended subjects')}</h2>
+
+    ${search_form(text=c.text, obj_type='subject', tags=c.tags, parts=['text', 'tags'], target=c.search_target)}
+
+    %if c.results:
+    ${search_results(c.results, display=search_subject)}
+    %endif
+
+    % if c.step:
+    <div class="create_item">
+      <span class="notice">${_('Did not find what you were looking for?')}</span>
+      ${h.button_to(_('Create a new subject'), c.group.url(action='add_subject_step'))}
+    </div>
+    <br />
+    <hr />
+    <a class="btn" href="${url(controller='group', action='invite_members_step', id=c.group.group_id)}" title="${_('Invite group members')}">
+      <span>${_('Finish choosing subjects')}</span>
+    </a>
+    % else:
+    <div class="create_item">
+      <span class="notice">${_('Did not find what you were looking for?')}</span>
+      ${h.button_to(_('Create a new subject'), c.group.url(action='add_subject'))}
+    </div>
+    % endif
+  </div>
 </div>
-<br />
-<hr />
-<a class="btn" href="${url(controller='group', action='invite_members_step', id=c.group.group_id)}" title="${_('Invite group members')}">
-  <span>${_('Finish choosing subjects')}</span>
-</a>
-% else:
-<div class="create_item">
-  <span class="notice">${_('Did not find what you were looking for?')}</span>
-  ${h.button_to(_('Create a new subject'), c.group.url(action='add_subject'))}
-</div>
-% endif

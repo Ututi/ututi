@@ -129,3 +129,11 @@ ul.event-list li {
 #group_settings_block {
   padding-top: 5px;
 }
+
+ul#watched-subjects #empty_subjects_msg {
+  background-image: url("../images/details/icon_subject_small_inactive.png");
+}
+
+#empty_subjects_msg.hidden {
+  display: none;
+}

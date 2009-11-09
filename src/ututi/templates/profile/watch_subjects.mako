@@ -51,8 +51,8 @@ ${parent.head_tags()}
   </div>
 </%def>
 
-<%def name="watched_subject(subject)">
-  <li class="enabled">
+<%def name="watched_subject(subject, new = False)">
+  <li class="enabled ${new and 'new' or ''}">
     <a href="${subject.url()}">${subject.title}</a>
     <input type="hidden" class="remove_url"
            value="${url(controller='profile', action='js_unwatch_subject', subject_id=subject.id)}" />

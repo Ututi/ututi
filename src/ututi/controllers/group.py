@@ -517,7 +517,8 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
                                subject=self._getSubject()) +\
             render_mako_def('group/subjects.mako',
                             'watched_subject',
-                            subject=self._getSubject())
+                            subject=self._getSubject(),
+                            new = True)
 
     @group_action
     @ActionProtector("admin", "moderator")
