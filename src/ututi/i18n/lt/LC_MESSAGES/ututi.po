@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-11-08 05:37+0200\n"
+"PO-Revision-Date: 2009-11-10 14:50+0200\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -961,20 +961,31 @@ msgstr "Grupės puslapis vis dar tuščias. Reikėtų ką nors parašyti..."
 msgid "Subject %(subj)s was selected."
 msgstr "Dalykas %(subj)s buvo pasirinktas."
 
-msgid "Watched subjects"
-msgstr "Stebimi dalykai"
+msgid "Watch"
+msgstr "stebėti"
+
+msgid ""
+"This is the list of subjects watched by this group. By selecting to watch"
+" subjects, the group will always be notified of any changes in them."
+msgstr ""
+
+msgid "Your group is not watching any subjects. Add them by using the search."
+msgstr ""
+
+msgid "recommended subjects"
+msgstr ""
 
 msgid "Recommended subjects"
 msgstr "Dalykų paieška"
-
-msgid "Watch"
-msgstr "stebėti"
 
 msgid "Did not find what you were looking for?"
 msgstr "Nėra to, ko ieškojote? "
 
 msgid "Create a new subject"
 msgstr "kurti naują dalyką"
+
+msgid "Watched subjects"
+msgstr "Stebimi dalykai"
 
 msgid "email subject"
 msgstr "laiško tema"
@@ -1328,6 +1339,9 @@ msgstr "Fakultetas"
 
 msgid "Section"
 msgstr "Filialas"
+
+msgid "You can keep private group files here (e.g. pictures)"
+msgstr ""
 
 msgid "Join Ututi"
 msgstr "Prisijunk prie Ututi"

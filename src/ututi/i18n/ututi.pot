@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2009-11-08 05:37+0200\n"
+"POT-Creation-Date: 2009-11-10 14:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -893,19 +893,30 @@ msgstr ""
 msgid "Subject %(subj)s was selected."
 msgstr ""
 
-msgid "Watched subjects"
+msgid "Watch"
+msgstr ""
+
+msgid ""
+"This is the list of subjects watched by this group. By selecting to watch "
+"subjects, the group will always be notified of any changes in them."
+msgstr ""
+
+msgid "Your group is not watching any subjects. Add them by using the search."
+msgstr ""
+
+msgid "recommended subjects"
 msgstr ""
 
 msgid "Recommended subjects"
-msgstr ""
-
-msgid "Watch"
 msgstr ""
 
 msgid "Did not find what you were looking for?"
 msgstr ""
 
 msgid "Create a new subject"
+msgstr ""
+
+msgid "Watched subjects"
 msgstr ""
 
 msgid "email subject"
@@ -1241,6 +1252,9 @@ msgid "Department"
 msgstr ""
 
 msgid "Section"
+msgstr ""
+
+msgid "You can keep private group files here (e.g. pictures)"
 msgstr ""
 
 msgid "Join Ututi"
