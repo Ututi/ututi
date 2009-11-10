@@ -1,14 +1,19 @@
 <%inherit file="/portlets/base.mako"/>
 
 <%def name="ututi_banners_portlet()">
-<%self:portlet id="banners_portlet" portlet_class="border-less">
-<%def name="header()">
-</%def>
-<div class="structured_info">
-  <iframe src="${url('/bunners', qualified=True)}" frameborder="0" style="height: 200px; border: none; overflow: visible;">
-  </iframe>
-</div>
-</%self:portlet>
+<%
+   content = h.render_lang('portlets/banners.mako')
+%>
+%if content != '':
+  <%self:portlet id="banners_portlet" portlet_class="border-less">
+  <%def name="header()">
+  </%def>
+  <h2 class="bunner-heading">${_('Friends of ututi')}</h2>
+  <div class="structured_info">
+    ${content}
+  </div>
+  </%self:portlet>
+%endif
 </%def>
 
 <%def name="ututi_links_portlet()">

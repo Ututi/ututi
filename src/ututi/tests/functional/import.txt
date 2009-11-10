@@ -6,7 +6,7 @@ First we log in to be able to see the user list.
     >>> browser = Browser.logIn()
 
     >>> browser.open('http://localhost/admin')
-    >>> browser.printQuery('//h2')
+    >>> browser.printQuery('id(page-content)//h2')
 
     >>> browser.open('http://localhost/admin/users')
 

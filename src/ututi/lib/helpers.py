@@ -15,6 +15,8 @@ from webhelpers.html.tags import convert_boolean_attrs
 
 from datetime import datetime
 
+from ututi.lib.base import render_lang
+
 import pytz
 
 

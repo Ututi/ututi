@@ -140,9 +140,6 @@ class HomeController(UniversityListMixin):
             c.slideshow = request.params.has_key('slide')
             return render_lang('/anonymous_index/lt.mako')
 
-    def banners(self):
-        return render('/portlets/banners/%s.mako' % c.lang)
-
     def about(self):
         return render('/about/%s.mako' % c.lang)
 

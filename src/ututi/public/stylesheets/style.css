@@ -1581,6 +1581,19 @@ span.btn btn, span.btn input{
   margin: 0;
   padding: 0;
 }
+
+h2.bunner-heading {
+  color: #666;
+  font-size: 12px;
+  border-bottom: 1px solid #ded8d8;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  text-transform: uppercase;
+  font-weight: normal;
+  font-style: verdana, sans-serif;
+  text-align: right;
+}
+
 /* banners */
 
 /* university list */
