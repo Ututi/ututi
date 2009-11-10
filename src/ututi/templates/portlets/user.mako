@@ -133,7 +133,7 @@
   %>
   <%self:action_portlet id="subject_create_portlet">
     <%def name="header()">
-    <a href="${url(controller='subject', action='add')}">${_('create new subject')}</a>
+    <a ${h.trackEvent(None, 'click', 'user_new_subject', 'action_portlets')|n} href="${url(controller='subject', action='add')}">${_('create new subject')}</a>
     ${h.image('/images/details/icon_question.png',
             alt=_("Store all the subject's files and notes in one place."),
              class_='tooltip', style='margin-top: 4px;')|n}
@@ -147,8 +147,8 @@
      if user is None:
          user = c.user
   %>
-  <%self:action_portlet id="user_recommend_portlet" expanding="True">
-    <%def name="header()">
+  <%self:action_portlet id="user_recommend_portlet" expanding="True" label="ututi_recommend">
+    <%def name="header()" >
     ${_('recommend Ututi to your friends')}
     </%def>
 
@@ -163,7 +163,7 @@
       </div>
 
       <div class="form-field">
-        <span class="btn"><input id="recommendation_submit" type="submit" value="${_('Send invitation')}"/></span>
+        <span class="btn"><input id="recommendation_submit" type="submit" value="${_('Send invitation')}" ${h.trackEvent(None, 'action_portlets', 'send', 'ututi_recommend')|n}/></span>
       </div>
     </form>
   <script type="text/javascript">
@@ -171,6 +171,7 @@
     $(document).ready(function() {
       $('#recommendation_submit').click(function() {
         $(this).parents('.form-field').addClass('loading');
+        pageTracker._trackEvent('action_portlets', 'send', 'ututi_recommend');
         $.post("${url(controller='home', action='send_recommendations', js=1)}",
             $(this).parents('form').serialize(),
             function(data) {

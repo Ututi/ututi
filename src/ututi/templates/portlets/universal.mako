@@ -1,7 +1,7 @@
 <%inherit file="/portlets/base.mako"/>
 
-<%def name="quick_file_upload_portlet(targets)">
-  <%self:action_portlet id="file_upload_portlet" expanding="True">
+<%def name="quick_file_upload_portlet(targets, label=None)">
+  <%self:action_portlet id="file_upload_portlet" expanding="True" label='${label}'>
     <%def name="header()">
       <span>${_('upload a file to..')}</span>
     </%def>
@@ -20,6 +20,9 @@
           name: 'attachment',
           data: {folder: ''},
           onSubmit : function(file, ext, iframe){
+              %if label is not None:
+                pageTracker.trackEvent('action_portlets', 'upload_file', '${label}');
+              %endif
               iframe['progress_indicator'] = $(document.createElement('div'));
               $(list).append(iframe['progress_indicator']);
               iframe['progress_indicator'].text(file);

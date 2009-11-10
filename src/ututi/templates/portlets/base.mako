@@ -12,12 +12,21 @@
 </div>
 </%def>
 
-<%def name="action_portlet(id, portlet_class='', expanding=False)">
+<%def name="action_portlet(id, portlet_class='', expanding=False, label=None)">
 <div class="action-portlet ${portlet_class}" id="${id}">
   <div class="content click2show" id="${id + '_content'}">
     <div class="header ${expanding and 'click clickable' or ''}">
       ${caller.header()}
     </div>
+    %if label is not None:
+    <script type="text/javascript">
+    //<![CDATA[
+      $("#${id+'_content'} .click").click(function() {
+        pageTracker._trackEvent('action_portlets', 'open', '${label}');
+      });
+    //]]>
+    </script>
+    %endif
     %if expanding:
       <div class="show body">
         ${caller.body()}

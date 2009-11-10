@@ -13,7 +13,7 @@
   ${blog_portlet()}
   %endif
   %if not 'files' in exclude:
-  ${quick_file_upload_portlet(c.user.groups + c.user.watched_subjects)}
+  ${quick_file_upload_portlet(c.user.groups + c.user.watched_subjects, label='user_files')}
   %endif
   %if not 'create_subject' in exclude:
   ${user_create_subject_portlet()}
@@ -36,7 +36,7 @@
   ${group_info_portlet()}
   %endif
   %if not 'files' in exclude:
-  ${quick_file_upload_portlet([c.group] + c.group.watched_subjects)}
+  ${quick_file_upload_portlet([c.group] + c.group.watched_subjects, label='group_files')}
   %endif
   %if not 'forum' in exclude:
   ${group_forum_post_portlet()}
