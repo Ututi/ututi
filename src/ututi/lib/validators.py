@@ -90,7 +90,7 @@ class LocationIdValidator(validators.FormValidator):
                           error_dict={'title_short' : Invalid(self.message('duplicate', state), form_dict, state)})
 
 class InURLValidator(validators.FancyValidator):
-    """ A validator for strings that appear in urls (e.g. location tag short titles) """
+    """ A validator for strings that appear in urls"""
     messages = {
         'badId': _(u"The field may only contain letters, numbers and the characters + - _"),
         'empty': _("The field may not be left empty.")
@@ -103,6 +103,23 @@ class InURLValidator(validators.FancyValidator):
         valueRE = re.compile("^[\w+-]+$", re.I)
         if not valueRE.search(value):
             raise Invalid(self.message('badId', state), value, state)
+
+
+class ShortTitleValidator(validators.FancyValidator):
+    """ A validator for location tag short titles. """
+    messages = {
+        'badId': _(u"The field may only contain letters, numbers and the characters + - _"),
+        'empty': _("The field may not be left empty.")
+        }
+
+    def validate_python(self, value, state):
+        if value == '':
+            raise Invalid(self.message('empty', state), value, state)
+
+        valueRE = re.compile("^[\w+-]+$", re.I | re.UNICODE)
+        if not valueRE.search(value):
+            raise Invalid(self.message('badId', state), value, state)
+
 
 class TagsValidator(validators.FormValidator):
 
