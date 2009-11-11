@@ -245,7 +245,7 @@ $(document).ready(function(){
       </div>
 </%def>
 
-<%def name="file_browser(obj, section_id=0, collapsible=False, title=None, comment=None)">
+<%def name="file_browser(obj, section_id=0, collapsible=False, title=None, comment=None, controls=['upload', 'folder'])">
   <div class="section click2show" id="file_section-${section_id}">
     <%
        cls_head = cls_container = ''
@@ -278,32 +278,34 @@ $(document).ready(function(){
       <input type="hidden" class="id" value="${obj.id}" />
       %if c.user:
       <div class="controls">
+        %if 'upload' in controls:
         <div id="file_upload_progress-${section_id}" class="file_upload_progress">
         </div>
-      <div class="file_upload upload_dropdown click2show">
-       <div class="click button">
-         <div>
-           ${_('upload file to...')}
-         </div>
-       </div>
-       <div class="show target_list file_upload_dropdown" id="file_upload_dropdown-${section_id}">
-        <%
-           n = len(obj.folders)
-        %>
-        %for fid, folder in enumerate(obj.folders):
-          <%
-             cls = ''
-             if fid == 0:
-                 cls = 'first'
-             if fid == n - 1:
-                 cls = 'last'
-          %>
-          <%self:folder_button folder="${folder}" section_id="${section_id}" fid="${fid}" cls="${cls}"/>
-        %endfor
-      </div>
-    </div>
-      ${h.image('/images/details/icon_question.png', alt=_('Upload the file to any folder.'), class_='tooltip')|n}
-
+        <div class="file_upload upload_dropdown click2show">
+          <div class="click button">
+            <div>
+              ${_('upload file to...')}
+            </div>
+          </div>
+          <div class="show target_list file_upload_dropdown" id="file_upload_dropdown-${section_id}">
+            <%
+               n = len(obj.folders)
+            %>
+            %for fid, folder in enumerate(obj.folders):
+            <%
+               cls = ''
+               if fid == 0:
+                   cls = 'first'
+               if fid == n - 1:
+                   cls = 'last'
+            %>
+            <%self:folder_button folder="${folder}" section_id="${section_id}" fid="${fid}" cls="${cls}"/>
+            %endfor
+          </div>
+        </div>
+        ${h.image('/images/details/icon_question.png', alt=_('Upload the file to any folder.'), class_='tooltip')|n}
+        %endif
+        %if 'folder' in controls:
         <div style="float: left; margin-left: 20px;">
           <form action="${obj.url(action='create_folder')}">
             <div>
@@ -315,6 +317,7 @@ $(document).ready(function(){
             </div>
           </form>
         </div>
+        %endif
         <br class="clear-left"/>
       </div>
       %endif

@@ -36,11 +36,12 @@ div.section h2.click {
 /* files section controls */
 div.section div.controls label {
   color: #888;
-  vertical-align: top;
+  vertical-align: middle;
 }
 
 div.section div.controls .new-folder-name {
   vertical-align: top;
+  font-size: 12px;
 }
 
 div.section div.controls div.file_upload {
