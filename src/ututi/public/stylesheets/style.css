@@ -152,7 +152,7 @@ h3 {
   font-weight: normal;
 }
 
-.show {
+.click2show .show {
   display: none;
 }
 
@@ -1385,6 +1385,10 @@ div.form-field .tooltip {
 .controls .tooltip {
   float: left;
   margin: 2px;
+}
+
+div.create_item {
+  padding: 10px 0;
 }
 
 div.create_item .tooltip,

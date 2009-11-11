@@ -611,6 +611,8 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             search_params['obj_type'] = 'subject'
 
             query = search_query(extra=_filter_watched_subjects(sids), **search_params)
+            if self.form_result != {}:
+                c.searched = True
 
             if search_params != {}:
                 c.results = paginate.Page(

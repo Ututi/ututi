@@ -153,18 +153,36 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
 </li>
 </ul>
 
-<div class="click2show">
+<div class="${not c.searched and 'click2show'}">
   <div class="click" id="expand-search">
     ${_('recommended subjects')}
   </div>
   <div class="show">
 
-    <h2 class="subjects-suggestions">${_('Recommended subjects')}</h2>
+    <div style="margin: 10px 0; overflow: auto;">
+      <h2 class="subjects-suggestions" style="float: left;">
+        ${_('Recommended subjects')}
+      </h2>
+
+      %if c.results:
+        <a style="float: left; margin-left: 30px;" class="btn" href="${c.group.url(action='add_subject')}"><span>${_('Create a new subject')}</span></a>
+      %endif
+    </div>
+
+    %if not c.results:
+    <div class="create_item">
+      <a class="btn-large" href="${c.group.url(action='add_subject')}"><span>${_('Create a new subject')}</span></a>
+    </div>
+    %endif
 
     ${search_form(text=c.text, obj_type='subject', tags=c.tags, parts=['text', 'tags'], target=c.search_target)}
 
     %if c.results:
     ${search_results(c.results, display=search_subject)}
+    % else:
+    <div class="create_item">
+      <a class="btn-large" href="${c.group.url(action='add_subject')}"><span>${_('Create a new subject')}</span></a>
+    </div>
     %endif
 
     % if c.step:
@@ -177,11 +195,6 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
     <a class="btn" href="${url(controller='group', action='invite_members_step', id=c.group.group_id)}" title="${_('Invite group members')}">
       <span>${_('Finish choosing subjects')}</span>
     </a>
-    % else:
-    <div class="create_item">
-      <span class="notice">${_('Did not find what you were looking for?')}</span>
-      ${h.button_to(_('Create a new subject'), c.group.url(action='add_subject'))}
-    </div>
     % endif
   </div>
 </div>
