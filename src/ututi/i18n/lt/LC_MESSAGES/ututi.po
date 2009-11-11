@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-11-10 15:46+0200\n"
+"PO-Revision-Date: 2009-11-11 15:36+0200\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -279,6 +279,9 @@ msgstr "Ututi naujienos: %(file_changes)s ir %(page_changes)s"
 msgid "Search"
 msgstr "Paieška"
 
+msgid "Your password has been changed!"
+msgstr "Jūsų slaptažodis pakeistas!"
+
 msgid "Your profile was updated."
 msgstr "Profilis atnaujintas!"
 
@@ -297,6 +300,10 @@ msgstr "Trinti"
 
 msgid "Information updated."
 msgstr "Informacija atnaujinta."
+
+#, python-format
+msgid "You are now watching the subject %s"
+msgstr "Jūs stebite dalyką %s"
 
 msgid "The subject has been added to your watched subjects list."
 msgstr "Dalykas pridėtas prie stebimų dalykų sąrašo."
@@ -327,6 +334,9 @@ msgstr "Ututi - narystės grupėje patvirtinimas"
 
 msgid "Save"
 msgstr "Saugoti"
+
+msgid "Invalid password"
+msgstr "Netinkamas slaptažodis"
 
 msgid "Location does not exist."
 msgstr "Tokios vietos nėra."
@@ -490,8 +500,8 @@ msgstr "paieška"
 msgid "home"
 msgstr "namai"
 
-msgid "Upload your personal logo"
-msgstr "įkelti asmeninį logo"
+msgid "Change your personal information"
+msgstr "Pakeisti asmeninę informaciją"
 
 msgid "Wrong password or username!"
 msgstr "Neteisingas el. paštas arba slaptažodis"
@@ -662,7 +672,9 @@ msgid ""
 "Group mailing lists, <a href=\"%(link)s\" title=\"Subject "
 "list\">subject</a> wikis, files, lecture notes and answers to questions "
 "that matter for your studies."
-msgstr "Grupių forumai, <a href=\"%(link)s\" title=\"Dalykų sąrašas\">dalykų</a> wikiai, failai, konspektai ir atsakymai į rūpimus klausimus."
+msgstr ""
+"Grupių forumai, <a href=\"%(link)s\" title=\"Dalykų sąrašas\">dalykų</a> "
+"wikiai, failai, konspektai ir atsakymai į rūpimus klausimus."
 
 #, python-format
 msgid ""
@@ -670,7 +682,11 @@ msgid ""
 "      and pass them on for future generations, create      <a "
 "href=\"%(groups)s\" title=\"Group list\">academic groups</a>      and "
 "communicate with groupmates."
-msgstr "Kaupkite <a href=\"%(subjects)s\" title=\"Dalykų sąrašas\">studijų medžiagą</a> ir perduokite ją ateities kartoms, kurkite <a href=\"%(groups)s\" title=\"Grupių sąrašas\">akademines grupes</a> ir bendraukite su grupiokais."
+msgstr ""
+"Kaupkite <a href=\"%(subjects)s\" title=\"Dalykų sąrašas\">studijų "
+"medžiagą</a> ir perduokite ją ateities kartoms, kurkite <a "
+"href=\"%(groups)s\" title=\"Grupių sąrašas\">akademines grupes</a> ir "
+"bendraukite su grupiokais."
 
 msgid "Ututi search"
 msgstr "Ututi paieška"
@@ -967,7 +983,9 @@ msgstr "stebėti"
 msgid ""
 "This is the list of subjects watched by this group. By selecting to watch"
 " subjects, the group will always be notified of any changes in them."
-msgstr "Tai yra šios grupės stebimų dalykų sąrašus. Apie pasikeitimus stebimuose dalykuose grupės nariams visada pranešama."
+msgstr ""
+"Tai yra šios grupės stebimų dalykų sąrašus. Apie pasikeitimus stebimuose "
+"dalykuose grupės nariams visada pranešama."
 
 msgid "Your group is not watching any subjects. Add them by using the search."
 msgstr "Jūsų grupė nestebi dalykų. Pridėkite juos naudodamiesi paieška."
@@ -976,13 +994,13 @@ msgid "recommended subjects"
 msgstr "rekomenduojami dalykai"
 
 msgid "Recommended subjects"
-msgstr "Dalykų paieška"
-
-msgid "Did not find what you were looking for?"
-msgstr "Nėra to, ko ieškojote? "
+msgstr "Rekomenduojami dalykai"
 
 msgid "Create a new subject"
 msgstr "kurti naują dalyką"
+
+msgid "Did not find what you were looking for?"
+msgstr "Nėra to, ko ieškojote? "
 
 msgid "Watched subjects"
 msgstr "Stebimi dalykai"
@@ -1068,9 +1086,6 @@ msgstr "Mano grupės"
 msgid "My information"
 msgstr "Apie mane"
 
-msgid "Friends of ututi"
-msgstr "Ututi draugai"
-
 msgid "back to the profile"
 msgstr "grįžti į profilį"
 
@@ -1088,6 +1103,18 @@ msgstr "Šiek tiek informacijos apie save"
 
 msgid "Personal logo"
 msgstr "Asmeninis logo"
+
+msgid "Change your password"
+msgstr "Pakeiskite savo slaptažodį"
+
+msgid "Current password"
+msgstr "Dabartinis slaptažodis"
+
+msgid "New password"
+msgstr "Naujas slaptažodis"
+
+msgid "Repeat the new password"
+msgstr "Pakartokite naują slaptažodį"
 
 msgid "These are the files from the the subjects you or your group are watching."
 msgstr "Tai yra tavo stebimų dalykų ir grupių failai."
@@ -1283,6 +1310,9 @@ msgstr "Dėstytojas"
 msgid "Brief description of the subject"
 msgstr "Trumpas dalyko aprašymas"
 
+msgid "Start watching this subject personally"
+msgstr "Noriu stebėti šį dalyką"
+
 msgid "Edit subject"
 msgstr "Redaguoti dalyką"
 
@@ -1330,6 +1360,10 @@ msgstr "Ką nuveikė %(user)s ?"
 
 msgid "Nothing yet."
 msgstr "Iki šiol nieko."
+
+#, python-format
+msgid "Log in as %(user)s"
+msgstr "Prisijungti kaip %(user)s"
 
 msgid "University"
 msgstr "mokymo įstaiga"
@@ -1554,6 +1588,9 @@ msgstr "Mūsų erdvė Facebook"
 
 msgid "Read our blog"
 msgstr "Mūsų blogas"
+
+msgid "Friends of ututi"
+msgstr "Ututi draugai"
 
 #, python-format
 msgid "Private files of the group %s"

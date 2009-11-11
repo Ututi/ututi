@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2009-11-10 15:36+0200\n"
+"POT-Creation-Date: 2009-11-11 15:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -258,6 +258,9 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
+msgid "Your password has been changed!"
+msgstr ""
+
 msgid "Your profile was updated."
 msgstr ""
 
@@ -275,6 +278,10 @@ msgid "Delete"
 msgstr ""
 
 msgid "Information updated."
+msgstr ""
+
+#, python-format
+msgid "You are now watching the subject %s"
 msgstr ""
 
 msgid "The subject has been added to your watched subjects list."
@@ -305,6 +312,9 @@ msgid "Ututi group membership confirmation"
 msgstr ""
 
 msgid "Save"
+msgstr ""
+
+msgid "Invalid password"
 msgstr ""
 
 msgid "Location does not exist."
@@ -457,7 +467,7 @@ msgstr ""
 msgid "home"
 msgstr ""
 
-msgid "Upload your personal logo"
+msgid "Change your personal information"
 msgstr ""
 
 msgid "Wrong password or username!"
@@ -910,10 +920,10 @@ msgstr ""
 msgid "Recommended subjects"
 msgstr ""
 
-msgid "Did not find what you were looking for?"
+msgid "Create a new subject"
 msgstr ""
 
-msgid "Create a new subject"
+msgid "Did not find what you were looking for?"
 msgstr ""
 
 msgid "Watched subjects"
@@ -1000,9 +1010,6 @@ msgstr ""
 msgid "My information"
 msgstr ""
 
-msgid "Friends of ututi"
-msgstr ""
-
 msgid "back to the profile"
 msgstr ""
 
@@ -1019,6 +1026,18 @@ msgid "About yourself"
 msgstr ""
 
 msgid "Personal logo"
+msgstr ""
+
+msgid "Change your password"
+msgstr ""
+
+msgid "Current password"
+msgstr ""
+
+msgid "New password"
+msgstr ""
+
+msgid "Repeat the new password"
 msgstr ""
 
 msgid "These are the files from the the subjects you or your group are watching."
@@ -1197,6 +1216,9 @@ msgstr ""
 msgid "Brief description of the subject"
 msgstr ""
 
+msgid "Start watching this subject personally"
+msgstr ""
+
 msgid "Edit subject"
 msgstr ""
 
@@ -1243,6 +1265,10 @@ msgid "What has %(user)s been up to?"
 msgstr ""
 
 msgid "Nothing yet."
+msgstr ""
+
+#, python-format
+msgid "Log in as %(user)s"
 msgstr ""
 
 msgid "University"
@@ -1448,6 +1474,9 @@ msgid "Find us on Facebook"
 msgstr ""
 
 msgid "Read our blog"
+msgstr ""
+
+msgid "Friends of ututi"
 msgstr ""
 
 #, python-format
