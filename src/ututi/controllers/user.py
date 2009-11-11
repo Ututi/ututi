@@ -8,6 +8,8 @@ from pylons.i18n import _
 from routes import url_for
 from routes.util import redirect_to
 
+from ututi.controllers.home import sign_in_user
+from ututi.lib.security import ActionProtector
 from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
 
@@ -50,6 +52,12 @@ class UserController(BaseController):
         if user is c.user:
             redirect_to(controller='profile', action='index')
         return render('user/index.mako')
+
+    @profile_action
+    @ActionProtector("root")
+    def login_as(self, user):
+            sign_in_user(user.emails[0].email)
+            redirect_to(controller='profile', action='home')
 
     def logo(self, id, width=None, height=None):
         try:
