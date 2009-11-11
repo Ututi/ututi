@@ -234,7 +234,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
         return self._create_folder(subject)
 
     @subject_action
-    @ActionProtector("moderator", "root")
+    @ActionProtector("user")
     def js_delete_folder(self, subject):
         folder_name = request.params['folder']
         if not subject.getFolder(folder_name).can_write(c.user):
