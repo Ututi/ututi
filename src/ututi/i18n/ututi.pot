@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2009-11-11 15:36+0200\n"
+"POT-Creation-Date: 2009-11-11 19:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -848,6 +848,9 @@ msgstr ""
 msgid "Edit group front page"
 msgstr ""
 
+msgid "Add more subjects"
+msgstr ""
+
 msgid "Group members"
 msgstr ""
 
@@ -1280,7 +1283,7 @@ msgstr ""
 msgid "Section"
 msgstr ""
 
-msgid "You can keep private group files here (e.g. pictures)"
+msgid "You can keep up to 200 Mb of private group files here (e.g. pictures)"
 msgstr ""
 
 msgid "Join Ututi"
