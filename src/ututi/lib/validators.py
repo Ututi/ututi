@@ -3,6 +3,7 @@ from lxml.html.clean import Cleaner
 
 from formencode import validators, Invalid
 from pylons.i18n import _
+from pylons import c
 
 from ututi.model import LocationTag
 
@@ -40,6 +41,18 @@ class HtmlSanitizeValidator(validators.FancyValidator):
 
     def _to_python(self, value, state):
         return html_cleanup(value.strip())
+
+
+class UserPasswordValidator(validators.FancyValidator):
+    """ User's password checker for password change form. """
+    messages = {
+        'invalid': _(u"Invalid password"),
+        }
+
+    def validate_python(self, value, state):
+        if not c.user.checkPassword(value.encode('utf-8')):
+            raise Invalid(self.message('invalid', state), value, state)
+
 
 class LocationTagsValidator(validators.FancyValidator):
     """A validator that tests if the specified location tags are correct."""

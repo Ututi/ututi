@@ -202,6 +202,16 @@ def input_line(name, title, value=''):
                             HTML.input(type='text', class_='line', id=name, name_=name, value='')])])
             ])
 
+def input_psw(name, title, value=''):
+    return HTML.div(class_='form-field', c=[
+            HTML.label(for_=name, c=[title]),
+            HTML.literal('<form:error name="%s" />' % name),
+            HTML.div(class_='input-line', c=[
+                    HTML.div(c=[
+                            HTML.input(type='password', class_='line', id=name, name_=name, value='')])])
+            ])
+
+
 def input_area(name, title, value='', cols='50', rows='5'):
     return HTML.div(class_='form-field', c=[
             HTML.label(for_=name, c=[title]),

@@ -421,6 +421,10 @@ class User(object):
         else:
             log.info("Could not send message to uncofirmed email %(email)s" % dict(email=email.email))
 
+    def checkPassword(self, password):
+        """Check the user's password."""
+        return validate_password(self.password, password)
+
     @classmethod
     def authenticate(cls, username, password):
         try:

@@ -87,3 +87,19 @@
     </tr>
   </table>
 </form>
+<br/>
+<h2>${_('Change your password')}</h2>
+<table>
+  <tr>
+    <td style="width: 220px;">&nbsp;</td>
+    <td>
+      <form method="post" action="${url(controller='profile', action='password')}" id="change_password_form">
+        ${h.input_line('password', _('Current password'))}
+        ${h.input_line('new_password', _('New password'))}
+        ${h.input_line('repeat_password', _('Repeat the new password'))}
+
+        ${h.input_submit(_('Change password'))}
+      </form>
+    </td>
+  </tr>
+</table>

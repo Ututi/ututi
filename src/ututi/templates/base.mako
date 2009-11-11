@@ -45,7 +45,7 @@ ${_('student information online')}
 
 <div class="personal-info">
   <div class="personal-logo">
-    <a href="${url(controller='profile', action='edit')}" title="${_('Upload your personal logo')}">
+    <a href="${url(controller='profile', action='edit')}" id="user_profile_edit_link" title="${_('Change your personal information')}">
       % if c.user.logo is not None:
         <img src="${url(controller='user', action='logo', id=c.user.id, width=60, height=60)}" alt="logo" />
       % else:

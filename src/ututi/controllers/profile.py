@@ -20,6 +20,7 @@ from ututi.lib.emails import email_confirmation_request
 from ututi.lib.security import ActionProtector
 from ututi.lib.search import search_query, search_query_count
 from ututi.lib.image import serve_image
+from ututi.lib.validators import UserPasswordValidator
 
 from ututi.model.events import Event
 from ututi.model import Subject
@@ -37,6 +38,25 @@ class ProfileForm(Schema):
     allow_extra_fields = True
     fullname = validators.String(not_empty=True)
     site_url = validators.URL()
+
+
+class PasswordChangeForm(Schema):
+    allow_extra_fields = False
+
+    password = UserPasswordValidator()
+
+    msg = {'empty': _(u"Please enter your password to register."),
+           'tooShort': _(u"The password must be at least 5 symbols long.")}
+    new_password = validators.String(
+        min=5, not_empty=True, strip=True, messages=msg)
+    repeat_password = validators.String(
+        min=5, not_empty=True, strip=True, messages=msg)
+    msg = {'invalid': _(u"Passwords do not match."),
+           'invalidNoMatch': _(u"Passwords do not match."),
+           'empty': _(u"Please enter your password to register.")}
+    chained_validators = [validators.FieldsMatch('new_password',
+                                                 'repeat_password',
+                                                 messages=msg)]
 
 
 class LogoUpload(Schema):
@@ -142,6 +162,17 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             }
 
         return htmlfill.render(self._edit_form(), defaults=defaults)
+
+    @validate(PasswordChangeForm, form='_edit_form')
+    @ActionProtector("user")
+    def password(self):
+        if hasattr(self, 'form_result'):
+            c.user.update_password(self.form_result['new_password'].encode('utf-8'))
+            meta.Session.commit()
+            h.flash(_('Your password has been changed!'))
+            redirect_to(controller='profile', action='home')
+        else:
+            redirect_to(controller='profile', action='edit')
 
     @validate(LogoUpload)
     @ActionProtector("user")
