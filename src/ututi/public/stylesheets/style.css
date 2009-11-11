@@ -538,6 +538,12 @@ form .form-field {
   clear: left;
 }
 
+form .form-field.check-field input,
+form .form-field.check-field label {
+  margin: 0;
+  display: inline;
+}
+
 form .form-field label {
   display: block;
   /* font */

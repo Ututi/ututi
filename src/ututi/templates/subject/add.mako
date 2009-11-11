@@ -16,7 +16,7 @@ ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
 <a class="back-link" href="${url(controller='profile', action='search')}">${_('back to the search')}</a>
 <h1>${_('New subject')}</h1>
 
-<%def name="form(action)">
+<%def name="form(action, personal=False)">
 <form method="post" action="${action}"
      id="subject_add_form" enctype="multipart/form-data">
   <div class="form-field">
@@ -44,6 +44,10 @@ ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
     <label for="description">${_('Brief description of the subject')}</label>
     <textarea class="line" name="description" id="description" cols="60" rows="5"></textarea>
   </div>
+  <div class="form-field check-field">
+    <input type="checkbox" name="watch_subject" id="watch_subject" value="watch"/>
+    <label for="watch_subject">${_('Start watching this subject personally')}</label>
+  </div>
 
   <div>
     <span class="btn">
@@ -53,4 +57,4 @@ ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
 </form>
 </%def>
 
-<%self:form action="${url(controller='subject', action='create')}" />
+<%self:form action="${url(controller='subject', action='create')}" personal="True"/>

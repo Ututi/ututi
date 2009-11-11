@@ -105,3 +105,27 @@ would cause a crash
     >>> browser.open('http://localhost/subjects/create')
     >>> print browser.url
     http://localhost/subjects/add
+
+When creating a subject, the user can select to watch it:
+
+    >>> browser.open('/home')
+    >>> browser.getLink('create new subject').click()
+    >>> browser.url
+    'http://localhost/subjects/add'
+
+    >>> browser.getControl(name='location-1').value = 'vu'
+    >>> browser.getControl('Title').value = 'Testing subject'
+    >>> browser.getControl('Lecturer').value = 'Some guy'
+    >>> browser.getControl('Start watching this subject personally').selected = True
+    >>> browser.getControl('Save').click()
+    >>> print browser.url
+    http://localhost/subject/vu/testing_subject
+
+    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
+    Close
+    You are now watching the subject Testing subject
+
+    >>> browser.open('/profile/subjects')
+    >>> browser.printQuery("//ul[@class='personal_watched_subjects']/li/a/text()")
+    Matematinė analizė
+    Testing subject

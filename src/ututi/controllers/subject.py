@@ -118,6 +118,11 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
         subj = self._create_subject()
         meta.Session.commit()
 
+        if self.form_result.has_key('watch_subject'):
+            c.user.watchSubject(subj)
+            meta.Session.commit()
+            h.flash(_('You are now watching the subject %s') % subj.title)
+
         redirect_to(controller='subject',
                     action='home',
                     id=subj.subject_id,
