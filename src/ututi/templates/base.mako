@@ -285,10 +285,8 @@ ${h.javascript_link('/javascripts/forms.js')|n}
     %else:
       <script type="text/javascript" src="http://app.sugester.pl/ututi/widget.js"></script>
     %endif
-    <script type="text/javascript">
-      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-    </script>
+
+    ${h.javascript_link('/javascripts/ga.js')|n}
     <script type="text/javascript">
       try {
       var pageTracker = _gat._getTracker("${c.google_tracker}");
