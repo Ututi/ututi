@@ -130,21 +130,19 @@ ${h.javascript_link('/javascripts/forms.js')|n}
 <%def name="breadcrumbs(breadcrumbs)">
 <div id="breadcrumb-container">
   <%
-     
      if c.user:
-         u_url = url(controller='profile', action='home')
+         u_url = url(controller='profile', action='browse')
          track_event = h.trackEvent(None, 'user_home', 'logo')
      else:
          track_event = ''
          u_url = url('/')
-    
   %>
   %if breadcrumbs:
-  <a ${track_event|n} href="${u_url}" title="home" id="ulogo">
+  <a ${track_event|n} href="${u_url}" title="Ututi" id="ulogo">
     ${h.image('/images/logo_small.gif', alt='logo')|n}
   </a>
   %else:
-  <a href="${u_url}" title="home" id="ulogo">
+  <a href="${u_url}" title="Ututi" id="ulogo">
     ${h.image('/images/logo.gif', alt='logo')|n}
   </a>
   %endif
