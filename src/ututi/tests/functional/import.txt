@@ -14,10 +14,9 @@ There is one initial user:
 
     >>> browser.printQuery("id('user_list')//li/a/text()")
     Adminas Adminovix
-    <BLANKLINE>
     Alternative user
-    <BLANKLINE>
     Second user
+    Third user
 
 We go to the import page. There we have a form to upload a user CSV file:
 
@@ -34,6 +33,7 @@ We go to the import page. There we have a form to upload a user CSV file:
     Adminas Adminovix
     Alternative user
     Second user
+    Third user
     Domas Monkus
 
 Now we will log out and see if we can log back in as the imported user.

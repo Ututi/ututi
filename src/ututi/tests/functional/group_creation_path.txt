@@ -296,7 +296,7 @@ Now let's kick out all of the members and delete the group:
     >>> form.getControl(name='role').displayValue = ['Leave group']
     >>> form.getControl('Update').click()
 
-    >>> form = browser.getForm(id='update-membership-4')
+    >>> form = browser.getForm(id='update-membership-5')
     >>> form.getControl(name='role').displayValue = ['Leave group']
     >>> form.getControl('Update').click()
 
