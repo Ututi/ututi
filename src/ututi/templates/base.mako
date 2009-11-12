@@ -283,7 +283,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
     })
     </script>
     %else:
-      <script type="text/javascript" src="http://app.sugester.pl/ututi/widget.js"></script>
+      ${h.javascript_link('/javascripts/sugester.js')|n}
     %endif
 
     ${h.javascript_link('/javascripts/ga.js')|n}
