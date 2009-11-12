@@ -140,6 +140,7 @@ def make_map():
     map.connect('/profile/{action}', controller='profile')
 
     # CUSTOM ROUTES HERE
+    map.connect('/sitemap.xml', controller='sitemap', action='index')
     map.connect('/', controller='home')
     map.connect('/login', controller='home', action='login')
     map.connect('/logout', controller='home', action='logout')
