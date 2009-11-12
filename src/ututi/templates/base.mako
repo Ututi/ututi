@@ -169,28 +169,30 @@ ${h.javascript_link('/javascripts/forms.js')|n}
   %if breadcrumbs:
   <ul id="breadcrumbs">
     <%
-       first_bc = True
+       if isinstance(breadcrumbs[-1], list):
+         breadcrumbs = breadcrumbs[:-1]
+
+       if len(breadcrumbs) > 1:
+         ellipsis = [20, 40]
+       else:
+         ellipsis = [50]
        %>
-    %for breadcrumb in breadcrumbs:
-    %if not first_bc:
-    <li class="breadcrumb">
+    %for ind, breadcrumb in enumerate(breadcrumbs):
+      %if ind > 0:
+        <li class="breadcrumb">
       %else:
-    <li class="no-bullet">
-      <%
-         first_bc = False
-         %>
+        <li class="no-bullet">
       %endif
-      %if isinstance(breadcrumb, dict):
+
       <div>
         %if breadcrumb.get('logo', None) is not None:
           <img src="${breadcrumb['logo']}" alt="${_('logo')}"/>
         %endif
 
         <a class="breadcrumb" title="${breadcrumb.get('title')}" href="${breadcrumb.get('link')}">
-          ${breadcrumb.get('title') | h.ellipsis}
+          ${h.ellipsis(breadcrumb.get('title'),ellipsis[ind])}
         </a>
       </div>
-      %endif
     </li>
     %endfor
     </ul>
