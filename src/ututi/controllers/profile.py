@@ -156,6 +156,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     @ActionProtector("user")
     def edit(self):
         defaults = {
+            'email': c.user.emails[0].email,
             'fullname': c.user.fullname,
             'site_url': c.user.site_url,
             'description': c.user.description,
@@ -212,7 +213,8 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             emails = request.POST.getall('email')
             for email in emails:
                 email_confirmation_request(c.user, email)
-            redirect_to(controller='profile', action='home')
+            h.flash(_('Confirmation message sent. Please check your email.'))
+            redirect_to(controller='profile', action='edit')
         else:
             redirect_to(controller='home', action='home')
 

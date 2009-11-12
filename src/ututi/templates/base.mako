@@ -55,7 +55,14 @@ ${_('student information online')}
   </div>
   <div id="personal-data">
     <div class="fullname">${c.user.fullname}</div>
-    <div class="small email">${c.user.emails[0].email}</div>
+    <div class="small email">
+      %if not c.user.isConfirmed:
+        <a href="${url(controller='profile', action='edit')}" title="${_('Confirm your email!')}" id="email_unconfirmed">
+          ${h.image('/images/details/icon_alert.png', alt="${_('Confirm your email')}")|n}
+        </a>
+      %endif
+      ${c.user.emails[0].email}
+    </div>
   </div>
   <br style="clear: right; height: 1px;"/>
 </div>

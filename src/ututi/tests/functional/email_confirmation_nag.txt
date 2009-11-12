@@ -1,0 +1,37 @@
+Test nagging users to confirm their emails
+==========================================
+
+   >>> from ututi.lib.mailer import mail_queue
+
+   >>> browser = Browser.logIn('user3@ututi.lt', 'password')
+   >>> browser.getLink(id='email_unconfirmed').click()
+   >>> browser.url
+   'http://localhost/profile/edit'
+
+   >>> form = browser.getForm(id='email_confirmation_request')
+   >>> form.getControl('Get confirmation email').click()
+   >>> browser.printQuery("//div[@class='flash-message']/span/text()")
+   Close
+   Confirmation message sent. Please check your email.
+
+   >>> msg = mail_queue.pop()
+   >>> print msg.payload()
+   We have received a request to confirm the ownership of this email by Third user on the Ututi system. If this email belongs to You, confirm it by clicking on this link:
+   <BLANKLINE>
+   http://localhost/confirm_user_email/...
+   <BLANKLINE>
+   Ututi team
+
+   >>> msg.recipients
+   [u'user3@ututi.lt']
+
+   >>> from ututi.lib.helpers import get_urls
+   >>> urls = get_urls(msg.payload())
+   >>> browser = Browser()
+   >>> browser.open(urls[0])
+
+   >>> browser.printQuery("//div[@class='flash-message']/span/text()")
+   Close
+   Your email user3@ututi.lt was confirmed. Thank You.
+
+   >>> browser.printQuery("id('email_unconfirmed')")

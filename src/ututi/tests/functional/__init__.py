@@ -43,6 +43,13 @@ def ftest_setUp(test):
     email.confirmed = True
     alt_user.emails.append(email)
 
+    #and a third one with an uncofirmed email
+    alt_user = User(u'Third user', 'password', True)
+    meta.Session.add(alt_user)
+    email = Email('user3@ututi.lt')
+    email.confirmed = False
+    alt_user.emails.append(email)
+
     meta.Session.add(Subject(u'mat_analize', u'Matematin\u0117 analiz\u0117', LocationTag.get(u'vu'), u'prof. E. Misevi\u010dius'))
     t = SimpleTag(u'simple_tag')
     meta.Session.add(t)

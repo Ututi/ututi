@@ -134,7 +134,7 @@ def make_map():
     map.connect('/school/*path', controller='structureview', action='index')
 
     # other user views
-    map.connect('/confirm_emails', controller='profile', action='confirm_emails')
+    map.connect('/profile/confirm_emails', controller='profile', action='confirm_emails')
     map.connect('/confirm_user_email/{key}', controller='profile', action='confirm_user_email')
     map.connect('/profile', controller='profile', action='index')
     map.connect('/profile/{action}', controller='profile')

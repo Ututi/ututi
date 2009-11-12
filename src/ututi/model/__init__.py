@@ -552,6 +552,10 @@ class User(object):
         if gen_password:
             self.password = generate_password(password)
 
+    @property
+    def isConfirmed(self):
+        return self.emails[0].confirmed
+
 email_table = None
 
 class Email(object):
