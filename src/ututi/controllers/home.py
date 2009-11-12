@@ -1,4 +1,5 @@
 import logging
+from xmlrpclib import ServerProxy
 from random import Random
 import string
 from datetime import datetime
@@ -8,7 +9,7 @@ from routes.util import redirect_to
 from formencode import Schema, validators, Invalid, All, htmlfill
 from webhelpers import paginate
 
-from pylons import request, c, url, session
+from pylons import request, c, url, session, config
 from pylons.decorators import validate
 from pylons.controllers.util import abort
 from pylons.i18n import _, ungettext
@@ -98,6 +99,16 @@ class RecommendationForm(Schema):
     """A schema for validating ututi recommendation submissions"""
     allow_extra_fields = True
     recommend_emails = validators.UnicodeString(not_empty=False)
+    came_from = validators.URL(require_tld=False)
+
+
+class GGForm(Schema):
+    """A schema for sending gadu gadu messages."""
+
+    allow_extra_fields = True
+
+    gg_uin = validators.Int(not_empty=True)
+    gg_message = validators.UnicodeString(not_empty=True)
     came_from = validators.URL(require_tld=False)
 
 
@@ -328,3 +339,21 @@ class HomeController(UniversityListMixin):
                     redirect_to(url(controller='profile', action='index'))
                 else:
                     redirect_to(url.encode('utf-8'))
+
+    @validate(schema=GGForm)
+    @ActionProtector("root")
+    def send_gg_message(self):
+        if hasattr(self, 'form_result'):
+            username = config.get('nous_im_username')
+            password = config.get('nous_im_password')
+            p = ServerProxy('http://%s:%s@localhost:6001' % (username, password))
+
+            result = p.send_gg_msg(self.form_result.get('gg_uin'),
+                                   self.form_result.get('gg_message'))
+            h.flash(result)
+
+            url = self.form_result.get('came_from', None)
+            if url is None:
+                redirect_to(url(controller='profile', action='index'))
+            else:
+                redirect_to(url.encode('utf-8'))

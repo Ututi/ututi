@@ -189,6 +189,30 @@
   </%self:action_portlet>
 </%def>
 
+<%def name="user_gg_portlet(user=None)">
+  <%self:portlet id="user_gg_portlet" portlet_class="inactive">
+    <%def name="header()" >
+    ${_('send GG message')}
+    </%def>
+
+    <div id="gg_status">
+    </div>
+    <form method="post"
+          action="${url(controller='home', action='send_gg_message')}" id="ututi_gg_form">
+      <div class="form-field">
+        <input type="hidden" name="came_from" value="${request.url}" />
+        <label for="gg_uin">${_('UIN')}</label>
+        <input type="text" name="gg_uin" id="gg_uin" length="30"/>
+        <label for="gg_message">${_('Your message.')}</label>
+        <textarea name="gg_message" id="gg_message" rows="4" cols="30"></textarea>
+      </div>
+      <div class="form-field">
+        <span class="btn"><input id="gg_submit" type="submit" value="${_('Send message')}" /></span>
+      </div>
+    </form>
+  </%self:portlet>
+</%def>
+
 <%def name="blog_portlet()">
   <%def name="entry(entry)">
     <div class="teaser">

@@ -21,6 +21,9 @@
   %if not 'recommend' in exclude:
   ${user_recommend_portlet()}
   %endif
+  %if not 'gg' in exclude and h.check_crowds(['root']):
+  ${user_gg_portlet()}
+  %endif
   %if not 'groups' in exclude:
   ${user_groups_portlet()}
   %endif
