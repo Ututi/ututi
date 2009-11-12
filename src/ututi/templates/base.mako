@@ -264,10 +264,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
     </div>
 
     %if c.lang in ['lt', 'en']:
-    <script type="text/javascript">
-      var uservoiceJsHost = ("https:" == document.location.protocol) ? "https://uservoice.com" : "http://cdn.uservoice.com";
-      document.write(unescape("%3Cscript src='" + uservoiceJsHost + "/javascripts/widgets/tab.js' type='text/javascript'%3E%3C/script%3E"))
-    </script>
+    ${h.javascript_link('/javascripts/uservoice.js')|n}
     <script type="text/javascript">
     UserVoice.Tab.show({
       /* required */
