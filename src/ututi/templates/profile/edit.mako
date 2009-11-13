@@ -53,6 +53,8 @@
   </script>
 </%def>
 
+<h1>${_('Edit your profile')}</h1>
+
 <a class="back-link" href="${url(controller='profile', action='index')}">${_('back to the profile')}</a>
 
 %if not c.user.isConfirmed:
@@ -70,8 +72,6 @@
 </div>
 %endif
 
-<h1>${_('Edit your profile')}</h1>
-
 <form method="post" action="${url(controller='profile', action='update')}" name="edit_profile_form" enctype="multipart/form-data">
   <table>
     <tr>
@@ -88,6 +88,7 @@
         </div>
       </td>
       <td class="js-alternatives">
+        <h3>${_('Personal information')}</h3>
         ${h.input_line('fullname', _('Full name'))}
         ${h.input_line('site_url', _('Address of your website or blog'))}
         ${h.input_area('description', _('About yourself'), rows='6', cols='50')}
@@ -103,15 +104,20 @@
   </table>
 </form>
 <br/>
-<h2>${_('Change your password')}</h2>
 <table>
   <tr>
     <td style="width: 220px;">&nbsp;</td>
     <td>
+      <h3>${_('Change your password')}</h3>
+    </td>
+  </tr>
+  <tr>
+    <td style="width: 220px;">&nbsp;</td>
+    <td>
       <form method="post" action="${url(controller='profile', action='password')}" id="change_password_form">
-        ${h.input_line('password', _('Current password'))}
-        ${h.input_line('new_password', _('New password'))}
-        ${h.input_line('repeat_password', _('Repeat the new password'))}
+        ${h.input_psw('password', _('Current password'))}
+        ${h.input_psw('new_password', _('New password'))}
+        ${h.input_psw('repeat_password', _('Repeat the new password'))}
 
         ${h.input_submit(_('Change password'))}
       </form>
