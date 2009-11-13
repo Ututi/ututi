@@ -547,21 +547,27 @@ form .form-field.check-field label {
 form .form-field label {
   display: block;
   /* font */
-  color: #666;
-  font-size: 12px;
-  height: 24px;
+  font-size: 0.85em;
+  height: 20px;
   line-height: 24px;
   vertical-align: middle;
-  text-transform: lowercase;
 }
 
 form .form-field div.input-line {
-  width: 180px;
+  width: 220px;
   height: 20px;
   background: url("../images/borders/input-small.png") left center no-repeat;
   line-height: 20px;
   padding-left: 5px;
   float: left;
+}
+
+#registration_form .form-field div.input-line {
+  width: 180px;
+}
+
+#login_form .form-field div.input-line {
+  width: 180px;
 }
 
 form.edit-form .form-field div.input-line {
@@ -1139,7 +1145,7 @@ div#pager {
 }
 
 #search_portlet .search-text {
-  width: 180px;
+  width: 220px;
   height: 20px;
   background: url("../images/borders/input-small.png") left center no-repeat;
   line-height: 20px;
