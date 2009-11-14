@@ -671,6 +671,17 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
 
         return render('group/members_step.mako')
 
+    def _clear_requests(self, group, user):
+        """Delete any pending invitations or requests for the group with the given email."""
+        request = meta.Session.query(PendingRequest).filter(PendingRequest.group == group)\
+            .filter(PendingRequest.user == user).first()
+        invitation = meta.Session.query(PendingInvitation).filter(PendingInvitation.group == group)\
+            .filter(PendingInvitation.email == user.emails[0].email).first()
+        if request is not None:
+            meta.Session.delete(request)
+        if invitation is not None:
+            meta.Session.delete(invitation)
+
     def _send_invitations(self, group, emails):
         count = 0
         failed = []
@@ -698,12 +709,13 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             try:
                 invitation = meta.Session.query(PendingInvitation).filter(PendingInvitation.group == group)\
                     .filter(PendingInvitation.user == c.user).one()
-                meta.Session.delete(invitation)
                 if self.form_result.get('action', '') == 'accept':
                     group.add_member(c.user)
                     h.flash(_("Congratulations! You are now a member of the group '%s'") % group.title)
                 else:
                     h.flash(_("Invitation to group '%s' rejected.") % group.title)
+
+                self._clear_requests(group, c.user)
                 meta.Session.commit()
             except NoResultFound:
                 pass
@@ -729,7 +741,9 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
                 else:
                     group_confirmation_email(group, request.user, False)
                     h.flash(_(u"Group membership denied to %s.") % request.user.fullname)
-                meta.Session.delete(request)
+
+                #delete the request and any invitations
+                self._clear_requests(group, request.user)
                 meta.Session.commit()
             except NoResultFound:
                 h.flash(_("Error confirming membership request."))
