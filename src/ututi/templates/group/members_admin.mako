@@ -39,8 +39,19 @@ ${h.javascript_link('/javascripts/forms.js')|n}
       ${invitation.email}
     </td>
     <td class="actions">
-      <a href="${url(controller='group', action='invite_members', id=c.group.group_id, emails=invitation.email)}"
-         title="${_('Send again')}">${_('Send invitation again')}</a>
+      <form style="display: inline;" method="post" action="${url(controller='group', action='invite_members', id=c.group.group_id)}">
+        <div style="display: inline;">
+          <input type="hidden" name="emails" value="${invitation.email}" />
+          <input type="submit" class="text_button" value="${_('Send invitation again')}"/>
+        </div>
+      </form>
+
+      <form style="display: inline;" method="post" action="${url(controller='group', id=c.group.group_id, action='cancel_invitation')}">
+        <div style="display: inline;">
+          <input type="hidden" name="email" value="${invitation.email}" />
+          <input type="submit" class="text_button" style="color: #888;" value="${_('Cancel invitation')}"/>
+        </div>
+      </form>
     </td>
   </tr>
   % endfor

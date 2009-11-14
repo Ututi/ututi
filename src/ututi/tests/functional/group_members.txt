@@ -15,7 +15,7 @@ Let's find the group.
 
 Let's try and invite a new member to the group.
 
-    >>> browser.getControl('Enter emails of the people You would like to invite to the group.').value = 'user@ututi.lt'
+    >>> browser.getControl('Enter emails of the people You would like to invite to the group.').value = 'user@ututi.lt, loser@ututi.lt'
     >>> browser.getControl('Invite').click()
     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
     Close
@@ -23,13 +23,19 @@ Let's try and invite a new member to the group.
 
 The user should be listed in the invited users table.
     >>> browser.printQuery("//table[@class='group-invitations']/tr/td[@class='email']/text()")
+    loser@ututi.lt
     user@ututi.lt
 
 The link to send another invitation should send another invitation email.
 
-    >>> browser.getLink('Send invitation again').click()
+    >>> browser.getControl('Send invitation again', index=1).click()
     >>> len(mail_queue)
-    2
+    3
+
+In case we change our mind, the group moderator can cancel the invitation.
+    >>> browser.getControl('Cancel invitation', index=0).click()
+    >>> browser.printQuery("//table[@class='group-invitations']/tr/td[@class='email']/text()")
+    user@ututi.lt
 
 There is also a table listing all the group's members:
 

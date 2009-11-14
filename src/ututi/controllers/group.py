@@ -152,6 +152,10 @@ class GroupInviteForm(Schema):
     allow_extra_fields = True
     emails = validators.UnicodeString(not_empty=False)
 
+class GroupInviteCancelForm(Schema):
+    """A schema for validating group member invitations"""
+    allow_extra_fields = True
+    email = validators.UnicodeString(not_empty=False)
 
 def group_action(method):
     def _group_action(self, id):
@@ -626,14 +630,30 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         else:
             return render('group/subjects_member.mako')
 
-    @validate(schema=GroupInviteForm, form='members', post_only = False, on_get = True)
     @group_action
+    @validate(schema=GroupInviteForm, form='members', post_only = False, on_get = True)
     @ActionProtector("member", "admin", "moderator")
     def invite_members(self, group):
         """Invite new members to the group."""
         if hasattr(self, 'form_result'):
             emails = self.form_result.get('emails', '').split()
             self._send_invitations(group, emails)
+        redirect_to(controller='group', action='members', id=group.group_id)
+
+    @group_action
+    @validate(schema=GroupInviteCancelForm, form='members')
+    @ActionProtector("admin", "moderator")
+    def cancel_invitation(self, group):
+        """Cancel and delete an invitation that was sent out to the user."""
+        if hasattr(self, 'form_result'):
+
+            email = self.form_result.get('email', '')
+            invitation = meta.Session.query(PendingInvitation).filter(PendingInvitation.group == group)\
+                .filter(PendingInvitation.email == email).first()
+            if invitation is not None:
+                meta.Session.delete(invitation)
+                meta.Session.commit()
+                h.flash(_('Invitation cancelled'))
         redirect_to(controller='group', action='members', id=group.group_id)
 
     @validate(schema=GroupInviteForm, form='invite_members_step')
