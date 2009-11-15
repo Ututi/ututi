@@ -14,7 +14,7 @@ log = logging.getLogger(__name__)
 
 def validate(schema=None, validators=None, form=None, variable_decode=False,
              dict_char='.', list_char='-', post_only=True, state=None,
-             on_get=False, ignore_request=False, defaults='', **htmlfill_kwargs):
+             on_get=False, ignore_request=False, defaults=None, **htmlfill_kwargs):
     """Validate input either for a FormEncode schema, or individual
     validators
 
@@ -163,13 +163,13 @@ def validate(schema=None, validators=None, form=None, variable_decode=False,
                 encoding = determine_response_charset(response)
                 form_content = form_content.decode(encoding)
 
+            if ignore_request:
+                params = {}
+
             if defaults is not None:
-                default_values = getattr(self, defaults).__call__()
-                if ignore_request:
-                    params = default_values
-                else:
-                    default_values.update(params)
-                    params = default_values
+                default_values = defaults(self)
+                default_values.update(params)
+                params = default_values
 
             form_content = htmlfill.render(form_content, defaults=params,
                                            errors=errors, **htmlfill_kwargs)

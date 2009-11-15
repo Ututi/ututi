@@ -169,7 +169,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
                                defaults=self._edit_form_defaults())
 
     @validate(PasswordChangeForm, form='_edit_form',
-              ignore_request=True, defaults='_edit_form_defaults')
+              ignore_request=True, defaults=_edit_form_defaults)
     @ActionProtector("user")
     def password(self):
         if hasattr(self, 'form_result'):
