@@ -72,7 +72,7 @@
 </div>
 %endif
 
-<form method="post" action="${url(controller='profile', action='update')}" name="edit_profile_form" enctype="multipart/form-data">
+<form method="post" action="${url(controller='profile', action='update')}" name="edit_profile_form" id="edit_profile_form" enctype="multipart/form-data">
   <table>
     <tr>
       <td style="width: 220px;">

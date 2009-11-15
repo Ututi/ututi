@@ -11,7 +11,7 @@ from webhelpers import paginate
 from pylons import request, c, url
 from pylons.templating import render_mako_def
 from pylons.controllers.util import redirect_to
-from pylons.decorators import validate
+
 from pylons.i18n import _
 
 import ututi.lib.helpers as h
@@ -21,6 +21,7 @@ from ututi.lib.security import ActionProtector
 from ututi.lib.search import search_query, search_query_count
 from ututi.lib.image import serve_image
 from ututi.lib.validators import UserPasswordValidator
+from ututi.lib.forms import validate
 
 from ututi.model.events import Event
 from ututi.model import Subject
@@ -43,7 +44,7 @@ class ProfileForm(Schema):
 class PasswordChangeForm(Schema):
     allow_extra_fields = False
 
-    password = UserPasswordValidator()
+    password = UserPasswordValidator(not_empty=True)
 
     msg = {'empty': _(u"Please enter your password to register."),
            'tooShort': _(u"The password must be at least 5 symbols long.")}
@@ -153,18 +154,22 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     def _edit_form(self):
         return render('profile/edit.mako')
 
-    @ActionProtector("user")
-    def edit(self):
+    def _edit_form_defaults(self):
         defaults = {
             'email': c.user.emails[0].email,
             'fullname': c.user.fullname,
             'site_url': c.user.site_url,
             'description': c.user.description,
             }
+        return defaults
 
-        return htmlfill.render(self._edit_form(), defaults=defaults)
+    @ActionProtector("user")
+    def edit(self):
+        return htmlfill.render(self._edit_form(),
+                               defaults=self._edit_form_defaults())
 
-    @validate(PasswordChangeForm, form='_edit_form')
+    @validate(PasswordChangeForm, form='_edit_form',
+              ignore_request=True, defaults='_edit_form_defaults')
     @ActionProtector("user")
     def password(self):
         if hasattr(self, 'form_result'):
