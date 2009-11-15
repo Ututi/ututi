@@ -56,11 +56,6 @@ ${_('student information online')}
   <div id="personal-data">
     <div class="fullname">${c.user.fullname}</div>
     <div class="small email">
-      %if not c.user.isConfirmed:
-        <a href="${url(controller='profile', action='edit')}" title="${_('Confirm your email!')}" id="email_unconfirmed">
-          ${h.image('/images/details/icon_alert.png', alt="${_('Confirm your email')}")|n}
-        </a>
-      %endif
       ${c.user.emails[0].email}
     </div>
   </div>
@@ -240,6 +235,14 @@ ${h.javascript_link('/javascripts/forms.js')|n}
             % if c.serve_file:
             <iframe style="display: none;" src="${c.serve_file.url()}"> </iframe>
             % endif
+            %if c.user and not c.user.isConfirmed:
+            <div class="flash-message">
+              <span class="close-link hide-parent">${_('Close')}</span>
+              <span>
+                ${_('Your <strong>email</strong> is not confirmed! Please confirm your email by clicking on the link sent to your address or click <a href="%(url)s">here</a> to request another confirmation message.') % dict(url=url(controller='profile', action='edit'))|n}
+              </span>
+            </div>
+            %endif
             <% messages = h.flash.pop_messages() %>
             % for message in messages:
             <div class="flash-message"><span class="close-link hide-parent">${_('Close')}</span><span>${message}</span></div>

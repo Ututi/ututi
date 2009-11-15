@@ -4,15 +4,19 @@ Test nagging users to confirm their emails
    >>> from ututi.lib.mailer import mail_queue
 
    >>> browser = Browser.logIn('user3@ututi.lt', 'password')
-   >>> browser.getLink(id='email_unconfirmed').click()
+   >>> browser.getLink('here').click()
    >>> browser.url
    'http://localhost/profile/edit'
 
    >>> form = browser.getForm(id='email_confirmation_request')
    >>> form.getControl('Get confirmation email').click()
-   >>> browser.printQuery("//div[@class='flash-message']/span/text()")
-   Close
-   Confirmation message sent. Please check your email.
+   >>> browser.printQuery("//div[@class='flash-message']/span")
+   <span class="close-link hide-parent">Close</span>
+   <span>
+     Your <strong>email</strong> is not confirmed! Please confirm your email by clicking on the link sent to your address or click <a href="/profile/edit">here</a> to request another confirmation message.
+   </span>
+   <span class="close-link hide-parent">Close</span>
+   <span>Confirmation message sent. Please check your email.</span>
 
    >>> msg = mail_queue.pop()
    >>> print msg.payload()
