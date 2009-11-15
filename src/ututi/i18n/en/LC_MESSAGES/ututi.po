@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-11-11 19:55+0200\n"
+"PO-Revision-Date: 2009-11-15 17:39+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -80,6 +80,10 @@ msgid ""
 " settings."
 msgstr ""
 
+#, python-format
+msgid "You are now a member of the group %s!"
+msgstr ""
+
 msgid ""
 "Your request to join the group was forwarded to the group's "
 "administrators. Thank You!"
@@ -106,6 +110,13 @@ msgstr ""
 msgid "Group information and settings updated."
 msgstr ""
 
+msgid "Invitation cancelled"
+msgstr ""
+
+#, python-format
+msgid "New member %s added."
+msgstr ""
+
 msgid "Users invited."
 msgstr ""
 
@@ -119,10 +130,6 @@ msgstr ""
 
 #, python-format
 msgid "Invitation to group '%s' rejected."
-msgstr ""
-
-#, python-format
-msgid "New member %s added."
 msgstr ""
 
 #, python-format
@@ -176,12 +183,27 @@ msgstr ""
 msgid "This email has already been used to register."
 msgstr ""
 
+msgid "You have to be logged in to download a file!"
+msgstr ""
+
+#, python-format
+msgid ""
+"After logging in you will be redirected to the download page of the file "
+"<strong>%(filename)s</strong> and the download will start automatically."
+msgstr ""
+
 msgid "Permission denied!"
 msgstr ""
 
 msgid ""
 "Only registered users can perform this action. Please log in, or register"
 " an account on our system."
+msgstr ""
+
+#, python-format
+msgid ""
+"If this is your first time visiting <a href=\"%(url)s\">Ututi</a>, please"
+" register first."
 msgstr ""
 
 msgid "Wrong username or password!"
@@ -266,6 +288,9 @@ msgid "Your password has been changed!"
 msgstr ""
 
 msgid "Your profile was updated."
+msgstr ""
+
+msgid "Confirmation message sent. Please check your email."
 msgstr ""
 
 #, python-format
@@ -500,6 +525,13 @@ msgid ""
 msgstr ""
 
 msgid "Close"
+msgstr ""
+
+#, python-format
+msgid ""
+"Your <strong>email</strong> is not confirmed! Please confirm your email "
+"by clicking on the link sent to your address or click <a "
+"href=\"%(url)s\">here</a> to request another confirmation message."
 msgstr ""
 
 msgid "Apie Ututi"
@@ -878,10 +910,10 @@ msgstr ""
 msgid "Invited users (have not accepted yet)"
 msgstr ""
 
-msgid "Send again"
+msgid "Send invitation again"
 msgstr ""
 
-msgid "Send invitation again"
+msgid "Cancel invitation"
 msgstr ""
 
 msgid "Awaiting confirmation"
@@ -1022,10 +1054,19 @@ msgstr ""
 msgid "My information"
 msgstr ""
 
+msgid "Edit your profile"
+msgstr ""
+
 msgid "back to the profile"
 msgstr ""
 
-msgid "Edit your profile"
+msgid "Your email is not confirmed!"
+msgstr ""
+
+msgid "Get confirmation email"
+msgstr ""
+
+msgid "Personal information"
 msgstr ""
 
 msgid "Full name"
@@ -1467,6 +1508,18 @@ msgid "Send invitation"
 msgstr ""
 
 msgid "Edit profile"
+msgstr ""
+
+msgid "send GG message"
+msgstr ""
+
+msgid "UIN"
+msgstr ""
+
+msgid "Your message."
+msgstr ""
+
+msgid "Send message"
 msgstr ""
 
 msgid "You are not a member of any."

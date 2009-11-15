@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-11-11 19:55+0200\n"
+"PO-Revision-Date: 2009-11-15 17:39+0200\n"
 "Last-Translator: eri\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && "
@@ -83,6 +83,10 @@ msgstr ""
 "Strona grupy została ukryta. Żeby pokazać ją innym - zmień ustawienia "
 "grupy."
 
+#, python-format
+msgid "You are now a member of the group %s!"
+msgstr ""
+
 msgid ""
 "Your request to join the group was forwarded to the group's "
 "administrators. Thank You!"
@@ -109,6 +113,13 @@ msgstr "Wyjdź z grupy"
 msgid "Group information and settings updated."
 msgstr "Informacje o grupie oraz ustawienia zostały zaktualizowane."
 
+msgid "Invitation cancelled"
+msgstr ""
+
+#, python-format
+msgid "New member %s added."
+msgstr "Dodał nowy członek %s."
+
 msgid "Users invited."
 msgstr "Zaproszeni użytkownicy"
 
@@ -123,10 +134,6 @@ msgstr "Gratulujemy! Właśnie dołączyłeś do grupy '%s'"
 #, python-format
 msgid "Invitation to group '%s' rejected."
 msgstr "Zaproszenie do grupy '%s' zostało odrzucone"
-
-#, python-format
-msgid "New member %s added."
-msgstr "Dodał nowy członek %s."
 
 #, python-format
 msgid "Group membership denied to %s."
@@ -179,6 +186,15 @@ msgstr "Podaj własną nazwę użytkownika."
 msgid "This email has already been used to register."
 msgstr "Ten email już jest w naszej bazie danych."
 
+msgid "You have to be logged in to download a file!"
+msgstr ""
+
+#, python-format
+msgid ""
+"After logging in you will be redirected to the download page of the file "
+"<strong>%(filename)s</strong> and the download will start automatically."
+msgstr ""
+
 msgid "Permission denied!"
 msgstr "Odmowa dostępu!"
 
@@ -188,6 +204,12 @@ msgid ""
 msgstr ""
 "Informacja udostępniana wyłącznie użytkownikom. Zaloguj się lub załóż "
 "nowe konto użytkownika."
+
+#, python-format
+msgid ""
+"If this is your first time visiting <a href=\"%(url)s\">Ututi</a>, please"
+" register first."
+msgstr ""
 
 msgid "Wrong username or password!"
 msgstr "Niepoprawny login lub hasło!"
@@ -279,6 +301,9 @@ msgstr ""
 
 msgid "Your profile was updated."
 msgstr "Twój profil został zaktualizowany."
+
+msgid "Confirmation message sent. Please check your email."
+msgstr ""
 
 #, python-format
 msgid "Your email %s was confirmed. Thank You."
@@ -529,6 +554,13 @@ msgstr ""
 
 msgid "Close"
 msgstr "Zamknij"
+
+#, python-format
+msgid ""
+"Your <strong>email</strong> is not confirmed! Please confirm your email "
+"by clicking on the link sent to your address or click <a "
+"href=\"%(url)s\">here</a> to request another confirmation message."
+msgstr ""
 
 msgid "Apie Ututi"
 msgstr "O Ututi"
@@ -946,11 +978,11 @@ msgstr "Zaproś"
 msgid "Invited users (have not accepted yet)"
 msgstr "Zaproszeni (brak akceptacji)"
 
-msgid "Send again"
-msgstr "Wyślij jeszcze raz"
-
 msgid "Send invitation again"
 msgstr "Zaproś jeszcze raz"
+
+msgid "Cancel invitation"
+msgstr ""
 
 msgid "Awaiting confirmation"
 msgstr "Czeka na potwierdzenie"
@@ -1092,11 +1124,20 @@ msgstr "Moje grupy"
 msgid "My information"
 msgstr "Moje dane"
 
+msgid "Edit your profile"
+msgstr "Popraw dane swego profilu"
+
 msgid "back to the profile"
 msgstr "wróć do profilu"
 
-msgid "Edit your profile"
-msgstr "Popraw dane swego profilu"
+msgid "Your email is not confirmed!"
+msgstr ""
+
+msgid "Get confirmation email"
+msgstr ""
+
+msgid "Personal information"
+msgstr ""
 
 msgid "Full name"
 msgstr "Imię i nazwisko"
@@ -1563,6 +1604,18 @@ msgstr "Zaproś"
 
 msgid "Edit profile"
 msgstr "Edytuj profil"
+
+msgid "send GG message"
+msgstr ""
+
+msgid "UIN"
+msgstr ""
+
+msgid "Your message."
+msgstr ""
+
+msgid "Send message"
+msgstr ""
 
 msgid "You are not a member of any."
 msgstr "Nie należysz do żadnej"

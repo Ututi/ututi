@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-11-11 19:55+0200\n"
+"PO-Revision-Date: 2009-11-15 17:39+0200\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -88,6 +88,10 @@ msgstr ""
 "Grupės puslapis buvo paslėptas. Jį galima vėl parodyti keičiant grupės "
 "nustatymus."
 
+#, python-format
+msgid "You are now a member of the group %s!"
+msgstr "Jūs tapote grupės %s nariu!"
+
 msgid ""
 "Your request to join the group was forwarded to the group's "
 "administrators. Thank You!"
@@ -114,6 +118,13 @@ msgstr "Palikti šią grupę"
 msgid "Group information and settings updated."
 msgstr "Grupės informacija ir nustatymai atnaujinti."
 
+msgid "Invitation cancelled"
+msgstr "Pakvietimas atšauktas"
+
+#, python-format
+msgid "New member %s added."
+msgstr "Pridėtas naujas narys %s."
+
 msgid "Users invited."
 msgstr "Nariai pakviesti."
 
@@ -128,10 +139,6 @@ msgstr "Sveikiname prisijungus prie grupės '%s' !"
 #, python-format
 msgid "Invitation to group '%s' rejected."
 msgstr "Kvietimas į grupę '%s' atmestas. Liūdna.."
-
-#, python-format
-msgid "New member %s added."
-msgstr "Pridėtas naujas narys %s."
 
 #, python-format
 msgid "Group membership denied to %s."
@@ -184,6 +191,18 @@ msgstr "Įveskite vardą."
 msgid "This email has already been used to register."
 msgstr "Toks el. paštas jau užregistruotas."
 
+msgid "You have to be logged in to download a file!"
+msgstr "Norėdami atsisiųsti failą, turite būti prisijungę!"
+
+#, python-format
+msgid ""
+"After logging in you will be redirected to the download page of the file "
+"<strong>%(filename)s</strong> and the download will start automatically."
+msgstr ""
+"Prisijungė prie sistemos būsite nukreipti į failo "
+"<strong>%(filename)s</strong> siuntimo puslapį ir failo siuntimas bus "
+"pradėtas automatiškai."
+
 msgid "Permission denied!"
 msgstr "Jums nepakanka teisių to padaryti. "
 
@@ -193,6 +212,14 @@ msgid ""
 msgstr ""
 "Tai gali padaryti tik registruoti naudotojai. Prašome prisijungti arba "
 "prisiregistruoti Ututi."
+
+#, python-format
+msgid ""
+"If this is your first time visiting <a href=\"%(url)s\">Ututi</a>, please"
+" register first."
+msgstr ""
+"Jeigu <a href=\\\"%(url)s\\\">Ututi</a> lankotės pirmą kartą, iš pradžių "
+"prisiregistruokite."
 
 msgid "Wrong username or password!"
 msgstr "Neteisingas el. pašto adresas ar slaptažodis!"
@@ -284,6 +311,9 @@ msgstr "Jūsų slaptažodis pakeistas!"
 
 msgid "Your profile was updated."
 msgstr "Profilis atnaujintas!"
+
+msgid "Confirmation message sent. Please check your email."
+msgstr "Patvirtinimo žinutė išsiųsta. Pasitikrinkite savo el. paštą."
 
 #, python-format
 msgid "Your email %s was confirmed. Thank You."
@@ -528,6 +558,17 @@ msgstr "Čia bandomoji versija - duomenys netikri! Tik peržiūrėjimui!"
 
 msgid "Close"
 msgstr "Uždaryti"
+
+#, python-format
+msgid ""
+"Your <strong>email</strong> is not confirmed! Please confirm your email "
+"by clicking on the link sent to your address or click <a "
+"href=\"%(url)s\">here</a> to request another confirmation message."
+msgstr ""
+"Jūsų el. pašto adresas nepatvirtintas! Prašome patvirtinti savo adresą "
+"paspaudus ant Jums atsiųstos nuorodos. Jeigu laiško negavote, spauskite "
+"<a href=\\\"%(url)s\\\">čia</a>, kad gautumėte dar vieną patvirtinimo "
+"žinutę."
 
 msgid "Apie Ututi"
 msgstr "Apie Ututi"
@@ -943,11 +984,11 @@ msgstr "pakviesti"
 msgid "Invited users (have not accepted yet)"
 msgstr "Pakviesti draugai (bet dar neprisijungę)"
 
-msgid "Send again"
-msgstr "Siųsti dar kartą"
-
 msgid "Send invitation again"
 msgstr "Siųsti pakvietimą dar kartą"
+
+msgid "Cancel invitation"
+msgstr "Atšaukti pakvietimą"
 
 msgid "Awaiting confirmation"
 msgstr "Laukiama patvirtinimo"
@@ -1089,11 +1130,20 @@ msgstr "Mano grupės"
 msgid "My information"
 msgstr "Apie mane"
 
+msgid "Edit your profile"
+msgstr "redaguoti profilį"
+
 msgid "back to the profile"
 msgstr "grįžti į profilį"
 
-msgid "Edit your profile"
-msgstr "redaguoti profilį"
+msgid "Your email is not confirmed!"
+msgstr "Jūsų el. pašto adresas nepatvirtintas!"
+
+msgid "Get confirmation email"
+msgstr "Siųsti patvirtinimo žinutę"
+
+msgid "Personal information"
+msgstr "Asmeninė informacija"
 
 msgid "Full name"
 msgstr "Vardas Pavardė"
@@ -1568,6 +1618,18 @@ msgstr "Siųsti pakvietimą"
 
 msgid "Edit profile"
 msgstr "redaguoti profilį"
+
+msgid "send GG message"
+msgstr "siųsti GG žinutę"
+
+msgid "UIN"
+msgstr "UIN"
+
+msgid "Your message."
+msgstr "Jūsų žinutė"
+
+msgid "Send message"
+msgstr "Siųsti žinutę"
 
 msgid "You are not a member of any."
 msgstr ""
