@@ -3,7 +3,7 @@ jQuery.fn.labelOver = function(overClass) {
  	var label = jQuery(this);
  	var f = label.attr('for');
  	if (f) {
- 		var input = jQuery('#' + f);
+ 	        var input = jQuery('#' + f, $(this).parents('form'));
 
  		this.hide = function() {
  		  label.hide()

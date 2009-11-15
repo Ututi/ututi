@@ -1,4 +1,4 @@
-from pylons import request
+from pylons import request, c
 
 from ututi.lib.base import BaseController, render
 
@@ -22,6 +22,7 @@ class ErrorController(SearchController):
             return render("/error.mako")
 
         if resp.status_int == 403:
+            import pdb; pdb.set_trace()
             return render("/access_denied.mako")
         elif resp.status_int == 404:
             from ututi.lib import helpers as h

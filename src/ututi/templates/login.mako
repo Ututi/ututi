@@ -19,9 +19,49 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
 <h1>${c.header}</h1>
 
 <div id="login_message" class="${c.message_class or 'permission-denied'}">
-${c.message}
+${c.message|n}
+%if c.final_msg:
+<p>
+  ${c.final_msg|n}
+</p>
+%endif
 </div>
 
+%if c.show_login:
+  <hr style="border: 0; border-top: 1px solid #ded8d8;"/>
+  <div id="login-page-form">
+    <form method="post" id="page_login_form" action="${url('/login')}">
+      <input type="hidden" name="came_from" value="${request.params.get('came_from', request.url)}" />
+      % if request.params.get('login'):
+      <div class="error">${_('Wrong password or username!')}</div>
+      % endif
+      <div class="form-field overlay">
+        <label for="login_page" class="small">${_('Email')}</label>
+        <div class="input-line"><div>
+            <input type="text" size="20" id="login_page" name="login" class="small line" value="${request.params.get('login')}" />
+        </div></div>
+      </div>
+      <br style="clear: left; height: 0; margin: 0; padding: 0;"/>
+      <div class="form-field overlay">
+        <label for="password_page" class="small">${_('Password')}</label>
+        <div class="input-line"><div>
+            <input type="password" size="20" name="password" id="password_page" class="small line"/>
+        </div></div>
+      </div>
+      <br style="clear: left; height: 0; margin: 0; padding: 0;"/>
+      <div class="form-field">
+        <span class="btn" style="float: right;"><input class="submit small" type="submit" name="join" value="Login" /></span>
+      </div>
+      <br style="clear: left; height: 0; margin: 0; padding: 0;"/>
+      <div class="form-field">
+        <a class="small-link small" href="${url(controller='home', action='pswrecovery')}">${_('forgotten password?')}</a>
+      </div>
+    </form>
+    <script type="text/javascript">
+      $("#login-page-form .overlay label").labelOver('over');
+    </script>
+  </div>
+%else:
   <h3 class="underline">${_('Why should I join?')}</h3>
   <div id="ututi_features">
     <div id="can_find">
@@ -35,4 +75,4 @@ ${c.message}
       and communicate with groupmates.')|n}
     </div>
   </div>
-
+%endif

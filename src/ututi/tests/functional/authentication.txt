@@ -111,7 +111,7 @@ Visiting a profile-related page should not crash if the user is not logged in.
     >>> browser.open('http://localhost/subject/vu/mat_analize')
     >>> browser.getLink('text.txt').click()
     >>> browser.url
-    'http://localhost/login?came_from=%2Fsubject%2Fvu%2Fmat_analize%3Fserve_file%3D3'
+    'http://localhost/login?came_from=%2Fsubject%2Fvu%2Fmat_analize%3Fserve_file%3D3&context=text.txt'
 
     >>> form = browser.getForm('login_form')
     >>> form.getControl('Email').value = "user@ututi.lt"

@@ -163,9 +163,17 @@ class HomeController(UniversityListMixin):
         destination = request.params.get('came_from',
                                    url(controller='profile',
                                       action='home'))
+        filename = request.params.get('context', None)
 
-        c.header = _('Permission denied!')
-        c.message = _('Only registered users can perform this action. Please log in, or register an account on our system.')
+        if filename is not None:
+            c.header = _('You have to be logged in to download a file!')
+            c.message = _('After logging in you will be redirected to the download page of the file <strong>%(filename)s</strong> and the download will start automatically.') % dict(filename=filename)
+            c.show_login = True
+        else:
+            c.header = _('Permission denied!')
+            c.message = _('Only registered users can perform this action. Please log in, or register an account on our system.')
+            c.show_login = False
+        c.final_msg = _('If this is your first time visiting <a href="%(url)s">Ututi</a>, please register first.') % dict(url=url('/', qualified=True))
 
         if password is not None:
             user = None
