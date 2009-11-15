@@ -244,10 +244,17 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     def request_join(self, group):
         request = PendingRequest.get(c.user, group)
         if request is None and not group.is_member(c.user):
-            group.request_join(c.user)
-            group_request_email(group, c.user)
+            if c.user is not None and self._check_handshakes(group, c.user) == 'invitation':
+                group.add_member(c.user)
+                self._clear_requests(group, c.user)
+                h.flash(_('You are now a member of the group %s!') % group.title)
+            else:
+                group.request_join(c.user)
+                group_request_email(group, c.user)
+                h.flash(_("Your request to join the group was forwarded to the group's administrators. Thank You!"))
+
             meta.Session.commit()
-            h.flash(_("Your request to join the group was forwarded to the group's administrators. Thank You!"))
+
         elif group.is_member(c.user):
             h.flash(_("You already are a member of this group."))
         else:
@@ -682,6 +689,14 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         if invitation is not None:
             meta.Session.delete(invitation)
 
+    def _check_handshakes(self, group, user):
+        """Check if the user already has a request to join the group or an invitation"""
+        request = meta.Session.query(PendingRequest).filter(PendingRequest.group == group)\
+            .filter(PendingRequest.user == user).first()
+        invitation = meta.Session.query(PendingInvitation).filter(PendingInvitation.group == group)\
+            .filter(PendingInvitation.email == user.emails[0].email).first()
+        return request is not None and 'request' or invitation is not None and 'invitation'
+
     def _send_invitations(self, group, emails):
         count = 0
         failed = []
@@ -690,8 +705,14 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
                 #XXX : need to validate emails
                 try:
                     validators.Email.to_python(email)
-                    count = count + 1
-                    group.invite_user(email, c.user)
+                    user = User.get(email)
+                    if user is not None and self._check_handshakes(group, user) == 'request':
+                        group.add_member(user)
+                        self._clear_requests(group, c.user)
+                        h.flash(_('New member %s added.') % user.fullname)
+                    else:
+                        count = count + 1
+                        group.invite_user(email, c.user)
                 except:
                     failed.append(email)
         if count > 0:

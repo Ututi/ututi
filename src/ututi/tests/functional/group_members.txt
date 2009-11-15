@@ -1,6 +1,13 @@
 Group members views
 ===================
+
     >>> from ututi.lib.mailer import mail_queue
+    >>> from ututi.lib.mailer import mail_queue
+    >>> def printEmails():
+    ...     for email in mail_queue:
+    ...         print email.recipients
+    ...         print email.payload()
+
 
 First of all let's log in;
 
@@ -15,7 +22,7 @@ Let's find the group.
 
 Let's try and invite a new member to the group.
 
-    >>> browser.getControl('Enter emails of the people You would like to invite to the group.').value = 'user@ututi.lt, loser@ututi.lt'
+    >>> browser.getControl('Enter emails of the people You would like to invite to the group.').value = 'user@ututi.lt, loser@ututi.lt, user2@ututi.lt'
     >>> browser.getControl('Invite').click()
     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
     Close
@@ -24,17 +31,23 @@ Let's try and invite a new member to the group.
 The user should be listed in the invited users table.
     >>> browser.printQuery("//table[@class='group-invitations']/tr/td[@class='email']/text()")
     loser@ututi.lt
+    user2@ututi.lt
     user@ututi.lt
+
+    >>> len(mail_queue)
+    3
+
 
 The link to send another invitation should send another invitation email.
 
     >>> browser.getControl('Send invitation again', index=1).click()
     >>> len(mail_queue)
-    3
+    4
 
 In case we change our mind, the group moderator can cancel the invitation.
     >>> browser.getControl('Cancel invitation', index=0).click()
     >>> browser.printQuery("//table[@class='group-invitations']/tr/td[@class='email']/text()")
+    user2@ututi.lt
     user@ututi.lt
 
 There is also a table listing all the group's members:
@@ -99,6 +112,7 @@ Now let's see if the view for the user has changed.
     >>> browser2.reload()
     >>> browser2.printQuery('//h2/text()')
     Invite your group mates
+    Invited users (have not accepted yet)
     Group members
 
 Let's use this ui to leave the group:
@@ -116,3 +130,14 @@ And the user is not a member of this group anymore:
     Traceback (most recent call last):
     ...
     httperror_seek_wrapper: HTTP Error 403: Forbidden
+
+If a user, who has been invited to join a group requests to join it, we consider this as an acceptance of the invitation.
+    >>> browser3 = Browser.logIn('user2@ututi.lt', 'password')
+    >>> browser3.open('http://localhost/group/moderators')
+    >>> browser3.url
+    'http://localhost/group/moderators/home'
+
+    >>> browser3.getControl('Join the group').click()
+    >>> browser3.printQuery("//div[@class='flash-message']/span/text()")
+    Close
+    You are now a member of the group Moderatoriai!
