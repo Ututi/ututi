@@ -1418,7 +1418,7 @@ div.upload_dropdown .button {
   color: #1a1a1a;
 }
 
-div.upload_dropdown .button div {
+div.upload_dropdown .button div.inner {
   height: 19px;
   background: transparent url("../images/file_dropdown.png") right center no-repeat;
   padding: 0;
