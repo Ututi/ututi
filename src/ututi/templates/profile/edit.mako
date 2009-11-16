@@ -82,7 +82,7 @@
           <a href="#" id="user-logo-button" class="btn"><span>${_('Change logo')}</span></a>
         </div>
         <br style="clear: left;"/>
-        <div class="form-field no-break" style="text-align: center;">
+        <div class="form-field no-break">
           <input type="checkbox" name="logo_delete" id="logo_delete" value="delete" class="line"/>
           <label for="logo_delete">${_('Delete current logo')}</label>
         </div>

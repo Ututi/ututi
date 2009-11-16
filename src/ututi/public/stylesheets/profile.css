@@ -1,5 +1,5 @@
 #user-logo {
-  text-align: center;
+  text-align: left;
   margin: 0 auto;
 }
 
@@ -24,7 +24,9 @@
   margin-top: 10px;
 }
 
-
+form#edit_profile_form .form-field textarea {
+  width: 360px;
+}
 
 .personal_watched_subjects {
   padding-left: 10px;
