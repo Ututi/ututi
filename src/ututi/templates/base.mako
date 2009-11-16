@@ -239,7 +239,14 @@ ${h.javascript_link('/javascripts/forms.js')|n}
             <div class="flash-message">
               <span class="close-link hide-parent">${_('Close')}</span>
               <span>
-                ${_('Your <strong>email</strong> is not confirmed! Please confirm your email by clicking on the link sent to your address or click <a href="%(url)s">here</a> to request another confirmation message.') % dict(url=url(controller='profile', action='edit'))|n}
+                ${_('Your <strong>email</strong> is not confirmed! Please confirm your email by clicking on the link sent to your address or ')|n}
+                    <form method="post" action="${url(controller='profile', action='confirm_emails')}" id="email_confirmation_request" class="inline-form">
+                      <div>
+                        <input type="hidden" name="email" value="${c.user.emails[0].email}" />
+                        ${h.input_submit(_('get another confirmation email'))}
+                      </div>
+                    </form>
+
               </span>
             </div>
             %endif

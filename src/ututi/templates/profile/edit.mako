@@ -57,21 +57,6 @@
 
 <a class="back-link" href="${url(controller='profile', action='index')}">${_('back to the profile')}</a>
 
-%if not c.user.isConfirmed:
-<div style="margin: 10px 0;">
-  <div class="error larger" style="height: 32px; line-height: 32px; padding: 3px 5px 0 0; float: left;">${_('Your email is not confirmed!')}</div>
-  <div style="float: left">
-    <form method="post" action="${url(controller='profile', action='confirm_emails')}" id="email_confirmation_request">
-      <div>
-        <input type="hidden" name="email" value="" />
-        ${h.input_submit(_('Get confirmation email'))}
-      </div>
-    </form>
-  </div>
-  <br class="clear-left" />
-</div>
-%endif
-
 <form method="post" action="${url(controller='profile', action='update')}" name="edit_profile_form" id="edit_profile_form" enctype="multipart/form-data">
   <table>
     <tr>
