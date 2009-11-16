@@ -258,7 +258,11 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             for email in emails:
                 email_confirmation_request(c.user, email)
             h.flash(_('Confirmation message sent. Please check your email.'))
-            redirect_to(controller='profile', action='edit')
+            dest = request.POST.get('came_from', None)
+            if dest is not None:
+                redirect_to(dest.encode('utf-8'))
+            else:
+                redirect_to(controller='profile', action='edit')
         else:
             redirect_to(controller='home', action='home')
 

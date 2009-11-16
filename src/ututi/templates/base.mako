@@ -242,8 +242,9 @@ ${h.javascript_link('/javascripts/forms.js')|n}
                 ${_('Your <strong>email</strong> is not confirmed! Please confirm your email by clicking on the link sent to your address or ')|n}
                     <form method="post" action="${url(controller='profile', action='confirm_emails')}" id="email_confirmation_request" class="inline-form">
                       <div>
+                        <input type="hidden" name="came_from" value="${request.url}" />
                         <input type="hidden" name="email" value="${c.user.emails[0].email}" />
-                        ${h.input_submit(_('get another confirmation email'))}
+                        <input type="submit" class="text_button" value="${_('get another confirmation email')}" style="font-size: 13px;"/>
                       </div>
                     </form>
 

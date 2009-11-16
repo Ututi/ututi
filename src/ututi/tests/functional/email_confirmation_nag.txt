@@ -7,15 +7,12 @@ Test nagging users to confirm their emails
    >>> browser.printQuery("//div[@class='flash-message']/span")
    <span class="close-link hide-parent">Close</span>
    <span>
-       Your <strong>email</strong> is not confirmed! Please confirm your email by clicking on the link sent to your address or
-       <form method="post" action="/profile/confirm_emails" id="email_confirmation_request" class="inline-form">
+     Your <strong>email</strong> is not confirmed! Please confirm your email by clicking on the link sent to your address or
+     <form method="post" action="/profile/confirm_emails" id="email_confirmation_request" class="inline-form">
        <div>
+         <input type="hidden" name="came_from" value="http://localhost/welcome" />
          <input type="hidden" name="email" value="user3@ututi.lt" />
-         <div class="form-field">
-           <span class="btn">
-             <input type="submit" value="get another confirmation email" />
-           </span>
-         </div>
+         <input type="submit" class="text_button" value="get another confirmation email" style="font-size: 13px;" />
        </div>
      </form>
    </span>
@@ -25,15 +22,12 @@ Test nagging users to confirm their emails
    >>> browser.printQuery("//div[@class='flash-message']/span")
    <span class="close-link hide-parent">Close</span>
    <span>
-       Your <strong>email</strong> is not confirmed! Please confirm your email by clicking on the link sent to your address or
-       <form method="post" action="/profile/confirm_emails" id="email_confirmation_request" class="inline-form">
+     Your <strong>email</strong> is not confirmed! Please confirm your email by clicking on the link sent to your address or
+     <form method="post" action="/profile/confirm_emails" id="email_confirmation_request" class="inline-form">
        <div>
+         <input type="hidden" name="came_from" value="http://localhost/welcome" />
          <input type="hidden" name="email" value="user3@ututi.lt" />
-         <div class="form-field">
-           <span class="btn">
-             <input type="submit" value="get another confirmation email" />
-           </span>
-         </div>
+         <input type="submit" class="text_button" value="get another confirmation email" style="font-size: 13px;" />
        </div>
      </form>
    </span>
