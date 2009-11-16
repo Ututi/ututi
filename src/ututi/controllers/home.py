@@ -352,14 +352,8 @@ class HomeController(UniversityListMixin):
     @ActionProtector("root")
     def send_gg_message(self):
         if hasattr(self, 'form_result'):
-            username = config.get('nous_im_username')
-            password = config.get('nous_im_password')
-            p = ServerProxy('http://%s:%s@localhost:6001' % (username, password))
-
-            result = p.send_gg_msg(self.form_result.get('gg_uin'),
-                                   self.form_result.get('gg_message'))
-            h.flash(result)
-
+            h.flash(gg.send_message(self.form_result.get('gg_uin'),
+                                    self.form_result.get('gg_message')))
             url = self.form_result.get('came_from', None)
             if url is None:
                 redirect_to(url(controller='profile', action='index'))
