@@ -1,5 +1,4 @@
 import logging
-from xmlrpclib import ServerProxy
 from random import Random
 import string
 from datetime import datetime
@@ -19,6 +18,7 @@ from sqlalchemy.orm.exc import NoResultFound
 
 from ututi.lib.base import BaseController, render, render_lang
 import ututi.lib.helpers as h
+from ututi.lib import gg
 from ututi.lib.emails import email_confirmation_request, email_password_reset
 from ututi.lib.messaging import Message
 from ututi.lib.security import ActionProtector
