@@ -10,6 +10,10 @@ create table users (
        logo bytea default null,
        accepted_terms timestamp default null,
        receive_email_each varchar(30) default 'day',
+       gadugadu_uin bigint default null,
+       gadugadu_confirmed boolean default false,
+       gadugadu_confirmation_key char(32) default '',
+       gadugadu_get_news boolean default false,
        primary key (id));;
 
 /* Create first user=admin and password=asdasd */
