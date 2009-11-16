@@ -9,7 +9,7 @@
   display: none;
   position: absolute;
   z-index: 10000;
-  width: 200px;
+  width: 180px;
 }
 
 .ac_results ul {
@@ -36,6 +36,11 @@
 
 .location-tag-field .input-line {
   float: none !important;
+  width: 180px !important;
+}
+
+.location-tag-field .input-line div input {
+  width: 180px !important;
 }
 
 #location-tag-field-1, #location-tag-field-2, #location-tag-field-3, #location-tag-field-4 {
