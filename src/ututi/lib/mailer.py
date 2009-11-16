@@ -32,6 +32,8 @@ class EmailInfo(object):
         return "<EmailInfo sender='%s' recipients=%s>" % (self.sender,
                                                           self.recipients)
 
+    __repr__ = __str__
+
 
 def send_email(sender, recipient, subject, body, html_body=None,
                message_id=None, reply_to=None, send_to=None, list_id=None):

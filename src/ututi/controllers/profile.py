@@ -6,6 +6,7 @@ from pkg_resources import resource_stream
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql.expression import desc, or_, asc, func
 from formencode import Schema, validators, htmlfill
+from formencode.api import Invalid
 from webhelpers import paginate
 
 from pylons import request, c, url
@@ -29,6 +30,7 @@ from ututi.model import LocationTag, BlogEntry
 from ututi.model import meta, Email, Group, SearchItem
 from ututi.controllers.group import _filter_watched_subjects, FileUploadTypeValidator
 from ututi.controllers.search import SearchSubmit, SearchBaseController
+from ututi.controllers.home import sign_in_user
 from ututi.controllers.home import UniversityListMixin
 
 log = logging.getLogger(__name__)
@@ -48,16 +50,52 @@ class PasswordChangeForm(Schema):
 
     msg = {'empty': _(u"Please enter your password to register."),
            'tooShort': _(u"The password must be at least 5 symbols long.")}
+
     new_password = validators.String(
         min=5, not_empty=True, strip=True, messages=msg)
+
     repeat_password = validators.String(
         min=5, not_empty=True, strip=True, messages=msg)
+
     msg = {'invalid': _(u"Passwords do not match."),
            'invalidNoMatch': _(u"Passwords do not match."),
            'empty': _(u"Please enter your password to register.")}
     chained_validators = [validators.FieldsMatch('new_password',
                                                  'repeat_password',
                                                  messages=msg)]
+
+
+class GaduGaduConfirmationNumber(validators.FormValidator):
+
+    messages = {
+        'invalid': _(u"This is not the confirmation code we sent you."),
+    }
+
+    def validate_python(self, form_dict, state):
+        if not form_dict['gadugadu_confirmation_key']:
+            return
+        if (form_dict['gadugadu_confirmation_key'] and
+            c.user.gadugadu_uin == form_dict['gadugadu_uin'] and
+            c.user.gadugadu_confirmation_key == form_dict['gadugadu_confirmation_key']):
+            return
+
+        raise Invalid(self.message('invalid', state),
+                      form_dict, state,
+                      error_dict={'gadugadu_confirmation_key': Invalid(self.message('invalid', state), form_dict, state)})
+
+
+class ContactForm(Schema):
+
+    allow_extra_fields = False
+
+    email = validators.Email()
+
+    gadugadu_uin = validators.Int()
+    gadugadu_confirmation_key = validators.String()
+
+    confirm_email = validators.Bool()
+
+    chained_validators = [GaduGaduConfirmationNumber()]
 
 
 class LogoUpload(Schema):
@@ -151,12 +189,13 @@ class ProfileController(SearchBaseController, UniversityListMixin):
 
         return render('/profile/home.mako')
 
-    def _edit_form(self):
+    def _edit_form(self, defaults=None):
         return render('profile/edit.mako')
 
     def _edit_form_defaults(self):
         defaults = {
             'email': c.user.emails[0].email,
+            'gadugadu_uin': c.user.gadugadu_uin,
             'fullname': c.user.fullname,
             'site_url': c.user.site_url,
             'description': c.user.description,
@@ -189,7 +228,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             meta.Session.commit()
             return ''
 
-    @validate(ProfileForm, form='_edit_form')
+    @validate(ProfileForm, form='_edit_form', defaults=_edit_form_defaults)
     @ActionProtector("user")
     def update(self):
         fields = ('fullname', 'logo_upload', 'logo_delete', 'site_url', 'description')
@@ -439,3 +478,24 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         if request.params.get('ajax'):
             return 'OK'
         redirect_to(controller='profile', action='subjects')
+
+    @validate(ContactForm, form='_edit_form', defaults=_edit_form_defaults)
+    @ActionProtector("user")
+    def update_contacts(self):
+        if hasattr(self, 'form_result'):
+            if self.form_result['confirm_email']:
+                h.flash(_('Confirmation message sent. Please check your email.'))
+                email_confirmation_request(c.user, c.user.emails[0].email)
+                redirect_to(controller='profile', action='edit')
+
+            # handle email
+            email = self.form_result['email']
+            if email != c.user.emails[0].email:
+                c.user.emails[0].email = email
+                c.user.emails[0].confirmed = False
+                email_confirmation_request(c.user, email)
+                meta.Session.commit()
+                sign_in_user(email)
+            redirect_to(controller='profile', action='edit')
+        else:
+            redirect_to(controller='profile', action='edit')

@@ -82,13 +82,59 @@
           <label for="logo_upload">${_('Personal logo')}</label>
           <input type="file" name="logo_upload" id="logo_upload" class="line"/>
         </div>
-
         ${h.input_submit()}
       </td>
     </tr>
   </table>
 </form>
-<br/>
+
+<br />
+<form method="post" action="${url(controller='profile', action='update_contacts')}"
+      id="contacts_form">
+  <table>
+    <tr>
+      <td style="width: 220px;">&nbsp;</td>
+      <td>
+        <h3>${_('Contact data')}</h3>
+      </td>
+    </tr>
+    <tr>
+      <td style="width: 220px;">&nbsp;</td>
+      <td>
+        <input type="hidden"  name="gadugadu_confirmation_key" />
+        %if c.gg_enabled:
+          ${h.input_line('gadugadu_uin', _('Your GG number'))}
+          %if c.user.gadugadu_uin:
+              %if c.user.gadugadu_uin and c.user.gadugadu_confirmed:
+                <span class="unconfirmed">${_('(unconfirmed)')}</span>
+              %else:
+                <span class="confirmed">${_('number is confirmed')}</span>
+              %endif
+          %endif
+        %else:
+          <input type="hidden"  name="gadugadu_uin" />
+        %endif
+        ${h.input_line('email', _('Your email address'))}
+        %if not c.user.isConfirmed:
+          (unconfirmed)
+        <div>
+          ${h.input_submit(_('Get confirmation email'), name='confirm_email')}
+        </div>
+        %else:
+          <span class="confirmed">${_('email is confirmed')}</span>
+        %endif
+      </td>
+    </tr>
+    <tr>
+      <td style="width: 220px;">&nbsp;</td>
+      <td>
+        ${h.input_submit(_('Update contacts'))}
+      </td>
+    </tr>
+  </table>
+</form>
+
+<br />
 <table>
   <tr>
     <td style="width: 220px;">&nbsp;</td>

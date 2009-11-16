@@ -226,13 +226,16 @@ def input_wysiwyg(name, title, value='', cols='80', rows='15'):
             HTML.textarea(class_='ckeditor', name_=name, id_=name, cols=cols, rows=rows, c=[value])
             ])
 
-def input_submit(text=None):
+def input_submit(text=None, name=None):
     if text is None:
         from pylons.i18n import _
         text = _('Save')
+    kwargs = {}
+    if name is not None:
+        kwargs['name'] = name
     return HTML.div(class_='form-field', c=[
             HTML.span(class_='btn', c=[
-                HTML.input(type_='submit', value=text)
+                HTML.input(type_='submit', value=text, **kwargs)
                 ])
             ])
 
