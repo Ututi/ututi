@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-11-16 12:06+0200\n"
+"PO-Revision-Date: 2009-11-16 12:40+0200\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -559,12 +559,13 @@ msgstr "Čia bandomoji versija - duomenys netikri! Tik peržiūrėjimui!"
 msgid "Close"
 msgstr "Uždaryti"
 
-#, python-format
 msgid ""
 "Your <strong>email</strong> is not confirmed! Please confirm your email "
-"by clicking on the link sent to your address or click <a "
-"href=\"%(url)s\">here</a> to request another confirmation message."
-msgstr "Jūsų el. pašto adresas nepatvirtintas! Prašome patvirtinti savo adresą paspaudus ant Jums atsiųstos nuorodos. Jeigu laiško negavote, spauskite <a href=\"%(url)s\">čia</a>, kad gautumėte dar vieną patvirtinimo žinutę."
+"by clicking on the link sent to your address or "
+msgstr "Jūsų <strong>el. pašto adresas</strong> yra nepatvirtintas! Patvirtinkite jį paspausdami ant Jums išsiųstos nuorodos arba "
+
+msgid "get another confirmation email"
+msgstr "gaukite dar vieną patvirtinimo žinutę"
 
 msgid "Apie Ututi"
 msgstr "Apie Ututi"
@@ -1131,12 +1132,6 @@ msgstr "redaguoti profilį"
 
 msgid "back to the profile"
 msgstr "grįžti į profilį"
-
-msgid "Your email is not confirmed!"
-msgstr "Jūsų el. pašto adresas nepatvirtintas!"
-
-msgid "Get confirmation email"
-msgstr "Siųsti patvirtinimo žinutę"
 
 msgid "Personal information"
 msgstr "Asmeninė informacija"

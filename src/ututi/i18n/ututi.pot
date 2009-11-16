@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2009-11-16 11:54+0200\n"
+"POT-Creation-Date: 2009-11-16 12:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -521,11 +521,12 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-#, python-format
 msgid ""
 "Your <strong>email</strong> is not confirmed! Please confirm your email by "
-"clicking on the link sent to your address or click <a "
-"href=\"%(url)s\">here</a> to request another confirmation message."
+"clicking on the link sent to your address or "
+msgstr ""
+
+msgid "get another confirmation email"
 msgstr ""
 
 msgid "Apie Ututi"
@@ -1049,12 +1050,6 @@ msgid "Edit your profile"
 msgstr ""
 
 msgid "back to the profile"
-msgstr ""
-
-msgid "Your email is not confirmed!"
-msgstr ""
-
-msgid "Get confirmation email"
 msgstr ""
 
 msgid "Personal information"

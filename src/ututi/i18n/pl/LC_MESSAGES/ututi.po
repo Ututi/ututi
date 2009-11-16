@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-11-16 11:54+0200\n"
+"PO-Revision-Date: 2009-11-16 12:39+0200\n"
 "Last-Translator: Jaroslav Šatkevič <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && "
@@ -555,11 +555,12 @@ msgstr ""
 msgid "Close"
 msgstr "Zamknij"
 
-#, python-format
 msgid ""
 "Your <strong>email</strong> is not confirmed! Please confirm your email "
-"by clicking on the link sent to your address or click <a "
-"href=\"%(url)s\">here</a> to request another confirmation message."
+"by clicking on the link sent to your address or "
+msgstr ""
+
+msgid "get another confirmation email"
 msgstr ""
 
 msgid "Apie Ututi"
@@ -1129,12 +1130,6 @@ msgstr "Popraw dane swego profilu"
 
 msgid "back to the profile"
 msgstr "wróć do profilu"
-
-msgid "Your email is not confirmed!"
-msgstr ""
-
-msgid "Get confirmation email"
-msgstr ""
 
 msgid "Personal information"
 msgstr ""
