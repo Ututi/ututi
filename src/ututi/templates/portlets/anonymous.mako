@@ -29,6 +29,15 @@
           </div></div>
           <label for="email">${_('Email')}</label>
         </div>
+        %if c.lang == 'pl':
+        <form:error name="gadugadu"/>
+        <div class="form-field">
+          <div class="input-line"><div>
+              <input  type="text" id="gadugadu" name="gadugadu" size="40" class="line"/>
+          </div></div>
+          <label for="email">${_('Gadu gadu')}</label>
+        </div>
+        %endif
         <form:error name="new_password"/>
         <div class="form-field">
           <div class="input-line"><div>
@@ -48,8 +57,8 @@
           <label for="agree">${_('I agree to the ')} <a href="${url(controller='home', action='terms')}">${_('terms of use')}</a></label>
           <input type="checkbox" name="agree" value="true" style="float: right;"/>
         </div>
-        <div class="form-field" style="clear: right;">
-          <span class="btn">
+        <div class="form-field" style="clear: right; text-align: right; padding: 15px 0 5px;">
+          <span class="btn-large">
             <input type="submit" value="${_('Register')}"/>
           </span>
         </div>
