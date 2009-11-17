@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-11-16 12:39+0200\n"
+"PO-Revision-Date: 2009-11-17 15:49+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -279,6 +279,9 @@ msgstr[1] ""
 
 #, python-format
 msgid "Ututi news: %(file_changes)s and %(page_changes)s"
+msgstr ""
+
+msgid "This is not the confirmation code we sent you."
 msgstr ""
 
 msgid "Search"
@@ -1076,6 +1079,42 @@ msgstr ""
 msgid "Personal logo"
 msgstr ""
 
+msgid "Contact data"
+msgstr ""
+
+msgid "Your GG number"
+msgstr ""
+
+msgid "(unconfirmed)"
+msgstr ""
+
+msgid "Send code again"
+msgstr ""
+
+msgid ""
+"If you want to confirm your GaduGadu number, please enter the code that "
+"you have received in your GG. Also don't forget to add Ututi (123345) to "
+"your friends."
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "number is confirmed"
+msgstr ""
+
+msgid "Your email address"
+msgstr ""
+
+msgid "Get confirmation email"
+msgstr ""
+
+msgid "email is confirmed"
+msgstr ""
+
+msgid "Update contacts"
+msgstr ""
+
 msgid "Change your password"
 msgstr ""
 
@@ -1209,6 +1248,9 @@ msgstr[1] ""
 msgid "No results found."
 msgstr ""
 
+msgid "upload file to..."
+msgstr ""
+
 msgid "Here"
 msgstr ""
 
@@ -1216,9 +1258,6 @@ msgid "(Delete)"
 msgstr ""
 
 msgid "There are no files here, this folder is empty!"
-msgstr ""
-
-msgid "upload file to..."
 msgstr ""
 
 msgid "Upload the file to any folder."

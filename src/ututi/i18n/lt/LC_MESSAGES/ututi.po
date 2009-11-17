@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-11-16 12:40+0200\n"
+"PO-Revision-Date: 2009-11-17 15:49+0200\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -303,6 +303,9 @@ msgstr[2] "%(page_count)d naujų puslapių"
 msgid "Ututi news: %(file_changes)s and %(page_changes)s"
 msgstr "Ututi naujienos: %(file_changes)s ir %(page_changes)s"
 
+msgid "This is not the confirmation code we sent you."
+msgstr ""
+
 msgid "Search"
 msgstr "Paieška"
 
@@ -562,7 +565,9 @@ msgstr "Uždaryti"
 msgid ""
 "Your <strong>email</strong> is not confirmed! Please confirm your email "
 "by clicking on the link sent to your address or "
-msgstr "Jūsų <strong>el. pašto adresas</strong> yra nepatvirtintas! Patvirtinkite jį paspausdami ant Jums išsiųstos nuorodos arba "
+msgstr ""
+"Jūsų <strong>el. pašto adresas</strong> yra nepatvirtintas! Patvirtinkite"
+" jį paspausdami ant Jums išsiųstos nuorodos arba "
 
 msgid "get another confirmation email"
 msgstr "gaukite dar vieną patvirtinimo žinutę"
@@ -1148,6 +1153,42 @@ msgstr "Šiek tiek informacijos apie save"
 msgid "Personal logo"
 msgstr "Asmeninis logo"
 
+msgid "Contact data"
+msgstr ""
+
+msgid "Your GG number"
+msgstr ""
+
+msgid "(unconfirmed)"
+msgstr ""
+
+msgid "Send code again"
+msgstr ""
+
+msgid ""
+"If you want to confirm your GaduGadu number, please enter the code that "
+"you have received in your GG. Also don't forget to add Ututi (123345) to "
+"your friends."
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "number is confirmed"
+msgstr ""
+
+msgid "Your email address"
+msgstr ""
+
+msgid "Get confirmation email"
+msgstr ""
+
+msgid "email is confirmed"
+msgstr ""
+
+msgid "Update contacts"
+msgstr ""
+
 msgid "Change your password"
 msgstr "Pakeiskite savo slaptažodį"
 
@@ -1297,6 +1338,9 @@ msgstr[2] "rasta %(count)s rezultatų"
 msgid "No results found."
 msgstr "Nerasta jokių rezultatų."
 
+msgid "upload file to..."
+msgstr "įkelti failą į..."
+
 msgid "Here"
 msgstr "tiesiog čia"
 
@@ -1305,9 +1349,6 @@ msgstr "(Trinti)"
 
 msgid "There are no files here, this folder is empty!"
 msgstr "Čia failų nėra, aplankas tuščias!"
-
-msgid "upload file to..."
-msgstr "įkelti failą į..."
 
 msgid "Upload the file to any folder."
 msgstr "Įkelkite failą į norimą katalogą."
