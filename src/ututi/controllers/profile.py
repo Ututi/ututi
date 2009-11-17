@@ -74,7 +74,6 @@ class GaduGaduConfirmationNumber(validators.FormValidator):
     }
 
     def validate_python(self, form_dict, state):
-        import pdb; pdb.set_trace()
         if not form_dict['gadugadu_confirmation_key']:
             return
         if not form_dict['confirm_gadugadu'] and not form_dict['update_contacts']:
