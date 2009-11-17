@@ -21,10 +21,10 @@
 <%def name="header()">
 </%def>
 <div class="structured_info">
-    <a class="facebook-link" href="http://facebook.com/ututi" title="${_('Find us on Facebook')}">
+    <a class="facebook-link" href="${_('facebook_link')}" title="${_('Find us on Facebook')}">
       <img src="${url('/images/bunners/facebook.jpeg')}" alt="facebook" />
     </a>
-    <a class="blog-link" href="http://blog.ututi.lt" title="${_('Read our blog')}">
+    <a class="blog-link" href="${_('blog_link')}" title="${_('Read our blog')}">
       <img src="${url('/images/bunners/ublog.jpeg')}" alt="U-blog" />
     </a>
 
