@@ -17,7 +17,7 @@ table#forum-thread-list td.subject {
 
 table#forum-thread-list td.subject a {
   padding-right: 17px;
-  color: #1a1a1a;
+  color: #333333;
   font-size: 1.2em;
   background: transparent url("../images/details/arrow.png") right center no-repeat;
 }
