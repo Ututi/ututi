@@ -101,18 +101,29 @@
     <tr>
       <td style="width: 220px;">&nbsp;</td>
       <td>
-        <input type="hidden"  name="gadugadu_confirmation_key" />
         %if c.gg_enabled:
           ${h.input_line('gadugadu_uin', _('Your GG number'))}
           %if c.user.gadugadu_uin:
-              %if c.user.gadugadu_uin and c.user.gadugadu_confirmed:
+              %if not c.user.gadugadu_confirmed:
                 <span class="unconfirmed">${_('(unconfirmed)')}</span>
+                ${h.input_submit(_('Send code again'))}
+                ${_("If you want to confirm your GaduGadu number,"
+                    " please enter the code that you have received"
+                    " in your GG. Also don't forget to add Ututi "
+                    "(123345) to your friends.")}
+                <br />
+                <input type="text" name="gadugadu_confirmation_key" />
+                <span class="btn"><input name="confirm_gadugadu" value="${_('OK')}" type="submit"></span>
               %else:
+                <input type="hidden"  name="gadugadu_confirmation_key" />
                 <span class="confirmed">${_('number is confirmed')}</span>
               %endif
+          %else:
+          <input type="hidden"  name="gadugadu_confirmation_key" />
           %endif
         %else:
           <input type="hidden"  name="gadugadu_uin" />
+          <input type="hidden"  name="gadugadu_confirmation_key" />
         %endif
         ${h.input_line('email', _('Your email address'))}
         %if not c.user.isConfirmed:

@@ -1,6 +1,7 @@
 from datetime import date
 import logging
 
+from paste.util.converters import asbool
 from pkg_resources import resource_stream
 
 from sqlalchemy.orm.exc import NoResultFound
@@ -9,7 +10,7 @@ from formencode import Schema, validators, htmlfill
 from formencode.api import Invalid
 from webhelpers import paginate
 
-from pylons import request, c, url
+from pylons import request, c, url, config
 from pylons.templating import render_mako_def
 from pylons.controllers.util import redirect_to
 
@@ -23,6 +24,7 @@ from ututi.lib.search import search_query, search_query_count
 from ututi.lib.image import serve_image
 from ututi.lib.validators import UserPasswordValidator
 from ututi.lib.forms import validate
+from ututi.lib import gg
 
 from ututi.model.events import Event
 from ututi.model import Subject
@@ -72,11 +74,14 @@ class GaduGaduConfirmationNumber(validators.FormValidator):
     }
 
     def validate_python(self, form_dict, state):
+        import pdb; pdb.set_trace()
         if not form_dict['gadugadu_confirmation_key']:
+            return
+        if not form_dict['confirm_gadugadu'] and not form_dict['update_contacts']:
             return
         if (form_dict['gadugadu_confirmation_key'] and
             c.user.gadugadu_uin == form_dict['gadugadu_uin'] and
-            c.user.gadugadu_confirmation_key == form_dict['gadugadu_confirmation_key']):
+            c.user.gadugadu_confirmation_key.strip() == form_dict['gadugadu_confirmation_key']):
             return
 
         raise Invalid(self.message('invalid', state),
@@ -94,6 +99,8 @@ class ContactForm(Schema):
     gadugadu_confirmation_key = validators.String()
 
     confirm_email = validators.Bool()
+
+    confirm_gadugadu = validators.Bool()
 
     chained_validators = [GaduGaduConfirmationNumber()]
 
@@ -190,6 +197,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         return render('/profile/home.mako')
 
     def _edit_form(self, defaults=None):
+        c.gg_enabled = asbool(config.get('gg_enabled', False))
         return render('profile/edit.mako')
 
     def _edit_form_defaults(self):
@@ -500,6 +508,19 @@ class ProfileController(SearchBaseController, UniversityListMixin):
                 email_confirmation_request(c.user, email)
                 meta.Session.commit()
                 sign_in_user(email)
+
+            gadugadu_uin = self.form_result['gadugadu_uin']
+            gadugadu_confirmation_key = self.form_result['gadugadu_confirmation_key']
+            if gadugadu_uin != c.user.gadugadu_uin:
+                c.user.gadugadu_uin = gadugadu_uin
+                if gadugadu_uin:
+                    c.user.gadugadu_confirmed = False
+                    gg.confirmation_request(c.user)
+                meta.Session.commit()
+            elif gadugadu_confirmation_key:
+                c.user.gadugadu_confirmed = True
+                meta.Session.commit()
+
             redirect_to(controller='profile', action='edit')
         else:
             redirect_to(controller='profile', action='edit')
