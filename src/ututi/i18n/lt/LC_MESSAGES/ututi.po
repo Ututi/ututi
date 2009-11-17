@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-11-17 15:49+0200\n"
+"PO-Revision-Date: 2009-11-17 17:53+0200\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -710,29 +710,31 @@ msgstr ""
 "sąrašas\">akademines grupes</a>\n"
 "ir bendrauti su grupiokais."
 
-#, python-format
 msgid ""
-"Group mailing lists, <a href=\"%(link)s\" title=\"Subject "
-"list\">subject</a> wikis, files, lecture notes and answers to questions "
-"that matter for your studies."
+"A place where you can store your study materials and leave them for "
+"future generations."
 msgstr ""
-"Grupių forumai, <a href=\"%(link)s\" title=\"Dalykų sąrašas\">dalykų</a> "
-"wikiai, failai, konspektai ir atsakymai į rūpimus klausimus."
 
-#, python-format
-msgid ""
-"Store <a href=\"%(subjects)s\" title=\"Subject list\">study materials</a>"
-"      and pass them on for future generations, create      <a "
-"href=\"%(groups)s\" title=\"Group list\">academic groups</a>      and "
-"communicate with groupmates."
+msgid "Create your group"
 msgstr ""
-"Kaupkite <a href=\"%(subjects)s\" title=\"Dalykų sąrašas\">studijų "
-"medžiagą</a> ir perduokite ją ateities kartoms, kurkite <a "
-"href=\"%(groups)s\" title=\"Grupių sąrašas\">akademines grupes</a> ir "
-"bendraukite su grupiokais."
 
-msgid "Ututi search"
-msgstr "Ututi paieška"
+msgid "Unlimited file size"
+msgstr ""
+
+msgid "Store and share with your group mates without restrictions!"
+msgstr ""
+
+msgid "Communicate with your group mates"
+msgstr ""
+
+msgid "All groups have their own mailing lists."
+msgstr ""
+
+msgid "Gadu Gadu integration"
+msgstr ""
+
+msgid "Receive notifications by email and gadu gadu!"
+msgstr ""
 
 msgid "New blog snippet:"
 msgstr "Nauja blogo ištrauka:"
@@ -1162,18 +1164,6 @@ msgstr ""
 msgid "(unconfirmed)"
 msgstr ""
 
-msgid "Send code again"
-msgstr ""
-
-msgid ""
-"If you want to confirm your GaduGadu number, please enter the code that "
-"you have received in your GG. Also don't forget to add Ututi (123345) to "
-"your friends."
-msgstr ""
-
-msgid "OK"
-msgstr ""
-
 msgid "number is confirmed"
 msgstr ""
 
@@ -1468,6 +1458,9 @@ msgstr "Prisijunk prie Ututi"
 msgid "Fullname"
 msgstr "Vardas Pavardė"
 
+msgid "Gadu gadu"
+msgstr ""
+
 msgid "Repeat password"
 msgstr "Pakartoti slaptažodį"
 
@@ -1680,8 +1673,14 @@ msgstr "Ututi naujienos"
 msgid "More news"
 msgstr "Daugiau naujienų"
 
+msgid "facebook_link"
+msgstr "http://facebook.com/ututi"
+
 msgid "Find us on Facebook"
 msgstr "Mūsų erdvė Facebook"
+
+msgid "blog_link"
+msgstr "http://blog.ututi.lt"
 
 msgid "Read our blog"
 msgstr "Mūsų blogas"
