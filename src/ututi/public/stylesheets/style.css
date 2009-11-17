@@ -472,8 +472,7 @@ div.action-portlet .content .header {
 div.border-portlet {
   border: 1px solid #ded8d8;
   padding: 5px 5px 0 5px;
-  width: 300px;
-  margin-left: 10px;
+  width: 290px;
   margin-bottom: 6px;
 }
 /* end border portlets */
@@ -1727,10 +1726,6 @@ h2.bunner-heading {
 /* end ututi recommendation form */
 
 /* blog portlet */
-#blog_portlet {
-  padding-right: 15px;
-  width: 270px;
-}
 
 #blog_portlet .header {
   font-size: 14px;
@@ -1770,7 +1765,7 @@ h2.bunner-heading {
 
 #blog_portlet #entries .teaser {
   height: 40px;
-  width: 270px;
+  width: 290px;
   margin: 0;
   margin-top:5px;
 }
