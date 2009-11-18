@@ -28,6 +28,7 @@ class BaseController(WSGIController):
         c.user = current_user()
         c.google_tracker = config['google_tracker']
         c.testing = asbool(config.get('testing', False))
+        c.gg_enabled = asbool(config.get('gg_enabled', False))
 
         lang = get_lang()
         if not lang:

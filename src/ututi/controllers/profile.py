@@ -196,7 +196,6 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         return render('/profile/home.mako')
 
     def _edit_form(self, defaults=None):
-        c.gg_enabled = asbool(config.get('gg_enabled', False))
         return render('profile/edit.mako')
 
     def _edit_form_defaults(self):

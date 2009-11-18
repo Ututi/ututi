@@ -29,13 +29,13 @@
           </div></div>
           <label for="email">${_('Email')}</label>
         </div>
-        %if c.lang == 'pl':
+        %if c.gg_enabled:
         <form:error name="gadugadu"/>
         <div class="form-field">
           <div class="input-line"><div>
               <input  type="text" id="gadugadu" name="gadugadu" size="40" class="line"/>
           </div></div>
-          <label for="email">${_('Gadu gadu')}</label>
+          <label for="gadugadu">${_('Gadu gadu')}</label>
         </div>
         %endif
         <form:error name="new_password"/>
