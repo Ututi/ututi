@@ -30,7 +30,7 @@ body {
 }
 
 #content {
-  padding: 20px 15px 70px 0;
+  padding: 10px 15px 70px 0;
   min-height: 200px;
 }
 
@@ -354,7 +354,7 @@ ul.bullets_large li {
 
 /* content */
 #content .inside {
-  padding: 0 20px 0 15px;
+  padding: 0 30px 0 15px;
   margin-right: 300px;
 }
 
@@ -1086,7 +1086,7 @@ div#pager {
 }
 
 .search-controls .search-submit {
-  float: left;
+  float: right;
   margin-left: 3px;
 }
 
@@ -1136,6 +1136,10 @@ div#pager {
 }
 
 /* search portlet */
+#search_portlet {
+  margin: 0;
+}
+
 #search_portlet .rounded-header {
   display: none;
 }
@@ -1143,6 +1147,7 @@ div#pager {
 #search_portlet .content {
   border: 0;
   margin-bottom: 0;
+  padding: 0 0 5px;
 }
 
 #search_portlet .search-text {
