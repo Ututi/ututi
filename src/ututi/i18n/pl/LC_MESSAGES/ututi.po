@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-11-17 17:53+0200\n"
+"PO-Revision-Date: 2009-11-18 04:37+0200\n"
 "Last-Translator: Jaroslav Šatkevič <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && "
@@ -31,7 +31,7 @@ msgstr "Aktualizacja wątku na blogu."
 msgid ""
 "Document at %(url)s was not found, but maybe you are interested in "
 "something else?"
-msgstr "Dokument %(url) nie został odnaleziony. Może interesuje Cię coś innego?"
+msgstr "Dokument %(url)s nie został odnaleziony. Może interesuje Cię coś innego?"
 
 msgid "Files"
 msgstr "Dokumenty"
@@ -279,8 +279,8 @@ msgstr "Nowe na Ututi: %(changes)s"
 msgid "%(file_count)d new file"
 msgid_plural "%(file_count)d new files"
 msgstr[0] "%(file_count)d nowy plik."
-msgstr[1] "%(file_count) nowe pliki"
-msgstr[2] "%(file_count) nowych plików"
+msgstr[1] "%(file_count)d nowe pliki"
+msgstr[2] "%(file_count)d nowych plików"
 
 #, python-format
 msgid "%(page_count)d new page"
@@ -291,7 +291,7 @@ msgstr[2] "%(page_count)d nowych stron"
 
 #, python-format
 msgid "Ututi news: %(file_changes)s and %(page_changes)s"
-msgstr "Nowe na Ututi:%(file_changes)s i %(page_changes)s"
+msgstr "Nowe na Ututi: %(file_changes)s i %(page_changes)s"
 
 msgid "This is not the confirmation code we sent you."
 msgstr ""
@@ -422,7 +422,7 @@ msgstr "Strona %(page_title)s (%(page_url)s) została zaktualizowana."
 
 #, python-format
 msgid "Page %(page_title)s was updated."
-msgstr "Strona %(page_title) została zaktualizowana."
+msgstr "Strona %(page_title)s została zaktualizowana."
 
 #, python-format
 msgid "Page %(link_to_page)s of a subject %(link_to_subject)s was updated"
