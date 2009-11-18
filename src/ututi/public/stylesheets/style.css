@@ -547,7 +547,7 @@ form .form-field.check-field label {
 form .form-field label {
   display: block;
   /* font */
-  font-size: 0.85em;
+  font-size: 0.9em;
   height: 20px;
   line-height: 24px;
   vertical-align: middle;

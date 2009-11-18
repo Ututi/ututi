@@ -26,33 +26,36 @@
   height: 40px;
 }
 
-#ututi_features {
+#ututi_main_features {
   margin-bottom: 20px;
 }
 
-#ututi_features .feature {
+#ututi_main_features .feature {
   margin: 15px 0;
   padding-left: 35px;
-  background-position: left top;
+  background-position: left center;
   background-repeat: no-repeat;
 }
 
-#ututi_features .feature h3 {
-  margin-top: 2px;
+#ututi_main_features .feature h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: normal;
 }
 
-#ututi_features .feature span {
+#ututi_main_features .feature span {
   color: #808080;
+  font-size: 12px;
 }
 
-#ututi_features .feature.icon_file {
+#ututi_main_features .feature.icon_file {
   background-image: url("../images/details/icon_file_larger.png");
 }
 
-#ututi_features .feature.icon_group {
+#ututi_main_features .feature.icon_group {
   background-image: url("../images/details/icon_group_larger.png");
 }
 
-#ututi_features .feature.icon_gadugadu {
+#ututi_main_features .feature.icon_gadugadu {
   background-image: url("../images/details/icon_gadugadu_larger.png");
 }

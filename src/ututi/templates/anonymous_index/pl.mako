@@ -32,17 +32,17 @@ ${h.stylesheet_link('/stylesheets/pl.css')|n}
     </a>
   </div>
 
-  <div id="ututi_features">
+  <div id="ututi_main_features">
     <div class="feature icon_file">
-      <h3>${_('Unlimited file size')}</h3>
+      <h2>${_('Unlimited file size')}</h2>
       <span>${_('Store and share with your group mates without restrictions!')}</span>
     </div>
     <div class="feature icon_group">
-      <h3>${_('Communicate with your group mates')}</h3>
+      <h2>${_('Communicate with your group mates')}</h2>
       <span>${_('All groups have their own mailing lists.')}</span>
     </div>
     <div class="feature icon_gadugadu">
-      <h3>${_('Gadu Gadu integration')}</h3>
+      <h2>${_('Gadu Gadu integration')}</h2>
       <span>${_('Receive notifications by email and gadu gadu!')}</span>
     </div>
   </div>
