@@ -28,7 +28,7 @@ from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator, TagsValidator
 
-from ututi.model import LocationTag, User, GroupMember, GroupMembershipType
+from ututi.model import LocationTag, User, GroupMember, GroupMembershipType, File
 from ututi.model import meta, Group, SimpleTag, Subject, ContentItem, PendingInvitation, PendingRequest
 from ututi.controllers.subject import SubjectAddMixin
 from ututi.controllers.subject import NewSubjectForm
@@ -289,6 +289,10 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @group_action
     @ActionProtector("member", "admin", "moderator")
     def files(self, group):
+        file_id = request.GET.get('serve_file')
+        file = File.get(file_id)
+        c.serve_file = file
+
         c.breadcrumbs.append(self._actions('files'))
         return render('group/files.mako')
 

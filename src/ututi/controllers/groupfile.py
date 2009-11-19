@@ -17,9 +17,10 @@ log = logging.getLogger(__name__)
 def set_login_url(method):
     def _set_login_url(self, group, file):
         c.login_form_url = url(controller='home',
-                               action='index',
+                               action='login',
                                came_from=group.url(action='files',
-                                                   serve_file=file.id))
+                                                   serve_file=file.id),
+                               context=file.filename)
         return method(self, group, file)
     return _set_login_url
 
