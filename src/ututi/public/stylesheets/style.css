@@ -535,7 +535,7 @@ form.inline-form div {
 }
 
 form .form-field {
-  margin: 0.2em 0;
+  margin: 0.4em 0;
   clear: left;
 }
 
@@ -581,6 +581,26 @@ form .form-field div.input-line div {
   background: url("../images/borders/input-small.png") right center no-repeat;
   padding-right: 5px;
   line-height: 18px;
+}
+
+form .form-field .field-status {
+  color: #808080;
+  line-height: 20px;
+  margin-left: 5px;
+  float: left;
+}
+
+form .form-field .field-status.confirmed {
+  background: url("../images/borders/field_status.png") left center no-repeat;
+  height: 20px;
+  padding-left: 15px;
+}
+
+form .form-field .field-status.confirmed div {
+  height: 20px;
+  background: url("../images/borders/field_status.png") right center no-repeat;
+  padding-right: 5px;
+  color: #535353;
 }
 
 form .form-field div.input-line input {
