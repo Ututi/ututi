@@ -359,3 +359,6 @@ class HomeController(UniversityListMixin):
                 redirect_to(url(controller='profile', action='index'))
             else:
                 redirect_to(url.encode('utf-8'))
+
+    def join(self):
+        return render('home/join.mako')

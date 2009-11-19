@@ -65,3 +65,93 @@
       </form>
   </%self:portlet>
 </%def>
+
+<%def name="ututi_join_section_portlet()">
+  <%self:portlet id="ututi_join_section_portlet">
+    <%def name="header()">
+      ${_('Registration')}
+    </%def>
+      <form id="join_registration_form" method="post" action="${url('/join_register')}">
+        <form:error name="fullname"/>
+        <div class="form-field">
+          <label for="fullname">${_('Fullname')}</label>
+          <div class="input-line"><div>
+            <input class="line" type="text" id="fullname" name="fullname" size="40"/>
+          </div></div>
+        </div>
+        <form:error name="email"/>
+        <div class="form-field">
+          <label for="email">${_('Email')}</label>
+          <div class="input-line"><div>
+            % if c.email:
+              <input  type="text" id="email" name="email" size="40" value="${c.email}" disabled="disabled" class="line"/>
+              <input  type="hidden" name="email" value="${c.email}" />
+            % else:
+              <input  type="text" id="email" name="email" size="40" class="line"/>
+            % endif
+          </div></div>
+        </div>
+        %if c.gg_enabled:
+        <form:error name="gadugadu"/>
+        <div class="form-field">
+          <label for="gadugadu">${_('Gadu gadu')}</label>
+          <div class="input-line"><div>
+              <input  type="text" id="gadugadu" name="gadugadu" size="40" class="line"/>
+          </div></div>
+        </div>
+        %endif
+        <form:error name="new_password"/>
+        <div class="form-field">
+          <label for="new_password">${_('Password')}</label>
+          <div class="input-line"><div>
+            <input class="line" type="password" id="new_password" name="new_password" size="40"/>
+          </div></div>
+        </div>
+        <form:error name="repeat_password"/>
+        <div class="form-field">
+          <label for="repeat_password">${_('Repeat password')}</label>
+          <div class="input-line"><div>
+            <input class="line" type="password" id="repeat_password" name="repeat_password" size="40"/>
+          </div></div>
+        </div>
+        <form:error name="agree"/>
+        <div class="form-field">
+          <label for="agree" style="float: right;">${_('I agree to the ')} <a href="${url(controller='home', action='terms')}">${_('terms of use')}</a></label>
+          <input type="checkbox" name="agree" value="true" style="float: right;"/>
+        </div>
+        <div class="form-field">
+          <span class="btn">
+            <input type="submit" value="${_('Join')}"/>
+          </span>
+        </div>
+      </form>
+  </%self:portlet>
+</%def>
+
+<%def name="ututi_login_section_portlet()">
+  <%self:portlet id="ututi_login_section_portlet">
+    <%def name="header()">
+    </%def>
+      <form id="join_login_form" method="post" action="${url('/join_login')}">
+        <form:error name="login_username"/>
+        <div class="form-field">
+          <label for="login_username">${_('Your email address')}</label>
+          <div class="input-line"><div>
+            <input class="line" type="text" id="login_username" name="login_username" size="40"/>
+          </div></div>
+        </div>
+        <form:error name="login_password"/>
+        <div class="form-field">
+          <label for="login_password">${_('Password')}</label>
+          <div class="input-line"><div>
+            <input class="line" type="password" id="login_password" name="login_password" size="40"/>
+          </div></div>
+        </div>
+        <div class="form-field">
+          <span class="btn">
+            <input type="submit" value="${_('Login')}"/>
+          </span>
+        </div>
+      </form>
+  </%self:portlet>
+</%def>

@@ -144,6 +144,7 @@ def make_map():
     map.connect('/', controller='home')
     map.connect('/login', controller='home', action='login')
     map.connect('/logout', controller='home', action='logout')
+    map.connect('/join', controller='home', action='join')
     map.connect('/register', controller='home', action='register')
     map.connect('/password', controller='home', action='pswrecovery')
     map.connect('/recovery/{key}', controller='home', action='recovery')

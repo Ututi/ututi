@@ -63,13 +63,19 @@ h1 {
 
 /* registration form */
 #ututi_join_portlet .rounded-header,
-#ututi_join_portlet .rounded-right {
+#ututi_join_portlet .rounded-right,
+#ututi_join_section_portlet .rounded-header,
+#ututi_join_section_portlet .rounded-right,
+#ututi_login_section_portlet .rounded-header,
+#ututi_login_section_portlet .rounded-right {
   background: white;
   height: 35px;
   padding: 0;
 }
 
-#ututi_join_portlet .rounded-right h3 {
+#ututi_join_portlet .rounded-right h3,
+#ututi_join_section_portlet .rounded-right h3,
+#ututi_login_section_portlet .rounded-right h3 {
   color: #333;
   margin: 0;
   text-transform: uppercase;
@@ -79,10 +85,41 @@ h1 {
   background: white url("../images/borders/registration_form.png") top center no-repeat;
 }
 
-#ututi_join_portlet .content {
+#page-content #ututi_login_section_portlet .rounded-right h3 {
+  background-image: url("../images/borders/login_form.png");
+  padding: 0;
+  height: 5px;
+  font-size: 0;
+}
+
+#page-content #ututi_login_section_portlet .rounded-header,
+#page-content #ututi_login_section_portlet .rounded-right {
+  height: 5px;
+}
+
+
+#body-container #ututi_join_section_portlet .rounded-right,
+#body-container #ututi_join_section_portlet .rounded-header {
+  height: 45px;
+}
+
+#body-container #ututi_join_section_portlet .rounded-right h3 {
+  text-transform: none;
+  font-size: 18px;
+  height: 40px;
+}
+
+#ututi_join_portlet .content,
+#ututi_join_section_portlet .content {
   border: 0px;
   background: white url("../images/borders/registration_form.png") center bottom no-repeat;
 }
+
+#ututi_login_section_portlet .content {
+  border: 0px;
+  background: white url("../images/borders/login_form.png") center bottom no-repeat;
+}
+
 
 #registration_form .form-field div {
   float: right;
