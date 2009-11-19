@@ -29,6 +29,7 @@ class BaseController(WSGIController):
         c.google_tracker = config['google_tracker']
         c.testing = asbool(config.get('testing', False))
         c.gg_enabled = asbool(config.get('gg_enabled', False))
+        c.tpl_lang = config.get('tpl_lang', 'en')
 
         lang = get_lang()
         if not lang:
@@ -65,11 +66,7 @@ def render_lang(template_name, extra_vars=None, cache_key=None,
     glob = pylons_globals()
     template_base = template_name[:-5] #remove the mako ending
 
-    lang = get_lang()
-    if not lang:
-        lang = 'lt'
-    else:
-        lang = lang[0]
+    lang = c.tpl_lang #template selection language separated from the interface language
 
     templates = [
         '/'.join([template_base, '%s.mako' % lang]), #active language
