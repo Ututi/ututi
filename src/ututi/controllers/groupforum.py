@@ -6,7 +6,7 @@ from pylons.decorators import validate
 from pylons.controllers.util import redirect_to
 from pylons.controllers.util import abort
 from pylons import url
-from pylons import c, config
+from pylons import c, config, request
 
 from mimetools import choose_boundary
 from ututi.model import File
@@ -20,6 +20,20 @@ from ututi.controllers.group import group_action
 from ututi.controllers.group import GroupControllerBase
 from ututi.model.mailing import GroupMailingListMessage
 from ututi.model import Group, meta
+
+
+def set_login_url(method):
+    def _set_login_url(self, group, message, file):
+        c.login_form_url = url(controller='home',
+                               action='login',
+                               came_from=url(controller='groupforum',
+                                             action='thread',
+                                             id=group.group_id,
+                                             thread_id=message.thread.id,
+                                             serve_file=file.id),
+                               context=file.filename)
+        return method(self, group, message, file)
+    return _set_login_url
 
 
 def group_forum_action(method):
@@ -37,6 +51,29 @@ def group_forum_action(method):
         c.object_location = group.location
         c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
         return method(self, group, thread)
+    return _group_action
+
+
+def groupforum_file_action(method):
+    def _group_action(self, id, message_id, file_id):
+        group = Group.get(id)
+        if group is None:
+            abort(404)
+
+        message = meta.Session.query(GroupMailingListMessage).filter_by(id=message_id).first()
+        if message is None:
+            abort(404)
+
+        file = File.get(file_id)
+        if file is None:
+            #not in group.files: ??? are forum files added as the group's files?
+            abort(404)
+
+        c.security_context = group
+        c.object_location = group.location
+        c.group = group
+        c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
+        return method(self, group, message, file)
     return _group_action
 
 
@@ -84,6 +121,10 @@ class GroupforumController(GroupControllerBase):
     @group_forum_action
     @ActionProtector("member", "admin", "moderator")
     def thread(self, group, thread):
+        file_id = request.GET.get('serve_file')
+        file = File.get(file_id)
+        c.serve_file = file
+
         c.thread = thread
         c.breadcrumbs.append(self._actions('forum'))
         c.messages = thread.posts
@@ -151,30 +192,9 @@ class GroupforumController(GroupControllerBase):
                     action='thread',
                     id=group.group_id, thread_id=post.id)
 
-    def file(self, id, message_id, file_id):
-
-        group = Group.get(id)
-        if group is None:
-            abort(404)
-
-        message = meta.Session.query(GroupMailingListMessage).filter_by(id=message_id).first()
-        if message is None:
-            abort(404)
-
-        file = File.get(file_id)
-        if file is None:
-            abort(404)
-
-        # XXX kind of stupid to do this here
-        if c.user is None:
-            code = 401
-        else:
-            code = 403
-
-        c.login_form_url = url(controller='home',
-                               action='login',
-                               came_from=file.url())
-        if not check_crowds(['member', 'admin', 'moderator'], context=group):
-            deny('Only group members can download attachments!', code)
+    @groupforum_file_action
+    @set_login_url
+    @ActionProtector('member', 'admin', 'moderator')
+    def file(self, group, message, file):
 
         return serve_file(file)
