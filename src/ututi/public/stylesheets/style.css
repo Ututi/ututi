@@ -1111,6 +1111,7 @@ div#pager {
   background: transparent url("../images/borders/search-type.png") bottom center repeat-x;
   color: #d45500;
   cursor: pointer;
+  text-transform: lowercase;
 }
 
 .search-type .active {
@@ -1130,7 +1131,7 @@ div#pager {
 .search-tags label {
   text-transform: uppercase;
   color: #888;
-  font-size: 0.9em;
+  font-size: 0.85em;
   padding-left: 25px;
   background: transparent url("../images/details/icon_tag.png") left center no-repeat;
 }
