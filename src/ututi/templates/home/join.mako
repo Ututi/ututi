@@ -7,7 +7,7 @@
   ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
 </%def>
 
-<table>
+<table style="width: 955px;">
   <tr>
     <td>
       ${ututi_join_section_portlet()}

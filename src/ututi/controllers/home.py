@@ -193,23 +193,28 @@ class HomeController(UniversityListMixin):
         session.save()
         redirect_to(controller='home', action='index')
 
+    def __register_user(self, form):
+        fullname = self.form_result['fullname']
+        password = self.form_result['new_password']
+        email = self.form_result['email'].lower()
+
+        user = User(fullname, password)
+        user.emails = [Email(email)]
+        user.accepted_terms = datetime.today()
+        #all newly registered users are marked when they agree to the terms of use
+
+        meta.Session.add(user)
+        meta.Session.commit()
+        email_confirmation_request(user, email)
+
+        sign_in_user(email)
+        return (user, email)
+
+
     @validate(schema=RegistrationForm(), form='register')
     def register(self, hash=None):
         if hasattr(self, 'form_result'):
-            fullname = self.form_result['fullname']
-            password = self.form_result['new_password']
-            email = self.form_result['email'].lower()
-
-            user = User(fullname, password)
-            user.emails = [Email(email)]
-            user.accepted_terms = datetime.today()
-            #all newly registered users are marked when they agree to the terms of use
-
-            meta.Session.add(user)
-            meta.Session.commit()
-            email_confirmation_request(user, email)
-
-            sign_in_user(email)
+            user, email = self.__register_user(self.form_result)
             hash = self.form_result.get('hash', None)
             if hash is not None:
                 invitation = PendingInvitation.get(hash)
@@ -362,3 +367,24 @@ class HomeController(UniversityListMixin):
 
     def join(self):
         return render('home/join.mako')
+
+    @validate(schema=RegistrationForm(), form='join')
+    def join_register(self):
+        if hasattr(self, 'form_result'):
+            user, email = self.__register_user(self.form_result)
+            redirect_to(controller='profile', action='welcome')
+
+    def join_login(self):
+        email = request.POST.get('login_username')
+        password = request.POST.get('login_password')
+
+        if password is not None:
+            user = None
+            user = User.authenticate(email, password.encode('utf-8'))
+            c.login_error = _('Wrong username or password!')
+
+            if user is not None:
+                sign_in_user(email)
+                redirect_to(url(controller='profile', action='home'))
+
+        return render('/home/join.mako')

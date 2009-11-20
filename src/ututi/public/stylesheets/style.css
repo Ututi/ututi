@@ -535,7 +535,7 @@ form.inline-form div {
 }
 
 form .form-field {
-  margin: 0.4em 0;
+  padding: 0.3em 0 0;
   clear: left;
 }
 

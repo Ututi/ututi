@@ -71,16 +71,17 @@
     <%def name="header()">
       ${_('Registration')}
     </%def>
-      <form id="join_registration_form" method="post" action="${url('/join_register')}">
-        <form:error name="fullname"/>
+      <form id="join_registration_form" method="post" action="${url(controller='home', action='join_register')}">
         <div class="form-field">
+          <form:error name="fullname"/>
           <label for="fullname">${_('Fullname')}</label>
           <div class="input-line"><div>
             <input class="line" type="text" id="fullname" name="fullname" size="40"/>
           </div></div>
         </div>
-        <form:error name="email"/>
+
         <div class="form-field">
+          <form:error name="email"/>
           <label for="email">${_('Email')}</label>
           <div class="input-line"><div>
             % if c.email:
@@ -92,30 +93,33 @@
           </div></div>
         </div>
         %if c.gg_enabled:
-        <form:error name="gadugadu"/>
         <div class="form-field">
+          <form:error name="gadugadu"/>
           <label for="gadugadu">${_('Gadu gadu')}</label>
           <div class="input-line"><div>
               <input  type="text" id="gadugadu" name="gadugadu" size="40" class="line"/>
           </div></div>
         </div>
         %endif
-        <form:error name="new_password"/>
+
         <div class="form-field">
+          <form:error name="new_password"/>
           <label for="new_password">${_('Password')}</label>
           <div class="input-line"><div>
             <input class="line" type="password" id="new_password" name="new_password" size="40"/>
           </div></div>
         </div>
-        <form:error name="repeat_password"/>
+
         <div class="form-field">
+          <form:error name="repeat_password"/>
           <label for="repeat_password">${_('Repeat password')}</label>
           <div class="input-line"><div>
             <input class="line" type="password" id="repeat_password" name="repeat_password" size="40"/>
           </div></div>
         </div>
-        <form:error name="agree"/>
+
         <div class="form-field">
+          <form:error name="agree"/>
           <label for="agree" style="float: right;">${_('I agree to the ')} <a href="${url(controller='home', action='terms')}">${_('terms of use')}</a></label>
           <input type="checkbox" name="agree" value="true" style="float: right;"/>
         </div>
@@ -132,8 +136,10 @@
   <%self:portlet id="ututi_login_section_portlet">
     <%def name="header()">
     </%def>
-      <form id="join_login_form" method="post" action="${url('/join_login')}">
-        <form:error name="login_username"/>
+      <form id="join_login_form" method="post" action="${url(controller='home', action='join_login')}">
+        %if c.login_error:
+        <div class="error">${c.login_error}</div>
+        %endif
         <div class="form-field">
           <label for="login_username">${_('Your email address')}</label>
           <div class="input-line"><div>
