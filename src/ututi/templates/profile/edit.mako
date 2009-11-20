@@ -110,7 +110,7 @@
               %if c.user.gadugadu_uin:
                   %if not c.user.gadugadu_confirmed:
                     <div class="field-status">${_('(unconfirmed)')}</div>
-                    ${h.input_submit(_('Send code again'))}
+                    ${h.input_submit(_('Send code again'), name='resend_gadugadu_code')}
                     ${_("If you want to confirm your GaduGadu number,"
                         " please enter the code that you have received"
                         " in your GG. Also don't forget to add Ututi "

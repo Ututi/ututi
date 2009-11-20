@@ -102,6 +102,8 @@ class ContactForm(Schema):
 
     confirm_gadugadu = validators.Bool()
 
+    resend_gadugadu_code = validators.Bool()
+
     update_contacts = validators.Bool()
 
     chained_validators = [GaduGaduConfirmationNumber()]
@@ -513,7 +515,11 @@ class ProfileController(SearchBaseController, UniversityListMixin):
 
             gadugadu_uin = self.form_result['gadugadu_uin']
             gadugadu_confirmation_key = self.form_result['gadugadu_confirmation_key']
-            if gadugadu_uin != c.user.gadugadu_uin:
+
+            if self.form_result['resend_gadugadu_code']:
+                gg.confirmation_request(c.user)
+                meta.Session.commit()
+            elif gadugadu_uin != c.user.gadugadu_uin:
                 c.user.gadugadu_uin = gadugadu_uin
                 if gadugadu_uin:
                     c.user.gadugadu_confirmed = False
