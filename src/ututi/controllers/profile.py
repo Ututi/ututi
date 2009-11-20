@@ -102,6 +102,8 @@ class ContactForm(Schema):
 
     confirm_gadugadu = validators.Bool()
 
+    update_contacts = validators.Bool()
+
     chained_validators = [GaduGaduConfirmationNumber()]
 
 

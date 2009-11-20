@@ -66,7 +66,7 @@
           <br />
           <a href="#" id="user-logo-button" class="btn"><span>${_('Change logo')}</span></a>
         </div>
-        <br style="clear: left;"/>
+        <br style="clear: left;" />
         <div class="form-field no-break">
           <input type="checkbox" name="logo_delete" id="logo_delete" value="delete" class="line"/>
           <label for="logo_delete">${_('Delete current logo')}</label>
@@ -121,15 +121,13 @@
                   %else:
                     <input type="hidden"  name="gadugadu_confirmation_key" />
                     <div class="field-status confirmed"><div>${_('number is confirmed')}</div></div>
+                    <div class="form-field no-break">
+                      <input type="checkbox" name="gadugadu_get_news"
+                             id="gadugadu_get_news" class="line" />
+                      <label for="gadugadu_get_news">${_('Receive news into gg')}</label>
+                    </div>
                   %endif
               %else:
-                <input type="hidden"  name="gadugadu_confirmation_key" />
-                <span class="confirmed">${_('number is confirmed')}</span>
-                <div class="form-field no-break">
-                  <input type="checkbox" name="gadugadu_get_news"
-                         id="gadugadu_get_news" class="line" />
-                  <label for="gadugadu_get_news">${_('Receive news into gg')}</label>
-                </div>
                 <input type="hidden"  name="gadugadu_confirmation_key" />
               %endif
             %else:
@@ -137,7 +135,6 @@
               <input type="hidden"  name="gadugadu_confirmation_key" />
             %endif
           </div>
-
 
         <div class="form-field">
           <label for="email">${_('Your email address')}</label>
@@ -159,7 +156,7 @@
     <tr>
       <td style="width: 220px;">&nbsp;</td>
       <td>
-        ${h.input_submit(_('Update contacts'))}
+        ${h.input_submit(_('Update contacts'), name='update_contacts')}
       </td>
     </tr>
   </table>
