@@ -123,7 +123,14 @@
                     <div class="field-status confirmed"><div>${_('number is confirmed')}</div></div>
                   %endif
               %else:
-              <input type="hidden"  name="gadugadu_confirmation_key" />
+                <input type="hidden"  name="gadugadu_confirmation_key" />
+                <span class="confirmed">${_('number is confirmed')}</span>
+                <div class="form-field no-break">
+                  <input type="checkbox" name="gadugadu_get_news"
+                         id="gadugadu_get_news" class="line" />
+                  <label for="gadugadu_get_news">${_('Receive news into gg')}</label>
+                </div>
+                <input type="hidden"  name="gadugadu_confirmation_key" />
               %endif
             %else:
               <input type="hidden"  name="gadugadu_uin" />

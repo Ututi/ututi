@@ -30,6 +30,7 @@ from ututi.model import teardown_db_defaults
 from ututi.model import initialize_db_defaults
 from ututi.model import meta
 from ututi.lib.mailer import mail_queue
+from ututi.lib import gg
 
 __all__ = ['environ', 'url']
 
@@ -80,6 +81,7 @@ class PylonsLayer(object):
         teardown_db_defaults(meta.engine, quiet=True)
         initialize_db_defaults(meta.engine)
         mail_queue[:] = []
+        gg.sent_messages[:] = []
         try:
             shutil.rmtree(config['files_path'])
         except OSError:
@@ -98,6 +100,9 @@ class PylonsLayer(object):
         teardown_db_defaults(meta.engine)
         meta.Session.rollback()
         meta.Session.remove()
+
+        if len(gg.sent_messages) > 0:
+            print >> sys.stderr, "GG queue is NOT EMPTY!"
 
         if len(mail_queue) > 0:
             print >> sys.stderr, "Mail queue is NOT EMPTY!"

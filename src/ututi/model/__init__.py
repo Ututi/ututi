@@ -130,6 +130,7 @@ def setup_orm(engine):
                inherit_condition=files_table.c.id==ContentItem.id,
                polymorphic_identity='file',
                polymorphic_on=content_items_table.c.content_type,
+               extension=NotifyGG(),
                properties = {'parent': relation(ContentItem,
                                                 primaryjoin=files_table.c.parent_id==content_items_table.c.id,
                                                 backref=backref("files", order_by=files_table.c.filename.asc()))})
@@ -618,6 +619,17 @@ class Group(ContentItem, FolderMixin):
     def send(self, msg):
         msg.send([mship.user for mship in self.members])
 
+    def recipients(self, period):
+        recipients = meta.Session.query(GroupMember).\
+            filter_by(group=self, receive_email_each=period).all()
+        return [recipient.user for recipient in recipients]
+
+    def recipients_gg(self):
+        recipients = meta.Session.query(GroupMember).\
+            filter_by(group=self).all()
+        return [recipient.user for recipient in recipients
+                if recipient.user.gadugadu_get_news == True]
+
     @classmethod
     def get(cls, id):
         query = meta.Session.query(cls)
@@ -823,6 +835,32 @@ class PendingRequest(object):
 
 subjects_table = None
 class Subject(ContentItem, FolderMixin):
+
+    def recipients(self, period):
+        all_recipients = []
+        groups =  meta.Session.query(Group).filter(Group.watched_subjects.contains(self)).all()
+        for group in groups:
+            all_recipients.extend(group.recipients(period))
+
+        usms = meta.Session.query(UserSubjectMonitoring).\
+            filter(UserSubjectMonitoring.subject==self).\
+            filter(User.receive_email_each==period).all()
+        recipients = [usm.user for usm in usms]
+        all_recipients.extend(recipients)
+        return list(set(all_recipients))
+
+    def recipients_gg(self):
+        all_recipients = []
+        groups =  meta.Session.query(Group).filter(Group.watched_subjects.contains(self)).all()
+        for group in groups:
+            all_recipients.extend(group.recipients_gg())
+
+        usms = meta.Session.query(UserSubjectMonitoring).\
+            filter(UserSubjectMonitoring.subject==self).\
+            filter(User.gadugadu_get_news==True).all()
+        recipients = [usm.user for usm in usms]
+        all_recipients.extend(recipients)
+        return list(set(all_recipients))
 
     @classmethod
     def get(cls, location, id):
@@ -1138,6 +1176,18 @@ class LocationTag(Tag):
 
 def cleanupFileName(filename):
     return filename.split('\\')[-1].split('/')[-1]
+
+
+from sqlalchemy.orm.interfaces import MapperExtension
+class NotifyGG(MapperExtension):
+
+    def after_insert(self, mapper, connection, instance):
+        from pylons import tmpl_context as c
+        from ututi.lib import gg
+        if isinstance(instance.parent, (Group, Subject)):
+            for interested_user in instance.parent.recipients_gg():
+                if interested_user is not c.user:
+                    gg.send_message(interested_user.gadugadu_uin, instance.url())
 
 
 class File(ContentItem):

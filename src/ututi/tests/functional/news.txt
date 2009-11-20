@@ -32,6 +32,38 @@ Let's invite a couple of users into our group:
 
     >>> mail_queue[:] = []
 
+Add their gadugadu numbers:
+
+    >>> browser2 = Browser.logIn('user2@ututi.lt', 'password')
+    >>> browser2.open('http://localhost/profile/edit')
+    >>> browser2.getControl(name='gadugadu_uin').value = "564321"
+    >>> browser2.getControl('Update contacts').click()
+
+    >>> from ututi.lib import gg
+    >>> msg = gg.sent_messages.pop()
+    >>> browser2.getControl(name='gadugadu_confirmation_key').value = msg[1]
+    >>> browser2.getControl('OK').click()
+
+    >>> browser2.getControl('Receive news into gg').click()
+    >>> browser2.getControl('Update contacts').click()
+
+    >>> browser3 = Browser.logIn('user@ututi.lt', 'password')
+    >>> browser3.open('http://localhost/profile/edit')
+    >>> browser3.getControl(name='gadugadu_uin').value = "133465"
+    >>> browser3.getControl('Update contacts').click()
+
+    >>> from ututi.lib import gg
+    >>> msg = gg.sent_messages.pop()
+    >>> browser3.getControl(name='gadugadu_confirmation_key').value = msg[1]
+    >>> browser3.getControl('OK').click()
+
+    >>> browser3.getControl('Receive news into gg').click()
+
+    >>> browser3.getControl('Update contacts').click()
+
+    >>> browser3.getControl('Receive news into gg').selected
+    True
+
 Make some noise:
 
     >>> browser.getLink('Subjects').click()
@@ -49,7 +81,6 @@ Let's look at the emails:
     >>> printEmails()
     >>> mail_queue[:] = []
 
-    >>> browser2 = Browser.logIn('user2@ututi.lt', 'password')
     >>> browser2.open(browser.url)
 
     >>> browser2.getLink('New page').click()
@@ -57,7 +88,6 @@ Let's look at the emails:
     >>> browser2.getControl('Content').value = "Being Awesome is easy!"
     >>> browser2.getControl('Save').click()
 
-    >>> browser3 = Browser.logIn('user@ututi.lt', 'password')
     >>> browser3.open(browser.url)
 
     >>> browser3.getLink('New page').click()
@@ -328,3 +358,14 @@ Hmm, now what happens if user2 starts ignoring the subject:
     <BLANKLINE>
 
     >>> mail_queue[:] = []
+
+    >>> from ututi.lib import gg
+    >>> sorted(gg.sent_messages)
+    [(133465L, '/subject/vu/mat_analize/file/10/get'),
+     (133465L, '/subject/vu/mat_analize/file/11/get'),
+     (133465L, '/subject/vu/mat_analize/file/9/get'),
+     (564321L, '/subject/vu/mat_analize/file/10/get'),
+     (564321L, '/subject/vu/mat_analize/file/11/get'),
+     (564321L, '/subject/vu/mat_analize/file/9/get')]
+
+    >>> gg.sent_messages[:] = []

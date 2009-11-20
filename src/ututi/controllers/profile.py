@@ -96,6 +96,7 @@ class ContactForm(Schema):
 
     gadugadu_uin = validators.Int()
     gadugadu_confirmation_key = validators.String()
+    gadugadu_get_news = validators.StringBool(if_missing=False)
 
     confirm_email = validators.Bool()
 
@@ -202,6 +203,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         defaults = {
             'email': c.user.emails[0].email,
             'gadugadu_uin': c.user.gadugadu_uin,
+            'gadugadu_get_news': c.user.gadugadu_get_news,
             'fullname': c.user.fullname,
             'site_url': c.user.site_url,
             'description': c.user.description,
@@ -517,6 +519,9 @@ class ProfileController(SearchBaseController, UniversityListMixin):
                 meta.Session.commit()
             elif gadugadu_confirmation_key:
                 c.user.gadugadu_confirmed = True
+                meta.Session.commit()
+            else:
+                c.user.gadugadu_get_news = self.form_result['gadugadu_get_news']
                 meta.Session.commit()
 
             redirect_to(controller='profile', action='edit')

@@ -36,22 +36,10 @@ class NewsController(BaseController):
         return events
 
     def _group_recipients(self, group, period):
-        recipients = meta.Session.query(GroupMember).\
-            filter_by(group=group, receive_email_each=period).all()
-        return [recipient.user for recipient in recipients]
+        return group.recipients(period)
 
     def _subject_recipients(self, subject, period):
-        all_recipients = []
-        groups =  meta.Session.query(Group).filter(Group.watched_subjects.contains(subject)).all()
-        for group in groups:
-            all_recipients.extend(self._group_recipients(group, period))
-
-        usms = meta.Session.query(UserSubjectMonitoring).\
-            filter(UserSubjectMonitoring.subject==subject).\
-            filter(User.receive_email_each==period).all()
-        recipients = [usm.user for usm in usms]
-        all_recipients.extend(recipients)
-        return list(set(all_recipients))
+        return subject.recipients(period)
 
     def _recipients(self, event, period):
         if isinstance(event.context, Subject):
