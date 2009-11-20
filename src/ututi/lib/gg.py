@@ -1,7 +1,10 @@
+import os
+
 from datetime import datetime
 from hashlib import md5
 from xmlrpclib import ServerProxy
 
+from paste.util.converters import aslist
 from paste.util.converters import asbool
 from pylons import config
 
@@ -9,7 +12,12 @@ sent_messages = []
 
 def send_message(uin, message):
     hold = asbool(config.get('hold_emails', 'false'))
-    if not hold:
+
+    force_gg_to = aslist(os.environ.get("ututi_force_gg_to", []), ',',
+                         strip=True)
+    force_gg_to = [int(gg) for gg in force_gg_to if gg]
+
+    if not hold or uin in force_gg_to:
         username = config.get('nous_im_username')
         password = config.get('nous_im_password')
         p = ServerProxy('http://%s:%s@localhost:6001' % (username, password))
