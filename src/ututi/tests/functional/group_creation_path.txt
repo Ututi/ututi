@@ -13,6 +13,20 @@ We can add a group at the url /groups/add.
     >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
     >>> browser.getControl('Continue').click()
 
+After creating the group, we are redirected to the member invitation
+
+    >>> browser.printQuery('//h1/text()')
+    Group members
+
+Let us fill in several email to be invited.
+    >>> browser.getControl('Enter emails of the people You would like to invite to the group.').value='user@ututi.lt, jonas@example.com, admin@ututi.lt'
+    >>> browser.getControl('Invite').click()
+
+    >>> print browser.url
+    http://localhost/group/test/invite_members_step
+
+    >>> browser.getControl("Continue").click()
+
 After creating the group we should be redirected to the subject selection view:
     >>> browser.printQuery('//h2/text()')
     Recommended subjects
@@ -44,17 +58,6 @@ The subject is added to the watched subject list automatically:
     </ul>
 
     >>> browser.getLink('Finish choosing subjects').click()
-    >>> browser.printQuery('//h1/text()')
-    Group members
-
-Let us fill in several email to be invited.
-    >>> browser.getControl('Enter emails of the people You would like to invite to the group.').value='user@ututi.lt, jonas@example.com, admin@ututi.lt'
-    >>> browser.getControl('Invite').click()
-
-    >>> print browser.url
-    http://localhost/group/test/invite_members_step
-
-    >>> browser.getControl("Finish and go to group's main page").click()
     >>> print browser.url
     http://localhost/group/test/home
 

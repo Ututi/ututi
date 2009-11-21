@@ -58,8 +58,8 @@ We can add a group at the url /groups/add.
 
 After creating the group we should be redirected to the subject selection view:
 
-    >>> browser.printQuery('//h2/text()')
-    Recommended subjects
+    >>> browser.url
+    'http://localhost/group/test/invite_members_step'
 
 The group's logo is displayed in a portlet.
 

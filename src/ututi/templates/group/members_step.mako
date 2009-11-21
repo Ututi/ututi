@@ -7,7 +7,7 @@ ${c.group.title}
 
 <h1>${_('Group members')}</h1>
 
-${path_steps(2)}
+${path_steps(1)}
 
 <form method="post" action="${url(controller='group', action='invite_members_step', id=c.group.group_id)}" id="member_invitation_form">
 
@@ -18,7 +18,7 @@ ${path_steps(2)}
 
   <div class="form-field">
     <span class="btn"><input type="submit" value="${_('Invite')}"/></span>
-    <span class="btn"><input type="submit" name="final_submit" value="${_('''Finish and go to group's main page''')}"/></span>
+    <span class="btn"><input type="submit" name="final_submit" value="${_('Continue')}"/></span>
   </div>
 </form>
 

@@ -14,7 +14,7 @@ ${_('New group')}
 
 <%def name="path_steps(step=0)">
 <div id="steps">
-  %for index, title in enumerate([_('Group settings'), _('Subject selection'), _('Member invitations')]):
+  %for index, title in enumerate([_('Group settings'), _('Member invitations'), _('Subject selection')]):
 <%
    cls=''
    if step == index:

@@ -348,7 +348,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
                 group.moderators = values['moderators']
 
             meta.Session.commit()
-            redirect_to(controller='group', action='subjects_step', id=values['id'])
+            redirect_to(controller='group', action='invite_members_step', id=values['id'])
         else:
             redirect_to(controller='group', action='add')
 
@@ -676,7 +676,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             emails = self.form_result.get('emails', '').split()
             self._send_invitations(group, emails)
             if self.form_result.get('final_submit', None) is not None:
-                redirect_to(controller='group', action='home', id=group.group_id)
+                redirect_to(controller='group', action='subjects_step', id=group.group_id)
             else:
                 redirect_to(controller='group', action='invite_members_step', id=group.group_id)
 

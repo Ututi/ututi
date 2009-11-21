@@ -52,7 +52,7 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
 </%def>
 
 % if c.step:
-  ${path_steps(1)}
+  ${path_steps(2)}
 % endif
 
 <%def name="subject_flash_message(subject)">
@@ -184,6 +184,7 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
       <a class="btn-large" href="${c.group.url(action='add_subject')}"><span>${_('Create a new subject')}</span></a>
     </div>
     %endif
+</div>
 
     % if c.step:
     <div class="create_item">
@@ -192,9 +193,9 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
     </div>
     <br />
     <hr />
-    <a class="btn" href="${url(controller='group', action='invite_members_step', id=c.group.group_id)}" title="${_('Invite group members')}">
+    <a class="btn" href="${url(controller='group', action='home', id=c.group.group_id)}" title="${_('Group home')}">
       <span>${_('Finish choosing subjects')}</span>
     </a>
     % endif
   </div>
-</div>
+
