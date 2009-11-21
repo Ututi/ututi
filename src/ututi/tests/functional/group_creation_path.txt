@@ -11,7 +11,7 @@ We can add a group at the url /groups/add.
     >>> browser.getControl('Group email address').value = 'test'
     >>> browser.getControl('Group title').value = 'Test group'
     >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
-    >>> browser.getControl('Save').click()
+    >>> browser.getControl('Continue').click()
 
 After creating the group we should be redirected to the subject selection view:
     >>> browser.printQuery('//h2/text()')

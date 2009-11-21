@@ -54,7 +54,7 @@ We can add a group at the url /groups/add.
     >>> browser.getControl('Group title').value = 'Test group'
     >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
     >>> browser.getControl('Group logo').add_file(*make_file('test_logo.png'))
-    >>> browser.getControl('Save').click()
+    >>> browser.getControl('Continue').click()
 
 After creating the group we should be redirected to the subject selection view:
 
@@ -76,31 +76,31 @@ However, group ids are checked for uniqueness.
     >>> browser.getControl('Group email address').value = 'Test'
     >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
     >>> browser.getControl('Group title').value = 'Test group'
-    >>> browser.getControl('Save').click()
+    >>> browser.getControl('Continue').click()
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Such id already exists, choose a different one.
 
 And they must be valid local parts of email addresses.
 
     >>> browser.getControl('Group email address').value = 'test test'
-    >>> browser.getControl('Save').click()
+    >>> browser.getControl('Continue').click()
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Id cannot be used as an email address.
 
 Slashes are also not allowed
     >>> browser.getControl('Group email address').value = 'test/test'
-    >>> browser.getControl('Save').click()
+    >>> browser.getControl('Continue').click()
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Id cannot be used as an email address.
 
     >>> browser.getControl('Group email address').value = 'test\test'
-    >>> browser.getControl('Save').click()
+    >>> browser.getControl('Continue').click()
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Id cannot be used as an email address.
 
 And plus signs for that matter
     >>> browser.getControl('Group email address').value = 'test+test'
-    >>> browser.getControl('Save').click()
+    >>> browser.getControl('Continue').click()
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Id cannot be used as an email address.
 

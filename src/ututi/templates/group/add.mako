@@ -65,7 +65,12 @@ ${path_steps()}
       %endfor
     </select>
   </div>
-
+  <div class="form-field">
+    <label for="logo_upload">${_('Group logo')}</label>
+    <form:error name="logo_upload" />
+    <input type="file" name="logo_upload" id="logo_upload" class="line"/>
+  </div>
+  ${h.input_area('description', _('Description'))}
 <%
 from ututi.lib.security import is_root
 %>
@@ -76,12 +81,5 @@ from ututi.lib.security import is_root
   </div>
 % endif
 
-  ${h.input_area('description', _('Description'))}
-  <div class="form-field">
-    <label for="logo_upload">${_('Group logo')}</label>
-    <form:error name="logo_upload" />
-    <input type="file" name="logo_upload" id="logo_upload" class="line"/>
-  </div>
-
-  ${h.input_submit()}
+  ${h.input_submit(_('Continue'))}
 </form>
