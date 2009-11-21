@@ -1,4 +1,5 @@
 import os
+import logging
 
 from datetime import datetime
 from hashlib import md5
@@ -8,6 +9,8 @@ from paste.util.converters import aslist
 from paste.util.converters import asbool
 from pylons import config
 
+log = logging.getLogger(__name__)
+
 sent_messages = []
 
 def send_message(uin, message):
@@ -16,6 +19,8 @@ def send_message(uin, message):
     force_gg_to = aslist(os.environ.get("ututi_force_gg_to", []), ',',
                          strip=True)
     force_gg_to = [int(gg) for gg in force_gg_to if gg]
+
+    log.debug("%d -> %r" % (uin, message))
 
     if not hold or uin in force_gg_to:
         username = config.get('nous_im_username')
