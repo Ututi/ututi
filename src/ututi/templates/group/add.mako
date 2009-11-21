@@ -55,6 +55,7 @@ ${path_steps()}
         <input type="text" id="id" name="id" class="line"/>
     </div></div>
     @${c.mailing_list_host}
+    <div class="explanation">${_("Your group's email address at Ututi")}</div>
   </div>
   <div class="form-field">
     <label for="year">${_("Year")}</label>

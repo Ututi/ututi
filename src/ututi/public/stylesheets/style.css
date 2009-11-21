@@ -523,6 +523,15 @@ div.action-portlet a.btn span, div.action-portlet span.btn input {
 /* end horizontal menu */
 
 /* begin form */
+form .form-field div.explanation {
+  clear: left;
+}
+
+form .form-field .explanation {
+  font-size: 10px;
+  color: #808080;
+}
+
 form .form-field .inline-label {
   font-weight: bold;
   font-size: 0.8em;
