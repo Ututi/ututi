@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-11-21 12:08+0200\n"
+"PO-Revision-Date: 2009-11-21 22:09+0200\n"
 "Last-Translator: Jaroslav Šatkevič <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && "
@@ -707,7 +707,9 @@ msgstr ""
 "list\">academic groups</a>         i kontaktuj się z kolegami z grupy."
 
 msgid "presentation_url"
-msgstr "http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=prexpl-091120185001-phpapp02&rel=0&stripped_title=ututi-czym-jest"
+msgstr ""
+"http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=prexpl-091120185001-phpapp02&rel=0&stripped_title"
+"=ututi-czym-jest"
 
 msgid ""
 "A place where you can store your study materials and leave them for "
@@ -901,11 +903,14 @@ msgstr "Odpowiedź"
 msgid "Group settings"
 msgstr "Ustawienia grupy"
 
+msgid "Member invitations"
+msgstr "Zaproszenia"
+
 msgid "Subject selection"
 msgstr "Wybór przedmiotu"
 
-msgid "Member invitations"
-msgstr "Zaproszenia"
+msgid "Create your Ututi group and start sharing!"
+msgstr ""
 
 msgid ""
 "Create your group, invite your classmates and use the mailing list, "
@@ -920,14 +925,20 @@ msgstr "Nazwa grupy"
 msgid "Group email address"
 msgstr "E-mail grupy"
 
+msgid "Your group's email address at Ututi"
+msgstr ""
+
 msgid "Year"
 msgstr "Rok"
+
+msgid "Group logo"
+msgstr "Logo grupy"
 
 msgid "Moderators"
 msgstr "Moderatorzy"
 
-msgid "Group logo"
-msgstr "Logo grupy"
+msgid "Continue"
+msgstr ""
 
 msgid "New subject"
 msgstr "Nowy przedmiot"
@@ -1013,9 +1024,6 @@ msgstr "Status"
 msgid "Delete group"
 msgstr "Usuń grupę"
 
-msgid "Finish and go to group's main page"
-msgstr "Zakończ i idź do strony startowej grupy"
-
 msgid "The group's page is empty. Enter your description."
 msgstr "Strona grupy jest pusta. Dodaj opis."
 
@@ -1047,6 +1055,9 @@ msgstr "Utwórz nowy przedmiot"
 
 msgid "Did not find what you were looking for?"
 msgstr "Nie znalazłeś tego, czego szukałeś?"
+
+msgid "Group home"
+msgstr ""
 
 msgid "Watched subjects"
 msgstr "Obserwowane przedmioty"
@@ -1463,6 +1474,27 @@ msgstr "Wydział"
 
 msgid "Section"
 msgstr "Dział"
+
+msgid "Full title"
+msgstr ""
+
+msgid "e.g. LKKA"
+msgstr ""
+
+msgid "Add university"
+msgstr ""
+
+msgid "Add deparment"
+msgstr ""
+
+msgid "Add section"
+msgstr ""
+
+msgid "enter the name or add a new one"
+msgstr ""
+
+msgid "enter the name"
+msgstr ""
 
 msgid "You can keep up to 200 Mb of private group files here (e.g. pictures)"
 msgstr ""

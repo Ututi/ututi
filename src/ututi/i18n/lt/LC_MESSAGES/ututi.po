@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-11-21 12:08+0200\n"
+"PO-Revision-Date: 2009-11-21 22:09+0200\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -711,7 +711,9 @@ msgstr ""
 "ir bendrauti su grupiokais."
 
 msgid "presentation_url"
-msgstr "http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=prex-091120192146-phpapp01&rel=0&stripped_title=ututi-kas-tai"
+msgstr ""
+"http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=prex-091120192146-phpapp01&rel=0&stripped_title"
+"=ututi-kas-tai"
 
 msgid ""
 "A place where you can store your study materials and leave them for "
@@ -904,11 +906,14 @@ msgstr "Atsakyti"
 msgid "Group settings"
 msgstr "Grupės nustatymai"
 
+msgid "Member invitations"
+msgstr "Narių kvietimas"
+
 msgid "Subject selection"
 msgstr "Dalykų pasirinkimas"
 
-msgid "Member invitations"
-msgstr "Narių kvietimas"
+msgid "Create your Ututi group and start sharing!"
+msgstr ""
 
 msgid ""
 "Create your group, invite your classmates and use the mailing list, "
@@ -923,14 +928,20 @@ msgstr "Grupės pavadinimas"
 msgid "Group email address"
 msgstr "Grupės el. konferencijos adresas"
 
+msgid "Your group's email address at Ututi"
+msgstr ""
+
 msgid "Year"
 msgstr "Metai"
+
+msgid "Group logo"
+msgstr "Grupės paveikslėlis"
 
 msgid "Moderators"
 msgstr "Grupės pilotai"
 
-msgid "Group logo"
-msgstr "Grupės paveikslėlis"
+msgid "Continue"
+msgstr ""
 
 msgid "New subject"
 msgstr "Naujas dalykas"
@@ -1018,9 +1029,6 @@ msgstr "Statusas"
 msgid "Delete group"
 msgstr "Ištrinti grupę"
 
-msgid "Finish and go to group's main page"
-msgstr "baigti ir grįžti į grupės puslapį"
-
 msgid "The group's page is empty. Enter your description."
 msgstr "Grupės puslapis vis dar tuščias. Reikėtų ką nors parašyti..."
 
@@ -1052,6 +1060,9 @@ msgstr "kurti naują dalyką"
 
 msgid "Did not find what you were looking for?"
 msgstr "Nėra to, ko ieškojote? "
+
+msgid "Group home"
+msgstr ""
 
 msgid "Watched subjects"
 msgstr "Stebimi dalykai"
@@ -1462,13 +1473,34 @@ msgid "Log in as %(user)s"
 msgstr "Prisijungti kaip %(user)s"
 
 msgid "University"
-msgstr "mokymo įstaiga"
+msgstr "Universitetas"
 
 msgid "Department"
 msgstr "Fakultetas"
 
 msgid "Section"
 msgstr "Filialas"
+
+msgid "Full title"
+msgstr ""
+
+msgid "e.g. LKKA"
+msgstr ""
+
+msgid "Add university"
+msgstr ""
+
+msgid "Add deparment"
+msgstr ""
+
+msgid "Add section"
+msgstr ""
+
+msgid "enter the name or add a new one"
+msgstr ""
+
+msgid "enter the name"
+msgstr ""
 
 msgid "You can keep up to 200 Mb of private group files here (e.g. pictures)"
 msgstr "Čia galite laikyti iki 200 Mb privačių grupės failų (pvz. nuotraukų)"

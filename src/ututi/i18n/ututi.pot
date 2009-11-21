@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2009-11-21 12:04+0200\n"
+"POT-Creation-Date: 2009-11-21 22:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -833,10 +833,13 @@ msgstr ""
 msgid "Group settings"
 msgstr ""
 
+msgid "Member invitations"
+msgstr ""
+
 msgid "Subject selection"
 msgstr ""
 
-msgid "Member invitations"
+msgid "Create your Ututi group and start sharing!"
 msgstr ""
 
 msgid ""
@@ -850,13 +853,19 @@ msgstr ""
 msgid "Group email address"
 msgstr ""
 
+msgid "Your group's email address at Ututi"
+msgstr ""
+
 msgid "Year"
+msgstr ""
+
+msgid "Group logo"
 msgstr ""
 
 msgid "Moderators"
 msgstr ""
 
-msgid "Group logo"
+msgid "Continue"
 msgstr ""
 
 msgid "New subject"
@@ -943,9 +952,6 @@ msgstr ""
 msgid "Delete group"
 msgstr ""
 
-msgid "Finish and go to group's main page"
-msgstr ""
-
 msgid "The group's page is empty. Enter your description."
 msgstr ""
 
@@ -974,6 +980,9 @@ msgid "Create a new subject"
 msgstr ""
 
 msgid "Did not find what you were looking for?"
+msgstr ""
+
+msgid "Group home"
 msgstr ""
 
 msgid "Watched subjects"
@@ -1373,6 +1382,27 @@ msgid "Department"
 msgstr ""
 
 msgid "Section"
+msgstr ""
+
+msgid "Full title"
+msgstr ""
+
+msgid "e.g. LKKA"
+msgstr ""
+
+msgid "Add university"
+msgstr ""
+
+msgid "Add deparment"
+msgstr ""
+
+msgid "Add section"
+msgstr ""
+
+msgid "enter the name or add a new one"
+msgstr ""
+
+msgid "enter the name"
 msgstr ""
 
 msgid "You can keep up to 200 Mb of private group files here (e.g. pictures)"
