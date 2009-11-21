@@ -142,17 +142,17 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
           </a>
         </div>
         <div id="presentation-actual" class="${(not c.slideshow) and 'hidden' or ''}">
-          <object id='${_("ututi_video_id")}'
-                  width='550'
-                  height='308'
-                  type='application/x-shockwave-flash'
-                  data='http://www.screentoaster.com/swf/STPlayer.swf'
-                  codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,115,0'>
-            <param name='movie' value='http://www.screentoaster.com/swf/STPlayer.swf'/>
-            <param name='allowFullScreen' value='true'/>
-            <param name='allowScriptAccess' value='always'/>
-            <param name='flashvars' value='video=${_("ututi_video_id")}'/>
-          </object>
+          <div style="width:550px;text-align:left" id="__ss_2549808">
+            <object style="margin:0px" width="550" height="434">
+              <param name="movie"
+                     value="${_('presentation_url')}" />
+              <param name="allowFullScreen" value="true"/>
+              <param name="allowScriptAccess" value="always"/>
+              <embed src="${_('presentation_url')}"
+                     type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="550" height="434">
+              </embed>
+            </object>
+          </div>
         </div>
       </div>
       <div id="ututi_features" class="${c.slideshow and 'hidden' or ''}">

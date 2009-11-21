@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2009-11-17 17:53+0200\n"
+"POT-Creation-Date: 2009-11-21 12:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -656,6 +656,9 @@ msgid ""
 "groups</a>          and communicate with groupmates."
 msgstr ""
 
+msgid "presentation_url"
+msgstr ""
+
 msgid ""
 "A place where you can store your study materials and leave them for future "
 "generations."
@@ -988,6 +991,9 @@ msgstr ""
 msgid "last author"
 msgstr ""
 
+msgid "Already have an account? Login!"
+msgstr ""
+
 msgid "Reset your password"
 msgstr ""
 
@@ -1087,7 +1093,22 @@ msgstr ""
 msgid "(unconfirmed)"
 msgstr ""
 
+msgid "Send code again"
+msgstr ""
+
+msgid ""
+"If you want to confirm your GaduGadu number, please enter the code that you "
+"have received in your GG. Also don't forget to add Ututi (123345) to your "
+"friends."
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
 msgid "number is confirmed"
+msgstr ""
+
+msgid "Receive news into gg"
 msgstr ""
 
 msgid "Your email address"
@@ -1357,6 +1378,9 @@ msgstr ""
 msgid "You can keep up to 200 Mb of private group files here (e.g. pictures)"
 msgstr ""
 
+msgid "Login"
+msgstr ""
+
 msgid "Join Ututi"
 msgstr ""
 
@@ -1376,6 +1400,12 @@ msgid "terms of use"
 msgstr ""
 
 msgid "Register"
+msgstr ""
+
+msgid "Registration"
+msgstr ""
+
+msgid "Join"
 msgstr ""
 
 msgid "There are no messages."

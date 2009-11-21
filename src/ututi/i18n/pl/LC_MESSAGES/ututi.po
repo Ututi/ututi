@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-11-18 04:37+0200\n"
+"PO-Revision-Date: 2009-11-21 12:08+0200\n"
 "Last-Translator: Jaroslav Šatkevič <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && "
@@ -706,6 +706,9 @@ msgstr ""
 "stodiów</a>,          twórz <a href=\"%(groups)s\" title=\"Group "
 "list\">academic groups</a>         i kontaktuj się z kolegami z grupy."
 
+msgid "presentation_url"
+msgstr "http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=prexpl-091120185001-phpapp02&rel=0&stripped_title=ututi-czym-jest"
+
 msgid ""
 "A place where you can store your study materials and leave them for "
 "future generations."
@@ -1060,6 +1063,9 @@ msgstr "ostatnia wypowiedż"
 msgid "last author"
 msgstr "ostatni autor"
 
+msgid "Already have an account? Login!"
+msgstr ""
+
 msgid "Reset your password"
 msgstr "Zmień hasło"
 
@@ -1160,7 +1166,22 @@ msgstr ""
 msgid "(unconfirmed)"
 msgstr "Zaakceptuj"
 
+msgid "Send code again"
+msgstr ""
+
+msgid ""
+"If you want to confirm your GaduGadu number, please enter the code that "
+"you have received in your GG. Also don't forget to add Ututi (123345) to "
+"your friends."
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
 msgid "number is confirmed"
+msgstr ""
+
+msgid "Receive news into gg"
 msgstr ""
 
 #, fuzzy
@@ -1446,6 +1467,9 @@ msgstr "Dział"
 msgid "You can keep up to 200 Mb of private group files here (e.g. pictures)"
 msgstr ""
 
+msgid "Login"
+msgstr ""
+
 msgid "Join Ututi"
 msgstr "Dołącz do Ututi"
 
@@ -1466,6 +1490,12 @@ msgstr "regulamin"
 
 msgid "Register"
 msgstr "Zaloguj się"
+
+msgid "Registration"
+msgstr ""
+
+msgid "Join"
+msgstr ""
 
 msgid "There are no messages."
 msgstr "Brak wiadomości."

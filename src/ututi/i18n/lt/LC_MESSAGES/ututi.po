@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-11-17 17:53+0200\n"
+"PO-Revision-Date: 2009-11-21 12:08+0200\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -710,6 +710,9 @@ msgstr ""
 "sąrašas\">akademines grupes</a>\n"
 "ir bendrauti su grupiokais."
 
+msgid "presentation_url"
+msgstr "http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=prex-091120192146-phpapp01&rel=0&stripped_title=ututi-kas-tai"
+
 msgid ""
 "A place where you can store your study materials and leave them for "
 "future generations."
@@ -1065,6 +1068,9 @@ msgstr "naujausias laiškas"
 msgid "last author"
 msgstr "paskutinis parašė"
 
+msgid "Already have an account? Login!"
+msgstr ""
+
 msgid "Reset your password"
 msgstr "Atstatyti slaptažodį"
 
@@ -1164,7 +1170,22 @@ msgstr ""
 msgid "(unconfirmed)"
 msgstr ""
 
+msgid "Send code again"
+msgstr ""
+
+msgid ""
+"If you want to confirm your GaduGadu number, please enter the code that "
+"you have received in your GG. Also don't forget to add Ututi (123345) to "
+"your friends."
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
 msgid "number is confirmed"
+msgstr ""
+
+msgid "Receive news into gg"
 msgstr ""
 
 msgid "Your email address"
@@ -1452,6 +1473,9 @@ msgstr "Filialas"
 msgid "You can keep up to 200 Mb of private group files here (e.g. pictures)"
 msgstr "Čia galite laikyti iki 200 Mb privačių grupės failų (pvz. nuotraukų)"
 
+msgid "Login"
+msgstr ""
+
 msgid "Join Ututi"
 msgstr "Prisijunk prie Ututi"
 
@@ -1472,6 +1496,12 @@ msgstr "naudojimosi sistema taisyklėmis"
 
 msgid "Register"
 msgstr "registruotis"
+
+msgid "Registration"
+msgstr ""
+
+msgid "Join"
+msgstr ""
 
 msgid "There are no messages."
 msgstr "Pranešimų nėra."
