@@ -193,7 +193,7 @@ def trackEvent(obj, action, label, category='navigation'):
         action,
         label)
 
-def input_line(name, title, value='', explanation=None):
+def input_line(name, title, value='', explanation=None, **kwargs):
     expl = None
     if explanation is not None:
         expl = HTML.div(class_='explanation', c=explanation)
@@ -203,7 +203,7 @@ def input_line(name, title, value='', explanation=None):
             HTML.literal('<form:error name="%s" />' % name),
             HTML.div(class_='input-line', c=[
                     HTML.div(c=[
-                            HTML.input(type='text', class_='line', id=name, name_=name, value='')])]),
+                            HTML.input(type='text', id=name, name_=name, value='', **kwargs)])]),
             expl
             ])
 

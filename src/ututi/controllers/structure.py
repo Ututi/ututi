@@ -192,3 +192,6 @@ class StructureController(BaseController):
             return dict(values = results)
 
         return None
+
+    def js_add_tag(self):
+        return 'ok';

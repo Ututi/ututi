@@ -1,11 +1,11 @@
 <%inherit file="/base.mako" />
 
-<%namespace file="/widgets/locationtag.mako" import="*"/>
+<%namespace file="/widgets/newlocationtag.mako" import="*"/>
 
 <%def name="head_tags()">
     ${parent.head_tags()}
     ${h.stylesheet_link('/stylesheets/group.css')|n}
-    ${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
+    ${h.stylesheet_link('/stylesheets/newlocationwidget.css')|n}
 </%def>
 
 <%def name="title()">
@@ -40,11 +40,7 @@ ${path_steps()}
      id="group_add_form" enctype="multipart/form-data">
 
   <div class="form-field">
-    %if c.location:
-      ${location_widget(2, c.location.hierarchy())}
-    %else:
-      ${location_widget(2)}
-    %endif
+    ${location_widget(2, add_new=(c.tpl_lang=='pl'))}
   </div>
   <br class="clear-left"/>
   ${h.input_line('title', _('Group title'))}
