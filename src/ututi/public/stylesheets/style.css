@@ -652,6 +652,13 @@ input.text_button:hover {
   border-bottom: 1px solid #d45500;
 }
 
+.sidebar-block a.btn-large,
+.sidebar-block a.btn-large span,
+.sidebar-block span.btn-large,
+.sidebar-block span.btn-large input {
+  background-image: url("../images/button_large_portlet.png");
+}
+
 span.btn-large,
 a.btn-large {
   background: white url("../images/button_large.png") left top no-repeat;
