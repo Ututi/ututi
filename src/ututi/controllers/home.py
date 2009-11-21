@@ -87,6 +87,8 @@ class RegistrationForm(Schema):
     repeat_password = validators.String(
          min=5, not_empty=True, strip=True, messages=msg)
 
+    gadugadu = validators.Int()
+
     msg = {'invalid': _(u"Passwords do not match."),
            'invalidNoMatch': _(u"Passwords do not match."),
            'empty': _(u"Please enter your password to register.")}
@@ -197,6 +199,7 @@ class HomeController(UniversityListMixin):
         fullname = self.form_result['fullname']
         password = self.form_result['new_password']
         email = self.form_result['email'].lower()
+        gadugadu_uin = self.form_result['gadugadu']
 
         user = User(fullname, password)
         user.emails = [Email(email)]
@@ -206,6 +209,10 @@ class HomeController(UniversityListMixin):
         meta.Session.add(user)
         meta.Session.commit()
         email_confirmation_request(user, email)
+
+        if gadugadu_uin:
+            user.gadugadu_uin = gadugadu_uin
+            gg.confirmation_request(user)
 
         sign_in_user(email)
         return (user, email)

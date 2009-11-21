@@ -100,6 +100,8 @@
               <input  type="text" id="gadugadu" name="gadugadu" size="40" class="line"/>
           </div></div>
         </div>
+        %else:
+         <input type="hidden" id="gadugadu" name="gadugadu"/>
         %endif
 
         <div class="form-field">
