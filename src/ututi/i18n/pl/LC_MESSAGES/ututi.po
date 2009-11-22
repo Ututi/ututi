@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-11-22 17:35+0200\n"
-"Last-Translator: Jaroslav Šatkevič <jaro@ututi.com>\n"
+"PO-Revision-Date: 2009-11-23 00:29+0200\n"
+"Last-Translator: \n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && "
 "(n%100<10 || n%100>=20) ? 1 : 2)\n"
@@ -85,7 +85,7 @@ msgstr ""
 
 #, python-format
 msgid "You are now a member of the group %s!"
-msgstr ""
+msgstr "Jesteś teraz członkiem grupy %s!"
 
 msgid ""
 "Your request to join the group was forwarded to the group's "
@@ -187,13 +187,15 @@ msgid "This email has already been used to register."
 msgstr "Ten email już jest w naszej bazie danych."
 
 msgid "You have to be logged in to download a file!"
-msgstr ""
+msgstr "Zaloguj się by pobrać plik!"
 
 #, python-format
 msgid ""
 "After logging in you will be redirected to the download page of the file "
 "<strong>%(filename)s</strong> and the download will start automatically."
 msgstr ""
+"Po zalogowaniu zostaniesz przekierowany na stronę pobierania pliku "
+"<strong>%(filename)s</strong>. Pobieranie rozpocznie się automatycznie."
 
 msgid "Permission denied!"
 msgstr "Odmowa dostępu!"
@@ -209,7 +211,7 @@ msgstr ""
 msgid ""
 "If this is your first time visiting <a href=\"%(url)s\">Ututi</a>, please"
 " register first."
-msgstr ""
+msgstr "Po raz pierwszy na <a href=\"%(url)s\">Ututi</a>? Zaloguj się."
 
 msgid "Wrong username or password!"
 msgstr "Niepoprawny login lub hasło!"
@@ -294,19 +296,19 @@ msgid "Ututi news: %(file_changes)s and %(page_changes)s"
 msgstr "Nowe na Ututi: %(file_changes)s i %(page_changes)s"
 
 msgid "This is not the confirmation code we sent you."
-msgstr ""
+msgstr "Błędny kod!"
 
 msgid "Search"
 msgstr "Szukaj"
 
 msgid "Your password has been changed!"
-msgstr ""
+msgstr "Twoje hasło zostało zmienione!"
 
 msgid "Your profile was updated."
 msgstr "Twój profil został zaktualizowany."
 
 msgid "Confirmation message sent. Please check your email."
-msgstr ""
+msgstr "E-mail potwierdzający został już wysłany."
 
 #, python-format
 msgid "Your email %s was confirmed. Thank You."
@@ -322,20 +324,20 @@ msgid "Delete"
 msgstr "Usuń"
 
 msgid "The entry already exists"
-msgstr ""
+msgstr "Taki wpis już istnieje"
 
 msgid "Choose a different short title"
-msgstr ""
+msgstr "Wybierz inną nazwę skróconą"
 
 msgid "The short title must contain no spaces"
-msgstr ""
+msgstr "Skrócona nazwa nie powinna zawierać spacji"
 
 msgid "Information updated."
 msgstr "Informacje zostały zaktualizowane."
 
 #, python-format
 msgid "You are now watching the subject %s"
-msgstr ""
+msgstr "Obserwujesz przedmiot %s"
 
 msgid "The subject has been added to your watched subjects list."
 msgstr "Przedmiot został dodany do listy obserwowanych przedmiotów."
@@ -366,6 +368,8 @@ msgstr "Potwierdzenie przyjęcia do ututi grupy "
 
 msgid "To confirm your gadu gadu enter this code in your profile page."
 msgstr ""
+"Potwierdź swój numer gg poprzez wpisanie tego kodu na stronie Twego "
+"profilu."
 
 msgid "Save"
 msgstr "Zachowaj"
@@ -390,7 +394,7 @@ msgstr "Tag jest zbyt długi."
 
 #, python-format
 msgid "A new file has been uploaded for the %(title)s:"
-msgstr ""
+msgstr "Do %(title)s został dodany nowy plik"
 
 #, python-format
 msgid "%(num)s second ago"
@@ -544,7 +548,7 @@ msgid "home"
 msgstr "główna"
 
 msgid "Change your personal information"
-msgstr ""
+msgstr "Zaktualizuj swoje dane osobowe"
 
 msgid "Wrong password or username!"
 msgstr "Niepoprawne hasło lub login"
@@ -723,27 +727,29 @@ msgid ""
 "A place where you can store your study materials and leave them for "
 "future generations."
 msgstr ""
+"Miejsce do przechowywania materiałów ze studiów i przekazywania ich "
+"przyszłym pokoleniom studentów."
 
 msgid "Create your group"
-msgstr ""
+msgstr "Utwórz Twoją grupę"
 
 msgid "Unlimited file size"
-msgstr ""
+msgstr "Nieograniczona pojemność plików"
 
 msgid "Store and share with your group mates without restrictions!"
-msgstr ""
+msgstr "Przechowuj i dziel się plikami bez żadnych ograniczeń!"
 
 msgid "Communicate with your group mates"
-msgstr ""
+msgstr "Komunikuj się ze swoimi kolegami z grupy"
 
 msgid "All groups have their own mailing lists."
-msgstr ""
+msgstr "Wszystkie grupy posiadają własne grupy mailingowe."
 
 msgid "Gadu Gadu integration"
-msgstr ""
+msgstr "Powiadomienia z Gadu Gadu"
 
 msgid "Receive notifications by email and gadu gadu!"
-msgstr ""
+msgstr "Otrzymuj powiadomienia na e-mail lub gg!"
 
 msgid "New blog snippet:"
 msgstr "Nowy wątek blogowy:"
@@ -918,7 +924,7 @@ msgid "Subject selection"
 msgstr "Wybór przedmiotu"
 
 msgid "Create your Ututi group and start sharing!"
-msgstr ""
+msgstr "Utwórz własną grupę na Ututi i zacznij się dzielić!"
 
 msgid ""
 "Create your group, invite your classmates and use the mailing list, "
@@ -934,7 +940,7 @@ msgid "Group email address"
 msgstr "E-mail grupy"
 
 msgid "Your group's email address at Ututi"
-msgstr ""
+msgstr "E-mail Twojej grupy na Ututi"
 
 msgid "Year"
 msgstr "Rok"
@@ -946,7 +952,7 @@ msgid "Moderators"
 msgstr "Moderatorzy"
 
 msgid "Continue"
-msgstr ""
+msgstr "Kontynuuj"
 
 msgid "New subject"
 msgstr "Nowy przedmiot"
@@ -985,7 +991,7 @@ msgid "Edit group front page"
 msgstr "Edytuj stronę startową grupy"
 
 msgid "Add more subjects"
-msgstr ""
+msgstr "Dodaj więcej przedmiotów"
 
 msgid "Group members"
 msgstr "Członkowie grupy"
@@ -1065,7 +1071,7 @@ msgid "Did not find what you were looking for?"
 msgstr "Nie znalazłeś tego, czego szukałeś?"
 
 msgid "Group home"
-msgstr ""
+msgstr "Strona grupy"
 
 msgid "Watched subjects"
 msgstr "Obserwowane przedmioty"
@@ -1083,7 +1089,7 @@ msgid "last author"
 msgstr "ostatni autor"
 
 msgid "Already have an account? Login!"
-msgstr ""
+msgstr "Masz swój profil? Zaloguj się!"
 
 msgid "Reset your password"
 msgstr "Zmień hasło"
@@ -1161,7 +1167,7 @@ msgid "back to the profile"
 msgstr "wróć do profilu"
 
 msgid "Personal information"
-msgstr ""
+msgstr "Dane osobowe"
 
 msgid "Full name"
 msgstr "Imię i nazwisko"
@@ -1176,17 +1182,17 @@ msgid "Personal logo"
 msgstr "Twoje logo"
 
 msgid "Contact data"
-msgstr ""
+msgstr "Dane kontaktowe"
 
 msgid "Your GG number"
-msgstr ""
+msgstr "Twoje GG"
 
 #, fuzzy
 msgid "(unconfirmed)"
 msgstr "Zaakceptuj"
 
 msgid "send code again"
-msgstr ""
+msgstr "wyślij kod ponownie"
 
 msgid ""
 "If you want to confirm your GaduGadu number,\n"
@@ -1195,28 +1201,33 @@ msgid ""
 "                        (<a href=\"gg:5437377\">5437377</a>) to your "
 "friends."
 msgstr ""
+"Jeżeli chcesz uzyskać potwierdzenie Twojego e-maila,\n"
+"                       wprowadź kod otrzymany \n"
+"                       na Twoje gg. Nie zapomnij też dodać UTUTI\n"
+"                        (<a href=\"gg:5437377\">5437377</a>) do listy "
+"znajomych."
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "number is confirmed"
-msgstr ""
+msgstr "numer gg  potwierdzony"
 
 msgid "Receive news into gg"
-msgstr ""
+msgstr "Otrzymuj powiadomienia na gg"
 
 #, fuzzy
 msgid "Your email address"
 msgstr "E-mail grupy"
 
 msgid "get confirmation email"
-msgstr ""
+msgstr "uzyskaj potwierdzenie"
 
 msgid "email is confirmed"
-msgstr ""
+msgstr "e-mail został potwierdzony"
 
 msgid "Update contacts"
-msgstr ""
+msgstr "Zaktualizuj listę kontaktową"
 
 msgid "Change your password"
 msgstr "Zmień hasło"
@@ -1386,6 +1397,8 @@ msgid ""
 "Your <strong>email</strong> is not confirmed! Please confirm your email "
 "by clicking on the link sent to your address or "
 msgstr ""
+"Twój <strong>email</strong> nie został potwierdzony! Potwierdź swój "
+"e-mail - aktywuj link wysłany na Twój adres "
 
 msgid "get another confirmation email"
 msgstr "uzyskaj nowy e-mail potwierdzający"
@@ -1434,7 +1447,7 @@ msgid "Brief description of the subject"
 msgstr "Krótki opis przedmiotu"
 
 msgid "Start watching this subject personally"
-msgstr ""
+msgstr "Rozpocznij śledzenie przedmiotu osobiście "
 
 msgid "Edit subject"
 msgstr "Edytuj przedmiot"
@@ -1486,7 +1499,7 @@ msgstr "Na razie niczym."
 
 #, python-format
 msgid "Log in as %(user)s"
-msgstr ""
+msgstr "Zaloguj się jako %(user)s"
 
 msgid "University"
 msgstr "Uczelnia"
@@ -1498,34 +1511,34 @@ msgid "Section"
 msgstr "Dział"
 
 msgid "Full title"
-msgstr ""
+msgstr "Pełna nazwa"
 
 msgid "e.g. LKKA"
-msgstr ""
+msgstr "n.p. UWM"
 
 msgid "Add university"
-msgstr ""
+msgstr "Dodaj uczelnię"
 
 msgid "Add deparment"
-msgstr ""
+msgstr "Dodaj wydział"
 
 msgid "Add section"
-msgstr ""
+msgstr "Dodaj kierunek"
 
 msgid "or"
-msgstr ""
+msgstr "lub"
 
 msgid "enter the name or add a new one"
-msgstr ""
+msgstr "wprowadź nazwę lub nadaj nową nazwę"
 
 msgid "enter the name"
-msgstr ""
+msgstr "podaj imię"
 
 msgid "You can keep up to 200 Mb of private group files here (e.g. pictures)"
-msgstr ""
+msgstr "Możesz przechowywać tu nawet 200 Mb plików Twojej grupy (n.p. zdjęć)"
 
 msgid "Login"
-msgstr ""
+msgstr "Login"
 
 msgid "Join Ututi"
 msgstr "Dołącz do Ututi"
@@ -1534,7 +1547,7 @@ msgid "Fullname"
 msgstr "Imię, nazwisko"
 
 msgid "Gadu gadu"
-msgstr ""
+msgstr "Gadu Gadu"
 
 msgid "Repeat password"
 msgstr "Powtórz hasło"
@@ -1549,10 +1562,10 @@ msgid "Register"
 msgstr "Zaloguj się"
 
 msgid "Registration"
-msgstr ""
+msgstr "Rejestracja"
 
 msgid "Join"
-msgstr ""
+msgstr "Dołącz"
 
 msgid "There are no messages."
 msgstr "Brak wiadomości."
