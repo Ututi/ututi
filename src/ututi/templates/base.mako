@@ -107,6 +107,21 @@ ${h.javascript_link('/javascripts/forms.js')|n}
 </div>
 </%def>
 
+<%def name="flash_messages()">
+<div id="flash-messages">
+  % if c.serve_file:
+  <iframe style="display: none;" src="${c.serve_file.url()}"> </iframe>
+  % endif
+
+  <% messages = h.flash.pop_messages() %>
+  % for message in messages:
+  <div class="flash-message"><span class="close-link hide-parent">${_('Close')}</span><span>${message}</span></div>
+  % endfor
+  ${invitation_messages(c.user)}
+  ${request_messages(c.user)}
+  ${confirmation_messages(c.user)}
+</div>
+</%def>
 
 <%def name="tabs(tabs)">
   %if isinstance(tabs, list):
@@ -234,20 +249,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
         ${self.portlets()}
 
         <div class="inside" id="page-content">
-          <div id="flash-messages">
-            % if c.serve_file:
-            <iframe style="display: none;" src="${c.serve_file.url()}"> </iframe>
-            % endif
-
-            <% messages = h.flash.pop_messages() %>
-            % for message in messages:
-            <div class="flash-message"><span class="close-link hide-parent">${_('Close')}</span><span>${message}</span></div>
-            % endfor
-            ${invitation_messages(c.user)}
-            ${request_messages(c.user)}
-            ${confirmation_messages(c.user)}
-          </div>
-
+          ${self.flash_messages()}
           %if c.breadcrumbs:
             ${tabs(c.breadcrumbs.pop())}
           %endif

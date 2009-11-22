@@ -5,6 +5,9 @@
 ${c.group.title}
 </%def>
 
+<%def name="flash_messages()">
+</%def>
+
 <h1>${_('Group members')}</h1>
 
 ${path_steps(1)}
