@@ -2,7 +2,7 @@ import logging
 
 from formencode import Schema, validators, Invalid, variabledecode, htmlfill
 from sqlalchemy.orm.exc import NoResultFound
-from sqlalchemy.sql import expression
+from sqlalchemy.sql import expression, func
 from sqlalchemy import or_
 
 from pylons.controllers.util import abort
@@ -14,6 +14,7 @@ from pylons.i18n import _
 from ututi.lib.security import ActionProtector
 from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
+from ututi.lib.validators import ShortTitleValidator
 from ututi.model import meta, LocationTag, SimpleTag, Tag
 from ututi.controllers.group import FileUploadTypeValidator
 
@@ -44,6 +45,11 @@ class NewStructureForm(Schema):
     logo_upload = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
     description = validators.UnicodeString(strip=True)
     parent = StructureIdValidator()
+
+
+class JSStructureForm(Schema):
+    allow_extra_fields = True
+    pre_validators = [variabledecode.NestedVariables()]
 
 
 class EditStructureForm(NewStructureForm):
@@ -140,7 +146,6 @@ class StructureController(BaseController):
     def logo(self, id, width=None, height=None):
         tag = meta.Session.query(LocationTag).filter_by(id=id).one()
         return serve_image(tag.logo, width, height)
-
     @validate(schema=AutoCompletionForm, post_only=False, on_get=True)
     @jsonify
     def completions(self):
@@ -193,5 +198,46 @@ class StructureController(BaseController):
 
         return None
 
+    @validate(schema=AutoCompletionForm, post_only=False, on_get=True)
+    @jsonify
     def js_add_tag(self):
-        return 'ok';
+        if hasattr(self, 'form_result'):
+            json = {
+                'success': '',
+                'error': ''
+                }
+            parent = None
+            created = None
+            location = self.form_result['location']
+            newlocation = self.form_result['newlocation']
+            for index, item in enumerate(newlocation):
+                if item['title'] == '' and location[index] != '':
+                    try:
+                        parent = meta.Session.query(LocationTag).filter(LocationTag.title == location[index]).filter(LocationTag.parent == parent).one()
+                    except:
+                        break
+                else:
+                    try:
+                        ShortTitleValidator.to_python(item['title_short'])
+
+                        existing = meta.Session.query(LocationTag).filter(func.lower(LocationTag.title_short) == item['title_short'].lower())\
+                            .filter(LocationTag.parent == parent).first()
+                        if existing is not None:
+                            if existing.title.lower() == item['title'].lower():
+                                json['error'] = _('The entry already exists')
+                                break
+                            else:
+                                json['error'] = _('Choose a different short title')
+                                break
+                    except:
+                        json['error'] = _('The short title must contain no spaces')
+                        break
+
+                    created = LocationTag(item['title'], item['title_short'], u'', parent)
+
+                    meta.Session.add(created)
+                    meta.Session.commit()
+                    break
+            if created is not None:
+                json['success'] = created.title
+            return json

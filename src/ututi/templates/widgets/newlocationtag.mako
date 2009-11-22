@@ -1,14 +1,9 @@
 <%def name="location_add_subform(index)">
 <div class="location-add-subform hidden" id="location-add-subform-${index}">
-${h.input_line('newlocation-title-%d' % index, _('Title'), explanation=_('Full title'), class_='title')}
-${h.input_line('newlocation-titleshort-%d' % index, _('Short title'), explanation=_('e.g. LKKA'), class_='title-short')}
-%if index == 0:
-  <div class="form-field">
-    <label for="logo-upload-${index}">${_('Logo')}</label>
-    <input type="file" name="logo-upload-{$index}" id="logo-upload-{$index}" class="line"/>
-  </div>
-%endif
-${h.input_submit('Save')}
+  <div class="error"></div>
+  ${h.input_line('newlocation-%d.title' % index, _('Title'), explanation=_('Full title'), class_='title')}
+  ${h.input_line('newlocation-%d.title_short' % index, _('Short title'), explanation=_('e.g. LKKA'), class_='title-short')}
+  ${h.input_submit('Save')}
 </div>
 </%def>
 
@@ -39,7 +34,7 @@ ${h.input_submit('Save')}
           </div>
         </div>
         %if add_new:
-          <a style="margin: 0 0 0 5px;" class="btn add_subform_switch" href="#"><span>${add_titles[i]}</span></a>
+          <span style="margin-left: 5px;">${_('or')}</span> <a style="margin: 0 0 0 5px;" class="btn add_subform_switch" href="#"><span>${add_titles[i]}</span></a>
         %endif
 
         <div class="explanation">
@@ -85,12 +80,17 @@ ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
            function(data) {
              target = $('.js-target');
              $(target).removeClass('js-target');
-             $('div.input-line div input.structure-complete', $(target).parent()).val(data);
-             $('input.title', target).val('')
-             $('input.title-short', target).val('')
-             $(target).toggle();
-             $(target).siblings('.add_subform_switch').toggleClass('active');
-           }
+             if (data.success != '') {
+               $('div.input-line div input.structure-complete', $(target).parent()).val(data.success);
+               $('input.title', target).val('')
+               $('input.title-short', target).val('')
+               $(target).toggle();
+               $(target).siblings('.add_subform_switch').toggleClass('active');
+             } else {
+               $('div.error', target).text(data.error);
+             }
+           },
+           'json'
       );
     }
     return false;
