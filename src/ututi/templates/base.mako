@@ -238,28 +238,14 @@ ${h.javascript_link('/javascripts/forms.js')|n}
             % if c.serve_file:
             <iframe style="display: none;" src="${c.serve_file.url()}"> </iframe>
             % endif
-            %if c.user and not c.user.isConfirmed:
-            <div class="flash-message">
-              <span class="close-link hide-parent">${_('Close')}</span>
-              <span>
-                ${_('Your <strong>email</strong> is not confirmed! Please confirm your email by clicking on the link sent to your address or ')|n}
-                    <form method="post" action="${url(controller='profile', action='confirm_emails')}" id="email_confirmation_request" class="inline-form">
-                      <div>
-                        <input type="hidden" name="came_from" value="${request.url}" />
-                        <input type="hidden" name="email" value="${c.user.emails[0].email}" />
-                        <input type="submit" class="text_button" value="${_('get another confirmation email')}" style="font-size: 13px;"/>
-                      </div>
-                    </form>
 
-              </span>
-            </div>
-            %endif
             <% messages = h.flash.pop_messages() %>
             % for message in messages:
             <div class="flash-message"><span class="close-link hide-parent">${_('Close')}</span><span>${message}</span></div>
             % endfor
             ${invitation_messages(c.user)}
             ${request_messages(c.user)}
+            ${confirmation_messages(c.user)}
           </div>
 
           %if c.breadcrumbs:
