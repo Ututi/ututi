@@ -35,6 +35,8 @@ from nous.mailpost import copy_chunked
 
 from zope.cachedescriptors.property import Lazy
 
+from pylons.i18n import _
+
 log = logging.getLogger(__name__)
 
 def init_model(engine):
@@ -1185,10 +1187,18 @@ class NotifyGG(MapperExtension):
     def after_insert(self, mapper, connection, instance):
         from pylons import tmpl_context as c
         from ututi.lib import gg
+        recipients = []
         if isinstance(instance.parent, (Group, Subject)):
             for interested_user in instance.parent.recipients_gg():
-                if interested_user is not c.user:
-                    gg.send_message(interested_user.gadugadu_uin, instance.url())
+                recipients.append(interested_user.gadugadu_uin)
+
+        for uin in sorted(recipients):
+            if interested_user is not c.user:
+                msg = _("A new file has been uploaded for the %(title)s:")
+                gg.send_message(interested_user.gadugadu_uin, msg % {
+                        'title': instance.parent.title})
+                msg = "%s (%s)" % (instance.title, instance.url(qualified=True))
+                gg.send_message(interested_user.gadugadu_uin, msg)
 
 
 class File(ContentItem):

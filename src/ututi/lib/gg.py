@@ -9,6 +9,8 @@ from paste.util.converters import aslist
 from paste.util.converters import asbool
 from pylons import config
 
+from pylons.i18n import _
+
 log = logging.getLogger(__name__)
 
 sent_messages = []
@@ -35,4 +37,6 @@ def confirmation_request(user):
     hash = md5(datetime.now().isoformat() + str(user.gadugadu_uin)).hexdigest()
     hash = hash[:5]
     user.gadugadu_confirmation_key = hash
+    msg = _("To confirm your gadu gadu enter this code in your profile page.")
+    send_message(user.gadugadu_uin, msg)
     send_message(user.gadugadu_uin, hash)

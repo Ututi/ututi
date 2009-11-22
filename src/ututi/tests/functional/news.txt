@@ -40,12 +40,14 @@ Add their gadugadu numbers:
     >>> browser2.getControl('Update contacts').click()
 
     >>> from ututi.lib import gg
-    >>> msg = gg.sent_messages.pop()
+    >>> gg.sent_messages[:] = []
 
 Pretend we lost it ;)
 
     >>> browser2.getControl('send code again').click()
     >>> msg = gg.sent_messages.pop()
+    >>> gg.sent_messages.pop()
+    (564321L, u'To confirm your gadu gadu enter this code in your profile page.')
 
     >>> browser2.getControl(name='gadugadu_confirmation_key').value = msg[1]
     >>> browser2.getControl('OK').click()
@@ -60,6 +62,7 @@ Pretend we lost it ;)
 
     >>> from ututi.lib import gg
     >>> msg = gg.sent_messages.pop()
+    >>> ignore = gg.sent_messages.pop()
     >>> browser3.getControl(name='gadugadu_confirmation_key').value = msg[1]
     >>> browser3.getControl('OK').click()
 
@@ -366,12 +369,19 @@ Hmm, now what happens if user2 starts ignoring the subject:
     >>> mail_queue[:] = []
 
     >>> from ututi.lib import gg
-    >>> sorted(gg.sent_messages)
-    [(133465L, '/subject/vu/mat_analize/file/10/get'),
-     (133465L, '/subject/vu/mat_analize/file/11/get'),
-     (133465L, '/subject/vu/mat_analize/file/9/get'),
-     (564321L, '/subject/vu/mat_analize/file/10/get'),
-     (564321L, '/subject/vu/mat_analize/file/11/get'),
-     (564321L, '/subject/vu/mat_analize/file/9/get')]
+    >>> from pprint import pprint
+    >>> for msg in gg.sent_messages: print msg
+    (133465L, u'A new file has been uploaded for the Matematin\u0117 analiz\u0117:')
+    (133465L, u'f1.txt (http://localhost:80/subject/vu/mat_analize/file/9/get)')
+    (133465L, u'A new file has been uploaded for the Matematin\u0117 analiz\u0117:')
+    (133465L, u'f1.txt (http://localhost:80/subject/vu/mat_analize/file/9/get)')
+    (133465L, u'A new file has been uploaded for the Matematin\u0117 analiz\u0117:')
+    (133465L, u'f2.txt (http://localhost:80/subject/vu/mat_analize/file/10/get)')
+    (133465L, u'A new file has been uploaded for the Matematin\u0117 analiz\u0117:')
+    (133465L, u'f2.txt (http://localhost:80/subject/vu/mat_analize/file/10/get)')
+    (133465L, u'A new file has been uploaded for the Matematin\u0117 analiz\u0117:')
+    (133465L, u'Null File (http://localhost/subject/vu/mat_analize/file/11/get)')
+    (133465L, u'A new file has been uploaded for the Matematin\u0117 analiz\u0117:')
+    (133465L, u'Null File (http://localhost/subject/vu/mat_analize/file/11/get)')
 
     >>> gg.sent_messages[:] = []
