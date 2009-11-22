@@ -119,7 +119,7 @@
                     ${_("""If you want to confirm your GaduGadu number,
                          please enter the code that you have received
                          in your GG. Also don't forget to add Ututi
-                        (<a href="gg://5437377">5437377</a>) to your friends.""")|n}
+                        (<a href="gg:5437377">5437377</a>) to your friends.""")|n}
                     <br />
                     <input type="text" name="gadugadu_confirmation_key" />
                     <span class="btn" style="margin: 0;"><input name="confirm_gadugadu" value="${_('OK')}" type="submit"></span>
