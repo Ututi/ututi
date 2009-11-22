@@ -233,7 +233,7 @@ class StructureController(BaseController):
                         json['error'] = _('The short title must contain no spaces')
                         break
 
-                    created = LocationTag(item['title'], item['title_short'], u'', parent)
+                    created = LocationTag(item['title'], item['title_short'], u'', parent, confirmed=False)
 
                     meta.Session.add(created)
                     meta.Session.commit()

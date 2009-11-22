@@ -80,6 +80,7 @@ create table tags (id bigserial not null,
        site_url varchar(200) default null,
        logo bytea default null,
        tag_type varchar(10) default null,
+       confirmed bool default true,
        primary key (id));;
 
 insert into tags (title, title_short, description, tag_type)

@@ -1051,11 +1051,12 @@ class SimpleTag(Tag):
 class LocationTag(Tag):
     """Class representing the university and faculty tags."""
 
-    def __init__(self, title, title_short, description, parent=None):
+    def __init__(self, title, title_short, description, parent=None, confirmed=True):
         self.parent = parent
         self.title = title
         self.title_short = title_short
         self.description = description
+        self.confirmed = confirmed
 
     @property
     def path(self):
