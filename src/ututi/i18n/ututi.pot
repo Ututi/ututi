@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2009-11-21 22:08+0200\n"
+"POT-Creation-Date: 2009-11-22 14:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -305,6 +305,15 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
+msgid "The entry already exists"
+msgstr ""
+
+msgid "Choose a different short title"
+msgstr ""
+
+msgid "The short title must contain no spaces"
+msgstr ""
+
 msgid "Information updated."
 msgstr ""
 
@@ -339,6 +348,9 @@ msgstr ""
 msgid "Ututi group membership confirmation"
 msgstr ""
 
+msgid "To confirm your gadu gadu enter this code in your profile page."
+msgstr ""
+
 msgid "Save"
 msgstr ""
 
@@ -358,6 +370,10 @@ msgid "The field may not be left empty."
 msgstr ""
 
 msgid "The tag is too long."
+msgstr ""
+
+#, python-format
+msgid "A new file has been uploaded for the %(title)s:"
 msgstr ""
 
 #, python-format
@@ -1102,13 +1118,14 @@ msgstr ""
 msgid "(unconfirmed)"
 msgstr ""
 
-msgid "Send code again"
+msgid "send code again"
 msgstr ""
 
 msgid ""
-"If you want to confirm your GaduGadu number, please enter the code that you "
-"have received in your GG. Also don't forget to add Ututi (123345) to your "
-"friends."
+"If you want to confirm your GaduGadu number,\n"
+"                         please enter the code that you have received\n"
+"                         in your GG. Also don't forget to add Ututi\n"
+"                        (<a href=\"gg:5437377\">5437377</a>) to your friends."
 msgstr ""
 
 msgid "OK"
@@ -1123,7 +1140,7 @@ msgstr ""
 msgid "Your email address"
 msgstr ""
 
-msgid "Get confirmation email"
+msgid "get confirmation email"
 msgstr ""
 
 msgid "email is confirmed"
@@ -1397,6 +1414,9 @@ msgid "Add deparment"
 msgstr ""
 
 msgid "Add section"
+msgstr ""
+
+msgid "or"
 msgstr ""
 
 msgid "enter the name or add a new one"

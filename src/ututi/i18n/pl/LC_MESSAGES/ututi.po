@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-11-21 22:09+0200\n"
+"PO-Revision-Date: 2009-11-22 14:10+0200\n"
 "Last-Translator: Jaroslav Šatkevič <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && "
@@ -321,6 +321,15 @@ msgstr "Element nie istnieje."
 msgid "Delete"
 msgstr "Usuń"
 
+msgid "The entry already exists"
+msgstr ""
+
+msgid "Choose a different short title"
+msgstr ""
+
+msgid "The short title must contain no spaces"
+msgstr ""
+
 msgid "Information updated."
 msgstr "Informacje zostały zaktualizowane."
 
@@ -355,6 +364,9 @@ msgstr "Zgłoszenie nowego członka do ututi grupy"
 msgid "Ututi group membership confirmation"
 msgstr "Potwierdzenie przyjęcia do ututi grupy "
 
+msgid "To confirm your gadu gadu enter this code in your profile page."
+msgstr ""
+
 msgid "Save"
 msgstr "Zachowaj"
 
@@ -375,6 +387,10 @@ msgstr "To pole nie może zostać puste."
 
 msgid "The tag is too long."
 msgstr "Tag jest zbyt długi."
+
+#, python-format
+msgid "A new file has been uploaded for the %(title)s:"
+msgstr ""
 
 #, python-format
 msgid "%(num)s second ago"
@@ -1177,13 +1193,15 @@ msgstr ""
 msgid "(unconfirmed)"
 msgstr "Zaakceptuj"
 
-msgid "Send code again"
+msgid "send code again"
 msgstr ""
 
 msgid ""
-"If you want to confirm your GaduGadu number, please enter the code that "
-"you have received in your GG. Also don't forget to add Ututi (123345) to "
-"your friends."
+"If you want to confirm your GaduGadu number,\n"
+"                         please enter the code that you have received\n"
+"                         in your GG. Also don't forget to add Ututi\n"
+"                        (<a href=\"gg:5437377\">5437377</a>) to your "
+"friends."
 msgstr ""
 
 msgid "OK"
@@ -1199,9 +1217,8 @@ msgstr ""
 msgid "Your email address"
 msgstr "E-mail grupy"
 
-#, fuzzy
-msgid "Get confirmation email"
-msgstr "uzyskaj nowy e-mail potwierdzający"
+msgid "get confirmation email"
+msgstr ""
 
 msgid "email is confirmed"
 msgstr ""
@@ -1488,6 +1505,9 @@ msgid "Add deparment"
 msgstr ""
 
 msgid "Add section"
+msgstr ""
+
+msgid "or"
 msgstr ""
 
 msgid "enter the name or add a new one"
