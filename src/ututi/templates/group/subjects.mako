@@ -153,7 +153,12 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
 </li>
 </ul>
 
-<div class="${not c.searched and 'click2show'}">
+<%
+   cls = ''
+   if not c.step and not c.searched:
+       cls = 'click2show'
+%>
+<div class="${cls}">
   <div class="click" id="expand-search">
     ${_('recommended subjects')}
   </div>
