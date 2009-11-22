@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-11-22 14:10+0200\n"
+"PO-Revision-Date: 2009-11-22 17:46+0200\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -304,7 +304,7 @@ msgid "Ututi news: %(file_changes)s and %(page_changes)s"
 msgstr "Ututi naujienos: %(file_changes)s ir %(page_changes)s"
 
 msgid "This is not the confirmation code we sent you."
-msgstr ""
+msgstr "Jums buvo išsiųstas ne toks patvirtinimo kodas."
 
 msgid "Search"
 msgstr "Paieška"
@@ -332,13 +332,13 @@ msgid "Delete"
 msgstr "Trinti"
 
 msgid "The entry already exists"
-msgstr ""
+msgstr "Toks įrašas jau egzistuoja"
 
 msgid "Choose a different short title"
-msgstr ""
+msgstr "Pasirinkite kitokį trumpą pavadinimą"
 
 msgid "The short title must contain no spaces"
-msgstr ""
+msgstr "Santrumpoje neturi būti tarpų"
 
 msgid "Information updated."
 msgstr "Informacija atnaujinta."
@@ -375,7 +375,7 @@ msgid "Ututi group membership confirmation"
 msgstr "Ututi - narystės grupėje patvirtinimas"
 
 msgid "To confirm your gadu gadu enter this code in your profile page."
-msgstr ""
+msgstr "Norėdami patvirtinti savo gadu gadu numerį, įveskite šį kodą savo profilio puslapyje."
 
 msgid "Save"
 msgstr "Saugoti"
@@ -402,7 +402,7 @@ msgstr "Žyma per ilga."
 
 #, python-format
 msgid "A new file has been uploaded for the %(title)s:"
-msgstr ""
+msgstr "%(title)s buvo įkeltas naujas failas:"
 
 #, python-format
 msgid "%(num)s second ago"
@@ -564,6 +564,9 @@ msgstr "Slaptažodis"
 msgid "forgotten password?"
 msgstr "Pamirštas slaptažodis?"
 
+msgid "Close"
+msgstr "Uždaryti"
+
 msgid "logo"
 msgstr "Logotipas"
 
@@ -574,19 +577,6 @@ msgid ""
 "This is a testing version - this is just a copy of the information! "
 "Changes you make will not be persisted!"
 msgstr "Čia bandomoji versija - duomenys netikri! Tik peržiūrėjimui!"
-
-msgid "Close"
-msgstr "Uždaryti"
-
-msgid ""
-"Your <strong>email</strong> is not confirmed! Please confirm your email "
-"by clicking on the link sent to your address or "
-msgstr ""
-"Jūsų <strong>el. pašto adresas</strong> yra nepatvirtintas! Patvirtinkite"
-" jį paspausdami ant Jums išsiųstos nuorodos arba "
-
-msgid "get another confirmation email"
-msgstr "gaukite dar vieną patvirtinimo žinutę"
 
 msgid "Apie Ututi"
 msgstr "Apie Ututi"
@@ -734,28 +724,28 @@ msgstr ""
 msgid ""
 "A place where you can store your study materials and leave them for "
 "future generations."
-msgstr ""
+msgstr "Vieta, kur studijų medžiagą galima kaupti ir palikti ateities kartoms."
 
 msgid "Create your group"
-msgstr ""
+msgstr "Sukurk savo grupę"
 
 msgid "Unlimited file size"
-msgstr ""
+msgstr "Neribotas failų dydis"
 
 msgid "Store and share with your group mates without restrictions!"
-msgstr ""
+msgstr "Saugok ir dalinkis su grupiokais be apribojimų!"
 
 msgid "Communicate with your group mates"
-msgstr ""
+msgstr "Bendrauk su grupiokais"
 
 msgid "All groups have their own mailing lists."
-msgstr ""
+msgstr "Visos grupės turi savo el. pašto konferencijas."
 
 msgid "Gadu Gadu integration"
-msgstr ""
+msgstr "Gadu Gadu integracija"
 
 msgid "Receive notifications by email and gadu gadu!"
-msgstr ""
+msgstr "Gauk pranešimus ne tik el. paštu, bet ir per gadu gadu!"
 
 msgid "New blog snippet:"
 msgstr "Nauja blogo ištrauka:"
@@ -929,7 +919,7 @@ msgid "Subject selection"
 msgstr "Dalykų pasirinkimas"
 
 msgid "Create your Ututi group and start sharing!"
-msgstr ""
+msgstr "Sukurk savo Ututi grupę ir pradėk dalintis!"
 
 msgid ""
 "Create your group, invite your classmates and use the mailing list, "
@@ -945,7 +935,7 @@ msgid "Group email address"
 msgstr "Grupės el. konferencijos adresas"
 
 msgid "Your group's email address at Ututi"
-msgstr ""
+msgstr "Tavo grupės el. pašto adresas"
 
 msgid "Year"
 msgstr "Metai"
@@ -957,7 +947,7 @@ msgid "Moderators"
 msgstr "Grupės pilotai"
 
 msgid "Continue"
-msgstr ""
+msgstr "Tęsti"
 
 msgid "New subject"
 msgstr "Naujas dalykas"
@@ -1078,7 +1068,7 @@ msgid "Did not find what you were looking for?"
 msgstr "Nėra to, ko ieškojote? "
 
 msgid "Group home"
-msgstr ""
+msgstr "Grupės puslapis"
 
 msgid "Watched subjects"
 msgstr "Stebimi dalykai"
@@ -1096,7 +1086,7 @@ msgid "last author"
 msgstr "paskutinis parašė"
 
 msgid "Already have an account? Login!"
-msgstr ""
+msgstr "Jau užsiregistravęs? Prisijunk!"
 
 msgid "Reset your password"
 msgstr "Atstatyti slaptažodį"
@@ -1189,16 +1179,16 @@ msgid "Personal logo"
 msgstr "Asmeninis logo"
 
 msgid "Contact data"
-msgstr ""
+msgstr "Kontaktiniai duomenys"
 
 msgid "Your GG number"
-msgstr ""
+msgstr "Tavo GG numeris"
 
 msgid "(unconfirmed)"
-msgstr ""
+msgstr "(nepatvirtintas)"
 
 msgid "send code again"
-msgstr ""
+msgstr "siųsti kodą dar kartą"
 
 msgid ""
 "If you want to confirm your GaduGadu number,\n"
@@ -1207,27 +1197,30 @@ msgid ""
 "                        (<a href=\"gg:5437377\">5437377</a>) to your "
 "friends."
 msgstr ""
+"Norėdamas patvirtinti savo GaduGadu numerį,\n"
+"įvesk gautą kodą. Taip pat nepamiršk pridėti Ututi\n"
+"(<a href=\"gg:5437377\">5437377</a>) prie savo draugų."
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "number is confirmed"
-msgstr ""
+msgstr "numeris patvirtintas"
 
 msgid "Receive news into gg"
-msgstr ""
+msgstr "Gauti naujienas į GG"
 
 msgid "Your email address"
-msgstr ""
+msgstr "Tavo el. pašto adresas"
 
 msgid "get confirmation email"
-msgstr ""
+msgstr "gauti patvirtinimo el. laišką"
 
 msgid "email is confirmed"
-msgstr ""
+msgstr "el. pašto adresas patvirtintas"
 
 msgid "Update contacts"
-msgstr ""
+msgstr "Atnaujinti kontaktus"
 
 msgid "Change your password"
 msgstr "Pakeiskite savo slaptažodį"
@@ -1399,6 +1392,21 @@ msgstr "Kurti aplanką"
 msgid "create"
 msgstr "sukurti"
 
+msgid ""
+"Your <strong>email</strong> is not confirmed! Please confirm your email "
+"by clicking on the link sent to your address or "
+msgstr ""
+"Jūsų <strong>el. pašto adresas</strong> yra nepatvirtintas! Patvirtinkite"
+" jį paspausdami ant Jums išsiųstos nuorodos arba "
+
+msgid "get another confirmation email"
+msgstr "gaukite dar vieną patvirtinimo žinutę"
+
+msgid ""
+"Your <strong>gadu gadu number</strong> is not confirmed! Please confirm "
+"it by entering the code sent to you."
+msgstr "Tavo <strong>gadu gadu numeris</strong> yra nepatvirtintas! Patvirtink jį su tau išsiųstu kodu."
+
 #, python-format
 msgid ""
 "%(author)s has sent you an invitation to group %(group)s. Do You want to "
@@ -1500,34 +1508,34 @@ msgid "Section"
 msgstr "Filialas"
 
 msgid "Full title"
-msgstr ""
+msgstr "Visas pavadinimas"
 
 msgid "e.g. LKKA"
-msgstr ""
+msgstr "pvz. LKKA"
 
 msgid "Add university"
-msgstr ""
+msgstr "Sukurk universitetą"
 
 msgid "Add deparment"
-msgstr ""
+msgstr "Sukurk fakultetą"
 
 msgid "Add section"
-msgstr ""
+msgstr "Sukurk katedrą"
 
 msgid "or"
-msgstr ""
+msgstr "arba"
 
 msgid "enter the name or add a new one"
-msgstr ""
+msgstr "įvesk pavadinimą arba sukurk naują"
 
 msgid "enter the name"
-msgstr ""
+msgstr "įvesk pavadinimą"
 
 msgid "You can keep up to 200 Mb of private group files here (e.g. pictures)"
 msgstr "Čia galite laikyti iki 200 Mb privačių grupės failų (pvz. nuotraukų)"
 
 msgid "Login"
-msgstr ""
+msgstr "Prisjungti"
 
 msgid "Join Ututi"
 msgstr "Prisijunk prie Ututi"
@@ -1536,7 +1544,7 @@ msgid "Fullname"
 msgstr "Vardas Pavardė"
 
 msgid "Gadu gadu"
-msgstr ""
+msgstr "Gadu gadu"
 
 msgid "Repeat password"
 msgstr "Pakartoti slaptažodį"
@@ -1551,10 +1559,10 @@ msgid "Register"
 msgstr "registruotis"
 
 msgid "Registration"
-msgstr ""
+msgstr "Registracija"
 
 msgid "Join"
-msgstr ""
+msgstr "Prisijunk"
 
 msgid "There are no messages."
 msgstr "Pranešimų nėra."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2009-11-22 14:10+0200\n"
+"POT-Creation-Date: 2009-11-22 17:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -526,6 +526,9 @@ msgstr ""
 msgid "forgotten password?"
 msgstr ""
 
+msgid "Close"
+msgstr ""
+
 msgid "logo"
 msgstr ""
 
@@ -535,17 +538,6 @@ msgstr ""
 msgid ""
 "This is a testing version - this is just a copy of the information! Changes "
 "you make will not be persisted!"
-msgstr ""
-
-msgid "Close"
-msgstr ""
-
-msgid ""
-"Your <strong>email</strong> is not confirmed! Please confirm your email by "
-"clicking on the link sent to your address or "
-msgstr ""
-
-msgid "get another confirmation email"
 msgstr ""
 
 msgid "Apie Ututi"
@@ -1299,6 +1291,19 @@ msgid "New folder:"
 msgstr ""
 
 msgid "create"
+msgstr ""
+
+msgid ""
+"Your <strong>email</strong> is not confirmed! Please confirm your email by "
+"clicking on the link sent to your address or "
+msgstr ""
+
+msgid "get another confirmation email"
+msgstr ""
+
+msgid ""
+"Your <strong>gadu gadu number</strong> is not confirmed! Please confirm it by"
+" entering the code sent to you."
 msgstr ""
 
 #, python-format

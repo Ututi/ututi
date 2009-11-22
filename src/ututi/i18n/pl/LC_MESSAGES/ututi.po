@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-11-22 14:10+0200\n"
+"PO-Revision-Date: 2009-11-22 17:35+0200\n"
 "Last-Translator: Jaroslav Šatkevič <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && "
@@ -558,6 +558,9 @@ msgstr "Hasło"
 msgid "forgotten password?"
 msgstr "zapomniałeś hasła?"
 
+msgid "Close"
+msgstr "Zamknij"
+
 msgid "logo"
 msgstr "logo"
 
@@ -570,17 +573,6 @@ msgid ""
 msgstr ""
 "To jest wersja testowa - to jest tylko kopia informacji! Zmiany przez "
 "Ciebie wprowadzone nie zostaną uwzględnione!"
-
-msgid "Close"
-msgstr "Zamknij"
-
-msgid ""
-"Your <strong>email</strong> is not confirmed! Please confirm your email "
-"by clicking on the link sent to your address or "
-msgstr ""
-
-msgid "get another confirmation email"
-msgstr "uzyskaj nowy e-mail potwierdzający"
 
 msgid "Apie Ututi"
 msgstr "O Ututi"
@@ -1389,6 +1381,19 @@ msgstr "Nowy folder:"
 
 msgid "create"
 msgstr "utwórz"
+
+msgid ""
+"Your <strong>email</strong> is not confirmed! Please confirm your email "
+"by clicking on the link sent to your address or "
+msgstr ""
+
+msgid "get another confirmation email"
+msgstr "uzyskaj nowy e-mail potwierdzający"
+
+msgid ""
+"Your <strong>gadu gadu number</strong> is not confirmed! Please confirm "
+"it by entering the code sent to you."
+msgstr ""
 
 #, python-format
 msgid ""
