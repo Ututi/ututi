@@ -111,6 +111,7 @@ Now let's see if the view for the user has changed.
 
     >>> browser2.reload()
     >>> browser2.printQuery('//h2/text()')
+    Friends of ututi
     Invite your group mates
     Invited users (have not accepted yet)
     Group members

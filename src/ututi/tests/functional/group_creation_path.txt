@@ -29,6 +29,7 @@ Let us fill in several email to be invited.
 
 After creating the group we should be redirected to the subject selection view:
     >>> browser.printQuery('//h2/text()')
+    Friends of ututi
     Recommended subjects
 
     >>> browser.getLink('Watch', index=1).url
