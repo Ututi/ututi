@@ -1628,6 +1628,7 @@ span.btn btn, span.btn input{
 #sidebar .border-less .content {
   border: 0;
   margin-bottom: 0;
+  padding: 0;
 }
 /*end border-less portlet */
 

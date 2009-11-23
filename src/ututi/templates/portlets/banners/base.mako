@@ -31,3 +31,17 @@
 </div>
 </%self:portlet>
 </%def>
+
+<%def name="ututi_dalintis_portlet()">
+<%self:portlet id="dalintis_portlet" portlet_class="border-less">
+<%def name="header()">
+</%def>
+<div class="structured_info">
+  <div class="bunner">
+    <a href="http://dalintis.lt/konspektai" title="dalintis.lt">
+      <img src="${url('/images/bunners/dalintis_konspektai.png')}" alt="dalintis.lt" />
+    </a>
+  </div>
+</div>
+</%self:portlet>
+</%def>

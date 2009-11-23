@@ -16,7 +16,7 @@
 <%def name="portlets()">
 <div id="sidebar">
   ${subject_info_portlet()}
-  ${ututi_banners_portlet()}
+  ${ututi_dalintis_portlet()}
 </div>
 </%def>
 
