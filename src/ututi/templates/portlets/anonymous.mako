@@ -37,6 +37,8 @@
           </div></div>
           <label for="gadugadu">${_('Gadu gadu')}</label>
         </div>
+        %else:
+        <input type="hidden" id="gadugadu" name="gadugadu"/>
         %endif
         <form:error name="new_password"/>
         <div class="form-field">
