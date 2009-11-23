@@ -71,7 +71,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
   % if request.params.get('login'):
     <div class="error">${_('Wrong password or username!')}</div>
   % endif
-  <div class="form-field overlay">
+  <div class="form-field overlay" style="clear: none;">
     <label for="login" class="small">${_('Email')}</label>
     <div class="input-line"><div>
         <input type="text" size="20" id="login" name="login" class="small line" value="${request.params.get('login')}" />
