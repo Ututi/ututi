@@ -32,7 +32,7 @@ Galimybė ne vien pakviesti userius, bet juos tiesiog įrašyti į grupsą, kad 
 pakvietimo, jie galėtų rašyti ir gauti mailus. Jie galėtų atsisakyti Ututi, bet neturėtų patvirtinti narystės.
 *** Grupės svečias
 Grupės adminas gali įvesti email'ą, kuris gali rašyti į mailinglist'ą, tačiau
-negautų grupės laiškų ir negalėtų matyti grupės tūrinio. Čia tam, kad dėstytojai
+negautų grupės laiškų ir negalėtų matyti grupės turinio. Čia tam, kad dėstytojai
 galėtų rašyti į mailinglist'ą.
 *** Grulės laiškų moderavimas
 Kaip alternatyva "Grupės svečias" funkcionalumui, galime grupės adminui leisti pasakyti,
@@ -79,9 +79,9 @@ Vietoje filtruoti pagal mokyklas, reikėtų gražinti užrašą žymos (tags), n
 
 
 * Bugai
-** Grupės pakvietimai:
+** DONE Grupės pakvietimai:
 prisijungus prie grupės kitu būdu turėtų būti panaikinamas tavo pakvietimas. Taip pat reikėtų galimybės atšaukti pakvietimą.
-** Kai žmogus sukuria dalyką, privalo iškarto jį stebėti
+** DONE Kai žmogus sukuria dalyką, privalo iškarto jį stebėti
 
 
 * Future features
@@ -91,7 +91,7 @@ prisijungus prie grupės kitu būdu turėtų būti panaikinamas tavo pakvietimas
 - Kiti naudotojai gali stebėti dėstytoj.
 - Dėstytojo įkelti failai yra išskirti.
 ** OpenID
-** Klausimai/atsakimai
+** Klausimai/atsakymai
 ** Žinutė kitam Ututi naudotojui
 ** Grupės chatas
 ** Send SMS to group friends
@@ -114,12 +114,12 @@ Kiek jame yra failų bei puslapių ir taip nurodyti jo reitingą/aktyvumą.
 *** Pilniausių dalykų sąrašas
 Dalykai dešimtukui
 
-** UerSearch log failo analizatorius
+** UserSearch log failo analizatorius
 Bent minimalus, kad surašytų kokios frazės yra populiariausios.
 ** Google analytics events
 Reikėtų sekti kiek žmonių lankosi grupėse, kiek profilyje, kiek paieškoje o kiek dalykų puslapiuose.
 ** Naudotojų stebėjimas
-** Banerių valdymo panelis
+** DONE Banerių valdymo panelis
 Galima įkelti banerį ir nurodyti nuo kada ir iki kada, bei kuriose puslapiuose jis bus rodomas.
 Pvz. rodysim banerį tik MIF'o dalykuose ir grupėse
 
