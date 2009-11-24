@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-11-23 14:47+0200\n"
+"PO-Revision-Date: 2009-11-24 23:23+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -847,6 +847,14 @@ msgstr ""
 msgid "Reply"
 msgstr ""
 
+msgid "Recommended groups from your university and faculty"
+msgstr ""
+
+msgid ""
+"Enter your university and faculty and you will be able to see groups that"
+" are already here. If you find your group, join them!"
+msgstr ""
+
 msgid "Group settings"
 msgstr ""
 
@@ -883,6 +891,12 @@ msgid "Moderators"
 msgstr ""
 
 msgid "Continue"
+msgstr ""
+
+msgid "join"
+msgstr ""
+
+msgid "No groups found"
 msgstr ""
 
 msgid "New subject"

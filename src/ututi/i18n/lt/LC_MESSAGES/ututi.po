@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-11-23 14:47+0200\n"
+"PO-Revision-Date: 2009-11-24 23:23+0200\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -911,6 +911,16 @@ msgstr "Rašyti pranešimą"
 msgid "Reply"
 msgstr "Atsakyti"
 
+msgid "Recommended groups from your university and faculty"
+msgstr "Rekomenduojamos grupės iš tavo universiteto ir fakulteto"
+
+msgid ""
+"Enter your university and faculty and you will be able to see groups that"
+" are already here. If you find your group, join them!"
+msgstr ""
+"Įvesk universitetą bei fakultetą ir pamatyk čia jau esančias grupes. "
+"Radęs savo grupę, prisijunk prie jos!"
+
 msgid "Group settings"
 msgstr "Grupės nustatymai"
 
@@ -950,6 +960,12 @@ msgstr "Grupės pilotai"
 
 msgid "Continue"
 msgstr "Tęsti"
+
+msgid "join"
+msgstr "prisijungti"
+
+msgid "No groups found"
+msgstr "Nerasta grupių."
 
 msgid "New subject"
 msgstr "Naujas dalykas"
