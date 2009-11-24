@@ -533,10 +533,11 @@ class User(object):
     def unignoreSubject(self, subject):
         self._unsetWatchedSubject(subject, ignored=True)
 
-    def url(self, controller='user', action='index'):
+    def url(self, controller='user', action='index', **kwargs):
         return url(controller=controller,
                    action=action,
-                   id=self.id)
+                   id=self.id,
+                   **kwargs)
 
     def watches(self, subject):
         return subject in self.watched_subjects
