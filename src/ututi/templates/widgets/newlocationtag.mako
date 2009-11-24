@@ -7,7 +7,7 @@
 </div>
 </%def>
 
-<%def name="location_widget(number, values=[], titles=[], add_titles=[], add_new=False)">
+<%def name="location_widget(number, values=[], titles=[], add_titles=[], add_new=False, live_search=False)">
 <%
    if titles == []:
        titles = [_('University'), _('Department'), _('Section')]
@@ -26,10 +26,15 @@
         %endif
         <div class="input-line">
           <div>
+            <%
+               cls = ''
+               if live_search:
+                   cls = 'group_live_search'
+            %>
             %if len(values) > i:
-              <input type="text" name="location-${i}" id="location-${i}" class="line structure-complete" value="${values[i]}"/>
+              <input type="text" name="location-${i}" id="location-${i}" class="${cls} line structure-complete" value="${values[i]}"/>
             %else:
-              <input type="text" name="location-${i}" id="location-${i}" class="line structure-complete" value=""/>
+              <input type="text" name="location-${i}" id="location-${i}" class="${cls} line structure-complete" value=""/>
             %endif
           </div>
         </div>
@@ -91,7 +96,7 @@ ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
              target = $('.js-target');
              $(target).removeClass('js-target');
              if (data.success != '') {
-               $('div.input-line div input.structure-complete', $(target).parent()).val(data.success);
+               $('div.input-line div input.structure-complete', $(target).parent()).val(data.success).change();
                $('input.title', target).val('')
                $('input.title-short', target).val('')
                $(target).toggle();
@@ -163,9 +168,9 @@ ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
     };
 
     $(this).result(function(event, data, formatted) {
+      $(this).change();
       if (data) {
         var ind = $(".structure-complete").index(this);
-
         if (data.has_children == true) {
           var next_item = $(".location-tag-field").eq(ind+1);
           $(next_item).addClass("json-target");

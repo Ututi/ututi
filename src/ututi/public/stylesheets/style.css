@@ -73,6 +73,7 @@ h1,
 .immense {
   font-size: 1.8em;
   margin: 0.4em 0;
+  font-weight: normal;
 }
 
 h2,
@@ -528,7 +529,7 @@ form .form-field div.input-line input.error {
 }
 
 form .form-field div.explanation {
-  clear: left;
+  float: left;
 }
 
 form .form-field .explanation {
@@ -1844,3 +1845,17 @@ h2.bunner-heading {
 }
 
 /* end blog portlet */
+
+/* layout alternatives */
+
+/* 6040 layout */
+body.split6040 #content #sidebar {
+  width: 425px;
+}
+
+body.split6040 #content #page-content {
+  width: 500px;
+  margin-right: 425px;
+}
+
+/* end layout alternatives */

@@ -1,8 +1,10 @@
 <%inherit file="/base.mako" />
-
 <%namespace file="/widgets/newlocationtag.mako" import="*"/>
 
-<%def name="flash_messages()">
+<%def name="flash_messages()"></%def>
+
+<%def name="body_class()">
+split6040
 </%def>
 
 <%def name="head_tags()">
@@ -14,6 +16,12 @@
 <%def name="title()">
 ${_('New group')}
 </%def>
+
+<%def name="portlets()">
+<div id="sidebar">
+</div>
+</%def>
+
 
 <%def name="path_steps(step=0)">
 <div id="steps">
@@ -43,7 +51,7 @@ ${path_steps()}
      id="group_add_form" enctype="multipart/form-data">
 
   <div class="form-field">
-    ${location_widget(2, add_new=(c.tpl_lang=='pl'))}
+    ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=True)}
   </div>
   <br class="clear-left"/>
   ${h.input_line('title', _('Group title'))}
@@ -59,7 +67,7 @@ ${path_steps()}
   <div class="form-field">
     <label for="year">${_("Year")}</label>
     <form:error name="year" />
-    <select name="year" id="year">
+    <select name="year" id="year" class="group_live_search">
       %for year in c.years:
       <option value="${year}">${year}</option>
       %endfor
@@ -83,3 +91,55 @@ from ututi.lib.security import is_root
 
   ${h.input_submit(_('Continue'))}
 </form>
+<script type="text/javascript">
+//<![CDATA[
+  $(document).ready(function() {
+    $('.group_live_search').change(function() {
+      parameters = {'location-0' : $('#location-0').val(),
+                    'location-1' : $('#location-1').val(),
+                    'year'       : $('#year').val()}
+      $('#sidebar').load(
+          '${url(controller="group", action="js_group_search")}',
+          parameters);
+    });
+
+  });
+//]]>
+</script>
+
+<%def name="live_search(groups)">
+<div class="header">
+  ${_('Recommended groups from your university and faculty')}
+</div>
+%if len(groups) > 0:
+  %for group in groups:
+    <div class="live_search_group">
+      <div class="group_logo">
+        <img class="group_logo" src="${group.url(action='logo', height=70, width=70)}" alt="${group.title}" />
+      </div>
+      <div class="group_information">
+        <div>
+          <a class="group_title" href="${group.url()}" title="${group.title}">${h.ellipsis(group.title, 40)}</a>
+          <a class="btn" href="${group.url()}"><span>${_('join')}</span></a>
+        </div>
+        <div class="group_members">
+          %for member in group.last_seen_members[:4]:
+          <div class="group_member">
+            <div class="member_logo">
+              <a href="${member.url()}" title="${member.fullname}">
+                <img src="${member.url(action='logo', height="20", width="20")}" alt="${member.fullname}" />
+              </a>
+            </div>
+            ${h.ellipsis(member.fullname, 20)}
+          </div>
+          %endfor
+        </div>
+      </div>
+    </div>
+  %endfor
+  <br class="clear-left" />
+%else:
+  <span>${_('No groups found')}</span>
+%endif
+
+</%def>

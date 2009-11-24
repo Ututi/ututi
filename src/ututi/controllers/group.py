@@ -109,6 +109,15 @@ class GroupForm(Schema):
         TagsValidator()
         ]
 
+class GroupLiveSearchForm(Schema):
+    """A schema for validating group edits and submits."""
+    pre_validators = [NestedVariables()]
+    allow_extra_fields = True
+    year = validators.String()
+    location = Pipe(ForEach(validators.String(strip=True)),
+                    LocationTagsValidator())
+
+
 class EditGroupForm(GroupForm):
     """A schema for validating group edits."""
     default_tab = validators.OneOf(['home', 'forum', 'members', 'files', 'subjects', 'page'])
@@ -889,3 +898,16 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         if request.params.get('ajax'):
             return 'OK'
         redirect_to(controller='profile', action='subjects')
+
+    @validate(schema=GroupLiveSearchForm)
+    def js_group_search(self):
+        """Group live search in group creation view."""
+        if hasattr(self, 'form_result'):
+            location = self.form_result.get('location', None)
+            year = self.form_result['year']
+            groups = meta.Session.query(Group).filter(Group.location_id.in_([loc.id for loc in location.flatten]))\
+                .filter(Group.year == date(int(year), 1, 1)).all()
+            return render_mako_def('group/add.mako', 'live_search', groups = groups)
+        else:
+            abort(404)
+

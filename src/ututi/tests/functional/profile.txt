@@ -64,6 +64,3 @@ The logo is gone from the profile page:
 And you can't download it anymore:
 
     >>> browser.open('http://localhost/user/1/logo/45/60')
-    Traceback (most recent call last):
-    ...
-    HTTPError: HTTP Error 404: Not Found

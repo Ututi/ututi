@@ -9,8 +9,7 @@ ${_('student information online')}
 <%def name="head_tags()">
 </%def>
 
-<%def name="body_class()">
-</%def>
+<%def name="body_class()"></%def>
 
 <%def name="personal_block()">
 %if c.user:
@@ -232,7 +231,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
     </title>
   </head>
 
-  <body class="${body_class()}">
+  <body class="${self.body_class()}">
     <div id="container">
       %if c.testing:
       <div style="background: #F7FF00">${_('This is a testing version - this is just a copy of the information! Changes you make will not be persisted!')}</div>

@@ -48,7 +48,7 @@ table.group-members th {
 
 /* forum portlet */
 #group_latest_messages td {
-  margins: 0;
+  margin: 0;
   padding: 0 1px;
   overflow: hidden;
 }
@@ -129,3 +129,60 @@ ul#watched-subjects #empty_subjects_msg {
 #empty_subjects_msg.hidden {
   display: none;
 }
+
+/* end misc */
+
+/* group live search */
+body.split6040 #sidebar {
+  margin-top: 40px;
+  border-left: 2px solid #ebe8e8;
+  padding-left: 20px;
+}
+
+#sidebar div.header {
+  font-size: 1.2em;
+  padding-bottom: 2px;
+  margin-bottom: 5px;
+}
+
+div.live_search_group {
+  height: 70px;
+  padding: 2px;
+  border: 1px solid #ded8d8;
+  clear: left;
+  margin-top: 5px;
+}
+
+div.live_search_group div.group_logo {
+  width: 70px;
+  float: left;
+  padding-right: 5px;
+}
+
+div.live_search_group div.group_logo img {
+  margin: 0 auto;
+}
+
+div.live_search_group a.group_title {
+  font-size: 16px;
+}
+
+div.live_search_group div.group_member {
+  height: 20px;
+  width: 160px;
+  float: left;
+  margin: 0 3px 5px 0;
+  line-height: 20px;
+}
+
+div.live_search_group div.group_member div.member_logo {
+  height: 20px;
+  width: 20px;
+  float: left;
+  margin-right: 5px;
+}
+
+div.live_search_group a.btn {
+  float: right;
+}
+/* end group live search */
