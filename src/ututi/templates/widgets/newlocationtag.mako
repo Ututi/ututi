@@ -61,6 +61,16 @@ ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
   });
   $('.location-add-subform span.btn input').click(function() {
     errors = false;
+    el = $(".location-add-subform span.btn input");
+    var ind = el.index(this);
+    input = $("input.structure-complete");
+    if (ind > 0) {
+      if ($.trim(input.eq(ind - 1).val()) == '') {
+        input.eq(ind - 1).addClass('error');
+        errors = true;
+      }
+    }
+
     el = $(this).parents('.location-add-subform').find('.title')[0];
     if (jQuery.trim($(el).val()) == '') {
       $(el).addClass('error');
