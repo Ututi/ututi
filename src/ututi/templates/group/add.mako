@@ -19,6 +19,12 @@ ${_('New group')}
 
 <%def name="portlets()">
 <div id="sidebar">
+  <div class="header">
+    ${_('Recommended groups from your university and faculty')}
+  </div>
+  <div class="message">
+    ${_('Enter your university and faculty and you will be able to see groups that are already here. If you find your group, join them!')}
+  </div>
 </div>
 </%def>
 

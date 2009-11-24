@@ -185,4 +185,9 @@ div.live_search_group div.group_member div.member_logo {
 div.live_search_group a.btn {
   float: right;
 }
+
+#sidebar .message {
+  background: #e6e6e6;
+  padding: 10px;
+}
 /* end group live search */
