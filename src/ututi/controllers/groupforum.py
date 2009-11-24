@@ -1,4 +1,5 @@
 #
+import re
 from sqlalchemy.sql.expression import desc
 from formencode import Schema, validators, htmlfill
 
@@ -64,6 +65,8 @@ def groupforum_file_action(method):
         if message is None:
             abort(404)
 
+        if isinstance(file_id, basestring):
+            file_id = re.search(r"\d*", file_id).group()
         file = File.get(file_id)
         if file is None:
             #not in group.files: ??? are forum files added as the group's files?
