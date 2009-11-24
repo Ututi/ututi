@@ -1,7 +1,7 @@
 from zope.testing import doctest
 from ututi.tests import PylonsLayer
 
-from sqlalchemy.sql.expression import select, column
+from sqlalchemy.sql.expression import select, literal_column
 from sqlalchemy import func
 from ututi.model import meta, User
 
@@ -19,15 +19,16 @@ def test_get_users():
     So if we will want to select some kind of object from a stored
     procedure, we will have to do it like this:
 
+
         >>> meta.Session.query(User)\
-        ...     .from_statement(select([column("*")]).select_from(func.get_users_by_email('admin@ututi.lt')))\
+        ...     .from_statement(select([literal_column("*")]).select_from(func.get_users_by_email('admin@ututi.lt')))\
         ...     .first().fullname
         'Adminas Adminovix'
 
     Check that we got only one user:
 
         >>> list(meta.Session.query(User)\
-        ...     .from_statement(select([column("*")]).select_from(func.get_users_by_email('admin@ututi.lt'))))
+        ...     .from_statement(select([literal_column("*")]).select_from(func.get_users_by_email('admin@ututi.lt'))))
         [<ututi.model.User object at ...>]
 
         >>> meta.Session.close()
