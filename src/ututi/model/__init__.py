@@ -652,7 +652,8 @@ class Group(ContentItem, FolderMixin):
         gmt = group_members_table
         return meta.Session.query(User).join((gmt,
                                       gmt.c.user_id == users_table.c.id))\
-                                .filter(gmt.c.group_id == self.id).all()
+                                      .filter(gmt.c.group_id == self.id)\
+                                      .order_by(User.last_seen.desc()).all()
 
     def is_subscribed(self, user):
         membership = GroupMember.get(user, self)
