@@ -1,10 +1,11 @@
 import logging
 
+from pkg_resources import resource_stream
+
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql.expression import desc
 from pylons.controllers.util import abort
 from pylons import c
-from pylons.i18n import _
 from routes import url_for
 from routes.util import redirect_to
 
@@ -62,7 +63,11 @@ class UserController(BaseController):
     def logo(self, id, width=None, height=None):
         try:
             user = meta.Session.query(User).filter_by(id=id).one()
+            if user.logo is not None:
+                return serve_image(user.logo, width, height)
+            else:
+                stream = resource_stream("ututi", "public/images/details/icon_user.png").read()
+                return serve_image(stream, width, height)
+
         except NoResultFound:
             abort(404)
-
-        return serve_image(user.logo, width, height)
