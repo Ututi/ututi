@@ -19,7 +19,7 @@ ${_('New group')}
 
 <%def name="portlets()">
 <div id="sidebar">
-  <div class="header">
+  <div class="search-header">
     ${_('Recommended groups from your university and faculty')}
   </div>
   <div class="message">
@@ -68,12 +68,14 @@ ${path_steps()}
         <input type="text" id="id" name="id" class="line"/>
     </div></div>
     @${c.mailing_list_host}
+    <br class="clear-left"/>
     <div class="explanation">${_("Your group's email address at Ututi")}</div>
   </div>
   <div class="form-field">
     <label for="year">${_("Year")}</label>
     <form:error name="year" />
     <select name="year" id="year" class="group_live_search">
+      <option value="">${_('Select the year')}</option>
       %for year in c.years:
       <option value="${year}">${year}</option>
       %endfor
@@ -116,7 +118,7 @@ from ututi.lib.security import is_root
 </script>
 
 <%def name="live_search(groups)">
-<div class="header">
+<div class="search-header">
   ${_('Recommended groups from your university and faculty')}
 </div>
 %if len(groups) > 0:

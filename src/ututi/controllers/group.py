@@ -325,7 +325,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             location = []
 
         defaults = {
-            'year': int(self.form_result.get('year',  date.today().year))
+            'year': self.form_result.get('year',  '')
             }
         defaults.update(location)
 
@@ -905,9 +905,10 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         if hasattr(self, 'form_result'):
             location = self.form_result.get('location', None)
             year = self.form_result['year']
-            groups = meta.Session.query(Group).filter(Group.location_id.in_([loc.id for loc in location.flatten]))\
-                .filter(Group.year == date(int(year), 1, 1)).all()
-            return render_mako_def('group/add.mako', 'live_search', groups = groups)
+            groups = meta.Session.query(Group).filter(Group.location_id.in_([loc.id for loc in location.flatten]))
+            if year != '':
+                groups = groups.filter(Group.year == date(int(year), 1, 1))
+            return render_mako_def('group/add.mako', 'live_search', groups = groups.all())
         else:
             abort(404)
 
