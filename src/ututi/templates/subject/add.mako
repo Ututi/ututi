@@ -45,8 +45,10 @@ ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
     <textarea class="line" name="description" id="description" cols="60" rows="5"></textarea>
   </div>
   <div class="form-field check-field">
-    <input type="checkbox" name="watch_subject" id="watch_subject" value="watch"/>
-    <label for="watch_subject">${_('Start watching this subject personally')}</label>
+    <label for="watch_subject">
+      <input type="checkbox" name="watch_subject" id="watch_subject" value="watch"/>
+      ${_('Start watching this subject personally')}
+    </label>
   </div>
 
   <div>

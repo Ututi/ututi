@@ -39,8 +39,10 @@
         <input type="file" name="logo_upload" id="logo_upload" class="line"/>
       </div>
       <div>
-        <input type="checkbox" name="logo_delete" id="logo_delete" value="true"/>
-        <label for="logo_delete">${_('Delete current logo')}</label>
+        <label for="logo_delete">
+          <input type="checkbox" name="logo_delete" id="logo_delete" value="true"/>
+          ${_('Delete current logo')}
+        </label>
       </div>
       <div>
         <span class="btn"><input type="submit" name="action" value="${_('Save')}"/></span>

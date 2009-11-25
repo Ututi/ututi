@@ -69,8 +69,10 @@ ${h.javascript_link('/javascripts/js-alternatives.js')|n}
         </div>
         <br class="clear-left"/>
         <div class="form-field no-break" style="text-align: center;">
-          <input type="checkbox" name="logo_delete" id="logo_delete" value="delete"/>
-          <label for="logo_delete">${_('Delete current logo')}</label>
+          <label for="logo_delete">
+            <input type="checkbox" name="logo_delete" id="logo_delete" value="delete"/>
+            ${_('Delete current logo')}
+          </label>
         </div>
       </td>
       <td class="js-alternatives">
@@ -102,8 +104,10 @@ ${h.javascript_link('/javascripts/js-alternatives.js')|n}
         </div>
         <hr />
         <div class="form-field">
-          <label for="show_page">${_('Show group page')}</label>
-          <input type="checkbox" name="show_page" id="show_page"/>
+          <label for="show_page">
+            <input type="checkbox" name="show_page" id="show_page"/>
+            ${_('Show group page')}
+          </label>
         </div>
         <div class="form-field">
           <label for="default_tab">${_('Default group tab')}</label>
@@ -116,12 +120,14 @@ from ututi.lib.security import is_root
 %>
 % if is_root(c.user):
   <div class="form-field">
-    <label for="moderators">${_("Moderators")}</label>
+    <label for="moderators">
     % if c.group.moderators:
        <input name="moderators" id="moderators" type="checkbox" value="true" checked="checked" />
     % else:
        <input name="moderators" id="moderators" type="checkbox" value="true" />
     % endif
+       ${_("Moderators")}
+    </label>
   </div>
 % endif
 

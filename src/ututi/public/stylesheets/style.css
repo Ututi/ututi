@@ -524,6 +524,10 @@ div.action-portlet a.btn span, div.action-portlet span.btn input {
 /* end horizontal menu */
 
 /* begin form */
+form .form-field label input {
+  vertical-align: middle;
+}
+
 form .form-field div.input-line input.error {
   background: #ffd9d9;
 }

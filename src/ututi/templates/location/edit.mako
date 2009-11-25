@@ -30,8 +30,10 @@ ${h.stylesheet_link('/stylesheets/location.css')|n}
         <input type="file" name="logo_upload" id="logo_upload" class="line"/>
       </div>
       <div class="form-field">
-        <input type="checkbox" name="logo_delete" id="logo_delete" value="true"/>
-        <label for="logo_delete">${_('Delete current logo')}</label>
+        <label for="logo_delete">
+          <input type="checkbox" name="logo_delete" id="logo_delete" value="true"/>
+          ${_('Delete current logo')}
+        </label>
       </div>
       ${h.input_submit(_('Save'))}
 </form>

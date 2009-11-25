@@ -90,8 +90,10 @@ from ututi.lib.security import is_root
 %>
 % if is_root(c.user):
   <div class="form-field">
-    <label for="moderators">${_("Moderators")}</label>
-    <input name="moderators" id="moderators" type="checkbox" />
+    <label for="moderators">
+      <input name="moderators" id="moderators" type="checkbox" />
+      ${_("Moderators")}
+    </label>
   </div>
 % endif
 
