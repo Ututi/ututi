@@ -1,4 +1,6 @@
 """The application's model objects"""
+import PIL
+from PIL import Image
 import sys
 import os
 import hashlib
@@ -7,6 +9,7 @@ import lxml
 import logging
 import warnings
 import string
+import StringIO
 from random import Random
 from binascii import a2b_base64, b2a_base64
 from pylons import url
@@ -26,6 +29,7 @@ from sqlalchemy.orm import relation, backref, deferred
 from sqlalchemy import func
 from sqlalchemy.sql.expression import desc
 from sqlalchemy.sql.expression import and_, or_
+from sqlalchemy.orm.interfaces import MapperExtension
 
 from ututi.migration import GreatMigrator
 from ututi.model import meta
@@ -44,6 +48,57 @@ def init_model(engine):
     ## Reflected tables must be defined and mapped here
     meta.Session.configure(bind=engine)
     meta.engine = engine
+
+
+def process_logo(value):
+    if value is None:
+        return
+
+    image = Image.open(StringIO.StringIO(value))
+
+    width = height = 500
+    if image.size[0] < width and image.size[1] < height:
+        return value
+
+    width = min(width, image.size[0])
+    height = min(height, image.size[1])
+
+    width = float(width)
+    height = float(height)
+    limit_x = width / height
+
+    original_x = float(image.size[0]) / image.size[1]
+
+    if limit_x > original_x:
+        width = height * original_x
+    elif limit_x <= original_x:
+        height = width / original_x
+
+    new_image = image.resize((int(width), int(height)), PIL.Image.ANTIALIAS)
+    # Try saving as png
+    png_buffer = StringIO.StringIO()
+    new_image.save(png_buffer, "PNG")
+    png_result = png_buffer.getvalue()
+
+    # Try preserving original format (JPEG most of the time)
+    orig_buffer = StringIO.StringIO()
+    new_image.save(orig_buffer, image.format)
+    orig_result = orig_buffer.getvalue()
+
+    # see which one is the smallest one, resized png, resized original
+    # or plain original
+    size, result = min((len(png_result), png_result),
+                       (len(orig_result), orig_result),
+                       (len(value), value))
+    return result
+
+
+def logo_property():
+    def get(self):
+        return self.raw_logo
+    def set(self, value):
+        self.raw_logo = process_logo(value)
+    return property(get, set)
 
 
 def setup_orm(engine):
@@ -100,7 +155,7 @@ def setup_orm(engine):
                             tags_table,
                             polymorphic_on=tags_table.c.tag_type,
                             polymorphic_identity='',
-                            properties={'logo': deferred(tags_table.c.logo)})
+                            properties={'raw_logo': deferred(tags_table.c.logo)})
 
     orm.mapper(LocationTag,
                inherits=Tag,
@@ -149,7 +204,7 @@ def setup_orm(engine):
     orm.mapper(User,
                users_table,
                properties = {'emails': relation(Email, backref='user'),
-                             'logo': deferred(users_table.c.logo)})
+                             'raw_logo': deferred(users_table.c.logo)})
 
     global emails_table
     emails_table = Table("emails", meta.metadata,
@@ -241,7 +296,7 @@ def setup_orm(engine):
                polymorphic_on=content_items_table.c.content_type,
                properties ={'watched_subjects': relation(Subject,
                                                          secondary=group_watched_subjects_table),
-                            'logo': deferred(groups_table.c.logo)})
+                            'raw_logo': deferred(groups_table.c.logo)})
 
     global group_invitations_table
     group_invitations_table = Table("group_invitations", meta.metadata,
@@ -560,6 +615,9 @@ class User(object):
     def isConfirmed(self):
         return self.emails[0].confirmed
 
+    logo = logo_property()
+
+
 email_table = None
 
 class Email(object):
@@ -750,6 +808,8 @@ class Group(ContentItem, FolderMixin):
             .filter_by(group_id=self.id, reply_to=None)\
             .order_by(desc(GroupMailingListMessage.sent))\
             .count()
+
+    logo = logo_property()
 
 
 group_members_table = None
@@ -1025,6 +1085,9 @@ class Tag(object):
         except NoResultFound:
             return None
 
+    logo = logo_property()
+
+
 class SimpleTag(Tag):
     """Class for simple (i.e. not location or hierarchy -aware) tags."""
 
@@ -1183,7 +1246,6 @@ def cleanupFileName(filename):
     return filename.split('\\')[-1].split('/')[-1]
 
 
-from sqlalchemy.orm.interfaces import MapperExtension
 class NotifyGG(MapperExtension):
 
     def after_insert(self, mapper, connection, instance):

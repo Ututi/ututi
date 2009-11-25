@@ -36,6 +36,7 @@ We'll go to our profile edit page. And change our name as well as upload a logo.
     <img src="/user/1/logo/60/60" alt="logo" />
 
 Let's check out the logo.
+
     >>> browser.open('http://localhost/user/1/logo/45/60')
 
 The content type should be PNG (all resized images are served as PNGs).
@@ -50,6 +51,25 @@ The size of the image should be as was specified in the request.
     >>> im = Image.open(StringIO.StringIO(browser.contents))
     >>> im.size
     (45, 45)
+
+The original logo can be retreived too:
+
+    >>> browser.open('http://localhost/user/1/logo')
+    >>> im = Image.open(StringIO.StringIO(browser.contents))
+    >>> im.size
+    (100, 100)
+
+Logos are automatically resized if they are too big before storing
+them in the database:
+
+    >>> browser.open('http://localhost/profile/edit')
+    >>> browser.getControl('Personal logo').add_file(*make_file('test_logo_huge.png', 'test_logo.Png'))
+    >>> browser.getControl('Save').click()
+
+    >>> browser.open('http://localhost/user/1/logo')
+    >>> im = Image.open(StringIO.StringIO(browser.contents))
+    >>> im.size
+    (500, 500)
 
 Now let's try to delete the logo.
 
