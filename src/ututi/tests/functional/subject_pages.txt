@@ -51,6 +51,21 @@ And see how it works.
       Being Awesome is very easy!
     </div>
 
+What about our brand new embedded latex syntax:
+
+    >>> browser.getLink('Edit', index=1).click()
+    >>> browser.getControl('Content').value = r"<script>Yeah!</script>Being Awesome is very easy! $$\sum_{n=1}^\infty a_n$$"
+    >>> browser.getControl('Save').click()
+
+    >>> browser.printQuery("id('page_content')")
+    <div id="page_content">
+      Being Awesome is very easy!
+      <code>
+        <img class="latex" alt="" src="http://l.wordpress.com/latex.php?bg=ffffff&amp;fg=000000&amp;s=0&amp;latex=%5Cdisplaystyle+%5Csum_%7Bn%3D1%7D%5E%5Cinfty+a_n" />
+        <script type="application/x-latex">\sum_{n=1}^\infty a_n</script>
+      </code>
+    </div>
+
 Let's go back now.
 
     >>> browser.getLink('Go back to Matematin\xc4\x97 analiz\xc4\x97').click()
@@ -72,7 +87,7 @@ We should see the list of pages.
           <span class="small" style="margin-left: 10px;">...</span>
           <a style="font-size: 0.9em;" href="/user/1">Adminas Adminovix</a>
           <div class="description">
-          Yeah! Being Awesome is very easy!
+          Yeah! Being Awesome is very easy! $$\sum_{n=1}^\infty a_n$$
         </div>
           <div class="item-tags">
           </div>

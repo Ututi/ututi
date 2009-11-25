@@ -1377,6 +1377,10 @@ ul#event_list li {
 
 
 /* misc */
+img.latex {
+	vertical-align: middle;
+}
+
 #watched_subjects li.new {
   background-image: url("../images/details/icon_subject_small_new.png") !important;
 }
