@@ -60,7 +60,7 @@
 <form method="post" action="${url(controller='profile', action='update')}" name="edit_profile_form" id="edit_profile_form" enctype="multipart/form-data">
   <table>
     <tr>
-      <td style="width: 200px;">
+      <td style="width: 180px;">
         <div class="js-alternatives" id="user-logo">
           <img src="${url(controller='profile', action='logo', width='120', height='200')}" alt="User logo" id="user-logo-editable"/>
           <br />
@@ -95,13 +95,13 @@
       id="contacts_form">
   <table>
     <tr>
-      <td style="width: 200px;">&nbsp;</td>
+      <td style="width: 180px;">&nbsp;</td>
       <td>
         <h3>${_('Contact data')}</h3>
       </td>
     </tr>
     <tr>
-      <td style="width: 200px;">&nbsp;</td>
+      <td style="width: 180px;">&nbsp;</td>
       <td>
         %if c.gg_enabled:
           <div class="form-field">
@@ -167,7 +167,7 @@
       </td>
     </tr>
     <tr>
-      <td style="width: 200px;">&nbsp;</td>
+      <td style="width: 180px;">&nbsp;</td>
       <td>
         ${h.input_submit(_('Update contacts'), name='update_contacts')}
       </td>
@@ -178,13 +178,13 @@
 <br />
 <table>
   <tr>
-    <td style="width: 200px;">&nbsp;</td>
+    <td style="width: 180px;">&nbsp;</td>
     <td>
       <h3>${_('Change your password')}</h3>
     </td>
   </tr>
   <tr>
-    <td style="width: 200px;">&nbsp;</td>
+    <td style="width: 180px;">&nbsp;</td>
     <td>
       <form method="post" action="${url(controller='profile', action='password')}" id="change_password_form">
         ${h.input_psw('password', _('Current password'))}
