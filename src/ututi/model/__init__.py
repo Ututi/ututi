@@ -689,7 +689,8 @@ class Group(ContentItem, FolderMixin):
         recipients = meta.Session.query(GroupMember).\
             filter_by(group=self).all()
         return [recipient.user for recipient in recipients
-                if recipient.user.gadugadu_get_news == True]
+                if (recipient.user.gadugadu_get_news and
+                    recipient.user.gadugadu_confirmed)]
 
     @classmethod
     def get(cls, id):
@@ -921,7 +922,8 @@ class Subject(ContentItem, FolderMixin):
 
         usms = meta.Session.query(UserSubjectMonitoring).\
             filter(UserSubjectMonitoring.subject==self).\
-            filter(User.gadugadu_get_news==True).all()
+            filter(User.gadugadu_get_news==True).\
+            filter(User.gadugadu_confirmed==True).all()
         recipients = [usm.user for usm in usms]
         all_recipients.extend(recipients)
         return list(set(all_recipients))

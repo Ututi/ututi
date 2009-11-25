@@ -167,6 +167,14 @@ Now let's upload a couple of files:
     ...                params={'folder': ''},
     ...                upload_files=[("attachment", "f1.txt", "Test")])
 
+Oh and in the mean time - a user sets his GG number to some nonsense:
+
+    >>> browser3.open('http://localhost/profile/edit')
+    >>> browser3.getControl(name='gadugadu_uin').value = ""
+    >>> browser3.getControl('Update contacts').click()
+
+And we continue uploading files:
+
     >>> res = app.post("/subject/vu/mat_analize/upload_file",
     ...                params={'folder': ''},
     ...                upload_files=[("attachment", "f2.txt", "Test")])
@@ -375,8 +383,6 @@ Hmm, now what happens if user2 starts ignoring the subject:
     (133465L, u'f1.txt (http://localhost:80/subject/vu/mat_analize/file/9/get)')
     (564321L, u'A new file has been uploaded for the Matematin\u0117 analiz\u0117:')
     (564321L, u'f1.txt (http://localhost:80/subject/vu/mat_analize/file/9/get)')
-    (133465L, u'A new file has been uploaded for the Matematin\u0117 analiz\u0117:')
-    (133465L, u'f2.txt (http://localhost:80/subject/vu/mat_analize/file/10/get)')
     (564321L, u'A new file has been uploaded for the Matematin\u0117 analiz\u0117:')
     (564321L, u'f2.txt (http://localhost:80/subject/vu/mat_analize/file/10/get)')
 

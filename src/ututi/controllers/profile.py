@@ -521,8 +521,9 @@ class ProfileController(SearchBaseController, UniversityListMixin):
                 meta.Session.commit()
             elif gadugadu_uin != c.user.gadugadu_uin:
                 c.user.gadugadu_uin = gadugadu_uin
+                c.user.gadugadu_confirmed = False
+                c.user.gadugadu_get_news = False
                 if gadugadu_uin:
-                    c.user.gadugadu_confirmed = False
                     gg.confirmation_request(c.user)
                 meta.Session.commit()
             elif gadugadu_confirmation_key:

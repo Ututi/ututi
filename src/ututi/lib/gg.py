@@ -22,13 +22,17 @@ def send_message(uin, message):
                          strip=True)
     force_gg_to = [int(gg) for gg in force_gg_to if gg]
 
-    log.debug("%d -> %r" % (uin, message))
+    log.debug("%s -> %r" % (uin, message))
 
     if not hold or uin in force_gg_to:
         username = config.get('nous_im_username')
         password = config.get('nous_im_password')
         p = ServerProxy('http://%s:%s@localhost:6001' % (username, password))
-        return p.send_gg_msg(uin, message)
+        try:
+            result = p.send_gg_msg(uin, message)
+        except:
+            result = "FAIL"
+        return result
     else:
         sent_messages.append((uin, message))
 
