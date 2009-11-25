@@ -13,9 +13,10 @@ def test_replace_between_latex_and_html():
 
         >>> latex = '<p>Jei $$\lim_{n \\to \infty} a_n &gt; 0$$, tai $$\sum_{n=1}^\infty a_n$$ diverguoja.</p>'
         >>> print replace_latex_to_html(latex)
-        <p>Jei <code><img class="latex" alt=""
-                          src="http://l.wordpress.com/latex.php?bg=ffffff&amp;fg=000000&amp;s=0&amp;latex=%5Cdisplaystyle+%5Clim_%7Bn+%5Cto+%5Cinfty%7D+a_n+%3E+0" /><script type="application/x-latex">\lim_{n \to \infty} a_n &gt; 0</script></code>,
-        tai <code><img class="latex" alt="" src="http://l.wordpress.com/latex.php?bg=ffffff&amp;fg=000000&amp;s=0&amp;latex=%5Cdisplaystyle+%5Csum_%7Bn%3D1%7D%5E%5Cinfty+a_n" /><script type="application/x-latex">\sum_{n=1}^\infty a_n</script></code>
+        <p>Jei <img class="latex" alt="\lim_{n \to \infty} a_n &gt; 0"
+                    src="http://l.wordpress.com/latex.php?bg=ffffff&amp;fg=000000&amp;s=0&amp;latex=%5Cdisplaystyle+%5Clim_%7Bn+%5Cto+%5Cinfty%7D+a_n+%3E+0" />,
+        tai <img class="latex" alt="\sum_{n=1}^\infty a_n"
+                 src="http://l.wordpress.com/latex.php?bg=ffffff&amp;fg=000000&amp;s=0&amp;latex=%5Cdisplaystyle+%5Csum_%7Bn%3D1%7D%5E%5Cinfty+a_n" />
         diverguoja.</p>
 
     When there is an error - somehow user used html formatting - we
@@ -26,7 +27,10 @@ def test_replace_between_latex_and_html():
         ... $$\sum_{n=1}^\infty a_n$$ diverguoja.</p>
         ... '''
         >>> print replace_latex_to_html(latex)
-        <p>Jei $$\lim_{n \to \infty} <strong>a_n &gt; 0$$, ta</strong>i <code><img class="latex" alt="" src="http://l.wordpress.com/latex.php?bg=ffffff&amp;fg=000000&amp;s=0&amp;latex=%5Cdisplaystyle+%5Csum_%7Bn%3D1%7D%5E%5Cinfty+a_n" /><script type="application/x-latex">\sum_{n=1}^\infty a_n</script></code> diverguoja.</p>
+        <p>Jei $$\lim_{n \to \infty} <strong>a_n &gt; 0$$, ta</strong>i
+          <img class="latex" alt="\sum_{n=1}^\infty a_n"
+               src="http://l.wordpress.com/latex.php?bg=ffffff&amp;fg=000000&amp;s=0&amp;latex=%5Cdisplaystyle+%5Csum_%7Bn%3D1%7D%5E%5Cinfty+a_n" />
+        diverguoja.</p>
 
     Strings without any separators should stay the same:
 
