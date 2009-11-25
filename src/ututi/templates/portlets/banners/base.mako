@@ -33,6 +33,7 @@
 </%def>
 
 <%def name="ututi_dalintis_portlet()">
+%if c.tpl_lang == 'lt':
 <%self:portlet id="dalintis_portlet" portlet_class="border-less">
 <%def name="header()">
 </%def>
@@ -44,4 +45,5 @@
   </div>
 </div>
 </%self:portlet>
+%endif
 </%def>
