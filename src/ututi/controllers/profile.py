@@ -469,6 +469,12 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         c.years = range(date.today().year - 10, date.today().year + 5)
         c.tags = ', '.join(c.tags)
 
+        # XXX OMG WTF PYLONS URL_FOR!
+        # url_for can't encode unicode parameters itself
+        # as it is used by paginate.Page we must do that for it
+        # weird, because url manages to accomplish this task pretty easily
+        search_params['tags'] = [tag.encode('utf-8')
+                                 for tag in search_params['tags']]
         c.results = paginate.Page(
             results,
             page=int(request.params.get('page', 1)),
