@@ -1220,6 +1220,9 @@ div#pager {
   background: transparent none;
 }
 
+#search_portlet .btn input {
+  width: 65px;
+}
 
 #search_portlet .autobox-hldr {
   width: 270px;
