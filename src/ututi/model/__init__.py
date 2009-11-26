@@ -1221,15 +1221,18 @@ class LocationTag(Tag):
                 }
             obj = obj_types[obj.lower()]
         ids = [t.id for t in self.flatten]
-        return meta.Session.query(obj).filter(obj.location_id.in_(ids)).count()
+        return meta.Session.query(obj).filter(obj.location_id.in_(ids)).filter(obj.deleted_on == None).count()
 
     @Lazy
     def stats(self):
         ids = [t.id for t in self.flatten]
         counts = meta.Session.query(ContentItem.content_type, func.count(ContentItem.id))\
-            .filter(ContentItem.location_id.in_(ids)).group_by(ContentItem.content_type).all()
+            .filter(ContentItem.location_id.in_(ids))\
+            .filter(ContentItem.deleted_on == None)\
+            .group_by(ContentItem.content_type).all()
         res = {'subject': 0, 'group': 0, 'file': 0}
         res.update(dict(counts))
+
         return res
 
     @Lazy
