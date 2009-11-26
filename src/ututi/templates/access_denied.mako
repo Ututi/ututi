@@ -6,7 +6,7 @@ ${parent.head_tags()}
 
 <h1>${_('Permission denied!')}</h1>
 
-<img src="${url('/images/nope.png')}" />
+<img src="${url('/images/details/icon_nope.png')}" />
 
 <div>
 ${_('You do not have the rights to see this page, or perform this action. Go back or go to the search page please.')}

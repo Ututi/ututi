@@ -7,7 +7,7 @@ ${parent.head_tags()}
 
 <h1>${_('Error!')}</h1>
 
-<img src="${url('/images/nope.png')}" />
+<img src="${url('/images/details/icon_nope.png')}" />
 
 <div>
 ${_("Oops, an error happened, please don't leave us, go back and try doing something else or look for information.")}
