@@ -34,6 +34,19 @@ def test_replace_between_latex_and_html():
                src="http://l.wordpress.com/latex.php?bg=ffffff&amp;fg=000000&amp;s=0&amp;latex=%5Cdisplaystyle+%5Csum_%7Bn%3D1%7D%5E%5Cinfty+a_n" />
         diverguoja.</p>
 
+     We want to handle cases where one of the separators is missing
+     properly too:
+
+        >>> latex = '''
+        ... <p>Jei $$\lim_{n \\to \infty} <strong>a_n &gt; 0, ta</strong>i
+        ... $$\sum_{n=1}^\infty a_n$$ diverguoja.</p>
+        ... '''
+        >>> print replace_latex_to_html(latex)
+        <p>Jei $$\lim_{n \to \infty} <strong>a_n &gt; 0, ta</strong>i
+          <img class="latex" alt="\sum_{n=1}^\infty a_n"
+               src="http://l.wordpress.com/latex.php?bg=ffffff&amp;fg=000000&amp;s=0&amp;latex=%5Cdisplaystyle+%5Csum_%7Bn%3D1%7D%5E%5Cinfty+a_n" />
+        diverguoja.</p>
+
     Strings without any separators should stay the same:
 
         >>> print replace_latex_to_html('Hello!')

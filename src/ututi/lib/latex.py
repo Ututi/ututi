@@ -14,8 +14,9 @@ def replace_latex_to_html(text):
     result = StringIO()
     text = text.split('$$')
 
+    x = 1
     for n, snippet in enumerate(text):
-        if n % 2 == 1:
+        if n % 2 == x:
             if not ('<' in snippet or
                     '>' in snippet or
                     '"' in snippet):
@@ -23,7 +24,8 @@ def replace_latex_to_html(text):
             else:
                 result.write('$$')
                 result.write(snippet)
-                result.write('$$')
+                x += 1
+                x = x % 2
         else:
             result.write(snippet)
     return result.getvalue()
