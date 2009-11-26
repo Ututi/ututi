@@ -57,13 +57,24 @@ $(document).ready(function(){
     }
 
 
-    $(".folder").sortable({
+    $(".section.open .folder").sortable({
       connectWith: ['.folder'],
       cancel: '.message',
       helper: 'clone',
       receive: folderReceive,
       handle: 'img.drag-target',
       axis: 'y'
+    });
+
+    $(".section").bind("expand", function() {
+      $('.folder', this).sortable({
+        connectWith: ['.folder'],
+        cancel: '.message',
+        helper: 'clone',
+        receive: folderReceive,
+        handle: 'img.drag-target',
+        axis: 'y'
+      });
     });
 
     function setUpFolder(i, btn) {
@@ -259,7 +270,7 @@ $(document).ready(function(){
 </%def>
 
 <%def name="file_browser(obj, section_id=0, collapsible=False, title=None, comment=None, controls=['upload', 'folder'])">
-  <div class="section click2show" id="file_section-${section_id}">
+  <div class="section click2show ${collapsible and '' or 'open'}" id="file_section-${section_id}">
     <%
        cls_head = cls_container = ''
        if collapsible:
@@ -299,12 +310,12 @@ $(document).ready(function(){
            single_folder = n == 1
         %>
 
-        <div class="single_upload ${not single_folder and 'hidden'}">
+        <div class="single_upload ${not single_folder and 'hidden' or ''}">
           <div class="button"><div class="inner">
             <%self:folder_button folder="${obj.folders[0]}" section_id="${section_id}" fid="${0}" />
           </div></div>
         </div>
-        <div class="file_upload upload_dropdown click2show ${single_folder and 'hidden'}">
+        <div class="file_upload upload_dropdown click2show ${single_folder and 'hidden' or ''}">
           <div class="click button">
             <div class="inner">
               ${_('upload file to...')}

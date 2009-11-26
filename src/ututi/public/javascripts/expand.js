@@ -5,6 +5,7 @@ $(document).ready(function() {
             el.toggle();
             el.siblings(".show").toggle();
             el.siblings(".hide").toggle();
+            el.trigger("expand");
             return false;
         });
     });
