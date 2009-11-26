@@ -120,33 +120,7 @@ $(document).ready(function(){
 
     var buttons = $('.file_upload_dropdown .upload');
     buttons.each(setUpFolder);
-
-    function empty_folders_control(i, control) {
-      targets = $(control).find('.upload');
-      if ((! $(control).hasClass('single_folder')) && (targets.size() == 1)) {
-        if ($(control).hasClass('open')) {
-          $(control).children('.click').click();
-        }
-        $(control).addClass('single_folder').removeClass('click2show');
-        upload_btn = $(control).find('.upload:first');
-        text = $(control).find('.click.button div').text();
-        jQuery.data(upload_btn, 'text', upload_btn.text())
-        $(upload_btn).text(text);
-        $(control).find('.click.button div').text('').append(upload_btn);
-      } else if (($(control).hasClass('single_folder')) && (targets.size() > 1)) {
-        if ($(control).hasClass('open')) {
-          $(control).children('.click').click();
-        }
-        $(control).addClass('click2show').removeClass('single_folder');
-        btn = $(control).find('.click.button div.inner:first')[0];
-        folder = $(btn).find('div.upload:first')[0];
-        $(folder).text(jQuery.data(folder, 'text'));
-        $(control).find('.target_list .target_item:first').append(folder);
-        $(btn).text('${_("upload file to...")}');
-      }
-    }
-    uploads = $('.upload_dropdown');
-    uploads.each(empty_folders_control);
+    $('.single_upload .upload').each(setUpFolder);
 
     function newFolder(target) {
         var section_id = target.id.split('-')[1];
@@ -160,19 +134,23 @@ $(document).ready(function(){
                   success: function(msg){
                       if (msg != '') {
                           $('#file_section-' + section_id + ' .container').append($(msg).filter('.folder_file_area'));
-                          if ($('#file_upload_dropdown-' + section_id).hasClass('open')) {
-                              $('#file_upload_dropdown-' + section_id).children('.click').click();
+                          section = $('#file_upload_dropdown-' + section_id)
+                          if (section.hasClass('open')) {
+                              section.children('.click').click();
                           }
-                          $('#file_upload_dropdown-' + section_id).find('.target_item:last').removeClass('last').after($(msg)[0]);
-                          $('#file_upload_dropdown-' + section_id).find('.target_item:last').addClass('last');
-                          setUpFolder(0, $('#file_upload_dropdown-' + section_id + ' .upload:last')[0]);
+                          section.find('.target_item:last').removeClass('last').after($(msg)[0]);
+                          section.find('.target_item:last').addClass('last');
+                          setUpFolder(0, $(' .upload:last', section)[0]);
                           $(".folder").sortable({
                             connectWith: ['.folder'],
                             cancel: '.message',
                             receive: folderReceive
                           });
-                          control = $('#file_upload_dropdown-' + section_id).parents('.upload_dropdown');
-                          empty_folders_control(0, control);
+                          control = section.parents('.upload_dropdown');
+                          if (control.find('.target_item').size() > 1) {
+                            control.removeClass('hidden');
+                            control.siblings('.single_upload').addClass('hidden');
+                          }
                         }
                   }});
         }
@@ -188,9 +166,13 @@ $(document).ready(function(){
                 data: ({folder: folder_name}),
                 success: function(msg){
                     $('#file_area-' + section_id + '-' + fid).hide()
-                    control = $('#file_upload_button-' + section_id + '-' + fid).parents('.upload_dropdown');
-                    $('#file_upload_button-' + section_id + '-' + fid).parent().remove()
-                    empty_folders_control(0, control);
+                    btn = $('#file_upload_button-' + section_id + '-' + fid);
+                    control = btn.parents('.upload_dropdown');
+                    btn.parent().remove()
+                    if (control.find('.target_item').size() == 1) {
+                      control.addClass('hidden');
+                      control.siblings('.single_upload').removeClass('hidden');
+                    }
                 }});
     }
 
@@ -312,16 +294,23 @@ $(document).ready(function(){
         %if 'upload' in controls:
         <div id="file_upload_progress-${section_id}" class="file_upload_progress">
         </div>
-        <div class="file_upload upload_dropdown click2show">
+        <%
+           n = len(obj.folders)
+           single_folder = n == 1
+        %>
+
+        <div class="single_upload ${not single_folder and 'hidden'}">
+          <div class="button"><div class="inner">
+            <%self:folder_button folder="${obj.folders[0]}" section_id="${section_id}" fid="${0}" />
+          </div></div>
+        </div>
+        <div class="file_upload upload_dropdown click2show ${single_folder and 'hidden'}">
           <div class="click button">
             <div class="inner">
               ${_('upload file to...')}
             </div>
           </div>
           <div class="show target_list file_upload_dropdown" id="file_upload_dropdown-${section_id}">
-            <%
-               n = len(obj.folders)
-            %>
             %for fid, folder in enumerate(obj.folders):
             <%
                cls = ''

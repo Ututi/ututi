@@ -141,6 +141,10 @@ h1, h2, h3, h4 {
 }
 
 /* resetting default styles */
+.hidden {
+  display: none;
+}
+
 p {
   margin: 0;
 }
@@ -1466,11 +1470,13 @@ span .tooltip {
 /* end misc */
 
 /* upload drop down (group files portlet, files view) */
-div.upload_dropdown {
+div.upload_dropdown,
+div.single_upload {
   width: 150px;
 }
 
-div.upload_dropdown .button {
+div.upload_dropdown .button,
+div.single_upload .button {
   height: 19px;
   background: transparent url("../images/file_dropdown.png") left center no-repeat;
   padding: 0;
@@ -1478,7 +1484,8 @@ div.upload_dropdown .button {
   color: #333333;
 }
 
-div.upload_dropdown .button div.inner {
+div.upload_dropdown .button div.inner,
+div.single_upload .button div.inner {
   height: 19px;
   background: transparent url("../images/file_dropdown.png") right center no-repeat;
   padding: 0;

@@ -44,7 +44,8 @@ div.section div.controls .new-folder-name {
   font-size: 12px;
 }
 
-div.section div.controls div.file_upload {
+div.section div.controls div.file_upload,
+div.section div.controls div.single_upload {
   float: left;
   margin: 0;
   margin-right: 5px;
