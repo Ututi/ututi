@@ -8,7 +8,7 @@ latex_template =  '<img class="latex"'\
 
 def convert_latex_to_html(text):
     return latex_template % {'latex_alt': text,
-                             'latex_code': urlencode({'latex': "\\displaystyle " + text.replace("&gt;", ">").replace("&lt;", "<")})}
+                             'latex_code': urlencode({'latex': "\\displaystyle " + text.encode('utf-8').replace("&gt;", ">").replace("&lt;", "<")})}
 
 def replace_latex_to_html(text):
     result = StringIO()

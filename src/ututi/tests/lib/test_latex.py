@@ -1,3 +1,5 @@
+# coding=utf-8
+
 from zope.testing import doctest
 
 from ututi.tests import PylonsLayer
@@ -36,6 +38,12 @@ def test_replace_between_latex_and_html():
 
         >>> print replace_latex_to_html('Hello!')
         Hello!
+
+    Strings with utf8 characters should not fail (however current latex web
+    service does not support them and so will display incorrectly):
+
+        >>> replace_latex_to_html(u'\u0126ello, $$\u017eeme$$!')
+        u'\u0126ello, <img class="latex" alt="\u017eeme" src="http://l.wordpress.com/latex.php?bg=ffffff&amp;fg=000000&amp;s=0&amp;latex=%5Cdisplaystyle+%C5%BEeme" />!'
 
     Emtpy strings should stay empty:
 
