@@ -22,6 +22,7 @@ from ututi.model import UserSubjectMonitoring
 from ututi.model import Page
 from ututi.model import (meta, User, Email, LocationTag, Group, Subject,
                          GroupMember, GroupMembershipType, File)
+from ututi.lib import helpers as h
 
 log = logging.getLogger(__name__)
 
@@ -168,6 +169,7 @@ class AdminController(BaseController):
             existing = meta.Session.query(Subject).filter(Subject.location_id == location.id).filter(func.upper(Subject.title) == func.upper(title)).first()
             if existing:
                 log.info('Subject exists: %s' % row)
+                h.flash('Subject exists: %s' % row)
                 continue
 
             title = title
