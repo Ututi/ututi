@@ -35,6 +35,9 @@ def serve_file(file):
 class BasefilesController(BaseController):
 
     def _get(self, file):
+        if c.user:
+            c.user.download(file)
+            meta.Session.commit()
         return serve_file(file)
 
     def _delete(self, file):

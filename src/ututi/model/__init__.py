@@ -113,6 +113,12 @@ def setup_orm(engine):
                         useexisting=True,
                         autoload_with=engine)
 
+    global file_downloads_table
+    file_downloads_table = Table("file_downloads", meta.metadata,
+                                 autoload=True,
+                                 autoload_with=engine)
+
+
     global forum_posts_table
     forum_posts_table = Table("forum_posts", meta.metadata,
                               Column('title', Unicode(assert_unicode=True)),
@@ -205,6 +211,11 @@ def setup_orm(engine):
                users_table,
                properties = {'emails': relation(Email, backref='user'),
                              'raw_logo': deferred(users_table.c.logo)})
+
+    orm.mapper(FileDownload,
+               file_downloads_table,
+               properties = {'user' : relation(User, backref='downloads'),
+                             'file' : relation(File)})
 
     global emails_table
     emails_table = Table("emails", meta.metadata,
@@ -610,6 +621,9 @@ class User(object):
         self.password = password
         if gen_password:
             self.password = generate_password(password)
+
+    def download(self, file):
+        self.downloads.append(FileDownload(self, file))
 
     @property
     def isConfirmed(self):
@@ -1271,6 +1285,12 @@ class NotifyGG(MapperExtension):
             msg = "%s (%s)" % (instance.title, instance.url(qualified=True))
             gg.send_message(uin, msg)
 
+
+class FileDownload(object):
+    """Class representing the user downloading a certain file."""
+    def __init__(self, user, file):
+        self.user = user
+        self.file = file
 
 class File(ContentItem):
     """Class representing user-uploaded files."""

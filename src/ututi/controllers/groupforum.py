@@ -199,5 +199,7 @@ class GroupforumController(GroupControllerBase):
     @set_login_url
     @ActionProtector('member', 'admin', 'moderator')
     def file(self, group, message, file):
-
+        if c.user:
+            c.user.download(file)
+            meta.Session.commit()
         return serve_file(file)
