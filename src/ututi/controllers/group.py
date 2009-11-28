@@ -184,8 +184,6 @@ class GroupControllerBase(BaseController):
     def __before__(self):
         c.breadcrumbs = []
 
-        c.mailing_list_host = config.get('mailing_list_host', '')
-
     def _actions(self, selected):
         """Generate a list of all possible actions.
 

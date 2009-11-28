@@ -94,3 +94,72 @@ li.empty_note {
 }
 
 
+/* group blocks in dashboard */
+.group_area {
+  padding: 5px;
+  margin: 5px 0;
+  border-bottom: 1px solid #ded8d8;
+  clear: left;
+}
+
+.group_area .group-logo {
+  float: left;
+  height: 35px;
+  width: 35px;
+  text-align: center;
+  padding-right: 10px;
+}
+
+.group_area .group-logo img {
+  margin: 0 auto;
+}
+
+.group_area .group-info .title a {
+  color: #030303;
+  font-size: 16px;
+}
+
+.group_area .group-info .school-link {
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.group_area table.group-news td {
+  width: 50%;
+  vertical-align: top;
+}
+
+.group_area table.group-news {
+  clear: left;
+  width: 600px;
+  font-size: 12px;
+}
+
+.group_area table.group-news td td.subject {
+  width: 80%;
+  line-height: 14px;
+}
+
+.group_area table.group-news td td.date {
+  width: 20%;
+  line-height: 14px;
+  color: #808080;
+}
+
+.group_area table.group-news table.group-events {
+  margin-left: 5px;
+}
+
+.group_area table.group-news table.group-events td.subject {
+  padding-left: 15px;
+  background: url("../images/details/icon_event.png") left 2px no-repeat;
+}
+
+.group_area table.group-news table.group-messages {
+  margin-right: 5px;
+}
+
+.group_area table.group-news table.group-messages td.subject {
+  padding-left: 15px;
+  background: url("../images/details/icon_message.png") left 2px no-repeat;
+}

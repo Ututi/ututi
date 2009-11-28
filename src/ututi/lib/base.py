@@ -30,6 +30,7 @@ class BaseController(WSGIController):
         c.testing = asbool(config.get('testing', False))
         c.gg_enabled = asbool(config.get('gg_enabled', False))
         c.tpl_lang = config.get('tpl_lang', 'en')
+        c.mailing_list_host = config.get('mailing_list_host', '')
 
         lang = get_lang()
         if not lang:
