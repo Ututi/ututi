@@ -243,3 +243,13 @@ test_migration_2: instance/var/run/.s.PGSQL.${PGPORT}
 	/usr/lib/postgresql/8.3/bin/pg_restore -d development -h ${PWD}/instance/var/run --no-owner < backup/dbdump || true
 	${PWD}/bin/migrate development.ini
 	/usr/lib/postgresql/8.3/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > actual.txt
+
+
+POFILTER = bin/pofilter --progress=none -t xmltags -t printf --ututi
+
+.PHONY: test_translations
+test_translations: bin/pofilter
+	${POFILTER} src/ututi/i18n/pl/LC_MESSAGES/ututi.po parts/test/pl.errors
+	${POFILTER} src/ututi/i18n/lt/LC_MESSAGES/ututi.po parts/test/lt.errors
+	diff -u src/ututi/i18n/pl/LC_MESSAGES/pl.errors parts/test/pl.errors && \
+	diff -u src/ututi/i18n/lt/LC_MESSAGES/lt.errors parts/test/lt.errors

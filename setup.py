@@ -24,7 +24,8 @@ setup(
         "PILwoTk",
         "Babel",
         "translitcodec",
-        "trans"
+        "trans",
+        "translate-toolkit"
     ],
     package_dir={'': 'src'},
     packages=find_packages('src'),
@@ -42,6 +43,7 @@ setup(
 
     [console_scripts]
     migrate = ututi.migration:main
+    pofilter = ututi.tests.translations:main
 
     [paste.app_install]
     main = pylons.util:PylonsInstaller
