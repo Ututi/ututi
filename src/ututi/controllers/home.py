@@ -297,7 +297,6 @@ class HomeController(UniversityListMixin):
                 redirect_to(controller='profile', action='index')
             else:
                 defaults={'recovery_key': key}
-                #user = meta.Session.query(User).filter(User.recovery_key == c.key).one()
 
             return htmlfill.render(self._pswreset_form(), defaults=defaults)
         except NoResultFound:
