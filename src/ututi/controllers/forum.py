@@ -1,5 +1,6 @@
 from ututi.lib.base import BaseController
 
+from sqlalchemy.sql.expression import desc
 from sqlalchemy.orm.exc import NoResultFound
 from formencode.schema import Schema
 from formencode import validators, htmlfill
@@ -90,13 +91,25 @@ class ForumController(BaseController):
         messages = meta.Session.query(ForumPost)\
             .filter_by(forum_id=forum_id)\
             .filter(ForumPost.id == ForumPost.thread_id)\
-            .order_by(ForumPost.created_on).all()
-        return [{'thread_id': message.thread_id,
-                 'title': message.title,
-                 'reply_count': meta.Session.query(ForumPost).filter_by(thread_id=message.thread_id).count() - 1,
-                 'created': message.created_on,
-                 'author': message.created}
-                for message in messages]
+            .order_by(desc(ForumPost.created_on)).all()
+
+        threads = []
+        for message in messages:
+            thread = {}
+
+            thread['thread_id'] = message.thread_id
+            thread['title'] = message.title
+
+            replies = meta.Session.query(ForumPost)\
+                .filter_by(thread_id=message.thread_id)\
+                .order_by(ForumPost.created_on).all()
+
+            thread['reply_count'] = len(replies) - 1
+            thread['created'] = replies[-1].created_on
+            thread['author'] = replies[-1].created
+            threads.append(thread)
+
+        return sorted(threads, key=lambda t: t['created'], reverse=True)
 
     @forum_action
     @ActionProtector("user")
