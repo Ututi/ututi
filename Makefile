@@ -247,7 +247,8 @@ test_migration_2: instance/var/run/.s.PGSQL.${PGPORT}
 .PHONY: test_translations
 test_translations: bin/pofilter
 	bin/pofilter --progress=none -t xmltags -t printf --ututi ${PWD}/src/ututi/i18n/ -o ${PWD}/parts/test_translations/
-	diff -r -u ${PWD}/src/ututi/tests/expected_i18n_errors/ ${PWD}/parts/test_translations/
+	diff -r -u ${PWD}/src/ututi/tests/expected_i18n_errors/lt ${PWD}/parts/test_translations/lt &&\
+	diff -r -u ${PWD}/src/ututi/tests/expected_i18n_errors/pl ${PWD}/parts/test_translations/pl
 
 .PHONY: update_expected_translations
 update_expected_translations: bin/pofilter
