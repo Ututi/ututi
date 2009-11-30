@@ -4,8 +4,8 @@ from translate.filters.checks import StandardChecker
 from translate.filters.checks import CheckerConfig
 
 ututiconfig = CheckerConfig(
-    canchangetags = [("link", "name", None),
-                     ("a", "title", None)]
+    canchangetags = [("a", "title", None),
+                     ("img", "alt", None)]
     )
 
 class UtutiChecker(StandardChecker):

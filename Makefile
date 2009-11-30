@@ -244,12 +244,13 @@ test_migration_2: instance/var/run/.s.PGSQL.${PGPORT}
 	${PWD}/bin/migrate development.ini
 	/usr/lib/postgresql/8.3/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > actual.txt
 
-
-POFILTER = bin/pofilter --progress=none -t xmltags -t printf --ututi
-
 .PHONY: test_translations
 test_translations: bin/pofilter
-	${POFILTER} src/ututi/i18n/pl/LC_MESSAGES/ututi.po parts/test/pl.errors
-	${POFILTER} src/ututi/i18n/lt/LC_MESSAGES/ututi.po parts/test/lt.errors
-	diff -u src/ututi/i18n/pl/LC_MESSAGES/pl.errors parts/test/pl.errors && \
-	diff -u src/ututi/i18n/lt/LC_MESSAGES/lt.errors parts/test/lt.errors
+	bin/pofilter --progress=none -t xmltags -t printf --ututi ${PWD}/src/ututi/i18n/ -o ${PWD}/parts/test_translations/
+	diff -r -u ${PWD}/src/ututi/tests/expected_i18n_errors/ ${PWD}/parts/test_translations/
+
+.PHONY: update_expected_translations
+update_expected_translations: bin/pofilter
+	bin/pofilter --progress=none -t xmltags -t printf --ututi ${PWD}/src/ututi/i18n/ -o ${PWD}/parts/test_translations/
+	rm -rf ${PWD}/src/ututi/tests/expected_i18n_errors/
+	mv ${PWD}/parts/test_translations/ ${PWD}/src/ututi/tests/expected_i18n_errors/

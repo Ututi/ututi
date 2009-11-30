@@ -43,7 +43,6 @@ setup(
 
     [console_scripts]
     migrate = ututi.migration:main
-    pofilter = ututi.tests.translations:main
 
     [paste.app_install]
     main = pylons.util:PylonsInstaller
