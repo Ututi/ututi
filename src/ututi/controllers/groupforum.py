@@ -99,10 +99,7 @@ class GroupforumController(GroupControllerBase):
 
     def _top_level_messages(self, group):
         messages = []
-        for message in meta.Session.query(GroupMailingListMessage)\
-                .filter_by(group_id=group.id, reply_to=None)\
-                .order_by(desc(GroupMailingListMessage.sent))\
-                .all():
+        for message in group.top_level_messages():
             msg = {'thread_id': message.id,
                    'last_reply_author_id': message.posts[-1].author,
                    'last_reply_author_title': message.posts[-1].author.fullname,

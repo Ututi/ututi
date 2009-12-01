@@ -797,6 +797,28 @@ class Group(ContentItem, FolderMixin):
             .order_by(GroupMailingListMessage.sent.desc())\
             .all()
 
+    def top_level_messages(self, sort=False, limit = None):
+        if sort:
+            messages = meta.Session.query(GroupMailingListMessage.thread_message_id,
+                                          GroupMailingListMessage.thread_group_id,
+                                          func.max(GroupMailingListMessage.sent).label('last_msg'))\
+                                          .group_by(GroupMailingListMessage.thread_message_id, GroupMailingListMessage.thread_group_id)\
+                                          .filter_by(group_id=self.id)\
+                                          .order_by(desc('last_msg'))
+            if limit is not None:
+                messages = messages.limit(limit)
+
+            messages = messages.all()
+
+            return [{'last_reply': msg[2], 'thread': GroupMailingListMessage.get(msg[0], msg[1])} for msg in messages]
+
+        else:
+            messages = meta.Session.query(GroupMailingListMessage)\
+                .filter_by(group_id=self.id, reply_to=None)\
+                .order_by(desc(GroupMailingListMessage.sent))\
+                .all()
+        return messages
+
     def all_files(self, limit=None):
         ids = [subject.id for subject in self.watched_subjects]
         ids.append(self.id)
@@ -808,13 +830,19 @@ class Group(ContentItem, FolderMixin):
 
     @property
     def group_events(self):
+        return self.filtered_events()
+
+    def filtered_events(self, types=[], limit=20):
         from ututi.model.events import Event
         events = meta.Session.query(Event)\
             .filter(or_(Event.object_id.in_([s.id for s in self.watched_subjects]),
-                        Event.object_id == self.id))\
-                        .order_by(Event.created.desc())\
-                        .limit(20).all()
+                        Event.object_id == self.id))
+        if types != []:
+            events = events.filter(Event.event_type.in_(types))
+
+        events = events.order_by(Event.created.desc()).limit(limit).all()
         return events
+
 
     @property
     def message_count(self):

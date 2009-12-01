@@ -1,7 +1,6 @@
 import datetime
 
 from sqlalchemy.schema import Table
-from webhelpers.html.tags import link_to
 from sqlalchemy.orm import backref
 from sqlalchemy.orm import relation
 from sqlalchemy import orm
@@ -15,7 +14,7 @@ from ututi.model import File
 from ututi.model import Page
 from ututi.model import ContentItem
 from ututi.model import meta
-
+from ututi.lib.helpers import link_to
 
 events_table = None
 
@@ -53,6 +52,9 @@ class Event(object):
     def render(self):
         raise NotImplementedError()
 
+    def shortened(self):
+        raise NotImplementedError()
+
 
 class PageCreatedEvent(Event):
     """Event fired when a page is created.
@@ -75,6 +77,11 @@ class PageCreatedEvent(Event):
             'link_to_subject': link_to(self.context.title, self.context.url()),
             'link_to_page': link_to(self.page.title, self.page.url())}
 
+    def shortened(self):
+        return _("%(link_to_context)s > %(link_to_page)s") % {
+            'link_to_context': link_to(self.context.title, self.context.url(), 17),
+            'link_to_page': link_to(self.page.title, self.page.url(), 17)}
+
 
 class PageModifiedEvent(Event):
     """Event fired when a page is modified.
@@ -96,6 +103,11 @@ class PageModifiedEvent(Event):
         return _("Page %(link_to_page)s of a subject %(link_to_subject)s was updated") % {
             'link_to_subject': link_to(self.context.title, self.context.url()),
             'link_to_page': link_to(self.page.title, self.page.url())}
+
+    def shortened(self):
+        return _("%(link_to_context)s > %(link_to_page)s") % {
+            'link_to_context': link_to(self.context.title, self.context.url(), 17),
+            'link_to_page': link_to(self.page.title, self.page.url(), 17)}
 
 
 class FileUploadedEvent(Event):
@@ -137,6 +149,11 @@ class FileUploadedEvent(Event):
                     'link_to_group': link_to(self.context.title, self.context.url()),
                     'folder_title': self.file.folder}
 
+    def shortened(self):
+        if self.file.md5 is not None:
+            return _("%(link_to_context)s > %(link_to_page)s") % {
+                'link_to_context': link_to(self.context.title, self.context.url(), 17),
+                'link_to_page': link_to(self.file.title, self.file.url(), 17)}
 
 class SubjectCreatedEvent(Event):
     """Event fired when a new subject is created."""
@@ -145,6 +162,10 @@ class SubjectCreatedEvent(Event):
         return _("New subject %(link_to_subject)s was created") % {
             'link_to_subject': link_to(self.context.title, self.context.url())}
 
+    def shortened(self):
+        return _("%(link_to_context)s") % {
+                'link_to_context': link_to(self.context.title, self.context.url(), 17)}
+
 
 class SubjectModifiedEvent(Event):
     """Event fired when a subject is modified."""
@@ -152,6 +173,10 @@ class SubjectModifiedEvent(Event):
     def render(self):
         return _("Subject %(link_to_subject)s was modified") % {
             'link_to_subject': link_to(self.context.title, self.context.url())}
+
+    def shortened(self):
+        return _("%(link_to_context)s") % {
+                'link_to_context': link_to(self.context.title, self.context.url(), 17)}
 
 
 class ForumPostCreatedEvent(Event):
@@ -165,6 +190,11 @@ class ForumPostCreatedEvent(Event):
             'link_to_group': link_to(self.context.title, self.context.url()),
             'link_to_message': link_to(self.message.subject, self.message.url())}
 
+    def shortened(self):
+        return _("%(link_to_context)s > %(link_to_message)") % {
+                'link_to_context': link_to(self.context.title, self.context.url(), 17),
+                'link_to_message': link_to(self.message.subject, self.message.url(), 17)}
+
 
 class GroupMemberJoinedEvent(Event):
     """Event fired when members join groups."""
@@ -173,6 +203,11 @@ class GroupMemberJoinedEvent(Event):
         return _("Member %(link_to_user)s joined the group %(link_to_group)s") % {
             'link_to_group': link_to(self.context.title, self.context.url()),
             'link_to_user': link_to(self.user.fullname, self.user.url())}
+
+    def shortened(self):
+        return _("%(link_to_context)s > %(link_to_message)") % {
+                'link_to_context': link_to(self.context.title, self.context.url(), 17),
+                'link_to_user': link_to(self.user.fullname, self.user.url(), 17)}
 
 
 class GroupMemberLeftEvent(Event):
@@ -183,6 +218,11 @@ class GroupMemberLeftEvent(Event):
             'link_to_group': link_to(self.context.title, self.context.url()),
             'link_to_user': link_to(self.user.fullname, self.user.url())}
 
+    def shortened(self):
+        return _("%(link_to_context)s > %(link_to_message)") % {
+                'link_to_context': link_to(self.context.title, self.context.url(), 17),
+                'link_to_user': link_to(self.user.fullname, self.user.url(), 17)}
+
 
 class GroupStartedWatchingSubjects(Event):
     """Event fired when group starts watching a subject."""
@@ -192,6 +232,11 @@ class GroupStartedWatchingSubjects(Event):
             'link_to_group': link_to(self.context.title, self.context.url()),
             'link_to_subject': link_to(self.subject.title, self.subject.url())}
 
+    def shortened(self):
+        return _("%(link_to_context)s > %(link_to_subject)") % {
+                'link_to_context': link_to(self.context.title, self.context.url(), 17),
+                'link_to_subject': link_to(self.subject.title, self.subject.url(), 17)}
+
 
 class GroupStoppedWatchingSubjects(Event):
     """Event fired when group stops watching a subject."""
@@ -200,6 +245,11 @@ class GroupStoppedWatchingSubjects(Event):
         return _("Group %(link_to_group)s stopped watching subject %(link_to_subject)s") % {
             'link_to_group': link_to(self.context.title, self.context.url()),
             'link_to_subject': link_to(self.subject.title, self.subject.url())}
+
+    def shortened(self):
+        return _("%(link_to_context)s > %(link_to_subject)") % {
+                'link_to_context': link_to(self.context.title, self.context.url(), 17),
+                'link_to_subject': link_to(self.subject.title, self.subject.url(), 17)}
 
 
 def setup_orm(engine):
