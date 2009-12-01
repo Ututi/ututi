@@ -5,6 +5,11 @@
   ${parent.head_tags()}
 </%def>
 
+<div class="display_selection">
+  <a href="${url(controller='profile', action='home')}" class="active">${_('grouped')}</a>
+  <a href="${url(controller='profile', action='feed')}">${_('ungrouped')}</a>
+</div>
+
 %for m in c.user.memberships:
 <div class="group_area">
   <%
@@ -46,9 +51,12 @@
         %endif
       </td>
       <td class="right-column">
-        %if group.group_events:
+        <%
+           events = group.filtered_events(['file_uploaded', 'page_created', 'page_modified', 'subject_modified'], 5)
+        %>
+        %if events:
         <table class="group-events">
-          %for evt in group.filtered_events(['file_uploaded', 'page_created', 'page_modified', 'subject_modified'], 5):
+          %for evt in events:
           <tr>
             <td class="subject">${evt.shortened()|n}</td>
             <td class="date">${evt.created.date()}</td>
@@ -68,14 +76,3 @@
   <br class="clear-left" />
 </div>
 %endfor
-
-<div class="tip">
-${_('This is a list of all the recent events in the subjects you are watching and the groups you belong to.')}
-</div>
-<ul id="event_list">
-% for event in c.events:
-<li>
-  ${event.render()|n} <span class="event_time">(${event.when()})</span>
-</li>
-% endfor
-</ul>

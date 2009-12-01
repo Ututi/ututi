@@ -200,6 +200,21 @@ class ProfileController(SearchBaseController, UniversityListMixin):
 
         return render('/profile/home.mako')
 
+    @ActionProtector("user")
+    def feed(self):
+        c.breadcrumbs.append(self._actions('home'))
+        c.events = meta.Session.query(Event)\
+            .filter(or_(Event.object_id.in_([s.id for s in c.user.all_watched_subjects]),
+                        Event.object_id.in_([m.group.id for m in c.user.memberships])))\
+            .filter(Event.author_id != c.user.id)\
+            .order_by(desc(Event.created))\
+            .limit(20).all()
+
+        if not c.events:
+            redirect_to(controller='profile', action='welcome')
+
+        return render('/profile/feed.mako')
+
     def _edit_form(self, defaults=None):
         return render('profile/edit.mako')
 

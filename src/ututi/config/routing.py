@@ -119,6 +119,7 @@ def make_map():
 
     # user's information
     map.connect('/home', controller='profile', action='home')
+    map.connect('/home/feed', controller='profile', action='feed')
 
     #user registration path
     map.connect('/welcome', controller='profile', action='welcome')

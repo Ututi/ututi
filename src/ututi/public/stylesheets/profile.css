@@ -184,3 +184,19 @@ li.empty_note {
 .group_area .more-links td {
   text-align: right;
 }
+
+/* blocks in dashboard */
+
+/* dashboard style selection */
+.display_selection {
+  margin-bottom: 5px;
+  text-align: right;
+}
+
+.display_selection a {
+  margin: 0 3px;
+}
+
+.display_selection a.active {
+  color: #808080;
+}
