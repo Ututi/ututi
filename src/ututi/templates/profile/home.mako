@@ -11,14 +11,14 @@
 </div>
 
 %for m in c.user.memberships:
-<div class="group_area">
+<div class="event_area group_area">
   <%
      group = m.group
   %>
-  <div class="group-logo">
+  <div class="area-logo">
     <img src="${group.url(action='logo', width=35, height=35)}" alt="logo" />
   </div>
-  <div class="group-info">
+  <div class="area-info">
     <span class="title">
       <a href="${group.url()}">${group.title}</a>
       (${ungettext("%(count)s member", "%(count)s members", len(group.members)) % dict(count = len(group.members))})
@@ -28,7 +28,7 @@
       ${group.group_id}@${c.mailing_list_host}
     </a>
   </div>
-  <table class="group-news">
+  <table class="area-news">
     <tr>
       <th>${_('Latest messages')}</th>
       <th class="right-column">${_('Latest events')}</th>
@@ -71,6 +71,61 @@
     <tr class="more-links">
       <td><a href="${group.url(action='forum')}" class="more">${_('Group forum')}</a></td>
       <td class="right-column"><a href="${group.url(action='home')}" class="more">${_('Group events')}</a></td>
+    </tr>
+  </table>
+  <br class="clear-left" />
+</div>
+%endfor
+
+%for subject in c.user.watched_subjects:
+<div class="event_area subject_area">
+  <div class="area-logo">
+    ${h.image('/images/details/icon_type_subject.png', alt='subject')|n}
+  </div>
+  <div class="area-info">
+    <span class="title">
+      <a href="${subject.url()}">${subject.title}</a>
+    </span>
+  </div>
+  <table class="area-news">
+    <tr>
+      <th>${_('Latest files')}</th>
+      <th class="right-column">${_('Latest pages')}</th>
+    </tr>
+    <tr><td>
+        <%
+           events = subject.filtered_events(['file_uploaded'], 5)
+        %>
+        %if events:
+        <table class="subject-file-events">
+          %for evt in events:
+          <tr>
+            <td class="subject">${evt.shortened()|n}</td>
+            <td class="date">${evt.created.date()}</td>
+          </tr>
+          %endfor
+        </table>
+        %else:
+        ${_("No events for the group.")}
+        %endif
+      </td>
+      <td class="right-column">
+        <%
+           events = subject.filtered_events(['page_created', 'page_modified', 'subject_modified'], 5)
+        %>
+        %if events:
+        <table class="group-events">
+          %for evt in events:
+          <tr>
+            <td class="subject">${evt.shortened()|n}</td>
+            <td class="date">${evt.created.date()}</td>
+          </tr>
+          %endfor
+        </table>
+        %else:
+        ${_("No events for the group.")}
+        %endif
+      </td>
     </tr>
   </table>
   <br class="clear-left" />

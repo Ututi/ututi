@@ -1031,6 +1031,18 @@ class Subject(ContentItem, FolderMixin):
         self.description = description
         self.tags = tags
 
+    def filtered_events(self, types=[], limit=20):
+        """Return a list of events, filtered by their type, that happened to this subject."""
+        from ututi.model.events import Event
+        events = meta.Session.query(Event)\
+            .filter(Event.object_id == self.id)
+
+        if types != []:
+            events = events.filter(Event.event_type.in_(types))
+
+        events = events.order_by(Event.created.desc()).limit(limit).all()
+        return events
+
 
 pages_table = None
 

@@ -95,14 +95,14 @@ li.empty_note {
 
 
 /* group blocks in dashboard */
-.group_area {
+.event_area {
   padding: 5px;
-  margin: 5px 0;
+  margin: 5px 0 10px;
   border-bottom: 1px solid #ded8d8;
   clear: left;
 }
 
-.group_area .group-logo {
+.event_area .area-logo {
   float: left;
   height: 35px;
   width: 35px;
@@ -110,78 +110,88 @@ li.empty_note {
   padding-right: 10px;
 }
 
-.group_area .group-logo img {
+.event_area.subject_area .area-logo {
+  height: 25px;
+  width: 25px;
+}
+
+.event_area .area-logo img {
   margin: 0 auto;
 }
 
-.group_area .group-info .title,
-.group_area .group-info .title a {
+.event_area .area-info .title,
+.event_area .area-info .title a {
   color: #030303;
   font-size: 16px;
 }
 
-.group_area .group-info .school-link {
+.event_area .area-info .school-link {
   text-transform: uppercase;
   font-size: 12px;
 }
 
-.group_area table.group-news td,
-.group_area table.group-news th {
+.event_area table.area-news td,
+.event_area table.area-news th {
   width: 50%;
   vertical-align: top;
   padding-right: 5px;
 }
 
-.group_area td.right-column {
+.event_area td.right-column {
   border-left: 1px solid #ded8d8;
 }
 
-.group_area .right-column {
+.event_area .right-column {
   padding: 0 0 0 5px;
 }
 
-.group_area table.group-news th {
+.event_area table.area-news th {
   text-align: left;
   font-size: 14px;
   font-weight: normal;
 }
 
-.group_area table.group-news {
+.event_area table.area-news {
   clear: left;
   width: 600px;
   font-size: 12px;
   margin-top: 10px;
 }
 
-.group_area table.group-news td td.subject {
+.event_area table.area-news td td.subject {
   width: 75%;
   line-height: 14px;
 }
 
-.group_area table.group-news td td.date {
+.event_area table.area-news td td.date {
   width: 25%;
   line-height: 14px;
   color: #808080;
   text-align: right;
 }
 
-.group_area table.group-news table.group-events td.subject {
-  padding-left: 15px;
+.event_area table.area-news table.group-events td.subject {
+  padding-left: 16px;
   background: url("../images/details/icon_event.png") left 2px no-repeat;
 }
 
-.group_area table.group-news table.group-messages,
-.group_area table.group-news table.group-events {
+.event_area table.area-news table.group-messages,
+.event_area table.area-news table.group-events {
   width: 295px;
   margin-bottom: 5px;
 }
 
-.group_area table.group-news table.group-messages td.subject {
-  padding-left: 15px;
+.event_area table.area-news table.group-messages td.subject {
+  padding-left: 16px;
   background: url("../images/details/icon_message.png") left 2px no-repeat;
 }
 
-.group_area .more-links td {
+.event_area table.area-news table.subject-file-events td.subject {
+  padding-left: 16px;
+  background: url("../images/details/icon_file.png") left 2px no-repeat;
+}
+
+.event_area .more-links td {
   text-align: right;
 }
 

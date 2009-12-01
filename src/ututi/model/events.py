@@ -151,9 +151,14 @@ class FileUploadedEvent(Event):
 
     def shortened(self):
         if self.file.md5 is not None:
-            return _("%(link_to_context)s > %(link_to_page)s") % {
+            return _("%(link_to_context)s > %(link_to_file)s") % {
                 'link_to_context': link_to(self.context.title, self.context.url(), 17),
-                'link_to_page': link_to(self.file.title, self.file.url(), 17)}
+                'link_to_file': link_to(self.file.title, self.file.url(), 17)}
+        else:
+            return _("%(link_to_context)s > %(link_to_file)s/") % {
+                'link_to_context': link_to(self.context.title, self.context.url(), 17),
+                'link_to_file': self.file.folder}
+
 
 class SubjectCreatedEvent(Event):
     """Event fired when a new subject is created."""
