@@ -58,8 +58,7 @@
         <table class="group-events">
           %for evt in events:
           <tr>
-            <td class="subject">${evt.shortened()|n}</td>
-            <td class="date">${evt.created.date()}</td>
+            <td colspan="2" class="subject">${evt.shortened()|n}</td>
           </tr>
           %endfor
         </table>
@@ -100,8 +99,7 @@
         <table class="subject-file-events">
           %for evt in events:
           <tr>
-            <td class="subject">${evt.shortened()|n}</td>
-            <td class="date">${evt.created.date()}</td>
+            <td colspan="2" class="subject">${evt.shortened(False)|n}</td>
           </tr>
           %endfor
         </table>
@@ -114,11 +112,10 @@
            events = subject.filtered_events(['page_created', 'page_modified', 'subject_modified'], 5)
         %>
         %if events:
-        <table class="group-events">
+        <table class="subject-page-events">
           %for evt in events:
           <tr>
-            <td class="subject">${evt.shortened()|n}</td>
-            <td class="date">${evt.created.date()}</td>
+            <td colspan="2" class="subject">${evt.shortened(False)|n}</td>
           </tr>
           %endfor
         </table>

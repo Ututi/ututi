@@ -147,8 +147,9 @@ li.empty_note {
 
 .event_area table.area-news th {
   text-align: left;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: normal;
+  color: #808080;
 }
 
 .event_area table.area-news {
@@ -168,11 +169,12 @@ li.empty_note {
   line-height: 14px;
   color: #808080;
   text-align: right;
+  font-size: 0.85em;
 }
 
 .event_area table.area-news table.group-events td.subject {
   padding-left: 16px;
-  background: url("../images/details/icon_event.png") left 2px no-repeat;
+  background: url("../images/details/icon_subject_12x12.png") left 2px no-repeat;
 }
 
 .event_area table.area-news table.group-messages,
@@ -189,6 +191,11 @@ li.empty_note {
 .event_area table.area-news table.subject-file-events td.subject {
   padding-left: 16px;
   background: url("../images/details/icon_file.png") left 2px no-repeat;
+}
+
+.event_area table.area-news table.subject-page-events td.subject {
+  padding-left: 16px;
+  background: url("../images/details/icon_page_small.png") left 2px no-repeat;
 }
 
 .event_area .more-links td {
