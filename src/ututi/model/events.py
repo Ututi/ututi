@@ -79,11 +79,11 @@ class PageCreatedEvent(Event):
 
     def shortened(self, context=True):
         if context:
-            return _("%(link_to_context)s > %(link_to_page)s") % {
-                'link_to_context': link_to(self.context.title, self.context.url(), 17),
-                'link_to_page': link_to(self.page.title, self.page.url(), 17)}
+            return "%(link_to_context)s > %(link_to_page)s" % {
+                'link_to_context': link_to(self.context.title, self.context.url(), 20),
+                'link_to_page': link_to(self.page.title, self.page.url(), 20)}
         else:
-            return _("%(link_to_page)s") % {
+            return "%(link_to_page)s" % {
                 'link_to_page': link_to(self.page.title, self.page.url(), 35)}
 
 
@@ -110,11 +110,11 @@ class PageModifiedEvent(Event):
 
     def shortened(self, context=True):
         if context:
-            return _("%(link_to_context)s > %(link_to_page)s") % {
-                'link_to_context': link_to(self.context.title, self.context.url(), 17),
-                'link_to_page': link_to(self.page.title, self.page.url(), 17)}
+            return "%(link_to_context)s > %(link_to_page)s" % {
+                'link_to_context': link_to(self.context.title, self.context.url(), 20),
+                'link_to_page': link_to(self.page.title, self.page.url(), 20)}
         else:
-            return _("%(link_to_page)s") % {'link_to_page': link_to(self.page.title, self.page.url(), 35)}
+            return "%(link_to_page)s" % {'link_to_page': link_to(self.page.title, self.page.url(), 35)}
 
 
 class FileUploadedEvent(Event):
@@ -159,18 +159,18 @@ class FileUploadedEvent(Event):
     def shortened(self, context=True):
         if context:
             if self.file.md5 is not None:
-                return _("%(link_to_context)s > %(link_to_file)s") % {
-                    'link_to_context': link_to(self.context.title, self.context.url(), 17),
-                    'link_to_file': link_to(self.file.title, self.file.url(), 17)}
+                return "%(link_to_context)s > %(link_to_file)s" % {
+                    'link_to_context': link_to(self.context.title, self.context.url(), 20),
+                    'link_to_file': link_to(self.file.title, self.file.url(), 20)}
             else:
-                return _("%(link_to_context)s > %(link_to_file)s/") % {
-                    'link_to_context': link_to(self.context.title, self.context.url(), 17),
+                return _("%(link_to_context)s > %(link_to_file)s (new) ") % {
+                    'link_to_context': link_to(self.context.title, self.context.url(), 20),
                     'link_to_file': self.file.folder}
         else:
             if self.file.md5 is not None:
-                return _("%(link_to_file)s") % {'link_to_file': link_to(self.file.title, self.file.url(), 17)}
+                return "%(link_to_file)s" % {'link_to_file': link_to(self.file.title, self.file.url(), 35)}
             else:
-                return _("%(link_to_file)s (new folder)") % {'link_to_file': self.file.folder}
+                return _("%(link_to_file)s (new)") % {'link_to_file': self.file.folder}
 
 
 class SubjectCreatedEvent(Event):
@@ -182,7 +182,7 @@ class SubjectCreatedEvent(Event):
 
     def shortened(self, context=True):
         return _("%(link_to_context)s (new subject)") % {
-                'link_to_context': link_to(self.context.title, self.context.url(), 17)}
+                'link_to_context': link_to(self.context.title, self.context.url(), 25)}
 
 
 class SubjectModifiedEvent(Event):
@@ -194,7 +194,7 @@ class SubjectModifiedEvent(Event):
 
     def shortened(self, context=True):
         return _("%(link_to_context)s (subject changed)") % {
-                'link_to_context': link_to(self.context.title, self.context.url(), 17)}
+                'link_to_context': link_to(self.context.title, self.context.url(), 25)}
 
 
 class ForumPostCreatedEvent(Event):
@@ -210,11 +210,11 @@ class ForumPostCreatedEvent(Event):
 
     def shortened(self, context=True):
         if context:
-            return _("%(link_to_context)s > %(link_to_message)") % {
-                'link_to_context': link_to(self.context.title, self.context.url(), 17),
-                'link_to_message': link_to(self.message.subject, self.message.url(), 17)}
+            return "%(link_to_context)s > %(link_to_message)s" % {
+                'link_to_context': link_to(self.context.title, self.context.url(), 20),
+                'link_to_message': link_to(self.message.subject, self.message.url(), 20)}
         else:
-            return _("%(link_to_message)") % {
+            return "%(link_to_message)s" % {
                 'link_to_message': link_to(self.message.subject, self.message.url(), 35)}
 
 
@@ -228,12 +228,12 @@ class GroupMemberJoinedEvent(Event):
 
     def shortened(self, context=True):
         if context:
-            return _("%(link_to_context)s > %(link_to_message)") % {
-                'link_to_context': link_to(self.context.title, self.context.url(), 17),
-                'link_to_user': link_to(self.user.fullname, self.user.url(), 17)}
+            return _("%(link_to_context)s > %(link_to_user)s (joined)") % {
+                'link_to_context': link_to(self.context.title, self.context.url(), 20),
+                'link_to_user': link_to(self.user.fullname, self.user.url(), 20)}
         else:
-            return _("%(link_to_message)") % {
-                'link_to_user': link_to(self.user.fullname, self.user.url(), 35)}
+            return _("%(link_to_user)s (joined)") % {
+                'link_to_user': link_to(self.user.fullname, self.user.url(), 30)}
 
 
 class GroupMemberLeftEvent(Event):
@@ -246,12 +246,12 @@ class GroupMemberLeftEvent(Event):
 
     def shortened(self, context=True):
         if context:
-            return _("%(link_to_context)s > %(link_to_user)") % {
-                'link_to_context': link_to(self.context.title, self.context.url(), 17),
-                'link_to_user': link_to(self.user.fullname, self.user.url(), 17)}
+            return _("%(link_to_context)s > %(link_to_user)s (left)")  % {
+                'link_to_context': link_to(self.context.title, self.context.url(), 20),
+                'link_to_user': link_to(self.user.fullname, self.user.url(), 20)}
         else:
-            return _("%(link_to_user)") % {
-                'link_to_user': link_to(self.user.fullname, self.user.url(), 17)}
+            return _("%(link_to_user)s (left)") % {
+                'link_to_user': link_to(self.user.fullname, self.user.url(), 30)}
 
 
 class GroupStartedWatchingSubjects(Event):
@@ -264,11 +264,11 @@ class GroupStartedWatchingSubjects(Event):
 
     def shortened(self, context=True):
         if context:
-            return _("%(link_to_context)s > %(link_to_subject)") % {
-                'link_to_context': link_to(self.context.title, self.context.url(), 17),
-                'link_to_subject': link_to(self.subject.title, self.subject.url(), 17)}
+            return "%(link_to_context)s > %(link_to_subject)s" % {
+                'link_to_context': link_to(self.context.title, self.context.url(), 20),
+                'link_to_subject': link_to(self.subject.title, self.subject.url(), 20)}
         else:
-            return _("%(link_to_subject)") % {
+            return "%(link_to_subject)s" % {
                 'link_to_subject': link_to(self.subject.title, self.subject.url(), 35)}
 
 
@@ -282,11 +282,11 @@ class GroupStoppedWatchingSubjects(Event):
 
     def shortened(self, context=True):
         if context:
-            return _("%(link_to_context)s > %(link_to_subject)") % {
-                'link_to_context': link_to(self.context.title, self.context.url(), 17),
-                'link_to_subject': link_to(self.subject.title, self.subject.url(), 17)}
+            return "%(link_to_context)s > %(link_to_subject)s" % {
+                'link_to_context': link_to(self.context.title, self.context.url(), 20),
+                'link_to_subject': link_to(self.subject.title, self.subject.url(), 20)}
         else:
-            return _("%(link_to_subject)") % {
+            return "%(link_to_subject)s" % {
                 'link_to_subject': link_to(self.subject.title, self.subject.url(), 35)}
 
 
