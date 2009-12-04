@@ -20,6 +20,9 @@ We will only require your email address, name and password:
 After registration is complete we should be hailed by our welcome
 screen:
 
+    >>> browser.url
+    'http://localhost/profile/register_welcome'
+
     >>> browser.printQuery("id('page-content')//h3/text()")
     Join a group
     Browse subjects

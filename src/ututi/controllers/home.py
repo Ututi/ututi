@@ -240,7 +240,7 @@ class HomeController(UniversityListMixin):
                     c.message = _('You can only use the email this invitation was sent for to register.')
                     return render('/login.mako')
             else:
-                redirect_to(controller='profile', action='welcome')
+                redirect_to(controller='profile', action='register_welcome')
         else:
             if hash is not None:
                 c.hash = hash

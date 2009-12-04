@@ -428,6 +428,13 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         c.years = range(c.current_year - 10, c.current_year + 5)
         return  render('profile/welcome.mako')
 
+    @ActionProtector("user")
+    def register_welcome(self):
+        c.current_year = date.today().year
+        c.years = range(c.current_year - 10, c.current_year + 5)
+        return  render('profile/welcome.mako')
+
+
     @validate(schema=SearchSubmit, form='test', post_only = False, on_get = True)
     @ActionProtector("user")
     def findgroup(self):

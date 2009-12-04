@@ -123,6 +123,7 @@ def make_map():
 
     #user registration path
     map.connect('/welcome', controller='profile', action='welcome')
+    map.connect('/register/welcome', controller='profile', action='registered_welcome')
     map.connect('/findgroup', controller='profile', action='findgroup')
 
     map.connect('/profile/logo/{width}/{height}',
