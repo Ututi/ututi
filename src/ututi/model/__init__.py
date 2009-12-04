@@ -1315,7 +1315,7 @@ class NotifyGG(MapperExtension):
         recipients = []
         if isinstance(instance.parent, (Group, Subject)):
             for interested_user in instance.parent.recipients_gg():
-                if interested_user is not c.user:
+                if interested_user is not c.user and interested_user.gadugadu_uin is not None:
                     recipients.append(interested_user.gadugadu_uin)
 
         for uin in sorted(recipients):
