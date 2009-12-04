@@ -12,13 +12,6 @@ If user is not logged in login form is shown. Let's fill it in:
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
 
-And we are greeted by the welcome page:
-
-    >>> browser.printQuery("id('page-content')//h3/text()")
-    Join a group
-    Browse subjects
-    Review and edit your profile
-
 The personal information portlet shows my name:
 
     >>> browser.printQuery('id("personal-box")//div[@class="fullname"]/text()')
@@ -28,7 +21,7 @@ Because it's our first time in the system we are in the welcome page
 and not the home page:
 
     >>> browser.url
-    'http://localhost/welcome'
+    'http://localhost/home'
 
 As we have successfully logged in let's logout and make some typos:
 

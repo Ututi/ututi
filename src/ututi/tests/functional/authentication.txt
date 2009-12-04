@@ -18,7 +18,7 @@ Visiting a profile-related page should not crash if the user is not logged in.
     >>> form.getControl('Login').click()
 
     >>> browser.url
-    'http://localhost/welcome'
+    'http://localhost/home'
 
     >>> browser.getLink('log out').click()
     >>> browser.url

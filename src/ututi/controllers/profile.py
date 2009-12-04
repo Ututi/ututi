@@ -188,6 +188,10 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     @ActionProtector("user")
     def home(self):
         c.breadcrumbs.append(self._actions('home'))
+
+        if not c.user.memberships and not c.user.watched_subjects:
+            redirect_to(controller='profile', action='welcome')
+
         c.events = meta.Session.query(Event)\
             .filter(or_(Event.object_id.in_([s.id for s in c.user.all_watched_subjects]),
                         Event.object_id.in_([m.group.id for m in c.user.memberships])))\
@@ -195,8 +199,6 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             .order_by(desc(Event.created))\
             .limit(20).all()
 
-        if not c.events:
-            redirect_to(controller='profile', action='welcome')
 
         return render('/profile/home.mako')
 
