@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-12-04 14:59+0200\n"
+"PO-Revision-Date: 2009-12-04 15:38+0200\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -447,14 +447,6 @@ msgid "New page %(link_to_page)s of a subject %(link_to_subject)s was created"
 msgstr "Dalyke %(link_to_subject)s sukurtas naujas puslapis %(link_to_page)s."
 
 #, python-format
-msgid "%(link_to_context)s > %(link_to_page)s"
-msgstr ""
-
-#, python-format
-msgid "%(link_to_page)s"
-msgstr ""
-
-#, python-format
 msgid "Page %(page_title)s (%(page_url)s) was updated."
 msgstr "Puslapis %(page_title)s (%(page_url)s) buvo atnaujintas."
 
@@ -523,13 +515,6 @@ msgstr ""
 "%(link_to_message)s."
 
 #, python-format
-msgid "%(link_to_context)s > %(link_to_message)"
-msgstr ""
-
-msgid "%(link_to_message)"
-msgstr ""
-
-#, python-format
 msgid "Member %(link_to_user)s joined the group %(link_to_group)s"
 msgstr "Prie grupės %(link_to_group)s prisijungė narys %(link_to_user)s."
 
@@ -556,13 +541,6 @@ msgstr "%(link_to_user)s (paliko)"
 #, python-format
 msgid "Group %(link_to_group)s started watching subject %(link_to_subject)s"
 msgstr "Grupė %(link_to_group)s nuo šiol stebi dalyką %(link_to_subject)s."
-
-#, python-format
-msgid "%(link_to_context)s > %(link_to_subject)"
-msgstr ""
-
-msgid "%(link_to_subject)"
-msgstr ""
 
 #, python-format
 msgid "Group %(link_to_group)s stopped watching subject %(link_to_subject)s"

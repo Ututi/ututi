@@ -1,29 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Free Software Foundation, Inc.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Translations template for ututi.
+# Copyright (C) 2009 ORGANIZATION
+# This file is distributed under the same license as the ututi project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
-"Content-Transfer-Encoding: 8bit\n"
-
-#~ # Translations template for ututi.
-#~ # Copyright (C) 2009 ORGANIZATION
-#~ # This file is distributed under the same license as the ututi project.
-#~ # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
-#~ #
-#~ #, fuzzy
-#~ msgid ""
-#~ msgstr ""
-#~ "Project-Id-Version: ututi 0.1\n"
-#~ "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2009-12-04 14:57+0200\n"
+"Project-Id-Version: ututi 0.1\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2009-12-04 15:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -428,14 +413,6 @@ msgid "New page %(link_to_page)s of a subject %(link_to_subject)s was created"
 msgstr ""
 
 #, python-format
-msgid "%(link_to_context)s > %(link_to_page)s"
-msgstr ""
-
-#, python-format
-msgid "%(link_to_page)s"
-msgstr ""
-
-#, python-format
 msgid "Page %(page_title)s (%(page_url)s) was updated."
 msgstr ""
 
@@ -500,13 +477,6 @@ msgid "New forum post %(link_to_message)s was posted on %(link_to_group)s forums
 msgstr ""
 
 #, python-format
-msgid "%(link_to_context)s > %(link_to_message)"
-msgstr ""
-
-msgid "%(link_to_message)"
-msgstr ""
-
-#, python-format
 msgid "Member %(link_to_user)s joined the group %(link_to_group)s"
 msgstr ""
 
@@ -532,13 +502,6 @@ msgstr ""
 
 #, python-format
 msgid "Group %(link_to_group)s started watching subject %(link_to_subject)s"
-msgstr ""
-
-#, python-format
-msgid "%(link_to_context)s > %(link_to_subject)"
-msgstr ""
-
-msgid "%(link_to_subject)"
 msgstr ""
 
 #, python-format

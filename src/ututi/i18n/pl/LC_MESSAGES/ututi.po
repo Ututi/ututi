@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-12-04 14:57+0200\n"
+"PO-Revision-Date: 2009-12-04 15:38+0200\n"
 "Last-Translator: Jaroslav Šatkevič <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -437,14 +437,6 @@ msgid "New page %(link_to_page)s of a subject %(link_to_subject)s was created"
 msgstr " %(link_to_page)s - to nowa strona przedmiotu %(link_to_subject)s "
 
 #, python-format
-msgid "%(link_to_context)s > %(link_to_page)s"
-msgstr ""
-
-#, python-format
-msgid "%(link_to_page)s"
-msgstr ""
-
-#, python-format
 msgid "Page %(page_title)s (%(page_url)s) was updated."
 msgstr "Strona %(page_title)s (%(page_url)s) została zaktualizowana."
 
@@ -519,13 +511,6 @@ msgstr ""
 "%(link_to_message)s"
 
 #, python-format
-msgid "%(link_to_context)s > %(link_to_message)"
-msgstr ""
-
-msgid "%(link_to_message)"
-msgstr ""
-
-#, python-format
 msgid "Member %(link_to_user)s joined the group %(link_to_group)s"
 msgstr "Użytkownik %(link_to_user)s dołączył do grupy %(link_to_group)s"
 
@@ -554,13 +539,6 @@ msgid "Group %(link_to_group)s started watching subject %(link_to_subject)s"
 msgstr ""
 "Grupa %(link_to_group)s dodała do obserwowanych przedmiot "
 "%(link_to_subject)s"
-
-#, python-format
-msgid "%(link_to_context)s > %(link_to_subject)"
-msgstr ""
-
-msgid "%(link_to_subject)"
-msgstr ""
 
 #, python-format
 msgid "Group %(link_to_group)s stopped watching subject %(link_to_subject)s"
