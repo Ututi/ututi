@@ -6,8 +6,8 @@
 </%def>
 
 <div class="display_selection">
-  <a href="${url(controller='profile', action='home')}">${_('grouped')}</a>
-  <a href="${url(controller='profile', action='feed')}" class="active">${_('ungrouped')}</a>
+  <a href="${url(controller='profile', action='home')}" ${h.trackEvent(None, 'click', 'grouped_events', 'dashboard')|n}>${_('grouped')}</a>
+  <a href="${url(controller='profile', action='feed')}" class="active" ${h.trackEvent(None, 'click', 'ungrouped_events', 'dashboard')|n}>${_('ungrouped')}</a>
 </div>
 
 <div class="tip">

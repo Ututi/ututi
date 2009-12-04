@@ -6,8 +6,8 @@
 </%def>
 
 <div class="display_selection">
-  <a href="${url(controller='profile', action='home')}" class="active">${_('grouped')}</a>
-  <a href="${url(controller='profile', action='feed')}">${_('ungrouped')}</a>
+  <a href="${url(controller='profile', action='home')}" class="active" ${h.trackEvent(None, 'click', 'grouped_events', 'dashboard')|n} >${_('grouped')}</a>
+  <a href="${url(controller='profile', action='feed')}" ${h.trackEvent(None, 'click', 'ungrouped_events', 'dashboard')|n} >${_('ungrouped')}</a>
 </div>
 
 %for m in c.user.memberships:
