@@ -1,0 +1,15 @@
+Functional tests for the dashboard
+==================================
+
+Just visit the dashboard first.
+
+    >>> browser = Browser.logIn('user3@ututi.lt', 'password')
+    >>> browser.url
+    'http://localhost/home'
+
+    >>> browser.printQuery("//span[@class='title']/a/text()")
+    Matematinė analizė
+
+    >>> browser.getLink('ungrouped').click()
+    >>> browser.url
+    'http://localhost/home/feed'

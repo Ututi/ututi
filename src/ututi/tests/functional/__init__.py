@@ -50,7 +50,10 @@ def ftest_setUp(test):
     email.confirmed = False
     alt_user.emails.append(email)
 
-    meta.Session.add(Subject(u'mat_analize', u'Matematin\u0117 analiz\u0117', LocationTag.get(u'vu'), u'prof. E. Misevi\u010dius'))
+    subj = Subject(u'mat_analize', u'Matematin\u0117 analiz\u0117', LocationTag.get(u'vu'), u'prof. E. Misevi\u010dius')
+    meta.Session.add(subj)
+    alt_user.watchSubject(subj)
+
     t = SimpleTag(u'simple_tag')
     meta.Session.add(t)
 
