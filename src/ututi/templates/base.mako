@@ -215,6 +215,9 @@ ${h.javascript_link('/javascripts/forms.js')|n}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
+    <script type="text/javascript">
+      var lang = '${c.lang}';
+    </script>
     ${h.javascript_link('/javascripts/jquery-1.3.2.min.js')|n}
     ${h.javascript_link('/javascripts/ajaxupload.3.5.js')|n}
     ${h.javascript_link('/javascripts/jquery.qtip.min.js')|n}
@@ -223,9 +226,6 @@ ${h.javascript_link('/javascripts/forms.js')|n}
     ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
     ${h.javascript_link('/javascripts/expand.js')|n}
     ${h.javascript_link('/javascripts/hide_parent.js')|n}
-    <script type="text/javascript">
-      var lang = '${c.lang}';
-    </script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="verify-v1" content="TSVWuU2veWvlR1F0wRgzprUz3gMtHFWbGKmOLQ3cmWQ=" />
     ${self.head_tags()}
