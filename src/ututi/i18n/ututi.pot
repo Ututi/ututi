@@ -1,14 +1,29 @@
-# Translations template for ututi.
-# Copyright (C) 2009 ORGANIZATION
-# This file is distributed under the same license as the ututi project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ututi 0.1\n"
-"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2009-12-04 13:34+0200\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#~ # Translations template for ututi.
+#~ # Copyright (C) 2009 ORGANIZATION
+#~ # This file is distributed under the same license as the ututi project.
+#~ # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+#~ #
+#~ #, fuzzy
+#~ msgid ""
+#~ msgstr ""
+#~ "Project-Id-Version: ututi 0.1\n"
+#~ "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2009-12-04 14:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -457,19 +472,11 @@ msgid "A new folder '%(folder_title)s' for a group %(link_to_group)s was uploade
 msgstr ""
 
 #, python-format
-msgid "%(link_to_context)s > %(link_to_file)s"
+msgid "%(link_to_context)s > %(link_to_file)s (new) "
 msgstr ""
 
 #, python-format
-msgid "%(link_to_context)s > %(link_to_file)s/"
-msgstr ""
-
-#, python-format
-msgid "%(link_to_file)s"
-msgstr ""
-
-#, python-format
-msgid "%(link_to_file)s (new folder)"
+msgid "%(link_to_file)s (new)"
 msgstr ""
 
 #, python-format
@@ -504,14 +511,23 @@ msgid "Member %(link_to_user)s joined the group %(link_to_group)s"
 msgstr ""
 
 #, python-format
+msgid "%(link_to_context)s > %(link_to_user)s (joined)"
+msgstr ""
+
+#, python-format
+msgid "%(link_to_user)s (joined)"
+msgstr ""
+
+#, python-format
 msgid "Member %(link_to_user)s left the group %(link_to_group)s"
 msgstr ""
 
 #, python-format
-msgid "%(link_to_context)s > %(link_to_user)"
+msgid "%(link_to_context)s > %(link_to_user)s (left)"
 msgstr ""
 
-msgid "%(link_to_user)"
+#, python-format
+msgid "%(link_to_user)s (left)"
 msgstr ""
 
 #, python-format

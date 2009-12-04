@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-12-04 13:34+0200\n"
+"PO-Revision-Date: 2009-12-04 14:59+0200\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -493,20 +493,12 @@ msgid "A new folder '%(folder_title)s' for a group %(link_to_group)s was uploade
 msgstr "Grupėje %(link_to_group)s sukurtas aplankas '%(folder_title)s'."
 
 #, python-format
-msgid "%(link_to_context)s > %(link_to_file)s"
-msgstr ""
+msgid "%(link_to_context)s > %(link_to_file)s (new) "
+msgstr "%(link_to_context)s > %(link_to_file)s (naujas) "
 
 #, python-format
-msgid "%(link_to_context)s > %(link_to_file)s/"
-msgstr ""
-
-#, python-format
-msgid "%(link_to_file)s"
-msgstr ""
-
-#, python-format
-msgid "%(link_to_file)s (new folder)"
-msgstr ""
+msgid "%(link_to_file)s (new)"
+msgstr "%(link_to_file)s (naujas)"
 
 #, python-format
 msgid "New subject %(link_to_subject)s was created"
@@ -514,7 +506,7 @@ msgstr "Sukurtas naujas dalykas %(link_to_subject)s"
 
 #, python-format
 msgid "%(link_to_context)s (new subject)"
-msgstr ""
+msgstr "%(link_to_context)s (naujas dalykas)"
 
 #, python-format
 msgid "Subject %(link_to_subject)s was modified"
@@ -522,7 +514,7 @@ msgstr "Dalykas %(link_to_subject)s buvo redaguotas."
 
 #, python-format
 msgid "%(link_to_context)s (subject changed)"
-msgstr ""
+msgstr "%(link_to_context)s (dalykas pasikeitė)"
 
 #, python-format
 msgid "New forum post %(link_to_message)s was posted on %(link_to_group)s forums"
@@ -542,15 +534,24 @@ msgid "Member %(link_to_user)s joined the group %(link_to_group)s"
 msgstr "Prie grupės %(link_to_group)s prisijungė narys %(link_to_user)s."
 
 #, python-format
+msgid "%(link_to_context)s > %(link_to_user)s (joined)"
+msgstr "%(link_to_context)s > %(link_to_user)s (prisijungė)"
+
+#, python-format
+msgid "%(link_to_user)s (joined)"
+msgstr "%(link_to_user)s (prisijungė)"
+
+#, python-format
 msgid "Member %(link_to_user)s left the group %(link_to_group)s"
 msgstr "Iš grupės %(link_to_group)s išėjo narys %(link_to_user)s."
 
 #, python-format
-msgid "%(link_to_context)s > %(link_to_user)"
-msgstr ""
+msgid "%(link_to_context)s > %(link_to_user)s (left)"
+msgstr "%(link_to_context)s > %(link_to_user)s (paliko)"
 
-msgid "%(link_to_user)"
-msgstr ""
+#, python-format
+msgid "%(link_to_user)s (left)"
+msgstr "%(link_to_user)s (paliko)"
 
 #, python-format
 msgid "Group %(link_to_group)s started watching subject %(link_to_subject)s"
@@ -1006,7 +1007,7 @@ msgid "Year"
 msgstr "Metai"
 
 msgid "Select the year"
-msgstr ""
+msgstr "Pasirinkite metus"
 
 msgid "Group logo"
 msgstr "Grupės paveikslėlis"
@@ -1309,10 +1310,10 @@ msgid "Repeat the new password"
 msgstr "Pakartokite naują slaptažodį"
 
 msgid "grouped"
-msgstr ""
+msgstr "grupuoti įvykiai"
 
 msgid "ungrouped"
-msgstr ""
+msgstr "negrupuoti įvykiai"
 
 msgid ""
 "This is a list of all the recent events in the subjects you are watching "
@@ -1353,28 +1354,28 @@ msgid "Mailing list address"
 msgstr "Grupės el. konferencijos (el. pašto) adresas"
 
 msgid "Latest messages"
-msgstr ""
+msgstr "Naujausios žinutės"
 
 msgid "Latest events"
-msgstr ""
+msgstr "Naujausi įvykiai"
 
 msgid "No messages in group's forum"
-msgstr ""
+msgstr "Grupės paštas tuščias."
 
 msgid "No events for the group."
-msgstr ""
+msgstr "Nėra įvykių."
 
 msgid "Group forum"
-msgstr ""
+msgstr "Grupės paštas"
 
 msgid "Group events"
-msgstr ""
+msgstr "Grupės įvykiai"
 
 msgid "Latest files"
-msgstr ""
+msgstr "Naujausi failai"
 
 msgid "Latest pages"
-msgstr ""
+msgstr "Naujausi puslapiai"
 
 msgid "What have I been doing?"
 msgstr "Ir ką gi aš nuveikiau?"

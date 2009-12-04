@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-12-04 15:12+0200\n"
-"Last-Translator: Ignas Mikalajūnas <ignas@pow.lt>\n"
+"PO-Revision-Date: 2009-12-04 14:57+0200\n"
+"Last-Translator: Jaroslav Šatkevič <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
 "&& n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
@@ -489,19 +489,11 @@ msgid "A new folder '%(folder_title)s' for a group %(link_to_group)s was uploade
 msgstr "Do grupy %(link_to_group)s został dodany nowy folder %(folder_title)s! "
 
 #, python-format
-msgid "%(link_to_context)s > %(link_to_file)s"
+msgid "%(link_to_context)s > %(link_to_file)s (new) "
 msgstr ""
 
 #, python-format
-msgid "%(link_to_context)s > %(link_to_file)s/"
-msgstr ""
-
-#, python-format
-msgid "%(link_to_file)s"
-msgstr ""
-
-#, python-format
-msgid "%(link_to_file)s (new folder)"
+msgid "%(link_to_file)s (new)"
 msgstr ""
 
 #, python-format
@@ -538,14 +530,23 @@ msgid "Member %(link_to_user)s joined the group %(link_to_group)s"
 msgstr "Użytkownik %(link_to_user)s dołączył do grupy %(link_to_group)s"
 
 #, python-format
+msgid "%(link_to_context)s > %(link_to_user)s (joined)"
+msgstr ""
+
+#, python-format
+msgid "%(link_to_user)s (joined)"
+msgstr ""
+
+#, python-format
 msgid "Member %(link_to_user)s left the group %(link_to_group)s"
 msgstr "Użytkownik %(link_to_user)s opuścił grupę %(link_to_group)s "
 
 #, python-format
-msgid "%(link_to_context)s > %(link_to_user)"
+msgid "%(link_to_context)s > %(link_to_user)s (left)"
 msgstr ""
 
-msgid "%(link_to_user)"
+#, python-format
+msgid "%(link_to_user)s (left)"
 msgstr ""
 
 #, python-format
