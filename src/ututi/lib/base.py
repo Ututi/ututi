@@ -7,6 +7,8 @@ from datetime import datetime
 from sqlalchemy.exc import InternalError
 from sqlalchemy.exc import InvalidRequestError
 
+from mako.exceptions import TopLevelLookupException
+
 from paste.util.converters import asbool
 from pylons.controllers import WSGIController
 from pylons.templating import pylons_globals, render_mako as render
@@ -81,7 +83,7 @@ def render_lang(template_name, extra_vars=None, cache_key=None,
     for n, template in templates:
         try:
             return render(template, extra_vars, cache_key, cache_type, cache_expire)
-        except:
+        except TopLevelLookupException:
             if n > 0:
                 pass
             else:
