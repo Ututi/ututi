@@ -18,11 +18,15 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
 </div>
 </%def>
 
-<%def name="university(uni)">
+<%def name="location_tag(uni)">
 <div class="university_block">
   %if uni.logo is not None:
   <div class="logo">
     <img src="${url(controller='structure', action='logo', id=uni.id, width=26, height=26)}" alt="logo" />
+  </div>
+  %elif uni.parent is not None and uni.parent.logo is not None:
+  <div class="logo">
+    <img src="${url(controller='structure', action='logo', id=uni.parent.id, width=26, height=26)}" alt="logo" />
   </div>
   %endif
   <div class="title">
@@ -53,7 +57,7 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
 
 <%def name="universities(unis, ajax_url)">
     %for uni in unis:
-      ${university(uni)}
+      ${location_tag(uni)}
     %endfor
     <div id="pager">
       ${unis.pager(format='~3~',

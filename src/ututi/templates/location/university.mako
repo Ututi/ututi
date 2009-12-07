@@ -2,6 +2,7 @@
 <%namespace file="/search/index.mako" import="search_form"/>
 <%namespace file="/search/index.mako" import="search_results"/>
 <%namespace file="/portlets/structure.mako" import="*"/>
+<%namespace file="/anonymous_index/en.mako" import="*"/>
 
 <%def name="portlets()">
 <div id="sidebar">
@@ -29,11 +30,9 @@ ${h.stylesheet_link('/stylesheets/location.css')|n}
   <tr>
     %for group in children:
       <td style="width: 50%;">
-        <ul class="u-list">
         %for department in group:
-        <li><a href="${department.url()}" title="${department.title}">${department.title}</a></li>
+        ${location_tag(department)}
         %endfor
-        </ul>
       </td>
     %endfor
   </tr>

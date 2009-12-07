@@ -25,7 +25,7 @@ We should be able to click on a link that leads us to the page of the faculty.
     vu department list
     Search
 
-    >>> browser.printQuery("//ul[@class='u-list']/li/a/text()")
+    >>> browser.printQuery('id("faculties-list")//div[@class="title"]/a/text()')
     Ekonomikos fakultetas
     Geografijos fakultetas
 
