@@ -294,12 +294,19 @@ ${h.javascript_link('/javascripts/forms.js')|n}
       ${h.javascript_link('/javascripts/sugester.js')|n}
     %endif
 
-    ${h.javascript_link('/javascripts/ga.js')|n}
+
     <script type="text/javascript">
-      try {
-      var pageTracker = _gat._getTracker("${c.google_tracker}");
-      pageTracker._trackPageview();
-      } catch(err) {}
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', '${c.google_tracker}']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+      var ga = document.createElement('script');
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      ga.setAttribute('async', 'true');
+      document.documentElement.firstChild.appendChild(ga);
+      })();
+
     </script>
   </body>
 </html>
