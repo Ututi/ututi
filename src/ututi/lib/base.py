@@ -2,6 +2,7 @@
 
 Provides the BaseController class for subclassing.
 """
+import re
 from datetime import datetime
 
 from sqlalchemy.exc import InternalError
@@ -12,7 +13,7 @@ from mako.exceptions import TopLevelLookupException
 from paste.util.converters import asbool
 from pylons.controllers import WSGIController
 from pylons.templating import pylons_globals, render_mako as render
-from pylons import c, config
+from pylons import c, config, request, response
 from pylons.i18n.translation import get_lang
 
 from ututi.lib.security import current_user
@@ -28,7 +29,6 @@ class BaseController(WSGIController):
         # available in environ['pylons.routes_dict']
 
         c.user = current_user()
-        c.google_tracker = config['google_tracker']
         c.testing = asbool(config.get('testing', False))
         c.gg_enabled = asbool(config.get('gg_enabled', False))
         c.tpl_lang = config.get('tpl_lang', 'en')
@@ -45,6 +45,12 @@ class BaseController(WSGIController):
             environ['repoze.who.identity'] = c.user.id
             c.user.last_seen = datetime.utcnow()
             meta.Session.commit()
+        else:
+            #the user is anonymous - check if he is coming from google search
+            referrer = request.headers.get('referer', '')
+            r = re.compile('www\.google\.[a-zA-Z]{2,4}/url')
+            if r.search(referrer) is not None:
+                response.set_cookie('camefromsearch', 'yes', expires=3600)
 
         try:
             return WSGIController.__call__(self, environ, start_response)
