@@ -21,7 +21,7 @@ After registration is complete we should be hailed by our welcome
 screen:
 
     >>> browser.url
-    'http://localhost/profile/register_welcome'
+    'http://localhost/register/welcome'
 
     >>> browser.printQuery("id('page-content')//h3/text()")
     Join a group
