@@ -21,7 +21,7 @@
           data: {folder: ''},
           onSubmit : function(file, ext, iframe){
               %if label is not None:
-                pageTracker._trackEvent('action_portlets', 'upload_file', '${label}');
+                _gaq.push(['_trackEvent', 'action_portlets', 'upload_file', '${label}']);
               %endif
               iframe['progress_indicator'] = $(document.createElement('div'));
               $(list).append(iframe['progress_indicator']);

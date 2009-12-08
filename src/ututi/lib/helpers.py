@@ -189,7 +189,7 @@ def file_size(size):
 
 def trackEvent(obj, action, label, category='navigation'):
     # _trackEvent(category, action, optional_label, optional_value)
-    return """onclick="pageTracker._trackEvent('%s', '%s', '%s');" """ % (
+    return """onclick="_gaq.push(['_trackEvent', '%s', '%s', '%s']);" """ % (
         category,
         action,
         label)

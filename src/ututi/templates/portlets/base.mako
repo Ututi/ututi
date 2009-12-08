@@ -22,7 +22,7 @@
     <script type="text/javascript">
     //<![CDATA[
       $("#${id+'_content'} .click").click(function() {
-        pageTracker._trackEvent('action_portlets', 'open', '${label}');
+        _gaq.push(['_trackEvent', 'action_portlets', 'open', '${label}']);
       });
     //]]>
     </script>

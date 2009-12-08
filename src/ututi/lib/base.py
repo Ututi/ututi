@@ -33,6 +33,7 @@ class BaseController(WSGIController):
         c.gg_enabled = asbool(config.get('gg_enabled', False))
         c.tpl_lang = config.get('tpl_lang', 'en')
         c.mailing_list_host = config.get('mailing_list_host', '')
+        c.google_tracker = config['google_tracker']
 
         lang = get_lang()
         if not lang:

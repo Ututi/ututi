@@ -171,7 +171,7 @@
     $(document).ready(function() {
       $('#recommendation_submit').click(function() {
         $(this).parents('.form-field').addClass('loading');
-        pageTracker._trackEvent('action_portlets', 'send', 'ututi_recommend');
+        _gaq.push(['_trackEvent', 'action_portlets', 'send', 'ututi_recommend']);
         $.post("${url(controller='home', action='send_recommendations', js=1)}",
             $(this).parents('form').serialize(),
             function(data) {
