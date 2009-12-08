@@ -28,6 +28,28 @@ class BaseController(WSGIController):
         # the request is routed to. This routing information is
         # available in environ['pylons.routes_dict']
 
+        # Global variables
+        # XXX reduce the scope of most of them
+        c.breadcrumbs = None
+        c.object_location = None
+        c.hash = None
+        c.email = None
+        c.serve_file = None
+        c.security_context = None
+        c.obj_type = None
+        c.blog_entries = None
+        c.results = None
+        c.step = None
+        c.searched = None
+        c.slideshow = None
+        c.structure = None
+        c.login_form_url = None
+        c.final_msg = None
+        c.message_class = None
+        c.show_login = None
+        c.text = None
+        c.tags = None
+
         c.user = current_user()
         c.testing = asbool(config.get('testing', False))
         c.gg_enabled = asbool(config.get('gg_enabled', False))
