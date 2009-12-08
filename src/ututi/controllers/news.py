@@ -95,6 +95,7 @@ class NewsController(BaseController):
         for event in events:
             section = sections.setdefault(event.context.id, {})
             section['title'] = event.context.title
+            section['url'] = event.context.url(qualified=True)
             section_events = section.setdefault('events', [])
             formatted_event = self._format_event(event)
             if formatted_event not in section_events:

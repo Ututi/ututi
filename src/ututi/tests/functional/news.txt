@@ -127,7 +127,7 @@ And look at the emails:
     ['admin@ututi.lt']
     Ututi news: 2 new pages
     <BLANKLINE>
-    Matematinė analizė
+    Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
     - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
@@ -137,7 +137,7 @@ And look at the emails:
     ['user2@ututi.lt']
     Ututi news: 2 new pages
     <BLANKLINE>
-    Matematinė analizė
+    Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
     - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
@@ -147,7 +147,7 @@ And look at the emails:
     ['user@ututi.lt']
     Ututi news: 2 new pages
     <BLANKLINE>
-    Matematinė analizė
+    Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
@@ -190,7 +190,7 @@ And we continue uploading files:
     ['admin@ututi.lt']
     Ututi news: 2 new pages
     <BLANKLINE>
-    Matematinė analizė
+    Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
     - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
@@ -200,7 +200,7 @@ And we continue uploading files:
     ['user2@ututi.lt']
     Ututi news: 2 new files and 2 new pages
     <BLANKLINE>
-    Matematinė analizė
+    Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
     - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
@@ -212,7 +212,7 @@ And we continue uploading files:
     ['user@ututi.lt']
     Ututi news: 2 new files and 2 new pages
     <BLANKLINE>
-    Matematinė analizė
+    Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
@@ -248,7 +248,7 @@ Let's try hourly now:
     ['admin@ututi.lt']
     Ututi news: 2 new pages
     <BLANKLINE>
-    Matematinė analizė
+    Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
     - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
@@ -274,7 +274,7 @@ Admin should stop getting events in his daily news:
     ['user2@ututi.lt']
     Ututi news: 2 new files and 2 new pages
     <BLANKLINE>
-    Matematinė analizė
+    Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
     - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
@@ -286,7 +286,7 @@ Admin should stop getting events in his daily news:
     ['user@ututi.lt']
     Ututi news: 2 new files and 2 new pages
     <BLANKLINE>
-    Matematinė analizė
+    Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
@@ -310,7 +310,7 @@ Unless he starts watching the subject himself:
     ['admin@ututi.lt']
     Ututi news: 2 new pages
     <BLANKLINE>
-    Matematinė analizė
+    Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
     - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
@@ -320,7 +320,7 @@ Unless he starts watching the subject himself:
     ['user2@ututi.lt']
     Ututi news: 2 new files and 2 new pages
     <BLANKLINE>
-    Matematinė analizė
+    Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
     - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
@@ -332,7 +332,7 @@ Unless he starts watching the subject himself:
     ['user@ututi.lt']
     Ututi news: 2 new files and 2 new pages
     <BLANKLINE>
-    Matematinė analizė
+    Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
@@ -354,7 +354,7 @@ Hmm, now what happens if user2 starts ignoring the subject:
     ['admin@ututi.lt']
     Ututi news: 2 new pages
     <BLANKLINE>
-    Matematinė analizė
+    Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
     - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
@@ -364,7 +364,7 @@ Hmm, now what happens if user2 starts ignoring the subject:
     ['user@ututi.lt']
     Ututi news: 2 new files and 2 new pages
     <BLANKLINE>
-    Matematinė analizė
+    Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.

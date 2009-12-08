@@ -1,7 +1,7 @@
 ${subject}
 
 %for section in sections:
-${section['title']}
+${section['title']} (${section['url']})
 
 %for event in section['events']:
 - ${event['text_item']}
