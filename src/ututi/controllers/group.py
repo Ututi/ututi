@@ -305,7 +305,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
 
     def _add_form(self):
         current_year = date.today().year
-        c.years = range(current_year - 10, current_year + 5)
+        c.years = range(current_year - 12, current_year + 3)
         return render('group/add.mako')
 
     @validate(schema=GroupAddingForm, post_only = False, on_get = True)
