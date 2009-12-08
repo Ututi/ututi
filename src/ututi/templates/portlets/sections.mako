@@ -24,9 +24,7 @@
   %if not 'gg' in exclude and h.check_crowds(['root']):
   ${user_gg_portlet()}
   %endif
-  %if not 'groups' in exclude:
-  ${user_groups_portlet()}
-  %endif
+  ${ututi_prizes_portlet()}
   %if not 'banners' in exclude:
   ${ututi_banners_portlet()}
   %endif
@@ -47,6 +45,7 @@
   %if not 'members' in exclude:
   ${group_invite_member_portlet()}
   %endif
+  ${ututi_prizes_portlet()}
   %if not 'subjects' in exclude:
   ${group_watched_subjects_portlet()}
   %endif

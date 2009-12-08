@@ -32,16 +32,22 @@
 </%self:portlet>
 </%def>
 
-<%def name="ututi_dalintis_portlet()">
-%if c.tpl_lang == 'lt':
+<%def name="ututi_prizes_portlet()">
+%if c.tpl_lang in ['lt', 'pl']:
 <%self:portlet id="dalintis_portlet" portlet_class="border-less">
 <%def name="header()">
 </%def>
 <div class="structured_info">
   <div class="bunner">
-    <a href="http://dalintis.lt/konspektai" title="dalintis.lt">
-      <img src="${url('/images/bunners/dalintis_konspektai.png')}" alt="dalintis.lt" />
+    %if c.tpl_lang == 'lt':
+    <a href="http://blog.ututi.lt/2009/12/7/ne-kaledines-u-dovanos">
+      <img src="${url('/images/bunners/UTUTI_dovanos.png')}" alt="" />
     </a>
+    %elif c.tpl_lang == 'pl':
+    <a href="http://blog.ututi.pl/2009/12/1/konkurs-najblizszego-tygodnia">
+      <img src="${url('/images/bunners/UTUTI_prezenty.png')}" alt="" />
+    </a>
+    %endif
   </div>
 </div>
 </%self:portlet>
