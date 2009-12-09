@@ -387,3 +387,13 @@ Hmm, now what happens if user2 starts ignoring the subject:
     (564321L, u'f2.txt (http://localhost:80/subject/vu/mat_analize/file/10/get)')
 
     >>> gg.sent_messages[:] = []
+
+Regression test - file moves should not send events!
+
+    >>> count = len(meta.Session.query(Event).all())
+
+    >>> res = app.post("/subject/vu/mat_analize/file/9/move",
+    ...                params={'target_folder': 'Some folder'})
+
+    >>> len(meta.Session.query(Event).all()) == count
+    True

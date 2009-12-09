@@ -527,6 +527,11 @@ CREATE FUNCTION file_event_trigger() RETURNS trigger AS $$
     DECLARE parent_type varchar(20) := NULL;
     BEGIN
       IF NOT NEW.parent_id is NULL THEN
+        IF TG_OP = 'UPDATE' THEN
+          IF OLD.parent_id = NEW.parent_id THEN
+            RETURN NEW;
+          END IF;
+        END IF;
         SELECT content_type INTO parent_type FROM content_items WHERE id = NEW.parent_id;
         IF parent_type in ('subject', 'group') THEN
           INSERT INTO events (object_id, author_id, event_type, file_id)
