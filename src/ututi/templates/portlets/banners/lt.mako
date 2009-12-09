@@ -1,9 +1,4 @@
 <div class="bunner">
-  <a href="http://dalintis.lt/" title="dalintis.lt">
-    <img src="${url('/images/bunners/dalintis_generic.png')}" alt="dalintis.lt" />
-  </a>
-</div>
-<div class="bunner">
   <a href="http://aukok.lt" title="aukok.lt">
     <img src="${url('/images/bunners/aukoklogo.png')}" alt="aukok.lt" />
   </a>
