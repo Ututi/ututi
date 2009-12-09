@@ -963,6 +963,7 @@ class Subject(ContentItem, FolderMixin):
             all_recipients.extend(group.recipients_gg())
 
         usms = meta.Session.query(UserSubjectMonitoring).\
+            join(User).\
             filter(UserSubjectMonitoring.subject==self).\
             filter(User.gadugadu_get_news==True).\
             filter(User.gadugadu_confirmed==True).all()
@@ -1315,7 +1316,7 @@ class NotifyGG(MapperExtension):
         recipients = []
         if isinstance(instance.parent, (Group, Subject)):
             for interested_user in instance.parent.recipients_gg():
-                if interested_user is not c.user and interested_user.gadugadu_uin is not None:
+                if interested_user is not c.user:
                     recipients.append(interested_user.gadugadu_uin)
 
         for uin in sorted(recipients):
