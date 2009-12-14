@@ -161,7 +161,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
             c.user.watchSubject(subject)
             h.flash(_("The subject has been added to your watched subjects list."))
         else:
-            c.user.ignoreSubject(subject)
+            c.user.unwatchSubject(subject)
             h.flash(_("The subject has been removed from your watched subjects list."))
 
         meta.Session.commit()

@@ -46,6 +46,10 @@ We can add a subject at the url /subject/add
     Close
     The subject has been removed from your watched subjects list.
 
+    And the button's action turns into 'watch subject' again
+    >>> browser.printQuery('id("subject_info_portlet_content")/div[@class="footer"]/span/a/span/text()')
+    Watch subject
+
     >>> browser.open('http://localhost/subjects/add')
 
     >>> browser.getControl(name='location-1').value = 'vu'
@@ -127,5 +131,4 @@ When creating a subject, the user can select to watch it:
 
     >>> browser.open('/profile/subjects')
     >>> browser.printQuery("//ul[@class='personal_watched_subjects']/li/a/text()")
-    Matematinė analizė
     Testing subject
