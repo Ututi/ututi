@@ -10,6 +10,7 @@ import logging
 import warnings
 import string
 import StringIO
+from math import ceil
 from random import Random
 from binascii import a2b_base64, b2a_base64
 from pylons import url
@@ -678,6 +679,14 @@ class FolderMixin(object):
     def file_count(self):
         return len([file for file in self.files if not file.isNullFile()])
 
+    @property
+    def file_size(self):
+        return sum([file.size for file in self.files if not file.isNullFile()])
+
+    @property
+    def free_size(self):
+        raise NotImplementedError("This method should be overridden by Folder-like containers")
+
     def getFolder(self, title):
         return self.folders_dict.get(title, None)
 
@@ -853,6 +862,18 @@ class Group(ContentItem, FolderMixin):
             .count()
 
     logo = logo_property()
+
+    available_size = 200 * 1024**2
+
+    @property
+    def free_size(self):
+        """The size of files in group private area is limited to 200 Mb."""
+        return self.available_size - self.file_size
+
+    @property
+    def free_size_points(self):
+        """Return the amount of free size in the area in points from 5 (empty) to 0 (full)."""
+        return ceil(5 * float(self.file_size) / self.available_size)
 
 
 group_members_table = None

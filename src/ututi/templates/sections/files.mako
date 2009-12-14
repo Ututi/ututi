@@ -288,12 +288,20 @@ $(document).ready(function(){
         %endif
         <span class="small">(${ungettext("%(count)s file", "%(count)s files", obj.file_count) % dict(count = obj.file_count)})</span>
       </span>
-      %if comment:
+      %if 'size' in controls:
+        ${h.image('/images/details/pbar%d.png' % obj.free_size_points, alt=h.file_size(obj.file_size), class_='area_size_points')|n}
+      %endif
+    </h2>
+    %if 'size' in controls:
+      <div class="area_size">${_('free space:')} ${h.file_size(obj.free_size)}</div>
+    %endif
+
+    %if comment:
       <span class="comment">
         ${comment}
       </span>
-      %endif
-    </h2>
+    %endif
+
     <div class="container ${cls_container}">
       <input type="hidden" id="file_upload_url-${section_id}"
              value="${obj.url(action='upload_file')}" />

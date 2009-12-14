@@ -16,6 +16,17 @@ div.section h2.click {
   margin-top: 5px;
 }
 
+div.area_size {
+  font-size: 12px;
+  color: #808080;
+  float: right;
+}
+
+img.area_size_points {
+  margin-top: 5px;
+  float: right;
+}
+
 /* expanding section headings  */
 .click2show h2.click .cont {
   padding-right: 15px;
