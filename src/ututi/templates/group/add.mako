@@ -129,7 +129,7 @@ from ututi.lib.security import is_root
       </div>
       <div class="group_information">
         <div>
-          <a class="group_title" href="${group.url()}" title="${group.title}">${h.ellipsis(group.title, 40)}</a>
+          <a class="group_title" href="${group.url()}" title="${group.title}">${h.ellipsis(group.title, 30)}</a>
           <a class="btn" href="${group.url()}"><span>${_('join')}</span></a>
         </div>
         <div class="group_members">
@@ -137,7 +137,7 @@ from ututi.lib.security import is_root
           <div class="group_member">
             <div class="member_logo">
               <a href="${member.url()}" title="${member.fullname}">
-                <img src="${member.url(action='logo', height="20", width="20")}" alt="${member.fullname}" />
+                <img src="${member.url(action='logo', height="15", width="15")}" alt="${member.fullname}" />
               </a>
             </div>
             ${h.ellipsis(member.fullname, 20)}

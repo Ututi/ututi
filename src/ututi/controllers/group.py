@@ -474,7 +474,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         if group.logo is not None:
             return serve_image(group.logo, width=width, height=height)
         else:
-            stream = resource_stream("ututi", "public/images/details/icon_group.png").read()
+            stream = resource_stream("ututi", "public/images/details/icon_group_large.png").read()
             return serve_image(stream, width, height)
 
     @group_action
