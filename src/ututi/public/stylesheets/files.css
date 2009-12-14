@@ -55,6 +55,16 @@ div.section div.controls div.single_upload {
   background: white;
 }
 
+div.section div.controls div.single_upload .target_item {
+  height: 19px;
+  margin-right: -20px;
+}
+
+div.section div.controls div.single_upload .target_item div {
+  padding-top: 2px;
+  height: 17px;
+}
+
 div.section div.controls div.file_upload div.file_upload_dropdown {
   position: absolute;
   width: 150px;

@@ -234,12 +234,14 @@ $(document).ready(function(){
             </li>
 </%def>
 
-<%def name="folder_button(folder, section_id, fid, cls='')">
-  % if folder.title == '':
-    <div class="target_item ${cls}"><div class="upload target" id="file_upload_button-${section_id}-${fid}">${_('Here')}</div></div>
-  % else:
-    <div class="target_item ${cls}"><div class="upload target" id="file_upload_button-${section_id}-${fid}">${h.ellipsis(folder.title, 17)}</div></div>
-  % endif
+<%def name="folder_button(folder, section_id, fid, cls='', title=None)">
+  <%
+     if title is None and folder.title != '':
+         title = folder.title
+     elif title is None and folder.title == '':
+         title = _('Here')
+  %>
+  <div class="target_item ${cls}"><div class="upload target" id="file_upload_button-${section_id}-${fid}">${h.ellipsis(title, 17)}</div></div>
 </%def>
 
 <%def name="folder(folder, section_id, fid)">
@@ -312,7 +314,7 @@ $(document).ready(function(){
 
         <div class="single_upload ${not single_folder and 'hidden' or ''}">
           <div class="button"><div class="inner">
-            <%self:folder_button folder="${obj.folders[0]}" section_id="${section_id}" fid="${0}" />
+            <%self:folder_button folder="${obj.folders[0]}" section_id="${section_id}" fid="${0}" title="${_('Upload file')}" />
           </div></div>
         </div>
         <div class="file_upload upload_dropdown click2show ${single_folder and 'hidden' or ''}">
