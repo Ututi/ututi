@@ -26,6 +26,7 @@ $(document).ready(function(){
                           $(ui.sender).sortable('cancel');
                           new_item.parents('.folder').children('.message').hide();
                           $('.delete_button', new_item).click(deleteFile);
+                          updateSizeInformation($('.section.size_indicated'));
                       },
                       error: function(msg){
                           $(ui.sender).sortable('cancel');
@@ -48,6 +49,7 @@ $(document).ready(function(){
                           } else {
                               ui.item.parents('.folder').children('.message').hide();
                           }
+                          updateSizeInformation($('.section.size_indicated'));
                       },
                       error: function(msg){
                           $(ui.sender).sortable('cancel');
@@ -120,6 +122,7 @@ $(document).ready(function(){
               $('.folder', result_area).append(response);
               $('.delete_button', result_area).click(deleteFile);
               $('.folder .message', result_area).hide();
+              updateSizeInformation($(result_area).parents('.section'));
           }
       });
 
@@ -162,6 +165,7 @@ $(document).ready(function(){
                             control.removeClass('hidden');
                             control.siblings('.single_upload').addClass('hidden');
                           }
+                          updateSizeInformation($('#file_section-'+section_id));
                         }
                   }});
         }
@@ -184,6 +188,7 @@ $(document).ready(function(){
                       control.addClass('hidden');
                       control.siblings('.single_upload').removeClass('hidden');
                     }
+                    updateSizeInformation($('#file_section-'+section_id));
                 }});
     }
 
@@ -197,6 +202,7 @@ $(document).ready(function(){
                     if ($('.file', folder).size() == 0) {
                         $('.message', folder).show();
                     }
+                    updateSizeInformation($(folder).parents('.section'));
         }});
     }
 
@@ -206,6 +212,23 @@ $(document).ready(function(){
         newFolder(event.target);
         return false;
     });
+
+    function updateSizeInformation(section) {
+      section = $(section)
+      if (section.hasClass('size_indicated')){
+        var ids = section[0].id.split('-');
+        section_id = ids[1];
+        url = $('#file_size_url-'+section_id).val();
+        $.post(url,
+               {section_id: section_id},
+               function(data, textStatus) {
+                 section_id = data['section_id'];
+                 $('#file_section-'+section_id+' .area_size_points').replaceWith(data['image']);
+                 $('#file_section-'+section_id+' .area_size').replaceWith(data['text']);
+               },
+               'json');
+      }
+    }
 
 });
 //]]>
@@ -271,8 +294,16 @@ $(document).ready(function(){
       </div>
 </%def>
 
+<%def name="free_space_indicator(obj)">
+  ${h.image('/images/details/pbar%d.png' % obj.free_size_points, alt=h.file_size(obj.file_size), class_='area_size_points')|n}
+</%def>
+
+<%def name="free_space_text(obj)">
+  <div class="area_size">${_('free space:')} ${h.file_size(obj.free_size)}</div>
+</%def>
+
 <%def name="file_browser(obj, section_id=0, collapsible=False, title=None, comment=None, controls=['upload', 'folder'])">
-  <div class="section click2show ${collapsible and '' or 'open'}" id="file_section-${section_id}">
+  <div class="section click2show ${collapsible and '' or 'open'} ${('size' in controls) and 'size_indicated' or ''}" id="file_section-${section_id}">
     <%
        cls_head = cls_container = ''
        if collapsible:
@@ -289,11 +320,11 @@ $(document).ready(function(){
         <span class="small">(${ungettext("%(count)s file", "%(count)s files", obj.file_count) % dict(count = obj.file_count)})</span>
       </span>
       %if 'size' in controls:
-        ${h.image('/images/details/pbar%d.png' % obj.free_size_points, alt=h.file_size(obj.file_size), class_='area_size_points')|n}
+        ${free_space_indicator(obj)}
       %endif
     </h2>
     %if 'size' in controls:
-      <div class="area_size">${_('free space:')} ${h.file_size(obj.free_size)}</div>
+      ${free_space_text(obj)}
     %endif
 
     %if comment:
@@ -303,6 +334,10 @@ $(document).ready(function(){
     %endif
 
     <div class="container ${cls_container}">
+      %if 'size' in controls:
+      <input type="hidden" id="file_size_url-${section_id}"
+             value="${obj.url(action='file_info')}" />
+      %endif
       <input type="hidden" id="file_upload_url-${section_id}"
              value="${obj.url(action='upload_file')}" />
       <input type="hidden" id="create_folder_url-${section_id}"

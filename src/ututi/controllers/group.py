@@ -8,7 +8,7 @@ from pkg_resources import resource_stream
 from pylons import c, config, request, url
 from pylons.templating import render_mako_def
 from pylons.controllers.util import redirect_to, abort
-from pylons.decorators import validate
+from pylons.decorators import validate, jsonify
 from pylons.i18n import _
 
 from webhelpers import paginate
@@ -910,3 +910,15 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         else:
             abort(404)
 
+    @jsonify
+    @group_action
+    @ActionProtector("admin", "moderator", "member")
+    def file_info(self, group):
+        """Information on the group's usage of the files area."""
+        info = {
+            'image' : render_mako_def('sections/files.mako', 'free_space_indicator', obj = group),
+            'text' : render_mako_def('sections/files.mako', 'free_space_text', obj = group) }
+        section_id = request.POST.get('section_id', None)
+        if section_id is not None:
+            info['section_id'] = section_id
+        return info

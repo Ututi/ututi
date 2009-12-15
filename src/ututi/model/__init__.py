@@ -863,7 +863,9 @@ class Group(ContentItem, FolderMixin):
 
     logo = logo_property()
 
-    available_size = 200 * 1024**2
+    @property
+    def available_size(self):
+        return int(config.get('group_file_limit', '200')) * 1024**2
 
     @property
     def free_size(self):
