@@ -684,10 +684,6 @@ class FolderMixin(object):
         return sum([file.size for file in self.files if not file.isNullFile()])
 
     @property
-    def free_size(self):
-        raise NotImplementedError("This method should be overridden by Folder-like containers")
-
-    @property
     def upload_status(self):
         """
            1 - allow uploading, with folders

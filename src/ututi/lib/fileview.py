@@ -35,16 +35,17 @@ class FileViewMixin(object):
     def _upload_file_basic(self, obj):
         file = request.params['attachment']
         folder = request.params['folder']
-        if file is not None and file != '':
-            f = File(file.filename,
-                     file.filename,
-                     mimetype=file.type)
-            f.store(file.file)
-            f.folder = folder
-            obj.files.append(f)
-            meta.Session.add(f)
-            meta.Session.commit()
-            return f
+        if not hasattr(obj, 'free_size') or obj.free_size > 0:
+            if file is not None and file != '':
+                f = File(file.filename,
+                         file.filename,
+                         mimetype=file.type)
+                f.store(file.file)
+                f.folder = folder
+                obj.files.append(f)
+                meta.Session.add(f)
+                meta.Session.commit()
+                return f
 
     def _upload_file(self, obj):
         f = self._upload_file_basic(obj)
