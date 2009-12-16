@@ -9,6 +9,7 @@ from sqlalchemy.sql.expression import not_
 from sqlalchemy import func
 from magic import from_buffer
 from datetime import date
+from webhelpers import paginate
 
 from pylons import request, c
 from pylons.controllers.util import redirect_to, abort
@@ -83,7 +84,12 @@ class AdminController(BaseController):
 
     @ActionProtector("root")
     def users(self):
-        c.users = meta.Session.query(User).order_by(User.id).all()
+        users = meta.Session.query(User).order_by(desc(User.id))
+        c.users = paginate.Page(
+            users,
+            page=int(request.params.get('page', 1)),
+            item_count=users.count() or 0,
+            items_per_page=100)
         return render('/admin/users.mako')
 
     @ActionProtector("root")

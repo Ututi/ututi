@@ -28,14 +28,14 @@ Having uploaded the file, we should be presented with a list of all files presen
 After the download of the file, the downloaded files count in the user list should indicate this:
     >>> browser.open('http://localhost/admin/users')
     >>> browser.printQuery('id("user_list")//li//text()')
-    Adminas Adminovix
-    joined  (1)
-    Alternative user
+    Third user
     joined  (0)
     Second user
     joined  (0)
-    Third user
+    Alternative user
     joined  (0)
+    Adminas Adminovix
+    joined  (1)
 
 
 The files is stored in our upload directory:
