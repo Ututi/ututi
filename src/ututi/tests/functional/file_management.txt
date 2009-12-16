@@ -35,6 +35,16 @@ File upload:
       ...
     </li>
 
+    >>> res = app.post("/group/moderators/file_info",
+    ...                params={'section_id': 0})
+    >>> print res.body
+    {"text": "\n  <div class=\"area_size\">free space: 10.0 Mb</div>\n", "image": "\n  <img alt=\"0.0 b\" class=\"area_size_points\" src=\"/images/details/pbar0.png\" />\n", "section_id": "0"}
+
+    >>> res = app.post("/group/moderators/upload_status",
+    ...                params={'section_id': 0})
+    >>> print res.body
+    {"status": 2, "section_id": "0"}
+
     >>> res = app.post("/group/moderators/upload_file",
     ...                params={'folder': ''},
     ...                upload_files=[("attachment", "other_text.txt", "Test Test")])
@@ -54,6 +64,16 @@ File upload:
       <a href="/group/moderators/file/6/get">more_text.txt</a>
       ...
     </li>
+
+    >>> res = app.post("/group/moderators/file_info",
+    ...                params={'section_id': 0})
+    >>> print res.body
+    {"text": "\n  <div class=\"area_size\">free space: 10.0 Mb</div>\n", "image": "\n  <img alt=\"18.0 b\" class=\"area_size_points\" src=\"/images/details/pbar1.png\" />\n", "section_id": "0"}
+
+    >>> res = app.post("/group/moderators/upload_status",
+    ...                params={'section_id': 0})
+    >>> print res.body
+    {"status": 1, "section_id": "0"}
 
 Empty folder creation:
 
