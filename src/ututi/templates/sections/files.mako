@@ -160,11 +160,6 @@ $(document).ready(function(){
                             cancel: '.message',
                             receive: folderReceive
                           });
-                          control = section.parents('.upload_dropdown');
-                          if (control.find('.target_item').size() > 1) {
-                            control.removeClass('hidden');
-                            control.siblings('.single_upload').addClass('hidden');
-                          }
                           updateSizeInformation($('#file_section-'+section_id));
                         }
                   }});
@@ -183,11 +178,7 @@ $(document).ready(function(){
                     $('#file_area-' + section_id + '-' + fid).hide()
                     btn = $('#file_upload_button-' + section_id + '-' + fid);
                     control = btn.parents('.upload_dropdown');
-                    btn.parent().remove()
-                    if (control.find('.target_item').size() == 1) {
-                      control.addClass('hidden');
-                      control.siblings('.single_upload').removeClass('hidden');
-                    }
+                    btn.parent().remove();
                     updateSizeInformation($('#file_section-'+section_id));
                 }});
     }
@@ -227,6 +218,29 @@ $(document).ready(function(){
                  $('#file_section-'+section_id+' .area_size').replaceWith(data['text']);
                },
                'json');
+
+        url = $('#upload_status_url-'+section_id).val();
+        $.post(url,
+               {section_id: section_id},
+               function(data, textStatus) {
+                 section_id = data['section_id'];
+                 status = data['status'];
+                 $('#file_section-'+section_id+' .upload_control').addClass('hidden');
+                 switch (status) {
+                   case 1:
+                     $('#file_section-'+section_id+' .file_upload').removeClass('hidden');
+                     break;
+                   case 2:
+                     $('#file_section-'+section_id+' .single_upload').removeClass('hidden');
+                     break;
+                   case 0:
+                     $('#file_section-'+section_id+' .no_upload').removeClass('hidden');
+                     $('#file_section-'+section_id+' .upload_forbidden').removeClass('hidden');
+                     break;
+                 }
+               },
+               'json');
+
       }
     }
 
@@ -337,6 +351,9 @@ $(document).ready(function(){
       %if 'size' in controls:
       <input type="hidden" id="file_size_url-${section_id}"
              value="${obj.url(action='file_info')}" />
+      <input type="hidden" id="upload_status_url-${section_id}"
+             value="${obj.url(action='upload_status')}" />
+
       %endif
       <input type="hidden" id="file_upload_url-${section_id}"
              value="${obj.url(action='upload_file')}" />
@@ -351,16 +368,17 @@ $(document).ready(function(){
         <div id="file_upload_progress-${section_id}" class="file_upload_progress">
         </div>
         <%
-           n = len(obj.folders)
-           single_folder = n == 1
+            n = len(obj.folders)
         %>
-
-        <div class="single_upload ${not single_folder and 'hidden' or ''}">
+        <div class="upload_control no_upload ${'' if obj.upload_status == 0 else 'hidden'}">
+             <a class="btn inactive"><span>${_('upload file to...')}</span></a>
+        </div>
+        <div class="upload_control single_upload ${'' if obj.upload_status == 2 else 'hidden'}">
           <div class="button"><div class="inner">
             <%self:folder_button folder="${obj.folders[0]}" section_id="${section_id}" fid="${0}" title="${_('Upload file')}" />
           </div></div>
         </div>
-        <div class="file_upload upload_dropdown click2show ${single_folder and 'hidden' or ''}">
+        <div class="upload_control file_upload upload_dropdown click2show ${'' if obj.upload_status == 1 else 'hidden'}">
           <div class="click button">
             <div class="inner">
               ${_('upload file to...')}
@@ -379,8 +397,8 @@ $(document).ready(function(){
             %endfor
           </div>
         </div>
-        ${h.image('/images/details/icon_question.png', alt=_('Upload the file to any folder.'), class_='tooltip')|n}
         %endif
+
         %if 'folder' in controls:
         <div style="float: left; margin-left: 20px;">
           <form action="${obj.url(action='create_folder')}">
@@ -395,6 +413,9 @@ $(document).ready(function(){
         </div>
         %endif
         <br class="clear-left"/>
+        <div class="upload_control upload_forbidden ${'' if obj.upload_status == 0 else 'hidden'}">
+          ${_('No more space for private files. We recommend moving files into subjects or upgrading the group.')}
+        </div>
       </div>
       %endif
       % for fid, folder in enumerate(obj.folders):

@@ -301,6 +301,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         c.serve_file = file
 
         c.breadcrumbs.append(self._actions('files'))
+
         return render('group/files.mako')
 
     def _add_form(self):
@@ -922,3 +923,17 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         if section_id is not None:
             info['section_id'] = section_id
         return info
+
+    @jsonify
+    @group_action
+    @ActionProtector("admin", "moderator", "member")
+    def upload_status(self, group):
+        """
+           Information on the group's file upload limits.
+           1 - allow uploading, with folders
+           2 - allow uploading, no folders
+           0 - limit reached, no uploads
+        """
+        section_id = request.POST.get('section_id', None)
+
+        return {'status' : group.upload_status, "section_id" : section_id}

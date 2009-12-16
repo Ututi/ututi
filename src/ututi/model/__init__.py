@@ -687,6 +687,14 @@ class FolderMixin(object):
     def free_size(self):
         raise NotImplementedError("This method should be overridden by Folder-like containers")
 
+    @property
+    def upload_status(self):
+        """
+           1 - allow uploading, with folders
+           2 - allow uploading, no folders
+        """
+        return 1 if (len(self.folders) > 1) else 2
+
     def getFolder(self, title):
         return self.folders_dict.get(title, None)
 
@@ -870,12 +878,32 @@ class Group(ContentItem, FolderMixin):
     @property
     def free_size(self):
         """The size of files in group private area is limited to 200 Mb."""
-        return self.available_size - self.file_size
+        avail = self.available_size - self.file_size
+        if avail < 0:
+            avail = 0
+        return avail
 
     @property
     def free_size_points(self):
         """Return the amount of free size in the area in points from 5 (empty) to 0 (full)."""
-        return ceil(5 * float(self.file_size) / self.available_size)
+        pts = ceil(5 * float(self.file_size) / self.available_size)
+        if pts > 5:
+            pts = 5
+        return pts
+
+    @property
+    def upload_status(self):
+        """
+           Information on the group's file upload limits.
+           1 - allow uploading, with folders
+           2 - allow uploading, no folders
+           0 - limit reached, no uploads
+        """
+        upload_status = self.free_size > 0 and 1 or 0
+        if upload_status == 1 and len(self.folders) == 1:
+            upload_status = 2
+        return upload_status
+
 
 
 group_members_table = None
