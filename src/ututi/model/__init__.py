@@ -874,7 +874,7 @@ class Group(ContentItem, FolderMixin):
 
     @property
     def available_size(self):
-        return int(config.get('group_file_limit', '200')) * 1024**2
+        return int(config.get('group_file_limit', 200*1024**2))
 
     @property
     def free_size(self):
