@@ -36,3 +36,9 @@ visible in the dummy payment page:
     >>> browser.getControl('Support Ututi!').click()
     >>> browser.getLink('Process payment').url
     'http://localhost/process_transaction?status=1&lang=LIT&transaction=&name=Jonas&transaction2=&_ss2=&paytext=Remiam%20remiam&orderid=support_1&merchantid=139718&currency=LTL&amount=0&error=&test=1&surename=Petraitis&payment=Snoras&_ss1='
+
+Let's click it, and register the payment in the database:
+
+    >>> browser.getLink('Process payment').click()
+    >>> browser.contents
+    'OK'

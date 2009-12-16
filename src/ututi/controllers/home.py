@@ -394,3 +394,6 @@ class HomeController(UniversityListMixin):
                 redirect_to(url(controller='group', action='add'))
 
         return render('/home/join.mako')
+
+    def process_transaction(self):
+        return 'OK'
