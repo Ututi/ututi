@@ -1,3 +1,4 @@
+from hashlib import md5
 import re
 """Helper functions
 
@@ -131,26 +132,32 @@ def ellipsis(text, max=20):
 
 from ututi.lib.security import check_crowds
 
+
 def selected_item(items):
     for item in items:
         if item.get('selected', False):
             return item
 
+
 def unselected_items(items):
     return [item for item in items if not item.get('selected', False)]
+
 
 def marked_list(items):
     items[-1]['last_item'] = True
     return items
+
 
 def get_timezone():
     from pylons import config
     tz = config.get('timezone')
     return pytz.timezone(tz)
 
+
 def get_locale():
     from pylons import config
     return config.get('locale')
+
 
 def fmt_dt(dt):
     """Format date and time for output."""
@@ -159,6 +166,7 @@ def fmt_dt(dt):
     localtime = pytz.utc.localize(dt).astimezone(get_timezone())
     return dates.format_datetime(localtime, fmt, locale=get_locale())
 
+
 def fmt_shortdate(dt):
     """Format date and time for output."""
     from babel import dates
@@ -166,9 +174,11 @@ def fmt_shortdate(dt):
     localtime = pytz.utc.localize(dt).astimezone(get_timezone())
     return dates.format_datetime(localtime, fmt, locale=get_locale())
 
+
 def nl2br(text):
     import cgi
     return '<br/>'.join(cgi.escape(text).split("\n"))
+
 
 def html_cleanup(*args, **kwargs):
     from ututi.lib.validators import html_cleanup
@@ -187,12 +197,14 @@ def file_size(size):
         else:
             return "%s %sb" % (round(size / float(lim/2**10), 2), suf)
 
+
 def trackEvent(obj, action, label, category='navigation'):
     # _trackEvent(category, action, optional_label, optional_value)
     return """onclick="_gaq.push(['_trackEvent', '%s', '%s', '%s']);" """ % (
         category,
         action,
         label)
+
 
 def input_line(name, title, value='', explanation=None, **kwargs):
     expl = None
@@ -207,6 +219,7 @@ def input_line(name, title, value='', explanation=None, **kwargs):
                             HTML.input(type='text', id=name, name_=name, value='', **kwargs)])]),
             expl
             ])
+
 
 def input_psw(name, title, value='', explanation=None):
     expl = None
@@ -235,12 +248,14 @@ def input_area(name, title, value='', cols='50', rows='5', explanation=None):
             expl
             ])
 
+
 def input_wysiwyg(name, title, value='', cols='80', rows='15'):
     return HTML.div(class_='form-field', c=[
             HTML.label(for_=name, c=[title]),
             HTML.literal('<form:error name="%s" />' % name),
             HTML.textarea(class_='ckeditor', name_=name, id_=name, cols=cols, rows=rows, c=[value])
             ])
+
 
 def input_submit(text=None, name=None):
     if text is None:
@@ -255,9 +270,65 @@ def input_submit(text=None, name=None):
                 ])
             ])
 
+
 def link_to(label, url='', max_length=None, **attrs):
     if max_length is not None:
         attrs['title'] = label
         label = ellipsis(label, max_length)
 
     return orig_link_to(label, url, **attrs)
+
+
+class mokejimai_form(object):
+
+    def __init__(self, transaction_type='support', amount=0):
+        from pylons import url, config, tmpl_context as c
+        self.orderid = "%s_%s" % (transaction_type,
+                                  c.user.id)
+        self.action = config.get('mokejimai.url')
+        self.amount = amount
+        self.salt = config.get('mokejimai.salt', '')
+        self.merchantid = config.get('mokejimai.merchantid', '')
+        self.test = config.get('mokejimai.test')
+        self.accepturl = url(controller='profile', action='thank_you')
+        self.cancelurl = url(controller='profile', action='no_thank_you')
+        self.callbackurl = url(controller='home', action='process_transaction')
+        self.logo = url('/images/logo.gif', qualified=True)
+        self.test = config.get('test', '0')
+        self.p_email = c.user.email.email
+
+    def calculate_sign(self, values):
+        form_data = ''.join(["%03d%s" % (len(value), value.lower())
+                             for key, value in values
+                             if value])
+        return md5(form_data + self.salt).hexdigest()
+
+    @property
+    def fields(self):
+        lang = 'LIT'
+        currency = 'LTL'
+        country = 'LT'
+
+        form_values = [('merchantid', self.merchantid),
+                       ('orderid', self.orderid),
+                       ('lang', lang),
+                       ('amount', str(self.amount)),
+                       ('currency', currency),
+                       ('accepturl', self.accepturl),
+                       ('cancelurl', self.cancelurl),
+                       ('callbackurl', self.callbackurl),
+                       ('payment', ''),
+                       ('country', country),
+                       ('logo', self.logo),
+                       ('p_firstname', ''),
+                       ('p_lastname', ''),
+                       ('p_email', self.p_email),
+                       ('p_street', ''),
+                       ('p_city', ''),
+                       ('p_state', ''),
+                       ('p_zip', ''),
+                       ('p_countrycode', ''),
+                       ('test', self.test)]
+
+        form_values.append(('sign', self.calculate_sign(form_values)))
+        return form_values

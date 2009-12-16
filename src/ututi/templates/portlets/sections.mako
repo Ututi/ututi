@@ -21,9 +21,7 @@
   %if not 'recommend' in exclude:
   ${user_recommend_portlet()}
   %endif
-  %if not 'gg' in exclude and h.check_crowds(['root']):
-  ${user_gg_portlet()}
-  %endif
+  ${user_support_portlet()}
   ${ututi_prizes_portlet()}
   %if not 'banners' in exclude:
   ${ututi_banners_portlet()}

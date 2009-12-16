@@ -566,3 +566,12 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             redirect_to(controller='profile', action='edit')
         else:
             redirect_to(controller='profile', action='edit')
+
+    @ActionProtector("user")
+    def thank_you(self):
+        c.breadcrumbs.append(self._actions('home'))
+        return render('/profile/thank_you.mako')
+
+    @ActionProtector("user")
+    def no_thank_you(self):
+        return render('/profile/no_thank_you.mako')

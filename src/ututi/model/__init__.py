@@ -483,6 +483,11 @@ user_monitored_subjects_table = None
 
 class User(object):
 
+    @property
+    def email(self):
+        email = self.emails[0]
+        return email
+
     def send(self, msg):
         """Send a message to the user."""
         email = self.emails[0]

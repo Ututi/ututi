@@ -151,6 +151,7 @@ def make_map():
     map.connect('/join/login_register', controller='home', action='join_register')
     map.connect('/register', controller='home', action='register')
     map.connect('/password', controller='home', action='pswrecovery')
+    map.connect('/process_transaction', controller='home', action='process_transaction')
     map.connect('/recovery/{key}', controller='home', action='recovery')
     map.connect('/recovery', controller='home', action='recovery')
     map.connect('/register/{hash}', controller='home', action='register')

@@ -77,6 +77,32 @@
   </%self:portlet>
 </%def>
 
+
+<%def name="user_support_portlet(user=None, title=None, full=True)">
+  <%
+     if user is None:
+         user = c.user
+
+     if title is None:
+       title = _('Support us')
+  %>
+  <%self:portlet id="support_portlet" portlet_class="inactive">
+    <%def name="header()">
+      ${title}
+    </%def>
+  <%
+    form = h.mokejimai_form()
+  %>
+    <form action="${form.action}" method="POST">
+      %for key, val in form.fields:
+      <input type="hidden" name="${key}" value="${val}" />
+      %endfor
+      <input type="submit" value="${_('Support Ututi!')}" />
+    </form>
+  </%self:portlet>
+</%def>
+
+
 <%def name="user_information_portlet(user=None, full=True, title=None)">
   <%
      if user is None:
