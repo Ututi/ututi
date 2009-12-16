@@ -52,7 +52,7 @@ class SubjectfileController(BasefilesController):
 
     @subject_file_action
     @set_login_url
-    @ActionProtector('user')
+    @ActionProtector('user', 'smallfile')
     def get(self, subject, file):
         return self._get(file)
 

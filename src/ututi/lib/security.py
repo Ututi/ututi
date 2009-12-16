@@ -1,4 +1,4 @@
-from pylons import response, url, request, session, c
+from pylons import response, url, request, session, c, config
 from pylons.controllers.util import abort
 from pylons.controllers.util import redirect_to
 
@@ -65,6 +65,13 @@ def is_user(user, context=None):
 def is_owner(user, context=None):
     return context.created is user
 
+def is_smallfile(user, context=None):
+    from ututi.model import Subject, File
+
+    if isinstance(context, File) and isinstance(context.parent, Subject):
+        return context.size < int(config.get('small_file_size', 1024**2))
+    return False
+
 
 crowd_checkers = {
     "root": is_root,
@@ -73,6 +80,7 @@ crowd_checkers = {
     "member": is_member,
     "owner": is_owner,
     "user": is_user,
+    "smallfile": is_smallfile,
     }
 
 
