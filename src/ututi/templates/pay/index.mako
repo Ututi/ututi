@@ -6,8 +6,15 @@ ${parent.head_tags()}
 
 <h1>Payment testing page</h1>
 
+<p>
 ${h.button_to("Dummy pay", c.accepturl)}
+</p>
 
-${h.link_to("Process payment", c.callbackurl)}
+<p>
+  ${h.link_to("Go back", c.cancelurl)}
+</p>
 
-${h.link_to("Go back", c.cancelurl)}
+<p>
+${h.link_to("Process payment",
+            c.callbackurl)}
+</p>

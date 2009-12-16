@@ -290,11 +290,17 @@ class mokejimai_form(object):
         self.salt = config.get('mokejimai.salt', '')
         self.merchantid = config.get('mokejimai.merchantid', '')
         self.test = config.get('mokejimai.test')
-        self.accepturl = url(controller='profile', action='thank_you')
-        self.cancelurl = url(controller='profile', action='no_thank_you')
-        self.callbackurl = url(controller='home', action='process_transaction')
+        self.accepturl = url(controller='profile',
+                             action='thank_you',
+                             qualified=True)
+        self.cancelurl = url(controller='profile',
+                             action='no_thank_you',
+                             qualified=True)
+        self.callbackurl = url(controller='home',
+                               action='process_transaction',
+                               qualified=True)
         self.logo = url('/images/logo.gif', qualified=True)
-        self.test = config.get('test', '0')
+        self.test = config.get('mokejimai.test', '0')
         self.p_email = c.user.email.email
 
     def calculate_sign(self, values):
