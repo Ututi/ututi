@@ -154,8 +154,7 @@ li.empty_note {
 }
 
 .event_area table.area-news {
-  clear: left;
-  width: 600px;
+  width: 590px;
   font-size: 12px;
   margin-top: 10px;
 }
@@ -180,7 +179,7 @@ li.empty_note {
 
 .event_area table.area-news table.group-messages,
 .event_area table.area-news table.group-events {
-  width: 295px;
+  width: 290px;
   margin-bottom: 5px;
 }
 
@@ -217,4 +216,5 @@ li.empty_note {
 
 .display_selection a.active {
   color: #808080;
+  background: transparent;
 }
