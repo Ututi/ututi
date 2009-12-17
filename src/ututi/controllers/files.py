@@ -35,13 +35,16 @@ def serve_file(file):
 class BasefilesController(BaseController):
 
     def _get(self, file):
+        if file.deleted is not None:
+            abort(404)
         if c.user:
             c.user.download(file)
             meta.Session.commit()
         return serve_file(file)
 
     def _delete(self, file):
-        meta.Session.delete(file)
+        file.parent = None
+        file.deleted = c.user
         meta.Session.commit()
 
     def _move(self, source, file):
