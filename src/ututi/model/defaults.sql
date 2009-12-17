@@ -72,6 +72,18 @@ create table content_items (id bigserial not null,
        deleted_on timestamp default null,
        primary key (id));;
 
+CREATE FUNCTION set_deleted_on() RETURNS trigger AS $$
+    BEGIN
+        IF not NEW.deleted_by is NULL AND OLD.deleted_by is NULL THEN
+          NEW.deleted_on := (now() at time zone 'UTC');
+        END IF;
+        RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+CREATE TRIGGER set_deleted_on BEFORE UPDATE ON content_items
+    FOR EACH ROW EXECUTE PROCEDURE set_deleted_on();;
+
 /* A table for files */
 create table files (id int8 references content_items(id),
        md5 char(32),
