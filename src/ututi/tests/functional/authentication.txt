@@ -108,10 +108,25 @@ Visiting a profile-related page should not crash if the user is not logged in.
     ...                params={'folder': ''},
     ...                upload_files=[("attachment", "text.txt", "Test")])
 
+    >>> res = app.post("/subject/vu/mat_analize/upload_file",
+    ...                params={'folder': ''},
+    ...                upload_files=[("attachment", "text2.txt", "Test test test test")])
+
+
     >>> browser.open('http://localhost/subject/vu/mat_analize')
+
+Anonymous users should be able to download small files (for testing: up to 10 bytes):
+
     >>> browser.getLink('text.txt').click()
     >>> browser.url
-    'http://localhost/login?came_from=%2Fsubject%2Fvu%2Fmat_analize%3Fserve_file%3D3&context=text.txt'
+    'http://localhost/subject/vu/mat_analize/file/3/get'
+
+But not larger ones:
+
+    >>> browser.open('http://localhost/subject/vu/mat_analize')
+    >>> browser.getLink('text2.txt').click()
+    >>> browser.url
+    'http://localhost/login?came_from=%2Fsubject%2Fvu%2Fmat_analize%3Fserve_file%3D4&context=text2.txt'
 
     >>> form = browser.getForm('login_form')
     >>> form.getControl('Email').value = "user@ututi.lt"
@@ -119,7 +134,7 @@ Visiting a profile-related page should not crash if the user is not logged in.
     >>> form.getControl('Login').click()
 
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize?serve_file=3'
+    'http://localhost/subject/vu/mat_analize?serve_file=4'
 
     >>> browser.getLink('log out').click()
 
