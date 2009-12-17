@@ -366,6 +366,14 @@ def setup_orm(engine):
 
     orm.mapper(BlogEntry, blog_table)
 
+    global payments_table
+    payments_table = Table("payments", meta.metadata,
+                           autoload=True,
+                           useexisting=True,
+                           autoload_with=engine)
+    orm.mapper(Payment, payments_table,
+               properties={'user': relation(User)})
+
     from ututi.model import mailing
     mailing.setup_orm(engine)
 
@@ -1547,6 +1555,22 @@ class BlogEntry(object):
 search_items_table = None
 class SearchItem(object):
     pass
+
+
+payments_table = None
+class Payment(object):
+
+    def __init__(self, **kwargs):
+        for key, value in kwargs.items():
+            setattr(self, 'raw_' + key, value)
+
+    def process(self):
+        payment_type, user_id = self.raw_orderid.split('_')
+        self.user = User.get_byid(int(user_id))
+        self.payment_type = payment_type
+        self.amount = int(self.raw_amount)
+        self.valid = True
+        self.processed = True
 
 
 # Reimports for convenience

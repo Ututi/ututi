@@ -91,7 +91,7 @@
       ${title}
     </%def>
   <%
-    form = h.mokejimai_form()
+    form = h.mokejimai_form(amount=1000)
   %>
     <form action="${form.action}" method="POST">
       %for key, val in form.fields:

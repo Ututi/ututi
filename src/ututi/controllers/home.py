@@ -23,7 +23,7 @@ from ututi.lib.emails import email_confirmation_request, email_password_reset
 from ututi.lib.messaging import Message
 from ututi.lib.security import ActionProtector
 
-from ututi.model import meta, User, Email, PendingInvitation, LocationTag
+from ututi.model import meta, User, Email, PendingInvitation, LocationTag, Payment
 
 log = logging.getLogger(__name__)
 
@@ -396,4 +396,39 @@ class HomeController(UniversityListMixin):
         return render('/home/join.mako')
 
     def process_transaction(self):
-        return 'OK'
+        args = ['orderid',
+                'merchantid',
+                'lang',
+                'amount',
+                'currency',
+                'paytext',
+                '_ss2',
+                '_ss1',
+                'transaction2',
+                'transaction',
+                'payment',
+                'name',
+                'surename',
+                'status',
+                'error',
+                'test',
+                'referrer',
+                'user',
+                'payent_type']
+
+        kwargs = {}
+        for arg in args:
+            value = request.params.get(arg, '')
+            kwargs[arg] = value
+
+        payment = Payment(**kwargs)
+        meta.Session.add(payment)
+        meta.Session.commit()
+
+        payment.process()
+        meta.Session.commit()
+
+        if payment.valid:
+            return 'OK'
+        else:
+            return 'Error accepting payment'
