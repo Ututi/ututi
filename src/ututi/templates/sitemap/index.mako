@@ -23,6 +23,17 @@ ${school_section(child)}
     <priority>0.7</priority>
   </url>
 %endfor
+<%
+   subject_files = [file for file in subject.files if file.size < c.file_limit]
+%>
+%for file in subject_files:
+  <url>
+    <loc>${url(file.url(), qualified=True)}</loc>
+    <lastmod>${file.modified_on.date()}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+%endfor
 </%def>
 <%def name="group_section(group)">
 <url>

@@ -1,0 +1,38 @@
+A simple test for the sitemap
+=============================
+
+   >>> browser = Browser()
+   >>> browser.open('http://localhost/sitemap.xml')
+   >>> print browser.contents
+   <?xml version='1.0' encoding='UTF-8'?>
+   <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+           xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+   <url>
+     <loc>http://localhost/school/vu</loc>
+     <changefreq>monthly</changefreq>
+     <priority>1.0</priority>
+   </url>
+   <url>
+     <loc>http://localhost/school/vu/ef</loc>
+     <changefreq>monthly</changefreq>
+     <priority>1.0</priority>
+   </url>
+   <url>
+     <loc>http://localhost/school/vu/gf</loc>
+     <changefreq>monthly</changefreq>
+     <priority>1.0</priority>
+   </url>
+   <url>
+     <loc>http://localhost/subject/vu/mat_analize</loc>
+     <lastmod>2009-12-17</lastmod>
+     <changefreq>monthly</changefreq>
+     <priority>0.8</priority>
+   </url>
+   <url>
+     <loc>http://localhost/group/moderators</loc>
+     <lastmod>2009-12-17</lastmod>
+     <changefreq>monthly</changefreq>
+     <priority>0.5</priority>
+   </url>
+   </urlset>
