@@ -34,7 +34,8 @@ The callback url that payment service would post to our application is
 visible in the dummy payment page:
 
     >>> browser.getControl('Support Ututi!').click()
-    >>> browser.getLink('Process payment').url
+    >>> url = browser.getLink('Process payment').url
+    >>> url
     'http://localhost/process_transaction?status=1&lang=LIT&transaction=&name=Jonas&transaction2=&_ss2=&paytext=Remiam%20remiam&orderid=support_1&merchantid=xxx&currency=LTL&amount=1000&error=&test=1&surename=Petraitis&payment=Snoras&_ss1='
 
 Let's click it, and register the payment in the database:
@@ -52,3 +53,12 @@ Let's click it, and register the payment in the database:
     1L
     >>> payment.payment_type
     'support'
+
+    >>> payment.referrer
+    'http://localhost/pay'
+
+    >>> print payment.query_string
+    status=1&lang=LIT&transaction=&name=Jonas...
+
+    >>> url.endswith(payment.query_string)
+    True

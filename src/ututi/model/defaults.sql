@@ -689,6 +689,8 @@ create table payments (
        valid bool default False,
        processed bool default False,
        created timestamp not null default (now() at time zone 'UTC'),
+       referrer text,
+       query_string text,
 
        raw_orderid varchar(250),
        raw_merchantid varchar(250),
@@ -706,7 +708,6 @@ create table payments (
        raw_status varchar(250),
        raw_error varchar(250),
        raw_test varchar(250),
-       raw_referrer varchar(250),
        raw_user varchar(250),
        raw_payent_type varchar(250),
 

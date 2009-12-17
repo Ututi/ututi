@@ -412,7 +412,6 @@ class HomeController(UniversityListMixin):
                 'status',
                 'error',
                 'test',
-                'referrer',
                 'user',
                 'payent_type']
 
@@ -422,6 +421,8 @@ class HomeController(UniversityListMixin):
             kwargs[arg] = value
 
         payment = Payment(**kwargs)
+        payment.referrer = request.referrer
+        payment.query_string = request.query_string
         meta.Session.add(payment)
         meta.Session.commit()
 
