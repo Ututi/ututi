@@ -55,7 +55,7 @@
 
 <h1>${_('Edit your profile')}</h1>
 
-<a class="back-link" href="${url(controller='profile', action='index')}">${_('back to the profile')}</a>
+<a class="back-link" href="${url(controller='profile', action='home')}">${_('back to the profile')}</a>
 
 <form method="post" action="${url(controller='profile', action='update')}" name="edit_profile_form" id="edit_profile_form" enctype="multipart/form-data">
   <table>

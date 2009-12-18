@@ -7,4 +7,4 @@
 
 <h2>${_('Thanks for supporting us!')}</h2>
 
-${h.link_to(_('Back to profile'), url(controller='profile', action='home'), class_="back-link")}
+${h.link_to(_('back to the profile'), url(controller='profile', action='home'), class_="back-link")}

@@ -27,7 +27,7 @@ After paying, they get redirected to their profile thank you page:
 
 They could have skipped the payment, and just clicked cancel:
 
-    >>> browser.getLink('Back to profile').click()
+    >>> browser.getLink('back to the profile').click()
     >>> browser.getControl('Support now').click()
     >>> browser.getControl('5 litas').click()
     >>> browser.getLink('Go back').click()
@@ -40,7 +40,7 @@ That would have sent them back to the profile as well:
 The callback url that payment service would post to our application is
 visible in the dummy payment page:
 
-    >>> browser.getLink('Back to profile').click()
+    >>> browser.getLink('back to the profile').click()
     >>> browser.getControl('Support now').click()
     >>> browser.getControl('10 litas').click()
     >>> url = browser.getLink('Process payment').url
