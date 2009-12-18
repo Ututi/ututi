@@ -9,9 +9,10 @@ class PayController(BaseController):
     def index(self):
         c.accepturl = request.params['accepturl']
         c.cancelurl = request.params['cancelurl']
+        c.amount = int(request.params['amount']) / 100
+        c.currency = request.params['currency']
 
         # Callback data
-
         params = [request.params[param].encode('UTF-8')
                   for param in ['callbackurl', 'orderid', 'merchantid', 'lang',
                                 'amount', 'currency', 'test']]

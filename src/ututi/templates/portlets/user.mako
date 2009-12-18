@@ -90,15 +90,7 @@
     <%def name="header()">
       ${title}
     </%def>
-  <%
-    form = h.mokejimai_form(amount=1000)
-  %>
-    <form action="${form.action}" method="POST">
-      %for key, val in form.fields:
-      <input type="hidden" name="${key}" value="${val}" />
-      %endfor
-      <input type="submit" value="${_('Support Ututi!')}" />
-    </form>
+    ${h.button_to(_('Support now'), url(controller='profile', action='support'))}
   </%self:portlet>
 </%def>
 

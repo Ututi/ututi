@@ -575,3 +575,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     @ActionProtector("user")
     def no_thank_you(self):
         return render('/profile/no_thank_you.mako')
+
+    @ActionProtector("user")
+    def support(self):
+        return render('/profile/support.mako')

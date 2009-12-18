@@ -8,12 +8,17 @@ to do is - log in:
 
 And click 'Support us' button:
 
-    >>> browser.getControl('Support Ututi!').click()
+    >>> browser.getControl('Support now').click()
+
+We get to the page where we can pick the ammount that we want to
+transfer:
+
+    >>> browser.getControl('50 litas').click()
 
 They should get sent to the page that provides them different options
 for payment:
 
-    >>> browser.getControl('Dummy pay').click()
+    >>> browser.getControl('Dummy pay 50 LTL').click()
 
 After paying, they get redirected to their profile thank you page:
 
@@ -22,7 +27,9 @@ After paying, they get redirected to their profile thank you page:
 
 They could have skipped the payment, and just clicked cancel:
 
-    >>> browser.getControl('Support Ututi!').click()
+    >>> browser.getLink('Back to profile').click()
+    >>> browser.getControl('Support now').click()
+    >>> browser.getControl('5 litas').click()
     >>> browser.getLink('Go back').click()
 
 That would have sent them back to the profile as well:
@@ -33,7 +40,9 @@ That would have sent them back to the profile as well:
 The callback url that payment service would post to our application is
 visible in the dummy payment page:
 
-    >>> browser.getControl('Support Ututi!').click()
+    >>> browser.getLink('Back to profile').click()
+    >>> browser.getControl('Support now').click()
+    >>> browser.getControl('10 litas').click()
     >>> url = browser.getLink('Process payment').url
     >>> url
     'http://localhost/process_transaction?status=1&lang=LIT&transaction=&name=Jonas&transaction2=&_ss2=&paytext=Remiam%20remiam&orderid=support_1&merchantid=xxx&currency=LTL&amount=1000&error=&test=1&surename=Petraitis&payment=Snoras&_ss1='

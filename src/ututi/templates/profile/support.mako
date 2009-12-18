@@ -5,6 +5,6 @@
   ${parent.head_tags()}
 </%def>
 
-<h2>${_('Thanks for supporting us!')}</h2>
-
-${h.link_to(_('Back to profile'), url(controller='profile', action='home'), class_="back-link")}
+${h.support_button(_('5 litas'), 500)}
+${h.support_button(_('10 litas'), 1000)}
+${h.support_button(_('50 litas'), 5000)}

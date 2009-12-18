@@ -7,7 +7,7 @@ ${parent.head_tags()}
 <h1>Payment testing page</h1>
 
 <p>
-${h.button_to("Dummy pay", c.accepturl)}
+${h.button_to("Dummy pay %s %s" % (c.amount, c.currency), c.accepturl)}
 </p>
 
 <p>

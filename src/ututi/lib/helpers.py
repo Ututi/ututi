@@ -119,6 +119,25 @@ def button_to(name, url='', **html_options):
                      c=[HTML.div(method_tag, HTML.span(HTML.input(**html_options), class_="btn"))])
 
 
+def support_button(name, amount, **html_options):
+    form = mokejimai_form(amount=amount)
+    html_options["type"] = "submit"
+    html_options["value"] = name
+
+    fields = [HTML.input(**html_options)]
+    for key, value in form.fields:
+        fields.append(HTML.input(type="hidden",
+                                 value=value,
+                                 name=key))
+
+    kwargs = {'class_': "btn"}
+    return HTML.form(method='POST',
+                     action=form.action,
+                     class_="button-to",
+                     c=[HTML.div(HTML.span(*fields,
+                                           **kwargs))])
+
+
 def get_urls(text):
     urls = re.findall("http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+",text)
     return urls
