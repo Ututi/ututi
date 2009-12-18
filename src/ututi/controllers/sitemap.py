@@ -11,7 +11,7 @@ class SitemapController(BaseController):
         c.subjects = meta.Session.query(Subject).filter_by(deleted_by=None).order_by(Subject.title.asc()).all()
         c.groups = meta.Session.query(Group).filter_by(deleted_by=None).order_by(Group.title.asc()).all()
 
-        cache = int(config.get('cache_lifetime', 7*24*3600))
+        cache = int(config.get('cache.lifetime', 7*24*3600))
 
         if cache != 0:
             return render('sitemap/index.mako',
