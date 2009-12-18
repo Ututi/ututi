@@ -281,24 +281,27 @@ def link_to(label, url='', max_length=None, **attrs):
 
 class mokejimai_form(object):
 
-    def __init__(self, transaction_type='support', amount=0):
+    def __init__(self, transaction_type='support', amount=0, **kwargs):
         from pylons import url, config, tmpl_context as c
-        self.orderid = "%s_%s" % (transaction_type,
-                                  c.user.id)
+        orderid = kwargs.get('orderid', "%s_%s" % (transaction_type, c.user.id))
+        self.orderid = orderid
         self.action = config.get('mokejimai.url')
         self.amount = amount
         self.salt = config.get('mokejimai.salt', '')
         self.merchantid = config.get('mokejimai.merchantid', '')
         self.test = config.get('mokejimai.test')
-        self.accepturl = url(controller='profile',
-                             action='thank_you',
-                             qualified=True)
-        self.cancelurl = url(controller='profile',
-                             action='no_thank_you',
-                             qualified=True)
-        self.callbackurl = url(controller='home',
-                               action='process_transaction',
-                               qualified=True)
+        self.accepturl = kwargs.get('accepturl',
+                                    url(controller='profile',
+                                        action='thank_you',
+                                        qualified=True))
+        self.cancelurl = kwargs.get('cancelurl',
+                                    url(controller='profile',
+                                        action='no_thank_you',
+                                        qualified=True))
+        self.callbackurl = kwargs.get('callbackurl',
+                                      url(controller='home',
+                                          action='process_transaction',
+                                          qualified=True))
         self.logo = url('/images/logo.gif', qualified=True)
         self.test = config.get('mokejimai.test', '0')
         self.p_email = c.user.email.email
