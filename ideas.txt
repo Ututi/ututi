@@ -62,3 +62,21 @@ What is the best way to implement this? Decorators?
 - [[http://www.sqlalchemy.org/docs/05/mappers.html#custom-comparators][Custom comparators]]
 - [[http://www.postgresql.org/docs/8.1/interactive/indexes-expressional.html][Function indexes in postgresql]]
 - 
+
+* banner management
+** banner management functionality:
+- Upload banner image
+- Selective display
+- Click tracking ?
+
+** selective display of banners
+filter by:
+- location tag
+- context type [*, profile, group, subject, page]
+- specific content item (by id)
+- logged in users
+- users in certain locations (by group location tag)
+
+** extra
+Multiple filters per banner:
+everywhere in VU/MIF and all users in KTU/IF
