@@ -14,8 +14,8 @@ ${h.stylesheet_link('/stylesheets/pl.css')|n}
 <%def name="portlets()">
 <div id="sidebar">
   ${ututi_join_portlet()}
-  ${ututi_banners_portlet()}
   ${ututi_links_portlet()}
+  ${ututi_banners_portlet()}
 </div>
 </%def>
 
