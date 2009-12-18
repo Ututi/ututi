@@ -63,8 +63,9 @@
       <td style="width: 180px;">
         <div class="js-alternatives" id="user-logo">
           <img src="${url(controller='profile', action='logo', width='120', height='200')}" alt="User logo" id="user-logo-editable"/>
-          <br />
-          <a href="#" id="user-logo-button" class="btn"><span>${_('Change logo')}</span></a>
+          <div>
+          <div class="btn"><div id="user-logo-button" >${_('Change logo')}</div></div>
+          </div>
         </div>
         <br style="clear: left;" />
         <div class="form-field no-break">
