@@ -569,7 +569,6 @@ class ProfileController(SearchBaseController, UniversityListMixin):
 
     @ActionProtector("user")
     def thank_you(self):
-        c.breadcrumbs.append(self._actions('home'))
         return render('/profile/thank_you.mako')
 
     @ActionProtector("user")
