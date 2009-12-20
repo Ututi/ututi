@@ -93,7 +93,9 @@ ${h.javascript_link('/javascripts/forms.js')|n}
   </div>
 </form>
 <script type="text/javascript">
-  $(".overlay label").labelOver('over');
+  $(window).load(function() {
+    $(".overlay label").labelOver('over');
+  });
 </script>
 %endif
 </%def>
