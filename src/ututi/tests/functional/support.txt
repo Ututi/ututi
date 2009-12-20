@@ -4,6 +4,8 @@ Supporting Ututi
 Users should be able to donate money to our application. All they have
 to do is - log in:
 
+    >>> from pylons import config
+    >>> config['tpl_lang'] = 'lt'
     >>> browser = Browser.logIn()
 
 And click 'Support us' button:

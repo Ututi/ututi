@@ -79,19 +79,21 @@
 
 
 <%def name="user_support_portlet(user=None, title=None, full=True)">
-  <%
-     if user is None:
-         user = c.user
+  %if c.tpl_lang == 'lt':
+    <%
+       if user is None:
+           user = c.user
 
-     if title is None:
-       title = _('Support us')
-  %>
-  <%self:portlet id="support_portlet" portlet_class="inactive">
-    <%def name="header()">
-      ${title}
-    </%def>
-    ${h.button_to(_('Support now'), url(controller='profile', action='support'))}
-  </%self:portlet>
+       if title is None:
+         title = _('Support us')
+    %>
+    <%self:portlet id="support_portlet" portlet_class="inactive">
+      <%def name="header()">
+        ${title}
+      </%def>
+      ${h.button_to(_('Support now'), url(controller='profile', action='support'))}
+    </%self:portlet>
+  %endif
 </%def>
 
 
