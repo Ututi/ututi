@@ -229,14 +229,12 @@
     ${h.javascript_link('/javascripts/jquery.cycle.all.js')|n}
     <script type="text/javascript">
     //<![CDATA[
-    $(document).ready(function() {
-      $('#entries').cycle({
-          'fx': 'scrollHorz',
-          'next': '#blog_fwd',
-          'prev': '#blog_bk',
-          'timeout': 0,
-        });
-    });
+    $('#entries').cycle({
+        'fx': 'scrollHorz',
+        'next': '#blog_fwd',
+        'prev': '#blog_bk',
+        'timeout': 0,
+      });
     //]]>
     </script>
 
