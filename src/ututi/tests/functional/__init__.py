@@ -61,8 +61,9 @@ def ftest_setUp(test):
     meta.Session.execute("SET ututi.active_user TO 0")
 
 
-def collect_ftests(package=None, level=None, layer=None, filenames=None,
-                   exclude=None):
+def collect_ftests(package=None, level=None,
+                   layer=ututi.tests.PylonsLayer,
+                   filenames=None, exclude=None):
     """Collect all functional doctest files in a given package.
 
     If `package` is None, looks up the call stack for the right module.
@@ -87,7 +88,7 @@ def collect_ftests(package=None, level=None, layer=None, filenames=None,
                                      optionflags=optionflags,
                                      setUp=ftest_setUp,
                                      tearDown=ututi.tests.tearDown)
-        suite.layer = ututi.tests.PylonsLayer
+        suite.layer = layer
         if level is not None:
             suite.level = level
         suites.append(suite)
