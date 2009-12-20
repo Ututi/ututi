@@ -70,7 +70,7 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
     <input type="hidden" class="remove_url"
            value="${c.group.url(action='js_unwatch_subject', subject_id=subject.subject_id, subject_location_id=subject.location.id)}" />
     <a href="${c.group.url(action='unwatch_subject', subject_id=subject.subject_id, subject_location_id=subject.location.id)}" class="remove_subject_button">
-      ${h.image('/images/details/icon_cross_larger.png', alt='unwatch')|n}
+      ${h.image('/images/details/icon_cross_subjects.png', alt='unwatch')|n}
     </a>
   </li>
 </%def>
