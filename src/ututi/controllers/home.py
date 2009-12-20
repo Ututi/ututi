@@ -104,16 +104,6 @@ class RecommendationForm(Schema):
     came_from = validators.URL(require_tld=False)
 
 
-class GGForm(Schema):
-    """A schema for sending gadu gadu messages."""
-
-    allow_extra_fields = True
-
-    gg_uin = validators.Int(not_empty=True)
-    gg_message = validators.UnicodeString(not_empty=True)
-    came_from = validators.URL(require_tld=False)
-
-
 def sign_in_user(email):
     session['login'] = email
     session.save()
@@ -358,18 +348,6 @@ class HomeController(UniversityListMixin):
                     redirect_to(url(controller='profile', action='index'))
                 else:
                     redirect_to(url.encode('utf-8'))
-
-    @validate(schema=GGForm)
-    @ActionProtector("root")
-    def send_gg_message(self):
-        if hasattr(self, 'form_result'):
-            h.flash(gg.send_message(self.form_result.get('gg_uin'),
-                                    self.form_result.get('gg_message')))
-            url = self.form_result.get('came_from', None)
-            if url is None:
-                redirect_to(url(controller='profile', action='index'))
-            else:
-                redirect_to(url.encode('utf-8'))
 
     def join(self):
         return render('home/join.mako')
