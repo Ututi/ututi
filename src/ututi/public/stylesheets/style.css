@@ -411,6 +411,17 @@ ul.bullets_large li {
   padding: 12px 10px 5px;
 }
 
+#supporter_list {
+  padding-left: 0;
+}
+
+#supporter_list li {
+  list-style-type: none;
+  list-style-image: none;
+  padding-left: 15px;
+  background: white url("../images/details/icon_user_small.png") left center no-repeat;
+}
+
 .sidebar-block .content a {
   color: #d45500;
 }
