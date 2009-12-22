@@ -1,4 +1,4 @@
-<%inherit file="/base.mako" />
+<%inherit file="/admin/base.mako" />
 
 <%def name="import_form(title, action)">
 <h1>${title}</h1>

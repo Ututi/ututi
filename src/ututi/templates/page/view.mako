@@ -1,18 +1,4 @@
-<%inherit file="/base.mako" />
-<%namespace file="/portlets/subject.mako" import="*"/>
-<%namespace file="/portlets/banners/base.mako" import="*"/>
-
-<%def name="portlets()">
-<div id="sidebar">
-  ${subject_info_portlet(c.subject)}
-  ${ututi_prizes_portlet()}
-</div>
-</%def>
-
-
-<%def name="title()">
-  ${c.subject.title} : ${c.page.title}
-</%def>
+<%inherit file="/page/base.mako" />
 
 <a class="back-link" href="${c.subject.url()}">${_('Go back to %(subject_title)s') % dict(subject_title=c.subject.title)}</a>
 

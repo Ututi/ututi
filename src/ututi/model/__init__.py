@@ -1573,6 +1573,12 @@ class Payment(object):
         self.processed = True
 
 
+def get_supporters():
+    return sorted(list(set([payment.user for payment in
+                            meta.Session.query(Payment)\
+                                .filter_by(payment_type='support')])),
+                  key=lambda u:u.id)
+
 # Reimports for convenience
 from ututi.model.mailing import GroupMailingListMessage
 

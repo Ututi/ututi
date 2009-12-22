@@ -12,6 +12,7 @@ from pylons.decorators import validate
 from pylons.controllers.util import redirect_to, abort
 from pylons.i18n import _
 
+from ututi.model import get_supporters
 from ututi.model import meta, LocationTag, Subject, File, SimpleTag
 from ututi.lib.security import ActionProtector, deny
 from ututi.lib.fileview import FileViewMixin
@@ -107,6 +108,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
 
     @ActionProtector("user")
     def add(self):
+        c.ututi_supporters = get_supporters()
         return self._add_form()
 
     @validate(schema=NewSubjectForm, form='_add_form')

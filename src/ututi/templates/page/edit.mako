@@ -1,4 +1,4 @@
-<%inherit file="/page/view.mako" />
+<%inherit file="/page/base.mako" />
 
 <%def name="head_tags()">
 ${parent.head_tags()}

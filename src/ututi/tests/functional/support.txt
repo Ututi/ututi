@@ -15,7 +15,7 @@ And click 'Support us' button:
 We get to the page where we can pick the ammount that we want to
 transfer:
 
-    >>> browser.getControl('50 litas').click()
+    >>> browser.getControl(name='50lt').click()
 
 They should get sent to the page that provides them different options
 for payment:
@@ -31,7 +31,7 @@ They could have skipped the payment, and just clicked cancel:
 
     >>> browser.getLink('back to the profile').click()
     >>> browser.getControl('Support now').click()
-    >>> browser.getControl('5 litas').click()
+    >>> browser.getControl(name='5lt').click()
     >>> browser.getLink('Go back').click()
 
 That would have sent them back to the profile as well:
@@ -50,7 +50,7 @@ visible in the dummy payment page:
 
     >>> browser.getLink('back to the profile').click()
     >>> browser.getControl('Support now').click()
-    >>> browser.getControl('10 litas').click()
+    >>> browser.getControl(name='10lt').click()
     >>> url = browser.getLink('Process payment').url
     >>> url
     'http://localhost/process_transaction?status=1&lang=LIT&transaction=&name=Jonas&transaction2=&_ss2=&paytext=Remiam%20remiam&orderid=support_1&merchantid=xxx&currency=LTL&amount=1000&error=&test=1&surename=Petraitis&payment=Snoras&_ss1='

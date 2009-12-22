@@ -7,6 +7,7 @@ from pylons import c, request
 from pylons.decorators import validate
 from pylons.controllers.util import redirect_to, abort
 
+from ututi.controllers.subject import subject_action
 from ututi.model import Subject
 from ututi.model import LocationTag
 from ututi.model import meta, Page
@@ -67,12 +68,11 @@ class SubjectpageController(BaseController):
             abort(404)
         return render('page/view.mako')
 
-    def add(self, id, tags):
-        location = LocationTag.get(tags)
-        c.subject = Subject.get(location, id)
+    @subject_action
+    def add(self, subject):
         c.breadcrumbs = [{'link': c.subject.url(),
                           'title': c.subject.title},
-                         {'link': url_for(controller='subjectpage', action='add', id=id, tags=tags),
+                         {'link': subject.url(controller='subjectpage', action='add'),
                           'title': _('New page')}]
 
         return render('page/add.mako')
