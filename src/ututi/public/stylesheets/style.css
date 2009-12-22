@@ -380,6 +380,11 @@ ul.bullets_large li {
   padding-left: 10px;
 }
 
+#support_portlet .rounded-header {
+  height: 25px;
+  background: white url("../images/borders/portlet-top-orange.png") left top no-repeat;
+}
+
 .sidebar-block .rounded-header .rounded-right {
   height: 19px;
   background: white url("../images/borders/portlet-top.png") right top no-repeat;
@@ -387,10 +392,23 @@ ul.bullets_large li {
   padding-top: 4px;
 }
 
+#support_portlet .rounded-header .rounded-right {
+  background: white url("../images/borders/portlet-top-orange.png") right top no-repeat;
+}
+
+#support_portlet_header {
+  color: #4d4d4d;
+}
+
 .sidebar-block .content {
   padding: 10px 10px 5px;
   margin-bottom: 5px;
   border: 2px solid #e5e5d3;
+}
+
+#support_portlet .content {
+  border-top: none;
+  padding: 12px 10px 5px;
 }
 
 .sidebar-block .content a {
