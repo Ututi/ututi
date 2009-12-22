@@ -220,14 +220,14 @@ ${h.javascript_link('/javascripts/forms.js')|n}
     <script type="text/javascript">
       var lang = '${c.lang}';
     </script>
-    ${h.javascript_link('/javascripts/jquery-1.3.2.min.js')|n}
-    ${h.javascript_link('/javascripts/ajaxupload.3.5.js')|n}
-    ${h.javascript_link('/javascripts/jquery.qtip.min.js')|n}
-    ${h.javascript_link('/javascripts/tooltips.js')|n}
-    ${h.stylesheet_link('/stylesheets/style.css')|n}
-    ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
-    ${h.javascript_link('/javascripts/expand.js')|n}
-    ${h.javascript_link('/javascripts/hide_parent.js')|n}
+    ${h.javascript_link('/javascripts/jquery-1.3.2.min.js')}
+    ${h.javascript_link('/javascripts/ajaxupload.3.5.js')}
+    ${h.javascript_link('/javascripts/jquery.qtip.min.js')}
+    ${h.javascript_link('/javascripts/tooltips.js')}
+    ${h.stylesheet_link('/stylesheets/style.css')}
+    ${h.stylesheet_link('/stylesheets/tagwidget.css')}
+    ${h.javascript_link('/javascripts/expand.js')}
+    ${h.javascript_link('/javascripts/hide_parent.js')}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="verify-v1" content="TSVWuU2veWvlR1F0wRgzprUz3gMtHFWbGKmOLQ3cmWQ=" />
     ${self.head_tags()}
