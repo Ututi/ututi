@@ -5,7 +5,7 @@
   ${parent.head_tags()}
 </%def>
 
-<h2>${_('Thank you for supporting Ututi!')}</h2>
+<h1>${_('Thank you for supporting Ututi!')}</h1>
 
 <div style="background-position: 160px 50px;background-image: url(${url('/images/happy_cat.png')}); background-repeat:no-repeat; height: 400px">
 <p>

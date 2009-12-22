@@ -5,7 +5,7 @@
   ${parent.head_tags()}
 </%def>
 
-<h2>${_('Very sad...')}</h2>
+<h1>${_('Very sad...')}</h1>
 
 <div style="background-position: 160px 40px;background-image: url(${url('/images/sad_cat.jpg')}); background-repeat:no-repeat; height: 400px">
 <p>
