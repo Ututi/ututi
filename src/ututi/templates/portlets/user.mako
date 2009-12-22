@@ -91,7 +91,20 @@
       <%def name="header()">
         ${title}
       </%def>
-      ${h.button_to(_('Support now'), url(controller='profile', action='support'))}
+
+      ${h.literal(_('You like <a href="%(url)s">Ututi</a> and you want to contribute? Support us!') % dict(url=url('/')))}
+      <form action="${url(controller='profile', action='support')}" class="button-to" method="post">
+        <div><span class="btn-large"><input type="submit" value="${_('Support now')}" /></span></div>
+      </form>
+      <br class="clear-left" />
+      <div class="footer click2show">
+        <div id="group_settings_toggle" class="click">${_("supporters")}</div>
+        <ul id="supporter_list" class="show">
+          %for supporter in c.ututi_supporters:
+            <li>${h.link_to(supporter.fullname, supporter.url())}</li>
+          %endfor
+        </ul>
+      </div>
     </%self:portlet>
   %endif
 </%def>

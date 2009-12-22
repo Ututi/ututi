@@ -27,6 +27,7 @@ from ututi.lib.forms import validate
 from ututi.lib import gg
 
 from ututi.model.events import Event
+from ututi.model import Payment
 from ututi.model import Subject
 from ututi.model import LocationTag, BlogEntry
 from ututi.model import meta, Email, Group, SearchItem
@@ -118,6 +119,9 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     """A controller for the user's personal information and actions."""
 
     def __before__(self):
+        c.ututi_supporters = set([payment.user for payment in
+                                  meta.Session.query(Payment)\
+                                      .filter_by(payment_type='support')])
         if c.user is not None:
             c.breadcrumbs = [{'title': c.user.fullname, 'link': url(controller='profile', action='home')}]
             c.blog_entries = meta.Session.query(BlogEntry).order_by(BlogEntry.created.desc()).limit(10).all()

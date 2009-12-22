@@ -39,6 +39,12 @@ That would have sent them back to the profile as well:
     >>> browser.url
     'http://localhost/profile/no_thank_you'
 
+The transaction has not been "registered" in the application, so the
+supporter list should be empty:
+
+    >>> browser.printQuery("id('supporter_list')")
+    <ul id="supporter_list" class="show"></ul>
+
 The callback url that payment service would post to our application is
 visible in the dummy payment page:
 
@@ -73,3 +79,13 @@ Let's click it, and register the payment in the database:
 
     >>> url.endswith(payment.query_string)
     True
+
+As I have just paid, I should be in the supporter list:
+
+    >>> browser.open('http://localhost')
+    >>> browser.printQuery("id('supporter_list')")
+    <ul id="supporter_list" class="show">
+      <li>
+        <a href="/user/1">Adminas Adminovix</a>
+      </li>
+    </ul>
