@@ -1419,6 +1419,22 @@ span .tooltip {
   margin: 3px 0 3px 10px;
 }
 
+.thank_you {
+  padding-top: 7px;
+  padding-bottom: 200px;
+  background-position: bottom center;
+  background-image: url('../images/happy_cat.png');
+  background-repeat: no-repeat;
+}
+
+.no_thank_you {
+  padding-top: 7px;
+  padding-bottom: 240px;
+  background-position: bottom center;
+  background-image: url('../images/sad_cat.jpg');
+  background-repeat: no-repeat;
+}
+
 /* end misc */
 
 /* upload drop down (group files portlet, files view) */
