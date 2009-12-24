@@ -231,16 +231,16 @@ $(document).ready(function(){
                {section_id: section_id},
                function(data, textStatus) {
                  section_id = data['section_id'];
-                 status = data['status'];
+                 status = String(data['status']);
                  $('#file_section-'+section_id+' .upload_control').addClass('hidden');
                  switch (status) {
-                   case 1:
+                   case "1":
                      $('#file_section-'+section_id+' .file_upload').removeClass('hidden');
                      break;
-                   case 2:
+                   case "2":
                      $('#file_section-'+section_id+' .single_upload').removeClass('hidden');
                      break;
-                   case 0:
+                   case "0":
                      $('#file_section-'+section_id+' .no_upload').removeClass('hidden');
                      $('#file_section-'+section_id+' .upload_forbidden').removeClass('hidden');
                      break;
@@ -316,7 +316,7 @@ $(document).ready(function(){
 </%def>
 
 <%def name="free_space_indicator(obj)">
-  ${h.image('/images/details/pbar%d.png' % obj.free_size_points, alt=h.file_size(obj.file_size), class_='area_size_points')|n}
+  ${h.image('/images/details/pbar%d.png' % obj.free_size_points, alt=h.file_size(obj.size), class_='area_size_points')|n}
 </%def>
 
 <%def name="free_space_text(obj)">
@@ -377,15 +377,24 @@ $(document).ready(function(){
         <%
             n = len(obj.folders)
         %>
-        <div class="upload_control no_upload ${'' if obj.upload_status == 0 else 'hidden'}">
-             <a class="btn inactive"><span>${_('upload file to...')}</span></a>
+        <div class="upload_control no_upload ${'' if obj.upload_status == obj.LIMIT_REACHED else 'hidden'}">
+          <table><tr>
+              <td>
+                <div style="float: left;" class="btn inactive"><div>${_('upload file to...')}</div></div>
+              </td>
+              <td>
+                <a style="float: left;" class="btn" href="${obj.url(action='pay')}" title="${_('Increase file area limits')}">
+                  <span>${_('Increase limits')}</span>
+                </a>
+              </td>
+          </tr></table>
         </div>
-        <div class="upload_control single_upload ${'' if obj.upload_status == 2 else 'hidden'}">
+        <div class="upload_control single_upload ${'' if obj.upload_status == obj.CAN_UPLOAD_SINGLE_FOLDER else 'hidden'}">
           <div class="button"><div class="inner">
             <%self:folder_button folder="${obj.folders[0]}" section_id="${section_id}" fid="${0}" title="${_('Upload file')}" />
           </div></div>
         </div>
-        <div class="upload_control file_upload upload_dropdown click2show ${'' if obj.upload_status == 1 else 'hidden'}">
+        <div class="upload_control file_upload upload_dropdown click2show ${'' if obj.upload_status == obj.CAN_UPLOAD else 'hidden'}">
           <div class="click button">
             <div class="inner">
               ${_('upload file to...')}
