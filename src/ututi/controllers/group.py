@@ -25,7 +25,7 @@ from sqlalchemy.orm.exc import NoResultFound
 import ututi.lib.helpers as h
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.image import serve_image
-from ututi.lib.base import BaseController, render
+from ututi.lib.base import BaseController, render, render_lang
 from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator, TagsValidator
 
 from ututi.model import LocationTag, User, GroupMember, GroupMembershipType, File
@@ -937,3 +937,28 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         section_id = request.POST.get('section_id', None)
 
         return {'status' : group.upload_status, "section_id" : section_id}
+
+    @group_action
+    @ActionProtector("member", "admin", "moderator")
+    def pay(self, group):
+        c.paymentform = h.mokejimai_form(
+            transaction_type='grouplimits',
+            amount=10,
+            accepturl=group.url(action='pay_accept'),
+            cancelurl=group.url(action='pay_cancel'),
+            orderid='%s_%s_%s' % ('grouplimits', c.user.id, group.id))
+
+        c.breadcrumbs.append(self._actions('home'))
+        return render_lang('group/pay.mako')
+
+    @group_action
+    @ActionProtector("member", "admin", "moderator")
+    def pay_accept(self, group):
+        c.breadcrumbs.append(self._actions('home'))
+        return render('group/pay_accept.mako')
+
+    @group_action
+    @ActionProtector("member", "admin", "moderator")
+    def pay_cancel(self, group):
+        c.breadcrumbs.append(self._actions('home'))
+        return render('group/pay_cancel.mako')
