@@ -16,7 +16,7 @@ from binascii import a2b_base64, b2a_base64
 from pylons import url
 from random import randrange
 import pkg_resources
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from ututi.lib import urlify
 
 from pylons import config
@@ -372,7 +372,8 @@ def setup_orm(engine):
                            useexisting=True,
                            autoload_with=engine)
     orm.mapper(Payment, payments_table,
-               properties={'user': relation(User)})
+               properties={'user': relation(User),
+                           'group': relation(Group, backref=backref('payments', order_by=payments_table.c.created.desc()))})
 
     from ututi.model import mailing
     mailing.setup_orm(engine)
@@ -688,22 +689,6 @@ class FolderMixin(object):
                 result[file.folder].append(file)
         return result
 
-    @property
-    def file_count(self):
-        return len([file for file in self.files if not file.isNullFile()])
-
-    @property
-    def file_size(self):
-        return sum([file.size for file in self.files if not file.isNullFile()])
-
-    @property
-    def upload_status(self):
-        """
-           1 - allow uploading, with folders
-           2 - allow uploading, no folders
-        """
-        return 1 if (len(self.folders) > 1) else 2
-
     def getFolder(self, title):
         return self.folders_dict.get(title, None)
 
@@ -712,10 +697,59 @@ class FolderMixin(object):
         return sorted(self.folders_dict.values(), key=lambda f: f.title)
 
 
+class LimitedUploadMixin(object):
+    """Mix-in for determining whether uploads are enabled for the object."""
+
+    CAN_UPLOAD = 1
+    CAN_UPLOAD_SINGLE_FOLDER = 2
+    LIMIT_REACHED = 0
+
+    available_size = 1
+
+    @property
+    def paid(self):
+        return True
+
+    @property
+    def upload_status(self):
+        """Information on the group's file upload limits."""
+        if self.paid:
+            return self.CAN_UPLOAD
+
+        upload_status = self.free_size > 0 and self.CAN_UPLOAD or self.LIMIT_REACHED
+
+        have_root_folder = len(self.folders) == 1
+        can_upload = upload_status == self.CAN_UPLOAD
+        if can_upload and have_root_folder:
+            return self.CAN_UPLOAD_SINGLE_FOLDER
+
+        return upload_status
+
+    @property
+    def file_count(self):
+        return len([file for file in self.files if not file.isNullFile()])
+
+    @property
+    def size(self):
+        return sum([file.size for file in self.files if not file.isNullFile()])
+
+    @property
+    def free_size(self):
+        """The size of files in group private area is limited to 200 Mb."""
+        avail = max(0, self.available_size - self.size)
+        return avail
+
+    @property
+    def free_size_points(self):
+        """Return the amount of free size in the area in points from 5 (empty) to 0 (full)."""
+        pts = min(5, ceil(5 * float(self.size) / self.available_size))
+        return pts
+
+
 group_watched_subjects_table = None
 groups_table = None
 
-class Group(ContentItem, FolderMixin):
+class Group(ContentItem, FolderMixin, LimitedUploadMixin):
 
     def send(self, msg):
         msg.send([mship.user for mship in self.members])
@@ -869,7 +903,6 @@ class Group(ContentItem, FolderMixin):
         events = events.order_by(Event.created.desc()).limit(limit).all()
         return events
 
-
     @property
     def message_count(self):
         from ututi.model.mailing import GroupMailingListMessage
@@ -885,34 +918,11 @@ class Group(ContentItem, FolderMixin):
         return int(config.get('group_file_limit', 200*1024**2))
 
     @property
-    def free_size(self):
-        """The size of files in group private area is limited to 200 Mb."""
-        avail = self.available_size - self.file_size
-        if avail < 0:
-            avail = 0
-        return avail
-
-    @property
-    def free_size_points(self):
-        """Return the amount of free size in the area in points from 5 (empty) to 0 (full)."""
-        pts = ceil(5 * float(self.file_size) / self.available_size)
-        if pts > 5:
-            pts = 5
-        return pts
-
-    @property
-    def upload_status(self):
-        """
-           Information on the group's file upload limits.
-           1 - allow uploading, with folders
-           2 - allow uploading, no folders
-           0 - limit reached, no uploads
-        """
-        upload_status = self.free_size > 0 and 1 or 0
-        if upload_status == 1 and len(self.folders) == 1:
-            upload_status = 2
-        return upload_status
-
+    def paid(self):
+        if len(self.payments) > 0:
+            pmnt = self.payments[-1]
+            return pmnt.created - datetime.utcnow() <= timedelta(days=int(config.get('group_payment_period', 190)))
+        return False
 
 
 group_members_table = None
@@ -1001,7 +1011,7 @@ class PendingRequest(object):
 
 
 subjects_table = None
-class Subject(ContentItem, FolderMixin):
+class Subject(ContentItem, FolderMixin, LimitedUploadMixin):
 
     def recipients(self, period):
         all_recipients = []
@@ -1565,8 +1575,15 @@ class Payment(object):
             setattr(self, 'raw_' + key, value)
 
     def process(self):
-        payment_type, user_id = self.raw_orderid.split('_')
-        self.user = User.get_byid(int(user_id))
+        payment_type, payment_info = self.raw_orderid.split('_', 1)
+        if payment_type == 'support':
+            user_id = payment_info
+            self.user = User.get_byid(int(user_id))
+        elif payment_type == 'grouplimits':
+            user_id, group_id = payment_info.split('_', 1)
+            self.user = User.get_byid(int(user_id))
+            self.group = Group.get(int(group_id))
+
         self.payment_type = payment_type
         self.amount = int(self.raw_amount)
         self.valid = True
