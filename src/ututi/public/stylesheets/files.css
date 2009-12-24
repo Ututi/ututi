@@ -177,6 +177,11 @@ div.file_upload_progress div.done {
   background: url("../images/details/icon_done.png") left center no-repeat;
 }
 
+div.file_upload_progress div.failed {
+  background: url("../images/details/icon_fail.png") left center no-repeat;
+}
+
+
 /* misc */
 
 .section .container {

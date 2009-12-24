@@ -117,12 +117,19 @@ $(document).ready(function(){
               iframe['interval'] = interval;
           },
           onComplete: function(file, response, iframe){
-              iframe['progress_ticker'].text('Done').parent().addClass('done');
-              window.clearInterval(iframe['interval']);
-              $('.folder', result_area).append(response);
-              $('.delete_button', result_area).click(deleteFile);
-              $('.folder .message', result_area).hide();
-              updateSizeInformation($(result_area).parents('.section'));
+              if (response != 'UPLOAD_FAILED') {
+                  iframe['progress_ticker'].text("${_('Done')}").parent().addClass('done');
+                  window.clearInterval(iframe['interval']);
+                  $('.folder', result_area).append(response);
+                  $('.delete_button', result_area).click(deleteFile);
+                  $('.folder .message', result_area).hide();
+                  updateSizeInformation($(result_area).parents('.section'));
+              } else {
+                  iframe['progress_ticker'].text("${_('File upload failed.')}").parent().addClass('failed');
+                  window.clearInterval(iframe['interval']);
+                  $('.folder .message', result_area).hide();
+                  updateSizeInformation($(result_area).parents('.section'));
+              }
           }
       });
 

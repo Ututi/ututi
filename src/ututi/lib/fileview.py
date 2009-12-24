@@ -35,7 +35,7 @@ class FileViewMixin(object):
     def _upload_file_basic(self, obj):
         file = request.params['attachment']
         folder = request.params['folder']
-        if not hasattr(obj, 'free_size') or obj.free_size > 0:
+        if obj.upload_status != obj.LIMIT_REACHED:
             if file is not None and file != '':
                 f = File(file.filename,
                          file.filename,
@@ -46,10 +46,15 @@ class FileViewMixin(object):
                 meta.Session.add(f)
                 meta.Session.commit()
                 return f
+        else:
+            return None
 
     def _upload_file(self, obj):
         f = self._upload_file_basic(obj)
-        return render_mako_def('/sections/files.mako','file', file=f, new_file=True)
+        if f is not None:
+            return render_mako_def('/sections/files.mako','file', file=f, new_file=True)
+        else:
+            return 'UPLOAD_FAILED'
 
     def _upload_file_short(self, obj):
         f = self._upload_file_basic(obj)
