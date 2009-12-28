@@ -11,14 +11,7 @@ ${_("The amount of group's private files is limited to 200 Mb. This is so becaus
   ${_('For <em>%d Lt</em> Your group will be able to store an <em>unlimited amount of files</em>:') % c.group_payment_cost|n}
 </div>
 
-<form action="${c.paymentform.action}" method="POST">
-  %for key, val in c.paymentform.fields:
-  <input type="hidden" name="${key}" value="${val}" />
-  %endfor
-  <span class="btn-large">
-    <input type="submit" value="${_('increase the limit')}" />
-  </span>
-</form>
+<a href="${c.group.url(action='payment_deferred')}" class="btn-large"><span>${_('increase the limit')}</span></a>
 
 <div style="text-align: right;">
   <a class="more" url="${c.group.url(action='files')}">${_("Back to the group's files")}</a>

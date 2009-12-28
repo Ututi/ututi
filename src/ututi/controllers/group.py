@@ -174,6 +174,7 @@ def group_action(method):
         c.security_context = group
         c.object_location = group.location
         c.group = group
+        c.group_payment_cost = int(config.get('group_payment_cost', '500'))
         c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
         return method(self, group)
     return _group_action
@@ -943,7 +944,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     def pay(self, group):
         c.paymentform = h.mokejimai_form(
             transaction_type='grouplimits',
-            amount=10,
+            amount=c.group_payment_cost,
             accepturl=group.url(action='pay_accept'),
             cancelurl=group.url(action='pay_cancel'),
             orderid='%s_%s_%s' % ('grouplimits', c.user.id, group.id))
@@ -962,3 +963,8 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     def pay_cancel(self, group):
         c.breadcrumbs.append(self._actions('home'))
         return render('group/pay_cancel.mako')
+
+    @group_action
+    @ActionProtector("member", "admin", "moderator")
+    def payment_deferred(self, group):
+        return render('group/payment_deferred.mako')

@@ -177,3 +177,14 @@ div.live_search_group a.btn {
   padding: 10px;
 }
 /* end group live search */
+
+div.orange_emph {
+  padding: 10px 0;
+}
+
+div.orange_emph em {
+  color: #d45500;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.1em;
+}
