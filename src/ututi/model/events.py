@@ -14,7 +14,7 @@ from ututi.model import File
 from ututi.model import Page
 from ututi.model import ContentItem
 from ututi.model import meta
-from ututi.lib.helpers import link_to
+from ututi.lib.helpers import link_to, ellipsis
 
 events_table = None
 
@@ -126,26 +126,40 @@ class FileUploadedEvent(Event):
     def isEmptyFile(self):
         return self.file.isNullFile()
 
+    def file_link(self, short=False):
+        limit = 23 if short else None
+        if self.file.isDeleted():
+            return ellipsis(self.file.title, limit) if short else self.file.title
+        else:
+            return link_to(self.file.title, self.file.url(qualified=False), limit)
+
     def text_news(self):
-        return _('File %(file_title)s (%(file_url)s) was uploaded.') % {
-            'file_title': self.file.title,
-            'file_url': self.file.url(qualified=True)}
+        if not self.file.isDeleted():
+            return _('File %(file_title)s (%(file_url)s) was uploaded.') % {
+                   'file_title': self.file.title,
+                   'file_url': self.file.url(qualified=True)}
+        else:
+            return _('File %(file_title)s was uploaded.') % {'file_title': self.file.title}
 
     def html_news(self):
-        return _('File %(file_title)s was uploaded.') % {
-            'file_title': link_to(self.file.title,
-                                  self.file.url(qualified=True))}
+        if not self.file.isDeleted():
+            return _('File %(file_title)s was uploaded.') % {
+                   'file_title': link_to(self.file.title,
+                                         self.file.url(qualified=True))}
+        else:
+            return _('File %(file_title)s was uploaded.') % {'file_title': self.file.title}
+
 
     def render(self):
         if self.file.md5 is not None:
             if isinstance(self.context, Subject):
                 return _("A new file %(link_to_file)s for a subject %(link_to_subject)s was uploaded") % {
                     'link_to_subject': link_to(self.context.title, self.context.url()),
-                    'link_to_file': link_to(self.file.title, self.file.url())}
+                    'link_to_file': self.file_link()}
             elif isinstance(self.context, Group):
                 return _("A new file %(link_to_file)s for a group %(link_to_group)s was uploaded") % {
                     'link_to_group': link_to(self.context.title, self.context.url()),
-                    'link_to_file': link_to(self.file.title, self.file.url())}
+                    'link_to_file': self.file_link()}
         else:
             if isinstance(self.context, Subject):
                 return _("A new folder '%(folder_title)s' for a subject %(link_to_subject)s was created") % {
@@ -161,14 +175,14 @@ class FileUploadedEvent(Event):
             if self.file.md5 is not None:
                 return "%(link_to_context)s > %(link_to_file)s" % {
                     'link_to_context': link_to(self.context.title, self.context.url(), 23),
-                    'link_to_file': link_to(self.file.title, self.file.url(), 23)}
+                    'link_to_file': self.file_link(short=True)}
             else:
                 return _("%(link_to_context)s > %(link_to_file)s (new) ") % {
                     'link_to_context': link_to(self.context.title, self.context.url(), 23),
                     'link_to_file': self.file.folder}
         else:
             if self.file.md5 is not None:
-                return "%(link_to_file)s" % {'link_to_file': link_to(self.file.title, self.file.url(), 35)}
+                return "%(link_to_file)s" % {'link_to_file': self.file_link(short=True)}
             else:
                 return _("%(link_to_file)s (new)") % {'link_to_file': self.file.folder}
 
