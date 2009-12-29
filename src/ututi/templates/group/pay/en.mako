@@ -8,7 +8,7 @@ ${_("The amount of group's private files is limited to 200 Mb. This is so becaus
 "You can do this.")}
 
 <div class="orange_emph">
-  ${_('For <em>%d Lt</em> Your group will be able to store an <em>unlimited amount of files</em>:') % c.group_payment_cost|n}
+  ${_('For <em>%d Lt</em> Your group will be able to store an <em>unlimited amount of files</em>:') % (c.group_payment_cost /  100)|n}
 </div>
 
 <form action="${c.paymentform.action}" method="POST">
