@@ -27,7 +27,7 @@ File upload:
 
     >>> res = app.post("/subject/vu/mat_analize/upload_file",
     ...                params={'folder': 'Some folder'},
-    ...                upload_files=[("attachment", r"c:\My Home\image.png", "Test")])
+    ...                upload_files=[("attachment", r"c:\My Home\image.png", "Tst")])
     >>> print dedent(res.body)
     <li class="file">
       ...
@@ -38,7 +38,7 @@ File upload:
     >>> res = app.post("/group/moderators/file_info",
     ...                params={'section_id': 0})
     >>> print res.body
-    {"text": "\n  <div class=\"area_size\">free space: 10.0 Mb</div>\n", "image": "\n  <img alt=\"0.0 b\" class=\"area_size_points\" src=\"/images/details/pbar0.png\" />\n", "section_id": "0"}
+    {"text": "\n  <div class=\"area_size\">free space: 20.0 b</div>\n", "image": "\n  <img alt=\"0.0 b\" class=\"area_size_points\" src=\"/images/details/pbar0.png\" />\n", "section_id": "0"}
 
     >>> res = app.post("/group/moderators/upload_status",
     ...                params={'section_id': 0})
@@ -57,7 +57,7 @@ File upload:
 
     >>> res = app.post("/group/moderators/upload_file",
     ...                params={'folder': 'Also a folder'},
-    ...                upload_files=[("attachment", "more_text.txt", "Test Test")])
+    ...                upload_files=[("attachment", "more_text.txt", "Tst")])
     >>> print dedent(res.body)
     <li class="file">
       ...
@@ -68,7 +68,7 @@ File upload:
     >>> res = app.post("/group/moderators/file_info",
     ...                params={'section_id': 0})
     >>> print res.body
-    {"text": "\n  <div class=\"area_size\">free space: 10.0 Mb</div>\n", "image": "\n  <img alt=\"18.0 b\" class=\"area_size_points\" src=\"/images/details/pbar1.png\" />\n", "section_id": "0"}
+    {"text": "\n  <div class=\"area_size\">free space: 8.0 b</div>\n", "image": "\n  <img alt=\"12.0 b\" class=\"area_size_points\" src=\"/images/details/pbar3.png\" />\n", "section_id": "0"}
 
     >>> res = app.post("/group/moderators/upload_status",
     ...                params={'section_id': 0})
@@ -117,7 +117,7 @@ Deleting folders:
 
     >>> res = app.post("/subject/vu/mat_analize/upload_file",
     ...                params={'folder': 'Folder to delete'},
-    ...                upload_files=[("attachment", "image.png", "Test")])
+    ...                upload_files=[("attachment", "image.png", "T")])
     >>> print dedent(res.body)
     <li class="file">
       ...
@@ -127,7 +127,7 @@ Deleting folders:
 
     >>> res = app.post("/group/moderators/upload_file",
     ...                params={'folder': 'Also a folder to delete'},
-    ...                upload_files=[("attachment", "more_text.txt", "Test Test")])
+    ...                upload_files=[("attachment", "more_text.txt", "T")])
     >>> print dedent(res.body)
     <li class="file">
       ...
