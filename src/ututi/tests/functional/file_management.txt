@@ -181,3 +181,89 @@ Deleting files:
     >>> app.get('/group/moderators/file/5/get', expect_errors=True).status
     '404 Not Found'
 
+Group payments:
+
+Once the group's private files reach a limit, no more files can be uploaded.
+
+    >>> res = app.post("/group/moderators/upload_file",
+    ...                params={'folder': ''},
+    ...                upload_files=[("attachment", "more_text.txt", "12345678901234567890")])
+    >>> print dedent(res.body)
+    <li class="file">
+      ...
+      <a href="/group/moderators/file/.../get">more_text.txt</a>
+      ...
+    </li>
+
+    >>> res = app.post("/group/moderators/upload_file",
+    ...                params={'folder': ''},
+    ...                upload_files=[("attachment", "over.txt", "over the limit")])
+    >>> print dedent(res.body)
+    UPLOAD_FAILED
+
+    >>> res = app.post("/group/moderators/file_info",
+    ...                params={'section_id': 0})
+    >>> print res.body
+    {"text": "\n  <div class=\"area_size\">free space: 0.0 b</div>\n", "image": "\n  <img alt=\"23.0 b\" class=\"area_size_points\" src=\"/images/details/pbar5.png\" />\n", "section_id": "0"}
+
+The disabled upload control is shown with a message encouraging users to pay for the service.
+
+    >>> browser.open('http://localhost/group/moderators/files')
+    >>> browser.printQuery('//div[@class="upload_control no_upload "]')
+    <div class="upload_control no_upload ">
+      <table>
+        <tr>
+          <td>
+            <div style="float: left;" class="btn inactive">
+              <div>upload file to...</div>
+            </div>
+          </td>
+          <td>
+            <a style="float: left;" class="btn" href="/group/moderators/pay" title="Increase file area limits">
+              <span>Increase limits</span>
+            </a>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    >>> browser.getLink('Increase limits').click()
+    >>> browser.url
+    'http://localhost/group/moderators/pay'
+
+    >>> browser.getControl('increase the limit').click()
+    >>> browser.url
+    'http://localhost/pay'
+
+    >>> browser.getLink('Process payment').click()
+    >>> browser.open('http://localhost/group/moderators/files')
+
+Once the group has been paid for and the payment has been processed,
+uploading is enabled again:
+
+    >>> browser.printQuery('//div[@class="upload_control no_upload "]')
+
+    >>> browser.printQuery('//div[@class="show target_list file_upload_dropdown"]')
+    <div class="show target_list file_upload_dropdown" id="file_upload_dropdown-0">
+      <div class="target_item first">
+        <div class="upload target" id="file_upload_button-0-0">Here</div>
+      </div>
+      <div class="target_item ">
+        <div class="upload target" id="file_upload_button-0-1">Also a folder</div>
+      </div>
+      <div class="target_item last">
+        <div class="upload target" id="file_upload_button-0-2">Uga Buga</div>
+      </div>
+    </div>
+
+    >>> res = app.post("/group/moderators/upload_file",
+    ...                params={'folder': ''},
+    ...                upload_files=[("attachment", "over.txt", "over the limit")])
+    >>> print dedent(res.body)
+    <li class="file">
+    ...
+      <a href="/group/moderators/file/12/get">over.txt</a>
+    ...
+    </li>
+
+
