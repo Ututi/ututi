@@ -24,6 +24,4 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
 ${group_members()}
 
 <br style="clear: left;"/>
-%if c.user:
   ${h.button_to(_('Join the group'), url(controller='group', action='request_join', id=c.group.group_id))}
-%endif

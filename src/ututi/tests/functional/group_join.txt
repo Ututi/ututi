@@ -1,0 +1,36 @@
+Group joining (for anonymous users)
+===================================
+
+Anonymous users are shown the button to join a group. After clicking on it,
+they are urged to register, which automatically fulfills their wish to
+request group membership.
+
+   >>> browser = Browser()
+   >>> browser.open('http://localhost/group/moderators')
+   >>> browser.url
+   'http://localhost/group/moderators/home'
+
+   >>> browser.getControl('Join the group').click()
+   >>> browser.url
+   'http://localhost/?came_from=http%3A%2F%2Flocalhost%2Fgroup%2Fmoderators%2Frequest_join'
+
+   >>> form = browser.getForm('registration_form')
+   >>> form.getControl('Fullname').value = 'Jonas Petraitis Petrauskas'
+   >>> form.getControl('Email').value = 'jonas@example.com'
+   >>> form.getControl('Password').value = 'asdfgh'
+   >>> form.getControl('Repeat password').value = 'asdfgh'
+   >>> form.getControl(name='agree').value = True
+   >>> form.getControl('Register').click()
+
+   >>> browser.url
+   'http://localhost/group/moderators/home'
+
+   >>> browser.printQuery("//div[@class='flash-message']/span/text()")
+   Close
+   Your request to join the group was forwarded to the group's administrators. Thank You!
+   Close
+   Your
+   is not confirmed! Please confirm your email by clicking on the link sent to your address or
+
+   >>> from ututi.lib.mailer import mail_queue
+   >>> mail_queue[:] = []

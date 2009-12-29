@@ -57,6 +57,8 @@ class BaseController(WSGIController):
         c.mailing_list_host = config.get('mailing_list_host', '')
         c.google_tracker = config['google_tracker']
 
+        c.came_from = request.GET.get('came_from', '')
+
         lang = get_lang()
         if not lang:
             c.lang = 'lt'

@@ -9,7 +9,10 @@
         %if c.hash:
           <input type="hidden" name="hash" value="${c.hash}"/>
         %endif
-
+        <form:error name="came_from"/>
+        %if c.came_from:
+          <input type="hidden" name="came_from" value="${c.came_from}" />
+        %endif
         <form:error name="fullname"/>
         <div class="form-field">
           <div class="input-line"><div>
