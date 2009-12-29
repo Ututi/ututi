@@ -945,8 +945,8 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         c.paymentform = h.mokejimai_form(
             transaction_type='grouplimits',
             amount=c.group_payment_cost,
-            accepturl=group.url(action='pay_accept'),
-            cancelurl=group.url(action='pay_cancel'),
+            accepturl=group.url(action='pay_accept', qualified=True),
+            cancelurl=group.url(action='pay_cancel', qualified=True),
             orderid='%s_%s_%s' % ('grouplimits', c.user.id, group.id))
 
         c.breadcrumbs.append(self._actions('home'))
