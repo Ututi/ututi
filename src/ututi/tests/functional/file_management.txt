@@ -266,4 +266,6 @@ uploading is enabled again:
     ...
     </li>
 
-
+Oh, and since payments are not possible for the polish version, there is a page that explains it once the user has
+clicked on the payment button.
+    >>> browser.open('http://localhost/group/moderators/payment_deferred')
