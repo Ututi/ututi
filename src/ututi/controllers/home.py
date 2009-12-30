@@ -185,7 +185,7 @@ class HomeController(UniversityListMixin):
         session.save()
         redirect_to(controller='home', action='index')
 
-    def __register_user(self, form):
+    def __register_user(self, form, send_confirmation=True):
         fullname = self.form_result['fullname']
         password = self.form_result['new_password']
         email = self.form_result['email'].lower()
@@ -198,7 +198,11 @@ class HomeController(UniversityListMixin):
 
         meta.Session.add(user)
         meta.Session.commit()
-        email_confirmation_request(user, email)
+        if send_confirmation:
+            email_confirmation_request(user, email)
+        else:
+            user.emails[0].confirmed = True
+            meta.Session.commit()
 
         if gadugadu_uin:
             user.gadugadu_uin = gadugadu_uin
@@ -211,11 +215,11 @@ class HomeController(UniversityListMixin):
     @validate(schema=RegistrationForm(), form='register')
     def register(self, hash=None):
         if hasattr(self, 'form_result'):
-            user, email = self.__register_user(self.form_result)
             hash = self.form_result.get('hash', None)
             if hash is not None:
                 invitation = PendingInvitation.get(hash)
-                if invitation is not None and invitation.email == email:
+                if invitation is not None and invitation.email == self.form_result['email'].lower():
+                    user, email = self.__register_user(self.form_result, False)
                     invitation.group.add_member(user)
                     meta.Session.delete(invitation)
                     meta.Session.commit()
@@ -230,6 +234,7 @@ class HomeController(UniversityListMixin):
                     c.message = _('You can only use the email this invitation was sent for to register.')
                     return render('/login.mako')
             else:
+                user, email = self.__register_user(self.form_result)
                 redirect_to(str(request.POST.get('came_from',
                                                  url(controller='profile',
                                                      action='register_welcome'))))
