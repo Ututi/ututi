@@ -604,6 +604,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @ActionProtector("member", "admin", "moderator")
     def subjects(self, group):
         c.breadcrumbs.append(self._actions('subjects'))
+        c.list_open = request.GET.get('list', '') == 'open'
         return self._subjects(group)
 
     def _subjects(self, group):

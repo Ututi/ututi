@@ -155,7 +155,7 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
 
 <%
    cls = ''
-   if not c.step and not c.searched:
+   if not c.step and not c.searched and not c.list_open:
        cls = 'click2show'
 %>
 <div class="${cls}">

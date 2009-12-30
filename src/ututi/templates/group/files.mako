@@ -21,7 +21,7 @@
 % endfor
 <br/>
 %if c.group.is_admin(c.user):
-<a class="btn" href="${c.group.url(action='subjects')}">
+<a class="btn" href="${c.group.url(action='subjects', list='open')}">
   <span>${_('Add more subjects')}</span>
 </a>
 %endif
