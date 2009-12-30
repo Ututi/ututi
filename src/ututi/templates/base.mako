@@ -64,7 +64,7 @@ ${_('student information online')}
   <br class="clear-right" />
 </div>
 <div id="profile-edit-link">
-  <a href="${url(controller='user', action='edit')}" class="forward-link">
+  <a href="${url(controller='profile', action='edit')}" class="forward-link">
     ${_('Change profile')}
   </a>
 </div>
