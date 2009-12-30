@@ -61,8 +61,14 @@ ${_('student information online')}
       ${c.user.emails[0].email}
     </div>
   </div>
-  <br style="clear: right; height: 1px;"/>
+  <br class="clear-right" />
 </div>
+<div id="profile-edit-link">
+  <a href="${url(controller='user', action='edit')}" class="forward-link">
+    ${_('Change profile')}
+  </a>
+</div>
+
 %else:
 ${h.javascript_link('/javascripts/forms.js')|n}
 <form method="post" id="login_form" action="${url('/login')}">

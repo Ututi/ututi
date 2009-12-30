@@ -228,7 +228,7 @@ ul.bullets_large li {
 #personal-box {
   float: right;
   width: 350px;
-  margin-top: 5px;
+  margin-top: 1px;
   margin-right: 15px;
 }
 
@@ -244,13 +244,20 @@ ul.bullets_large li {
 
 #personal-box .personal-info {
   border: 0;
-  margin: 0;
-  margin-top: 5px;
+  margin: 2px 0 2px;
   padding: 5px;
   height: 60px;
   width: 283px;
   background: url("../images/borders/personal-box.png") 0 0 no-repeat;
 }
+
+#profile-edit-link {
+  clear: right;
+  text-align: right;
+  padding-right: 5px;
+  margin-top: 4px;
+}
+
 .personal-logo {
   float: right;
   height: 60px;
