@@ -5,6 +5,8 @@ from formencode import validators, Invalid
 from pylons.i18n import _
 from pylons import c
 
+from ututi.model import meta, Email
+
 from ututi.model import LocationTag
 
 def html_cleanup(input):
@@ -143,3 +145,21 @@ class TagsValidator(validators.FormValidator):
                     raise Invalid(self.message('too_long', state),
                                   form_dict, state,
                                   error_dict={'tags' : Invalid(self.message('too_long', state), form_dict, state)})
+
+class UniqueEmail(validators.FancyValidator):
+
+    messages = {
+        'empty': _(u"Enter a valid email."),
+        'non_unique': _(u"The email already exists."),
+        }
+
+    def validate_python(self, value, state):
+        if value == '':
+            raise Invalid(self.message("empty", state), value, state)
+        else:
+            existing = meta.Session.query(Email).filter_by(email=value.strip().lower()).first()
+            id = c.user.id if c.user is not None else 0
+            if existing is not None and existing.user.id != id:
+                raise Invalid(self.message("non_unique", state), value, state)
+
+

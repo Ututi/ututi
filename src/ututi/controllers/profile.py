@@ -1,16 +1,15 @@
 from datetime import date
 import logging
 
-from paste.util.converters import asbool
 from pkg_resources import resource_stream
 
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql.expression import desc, or_, asc, func
-from formencode import Schema, validators, htmlfill
+from formencode import Schema, validators, htmlfill, All
 from formencode.api import Invalid
 from webhelpers import paginate
 
-from pylons import request, c, url, config
+from pylons import request, c, url
 from pylons.templating import render_mako_def
 from pylons.controllers.util import redirect_to
 
@@ -22,7 +21,7 @@ from ututi.lib.emails import email_confirmation_request
 from ututi.lib.security import ActionProtector
 from ututi.lib.search import search_query, search_query_count
 from ututi.lib.image import serve_image
-from ututi.lib.validators import UserPasswordValidator
+from ututi.lib.validators import UserPasswordValidator, UniqueEmail
 from ututi.lib.forms import validate
 from ututi.lib import gg
 
@@ -93,7 +92,10 @@ class ContactForm(Schema):
 
     allow_extra_fields = False
 
-    email = validators.Email()
+    msg = {'non_unique': _(u"This email is already in use.")}
+    email = All(validators.Email(not_empty=True, strip=True),
+                UniqueEmail(messages=msg, strip=True))
+
 
     gadugadu_uin = validators.Int()
     gadugadu_confirmation_key = validators.String()

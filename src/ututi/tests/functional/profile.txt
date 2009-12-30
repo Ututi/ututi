@@ -21,6 +21,42 @@ Now we'll try editing our profile information. First we need to log in.
     >>> browser.printQuery("id('personal-box')//div[@class='fullname']/text()")
     Adminas Adminovix
 
+The user should be able to change his email:
+
+    >>> browser.printQuery("id('personal-box')//div[@class='small email']/text()")
+    admin@ututi.lt
+
+    >>> browser.open('http://localhost/profile/edit')
+    >>> form = browser.getForm('contacts_form')
+    >>> form.getControl('Your email address').value = 'user@ututi.lt'
+    >>> form.getControl('Update contacts').click()
+
+This email is already in use, so we won't be able to use it.
+
+    >>> browser.printQuery("id('personal-box')//div[@class='small email']/text()")
+    admin@ututi.lt
+
+    >>> browser.printQuery("//span[@class='error-message']/text()")
+    This email is already in use.
+
+Let's try something unique
+
+    >>> form = browser.getForm('contacts_form')
+    >>> form.getControl('Your email address').value = 'uniqueuser@ututi.lt'
+    >>> form.getControl('Update contacts').click()
+
+    >>> browser.printQuery("id('personal-box')//div[@class='small email']/text()")
+    uniqueuser@ututi.lt
+
+    >>> browser.printQuery("//span[@class='error-message']/text()")
+
+The should be an email confirmation request in our inbox:
+    >>> from ututi.lib.mailer import mail_queue
+    >>> len(mail_queue)
+    1
+    >>> mail_queue[:] = []
+
+
 We'll go to our profile edit page. And change our name as well as upload a logo.
 
     >>> browser.open('http://localhost/profile/edit')

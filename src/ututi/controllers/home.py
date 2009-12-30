@@ -22,24 +22,10 @@ from ututi.lib import gg
 from ututi.lib.emails import email_confirmation_request, email_password_reset
 from ututi.lib.messaging import Message
 from ututi.lib.security import ActionProtector
-
+from ututi.lib.validators import UniqueEmail
 from ututi.model import meta, User, Email, PendingInvitation, LocationTag, Payment
 
 log = logging.getLogger(__name__)
-
-class UniqueEmail(validators.FancyValidator):
-
-    messages = {
-        'empty': _(u"Enter a valid email."),
-        'non_unique': _(u"The email already exists."),
-        }
-
-    def validate_python(self, value, state):
-        if value == '':
-            raise Invalid(self.message("empty", state), value, state)
-        elif meta.Session.query(Email).filter_by(email=value.strip().lower()).count() > 0:
-            raise Invalid(self.message("non_unique", state), value, state)
-
 
 class PasswordRecoveryForm(Schema):
     allow_extra_fields = False
