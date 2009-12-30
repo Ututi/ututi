@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-12-05 09:26+0200\n"
+"PO-Revision-Date: 2009-12-30 14:06+0200\n"
 "Last-Translator: Jaroslav Šatkevič <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -162,12 +162,6 @@ msgstr "Nie możesz usunąć grupy, do której ktoś należy!"
 msgid "Group '%(group_title)s' has been deleted!"
 msgstr "Grupa '%(group_title)s' została usunięta!"
 
-msgid "Enter a valid email."
-msgstr "Wprowadź aktualny e-mail."
-
-msgid "The email already exists."
-msgstr "Taki e-mail już istnieje."
-
 msgid "Please enter your password to register."
 msgstr "Wprowadź hasło."
 
@@ -298,6 +292,9 @@ msgstr "Nowe na Ututi: %(file_changes)s i %(page_changes)s"
 msgid "This is not the confirmation code we sent you."
 msgstr "Błędny kod!"
 
+msgid "This email is already in use."
+msgstr ""
+
 msgid "Search"
 msgstr "Szukaj"
 
@@ -391,6 +388,12 @@ msgstr "To pole nie może zostać puste."
 
 msgid "The tag is too long."
 msgstr "Tag jest zbyt długi."
+
+msgid "Enter a valid email."
+msgstr "Wprowadź aktualny e-mail."
+
+msgid "The email already exists."
+msgstr "Taki e-mail już istnieje."
 
 #, python-format
 msgid "A new file has been uploaded for the %(title)s:"
@@ -582,6 +585,9 @@ msgstr "profil"
 msgid "Change your personal information"
 msgstr "Zaktualizuj swoje dane osobowe"
 
+msgid "Change profile"
+msgstr ""
+
 msgid "Wrong password or username!"
 msgstr "Niepoprawne hasło lub login"
 
@@ -695,6 +701,13 @@ msgstr "Importuj przedmioty"
 
 msgid "Ututi users:"
 msgstr "Użytkownicy Ututi:"
+
+#, python-format
+msgid "found %(count)s user"
+msgid_plural "found %(count)s users"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #, python-format
 msgid "%(count)s subject"
@@ -1090,6 +1103,39 @@ msgstr "Usuń grupę"
 msgid "The group's page is empty. Enter your description."
 msgstr "Strona grupy jest pusta. Dodaj opis."
 
+msgid "You have increased your group's file limit!"
+msgstr ""
+
+msgid ""
+"Once we get confirmation that the payment has been transfered, your group"
+" will be able to store an unlimited amount of files. The payment will be "
+"valid for 6 months."
+msgstr ""
+
+msgid "Good luck using Ututi groups!"
+msgstr ""
+
+msgid "back to the group's files"
+msgstr ""
+
+msgid "You have decided not to increase Your group's file limit"
+msgstr ""
+
+msgid ""
+"We hope You did not increase Your group's file limit because You decided "
+"to store Your files in the publicly accessible subject folders and share "
+"them with everybody :)"
+msgstr ""
+
+msgid "Paying for the group is not possible at the moment"
+msgstr ""
+
+msgid "At the moment payments for the group's file limit cannot be made."
+msgstr ""
+
+msgid "Back to the group's files"
+msgstr ""
+
 #, python-format
 msgid "Subject %(subj)s was selected."
 msgstr "Wybrano przedmiot %(subj)s."
@@ -1124,6 +1170,25 @@ msgstr "Strona grupy"
 
 msgid "Watched subjects"
 msgstr "Obserwowane przedmioty"
+
+msgid "Make your group's file space unlimited"
+msgstr ""
+
+msgid ""
+"The amount of group's private files is limited to 200 Mb. This is so "
+"because Ututi encourages users to store their files in publicly "
+"accessible subjects where they can be shared with all the users. But if "
+"You want to keep more than 200 Mb of files, You can do this."
+msgstr ""
+
+#, python-format
+msgid ""
+"For <em>%d Lt</em> Your group will be able to store an <em>unlimited "
+"amount of files</em>:"
+msgstr ""
+
+msgid "increase the limit"
+msgstr ""
 
 msgid "email subject"
 msgstr "temat wypowiedzi"
@@ -1205,6 +1270,9 @@ msgstr "Nowa wiadomość na forum wspólnoty"
 
 msgid "My groups"
 msgstr "Moje grupy"
+
+msgid "Support us"
+msgstr ""
 
 msgid "My information"
 msgstr "Moje dane"
@@ -1356,6 +1424,14 @@ msgstr "Najnowsze pliki"
 msgid "Latest pages"
 msgstr "Najnowsze strony (wiki)"
 
+msgid "Very sad..."
+msgstr ""
+
+msgid ""
+"We are very disappointed that you have decided not to support Ututi. We "
+"hope you will support us next time. Good luck!"
+msgstr ""
+
 msgid "What have I been doing?"
 msgstr "Moja aktywność"
 
@@ -1392,6 +1468,43 @@ msgstr "Przedmioty obserwowane przez %(group_title)s"
 
 msgid "This group is not watching any subjects."
 msgstr "Ta grupa nie obserwuje przedmiotów."
+
+msgid "Why we need support?"
+msgstr ""
+
+msgid ""
+"Ututi is just like wikipedia: every user can change, create, see and "
+"download the content for free.  But maintainance of servers, develpment "
+"and supervision requires recources.  So if Ututi has helped you pass an "
+"exam, write your thesis or you just like Ututi, we are asking you to "
+"contribute by making a small donation :)"
+msgstr ""
+
+msgid ""
+"If you will donate at least 50 you will receive a gift &mdash; Ututi "
+"T-shirt (you can donate this amount in parts)."
+msgstr ""
+
+msgid "I want to donate:"
+msgstr ""
+
+msgid "5 litas"
+msgstr ""
+
+msgid "10 litas"
+msgstr ""
+
+msgid "50 litas"
+msgstr ""
+
+msgid "Thank you for supporting Ututi!"
+msgstr ""
+
+msgid ""
+"You have just contributed to the development of Ututi! A medal, "
+"signifying your Ututi supporter status, should soon appear in your "
+"profile. Good luck continuing to use Ututi!"
+msgstr ""
 
 msgid ""
 "This is a list of the subjects You are watching. By clicking on the cross"
@@ -1459,6 +1572,12 @@ msgstr[2] "znaleziono %(count)s wyników"
 msgid "No results found."
 msgstr "Brak wyników."
 
+msgid "Done"
+msgstr ""
+
+msgid "File upload failed."
+msgstr ""
+
 msgid "Here"
 msgstr "bieżący folder"
 
@@ -1468,17 +1587,28 @@ msgstr "(Usuń)"
 msgid "There are no files here, this folder is empty!"
 msgstr "Brak dokumentów. Folder jest pusty."
 
+msgid "free space:"
+msgstr ""
+
 msgid "upload file to..."
 msgstr "dodaj plik do..."
 
-msgid "Upload the file to any folder."
-msgstr "Dodaj dokument do dowolnego folderu."
+msgid "Increase file area limits"
+msgstr ""
+
+msgid "Increase limits"
+msgstr ""
 
 msgid "New folder:"
 msgstr "Nowy folder:"
 
 msgid "create"
 msgstr "utwórz"
+
+msgid ""
+"No more space for private files. We recommend moving files into subjects "
+"or upgrading the group."
+msgstr ""
 
 msgid ""
 "Your <strong>email</strong> is not confirmed! Please confirm your email "
@@ -1623,8 +1753,34 @@ msgstr "wprowadź nazwę lub nadaj nową nazwę"
 msgid "enter the name"
 msgstr "podaj imię"
 
-msgid "You can keep up to 200 Mb of private group files here (e.g. pictures)"
-msgstr "Możesz przechowywać tu nawet 200 Mb plików Twojej grupy (n.p. zdjęć)"
+#, python-format
+msgid "You can keep up to %s of private group files here (e.g. pictures)"
+msgstr ""
+
+msgid "By paying for the group, you will get an unlimited file area for 6 months."
+msgstr ""
+
+msgid "Pay for group extension."
+msgstr ""
+
+msgid ""
+"Once we get confirmation that the payment has been transfered,your group "
+"will be able to store an unlimited amount of files.The payment will be "
+"valid for 6 months."
+msgstr ""
+
+msgid ""
+"We hope You did not increase Your group's file limit because You decided "
+"to store Your filesin the publicly accessible subject folders and share "
+"them with everybody :)"
+msgstr ""
+
+msgid ""
+"The amount of group's private files is limited to 200 Mb. This is so "
+"because Ututiencourages users to store their files in publicly accessible"
+" subjects where they canbe shared with all the users. But if You want to "
+"keep more than 200 Mb of files,You can do this."
+msgstr ""
 
 msgid "Login"
 msgstr "Login"
@@ -1799,6 +1955,18 @@ msgstr ""
 "Dodanie przedmiotu do obserwowanych skutkuje otrzymywaniem powiadomień o "
 "zmianach w tym przedmiocie."
 
+#, python-format
+msgid ""
+"You like <a href=\"%(url)s\">Ututi</a> and you want to contribute? "
+"Support us!"
+msgstr ""
+
+msgid "Support now"
+msgstr ""
+
+msgid "supporters"
+msgstr ""
+
 msgid "recommend Ututi to your friends"
 msgstr "poleć Ututi znajomym"
 
@@ -1812,18 +1980,6 @@ msgstr "Zaproś"
 
 msgid "Edit profile"
 msgstr "Edytuj profil"
-
-msgid "send GG message"
-msgstr "wyślij wiadomość gg"
-
-msgid "UIN"
-msgstr "gg"
-
-msgid "Your message."
-msgstr "Twoja wiadomość."
-
-msgid "Send message"
-msgstr "Wyślij wiadomość"
 
 msgid "You are not a member of any."
 msgstr "Nie należysz do żadnej"
@@ -1858,6 +2014,9 @@ msgstr "Przyjaciele Ututi"
 #, python-format
 msgid "Private files of the group %s"
 msgstr "Grupa %s"
+
+msgid "Upload file"
+msgstr ""
 
 msgid "Subject files"
 msgstr "Pliki przedmiotu"

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2009-12-05 09:43+0200\n"
+"PO-Revision-Date: 2009-12-30 14:06+0200\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -167,12 +167,6 @@ msgstr "Negalite ištrinti šios grupės, kol joje yra narių!"
 msgid "Group '%(group_title)s' has been deleted!"
 msgstr "Grupė '%(group_title)s' buvo ištrinta."
 
-msgid "Enter a valid email."
-msgstr "Įveskite galiojantį el. paštą."
-
-msgid "The email already exists."
-msgstr "Toks el. paštas jau yra."
-
 msgid "Please enter your password to register."
 msgstr "Įveskite slaptažodį."
 
@@ -306,6 +300,9 @@ msgstr "Ututi naujienos: %(file_changes)s ir %(page_changes)s"
 msgid "This is not the confirmation code we sent you."
 msgstr "Jums buvo išsiųstas ne toks patvirtinimo kodas."
 
+msgid "This email is already in use."
+msgstr "Šis el. pašto adresas jau naudojamas."
+
 msgid "Search"
 msgstr "Paieška"
 
@@ -401,6 +398,12 @@ msgstr "Šio lauko negalima palikti tuščio."
 
 msgid "The tag is too long."
 msgstr "Žyma per ilga."
+
+msgid "Enter a valid email."
+msgstr "Įveskite galiojantį el. paštą."
+
+msgid "The email already exists."
+msgstr "Toks el. paštas jau yra."
 
 #, python-format
 msgid "A new file has been uploaded for the %(title)s:"
@@ -586,6 +589,9 @@ msgstr "namai"
 msgid "Change your personal information"
 msgstr "Pakeisti asmeninę informaciją"
 
+msgid "Change profile"
+msgstr "Redaguoti profilį"
+
 msgid "Wrong password or username!"
 msgstr "Neteisingas el. paštas arba slaptažodis"
 
@@ -694,6 +700,13 @@ msgstr "Dalykų importavimas"
 
 msgid "Ututi users:"
 msgstr "Ututi naudotojai:"
+
+#, python-format
+msgid "found %(count)s user"
+msgid_plural "found %(count)s users"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #, python-format
 msgid "%(count)s subject"
@@ -807,7 +820,10 @@ msgid ""
 "We have received a request to confirm the ownership of this email by "
 "%(fullname)s on the Ututi system. If this email belongs to You, confirm "
 "it by clicking on this link:"
-msgstr "Gavome pranešimą, kad %(fullname)s šiuo el. pašto adresu nori prisijungti prie Ututi.lt sistemos. Jei tai Jūs, prašome patvirtinti paspaudžiant nuorodą:"
+msgstr ""
+"Gavome pranešimą, kad %(fullname)s šiuo el. pašto adresu nori prisijungti"
+" prie Ututi.lt sistemos. Jei tai Jūs, prašome patvirtinti paspaudžiant "
+"nuorodą:"
 
 msgid "Ututi team"
 msgstr "Ututi komanda"
@@ -1088,6 +1104,48 @@ msgstr "Ištrinti grupę"
 msgid "The group's page is empty. Enter your description."
 msgstr "Grupės puslapis vis dar tuščias. Reikėtų ką nors parašyti..."
 
+msgid "You have increased your group's file limit!"
+msgstr "Jūs padidinote savo grupės limitą!"
+
+msgid ""
+"Once we get confirmation that the payment has been transfered, your group"
+" will be able to store an unlimited amount of files. The payment will be "
+"valid for 6 months."
+msgstr ""
+"Kai mes gausime patvirtinimą, kad apmokėjimas įvykdytas, Jūsų grupė galės"
+" laikyti\n"
+"neribotą failų skaičių. Apmokėjimas galios 6 mėnesius."
+
+msgid "Good luck using Ututi groups!"
+msgstr "Sėkmės naudojantis Ututi grupėmis!"
+
+msgid "back to the group's files"
+msgstr "grįžti į grupės failus"
+
+msgid "You have decided not to increase Your group's file limit"
+msgstr "Jūs nusprendėte nedidinti grupės failų limito"
+
+msgid ""
+"We hope You did not increase Your group's file limit because You decided "
+"to store Your files in the publicly accessible subject folders and share "
+"them with everybody :)"
+msgstr ""
+"Tikimės, kad nedidinote grupės failų limito, nes nusprendėte daugiau "
+"failų laikyti\n"
+"visiems prieinamuose dalykų kataloguose, kur jais naudoti galės visi "
+"studentai."
+
+msgid "Paying for the group is not possible at the moment"
+msgstr ""
+"Atsiprašome, šiuo metu sumokėti už grupės apribojimų padidinimą nėra "
+"galimybės."
+
+msgid "At the moment payments for the group's file limit cannot be made."
+msgstr "Šiuo metu grupių apmokėjimai nepriimami."
+
+msgid "Back to the group's files"
+msgstr "grįžti į grupės failus"
+
 #, python-format
 msgid "Subject %(subj)s was selected."
 msgstr "Dalykas %(subj)s buvo pasirinktas."
@@ -1122,6 +1180,31 @@ msgstr "Grupės puslapis"
 
 msgid "Watched subjects"
 msgstr "Stebimi dalykai"
+
+msgid "Make your group's file space unlimited"
+msgstr "Panaikinkite grupės failų apribojimus"
+
+msgid ""
+"The amount of group's private files is limited to 200 Mb. This is so "
+"because Ututi encourages users to store their files in publicly "
+"accessible subjects where they can be shared with all the users. But if "
+"You want to keep more than 200 Mb of files, You can do this."
+msgstr ""
+"Grupės failų kiekis ribojimas iki 200 Mb. Taip yra todėl, kad Ututi "
+"skatina\n"
+"vartotojus laikyti failus viešai prieinamuose dalykuose, kur jais gali "
+"naudotis visi.\n"
+"Jeigu norite laikyti daugiau nei 200 Mb failų grupės erdvėje, galite tai "
+"padaryti."
+
+#, python-format
+msgid ""
+"For <em>%d Lt</em> Your group will be able to store an <em>unlimited "
+"amount of files</em>:"
+msgstr "Už <em>%d Lt</em> Jūsų grupė galės laikyti <en>neribotą failų kiekį</em>:"
+
+msgid "increase the limit"
+msgstr "padidinti limitą"
 
 msgid "email subject"
 msgstr "laiško tema"
@@ -1203,6 +1286,9 @@ msgstr "Bendruomenės forumo pranešimai"
 
 msgid "My groups"
 msgstr "Mano grupės"
+
+msgid "Support us"
+msgstr "Paremkite mus"
 
 msgid "My information"
 msgstr "Apie mane"
@@ -1352,6 +1438,16 @@ msgstr "Naujausi failai"
 msgid "Latest pages"
 msgstr "Naujausi puslapiai"
 
+msgid "Very sad..."
+msgstr "Labai gaila..."
+
+msgid ""
+"We are very disappointed that you have decided not to support Ututi. We "
+"hope you will support us next time. Good luck!"
+msgstr ""
+"Mums labai gaila, kad nusprendėte neparemti Ututi. Tikimės, kad dar "
+"grįšite ir paremsite mus kitą kartą. Sėkmės!"
+
 msgid "What have I been doing?"
 msgstr "Ir ką gi aš nuveikiau?"
 
@@ -1392,6 +1488,56 @@ msgstr "Grupės %(group_title)s stebimi dalykai"
 
 msgid "This group is not watching any subjects."
 msgstr "Ši grupė nestebi nė vieno dalyko."
+
+msgid "Why we need support?"
+msgstr "Kodėl mums reikia paramos?"
+
+msgid ""
+"Ututi is just like wikipedia: every user can change, create, see and "
+"download the content for free.  But maintainance of servers, develpment "
+"and supervision requires recources.  So if Ututi has helped you pass an "
+"exam, write your thesis or you just like Ututi, we are asking you to "
+"contribute by making a small donation :)"
+msgstr ""
+"Ututi veikia Vikipedijos principu: kiekvienas vartotojas gali pildyti, "
+"redaguoti, matyti ir atsisiųsti\n"
+"svetainės turinį nemokamai. Tačiau sistemos palaikymas - serveriai, "
+"programuotojai ir turinio priežiūra\n"
+"(moderavimas vei moderatoriai) reikalauja resursų. Todėl jeigu Ututi "
+"padėjo išlaikyti egzaminą, parašyti\n"
+"kursinį darbą ar tiesiog tau patinka, kviečiame tave prisijungti prie "
+"vystymosi nedidele parama :)"
+
+msgid ""
+"If you will donate at least 50 you will receive a gift &mdash; Ututi "
+"T-shirt (you can donate this amount in parts)."
+msgstr ""
+"Paaukoję bent 50 lt gausite dovaną &mdash; Ututi marškinėlius (nebūtina "
+"aukoti visos sumos iš karto)."
+
+msgid "I want to donate:"
+msgstr "Noriu paaukoti:"
+
+msgid "5 litas"
+msgstr "5 litus"
+
+msgid "10 litas"
+msgstr "10 litų"
+
+msgid "50 litas"
+msgstr "50 litų"
+
+msgid "Thank you for supporting Ututi!"
+msgstr "Ačiū, kad palaikote Ututi!"
+
+msgid ""
+"You have just contributed to the development of Ututi! A medal, "
+"signifying your Ututi supporter status, should soon appear in your "
+"profile. Good luck continuing to use Ututi!"
+msgstr ""
+"Tu ką tik prisidėjai prie Ututi tobulinimo! Už tai tavo profilyje "
+"neužilgo atsiras medalis,\n"
+"rodantis Ututi rėmėjo statusą. Sėkmės naudojantis Ututi!"
 
 msgid ""
 "This is a list of the subjects You are watching. By clicking on the cross"
@@ -1461,6 +1607,12 @@ msgstr[2] "rasta %(count)s rezultatų"
 msgid "No results found."
 msgstr "Nerasta jokių rezultatų."
 
+msgid "Done"
+msgstr "Baigta"
+
+msgid "File upload failed."
+msgstr "Failo įkėlimas nepavyko."
+
 msgid "Here"
 msgstr "tiesiog čia"
 
@@ -1470,17 +1622,31 @@ msgstr "(Trinti)"
 msgid "There are no files here, this folder is empty!"
 msgstr "Čia failų nėra, aplankas tuščias!"
 
+msgid "free space:"
+msgstr "laisva vieta:"
+
 msgid "upload file to..."
 msgstr "įkelti failą į..."
 
-msgid "Upload the file to any folder."
-msgstr "Įkelkite failą į norimą katalogą."
+msgid "Increase file area limits"
+msgstr "Padidinti failų srities limitą"
+
+msgid "Increase limits"
+msgstr "Padidinti limitą"
 
 msgid "New folder:"
 msgstr "Kurti aplanką"
 
 msgid "create"
 msgstr "sukurti"
+
+msgid ""
+"No more space for private files. We recommend moving files into subjects "
+"or upgrading the group."
+msgstr ""
+"Privatiems grupės failams nebeliko vietos. Rekomenduojame perkelti failus"
+" į dalykus arba\n"
+"sumokėti už grupę be apribojimų."
 
 msgid ""
 "Your <strong>email</strong> is not confirmed! Please confirm your email "
@@ -1623,8 +1789,47 @@ msgstr "įvesk pavadinimą arba sukurk naują"
 msgid "enter the name"
 msgstr "įvesk pavadinimą"
 
-msgid "You can keep up to 200 Mb of private group files here (e.g. pictures)"
-msgstr "Čia galite laikyti iki 200 Mb privačių grupės failų (pvz. nuotraukų)"
+#, python-format
+msgid "You can keep up to %s of private group files here (e.g. pictures)"
+msgstr "Čia galite laikyti iki %s privačių grupės failų (pvz. nuotraukų)"
+
+msgid "By paying for the group, you will get an unlimited file area for 6 months."
+msgstr "Sumokėję už grupę, 6 mėnesius turėsite neribotą vietos failams kiekį."
+
+msgid "Pay for group extension."
+msgstr "Sumokėti už grupę."
+
+msgid ""
+"Once we get confirmation that the payment has been transfered,your group "
+"will be able to store an unlimited amount of files.The payment will be "
+"valid for 6 months."
+msgstr ""
+"Kai gausime patvirtinimą, kad apmokėjimas pervestas, Jūsų grupė galės "
+"laikyti neribotą\n"
+"failų kiekį. Apmokėjimas galios 6 mėnesius."
+
+msgid ""
+"We hope You did not increase Your group's file limit because You decided "
+"to store Your filesin the publicly accessible subject folders and share "
+"them with everybody :)"
+msgstr ""
+"Tikimės, kad nedidinote grupės failų limito, nes nusprendėte daugiau "
+"failų laikyti\n"
+"visiems prieinamuose dalykų kataloguose, kur jais naudoti galės visi "
+"studentai."
+
+msgid ""
+"The amount of group's private files is limited to 200 Mb. This is so "
+"because Ututiencourages users to store their files in publicly accessible"
+" subjects where they canbe shared with all the users. But if You want to "
+"keep more than 200 Mb of files,You can do this."
+msgstr ""
+"Grupės failų kiekis ribojimas iki 200 Mb. Taip yra todėl, kad Ututi "
+"skatina\n"
+"vartotojus laikyti failus viešai prieinamuose dalykuose, kur jais gali "
+"naudotis visi.\n"
+"Jeigu norite laikyti daugiau nei 200 Mb failų grupės erdvėje, galite tai "
+"padaryti.<"
 
 msgid "Login"
 msgstr "Prisjungti"
@@ -1803,6 +2008,18 @@ msgstr ""
 "Prisidėkite studijuojamus dalykus prie stebimų dalykų sąrašo ir gaukite "
 "pranešimus apie pasiketimus šiuose dalykuose."
 
+#, python-format
+msgid ""
+"You like <a href=\"%(url)s\">Ututi</a> and you want to contribute? "
+"Support us!"
+msgstr "Patinka <a href=\"%(url)s\">Ututi</a> ir nori prisidėti? Paremk mus!"
+
+msgid "Support now"
+msgstr "Paremk mus dabar"
+
+msgid "supporters"
+msgstr "rėmėjai"
+
 msgid "recommend Ututi to your friends"
 msgstr "rekomenduok Ututi draugams"
 
@@ -1816,18 +2033,6 @@ msgstr "Siųsti pakvietimą"
 
 msgid "Edit profile"
 msgstr "redaguoti profilį"
-
-msgid "send GG message"
-msgstr "siųsti GG žinutę"
-
-msgid "UIN"
-msgstr "UIN"
-
-msgid "Your message."
-msgstr "Jūsų žinutė"
-
-msgid "Send message"
-msgstr "Siųsti žinutę"
 
 msgid "You are not a member of any."
 msgstr ""
@@ -1864,6 +2069,9 @@ msgstr "Ututi draugai"
 #, python-format
 msgid "Private files of the group %s"
 msgstr "Grupės '%s' privatūs failai"
+
+msgid "Upload file"
+msgstr "Įkelti failą"
 
 msgid "Subject files"
 msgstr "Dalyko failai"
