@@ -2,9 +2,9 @@
 
 <h1>${_("Make your group's file space unlimited")}</h1>
 <br />
-${_("The amount of group's private files is limited to 200 Mb. This is so because Ututi"
-"encourages users to store their files in publicly accessible subjects where they can"
-"be shared with all the users. But if You want to keep more than 200 Mb of files,"
+${_("The amount of group's private files is limited to 200 Mb. This is so because Ututi "
+"encourages users to store their files in publicly accessible subjects where they can "
+"be shared with all the users. But if You want to keep more than 200 Mb of files, "
 "You can do this.")}
 
 <div class="orange_emph">
