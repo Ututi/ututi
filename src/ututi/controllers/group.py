@@ -33,7 +33,7 @@ from ututi.model import meta, Group, SimpleTag, Subject, ContentItem, PendingInv
 from ututi.controllers.subject import SubjectAddMixin
 from ututi.controllers.subject import NewSubjectForm
 from ututi.controllers.search import SearchSubmit
-from ututi.lib.security import is_root, check_crowds
+from ututi.lib.security import is_root, check_crowds, deny
 from ututi.lib.security import ActionProtector
 from ututi.lib.search import search_query, search_query_count
 from ututi.lib.emails import group_request_email, group_confirmation_email
@@ -248,8 +248,14 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             return render('group/home_public.mako')
 
     @group_action
-    @ActionProtector("user")
     def request_join(self, group):
+        if c.user is None:
+            c.login_form_url = url(controller='home',
+                                   action='login',
+                                   came_from=group.url(action='request_join'),
+                                   context_type='group_join')
+            deny(_('You have to log in or register to request group membership.'), 401)
+
         request = PendingRequest.get(c.user, group)
         if request is None and not group.is_member(c.user):
             if c.user is not None and self._check_handshakes(group, c.user) == 'invitation':

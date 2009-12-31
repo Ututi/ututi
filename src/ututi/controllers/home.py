@@ -143,9 +143,15 @@ class HomeController(UniversityListMixin):
                                       action='home'))
         filename = request.params.get('context', None)
 
+        context_type = request.params.get('context_type', None)
+
         if filename is not None:
             c.header = _('You have to be logged in to download a file!')
             c.message = _('After logging in you will be redirected to the download page of the file <strong>%(filename)s</strong> and the download will start automatically.') % dict(filename=filename)
+            c.show_login = True
+        elif context_type == 'group_join':
+            c.header = _('You have to log in or register to join a group!')
+            c.message = _('After logging in or registering, your request to join the group will be sent.')
             c.show_login = True
         else:
             c.header = _('Permission denied!')

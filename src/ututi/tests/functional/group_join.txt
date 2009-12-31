@@ -12,7 +12,7 @@ request group membership.
 
    >>> browser.getControl('Join the group').click()
    >>> browser.url
-   'http://localhost/?came_from=http%3A%2F%2Flocalhost%2Fgroup%2Fmoderators%2Frequest_join'
+   'http://localhost/login?context_type=group_join&came_from=%2Fgroup%2Fmoderators%2Frequest_join'
 
    >>> form = browser.getForm('registration_form')
    >>> form.getControl('Fullname').value = 'Jonas Petraitis Petrauskas'
