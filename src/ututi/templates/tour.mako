@@ -1,0 +1,182 @@
+<%inherit file="/base.mako" />
+
+<%def name="body_class()">no_sidebar</%def>
+
+<%def name="portlets()">
+</%def>
+
+<div id="tour_navigation">
+  <a href="#" id="tour_prev">${_('Previous')}</a>
+  <span id="pager" ></span>
+  <a href="#" id="tour_next">${_('Next')}</a>
+</div>
+<div id="tour_slides">
+  <div class="tour_slide">
+    <a name="1" class="anchor">1</a>
+    <div class="image">
+      ${h.image('/images/tour/%s/1.jpg' % c.lang, alt='logo')|n}
+    </div>
+    <div class="text">
+      <h2>${_('Ututi - your university on the web')}</h2>
+      <p>
+        ${_('Your academic groups and subjects containing '
+        'related materials: files, notes and descriptions. ')}
+      </p>
+      <p>
+        ${_('All these things are combined in the handy Ututi system.')}
+      </p>
+    </div>
+  </div>
+
+  <div class="tour_slide">
+    <a name="2" class="anchor">2</a>
+    <div class="image">
+      ${h.image('/images/tour/%s/2.jpg' % c.lang, alt='logo')|n}
+    </div>
+    <div class="text">
+      <h2>${_('Groups: email')}</h2>
+      <p>
+        ${_('It is a communication tool for You and Your group mates. '
+        'Ututi groups work just like mailing lists: every member can '
+        'receive these messages in their email account and can reply to '
+        'them from there (You do not have to log on to Ututi every time). ')}
+      </p>
+      <p>
+        ${_('You can always choose not to receive these email messages in the group settings.')}
+      </p>
+    </div>
+  </div>
+
+  <div class="tour_slide">
+    <a name="3" class="anchor">3</a>
+    <div class="image">
+      ${h.image('/images/tour/%s/3.jpg' % c.lang, alt='logo')|n}
+    </div>
+    <div class="text">
+      <h2>${_('Groups: subjects')}</h2>
+      <p>
+        ${_('Every group studies subjects. Ututi also has a catalog '
+        'of academic subjects. Here the subjects are classified by the '
+        'university and faculty. Every group can mark the subjects it is '
+        'studying in the "subjects" area.')}
+      </p>
+      <p>
+        ${_('Members of the group receive notifications about the changes '
+        'in all watched subjects: what files were uploaded, pages created '
+        'or descriptions changed.')}
+      </p>
+      <br />
+      <p>
+        ${_('You can find new subjects by using our search and if they do not '
+        'exist - create them :)')}
+      </p>
+    </div>
+  </div>
+
+  <div class="tour_slide">
+    <a name="4" class="anchor">4</a>
+    <div class="image">
+      ${h.image('/images/tour/%s/4.jpg' % c.lang, alt='logo')|n}
+    </div>
+    <div class="text">
+      <h2>${_('Groups: files')}</h2>
+      <p>
+        ${_('Ututi makes it easy to share files. In the "files" area '
+        'members of the group can see the private files of the group '
+        'and all the files of the subjects the group is watching.')}
+      </p>
+      <br />
+      <p>
+        ${_('Private files are kept in a separate folder. Their size is '
+        'limited to 100 Mb.')}
+      </p>
+      <br />
+      <p>
+        ${_('Public files are kept in the folders belonging to the subjects. '
+        'The folders are visible in the group when it is watching these subjects. '
+        'The size and amount of public files is not limited. What is more, '
+        'files can be added to subjects not only by your group, but also by other '
+        'groups and Ututi members. This makes it easy to share information.')}
+      </p>
+    </div>
+  </div>
+
+  <div class="tour_slide">
+    <a name="5" class="anchor">5</a>
+    <div class="image">
+      ${h.image('/images/tour/%s/5.jpg' % c.lang, alt='logo')|n}
+    </div>
+    <div class="text">
+      <h2>${_('Groups: events')}</h2>
+      <p>
+        ${_('All the events of a groups: new members, files, subjects '
+        'are visible in the "whats new" section.')}
+      </p>
+    </div>
+  </div>
+
+  <div class="tour_slide">
+    <a name="6" class="anchor">6</a>
+    <div class="image">
+      ${h.image('/images/tour/%s/6.jpg' % c.lang, alt='logo')|n}
+    </div>
+    <div class="text">
+      <h2>${_('Members: subjects')}</h2>
+      <p>
+        ${_('Not only groups, but also single Ututi members can watch subjects. '
+        'You can easily start watching a subject by visiting its page and clicking on '
+        'the link "start watching".')}
+      </p>
+      <br />
+      <p>
+        ${_('You can view all the subjects You are watching in the "files" area of Your '
+        'profile.')}
+      </p>
+      <br />
+      <p>
+        ${_('Here You can also choose to ignore the subjects watched by Your group - by '
+        'clicking on the "eye" icon next to a subject You will stop receiving notifications about '
+        'its events, but other group mates will continue watching it. ')}
+      </p>
+      <br />
+      <p>
+        ${_('What is more, You can specify how often You want to receive email notifications about '
+        'events in Your watched subjects.')}
+      </p>
+    </div>
+  </div>
+
+  <div class="tour_slide">
+    <a name="7" class="anchor">7</a>
+    <div class="image">
+      ${h.image('/images/tour/%s/7.jpg' % c.lang, alt='logo')|n}
+    </div>
+    <div class="text">
+      <h2>${_('Members: home')}</h2>
+      <p>
+        ${_('In Your home area You will see what is happening in Your group and '
+        'the subjects either You or Your group are watching.')}
+      </p>
+      <br />
+      <p>
+        ${_('From here You can also easily create a subject, upload a file, '
+        'invite people to use Ututi.')}
+      </p>
+    </div>
+  </div>
+</div>
+
+${h.javascript_link('/javascripts/jquery.cycle.all.js')|n}
+<script type="text/javascript">
+  //<![CDATA[
+    $('#tour_slides').cycle({
+        'fx': 'scrollHorz',
+        'next': '#tour_next',
+        'prev': '#tour_prev',
+        'pager': '#pager',
+        'timeout': 0,
+        'nowrap': 1
+      });
+    //]]>
+</script>
+

@@ -410,3 +410,6 @@ class HomeController(UniversityListMixin):
             return 'OK'
         else:
             return 'Error accepting payment'
+
+    def tour(self):
+        return render('tour.mako')

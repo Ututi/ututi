@@ -155,6 +155,7 @@ def make_map():
     map.connect('/recovery/{key}', controller='home', action='recovery')
     map.connect('/recovery', controller='home', action='recovery')
     map.connect('/register/{hash}', controller='home', action='register')
+    map.connect('/tour', controller='home', action='tour')
 
     map.connect('/got_mail', controller='receivemail', action='index')
     map.connect('/admin', controller='admin', action='index')

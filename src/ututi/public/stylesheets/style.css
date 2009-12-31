@@ -1858,4 +1858,75 @@ body.split6040 #content #page-content {
   margin-right: 425px;
 }
 
+body.no_sidebar #content #page-content {
+  margin-right: 0;
+  padding-right: 0;
+}
+
 /* end layout alternatives */
+
+/* take a tour style */
+#tour_navigation {
+  text-align: right;
+  margin: 10px 0;
+}
+
+#pager a {
+  color: #333;
+  font-size: 14px;
+  padding: 4px;
+  margin: 0 2px;
+  font-weight: bold;
+}
+
+#pager a.activeSlide {
+  background: #ffccaa;
+}
+
+#tour_prev {
+  padding-left: 15px;
+  background: white url("../images/details/link_back.png") left center no-repeat;
+  color: #333;
+  font-weight: bold;
+}
+
+#tour_next {
+  padding-right: 15px;
+  background: url("../images/details/link_arrow.png") right center no-repeat;
+  color: #333;
+  font-weight: bold;
+
+}
+
+div.tour_slide {
+  height: 500px;
+  position: relative;
+}
+
+div.tour_slide div.image {
+  width: 605px;
+  float: left;
+  padding: 0 2px 5px 0;
+  background: url("../images/details/image_shadow.png") bottom right no-repeat;
+}
+
+div.tour_slide div.image img {
+  margin: 0;
+  padding: 0;
+}
+
+div.tour_slide div.text {
+  width: 300px;
+  float: right;
+  padding-left: 30px;
+}
+
+div.tour_slide div.text h2 {
+  margin: 5px 0;
+  font-weight: normal;
+  font-size: 22px;
+}
+
+a.anchor {
+  display: none;
+}
