@@ -918,13 +918,13 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
 
     @property
     def available_size(self):
-        return int(config.get('group_file_limit', 200*1024**2))
+        return int(config.get('group_file_limit', 100*1024**2))
 
     @property
     def paid(self):
         if len(self.payments) > 0:
             pmnt = self.payments[-1]
-            return pmnt.created - datetime.utcnow() <= timedelta(days=int(config.get('group_payment_period', 190)))
+            return pmnt.created - datetime.utcnow() <= timedelta(days=int(config.get('group_payment_period', 100)))
         return False
 
 
