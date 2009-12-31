@@ -343,6 +343,9 @@ $(document).ready(function(){
       %if 'size' in controls:
         ${free_space_indicator(obj)}
       %endif
+      %if 'unlimited' in controls:
+      <span class="unlimited_size">${_('unlimited')}</span>
+      %endif
     </h2>
     %if 'size' in controls:
       ${free_space_text(obj)}

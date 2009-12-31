@@ -27,6 +27,13 @@ img.area_size_points {
   float: right;
 }
 
+span.unlimited_size {
+  color: #808080;
+  float: right;
+  font-size: 12px;
+  padding-top: 7px;
+}
+
 /* expanding section headings  */
 .click2show h2.click .cont {
   padding-right: 15px;
