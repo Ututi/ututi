@@ -32,6 +32,19 @@ h1 {
   margin: 20px 0 50px 0;
 }
 
+#ututi_features .q_mark {
+  padding-left: 35px;
+  background: transparent url("../images/details/questionmark.png") left top no-repeat;
+  font-size: 13px;
+  padding-bottom: 10px;
+}
+
+#ututi_features .q_mark h3 {
+  color: #d45500;
+  font-size: 16px;
+  padding-bottom: 5px;
+}
+
 #ututi_features h3 {
   font-size: 16px;
 }

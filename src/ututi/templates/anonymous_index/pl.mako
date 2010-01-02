@@ -99,17 +99,14 @@ ${h.stylesheet_link('/stylesheets/pl.css')|n}
         </div>
       </div>
       <div id="ututi_features" class="${c.slideshow and 'hidden' or ''}">
-        <div id="can_find">
-          <h3>${_('What can You find here?')}</h3>
-          ${_('Group mailing lists, <a href="%(link)s" title="Subject list">subjects</a> files and lecture notes.') %\
-            dict(link=url(controller='search', action='index', obj_type='subject'))|n}
+        <div class="q_mark">
+          <h3>${_('What is Ututi?')}</h3>
+          ${_('It is a web system that enables students to easily and quickly find, upload, share study materials and information.')}
         </div>
-        <div id="can_do">
-          <h3>${_('What can you do here?')}</h3>
-          ${_('Share <a href="%(subjects)s" title="Subject list">study materials</a>\
-          create <a href="%(groups)s" title="Group list">academic groups</a>\
-          and communicate with groupmates.') % dict(subjects=url(controller='search', action='index', obj_type='subject'),\
-                                                    groups=url(controller='search', action='index', obj_type='group'))|n}
+        <div class="q_mark">
+          <h3>${_('What is new about Ututi?')}</h3>
+          ${_('Ututi offers students the tools they need in their studies: mailing lists, file storage, catalogues of academic subjects all'
+          ' in one place. This means You will not need to have a separate google group.')}
         </div>
       </div>
   </div>
