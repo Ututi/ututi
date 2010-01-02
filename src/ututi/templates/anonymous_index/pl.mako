@@ -46,7 +46,15 @@ ${h.stylesheet_link('/stylesheets/pl.css')|n}
       <span>${_('Receive notifications by email and gadu gadu!')}</span>
     </div>
   </div>
+  <div id="ututi_tour_link">
+    <span>
+      ${_('Find out what is Ututi and how it works!')}
+    </span>
+    <a href="${url(controller='home', action='tour')}" title="${_('Take a tour')}">
+      ${h.image('/images/button_tour.png', alt='tour')|n}
+    </a>
 
+  </div>
   <br class="clear-left" />
   <script type="text/javascript">
   //<![CDATA[

@@ -195,3 +195,12 @@ h1 {
   margin: 0 auto;
   padding-top: 30px;
 }
+
+#ututi_tour_link img {
+  vertical-align: middle;
+}
+
+#ututi_tour_link span {
+  font-size: 14px;
+  color: #d45500;
+}
