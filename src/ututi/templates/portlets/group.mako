@@ -23,7 +23,7 @@
     <div class="structured_info">
       <h4>${group.title}</h4>
       <span class="school-link"><a href="${group.location.url()}">${' | '.join(group.location.path)}</a></span><br />
-      %if group.is_member(c.user):
+      %if c.user:
         <a href="${url(controller='groupforum', action='new_thread', id=c.group.group_id)}" title="${_('Mailing list address')}">${group.group_id}@${c.mailing_list_host}</a><br />
       %endif
       <span>
