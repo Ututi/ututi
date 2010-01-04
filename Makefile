@@ -155,7 +155,6 @@ clean:
 coverage: bin/test
 	rm -rf .coverage
 	bin/coverage run bin/test
-	mv parts/test/coverage .
 
 .PHONY: coverage_report
 coverage_report: bin/test .coverage
@@ -244,8 +243,28 @@ test_translations: bin/pofilter
 	bin/pofilter --progress=none -t xmltags -t printf --ututi ${PWD}/src/ututi/i18n/ -o ${PWD}/parts/test_translations/
 	diff -r -u ${PWD}/src/ututi/tests/expected_i18n_errors/lt ${PWD}/parts/test_translations/lt
 
+.coverage: bin/coverage bin/test
+	bin/coverage run bin/test
+
+# As our translation extraction depends on coverage, we test coverage
+# of templates any non-covered template might not get it's
+# translations extracted, which is very risky.
+.PHONY: test_template_coverage
+test_template_coverage: bin/coverage .coverage
+	bin/coverage report --omit=/usr,src/ututi/tests,`echo ~`/.buildout,src/ututi/migration | grep mako | awk  '{print $$1}' | sed s/data// | sort > parts/test/covered_templates.txt
+	find src/ututi -name "*.mako" | sed s/src\\/ututi// | sort > parts/test/all_templates.txt
+	diff -u parts/test/all_templates.txt parts/test/covered_templates.txt
+
 .PHONY: update_expected_translations
 update_expected_translations: bin/pofilter
 	bin/pofilter --progress=none -t xmltags -t printf --ututi ${PWD}/src/ututi/i18n/ -o ${PWD}/parts/test_translations/
 	rm -rf ${PWD}/src/ututi/tests/expected_i18n_errors/
 	mv ${PWD}/parts/test_translations/ ${PWD}/src/ututi/tests/expected_i18n_errors/
+
+.PHONY: test_all
+test_all: bin/test bin/coverage instance/done instance/var/run/.s.PGSQL.${PGPORT}
+	rm -rf data/templates/
+	bin/coverage run bin/test --all
+	$(MAKE) test_template_coverage
+	$(MAKE) test_translations
+
