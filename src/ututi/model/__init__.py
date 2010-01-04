@@ -924,7 +924,14 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
     def paid(self):
         if len(self.payments) > 0:
             pmnt = self.payments[-1]
-            return pmnt.created - datetime.utcnow() <= timedelta(days=int(config.get('group_payment_period', 100)))
+            period = 0
+            if pmnt.amount == int(config.get('group_payment_month', 1000)):
+                period = 31
+            elif pmnt.amount == int(config.get('group_payment_quarter', 2000)):
+                period = 100
+            elif pmnt.amount == int(config.get('group_payment_halfyear', 3000)):
+                period = 200
+            return pmnt.created - datetime.utcnow() <= timedelta(days=period)
         return False
 
 

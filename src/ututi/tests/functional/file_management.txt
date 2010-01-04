@@ -231,7 +231,7 @@ The disabled upload control is shown with a message encouraging users to pay for
     >>> browser.url
     'http://localhost/group/moderators/pay'
 
-    >>> browser.getControl('increase the limit').click()
+    >>> browser.getControl('10 Lt').click()
     >>> browser.url
     'http://localhost/pay'
 
