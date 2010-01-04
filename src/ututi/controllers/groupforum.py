@@ -8,6 +8,7 @@ from pylons.controllers.util import redirect_to
 from pylons.controllers.util import abort
 from pylons import url
 from pylons import c, config, request
+from pylons.i18n import _
 
 from mimetools import choose_boundary
 from ututi.model import File
@@ -16,6 +17,7 @@ from ututi.lib.security import check_crowds
 from ututi.lib.security import ActionProtector
 from ututi.lib.mailer import send_email
 from ututi.lib.base import render
+from ututi.lib import helpers as h
 from ututi.controllers.files import serve_file
 from ututi.controllers.group import group_action
 from ututi.controllers.group import GroupControllerBase
@@ -200,3 +202,28 @@ class GroupforumController(GroupControllerBase):
             c.user.download(file)
             meta.Session.commit()
         return serve_file(file)
+
+    @group_action
+    @ActionProtector('user')
+    def new_anonymous_post(self, group):
+        return htmlfill.render(self._new_anonymous_post_form())
+
+    def _new_anonymous_post_form(self):
+        return render('groupforum/new_anonymous_post.mako')
+
+    @group_action
+    @validate(NewMailForm, form='_new_anonymous_post_form')
+    @ActionProtector("user")
+    def post_anonymous(self, group):
+        message = send_email(c.user.emails[0].email,
+                             c.group.list_address,
+                             self.form_result['subject'],
+                             self.form_result['message'],
+                             message_id=self._generateMessageId(),
+                             send_to=self._recipients(group),
+                             list_id=group.list_address)
+        post = GroupMailingListMessage.fromMessageText(unicode(message))
+        post.group = group
+        meta.Session.commit()
+        h.flash(_('Your message to the group was successfully sent.'))
+        redirect_to(group.url())

@@ -23,8 +23,10 @@
     <div class="structured_info">
       <h4>${group.title}</h4>
       <span class="school-link"><a href="${group.location.url()}">${' | '.join(group.location.path)}</a></span><br />
-      %if c.user:
+      %if group.is_member(c.user):
         <a href="${url(controller='groupforum', action='new_thread', id=c.group.group_id)}" title="${_('Mailing list address')}">${group.group_id}@${c.mailing_list_host}</a><br />
+      %elif c.user is not None:
+        <a href="${url(controller='groupforum', action='new_anonymous_post', id=c.group.group_id)}" title="${_('Mailing list address')}">${group.group_id}@${c.mailing_list_host}</a><br />
       %endif
       <span>
         ${ungettext("%(count)s member", "%(count)s members", len(group.members)) % dict(count = len(group.members))}
