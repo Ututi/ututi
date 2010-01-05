@@ -29,3 +29,4 @@ and even can see some actions:
     <h1>Structure import</h1>
     ...
 
+    >>> browser.open('http://localhost/admin/events')
