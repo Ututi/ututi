@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2009-12-30 14:06+0200\n"
+"PO-Revision-Date: 2010-01-04 22:43+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -78,6 +78,9 @@ msgstr ""
 msgid ""
 "The group's page was hidden. You can show it again by editing the group's"
 " settings."
+msgstr ""
+
+msgid "You have to log in or register to request group membership."
 msgstr ""
 
 #, python-format
@@ -159,6 +162,18 @@ msgstr ""
 msgid "Group '%(group_title)s' has been deleted!"
 msgstr ""
 
+msgid "month"
+msgstr ""
+
+msgid "3 months"
+msgstr ""
+
+msgid "6 months"
+msgstr ""
+
+msgid "Your message to the group was successfully sent."
+msgstr ""
+
 msgid "Please enter your password to register."
 msgstr ""
 
@@ -184,6 +199,14 @@ msgstr ""
 msgid ""
 "After logging in you will be redirected to the download page of the file "
 "<strong>%(filename)s</strong> and the download will start automatically."
+msgstr ""
+
+msgid "You have to log in or register to join a group!"
+msgstr ""
+
+msgid ""
+"After logging in or registering, your request to join the group will be "
+"sent."
 msgstr ""
 
 msgid "Permission denied!"
@@ -627,6 +650,128 @@ msgid ""
 "create <em>academic groups</em>       and communicate with groupmates."
 msgstr ""
 
+msgid "Previous"
+msgstr ""
+
+msgid "Next"
+msgstr ""
+
+msgid "Ututi - your university on the web"
+msgstr ""
+
+msgid ""
+"Your academic groups and subjects containing related materials: files, "
+"notes and descriptions. "
+msgstr ""
+
+msgid "All these things are combined in the handy Ututi system."
+msgstr ""
+
+msgid "Groups: email"
+msgstr ""
+
+msgid ""
+"It is a communication tool for You and Your group mates. Ututi groups "
+"work just like mailing lists: every member can receive these messages in "
+"their email account and can reply to them from there (You do not have to "
+"log on to Ututi every time). "
+msgstr ""
+
+msgid ""
+"You can always choose not to receive these email messages in the group "
+"settings."
+msgstr ""
+
+msgid "Groups: subjects"
+msgstr ""
+
+msgid ""
+"Every group studies subjects. Ututi also has a catalog of academic "
+"subjects. Here the subjects are classified by the university and faculty."
+" Every group can mark the subjects it is studying in the \"subjects\" "
+"area."
+msgstr ""
+
+msgid ""
+"Members of the group receive notifications about the changes in all "
+"watched subjects: what files were uploaded, pages created or descriptions"
+" changed."
+msgstr ""
+
+msgid ""
+"You can find new subjects by using our search and if they do not exist - "
+"create them :)"
+msgstr ""
+
+msgid "Groups: files"
+msgstr ""
+
+msgid ""
+"Ututi makes it easy to share files. In the \"files\" area members of the "
+"group can see the private files of the group and all the files of the "
+"subjects the group is watching."
+msgstr ""
+
+msgid ""
+"Private files are kept in a separate folder. Their size is limited to 100"
+" Mb."
+msgstr ""
+
+msgid ""
+"Public files are kept in the folders belonging to the subjects. The "
+"folders are visible in the group when it is watching these subjects. The "
+"size and amount of public files is not limited. What is more, files can "
+"be added to subjects not only by your group, but also by other groups and"
+" Ututi members. This makes it easy to share information."
+msgstr ""
+
+msgid "Groups: events"
+msgstr ""
+
+msgid ""
+"All the events of a groups: new members, files, subjects are visible in "
+"the \"whats new\" section."
+msgstr ""
+
+msgid "Members: subjects"
+msgstr ""
+
+msgid ""
+"Not only groups, but also single Ututi members can watch subjects. You "
+"can easily start watching a subject by visiting its page and clicking on "
+"the link \"start watching\"."
+msgstr ""
+
+msgid ""
+"You can view all the subjects You are watching in the \"files\" area of "
+"Your profile."
+msgstr ""
+
+msgid ""
+"Here You can also choose to ignore the subjects watched by Your group - "
+"by clicking on the \"eye\" icon next to a subject You will stop receiving"
+" notifications about its events, but other group mates will continue "
+"watching it. "
+msgstr ""
+
+msgid ""
+"What is more, You can specify how often You want to receive email "
+"notifications about events in Your watched subjects."
+msgstr ""
+
+msgid "Members: home"
+msgstr ""
+
+msgid ""
+"In Your home area You will see what is happening in Your group and the "
+"subjects either You or Your group are watching."
+msgstr ""
+
+msgid ""
+"From here You can also easily create a subject, upload a file, invite "
+"people to use Ututi."
+msgstr ""
+
 msgid "Events"
 msgstr ""
 
@@ -742,6 +887,29 @@ msgid "Gadu Gadu integration"
 msgstr ""
 
 msgid "Receive notifications by email and gadu gadu!"
+msgstr ""
+
+msgid "Find out what is Ututi and how it works!"
+msgstr ""
+
+msgid "Take a tour"
+msgstr ""
+
+msgid "What is Ututi?"
+msgstr ""
+
+msgid ""
+"It is a web system that enables students to easily and quickly find, "
+"upload, share study materials and information."
+msgstr ""
+
+msgid "What is new about Ututi?"
+msgstr ""
+
+msgid ""
+"Ututi offers students the tools they need in their studies: mailing "
+"lists, file storage, catalogues of academic subjects all in one place. "
+"This means You will not need to have a separate google group."
 msgstr ""
 
 msgid "New blog snippet:"
@@ -1038,8 +1206,7 @@ msgstr ""
 
 msgid ""
 "Once we get confirmation that the payment has been transfered, your group"
-" will be able to store an unlimited amount of files. The payment will be "
-"valid for 6 months."
+" will be able to store an unlimited amount of files. "
 msgstr ""
 
 msgid "Good luck using Ututi groups!"
@@ -1118,6 +1285,23 @@ msgstr ""
 msgid "increase the limit"
 msgstr ""
 
+#, python-format
+msgid ""
+"The amount of group's private files is limited to %(limit)s. This is so "
+"because Ututi encourages users to store their files in publicly "
+"accessible subjects where they can be shared with all the users. But if "
+"You want to keep more than %(limit)s of files, You can do this."
+msgstr ""
+
+msgid ""
+"By paying Your group will be able to store an <em>unlimited amount of "
+"files</em>:"
+msgstr ""
+
+#, python-format
+msgid "%d Lt"
+msgstr ""
+
 msgid "email subject"
 msgstr ""
 
@@ -1128,6 +1312,9 @@ msgid "latest email"
 msgstr ""
 
 msgid "last author"
+msgstr ""
+
+msgid "Message to the group"
 msgstr ""
 
 msgid "Already have an account? Login!"
@@ -1502,6 +1689,9 @@ msgstr ""
 msgid "free space:"
 msgstr ""
 
+msgid "unlimited"
+msgstr ""
+
 msgid "upload file to..."
 msgstr ""
 
@@ -1661,31 +1851,6 @@ msgstr ""
 
 #, python-format
 msgid "You can keep up to %s of private group files here (e.g. pictures)"
-msgstr ""
-
-msgid "By paying for the group, you will get an unlimited file area for 6 months."
-msgstr ""
-
-msgid "Pay for group extension."
-msgstr ""
-
-msgid ""
-"Once we get confirmation that the payment has been transfered,your group "
-"will be able to store an unlimited amount of files.The payment will be "
-"valid for 6 months."
-msgstr ""
-
-msgid ""
-"We hope You did not increase Your group's file limit because You decided "
-"to store Your filesin the publicly accessible subject folders and share "
-"them with everybody :)"
-msgstr ""
-
-msgid ""
-"The amount of group's private files is limited to 200 Mb. This is so "
-"because Ututiencourages users to store their files in publicly accessible"
-" subjects where they canbe shared with all the users. But if You want to "
-"keep more than 200 Mb of files,You can do this."
 msgstr ""
 
 msgid "Login"
