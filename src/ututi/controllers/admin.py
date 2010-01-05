@@ -80,6 +80,10 @@ class AdminController(BaseController):
 
     @ActionProtector("root")
     def index(self):
+        return render('/admin/dashboard.mako')
+
+    @ActionProtector("root")
+    def import_csv(self):
         return render('/admin/import.mako')
 
     @ActionProtector("root")

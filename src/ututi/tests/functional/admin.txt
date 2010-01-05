@@ -14,9 +14,9 @@ if I would just type in the admin url I should get redirected to the
 login form:
 
     >>> browser = Browser()
-    >>> browser.open('http://localhost/admin')
+    >>> browser.open('http://localhost/admin/import_csv')
     >>> browser.url
-    'http://localhost/?came_from=http%3A%2F%2Flocalhost%2Fadmin'
+    'http://localhost/?came_from=http%3A%2F%2Flocalhost%2Fadmin%2Fimport_csv'
 
 
 Now if I type in the admin credentials:
@@ -29,7 +29,7 @@ Now if I type in the admin credentials:
 I'd get redirected back to where I was trying to go:
 
     >>> browser.url
-    'http://localhost/admin'
+    'http://localhost/admin/import_csv'
 
 and even can see some actions:
 
