@@ -17,7 +17,7 @@ class Message(object):
         self.subject = subject
         self.text = text
         self.html = html
-        self.force = False
+        self.force = force
 
     def send(self, recipient):
         from ututi.model import User, Group
