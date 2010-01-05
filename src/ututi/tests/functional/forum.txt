@@ -1,0 +1,16 @@
+Basic forum test
+================
+    >>> browser = Browser.logIn()
+    >>> browser.getLink('community').click()
+
+    >>> browser.getLink('New topic').click()
+    >>> browser.getControl('Subject').value = 'Help!'
+    >>> browser.getControl('Message').value = 'My ututi is borken!'
+    >>> browser.getControl('Post').click()
+
+    >>> browser.url
+    'http://localhost/community/thread/3'
+
+    >>> browser.printQuery('id("forum-thread")//div[@class="post-body"]/text()')
+    My ututi is borken!
+
