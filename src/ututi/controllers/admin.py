@@ -211,8 +211,13 @@ class AdminController(BaseController):
 
     @ActionProtector("root")
     def subjects(self):
-        c.subjects = meta.Session.query(Subject)\
-            .order_by(Subject.created_on).all()
+        subjects = meta.Session.query(Subject)\
+            .order_by(desc(Subject.created_on))
+        c.subjects = paginate.Page(
+            subjects,
+            page=int(request.params.get('page', 1)),
+            item_count=subjects.count() or 0,
+            items_per_page=100)
         return render('admin/subjects.mako')
 
     @ActionProtector("root")

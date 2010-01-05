@@ -83,10 +83,10 @@ You can import more subjects using the admin interface.
     >>> browser.url
     'http://localhost/admin/subjects'
     >>> browser.printQuery("id('subject_list')//li/a[@class='subject-link']/text()")
-    Matematinė analizė
-    Test subject
-    Test subject
     Imported subject
+    Test subject
+    Test subject
+    Matematinė analizė
 
     >>> browser.getLink('Imported subject').click()
     >>> browser.queryHTML("id('subject_description')//*[@class='content']/text()")
