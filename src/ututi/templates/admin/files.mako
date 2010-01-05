@@ -6,19 +6,23 @@
 
 <h1>${_('Files')}</h1>
 
-%if c.files:
-    <ol id="file_list">
+<div id="search-results-container">
+  <h3 class="underline search-results-title">
+    <span class="result-count">(${ungettext("found %(count)s file", "found %(count)s files", c.files.item_count) % dict(count = c.files.item_count)})</span>
+  </h3>
+  <ul id="file_list">
     %for file in c.files:
-         <li>
-           <a href="${url(controller='files', action='get', id=file.id)}" class="file-link">${file.title}</a>
-           %if file.parent is not None:
-           (<a href="${file.parent.url()}" class="parent-link">${getattr(file.parent, 'title', 'email')}</a>)
-           %endif
-           (<a href="${file.created.url()}" class="author-link">${file.created.fullname}</a>)
-         </li>
+     <li>
+       <a href="${url(controller='files', action='get', id=file.id)}" class="file-link">${file.title}</a>
+       %if file.parent is not None:
+       (<a href="${file.parent.url()}" class="parent-link">${getattr(file.parent, 'title', 'email')}</a>)
+       %endif
+       (<a href="${file.created.url()}" class="author-link">${file.created.fullname}</a>)
+     </li>
     %endfor
-    </ol>
-%endif
+  </ul>
+  <div id="pager">${c.files.pager(format='~3~') }</div>
+</div>
 
 <h2>${_('Create new')}</h2>
 <form method="post" action="${url(controller='files', action='upload')}"

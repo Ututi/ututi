@@ -197,11 +197,18 @@ class AdminController(BaseController):
 
     @ActionProtector('root')
     def files(self):
-        c.files = meta.Session.query(File)\
-            .order_by(File.created_on)\
+
+        files = meta.Session.query(File)\
+            .order_by(desc(File.created_on))\
             .filter(File.title != u'text.html')\
-            .filter(File.title != u'Null File')\
-            .all()
+            .filter(File.title != u'Null File')
+
+        c.files = paginate.Page(
+            files,
+            page=int(request.params.get('page', 1)),
+            item_count=files.count() or 0,
+            items_per_page=100)
+
         return render('admin/files.mako')
 
     @ActionProtector("root")
