@@ -7,3 +7,9 @@ I am visiting them so they would get translated properly.
     >>> browser.open('http://localhost/bugs')
     >>> browser.open('http://localhost/group/moderators/files')
     >>> browser.open('http://localhost/profile/files')
+
+Polish frontpage:
+    >>> from pylons import config
+    >>> config['tpl_lang'] = 'pl'
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/')
