@@ -229,7 +229,11 @@ class AdminController(BaseController):
 
     @ActionProtector("root")
     def events(self):
-        c.events = meta.Session.query(Event)\
-            .order_by(desc(Event.created))\
-            .limit(500).all()
+        events = meta.Session.query(Event)\
+            .order_by(desc(Event.created))
+        c.events = paginate.Page(
+            events,
+            page=int(request.params.get('page', 1)),
+            item_count=events.count() or 0,
+            items_per_page=100)
         return render('admin/events.mako')
