@@ -17,7 +17,7 @@
         <input type="text" id="date" name="date"/>
       </div>
       <div class="form-field">
-        <label for="content">${_('Content')}</label>
+        <label for="snippet-content">${_('Content')}</label>
         <textarea name="content" id="snippet-content" cols="60" rows="6"></textarea>
       </div>
       <div class="form-field">
