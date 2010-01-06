@@ -88,7 +88,7 @@
       <br />
       <p>
         ${_('Private files are kept in a separate folder. Their size is '
-        'limited to 100 Mb.')}
+        'limited to 200 Mb.')}
       </p>
       <br />
       <p>
