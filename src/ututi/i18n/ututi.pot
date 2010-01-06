@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-01-04 22:43+0200\n"
+"POT-Creation-Date: 2010-01-06 10:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -658,7 +658,7 @@ msgstr ""
 msgid "All these things are combined in the handy Ututi system."
 msgstr ""
 
-msgid "Groups: email"
+msgid "What groups can do: email"
 msgstr ""
 
 msgid ""
@@ -673,7 +673,7 @@ msgid ""
 "settings."
 msgstr ""
 
-msgid "Groups: subjects"
+msgid "What groups can do: subjects"
 msgstr ""
 
 msgid ""
@@ -692,7 +692,7 @@ msgid ""
 "create them :)"
 msgstr ""
 
-msgid "Groups: files"
+msgid "What groups can do: files"
 msgstr ""
 
 msgid ""
@@ -712,7 +712,7 @@ msgid ""
 "This makes it easy to share information."
 msgstr ""
 
-msgid "Groups: events"
+msgid "What groups can do: events"
 msgstr ""
 
 msgid ""
@@ -720,7 +720,7 @@ msgid ""
 "\"whats new\" section."
 msgstr ""
 
-msgid "Members: subjects"
+msgid "What members can do: subjects"
 msgstr ""
 
 msgid ""
@@ -746,7 +746,7 @@ msgid ""
 "notifications about events in Your watched subjects."
 msgstr ""
 
-msgid "Members: home"
+msgid "What members can do: home"
 msgstr ""
 
 msgid ""
