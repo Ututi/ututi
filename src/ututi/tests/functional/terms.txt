@@ -11,6 +11,7 @@ Terms of use
     3. Garantijos atsisakymas
     4. Atsakomybės ribojimas
     5. Sutikimas su licencija (licencijos priėmimas)
+    >>> browser.open('http://localhost/about')
     >>> from pylons import config
     >>> config['tpl_lang'] = 'pl'
     >>> browser = Browser()
@@ -21,8 +22,9 @@ Terms of use
     3. Wyłączenie gwarancji
     4. Ograniczenia odpowiedzialności
     5. Akceptacja regulaminu
+    >>> browser.open('http://localhost/about')
     >>> from pylons import config
     >>> config['tpl_lang'] = 'en'
     >>> browser = Browser()
     >>> browser.open('http://localhost/terms')
-
+    >>> browser.open('http://localhost/about')
