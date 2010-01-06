@@ -251,8 +251,8 @@ test_translations: bin/pofilter
 # translations extracted, which is very risky.
 .PHONY: test_template_coverage
 test_template_coverage: bin/coverage .coverage
-	bin/coverage report --omit=/usr,eggs,src/ututi/tests,`echo ~`/.buildout,src/ututi/migration | grep mako | awk  '{print $$1}' | sed s/data// | sort > parts/test/covered_templates.txt
-	find src/ututi -name "*.mako" | sed s/src\\/ututi// | sort > parts/test/all_templates.txt
+	bin/coverage report --omit=/usr,eggs,src/ututi/tests,`echo ~`/.buildout,src/ututi/migration | grep mako | awk  '{print $$1}' | sed s/data/src\\/ututi/ | sort > parts/test/covered_templates.txt
+	find src/ututi -name "*.mako" | sort > parts/test/all_templates.txt
 	diff -u parts/test/all_templates.txt parts/test/covered_templates.txt
 
 .PHONY: update_expected_translations
