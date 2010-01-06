@@ -175,12 +175,12 @@ ${h.javascript_link('/javascripts/jquery.cycle.all.js')|n}
 <script type="text/javascript">
   //<![CDATA[
     $('#tour_slides').cycle({
-        'fx': 'scrollHorz',
+        'fx': 'scrollVertReverse',
         'next': '#tour_next',
         'prev': '#tour_prev',
         'pager': '#pager',
         'timeout': 0,
-        'nowrap': 1
+        'nowrap': 1,
       });
     //]]>
 </script>
