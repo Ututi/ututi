@@ -1469,6 +1469,10 @@ div.single_upload .button div.inner {
   cursor: pointer;
 }
 
+div.single_upload .button div.inner {
+  background: transparent url("../images/file_dropdown_single.png") right center no-repeat;
+}
+
 div.upload_dropdown .target_item {
   height: 20px;
   background: transparent url("../images/file_dropdown_block.png") 0 -20px no-repeat;
@@ -1484,6 +1488,7 @@ div.upload_dropdown .target_item .target.hover {
 
 div.upload_dropdown .target_item div {
   height: 20px;
+  line-height: 20px;
   background: transparent url("../images/file_dropdown_block.png") right -20px no-repeat;
   padding: 0;
   margin: 0;
