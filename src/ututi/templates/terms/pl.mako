@@ -1,4 +1,4 @@
-<%inherit file="/base.mako" />
+<%inherit file="/terms/en.mako" />
 
 <h1>Regulamin korzystania z portalu</h1>
 
