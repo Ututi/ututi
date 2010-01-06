@@ -265,7 +265,6 @@ And the new member should be able to access the group now.
     Second user
 
 A simple member of the group, however, only sees a listing of the subjects the group is watching:
-    >>> browser3.open('http://localhost/group/moderators')
     >>> browser3.getLink('Subjects').click()
     >>> browser3.printQuery('id("watched-subjects")//li/text()')
 
