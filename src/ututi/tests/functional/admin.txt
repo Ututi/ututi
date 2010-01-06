@@ -1,14 +1,6 @@
 Seucurity of Administration views
 =================================
 
-Admin views are not accessible to simple users:
-
-    >>> browser = Browser.logIn('user@ututi.lt', 'password')
-    >>> browser.open('http://localhost/admin')
-    Traceback (most recent call last):
-    ...
-    HTTPError: HTTP Error 403: Forbidden
-
 Our admin views should only be accessible when you are logged in. So
 if I would just type in the admin url I should get redirected to the
 login form:

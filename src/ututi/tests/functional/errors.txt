@@ -1,7 +1,7 @@
 Tests for our error views
 -------------------------
 
-    >>> browser = Browser()
+    >>> browser = Browser.logIn('user@ututi.lt', 'password')
 
 Sometimes errors happen, and when that does, we display a simple page,
 that explains that an error has happened, and suggests the user to go
@@ -38,3 +38,24 @@ page itself:
 
     >>> browser.printQuery("id('body-container')/h1")
     <h1>Search</h1>
+
+Some views are not accessible to simple users:
+
+    >>> browser.open('http://localhost/admin')
+    Traceback (most recent call last):
+    ...
+    HTTPError: HTTP Error 403: Forbidden
+
+Our access denied page looks just like an error page, but with a
+different error message:
+
+    >>> browser.printQuery("id('body-container')")
+    <div id="body-container">
+      <h1>Permission denied!</h1>
+      <img src="/images/details/icon_nope.png" />
+      <div>
+    You do not have the rights to see this page, or perform this
+    action. Go back or go to the search page please.
+    </div>
+      <a href="/search">go find something else</a>
+    </div>
