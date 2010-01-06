@@ -73,6 +73,7 @@ class PylonsLayer(object):
 
     @classmethod
     def testSetUp(self):
+        config['tpl_lang'] = 'lt'
         translator = _get_translator(pylons.config.get('lang'))
         pylons.translator._push_object(translator)
         url._push_object(URLGenerator(config['routes.map'], environ))
