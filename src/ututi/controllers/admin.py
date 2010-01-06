@@ -237,3 +237,6 @@ class AdminController(BaseController):
             item_count=events.count() or 0,
             items_per_page=100)
         return render('admin/events.mako')
+
+    def error(self):
+        return 1 / 0
