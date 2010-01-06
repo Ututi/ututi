@@ -7,7 +7,7 @@ Log in as admin:
 
 Go to admin page:
 
-    >>> browser.open('http://localhost/admin')
+    >>> browser.open('http://localhost/admin/import_csv')
 
 And upload all the files one by one:
 

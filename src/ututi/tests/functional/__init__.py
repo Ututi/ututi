@@ -128,7 +128,7 @@ def make_file(filename):
 
 
 def import_csv(browser, formname, filename):
-    browser.open('http://localhost/admin')
+    browser.open('http://localhost/admin/import_csv')
     form = browser.getForm(name=formname)
     form.getControl('CSV File').add_file(*make_file(filename))
     form.getControl('Upload').click()
