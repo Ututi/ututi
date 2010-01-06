@@ -118,6 +118,8 @@ create table tags (id bigserial not null,
        confirmed bool default true,
        primary key (id));;
 
+alter table users add column location_id int8 default null references tags(id) on delete set null;;
+
 insert into tags (title, title_short, description, tag_type)
        values ('Vilniaus universitetas', 'vu', 'Seniausias universitetas Lietuvoje.', 'location');;
 insert into tags (title, title_short, description, parent_id, tag_type)

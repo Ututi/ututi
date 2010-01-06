@@ -211,7 +211,8 @@ def setup_orm(engine):
     orm.mapper(User,
                users_table,
                properties = {'emails': relation(Email, backref='user'),
-                             'raw_logo': deferred(users_table.c.logo)})
+                             'raw_logo': deferred(users_table.c.logo),
+                             'location': relation(LocationTag)})
 
     orm.mapper(FileDownload,
                file_downloads_table,
