@@ -44,7 +44,7 @@ ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
     $(this).autocomplete([], {\
       cacheLength: 200,
       dataType:"json",
-      max: 10,
+      max: 100,
       minChars: 0,
       matchCase: false,
       matchSubset: true,
