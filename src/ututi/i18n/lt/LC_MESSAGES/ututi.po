@@ -1423,7 +1423,7 @@ msgstr ""
 msgid ""
 "For <em>%d Lt</em> Your group will be able to store an <em>unlimited "
 "amount of files</em>:"
-msgstr "Už <em>%d Lt</em> Jūsų grupė galės laikyti <en>neribotą failų kiekį</em>:"
+msgstr "Už <em>%d Lt</em> Jūsų grupė galės laikyti <em>neribotą failų kiekį</em>:"
 
 msgid "increase the limit"
 msgstr "padidinti limitą"
