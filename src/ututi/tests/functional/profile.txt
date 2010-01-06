@@ -61,6 +61,7 @@ We'll go to our profile edit page. And change our name as well as upload a logo.
 
     >>> browser.open('http://localhost/profile/edit')
     >>> browser.getControl('Full name').value = 'Adminas Adminas'
+    >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
     >>> browser.getControl('Address of your website or blog').value = 'http://ututi.lt'
     >>> browser.getControl('About yourself').value = 'This is me'
     >>> browser.getControl('Personal logo').add_file(*make_file('test_logo.png', 'test_logo.Png'))

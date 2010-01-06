@@ -574,6 +574,7 @@ form .form-field div.input-line input.error {
 
 form .form-field div.explanation {
   float: left;
+  clear: left;
 }
 
 form .form-field .explanation {
