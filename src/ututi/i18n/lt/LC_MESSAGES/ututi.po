@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-01-06 10:59+0200\n"
+"PO-Revision-Date: 2010-01-06 16:33+0200\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -861,8 +861,25 @@ msgstr ""
 "dalyką ar grupę, pakviesti pažįstamus ir draugus\n"
 "naudotis Ututi (šoninių blokelių meniu)."
 
+msgid "Adminstration dashboard"
+msgstr ""
+
 msgid "Events"
 msgstr "Įvykiai"
+
+#, python-format
+msgid "found %(count)s event"
+msgid_plural "found %(count)s events"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, python-format
+msgid "found %(count)s file"
+msgid_plural "found %(count)s files"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "Create new"
 msgstr "Sukurti naują"
@@ -893,6 +910,13 @@ msgstr "Grupių importavimas"
 
 msgid "Subjects import"
 msgstr "Dalykų importavimas"
+
+#, python-format
+msgid "found %(count)s subject"
+msgid_plural "found %(count)s subjects"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "Ututi users:"
 msgstr "Ututi naudotojai:"

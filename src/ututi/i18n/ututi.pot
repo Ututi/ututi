@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-01-06 10:54+0200\n"
+"POT-Creation-Date: 2010-01-06 16:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -759,8 +759,23 @@ msgid ""
 "to use Ututi."
 msgstr ""
 
+msgid "Adminstration dashboard"
+msgstr ""
+
 msgid "Events"
 msgstr ""
+
+#, python-format
+msgid "found %(count)s event"
+msgid_plural "found %(count)s events"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "found %(count)s file"
+msgid_plural "found %(count)s files"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "Create new"
 msgstr ""
@@ -791,6 +806,12 @@ msgstr ""
 
 msgid "Subjects import"
 msgstr ""
+
+#, python-format
+msgid "found %(count)s subject"
+msgid_plural "found %(count)s subjects"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "Ututi users:"
 msgstr ""

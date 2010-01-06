@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-01-06 10:54+0200\n"
+"PO-Revision-Date: 2010-01-06 16:33+0200\n"
 "Last-Translator: Jaroslav Šatkevič <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -811,8 +811,25 @@ msgid ""
 "people to use Ututi."
 msgstr ""
 
+msgid "Adminstration dashboard"
+msgstr ""
+
 msgid "Events"
 msgstr "Wydarzenia"
+
+#, python-format
+msgid "found %(count)s event"
+msgid_plural "found %(count)s events"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, python-format
+msgid "found %(count)s file"
+msgid_plural "found %(count)s files"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "Create new"
 msgstr "Utwórz"
@@ -843,6 +860,13 @@ msgstr "Importuj grupy"
 
 msgid "Subjects import"
 msgstr "Importuj przedmioty"
+
+#, python-format
+msgid "found %(count)s subject"
+msgid_plural "found %(count)s subjects"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "Ututi users:"
 msgstr "Użytkownicy Ututi:"
