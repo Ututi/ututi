@@ -14,7 +14,7 @@
   <div class="tour_slide">
     <a name="1" class="anchor">1</a>
     <div class="image">
-      ${h.image('/images/tour/%s/1.jpg' % c.lang, alt='logo')|n}
+      ${h.image('/images/tour/%s/1.png' % c.lang, alt='logo')|n}
     </div>
     <div class="text">
       <h2>${_('Ututi - your university on the web')}</h2>
@@ -31,10 +31,10 @@
   <div class="tour_slide">
     <a name="2" class="anchor">2</a>
     <div class="image">
-      ${h.image('/images/tour/%s/2.jpg' % c.lang, alt='logo')|n}
+      ${h.image('/images/tour/%s/2.png' % c.lang, alt='logo')|n}
     </div>
     <div class="text">
-      <h2>${_('Groups: email')}</h2>
+      <h2>${_('What groups can do: email')}</h2>
       <p>
         ${_('It is a communication tool for You and Your group mates. '
         'Ututi groups work just like mailing lists: every member can '
@@ -50,10 +50,10 @@
   <div class="tour_slide">
     <a name="3" class="anchor">3</a>
     <div class="image">
-      ${h.image('/images/tour/%s/3.jpg' % c.lang, alt='logo')|n}
+      ${h.image('/images/tour/%s/3.png' % c.lang, alt='logo')|n}
     </div>
     <div class="text">
-      <h2>${_('Groups: subjects')}</h2>
+      <h2>${_('What groups can do: subjects')}</h2>
       <p>
         ${_('Every group studies subjects. Ututi also has a catalog '
         'of academic subjects. Here the subjects are classified by the '
@@ -76,10 +76,10 @@
   <div class="tour_slide">
     <a name="4" class="anchor">4</a>
     <div class="image">
-      ${h.image('/images/tour/%s/4.jpg' % c.lang, alt='logo')|n}
+      ${h.image('/images/tour/%s/4.png' % c.lang, alt='logo')|n}
     </div>
     <div class="text">
-      <h2>${_('Groups: files')}</h2>
+      <h2>${_('What groups can do: files')}</h2>
       <p>
         ${_('Ututi makes it easy to share files. In the "files" area '
         'members of the group can see the private files of the group '
@@ -104,10 +104,10 @@
   <div class="tour_slide">
     <a name="5" class="anchor">5</a>
     <div class="image">
-      ${h.image('/images/tour/%s/5.jpg' % c.lang, alt='logo')|n}
+      ${h.image('/images/tour/%s/5.png' % c.lang, alt='logo')|n}
     </div>
     <div class="text">
-      <h2>${_('Groups: events')}</h2>
+      <h2>${_('What groups can do: events')}</h2>
       <p>
         ${_('All the events of a groups: new members, files, subjects '
         'are visible in the "whats new" section.')}
@@ -117,11 +117,8 @@
 
   <div class="tour_slide">
     <a name="6" class="anchor">6</a>
-    <div class="image">
-      ${h.image('/images/tour/%s/6.jpg' % c.lang, alt='logo')|n}
-    </div>
     <div class="text">
-      <h2>${_('Members: subjects')}</h2>
+      <h2>${_('What members can do: subjects')}</h2>
       <p>
         ${_('Not only groups, but also single Ututi members can watch subjects. '
         'You can easily start watching a subject by visiting its page and clicking on '
@@ -144,15 +141,23 @@
         'events in Your watched subjects.')}
       </p>
     </div>
+    <div class="image">
+      ${h.image('/images/tour/%s/6_1.png' % c.lang, alt='logo')|n}
+    </div>
+    <div class="image">
+      ${h.image('/images/tour/%s/6_2.png' % c.lang, alt='logo')|n}
+    </div>
+
+
   </div>
 
   <div class="tour_slide">
     <a name="7" class="anchor">7</a>
     <div class="image">
-      ${h.image('/images/tour/%s/7.jpg' % c.lang, alt='logo')|n}
+      ${h.image('/images/tour/%s/7.png' % c.lang, alt='logo')|n}
     </div>
     <div class="text">
-      <h2>${_('Members: home')}</h2>
+      <h2>${_('What members can do: home')}</h2>
       <p>
         ${_('In Your home area You will see what is happening in Your group and '
         'the subjects either You or Your group are watching.')}
