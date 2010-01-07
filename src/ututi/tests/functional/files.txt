@@ -26,16 +26,29 @@ Having uploaded the file, we should be presented with a list of all files presen
     'The contents of the file.'
 
 After the download of the file, the downloaded files count in the user list should indicate this:
+
     >>> browser.open('http://localhost/admin/users')
     >>> browser.printQuery('id("user_list")//li//text()')
     Third user
-    joined  (0)
+    Downloads: 0 (0.0 b)
+    Uploads: 0
+    Pages: 0
+    Joined:
     Second user
-    joined  (0)
+    Downloads: 0 (0.0 b)
+    Uploads: 0
+    Pages: 0
+    Joined:
     Alternative user
-    joined  (0)
+    Downloads: 0 (0.0 b)
+    Uploads: 0
+    Pages: 0
+    Joined:
     Adminas Adminovix
-    joined  (1)
+    Downloads: 1 (25.0 b)
+    Uploads: 0
+    Pages: 0
+    Joined:
 
 
 The files is stored in our upload directory:

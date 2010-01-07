@@ -3,6 +3,7 @@ import string
 import os
 import logging
 import base64
+import datetime
 
 from sqlalchemy.sql.expression import desc
 from sqlalchemy.sql.expression import not_
@@ -11,19 +12,24 @@ from magic import from_buffer
 from datetime import date
 from webhelpers import paginate
 
-from pylons import request, c
+from babel.dates import parse_date
+from babel.dates import format_date
+
+from pylons import request, c, config
 from pylons.controllers.util import redirect_to, abort
 
 from random import Random
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
 from ututi.model.events import Event
+from ututi.model import FileDownload
 from ututi.model import SimpleTag
 from ututi.model import UserSubjectMonitoring
 from ututi.model import Page
 from ututi.model import (meta, User, Email, LocationTag, Group, Subject,
                          GroupMember, GroupMembershipType, File)
 from ututi.lib import helpers as h
+
 
 log = logging.getLogger(__name__)
 
@@ -88,12 +94,66 @@ class AdminController(BaseController):
 
     @ActionProtector("root")
     def users(self):
-        users = meta.Session.query(User).order_by(desc(User.id))
+        locale = config.get('locale')
+        c.from_time_str = request.params.get('from_time')
+        if not c.from_time_str:
+            c.from_time_str = format_date(datetime.date.today() - datetime.timedelta(7),
+                                          format="short",
+                                          locale=locale)
+        c.to_time_str = request.params.get('to_time')
+        if not c.to_time_str:
+            c.to_time_str = format_date(datetime.date.today() + datetime.timedelta(1),
+                                        format="short",
+                                        locale=locale)
+        from_time = parse_date(c.from_time_str, locale=locale)
+        to_time = parse_date(c.to_time_str, locale=locale)
+
+        pages_stmt = meta.Session.query(Event.author_id,
+                                        func.count(Event.created).label('pages_count'))\
+                                        .filter(Event.event_type == 'page_created')\
+                                        .filter(Event.created < to_time)\
+                                        .filter(Event.created >= from_time)\
+                                        .group_by(Event.author_id).subquery()
+
+        uploads_stmt = meta.Session.query(Event.author_id,
+                                          func.count(Event.created).label('uploads_count'))\
+                                          .filter(Event.event_type == 'file_uploaded')\
+                                          .filter(Event.created < to_time)\
+                                          .filter(Event.created >= from_time)\
+                                          .group_by(Event.author_id).subquery()
+
+        downloads_stmt = meta.Session.query(FileDownload.user_id,
+                                            func.count(FileDownload.file_id).label('downloads_count'),
+                                            func.sum(File.filesize).label('downloads_size'))\
+                                            .filter(FileDownload.download_time < to_time)\
+                                            .filter(FileDownload.download_time >= from_time)\
+                                            .outerjoin((File, File.id == FileDownload.file_id))\
+                                            .group_by(FileDownload.user_id).subquery()
+
+
+        users = meta.Session.query(User,
+                                   func.coalesce(downloads_stmt.c.downloads_count, 0).label('downloads'),
+                                   func.coalesce(downloads_stmt.c.downloads_size, 0).label('downloads_size'),
+                                   func.coalesce(uploads_stmt.c.uploads_count, 0).label('uploads'),
+                                   func.coalesce(pages_stmt.c.pages_count, 0).label('pages'))\
+            .outerjoin((downloads_stmt, downloads_stmt.c.user_id == User.id))\
+            .outerjoin((uploads_stmt, uploads_stmt.c.author_id == User.id))\
+            .outerjoin((pages_stmt, pages_stmt.c.author_id == User.id))
+
+        order_by = request.params.get('order_by', 'id')
+        if order_by == 'id':
+            users = users.order_by(desc(User.id))
+        else:
+            users = users.order_by(desc(order_by))
+
         c.users = paginate.Page(
             users,
             page=int(request.params.get('page', 1)),
             item_count=users.count() or 0,
-            items_per_page=100)
+            items_per_page=100,
+            order_by=order_by,
+            from_time=c.from_time_str,
+            to_time=c.to_time_str)
         return render('/admin/users.mako')
 
     @ActionProtector("root")
