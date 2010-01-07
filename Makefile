@@ -30,7 +30,7 @@ bin/tags: buildout.cfg bin/buildout setup.py versions.cfg
 	$(BUILDOUT)
 
 export PGPORT ?= 4455
-PG_PATH = /usr/lib/postgresql/8.3
+PG_PATH = /usr/lib/postgresql/8.4
 
 instance/var/data/postgresql.conf:
 	mkdir -p ${PWD}/instance/var/data
@@ -209,7 +209,7 @@ download_backup:
 import_backup: instance/var/run/.s.PGSQL.${PGPORT}
 	psql -h ${PWD}/instance/var/run/ -d development -c "drop schema public cascade"
 	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
-	/usr/lib/postgresql/8.3/bin/pg_restore -d development -h ${PWD}/instance/var/run --no-owner < backup/dbdump || true
+	/usr/lib/postgresql/8.4/bin/pg_restore -d development -h ${PWD}/instance/var/run --no-owner < backup/dbdump || true
 
 .PHONY: download_backup_files
 download_backup_files:
@@ -219,24 +219,24 @@ download_backup_files:
 test_migration: instance/var/run/.s.PGSQL.${PGPORT}
 	psql -h ${PWD}/instance/var/run/ -d development -c "drop schema public cascade"
 	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
-	/usr/lib/postgresql/8.3/bin/pg_restore -d development -h ${PWD}/instance/var/run --no-owner < backup/dbdump || true
-	/usr/lib/postgresql/8.3/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > before_migration.txt
+	/usr/lib/postgresql/8.4/bin/pg_restore -d development -h ${PWD}/instance/var/run --no-owner < backup/dbdump || true
+	/usr/lib/postgresql/8.4/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > before_migration.txt
 	${PWD}/bin/migrate development.ini upgrade_once
-	/usr/lib/postgresql/8.3/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > after_migration.txt
+	/usr/lib/postgresql/8.4/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > after_migration.txt
 	${PWD}/bin/migrate development.ini downgrade
-	/usr/lib/postgresql/8.3/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > after_downgrade.txt
+	/usr/lib/postgresql/8.4/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > after_downgrade.txt
 
 .PHONY: test_migration_2
 test_migration_2: instance/var/run/.s.PGSQL.${PGPORT}
 	psql -h ${PWD}/instance/var/run/ -d development -c "drop schema public cascade"
 	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
 	${PWD}/bin/paster setup-app development.ini
-	/usr/lib/postgresql/8.3/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > default.txt
+	/usr/lib/postgresql/8.4/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > default.txt
 	psql -h ${PWD}/instance/var/run/ -d development -c "drop schema public cascade"
 	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
-	/usr/lib/postgresql/8.3/bin/pg_restore -d development -h ${PWD}/instance/var/run --no-owner < backup/dbdump || true
+	/usr/lib/postgresql/8.4/bin/pg_restore -d development -h ${PWD}/instance/var/run --no-owner < backup/dbdump || true
 	${PWD}/bin/migrate development.ini
-	/usr/lib/postgresql/8.3/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > actual.txt
+	/usr/lib/postgresql/8.4/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > actual.txt
 
 .PHONY: test_translations
 test_translations: bin/pofilter
