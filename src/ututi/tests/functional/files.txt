@@ -33,21 +33,25 @@ After the download of the file, the downloaded files count in the user list shou
     Downloads: 0 (0.0 b)
     Uploads: 0
     Pages: 0
+    Messages: 0
     Joined:
     Second user
     Downloads: 0 (0.0 b)
     Uploads: 0
     Pages: 0
+    Messages: 0
     Joined:
     Alternative user
     Downloads: 0 (0.0 b)
     Uploads: 0
     Pages: 0
+    Messages: 0
     Joined:
     Adminas Adminovix
     Downloads: 1 (25.0 b)
     Uploads: 0
     Pages: 0
+    Messages: 0
     Joined:
 
 

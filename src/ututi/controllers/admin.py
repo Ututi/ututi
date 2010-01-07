@@ -122,6 +122,13 @@ class AdminController(BaseController):
                                           .filter(Event.created >= from_time)\
                                           .group_by(Event.author_id).subquery()
 
+        messages_stmt = meta.Session.query(Event.author_id,
+                                           func.count(Event.created).label('messages_count'))\
+                                           .filter(Event.event_type == 'forum_post_created')\
+                                           .filter(Event.created < to_time)\
+                                           .filter(Event.created >= from_time)\
+                                           .group_by(Event.author_id).subquery()
+
         downloads_stmt = meta.Session.query(FileDownload.user_id,
                                             func.count(FileDownload.file_id).label('downloads_count'),
                                             func.sum(File.filesize).label('downloads_size'))\
@@ -135,9 +142,11 @@ class AdminController(BaseController):
                                    func.coalesce(downloads_stmt.c.downloads_count, 0).label('downloads'),
                                    func.coalesce(downloads_stmt.c.downloads_size, 0).label('downloads_size'),
                                    func.coalesce(uploads_stmt.c.uploads_count, 0).label('uploads'),
+                                   func.coalesce(messages_stmt.c.messages_count, 0).label('messages'),
                                    func.coalesce(pages_stmt.c.pages_count, 0).label('pages'))\
             .outerjoin((downloads_stmt, downloads_stmt.c.user_id == User.id))\
             .outerjoin((uploads_stmt, uploads_stmt.c.author_id == User.id))\
+            .outerjoin((messages_stmt, messages_stmt.c.author_id == User.id))\
             .outerjoin((pages_stmt, pages_stmt.c.author_id == User.id))
 
         order_by = request.params.get('order_by', 'id')
