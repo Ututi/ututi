@@ -49,6 +49,7 @@ class BaseController(WSGIController):
         c.show_login = None
         c.text = None
         c.tags = None
+        c.login_error = None
 
         c.user = current_user()
         c.testing = asbool(config.get('testing', False))

@@ -1,5 +1,6 @@
 from pylons import request, c
 
+from ututi.model import get_supporters
 from ututi.lib.base import BaseController, render
 
 
@@ -16,6 +17,7 @@ class ErrorController(SearchController):
     """
 
     def document(self):
+        c.ututi_supporters = get_supporters()
         resp = request.environ.get('pylons.original_response')
         req = request.environ.get('pylons.original_request')
         if resp is None:

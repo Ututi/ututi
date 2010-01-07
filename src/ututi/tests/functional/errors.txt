@@ -1,0 +1,61 @@
+Tests for our error views
+-------------------------
+
+    >>> browser = Browser.logIn('user@ututi.lt', 'password')
+
+Sometimes errors happen, and when that does, we display a simple page,
+that explains that an error has happened, and suggests the user to go
+and do something else:
+
+    >>> browser.open('http://localhost/admin/error')
+    Traceback (most recent call last):
+    ...
+    HTTPError: HTTP Error 500: Internal Server Error
+
+    >>> browser.printQuery("id('body-container')")
+    <div id="body-container">
+      <h1>Error!</h1>
+      <img src="/images/details/icon_nope.png" />
+      <div>
+    Oops, an error happened, please don't leave us, go back and try
+    doing something else or look for information.
+    </div>
+      <a href="/search">go find something</a>
+    </div>
+
+While not found pages show a flash message indicating that the url
+they have entered is not found, and include the search form in the
+page itself:
+
+    >>> browser.open('http://localhost/admin/404')
+    Traceback (most recent call last):
+    ...
+    HTTPError: HTTP Error 404: Not Found
+
+    >>> browser.printQuery("//div[@class='flash-message']/span")
+    <span class="close-link hide-parent">Close</span>
+    <span>Document at http://localhost/admin/404 was not found, but maybe you are interested in something else?</span>
+
+    >>> browser.printQuery("id('body-container')/h1")
+    <h1>Search</h1>
+
+Some views are not accessible to simple users:
+
+    >>> browser.open('http://localhost/admin')
+    Traceback (most recent call last):
+    ...
+    HTTPError: HTTP Error 403: Forbidden
+
+Our access denied page looks just like an error page, but with a
+different error message:
+
+    >>> browser.printQuery("id('body-container')")
+    <div id="body-container">
+      <h1>Permission denied!</h1>
+      <img src="/images/details/icon_nope.png" />
+      <div>
+    You do not have the rights to see this page, or perform this
+    action. Go back or go to the search page please.
+    </div>
+      <a href="/search">go find something else</a>
+    </div>

@@ -89,8 +89,8 @@ div.section div.controls div.single_upload .target_item {
 }
 
 div.section div.controls div.single_upload .target_item div {
-  padding-top: 2px;
   height: 17px;
+  line-height: 17px;
 }
 
 div.section div.controls div.file_upload div.file_upload_dropdown {

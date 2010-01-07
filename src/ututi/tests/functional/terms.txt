@@ -1,0 +1,30 @@
+Terms of use
+============
+
+    >>> from pylons import config
+    >>> config['tpl_lang'] = 'lt'
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/terms')
+    >>> browser.printQuery('//h2/text()')
+    1. Turinio licencija
+    2. Naudotojų atsakomybė ir teisės
+    3. Garantijos atsisakymas
+    4. Atsakomybės ribojimas
+    5. Sutikimas su licencija (licencijos priėmimas)
+    >>> browser.open('http://localhost/about')
+    >>> from pylons import config
+    >>> config['tpl_lang'] = 'pl'
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/terms')
+    >>> browser.printQuery('//h2/text()')
+    1.Licencja treści w serwisie
+    2. Odpowiedzialność i prawa użytkowników
+    3. Wyłączenie gwarancji
+    4. Ograniczenia odpowiedzialności
+    5. Akceptacja regulaminu
+    >>> browser.open('http://localhost/about')
+    >>> from pylons import config
+    >>> config['tpl_lang'] = 'en'
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/terms')
+    >>> browser.open('http://localhost/about')

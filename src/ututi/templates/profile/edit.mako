@@ -1,4 +1,5 @@
 <%inherit file="/profile/base.mako" />
+<%namespace file="/widgets/newlocationtag.mako" import="*"/>
 
 <%def name="title()">
   ${c.user.fullname}
@@ -7,6 +8,7 @@
 <%def name="head_tags()">
   ${parent.head_tags()}
   ${h.stylesheet_link('/stylesheets/profile.css')|n}
+  ${h.stylesheet_link('/stylesheets/newlocationwidget.css')|n}
   ${h.javascript_link('/javascripts/js-alternatives.js')|n}
   <script type="text/javascript">
   $(document).ready(function() {
@@ -78,6 +80,9 @@
       <td class="js-alternatives">
         <h3>${_('Personal information')}</h3>
         ${h.input_line('fullname', _('Full name'))}
+        <div class="form-field">
+          ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=False)}
+        </div>
         ${h.input_line('site_url', _('Address of your website or blog'))}
         ${h.input_area('description', _('About yourself'), rows='6', cols='50')}
 

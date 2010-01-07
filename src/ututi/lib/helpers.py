@@ -233,7 +233,7 @@ def input_line(name, title, value='', explanation=None, **kwargs):
             HTML.literal('<form:error name="%s" />' % name),
             HTML.div(class_='input-line', c=[
                     HTML.div(c=[
-                            HTML.input(type='text', id=name, name_=name, value='', **kwargs)])]),
+                            HTML.input(type='text', id=name, name_=name, value=value, **kwargs)])]),
             expl
             ])
 

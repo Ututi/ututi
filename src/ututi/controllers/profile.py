@@ -6,7 +6,10 @@ from pkg_resources import resource_stream
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql.expression import desc, or_, asc, func
 from formencode import Schema, validators, htmlfill, All
+from formencode.compound import Pipe
+from formencode.foreach import ForEach
 from formencode.api import Invalid
+from formencode.variabledecode import NestedVariables
 from webhelpers import paginate
 
 from pylons import request, c, url
@@ -21,7 +24,7 @@ from ututi.lib.emails import email_confirmation_request
 from ututi.lib.security import ActionProtector
 from ututi.lib.search import search_query, search_query_count
 from ututi.lib.image import serve_image
-from ututi.lib.validators import UserPasswordValidator, UniqueEmail
+from ututi.lib.validators import UserPasswordValidator, UniqueEmail, LocationTagsValidator
 from ututi.lib.forms import validate
 from ututi.lib import gg
 
@@ -40,9 +43,13 @@ log = logging.getLogger(__name__)
 
 class ProfileForm(Schema):
     """A schema for validating user profile forms."""
+    pre_validators = [NestedVariables()]
     allow_extra_fields = True
     fullname = validators.String(not_empty=True)
     site_url = validators.URL()
+    location = Pipe(ForEach(validators.String(strip=True)),
+                    LocationTagsValidator())
+
 
 
 class PasswordChangeForm(Schema):
@@ -233,6 +240,13 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             'site_url': c.user.site_url,
             'description': c.user.description,
             }
+        if c.user.location is not None:
+            location = dict([('location-%d' % n, tag)
+                             for n, tag in enumerate(c.user.location.hierarchy())])
+        else:
+            location = []
+        defaults.update(location)
+
         return defaults
 
     @ActionProtector("user")
@@ -264,7 +278,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     @validate(ProfileForm, form='_edit_form', defaults=_edit_form_defaults)
     @ActionProtector("user")
     def update(self):
-        fields = ('fullname', 'logo_upload', 'logo_delete', 'site_url', 'description')
+        fields = ('fullname', 'logo_upload', 'logo_delete', 'site_url', 'description', 'location')
         values = {}
 
         for field in fields:
@@ -273,6 +287,9 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         c.user.fullname = values['fullname']
         c.user.site_url = values['site_url']
         c.user.description = values['description']
+        tag = values.get('location', None)
+        c.user.location = tag
+
 
         if values['logo_delete'] == 'delete' and c.user.logo is not None:
             c.user.logo = None

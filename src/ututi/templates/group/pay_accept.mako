@@ -5,8 +5,7 @@
 <div class="thank_you">
 <p>
 ${_('Once we get confirmation that the payment has been transfered, '
-'your group will be able to store an unlimited amount of files. '
-'The payment will be valid for 6 months.')}
+'your group will be able to store an unlimited amount of files. ')}
 </p>
 <p>
 ${_('Good luck using Ututi groups!')}

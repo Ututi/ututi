@@ -179,9 +179,9 @@ add any additional files to the repository:
     /uploads/cb396bb6/487560f2/6de19949/6051b42e
 
     >>> listFiles(browser)
-    README.txt
-    README.txt
     file.txt
+    README.txt
+    README.txt
 
 If a message gets posted more than once, it is simply ignored:
 
@@ -190,9 +190,9 @@ If a message gets posted more than once, it is simply ignored:
     ...                   'moderators@groups.ututi.lt')
     >>> browser.open('http://localhost/admin/files')
     >>> listFiles(browser)
-    README.txt
-    README.txt
     file.txt
+    README.txt
+    README.txt
 
     >>> mail_queue
     []

@@ -264,6 +264,52 @@ And the new member should be able to access the group now.
     Jonas Petraitis Petrauskas
     Second user
 
+A simple member of the group, however, only sees a listing of the subjects the group is watching:
+    >>> browser3.getLink('Subjects').click()
+    >>> browser3.printQuery('id("watched-subjects")//li/text()')
+
+Let's try to deny a user's request to join the group:
+    >>> browser4 = Browser.logIn('user3@ututi.lt', 'password')
+    >>> browser4.open('http://localhost/group/test')
+    >>> browser4.getControl('Join the group').click()
+    >>> browser4.printQuery("//div[@class='flash-message']/span/text()")
+    Close
+    Your request to join the group was forwarded to the group's administrators. Thank You!
+    Close
+    Your
+    is not confirmed! Please confirm your email by clicking on the link sent to your address or
+
+    >>> print mail_queue.pop().message
+    MIME-Version: 1.0
+    Content-Type: text/plain; charset="us-ascii"
+    Content-Transfer-Encoding: 7bit
+    From: info@ututi.lt
+    To: admin@ututi.lt
+    Subject: Ututi group membership request
+    Third user has requested to become a member of the group Test group.
+    You can confirm or deny this request at this url: http://localhost/group/test/members .
+    The Ututi team
+
+    >>> browser = Browser.logIn()
+    >>> browser.getLink('Test group').click()
+    >>> browser.getLink('Members').click()
+
+    >>> print browser.url
+    http://localhost/group/test/members
+
+    >>> browser.getControl('Deny', index=0).click()
+
+    >>> print mail_queue.pop().message
+    MIME-Version: 1.0
+    Content-Type: text/plain; charset="us-ascii"
+    Content-Transfer-Encoding: 7bit
+    From: info@ututi.lt
+    To: user3@ututi.lt
+    Subject: Ututi group membership confirmation
+    Third user,
+    Your request to join the group Test group has been denied.
+    The Ututi team
+
 XXX Should be in a separate test
 
 Now let's kick out all of the members and delete the group:

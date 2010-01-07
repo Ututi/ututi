@@ -27,7 +27,7 @@ if ($.support == undefined) {
 function debug(s) {
 	if ($.fn.cycle.debug)
 		log(s);
-}		
+}
 function log() {
 	if (window.console && window.console.log)
 		window.console.log('[cycle] ' + Array.prototype.join.call(arguments,' '));
@@ -665,7 +665,7 @@ $.fn.cycle.createPagerAnchor = function(i, el, $p, els, opts) {
 		a = opts.pagerAnchorBuilder(i,el);
 	else
 		a = '<a href="#">'+(i+1)+'</a>';
-		
+
 	if (!a)
 		return;
 	var $a = $(a);
@@ -698,10 +698,10 @@ $.fn.cycle.createPagerAnchor = function(i, el, $p, els, opts) {
 		go(els,opts,1,opts.currSlide < i); // trigger the trans
 		return false;
 	});
-	
+
 	if (opts.pagerEvent != 'click')
 		$a.click(function(){return false;}); // supress click
-	
+
 	if (opts.pauseOnPagerHover)
 		$a.hover(function() { opts.$cont[0].cyclePause++; }, function() { opts.$cont[0].cyclePause--; } );
 };
@@ -924,6 +924,18 @@ $.fn.cycle.transitions.scrollVert = function($cont, $slides, opts) {
 		$.fn.cycle.commonReset(curr,next,opts);
 		opts.cssBefore.top = fwd ? (1-next.cycleH) : (next.cycleH-1);
 		opts.animOut.top = fwd ? curr.cycleH : -curr.cycleH;
+	});
+	opts.cssFirst = { top: 0 };
+	opts.cssBefore= { left: 0 };
+	opts.animIn   = { top: 0 };
+	opts.animOut  = { left: 0 };
+};
+$.fn.cycle.transitions.scrollVertReverse = function($cont, $slides, opts) {
+	$cont.css('overflow','hidden');
+	opts.before.push(function(curr, next, opts, fwd) {
+		$.fn.cycle.commonReset(curr,next,opts);
+		opts.cssBefore.top = fwd ? (next.cycleH-1) : (1-next.cycleH);
+		opts.animOut.top = fwd ? -curr.cycleH : curr.cycleH;
 	});
 	opts.cssFirst = { top: 0 };
 	opts.cssBefore= { left: 0 };

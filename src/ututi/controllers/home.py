@@ -130,10 +130,10 @@ class HomeController(UniversityListMixin):
             return render_lang('/anonymous_index.mako')
 
     def about(self):
-        return render('/about/%s.mako' % c.lang)
+        return render_lang('/about.mako')
 
     def terms(self):
-        return render('/terms/%s.mako' % c.lang)
+        return render_lang('/terms.mako')
 
     def login(self):
         email = request.POST.get('login')

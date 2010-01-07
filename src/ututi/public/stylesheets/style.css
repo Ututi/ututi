@@ -574,6 +574,7 @@ form .form-field div.input-line input.error {
 
 form .form-field div.explanation {
   float: left;
+  clear: left;
 }
 
 form .form-field .explanation {
@@ -1162,7 +1163,7 @@ div#pager {
 }
 
 #search_portlet .search-text {
-  width: 220px;
+  width: 190px;
   height: 20px;
   background: url("../images/borders/input-small.png") left center no-repeat;
   line-height: 20px;
@@ -1469,6 +1470,10 @@ div.single_upload .button div.inner {
   cursor: pointer;
 }
 
+div.single_upload .button div.inner {
+  background: transparent url("../images/file_dropdown_single.png") right center no-repeat;
+}
+
 div.upload_dropdown .target_item {
   height: 20px;
   background: transparent url("../images/file_dropdown_block.png") 0 -20px no-repeat;
@@ -1484,6 +1489,7 @@ div.upload_dropdown .target_item .target.hover {
 
 div.upload_dropdown .target_item div {
   height: 20px;
+  line-height: 20px;
   background: transparent url("../images/file_dropdown_block.png") right -20px no-repeat;
   padding: 0;
   margin: 0;
@@ -1908,6 +1914,7 @@ div.tour_slide div.image {
   float: left;
   padding: 0 2px 5px 0;
   background: url("../images/details/image_shadow.png") bottom right no-repeat;
+  margin-bottom: 10px;
 }
 
 div.tour_slide div.image img {

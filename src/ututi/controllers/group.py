@@ -174,7 +174,10 @@ def group_action(method):
         c.security_context = group
         c.object_location = group.location
         c.group = group
-        c.group_payment_cost = int(config.get('group_payment_cost', '500'))
+        c.group_payment_month = int(config.get('group_payment_month', '1000'))
+        c.group_payment_quarter = int(config.get('group_payment_quarter', '20000'))
+        c.group_payment_halfyear = int(config.get('group_payment_halfyear', '30000'))
+        c.group_file_limit = int(config.get('group_file_limit', 104857600))
         c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
         return method(self, group)
     return _group_action
@@ -949,13 +952,17 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @group_action
     @ActionProtector("member", "admin", "moderator")
     def pay(self, group):
-        c.paymentform = h.mokejimai_form(
-            transaction_type='grouplimits',
-            amount=c.group_payment_cost,
-            accepturl=group.url(action='pay_accept', qualified=True),
-            cancelurl=group.url(action='pay_cancel', qualified=True),
-            orderid='%s_%s_%s' % ('grouplimits', c.user.id, group.id))
-
+        payment_forms = []
+        payment_types = [_('month'), _('3 months'), _('6 months')]
+        payment_amounts = [c.group_payment_month, c.group_payment_quarter, c.group_payment_halfyear]
+        for amount in payment_amounts:
+            payment_forms.append(h.mokejimai_form(
+                    transaction_type='grouplimits',
+                    amount=amount,
+                    accepturl=group.url(action='pay_accept', qualified=True),
+                    cancelurl=group.url(action='pay_cancel', qualified=True),
+                    orderid='%s_%s_%s' % ('grouplimits', c.user.id, group.id)))
+        c.payments = zip(payment_types, payment_amounts, payment_forms)
         c.breadcrumbs.append(self._actions('home'))
         return render_lang('group/pay.mako')
 

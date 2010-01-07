@@ -70,5 +70,5 @@ def group_confirmation_email(group, user, status):
     else:
         text = render('/emails/group_confirmation_deny.mako', extra_vars={'group': group, 'user': user})
 
-    msg = Message(_('Ututi group membership confirmation'), text)
+    msg = Message(_('Ututi group membership confirmation'), text, force=True)
     msg.send(user)

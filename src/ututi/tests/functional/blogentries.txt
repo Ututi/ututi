@@ -1,0 +1,26 @@
+Blog entries
+============
+
+Test the administration of blog entries.
+     >>> browser = Browser.logIn()
+     >>> browser.open('http://localhost/admin/blog')
+
+     >>> browser.getLink('New entry').click()
+
+     >>> browser.getControl('Date').value = '2009-10-10'
+     >>> browser.getControl('Content').value = 'Find stuff to read on our blog!'
+     >>> browser.getControl('Save').click()
+
+     >>> browser.url
+     'http://localhost/admin/blog'
+
+     >>> browser.printQuery('id("entry_list")//li/text()')
+     Find stuff to read on our blog!
+
+     >>> browser.getLink('Edit').click()
+     >>> browser.getControl('Content').value = 'Find more stuff to read on our blog!'
+     >>> browser.getControl('Update').click()
+
+     >>> browser.printQuery('id("entry_list")//li/text()')
+     Find more stuff to read on our blog!
+

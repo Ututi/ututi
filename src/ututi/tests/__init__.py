@@ -41,73 +41,121 @@ here_dir = os.path.dirname(os.path.abspath(__file__))
 conf_dir = os.path.dirname(os.path.dirname(os.path.dirname(here_dir)))
 
 
+def layerSetUp(cls):
+    # Zope component setup
+    zcSetUp()
+    EventPlacelessSetup().setUp()
+
+    if pylons.test.pylonsapp is None:
+        SetupCommand('setup-app').run([conf_dir + '/%s' % cls.config])
+        pylons.test.pylonsapp = loadapp('config:%s' % cls.config,
+                                        relative_to=conf_dir)
+        config['files_path'] = tempfile.mkdtemp(prefix="uploads_")
+        def create_fn():
+            return pylons.test.pylonsapp
+        install_opener()
+        wsgi_intercept.add_wsgi_intercept('localhost', 80, create_fn)
+
+
+def layerTearDown(cls):
+    try:
+        shutil.rmtree(config['files_path'])
+    except OSError:
+        pass
+    # Zope component tear down
+
+    # meta.engine = None
+    from sqlalchemy.schema import MetaData
+    meta.metadata = MetaData()
+    from sqlalchemy.orm import clear_mappers
+    clear_mappers()
+    zcTearDown()
+    pylons.test.pylonsapp = None
+    wsgi_intercept.remove_wsgi_intercept()
+    uninstall_opener()
+
+
+def layerTestSetUp(cls):
+    config['tpl_lang'] = 'lt'
+    translator = _get_translator(pylons.config.get('lang'))
+    pylons.translator._push_object(translator)
+    url._push_object(URLGenerator(config['routes.map'], environ))
+    # XXX Set up database here
+    # meta.metadata.create_all(meta.engine)
+    teardown_db_defaults(meta.engine, quiet=True)
+    initialize_db_defaults(meta.engine)
+    mail_queue[:] = []
+    gg.sent_messages[:] = []
+    try:
+        shutil.rmtree(config['files_path'])
+    except OSError:
+        pass
+    os.makedirs(config['files_path'])
+    # Keep random stable in tests
+    random.seed(123)
+
+
+def layerTestTearDown(cls):
+    url._pop_object()
+    pylons.translator._pop_object()
+    meta.Session.execute("SET ututi.active_user TO 0")
+    meta.Session.close()
+    # XXX Tear down database here
+    teardown_db_defaults(meta.engine)
+    meta.Session.rollback()
+    meta.Session.remove()
+    from ututi.grok.grokker import the_multi_grokker
+    the_multi_grokker.clear()
+    if len(gg.sent_messages) > 0:
+        print >> sys.stderr, "GG queue is NOT EMPTY!"
+
+    if len(mail_queue) > 0:
+        print >> sys.stderr, "Mail queue is NOT EMPTY!"
+
+    shutil.rmtree(config['files_path'])
+
+
 class PylonsLayer(object):
 
-    @classmethod
-    def setUp(self):
-        # Zope component setup
-        zcSetUp()
-        EventPlacelessSetup().setUp()
-
-        if pylons.test.pylonsapp is None:
-            SetupCommand('setup-app').run([conf_dir + '/test.ini'])
-            pylons.test.pylonsapp = loadapp('config:test.ini',
-                                            relative_to=conf_dir)
-            config['files_path'] = tempfile.mkdtemp(prefix="uploads_")
-            def create_fn():
-                return pylons.test.pylonsapp
-            install_opener()
-            wsgi_intercept.add_wsgi_intercept('localhost', 80, create_fn)
+    config = 'test.ini'
 
     @classmethod
-    def tearDown(self):
-        try:
-            shutil.rmtree(config['files_path'])
-        except OSError:
-            pass
-        # Zope component tear down
-        zcTearDown()
-        pylons.test.pylonsapp = None
-        wsgi_intercept.remove_wsgi_intercept()
-        uninstall_opener()
+    def setUp(cls):
+        layerSetUp(cls)
 
     @classmethod
-    def testSetUp(self):
-        translator = _get_translator(pylons.config.get('lang'))
-        pylons.translator._push_object(translator)
-        url._push_object(URLGenerator(config['routes.map'], environ))
-        # XXX Set up database here
-        # meta.metadata.create_all(meta.engine)
-        teardown_db_defaults(meta.engine, quiet=True)
-        initialize_db_defaults(meta.engine)
-        mail_queue[:] = []
-        gg.sent_messages[:] = []
-        try:
-            shutil.rmtree(config['files_path'])
-        except OSError:
-            pass
-        os.makedirs(config['files_path'])
-        # Keep random stable in tests
-        random.seed(123)
+    def tearDown(cls):
+        layerTearDown(cls)
 
     @classmethod
-    def testTearDown(self):
-        url._pop_object()
-        pylons.translator._pop_object()
-        meta.Session.execute("SET ututi.active_user TO 0")
-        meta.Session.close()
-        # XXX Tear down database here
-        teardown_db_defaults(meta.engine)
-        meta.Session.rollback()
-        meta.Session.remove()
+    def testSetUp(cls):
+        layerTestSetUp(cls)
 
-        if len(gg.sent_messages) > 0:
-            print >> sys.stderr, "GG queue is NOT EMPTY!"
+    @classmethod
+    def testTearDown(cls):
+        layerTestTearDown(cls)
 
-        if len(mail_queue) > 0:
-            print >> sys.stderr, "Mail queue is NOT EMPTY!"
 
-        shutil.rmtree(config['files_path'])
+class PylonsErrorLayer(object):
+
+    config = 'errors.ini'
+
+    @classmethod
+    def setUp(cls):
+        layerSetUp(cls)
+
+    @classmethod
+    def tearDown(cls):
+        layerTearDown(cls)
+
+    @classmethod
+    def testSetUp(cls):
+        layerTestSetUp(cls)
+
+    @classmethod
+    def testTearDown(cls):
+        layerTestTearDown(cls)
+
 
 
 class UtutiTestApp(TestApp):
