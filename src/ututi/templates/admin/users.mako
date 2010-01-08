@@ -30,13 +30,13 @@
     <span class="result-count">(${ungettext("found %(count)s user", "found %(count)s users", c.users.item_count) % dict(count = c.users.item_count)})</span>
   </h3>
   <ul id="user_list">
-    %for n, (user, downloads, downloads_size, uploads, messages, pages) in enumerate(c.users):
+    %for n, (user, downloads, u_downloads, downloads_size, uploads, messages, pages) in enumerate(c.users):
      <li style="background: ${n % 2 and '#EEEEEE' or '#FFFFFF'}"><a href="${user.url()}">${user.fullname}</a>
      % if user.logo is not None:
         <img style="float:right; padding: 3px;" src="${url(controller='user', action='logo', id=user.id, width=72, height=72)}" />
      % endif
         <div>
-          Downloads: ${downloads} (${h.file_size(int(downloads_size))})
+          Downloads: ${downloads} (${h.file_size(int(downloads_size))}) ${u_downloads} unique
         </div>
         <div>
           Uploads: ${uploads}

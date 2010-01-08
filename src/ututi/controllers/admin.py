@@ -131,6 +131,7 @@ class AdminController(BaseController):
 
         downloads_stmt = meta.Session.query(FileDownload.user_id,
                                             func.count(FileDownload.file_id).label('downloads_count'),
+                                            func.count(func.distinct(FileDownload.file_id)).label('unique_downloads_count'),
                                             func.sum(File.filesize).label('downloads_size'))\
                                             .filter(FileDownload.download_time < to_time)\
                                             .filter(FileDownload.download_time >= from_time)\
@@ -140,6 +141,7 @@ class AdminController(BaseController):
 
         users = meta.Session.query(User,
                                    func.coalesce(downloads_stmt.c.downloads_count, 0).label('downloads'),
+                                   func.coalesce(downloads_stmt.c.unique_downloads_count, 0).label('unique_downloads'),
                                    func.coalesce(downloads_stmt.c.downloads_size, 0).label('downloads_size'),
                                    func.coalesce(uploads_stmt.c.uploads_count, 0).label('uploads'),
                                    func.coalesce(messages_stmt.c.messages_count, 0).label('messages'),
