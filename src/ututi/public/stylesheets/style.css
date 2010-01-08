@@ -63,6 +63,11 @@ body {
 /* end main layout */
 
 /* fonts */
+em {
+  color: #d45500;
+  font-style: normal;
+}
+
 .error,
 .error-message {
   color: red;
@@ -1442,6 +1447,27 @@ span .tooltip {
   background-image: url('../images/sad_cat.jpg');
   background-repeat: no-repeat;
 }
+
+.tour-link {
+  font-size: 14px;
+}
+
+a.btn-large.tour,
+a.btn-large.tour span {
+  background-image: url("../images/button_exclamation.png");
+}
+
+a.btn-large.tour {
+  margin-left: 10px;
+  padding-left: 25px;
+}
+
+a.btn-large.tour span {
+  font-size: 16px;
+  font-weight: bold;
+  color: #d45500;
+}
+
 
 /* end misc */
 
