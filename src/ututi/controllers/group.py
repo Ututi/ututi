@@ -174,10 +174,10 @@ def group_action(method):
         c.security_context = group
         c.object_location = group.location
         c.group = group
-        c.group_payment_month = int(config.get('group_payment_month', '1000'))
-        c.group_payment_quarter = int(config.get('group_payment_quarter', '20000'))
-        c.group_payment_halfyear = int(config.get('group_payment_halfyear', '30000'))
-        c.group_file_limit = int(config.get('group_file_limit', 104857600))
+        c.group_payment_month = int(config.get('group_payment_month', 1000))
+        c.group_payment_quarter = int(config.get('group_payment_quarter', 2000))
+        c.group_payment_halfyear = int(config.get('group_payment_halfyear', 3000))
+        c.group_file_limit = int(config.get('group_file_limit', 200 * 1024 * 1024))
         c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
         return method(self, group)
     return _group_action
