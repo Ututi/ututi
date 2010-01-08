@@ -725,7 +725,6 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         failed = []
         for line in emails:
             for email in filter(bool, line.split(',')):
-                #XXX : need to validate emails
                 try:
                     validators.Email.to_python(email)
                     user = User.get(email)
@@ -736,7 +735,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
                     else:
                         count = count + 1
                         group.invite_user(email, c.user)
-                except:
+                except Invalid:
                     failed.append(email)
         if count > 0:
             h.flash(_("Users invited."))
