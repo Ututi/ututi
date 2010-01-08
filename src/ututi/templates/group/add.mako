@@ -1,5 +1,5 @@
 <%inherit file="/base.mako" />
-<%namespace file="/widgets/newlocationtag.mako" import="*"/>
+<%namespace name="newlocationtag" file="/widgets/newlocationtag.mako" import="*"/>
 
 <%def name="flash_messages()"></%def>
 
@@ -11,6 +11,7 @@ split6040
     ${parent.head_tags()}
     ${h.stylesheet_link('/stylesheets/group.css')|n}
     ${h.stylesheet_link('/stylesheets/newlocationwidget.css')|n}
+    <%newlocationtag:head_tags />
 </%def>
 
 <%def name="title()">
@@ -105,8 +106,8 @@ from ututi.lib.security import is_root
 //<![CDATA[
   $(document).ready(function() {
     $('.group_live_search').change(function() {
-      parameters = {'location-0' : $('#location-0').val(),
-                    'location-1' : $('#location-1').val(),
+      parameters = {'location-0' : $('#location-0-0').val(),
+                    'location-1' : $('#location-0-1').val(),
                     'year'       : $('#year').val()}
       $('#sidebar').load(
           '${url(controller="group", action="js_group_search")}',

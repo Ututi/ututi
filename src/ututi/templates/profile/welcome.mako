@@ -1,9 +1,11 @@
 <%inherit file="/profile/base.mako" />
+<%namespace name="newlocationtag" file="/widgets/newlocationtag.mako" import="*"/>
 
 <%def name="head_tags()">
 ${h.stylesheet_link('/stylesheets/home.css')|n}
 ${h.stylesheet_link('/stylesheets/suggestions.css')|n}
 ${parent.head_tags()}
+<%newlocationtag:head_tags />
 </%def>
 
   <h1>${_('Welcome to Ututi!')}</h1>
@@ -11,6 +13,21 @@ ${parent.head_tags()}
     ${_('Ututi is your university online. Here You and Your class mates can create a <em>group</em> with a mailing list.'
     'You will be able to find the subject You are studying here at Ututi and share your study notes and files with others.')|n}
   </div>
+
+  %if c.user.location is None:
+  <div id="user_location">
+    <div class="inner">
+      <h2>${_('Specify your university and faculty!')}</h2>
+      <form method="post" action="${url(controller='profile', action='update_location')}" id="update-location-form">
+        <div class="form-field">
+          ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=True)}
+        </div>
+        ${h.input_submit(_('confirm'))}
+      </form>
+
+    </div>
+  </div>
+  %endif
 
   <div id="join-group" class="gray-box">
     <div class="inner">
