@@ -478,6 +478,8 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             tags = self.form_result.get('tags', [])
             if isinstance(tags, basestring):
                 tags = tags.split(', ')
+        elif c.user.location is not None:
+            tags = c.user.location.hierarchy()
 
         c.tags = tags
 
