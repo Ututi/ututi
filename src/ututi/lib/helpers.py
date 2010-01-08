@@ -274,11 +274,10 @@ def input_wysiwyg(name, title, value='', cols='80', rows='15'):
             ])
 
 
-def input_submit(text=None, name=None):
+def input_submit(text=None, name=None, **kwargs):
     if text is None:
         from pylons.i18n import _
         text = _('Save')
-    kwargs = {}
     if name is not None:
         kwargs['name'] = name
     return HTML.div(class_='form-field', c=[
