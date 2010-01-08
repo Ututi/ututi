@@ -201,7 +201,8 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     @ActionProtector("user")
     def home(self):
         if c.user.location is None:
-            h.flash(_("You haven't told us where You are studying. You can do this <a href='%(edit_url)s'>here</a>. Thank You."))
+            h.flash(_("You haven't told us where You are studying. "
+                      "You can do this <a href='%(edit_url)s'>here</a>. Thank You.") % dict(edit_url=url(controller='profile', action='edit')))
         c.breadcrumbs.append(self._actions('home'))
 
         if not c.user.memberships and not c.user.watched_subjects:

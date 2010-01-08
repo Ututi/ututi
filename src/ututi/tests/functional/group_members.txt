@@ -66,6 +66,9 @@ We need another member in the group, so let's join as the invited user.
 The user should be presented with a flash message inviting him to join the group.
 
     >>> browser2.printQuery("//div[@class='flash-message']/span/text()")
+    Close
+    You haven't told us where You are studying. You can do this
+    . Thank You.
     Adminas Adminovix has sent you an invitation to group Moderatoriai. Do You want to become a member of this group?
 
 Let's accept this invitation.
