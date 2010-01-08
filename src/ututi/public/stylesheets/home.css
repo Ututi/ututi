@@ -82,10 +82,14 @@ div.gray-box div.description,
 }
 
 #user_location {
-  width: 605px;
-  height: 150px;
+  width: 615px;
+  padding-top: 5px;
   background: url("../images/borders/gray_box_full.png") left top no-repeat;
-  padding: 5px;
+}
+
+#user_location .wrapper {
+  background: url("../images/borders/gray_box_full.png") left bottom no-repeat;
+  padding: 0 5px 5px;
 }
 
 #user_location .inner {

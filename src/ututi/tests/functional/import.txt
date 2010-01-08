@@ -47,6 +47,7 @@ Now we will log out and see if we can log back in as the imported user.
     >>> form.getControl('Login').click()
 
     >>> browser.printQuery("id('page-content')//h2/text()")
+    Specify your university and faculty!
     Join your group
     Find your subjects
     Update your profile

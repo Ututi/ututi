@@ -8,6 +8,18 @@ ${parent.head_tags()}
 <%newlocationtag:head_tags />
 </%def>
 
+<%def name="location_updated()">
+  <div id="user_location">
+    <div class="wrapper">
+      <div class="inner" style="height: 50px; font-weight: bold;">
+        <br />
+        ${_('Your university information has been updated. Thank You.')}
+      </div>
+    </div>
+  </div>
+
+</%def>
+
   <h1>${_('Welcome to Ututi!')}</h1>
   <div class="welcome-message">
     ${_('Ututi is your university online. Here You and Your class mates can create a <em>group</em> with a mailing list.'
@@ -16,17 +28,36 @@ ${parent.head_tags()}
 
   %if c.user.location is None:
   <div id="user_location">
-    <div class="inner">
-      <h2>${_('Specify your university and faculty!')}</h2>
-      <form method="post" action="${url(controller='profile', action='update_location')}" id="update-location-form">
-        <div class="form-field">
-          ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=True)}
-        </div>
-        ${h.input_submit(_('confirm'))}
-      </form>
-
+    <div class="wrapper">
+      <div class="inner">
+        <h2>${_('Specify your university and faculty!')}</h2>
+        <form method="post" action="${url(controller='profile', action='update_location')}" id="update-location-form">
+          <div class="form-field">
+            ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=True)}
+          </div>
+          ${h.input_submit(_('confirm'), id='user-location-submit')}
+        </form>
+      </div>
     </div>
   </div>
+  <script type="text/javascript">
+  //<![CDATA[
+  url = '${url(controller='profile', action='js_update_location')}';
+
+  $('#user-location-submit').click(function() {
+    $('#user_location').addClass('loading');
+    $.post(url,
+      $(this).parents('form').serialize(),
+      function(data, status) {
+        if (status == 'success') {
+          $('#user_location').replaceWith(data);
+        }
+        $('#user_location').removeClass('loading');
+      });
+    return false;
+  });
+  //]]>
+  </script>
   %endif
 
   <div id="join-group" class="gray-box">
