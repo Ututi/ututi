@@ -46,10 +46,10 @@ Now we will log out and see if we can log back in as the imported user.
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
 
-    >>> browser.printQuery("id('page-content')//h3/text()")
-    Join a group
-    Browse subjects
-    Review and edit your profile
+    >>> browser.printQuery("id('page-content')//h2/text()")
+    Join your group
+    Find your subjects
+    Update your profile
 
 
 XXX test more than 1 user import

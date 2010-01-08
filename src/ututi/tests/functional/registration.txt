@@ -23,34 +23,10 @@ screen:
     >>> browser.url
     'http://localhost/register/welcome'
 
-    >>> browser.printQuery("id('page-content')//h3/text()")
-    Join a group
-    Browse subjects
-    Review and edit your profile
-
-    >>> form = browser.getForm(id="findgroup-form")
-    >>> form.getControl(name='location-0').value = 'vu'
-    >>> form.getControl(name='year').value = '2009'
-    >>> form.getControl('Search').click()
-    >>> browser.printQuery("id('search-results')//a/text()")
-    Moderatoriai
-
-Another bug in the group search: adding a simple tag to the search's parameters would cause a crash.
-    >>> browser.getControl(name='tags').value = 'vu, simple_tag'
-    >>> browser.getControl('Search', index=1).click()
-
-There was a bug, where searching without anything specified and then pressing search again in the group find view
-would cause a crash. Is it still there?
-    >>> browser.open('http://localhost/welcome')
-    >>> browser.getControl(name='location-0').value = ''
-    >>> browser.getControl(name='year').value = ''
-    >>> browser.getControl('Search', index=1).click()
-
-    >>> browser.getControl('Search', index=1).click()
-    >>> print browser.url
-    http://localhost/findgroup
-    >>> browser.printQuery("//div[@class='search-item group-item']/a/text()")
-    Moderatoriai
+    >>> browser.printQuery("id('page-content')//h2/text()")
+    Join your group
+    Find your subjects
+    Update your profile
 
 An email, requesting the confirmation of the email address entered is sent:
 
@@ -197,9 +173,9 @@ Bug fix confirm: passwords with non-ascii chars would crash the registration.
 
     >>> browser.printQuery("//span[@class='error-message']/text()")
 
-    >>> browser.printQuery("id('page-content')//h3/text()")
-    Join a group
-    Browse subjects
-    Review and edit your profile
+    >>> browser.printQuery("id('page-content')//h2/text()")
+    Join your group
+    Find your subjects
+    Update your profile
 
     >>> email = mail_queue.pop()
