@@ -1910,10 +1910,9 @@ div.tour_slide {
 }
 
 div.tour_slide div.image {
-  width: 605px;
+  width: 606px;
   float: left;
-  padding: 0 2px 5px 0;
-  background: url("../images/details/image_shadow.png") bottom right no-repeat;
+  padding: 0;
   margin-bottom: 10px;
 }
 
