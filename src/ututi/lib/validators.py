@@ -163,3 +163,19 @@ class UniqueEmail(validators.FancyValidator):
                 raise Invalid(self.message("non_unique", state), value, state)
 
 
+def manual_validate(schema, **state_kwargs):
+    """Validate a formencode schema.
+    Works similar to the @validate decorator. On success return a dictionary
+    of parameters from request.params. On failure throws a formencode.Invalid
+    exception."""
+    # Create a state object if requested
+    if state_kwargs:
+        state = State(**state_kwargs)
+    else:
+        state = None
+
+    # In case of validation errors an exception is thrown. This needs to
+    # be caught elsewhere.
+    from pylons import request
+    return schema.to_python(request.params, state)
+
