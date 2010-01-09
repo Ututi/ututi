@@ -17,4 +17,7 @@ Polish frontpage:
     >>> browser.open('http://localhost/join')
 
 Group search (not removed yet):
+    >>> browser = Browser.logIn()
     >>> browser.open('http://localhost/findgroup')
+    >>> browser.url
+    'http://localhost/findgroup'
