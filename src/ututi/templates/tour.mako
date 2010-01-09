@@ -5,6 +5,18 @@
 <%def name="portlets()">
 </%def>
 
+<%def name="joinlink()">
+<div class="join_link">
+  ${_('Found out enough?')}
+  <br />
+  <a class="btn-large" href="${url(controller='home', action='join')}">
+    <span>
+      ${_('Join Ututi!')}
+    </span>
+  </a>
+</div>
+</%def>
+
 <div id="tour_navigation">
   <a href="#" id="tour_prev">${_('Previous')}</a>
   <span id="pager" ></span>
@@ -25,6 +37,7 @@
       <p>
         ${_('All these things are combined in the handy Ututi system.')}
       </p>
+      ${joinlink()}
     </div>
   </div>
 
@@ -44,6 +57,7 @@
       <p>
         ${_('You can always choose not to receive these email messages in the group settings.')}
       </p>
+      ${joinlink()}
     </div>
   </div>
 
@@ -70,6 +84,7 @@
         ${_('You can find new subjects by using our search and if they do not '
         'exist - create them :)')}
       </p>
+      ${joinlink()}
     </div>
   </div>
 
@@ -98,6 +113,7 @@
         'files can be added to subjects not only by your group, but also by other '
         'groups and Ututi members. This makes it easy to share information.')}
       </p>
+      ${joinlink()}
     </div>
   </div>
 
@@ -112,6 +128,7 @@
         ${_('All the events of a groups: new members, files, subjects '
         'are visible in the "whats new" section.')}
       </p>
+      ${joinlink()}
     </div>
   </div>
 
@@ -140,6 +157,7 @@
         ${_('What is more, You can specify how often You want to receive email notifications about '
         'events in Your watched subjects.')}
       </p>
+      ${joinlink()}
     </div>
     <div class="image">
       ${h.image('/images/tour/%s/6_1.png' % c.lang, alt='logo')|n}
@@ -167,6 +185,7 @@
         ${_('From here You can also easily create a subject, upload a file, '
         'invite people to use Ututi.')}
       </p>
+      ${joinlink()}
     </div>
   </div>
 </div>

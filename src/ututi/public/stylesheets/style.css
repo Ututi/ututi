@@ -1962,3 +1962,10 @@ div.tour_slide div.text h2 {
 a.anchor {
   display: none;
 }
+
+div.tour_slide div.text div.join_link {
+  margin-top: 15px;
+  border-top: 1px solid #ded8d8;
+  padding-top: 5px;
+  line-height: 20px;
+}
