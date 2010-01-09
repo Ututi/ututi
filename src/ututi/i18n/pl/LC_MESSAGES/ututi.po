@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-01-06 16:33+0200\n"
+"PO-Revision-Date: 2010-01-09 19:27+0200\n"
 "Last-Translator: Jaroslav Šatkevič <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -321,6 +321,12 @@ msgstr ""
 msgid "Search"
 msgstr "Szukaj"
 
+#, python-format
+msgid ""
+"You haven't told us where You are studying. You can do this <a "
+"href='%(edit_url)s'>here</a>. Thank You."
+msgstr ""
+
 msgid "Your password has been changed!"
 msgstr "Twoje hasło zostało zmienione!"
 
@@ -336,6 +342,9 @@ msgstr "Twój e-mail %s został zaakceptowany. Dziękujemy."
 
 msgid "Could not confirm email - invalid confirmation key."
 msgstr "E-mail nie został potwierdzony - niewłaściwe hasło potwierdzenia."
+
+msgid "Your university information has been updated."
+msgstr ""
 
 msgid "The element does not exist."
 msgstr "Element nie istnieje."
@@ -871,6 +880,24 @@ msgstr[2] ""
 msgid "Ututi users:"
 msgstr "Użytkownicy Ututi:"
 
+msgid "Downloads"
+msgstr ""
+
+msgid "Downloads (Mb)"
+msgstr ""
+
+msgid "Uploads"
+msgstr ""
+
+msgid "Pages"
+msgstr "Strony"
+
+msgid "Messages"
+msgstr ""
+
+msgid "User Id"
+msgstr ""
+
 #, python-format
 msgid "found %(count)s user"
 msgid_plural "found %(count)s users"
@@ -1365,22 +1392,6 @@ msgstr "Obserwowane przedmioty"
 msgid "Make your group's file space unlimited"
 msgstr ""
 
-msgid ""
-"The amount of group's private files is limited to 200 Mb. This is so "
-"because Ututi encourages users to store their files in publicly "
-"accessible subjects where they can be shared with all the users. But if "
-"You want to keep more than 200 Mb of files, You can do this."
-msgstr ""
-
-#, python-format
-msgid ""
-"For <em>%d Lt</em> Your group will be able to store an <em>unlimited "
-"amount of files</em>:"
-msgstr ""
-
-msgid "increase the limit"
-msgstr ""
-
 #, python-format
 msgid ""
 "The amount of group's private files is limited to %(limit)s. This is so "
@@ -1396,6 +1407,22 @@ msgstr ""
 
 #, python-format
 msgid "%d Lt"
+msgstr ""
+
+msgid ""
+"The amount of group's private files is limited to 200 Mb. This is so "
+"because Ututi encourages users to store their files in publicly "
+"accessible subjects where they can be shared with all the users. But if "
+"You want to keep more than 200 Mb of files, You can do this."
+msgstr ""
+
+#, python-format
+msgid ""
+"For <em>%d Lt</em> Your group will be able to store an <em>unlimited "
+"amount of files</em>:"
+msgstr ""
+
+msgid "increase the limit"
 msgstr ""
 
 msgid "email subject"
@@ -1727,48 +1754,53 @@ msgstr ""
 msgid "Back to subject list"
 msgstr "Wróć do listy przedmiotów"
 
+msgid "Your university information has been updated. Thank You."
+msgstr ""
+
 msgid "Welcome to Ututi!"
 msgstr "Witaj w Ututi!"
 
-msgid "Join a group"
-msgstr "Dołącz do grupy"
-
 msgid ""
-"You can join your academic group to make communicating and sharing "
-"materials with your class mates easier."
+"Ututi is your university online. Here You and Your class mates can create"
+" a <em>group</em> with a mailing list.You will be able to find the "
+"subject You are studying here at Ututi and share your study notes and "
+"files with others."
 msgstr ""
-"Dołącz do swojej grupy studyjnej aby ułatwić wzajemną komunikację, "
-"przepływ materiałów i notatek pomiędzy Wami."
 
-msgid "entrance year"
-msgstr "rok założenia"
-
-msgid "Browse subjects"
-msgstr "Przeglądaj przedmioty"
-
-#, python-format
-msgid ""
-"You can browse the %(link_to_list_of_subjects)s, look for information and"
-" share coursework. Also you can %(link_to_subject_watching_view)s, so you"
-" would not miss anything."
+msgid "Specify your university and faculty!"
 msgstr ""
-"Możesz przeglądać %(link_to_list_of_subjects)s, szukać informacji i "
-"dzielić się dorobkiem ze studiów. Ponadto możesz "
-"%(link_to_subject_watching_view)s, po to by nic nie przegapić."
 
-msgid "list of subjects"
-msgstr "wykaz przedmiotów"
+msgid "confirm"
+msgstr ""
 
-msgid "select watched subjects"
-msgstr "wybierz obserwowane przedmioty"
+msgid "Join your group"
+msgstr ""
 
-msgid "Review and edit your profile"
-msgstr "Podejrzyj i zmień swój profil"
+msgid "Here You can find Your group or create one if it does not exist."
+msgstr ""
+
+msgid "your group"
+msgstr ""
+
+msgid "Find your subjects"
+msgstr ""
+
+msgid "Update your profile"
+msgstr ""
 
 msgid ""
-"Fill in your information, upload your photo so that others can recognize "
-"you."
-msgstr "Napisz coś o sobie, dodaj zdjęcie, żeby inni Cię poznali "
+"Let Your friends know who You are, so they can trust the information You "
+"upload."
+msgstr ""
+
+msgid "edit your profile"
+msgstr ""
+
+msgid "New to Ututi? Don't know how to use it?"
+msgstr ""
+
+msgid "Find out more"
+msgstr ""
 
 msgid "results"
 msgstr "wyniki"
@@ -1910,9 +1942,6 @@ msgstr "Popraw opis przedmiotu"
 
 msgid "The subject's description is empty."
 msgstr "Brak opisu przedmiotu."
-
-msgid "Pages"
-msgstr "Strony"
 
 msgid "The subject has no pages yet - create one!"
 msgstr "Przedmiot nie posiada własnej strony. Utwórz!"

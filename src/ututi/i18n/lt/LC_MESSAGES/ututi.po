@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-01-06 16:33+0200\n"
+"PO-Revision-Date: 2010-01-09 19:27+0200\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -329,6 +329,14 @@ msgstr "Šis el. pašto adresas jau naudojamas."
 msgid "Search"
 msgstr "Paieška"
 
+#, python-format
+msgid ""
+"You haven't told us where You are studying. You can do this <a "
+"href='%(edit_url)s'>here</a>. Thank You."
+msgstr ""
+"Tu dar nepasakei mums, kur studijuoji. Tai gali padaryti <a "
+"href='%(edit_url)s'>čia</a>. Ačiū."
+
 msgid "Your password has been changed!"
 msgstr "Jūsų slaptažodis pakeistas!"
 
@@ -344,6 +352,9 @@ msgstr "El. pašto adresas %s  patvirtintas. Labai ačiū!"
 
 msgid "Could not confirm email - invalid confirmation key."
 msgstr "Nepavyko patvirtinti el. pašto adreso - netinkamas patvirtinimo raktas."
+
+msgid "Your university information has been updated."
+msgstr "Tavo universiteto informacija atnaujinta."
 
 msgid "The element does not exist."
 msgstr "Tai sistemoje neegzistuoja."
@@ -862,7 +873,7 @@ msgstr ""
 "naudotis Ututi (šoninių blokelių meniu)."
 
 msgid "Adminstration dashboard"
-msgstr ""
+msgstr "Administravimas"
 
 msgid "Events"
 msgstr "Įvykiai"
@@ -920,6 +931,24 @@ msgstr[2] ""
 
 msgid "Ututi users:"
 msgstr "Ututi naudotojai:"
+
+msgid "Downloads"
+msgstr "Atsisiuntimai"
+
+msgid "Downloads (Mb)"
+msgstr "Atsisiuntimai (Mb)"
+
+msgid "Uploads"
+msgstr "Įkėlimai"
+
+msgid "Pages"
+msgstr "Puslapiai"
+
+msgid "Messages"
+msgstr "Žinutės"
+
+msgid "User Id"
+msgstr "Nario ID"
 
 #, python-format
 msgid "found %(count)s user"
@@ -1430,28 +1459,6 @@ msgstr "Stebimi dalykai"
 msgid "Make your group's file space unlimited"
 msgstr "Panaikinkite grupės failų apribojimus"
 
-msgid ""
-"The amount of group's private files is limited to 200 Mb. This is so "
-"because Ututi encourages users to store their files in publicly "
-"accessible subjects where they can be shared with all the users. But if "
-"You want to keep more than 200 Mb of files, You can do this."
-msgstr ""
-"Grupės failų kiekis ribojimas iki 200 Mb. Taip yra todėl, kad Ututi "
-"skatina\n"
-"vartotojus laikyti failus viešai prieinamuose dalykuose, kur jais gali "
-"naudotis visi.\n"
-"Jeigu norite laikyti daugiau nei 200 Mb failų grupės erdvėje, galite tai "
-"padaryti."
-
-#, python-format
-msgid ""
-"For <em>%d Lt</em> Your group will be able to store an <em>unlimited "
-"amount of files</em>:"
-msgstr "Už <em>%d Lt</em> Jūsų grupė galės laikyti <em>neribotą failų kiekį</em>:"
-
-msgid "increase the limit"
-msgstr "padidinti limitą"
-
 #, python-format
 msgid ""
 "The amount of group's private files is limited to %(limit)s. This is so "
@@ -1474,6 +1481,28 @@ msgstr "Sumokėję už grupę, galėsite joje laikyti <em>neribotą failų kiek�
 #, python-format
 msgid "%d Lt"
 msgstr "%d Lt"
+
+msgid ""
+"The amount of group's private files is limited to 200 Mb. This is so "
+"because Ututi encourages users to store their files in publicly "
+"accessible subjects where they can be shared with all the users. But if "
+"You want to keep more than 200 Mb of files, You can do this."
+msgstr ""
+"Grupės failų kiekis ribojimas iki 200 Mb. Taip yra todėl, kad Ututi "
+"skatina\n"
+"vartotojus laikyti failus viešai prieinamuose dalykuose, kur jais gali "
+"naudotis visi.\n"
+"Jeigu norite laikyti daugiau nei 200 Mb failų grupės erdvėje, galite tai "
+"padaryti."
+
+#, python-format
+msgid ""
+"For <em>%d Lt</em> Your group will be able to store an <em>unlimited "
+"amount of files</em>:"
+msgstr "Už <em>%d Lt</em> Jūsų grupė galės laikyti <em>neribotą failų kiekį</em>:"
+
+msgid "increase the limit"
+msgstr "padidinti limitą"
 
 msgid "email subject"
 msgstr "laiško tema"
@@ -1821,50 +1850,60 @@ msgstr ""
 msgid "Back to subject list"
 msgstr "Grįžti į dalykų sąrašą"
 
+msgid "Your university information has been updated. Thank You."
+msgstr "Tavo universiteto informacija atnaujinta. Ačiū."
+
 msgid "Welcome to Ututi!"
 msgstr "Sveiki prisijungę prie Ututi!"
 
-msgid "Join a group"
-msgstr "Prisijunkite prie grupės"
+msgid ""
+"Ututi is your university online. Here You and Your class mates can create"
+" a <em>group</em> with a mailing list.You will be able to find the "
+"subject You are studying here at Ututi and share your study notes and "
+"files with others."
+msgstr ""
+"Ututi - tai tavo universitetas internete. Čia tu ir tavo grupiokai galite"
+" sukurti <em>grupę</em>\n"
+"su el. pašto konferencija. Taip pat čia rasi savo studijuojamus dalykus "
+"ir galėsi\n"
+"dalintis jų medžiaga ir failais su kitais."
+
+msgid "Specify your university and faculty!"
+msgstr "Nurodyk savo universitetą ir fakultetą!"
+
+msgid "confirm"
+msgstr "patvirtinti"
+
+msgid "Join your group"
+msgstr "Prisijunk prie savo grupės"
+
+msgid "Here You can find Your group or create one if it does not exist."
+msgstr "Čia gali surasti savo grupę arba sukurti ją, jei jos dar nėra."
+
+msgid "your group"
+msgstr "tavo grupė"
+
+msgid "Find your subjects"
+msgstr "Surask savo dalykus"
+
+msgid "Update your profile"
+msgstr "Atnaujink savo profilį"
 
 msgid ""
-"You can join your academic group to make communicating and sharing "
-"materials with your class mates easier."
+"Let Your friends know who You are, so they can trust the information You "
+"upload."
 msgstr ""
-"Prisijungus prie savo akademinės grupės galima bendrauti bei dalintis "
-"studijų medžiaga patogiau."
+"Pasakyk savo draugams, kas esi, kad jie galėtų pasitikėti tavo įkeliama "
+"informacija."
 
-msgid "entrance year"
-msgstr "Įstojimo metai"
+msgid "edit your profile"
+msgstr "redaguoti profilį"
 
-msgid "Browse subjects"
-msgstr "Raskite savo dalykus"
+msgid "New to Ututi? Don't know how to use it?"
+msgstr "Pirmą kartą Ututi? Nežinai, kas tai yra?"
 
-#, python-format
-msgid ""
-"You can browse the %(link_to_list_of_subjects)s, look for information and"
-" share coursework. Also you can %(link_to_subject_watching_view)s, so you"
-" would not miss anything."
-msgstr ""
-"Ututi galima naršyti %(link_to_list_of_subjects)s, ieškoti medžiagos bei "
-"dalintis konspektais. Taip pat %(link_to_subject_watching_view)s, kad "
-"niekas neliktų nepastebėta."
-
-msgid "list of subjects"
-msgstr "dalykų katalogus"
-
-msgid "select watched subjects"
-msgstr "stebėti studijuojamus dalykus"
-
-msgid "Review and edit your profile"
-msgstr "Pildykite profilį"
-
-msgid ""
-"Fill in your information, upload your photo so that others can recognize "
-"you."
-msgstr ""
-"Šiek tiek informacijos apie save ir įkelta nuotrauka padeda tapti "
-"atpažįstamam."
+msgid "Find out more"
+msgstr "Sužinok"
 
 msgid "results"
 msgstr "rezultatai"
@@ -2007,9 +2046,6 @@ msgstr "Keisti dalyko aprašymą"
 
 msgid "The subject's description is empty."
 msgstr "Dalyko aprašymas tuščias."
-
-msgid "Pages"
-msgstr "Puslapiai"
 
 msgid "The subject has no pages yet - create one!"
 msgstr "Dalykas dar neturi puslapių - sukurkite!"

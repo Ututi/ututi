@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-01-06 16:33+0200\n"
+"POT-Creation-Date: 2010-01-09 19:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -301,6 +301,12 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
+#, python-format
+msgid ""
+"You haven't told us where You are studying. You can do this <a "
+"href='%(edit_url)s'>here</a>. Thank You."
+msgstr ""
+
 msgid "Your password has been changed!"
 msgstr ""
 
@@ -315,6 +321,9 @@ msgid "Your email %s was confirmed. Thank You."
 msgstr ""
 
 msgid "Could not confirm email - invalid confirmation key."
+msgstr ""
+
+msgid "Your university information has been updated."
 msgstr ""
 
 msgid "The element does not exist."
@@ -816,6 +825,24 @@ msgstr[1] ""
 msgid "Ututi users:"
 msgstr ""
 
+msgid "Downloads"
+msgstr ""
+
+msgid "Downloads (Mb)"
+msgstr ""
+
+msgid "Uploads"
+msgstr ""
+
+msgid "Pages"
+msgstr ""
+
+msgid "Messages"
+msgstr ""
+
+msgid "User Id"
+msgstr ""
+
 #, python-format
 msgid "found %(count)s user"
 msgid_plural "found %(count)s users"
@@ -1275,22 +1302,6 @@ msgstr ""
 msgid "Make your group's file space unlimited"
 msgstr ""
 
-msgid ""
-"The amount of group's private files is limited to 200 Mb. This is so because "
-"Ututi encourages users to store their files in publicly accessible subjects "
-"where they can be shared with all the users. But if You want to keep more "
-"than 200 Mb of files, You can do this."
-msgstr ""
-
-#, python-format
-msgid ""
-"For <em>%d Lt</em> Your group will be able to store an <em>unlimited amount "
-"of files</em>:"
-msgstr ""
-
-msgid "increase the limit"
-msgstr ""
-
 #, python-format
 msgid ""
 "The amount of group's private files is limited to %(limit)s. This is so "
@@ -1306,6 +1317,22 @@ msgstr ""
 
 #, python-format
 msgid "%d Lt"
+msgstr ""
+
+msgid ""
+"The amount of group's private files is limited to 200 Mb. This is so because "
+"Ututi encourages users to store their files in publicly accessible subjects "
+"where they can be shared with all the users. But if You want to keep more "
+"than 200 Mb of files, You can do this."
+msgstr ""
+
+#, python-format
+msgid ""
+"For <em>%d Lt</em> Your group will be able to store an <em>unlimited amount "
+"of files</em>:"
+msgstr ""
+
+msgid "increase the limit"
 msgstr ""
 
 msgid "email subject"
@@ -1626,40 +1653,51 @@ msgstr ""
 msgid "Back to subject list"
 msgstr ""
 
+msgid "Your university information has been updated. Thank You."
+msgstr ""
+
 msgid "Welcome to Ututi!"
 msgstr ""
 
-msgid "Join a group"
+msgid ""
+"Ututi is your university online. Here You and Your class mates can create a "
+"<em>group</em> with a mailing list.You will be able to find the subject You "
+"are studying here at Ututi and share your study notes and files with others."
+msgstr ""
+
+msgid "Specify your university and faculty!"
+msgstr ""
+
+msgid "confirm"
+msgstr ""
+
+msgid "Join your group"
+msgstr ""
+
+msgid "Here You can find Your group or create one if it does not exist."
+msgstr ""
+
+msgid "your group"
+msgstr ""
+
+msgid "Find your subjects"
+msgstr ""
+
+msgid "Update your profile"
 msgstr ""
 
 msgid ""
-"You can join your academic group to make communicating and sharing materials "
-"with your class mates easier."
+"Let Your friends know who You are, so they can trust the information You "
+"upload."
 msgstr ""
 
-msgid "entrance year"
+msgid "edit your profile"
 msgstr ""
 
-msgid "Browse subjects"
+msgid "New to Ututi? Don't know how to use it?"
 msgstr ""
 
-#, python-format
-msgid ""
-"You can browse the %(link_to_list_of_subjects)s, look for information and "
-"share coursework. Also you can %(link_to_subject_watching_view)s, so you "
-"would not miss anything."
-msgstr ""
-
-msgid "list of subjects"
-msgstr ""
-
-msgid "select watched subjects"
-msgstr ""
-
-msgid "Review and edit your profile"
-msgstr ""
-
-msgid "Fill in your information, upload your photo so that others can recognize you."
+msgid "Find out more"
 msgstr ""
 
 msgid "results"
@@ -1794,9 +1832,6 @@ msgid "Edit subject description"
 msgstr ""
 
 msgid "The subject's description is empty."
-msgstr ""
-
-msgid "Pages"
 msgstr ""
 
 msgid "The subject has no pages yet - create one!"
