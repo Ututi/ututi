@@ -74,12 +74,18 @@ The users should get emails:
     To: jonas@example.com
     Subject: Ututi group invitation
     <BLANKLINE>
-    Adminas Adminovix has invited You to join the group Test group.
+    Hi,
+    Your friend Adminas Adminovix is using Ututi.lt - a system for students, and
+    wants to invite You into a group Test group < http://localhost/group/test >.  In Ututi
+    you can find coursework, share files with other members of the group
+    and use the group forums.
     <BLANKLINE>
-    Since You do not appear to be a Ututi user at the moment, to become a member of this group, You will have to register first.
+    Since You do not appear to be a Ututi user at the moment, to become a
+    member of this group, You will have to register first.
     <BLANKLINE>
-    You can do this by following this link: http://localhost/register/...
+    You can do this by following this link: < http://localhost/register/... >
     <BLANKLINE>
+    --
     The Ututi team
     <BLANKLINE>
 
@@ -93,14 +99,18 @@ And another message, this time to somebody who already is a ututi user:
     To: user@ututi.lt
     Subject: Ututi group invitation
     <BLANKLINE>
-    Alternative user,
+    Hi,
+    Your friend Adminas Adminovix wants to wants to invite You into a group
+    Test group < http://localhost/group/test >. After joining you will be able to
+    watch subjects your group is studying, share files with other members
+    of the group and use the group forum.
     <BLANKLINE>
-    Adminas Adminovix has invited You to join the group Test group.
+    You can accept or reject the invitation here: < http://localhost/group/test/invitation >
     <BLANKLINE>
-    You can accept or reject this invitation by following this link: http://localhost/group/test/invitation .
+    We hope You will find Ututi useful!
     <BLANKLINE>
-    The Ututi team
-    <BLANKLINE>
+    --
+    Ututi komanda
 
 Now, if we were to sign in as this 'alternative user' user, we should see a flash message notifying us of the
 invitation.
@@ -129,13 +139,13 @@ Let's accept this invitation.
 Let's get the url from the first message
 
     >>> from  ututi.lib.helpers import get_urls
-    >>> print get_urls(msg)
-    ['http://localhost/register/...']
+    >>> print get_urls(msg)[-1]
+    http://localhost/register/...
 
 First let us log out.
 
     >>> browser.getLink('log out').click()
-    >>> browser.open(get_urls(msg)[0])
+    >>> browser.open(get_urls(msg)[-1])
 
     >>> browser.queryHTML('//h1/text()')
     ['Please register!']
@@ -178,18 +188,23 @@ And we are redirected to the group that invited us.
     To: user3@ututi.com
     Subject: Ututi group invitation
     <BLANKLINE>
-    Jonas Petraitis Petrauskas has invited You to join the group Test group.
+    Hi,
+    Your friend Jonas Petraitis Petrauskas is using Ututi.lt - a system for students, and
+    wants to invite You into a group Test group < http://localhost/group/test >.  In Ututi
+    you can find coursework, share files with other members of the group
+    and use the group forums.
     <BLANKLINE>
-    Since You do not appear to be a Ututi user at the moment, to become a member of this group, You will have to register first.
+    Since You do not appear to be a Ututi user at the moment, to become a
+    member of this group, You will have to register first.
     <BLANKLINE>
-    You can do this by following this link: http://localhost/register/...
+    You can do this by following this link: < http://localhost/register/... >
     <BLANKLINE>
+    --
     The Ututi team
-    <BLANKLINE>
 
 However, if we click the link again, we should get a message:
 
-    >>> browser.open(get_urls(msg)[0])
+    >>> browser.open(get_urls(msg)[-1])
     >>> print browser.url
     http://localhost/register/...
 

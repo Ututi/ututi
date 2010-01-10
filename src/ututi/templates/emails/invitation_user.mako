@@ -1,7 +1,17 @@
-${invitation.user.fullname},
+${h.literal(_("""Hi,
+Your friend %(author)s wants to wants to invite You into a group
+%(group_title)s < %(group_url)s >. After joining you will be able to
+watch subjects your group is studying, share files with other members
+of the group and use the group forum.
 
-${_(u"%(author)s has invited You to join the group %(group)s.") % dict(author=invitation.author.fullname, group=invitation.group.title)}
+You can accept or reject the invitation here: < %(invitation_url)s >
 
-${_(u"You can accept or reject this invitation by following this link: %(url)s .") % dict(url=url(controller="group", action="invitation", id=invitation.group.group_id, qualified=True))}
+We hope You will find Ututi useful!
 
-${_(u"The Ututi team")}
+--
+Ututi komanda
+""") % dict(author=invitation.author.fullname,
+            group_title=invitation.group.title,
+            group_url=invitation.group.url(qualified=True),
+            invitation_url=url(controller="group", action="invitation", id=invitation.group.group_id, qualified=True)
+))}
