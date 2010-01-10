@@ -82,6 +82,13 @@ What if we clicked the link again?
      >>> print browser.url
      http://localhost/welcome
 
+     >>> form = browser.getForm('findsubject-form')
+     >>> form.getControl(name='location-0').value = 'Vilniaus universitetas'
+     >>> form.getControl('Search').click()
+
+     >>> print browser.url
+     http://localhost/school/vu
+
 We have been logged in after signing up. Now let's log out and test more unfortunate
 scenarios:
 

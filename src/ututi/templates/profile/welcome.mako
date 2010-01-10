@@ -77,9 +77,8 @@ ${parent.head_tags()}
   <div id="find-subjects" class="gray-box">
     <div class="inner">
       <h2>${_('Find your subjects')}</h2>
-      <form method="post" action="${url(controller='profile', action='search')}" id="findsubject-form">
+      <form method="post" action="${url(controller='profile', action='goto_location')}" id="findsubject-form">
         <div>
-          <input type='hidden' name='obj_type' value='subject' />
           ${location_widget(2, add_new=False, live_search=False)}
           ${h.input_submit(_('Search'))}
         </div>

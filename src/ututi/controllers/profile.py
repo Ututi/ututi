@@ -41,14 +41,14 @@ from ututi.controllers.home import UniversityListMixin
 log = logging.getLogger(__name__)
 
 
-class LocationUpdateForm(Schema):
+class LocationForm(Schema):
     pre_validators = [NestedVariables()]
     allow_extra_fields = True
     location = Pipe(ForEach(validators.String(strip=True)),
                     LocationTagsValidator())
 
 
-class ProfileForm(LocationUpdateForm):
+class ProfileForm(LocationForm):
     """A schema for validating user profile forms."""
     fullname = validators.String(not_empty=True)
     site_url = validators.URL()
@@ -608,7 +608,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         return render('/profile/support.mako')
 
     @ActionProtector("user")
-    @validate(schema=LocationUpdateForm, form='welcome')
+    @validate(schema=LocationForm, form='welcome')
     def update_location(self):
         c.user.location = self.form_result.get('location', None)
         meta.Session.commit()
@@ -618,9 +618,18 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     @ActionProtector("user")
     def js_update_location(self):
         try:
-            fields = manual_validate(LocationUpdateForm)
+            fields = manual_validate(LocationForm)
             c.user.location = fields.get('location', None)
             meta.Session.commit()
             return render_mako_def('/profile/welcome.mako','location_updated')
         except Invalid, e:
             abort(400)
+
+    @ActionProtector("user")
+    @validate(schema=LocationForm, form='welcome')
+    def goto_location(self):
+        if hasattr(self, 'form_result'):
+            location = self.form_result.get('location', None)
+            if location is not None:
+                redirect_to(location.url())
+        redirect_to(url(controller='profile', action='welcome'))
