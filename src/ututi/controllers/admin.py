@@ -108,35 +108,39 @@ class AdminController(BaseController):
         from_time = parse_date(c.from_time_str, locale=locale)
         to_time = parse_date(c.to_time_str, locale=locale)
 
-        pages_stmt = meta.Session.query(Event.author_id,
-                                        func.count(Event.created).label('pages_count'))\
-                                        .filter(Event.event_type == 'page_created')\
-                                        .filter(Event.created < to_time)\
-                                        .filter(Event.created >= from_time)\
-                                        .group_by(Event.author_id).subquery()
+        pages_stmt = meta.Session.query(
+            Event.author_id,
+            func.count(Event.created).label('pages_count'))\
+            .filter(Event.event_type == 'page_created')\
+            .filter(Event.created < to_time)\
+            .filter(Event.created >= from_time)\
+            .group_by(Event.author_id).subquery()
 
-        uploads_stmt = meta.Session.query(Event.author_id,
-                                          func.count(Event.created).label('uploads_count'))\
-                                          .filter(Event.event_type == 'file_uploaded')\
-                                          .filter(Event.created < to_time)\
-                                          .filter(Event.created >= from_time)\
-                                          .group_by(Event.author_id).subquery()
+        uploads_stmt = meta.Session.query(
+            Event.author_id,
+            func.count(Event.created).label('uploads_count'))\
+            .filter(Event.event_type == 'file_uploaded')\
+            .filter(Event.created < to_time)\
+            .filter(Event.created >= from_time)\
+            .group_by(Event.author_id).subquery()
 
-        messages_stmt = meta.Session.query(Event.author_id,
-                                           func.count(Event.created).label('messages_count'))\
-                                           .filter(Event.event_type == 'forum_post_created')\
-                                           .filter(Event.created < to_time)\
-                                           .filter(Event.created >= from_time)\
-                                           .group_by(Event.author_id).subquery()
+        messages_stmt = meta.Session.query(
+            Event.author_id,
+            func.count(Event.created).label('messages_count'))\
+            .filter(Event.event_type == 'forum_post_created')\
+            .filter(Event.created < to_time)\
+            .filter(Event.created >= from_time)\
+            .group_by(Event.author_id).subquery()
 
-        downloads_stmt = meta.Session.query(FileDownload.user_id,
-                                            func.count(FileDownload.file_id).label('downloads_count'),
-                                            func.count(func.distinct(FileDownload.file_id)).label('unique_downloads_count'),
-                                            func.sum(File.filesize).label('downloads_size'))\
-                                            .filter(FileDownload.download_time < to_time)\
-                                            .filter(FileDownload.download_time >= from_time)\
-                                            .outerjoin((File, File.id == FileDownload.file_id))\
-                                            .group_by(FileDownload.user_id).subquery()
+        downloads_stmt = meta.Session.query(
+            FileDownload.user_id,
+            func.count(FileDownload.file_id).label('downloads_count'),
+            func.count(func.distinct(FileDownload.file_id)).label('unique_downloads_count'),
+            func.sum(File.filesize).label('downloads_size'))\
+            .filter(FileDownload.download_time < to_time)\
+            .filter(FileDownload.download_time >= from_time)\
+            .outerjoin((File, File.id == FileDownload.file_id))\
+            .group_by(FileDownload.user_id).subquery()
 
 
         users = meta.Session.query(User,
