@@ -135,7 +135,6 @@ create table groups (
        title varchar(250) not null,
        year date not null,
        description text,
-       show_page bool default true,
        page text not null default '',
        logo bytea default null,
        moderators bool default false,

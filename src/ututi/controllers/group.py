@@ -220,8 +220,6 @@ class GroupControllerBase(BaseController):
              'selected': selected == 'page',
              'event': h.trackEvent(c.group, 'page', 'breadcrumb')},
             ]
-        if not c.group.show_page:
-            del bcs[-1]
         return bcs
 
 class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
@@ -237,10 +235,6 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @group_action
     def home(self, group):
         if check_crowds(["member", "admin", "moderator"]):
-            if request.GET.get('do', None) == 'hide_page':
-                group.show_page = False
-                h.flash(_("The group's page was hidden. You can show it again by editing the group's settings."))
-            meta.Session.commit()
             c.breadcrumbs.append(self._actions('home'))
             c.events = group.group_events
             return render('group/home.mako')
@@ -418,7 +412,6 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             'title': group.title,
             'description': group.description,
             'tags': ', '.join([tag.title for tag in c.group.tags]),
-            'show_page': group.show_page,
             'year': group.year.year,
             'default_tab': group.default_tab
             }
@@ -472,8 +465,6 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
 
         if is_root(c.user):
             group.moderators = values['moderators']
-
-        group.show_page = bool(values.get('show_page', False))
 
         meta.Session.commit()
         h.flash(_('Group information and settings updated.'))
