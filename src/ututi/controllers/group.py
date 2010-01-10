@@ -232,11 +232,16 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         else:
             redirect_to(controller='group', action='home', id=group.group_id)
 
+    def _set_home_variables(self, group):
+        c.breadcrumbs.append(self._actions('home'))
+        c.events = group.group_events
+        c.has_to_invite_members = (len(group.members) == 1 and
+                                   len(group.invitations) == 0)
+
     @group_action
     def home(self, group):
         if check_crowds(["member", "admin", "moderator"]):
-            c.breadcrumbs.append(self._actions('home'))
-            c.events = group.group_events
+            self._set_home_variables(group)
             return render('group/home.mako')
         else:
             c.breadcrumbs = [{'title': group.title,
@@ -247,10 +252,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @group_action
     @ActionProtector("admin", "moderator", "member")
     def welcome(self, group):
-        c.breadcrumbs.append(self._actions('home'))
-        c.events = group.group_events
-        c.has_to_invite_members = (len(group.members) == 1 and
-                                   len(group.invitations) == 0)
+        self._set_home_variables(group)
         return render('group/welcome.mako')
 
     @group_action
