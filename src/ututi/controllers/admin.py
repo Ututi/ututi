@@ -278,11 +278,7 @@ class AdminController(BaseController):
             .filter(File.title != u'text.html')\
             .filter(File.title != u'Null File')
 
-        c.files = paginate.Page(
-            files,
-            page=int(request.params.get('page', 1)),
-            item_count=files.count() or 0,
-            items_per_page=100)
+        c.files = self._make_pages(files)
 
         return render('admin/files.mako')
 
@@ -295,23 +291,21 @@ class AdminController(BaseController):
     def subjects(self):
         subjects = meta.Session.query(Subject)\
             .order_by(desc(Subject.created_on))
-        c.subjects = paginate.Page(
-            subjects,
-            page=int(request.params.get('page', 1)),
-            item_count=subjects.count() or 0,
-            items_per_page=100)
+        c.subjects = self._make_pages(subjects)
         return render('admin/subjects.mako')
 
     @ActionProtector("root")
     def events(self):
         events = meta.Session.query(Event)\
             .order_by(desc(Event.created))
-        c.events = paginate.Page(
-            events,
-            page=int(request.params.get('page', 1)),
-            item_count=events.count() or 0,
-            items_per_page=100)
+        c.events = self._make_pages(events)
         return render('admin/events.mako')
+
+    def _make_pages(self, items):
+        return paginate.Page(items,
+                             page=int(request.params.get('page', 1)),
+                             item_count=items.count() or 0,
+                             items_per_page=100)
 
     def error(self):
         return 1 / 0
