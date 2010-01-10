@@ -245,6 +245,15 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             return render('group/home_public.mako')
 
     @group_action
+    @ActionProtector("admin", "moderator", "member")
+    def welcome(self, group):
+        c.breadcrumbs.append(self._actions('home'))
+        c.events = group.group_events
+        c.has_to_invite_members = (len(group.members) == 1 and
+                                   len(group.invitations) == 0)
+        return render('group/welcome.mako')
+
+    @group_action
     def request_join(self, group):
         if c.user is None:
             c.login_form_url = url(controller='home',

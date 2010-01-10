@@ -60,7 +60,7 @@ The subject is added to the watched subject list automatically:
 
     >>> browser.getLink('Finish choosing subjects').click()
     >>> print browser.url
-    http://localhost/group/test/home
+    http://localhost/group/test/welcome
 
 The users should get emails:
 

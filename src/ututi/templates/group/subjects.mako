@@ -198,7 +198,7 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
     </div>
     <br />
     <hr />
-    <a class="btn" href="${url(controller='group', action='home', id=c.group.group_id)}" title="${_('Group home')}">
+    <a class="btn" href="${c.group.url(action='welcome')}" title="${_('Group home')}">
       <span>${_('Finish choosing subjects')}</span>
     </a>
     % endif

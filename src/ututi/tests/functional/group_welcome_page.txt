@@ -1,0 +1,42 @@
+Group welcome page
+==================
+
+First of all let's log in;
+
+    >>> browser = Browser.logIn()
+
+We can add a group at the url /groups/add.
+
+    >>> browser.open('http://localhost/groups/add')
+    >>> browser.getControl('Group email address').value = 'test'
+    >>> browser.getControl('Group title').value = 'Test group'
+    >>> browser.getControl('Year').value = ['2009']
+    >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
+    >>> browser.getControl('Continue').click()
+
+We skip the member invitation step:
+
+    >>> browser.getControl("Continue").click()
+
+Ant the subject selection step:
+
+    >>> browser.getLink('Finish choosing subjects').click()
+
+We get to the group welcome page:
+
+    >>> print browser.url
+    http://localhost/group/test/welcome
+
+In which we see a box suggesting us to invite more members:
+
+    >>> browser.printQuery("id('invite_more_members')")
+    <div id="invite_more_members">
+      <h4>Invite group members!</h4>
+      <p>
+        It's easy - you just have to know their email addresses! You can
+        use the group mailing list together then!
+      </p>
+      <a class="btn-large" href="/group/test/members">
+        <span>Invite friends</span>
+      </a>
+    </div>
