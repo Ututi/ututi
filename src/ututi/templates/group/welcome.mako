@@ -16,6 +16,15 @@ ${group_sidebar()}
 
 <h1>${_('Congratulations, you have created a new group!')}</h1>
 
+<p>
+${h.literal(_("""
+Ututi groups are a communication tool for you and your friends. Here
+your group can use the <a href="%(link_to_forums)s">forums</a>, keep
+private files and <a href="%(link_to_subjects)s">watch subjects</a>
+you are studying.
+""") % dict(link_to_forums=c.group.url(action='forum'),
+            link_to_subjects=c.group.url(action='subjects')))}
+
 %if c.has_to_invite_members:
 <div id="invite_more_members">
   <h4>Invite group members!</h4>
