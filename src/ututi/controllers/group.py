@@ -243,6 +243,9 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @group_action
     def home(self, group):
         if check_crowds(["member", "admin", "moderator"]):
+            if request.params.get('do_not_watch'):
+                group.wants_to_watch_subjects = False
+                meta.Session.commit()
             self._set_home_variables(group)
             return render('group/home.mako')
         else:
