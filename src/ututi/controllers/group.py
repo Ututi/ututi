@@ -237,6 +237,8 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         c.events = group.group_events
         c.has_to_invite_members = (len(group.members) == 1 and
                                    len(group.invitations) == 0)
+        c.wants_to_watch_subjects = (len(group.watched_subjects) == 0 and
+                                     group.wants_to_watch_subjects)
 
     @group_action
     def home(self, group):
@@ -699,7 +701,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             emails = self.form_result.get('emails', '').split()
             self._send_invitations(group, emails)
             if self.form_result.get('final_submit', None) is not None:
-                redirect_to(controller='group', action='subjects_step', id=group.group_id)
+                redirect_to(group.url(action='welcome'))
             else:
                 redirect_to(controller='group', action='invite_members_step', id=group.group_id)
 

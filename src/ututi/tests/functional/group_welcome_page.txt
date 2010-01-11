@@ -18,11 +18,7 @@ We skip the member invitation step:
 
     >>> browser.getControl("Continue").click()
 
-Ant the subject selection step:
-
-    >>> browser.getLink('Finish choosing subjects').click()
-
-We get to the group welcome page:
+And get to the group welcome page:
 
     >>> print browser.url
     http://localhost/group/test/welcome

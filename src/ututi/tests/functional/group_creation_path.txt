@@ -20,6 +20,7 @@ After creating the group, we are redirected to the member invitation
     Group members
 
 Let us fill in several email to be invited.
+
     >>> browser.getControl('Enter emails of the people You would like to invite to the group.').value='user@ututi.lt, jonas@example.com, admin@ututi.lt'
     >>> browser.getControl('Invite').click()
 
@@ -28,22 +29,24 @@ Let us fill in several email to be invited.
 
     >>> browser.getControl("Continue").click()
 
-After creating the group we should be redirected to the subject selection view:
-    >>> browser.printQuery('//h2/text()')
-    Recommended subjects
+We should be hailed by the welcome screen:
 
-    >>> browser.getLink('Watch', index=1).url
-    'http://localhost/group/test/watch_subject?subject_location_id=1&subject_id=mat_analize'
+    >>> print browser.url
+    http://localhost/group/test/welcome
+
+Let's add some watched subjects now:
+
+    >>> browser.getLink('Watch subjects').click()
 
 We can create a new subject without leaving the subject form:
 
-    >>> browser.getControl('Create a new subject').click()
+    >>> browser.getLink('Create a new subject').click()
     >>> browser.getControl(name='location-1').value = 'vu'
     >>> browser.getControl('Title').value = 'Test subject'
     >>> browser.getControl('Lecturer').value = 'Some guy'
     >>> browser.getControl('Save').click()
     >>> print browser.url
-    http://localhost/group/test/subjects_step
+    http://localhost/group/test/subjects
 
 The subject is added to the watched subject list automatically:
 
@@ -57,10 +60,6 @@ The subject is added to the watched subject list automatically:
       Your group is not watching any subjects. Add them by using the search.
     </li>
     </ul>
-
-    >>> browser.getLink('Finish choosing subjects').click()
-    >>> print browser.url
-    http://localhost/group/test/welcome
 
 The users should get emails:
 
