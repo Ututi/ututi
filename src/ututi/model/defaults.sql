@@ -140,6 +140,7 @@ create table groups (
        moderators bool default false,
        default_tab varchar(20) default 'home',
        page_public bool default false,
+       wants_to_watch_subjects bool default true,
        primary key (id));;
 
 /* An enumerator for membership types in groups */
