@@ -3,7 +3,6 @@
 <%namespace file="/search/index.mako" import="search_form"/>
 <%namespace file="/search/index.mako" import="search_results"/>
 <%namespace file="/sections/content_snippets.mako" import="item_tags, tag_link"/>
-<%namespace file="/group/add.mako" import="path_steps"/>
 
 <%def name="head_tags()">
 ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
@@ -50,10 +49,6 @@ ${parent.head_tags()}
 ${h.stylesheet_link('/stylesheets/group.css')|n}
 
 </%def>
-
-% if c.step:
-  ${path_steps(2)}
-% endif
 
 <%def name="subject_flash_message(subject)">
   <div class="selected_subject_flash_message flash-message">
@@ -155,7 +150,7 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
 
 <%
    cls = ''
-   if not c.step and not c.searched and not c.list_open:
+   if not c.searched and not c.list_open:
        cls = 'click2show'
 %>
 <div class="${cls}">
@@ -190,17 +185,3 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
     </div>
     %endif
 </div>
-
-    % if c.step:
-    <div class="create_item">
-      <span class="notice">${_('Did not find what you were looking for?')}</span>
-      ${h.button_to(_('Create a new subject'), c.group.url(action='add_subject_step'))}
-    </div>
-    <br />
-    <hr />
-    <a class="btn" href="${c.group.url(action='welcome')}" title="${_('Group home')}">
-      <span>${_('Finish choosing subjects')}</span>
-    </a>
-    % endif
-  </div>
-
