@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-01-10 21:58+0200\n"
+"PO-Revision-Date: 2010-01-11 18:53+0200\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -80,13 +80,6 @@ msgstr "Dalykai"
 
 msgid "Page"
 msgstr "Puslapis"
-
-msgid ""
-"The group's page was hidden. You can show it again by editing the group's"
-" settings."
-msgstr ""
-"Grupės puslapis buvo paslėptas. Jį galima vėl parodyti keičiant grupės "
-"nustatymus."
 
 msgid "You have to log in or register to request group membership."
 msgstr "Norėdami tapti grupės nariu, turite užsiregistruoti arba prisijungti."
@@ -1368,17 +1361,47 @@ msgstr "Trinti dabartinį logo"
 msgid "Tags"
 msgstr "Žymos"
 
-msgid "Show group page"
-msgstr "Rodyti grupės puslapį"
-
 msgid "Default group tab"
 msgstr "Pradinis grupės skirtukas"
 
 msgid "Edit group front page"
 msgstr "Redaguoti grupės pagrindinį puslapį"
 
+msgid "Group page is visible to everybody"
+msgstr ""
+
 msgid "Add more subjects"
 msgstr "Pridėkite daugiau dalykų"
+
+msgid "Invite group members!"
+msgstr ""
+
+msgid ""
+"\n"
+"    It's easy - you just have to know their email addresses! You can\n"
+"    use the group mailing list together then!\n"
+"    "
+msgstr ""
+
+msgid "Invite friends"
+msgstr ""
+
+msgid "Watch subjects you are studying!"
+msgstr ""
+
+msgid ""
+"\n"
+"    Find the subjects your group is studying and add them to the list\n"
+"    of watched subjects.  Upload files for the subjects without any\n"
+"    limitations!\n"
+"    "
+msgstr ""
+
+msgid "Watch subjects"
+msgstr "Stebėti dalykus"
+
+msgid "no, thank you"
+msgstr ""
 
 msgid "Group members"
 msgstr "Grupės nariai"
@@ -1496,14 +1519,20 @@ msgstr "Rekomenduojami dalykai"
 msgid "Create a new subject"
 msgstr "kurti naują dalyką"
 
-msgid "Did not find what you were looking for?"
-msgstr "Nėra to, ko ieškojote? "
-
-msgid "Group home"
-msgstr "Grupės puslapis"
-
 msgid "Watched subjects"
 msgstr "Stebimi dalykai"
+
+msgid "Congratulations, you have created a new group!"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"Ututi groups are a communication tool for you and your friends. Here\n"
+"your group can use the <a href=\"%(link_to_forums)s\">forums</a>, keep\n"
+"private files and <a href=\"%(link_to_subjects)s\">watch subjects</a>\n"
+"you are studying.\n"
+msgstr ""
 
 msgid "Make your group's file space unlimited"
 msgstr "Panaikinkite grupės failų apribojimus"
@@ -1591,6 +1620,9 @@ msgstr "Įveskite savo el. pašto adresą"
 
 msgid "Recover password"
 msgstr "Atstatyti slaptažodį"
+
+msgid "Did not find what you were looking for?"
+msgstr "Nėra to, ko ieškojote? "
 
 msgid "Store all the subject's files and notes in one place."
 msgstr "Laikykite visus dalyko failus ir užrašus vienoje vietoje."
@@ -2319,9 +2351,6 @@ msgstr "Greitas failų įkėlimas į grupes ir dalykus."
 
 msgid "More subjects"
 msgstr "Daugiau dalykų"
-
-msgid "Watch subjects"
-msgstr "Stebėti dalykus"
 
 msgid ""
 "Add watched subjects to your watched subjects' list and receive "

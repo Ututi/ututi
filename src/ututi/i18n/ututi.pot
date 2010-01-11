@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-01-10 21:54+0200\n"
+"POT-Creation-Date: 2010-01-11 18:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,11 +73,6 @@ msgid "Subjects"
 msgstr ""
 
 msgid "Page"
-msgstr ""
-
-msgid ""
-"The group's page was hidden. You can show it again by editing the group's "
-"settings."
 msgstr ""
 
 msgid "You have to log in or register to request group membership."
@@ -1197,16 +1192,46 @@ msgstr ""
 msgid "Tags"
 msgstr ""
 
-msgid "Show group page"
-msgstr ""
-
 msgid "Default group tab"
 msgstr ""
 
 msgid "Edit group front page"
 msgstr ""
 
+msgid "Group page is visible to everybody"
+msgstr ""
+
 msgid "Add more subjects"
+msgstr ""
+
+msgid "Invite group members!"
+msgstr ""
+
+msgid ""
+"\n"
+"    It's easy - you just have to know their email addresses! You can\n"
+"    use the group mailing list together then!\n"
+"    "
+msgstr ""
+
+msgid "Invite friends"
+msgstr ""
+
+msgid "Watch subjects you are studying!"
+msgstr ""
+
+msgid ""
+"\n"
+"    Find the subjects your group is studying and add them to the list\n"
+"    of watched subjects.  Upload files for the subjects without any\n"
+"    limitations!\n"
+"    "
+msgstr ""
+
+msgid "Watch subjects"
+msgstr ""
+
+msgid "no, thank you"
 msgstr ""
 
 msgid "Group members"
@@ -1313,13 +1338,19 @@ msgstr ""
 msgid "Create a new subject"
 msgstr ""
 
-msgid "Did not find what you were looking for?"
-msgstr ""
-
-msgid "Group home"
-msgstr ""
-
 msgid "Watched subjects"
+msgstr ""
+
+msgid "Congratulations, you have created a new group!"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"Ututi groups are a communication tool for you and your friends. Here\n"
+"your group can use the <a href=\"%(link_to_forums)s\">forums</a>, keep\n"
+"private files and <a href=\"%(link_to_subjects)s\">watch subjects</a>\n"
+"you are studying.\n"
 msgstr ""
 
 msgid "Make your group's file space unlimited"
@@ -1395,6 +1426,9 @@ msgid "Enter your email:"
 msgstr ""
 
 msgid "Recover password"
+msgstr ""
+
+msgid "Did not find what you were looking for?"
 msgstr ""
 
 msgid "Store all the subject's files and notes in one place."
@@ -2067,9 +2101,6 @@ msgid "Quickly upload files to your groups and subjects."
 msgstr ""
 
 msgid "More subjects"
-msgstr ""
-
-msgid "Watch subjects"
 msgstr ""
 
 msgid ""
