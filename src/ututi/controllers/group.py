@@ -137,7 +137,7 @@ class GroupAddingForm(Schema):
 
 
 class GroupPageForm(Schema):
-    allow_extra_fields = False
+    allow_extra_fields = True
     page_content = HtmlSanitizeValidator()
 
 
@@ -292,7 +292,8 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     def edit_page(self, group):
         c.breadcrumbs.append(self._actions('page'))
         defaults = {
-            'page_content': c.group.page
+            'page_content': c.group.page,
+            'page_public': 'public' if c.group.page_public else ''
             }
         return htmlfill.render(self._edit_page_form(), defaults=defaults)
 
@@ -304,6 +305,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         if page_content is None:
             page_content = ''
         group.page = page_content
+        group.page_public =  (self.form_result.get('page_public', False) == 'public')
         meta.Session.commit()
         h.flash(_("The group's front page was updated."))
         redirect_to(controller='group', action='page', id=group.group_id)

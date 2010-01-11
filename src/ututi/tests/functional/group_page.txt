@@ -26,3 +26,14 @@ We can edit it. of course:
 
     >>> browser.printQuery('id("body-container")/text()')
     This is our group
+
+We can specify that the group's page is public, shown on the front page.
+
+    >>> browser.getLink('Edit', index=1).click()
+    >>> browser.getControl('Group page is visible to everybody').selected = True
+    >>> browser.getControl('Save').click()
+
+    >>> browser2 = Browser()
+    >>> browser2.open('http://localhost/group/moderators')
+    >>> browser2.printQuery("id('group_page')/text()")
+    This is our group

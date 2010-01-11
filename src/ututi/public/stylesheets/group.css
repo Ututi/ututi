@@ -46,6 +46,12 @@ table.group-members th {
   color: #888;
 }
 
+#group_page {
+  border: 1px solid #e5e5d3;
+  margin: 15px 0;
+  padding: 5px;
+}
+
 /* forum portlet */
 #group_latest_messages td {
   margin: 0;

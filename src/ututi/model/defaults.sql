@@ -139,6 +139,7 @@ create table groups (
        logo bytea default null,
        moderators bool default false,
        default_tab varchar(20) default 'home',
+       page_public bool default false,
        primary key (id));;
 
 /* An enumerator for membership types in groups */
