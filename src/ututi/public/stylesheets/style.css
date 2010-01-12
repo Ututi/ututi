@@ -712,7 +712,7 @@ input.text_button {
 }
 
 input.text_button:hover {
-  text-decoration: underline;
+  text-decoration: none;
   padding: 0;
   border-bottom: 1px solid #d45500;
 }
