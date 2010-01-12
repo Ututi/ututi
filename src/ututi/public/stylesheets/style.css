@@ -1549,6 +1549,10 @@ div.upload_dropdown .target_item.last div {
 }
 
 /* buttons - experiment */
+a.btn-large:hover, a.btn:hover {
+  text-decoration: none;
+}
+
 span.message, a.btn, span.btn, div.btn {
   display:-moz-inline-box;
   display:inline-block;
