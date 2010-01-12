@@ -717,11 +717,16 @@ input.text_button:hover {
   border-bottom: 1px solid #d45500;
 }
 
+.full_box a.btn-large,
+.full_box a.btn-large span,
+.gray-box a.btn-large,
+.gray-box a.btn-large span,
 #ututi_join_portlet a.btn-large,
 #ututi_join_portlet a.btn-large span,
 #ututi_join_portlet span.btn-large,
 #ututi_join_portlet span.btn-large input {
   background-image: url("../images/button_large_portlet.png");
+  background-color: #f9f9f9;
 }
 
 span.btn-large,
@@ -1346,6 +1351,12 @@ ul#event_list li {
 
 
 /* misc */
+a.cancel_link {
+  padding-right: 8px;
+  background: url('/images/details/icon_cross.png') right center no-repeat;
+  font-size: 12px;
+}
+
 img.latex {
 	vertical-align: middle;
 }

@@ -200,6 +200,7 @@ div.orange_emph em {
   width: 615px;
   padding-top: 5px;
   background: url("../images/borders/gray_box_full.png") left top no-repeat;
+  margin: 5px 0;
 }
 
 .full_box .wrapper {

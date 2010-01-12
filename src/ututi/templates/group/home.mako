@@ -55,10 +55,12 @@ ${group_sidebar()}
               """)}
             </div>
           </td>
-          <td style="width: 120px;">
+          <td style="width: 120px; text-align: right;">
             <a class="btn-large" href="${c.group.url(action='subjects')}"><span>${_('Watch subjects')}</span></a>
             <br />
-            <a href="${c.group.url(action='home', do_not_watch=True)}" style="padding-right: 10px; background: url('/images/details/icon_cross.png') right center no-repeat; float: right; font-size: 12px;">${_('no, thank you')}</a>
+            <span style="padding-right: 5px;">
+              <a href="${c.group.url(action='home', do_not_watch=True)}" class="cancel_link">${_('no, thank you')}</a>
+            </span>
           </td>
         </tr>
       </table>
