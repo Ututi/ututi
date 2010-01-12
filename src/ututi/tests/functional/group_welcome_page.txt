@@ -26,31 +26,58 @@ And get to the group welcome page:
 In which we see a box suggesting us to invite more members:
 
     >>> browser.printQuery("id('invite_more_members')")
-    <div id="invite_more_members">
-      <h4>Invite group members!</h4>
-      <p>
-        It's easy - you just have to know their email addresses! You can
-        use the group mailing list together then!
-      </p>
-      <a class="btn-large" href="/group/test/members">
-        <span>Invite friends</span>
-      </a>
+    <div id="invite_more_members" class="full_box">
+      <div class="wrapper">
+        <div class="inner">
+          <table>
+            <tr>
+              <td>
+                <h2>Invite group members!</h2>
+                <div class="description">
+                  It's easy - you just have to know their email addresses! You can
+                  use the group mailing list together then!
+                </div>
+              </td>
+              <td style="width: 120px;">
+                <a class="btn-large" href="/group/test/members">
+                  <span>Invite friends</span>
+                </a>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
     </div>
 
 Also we see a box that suggest us to watch some subjects:
 
     >>> browser.printQuery("id('watch_more_subjects')")
-    <div id="watch_more_subjects">
-      <h4>Watch subjects you are studying!</h4>
-      <p>
-        Find the subjects your group is studying and add them to the list
-        of watched subjects.  Upload files for the subjects without any
-        limitations!
-      </p>
-      <a class="btn-large" href="/group/test/subjects">
-        <span>Watch subjects</span>
-      </a>
-      <a href="/group/test/home?do_not_watch=True">no, thank you</a>
+    <div id="watch_more_subjects" class="full_box">
+      <div class="wrapper">
+        <div class="inner">
+          <table>
+            <tr>
+              <td>
+                <h2>Watch subjects you are studying!</h2>
+                <div class="description">
+                  Find the subjects your group is studying and add them to the list
+                  of watched subjects.  Upload files for the subjects without any
+                  limitations!
+                </div>
+              </td>
+              <td style="width: 120px; text-align: right;">
+                <a class="btn-large" href="/group/test/subjects">
+                  <span>Watch subjects</span>
+                </a>
+                <br />
+                <span style="padding-right: 5px;">
+                  <a href="/group/test/home?do_not_watch=True" class="cancel_link">no, thank you</a>
+                </span>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
     </div>
 
 If we invite a member into the system, the member box should
@@ -68,7 +95,7 @@ box:
     >>> browser.printQuery("id('invite_more_members')")
 
     >>> browser.printQuery("id('watch_more_subjects')")
-    <div id="watch_more_subjects">
+    <div id="watch_more_subjects" class="full_box">
     ...
     </div>
 
@@ -94,7 +121,7 @@ If we stop watching the subject though, the box reappears:
     >>> browser.getLink("What's new?", url='group').click()
 
     >>> browser.printQuery("id('watch_more_subjects')")
-    <div id="watch_more_subjects">
+    <div id="watch_more_subjects" class="full_box">
     ...
     </div>
 
