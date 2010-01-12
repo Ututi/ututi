@@ -294,7 +294,7 @@ Let's try to deny a user's request to join the group:
     Your request to join the group was forwarded to the group's administrators. Thank You!
     Close
     Your
-    is not confirmed! Please confirm your email by clicking on the link sent to your address or
+    (user3@ututi.lt) is not confirmed! Please confirm your email by clicking on the link sent to your address or
 
     >>> print mail_queue.pop().message
     MIME-Version: 1.0

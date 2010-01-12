@@ -205,7 +205,7 @@ A newly registered user will not have his location set, so he will be shown a fo
     Your university information has been updated.
     Close
     Your
-    is not confirmed! Please confirm your email by clicking on the link sent to your address or
+    (jonas_new@example.com) is not confirmed! Please confirm your email by clicking on the link sent to your address or
 
 After setting his location, he will not be shown the form again:
     >>> browser.printQuery("id('page-content')//h2/text()")

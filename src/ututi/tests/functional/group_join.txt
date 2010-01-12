@@ -30,7 +30,7 @@ request group membership.
    Your request to join the group was forwarded to the group's administrators. Thank You!
    Close
    Your
-   is not confirmed! Please confirm your email by clicking on the link sent to your address or
+   (jonas@example.com) is not confirmed! Please confirm your email by clicking on the link sent to your address or
 
    >>> from ututi.lib.mailer import mail_queue
    >>> mail_queue[:] = []
