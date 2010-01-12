@@ -159,6 +159,10 @@ div.live_search_group a.group_title {
   font-size: 16px;
 }
 
+div.live_search_group div.group_members {
+  clear: right;
+}
+
 div.live_search_group div.group_member {
   height: 20px;
   width: 160px;
