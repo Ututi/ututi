@@ -29,7 +29,7 @@ ${group_sidebar()}
               """)}
             </div>
           </td>
-          <td style="width: 120px;">
+          <td style="width: 150px; text-align: right;">
             <a class="btn-large" href="${c.group.url(action='members')}"><span>${_('Invite friends')}</span></a>
           </td>
         </tr>
@@ -55,7 +55,7 @@ ${group_sidebar()}
               """)}
             </div>
           </td>
-          <td style="width: 120px; text-align: right;">
+          <td style="width: 150px; text-align: right;">
             <a class="btn-large" href="${c.group.url(action='subjects')}"><span>${_('Watch subjects')}</span></a>
             <br />
             <span style="padding-right: 5px;">
