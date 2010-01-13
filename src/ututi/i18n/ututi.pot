@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-01-12 18:26+0200\n"
+"POT-Creation-Date: 2010-01-13 05:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1122,9 +1122,6 @@ msgid "Group settings"
 msgstr ""
 
 msgid "Member invitations"
-msgstr ""
-
-msgid "Subject selection"
 msgstr ""
 
 msgid "Create your Ututi group and start sharing!"

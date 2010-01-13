@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-01-12 18:26+0200\n"
+"PO-Revision-Date: 2010-01-13 05:32+0200\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -1290,9 +1290,6 @@ msgstr "Grupės nustatymai"
 
 msgid "Member invitations"
 msgstr "Narių kvietimas"
-
-msgid "Subject selection"
-msgstr "Dalykų pasirinkimas"
 
 msgid "Create your Ututi group and start sharing!"
 msgstr "Sukurk savo Ututi grupę ir pradėk dalintis!"
