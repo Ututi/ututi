@@ -41,8 +41,12 @@ div.gray-box div.description,
   float: right;
 }
 
+#find-subjects h2 {
+  margin-bottom: 5px;
+}
+
 #find-subjects .inner {
-  background: url("../images/details/icon_subject_gray.png") 20px 10px no-repeat;
+  background: url("../images/details/icon_subject_gray.png") 10px 10px no-repeat;
 }
 
 #find-subjects .input-line {
@@ -67,7 +71,7 @@ div.gray-box div.description,
 #update-profile {
   margin-top: 15px;
   padding: 20px 0 0 60px;
-  background: white url("../images/details/icon_user_gray.png") left 20px no-repeat;
+  background: white url("../images/details/icon_user_gray.png") 10px 25px no-repeat;
   clear: left;
 }
 
