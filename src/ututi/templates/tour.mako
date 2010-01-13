@@ -6,6 +6,7 @@
 </%def>
 
 <%def name="joinlink()">
+%if c.user is None:
 <div class="join_link">
   ${_('Found out enough?')}
   <br />
@@ -15,6 +16,7 @@
     </span>
   </a>
 </div>
+%endif
 </%def>
 
 <div id="tour_navigation">
