@@ -545,13 +545,13 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         meta.Session.commit()
 
     @group_action
-    @ActionProtector("admin", "moderator")
+    @ActionProtector("admin", "moderator", "member")
     def watch_subject(self, group):
         self._watch_subject(group)
         redirect_to(request.referrer)
 
     @group_action
-    @ActionProtector("admin", "moderator")
+    @ActionProtector("admin", "moderator", "member")
     def js_watch_subject(self, group):
         self._watch_subject(group)
         return render_mako_def('group/subjects.mako',
@@ -563,13 +563,13 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
                             new = True)
 
     @group_action
-    @ActionProtector("admin", "moderator")
+    @ActionProtector("admin", "moderator", "member")
     def unwatch_subject(self, group):
         self._unwatch_subject(group)
         redirect_to(request.referrer)
 
     @group_action
-    @ActionProtector("admin", "moderator")
+    @ActionProtector("admin", "moderator", "member")
     def js_unwatch_subject(self, group):
         self._unwatch_subject(group)
         return "OK"
@@ -630,7 +630,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         The basis for views displaying all the subjects the group is already watching and allowing
         members to choose new subjects for the group.
         """
-        if check_crowds(["admin", "moderator"]):
+        if check_crowds(["admin", "moderator", "member"]):
             c.search_target = url(controller = 'group', action='subjects', id = group.group_id)
 
             #retrieve search parameters
@@ -666,8 +666,6 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
                     **search_params)
 
             return render('group/subjects.mako')
-        else:
-            return render('group/subjects_member.mako')
 
     @group_action
     @validate(schema=GroupInviteForm, form='members', post_only = False, on_get = True)

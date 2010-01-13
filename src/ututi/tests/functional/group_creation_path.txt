@@ -281,9 +281,10 @@ And the new member should be able to access the group now.
     Jonas Petraitis Petrauskas
     Second user
 
-A simple member of the group, however, only sees a listing of the subjects the group is watching:
+Simple members noe also have access to the full subject watching page;
     >>> browser3.getLink('Subjects').click()
     >>> browser3.printQuery('id("watched-subjects")//li/text()')
+    Your group is not watching any subjects. Add them by using the search.
 
 Let's try to deny a user's request to join the group:
     >>> browser4 = Browser.logIn('user3@ututi.lt', 'password')

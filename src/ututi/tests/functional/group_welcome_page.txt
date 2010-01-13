@@ -38,7 +38,7 @@ In which we see a box suggesting us to invite more members:
                   use the group mailing list together then!
                 </div>
               </td>
-              <td style="width: 150px; text-align: right;">
+              <td style="width: 170px; text-align: right;">
                 <a class="btn-large" href="/group/test/members">
                   <span>Invite friends</span>
                 </a>
@@ -65,7 +65,7 @@ Also we see a box that suggest us to watch some subjects:
                   limitations!
                 </div>
               </td>
-              <td style="width: 150px; text-align: right;">
+              <td style="width: 170px; text-align: right;">
                 <a class="btn-large" href="/group/test/subjects">
                   <span>Watch subjects</span>
                 </a>
