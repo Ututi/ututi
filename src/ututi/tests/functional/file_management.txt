@@ -95,6 +95,12 @@ Empty folder creation:
         </ul>
     </div>
 
+    >>> browser = Browser.logIn()
+    >>> browser.open('http://localhost/subject/vu/mat_analize/file/7/get')
+    Traceback (most recent call last):
+    ...
+    HTTPError: HTTP Error 404: Not Found
+
     >>> res = app.post("/group/moderators/js_create_folder",
     ...                params={'folder': 'Uga Buga',
     ...                        'section_id': '8'})

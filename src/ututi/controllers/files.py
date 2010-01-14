@@ -35,7 +35,7 @@ def serve_file(file):
 class BasefilesController(BaseController):
 
     def _get(self, file):
-        if file.deleted is not None:
+        if file.deleted is not None or file.isNullFile():
             abort(404)
         if c.user:
             c.user.download(file)
