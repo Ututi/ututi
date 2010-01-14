@@ -24,7 +24,7 @@ ${school_section(child)}
   </url>
 %endfor
 <%
-   subject_files = [file for file in subject.files if file.size < c.file_limit]
+   subject_files = [file for file in subject.files if file.size < c.file_limit and not file.isNullFile()]
 %>
 %for file in subject_files:
   <url>
