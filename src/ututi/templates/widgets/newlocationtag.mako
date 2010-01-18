@@ -21,7 +21,7 @@
 %>
 
 <div class="location-tag-widget" id="newlocationwidget-${self.newlocationwidget_id}">
-  <div class="form-field">
+  <div class="form-field" style="float: none;">
     <form:error name="location"/>
     <% rng = range(number) %>
     %for i in rng:
