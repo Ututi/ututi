@@ -42,11 +42,10 @@ ${parent.head_tags()}
   </div>
   <script type="text/javascript">
   //<![CDATA[
-  url = '${url(controller='profile', action='js_update_location')}';
 
   $('#user-location-submit').click(function() {
     $('#user_location').addClass('loading');
-    $.post(url,
+    $.post('${url(controller='profile', action='js_update_location')}',
       $(this).parents('form').serialize(),
       function(data, status) {
         if (status == 'success') {
