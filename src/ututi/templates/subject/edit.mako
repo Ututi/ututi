@@ -32,9 +32,7 @@ ${h.javascript_link('/javascripts/ckeditor/ckeditor.js')|n}
         <input type="text" id="lecturer" name="lecturer" class="line" value=""/>
     </div></div>
   </div>
-  <div class="form-field">
     ${location_widget(2)}
-  </div>
   <br class="clear-left"/>
   <div class="form-field">
     <label for="tags">${_('Tags')}</label>

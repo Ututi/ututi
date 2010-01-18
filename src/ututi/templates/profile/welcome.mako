@@ -32,9 +32,7 @@ ${parent.head_tags()}
       <div class="inner">
         <h2>${_('Specify your university and faculty!')}</h2>
         <form method="post" action="${url(controller='profile', action='update_location')}" id="update-location-form">
-          <div class="form-field">
-            ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=True)}
-          </div>
+          ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=True)}
           ${h.input_submit(_('confirm'), id='user-location-submit')}
         </form>
       </div>
@@ -77,10 +75,8 @@ ${parent.head_tags()}
     <div class="inner">
       <h2>${_('Find your subjects')}</h2>
       <form method="post" action="${url(controller='profile', action='goto_location')}" id="findsubject-form">
-        <div>
-          ${location_widget(2, add_new=False, live_search=False)}
-          ${h.input_submit(_('Search'))}
-        </div>
+        ${location_widget(2, add_new=False, live_search=False)}
+        ${h.input_submit(_('Search'))}
       </form>
     </div>
   </div>

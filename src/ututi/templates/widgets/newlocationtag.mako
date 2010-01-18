@@ -21,7 +21,7 @@
 %>
 
 <div class="location-tag-widget" id="newlocationwidget-${self.newlocationwidget_id}">
-  <div class="form-field" style="float: none;">
+  <div class="form-field">
     <form:error name="location"/>
     <% rng = range(number) %>
     %for i in rng:
@@ -29,7 +29,7 @@
         %if i < len(titles):
             <label for="location-${self.newlocationwidget_id}-${i}">${titles[i]}</label>
         %endif
-        <div class="input-line">
+        <div class="input-line" style="display: inline;">
           <div>
             <%
                cls = ''
@@ -195,7 +195,7 @@ $(document).ready(function() {
                   parameters['parent-'+i] = $(this).val();
               }
           });
-          $(next_item).find("input").setOptions({
+          $(next_item).find("input.structure-complete").setOptions({
                 data: []
           });
 
@@ -203,16 +203,16 @@ $(document).ready(function() {
                           parameters,
                           function(jdata) {
                               var item = $(".json-target").eq(0);
-                              item.find("input").setOptions({
+                              item.find("input.structure-complete").setOptions({
                                   data: jdata.values
                               });
                               item.removeClass("json-target");
-                              item.find("input").focus().click();
+                              item.find("input.structure-complete").focus().click();
                    });
 
-          $(next_item).find('input').val('');
+          $(next_item).find('input.structure-complete').val('');
         } else {
-          $(next_item).find('input').val('');
+          $(next_item).find('input.structure-complete').val('');
         }
       }
     });
