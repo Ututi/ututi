@@ -1,6 +1,6 @@
 <%inherit file="/base.mako" />
 
-<%namespace file="/widgets/locationtag.mako" import="*"/>
+<%namespace name="newlocationtag" file="/widgets/newlocationtag.mako" import="*"/>
 
 <%namespace file="/widgets/tags.mako" import="*"/>
 
@@ -9,8 +9,8 @@ ${_('New subject')}
 </%def>
 
 <%def name="head_tags()">
-${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
 ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
+<%newlocationtag:head_tags />
 </%def>
 
 <a class="back-link" href="${url(controller='profile', action='search')}">${_('back to the search')}</a>

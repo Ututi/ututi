@@ -1,7 +1,6 @@
 <%inherit file="/subject/home.mako" />
 
-<%namespace file="/widgets/locationtag.mako" import="*"/>
-
+<%namespace name="newlocationtag" file="/widgets/newlocationtag.mako" import="*"/>
 <%namespace file="/widgets/tags.mako" import="*"/>
 
 <%def name="title()">
@@ -9,7 +8,7 @@ ${_('Edit subject')}
 </%def>
 
 <%def name="head_tags()">
-${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
+<%newlocationtag:head_tags />
 ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
 ${h.javascript_link('/javascripts/ckeditor/ckeditor.js')|n}
 </%def>

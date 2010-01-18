@@ -1,9 +1,9 @@
 <%inherit file="/group/home.mako" />
-<%namespace file="/widgets/locationtag.mako" import="*"/>
+<%namespace name="newlocationtag" file="/widgets/newlocationtag.mako" import="*"/>
 <%namespace file="/widgets/tags.mako" import="*"/>
 
 <%def name="head_tags()">
-${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
+<%newlocationtag:head_tags />
 ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
 ${h.stylesheet_link('/stylesheets/group.css')|n}
 ${parent.head_tags()}
