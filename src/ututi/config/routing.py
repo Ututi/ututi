@@ -45,6 +45,7 @@ def make_map():
     map.connect('/bunners', controller='home', action='banners')
     map.connect('/terms', controller='home', action='terms')
     map.connect('/about', controller='home', action='about')
+    map.connect('/advertising', controller='home', action='advertising')
 
     # essential ututi component routes go here
 
