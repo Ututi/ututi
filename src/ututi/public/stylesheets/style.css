@@ -60,6 +60,16 @@ body {
   margin-bottom: 10px;
 }
 
+.text h3 {
+  margin-top: 15px;
+  margin-botton: 5px;
+  font-weight: bold;
+}
+
+.text p {
+  margin-top: 5px;
+}
+
 /* end main layout */
 
 /* fonts */
