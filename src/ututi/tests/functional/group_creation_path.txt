@@ -20,6 +20,7 @@ After creating the group, we are redirected to the member invitation
     Group members
 
 Let us fill in several email to be invited.
+
     >>> browser.getControl('Enter emails of the people You would like to invite to the group.').value='user@ututi.lt, jonas@example.com, admin@ututi.lt'
     >>> browser.getControl('Invite').click()
 
@@ -28,22 +29,24 @@ Let us fill in several email to be invited.
 
     >>> browser.getControl("Continue").click()
 
-After creating the group we should be redirected to the subject selection view:
-    >>> browser.printQuery('//h2/text()')
-    Recommended subjects
+We should be hailed by the welcome screen:
 
-    >>> browser.getLink('Watch', index=1).url
-    'http://localhost/group/test/watch_subject?subject_location_id=1&subject_id=mat_analize'
+    >>> print browser.url
+    http://localhost/group/test/welcome
+
+Let's add some watched subjects now:
+
+    >>> browser.getLink('Watch subjects').click()
 
 We can create a new subject without leaving the subject form:
 
-    >>> browser.getControl('Create a new subject').click()
+    >>> browser.getLink('Create a new subject').click()
     >>> browser.getControl(name='location-1').value = 'vu'
     >>> browser.getControl('Title').value = 'Test subject'
     >>> browser.getControl('Lecturer').value = 'Some guy'
     >>> browser.getControl('Save').click()
     >>> print browser.url
-    http://localhost/group/test/subjects_step
+    http://localhost/group/test/subjects
 
 The subject is added to the watched subject list automatically:
 
@@ -58,10 +61,6 @@ The subject is added to the watched subject list automatically:
     </li>
     </ul>
 
-    >>> browser.getLink('Finish choosing subjects').click()
-    >>> print browser.url
-    http://localhost/group/test/home
-
 The users should get emails:
 
     >>> from ututi.lib.mailer import mail_queue
@@ -74,12 +73,18 @@ The users should get emails:
     To: jonas@example.com
     Subject: Ututi group invitation
     <BLANKLINE>
-    Adminas Adminovix has invited You to join the group Test group.
+    Hi,
+    Your friend Adminas Adminovix is using Ututi.lt - a system for students, and
+    wants to invite You into a group Test group < http://localhost/group/test >.  In Ututi
+    you can find coursework, share files with other members of the group
+    and use the group forums.
     <BLANKLINE>
-    Since You do not appear to be a Ututi user at the moment, to become a member of this group, You will have to register first.
+    Since You do not appear to be a Ututi user at the moment, to become a
+    member of this group, You will have to register first.
     <BLANKLINE>
-    You can do this by following this link: http://localhost/register/...
+    You can do this by following this link: < http://localhost/register/... >
     <BLANKLINE>
+    --
     The Ututi team
     <BLANKLINE>
 
@@ -93,14 +98,18 @@ And another message, this time to somebody who already is a ututi user:
     To: user@ututi.lt
     Subject: Ututi group invitation
     <BLANKLINE>
-    Alternative user,
+    Hi,
+    Your friend Adminas Adminovix wants to wants to invite You into a group
+    Test group < http://localhost/group/test >. After joining you will be able to
+    watch subjects your group is studying, share files with other members
+    of the group and use the group forum.
     <BLANKLINE>
-    Adminas Adminovix has invited You to join the group Test group.
+    You can accept or reject the invitation here: < http://localhost/group/test/invitation >
     <BLANKLINE>
-    You can accept or reject this invitation by following this link: http://localhost/group/test/invitation .
+    We hope You will find Ututi useful!
     <BLANKLINE>
-    The Ututi team
-    <BLANKLINE>
+    --
+    Ututi komanda
 
 Now, if we were to sign in as this 'alternative user' user, we should see a flash message notifying us of the
 invitation.
@@ -113,8 +122,11 @@ invitation.
     >>> form.getControl('Login').click()
 
     >>> browser2.printQuery("//div[@class='flash-message']/span/text()")
-    Adminas Adminovix has sent you an invitation to group Test
-    group. Do You want to become a member of this group?
+    Close
+    You haven't told us where You are studying. You can do this
+    . Thank You.
+    Adminas Adminovix has sent you an invitation to group Test group. Do You want to become a member of this group?
+
 
 Let's accept this invitation.
 
@@ -126,13 +138,13 @@ Let's accept this invitation.
 Let's get the url from the first message
 
     >>> from  ututi.lib.helpers import get_urls
-    >>> print get_urls(msg)
-    ['http://localhost/register/...']
+    >>> print get_urls(msg)[-1]
+    http://localhost/register/...
 
 First let us log out.
 
     >>> browser.getLink('log out').click()
-    >>> browser.open(get_urls(msg)[0])
+    >>> browser.open(get_urls(msg)[-1])
 
     >>> browser.queryHTML('//h1/text()')
     ['Please register!']
@@ -175,18 +187,23 @@ And we are redirected to the group that invited us.
     To: user3@ututi.com
     Subject: Ututi group invitation
     <BLANKLINE>
-    Jonas Petraitis Petrauskas has invited You to join the group Test group.
+    Hi,
+    Your friend Jonas Petraitis Petrauskas is using Ututi.lt - a system for students, and
+    wants to invite You into a group Test group < http://localhost/group/test >.  In Ututi
+    you can find coursework, share files with other members of the group
+    and use the group forums.
     <BLANKLINE>
-    Since You do not appear to be a Ututi user at the moment, to become a member of this group, You will have to register first.
+    Since You do not appear to be a Ututi user at the moment, to become a
+    member of this group, You will have to register first.
     <BLANKLINE>
-    You can do this by following this link: http://localhost/register/...
+    You can do this by following this link: < http://localhost/register/... >
     <BLANKLINE>
+    --
     The Ututi team
-    <BLANKLINE>
 
 However, if we click the link again, we should get a message:
 
-    >>> browser.open(get_urls(msg)[0])
+    >>> browser.open(get_urls(msg)[-1])
     >>> print browser.url
     http://localhost/register/...
 
@@ -264,9 +281,10 @@ And the new member should be able to access the group now.
     Jonas Petraitis Petrauskas
     Second user
 
-A simple member of the group, however, only sees a listing of the subjects the group is watching:
+Simple members noe also have access to the full subject watching page;
     >>> browser3.getLink('Subjects').click()
     >>> browser3.printQuery('id("watched-subjects")//li/text()')
+    Your group is not watching any subjects. Add them by using the search.
 
 Let's try to deny a user's request to join the group:
     >>> browser4 = Browser.logIn('user3@ututi.lt', 'password')
@@ -277,7 +295,7 @@ Let's try to deny a user's request to join the group:
     Your request to join the group was forwarded to the group's administrators. Thank You!
     Close
     Your
-    is not confirmed! Please confirm your email by clicking on the link sent to your address or
+    (user3@ututi.lt) is not confirmed! Please confirm your email by clicking on the link sent to your address or
 
     >>> print mail_queue.pop().message
     MIME-Version: 1.0

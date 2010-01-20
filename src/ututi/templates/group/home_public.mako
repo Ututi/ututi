@@ -20,6 +20,13 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
 <div class="description">
   ${c.group.description}
 </div>
+
+%if c.group.page_public and c.group.page != '':
+<div id="group_page">
+${h.html_cleanup(c.group.page)|n,decode.utf8}
+</div>
+%endif
+
 <h2>${_('Group members')}</h2>
 ${group_members()}
 

@@ -137,7 +137,7 @@ class GroupAddingForm(Schema):
 
 
 class GroupPageForm(Schema):
-    allow_extra_fields = False
+    allow_extra_fields = True
     page_content = HtmlSanitizeValidator()
 
 
@@ -174,10 +174,10 @@ def group_action(method):
         c.security_context = group
         c.object_location = group.location
         c.group = group
-        c.group_payment_month = int(config.get('group_payment_month', '1000'))
-        c.group_payment_quarter = int(config.get('group_payment_quarter', '20000'))
-        c.group_payment_halfyear = int(config.get('group_payment_halfyear', '30000'))
-        c.group_file_limit = int(config.get('group_file_limit', 104857600))
+        c.group_payment_month = int(config.get('group_payment_month', 1000))
+        c.group_payment_quarter = int(config.get('group_payment_quarter', 2000))
+        c.group_payment_halfyear = int(config.get('group_payment_halfyear', 3000))
+        c.group_file_limit = int(config.get('group_file_limit', 200 * 1024 * 1024))
         c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
         return method(self, group)
     return _group_action
@@ -220,8 +220,6 @@ class GroupControllerBase(BaseController):
              'selected': selected == 'page',
              'event': h.trackEvent(c.group, 'page', 'breadcrumb')},
             ]
-        if not c.group.show_page:
-            del bcs[-1]
         return bcs
 
 class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
@@ -234,21 +232,33 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         else:
             redirect_to(controller='group', action='home', id=group.group_id)
 
+    def _set_home_variables(self, group):
+        c.breadcrumbs.append(self._actions('home'))
+        c.events = group.group_events
+        c.has_to_invite_members = (len(group.members) == 1 and
+                                   len(group.invitations) == 0)
+        c.wants_to_watch_subjects = (len(group.watched_subjects) == 0 and
+                                     group.wants_to_watch_subjects)
+
     @group_action
     def home(self, group):
         if check_crowds(["member", "admin", "moderator"]):
-            if request.GET.get('do', None) == 'hide_page':
-                group.show_page = False
-                h.flash(_("The group's page was hidden. You can show it again by editing the group's settings."))
-            meta.Session.commit()
-            c.breadcrumbs.append(self._actions('home'))
-            c.events = group.group_events
+            if request.params.get('do_not_watch'):
+                group.wants_to_watch_subjects = False
+                meta.Session.commit()
+            self._set_home_variables(group)
             return render('group/home.mako')
         else:
             c.breadcrumbs = [{'title': group.title,
                               'link': url(controller='group', action='home', id=c.group.group_id)}]
 
             return render('group/home_public.mako')
+
+    @group_action
+    @ActionProtector("admin", "moderator", "member")
+    def welcome(self, group):
+        self._set_home_variables(group)
+        return render('group/welcome.mako')
 
     @group_action
     def request_join(self, group):
@@ -287,7 +297,8 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     def edit_page(self, group):
         c.breadcrumbs.append(self._actions('page'))
         defaults = {
-            'page_content': c.group.page
+            'page_content': c.group.page,
+            'page_public': 'public' if c.group.page_public else ''
             }
         return htmlfill.render(self._edit_page_form(), defaults=defaults)
 
@@ -299,6 +310,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         if page_content is None:
             page_content = ''
         group.page = page_content
+        group.page_public =  (self.form_result.get('page_public', False) == 'public')
         meta.Session.commit()
         h.flash(_("The group's front page was updated."))
         redirect_to(controller='group', action='page', id=group.group_id)
@@ -418,7 +430,6 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             'title': group.title,
             'description': group.description,
             'tags': ', '.join([tag.title for tag in c.group.tags]),
-            'show_page': group.show_page,
             'year': group.year.year,
             'default_tab': group.default_tab
             }
@@ -472,8 +483,6 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
 
         if is_root(c.user):
             group.moderators = values['moderators']
-
-        group.show_page = bool(values.get('show_page', False))
 
         meta.Session.commit()
         h.flash(_('Group information and settings updated.'))
@@ -536,13 +545,13 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         meta.Session.commit()
 
     @group_action
-    @ActionProtector("admin", "moderator")
+    @ActionProtector("admin", "moderator", "member")
     def watch_subject(self, group):
         self._watch_subject(group)
         redirect_to(request.referrer)
 
     @group_action
-    @ActionProtector("admin", "moderator")
+    @ActionProtector("admin", "moderator", "member")
     def js_watch_subject(self, group):
         self._watch_subject(group)
         return render_mako_def('group/subjects.mako',
@@ -554,13 +563,13 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
                             new = True)
 
     @group_action
-    @ActionProtector("admin", "moderator")
+    @ActionProtector("admin", "moderator", "member")
     def unwatch_subject(self, group):
         self._unwatch_subject(group)
         redirect_to(request.referrer)
 
     @group_action
-    @ActionProtector("admin", "moderator")
+    @ActionProtector("admin", "moderator", "member")
     def js_unwatch_subject(self, group):
         self._unwatch_subject(group)
         return "OK"
@@ -621,7 +630,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         The basis for views displaying all the subjects the group is already watching and allowing
         members to choose new subjects for the group.
         """
-        if check_crowds(["admin", "moderator"]):
+        if check_crowds(["admin", "moderator", "member"]):
             c.search_target = url(controller = 'group', action='subjects', id = group.group_id)
 
             #retrieve search parameters
@@ -657,8 +666,6 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
                     **search_params)
 
             return render('group/subjects.mako')
-        else:
-            return render('group/subjects_member.mako')
 
     @group_action
     @validate(schema=GroupInviteForm, form='members', post_only = False, on_get = True)
@@ -695,7 +702,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             emails = self.form_result.get('emails', '').split()
             self._send_invitations(group, emails)
             if self.form_result.get('final_submit', None) is not None:
-                redirect_to(controller='group', action='subjects_step', id=group.group_id)
+                redirect_to(group.url(action='welcome'))
             else:
                 redirect_to(controller='group', action='invite_members_step', id=group.group_id)
 
@@ -725,7 +732,6 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         failed = []
         for line in emails:
             for email in filter(bool, line.split(',')):
-                #XXX : need to validate emails
                 try:
                     validators.Email.to_python(email)
                     user = User.get(email)
@@ -736,7 +742,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
                     else:
                         count = count + 1
                         group.invite_user(email, c.user)
-                except:
+                except Invalid:
                     failed.append(email)
         if count > 0:
             h.flash(_("Users invited."))

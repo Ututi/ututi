@@ -9,22 +9,27 @@
 
 <%def name="location_widget(number, values=[], titles=[], add_titles=[], add_new=False, live_search=False)">
 <%
+   if not hasattr(self, 'newlocationwidget_id'):
+       self.newlocationwidget_id = 0
+   else:
+       self.newlocationwidget_id = self.newlocationwidget_id + 1
+
    if titles == []:
        titles = [_('University'), _('Department'), _('Section')]
    if add_titles == []:
        add_titles = [_('Add university'), _('Add deparment'), _('Add section')]
 %>
 
-<div class="location-tag-widget">
+<div class="location-tag-widget" id="newlocationwidget-${self.newlocationwidget_id}">
   <div class="form-field">
     <form:error name="location"/>
     <% rng = range(number) %>
     %for i in rng:
       <div class="location-tag-field form-field" id="location-tag-field-${i}">
         %if i < len(titles):
-            <label for="location-${i}">${titles[i]}</label>
+            <label for="location-${self.newlocationwidget_id}-${i}">${titles[i]}</label>
         %endif
-        <div class="input-line">
+        <div class="input-line" style="display: inline;">
           <div>
             <%
                cls = ''
@@ -32,9 +37,9 @@
                    cls = 'group_live_search'
             %>
             %if len(values) > i:
-              <input type="text" name="location-${i}" id="location-${i}" class="${cls} line structure-complete" value="${values[i]}"/>
+              <input type="text" name="location-${i}" id="location-${self.newlocationwidget_id}-${i}" class="${cls} line structure-complete location-${i}" value="${values[i]}"/>
             %else:
-              <input type="text" name="location-${i}" id="location-${i}" class="${cls} line structure-complete" value=""/>
+              <input type="text" name="location-${i}" id="location-${self.newlocationwidget_id}-${i}" class="${cls} line structure-complete location-${i}" value=""/>
             %endif
           </div>
         </div>
@@ -56,9 +61,14 @@
     %endfor
   </div>
 </div>
+</%def>
+
+<%def name="head_tags()">
+${h.stylesheet_link('/stylesheets/newlocationwidget.css')|n}
 ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
 <script type="text/javascript">
 //<![CDATA[
+$(document).ready(function() {
   $('.add_subform_switch').click(function() {
     $(this).toggleClass('active');
     $(this).siblings('.location-add-subform').toggle();
@@ -112,8 +122,9 @@ ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
  });
 
 
-
-  $(".structure-complete").each(function(i) {
+ $('.location-tag-widget').each(function() {
+  $(".structure-complete", this).each(function(i) {
+    widget = $(this).parents('.location-tag-widget').eq(0);
     $(this).autocomplete([], {\
       cacheLength: 200,
       dataType:"json",
@@ -149,8 +160,9 @@ ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
     });
 
     var parameters = {};
+    parameters['widget_id'] = $(widget).eq(0).attr('id');
     $(this).addClass('preloadData');
-    $(".structure-complete").each(function(ii) {
+    $(".structure-complete", widget).each(function(ii) {
         if (ii < i) {
            parameters['parent-'+ii] = $(this).val();
         }
@@ -170,18 +182,20 @@ ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
     $(this).result(function(event, data, formatted) {
       $(this).change();
       if (data) {
-        var ind = $(".structure-complete").index(this);
+        widget = $(this).parents('.location-tag-widget').eq(0);
+        var ind = $(".structure-complete", widget).index(this);
+        var next_item = $(".location-tag-field", widget).eq(ind+1);
         if (data.has_children == true) {
-          var next_item = $(".location-tag-field").eq(ind+1);
           $(next_item).addClass("json-target");
           var parameters = {};
+          parameters['widget_id'] = widget.attr('id')
 
-          $(".structure-complete").each(function(i) {
+          $(".structure-complete", widget).each(function(i) {
               if (i < ind+1) {
                   parameters['parent-'+i] = $(this).val();
               }
           });
-          $(next_item).find("input").setOptions({
+          $(next_item).find("input.structure-complete").setOptions({
                 data: []
           });
 
@@ -189,18 +203,22 @@ ${h.javascript_link('/javascripts/jquery.autocomplete.js')|n}
                           parameters,
                           function(jdata) {
                               var item = $(".json-target").eq(0);
-                              item.find("input").setOptions({
+                              item.find("input.structure-complete").setOptions({
                                   data: jdata.values
                               });
                               item.removeClass("json-target");
-                              item.find("input").focus().click();
+                              item.find("input.structure-complete").focus().click();
                    });
 
-          $(next_item).find('input').val('');
+          $(next_item).find('input.structure-complete').val('');
+        } else {
+          $(next_item).find('input.structure-complete').val('');
         }
       }
     });
    });
+  });
+});
 //]]>
 </script>
 </%def>

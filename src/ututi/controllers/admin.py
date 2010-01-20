@@ -108,38 +108,44 @@ class AdminController(BaseController):
         from_time = parse_date(c.from_time_str, locale=locale)
         to_time = parse_date(c.to_time_str, locale=locale)
 
-        pages_stmt = meta.Session.query(Event.author_id,
-                                        func.count(Event.created).label('pages_count'))\
-                                        .filter(Event.event_type == 'page_created')\
-                                        .filter(Event.created < to_time)\
-                                        .filter(Event.created >= from_time)\
-                                        .group_by(Event.author_id).subquery()
+        pages_stmt = meta.Session.query(
+            Event.author_id,
+            func.count(Event.created).label('pages_count'))\
+            .filter(Event.event_type == 'page_created')\
+            .filter(Event.created < to_time)\
+            .filter(Event.created >= from_time)\
+            .group_by(Event.author_id).subquery()
 
-        uploads_stmt = meta.Session.query(Event.author_id,
-                                          func.count(Event.created).label('uploads_count'))\
-                                          .filter(Event.event_type == 'file_uploaded')\
-                                          .filter(Event.created < to_time)\
-                                          .filter(Event.created >= from_time)\
-                                          .group_by(Event.author_id).subquery()
+        uploads_stmt = meta.Session.query(
+            Event.author_id,
+            func.count(Event.created).label('uploads_count'))\
+            .filter(Event.event_type == 'file_uploaded')\
+            .filter(Event.created < to_time)\
+            .filter(Event.created >= from_time)\
+            .group_by(Event.author_id).subquery()
 
-        messages_stmt = meta.Session.query(Event.author_id,
-                                           func.count(Event.created).label('messages_count'))\
-                                           .filter(Event.event_type == 'forum_post_created')\
-                                           .filter(Event.created < to_time)\
-                                           .filter(Event.created >= from_time)\
-                                           .group_by(Event.author_id).subquery()
+        messages_stmt = meta.Session.query(
+            Event.author_id,
+            func.count(Event.created).label('messages_count'))\
+            .filter(Event.event_type == 'forum_post_created')\
+            .filter(Event.created < to_time)\
+            .filter(Event.created >= from_time)\
+            .group_by(Event.author_id).subquery()
 
-        downloads_stmt = meta.Session.query(FileDownload.user_id,
-                                            func.count(FileDownload.file_id).label('downloads_count'),
-                                            func.sum(File.filesize).label('downloads_size'))\
-                                            .filter(FileDownload.download_time < to_time)\
-                                            .filter(FileDownload.download_time >= from_time)\
-                                            .outerjoin((File, File.id == FileDownload.file_id))\
-                                            .group_by(FileDownload.user_id).subquery()
+        downloads_stmt = meta.Session.query(
+            FileDownload.user_id,
+            func.count(FileDownload.file_id).label('downloads_count'),
+            func.count(func.distinct(FileDownload.file_id)).label('unique_downloads_count'),
+            func.sum(File.filesize).label('downloads_size'))\
+            .filter(FileDownload.download_time < to_time)\
+            .filter(FileDownload.download_time >= from_time)\
+            .outerjoin((File, File.id == FileDownload.file_id))\
+            .group_by(FileDownload.user_id).subquery()
 
 
         users = meta.Session.query(User,
                                    func.coalesce(downloads_stmt.c.downloads_count, 0).label('downloads'),
+                                   func.coalesce(downloads_stmt.c.unique_downloads_count, 0).label('unique_downloads'),
                                    func.coalesce(downloads_stmt.c.downloads_size, 0).label('downloads_size'),
                                    func.coalesce(uploads_stmt.c.uploads_count, 0).label('uploads'),
                                    func.coalesce(messages_stmt.c.messages_count, 0).label('messages'),
@@ -272,11 +278,7 @@ class AdminController(BaseController):
             .filter(File.title != u'text.html')\
             .filter(File.title != u'Null File')
 
-        c.files = paginate.Page(
-            files,
-            page=int(request.params.get('page', 1)),
-            item_count=files.count() or 0,
-            items_per_page=100)
+        c.files = self._make_pages(files)
 
         return render('admin/files.mako')
 
@@ -289,23 +291,21 @@ class AdminController(BaseController):
     def subjects(self):
         subjects = meta.Session.query(Subject)\
             .order_by(desc(Subject.created_on))
-        c.subjects = paginate.Page(
-            subjects,
-            page=int(request.params.get('page', 1)),
-            item_count=subjects.count() or 0,
-            items_per_page=100)
+        c.subjects = self._make_pages(subjects)
         return render('admin/subjects.mako')
 
     @ActionProtector("root")
     def events(self):
         events = meta.Session.query(Event)\
             .order_by(desc(Event.created))
-        c.events = paginate.Page(
-            events,
-            page=int(request.params.get('page', 1)),
-            item_count=events.count() or 0,
-            items_per_page=100)
+        c.events = self._make_pages(events)
         return render('admin/events.mako')
+
+    def _make_pages(self, items):
+        return paginate.Page(items,
+                             page=int(request.params.get('page', 1)),
+                             item_count=items.count() or 0,
+                             items_per_page=100)
 
     def error(self):
         return 1 / 0

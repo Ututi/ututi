@@ -14,7 +14,7 @@ from webhelpers import paginate
 
 from pylons import request, c, url
 from pylons.templating import render_mako_def
-from pylons.controllers.util import redirect_to
+from pylons.controllers.util import redirect_to, abort
 
 from pylons.i18n import _
 
@@ -24,7 +24,7 @@ from ututi.lib.emails import email_confirmation_request
 from ututi.lib.security import ActionProtector
 from ututi.lib.search import search_query, search_query_count
 from ututi.lib.image import serve_image
-from ututi.lib.validators import UserPasswordValidator, UniqueEmail, LocationTagsValidator
+from ututi.lib.validators import UserPasswordValidator, UniqueEmail, LocationTagsValidator, manual_validate
 from ututi.lib.forms import validate
 from ututi.lib import gg
 
@@ -41,15 +41,17 @@ from ututi.controllers.home import UniversityListMixin
 log = logging.getLogger(__name__)
 
 
-class ProfileForm(Schema):
-    """A schema for validating user profile forms."""
+class LocationForm(Schema):
     pre_validators = [NestedVariables()]
     allow_extra_fields = True
-    fullname = validators.String(not_empty=True)
-    site_url = validators.URL()
     location = Pipe(ForEach(validators.String(strip=True)),
                     LocationTagsValidator())
 
+
+class ProfileForm(LocationForm):
+    """A schema for validating user profile forms."""
+    fullname = validators.String(not_empty=True)
+    site_url = validators.URL()
 
 
 class PasswordChangeForm(Schema):
@@ -198,6 +200,9 @@ class ProfileController(SearchBaseController, UniversityListMixin):
 
     @ActionProtector("user")
     def home(self):
+        if c.user.location is None:
+            h.flash(_("You haven't told us where You are studying. "
+                      "You can do this <a href='%(edit_url)s'>here</a>. Thank You.") % dict(edit_url=url(controller='profile', action='edit')))
         c.breadcrumbs.append(self._actions('home'))
 
         if not c.user.memberships and not c.user.watched_subjects:
@@ -473,6 +478,8 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             tags = self.form_result.get('tags', [])
             if isinstance(tags, basestring):
                 tags = tags.split(', ')
+        elif c.user.location is not None:
+            tags = c.user.location.hierarchy()
 
         c.tags = tags
 
@@ -599,3 +606,30 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     @ActionProtector("user")
     def support(self):
         return render('/profile/support.mako')
+
+    @ActionProtector("user")
+    @validate(schema=LocationForm, form='welcome')
+    def update_location(self):
+        c.user.location = self.form_result.get('location', None)
+        meta.Session.commit()
+        h.flash(_('Your university information has been updated.'))
+        redirect_to(url(controller='profile', action='welcome'))
+
+    @ActionProtector("user")
+    def js_update_location(self):
+        try:
+            fields = manual_validate(LocationForm)
+            c.user.location = fields.get('location', None)
+            meta.Session.commit()
+            return render_mako_def('/profile/welcome.mako','location_updated')
+        except Invalid, e:
+            abort(400)
+
+    @ActionProtector("user")
+    @validate(schema=LocationForm, form='welcome')
+    def goto_location(self):
+        if hasattr(self, 'form_result'):
+            location = self.form_result.get('location', None)
+            if location is not None:
+                redirect_to(location.url())
+        redirect_to(url(controller='profile', action='welcome'))

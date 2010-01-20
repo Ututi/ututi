@@ -1,46 +1,102 @@
-#year-input {
-  width: 80px;
-  padding-left: 20px;
-  background: white url("../images/details/arrow.png") left bottom no-repeat;
+div.welcome-message {
+    margin: 15px 0;
+
 }
 
-#year-input div,
-#year-input input {
-  width: 80px;
+div.gray-box {
+  margin-top: 15px;
+  width: 290px;
+  height: 130px;
+  background: url("../images/borders/gray_box.png") top right no-repeat;
+  padding: 5px;
 }
 
-input.selected {
-  background: #ffd0a1;
+div.gray-box .inner {
+  padding: 5px 0 0 80px;
 }
 
-form {
-  margin: 5px;
+div.gray-box h2,
+#update-profile h2,
+#user_location h2 {
+  font-weight: normal;
+  font-size: 16px;
 }
 
-#school-search, #faculty-search {
-  margin-bottom: 5px;
+div.gray-box div.description,
+#update-profile .description {
+  margin: 5px 0 10px;
   color: #808080;
+  font-size: 12px;
 }
 
-#add-group {
-  padding-left: 65px;
-  background: white url("../images/details/icon_group.png") left top no-repeat;
-  margin: 20px 0;
-}
-
-#add-group .form-field {
+#join-group {
   float: left;
 }
 
-#browse-subjects {
-  padding-left: 65px;
-  background: white url("../images/details/icon_subject.png") left top no-repeat;
-  margin: 20px 0;
+#join-group .inner {
+  background: url("../images/details/icon_group_gray.png") 10px 10px no-repeat;
 }
 
-#edit-profile {
-  padding-left: 65px;
-  height: 50px;
-  background: white url("../images/details/icon_profile.png") left top no-repeat;
-  margin: 20px 0;
+#find-subjects {
+  float: right;
+}
+
+#find-subjects h2 {
+  margin-bottom: 5px;
+}
+
+#find-subjects .inner {
+  background: url("../images/details/icon_subject_gray.png") 10px 10px no-repeat;
+}
+
+#find-subjects .input-line {
+  width: 160px;
+}
+
+#find-subjects .explanation {
+  display: none;
+}
+
+#find-subjects .form-field,
+#user_location .form-field {
+  padding: 0;
+}
+
+#find-subjects label,
+#user_location label {
+  height: 14px;
+  line-height: 14px;
+}
+
+#update-profile {
+  margin-top: 15px;
+  padding: 20px 0 0 60px;
+  background: white url("../images/details/icon_user_gray.png") 10px 25px no-repeat;
+  clear: left;
+}
+
+#update-profile table {
+  width: 555px;
+}
+
+#update-profile table td.action {
+  width: 20%;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#user_location {
+  width: 615px;
+  padding-top: 5px;
+  background: url("../images/borders/gray_box_full.png") left top no-repeat;
+}
+
+#user_location .wrapper {
+  background: url("../images/borders/gray_box_full.png") left bottom no-repeat;
+  padding: 0 5px 5px;
+}
+
+#user_location .inner {
+  padding: 5px 0 0 80px;
+  background: url("../images/details/icon_university_gray.png") 10px 10px no-repeat;
 }

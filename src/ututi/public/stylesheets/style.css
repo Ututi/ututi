@@ -63,6 +63,11 @@ body {
 /* end main layout */
 
 /* fonts */
+em {
+  color: #d45500;
+  font-style: normal;
+}
+
 .error,
 .error-message {
   color: red;
@@ -707,16 +712,21 @@ input.text_button {
 }
 
 input.text_button:hover {
-  text-decoration: underline;
+  text-decoration: none;
   padding: 0;
   border-bottom: 1px solid #d45500;
 }
 
+.full_box a.btn-large,
+.full_box a.btn-large span,
+.gray-box a.btn-large,
+.gray-box a.btn-large span,
 #ututi_join_portlet a.btn-large,
 #ututi_join_portlet a.btn-large span,
 #ututi_join_portlet span.btn-large,
 #ututi_join_portlet span.btn-large input {
   background-image: url("../images/button_large_portlet.png");
+  background-color: #f9f9f9;
 }
 
 span.btn-large,
@@ -1341,6 +1351,12 @@ ul#event_list li {
 
 
 /* misc */
+a.cancel_link {
+  padding-right: 8px;
+  background: url('/images/details/icon_cross.png') right center no-repeat;
+  font-size: 12px;
+}
+
 img.latex {
 	vertical-align: middle;
 }
@@ -1443,6 +1459,27 @@ span .tooltip {
   background-repeat: no-repeat;
 }
 
+.tour-link {
+  font-size: 14px;
+}
+
+a.btn-large.tour,
+a.btn-large.tour span {
+  background-image: url("../images/button_exclamation.png");
+}
+
+a.btn-large.tour {
+  margin-left: 10px;
+  padding-left: 25px;
+}
+
+a.btn-large.tour span {
+  font-size: 16px;
+  font-weight: bold;
+  color: #d45500;
+}
+
+
 /* end misc */
 
 /* upload drop down (group files portlet, files view) */
@@ -1512,6 +1549,10 @@ div.upload_dropdown .target_item.last div {
 }
 
 /* buttons - experiment */
+a.btn-large:hover, a.btn:hover {
+  text-decoration: none;
+}
+
 span.message, a.btn, span.btn, div.btn {
   display:-moz-inline-box;
   display:inline-block;
@@ -1910,10 +1951,9 @@ div.tour_slide {
 }
 
 div.tour_slide div.image {
-  width: 605px;
+  width: 606px;
   float: left;
-  padding: 0 2px 5px 0;
-  background: url("../images/details/image_shadow.png") bottom right no-repeat;
+  padding: 0;
   margin-bottom: 10px;
 }
 
@@ -1936,4 +1976,11 @@ div.tour_slide div.text h2 {
 
 a.anchor {
   display: none;
+}
+
+div.tour_slide div.text div.join_link {
+  margin-top: 15px;
+  border-top: 1px solid #ded8d8;
+  padding-top: 5px;
+  line-height: 20px;
 }

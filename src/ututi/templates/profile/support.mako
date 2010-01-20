@@ -12,7 +12,7 @@
        '  So if Ututi has helped you pass an exam, write your thesis or you just like Ututi,'
        ' we are asking you to contribute by making a small donation :)')}
 </p>
-<p>${_('If you will donate at least 50 you will receive a gift &mdash; Ututi T-shirt (you can donate this amount in parts).')}</p>
+<p>${h.literal(_('If you will donate at least 50 you will receive a gift &mdash; Ututi T-shirt (you can donate this amount in parts).'))}</p>
 
 <br />
 

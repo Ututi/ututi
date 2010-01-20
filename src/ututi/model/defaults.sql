@@ -135,11 +135,12 @@ create table groups (
        title varchar(250) not null,
        year date not null,
        description text,
-       show_page bool default true,
        page text not null default '',
        logo bytea default null,
        moderators bool default false,
        default_tab varchar(20) default 'home',
+       page_public bool default false,
+       wants_to_watch_subjects bool default true,
        primary key (id));;
 
 /* An enumerator for membership types in groups */

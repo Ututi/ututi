@@ -23,34 +23,11 @@ screen:
     >>> browser.url
     'http://localhost/register/welcome'
 
-    >>> browser.printQuery("id('page-content')//h3/text()")
-    Join a group
-    Browse subjects
-    Review and edit your profile
-
-    >>> form = browser.getForm(id="findgroup-form")
-    >>> form.getControl(name='location-0').value = 'vu'
-    >>> form.getControl(name='year').value = '2009'
-    >>> form.getControl('Search').click()
-    >>> browser.printQuery("id('search-results')//a/text()")
-    Moderatoriai
-
-Another bug in the group search: adding a simple tag to the search's parameters would cause a crash.
-    >>> browser.getControl(name='tags').value = 'vu, simple_tag'
-    >>> browser.getControl('Search', index=1).click()
-
-There was a bug, where searching without anything specified and then pressing search again in the group find view
-would cause a crash. Is it still there?
-    >>> browser.open('http://localhost/welcome')
-    >>> browser.getControl(name='location-0').value = ''
-    >>> browser.getControl(name='year').value = ''
-    >>> browser.getControl('Search', index=1).click()
-
-    >>> browser.getControl('Search', index=1).click()
-    >>> print browser.url
-    http://localhost/findgroup
-    >>> browser.printQuery("//div[@class='search-item group-item']/a/text()")
-    Moderatoriai
+    >>> browser.printQuery("id('page-content')//h2/text()")
+    Specify your university and faculty!
+    Join your group
+    Find your subjects
+    Update your profile
 
 An email, requesting the confirmation of the email address entered is sent:
 
@@ -86,6 +63,10 @@ An email, requesting the confirmation of the email address entered is sent:
     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
     Close
     Your email jonas@example.com was confirmed. Thank You.
+    Close
+    You haven't told us where You are studying. You can do this
+    . Thank You.
+
 
 What if we clicked the link again?
 
@@ -93,9 +74,20 @@ What if we clicked the link again?
      >>> browser.printQuery("//div[@class='flash-message']/span/text()")
      Close
      Could not confirm email - invalid confirmation key.
+     Close
+     You haven't told us where You are studying. You can do this
+     . Thank You.
+
 
      >>> print browser.url
      http://localhost/welcome
+
+     >>> form = browser.getForm('findsubject-form')
+     >>> form.getControl(name='location-0').value = 'Vilniaus universitetas'
+     >>> form.getControl('Search').click()
+
+     >>> print browser.url
+     http://localhost/school/vu
 
 We have been logged in after signing up. Now let's log out and test more unfortunate
 scenarios:
@@ -197,9 +189,30 @@ Bug fix confirm: passwords with non-ascii chars would crash the registration.
 
     >>> browser.printQuery("//span[@class='error-message']/text()")
 
-    >>> browser.printQuery("id('page-content')//h3/text()")
-    Join a group
-    Browse subjects
-    Review and edit your profile
+    >>> browser.printQuery("id('page-content')//h2/text()")
+    Specify your university and faculty!
+    Join your group
+    Find your subjects
+    Update your profile
+
+A newly registered user will not have his location set, so he will be shown a form to set it:
+
+    >>> form = browser.getForm('update-location-form')
+    >>> form.getControl(name='location-0').value = 'Vilniaus universitetas'
+    >>> form.getControl('confirm').click()
+    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
+    Close
+    Your university information has been updated.
+    Close
+    Your
+    (jonas_new@example.com) is not confirmed! Please confirm your email by clicking on the link sent to your address or
+
+After setting his location, he will not be shown the form again:
+    >>> browser.printQuery("id('page-content')//h2/text()")
+    Join your group
+    Find your subjects
+    Update your profile
+
+
 
     >>> email = mail_queue.pop()

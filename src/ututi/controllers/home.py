@@ -322,7 +322,7 @@ class HomeController(UniversityListMixin):
                             rcpt.append(email)
                         else:
                             using.append(email)
-                    except:
+                    except Invalid:
                         failed.append(email)
             if rcpt != []:
                 msg.send(rcpt)

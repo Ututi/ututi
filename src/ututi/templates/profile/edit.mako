@@ -1,5 +1,5 @@
 <%inherit file="/profile/base.mako" />
-<%namespace file="/widgets/newlocationtag.mako" import="*"/>
+<%namespace name="newlocationtag" file="/widgets/newlocationtag.mako" import="*"/>
 
 <%def name="title()">
   ${c.user.fullname}
@@ -10,6 +10,7 @@
   ${h.stylesheet_link('/stylesheets/profile.css')|n}
   ${h.stylesheet_link('/stylesheets/newlocationwidget.css')|n}
   ${h.javascript_link('/javascripts/js-alternatives.js')|n}
+  <%newlocationtag:head_tags />
   <script type="text/javascript">
   $(document).ready(function() {
     new AjaxUpload('#user-logo-editable', {

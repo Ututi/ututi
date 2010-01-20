@@ -7,7 +7,9 @@
 <div class="flash-message">
   <span class="close-link hide-parent">${_('Close')}</span>
   <span>
-    ${_('Your <strong>email</strong> is not confirmed! Please confirm your email by clicking on the link sent to your address or ')|n}
+    ${_('Your <strong>email</strong> (%(email)s) is not confirmed! '
+    'Please confirm your email by clicking on the link sent '
+    'to your address or ') % dict(email=c.user.emails[0].email) |n}
     <form method="post" action="${url(controller='profile', action='confirm_emails')}" id="email_confirmation_request" class="inline-form">
       <div>
         <input type="hidden" name="came_from" value="${request.url}" />

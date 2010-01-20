@@ -1,9 +1,9 @@
 <%inherit file="/group/home.mako" />
-<%namespace file="/widgets/locationtag.mako" import="*"/>
+<%namespace name="newlocationtag" file="/widgets/newlocationtag.mako" import="*"/>
 <%namespace file="/widgets/tags.mako" import="*"/>
 
 <%def name="head_tags()">
-${h.stylesheet_link('/stylesheets/locationwidget.css')|n}
+<%newlocationtag:head_tags />
 ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
 ${h.stylesheet_link('/stylesheets/group.css')|n}
 ${parent.head_tags()}
@@ -103,12 +103,6 @@ ${h.javascript_link('/javascripts/js-alternatives.js')|n}
           ${tags_widget([])}
         </div>
         <hr />
-        <div class="form-field">
-          <label for="show_page">
-            <input type="checkbox" name="show_page" id="show_page"/>
-            ${_('Show group page')}
-          </label>
-        </div>
         <div class="form-field">
           <label for="default_tab">${_('Default group tab')}</label>
           ${h.select("default_tab", c.group.default_tab, c.tabs)}

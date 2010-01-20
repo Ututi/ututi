@@ -6,9 +6,11 @@ Test nagging users to confirm their emails
    >>> browser = Browser.logIn('user3@ututi.lt', 'password')
    >>> browser.printQuery("//div[@class='flash-message']/span")
    <span class="close-link hide-parent">Close</span>
+   <span>You haven't told us where You are studying. You can do this <a href="/profile/edit">here</a>. Thank You.</span>
+   <span class="close-link hide-parent">Close</span>
    <span>
-     Your <strong>email</strong> is not confirmed! Please confirm your email by clicking on the link sent to your address or
-     <form method="post" action="/profile/confirm_emails" id="email_confirmation_request" class="inline-form">
+       Your <strong>email</strong> (user3@ututi.lt) is not confirmed! Please confirm your email by clicking on the link sent to your address or
+       <form method="post" action="/profile/confirm_emails" id="email_confirmation_request" class="inline-form">
        <div>
          <input type="hidden" name="came_from" value="http://localhost/home" />
          <input type="hidden" name="email" value="user3@ututi.lt" />
@@ -23,8 +25,10 @@ Test nagging users to confirm their emails
    <span class="close-link hide-parent">Close</span>
    <span>Confirmation message sent. Please check your email.</span>
    <span class="close-link hide-parent">Close</span>
+   <span>You haven't told us where You are studying. You can do this <a href="/profile/edit">here</a>. Thank You.</span>
+   <span class="close-link hide-parent">Close</span>
    <span>
-       Your <strong>email</strong> is not confirmed! Please confirm your email by clicking on the link sent to your address or
+       Your <strong>email</strong> (user3@ututi.lt) is not confirmed! Please confirm your email by clicking on the link sent to your address or
        <form method="post" action="/profile/confirm_emails" id="email_confirmation_request" class="inline-form">
        <div>
          <input type="hidden" name="came_from" value="http://localhost/home" />
