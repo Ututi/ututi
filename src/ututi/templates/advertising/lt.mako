@@ -1,16 +1,16 @@
 <%inherit file="/advertising/en.mako" />
 
-<h1>Reklamuokitės Lietuvos studentų tarpe!</h1>
+<h1>Reklamuokitės Lietuvos studentams!</h1>
 
 <div class="text">
 
   <p>
-    <a href="${url('/')}">Ututi</a> tai virtuali bendradarbiavimo aplinka akademinėms studentų grupėms, 
+    <a href="${url('/')}">Ututi</a> - tai virtuali bendradarbiavimo aplinka akademinėms studentų grupėms, 
     kurioje studentai bendrauja ir keičiasi aktualia studijų bei mokslo informacija. Šiuo metu 
-    <a href="${url('/')}">Ututi.lt</a> vienija <em>virš 4000 lietuvos studentų</em> iš pagrindinių universitetų Vilniuje, Kaune, Klaipėdoje bei Šiauliuose. 
+    <a href="${url('/')}">Ututi.lt</a> vienija <em>daugiau nei 4000 lietuvos studentų</em> iš pagrindinių universitetų Vilniuje, Kaune, Klaipėdoje bei Šiauliuose. 
 
   <h2 id="top">Reklamos formatai ir galimybės </h2>
-  <p>Siekdami padėti Jums <em>pasiekti tikslinę auditoriją</em> ir pateikti labiausiai Jums tinkamas reiklamos formas, <a href="${url('/')}">Ututi.lt</a> suteikia kelis reklamavimosi būdus:
+  <p>Siekdami padėti Jums <em>pasiekti tikslinę auditoriją</em> ir pateikti labiausiai Jums tinkamas reklamos formas, <a href="${url('/')}">Ututi.lt</a> suteikia kelis reklamavimosi būdus:
   </p>
 
   <ul>
@@ -26,34 +26,32 @@
     <img src="${url('/images/advertising/default-ad.png')}" style="float: right; margin-left: 10px;" alt="Standartinis skydelis" />
 
     Tai tradicinis internetinės reklamos būdas, kai reklamos užsakovas paruošia reklaminį skydelį o puslapio savininkai jį patalpina savo svetainėje.</p>
-  <p><strong>Kaip tai artodo?</strong></p>
-  <p
-    Reklaminėms skydeliams yra numatyta vieta puslapio šone, dešinėje. Rekomenduojami skydelių išmatavimai yra 300x300 arba 300x125 (galimi ir kitokie skydelių išmatavimai, dėl jų teirautis atskirai).
+  <p><strong>Kaip tai atrodo?</strong></p>
+  <p>
+    Reklaminėms skydeliams yra numatyta vieta puslapio šone, dešinėje. Rekomenduojami skydelių išmatavimai yra 300x300px arba 300x125px (galimi ir kitokie skydelių išmatavimai, dėl jų teirautis atskirai).
   </p>
   <p><strong>Kiek tai kainuoja?</strong></p>
   <p>
-    Skydelio translavimo <em>dienos kaina 40lt</em>, 1000lt už mėnesį.
+    Skydelio translavimo <em>dienos kaina -  40lt</em>, 1000lt už mėnesį.
   </p>
-  <p><strong>Kam skirta ir kokiais atvėjais apsimoka?</strong></p>
-  <p>Šitą reklamos būdą rekomenduojame tiems, kam svarbu <em>pasiekti</em> kaip galima <em>didesnį žmonių ratą</em> ir greitai informuoti rinką apie savo naują produktą ar paslaugą.</p>
-  <p>Jeigu Jūsų produktas/paslauga yra skirti ne visiems ir Jus nevykdote įvaizdinės kampanijos, tada siūlome Jums pasinaudoti <a href="#top">kitais reklamos būdais</a> Ututi sistemoje.
+  <p><strong>Kam skirta ir kokiais atvejais naudinga?</strong></p>
+  <p>Šį reklamos būdą rekomenduojame tiems, kam svarbu <em>pasiekti</em> kuo <em>didesnį žmonių ratą</em> ir greitai informuoti rinką apie savo naują produktą ar paslaugą.</p>
+  <p>Jeigu Jūsų produktas/paslauga yra skirti ne visiems ir Jūs nevykdote įvaizdinės kampanijos, tada siūlome Jums pasinaudoti <a href="#top">kitais reklamos būdais</a> Ututi sistemoje.
   </p>
 
   <h3 id="target">Reklama tikslinei auditorijai</h3>
   <p>
-    <img src="${url('/images/advertising/u-ads.png')}" style="float: right; margin-left: 10px;" alt="Standartinis skydelis" /
+    <img src="${url('/images/advertising/u-ads.png')}" style="float: right; margin-left: 10px;" alt="Ututi skydelis" />
 
-    Jūsų produktas ar paslauga yra skirtas <em>tik Vilniečiams</em>? Gal norėtumėt pasiekti tik medikus ar teisininkus? O gal norėtumėt reklamą rodyti <em>tik pirmakursiams</em>? Ututi gali Jums padėti. Kadangi sistema žino kur ir ką studijuoja naudotojai, reklama gali būti <em>rodoma būtent tiems</em>, kas privalo ją pamatyti.</p>
+    Jūsų produktas ar paslauga yra skirtas <em>tik Vilniečiams</em>? Gal norėtumėt pasiekti tik medikus ar teisininkus? O gal norėtumėt reklamą rodyti <em>tik pirmakursiams</em>? Ututi gali Jums padėti. Kadangi sistema žino, kur ir ką studijuoja naudotojai, reklama gali būti <em>rodoma būtent tiems</em>, kas turi ją pamatyti.</p>
 
   <p><strong>Kaip tai atrodo?</strong></p>
 
-  <p>Jūsų reklama susidarys iš iliustracijos(paveiksliūko), antraštės bei trumpos žinutės. Tai padaro ją sistemos dalimi ir tokia reklama <em>mažiau erzina naudotojus</em> bei jos <em>negali užblokuoti</em> reklomų blokavimo programos (pvz. <a href="https://addons.mozilla.org/en-US/firefox/addon/1865">AdBlock</a>).</p>
+  <p>Jūsų reklama susidarys iš iliustracijos (paveiksliuko), antraštės bei trumpos žinutės. Reklama tampa panaši į sistemos elementą, todėl mažiau erzina naudotojus. Be to, jos negali užblokuoti reklamų blokavimo programos (pvz. <a href="https://addons.mozilla.org/en-US/firefox/addon/1865">AdBlock</a>).</p>
 
-[Čia parodome kelis reklamos variantus.]
+  <p><strong>Kam skirta ir kokiais atvejais naudinga?</strong></p>
 
-  <p><strong>Kam skirta ir kokiais atvėjais apsimoka?</strong></p>
-
-  <p>Reklama skirta tiems, kas nori <em>pasiekti tikslinę audotriją</em>, juk Jus nenorite reklamuoti Vilniaus picerijos Klaipėdoje, arba maketavimo paslaugų filologijos studentams. Šitas reklamos būdas apsimoka tada, kai jus <em>galite apibrėžti savo tikslinę auditoriją</em>, nes išvengiate mokėjimų už atsitiktinius paspaudimus ar/ir parodymus. Reklamą <em>pamatys būtent tie, kam jį skirta</em>.</p>
+  <p>Reklama skirta tiems, kas nori <em>pasiekti tikslinę auditoriją</em> (pvz.: Jūs nenorite reklamuoti Vilniaus picerijos Klaipėdoje, arba maketavimo paslaugų filologijos studentams). Šis reklamos būdas naudingas tada, kai Jūs <em>galite apibrėžti savo tikslinę auditoriją</em>, taip išvengdami mokėjimų už atsitiktinius paspaudimus ar/ir parodymus. Reklamą <em>pamatys būtent tie, kam ji skirta</em>.</p>
 
   <p><strong>Kiek tai kainuoja?</strong></p>
 
@@ -70,14 +68,12 @@
 
   <p><strong>Kaip tai atrodo?</strong></p>
 
-  <p>Jūsų reklama susidarys iš iliustracijos(paveiksliūko), antraštės bei trumpos žinutės. Tai padaro ją sistemos dalimi ir tokia reklama mažiau erzina naudotojus bei jos negali užblokuoti reklomų blokavimo programos (pvz. AdBlock).
-
-    [Čia parodome kelis reklamos variantus.]
+  <p>Jūsų reklama susidės iš iliustracijos(paveiksliuko), antraštės bei trumpos žinutės. Reklama tampa panaši į sistemos elementą, todėl mažiau erzina naudotojus. Be to, jos negali užblokuoti reklamų blokavimo programos (pvz. AdBlock).
   </p>
 
-  <p><strong>Kam skirta ir kokiais atvėjais apsimoka?</strong></p>
+  <p><strong>Kam skirta ir kokiais atvejais naudinga?</strong></p>
 
-  <p>Reklama skirta tiems, kas nori <em>pasiekti savo tiksline audotriją</em> ir apsimoka tada, kai jus galite apibrėžti kontekstą kuriame privalo būti rodoma jūsų reklama. Taip išvengiasite mokėjimų už atsitiktinius paspaudimus/parodymus. Reklamą pamatys būtent tie, kam jį skirta.</p>
+  <p>Reklama skirta tiems, kas nori <em>pasiekti savo tikslinę auditoriją</em> ir naudinga tada, kai galima apibrėžti kontekstą, kuriame privalo būti rodoma reklama. Taip išvengsite mokėjimų už atsitiktinius paspaudimus bei parodymus. Reklamą pamatys būtent tie, kam ji skirta.</p>
 
   <p><strong>Kiek tai kainuoja?</strong></p>
 
