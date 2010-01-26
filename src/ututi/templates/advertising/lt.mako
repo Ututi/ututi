@@ -1,6 +1,6 @@
 <%inherit file="/advertising/en.mako" />
 
-<h1>Reklamuotikės Lietuvos studentų tarpe!</h1>
+<h1>Reklamuokitės Lietuvos studentų tarpe!</h1>
 
 <div class="text">
 
@@ -9,54 +9,64 @@
     kurioje studentai bendrauja ir keičiasi aktualia studijų bei mokslo informacija. Šiuo metu 
     <a href="${url('/')}">Ututi.lt</a> vienija <em>virš 4000 lietuvos studentų</em> iš pagrindinių universitetų Vilniuje, Kaune, Klaipėdoje bei Šiauliuose. 
 
-  <h2>Reklamos formatai ir galimybės </h2>
-  <p>Siekdami padėti Jums <em>pasiekti tikslinę auditoriją</em> ir pateikti labiausiai Jums tinkamas reiklamos formas, <a href="${url('/')}">Ututi.lt</a> suteikia Jums kelis reklamavimosi būdus:
-    <ul>
-      <li>Standartiniai reklaminiai skydeliai</li>
-      <li>Reklama tikslinei auditorijai</li>
-      <li>Kontekstinė reklama</li>
-      <li>Partnerystės sutartis su kitais portalais</li>
-    </ul>
+  <h2 id="top">Reklamos formatai ir galimybės </h2>
+  <p>Siekdami padėti Jums <em>pasiekti tikslinę auditoriją</em> ir pateikti labiausiai Jums tinkamas reiklamos formas, <a href="${url('/')}">Ututi.lt</a> suteikia kelis reklamavimosi būdus:
   </p>
 
-  <h3>Standartiniai reklaminiai skydeliai</h3> 
-  <p>Tai tradicinis internetinės reklamos būdas, kai reklamos užsakovas paruošia savo reklaminį skydelį o puslapio savininkai jį patalpina savo svetainėje.</p>
-  <p><strong>Kaip tai artodo?</strong></p>
+  <ul>
+    <li><a href="#standart">Standartiniai reklaminiai skydeliai</a></li>
+    <li><a href="#target">Reklama tikslinei auditorijai</a></li>
+    <li><a href="#context">Kontekstinė reklama</a></li>
+  </ul>
+
+  <img src="${url('/images/advertising/screenshot.png')}" alt="Screenshot" style="margin-top:15px;"/>
+
+  <h3 id="standart">Standartiniai reklaminiai skydeliai</h3>
   <p>
-    Ututi reklamai yra numatyta vieta šone dešinėje. Priimtini reklaminio skydelio išmatavimai 300x300 arba 300x125 (galimi ir kitokie skydelių išmatavimų, dėl jų teirautis atskirai). [Čia idėsime kelių banerių paveiksliukus iš arčiau ir kaip vieną screenshot'ą apibrauktą raudonai kaip tai atrodys iš toliau. ]
+    <img src="${url('/images/advertising/default-ad.png')}" style="float: right; margin-left: 10px;" alt="Standartinis skydelis" />
+
+    Tai tradicinis internetinės reklamos būdas, kai reklamos užsakovas paruošia reklaminį skydelį o puslapio savininkai jį patalpina savo svetainėje.</p>
+  <p><strong>Kaip tai artodo?</strong></p>
+  <p
+    Reklaminėms skydeliams yra numatyta vieta puslapio šone, dešinėje. Rekomenduojami skydelių išmatavimai yra 300x300 arba 300x125 (galimi ir kitokie skydelių išmatavimai, dėl jų teirautis atskirai).
   </p>
   <p><strong>Kiek tai kainuoja?</strong></p>
   <p>
-    Skydelio translavimo dienos kaina 40lt, 1000lt už mėnesį.
+    Skydelio translavimo <em>dienos kaina 40lt</em>, 1000lt už mėnesį.
   </p>
   <p><strong>Kam skirta ir kokiais atvėjais apsimoka?</strong></p>
-  <p>Šitą reklamos būdą reklamuojame tiems, kam svarbu pasiekti kaip galima didesnį žmonių ratą ir greitai informuoti rinką apie savo naują produktą/paslaugą.</p>
-  <p>Jeigu Jūsų produktas/paslauga yra skirti ne visiems ir Jus nevykdote įvaizdinės kampanijos, tada siūlome Jums pasinaudoti kitomis Ututi reklamos būdais
+  <p>Šitą reklamos būdą rekomenduojame tiems, kam svarbu <em>pasiekti</em> kaip galima <em>didesnį žmonių ratą</em> ir greitai informuoti rinką apie savo naują produktą ar paslaugą.</p>
+  <p>Jeigu Jūsų produktas/paslauga yra skirti ne visiems ir Jus nevykdote įvaizdinės kampanijos, tada siūlome Jums pasinaudoti <a href="#top">kitais reklamos būdais</a> Ututi sistemoje.
   </p>
 
-  <h3>Reklama tikslinei auditorijai</h3>
-  <p>Jūsų produktas/paslauga yra skirtas tik Vilniečiams? Gal norėtumėt pasiekti tik medikams ar teisininkams? O gal norėtumėt reklamą rodyti tik pirmakursiams? Ututi gali Jums padėti. Kadangi Ututi žino kur ir ką studijuoja sistemos naudotojai, reklama gali būti rodoma būtent tiems, kas privalo ją pamatyti.</p>
+  <h3 id="target">Reklama tikslinei auditorijai</h3>
+  <p>
+    <img src="${url('/images/advertising/u-ads.png')}" style="float: right; margin-left: 10px;" alt="Standartinis skydelis" /
+
+    Jūsų produktas ar paslauga yra skirtas <em>tik Vilniečiams</em>? Gal norėtumėt pasiekti tik medikus ar teisininkus? O gal norėtumėt reklamą rodyti <em>tik pirmakursiams</em>? Ututi gali Jums padėti. Kadangi sistema žino kur ir ką studijuoja naudotojai, reklama gali būti <em>rodoma būtent tiems</em>, kas privalo ją pamatyti.</p>
 
   <p><strong>Kaip tai atrodo?</strong></p>
 
-  <p>Jūsų reklama susidarys iš iliustracijos(paveiksliūko), antraštės bei trumpos žinutės. Tai padaro ją sistemos dalimi ir tokia reklama mažiau erzina naudotojus bei jos negali užblokuoti reklomų blokavimo programos (pvz. AdBlock).</p>
+  <p>Jūsų reklama susidarys iš iliustracijos(paveiksliūko), antraštės bei trumpos žinutės. Tai padaro ją sistemos dalimi ir tokia reklama <em>mažiau erzina naudotojus</em> bei jos <em>negali užblokuoti</em> reklomų blokavimo programos (pvz. <a href="https://addons.mozilla.org/en-US/firefox/addon/1865">AdBlock</a>).</p>
 
 [Čia parodome kelis reklamos variantus.]
 
   <p><strong>Kam skirta ir kokiais atvėjais apsimoka?</strong></p>
 
-  <p>Reklama skirta tiems, kas nori pasiekti savo tiksline audotriją, juk Jus nenorite reklamuoti Vilniaus picerijos Klaipėdoje, arba maketavimo paslaugų filologijos studentams. Šitas reklamos būdas apsimoka tada, kai jus galite apibrėžti savo tikslinę auditoriją, nes išvengiate mokėjimu už atsitiktinius paspaudimus/parodymus. Reklamą pamatys būtent tie, kam jį skirta.</p>
+  <p>Reklama skirta tiems, kas nori <em>pasiekti tikslinę audotriją</em>, juk Jus nenorite reklamuoti Vilniaus picerijos Klaipėdoje, arba maketavimo paslaugų filologijos studentams. Šitas reklamos būdas apsimoka tada, kai jus <em>galite apibrėžti savo tikslinę auditoriją</em>, nes išvengiate mokėjimų už atsitiktinius paspaudimus ar/ir parodymus. Reklamą <em>pamatys būtent tie, kam jį skirta</em>.</p>
 
   <p><strong>Kiek tai kainuoja?</strong></p>
 
-  <p>Galimas mokėjimas už paspaudimus (pay for click) arba mokėjimas už parodymus.</p>
+  <p>Galimas <em>mokėjimas už paspaudimus</em> (pay for click) arba <em>mokėjimas už parodymus</em>.</p>
 
-  <p>Vieno paspaudimo kaina: 50 ct.<br />
-    1.000 parodymų kaina: 10 litų.</p>
+  <ul>
+    <li>Vieno paspaudimo kaina: 50 ct.</li>
+    <li>1.000 parodymų kaina: 10 litų.</li>
+  </ul>
 
-  <h3>Context advertising</h3>
+  <h3 id="context">Kontekstinė reklama</h3>
 
-  <p>Jūsų produktas/paslauga yra skirtas tik besidominantiems programavimu ar ekonomika? Ututi gali Jums padėti. Kadangi dauguma Ututi turinio turi priskirtas žymas, Jūsų reklama gali būti rodoma tik šalia nurodyto konteksto (pvz. ten, kur paminėtas programavimas, konpiuteriai, informatika ir pan.).</p>
+  <p>Jei Jūsų produktas ar paslauga yra skirti tik <em>besidominantiems programavimu</em> ar ekonomika, Ututi gali Jums padėti. Dauguma sistemos turinio turi priskirtas žymas, todėl Jūsų reklama gali būti rodoma šalia nurodyto konteksto (pvz. ten, kur paminėtas programavimas, konpiuteriai, informatika ir pan.).</p>
 
   <p><strong>Kaip tai atrodo?</strong></p>
 
@@ -67,18 +77,20 @@
 
   <p><strong>Kam skirta ir kokiais atvėjais apsimoka?</strong></p>
 
-  <p>Reklama skirta tiems, kas nori pasiekti savo tiksline audotriją ir apsimoka tada, kai jus galite apibrėžti kontekstą kuriame privalo būti rodoma jūsų reklama. Taip išvengiasite mokėjimų už atsitiktinius paspaudimus/parodymus. Reklamą pamatys būtent tie, kam jį skirta.</p>
+  <p>Reklama skirta tiems, kas nori <em>pasiekti savo tiksline audotriją</em> ir apsimoka tada, kai jus galite apibrėžti kontekstą kuriame privalo būti rodoma jūsų reklama. Taip išvengiasite mokėjimų už atsitiktinius paspaudimus/parodymus. Reklamą pamatys būtent tie, kam jį skirta.</p>
 
   <p><strong>Kiek tai kainuoja?</strong></p>
 
-  <p>Galimas mokėjimas už paspaudimus (pay for click) arba mokėjimas už parodymus.</p>
+  <p>Galimas <em>mokėjimas už paspaudimus</em> (pay for click) arba <em>mokėjimas už parodymus</em>.</p>
 
-  <p>Vieno paspaudimo kaina: 50 ct.<br />
-    1.000 parodymų kaina: 10 litų.</p>
+  <ul>
+    <li>Vieno paspaudimo kaina: 50 ct.</li>
+    <li>1.000 parodymų kaina: 10 litų.</li>
+  </ul>
 
-  <h3>Reklamos partnerystės sutartis</h3>
+  <h2>Sudomino? Susisiekite su mumis.</h2>
+  <p><strong>Kontaktinis asmuo:</strong> Jaroslav Šatkevič</p>
+  <p><strong>El.paštas:</strong> <a href="mailto: jaro@ututi.com">jaro@ututi.com</a></p>
+  <p><strong>Mob. tel.:</strong> +370 683 79238</p>
 
-  <p>
-    Čia CV online, pigu.lt ir kitiems, kad galės dėti daug reklamų. 
-  <p>
 </div>
