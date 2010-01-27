@@ -299,9 +299,9 @@ msgstr[2] "%(file_count)d nowych plików"
 #, python-format
 msgid "%(page_count)d new page"
 msgid_plural "%(page_count)d new pages"
-msgstr[0] "%(page_count)d nowa strona."
-msgstr[1] "%(page_count)d nowe strony"
-msgstr[2] "%(page_count)d nowych stron"
+msgstr[0] "%(page_count)d nowa notatka."
+msgstr[1] "%(page_count)d nowe notatki"
+msgstr[2] "%(page_count)d nowych notatek"
 
 #, python-format
 msgid "Ututi news: %(file_changes)s and %(page_changes)s"
@@ -375,7 +375,7 @@ msgid "You have no right to delete this folder."
 msgstr "Nie możesz usunąć tej teczki."
 
 msgid "New page"
-msgstr "Nowa strona"
+msgstr "Nowa notatka"
 
 msgid "Confirm the email for Ututi"
 msgstr "Zaakceptuj e-mail Ututi"
@@ -458,28 +458,28 @@ msgstr[2] "%(num)s dni temu"
 
 #, python-format
 msgid "Page %(page_title)s (%(page_url)s) was created."
-msgstr "Została utworzona strona %(page_title)s (%(page_url)s)."
+msgstr "Została utworzona notatka %(page_title)s (%(page_url)s)."
 
 #, python-format
 msgid "Page %(page_title)s was created."
-msgstr "Została utworzona %(page_title)s nowa strona."
+msgstr "Została utworzona %(page_title)s nowa notatka."
 
 #, python-format
 msgid "New page %(link_to_page)s of a subject %(link_to_subject)s was created"
-msgstr " %(link_to_page)s - to nowa strona przedmiotu %(link_to_subject)s "
+msgstr " %(link_to_page)s - to nowa notatka przedmiotu %(link_to_subject)s "
 
 #, python-format
 msgid "Page %(page_title)s (%(page_url)s) was updated."
-msgstr "Strona %(page_title)s (%(page_url)s) została zaktualizowana."
+msgstr "Notatka %(page_title)s (%(page_url)s) została zaktualizowana."
 
 #, python-format
 msgid "Page %(page_title)s was updated."
-msgstr "Strona %(page_title)s została zaktualizowana."
+msgstr "Notatka %(page_title)s została zaktualizowana."
 
 #, python-format
 msgid "Page %(link_to_page)s of a subject %(link_to_subject)s was updated"
 msgstr ""
-"Strona przedmiotu %(link_to_subject)s %(link_to_page)s została "
+"Notatka przedmiotu %(link_to_subject)s %(link_to_page)s została "
 "zaktualizowana"
 
 #, python-format
@@ -1204,7 +1204,7 @@ msgid ""
 "subscription settings in your watched subject page (%(url)s)."
 msgstr ""
 "Jeżeli nie chcesz otrzymywać takich wiadomości - zmień ustawienia "
-"subskrypcji na stronach obserwowanych przez Ciebie przedmiotów (%(url)s)."
+"subskrypcji na stronie obserwowanych przez Ciebie przedmiotów (%(url)s)."
 
 msgid ""
 "We have received a request to reset Your password on the Ututi system. If"
