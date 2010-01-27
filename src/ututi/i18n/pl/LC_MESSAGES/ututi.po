@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-01-14 06:06+0200\n"
+"PO-Revision-Date: 2010-01-26 18:42+0200\n"
 "Last-Translator: eri\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -645,14 +645,17 @@ msgstr ""
 "To jest wersja testowa - to jest tylko kopia informacji! Zmiany przez "
 "Ciebie wprowadzone nie zostaną uwzględnione!"
 
-msgid "Apie Ututi"
-msgstr "O Ututi"
+msgid "About Ututi"
+msgstr ""
 
 msgid "ututi_blog_url"
 msgstr "http://blog.ututi.pl"
 
 msgid "U-blog"
 msgstr "U-blog"
+
+msgid "Advertising"
+msgstr ""
 
 msgid "Terms of use"
 msgstr "Regulamin"
@@ -1182,7 +1185,7 @@ msgstr ""
 "Jeszcze nie jesteś użytkownikiem Ututi, ale możesz zalogować się i "
 "dołączyć do grupy.\n"
 "\n"
-"Aby dołaczyć kliknij na: < %(link)s >\n"
+"Aby dołaczyć kliknij na: < %(invitation_url)s >\n"
 "\n"
 "--\n"
 
@@ -2140,6 +2143,12 @@ msgstr "Na razie niczym."
 msgid "Log in as %(user)s"
 msgstr "Zaloguj się jako %(user)s"
 
+msgid "Full title"
+msgstr "Pełna nazwa"
+
+msgid "e.g. LKKA"
+msgstr "n.p. UWM"
+
 msgid "University"
 msgstr "Uczelnia"
 
@@ -2148,12 +2157,6 @@ msgstr "Wydział"
 
 msgid "Section"
 msgstr "Dział"
-
-msgid "Full title"
-msgstr "Pełna nazwa"
-
-msgid "e.g. LKKA"
-msgstr "n.p. UWM"
 
 msgid "Add university"
 msgstr "Dodaj uczelnię"
@@ -2176,9 +2179,6 @@ msgstr "podaj imię"
 #, python-format
 msgid "You can keep up to %s of private group files here (e.g. pictures)"
 msgstr "Możesz przechowywać tu nawet %s prywatnych plików grupy (n.p. zdjęć)"
-
-msgid "Watched subjects"
-msgstr "Obserwowane przedmioty"
 
 msgid "Login"
 msgstr "Login"
@@ -2245,6 +2245,9 @@ msgstr "Napisz wiadomość na forum grupy (dostępne dla członków grupy)."
 
 msgid "All watched subjects"
 msgstr "Wszystkie obserwowane przedmioty"
+
+msgid "Watched subjects"
+msgstr "Obserwowane przedmioty"
 
 msgid "Your group is not watching any subjects!"
 msgstr "Twoja grupa nie śledzi żadnego przedmiotu!"

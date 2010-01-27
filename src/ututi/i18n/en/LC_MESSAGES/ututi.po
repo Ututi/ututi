@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-01-13 05:32+0200\n"
+"PO-Revision-Date: 2010-01-26 18:42+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -611,13 +611,16 @@ msgid ""
 "Changes you make will not be persisted!"
 msgstr ""
 
-msgid "Apie Ututi"
+msgid "About Ututi"
 msgstr ""
 
 msgid "ututi_blog_url"
 msgstr ""
 
 msgid "U-blog"
+msgstr ""
+
+msgid "Advertising"
 msgstr ""
 
 msgid "Terms of use"
@@ -1353,9 +1356,6 @@ msgstr ""
 msgid "Create a new subject"
 msgstr ""
 
-msgid "Watched subjects"
-msgstr ""
-
 msgid "Congratulations, you have created a new group!"
 msgstr ""
 
@@ -1929,6 +1929,12 @@ msgstr ""
 msgid "Log in as %(user)s"
 msgstr ""
 
+msgid "Full title"
+msgstr ""
+
+msgid "e.g. LKKA"
+msgstr ""
+
 msgid "University"
 msgstr ""
 
@@ -1936,12 +1942,6 @@ msgid "Department"
 msgstr ""
 
 msgid "Section"
-msgstr ""
-
-msgid "Full title"
-msgstr ""
-
-msgid "e.g. LKKA"
 msgstr ""
 
 msgid "Add university"
@@ -2027,6 +2027,9 @@ msgid "Write an email to the group's forum - accessible by all your groupmates."
 msgstr ""
 
 msgid "All watched subjects"
+msgstr ""
+
+msgid "Watched subjects"
 msgstr ""
 
 msgid "Your group is not watching any subjects!"
