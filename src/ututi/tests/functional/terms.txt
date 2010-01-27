@@ -1,6 +1,8 @@
 Terms of use
 ============
 
+Testing Lithuanian pages.
+
     >>> from pylons import config
     >>> config['tpl_lang'] = 'lt'
     >>> browser = Browser()
@@ -12,6 +14,11 @@ Terms of use
     4. Atsakomybės ribojimas
     5. Sutikimas su licencija (licencijos priėmimas)
     >>> browser.open('http://localhost/about')
+    >>> browser.open('http://localhost/advertising')
+
+
+Testing Polish pages.
+
     >>> from pylons import config
     >>> config['tpl_lang'] = 'pl'
     >>> browser = Browser()
@@ -23,8 +30,13 @@ Terms of use
     4. Ograniczenia odpowiedzialności
     5. Akceptacja regulaminu
     >>> browser.open('http://localhost/about')
+
+
+Testing English pages.
+
     >>> from pylons import config
     >>> config['tpl_lang'] = 'en'
     >>> browser = Browser()
     >>> browser.open('http://localhost/terms')
     >>> browser.open('http://localhost/about')
+    >>> browser.open('http://localhost/advertising')
