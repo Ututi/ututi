@@ -62,28 +62,6 @@
     <li>1.000 parodymų kaina: 10 litų.</li>
   </ul>
 
-  <h3 id="context">Kontekstinė reklama</h3>
-
-  <p>Jei Jūsų produktas ar paslauga yra skirti tik <em>besidominantiems programavimu</em> ar ekonomika, Ututi gali Jums padėti. Dauguma sistemos turinio turi priskirtas žymas, todėl Jūsų reklama gali būti rodoma šalia nurodyto konteksto (pvz. ten, kur paminėtas programavimas, konpiuteriai, informatika ir pan.).</p>
-
-  <p><strong>Kaip tai atrodo?</strong></p>
-
-  <p>Jūsų reklama susidės iš iliustracijos(paveiksliuko), antraštės bei trumpos žinutės. Reklama tampa panaši į sistemos elementą, todėl mažiau erzina naudotojus. Be to, jos negali užblokuoti reklamų blokavimo programos (pvz. AdBlock).
-  </p>
-
-  <p><strong>Kam skirta ir kokiais atvejais naudinga?</strong></p>
-
-  <p>Reklama skirta tiems, kas nori <em>pasiekti savo tikslinę auditoriją</em> ir naudinga tada, kai galima apibrėžti kontekstą, kuriame privalo būti rodoma reklama. Taip išvengsite mokėjimų už atsitiktinius paspaudimus bei parodymus. Reklamą pamatys būtent tie, kam ji skirta.</p>
-
-  <p><strong>Kiek tai kainuoja?</strong></p>
-
-  <p>Galimas <em>mokėjimas už paspaudimus</em> (pay for click) arba <em>mokėjimas už parodymus</em>.</p>
-
-  <ul>
-    <li>Vieno paspaudimo kaina: 50 ct.</li>
-    <li>1.000 parodymų kaina: 10 litų.</li>
-  </ul>
-
   <h2>Sudomino? Susisiekite su mumis.</h2>
   <p><strong>Kontaktinis asmuo:</strong> Jaroslav Šatkevič</p>
   <p><strong>El.paštas:</strong> <a href="mailto: jaro@ututi.com">jaro@ututi.com</a></p>
