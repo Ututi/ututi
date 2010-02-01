@@ -213,7 +213,8 @@ class GroupMailingListMessage(ContentItem):
         if g is not None:
             group_id = g.id
         else:
-            group_id = None #??? is this right?
+            from pylons.controllers.util import abort
+            abort(404)
 
         if cls.get(message_id, group_id):
             raise MessageAlreadyExists(message_id, group_id)
