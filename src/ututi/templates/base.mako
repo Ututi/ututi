@@ -95,7 +95,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
   </div>
   <br style="clear: right; height: 0; margin: 0; padding: 0;"/>
   <div class="form-field">
-    <a class="small-link small" href="${url(controller='home', action='pswrecovery')}">${_('forgotten password?')}</a>
+    <a rel="nofollow" class="small-link small" href="${url(controller='home', action='pswrecovery')}">${_('forgotten password?')}</a>
   </div>
 </form>
 <script type="text/javascript">
@@ -158,11 +158,11 @@ ${h.javascript_link('/javascripts/forms.js')|n}
          u_url = url('/')
   %>
   %if breadcrumbs:
-  <a ${track_event|n} href="${u_url}" title="Ututi" id="ulogo">
+  <a rel="nofollow" ${track_event|n} href="${u_url}" title="Ututi" id="ulogo">
     ${h.image('/images/logo_small.gif', alt='logo')|n}
   </a>
   %else:
-  <a href="${u_url}" title="Ututi" id="ulogo">
+  <a rel="nofollow" href="${u_url}" title="Ututi" id="ulogo">
     ${h.image('/images/logo.gif', alt='logo')|n}
   </a>
   %endif
