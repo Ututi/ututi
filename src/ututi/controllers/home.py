@@ -8,7 +8,8 @@ from routes.util import redirect_to
 from formencode import Schema, validators, Invalid, All, htmlfill
 from webhelpers import paginate
 
-from pylons import request, c, url, session, config
+from paste.util.converters import asbool
+from pylons import request, c, url, session, config, response
 from pylons.decorators import validate
 from pylons.controllers.util import abort
 from pylons.i18n import _, ungettext
@@ -137,6 +138,13 @@ class HomeController(UniversityListMixin):
 
     def terms(self):
         return render_lang('/terms.mako')
+
+    def robots(self):
+        response.headers['Content-Type'] = 'text/plain'
+        if asbool(config.get('testing', False)):
+            return 'User-agent: *\nDisallow: /'
+        else:
+            return 'User-agent: *\nAllow: /'
 
     def login(self):
         email = request.POST.get('login')
