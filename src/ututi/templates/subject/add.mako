@@ -31,9 +31,7 @@ ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
         <input type="text" id="lecturer" name="lecturer" class="line"/>
     </div></div>
   </div>
-  <div class="form-field">
-    ${location_widget(2)}
-  </div>
+  ${location_widget(2)}
   <br class="clear-left"/>
   <div class="form-field">
     <label for="tags">${_('Tags')}</label>
