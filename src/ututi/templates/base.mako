@@ -285,14 +285,17 @@ ${h.javascript_link('/javascripts/forms.js')|n}
       </div>
 
       <div id="footer" class="small">
-        Copyright <a href="http://www.nous.lt">UAB „Nous“</a>
+        <%
+           nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '')
+        %>
+        Copyright <a ${nofollow} href="http://www.nous.lt">UAB „Nous“</a>
         <div id="footer-links">
-          <a ${request.path != '/' and  'rel="nofollow"' or ''} href="${url(controller='home', action='about')}">${_('About Ututi')}</a> |
-          <a ${request.path != '/' and  'rel="nofollow"' or ''} href="${_('ututi_blog_url')}">${_('U-blog')}</a> |
+          <a ${nofollow} href="${url(controller='home', action='about')}">${_('About Ututi')}</a> |
+          <a ${nofollow} href="${_('ututi_blog_url')}">${_('U-blog')}</a> |
 	  %if c.tpl_lang in ['lt']:
-             <a ${request.path != '/' and  'rel="nofollow"' or ''} href="${url(controller='home', action='advertising')}">${_('Advertising')}</a> |
+             <a ${nofollow} href="${url(controller='home', action='advertising')}">${_('Advertising')}</a> |
 	  %endif
-          <a ${request.path != '/' and  'rel="nofollow"' or ''} href="${url(controller='home', action='terms')}">${_('Terms of use')}</a>
+          <a ${nofollow} href="${url(controller='home', action='terms')}">${_('Terms of use')}</a>
         </div>
 
       </div>
