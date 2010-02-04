@@ -717,12 +717,14 @@ class LimitedUploadMixin(object):
     @property
     def upload_status(self):
         """Information on the group's file upload limits."""
-        if self.paid:
-            return self.CAN_UPLOAD
-
         upload_status = self.free_size > 0 and self.CAN_UPLOAD or self.LIMIT_REACHED
 
         have_root_folder = len(self.folders) == 1
+        if self.paid and have_root_folder:
+            return self.CAN_UPLOAD_SINGLE_FOLDER
+        elif self.paid:
+            return self.CAN_UPLOAD
+
         can_upload = upload_status == self.CAN_UPLOAD
         if can_upload and have_root_folder:
             return self.CAN_UPLOAD_SINGLE_FOLDER
@@ -1124,7 +1126,6 @@ class Subject(ContentItem, FolderMixin, LimitedUploadMixin):
 
         events = events.order_by(Event.created.desc()).limit(limit).all()
         return events
-
 
 pages_table = None
 
