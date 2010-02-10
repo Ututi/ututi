@@ -46,7 +46,7 @@ class SearchBaseController(BaseController):
             c.results = paginate.Page(
                 query,
                 page=int(request.params.get('page', 1)),
-                items_per_page = 20,
+                items_per_page = 30,
                 item_count = search_query_count(query),
                 **search_params)
             c.searched = True
