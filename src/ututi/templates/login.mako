@@ -54,7 +54,7 @@ ${c.message|n}
       </div>
       <br style="clear: left; height: 0; margin: 0; padding: 0;"/>
       <div class="form-field">
-        <a class="small-link small" href="${url(controller='home', action='pswrecovery')}">${_('forgotten password?')}</a>
+        <a class="small-link small" href="${url(controller='home', action='pswrecovery')}" rel="nofollow">${_('forgotten password?')}</a>
       </div>
     </form>
     <script type="text/javascript">
