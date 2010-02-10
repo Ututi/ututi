@@ -144,7 +144,10 @@ class HomeController(UniversityListMixin):
         if asbool(config.get('testing', False)):
             return 'User-agent: *\nDisallow: /'
         else:
-            return 'User-agent: *\nAllow: /'
+            robots = ['User-agent: *',
+                      'Disallow: /password',
+                      'Allow: /']
+            return '\n'.join(robots)
 
     def login(self):
         email = request.POST.get('login')
