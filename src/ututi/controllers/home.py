@@ -145,7 +145,10 @@ class HomeController(UniversityListMixin):
             return 'User-agent: *\nDisallow: /'
         else:
             robots = ['User-agent: *',
-                      'Disallow: /password',
+                      'Allow: /',
+                      '',
+                      'User-agent: Googlebot',
+                      'Disallow: /passwords',
                       'Allow: /']
             return '\n'.join(robots)
 
