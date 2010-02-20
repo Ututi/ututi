@@ -55,6 +55,21 @@
   </div>
 </div>
 
+%if c.came_from_search:
+  <script type="text/javascript">
+    <!--
+       google_ad_client = "pub-1809251984220343";
+       /* 468x60, sukurta 10.2.3 */
+       google_ad_slot = "3543124516";
+       google_ad_width = 468;
+       google_ad_height = 60;
+       //-->
+  </script>
+  <script type="text/javascript"
+	  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+  </script>
+%endif
+
 <%files:file_browser obj="${c.subject}", title="${_('Subject files')}" />
 
 <div id="subject_pages" class="section">
