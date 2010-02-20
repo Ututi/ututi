@@ -11,7 +11,7 @@
 </%def>
 
 <%def name="title()">
-  Ututi: ${c.location.title}
+  ${c.location.title} (${c.location.title_short}) - ${c.location.parent.title_short}
 </%def>
 
 <%def name="head_tags()">

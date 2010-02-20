@@ -12,7 +12,7 @@
 </%def>
 
 <%def name="title()">
-  Ututi: ${c.location.title}
+  ${c.location.title}
 </%def>
 
 <%def name="head_tags()">
