@@ -34,36 +34,38 @@
 
 <%def name="ututi_prizes_portlet()">
 
-## %if c.tpl_lang in ['lt']:
-##
-## <%
-##    path = []
-##    location = None
-##
-##    if getattr(c, 'object_location', None):
-##        location = c.object_location
-##    elif getattr(c, 'user', None):
-##        location = c.user.location
-##
-##    if location is not None:
-##        path = location.path
-##
-##    location_path = '/'.join(path)
-## %>
-## %if location_path in ['vu/chf', 'vu/ef', 'vu/ff', 'vu/gmf', 'vu/mif', 'vgtu/ef', 'vgtu/vvf', 'mru/sif']:
-## <%self:portlet id="barcamp_portlet" portlet_class="border-less">
-## <%def name="header()">
-## </%def>
-## <div class="structured_info">
-##   <div class="bunner">
-##     <a href="http://barcamp.lt/2010/01/mini-barcamp-vilnius-3/">
-##       <img src="${url('/images/bunners/barcamp.png')}" alt="" />
-##     </a>
-##   </div>
-## </div>
-## </%self:portlet>
-## %endif
-## %endif
+ %if c.tpl_lang in ['lt']:
+
+ <%
+    path = []
+    location = None
+
+    if getattr(c, 'object_location', None):
+        location = c.object_location
+    elif getattr(c, 'location', None):
+        location = c.location
+    elif getattr(c, 'user', None):
+        location = c.user.location
+
+    if location is not None:
+        path = location.path
+
+    location_path = path
+ %>
+ %if True or 'ktu' in location_path:
+ <%self:portlet id="barcamp_portlet" portlet_class="border-less">
+ <%def name="header()">
+ </%def>
+ <div class="structured_info">
+   <div class="bunner">
+     <a href="http://barcamp.lt/2010/01/mini-barcamp-vilnius-3/">
+       <img src="${url('/images/bunners/barcamp.png')}" alt="" />
+     </a>
+   </div>
+ </div>
+ </%self:portlet>
+ %endif
+ %endif
 
 %if c.tpl_lang in ['lt', 'pl']:
 <%self:portlet id="dalintis_portlet" portlet_class="border-less">
