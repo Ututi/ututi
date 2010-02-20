@@ -58,7 +58,7 @@
  </%def>
  <div class="structured_info">
    <div class="bunner">
-     <a href="http://barcamp.lt/2010/01/mini-barcamp-vilnius-3/">
+     <a href="http://barcamp.lt/2010/02/barcamp-atkeliauja-i-kauna/">
        <img src="${url('/images/bunners/barcamp.png')}" alt="" />
      </a>
    </div>
