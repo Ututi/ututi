@@ -59,6 +59,7 @@ class BaseController(WSGIController):
         c.google_tracker = config['google_tracker']
 
         c.came_from = request.GET.get('came_from', '')
+        c.came_from_search = False #if the user came from google search
 
         lang = get_lang()
         if not lang:
@@ -77,6 +78,9 @@ class BaseController(WSGIController):
             r = re.compile('www\.google\.[a-zA-Z]{2,4}/[url|search]')
             if r.search(referrer) is not None:
                 response.set_cookie('camefromsearch', 'yes', expires=3600)
+                c.came_from_search = True
+            else:
+                c.came_from_search = request.cookies.get('camefromsearch', None) == 'yes'
 
         try:
             return WSGIController.__call__(self, environ, start_response)
