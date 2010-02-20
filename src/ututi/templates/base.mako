@@ -238,7 +238,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
     <meta name="verify-v1" content="TSVWuU2veWvlR1F0wRgzprUz3gMtHFWbGKmOLQ3cmWQ=" />
     ${self.head_tags()}
     <title>
-      ${_('UTUTI')} - ${self.title()}
+      ${self.title()} - ${_('UTUTI')}
     </title>
     <script type="text/javascript">
       var _gaq = _gaq || [];

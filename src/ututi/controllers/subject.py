@@ -100,7 +100,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
         file = File.get(file_id)
         c.serve_file = file
         c.breadcrumbs = [{'link': subject.url(),
-                              'title': subject.title}]
+                          'title': subject.title}]
         return render('subject/home.mako')
 
     def _add_form(self):
