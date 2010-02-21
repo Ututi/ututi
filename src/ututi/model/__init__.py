@@ -311,6 +311,12 @@ def setup_orm(engine):
                                                          secondary=group_watched_subjects_table),
                             'raw_logo': deferred(groups_table.c.logo)})
 
+    orm.mapper(GroupSubjectMonitoring, group_watched_subjects_table,
+               properties ={'subject': relation(Subject),
+                            'group': relation(Group)
+                            })
+
+
     global group_invitations_table
     group_invitations_table = Table("group_invitations", meta.metadata,
                                     autoload=True,
@@ -754,6 +760,12 @@ class LimitedUploadMixin(object):
 
 group_watched_subjects_table = None
 groups_table = None
+
+class GroupSubjectMonitoring(object):
+
+    def __init__(self, group, subject, ignored=False):
+        self.group, self.subject, self.ignored = group, subject, ignored
+
 
 class Group(ContentItem, FolderMixin, LimitedUploadMixin):
 

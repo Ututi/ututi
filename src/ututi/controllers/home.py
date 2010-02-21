@@ -16,6 +16,8 @@ from pylons.i18n import _, ungettext
 from pylons.templating import render_mako_def
 
 from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.sql import func
+from sqlalchemy.sql.expression import desc
 
 from ututi.lib.base import BaseController, render, render_lang
 import ututi.lib.helpers as h
@@ -25,6 +27,7 @@ from ututi.lib.messaging import Message
 from ututi.lib.security import ActionProtector
 from ututi.lib.validators import UniqueEmail
 from ututi.model import meta, User, Email, PendingInvitation, LocationTag, Payment
+from ututi.model import UserSubjectMonitoring, GroupSubjectMonitoring, Subject
 
 log = logging.getLogger(__name__)
 
@@ -135,6 +138,25 @@ class HomeController(UniversityListMixin):
 
     def advertising(self):
         return render_lang('/advertising.mako')
+
+    def statistics(self):
+        c.most_watched_by_user = meta.Session.query(UserSubjectMonitoring.subject_id, func.count(UserSubjectMonitoring.user_id))\
+            .group_by(UserSubjectMonitoring.subject_id)\
+            .order_by(desc(func.count(UserSubjectMonitoring.user_id))).limit(20)
+        c.most_watched_by_group = meta.Session.query(GroupSubjectMonitoring.subject_id, func.count(GroupSubjectMonitoring.group_id))\
+            .group_by(GroupSubjectMonitoring.subject_id)\
+            .order_by(desc(func.count(GroupSubjectMonitoring.group_id))).limit(20)
+
+        subjects_ids, group_subjects_ids = [], []
+        for a in c.most_watched_by_user: subjects_ids.append(a.subject_id)
+        for a in c.most_watched_by_group: group_subjects_ids.append(a.subject_id)
+ 
+        c.subjects = meta.Session.query(Subject)\
+            .filter(Subject.id.in_(subjects_ids))
+        c.group_subjects = meta.Session.query(Subject)\
+            .filter(Subject.id.in_(group_subjects_ids))
+
+        return render('/statistics.mako')
 
     def terms(self):
         return render_lang('/terms.mako')

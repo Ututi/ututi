@@ -26,7 +26,8 @@ def make_map():
     /register
     /home
     /search
-
+    /advertising
+    /statistics
     """
 
     map = Mapper(directory=config['pylons.paths']['controllers'],
@@ -46,6 +47,7 @@ def make_map():
     map.connect('/terms', controller='home', action='terms')
     map.connect('/about', controller='home', action='about')
     map.connect('/advertising', controller='home', action='advertising')
+    map.connect('/statistics', controller='home', action='statistics')
     map.connect('/robots.txt', controller='home', action='robots')
 
     # essential ututi component routes go here
