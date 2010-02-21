@@ -26,7 +26,7 @@ from ututi.lib.emails import email_confirmation_request, email_password_reset
 from ututi.lib.messaging import Message
 from ututi.lib.security import ActionProtector
 from ututi.lib.validators import UniqueEmail
-from ututi.model import meta, User, Email, PendingInvitation, LocationTag, Payment
+from ututi.model import meta, User, Email, PendingInvitation, LocationTag, Payment, get_supporters
 from ututi.model import UserSubjectMonitoring, GroupSubjectMonitoring, Subject
 
 log = logging.getLogger(__name__)
@@ -122,6 +122,9 @@ class UniversityListMixin(BaseController):
 
 
 class HomeController(UniversityListMixin):
+
+    def __before__(self):
+        c.ututi_supporters = get_supporters()
 
     def index(self):
         if c.user is not None:

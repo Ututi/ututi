@@ -8,6 +8,7 @@ I am visiting them so they would get translated properly.
     >>> browser.open('http://localhost/group/moderators/files')
     >>> browser.open('http://localhost/profile/files')
     >>> browser.open('http://localhost/tour')
+    >>> browser.open('http://localhost/statistics')
 
 Polish frontpage:
     >>> from pylons import config
