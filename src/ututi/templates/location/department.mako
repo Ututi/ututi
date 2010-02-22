@@ -11,7 +11,7 @@
 </%def>
 
 <%def name="title()">
-  ${c.location.title} (${c.location.title_short}) - ${c.location.parent.title_short}
+  ${c.location.parent.title_short} ${c.location.title} - ${_('subjects list')}
 </%def>
 
 <%def name="head_tags()">
@@ -19,6 +19,8 @@ ${parent.head_tags()}
 ${h.stylesheet_link('/stylesheets/location.css')|n}
 </%def>
 
+
+<h1 class="small-h1"> ${c.location.parent.title_short} ${c.location.title}</h1>
 ${search_form(c.text, c.obj_type, c.location.hierarchy,
   parts=['obj_type', 'text'], target=c.location.url(), js=True,
   js_target=c.location.url(action='search_js'))}

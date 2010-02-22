@@ -91,9 +91,14 @@ h1,
   font-weight: normal;
 }
 
+h1.small-h1 {
+  font-size: 1.6em;
+}
+
 h2,
 .huge {
   font-size: 1.6em;
+  font-weight: normal;
 }
 
 h3,
