@@ -52,7 +52,7 @@
 
     location_path = path
  %>
- %if True or 'ktu' in location_path:
+ %if 'ktu' in location_path:
  <%self:portlet id="barcamp_portlet" portlet_class="border-less">
  <%def name="header()">
  </%def>
