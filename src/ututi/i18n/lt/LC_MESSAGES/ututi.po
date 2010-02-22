@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-01-26 18:48+0300\n"
+"PO-Revision-Date: 2010-02-22 16:43+0300\n"
 "Last-Translator: Jaroslav Šatkevič <jaro@akl.lt>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
@@ -632,6 +632,18 @@ msgstr "Ką čia galima veikti?"
 
 msgid "Store <em>study materials</em> and pass them on for future generations, create <em>academic groups</em>       and communicate with groupmates."
 msgstr "Kelti <em>studijų medžiagą</em>, perduoti tai ateities kartoms, kurti <em>akademines grupes</em> ir bendrauti su grupės draugais."
+
+msgid "Statistics"
+msgstr "Statistika"
+
+msgid "Most popular subjects by users"
+msgstr "Populiariausi dalykai"
+
+msgid "watchers"
+msgstr "stebėtojai"
+
+msgid "Most popular subjects by groups"
+msgstr "Grupių dažniausiai stebimi dalykai"
 
 msgid "Found out enough?"
 msgstr "Sužinojai pakankamai?"
@@ -1420,6 +1432,9 @@ msgstr "Įveskite savo el. pašto adresą"
 
 msgid "Recover password"
 msgstr "Atstatyti slaptažodį"
+
+msgid "subjects list"
+msgstr "dalykų sąrašas"
 
 msgid "Did not find what you were looking for?"
 msgstr "Nėra to, ko ieškojote? "
