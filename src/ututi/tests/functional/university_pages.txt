@@ -21,8 +21,10 @@ We should be able to click on a link that leads us to the page of the faculty.
     >>> browser.url
     'http://localhost/school/vu'
 
-    >>> browser.printQuery('//h2/text()')
+    >>> browser.printQuery('//h1/text()')
     vu department list
+
+    >>> browser.printQuery('//h2/text()')
     Search
 
     >>> browser.printQuery('id("faculties-list")//div[@class="title"]/a/text()')
