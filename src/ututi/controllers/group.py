@@ -227,7 +227,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
 
     @group_action
     def index(self, group):
-        if check_crowds(["member", "admin", "moderator"]):
+        if check_crowds(["member", "admin"]):
             redirect_to(controller='group', action=c.group.default_tab, id=group.group_id)
         else:
             redirect_to(controller='group', action='home', id=group.group_id)
@@ -242,7 +242,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
 
     @group_action
     def home(self, group):
-        if check_crowds(["member", "admin", "moderator"]):
+        if check_crowds(["member", "admin"]):
             if request.params.get('do_not_watch'):
                 group.wants_to_watch_subjects = False
                 meta.Session.commit()
@@ -255,7 +255,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             return render('group/home_public.mako')
 
     @group_action
-    @ActionProtector("admin", "moderator", "member")
+    @ActionProtector("admin", "member")
     def welcome(self, group):
         self._set_home_variables(group)
         return render('group/welcome.mako')
@@ -293,7 +293,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         return render('group/edit_page.mako')
 
     @group_action
-    @ActionProtector("admin", "moderator", "member")
+    @ActionProtector("admin", "member")
     def edit_page(self, group):
         c.breadcrumbs.append(self._actions('page'))
         defaults = {
@@ -304,7 +304,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
 
     @group_action
     @validate(schema=GroupPageForm, form='_edit_page_form')
-    @ActionProtector("admin", "moderator", "member")
+    @ActionProtector("admin", "member")
     def update_page(self, group):
         page_content = self.form_result['page_content']
         if page_content is None:
@@ -316,7 +316,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         redirect_to(controller='group', action='page', id=group.group_id)
 
     @group_action
-    @ActionProtector("member", "admin", "moderator")
+    @ActionProtector("member", "admin")
     def files(self, group):
         file_id = request.GET.get('serve_file')
         file = File.get(file_id)
@@ -395,7 +395,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         return roles
 
     @group_action
-    @ActionProtector("member", "admin", "moderator")
+    @ActionProtector("member", "admin")
     def members(self, group):
         c.breadcrumbs.append(self._actions('members'))
         c.members = []
@@ -424,7 +424,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         return render('group/edit.mako')
 
     @group_action
-    @ActionProtector("admin", "moderator")
+    @ActionProtector("admin")
     def edit(self, group):
         defaults = {
             'title': group.title,
@@ -453,7 +453,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
 
     @group_action
     @validate(EditGroupForm, form='_edit_form')
-    @ActionProtector("admin", "moderator")
+    @ActionProtector("admin")
     def update(self, group):
         values = self.form_result
         group.title = values['title']
@@ -498,35 +498,35 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             return serve_image(stream, width, height)
 
     @group_action
-    @ActionProtector("member", "admin", "moderator")
+    @ActionProtector("member", "admin")
     def upload_file(self, group):
         return self._upload_file(group)
 
     @group_action
-    @ActionProtector("member", "admin", "moderator")
+    @ActionProtector("member", "admin")
     def upload_file_short(self, group):
         return self._upload_file_short(group)
 
 
     @group_action
-    @ActionProtector("member", "admin", "moderator")
+    @ActionProtector("member", "admin")
     def create_folder(self, group):
         self._create_folder(group)
         redirect_to(request.referrer)
 
     @group_action
-    @ActionProtector("admin", "moderator")
+    @ActionProtector("admin")
     def delete_folder(self, group):
         self._delete_folder(group)
         redirect_to(request.referrer)
 
     @group_action
-    @ActionProtector("member", "admin", "moderator")
+    @ActionProtector("member", "admin")
     def js_create_folder(self, group):
         return self._create_folder(group)
 
     @group_action
-    @ActionProtector("admin", "moderator")
+    @ActionProtector("admin")
     def js_delete_folder(self, group):
         return self._delete_folder(group)
 
@@ -545,13 +545,13 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         meta.Session.commit()
 
     @group_action
-    @ActionProtector("admin", "moderator", "member")
+    @ActionProtector("admin", "member")
     def watch_subject(self, group):
         self._watch_subject(group)
         redirect_to(request.referrer)
 
     @group_action
-    @ActionProtector("admin", "moderator", "member")
+    @ActionProtector("admin", "member")
     def js_watch_subject(self, group):
         self._watch_subject(group)
         return render_mako_def('group/subjects.mako',
@@ -563,19 +563,19 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
                             new = True)
 
     @group_action
-    @ActionProtector("admin", "moderator", "member")
+    @ActionProtector("admin", "member")
     def unwatch_subject(self, group):
         self._unwatch_subject(group)
         redirect_to(request.referrer)
 
     @group_action
-    @ActionProtector("admin", "moderator", "member")
+    @ActionProtector("admin", "member")
     def js_unwatch_subject(self, group):
         self._unwatch_subject(group)
         return "OK"
 
     @group_action
-    @ActionProtector("member", "admin", "moderator")
+    @ActionProtector("member", "admin")
     def add_subject_step(self, group):
         c.step = True
         return render('group/add_subject.mako')
@@ -592,26 +592,26 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
 
     @validate(schema=NewSubjectForm, form='add_subject_step')
     @group_action
-    @ActionProtector("member", "admin", "moderator")
+    @ActionProtector("member", "admin")
     def create_subject_step(self, group):
         self._createSubject(group)
         redirect_to(group.url(action='subjects_step'))
 
     @group_action
-    @ActionProtector("member", "admin", "moderator")
+    @ActionProtector("member", "admin")
     def add_subject(self, group):
         return render('group/add_subject.mako')
 
     @validate(schema=NewSubjectForm, form='add_subject')
     @group_action
-    @ActionProtector("member", "admin", "moderator")
+    @ActionProtector("member", "admin")
     def create_subject(self, group):
         self._createSubject(group)
         redirect_to(group.url(action='subjects'))
 
     @validate(schema=SearchSubmit, form='subjects', post_only = False, on_get = True)
     @group_action
-    @ActionProtector("member", "admin", "moderator")
+    @ActionProtector("member", "admin")
     def subjects_step(self, group):
         c.step = True
         c.search_target = url(controller = 'group', action='subjects_step', id = group.group_id)
@@ -619,7 +619,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
 
     @validate(schema=SearchSubmit, form='subjects', post_only = False, on_get = True)
     @group_action
-    @ActionProtector("member", "admin", "moderator")
+    @ActionProtector("member", "admin")
     def subjects(self, group):
         c.breadcrumbs.append(self._actions('subjects'))
         c.list_open = request.GET.get('list', '') == 'open'
@@ -630,7 +630,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         The basis for views displaying all the subjects the group is already watching and allowing
         members to choose new subjects for the group.
         """
-        if check_crowds(["admin", "moderator", "member"]):
+        if check_crowds(["admin", "member"]):
             c.search_target = url(controller = 'group', action='subjects', id = group.group_id)
 
             #retrieve search parameters
@@ -669,7 +669,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
 
     @group_action
     @validate(schema=GroupInviteForm, form='members', post_only = False, on_get = True)
-    @ActionProtector("member", "admin", "moderator")
+    @ActionProtector("member", "admin")
     def invite_members(self, group):
         """Invite new members to the group."""
         if hasattr(self, 'form_result'):
@@ -679,7 +679,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
 
     @group_action
     @validate(schema=GroupInviteCancelForm, form='members')
-    @ActionProtector("admin", "moderator")
+    @ActionProtector("admin")
     def cancel_invitation(self, group):
         """Cancel and delete an invitation that was sent out to the user."""
         if hasattr(self, 'form_result'):
@@ -695,7 +695,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
 
     @validate(schema=GroupInviteForm, form='invite_members_step')
     @group_action
-    @ActionProtector("member", "admin", "moderator")
+    @ActionProtector("member", "admin")
     def invite_members_step(self, group):
 
         if hasattr(self, 'form_result'):
@@ -930,7 +930,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
 
     @jsonify
     @group_action
-    @ActionProtector("admin", "moderator", "member")
+    @ActionProtector("admin", "member")
     def file_info(self, group):
         """Information on the group's usage of the files area."""
         info = {
@@ -943,7 +943,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
 
     @jsonify
     @group_action
-    @ActionProtector("admin", "moderator", "member")
+    @ActionProtector("admin", "member")
     def upload_status(self, group):
         """
            Information on the group's file upload limits.
@@ -956,7 +956,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         return {'status' : group.upload_status, "section_id" : section_id}
 
     @group_action
-    @ActionProtector("member", "admin", "moderator")
+    @ActionProtector("member", "admin")
     def pay(self, group):
         payment_forms = []
         payment_types = [_('month'), _('3 months'), _('6 months')]
@@ -973,18 +973,18 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         return render_lang('group/pay.mako')
 
     @group_action
-    @ActionProtector("member", "admin", "moderator")
+    @ActionProtector("member", "admin")
     def pay_accept(self, group):
         c.breadcrumbs.append(self._actions('home'))
         return render('group/pay_accept.mako')
 
     @group_action
-    @ActionProtector("member", "admin", "moderator")
+    @ActionProtector("member", "admin")
     def pay_cancel(self, group):
         c.breadcrumbs.append(self._actions('home'))
         return render('group/pay_cancel.mako')
 
     @group_action
-    @ActionProtector("member", "admin", "moderator")
+    @ActionProtector("member", "admin")
     def payment_deferred(self, group):
         return render('group/payment_deferred.mako')

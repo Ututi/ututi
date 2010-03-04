@@ -114,14 +114,14 @@ class GroupforumController(GroupControllerBase):
         return messages
 
     @group_action
-    @ActionProtector("member", "admin", "moderator")
+    @ActionProtector("member", "admin")
     def index(self, group):
         c.breadcrumbs.append(self._actions('forum'))
         c.messages = self._top_level_messages(group)
         return render('groupforum/index.mako')
 
     @group_forum_action
-    @ActionProtector("member", "admin", "moderator")
+    @ActionProtector("member", "admin")
     def thread(self, group, thread):
         file_id = request.GET.get('serve_file')
         file = File.get(file_id)
@@ -134,7 +134,7 @@ class GroupforumController(GroupControllerBase):
 
     @group_forum_action
     @validate(NewReplyForm)
-    @ActionProtector("member", "admin", "moderator")
+    @ActionProtector("member", "admin")
     def reply(self, group, thread):
         last_post = thread.posts[-1]
         message = send_email(c.user.emails[0].email,
@@ -157,7 +157,7 @@ class GroupforumController(GroupControllerBase):
         return render('groupforum/new.mako')
 
     @group_action
-    @ActionProtector("member", "admin", "moderator")
+    @ActionProtector("member", "admin")
     def new_thread(self, group):
         return htmlfill.render(self._new_thread_form())
 
@@ -178,7 +178,7 @@ class GroupforumController(GroupControllerBase):
 
     @group_action
     @validate(NewMailForm, form='_new_thread_form')
-    @ActionProtector("member", "admin", "moderator")
+    @ActionProtector("member", "admin")
     def post(self, group):
         message = send_email(c.user.emails[0].email,
                              c.group.list_address,
@@ -196,7 +196,7 @@ class GroupforumController(GroupControllerBase):
 
     @groupforum_file_action
     @set_login_url
-    @ActionProtector('member', 'admin', 'moderator')
+    @ActionProtector('member', 'admin')
     def file(self, group, message, file):
         if c.user:
             c.user.download(file)

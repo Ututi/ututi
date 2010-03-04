@@ -47,21 +47,21 @@ class GroupfileController(BasefilesController):
 
     @group_file_action
     @set_login_url
-    @ActionProtector('member', 'admin', 'moderator')
+    @ActionProtector('member', 'admin')
     def get(self, group, file):
         return self._get(file)
 
     @group_file_action
-    @ActionProtector('admin', 'moderator')
+    @ActionProtector('admin')
     def delete(self, group, file):
         return self._delete(file)
 
     @group_file_action
-    @ActionProtector('member', 'admin', 'moderator')
+    @ActionProtector('member', 'admin')
     def move(self, group, file):
         return self._move(group, file)
 
     @group_file_action
-    @ActionProtector('member', 'admin', 'moderator')
+    @ActionProtector('member', 'admin')
     def copy(self, group, file):
         return self._copy(group, file)
