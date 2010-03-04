@@ -1434,6 +1434,8 @@ class File(ContentItem):
         can_write = False
         if isinstance(self.parent, Subject):
             can_write = check_crowds(['moderator'], context=self.parent, user=user)
+        elif isinstance(self.parent, Group):
+            can_write = check_crowds(['admin'], context=self.parent, user=user)
         return can_write or check_crowds(['owner'], context=self, user=user)
 
     def copy(self):
