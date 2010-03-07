@@ -2,6 +2,8 @@ import logging
 from random import Random
 import string
 
+from datetime import datetime
+
 from formencode.variabledecode import NestedVariables
 from formencode.foreach import ForEach
 from formencode.compound import Pipe
@@ -253,6 +255,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
     @ActionProtector("moderator", "root")
     def delete(self, subject):
         c.subject.deleted = c.user
+        c.subject.deleted_on = datetime.today()
         meta.Session.commit()
         redirect_to(request.referrer)
 
