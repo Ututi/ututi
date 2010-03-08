@@ -33,7 +33,7 @@
 </%def>
 
 <%def name="ututi_prizes_portlet()">
-
+<%doc>
  %if c.tpl_lang in ['lt']:
 
  <%
@@ -52,6 +52,7 @@
 
     location_path = path
  %>
+
  %if 'ktu' in location_path:
  <%self:portlet id="barcamp_portlet" portlet_class="border-less">
  <%def name="header()">
@@ -66,7 +67,7 @@
  </%self:portlet>
  %endif
  %endif
-
+</%doc>
 %if c.tpl_lang in ['lt', 'pl']:
 <%self:portlet id="dalintis_portlet" portlet_class="border-less">
 <%def name="header()">
