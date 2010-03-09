@@ -4,7 +4,7 @@ CREATE OR REPLACE FUNCTION set_deleted_on() RETURNS trigger AS $$
     BEGIN
         IF not NEW.deleted_by is NULL AND OLD.deleted_by is NULL THEN
           NEW.deleted_on := (now() at time zone 'UTC');
-        ELSE IF NEW.deleted_by is NULL AND NOT OLD.deleted_by is NULL THEN
+        ELSIF NEW.deleted_by is NULL AND NOT OLD.deleted_by is NULL THEN
           NEW.deleted_on := NULL;
         END IF;
 
