@@ -33,6 +33,7 @@
              <label for="parent_id">${_('Parent id')}</label>
              <input type="text" name="parent_id" size="10"/>
              <input type="submit" value="${_('Undelete')}"/>
+             <div class="message">${_('Parent id can be a path, e.g. subject/vu/matematika, group/matematikai, or a numeric id.')}</div>
            </div>
          </form>
        </div>
