@@ -43,7 +43,6 @@ class BasefilesController(BaseController):
         return serve_file(file)
 
     def _delete(self, file):
-        file.parent = None
         file.deleted = c.user
         meta.Session.commit()
 

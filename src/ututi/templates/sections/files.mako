@@ -303,10 +303,15 @@ $(document).ready(function(){
           </h4>
         % endif
           <ul class="folder">
-        % if folder:
+        <%
+           files = [file for file in folder if file.deleted is None]
+        %>
+        % if files:
               <li style="display: none;" class="message">${_("There are no files here, this folder is empty!")}</li>
-              % for file in folder:
-                <%self:file file="${file}" />
+              % for file in files:
+                %if file.deleted is None:
+                  <%self:file file="${file}" />
+                %endif
               % endfor
         % else:
               <li class="message">${_("There are no files here, this folder is empty!")}</li>

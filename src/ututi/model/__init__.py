@@ -739,11 +739,11 @@ class LimitedUploadMixin(object):
 
     @property
     def file_count(self):
-        return len([file for file in self.files if not file.isNullFile()])
+        return len([file for file in self.files if not file.isNullFile() and file.deleted_on is None])
 
     @property
     def size(self):
-        return sum([file.size for file in self.files if not file.isNullFile()])
+        return sum([file.size for file in self.files if not file.isNullFile() and file.deleted_on is None])
 
     @property
     def free_size(self):
