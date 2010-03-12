@@ -6,8 +6,7 @@ from pylons.i18n import _
 from pylons import c
 
 from ututi.model import meta, Email
-
-from ututi.model import LocationTag
+from ututi.model import Subject, Group, ContentItem, LocationTag
 
 def html_cleanup(input):
     cleaner = Cleaner(
@@ -172,10 +171,49 @@ def manual_validate(schema, **state_kwargs):
     if state_kwargs:
         state = State(**state_kwargs)
     else:
-        state = None
+       state = None
 
     # In case of validation errors an exception is thrown. This needs to
     # be caught elsewhere.
     from pylons import request
     return schema.to_python(request.params, state)
+
+class ParentIdValidator(validators.FancyValidator):
+    """
+    A validator that determines if the id passed in references a Subject or a Group.
+    Numeric ids as well as path fragments are allowed:
+    - subject/vu/mif/subject_id for subjects
+    - group/group_id for groups
+    - 123 for either.
+    """
+
+    messages = {
+        'badId': _(u"Id does not reference what we either a group or a subject.")
+        }
+
+    def _to_python(self, value, state):
+        obj = None
+        # check if this is a plain numeric id
+        try:
+            num_id = int(value)
+            obj = ContentItem.get(num_id)
+        except ValueError:
+            pass
+
+        # check if the id is a path to a subject
+        if obj is None and value.startswith('subject'):
+            path = value.split('/')[1:]
+            location = LocationTag.get(path[:-1])
+            obj = Subject.get(location, path.pop())
+
+        # check if the object is a group
+        if obj is None and value.startswith('group'):
+            id = value.split('/')
+            obj = Group.get(id.pop())
+
+        return obj
+
+    def validate_python(self, value, state):
+        if value is None or not isinstance(value, (Group, Subject)):
+            raise Invalid(self.message('badId', state), value, state)
 

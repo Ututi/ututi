@@ -187,6 +187,18 @@ Deleting files:
     >>> app.get('/group/moderators/file/5/get', expect_errors=True).status
     '404 Not Found'
 
+Try and restore the file:
+    >>> browser = Browser.logIn()
+    >>> browser.open('http://localhost/admin/deleted_files')
+    >>> browser.printQuery('//span[@class="result-count"]/text()')
+    (found 2 files)
+
+    >>> browser.getControl(name='parent_id', index=0).value = 'subject/vu/mat_analize'
+    >>> browser.getControl('Undelete', index=0).click()
+    >>> browser.printQuery('//span[@class="result-count"]/text()')
+    (found 1 files)
+
+
 Group payments:
 
 Once the group's private files reach a limit, no more files can be uploaded.

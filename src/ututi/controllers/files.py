@@ -2,8 +2,10 @@ import logging
 import mimetypes
 import re
 
+from formencode.schema import Schema
 from paste.fileapp import FileApp
 
+from pylons.decorators import validate
 from pylons.templating import render_mako_def
 from pylons.controllers.util import abort
 from pylons import url
@@ -16,11 +18,18 @@ from ututi.lib.security import is_root
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
 from ututi.model import meta, File, ContentItem
+from ututi.lib.validators import ParentIdValidator
 from sqlalchemy.orm.exc import NoResultFound
 from pylons.i18n import _
 from routes import url_for
 
 log = logging.getLogger(__name__)
+
+
+class UndeleteForm(Schema):
+    """A schema for validating file undelete forms."""
+    allow_extra_fields = True
+    parent_id = ParentIdValidator()
 
 
 def serve_file(file):
@@ -120,3 +129,20 @@ class FilesController(BasefilesController):
         if file is None:
             abort(404)
         return self._delete(file)
+
+    @validate(UndeleteForm)
+    @ActionProtector('root')
+    def undelete(self, id):
+        if hasattr(self, 'form_result'):
+            parent = self.form_result['parent_id']
+            file = File.get(id)
+            if file is None:
+                abort(404)
+
+            file.parent = parent
+            file.deleted_on = None
+            meta.Session.commit()
+            redirect_to(controller='admin', action='deleted_files')
+        else:
+            abort(400) #bad request
+
