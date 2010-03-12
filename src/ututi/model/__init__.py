@@ -453,6 +453,13 @@ content_items_table = None
 class ContentItem(object):
     """A generic class for content items."""
 
+    @classmethod
+    def get(cls, id):
+        try:
+            return meta.Session.query(cls).filter_by(id=id).one()
+        except NoResultFound:
+            return None
+
     def url(self):
         raise NotImplementedError("This method should be overridden by content"
                                   " objects to provide their urls.")
