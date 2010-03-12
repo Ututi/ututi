@@ -276,11 +276,25 @@ class AdminController(BaseController):
         files = meta.Session.query(File)\
             .order_by(desc(File.created_on))\
             .filter(File.title != u'text.html')\
-            .filter(File.title != u'Null File')
+            .filter(File.title != u'Null File')\
+            .filter(File.deleted_on == None)
 
         c.files = self._make_pages(files)
 
         return render('admin/files.mako')
+
+    @ActionProtector('root')
+    def deleted_files(self):
+        files = meta.Session.query(File)\
+            .order_by(desc(File.created_on))\
+            .filter(File.title != u'text.html')\
+            .filter(File.title != u'Null File')\
+            .filter(File.deleted_on != None)
+
+        c.files = self._make_pages(files)
+
+        return render('admin/deleted_files.mako')
+
 
     @ActionProtector("root")
     def groups(self):
