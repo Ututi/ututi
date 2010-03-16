@@ -12,5 +12,6 @@
   <li>${h.link_to('Events', url(controller='admin', action='events'))}</li>
   <li>${h.link_to('Subjects', url(controller='admin', action='subjects'))}</li>
   <li>${h.link_to('Files', url(controller='admin', action='files'))}</li>
+  <li>${h.link_to('Deleted Files', url(controller='admin', action='deleted_files'))}</li>
   <li>${h.link_to('Import', url(controller='admin', action='import_csv'))}</li>
 </ul>
