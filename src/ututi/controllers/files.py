@@ -139,8 +139,13 @@ class FilesController(BasefilesController):
             if file is None:
                 abort(404)
 
-            file.parent = parent
-            file.deleted_on = None
+            if parent is None:
+                if file.parent is None:
+                    abort(400)
+            else:
+                file.parent = parent
+
+            file.deleted_by = None
             meta.Session.commit()
             redirect_to(controller='admin', action='deleted_files')
         else:

@@ -1,0 +1,67 @@
+
+    >>> res = app.post("/login",
+    ...                params={'login': 'admin@ututi.lt', 'password': 'asdasd'})
+
+    >>> res = app.post("/group/moderators/upload_file",
+    ...                params={'folder': ''},
+    ...                upload_files=[("attachment", "text1.txt", "Test Test")])
+
+    >>> res = app.post("/group/moderators/upload_file",
+    ...                params={'folder': ''},
+    ...                upload_files=[("attachment", "text2.txt", "Test Test")])
+
+    >>> res = app.post("/subject/vu/mat_analize/upload_file",
+    ...                params={'folder': ''},
+    ...                upload_files=[("attachment", "text3.txt", "Test")])
+
+    >>> res = app.post("/subject/vu/mat_analize/upload_file",
+    ...                params={'folder': ''},
+    ...                upload_files=[("attachment", "text4.txt", "Test")])
+
+
+    >>> res = app.post("/subject/vu/mat_analize/upload_file",
+    ...                params={'folder': 'Foldah'},
+    ...                upload_files=[("attachment", "text_in_a_folder.txt", "Test")])
+
+    >>> browser = Browser.logIn()
+
+Deleting files:
+
+    >>> res = app.get('/files/delete/3')
+    >>> res = app.get('/files/delete/4')
+    >>> res = app.get('/files/delete/5')
+    >>> res = app.get('/files/delete/6')
+    >>> res = app.get('/files/delete/7')
+
+Try and restore the file:
+
+    >>> browser.open('http://localhost/admin/deleted_files')
+    >>> browser.getControl('Undelete', index=0).click()
+
+XXX regression test - file parent was not being set and that was
+causing errors when rendering events.
+
+    >>> browser.open('http://localhost/admin/events')
+
+Restore a file to a different 'parent':
+
+    >>> browser.open('http://localhost/admin/deleted_files')
+    >>> browser.getControl(name='parent_id', index=0).value = 'group/moderators'
+    >>> browser.getControl('Undelete', index=0).click()
+
+Restore all the other files:
+
+    >>> browser.getControl('Undelete', index=0).click()
+    >>> browser.getControl('Undelete', index=0).click()
+    >>> browser.getControl('Undelete', index=0).click()
+
+    >>> browser.open('http://localhost/subject/vu/mat_analize')
+    >>> browser.printQuery("//li[@class='file']/a/text()")
+    text3.txt Adminas Adminovix
+    text_in_a_folder.txt Adminas Adminovix
+
+    >>> browser.open('http://localhost/group/moderators/files')
+    >>> browser.printQuery("//li[@class='file']/a/text()")
+    text1.txt Adminas Adminovix
+    text2.txt Adminas Adminovix
+    text4.txt Adminas Adminovix
