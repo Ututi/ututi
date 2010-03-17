@@ -286,7 +286,7 @@ class AdminController(BaseController):
     @ActionProtector('root')
     def deleted_files(self):
         files = meta.Session.query(File)\
-            .order_by(desc(File.created_on))\
+            .order_by(desc(File.deleted_on))\
             .filter(File.title != u'text.html')\
             .filter(File.title != u'Null File')\
             .filter(File.deleted_on != None)
