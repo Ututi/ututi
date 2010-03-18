@@ -32,13 +32,14 @@ We should be able to click on a link that leads us to the page of the faculty.
     Geografijos fakultetas
 
 There is a search form on this page and we should be able to use it.
+
     >>> browser.getControl(name='text').value = 'prof.'
     >>> browser.getControl('Search').click()
     >>> browser.url
-    'http://localhost/school/vu'
+    'http://localhost/school/vu?obj_type=subject&text=prof.'
 
     >>> browser.printQuery("//div[@class='search-item snippet-subject']/a/text()")
-     Matematinė analizė
+    Matematinė analizė
 
 The information portlet should show the most important information about the university:
     >>> browser.printQuery("id('location_info_portlet')//h4/text()")

@@ -29,7 +29,7 @@ ${h.javascript_link('/javascripts/search.js')|n}
        target = url(controller='search', action='index')
 %>
 <div class="search-controls">
-  <form method="post" action="${target}" id="search_form">
+  <form method="get" action="${target}" id="search_form">
     %if 'obj_type' in parts:
     <%
        types = [('*', _('Everywhere')), ('group', _('Groups')), ('subject', _('in-Subjects'))]
