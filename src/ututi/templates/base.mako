@@ -181,7 +181,8 @@ ${h.javascript_link('/javascripts/forms.js')|n}
       %if tag.logo:
       <img src="${url(controller='structure', action='logo', id=tag.id, height=20, width=40)}" alt="location tag logo"/>
       %endif
-      <div class="title"><a href="${tag.url()}" title="${tag.title}">${tag.title_short}</a></div>
+      ## XXX a nasty hack to record the type of the object we are showing breadcrumbs for
+      <div class="title"><a href="${tag.url()}" ${h.trackEvent(None, '%s_breadcrumbs' % c.security_context.__class__.__name__, 'level%s' % index)} title="${tag.title}">${tag.title_short}</a></div>
     </div>
     %endfor
   </div>
