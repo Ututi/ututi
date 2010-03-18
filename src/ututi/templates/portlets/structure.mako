@@ -9,9 +9,9 @@
   <%self:portlet id="location_info_portlet">
     <%def name="header()">
       %if location.parent is None:
-        <a ${h.trackEvent(location, 'home', 'portlet_header')|n} href="${location.url()}" title="${location.title}">${_('University information')}</a>
+        <a ${h.trackEvent(location, 'home', 'portlet_header')} href="${location.url()}" title="${location.title}">${_('University information')}</a>
       %else:
-        <a ${h.trackEvent(location, 'home', 'portlet_header')|n} href="${location.url()}" title="${location.title}">${_('Faculty information')}</a>
+        <a ${h.trackEvent(location, 'home', 'portlet_header')} href="${location.url()}" title="${location.title}">${_('Faculty information')}</a>
       %endif
     </%def>
     %if location.logo is not None:

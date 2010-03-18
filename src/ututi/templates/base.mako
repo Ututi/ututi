@@ -40,7 +40,7 @@ ${_('student information online')}
     <a href="${url(controller='profile', action='browse')}">${_("search")}</a>
   </div>
   <div class="item menuitem">
-    <a href="${url(controller='profile', action='home')}" ${h.trackEvent(None, 'user_home', 'menu')|n}>${_("home")}</a>
+    <a href="${url(controller='profile', action='home')}" ${h.trackEvent(None, 'user_home', 'menu')}>${_("home")}</a>
   </div>
 
 </div>
@@ -139,7 +139,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
       %>
       <div class="tab ${cls}">
         <div>
-          <a ${tab.get('event', '')|n} class="subbreadcrumb" title="${tab.get('title')}" href="${tab.get('link')}">${tab.get('title')}</a>
+          <a ${tab.get('event', '')} class="subbreadcrumb" title="${tab.get('title')}" href="${tab.get('link')}">${tab.get('title')}</a>
         </div>
       </div>
     %endfor
@@ -158,7 +158,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
          u_url = url('/')
   %>
   %if breadcrumbs:
-  <a rel="nofollow" ${track_event|n} href="${u_url}" title="Ututi" id="ulogo">
+  <a rel="nofollow" ${track_event} href="${u_url}" title="Ututi" id="ulogo">
     ${h.image('/images/logo_small.gif', alt='logo')|n}
   </a>
   %else:

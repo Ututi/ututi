@@ -15,7 +15,7 @@
 
   <%self:portlet id="group_info_portlet">
     <%def name="header()">
-      <a ${h.trackEvent(c.group, 'home', 'portlet_header')|n} href="${group.url()}" title="${group.title}">${_('Group information')}</a>
+      <a ${h.trackEvent(c.group, 'home', 'portlet_header')} href="${group.url()}" title="${group.title}">${_('Group information')}</a>
     </%def>
     %if group.logo is not None:
       <img id="group-logo" src="${url(controller='group', action='logo', id=group.group_id, width=70, height=80)}" alt="logo" />
@@ -62,7 +62,7 @@
   %>
   <%self:portlet id="subject_portlet" portlet_class="inactive">
     <%def name="header()">
-      <a ${h.trackEvent(c.group, 'subjects', 'portlet_header')|n} href="${group.url(action='subjects')}" title="${_('All watched subjects')}">${_('Watched subjects')}</a>
+      <a ${h.trackEvent(c.group, 'subjects', 'portlet_header')} href="${group.url(action='subjects')}" title="${_('All watched subjects')}">${_('Watched subjects')}</a>
     </%def>
     %if not group.watched_subjects:
       ${_('Your group is not watching any subjects!')}
@@ -91,7 +91,7 @@
   %>
   <%self:action_portlet id="forum_post_portlet">
     <%def name="header()">
-    <a ${h.trackEvent(None, 'click', 'group_forum_post', 'action_portlets')|n} href="${url(controller='groupforum', action='new_thread', id=group.group_id)}">${_('email your group')}</a>
+    <a ${h.trackEvent(None, 'click', 'group_forum_post', 'action_portlets')} href="${url(controller='groupforum', action='new_thread', id=group.group_id)}">${_('email your group')}</a>
     ${h.image('/images/details/icon_question.png',
             alt=_("Write an email to the group's forum - accessible by all your groupmates."),
              class_='tooltip', style='margin-top: 4px;')|n}
@@ -107,7 +107,7 @@
   %>
   <%self:action_portlet id="invite_member_portlet">
     <%def name="header()">
-    <a ${h.trackEvent(None, 'click', 'group_invite_members', 'action_portlets')|n} href="${group.url(action='members')}">${_('invite groupmates')}</a>
+    <a ${h.trackEvent(None, 'click', 'group_invite_members', 'action_portlets')} href="${group.url(action='members')}">${_('invite groupmates')}</a>
     ${h.image('/images/details/icon_question.png',
             alt=_("Invite your groupmates to use Ututi with you."),
              class_='tooltip', style='margin-top: 4px;')|n}

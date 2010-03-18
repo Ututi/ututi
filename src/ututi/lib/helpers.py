@@ -217,10 +217,10 @@ def file_size(size):
 
 def trackEvent(obj, action, label, category='navigation'):
     # _trackEvent(category, action, optional_label, optional_value)
-    return """onclick="_gaq.push(['_trackEvent', '%s', '%s', '%s']);" """ % (
-        category,
-        action,
-        label)
+    return literal("""onclick="_gaq.push(['_trackEvent', '%s', '%s', '%s']);" """ % (
+            category,
+            action,
+            label))
 
 
 def input_line(name, title, value='', explanation=None, **kwargs):

@@ -166,7 +166,7 @@
   %>
   <%self:action_portlet id="subject_create_portlet">
     <%def name="header()">
-    <a ${h.trackEvent(None, 'click', 'user_new_subject', 'action_portlets')|n} href="${url(controller='subject', action='add')}">${_('create new subject')}</a>
+    <a ${h.trackEvent(None, 'click', 'user_new_subject', 'action_portlets')} href="${url(controller='subject', action='add')}">${_('create new subject')}</a>
     ${h.image('/images/details/icon_question.png',
             alt=_("Store all the subject's files and notes in one place."),
              class_='tooltip', style='margin-top: 4px;')|n}
@@ -196,7 +196,7 @@
       </div>
 
       <div class="form-field">
-        <span class="btn"><input id="recommendation_submit" type="submit" value="${_('Send invitation')}" ${h.trackEvent(None, 'action_portlets', 'send', 'ututi_recommend')|n}/></span>
+        <span class="btn"><input id="recommendation_submit" type="submit" value="${_('Send invitation')}" ${h.trackEvent(None, 'action_portlets', 'send', 'ututi_recommend')}/></span>
       </div>
     </form>
   <script type="text/javascript">
