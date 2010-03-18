@@ -20,7 +20,7 @@
   </div>
   <div class="area-info">
     <span class="title">
-      <a href="${group.url()}">${group.title}</a>
+      <a href="${group.url()}" h.trackEvent(None, 'group_home', 'dashboard')>${group.title}</a>
       (${ungettext("%(count)s member", "%(count)s members", len(group.members)) % dict(count = len(group.members))})
     </span>
     <br />
@@ -68,8 +68,8 @@
       </td>
     </tr>
     <tr class="more-links">
-      <td><a href="${group.url(action='forum')}" class="more">${_('Group forum')}</a></td>
-      <td class="right-column"><a href="${group.url(action='home')}" class="more">${_('Group events')}</a></td>
+      <td><a ${h.trackEvent(None, 'group_home', 'dashboard_forum')} href="${group.url(action='forum')}" class="more">${_('Group forum')}</a></td>
+      <td  class="right-column"><a ${h.trackEvent(None, 'group_home', 'dashboard_events')} href="${group.url(action='home')}" class="more">${_('Group events')}</a></td>
     </tr>
   </table>
   <br class="clear-left" />
