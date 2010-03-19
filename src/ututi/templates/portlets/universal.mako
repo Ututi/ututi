@@ -1,6 +1,7 @@
 <%inherit file="/portlets/base.mako"/>
 
 <%def name="quick_file_upload_portlet(targets, label=None)">
+%if len(targets) > 0:
   <%self:action_portlet id="file_upload_portlet" expanding="True" label='${label}'>
     <%def name="header()">
       <span>${_('upload a file to..')}</span>
@@ -63,4 +64,5 @@
     </div>
     %endfor
   </%self:action_portlet>
+%endif
 </%def>
