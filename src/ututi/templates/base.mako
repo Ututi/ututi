@@ -153,7 +153,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
   <%
      if c.user:
          u_url = url(controller='profile', action='browse')
-         track_event = h.trackEvent(None, 'user_home', 'logo')
+         track_event = h.trackEvent(None, 'user_search', 'logo')
      else:
          track_event = ''
          u_url = url('/')
