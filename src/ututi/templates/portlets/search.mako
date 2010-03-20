@@ -11,7 +11,7 @@
       ${_('Search')}
     </%def>
     <div class="search-controls">
-      <form method="post" action="${target}" id="search_form_portlet">
+      <form method="get" action="${target}" id="search_form_portlet">
         %if 'obj_type' in parts:
         <%
            types = [('*', _('Everywhere')), ('group', _('Groups')), ('subject', _('in-Subjects'))]
