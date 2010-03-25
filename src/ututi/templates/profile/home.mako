@@ -20,7 +20,7 @@
   </div>
   <div class="area-info">
     <span class="title">
-      <a href="${group.url()}" h.trackEvent(None, 'group_home', 'dashboard')>${group.title}</a>
+      <a href="${group.url()}" ${h.trackEvent(None, 'group_home', 'dashboard')}>${group.title}</a>
       (${ungettext("%(count)s member", "%(count)s members", len(group.members)) % dict(count = len(group.members))})
     </span>
     <br />
