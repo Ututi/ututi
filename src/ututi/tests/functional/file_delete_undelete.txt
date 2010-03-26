@@ -23,6 +23,10 @@
     ...                params={'folder': 'Foldah'},
     ...                upload_files=[("attachment", "text_in_a_folder.txt", "Test")])
 
+    >>> res = app.post("/subject/vu/mat_analize/upload_file",
+    ...                params={'folder': 'Foldah'},
+    ...                upload_files=[("attachment", "text_in_a_folderr.txt", "Test")])
+
     >>> browser = Browser.logIn()
 
 Deleting files:
@@ -33,10 +37,22 @@ Deleting files:
     >>> res = app.get('/files/delete/6')
     >>> res = app.get('/files/delete/7')
 
+Delete the folder too:
+    >>> res = app.get('/subject/vu/mat_analize/js_delete_folder?folder=Foldah')
+
 Try and restore the file:
 
     >>> browser.open('http://localhost/admin/deleted_files')
-    >>> browser.getControl('Undelete', index=0).click()
+
+    >>> browser.printQuery('//a[@class="file-link"]/text()')
+    text_in_a_folderr.txt
+    text_in_a_folder.txt
+    text4.txt
+    text3.txt
+    text2.txt
+    text1.txt
+
+    >>> browser.getControl('Undelete', index=1).click()
 
 XXX regression test - file parent was not being set and that was
 causing errors when rendering events.
@@ -46,22 +62,25 @@ causing errors when rendering events.
 Restore a file to a different 'parent':
 
     >>> browser.open('http://localhost/admin/deleted_files')
-    >>> browser.getControl(name='parent_id', index=0).value = 'group/moderators'
-    >>> browser.getControl('Undelete', index=0).click()
+
+    >>> browser.getControl(name='parent_id', index=1).value = 'group/moderators'
+    >>> browser.getControl('Undelete', index=1).click()
 
 Restore all the other files:
 
-    >>> browser.getControl('Undelete', index=0).click()
-    >>> browser.getControl('Undelete', index=0).click()
-    >>> browser.getControl('Undelete', index=0).click()
+    >>> browser.getControl('Undelete', index=1).click()
+    >>> browser.getControl('Undelete', index=1).click()
+    >>> browser.getControl('Undelete', index=1).click()
 
     >>> browser.open('http://localhost/subject/vu/mat_analize')
     >>> browser.printQuery("//li[@class='file']/a/text()")
     text3.txt Adminas Adminovix
     text_in_a_folder.txt Adminas Adminovix
 
+
     >>> browser.open('http://localhost/group/moderators/files')
     >>> browser.printQuery("//li[@class='file']/a/text()")
     text1.txt Adminas Adminovix
     text2.txt Adminas Adminovix
     text4.txt Adminas Adminovix
+

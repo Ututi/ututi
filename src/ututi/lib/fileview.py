@@ -1,6 +1,6 @@
 from pylons.templating import render_mako_def
 
-from pylons import request
+from pylons import request, c
 from ututi.model import File, meta
 
 from mimetools import choose_boundary
@@ -27,9 +27,8 @@ class FileViewMixin(object):
     def _delete_folder(self, obj):
         folder_name = request.params['folder']
         for file in list(obj.files):
-            if file.folder == folder_name:
-                obj.files.remove(file)
-                meta.Session.delete(file)
+            if file.folder == folder_name and file.deleted is None:
+                file.deleted = c.user
         meta.Session.commit()
 
     def _upload_file_basic(self, obj):

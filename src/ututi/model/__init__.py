@@ -701,9 +701,10 @@ class FolderMixin(object):
     def folders_dict(self):
         result = {'': Folder('', parent=self)}
         for file in self.files:
-            result.setdefault(file.folder, Folder(file.folder, parent=self))
-            if not file.isNullFile():
-                result[file.folder].append(file)
+            if file.deleted_by is None:
+                result.setdefault(file.folder, Folder(file.folder, parent=self))
+                if not file.isNullFile():
+                    result[file.folder].append(file)
         return result
 
     def getFolder(self, title):
