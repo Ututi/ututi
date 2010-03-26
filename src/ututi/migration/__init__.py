@@ -11,12 +11,12 @@ def sql_migrate(name):
     upgrade_file = "%s_upgrade.sql" % base_name
     downgrade_file = "%s_downgrade.sql" % base_name
 
-    def upgrade(engine):
+    def upgrade(engine, lang):
         connection = engine.connect()
         statements = pkg_resources.resource_string('ututi.migration', upgrade_file)
         connection.execute(statements)
 
-    def downgrade(engine):
+    def downgrade(engine, lang):
         connection = engine.connect()
         statements = pkg_resources.resource_string('ututi.migration', downgrade_file)
         connection.execute(statements)
@@ -34,7 +34,7 @@ class EvolutionScript(object):
 
 class GreatMigrator(object):
 
-    min_version = 38
+    min_version = 39
 
     def __init__(self, engine, language=None):
         self.engine = engine
@@ -95,7 +95,7 @@ class GreatMigrator(object):
 
         for script in self.evolution_scripts[start:end]:
             print "Running:", script.title
-            script.upgrade(connection)
+            script.upgrade(connection, self.language)
 
         print "Setting database version to:", end
         connection.execute("update db_versions set version=%d" % end)
@@ -111,7 +111,7 @@ class GreatMigrator(object):
 
         script = self.evolution_scripts[start-1]
         print "Running:", script.title
-        script.downgrade(connection)
+        script.downgrade(connection, self.language)
 
         print "Setting database version to:", down
         connection.execute("update db_versions set version=%d" % down)
