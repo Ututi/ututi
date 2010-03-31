@@ -39,6 +39,20 @@
 <div id="subject_description" class="content-block">
   <div class="hdr">
     <span class="huge" style="float: left;">${_("Subject's description")}</span>
+    %if c.came_from_search:
+    <script type="text/javascript">
+      <!--
+	 google_ad_client = "pub-1809251984220343";
+	 /* 468x60, sukurta 10.2.3 */
+	 google_ad_slot = "3543124516";
+	 google_ad_width = 468;
+	 google_ad_height = 60;
+	 //-->
+    </script>
+    <script type="text/javascript"
+	    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+    %endif
     <div style="float: left; margin-top: 4px; margin-left: 20px;">
       <a class="btn" href="${c.subject.url(action='edit')}" title="${_('Edit subject description')}">
         <span>${_('Edit')}</span>
@@ -54,21 +68,6 @@
     %endif
   </div>
 </div>
-
-%if c.came_from_search:
-  <script type="text/javascript">
-    <!--
-       google_ad_client = "pub-1809251984220343";
-       /* 468x60, sukurta 10.2.3 */
-       google_ad_slot = "3543124516";
-       google_ad_width = 468;
-       google_ad_height = 60;
-       //-->
-  </script>
-  <script type="text/javascript"
-	  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-  </script>
-%endif
 
 <%files:file_browser obj="${c.subject}", title="${_('Subject files')}" />
 
