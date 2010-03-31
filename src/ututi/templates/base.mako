@@ -297,6 +297,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
 	  %if c.tpl_lang in ['lt']:
              <a ${nofollow} href="${url(controller='home', action='advertising')}">${_('Advertising')}</a> |
 	  %endif
+          <a href="${url(controller='home', action='statistics')}">${_('Statistics')}</a> |
           <a ${nofollow} href="${url(controller='home', action='terms')}">${_('Terms of use')}</a>
         </div>
 
