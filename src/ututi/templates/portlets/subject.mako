@@ -57,4 +57,19 @@
     </div>
     %endif
   </%self:portlet>
+
+%if c.user is None:
+<script type="text/javascript"><!--
+google_ad_client = "pub-1809251984220343";
+/* Šoninis blokelis (300x250) */
+google_ad_slot = "6884411140";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+%endif
+
 </%def>
