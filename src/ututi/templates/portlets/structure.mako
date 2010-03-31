@@ -91,6 +91,21 @@
         ${h.image('/images/details/icon_question.png', alt=_('Create your group, invite your classmates and use the mailing list, upload private group files'), class_='tooltip')|n}
       </span>
     </div>
-
   </%self:portlet>
+
+%if c.user is None:
+<script type="text/javascript"><!--
+google_ad_client = "pub-1809251984220343";
+/* Universities portlet 300x250 */
+google_ad_slot = "4000532165";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script> 
+%endif
+
+
 </%def>

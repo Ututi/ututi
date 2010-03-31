@@ -40,6 +40,20 @@ ${h.stylesheet_link('/stylesheets/location.css')|n}
 
 
 <h2 class="underline">${_('Search')}</h2>
+%if c.came_from_search:
+<script type="text/javascript"><!--
+google_ad_client = "pub-1809251984220343";
+/* Universities ads menu - 728x15 */
+google_ad_slot = "1300049814";
+google_ad_width = 650;
+google_ad_height = 15;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script> 
+%endif
+
 ${search_form(c.text, c.obj_type, c.location.hierarchy,
   parts=['obj_type', 'text'], target=c.location.url(), js=True,
   js_target=c.location.url(action='search_js'))}
