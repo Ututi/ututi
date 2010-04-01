@@ -689,7 +689,7 @@ form .form-field .field-status.confirmed div {
 }
 
 form .form-field div.input-line input {
-  width: 100;
+  width: 100%;
   font-size: 0.9em;
   border: 0;
   background: transparent none;
