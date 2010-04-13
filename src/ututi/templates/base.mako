@@ -290,7 +290,7 @@ ${h.javascript_link('/javascripts/forms.js')|n}
         <%
            nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '')
         %>
-        Copyright <a ${nofollow} href="http://www.nous.lt">UAB „Ututi“</a>
+        Copyright <em>UAB „Ututi“</em>
         <div id="footer-links">
           <a ${nofollow} href="${url(controller='home', action='about')}">${_('About Ututi')}</a> |
           <a ${nofollow} href="${_('ututi_blog_url')}">${_('U-blog')}</a> |
