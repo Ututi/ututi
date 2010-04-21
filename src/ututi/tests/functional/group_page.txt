@@ -13,10 +13,12 @@ Let's find the group.
     http://localhost/group/moderators/page
 
 At first the page should be empty.
+
     >>> browser.printQuery('id("body-container")/text()')
     The group's page is empty. Enter your description.
 
-We can edit it. of course:
+We can edit it of course:
+
     >>> browser.getLink('Edit', index=1).click()
     >>> browser.url
     'http://localhost/group/moderators/edit_page'
