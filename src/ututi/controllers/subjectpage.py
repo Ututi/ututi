@@ -3,16 +3,18 @@ import logging
 from routes.util import url_for
 from formencode import Schema, validators, htmlfill
 
+from lxml.html.diff import htmldiff
+
 from pylons import c, request
 from pylons.decorators import validate
 from pylons.controllers.util import redirect_to, abort
 
 from ututi.controllers.subject import subject_action
-from ututi.model import Subject
-from ututi.model import LocationTag
-from ututi.model import meta, Page
+from ututi.model import Subject, LocationTag, Page, PageVersion
+from ututi.model import meta
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
+from ututi.lib.helpers import html_cleanup, literal
 
 from pylons.i18n import _
 
@@ -67,6 +69,57 @@ class SubjectpageController(BaseController):
         if page not in subject.pages:
             abort(404)
         return render('page/view.mako')
+
+    @page_action
+    @ActionProtector("user")
+    def history(self, subject, page):
+        c.breadcrumbs = [{'link': subject.url(),
+                          'title': subject.title},
+                         {'link': page.url(),
+                          'title': page.title}]
+        if page not in subject.pages:
+            abort(404)
+        return render('page/history.mako')
+
+    @page_action
+    @ActionProtector("user")
+    def show_version(self, subject, page):
+        c.breadcrumbs = [{'link': subject.url(),
+                          'title': subject.title},
+                         {'link': page.url(),
+                          'title': page.title}]
+        if page not in subject.pages:
+            abort(404)
+        version_id = int(request.GET['version_id'])
+        c.version = PageVersion.get(version_id)
+        return render('page/version.mako')
+
+    @page_action
+    @ActionProtector("user")
+    def diff_with_previous(self, subject, page):
+        c.breadcrumbs = [{'link': subject.url(),
+                          'title': subject.title},
+                         {'link': page.url(),
+                          'title': page.title}]
+        if page not in subject.pages:
+            abort(404)
+        version_id = int(request.GET['version_id'])
+        c.version = PageVersion.get(version_id)
+        idx = page.versions.index(c.version)
+        prev_version = page.versions[idx+1]
+        c.diff = literal(htmldiff(html_cleanup(prev_version.content),
+                                  html_cleanup(c.version.content)))
+        return render('page/diff_with_previous.mako')
+
+    @page_action
+    @ActionProtector("user")
+    def restore(self, subject, page):
+        raise NotImplementedError() # TODO
+
+    @page_action
+    @ActionProtector("user")
+    def delete(self, subject, page):
+        raise NotImplementedError()
 
     @subject_action
     def add(self, subject):

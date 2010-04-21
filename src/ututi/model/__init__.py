@@ -1223,6 +1223,15 @@ class PageVersion(ContentItem):
         texts = doc.xpath('//text()')
         return ' '.join(texts)
 
+    def url(self, controller='subjectpage', action='show_version', **kwargs):
+        return url(controller=controller,
+                   action=action,
+                   id=self.page.subject[0].subject_id,
+                   tags=self.page.subject[0].location_path,
+                   page_id=self.page_id,
+                   version_id=self.id,
+                   **kwargs)
+
 
 content_tags_table = None
 class Tag(object):

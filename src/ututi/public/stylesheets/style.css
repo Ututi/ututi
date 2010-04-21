@@ -2006,3 +2006,18 @@ div.tour_slide div.text div.join_link {
   line-height: 20px;
 }
 
+/* revision diffs */
+
+ins, del {
+  text-decoration: none;
+}
+
+ins {
+  background: #7cc576;
+}
+
+del {
+  background: #f68e56;
+}
+
+/* end revision diffs */
