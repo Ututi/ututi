@@ -9,8 +9,13 @@
 <div id="page_header">
   <h1 style="float: left;">${c.page.title}</h1>
   <div style="float: left; margin-top: 8px; margin-left: 10px;"><a class="btn" href="${h.url_for(action='edit')}"><span>${_('Edit')}</span></a></div>
-  <div style="float: left; margin-top: 8px; margin-left: 10px;"><a class="btn" href="${h.url_for(action='history')}"><span>${_('View history')}</span></a></div>
-  <div style="float: left; margin-top: 8px; margin-left: 10px;"><a class="btn warning" href="${h.url_for(action='delete')}"><span>${_('Delete')}</span></a></div>
+
+  % if h.check_crowds(['user']):
+    <div style="float: left; margin-top: 8px; margin-left: 10px;"><a class="btn" href="${h.url_for(action='history')}"><span>${_('View history')}</span></a></div>
+  % endif
+  % if h.check_crowds(['moderator']):
+    <div style="float: left; margin-top: 8px; margin-left: 10px;"><a class="btn warning" href="${h.url_for(action='delete')}"><span>${_('Delete')}</span></a></div>
+  % endif
 </div>
 <div class="clear-left small">
   ${_('Last edit:')}
