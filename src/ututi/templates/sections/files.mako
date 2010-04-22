@@ -108,10 +108,10 @@ $(document).ready(function(){
               // Uploding -> Uploading. -- Uploading...
               interval = window.setInterval(function(){
                   var text = progress_ticker.text();
-                  if (text.length < 13){
+                  if (text.length < "${_('Uploading')}".length){
                       progress_ticker.text(text + '.');
                   } else {
-                      progress_ticker.text('Uploading');
+                      progress_ticker.text("${_('Uploading')}");
                   }
               }, 200);
               iframe['interval'] = interval;
