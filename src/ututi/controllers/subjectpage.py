@@ -121,9 +121,11 @@ class SubjectpageController(BaseController):
         redirect_to(page.url())
 
     @page_action
-    @ActionProtector("user")
+    @ActionProtector("moderator")
     def delete(self, subject, page):
-        raise NotImplementedError()
+        page.deleted = c.user
+        meta.Session.commit()
+        redirect_to(subject.url())
 
     @subject_action
     def add(self, subject):
