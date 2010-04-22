@@ -69,6 +69,9 @@
 <%def name="page_extra(object)">
   ##page snippet with last edit and author info
   <div class="search-item snippet-page">
+    % if object.deleted_on is not None:
+      <span style="color: red; font-weight: bold">${_('[DELETED]')}</span>
+    % endif
     <a href="${object.url()}" title="${object.title}" class="item-title larger">${object.title}</a>
     <span class="small" style="margin-left: 10px;">${h.fmt_dt(object.last_version.created_on)}</span>
     <a style="font-size: 0.9em;" href="${object.last_version.created.url()}">${object.last_version.created.fullname}</a>

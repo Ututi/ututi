@@ -125,7 +125,14 @@ class SubjectpageController(BaseController):
     def delete(self, subject, page):
         page.deleted = c.user
         meta.Session.commit()
-        redirect_to(subject.url())
+        redirect_to(page.url())
+
+    @page_action
+    @ActionProtector("moderator")
+    def undelete(self, subject, page):
+        page.deleted_by = None
+        meta.Session.commit()
+        redirect_to(page.url())
 
     @subject_action
     def add(self, subject):

@@ -82,7 +82,9 @@
     %endif
     % if c.subject.pages:
       % for page in c.subject.pages:
-        ${page_extra(page)}
+        % if page.deleted_by is None or h.check_crowds(['moderator']):
+          ${page_extra(page)}
+        % endif
       % endfor
     % else:
       <br />
