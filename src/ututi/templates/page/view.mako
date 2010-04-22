@@ -14,10 +14,10 @@
     <div style="float: left; margin-top: 8px; margin-left: 10px;"><a class="btn" href="${h.url_for(action='history')}"><span>${_('View history')}</span></a></div>
   % endif
   % if h.check_crowds(['moderator']):
-    % if c.page.deleted_by is None:
+    % if not c.page.isDeleted():
       <div style="float: left; margin-top: 8px; margin-left: 10px;"><a class="btn warning" href="${h.url_for(action='delete')}"><span>${_('Delete')}</span></a></div>
     % else:
-        <div style="float: left; margin-top: 8px; margin-left: 10px;"><a class="btn" href="${h.url_for(action='undelete')}"><span>${_('Undelete')}</span></a></div>
+      <div style="float: left; margin-top: 8px; margin-left: 10px;"><a class="btn" href="${h.url_for(action='undelete')}"><span>${_('Undelete')}</span></a></div>
     % endif
   % endif
 </div>
