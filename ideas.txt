@@ -15,7 +15,7 @@ http://lucene.apache.org/pylucene/ (pylucene, an extension for accessing lucene 
 ...
 
 ** opinions
-Currently I am thinking of going the postgresql way. Especially since it supports using ispell for stemming 
+Currently I am thinking of going the postgresql way. Especially since it supports using ispell for stemming
 and stop-word lists.
 
 
@@ -61,7 +61,7 @@ What is the best way to implement this? Decorators?
 * model properties, case insensitive search
 - [[http://www.sqlalchemy.org/docs/05/mappers.html#custom-comparators][Custom comparators]]
 - [[http://www.postgresql.org/docs/8.1/interactive/indexes-expressional.html][Function indexes in postgresql]]
-- 
+-
 
 * banner management
 ** banner management functionality:
