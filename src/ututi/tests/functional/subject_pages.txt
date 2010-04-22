@@ -80,6 +80,9 @@ We can also look at the previous version:
 
     >>> browser.getControl('Show', index=1).click()
     >>> browser.printQuery("id('old-version-note')")
+    <div id="old-version-note" class="clear-left small">
+          You are viewing an old version of this page created by <a href="/user/1">Adminas Adminovix</a> on ...
+    </div>
 
     >>> browser.printQuery("id('page_content')")
     <div id="page_content">
