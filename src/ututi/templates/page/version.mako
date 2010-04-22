@@ -10,7 +10,7 @@
   <h1 style="float: left;">${c.version.title}</h1>
 </div>
 
-<div class="clear-left small">
+<div id="old-version-note" class="clear-left small">
   % if c.version is not c.page.versions[0]:
       ${h.literal(
          _('You are viewing an old version of this page created'

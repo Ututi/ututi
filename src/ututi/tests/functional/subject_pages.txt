@@ -76,10 +76,21 @@ Let's look at the changes
 
     >>> browser.getLink('Go back to history').click()
 
-    >>> browser.getLink('Go back to page').click()
+We can also look at the previous version:
+
+    >>> browser.getControl('Show', index=1).click()
+    >>> browser.printQuery("id('old-version-note')")
+
+    >>> browser.printQuery("id('page_content')")
+    <div id="page_content">
+      Being Awesome is very easy!
+    </div>
+
+    >>> browser.getLink('Go back to history').click()
 
 Let's go back now.
 
+    >>> browser.getLink('Go back to page').click()
     >>> browser.getLink('Go back to Matematin\xc4\x97 analiz\xc4\x97').click()
     >>> browser.url
     'http://localhost/subject/vu/mat_analize'
