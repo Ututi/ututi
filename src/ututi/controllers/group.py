@@ -167,7 +167,9 @@ class GroupInviteCancelForm(Schema):
     email = validators.UnicodeString(not_empty=False)
 
 def group_action(method):
-    def _group_action(self, id):
+    def _group_action(self, id=None):
+        if id is None:
+            redirect_to(controller='search', obj_type='group')
         group = Group.get(id)
         if group is None:
             abort(404)
@@ -491,6 +493,8 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
 
     def logo(self, id, width=None, height=None):
         group = Group.get(id)
+        if group is None:
+            abort(404)
         if group.logo is not None:
             return serve_image(group.logo, width=width, height=height)
         else:
