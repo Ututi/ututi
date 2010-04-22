@@ -106,15 +106,19 @@ class SubjectpageController(BaseController):
         version_id = int(request.GET['version_id'])
         c.version = PageVersion.get(version_id)
         idx = page.versions.index(c.version)
-        prev_version = page.versions[idx+1]
-        c.diff = literal(htmldiff(html_cleanup(prev_version.content),
+        c.prev_version = page.versions[idx+1]
+        c.diff = literal(htmldiff(html_cleanup(c.prev_version.content),
                                   html_cleanup(c.version.content)))
         return render('page/diff_with_previous.mako')
 
     @page_action
     @ActionProtector("user")
     def restore(self, subject, page):
-        raise NotImplementedError() # TODO
+        version_id = int(request.GET['version_id'])
+        version = PageVersion.get(version_id)
+        page.save(version.title, version.content)
+        meta.Session.commit()
+        redirect_to(page.url())
 
     @page_action
     @ActionProtector("user")

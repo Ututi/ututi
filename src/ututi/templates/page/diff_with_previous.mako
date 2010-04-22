@@ -8,11 +8,9 @@
 
 <div id="page_header">
   <h1 style="float: left;">${c.page.title}</h1>
-  % if c.version is not c.page.versions[0]:
-    <div style="float: left; margin-top: 8px; margin-left: 10px;">
-      <a class="btn" href="XXX"><span>${_('Restore')}</span></a>
-    </div>
-  % endif
+  <div style="float: left; margin-top: 8px; margin-left: 10px;">
+      ${h.button_to(_('Restore previous'), c.prev_version.url(action='restore'))}</span></a>
+  </div>
 </div>
 
 <div class="clear-left">

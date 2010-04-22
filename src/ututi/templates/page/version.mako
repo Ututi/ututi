@@ -8,6 +8,11 @@
 
 <div id="page_header">
   <h1 style="float: left;">${c.version.title}</h1>
+  % if c.version is not c.page.versions[0]:
+    <div style="float: left; margin-top: 8px; margin-left: 10px;">
+      ${h.button_to(_('Restore'), c.version.url(action='restore'))}</span></a>
+    </div>
+  % endif
 </div>
 
 <div id="old-version-note" class="clear-left small">
