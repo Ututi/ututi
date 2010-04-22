@@ -159,7 +159,7 @@ coverage: bin/test
 .PHONY: coverage_report
 coverage_report: bin/test .coverage
 	rm -rf coverage
-	bin/coverage html -d ./coverage/ --omit=/usr,src/ututi/tests,`echo ~`/.buildout,src/ututi/migration
+	bin/coverage html -d ./coverage/ --omit=/usr,src/ututi/tests,$(HOME)/.buildout,src/ututi/migration
 
 .PHONY: extract-translations
 extract-translations: bin/py
