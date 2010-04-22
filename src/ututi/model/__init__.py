@@ -1195,9 +1195,9 @@ class Page(ContentItem):
     def created(self):
         return self.last_version.created
 
-    def url(self, **kwargs):
-        return url(controller='subjectpage',
-                   action='index',
+    def url(self, controller='subjectpage', action='index', **kwargs):
+        return url(controller=controller,
+                   action=action,
                    page_id=self.id,
                    id=self.subject[0].subject_id,
                    tags=self.subject[0].location_path,
