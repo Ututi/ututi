@@ -5,7 +5,7 @@ from pkg_resources import resource_stream
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql.expression import desc
 from pylons.controllers.util import abort
-from pylons import c
+from pylons import c, request
 from routes import url_for
 from routes.util import redirect_to
 
@@ -14,7 +14,7 @@ from ututi.lib.security import ActionProtector
 from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
 
-from ututi.model import meta, User, ContentItem
+from ututi.model import meta, User, ContentItem, Medal
 from ututi.model.events import Event
 
 log = logging.getLogger(__name__)
@@ -57,8 +57,36 @@ class UserController(BaseController):
     @profile_action
     @ActionProtector("root")
     def login_as(self, user):
-            sign_in_user(user.emails[0].email)
-            redirect_to(controller='profile', action='home')
+        sign_in_user(user.emails[0].email)
+        redirect_to(controller='profile', action='home')
+
+    @profile_action
+    @ActionProtector("root")
+    def medals(self, user):
+        c.user_info = user
+        c.available_medals = [Medal(None, m) for m in Medal.available_medals()]
+        return render('user/medals.mako')
+
+    @profile_action
+    @ActionProtector("root")
+    def award_medal(self, user):
+        medal_type = request.GET['medal_type']
+        assert medal_type in Medal.available_medals()
+        assert medal_type not in [m.medal_type for m in user.medals]
+        m = Medal(user, medal_type)
+        meta.Session.add(m)
+        meta.Session.commit()
+        redirect_to(action='medals')
+
+    @profile_action
+    @ActionProtector("root")
+    def take_away_medal(self, user):
+        medal_id = int(request.GET['medal_id'])
+        medal = meta.Session.query(Medal).filter_by(id=medal_id).one()
+        assert medal.user is user, medal.user
+        meta.Session.delete(medal)
+        meta.Session.commit()
+        redirect_to(action='medals')
 
     def logo(self, id, width=None, height=None):
         try:

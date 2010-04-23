@@ -139,7 +139,7 @@
             <a href="mailto:${user.emails[0].email}">${user.emails[0].email}</a>
           </div>
         %endif
-        <div class="medals"
+        <div class="medals" id="user-medals">
           % for medal in user.medals:
               ${medal.img_tag()}
           % endfor

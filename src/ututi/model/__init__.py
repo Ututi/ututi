@@ -695,11 +695,12 @@ class Medal(object):
     MEDAL_SIZE = dict(height=26, width=26)
 
     def __init__(self, user, medal_type):
-        assert medal_type in self._medals(), medal_type
+        assert medal_type in self.available_medals(), medal_type
         self.user = user
         self.medal_type = medal_type
 
-    def _medals(self):
+    @staticmethod
+    def available_medals():
         return {'admin': _('Administrator'),
                 'admin2': _('Administrator'),
                 'buyer': _('Sponsor'),
@@ -712,9 +713,11 @@ class Medal(object):
     def url(self):
         return self.MEDAL_IMG_PATH + self.medal_type + '.png'
 
+    def title(self):
+        return self.available_medals()[self.medal_type]
+
     def img_tag(self):
-        return image(self.url(), alt=self._medals()[self.medal_type],
-                     **self.MEDAL_SIZE)
+        return image(self.url(), alt=self.title(), **self.MEDAL_SIZE)
 
 
 class Folder(list):

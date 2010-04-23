@@ -1,0 +1,33 @@
+Medals
+======
+
+    >>> browser = Browser.logIn()
+
+We'll find us a user:
+
+    >>> browser.open('http://localhost/user/2')
+
+Let's go to his medal page:
+
+    >>> browser.getControl('Award medals').click()
+
+We will award him a medal:
+
+    >>> browser.getControl('Award', index=0).click()
+
+The medal should have appeared in the user's information portlet:
+
+    >>> browser.printQuery('id("user-medals")')
+    <div class="medals" id="user-medals">
+      <img alt="Sponsor" height="26" src="/images/medals/buyer2.png" width="26" />
+    </div>
+
+Now we'll take away the medal:
+
+    >>> browser.getControl('Take away').click()
+
+The medal is no more:
+
+    >>> browser.printQuery('id("user-medals")')
+    <div class="medals" id="user-medals">
+    </div>
