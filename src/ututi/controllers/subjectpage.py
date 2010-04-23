@@ -14,7 +14,7 @@ from ututi.model import Subject, LocationTag, Page, PageVersion
 from ututi.model import meta
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
-from ututi.lib.helpers import html_cleanup, literal
+from ututi.lib.helpers import html_cleanup, literal, check_crowds
 
 from pylons.i18n import _
 
@@ -66,6 +66,8 @@ class SubjectpageController(BaseController):
                           'title': page.title}]
 
         if page not in subject.pages:
+            abort(404)
+        if page.isDeleted() and not check_crowds(['moderator']):
             abort(404)
         return render('page/view.mako')
 
