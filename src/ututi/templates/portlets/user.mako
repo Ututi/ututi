@@ -139,6 +139,11 @@
             <a href="mailto:${user.emails[0].email}">${user.emails[0].email}</a>
           </div>
         %endif
+        <div class="medals"
+          % for medal in user.medals:
+              ${medal.img_tag()}
+          % endfor
+        </div>
         %if user.site_url:
           <div class="user-link">
             <a href="${user.site_url}">${user.site_url}</a>

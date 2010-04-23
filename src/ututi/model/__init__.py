@@ -34,6 +34,7 @@ from sqlalchemy.orm.interfaces import MapperExtension
 
 from ututi.migration import GreatMigrator
 from ututi.model import meta
+from ututi.lib.helpers import image
 from ututi.lib.emails import group_invitation_email
 from ututi.lib.security import check_crowds
 from nous.mailpost import copy_chunked
@@ -211,6 +212,7 @@ def setup_orm(engine):
     orm.mapper(User,
                users_table,
                properties = {'emails': relation(Email, backref='user'),
+                             'medals': relation(Medal, backref='user'),
                              'raw_logo': deferred(users_table.c.logo),
                              'location': relation(LocationTag)})
 
@@ -224,6 +226,12 @@ def setup_orm(engine):
                          autoload=True,
                          autoload_with=engine)
     orm.mapper(Email, emails_table)
+
+    global user_medals_table
+    user_medals_table = Table("user_medals", meta.metadata,
+                              autoload=True,
+                              autoload_with=engine)
+    orm.mapper(Medal, user_medals_table)
 
     global subject_pages_table
     subject_pages_table = Table("subject_pages", meta.metadata,
@@ -678,6 +686,35 @@ class Email(object):
             return meta.Session.query(Email).filter(Email.email == email.lower()).one()
         except NoResultFound:
             return None
+
+
+class Medal(object):
+    """A medal for a user."""
+
+    MEDAL_IMG_PATH = '/images/medals/'
+    MEDAL_SIZE = dict(height=26, width=26)
+
+    def __init__(self, user, medal_type):
+        assert medal_type in self._medals(), medal_type
+        self.user = user
+        self.medal_type = medal_type
+
+    def _medals(self):
+        return {'admin': _('Administrator'),
+                'admin2': _('Administrator'),
+                'buyer': _('Sponsor'),
+                'buyer2': _('Sponsor'),
+                'support': _('Support'),
+                'support2': _('Support'),
+                'ututiman': _('Manager'),
+                'ututiman2': _('Manager')} 
+
+    def url(self):
+        return self.MEDAL_IMG_PATH + self.medal_type + '.png'
+
+    def img_tag(self):
+        return image(self.url(), alt=self._medals()[self.medal_type],
+                     **self.MEDAL_SIZE)
 
 
 class Folder(list):

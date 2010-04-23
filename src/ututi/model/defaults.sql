@@ -61,6 +61,15 @@ $get_user_by_email$ LANGUAGE sql;;
 
 insert into emails (id, email, confirmed) values (1, 'admin@ututi.lt', true);;
 
+/* user medals */
+create table user_medals (
+       id bigserial not null,
+       user_id int8 default null references users(id),
+       medal_type varchar(30) not null,
+       primary key (id));;
+
+insert into user_medals (user_id, medal_type) values (1, 'admin2');
+
 /* A generic table for Ututi objects */
 create table content_items (id bigserial not null,
        content_type varchar(20) not null default '',
