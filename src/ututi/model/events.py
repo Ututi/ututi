@@ -94,27 +94,48 @@ class PageModifiedEvent(Event):
     """
 
     def text_news(self):
-        return _('Page %(page_title)s (%(page_url)s) was updated.') % {
-            'page_title': self.page.title,
-            'page_url': self.page.url(qualified=True)}
+        if not self.page.isDeleted():
+            return _('Page %(page_title)s (%(page_url)s) was updated.') % {
+                'page_title': self.page.title,
+                'page_url': self.page.url(qualified=True)}
+        else:
+            return _('Page %(page_title)s was updated.') % {
+                'page_title': self.page.title}
 
     def html_news(self):
-        return _('Page %(page_title)s was updated.') % {
-            'page_title': link_to(self.page.title,
-                                  self.page.url(qualified=True))}
+        if not self.page.isDeleted():
+            return _('Page %(page_title)s was updated.') % {
+                'page_title': link_to(self.page.title,
+                                      self.page.url(qualified=True))}
+        else:
+            return _('Page %(page_title)s was updated.') % {
+                'page_title': self.page.title}
 
     def render(self):
-        return _("Page %(link_to_page)s of a subject %(link_to_subject)s was updated") % {
-            'link_to_subject': link_to(self.context.title, self.context.url()),
-            'link_to_page': link_to(self.page.title, self.page.url())}
+        if not self.page.isDeleted():
+            return _("Page %(page)s of a subject %(subject)s was updated") % {
+                'subject': self.context.title,
+                'page': self.page.title}
+        else:
+            return _("Page %(link_to_page)s of a subject %(link_to_subject)s was updated") % {
+                'link_to_subject': link_to(self.context.title, self.context.url()),
+                'link_to_page': link_to(self.page.title, self.page.url())}
 
     def shortened(self, context=True):
         if context:
-            return "%(link_to_context)s > %(link_to_page)s" % {
-                'link_to_context': link_to(self.context.title, self.context.url(), 23),
-                'link_to_page': link_to(self.page.title, self.page.url(), 23)}
+            if not self.page.isDeleted():
+                return "%(link_to_context)s > %(link_to_page)s" % {
+                    'link_to_context': link_to(self.context.title, self.context.url(), 23),
+                    'link_to_page': link_to(self.page.title, self.page.url(), 23)}
+            else:
+                return "%(context)s > %(page)s" % {
+                    'context': self.context.title,
+                    'page': self.page.title}
         else:
-            return "%(link_to_page)s" % {'link_to_page': link_to(self.page.title, self.page.url(), 35)}
+            if not self.page.isDeleted():
+                return "%(link_to_page)s" % {'link_to_page': link_to(self.page.title, self.page.url(), 35)}
+            else:
+                return "%(page)s" % {'page': self.page.title}
 
 
 class FileUploadedEvent(Event):
