@@ -5,6 +5,8 @@ import pkg_resources
 
 from martian.scan import module_info_from_dotted_name
 
+MIN_VERSION = 39
+
 
 def sql_migrate(name):
     base_name = name.split('.')[-1]
@@ -34,7 +36,7 @@ class EvolutionScript(object):
 
 class GreatMigrator(object):
 
-    min_version = 39
+    min_version = MIN_VERSION
 
     def __init__(self, engine, language=None):
         self.engine = engine
