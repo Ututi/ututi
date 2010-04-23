@@ -5,7 +5,7 @@ import sys
 import re
 
 MIGRATION_FILE_TEMPLATE = """\
-from stocky.migration import sql_migrate
+from ututi.migration import sql_migrate
 
 upgrade, downgrade = sql_migrate(__name__)
 """
