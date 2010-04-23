@@ -36,7 +36,6 @@ def page_action(method):
         except ValueError:
             abort(404)
 
-
         location = LocationTag.get(tags)
         if location is None:
             abort(404)
