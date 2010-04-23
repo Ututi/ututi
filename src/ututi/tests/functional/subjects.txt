@@ -1,7 +1,7 @@
 Subject adding and import
 =========================
 
-A list of all subjects is show at /subjects.
+A list of all subjects is shown at /subjects.
 
     >>> browser = Browser.logIn()
 
