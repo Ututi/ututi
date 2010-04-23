@@ -7,6 +7,8 @@ BOOTSTRAP_PYTHON=python2.5
 TIMEOUT=1
 BUILDOUT = bin/buildout -t $(TIMEOUT) && touch bin/*
 
+export LC_ALL := C
+
 
 .PHONY: all
 all: python/bin/python bin/buildout bin/paster
