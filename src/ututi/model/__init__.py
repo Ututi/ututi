@@ -1009,12 +1009,13 @@ class GroupMember(object):
     """
     def __init__(self, user=None, group=None, admin=False):
         """Create a group membership object."""
+        role_admin = GroupMembershipType.get('administrator')
+        role_member = GroupMembershipType.get('member')
         self.user = user
         self.group = group
+        self.role = role_member
         if admin:
-            self.role = GroupMembershipType.get('administrator')
-        else:
-            self.role = GroupMembershipType.get('member')
+            self.role = role_admin
 
     @classmethod
     def get(cls, user, group):
