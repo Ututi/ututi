@@ -701,8 +701,8 @@ class Medal(object):
 
     @staticmethod
     def available_medals():
-        return {'admin': _('Administrator'),
-                'admin2': _('Administrator'),
+        return {'admin': _('Group admin'),
+                'admin2': _('Group admin'),
                 'buyer': _('Sponsor'),
                 'buyer2': _('Sponsor'),
                 'support': _('Moderator'),
