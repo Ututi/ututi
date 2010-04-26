@@ -705,10 +705,10 @@ class Medal(object):
                 'admin2': _('Administrator'),
                 'buyer': _('Sponsor'),
                 'buyer2': _('Sponsor'),
-                'support': _('Support'),
-                'support2': _('Support'),
-                'ututiman': _('Manager'),
-                'ututiman2': _('Manager')} 
+                'support': _('Moderator'),
+                'support2': _('Moderator'),
+                'ututiman': _('Distinguished user'),
+                'ututiman2': _('Distinguished user')}
 
     def url(self):
         return self.MEDAL_IMG_PATH + self.medal_type + '.png'
