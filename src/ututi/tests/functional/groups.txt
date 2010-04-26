@@ -6,7 +6,7 @@ Group adding and import
     ...     stream = resource_stream("ututi.tests.functional.import", filename)
     ...     return (stream, 'text/plain', filename)
 
-A list of all groups is show at /groups.
+A list of all groups is shown at /groups.
 
     >>> browser = Browser.logIn()
 
