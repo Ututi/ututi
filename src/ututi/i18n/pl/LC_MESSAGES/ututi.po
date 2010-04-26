@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-02-22 16:42+0200\n"
+"PO-Revision-Date: 2010-04-26 15:12+0300\n"
 "Last-Translator: Jaroslav Šatkevič <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -424,6 +424,21 @@ msgstr "Wprowadź aktualny e-mail."
 msgid "The email already exists."
 msgstr "Taki e-mail już istnieje."
 
+msgid "Id does not reference what we either a group or a subject."
+msgstr ""
+
+msgid "Group admin"
+msgstr ""
+
+msgid "Sponsor"
+msgstr ""
+
+msgid "Moderator"
+msgstr ""
+
+msgid "Distinguished user"
+msgstr ""
+
 #, python-format
 msgid "A new file has been uploaded for the %(title)s:"
 msgstr "Do %(title)s został dodany nowy plik"
@@ -475,6 +490,10 @@ msgstr "Notatka %(page_title)s (%(page_url)s) została zaktualizowana."
 #, python-format
 msgid "Page %(page_title)s was updated."
 msgstr "Notatka %(page_title)s została zaktualizowana."
+
+#, python-format
+msgid "Page %(page)s of a subject %(subject)s was updated"
+msgstr ""
 
 #, python-format
 msgid "Page %(link_to_page)s of a subject %(link_to_subject)s was updated"
@@ -657,6 +676,9 @@ msgstr "U-blog"
 msgid "Advertising"
 msgstr "Reklama"
 
+msgid "Statistics"
+msgstr ""
+
 msgid "Terms of use"
 msgstr "Regulamin"
 
@@ -697,9 +719,6 @@ msgstr ""
 "Przechowywać <em>notatki ze studiów</em> i przekazywać je kolejnym "
 "pokoleniom studentów, tworzyć <em> grupy studyjne</em> i porozumiewać się"
 " z kolegami ze studiów."
-
-msgid "Statistics"
-msgstr ""
 
 msgid "Most popular subjects by users"
 msgstr ""
@@ -885,22 +904,30 @@ msgstr ""
 msgid "Adminstration dashboard"
 msgstr "Panel administracyjny"
 
-msgid "Events"
-msgstr "Wydarzenia"
-
-#, python-format
-msgid "found %(count)s event"
-msgid_plural "found %(count)s events"
-msgstr[0] "znaleziono %(count)s wydarzenie"
-msgstr[1] "znaleziono %(count)s wydarzenia"
-msgstr[2] "znaleziono %(count)s wydarzeń"
-
 #, python-format
 msgid "found %(count)s file"
 msgid_plural "found %(count)s files"
 msgstr[0] "znaleziono %(count)s plik"
 msgstr[1] "znaleziono %(count)s pliki"
 msgstr[2] "znaleziono %(count)s plików"
+
+#, python-format
+msgid "deleted by <a href=\"%(user_url)s\">%(user)s</a> on %(date)s"
+msgstr ""
+
+msgid "undelete"
+msgstr ""
+
+msgid "Parent id"
+msgstr ""
+
+msgid "Undelete"
+msgstr ""
+
+msgid ""
+"Parent id can be a path, e.g. subject/vu/matematika, group/matematikai, "
+"or a numeric id."
+msgstr ""
 
 msgid "Create new"
 msgstr "Utwórz"
@@ -913,6 +940,16 @@ msgstr "Opis"
 
 msgid "Upload"
 msgstr "Dodaj"
+
+msgid "Events"
+msgstr "Wydarzenia"
+
+#, python-format
+msgid "found %(count)s event"
+msgid_plural "found %(count)s events"
+msgstr[0] "znaleziono %(count)s wydarzenie"
+msgstr[1] "znaleziono %(count)s wydarzenia"
+msgstr[2] "znaleziono %(count)s wydarzeń"
 
 msgid "Groups"
 msgstr "Grupy"
@@ -1660,6 +1697,12 @@ msgstr "lista wydziałów"
 msgid "Back to %(subject_title)s"
 msgstr "Wróć do %(subject_title)s"
 
+msgid "Go back to history"
+msgstr ""
+
+msgid "Restore previous"
+msgstr ""
+
 msgid "Edit page"
 msgstr "Edytuj stronę"
 
@@ -1667,9 +1710,30 @@ msgstr "Edytuj stronę"
 msgid "Back to %(page_title)s"
 msgstr "Wróć do %(page_title)s"
 
+msgid "Go back to page"
+msgstr ""
+
+msgid "Show"
+msgstr ""
+
+msgid "Compare with previous"
+msgstr ""
+
+msgid "Restore"
+msgstr ""
+
+#, python-format
+msgid ""
+"You are viewing an old version of this page created by %(link_to_user)s "
+"on %(date)s"
+msgstr ""
+
 #, python-format
 msgid "Go back to %(subject_title)s"
 msgstr "Wróc do %(subject_title)s "
+
+msgid "View history"
+msgstr ""
 
 msgid "Last edit:"
 msgstr "Ostatnia zmiana:"
@@ -1889,20 +1953,15 @@ msgstr "Dlaczego potrzebujemy wsparcia"
 
 msgid ""
 "Ututi is just like wikipedia: every user can change, create, see and "
-"download the content for free.  But maintainance of servers, develpment "
+"download the content for free.  But maintainance of servers, development "
 "and supervision requires recources.  So if Ututi has helped you pass an "
 "exam, write your thesis or you just like Ututi, we are asking you to "
 "contribute by making a small donation :)"
 msgstr ""
-"Ututi jest jak Wikipedia: każdy uzytkownik może edytować, tworzyć, czytać"
-" i pobrać treści za darmo. Utrzymanie serwerów i dalszy rozwój wymagają "
-"jednak sporo środków. Jeśli więc Ututi pomogło Ci zaliczyć sesję, znaleźć"
-" ważne dla Ciebie notatki, przygotować się do kolokwium albo po prostu "
-"nasz lubisz - wesprzyj nas!"
 
 msgid ""
-"If you will donate at least 50 you will receive a gift &mdash; Ututi "
-"T-shirt (you can donate this amount in parts)."
+"If you donate at least 50 Lt, you will receive a gift &mdash; an Ututi "
+"T-shirt. You can donate this amount in parts."
 msgstr ""
 
 msgid "I want to donate:"
@@ -2007,6 +2066,12 @@ msgstr[2] "znaleziono %(count)s wyników"
 
 msgid "No results found."
 msgstr "Brak wyników."
+
+msgid "[DELETED]"
+msgstr ""
+
+msgid "Uploading"
+msgstr ""
 
 msgid "Done"
 msgstr "Gotowe"
@@ -2159,6 +2224,24 @@ msgstr "Na razie niczym."
 #, python-format
 msgid "Log in as %(user)s"
 msgstr "Zaloguj się jako %(user)s"
+
+msgid "Award medals"
+msgstr ""
+
+msgid "Back to profile"
+msgstr ""
+
+msgid "Current medals"
+msgstr ""
+
+msgid "Take away"
+msgstr ""
+
+msgid "Award a medal"
+msgstr ""
+
+msgid "Award"
+msgstr ""
 
 msgid "Full title"
 msgstr "Pełna nazwa"

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-02-22 16:42+0200\n"
+"PO-Revision-Date: 2010-04-26 15:12+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -406,6 +406,21 @@ msgstr ""
 msgid "The email already exists."
 msgstr ""
 
+msgid "Id does not reference what we either a group or a subject."
+msgstr ""
+
+msgid "Group admin"
+msgstr ""
+
+msgid "Sponsor"
+msgstr ""
+
+msgid "Moderator"
+msgstr ""
+
+msgid "Distinguished user"
+msgstr ""
+
 #, python-format
 msgid "A new file has been uploaded for the %(title)s:"
 msgstr ""
@@ -452,6 +467,10 @@ msgstr ""
 
 #, python-format
 msgid "Page %(page_title)s was updated."
+msgstr ""
+
+#, python-format
+msgid "Page %(page)s of a subject %(subject)s was updated"
 msgstr ""
 
 #, python-format
@@ -623,6 +642,9 @@ msgstr ""
 msgid "Advertising"
 msgstr ""
 
+msgid "Statistics"
+msgstr ""
+
 msgid "Terms of use"
 msgstr ""
 
@@ -655,9 +677,6 @@ msgstr ""
 msgid ""
 "Store <em>study materials</em> and pass them on for future generations, "
 "create <em>academic groups</em>       and communicate with groupmates."
-msgstr ""
-
-msgid "Statistics"
 msgstr ""
 
 msgid "Most popular subjects by users"
@@ -800,20 +819,29 @@ msgstr ""
 msgid "Adminstration dashboard"
 msgstr ""
 
-msgid "Events"
-msgstr ""
-
-#, python-format
-msgid "found %(count)s event"
-msgid_plural "found %(count)s events"
-msgstr[0] ""
-msgstr[1] ""
-
 #, python-format
 msgid "found %(count)s file"
 msgid_plural "found %(count)s files"
 msgstr[0] ""
 msgstr[1] ""
+
+#, python-format
+msgid "deleted by <a href=\"%(user_url)s\">%(user)s</a> on %(date)s"
+msgstr ""
+
+msgid "undelete"
+msgstr ""
+
+msgid "Parent id"
+msgstr ""
+
+msgid "Undelete"
+msgstr ""
+
+msgid ""
+"Parent id can be a path, e.g. subject/vu/matematika, group/matematikai, "
+"or a numeric id."
+msgstr ""
 
 msgid "Create new"
 msgstr ""
@@ -826,6 +854,15 @@ msgstr ""
 
 msgid "Upload"
 msgstr ""
+
+msgid "Events"
+msgstr ""
+
+#, python-format
+msgid "found %(count)s event"
+msgid_plural "found %(count)s events"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "Groups"
 msgstr ""
@@ -1480,6 +1517,12 @@ msgstr ""
 msgid "Back to %(subject_title)s"
 msgstr ""
 
+msgid "Go back to history"
+msgstr ""
+
+msgid "Restore previous"
+msgstr ""
+
 msgid "Edit page"
 msgstr ""
 
@@ -1487,8 +1530,29 @@ msgstr ""
 msgid "Back to %(page_title)s"
 msgstr ""
 
+msgid "Go back to page"
+msgstr ""
+
+msgid "Show"
+msgstr ""
+
+msgid "Compare with previous"
+msgstr ""
+
+msgid "Restore"
+msgstr ""
+
+#, python-format
+msgid ""
+"You are viewing an old version of this page created by %(link_to_user)s "
+"on %(date)s"
+msgstr ""
+
 #, python-format
 msgid "Go back to %(subject_title)s"
+msgstr ""
+
+msgid "View history"
 msgstr ""
 
 msgid "Last edit:"
@@ -1701,15 +1765,15 @@ msgstr ""
 
 msgid ""
 "Ututi is just like wikipedia: every user can change, create, see and "
-"download the content for free.  But maintainance of servers, develpment "
+"download the content for free.  But maintainance of servers, development "
 "and supervision requires recources.  So if Ututi has helped you pass an "
 "exam, write your thesis or you just like Ututi, we are asking you to "
 "contribute by making a small donation :)"
 msgstr ""
 
 msgid ""
-"If you will donate at least 50 you will receive a gift &mdash; Ututi "
-"T-shirt (you can donate this amount in parts)."
+"If you donate at least 50 Lt, you will receive a gift &mdash; an Ututi "
+"T-shirt. You can donate this amount in parts."
 msgstr ""
 
 msgid "I want to donate:"
@@ -1799,6 +1863,12 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid "No results found."
+msgstr ""
+
+msgid "[DELETED]"
+msgstr ""
+
+msgid "Uploading"
 msgstr ""
 
 msgid "Done"
@@ -1942,6 +2012,24 @@ msgstr ""
 
 #, python-format
 msgid "Log in as %(user)s"
+msgstr ""
+
+msgid "Award medals"
+msgstr ""
+
+msgid "Back to profile"
+msgstr ""
+
+msgid "Current medals"
+msgstr ""
+
+msgid "Take away"
+msgstr ""
+
+msgid "Award a medal"
+msgstr ""
+
+msgid "Award"
 msgstr ""
 
 msgid "Full title"
