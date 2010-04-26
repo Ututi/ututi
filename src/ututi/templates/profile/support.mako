@@ -8,11 +8,11 @@
 <h1>${_('Why we need support?')}</h1>
 
 <p style="padding-top: 7px">${_('Ututi is just like wikipedia: every user can change, create, see and download the content for free.'
-       '  But maintainance of servers, develpment and supervision requires recources.'
+       '  But maintainance of servers, development and supervision requires recources.'
        '  So if Ututi has helped you pass an exam, write your thesis or you just like Ututi,'
        ' we are asking you to contribute by making a small donation :)')}
 </p>
-<p>${h.literal(_('If you will donate at least 50 you will receive a gift &mdash; Ututi T-shirt (you can donate this amount in parts).'))}</p>
+<p>${h.literal(_('If you donate at least 50 Lt, you will receive a gift &mdash; an Ututi T-shirt. You can donate this amount in parts.'))}</p>
 
 <br />
 
