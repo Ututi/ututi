@@ -62,7 +62,7 @@ ${_('student information online')}
       ${c.user.emails[0].email}
     </div>
     <div class="medals">
-      % for medal in c.user.medals:
+      % for medal in c.user.all_medals():
           ${medal.img_tag()}
       % endfor
     </div>

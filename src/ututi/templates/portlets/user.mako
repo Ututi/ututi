@@ -140,7 +140,7 @@
           </div>
         %endif
         <div class="medals" id="user-medals">
-          % for medal in user.medals:
+          % for medal in user.all_medals():
               ${medal.img_tag()}
           % endfor
         </div>

@@ -653,6 +653,34 @@ class User(object):
         return [membership.group
                 for membership in self.memberships]
 
+    def all_medals(self):
+        is_moderator = bool(meta.Session.query(GroupMember
+            ).filter_by(user=self, role=GroupMembershipType.get('moderator')
+            ).count())
+        is_admin = bool(meta.Session.query(GroupMember
+            ).filter_by(user=self, role=GroupMembershipType.get('administrator')
+            ).count())
+        is_supporter = bool(meta.Session.query(Payment
+            ).filter_by(user=self, payment_type='support'
+            ).count())
+
+        implicit_medals = {'support': is_moderator,
+                           'admin': is_admin,
+                           'buyer': is_supporter}
+
+        medals = list(self.medals)
+        def has_medal(medal_type):
+            for medal in medals:
+                if medal.medal_type == medal_type:
+                    return True
+            else:
+                return False
+
+        for medal_type, test_f in implicit_medals.items():
+            if test_f and not has_medal(medal_type):
+                medals.append(Medal(self, medal_type))
+        return medals
+
     def __init__(self, fullname, password, gen_password=True):
         self.fullname = fullname
         self.update_password(password, gen_password)
