@@ -125,6 +125,29 @@ from ututi.lib.security import is_root
   </div>
 % endif
 
+        <hr />
+
+        <h2>${_('Access settings')}</h2>
+
+        <div class="form-field">
+          <label for="approve_new_members">${_('New members')}</label>
+          ${h.radio("approve_new_members", "none",
+            label=_('Anyone can join the group any time'))}
+          ${h.radio("approve_new_members", "admin",
+            label=_('Administrators have to approve new members'))}
+        </div>
+
+        <div class="form-field">
+          <label for="forum_visibility">${_('Group forum and mailing list visibility')}</label>
+          ${h.radio("forum_visibility", "public", label=_('Public'))}
+          ${h.radio("forum_visibility", "members", label=_('Members only'))}
+        </div>
+
+        <div class="form-field">
+          <label for="page_visibility">${_('Group page visibility')}</label>
+          ${h.radio("page_visibility", "public", label=_('Public'))}
+          ${h.radio("page_visibility", "members", label=_('Members only'))}
+        </div>
 
   ${h.input_submit()}
       </td>
