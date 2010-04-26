@@ -717,7 +717,8 @@ class Medal(object):
         return self.available_medals()[self.medal_type]
 
     def img_tag(self):
-        return image(self.url(), alt=self.title(), **self.MEDAL_SIZE)
+        return image(self.url(), alt=self.title(), title=self.title(),
+                     **self.MEDAL_SIZE)
 
 
 class Folder(list):
