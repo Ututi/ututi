@@ -654,6 +654,7 @@ class User(object):
                 for membership in self.memberships]
 
     def all_medals(self):
+        """Return a list of medals for this user, including implicit medals."""
         is_moderator = bool(meta.Session.query(GroupMember
             ).filter_by(user=self, role=GroupMembershipType.get('moderator')
             ).count())
