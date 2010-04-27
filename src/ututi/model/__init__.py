@@ -731,13 +731,13 @@ class Medal(object):
     @staticmethod
     def available_medals():
         return {'admin': _('Group admin'),
-                'admin2': _('Group admin'),
+                'admin2': _('Admin'),
                 'buyer': _('Sponsor'),
-                'buyer2': _('Sponsor'),
+                'buyer2': _('Gold sponsor'),
                 'support': _('Moderator'),
-                'support2': _('Moderator'),
+                'support2': _('Best moderator'),
                 'ututiman': _('Distinguished user'),
-                'ututiman2': _('Distinguished user')}
+                'ututiman2': _('The best distinguished user')}
 
     def url(self):
         return self.MEDAL_IMG_PATH + self.medal_type + '.png'
