@@ -1,5 +1,5 @@
-Group joining (for anonymous users)
-===================================
+Joining a group (for anonymous users)
+=====================================
 
 Anonymous users are shown the button to join a group. After clicking on it,
 they are urged to register, which automatically fulfills their wish to
