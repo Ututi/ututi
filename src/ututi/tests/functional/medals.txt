@@ -19,7 +19,7 @@ The medal should have appeared in the user's information portlet:
 
     >>> browser.printQuery('id("user-medals")')
     <div class="medals" id="user-medals">
-      <img alt="Sponsor" height="26" src="/images/medals/buyer2.png" title="Sponsor" width="26" />
+      <img alt="Gold sponsor" height="26" src="/images/medals/buyer2.png" title="Gold sponsor" width="26" />
     </div>
 
 Now we'll take away the medal:
