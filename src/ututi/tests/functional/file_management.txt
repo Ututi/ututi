@@ -22,6 +22,7 @@ File upload:
       <input class="move_url" type="hidden" value="/subject/vu/mat_analize/file/3/move" />
       <input class="copy_url" type="hidden" value="/subject/vu/mat_analize/file/3/copy" />
       <input class="delete_url" type="hidden" value="/subject/vu/mat_analize/file/3/delete" />
+      <input class="folder_title_value" type="hidden" value="" />
       <img src="/images/delete.png" alt="delete file" class="delete_button" />
     </li>
 
@@ -162,6 +163,7 @@ Both folders should be gone:
     <h4>
                 Some folder ...
     </h4>
+    <h4 class="trash_heading">Trash</h4>
 
     >>> browser.open('http://localhost/group/moderators/files')
     >>> browser.printQuery('//h4')
@@ -172,6 +174,7 @@ Both folders should be gone:
     <h4>
                 Uga Buga ...
     </h4>
+    <h4 class="trash_heading">Trash</h4>
 
 Deleting files:
 

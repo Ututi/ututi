@@ -62,6 +62,11 @@ class SubjectfileController(BasefilesController):
         return self._delete(file)
 
     @subject_file_action
+    @ActionProtector('owner', 'moderator')
+    def restore(self, subject, file):
+        return self._restore(file)
+
+    @subject_file_action
     @ActionProtector('user')
     def move(self, subject, file):
         return self._move(subject, file)

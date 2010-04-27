@@ -35,7 +35,7 @@ def group_file_action(method):
         if file not in group.files:
             abort(404)
 
-        c.security_context = group
+        c.security_context = file
         c.object_location = group.location
         c.group = group
         c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
@@ -52,9 +52,14 @@ class GroupfileController(BasefilesController):
         return self._get(file)
 
     @group_file_action
-    @ActionProtector('admin')
+    @ActionProtector('admin', 'owner')
     def delete(self, group, file):
         return self._delete(file)
+
+    @group_file_action
+    @ActionProtector('deleter', 'owner')
+    def restore(self, group, file):
+        return self._restore(file)
 
     @group_file_action
     @ActionProtector('member', 'admin')

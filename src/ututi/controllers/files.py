@@ -54,11 +54,18 @@ class BasefilesController(BaseController):
     def _delete(self, file):
         file.deleted = c.user
         meta.Session.commit()
+        return render_mako_def('/sections/files.mako','file', file=file)
+
+    def _restore(self, file):
+        file.deleted = None
+        meta.Session.commit()
+        return render_mako_def('/sections/files.mako','file', file=file)
 
     def _move(self, source, file):
         source_folder = file.folder
 
         file.folder = request.POST['target_folder']
+        file.deleted = None
 
         if source_folder and source.getFolder(source_folder) is None:
             source.files.append(File.makeNullFile(source_folder))

@@ -14,8 +14,13 @@ $(document).ready(function(){
           var source_id = ui.sender.parents('.section').children('.container').children('.id').val();
           var target_id = ui.item.parents('.section').children('.container').children('.id').val();
           var target_folder = ui.item.parents('.folder_file_area').children('.folder_name').val();
+          var target_is_trash = ui.item.parents('.folder').hasClass('.trash_folder');
 
           if (source_id != target_id) {
+              if (target_is_trash) {
+                  $(ui.sender).sortable('cancel');
+                  return;
+              }
               $.ajax({type: "POST",
                       url: copy_url,
                       data: ({source_id: source_id,
@@ -25,6 +30,7 @@ $(document).ready(function(){
                           var new_item = $(msg).insertAfter($(ui.item));
                           $(ui.sender).sortable('cancel');
                           new_item.parents('.folder').children('.message').hide();
+                          new_item.parents('.folder').closest('.folder_file_area').find('.delete_folder_button').hide();
                           $('.delete_button', new_item).click(deleteFile);
                           updateSizeInformation($('.section.size_indicated'));
                       },
@@ -38,16 +44,19 @@ $(document).ready(function(){
                       url: move_url,
                       data: ({target_folder: target_folder}),
                       success: function(msg){
-
                           if (ui.sender.children('.file').size() == 0) {
                              ui.sender.children('.message').show();
+                             ui.sender.closest('.folder_file_area').find('.delete_folder_button').show()
                           } else {
                               ui.sender.children('.message').hide();
+                              ui.sender.closest('.folder_file_area').find('.delete_folder_button').hide();
                           }
                           if (ui.item.parents('.folder').children('.file').size() == 0) {
                               ui.item.parents('.folder').children('.message').show();
+                              ui.item.closest('.folder_file_area').find('.delete_folder_button').show()
                           } else {
                               ui.item.parents('.folder').children('.message').hide();
+                              ui.item.closest('.folder_file_area').find('.delete_folder_button').hide()
                           }
                           updateSizeInformation($('.section.size_indicated'));
                       },
@@ -58,25 +67,19 @@ $(document).ready(function(){
           }
     }
 
-
-    $(".section.open .folder").sortable({
+    var sortable_config = {
       connectWith: ['.folder'],
       cancel: '.message',
       helper: 'clone',
       receive: folderReceive,
       handle: 'img.drag-target',
       axis: 'y'
-    });
+    };
+
+    $(".section.open .folder").sortable(sortable_config);
 
     $(".section").bind("expand", function() {
-      $('.folder', this).sortable({
-        connectWith: ['.folder'],
-        cancel: '.message',
-        helper: 'clone',
-        receive: folderReceive,
-        handle: 'img.drag-target',
-        axis: 'y'
-      });
+      $('.folder', this).sortable(sortable_config);
     });
 
     function setUpFolder(i, btn) {
@@ -123,11 +126,13 @@ $(document).ready(function(){
                   $('.folder', result_area).append(response);
                   $('.delete_button', result_area).click(deleteFile);
                   $('.folder .message', result_area).hide();
+                  $('.folder_file_area .delete_folder_button', result_area).hide();
                   updateSizeInformation($(result_area).parents('.section'));
               } else {
                   iframe['progress_ticker'].text("${_('File upload failed.')}").parent().addClass('failed');
                   window.clearInterval(iframe['interval']);
                   $('.folder .message', result_area).hide();
+                  $('.folder_file_area .delete_folder_button', result_area).hide();
                   updateSizeInformation($(result_area).parents('.section'));
               }
           }
@@ -143,9 +148,7 @@ $(document).ready(function(){
     buttons.each(setUpFolder);
     $('.single_upload .upload').each(setUpFolder);
 
-    function newFolder(target) {
-        var section_id = target.id.split('-')[1];
-        var folder_name = $('#new_folder_input-' + section_id).val();
+    function createFolder(section_id, folder_name) {
         if ($.trim(folder_name) != '') {
            $('#new_folder_input-' + section_id).val('');
             var url = $('#create_folder_url-' + section_id).val();
@@ -154,7 +157,10 @@ $(document).ready(function(){
                   data: ({section_id: section_id, folder: folder_name}),
                   success: function(msg){
                       if (msg != '') {
-                          $('#file_section-' + section_id + ' .container').append($(msg).filter('.folder_file_area'));
+                          // XXX find the old folder, insert new one after it, delete it
+                          var area = $(msg).filter('.folder_file_area').insertBefore($('#file_section-' + section_id + ' .trash_folder_file_area'));
+                          area.find('.delete_button').click(deleteFile);
+
                           section = $('#file_upload_dropdown-' + section_id)
                           if (section.hasClass('open')) {
                               section.children('.click').click();
@@ -162,15 +168,17 @@ $(document).ready(function(){
                           section.find('.target_item:last').removeClass('last').after($(msg)[0]);
                           section.find('.target_item:last').addClass('last');
                           setUpFolder(0, $(' .upload:last', section)[0]);
-                          $(".folder").sortable({
-                            connectWith: ['.folder'],
-                            cancel: '.message',
-                            receive: folderReceive
-                          });
+                          $(".folder").sortable(sortable_config);
                           updateSizeInformation($('#file_section-'+section_id));
                         }
                   }});
         }
+    }
+
+    function newFolder(target) {
+        var section_id = target.id.split('-')[1];
+        var folder_name = $('#new_folder_input-' + section_id).val();
+        createFolder(section_id, folder_name)
     }
 
     function deleteFolder(target) {
@@ -182,7 +190,7 @@ $(document).ready(function(){
                 url: url,
                 data: ({folder: folder_name}),
                 success: function(msg){
-                    $('#file_area-' + section_id + '-' + fid).hide()
+                    $('#file_area-' + section_id + '-' + fid).remove()
                     btn = $('#file_upload_button-' + section_id + '-' + fid);
                     control = btn.parents('.upload_dropdown');
                     btn.parent().remove();
@@ -191,20 +199,64 @@ $(document).ready(function(){
     }
 
     function deleteFile(event) {
-        var folder = $(event.target).parent().parent();
-        var url = $(event.target).prev('.delete_url').val();
+        var folder = $(event.target).closest('.folder');
+        var url = $(event.target).closest('.file').children('.delete_url').val();
+        var section = $(event.target).closest('.section');
+        var section_area_id = section[0].id;
+        var sid = section_area_id.split('-')[1];
+        var trash_bin = $('#file_area-' + sid + '-trash');
+
         $.ajax({type: "GET",
                 url: url,
                 success: function(msg){
                     $(event.target).parent().remove();
                     if ($('.file', folder).size() == 0) {
                         $('.message', folder).show();
+                        folder.closest('.folder_file_area').find('.delete_folder_button').show();
                     }
+                    var new_item = $(msg);
+                    trash_bin.show();
+                    trash_bin.children('.folder').append(new_item);
+                    new_item.parents('.folder').children('.message').hide();
+                    $('.restore_button', new_item).click(restoreFile);
                     updateSizeInformation($(folder).parents('.section'));
         }});
     }
 
+    function restoreFile(event) {
+        var folder = $(event.target).closest('.folder');
+        var url = $(event.target).closest('.file').children('.restore_url').val();
+        var section = $(event.target).closest('.section');
+
+        $.ajax({type: "GET",
+                url: url,
+                success: function(msg){
+                    $(event.target).closest('.file').remove();
+                    if ($('.file', folder).size() == 0) {
+                        $('.message', folder).show();
+                        folder.closest('.folder_file_area').find('.delete_folder_button').show();
+                    }
+                    var new_item = $(msg);
+                    var folder_name = $(msg).children('.folder_title_value').val();
+                    var target_folder_title_attr = section.contents().find('.folder_file_area .folder_name').filter(function (n) { return this.value == folder_name});
+                    var target_folder = target_folder_title_attr.closest('.folder_file_area').children('.folder');
+                    if (target_folder.size() == 0)
+                    {
+                        createFolder(section[0].id.split('-')[1], folder_name);
+                    }
+                    else {
+                        target_folder.append(new_item);
+                        target_folder.show();
+                        new_item.parents('.folder').children('.message').hide();
+                        new_item.closest('.folder_file_area').find('.delete_folder_button').hide();
+                        $('.delete_button', new_item).click(deleteFile);
+                        updateSizeInformation($(folder).parents('.section'));
+                    }
+        }});
+    }
+
     $('.delete_button').click(deleteFile);
+    $('.restore_button').click(restoreFile);
 
     $('.new_folder_button').click(function (event) {
         newFolder(event.target);
@@ -257,12 +309,13 @@ $(document).ready(function(){
 </%def>
 
 <%def name="file(file, new_file=False)">
+  %if file.deleted is None:
             <li class="file">
-              %if new_file:
-                ${h.image('/images/details/icon_drag_file_new.png', alt='file icon', class_='drag-target')|n}
-              %else:
-                ${h.image('/images/details/icon_drag_file.png', alt='file icon', class_='drag-target')|n}
-              %endif
+            %if new_file:
+              ${h.image('/images/details/icon_drag_file_new.png', alt='file icon', class_='drag-target')|n}
+            %else:
+              ${h.image('/images/details/icon_drag_file.png', alt='file icon', class_='drag-target')|n}
+            %endif
               ${h.link_to(file.title, file.url())}
               <span class="size">(${h.file_size(file.size)})</span>
               <span class="date">${h.fmt_dt(file.created_on)}</span>
@@ -272,10 +325,30 @@ $(document).ready(function(){
               <input class="move_url" type="hidden" value="${file.url(action='move')}" />
               <input class="copy_url" type="hidden" value="${file.url(action='copy')}" />
               <input class="delete_url" type="hidden" value="${file.url(action='delete')}" />
-              %if file.can_write():
-                <img src="${url('/images/delete.png')}" alt="delete file" class="delete_button" />
-              %endif
+              <input class="folder_title_value" type="hidden" value="${file.folder}" />
+            %if file.can_write():
+              <img src="${url('/images/delete.png')}" alt="${_('delete file')}" class="delete_button" />
+            %endif
             </li>
+  %else: ## deleted file
+            <li class="file">
+              ${h.image('/images/details/icon_drag_file.png', alt='file icon', class_='drag-target')|n}
+              ${h.link_to(file.title, file.url())}
+              %if file.folder:
+              <span class="folder_title">(${file.folder})</span>
+              %endif
+              <span class="size">(${h.file_size(file.size)})</span>
+              <span class="date">${_('deleted')} ${h.fmt_dt(file.deleted_on)}</span>,
+              <a href="${file.deleted.url()}" class="author">
+                ${file.deleted.fullname}
+              </a>
+              <input class="move_url" type="hidden" value="${file.url(action='move')}" />
+              <input class="copy_url" type="hidden" value="${file.url(action='copy')}" />
+              <input class="restore_url" type="hidden" value="${file.url(action='restore')}" />
+              <input class="folder_title_value" type="hidden" value="${file.folder}" />
+              <img src="${url('/images/restore.png')}" alt="${_('restore file')}" class="restore_button" />
+            </li>
+  %endif
 </%def>
 
 <%def name="folder_button(folder, section_id, fid, cls='', title=None)">
@@ -294,18 +367,21 @@ $(document).ready(function(){
       %>
       <div class="folder_file_area ${cls}" id="file_area-${section_id}-${fid}">
         <input class="folder_name" id="file_folder_name-${section_id}-${fid}" type="hidden" value="${folder.title}" />
+        <%
+           style = ''
+           files = [file for file in folder if file.deleted is None]
+           if files:
+               style = h.literal('style="display: none;"')
+        %>
         % if folder.title != '':
           <h4>
             ${folder.title}
             % if folder.can_write(c.user):
-              <a href="${folder.parent.url(action='delete_folder', folder=folder.title)}" id="delete_folder_button-${section_id}-${fid}" class="delete_folder_button">${_("(Delete)")}</a>
+              <a ${style} href="${folder.parent.url(action='delete_folder', folder=folder.title)}" id="delete_folder_button-${section_id}-${fid}" class="delete_folder_button">${_("(Delete)")}</a>
             % endif
           </h4>
         % endif
           <ul class="folder">
-        <%
-           files = [file for file in folder if file.deleted is None]
-        %>
         % if files:
               <li style="display: none;" class="message">${_("There are no files here, this folder is empty!")}</li>
               % for file in files:
@@ -445,6 +521,33 @@ $(document).ready(function(){
       % for fid, folder in enumerate(obj.folders):
         <%self:folder folder="${folder}" section_id="${section_id}" fid="${fid}" />
       % endfor
+
+      <%
+      if h.check_crowds(['moderator'], context=obj):
+          style = ''
+          files = [file for file in obj.files
+                   if (file.deleted is not None and
+                       not file.isNullFile())]
+          if not files: style = h.literal('style="display: none"')
+      else:
+          style = h.literal('style="display: none"')
+          files = []
+      %>
+      <div ${style} class="folder_file_area subfolder trash_folder_file_area" id="file_area-${section_id}-trash">
+          <h4 class="trash_heading">${_('Trash')}</h4>
+          <ul class="folder trash_folder">
+        %if files:
+              <li style="display: none;" class="message">${_("There are no deleted files.")}</li>
+              %for file in files:
+                %if file.deleted is not None:
+                  <%self:file file="${file}" />
+                %endif
+              %endfor
+        %else:
+              <li class="message">${_("There are no deleted files.")}</li>
+        %endif
+          </ul>
+      </div>
     </div>
   </div>
 </%def>

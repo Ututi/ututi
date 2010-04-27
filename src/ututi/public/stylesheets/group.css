@@ -92,6 +92,9 @@ ul.event-list li {
 /* end group changes portlet */
 
 /* group files portlet */
+.restore_button,
+.rename_button,
+.flag_button,
 .delete_button {
   cursor: pointer;
 }

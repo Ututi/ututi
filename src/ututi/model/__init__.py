@@ -1510,9 +1510,11 @@ class NotifyGG(MapperExtension):
 
 class FileDownload(object):
     """Class representing the user downloading a certain file."""
+
     def __init__(self, user, file):
         self.user = user
         self.file = file
+
 
 class File(ContentItem):
     """Class representing user-uploaded files."""

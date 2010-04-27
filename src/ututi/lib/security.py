@@ -65,6 +65,9 @@ def is_user(user, context=None):
 def is_owner(user, context=None):
     return context.created is user
 
+def is_deleter(user, context=None):
+    return context.deleted is user
+
 def is_smallfile(user, context=None):
     from ututi.model import Subject, File
 
@@ -79,6 +82,7 @@ crowd_checkers = {
     "admin": is_admin,
     "member": is_member,
     "owner": is_owner,
+    "owner": is_deleter,
     "user": is_user,
     "smallfile": is_smallfile,
     }
