@@ -271,8 +271,8 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
                                    context_type='group_join')
             deny(_('You have to log in or register to request group membership.'), 401)
 
-        request = PendingRequest.get(c.user, group)
-        if request is None and not group.is_member(c.user):
+        pending_request = PendingRequest.get(c.user, group)
+        if pending_request is None and not group.is_member(c.user):
             if self._check_handshakes(group, c.user) == 'invitation':
                 group.add_member(c.user)
                 self._clear_requests(group, c.user)
