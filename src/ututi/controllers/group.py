@@ -273,7 +273,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
 
         request = PendingRequest.get(c.user, group)
         if request is None and not group.is_member(c.user):
-            if c.user is not None and self._check_handshakes(group, c.user) == 'invitation':
+            if self._check_handshakes(group, c.user) == 'invitation':
                 group.add_member(c.user)
                 self._clear_requests(group, c.user)
                 h.flash(_('You are now a member of the group %s!') % group.title)
