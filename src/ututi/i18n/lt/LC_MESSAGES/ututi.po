@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-04-27 15:12+0300\n"
+"PO-Revision-Date: 2010-04-27 16:28+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -439,25 +439,25 @@ msgid "Group admin"
 msgstr "Grupės administratorius"
 
 msgid "Admin"
-msgstr ""
+msgstr "Administratorius"
 
 msgid "Sponsor"
 msgstr "Rėmėjas"
 
 msgid "Gold sponsor"
-msgstr ""
+msgstr "Auksinis sponsorius"
 
 msgid "Moderator"
 msgstr "Moderatorius"
 
 msgid "Best moderator"
-msgstr ""
+msgstr "Auksinis moderatorius"
 
 msgid "Distinguished user"
 msgstr "Ututininkas"
 
 msgid "The best distinguished user"
-msgstr ""
+msgstr "Super-ututininkas"
 
 #, python-format
 msgid "A new file has been uploaded for the %(title)s:"
@@ -929,16 +929,16 @@ msgstr[2] "rasta %(count)s failų"
 
 #, python-format
 msgid "deleted by <a href=\"%(user_url)s\">%(user)s</a> on %(date)s"
-msgstr ""
+msgstr "ištrynė <a href=\"%(user_url)s\">%(user)s</a> %(date)s"
 
 msgid "undelete"
-msgstr ""
+msgstr "atkurti"
 
 msgid "Parent id"
 msgstr ""
 
 msgid "Undelete"
-msgstr "Atstatyti"
+msgstr "Atkurti"
 
 msgid ""
 "Parent id can be a path, e.g. subject/vu/matematika, group/matematikai, "
@@ -1426,28 +1426,28 @@ msgid "Default group tab"
 msgstr "Pradinis grupės skirtukas"
 
 msgid "Access settings"
-msgstr ""
+msgstr "Prieiga"
 
 msgid "New members"
-msgstr ""
+msgstr "Narių priėmimas"
 
 msgid "Anyone can join the group any time"
-msgstr ""
+msgstr "Visi gali laisvai prisijungti"
 
 msgid "Administrators have to approve new members"
-msgstr ""
+msgstr "Administratorius turi patvirtinti naujus narius"
 
 msgid "Group forum and mailing list visibility"
-msgstr ""
+msgstr "Grupės forumo ir el. pašto archyvas"
 
 msgid "Public"
-msgstr ""
+msgstr "Viešas"
 
 msgid "Members only"
-msgstr ""
+msgstr "Matomas tik nariams"
 
 msgid "Group page visibility"
-msgstr ""
+msgstr "Grupės puslapio viešumas"
 
 msgid "Edit group front page"
 msgstr "Redaguoti grupės pagrindinį puslapį"
@@ -1515,7 +1515,7 @@ msgstr ""
 "adresus."
 
 msgid "Invite"
-msgstr "pakviesti"
+msgstr "Pakviesti"
 
 msgid "Invited users (have not accepted yet)"
 msgstr "Pakviesti draugai (bet dar neprisijungę)"
@@ -1567,7 +1567,7 @@ msgid "back to the group's files"
 msgstr "grįžti į grupės failus"
 
 msgid "You have decided not to increase Your group's file limit"
-msgstr "Jūs nusprendėte nedidinti grupės failų limito"
+msgstr "Nusprendėte nedidinti grupės failų limito"
 
 msgid ""
 "We hope You did not increase Your group's file limit because You decided "
@@ -1588,14 +1588,14 @@ msgid "At the moment payments for the group's file limit cannot be made."
 msgstr "Šiuo metu grupių apmokėjimai nepriimami."
 
 msgid "Back to the group's files"
-msgstr "grįžti į grupės failus"
+msgstr "Grįžti į grupės failus"
 
 #, python-format
 msgid "Subject %(subj)s was selected."
 msgstr "Dalykas %(subj)s buvo pasirinktas."
 
 msgid "Watch"
-msgstr "stebėti"
+msgstr "Stebėti"
 
 msgid ""
 "This is the list of subjects watched by this group. By selecting to watch"
