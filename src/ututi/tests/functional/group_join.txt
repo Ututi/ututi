@@ -32,5 +32,43 @@ request group membership.
    Your
    (jonas@example.com) is not confirmed! Please confirm your email by clicking on the link sent to your address or
 
-   >>> from ututi.lib.mailer import mail_queue
-   >>> mail_queue[:] = []
+
+Joining a public group
+======================
+
+If a group is public, administrators do not have to approve new members.
+
+    >>> abrowser = Browser.logIn()
+
+Let's add a new group:
+
+    >>> abrowser.open('http://localhost/groups/add')
+    >>> abrowser.getControl('Group email address').value = 'test'
+    >>> abrowser.getControl('Group title').value = 'Test group'
+    >>> abrowser.getControl(name='location-0').value = 'Vilniaus universitetas'
+    >>> abrowser.getControl('Year').value = ['2009']
+    >>> abrowser.getControl('Continue').click()
+
+We won't invite anyone for now:
+
+    >>> abrowser.getControl('Continue').click()
+
+Now, let's go to group settings and make the group public:
+
+    >>> abrowser.getLink('Edit').click()
+    >>> abrowser.getControl('Anyone can join the group any time').click()
+    >>> abrowser.getControl('Save').click()
+
+Now, the previous user comes over and tries to join:
+
+    >>> browser.open('http://localhost/group/test')
+    >>> browser.getControl('Join the group').click()
+
+We're in the group.  For example, we can see the group's files now:
+
+    >>> browser.getLink('Files')
+    <Link text='Files' url='http://localhost/group/test/files'>
+
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> mail_queue[:] = []

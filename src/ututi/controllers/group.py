@@ -120,7 +120,11 @@ class GroupLiveSearchForm(Schema):
 
 class EditGroupForm(GroupForm):
     """A schema for validating group edits."""
+
     default_tab = validators.OneOf(['home', 'forum', 'members', 'files', 'subjects', 'page'])
+    approve_new_members = validators.OneOf(['none', 'admin'])
+    forum_visibility = validators.OneOf(['public', 'members'])
+    page_visibility = validators.OneOf(['public', 'members'])
 
 class NewGroupForm(GroupForm):
     """A schema for validating new group forms."""
@@ -273,7 +277,8 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
 
         pending_request = PendingRequest.get(c.user, group)
         if pending_request is None and not group.is_member(c.user):
-            if self._check_handshakes(group, c.user) == 'invitation':
+            if (self._check_handshakes(group, c.user) == 'invitation'
+                or not group.admins_approve_members):
                 group.add_member(c.user)
                 self._clear_requests(group, c.user)
                 h.flash(_('You are now a member of the group %s!') % group.title)
@@ -298,7 +303,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         c.breadcrumbs.append(self._actions('page'))
         defaults = {
             'page_content': c.group.page,
-            'page_public': 'public' if c.group.page_public else ''
+            'page_public': 'public' if c.group.page_public else '',
             }
         return htmlfill.render(self._edit_page_form(), defaults=defaults)
 
@@ -310,7 +315,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         if page_content is None:
             page_content = ''
         group.page = page_content
-        group.page_public =  (self.form_result.get('page_public', False) == 'public')
+        group.page_public = (self.form_result.get('page_public', False) == 'public')
         meta.Session.commit()
         h.flash(_("The group's front page was updated."))
         redirect_to(controller='group', action='page', id=group.group_id)
@@ -431,7 +436,10 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             'description': group.description,
             'tags': ', '.join([tag.title for tag in c.group.tags]),
             'year': group.year.year,
-            'default_tab': group.default_tab
+            'default_tab': group.default_tab,
+            'approve_new_members': 'admin' if group.admins_approve_members else 'none',
+            'forum_visibility': 'public' if group.forum_is_public else 'members',
+            'page_visibility': 'public' if group.page_is_public else 'members',
             }
 
         tags = dict([('tagsitem-%d' % n, tag.title)
@@ -460,6 +468,12 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         group.year = date(int(values['year']), 1, 1)
         group.description = values['description']
         group.default_tab = values['default_tab']
+        group.admins_approve_members = (
+                self.form_result['approve_new_members'] == 'admin')
+        group.forum_is_public = (
+                self.form_result['forum_visibility'] == 'public')
+        group.page_is_public = (
+                self.form_result['page_visibility'] == 'public')
 
         if values['logo_delete']:
             group.logo = None
