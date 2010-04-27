@@ -7,7 +7,7 @@ BOOTSTRAP_PYTHON=python2.5
 TIMEOUT=1
 BUILDOUT = bin/buildout -t $(TIMEOUT) && touch bin/*
 
-export LC_ALL := C
+export LC_ALL := en_US.utf8
 
 
 .PHONY: all
