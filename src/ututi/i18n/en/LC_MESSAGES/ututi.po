@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-04-26 15:12+0300\n"
+"PO-Revision-Date: 2010-04-27 15:12+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -412,13 +412,25 @@ msgstr ""
 msgid "Group admin"
 msgstr ""
 
+msgid "Admin"
+msgstr ""
+
 msgid "Sponsor"
+msgstr ""
+
+msgid "Gold sponsor"
 msgstr ""
 
 msgid "Moderator"
 msgstr ""
 
+msgid "Best moderator"
+msgstr ""
+
 msgid "Distinguished user"
+msgstr ""
+
+msgid "The best distinguished user"
 msgstr ""
 
 #, python-format
@@ -1257,6 +1269,30 @@ msgid "Tags"
 msgstr ""
 
 msgid "Default group tab"
+msgstr ""
+
+msgid "Access settings"
+msgstr ""
+
+msgid "New members"
+msgstr ""
+
+msgid "Anyone can join the group any time"
+msgstr ""
+
+msgid "Administrators have to approve new members"
+msgstr ""
+
+msgid "Group forum and mailing list visibility"
+msgstr ""
+
+msgid "Public"
+msgstr ""
+
+msgid "Members only"
+msgstr ""
+
+msgid "Group page visibility"
 msgstr ""
 
 msgid "Edit group front page"
