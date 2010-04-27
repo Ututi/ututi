@@ -2,7 +2,6 @@ Group members views
 ===================
 
     >>> from ututi.lib.mailer import mail_queue
-    >>> from ututi.lib.mailer import mail_queue
     >>> def printEmails():
     ...     for email in mail_queue:
     ...         print email.recipients
