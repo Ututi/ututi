@@ -8,7 +8,7 @@ ${_('New topic')}
 
 <h1>${_('New topic')}</h1>
 
-<form method="post" action="${url(controller='forum', action='post', forum_id=c.forum_id)}"
+<form method="post" action="${url.current(action='post')}"
      id="group_add_form" enctype="multipart/form-data">
   ${h.input_line('title', _('Subject'))}
   ${h.input_area('message', _('Message'))}

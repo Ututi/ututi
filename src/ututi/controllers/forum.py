@@ -7,68 +7,45 @@ from formencode import validators, htmlfill
 
 from pylons.decorators import validate
 from pylons.controllers.util import abort
-from pylons.controllers.util import redirect_to
+from pylons.controllers.util import redirect, redirect_to
 from pylons.i18n import _
 from pylons import tmpl_context as c, url
 
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import render
-from ututi.model import ForumPost
+from ututi.model import Group, Forum, ForumPost
 from ututi.model import meta
 
-def setup_title(forum_id):
-    c.forum_id = forum_id
-    forum_titles = {'bugs': _('Report a bug'),
-                    'community': _('Community page')}
-    forum_logos = {'bugs': 'report_bug.png',
-                   'community': 'community.png'}
 
-    forum_descriptions = {'bugs': _("This is ututi bugs forum"),
-                          'community': _("This is ututi community forum.")}
+def setup_title(group_id, forum_id):
+    c.forum = Forum.get(forum_id)
+    if group_id is not None:
+        c.group = c.forum.group
+        c.group_id = c.group.group_id
+    else:
+        c.group_id = None
 
-    c.forum_title = forum_titles[c.forum_id]
-    c.forum_logo = forum_logos[c.forum_id]
-    c.forum_description = forum_descriptions[c.forum_id]
-    c.poster_count = 0
-    c.bugs_forum_messages = meta.Session.query(ForumPost)\
-        .filter_by(forum_id='bugs')\
-        .filter(ForumPost.thread_id == ForumPost.id)\
-        .limit(5).all()
-    c.community_forum_messages = meta.Session.query(ForumPost)\
-        .filter_by(forum_id='community')\
-        .filter(ForumPost.thread_id == ForumPost.id)\
-        .limit(5).all()
-
-    c.post_count = meta.Session.query(ForumPost).filter_by(forum_id=forum_id).count() or 0
-    c.topic_count = meta.Session.query(ForumPost)\
-        .filter_by(forum_id=forum_id)\
-        .filter(ForumPost.thread_id == ForumPost.id)\
-        .count() or 0
-    query = """select count(distinct content_items.created_by)
-                   from content_items
-                   join forum_posts on forum_posts.id = content_items.id
-                   where forum_id = '%s'""" % forum_id
-    c.poster_count = meta.Session.execute(query).scalar() or 0
-
-    c.breadcrumbs = [{'title': c.forum_title, 'link': url(controller='forum', forum_id=c.forum_id)}]
+    c.breadcrumbs = [{'title': c.forum.title,
+                      'link': url.current(action='index', forum_id=c.forum.id)}]
 
 
 def forum_action(method):
-    def _forum_action(self, forum_id):
-        setup_title(forum_id)
+    def _forum_action(self, id, forum_id):
+        setup_title(id, forum_id)
         return method(self, forum_id)
     return _forum_action
 
 
 def forum_thread_action(method):
-    def _forum_thread_action(self, forum_id, thread_id):
+    def _forum_thread_action(self, id, forum_id, thread_id):
         c.thread_id = thread_id
         try:
-            c.thread = meta.Session.query(ForumPost).filter_by(id=thread_id,
-                                                               forum_id=forum_id).one()
+            c.thread = meta.Session.query(ForumPost
+                              ).filter_by(id=thread_id, forum_id=forum_id
+                              ).one()
         except NoResultFound:
             abort(404)
-        setup_title(forum_id)
+        setup_title(id, forum_id)
         return method(self, forum_id, thread_id)
     return _forum_thread_action
 
@@ -110,6 +87,20 @@ class ForumController(BaseController):
             threads.append(thread)
 
         return sorted(threads, key=lambda t: t['created'], reverse=True)
+
+    def list(self, id):
+        c.group = Group.get(id)
+        if c.group is None:
+            abort(404)
+        return render('forum/list.mako')
+
+    def create(self, id):
+        # XXX beef me up
+        c.group = Group.get(id)
+        forum = Forum('test forum', group=c.group)
+        meta.Session.add(forum)
+        meta.Session.commit()
+        redirect_to(controller='forum', action='list')
 
     @forum_action
     @ActionProtector("user")
@@ -157,10 +148,7 @@ class ForumController(BaseController):
                          forum_id=forum_id)
         meta.Session.add(post)
         meta.Session.commit()
-        redirect_to(controller='forum',
-                    action='thread',
-                    forum_id=c.forum_id,
-                    thread_id=post.id)
+        redirect(url.current(action='thread', thread_id=post.id))
 
     # Redirects for backwards compatibility.
 

@@ -121,6 +121,12 @@ def setup_orm(engine):
                                  autoload_with=engine)
 
 
+    global forums_table
+    forums_table = Table("forums", meta.metadata,
+                         autoload=True,
+                         autoload_with=engine)
+
+
     global forum_posts_table
     forum_posts_table = Table("forum_posts", meta.metadata,
                               Column('title', Unicode(assert_unicode=True)),
@@ -199,6 +205,11 @@ def setup_orm(engine):
                properties = {'parent': relation(ContentItem,
                                                 primaryjoin=files_table.c.parent_id==content_items_table.c.id,
                                                 backref=backref("files", order_by=files_table.c.filename.asc()))})
+
+    orm.mapper(Forum, forums_table,
+               properties={'group': relation(Group,
+                                       backref=backref("forums",
+                                          order_by=forums_table.c.id.asc()))})
 
     orm.mapper(ForumPost, forum_posts_table,
                inherits=ContentItem,
@@ -1659,8 +1670,47 @@ class File(ContentItem):
             return None
 
 
+class Forum(object):
+    """A collection of threads."""
+
+    def __init__(self, title, group=None):
+        self.title = title
+        self.group = group
+
+    @staticmethod
+    def get(forum_id):
+        try:
+            return meta.Session.query(Forum).filter_by(id=forum_id).one()
+        except NoResultFound:
+            return None
+
+    def post_count(self):
+        return meta.Session.query(ForumPost
+                                   ).filter_by(forum_id=self.id
+                                   ).count() or 0
+
+    def poster_count(self):
+        query = """select count(distinct content_items.created_by)
+                       from content_items
+                       join forum_posts on forum_posts.id = content_items.id
+                       where forum_id = %s""" % self.id
+        return meta.Session.execute(query).scalar() or 0
+
+    def topic_count(self):
+        return meta.Session.query(ForumPost)\
+                 .filter_by(forum_id=self.id)\
+                 .filter(ForumPost.thread_id == ForumPost.id)\
+                 .count() or 0
+
+    def messages(self, limit=5):
+        return meta.Session.query(ForumPost
+                ).filter_by(forum_id=self.id
+                ).filter(ForumPost.thread_id == ForumPost.id
+                ).limit(limit).all()
+
+
 class ForumPost(ContentItem):
-    """ """
+    """Forum post."""
 
     def __init__(self, title, message, forum_id=None, thread_id=None):
         self.title = title
@@ -1671,6 +1721,7 @@ class ForumPost(ContentItem):
     def url(self):
         return url(controller='forum', action='thread',
                    forum_id=self.forum_id, thread_id=self.thread_id)
+
 
 blog_table = None
 class BlogEntry(object):

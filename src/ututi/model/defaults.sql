@@ -668,10 +668,25 @@ CREATE TABLE group_requests (
        primary key (hash));;
 
 
+CREATE TABLE forums (
+       id bigserial not null,
+       group_id int8 null references groups(id),
+       logo bytea default null,
+       title varchar(255) not null default '',
+       description text not null default '',
+       primary key (id));
+
+
+insert into forums (group_id, title, description)
+    values (null, 'Report a bug', 'Report bugs here.' );
+insert into forums (group_id, title, description)
+    values (null, 'Community', 'Ututi community forum');
+
+
 CREATE TABLE forum_posts (
        id int8 not null references content_items(id),
-       thread_id int8 not null references forum_posts,
-       forum_id varchar(100) default null,
+       thread_id int8 references forum_posts,
+       forum_id int8 not null references forums(id),
        title varchar(500) not null,
        message text not null,
        parent_id int8 default null references content_items(id) on delete cascade,
