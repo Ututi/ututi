@@ -4,6 +4,7 @@ import re
 
 from formencode.schema import Schema
 from paste.fileapp import FileApp
+from paste.util.converters import asbool
 
 from pylons.decorators import validate
 from pylons.templating import render_mako_def
@@ -63,14 +64,18 @@ class BasefilesController(BaseController):
 
     def _move(self, source, file):
         source_folder = file.folder
-
-        file.folder = request.POST['target_folder']
-        file.deleted = None
+        delete = asbool(request.POST['delete'])
+        if delete:
+            file.deleted = c.user
+        else:
+            file.folder = request.POST['target_folder']
+            file.deleted = None
 
         if source_folder and source.getFolder(source_folder) is None:
             source.files.append(File.makeNullFile(source_folder))
 
         meta.Session.commit()
+        return render_mako_def('/sections/files.mako','file', file=file)
 
     def _copy(self, source, file_to_copy):
         target_id = int(request.POST['target_id'])

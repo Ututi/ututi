@@ -15,6 +15,7 @@ $(document).ready(function(){
           var target_id = ui.item.parents('.section').children('.container').children('.id').val();
           var target_folder = ui.item.parents('.folder_file_area').children('.folder_name').val();
           var target_is_trash = ui.item.parents('.folder').hasClass('.trash_folder');
+          var source_is_trash = ui.sender.closest('.folder').hasClass('.trash_folder');
 
           if (source_id != target_id) {
               if (target_is_trash) {
@@ -42,7 +43,7 @@ $(document).ready(function(){
           else {
               $.ajax({type: "POST",
                       url: move_url,
-                      data: ({target_folder: target_folder}),
+                      data: ({target_folder: target_folder, delete: target_is_trash}),
                       success: function(msg){
                           if (ui.sender.children('.file').size() == 0) {
                              ui.sender.children('.message').show();
@@ -57,6 +58,12 @@ $(document).ready(function(){
                           } else {
                               ui.item.parents('.folder').children('.message').hide();
                               ui.item.closest('.folder_file_area').find('.delete_folder_button').hide()
+                          }
+                          if (target_is_trash || source_is_trash) {
+                              var new_item = $(msg).insertAfter($(ui.item));
+                              $('.delete_button', new_item).click(deleteFile);
+                              $('.restore_button', new_item).click(restoreFile);
+                              $(ui.item).remove();
                           }
                           updateSizeInformation($('.section.size_indicated'));
                       },
