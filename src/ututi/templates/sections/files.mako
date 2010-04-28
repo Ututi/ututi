@@ -340,7 +340,9 @@ $(document).ready(function(){
   %else: ## deleted file
             <li class="file">
               ${h.image('/images/details/icon_drag_file.png', alt='file icon', class_='drag-target')|n}
-              ${h.link_to(file.title, file.url())}
+              <span class="file_name">
+                ${file.title}
+              </span>
               %if file.folder:
               <span class="folder_title">(${file.folder})</span>
               %endif
