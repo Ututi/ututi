@@ -7,9 +7,9 @@ CREATE TABLE forums (
        primary key (id));
 
 insert into forums (group_id, title, description)
-    values (null, 'Report a bug', 'Report bugs here.' );
-insert into forums (group_id, title, description)
     values (null, 'Community', 'Ututi community forum');
+insert into forums (group_id, title, description)
+    values (null, 'Report a bug', 'Report bugs here.' );
 
 ALTER TABLE forum_posts ALTER COLUMN forum_id DROP DEFAULT;
 

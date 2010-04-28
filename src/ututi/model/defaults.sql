@@ -678,9 +678,9 @@ CREATE TABLE forums (
 
 
 insert into forums (group_id, title, description)
-    values (null, 'Report a bug', 'Report bugs here.' );
-insert into forums (group_id, title, description)
     values (null, 'Community', 'Ututi community forum');
+insert into forums (group_id, title, description)
+    values (null, 'Report a bug', 'Report bugs here' );
 
 
 CREATE TABLE forum_posts (
