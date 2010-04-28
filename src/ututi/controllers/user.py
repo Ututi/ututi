@@ -70,9 +70,14 @@ class UserController(BaseController):
     @profile_action
     @ActionProtector("root")
     def award_medal(self, user):
-        medal_type = request.GET['medal_type']
-        assert medal_type in Medal.available_medals()
-        assert medal_type not in [m.medal_type for m in user.medals]
+        try:
+            medal_type = request.GET['medal_type']
+        except KeyError:
+            abort(404)
+        if medal_type not in Medal.available_medals():
+            abort(404)
+        if medal_type in [m.medal_type for m in user.medals]:
+            redirect_to(action='medals') # Medal already granted.
         m = Medal(user, medal_type)
         meta.Session.add(m)
         meta.Session.commit()
@@ -81,9 +86,16 @@ class UserController(BaseController):
     @profile_action
     @ActionProtector("root")
     def take_away_medal(self, user):
-        medal_id = int(request.GET['medal_id'])
-        medal = meta.Session.query(Medal).filter_by(id=medal_id).one()
-        assert medal.user is user, medal.user
+        try:
+            medal_id = int(request.GET['medal_id'])
+        except KeyError:
+            abort(404)
+        try:
+            medal = meta.Session.query(Medal).filter_by(id=medal_id).one()
+        except NoResultFound:
+            redirect_to(action='medals') # Medal has been already taken away.
+        if medal.user is not user:
+            abort(404)
         meta.Session.delete(medal)
         meta.Session.commit()
         redirect_to(action='medals')
