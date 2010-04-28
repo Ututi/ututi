@@ -1,4 +1,4 @@
-<%inherit file="/groupforum/thread.mako" />
+<%inherit file="/mailinglist/thread.mako" />
 
 <%def name="title()">
 ${_('New topic')}
@@ -8,7 +8,7 @@ ${_('New topic')}
 
 <h1>${_('New topic')}</h1>
 
-<form method="post" action="${url(controller='groupforum', action='post', id=c.group.group_id)}"
+<form method="post" action="${url(controller='mailinglist', action='post', id=c.group.group_id)}"
      id="group_add_form" enctype="multipart/form-data">
   ${h.input_line('subject', _('Subject'))}
   ${h.input_area('message', _('Message'))}

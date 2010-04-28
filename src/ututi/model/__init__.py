@@ -1612,7 +1612,7 @@ class File(ContentItem):
                                    **kwargs)
         elif isinstance(self.parent, GroupMailingListMessage):
             message = self.parent
-            return message.group.url(controller='groupforum',
+            return message.group.url(controller='mailinglist',
                                      action='file',
                                      message_id=message.id,
                                      file_id=self.id,

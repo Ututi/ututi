@@ -16,7 +16,7 @@
 </%def>
 
 <div id="page_header">
-  <a class="btn" href="${url(controller='groupforum', action='new_thread', id=c.group.group_id)}"><span>${_("New topic")}</span></a>
+  <a class="btn" href="${url(controller='mailinglist', action='new_thread', id=c.group.group_id)}"><span>${_("New topic")}</span></a>
 </div>
 <br class="clear-left"/>
 
@@ -37,7 +37,7 @@
 % for message in c.messages:
 <tr>
   <td class="subject">
-    <a class="thread-subject" href="${url(controller='groupforum', action='thread', id=c.group.group_id, thread_id=message['thread_id'])}">
+    <a class="thread-subject" href="${url(controller='mailinglist', action='thread', id=c.group.group_id, thread_id=message['thread_id'])}">
       ${message['subject']}
     </a>
   </td>

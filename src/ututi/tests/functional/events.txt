@@ -55,7 +55,7 @@ Events and watching
     >>> browser.open('http://localhost/profile/index/1')
     >>> browser.printQuery("id('event_list')/li")
     <li>
-          New forum post <a href="/group/moderators/forum/thread/5">Also - an attachment</a>
+          New forum post <a href="/group/moderators/mailinglist/thread/5">Also - an attachment</a>
           was posted on <a href="/group/moderators">Moderatoriai</a>
           forums <span class="event_time">(...)</span>
     </li>

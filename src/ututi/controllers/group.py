@@ -121,7 +121,7 @@ class GroupLiveSearchForm(Schema):
 class EditGroupForm(GroupForm):
     """A schema for validating group edits."""
 
-    default_tab = validators.OneOf(['home', 'forum', 'members', 'files', 'subjects', 'page'])
+    default_tab = validators.OneOf(['home', 'mailinglist', 'members', 'files', 'subjects', 'page'])
     approve_new_members = validators.OneOf(['none', 'admin'])
     forum_visibility = validators.OneOf(['public', 'members'])
     page_visibility = validators.OneOf(['public', 'members'])
@@ -206,9 +206,9 @@ class GroupControllerBase(BaseController):
              'selected': selected == 'home',
              'event': h.trackEvent(c.group, 'home', 'breadcrumb')},
             {'title': _('Forum'),
-             'link': url(controller='group', action='forum', id=c.group.group_id),
-             'selected': selected == 'forum',
-             'event': h.trackEvent(c.group, 'forum', 'breadcrumb')},
+             'link': url(controller='group', action='mailinglist', id=c.group.group_id),
+             'selected': selected == 'mailinglist',
+             'event': h.trackEvent(c.group, 'mailinglist', 'breadcrumb')},
             {'title': _('Members'),
              'link': url(controller='group', action='members', id=c.group.group_id),
              'selected': selected == 'members',
@@ -420,7 +420,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         c.current_year = date.today().year
         c.years = range(c.current_year - 10, c.current_year + 5)
         c.tabs = [('home', _("What's new?")),
-                  ('forum', _('Forum')),
+                  ('mailinglist', _('Forum')),
                   ('members', _('Members')),
                   ('files', _('Files')),
                   ('subjects', _('Subjects')),

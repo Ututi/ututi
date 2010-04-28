@@ -54,27 +54,40 @@ def make_map():
 
     map.connect('/group/{id}', controller='group', action='index')
 
-    map.connect('/group/{id}/forum',
-                controller='groupforum',
+    map.connect('/group/{id}/mailinglist',
+                controller='mailinglist',
                 action='index')
 
-    map.connect('/group/{id}/forum/{action}',
-                controller='groupforum')
+    map.connect('/group/{id}/mailinglist/{action}',
+                controller='mailinglist')
 
-    map.connect('/group/{id}/forum/thread/{thread_id}',
-                controller='groupforum',
+    map.connect('/group/{id}/mailinglist/thread/{thread_id}',
+                controller='mailinglist',
                 action='thread')
 
-    map.connect('/group/{id}/forum/thread/{thread_id}/reply',
-                controller='groupforum',
+    map.connect('/group/{id}/mailinglist/thread/{thread_id}/reply',
+                controller='mailinglist',
                 action='reply')
 
-    map.connect('/group/{id}/forum/file/{message_id}/{file_id}',
-                controller='groupforum',
+    map.connect('/group/{id}/mailinglist/file/{message_id}/{file_id}',
+                controller='mailinglist',
                 action='file')
 
     map.connect('/group/{id}/file/{file_id}/{action}',
                 controller='groupfile')
+
+    # Backwards compatibility.
+    map.connect('/group/{id}/forum/thread/{thread_id}',
+                controller='mailinglist',
+                action='thread')
+
+    map.connect('/group/{id}/forum/thread/{thread_id}/reply',
+                controller='mailinglist',
+                action='reply')
+
+    map.connect('/group/{id}/forum/file/{message_id}/{file_id}',
+                controller='mailinglist',
+                action='file')
 
     #act on group membership request
     map.connect('/group/{id}/request/{hash_code}/{do}', controller='group', action='request')

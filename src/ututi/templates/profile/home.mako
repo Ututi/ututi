@@ -24,7 +24,7 @@
       (${ungettext("%(count)s member", "%(count)s members", len(group.members)) % dict(count = len(group.members))})
     </span>
     <br />
-    <a href="${url(controller='groupforum', action='new_thread', id=group.group_id)}" title="${_('Mailing list address')}">
+    <a href="${url(controller='mailinglist', action='new_thread', id=group.group_id)}" title="${_('Mailing list address')}">
       ${group.group_id}@${c.mailing_list_host}
     </a>
   </div>

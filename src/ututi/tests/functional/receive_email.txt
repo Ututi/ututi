@@ -94,7 +94,7 @@ link to the file on our system:
     Content-Transfer-Encoding: base64
     <BLANKLINE>
     QWxzbywgSSBqdXN0IHdhbnRlZCB0byBzZW5kIHlvdSB0aGlzIGZpbGU6CgpSRUFETUUudHh0IC0g
-    aHR0cDovL2xvY2FsaG9zdC9ncm91cC9tb2RlcmF0b3JzL2ZvcnVtL2ZpbGUvNC81
+    aHR0cDovL2xvY2FsaG9zdC9ncm91cC9tb2RlcmF0b3JzL21haWxpbmdsaXN0L2ZpbGUvNC81
     <BLANKLINE>
     --ZGiS0Q5IWpPtfppv--
     <BLANKLINE>
@@ -102,7 +102,7 @@ link to the file on our system:
     >>> print email.payload()
     Also, I just wanted to send you this file:
     <BLANKLINE>
-    README.txt - http://localhost/group/moderators/forum/file/4/5
+    README.txt - http://localhost/group/moderators/mailinglist/file/4/5
 
     >>> print email.recipients
     ['admin@ututi.lt']
@@ -150,7 +150,7 @@ list of files:
     Content-Transfer-Encoding: base64
     <BLANKLINE>
     QWxzbywgSSBqdXN0IHdhbnRlZCB0byBzZW5kIHlvdSB0aGlzIGZpbGU6CgpSRUFETUUudHh0IC0g
-    aHR0cDovL2xvY2FsaG9zdC9ncm91cC9tb2RlcmF0b3JzL2ZvcnVtL2ZpbGUvNi83
+    aHR0cDovL2xvY2FsaG9zdC9ncm91cC9tb2RlcmF0b3JzL21haWxpbmdsaXN0L2ZpbGUvNi83
     <BLANKLINE>
     --ZGiS0Q5IWpPtfppv--
     <BLANKLINE>
@@ -158,7 +158,7 @@ list of files:
     >>> print email.payload()
     Also, I just wanted to send you this file:
     <BLANKLINE>
-    README.txt - http://localhost/group/moderators/forum/file/6/7
+    README.txt - http://localhost/group/moderators/mailinglist/file/6/7
 
     >>> browser.getLink('README.txt').click()
     >>> browser.printContents()
