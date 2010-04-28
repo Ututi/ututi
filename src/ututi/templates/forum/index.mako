@@ -14,11 +14,11 @@
 <%def name="portlets()">
 <div id="sidebar">
   ${forum_info_portlet()}
-%if c.forum_id == 2:
-  ${bugs_forum_posts_portlet()}
-%elif c.forum_id == 1:
-  ${community_forum_posts_portlet()}
-%endif
+  % if c.forum.id == 1:
+    ${community_forum_posts_portlet()}
+  % elif c.forum.id == 2:
+    ${bugs_forum_posts_portlet()}
+  % endif
 </div>
 </%def>
 

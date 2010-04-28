@@ -29,10 +29,10 @@
   </%self:portlet>
 </%def>
 
-<%def name="forum_posts_portlet(forum_id, new_post_subtitle, messages, portlet_title, new_post_title)">
+<%def name="forum_posts_portlet(forum_id, route_id, new_post_subtitle, messages, portlet_title, new_post_title)">
   <%self:portlet id="group_latest_messages" portlet_class="inactive">
     <%def name="header()">
-      <a href="${url(controller='forum', action='index', forum_id=forum_id)}">${portlet_title|n}</a>
+      <a href="${url(route_id)}">${portlet_title|n}</a>
     </%def>
     %if messages:
       <table id="group_latest_messages">
@@ -54,18 +54,20 @@
   </%self:portlet>
 </%def>
 
-<%def name="bugs_forum_posts_portlet()">
-${forum_posts_portlet(forum_id=2,
-                      new_post_subtitle=_('You found a bug in our system? Something is broken? Report it.'),
-                      messages=c.forum.messages(),
-                      portlet_title=_('Messages in Bugs forum'),
-                      new_post_title=_('Report a bug'))}
-</%def>
-
 <%def name="community_forum_posts_portlet()">
-${forum_posts_portlet(forum_id='community',
+${forum_posts_portlet(forum_id=1,
+                      route_id='forum_community_index',
                       new_post_subtitle='',
                       messages=c.forum.messages(),
                       portlet_title=_('Messages in community forum'),
                       new_post_title=_('New topic'))}
+</%def>
+
+<%def name="bugs_forum_posts_portlet()">
+${forum_posts_portlet(forum_id=2,
+                      route_id='forum_bugs_index',
+                      new_post_subtitle=_('You found a bug in our system? Something is broken? Report it.'),
+                      messages=c.forum.messages(),
+                      portlet_title=_('Messages in Bugs forum'),
+                      new_post_title=_('Report a bug'))}
 </%def>
