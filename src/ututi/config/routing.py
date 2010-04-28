@@ -219,7 +219,7 @@ def make_map():
     map.connect('/structure/{id}/logo/{width}',
                 controller='structure', action='logo')
 
-    map.connect('/community',
+    map.connect('forum_community_index', '/community',
                 controller='forum', action='index', id=None, forum_id=1)
     map.connect('/community/{action}',
                 controller='forum', id=None, forum_id=1)
@@ -228,7 +228,7 @@ def make_map():
     map.connect('/community/thread/{thread_id}/reply',
                 controller='forum', id=None, forum_id=1, action='reply')
 
-    map.connect('/bugs',
+    map.connect('forum_bugs_index', '/bugs',
                 controller='forum', action='index', id=None, forum_id=2)
     map.connect('/bugs/{action}',
                 controller='forum', id=None, forum_id=2)
