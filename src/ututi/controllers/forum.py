@@ -161,3 +161,17 @@ class ForumController(BaseController):
                     action='thread',
                     forum_id=c.forum_id,
                     thread_id=post.id)
+
+    # Redirects for backwards compatibility.
+
+    def legacy_thread(self, id, thread_id):
+        redirect_to(controller='mailinglist', action='thread',
+                    id=id, thread_id=thread_id)
+
+    def legacy_file(self, id, thread_id):
+        redirect_to(controller='mailinglist', action='file',
+                    id=id, thread_id=thread_id)
+
+    def legacy_reply(self, id, message_id, file_id):
+        redirect_to(controller='mailinglist', action='reply',
+                    id=id, message_id=message_id, file_id=file_id)

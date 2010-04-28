@@ -78,16 +78,16 @@ def make_map():
 
     # Backwards compatibility.
     map.connect('/group/{id}/forum/thread/{thread_id}',
-                controller='mailinglist',
-                action='thread')
+                controller='forum',
+                action='legacy_thread')
 
     map.connect('/group/{id}/forum/thread/{thread_id}/reply',
-                controller='mailinglist',
-                action='reply')
+                controller='forum',
+                action='legacy_reply')
 
     map.connect('/group/{id}/forum/file/{message_id}/{file_id}',
-                controller='mailinglist',
-                action='file')
+                controller='forum',
+                action='legacy_file')
 
     #act on group membership request
     map.connect('/group/{id}/request/{hash_code}/{do}', controller='group', action='request')
