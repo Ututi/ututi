@@ -1,7 +1,6 @@
 CREATE TABLE forums (
        id bigserial not null,
        group_id int8 null references groups(id),
-       logo bytea default null,
        title varchar(255) not null default '',
        description text not null default '',
        primary key (id));
