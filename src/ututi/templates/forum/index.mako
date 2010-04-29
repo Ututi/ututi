@@ -35,23 +35,27 @@
 
 <br class="clear-left"/>
 
-<table id="forum-thread-list">
-% for forum_post in c.category.top_level_messages():
-<tr>
-  <td class="subject">
-    <a class="thread-subject" href="${url.current(action='thread', thread_id=forum_post['thread_id'])}">
-      ${forum_post['title']}
-    </a>
-  </td>
-  <td class="count">
-    ${ungettext("%(count)s reply", "%(count)s replies", forum_post['reply_count']) % dict(count = forum_post['reply_count'])}
-  </td>
-  <td class="date">
-    ${h.fmt_dt(forum_post['created'])}
-  </td>
-  <td class="author">
-    <a href="${forum_post['author'].url()}">${forum_post['author'].fullname}</a>
-  </td>
-</tr>
-% endfor
-</table>
+<%def name="forum_thread_list(category)">
+  <table id="forum-thread-list">
+  % for forum_post in category.top_level_messages():
+  <tr>
+    <td class="subject">
+      <a class="thread-subject" href="${url.current(action='thread', thread_id=forum_post['thread_id'])}">
+        ${forum_post['title']}
+      </a>
+    </td>
+    <td class="count">
+      ${ungettext("%(count)s reply", "%(count)s replies", forum_post['reply_count']) % dict(count = forum_post['reply_count'])}
+    </td>
+    <td class="date">
+      ${h.fmt_dt(forum_post['created'])}
+    </td>
+    <td class="author">
+      <a href="${forum_post['author'].url()}">${forum_post['author'].fullname}</a>
+    </td>
+  </tr>
+  % endfor
+  </table>
+</%def>
+
+${forum_thread_list(c.category)}

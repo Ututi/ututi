@@ -74,10 +74,10 @@ And all the way up to the category list:
 
     >>> browser.getLink('Back to category list').click()
 
-    >>> print browser.printQuery('id("forum-categories")//td')
-    <td>
+    >>> print browser.printQuery('//h2[@class="category"]')
+    <h2 class="category">
       <a href="/group/moderators/forum/3">
             General
-          </a>
-    </td>
-    ...
+        </a>
+    </h2>
+    None

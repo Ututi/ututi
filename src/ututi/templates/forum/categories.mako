@@ -1,5 +1,6 @@
 <%inherit file="/base.mako" />
 <%namespace file="/portlets/forum.mako" import="*"/>
+<%namespace file="/forum/index.mako" import="*"/>
 
 <%def name="title()">
   ${c.group.title}
@@ -25,27 +26,14 @@
 %if not c.group.forum_categories:
     <span id="no-categories" class="small">${_('No categories yet.')}</span>
 %endif
-<table id='forum-categories'>
 % for category in c.group.forum_categories:
-  <tr>
-    <td>
+  <hr />
+  <h2 class="category">
       <a href="${url(controller='forum', action='index', id=c.group.group_id, category_id=category.id)}">
         ${category.title}
-      </a>
-    </td>
-    <td>
-      <a class="btn" href="${url.current(category_id=category.id, action='new_thread')}"><span>${_("New topic")}</span></a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      ${category.description}
-    </td>
-  </tr>
-  <tr>
-    <td>
-      ... TODO messages ...
-    </td>
-  </tr>
+    </a></h2>
+  <div>${category.description}</div>
+  ${forum_thread_list(category)}
+  <a class="btn" href="${url.current(category_id=category.id, action='new_thread')}"><span>${_("New topic")}</span></a>
 % endfor
 </table>

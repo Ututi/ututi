@@ -131,7 +131,7 @@ class ForumController(GroupControllerBase):
     @ActionProtector("user")
     def list(self, id):
         c.breadcrumbs.append(self._actions('forum'))
-        return render('forum/list.mako')
+        return render('forum/categories.mako')
 
     @category_action
     @ActionProtector("user")
