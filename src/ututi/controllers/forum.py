@@ -17,22 +17,22 @@ from ututi.model import Group, ForumCategory, ForumPost
 from ututi.model import meta
 
 
-def setup_title(group_id, forum_id):
-    c.forum = ForumCategory.get(forum_id)
-    if c.forum is None:
+def setup_title(group_id, category_id):
+    c.category = ForumCategory.get(category_id)
+    if c.category is None:
         abort(404)
     if group_id is not None:
-        c.group = c.forum.group
+        c.group = c.category.group
         c.group_id = c.group.group_id
     else:
         c.group_id = None
 
     # Make sure forum title and description are localized.
     # This is not the best place to do this, but I know no better way.
-    fix_public_forum_metadata(c.forum)
+    fix_public_forum_metadata(c.category)
 
-    c.breadcrumbs = [{'title': c.forum.title,
-                      'link': url.current(action='index', forum_id=c.forum.id)}]
+    c.breadcrumbs = [{'title': c.category.title,
+                      'link': url.current(action='index', category_id=c.category.id)}]
 
 
 def fix_public_forum_metadata(forum):
@@ -64,29 +64,29 @@ def group_action(method):
     return _group_action
 
 
-def forum_action(method):
-    def _forum_action(self, id, forum_id):
+def category_action(method):
+    def _forum_action(self, id, category_id):
         if id is not None:
             group = Group.get(id)
             if group is None:
                 abort(404)
             c.security_context = group
-        setup_title(id, forum_id)
-        return method(self, forum_id)
+        setup_title(id, category_id)
+        return method(self, category_id)
     return _forum_action
 
 
 def forum_thread_action(method):
-    def _forum_thread_action(self, id, forum_id, thread_id):
+    def _forum_thread_action(self, id, category_id, thread_id):
         c.thread_id = thread_id
         try:
             c.thread = meta.Session.query(ForumPost
-                              ).filter_by(id=thread_id, forum_id=forum_id
+                              ).filter_by(id=thread_id, category_id=category_id
                               ).one()
         except NoResultFound:
             abort(404)
-        setup_title(id, forum_id)
-        return method(self, forum_id, thread_id)
+        setup_title(id, category_id)
+        return method(self, category_id, thread_id)
     return _forum_thread_action
 
 
@@ -110,9 +110,9 @@ class NewTopicForm(NewReplyForm):
 
 class ForumController(BaseController):
 
-    def _top_level_messages(self, forum_id):
+    def _top_level_messages(self, category_id):
         messages = meta.Session.query(ForumPost)\
-            .filter_by(forum_id=forum_id)\
+            .filter_by(category_id=category_id)\
             .filter(ForumPost.id == ForumPost.thread_id)\
             .order_by(desc(ForumPost.created_on)).all()
 
@@ -139,41 +139,41 @@ class ForumController(BaseController):
     def list(self, id):
         return render('forum/list.mako')
 
-    @forum_action
+    @category_action
     @ActionProtector("user")
-    def index(self, forum_id):
-        c.forum_posts = self._top_level_messages(forum_id)
+    def index(self, category_id):
+        c.forum_posts = self._top_level_messages(category_id)
         return render('forum/index.mako')
 
     @forum_thread_action
     @ActionProtector("user")
-    def thread(self, forum_id, thread_id):
+    def thread(self, category_id, thread_id):
         c.forum_posts = meta.Session.query(ForumPost)\
-            .filter_by(forum_id=forum_id, thread_id=thread_id)\
+            .filter_by(category_id=category_id, thread_id=thread_id)\
             .order_by(ForumPost.created_on).all()
         return render('forum/thread.mako')
 
     @forum_thread_action
     @validate(NewReplyForm)
     @ActionProtector("user")
-    def reply(self, forum_id, thread_id):
+    def reply(self, category_id, thread_id):
         post = ForumPost(c.thread.title,
                          self.form_result['message'],
-                         forum_id=forum_id,
+                         category_id=category_id,
                          thread_id=thread_id)
         meta.Session.add(post)
         meta.Session.commit()
         redirect_to(controller='forum',
                     action='thread',
-                    forum_id=forum_id,
+                    category_id=category_id,
                     thread_id=thread_id)
 
     def _new_thread_form(self):
         return render('forum/new.mako')
 
-    @forum_action
+    @category_action
     @ActionProtector("user")
-    def new_thread(self, forum_id):
+    def new_thread(self, category_id):
         return htmlfill.render(self._new_thread_form())
 
     def _new_category_form(self):
@@ -188,20 +188,21 @@ class ForumController(BaseController):
     @validate(NewCategoryForm, form='_new_category_form')
     @ActionProtector("admin", "moderator")
     def create_category(self, id):
-        forum = ForumCategory(self.form_result['title'],
-                              description=self.form_result['description'],
-                              group=c.group)
-        meta.Session.add(forum)
+        category = ForumCategory(self.form_result['title'],
+                                 description=self.form_result['description'],
+                                 group=c.group)
+        meta.Session.add(category)
         meta.Session.commit()
-        redirect_to(controller='forum', action='index', id=id, forum_id=forum.id)
+        redirect_to(controller='forum', action='index',
+                    id=id, category_id=category.id)
 
-    @forum_action
+    @category_action
     @validate(NewTopicForm, form='_new_thread_form')
     @ActionProtector("user")
-    def post(self, forum_id):
+    def post(self, category_id):
         post = ForumPost(self.form_result['title'],
                          self.form_result['message'],
-                         forum_id=forum_id)
+                         category_id=category_id)
         meta.Session.add(post)
         meta.Session.commit()
         redirect(url.current(action='thread', thread_id=post.id))

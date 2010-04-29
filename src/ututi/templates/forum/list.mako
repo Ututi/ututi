@@ -26,20 +26,20 @@
   <span class="small">${_('No categories yet.')}</span>
 %endif
 <table>
-% for forum in c.group.forum_categories:
+% for category in c.group.forum_categories:
   <tr>
     <td>
-      <a href="${url(controller='forum', action='index', id=c.group.group_id, forum_id=forum.id)}">
-        ${forum.title}
+      <a href="${url(controller='forum', action='index', id=c.group.group_id, category_id=category.id)}">
+        ${category.title}
       </a>
     </td>
     <td>
-      <a class="btn" href="${url.current(forum_id=forum.id, action='new_thread')}"><span>${_("New topic")}</span></a>
+      <a class="btn" href="${url.current(category_id=category.id, action='new_thread')}"><span>${_("New topic")}</span></a>
     </td>
   </tr>
   <tr>
     <td>
-      ${forum.description}
+      ${category.description}
     </td>
   </tr>
   <tr>

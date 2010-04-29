@@ -2,7 +2,7 @@
 <%namespace file="/portlets/forum.mako" import="*"/>
 
 <%def name="title()">
-  ${c.forum.title}
+  ${c.category.title}
 </%def>
 
 <%def name="head_tags()">
@@ -14,9 +14,9 @@
 <%def name="portlets()">
 <div id="sidebar">
   ${forum_info_portlet()}
-  % if c.forum.id == 1:
+  % if c.category.id == 1:
     ${community_forum_posts_portlet()}
-  % elif c.forum.id == 2:
+  % elif c.category.id == 2:
     ${bugs_forum_posts_portlet()}
   % endif
 </div>
@@ -27,7 +27,7 @@
 % endif
 
 <div id="page_header">
-  <h1 style="float: left;">${c.forum.title}</h1>
+  <h1 style="float: left;">${c.category.title}</h1>
   <div style="float: left; margin-top: 8px; margin-left: 10px;">
       <a class="btn" href="${url.current(action='new_thread')}"><span>${_("New topic")}</span></a>
   </div>

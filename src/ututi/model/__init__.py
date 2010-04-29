@@ -1679,33 +1679,33 @@ class ForumCategory(object):
         self.description = description
 
     @staticmethod
-    def get(forum_id):
+    def get(category_id):
         try:
-            return meta.Session.query(ForumCategory).filter_by(id=forum_id).one()
+            return meta.Session.query(ForumCategory).filter_by(id=category_id).one()
         except NoResultFound:
             return None
 
     def post_count(self):
         return meta.Session.query(ForumPost
-                                   ).filter_by(forum_id=self.id
+                                   ).filter_by(category_id=self.id
                                    ).count() or 0
 
     def poster_count(self):
         query = """select count(distinct content_items.created_by)
                        from content_items
                        join forum_posts on forum_posts.id = content_items.id
-                       where forum_id = %s""" % self.id
+                       where category_id = %s""" % self.id
         return meta.Session.execute(query).scalar() or 0
 
     def topic_count(self):
         return meta.Session.query(ForumPost)\
-                 .filter_by(forum_id=self.id)\
+                 .filter_by(category_id=self.id)\
                  .filter(ForumPost.thread_id == ForumPost.id)\
                  .count() or 0
 
     def messages(self, limit=5):
         return meta.Session.query(ForumPost
-                ).filter_by(forum_id=self.id
+                ).filter_by(category_id=self.id
                 ).filter(ForumPost.thread_id == ForumPost.id
                 ).limit(limit).all()
 
@@ -1713,15 +1713,15 @@ class ForumCategory(object):
 class ForumPost(ContentItem):
     """Forum post."""
 
-    def __init__(self, title, message, forum_id=None, thread_id=None):
+    def __init__(self, title, message, category_id=None, thread_id=None):
         self.title = title
         self.message = message
-        self.forum_id = forum_id
+        self.category_id = category_id
         self.thread_id = thread_id
 
     def url(self):
         return url(controller='forum', action='thread',
-                   forum_id=self.forum_id, thread_id=self.thread_id)
+                   category_id=self.category_id, thread_id=self.thread_id)
 
 
 blog_table = None

@@ -12,10 +12,12 @@ insert into forum_categories (group_id, title, description)
 insert into forum_categories (group_id, title, description)
     values (null, 'Report a bug', 'Report bugs here.' );
 
-ALTER TABLE forum_posts ALTER COLUMN forum_id DROP DEFAULT;
+ALTER TABLE forum_posts ADD COLUMN category_id int8;
 
-ALTER TABLE forum_posts ALTER COLUMN forum_id TYPE int8 USING
+UPDATE forum_posts SET category_id =
     CASE forum_id WHEN 'community' THEN 1 WHEN 'bugs' THEN 2 END;
 
-ALTER TABLE forum_posts ADD FOREIGN KEY (forum_id)
+ALTER TABLE forum_posts DROP COLUMN forum_id;
+
+ALTER TABLE forum_posts ADD FOREIGN KEY (category_id)
     REFERENCES forum_categories(id);

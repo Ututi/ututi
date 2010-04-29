@@ -686,7 +686,7 @@ insert into forum_categories (group_id, title, description)
 CREATE TABLE forum_posts (
        id int8 not null references content_items(id),
        thread_id int8 references forum_posts,
-       forum_id int8 not null references forum_categories(id),
+       category_id int8 not null references forum_categories(id),
        title varchar(500) not null,
        message text not null,
        parent_id int8 default null references content_items(id) on delete cascade,
