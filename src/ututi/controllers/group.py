@@ -797,6 +797,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @validate(schema=GroupRequestActionForm)
     @group_action
     def request(self, group):
+        url = None
         if hasattr(self, 'form_result'):
             try:
                 request = meta.Session.query(PendingRequest).filter_by(hash=self.form_result.get('hash_code', '')).one()
@@ -815,7 +816,8 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
                 h.flash(_("Error confirming membership request."))
                 pass
 
-        url = self.form_result.get('came_from', None)
+            url = self.form_result.get('came_from', None)
+
         if url is None:
             redirect_to(controller='group', action='members', id=c.group.group_id)
         else:
