@@ -1673,9 +1673,10 @@ class File(ContentItem):
 class Forum(object):
     """A collection of threads."""
 
-    def __init__(self, title, group=None):
+    def __init__(self, title, description, group=None):
         self.title = title
         self.group = group
+        self.description = description
 
     @staticmethod
     def get(forum_id):

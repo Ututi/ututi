@@ -19,6 +19,8 @@ from ututi.model import meta
 
 def setup_title(group_id, forum_id):
     c.forum = Forum.get(forum_id)
+    if c.forum is None:
+        abort(404)
     if group_id is not None:
         c.group = c.forum.group
         c.group_id = c.group.group_id
@@ -52,8 +54,23 @@ def fix_public_forum_metadata(forum):
         meta.Session.commit()
 
 
+def group_action(method):
+    def _group_action(self, id):
+        c.group = Group.get(id)
+        if c.group is None:
+            abort(404)
+        c.security_context = c.group
+        return method(self, id)
+    return _group_action
+
+
 def forum_action(method):
     def _forum_action(self, id, forum_id):
+        if id is not None:
+            group = Group.get(id)
+            if group is None:
+                abort(404)
+            c.security_context = group
         setup_title(id, forum_id)
         return method(self, forum_id)
     return _forum_action
@@ -71,6 +88,12 @@ def forum_thread_action(method):
         setup_title(id, forum_id)
         return method(self, forum_id, thread_id)
     return _forum_thread_action
+
+
+class NewCategoryForm(Schema):
+
+    title = validators.UnicodeString(not_empty=True, strip=True)
+    description = validators.UnicodeString(not_empty=True, strip=True)
 
 
 class NewReplyForm(Schema):
@@ -111,19 +134,10 @@ class ForumController(BaseController):
 
         return sorted(threads, key=lambda t: t['created'], reverse=True)
 
+    @group_action
+    @ActionProtector("user")
     def list(self, id):
-        c.group = Group.get(id)
-        if c.group is None:
-            abort(404)
         return render('forum/list.mako')
-
-    def create(self, id):
-        # XXX beef me up
-        c.group = Group.get(id)
-        forum = Forum('test forum', group=c.group)
-        meta.Session.add(forum)
-        meta.Session.commit()
-        redirect_to(controller='forum', action='list')
 
     @forum_action
     @ActionProtector("user")
@@ -161,6 +175,25 @@ class ForumController(BaseController):
     @ActionProtector("user")
     def new_thread(self, forum_id):
         return htmlfill.render(self._new_thread_form())
+
+    def _new_category_form(self):
+        return render('forum/new_category.mako')
+
+    @group_action
+    @ActionProtector("admin", "moderator")
+    def new_category(self, id):
+        return htmlfill.render(self._new_category_form())
+
+    @group_action
+    @validate(NewCategoryForm, form='_new_category_form')
+    @ActionProtector("admin", "moderator")
+    def create_category(self, id):
+        forum = Forum(self.form_result['title'],
+                      description=self.form_result['description'],
+                      group=c.group)
+        meta.Session.add(forum)
+        meta.Session.commit()
+        redirect_to(controller='forum', action='index', id=id, forum_id=forum.id)
 
     @forum_action
     @validate(NewTopicForm, form='_new_thread_form')
