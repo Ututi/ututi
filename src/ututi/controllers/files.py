@@ -57,6 +57,13 @@ class BasefilesController(BaseController):
         meta.Session.commit()
         return render_mako_def('/sections/files.mako','file', file=file)
 
+    def _rename(self, file):
+        new_file_name = request.params.get('new_file_name', '').strip()
+        if new_file_name:
+            file.title = new_file_name
+        meta.Session.commit()
+        return file.title
+
     def _restore(self, file):
         file.deleted = None
         meta.Session.commit()

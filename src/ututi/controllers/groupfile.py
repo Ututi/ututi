@@ -57,6 +57,11 @@ class GroupfileController(BasefilesController):
         return self._delete(file)
 
     @group_file_action
+    @ActionProtector('admin', 'owner')
+    def rename(self, group, file):
+        return self._rename(file)
+
+    @group_file_action
     @ActionProtector('deleter', 'owner')
     def restore(self, group, file):
         return self._restore(file)

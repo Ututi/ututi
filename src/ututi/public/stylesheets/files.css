@@ -210,3 +210,24 @@ div.file_upload_progress div.failed {
   padding-left: 20px;
   margin-bottom: 15px;
 }
+
+.file_rename_input_decorator {
+  display:-moz-inline-box;
+  display:inline-block;
+  padding: 0;
+  padding-right: 3px;
+  background: white url("../images/borders/rename_file.png") right center no-repeat;
+}
+
+.file_rename_input {
+  font-size: 12px;
+  width: 190px;
+  height: 20px;
+  line-height: 21px;
+  vertical-align: center;
+  margin: 0;
+  border: 0;
+  outline: 0;
+  padding: 2px 0 0 7px;
+  background: white url("../images/borders/rename_file.png") left center no-repeat;
+} /* no left/right padding here please */

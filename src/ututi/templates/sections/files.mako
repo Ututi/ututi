@@ -264,6 +264,36 @@ $(document).ready(function(){
 
     $('.delete_button').click(deleteFile);
     $('.restore_button').click(restoreFile);
+    $('.rename_button').click(renameFile);
+
+    function renameFile(event) {
+       var file_name = $(event.target).closest('.file').find('.filename');
+       var rename_form = $(event.target).closest('.file').find('.file_rename_form');
+       rename_form.find('.file_rename_input').val(file_name.text());
+       rename_form.show();
+       $(event.target).hide();
+       file_name.hide();
+    }
+
+    function performFileRename(event) {
+       var new_file_name = $(event.target).closest('.file_rename_form').find('.file_rename_input').val();
+       var url = $(event.target).closest('.file').children('.rename_url').val();
+       $.ajax({type: "POST",
+               url: url,
+               data: ({new_file_name: new_file_name}),
+               success: function(msg){
+                  var file_name = $(event.target).closest('.file').find('.filename');
+                  var rename_form = $(event.target).closest('.file').find('.file_rename_form');
+
+                  rename_form.hide();
+
+                  $(event.target).closest('.file').find('.rename_button').show();
+                  file_name.text(msg);
+                  file_name.show();
+       }});
+    }
+
+    $('.rename_confirm').click(performFileRename);
 
     $('.new_folder_button').click(function (event) {
         newFolder(event.target);
@@ -324,6 +354,15 @@ $(document).ready(function(){
               ${h.image('/images/details/icon_drag_file.png', alt='file icon', class_='drag-target')|n}
             %endif
               ${h.link_to(file.title, file.url(), class_='filename')}
+            %if file.can_write():
+              <span class="file_rename_form hidden">
+                <span class="file_rename_input_decorator">
+                  <input class="file_rename_input" type="text" />
+                </span>
+                <span class="btn"><input class="rename_confirm" type="button" value="${_('Rename')}"/></span>
+              </span>
+              <img src="${url('/images/details/icon_rename.png')}" alt="${_('edit file name')}" class="rename_button" />
+            %endif
               <span class="size">(${h.file_size(file.size)})</span>
               <span class="date">${h.fmt_dt(file.created_on)}</span>
               <a href="${url(controller='user', action='index', id=file.created_by)}" class="author">
@@ -332,6 +371,7 @@ $(document).ready(function(){
               <input class="move_url" type="hidden" value="${file.url(action='move')}" />
               <input class="copy_url" type="hidden" value="${file.url(action='copy')}" />
               <input class="delete_url" type="hidden" value="${file.url(action='delete')}" />
+              <input class="rename_url" type="hidden" value="${file.url(action='rename')}" />
               <input class="folder_title_value" type="hidden" value="${file.folder}" />
             %if file.can_write():
               <img src="${url('/images/delete.png')}" alt="${_('delete file')}" class="delete_button" />

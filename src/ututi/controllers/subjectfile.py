@@ -63,6 +63,11 @@ class SubjectfileController(BasefilesController):
 
     @subject_file_action
     @ActionProtector('owner', 'moderator')
+    def rename(self, subject, file):
+        return self._rename(file)
+
+    @subject_file_action
+    @ActionProtector('owner', 'moderator')
     def restore(self, subject, file):
         return self._restore(file)
 

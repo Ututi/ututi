@@ -14,6 +14,13 @@ File upload:
     <li class="file">
       <img alt="file icon" class="drag-target" src="/images/details/icon_drag_file_new.png" />
       <a class="filename" href="/subject/vu/mat_analize/file/3/get">text;for you.txt</a>
+      <span class="file_rename_form hidden">
+        <span class="file_rename_input_decorator">
+          <input class="file_rename_input" type="text" />
+        </span>
+        <span class="btn"><input class="rename_confirm" type="button" value="Rename"/></span>
+      </span>
+      <img src="/images/details/icon_rename.png" alt="edit file name" class="rename_button" />
       <span class="size">(4.0 b)</span>
       <span class="date">...</span>
       <a href="/user/1" class="author">
@@ -22,6 +29,7 @@ File upload:
       <input class="move_url" type="hidden" value="/subject/vu/mat_analize/file/3/move" />
       <input class="copy_url" type="hidden" value="/subject/vu/mat_analize/file/3/copy" />
       <input class="delete_url" type="hidden" value="/subject/vu/mat_analize/file/3/delete" />
+      <input class="rename_url" type="hidden" value="/subject/vu/mat_analize/file/3/rename" />
       <input class="folder_title_value" type="hidden" value="" />
       <img src="/images/delete.png" alt="delete file" class="delete_button" />
     </li>
