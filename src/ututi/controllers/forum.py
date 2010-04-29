@@ -1,3 +1,5 @@
+import os.path
+
 from ututi.lib.base import BaseController
 
 from sqlalchemy.sql.expression import desc
@@ -9,7 +11,7 @@ from pylons.decorators import validate
 from pylons.controllers.util import abort
 from pylons.controllers.util import redirect, redirect_to
 from pylons.i18n import _
-from pylons import tmpl_context as c, url
+from pylons import tmpl_context as c, url, config
 
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import render
@@ -25,8 +27,39 @@ def setup_title(group_id, forum_id):
     else:
         c.group_id = None
 
+    # Make sure forum title and description are localized.
+    # This is not the best place to do this, but I know no better way.
+    fix_public_forum_metadata(c.forum)
+
     c.breadcrumbs = [{'title': c.forum.title,
                       'link': url.current(action='index', forum_id=c.forum.id)}]
+
+
+def fix_public_forum_metadata(forum):
+    if forum.group is not None:
+        return
+    assert forum.id in [1, 2], forum.id
+    if forum.id == 1:
+        title = _('Community page')
+        description = _('Ututi community forum.')
+        logo = 'report_bug.png'
+    elif forum.id == 2:
+        title = _('Ututi bugs')
+        description = _('Report Ututi bugs here.')
+        logo = 'community.png'
+
+    static_files_path = config['pylons.paths']['static_files']
+    logo_data = file(os.path.join(static_files_path, 'images', logo)).read()
+
+    if forum.title != title:
+        forum.title = title
+        meta.Session.commit()
+    if forum.description != description:
+        forum.description = description
+        meta.Session.commit()
+    if forum.logo_data != logo_data:
+        forum.logo_data = logo_data
+        meta.Session.commit()
 
 
 def forum_action(method):
