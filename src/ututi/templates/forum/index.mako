@@ -35,11 +35,8 @@
 
 <br class="clear-left"/>
 
-%if not c.forum_posts:
-  <span class="small">${_('No messages yet.')}</span>
-%endif
 <table id="forum-thread-list">
-% for forum_post in c.forum_posts:
+% for forum_post in c.category.top_level_messages():
 <tr>
   <td class="subject">
     <a class="thread-subject" href="${url.current(action='thread', thread_id=forum_post['thread_id'])}">

@@ -1709,6 +1709,30 @@ class ForumCategory(object):
                 ).filter(ForumPost.thread_id == ForumPost.id
                 ).limit(limit).all()
 
+    def top_level_messages(self):
+        messages = meta.Session.query(ForumPost)\
+            .filter_by(category_id=self.id)\
+            .filter(ForumPost.id == ForumPost.thread_id)\
+            .order_by(desc(ForumPost.created_on)).all()
+
+        threads = []
+        for message in messages:
+            thread = {}
+
+            thread['thread_id'] = message.thread_id
+            thread['title'] = message.title
+
+            replies = meta.Session.query(ForumPost)\
+                .filter_by(thread_id=message.thread_id)\
+                .order_by(ForumPost.created_on).all()
+
+            thread['reply_count'] = len(replies) - 1
+            thread['created'] = replies[-1].created_on
+            thread['author'] = replies[-1].created
+            threads.append(thread)
+
+        return sorted(threads, key=lambda t: t['created'], reverse=True)
+
 
 class ForumPost(ContentItem):
     """Forum post."""

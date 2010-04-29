@@ -127,30 +127,6 @@ class ForumController(GroupControllerBase):
         c.ututi_supporters = get_supporters()
         c.breadcrumbs = []
 
-    def _top_level_messages(self, category_id):
-        messages = meta.Session.query(ForumPost)\
-            .filter_by(category_id=category_id)\
-            .filter(ForumPost.id == ForumPost.thread_id)\
-            .order_by(desc(ForumPost.created_on)).all()
-
-        threads = []
-        for message in messages:
-            thread = {}
-
-            thread['thread_id'] = message.thread_id
-            thread['title'] = message.title
-
-            replies = meta.Session.query(ForumPost)\
-                .filter_by(thread_id=message.thread_id)\
-                .order_by(ForumPost.created_on).all()
-
-            thread['reply_count'] = len(replies) - 1
-            thread['created'] = replies[-1].created_on
-            thread['author'] = replies[-1].created
-            threads.append(thread)
-
-        return sorted(threads, key=lambda t: t['created'], reverse=True)
-
     @group_action
     @ActionProtector("user")
     def list(self, id):
@@ -162,7 +138,6 @@ class ForumController(GroupControllerBase):
     def index(self, category_id):
         if c.group_id is not None:
             c.breadcrumbs.append(self._actions('forum'))
-        c.forum_posts = self._top_level_messages(category_id)
         return render('forum/index.mako')
 
     @forum_thread_action
