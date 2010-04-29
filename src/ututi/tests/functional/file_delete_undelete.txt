@@ -73,12 +73,9 @@ Restore all the other files:
     >>> browser.getControl('Undelete', index=1).click()
 
     >>> browser.open('http://localhost/subject/vu/mat_analize')
-    >>> browser.printQuery("//li[@class='file']/a/text()")
-    text3.txt Adminas Adminovix
-    text_in_a_folder.txt Adminas Adminovix
-    text_in_a_folderr.txt Adminas Adminovix
-
-text_in_a_folderr.txt is in the Trash folder
+    >>> browser.printQuery("//a[@class='filename']/text()")
+    text3.txt
+    text_in_a_folder.txt
 
     >>> browser.open('http://localhost/group/moderators/files')
     >>> browser.printQuery("//li[@class='file']/a/text()")

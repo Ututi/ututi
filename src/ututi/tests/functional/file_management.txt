@@ -13,7 +13,7 @@ File upload:
     >>> print dedent(res.body)
     <li class="file">
       <img alt="file icon" class="drag-target" src="/images/details/icon_drag_file_new.png" />
-      <a href="/subject/vu/mat_analize/file/3/get">text;for you.txt</a>
+      <a class="filename" href="/subject/vu/mat_analize/file/3/get">text;for you.txt</a>
       <span class="size">(4.0 b)</span>
       <span class="date">...</span>
       <a href="/user/1" class="author">
@@ -32,7 +32,7 @@ File upload:
     >>> print dedent(res.body)
     <li class="file">
       ...
-      <a href="/subject/vu/mat_analize/file/4/get">image.png</a>
+      <a class="filename" href="/subject/vu/mat_analize/file/4/get">image.png</a>
       ...
     </li>
 
@@ -52,7 +52,7 @@ File upload:
     >>> print dedent(res.body)
     <li class="file">
       ...
-      <a href="/group/moderators/file/5/get">other_text.txt</a>
+      <a class="filename" href="/group/moderators/file/5/get">other_text.txt</a>
       ...
     </li>
 
@@ -62,7 +62,7 @@ File upload:
     >>> print dedent(res.body)
     <li class="file">
       ...
-      <a href="/group/moderators/file/6/get">more_text.txt</a>
+      <a class="filename" href="/group/moderators/file/6/get">more_text.txt</a>
       ...
     </li>
 
@@ -128,7 +128,7 @@ Deleting folders:
     >>> print dedent(res.body)
     <li class="file">
       ...
-      <a href="/subject/vu/mat_analize/file/.../get">image.png</a>
+      <a class="filename" href="/subject/vu/mat_analize/file/.../get">image.png</a>
       ...
     </li>
 
@@ -138,7 +138,7 @@ Deleting folders:
     >>> print dedent(res.body)
     <li class="file">
       ...
-      <a href="/group/moderators/file/.../get">more_text.txt</a>
+      <a class="filename" href="/group/moderators/file/.../get">more_text.txt</a>
       ...
     </li>
 
@@ -200,7 +200,7 @@ Once the group's private files reach a limit, no more files can be uploaded.
     >>> print dedent(res.body)
     <li class="file">
       ...
-      <a href="/group/moderators/file/.../get">more_text.txt</a>
+      <a class="filename" href="/group/moderators/file/.../get">more_text.txt</a>
       ...
     </li>
 
@@ -286,7 +286,7 @@ uploading is enabled again:
     >>> print dedent(res.body)
     <li class="file">
     ...
-      <a href="/group/moderators/file/12/get">over.txt</a>
+      <a class="filename" href="/group/moderators/file/12/get">over.txt</a>
     ...
     </li>
 

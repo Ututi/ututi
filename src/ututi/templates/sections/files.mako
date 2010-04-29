@@ -323,7 +323,7 @@ $(document).ready(function(){
             %else:
               ${h.image('/images/details/icon_drag_file.png', alt='file icon', class_='drag-target')|n}
             %endif
-              ${h.link_to(file.title, file.url())}
+              ${h.link_to(file.title, file.url(), class_='filename')}
               <span class="size">(${h.file_size(file.size)})</span>
               <span class="date">${h.fmt_dt(file.created_on)}</span>
               <a href="${url(controller='user', action='index', id=file.created_by)}" class="author">
