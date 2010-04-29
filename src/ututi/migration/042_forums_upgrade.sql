@@ -1,3 +1,5 @@
+alter table groups add column mailinglist_enabled bool default true;
+
 CREATE TABLE forums (
        id bigserial not null,
        group_id int8 null references groups(id),

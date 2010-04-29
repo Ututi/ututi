@@ -158,6 +158,7 @@ create table groups (
        admins_approve_members bool default true,
        forum_is_public bool default false,
        page_is_public bool default false,
+       mailinglist_enabled bool default true,
        primary key (id));;
 
 /* An enumerator for membership types in groups */
