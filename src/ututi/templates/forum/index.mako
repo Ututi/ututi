@@ -23,13 +23,13 @@
 </%def>
 
 % if c.group_id is not None:
-    <a class="back-link" href="${url(controller='forum', action='list', id=c.group_id)}">${_('Back to forum list')}</a>
+    <a class="back-link" href="${url.current(action='list')}">${_('Back to forum list')}</a>
 % endif
 
 <div id="page_header">
   <h1 style="float: left;">${c.forum.title}</h1>
   <div style="float: left; margin-top: 8px; margin-left: 10px;">
-    <a class="btn" href="${url(controller='forum', action='new_thread', id=c.group_id, forum_id=c.forum_id)}"><span>${_("New topic")}</span></a>
+      <a class="btn" href="${url.current(action='new_thread')}"><span>${_("New topic")}</span></a>
   </div>
 </div>
 
@@ -42,7 +42,7 @@
 % for forum_post in c.forum_posts:
 <tr>
   <td class="subject">
-    <a class="thread-subject" href="${url(controller='forum', action='thread', id=c.group_id, forum_id=c.forum_id, thread_id=forum_post['thread_id'])}">
+    <a class="thread-subject" href="${url.current(action='thread', thread_id=forum_post['thread_id'])}">
       ${forum_post['title']}
     </a>
   </td>
