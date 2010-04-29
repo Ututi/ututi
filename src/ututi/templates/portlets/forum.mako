@@ -5,9 +5,11 @@
     <%def name="header()">
         <a href="${url.current(action='index')}" title="${c.forum.title}">${c.forum.title}</a>
     </%def>
-    <!-- XXX
-      <img id="forum-logo"  class="logo" src="${url('/images/%s') }" alt="logo" />
-    -->
+    % if c.forum.id == 1:
+      <img id="forum-logo"  class="logo" src="${url('/images/community.png') }" alt="logo" />
+    % elif c.forum.id == 2:
+      <img id="forum-logo"  class="logo" src="${url('/images/report_bug.png') }" alt="logo" />
+    % endif
     <div class="structured_info">
       <span class="small">
         ${ungettext("<em>%(count)s</em> active poster", "<em>%(count)s</em> active posters", c.forum.poster_count()) % dict(count=c.forum.poster_count())|n}
