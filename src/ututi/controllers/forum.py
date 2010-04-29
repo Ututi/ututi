@@ -14,6 +14,7 @@ from pylons import tmpl_context as c, url
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import render
 from ututi.model import Group, ForumCategory, ForumPost
+from ututi.model import get_supporters
 from ututi.model import meta
 
 
@@ -31,6 +32,7 @@ def setup_title(group_id, category_id):
     # This is not the best place to do this, but I know no better way.
     fix_public_forum_metadata(c.category)
 
+    # XXX: fix breadcrumbs
     c.breadcrumbs = [{'title': c.category.title,
                       'link': url.current(action='index', category_id=c.category.id)}]
 
@@ -109,6 +111,9 @@ class NewTopicForm(NewReplyForm):
 
 
 class ForumController(BaseController):
+
+    def __before__(self):
+        c.ututi_supporters = get_supporters()
 
     def _top_level_messages(self, category_id):
         messages = meta.Session.query(ForumPost)\

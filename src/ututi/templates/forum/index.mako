@@ -23,7 +23,7 @@
 </%def>
 
 % if c.group_id is not None:
-    <a class="back-link" href="${url.current(action='list')}">${_('Back to forum list')}</a>
+    <a class="back-link" href="${url.current(action='list')}">${_('Back to category list')}</a>
 % endif
 
 <div id="page_header">

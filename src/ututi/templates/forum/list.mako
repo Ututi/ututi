@@ -23,9 +23,9 @@
 <br class="clear-left"/>
 
 %if not c.group.forum_categories:
-  <span class="small">${_('No categories yet.')}</span>
+    <span id="no-categories" class="small">${_('No categories yet.')}</span>
 %endif
-<table>
+<table id='forum-categories'>
 % for category in c.group.forum_categories:
   <tr>
     <td>
