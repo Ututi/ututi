@@ -12,7 +12,7 @@
 </%def>
 
 <div id="page_header">
-  <h1 style="float: left;">${c.group.title}</h1>
+  <h1 style="float: left;">${_('Forum')}</h1>
    % if h.check_crowds(['admin', 'moderator']):
      <div style="float: left; margin-top: 8px; margin-left: 10px;">
        <a class="btn" href="${url.current(action='new_category')}"><span>${_("New category")}</span></a>

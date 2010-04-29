@@ -13,6 +13,7 @@ from pylons import tmpl_context as c, url
 
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import render
+from ututi.controllers.group import GroupControllerBase
 from ututi.model import Group, ForumCategory, ForumPost
 from ututi.model import get_supporters
 from ututi.model import meta
@@ -32,9 +33,8 @@ def setup_title(group_id, category_id):
     # This is not the best place to do this, but I know no better way.
     fix_public_forum_metadata(c.category)
 
-    # XXX: fix breadcrumbs
-    c.breadcrumbs = [{'title': c.category.title,
-                      'link': url.current(action='index', category_id=c.category.id)}]
+    c.breadcrumbs.append({'title': c.category.title,
+                          'link': url.current(action='index', category_id=c.category.id)})
 
 
 def fix_public_forum_metadata(forum):
@@ -59,6 +59,8 @@ def fix_public_forum_metadata(forum):
 def group_action(method):
     def _group_action(self, id):
         c.group = Group.get(id)
+        c.object_location = c.group.location
+        c.breadcrumbs = [{'title': c.group.title, 'link': c.group.url()}]
         if c.group is None:
             abort(404)
         c.security_context = c.group
@@ -70,6 +72,8 @@ def category_action(method):
     def _forum_action(self, id, category_id):
         if id is not None:
             group = Group.get(id)
+            c.object_location = group.location
+            c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
             if group is None:
                 abort(404)
             c.security_context = group
@@ -80,6 +84,13 @@ def category_action(method):
 
 def forum_thread_action(method):
     def _forum_thread_action(self, id, category_id, thread_id):
+        if id is not None:
+            group = Group.get(id)
+            c.object_location = group.location
+            c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
+            if group is None:
+                abort(404)
+            c.security_context = group
         c.thread_id = thread_id
         try:
             c.thread = meta.Session.query(ForumPost
@@ -110,10 +121,11 @@ class NewTopicForm(NewReplyForm):
     title = validators.UnicodeString(not_empty=True, strip=True)
 
 
-class ForumController(BaseController):
+class ForumController(GroupControllerBase):
 
     def __before__(self):
         c.ututi_supporters = get_supporters()
+        c.breadcrumbs = []
 
     def _top_level_messages(self, category_id):
         messages = meta.Session.query(ForumPost)\
@@ -142,11 +154,14 @@ class ForumController(BaseController):
     @group_action
     @ActionProtector("user")
     def list(self, id):
+        c.breadcrumbs.append(self._actions('forum'))
         return render('forum/list.mako')
 
     @category_action
     @ActionProtector("user")
     def index(self, category_id):
+        if c.group_id is not None:
+            c.breadcrumbs.append(self._actions('forum'))
         c.forum_posts = self._top_level_messages(category_id)
         return render('forum/index.mako')
 
