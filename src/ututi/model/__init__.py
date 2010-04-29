@@ -121,8 +121,8 @@ def setup_orm(engine):
                                  autoload_with=engine)
 
 
-    global forums_table
-    forums_table = Table("forums", meta.metadata,
+    global forum_categories_table
+    forum_categories_table = Table("forum_categories", meta.metadata,
                          autoload=True,
                          autoload_with=engine)
 
@@ -206,10 +206,10 @@ def setup_orm(engine):
                                                 primaryjoin=files_table.c.parent_id==content_items_table.c.id,
                                                 backref=backref("files", order_by=files_table.c.filename.asc()))})
 
-    orm.mapper(Forum, forums_table,
+    orm.mapper(ForumCategory, forum_categories_table,
                properties={'group': relation(Group,
-                                       backref=backref("forums",
-                                          order_by=forums_table.c.id.asc()))})
+                                       backref=backref("forum_categories",
+                                          order_by=forum_categories_table.c.id.asc()))})
 
     orm.mapper(ForumPost, forum_posts_table,
                inherits=ContentItem,
@@ -1670,7 +1670,7 @@ class File(ContentItem):
             return None
 
 
-class Forum(object):
+class ForumCategory(object):
     """A collection of threads."""
 
     def __init__(self, title, description, group=None):
@@ -1681,7 +1681,7 @@ class Forum(object):
     @staticmethod
     def get(forum_id):
         try:
-            return meta.Session.query(Forum).filter_by(id=forum_id).one()
+            return meta.Session.query(ForumCategory).filter_by(id=forum_id).one()
         except NoResultFound:
             return None
 

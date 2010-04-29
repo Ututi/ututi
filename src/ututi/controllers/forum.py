@@ -13,12 +13,12 @@ from pylons import tmpl_context as c, url
 
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import render
-from ututi.model import Group, Forum, ForumPost
+from ututi.model import Group, ForumCategory, ForumPost
 from ututi.model import meta
 
 
 def setup_title(group_id, forum_id):
-    c.forum = Forum.get(forum_id)
+    c.forum = ForumCategory.get(forum_id)
     if c.forum is None:
         abort(404)
     if group_id is not None:
@@ -188,9 +188,9 @@ class ForumController(BaseController):
     @validate(NewCategoryForm, form='_new_category_form')
     @ActionProtector("admin", "moderator")
     def create_category(self, id):
-        forum = Forum(self.form_result['title'],
-                      description=self.form_result['description'],
-                      group=c.group)
+        forum = ForumCategory(self.form_result['title'],
+                              description=self.form_result['description'],
+                              group=c.group)
         meta.Session.add(forum)
         meta.Session.commit()
         redirect_to(controller='forum', action='index', id=id, forum_id=forum.id)

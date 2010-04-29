@@ -669,7 +669,7 @@ CREATE TABLE group_requests (
        primary key (hash));;
 
 
-CREATE TABLE forums (
+CREATE TABLE forum_categories (
        id bigserial not null,
        group_id int8 null references groups(id),
        title varchar(255) not null default '',
@@ -677,16 +677,16 @@ CREATE TABLE forums (
        primary key (id));
 
 
-insert into forums (group_id, title, description)
+insert into forum_categories (group_id, title, description)
     values (null, 'Community', 'Ututi community forum');
-insert into forums (group_id, title, description)
+insert into forum_categories (group_id, title, description)
     values (null, 'Report a bug', 'Report bugs here' );
 
 
 CREATE TABLE forum_posts (
        id int8 not null references content_items(id),
        thread_id int8 references forum_posts,
-       forum_id int8 not null references forums(id),
+       forum_id int8 not null references forum_categories(id),
        title varchar(500) not null,
        message text not null,
        parent_id int8 default null references content_items(id) on delete cascade,

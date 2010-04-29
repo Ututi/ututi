@@ -22,11 +22,11 @@
 
 <br class="clear-left"/>
 
-%if not c.group.forums:
-  <span class="small">${_('No forums yet.')}</span>
+%if not c.group.forum_categories:
+  <span class="small">${_('No categories yet.')}</span>
 %endif
 <table>
-% for forum in c.group.forums:
+% for forum in c.group.forum_categories:
   <tr>
     <td>
       <a href="${url(controller='forum', action='index', id=c.group.group_id, forum_id=forum.id)}">
