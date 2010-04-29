@@ -24,9 +24,9 @@
       <h4>${group.title}</h4>
       <span class="school-link"><a href="${group.location.url()}">${' | '.join(group.location.path)}</a></span><br />
       %if group.is_member(c.user):
-        <a href="${url(controller='groupforum', action='new_thread', id=c.group.group_id)}" title="${_('Mailing list address')}">${group.group_id}@${c.mailing_list_host}</a><br />
+        <a href="${url(controller='mailinglist', action='new_thread', id=c.group.group_id)}" title="${_('Mailing list address')}">${group.group_id}@${c.mailing_list_host}</a><br />
       %elif c.user is not None:
-        <a href="${url(controller='groupforum', action='new_anonymous_post', id=c.group.group_id)}" title="${_('Mailing list address')}">${group.group_id}@${c.mailing_list_host}</a><br />
+        <a href="${url(controller='mailinglist', action='new_anonymous_post', id=c.group.group_id)}" title="${_('Mailing list address')}">${group.group_id}@${c.mailing_list_host}</a><br />
       %endif
       <span>
         ${ungettext("%(count)s member", "%(count)s members", len(group.members)) % dict(count = len(group.members))}
@@ -91,7 +91,7 @@
   %>
   <%self:action_portlet id="forum_post_portlet">
     <%def name="header()">
-    <a ${h.trackEvent(None, 'click', 'group_forum_post', 'action_portlets')} href="${url(controller='groupforum', action='new_thread', id=group.group_id)}">${_('email your group')}</a>
+    <a ${h.trackEvent(None, 'click', 'group_forum_post', 'action_portlets')} href="${url(controller='mailinglist', action='new_thread', id=group.group_id)}">${_('email your group')}</a>
     ${h.image('/images/details/icon_question.png',
             alt=_("Write an email to the group's forum - accessible by all your groupmates."),
              class_='tooltip', style='margin-top: 4px;')|n}

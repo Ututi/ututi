@@ -1,6 +1,6 @@
 <%inherit file="/forum/index.mako" />
 
-<a class="back-link" href="${url(controller='forum', action='index', forum_id=c.forum_id)}">${_('Back to the topic list')}</a>
+<a class="back-link" href="${url.current(action='index')}">${_('Back to the topic list')}</a>
 <h1>${c.thread.title}</h1>
 
 <table id="forum-thread">
@@ -33,7 +33,7 @@
 <br />
 <a name="reply"/>
 <h2>${_('Reply')}</h2>
-<form method="post" action="${url(controller='forum', action='reply', thread_id=c.thread.id, forum_id=c.forum_id)}"
+<form method="post" action="${url.current(action='reply')}"
      id="group_add_form" enctype="multipart/form-data">
   <div class="form-field">
     <label for="message">${_('Message')}</label>

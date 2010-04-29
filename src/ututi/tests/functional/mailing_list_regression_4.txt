@@ -6,7 +6,7 @@ Regression test for group attachment handling in evolution generated emails
     >>> from ututi.tests.functional import send_test_message
 
     >>> send_test_message('evolution_attachment_bug.txt')
-    >>> browser.open("http://localhost/group/moderators/forum/thread/3")
+    >>> browser.open("http://localhost/group/moderators/mailinglist/thread/3")
 
     >>> from ututi.lib.mailer import mail_queue
     >>> print mail_queue[0].message
@@ -34,7 +34,7 @@ Regression test for group attachment handling in evolution generated emails
     Content-Transfer-Encoding: base64
     <BLANKLINE>
     TGFiYXMuCgpwbGFrYXRhczIuc3ZnIC0gaHR0cDovL2xvY2FsaG9zdC9ncm91cC9tb2RlcmF0b3Jz
-    L2ZvcnVtL2ZpbGUvMy80
+    L21haWxpbmdsaXN0L2ZpbGUvMy80
     <BLANKLINE>
     --=-AiCycqkJF+NJt7Ar8KJW--
     <BLANKLINE>

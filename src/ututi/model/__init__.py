@@ -121,6 +121,12 @@ def setup_orm(engine):
                                  autoload_with=engine)
 
 
+    global forum_categories_table
+    forum_categories_table = Table("forum_categories", meta.metadata,
+                         autoload=True,
+                         autoload_with=engine)
+
+
     global forum_posts_table
     forum_posts_table = Table("forum_posts", meta.metadata,
                               Column('title', Unicode(assert_unicode=True)),
@@ -199,6 +205,11 @@ def setup_orm(engine):
                properties = {'parent': relation(ContentItem,
                                                 primaryjoin=files_table.c.parent_id==content_items_table.c.id,
                                                 backref=backref("files", order_by=files_table.c.filename.asc()))})
+
+    orm.mapper(ForumCategory, forum_categories_table,
+               properties={'group': relation(Group,
+                                       backref=backref("forum_categories",
+                                          order_by=forum_categories_table.c.id.asc()))})
 
     orm.mapper(ForumPost, forum_posts_table,
                inherits=ContentItem,
@@ -1612,7 +1623,7 @@ class File(ContentItem):
                                    **kwargs)
         elif isinstance(self.parent, GroupMailingListMessage):
             message = self.parent
-            return message.group.url(controller='groupforum',
+            return message.group.url(controller='mailinglist',
                                      action='file',
                                      message_id=message.id,
                                      file_id=self.id,
@@ -1659,18 +1670,83 @@ class File(ContentItem):
             return None
 
 
-class ForumPost(ContentItem):
-    """ """
+class ForumCategory(object):
+    """A collection of threads."""
 
-    def __init__(self, title, message, forum_id=None, thread_id=None):
+    def __init__(self, title, description, group=None):
+        self.title = title
+        self.group = group
+        self.description = description
+
+    @staticmethod
+    def get(category_id):
+        try:
+            return meta.Session.query(ForumCategory).filter_by(id=category_id).one()
+        except NoResultFound:
+            return None
+
+    def post_count(self):
+        return meta.Session.query(ForumPost
+                                   ).filter_by(category_id=self.id
+                                   ).count() or 0
+
+    def poster_count(self):
+        query = """select count(distinct content_items.created_by)
+                       from content_items
+                       join forum_posts on forum_posts.id = content_items.id
+                       where category_id = %s""" % self.id
+        return meta.Session.execute(query).scalar() or 0
+
+    def topic_count(self):
+        return meta.Session.query(ForumPost)\
+                 .filter_by(category_id=self.id)\
+                 .filter(ForumPost.thread_id == ForumPost.id)\
+                 .count() or 0
+
+    def messages(self, limit=5):
+        return meta.Session.query(ForumPost
+                ).filter_by(category_id=self.id
+                ).filter(ForumPost.thread_id == ForumPost.id
+                ).limit(limit).all()
+
+    def top_level_messages(self):
+        messages = meta.Session.query(ForumPost)\
+            .filter_by(category_id=self.id)\
+            .filter(ForumPost.id == ForumPost.thread_id)\
+            .order_by(desc(ForumPost.created_on)).all()
+
+        threads = []
+        for message in messages:
+            thread = {}
+
+            thread['thread_id'] = message.thread_id
+            thread['title'] = message.title
+
+            replies = meta.Session.query(ForumPost)\
+                .filter_by(thread_id=message.thread_id)\
+                .order_by(ForumPost.created_on).all()
+
+            thread['reply_count'] = len(replies) - 1
+            thread['created'] = replies[-1].created_on
+            thread['author'] = replies[-1].created
+            threads.append(thread)
+
+        return sorted(threads, key=lambda t: t['created'], reverse=True)
+
+
+class ForumPost(ContentItem):
+    """Forum post."""
+
+    def __init__(self, title, message, category_id=None, thread_id=None):
         self.title = title
         self.message = message
-        self.forum_id = forum_id
+        self.category_id = category_id
         self.thread_id = thread_id
 
     def url(self):
         return url(controller='forum', action='thread',
-                   forum_id=self.forum_id, thread_id=self.thread_id)
+                   category_id=self.category_id, thread_id=self.thread_id)
+
 
 blog_table = None
 class BlogEntry(object):

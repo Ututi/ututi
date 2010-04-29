@@ -1,0 +1,83 @@
+Group forums
+============
+
+First of all let's log in;
+
+    >>> browser = Browser.logIn()
+
+Let's find the group:
+
+    >>> browser.open('http://localhost/group/moderators')
+    >>> browser.url
+    'http://localhost/group/moderators/home'
+
+    >>> browser.getLink('Edit').click()
+
+    >>> browser.getControl('Forum type').value = ['forum']
+    >>> browser.getControl('Save').click()
+
+    >>> browser.url
+    'http://localhost/group/moderators/home'
+
+Let's enter the forum:
+
+    >>> browser.getLink('Forum').click()
+
+There are no categories:
+
+    >>> browser.printQuery('id("no-categories")')
+    <span id="no-categories" class="small">No categories yet.</span>
+
+Let's create a category:
+
+    >>> browser.getLink('New category').click()
+    >>> browser.getControl(name='title').value = 'General'
+    >>> browser.getControl(name='description').value = 'General stuff'
+    >>> browser.getControl('Create').click()
+
+Now, let's start a thread:
+
+    >>> browser.getLink('New topic').click()
+    >>> browser.getControl(name='title').value = "What's up?"
+    >>> browser.getControl(name='message').value = "How's everybody doin'?"
+    >>> browser.getControl('Post').click()
+
+And we'll post a reply:
+
+    >>> browser.getControl(name='message').value = 'Not too bad!'
+    >>> browser.getControl('Reply').click()
+
+We can see the messages we posted:
+
+    >>> print browser.printQuery('//div[@class="post-body"]')
+    <div class="post-body">
+            How's everybody doin'?
+          </div>
+    <div class="post-body">
+            Not too bad!
+          </div>
+    None
+
+Let's go back to the topic list.
+
+    >>> browser.getLink('Back to the topic list').click()
+
+    >>> print browser.printQuery('//td[@class="subject"]')
+    <td class="subject">
+      <a class="thread-subject" href="/group/moderators/forum/3/thread/3">
+          What's up?
+        </a>
+    </td>
+    None
+
+And all the way up to the category list:
+
+    >>> browser.getLink('Back to category list').click()
+
+    >>> print browser.printQuery('//h2[@class="category"]')
+    <h2 class="category">
+      <a href="/group/moderators/forum/3">
+            General
+        </a>
+    </h2>
+    None

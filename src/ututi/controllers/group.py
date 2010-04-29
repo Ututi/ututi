@@ -121,10 +121,11 @@ class GroupLiveSearchForm(Schema):
 class EditGroupForm(GroupForm):
     """A schema for validating group edits."""
 
-    default_tab = validators.OneOf(['home', 'forum', 'members', 'files', 'subjects', 'page'])
+    default_tab = validators.OneOf(['home', 'forum', 'mailinglist', 'members', 'files', 'subjects', 'page'])
     approve_new_members = validators.OneOf(['none', 'admin'])
     forum_visibility = validators.OneOf(['public', 'members'])
     page_visibility = validators.OneOf(['public', 'members'])
+    forum_type = validators.OneOf(['mailinglist', 'forum'])
 
 class NewGroupForm(GroupForm):
     """A schema for validating new group forms."""
@@ -200,15 +201,25 @@ class GroupControllerBase(BaseController):
         The action with the name matching the `selected' parameter is
         marked as selected.
         """
+        if c.group.mailinglist_enabled:
+            forum_entry = {
+             'title': _('Forum'),
+             'link': url(controller='group', action='mailinglist', id=c.group.group_id),
+             'selected': selected == 'mailinglist',
+             'event': h.trackEvent(c.group, 'mailinglist', 'breadcrumb')}
+        else:
+            forum_entry = {
+             'title': _('Forum'),
+             'link': url(controller='group', action='forum', id=c.group.group_id),
+             'selected': selected == 'forum',
+             'event': h.trackEvent(c.group, 'forum', 'breadcrumb')}
+
         bcs = [
             {'title': _("What's new?"),
              'link': url(controller='group', action='home', id=c.group.group_id),
              'selected': selected == 'home',
              'event': h.trackEvent(c.group, 'home', 'breadcrumb')},
-            {'title': _('Forum'),
-             'link': url(controller='group', action='forum', id=c.group.group_id),
-             'selected': selected == 'forum',
-             'event': h.trackEvent(c.group, 'forum', 'breadcrumb')},
+            forum_entry,
             {'title': _('Members'),
              'link': url(controller='group', action='members', id=c.group.group_id),
              'selected': selected == 'members',
@@ -419,8 +430,9 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     def _edit_form(self):
         c.current_year = date.today().year
         c.years = range(c.current_year - 10, c.current_year + 5)
+        forum_link = 'mailinglist' if c.group.mailinglist_enabled else 'forum'
         c.tabs = [('home', _("What's new?")),
-                  ('forum', _('Forum')),
+                  (forum_link, _('Forum')),
                   ('members', _('Members')),
                   ('files', _('Files')),
                   ('subjects', _('Subjects')),
@@ -457,6 +469,12 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
 
         c.breadcrumbs.append(self._actions('home'))
 
+        c.forum_types = [('mailinglist', _('Mailing list')),
+                         ('forum', _('Web-based forum'))]
+        c.forum_type = 'mailinglist' if c.group.mailinglist_enabled else 'forum'
+
+        defaults['forum_type'] = c.forum_type
+
         return htmlfill.render(self._edit_form(), defaults=defaults)
 
     @group_action
@@ -474,6 +492,13 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
                 self.form_result['forum_visibility'] == 'public')
         group.page_is_public = (
                 self.form_result['page_visibility'] == 'public')
+        group.mailinglist_enabled = (self.form_result['forum_type'] == 'mailinglist')
+
+        # Fix default tab setting if needed.
+        if group.default_tab == 'forum' and group.mailinglist_enabled:
+            group.default_tab = 'mailinglist'
+        if group.default_tab == 'mailinglist' and not group.mailinglist_enabled:
+            group.default_tab = 'forum'
 
         if values['logo_delete']:
             group.logo = None

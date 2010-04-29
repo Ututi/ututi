@@ -107,7 +107,10 @@ ${h.javascript_link('/javascripts/js-alternatives.js')|n}
           <label for="default_tab">${_('Default group tab')}</label>
           ${h.select("default_tab", c.group.default_tab, c.tabs)}
         </div>
-
+        <div class="form-field">
+          <label for="forum_type">${_('Forum type')}</label>
+          ${h.select("forum_type", c.forum_type, c.forum_types)}
+        </div>
 
 <%
 from ututi.lib.security import is_root

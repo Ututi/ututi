@@ -2,7 +2,7 @@
 <%namespace file="/portlets/forum.mako" import="*"/>
 
 <%def name="title()">
-  ${c.forum_title}
+  ${c.category.title}
 </%def>
 
 <%def name="head_tags()">
@@ -14,43 +14,48 @@
 <%def name="portlets()">
 <div id="sidebar">
   ${forum_info_portlet()}
-%if c.forum_id == 'community':
-  ${bugs_forum_posts_portlet()}
-%elif c.forum_id == 'bugs':
-  ${community_forum_posts_portlet()}
-%endif
+  % if c.category.id == 1:
+    ${community_forum_posts_portlet()}
+  % elif c.category.id == 2:
+    ${bugs_forum_posts_portlet()}
+  % endif
 </div>
 </%def>
 
+% if c.group_id is not None:
+    <a class="back-link" href="${url.current(action='list')}">${_('Back to category list')}</a>
+% endif
+
 <div id="page_header">
-  <h1 style="float: left;">${c.forum_title}</h1>
+  <h1 style="float: left;">${c.category.title}</h1>
   <div style="float: left; margin-top: 8px; margin-left: 10px;">
-    <a class="btn" href="${url(controller='forum', action='new_thread', forum_id=c.forum_id)}"><span>${_("New topic")}</span></a>
+      <a class="btn" href="${url.current(action='new_thread')}"><span>${_("New topic")}</span></a>
   </div>
 </div>
+
 <br class="clear-left"/>
 
+<%def name="forum_thread_list(category)">
+  <table id="forum-thread-list">
+  % for forum_post in category.top_level_messages():
+  <tr>
+    <td class="subject">
+      <a class="thread-subject" href="${url.current(action='thread', thread_id=forum_post['thread_id'])}">
+        ${forum_post['title']}
+      </a>
+    </td>
+    <td class="count">
+      ${ungettext("%(count)s reply", "%(count)s replies", forum_post['reply_count']) % dict(count = forum_post['reply_count'])}
+    </td>
+    <td class="date">
+      ${h.fmt_dt(forum_post['created'])}
+    </td>
+    <td class="author">
+      <a href="${forum_post['author'].url()}">${forum_post['author'].fullname}</a>
+    </td>
+  </tr>
+  % endfor
+  </table>
+</%def>
 
-%if not c.forum_posts:
-  <span class="small">${_('No messages yet.')}</span>
-%endif
-<table id="forum-thread-list">
-% for forum_post in c.forum_posts:
-<tr>
-  <td class="subject">
-    <a class="thread-subject" href="${url(controller='forum', action='thread', forum_id=c.forum_id, thread_id=forum_post['thread_id'])}">
-      ${forum_post['title']}
-    </a>
-  </td>
-  <td class="count">
-    ${ungettext("%(count)s reply", "%(count)s replies", forum_post['reply_count']) % dict(count = forum_post['reply_count'])}
-  </td>
-  <td class="date">
-    ${h.fmt_dt(forum_post['created'])}
-  </td>
-  <td class="author">
-    <a href="${forum_post['author'].url()}">${forum_post['author'].fullname}</a>
-  </td>
-</tr>
-% endfor
-</table>
+${forum_thread_list(c.category)}

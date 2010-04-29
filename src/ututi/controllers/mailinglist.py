@@ -29,7 +29,7 @@ def set_login_url(method):
     def _set_login_url(self, group, message, file):
         c.login_form_url = url(controller='home',
                                action='login',
-                               came_from=url(controller='groupforum',
+                               came_from=url(controller='mailinglist',
                                              action='thread',
                                              id=group.group_id,
                                              thread_id=message.thread.id,
@@ -39,7 +39,7 @@ def set_login_url(method):
     return _set_login_url
 
 
-def group_forum_action(method):
+def group_mailinglist_action(method):
     def _group_action(self, id, thread_id):
         group = Group.get(id)
         if group is None:
@@ -57,7 +57,7 @@ def group_forum_action(method):
     return _group_action
 
 
-def groupforum_file_action(method):
+def mailinglist_file_action(method):
     def _group_action(self, id, message_id, file_id):
         group = Group.get(id)
         if group is None:
@@ -71,7 +71,7 @@ def groupforum_file_action(method):
             file_id = re.search(r"\d*", file_id).group()
         file = File.get(file_id)
         if file is None:
-            #not in group.files: ??? are forum files added as the group's files?
+            #not in group.files: ??? are mailing list files added as the group's files?
             abort(404)
 
         c.security_context = group
@@ -96,8 +96,7 @@ class NewMailForm(NewReplyForm):
     subject = validators.UnicodeString(not_empty=True, strip=True)
 
 
-class GroupforumController(GroupControllerBase):
-
+class MailinglistController(GroupControllerBase):
 
     def _top_level_messages(self, group):
         messages = []
@@ -116,11 +115,11 @@ class GroupforumController(GroupControllerBase):
     @group_action
     @ActionProtector("member", "admin")
     def index(self, group):
-        c.breadcrumbs.append(self._actions('forum'))
+        c.breadcrumbs.append(self._actions('mailinglist'))
         c.messages = self._top_level_messages(group)
-        return render('groupforum/index.mako')
+        return render('mailinglist/index.mako')
 
-    @group_forum_action
+    @group_mailinglist_action
     @ActionProtector("member", "admin")
     def thread(self, group, thread):
         file_id = request.GET.get('serve_file')
@@ -128,11 +127,11 @@ class GroupforumController(GroupControllerBase):
         c.serve_file = file
 
         c.thread = thread
-        c.breadcrumbs.append(self._actions('forum'))
+        c.breadcrumbs.append(self._actions('mailinglist'))
         c.messages = thread.posts
-        return render('groupforum/thread.mako')
+        return render('mailinglist/thread.mako')
 
-    @group_forum_action
+    @group_mailinglist_action
     @validate(NewReplyForm)
     @ActionProtector("member", "admin")
     def reply(self, group, thread):
@@ -149,12 +148,12 @@ class GroupforumController(GroupControllerBase):
         post.group = group
         post.reply_to = last_post
         meta.Session.commit()
-        redirect_to(controller='groupforum',
+        redirect_to(controller='mailinglist',
                     action='thread',
                     id=group.group_id, thread_id=thread.id)
 
     def _new_thread_form(self):
-        return render('groupforum/new.mako')
+        return render('mailinglist/new.mako')
 
     @group_action
     @ActionProtector("member", "admin")
@@ -190,11 +189,11 @@ class GroupforumController(GroupControllerBase):
         post = GroupMailingListMessage.fromMessageText(unicode(message))
         post.group = group
         meta.Session.commit()
-        redirect_to(controller='groupforum',
+        redirect_to(controller='mailinglist',
                     action='thread',
                     id=group.group_id, thread_id=post.id)
 
-    @groupforum_file_action
+    @mailinglist_file_action
     @set_login_url
     @ActionProtector('member', 'admin')
     def file(self, group, message, file):
@@ -209,7 +208,7 @@ class GroupforumController(GroupControllerBase):
         return htmlfill.render(self._new_anonymous_post_form())
 
     def _new_anonymous_post_form(self):
-        return render('groupforum/new_anonymous_post.mako')
+        return render('mailinglist/new_anonymous_post.mako')
 
     @group_action
     @validate(NewMailForm, form='_new_anonymous_post_form')

@@ -158,6 +158,7 @@ create table groups (
        admins_approve_members bool default true,
        forum_is_public bool default false,
        page_is_public bool default false,
+       mailinglist_enabled bool default true,
        primary key (id));;
 
 /* An enumerator for membership types in groups */
@@ -668,10 +669,24 @@ CREATE TABLE group_requests (
        primary key (hash));;
 
 
+CREATE TABLE forum_categories (
+       id bigserial not null,
+       group_id int8 null references groups(id),
+       title varchar(255) not null default '',
+       description text not null default '',
+       primary key (id));
+
+
+insert into forum_categories (group_id, title, description)
+    values (null, 'Community', 'Ututi community forum');
+insert into forum_categories (group_id, title, description)
+    values (null, 'Report a bug', 'Report bugs here' );
+
+
 CREATE TABLE forum_posts (
        id int8 not null references content_items(id),
-       thread_id int8 not null references forum_posts,
-       forum_id varchar(100) default null,
+       thread_id int8 references forum_posts,
+       category_id int8 not null references forum_categories(id),
        title varchar(500) not null,
        message text not null,
        parent_id int8 default null references content_items(id) on delete cascade,

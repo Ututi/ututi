@@ -54,27 +54,70 @@ def make_map():
 
     map.connect('/group/{id}', controller='group', action='index')
 
+    # Forum
+    map.connect('/group/{id}/forum/create',
+                controller='forum',
+                action='create')
+
     map.connect('/group/{id}/forum',
-                controller='groupforum',
+                controller='forum',
+                action='list')
+
+    map.connect('/group/{id}/forum/{category_id}',
+                controller='forum',
                 action='index')
 
-    map.connect('/group/{id}/forum/{action}',
-                controller='groupforum')
+    map.connect('/group/{id}/forum/{category_id}/new_thread',
+                controller='forum',
+                action='new_thread')
 
-    map.connect('/group/{id}/forum/thread/{thread_id}',
-                controller='groupforum',
+    map.connect('/group/{id}/forum/{category_id}/post',
+                controller='forum',
+                action='post')
+
+    map.connect('/group/{id}/forum/{category_id}/thread/{thread_id}',
+                controller='forum',
                 action='thread')
 
-    map.connect('/group/{id}/forum/thread/{thread_id}/reply',
-                controller='groupforum',
+    map.connect('/group/{id}/forum/{category_id}/thread/{thread_id}/reply',
+                controller='forum',
                 action='reply')
 
-    map.connect('/group/{id}/forum/file/{message_id}/{file_id}',
-                controller='groupforum',
+    # Mailing list
+    map.connect('/group/{id}/mailinglist',
+                controller='mailinglist',
+                action='index')
+
+    map.connect('/group/{id}/mailinglist/{action}',
+                controller='mailinglist')
+
+    map.connect('/group/{id}/mailinglist/thread/{thread_id}',
+                controller='mailinglist',
+                action='thread')
+
+    map.connect('/group/{id}/mailinglist/thread/{thread_id}/reply',
+                controller='mailinglist',
+                action='reply')
+
+    map.connect('/group/{id}/mailinglist/file/{message_id}/{file_id}',
+                controller='mailinglist',
                 action='file')
 
     map.connect('/group/{id}/file/{file_id}/{action}',
                 controller='groupfile')
+
+    # Backwards compatibility.
+    map.connect('/group/{id}/forum/thread/{thread_id}',
+                controller='forum',
+                action='legacy_thread')
+
+    map.connect('/group/{id}/forum/thread/{thread_id}/reply',
+                controller='forum',
+                action='legacy_reply')
+
+    map.connect('/group/{id}/forum/file/{message_id}/{file_id}',
+                controller='forum',
+                action='legacy_file')
 
     #act on group membership request
     map.connect('/group/{id}/request/{hash_code}/{do}', controller='group', action='request')
@@ -176,23 +219,23 @@ def make_map():
     map.connect('/structure/{id}/logo/{width}',
                 controller='structure', action='logo')
 
-    map.connect('/community',
-                controller='forum', action='index', forum_id='community')
+    map.connect('forum_community_index', '/community',
+                controller='forum', action='index', id=None, category_id=1)
     map.connect('/community/{action}',
-                controller='forum', forum_id='community')
+                controller='forum', id=None, category_id=1)
     map.connect('/community/thread/{thread_id}',
-                controller='forum', forum_id='community', action='thread')
+                controller='forum', id=None, category_id=1, action='thread')
     map.connect('/community/thread/{thread_id}/reply',
-                controller='forum', forum_id='community', action='reply')
+                controller='forum', id=None, category_id=1, action='reply')
 
-    map.connect('/bugs',
-                controller='forum', action='index', forum_id='bugs')
+    map.connect('forum_bugs_index', '/bugs',
+                controller='forum', action='index', id=None, category_id=2)
     map.connect('/bugs/{action}',
-                controller='forum', forum_id='bugs')
+                controller='forum', id=None, category_id=2)
     map.connect('/bugs/thread/{thread_id}',
-                controller='forum', forum_id='bugs', action='thread')
+                controller='forum', id=None, category_id=2, action='thread')
     map.connect('/bugs/thread/{thread_id}/reply',
-                controller='forum', forum_id='bugs', action='reply')
+                controller='forum', id=None, category_id=2, action='reply')
 
     map.connect('/{controller}', action='index')
     map.connect('/{controller}/{action}')
