@@ -13,6 +13,7 @@ from pylons import tmpl_context as c, url
 
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import render
+from ututi.lib.helpers import check_crowds
 from ututi.controllers.group import GroupControllerBase
 from ututi.model import Group, ForumCategory, ForumPost
 from ututi.model import get_supporters
@@ -85,12 +86,14 @@ def category_action(method):
 def forum_thread_action(method):
     def _forum_thread_action(self, id, category_id, thread_id):
         if id is not None:
-            group = Group.get(id)
+            c.group = group = Group.get(id)
             c.object_location = group.location
             c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
             if group is None:
                 abort(404)
             c.security_context = group
+        else:
+            c.group = None
         c.thread_id = thread_id
         try:
             c.thread = meta.Session.query(ForumPost
@@ -110,6 +113,13 @@ class NewCategoryForm(Schema):
 
 
 class NewReplyForm(Schema):
+
+    allow_extra_fields = True
+
+    message = validators.UnicodeString(not_empty=True, strip=True)
+
+
+class EditPostForm(Schema):
 
     allow_extra_fields = True
 
@@ -201,6 +211,27 @@ class ForumController(GroupControllerBase):
         meta.Session.add(post)
         meta.Session.commit()
         redirect(url.current(action='thread', thread_id=post.id))
+
+    def _edit_post_form(self):
+        return render('forum/edit.mako')
+
+    @forum_thread_action
+    @ActionProtector("user")
+    def edit(self, category_id, thread_id):
+        return htmlfill.render(self._edit_post_form(),
+                               defaults={'message': c.thread.message})
+
+    @forum_thread_action
+    @validate(EditPostForm, form='_edit_post_form')
+    @ActionProtector("user")
+    def edit_post(self, category_id, thread_id):
+        if not (c.thread.created_by == c.user.id or
+          (check_crowds(['moderator']) if c.group is not None else check_crowds(['root']))):
+            abort(403)
+        c.thread.message = self.form_result['message']
+        meta.Session.commit()
+        redirect(url.current(action='thread',
+                             thread_id=c.thread.thread_id))
 
     # Redirects for backwards compatibility.
 

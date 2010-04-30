@@ -25,6 +25,10 @@
         ${h.nl2br(forum_post.message)|n}
       </div>
       <a class="btn" href="#reply"><span>${_('Reply')}</span></a>
+      % if forum_post.created_by == c.user.id or (h.check_crowds(['moderator']) if c.group is not None else h.check_crowds(['root'])):
+        ${h.button_to(_('Edit'), url.current(action='edit', thread_id=forum_post.id))}
+        ${h.button_to(_('Delete'), url.current(action='delete', thread_id=forum_post.id))}
+      % endif
     </div>
   </td>
 </tr>
