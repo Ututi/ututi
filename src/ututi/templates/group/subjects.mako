@@ -144,7 +144,7 @@ ${h.stylesheet_link('/stylesheets/group.css')|n}
 %>
 
 <li id="empty_subjects_msg" class="empty_msg ${cls}">
-  ${_('Your group is not watching any subjects. Add them by using the search.')}
+${_('Your group is not watching any subjects. Add them by searching.')}
 </li>
 </ul>
 

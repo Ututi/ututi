@@ -20,11 +20,11 @@ There should be a portlet with a form that let's us enter email addresses the re
    [u'somenewuser@example.com']
    Hello!
    <BLANKLINE>
-   Adminas Adminovix has been using Ututi - the portal for students - for some time now and is recommending you to try it.
+   Adminas Adminovix has been using Ututi, a portal for students, for some time now and recommends you to try it.
    <BLANKLINE>
-   Ututi is a system for students that encourages collaboration and sharing of study materials. We provide tools that make storing lecture notes, sharing files and communicating with your class mates much, much easier.
+   Ututi is a system for students that encourages collaboration and sharing of study materials. We provide tools that make storing lecture notes, sharing files and communicating with your classmates much, much easier.
    <BLANKLINE>
-   If You would like to join Ututi now, please follow this link:
+   If you would like to join Ututi now, please follow this link:
    http://localhost/
    <BLANKLINE>
    The Ututi team
@@ -55,11 +55,11 @@ What if some of the emails were mistyped?
    [u'someneweruser@example.com']
    Hello!
    <BLANKLINE>
-   Adminas Adminovix has been using Ututi - the portal for students - for some time now and is recommending you to try it.
+   Adminas Adminovix has been using Ututi, a portal for students, for some time now and recommends you to try it.
    <BLANKLINE>
-   Ututi is a system for students that encourages collaboration and sharing of study materials. We provide tools that make storing lecture notes, sharing files and communicating with your class mates much, much easier.
+   Ututi is a system for students that encourages collaboration and sharing of study materials. We provide tools that make storing lecture notes, sharing files and communicating with your classmates much, much easier.
    <BLANKLINE>
-   If You would like to join Ututi now, please follow this link:
+   If you would like to join Ututi now, please follow this link:
    http://localhost/
    <BLANKLINE>
    The Ututi team
@@ -67,11 +67,11 @@ What if some of the emails were mistyped?
    [u'user@example.com']
    Hello!
    <BLANKLINE>
-   Adminas Adminovix has been using Ututi - the portal for students - for some time now and is recommending you to try it.
+   Adminas Adminovix has been using Ututi, a portal for students, for some time now and recommends you to try it.
    <BLANKLINE>
-   Ututi is a system for students that encourages collaboration and sharing of study materials. We provide tools that make storing lecture notes, sharing files and communicating with your class mates much, much easier.
+   Ututi is a system for students that encourages collaboration and sharing of study materials. We provide tools that make storing lecture notes, sharing files and communicating with your classmates much, much easier.
    <BLANKLINE>
-   If You would like to join Ututi now, please follow this link:
+   If you would like to join Ututi now, please follow this link:
    http://localhost/
    <BLANKLINE>
    The Ututi team

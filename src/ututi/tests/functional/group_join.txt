@@ -27,7 +27,7 @@ request group membership.
 
    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
    Close
-   Your request to join the group was forwarded to the group's administrators. Thank You!
+   Your request to join the group has been forwarded to the group's administrators. Thanks!
    Close
    Your
    (jonas@example.com) is not confirmed! Please confirm your email by clicking on the link sent to your address or

@@ -16,7 +16,7 @@ ${h.javascript_link('/javascript/forms.js')|n}
   <form method="post" action="${url(controller='group', action='invite_members', id=c.group.group_id)}" id="member_invitation_form">
 
     <div class="form-field">
-      <label for="emails">${_('Enter emails of the people You would like to invite to the group.')}</label>
+      <label for="emails">${_('Enter emails of the people you would like to invite to the group.')}</label>
       <textarea name="emails" id="emails" rows="8" cols="60"></textarea>
     </div>
 
@@ -28,7 +28,7 @@ ${h.javascript_link('/javascript/forms.js')|n}
 
 %if c.group.invitations:
 <div>
-  <h2>${_('Invited users (have not accepted yet)')}</h2>
+  <h2>${_('Invited users (invitations not accepted yet)')}</h2>
   <table class="group-invitations">
   % for invitation in c.group.invitations:
   <tr>

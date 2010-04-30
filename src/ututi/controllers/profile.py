@@ -201,8 +201,8 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     @ActionProtector("user")
     def home(self):
         if c.user.location is None:
-            h.flash(_("You haven't told us where You are studying. "
-                      "You can do this <a href='%(edit_url)s'>here</a>. Thank You.") % dict(edit_url=url(controller='profile', action='edit')))
+            h.flash(_("You haven't told us where you are studying. "
+                      "You can do this <a href='%(edit_url)s'>here</a>. Thanks.") % dict(edit_url=url(controller='profile', action='edit')))
         c.breadcrumbs.append(self._actions('home'))
 
         if not c.user.memberships and not c.user.watched_subjects:
@@ -327,9 +327,9 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             email.confirmed = True
             email.confirmation_key = ''
             meta.Session.commit()
-            h.flash(_("Your email %s was confirmed. Thank You." % email.email))
+            h.flash(_("Your email %s has been confirmed, thanks." % email.email))
         except NoResultFound:
-            h.flash(_("Could not confirm email - invalid confirmation key."))
+            h.flash(_("Could not confirm email: invalid confirmation key."))
 
         redirect_to(url(controller='profile', action='home'))
 

@@ -302,7 +302,7 @@ class HomeController(UniversityListMixin):
                     user.recovery_key = ''.join(Random().sample(string.ascii_lowercase, 8))
                 email_password_reset(user, email)
                 meta.Session.commit()
-                h.flash(_('Password recovery email sent. Please check You inbox.'))
+                h.flash(_('Password recovery email sent. Please check your inbox.'))
             else:
                 h.flash(_('User account not found.'))
 
@@ -348,7 +348,7 @@ class HomeController(UniversityListMixin):
                           extra_vars=extra_vars)
             html = render('/emails/recommendation_html.mako',
                           extra_vars=extra_vars)
-            msg = Message(_('%(fullname)s wants You to join Ututi') % dict(fullname = c.user.fullname), text, html)
+            msg = Message(_('%(fullname)s wants you to join Ututi') % dict(fullname = c.user.fullname), text, html)
 
             emails = self.form_result.get('recommend_emails', '').split()
             for line in emails:

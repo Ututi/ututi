@@ -296,7 +296,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             else:
                 group.request_join(c.user)
                 group_request_email(group, c.user)
-                h.flash(_("Your request to join the group was forwarded to the group's administrators. Thank You!"))
+                h.flash(_("Your request to join the group has been forwarded to the group's administrators. Thanks!"))
             meta.Session.commit()
         elif group.is_member(c.user):
             h.flash(_("You already are a member of this group."))

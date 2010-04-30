@@ -13,7 +13,7 @@ ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
 <%newlocationtag:head_tags />
 </%def>
 
-<a class="back-link" href="${url(controller='profile', action='search')}">${_('back to the search')}</a>
+<a class="back-link" href="${url(controller='profile', action='search')}">${_('back to search')}</a>
 <h1>${_('New subject')}</h1>
 
 <%def name="form(action, personal=False)">

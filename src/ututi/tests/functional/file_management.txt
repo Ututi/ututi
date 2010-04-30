@@ -261,7 +261,7 @@ The disabled upload control is shown with a message encouraging users to pay for
 What if we had decided to cancel the payment?
     >>> browser.open(cancel)
     >>> browser.printQuery('//h1/text()')
-    You have decided not to increase Your group's file limit
+    You have decided not to increase your group's file limit
 
 Anyway, let's process the payment:
     >>> browser.open(process)

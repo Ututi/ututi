@@ -36,7 +36,7 @@ ${group_members(c.group)}
   <form method="post" action="${url(controller='group', action='invite_members', id=c.group.group_id)}" id="member_invitation_form">
 
     <div class="form-field">
-      <label for="emails">${_('Enter emails of the people You would like to invite to the group.')}</label>
+      <label for="emails">${_('Enter emails of the people you would like to invite to the group.')}</label>
       <textarea name="emails" id="emails" rows="8" cols="60"></textarea>
     </div>
 
