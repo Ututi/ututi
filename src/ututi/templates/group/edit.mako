@@ -107,7 +107,7 @@ ${h.javascript_link('/javascript/js-alternatives.js')|n}
           <label for="default_tab">${_('Default group tab')}</label>
           ${h.select("default_tab", c.group.default_tab, c.tabs)}
         </div>
-        <div class="form-field">
+        <div class="form-field" id="forum-type-setting">
           <label for="forum_type">${_('Forum type')}</label>
           ${h.select("forum_type", c.forum_type, c.forum_types)}
         </div>
@@ -129,7 +129,7 @@ ${h.javascript_link('/javascript/js-alternatives.js')|n}
 
         <h2>${_('Access settings')}</h2>
 
-        <div class="form-field">
+        <div id="approve-new-members-setting" class="form-field">
           <label for="approve_new_members">${_('New members')}</label>
           ${h.radio("approve_new_members", "none",
             label=_('Anyone can join the group any time'))}
@@ -137,19 +137,19 @@ ${h.javascript_link('/javascript/js-alternatives.js')|n}
             label=_('Administrators have to approve new members'))}
         </div>
 
-        <div class="form-field">
+        <div id="forum-visibility-setting" class="form-field">
           <label for="forum_visibility">${_('Group forum and mailing list visibility')}</label>
           ${h.radio("forum_visibility", "public", label=_('Public'))}
           ${h.radio("forum_visibility", "members", label=_('Members only'))}
         </div>
 
-        <div class="form-field">
+        <div id="page-visibility-setting" class="form-field">
           <label for="page_visibility">${_('Group page visibility')}</label>
           ${h.radio("page_visibility", "public", label=_('Public'))}
           ${h.radio("page_visibility", "members", label=_('Members only'))}
         </div>
 
-  ${h.input_submit()}
+        ${h.input_submit()}
       </td>
   </tr></table>
 </form>

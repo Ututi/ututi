@@ -2022,3 +2022,12 @@ del {
 }
 
 /* end revision diffs */
+
+/* disable incomplete features */
+
+div#forum-type-setting,
+div#forum-visibility-setting,
+div#page-visibility-setting
+{
+    display: none;
+}
