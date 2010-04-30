@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-04-27 15:12+0300\n"
+"POT-Creation-Date: 2010-04-30 14:01+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,16 +38,16 @@ msgstr ""
 msgid "You have no right to download this file."
 msgstr ""
 
-msgid "Report a bug"
-msgstr ""
-
 msgid "Community page"
 msgstr ""
 
-msgid "This is ututi bugs forum"
+msgid "Ututi community forum."
 msgstr ""
 
-msgid "This is ututi community forum."
+msgid "Ututi bugs"
+msgstr ""
+
+msgid "Report Ututi bugs here."
 msgstr ""
 
 msgid "Such id already exists, choose a different one."
@@ -60,10 +60,10 @@ msgstr ""
 msgid "Bad file type, only files of the types '%(allowed)s' are supported."
 msgstr ""
 
-msgid "What's new?"
+msgid "Forum"
 msgstr ""
 
-msgid "Forum"
+msgid "What's new?"
 msgstr ""
 
 msgid "Members"
@@ -103,6 +103,12 @@ msgid "Member"
 msgstr ""
 
 msgid "Leave group"
+msgstr ""
+
+msgid "Mailing list"
+msgstr ""
+
+msgid "Web-based forum"
 msgstr ""
 
 msgid "Group information and settings updated."
@@ -164,9 +170,6 @@ msgid "3 months"
 msgstr ""
 
 msgid "6 months"
-msgstr ""
-
-msgid "Your message to the group was successfully sent."
 msgstr ""
 
 msgid "Please enter your password to register."
@@ -265,6 +268,9 @@ msgstr ""
 
 #, python-format
 msgid "Invalid emails: %s"
+msgstr ""
+
+msgid "Your message to the group was successfully sent."
 msgstr ""
 
 #, python-format
@@ -1147,10 +1153,16 @@ msgstr ""
 msgid "If You would like to join Ututi now, please follow this link:"
 msgstr ""
 
+msgid "New category"
+msgstr ""
+
+msgid "No categories yet."
+msgstr ""
+
 msgid "New topic"
 msgstr ""
 
-msgid "No messages yet."
+msgid "Back to category list"
 msgstr ""
 
 #, python-format
@@ -1169,6 +1181,12 @@ msgid "Message"
 msgstr ""
 
 msgid "Post"
+msgstr ""
+
+msgid "Category title"
+msgstr ""
+
+msgid "Create"
 msgstr ""
 
 msgid "Reply"
@@ -1254,6 +1272,9 @@ msgid "Tags"
 msgstr ""
 
 msgid "Default group tab"
+msgstr ""
+
+msgid "Forum type"
 msgstr ""
 
 msgid "Access settings"
@@ -1474,21 +1495,6 @@ msgstr ""
 msgid "increase the limit"
 msgstr ""
 
-msgid "email subject"
-msgstr ""
-
-msgid "replies"
-msgstr ""
-
-msgid "latest email"
-msgstr ""
-
-msgid "last author"
-msgstr ""
-
-msgid "Message to the group"
-msgstr ""
-
 msgid "Already have an account? Login!"
 msgstr ""
 
@@ -1532,6 +1538,24 @@ msgid "Logo"
 msgstr ""
 
 msgid "department list"
+msgstr ""
+
+msgid "No messages yet."
+msgstr ""
+
+msgid "email subject"
+msgstr ""
+
+msgid "replies"
+msgstr ""
+
+msgid "latest email"
+msgstr ""
+
+msgid "last author"
+msgstr ""
+
+msgid "Message to the group"
 msgstr ""
 
 #, python-format
@@ -1579,13 +1603,16 @@ msgstr ""
 msgid "Last edit:"
 msgstr ""
 
+msgid "Messages in community forum"
+msgstr ""
+
 msgid "You found a bug in our system? Something is broken? Report it."
 msgstr ""
 
 msgid "Messages in Bugs forum"
 msgstr ""
 
-msgid "Messages in community forum"
+msgid "Report a bug"
 msgstr ""
 
 msgid "My groups"
@@ -1896,6 +1923,21 @@ msgstr ""
 msgid "File upload failed."
 msgstr ""
 
+msgid "Rename"
+msgstr ""
+
+msgid "edit file name"
+msgstr ""
+
+msgid "delete file"
+msgstr ""
+
+msgid "deleted"
+msgstr ""
+
+msgid "restore file"
+msgstr ""
+
 msgid "Here"
 msgstr ""
 
@@ -1929,6 +1971,12 @@ msgstr ""
 msgid ""
 "No more space for private files. We recommend moving files into subjects or "
 "upgrading the group."
+msgstr ""
+
+msgid "Trash"
+msgstr ""
+
+msgid "There are no deleted files."
 msgstr ""
 
 #, python-format

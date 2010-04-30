@@ -1,6 +1,6 @@
 <%def name="head_tags()">
 ${h.stylesheet_link('/stylesheets/files.css')|n}
-${h.javascript_link('/javascripts/jquery-ui-1.7.2.custom.min.js')|n}
+${h.javascript_link('/javascript/jquery-ui-1.7.2.custom.min.js')|n}
 
 <script type="text/javascript">
 //<![CDATA[

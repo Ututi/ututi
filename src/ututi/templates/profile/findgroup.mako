@@ -9,8 +9,8 @@ ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
 ${_('Search')}
 </%def>
 <%def name="search_form(text='', obj_type='*', tags='', parts=['obj_type', 'text', 'tags'], target=None)">
-${h.javascript_link('/javascripts/js-alternatives.js')|n}
-${h.javascript_link('/javascripts/search.js')|n}
+${h.javascript_link('/javascript/js-alternatives.js')|n}
+${h.javascript_link('/javascript/search.js')|n}
 <%
    if target is None:
        target = url(controller='profile', action='findgroup')

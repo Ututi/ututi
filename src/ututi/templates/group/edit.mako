@@ -8,7 +8,7 @@ ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
 ${h.stylesheet_link('/stylesheets/group.css')|n}
 ${parent.head_tags()}
 
-${h.javascript_link('/javascripts/js-alternatives.js')|n}
+${h.javascript_link('/javascript/js-alternatives.js')|n}
   <script type="text/javascript">
   //<![CDATA[
   $(document).ready(function() {

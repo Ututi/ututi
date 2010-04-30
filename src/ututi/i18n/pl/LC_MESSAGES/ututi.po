@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-04-27 15:12+0300\n"
+"PO-Revision-Date: 2010-04-30 14:01+0300\n"
 "Last-Translator: Jaroslav Šatkevič <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -39,17 +39,17 @@ msgstr "Pliki"
 msgid "You have no right to download this file."
 msgstr "Nie możesz pobrać tego pliku."
 
-msgid "Report a bug"
-msgstr "Zgłoś bug"
-
 msgid "Community page"
 msgstr "Strona społeczności"
 
-msgid "This is ututi bugs forum"
-msgstr "To jest forum bugów Ututi"
+msgid "Ututi community forum."
+msgstr ""
 
-msgid "This is ututi community forum."
-msgstr "To jest forum wspólnoty ututi."
+msgid "Ututi bugs"
+msgstr ""
+
+msgid "Report Ututi bugs here."
+msgstr ""
 
 msgid "Such id already exists, choose a different one."
 msgstr "Takie ID już istnieje. Wybierz inne."
@@ -61,11 +61,11 @@ msgstr "ID nie może być wykorzystywane jako adres e-mail"
 msgid "Bad file type, only files of the types '%(allowed)s' are supported."
 msgstr "Niewłaściwy rodzaj pliku. Dozwolone formaty:'%(allowed)s'"
 
-msgid "What's new?"
-msgstr "Najnowsze"
-
 msgid "Forum"
 msgstr "Forum"
+
+msgid "What's new?"
+msgstr "Najnowsze"
 
 msgid "Members"
 msgstr "Użytkownicy"
@@ -105,6 +105,12 @@ msgstr "Członek"
 
 msgid "Leave group"
 msgstr "Wyjdź z grupy"
+
+msgid "Mailing list"
+msgstr ""
+
+msgid "Web-based forum"
+msgstr ""
 
 msgid "Group information and settings updated."
 msgstr "Informacje o grupie oraz ustawienia zostały zaktualizowane."
@@ -166,9 +172,6 @@ msgstr "3 miesiące"
 
 msgid "6 months"
 msgstr "6 miesięcy"
-
-msgid "Your message to the group was successfully sent."
-msgstr "Twoja wiadomość do grupy została pomyślnie wysłana."
 
 msgid "Please enter your password to register."
 msgstr "Wprowadź hasło."
@@ -284,6 +287,9 @@ msgstr "Z Ututi już korzysta: %s."
 #, python-format
 msgid "Invalid emails: %s"
 msgstr "Niepoprawne emaile: %s"
+
+msgid "Your message to the group was successfully sent."
+msgstr "Twoja wiadomość do grupy została pomyślnie wysłana."
 
 #, python-format
 msgid "Ututi news: %(changes)s"
@@ -1309,11 +1315,17 @@ msgstr "Do zobaczenia na Ututi, <br/> U-team"
 msgid "If You would like to join Ututi now, please follow this link:"
 msgstr "Jeśli chcesz dołączyć do Ututi, kliknij: "
 
+msgid "New category"
+msgstr ""
+
+msgid "No categories yet."
+msgstr ""
+
 msgid "New topic"
 msgstr "Nowy temat"
 
-msgid "No messages yet."
-msgstr "Brak wiadomości"
+msgid "Back to category list"
+msgstr ""
 
 #, python-format
 msgid "%(count)s reply"
@@ -1333,6 +1345,12 @@ msgstr "Wiadomość"
 
 msgid "Post"
 msgstr "Post"
+
+msgid "Category title"
+msgstr ""
+
+msgid "Create"
+msgstr ""
 
 msgid "Reply"
 msgstr "Odpowiedź"
@@ -1422,6 +1440,9 @@ msgstr "Tagi"
 
 msgid "Default group tab"
 msgstr "Podstawowy widok"
+
+msgid "Forum type"
+msgstr ""
 
 msgid "Access settings"
 msgstr ""
@@ -1669,21 +1690,6 @@ msgstr ""
 msgid "increase the limit"
 msgstr "podnieś limit"
 
-msgid "email subject"
-msgstr "temat wypowiedzi"
-
-msgid "replies"
-msgstr "odpowiedzi"
-
-msgid "latest email"
-msgstr "ostatnia wypowiedż"
-
-msgid "last author"
-msgstr "ostatni autor"
-
-msgid "Message to the group"
-msgstr "Wiadomość do grupy"
-
 msgid "Already have an account? Login!"
 msgstr "Masz swój profil? Zaloguj się!"
 
@@ -1728,6 +1734,24 @@ msgstr "Logo"
 
 msgid "department list"
 msgstr "lista wydziałów"
+
+msgid "No messages yet."
+msgstr "Brak wiadomości"
+
+msgid "email subject"
+msgstr "temat wypowiedzi"
+
+msgid "replies"
+msgstr "odpowiedzi"
+
+msgid "latest email"
+msgstr "ostatnia wypowiedż"
+
+msgid "last author"
+msgstr "ostatni autor"
+
+msgid "Message to the group"
+msgstr "Wiadomość do grupy"
 
 #, python-format
 msgid "Back to %(subject_title)s"
@@ -1774,14 +1798,17 @@ msgstr ""
 msgid "Last edit:"
 msgstr "Ostatnia zmiana:"
 
+msgid "Messages in community forum"
+msgstr "Nowa wiadomość na forum wspólnoty"
+
 msgid "You found a bug in our system? Something is broken? Report it."
 msgstr "Coś nie działa na Ututi? Zgłoś to."
 
 msgid "Messages in Bugs forum"
 msgstr "Nowa wiadomość na forum bugów."
 
-msgid "Messages in community forum"
-msgstr "Nowa wiadomość na forum wspólnoty"
+msgid "Report a bug"
+msgstr "Zgłoś bug"
 
 msgid "My groups"
 msgstr "Moje grupy"
@@ -2115,6 +2142,21 @@ msgstr "Gotowe"
 msgid "File upload failed."
 msgstr "Plik nie został dodany."
 
+msgid "Rename"
+msgstr ""
+
+msgid "edit file name"
+msgstr ""
+
+msgid "delete file"
+msgstr ""
+
+msgid "deleted"
+msgstr ""
+
+msgid "restore file"
+msgstr ""
+
 msgid "Here"
 msgstr "bieżący folder"
 
@@ -2152,6 +2194,12 @@ msgstr ""
 "Nie ma już miejsca dla prywatnych plików. Polecamy przeniesienie "
 "niektórych plików do poszczególnych przedmiotów lub zwiększenie limitu "
 "miejsca dla prywatnych plików grupy."
+
+msgid "Trash"
+msgstr ""
+
+msgid "There are no deleted files."
+msgstr ""
 
 #, python-format
 msgid ""

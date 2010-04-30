@@ -4,7 +4,7 @@
 
 <%def name="head_tags()">
 ${parent.head_tags()}
-${h.javascript_link('/javascripts/ckeditor/ckeditor.js')|n}
+${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
 </%def>
 
 <form method="post" action="${url(controller='group', action='update_page', id=c.group.group_id)}"

@@ -192,7 +192,7 @@
   </div>
 </div>
 
-${h.javascript_link('/javascripts/jquery.cycle.all.js')|n}
+${h.javascript_link('/javascript/jquery.cycle.all.js')|n}
 <script type="text/javascript">
   //<![CDATA[
     $('#tour_slides').cycle({

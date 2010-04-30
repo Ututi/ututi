@@ -1,6 +1,6 @@
 <%def name="tags_widget(value='', name='tags', all_tags=False)">
-${h.javascript_link('/javascripts/jquery.ui.autobox.js')|n}
-${h.javascript_link('/javascripts/jquery.ui.autobox.ext.js')|n}
+${h.javascript_link('/javascript/jquery.ui.autobox.js')|n}
+${h.javascript_link('/javascript/jquery.ui.autobox.ext.js')|n}
 
 <div class="tag-widget">
   <form:error name="tags" />

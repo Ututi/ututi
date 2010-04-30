@@ -7,7 +7,7 @@
 <%def name="head_tags()">
 ${parent.head_tags()}
 ${h.stylesheet_link('/stylesheets/group.css')|n}
-${h.javascript_link('/javascripts/forms.js')|n}
+${h.javascript_link('/javascript/forms.js')|n}
 </%def>
 
 

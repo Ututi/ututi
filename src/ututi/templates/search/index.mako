@@ -19,8 +19,8 @@ ${_('Search')}
 </%def>
 
 <%def name="search_form(text='', obj_type='*', tags='', parts=['obj_type', 'text', 'tags'], target=None, js_target=None, js=False)">
-${h.javascript_link('/javascripts/js-alternatives.js')|n}
-${h.javascript_link('/javascripts/search.js')|n}
+${h.javascript_link('/javascript/js-alternatives.js')|n}
+${h.javascript_link('/javascript/search.js')|n}
 <%
    if js and js_target is None:
        js = False

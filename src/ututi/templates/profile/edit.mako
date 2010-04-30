@@ -9,7 +9,7 @@
   ${parent.head_tags()}
   ${h.stylesheet_link('/stylesheets/profile.css')|n}
   ${h.stylesheet_link('/stylesheets/newlocationwidget.css')|n}
-  ${h.javascript_link('/javascripts/js-alternatives.js')|n}
+  ${h.javascript_link('/javascript/js-alternatives.js')|n}
   <%newlocationtag:head_tags />
   <script type="text/javascript">
   $(document).ready(function() {

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-04-27 16:28+0300\n"
+"PO-Revision-Date: 2010-04-30 14:01+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -39,22 +39,17 @@ msgstr "Failai"
 msgid "You have no right to download this file."
 msgstr "Jūs neturite teisės siųstis šį failą."
 
-msgid "Report a bug"
-msgstr "Pranešk apie klaidą"
-
 msgid "Community page"
 msgstr "Bendruomenės puslapis"
 
-msgid "This is ututi bugs forum"
+msgid "Ututi community forum."
 msgstr ""
-"Šiame forume galite pranešti apie rastas sistemos klaidas. Padėkite Ututi"
-" augti :)"
 
-msgid "This is ututi community forum."
+msgid "Ututi bugs"
 msgstr ""
-"Čia - Ututi bendruomenės forumas. Klauskite, atsakykite, komentuokite, "
-"rašykite savo mintis ir teikite pasiūlymus dėl sistemos tobulinimo ir ne "
-"tik. Prašome nesivaržyti."
+
+msgid "Report Ututi bugs here."
+msgstr ""
 
 msgid "Such id already exists, choose a different one."
 msgstr "Toks ID jau egzistuoja. Reikia naujo."
@@ -66,11 +61,11 @@ msgstr "ID nėra el. paštas. Ar ne?"
 msgid "Bad file type, only files of the types '%(allowed)s' are supported."
 msgstr "Netinkamas failo tipas. Tik '%(allowed)s' failai yra palaikomi."
 
-msgid "What's new?"
-msgstr "Kas naujo?"
-
 msgid "Forum"
 msgstr "Grupės paštas"
+
+msgid "What's new?"
+msgstr "Kas naujo?"
 
 msgid "Members"
 msgstr "Nariai"
@@ -110,6 +105,12 @@ msgstr "Narys"
 
 msgid "Leave group"
 msgstr "Palikti šią grupę"
+
+msgid "Mailing list"
+msgstr ""
+
+msgid "Web-based forum"
+msgstr ""
 
 msgid "Group information and settings updated."
 msgstr "Grupės informacija ir nustatymai atnaujinti."
@@ -171,9 +172,6 @@ msgstr "3 mėnesiai"
 
 msgid "6 months"
 msgstr "6 mėmesiai"
-
-msgid "Your message to the group was successfully sent."
-msgstr "Jūsų žinutė grupei buvo sėkmingai išsiųsta."
 
 msgid "Please enter your password to register."
 msgstr "Įveskite slaptažodį."
@@ -290,6 +288,9 @@ msgstr "%s jau naudojasi Ututi."
 #, python-format
 msgid "Invalid emails: %s"
 msgstr "%s yra netinkamas el. pašto adresas."
+
+msgid "Your message to the group was successfully sent."
+msgstr "Jūsų žinutė grupei buvo sėkmingai išsiųsta."
 
 #, python-format
 msgid "Ututi news: %(changes)s"
@@ -1311,11 +1312,17 @@ msgstr "Nekantriai laukiame tavęs prisijungiant,<br/>Ututi komanda"
 msgid "If You would like to join Ututi now, please follow this link:"
 msgstr "Jeigu norėtum išbandyti Ututi, mus rasi šiuo adresu:"
 
+msgid "New category"
+msgstr ""
+
+msgid "No categories yet."
+msgstr ""
+
 msgid "New topic"
 msgstr "Nauja tema"
 
-msgid "No messages yet."
-msgstr "Žinučių kol kas nėra"
+msgid "Back to category list"
+msgstr ""
 
 #, python-format
 msgid "%(count)s reply"
@@ -1335,6 +1342,12 @@ msgstr "Pranešimas"
 
 msgid "Post"
 msgstr "Rašyti pranešimą"
+
+msgid "Category title"
+msgstr ""
+
+msgid "Create"
+msgstr ""
 
 msgid "Reply"
 msgstr "Atsakyti"
@@ -1424,6 +1437,9 @@ msgstr "Žymos"
 
 msgid "Default group tab"
 msgstr "Pradinis grupės skirtukas"
+
+msgid "Forum type"
+msgstr ""
 
 msgid "Access settings"
 msgstr "Prieiga"
@@ -1681,21 +1697,6 @@ msgstr "Už <em>%d Lt</em> Jūsų grupė galės laikyti <em>neribotą failų kie
 msgid "increase the limit"
 msgstr "padidinti limitą"
 
-msgid "email subject"
-msgstr "laiško tema"
-
-msgid "replies"
-msgstr "atsakymai"
-
-msgid "latest email"
-msgstr "naujausias laiškas"
-
-msgid "last author"
-msgstr "paskutinis parašė"
-
-msgid "Message to the group"
-msgstr "Laiškas grupei"
-
 msgid "Already have an account? Login!"
 msgstr "Jau užsiregistravęs? Prisijunk!"
 
@@ -1740,6 +1741,24 @@ msgstr "Logotipas"
 
 msgid "department list"
 msgstr "fakultetų sąrašas"
+
+msgid "No messages yet."
+msgstr "Žinučių kol kas nėra"
+
+msgid "email subject"
+msgstr "laiško tema"
+
+msgid "replies"
+msgstr "atsakymai"
+
+msgid "latest email"
+msgstr "naujausias laiškas"
+
+msgid "last author"
+msgstr "paskutinis parašė"
+
+msgid "Message to the group"
+msgstr "Laiškas grupei"
 
 #, python-format
 msgid "Back to %(subject_title)s"
@@ -1786,14 +1805,17 @@ msgstr "Rodyti istoriją"
 msgid "Last edit:"
 msgstr "Paskutinis taisymas:"
 
+msgid "Messages in community forum"
+msgstr "Bendruomenės forumo pranešimai"
+
 msgid "You found a bug in our system? Something is broken? Report it."
 msgstr "Radote sistemoje klaidą? Kas nors neveikia? Praneškite."
 
 msgid "Messages in Bugs forum"
 msgstr "<strong>Bugs</strong> forumo pranešimai."
 
-msgid "Messages in community forum"
-msgstr "Bendruomenės forumo pranešimai"
+msgid "Report a bug"
+msgstr "Pranešk apie klaidą"
 
 msgid "My groups"
 msgstr "Mano grupės"
@@ -2130,6 +2152,21 @@ msgstr "Baigta"
 msgid "File upload failed."
 msgstr "Failo įkėlimas nepavyko."
 
+msgid "Rename"
+msgstr ""
+
+msgid "edit file name"
+msgstr ""
+
+msgid "delete file"
+msgstr ""
+
+msgid "deleted"
+msgstr ""
+
+msgid "restore file"
+msgstr ""
+
 msgid "Here"
 msgstr "tiesiog čia"
 
@@ -2167,6 +2204,12 @@ msgstr ""
 "Privatiems grupės failams nebeliko vietos. Rekomenduojame perkelti failus"
 " į dalykus arba\n"
 "sumokėti už grupę be apribojimų."
+
+msgid "Trash"
+msgstr ""
+
+msgid "There are no deleted files."
+msgstr ""
 
 #, python-format
 msgid ""
