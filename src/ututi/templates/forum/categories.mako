@@ -33,7 +33,7 @@
         ${category.title}
     </a></h2>
   <div>${category.description}</div>
-  ${forum_thread_list(category)}
+  ${forum_thread_list(category, n=5)}
   <a class="btn" href="${url.current(category_id=category.id, action='new_thread')}"><span>${_("New topic")}</span></a>
 % endfor
 </table>

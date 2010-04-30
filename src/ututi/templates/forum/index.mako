@@ -35,9 +35,9 @@
 
 <br class="clear-left"/>
 
-<%def name="forum_thread_list(category)">
+<%def name="forum_thread_list(category, n)">
   <table id="forum-thread-list">
-  % for forum_post in category.top_level_messages():
+   % for forum_post in category.top_level_messages()[:n]:
   <tr>
     <td class="subject">
       <a class="thread-subject" href="${url.current(action='thread', category_id=category.id, thread_id=forum_post['thread_id'])}">
@@ -58,4 +58,5 @@
   </table>
 </%def>
 
-${forum_thread_list(c.category)}
+${forum_thread_list(c.category, n=10**10)}
+<!-- TODO: pagination -->
