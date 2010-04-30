@@ -40,7 +40,7 @@
   % for forum_post in category.top_level_messages():
   <tr>
     <td class="subject">
-      <a class="thread-subject" href="${url.current(action='thread', thread_id=forum_post['thread_id'])}">
+      <a class="thread-subject" href="${url.current(action='thread', category_id=category.id, thread_id=forum_post['thread_id'])}">
         ${forum_post['title']}
       </a>
     </td>
