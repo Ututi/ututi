@@ -88,17 +88,14 @@ ${path_steps()}
     <input type="file" name="logo_upload" id="logo_upload" class="line"/>
   </div>
   ${h.input_area('description', _('Description'))}
-<%
-from ututi.lib.security import is_root
-%>
-% if is_root(c.user):
+%if h.check_crowds(['root']):
   <div class="form-field">
     <label for="moderators">
       <input name="moderators" id="moderators" type="checkbox" />
       ${_("Moderators")}
     </label>
   </div>
-% endif
+%endif
 
   ${h.input_submit(_('Continue'))}
 </form>

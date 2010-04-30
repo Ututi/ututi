@@ -112,10 +112,7 @@ ${h.javascript_link('/javascripts/js-alternatives.js')|n}
           ${h.select("forum_type", c.forum_type, c.forum_types)}
         </div>
 
-<%
-from ututi.lib.security import is_root
-%>
-% if is_root(c.user):
+%if h.check_crowds(['root']):
   <div class="form-field">
     <label for="moderators">
     % if c.group.moderators:
@@ -126,7 +123,7 @@ from ututi.lib.security import is_root
        ${_("Moderators")}
     </label>
   </div>
-% endif
+%endif
 
         <hr />
 
