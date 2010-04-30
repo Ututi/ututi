@@ -1,5 +1,6 @@
 Basic forum test
 ================
+
     >>> browser = Browser.logIn()
     >>> browser.getLink('community').click()
 
@@ -14,3 +15,4 @@ Basic forum test
     >>> browser.printQuery('id("forum-thread")//div[@class="post-body"]/text()')
     My ututi is borken!
 
+    >>> browser.open('http://localhost/community/thread/3/edit')
