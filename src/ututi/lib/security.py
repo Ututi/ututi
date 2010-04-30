@@ -82,7 +82,7 @@ crowd_checkers = {
     "admin": is_admin,
     "member": is_member,
     "owner": is_owner,
-    "owner": is_deleter,
+    "deleter": is_deleter,
     "user": is_user,
     "smallfile": is_smallfile,
     }

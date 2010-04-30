@@ -71,7 +71,7 @@ class BasefilesController(BaseController):
 
     def _move(self, source, file):
         source_folder = file.folder
-        delete = asbool(request.POST.get('delete', False))
+        delete = asbool(request.POST.get('remove', False))
         if delete:
             file.deleted = c.user
         else:

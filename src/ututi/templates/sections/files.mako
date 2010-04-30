@@ -43,7 +43,7 @@ $(document).ready(function(){
           else {
               $.ajax({type: "POST",
                       url: move_url,
-                      data: ({target_folder: target_folder, delete: target_is_trash}),
+                      data: ({target_folder: target_folder, remove: target_is_trash}),
                       success: function(msg){
                           if (ui.sender.children('.file').size() == 0) {
                              ui.sender.children('.message').show();
@@ -257,6 +257,7 @@ $(document).ready(function(){
                         new_item.parents('.folder').children('.message').hide();
                         new_item.closest('.folder_file_area').find('.delete_folder_button').hide();
                         $('.delete_button', new_item).click(deleteFile);
+                        $('.rename_button', new_item).click(renameFile);
                         updateSizeInformation($(folder).parents('.section'));
                     }
         }});
