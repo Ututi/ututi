@@ -128,7 +128,7 @@ ${h.javascript_link('/javascript/forms.js')|n}
 
   <% messages = h.flash.pop_messages() %>
   % for message in messages:
-  <div class="flash-message"><span class="close-link hide-parent">${_('Close')}</span><span>${message|n}</span></div>
+  <div class="flash-message"><span class="close-link hide-parent">${_('Close')}</span><span>${h.literal(unicode(message))}</span></div>
   % endfor
   ${invitation_messages(c.user)}
   ${request_messages(c.user)}

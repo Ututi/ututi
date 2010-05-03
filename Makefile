@@ -3,7 +3,7 @@
 # Makefile for UTUTI Sandbox
 #
 
-BOOTSTRAP_PYTHON=python2.5
+BOOTSTRAP_PYTHON=python2.6
 TIMEOUT=1
 BUILDOUT = bin/buildout -t $(TIMEOUT) && touch bin/*
 
