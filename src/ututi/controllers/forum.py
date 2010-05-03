@@ -60,6 +60,8 @@ def fix_public_forum_metadata(forum):
 def group_action(method):
     def _group_action(self, id):
         c.group = Group.get(id)
+        if c.group.mailinglist_enabled:
+            redirect_to(controller='mailinglist', action='index')
         c.object_location = c.group.location
         c.breadcrumbs = [{'title': c.group.title, 'link': c.group.url()}]
         if c.group is None:
@@ -72,12 +74,14 @@ def group_action(method):
 def category_action(method):
     def _category_action(self, id, category_id):
         if id is not None:
-            group = Group.get(id)
-            c.object_location = group.location
-            c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
-            if group is None:
+            c.group = Group.get(id)
+            if c.group.mailinglist_enabled:
+                redirect_to(controller='mailinglist', action='index')
+            c.object_location = c.group.location
+            c.breadcrumbs = [{'title': c.group.title, 'link': c.group.url()}]
+            if c.group is None:
                 abort(404)
-            c.security_context = group
+            c.security_context = c.group
         setup_title(id, category_id)
         return method(self, category_id)
     return _category_action
@@ -87,6 +91,8 @@ def forum_thread_action(method):
     def _forum_thread_action(self, id, category_id, thread_id):
         if id is not None:
             c.group = group = Group.get(id)
+            if c.group.mailinglist_enabled:
+                redirect_to(controller='mailinglist', action='index')
             c.object_location = group.location
             c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
             if group is None:
