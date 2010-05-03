@@ -187,8 +187,8 @@ ubuntu-environment:
 	 echo "I am running as $(shell whoami)"; \
 	 exit 3; \
 	} else { \
-	 apt-get build-dep python-psycopg2 python-imaging python-lxml; \
-	 apt-get install build-essential python-all python-all-dev postgresql enscript myspell-lt myspell-en-gb myspell-pl libxslt1-dev libpq-dev; \
+	 apt-get build-dep python-psycopg2 python-imaging ; \
+	 apt-get install build-essential python-all python-all-dev postgresql enscript myspell-lt myspell-en-gb myspell-pl libxslt1-dev libpq-dev python-pyrex; \
 	 apt-get remove python-egenix-mx-base-dev; \
 	 echo "Installation Complete: Next... Run 'make'."; \
 	} fi
