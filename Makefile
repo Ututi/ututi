@@ -211,7 +211,7 @@ download_backup:
 .PHONY: import_backup
 import_backup: instance/var/run/.s.PGSQL.${PGPORT}
 	psql -h ${PWD}/instance/var/run/ -d development -c "drop schema public cascade"
-	droplang plpgsql development -h ${PWD}/instance/var/run/
+	droplang plpgsql development -h ${PWD}/instance/var/run/ || true
 	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
 	${PG_PATH}/bin/pg_restore -d development -h ${PWD}/instance/var/run --no-owner < backup/dbdump || true
 
@@ -222,7 +222,7 @@ download_backup_files:
 .PHONY: test_migration
 test_migration: instance/var/run/.s.PGSQL.${PGPORT}
 	psql -h ${PWD}/instance/var/run/ -d development -c "drop schema public cascade"
-	droplang plpgsql development -h ${PWD}/instance/var/run/
+	droplang plpgsql development -h ${PWD}/instance/var/run/ || true
 	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
 	${PG_PATH}/bin/pg_restore -d development -h ${PWD}/instance/var/run --no-owner < backup/dbdump || true
 	${PG_PATH}/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > before_migration.txt
@@ -238,7 +238,7 @@ test_migration_2: instance/var/run/.s.PGSQL.${PGPORT}
 	${PWD}/bin/paster setup-app development.ini
 	${PG_PATH}/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > default.txt
 	psql -h ${PWD}/instance/var/run/ -d development -c "drop schema public cascade"
-	droplang plpgsql development -h ${PWD}/instance/var/run/
+	droplang plpgsql development -h ${PWD}/instance/var/run/ || true
 	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
 	${PG_PATH}/bin/pg_restore -d development -h ${PWD}/instance/var/run --no-owner < backup/dbdump || true
 	${PWD}/bin/migrate development.ini
