@@ -236,10 +236,10 @@ class ForumController(GroupControllerBase):
         redirect_to(controller='mailinglist', action='thread',
                     id=id, thread_id=thread_id)
 
-    def legacy_file(self, id, thread_id):
-        redirect_to(controller='mailinglist', action='file',
+    def legacy_reply(self, id, thread_id):
+        redirect_to(controller='mailinglist', action='reply',
                     id=id, thread_id=thread_id)
 
-    def legacy_reply(self, id, message_id, file_id):
-        redirect_to(controller='mailinglist', action='reply',
+    def legacy_file(self, id, message_id, file_id):
+        redirect_to(controller='mailinglist', action='file',
                     id=id, message_id=message_id, file_id=file_id)
