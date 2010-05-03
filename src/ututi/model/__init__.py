@@ -735,26 +735,30 @@ class Medal(object):
     MEDAL_SIZE = dict(height=26, width=26)
 
     def __init__(self, user, medal_type):
-        assert medal_type in self.available_medals(), medal_type
+        assert medal_type in self.available_medal_types(), medal_type
         self.user = user
         self.medal_type = medal_type
 
     @staticmethod
     def available_medals():
-        return {'admin': _('Group admin'),
-                'admin2': _('Admin'),
-                'buyer': _('Sponsor'),
-                'buyer2': _('Gold sponsor'),
-                'support': _('Moderator'),
-                'support2': _('Best moderator'),
-                'ututiman': _('Distinguished user'),
-                'ututiman2': _('The best distinguished user')}
+        return [('admin', _('Group admin')),
+                ('admin2', _('Admin')),
+                ('buyer', _('Sponsor')),
+                ('buyer2', _('Gold sponsor')),
+                ('support', _('Moderator')),
+                ('support2', _('Best moderator')),
+                ('ututiman', _('Distinguished user')),
+                ('ututiman2', _('The best distinguished user'))]
+
+    @staticmethod
+    def available_medal_types():
+        return [m[0] for m in Medal.available_medals()]
 
     def url(self):
         return self.MEDAL_IMG_PATH + self.medal_type + '.png'
 
     def title(self):
-        return self.available_medals()[self.medal_type]
+        return dict(self.available_medals())[self.medal_type]
 
     def img_tag(self):
         return image(self.url(), alt=self.title(), title=self.title(),

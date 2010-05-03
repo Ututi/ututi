@@ -64,7 +64,8 @@ class UserController(BaseController):
     @ActionProtector("root")
     def medals(self, user):
         c.user_info = user
-        c.available_medals = [Medal(None, m) for m in Medal.available_medals()]
+        c.available_medals = [Medal(None, m[0])
+                              for m in Medal.available_medals()]
         return render('user/medals.mako')
 
     @profile_action
@@ -74,7 +75,7 @@ class UserController(BaseController):
             medal_type = request.GET['medal_type']
         except KeyError:
             abort(404)
-        if medal_type not in Medal.available_medals():
+        if medal_type not in Medal.available_medal_types():
             abort(404)
         if medal_type in [m.medal_type for m in user.medals]:
             redirect_to(action='medals') # Medal already granted.
