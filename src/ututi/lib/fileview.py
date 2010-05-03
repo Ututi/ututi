@@ -1,6 +1,6 @@
 from pylons.templating import render_mako_def
 
-from pylons import request, c
+from pylons import request, tmpl_context as c
 from ututi.model import File, meta
 
 from mimetools import choose_boundary

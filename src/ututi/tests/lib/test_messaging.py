@@ -2,7 +2,11 @@ from datetime import date
 
 from zope.testing import doctest
 
+import pylons.test
+from pylons import config
+
 import ututi
+
 from ututi.tests import PylonsLayer
 from ututi.lib.messaging import Message
 from ututi.model import User, Group, Email, meta
@@ -11,6 +15,9 @@ from ututi.lib.mailer import mail_queue
 
 def test_message_user():
     """Tests for messaging.
+
+        >>> config._push_object(pylons.test.pylonsapp.config)
+
         >>> user = User.get("somebloke@somehost.com")
         >>> group = meta.Session.query(Group).first()
 
@@ -46,12 +53,17 @@ def test_message_user():
         <BLANKLINE>
         the text
 
+        >>> config._pop_object(pylons.test.pylonsapp.config)
+
     """
 
 def test_message_list():
     """Sending messages to lists of recipients.
 
+        >>> config._push_object(pylons.test.pylonsapp.config)
+
     This can be a list of emails.
+
         >>> msg = Message("the subject", "the text")
         >>> msg.send(["email@host.com", "email2@example.com", "invalidemail"])
         >>> print mail_queue.pop().message
@@ -74,10 +86,14 @@ def test_message_list():
         <BLANKLINE>
         the text
 
+        >>> config._pop_object(pylons.test.pylonsapp.config)
+
     """
 
 def test_message_group():
     """ Try sending emails to a group.
+
+        >>> config._push_object(pylons.test.pylonsapp.config)
 
         >>> g = Group.get("moderators")
         >>> msg = Message("the subject", "the text")
@@ -91,6 +107,8 @@ def test_message_group():
         Subject: the subject
         <BLANKLINE>
         the text
+
+        >>> config._pop_object(pylons.test.pylonsapp.config)
 
     """
 

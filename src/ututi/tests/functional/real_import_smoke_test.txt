@@ -19,7 +19,7 @@ And upload all the files one by one:
     >>> from urllib2 import HTTPError
     >>> from pkg_resources import resource_string
     >>> from nous.mailpost import processEmailAndPost
-    >>> from pylons import config
+    >>> import pylons.test
     >>> emails = resource_string("ututi.tests.functional.import", "export_group_forums.txt").split("=" * 72 + '\n')
     >>> from nous.mailpost.MailBoxerTools import splitMail
     >>> import rfc822
@@ -31,7 +31,7 @@ And upload all the files one by one:
     >>> for n, email_text in enumerate(emails):
     ...     if email_text:
     ...         try:
-    ...             processEmailAndPost('http://localhost/got_mail', email_text, config['files_path'])
+    ...             processEmailAndPost('http://localhost/got_mail', email_text, pylons.test.pylonsapp.config['files_path'])
     ...         except HTTPError, e:
     ...             message = email.message_from_string(email_text, UtutiEmail)
     ...             print "Email %d from %s was ignored" % (n, message.getFrom())

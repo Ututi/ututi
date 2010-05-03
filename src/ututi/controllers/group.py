@@ -5,7 +5,7 @@ from os.path import splitext
 
 from pkg_resources import resource_stream
 
-from pylons import c, config, request, url
+from pylons import tmpl_context as c, config, request, url
 from pylons.templating import render_mako_def
 from pylons.controllers.util import redirect_to, abort
 from pylons.decorators import validate, jsonify

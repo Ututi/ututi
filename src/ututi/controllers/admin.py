@@ -15,7 +15,7 @@ from webhelpers import paginate
 from babel.dates import parse_date
 from babel.dates import format_date
 
-from pylons import request, c, config
+from pylons import request, tmpl_context as c, config
 from pylons.controllers.util import redirect_to, abort
 
 from random import Random

@@ -2,7 +2,7 @@ import logging
 
 from formencode import Schema, validators, compound, htmlfill
 from pylons.controllers.util import redirect_to, abort
-from pylons import c, url
+from pylons import tmpl_context as c, url
 from pylons.i18n import _
 from pylons.decorators import validate
 from pylons.templating import render_mako_def

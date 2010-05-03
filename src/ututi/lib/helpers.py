@@ -7,7 +7,6 @@ available to Controllers. This module is available to templates as 'h'.
 """
 # Import helpers as desired, or define your own, ie:
 #from webhelpers.html.tags import checkbox, password
-from routes import url_for
 from webhelpers.html.tags import stylesheet_link, javascript_link, image, select, radio
 from webhelpers.html.tags import link_to as orig_link_to
 from webhelpers.html.builder import literal
@@ -357,3 +356,7 @@ class mokejimai_form(object):
 
         form_values.append(('sign', self.calculate_sign(form_values)))
         return form_values
+
+def url_for(*args, **kwargs):
+    from pylons import url
+    return url.current(*args, **kwargs)

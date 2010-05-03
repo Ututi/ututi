@@ -10,6 +10,7 @@ log = logging.getLogger(__name__)
 
 def setup_app(command, conf, vars):
     """Place any commands to setup ututi here"""
+
     load_environment(conf.global_conf, conf.local_conf)
 
     if asbool(conf.get('reset_database', 'false')):

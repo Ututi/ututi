@@ -10,7 +10,7 @@ from pylons.decorators import validate
 from pylons.templating import render_mako_def
 from pylons.controllers.util import abort
 from pylons import url
-from pylons import request, response, c
+from pylons import request, response, tmpl_context as c
 from pylons.controllers.util import redirect_to
 from pylons.controllers.util import forward
 

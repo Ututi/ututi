@@ -1,4 +1,4 @@
-from pylons import response, url, request, session, c, config
+from pylons import response, url, request, session, tmpl_context as c, config
 from pylons.controllers.util import abort
 from pylons.controllers.util import redirect_to
 

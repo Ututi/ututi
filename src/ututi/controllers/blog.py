@@ -1,6 +1,6 @@
 from datetime import date
 
-from pylons import c, url
+from pylons import url, tmpl_context as c
 from pylons.controllers.util import redirect_to, abort
 from pylons.i18n import _
 from pylons.decorators import validate

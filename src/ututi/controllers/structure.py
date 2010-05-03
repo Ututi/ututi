@@ -6,7 +6,7 @@ from sqlalchemy.sql import expression, func
 from sqlalchemy import or_
 
 from pylons.controllers.util import abort
-from pylons import request, c
+from pylons import request, tmpl_context as c
 from pylons.controllers.util import redirect_to
 from pylons.decorators import validate, jsonify
 from pylons.i18n import _

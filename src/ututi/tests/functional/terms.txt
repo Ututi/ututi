@@ -3,8 +3,8 @@ Terms of use
 
 Testing Lithuanian pages.
 
-    >>> from pylons import config
-    >>> config['tpl_lang'] = 'lt'
+    >>> import pylons.test
+    >>> pylons.test.pylonsapp.config['tpl_lang'] = 'lt'
     >>> browser = Browser()
     >>> browser.open('http://localhost/terms')
     >>> browser.printQuery('//h2/text()')
@@ -19,8 +19,7 @@ Testing Lithuanian pages.
 
 Testing Polish pages.
 
-    >>> from pylons import config
-    >>> config['tpl_lang'] = 'pl'
+    >>> pylons.test.pylonsapp.config['tpl_lang'] = 'pl'
     >>> browser = Browser()
     >>> browser.open('http://localhost/terms')
     >>> browser.printQuery('//h2/text()')
@@ -35,7 +34,7 @@ Testing Polish pages.
 Testing English pages.
 
     >>> from pylons import config
-    >>> config['tpl_lang'] = 'en'
+    >>> pylons.test.pylonsapp.config['tpl_lang'] = 'en'
     >>> browser = Browser()
     >>> browser.open('http://localhost/terms')
     >>> browser.open('http://localhost/about')

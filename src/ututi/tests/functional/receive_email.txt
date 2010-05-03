@@ -8,8 +8,8 @@ running in, this allows us to replace urllib2 with a wsgi_intercept
 version and send the actual message directly to the ututi wsgi
 application.
 
-    >>> from pylons import config
-    >>> files_path = config['files_path']
+    >>> import pylons.test
+    >>> files_path = pylons.test.pylonsapp.config['files_path']
     >>> from ututi.tests.functional import listUploads, send_test_message
 
 Let's send an email to the system:

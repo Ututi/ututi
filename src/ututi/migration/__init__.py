@@ -44,10 +44,20 @@ class GreatMigrator(object):
 
     @property
     def evolution_scripts(self):
-        script_modules = \
-            module_info_from_dotted_name("ututi.migration").getSubModuleInfos()
-        scripts = []
+        script_module = \
+            module_info_from_dotted_name("ututi.migration")
+
+        directory = os.path.dirname(script_module.path)
+        script_modules = []
         script_pattern = r"(\d{3})_(.*)"
+        for entry in sorted(os.listdir(directory)):
+            name, ext = os.path.splitext(entry)
+            match = re.match(script_pattern, name)
+            if ext == '.py' and match:
+                dotted_name = script_module.dotted_name + '.' + name
+                script_modules.append(module_info_from_dotted_name(dotted_name))
+
+        scripts = []
         for script in sorted(script_modules, key=lambda s: s.name):
             match = re.match(script_pattern, script.name)
             if match:

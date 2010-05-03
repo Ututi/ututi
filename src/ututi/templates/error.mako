@@ -16,5 +16,5 @@ ${_("Oops, an error happened, please don't leave us, go back and try doing somet
 % if request.referrer.startswith(url("/", qualified=True)):
     <a href="#" onclick="javascript: history.go(-1); return false;">${_('go back')}</a>
 % else:
-    <a href="${url(controller='search')}">${_('go find something')}</a>
+    <a href="${url(controller='search', action='index')}">${_('go find something')}</a>
 % endif

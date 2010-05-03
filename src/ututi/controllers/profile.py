@@ -12,7 +12,7 @@ from formencode.api import Invalid
 from formencode.variabledecode import NestedVariables
 from webhelpers import paginate
 
-from pylons import request, c, url
+from pylons import request, tmpl_context as c, url
 from pylons.templating import render_mako_def
 from pylons.controllers.util import redirect_to, abort
 

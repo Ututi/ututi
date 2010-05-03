@@ -13,7 +13,7 @@ from mako.exceptions import TopLevelLookupException
 from paste.util.converters import asbool
 from pylons.controllers import WSGIController
 from pylons.templating import pylons_globals, render_mako as render
-from pylons import c, config, request, response
+from pylons import tmpl_context as c, config, request, response
 from pylons.i18n.translation import get_lang
 
 from ututi.lib.security import current_user

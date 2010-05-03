@@ -5,9 +5,9 @@ from formencode import Schema, validators, htmlfill
 
 from lxml.html.diff import htmldiff
 
-from pylons import c, request
+from pylons import tmpl_context as c, request, url
 from pylons.decorators import validate
-from pylons.controllers.util import redirect_to, abort
+from pylons.controllers.util import redirect_to, abort, redirect
 
 from ututi.controllers.subject import subject_action
 from ututi.model import Subject, LocationTag, Page, PageVersion
@@ -156,7 +156,7 @@ class SubjectpageController(BaseController):
         subject.pages.append(page)
         meta.Session.add(page)
         meta.Session.commit()
-        redirect_to(url_for(action='index', page_id=page.id))
+        redirect(url.current(action='index', page_id=page.id))
 
     def _edit_form(self):
         return render('page/edit.mako')
@@ -185,4 +185,4 @@ class SubjectpageController(BaseController):
         page.save(self.form_result['page_title'],
                   self.form_result['page_content'])
         meta.Session.commit()
-        redirect_to(url_for(action='index'))
+        redirect(url.current(action='index'))

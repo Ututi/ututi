@@ -9,7 +9,7 @@ from formencode.foreach import ForEach
 from formencode.compound import Pipe
 from formencode import Schema, validators, htmlfill
 
-from pylons import c, request
+from pylons import tmpl_context as c, request
 from pylons.decorators import validate
 from pylons.controllers.util import redirect_to, abort
 from pylons.i18n import _

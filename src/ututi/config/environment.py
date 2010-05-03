@@ -1,9 +1,11 @@
 """Pylons environment configuration"""
 import os
+import tempfile
 
+from paste.util.converters import asbool
 from mako.lookup import TemplateLookup
-from pylons import config
 from pylons.error import handle_mako_error
+from pylons.configuration import PylonsConfig
 from sqlalchemy import engine_from_config
 
 import ututi.lib.app_globals as app_globals
@@ -13,11 +15,20 @@ from ututi.config.routing import make_map
 from ututi.model import init_model
 
 
+class FixedPylonsConfig(PylonsConfig):
+
+    def __getattr__(self, name):
+        try:
+            return PylonsConfig.__getattr__(self, name)
+        except KeyError:
+            raise AttributeError
+
+
 def load_environment(global_conf, app_conf):
     """Configure the Pylons environment via the ``pylons.config``
     object
     """
-
+    config = FixedPylonsConfig()
     monkeypatch()
 
     pgport = os.environ.get("PGPORT", "4455")
@@ -33,8 +44,8 @@ def load_environment(global_conf, app_conf):
     # Initialize config with the basic options
     config.init_app(global_conf, app_conf, package='ututi', paths=paths)
 
-    config['routes.map'] = make_map()
-    config['pylons.app_globals'] = app_globals.Globals()
+    config['routes.map'] = make_map(config)
+    config['pylons.app_globals'] = app_globals.Globals(config)
     config['pylons.h'] = ututi.lib.helpers
 
     # Create the Mako TemplateLookup, with the default auto-escaping
@@ -52,3 +63,7 @@ def load_environment(global_conf, app_conf):
 
     # CONFIGURATION OPTIONS HERE (note: all config options will override
     # any Pylons config options)
+    if asbool(config.get('reset_database', 'false')):
+        config['files_path'] = tempfile.mkdtemp(prefix="uploads_")
+
+    return config

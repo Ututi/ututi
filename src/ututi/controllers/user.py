@@ -4,10 +4,10 @@ from pkg_resources import resource_stream
 
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql.expression import desc
-from pylons.controllers.util import abort
-from pylons import c, request
-from routes import url_for
+from pylons.controllers.util import abort, redirect
+from pylons import tmpl_context as c, request, url
 from routes.util import redirect_to
+from routes.util import url_for
 
 from ututi.controllers.home import sign_in_user
 from ututi.lib.security import ActionProtector
@@ -78,11 +78,11 @@ class UserController(BaseController):
         if medal_type not in Medal.available_medal_types():
             abort(404)
         if medal_type in [m.medal_type for m in user.medals]:
-            redirect_to(action='medals') # Medal already granted.
+            redirect(url.current(action='medals')) # Medal already granted.
         m = Medal(user, medal_type)
         meta.Session.add(m)
         meta.Session.commit()
-        redirect_to(action='medals')
+        redirect(url.current(action='medals'))
 
     @profile_action
     @ActionProtector("root")
@@ -99,7 +99,7 @@ class UserController(BaseController):
             abort(404)
         meta.Session.delete(medal)
         meta.Session.commit()
-        redirect_to(action='medals')
+        redirect(url.current(action='medals'))
 
     def logo(self, id, width=None, height=None):
         try:

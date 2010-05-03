@@ -4,7 +4,6 @@ import sys
 import re
 import random
 import webbrowser
-import tempfile
 import shutil
 from lxml import etree
 import wsgi_intercept
@@ -14,7 +13,7 @@ from wsgi_intercept.urllib2_intercept import uninstall_opener
 from wsgi_intercept.urllib2_intercept import install_opener
 from wsgiref.simple_server import make_server
 from paste.deploy import loadapp
-from pylons import config, url
+from pylons import url
 from routes.util import URLGenerator
 from webtest import TestApp
 from paste.script.appinstall import SetupCommand
@@ -25,7 +24,6 @@ from zope.component.eventtesting import PlacelessSetup as EventPlacelessSetup
 
 import pylons.test
 from pylons.i18n.translation import _get_translator
-from pylons import config
 from ututi.model import teardown_db_defaults
 from ututi.model import initialize_db_defaults
 from ututi.model import meta
@@ -50,7 +48,7 @@ def layerSetUp(cls):
         SetupCommand('setup-app').run([conf_dir + '/%s' % cls.config])
         pylons.test.pylonsapp = loadapp('config:%s' % cls.config,
                                         relative_to=conf_dir)
-        config['files_path'] = tempfile.mkdtemp(prefix="uploads_")
+
         def create_fn():
             return pylons.test.pylonsapp
         install_opener()
@@ -59,7 +57,7 @@ def layerSetUp(cls):
 
 def layerTearDown(cls):
     try:
-        shutil.rmtree(config['files_path'])
+        shutil.rmtree(pylons.test.pylonsapp.config['files_path'])
     except OSError:
         pass
     # Zope component tear down
@@ -76,10 +74,11 @@ def layerTearDown(cls):
 
 
 def layerTestSetUp(cls):
+    config = pylons.test.pylonsapp.config
     config['tpl_lang'] = 'lt'
-    translator = _get_translator(pylons.config.get('lang'))
+    translator = _get_translator(config.get('lang'), pylons_config=config)
     pylons.translator._push_object(translator)
-    url._push_object(URLGenerator(config['routes.map'], environ))
+    url._push_object(URLGenerator(pylons.test.pylonsapp.config['routes.map'], environ))
     # XXX Set up database here
     # meta.metadata.create_all(meta.engine)
     teardown_db_defaults(meta.engine, quiet=True)
@@ -96,6 +95,7 @@ def layerTestSetUp(cls):
 
 
 def layerTestTearDown(cls):
+    config = pylons.test.pylonsapp.config
     url._pop_object()
     pylons.translator._pop_object()
     meta.Session.execute("SET ututi.active_user TO 0")

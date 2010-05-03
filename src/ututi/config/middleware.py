@@ -4,7 +4,7 @@ from paste.cascade import Cascade
 from paste.registry import RegistryManager
 from paste.urlparser import StaticURLParser
 from paste.deploy.converters import asbool
-from pylons import request, tmpl_context, response, session, config, translator, url
+from pylons import request, tmpl_context, response, session, translator, url, config
 from pylons.i18n.translation import _get_translator
 from pylons.middleware import ErrorHandler, StatusCodeRedirect
 from pylons.wsgiapp import PylonsApp
@@ -17,9 +17,11 @@ from ututi.grok.grokker import do_grok
 from ututi.config.environment import load_environment
 
 
-def grok_app():
+def grok_app(conf):
     items = [request, tmpl_context, response, session, url]
-    translator._push_object(_get_translator(config.get('lang')))
+    #translator._push_object(_get_translator(config.get('lang')))
+    translator._push_object(_get_translator(None))
+    config._push_object(conf)
 
     for item in items:
         item._push_object(object())
@@ -30,6 +32,7 @@ def grok_app():
     zope_config.execute_actions()
 
     translator._pop_object()
+    config._pop_object()
     for item in items:
         item._pop_object()
 
@@ -58,13 +61,13 @@ def make_app(global_conf, full_stack=True, static_files=True, **app_conf):
 
     """
     # Configure the Pylons environment
-    load_environment(global_conf, app_conf)
+    config = load_environment(global_conf, app_conf)
     setup_orm(meta.engine)
 
-    grok_app()
+    grok_app(config)
 
     # The Pylons WSGI app
-    app = PylonsApp()
+    app = PylonsApp(config=config)
 
     # Routing/Session/Cache Middleware
     app = RoutesMiddleware(app, config['routes.map'])
@@ -92,4 +95,5 @@ def make_app(global_conf, full_stack=True, static_files=True, **app_conf):
         static_app = StaticURLParser(config['pylons.paths']['static_files'])
         app = Cascade([static_app, app])
 
+    app.config = config
     return app

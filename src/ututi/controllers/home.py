@@ -9,7 +9,7 @@ from formencode import Schema, validators, Invalid, All, htmlfill
 from webhelpers import paginate
 
 from paste.util.converters import asbool
-from pylons import request, c, url, session, config, response
+from pylons import request, tmpl_context as c, url, session, config, response
 from pylons.decorators import validate
 from pylons.controllers.util import abort
 from pylons.i18n import _, ungettext

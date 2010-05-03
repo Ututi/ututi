@@ -6,10 +6,9 @@ import shutil
 from datetime import date
 
 from pkg_resources import resource_string, resource_stream
+import pylons.test
 
 from zope.testing import doctest
-
-from pylons import config
 
 from nous.mailpost import processEmailAndPost
 
@@ -97,7 +96,7 @@ def collect_ftests(package=None, level=None,
 
 def listUploads(files_path=None):
     if files_path is None:
-        files_path = config['files_path']
+        files_path = pylons.test.pylonsapp.config['files_path']
     for dir_name, subdirs, files in os.walk(files_path):
         if files:
             for file_name in files:
@@ -119,7 +118,7 @@ def send_test_message(email_file, message_id='', to='', reply_to=None):
 
     processEmailAndPost('http://localhost/got_mail',
                         message,
-                        config['files_path'])
+                        pylons.test.pylonsapp.config['files_path'])
 
 
 def make_file(filename):
@@ -135,13 +134,12 @@ def import_csv(browser, formname, filename):
 
 
 def dump_database():
-
     executable = "/usr/lib/postgresql/8.3/bin/pg_dump"
-    path = os.path.join(config['global_conf']['here'], 'instance/var/run')
+    path = os.path.join(pylons.test.pylonsapp.config['global_conf']['here'], 'instance/var/run')
     os.environ["PGPORT"] = os.environ.get("PGPORT", "4455")
 
     p = subprocess.Popen([executable, "test", "-Fc", "-O", "-h", path],
                          stdout=subprocess.PIPE)
     shutil.copyfileobj(p.stdout, open("dbdump", "w"))
     shutil.rmtree("files_dump", ignore_errors=True)
-    shutil.copytree(config["files_path"], "files_dump")
+    shutil.copytree(pylons.test.pylonsapp.config["files_path"], "files_dump")

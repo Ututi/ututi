@@ -301,8 +301,9 @@ uploading is enabled again:
 Oh, and since payments are not possible for the polish version, there is a page that explains it once the user has
 clicked on the payment button.
 
-    >>> from pylons import config
-    >>> config['tpl_lang'] = 'pl'
+    >>> import pylons.test
+    >>> pylons.test.pylonsapp.config['tpl_lang'] = 'pl'
+
     >>> browser.open('http://localhost/group/moderators/pay')
     >>> browser.getLink('increase the limit').click()
     >>> browser.url

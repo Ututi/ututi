@@ -1,4 +1,4 @@
-from pylons import request, c
+from pylons import request, tmpl_context as c
 
 from ututi.model import get_supporters
 from ututi.lib.base import BaseController, render

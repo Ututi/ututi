@@ -1,4 +1,4 @@
-from pylons import c, config
+from pylons import tmpl_context as c, config
 
 from ututi.lib.base import BaseController, render
 from ututi.model import meta, Subject, LocationTag, Group

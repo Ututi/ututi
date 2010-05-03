@@ -1,6 +1,9 @@
 from datetime import date
 from zope.testing import doctest
 
+import pylons.test
+from pylons import config
+
 from ututi.model import LocationTag, GroupMembershipType, GroupMember, Group, File, User, meta
 
 from ututi.tests import PylonsLayer
@@ -9,6 +12,7 @@ import ututi
 def test_group_uploadstatus():
     """Tests for group file upload limiting.
 
+        >>> config._push_object(pylons.test.pylonsapp.config)
 
         >>> group = Group.get("moderators")
 
@@ -25,6 +29,8 @@ def test_group_uploadstatus():
 
         >>> group.upload_status == group.CAN_UPLOAD
         False
+
+        >>> config._pop_object(pylons.test.pylonsapp.config)
 
     """
 

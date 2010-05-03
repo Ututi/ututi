@@ -2,7 +2,7 @@ import logging
 
 from sqlalchemy.orm.exc import NoResultFound
 from pylons.controllers.util import abort
-from pylons import c, url
+from pylons import tmpl_context as c, url
 
 from ututi.controllers.files import BasefilesController
 from ututi.model import Group, File, meta

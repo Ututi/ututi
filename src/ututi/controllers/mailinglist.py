@@ -7,7 +7,7 @@ from pylons.decorators import validate
 from pylons.controllers.util import redirect_to
 from pylons.controllers.util import abort
 from pylons import url
-from pylons import c, config, request
+from pylons import tmpl_context as c, config, request
 from pylons.i18n import _
 
 from mimetools import choose_boundary

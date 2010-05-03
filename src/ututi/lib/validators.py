@@ -3,7 +3,7 @@ from lxml.html.clean import Cleaner
 
 from formencode import validators, Invalid
 from pylons.i18n import _
-from pylons import c
+from pylons import tmpl_context as c
 
 from ututi.model import meta, Email
 from ututi.model import Subject, Group, ContentItem, LocationTag

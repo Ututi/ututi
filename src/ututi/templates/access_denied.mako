@@ -15,5 +15,5 @@ ${_('You do not have the rights to see this page, or perform this action. Go bac
 % if request.referrer.startswith(url("/", qualified=True)):
     <a href="#" onclick="javascript: history.go(-1); return false;">${_('go back')}</a>
 % else:
-    <a href="${url(controller='search')}">${_('go find something else')}</a>
+    <a href="${url(controller='search', action='index')}">${_('go find something else')}</a>
 % endif
