@@ -84,7 +84,7 @@ class GreatMigrator(object):
         if 0 < len(versions) < 2:
             return versions[0][0]
         else:
-            raise "OMGWTF BBW"
+            raise ValueError(versions)
         connection.close()
 
     def initializeVersionning(self):
