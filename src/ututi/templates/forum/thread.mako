@@ -1,6 +1,6 @@
 <%inherit file="/forum/index.mako" />
 
-<a class="back-link" href="${url.current(action='index')}">${_('Back to the topic list')}</a>
+<a class="back-link" href="${url.current(action='index', thread_id=None)}">${_('Back to the topic list')}</a>
 <h1>${c.thread.title}</h1>
 
 <table id="forum-thread">

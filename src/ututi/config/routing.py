@@ -228,30 +228,30 @@ def make_map():
                 controller='structure', action='logo')
 
     map.connect('forum_community_index', '/community',
-                controller='forum', action='index', id=None, category_id=1)
+                controller='publicforum', action='index', id=None, category_id=1)
     map.connect('/community/{action}',
-                controller='forum', id=None, category_id=1)
+                controller='publicforum', id=None, category_id=1)
     map.connect('/community/thread/{thread_id}',
-                controller='forum', id=None, category_id=1, action='thread')
+                controller='publicforum', id=None, category_id=1, action='thread')
     map.connect('/community/thread/{thread_id}/reply',
-                controller='forum', id=None, category_id=1, action='reply')
+                controller='publicforum', id=None, category_id=1, action='reply')
     map.connect('/community/thread/{thread_id}/edit',
-                controller='forum', id=None, category_id=1, action='edit')
+                controller='publicforum', id=None, category_id=1, action='edit')
     map.connect('/community/thread/{thread_id}/edit_post',
-                controller='forum', id=None, category_id=1, action='edit_post')
+                controller='publicforum', id=None, category_id=1, action='edit_post')
 
     map.connect('forum_bugs_index', '/bugs',
-                controller='forum', action='index', id=None, category_id=2)
+                controller='publicforum', action='index', id=None, category_id=2)
     map.connect('/bugs/{action}',
-                controller='forum', id=None, category_id=2)
+                controller='publicforum', id=None, category_id=2)
     map.connect('/bugs/thread/{thread_id}',
-                controller='forum', id=None, category_id=2, action='thread')
+                controller='publicforum', id=None, category_id=2, action='thread')
     map.connect('/bugs/thread/{thread_id}/reply',
-                controller='forum', id=None, category_id=2, action='reply')
+                controller='publicforum', id=None, category_id=2, action='reply')
     map.connect('/bugs/thread/{thread_id}/edit',
-                controller='forum', id=None, category_id=2, action='edit')
+                controller='publicforum', id=None, category_id=2, action='edit')
     map.connect('/bugs/thread/{thread_id}/edit_post',
-                controller='forum', id=None, category_id=2, action='edit_post')
+                controller='publicforum', id=None, category_id=2, action='edit_post')
 
     map.connect('/{controller}', action='index')
     map.connect('/{controller}/{action}')

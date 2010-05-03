@@ -40,7 +40,13 @@
    % for forum_post in category.top_level_messages()[:n]:
   <tr>
     <td class="subject">
-      <a class="thread-subject" href="${url.current(action='thread', category_id=category.id, thread_id=forum_post['thread_id'])}">
+      <a class="thread-subject"
+      % if category.id not in [1, 2]:
+       href="${url.current(action='thread', category_id=category.id, thread_id=forum_post['thread_id'])}"
+      % else:
+       href="${url.current(action='thread', thread_id=forum_post['thread_id'])}"
+      % endif
+      >
         ${forum_post['title']}
       </a>
     </td>

@@ -35,7 +35,7 @@ def setup_title(group_id, category_id):
     fix_public_forum_metadata(c.category)
 
     c.breadcrumbs.append({'title': c.category.title,
-                          'link': url.current(action='index', category_id=c.category.id)})
+                          'link': url.current(action='index')})
 
 
 def fix_public_forum_metadata(forum):
@@ -70,7 +70,7 @@ def group_action(method):
 
 
 def category_action(method):
-    def _forum_action(self, id, category_id):
+    def _category_action(self, id, category_id):
         if id is not None:
             group = Group.get(id)
             c.object_location = group.location
@@ -80,7 +80,7 @@ def category_action(method):
             c.security_context = group
         setup_title(id, category_id)
         return method(self, category_id)
-    return _forum_action
+    return _category_action
 
 
 def forum_thread_action(method):
@@ -168,10 +168,7 @@ class ForumController(GroupControllerBase):
                          thread_id=thread_id)
         meta.Session.add(post)
         meta.Session.commit()
-        redirect_to(controller='forum',
-                    action='thread',
-                    category_id=category_id,
-                    thread_id=thread_id)
+        redirect(url.current(action='thread'))
 
     def _new_thread_form(self):
         return render('forum/new.mako')

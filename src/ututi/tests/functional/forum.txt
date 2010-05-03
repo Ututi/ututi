@@ -15,4 +15,70 @@ Basic forum test
     >>> browser.printQuery('id("forum-thread")//div[@class="post-body"]/text()')
     My ututi is borken!
 
-    >>> browser.open('http://localhost/community/thread/3/edit')
+Messages can be edited:
+
+    >>> browser.getControl('Edit').click()
+    >>> browser.url
+    'http://localhost/community/thread/3/edit'
+
+Let's get back to the topic list:
+
+    >>> browser.getLink('Back to thread')
+    <Link text='Back to thread' url='http://localhost/community/thread/3'>
+    >>> browser.getLink('Back to thread').click()
+
+    >>> browser.getLink('Back to the topic list')
+    <Link text='Back to the topic list' url='http://localhost/community'>
+    >>> browser.getLink('Back to the topic list').click()
+
+Links from the front page work:
+
+    >>> browser.getLink('Help!', index=1)
+    <Link text='Help!' url='http://localhost/community/thread/3'>
+
+    >>> browser.getLink('Help!', index=1).click()
+    >>> browser.printQuery('id("forum-thread")//div[@class="post-body"]/text()')
+    My ututi is borken!
+
+
+Bugs forum
+==========
+
+The bugs forum works just fine too:
+
+    >>> browser.open('http://localhost/bugs')
+
+    >>> browser.getLink('New topic').click()
+    >>> browser.getControl('Subject').value = 'Help!'
+    >>> browser.getControl('Message').value = 'My ututi is borken!'
+    >>> browser.getControl('Post').click()
+
+    >>> browser.url
+    'http://localhost/bugs/thread/4'
+
+    >>> browser.printQuery('id("forum-thread")//div[@class="post-body"]/text()')
+    My ututi is borken!
+
+Messages can be edited:
+
+    >>> browser.getControl('Edit').click()
+    >>> browser.url
+    'http://localhost/bugs/thread/4/edit'
+
+Let's get back to the topic list:
+
+    >>> browser.getLink('Back to thread')
+    <Link text='Back to thread' url='http://localhost/bugs/thread/4'>
+    >>> browser.getLink('Back to thread').click()
+
+    >>> browser.getLink('Back to the topic list')
+    <Link text='Back to the topic list' url='http://localhost/bugs'>
+    >>> browser.getLink('Back to the topic list').click()
+
+Links from the front page work:
+
+    >>> browser.getLink('Help!', index=1)
+    <Link text='Help!' url='http://localhost/bugs/thread/4'>
+    >>> browser.getLink('Help!', index=1).click()
+    >>> browser.printQuery('id("forum-thread")//div[@class="post-body"]/text()')
+    My ututi is borken!
