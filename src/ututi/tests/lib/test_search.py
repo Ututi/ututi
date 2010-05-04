@@ -4,7 +4,7 @@ from zope.testing import doctest
 from pylons import config
 
 from ututi.model import LocationTag, GroupMembershipType, GroupMember, Group, User, meta
-from ututi.model import meta, Subject, Page, SimpleTag
+from ututi.model import meta, Subject, Page, SimpleTag, File
 
 from ututi.tests import PylonsLayer
 import ututi
@@ -49,6 +49,12 @@ def test_basic_search():
     No pages have been added yet:
         >>> [result.object.title for result in search(u'biologija', type='page')]
         []
+
+    Test file search:
+        >>> results = search(u'geografija')
+        >>> [result.object.title for result in results]
+        [u'geografija']
+
 
     """
 
@@ -172,6 +178,9 @@ def test_setup(test):
     s.pages.append(p)
     meta.Session.add(s)
     meta.Session.add(p)
+
+    f = File(u'test.txt', u'geografija', 'text/txt')
+    meta.Session.add(f)
 
     meta.Session.commit()
     meta.Session.execute("SET default_text_search_config TO 'public.lt'")
