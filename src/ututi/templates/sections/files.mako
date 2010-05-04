@@ -13,8 +13,8 @@ $(document).ready(function(){
 
           var source_id = ui.sender.parents('.section').children('.container').children('.id').val();
           var target_id = ui.item.parents('.section').children('.container').children('.id').val();
-          var target_folder = ui.item.parents('.folder_file_area').children('.folder_name').val();
-          var target_is_trash = ui.item.parents('.folder').hasClass('.trash_folder');
+          var target_folder = ui.item.closest('.folder_file_area').children('.folder_name').val();
+          var target_is_trash = ui.item.closest('.folder').hasClass('.trash_folder');
           var source_is_trash = ui.sender.closest('.folder').hasClass('.trash_folder');
 
           if (source_id != target_id) {

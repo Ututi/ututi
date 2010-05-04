@@ -16,6 +16,7 @@ from pylons.controllers.util import forward
 
 from ututi.lib.security import deny
 from ututi.lib.security import is_root
+from ututi.lib.security import check_crowds
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
 from ututi.model import meta, File, ContentItem
@@ -73,7 +74,10 @@ class BasefilesController(BaseController):
         source_folder = file.folder
         delete = asbool(request.POST.get('remove', False))
         if delete:
-            file.deleted = c.user
+            if check_crowds(['owner', 'moderator', 'admin']):
+                file.deleted = c.user
+            else:
+                abort(501)
         else:
             file.folder = request.POST['target_folder']
             file.deleted = None
