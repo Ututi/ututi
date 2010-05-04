@@ -1,5 +1,5 @@
 from datetime import datetime
-import md5
+import hashlib
 from routes import url_for
 
 from pylons.i18n import _
@@ -11,7 +11,7 @@ from ututi.lib.messaging import Message
 def email_confirmation_request(user, email):
     for user_email in user.emails:
         if email.strip() == user_email.email.strip():
-            hash = md5.new(datetime.now().isoformat() + email).hexdigest()
+            hash = hashlib.md5(datetime.now().isoformat() + email).hexdigest()
             user_email.confirmation_key = hash
             meta.Session.commit()
 

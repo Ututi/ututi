@@ -4,7 +4,7 @@ from PIL import Image
 import sys
 import os
 import hashlib
-import sha, binascii
+import binascii
 import lxml
 import logging
 import warnings
@@ -503,7 +503,7 @@ def generate_password(password):
     """Generate a hash for a given password."""
     salt = generate_salt()
     password = password.encode('utf-8')
-    return b2a_base64(sha.new(password + salt).digest() + salt)[:-1]
+    return b2a_base64(hashlib.sha1(password + salt).digest() + salt)[:-1]
 
 
 def validate_password(reference, password):
@@ -513,7 +513,7 @@ def validate_password(reference, password):
     except binascii.Error:
         return False
     salt = ref[20:]
-    compare = b2a_base64(sha.new(password + salt).digest() + salt)[:-1]
+    compare = b2a_base64(hashlib.sha1(password + salt).digest() + salt)[:-1]
     return compare == reference
 
 
