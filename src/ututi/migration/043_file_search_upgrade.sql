@@ -1,18 +1,22 @@
 CREATE OR REPLACE FUNCTION update_file_worker(files) RETURNS void AS $$
     DECLARE
         search_id int8 := NULL;
+        parent_type varchar(20) := NULL;
         file ALIAS FOR $1;
     BEGIN
-      SELECT content_item_id INTO search_id  FROM search_items WHERE content_item_id = file.id;
-      IF FOUND THEN
-        UPDATE search_items SET terms = to_tsvector(coalesce(file.title,''))
-          || to_tsvector(coalesce(file.filename,'')) || to_tsvector(coalesce(file.description,'')) WHERE content_item_id=search_id;
-      ELSE
-        INSERT INTO search_items (content_item_id, terms) VALUES (file.id,
-          to_tsvector(coalesce(file.title,'')) || to_tsvector(coalesce(file.filename,'')) || to_tsvector(coalesce(file.description,'')));
+      SELECT ci.content_type INTO parent_type FROM content_items ci WHERE ci.id = file.parent_id;
+      IF parent_type = 'subject' THEN
+        SELECT content_item_id INTO search_id  FROM search_items WHERE content_item_id = file.id;
+        IF FOUND THEN
+          UPDATE search_items SET terms = to_tsvector(coalesce(file.title,''))
+            || to_tsvector(coalesce(file.filename,'')) || to_tsvector(coalesce(file.description,'')) WHERE content_item_id=search_id;
+        ELSE
+          INSERT INTO search_items (content_item_id, terms) VALUES (file.id,
+            to_tsvector(coalesce(file.title,'')) || to_tsvector(coalesce(file.filename,'')) || to_tsvector(coalesce(file.description,'')));
+        END IF;
       END IF;
     END
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql;;
 
 CREATE OR REPLACE FUNCTION update_file_search() RETURNS trigger AS $$
     BEGIN
