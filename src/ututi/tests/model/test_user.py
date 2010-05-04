@@ -62,9 +62,9 @@ def test_generate_validate_password():
     So if we split the hash into two parts, and encode the password
     using the salt, we should get the same result:
 
-         >>> import sha
+         >>> import hashlib
          >>> pwd_hash, salt = hash[:-7], hash[-7:]
-         >>> sha.new('asdasd' + salt).digest() == pwd_hash
+         >>> hashlib.sha1('asdasd' + salt).digest() == pwd_hash
          True
 
     But to make it easier to do we have all that code in our password
