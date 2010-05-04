@@ -973,7 +973,7 @@ msgstr[1] "rasta %(count)s įvykiai"
 msgstr[2] "rasta %(count)s įvykių"
 
 msgid "Groups"
-msgstr "grupėse"
+msgstr "grupės"
 
 msgid "CSV File"
 msgstr "CSV failas"
@@ -1942,7 +1942,7 @@ msgid "Everywhere"
 msgstr "visur"
 
 msgid "in-Subjects"
-msgstr "dalykuose"
+msgstr "dalykai"
 
 msgid "Search-btn"
 msgstr "Ieškok"
