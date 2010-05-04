@@ -108,7 +108,7 @@ Let's watch some subjects:
 
     >>> browser.getLink('Watch subjects').click()
     >>> browser.getLink('Watch', url='mat_analize').click()
-    >>> browser.getLink("What's new?", url='group').click()
+    >>> browser.getLink("What's New?", url='group').click()
 
 And the subject watching box is gone:
 
@@ -118,7 +118,7 @@ If we stop watching the subject though, the box reappears:
 
     >>> browser.getLink('Subjects').click()
     >>> browser.getLink(url='unwatch_subject').click()
-    >>> browser.getLink("What's new?", url='group').click()
+    >>> browser.getLink("What's New?", url='group').click()
 
     >>> browser.printQuery("id('watch_more_subjects')")
     <div id="watch_more_subjects" class="full_box">

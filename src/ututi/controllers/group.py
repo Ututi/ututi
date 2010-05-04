@@ -431,7 +431,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         c.current_year = date.today().year
         c.years = range(c.current_year - 10, c.current_year + 5)
         forum_link = 'mailinglist' if c.group.mailinglist_enabled else 'forum'
-        c.tabs = [('home', _("What's new?")),
+        c.tabs = [('home', _("What's New?")),
                   (forum_link, _('Forum')),
                   ('members', _('Members')),
                   ('files', _('Files')),

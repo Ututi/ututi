@@ -142,7 +142,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         marked as selected.
         """
         bcs = [
-            {'title': _("What's new?"),
+            {'title': _("What's New?"),
              'link': url(controller='profile', action='home'),
              'selected': selected == 'home'},
             {'title': _("Files"),

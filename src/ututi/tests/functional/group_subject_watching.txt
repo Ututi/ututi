@@ -38,7 +38,7 @@ Group subject watching
 
 These actions should have left an event trail on the group home page:
 
-    >>> browser.getLink("What's new?", url='group').click()
+    >>> browser.getLink("What's New?", url='group').click()
     >>> browser.printQuery("id('event_list')")
     <ul id="event_list">
       <li>
