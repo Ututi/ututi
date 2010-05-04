@@ -1,7 +1,7 @@
 from datetime import date
 
 from pylons import url, tmpl_context as c
-from pylons.controllers.util import redirect_to, abort
+from pylons.controllers.util import redirect, abort
 from pylons.i18n import _
 from pylons.decorators import validate
 
@@ -50,7 +50,7 @@ class BlogController(BaseController):
             meta.Session.add(blog)
             meta.Session.commit()
             h.flash(_('Blog snippet created.'))
-            redirect_to(url(controller='blog', action='index'))
+            redirect(url(controller='blog', action='index'))
 
     @ActionProtector("root")
     def add(self):
@@ -85,6 +85,6 @@ class BlogController(BaseController):
                 h.flash(_('Blog snippet updated.'))
 
             meta.Session.commit()
-            redirect_to(url(controller='blog', action='index'))
+            redirect(url(controller='blog', action='index'))
         except NoResultFound:
             abort(404)

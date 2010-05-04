@@ -4,14 +4,13 @@ import string
 from datetime import datetime
 import simplejson
 
-from routes.util import redirect_to
 from formencode import Schema, validators, Invalid, All, htmlfill
 from webhelpers import paginate
 
 from paste.util.converters import asbool
 from pylons import request, tmpl_context as c, url, session, config, response
 from pylons.decorators import validate
-from pylons.controllers.util import abort
+from pylons.controllers.util import abort, redirect
 from pylons.i18n import _, ungettext
 from pylons.templating import render_mako_def
 
@@ -128,7 +127,7 @@ class HomeController(UniversityListMixin):
 
     def index(self):
         if c.user is not None:
-            redirect_to(controller='profile', action='home')
+            redirect(url(controller='profile', action='home'))
         else:
             self._get_unis()
             if request.params.has_key('js'):
@@ -209,7 +208,7 @@ class HomeController(UniversityListMixin):
 
             if user is not None:
                 sign_in_user(email)
-                redirect_to(str(destination))
+                redirect(str(destination))
 
         return render('/login.mako')
 
@@ -217,7 +216,7 @@ class HomeController(UniversityListMixin):
         if 'login' in session:
             del session['login']
         session.save()
-        redirect_to(controller='home', action='index')
+        redirect(url(controller='home', action='index'))
 
     def __register_user(self, form, send_confirmation=True):
         fullname = self.form_result['fullname']
@@ -257,7 +256,7 @@ class HomeController(UniversityListMixin):
                     invitation.group.add_member(user)
                     meta.Session.delete(invitation)
                     meta.Session.commit()
-                    redirect_to(controller='group', action='home', id=invitation.group.group_id)
+                    redirect(url(controller='group', action='home', id=invitation.group.group_id))
                 elif invitation is None:
                     c.header = _('Invalid invitation!')
                     c.message = _('The invitation link you have followed was either already used or invalid.')
@@ -269,7 +268,7 @@ class HomeController(UniversityListMixin):
                     return render('/login.mako')
             else:
                 user, email = self.__register_user(self.form_result)
-                redirect_to(str(request.POST.get('came_from',
+                redirect(str(request.POST.get('came_from',
                                                  url(controller='profile',
                                                      action='register_welcome'))))
         else:
@@ -325,7 +324,7 @@ class HomeController(UniversityListMixin):
                 meta.Session.commit()
                 h.flash(_('Your password has been updated. Welcome back!'))
                 sign_in_user(user.emails[0].email)
-                redirect_to(controller='profile', action='index')
+                redirect(url(controller='profile', action='index'))
             else:
                 defaults={'recovery_key': key}
 
@@ -386,9 +385,9 @@ class HomeController(UniversityListMixin):
                     h.flash(v)
                 url = self.form_result.get('came_from', None)
                 if url is None:
-                    redirect_to(url(controller='profile', action='index'))
+                    redirect(url(controller='profile', action='index'))
                 else:
-                    redirect_to(url.encode('utf-8'))
+                    redirect(url.encode('utf-8'))
 
     def join(self):
         return render('home/join.mako')
@@ -397,7 +396,7 @@ class HomeController(UniversityListMixin):
     def join_register(self):
         if hasattr(self, 'form_result'):
             user, email = self.__register_user(self.form_result)
-            redirect_to(controller='group', action='add')
+            redirect(url(controller='group', action='add'))
 
     def join_login(self):
         email = request.POST.get('login_username')
@@ -410,7 +409,7 @@ class HomeController(UniversityListMixin):
 
             if user is not None:
                 sign_in_user(email)
-                redirect_to(url(controller='group', action='add'))
+                redirect(url(controller='group', action='add'))
 
         return render('/home/join.mako')
 

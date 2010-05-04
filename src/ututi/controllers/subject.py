@@ -9,9 +9,9 @@ from formencode.foreach import ForEach
 from formencode.compound import Pipe
 from formencode import Schema, validators, htmlfill
 
-from pylons import tmpl_context as c, request
+from pylons import tmpl_context as c, request, url
 from pylons.decorators import validate
-from pylons.controllers.util import redirect_to, abort
+from pylons.controllers.util import redirect, abort
 from pylons.i18n import _
 
 from ututi.model import get_supporters
@@ -117,7 +117,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
     @ActionProtector("user")
     def create(self):
         if not hasattr(self, 'form_result'):
-            redirect_to(controller='subject', action='add')
+            redirect(url(controller='subject', action='add'))
 
         subj = self._create_subject()
         meta.Session.commit()
@@ -127,10 +127,10 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
             meta.Session.commit()
             h.flash(_('You are now watching the subject %s') % subj.title)
 
-        redirect_to(controller='subject',
+        redirect(url(controller='subject',
                     action='home',
                     id=subj.subject_id,
-                    tags=subj.location_path)
+                    tags=subj.location_path))
 
     def _edit_form(self):
         return render('subject/edit.mako')
@@ -170,10 +170,10 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
 
         meta.Session.commit()
 
-        redirect_to(controller='subject',
+        redirect(url(controller='subject',
                     action='home',
                     id=subject.subject_id,
-                    tags=subject.location_path)
+                    tags=subject.location_path))
 
 
     @subject_action
@@ -181,7 +181,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
     @ActionProtector("user")
     def update(self, subject):
         if not hasattr(self, 'form_result'):
-            redirect_to(controller='subject', action='add')
+            redirect(url(controller='subject', action='add'))
 
         #check if we need to regenerate the id
         clash = Subject.get(self.form_result.get('location', None), subject.subject_id)
@@ -206,10 +206,10 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
 
         meta.Session.commit()
 
-        redirect_to(controller='subject',
+        redirect(url(controller='subject',
                     action='home',
                     id=subject.subject_id,
-                    tags=subject.location_path)
+                    tags=subject.location_path))
 
     @subject_action
     @ActionProtector("user")
@@ -225,7 +225,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
     @ActionProtector("user")
     def create_folder(self, subject):
         self._create_folder(subject)
-        redirect_to(subject.url())
+        redirect(subject.url())
 
     @subject_action
     @ActionProtector("user")
@@ -235,7 +235,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
             deny(_('You have no right to delete this folder.'), 403)
         else:
             self._delete_folder(subject)
-            redirect_to(request.referrer)
+            redirect(request.referrer)
 
     @subject_action
     @ActionProtector("user")
@@ -256,11 +256,11 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
     def delete(self, subject):
         c.subject.deleted = c.user
         meta.Session.commit()
-        redirect_to(request.referrer)
+        redirect(request.referrer)
 
     @subject_action
     @ActionProtector("moderator", "root")
     def undelete(self, subject):
         c.subject.deleted = None
         meta.Session.commit()
-        redirect_to(request.referrer)
+        redirect(request.referrer)

@@ -7,7 +7,7 @@ from formencode import validators, htmlfill
 
 from pylons.decorators import validate
 from pylons.controllers.util import abort
-from pylons.controllers.util import redirect, redirect_to
+from pylons.controllers.util import redirect, redirect
 from pylons.i18n import _
 from pylons import tmpl_context as c, url
 
@@ -105,7 +105,7 @@ class ForumController(GroupControllerBase):
                 abort(404)
             c.group_id = c.group.group_id
             if c.group.mailinglist_enabled:
-                redirect_to(controller='mailinglist', action='index')
+                redirect(url(controller='mailinglist', action='index'))
             c.object_location = c.group.location
             c.security_context = c.group
             c.breadcrumbs.append({'title': c.group.title, 'link': c.group.url()})
@@ -229,13 +229,13 @@ class ForumController(GroupControllerBase):
     # Redirects for backwards compatibility.
 
     def legacy_thread(self, id, thread_id):
-        redirect_to(controller='mailinglist', action='thread',
-                    id=id, thread_id=thread_id)
+        redirect(url(controller='mailinglist', action='thread',
+                    id=id, thread_id=thread_id))
 
     def legacy_reply(self, id, thread_id):
-        redirect_to(controller='mailinglist', action='reply',
-                    id=id, thread_id=thread_id)
+        redirect(url(controller='mailinglist', action='reply',
+                    id=id, thread_id=thread_id))
 
     def legacy_file(self, id, message_id, file_id):
-        redirect_to(controller='mailinglist', action='file',
-                    id=id, message_id=message_id, file_id=file_id)
+        redirect(url(controller='mailinglist', action='file',
+                    id=id, message_id=message_id, file_id=file_id))

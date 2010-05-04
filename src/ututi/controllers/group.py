@@ -7,7 +7,7 @@ from pkg_resources import resource_stream
 
 from pylons import tmpl_context as c, config, request, url
 from pylons.templating import render_mako_def
-from pylons.controllers.util import redirect_to, abort
+from pylons.controllers.util import redirect, abort
 from pylons.decorators import validate, jsonify
 from pylons.i18n import _
 
@@ -174,7 +174,7 @@ class GroupInviteCancelForm(Schema):
 def group_action(method):
     def _group_action(self, id=None):
         if id is None:
-            redirect_to(controller='search', obj_type='group')
+            redirect(url(controller='search', obj_type='group'))
         group = Group.get(id)
         if group is None:
             abort(404)
@@ -245,9 +245,9 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @group_action
     def index(self, group):
         if check_crowds(["member", "admin"]):
-            redirect_to(controller='group', action=c.group.default_tab, id=group.group_id)
+            redirect(url(controller='group', action=c.group.default_tab, id=group.group_id))
         else:
-            redirect_to(controller='group', action='home', id=group.group_id)
+            redirect(url(controller='group', action='home', id=group.group_id))
 
     def _set_home_variables(self, group):
         c.breadcrumbs.append(self._actions('home'))
@@ -303,7 +303,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         else:
             h.flash(_("Your request to join the group is still being processed."))
 
-        redirect_to(controller='group', action='home', id=group.group_id)
+        redirect(url(controller='group', action='home', id=group.group_id))
 
     def _edit_page_form(self):
         return render('group/edit_page.mako')
@@ -329,7 +329,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         group.page_public = (self.form_result.get('page_public', False) == 'public')
         meta.Session.commit()
         h.flash(_("The group's front page was updated."))
-        redirect_to(controller='group', action='page', id=group.group_id)
+        redirect(url(controller='group', action='page', id=group.group_id))
 
     @group_action
     @ActionProtector("member", "admin")
@@ -394,9 +394,9 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
                 group.moderators = values['moderators']
 
             meta.Session.commit()
-            redirect_to(controller='group', action='invite_members_step', id=values['id'])
+            redirect(url(controller='group', action='invite_members_step', id=values['id']))
         else:
-            redirect_to(controller='group', action='add')
+            redirect(url(controller='group', action='add'))
 
     def _get_available_roles(self, member):
         roles = ({'type' : 'administrator', 'title' : _('Administrator')},
@@ -526,7 +526,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         meta.Session.commit()
         h.flash(_('Group information and settings updated.'))
 
-        redirect_to(controller='group', action='home', id=group.group_id)
+        redirect(url(controller='group', action='home', id=group.group_id))
 
     def logo(self, id, width=None, height=None):
         group = Group.get(id)
@@ -553,13 +553,13 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @ActionProtector("member", "admin")
     def create_folder(self, group):
         self._create_folder(group)
-        redirect_to(request.referrer)
+        redirect(request.referrer)
 
     @group_action
     @ActionProtector("admin")
     def delete_folder(self, group):
         self._delete_folder(group)
-        redirect_to(request.referrer)
+        redirect(request.referrer)
 
     @group_action
     @ActionProtector("member", "admin")
@@ -589,7 +589,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @ActionProtector("admin", "member")
     def watch_subject(self, group):
         self._watch_subject(group)
-        redirect_to(request.referrer)
+        redirect(request.referrer)
 
     @group_action
     @ActionProtector("admin", "member")
@@ -607,7 +607,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @ActionProtector("admin", "member")
     def unwatch_subject(self, group):
         self._unwatch_subject(group)
-        redirect_to(request.referrer)
+        redirect(request.referrer)
 
     @group_action
     @ActionProtector("admin", "member")
@@ -623,7 +623,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
 
     def _createSubject(self, group):
         if not hasattr(self, 'form_result'):
-            redirect_to(group.url(action='add_subject_step'))
+            redirect(group.url(action='add_subject_step'))
 
         subject = self._create_subject()
         meta.Session.flush()
@@ -636,7 +636,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @ActionProtector("member", "admin")
     def create_subject_step(self, group):
         self._createSubject(group)
-        redirect_to(group.url(action='subjects_step'))
+        redirect(group.url(action='subjects_step'))
 
     @group_action
     @ActionProtector("member", "admin")
@@ -648,7 +648,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @ActionProtector("member", "admin")
     def create_subject(self, group):
         self._createSubject(group)
-        redirect_to(group.url(action='subjects'))
+        redirect(group.url(action='subjects'))
 
     @validate(schema=SearchSubmit, form='subjects', post_only = False, on_get = True)
     @group_action
@@ -716,7 +716,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         if hasattr(self, 'form_result'):
             emails = self.form_result.get('emails', '').split()
             self._send_invitations(group, emails)
-        redirect_to(controller='group', action='members', id=group.group_id)
+        redirect(url(controller='group', action='members', id=group.group_id))
 
     @group_action
     @validate(schema=GroupInviteCancelForm, form='members')
@@ -732,7 +732,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
                 meta.Session.delete(invitation)
                 meta.Session.commit()
                 h.flash(_('Invitation cancelled'))
-        redirect_to(controller='group', action='members', id=group.group_id)
+        redirect(url(controller='group', action='members', id=group.group_id))
 
     @validate(schema=GroupInviteForm, form='invite_members_step')
     @group_action
@@ -743,9 +743,9 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             emails = self.form_result.get('emails', '').split()
             self._send_invitations(group, emails)
             if self.form_result.get('final_submit', None) is not None:
-                redirect_to(group.url(action='welcome'))
+                redirect(group.url(action='welcome'))
             else:
-                redirect_to(controller='group', action='invite_members_step', id=group.group_id)
+                redirect(url(controller='group', action='invite_members_step', id=group.group_id))
 
         return render('group/members_step.mako')
 
@@ -813,11 +813,11 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
 
             url = self.form_result.get('came_from', None)
             if url is None:
-                redirect_to(controller='group', action='home', id=group.group_id)
+                redirect(url(controller='group', action='home', id=group.group_id))
             else:
-                redirect_to(url.encode('utf-8'))
+                redirect(url.encode('utf-8'))
         else:
-            redirect_to(controller='group', action='home', id=group.group_id)
+            redirect(url(controller='group', action='home', id=group.group_id))
 
     @validate(schema=GroupRequestActionForm)
     @group_action
@@ -844,9 +844,9 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             url = self.form_result.get('came_from', None)
 
         if url is None:
-            redirect_to(controller='group', action='members', id=c.group.group_id)
+            redirect(url(controller='group', action='members', id=c.group.group_id))
         else:
-            redirect_to(url.encode('utf-8'))
+            redirect(url.encode('utf-8'))
 
     @validate(schema=GroupMemberUpdateForm)
     @group_action
@@ -874,7 +874,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
                     meta.Session.commit()
             else:
                 h.flash(_("Problem updating the status of the user. Cannot find such user."))
-        redirect_to(controller="group", action="members", id=group.group_id)
+        redirect(url(controller="group", action="members", id=group.group_id))
 
     @group_action
     @validate(LogoUpload)
@@ -890,7 +890,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @ActionProtector("admin")
     def do_delete(self, group):
         if len(group.members) > 1:
-            redirect_to(controller='group', action='delete')
+            redirect(url(controller='group', action='delete'))
 
 
     @group_action
@@ -898,12 +898,12 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     def delete(self, group):
         if len(group.members) > 1:
             h.flash(_("You can't delete a group while it has members!"))
-            redirect_to(request.referrer)
+            redirect(request.referrer)
         else:
             h.flash(_("Group '%(group_title)s' has been deleted!" % dict(group_title=group.title)))
             meta.Session.delete(group)
             meta.Session.commit()
-            redirect_to(url(controller='profile', action='home'))
+            redirect(url(controller='profile', action='home'))
 
     @group_action
     @ActionProtector("member", "admin")
@@ -912,7 +912,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         if membership is not None:
             membership.subscribed = False
         meta.Session.commit()
-        redirect_to(request.referrer)
+        redirect(request.referrer)
 
     @group_action
     @ActionProtector("member", "admin")
@@ -921,7 +921,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         if membership is not None:
             membership.subscribed = True
         meta.Session.commit()
-        redirect_to(request.referrer)
+        redirect(request.referrer)
 
     @group_action
     @ActionProtector("member", "admin")
@@ -934,9 +934,9 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         if len(group.administrators) < 1:
             h.flash(_('The group must have at least one administrator!'))
             meta.Session.rollback()
-            redirect_to(request.referrer)
+            redirect(request.referrer)
         meta.Session.commit()
-        redirect_to(group.url())
+        redirect(group.url())
 
     @group_action
     @ActionProtector("member", "admin")
@@ -956,7 +956,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             meta.Session.commit()
         if request.params.get('ajax'):
             return 'OK'
-        redirect_to(controller='profile', action='subjects')
+        redirect(url(controller='profile', action='subjects'))
 
     @validate(schema=GroupLiveSearchForm)
     def js_group_search(self):

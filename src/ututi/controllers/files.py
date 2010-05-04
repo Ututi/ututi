@@ -11,8 +11,7 @@ from pylons.templating import render_mako_def
 from pylons.controllers.util import abort
 from pylons import url
 from pylons import request, response, tmpl_context as c
-from pylons.controllers.util import redirect_to
-from pylons.controllers.util import forward
+from pylons.controllers.util import forward, redirect
 
 from ututi.lib.security import deny
 from ututi.lib.security import is_root
@@ -124,7 +123,7 @@ class FilesController(BasefilesController):
             meta.Session.add(f)
             meta.Session.commit()
 
-        redirect_to(controller='admin', action='files')
+        redirect(url(controller='admin', action='files'))
 
     def get(self, id):
         if isinstance(id, basestring):
@@ -137,7 +136,7 @@ class FilesController(BasefilesController):
         if file is None:
             abort(404)
         if file.parent is not None:
-            redirect_to(file.url())
+            redirect(file.url())
         elif is_root(c.user):
             return self._get(file)
         else:
@@ -170,7 +169,7 @@ class FilesController(BasefilesController):
 
             file.deleted_by = None
             meta.Session.commit()
-            redirect_to(controller='admin', action='deleted_files')
+            redirect(url(controller='admin', action='deleted_files'))
         else:
             abort(400) #bad request
 

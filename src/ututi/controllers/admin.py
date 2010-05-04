@@ -15,8 +15,8 @@ from webhelpers import paginate
 from babel.dates import parse_date
 from babel.dates import format_date
 
-from pylons import request, tmpl_context as c, config
-from pylons.controllers.util import redirect_to, abort
+from pylons import request, tmpl_context as c, config, url
+from pylons.controllers.util import redirect, abort
 
 from random import Random
 from ututi.lib.security import ActionProtector
@@ -189,7 +189,7 @@ class AdminController(BaseController):
                 meta.Session.add(user)
 
             meta.Session.commit()
-        redirect_to(controller='admin', action='users')
+        redirect(url(controller='admin', action='users'))
 
     @ActionProtector("root")
     def import_structure(self):
@@ -213,7 +213,7 @@ class AdminController(BaseController):
                 parent = LocationTag.get([parent])
                 parent.children.append(tag)
             meta.Session.commit()
-        redirect_to(controller='structure', action='index')
+        redirect(url(controller='structure', action='index'))
 
     @ActionProtector("root")
     def import_groups(self):
@@ -238,7 +238,7 @@ class AdminController(BaseController):
                 group.year = date(2008, 1, 1)
 
         meta.Session.commit()
-        redirect_to(controller='admin', action='groups')
+        redirect(url(controller='admin', action='groups'))
 
     @ActionProtector("root")
     def import_subjects_without_ids(self):
@@ -268,7 +268,7 @@ class AdminController(BaseController):
             for tag in tags:
                 subj.tags.append(SimpleTag.get(tag))
         meta.Session.commit()
-        redirect_to(controller='admin', action='subjects')
+        redirect(url(controller='admin', action='subjects'))
 
     @ActionProtector('root')
     def files(self):

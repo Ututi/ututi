@@ -1,6 +1,6 @@
 from pylons import response, url, request, session, tmpl_context as c, config
 from pylons.controllers.util import abort
-from pylons.controllers.util import redirect_to
+from pylons.controllers.util import redirect
 
 from repoze.what.predicates import NotAuthorizedError
 from repoze.what.plugins.pylonshq.protectors import ActionProtector as BaseActionProtector
@@ -119,7 +119,7 @@ def deny(reason, code=None):
         login_form_url =  c.login_form_url or url(controller='home',
                                                   action='index',
                                                   came_from=request.url)
-        redirect_to(login_form_url)
+        redirect(login_form_url)
 
     abort(response.status_int, comment=reason)
 

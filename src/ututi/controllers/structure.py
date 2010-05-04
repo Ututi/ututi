@@ -6,8 +6,8 @@ from sqlalchemy.sql import expression, func
 from sqlalchemy import or_
 
 from pylons.controllers.util import abort
-from pylons import request, tmpl_context as c
-from pylons.controllers.util import redirect_to
+from pylons import request, tmpl_context as c, url
+from pylons.controllers.util import redirect
 from pylons.decorators import validate, jsonify
 from pylons.i18n import _
 
@@ -99,7 +99,7 @@ class StructureController(BaseController):
             parent = meta.Session.query(LocationTag).filter_by(id=values['parent']).one()
             parent.children.append(structure)
         meta.Session.commit()
-        redirect_to(controller='structure', action='index')
+        redirect(url(controller='structure', action='index'))
 
     def _edit_form(self):
         return render('structure/edit.mako')
@@ -141,7 +141,7 @@ class StructureController(BaseController):
                 parent.children.append(c.item)
 
         meta.Session.commit()
-        redirect_to(controller='structure', action='index')
+        redirect(url(controller='structure', action='index'))
 
     def logo(self, id, width=None, height=None):
         tag = meta.Session.query(LocationTag).filter_by(id=id).one()

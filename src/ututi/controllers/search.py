@@ -3,7 +3,7 @@ import logging
 from formencode import Schema, variabledecode
 from webhelpers import paginate
 
-from pylons.controllers.util import redirect_to
+from pylons.controllers.util import redirect
 from pylons.decorators import validate
 from pylons import request, tmpl_context as c, url
 from pylons.templating import render_mako_def
@@ -56,7 +56,7 @@ class SearchController(SearchBaseController):
     @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
     def index(self):
         if c.user is not None and self.form_result == {}:
-            redirect_to(url(controller='profile', action='browse'))
+            redirect(url(controller='profile', action='browse'))
 
         self._search()
         return render('/search/index.mako')

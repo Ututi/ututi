@@ -14,7 +14,7 @@ from webhelpers import paginate
 
 from pylons import request, tmpl_context as c, url
 from pylons.templating import render_mako_def
-from pylons.controllers.util import redirect_to, abort
+from pylons.controllers.util import abort, redirect
 
 from pylons.i18n import _
 
@@ -206,7 +206,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         c.breadcrumbs.append(self._actions('home'))
 
         if not c.user.memberships and not c.user.watched_subjects:
-            redirect_to(controller='profile', action='welcome')
+            redirect(url(controller='profile', action='welcome'))
 
         c.events = meta.Session.query(Event)\
             .filter(or_(Event.object_id.in_([s.id for s in c.user.all_watched_subjects]),
@@ -229,7 +229,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             .limit(20).all()
 
         if not c.events:
-            redirect_to(controller='profile', action='welcome')
+            redirect(url(controller='profile', action='welcome'))
 
         return render('/profile/feed.mako')
 
@@ -267,9 +267,9 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             c.user.update_password(self.form_result['new_password'].encode('utf-8'))
             meta.Session.commit()
             h.flash(_('Your password has been changed!'))
-            redirect_to(controller='profile', action='home')
+            redirect(url(controller='profile', action='home'))
         else:
-            redirect_to(controller='profile', action='edit')
+            redirect(url(controller='profile', action='edit'))
 
     @validate(LogoUpload)
     @ActionProtector("user")
@@ -305,7 +305,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
 
         meta.Session.commit()
         h.flash(_('Your profile was updated.'))
-        redirect_to(controller='profile', action='home')
+        redirect(url(controller='profile', action='home'))
 
     def confirm_emails(self):
         if c.user is not None:
@@ -315,11 +315,11 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             h.flash(_('Confirmation message sent. Please check your email.'))
             dest = request.POST.get('came_from', None)
             if dest is not None:
-                redirect_to(dest.encode('utf-8'))
+                redirect(dest.encode('utf-8'))
             else:
-                redirect_to(controller='profile', action='edit')
+                redirect(url(controller='profile', action='edit'))
         else:
-            redirect_to(controller='home', action='home')
+            redirect(url(controller='home', action='home'))
 
     def confirm_user_email(self, key):
         try:
@@ -331,7 +331,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         except NoResultFound:
             h.flash(_("Could not confirm email: invalid confirmation key."))
 
-        redirect_to(url(controller='profile', action='home'))
+        redirect(url(controller='profile', action='home'))
 
     @ActionProtector("user")
     def subjects(self):
@@ -399,7 +399,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     @ActionProtector("user")
     def watch_subject(self):
         self._watch_subject()
-        redirect_to(request.referrer)
+        redirect(request.referrer)
 
     @ActionProtector("user")
     def js_watch_subject(self):
@@ -415,7 +415,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     @ActionProtector("user")
     def unwatch_subject(self):
         self._unwatch_subject()
-        redirect_to(request.referrer)
+        redirect(request.referrer)
 
     @ActionProtector("user")
     def js_unwatch_subject(self):
@@ -433,7 +433,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     @ActionProtector("user")
     def ignore_subject(self):
         self._ignore_subject()
-        redirect_to(request.referrer)
+        redirect(request.referrer)
 
     @ActionProtector("user")
     def js_ignore_subject(self):
@@ -443,7 +443,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     @ActionProtector("user")
     def unignore_subject(self):
         self._unignore_subject()
-        redirect_to(request.referrer)
+        redirect(request.referrer)
 
     @ActionProtector("user")
     def js_unignore_subject(self):
@@ -551,7 +551,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             meta.Session.commit()
         if request.params.get('ajax'):
             return 'OK'
-        redirect_to(controller='profile', action='subjects')
+        redirect(url(controller='profile', action='subjects'))
 
     @validate(ContactForm, form='_edit_form', defaults=_edit_form_defaults)
     @ActionProtector("user")
@@ -560,7 +560,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             if self.form_result['confirm_email']:
                 h.flash(_('Confirmation message sent. Please check your email.'))
                 email_confirmation_request(c.user, c.user.emails[0].email)
-                redirect_to(controller='profile', action='edit')
+                redirect(url(controller='profile', action='edit'))
 
             # handle email
             email = self.form_result['email']
@@ -591,9 +591,9 @@ class ProfileController(SearchBaseController, UniversityListMixin):
                 c.user.gadugadu_get_news = self.form_result['gadugadu_get_news']
                 meta.Session.commit()
 
-            redirect_to(controller='profile', action='edit')
+            redirect(url(controller='profile', action='edit'))
         else:
-            redirect_to(controller='profile', action='edit')
+            redirect(url(controller='profile', action='edit'))
 
     @ActionProtector("user")
     def thank_you(self):
@@ -613,7 +613,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         c.user.location = self.form_result.get('location', None)
         meta.Session.commit()
         h.flash(_('Your university information has been updated.'))
-        redirect_to(url(controller='profile', action='welcome'))
+        redirect(url(controller='profile', action='welcome'))
 
     @ActionProtector("user")
     def js_update_location(self):
@@ -631,5 +631,5 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         if hasattr(self, 'form_result'):
             location = self.form_result.get('location', None)
             if location is not None:
-                redirect_to(location.url())
-        redirect_to(url(controller='profile', action='welcome'))
+                redirect(location.url())
+        redirect(url(controller='profile', action='welcome'))

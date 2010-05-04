@@ -1,7 +1,7 @@
 import logging
 
 from formencode import Schema, validators, compound, htmlfill
-from pylons.controllers.util import redirect_to, abort
+from pylons.controllers.util import redirect, abort
 from pylons import tmpl_context as c, url
 from pylons.i18n import _
 from pylons.decorators import validate
@@ -110,4 +110,4 @@ class StructureviewController(SearchBaseController):
 
             meta.Session.commit()
             h.flash(_("Information updated."))
-        redirect_to(controller='structureview', action='index', path='/'.join(location.path))
+        redirect(url(controller='structureview', action='index', path='/'.join(location.path)))

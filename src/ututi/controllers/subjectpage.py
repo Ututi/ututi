@@ -7,7 +7,7 @@ from lxml.html.diff import htmldiff
 
 from pylons import tmpl_context as c, request, url
 from pylons.decorators import validate
-from pylons.controllers.util import redirect_to, abort, redirect
+from pylons.controllers.util import abort, redirect
 
 from ututi.controllers.subject import subject_action
 from ututi.model import Subject, LocationTag, Page, PageVersion
@@ -119,21 +119,21 @@ class SubjectpageController(BaseController):
         version = PageVersion.get(version_id)
         page.save(version.title, version.content)
         meta.Session.commit()
-        redirect_to(page.url())
+        redirect(page.url())
 
     @page_action
     @ActionProtector("moderator")
     def delete(self, subject, page):
         page.deleted = c.user
         meta.Session.commit()
-        redirect_to(page.url())
+        redirect(page.url())
 
     @page_action
     @ActionProtector("moderator")
     def undelete(self, subject, page):
         page.deleted_by = None
         meta.Session.commit()
-        redirect_to(page.url())
+        redirect(page.url())
 
     @subject_action
     def add(self, subject):
@@ -148,7 +148,7 @@ class SubjectpageController(BaseController):
     @ActionProtector("user")
     def create(self, id, tags):
         if not hasattr(self, 'form_result'):
-            redirect_to(url_for(action='add'))
+            redirect(url.current(action='add'))
         location = LocationTag.get(tags)
         subject = Subject.get(location, id)
         page = Page(self.form_result['page_title'],

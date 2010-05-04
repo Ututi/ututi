@@ -4,7 +4,7 @@ from sqlalchemy.sql.expression import desc
 from formencode import Schema, validators, htmlfill
 
 from pylons.decorators import validate
-from pylons.controllers.util import redirect_to
+from pylons.controllers.util import redirect
 from pylons.controllers.util import abort
 from pylons import url
 from pylons import tmpl_context as c, config, request
@@ -148,9 +148,9 @@ class MailinglistController(GroupControllerBase):
         post.group = group
         post.reply_to = last_post
         meta.Session.commit()
-        redirect_to(controller='mailinglist',
+        redirect(url(controller='mailinglist',
                     action='thread',
-                    id=group.group_id, thread_id=thread.id)
+                    id=group.group_id, thread_id=thread.id))
 
     def _new_thread_form(self):
         return render('mailinglist/new.mako')
@@ -189,9 +189,9 @@ class MailinglistController(GroupControllerBase):
         post = GroupMailingListMessage.fromMessageText(unicode(message))
         post.group = group
         meta.Session.commit()
-        redirect_to(controller='mailinglist',
+        redirect(url(controller='mailinglist',
                     action='thread',
-                    id=group.group_id, thread_id=post.id)
+                    id=group.group_id, thread_id=post.id))
 
     @mailinglist_file_action
     @set_login_url
@@ -225,4 +225,4 @@ class MailinglistController(GroupControllerBase):
         post.group = group
         meta.Session.commit()
         h.flash(_('Your message to the group was successfully sent.'))
-        redirect_to(group.url())
+        redirect(group.url())

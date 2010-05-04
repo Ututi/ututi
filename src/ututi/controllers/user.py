@@ -6,7 +6,6 @@ from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql.expression import desc
 from pylons.controllers.util import abort, redirect
 from pylons import tmpl_context as c, request, url
-from routes.util import redirect_to
 from routes.util import url_for
 
 from ututi.controllers.home import sign_in_user
@@ -51,14 +50,14 @@ class UserController(BaseController):
             .limit(20).all()
 
         if user is c.user:
-            redirect_to(controller='profile', action='index')
+            redirect(url(controller='profile', action='index'))
         return render('user/index.mako')
 
     @profile_action
     @ActionProtector("root")
     def login_as(self, user):
         sign_in_user(user.emails[0].email)
-        redirect_to(controller='profile', action='home')
+        redirect(url(controller='profile', action='home'))
 
     @profile_action
     @ActionProtector("root")
@@ -94,7 +93,7 @@ class UserController(BaseController):
         try:
             medal = meta.Session.query(Medal).filter_by(id=medal_id).one()
         except NoResultFound:
-            redirect_to(action='medals') # Medal has been already taken away.
+            redirect(url.current(action='medals')) # Medal has been already taken away.
         if medal.user is not user:
             abort(404)
         meta.Session.delete(medal)
