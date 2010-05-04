@@ -1757,7 +1757,20 @@ class ForumPost(ContentItem):
         self.thread_id = thread_id
 
     def url(self):
-        return url(controller='forum', action='thread',
+        if self.category_id == 1:
+            controller = 'community'
+        elif self.category_id == 2:
+            controller = 'bugs'
+        else:
+            controller = 'forum'
+
+        category = ForumCategory.get(self.category_id)
+        if category.group_id:
+            group_id = category.group.group_id
+        else:
+            group_id = None
+        return url(controller=controller, action='thread',
+                   id=group_id,
                    category_id=self.category_id, thread_id=self.thread_id)
 
     @staticmethod
