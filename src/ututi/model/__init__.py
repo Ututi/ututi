@@ -741,14 +741,16 @@ class Medal(object):
 
     @staticmethod
     def available_medals():
-        return [('admin', _('Group admin')),
+        return [
                 ('admin2', _('Admin')),
-                ('buyer', _('Sponsor')),
-                ('buyer2', _('Gold sponsor')),
-                ('support', _('Moderator')),
-                ('support2', _('Best moderator')),
+                ('support2', _('Distinguished moderator')),
+                ('ututiman2', _('The best distinguished user')),
                 ('ututiman', _('Distinguished user')),
-                ('ututiman2', _('The best distinguished user'))]
+                ('buyer2', _('Gold sponsor')),
+                ('buyer', _('Sponsor')),
+                ('support', _('Moderator')),
+                ('admin', _('Group admin')),
+                ]
 
     @staticmethod
     def available_medal_types():
