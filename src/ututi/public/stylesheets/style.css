@@ -1252,6 +1252,10 @@ div.snippet-group {
   background: white url("../images/details/icon_type_group.png") left 5px no-repeat;
 }
 
+div.snippet-file {
+  background: white url("../images/details/icon_type_file.png") left 5px no-repeat;
+}
+
 div.snippet-subject {
   background: white url("../images/details/icon_type_subject.png") left 5px no-repeat;
 }

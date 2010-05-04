@@ -46,6 +46,16 @@
   </div>
 </%def>
 
+<%def name="file(object)">
+  <div class="search-item snippet-file">
+    <a href="${object.url()}" title="${object.title}" class="item-title larger">${object.title}</a>
+    <div class="description">
+      ${object.description}
+    </div>
+    ${item_tags(object)}
+  </div>
+</%def>
+
 <%def name="subject(object)">
   <div class="search-item snippet-subject">
     <a href="${object.url()}" title="${object.title}" class="item-title larger">${object.title}</a>

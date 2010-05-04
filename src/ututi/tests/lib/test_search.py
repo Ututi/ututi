@@ -107,7 +107,7 @@ def test_location_search():
     r"""Testing filtering by location.
 
         >>> sorted([result.object.title for result in search(tags=[u'vu'])])
-        [u'Biologijos pagrindai', u'Biology students', u'Test subject', u'page title', u'page title']
+        [u'Biologijos pagrindai', u'Biology students', u'Test subject', u'geografija', u'page title', u'page title']
 
         >>> sorted([result.object.title for result in search(tags=[u'ef'])])
         [u'Biology students', u'Ekologai']
@@ -180,6 +180,7 @@ def test_setup(test):
     meta.Session.add(p)
 
     f = File(u'test.txt', u'geografija', 'text/txt')
+    f.parent = s
     meta.Session.add(f)
 
     meta.Session.commit()

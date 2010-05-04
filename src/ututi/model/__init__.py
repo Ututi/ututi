@@ -1583,6 +1583,10 @@ class File(ContentItem):
     def isNullFile(self):
         return self.md5 == None
 
+    def snippet(self):
+        """Render a short snippet with the basic item's information. Used in search to render the results."""
+        return render_mako_def('/sections/content_snippets.mako','file', object=self)
+
     def filepath(self):
         """Calculate the path of a file, based on its md5 checksum."""
         dir_path = [config.get('files_path')]
