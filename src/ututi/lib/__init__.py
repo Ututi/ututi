@@ -2,6 +2,7 @@ import re
 import string
 import translitcodec
 import trans
+import traceback
 
 def urlify(text, maxlen=None):
     """
@@ -65,3 +66,9 @@ def _parse_header(line):
 def monkeypatch():
     import cgi
     cgi.parse_header = _parse_header
+    old_extract_tb = traceback.extract_tb
+    def _extract_tb(*args, **kwargs):
+        result = old_extract_tb(*args, **kwargs)
+        return [(filename, lineno, function, line or '')
+                for (filename, lineno, function, line) in result]
+    traceback.extract_tb = _extract_tb
