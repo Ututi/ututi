@@ -3,7 +3,7 @@
 <%def name="forum_info_portlet()">
   <%self:portlet id="forum_info_portlet">
     <%def name="header()">
-        <a href="${url.current(action='index')}" title="${c.category.title}">${c.category.title}</a>
+        <a href="${url(controller=c.controller, action='index', id=c.group_id, category_id=c.category.id)}" title="${c.category.title}">${c.category.title}</a>
     </%def>
     % if c.category.id == 1:
       <img id="forum-logo"  class="logo" src="${url('/images/community.png') }" alt="logo" />
@@ -50,8 +50,8 @@
     %endif
     <br style="clear: both;" />
     <div class="footer">
-      <a class="more" href="${url.current(action='index')}" title="${_('more')}">${_('more')}</a>
-      <a href="${url.current(action='new_thread')}" class="btn"><span>${new_post_title}</span></a>
+      <a class="more" href="${url(controller=c.controller, action='index')}" title="${_('more')}">${_('more')}</a>
+      <a href="${url(controller=c.controller, action='new_thread')}" class="btn"><span>${new_post_title}</span></a>
     </div>
   </%self:portlet>
 </%def>

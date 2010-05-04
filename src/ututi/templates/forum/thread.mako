@@ -1,6 +1,6 @@
 <%inherit file="/forum/index.mako" />
 
-<a class="back-link" href="${url.current(action='index', thread_id=None)}">${_('Back to the topic list')}</a>
+<a class="back-link" href="${url(controller=c.controller, action='index', id=c.group_id, category_id=c.category_id)}">${_('Back to the topic list')}</a>
 <h1>${c.thread.title}</h1>
 
 <table id="forum-thread">
@@ -26,7 +26,7 @@
       </div>
       <a class="btn" href="#reply"><span>${_('Reply')}</span></a>
       % if forum_post.created_by == c.user.id or (h.check_crowds(['moderator']) if c.group is not None else h.check_crowds(['root'])):
-        ${h.button_to(_('Edit'), url.current(action='edit', thread_id=forum_post.id))}
+        ${h.button_to(_('Edit'), url(controller=c.controller, action='edit', id=c.group_id, category_id=c.category_id, thread_id=forum_post.id))}
       % endif
     </div>
   </td>
@@ -36,7 +36,7 @@
 <br />
 <a name="reply"/>
 <h2>${_('Reply')}</h2>
-<form method="post" action="${url.current(action='reply')}"
+<form method="post" action="${url(controller=c.controller, action='reply', id=c.group_id, category_id=c.category_id, thread_id=c.thread_id)}"
      id="group_add_form" enctype="multipart/form-data">
   <div class="form-field">
     <label for="message">${_('Message')}</label>

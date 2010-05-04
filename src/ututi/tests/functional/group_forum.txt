@@ -64,9 +64,7 @@ Let's go back to the topic list.
 
     >>> print browser.printQuery('//td[@class="subject"]')
     <td class="subject">
-      <a class="thread-subject" href="/group/moderators/forum/3/thread/3">
-          What's up?
-        </a>
+      <a class="thread-subject" href="/group/moderators/forum/3/thread/3">What's up?</a>
     </td>
     None
 
@@ -76,8 +74,6 @@ And all the way up to the category list:
 
     >>> print browser.printQuery('//h2[@class="category"]')
     <h2 class="category">
-      <a href="/group/moderators/forum/3">
-            General
-        </a>
+      <a href="/group/moderators/forum/3">General</a>
     </h2>
     None

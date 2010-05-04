@@ -16,7 +16,7 @@
   <h1 style="float: left;">${_('Forum')}</h1>
    % if h.check_crowds(['admin', 'moderator']):
      <div style="float: left; margin-top: 8px; margin-left: 10px;">
-       <a class="btn" href="${url.current(action='new_category')}"><span>${_("New category")}</span></a>
+       <a class="btn" href="${url(controller=c.controller, action='new_category', id=c.group_id)}"><span>${_("New category")}</span></a>
      </div>
    % endif
 </div>
@@ -29,11 +29,12 @@
 % for category in c.group.forum_categories:
   <hr />
   <h2 class="category">
-      <a href="${url(controller='forum', action='index', id=c.group.group_id, category_id=category.id)}">
-        ${category.title}
-    </a></h2>
+      <a href="${url(controller=c.controller, action='index', id=c.group_id, category_id=category.id)}"
+          >${category.title}</a>
+  </h2>
   <div>${category.description}</div>
   ${forum_thread_list(category, n=5)}
-  <a class="btn" href="${url.current(category_id=category.id, action='new_thread')}"><span>${_("New topic")}</span></a>
+  <a class="btn" href="${url(controller=c.controller, action='new_thread', id=id, category_id=category.id)}"
+      ><span>${_("New topic")}</span></a>
 % endfor
 </table>

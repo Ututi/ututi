@@ -1751,6 +1751,13 @@ class ForumPost(ContentItem):
         return url(controller='forum', action='thread',
                    category_id=self.category_id, thread_id=self.thread_id)
 
+    @staticmethod
+    def get(id):
+        try:
+            return meta.Session.query(ForumPost).filter_by(id=id).one()
+        except NoResultFound:
+            return None
+
 
 blog_table = None
 class BlogEntry(object):

@@ -23,13 +23,13 @@
 </%def>
 
 % if c.group_id is not None:
-    <a class="back-link" href="${url.current(action='list')}">${_('Back to category list')}</a>
+    <a class="back-link" href="${url(controller=c.controller, action='categories', id=c.group_id)}">${_('Back to category list')}</a>
 % endif
 
 <div id="page_header">
   <h1 style="float: left;">${c.category.title}</h1>
   <div style="float: left; margin-top: 8px; margin-left: 10px;">
-      <a class="btn" href="${url.current(action='new_thread')}"><span>${_("New topic")}</span></a>
+      <a class="btn" href="${url(controller=c.controller, action='new_thread', id=c.group_id, category_id=c.category.id)}"><span>${_("New topic")}</span></a>
   </div>
 </div>
 
@@ -40,15 +40,8 @@
    % for forum_post in category.top_level_messages()[:n]:
   <tr>
     <td class="subject">
-      <a class="thread-subject"
-      % if category.id not in [1, 2]:
-       href="${url.current(action='thread', category_id=category.id, thread_id=forum_post['thread_id'])}"
-      % else:
-       href="${url.current(action='thread', thread_id=forum_post['thread_id'])}"
-      % endif
-      >
-        ${forum_post['title']}
-      </a>
+      <a class="thread-subject" href="${url(controller=c.controller, action='thread', id=c.group_id, category_id=category.id, thread_id=forum_post['thread_id'])}"
+        >${forum_post['title']}</a>
     </td>
     <td class="count">
       ${ungettext("%(count)s reply", "%(count)s replies", forum_post['reply_count']) % dict(count = forum_post['reply_count'])}
