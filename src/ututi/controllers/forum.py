@@ -64,10 +64,6 @@ class NewTopicForm(NewReplyForm):
     title = validators.UnicodeString(not_empty=True, strip=True)
 
 
-def forum_url(controller='forum', **kwargs):
-    return url(controller=controller, **kwargs)
-
-
 def group_action(method):
     def _group_action(self, id=None):
         self.set_up_context(id=id)
