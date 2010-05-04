@@ -18,6 +18,9 @@
   <td class="forum_post">
     <div class="forum_post-header">
       <a href="${forum_post.created.url()}">${forum_post.created.fullname}</a>
+      % for medal in forum_post.created.all_medals()[:1]:
+          ${medal.img_tag()}
+      % endfor
       <span class="small">${h.fmt_dt(forum_post.created_on)}</span>
     </div>
     <div class="forum_post-content">

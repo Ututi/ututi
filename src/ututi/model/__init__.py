@@ -681,6 +681,7 @@ class User(object):
                            'buyer': is_supporter}
 
         medals = list(self.medals)
+
         def has_medal(medal_type):
             for medal in medals:
                 if medal.medal_type == medal_type:
@@ -691,6 +692,8 @@ class User(object):
         for medal_type, test_f in implicit_medals.items():
             if test_f and not has_medal(medal_type):
                 medals.append(Medal(self, medal_type))
+        order = [m[0] for m in Medal.available_medals()]
+        medals.sort(key=lambda m: order.index(m.medal_type))
         return medals
 
     def __init__(self, fullname, password, gen_password=True):
