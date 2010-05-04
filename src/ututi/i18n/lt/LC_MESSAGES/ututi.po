@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-05-04 16:50+0300\n"
+"PO-Revision-Date: 2010-05-04 17:13+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -61,10 +61,13 @@ msgstr "ID nėra el. paštas. Ar ne?"
 msgid "Bad file type, only files of the types '%(allowed)s' are supported."
 msgstr "Netinkamas failo tipas. Tik '%(allowed)s' failai yra palaikomi."
 
-msgid "Forum"
+msgid "Mailing List"
 msgstr "Grupės paštas"
 
-msgid "What's new?"
+msgid "Forum"
+msgstr "Forumas"
+
+msgid "What's New?"
 msgstr "Kas naujo?"
 
 msgid "Members"
@@ -105,6 +108,9 @@ msgstr "Narys"
 
 msgid "Leave group"
 msgstr "Palikti šią grupę"
+
+msgid "What's new?"
+msgstr "Kas naujo?"
 
 msgid "Mailing list"
 msgstr "El. pašto konferencija"

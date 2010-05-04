@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-05-04 16:50+0300\n"
+"POT-Creation-Date: 2010-05-04 17:13+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,10 +60,13 @@ msgstr ""
 msgid "Bad file type, only files of the types '%(allowed)s' are supported."
 msgstr ""
 
+msgid "Mailing List"
+msgstr ""
+
 msgid "Forum"
 msgstr ""
 
-msgid "What's new?"
+msgid "What's New?"
 msgstr ""
 
 msgid "Members"
@@ -103,6 +106,9 @@ msgid "Member"
 msgstr ""
 
 msgid "Leave group"
+msgstr ""
+
+msgid "What's new?"
 msgstr ""
 
 msgid "Mailing list"

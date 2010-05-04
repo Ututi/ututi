@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-05-04 16:50+0300\n"
+"PO-Revision-Date: 2010-05-04 17:13+0300\n"
 "Last-Translator: Jaroslav Šatkevič <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -61,11 +61,14 @@ msgstr "ID nie może być wykorzystywane jako adres e-mail"
 msgid "Bad file type, only files of the types '%(allowed)s' are supported."
 msgstr "Niewłaściwy rodzaj pliku. Dozwolone formaty:'%(allowed)s'"
 
+msgid "Mailing List"
+msgstr ""
+
 msgid "Forum"
 msgstr "Forum"
 
-msgid "What's new?"
-msgstr "Najnowsze"
+msgid "What's New?"
+msgstr ""
 
 msgid "Members"
 msgstr "Użytkownicy"
@@ -105,6 +108,9 @@ msgstr "Członek"
 
 msgid "Leave group"
 msgstr "Wyjdź z grupy"
+
+msgid "What's new?"
+msgstr "Najnowsze"
 
 msgid "Mailing list"
 msgstr ""

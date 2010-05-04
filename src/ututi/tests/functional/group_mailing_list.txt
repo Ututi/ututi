@@ -4,7 +4,7 @@ Test for group mailing list UI
     >>> browser = Browser.logIn()
 
     >>> browser.getLink('Moderatoriai').click()
-    >>> browser.getLink('Forum').click()
+    >>> browser.getLink('Mailing List').click()
 
 There are no threads posted at the moment:
 

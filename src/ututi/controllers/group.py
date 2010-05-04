@@ -203,7 +203,7 @@ class GroupControllerBase(BaseController):
         """
         if c.group.mailinglist_enabled:
             forum_entry = {
-             'title': _('Forum'),
+             'title': _('Mailing List'),
              'link': url(controller='group', action='mailinglist', id=c.group.group_id),
              'selected': selected == 'mailinglist',
              'event': h.trackEvent(c.group, 'mailinglist', 'breadcrumb')}
@@ -215,7 +215,7 @@ class GroupControllerBase(BaseController):
              'event': h.trackEvent(c.group, 'forum', 'breadcrumb')}
 
         bcs = [
-            {'title': _("What's new?"),
+            {'title': _("What's New?"),
              'link': url(controller='group', action='home', id=c.group.group_id),
              'selected': selected == 'home',
              'event': h.trackEvent(c.group, 'home', 'breadcrumb')},
