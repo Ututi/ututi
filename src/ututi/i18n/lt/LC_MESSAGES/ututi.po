@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-04-30 15:54+0300\n"
+"PO-Revision-Date: 2010-05-04 16:50+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 0.9.4\n"
+"Generated-By: Babel 0.9.5\n"
 
 msgid "Blog snippet created."
 msgstr "Blogo ištrauka sukurta."
@@ -86,8 +86,7 @@ msgstr "Jūs tapote grupės %s nariu!"
 msgid ""
 "Your request to join the group has been forwarded to the group's "
 "administrators. Thanks!"
-msgstr ""
-"Prašymas prisijungti prie grupės persiųstas grupės administratoriams."
+msgstr "Prašymas prisijungti prie grupės persiųstas grupės administratoriams."
 
 msgid "You already are a member of this group."
 msgstr "Jūs jau priklausote šiai grupei. "
@@ -435,29 +434,29 @@ msgstr "Toks el. paštas jau yra."
 msgid "Id does not reference what we either a group or a subject."
 msgstr ""
 
-msgid "Group admin"
-msgstr "Grupės administratorius"
-
 msgid "Admin"
 msgstr "Administratorius"
 
-msgid "Sponsor"
-msgstr "Rėmėjas"
-
-msgid "Gold sponsor"
-msgstr "Auksinis sponsorius"
-
-msgid "Moderator"
-msgstr "Moderatorius"
-
-msgid "Best moderator"
+msgid "Distinguished moderator"
 msgstr "Auksinis moderatorius"
+
+msgid "Champion"
+msgstr "Čempionas"
 
 msgid "Distinguished user"
 msgstr "Ututininkas"
 
-msgid "The best distinguished user"
-msgstr "Super-ututininkas"
+msgid "Gold sponsor"
+msgstr "Auksinis sponsorius"
+
+msgid "Sponsor"
+msgstr "Rėmėjas"
+
+msgid "Moderator"
+msgstr "Moderatorius"
+
+msgid "Group admin"
+msgstr "Grupės administratorius"
 
 #, python-format
 msgid "A new file has been uploaded for the %(title)s:"
@@ -1161,8 +1160,9 @@ msgid ""
 "%(fullname)s on the Ututi system. If this email belongs to you, confirm "
 "it by clicking on this link:"
 msgstr ""
-"Prašome patvirtinti, kad %(fullname)s yra šio el. pašto adreso savininkas."
-" Jei šis el. pašto adresas priklauso jums, patvirtinkite tai šia nuoroda:"
+"Prašome patvirtinti, kad %(fullname)s yra šio el. pašto adreso "
+"savininkas. Jei šis el. pašto adresas priklauso jums, patvirtinkite tai "
+"šia nuoroda:"
 
 msgid "Ututi team"
 msgstr "Ututi komanda"
@@ -1208,12 +1208,14 @@ msgid ""
 "The Ututi team\n"
 msgstr ""
 "Sveiki,\n"
-"Jūsų draugas %(author)s naudoja Ututi.lt, žiniatinklio sistemą studentams, ir\n"
+"Jūsų draugas %(author)s naudoja Ututi.lt, žiniatinklio sistemą "
+"studentams, ir\n"
 "nori pakviesti jus į grupę %(group_title)s < %(group_url)s >.\n"
 "Ututi sistemoje rasite studijų medžiagą ir galėsite dalintis failais su \n"
 "kitais grupės nariais bei naudotis grupės forumu.\n"
 "\n"
-"Norėdami prisijungti prie grupės, turite prisiregistruoti Ututi sistemoje:\n"
+"Norėdami prisijungti prie grupės, turite prisiregistruoti Ututi "
+"sistemoje:\n"
 "\n"
 "%(link)s\n"
 "\n"
@@ -1284,8 +1286,8 @@ msgid ""
 "%(user_name)s has been using Ututi, a portal for students, for some time "
 "now and recommends you to try it."
 msgstr ""
-"%(user_name)s jau kurį laiką naudojasi Ututi, portalu studentams, "
-"ir siūlo šią sistemą pabandyti ir Jums."
+"%(user_name)s jau kurį laiką naudojasi Ututi, portalu studentams, ir "
+"siūlo šią sistemą pabandyti ir Jums."
 
 msgid ""
 "Ututi is a system for students that encourages collaboration and sharing "
@@ -1314,6 +1316,15 @@ msgstr "Kategorijų nėra"
 msgid "New topic"
 msgstr "Nauja tema"
 
+msgid "Back to thread"
+msgstr ""
+
+msgid "Message"
+msgstr "Pranešimas"
+
+msgid "Submit"
+msgstr ""
+
 msgid "Back to category list"
 msgstr "Atgal į kategorijų sąrašą"
 
@@ -1329,9 +1340,6 @@ msgstr "Grįžti į temų sąrašą"
 
 msgid "Subject"
 msgstr "Temos antraštė"
-
-msgid "Message"
-msgstr "Pranešimas"
 
 msgid "Post"
 msgstr "Rašyti pranešimą"
@@ -1463,6 +1471,10 @@ msgstr "Redaguoti grupės pagrindinį puslapį"
 
 msgid "Group page is visible to everybody"
 msgstr "Grupės puslapis rodomas visiems"
+
+#, python-format
+msgid "You can keep up to %s of private group files here (e.g. pictures)"
+msgstr "Čia galite laikyti iki %s privačių grupės failų (pvz. nuotraukų)"
 
 msgid "Add more subjects"
 msgstr "Pridėkite daugiau dalykų"
@@ -1778,9 +1790,7 @@ msgstr "Atstatyti"
 msgid ""
 "You are viewing an old version of this page created by %(link_to_user)s "
 "on %(date)s"
-msgstr ""
-"Matote ankstesnę puslapio versiją, kurią sukūrė %(link_to_user)s "
-"%(date)s"
+msgstr "Matote ankstesnę puslapio versiją, kurią sukūrė %(link_to_user)s %(date)s"
 
 #, python-format
 msgid "Go back to %(subject_title)s"
@@ -1791,6 +1801,66 @@ msgstr "Rodyti istoriją"
 
 msgid "Last edit:"
 msgstr "Paskutinis taisymas:"
+
+msgid "Join Ututi"
+msgstr "Prisijunk prie Ututi"
+
+msgid "Fullname"
+msgstr "Vardas Pavardė"
+
+msgid "Gadu gadu"
+msgstr "Gadu gadu"
+
+msgid "Repeat password"
+msgstr "Pakartoti slaptažodį"
+
+msgid "I agree to the "
+msgstr "Sutinku su"
+
+msgid "terms of use"
+msgstr "naudojimosi sistema taisyklėmis"
+
+msgid "Register"
+msgstr "registruotis"
+
+msgid "Registration"
+msgstr "Registracija"
+
+msgid "Join"
+msgstr "Prisijunk"
+
+msgid "Your email address"
+msgstr "Tavo el. pašto adresas"
+
+msgid "Login"
+msgstr "Prisjungti"
+
+#, python-format
+msgid "<em>%(count)s</em> active poster"
+msgid_plural "<em>%(count)s</em> active posters"
+msgstr[0] "<em>%(count)s</em> aktyvus naudotojas"
+msgstr[1] "<em>%(count)s</em> aktyvūs naudotojai"
+msgstr[2] "<em>%(count)s</em> aktyvių naudotojų"
+
+#, python-format
+msgid "<em>%(count)s</em> topic"
+msgid_plural "<em>%(count)s</em> topics"
+msgstr[0] "<em>%(count)s</em> tema"
+msgstr[1] "<em>%(count)s</em> temos"
+msgstr[2] "<em>%(count)s</em> temų"
+
+#, python-format
+msgid "<em>%(count)s</em> post"
+msgid_plural "<em>%(count)s</em> posts"
+msgstr[0] "<em>%(count)s</em> pranešimas"
+msgstr[1] "<em>%(count)s</em> pranešimai"
+msgstr[2] "<em>%(count)s</em> pranešimų"
+
+msgid "There are no messages."
+msgstr "Pranešimų nėra."
+
+msgid "more"
+msgstr "daugiau"
 
 msgid "Messages in community forum"
 msgstr "Bendruomenės forumo pranešimai"
@@ -1804,14 +1874,219 @@ msgstr "<strong>Bugs</strong> forumo pranešimai."
 msgid "Report a bug"
 msgstr "Pranešk apie klaidą"
 
+msgid "Group information"
+msgstr "Informacija apie grupę"
+
+msgid "Mailing list address"
+msgstr "Grupės el. konferencijos (el. pašto) adresas"
+
+#, python-format
+msgid "%(count)s member"
+msgid_plural "%(count)s members"
+msgstr[0] "%(count)s narys"
+msgstr[1] "%(count)s nariai"
+msgstr[2] "%(count)s narių"
+
+msgid "more settings"
+msgstr "daugiau nustatymų"
+
+msgid "Do not get email"
+msgstr "Negauti el. laiškų"
+
+msgid "Get email"
+msgstr "Gauti el. laiškus"
+
+msgid "Edit group settings"
+msgstr "Keisti grupės nustatymus"
+
+msgid "All watched subjects"
+msgstr "Visi stebimi dalykai"
+
+msgid "Watched subjects"
+msgstr "Stebimi dalykai"
+
+msgid "Your group is not watching any subjects!"
+msgstr ""
+"Raskite dalykus, kuriuos studijuojate ir pridėkite prie grupės stebimų "
+"dalykų sąrašo."
+
+msgid "choose subjects"
+msgstr "pasirinkti dalykus"
+
+msgid ""
+"Watching subjects means your group will be informed of all the changes "
+"that happen in these subjects: new files, new pages etc."
+msgstr ""
+"Visi grupės nariai gaus pranešimus apie įvykius stebimuose dalykuose: "
+"naujus failus, puslapius ir t.t."
+
+msgid "email your group"
+msgstr "rašyti laišką grupei"
+
+msgid "Write an email to the group's forum - accessible by all your groupmates."
+msgstr "Parašyk laišką į grupės forumą, kurį skaito visi tavo grupiokai."
+
+msgid "invite groupmates"
+msgstr "pakviesti grupiokus"
+
+msgid "Invite your groupmates to use Ututi with you."
+msgstr "Pakviesk grupiokus į Ututi!"
+
+msgid "Everywhere"
+msgstr "visur"
+
+msgid "in-Subjects"
+msgstr "dalykuose"
+
+msgid "Search-btn"
+msgstr "Ieškok"
+
+msgid "University information"
+msgstr "Universiteto informacija"
+
+msgid "Faculty information"
+msgstr "Fakulteto informacija"
+
+#, python-format
+msgid "%(count)s <em>subject</em>"
+msgid_plural "%(count)s <em>subjects</em>"
+msgstr[0] "%(count)s <em>dalykas</em>"
+msgstr[1] "%(count)s <em>dalykai</em>"
+msgstr[2] "%(count)s <em>dalykų</em>"
+
+#, python-format
+msgid "%(count)s <em>group</em>"
+msgid_plural "%(count)s <em>groups</em>"
+msgstr[0] "%(count)s <em>grupė</em>"
+msgstr[1] "%(count)s <em>grupės</em>"
+msgstr[2] "%(count)s <em>grupių</em>"
+
+#, python-format
+msgid "%(count)s <em>file</em>"
+msgid_plural "%(count)s <em>files</em>"
+msgstr[0] "%(count)s <em>failas</em>"
+msgstr[1] "%(count)s <em>failai</em>"
+msgstr[2] "%(count)s <em>failų</em>"
+
+msgid "Latest groups"
+msgstr "Naujausios grupės"
+
+msgid "There are no groups yet."
+msgstr "Grupių dar nėra."
+
+msgid "All groups"
+msgstr "Visos grupės"
+
+msgid "Create group"
+msgstr "kurti naują grupę"
+
+msgid "Subject information"
+msgstr "Informacija apie dalyką"
+
+msgid "Lecturer"
+msgstr "Dėstytojas"
+
+msgid "Watch subject"
+msgstr "stebėti dalyką"
+
+msgid "Stop watching the subject"
+msgstr "nebestebėti dalyko"
+
+msgid "By watching a subject, you will be informed about all the changes in it."
+msgstr ""
+"Paspaudę stebėti dalyką Jūs gausite pranešimus apie visus pasikeitimus "
+"šiame dalyke."
+
+msgid "Delete subject"
+msgstr "Ištrinti dalyką"
+
+msgid "upload a file to.."
+msgstr "įkelti failą į.."
+
+msgid "Quickly upload files to your groups and subjects."
+msgstr "Greitas failų įkėlimas į grupes ir dalykus."
+
+msgid "You are not watching any subjects."
+msgstr ""
+"Raskite dalykus, kuriuos studijuojate ir pridėkite prie savo stebimų "
+"dalykų sąrašo."
+
+msgid "More subjects"
+msgstr "Daugiau dalykų"
+
+msgid ""
+"Add watched subjects to your watched subjects' list and receive "
+"notifications about changes in these subjects"
+msgstr ""
+"Prisidėkite studijuojamus dalykus prie stebimų dalykų sąrašo ir gaukite "
+"pranešimus apie pasiketimus šiuose dalykuose."
+
 msgid "My groups"
 msgstr "Mano grupės"
+
+msgid "You are not a member of any."
+msgstr ""
+"Suraskite Ututi savo akademinę grupę ir prijunkite prie jos savo grupės "
+"draugus. "
+
+msgid "More groups"
+msgstr "Daugiau grupių"
 
 msgid "Support us"
 msgstr "Paremkite mus"
 
+#, python-format
+msgid ""
+"You like <a href=\"%(url)s\">Ututi</a> and you want to contribute? "
+"Support us!"
+msgstr "Patinka <a href=\"%(url)s\">Ututi</a> ir nori prisidėti? Paremk mus!"
+
+msgid "Support now"
+msgstr "Paremk mus dabar"
+
+msgid "supporters"
+msgstr "rėmėjai"
+
 msgid "My information"
 msgstr "Apie mane"
+
+msgid "Edit profile"
+msgstr "redaguoti profilį"
+
+msgid "create new subject"
+msgstr "kurti naują dalyką"
+
+msgid "recommend Ututi to your friends"
+msgstr "rekomenduok Ututi draugams"
+
+msgid "Enter the emails of your groupmates, separated by commas or new lines."
+msgstr ""
+"Įvesk grupiokų el. pašto adresus, po vieną į eilutę arba atskirtus "
+"kableliais"
+
+msgid "Send invitation"
+msgstr "Siųsti pakvietimą"
+
+msgid "Ututi news"
+msgstr "Ututi naujienos"
+
+msgid "More news"
+msgstr "Daugiau naujienų"
+
+msgid "Friends of ututi"
+msgstr "Ututi draugai"
+
+msgid "facebook_link"
+msgstr "http://facebook.com/ututi"
+
+msgid "Find us on Facebook"
+msgstr "Mūsų erdvė Facebook"
+
+msgid "blog_link"
+msgstr "http://blog.ututi.lt"
+
+msgid "Read our blog"
+msgstr "Mūsų blogas"
 
 msgid "Edit your profile"
 msgstr "redaguoti profilį"
@@ -1866,9 +2141,6 @@ msgstr "numeris patvirtintas"
 msgid "Receive news into gg"
 msgstr "Gauti naujienas į GG"
 
-msgid "Your email address"
-msgstr "Tavo el. pašto adresas"
-
 msgid "get confirmation email"
 msgstr "gauti patvirtinimo el. laišką"
 
@@ -1906,14 +2178,9 @@ msgstr ""
 msgid "These are the files from the the subjects you or your group are watching."
 msgstr "Tai yra tavo stebimų dalykų ir grupių failai."
 
-msgid "Everywhere"
-msgstr "visur"
-
-msgid "in-Subjects"
-msgstr "dalykuose"
-
-msgid "Search-btn"
-msgstr "Ieškok"
+#, python-format
+msgid "Private files of the group %s"
+msgstr "Grupės '%s' privatūs failai"
 
 msgid "Filter by school:"
 msgstr "Filtruoti pagal mokymo įstaigą"
@@ -1923,16 +2190,6 @@ msgstr "Nėra grupės, kurios ieškojote?"
 
 msgid "Create your group!"
 msgstr "Sukurti savo grupę"
-
-#, python-format
-msgid "%(count)s member"
-msgid_plural "%(count)s members"
-msgstr[0] "%(count)s narys"
-msgstr[1] "%(count)s nariai"
-msgstr[2] "%(count)s narių"
-
-msgid "Mailing list address"
-msgstr "Grupės el. konferencijos (el. pašto) adresas"
 
 msgid "Latest messages"
 msgstr "Naujausios žinutės"
@@ -1993,11 +2250,6 @@ msgstr ""
 
 msgid "Personally watched subjects"
 msgstr "Asmeniškai stebimi dalykai"
-
-msgid "You are not watching any subjects."
-msgstr ""
-"Raskite dalykus, kuriuos studijuojate ir pridėkite prie savo stebimų "
-"dalykų sąrašo."
 
 msgid "Watch more subjects"
 msgstr "Stebėti daugiau dalykų"
@@ -2178,6 +2430,9 @@ msgstr "Padidinti failų srities limitą"
 msgid "Increase limits"
 msgstr "Padidinti limitą"
 
+msgid "Upload file"
+msgstr "Įkelti failą"
+
 msgid "New folder:"
 msgstr "Kurti aplanką"
 
@@ -2221,8 +2476,8 @@ msgid ""
 "%(author)s has sent you an invitation to group %(group)s. Do you want to "
 "become a member of this group?"
 msgstr ""
-"%(author)s išsiuntė jums kvietimą į grupę %(group)s. Ar norite tapti "
-"šios grupės nariu?"
+"%(author)s išsiuntė jums kvietimą į grupę %(group)s. Ar norite tapti šios"
+" grupės nariu?"
 
 msgid "Reject"
 msgstr "Atmesti"
@@ -2249,9 +2504,6 @@ msgstr "Hierarchijos naršymas"
 
 msgid "back to search"
 msgstr "atgal į paiešką"
-
-msgid "Lecturer"
-msgstr "Dėstytojas"
 
 msgid "Brief description of the subject"
 msgstr "Trumpas dalyko aprašymas"
@@ -2287,6 +2539,9 @@ msgstr "Keisti dalyko aprašymą"
 
 msgid "The subject's description is empty."
 msgstr "Dalyko aprašymas tuščias."
+
+msgid "Subject files"
+msgstr "Dalyko failai"
 
 msgid "The subject has no pages yet - create one!"
 msgstr "Dalykas dar neturi puslapių - sukurkite!"
@@ -2358,253 +2613,4 @@ msgstr "įvesk pavadinimą arba sukurk naują"
 
 msgid "enter the name"
 msgstr "įvesk pavadinimą"
-
-#, python-format
-msgid "You can keep up to %s of private group files here (e.g. pictures)"
-msgstr "Čia galite laikyti iki %s privačių grupės failų (pvz. nuotraukų)"
-
-msgid "Login"
-msgstr "Prisjungti"
-
-msgid "Join Ututi"
-msgstr "Prisijunk prie Ututi"
-
-msgid "Fullname"
-msgstr "Vardas Pavardė"
-
-msgid "Gadu gadu"
-msgstr "Gadu gadu"
-
-msgid "Repeat password"
-msgstr "Pakartoti slaptažodį"
-
-msgid "I agree to the "
-msgstr "Sutinku su"
-
-msgid "terms of use"
-msgstr "naudojimosi sistema taisyklėmis"
-
-msgid "Register"
-msgstr "registruotis"
-
-msgid "Registration"
-msgstr "Registracija"
-
-msgid "Join"
-msgstr "Prisijunk"
-
-msgid "There are no messages."
-msgstr "Pranešimų nėra."
-
-msgid "more"
-msgstr "daugiau"
-
-#, python-format
-msgid "<em>%(count)s</em> active poster"
-msgid_plural "<em>%(count)s</em> active posters"
-msgstr[0] "<em>%(count)s</em> aktyvus naudotojas"
-msgstr[1] "<em>%(count)s</em> aktyvūs naudotojai"
-msgstr[2] "<em>%(count)s</em> aktyvių naudotojų"
-
-#, python-format
-msgid "<em>%(count)s</em> topic"
-msgid_plural "<em>%(count)s</em> topics"
-msgstr[0] "<em>%(count)s</em> tema"
-msgstr[1] "<em>%(count)s</em> temos"
-msgstr[2] "<em>%(count)s</em> temų"
-
-#, python-format
-msgid "<em>%(count)s</em> post"
-msgid_plural "<em>%(count)s</em> posts"
-msgstr[0] "<em>%(count)s</em> pranešimas"
-msgstr[1] "<em>%(count)s</em> pranešimai"
-msgstr[2] "<em>%(count)s</em> pranešimų"
-
-msgid "email your group"
-msgstr "rašyti laišką grupei"
-
-msgid "Write an email to the group's forum - accessible by all your groupmates."
-msgstr "Parašyk laišką į grupės forumą, kurį skaito visi tavo grupiokai."
-
-msgid "All watched subjects"
-msgstr "Visi stebimi dalykai"
-
-msgid "Watched subjects"
-msgstr "Stebimi dalykai"
-
-msgid "Your group is not watching any subjects!"
-msgstr ""
-"Raskite dalykus, kuriuos studijuojate ir pridėkite prie grupės stebimų "
-"dalykų sąrašo."
-
-msgid "choose subjects"
-msgstr "pasirinkti dalykus"
-
-msgid ""
-"Watching subjects means your group will be informed of all the changes "
-"that happen in these subjects: new files, new pages etc."
-msgstr ""
-"Visi grupės nariai gaus pranešimus apie įvykius stebimuose dalykuose: "
-"naujus failus, puslapius ir t.t."
-
-msgid "invite groupmates"
-msgstr "pakviesti grupiokus"
-
-msgid "Invite your groupmates to use Ututi with you."
-msgstr "Pakviesk grupiokus į Ututi!"
-
-msgid "Group information"
-msgstr "Informacija apie grupę"
-
-msgid "more settings"
-msgstr "daugiau nustatymų"
-
-msgid "Do not get email"
-msgstr "Negauti el. laiškų"
-
-msgid "Get email"
-msgstr "Gauti el. laiškus"
-
-msgid "Edit group settings"
-msgstr "Keisti grupės nustatymus"
-
-msgid "Latest groups"
-msgstr "Naujausios grupės"
-
-msgid "There are no groups yet."
-msgstr "Grupių dar nėra."
-
-msgid "All groups"
-msgstr "Visos grupės"
-
-msgid "Create group"
-msgstr "kurti naują grupę"
-
-msgid "University information"
-msgstr "Universiteto informacija"
-
-msgid "Faculty information"
-msgstr "Fakulteto informacija"
-
-#, python-format
-msgid "%(count)s <em>subject</em>"
-msgid_plural "%(count)s <em>subjects</em>"
-msgstr[0] "%(count)s <em>dalykas</em>"
-msgstr[1] "%(count)s <em>dalykai</em>"
-msgstr[2] "%(count)s <em>dalykų</em>"
-
-#, python-format
-msgid "%(count)s <em>group</em>"
-msgid_plural "%(count)s <em>groups</em>"
-msgstr[0] "%(count)s <em>grupė</em>"
-msgstr[1] "%(count)s <em>grupės</em>"
-msgstr[2] "%(count)s <em>grupių</em>"
-
-#, python-format
-msgid "%(count)s <em>file</em>"
-msgid_plural "%(count)s <em>files</em>"
-msgstr[0] "%(count)s <em>failas</em>"
-msgstr[1] "%(count)s <em>failai</em>"
-msgstr[2] "%(count)s <em>failų</em>"
-
-msgid "Subject information"
-msgstr "Informacija apie dalyką"
-
-msgid "Watch subject"
-msgstr "stebėti dalyką"
-
-msgid "Stop watching the subject"
-msgstr "nebestebėti dalyko"
-
-msgid "By watching a subject, you will be informed about all the changes in it."
-msgstr ""
-"Paspaudę stebėti dalyką Jūs gausite pranešimus apie visus pasikeitimus "
-"šiame dalyke."
-
-msgid "Delete subject"
-msgstr "Ištrinti dalyką"
-
-msgid "upload a file to.."
-msgstr "įkelti failą į.."
-
-msgid "Quickly upload files to your groups and subjects."
-msgstr "Greitas failų įkėlimas į grupes ir dalykus."
-
-msgid "More subjects"
-msgstr "Daugiau dalykų"
-
-msgid ""
-"Add watched subjects to your watched subjects' list and receive "
-"notifications about changes in these subjects"
-msgstr ""
-"Prisidėkite studijuojamus dalykus prie stebimų dalykų sąrašo ir gaukite "
-"pranešimus apie pasiketimus šiuose dalykuose."
-
-#, python-format
-msgid ""
-"You like <a href=\"%(url)s\">Ututi</a> and you want to contribute? "
-"Support us!"
-msgstr "Patinka <a href=\"%(url)s\">Ututi</a> ir nori prisidėti? Paremk mus!"
-
-msgid "Support now"
-msgstr "Paremk mus dabar"
-
-msgid "supporters"
-msgstr "rėmėjai"
-
-msgid "recommend Ututi to your friends"
-msgstr "rekomenduok Ututi draugams"
-
-msgid "Enter the emails of your groupmates, separated by commas or new lines."
-msgstr ""
-"Įvesk grupiokų el. pašto adresus, po vieną į eilutę arba atskirtus "
-"kableliais"
-
-msgid "Send invitation"
-msgstr "Siųsti pakvietimą"
-
-msgid "Edit profile"
-msgstr "redaguoti profilį"
-
-msgid "You are not a member of any."
-msgstr ""
-"Suraskite Ututi savo akademinę grupę ir prijunkite prie jos savo grupės "
-"draugus. "
-
-msgid "More groups"
-msgstr "Daugiau grupių"
-
-msgid "create new subject"
-msgstr "kurti naują dalyką"
-
-msgid "Ututi news"
-msgstr "Ututi naujienos"
-
-msgid "More news"
-msgstr "Daugiau naujienų"
-
-msgid "facebook_link"
-msgstr "http://facebook.com/ututi"
-
-msgid "Find us on Facebook"
-msgstr "Mūsų erdvė Facebook"
-
-msgid "blog_link"
-msgstr "http://blog.ututi.lt"
-
-msgid "Read our blog"
-msgstr "Mūsų blogas"
-
-msgid "Friends of ututi"
-msgstr "Ututi draugai"
-
-#, python-format
-msgid "Private files of the group %s"
-msgstr "Grupės '%s' privatūs failai"
-
-msgid "Upload file"
-msgstr "Įkelti failą"
-
-msgid "Subject files"
-msgstr "Dalyko failai"
 

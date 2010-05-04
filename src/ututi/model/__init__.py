@@ -747,7 +747,7 @@ class Medal(object):
         return [
                 ('admin2', _('Admin')),
                 ('support2', _('Distinguished moderator')),
-                ('ututiman2', _('The best distinguished user')),
+                ('ututiman2', _('Champion')),
                 ('ututiman', _('Distinguished user')),
                 ('buyer2', _('Gold sponsor')),
                 ('buyer', _('Sponsor')),
