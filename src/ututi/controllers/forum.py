@@ -13,7 +13,7 @@ from pylons import tmpl_context as c, url
 
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import render
-from ututi.lib.helpers import check_crowds
+from ututi.lib.helpers import check_crowds, flash
 from ututi.controllers.group import GroupControllerBase
 from ututi.model import Group, ForumCategory, ForumPost
 from ututi.model import get_supporters
@@ -239,20 +239,25 @@ class ForumController(GroupControllerBase):
     @validate(EditPostForm, form='_edit_post_form')
     @ActionProtector("user")
     def edit_post(self, id, category_id, thread_id):
-        if not self.can_manage_post(c.thread):
-            abort(403)
-        c.thread.message = self.form_result['message']
-        meta.Session.commit()
+        if self.can_manage_post(c.thread):
+            c.thread.message = self.form_result['message']
+            meta.Session.commit()
+            flash(_("Post updated."))
+        else:
+            flash(_("Unable to edit post, probably because somebody has already replied to your post."))
+
         redirect(url(controller=c.controller, action='thread', id=id, category_id=category_id,
-                             thread_id=c.thread.thread_id))
+                     thread_id=c.thread.thread_id))
 
     @thread_action
     @ActionProtector("user")
     def delete_post(self, id, category_id, thread_id):
-        if not self.can_manage_post(c.thread):
-            abort(403)
-        c.thread.deleted = c.user
-        meta.Session.commit()
+        if self.can_manage_post(c.thread):
+            c.thread.deleted = c.user
+            meta.Session.commit()
+            flash(_("Post deleted."))
+        else:
+            flash(_("Unable to delete post, probably because somebody has already replied to your post."))
         redirect(url(controller=c.controller, action='thread', id=id, category_id=category_id,
                              thread_id=c.thread.thread_id))
 
