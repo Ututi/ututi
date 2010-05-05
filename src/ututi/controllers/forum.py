@@ -144,8 +144,11 @@ class ForumController(GroupControllerBase):
     @thread_action
     @ActionProtector("user")
     def thread(self, id, category_id, thread_id):
+        c.can_manage_post = self.can_manage_post
         c.forum_posts = meta.Session.query(ForumPost)\
-            .filter_by(category_id=category_id, thread_id=thread_id)\
+            .filter_by(category_id=category_id,
+                       thread_id=thread_id,
+                       deleted_by=None)\
             .order_by(ForumPost.created_on).all()
         return render('forum/thread.mako')
 
@@ -204,9 +207,31 @@ class ForumController(GroupControllerBase):
     def _edit_post_form(self):
         return render('forum/edit.mako')
 
+    _forum_posts = None
+
+    def can_manage_post(self, post):
+        if (check_crowds(['moderator'])
+            if c.group is not None else check_crowds(['root'])):
+            return True # Moderator can edit/delete anything.
+
+        if not post.created_by == c.user.id:
+            return False # Not the owner.
+        if not self._forum_posts: # Cache query result.
+            self._forum_posts = meta.Session.query(ForumPost)\
+                .filter_by(category_id=c.category.id,
+                           thread_id=c.thread.thread_id,
+                           deleted_by=None)\
+                .order_by(ForumPost.created_on).all()
+        if post.id != self._forum_posts[-1].id: # Not the last message in thread.
+            # TODO: Show a flash warning that the message could not be edited.
+            return False
+        return True
+
     @thread_action
     @ActionProtector("user")
     def edit(self, id, category_id, thread_id):
+        if not self.can_manage_post(c.thread):
+            abort(403)
         return htmlfill.render(self._edit_post_form(),
                                defaults={'message': c.thread.message})
 
@@ -214,10 +239,19 @@ class ForumController(GroupControllerBase):
     @validate(EditPostForm, form='_edit_post_form')
     @ActionProtector("user")
     def edit_post(self, id, category_id, thread_id):
-        if not (c.thread.created_by == c.user.id or
-          (check_crowds(['moderator']) if c.group is not None else check_crowds(['root']))):
+        if not self.can_manage_post(c.thread):
             abort(403)
         c.thread.message = self.form_result['message']
+        meta.Session.commit()
+        redirect(url(controller=c.controller, action='thread', id=id, category_id=category_id,
+                             thread_id=c.thread.thread_id))
+
+    @thread_action
+    @ActionProtector("user")
+    def delete_post(self, id, category_id, thread_id):
+        if not self.can_manage_post(c.thread):
+            abort(403)
+        c.thread.deleted = c.user
         meta.Session.commit()
         redirect(url(controller=c.controller, action='thread', id=id, category_id=category_id,
                              thread_id=c.thread.thread_id))

@@ -94,6 +94,10 @@ def make_map(config):
                 controller='forum',
                 action='edit_post')
 
+    map.connect('/group/{id}/forum/{category_id}/thread/{thread_id}/delete_post',
+                controller='forum',
+                action='delete_post')
+
     # Mailing list
     map.connect('/group/{id}/mailinglist',
                 controller='mailinglist',
@@ -242,6 +246,8 @@ def make_map(config):
                 controller='community', action='edit', id=None, category_id=1)
     map.connect('/community/thread/{thread_id}/edit_post',
                 controller='community', action='edit_post', id=None, category_id=1)
+    map.connect('/community/thread/{thread_id}/delete_post',
+                controller='community', action='delete_post', id=None, category_id=1)
 
     map.connect('forum_bugs_index', '/bugs',
                 controller='bugs', action='index', id=None, category_id=2)
@@ -255,6 +261,8 @@ def make_map(config):
                 controller='bugs', action='edit', id=None, category_id=2)
     map.connect('/bugs/thread/{thread_id}/edit_post',
                 controller='bugs', action='edit_post', id=None, category_id=2)
+    map.connect('/bugs/thread/{thread_id}/delete_post',
+                controller='bugs', action='delete_post', id=None, category_id=2)
 
     map.connect('/{controller}', action='index')
     map.connect('/{controller}/{action}')

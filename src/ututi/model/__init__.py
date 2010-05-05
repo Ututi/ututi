@@ -1700,7 +1700,8 @@ class ForumCategory(object):
 
     def post_count(self):
         return meta.Session.query(ForumPost
-                                   ).filter_by(category_id=self.id
+                                   ).filter_by(category_id=self.id,
+                                               deleted_by=None
                                    ).count() or 0
 
     def poster_count(self):
@@ -1712,19 +1713,19 @@ class ForumCategory(object):
 
     def topic_count(self):
         return meta.Session.query(ForumPost)\
-                 .filter_by(category_id=self.id)\
+                 .filter_by(category_id=self.id, deleted_by=None)\
                  .filter(ForumPost.thread_id == ForumPost.id)\
                  .count() or 0
 
     def messages(self, limit=5):
         return meta.Session.query(ForumPost
-                ).filter_by(category_id=self.id
+                ).filter_by(category_id=self.id, deleted_by=None
                 ).filter(ForumPost.thread_id == ForumPost.id
                 ).limit(limit).all()
 
     def top_level_messages(self):
         messages = meta.Session.query(ForumPost)\
-            .filter_by(category_id=self.id)\
+            .filter_by(category_id=self.id, deleted_by=None)\
             .filter(ForumPost.id == ForumPost.thread_id)\
             .order_by(desc(ForumPost.created_on)).all()
 
@@ -1736,7 +1737,7 @@ class ForumCategory(object):
             thread['title'] = message.title
 
             replies = meta.Session.query(ForumPost)\
-                .filter_by(thread_id=message.thread_id)\
+                .filter_by(thread_id=message.thread_id, deleted_by=None)\
                 .order_by(ForumPost.created_on).all()
 
             thread['reply_count'] = len(replies) - 1
@@ -1776,7 +1777,9 @@ class ForumPost(ContentItem):
     @staticmethod
     def get(id):
         try:
-            return meta.Session.query(ForumPost).filter_by(id=id).one()
+            return meta.Session.query(ForumPost
+                                      ).filter_by(id=id, deleted_by=None
+                                      ).one()
         except NoResultFound:
             return None
 
