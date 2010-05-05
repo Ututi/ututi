@@ -139,7 +139,7 @@ ${h.javascript_link('/javascript/search.js')|n}
 
   %if len(results):
     %if controller is not None and action is not None:
-    <div id="pager">${results.pager(format='~3~', controller=controller, action=action) }</div>
+    <div id="pager">${results.pager(format='~3~', controller=controller, action=action, onclick='$("#pager").addClass("loading"); $("#search-results-container").load("%s"); return false;') }</div>
     %else:
     <div id="pager">${results.pager(format='~3~') }</div>
     %endif
