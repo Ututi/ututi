@@ -156,8 +156,11 @@ class ForumController(GroupControllerBase):
 
         return render('forum/thread.mako')
 
+    def _new_reply_form(self):
+        return render('forum/thread.mako')
+
     @thread_action
-    @validate(NewReplyForm)
+    @validate(NewReplyForm, form='_new_reply_form')
     @ActionProtector("user")
     def reply(self, id, category_id, thread_id):
         post = ForumPost(c.thread.title,
