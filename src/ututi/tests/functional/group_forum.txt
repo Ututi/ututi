@@ -49,31 +49,28 @@ And we'll post a reply:
 
 We can see the messages we posted:
 
-    >>> print browser.printQuery('//div[@class="post-body"]')
+    >>> browser.printQuery('//div[@class="post-body"]')
     <div class="post-body">
             How's everybody doin'?
           </div>
     <div class="post-body">
             Not too bad!
           </div>
-    None
 
 Let's go back to the topic list.
 
     >>> browser.getLink('Back to the topic list').click()
 
-    >>> print browser.printQuery('//td[@class="subject"]')
+    >>> browser.printQuery('//td[@class="subject"]')
     <td class="subject">
       <a class="thread-subject" href="/group/moderators/forum/3/thread/3">What's up?</a>
     </td>
-    None
 
 And all the way up to the category list:
 
     >>> browser.getLink('Back to category list').click()
 
-    >>> print browser.printQuery('//h2[@class="category"]')
+    >>> browser.printQuery('//h2[@class="category"]')
     <h2 class="category">
       <a href="/group/moderators/forum/3">General</a>
     </h2>
-    None
