@@ -150,6 +150,10 @@ class ForumController(GroupControllerBase):
                        thread_id=thread_id,
                        deleted_by=None)\
             .order_by(ForumPost.created_on).all()
+
+        c.first_unseen = c.thread.first_unseen_thread_post(c.user)
+        c.thread.mark_as_seen_by(c.user)
+
         return render('forum/thread.mako')
 
     @thread_action
@@ -161,6 +165,7 @@ class ForumController(GroupControllerBase):
                          category_id=category_id,
                          thread_id=thread_id)
         meta.Session.add(post)
+        c.thread.mark_as_seen_by(c.user)
         meta.Session.commit()
         redirect(url(controller=c.controller, action='thread', id=id,
                              category_id=category_id, thread_id=thread_id))

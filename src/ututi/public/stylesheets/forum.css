@@ -15,11 +15,15 @@ table#forum-thread-list td.subject {
   width: 50%;
 }
 
-table#forum-thread-list td.subject a {
+table#forum-thread-list td.subject a.thread-subject {
   padding-right: 17px;
   color: #333333;
   font-size: 1.2em;
   background: transparent url("../images/details/arrow.png") right center no-repeat;
+}
+
+table#forum-thread-list td.subject a.unread {
+  font-weight: bold;
 }
 
 table#forum-thread-list td.count {

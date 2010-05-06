@@ -40,7 +40,13 @@
    % for forum_post in category.top_level_messages()[:n]:
   <tr>
     <td class="subject">
-      <a class="thread-subject" href="${url(controller=c.controller, action='thread', id=c.group_id, category_id=category.id, thread_id=forum_post['thread_id'])}"
+        % if forum_post['post'].first_unseen_thread_post(c.user):
+          <a href="${url(controller=c.controller, action='thread', id=c.group_id, category_id=category.id, thread_id=forum_post['thread_id'])}#unseen">
+            [NEW]
+          </a>
+        % endif
+        <a class="thread-subject${' unread' if forum_post['post'].first_unseen_thread_post(c.user) else ''}"
+        href="${url(controller=c.controller, action='thread', id=c.group_id, category_id=category.id, thread_id=forum_post['thread_id'])}"
         >${forum_post['title']}</a>
     </td>
     <td class="count">

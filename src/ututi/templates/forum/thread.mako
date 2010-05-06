@@ -5,7 +5,12 @@
 
 <table id="forum-thread">
 % for forum_post in c.forum_posts:
-<tr class="thread-post">
+  % if forum_post != c.forum_posts[0] and c.first_unseen and forum_post.id == c.first_unseen.id:
+    <tr>
+        <td colspan="2"><a name="unseen"></a><hr /><td>
+    </tr>
+  % endif
+  <tr class="thread-post">
   <td class="author-logo">
     <a href="${forum_post.created.url()}">
       %if forum_post.created.logo is not None:

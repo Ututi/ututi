@@ -135,6 +135,12 @@ def setup_orm(engine):
                               useexisting=True,
                               autoload_with=engine)
 
+    global seen_threads_table
+    seen_threads_table = Table("seen_threads", meta.metadata,
+                              autoload=True,
+                              useexisting=True,
+                              autoload_with=engine)
+
     global users_table
     users_table = Table("users", meta.metadata,
                         Column('id', Integer, Sequence('users_id_seq'), primary_key=True),
@@ -218,7 +224,12 @@ def setup_orm(engine):
                polymorphic_on=content_items_table.c.content_type,
                properties = {'parent': relation(ContentItem,
                                                 primaryjoin=forum_posts_table.c.parent_id==content_items_table.c.id,
-                                                backref="forum_posts")})
+                                                backref="forum_posts")
+                            })
+
+    orm.mapper(SeenThread, seen_threads_table,
+               properties = {'thread': relation(ForumPost),
+                             'user': relation(User)})
 
     orm.mapper(User,
                users_table,
@@ -1733,6 +1744,7 @@ class ForumCategory(object):
         for message in messages:
             thread = {}
 
+            thread['post'] = message
             thread['thread_id'] = message.thread_id
             thread['title'] = message.title
 
@@ -1782,6 +1794,43 @@ class ForumPost(ContentItem):
                                       ).one()
         except NoResultFound:
             return None
+
+    def mark_as_seen_by(self, user):
+        seen = SeenThread.get_or_create(self.thread_id, user)
+        seen.visited_on = datetime.utcnow()
+        meta.Session.commit()
+
+    def first_unseen_thread_post(self, user):
+        seen = SeenThread.get_or_create(self.thread_id, user)
+        posts = meta.Session.query(ForumPost
+                ).filter_by(thread_id=self.thread_id,
+                ).filter(ForumPost.created_on > seen.visited_on
+                ).order_by(ForumPost.created_on.asc()
+                ).limit(1).all()
+        if posts:
+            return posts[0]
+        else:
+            return None
+
+
+seen_threads_table = None
+class SeenThread(object):
+
+    def __init__(self, thread_id, user):
+        self.thread_id = thread_id
+        self.user = user
+
+    @staticmethod
+    def get_or_create(thread_id, user):
+        try:
+            return meta.Session.query(SeenThread
+                                ).filter_by(thread_id=thread_id,
+                                            user=user).one()
+        except NoResultFound:
+            seen = SeenThread(thread_id, user)
+            meta.Session.add(seen)
+            meta.Session.commit()
+            return seen
 
 
 blog_table = None
