@@ -23,19 +23,11 @@ Let's enter the forum:
 
     >>> browser.getLink('Forum').click()
 
-There are no categories:
+There should be a default category, 'General':
 
-    >>> browser.printQuery('id("no-categories")')
-    <span id="no-categories" class="small">No categories yet.</span>
+    >>> browser.getLink('General').click()
 
-Let's create a category:
-
-    >>> browser.getLink('New category').click()
-    >>> browser.getControl(name='title').value = 'General'
-    >>> browser.getControl(name='description').value = 'General stuff'
-    >>> browser.getControl('Create').click()
-
-Now, let's start a thread:
+Let's start a thread:
 
     >>> browser.getLink('New topic').click()
     >>> browser.getControl(name='title').value = "What's up?"
