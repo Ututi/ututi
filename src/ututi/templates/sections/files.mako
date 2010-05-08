@@ -346,9 +346,9 @@ $(document).ready(function(){
 </script>
 </%def>
 
-<%def name="file(file, new_file=False)">
+<%def name="file(file, new_file=False, hidden=False)">
   %if file.deleted is None:
-            <li class="file">
+            <li class="file${hidden and 'show' or ''}">
             %if new_file:
               ${h.image('/images/details/icon_drag_file_new.png', alt='file icon', class_='drag-target')|n}
             %else:
@@ -411,11 +411,40 @@ $(document).ready(function(){
   <div class="target_item ${cls}"><div class="upload target" id="file_upload_button-${section_id}-${fid}">${h.ellipsis(title, 17)}</div></div>
 </%def>
 
-<%def name="folder(folder, section_id, fid)">
-      <%
-         cls = folder.title == '' and 'root_folder' or 'subfolder'
-      %>
-      <div class="folder_file_area ${cls}" id="file_area-${section_id}-${fid}">
+
+<%def name="root_folder(folder, section_id, fid)">
+      <div class="folder_file_area root_folder" id="file_area-${section_id}-${fid}">
+        <input class="folder_name" id="file_folder_name-${section_id}-${fid}" type="hidden" value="${folder.title}" />
+        <%
+           files = [file for file in folder if file.deleted is None]
+           hidden = False
+           file_count = len(files)
+        %>
+          <ul class="folder${file_count > 4 and 'click2show' or ''}">
+        % if files:
+              <li style="display: none;" class="message">${_("There are no files here, this folder is empty!")}</li>
+              % for n, file in enumerate(files):
+                <%
+                    if n > 2 and file_count > 4:
+                        hidden = True
+                %>
+                %if n == 3 and file_count > 4:
+                    <li class="click hide">
+                      ${ungettext("Show the other %(count)s file", "Show the other %(count)s files", file_count - n ) % dict(count = file_count - n)}
+                    </li>
+                %endif
+                <%self:file file="${file}" hidden="${hidden}" />
+              % endfor
+        % else:
+              <li class="message">${_("There are no files here, this folder is empty!")}</li>
+        % endif
+
+          </ul>
+      </div>
+</%def>
+
+<%def name="sub_folder(folder, section_id, fid)">
+      <div class="folder_file_area subfolder" id="file_area-${section_id}-${fid}">
         <input class="folder_name" id="file_folder_name-${section_id}-${fid}" type="hidden" value="${folder.title}" />
         <%
            style = ''
@@ -423,27 +452,33 @@ $(document).ready(function(){
            if files:
                style = h.literal('style="display: none;"')
         %>
-        % if folder.title != '':
           <h4>
             ${folder.title}
             % if folder.can_write(c.user):
               <a ${style} href="${folder.parent.url(action='delete_folder', folder=folder.title)}" id="delete_folder_button-${section_id}-${fid}" class="delete_folder_button">${_("(Delete)")}</a>
             % endif
           </h4>
-        % endif
           <ul class="folder">
         % if files:
               <li style="display: none;" class="message">${_("There are no files here, this folder is empty!")}</li>
               % for file in files:
-                %if file.deleted is None:
-                  <%self:file file="${file}" />
-                %endif
+                <%self:file file="${file}" />
               % endfor
         % else:
               <li class="message">${_("There are no files here, this folder is empty!")}</li>
         % endif
+
           </ul>
       </div>
+</%def>
+
+<%def name="folder(folder, section_id, fid)">
+      %if folder.title == '':
+          <%self:root_folder folder="${folder}" section_id="${section_id}" fid="${fid}" />
+      %else:
+          <%self:sub_folder  folder="${folder}" section_id="${section_id}" fid="${fid}" />
+      %endif
+
 </%def>
 
 <%def name="free_space_indicator(obj)">
