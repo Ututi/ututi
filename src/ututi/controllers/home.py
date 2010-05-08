@@ -414,28 +414,28 @@ class HomeController(UniversityListMixin):
         return render('/home/join.mako')
 
     def process_transaction(self):
-        args = ['orderid',
-                'merchantid',
+        prefix = 'wp_'
+        args = ['projectid',
+                'orderid',
                 'lang',
                 'amount',
                 'currency',
                 'paytext',
                 '_ss2',
                 '_ss1',
-                'transaction2',
-                'transaction',
-                'payment',
                 'name',
                 'surename',
                 'status',
                 'error',
                 'test',
-                'user',
-                'payent_type']
+                'p_email',
+                'payamount',
+                'paycurrency',
+                'version']
 
         kwargs = {}
         for arg in args:
-            value = request.params.get(arg, '')
+            value = request.params.get(prefix + arg, '')
             kwargs[arg] = value
 
         payment = Payment(**kwargs)
@@ -443,7 +443,6 @@ class HomeController(UniversityListMixin):
         payment.query_string = request.query_string
         meta.Session.add(payment)
         meta.Session.commit()
-
         payment.process()
         meta.Session.commit()
 

@@ -53,7 +53,7 @@ visible in the dummy payment page:
     >>> browser.getControl(name='10lt').click()
     >>> url = browser.getLink('Process payment').url
     >>> url
-    'http://localhost/process_transaction?status=1&lang=LIT&transaction=&name=Jonas&transaction2=&_ss2=&paytext=Remiam%20remiam&orderid=support_1&merchantid=xxx&currency=LTL&amount=1000&error=&test=1&surename=Petraitis&payment=Snoras&_ss1='
+    'http://localhost/process_transaction?wp_pemail=&wp_lang=LIT&wp_paytext=Remiam%20remiam&wp_name=Jonas&wp_projectid=&wp_orderid=support_1&wp_amount=1000&wp_status=1&wp_currency=LTL&wp_surename=Petraitis&wp_error=&wp_test=1&wp__ss1=&wp__ss2='
 
 Let's click it, and register the payment in the database:
 
@@ -75,7 +75,7 @@ Let's click it, and register the payment in the database:
     'http://localhost/pay'
 
     >>> print payment.query_string
-    status=1&lang=LIT&transaction=&name=Jonas...
+    wp_pemail=&wp_lang=LIT&wp_paytext=Remiam%20remiam&wp_name=Jonas&...
 
     >>> url.endswith(payment.query_string)
     True

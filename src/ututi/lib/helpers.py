@@ -303,7 +303,7 @@ class mokejimai_form(object):
         self.action = config.get('mokejimai.url')
         self.amount = amount
         self.salt = config.get('mokejimai.salt', '')
-        self.merchantid = config.get('mokejimai.merchantid', '')
+        self.projectid = config.get('mokejimai.projectid', '')
         self.test = config.get('mokejimai.test')
         self.accepturl = kwargs.get('accepturl',
                                     url(controller='profile',
@@ -322,7 +322,7 @@ class mokejimai_form(object):
         self.p_email = c.user.email.email
 
     def calculate_sign(self, values):
-        form_data = ''.join(["%03d%s" % (len(value), value.lower())
+        form_data = ''.join(["%03d%s" % (len(value.encode('utf-8')), value.lower())
                              for key, value in values
                              if value])
         return md5(form_data + self.salt).hexdigest()
@@ -333,7 +333,7 @@ class mokejimai_form(object):
         currency = 'LTL'
         country = 'LT'
 
-        form_values = [('merchantid', self.merchantid),
+        form_values = [('projectid', self.projectid),
                        ('orderid', self.orderid),
                        ('lang', lang),
                        ('amount', str(self.amount)),
@@ -343,7 +343,7 @@ class mokejimai_form(object):
                        ('callbackurl', self.callbackurl),
                        ('payment', ''),
                        ('country', country),
-                       ('logo', self.logo),
+                       ('paytext', ''), # XXX we should add some texts here
                        ('p_firstname', ''),
                        ('p_lastname', ''),
                        ('p_email', self.p_email),
@@ -355,6 +355,7 @@ class mokejimai_form(object):
                        ('test', self.test)]
 
         form_values.append(('sign', self.calculate_sign(form_values)))
+        form_values.append(('version', '1.2'))
         return form_values
 
 def url_for(*args, **kwargs):
