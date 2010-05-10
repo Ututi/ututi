@@ -93,13 +93,15 @@ Empty folder creation:
     <BLANKLINE>
     <div class="target_item "><div class="upload target" id="file_upload_button-7-...">Buga Buga</div></div>
     <BLANKLINE>
-    <div class="folder_file_area subfolder" id="file_area-7-...">
+    <div class="folder_file_area subfolder click2show open" id="file_area-7-...">
       <input class="folder_name" id="file_folder_name-7-..." type="hidden" value="Buga Buga" />
-        <h4>
+        <h4 class="click">
+        <span class="cont">
           Buga Buga <a href="/subject/vu/mat_analize/delete_folder?folder=Buga+Buga"
                        id="delete_folder_button-7-..." class="delete_folder_button">(Delete)</a>
+        </span>
         </h4>
-        <ul class="folder">
+        <ul class="folder hide">
             <li class="message">There are no files here, this folder is empty!</li>
         </ul>
     </div>
@@ -115,18 +117,20 @@ Empty folder creation:
     ...                        'section_id': '8'})
     >>> print dedent(res.body)
     <BLANKLINE>
-    <div class="target_item "><div class="upload target" id="file_upload_button-8-...">Uga Buga</div></div>
     <BLANKLINE>
-    <div class="folder_file_area subfolder" id="file_area-8-...">
-      <input class="folder_name" id="file_folder_name-8-..." type="hidden" value="Uga Buga" />
-        <h4>
-          Uga Buga <a href="/group/moderators/delete_folder?folder=Uga+Buga"
-                      id="delete_folder_button-8-..." class="delete_folder_button">(Delete)</a>
-        </h4>
-        <ul class="folder">
-            <li class="message">There are no files here, this folder is empty!</li>
-        </ul>
-    </div>
+    <div class="target_item "><div class="upload target" id="file_upload_button-...">Uga Buga</div></div>
+        <div class="folder_file_area subfolder click2show open" id="file_area-...">
+          <input class="folder_name" id="file_folder_name-..." type="hidden" value="Uga Buga" />
+          <h4 class="click">
+            <span class="cont">
+              Uga Buga
+                <a  href="/group/moderators/delete_folder?folder=Uga+Buga" id="delete_folder_button-..." class="delete_folder_button">(Delete)</a>
+            </span>
+          </h4>
+            <ul class="folder hide">
+                <li class="message">There are no files here, this folder is empty!</li>
+            </ul>
+        </div>
 
 Deleting folders:
 
@@ -165,22 +169,30 @@ Both folders should be gone:
     >>> browser = Browser.logIn()
     >>> browser.open('http://localhost/subject/vu/mat_analize')
     >>> browser.printQuery('id("page-content")//h4')
-    <h4>
+    <h4 class="click">
+      <span class="cont">
                 Buga Buga ...
+      </span>
     </h4>
-    <h4>
+    <h4 class="click">
+      <span class="cont">
                 Some folder ...
+      </span>
     </h4>
     <h4 class="trash_heading">Trash</h4>
 
     >>> browser.open('http://localhost/group/moderators/files')
     >>> browser.printQuery('//h4')
     <h4>Moderatoriai</h4>
-    <h4>
+    <h4 class="click">
+      <span class="cont">
                 Also a folder ...
+      </span>
     </h4>
-    <h4>
+    <h4 class="click">
+      <span class="cont">
                 Uga Buga ...
+      </span>
     </h4>
     <h4 class="trash_heading">Trash</h4>
 

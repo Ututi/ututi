@@ -37,12 +37,12 @@ span.unlimited_size {
 /* expanding section headings  */
 .click2show h2.click .cont {
   padding-right: 15px;
-  background: white url("../images/details/arrow_expand_right.png") right center no-repeat;
+  background: white url("../images/details/arrow_expand_down.png") right center no-repeat;
 }
 
 .click2show.open h2.click .cont {
   padding-right: 15px;
-  background: white url("../images/details/arrow_expand_down.png") right center no-repeat;
+  background: white url("../images/details/arrow_expand_right.png") right center no-repeat;
 }
 
 .section h2 .comment {
@@ -231,3 +231,17 @@ div.file_upload_progress div.failed {
   padding: 2px 0 0 7px;
   background: white url("../images/borders/rename_file.png") left center no-repeat;
 } /* no left/right padding here please */
+
+.subfolder H4 {
+  cursor: pointer;
+}
+
+.section .click2show h4.click .cont {
+  padding-right: 15px;
+  background: white url("../images/details/arrow_expand_right.png") right center no-repeat;
+}
+
+.section .click2show.open h4.click .cont {
+  padding-right: 15px;
+  background: white url("../images/details/arrow_expand_down.png") right center no-repeat;
+}
