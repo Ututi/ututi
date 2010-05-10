@@ -12,12 +12,12 @@ class PayController(BaseController):
         c.cancelurl = request.params['cancelurl']
         c.amount = int(request.params['amount']) / 100
         c.currency = request.params['currency']
-        pemail = ''
+
         # Callback data
         params = [request.params[param].encode('UTF-8')
                   for param in ['callbackurl', 'orderid', 'projectid', 'lang',
-                                'amount', 'currency', 'test']]
-        [callbackurl, orderid, projectid, lang, amount, currency, test] = params
+                                'amount', 'currency', 'test', 'p_email']]
+        [callbackurl, orderid, projectid, lang, amount, currency, test, p_email] = params
 
         args = ['projectid',
                 'orderid',
@@ -50,7 +50,7 @@ class PayController(BaseController):
             wp_name='Jonas',
             wp_surename='Petraitis',
             wp_status='1',
-            wp_pemail=pemail,
+            wp_p_email=p_email,
             wp_error='',
             wp_test=test)
         return render('/pay/index.mako')
