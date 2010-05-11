@@ -453,7 +453,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             'default_tab': group.default_tab,
             'approve_new_members': 'admin' if group.admins_approve_members else 'none',
             'forum_visibility': 'public' if group.forum_is_public else 'members',
-            'page_visibility': 'public' if group.page_is_public else 'members',
+            'page_visibility': 'public' if group.page_public else 'members',
             }
 
         tags = dict([('tagsitem-%d' % n, tag.title)
@@ -492,7 +492,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
                 self.form_result['approve_new_members'] == 'admin')
         group.forum_is_public = (
                 self.form_result['forum_visibility'] == 'public')
-        group.page_is_public = (
+        group.page_public = (
                 self.form_result['page_visibility'] == 'public')
         group.mailinglist_enabled = (self.form_result['forum_type'] == 'mailinglist')
 

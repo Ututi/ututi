@@ -157,7 +157,6 @@ create table groups (
        wants_to_watch_subjects bool default true,
        admins_approve_members bool default true,
        forum_is_public bool default false,
-       page_is_public bool default false,
        mailinglist_enabled bool default true,
        primary key (id));;
 
