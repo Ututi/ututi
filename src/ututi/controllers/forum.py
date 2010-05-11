@@ -229,8 +229,8 @@ class ForumController(GroupControllerBase):
     _forum_posts = None
 
     def can_manage_post(self, post):
-        if (check_crowds(['moderator'])
-            if c.group is not None else check_crowds(['root'])):
+        if (check_crowds(['admin', 'moderator']) if c.group is not None
+            else check_crowds(['root'])):
             return True # Moderator can edit/delete anything.
 
         if not post.created_by == c.user.id:
