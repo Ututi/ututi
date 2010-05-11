@@ -1769,6 +1769,9 @@ class ForumPost(ContentItem):
         self.category_id = category_id
         self.thread_id = thread_id
 
+    def is_thread(self):
+        return self.thread_id == self.id
+
     def url(self):
         if self.category_id == 1:
             controller = 'community'

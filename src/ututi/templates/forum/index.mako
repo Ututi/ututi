@@ -61,6 +61,10 @@
   </tr>
   % endfor
   </table>
+
+  <div>
+    ${h.button_to(_('Mark all as read'), url(controller=c.controller, action='mark_category_as_read', id=c.group_id, category_id=category.id))}
+  </div>
 </%def>
 
 ${forum_thread_list(c.category, n=10**10)}

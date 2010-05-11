@@ -274,11 +274,25 @@ class ForumController(GroupControllerBase):
         if self.can_manage_post(c.thread):
             c.thread.deleted = c.user
             meta.Session.commit()
-            flash(_("Post deleted."))
         else:
             flash(_("Unable to delete post, probably because somebody has already replied to your post."))
-        redirect(url(controller=c.controller, action='thread', id=id, category_id=category_id,
-                             thread_id=c.thread.thread_id))
+            redirect(url(controller=c.controller, action='thread', id=id, category_id=category_id,
+                                 thread_id=c.thread.thread_id))
+
+        if not c.thread.is_thread():
+            flash(_("Post deleted."))
+            redirect(url(controller=c.controller, action='thread', id=id, category_id=category_id,
+                                 thread_id=c.thread.thread_id))
+        else:
+            flash(_("Thread deleted."))
+            redirect(url(controller=c.controller, action='index', id=id, category_id=category_id))
+
+    @category_action
+    @ActionProtector("user")
+    def mark_category_as_read(self, id, category_id):
+       for forum_post in c.category.top_level_messages():
+           forum_post['post'].mark_as_seen_by(c.user)
+       redirect(url(controller=c.controller, action='index', id=id, category_id=category_id))
 
     # Redirects for backwards compatibility.
 

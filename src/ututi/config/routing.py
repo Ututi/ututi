@@ -74,6 +74,10 @@ def make_map(config):
                 controller='forum',
                 action='new_thread')
 
+    map.connect('/group/{id}/forum/{category_id}/mark_as_read',
+                controller='forum',
+                action='mark_category_as_read')
+
     map.connect('/group/{id}/forum/{category_id}/post',
                 controller='forum',
                 action='post')
