@@ -35,7 +35,7 @@
       <a class="btn" href="#reply"><span>${_('Reply')}</span></a>
       % if c.can_manage_post(forum_post):
         ${h.button_to(_('Edit'), url(controller=c.controller, action='edit', id=c.group_id, category_id=c.category_id, thread_id=forum_post.id))}
-        ${h.button_to(_('Delete'), url(controller=c.controller, action='delete_post', id=c.group_id, category_id=c.category_id, thread_id=forum_post.id))}
+        ${h.button_to(_('Delete') if forum_post != c.forum_posts[0] else _('Delete thread'), url(controller=c.controller, action='delete_post', id=c.group_id, category_id=c.category_id, thread_id=forum_post.id))}
       % endif
     </div>
   </td>
