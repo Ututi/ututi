@@ -29,9 +29,11 @@
 
 <div id="page_header">
   <h1 style="float: left;">${c.category.title}</h1>
-  <div style="float: left; margin-top: 8px; margin-left: 10px;">
-      <a class="btn" href="${url(controller=c.controller, action='new_thread', id=c.group_id, category_id=c.category.id)}"><span>${_("New topic")}</span></a>
-  </div>
+  % if c.can_post(c.user):
+    <div style="float: left; margin-top: 8px; margin-left: 10px;">
+        <a class="btn" href="${url(controller=c.controller, action='new_thread', id=c.group_id, category_id=c.category.id)}"><span>${_("New topic")}</span></a>
+    </div>
+  % endif
 </div>
 
 <br class="clear-left"/>
@@ -63,9 +65,11 @@
   % endfor
   </table>
 
-  <div>
-    ${h.button_to(_('Mark all as read'), url(controller=c.controller, action='mark_category_as_read', id=c.group_id, category_id=category.id))}
-  </div>
+  % if c.user:
+    <div>
+      ${h.button_to(_('Mark all as read'), url(controller=c.controller, action='mark_category_as_read', id=c.group_id, category_id=category.id))}
+    </div>
+  % endif
 </%def>
 
 ${forum_thread_list(c.category, n=10**10)}

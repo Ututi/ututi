@@ -16,12 +16,11 @@
 </%def>
 
 <div id="page_header">
-  <a class="btn" href="${url(controller='mailinglist', action='new_thread', id=c.group.group_id)}"><span>${_("New topic")}</span></a>
+  % if h.check_crowds(['member', 'admin']):
+    <a class="btn" href="${url(controller='mailinglist', action='new_thread', id=c.group.group_id)}"><span>${_("New topic")}</span></a>
+  % endif
 </div>
 <br class="clear-left"/>
-
-
-
 
 %if not c.messages:
   <span class="small">${_('No messages yet.')}</span>

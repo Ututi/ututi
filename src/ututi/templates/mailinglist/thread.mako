@@ -48,15 +48,17 @@ ${h.stylesheet_link('/stylesheets/forum.css')|n}
 </tr>
 % endfor
 </table>
-<br />
-<a name="reply"/>
-<h2>${_('Reply')}</h2>
-<form method="post" action="${url(controller='mailinglist', action='reply', thread_id=c.thread.id, id=c.group.group_id)}"
-     id="group_add_form" enctype="multipart/form-data">
-  <div class="form-field">
-    <label for="message">${_('Message')}</label>
-    <textarea class="line" name="message" id="message" cols="80" rows="10" style="width: 620px;"></textarea>
-  </div>
-  ${h.input_submit(_('Reply'))}
-</form>
-</table>
+
+% if h.check_crowds(['member', 'admin']):
+  <br />
+  <a name="reply"/>
+  <h2>${_('Reply')}</h2>
+  <form method="post" action="${url(controller='mailinglist', action='reply', thread_id=c.thread.id, id=c.group.group_id)}"
+       id="group_add_form" enctype="multipart/form-data">
+    <div class="form-field">
+      <label for="message">${_('Message')}</label>
+      <textarea class="line" name="message" id="message" cols="80" rows="10" style="width: 620px;"></textarea>
+    </div>
+    ${h.input_submit(_('Reply'))}
+  </form>
+% endif

@@ -32,7 +32,9 @@
       <div class="post-body">
         ${h.nl2br(forum_post.message)|n}
       </div>
-      <a class="btn" href="#reply"><span>${_('Reply')}</span></a>
+      % if c.can_post(c.user):
+        <a class="btn" href="#reply"><span>${_('Reply')}</span></a>
+      % endif
       % if c.can_manage_post(forum_post):
         ${h.button_to(_('Edit'), url(controller=c.controller, action='edit', id=c.group_id, category_id=c.category_id, thread_id=forum_post.id))}
         ${h.button_to(_('Delete') if forum_post != c.forum_posts[0] else _('Delete thread'), url(controller=c.controller, action='delete_post', id=c.group_id, category_id=c.category_id, thread_id=forum_post.id))}
@@ -42,15 +44,17 @@
 </tr>
 % endfor
 </table>
-<br />
-<a name="reply"/>
-<h2>${_('Reply')}</h2>
-<form method="post" action="${url(controller=c.controller, action='reply', id=c.group_id, category_id=c.category_id, thread_id=c.thread_id)}"
-     id="group_add_form" enctype="multipart/form-data">
-  <div class="form-field">
-    <label for="message">${_('Message')}</label>
-    <textarea class="line" name="message" id="message" cols="80" rows="10" style="width: 620px;"></textarea>
-  </div>
-  ${h.input_submit(_('Reply'))}
-</form>
-</table>
+
+% if c.can_post(c.user):
+  <br />
+  <a name="reply"/>
+  <h2>${_('Reply')}</h2>
+  <form method="post" action="${url(controller=c.controller, action='reply', id=c.group_id, category_id=c.category_id, thread_id=c.thread_id)}"
+       id="group_add_form" enctype="multipart/form-data">
+    <div class="form-field">
+      <label for="message">${_('Message')}</label>
+      <textarea class="line" name="message" id="message" cols="80" rows="10" style="width: 620px;"></textarea>
+    </div>
+    ${h.input_submit(_('Reply'))}
+  </form>
+% endif

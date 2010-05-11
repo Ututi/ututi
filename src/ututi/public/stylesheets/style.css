@@ -2026,10 +2026,3 @@ del {
 }
 
 /* end revision diffs */
-
-/* disable incomplete features */
-
-div#forum-visibility-setting
-{
-    display: none;
-}

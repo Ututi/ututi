@@ -14,6 +14,7 @@ from pylons import tmpl_context as c, url
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import render
 from ututi.lib.helpers import check_crowds, flash
+from ututi.lib.security import deny
 from ututi.controllers.group import GroupControllerBase
 from ututi.model import Group, ForumCategory, ForumPost
 from ututi.model import get_supporters
@@ -94,6 +95,24 @@ def thread_action(method):
     return _thread_action
 
 
+def protect_view(m):
+    def fn(*args, **kwargs):
+        if c.group is not None:
+            if not c.group.forum_is_public and not check_crowds(['member', 'moderator']):
+                deny("This forum is not public", 401)
+        return m(*args, **kwargs)
+    return fn
+
+
+def protect_edit(m):
+    def fn(*args, **kwargs):
+        if c.group is not None:
+            if not check_crowds(['member', 'moderator']):
+                deny("Only members can post", 401)
+        return m(*args, **kwargs)
+    return fn
+
+
 class ForumController(GroupControllerBase):
 
     controller_name = 'forum'
@@ -102,6 +121,7 @@ class ForumController(GroupControllerBase):
         c.ututi_supporters = get_supporters()
         c.breadcrumbs = []
         c.controller = self.controller_name
+        c.can_post = self.can_post
 
     def set_up_context(self, id=None, category_id=None, thread_id=None):
         if id is not None:
@@ -141,19 +161,22 @@ class ForumController(GroupControllerBase):
         else:
             c.thread = None
 
+        if c.group is not None and self.can_post(c.user):
+            # Only show tabs for members / people who can post.
+            c.breadcrumbs.append(self._actions('forum'))
+
     @group_action
-    @ActionProtector("user")
+    @protect_view
     def categories(self, id):
-        c.breadcrumbs.append(self._actions('forum'))
         return render('forum/categories.mako')
 
     @category_action
-    @ActionProtector("user")
+    @protect_view
     def index(self, id, category_id):
         return render('forum/index.mako')
 
     @thread_action
-    @ActionProtector("user")
+    @protect_view
     def thread(self, id, category_id, thread_id):
         c.can_manage_post = self.can_manage_post
         c.forum_posts = meta.Session.query(ForumPost)\
@@ -228,7 +251,12 @@ class ForumController(GroupControllerBase):
 
     _forum_posts = None
 
+    def can_post(self, user):
+        return user is not None and (not c.group_id or check_crowds(['member', 'admin', 'moderator']))
+
     def can_manage_post(self, post):
+        if c.user is None:
+            return False # Anonymous users can not change anything.
         if (check_crowds(['admin', 'moderator']) if c.group is not None
             else check_crowds(['root'])):
             return True # Moderator can edit/delete anything.

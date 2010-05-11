@@ -1799,11 +1799,15 @@ class ForumPost(ContentItem):
             return None
 
     def mark_as_seen_by(self, user):
+        if user is None:
+            return
         seen = SeenThread.get_or_create(self.thread_id, user)
         seen.visited_on = datetime.utcnow()
         meta.Session.commit()
 
     def first_unseen_thread_post(self, user):
+        if user is None:
+            return None
         seen = SeenThread.get_or_create(self.thread_id, user)
         posts = meta.Session.query(ForumPost
                 ).filter_by(thread_id=self.thread_id,

@@ -34,7 +34,9 @@
   </h2>
   <div>${category.description}</div>
   ${forum_thread_list(category, n=5)}
-  <a class="btn" href="${url(controller=c.controller, action='new_thread', id=c.group_id, category_id=category.id)}"
-      ><span>${_("New topic")}</span></a>
+  % if c.can_post(c.user):
+    <a class="btn" href="${url(controller=c.controller, action='new_thread', id=c.group_id, category_id=category.id)}"
+        ><span>${_("New topic")}</span></a>
+  % endif
 % endfor
 </table>

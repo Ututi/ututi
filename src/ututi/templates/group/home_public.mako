@@ -27,6 +27,16 @@ ${h.html_cleanup(c.group.page)|n,decode.utf8}
 </div>
 %endif
 
+%if c.group.forum_is_public:
+  <div id="group_forum" style="padding: 1em">
+    %if c.group.mailinglist_enabled:
+      ${h.link_to(_('Group mailing list archives'), url(controller='mailinglist', action='index', id=c.group.group_id))}
+    %else:
+      ${h.link_to(_('Group forum'), url(controller='forum', action='categories', id=c.group.group_id))}
+    %endif
+  </div>
+%endif
+
 <h2>${_('Group members')}</h2>
 ${group_members()}
 

@@ -82,6 +82,14 @@ def mailinglist_file_action(method):
     return _group_action
 
 
+def protect_view(m):
+    def fn(*args, **kwargs):
+        if not (c.group.forum_is_public or check_crowds(['member', 'admin'])):
+            deny("This mailing list is not public", 401)
+        return m(*args, **kwargs)
+    return fn
+
+
 class NewReplyForm(Schema):
     """A schema for validating group edits."""
 
@@ -113,21 +121,23 @@ class MailinglistController(GroupControllerBase):
         return messages
 
     @group_action
-    @ActionProtector("member", "admin")
+    @protect_view
     def index(self, group):
-        c.breadcrumbs.append(self._actions('mailinglist'))
+        if check_crowds(['member', 'admin']):
+            c.breadcrumbs.append(self._actions('mailinglist'))
         c.messages = self._top_level_messages(group)
         return render('mailinglist/index.mako')
 
     @group_mailinglist_action
-    @ActionProtector("member", "admin")
+    @protect_view
     def thread(self, group, thread):
         file_id = request.GET.get('serve_file')
         file = File.get(file_id)
         c.serve_file = file
 
         c.thread = thread
-        c.breadcrumbs.append(self._actions('mailinglist'))
+        if check_crowds(['member', 'admin']):
+            c.breadcrumbs.append(self._actions('mailinglist'))
         c.messages = thread.posts
         return render('mailinglist/thread.mako')
 
