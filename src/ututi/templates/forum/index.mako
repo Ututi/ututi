@@ -42,7 +42,7 @@
     <td class="subject">
         % if forum_post['post'].first_unseen_thread_post(c.user):
           <a href="${url(controller=c.controller, action='thread', id=c.group_id, category_id=category.id, thread_id=forum_post['thread_id'])}#unseen">
-            [NEW]
+            [N]
           </a>
         % endif
         <a class="thread-subject${' unread' if forum_post['post'].first_unseen_thread_post(c.user) else ''}"
