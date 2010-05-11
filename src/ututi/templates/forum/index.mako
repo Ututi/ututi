@@ -14,9 +14,10 @@
 <%def name="portlets()">
 <div id="sidebar">
   ${forum_info_portlet()}
-  % if c.category.id == 1:
+  <!-- forum crosslink -->
+  % if c.category.id == 2:
     ${community_forum_posts_portlet()}
-  % elif c.category.id == 2:
+  % elif c.category.id == 1:
     ${bugs_forum_posts_portlet()}
   % endif
 </div>
