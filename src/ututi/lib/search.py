@@ -1,4 +1,4 @@
-from ututi.model import meta, SearchItem, SimpleTag, LocationTag, ContentItem
+from ututi.model import meta, SearchItem, SimpleTag, LocationTag, ContentItem, TagSearchItem
 import logging
 
 from sqlalchemy.sql import func, select
@@ -120,3 +120,10 @@ def _search_query_tags(query, tags):
                 query = query.filter(or_(SimpleTag.id == mtag['tag'], ContentItem.location_id.in_(list(mtag['ltag']))))
 
     return query
+
+def tag_search(text):
+    """Search in the tag_search_items table (for location tags)."""
+    query = meta.Session.query(TagSearchItem)\
+        .filter(TagSearchItem.terms.op('@@')(func.plainto_tsquery(text)))\
+        .order_by(func.ts_rank_cd(TagSearchItem.terms, func.plainto_tsquery(text)))
+    return query.all()

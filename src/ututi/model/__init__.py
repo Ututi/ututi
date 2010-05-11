@@ -389,10 +389,18 @@ def setup_orm(engine):
                                autoload=True,
                                autoload_with=engine)
 
+    global tag_search_items_table
+    tag_search_items_table = Table("tag_search_items", meta.metadata,
+                                   autoload=True,
+                                   autoload_with=engine)
+
     warnings.simplefilter("default", SAWarning)
 
     orm.mapper(SearchItem, search_items_table,
                properties={'object' : relation(ContentItem)})
+
+    orm.mapper(TagSearchItem, tag_search_items_table,
+               properties={'tag' : relation(LocationTag)})
 
     global blog_table
     blog_table = Table("blog", meta.metadata,
@@ -1849,6 +1857,9 @@ search_items_table = None
 class SearchItem(object):
     pass
 
+tag_search_items_table = None
+class TagSearchItem(object):
+    pass
 
 payments_table = None
 class Payment(object):
