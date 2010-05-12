@@ -1971,12 +1971,17 @@ body.no_sidebar #content #page-content {
   margin: 10px 0;
 }
 
-#pager a {
+#pager a,
+#pager span {
   color: #333;
   font-size: 14px;
   padding: 4px;
   margin: 0 2px;
   font-weight: bold;
+}
+
+#pager span.pager_curpage {
+  font-size: 16px;
 }
 
 #pager a.activeSlide {
