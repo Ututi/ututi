@@ -55,9 +55,9 @@ Events and watching
     >>> browser.open('http://localhost/profile/index/1')
     >>> browser.printQuery("id('event_list')/li")
     <li>
-          New forum post <a href="/group/moderators/mailinglist/thread/5">Also - an attachment</a>
+          New email post <a href="/group/moderators/mailinglist/thread/5">Also - an attachment</a>
           was posted on <a href="/group/moderators">Moderatoriai</a>
-          forums <span class="event_time">(...)</span>
+          mailing list <span class="event_time">(...)</span>
     </li>
     <li>
           A new file <a href="/group/moderators/file/4/get">text.txt</a> for a group <a href="/group/moderators">Moderatoriai</a>
