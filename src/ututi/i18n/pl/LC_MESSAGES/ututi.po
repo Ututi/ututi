@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-05-04 17:13+0300\n"
+"PO-Revision-Date: 2010-05-12 09:13+0300\n"
 "Last-Translator: Jaroslav Šatkevič <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -49,6 +49,31 @@ msgid "Ututi bugs"
 msgstr ""
 
 msgid "Report Ututi bugs here."
+msgstr ""
+
+msgid "General"
+msgstr ""
+
+msgid "Discussions on anything and everything"
+msgstr ""
+
+msgid "Post updated."
+msgstr ""
+
+msgid ""
+"Unable to edit post, probably because somebody has already replied to "
+"your post."
+msgstr ""
+
+msgid ""
+"Unable to delete post, probably because somebody has already replied to "
+"your post."
+msgstr ""
+
+msgid "Post deleted."
+msgstr ""
+
+msgid "Thread deleted."
 msgstr ""
 
 msgid "Such id already exists, choose a different one."
@@ -108,9 +133,6 @@ msgstr "Członek"
 
 msgid "Leave group"
 msgstr "Wyjdź z grupy"
-
-msgid "What's new?"
-msgstr "Najnowsze"
 
 msgid "Mailing list"
 msgstr ""
@@ -1313,6 +1335,9 @@ msgstr[0] "%(count)s odpowiedź"
 msgstr[1] "%(count)s odpowiedzi"
 msgstr[2] "%(count)s odpowiedzi"
 
+msgid "Mark all as read"
+msgstr ""
+
 msgid "Back to the topic list"
 msgstr "Powrót do listy tematów"
 
@@ -1330,6 +1355,9 @@ msgstr ""
 
 msgid "Reply"
 msgstr "Odpowiedź"
+
+msgid "Delete thread"
+msgstr ""
 
 msgid "Recommended groups from your university and faculty"
 msgstr "Polecane grupy z Twojej uczelni"
@@ -1498,6 +1526,12 @@ msgstr "Obserwuj przedmioty"
 
 msgid "no, thank you"
 msgstr "nie chcę"
+
+msgid "Group mailing list archives"
+msgstr ""
+
+msgid "Group forum"
+msgstr "Forum grupy"
 
 msgid "Group members"
 msgstr "Członkowie grupy"
@@ -2168,9 +2202,6 @@ msgstr "Nie ma wpisów na forum grupy"
 msgid "No events for the group."
 msgstr "Nie ma żadnych wydarzeń"
 
-msgid "Group forum"
-msgstr "Forum grupy"
-
 msgid "Group events"
 msgstr "Wydarzenia grupy"
 
@@ -2330,6 +2361,9 @@ msgstr "Po raz pierwszy na Ututi? Nie wiesz, jak się tego używa?"
 msgid "Find out more"
 msgstr "Dowiedz się więcej"
 
+msgid "Were you looking for a university or department?"
+msgstr ""
+
 msgid "results"
 msgstr "wyniki"
 
@@ -2373,11 +2407,18 @@ msgstr ""
 msgid "Here"
 msgstr "bieżący folder"
 
-msgid "(Delete)"
-msgstr "(Usuń)"
-
 msgid "There are no files here, this folder is empty!"
 msgstr "Brak dokumentów. Folder jest pusty."
+
+#, python-format
+msgid "Show the other %(count)s file"
+msgid_plural "Show the other %(count)s files"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "(Delete)"
+msgstr "(Usuń)"
 
 msgid "free space:"
 msgstr "wolna przestrzeń:"

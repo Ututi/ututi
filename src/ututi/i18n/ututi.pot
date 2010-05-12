@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-05-04 17:13+0300\n"
+"POT-Creation-Date: 2010-05-12 09:13+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,6 +48,31 @@ msgid "Ututi bugs"
 msgstr ""
 
 msgid "Report Ututi bugs here."
+msgstr ""
+
+msgid "General"
+msgstr ""
+
+msgid "Discussions on anything and everything"
+msgstr ""
+
+msgid "Post updated."
+msgstr ""
+
+msgid ""
+"Unable to edit post, probably because somebody has already replied to your "
+"post."
+msgstr ""
+
+msgid ""
+"Unable to delete post, probably because somebody has already replied to your "
+"post."
+msgstr ""
+
+msgid "Post deleted."
+msgstr ""
+
+msgid "Thread deleted."
 msgstr ""
 
 msgid "Such id already exists, choose a different one."
@@ -106,9 +131,6 @@ msgid "Member"
 msgstr ""
 
 msgid "Leave group"
-msgstr ""
-
-msgid "What's new?"
 msgstr ""
 
 msgid "Mailing list"
@@ -1185,6 +1207,9 @@ msgid_plural "%(count)s replies"
 msgstr[0] ""
 msgstr[1] ""
 
+msgid "Mark all as read"
+msgstr ""
+
 msgid "Back to the topic list"
 msgstr ""
 
@@ -1201,6 +1226,9 @@ msgid "Create"
 msgstr ""
 
 msgid "Reply"
+msgstr ""
+
+msgid "Delete thread"
 msgstr ""
 
 msgid "Recommended groups from your university and faculty"
@@ -1356,6 +1384,12 @@ msgid "Watch subjects"
 msgstr ""
 
 msgid "no, thank you"
+msgstr ""
+
+msgid "Group mailing list archives"
+msgstr ""
+
+msgid "Group forum"
 msgstr ""
 
 msgid "Group members"
@@ -1989,9 +2023,6 @@ msgstr ""
 msgid "No events for the group."
 msgstr ""
 
-msgid "Group forum"
-msgstr ""
-
 msgid "Group events"
 msgstr ""
 
@@ -2135,6 +2166,9 @@ msgstr ""
 msgid "Find out more"
 msgstr ""
 
+msgid "Were you looking for a university or department?"
+msgstr ""
+
 msgid "results"
 msgstr ""
 
@@ -2177,10 +2211,16 @@ msgstr ""
 msgid "Here"
 msgstr ""
 
-msgid "(Delete)"
+msgid "There are no files here, this folder is empty!"
 msgstr ""
 
-msgid "There are no files here, this folder is empty!"
+#, python-format
+msgid "Show the other %(count)s file"
+msgid_plural "Show the other %(count)s files"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "(Delete)"
 msgstr ""
 
 msgid "free space:"

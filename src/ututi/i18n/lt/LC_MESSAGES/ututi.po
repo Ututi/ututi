@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-05-05 15:29+0300\n"
+"PO-Revision-Date: 2010-05-12 09:13+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -50,6 +50,31 @@ msgstr "Ututi klaidos"
 
 msgid "Report Ututi bugs here."
 msgstr "Pranešimai apie klaidas Ututi sistemoje."
+
+msgid "General"
+msgstr ""
+
+msgid "Discussions on anything and everything"
+msgstr ""
+
+msgid "Post updated."
+msgstr ""
+
+msgid ""
+"Unable to edit post, probably because somebody has already replied to "
+"your post."
+msgstr ""
+
+msgid ""
+"Unable to delete post, probably because somebody has already replied to "
+"your post."
+msgstr ""
+
+msgid "Post deleted."
+msgstr ""
+
+msgid "Thread deleted."
+msgstr ""
 
 msgid "Such id already exists, choose a different one."
 msgstr "Toks ID jau egzistuoja. Reikia naujo."
@@ -108,9 +133,6 @@ msgstr "Narys"
 
 msgid "Leave group"
 msgstr "Palikti šią grupę"
-
-msgid "What's new?"
-msgstr "Kas naujo?"
 
 msgid "Mailing list"
 msgstr "El. pašto konferencija"
@@ -1340,6 +1362,9 @@ msgstr[0] "%(count)s atsakymas"
 msgstr[1] "%(count)s atsakymai"
 msgstr[2] "%(count)s atsakymų"
 
+msgid "Mark all as read"
+msgstr ""
+
 msgid "Back to the topic list"
 msgstr "Grįžti į temų sąrašą"
 
@@ -1357,6 +1382,9 @@ msgstr "Kurti"
 
 msgid "Reply"
 msgstr "Atsakyti"
+
+msgid "Delete thread"
+msgstr ""
 
 msgid "Recommended groups from your university and faculty"
 msgstr "Rekomenduojamos grupės iš tavo universiteto ir fakulteto"
@@ -1525,6 +1553,12 @@ msgstr "Stebėti dalykus"
 
 msgid "no, thank you"
 msgstr "ne, ačiū"
+
+msgid "Group mailing list archives"
+msgstr ""
+
+msgid "Group forum"
+msgstr "Grupės paštas"
 
 msgid "Group members"
 msgstr "Grupės nariai"
@@ -2208,9 +2242,6 @@ msgstr "Grupės paštas tuščias."
 msgid "No events for the group."
 msgstr "Nėra įvykių."
 
-msgid "Group forum"
-msgstr "Grupės paštas"
-
 msgid "Group events"
 msgstr "Grupės įvykiai"
 
@@ -2371,6 +2402,9 @@ msgstr "Pirmą kartą Ututi? Nežinai, kas tai yra?"
 msgid "Find out more"
 msgstr "Sužinok"
 
+msgid "Were you looking for a university or department?"
+msgstr "Gal ieškojai universiteto arba fakulteto?"
+
 msgid "results"
 msgstr "rezultatai"
 
@@ -2414,11 +2448,18 @@ msgstr ""
 msgid "Here"
 msgstr "tiesiog čia"
 
-msgid "(Delete)"
-msgstr "(Trinti)"
-
 msgid "There are no files here, this folder is empty!"
 msgstr "Čia failų nėra, aplankas tuščias!"
+
+#, python-format
+msgid "Show the other %(count)s file"
+msgid_plural "Show the other %(count)s files"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "(Delete)"
+msgstr "(Trinti)"
 
 msgid "free space:"
 msgstr "laisva vieta:"
