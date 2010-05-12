@@ -41,7 +41,7 @@
         <table class="group-messages">
           %for msg in messages:
           <tr>
-            <td class="subject"><a href="${msg['thread'].url()}">${h.ellipsis(msg['thread'].subject, 30)}</a></td>
+            <td class="subject"><a href="${msg['url']}">${h.ellipsis(msg['subject'], 30)}</a></td>
             <td class="date">${msg['last_reply'].date()}</td>
           </tr>
           %endfor

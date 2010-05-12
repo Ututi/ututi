@@ -993,26 +993,44 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
             .all()
 
     def top_level_messages(self, sort=False, limit=None):
-        if sort:
-            messages = meta.Session.query(GroupMailingListMessage.thread_message_id,
-                                          GroupMailingListMessage.thread_group_id,
-                                          func.max(GroupMailingListMessage.sent).label('last_msg'))\
-                                          .group_by(GroupMailingListMessage.thread_message_id, GroupMailingListMessage.thread_group_id)\
-                                          .filter_by(group_id=self.id)\
-                                          .order_by(desc('last_msg'))
-            if limit is not None:
-                messages = messages.limit(limit)
-
-            return [{'last_reply': msg[2],
-                     'thread': GroupMailingListMessage.get(msg[0], msg[1])}
-                    for msg in messages.all()]
-
+        if self.mailinglist_enabled:
+            return self.top_level_messages_ml(sort=sort, limit=limit)
         else:
-            messages = meta.Session.query(GroupMailingListMessage)\
-                .filter_by(group_id=self.id, reply_to=None)\
-                .order_by(desc(GroupMailingListMessage.sent))\
-                .all()
-            return messages
+            return self.top_level_messages_forum(sort=sort, limit=limit)
+
+    def top_level_messages_ml(self, sort=False, limit=None):
+        messages = meta.Session.query(GroupMailingListMessage.thread_message_id,
+                                      GroupMailingListMessage.thread_group_id,
+                                      func.max(GroupMailingListMessage.sent).label('last_msg'))\
+                                      .group_by(GroupMailingListMessage.thread_message_id, GroupMailingListMessage.thread_group_id)\
+                                      .filter_by(group_id=self.id)\
+                                      .order_by(desc('last_msg'))
+        if limit is not None:
+            messages = messages.limit(limit)
+
+        for msg in messages.all():
+            thread = GroupMailingListMessage.get(msg[0], msg[1])
+            yield {'subject': thread.subject,
+                   'url': thread.url(),
+                   'last_reply': msg[2]}
+
+    def top_level_messages_forum(self, sort=False, limit=None):
+        category_ids = [r[0] for r in meta.Session.query(ForumCategory.id
+                                        ).filter_by(group_id=self.id).all()]
+        messages = meta.Session.query(
+                ForumPost.thread_id,
+                func.max(ForumPost.created_on).label('created_on'))\
+                .group_by(ForumPost.thread_id, ForumPost.category_id)\
+                .filter(ForumPost.category_id.in_(category_ids))\
+                .order_by(desc('created_on'))
+        if limit is not None:
+            messages = messages.limit(limit)
+
+        for msg in messages.all():
+            post = ForumPost.get(msg[0])
+            yield {'subject': post.title,
+                   'url': post.url(new=True),
+                   'last_reply': msg[1]}
 
     def all_files(self, limit=None):
         ids = [subject.id for subject in self.watched_subjects]
@@ -1780,7 +1798,7 @@ class ForumPost(ContentItem):
     def is_thread(self):
         return self.thread_id == self.id
 
-    def url(self):
+    def url(self, new=False):
         if self.category_id == 1:
             controller = 'community'
         elif self.category_id == 2:
@@ -1793,9 +1811,12 @@ class ForumPost(ContentItem):
             group_id = category.group.group_id
         else:
             group_id = None
-        return url(controller=controller, action='thread',
+        s = url(controller=controller, action='thread',
                    id=group_id,
                    category_id=self.category_id, thread_id=self.thread_id)
+        if new:
+            s += '#seen'
+        return s
 
     @staticmethod
     def get(id):
