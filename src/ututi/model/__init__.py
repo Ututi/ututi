@@ -992,7 +992,7 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
             .order_by(GroupMailingListMessage.sent.desc())\
             .all()
 
-    def top_level_messages(self, sort=False, limit = None):
+    def top_level_messages(self, sort=False, limit=None):
         if sort:
             messages = meta.Session.query(GroupMailingListMessage.thread_message_id,
                                           GroupMailingListMessage.thread_group_id,
@@ -1003,16 +1003,16 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
             if limit is not None:
                 messages = messages.limit(limit)
 
-            messages = messages.all()
-
-            return [{'last_reply': msg[2], 'thread': GroupMailingListMessage.get(msg[0], msg[1])} for msg in messages]
+            return [{'last_reply': msg[2],
+                     'thread': GroupMailingListMessage.get(msg[0], msg[1])}
+                    for msg in messages.all()]
 
         else:
             messages = meta.Session.query(GroupMailingListMessage)\
                 .filter_by(group_id=self.id, reply_to=None)\
                 .order_by(desc(GroupMailingListMessage.sent))\
                 .all()
-        return messages
+            return messages
 
     def all_files(self, limit=None):
         ids = [subject.id for subject in self.watched_subjects]
