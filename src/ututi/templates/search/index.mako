@@ -13,9 +13,63 @@ ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
 </div>
 </%def>
 
-
 <%def name="title()">
 ${_('Search')}
+</%def>
+
+<%def name="search_location_tag(tag)">
+<div class="location_block">
+  %if tag.logo is not None:
+  <div class="logo">
+    <img src="${url(controller='structure', action='logo', id=tag.id, width=26, height=26)}" alt="logo" />
+  </div>
+  %elif tag.parent is not None and tag.parent.logo is not None:
+  <div class="logo">
+    <img src="${url(controller='structure', action='logo', id=tag.parent.id, width=26, height=26)}" alt="logo" />
+  </div>
+  %endif
+  <div class="title">
+    %if tag.parent is not None:
+    <a href="${tag.parent.url()}" title="${tag.parent.title}">${h.ellipsis(tag.parent.title, 70)}</a> ∘
+    %endif
+    <a href="${tag.url()}" title="${tag.title}">${h.ellipsis(tag.title, 70)}</a>
+  </div>
+  <div class="stats">
+    <span>
+        <%
+           cnt = tag.count('subject')
+        %>
+        ${ungettext("%(count)s subject", "%(count)s subjects", cnt) % dict(count = cnt)|n}
+    </span>
+    <span>
+        <%
+           cnt = tag.count('group')
+        %>
+        ${ungettext("%(count)s group", "%(count)s groups", cnt) % dict(count = cnt)|n}
+    </span>
+    <span>
+        <%
+           cnt = tag.count('file')
+        %>
+        ${ungettext("%(count)s file", "%(count)s files", cnt) % dict(count = cnt)|n}
+    </span>
+  </div>
+</div>
+</%def>
+
+<%def name="location_tag_results(results=None)">
+<%
+   if results is None:
+       results = c.tag_search
+%>
+%if results:
+<div id="location-search" class="rounded">
+  <div class="block-title">${_('Were you looking for a university or department?')}</div>
+  %for result in results:
+    ${search_location_tag(result.tag)}
+  %endfor
+</div>
+%endif
 </%def>
 
 <%def name="search_form(text='', obj_type='*', tags='', parts=['obj_type', 'text', 'tags'], target=None, js_target=None, js=False)">
@@ -122,6 +176,9 @@ ${h.javascript_link('/javascript/search.js')|n}
 %>
 %if results is not None:
 <div id="search-results-container">
+  %if c.page == 1:
+    ${location_tag_results()}
+  %endif
   <h3 class="underline search-results-title">
     <span>${_('results')}:</span>
     <span class="result-count">(${ungettext("found %(count)s result", "found %(count)s results", results.item_count) % dict(count = results.item_count)})</span>

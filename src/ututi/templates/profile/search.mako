@@ -1,7 +1,6 @@
 <%inherit file="/profile/base.mako" />
 <%namespace file="/widgets/tags.mako" import="*"/>
-<%namespace file="/search/index.mako" import="search_form"/>
-<%namespace file="/search/index.mako" import="search_results"/>
+<%namespace file="/search/index.mako" import="*"/>
 <%namespace file="/portlets/sections.mako" import="*"/>
 
 <%def name="head_tags()">
@@ -17,10 +16,8 @@ ${user_sidebar(['search'])}
 
 <h1>${_('Search')}</h1>
 ${search_form(c.text, c.obj_type, c.tags, parts=['obj_type', 'text', 'tags'], target=url(controller='profile', action='search'), js_target=url(controller='profile', action='search_js'), js=True)}
-
 ${search_results(c.results)}
 %if c.searched:
-
 
   %if c.obj_type == 'group':
   <div class="create_item">

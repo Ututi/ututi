@@ -170,6 +170,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     def search(self):
         c.breadcrumbs = [{'title': _('Search'), 'link': url(controller='profile', action='browse')}]
         self._search()
+        self._search_locations(self.form_result.get('text', ''))
         return render('/profile/search.mako')
 
     @ActionProtector("user")

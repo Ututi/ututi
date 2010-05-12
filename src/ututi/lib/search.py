@@ -121,9 +121,11 @@ def _search_query_tags(query, tags):
 
     return query
 
-def tag_search(text):
+def tag_search(text, count=5):
     """Search in the tag_search_items table (for location tags)."""
     query = meta.Session.query(TagSearchItem)\
         .filter(TagSearchItem.terms.op('@@')(func.plainto_tsquery(text)))\
         .order_by(func.ts_rank_cd(TagSearchItem.terms, func.plainto_tsquery(text)))
+    if count is not None:
+        query = query.limit(count)
     return query.all()

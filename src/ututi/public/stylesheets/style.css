@@ -1376,6 +1376,11 @@ ul#event_list li {
 
 
 /* misc */
+.rounded {
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
 a.cancel_link {
   padding-right: 8px;
   background: url('/images/details/icon_cross.png') right center no-repeat;
@@ -1760,11 +1765,32 @@ h2.bunner-heading {
   height: 35px;
 }
 
+.location_block {
+  padding-left: 36px;
+  font-size: 14px;
+  margin-top: 10px;
+  margin-right: 5px;
+}
+
+#location-search {
+  padding: 5px 10px;
+  background: #f9f9f9;
+  margin-top: 10px;
+}
+
+#location-search div.block-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #808080;
+}
+
+.location_block div.stats,
 .university_block div.stats {
   color: #808080;
   font-size: 11px;
 }
 
+.location_block div.logo,
 .university_block div.logo {
   float: left;
   margin-left: -36px;
@@ -1774,6 +1800,7 @@ h2.bunner-heading {
   line-height: 28px;
 }
 
+.location_block div.logo img,
 .university_block div.logo img {
   vertical-align: middle;
 }

@@ -9,7 +9,7 @@ from pylons import request, tmpl_context as c, url
 from pylons.templating import render_mako_def
 
 from ututi.lib.base import BaseController, render
-from ututi.lib.search import search_query, search_query_count
+from ututi.lib.search import search_query, search_query_count, tag_search
 
 log = logging.getLogger(__name__)
 
@@ -41,15 +41,20 @@ class SearchBaseController(BaseController):
         if c.obj_type != '*' and c.obj_type in ('group', 'page', 'subject'):
             search_params['obj_type'] = c.obj_type
 
+        c.page = int(request.params.get('page', 1))
+
         if search_params != {}:
             query = search_query(**search_params)
             c.results = paginate.Page(
                 query,
-                page=int(request.params.get('page', 1)),
+                page=c.page,
                 items_per_page = 30,
                 item_count = search_query_count(query),
                 **search_params)
             c.searched = True
+
+    def _search_locations(self, text):
+        c.tag_search = tag_search(text)
 
 class SearchController(SearchBaseController):
 
@@ -59,10 +64,12 @@ class SearchController(SearchBaseController):
             redirect(url(controller='profile', action='browse'))
 
         self._search()
+        self._search_locations(c.text)
         return render('/search/index.mako')
 
     @validate(schema=SearchSubmit, post_only = False, on_get = True)
     def search_js(self):
         self._search()
+        self._search_locations(c.text)
         return render_mako_def('/search/index.mako','search_results', results=c.results, controller='search', action='index')
 

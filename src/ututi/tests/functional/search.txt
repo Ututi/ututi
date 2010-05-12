@@ -22,3 +22,14 @@ And does type selection work?
     >>> browser.printQuery("id('search-results')//a[@class='item-title larger']/text()")
     Moderatoriai
 
+Test location search
+   >>> browser.open('http://localhost/search')
+   >>> form = browser.getForm('search_form')
+
+Let's fill out the search form.
+
+   >>> form.getControl(name="text").value = "ekonomikos"
+   >>> form.getControl('Search').click()
+   >>> browser.printQuery("id('location-search')//div[@class='title']//a/text()")
+   Vilniaus universitetas
+   Ekonomikos fakultetas
