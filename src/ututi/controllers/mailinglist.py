@@ -107,8 +107,12 @@ class NewMailForm(NewReplyForm):
 class MailinglistController(GroupControllerBase):
 
     def _top_level_messages(self, group):
+        message_objs = meta.Session.query(GroupMailingListMessage)\
+            .filter_by(group_id=group.id, reply_to=None)\
+            .order_by(desc(GroupMailingListMessage.sent))\
+            .all()
         messages = []
-        for message in group.top_level_messages():
+        for message in message_objs:
             msg = {'thread_id': message.id,
                    'last_reply_author_id': message.posts[-1].author,
                    'last_reply_author_title': message.posts[-1].author.fullname,
