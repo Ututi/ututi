@@ -7,12 +7,7 @@ from sqlalchemy import orm
 from pylons.i18n import ungettext, _
 
 from ututi.model.mailing import GroupMailingListMessage
-from ututi.model import Group
-from ututi.model import Subject
-from ututi.model import User
-from ututi.model import File
-from ututi.model import Page
-from ututi.model import ContentItem
+from ututi.model import Group, Subject, User, File, Page, ContentItem, ForumPost
 from ututi.model import meta
 from ututi.lib.helpers import link_to, ellipsis
 
@@ -232,14 +227,14 @@ class SubjectModifiedEvent(Event):
                 'link_to_context': link_to(self.context.title, self.context.url(), 25)}
 
 
-class ForumPostCreatedEvent(Event):
-    """Event fired when someone posts a message on group forums.
+class MailinglistPostCreatedEvent(Event):
+    """Event fired when someone posts a message on the group mailing list.
 
     Has an attribute `message' pointing to the message added.
     """
 
     def render(self):
-        return _("New forum post %(link_to_message)s was posted on %(link_to_group)s forums") % {
+        return _("New email post %(link_to_message)s was posted on %(link_to_group)s mailing list") % {
             'link_to_group': link_to(self.context.title, self.context.url()),
             'link_to_message': link_to(self.message.subject, self.message.url())}
 
@@ -251,6 +246,27 @@ class ForumPostCreatedEvent(Event):
         else:
             return "%(link_to_message)s" % {
                 'link_to_message': link_to(self.message.subject, self.message.url(), 35)}
+
+
+class ForumPostCreatedEvent(Event):
+    """Event fired when someone posts a message on group forums.
+
+    Has an attribute `post' pointing to the message added.
+    """
+
+    def render(self):
+        return _("New forum post %(link_to_message)s posted on %(link_to_group)s forums") % {
+            'link_to_group': link_to(self.context.title, self.context.url(new=True)),
+            'link_to_message': link_to(self.post.title, self.post.url(new=True))}
+
+    def shortened(self, context=True):
+        if context:
+            return "%(link_to_context)s > %(link_to_message)s" % {
+                'link_to_context': link_to(self.context.title, self.context.url(new=True), 23),
+                'link_to_message': link_to(self.post.title, self.post.url(new=True), 23)}
+        else:
+            return "%(link_to_message)s" % {
+                'link_to_message': link_to(self.post.title, self.post.url(new=True), 35)}
 
 
 class GroupMemberJoinedEvent(Event):
@@ -327,6 +343,7 @@ class GroupStoppedWatchingSubjects(Event):
 
 def setup_orm(engine):
     from ututi.model import files_table, pages_table, subjects_table
+    from ututi.model import forum_posts_table
     from ututi.model.mailing import group_mailing_list_messages_table
     global events_table
     events_table = Table(
@@ -373,13 +390,19 @@ def setup_orm(engine):
                polymorphic_on=events_table.c.event_type,
                polymorphic_identity='subject_modified')
 
+    orm.mapper(MailinglistPostCreatedEvent, events_table,
+               inherits=Event,
+               polymorphic_on=events_table.c.event_type,
+               polymorphic_identity='mailinglist_post_created',
+               properties = {'message': relation(GroupMailingListMessage,
+                                                 primaryjoin=group_mailing_list_messages_table.c.id==events_table.c.message_id)})
 
     orm.mapper(ForumPostCreatedEvent, events_table,
                inherits=Event,
                polymorphic_on=events_table.c.event_type,
                polymorphic_identity='forum_post_created',
-               properties = {'message': relation(GroupMailingListMessage,
-                                                 primaryjoin=group_mailing_list_messages_table.c.id==events_table.c.message_id)})
+               properties = {'post': relation(ForumPost,
+                                 primaryjoin=forum_posts_table.c.id==events_table.c.post_id)})
 
     orm.mapper(GroupMemberJoinedEvent, events_table,
                inherits=Event,

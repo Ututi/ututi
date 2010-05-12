@@ -537,6 +537,7 @@ create table events (
        page_id int8 references pages(id) on delete cascade default null,
        subject_id int8 references subjects(id) on delete cascade default null,
        message_id int8 references group_mailing_list_messages(id) on delete cascade default null,
+       post_id int8 references forum_posts(id) on delete cascade default null,
        primary key (id));;
 
 
@@ -632,7 +633,7 @@ CREATE TRIGGER subject_event_trigger BEFORE INSERT OR UPDATE ON subjects
 CREATE FUNCTION group_mailing_list_message_event_trigger() RETURNS trigger AS $$
     BEGIN
       INSERT INTO events (object_id, author_id, event_type, message_id)
-             VALUES (NEW.group_id, cast(current_setting('ututi.active_user') as int8), 'forum_post_created', NEW.id);
+             VALUES (NEW.group_id, cast(current_setting('ututi.active_user') as int8), 'mailinglist_post_created', NEW.id);
       RETURN NEW;
     END
 $$ LANGUAGE plpgsql;;
@@ -640,6 +641,22 @@ $$ LANGUAGE plpgsql;;
 
 CREATE TRIGGER group_mailing_list_message_event_trigger AFTER INSERT OR UPDATE ON group_mailing_list_messages
     FOR EACH ROW EXECUTE PROCEDURE group_mailing_list_message_event_trigger();;
+
+
+CREATE FUNCTION group_forum_message_event_trigger() RETURNS trigger AS $$
+    BEGIN
+      INSERT INTO events (object_id, author_id, event_type, post_id)
+             VALUES (
+                (SELECT group_id FROM forum_categories
+                 WHERE forum_categories.id = NEW.category_id),
+                cast(current_setting('ututi.active_user') as int8),
+                'forum_post_created', NEW.id);
+      RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+CREATE TRIGGER group_forum_message_event_trigger AFTER INSERT OR UPDATE ON forum_posts
+    FOR EACH ROW EXECUTE PROCEDURE group_forum_message_event_trigger();;
 
 
 CREATE FUNCTION member_group_event_trigger() RETURNS trigger AS $$

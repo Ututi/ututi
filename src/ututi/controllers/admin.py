@@ -127,7 +127,7 @@ class AdminController(BaseController):
         messages_stmt = meta.Session.query(
             Event.author_id,
             func.count(Event.created).label('messages_count'))\
-            .filter(Event.event_type == 'forum_post_created')\
+            .filter(Event.event_type == 'mailinglist_post_created')\
             .filter(Event.created < to_time)\
             .filter(Event.created >= from_time)\
             .group_by(Event.author_id).subquery()
