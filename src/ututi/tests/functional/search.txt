@@ -23,13 +23,18 @@ And does type selection work?
     Moderatoriai
 
 Test location search
-   >>> browser.open('http://localhost/search')
-   >>> form = browser.getForm('search_form')
+    >>> from ututi.model import meta, LocationTag
+    >>> vu = LocationTag.get(u'vu')
+    >>> vu.description = u'Vilniaus Universitetas'
+    >>> ef = LocationTag.get(u'vu/ef')
+    >>> ef.description = u'Ekonomikos fakultetas'
+    >>> meta.Session.commit()
+    >>> browser.open('http://localhost/search')
+    >>> form = browser.getForm('search_form')
 
 Let's fill out the search form.
-
-   >>> form.getControl(name="text").value = "ekonomikos"
-   >>> form.getControl('Search').click()
-   >>> browser.printQuery("id('location-search')//div[@class='title']//a/text()")
-   Vilniaus universitetas
-   Ekonomikos fakultetas
+    >>> form.getControl(name="text").value = "ekonomikos"
+    >>> form.getControl('Search').click()
+    >>> browser.printQuery("id('location-search')//div[@class='title']//a/text()")
+    Vilniaus universitetas
+    Ekonomikos fakultetas

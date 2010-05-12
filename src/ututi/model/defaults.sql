@@ -852,4 +852,3 @@ $$ LANGUAGE plpgsql;;
 CREATE TRIGGER update_tag_search AFTER INSERT OR UPDATE ON tags
     FOR EACH ROW EXECUTE PROCEDURE update_tag_search();;
 
-SELECT update_tag_worker(tags.*) FROM tags WHERE tag_type = 'location';;
