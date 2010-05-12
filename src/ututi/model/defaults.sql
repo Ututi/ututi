@@ -269,6 +269,54 @@ CREATE TRIGGER set_thread_id BEFORE INSERT OR UPDATE ON group_mailing_list_messa
     FOR EACH ROW EXECUTE PROCEDURE set_thread_id();;
 
 
+/* Forums */
+
+CREATE TABLE forum_categories (
+       id bigserial not null,
+       group_id int8 null references groups(id),
+       title varchar(255) not null default '',
+       description text not null default '',
+       primary key (id));
+
+
+insert into forum_categories (group_id, title, description)
+    values (null, 'Community', 'Ututi community forum');
+insert into forum_categories (group_id, title, description)
+    values (null, 'Report a bug', 'Report bugs here' );
+
+
+CREATE TABLE forum_posts (
+       id int8 not null references content_items(id),
+       thread_id int8 references forum_posts,
+       category_id int8 not null references forum_categories(id),
+       title varchar(500) not null,
+       message text not null,
+       parent_id int8 default null references content_items(id) on delete cascade,
+       primary key(id));;
+
+
+CREATE TABLE seen_threads (
+       thread_id int8 not null references forum_posts,
+       user_id int8 not null references users(id),
+       visited_on timestamp not null default '2000-01-01',
+       primary key(thread_id, user_id));;
+
+
+CREATE FUNCTION set_forum_thread_id() RETURNS trigger AS $$
+    BEGIN
+        IF NEW.thread_id is NULL THEN
+          NEW.thread_id := NEW.id;
+        END IF;
+        RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+
+CREATE TRIGGER set_forum_thread_id BEFORE INSERT OR UPDATE ON forum_posts
+    FOR EACH ROW EXECUTE PROCEDURE set_forum_thread_id();;
+
+
+
 /* A table that tracks attachments for messages */
 
 create table group_mailing_list_attachments (
@@ -712,51 +760,6 @@ CREATE TABLE group_requests (
        group_id int8 not null references groups(id) on delete cascade,
        hash char(8) not null unique,
        primary key (hash));;
-
-
-CREATE TABLE forum_categories (
-       id bigserial not null,
-       group_id int8 null references groups(id),
-       title varchar(255) not null default '',
-       description text not null default '',
-       primary key (id));
-
-
-insert into forum_categories (group_id, title, description)
-    values (null, 'Community', 'Ututi community forum');
-insert into forum_categories (group_id, title, description)
-    values (null, 'Report a bug', 'Report bugs here' );
-
-
-CREATE TABLE forum_posts (
-       id int8 not null references content_items(id),
-       thread_id int8 references forum_posts,
-       category_id int8 not null references forum_categories(id),
-       title varchar(500) not null,
-       message text not null,
-       parent_id int8 default null references content_items(id) on delete cascade,
-       primary key(id));;
-
-
-CREATE TABLE seen_threads (
-       thread_id int8 not null references forum_posts,
-       user_id int8 not null references users(id),
-       visited_on timestamp not null default '2000-01-01',
-       primary key(thread_id, user_id));;
-
-
-CREATE FUNCTION set_forum_thread_id() RETURNS trigger AS $$
-    BEGIN
-        IF NEW.thread_id is NULL THEN
-          NEW.thread_id := NEW.id;
-        END IF;
-        RETURN NEW;
-    END
-$$ LANGUAGE plpgsql;;
-
-
-CREATE TRIGGER set_forum_thread_id BEFORE INSERT OR UPDATE ON forum_posts
-    FOR EACH ROW EXECUTE PROCEDURE set_forum_thread_id();;
 
 /* blog entries */
 create table blog (
