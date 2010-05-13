@@ -3,6 +3,8 @@ import logging
 
 from sqlalchemy.sql import func, select
 from sqlalchemy.sql.expression import or_
+from sqlalchemy.orm import aliased
+
 import pylons
 
 log = logging.getLogger(__name__)
@@ -123,8 +125,15 @@ def _search_query_tags(query, tags):
 
 def tag_search(text, count=5):
     """Search in the tag_search_items table (for location tags)."""
+    QTag = aliased(LocationTag)
+    QParent = aliased(LocationTag)
+    text = text.lower().strip()
     query = meta.Session.query(TagSearchItem)\
+        .join(QTag)\
+        .outerjoin((QParent, QParent.id==QTag.parent_id))\
         .filter(TagSearchItem.terms.op('@@')(func.plainto_tsquery(text)))\
+        .order_by(or_(func.lower(func.btrim(QParent.title)) == text, func.lower(func.btrim(QParent.title_short)) == text).desc())\
+        .order_by(or_(func.lower(func.btrim(QTag.title)) == text, func.lower(func.btrim(QTag.title_short)) == text).desc())\
         .order_by(func.ts_rank_cd(TagSearchItem.terms, func.plainto_tsquery(text)))
     if count is not None:
         query = query.limit(count)
