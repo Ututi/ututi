@@ -250,14 +250,19 @@ test_translations: bin/pofilter
 .coverage: bin/coverage bin/test
 	bin/coverage run bin/test
 
-# As our translation extraction depends on coverage, we test coverage
-# of templates any non-covered template might not get it's
-# translations extracted, which is very risky.
-.PHONY: test_template_coverage
-test_template_coverage: bin/coverage .coverage
+# Test for files that were not touched at all such files may contain
+# code, but if the files were not imported during the test run they
+# will not show up in the coverage report, we want to at least get a
+# warning when that happens
+.PHONY: test_coverage
+test_coverage: bin/coverage .coverage
 	bin/coverage report --omit=/usr,eggs,src/ututi/tests,$(HOME)/.buildout,src/ututi/migration | grep mako | awk  '{print $$1}' | sed s/data/src\\/ututi/ | sort > parts/test/covered_templates.txt
 	find src/ututi -name "*.mako" | sort > parts/test/all_templates.txt
-	diff -u parts/test/all_templates.txt parts/test/covered_templates.txt
+	diff -u parts/test/all_templates.txt parts/test/covered_templates.txt || true
+
+	bin/coverage report --omit=/usr,eggs,src/ututi/tests,$(HOME)/.buildout,src/ututi/migration | grep -v mako | grep '^src/' | awk  '{print $$1}' | sort > parts/test/covered_code.txt
+	find src/ututi -name "*.py" | grep -v "src/ututi/migration" | grep -v "src/ututi/tests" | sed s/\\.py// | sort > parts/test/all_code.txt
+	diff -u parts/test/all_code.txt parts/test/covered_code.txt || true
 
 .PHONY: update_expected_translations
 update_expected_translations: bin/pofilter
@@ -269,6 +274,6 @@ update_expected_translations: bin/pofilter
 test_all: bin/test bin/coverage instance/done instance/var/run/.s.PGSQL.${PGPORT}
 	rm -rf data/templates/
 	bin/coverage run bin/test --all
-	$(MAKE) test_template_coverage
+	$(MAKE) test_coverage
 	$(MAKE) test_translations
 
