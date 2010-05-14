@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-05-12 13:44+0300\n"
+"PO-Revision-Date: 2010-05-14 19:23+0300\n"
 "Last-Translator: Jaroslav Šatkevič <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -600,10 +600,14 @@ msgid "%(link_to_context)s (subject changed)"
 msgstr "%(link_to_context)s (odnowiono przedmiot)"
 
 #, python-format
-msgid "New forum post %(link_to_message)s was posted on %(link_to_group)s forums"
+msgid ""
+"New email post %(link_to_message)s was posted on %(link_to_group)s "
+"mailing list"
 msgstr ""
-"Na forum grupy %(link_to_group)s została zamieszczona wiadomość "
-"%(link_to_message)s"
+
+#, python-format
+msgid "New forum post %(link_to_message)s posted on %(link_to_group)s forums"
+msgstr ""
 
 #, python-format
 msgid "Member %(link_to_user)s joined the group %(link_to_group)s"

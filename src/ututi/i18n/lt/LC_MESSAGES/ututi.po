@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-05-12 13:44+0300\n"
+"PO-Revision-Date: 2010-05-14 19:23+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -597,10 +597,14 @@ msgid "%(link_to_context)s (subject changed)"
 msgstr "%(link_to_context)s (dalykas pasikeitė)"
 
 #, python-format
-msgid "New forum post %(link_to_message)s was posted on %(link_to_group)s forums"
+msgid ""
+"New email post %(link_to_message)s was posted on %(link_to_group)s "
+"mailing list"
 msgstr ""
-"Grupės %(link_to_group)s pašto dėžutėje yra naujas pranešimas "
-"%(link_to_message)s."
+
+#, python-format
+msgid "New forum post %(link_to_message)s posted on %(link_to_group)s forums"
+msgstr ""
 
 #, python-format
 msgid "Member %(link_to_user)s joined the group %(link_to_group)s"
