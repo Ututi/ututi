@@ -34,10 +34,49 @@ Let's start a thread:
     >>> browser.getControl(name='message').value = "How's everybody doin'?"
     >>> browser.getControl('Post').click()
 
+A notification to subscribed group members has been sent by email:
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> msg = mail_queue.pop()
+    >>> msg.recipients
+    ['admin@ututi.lt']
+    >>> print msg.message
+    MIME-Version: 1.0
+    Content-Type: text/plain; charset="us-ascii"
+    Content-Transfer-Encoding: 7bit
+    From: admin@ututi.lt
+    To: moderators@groups.ututi.lt
+    Subject: What's up?
+    Message-ID: <...@groups.ututi.lt>
+    Reply-To: moderators@groups.ututi.lt
+    Errors-To: errors@ututi.lt
+    List-Id: moderators@groups.ututi.lt
+    <BLANKLINE>
+    How's everybody doin'?
+
 And we'll post a reply:
 
     >>> browser.getControl(name='message').value = 'Not too bad!'
     >>> browser.getControl('Reply').click()
+
+Email notifications about the reply have also been sent:
+
+    >>> msg = mail_queue.pop()
+    >>> msg.recipients
+    ['admin@ututi.lt']
+    >>> print msg.message
+    MIME-Version: 1.0
+    Content-Type: text/plain; charset="us-ascii"
+    Content-Transfer-Encoding: 7bit
+    From: admin@ututi.lt
+    To: moderators@groups.ututi.lt
+    Subject: What's up?
+    Message-ID: <...@groups.ututi.lt>
+    Reply-To: moderators@groups.ututi.lt
+    Errors-To: errors@ututi.lt
+    List-Id: moderators@groups.ututi.lt
+    <BLANKLINE>
+    Not too bad!
 
 We can see the messages we posted:
 
