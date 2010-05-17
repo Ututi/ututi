@@ -222,7 +222,9 @@ def setup_orm(engine):
                inherit_condition=forum_posts_table.c.id==ContentItem.id,
                polymorphic_identity='forum_post',
                polymorphic_on=content_items_table.c.content_type,
-               properties = {'parent': relation(ContentItem,
+               properties = {'category': relation(ForumCategory,
+                                                  backref="posts"),
+                             'parent': relation(ContentItem,
                                                 primaryjoin=forum_posts_table.c.parent_id==content_items_table.c.id,
                                                 backref="forum_posts")
                             })

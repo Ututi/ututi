@@ -65,7 +65,7 @@
   % endfor
   </table>
 
-  % if c.user:
+  % if c.user and category.posts:
     <div>
       ${h.button_to(_('Mark all as read'), url(controller=c.controller, action='mark_category_as_read', id=c.group_id, category_id=category.id))}
     </div>
