@@ -660,7 +660,7 @@ CREATE FUNCTION file_event_trigger() RETURNS trigger AS $$
 $$ LANGUAGE plpgsql;;
 
 
-CREATE TRIGGER file_event_trigger AFTER INSERT OR UPDATE ON files
+CREATE TRIGGER file_event_trigger AFTER INSERT ON files
     FOR EACH ROW EXECUTE PROCEDURE file_event_trigger();;
 
 
