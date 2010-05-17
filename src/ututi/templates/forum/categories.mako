@@ -1,9 +1,16 @@
 <%inherit file="/base.mako" />
 <%namespace file="/portlets/forum.mako" import="*"/>
+<%namespace file="/portlets/sections.mako" import="*"/>
 <%namespace file="/forum/index.mako" import="*"/>
 
 <%def name="title()">
   ${c.group.title}
+</%def>
+
+<%def name="portlets()">
+<div id="sidebar">
+  ${group_sidebar()}
+</div>
 </%def>
 
 <%def name="head_tags()">

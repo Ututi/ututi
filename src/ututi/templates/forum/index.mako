@@ -1,4 +1,5 @@
 <%inherit file="/base.mako" />
+<%namespace file="/portlets/sections.mako" import="*"/>
 <%namespace file="/portlets/forum.mako" import="*"/>
 
 <%def name="title()">
@@ -19,6 +20,8 @@
     ${community_forum_posts_portlet()}
   % elif c.category.id == 1:
     ${bugs_forum_posts_portlet()}
+  % else:
+    ${group_sidebar()}
   % endif
 </div>
 </%def>
