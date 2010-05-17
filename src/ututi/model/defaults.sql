@@ -541,7 +541,7 @@ CREATE TRIGGER set_page_location AFTER INSERT ON subject_pages
 /* a trigger to update the page's tags when the subject's location changes */
 CREATE FUNCTION update_page_location() RETURNS trigger AS $$
     BEGIN
-      IF NEW.content_type <> 'subject' THEN
+      IF NEW.content_type <> 'subject' OR NEW.location_id = OLD.location_id THEN
         RETURN NEW;
       END IF;
       UPDATE content_items SET location_id = NEW.location_id
