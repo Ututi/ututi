@@ -12,7 +12,7 @@ CREATE OR REPLACE FUNCTION update_page_location() RETURNS trigger AS $$
     END
 $$ LANGUAGE plpgsql;;
 
-ALTER TABLE content_items ADD COLUMN rating int NOT NULL DEFAULT 0;;
+ALTER TABLE search_items ADD COLUMN rating int NOT NULL DEFAULT 0;;
 
 CREATE OR REPLACE FUNCTION subject_rating_worker(content_items) RETURNS void AS $$
   DECLARE
@@ -35,8 +35,8 @@ CREATE OR REPLACE FUNCTION subject_rating_worker(content_items) RETURNS void AS 
         WHERE subject_id = subject.id;
       SELECT COUNT(user_id) INTO user_count FROM user_monitored_subjects
         WHERE ignored = false and subject_id = subject.id;
-      UPDATE content_items SET rating = page_count + file_count + group_count + user_count
-        WHERE id = subject.id;
+      UPDATE search_items SET rating = page_count + file_count + group_count + user_count
+        WHERE content_item_id = subject.id;
     END IF;
   END
 $$ LANGUAGE plpgsql;;

@@ -74,7 +74,6 @@ insert into user_medals (user_id, medal_type) values (1, 'admin2');
 
 /* A generic table for Ututi objects */
 create table content_items (id bigserial not null,
-       rating int not null default 0,
        content_type varchar(20) not null default '',
        created_by int8 references users(id) not null,
        created_on timestamp not null default (now() at time zone 'UTC'),
@@ -337,6 +336,7 @@ create table group_mailing_list_attachments (
 /* A table for search indexing */
 create table search_items (
        content_item_id int8 not null references content_items(id) on delete cascade,
+       rating int not null default 0,
        terms tsvector,
        primary key (content_item_id));;
 
@@ -918,8 +918,8 @@ CREATE OR REPLACE FUNCTION subject_rating_worker(content_items) RETURNS void AS 
         WHERE subject_id = subject.id;
       SELECT COUNT(user_id) INTO user_count FROM user_monitored_subjects
         WHERE ignored = false and subject_id = subject.id;
-      UPDATE content_items SET rating = page_count + file_count + group_count + user_count
-        WHERE id = subject.id;
+      UPDATE search_items SET rating = page_count + file_count + group_count + user_count
+        WHERE content_item_id = subject.id;
     END IF;
   END
 $$ LANGUAGE plpgsql;;
