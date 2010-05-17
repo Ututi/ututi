@@ -28,6 +28,8 @@ def search_query(text=None, tags=None, obj_type=None, extra=None):
         tags = tags.split(', ')
     query = _search_query_tags(query, tags)
 
+    query = _search_query_rank(query, obj_type, text)
+
     if extra is not None:
         query = extra(query)
 
@@ -58,13 +60,22 @@ def search(text=None, tags=None, type=None, extra=None):
     query = search_query(text, tags, type, extra)
     return query.all()
 
-
 def _search_query_text(query, text=None):
     """Prepare the initial query, searching by text and ranking by the proximity."""
 
     if text is not None:
-        query = query.filter(SearchItem.terms.op('@@')(func.plainto_tsquery(text)))\
-            .order_by(func.ts_rank_cd(SearchItem.terms, func.plainto_tsquery(text)))
+        query = query.filter(SearchItem.terms.op('@@')(func.plainto_tsquery(text)))
+    return query
+
+def _search_query_rank(query, obj_type, text):
+    """
+    Rank query results, sorting by search rank for most content types and
+    integrating the rating for subjects.
+    """
+    if obj_type == 'subject':
+        query = query.order_by((SearchItem.rating * func.ts_rank_cd(SearchItem.terms, func.plainto_tsquery(text))).desc())
+    else:
+        query = query.order_by(func.ts_rank_cd(SearchItem.terms, func.plainto_tsquery(text)))
     return query
 
 def _search_query_type(query, obj_type):

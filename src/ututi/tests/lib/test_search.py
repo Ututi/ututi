@@ -102,8 +102,8 @@ def test_tag_search():
         [(u'Ekologai', 'group'), (u'Test subject', 'subject'), (u'page title', 'page')]
 
     Take a look at the rating just cause they are here:
-        >>> sorted([(result.object.rating, result.object.title) for result in search(tags=[u'Ekologijos fakultetas'])])
-        [(0, u'Ekologai'), (0, u'page title'), (1, u'Test subject')]
+        >>> [(result.rating, result.object.title) for result in search(u'pagrindai', type='subject')]
+        [(2, u'Biologijos pagrindai'), (1, u'Test subject')]
     """
 
 
@@ -168,6 +168,7 @@ def test_setup(test):
     g2.tags.append(tg)
 
     s = Subject(u'subj_id', u'Test subject', LocationTag.get(u'VU'))
+    s.description = u'pagrindai'
     t = SimpleTag(u'a tag')
     meta.Session.add(t)
     s.tags.append(t)
