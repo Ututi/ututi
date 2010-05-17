@@ -102,6 +102,14 @@ def make_map(config):
                 controller='forum',
                 action='delete_post')
 
+    map.connect('/group/{id}/forum/{category_id}/thread/{thread_id}/subscribe',
+                controller='forum',
+                action='subscribe')
+
+    map.connect('/group/{id}/forum/{category_id}/thread/{thread_id}/unsubscribe',
+                controller='forum',
+                action='unsubscribe')
+
     # Mailing list
     map.connect('/group/{id}/mailinglist',
                 controller='mailinglist',
@@ -252,6 +260,10 @@ def make_map(config):
                 controller='community', action='edit_post', id=None, category_id=1)
     map.connect('/community/thread/{thread_id}/delete_post',
                 controller='community', action='delete_post', id=None, category_id=1)
+    map.connect('/community/thread/{thread_id}/subscribe',
+                controller='community', action='subscribe', id=None, category_id=1)
+    map.connect('/community/thread/{thread_id}/unsubscribe',
+                controller='community', action='unsubscribe', id=None, category_id=1)
 
     map.connect('forum_bugs_index', '/bugs',
                 controller='bugs', action='index', id=None, category_id=2)
@@ -267,6 +279,10 @@ def make_map(config):
                 controller='bugs', action='edit_post', id=None, category_id=2)
     map.connect('/bugs/thread/{thread_id}/delete_post',
                 controller='bugs', action='delete_post', id=None, category_id=2)
+    map.connect('/bugs/thread/{thread_id}/subscribe',
+                controller='bugs', action='subscribe', id=None, category_id=2)
+    map.connect('/bugs/thread/{thread_id}/unsubscribe',
+                controller='bugs', action='unsubscribe', id=None, category_id=2)
 
     map.connect('/{controller}', action='index')
     map.connect('/{controller}/{action}')

@@ -1,5 +1,8 @@
 from ututi.lib.base import BaseController
 
+from mimetools import choose_boundary
+from ututi.lib.mailer import send_email
+
 from sqlalchemy.sql.expression import desc
 from sqlalchemy.orm.exc import NoResultFound
 from formencode.schema import Schema
@@ -9,14 +12,14 @@ from pylons.decorators import validate
 from pylons.controllers.util import abort
 from pylons.controllers.util import redirect, redirect
 from pylons.i18n import _
-from pylons import tmpl_context as c, url
+from pylons import tmpl_context as c, url, config
 
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import render
 from ututi.lib.helpers import check_crowds, flash
 from ututi.lib.security import deny
 from ututi.controllers.group import GroupControllerBase
-from ututi.model import Group, ForumCategory, ForumPost
+from ututi.model import Group, ForumCategory, ForumPost, SubscribedThread
 from ututi.model import get_supporters
 from ututi.model import meta
 
@@ -185,6 +188,8 @@ class ForumController(GroupControllerBase):
                        deleted_by=None)\
             .order_by(ForumPost.created_on).all()
 
+        c.subscribed = SubscribedThread.get_or_create(thread_id, c.user).active
+
         c.first_unseen = c.thread.first_unseen_thread_post(c.user)
         c.thread.mark_as_seen_by(c.user)
 
@@ -197,11 +202,8 @@ class ForumController(GroupControllerBase):
     @validate(NewReplyForm, form='_new_reply_form')
     @ActionProtector("user")
     def reply(self, id, category_id, thread_id):
-        post = ForumPost(c.thread.title,
-                         self.form_result['message'],
-                         category_id=category_id,
-                         thread_id=thread_id)
-        meta.Session.add(post)
+        self._post(c.thread.title, self.form_result['message'],
+                   category_id=category_id, thread_id=thread_id)
         c.thread.mark_as_seen_by(c.user)
         meta.Session.commit()
         redirect(url(controller=c.controller, action='thread', id=id,
@@ -238,13 +240,63 @@ class ForumController(GroupControllerBase):
     @validate(NewTopicForm, form='_new_thread_form')
     @ActionProtector("user")
     def post(self, id, category_id):
-        post = ForumPost(self.form_result['title'],
-                         self.form_result['message'],
-                         category_id=c.category.id)
-        meta.Session.add(post)
-        meta.Session.commit()
+        post = self._post(title=self.form_result['title'],
+                          message=self.form_result['message'],
+                          category_id=c.category.id)
         redirect(url(controller=c.controller, action='thread', id=c.group_id,
                              category_id=c.category.id, thread_id=post.id))
+
+    def _generateMessageId(self):
+        host = config.get('mailing_list_host', '')
+        return "%s@%s" % (choose_boundary(), host)
+
+    def _post(self, title, message, category_id, thread_id=None):
+        post = ForumPost(title, message, category_id=category_id,
+                         thread_id=thread_id)
+        meta.Session.add(post)
+        meta.Session.commit()
+
+        meta.Session.refresh(post)
+        SubscribedThread.get_or_create(post.thread_id, c.user, activate=True)
+
+        if c.group_id:
+            recipients = self._recipients(c.group)
+            recipient = c.group.list_address
+            list_id = c.group.list_address
+            group_title = c.group.title
+        else:
+            # XXX
+            recipients = []
+            recipient = 'noreply@localhost'
+            list_id = 'public-ututi-forum'
+            group_title = None
+
+        extra_vars = dict(message=message, title=group_title,
+            thread_url=url(controller=c.controller, action='thread',
+                           id=c.group_id, category_id=c.category.id,
+                           thread_id=post.thread_id))
+        email_message = render('/emails/forum_message.mako',
+                               extra_vars=extra_vars)
+
+        if thread_id is not None:
+            for subscription in c.thread.subscriptions:
+                if subscription.active:
+                    for email in subscription.user.emails:
+                        if email.confirmed:
+                            recipients.append(email.email)
+                            break
+
+        recipients = list(set(recipients))
+        if recipients:
+            # TODO: tag in subject, footer with link
+            send_email(c.user.emails[0].email,
+                       recipient,
+                       title,
+                       email_message,
+                       message_id=self._generateMessageId(),
+                       send_to=recipients,
+                       list_id=list_id)
+        return post
 
     def _edit_post_form(self):
         return render('forum/edit.mako')
@@ -315,12 +367,41 @@ class ForumController(GroupControllerBase):
             flash(_("Thread deleted."))
             redirect(url(controller=c.controller, action='index', id=id, category_id=category_id))
 
+    @thread_action
+    @ActionProtector("user")
+    def subscribe(self, id, category_id, thread_id):
+        subscription = SubscribedThread.get_or_create(thread_id, c.user)
+        subscription.active = True
+        meta.Session.commit()
+        redirect(url(controller=c.controller, action='thread', id=id, category_id=category_id,
+                             thread_id=c.thread.thread_id))
+
+    @thread_action
+    @ActionProtector("user")
+    def unsubscribe(self, id, category_id, thread_id):
+        subscription = SubscribedThread.get_or_create(thread_id, c.user)
+        subscription.active = False
+        meta.Session.commit()
+        redirect(url(controller=c.controller, action='thread', id=id, category_id=category_id,
+                             thread_id=c.thread.thread_id))
+
     @category_action
     @ActionProtector("user")
     def mark_category_as_read(self, id, category_id):
        for forum_post in c.category.top_level_messages():
            forum_post['post'].mark_as_seen_by(c.user)
        redirect(url(controller=c.controller, action='index', id=id, category_id=category_id))
+
+    def _recipients(self, group):
+        recipients = []
+        for member in group.members:
+            if not member.subscribed:
+                continue
+            for email in member.user.emails:
+                if email.confirmed:
+                    recipients.append(email.email)
+                    break
+        return recipients
 
     # Redirects for backwards compatibility.
 

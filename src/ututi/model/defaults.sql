@@ -302,6 +302,13 @@ CREATE TABLE seen_threads (
        primary key(thread_id, user_id));;
 
 
+CREATE TABLE subscribed_threads (
+       thread_id int8 not null references forum_posts,
+       user_id int8 not null references users(id),
+       active boolean default true,
+       primary key(thread_id, user_id));;
+
+
 CREATE FUNCTION set_forum_thread_id() RETURNS trigger AS $$
     BEGIN
         IF NEW.thread_id is NULL THEN

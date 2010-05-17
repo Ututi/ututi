@@ -141,6 +141,12 @@ def setup_orm(engine):
                               useexisting=True,
                               autoload_with=engine)
 
+    global subscribed_threads_table
+    subscribed_threads_table = Table("subscribed_threads", meta.metadata,
+                              autoload=True,
+                              useexisting=True,
+                              autoload_with=engine)
+
     global users_table
     users_table = Table("users", meta.metadata,
                         Column('id', Integer, Sequence('users_id_seq'), primary_key=True),
@@ -231,6 +237,12 @@ def setup_orm(engine):
 
     orm.mapper(SeenThread, seen_threads_table,
                properties = {'thread': relation(ForumPost),
+                             'user': relation(User)})
+
+
+    orm.mapper(SubscribedThread, subscribed_threads_table,
+               properties = {'thread': relation(ForumPost,
+                                                backref='subscriptions'),
                              'user': relation(User)})
 
     orm.mapper(User,
@@ -1869,6 +1881,40 @@ class SeenThread(object):
             meta.Session.add(seen)
             meta.Session.commit()
             return seen
+
+
+subscribed_threads_table = None
+class SubscribedThread(object):
+    """A relationship between a thread and a user indicating a subscription.
+
+    Subscribed users will receive new posts to subscribed threads by email.
+
+    Subscriptions may be marked inactive, which means that the user should not
+    be automatically subscribed to that thread in the future.
+    """
+
+    def __init__(self, thread_id, user, active=False):
+        self.thread_id = thread_id
+        self.user = user
+        self.active = active
+
+    @staticmethod
+    def get_or_create(thread_id, user, activate=False):
+        """Find a subscription for a given thread.
+
+        If an existing subscription is not found, one is created.  If `activate`
+        is True and a subscription needs to be created, it is initially
+        marked as active.
+        """
+        try:
+            return meta.Session.query(SubscribedThread
+                                ).filter_by(thread_id=thread_id,
+                                            user=user).one()
+        except NoResultFound:
+            subscription = SubscribedThread(thread_id, user, active=activate)
+            meta.Session.add(subscription)
+            meta.Session.commit()
+            return subscription
 
 
 blog_table = None
