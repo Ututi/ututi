@@ -3,6 +3,14 @@
 <a class="back-link" href="${url(controller=c.controller, action='index', id=c.group_id, category_id=c.category_id)}">${_('Back to the topic list')}</a>
 <h1>${c.thread.title}</h1>
 
+<div>
+  % if not c.subscribed:
+    ${h.button_to(_('Subscribe to emails'), url(controller=c.controller, action='subscribe', id=c.group_id, category_id=c.category_id, thread_id=c.thread.id))}
+  % else:
+    ${h.button_to(_('Unsubscribe from emails'), url(controller=c.controller, action='unsubscribe', id=c.group_id, category_id=c.category_id, thread_id=c.thread.id))}
+  % endif
+</div>
+
 <table id="forum-thread">
 % for forum_post in c.forum_posts:
   % if forum_post != c.forum_posts[0] and c.first_unseen and forum_post.id == c.first_unseen.id:

@@ -1883,19 +1883,33 @@ class SeenThread(object):
 
 subscribed_threads_table = None
 class SubscribedThread(object):
+    """A relationship between a thread and a user indicating a subscription.
 
-    def __init__(self, thread_id, user):
+    Subscribed users will receive new posts to subscribed threads by email.
+
+    Subscriptions may be marked inactive, which means that the user should not
+    be automatically subscribed to that thread in the future.
+    """
+
+    def __init__(self, thread_id, user, active=False):
         self.thread_id = thread_id
         self.user = user
+        self.active = active
 
     @staticmethod
-    def get_or_create(thread_id, user):
+    def get_or_create(thread_id, user, activate=False):
+        """Find a subscription for a given thread.
+
+        If an existing subscription is not found, one is created.  If `activate`
+        is True and a subscription needs to be created, it is initially
+        marked as active.
+        """
         try:
             return meta.Session.query(SubscribedThread
                                 ).filter_by(thread_id=thread_id,
                                             user=user).one()
         except NoResultFound:
-            subscription = SubscribedThread(thread_id, user)
+            subscription = SubscribedThread(thread_id, user, active=activate)
             meta.Session.add(subscription)
             meta.Session.commit()
             return subscription

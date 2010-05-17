@@ -188,6 +188,8 @@ class ForumController(GroupControllerBase):
                        deleted_by=None)\
             .order_by(ForumPost.created_on).all()
 
+        c.subscribed = SubscribedThread.get_or_create(thread_id, c.user).active
+
         c.first_unseen = c.thread.first_unseen_thread_post(c.user)
         c.thread.mark_as_seen_by(c.user)
 
@@ -255,7 +257,7 @@ class ForumController(GroupControllerBase):
         meta.Session.commit()
 
         meta.Session.refresh(post)
-        SubscribedThread.get_or_create(post.thread_id, c.user)
+        SubscribedThread.get_or_create(post.thread_id, c.user, activate=True)
 
         if c.group_id:
             recipients = self._recipients(c.group)
@@ -355,6 +357,24 @@ class ForumController(GroupControllerBase):
         else:
             flash(_("Thread deleted."))
             redirect(url(controller=c.controller, action='index', id=id, category_id=category_id))
+
+    @thread_action
+    @ActionProtector("user")
+    def subscribe(self, id, category_id, thread_id):
+        subscription = SubscribedThread.get_or_create(thread_id, c.user)
+        subscription.active = True
+        meta.Session.commit()
+        redirect(url(controller=c.controller, action='thread', id=id, category_id=category_id,
+                             thread_id=c.thread.thread_id))
+
+    @thread_action
+    @ActionProtector("user")
+    def unsubscribe(self, id, category_id, thread_id):
+        subscription = SubscribedThread.get_or_create(thread_id, c.user)
+        subscription.active = False
+        meta.Session.commit()
+        redirect(url(controller=c.controller, action='thread', id=id, category_id=category_id,
+                             thread_id=c.thread.thread_id))
 
     @category_action
     @ActionProtector("user")
