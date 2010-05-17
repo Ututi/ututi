@@ -411,7 +411,7 @@ def setup_orm(engine):
     warnings.simplefilter("default", SAWarning)
 
     orm.mapper(SearchItem, search_items_table,
-               properties={'object' : relation(ContentItem)})
+               properties={'object' : relation(ContentItem, lazy=True, backref=backref("searchItem", uselist=False, cascade="all"))})
 
     orm.mapper(TagSearchItem, tag_search_items_table,
                properties={'tag' : relation(LocationTag)})
