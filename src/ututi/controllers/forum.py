@@ -19,7 +19,7 @@ from ututi.lib.base import render
 from ututi.lib.helpers import check_crowds, flash
 from ututi.lib.security import deny
 from ututi.controllers.group import GroupControllerBase
-from ututi.model import Group, ForumCategory, ForumPost
+from ututi.model import Group, ForumCategory, ForumPost, SubscribedThread
 from ututi.model import get_supporters
 from ututi.model import meta
 
@@ -254,6 +254,9 @@ class ForumController(GroupControllerBase):
         meta.Session.add(post)
         meta.Session.commit()
 
+        meta.Session.refresh(post)
+        SubscribedThread.get_or_create(post.thread_id, c.user)
+
         if c.group_id:
             recipients = self._recipients(c.group)
             recipient = c.group.list_address
@@ -263,10 +266,18 @@ class ForumController(GroupControllerBase):
             recipients = []
             recipient = 'noreply@localhost'
             list_id = 'public-ututi-forum'
-        # TODO: add subscribed users (and implicitly thread co-authors) to
-        #       `recipients`
 
+        if thread_id is not None:
+            for subscription in c.thread.subscriptions:
+                if subscription.active:
+                    for email in subscription.user.emails:
+                        if email.confirmed:
+                            recipients.append(email.email)
+                            break
+
+        recipients = list(set(recipients))
         if recipients:
+            # TODO: tag in subject, footer with link
             send_email(c.user.emails[0].email,
                        recipient,
                        title,
