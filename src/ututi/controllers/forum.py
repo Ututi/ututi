@@ -263,15 +263,20 @@ class ForumController(GroupControllerBase):
             recipients = self._recipients(c.group)
             recipient = c.group.list_address
             list_id = c.group.list_address
+            group_title = c.group.title
         else:
             # XXX
             recipients = []
             recipient = 'noreply@localhost'
             list_id = 'public-ututi-forum'
+            group_title = None
 
-        email_message = '%s\n\n%s' % (message,
-                 url(controller=c.controller, action='thread', id=c.group_id,
-                     category_id=c.category.id, thread_id=post.thread_id))
+        extra_vars = dict(message=message, title=group_title,
+            thread_url=url(controller=c.controller, action='thread',
+                           id=c.group_id, category_id=c.category.id,
+                           thread_id=post.thread_id))
+        email_message = render('/emails/forum_message.mako',
+                               extra_vars=extra_vars)
 
         if thread_id is not None:
             for subscription in c.thread.subscriptions:

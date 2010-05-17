@@ -54,7 +54,11 @@ A notification to subscribed group members has been sent by email:
     <BLANKLINE>
     How's everybody doin'?
     <BLANKLINE>
-    /group/moderators/forum/3/thread/3
+    --
+    This message was posted on the 'Moderatoriai' forum.
+    You can find the thread online here: /group/moderators/forum/3/thread/3
+    <BLANKLINE>
+    The Ututi team
 
 And we'll post a reply:
 
@@ -80,7 +84,11 @@ Email notifications about the reply have also been sent:
     <BLANKLINE>
     Not too bad!
     <BLANKLINE>
-    /group/moderators/forum/3/thread/3
+    --
+    This message was posted on the 'Moderatoriai' forum.
+    You can find the thread online here: /group/moderators/forum/3/thread/3
+    <BLANKLINE>
+    The Ututi team
 
 We can see the messages we posted:
 
