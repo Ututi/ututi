@@ -100,6 +100,10 @@ def test_tag_search():
     Mixed tags are the tags that are matched by both location tags and simple tags.
         >>> sorted([(result.object.title, result.object.content_type) for result in search(tags=[u'Ekologijos fakultetas'])])
         [(u'Ekologai', 'group'), (u'Test subject', 'subject'), (u'page title', 'page')]
+
+    Take a look at the rating just cause they are here:
+        >>> sorted([(result.object.rating, result.object.title) for result in search(tags=[u'Ekologijos fakultetas'])])
+        [(0, u'Ekologai'), (0, u'page title'), (1, u'Test subject')]
     """
 
 
