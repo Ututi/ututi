@@ -229,6 +229,10 @@ test_migration: instance/var/run/.s.PGSQL.${PGPORT}
 	${PWD}/bin/migrate development.ini downgrade
 	${PG_PATH}/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > after_downgrade.txt
 
+.PHONY: dbdump
+dbdump: instance/var/run/.s.PGSQL.${PGPORT}
+	${PG_PATH}/bin/pg_dump --format=c -h ${PWD}/instance/var/run/ -p 4455 -d development > dbdump
+
 .PHONY: test_migration_2
 test_migration_2: instance/var/run/.s.PGSQL.${PGPORT}
 	psql -h ${PWD}/instance/var/run/ -d development -c "drop schema public cascade"
