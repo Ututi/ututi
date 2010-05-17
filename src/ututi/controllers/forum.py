@@ -269,6 +269,10 @@ class ForumController(GroupControllerBase):
             recipient = 'noreply@localhost'
             list_id = 'public-ututi-forum'
 
+        email_message = '%s\n\n%s' % (message,
+                 url(controller=c.controller, action='thread', id=c.group_id,
+                     category_id=c.category.id, thread_id=post.thread_id))
+
         if thread_id is not None:
             for subscription in c.thread.subscriptions:
                 if subscription.active:
@@ -283,7 +287,7 @@ class ForumController(GroupControllerBase):
             send_email(c.user.emails[0].email,
                        recipient,
                        title,
-                       message,
+                       email_message,
                        message_id=self._generateMessageId(),
                        send_to=recipients,
                        list_id=list_id)

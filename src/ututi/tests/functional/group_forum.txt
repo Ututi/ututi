@@ -53,6 +53,8 @@ A notification to subscribed group members has been sent by email:
     List-Id: moderators@groups.ututi.lt
     <BLANKLINE>
     How's everybody doin'?
+    <BLANKLINE>
+    /group/moderators/forum/3/thread/3
 
 And we'll post a reply:
 
@@ -77,6 +79,8 @@ Email notifications about the reply have also been sent:
     List-Id: moderators@groups.ututi.lt
     <BLANKLINE>
     Not too bad!
+    <BLANKLINE>
+    /group/moderators/forum/3/thread/3
 
 We can see the messages we posted:
 
