@@ -13,11 +13,6 @@
 </div>
 </%def>
 
-<%def name="head_tags()">
-  ${parent.head_tags()}
-  ${h.stylesheet_link('/stylesheets/group.css')|n}
-</%def>
-
 <div id="page_header">
   <h1 style="float: left;">${_('Forum')}</h1>
    % if h.check_crowds(['admin', 'moderator']):

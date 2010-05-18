@@ -46,7 +46,6 @@ $(document).ready(function(){
 </script>
 
 ${parent.head_tags()}
-${h.stylesheet_link('/stylesheets/group.css')|n}
 
 </%def>
 

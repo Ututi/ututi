@@ -6,11 +6,6 @@
   ${c.category.title}
 </%def>
 
-<%def name="head_tags()">
-  ${parent.head_tags()}
-  ${h.stylesheet_link('/stylesheets/group.css')|n}
-</%def>
-
 <%def name="portlets()">
 <div id="sidebar">
   ${forum_info_portlet()}

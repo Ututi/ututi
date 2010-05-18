@@ -7,8 +7,8 @@ ${_('New subject')}
 </%def>
 
 <%def name="head_tags()">
-${h.stylesheet_link('/stylesheets/group.css')|n}
-<%subject:head_tags />
+    ${parent.head_tags()}
+    <%subject:head_tags />
 </%def>
 
 % if c.step:

@@ -9,11 +9,6 @@
   ${group_sidebar()}
 </%def>
 
-
-<%def name="head_tags()">
-  ${h.stylesheet_link('/stylesheets/group.css')|n}
-</%def>
-
 <div id="page_header">
   % if h.check_crowds(['member', 'admin']):
     <a class="btn" href="${url(controller='mailinglist', action='new_thread', id=c.group.group_id)}"><span>${_("New topic")}</span></a>

@@ -1,10 +1,5 @@
 <%inherit file="/group/home.mako" />
 
-<%def name="head_tags()">
-${parent.head_tags()}
-${h.stylesheet_link('/stylesheets/group.css')|n}
-</%def>
-
 <%def name="watched_subject(subject)">
   <li>
     <a href="${subject.url()}">${subject.title}</a>
