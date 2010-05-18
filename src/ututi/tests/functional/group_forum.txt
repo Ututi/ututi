@@ -56,7 +56,8 @@ A notification to subscribed group members has been sent by email:
     <BLANKLINE>
     --
     This message was posted on the 'Moderatoriai' forum.
-    You can find the thread online here: /group/moderators/forum/3/thread/3
+    You can find the thread online here:
+    http://localhost/group/moderators/forum/3/thread/3
     <BLANKLINE>
     The Ututi team
 
@@ -86,7 +87,8 @@ Email notifications about the reply have also been sent:
     <BLANKLINE>
     --
     This message was posted on the 'Moderatoriai' forum.
-    You can find the thread online here: /group/moderators/forum/3/thread/3
+    You can find the thread online here:
+    http://localhost/group/moderators/forum/3/thread/3
     <BLANKLINE>
     The Ututi team
 
@@ -117,3 +119,92 @@ And all the way up to the category list:
     <h2 class="category">
       <a href="/group/moderators/forum/3">General</a>
     </h2>
+
+
+Email subscriptions
+===================
+
+Let's invite a few more members for testing:
+
+    >>> browser.open('http://localhost/group/moderators/members')
+    >>> browser.getControl('Enter emails of the people you would like to'
+    ... ' invite to the group.').value = 'user@ututi.lt, user2@ututi.lt'
+    >>> browser.getControl('Invite').click()
+
+Drop the email invitations, those are not interesting:
+
+    >>> del mail_queue[:]
+
+Excellent. Now log in as one of the users:
+
+    >>> ubrowser = Browser.logIn('user@ututi.lt', 'password')
+
+Accept the group invitation
+
+    >>> ubrowser.getControl('Accept').click()
+    >>> ubrowser.getLink('Moderatoriai').click()
+    >>> ubrowser.getLink('Forum').click()
+
+We see the thread the admin has posted:
+
+    >>> ubrowser.printQuery('//td[@class="subject"]')
+    <td class="subject">
+      <a href="/group/moderators/forum/3/thread/3#unseen">
+                [N]
+              </a>
+      <a class="thread-subject unread" href="/group/moderators/forum/3/thread/3">What's up?</a>
+    </td>
+
+Let's look into it:
+
+    >>> ubrowser.getLink("What's up?").click()
+
+We could subscribe to email updates:
+
+    >>> ubrowser.getControl('Subscribe to emails')
+    <SubmitControl name=None type='submit'>
+
+Let's post a reply:
+
+    >>> ubrowser.getControl(name='message').value = 'I agree!'
+    >>> ubrowser.getControl('Reply').click()
+
+By the act of replying, we were automatically subscribed:
+
+    >>> ubrowser.getControl('Unsubscribe from emails')
+    <SubmitControl name=None type='submit'>
+
+The resulting email notification was sent to the admin user and to us:
+
+    >>> msg = mail_queue.pop()
+    >>> msg.recipients
+    ['user@ututi.lt', 'admin@ututi.lt']
+
+Now, if, say, the admin posts a message, we will receive an email:
+
+    >>> browser.getLink('Forum').click()
+    >>> browser.getLink("What's up?").click()
+    >>> browser.getControl(name='message').value = 'Indeed!'
+    >>> browser.getControl('Reply').click()
+
+    >>> msg = mail_queue.pop()
+    >>> msg.recipients
+    ['user@ututi.lt', 'admin@ututi.lt']
+
+Let's unsubscribe from emails.
+
+    >>> ubrowser.getControl('Unsubscribe from emails').click()
+
+Now any further replies will not be sent to us.
+
+    >>> ubrowser.getControl(name='message').value = 'Right!'
+    >>> ubrowser.getControl('Reply').click()
+
+    >>> mail_queue.pop()
+    <EmailInfo sender='user@ututi.lt' recipients=['admin@ututi.lt']>
+
+Since we unsubscribed explicitly, we will not be automatically resubscribed
+again:
+
+    >>> ubrowser.getControl('Subscribe to emails')
+    <SubmitControl name=None type='submit'>

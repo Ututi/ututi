@@ -1915,6 +1915,15 @@ class SubscribedThread(object):
         self.active = active
 
     @staticmethod
+    def get(thread_id, user):
+        try:
+            return meta.Session.query(SubscribedThread
+                                ).filter_by(thread_id=thread_id,
+                                            user=user).one()
+        except NoResultFound:
+            return None
+
+    @staticmethod
     def get_or_create(thread_id, user, activate=False):
         """Find a subscription for a given thread.
 

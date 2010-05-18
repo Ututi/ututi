@@ -188,7 +188,8 @@ class ForumController(GroupControllerBase):
                        deleted_by=None)\
             .order_by(ForumPost.created_on).all()
 
-        c.subscribed = SubscribedThread.get_or_create(thread_id, c.user).active
+        subscription = SubscribedThread.get(thread_id, c.user)
+        c.subscribed = subscription and subscription.active
 
         c.first_unseen = c.thread.first_unseen_thread_post(c.user)
         c.thread.mark_as_seen_by(c.user)
@@ -257,16 +258,19 @@ class ForumController(GroupControllerBase):
         meta.Session.commit()
 
         meta.Session.refresh(post)
-        SubscribedThread.get_or_create(post.thread_id, c.user, activate=True)
+        thread = ForumPost.get(post.thread_id)
+        subscription = SubscribedThread.get_or_create(post.thread_id, c.user,
+                                                      activate=True)
 
         if c.group_id:
-            recipients = self._recipients(c.group)
+            #recipients = self._recipients(c.group)
+            recipients = set()
             recipient = c.group.list_address
             list_id = c.group.list_address
             group_title = c.group.title
         else:
             # XXX
-            recipients = []
+            recipients = set()
             recipient = 'noreply@localhost'
             list_id = 'public-ututi-forum'
             group_title = None
@@ -274,19 +278,24 @@ class ForumController(GroupControllerBase):
         extra_vars = dict(message=message, title=group_title,
             thread_url=url(controller=c.controller, action='thread',
                            id=c.group_id, category_id=c.category.id,
-                           thread_id=post.thread_id))
+                           thread_id=post.thread_id, qualified=True))
         email_message = render('/emails/forum_message.mako',
                                extra_vars=extra_vars)
 
-        if thread_id is not None:
-            for subscription in c.thread.subscriptions:
-                if subscription.active:
-                    for email in subscription.user.emails:
-                        if email.confirmed:
-                            recipients.append(email.email)
-                            break
+        for subscription in thread.subscriptions:
+            if subscription.active:
+                for email in subscription.user.emails:
+                    if email.confirmed:
+                        recipients.add(email.email)
+                        break
+            else:
+                # Explicit unsubscription.
+                for email in subscription.user.emails:
+                    try:
+                        recipients.remove(email.email)
+                    except KeyError:
+                        pass
 
-        recipients = list(set(recipients))
         if recipients:
             # TODO: tag in subject, footer with link
             send_email(c.user.emails[0].email,
@@ -294,7 +303,7 @@ class ForumController(GroupControllerBase):
                        title,
                        email_message,
                        message_id=self._generateMessageId(),
-                       send_to=recipients,
+                       send_to=list(recipients),
                        list_id=list_id)
         return post
 
