@@ -2073,3 +2073,261 @@ del {
 }
 
 /* end revision diffs */
+
+
+/*************************************************************************
+ *************************************************************************
+
+    FILES SECTION
+
+    Moved from files.css
+
+ *************************************************************************
+**************************************************************************/
+/* files section */
+div.section h2 {
+  color: black;
+  padding-bottom: 0.1em;
+  border-bottom: 1px solid #ded8d8;
+  font-size: 1.2em;
+  font-weight: normal;
+  margin-top: 5px;
+}
+
+div.section h2.click {
+  cursor: pointer;
+}
+
+.root_folder {
+  margin-top: 5px;
+}
+
+div.area_size {
+  font-size: 12px;
+  color: #808080;
+  float: right;
+}
+
+img.area_size_points {
+  margin-top: 5px;
+  float: right;
+}
+
+span.unlimited_size {
+  color: #808080;
+  float: right;
+  font-size: 12px;
+  padding-top: 7px;
+}
+
+/* expanding section headings  */
+.click2show h2.click .cont {
+  padding-right: 15px;
+  background: white url("../images/details/arrow_expand_down.png") right center no-repeat;
+}
+
+.click2show.open h2.click .cont {
+  padding-right: 15px;
+  background: white url("../images/details/arrow_expand_right.png") right center no-repeat;
+}
+
+.section h2 .comment {
+  font-size: 12px;
+  font-weight: normal;
+}
+/* end expanding section headings */
+
+/* files section controls */
+div.section div.controls label {
+  color: #888;
+  vertical-align: middle;
+}
+
+div.section div.controls .new-folder-name {
+  vertical-align: top;
+  font-size: 12px;
+}
+
+div.section div.controls div.file_upload,
+div.section div.controls div.no_upload,
+div.section div.controls div.single_upload {
+  float: left;
+  margin: 0;
+  margin-right: 5px;
+  height: 20px;
+  z-index: 10000;
+  width: 150px;
+  background: white;
+}
+
+div.upload_forbidden {
+  clear: left;
+  margin-top: 3px;
+  background: #f2f2f2 url("../images/details/icon_exclamation.png") 5px center no-repeat;
+  padding: 2px 0 2px 15px;
+  font-size: 12px;
+  color: #535353;
+}
+
+div.section div.controls div.single_upload .target_item {
+  height: 19px;
+  margin-right: -20px;
+}
+
+div.section div.controls div.single_upload .target_item div {
+  height: 17px;
+  line-height: 17px;
+}
+
+div.section div.controls div.file_upload div.file_upload_dropdown {
+  position: absolute;
+  width: 150px;
+}
+/* end controls section */
+
+/* files */
+ul.folder {
+  padding: 0;
+}
+
+li.message {
+  list-style-type: none;
+}
+
+li.file {
+  line-height: 20px;
+  list-style-type: none;
+  padding: 0;
+  margin: 3px 0;
+}
+
+li.file img.drag-target {
+  cursor: move;
+  vertical-align: middle;
+}
+
+li.file a {
+  cursor: pointer;
+}
+
+li.file .file_name {
+  color: #888;
+}
+
+li.file .size,
+li.file .date {
+  font-size: 0.8em;
+  color: #888;
+}
+
+li.file .author {
+  font-size: 0.85em;
+}
+
+li.file img.restore_button,
+li.file img.rename_button,
+li.file img.flag_button,
+li.file img.delete_button {
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+/* end files */
+
+/* folders */
+.folder_file_area h4 {
+  height: 1.4em;
+  line-height: 1.4em;
+  padding: 0 0 0 25px;
+  margin: 3px 0;
+  background: url("../images/details/icon_folder.png") left center no-repeat;
+}
+
+.folder_file_area h4.trash_heading {
+  height: 1.4em;
+  line-height: 1.4em;
+  padding: 0 0 0 25px;
+  margin: 3px 0;
+  background: url("../images/details/icon_trash_folder.png") left center no-repeat;
+}
+
+.folder_file_area h4 .delete_folder_button {
+  font-size: 0.8em;
+  vertical-align: top;
+}
+
+.subfolder {
+  margin-top: 10px;
+}
+
+.subfolder .folder {
+  padding-left: 25px;
+}
+
+/* end folders */
+
+/* upload messages */
+div.file_upload_progress {
+  padding: 5px;
+}
+
+div.file_upload_progress div span {
+  padding-left: 1em;
+}
+
+div.file_upload_progress div {
+  padding-left: 25px;
+  background: url("../images/details/icon_progress.gif") left center no-repeat;
+  color: #888;
+}
+
+div.file_upload_progress div.done {
+  background: url("../images/details/icon_done.png") left center no-repeat;
+}
+
+div.file_upload_progress div.failed {
+  background: url("../images/details/icon_fail.png") left center no-repeat;
+}
+
+
+/* misc */
+
+.section .container {
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+.file_rename_input_decorator {
+  display:-moz-inline-box;
+  display:inline-block;
+  padding: 0;
+  padding-right: 3px;
+  background: white url("../images/borders/rename_file.png") right center no-repeat;
+}
+
+.file_rename_input {
+  font-size: 12px;
+  width: 190px;
+  height: 20px;
+  line-height: 21px;
+  vertical-align: center;
+  margin: 0;
+  border: 0;
+  outline: 0;
+  padding: 2px 0 0 7px;
+  background: white url("../images/borders/rename_file.png") left center no-repeat;
+} /* no left/right padding here please */
+
+.subfolder H4 {
+  cursor: pointer;
+}
+
+.section .click2show h4.click .cont {
+  padding-right: 15px;
+  background: white url("../images/details/arrow_expand_right.png") right center no-repeat;
+}
+
+.section .click2show.open h4.click .cont {
+  padding-right: 15px;
+  background: white url("../images/details/arrow_expand_down.png") right center no-repeat;
+}
