@@ -2704,3 +2704,120 @@ div.orange_emph em {
 /*************************************************************************
     END OF GROUP SECTION
 **************************************************************************/
+
+/*************************************************************************
+ *************************************************************************
+
+    HOME SECTION
+
+    Moved from home.css
+
+ *************************************************************************
+**************************************************************************/
+
+div.welcome-message {
+    margin: 15px 0;
+
+}
+
+div.gray-box {
+  margin-top: 15px;
+  width: 290px;
+  height: 130px;
+  background: url("../images/borders/gray_box.png") top right no-repeat;
+  padding: 5px;
+}
+
+div.gray-box .inner {
+  padding: 5px 0 0 80px;
+}
+
+div.gray-box h2,
+#update-profile h2,
+#user_location h2 {
+  font-weight: normal;
+  font-size: 16px;
+}
+
+div.gray-box div.description,
+#update-profile .description {
+  margin: 5px 0 10px;
+  color: #808080;
+  font-size: 12px;
+}
+
+#join-group {
+  float: left;
+}
+
+#join-group .inner {
+  background: url("../images/details/icon_group_gray.png") 10px 10px no-repeat;
+}
+
+#find-subjects {
+  float: right;
+}
+
+#find-subjects h2 {
+  margin-bottom: 5px;
+}
+
+#find-subjects .inner {
+  background: url("../images/details/icon_subject_gray.png") 10px 10px no-repeat;
+}
+
+#find-subjects .input-line {
+  width: 160px;
+}
+
+#find-subjects .explanation {
+  display: none;
+}
+
+#find-subjects .form-field,
+#user_location .form-field {
+  padding: 0;
+}
+
+#find-subjects label,
+#user_location label {
+  height: 14px;
+  line-height: 14px;
+}
+
+#update-profile {
+  margin-top: 15px;
+  padding: 20px 0 0 60px;
+  background: white url("../images/details/icon_user_gray.png") 10px 25px no-repeat;
+  clear: left;
+}
+
+#update-profile table {
+  width: 555px;
+}
+
+#update-profile table td.action {
+  width: 20%;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#user_location {
+  width: 615px;
+  padding-top: 5px;
+  background: url("../images/borders/gray_box_full.png") left top no-repeat;
+}
+
+#user_location .wrapper {
+  background: url("../images/borders/gray_box_full.png") left bottom no-repeat;
+  padding: 0 5px 5px;
+}
+
+#user_location .inner {
+  padding: 5px 0 0 80px;
+  background: url("../images/details/icon_university_gray.png") 10px 10px no-repeat;
+}
+
+/*************************************************************************
+    END OF HOME SECTION
+**************************************************************************/
