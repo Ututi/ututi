@@ -1241,8 +1241,12 @@ div#pager {
 div.sidebar-block .item-tags,
 div.search-item .item-tags {
   padding-left: 25px;
-  background: white url("../images/details/icon_tag.png") left 3px no-repeat;
+  background: white url("../images/details/icon_tag.png") left top no-repeat;
   margin-top: 5px;
+}
+
+div.sidebar-block .item-tags {
+  background-position: left 3px;
 }
 
 /* search results */
