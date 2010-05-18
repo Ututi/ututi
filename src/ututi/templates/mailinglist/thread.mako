@@ -6,7 +6,6 @@
 
 <%def name="head_tags()">
 ${parent.head_tags()}
-${h.stylesheet_link('/stylesheets/forum.css')|n}
 </%def>
 
 <a class="back-link" href="${h.url_for(action='index')}">${_('Back to the topic list')}</a>
