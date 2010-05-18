@@ -144,7 +144,7 @@ def raw_send_email(sender, recipients, message):
         server = config.get('smtp_host', 'localhost')
         smtp = SMTP(server)
         try:
-            smtp.sendmail('info@ututi.lt', recipients, message)
+            smtp.sendmail(config['ututi_email_from'], recipients, message)
         except SMTPRecipientsRefused:
             log.warn(sender)
             log.warn(recipients)
