@@ -3,7 +3,6 @@
 
 <%def name="head_tags()">
   <title>UTUTI – student information online</title>
-  ${h.stylesheet_link('/stylesheets/profile.css')|n}
   ${parent.head_tags()}
 </%def>
 

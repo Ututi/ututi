@@ -2917,3 +2917,238 @@ body.join #ututi_login_section_portlet_content {
 /*************************************************************************
     END OF LOCATION SECTION
 **************************************************************************/
+
+/*************************************************************************
+ *************************************************************************
+
+    PROFILE SECTION
+
+    Moved from profile.css
+
+ *************************************************************************
+**************************************************************************/
+
+#user-logo {
+  text-align: left;
+  margin: 0 auto;
+}
+
+#user-logo-msg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-left: -50%;
+  background: #1f1f1f;
+  color: white;
+}
+
+#year-input div.input-line {
+  width: 80px;
+}
+
+#year-input {
+  clear: none;
+}
+
+#group_portlet {
+  margin-top: 10px;
+}
+
+form#edit_profile_form .form-field textarea {
+  width: 360px;
+}
+
+.personal_watched_subjects {
+  padding-left: 10px;
+}
+
+.personal_watched_subjects li.enabled {
+  list-style-type: none;
+  padding: 0 0 5px 20px;
+  background: transparent url("../images/details/icon_subject_small.png") left top no-repeat;
+}
+
+.personal_watched_subjects li.disabled {
+  list-style-type: none;
+  padding: 0 0 5px 20px;
+  background: transparent url("../images/details/dalykas_disabled.png") left top no-repeat;
+}
+
+.personal_watched_subjects li.enabled a {
+  color: #000;
+  text-size: 1em;
+}
+
+.personal_watched_subjects li.disabled a {
+  color: #999;
+  text-size: 1em;
+}
+
+.hdr {
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+
+.enabled .unignore_subject_button {
+  display: none;
+}
+
+.disabled .ignore_subject_button {
+  display: none;
+}
+
+.select_interval_form_done .in_progress_icon,
+.select_interval_form .in_progress_icon {
+  float: right;
+  display: none;
+}
+
+.select_interval_form_in_progress .done_icon,
+.select_interval_form .done_icon {
+  float: right;
+  display: none;
+}
+
+.select_interval_form_in_progress .in_progress_icon {
+  float: right;
+}
+
+.select_interval_form_done .done_icon{
+  float: right;
+}
+
+li.empty_note {
+  list-style-type: none;
+  color: #999;
+  text-size: 1em;
+}
+
+
+/* group blocks in dashboard */
+.event_area {
+  padding: 5px;
+  margin: 5px 0 10px;
+  border-bottom: 1px solid #ded8d8;
+  clear: left;
+}
+
+.event_area .area-logo {
+  float: left;
+  height: 35px;
+  width: 35px;
+  text-align: center;
+  padding-right: 10px;
+}
+
+.event_area.subject_area .area-logo {
+  height: 25px;
+  width: 25px;
+}
+
+.event_area .area-logo img {
+  margin: 0 auto;
+}
+
+.event_area .area-info .title,
+.event_area .area-info .title a {
+  color: #030303;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.event_area .area-info .school-link {
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.event_area table.area-news td,
+.event_area table.area-news th {
+  width: 50%;
+  vertical-align: top;
+  padding-right: 5px;
+}
+
+.event_area td.right-column {
+  border-left: 1px solid #ded8d8;
+}
+
+.event_area .right-column {
+  padding: 0 0 0 5px;
+}
+
+.event_area table.area-news th {
+  text-align: left;
+  font-size: 12px;
+  font-weight: normal;
+  color: #808080;
+}
+
+.event_area table.area-news {
+  width: 590px;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.event_area table.area-news td td.subject {
+  width: 75%;
+  line-height: 14px;
+}
+
+.event_area table.area-news td td.date {
+  width: 25%;
+  line-height: 14px;
+  color: #808080;
+  text-align: right;
+  font-size: 0.85em;
+}
+
+.event_area table.area-news table.group-events td.subject {
+  padding-left: 16px;
+  background: url("../images/details/icon_subject_12x12.png") left 2px no-repeat;
+}
+
+.event_area table.area-news table.group-messages,
+.event_area table.area-news table.group-events {
+  width: 290px;
+  margin-bottom: 5px;
+}
+
+.event_area table.area-news table.group-messages td.subject {
+  padding-left: 16px;
+  background: url("../images/details/icon_message.png") left 2px no-repeat;
+}
+
+.event_area table.area-news table.subject-file-events td.subject {
+  padding-left: 16px;
+  background: url("../images/details/icon_file.png") left 2px no-repeat;
+}
+
+.event_area table.area-news table.subject-page-events td.subject {
+  padding-left: 16px;
+  background: url("../images/details/icon_page_small.png") left 2px no-repeat;
+}
+
+.event_area .more-links td {
+  text-align: right;
+}
+
+/* blocks in dashboard */
+
+/* dashboard style selection */
+.display_selection {
+  margin-bottom: 5px;
+  text-align: right;
+}
+
+.display_selection a {
+  margin: 0 3px;
+}
+
+.display_selection a.active {
+  color: #808080;
+  background: transparent;
+}
+
+/*************************************************************************
+    END OF PROFILE SECTION
+**************************************************************************/
