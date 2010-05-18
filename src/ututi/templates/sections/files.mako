@@ -270,10 +270,22 @@ $(document).ready(function(){
     function renameFile(event) {
        var file_name = $(event.target).closest('.file').find('.filename');
        var rename_form = $(event.target).closest('.file').find('.file_rename_form');
-       rename_form.find('.file_rename_input').val(file_name.text());
+       var input = rename_form.find('.file_rename_input')
+       input.val(file_name.text())\
+         .keypress(function(event) {
+             if (event.keyCode == '13') {
+                 $(event.target).closest('.file_rename_form').find('.rename_confirm').click();
+             } else if (event.keyCode == '27') {
+                 var rename_form = $(event.target).closest('.file').find('.file_rename_form');
+                 rename_form.hide();
+                 $(event.target).closest('.file').find('.rename_button').show();
+                 file_name.show();
+             }
+         });
        rename_form.show();
        $(event.target).hide();
        file_name.hide();
+       input.focus();
     }
 
     function performFileRename(event) {
