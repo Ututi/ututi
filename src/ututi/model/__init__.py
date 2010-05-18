@@ -352,6 +352,7 @@ def setup_orm(engine):
                polymorphic_identity='group',
                polymorphic_on=content_items_table.c.content_type,
                properties ={'watched_subjects': relation(Subject,
+                                                         backref=backref("watching_groups", lazy=True),
                                                          secondary=group_watched_subjects_table),
                             'raw_logo': deferred(groups_table.c.logo)})
 
@@ -391,7 +392,7 @@ def setup_orm(engine):
                                         autoload_with=engine)
 
     orm.mapper(UserSubjectMonitoring, user_monitored_subjects_table,
-               properties ={'subject': relation(Subject),
+               properties ={'subject': relation(Subject, backref=backref("watching_users", lazy=True)),
                             'user': relation(User)
                             })
 
@@ -411,7 +412,7 @@ def setup_orm(engine):
     warnings.simplefilter("default", SAWarning)
 
     orm.mapper(SearchItem, search_items_table,
-               properties={'object' : relation(ContentItem, lazy=True, backref=backref("searchItem", uselist=False, cascade="all"))})
+               properties={'object' : relation(ContentItem, lazy=True, backref=backref("search_item", uselist=False, cascade="all"))})
 
     orm.mapper(TagSearchItem, tag_search_items_table,
                properties={'tag' : relation(LocationTag)})
@@ -1295,6 +1296,13 @@ class Subject(ContentItem, FolderMixin, LimitedUploadMixin):
 
         events = events.order_by(Event.created.desc()).limit(limit).all()
         return events
+
+    def user_count(self):
+        return len([w_u for w_u in self.watching_users if not w_u.ignored])
+
+    def group_count(self):
+        return len(self.watching_groups)
+
 
 pages_table = None
 
