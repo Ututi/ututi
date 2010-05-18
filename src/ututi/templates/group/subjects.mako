@@ -6,7 +6,6 @@
 
 <%def name="head_tags()">
 ${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
-${h.stylesheet_link('/stylesheets/subject_selection.css')|n}
 <script type="text/javascript">
 //<![CDATA[
 $(document).ready(function(){
