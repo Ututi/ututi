@@ -64,7 +64,6 @@
 </%def>
 
 <%def name="head_tags()">
-${h.stylesheet_link('/stylesheets/newlocationwidget.css')|n}
 ${h.javascript_link('/javascript/jquery.autocomplete.js')|n}
 <script type="text/javascript">
 //<![CDATA[
