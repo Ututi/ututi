@@ -83,10 +83,10 @@ Links from the front page work:
     >>> browser.printQuery('id("forum-thread")//div[@class="post-body"]/text()')
     My ututi is borken!
 
-A couple of email notifications have been sent:
+A couple of email notifications about the forum posts have been sent:
 
     >>> from ututi.lib.mailer import mail_queue
     >>> mail_queue
-    [<EmailInfo sender='admin@ututi.lt' recipients=['admin@ututi.lt']>,
-     <EmailInfo sender='admin@ututi.lt' recipients=['admin@ututi.lt']>]
+    [<EmailInfo sender='info@ututi.lt' recipients=['admin@ututi.lt']>,
+     <EmailInfo sender='info@ututi.lt' recipients=['admin@ututi.lt']>]
     >>> del mail_queue[:]

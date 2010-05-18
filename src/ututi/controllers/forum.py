@@ -275,16 +275,11 @@ class ForumController(GroupControllerBase):
                         SubscribedThread.get_or_create(post.thread_id, member.user,
                                                        activate=True)
 
-            recipient = c.group.list_address
-            list_id = c.group.list_address
-            group_title = c.group.title
+            forum_title = c.group.title
         else:
-            # XXX
-            recipient = 'noreply@localhost'
-            list_id = 'public-ututi-forum'
-            group_title = None
+            forum_title = _('Community') if c.category.id == 1 else _('Bugs')
 
-        extra_vars = dict(message=message, title=group_title,
+        extra_vars = dict(message=message, person_title=c.user.fullname, forum_title=forum_title,
             thread_url=url(controller=c.controller, action='thread',
                            id=c.group_id, category_id=c.category.id,
                            thread_id=post.thread_id, qualified=True))
@@ -307,14 +302,13 @@ class ForumController(GroupControllerBase):
                         pass
 
         if recipients:
-            # TODO: tag in subject, footer with link
-            send_email(c.user.emails[0].email,
-                       recipient,
-                       title,
+            re = 'Re: ' if not new_thread else ''
+            send_email(config['ututi_email_from'],
+                       config['ututi_email_from'],
+                       '[%s] %s%s' % (c.group_id, re, title),
                        email_message,
                        message_id=self._generateMessageId(),
-                       send_to=list(recipients),
-                       list_id=list_id)
+                       send_to=list(recipients))
         return post
 
     def _edit_post_form(self):

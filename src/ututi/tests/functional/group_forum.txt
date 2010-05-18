@@ -44,22 +44,21 @@ A notification to subscribed group members has been sent by email:
     MIME-Version: 1.0
     Content-Type: text/plain; charset="us-ascii"
     Content-Transfer-Encoding: 7bit
-    From: admin@ututi.lt
-    To: moderators@groups.ututi.lt
-    Subject: What's up?
-    Message-ID: <...@groups.ututi.lt>
-    Reply-To: moderators@groups.ututi.lt
-    Errors-To: errors@ututi.lt
-    List-Id: moderators@groups.ututi.lt
+    From: info@ututi.lt
+    To: info@ututi.lt
+    Subject: [moderators] What's up?
+    Message-ID: <...>
+    <BLANKLINE>
+    Adminas Adminovix posted on the 'Moderatoriai' forum:
     <BLANKLINE>
     How's everybody doin'?
     <BLANKLINE>
     --
-    This message was posted on the 'Moderatoriai' forum.
     You can find the thread online here:
     http://localhost/group/moderators/forum/3/thread/3
     <BLANKLINE>
     The Ututi team
+    <BLANKLINE>
 
 And we'll post a reply:
 
@@ -75,22 +74,21 @@ Email notifications about the reply have also been sent:
     MIME-Version: 1.0
     Content-Type: text/plain; charset="us-ascii"
     Content-Transfer-Encoding: 7bit
-    From: admin@ututi.lt
-    To: moderators@groups.ututi.lt
-    Subject: What's up?
-    Message-ID: <...@groups.ututi.lt>
-    Reply-To: moderators@groups.ututi.lt
-    Errors-To: errors@ututi.lt
-    List-Id: moderators@groups.ututi.lt
+    From: info@ututi.lt
+    To: info@ututi.lt
+    Subject: [moderators] Re: What's up?
+    Message-ID: <...>
+    <BLANKLINE>
+    Adminas Adminovix posted on the 'Moderatoriai' forum:
     <BLANKLINE>
     Not too bad!
     <BLANKLINE>
     --
-    This message was posted on the 'Moderatoriai' forum.
     You can find the thread online here:
     http://localhost/group/moderators/forum/3/thread/3
     <BLANKLINE>
     The Ututi team
+    <BLANKLINE>
 
 We can see the messages we posted:
 
@@ -201,7 +199,7 @@ Now any further replies will not be sent to us.
     >>> ubrowser.getControl('Reply').click()
 
     >>> mail_queue.pop()
-    <EmailInfo sender='user@ututi.lt' recipients=['admin@ututi.lt']>
+    <EmailInfo sender='info@ututi.lt' recipients=['admin@ututi.lt']>
 
 Since we unsubscribed explicitly, we will not be automatically resubscribed
 again:
@@ -230,4 +228,4 @@ Now, the admin creates another thread:
 And the user is automatically subscribed to it:
 
     >>> mail_queue.pop()
-    <EmailInfo sender='admin@ututi.lt' recipients=['user@ututi.lt', 'admin@ututi.lt']>
+    <EmailInfo sender='info@ututi.lt' recipients=['user@ututi.lt', 'admin@ututi.lt']>
