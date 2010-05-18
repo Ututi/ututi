@@ -15,11 +15,6 @@
   ${c.location.title} (${c.location.title_short}) - ${_('department list')}
 </%def>
 
-<%def name="head_tags()">
-${parent.head_tags()}
-${h.stylesheet_link('/stylesheets/location.css')|n}
-</%def>
-
 <h1 class="small-h1">${c.location.title_short} ${_('department list')}</h1>
 <%
    children = c.location.children

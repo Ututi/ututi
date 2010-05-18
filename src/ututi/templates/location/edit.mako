@@ -11,11 +11,6 @@
   Ututi: ${c.location.title}
 </%def>
 
-<%def name="head_tags()">
-${parent.head_tags()}
-${h.stylesheet_link('/stylesheets/location.css')|n}
-</%def>
-
 <h1>${c.location.title}</h1>
 <form method="post" action="${c.location.url(action='update')}" name="edit_structure_form" enctype="multipart/form-data" class="edit-form">
       <div style="display: none;">
