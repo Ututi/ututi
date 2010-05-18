@@ -35,7 +35,7 @@ ${_('student information online')}
     </ul>
   </div>
   <div class="item menuitem">
-      <a href="${url('forum_community_index')}">${_("community")}</a>
+      <a href="${url(controller='community', action='index')}">${_("community")}</a>
   </div>
   <div class="item menuitem">
     <a href="${url(controller='profile', action='browse')}">${_("search")}</a>

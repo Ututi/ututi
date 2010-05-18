@@ -142,6 +142,8 @@ class ForumController(GroupControllerBase):
         else:
             c.group = None
             c.group_id = None
+            c.community_category = ForumCategory.get(1)
+            c.bugs_category = ForumCategory.get(2)
 
         if category_id is not None:
             c.category = ForumCategory.get(category_id)

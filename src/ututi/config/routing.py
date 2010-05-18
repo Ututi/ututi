@@ -246,7 +246,7 @@ def make_map(config):
     map.connect('/structure/{id}/logo/{width}',
                 controller='structure', action='logo')
 
-    map.connect('forum_community_index', '/community',
+    map.connect('/community',
                 controller='community', action='index', id=None, category_id=1)
     map.connect('/community/{action}',
                 controller='community', id=None, category_id=1)
@@ -265,7 +265,7 @@ def make_map(config):
     map.connect('/community/thread/{thread_id}/unsubscribe',
                 controller='community', action='unsubscribe', id=None, category_id=1)
 
-    map.connect('forum_bugs_index', '/bugs',
+    map.connect('/bugs',
                 controller='bugs', action='index', id=None, category_id=2)
     map.connect('/bugs/{action}',
                 controller='bugs', id=None, category_id=2)
