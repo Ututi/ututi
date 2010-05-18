@@ -4,12 +4,7 @@
 <%namespace file="/portlets/anonymous.mako" import="*"/>
 <%namespace file="/portlets/banners/base.mako" import="*"/>
 
-<%def name="head_tags()">
-${parent.head_tags()}
-${h.stylesheet_link('/stylesheets/pl.css')|n}
-</%def>
-
-<%def name="body_class()">anonymous_index</%def>
+<%def name="body_class()">anonymous_index pl_specific</%def>
 
 <%def name="portlets()">
 <div id="sidebar">

@@ -3633,3 +3633,79 @@ body.anonymous_index #registration_form .error-message {
 /*************************************************************************
     END OF ANONYMOUS SECTION
 **************************************************************************/
+
+/*************************************************************************
+ *************************************************************************
+
+    POLISH SECTION
+
+    Moved from pl.css
+
+ *************************************************************************
+**************************************************************************/
+
+/* polish frontpage */
+body.pl_specific .subhead {
+    color: #808080;
+    font-size: 12px;
+}
+
+body.pl_specific #group_create {
+    margin: 40px;
+}
+
+body.pl_specific #group_create .btn {
+  padding-left: 45px;
+}
+
+body.pl_specific #group_create .btn span {
+  font-size: 18px;
+  line-height: 40px;
+  padding-right: 20px;
+  text-transform: none;
+  vertical-align: middle;
+}
+
+body.pl_specific #group_create .btn,
+body.pl_specific #group_create .btn span {
+  background-image: url("../images/button_newgroup.png");
+  height: 40px;
+}
+
+body.pl_specific #ututi_main_features {
+  margin-bottom: 20px;
+}
+
+body.pl_specific #ututi_main_features .feature {
+  margin: 15px 0;
+  padding-left: 35px;
+  background-position: left center;
+  background-repeat: no-repeat;
+}
+
+body.pl_specific #ututi_main_features .feature h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+body.pl_specific #ututi_main_features .feature span {
+  color: #808080;
+  font-size: 12px;
+}
+
+body.pl_specific #ututi_main_features .feature.icon_file {
+  background-image: url("../images/details/icon_file_larger.png");
+}
+
+body.pl_specific #ututi_main_features .feature.icon_group {
+  background-image: url("../images/details/icon_group_larger.png");
+}
+
+body.pl_specific #ututi_main_features .feature.icon_gadugadu {
+  background-image: url("../images/details/icon_gadugadu_larger.png");
+}
+
+/*************************************************************************
+    END OF POLISH SECTION
+**************************************************************************/
