@@ -208,3 +208,26 @@ again:
 
     >>> ubrowser.getControl('Subscribe to emails')
     <SubmitControl name=None type='submit'>
+
+Forum-wide subscriptions
+========================
+
+We can subscribe to the entire forum. Then we will be automatically
+subscribed to any new threads:
+
+    >>> ubrowser.getLink('Back to the topic list').click()
+    >>> ubrowser.getLink('Get email').click()
+
+Now, the admin creates another thread:
+
+    >>> browser.getLink('Back to the topic list').click()
+
+    >>> browser.getLink('New topic').click()
+    >>> browser.getControl(name='title').value = "Some news"
+    >>> browser.getControl(name='message').value = "Notice this?"
+    >>> browser.getControl('Post').click()
+
+And the user is automatically subscribed to it:
+
+    >>> mail_queue.pop()
+    <EmailInfo sender='admin@ututi.lt' recipients=['user@ututi.lt', 'admin@ututi.lt']>

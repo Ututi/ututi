@@ -949,7 +949,20 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
 
     def is_subscribed(self, user):
         membership = GroupMember.get(user, self)
-        return membership and membership.subscribed
+        if self.mailinglist_enabled:
+            return membership and membership.subscribed
+        else:
+            return membership and membership.subscribed_to_forum
+
+    def set_subscription(self, user, subscribed=True):
+        membership = GroupMember.get(user, self)
+        if membership is None:
+            return
+        if self.mailinglist_enabled:
+            membership.subscribed = subscribed
+        else:
+            membership.subscribed_to_forum = subscribed
+        meta.Session.commit()
 
     def is_member(self, user):
         """Is the user a member of the group?"""

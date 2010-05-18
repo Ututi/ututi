@@ -254,6 +254,8 @@ class ForumController(GroupControllerBase):
         return "%s@%s" % (choose_boundary(), host)
 
     def _post(self, title, message, category_id, thread_id=None):
+        new_thread = thread_id is None
+
         post = ForumPost(title, message, category_id=category_id,
                          thread_id=thread_id)
         meta.Session.add(post)
@@ -265,6 +267,14 @@ class ForumController(GroupControllerBase):
                                                       activate=True)
 
         if c.group_id:
+            if new_thread:
+                # This is a new thread; automatically subscribe all interested
+                # members.
+                for member in c.group.members:
+                    if member.subscribed_to_forum:
+                        SubscribedThread.get_or_create(post.thread_id, member.user,
+                                                       activate=True)
+
             recipient = c.group.list_address
             list_id = c.group.list_address
             group_title = c.group.title

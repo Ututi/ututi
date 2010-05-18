@@ -172,6 +172,7 @@ create table group_members (
        user_id int8 references users(id) not null,
        membership_type varchar(20) references group_membership_types(membership_type) not null,
        subscribed bool default true,
+       subscribed_to_forum bool default false,
        receive_email_each varchar(30) default 'day',
        primary key (group_id, user_id));;
 

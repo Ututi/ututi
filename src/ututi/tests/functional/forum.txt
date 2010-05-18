@@ -33,10 +33,10 @@ Let's get back to the topic list:
 
 Links from the front page work:
 
-    >>> browser.getLink('Help!', index=1)
+    >>> browser.getLink('Help!')
     <Link text='Help!' url='http://localhost/community/thread/3'>
 
-    >>> browser.getLink('Help!', index=1).click()
+    >>> browser.getLink('Help!').click()
     >>> browser.printQuery('id("forum-thread")//div[@class="post-body"]/text()')
     My ututi is borken!
 
@@ -48,7 +48,7 @@ The bugs forum works just fine too:
 
     >>> browser.open('http://localhost/bugs')
 
-    >>> browser.getLink('New topic').click()
+    >>> browser.getLink('New topic', index=1).click()
     >>> browser.getControl('Subject').value = 'Help!'
     >>> browser.getControl('Message').value = 'My ututi is borken!'
     >>> browser.getControl('Post').click()
@@ -82,3 +82,11 @@ Links from the front page work:
     >>> browser.getLink('Help!', index=1).click()
     >>> browser.printQuery('id("forum-thread")//div[@class="post-body"]/text()')
     My ututi is borken!
+
+A couple of email notifications have been sent:
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> mail_queue
+    [<EmailInfo sender='admin@ututi.lt' recipients=['admin@ututi.lt']>,
+     <EmailInfo sender='admin@ututi.lt' recipients=['admin@ututi.lt']>]
+    >>> del mail_queue[:]
