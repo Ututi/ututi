@@ -263,14 +263,11 @@ class ForumController(GroupControllerBase):
                                                       activate=True)
 
         if c.group_id:
-            #recipients = self._recipients(c.group)
-            recipients = set()
             recipient = c.group.list_address
             list_id = c.group.list_address
             group_title = c.group.title
         else:
             # XXX
-            recipients = set()
             recipient = 'noreply@localhost'
             list_id = 'public-ututi-forum'
             group_title = None
@@ -282,6 +279,7 @@ class ForumController(GroupControllerBase):
         email_message = render('/emails/forum_message.mako',
                                extra_vars=extra_vars)
 
+        recipients = set()
         for subscription in thread.subscriptions:
             if subscription.active:
                 for email in subscription.user.emails:
@@ -400,17 +398,6 @@ class ForumController(GroupControllerBase):
        for forum_post in c.category.top_level_messages():
            forum_post['post'].mark_as_seen_by(c.user)
        redirect(url(controller=c.controller, action='index', id=id, category_id=category_id))
-
-    def _recipients(self, group):
-        recipients = []
-        for member in group.members:
-            if not member.subscribed:
-                continue
-            for email in member.user.emails:
-                if email.confirmed:
-                    recipients.append(email.email)
-                    break
-        return recipients
 
     # Redirects for backwards compatibility.
 
