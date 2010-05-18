@@ -3248,3 +3248,102 @@ div.snippet-subject div.description {
 /*************************************************************************
     END OF SUGGESTIONS SECTION
 **************************************************************************/
+
+/*************************************************************************
+ *************************************************************************
+
+    TAG WIDGET SECTION
+
+    Moved from tagwidget.css
+
+ *************************************************************************
+**************************************************************************/
+
+/* autobox-list is the dropdown list */
+ul.autobox-list {
+  position: absolute;
+  overflow: hidden;
+  background-color: #fff;
+  border: 1px solid #aaa;
+  margin: 0px;
+  padding: 0;
+  list-style: none;
+  font: normal .75em/.75em "Lucida Grande", "Verdana", sans-serif;
+  color: #333;
+}
+ul.autobox-list li {
+  display: block;
+  padding: .3em .5em .3em .3em;
+  overflow: hidden;
+  width: 100%;
+}
+ul.autobox-list li.active {
+  background-color: #3875d7;
+  color: #fff;
+}
+
+/* autobx-hldr is the selected list */
+ul.autobox-hldr {
+  width: 390px;
+  overflow: hidden;
+  height: auto !important;
+  border: 1px solid #ccc;
+  padding: 4px 5px;
+  font: 11px "Lucida Grande", "Verdana";
+  margin: 0;
+}
+ul.autobox-hldr li {
+  float: left;
+  list-style-type: none;
+  padding: 0 5px 4px 0;
+  margin-right: 5px;
+}
+ul.autobox-hldr li.bit-box {
+  height: 17px;
+  background: white url("../images/borders/tag.png") left center no-repeat;
+  padding: 0;
+  padding-left: 5px;
+  margin-bottom: 3px;
+}
+ul.autobox-hldr li.bit-box div {
+  height: 15px;
+  line-height: 15px;
+  padding: 0 15px 2px 0;
+  margin: 0;
+  color: #333;
+  background: white url("../images/borders/tag.png") right center no-repeat;
+  position: relative;
+}
+
+ul.autobox-hldr li.autobox-input {
+  padding: 0;
+  padding-right: 25px;
+  height: 20px;
+  background: white url("../images/borders/tag_input.png") right center no-repeat;
+}
+
+ul.autobox-hldr li.autobox-input input {
+  width: 150px;
+  height: 18px;
+  line-height: 20px;
+  vertical-align: center;
+  font-size: 12px;
+  margin: 0;
+  border: 0;
+  outline: 0;
+  padding: 2px 0 0 7px;
+  background: white url("../images/borders/tag_input.png") left center no-repeat;
+} /* no left/right padding here please */
+
+ul.autobox-hldr li.bit-box a.closebutton {
+  position: absolute;
+  right: 2px; top: 4px;
+  display: block;
+  width: 10px; height: 10px;
+  font-size: 1px;
+  background: url('../images/details/icon_cross.png') center center no-repeat;
+}
+
+/*************************************************************************
+    END OF TAG WIDGET SECTION
+**************************************************************************/

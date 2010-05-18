@@ -5,12 +5,6 @@
 
 <%namespace file="/anonymous_index/en.mako" import="*"/>
 
-<%def name="head_tags()">
-${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
-
-${parent.head_tags()}
-</%def>
-
 <%def name="portlets()">
   ${user_sidebar(['search'])}
 </%def>

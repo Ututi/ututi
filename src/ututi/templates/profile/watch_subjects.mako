@@ -5,7 +5,6 @@
 <%namespace file="/search/index.mako" import="search_results"/>
 
 <%def name="head_tags()">
-${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
 <script type="text/javascript">
 //<![CDATA[
 $(document).ready(function(){

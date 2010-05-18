@@ -9,7 +9,6 @@ ${_('Edit subject')}
 
 <%def name="head_tags()">
 <%newlocationtag:head_tags />
-${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
 ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
 </%def>
 

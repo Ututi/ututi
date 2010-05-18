@@ -4,7 +4,6 @@
 
 <%def name="head_tags()">
 <%newlocationtag:head_tags />
-${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
 ${parent.head_tags()}
 
 ${h.javascript_link('/javascript/js-alternatives.js')|n}

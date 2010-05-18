@@ -9,7 +9,6 @@ ${_('New subject')}
 </%def>
 
 <%def name="head_tags()">
-${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
 <%newlocationtag:head_tags />
 </%def>
 

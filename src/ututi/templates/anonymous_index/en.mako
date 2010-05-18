@@ -6,7 +6,6 @@
 
 <%def name="head_tags()">
 ${parent.head_tags()}
-${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
 ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
 </%def>
 

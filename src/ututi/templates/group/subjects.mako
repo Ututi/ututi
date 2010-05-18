@@ -5,7 +5,6 @@
 <%namespace file="/sections/content_snippets.mako" import="item_tags, tag_link"/>
 
 <%def name="head_tags()">
-${h.stylesheet_link('/stylesheets/tagwidget.css')|n}
 <script type="text/javascript">
 //<![CDATA[
 $(document).ready(function(){
