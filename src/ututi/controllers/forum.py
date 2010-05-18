@@ -133,6 +133,8 @@ class ForumController(GroupControllerBase):
                 abort(404)
             c.group_id = c.group.group_id
             if c.group.mailinglist_enabled:
+                flash(_('The web-based forum for this group has been disabled.'
+                        ' Please use the mailing list instead.'))
                 redirect(url(controller='mailinglist', action='index', id=id))
             c.object_location = c.group.location
             c.security_context = c.group

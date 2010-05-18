@@ -19,10 +19,32 @@ from ututi.lib.mailer import send_email
 from ututi.lib.base import render
 from ututi.lib import helpers as h
 from ututi.controllers.files import serve_file
-from ututi.controllers.group import group_action
 from ututi.controllers.group import GroupControllerBase
 from ututi.model.mailing import GroupMailingListMessage
 from ututi.model import Group, meta
+
+
+def check_forum_setting(group):
+    if not group.mailinglist_enabled:
+        h.flash(_('The mailing list for this group has been disabled.'
+                  ' Please use the web-based forum instead.'))
+        redirect(url(controller='forum', action='categories', id=id))
+
+
+def group_action(method):
+    def _group_action(self, id=None):
+        if id is None:
+            redirect(url(controller='search', obj_type='group'))
+        group = Group.get(id)
+        if group is None:
+            abort(404)
+        check_forum_setting(group)
+        c.security_context = group
+        c.object_location = group.location
+        c.group = group
+        c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
+        return method(self, group)
+    return _group_action
 
 
 def set_login_url(method):
@@ -44,7 +66,10 @@ def group_mailinglist_action(method):
         group = Group.get(id)
         if group is None:
             abort(404)
-        thread = meta.Session.query(GroupMailingListMessage).filter_by(id=thread_id).first()
+
+        check_forum_setting(group)
+        thread = meta.Session.query(GroupMailingListMessage).filter_by(
+                    id=thread_id).first()
         if (thread is None or
             thread.thread != thread or
             thread.group != group):
