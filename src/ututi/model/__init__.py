@@ -523,6 +523,14 @@ class ContentItem(object):
     def isDeleted(self):
         return self.deleted_on is not None
 
+    def rating(self):
+        """Rank the subject from 0 to 5."""
+        intervals = ((5, 50), (4, 30), (3, 15), (2, 5), (1, 1))
+
+        for level, limit in intervals:
+            if self.search_item.rating >= limit:
+                return level
+        return 0
 
 def generate_salt():
     """Generate the salt used in passwords."""
