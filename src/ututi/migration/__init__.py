@@ -148,10 +148,8 @@ class GreatMigrator(object):
             self.run_downgrade_scripts(self.db_version)
 
 def main():
-    config_file = sys.argv[1]
-    action = 'upgrade'
-    if len(sys.argv) > 2:
-        action = sys.argv[2]
+    config_file = sys.argv[1] if len(sys.argv) > 1 else 'development.ini'
+    action = sys.argv[2] if len(sys.argv) > 2 else 'upgrade'
 
     config_name = 'config:%s' % config_file
 
