@@ -6,8 +6,9 @@
 <%def name="head_tags()">
 ${parent.head_tags()}
 <meta name="robots" content="noindex, nofollow" />
-${h.stylesheet_link('/stylesheets/anonymous.css')|n}
 </%def>
+
+<%def name="body_class()">anonymous_index</%def>
 
 <%def name="portlets()">
 <div id="sidebar">

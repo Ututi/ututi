@@ -3399,3 +3399,237 @@ div.location-add-subform {
 /*************************************************************************
     END OF NEW LOCATION WIDGET SECTION
 **************************************************************************/
+
+/*************************************************************************
+ *************************************************************************
+
+    ANONYMOUS SECTION
+
+    Moved from anonymous.css
+
+ *************************************************************************
+**************************************************************************/
+
+body.anonymous_index h1 {
+  font-size: 26px;
+  font-weight: normal;
+  margin-left: -20px;
+}
+
+body.anonymous_index #body-container {
+  padding-left: 20px !important;
+}
+
+/* search */
+body.anonymous_index #frontpage-search {
+  margin-top: 15px;
+}
+
+/* ututi feature list */
+#can_find {
+  margin-top: 20px;
+  padding-left: 80px;
+  height: 60px;
+  background: transparent url("../images/details/image_door.png") left center no-repeat;
+}
+
+#can_do {
+  height: 60px;
+  margin-top: 20px;
+  padding-left: 80px;
+  background: transparent url("../images/details/image_man.png") left center no-repeat;
+}
+
+#ututi_features {
+  margin: 20px 0 50px 0;
+}
+
+#ututi_features .q_mark {
+  padding-left: 35px;
+  background: transparent url("../images/details/questionmark.png") left top no-repeat;
+  font-size: 13px;
+  padding-bottom: 10px;
+}
+
+#ututi_features .q_mark h3 {
+  color: #d45500;
+  font-size: 16px;
+  padding-bottom: 5px;
+}
+
+#ututi_features h3 {
+  font-size: 16px;
+}
+
+#ututi_features em {
+  color: #d45500;
+  font-style: normal;
+}
+
+/* removing conventional sidebars */
+body.anonymous_index #content .inside {
+  margin-right: 360px !important;
+}
+
+/* registration block */
+body.anonymous_index .sidebar-block {
+  width: 350px;
+}
+
+body.anonymous_index .sidebar-block .btn {
+  float: right;
+}
+
+body.anonymous_index .sidebar-block form .input-line {
+  width: 165px;
+  font-size: 0.8em;
+  font-weight: normal;
+}
+
+/* registration form */
+#ututi_join_portlet .rounded-header,
+#ututi_join_portlet .rounded-right,
+#ututi_join_section_portlet .rounded-header,
+#ututi_join_section_portlet .rounded-right,
+#ututi_login_section_portlet .rounded-header,
+#ututi_login_section_portlet .rounded-right {
+  background: white;
+  height: 35px;
+  padding: 0;
+}
+
+#ututi_join_portlet .rounded-right h3,
+#ututi_join_section_portlet .rounded-right h3,
+#ututi_login_section_portlet .rounded-right h3 {
+  color: #333;
+  margin: 0;
+  text-transform: uppercase;
+  padding-bottom: 10px;
+  height: 30px;
+  font-size: 14px;
+  background: white url("../images/borders/registration_form.png") top center no-repeat;
+}
+
+body.anonymous_index #page-content #ututi_login_section_portlet .rounded-right h3 {
+  background-image: url("../images/borders/login_form.png");
+  padding: 0;
+  height: 5px;
+  font-size: 0;
+}
+
+body.anonymous_index #page-content #ututi_login_section_portlet .rounded-header,
+body.anonymous_index #page-content #ututi_login_section_portlet .rounded-right {
+  height: 5px;
+}
+
+
+body.anonymous_index #body-container #ututi_join_section_portlet .rounded-right,
+body.anonymous_index #body-container #ututi_join_section_portlet .rounded-header {
+  height: 45px;
+}
+
+body.anonymous_index #body-container #ututi_join_section_portlet .rounded-right h3 {
+  text-transform: none;
+  font-size: 18px;
+  height: 40px;
+}
+
+body.anonymous_index #ututi_join_portlet .content,
+body.anonymous_index #ututi_join_section_portlet .content {
+  border: 0px;
+  background: white url("../images/borders/registration_form.png") center bottom no-repeat;
+}
+
+body.anonymous_index #ututi_login_section_portlet .content {
+  border: 0px;
+  background: white url("../images/borders/login_form.png") center bottom no-repeat;
+}
+
+
+body.anonymous_index #registration_form .form-field div {
+  float: right;
+  clear: right;
+}
+
+
+body.anonymous_index #registration_form .form-field input.submit {
+  float: none;
+  width: auto;
+}
+
+body.anonymous_index #registration_form .form-field label {
+  float: right;
+  margin-right: 10px;
+}
+
+body.anonymous_index #registration_form .form-field {
+  margin: 2px 0;
+  height: 24px;
+}
+
+body.anonymous_index #registration_form .error-message {
+  float: right;
+}
+
+/* end registration form */
+
+/* information block */
+#infoblock {
+  border-top: 1px solid #ded8d8;
+  margin-top: 25px;
+  margin-left: -20px;
+  padding-top: 20px;
+}
+
+#infoblock #ututi_features {
+  float: left;
+  width: 280px;
+  padding-left: 10px;
+  font-size: 12px;
+}
+
+#infoblock #can_find {
+  margin-top: 0;
+  padding-left: 60px;
+  background: transparent url("../images/details/fp_image_door.png") left center no-repeat;
+}
+
+#infoblock #can_do {
+  margin-top: 20px;
+  padding-left: 60px;
+  background: transparent url("../images/details/fp_image_man.png") left center no-repeat;
+}
+/* end information block */
+
+/* presentation */
+#infoblock .hidden {
+  display: none;
+}
+
+#presentation {
+  width: 260px;
+  float: left;
+}
+
+#presentation-img {
+  cursor: pointer;
+}
+
+#login-page-form {
+  width: 180px;
+  margin: 0 auto;
+  padding-top: 30px;
+}
+
+#ututi_tour_link img {
+  vertical-align: middle;
+}
+
+#ututi_tour_link span {
+  font-size: 14px;
+  color: #d45500;
+}
+
+/*************************************************************************
+    END OF ANONYMOUS SECTION
+**************************************************************************/

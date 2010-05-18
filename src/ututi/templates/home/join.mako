@@ -1,12 +1,7 @@
 <%inherit file="/base.mako" />
 <%namespace file="/portlets/anonymous.mako" import="*"/>
 
-<%def name="body_class()">join</%def>
-
-<%def name="head_tags()">
-  ${parent.head_tags()}
-  ${h.stylesheet_link('/stylesheets/anonymous.css')|n}
-</%def>
+<%def name="body_class()">join anonymous_index</%def>
 
 <table style="width: 955px;">
   <tr>
