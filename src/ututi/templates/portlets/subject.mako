@@ -16,9 +16,16 @@
       <div class="small">
         ${_('Lecturer')}: ${subject.lecturer}
       </div>
+      <div class="border-top">
+        <span class="small">${_('Subject rating:')} ${h.image('/images/details/pbar%d.png' % subject.rating(), alt='', class_='subject_rating')|n}</span>
+        <br/>
+        <span class="small">${h.image('/images/details/eye_open.png', alt='')|n}
+          ${ungettext("<em>%(count)s</em> user", "<em>%(count)s</em> users", subject.user_count()) % dict(count = subject.user_count())|n},
+          ${ungettext("<em>%(count)s</em> group", "<em>%(count)s</em> groups", subject.group_count()) % dict(count = subject.group_count())|n}
+        </span>
+      </div>
       % if subject.tags:
-      <hr />
-      <div class="item-tags">
+      <div class="item-tags border-top">
         %for tag in subject.tags:
           ${tag_link(tag)}
         %endfor

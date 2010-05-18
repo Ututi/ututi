@@ -95,7 +95,7 @@ You can import more subjects using the admin interface.
     >>> browser.printQuery("id('subject_info_portlet_content')//h4")
     <h4>Imported subject</h4>
 
-    >>> browser.printQuery("id('subject_info_portlet_content')//*[@class='item-tags']/a")
+    >>> browser.printQuery("id('subject_info_portlet_content')//*[@class='item-tags border-top']/a")
     <a class="tag" title="imported" href="/profile/search?tags=imported">
       imported
     </a>

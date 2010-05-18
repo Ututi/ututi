@@ -137,8 +137,13 @@ label {
 }
 
 .small {
-  font-size: 0.8em;
+  line-height: 12px;
+  font-size: 12px;
   color: #808080;
+}
+
+.small img {
+  vertical-align: middle;
 }
 
 /* end fonts */
@@ -146,7 +151,7 @@ label {
 /* text colors */
 h1, h2, h3, h4 {
   color: #333333;
-  margin: 0.1em 0 0 0em;
+  margin: 0.1em 0 0.1em 0;
 }
 
 .sidebar-block .content a.tag,
@@ -405,6 +410,12 @@ ul.bullets_large li {
 .sidebar-block {
   width: 300px;
   margin-top: 5px;
+}
+
+.sidebar-block .border-top {
+  border-top: 1px solid #ded8d8;
+  padding: 5px 0;
+  margin: 5px 0;
 }
 
 .sidebar-block .rounded-header {
@@ -1230,7 +1241,7 @@ div#pager {
 div.sidebar-block .item-tags,
 div.search-item .item-tags {
   padding-left: 25px;
-  background: white url("../images/details/icon_tag.png") left top no-repeat;
+  background: white url("../images/details/icon_tag.png") left 3px no-repeat;
   margin-top: 5px;
 }
 
