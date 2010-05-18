@@ -2,7 +2,6 @@
 <%namespace name="newlocationtag" file="/widgets/newlocationtag.mako" import="*"/>
 
 <%def name="head_tags()">
-${h.stylesheet_link('/stylesheets/suggestions.css')|n}
 ${parent.head_tags()}
 <%newlocationtag:head_tags />
 </%def>
