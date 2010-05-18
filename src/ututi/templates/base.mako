@@ -237,7 +237,7 @@ ${h.javascript_link('/javascript/forms.js')|n}
     ${h.javascript_link('/javascript/ajaxupload.3.5.js')}
     ${h.javascript_link('/javascript/jquery.qtip.min.js')}
     ${h.javascript_link('/javascript/tooltips.js')}
-    ${h.stylesheet_link('/stylesheets/style.css')}
+    ${h.stylesheet_link('/style.css')}
     ${h.javascript_link('/javascript/expand.js')}
     ${h.javascript_link('/javascript/hide_parent.js')}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
