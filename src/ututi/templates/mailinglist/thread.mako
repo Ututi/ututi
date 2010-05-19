@@ -6,6 +6,7 @@
 
 <%def name="head_tags()">
 ${parent.head_tags()}
+${h.javascript_link('/javascript/mailinglist.js')|n}
 </%def>
 
 <a class="back-link" href="${h.url_for(action='index')}">${_('Back to the topic list')}</a>
@@ -30,7 +31,7 @@ ${parent.head_tags()}
     </div>
     <div class="message-content">
       <div class="post-body">
-        ${h.nl2br(message.body)}
+        ${h.email_with_replies(message.body)}
       </div>
       <a class="btn" href="#reply"><span>${_('Reply')}</span></a>
       % if message.attachments:

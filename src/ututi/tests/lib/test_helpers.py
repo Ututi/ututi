@@ -1,3 +1,4 @@
+import re
 from zope.testing import doctest
 
 from ututi.tests import PylonsLayer
@@ -28,6 +29,130 @@ def test_ellipsis():
 
     As you can see, we are passing the length of the full string,
     ellipsis included.
+
+    """
+
+
+def test_email_with_replies():
+    r"""Tests for email_with_replies.
+
+    `email_with_replies` marks reply text in emails.
+
+        >>> from ututi.lib.helpers import email_with_replies
+        >>> from ututi.lib.helpers import EXPAND_QUOTED_TEXT_LINK
+
+        >>> email_with_replies('')
+        literal(u'<br />')
+
+    HTML escaping is automatically applied and newlines are replaced with <br>:
+
+        >>> email_with_replies('<foo>\n</bar>')
+        literal(u'&lt;foo&gt;<br />&lt;/bar&gt;<br />')
+
+    Let's define a test helper function that will make the HTML easier on the
+    eyes:
+
+        >>> def test(s):
+        ...     print ('\n'.join(email_with_replies(s.strip()).split('<br />'))
+        ...            .replace(EXPAND_QUOTED_TEXT_LINK, '[...]<div>'))
+
+    Consecutive newlines are removed:
+
+        >>> test('\n\n1\n2\n\n\n\n3')
+        1
+        2
+        <BLANKLINE>
+        3
+        <BLANKLINE>
+
+    (In quotes too:)
+
+        >>> test('''
+        ... Hello
+        ... >
+        ... >
+        ... >
+        ... > Hi!
+        ... ''')
+        Hello [...]<div>
+        &gt;
+        &gt; Hi!</div>
+        <BLANKLINE>
+
+    '>' quotes are marked:
+
+        >>> test('''
+        ... Hi!
+        ... > Hello!
+        ... ''')
+        Hi! [...]<div>
+        &gt; Hello!</div>
+        <BLANKLINE>
+
+    Block quotes are grouped:
+
+        >>> test('''
+        ... Hi!
+        ... > Hello!
+        ... > 42
+        ... > blue
+        ... ''')
+        Hi! [...]<div>
+        &gt; Hello!
+        &gt; 42
+        &gt; blue</div>
+        <BLANKLINE>
+
+    Block quote headers are recognized:
+
+        >>> test('''
+        ... Hi!
+        ...
+        ... 2010/04/03 Mr. Foo <foo@example.com> wrote:
+        ... > Hello!
+        ... > 42
+        ... > blue
+        ... ''')
+        Hi!
+        <BLANKLINE>
+        2010/04/03 Mr. Foo &lt;foo@example.com&gt; wrote: [...]<div>
+        &gt; Hello!
+        &gt; 42
+        &gt; blue</div>
+        <BLANKLINE>
+
+    If there's an extra row between the reply and the header, it is removed.
+
+        >>> test('''
+        ... Hi!
+        ...
+        ... 2010/04/03 Mr. Foo <foo@example.com> wrote:
+        ...
+        ... > Hello!
+        ... > 42
+        ... > blue
+        ... ''')
+        Hi!
+        <BLANKLINE>
+        2010/04/03 Mr. Foo &lt;foo@example.com&gt; wrote: [...]<div>
+        &gt; Hello!
+        &gt; 42
+        &gt; blue</div>
+        <BLANKLINE>
+
+    Corner cases:
+
+        >>> test('>')
+        [...]<div>
+        &gt;</div>
+        <BLANKLINE>
+
+        >>> test('foo\n>\nbar')
+        foo [...]<div>
+        &gt;</div>
+        <BLANKLINE>
+        bar
+        <BLANKLINE>
 
     """
 

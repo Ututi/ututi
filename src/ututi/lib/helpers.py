@@ -7,6 +7,7 @@ available to Controllers. This module is available to templates as 'h'.
 from hashlib import md5
 import re
 import cgi
+from datetime import datetime
 
 # Import helpers as desired, or define your own, ie:
 #from webhelpers.html.tags import checkbox, password
@@ -16,8 +17,6 @@ from webhelpers.html.builder import literal
 
 from webhelpers.html import HTML
 from webhelpers.html.tags import convert_boolean_attrs
-
-from datetime import datetime
 
 from ututi.lib.base import render_lang
 from ututi.lib.latex import replace_latex_to_html as latex_to_html
@@ -196,6 +195,48 @@ def fmt_shortdate(dt):
 
 def nl2br(text):
     return literal('<br/>'.join(cgi.escape(text).split("\n")))
+
+
+EXPAND_QUOTED_TEXT_LINK = ('<a class="expand-quote" href="#">[...]</a>'
+                           '<div class="quote" style="display: none">')
+
+
+def email_with_replies(text):
+    lines = cgi.escape(text).split("\n")
+    # First preprocessing stage: remove consecutive newlines.
+    cleaned_lines = []
+    last_empty = False
+    for line in list(lines):
+        empty_line = not line.replace('&gt;', '').strip()
+        if not empty_line or not last_empty:
+            cleaned_lines.append(line)
+        last_empty = empty_line
+
+    # TODO: find and mark emails quoted without > and with full headers.
+
+    cleaned_lines.append('') # Makes it easier to deal with end-conditions.
+    result = []
+    in_quote = False
+    for line in cleaned_lines:
+        line_is_quoted = line.strip().startswith('&gt;')
+        if not in_quote and line_is_quoted:
+            # Quote started.
+            in_quote = True
+            # Eat empty line (if any) above.
+            # There shouldn't be several empty lines because of the filter above.
+            if result and not result[-1].strip():
+                del result[-1]
+            if not result:
+                result.append('')
+            result[-1] += ' ' + EXPAND_QUOTED_TEXT_LINK
+        elif in_quote and not line_is_quoted:
+            # Quote ended.
+            in_quote = False
+            result[-1] += '</div>'
+            if line:
+                result.append('')
+        result.append(line)
+    return literal('<br />'.join(result))
 
 
 def html_cleanup(*args, **kwargs):

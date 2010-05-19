@@ -2439,6 +2439,15 @@ table#forum-thread div.message-content {
   padding-bottom: 10px;
 }
 
+table#forum-thread div.message-content a.expand-quote {
+  color: blue;
+  font-weight: bold;
+}
+
+table#forum-thread div.message-content div.quote {
+  font-size: small;
+}
+
 ul.post-attachments {
   padding-left: 0;
 }
