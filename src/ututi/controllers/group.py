@@ -347,7 +347,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         c.years = range(current_year - 12, current_year + 3)
         return render('group/add.mako')
 
-    @validate(schema=GroupAddingForm, post_only = False, on_get = True)
+    @validate(schema=GroupAddingForm, post_only=False, on_get=True)
     @ActionProtector("user")
     def add(self):
         #some initial date may be submitted as a get request
@@ -652,15 +652,15 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         self._createSubject(group)
         redirect(group.url(action='subjects'))
 
-    @validate(schema=SearchSubmit, form='subjects', post_only = False, on_get = True)
+    @validate(schema=SearchSubmit, form='subjects', post_only=False, on_get=True)
     @group_action
     @ActionProtector("member", "admin")
     def subjects_step(self, group):
         c.step = True
-        c.search_target = url(controller = 'group', action='subjects_step', id = group.group_id)
+        c.search_target = url(controller='group', action='subjects_step', id=group.group_id)
         return self._subjects(group)
 
-    @validate(schema=SearchSubmit, form='subjects', post_only = False, on_get = True)
+    @validate(schema=SearchSubmit, form='subjects', post_only=False, on_get=True)
     @group_action
     @ActionProtector("member", "admin")
     def subjects(self, group):
@@ -674,7 +674,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         members to choose new subjects for the group.
         """
         if check_crowds(["admin", "member"]):
-            c.search_target = url(controller = 'group', action='subjects', id = group.group_id)
+            c.search_target = url(controller='group', action='subjects', id=group.group_id)
 
             #retrieve search parameters
             c.text = self.form_result.get('text', '')
@@ -711,7 +711,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             return render('group/subjects.mako')
 
     @group_action
-    @validate(schema=GroupInviteForm, form='members', post_only = False, on_get = True)
+    @validate(schema=GroupInviteForm, form='members', post_only=False, on_get=True)
     @ActionProtector("member", "admin")
     def invite_members(self, group):
         """Invite new members to the group."""
@@ -963,7 +963,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             groups = meta.Session.query(Group).filter(Group.location_id.in_([loc.id for loc in location.flatten]))
             if year != '':
                 groups = groups.filter(Group.year == date(int(year), 1, 1))
-            return render_mako_def('group/add.mako', 'live_search', groups = groups.all())
+            return render_mako_def('group/add.mako', 'live_search', groups=groups.all())
         else:
             abort(404)
 
@@ -973,8 +973,8 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     def file_info(self, group):
         """Information on the group's usage of the files area."""
         info = {
-            'image' : render_mako_def('sections/files.mako', 'free_space_indicator', obj = group),
-            'text' : render_mako_def('sections/files.mako', 'free_space_text', obj = group) }
+            'image' : render_mako_def('sections/files.mako', 'free_space_indicator', obj=group),
+            'text' : render_mako_def('sections/files.mako', 'free_space_text', obj=group) }
         section_id = request.POST.get('section_id', None)
         if section_id is not None:
             info['section_id'] = section_id
