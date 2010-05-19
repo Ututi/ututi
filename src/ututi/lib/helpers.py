@@ -1,10 +1,13 @@
-from hashlib import md5
-import re
 """Helper functions
 
 Consists of functions to typically be used within templates, but also
 available to Controllers. This module is available to templates as 'h'.
 """
+
+from hashlib import md5
+import re
+import cgi
+
 # Import helpers as desired, or define your own, ie:
 #from webhelpers.html.tags import checkbox, password
 from webhelpers.html.tags import stylesheet_link, javascript_link, image, select, radio
@@ -192,8 +195,7 @@ def fmt_shortdate(dt):
 
 
 def nl2br(text):
-    import cgi
-    return '<br/>'.join(cgi.escape(text).split("\n"))
+    return literal('<br/>'.join(cgi.escape(text).split("\n")))
 
 
 def html_cleanup(*args, **kwargs):

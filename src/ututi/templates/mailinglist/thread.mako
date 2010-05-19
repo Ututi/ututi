@@ -30,7 +30,7 @@ ${parent.head_tags()}
     </div>
     <div class="message-content">
       <div class="post-body">
-        ${h.nl2br(message.body)|n}
+        ${h.nl2br(message.body)}
       </div>
       <a class="btn" href="#reply"><span>${_('Reply')}</span></a>
       % if message.attachments:

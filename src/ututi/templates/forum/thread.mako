@@ -38,7 +38,7 @@
     </div>
     <div class="forum_post-content">
       <div class="post-body">
-        ${h.nl2br(forum_post.message)|n}
+        ${h.nl2br(forum_post.message)}
       </div>
       % if c.can_post(c.user):
         <a class="btn" href="#reply"><span>${_('Reply')}</span></a>
