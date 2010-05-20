@@ -239,7 +239,7 @@ ul.bullets_large li {
 }
 
 /* personal box */
-#login_form .error {
+#loginForm .error {
   float: left;
   height: 20px;
   line-height: 20px;
@@ -247,11 +247,11 @@ ul.bullets_large li {
   padding-left: 40px;
 }
 
-#login_form .input-rounded input {
+#loginForm .input-rounded input {
   width: 160px;
 }
 
-#login_form label {
+#loginForm label {
   font-size: 1em;
   font-weight: normal;
 }
@@ -663,7 +663,7 @@ form .form-field div.input-line {
   width: 180px;
 }
 
-#login_form .form-field div.input-line {
+#loginForm .form-field div.input-line {
   width: 180px;
 }
 

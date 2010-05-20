@@ -10,7 +10,7 @@ in it:
 
 We will only require your email address, name and password:
 
-    >>> form.getControl('Fullname').value = 'Jonas Petraitis Petrauskas'
+    >>> form.getControl('Full name').value = 'Jonas Petraitis Petrauskas'
     >>> form.getControl('Email').value = 'jonas@example.com'
     >>> form.getControl('Password').value = 'asdfgh'
     >>> form.getControl('Repeat password').value = 'asdfgh'
@@ -116,7 +116,7 @@ Ok, now we forget to enter the email when registering. We should be redirected t
 registration form and shown an error message that we've forgotten the email.
 
     >>> form = browser.getForm('registration_form')
-    >>> form.getControl('Fullname').value = 'Domas Monkus'
+    >>> form.getControl('Full name').value = 'Domas Monkus'
     >>> form.getControl('Password').value = 'asdfgh'
     >>> form.getControl('Repeat password').value = 'asdfgh'
     >>> form.getControl('Email').value = ''
@@ -131,7 +131,7 @@ registration form and shown an error message that we've forgotten the email.
 If we forget to enter the password, we should also get an error message.
 
     >>> form = browser.getForm('registration_form')
-    >>> form.getControl('Fullname').value = 'Domas Monkus'
+    >>> form.getControl('Full name').value = 'Domas Monkus'
     >>> form.getControl('Email').value = 'domas@ututi.com'
     >>> form.getControl('Password').value = ''
     >>> form.getControl('Repeat password').value = ''
@@ -147,7 +147,7 @@ If we forget to enter the password, we should also get an error message.
 If the passwords do not match we also get an error message.
 
     >>> form = browser.getForm('registration_form')
-    >>> form.getControl('Fullname').value = 'Domas Monkus'
+    >>> form.getControl('Full name').value = 'Domas Monkus'
     >>> form.getControl('Password').value = 'abcdefgh'
     >>> form.getControl('Repeat password').value = 'abcdef'
     >>> form.getControl('Email').value = 'jonas3@example.com'
@@ -163,7 +163,7 @@ If such an email already exists, we also get an error message (later we should g
 we have forgotten it).
 
     >>> form = browser.getForm('registration_form')
-    >>> form.getControl('Fullname').value = 'Domas Monkus'
+    >>> form.getControl('Full name').value = 'Domas Monkus'
     >>> form.getControl('Password').value = 'abcdefgh'
     >>> form.getControl('Repeat password').value = 'abcdefgh'
     >>> form.getControl('Email').value = 'jonas@example.com'
@@ -180,7 +180,7 @@ Bug fix confirm: passwords with non-ascii chars would crash the registration.
     >>> browser.open('http://localhost/')
 
     >>> form = browser.getForm('registration_form')
-    >>> form.getControl('Fullname').value = 'Jonas Petraitis Petrauskas'
+    >>> form.getControl('Full name').value = 'Jonas Petraitis Petrauskas'
     >>> form.getControl('Email').value = 'jonas_new@example.com'
     >>> form.getControl('Password').value = u'\u0105\u010d\u0119\u0117\u012f\u0161'.encode('utf-8')
     >>> form.getControl('Repeat password').value = u'\u0105\u010d\u0119\u0117\u012f\u0161'.encode('utf-8')

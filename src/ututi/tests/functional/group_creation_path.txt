@@ -115,7 +115,7 @@ invitation.
 
     >>> browser2 = Browser()
     >>> browser2.open('http://localhost/')
-    >>> form = browser2.getForm('login_form')
+    >>> form = browser2.getForm('loginForm')
     >>> form.getControl('Email').value = "user@ututi.lt"
     >>> form.getControl('Password').value = "password"
     >>> form.getControl('Login').click()
@@ -210,7 +210,7 @@ Let's try requesting to join the group:
 
     >>> browser3 = Browser()
     >>> browser3.open('http://localhost/')
-    >>> form = browser3.getForm('login_form')
+    >>> form = browser3.getForm('loginForm')
     >>> form.getControl('Email').value = "user2@ututi.lt"
     >>> form.getControl('Password').value = "password"
     >>> form.getControl('Login').click()
@@ -240,7 +240,7 @@ The group's administrator should now see the request in the members view.
 
     >>> browser.getLink('log out').click()
     >>> browser.open('http://localhost/')
-    >>> form = browser.getForm('login_form')
+    >>> form = browser.getForm('loginForm')
     >>> form.getControl('Email').value = "admin@ututi.lt"
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
