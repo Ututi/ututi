@@ -62,7 +62,7 @@
 
 
 <%def name="location_field()">
-  ${location_widget(2, add_new=True, live_search=True)}
+  ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=True)}
 </%def>
 
 <%def name="logo_field()">
