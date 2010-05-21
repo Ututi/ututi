@@ -41,6 +41,15 @@ from ututi.lib.emails import group_request_email, group_confirmation_email
 log = logging.getLogger(__name__)
 
 
+def set_login_url(method):
+    def _set_login_url(self):
+        c.login_form_url = url(controller='home',
+                               action='join',
+                               came_from=url.current())
+        return method(self)
+    return _set_login_url
+
+
 def _filter_watched_subjects(sids):
     """A modifier for the subjects query, which excludes subjects already being watched."""
     def _filter(query):
@@ -347,7 +356,25 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         c.years = range(current_year - 12, current_year + 3)
         return render('group/add.mako')
 
-    @validate(schema=GroupAddingForm, post_only = False, on_get = True)
+    def group_type(self):
+        return render('group/group_type.mako')
+
+    @set_login_url
+    @ActionProtector("user")
+    def create_academic(self):
+        # TODO
+        return self.add()
+
+    @ActionProtector("user")
+    def create_public(self):
+        # XXX
+        return render('group/create_public.mako')
+
+    @ActionProtector("user")
+    def create_group(self):
+        raise NotImplementedError()
+
+    @validate(schema=GroupAddingForm, post_only=False, on_get=True)
     @ActionProtector("user")
     def add(self):
         #some initial date may be submitted as a get request

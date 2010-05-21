@@ -105,6 +105,7 @@
     <li style="background-image: url('img/icons/file_private_green_17.png');">Privačių failų saugyklą</li>
     <li style="background-image: url('img/icons/subjects_green_17.png');">Studijuojamus dalykus</li>
   </ul>
+  ${h.button_to(_('Create group'), url(controller='group', action='group_type'), class_='button buttonHuge')}
 </div>
 <div id="homePopularSubjects">
   <h2>Populiariausi dalykai</h2>

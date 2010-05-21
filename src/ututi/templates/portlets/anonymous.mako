@@ -9,7 +9,6 @@
         %if c.hash:
           <input type="hidden" name="hash" value="${c.hash}"/>
         %endif
-        <form:error name="came_from"/>
         %if c.came_from:
           <input type="hidden" name="came_from" value="${c.came_from}" />
         %endif
@@ -77,6 +76,11 @@
       ${_('Registration')}
     </%def>
       <form id="join_registration_form" method="post" action="${url(controller='home', action='join_register')}">
+
+        %if c.came_from:
+          <input type="hidden" name="came_from" value="${c.came_from}" />
+        %endif
+
         <div class="form-field">
           <form:error name="fullname"/>
           <label for="fullname">${_('Fullname')}</label>
@@ -144,6 +148,9 @@
     <%def name="header()">
     </%def>
       <form id="join_login_form" method="post" action="${url(controller='home', action='join_login')}">
+        %if c.came_from:
+          <input type="hidden" name="came_from" value="${c.came_from}" />
+        %endif
         %if c.login_error:
         <div class="error">${c.login_error}</div>
         %endif

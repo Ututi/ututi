@@ -397,7 +397,7 @@ class HomeController(UniversityListMixin):
     def join_register(self):
         if hasattr(self, 'form_result'):
             user, email = self.__register_user(self.form_result)
-            redirect(url(controller='group', action='add'))
+            redirect(c.came_from or url(controller='group', action='add'))
 
     def join_login(self):
         email = request.POST.get('login_username')

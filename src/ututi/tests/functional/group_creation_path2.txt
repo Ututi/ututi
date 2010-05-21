@@ -1,0 +1,47 @@
+Group creation path
+===================
+
+    >>> browser = Browser()
+
+    >>> browser.getControl('Create group').click()
+
+Academic groups
+---------------
+
+    >>> browser.getLink('Academic group').click()
+
+We should be redirected to the registration form:
+
+    >>> print browser.url
+    http://localhost/join?came_from=%2Fgroups%2Fcreate_academic
+
+Let's register:
+
+   >>> form = browser.getForm('join_registration_form')
+   >>> form.getControl('Fullname').value = 'Jonas Petraitis Petrauskas'
+   >>> form.getControl('Email').value = 'jonas@example.com'
+   >>> form.getControl('Password').value = 'asdfgh'
+   >>> form.getControl('Repeat password').value = 'asdfgh'
+   >>> form.getControl(name='agree').value = True
+   >>> form.getControl('Join').click()
+
+(We have been sent an email confirmation message.)
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> mail_queue.pop()
+    <EmailInfo sender='info@ututi.lt' recipients=[u'jonas@example.com']>
+
+We should be redirected back to the academic group creation page:
+
+   >>> browser.url
+   'http://localhost/groups/create_academic'
+
+Let's create a simple group:
+
+    >>> browser.getControl('Group email address').value = 'test'
+    >>> browser.getControl('Group title').value = 'Test group'
+    >>> browser.getControl('Year').value = ['2009']
+    >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
+    >>> browser.getControl('Continue').click()
+
+TODO: look around for more
