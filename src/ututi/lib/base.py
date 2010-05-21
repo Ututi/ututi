@@ -59,7 +59,7 @@ class BaseController(WSGIController):
         c.mailing_list_host = config.get('mailing_list_host', '')
         c.google_tracker = config['google_tracker']
 
-        c.came_from = request.GET.get('came_from', '')
+        c.came_from = request.params.get('came_from', '')
         c.came_from_search = False #if the user came from google search
 
         lang = get_lang()
