@@ -1,5 +1,9 @@
 <%namespace file="/sections/messages.mako" import="*"/>
 
+<%
+c.new_design = True
+%>
+
 <%def name="title()">
 ${_('student information online')}
 </%def>

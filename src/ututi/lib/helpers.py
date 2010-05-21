@@ -93,6 +93,7 @@ def button_to(name, url='', **html_options):
         (Bottom line: Always validate your HTML before going public.)
 
     """
+    from pylons import tmpl_context as c
     if html_options:
         convert_boolean_attrs(html_options, ['disabled'])
 
@@ -115,8 +116,17 @@ def button_to(name, url='', **html_options):
         html_options["type"] = "submit"
         html_options["value"] = name
 
-    return HTML.form(method=form_method, action=url, class_="button-to",
-                     c=[HTML.div(method_tag, HTML.span(HTML.input(**html_options), class_="btn"))])
+    if c.new_design:
+        html_options.pop("value")
+        html_options.setdefault('class_', "button")
+        return HTML.form(method=form_method, action=url, class_="button-to",
+                         c=[HTML.label(method_tag,
+                                       HTML.button(name),
+                                       HTML.span(class_="edge"),
+                                       **html_options)])
+    else:
+        return HTML.form(method=form_method, action=url, class_="button-to",
+                         c=[HTML.div(method_tag, HTML.span(HTML.input(**html_options), class_="btn"))])
 
 
 def support_button(name, amount, **html_options):
