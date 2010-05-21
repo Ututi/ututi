@@ -28,8 +28,6 @@
         %if i < len(titles):
           <span class="labelText">${titles[i]}</span>
         %endif
-        <div class="input-line" style="display: inline;">
-          <div>
             <%
                cls = ''
                if live_search:
@@ -43,20 +41,10 @@
               %endif
               <span class="edge"></span>
             </span>
-          </div>
-        </div>
       </label>
       %if add_new:
         <span style="margin-left: 5px;">${_('or')}</span> <a style="margin: 0 0 0 5px;" class="btn add_subform_switch" href="#"><span>${add_titles[i]}</span></a>
       %endif
-
-      <div class="explanation">
-        %if add_new:
-          ${_('enter the name or add a new one')}
-        %else:
-          ${_('enter the name')}
-        %endif
-      </div>
       %if add_new:
         ${location_add_subform(i)}
       %endif
@@ -76,6 +64,7 @@ $(document).ready(function() {
     return false;
   });
   $('.location-add-subform span.btn input').click(function() {
+    // XXX does not work with the new tag structure
     errors = false;
     el = $(".location-add-subform span.btn input");
     var ind = el.index(this);
