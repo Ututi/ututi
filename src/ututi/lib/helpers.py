@@ -237,14 +237,23 @@ def input_line(name, title, value='', explanation=None, **kwargs):
     if explanation is not None:
         expl = HTML.div(class_='explanation', c=explanation)
 
-    return HTML.div(class_='form-field', c=[
-            HTML.label(for_=name, c=[title]),
-            HTML.literal('<form:error name="%s" />' % name),
-            HTML.div(class_='input-line', c=[
-                    HTML.div(c=[
-                            HTML.input(type='text', id=name, name_=name, value=value, **kwargs)])]),
-            expl
-            ])
+    from pylons import tmpl_context as c
+    if c.new_design:
+        return HTML.label(c=[
+            HTML.span(class_='labelText', c=[title]),
+            HTML.span(class_='textField', c=[
+                HTML.input(type='text'),
+                HTML.span(class_='edge')
+                ])])
+    else:
+        return HTML.div(class_='form-field', c=[
+                HTML.label(for_=name, c=[title]),
+                HTML.literal('<form:error name="%s" />' % name),
+                HTML.div(class_='input-line', c=[
+                        HTML.div(c=[
+                                HTML.input(type='text', id=name, name_=name, value=value, **kwargs)])]),
+                expl
+                ])
 
 
 def input_psw(name, title, value='', explanation=None):
@@ -267,12 +276,21 @@ def input_area(name, title, value='', cols='50', rows='5', explanation=None):
     if explanation is not None:
         expl = HTML.div(class_='explanation', c=explanation)
 
-    return HTML.div(class_='form-field', c=[
-            HTML.label(for_=name, c=[title]),
-            HTML.literal('<form:error name="%s" />' % name),
-            HTML.textarea(class_='line', name_=name, id_=name, cols=cols, rows=rows, c=[value]),
-            expl
-            ])
+    from pylons import tmpl_context as c
+    if c.new_design:
+        return HTML.label(c=[
+            HTML.span(class_='labelText', c=[title]),
+            HTML.span(class_='textField', c=[
+                HTML.textarea(name_=name, id_=name, cols=cols, rows=rows, c=[value]),
+                HTML.span(class_='edgeTextArea')
+                ])])
+    else:
+        return HTML.div(class_='form-field', c=[
+                HTML.label(for_=name, c=[title]),
+                HTML.literal('<form:error name="%s" />' % name),
+                HTML.textarea(class_='line', name_=name, id_=name, cols=cols, rows=rows, c=[value]),
+                expl
+                ])
 
 
 def input_wysiwyg(name, title, value='', cols='80', rows='15'):

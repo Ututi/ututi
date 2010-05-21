@@ -365,10 +365,13 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         # TODO
         return self.add()
 
+    def _create_public_form(self):
+        return render('group/create_public.mako')
+
+    @set_login_url
     @ActionProtector("user")
     def create_public(self):
-        # XXX
-        return render('group/create_public.mako')
+        return htmlfill.render(self._create_public_form())
 
     @ActionProtector("user")
     def create_group(self):

@@ -5,15 +5,15 @@ Group creation path
 
     >>> browser.getControl('Create group').click()
 
-Academic groups
----------------
+Public groups
+-------------
 
-    >>> browser.getLink('Academic group').click()
+    >>> browser.getLink('Public group').click()
 
 We should be redirected to the registration form:
 
     >>> print browser.url
-    http://localhost/join?came_from=%2Fgroups%2Fcreate_academic
+    http://localhost/join?came_from=%2Fgroups%2Fcreate_public
 
 Let's register:
 
@@ -31,16 +31,15 @@ Let's register:
     >>> mail_queue.pop()
     <EmailInfo sender='info@ututi.lt' recipients=[u'jonas@example.com']>
 
-We should be redirected back to the academic group creation page:
+We should be redirected back to the public group creation page:
 
    >>> browser.url
-   'http://localhost/groups/create_academic'
+   'http://localhost/groups/create_public'
 
 Let's create a simple group:
 
-    >>> browser.getControl('Group email address').value = 'test'
+    >>> browser.getControl('Group address on the web').value = 'test'
     >>> browser.getControl('Group title').value = 'Test group'
-    >>> browser.getControl('Year').value = ['2009']
     >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
     >>> browser.getControl('Continue').click()
 
