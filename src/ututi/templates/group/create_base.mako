@@ -51,10 +51,9 @@
   </label>
   <label>
     <span class="address">${url(controller='group', action='', qualified=True)}</span>
-
     <form:error name="id" />
     <span class="textField">
-      <input class="address" type="text" id="group-id-field" name="id" class="line"/>
+      <input class="address" type="text" id="group-id-field" name="id" />
       <span class="edge"></span>
     </span>
   </label>
