@@ -19,7 +19,7 @@ html, body {
 body {
 	background: #ffffff url('img/body_bg.gif') repeat-x top;
 	color: #333333;
-	font: 12px normal Arial,Helvetica,sans-serif;
+	font: 13px normal Arial,Helvetica,sans-serif;
 }
 body.noMenu {
 	background-image: url('img/body_bg_nomenu.gif');
@@ -49,11 +49,14 @@ h1,h2,h3,h4,h5,h6 {
 .a11y {
 	display: none;
 }
+.green{
+color:#668000;
+}
+.bold{
+font-weight:bold;
+}
 
 /* Form controls */
-span.error-message {
-        color: red;
-}
 .textField {
 	display: inline-block;
 	padding-right: 5px;
@@ -72,14 +75,17 @@ span.error-message {
           z-index: 100;
         }
 
-	.textField input {
+	.textField input, .textField textarea {
 		background: url('img/inputs_bg.png') no-repeat left top;
-		height: 18px;
-                padding-top: 2px;
-		line-height: 18px;
+		height: 20px;
+		line-height: 20px;
 		padding-left: 5px;
 	}
-	.textField .edge {
+	.textField textarea{
+	background: url('img/textarea_bg.png') no-repeat left top;
+	height: 90px;
+	}
+	.textField .edge, .textField .edgeTextArea {
 		background: url('img/inputs_bg.png') no-repeat right top;
 		height: 20px;
 		position: absolute;
@@ -88,11 +94,14 @@ span.error-message {
 		width: 5px;
 		_top: 1px; /* IE6 */
 	}
+	.textField .edgeTextArea {
+		background: url('img/textarea_bg.png') no-repeat right top;
+		height: 90px;
+	}
 	.textFieldBig input {
 		background-position: left -30px;
 		height: 30px;
 		line-height: 30px;
-                font-size: 18px;
 	}
 	.textFieldBig .edge {
 		background-position: right -30px;
@@ -117,6 +126,10 @@ span.error-message {
 		padding-top: 4px;
 		text-align: center;
 	}
+	.buttonplus button {
+		background: url('img/buttons_bg_plus.png') no-repeat left top;
+		padding-left: 35px;
+	}
 	.button .edge {
 		background: url('img/buttons_bg.png') no-repeat right top;
 		height: 24px;
@@ -124,6 +137,9 @@ span.error-message {
 		right: 0;
 		top: 0;
 		width: 10px;
+	}
+	.buttonplus .edge {
+		background: url('img/buttons_bg_plus.png') no-repeat right top;
 	}
 	.buttonBig button {
 		background-position: left -30px;
@@ -141,9 +157,15 @@ span.error-message {
 		font-weight: bold;
 		height: 38px;
 	}
+	.buttonHugePlus button {
+		background-position: left top;
+	}
 	.buttonHuge .edge {
 		background-position: right -70px;
 		height: 38px;
+	}
+	.buttonHugePlus .edge {
+		background-position: right top;
 	}
 
 /* Header */
@@ -286,14 +308,20 @@ span.error-message {
 	}
 
 /* Main Content block */
-#mainContent {
+#mainContent, #CreatePubliCGroupLeft {
 	display: inline-block;
-	margin-right: 40px;
-	margin-top: 20px;
+	margin: 20px 40px 0 0;
 	vertical-align: top;
 	width: 640px;
 	*display: inline; /* IE7 */
 	*zoom: 1; /* IE7 */
+}
+
+#CreatePubliCGroupLeft {
+	width: 480px;
+	border-right: 1px solid #e9e6e6;
+	margin: 20px 40px 30px 0;
+	
 }
 	.pageTitle {
 		color: #333333;
@@ -346,7 +374,7 @@ span.error-message {
 		text-decoration: none;
 	}
 /* Right sidebar */
-#aside {
+#aside, #CreatePubliCGroupRight {
 	display: inline-block;
 	margin-top: 15px;
 	vertical-align: top;
@@ -354,6 +382,65 @@ span.error-message {
 	*display: inline; /* IE7 */
 	*zoom: 1; /* IE7 */
 }
+#CreatePubliCGroupRight{
+	width: 410px;
+}
+#CreatePubliCGroupRight ul,
+	#CreatePubliCGroupRight ul {
+		list-style: none;
+		margin-top: 15px;
+	}
+	#CreatePubliCGroupRight ul li {
+		background: url('img/icons/tick_big.png') no-repeat 2px 11px;
+		padding: 10px 0 5px 25px;
+		margin:0 0 0 20px;
+		font-size: 14px;
+		font-weight:500;
+
+	}
+
+/* CreatePubliCGroupLeft forms*/
+#CreatePubliCGroupLeft
+
+#CreatePubliCGroupLeft form {
+		margin-top: 50px;
+		width:90%;
+	}
+	#CreatePubliCGroupLeft label {
+
+		font-size: 12px;
+		margin: 7px 0 0 15px;
+		width: 180px;
+	}
+		
+	#CreatePubliCGroupLeft label .labelText {
+		display: block;
+	}
+    #CreatePubliCGroupLeft label input {
+		width: 270px;
+		margin: 0 0 10px 0;
+	}
+	#CreatePubliCGroupLeft label span.address{
+		color:#666;
+		font-size:14px;
+		margin: 0 5px 0 -15px;
+		width:140px;
+		display: inline;	
+	}
+	#CreatePubliCGroupLeft input.address{
+	
+	width:142px;
+	}
+	#CreatePubliCGroupLeft label.button {
+		margin: 25px 0 0 0;
+		width: 105px;
+	}
+	#CreatePubliCGroupLeft label.buttonHuge {
+		display: block;
+	}
+	#CreatePubliCGroupLeft label.button button {
+		width: 105px;
+	}
 
 /* Footer */
 #footer {
@@ -388,7 +475,6 @@ span.error-message {
 	display: block;
 	margin-bottom: 20px;
 	margin-top: 20px;
-	overflow: hidden;
 	padding: 5px 10px;
 	position: relative;
 	_margin-bottom: 15px; /* IE6 */
@@ -466,7 +552,7 @@ span.error-message {
 
 
 
-/* Home Page Specials – could be moved into a separate file */
+/* Home Page Specials â€“ could be moved into a separate file */
 #homeSearchNotesBlock,
 #homeRegisterBlock,
 #homeCreateGroupBlock {
@@ -479,7 +565,6 @@ span.error-message {
 	padding-left: 25px;
 	padding-right: 25px;
 	vertical-align: top;
-        position: relative;
 	width: 261px;
 	*display: inline; /* IE7 */
 	*zoom: 1; /* IE7 */
@@ -501,11 +586,18 @@ span.error-message {
 		margin-top: 210px;
 	}
 	#homeSearchNotesBlock ul,
+	#CreatePubliCGroupLeft ul,
 	#homeCreateGroupBlock ul {
 		font-size: 13px;
 		line-height: 28px;
 		list-style: none;
 		margin-top: 10px;
+	}
+	#CreatePubliCGroupLeft ul {
+		border-top: 1px solid #e9e6e6;
+		border-bottom: 1px solid #e9e6e6;
+		text-align: center;
+		width:430px;
 	}
 #homeSearchNotesBlock {
 	background-image: url('img/homepage_pane1_bg.jpg');
@@ -514,12 +606,16 @@ span.error-message {
 		background: url('img/icons/tick_10.png') no-repeat 2px 9px;
 		padding-left: 15px;
 	}
+	#CreatePubliCGroupLeft ul li {
+		list-style-image: url('img/icons/tick_10.png');
+		margin: 10px auto 10px 0;
+	}
 	#homeSearchNotesBlock form {
 		margin-top: 10px;
 	}
 	#homeSearchNotesBlock input {
-		width: 145px;
-		*width: 130px; /* IE7 */
+		width: 165px;
+		*width: 150px; /* IE7 */
 	}
 	#homeSearchNotesBlock .button {
 		margin-left: 5px;
@@ -528,15 +624,12 @@ span.error-message {
 	#homeRegisterBlock form {
 		margin-top: 50px;
 	}
-	#homeRegisterBlock #registrationForm.shown form {
-		margin-top: 0;
-	}
 	#homeRegisterBlock label {
 		display: block;
-		font-size: 11px;
+		font-size: 12px;
 		margin-left: auto;
 		margin-right: auto;
-		margin-bottom: 7px;
+		margin-top: 7px;
 		width: 180px;
 	}
 	#homeRegisterBlock label .labelText {
@@ -553,28 +646,12 @@ span.error-message {
 		width: auto;
 	}
 	#homeRegisterBlock label.button {
-		margin-top: 15px;
+		margin-top: 25px;
 		width: 105px;
 	}
 	#homeRegisterBlock label.button button {
 		width: 105px;
 	}
-        #homeRegisterBlock #registrationTeaser {
-            padding-top: 20px;
-            text-align: center;
-        }
-        #homeRegisterBlock #registrationTeaser img {
-            margin-bottom: 60px;
-        }
-        #homeRegisterBlock .homeRegisterStep {
-            position: absolute;
-            bottom: 20px;
-            width: 261px;
-        }
-        #homeRegisterBlock .homeRegisterStep label {
-            margin: 0 auto;
-        }
-
 #homeCreateGroupBlock {
 	background-image: url('img/homepage_pane3_bg.jpg');
 }
@@ -582,6 +659,14 @@ span.error-message {
 		background-position: 5px center;
 		background-repeat: no-repeat;
 		padding-left: 30px;
+	}
+	#homeCreateGroupBlock label {
+		display: block;
+		font-size: 12px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 7px;
+		width: 124px;
 	}
 
 #homePopularSubjects,
@@ -702,7 +787,3 @@ span.error-message {
 	#homeActiveGroups dd a {
 		color: #668000;
 	}
-/* misc styles */
-.hidden {
-    display: none;
-}
