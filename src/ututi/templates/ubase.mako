@@ -28,7 +28,7 @@ ${_('student information online')}
 <!DOCTYPE HTML>
 <html xml:lang="lt" xmlns="http://www.w3.org/1999/xhtml" lang="lt">
   <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
     <script type="text/javascript">
       var lang = '${c.lang}';
@@ -42,7 +42,7 @@ ${_('student information online')}
     ${h.javascript_link('/javascript/hide_parent.js')}
     ${h.javascript_link('/javascript/forms.js')}
     ${self.head_tags()}
-	<title>
+    <title>
       ${self.title()} - ${_('UTUTI')}
     </title>
     <script type="text/javascript">
@@ -66,33 +66,33 @@ ${_('student information online')}
              u_url = url(controller='profile', action='browse')
              track_event = h.trackEvent(None, 'user_search', 'logo')
          else:
-             track_event = ''
              u_url = url('/')
+             track_event = ''
       %>
-	  <h1 id="siteName"><a href="${u_url}">Ututi</a></h1>
-	  <ul id="socialLinks">
-		<li id="blogLink"><a href="${_('ututi_blog_url')}">${_(u'„Ututi“ blog')}</a></li>
-		<li id="twitterLink"><a href="${_('ututi_twitter_url')}">${_(u'„Ututi“ on twitter')}</a></li>
-		<li id="facebookLink"><a href="${_('ututi_facebook_url')}">${_(u'„Ututi“ on Facebook')}</a></li>
-	  </ul>
+      <h1 id="siteName"><a href="${u_url}">Ututi</a></h1>
+      <ul id="socialLinks">
+        <li id="blogLink"><a href="${_('ututi_blog_url')}">${_(u'„Ututi“ blog')}</a></li>
+        <li id="twitterLink"><a href="${_('ututi_twitter_url')}">${_(u'„Ututi“ on twitter')}</a></li>
+        <li id="facebookLink"><a href="${_('ututi_facebook_url')}">${_(u'„Ututi“ on Facebook')}</a></li>
+      </ul>
       %if not c.user:
       <form method="post" id="loginForm" action="${url('/login')}">
-		<fieldset>
+        <fieldset>
           <input type="hidden" name="came_from" value="${request.params.get('came_from', request.url)}" />
-		  <legend class="a11y">${_('Join!')}</legend>
-		  <label class="textField"><span class="overlay">${_('Email')}:</span><input type="text" name="login" /><span class="edge"></span></label>
-		  <label class="textField"><span class="overlay">${_('Password')}</span><input type="password" name="password" /><span class="edge"></span></label>
-		  <label class="button"><button type="submit">${_('Login')}</button><span class="edge"></span></label><br />
-		  <label id="rememberMe"><input type="checkbox"> ${_('remember me')}</label><br />
-		  <a href="${url(controller='home', action='pswrecovery')}">${_('forgotten password?')}</a>
-		</fieldset>
+          <legend class="a11y">${_('Join!')}</legend>
+          <label class="textField"><span class="overlay">${_('Email')}:</span><input type="text" name="login" /><span class="edge"></span></label>
+          <label class="textField"><span class="overlay">${_('Password')}</span><input type="password" name="password" /><span class="edge"></span></label>
+          <label class="button"><button type="submit">${_('Login')}</button><span class="edge"></span></label><br />
+          <label id="rememberMe"><input type="checkbox"> ${_('remember me')}</label><br />
+          <a href="${url(controller='home', action='pswrecovery')}">${_('forgotten password?')}</a>
+        </fieldset>
         <script type="text/javascript">
           $(window).load(function() {
           $(".textField .overlay").labelOver('over');
           });
         </script>
 
-	  </form>
+      </form>
       %endif
       ${self.flash_messages()}
       ${self.body()}
@@ -100,16 +100,16 @@ ${_('student information online')}
       <div class="push"></div>
     </div>
 
-	<div id="footer">
+    <div id="footer">
       <%
          nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '')
       %>
-	  <p>Copyright © <a href="${_('ututi_link')}">${_(u'UAB „UTUTI“')}</a></p>
-	  <ul>
+      <p>Copyright © <a href="${_('ututi_link')}">${_(u'UAB „UTUTI“')}</a></p>
+      <ul>
         <li><a ${nofollow} href="${url(controller='home', action='about')}">${_('About ututi')}</a></li>
         <li><a ${nofollow} href="${_('ututi_blog_url')}">${_('U-blog')}</a></li>
         <li><a ${nofollow} href="${url(controller='home', action='terms')}">${_('Terms of use')}</a></li></ul>
-	</div>
+    </div>
 
   </body>
 </html>
