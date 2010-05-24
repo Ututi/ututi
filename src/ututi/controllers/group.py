@@ -389,11 +389,9 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         if hasattr(self, 'form_result'):
             values = self.form_result
 
-            dt = year=date(2010, 1, 1) # XXX Update schema, allow NULL.
             group = Group(group_id=values['id'],
                           title=values['title'],
-                          description=values['description'],
-                          year=dt)
+                          description=values['description'])
 
             tag = values.get('location', None)
             group.location = tag
