@@ -241,8 +241,9 @@ def input_line(name, title, value='', explanation=None, **kwargs):
     if c.new_design:
         return HTML.label(c=[
             HTML.span(class_='labelText', c=[title]),
+            HTML.literal('<form:error name="%s" />' % name),
             HTML.span(class_='textField', c=[
-                HTML.input(type='text'),
+                HTML.input(type='text', id=name, name_=name, value=value, **kwargs),
                 HTML.span(class_='edge')
                 ])])
     else:
@@ -280,9 +281,11 @@ def input_area(name, title, value='', cols='50', rows='5', explanation=None):
     if c.new_design:
         return HTML.label(c=[
             HTML.span(class_='labelText', c=[title]),
+            HTML.literal('<form:error name="%s" />' % name),
             HTML.span(class_='textField', c=[
                 HTML.textarea(name_=name, id_=name, cols=cols, rows=rows, c=[value]),
-                HTML.span(class_='edgeTextArea')
+                HTML.span(class_='edgeTextArea'),
+                expl
                 ])])
     else:
         return HTML.div(class_='form-field', c=[
@@ -307,11 +310,18 @@ def input_submit(text=None, name=None, **kwargs):
         text = _('Save')
     if name is not None:
         kwargs['name'] = name
-    return HTML.div(class_='form-field', c=[
-            HTML.span(class_='btn', c=[
-                HTML.input(type_='submit', value=text, **kwargs)
+    from pylons import tmpl_context as c
+    if c.new_design:
+        return HTML.span(class_='button', c=[
+                HTML.button(type='submit', c=[text]),
+                HTML.span(class_='edge')
                 ])
-            ])
+    else:
+        return HTML.div(class_='form-field', c=[
+                HTML.span(class_='btn', c=[
+                    HTML.input(type_='submit', value=text, **kwargs)
+                    ])
+                ])
 
 
 def link_to(label, url='', max_length=None, **attrs):
