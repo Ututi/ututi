@@ -312,8 +312,10 @@ def input_submit(text=None, name=None, **kwargs):
         kwargs['name'] = name
     from pylons import tmpl_context as c
     if c.new_design:
-        return HTML.span(class_='button', c=[
-                HTML.button(type='submit', c=[text]),
+        cls = kwargs.pop('class_', 'button')
+        # XXX should use <input>?
+        return HTML.span(class_=cls, c=[
+                HTML.button(type='submit', c=[text], **kwargs),
                 HTML.span(class_='edge')
                 ])
     else:

@@ -410,7 +410,7 @@ class HomeController(UniversityListMixin):
 
             if user is not None:
                 sign_in_user(email)
-                redirect(url(controller='group', action='add'))
+                redirect(c.came_from or url(controller='group', action='add'))
 
         return render('/home/join.mako')
 

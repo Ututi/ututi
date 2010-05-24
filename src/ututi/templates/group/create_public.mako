@@ -9,7 +9,7 @@ ${_('New public group')}
   <div id="CreatePubliCGroupLeft">
     <h1 class="pageTitle">${_('Create a public group')}</h1>
 
-    <form method="post" action="${url(controller='group', action='new_group')}"
+    <form method="post" action="${url(controller='group', action='create_public')}"
          id="group_add_form" enctype="multipart/form-data">
 
       <fieldset>
@@ -20,7 +20,7 @@ ${_('New public group')}
         ${self.logo_field()}
         ${self.description_field()}
 
-        ${h.input_submit(_('Continue'))}
+        ${h.input_submit(_('Continue'), class_='button buttonHuge')}
       </fieldset>
     </form>
 

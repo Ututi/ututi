@@ -146,6 +146,20 @@ class NewGroupForm(GroupForm):
     id = Pipe(validators.String(strip=True, min=4, max=20), GroupIdValidator())
 
 
+class CreatePublicGroupForm(Schema):
+    """A schema for creating public groups."""
+
+    pre_validators = [variabledecode.NestedVariables()]
+
+    title = validators.UnicodeString(not_empty=True)
+    location = Pipe(ForEach(validators.String(strip=True)),
+                    LocationTagsValidator())
+    id = Pipe(validators.String(strip=True, min=4, max=20), GroupIdValidator())
+    logo_upload = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
+    description = validators.UnicodeString()
+
+
+
 class GroupAddingForm(Schema):
     allow_extra_fields = True
 
@@ -369,8 +383,35 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         return render('group/create_public.mako')
 
     @set_login_url
+    @validate(schema=CreatePublicGroupForm, form='_create_public_form')
     @ActionProtector("user")
     def create_public(self):
+        if hasattr(self, 'form_result'):
+            values = self.form_result
+
+            dt = year=date(2010, 1, 1) # XXX Update schema, allow NULL.
+            group = Group(group_id=values['id'],
+                          title=values['title'],
+                          description=values['description'],
+                          year=dt)
+
+            tag = values.get('location', None)
+            group.location = tag
+
+            # TODO: check settings in tests
+            group.mailinglist_enabled = False
+
+
+            meta.Session.add(group)
+
+            if values['logo_upload'] is not None:
+                logo = values['logo_upload']
+                group.logo = logo.file.read()
+
+            group.add_member(c.user, admin=True)
+
+            meta.Session.commit()
+            redirect(url(controller='group', action='invite_members_step', id=values['id']))
         return htmlfill.render(self._create_public_form())
 
     @ActionProtector("user")
@@ -756,10 +797,11 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     def cancel_invitation(self, group):
         """Cancel and delete an invitation that was sent out to the user."""
         if hasattr(self, 'form_result'):
-
             email = self.form_result.get('email', '')
-            invitation = meta.Session.query(PendingInvitation).filter(PendingInvitation.group == group)\
-                .filter(PendingInvitation.email == email).first()
+            invitation = meta.Session.query(PendingInvitation
+                    ).filter(PendingInvitation.group == group
+                    ).filter(PendingInvitation.email == email
+                    ).first()
             if invitation is not None:
                 meta.Session.delete(invitation)
                 meta.Session.commit()
@@ -770,15 +812,14 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @group_action
     @ActionProtector("member", "admin")
     def invite_members_step(self, group):
-
         if hasattr(self, 'form_result'):
             emails = self.form_result.get('emails', '').split()
             self._send_invitations(group, emails)
             if self.form_result.get('final_submit', None) is not None:
                 redirect(group.url(action='welcome'))
             else:
-                redirect(url(controller='group', action='invite_members_step', id=group.group_id))
-
+                redirect(url(controller='group', action='invite_members_step',
+                             id=group.group_id))
         return render('group/members_step.mako')
 
     def _clear_requests(self, group, user):

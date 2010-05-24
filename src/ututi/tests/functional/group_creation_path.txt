@@ -253,8 +253,8 @@ The group's administrator should now see the request in the members view.
 
     >>> browser.getControl('Confirm', index=0).click()
 
-
 After the confirmation, the new member should receive an email:
+
     >>> print mail_queue.pop().message
     MIME-Version: 1.0
     Content-Type: text/plain; charset="us-ascii"
