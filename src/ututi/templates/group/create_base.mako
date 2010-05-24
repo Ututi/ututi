@@ -45,6 +45,19 @@
   ${h.input_line('title', _('Group title'))}
 </%def>
 
+<%def name="year_field()">
+  <label for="year"><span class="labelText">${_("Year")}</span></label>
+  <label>
+    <form:error name="year" />
+    <select name="year" id="year" class="group_live_search">
+      <option value="">${_('Select the year')}</option>
+      %for year in c.years:
+      <option value="${year}">${year}</option>
+      %endfor
+    </select>
+  </label>
+</%def>
+
 <%def name="web_address_field()">
   <label for="group-id-field">
     <span class="labelText">${_("Group address on the web")}</span>
@@ -56,6 +69,20 @@
       <input class="address" type="text" id="group-id-field" name="id" />
       <span class="edge"></span>
     </span>
+  </label>
+</%def>
+
+<%def name="group_email_field()">
+  <label for="group-id-field">
+    <span class="labelText">${_("Group e-mail address")}</span>
+  </label>
+  <label>
+    <form:error name="id" />
+    <span class="textField">
+      <input class="address" type="text" id="group-id-field" name="id" />
+      <span class="edge"></span>
+    </span>
+     @groups.ututi.lt
   </label>
 </%def>
 
