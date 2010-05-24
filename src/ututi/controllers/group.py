@@ -168,6 +168,16 @@ class CreateAcademicGroupForm(CreateGroupFormBase):
 
     year = validators.String()
 
+class CreateCustomGroupForm(CreateGroupFormBase):
+    """A schema for creating custom groups."""
+
+    allow_extra_fields = True # TODO: remove this
+
+    forum_type = validators.OneOf(['mailinglist', 'forum'])
+    approve_new_members = validators.OneOf(['none', 'admin'])
+    forum_visibility = validators.OneOf(['public', 'members'])
+    page_visibility = validators.OneOf(['public', 'members'])
+
 
 class GroupAddingForm(Schema):
     allow_extra_fields = True
@@ -392,6 +402,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @ActionProtector("user")
     def create_academic(self):
         if hasattr(self, 'form_result'):
+            # TODO: refactor; see create_public()
             values = self.form_result
 
             year = int(values.get('year') or '2010') # XXX
@@ -426,9 +437,11 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         if hasattr(self, 'form_result'):
             values = self.form_result
 
+            year = int(values.get('year') or '2010') # XXX
             group = Group(group_id=values['id'],
                           title=values['title'],
-                          description=values['description'])
+                          description=values['description'],
+                          year=date(year, 1, 1))
 
             tag = values.get('location', None)
             group.location = tag
@@ -450,9 +463,40 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             redirect(url(controller='group', action='invite_members_step', id=values['id']))
         return htmlfill.render(self._create_public_form())
 
+    def _create_custom_form(self):
+        c.forum_type = 'mailinglist'
+        c.forum_types = [('mailinglist', _('Mailing list')),
+                         ('forum', _('Web-based forum'))]
+        return render('group/create_custom.mako')
+
+    @set_login_url
+    @validate(schema=CreateCustomGroupForm, form='_create_custom_form')
     @ActionProtector("user")
-    def create_group(self):
-        raise NotImplementedError()
+    def create_custom(self):
+        if hasattr(self, 'form_result'):
+            values = self.form_result
+            group = Group(group_id=values['id'],
+                          title=values['title'],
+                          description=values['description'])
+            tag = values.get('location', None)
+            group.location = tag
+
+            # TODO: specify all other settings
+
+            meta.Session.add(group)
+
+            if values['logo_upload'] is not None:
+                logo = values['logo_upload']
+                group.logo = logo.file.read()
+
+            group.add_member(c.user, admin=True)
+
+            meta.Session.commit()
+            redirect(url(controller='group', action='invite_members_step', id=values['id']))
+        defaults = {'approve_new_members': 'admin',
+                    'forum_visibility': 'public',
+                    'page_visibility': 'public'}
+        return htmlfill.render(self._create_custom_form(), defaults=defaults)
 
     @validate(schema=GroupAddingForm, post_only=False, on_get=True)
     @ActionProtector("user")

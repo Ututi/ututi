@@ -166,3 +166,40 @@ Let's have a look at the settings:
     ['members']
     >>> browser.getControl(name='page_visibility').value
     ['members']
+
+Custom groups
+-------------
+
+Finally, custom groups:
+
+    >>> browser.open('http://localhost/groups/group_type')
+    >>> browser.getLink('Custom group').click()
+
+    >>> browser.getControl('Group e-mail address').value = 'test3'
+    >>> browser.getControl('Group title').value = 'Another test group'
+    >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
+    >>> browser.getForm().submit()
+
+After creating the group, we are redirected to the member invitation step:
+
+    >>> browser.printQuery('//h1/text()')
+    Group members
+
+We've checked that already; let's move on.
+
+    >>> browser.getControl("Continue").click()
+
+## Let's have a look at the settings:
+##
+##     >>> browser.getLink('Edit').click()
+##
+##     >>> browser.getControl('Title').value
+##     'Another test group'
+##     >>> browser.getControl('Forum type').value
+##     ['mailinglist']
+##     >>> browser.getControl(name='approve_new_members').value
+##     ['admin']
+##     >>> browser.getControl(name='forum_visibility').value
+##     ['members']
+##     >>> browser.getControl(name='page_visibility').value
+##     ['members']

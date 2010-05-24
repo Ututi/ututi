@@ -52,7 +52,7 @@
     <select name="year" id="year" class="group_live_search">
       <option value="">${_('Select the year')}</option>
       %for year in c.years:
-      <option value="${year}">${year}</option>
+        <option value="${year}">${year}</option>
       %endfor
     </select>
   </label>
@@ -86,6 +86,19 @@
   </label>
 </%def>
 
+<%def name="can_add_subjects()">
+  <label>
+    <input name="can_add_subjects" type="checkbox" />
+    <span class="labelText">${_("Group can subscribe to subjects")}</span>
+  </label>
+</%def>
+
+<%def name="has_file_storage()">
+  <label>
+    <input name="file_storage" type="checkbox" />
+    <span class="labelText">${_("Group has a file storage area")}</span>
+  </label>
+</%def>
 
 <%def name="location_field()">
   ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=True)}
@@ -103,6 +116,10 @@
   ${h.input_area('description', _('Description'))}
 </%def>
 
+<%def name="forum_type()">
+  <label for="forum_type">${_('Forum type')}</label>
+  ${h.select("forum_type", c.forum_type, c.forum_types)}
+</%def>
 
 <%def name="moderators_field()">
   <div class="form-field">
@@ -171,4 +188,28 @@
     <h1 class="pageTitle">${title}</h1>
       ${caller.body()}
   </div>
+</%def>
+
+<%def name="access_settings()">
+  <h2>${_('Access settings')}</h2>
+
+  <label for="approve_new_members">
+    <span class="labelText">${_('New members')}</span>
+    ${h.radio("approve_new_members", "none",
+      label=_('Anyone can join the group any time'))}
+    ${h.radio("approve_new_members", "admin",
+      label=_('Administrators have to approve new members'))}
+  </label>
+
+  <label for="forum_visibility">
+    <span class="labelText">${_('Group forum and mailing list visibility')}</span>
+    ${h.radio("forum_visibility", "public", label=_('Public'))}
+    ${h.radio("forum_visibility", "members", label=_('Members only'))}
+  </label>
+
+  <label for="page_visibility">
+    <span class="labelText">${_('Group page visibility')}</span>
+    ${h.radio("page_visibility", "public", label=_('Public'))}
+    ${h.radio("page_visibility", "members", label=_('Members only'))}
+  </label>
 </%def>
