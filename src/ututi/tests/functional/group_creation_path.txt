@@ -19,7 +19,7 @@ After creating the group, we are redirected to the member invitation
     >>> browser.printQuery('//h1/text()')
     Group members
 
-Let us fill in several email to be invited.
+Let us fill in several emails to invite.
 
     >>> browser.getControl('Enter emails of the people you would like to invite to the group.').value='user@ututi.lt, jonas@example.com, admin@ututi.lt'
     >>> browser.getControl('Invite').click()
