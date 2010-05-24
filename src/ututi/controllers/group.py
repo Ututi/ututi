@@ -398,9 +398,10 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             tag = values.get('location', None)
             group.location = tag
 
-            # TODO: check settings in tests
+            group.page_public = True
+            group.admins_approve_members = False
+            group.forum_is_public = True
             group.mailinglist_enabled = False
-
 
             meta.Session.add(group)
 

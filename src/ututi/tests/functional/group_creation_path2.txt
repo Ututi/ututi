@@ -112,3 +112,19 @@ We should be hailed by the welcome screen:
 
     >>> print browser.url
     http://localhost/group/test/welcome
+
+Let's examine the group's settings.  This group should be configured with sane
+defaults for public groups:
+
+    >>> browser.getLink('Edit').click()
+
+    >>> browser.getControl('Title').value
+    'Test group'
+    >>> browser.getControl('Forum type').value
+    ['forum']
+    >>> browser.getControl(name='approve_new_members').value
+    ['none']
+    >>> browser.getControl(name='forum_visibility').value
+    ['public']
+    >>> browser.getControl(name='page_visibility').value
+    ['public']
