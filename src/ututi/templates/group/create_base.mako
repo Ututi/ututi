@@ -50,8 +50,8 @@
     <span class="labelText">${_("Group address on the web")}</span>
   </label>
   <label>
-    <span class="address">${url(controller='group', action='', qualified=True)}</span>
     <form:error name="id" />
+    <span class="address">${url(controller='group', action='', qualified=True)}</span>
     <span class="textField">
       <input class="address" type="text" id="group-id-field" name="id" />
       <span class="edge"></span>
