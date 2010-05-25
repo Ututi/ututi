@@ -155,6 +155,7 @@ create table groups (
        default_tab varchar(20) default 'home',
        page_public bool default false,
        wants_to_watch_subjects bool default true,
+       has_file_area bool default true,
        admins_approve_members bool default true,
        forum_is_public bool default false,
        mailinglist_enabled bool default true,

@@ -208,18 +208,17 @@ We've checked that already; let's move on.
 
     >>> browser.getControl("Continue").click()
 
-The initial page will not suggest watching subjects:
+The initial page will not suggest watching subjects (we opted out of it):
 
     >>> browser.printQuery('//table//h2/text()')
     Invite group members!
 
-The files tab is hidden, as requested [TODO]:
+The files tab is hidden, as requested:
 
     >>> browser.printQuery('id("tabs")//a/text()')
     What's New?
     Forum
     Members
-    Files
     Subjects
     Page
 
