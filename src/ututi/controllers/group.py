@@ -118,6 +118,7 @@ class GroupForm(Schema):
         TagsValidator()
         ]
 
+
 class GroupLiveSearchForm(Schema):
     """A schema for validating group edits and submits."""
     pre_validators = [NestedVariables()]
@@ -135,6 +136,7 @@ class EditGroupForm(GroupForm):
     forum_visibility = validators.OneOf(['public', 'members'])
     page_visibility = validators.OneOf(['public', 'members'])
     forum_type = validators.OneOf(['mailinglist', 'forum'])
+
 
 class NewGroupForm(GroupForm):
     """A schema for validating new group forms."""
@@ -167,6 +169,7 @@ class CreateAcademicGroupForm(CreateGroupFormBase):
     """A schema for creating academic groups."""
 
     year = validators.String()
+
 
 class CreateCustomGroupForm(CreateGroupFormBase):
     """A schema for creating custom groups."""
@@ -701,7 +704,6 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     def upload_file_short(self, group):
         return self._upload_file_short(group)
 
-
     @group_action
     @ActionProtector("member", "admin")
     def create_folder(self, group):
@@ -944,7 +946,6 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             h.flash(_("Invalid email addresses detected: %s") % ', '.join(failed))
         meta.Session.commit()
 
-
     @validate(schema=GroupInvitationActionForm)
     @group_action
     def invitation(self, group):
@@ -1044,7 +1045,6 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     def do_delete(self, group):
         if len(group.members) > 1:
             redirect(url(controller='group', action='delete'))
-
 
     @group_action
     @ActionProtector("admin")
