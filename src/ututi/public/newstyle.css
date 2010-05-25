@@ -112,66 +112,102 @@ span.error-message {
                 background-position: right -30px;
                 height: 30px;
         }
-.button {
-        display: inline-block;
-        padding-right: 10px;
+
+/* buttons */
+button.btn,
+button.btnMedium,
+button.btnLarge {
         position: relative;
-        vertical-align: top;
-        *display: inline; /* IE7 */
-        *zoom: 1; /* IE7 */
+        border: 0;
+        padding: 0;
+        cursor: pointer;
+        overflow: visible; /* removes extra side padding in IE */
 }
-        .button button {
-                background: url('img/buttons_bg.png') no-repeat left top;
-                box-sizing: border-box;
-                color: #333333;
-                font: 12px normal Arial,Helvetica,sans-serif;
-                height: 24px;
-                padding-bottom: 6px;
-                padding-left: 9px;
-                padding-top: 4px;
-                text-align: center;
+
+button.btn::-moz-focus-inner,
+button.btnMedium::-moz-focus-inner,
+button.btnLarge::-moz-focus-inner {
+        border: none;  /* overrides extra padding in Firefox */
+        padding: 0;
+}
+
+button.btn span,
+button.btnMedium span,
+button.btnLarge span {
+        position: relative;
+        display: block;
+        transparent-space: nowrap;
+        color: #333;
+}
+
+button.btn:hover span,
+button.btnMedium:hover span,
+button.btnLarge:hover span {
+    color: black;
+}
+
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+        /* Safari and Google Chrome only - fix margins */
+        button.btn span,
+        button.btnMedium span,
+        button.btnLarge span {
+                margin-top: -1px;
         }
-        .buttonplus button {
-                background: url('img/buttons_bg_plus.png') no-repeat left top;
-                padding-left: 35px;
-        }
-        .button .edge {
-                background: url('img/buttons_bg.png') no-repeat right top;
-                height: 24px;
-                position: absolute;
-                right: 0;
-                top: 0;
-                width: 10px;
-        }
-        .buttonplus .edge {
-                background: url('img/buttons_bg_plus.png') no-repeat right top;
-        }
-        .buttonBig button {
-                background-position: left -30px;
-                font-size: 16px;
-                font-weight: bold;
-                height: 30px;
-        }
-        .buttonBig .edge {
-                background-position: right -30px;
-                height: 30px;
-        }
-        .buttonHuge button {
-                background-position: left -70px;
-                font-size: 16px;
-                font-weight: bold;
-                height: 38px;
-        }
-        .buttonHugePlus button {
-                background-position: left top;
-        }
-        .buttonHuge .edge {
-                background-position: right -70px;
-                height: 38px;
-        }
-        .buttonHugePlus .edge {
-                background-position: right top;
-        }
+}
+
+button.btn {
+    padding: 0 15px 0 0;
+    margin-right: 5px;
+    font-size: 12px;
+    text-align: center;
+    background: transparent url("img/buttons_bg_split.png") no-repeat right -110px;
+}
+
+button.btn span {
+    padding: 3px 0 0 15px;
+    height: 20px;
+    background: transparent url("img/buttons_bg_split.png") no-repeat left top;
+}
+
+* html button.btn span { height: 23px; }
+
+button.btnMedium {
+    padding: 0 15px 0 0;
+    margin-right: 5px;
+    font-size: 16px;
+    text-align: center;
+    background: transparent url("img/buttons_bg_split.png") no-repeat right -140px;
+}
+
+button.btnMedium span {
+    padding: 5px 0 0 15px;
+    height: 26px;
+    background: transparent url("img/buttons_bg_split.png") no-repeat left -30px;
+}
+
+* html button.btnMedium span { height: 31px; }
+
+button.btnLarge {
+    padding: 0 15px 0 0;
+    margin-right: 5px;
+    font-size: 20px;
+    text-align: center;
+    background: transparent url("img/buttons_bg_split.png") no-repeat right -180px;
+}
+
+button.btnLarge span {
+    padding: 6px 0 0 15px;
+    height: 32px;
+    background: transparent url("img/buttons_bg_split.png") no-repeat left -70px;
+}
+
+* html button.btnLarge span { height: 38px; }
+
+button.btnLarge.btnPlus span {
+    background-position: left -224px;
+    padding-left: 35px;
+}
 
 /* Header */
 #siteName a {
@@ -615,8 +651,8 @@ span.error-message {
                 margin-top: 10px;
         }
         #homeSearchNotesBlock input {
-                width: 145px;
-                *width: 130px; /* IE7 */
+                width: 125px;
+                *width: 115px; /* IE7 */
         }
         #homeSearchNotesBlock .button {
                 margin-left: 5px;
@@ -667,6 +703,7 @@ span.error-message {
             position: absolute;
             bottom: 20px;
             width: 261px;
+            text-align: center;
         }
         #homeRegisterBlock .homeRegisterStep label {
             margin: 0 auto;
@@ -681,12 +718,14 @@ span.error-message {
                 padding-left: 30px;
         }
         #homeCreateGroupBlock label {
-                display: block;
+                display: inline-block;
                 font-size: 12px;
                 margin-left: auto;
                 margin-right: auto;
                 margin-top: 7px;
-                width: 124px;
+        }
+        #homeCreateGroupBlock span.edge {
+                background-position: right -110px;
         }
 
 #homePopularSubjects,
@@ -811,3 +850,4 @@ span.error-message {
 .hidden {
     display: none;
 }
+

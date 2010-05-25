@@ -119,13 +119,10 @@ def button_to(name, url='', **html_options):
         html_options["value"] = name
 
     if c.new_design:
-        html_options.pop("value")
-        html_options.setdefault('class_', "button")
+        #html_options.pop("value")
+        html_options.setdefault('class_', "btn")
         return HTML.form(method=form_method, action=url, class_="button-to",
-                         c=[HTML.label(method_tag,
-                                       HTML.button(name),
-                                       HTML.span(class_="edge"),
-                                       **html_options)])
+                         c=[HTML.fieldset(c=[method_tag, HTML.button(c=[HTML.span(name)], **html_options)])])
     else:
         return HTML.form(method=form_method, action=url, class_="button-to",
                          c=[HTML.div(method_tag, HTML.span(HTML.input(**html_options), class_="btn"))])

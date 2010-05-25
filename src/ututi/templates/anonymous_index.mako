@@ -14,8 +14,8 @@
     <fieldset>
       <label class="textField textFieldBig">
         <span class="a11y">${_('Enter the search string')}: </span><input name="text" type="text"><span class="edge"></span>
-      </label><label class="button buttonBig">
-        <button type="submit">${_('search_fp')}</button><span class="edge"></span></label>
+      </label>
+      <button type="submit" class="btnMedium"><span>${_('search_fp')}</span></button>
     </fieldset>
   </form>
 </div><div id="homeRegisterBlock">
@@ -78,7 +78,9 @@
       </label>
       <form:error name="agree"/>
       <label id="agreeWithTOC"><input type="checkbox" name="agree" value="true"/>${_('I agree to the ')} <a href="" onclick="return false;">${_('terms of use')}</a></label>
-      <label class="button buttonHuge"><button type="submit">${_('Register')}</button><span class="edge"></span></label>
+      <div style="text-align: center;">
+        <button class="btnLarge" type="submit" value="${_('Register')}"><span>${_('Register')}</span></button>
+      </div>
     </fieldset>
   </form>
   </div>
@@ -88,7 +90,7 @@
       ${_('home_register_welcome')}
     </div>
     <div class="homeRegisterStep">
-      <label class="button buttonHuge"><button type="button" id="homeRegisterStep">${_('register')}</button><span class="edge"></span></label>
+      <button class="btnLarge" type="button" id="homeRegisterStep"><span>${_('register')}</span></button>
     </div>
     <script type="text/javascript">
       $('#homeRegisterStep').click(function() {
@@ -105,13 +107,16 @@
     <li style="background-image: url('img/icons/file_private_green_17.png');">Privačių failų saugyklą</li>
     <li style="background-image: url('img/icons/subjects_green_17.png');">Studijuojamus dalykus</li>
   </ul>
-  ${h.button_to(_('Create group'), url(controller='group', action='group_type'), class_='button buttonHuge')}
+  <table style="width: 100%;">
+    <tr><td style="text-align: center;">
+        ${h.button_to(_('Create group'), url(controller='group', action='group_type'),  method='GET', class_='btnPlus btnLarge')}
+    </td></tr>
+  </table>
 </div>
 <div id="homePopularSubjects">
   <h2>Populiariausi dalykai</h2>
   <ul>
-    <li>
-      <dl>
+    <li>      <dl>
         <dt><a href="">Citologija</a></dt>
         <dd class="files"><span class="a11y">Failų:</span> 30</dd>
         <dd class="pages"><span class="a11y">Wiki puslapių:</span> 0</dd>
