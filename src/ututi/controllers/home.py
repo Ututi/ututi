@@ -133,7 +133,7 @@ class HomeController(UniversityListMixin):
             if request.params.has_key('js'):
                 return render_mako_def('/anonymous_index/lt.mako','universities', unis=c.unis, ajax_url=url(controller='home', action='index'))
             c.slideshow = request.params.has_key('slide')
-            return render_lang('/anonymous_index.mako')
+            return render('/anonymous_index.mako')
 
     def about(self):
         return render_lang('/about.mako')
@@ -247,6 +247,7 @@ class HomeController(UniversityListMixin):
 
     @validate(schema=RegistrationForm(), form='register')
     def register(self, hash=None):
+        c.show_registration = True
         if hasattr(self, 'form_result'):
             hash = self.form_result.get('hash', None)
             if hash is not None:
@@ -286,7 +287,7 @@ class HomeController(UniversityListMixin):
                 return render('/login.mako')
 
             self._get_unis()
-            return render_lang('/anonymous_index.mako')
+            return render('/anonymous_index.mako')
 
     def _pswrecovery_form(self):
         return render('home/recoveryform.mako')
@@ -396,7 +397,7 @@ class HomeController(UniversityListMixin):
     def join_register(self):
         if hasattr(self, 'form_result'):
             user, email = self.__register_user(self.form_result)
-            redirect(url(controller='group', action='add'))
+            redirect(c.came_from or url(controller='group', action='add'))
 
     def join_login(self):
         email = request.POST.get('login_username')
@@ -409,7 +410,7 @@ class HomeController(UniversityListMixin):
 
             if user is not None:
                 sign_in_user(email)
-                redirect(url(controller='group', action='add'))
+                redirect(c.came_from or url(controller='group', action='add'))
 
         return render('/home/join.mako')
 

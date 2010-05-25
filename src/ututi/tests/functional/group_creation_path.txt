@@ -19,7 +19,7 @@ After creating the group, we are redirected to the member invitation
     >>> browser.printQuery('//h1/text()')
     Group members
 
-Let us fill in several email to be invited.
+Let us fill in several emails to invite.
 
     >>> browser.getControl('Enter emails of the people you would like to invite to the group.').value='user@ututi.lt, jonas@example.com, admin@ututi.lt'
     >>> browser.getControl('Invite').click()
@@ -115,7 +115,7 @@ invitation.
 
     >>> browser2 = Browser()
     >>> browser2.open('http://localhost/')
-    >>> form = browser2.getForm('login_form')
+    >>> form = browser2.getForm('loginForm')
     >>> form.getControl('Email').value = "user@ututi.lt"
     >>> form.getControl('Password').value = "password"
     >>> form.getControl('Login').click()
@@ -210,7 +210,7 @@ Let's try requesting to join the group:
 
     >>> browser3 = Browser()
     >>> browser3.open('http://localhost/')
-    >>> form = browser3.getForm('login_form')
+    >>> form = browser3.getForm('loginForm')
     >>> form.getControl('Email').value = "user2@ututi.lt"
     >>> form.getControl('Password').value = "password"
     >>> form.getControl('Login').click()
@@ -240,7 +240,7 @@ The group's administrator should now see the request in the members view.
 
     >>> browser.getLink('log out').click()
     >>> browser.open('http://localhost/')
-    >>> form = browser.getForm('login_form')
+    >>> form = browser.getForm('loginForm')
     >>> form.getControl('Email').value = "admin@ututi.lt"
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
@@ -253,8 +253,8 @@ The group's administrator should now see the request in the members view.
 
     >>> browser.getControl('Confirm', index=0).click()
 
-
 After the confirmation, the new member should receive an email:
+
     >>> print mail_queue.pop().message
     MIME-Version: 1.0
     Content-Type: text/plain; charset="us-ascii"

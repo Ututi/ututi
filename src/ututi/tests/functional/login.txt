@@ -7,7 +7,7 @@ user. Let's try logging in as him.
 If user is not logged in login form is shown. Let's fill it in:
 
     >>> browser = Browser()
-    >>> form = browser.getForm('login_form')
+    >>> form = browser.getForm('loginForm')
     >>> form.getControl('Email').value = "admin@ututi.lt"
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
@@ -32,7 +32,7 @@ As we have successfully logged in let's logout and make some typos:
 If we enter the username wrong - we get redirected back to the login
 form, but not logged in:
 
-    >>> form = browser.getForm('login_form')
+    >>> form = browser.getForm('loginForm')
     >>> form.getControl('Email').value = "odmin@ututi.lt"
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
@@ -42,7 +42,7 @@ form, but not logged in:
 
 Let's enter the password wrong:
 
-    >>> form = browser.getForm('login_form')
+    >>> form = browser.getForm('loginForm')
     >>> form.getControl('Email').value = "admin@ututi.lt"
     >>> form.getControl('Password').value = "asd"
     >>> form.getControl('Login').click()

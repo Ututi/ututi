@@ -41,6 +41,15 @@ from ututi.lib.emails import group_request_email, group_confirmation_email
 log = logging.getLogger(__name__)
 
 
+def set_login_url(method):
+    def _set_login_url(self):
+        c.login_form_url = url(controller='home',
+                               action='join',
+                               came_from=url.current())
+        return method(self)
+    return _set_login_url
+
+
 def _filter_watched_subjects(sids):
     """A modifier for the subjects query, which excludes subjects already being watched."""
     def _filter(query):
@@ -135,6 +144,39 @@ class NewGroupForm(GroupForm):
                     LocationTagsValidator())
 
     id = Pipe(validators.String(strip=True, min=4, max=20), GroupIdValidator())
+
+
+class CreateGroupFormBase(Schema):
+    """A base class for group creation forms."""
+
+    pre_validators = [variabledecode.NestedVariables()]
+
+    title = validators.UnicodeString(not_empty=True)
+    location = Pipe(ForEach(validators.String(strip=True)),
+                    LocationTagsValidator())
+    id = Pipe(validators.String(strip=True, min=4, max=20), GroupIdValidator())
+    logo_upload = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
+    description = validators.UnicodeString()
+
+
+class CreatePublicGroupForm(CreateGroupFormBase):
+    """A schema for creating public groups."""
+
+
+class CreateAcademicGroupForm(CreateGroupFormBase):
+    """A schema for creating academic groups."""
+
+    year = validators.String()
+
+class CreateCustomGroupForm(CreateGroupFormBase):
+    """A schema for creating custom groups."""
+
+    allow_extra_fields = True # TODO: remove this
+
+    forum_type = validators.OneOf(['mailinglist', 'forum'])
+    approve_new_members = validators.OneOf(['none', 'admin'])
+    forum_visibility = validators.OneOf(['public', 'members'])
+    page_visibility = validators.OneOf(['public', 'members'])
 
 
 class GroupAddingForm(Schema):
@@ -346,6 +388,115 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         current_year = date.today().year
         c.years = range(current_year - 12, current_year + 3)
         return render('group/add.mako')
+
+    def group_type(self):
+        return render('group/group_type.mako')
+
+    def _create_academic_form(self):
+        c.current_year = date.today().year
+        c.years = range(c.current_year - 10, c.current_year + 5)
+        return render('group/create_academic.mako')
+
+    @set_login_url
+    @validate(schema=CreateAcademicGroupForm, form='_create_academic_form')
+    @ActionProtector("user")
+    def create_academic(self):
+        if hasattr(self, 'form_result'):
+            # TODO: refactor; see create_public()
+            values = self.form_result
+
+            year = int(values.get('year') or '2010') # XXX
+            group = Group(group_id=values['id'],
+                          title=values['title'],
+                          description=values['description'],
+                          year=date(year, 1, 1))
+
+            tag = values.get('location', None)
+            group.location = tag
+
+            meta.Session.add(group)
+
+            if values['logo_upload'] is not None:
+                logo = values['logo_upload']
+                group.logo = logo.file.read()
+
+            group.add_member(c.user, admin=True)
+
+            meta.Session.commit()
+            redirect(url(controller='group', action='invite_members_step', id=values['id']))
+
+        return htmlfill.render(self._create_academic_form())
+
+    def _create_public_form(self):
+        return render('group/create_public.mako')
+
+    @set_login_url
+    @validate(schema=CreatePublicGroupForm, form='_create_public_form')
+    @ActionProtector("user")
+    def create_public(self):
+        if hasattr(self, 'form_result'):
+            values = self.form_result
+
+            year = int(values.get('year') or '2010') # XXX
+            group = Group(group_id=values['id'],
+                          title=values['title'],
+                          description=values['description'],
+                          year=date(year, 1, 1))
+
+            tag = values.get('location', None)
+            group.location = tag
+
+            group.page_public = True
+            group.admins_approve_members = False
+            group.forum_is_public = True
+            group.mailinglist_enabled = False
+
+            meta.Session.add(group)
+
+            if values['logo_upload'] is not None:
+                logo = values['logo_upload']
+                group.logo = logo.file.read()
+
+            group.add_member(c.user, admin=True)
+
+            meta.Session.commit()
+            redirect(url(controller='group', action='invite_members_step', id=values['id']))
+        return htmlfill.render(self._create_public_form())
+
+    def _create_custom_form(self):
+        c.forum_type = 'mailinglist'
+        c.forum_types = [('mailinglist', _('Mailing list')),
+                         ('forum', _('Web-based forum'))]
+        return render('group/create_custom.mako')
+
+    @set_login_url
+    @validate(schema=CreateCustomGroupForm, form='_create_custom_form')
+    @ActionProtector("user")
+    def create_custom(self):
+        if hasattr(self, 'form_result'):
+            values = self.form_result
+            group = Group(group_id=values['id'],
+                          title=values['title'],
+                          description=values['description'])
+            tag = values.get('location', None)
+            group.location = tag
+
+            # TODO: specify all other settings
+
+            meta.Session.add(group)
+
+            if values['logo_upload'] is not None:
+                logo = values['logo_upload']
+                group.logo = logo.file.read()
+
+            group.add_member(c.user, admin=True)
+
+            meta.Session.commit()
+            redirect(url(controller='group', action='invite_members_step', id=values['id']))
+        defaults = {'approve_new_members': 'admin',
+                    'forum_visibility': 'public',
+                    'page_visibility': 'public'}
+        return htmlfill.render(self._create_custom_form(), defaults=defaults)
 
     @validate(schema=GroupAddingForm, post_only=False, on_get=True)
     @ActionProtector("user")
@@ -726,10 +877,11 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     def cancel_invitation(self, group):
         """Cancel and delete an invitation that was sent out to the user."""
         if hasattr(self, 'form_result'):
-
             email = self.form_result.get('email', '')
-            invitation = meta.Session.query(PendingInvitation).filter(PendingInvitation.group == group)\
-                .filter(PendingInvitation.email == email).first()
+            invitation = meta.Session.query(PendingInvitation
+                    ).filter(PendingInvitation.group == group
+                    ).filter(PendingInvitation.email == email
+                    ).first()
             if invitation is not None:
                 meta.Session.delete(invitation)
                 meta.Session.commit()
@@ -740,15 +892,14 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @group_action
     @ActionProtector("member", "admin")
     def invite_members_step(self, group):
-
         if hasattr(self, 'form_result'):
             emails = self.form_result.get('emails', '').split()
             self._send_invitations(group, emails)
             if self.form_result.get('final_submit', None) is not None:
                 redirect(group.url(action='welcome'))
             else:
-                redirect(url(controller='group', action='invite_members_step', id=group.group_id))
-
+                redirect(url(controller='group', action='invite_members_step',
+                             id=group.group_id))
         return render('group/members_step.mako')
 
     def _clear_requests(self, group, user):

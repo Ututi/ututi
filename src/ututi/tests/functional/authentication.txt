@@ -12,7 +12,7 @@ Visiting a profile-related page should not crash if the user is not logged in.
 -------------------------
 
     >>> browser = Browser()
-    >>> form = browser.getForm('login_form')
+    >>> form = browser.getForm('loginForm')
     >>> form.getControl('Email').value = "admin@ututi.lt"
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
@@ -27,7 +27,7 @@ Visiting a profile-related page should not crash if the user is not logged in.
 
 -------------------------
 
-    >>> form = browser.getForm('login_form')
+    >>> form = browser.getForm('loginForm')
     >>> form.getControl('Email').value = "admin@ututi.lt"
     >>> form.getControl('Password').value = "asd"
     >>> form.getControl('Login').click()
@@ -35,7 +35,7 @@ Visiting a profile-related page should not crash if the user is not logged in.
     >>> browser.url
     'http://localhost/login'
 
-    >>> form = browser.getForm('login_form')
+    >>> form = browser.getForm('loginForm')
     >>> form.getControl('Email').value
     'admin@ututi.lt'
 
@@ -53,7 +53,7 @@ Visiting a profile-related page should not crash if the user is not logged in.
     >>> browser.url
     'http://localhost/?came_from=http%3A%2F%2Flocalhost%2Fgroup%2Fmoderators%2Fmembers'
 
-    >>> form = browser.getForm('login_form')
+    >>> form = browser.getForm('loginForm')
     >>> form.getControl('Email').value = "admin@ututi.lt"
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
@@ -64,7 +64,7 @@ Visiting a profile-related page should not crash if the user is not logged in.
 -------------------------
 
     >>> browser.open('http://localhost/search')
-    >>> form = browser.getForm('login_form')
+    >>> form = browser.getForm('loginForm')
     >>> form.getControl('Email').value = "admin@ututi.lt"
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
@@ -77,7 +77,7 @@ Visiting a profile-related page should not crash if the user is not logged in.
 -------------------------
 
     >>> browser.open('http://localhost/search')
-    >>> form = browser.getForm('login_form')
+    >>> form = browser.getForm('loginForm')
     >>> form.getControl('Email').value = "admin@ututi.lt"
     >>> form.getControl('Password').value = "asd"
     >>> form.getControl('Login').click()
@@ -89,7 +89,7 @@ Visiting a profile-related page should not crash if the user is not logged in.
     >>> browser.url
     'http://localhost/login'
 
-    >>> form = browser.getForm('login_form')
+    >>> form = browser.getForm('loginForm')
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
 
@@ -128,7 +128,7 @@ But not larger ones:
     >>> browser.url
     'http://localhost/login?came_from=%2Fsubject%2Fvu%2Fmat_analize%3Fserve_file%3D4&context=text2.txt'
 
-    >>> form = browser.getForm('login_form')
+    >>> form = browser.getForm('loginForm')
     >>> form.getControl('Email').value = "user@ututi.lt"
     >>> form.getControl('Password').value = "password"
     >>> form.getControl('Login').click()
@@ -140,7 +140,7 @@ But not larger ones:
 
 -------------------------
 
-    >>> form = browser.getForm('login_form')
+    >>> form = browser.getForm('loginForm')
     >>> form.getControl('Email').value = "user@ututi.lt"
     >>> form.getControl('Password').value = "password"
     >>> form.getControl('Login').click()

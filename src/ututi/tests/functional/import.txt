@@ -41,7 +41,7 @@ Now we will log out and see if we can log back in as the imported user.
     >>> browser.open('http://localhost/')
     >>> browser.getLink('log out').click()
 
-    >>> form = browser.getForm('login_form')
+    >>> form = browser.getForm('loginForm')
     >>> form.getControl('Email').value = "domas@ututi.lt"
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()

@@ -1,0 +1,205 @@
+Group creation path
+===================
+
+    >>> browser = Browser()
+
+    >>> browser.getControl('Create group').click()
+
+Public groups
+-------------
+
+    >>> browser.getLink('Public group').click()
+
+We should be redirected to the registration form:
+
+    >>> print browser.url
+    http://localhost/join?came_from=%2Fgroups%2Fcreate_public
+
+Let's register:
+
+   >>> form = browser.getForm('join_registration_form')
+   >>> form.getControl('Fullname').value = 'Jonas Petraitis Petrauskas'
+   >>> form.getControl('Email').value = 'jonas@example.com'
+   >>> form.getControl('Password').value = 'asdfgh'
+   >>> form.getControl('Repeat password').value = 'asdfgh'
+   >>> form.getControl(name='agree').value = True
+   >>> form.getControl('Join').click()
+
+(We have been sent an email confirmation message.)
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> mail_queue.pop()
+    <EmailInfo sender='info@ututi.lt' recipients=[u'jonas@example.com']>
+
+We should be redirected back to the public group creation page:
+
+   >>> browser.url
+   'http://localhost/groups/create_public'
+
+Let's create a simple group:
+
+    >>> browser.getControl('Group address on the web').value = 'test'
+    >>> browser.getControl('Group title').value = 'Test group'
+    >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
+    >>> browser.getForm().submit()
+
+After creating the group, we are redirected to the member invitation
+
+    >>> browser.printQuery('//h1/text()')
+    Group members
+
+Let us fill in several emails to invite.
+
+    >>> browser.getControl('Enter emails of the people you would like'
+    ...     ' to invite to the group.').value = 'petras@ututi.lt, admin@ututi.lt'
+    >>> browser.getControl('Invite').click()
+
+    >>> print browser.url
+    http://localhost/group/test/invite_members_step
+
+    >>> browser.getControl("Continue").click()
+
+Users should get emails.
+
+    >>> print mail_queue.pop().message
+    MIME-Version: 1.0
+    Content-Type: text/plain; charset="us-ascii"
+    Content-Transfer-Encoding: 7bit
+    From: info@ututi.lt
+    To: admin@ututi.lt
+    Subject: Ututi group invitation
+    <BLANKLINE>
+    Hi,
+    Your friend Jonas Petraitis Petrauskas wants to invite you to the group
+    Test group < http://localhost/group/test >. After joining you will be able to
+    watch subjects your group is studying, share files with other members
+    of the group and use the group forum.
+    <BLANKLINE>
+    You may accept or reject the invitation here: < http://localhost/group/test/invitation >
+    <BLANKLINE>
+    We hope you will find Ututi useful!
+    <BLANKLINE>
+    --
+    The Ututi team
+    <BLANKLINE>
+    <BLANKLINE>
+
+This user is not a member, so he gets a more verbose email.
+
+    >>> print mail_queue.pop().message
+    MIME-Version: 1.0
+    Content-Type: text/plain; charset="us-ascii"
+    Content-Transfer-Encoding: 7bit
+    From: info@ututi.lt
+    To: petras@ututi.lt
+    Subject: Ututi group invitation
+    <BLANKLINE>
+    Hi,
+    Your friend Jonas Petraitis Petrauskas is using Ututi.lt, a portal for students, and
+    wants to invite you to a group Test group < http://localhost/group/test >.  In Ututi
+    you can find coursework, share files with other members of the group
+    and use the group forums.
+    <BLANKLINE>
+    Since you do not appear to be a Ututi user at the moment, to become a
+    member of this group, you need to register first.
+    <BLANKLINE>
+    You may register by following this link: < http://localhost/register/... >
+    <BLANKLINE>
+    --
+    The Ututi team
+
+We should be hailed by the welcome screen:
+
+    >>> print browser.url
+    http://localhost/group/test/welcome
+
+Let's examine the group's settings.  This group should be configured with sane
+defaults for public groups:
+
+    >>> browser.getLink('Edit').click()
+
+    >>> browser.getControl('Title').value
+    'Test group'
+    >>> browser.getControl('Forum type').value
+    ['forum']
+    >>> browser.getControl(name='approve_new_members').value
+    ['none']
+    >>> browser.getControl(name='forum_visibility').value
+    ['public']
+    >>> browser.getControl(name='page_visibility').value
+    ['public']
+
+Academic groups
+---------------
+
+This time, let's try creating an academic group:
+
+    >>> browser.open('http://localhost/groups/group_type')
+    >>> browser.getLink('Academic group').click()
+
+    >>> browser.getControl('Group e-mail address').value = 'test2'
+    >>> browser.getControl('Group title').value = 'Another test group'
+    >>> browser.getControl('Year').value = ['2010']
+    >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
+    >>> browser.getForm().submit()
+
+After creating the group, we are redirected to the member invitation step:
+
+    >>> browser.printQuery('//h1/text()')
+    Group members
+
+We've checked that already; let's move on.
+
+    >>> browser.getControl("Continue").click()
+
+Let's have a look at the settings:
+
+    >>> browser.getLink('Edit').click()
+
+    >>> browser.getControl('Title').value
+    'Another test group'
+    >>> browser.getControl('Forum type').value
+    ['mailinglist']
+    >>> browser.getControl(name='approve_new_members').value
+    ['admin']
+    >>> browser.getControl(name='forum_visibility').value
+    ['members']
+    >>> browser.getControl(name='page_visibility').value
+    ['members']
+
+Custom groups
+-------------
+
+Finally, custom groups:
+
+    >>> browser.open('http://localhost/groups/group_type')
+    >>> browser.getLink('Custom group').click()
+
+    >>> browser.getControl('Group e-mail address').value = 'test3'
+    >>> browser.getControl('Group title').value = 'Another test group'
+    >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
+    >>> browser.getForm().submit()
+
+After creating the group, we are redirected to the member invitation step:
+
+    >>> browser.printQuery('//h1/text()')
+    Group members
+
+We've checked that already; let's move on.
+
+    >>> browser.getControl("Continue").click()
+
+## Let's have a look at the settings:
+##
+##     >>> browser.getLink('Edit').click()
+##
+##     >>> browser.getControl('Title').value
+##     'Another test group'
+##     >>> browser.getControl('Forum type').value
+##     ['mailinglist']
+##     >>> browser.getControl(name='approve_new_members').value
+##     ['admin']
+##     >>> browser.getControl(name='forum_visibility').value
+##     ['members']
+##     >>> browser.getControl(name='page_visibility').value
+##     ['members']

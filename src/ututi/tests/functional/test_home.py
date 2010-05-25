@@ -6,7 +6,7 @@ def doctest_index():
     """
 
        >>> response = app.get('/')
-       >>> response.forms['login_form']
+       >>> response.forms['loginForm']
        <webtest.Form object at ...>
 
     """

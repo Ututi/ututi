@@ -211,7 +211,7 @@ class Browser(WSGI_Browser):
     @classmethod
     def logIn(cls, email='admin@ututi.lt', password='asdasd'):
         browser = cls()
-        form = browser.getForm('login_form')
+        form = browser.getForm('loginForm')
         form.getControl('Email').value = email
         form.getControl('Password').value = password
         form.getControl('Login').click()

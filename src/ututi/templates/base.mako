@@ -77,7 +77,7 @@ ${_('student information online')}
 
 %else:
 ${h.javascript_link('/javascript/forms.js')|n}
-<form method="post" id="login_form" action="${url('/login')}">
+<form method="post" id="loginForm" action="${url('/login')}">
   <input type="hidden" name="came_from" value="${request.params.get('came_from', request.url)}" />
   % if request.params.get('login'):
     <div class="error">${_('Wrong password or username!')}</div>

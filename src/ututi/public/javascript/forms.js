@@ -1,25 +1,22 @@
 jQuery.fn.labelOver = function(overClass) {
     return this.each(function(){
  	var label = jQuery(this);
- 	var f = label.attr('for');
- 	if (f) {
- 	        var input = jQuery('#' + f, $(this).parents('form'));
+    var input = label.parent().find('input');
 
- 		this.hide = function() {
- 		  label.hide()
- 		}
+ 	this.hide = function() {
+	  label.hide();
+	}
 
- 		this.show = function() {
- 		  if (input.val() == '') label.show()
- 		}
+	this.show = function() {
+	  if (input.val() == '') label.show()
+	}
 
- 		// handlers
- 		input.focus(this.hide);
- 		input.blur(this.show);
- 	  label.addClass(overClass).click(function(){ input.focus() });
+	// handlers
+	input.focus(this.hide);
+	input.blur(this.show);
+ 	label.addClass(overClass).click(function(){ input.focus() });
+        if (input.val() != '') this.hide();
 
- 		if (input.val() != '') this.hide();
- 	}
  })
  }
 
