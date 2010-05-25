@@ -197,10 +197,13 @@ class GroupMailingListMessage(ContentItem):
         mailing_list_hosts = [mailing_list_host,
                               'lists.ututi.lt']
 
-        group_ids = [prefix
-                     for prefix, suffix in [address.split('@')
-                                            for name, address in message.getToAddresses()]
-                     if suffix in mailing_list_hosts]
+        group_ids = []
+        for name, address in message.getToAddresses():
+            if '@' not in address:
+                continue
+            prefix, suffix = address.split('@')
+            if suffix in mailing_list_hosts:
+                group_ids.append(prefix)
 
         g = None
         if group_ids:

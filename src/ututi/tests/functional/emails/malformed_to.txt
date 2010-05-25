@@ -1,0 +1,32 @@
+Received: from voruta.vu.lt (mail.vu.lt [193.219.80.13])
+	by ututi.com (Postfix) with ESMTP id CDE9A3FB83
+	for <nenusivyle@groups.ututi.lt>; Mon, 24 May 2010 18:43:51 +0300 (EEST)
+Received: from localhost (webmail.vu.lt [193.219.80.4])
+	by voruta.vu.lt (VU/2006/08/16) with ESMTP id o4OFBjHm017413;
+	Mon, 24 May 2010 18:11:45 +0300 (EEST)
+Received: from cable-14-2.cgates.lt (cable-14-2.cgates.lt [80.240.14.2]) by
+	webmail.vu.lt (Horde Framework) with HTTP; Mon, 24 May 2010 18:15:39 +0300
+Message-ID: <20100524181539.1944485dv6u5hyww@webmail.vu.lt>
+Date: Mon, 24 May 2010 18:15:39 +0300
+From: Ignas <admin@ututi.lt>
+To: moderators@lists.ututi.lt,
+        =?utf-8?b?QWlzdMSXIA==?=
+	=?utf-8?b?S3XEjWluc2tpZW7Elw==?= <aiste.kucinskiene@gmail.com>
+Subject: Re: =?utf-8?b?RMSXbCA=?= =?utf-8?b?bWnFoXJpxbNqxbMg?=
+	=?utf-8?b?ZGlza3Vyc8Wz?= seminaro
+References: <AANLkTikQyZCl2Fv_WpSrHf0CBnBz1kS406RRqximmrXO@mail.gmail.com>
+	<AANLkTikg2bjFWM75MJCl1dTl0pCVp34l6JhalEUc8Dw8@mail.gmail.com>
+	<AANLkTil4O4nbD1S-rwgIjaKdxIIGwfMuUQpTc5qlb4nY@mail.gmail.com>
+In-Reply-To: <AANLkTil4O4nbD1S-rwgIjaKdxIIGwfMuUQpTc5qlb4nY@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain;
+	charset=utf-8;
+	DelSp="Yes";
+	format="flowed"
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Internet Messaging Program (IMP) H3 (4.2)
+
+man taip pat tinka
+
+virga
