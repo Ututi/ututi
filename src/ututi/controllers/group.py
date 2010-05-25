@@ -174,6 +174,9 @@ class CreateAcademicGroupForm(CreateGroupFormBase):
 class CreateCustomGroupForm(CreateGroupFormBase):
     """A schema for creating custom groups."""
 
+    can_add_subjects = validators.Bool()
+    file_storage = validators.Bool()
+
     forum_type = validators.OneOf(['mailinglist', 'forum'])
     approve_new_members = validators.OneOf(['none', 'admin'])
     forum_visibility = validators.OneOf(['public', 'members'])
@@ -482,7 +485,16 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             tag = values.get('location', None)
             group.location = tag
 
-            # TODO: specify all other settings
+            group.wants_to_watch_subjects = bool(self.form_result['can_add_subjects'])
+            # TODO: group has file area
+
+            group.mailinglist_enabled = (self.form_result['forum_type'] == 'mailinglist')
+            group.admins_approve_members = (
+                    self.form_result['approve_new_members'] == 'admin')
+            group.forum_is_public = (
+                    self.form_result['forum_visibility'] == 'public')
+            group.page_public = (
+                    self.form_result['page_visibility'] == 'public')
 
             meta.Session.add(group)
 
@@ -494,7 +506,9 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
 
             meta.Session.commit()
             redirect(url(controller='group', action='invite_members_step', id=values['id']))
-        defaults = {'approve_new_members': 'admin',
+        defaults = {'can_add_subjects': True,
+                    'file_storage': True,
+                    'approve_new_members': 'admin',
                     'forum_visibility': 'public',
                     'page_visibility': 'public'}
         return htmlfill.render(self._create_custom_form(), defaults=defaults)
