@@ -9,8 +9,25 @@
 <%def name="flash_messages()"></%def>
 
 <%def name="head_tags()">
-    ${parent.head_tags()}
-    <%newlocationtag:head_tags />
+  ${parent.head_tags()}
+  <%newlocationtag:head_tags />
+
+  <!-- Temporary hack until we get proper HTML -->
+  <style type="text/css">
+      #CreatePubliCGroupLeft input[type=checkbox] {
+        width: 1em !important;
+      }
+      #CreatePubliCGroupLeft input[type=radio] {
+        width: 1em !important;
+      }
+      #CreatePubliCGroupLeft label.checkbox {
+        display: block;
+      }
+      #CreatePubliCGroupLeft label.checkbox span.labelText {
+        display: inline !important;
+        width: 300px !important;
+      }
+  </style>
 </%def>
 
 <%def name="portlets()">
@@ -87,14 +104,14 @@
 </%def>
 
 <%def name="can_add_subjects()">
-  <label>
+  <label class="checkbox">
     <input name="can_add_subjects" type="checkbox" />
     <span class="labelText">${_("Group can subscribe to subjects")}</span>
   </label>
 </%def>
 
 <%def name="has_file_storage()">
-  <label>
+  <label class="checkbox">
     <input name="file_storage" type="checkbox" />
     <span class="labelText">${_("Group has a file storage area")}</span>
   </label>

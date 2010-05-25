@@ -25,6 +25,8 @@ ${_('New public group')}
 
         ${self.access_settings()}
 
+        <br />
+
         ${h.input_submit(_('Continue'), class_='button buttonHuge')}
       </fieldset>
     </form>
