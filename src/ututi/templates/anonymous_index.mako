@@ -100,12 +100,12 @@
     </script>
   </div>
 </div><div id="homeCreateGroupBlock">
-  <h2>Sukurk grupę</h2>
-  <p>Ką turi grupės</p>
+  <h2>${_('Create a group')}</h2>
+  <p>${_('Groups have')}</p>
   <ul>
-    <li style="background-image: url('img/icons/comment_green_17.png');">El. pašto konferenciją arba forumą</li>
-    <li style="background-image: url('img/icons/file_private_green_17.png');">Privačių failų saugyklą</li>
-    <li style="background-image: url('img/icons/subjects_green_17.png');">Studijuojamus dalykus</li>
+    <li style="background-image: url('img/icons/comment_green_17.png');">${_('A mailing list or forum')}</li>
+    <li style="background-image: url('img/icons/file_private_green_17.png');">${_('Private file storage')}</li>
+    <li style="background-image: url('img/icons/subjects_green_17.png');">${_('A list of studied subjects')}</li>
   </ul>
   <table style="width: 100%;">
     <tr><td style="text-align: center;">
@@ -114,216 +114,82 @@
   </table>
 </div>
 <div id="homePopularSubjects">
-  <h2>Populiariausi dalykai</h2>
+  <h2>${_('Popular subjects')}</h2>
+  %if c.subjects:
   <ul>
+    %for subject in c.subjects:
     <li>      <dl>
-        <dt><a href="">Citologija</a></dt>
-        <dd class="files"><span class="a11y">Failų:</span> 30</dd>
-        <dd class="pages"><span class="a11y">Wiki puslapių:</span> 0</dd>
-        <dd class="watchedBy"><span class="a11y">Dalyką stebi:</span> 0 grupių ir 4 nariai</dd>
+        <dt><a href="${subject.url()}">${subject.title}</a></dt>
+        <%
+           file_cnt = len(subject.files)
+           page_cnt = len(subject.pages)
+           group_cnt = subject.group_count()
+           user_cnt = subject.user_count()
+        %>
+        <dd class="files">${ungettext('%(count)s <span class="a11y">file</span>', '%(count)s <span class="a11y">files</span>', file_cnt) % dict(count = file_cnt)|n}</dd>
+        <dd class="pages">${ungettext('%(count)s <span class="a11y">wiki page</span>', '%(count)s <span class="a11y">wiki pages</span>', page_cnt) % dict(count = page_cnt)|n}</dd>
+        <dd class="watchedBy"><span class="a11y">${_('Watched by:')}</span> 
+          ${ungettext("%(count)s group", "%(count)s groups", group_cnt) % dict(count = group_cnt)|n}
+          ${_('and')}
+          ${ungettext("%(count)s member", "%(count)s members", user_cnt) % dict(count = user_cnt)|n}
+        </dd>
       </dl>
     </li>
-    <li>
-      <dl>
-        <dt><a href="">Parazitologija</a></dt>
-        <dd class="files"><span class="a11y">Failų:</span> 30</dd>
-        <dd class="pages"><span class="a11y">Wiki puslapių:</span> 0</dd>
-        <dd class="watchedBy"><span class="a11y">Dalyką stebi:</span> 0 grupių ir 4 nariai</dd>
-      </dl>
-    </li>
-    <li>
-      <dl>
-        <dt><a href="">Chirurginė medicina</a></dt>
-        <dd class="files"><span class="a11y">Failų:</span> 30</dd>
-        <dd class="pages"><span class="a11y">Wiki puslapių:</span> 0</dd>
-        <dd class="watchedBy"><span class="a11y">Dalyką stebi:</span> 0 grupių ir 4 nariai</dd>
-      </dl>
-    </li>
-    <li>
-      <dl>
-        <dt><a href="">Matematinė analizė</a></dt>
-        <dd class="files"><span class="a11y">Failų:</span> 30</dd>
-        <dd class="pages"><span class="a11y">Wiki puslapių:</span> 0</dd>
-        <dd class="watchedBy"><span class="a11y">Dalyką stebi:</span> 0 grupių ir 4 nariai</dd>
-      </dl>
-    </li>
-    <li>
-      <dl>
-        <dt><a href="">Ekonometrija</a></dt>
-        <dd class="files"><span class="a11y">Failų:</span> 30</dd>
-        <dd class="pages"><span class="a11y">Wiki puslapių:</span> 0</dd>
-        <dd class="watchedBy"><span class="a11y">Dalyką stebi:</span> 0 grupių ir 4 nariai</dd>
-      </dl>
-    </li>
-    <li>
-      <dl>
-        <dt><a href="">Finansų ir draudimo matematika</a></dt>
-        <dd class="files"><span class="a11y">Failų:</span> 30</dd>
-        <dd class="pages"><span class="a11y">Wiki puslapių:</span> 0</dd>
-        <dd class="watchedBy"><span class="a11y">Dalyką stebi:</span> 0 grupių ir 4 nariai</dd>
-      </dl>
-    </li>
-    <li>
-      <dl>
-        <dt><a href="">Kompozicija</a></dt>
-        <dd class="files"><span class="a11y">Failų:</span> 30</dd>
-        <dd class="pages"><span class="a11y">Wiki puslapių:</span> 0</dd>
-        <dd class="watchedBy"><span class="a11y">Dalyką stebi:</span> 0 grupių ir 4 nariai</dd>
-      </dl>
-    </li>
-    <li>
-      <dl>
-        <dt><a href="">Visuomeninio pastato techninis projektas</a></dt>
-        <dd class="files"><span class="a11y">Failų:</span> 30</dd>
-        <dd class="pages"><span class="a11y">Wiki puslapių:</span> 0</dd>
-        <dd class="watchedBy"><span class="a11y">Dalyką stebi:</span> 0 grupių ir 4 nariai</dd>
-      </dl>
-    </li>
-    <li>
-      <dl>
-        <dt><a href="">Vadyba</a></dt>
-        <dd class="files"><span class="a11y">Failų:</span> 30</dd>
-        <dd class="pages"><span class="a11y">Wiki puslapių:</span> 0</dd>
-        <dd class="watchedBy"><span class="a11y">Dalyką stebi:</span> 0 grupių ir 4 nariai</dd>
-      </dl>
-    </li>
-    <li>
-      <dl>
-        <dt><a href="">Vadyba II</a></dt>
-        <dd class="files"><span class="a11y">Failų:</span> 30</dd>
-        <dd class="pages"><span class="a11y">Wiki puslapių:</span> 0</dd>
-        <dd class="watchedBy"><span class="a11y">Dalyką stebi:</span> 0 grupių ir 4 nariai</dd>
-      </dl>
-    </li>
+    %endfor
   </ul>
+  %endif
+
 </div><div id="homeActiveUniversities">
-  <h2>Aktyviausi universitetai</h2>
+  <h2>${_('Active universities')}</h2>
+  %if c.universities:
   <ul>
-    <li style="background-image: url('tmp/vgtu.png');">
+    %for university in c.universities:
+    <%
+       logo_style = ''
+       if university.logo is not None:
+           logo_url = 'background-image: "%s";' % url(controller='structure', action='logo', id=university.id, width=20, height=20)
+       subject_cnt = university.count('subject')
+       group_cnt = university.count('group')
+       file_cnt = university.count('file')
+    %>
+    <li style="${logo_style}">
       <dl>
-        <dt><a href="">Vilniaus Gedimino technikos universitetas</a></dt>
-        <dd>120 dalykų, 23 grupės, 2212 failų</dd>
+        <dt><a href="${university.url()}">${university.title}</a></dt>
+        <dd>
+          ${ungettext("%(count)s subject", "%(count)s subjects", subject_cnt) % dict(count = subject_cnt)|n},
+          ${ungettext("%(count)s group", "%(count)s groups", group_cnt) % dict(count = group_cnt)|n},
+          ${ungettext("%(count)s file", "%(count)s files", file_cnt) % dict(count = file_cnt)|n}
+        </dd>
       </dl>
     </li>
-    <li style="background-image: url('tmp/vgtu.png');">
-      <dl>
-        <dt><a href="">Kauno kolegija</a></dt>
-        <dd>120 dalykų, 23 grupės, 2212 failų</dd>
-      </dl>
-    </li>
-    <li>
-      <dl>
-        <dt><a href="">Vilniaus Gedimino technikos universitetas</a></dt>
-        <dd>120 dalykų, 23 grupės, 2212 failų</dd>
-      </dl>
-    </li>
-    <li>
-      <dl>
-        <dt><a href="">Vilniaus universitetas</a></dt>
-        <dd>120 dalykų, 23 grupės, 2212 failų</dd>
-      </dl>
-    </li>
-    <li>
-      <dl>
-        <dt><a href="">Kauno miškų agrokultūros ir inžinerijos akademija</a></dt>
-        <dd>120 dalykų, 23 grupės, 2212 failų</dd>
-      </dl>
-    </li>
-    <li>
-      <dl>
-        <dt><a href="">Lietuvos muzikos ir teatro akademija</a></dt>
-        <dd>120 dalykų, 23 grupės, 2212 failų</dd>
-      </dl>
-    </li>
-    <li>
-      <dl>
-        <dt><a href="">Vilniaus ekonomikos ir verslo kolegija</a></dt>
-        <dd>120 dalykų, 23 grupės, 2212 failų</dd>
-      </dl>
-    </li>
-    <li>
-      <dl>
-        <dt><a href="">Kauno medicinos universitetas</a></dt>
-        <dd>120 dalykų, 23 grupės, 2212 failų</dd>
-      </dl>
-    </li>
-    <li>
-      <dl>
-        <dt><a href="">Klaipėdos universitetas</a></dt>
-        <dd>120 dalykų, 23 grupės, 2212 failų</dd>
-      </dl>
-    </li>
-    <li>
-      <dl>
-        <dt><a href="">Mykolo Romerio universitetas</a> </dt>
-        <dd>120 dalykų, 23 grupės, 2212 failų</dd>
-      </dl>
-    </li>
+    %endfor
   </ul>
-  <p class="more"><a href="">Visi universitetai</a></p>
+  %endif
+  <p class="more"><a href="${url(controller='search', action='index')}">${_('All universities')}</a></p>
 </div><div id="homeActiveGroups">
-  <h2>Aktyviausios grupės</h2>
+  <h2>${_('Active groups')}</h2>
+  %if c.groups:
   <ul>
+    %for group in c.groups:
     <li>
       <dl>
-        <dt><a href="">Citologija</a></dt>
-        <dd><a href="" title="Vilniaus universitetas">VU</a> | <a href="" title="Matematikos ir informatikos fakultetas">MIF</a></dd>
+        <dt><a href="${group.url()}">${group.title}</a></dt>
+        <dd>
+          <%
+             hierarchy = group.location.hierarchy(True)
+             total_hierarchy = len(hierarchy)
+          %>
+          %for n, tag in enumerate(hierarchy):
+            <a href="${tag.url()}" title="${tag.title}">${tag.title_short}</a>
+            %if n != total_hierarchy - 1:
+             |
+            %endif
+          %endfor
+        </dd>
       </dl>
     </li>
-    <li>
-      <dl>
-        <dt><a href="">Parazitologija</a></dt>
-        <dd><a href="" title="Kauno medicinos universitetas">KMU</a> | <a href="" title="Kažkoks fakultetas">KF</a></dd>
-      </dl>
-    </li>
-    <li>
-      <dl>
-        <dt><a href="">Chirurginė medicina</a></dt>
-        <dd><a href="" title="Vilniaus universitetas">VU</a> | <a href="" title="Medicinos fakultetas">MF</a></dd>
-      </dl>
-    </li>
-    <li>
-      <dl>
-        <dt><a href="">Matematinė analizė</a></dt>
-        <dd><a href="" title="Vilniaus universitetas">VU</a> | <a href="" title="Matematikos ir informatikos fakultetas">MIF</a></dd>
-      </dl>
-    </li>
-    <li>
-      <dl>
-        <dt><a href="">Ekonometrija</a></dt>
-        <dd><a href="" title="Vilniaus universitetas">VU</a> | <a href="" title="Matematikos ir informatikos fakultetas">MIF</a></dd>
-      </dl>
-    </li>
-    <li>
-      <dl>
-        <dt><a href="">Finansų ir draudimo matematika</a></dt>
-        <dd><a href="" title="Vilniaus universitetas">VU</a> | <a href="" title="Matematikos ir informatikos fakultetas">MIF</a></dd>
-      </dl>
-    </li>
-    <li>
-      <dl>
-        <dt><a href="">Kompozicija</a></dt>
-        <dd><a href="" title="Vilniaus statybos ir dizaino kolegija">VSDK</a> | <a href="" title="Architektūros fakultetas">AF</a></dd>
-      </dl>
-    </li>
-    <li>
-      <dl>
-        <dt><a href="">Visuomeninio pastato techninis projektas</a></dt>
-        <dd><a href="" title="Vilniaus statybos ir dizaino kolegija">VSDK</a> | <a href="" title="Architektūros fakultetas">AF</a></dd>
-      </dl>
-    </li>
-    <li>
-      <dl>
-        <dt><a href="">Vadyba</a></dt>
-        <dd><a href="" title="Vilniaus universitetas">VU</a> | <a href="" title="Ekonomikos fakultetas">EF</a></dd>
-      </dl>
-    </li>
-    <li>
-      <dl>
-        <dt><a href="">Vadyba II</a></dt>
-        <dd><a href="" title="Vilniaus universitetas">VU</a> | <a href="" title="Ekonomikos fakultetas">EF</a></dd>
-      </dl>
-    </li>
+    %endfor
   </ul>
+  %endif
 </div>
 

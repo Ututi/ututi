@@ -26,7 +26,7 @@ from ututi.lib.messaging import Message
 from ututi.lib.security import ActionProtector
 from ututi.lib.validators import UniqueEmail
 from ututi.model import meta, User, Email, PendingInvitation, LocationTag, Payment, get_supporters
-from ututi.model import UserSubjectMonitoring, GroupSubjectMonitoring, Subject
+from ututi.model import UserSubjectMonitoring, GroupSubjectMonitoring, Subject, Group, SearchItem
 
 log = logging.getLogger(__name__)
 
@@ -100,11 +100,22 @@ def sign_in_user(email):
 class UniversityListMixin(BaseController):
     """ A mix-in for listing all the universitites (first level location tags) in the system."""
 
-    def _universities(self, sort_popularity=True):
-        unis = meta.Session.query(LocationTag).filter(LocationTag.parent == None).order_by(LocationTag.title.asc()).all()
+    def _universities(self, sort_popularity=True, limit=None):
+        unis = meta.Session.query(LocationTag).filter(LocationTag.parent == None).order_by(LocationTag.title.asc())
+        if limit is not None:
+            unis = unis.limit(limit)
+        unis = unis.all()
         if sort_popularity:
             unis.sort(key=lambda obj: obj.rating, reverse=True)
         return unis
+
+    def _subjects(self):
+        subjects = meta.Session.query(Subject).join(SearchItem).order_by(SearchItem.rating.desc()).limit(10).all()
+        return subjects
+
+    def _groups(self):
+        groups = meta.Session.query(Group).order_by(Group.created_on.desc()).limit(10).all()
+        return groups
 
     def _get_unis(self):
         """List all the universities in the system, paging and sorting according to request parameters."""
@@ -130,6 +141,7 @@ class HomeController(UniversityListMixin):
             redirect(url(controller='profile', action='home'))
         else:
             self._get_unis()
+            (c.subjects, c.groups, c.universities) = (self._subjects(), self._groups(), self._universities(limit=10))
             if request.params.has_key('js'):
                 return render_mako_def('/anonymous_index/lt.mako','universities', unis=c.unis, ajax_url=url(controller='home', action='index'))
             c.slideshow = request.params.has_key('slide')
@@ -287,6 +299,7 @@ class HomeController(UniversityListMixin):
                 return render('/login.mako')
 
             self._get_unis()
+            (c.subjects, c.groups, c.universities) = (self._subjects(), self._groups(), self._universities(limit=10))
             return render('/anonymous_index.mako')
 
     def _pswrecovery_form(self):
