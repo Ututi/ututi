@@ -174,8 +174,6 @@ class CreateAcademicGroupForm(CreateGroupFormBase):
 class CreateCustomGroupForm(CreateGroupFormBase):
     """A schema for creating custom groups."""
 
-    allow_extra_fields = True # TODO: remove this
-
     forum_type = validators.OneOf(['mailinglist', 'forum'])
     approve_new_members = validators.OneOf(['none', 'admin'])
     forum_visibility = validators.OneOf(['public', 'members'])
