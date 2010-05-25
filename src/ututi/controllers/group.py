@@ -259,6 +259,7 @@ class GroupControllerBase(BaseController):
              'link': url(controller='group', action='forum', id=c.group.group_id),
              'selected': selected == 'forum',
              'event': h.trackEvent(c.group, 'forum', 'breadcrumb')}
+
         files_entry = {
              'title': _('Files'),
              'link': url(controller='group', action='files', id=c.group.group_id),
@@ -266,6 +267,12 @@ class GroupControllerBase(BaseController):
              'event': h.trackEvent(c.group, 'files', 'breadcrumb')
             } if c.group.has_file_area else None
 
+        subjects_entry = {
+             'title': _('Subjects'),
+             'link': url(controller='group', action='subjects', id=c.group.group_id),
+             'selected': selected == 'subjects',
+             'event': h.trackEvent(c.group, 'subjects', 'breadcrumb') 
+            } if c.group.wants_to_watch_subjects else None
 
         bcs = [
             {'title': _("What's New?"),
@@ -278,10 +285,7 @@ class GroupControllerBase(BaseController):
              'selected': selected == 'members',
              'event': h.trackEvent(c.group, 'members', 'breadcrumb')}
             ] + ([files_entry] if files_entry else []) + [
-            {'title': _('Subjects'),
-             'link': url(controller='group', action='subjects', id=c.group.group_id),
-             'selected': selected == 'subjects',
-             'event': h.trackEvent(c.group, 'subjects', 'breadcrumb')},
+            ] + ([subjects_entry] if subjects_entry else []) + [
             {'title': _('Page'),
              'link': url(controller='group', action='page', id=c.group.group_id),
              'selected': selected == 'page',
@@ -604,11 +608,12 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
                       if c.group.mailinglist_enabled
                       else ('forum', _('Forum')))
         files_link = ('files', _('Files')) if c.group.has_file_area else None
+        subjects_link = ('subjects', _('Subjects')) if c.group.has_file_area else None
         c.tabs = [('home', _("What's New?")),
                   forum_link,
                   ('members', _('Members'))
                   ] + ([files_link] if files_link else []) + [
-                  ('subjects', _('Subjects')),
+                  ] + ([subjects_link] if subjects_link else []) + [
                   ('page', _('Page'))]
 
         return render('group/edit.mako')

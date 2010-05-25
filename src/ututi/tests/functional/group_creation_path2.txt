@@ -213,13 +213,12 @@ The initial page will not suggest watching subjects (we opted out of it):
     >>> browser.printQuery('//table//h2/text()')
     Invite group members!
 
-The files tab is hidden, as requested:
+The files and subjects tabs are hidden, as requested:
 
     >>> browser.printQuery('id("tabs")//a/text()')
     What's New?
     Forum
     Members
-    Subjects
     Page
 
 Let's have a look at the settings:
