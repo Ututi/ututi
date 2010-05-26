@@ -138,6 +138,40 @@
   ${h.select("forum_type", c.forum_type, c.forum_types)}
 </%def>
 
+<%def name="forum_type_and_id()">
+  <label for="forum_type">${_('Forum type')}</label>
+  ${h.select("forum_type", c.forum_type, c.forum_types)}
+
+  <label for="group-id-field">
+    <span class="labelText mailinglist-choice">${_("Group e-mail address")}</span>
+    <span class="labelText forum-choice" style="display: none">${_("Group address on the web")}</span>
+  </label>
+  <label>
+    <form:error name="id" />
+    <span class="address forum-choice" style="display: none">${url(controller='group', action='', qualified=True)}</span>
+    <span class="textField">
+      <input class="address" type="text" id="group-id-field" name="id" />
+      <span class="edge"></span>
+    </span>
+    <span class="mailinglist-choice">@groups.ututi.lt</span>
+  </label>
+
+  <script>
+      $(document).ready(function() {
+          $('select#forum_type').change(function() {
+              if (this.value == 'mailinglist') {
+                  $('.mailinglist-choice').show();
+                  $('.forum-choice').hide();
+              } else {
+                  $('.forum-choice').show();
+                  $('.mailinglist-choice').hide();
+              };
+          });
+      });
+  </script>
+
+</%def>
+
 <%def name="moderators_field()">
   <div class="form-field">
     <label for="moderators">

@@ -15,8 +15,7 @@ ${_('New public group')}
         ${self.group_title_field()}
         ${self.logo_field()}
         ${self.description_field()}
-        ${self.forum_type()}
-        ${self.group_email_field()}
+        ${self.forum_type_and_id()}
 
         ${self.location_field()}
 
