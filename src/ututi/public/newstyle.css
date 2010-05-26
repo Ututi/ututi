@@ -441,16 +441,13 @@ button.btnLarge.btnPlus span {
         }
 
 /* CreatePubliCGroupLeft forms*/
-#CreatePubliCGroupLeft
-
 #CreatePubliCGroupLeft form {
                 margin-top: 50px;
                 width:90%;
         }
         #CreatePubliCGroupLeft label {
-
                 font-size: 12px;
-                margin: 7px 0 0 15px;
+                margin: 7px 0 0 0;
                 width: 180px;
         }
                 
@@ -855,3 +852,58 @@ button.btnLarge.btnPlus span {
     display: none;
 }
 
+/*************************************************************************
+ *************************************************************************
+
+    NEW LOCATION WIDGET SECTION
+
+    Moved from newlocationwidget.css
+
+ ***************************************************************************************************************************************************/
+
+.hidden {
+  display: none;
+}
+
+.ac_results {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: none;
+  position: absolute;
+  z-index: 10000;
+  width: 275px !important;
+}
+
+.ac_results ul {
+  margin: 0;
+  padding: 0;
+  border: 1px solid #e9e6e6;
+  width: 275px !important;
+  text-align: left !important;
+}
+
+.ac_results li {
+  list-style-type: none;
+  list-style-image: none !important;
+  margin: 0 !important;
+  padding: 2px 0 2px 5px;
+  color: #303030;
+  background: white;
+}
+
+.ac_results .ac_over {
+  background: #e9e9e9;
+}
+
+/* location adding subform */
+div.location-add-subform {
+  padding: 5px 10px 5px 10px;
+  margin-top: 15px;
+  border-top: 1px solid #ebe8e8;
+  border-bottom: 1px solid #ebe8e8;
+}
+
+/*************************************************************************
+    END OF NEW LOCATION WIDGET SECTION
+**************************************************************************/
