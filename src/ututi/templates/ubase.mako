@@ -86,7 +86,7 @@ ${_('student information online')}
           <legend class="a11y">${_('Join!')}</legend>
           <label class="textField"><span class="overlay">${_('Email')}:</span><input type="text" name="login" /><span class="edge"></span></label>
           <label class="textField"><span class="overlay">${_('Password')}</span><input type="password" name="password" /><span class="edge"></span></label>
-          <label class="button"><button type="submit">${_('Login')}</button><span class="edge"></span></label><br />
+          <button class="btn" type="submit" value="${_('Login')}"><span>${_('Login')}</span></button><br />
           <label id="rememberMe"><input type="checkbox"> ${_('remember me')}</label><br />
           <a href="${url(controller='home', action='pswrecovery')}">${_('forgotten password?')}</a>
         </fieldset>

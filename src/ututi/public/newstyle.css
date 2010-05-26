@@ -708,6 +708,10 @@ button.btnLarge.btnPlus span {
         #homeRegisterBlock .homeRegisterStep label {
             margin: 0 auto;
         }
+        #homeRegisterBlock #homeRegisterWelcome {
+            margin-top: 10px;
+            font-size: 14px;
+        }
 
 #homeCreateGroupBlock {
         background-image: url('img/homepage_pane3_bg.jpg');
