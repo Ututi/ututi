@@ -26,7 +26,7 @@ ${_('New public group')}
 
         <br />
 
-        ${h.input_submit(_('Continue'), class_='button buttonHuge')}
+        ${h.input_submit(_('Continue'), class_='btnLarge')}
       </fieldset>
     </form>
 
