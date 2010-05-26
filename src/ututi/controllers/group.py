@@ -462,6 +462,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             tag = values.get('location', None)
             group.location = tag
 
+            group.wants_to_watch_subjects = False
             group.page_public = True
             group.admins_approve_members = False
             group.forum_is_public = True

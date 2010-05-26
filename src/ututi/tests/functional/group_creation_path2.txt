@@ -113,10 +113,14 @@ We should be hailed by the welcome screen:
     >>> print browser.url
     http://localhost/group/test/welcome
 
-The screen will suggest watching subjects:
+The subject tab is hidden for public groups:
 
-    >>> browser.printQuery('//table//h2/text()')
-    Watch subjects you are studying!
+    >>> browser.printQuery('id("tabs")//a/text()')
+    What's New?
+    Forum
+    Members
+    Files
+    Page
 
 Let's examine the group's settings.  This group should be configured with sane
 defaults for public groups:
@@ -156,6 +160,12 @@ After creating the group, we are redirected to the member invitation step:
 We've checked that already; let's move on.
 
     >>> browser.getControl("Continue").click()
+
+The screen will suggest watching subjects:
+
+    >>> browser.printQuery('//table//h2/text()')
+    Invite group members!
+    Watch subjects you are studying!
 
 Let's have a look at the settings:
 
