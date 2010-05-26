@@ -11,7 +11,11 @@ ${_('student information online')}
 <%def name="head_tags()">
 </%def>
 
-<%def name="body_class()"></%def>
+<%def name="body_class()">
+%if c.user is None:
+    noMenu
+%endif
+</%def>
 
 <%def name="anonymous_header()">
 <ul id="socialLinks">
