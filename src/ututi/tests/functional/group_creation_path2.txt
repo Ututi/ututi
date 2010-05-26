@@ -41,7 +41,7 @@ Let's create a simple group:
     >>> browser.getControl('Group address on the web').value = 'test'
     >>> browser.getControl('Group title').value = 'Test group'
     >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
-    >>> browser.getForm().submit()
+    >>> browser.getControl('Continue').click()
 
 After creating the group, we are redirected to the member invitation
 
@@ -150,7 +150,7 @@ This time, let's try creating an academic group:
     >>> browser.getControl('Group title').value = 'Another test group'
     >>> browser.getControl('Year').value = ['2010']
     >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
-    >>> browser.getForm().submit()
+    >>> browser.getControl('Continue').click()
 
 After creating the group, we are redirected to the member invitation step:
 
@@ -207,7 +207,7 @@ Change the defaults to make sure the controls have an effect:
     >>> browser.getControl('Members only', index=0).click()
     >>> browser.getControl('Members only', index=1).click()
 
-    >>> browser.getForm().submit()
+    >>> browser.getControl('Continue').click()
 
 After creating the group, we are redirected to the member invitation step:
 
