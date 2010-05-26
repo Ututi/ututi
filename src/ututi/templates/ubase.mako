@@ -13,6 +13,62 @@ ${_('student information online')}
 
 <%def name="body_class()"></%def>
 
+<%def name="anonymous_header()">
+<ul id="socialLinks">
+  <li id="blogLink"><a href="${_('ututi_blog_url')}">${_(u'„Ututi“ blog')}</a></li>
+  <li id="twitterLink"><a href="${_('ututi_twitter_url')}">${_(u'„Ututi“ on twitter')}</a></li>
+  <li id="facebookLink"><a href="${_('ututi_facebook_url')}">${_(u'„Ututi“ on Facebook')}</a></li>
+</ul>
+<form method="post" id="loginForm" action="${url('/login')}">
+  <fieldset>
+    <input type="hidden" name="came_from" value="${request.params.get('came_from', request.url)}" />
+    <legend class="a11y">${_('Join!')}</legend>
+    <label class="textField"><span class="overlay">${_('Email')}:</span><input type="text" name="login" /><span class="edge"></span></label>
+    <label class="textField"><span class="overlay">${_('Password')}</span><input type="password" name="password" /><span class="edge"></span></label>
+    <button class="btn" type="submit" value="${_('Login')}"><span>${_('Login')}</span></button><br />
+    <label id="rememberMe"><input type="checkbox"> ${_('remember me')}</label><br />
+    <a href="${url(controller='home', action='pswrecovery')}">${_('forgotten password?')}</a>
+  </fieldset>
+  <script type="text/javascript">
+    $(window).load(function() {
+    $(".textField .overlay").labelOver('over');
+    });
+  </script>
+
+</form>
+</%def>
+
+<%def name="loggedin_header(user)">
+<form id="searchForm" action="${url(controller='profile', action='search')}">
+	<fieldset>
+		<legend class="a11y">${_('Search')}</legend>
+		<label class="textField">
+          <span class="a11y">${_('Search text')}</span>
+          <input type="text" name="text"/>
+          <span class="edge"></span>
+        </label>
+        ${h.input_submit(_('search_'))}
+	</fieldset>
+</form>
+<p class="a11y">${_('Main menu')}</p>
+<ul id="mainMenu">
+	<li><a href="${url(controller='profile', action='home')}">${_('Home')}</a></li>
+	<li><a href="${url(controller='profile', action='browse')}">${_('Browse')}</a></li>
+	<li class="expandable XXXdisabled"><a href="">${_('Groups')}</a></li>
+	<li><a href="${url(controller='community', action='index')}">${_('Community')}</a></li>
+</ul>
+<p class="a11y">${_('User menu')}</p>
+<ul id="userMenu">
+	<li id="checkMail" class="XXXdisabled"><a href="">${_('inbox (%d)') % 4}</a></li>
+
+	<li id="profileInfo">
+		<a href="${url(controller='profile', action='edit')}">${c.user.fullname}</a>
+	</li>
+	<li id="logout"><a href="${url(controller='home', action='logout')}">${_('exit')}</a></li>
+</ul>
+
+</%def>
+
 <%def name="flash_messages()">
 <div id="flash-messages">
   % if c.serve_file:
@@ -74,30 +130,12 @@ ${_('student information online')}
              track_event = ''
       %>
       <h1 id="siteName"><a href="${u_url}">Ututi</a></h1>
-      <ul id="socialLinks">
-        <li id="blogLink"><a href="${_('ututi_blog_url')}">${_(u'„Ututi“ blog')}</a></li>
-        <li id="twitterLink"><a href="${_('ututi_twitter_url')}">${_(u'„Ututi“ on twitter')}</a></li>
-        <li id="facebookLink"><a href="${_('ututi_facebook_url')}">${_(u'„Ututi“ on Facebook')}</a></li>
-      </ul>
-      %if not c.user:
-      <form method="post" id="loginForm" action="${url('/login')}">
-        <fieldset>
-          <input type="hidden" name="came_from" value="${request.params.get('came_from', request.url)}" />
-          <legend class="a11y">${_('Join!')}</legend>
-          <label class="textField"><span class="overlay">${_('Email')}:</span><input type="text" name="login" /><span class="edge"></span></label>
-          <label class="textField"><span class="overlay">${_('Password')}</span><input type="password" name="password" /><span class="edge"></span></label>
-          <button class="btn" type="submit" value="${_('Login')}"><span>${_('Login')}</span></button><br />
-          <label id="rememberMe"><input type="checkbox"> ${_('remember me')}</label><br />
-          <a href="${url(controller='home', action='pswrecovery')}">${_('forgotten password?')}</a>
-        </fieldset>
-        <script type="text/javascript">
-          $(window).load(function() {
-          $(".textField .overlay").labelOver('over');
-          });
-        </script>
-
-      </form>
+      %if c.user is None:
+        ${self.anonymous_header()}
+      %else:
+        ${self.loggedin_header(c.user)}
       %endif
+
       ${self.flash_messages()}
       ${self.body()}
       </div>

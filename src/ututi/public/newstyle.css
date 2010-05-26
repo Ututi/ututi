@@ -279,14 +279,10 @@ button.btnLarge.btnPlus span {
         width: 276px;
 }
         #searchForm input {
-                width: 200px;
+                width: 180px;
         }
-        #searchForm .button {
-                margin-left: 5px;
+        #searchForm .btn {
                 margin-top: -1px;
-        }
-        #searchForm button {
-                *width: 50px; /* IE7 */
         }
 #mainMenu {
         color: #666666
@@ -907,3 +903,7 @@ div.location-add-subform {
 /*************************************************************************
     END OF NEW LOCATION WIDGET SECTION
 **************************************************************************/
+
+.XXXdisabled {
+    text-decoration: line-through;
+}
