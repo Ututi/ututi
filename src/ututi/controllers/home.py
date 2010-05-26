@@ -101,12 +101,12 @@ class UniversityListMixin(BaseController):
     """ A mix-in for listing all the universitites (first level location tags) in the system."""
 
     def _universities(self, sort_popularity=True, limit=None):
-        unis = meta.Session.query(LocationTag).filter(LocationTag.parent == None).order_by(LocationTag.title.asc())
-        if limit is not None:
-            unis = unis.limit(limit)
-        unis = unis.all()
+        unis = meta.Session.query(LocationTag).filter(LocationTag.parent == None).order_by(LocationTag.title.asc()).all()
         if sort_popularity:
             unis.sort(key=lambda obj: obj.rating, reverse=True)
+        if limit is not None:
+            unis = unis[:limit]
+
         return unis
 
     def _subjects(self):
@@ -142,6 +142,7 @@ class HomeController(UniversityListMixin):
         else:
             self._get_unis()
             (c.subjects, c.groups, c.universities) = (self._subjects(), self._groups(), self._universities(limit=10))
+
             if request.params.has_key('js'):
                 return render_mako_def('/anonymous_index/lt.mako','universities', unis=c.unis, ajax_url=url(controller='home', action='index'))
             c.slideshow = request.params.has_key('slide')

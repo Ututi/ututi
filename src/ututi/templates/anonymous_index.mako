@@ -107,7 +107,7 @@
     <li style="background-image: url('img/icons/file_private_green_17.png');">${_('Private file storage')}</li>
     <li style="background-image: url('img/icons/subjects_green_17.png');">${_('A list of studied subjects')}</li>
   </ul>
-  <table style="width: 100%;">
+  <table style="position: absolute; bottom: 20px; width: 100%;">
     <tr><td style="text-align: center;">
         ${h.button_to(_('Create group'), url(controller='group', action='group_type'),  method='GET', class_='btnPlus btnLarge')}
     </td></tr>
@@ -147,12 +147,12 @@
     <%
        logo_style = ''
        if university.logo is not None:
-           logo_url = 'background-image: "%s";' % url(controller='structure', action='logo', id=university.id, width=20, height=20)
+           logo_style = 'background-image: url(%s);' % url(controller='structure', action='logo', id=university.id, width=20, height=20)
        subject_cnt = university.count('subject')
        group_cnt = university.count('group')
        file_cnt = university.count('file')
     %>
-    <li style="${logo_style}">
+    <li style="${logo_style|n}">
       <dl>
         <dt><a href="${university.url()}">${university.title}</a></dt>
         <dd>
@@ -167,11 +167,16 @@
   %endif
   <p class="more"><a href="${url(controller='search', action='index')}">${_('All universities')}</a></p>
 </div><div id="homeActiveGroups">
-  <h2>${_('Active groups')}</h2>
+  <h2>${_('Latest groups')}</h2>
   %if c.groups:
   <ul>
     %for group in c.groups:
-    <li>
+    <%
+       logo_style = ''
+       if group.logo is not None:
+           logo_style = 'background-image: url(%s);' % url(controller='group', action='logo', id=group.group_id, width=20, height=20)
+    %>
+    <li style="${logo_style|n}">
       <dl>
         <dt><a href="${group.url()}">${group.title}</a></dt>
         <dd>
