@@ -156,7 +156,7 @@
     <span class="mailinglist-choice">@groups.ututi.lt</span>
   </label>
 
-  <script>
+  <script type="text/javascript">
       $(document).ready(function() {
           $('select#forum_type').change(function() {
               if (this.value == 'mailinglist') {
