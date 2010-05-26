@@ -124,7 +124,7 @@ ${_('student information online')}
     </script>
   </head>
   <body class="${self.body_class()}">
-    <div class="wrapper"><div id="widthLimiter">
+    <div id="wrap"><div id="widthLimiter">
       <%
          if c.user:
              u_url = url(controller='profile', action='browse')
