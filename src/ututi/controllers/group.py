@@ -153,10 +153,14 @@ class CreateGroupFormBase(Schema):
 
     pre_validators = [variabledecode.NestedVariables()]
 
-    title = validators.UnicodeString(not_empty=True)
+    msg = {'empty': _(u"Please enter a title.")}
+    title = validators.UnicodeString(not_empty=True, messages=msg)
     location = Pipe(ForEach(validators.String(strip=True)),
                     LocationTagsValidator())
-    id = Pipe(validators.String(strip=True, min=4, max=20), GroupIdValidator())
+    msg = {'empty': _(u"Please enter a group identifier."),
+           'tooShort': _(u"The group identifier must be at least 4 characters long.")}
+    id = Pipe(validators.String(strip=True, min=4, max=20, messages=msg),
+              GroupIdValidator())
     logo_upload = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
     description = validators.UnicodeString()
 
