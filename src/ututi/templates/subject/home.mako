@@ -18,6 +18,8 @@
   ${ututi_prizes_portlet()}
 </%def>
 
+<h1 class="pageTitle">${c.subject.title}</h1>
+
 %if c.subject.deleted:
 <div id="note" style="margin-bottom: 25px; margin-top: 6px;">
   %if h.check_crowds(['moderator']):
@@ -34,37 +36,33 @@
 </div>
 %endif
 
-<div id="subject_description" class="content-block">
-  <div class="hdr">
-    <span class="huge" style="float: left;">${_("Subject's description")}</span>
-    %if c.came_from_search:
-    <script type="text/javascript">
-      <!--
-	 google_ad_client = "pub-1809251984220343";
-	 /* 468x60, sukurta 10.2.3 */
-	 google_ad_slot = "3543124516";
-	 google_ad_width = 468;
-	 google_ad_height = 60;
-	 //-->
-    </script>
-    <script type="text/javascript"
-	    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-    </script>
-    %endif
-    <div style="float: left; margin-top: 4px; margin-left: 20px;">
-      <a class="btn" href="${c.subject.url(action='edit')}" title="${_('Edit subject description')}">
-        <span>${_('Edit')}</span>
-      </a>
-    </div>
-    <br class="clear-left" />
-  </div>
-  <div class="content">
-    %if c.subject.description:
-      ${h.html_cleanup(c.subject.description)|n,decode.utf8}
-    %else:
-      ${_("The subject's description is empty.")}
-    %endif
-  </div>
+##google ads
+%if c.came_from_search:
+<script type="text/javascript">
+  <!--
+ google_ad_client = "pub-1809251984220343";
+ /* 468x60, sukurta 10.2.3 */
+ google_ad_slot = "3543124516";
+ google_ad_width = 468;
+ google_ad_height = 60;
+ //-->
+</script>
+<script type="text/javascript"
+	src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+%endif
+
+<div class="portlet portletSmall">
+			<div class="ctl"></div>
+			<div class="ctr"></div>
+			<div class="cbl"></div>
+			<div class="cbr"></div>
+            %if c.subject.description:
+              ${h.html_cleanup(c.subject.description)|n,decode.utf8}
+            %else:
+              ${_("The subject's description is empty.")}
+            %endif
+			<div class="right_arrow1"><a href="${c.subject.url(action='edit')}"> ${_('Edit')}</a></div>
 </div>
 
 <%files:file_browser obj="${c.subject}", title="${_('Subject files')}" />
