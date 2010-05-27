@@ -44,31 +44,31 @@ ${_('student information online')}
 
 <%def name="loggedin_header(user)">
 <form id="searchForm" action="${url(controller='profile', action='search')}">
-	<fieldset>
-		<legend class="a11y">${_('Search')}</legend>
-		<label class="textField">
+    <fieldset>
+        <legend class="a11y">${_('Search')}</legend>
+        <label class="textField">
           <span class="a11y">${_('Search text')}</span>
           <input type="text" name="text"/>
           <span class="edge"></span>
         </label>
         ${h.input_submit(_('search_'))}
-	</fieldset>
+    </fieldset>
 </form>
 <p class="a11y">${_('Main menu')}</p>
 <ul id="mainMenu">
-	<li><a href="${url(controller='profile', action='home')}">${_('Home')}</a></li>
-	<li><a href="${url(controller='profile', action='browse')}">${_('Browse')}</a></li>
-	<li class="expandable XXXdisabled"><a href="">${_('Groups')}</a></li>
-	<li><a href="${url(controller='community', action='index')}">${_('Community')}</a></li>
+    <li><a href="${url(controller='profile', action='home')}">${_('Home')}</a></li>
+    <li><a href="${url(controller='profile', action='browse')}">${_('Browse')}</a></li>
+    <li class="expandable XXXdisabled"><a href="">${_('Groups')}</a></li>
+    <li><a href="${url(controller='community', action='index')}">${_('Community')}</a></li>
 </ul>
 <p class="a11y">${_('User menu')}</p>
 <ul id="userMenu">
-	<li id="checkMail" class="XXXdisabled"><a href="">${_('inbox (%d)') % 4}</a></li>
+    <li id="checkMail" class="XXXdisabled"><a href="">${_('inbox (%d)') % 4}</a></li>
 
-	<li id="profileInfo">
-		<a href="${url(controller='profile', action='edit')}">${c.user.fullname}</a>
-	</li>
-	<li id="logout"><a href="${url(controller='home', action='logout')}">${_('exit')}</a></li>
+    <li id="profileInfo">
+        <a href="${url(controller='profile', action='edit')}">${c.user.fullname}</a>
+    </li>
+    <li id="logout"><a href="${url(controller='home', action='logout')}">${_('exit')}</a></li>
 </ul>
 
 </%def>
