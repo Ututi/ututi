@@ -89,7 +89,7 @@ You can import more subjects using the admin interface.
     Matematinė analizė
 
     >>> browser.getLink('Imported subject').click()
-    >>> browser.queryHTML("id('subject_description')//*[@class='content']/text()")
+    >>> browser.queryHTML("id('subject_description')//div[@class='content']/text()")
     ['Description of the subject']
 
     >>> browser.printQuery("id('subject_info_portlet_content')//h4")

@@ -1,21 +1,10 @@
-<%inherit file="/ubase-sidebar.mako" />
-<%namespace name="files" file="/sections/files.mako" />
-<%namespace file="/portlets/subject.mako" import="*"/>
+<%inherit file="/subject/base.mako" />
 <%namespace file="/sections/content_snippets.mako" import="*"/>
-<%namespace file="/portlets/banners/base.mako" import="*"/>
-
-<%def name="title()">
-  ${c.subject.title}
-</%def>
+<%namespace name="files" file="/sections/files.mako" />
 
 <%def name="head_tags()">
     ${parent.head_tags()}
    <%files:head_tags />
-</%def>
-
-<%def name="portlets()">
-  ${subject_info_portlet()}
-  ${ututi_prizes_portlet()}
 </%def>
 
 <h1 class="pageTitle">${c.subject.title}</h1>
@@ -52,18 +41,20 @@
 </script>
 %endif
 
-<%self:rounded_block>
+<%self:rounded_block id="subject_description">
    %if c.subject.description:
+   <div class="content">
 	 ${h.html_cleanup(c.subject.description)|n,decode.utf8}
+   </div>
    %else:
 	 ${_("The subject's description is empty.")}
    %endif
    <div class="right_arrow1"><a href="${c.subject.url(action='edit')}"> ${_('Edit')}</a></div>
 </%self:rounded_block>
 
-##<%files:file_browser obj="${c.subject}", title="${_('Subject files')}" />
+<%files:file_browser obj="${c.subject}", title="${_('Subject files')}" />
 
-<%self:rounded_block class_='portletGroupFiles'>
+<%self:rounded_block class_='portletGroupFiles' id="subject_pages">
 <div class="GroupFiles GroupFilesWiki">
   <%
      count = len([page for page in c.subject.pages if not page.isDeleted()])
@@ -81,7 +72,7 @@
         class_ = 'wiki-tekstas' if n < count - 1 else 'wiki-tekstas-last'
      %>
      <div class="${class_}">
-       <p><span class="orange bold">${page.title}</span>
+       <p><span class="orange bold"><a href="${page.url()}" title="${page.title}">${page.title}</a></span>
          <span class="grey verysmall"> ${h.fmt_dt(page.last_version.created_on)} </span>
          <span class="orange verysmall"><a href="${page.last_version.created.url()}">${page.last_version.created.fullname}</a></span>
        </p>

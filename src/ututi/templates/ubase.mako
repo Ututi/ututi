@@ -68,7 +68,7 @@ ${_('student information online')}
     <li id="profileInfo">
         <a href="${url(controller='profile', action='edit')}">${c.user.fullname}</a>
     </li>
-    <li id="logout"><a href="${url(controller='home', action='logout')}">${_('exit')}</a></li>
+    <li id="logout"><a href="${url(controller='home', action='logout')}">${_('log out')}</a></li>
 </ul>
 
 </%def>
@@ -161,8 +161,12 @@ ${_('student information online')}
   </body>
 </html>
 
-<%def name="rounded_block(class_='')">
-<div class="portlet portletSmall ${class_}">
+<%def name="rounded_block(class_='', id=None)">
+<div class="portlet portletSmall ${class_}"
+     %if id is not None:
+       id="${id}"
+     %endif
+>
   <div class="ctl"></div>
   <div class="ctr"></div>
   <div class="cbl"></div>

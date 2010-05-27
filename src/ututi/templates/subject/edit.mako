@@ -1,4 +1,4 @@
-<%inherit file="/subject/home.mako" />
+<%inherit file="/subject/base.mako" />
 
 <%namespace name="newlocationtag" file="/widgets/newlocationtag.mako" import="*"/>
 <%namespace file="/widgets/tags.mako" import="*"/>
