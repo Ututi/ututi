@@ -1,0 +1,18 @@
+table.group-type-choice {
+    width: 950px;
+    padding: 2em;
+}
+
+table.group-type-choice th {
+    text-align: left;
+    padding: 1em;
+}
+
+table.group-type-choice p.point {
+    padding: 0.5em;
+}
+
+table.group-type-choice td.button {
+    text-align: center;
+    padding: 1em;
+}
