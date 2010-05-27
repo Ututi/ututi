@@ -12,7 +12,7 @@ The subject:
 
 
     >>> browser.open('http://localhost/subject/vu/mat_analize')
-    >>> browser.printQuery('id("location")//div[@class="title"]/a/text()')
+    >>> browser.printQuery('id("BreadLinks")//li/a/text()')
     vu
 
 The group:
