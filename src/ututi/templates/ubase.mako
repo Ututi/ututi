@@ -160,3 +160,14 @@ ${_('student information online')}
 
   </body>
 </html>
+
+<%def name="rounded_block(class_='')">
+<div class="portlet portletSmall ${class_}">
+  <div class="ctl"></div>
+  <div class="ctr"></div>
+  <div class="cbl"></div>
+  <div class="cbr"></div>
+
+  ${caller.body()}
+</div>
+</%def>
