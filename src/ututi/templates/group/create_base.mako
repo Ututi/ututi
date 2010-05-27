@@ -264,3 +264,5 @@
     ${h.radio("page_visibility", "members", label=_('Members only'))}
   </label>
 </%def>
+
+${next.body()}
