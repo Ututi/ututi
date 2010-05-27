@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-05-14 19:23+0300\n"
+"PO-Revision-Date: 2010-05-27 14:54+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -56,6 +56,17 @@ msgstr ""
 msgid "Discussions on anything and everything"
 msgstr ""
 
+msgid ""
+"The web-based forum for this group has been disabled. Please use the "
+"mailing list instead."
+msgstr ""
+
+msgid "Community"
+msgstr ""
+
+msgid "Bugs"
+msgstr ""
+
 msgid "Post updated."
 msgstr ""
 
@@ -85,19 +96,28 @@ msgstr ""
 msgid "Bad file type, only files of the types '%(allowed)s' are supported."
 msgstr ""
 
+msgid "Please enter a title."
+msgstr ""
+
+msgid "Please enter a group identifier."
+msgstr ""
+
+msgid "The group identifier must be at least 4 characters long."
+msgstr ""
+
 msgid "Mailing List"
 msgstr ""
 
 msgid "Forum"
 msgstr ""
 
+msgid "Subjects"
+msgstr ""
+
 msgid "What's New?"
 msgstr ""
 
 msgid "Members"
-msgstr ""
-
-msgid "Subjects"
 msgstr ""
 
 msgid "Page"
@@ -124,6 +144,12 @@ msgstr ""
 msgid "The group's front page was updated."
 msgstr ""
 
+msgid "Mailing list"
+msgstr ""
+
+msgid "Web-based forum"
+msgstr ""
+
 msgid "Administrator"
 msgstr ""
 
@@ -131,12 +157,6 @@ msgid "Member"
 msgstr ""
 
 msgid "Leave group"
-msgstr ""
-
-msgid "Mailing list"
-msgstr ""
-
-msgid "Web-based forum"
 msgstr ""
 
 msgid "Group information and settings updated."
@@ -302,6 +322,11 @@ msgstr ""
 
 #, python-format
 msgid "Invalid emails: %s"
+msgstr ""
+
+msgid ""
+"The mailing list for this group has been disabled. Please use the web-"
+"based forum instead."
 msgstr ""
 
 msgid "Your message to the group was successfully sent."
@@ -626,6 +651,132 @@ msgstr ""
 msgid "go find something else"
 msgstr ""
 
+msgid "Search for notes"
+msgstr ""
+
+msgid "Your study materials"
+msgstr ""
+
+msgid "Subjects and files"
+msgstr ""
+
+msgid "Shared lecture notes"
+msgstr ""
+
+msgid "Universities and departments"
+msgstr ""
+
+msgid "Enter the search string"
+msgstr ""
+
+msgid "search_fp"
+msgstr ""
+
+msgid "Join"
+msgstr ""
+
+msgid "Full name"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Gadu gadu"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Repeat password"
+msgstr ""
+
+msgid "I agree to the "
+msgstr ""
+
+msgid "terms of use"
+msgstr ""
+
+msgid "Register"
+msgstr ""
+
+msgid "home_register_welcome"
+msgstr ""
+
+msgid "register"
+msgstr ""
+
+msgid "Create a group"
+msgstr ""
+
+msgid "Groups have"
+msgstr ""
+
+msgid "A mailing list or forum"
+msgstr ""
+
+msgid "Private file storage"
+msgstr ""
+
+msgid "A list of studied subjects"
+msgstr ""
+
+msgid "Create group"
+msgstr ""
+
+msgid "Popular subjects"
+msgstr ""
+
+#, python-format
+msgid "%(count)s <span class=\"a11y\">file</span>"
+msgid_plural "%(count)s <span class=\"a11y\">files</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(count)s <span class=\"a11y\">wiki page</span>"
+msgid_plural "%(count)s <span class=\"a11y\">wiki pages</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Watched by:"
+msgstr ""
+
+#, python-format
+msgid "%(count)s group"
+msgid_plural "%(count)s groups"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "and"
+msgstr ""
+
+#, python-format
+msgid "%(count)s member"
+msgid_plural "%(count)s members"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Active universities"
+msgstr ""
+
+#, python-format
+msgid "%(count)s subject"
+msgid_plural "%(count)s subjects"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(count)s file"
+msgid_plural "%(count)s files"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "All universities"
+msgstr ""
+
+msgid "Latest groups"
+msgstr ""
+
 msgid "student information online"
 msgstr ""
 
@@ -657,12 +808,6 @@ msgid "Change profile"
 msgstr ""
 
 msgid "Wrong password or username!"
-msgstr ""
-
-msgid "Email"
-msgstr ""
-
-msgid "Password"
 msgstr ""
 
 msgid "forgotten password?"
@@ -868,6 +1013,67 @@ msgid ""
 "people to use Ututi."
 msgstr ""
 
+msgid "„Ututi“ blog"
+msgstr ""
+
+msgid "ututi_twitter_url"
+msgstr ""
+
+msgid "„Ututi“ on twitter"
+msgstr ""
+
+msgid "ututi_facebook_url"
+msgstr ""
+
+msgid "„Ututi“ on Facebook"
+msgstr ""
+
+msgid "Join!"
+msgstr ""
+
+msgid "Login"
+msgstr ""
+
+msgid "remember me"
+msgstr ""
+
+msgid "Search text"
+msgstr ""
+
+msgid "search_"
+msgstr ""
+
+msgid "Main menu"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "Browse"
+msgstr ""
+
+msgid "Groups"
+msgstr ""
+
+msgid "User menu"
+msgstr ""
+
+#, python-format
+msgid "inbox (%d)"
+msgstr ""
+
+msgid "exit"
+msgstr ""
+
+msgid "ututi_link"
+msgstr ""
+
+msgid "UAB „UTUTI“"
+msgstr ""
+
+msgid "About ututi"
+msgstr ""
+
 msgid "Adminstration dashboard"
 msgstr ""
 
@@ -915,9 +1121,6 @@ msgid "found %(count)s event"
 msgid_plural "found %(count)s events"
 msgstr[0] ""
 msgstr[1] ""
-
-msgid "Groups"
-msgstr ""
 
 msgid "CSV File"
 msgstr ""
@@ -967,24 +1170,6 @@ msgid_plural "found %(count)s users"
 msgstr[0] ""
 msgstr[1] ""
 
-#, python-format
-msgid "%(count)s subject"
-msgid_plural "%(count)s subjects"
-msgstr[0] ""
-msgstr[1] ""
-
-#, python-format
-msgid "%(count)s group"
-msgid_plural "%(count)s groups"
-msgstr[0] ""
-msgstr[1] ""
-
-#, python-format
-msgid "%(count)s file"
-msgid_plural "%(count)s files"
-msgstr[0] ""
-msgstr[1] ""
-
 msgid "Sort  by: "
 msgstr ""
 
@@ -992,9 +1177,6 @@ msgid "More universities"
 msgstr ""
 
 msgid "UTUTI - student information online"
-msgstr ""
-
-msgid "About ututi"
 msgstr ""
 
 msgid "ututi_video_id"
@@ -1097,14 +1279,21 @@ msgid "Ututi team"
 msgstr ""
 
 #, python-format
+msgid "%(person_title)s posted on the '%(forum_title)s' forum:"
+msgstr ""
+
+msgid "You can find the thread online here:"
+msgstr ""
+
+msgid "The Ututi team"
+msgstr ""
+
+#, python-format
 msgid "Your request to join the group %(groupname)s has been confirmed."
 msgstr ""
 
 #, python-format
 msgid "You may visit the group's page here: %(url)s ."
-msgstr ""
-
-msgid "The Ututi team"
 msgstr ""
 
 #, python-format
@@ -1247,6 +1436,12 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
+msgid "Subscribe to emails"
+msgstr ""
+
+msgid "Unsubscribe from emails"
+msgstr ""
+
 msgid "Reply"
 msgstr ""
 
@@ -1320,19 +1515,25 @@ msgstr ""
 msgid "Finish choosing subjects"
 msgstr ""
 
-msgid "The file type is not supported."
+msgid "New public group"
 msgstr ""
 
-msgid "Change logo"
+msgid "Create a public group"
 msgstr ""
 
-msgid "Delete current logo"
+msgid "What can you do with public groups?"
 msgstr ""
 
-msgid "Tags"
+msgid "Group address on the web"
 msgstr ""
 
-msgid "Default group tab"
+msgid "Group e-mail address"
+msgstr ""
+
+msgid "Group can subscribe to subjects"
+msgstr ""
+
+msgid "Group has a file storage area"
 msgstr ""
 
 msgid "Forum type"
@@ -1362,6 +1563,21 @@ msgstr ""
 msgid "Group page visibility"
 msgstr ""
 
+msgid "The file type is not supported."
+msgstr ""
+
+msgid "Change logo"
+msgstr ""
+
+msgid "Delete current logo"
+msgstr ""
+
+msgid "Tags"
+msgstr ""
+
+msgid "Default group tab"
+msgstr ""
+
 msgid "Edit group front page"
 msgstr ""
 
@@ -1373,6 +1589,21 @@ msgid "You can keep up to %s of private group files here (e.g. pictures)"
 msgstr ""
 
 msgid "Add more subjects"
+msgstr ""
+
+msgid "Choose group type"
+msgstr ""
+
+msgid "What kind of a group do you want to create?"
+msgstr ""
+
+msgid "Academic group"
+msgstr ""
+
+msgid "Public group"
+msgstr ""
+
+msgid "Custom group"
 msgstr ""
 
 msgid "Invite group members!"
@@ -1680,31 +1911,10 @@ msgstr ""
 msgid "Fullname"
 msgstr ""
 
-msgid "Gadu gadu"
-msgstr ""
-
-msgid "Repeat password"
-msgstr ""
-
-msgid "I agree to the "
-msgstr ""
-
-msgid "terms of use"
-msgstr ""
-
-msgid "Register"
-msgstr ""
-
 msgid "Registration"
 msgstr ""
 
-msgid "Join"
-msgstr ""
-
 msgid "Your email address"
-msgstr ""
-
-msgid "Login"
 msgstr ""
 
 #, python-format
@@ -1748,12 +1958,6 @@ msgstr ""
 
 msgid "Mailing list address"
 msgstr ""
-
-#, python-format
-msgid "%(count)s member"
-msgid_plural "%(count)s members"
-msgstr[0] ""
-msgstr[1] ""
 
 msgid "more settings"
 msgstr ""
@@ -1829,16 +2033,10 @@ msgid_plural "%(count)s <em>files</em>"
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "Latest groups"
-msgstr ""
-
 msgid "There are no groups yet."
 msgstr ""
 
 msgid "All groups"
-msgstr ""
-
-msgid "Create group"
 msgstr ""
 
 msgid "Subject information"
@@ -1846,6 +2044,21 @@ msgstr ""
 
 msgid "Lecturer"
 msgstr ""
+
+msgid "Subject rating:"
+msgstr ""
+
+#, python-format
+msgid "<em>%(count)s</em> user"
+msgid_plural "<em>%(count)s</em> users"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "<em>%(count)s</em> group"
+msgid_plural "<em>%(count)s</em> groups"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "Watch subject"
 msgstr ""
@@ -1946,9 +2159,6 @@ msgid "back to the profile"
 msgstr ""
 
 msgid "Personal information"
-msgstr ""
-
-msgid "Full name"
 msgstr ""
 
 msgid "Address of your website or blog"

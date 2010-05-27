@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-05-14 19:23+0300\n"
+"PO-Revision-Date: 2010-05-27 14:54+0300\n"
 "Last-Translator: Jaroslav Šatkevič <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -57,6 +57,17 @@ msgstr ""
 msgid "Discussions on anything and everything"
 msgstr ""
 
+msgid ""
+"The web-based forum for this group has been disabled. Please use the "
+"mailing list instead."
+msgstr ""
+
+msgid "Community"
+msgstr ""
+
+msgid "Bugs"
+msgstr ""
+
 msgid "Post updated."
 msgstr ""
 
@@ -86,20 +97,29 @@ msgstr "ID nie może być wykorzystywane jako adres e-mail"
 msgid "Bad file type, only files of the types '%(allowed)s' are supported."
 msgstr "Niewłaściwy rodzaj pliku. Dozwolone formaty:'%(allowed)s'"
 
+msgid "Please enter a title."
+msgstr ""
+
+msgid "Please enter a group identifier."
+msgstr ""
+
+msgid "The group identifier must be at least 4 characters long."
+msgstr ""
+
 msgid "Mailing List"
 msgstr ""
 
 msgid "Forum"
 msgstr "Forum"
 
+msgid "Subjects"
+msgstr "Przedmioty"
+
 msgid "What's New?"
 msgstr ""
 
 msgid "Members"
 msgstr "Użytkownicy"
-
-msgid "Subjects"
-msgstr "Przedmioty"
 
 msgid "Page"
 msgstr "Strona"
@@ -125,6 +145,12 @@ msgstr "Twoje zgłoszenie jeszcze nie zostało zaakceptowane."
 msgid "The group's front page was updated."
 msgstr "Strona główna grupy została zaktualizowana."
 
+msgid "Mailing list"
+msgstr ""
+
+msgid "Web-based forum"
+msgstr ""
+
 msgid "Administrator"
 msgstr "Administrator"
 
@@ -133,12 +159,6 @@ msgstr "Członek"
 
 msgid "Leave group"
 msgstr "Wyjdź z grupy"
-
-msgid "Mailing list"
-msgstr ""
-
-msgid "Web-based forum"
-msgstr ""
 
 msgid "Group information and settings updated."
 msgstr "Informacje o grupie oraz ustawienia zostały zaktualizowane."
@@ -315,6 +335,11 @@ msgstr "Z Ututi już korzysta: %s."
 #, python-format
 msgid "Invalid emails: %s"
 msgstr "Niepoprawne emaile: %s"
+
+msgid ""
+"The mailing list for this group has been disabled. Please use the web-"
+"based forum instead."
+msgstr ""
 
 msgid "Your message to the group was successfully sent."
 msgstr "Twoja wiadomość do grupy została pomyślnie wysłana."
@@ -654,6 +679,138 @@ msgstr "wróć"
 msgid "go find something else"
 msgstr "poszukaj czegoś innego"
 
+msgid "Search for notes"
+msgstr ""
+
+msgid "Your study materials"
+msgstr ""
+
+msgid "Subjects and files"
+msgstr ""
+
+msgid "Shared lecture notes"
+msgstr ""
+
+msgid "Universities and departments"
+msgstr ""
+
+msgid "Enter the search string"
+msgstr ""
+
+msgid "search_fp"
+msgstr ""
+
+msgid "Join"
+msgstr "Dołącz"
+
+msgid "Full name"
+msgstr "Imię i nazwisko"
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "Gadu gadu"
+msgstr "Gadu Gadu"
+
+msgid "Password"
+msgstr "Hasło"
+
+msgid "Repeat password"
+msgstr "Powtórz hasło"
+
+msgid "I agree to the "
+msgstr "Akceptuję"
+
+msgid "terms of use"
+msgstr "regulamin"
+
+msgid "Register"
+msgstr "Zaloguj się"
+
+msgid "home_register_welcome"
+msgstr ""
+
+msgid "register"
+msgstr ""
+
+msgid "Create a group"
+msgstr ""
+
+msgid "Groups have"
+msgstr ""
+
+msgid "A mailing list or forum"
+msgstr ""
+
+msgid "Private file storage"
+msgstr ""
+
+msgid "A list of studied subjects"
+msgstr ""
+
+msgid "Create group"
+msgstr "Utwórz grupę"
+
+msgid "Popular subjects"
+msgstr ""
+
+#, python-format
+msgid "%(count)s <span class=\"a11y\">file</span>"
+msgid_plural "%(count)s <span class=\"a11y\">files</span>"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, python-format
+msgid "%(count)s <span class=\"a11y\">wiki page</span>"
+msgid_plural "%(count)s <span class=\"a11y\">wiki pages</span>"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "Watched by:"
+msgstr ""
+
+#, python-format
+msgid "%(count)s group"
+msgid_plural "%(count)s groups"
+msgstr[0] "%(count)s grupa"
+msgstr[1] "%(count)s grupy"
+msgstr[2] "%(count)s grup"
+
+msgid "and"
+msgstr ""
+
+#, python-format
+msgid "%(count)s member"
+msgid_plural "%(count)s members"
+msgstr[0] "%(count)s członek"
+msgstr[1] "%(count)s członków"
+msgstr[2] "%(count)s członków"
+
+msgid "Active universities"
+msgstr ""
+
+#, python-format
+msgid "%(count)s subject"
+msgid_plural "%(count)s subjects"
+msgstr[0] "%(count)s przedmiot"
+msgstr[1] "%(count)s przedmioty"
+msgstr[2] "%(count)s przedmiotów"
+
+#, python-format
+msgid "%(count)s file"
+msgid_plural "%(count)s files"
+msgstr[0] "%(count)s dokument"
+msgstr[1] "%(count)s dokumenty"
+msgstr[2] "%(count)s dokumentów"
+
+msgid "All universities"
+msgstr ""
+
+msgid "Latest groups"
+msgstr "Najnowsze grupy"
+
 msgid "student information online"
 msgstr "studencka wiedza w sieci"
 
@@ -686,12 +843,6 @@ msgstr "Popraw profil"
 
 msgid "Wrong password or username!"
 msgstr "Niepoprawne hasło lub login"
-
-msgid "Email"
-msgstr "E-mail"
-
-msgid "Password"
-msgstr "Hasło"
 
 msgid "forgotten password?"
 msgstr "Zapomniałeś hasła?"
@@ -949,6 +1100,67 @@ msgstr ""
 "Stąd możesz też z łatwością utworzyć przedmiot, dodać plik, zaprosić do "
 "Ututi znajomych."
 
+msgid "„Ututi“ blog"
+msgstr ""
+
+msgid "ututi_twitter_url"
+msgstr ""
+
+msgid "„Ututi“ on twitter"
+msgstr ""
+
+msgid "ututi_facebook_url"
+msgstr ""
+
+msgid "„Ututi“ on Facebook"
+msgstr ""
+
+msgid "Join!"
+msgstr ""
+
+msgid "Login"
+msgstr "Login"
+
+msgid "remember me"
+msgstr ""
+
+msgid "Search text"
+msgstr ""
+
+msgid "search_"
+msgstr ""
+
+msgid "Main menu"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "Browse"
+msgstr ""
+
+msgid "Groups"
+msgstr "Grupy"
+
+msgid "User menu"
+msgstr ""
+
+#, python-format
+msgid "inbox (%d)"
+msgstr ""
+
+msgid "exit"
+msgstr ""
+
+msgid "ututi_link"
+msgstr ""
+
+msgid "UAB „UTUTI“"
+msgstr ""
+
+msgid "About ututi"
+msgstr "O ututi"
+
 msgid "Adminstration dashboard"
 msgstr "Panel administracyjny"
 
@@ -998,9 +1210,6 @@ msgid_plural "found %(count)s events"
 msgstr[0] "znaleziono %(count)s wydarzenie"
 msgstr[1] "znaleziono %(count)s wydarzenia"
 msgstr[2] "znaleziono %(count)s wydarzeń"
-
-msgid "Groups"
-msgstr "Grupy"
 
 msgid "CSV File"
 msgstr "Plik CSV"
@@ -1052,27 +1261,6 @@ msgstr[0] "znaleziono  %(count)s użytkownika"
 msgstr[1] "znaleziono  %(count)s użytkowników"
 msgstr[2] "znaleziono  %(count)s użytkowników"
 
-#, python-format
-msgid "%(count)s subject"
-msgid_plural "%(count)s subjects"
-msgstr[0] "%(count)s przedmiot"
-msgstr[1] "%(count)s przedmioty"
-msgstr[2] "%(count)s przedmiotów"
-
-#, python-format
-msgid "%(count)s group"
-msgid_plural "%(count)s groups"
-msgstr[0] "%(count)s grupa"
-msgstr[1] "%(count)s grupy"
-msgstr[2] "%(count)s grup"
-
-#, python-format
-msgid "%(count)s file"
-msgid_plural "%(count)s files"
-msgstr[0] "%(count)s dokument"
-msgstr[1] "%(count)s dokumenty"
-msgstr[2] "%(count)s dokumentów"
-
 msgid "Sort  by: "
 msgstr "Sortuj według: "
 
@@ -1081,9 +1269,6 @@ msgstr "Więcej uczelni"
 
 msgid "UTUTI - student information online"
 msgstr "UTUTI - studencka wiedza w sieci"
-
-msgid "About ututi"
-msgstr "O ututi"
 
 msgid "ututi_video_id"
 msgstr "ututi_video_id"
@@ -1200,15 +1385,22 @@ msgid "Ututi team"
 msgstr "Załoga Ututi"
 
 #, python-format
+msgid "%(person_title)s posted on the '%(forum_title)s' forum:"
+msgstr ""
+
+msgid "You can find the thread online here:"
+msgstr ""
+
+msgid "The Ututi team"
+msgstr "Załoga Ututi"
+
+#, python-format
 msgid "Your request to join the group %(groupname)s has been confirmed."
 msgstr "Twoja prośba o przyjęcie do grupy %(groupname)s została zaakceptowana."
 
 #, python-format
 msgid "You may visit the group's page here: %(url)s ."
 msgstr ""
-
-msgid "The Ututi team"
-msgstr "Załoga Ututi"
 
 #, python-format
 msgid "Your request to join the group %(groupname)s has been denied."
@@ -1357,6 +1549,12 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
+msgid "Subscribe to emails"
+msgstr ""
+
+msgid "Unsubscribe from emails"
+msgstr ""
+
 msgid "Reply"
 msgstr "Odpowiedź"
 
@@ -1434,20 +1632,26 @@ msgstr "Zaproś do grupy"
 msgid "Finish choosing subjects"
 msgstr "Zakończ wybór przedmiotów"
 
-msgid "The file type is not supported."
-msgstr "Niewłaściwy rodzaj dokumentu."
+msgid "New public group"
+msgstr ""
 
-msgid "Change logo"
-msgstr "Zmień logo"
+msgid "Create a public group"
+msgstr ""
 
-msgid "Delete current logo"
-msgstr "Usuń aktualne logo"
+msgid "What can you do with public groups?"
+msgstr ""
 
-msgid "Tags"
-msgstr "Tagi"
+msgid "Group address on the web"
+msgstr ""
 
-msgid "Default group tab"
-msgstr "Podstawowy widok"
+msgid "Group e-mail address"
+msgstr ""
+
+msgid "Group can subscribe to subjects"
+msgstr ""
+
+msgid "Group has a file storage area"
+msgstr ""
 
 msgid "Forum type"
 msgstr ""
@@ -1476,6 +1680,21 @@ msgstr ""
 msgid "Group page visibility"
 msgstr ""
 
+msgid "The file type is not supported."
+msgstr "Niewłaściwy rodzaj dokumentu."
+
+msgid "Change logo"
+msgstr "Zmień logo"
+
+msgid "Delete current logo"
+msgstr "Usuń aktualne logo"
+
+msgid "Tags"
+msgstr "Tagi"
+
+msgid "Default group tab"
+msgstr "Podstawowy widok"
+
 msgid "Edit group front page"
 msgstr "Edytuj stronę startową grupy"
 
@@ -1488,6 +1707,21 @@ msgstr "Możesz przechowywać tu nawet %s prywatnych plików grupy (n.p. zdjęć
 
 msgid "Add more subjects"
 msgstr "Dodaj więcej przedmiotów"
+
+msgid "Choose group type"
+msgstr ""
+
+msgid "What kind of a group do you want to create?"
+msgstr ""
+
+msgid "Academic group"
+msgstr ""
+
+msgid "Public group"
+msgstr ""
+
+msgid "Custom group"
+msgstr ""
 
 msgid "Invite group members!"
 msgstr "Zaproś kolegów z Twojej grupy!"
@@ -1817,32 +2051,11 @@ msgstr "Dołącz do Ututi"
 msgid "Fullname"
 msgstr "Imię, nazwisko"
 
-msgid "Gadu gadu"
-msgstr "Gadu Gadu"
-
-msgid "Repeat password"
-msgstr "Powtórz hasło"
-
-msgid "I agree to the "
-msgstr "Akceptuję"
-
-msgid "terms of use"
-msgstr "regulamin"
-
-msgid "Register"
-msgstr "Zaloguj się"
-
 msgid "Registration"
 msgstr "Rejestracja"
 
-msgid "Join"
-msgstr "Dołącz"
-
 msgid "Your email address"
 msgstr "Twój adres e-mail"
-
-msgid "Login"
-msgstr "Login"
 
 #, python-format
 msgid "<em>%(count)s</em> active poster"
@@ -1888,13 +2101,6 @@ msgstr "O grupie"
 
 msgid "Mailing list address"
 msgstr "Adres listy mailingowej"
-
-#, python-format
-msgid "%(count)s member"
-msgid_plural "%(count)s members"
-msgstr[0] "%(count)s członek"
-msgstr[1] "%(count)s członków"
-msgstr[2] "%(count)s członków"
 
 msgid "more settings"
 msgstr "dodatkowe ustawienia"
@@ -1975,23 +2181,34 @@ msgstr[0] "%(count)s <em>plik</em>"
 msgstr[1] "%(count)s <em>pliki</em>"
 msgstr[2] "%(count)s <em>plików</em>"
 
-msgid "Latest groups"
-msgstr "Najnowsze grupy"
-
 msgid "There are no groups yet."
 msgstr "Nie ma jeszcze grup."
 
 msgid "All groups"
 msgstr "Wszystkie grupy"
 
-msgid "Create group"
-msgstr "Utwórz grupę"
-
 msgid "Subject information"
 msgstr "Informacje o przedmiocie"
 
 msgid "Lecturer"
 msgstr "Prowadzący"
+
+msgid "Subject rating:"
+msgstr ""
+
+#, python-format
+msgid "<em>%(count)s</em> user"
+msgid_plural "<em>%(count)s</em> users"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, python-format
+msgid "<em>%(count)s</em> group"
+msgid_plural "<em>%(count)s</em> groups"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "Watch subject"
 msgstr "Obserwuj przedmiot"
@@ -2099,9 +2316,6 @@ msgstr "wróć do profilu"
 
 msgid "Personal information"
 msgstr "Dane osobowe"
-
-msgid "Full name"
-msgstr "Imię i nazwisko"
 
 msgid "Address of your website or blog"
 msgstr "Adres Twojej strony lub bloga"
