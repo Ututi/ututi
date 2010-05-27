@@ -28,7 +28,7 @@ from webhelpers.pylonslib import Flash as _Flash
 flash = _Flash()
 
 
-def button_to(name, url='', **html_options):
+def button_to(title, url='', **html_options):
     """Generate a form containing a sole button that submits to
     ``url``.
 
@@ -107,22 +107,22 @@ def button_to(name, url='', **html_options):
 
     form_method = (method.upper() == 'GET' and method.lower()) or 'post'
 
-    url, name = url, name or url
+    url, title = url, title or url
 
     submit_type = html_options.get('type')
     img_source = html_options.get('src')
     if submit_type == 'image' and img_source:
-        html_options["value"] = name
-        html_options.setdefault("alt", name)
+        html_options["value"] = title
+        html_options.setdefault("alt", title)
     else:
         html_options["type"] = "submit"
-        html_options["value"] = name
+        html_options["value"] = title
 
     if c.new_design:
         #html_options.pop("value")
         html_options.setdefault('class_', "btn")
         return HTML.form(method=form_method, action=url, class_="button-to",
-                         c=[HTML.fieldset(c=[method_tag, HTML.button(c=[HTML.span(name)], **html_options)])])
+                         c=[HTML.fieldset(c=[method_tag, HTML.button(c=[HTML.span(title)], **html_options)])])
     else:
         return HTML.form(method=form_method, action=url, class_="button-to",
                          c=[HTML.div(method_tag, HTML.span(HTML.input(**html_options), class_="btn"))])

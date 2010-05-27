@@ -8,7 +8,7 @@ Group creation path
 Public groups
 -------------
 
-    >>> browser.getLink('Public group').click()
+    >>> browser.getControl(name='create-public-group').click()
 
 We should be redirected to the registration form:
 
@@ -144,7 +144,7 @@ Academic groups
 This time, let's try creating an academic group:
 
     >>> browser.open('http://localhost/groups/group_type')
-    >>> browser.getLink('Academic group').click()
+    >>> browser.getControl(name='create-academic-group').click()
 
     >>> browser.getControl('Group e-mail address').value = 'test2'
     >>> browser.getControl('Group title').value = 'Another test group'
@@ -188,7 +188,7 @@ Custom groups
 Finally, custom groups:
 
     >>> browser.open('http://localhost/groups/group_type')
-    >>> browser.getLink('Custom group').click()
+    >>> browser.getControl(name='create-custom-group').click()
 
     >>> browser.getControl('Group e-mail address').value = 'test3'
     >>> browser.getControl('Group title').value = 'Another test group'

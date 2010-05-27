@@ -49,13 +49,13 @@ ${_('Choose group type')}
   </tr>
   <tr>
     <td class="button">
-      ${h.button_to(_('Create group'), url(controller='group', action='create_academic'), class_='btnPlus btnLarge')}
+      ${h.button_to(_('Create group'), url(controller='group', action='create_academic'), class_='btnPlus btnLarge', name='create-academic-group', method='GET')}
     </td>
     <td class="button">
-      ${h.button_to(_('Create group'), url(controller='group', action='create_public'), class_='btnPlus btnLarge')}
+      ${h.button_to(_('Create group'), url(controller='group', action='create_public'), class_='btnPlus btnLarge', name='create-public-group', method='GET')}
     </td>
     <td class="button">
-      ${h.button_to(_('Create group'), url(controller='group', action='create_custom'), class_='btnPlus btnLarge')}
+      ${h.button_to(_('Create group'), url(controller='group', action='create_custom'), class_='btnPlus btnLarge', name='create-custom-group', method='GET')}
     </td>
   </tr>
 </table>
