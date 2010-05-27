@@ -278,12 +278,13 @@ def input_line(name, title, value='', explanation=None, **kwargs):
         expl = HTML.div(class_='explanation', c=explanation)
 
     from pylons import tmpl_context as c
+    kwargs.setdefault('id', name)
     if c.new_design:
         return HTML.label(c=[
             HTML.span(class_='labelText', c=[title]),
             HTML.literal('<form:error name="%s" />' % name),
             HTML.span(class_='textField', c=[
-                HTML.input(type='text', id=name, name_=name, value=value, **kwargs),
+                HTML.input(type='text', name_=name, value=value, **kwargs),
                 HTML.span(class_='edge')
                 ])])
     else:
@@ -292,7 +293,7 @@ def input_line(name, title, value='', explanation=None, **kwargs):
                 HTML.literal('<form:error name="%s" />' % name),
                 HTML.div(class_='input-line', c=[
                         HTML.div(c=[
-                                HTML.input(type='text', id=name, name_=name, value=value, **kwargs)])]),
+                                HTML.input(type='text', name_=name, value=value, **kwargs)])]),
                 expl
                 ])
 
