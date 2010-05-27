@@ -1,4 +1,4 @@
-<%inherit file="/base.mako" />
+<%inherit file="/ubase-sidebar.mako" />
 <%namespace name="files" file="/sections/files.mako" />
 <%namespace file="/portlets/subject.mako" import="*"/>
 <%namespace file="/sections/content_snippets.mako" import="*"/>
@@ -14,10 +14,8 @@
 </%def>
 
 <%def name="portlets()">
-<div id="sidebar">
   ${subject_info_portlet()}
   ${ututi_prizes_portlet()}
-</div>
 </%def>
 
 %if c.subject.deleted:

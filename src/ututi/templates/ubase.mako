@@ -142,7 +142,7 @@ ${_('student information online')}
       %endif
 
       ${self.flash_messages()}
-      ${self.body()}
+      ${next.body()}
       </div>
       <div class="push"></div>
     </div>
