@@ -371,7 +371,7 @@ $(document).ready(function(){
                 <span class="file_rename_input_decorator">
                   <input class="file_rename_input" type="text" />
                 </span>
-                <span class="btn"><input class="rename_confirm" type="button" value="${_('Rename')}"/></span>
+                ${h.input_submit(_('Rename'), class_='rename_confirm btn')}
               </span>
               <img src="${url('/images/details/icon_rename.png')}" alt="${_('edit file name')}" class="rename_button" />
             %endif
@@ -407,7 +407,9 @@ $(document).ready(function(){
               <input class="copy_url" type="hidden" value="${file.url(action='copy')}" />
               <input class="restore_url" type="hidden" value="${file.url(action='restore')}" />
               <input class="folder_title_value" type="hidden" value="${file.folder}" />
-              <img src="${url('/images/restore.png')}" alt="${_('restore file')}" class="restore_button" />
+              <span>
+                <img src="${url('/images/restore.png')}" alt="${_('restore file')}" class="restore_button" />
+              </span>
             </li>
   %endif
 </%def>
@@ -605,11 +607,8 @@ $(document).ready(function(){
         <div style="float: left; margin-left: 20px;">
           <form action="${obj.url(action='create_folder')}">
             <div>
-              <label for="folder">${_('New folder:')}</label>
-              <input name="folder" id="new_folder_input-${section_id}" type="text" value="" class="new-folder-name" />
-              <span class="btn">
-                <input id="new_folder_button-${section_id}" class="new_folder_button" type="submit" value="${_('create')}" />
-              </span>
+              ${h.input_line('folder', _('New folder:'), class_="new-folder-name", id="new_folder_input-%s"%section_id)}
+              ${h.input_submit(_('create'), id="new_folder_button-%s" % section_id, class_="new_folder_button btn")}
             </div>
           </form>
         </div>
