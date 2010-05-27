@@ -18,6 +18,7 @@ ${_('New public group')}
         ${self.forum_type_and_id()}
 
         ${self.location_field()}
+        ${self.year_field()}
 
         ${self.can_add_subjects()}
         ${self.has_file_storage()}

@@ -178,6 +178,7 @@ class CreateAcademicGroupForm(CreateGroupFormBase):
 class CreateCustomGroupForm(CreateGroupFormBase):
     """A schema for creating custom groups."""
 
+    year = validators.String()
     can_add_subjects = validators.Bool()
     file_storage = validators.Bool()
 
@@ -481,6 +482,8 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         return htmlfill.render(self._create_public_form())
 
     def _create_custom_form(self):
+        c.current_year = date.today().year
+        c.years = range(c.current_year - 10, c.current_year + 5)
         c.forum_type = 'mailinglist'
         c.forum_types = [('mailinglist', _('Mailing list')),
                          ('forum', _('Web-based forum'))]
@@ -492,9 +495,11 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     def create_custom(self):
         if hasattr(self, 'form_result'):
             values = self.form_result
+            year = int(values.get('year') or '2010') # XXX
             group = Group(group_id=values['id'],
                           title=values['title'],
-                          description=values['description'])
+                          description=values['description'],
+                          year=date(year, 1, 1))
             tag = values.get('location', None)
             group.location = tag
 
