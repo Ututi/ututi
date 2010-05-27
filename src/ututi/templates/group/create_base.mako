@@ -13,18 +13,6 @@
   <%newlocationtag:head_tags />
 </%def>
 
-<%def name="portlets()">
-<div id="sidebar">
-  <div class="search-header">
-    ${_('Recommended groups from your university and faculty')}
-  </div>
-  <div class="message">
-    ${_('Enter your university and faculty and you will be able to see groups that are already here. If you find your group, join them!')}
-  </div>
-</div>
-</%def>
-
-
 <%def name="path_steps(step=0)">
 <div id="steps">
   %for index, title in enumerate([_('Group settings'), _('Member invitations')]):
@@ -204,10 +192,11 @@
 <script type="text/javascript">
 //<![CDATA[
   $(document).ready(function() {
-    $('.group_live_search').change(function() {
+    $('select.group_live_search').change(function() {
       parameters = {'location-0': $('#location-0-0').val(),
                     'location-1': $('#location-0-1').val(),
                     'year': $('#year').val()}
+      $('div.group-type-info').hide();
       $('#sidebar').load(
           '${url(controller="group", action="js_group_search")}',
           parameters);
@@ -219,9 +208,21 @@
 
 <%def name="right_pane(title)">
   <div id="CreatePubliCGroupRight">
-    <h1 class="pageTitle">${title}</h1>
-      ${caller.body()}
+    <div class="group-type-info">
+      <h1 class="pageTitle">${title}</h1>
+        ${caller.body()}
+    </div>
+
+    <div id="sidebar">
+      <div class="search-header">
+        ${_('Recommended groups from your university and faculty')}
+      </div>
+      <div class="message">
+        ${_('Enter your university and faculty and you will be able to see groups that are already here. If you find your group, join them!')}
+      </div>
+    </div>
   </div>
+
 </%def>
 
 <%def name="access_settings()">
