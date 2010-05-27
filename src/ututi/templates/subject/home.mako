@@ -52,39 +52,47 @@
 </script>
 %endif
 
-<div class="portlet portletSmall">
-			<div class="ctl"></div>
-			<div class="ctr"></div>
-			<div class="cbl"></div>
-			<div class="cbr"></div>
-            %if c.subject.description:
-              ${h.html_cleanup(c.subject.description)|n,decode.utf8}
-            %else:
-              ${_("The subject's description is empty.")}
-            %endif
-			<div class="right_arrow1"><a href="${c.subject.url(action='edit')}"> ${_('Edit')}</a></div>
-</div>
+<%self:rounded_block>
+   %if c.subject.description:
+	 ${h.html_cleanup(c.subject.description)|n,decode.utf8}
+   %else:
+	 ${_("The subject's description is empty.")}
+   %endif
+   <div class="right_arrow1"><a href="${c.subject.url(action='edit')}"> ${_('Edit')}</a></div>
+</%self:rounded_block>
 
-<%files:file_browser obj="${c.subject}", title="${_('Subject files')}" />
+##<%files:file_browser obj="${c.subject}", title="${_('Subject files')}" />
 
-<div id="subject_pages" class="section">
-  <h2>${_('Pages')}</h2>
-  <div class="container">
-    <br />
-    %if c.user:
-    <a class="btn" href="${url(controller='subjectpage', action='add', id=c.subject.subject_id, tags=c.subject.location_path)}">
-      <span>${_('New page')}</span>
-    </a>
-    %endif
-    % if c.subject.pages:
-      % for page in c.subject.pages:
-        % if not page.isDeleted() or h.check_crowds(['moderator']):
-          ${page_extra(page)}
-        % endif
-      % endfor
-    % else:
-      <br />
-      <span class="notice">${_('The subject has no pages yet - create one!')}</span>
-    % endif
-  </div>
+<%self:rounded_block class_='portletGroupFiles'>
+<div class="GroupFiles GroupFilesWiki">
+  <%
+     count = len([page for page in c.subject.pages if not page.isDeleted()])
+  %>
+  <h2 class="portletTitle bold">${_("Subject's Wiki Pages")} (${count})</h2>
+  <span class="group-but">
+      ${h.button_to(_('Create a wiki document'), url(controller='subjectpage', action='add', id=c.subject.subject_id, tags=c.subject.location_path),
+                method='GET')}
+  </span>
 </div>
+% if c.subject.pages:
+  % for n, page in enumerate(c.subject.pages):
+	% if not page.isDeleted() or h.check_crowds(['moderator']):
+     <%
+        class_ = 'wiki-tekstas' if n < count - 1 else 'wiki-tekstas-last'
+     %>
+     <div class="${class_}">
+       <p><span class="orange bold">${page.title}</span>
+         <span class="grey verysmall"> ${h.fmt_dt(page.last_version.created_on)} </span>
+         <span class="orange verysmall"><a href="${page.last_version.created.url()}">${page.last_version.created.fullname}</a></span>
+       </p>
+       <p>
+         ${h.ellipsis(page.last_version.plain_text, 250)}
+       </p>
+     </div>
+	% endif
+  % endfor
+% else:
+  <br />
+  <span class="notice">${_('The subject has no pages yet - create one!')}</span>
+% endif
+</%self:rounded_block>
