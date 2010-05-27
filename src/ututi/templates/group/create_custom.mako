@@ -6,7 +6,7 @@ ${_('New public group')}
 
 
   <div id="CreatePubliCGroupLeft">
-    <h1 class="pageTitle">${_('Create a public group')}</h1>
+    <h1 class="pageTitle">${_('Create a custom group')}</h1>
 
     <form method="post" action="${url(controller='group', action='create_custom')}"
          id="group_add_form" enctype="multipart/form-data">
