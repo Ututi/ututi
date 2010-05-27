@@ -11,23 +11,6 @@
 <%def name="head_tags()">
   ${parent.head_tags()}
   <%newlocationtag:head_tags />
-
-  <!-- Temporary hack until we get proper HTML -->
-  <style type="text/css">
-      #CreatePubliCGroupLeft input[type=checkbox] {
-        width: 1em !important;
-      }
-      #CreatePubliCGroupLeft input[type=radio] {
-        width: 1em !important;
-      }
-      #CreatePubliCGroupLeft label.checkbox {
-        display: block;
-      }
-      #CreatePubliCGroupLeft label.checkbox span.labelText {
-        display: inline !important;
-        width: 300px !important;
-      }
-  </style>
 </%def>
 
 <%def name="portlets()">

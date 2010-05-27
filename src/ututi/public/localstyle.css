@@ -16,3 +16,18 @@ table.group-type-choice td.button {
     text-align: center;
     padding: 1em;
 }
+
+
+#CreatePubliCGroupLeft input[type=checkbox] {
+    width: 1em !important;
+}
+#CreatePubliCGroupLeft input[type=radio] {
+    width: 1em !important;
+}
+#CreatePubliCGroupLeft label.checkbox {
+    display: block;
+}
+#CreatePubliCGroupLeft label.checkbox span.labelText {
+    display: inline !important;
+    width: 300px !important;
+}
