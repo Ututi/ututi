@@ -841,15 +841,17 @@ font-size: 11px;
 		height:10px;
 		display:block
 	}
+        .fullForm label,
         #CreatePubliCGroupLeft label {
                 font-size: 12px;
                 margin: 7px 0 0 0;
                 width: 180px;
         }
-                
+        .fullForm label .labelText,
         #CreatePubliCGroupLeft label .labelText {
                 display: block;
         }
+    .fullForm label input,
     #CreatePubliCGroupLeft label input, #CreatePubliCGroupLeft input {
                 width: 270px;
                 margin: 0 0 10px 0;

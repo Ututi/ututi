@@ -1,6 +1,6 @@
 <%inherit file="/subject/base.mako" />
 
-<%namespace name="newlocationtag" file="/widgets/newlocationtag.mako" import="*"/>
+<%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*"/>
 <%namespace file="/widgets/tags.mako" import="*"/>
 
 <%def name="title()">
@@ -16,36 +16,27 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
 <h1>${_('Edit subject')}</h1>
 
 <form method="post" action="${url(controller='subject', action='update', id=c.subject.subject_id, tags=c.subject.location_path)}"
-     id="subject_add_form" enctype="multipart/form-data">
+     id="subject_add_form" enctype="multipart/form-data" class="fullForm">
+  <fieldset>
   <input type="hidden" name="id" value=""/>
   <input type="hidden" name="old_location" value=""/>
-  <div class="form-field">
-    <label for="title">${_('Title')}</label>
-    <div class="input-line"><div>
-        <input type="text" id="title" name="title" class="line" value=""/>
-    </div></div>
-  </div>
-  <div class="form-field">
-    <label for="lecturer">${_('Lecturer')}</label>
-    <div class="input-line"><div>
-        <input type="text" id="lecturer" name="lecturer" class="line" value=""/>
-    </div></div>
-  </div>
-    ${location_widget(2)}
+  ${h.input_line('title', _('Title'))}
+  ${h.input_line('lecturer', _('Lecturer'))}
+  ${location_widget(2)}
   <br class="clear-left"/>
   <div class="form-field">
     <label for="tags">${_('Tags')}</label>
     ${tags_widget()}
   </div>
-
+  <br />
   <div class="form-field">
     <label for="description">${_('Brief description of the subject')}</label>
     <textarea class="line ckeditor" name="description" id="description" cols="60" rows="5"></textarea>
   </div>
 
+  <br />
   <div>
-    <span class="btn">
-      <input type="submit" value="${_('Save')}"/>
-    </span>
+    ${h.input_submit(_('Save'))}
   </div>
+  </fieldset>
 </form>
