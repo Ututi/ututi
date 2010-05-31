@@ -7,6 +7,10 @@
    <%files:head_tags />
 </%def>
 
+<%def name="title()">
+${c.subject.title}
+</%def>
+
 <h1 class="pageTitle">${c.subject.title}</h1>
 
 %if c.subject.deleted:
@@ -53,7 +57,7 @@
 </%self:rounded_block>
 
 <%self:rounded_block class_='portletGroupFiles' id="subject_files">
-<div class="GroupFiles"><h2 class="portletTitle bold">${_('Subject files')} (${c.subject.file_count}))</h2>
+<div class="GroupFiles"><h2 class="portletTitle bold">${_('Subject files')} (${c.subject.file_count})</h2>
   <span class="butright button-orange"><a href="">įkelti failą į...<span class="edge-link"></span></a></span>
 </div>
 

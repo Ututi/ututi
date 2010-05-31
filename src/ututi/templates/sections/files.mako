@@ -442,8 +442,10 @@ $(document).ready(function(){
                         hidden = True
                 %>
                 %if n == 3 and file_count > 4:
-                    <li class="click hide">
+                    <li class="click hide files_more">
+                      <span class="green verysmall">
                       ${ungettext("Show the other %(count)s file", "Show the other %(count)s files", file_count - n ) % dict(count = file_count - n)}
+                      </span>
                     </li>
                 %endif
                 <%self:file file="${file}" hidden="${hidden}" />
@@ -460,28 +462,34 @@ $(document).ready(function(){
         <%
            style = ''
            files = [file for file in folder if file.deleted is None]
-           is_open = len(files) < 4
+           file_count = len(files)
+           is_open = file_count > 4
            if files:
                style = h.literal('style="display: none;"')
         %>
-      <div class="folder_file_area subfolder click2show${is_open and ' open' or ''}" id="file_area-${section_id}-${fid}">
+      <div class="folder_file_area subfolder click2show${bool(files) and ' open' or ''}" id="file_area-${section_id}-${fid}">
         <input class="folder_name" id="file_folder_name-${section_id}-${fid}" type="hidden" value="${folder.title}" />
-        <h4 class="click">
+        <h4 class="${is_open and 'click' or ''}">
           <span class="cont">
             ${folder.title}
-            %if not is_open:
-              <span class="small">(${ungettext("%(count)s file", "%(count)s files", len(files)) % dict(count=len(files))})</span>
-            %endif
+            <span class="small">(${ungettext("%(count)s file", "%(count)s files", len(files)) % dict(count=len(files))})</span>
             % if folder.can_write(c.user):
               <a ${style} href="${folder.parent.url(action='delete_folder', folder=folder.title)}" id="delete_folder_button-${section_id}-${fid}" class="delete_folder_button">${_("(Delete)")}</a>
             % endif
           </span>
         </h4>
-          <ul class="folder ${is_open and 'hide' or 'show'}">
+        <ul class="folder">
         % if files:
               <li style="display: none;" class="message">${_("There are no files here, this folder is empty!")}</li>
-              % for file in files:
-                <%self:file file="${file}" />
+              % for n, file in enumerate(files):
+                <%self:file file="${file}" hidden="${n > 2}"/>
+                %if n == 3 and file_count > 4:
+                    <li class="click hide files_more">
+                      <span class="green verysmall">
+                      ${ungettext("Show the other %(count)s file", "Show the other %(count)s files", file_count - n ) % dict(count = file_count - n)}
+                      </span>
+                    </li>
+                %endif
               % endfor
         % else:
               <li class="message">${_("There are no files here, this folder is empty!")}</li>

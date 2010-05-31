@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $(".click2show > .click").each(function() {
+    $(".click2show .click").each(function() {
         $(this).click(function() {
             var el = $(this).closest('.click2show').toggleClass("open");
             el.find(".show").toggle();

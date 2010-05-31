@@ -1209,14 +1209,20 @@ div.single-title{
 border-bottom: 1px solid #ded8d8;
 padding: 5px 0 5px 15px;
 }
-div.kiti-failai{
+li.files_more{
+cursor: pointer;
+list-style-type: none;
 border-top: 1px solid #ded8d8;
 width:158px;
-margin: 5px 0 0 15px;
+margin: 0 0 0 15px;
 text-align:center;
 }
+li.files_more span{
+padding-right: 10px;
+background: url("img/icons/arrow-very-small-down.png") right center no-repeat;
+}
 
-div.kiti-failai-100{
+li.kiti-failai-100{
 margin: 5px 0 0 0;
 padding:0 0 0 45px;
 }

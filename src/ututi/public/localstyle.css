@@ -277,7 +277,7 @@ div.file_upload_progress div.failed {
   background: white url("../images/borders/rename_file.png") left center no-repeat;
 } /* no left/right padding here please */
 
-.subfolder H4 {
+.subfolder H4.click {
   cursor: pointer;
 }
 
