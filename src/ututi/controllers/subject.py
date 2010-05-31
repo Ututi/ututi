@@ -96,6 +96,9 @@ class SubjectAddMixin(object):
 class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
     """A controller for subjects."""
 
+    def __before__(self):
+        c.ututi_supporters = get_supporters()
+
     @subject_action
     def home(self, subject):
         file_id = request.GET.get('serve_file')
@@ -110,7 +113,6 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
 
     @ActionProtector("user")
     def add(self):
-        c.ututi_supporters = get_supporters()
         return self._add_form()
 
     @validate(schema=NewSubjectForm, form='_add_form')

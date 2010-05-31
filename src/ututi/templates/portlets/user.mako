@@ -77,7 +77,6 @@
   </%self:portlet>
 </%def>
 
-
 <%def name="user_support_portlet(user=None, title=None, full=True)">
   %if c.tpl_lang == 'lt':
     <%
@@ -87,25 +86,25 @@
        if title is None:
          title = _('Support us')
     %>
-    <%self:portlet id="support_portlet" portlet_class="inactive">
+    <%self:uportlet id="support_portlet">
       <%def name="header()">
         ${title}
       </%def>
 
       ${h.literal(_('You like <a href="%(url)s">Ututi</a> and you want to contribute? Support us!') % dict(url=url('/')))}
-      <form action="${url(controller='profile', action='support')}" class="button-to" method="post">
-        <div><span class="btn-large"><input type="submit" value="${_('Support now')}" /></span></div>
-      </form>
+      <div style="margin-top: 10px;">
+      ${h.button_to(_('Support now'), url(controller='profile', action='support'), class_="btnMedium", method="GET")}
+      </div>
       <br class="clear-left" />
-      <div class="footer click2show">
-        <div id="group_settings_toggle" class="click">${_("supporters")}</div>
+      <div class="click2show">
+		<div class="right_arrow click"><a href="">${_("supporters")}</a></div>
         <ul id="supporter_list" class="show">
           %for supporter in c.ututi_supporters:
             <li>${h.link_to(supporter.fullname, supporter.url())}</li>
           %endfor
         </ul>
       </div>
-    </%self:portlet>
+    </%self:uportlet>
   %endif
 </%def>
 
