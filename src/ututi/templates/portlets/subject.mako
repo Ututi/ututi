@@ -28,6 +28,7 @@
           %endfor
           </span>
         </p>
+		<p><span class="green verysmall">${_('Lecturer:')}</span><span class="orange verysmall">${subject.lecturer}</span></p>
     </div>
     <div class="dalyko-info">
         <p><span class="verysmall">${_('Subject rating:')} </span><span>${h.image('/images/details/stars%d.png' % subject.rating(), alt='', class_='subject_rating')|n}</span></p>
@@ -51,7 +52,7 @@
        cls = 'btn'
        text = _('Add to my subjects')
        if c.user.watches(subject):
-           cls = 'btn inactive'
+           cls = 'btn btnNegative'
            text = _('Remove from my subjects')
 
     %>

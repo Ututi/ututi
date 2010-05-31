@@ -253,6 +253,12 @@ button.btnLarge.btnPlus span {
     padding-left: 35px;
 }
 
+button.btn.btnNegative span {
+    background-position: left -312px;
+    padding-left: 25px;
+}
+
+
 /* Header */
 #siteName a, #siteName2 a{
         background: url('img/site_logo.gif') no-repeat left;
