@@ -52,7 +52,13 @@
    <div class="right_arrow1"><a href="${c.subject.url(action='edit')}"> ${_('Edit')}</a></div>
 </%self:rounded_block>
 
-<%files:file_browser obj="${c.subject}", title="${_('Subject files')}" />
+<%self:rounded_block class_='portletGroupFiles' id="subject_files">
+<div class="GroupFiles"><h2 class="portletTitle bold">${_('Subject files')} (${c.subject.file_count}))</h2>
+  <span class="butright button-orange"><a href="">įkelti failą į...<span class="edge-link"></span></a></span>
+</div>
+
+<%files:file_browser obj="${c.subject}", title="${_('Subject files')}", controls="['upload', 'folder']" />
+</%self:rounded_block>
 
 <%self:rounded_block class_='portletGroupFiles' id="subject_pages">
 <div class="GroupFiles GroupFilesWiki">

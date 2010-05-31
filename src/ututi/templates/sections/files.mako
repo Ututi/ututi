@@ -508,7 +508,7 @@ $(document).ready(function(){
   <div class="area_size">${_('free space:')} ${h.file_size(obj.free_size)}</div>
 </%def>
 
-<%def name="file_browser(obj, section_id=0, collapsible=False, title=None, comment=None, controls=['upload', 'folder'])">
+<%def name="file_browser(obj, section_id=0, collapsible=False, title=None, comment=None, controls=['upload', 'folder', 'title'])">
   <div class="section click2show ${collapsible and '' or 'open'} ${('size' in controls) and 'size_indicated' or ''}" id="file_section-${section_id}">
     <%
        cls_head = cls_container = ''
@@ -516,6 +516,7 @@ $(document).ready(function(){
            cls_head = 'click'
            cls_container = 'show'
     %>
+    %if 'title' in controls:
     <h2 class="${cls_head}">
       <span class="cont">
         %if title is None:
@@ -532,6 +533,7 @@ $(document).ready(function(){
       <span class="unlimited_size">${_('unlimited')}</span>
       %endif
     </h2>
+    %endif
     %if 'size' in controls:
       ${free_space_text(obj)}
     %endif
