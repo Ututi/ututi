@@ -34,7 +34,7 @@ We should get redirected to the index view of the page we just created.
 
 Let's edit the page now.
 
-    >>> browser.getLink('Edit', index=1).click()
+    >>> browser.getLink('Edit').click()
     >>> browser.getControl('Content').value = "<script>Yeah!</script>Being Awesome is very easy!"
     >>> browser.getControl('Save').click()
 
@@ -53,7 +53,7 @@ And see how it works.
 
 What about our brand new embedded latex syntax:
 
-    >>> browser.getLink('Edit', index=1).click()
+    >>> browser.getLink('Edit').click()
     >>> browser.getControl('Content').value = r"<script>Yeah!</script>Being Awesome is very easy! $$\sum_{n=1}^\infty a_n$$"
     >>> browser.getControl('Save').click()
 
@@ -94,7 +94,7 @@ We can also look at the previous version:
 
 As an admin, we can delete the page:
 
-    >>> browser.getLink('Delete', index=1).click()
+    >>> browser.getLink('Delete').click()
 
 Let's go back:
 
@@ -145,7 +145,7 @@ Now, visit the page and undelete:
 
 We could delete it again if we wanted to:
 
-    >>> browser.getLink('Delete', index=1)
+    >>> browser.getLink('Delete')
     <Link text='Delete' url='http://localhost/subject/vu/mat_analize/page/3/delete'>
 
 Now the page shows up in the index again without the "deleted" marker:

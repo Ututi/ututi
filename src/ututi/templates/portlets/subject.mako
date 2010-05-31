@@ -28,7 +28,9 @@
           %endfor
           </span>
         </p>
+        %if subject.lecturer:
 		<p><span class="green verysmall">${_('Lecturer:')}</span><span class="orange verysmall">${subject.lecturer}</span></p>
+        %endif
     </div>
     <div class="dalyko-info">
         <p><span class="verysmall">${_('Subject rating:')} </span><span>${h.image('/images/details/stars%d.png' % subject.rating(), alt='', class_='subject_rating')|n}</span></p>
@@ -48,6 +50,7 @@
         % endif
         </div>
     </div>
+    %if c.user is not None:
     <%
        cls = 'btn'
        text = _('Add to my subjects')
@@ -60,6 +63,7 @@
       ${h.button_to(text, subject.url(action='watch'), class_=cls, method='GET')}
     </div>
     <div class="right_arrow"><a href="${url(controller='subject', action='edit', id=subject.subject_id, tags=c.subject.location_path)}">${_('edit subject information')}</a></div>
+    %endif
   </%self:uportlet>
 
 %if c.user is None:

@@ -17,8 +17,11 @@ The link of the subject leads to its home page.
     >>> browser.getLink('Matematinė analizė').click()
     >>> browser.url
     'http://localhost/subject/vu/mat_analize'
-    >>> browser.printQuery('//h2/span/text()')
-    Subject files
+    >>> browser.printQuery("id('mainContent')//h2/text()")
+    Subject files (0)
+    Subject's Wiki Pages (0)
+
+
 
 From there we can edit the subject.
 
@@ -28,12 +31,18 @@ From there we can edit the subject.
 
 The changed information should  be visible in the sidebar block.
 
-    >>> browser.printQuery('id("subject_info_portlet_content")//div/text()')
-    Lecturer: Some other guy
+    >>> browser.printQuery('//div[@class="dalyko-info"]//p/span/text()')
+    Lecturer:
+    Some other guy
+    Subject rating:
+    The subject is watched by:
+    user,
+    groups
+
 
 The subject's portlet contains a link that can be used to start watching the subject.
 
-    >>> browser.getLink('Watch subject').click()
+    >>> browser.getControl('Add to my subjects').click()
     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
     Close
     The subject has been added to your watched subjects list.
@@ -41,22 +50,20 @@ The subject's portlet contains a link that can be used to start watching the sub
 If we click the link again, we stop watching the subject
 We can add a subject at the url /subject/add
 
-    >>> browser.getLink('Stop watching the subject').click()
+    >>> browser.getControl('Remove from my subjects').click()
     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
     Close
     The subject has been removed from your watched subjects list.
 
     And the button's action turns into 'watch subject' again
-    >>> browser.printQuery('id("subject_info_portlet_content")/div[@class="footer"]/span/a/span/text()')
-    Watch subject
+    >>> browser.getControl('Add to my subjects')
+    <SubmitControl name=None type='submitbutton'>
 
     >>> browser.open('http://localhost/subjects/add')
 
     >>> browser.getControl(name='location-1').value = 'vu'
     >>> browser.getControl('Title').value = 'Test subject'
     >>> browser.getControl('Save').click()
-    >>> browser.printQuery('//h2/span/text()')
-    Subject files
     >>> print browser.url
     http://localhost/subject/vu/test_subject
 
@@ -92,16 +99,8 @@ You can import more subjects using the admin interface.
     >>> browser.queryHTML("id('subject_description')//div[@class='content']/text()")
     ['Description of the subject']
 
-    >>> browser.printQuery("id('subject_info_portlet_content')//h4")
-    <h4>Imported subject</h4>
-
-    >>> browser.printQuery("id('subject_info_portlet_content')//*[@class='item-tags border-top']/a")
-    <a class="tag" title="imported" href="/profile/search?tags=imported">
-      imported
-    </a>
-    <a class="tag" title="subject" href="/profile/search?tags=subject">
-      subject
-    </a>
+    >>> browser.printQuery("id('subject_info_portlet-content')//h2/text()")
+    Imported subject
 
 Bug fix confirmation: going to subjects/create directly (e.g. refreshing a failed subject form)
 would cause a crash
