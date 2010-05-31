@@ -7,63 +7,59 @@
          subject = c.subject
   %>
 
-  <%self:portlet id="subject_info_portlet">
+  <%self:uportlet id="subject_info_portlet">
     <%def name="header()">
       ${_('Subject information')}
     </%def>
-    <div class="structured_info">
-      <h4>${subject.title}</h4>
-      <div class="small">
-        ${_('Lecturer')}: ${subject.lecturer}
-      </div>
-      <div class="border-top">
-        <span class="small">${_('Subject rating:')} ${h.image('/images/details/stars%d.png' % subject.rating(), alt='', class_='subject_rating')|n}</span>
-        <br/>
-        <span class="small">${h.image('/images/details/eye_open.png', alt='')|n}
-          ${ungettext("<em>%(count)s</em> user", "<em>%(count)s</em> users", subject.user_count()) % dict(count = subject.user_count())|n},
-          ${ungettext("<em>%(count)s</em> group", "<em>%(count)s</em> groups", subject.group_count()) % dict(count = subject.group_count())|n}
-        </span>
-      </div>
-      % if subject.tags:
-      <div class="item-tags border-top">
-        %for tag in subject.tags:
-          ${tag_link(tag)}
-        %endfor
-      </div>
-      % endif
+    <div class="dalyko-info">
+        <h2 class="group-name">${subject.title}</h2>	
     </div>
-    <br />
-    %if c.user:
-    <div class="footer">
-      <a id="subject_edit_link"
-         class="more"
-         href="${url(controller='subject', action='edit', id=subject.subject_id, tags=c.subject.location_path)}">${_('Edit')}</a>
-
-      <%
-         cls = ''
-         text = _('Watch subject')
-         if c.user.watches(subject):
-             cls = 'inactive'
-             text = _('Stop watching the subject')
-
-      %>
-      <span>
-        <a class="btn ${cls}" href="${url(controller='subject', action='watch', id=subject.subject_id, tags=subject.location_path)}">
-          <span>${text}</span>
-        </a>
-        ${h.image('/images/details/icon_question.png',
-            alt=_('By watching a subject, you will be informed about all the changes in it.'),
-            class_='tooltip')|n}
-      </span>
-      <br />
-      %if h.check_crowds(['moderator']) and not c.subject.deleted:
-      <a class="btn warning" href="${c.subject.url(action='delete')}" title="${_('Delete subject')}">
-        <span>${_('Delete')}</span>
-      </a>
-      %endif
+    <div class="dalyko-info">
+        <p>
+          <%
+             hierarchy_len = len(subject.location.hierarchy())
+          %>
+          <span class="green">
+          %for index, tag in enumerate(subject.location.hierarchy(True)):
+            <a class="green" href="${tag.url()}">${tag.title_short}</a>
+            %if index != hierarchy_len - 1:
+              |
+            %endif
+          %endfor
+          </span>
+        </p>
     </div>
-    %endif
-  </%self:portlet>
+    <div class="dalyko-info">
+        <p><span class="verysmall">${_('Subject rating:')} </span><span>${h.image('/images/details/stars%d.png' % subject.rating(), alt='', class_='subject_rating')|n}</span></p>
+        <p><span class="verysmall">${_('The subject is watched by:')}</span>
+          <span class="verysmall">
+            ${ungettext("<span class='orange'>%(count)s</span> user", "<span class='orange'>%(count)s</span> users", subject.user_count()) % dict(count = subject.user_count())|n},
+            ${ungettext("<span class='orange'>%(count)s</span> group", "<span class='orange'>%(count)s</span> groups", subject.group_count()) % dict(count = subject.group_count())|n}
+          </span>
+        </p>
+    </div>
+    <div class="dalyko-info">
+        <div class="item-tags">
+        % if subject.tags:
+          %for tag in subject.tags:
+            <a class="grey" href="${tag.url()}">${tag.title}</a>
+          %endfor
+        % endif
+        </div>
+    </div>
+    <%
+       cls = 'btn'
+       text = _('Add to my subjects')
+       if c.user.watches(subject):
+           cls = 'btn inactive'
+           text = _('Remove from my subjects')
+
+    %>
+    <div>
+      ${h.button_to(text, subject.url(action='watch'), class_=cls, method='GET')}
+    </div>
+    <div class="right_arrow"><a href="${url(controller='subject', action='edit', id=subject.subject_id, tags=c.subject.location_path)}">${_('edit subject information')}</a></div>
+  </%self:uportlet>
 
 %if c.user is None:
 <script type="text/javascript"><!--

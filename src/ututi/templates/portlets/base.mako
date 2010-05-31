@@ -1,3 +1,13 @@
+##new style portlet
+<%def name="uportlet(id, portlet_class='')">
+<div id="${id}-header}" class="module-top ${portlet_class}"><h2>${caller.header()}</h2></div>
+<div id="${id}-content}" class="portlet portletSmall portletModule">
+  <div class="cbl"></div>
+  <div class="cbr"></div>
+  ${caller.body()}
+</div>
+</%def>
+
 <%def name="portlet(id, portlet_class='')">
 <div class="sidebar-block ${portlet_class}" id="${id}">
   <div class="rounded-header">
