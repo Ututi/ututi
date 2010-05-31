@@ -1452,6 +1452,13 @@ class SimpleTag(Tag):
 
         return tag
 
+    def url(self, controller='search', action='index', **kwargs):
+        return url(controller=controller,
+                   action=action,
+                   tags=self.title,
+                   **kwargs)
+
+
 
 class LocationTag(Tag):
     """Class representing the university and faculty tags."""
