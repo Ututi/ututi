@@ -49,8 +49,6 @@ class UserController(BaseController):
             .order_by(desc(Event.created))\
             .limit(20).all()
 
-        if user is c.user:
-            redirect(url(controller='profile', action='index'))
         return render('user/index.mako')
 
     @profile_action
