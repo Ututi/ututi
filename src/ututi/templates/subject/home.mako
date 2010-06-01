@@ -57,10 +57,9 @@ ${c.subject.title}
 </%self:rounded_block>
 
 <%self:rounded_block class_='portletGroupFiles' id="subject_files">
-<div class="GroupFiles"><h2 class="portletTitle bold">${_('Subject files')} (${c.subject.file_count})</h2>
-  <span class="butright button-orange"><a href="">įkelti failą į...<span class="edge-link"></span></a></span>
+<div class="GroupFiles">
+  <h2 class="portletTitle bold">${_('Subject files')} (${c.subject.file_count})</h2>
 </div>
-
 <%files:file_browser obj="${c.subject}", title="${_('Subject files')}", controls="['upload', 'folder']" />
 </%self:rounded_block>
 
