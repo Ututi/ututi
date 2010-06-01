@@ -7,7 +7,7 @@
 </div>
 </%def>
 
-<%def name="location_widget(number, values=[], titles=[], add_titles=[], add_new=False, live_search=False)">
+<%def name="location_widget(number, values=[], titles=[], add_titles=[], add_new=False, live_search=False, label_class='')">
 <%
    if not hasattr(self, 'newlocationwidget_id'):
        self.newlocationwidget_id = 0
@@ -24,7 +24,7 @@
   <form:error name="location"/>
   %for i in range(number):
     <div class="location-tag-field form-field" id="location-tag-field-${i}">
-      <label>
+      <label class="${label_class}">
         %if i < len(titles):
           <span class="labelText">${titles[i]}</span>
         %endif
@@ -212,4 +212,3 @@ $(document).ready(function() {
 //]]>
 </script>
 </%def>
-

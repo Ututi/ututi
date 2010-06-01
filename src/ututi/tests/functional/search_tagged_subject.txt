@@ -17,8 +17,8 @@ Go to the search form.
 
 Try looking for a subject that does not exist, while passing a tag that exists.
 
-   >>> browser.getControl(name="text").value = 'analizai'
+   >>> browser.getControl(name="text", index=1).value = 'analizai'
    >>> browser.getControl(name='tags').value = 'matematika'
 
 # XXX failing test
-   >>> browser.getControl('Search').click()
+   >>> browser.getControl('Search', index=1).click()

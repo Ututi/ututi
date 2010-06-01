@@ -24,19 +24,21 @@ body.noMenu {
 #wrap{
     position: relative;
     width: 980px;
-    margin: 0 auto;
+
     min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -60px;
 }
 
 .push {
-    height: 45px;
+    height: 60px;
 
 }
 
 #widthLimiter {
         background: url('img/header_bg.gif') no-repeat top;
         width: 980px;
-        margin: 0 auto;
         position: relative;
         padding-top: 109px;
 	padding-bottom:10px;
@@ -889,8 +891,8 @@ font-size: 11px;
 /* Footer */
 #footer {
 	position: relative;
-	width: 980px;
-	margin: -45px auto 0;
+	width: 966px;
+	margin: -50px auto 0;
 	height: 45px;
         background: #f5f5f5;
         border: 2px solid #e9e6e6;
@@ -2082,6 +2084,8 @@ border-bottom: 1px solid #ded8d8;
     Moved from newlocationwidget.css
 
  ***************************************************************************************************************************************************/
+
+div.location-tag-field { position: relative;}
 
 .hidden {
   display: none;

@@ -2,7 +2,7 @@ Basic forum test
 ================
 
     >>> browser = Browser.logIn()
-    >>> browser.getLink('community').click()
+    >>> browser.getLink('Community').click()
 
     >>> browser.getLink('New topic').click()
     >>> browser.getControl('Subject').value = 'Help!'

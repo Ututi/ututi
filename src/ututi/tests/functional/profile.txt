@@ -18,13 +18,10 @@ Now we'll try editing our profile information. First we need to log in.
 
     >>> browser = Browser.logIn()
 
-    >>> browser.printQuery("id('personal-box')//div[@class='fullname']/text()")
+    >>> browser.printQuery("id('personal-data')//span[@class='fullname']/text()")
     Adminas Adminovix
 
 The user should be able to change his email:
-
-    >>> browser.printQuery("id('personal-box')//div[@class='small email']/text()")
-    admin@ututi.lt
 
     >>> browser.open('http://localhost/profile/edit')
     >>> form = browser.getForm('contacts_form')
@@ -32,9 +29,6 @@ The user should be able to change his email:
     >>> form.getControl('Update contacts').click()
 
 This email is already in use, so we won't be able to use it.
-
-    >>> browser.printQuery("id('personal-box')//div[@class='small email']/text()")
-    admin@ututi.lt
 
     >>> browser.printQuery("//span[@class='error-message']/text()")
     This email is already in use.
@@ -44,9 +38,6 @@ Let's try something unique
     >>> form = browser.getForm('contacts_form')
     >>> form.getControl('Your email address').value = 'uniqueuser@ututi.lt'
     >>> form.getControl('Update contacts').click()
-
-    >>> browser.printQuery("id('personal-box')//div[@class='small email']/text()")
-    uniqueuser@ututi.lt
 
     >>> browser.printQuery("//span[@class='error-message']/text()")
 
@@ -67,10 +58,8 @@ We'll go to our profile edit page. And change our name as well as upload a logo.
     >>> browser.getControl('Personal logo').add_file(*make_file('test_logo.png', 'test_logo.Png'))
     >>> browser.getControl('Save').click()
 
-    >>> browser.printQuery("id('personal-box')//div[@class='fullname']/text()")
+    >>> browser.printQuery("id('personal-data')//span[@class='fullname']/text()")
     Adminas Adminas
-    >>> browser.printQuery("id('personal-box')//div[@class='personal-logo']//img")
-    <img src="/user/1/logo/60/60" alt="logo" />
 
 Let's check out the logo.
 

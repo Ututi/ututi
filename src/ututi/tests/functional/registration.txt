@@ -23,12 +23,6 @@ screen:
     >>> browser.url
     'http://localhost/register/welcome'
 
-    >>> browser.printQuery("id('page-content')//h2/text()")
-    Specify your university and faculty!
-    Join your group
-    Find your subjects
-    Update your profile
-
 An email, requesting the confirmation of the email address entered is sent:
 
     >>> from ututi.lib.mailer import mail_queue
@@ -81,13 +75,6 @@ What if we clicked the link again?
 
      >>> print browser.url
      http://localhost/welcome
-
-     >>> form = browser.getForm('findsubject-form')
-     >>> form.getControl(name='location-0').value = 'Vilniaus universitetas'
-     >>> form.getControl('Search').click()
-
-     >>> print browser.url
-     http://localhost/school/vu
 
 We have been logged in after signing up. Now let's log out and test more unfortunate
 scenarios:
@@ -189,17 +176,11 @@ Bug fix confirm: passwords with non-ascii chars would crash the registration.
 
     >>> browser.printQuery("//span[@class='error-message']/text()")
 
-    >>> browser.printQuery("id('page-content')//h2/text()")
-    Specify your university and faculty!
-    Join your group
-    Find your subjects
-    Update your profile
-
 A newly registered user will not have his location set, so he will be shown a form to set it:
 
     >>> form = browser.getForm('update-location-form')
     >>> form.getControl(name='location-0').value = 'Vilniaus universitetas'
-    >>> form.getControl('confirm').click()
+    >>> form.getControl('save').click()
     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
     Close
     Your university information has been updated.
@@ -209,10 +190,5 @@ A newly registered user will not have his location set, so he will be shown a fo
 
 After setting his location, he will not be shown the form again:
     >>> browser.printQuery("id('page-content')//h2/text()")
-    Join your group
-    Find your subjects
-    Update your profile
-
-
 
     >>> email = mail_queue.pop()

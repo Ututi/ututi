@@ -141,18 +141,19 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         The action with the name matching the `selected' parameter is
         marked as selected.
         """
-        bcs = [
+        bcs = {
+            'home':
             {'title': _("What's New?"),
-             'link': url(controller='profile', action='home'),
-             'selected': selected == 'home'},
+             'link': url(controller='profile', action='home')},
+            'files':
             {'title': _("Files"),
-             'link': url(controller='profile', action='files'),
-             'selected': selected == 'files'},
+             'link': url(controller='profile', action='files')},
+            'subjects':
             {'title': _("Subjects"),
-             'link': url(controller='profile', action='subjects'),
-             'selected': selected == 'subjects'},
-            ]
-        return bcs
+             'link': url(controller='profile', action='subjects')}
+            }
+        if selected in bcs.keys():
+            return bcs[selected]
 
     @ActionProtector("user")
     def browse(self):

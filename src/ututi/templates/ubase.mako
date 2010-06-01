@@ -58,7 +58,7 @@ ${_('student information online')}
     %>
     %for ind, breadcrumb in enumerate(breadcrumbs):
        <%
-          cls = 'first' if index == 0 and not c.object_location else 'second'
+          cls = 'first' if ind == 0 and not c.object_location else 'second'
        %>
        <li class="${cls}">
          %if ind != len(breadcrumbs) - 1:
@@ -73,6 +73,7 @@ ${_('student information online')}
   %endif
   </ul>
   %endif
+</div>
 </%def>
 
 <%def name="anonymous_header()">
@@ -137,11 +138,11 @@ ${_('student information online')}
   </ul>
 </div>
 <p class="a11y">${_('User menu')}</p>
-<div class="loggedin-nav">
+<div class="loggedin-nav" id="personal-data">
 	<ul>
 ##		<li><a href="#"><strong>inbox (3)</strong></a></li>
 		<li class="expandable profile-nav">
-			<span>${user.fullname}</span>
+			<span class="fullname">${user.fullname}</span>
 			<div>
 				<ul>
 					<li class="action"><a href="${url(controller='profile', action='edit')}">${_('Settings')}</a></li>
@@ -190,10 +191,10 @@ ${_('student information online')}
 </div>
 </%def>
 
-<!DOCTYPE HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xml:lang="lt" xmlns="http://www.w3.org/1999/xhtml" lang="lt">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <script type="text/javascript">
       var lang = '${c.lang}';
@@ -226,16 +227,17 @@ ${_('student information online')}
     </script>
   </head>
   <body class="${self.body_class()}">
-    <div id="wrap"><div id="widthLimiter">
-      ${breadcrumbs(c.breadcrumbs)}
-      %if c.user is None:
-        ${self.anonymous_header()}
-      %else:
-        ${self.loggedin_header(c.user)}
-      %endif
+    <div id="wrap">
+      <div id="widthLimiter">
+        ${breadcrumbs(c.breadcrumbs)}
+        %if c.user is None:
+          ${self.anonymous_header()}
+        %else:
+          ${self.loggedin_header(c.user)}
+        %endif
 
-      ${self.flash_messages()}
-      ${next.body()}
+        ${self.flash_messages()}
+        ${next.body()}
       </div>
       <div class="push"></div>
     </div>
