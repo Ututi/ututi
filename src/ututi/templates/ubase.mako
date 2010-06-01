@@ -113,22 +113,65 @@ ${_('student information online')}
     </fieldset>
 </form>
 <p class="a11y">${_('Main menu')}</p>
-<ul id="mainMenu">
+<div class="head-nav">
+  <ul>
     <li><a href="${url(controller='profile', action='home')}">${_('Home')}</a></li>
     <li><a href="${url(controller='profile', action='browse')}">${_('Browse')}</a></li>
-    <li class="expandable XXXdisabled"><a href="">${_('Groups')}</a></li>
+	<li class="expandable group-nav">
+	  <span>${_('Groups')}</span>
+	  <div>
+		<ul>
+          %for mship in user.memberships:
+            <li>
+              <a href="${url(controller='group', action='index', id=mship.group.group_id)}"
+                 ${h.trackEvent(None, 'group_home', 'top_menu')} title="${mship.group.title}">
+                ${h.ellipsis(mship.group.title, 18)}
+              </a>
+            </li>
+          %endfor
+          <li class="action"><a href="${url(controller='community', action='index')}">${_('Community')}</a></li>
+		</ul>
+	  </div>
+	</li>
     <li><a href="${url(controller='community', action='index')}">${_('Community')}</a></li>
-</ul>
+  </ul>
+</div>
 <p class="a11y">${_('User menu')}</p>
-<ul id="userMenu">
-    <li id="checkMail" class="XXXdisabled"><a href="">${_('inbox (%d)') % 4}</a></li>
+<div class="loggedin-nav">
+	<ul>
+##		<li><a href="#"><strong>inbox (3)</strong></a></li>
+		<li class="expandable profile-nav">
+			<span>${user.fullname}</span>
+			<div>
+				<ul>
+					<li class="action"><a href="${url(controller='profile', action='edit')}">${_('Settings')}</a></li>
+					<li class="action"><a href="${url(controller='user', action='index', id=user.id)}">${_('Public profile')}</a></li>
+				</ul>
+			</div>
+		</li>
+		<li><a href="${url(controller='home', action='logout')}">${_('log out')}</a></li>
+	</ul>
+</div>
 
-    <li id="profileInfo">
-        <a href="${url(controller='profile', action='edit')}">${c.user.fullname}</a>
-    </li>
-    <li id="logout"><a href="${url(controller='home', action='logout')}">${_('log out')}</a></li>
-</ul>
-
+<script type="text/javascript">
+    // nav ul li expandable
+    $('ul li.expandable').toggle(function() {
+        $(this).addClass('expanded').find('div:last-child ul').show();
+    }, function(){
+        $(this).removeClass('expanded').find('div:last-child ul').hide();
+    }).click(function(){ // remove selection
+        if(document.selection && document.selection.empty) {
+            document.selection.empty() ;
+        } else if(window.getSelection) {
+            var s = window.getSelection();
+            if(s && s.removeAllRanges)
+                s.removeAllRanges();
+        }
+    }).find('li a').click(function(ev){
+        ev.preventDefault();
+        window.location.href = $(this).attr('href');
+    });
+</script>
 </%def>
 
 <%def name="flash_messages()">

@@ -506,3 +506,40 @@ ul.autobox-hldr li.bit-box a.closebutton {
   padding-left: 15px;
   background: white url("../images/details/icon_user_small.png") left center no-repeat;
 }
+
+#subject_pages .notice {
+  margin-left: 25px;
+}
+
+/* menu from #2 */
+.head-nav li, .loggedin-nav li {list-style-type: none;}
+li.expandable{ position:relative; padding-right:12px; background-color:#E0E0E0; }
+li.expandable span, 
+li.expandable a{ padding-right:24px; background-image:url(../img/ico_expandable_0.gif); background-repeat:no-repeat; background-position:right 4px; cursor:pointer; }
+li.expandable div{ display:none; position:absolute; top:18px; right:12px; padding-top:1px; border:2px solid #CCC; border-width:0 2px 1px; background-color:#FFF; background-image:url(../img/ico_expandable_0.gif); background-repeat:no-repeat; background-position:right -139px; }
+li.expandable div a{ background:none!important; }
+li.expanded div{ display:block; }
+li.expanded li{ float:none !important; border:0; height:1%; line-height:1; border-bottom:1px solid #CCC; width: 120px;}
+li.expanded,
+li.expanded span,
+li.expanded a{ background-color:transparent !important; background-position:right -76px; } 
+li.expanded li span,
+li.expanded li a{ padding:6px 21px 6px 6px; font-size:12px; font-weight:normal; color:#D45500 !important; }
+li.expanded li a:hover{ text-decoration:underline; }
+li.expanded li.action a{ font-weight:bold; color:#ACBF50 !important; }
+
+.head-nav{ position:absolute; top:84px; left:0; z-index: 100;}
+.loggedin-nav li, 
+.head-nav li{ float: left; border-right:2px solid #F6F6F6; height:22px; line-height:22px; }
+.head-nav a,
+.head-nav span{ display:block; padding:0 20px; font-weight:bold; font-size:13px; white-space:nowrap; color:#666; background-color:#E0E0E0; }
+.head-nav a:hover, .head-nav a:focus,
+.head-nav span:hover, .head-nav span:focus{ color:#333; background-color:#E6E6E6; }
+
+.loggedin-nav{ position: absolute; top:84px; right:5px; z-index: 100; }
+.loggedin-nav li.expandable{ background-color:transparent; }
+.loggedin-nav a,
+.loggedin-nav span{ display:block; padding:0 20px; font-weight:normal; font-size:13px; white-space:nowrap; }
+.loggedin-nav a:hover{ color:#FF7901; }
+.loggedin-nav .profile-nav{ padding-right:0; background:url(../img/ico_user_small.gif) 0 3px no-repeat; }
+.loggedin-nav .profile-nav div{ right:0; }

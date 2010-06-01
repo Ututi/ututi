@@ -358,37 +358,33 @@ button.btn.btnNegative span {
 		*width: 50px; /* IE7 */
 	}
 
-#mainMenu {
-        color: #666666;
-        display: block;
-        font-size: 13px;
-        font-weight: bold;
-        height: 22px;
-        left: 0;
-        line-height: 22px;
-        list-style: none;
-        position: absolute;
-        top: 84px;
+/* dropdown menu starts*/
+
+ul.head-nav {
+	color: #666666;
+	display: block;
+	font-size: 13px;
+	font-weight: bold;
+	height: 22px;
+	left: 0;
+	line-height: 22px;
+	list-style: none;
+	position: absolute;
+	top: 84px;
 }
-        #mainMenu li {
-                background: #e6e6e6;
-                display: block;
-                float: left;
-                margin-right: 3px;
-                text-align: center;
-                width: 105px;
-        }
-        #mainMenu li a {
-                color: #666666;
-        }
-        #mainMenu li.expandable a {
-                background: url('img/icons/arrow_expand_15.png') no-repeat right;
-                padding-right: 20px;
-        }
-        #mainMenu li a:hover {
-                color: #333333;
-                text-decoration: none
-        }
+
+ul.head-nav li {
+        float: left;
+        display: inline;
+        list-style: none;
+        position: relative;		
+		background: #e6e6e6;
+		display: block;
+		margin-right: 3px;
+		text-align: center;
+		width: 105px;
+}
+
 ul#links-messages  {
 list-style: none;
 display: block;
@@ -676,6 +672,12 @@ div.right_arrow1 span{
 
 	padding:0 15px 0 0;
 }
+div.right_arrow2{
+padding-left:50px;
+	text-align: right;
+	padding-top:3px;
+}
+
 #aside div.news_header{
 	background: url('img/icons/double-arrow.png') no-repeat right 2px;
 	padding:0 15px 0 0;
@@ -694,6 +696,9 @@ div.right_arrow1 span{
 #aside div.orange{
 	background: url('img/module-top-bg-orange.png') no-repeat center 2px;
 }
+#aside div.orange form{
+	margin-top:5px;
+}
 #aside .module-top h2{
 	text-transform: uppercase;
 	color: #333;
@@ -709,10 +714,10 @@ div.right_arrow1 span{
 #aside .module-content p, #aside div.news_header p {
 	padding: 0 0 10px 0;
 }
-.module-content table{
+.MyProfile table{
 width:100%;
 }
-.module-content table td{
+.MyProfile table td{
 width:25%;
 text-align:center;
 }
@@ -760,6 +765,9 @@ h2.group-name{
 font-size:16px;
 color:#333;
 font-weight:normal;
+}
+div.uni-name{
+width:150px;
 }
 div.dalyko-info{
 border-bottom: 1px solid #ded8d8;
@@ -906,7 +914,7 @@ font-size: 11px;
         }
 
 /* Portlets */
-.portlet, #SearchResults, .portletModule {
+.portlet, #SearchResults, .portletModule, .portlet-verysmall {
         background-repeat: no-repeat;
         border-left: 1px solid #ded8d8;
         border-right: 1px solid #ded8d8;
@@ -920,6 +928,23 @@ font-size: 11px;
         _padding: 10px; /* IE6 */
         _border: 1px solid #ded8d8; /* IE6 */
 }
+.portlet-verysmall {
+padding: 0 0 0 4px;
+display: inline-block;
+margin:0 5px 15px 0;
+position:relative;
+
+}
+.portlet-verysmall div.tag-sp {
+text-align:right;
+width:118px;
+margin-top: 0;
+}
+div.tag {
+margin-top: 0px;
+margin-bottom: 0px;
+}
+
 .portletModule {
 margin-top: 0;
 padding: 5px 15px;
@@ -973,7 +998,12 @@ margin-top:3px;
         .portlet .ctl,
         .portlet .ctr,
         .portlet .cbl,
-        .portlet .cbr {
+	.portlet .cbr,
+	.portlet-verysmall .ctl,
+	.portlet-verysmall .ctr,
+	.portlet-verysmall .cbl,
+	.portlet-verysmall .cbr
+	{
                 background-image: url('img/portlets_bg.png');
                 background-repeat: no-repeat;
                 display: block;
@@ -982,37 +1012,46 @@ margin-top:3px;
                 position: absolute;
                 _display: none; /* IE6 */
         }
-        .portlet .ctl {
+	.portlet .ctl, .portlet-verysmall .ctl {
                 background-position: left top;
                 left: -1px;
                 right: 4px;
                 top: -5px;
                 _width: 100%; /* IE6 */
         }
-        .portlet .ctr {
+	.portlet .ctr, .portlet-verysmall .ctr {
                 background-position: right top;
                 right: -1px;
                 top: -5px;
                 width: 5px;
         }
-        .portlet .cbl {
+	.portlet .cbl, .portlet-verysmall .cbl {
                 background-position: left -5px;
                 bottom: -5px;
                 left: -1px;
                 right: 4px;
         }
-        .portlet .cbr {
+	.portlet .cbr, .portlet-verysmall .cbr {
                 background-position: right -5px;
                 bottom: -5px;
                 right: -1px;
                 width: 5px;
         }
-.portletSmall { background-color: #fff; }
+.portletSmall, .portlet-verysmall  { background-color: #fff; }
+
+
+
         .portletSmall .ctl { background-position: left top;     }
         .portletSmall .ctr { background-position: right top; }
         .portletSmall .cbl { background-position: left -5px; }
         .portletSmall .cbr { background-position: right -5px; }
-.portletTitle { font-size: 16px; }
+.portletTitle { font-size: 16px; color:#666; }
+.portletTitleBold { 
+font-size: 16px;
+color:#666;
+padding-bottom:5px;
+ }
+
 .MyProfile, .portletGroupFiles { background-color: #fff; }
 div.secondModuleLayerSpace{
 color:#fff;
@@ -1044,6 +1083,11 @@ color:#fff;
                 vertical-align: bottom;
                 width: 200px;
         }
+	.portletSetLocation .button, .portletGroupFiles .button {
+		vertical-align: bottom;
+		margin-left: -8px;
+		margin-bottom: -2px;
+	}
 	.portletSetLocation input, .portletSetLocation-nobg input, .portletNewGroup input, .portletNewDalykas input, .portletGroupFiles input {
                 width: 190px;
         }
@@ -1079,6 +1123,17 @@ div.GroupFilesWiki{
 background: url('img/icons/exams-off.png') no-repeat 15px 5px;
 height:50px;
 }
+
+div.wiki2{
+width:355px;
+}
+div.wiki3{
+padding-top:15px;
+}
+div.wiki4{
+width:485px;
+}
+
 div.GroupFilesWiki p{
 padding-left:50px;
 }
@@ -1124,6 +1179,12 @@ padding-right:3px;
 position:absolute;
 right:5px;
 top:10px;
+}
+.butright1{
+position:absolute;
+left:15px;
+top:57px;
+padding-right: 30px;
 }
 
 .search-type .search-type-item{
@@ -1316,8 +1377,12 @@ height:32px;
 padding:8px 5px 0 0;
 }
 
-.dalykai-qu{
-padding: 0 30px 0 5px;
+div.dalykai-qu{
+padding: 0;
+margin-top:3px;
+}
+span.dalykai-qu{
+padding: 0 19px 0 2px;
 }
 .remeju-sarasas{
 border-bottom: 1px solid #ded8d8;
@@ -1614,12 +1679,16 @@ padding: 15px 0 0 0;
                 background-image: url('img/icons/watching_13.png');
                 margin-right: 0;
         }
-	#homePopularSubjects dd.item-tags, #SearchResults dd.item-tags {
+	#homePopularSubjects dd.item-tags, #SearchResults dd.item-tags, #SearchResults dd.subject-tags {
 		background-image: url('img/icons/icon_tag.png');
 		margin-right: 0;
 		display:inline;
 		padding: 0 0 0 25px;
 	}
+	#SearchResults dd.subject-tags {
+		background: url('img/icons/dalykas-very-small.png')no-repeat top left;
+		}
+
 	div.item-tags {
 		background: url('img/icons/icon_tag.png')no-repeat top left;
 		padding-left:25px;
@@ -1630,6 +1699,12 @@ padding: 15px 0 0 0;
 	}
 	#SearchResults li {
 		background: url('img/icons/subject_gray_18.png') no-repeat 3px 3px;
+	}
+	#SearchResults li.grupe {
+		background: url('img/icons/group_gray_21.png') no-repeat 3px 3px;
+	}
+	#SearchResults li.wiki {
+		background: url('img/icons/wiki-small.png') no-repeat 3px 3px;
 	}
 	#SearchResults li.file-on {
 		background: url('img/icons/file-on.png') no-repeat 3px 3px;
@@ -1651,6 +1726,11 @@ padding: 15px 0 0 0;
 	}
 	#SearchResults li.vgtu {
 		background: url('tmp/vgtu.png') no-repeat 3px 3px;
+	}
+	#SearchResults li dd.text {
+		font: 13px normal Arial,Helvetica,sans-serif;
+		margin: 0 ;
+		padding: 0 5px 0 0;	
 	}
 div.usergrupeleft ul, ul.GroupFilesList{
 list-style: none;
@@ -1697,24 +1777,83 @@ div.usergrupeleft ul li, ul.GroupFilesList li {
 		padding-right:15px;	
 	}
 
-	.Dalykail{
+	.Dalykail, .grupesl, ul.uni-info, #SearchResults ul.uni-info{
 		display: block;
 		list-style: none;
 		margin-bottom:5px;
 	}
+	#SearchResults ul.uni-info{
+		position:absolute;
+		top:0px;
+		left:5px;
+		z-index:5;
+		
+	}
+	ul.uni-info li, #SearchResults ul.uni-info li{
+		display: inline-block;
+		list-style: none;
+		margin-bottom:5px;
+		padding-right:10px;	
+		padding-left:5px;	
+		*display: inline; /* IE7 */
+		*zoom: 1; /* IE7 */
+	}
+	#SearchResults ul.uni-info li {
+	background: none;
+	padding-bottom:9px;
+	margin-bottom:9px;
+	height:25px;
+	}
+
+	div.form-ind{
+	padding:0 10px 0 0;
+	width:170px;
+	}
+	div.input-radio{
+	padding:10px 10px 5px 0;
+	}
+	div.input-radio span{
+	padding-right:15px;
+	}
 	
+	 #SearchResults ul.uni-info li.current{
+	background: url('img/icons/search-type-active.png') repeat-x center 15px;
+		padding-bottom:9px;
+		text-decoration:none;
+		margin-bottom:12px;
+	}
+	
+	div.form-links{
+	position:relative;
+	height:60px;
+	}
+	div.form-links form{
+	z-index:4;
+	position:absolute;
+	top:38px;
+	}
 
 	#DalykaiList li.grupes-dalykai, .Dalykail li{
-		background: url('img/icons/dalykas-very-small.png') no-repeat 5px center;
-		margin-top: 5px;
-		padding-left: 25px;
+		background: url('img/icons/dalykas-very-small.png') no-repeat 0 center;
+		margin-top: 4px;
+		padding-left: 20px;
 		}
-		.Dalykail li, li.Dalykail-last{
+#DalykaiList li.grupes-dalykai{
+		background: url('img/icons/dalykas-very-small.png') no-repeat 0 center;
+		padding-top: 2px;
+		}
+		.Dalykail li, li.Dalykail-last, .grupesl li{
 		background: url('img/icons/dalykas-very-small.png') no-repeat left top;
 		padding-left: 17px;
 		border-bottom: 1px solid #ded8d8;
 		padding-bottom:10px;
 		}
+		.grupesl li{
+		background: url('img/avatar-small.png') no-repeat 3px;
+		padding: 3px 0 5px 45px;
+		height: 35px;
+		}
+		
 		li.Dalykail-last{
 		border:none;
 		}
@@ -1763,6 +1902,34 @@ padding:0;
 margin:0;
 border:0;
 }
+div.filtrai{
+margin: 15px 0;
+background: #f2f2f2;
+padding: 5px 15px;
+}
+
+div.filtrai div.head h2, div.filtrai h2{
+	background: url('img/icons/icon_tag1.png') no-repeat left 3px;
+	text-transform: uppercase;
+	color: #333;
+	font-weight: normal;
+	padding:0 0 15px 25px;
+	font-size:13px;
+
+}
+
+div.filtrai h2{
+padding:0 0 0 25px;
+}
+
+div.filtrai .portlet{
+margin:5px 0;
+}
+
+div.filtrai .portlet-verysmall {
+
+padding-top:0;
+}
 
 
 .floatleft{
@@ -1782,11 +1949,14 @@ width:310px;
 padding-left:10px;
 }
 .results div{
-	width:590px;
+	width:575px;
 	float: left;
 	}
+.results dt div{
+width:100%;
+}
 .results div.add{
-	width:50px;
+	width:65px;
 	float: right;
 	padding: 18px 0 0 0;
 	}
@@ -1810,7 +1980,7 @@ background: url('img/icons/message-on.png') no-repeat left 22px;
 padding: 15px 15px 5px 15px;
 border-bottom: 1px solid #ded8d8;
 }
-.results dt a{
+.results dt a, .results2 dt a{
 	color:#D45500;
 	font-size:14px;
 	font-weight:bold;
