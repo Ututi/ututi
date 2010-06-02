@@ -129,7 +129,7 @@ class LogoUpload(Schema):
 class HideElementForm(Schema):
     """Ajax submit validator to hide welcome screen widgets."""
     allow_extra_fields = False
-    type = validators.OneOf(['hide_suggest_create_group'])
+    type = validators.OneOf(['hide_suggest_create_group', 'hide_suggest_watch_subject'])
 
 
 class ProfileController(SearchBaseController, UniversityListMixin):
@@ -647,4 +647,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     def js_hide_element(self):
         if self.form_result['type'] == 'hide_suggest_create_group':
             c.user.hide_suggest_create_group = True
+            meta.Session.commit()
+        elif self.form_result['type'] == 'hide_suggest_watch_subject':
+            c.user.hide_suggest_watch_subject = True
             meta.Session.commit()

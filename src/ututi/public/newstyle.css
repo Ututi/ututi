@@ -1351,7 +1351,7 @@ bottom:5px;
 }
 
 div.usergrupeleft {
-width: 400px;
+width: 390px;
 }
 div.usergrupeleft .portletTitle{
 padding-bottom:5px;
@@ -1398,9 +1398,9 @@ div.right_cross{
 	padding:5px 15px 0 0;
 }
 
-div.usergruperight {
+\div.usergruperight {
 text-align:right;
-width: 152px;
+width: 162px;
 padding-top:5px;
 }
 
