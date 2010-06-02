@@ -112,3 +112,9 @@ ${parent.head_tags()}
 
 </%self:rounded_block>
 %endif
+
+<div class="floatleft suzinok"><p>${_("New to Ututi? Don't know how to use it?")}</p></div>
+<div class="floatleft">
+  ${h.button_to(_('Find out more'), url(controller='home', action='tour'), method='GET', class_='btnMedium btnExclamation')}
+</div>
+<div class="clear"></div>

@@ -260,6 +260,15 @@ button.btn.btnNegative span {
     padding-left: 25px;
 }
 
+button.btnMedium.btnExclamation span {
+    background-position: left -335px;
+    padding-left: 25px;
+}
+
+button.btnMedium.btnExclamation {
+    background-position: right -374px;
+}
+
 
 /* Header */
 #siteName a, #siteName2 a{
