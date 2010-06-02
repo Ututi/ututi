@@ -552,3 +552,9 @@ li.expanded li.action a{ font-weight:bold; color:#ACBF50 !important; }
 #update-location-form button {
     margin-top: 20px;
 }
+
+.portlet .right_cross {
+    position: absolute;
+    bottom: 0;
+    right: 5px;
+}

@@ -14,6 +14,8 @@ create table users (
        gadugadu_confirmed boolean default false,
        gadugadu_confirmation_key char(32) default '',
        gadugadu_get_news boolean default false,
+       hide_suggest_create_group boolean default false,
+       hide_suggest_watch_subject boolean default false,
        primary key (id));;
 
 CREATE FUNCTION check_gadugadu() RETURNS trigger AS $$

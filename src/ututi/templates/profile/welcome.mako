@@ -47,3 +47,34 @@ ${parent.head_tags()}
   </script>
 %endif
 
+%if not c.user.hide_suggest_create_group:
+<%self:rounded_block id="user_location" class_="portletNewGroup">
+  <div class="floatleft usergrupeleft">
+    <h2 class="portletTitleBold">${_('Create a group')}</h2>
+    <p>${_("It's simple - you only need to know the email addresses of your group mates!")}</p>
+    <p>${_("Use the group's mailing list!")}</p>
+  </div>
+  <div class="floatleft usergruperight">
+    <form action="${url(controller='group', action='group_type')}" method="GET">
+      <fieldset>
+        <legend class="a11y">${_('Create group')}</legend>
+        <label><button value="submit" class="btnMedium"><span>${_('create group')}</span></button>
+        </label>
+      </fieldset>
+    </form>
+    <div class="right_cross"><a id="hide_suggest_create_group" href="">${_('no, thanks')}</a></div>
+  </div>
+  <br class="clear-left" />
+  <script type="text/javascript">
+  //<![CDATA[
+    $('#hide_suggest_create_group').click(function() {
+        $(this).closest('.portlet').hide();
+        $.post('${url(controller='profile', action='js_hide_element')}',
+               {type: 'hide_suggest_create_group'});
+        return false;
+    });
+  //]]>
+  </script>
+
+</%self:rounded_block>
+%endif

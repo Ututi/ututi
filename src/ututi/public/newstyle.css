@@ -1075,9 +1075,6 @@ color:#fff;
 .portletGroupFiles-single  {
 	margin-bottom: 5px;
 }
-.portletNewGroup, .portletNewDalykas  {
-	height: 55px;
-}
 	.portletSetLocation .label , .portletSetLocation-nobg .label, .portletNewGroup .label, .portletNewDalykas .label, .portletGroupFiles .label {
                 display: inline-block;
                 margin-right: 10px;

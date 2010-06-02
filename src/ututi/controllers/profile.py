@@ -126,6 +126,12 @@ class LogoUpload(Schema):
     logo = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
 
 
+class HideElementForm(Schema):
+    """Ajax submit validator to hide welcome screen widgets."""
+    allow_extra_fields = False
+    type = validators.OneOf(['hide_suggest_create_group'])
+
+
 class ProfileController(SearchBaseController, UniversityListMixin):
     """A controller for the user's personal information and actions."""
 
@@ -635,3 +641,10 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             if location is not None:
                 redirect(location.url())
         redirect(url(controller='profile', action='welcome'))
+
+    @ActionProtector("user")
+    @validate(schema=HideElementForm)
+    def js_hide_element(self):
+        if self.form_result['type'] == 'hide_suggest_create_group':
+            c.user.hide_suggest_create_group = True
+            meta.Session.commit()
