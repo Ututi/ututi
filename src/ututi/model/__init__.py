@@ -199,7 +199,8 @@ def setup_orm(engine):
                polymorphic_on=content_items_table.c.content_type,
                polymorphic_identity='generic',
                properties = {'created': relation(User,
-                                                 primaryjoin=content_items_table.c.created_by==users_table.c.id),
+                                                 primaryjoin=content_items_table.c.created_by==users_table.c.id,
+                                                 backref="content_items"),
                              'modified': relation(User,
                                                   primaryjoin=content_items_table.c.modified_by==users_table.c.id),
                              'deleted': relation(User,
@@ -586,6 +587,9 @@ class User(object):
     def checkPassword(self, password):
         """Check the user's password."""
         return validate_password(self.password, password)
+
+    def files(self):
+        return [item for item in self.content_items if item.deleted_by is None and item.content_type == 'file']
 
     @classmethod
     def authenticate(cls, username, password):

@@ -6,6 +6,7 @@
 
 <%def name="user_sidebar(exclude=[])">
 <div id="sidebar">
+  ${user_information_portlet()}
   %if not 'search' in exclude:
   ${search_portlet(parts=['text'], target=url(controller='profile', action='search'))}
   %endif
