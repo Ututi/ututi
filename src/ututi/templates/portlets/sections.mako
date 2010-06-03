@@ -16,11 +16,12 @@
   %if not 'create_subject' in exclude:
   ${user_create_subject_portlet()}
   %endif
+  %if not 'recommend' in exclude:
+  ${user_recommend_portlet()}
+  %endif
+
 ##  %if not 'blog' in exclude:
 ##  ${blog_portlet()}
-##  %endif
-##  %if not 'recommend' in exclude:
-##  ${user_recommend_portlet()}
 ##  %endif
 ##  ${user_support_portlet()}
 ##  ${ututi_prizes_portlet()}

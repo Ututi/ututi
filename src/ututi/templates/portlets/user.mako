@@ -214,14 +214,19 @@
           action="${url(controller='home', action='send_recommendations')}" id="ututi_recommendation_form">
       <div class="form-field">
         <input type="hidden" name="came_from" value="${request.url}" />
-        <label for="recommend_emails">${_('Enter the emails of your groupmates, separated by commas or new lines.')}</label>
-        <textarea name="recommend_emails" id="recommend_emails" rows="4" cols="30"></textarea>
+        <label class="textField" for="recommend_emails">${_('Enter the emails of your groupmates, separated by commas or new lines.')}
+          <textarea name="recommend_emails" id="recommend_emails" rows="4"></textarea>
+        </label>
       </div>
 
       <div class="form-field">
-        <span class="btn"><input id="recommendation_submit" type="submit" value="${_('Send invitation')}" ${h.trackEvent(None, 'action_portlets', 'send', 'ututi_recommend')}/></span>
+        <br />
+        <button class="btn" id="recommendation_submit" type="submit" value="${_('Send invitation')}" ${h.trackEvent(None, 'action_portlets', 'send', 'ututi_recommend')}>
+          <span>${_('Send invitation')}</span>
+        </button>
       </div>
     </form>
+    <br />
   <script type="text/javascript">
   //<![CDATA[
     $(document).ready(function() {

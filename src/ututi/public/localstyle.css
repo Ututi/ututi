@@ -585,8 +585,46 @@ div.action-portlet .content .header {
   line-height: 24px;
 }
 
+div.action-portlet .header .arrow,
 div.action-portlet .header .tooltip {
   float: right;
 }
 
+div.action-portlet .textField textarea {
+  background-image: url('img/textarea_small.png');
+  width: 275px;
+  height: 90px;
+}
+
 /* end action portlets */
+
+/* invitation portlet */
+
+#user_recommend_portlet_content .header {
+  background: url("../images/details/expand_down.png") right center no-repeat;
+}
+
+#ututi_recommendation_form label,
+#file_upload_portlet .comment {
+  color: #666;
+  font-size: 11px;
+  height: auto;
+  line-height: 13px;
+  margin-bottom: 3px;
+}
+
+#ututi_recommendation_form .form-field.loading {
+  background: url("../images/details/icon_progress.gif") right center no-repeat;
+}
+
+#recommendation_status div.ok {
+  padding-left: 18px;
+  background: url("../images/details/icon_ok_portlet.png") left center no-repeat;
+}
+
+#recommendation_status div.fail,
+#recommendation_status div.members {
+  padding-left: 18px;
+  background: url("../images/details/icon_fail_portlet.png") left center no-repeat;
+}
+/* end ututi recommendation form */
