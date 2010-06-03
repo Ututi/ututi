@@ -13,10 +13,9 @@
   %if not 'create_group' in exclude:
   ${user_create_group_portlet()}
   %endif
-
-##  %if not 'create_subject' in exclude:
-##  ${user_create_subject_portlet()}
-##  %endif
+  %if not 'create_subject' in exclude:
+  ${user_create_subject_portlet()}
+  %endif
 ##  %if not 'blog' in exclude:
 ##  ${blog_portlet()}
 ##  %endif
