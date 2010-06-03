@@ -19,10 +19,9 @@
   %if not 'recommend' in exclude:
   ${user_recommend_portlet()}
   %endif
-
-##  %if not 'blog' in exclude:
-##  ${blog_portlet()}
-##  %endif
+  %if not 'blog' in exclude:
+  ${blog_portlet()}
+  %endif
 ##  ${user_support_portlet()}
 ##  ${ututi_prizes_portlet()}
 ##  %if not 'banners' in exclude:

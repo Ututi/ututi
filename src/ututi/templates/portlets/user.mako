@@ -257,12 +257,14 @@
     </div>
   </%def>
   %if c.blog_entries:
-    <%self:border_portlet id="blog_portlet">
-    <div class="header">
-      <span style="float: left;">${_('Ututi news')}</span>
-      <div class="blog_pager" id="blog_bk"></div>
-      <div class="blog_pager" id="blog_fwd"></div>
-    </div>
+    <%self:uportlet id="blog_portlet" portlet_class="">
+      <%def name="header()">
+        ${_('Ututi news')}
+        <div style="float: right;">
+          <div class="blog_pager" id="blog_bk"></div>
+          <div class="blog_pager" id="blog_fwd"></div>
+        </div>
+      </%def>
     <div id="entries">
       %for blog_entry in c.blog_entries:
       ${entry(blog_entry)}
@@ -284,6 +286,6 @@
     <div class="footer">
       <a class="more" href="${_('ututi_blog_url')}">${_('More news')}</a>
     </div>
-    </%self:border_portlet>
+    </%self:uportlet>
   %endif
 </%def>
