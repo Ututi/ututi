@@ -127,7 +127,7 @@
             %if user.logo is not None:
               <img src="${url(controller='user', action='logo', id=user.id, width=70, height=70)}" alt="logo" />
             %else:
-              ${h.image('img/profile-avatar.png', alt='logo')|n}\
+              ${h.image('/img/profile-avatar.png', alt='logo')|n}\
             %endif
 		</div>
 		<div class="floatleft personal-data">
