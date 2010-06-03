@@ -222,7 +222,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             .filter(Event.author_id != c.user.id)\
             .order_by(desc(Event.created))\
             .limit(20).all()
-
+        c.action = 'home'
 
         return render('/profile/home.mako')
 
@@ -238,7 +238,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
 
         if not c.events:
             redirect(url(controller='profile', action='welcome'))
-
+        c.action = 'feed'
         return render('/profile/feed.mako')
 
     def _edit_form(self, defaults=None):
@@ -460,8 +460,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
 
     @ActionProtector("user")
     def welcome(self):
-        c.current_year = date.today().year
-        c.years = range(c.current_year - 10, c.current_year + 5)
+        c.action = 'home'
         return  render('profile/welcome.mako')
 
     @ActionProtector("user")

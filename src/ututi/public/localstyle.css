@@ -953,3 +953,21 @@ input.text_button:hover {
   padding-left: 25px;
   background: transparent url("../images/details/icon_tag.png") left center no-repeat;
 }
+
+/* events listing */
+ul#event_list {
+  margin-top: 15px;
+  padding-left: 25px;
+}
+
+ul#event_list li {
+  list-style-type: none;
+  padding: 0 0 5px 20px;
+  background: transparent url("../images/details/icon_event.png") left top no-repeat;
+}
+
+.tip {
+  font-size: 0.85em;
+  color: #808080;
+  padding-bottom: 5px;
+}

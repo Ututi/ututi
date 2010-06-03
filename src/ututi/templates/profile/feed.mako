@@ -5,10 +5,10 @@
   ${parent.head_tags()}
 </%def>
 
-<div class="display_selection">
-  <a href="${url(controller='profile', action='home')}" ${h.trackEvent(None, 'click', 'grouped_events', 'dashboard')}>${_('grouped')}</a>
-  <a href="${url(controller='profile', action='feed')}" class="active" ${h.trackEvent(None, 'click', 'ungrouped_events', 'dashboard')}>${_('ungrouped')}</a>
-</div>
+##<div class="display_selection">
+##  <a href="${url(controller='profile', action='home')}" ${h.trackEvent(None, 'click', 'grouped_events', 'dashboard')}>${_('grouped')}</a>
+##  <a href="${url(controller='profile', action='feed')}" class="active" ${h.trackEvent(None, 'click', 'ungrouped_events', 'dashboard')}>${_('ungrouped')}</a>
+##</div>
 
 <div class="tip">
 ${_('This is a list of all the recent events in the subjects you are watching and the groups you belong to.')}
