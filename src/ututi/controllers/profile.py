@@ -151,9 +151,6 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             'home':
             {'title': _("What's New?"),
              'link': url(controller='profile', action='home')},
-            'files':
-            {'title': _("Files"),
-             'link': url(controller='profile', action='files')},
             'subjects':
             {'title': _("Subjects"),
              'link': url(controller='profile', action='subjects')}
@@ -199,12 +196,6 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         c.emails_confirmed = [email.email for email in
                               meta.Session.query(Email).filter_by(id=c.user.id).filter_by(confirmed=True).all()]
         return render('profile/profile.mako')
-
-    @ActionProtector("user")
-    def files(self):
-        c.breadcrumbs.append(self._actions('files'))
-        return render('profile/files.mako')
-
 
     @ActionProtector("user")
     def home(self):

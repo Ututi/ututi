@@ -10,7 +10,6 @@ I am visiting them so they would get translated properly.
     >>> browser.getControl('Forum type').displayValue = ['Web-based forum']
     >>> browser.getControl('Save').click()
     >>> browser.open('http://localhost/group/moderators/forum/new_category')
-    >>> browser.open('http://localhost/profile/files')
     >>> browser.open('http://localhost/tour')
     >>> browser.open('http://localhost/statistics')
 
