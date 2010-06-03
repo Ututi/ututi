@@ -997,3 +997,65 @@ ul#event_list li {
   color: #808080;
   padding-bottom: 5px;
 }
+
+/* search results */
+
+div.search-item {
+  padding-left: 35px;
+}
+
+div.search-item { min-height:40px; }
+
+* html div.search-item { height:40px; }
+
+div.snippet-page {
+  background: white url("../images/details/icon_type_page.png") left 5px no-repeat;
+}
+
+div.snippet-group {
+  background: white url("../images/details/icon_type_group.png") left 5px no-repeat;
+}
+
+div.snippet-file {
+  background: white url("../images/details/icon_type_file.png") left 5px no-repeat;
+}
+
+div.snippet-subject {
+  background: white url("../images/details/icon_type_subject.png") left 5px no-repeat;
+}
+
+h3.search-results-title {
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+h3.search-results-title span {
+  float: left;
+  color: #808080;
+  font-size: 0.8em;
+  font-weight: normal;
+}
+
+h3.search-results-title span.result-count {
+  float: right;
+  color: #808080;
+  font-size: 0.8em;
+  font-weight: normal;
+}
+
+div#search-results div.search-item {
+  margin: 0.5em 0;
+}
+
+div#search-results div.search-item a.item-title {
+  margin-bottom: 0.3em;
+}
+
+div.group-item {
+  padding-left: 70px;
+  background: url("../images/group_ico.png") left top no-repeat;
+}
+
+div.search-item div.description {
+  margin: 0.1em 0;
+}
