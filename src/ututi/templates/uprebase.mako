@@ -51,7 +51,9 @@ ${_('student information online')}
 
   %if breadcrumbs:
     <%
-       if len(breadcrumbs) > 1:
+       if len(breadcrumbs) == 3:
+         ellipsis = [15, 15, 25]
+       elif len(breadcrumbs) == 2:
          ellipsis = [20, 40]
        else:
          ellipsis = [50]
