@@ -776,12 +776,12 @@ input.text_button:hover {
 /* end university list */
 
 /* search form */
-#page-content .search-controls {
+#mainContent .search-controls {
   width: 400px;
   padding-right: 90px;
 }
 
-#page-content .search-controls.loading {
+#mainContent .search-controls.loading {
   background: url("../images/details/search-loader.gif") right 40px no-repeat;
 }
 
