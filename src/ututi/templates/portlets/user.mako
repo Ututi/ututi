@@ -86,7 +86,7 @@
        if title is None:
          title = _('Support us')
     %>
-    <%self:uportlet id="support_portlet">
+    <%self:uportlet id="support_portlet" portlet_class="orange">
       <%def name="header()">
         ${title}
       </%def>

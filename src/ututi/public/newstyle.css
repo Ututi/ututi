@@ -704,7 +704,7 @@ padding-left:50px;
 	font-size:14px;
 	padding: 8px 0 0 0;
 }
-#aside div.orange{
+#aside .module-top.orange{
 	background: url('img/module-top-bg-orange.png') no-repeat center 2px;
 }
 #aside div.orange form{
@@ -930,7 +930,7 @@ font-size: 11px;
         border-left: 1px solid #ded8d8;
         border-right: 1px solid #ded8d8;
         display: block;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
         margin-top: 20px;
         padding: 5px 10px;
         position: relative;

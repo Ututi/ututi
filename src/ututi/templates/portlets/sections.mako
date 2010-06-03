@@ -22,11 +22,7 @@
   %if not 'blog' in exclude:
   ${blog_portlet()}
   %endif
-##  ${user_support_portlet()}
-##  ${ututi_prizes_portlet()}
-##  %if not 'banners' in exclude:
-##  ${ututi_banners_portlet()}
-##  %endif
+  ${user_support_portlet()}
 </div>
 </%def>
 
