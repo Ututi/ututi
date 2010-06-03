@@ -2,12 +2,12 @@
 <%namespace name="newlocationtag" file="/widgets/newlocationtag.mako" import="*"/>
 
 <%def name="title()">
-${_('New public group')}
+  ${_('New academic group')}
 </%def>
 
 
   <div id="CreatePubliCGroupLeft">
-    <h1 class="pageTitle">${_('Create a public group')}</h1>
+    <h1 class="pageTitle">${_('Create an academic group')}</h1>
 
     <form method="post" action="${url(controller='group', action='create_academic')}"
          id="group_add_form" enctype="multipart/form-data">
@@ -28,7 +28,7 @@ ${_('New public group')}
 
   ${self.group_live_search_js()}
 
-  <%self:right_pane title="${_('What can you do with public groups?')}">
+  <%self:right_pane title="${_('What can you do with academic groups?')}">
       <ul>
         <li>Lorem ipsum dolor sit amet</li>
         <li>Lorem ipsum dolor sit amet dolor sit amet</li>

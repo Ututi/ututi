@@ -1,7 +1,7 @@
 <%inherit file="/group/create_base.mako" />
 
 <%def name="title()">
-${_('New public group')}
+${_('New custom group')}
 </%def>
 
 
@@ -35,7 +35,7 @@ ${_('New public group')}
 
   ${self.group_live_search_js()}
 
-  <%self:right_pane title="${_('What can you do with public groups?')}">
+  <%self:right_pane title="${_('What can you do with custom groups?')}">
       <ul>
         <li>Lorem ipsum dolor sit amet</li>
         <li>Lorem ipsum dolor sit amet dolor sit amet</li>
