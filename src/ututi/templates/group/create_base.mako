@@ -207,7 +207,7 @@
 </%def>
 
 <%def name="right_pane(title, sidebar=True)">
-  <div id="CreatePubliCGroupRight">
+  <div id="CreatePublicGroupRight">
     <div class="group-type-info">
       <h1 class="pageTitle">${title}</h1>
         ${caller.body()}

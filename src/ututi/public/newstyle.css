@@ -569,7 +569,7 @@ margin-top: 0;
 
 
 /* Main Content block */
-#mainContent, #CreatePubliCGroupLeft {
+#mainContent, #CreatePublicGroupLeft {
         display: inline-block;
         margin: 20px 40px 0 0;
         vertical-align: top;
@@ -578,7 +578,7 @@ margin-top: 0;
         *zoom: 1; /* IE7 */
 }
 
-#CreatePubliCGroupLeft {
+#CreatePublicGroupLeft {
         width: 480px;
         border-right: 1px solid #e9e6e6;
         margin: 20px 40px 30px 0;
@@ -640,7 +640,7 @@ margin-top: 0;
 	margin: 10px 0 20px 0;
 }
 /* Right sidebar */
-#aside, #CreatePubliCGroupRight {
+#aside, #CreatePublicGroupRight {
         display: inline-block;
         margin-top: 15px;
         vertical-align: top;
@@ -835,15 +835,15 @@ padding:0 3px;
 .verysmall{
 font-size: 11px;
 }
-#CreatePubliCGroupRight{
+#CreatePublicGroupRight{
         width: 410px;
 }
-#CreatePubliCGroupRight ul,
-        #CreatePubliCGroupRight ul {
+#CreatePublicGroupRight ul,
+        #CreatePublicGroupRight ul {
                 list-style: none;
                 margin-top: 15px;
         }
-        #CreatePubliCGroupRight ul li {
+        #CreatePublicGroupRight ul li {
                 background: url('img/icons/tick_big.png') no-repeat 2px 11px;
                 padding: 10px 0 5px 25px;
                 margin:0 0 0 20px;
@@ -852,50 +852,50 @@ font-size: 11px;
 
         }
 
-/* CreatePubliCGroupLeft forms*/
-#CreatePubliCGroupLeft form {
+/* CreatePublicGroupLeft forms*/
+#CreatePublicGroupLeft form {
 		margin-top: 15px;
 		padding:0 0 0 15px;
                 width:90%;
         }
-	#CreatePubliCGroupLeft form span.space {
+	#CreatePublicGroupLeft form span.space {
 		height:10px;
 		display:block
 	}
         .fullForm label,
-        #CreatePubliCGroupLeft label {
+        #CreatePublicGroupLeft label {
                 font-size: 12px;
                 margin: 7px 0 0 0;
                 width: 180px;
         }
         .fullForm label .labelText,
-        #CreatePubliCGroupLeft label .labelText {
+        #CreatePublicGroupLeft label .labelText {
                 display: block;
         }
     .fullForm label input,
-    #CreatePubliCGroupLeft label input, #CreatePubliCGroupLeft input {
+    #CreatePublicGroupLeft label input, #CreatePublicGroupLeft input {
                 width: 270px;
                 margin: 0 0 10px 0;
         }
-        #CreatePubliCGroupLeft label span.address{
+        #CreatePublicGroupLeft label span.address{
                 color:#666;
                 font-size:14px;
                 margin: 0;
                 width:140px;
                 display: inline;        
         }
-        #CreatePubliCGroupLeft input.address{
+        #CreatePublicGroupLeft input.address{
         
         width:142px;
         }
-        #CreatePubliCGroupLeft label.button {
+        #CreatePublicGroupLeft label.button {
                 margin: 25px 0 0 0;
                 width: 105px;
         }
-        #CreatePubliCGroupLeft label.buttonHuge {
+        #CreatePublicGroupLeft label.buttonHuge {
                 display: block;
         }
-        #CreatePubliCGroupLeft label.button button {
+        #CreatePublicGroupLeft label.button button {
                 width: 105px;
         }
 
@@ -1454,7 +1454,7 @@ padding-top:5px;
         }
         #homeSearchNotesBlock ul,
 	#rightlist ul,
-        #CreatePubliCGroupLeft ul,
+        #CreatePublicGroupLeft ul,
         #homeCreateGroupBlock ul {
                 font-size: 13px;
                 line-height: 28px;
@@ -1467,14 +1467,14 @@ padding-top:5px;
 	line-height: 28px;
 	}
 	
-	#CreatePubliCGroupLeft p.laisvas {
+	#CreatePublicGroupLeft p.laisvas {
                 border-top: 1px solid #e9e6e6;
                 border-bottom: 1px solid #e9e6e6;
                 text-align: center;
                 width:430px;
 		padding: 15px 0 15px 0;
 	}
-	#CreatePubliCGroupLeft p span img{
+	#CreatePublicGroupLeft p span img{
 		border:0;
 		padding-right:15px;
         }

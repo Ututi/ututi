@@ -52,23 +52,23 @@ table.group-type-choice td.button {
 }
 
 
-#CreatePubliCGroupLeft input[type=checkbox] {
+#CreatePublicGroupLeft input[type=checkbox] {
     width: 1em !important;
 }
-#CreatePubliCGroupLeft input[type=radio] {
+#CreatePublicGroupLeft input[type=radio] {
     width: 1em !important;
 }
-#CreatePubliCGroupLeft label.checkbox {
+#CreatePublicGroupLeft label.checkbox {
     display: block;
 }
-#CreatePubliCGroupLeft label.checkbox span.labelText {
+#CreatePublicGroupLeft label.checkbox span.labelText {
     display: inline !important;
     width: 300px !important;
 }
 
 /* group live search */
 
-#CreatePubliCGroupRight div.search-header {
+#CreatePublicGroupRight div.search-header {
   font-size: 1.2em;
   padding-top: 2em;
   padding-bottom: 2px;

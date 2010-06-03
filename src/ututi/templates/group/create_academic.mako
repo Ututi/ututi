@@ -6,7 +6,7 @@
 </%def>
 
 
-  <div id="CreatePubliCGroupLeft">
+  <div id="CreatePublicGroupLeft">
     <h1 class="pageTitle">${_('Create an academic group')}</h1>
 
     <form method="post" action="${url(controller='group', action='create_academic')}"
