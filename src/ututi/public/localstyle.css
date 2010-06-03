@@ -558,3 +558,31 @@ li.expanded li.action a{ font-weight:bold; color:#ACBF50 !important; }
     bottom: 0;
     right: 5px;
 }
+
+/* action portlets */
+div.action-portlet {
+  width: 300px;
+  background: url("../img/action_portlet_green.png") top center no-repeat;
+  padding: 0;
+  padding-top: 2px;
+  margin: 0 0 2px 0;
+}
+
+div.action-portlet .content {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background: url("../img/action_portlet_green.png") bottom center no-repeat
+}
+
+div.action-portlet .content .header {
+  font-size: 14px;
+  font-weight: normal;
+  color: #d45500;
+  height: 24px;
+  line-height: 24px;
+}
+
+/* end action portlets */

@@ -7,26 +7,23 @@
 <%def name="user_sidebar(exclude=[])">
 <div id="sidebar">
   ${user_information_portlet()}
-  %if not 'search' in exclude:
-  ${search_portlet(parts=['text'], target=url(controller='profile', action='search'))}
-  %endif
-  %if not 'blog' in exclude:
-  ${blog_portlet()}
-  %endif
   %if not 'files' in exclude:
   ${quick_file_upload_portlet(c.user.groups + c.user.watched_subjects, label='user_files')}
   %endif
-  %if not 'create_subject' in exclude:
-  ${user_create_subject_portlet()}
-  %endif
-  %if not 'recommend' in exclude:
-  ${user_recommend_portlet()}
-  %endif
-  ${user_support_portlet()}
-  ${ututi_prizes_portlet()}
-  %if not 'banners' in exclude:
-  ${ututi_banners_portlet()}
-  %endif
+##  %if not 'create_subject' in exclude:
+##  ${user_create_subject_portlet()}
+##  %endif
+##  %if not 'blog' in exclude:
+##  ${blog_portlet()}
+##  %endif
+##  %if not 'recommend' in exclude:
+##  ${user_recommend_portlet()}
+##  %endif
+##  ${user_support_portlet()}
+##  ${ututi_prizes_portlet()}
+##  %if not 'banners' in exclude:
+##  ${ututi_banners_portlet()}
+##  %endif
 </div>
 </%def>
 
