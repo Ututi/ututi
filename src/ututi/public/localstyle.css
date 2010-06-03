@@ -346,6 +346,32 @@ div.file_upload_progress div.failed {
 
 /* misc */
 
+.thank_you {
+  padding-top: 7px;
+  padding-bottom: 200px;
+  background-position: bottom center;
+  background-image: url('../images/happy_cat.png');
+  background-repeat: no-repeat;
+}
+
+.no_thank_you {
+  padding-top: 7px;
+  padding-bottom: 240px;
+  background-position: bottom center;
+  background-image: url('../images/sad_cat.jpg');
+  background-repeat: no-repeat;
+}
+
+a.forward-link {
+  padding-right: 15px;
+  background: url("../images/details/link_arrow.png") right center no-repeat;
+}
+
+a.back-link {
+  padding-left: 15px;
+  background: white url("../images/details/link_back.png") left center no-repeat;
+}
+
 .section .container {
   padding-left: 20px;
   margin-bottom: 15px;
