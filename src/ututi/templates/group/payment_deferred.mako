@@ -1,4 +1,4 @@
-<%inherit file="/group/home.mako" />
+<%inherit file="/group/base.mako" />
 
 <h1>${_("Paying for the group is not possible at the moment")}</h1>
 <br />

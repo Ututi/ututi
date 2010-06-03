@@ -1,4 +1,4 @@
-<%inherit file="/group/home.mako" />
+<%inherit file="/group/base.mako" />
 <%namespace name="newlocationtag" file="/widgets/newlocationtag.mako" import="*"/>
 <%namespace file="/widgets/tags.mako" import="*"/>
 
@@ -74,6 +74,7 @@ ${h.javascript_link('/javascript/js-alternatives.js')|n}
         </div>
       </td>
       <td class="js-alternatives">
+
         ${h.input_line('title', _('Title'))}
         ${h.input_area('description', _('Description'))}
         <div class="form-field non-js">

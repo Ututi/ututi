@@ -153,7 +153,7 @@ class MailinglistController(GroupControllerBase):
     @protect_view
     def index(self, group):
         if check_crowds(['member', 'admin']):
-            c.breadcrumbs.append(self._actions('mailinglist'))
+            c.breadcrumbs.append(self._breadcrumb('mailinglist'))
         c.messages = self._top_level_messages(group)
         return render('mailinglist/index.mako')
 
@@ -166,7 +166,7 @@ class MailinglistController(GroupControllerBase):
 
         c.thread = thread
         if check_crowds(['member', 'admin']):
-            c.breadcrumbs.append(self._actions('mailinglist'))
+            c.breadcrumbs.append(self._breadcrumb('mailinglist'))
         c.messages = thread.posts
         return render('mailinglist/thread.mako')
 

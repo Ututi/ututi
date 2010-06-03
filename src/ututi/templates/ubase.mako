@@ -51,7 +51,9 @@ ${_('student information online')}
 
   %if breadcrumbs:
     <%
-       if len(breadcrumbs) > 1:
+       if len(breadcrumbs) > 2:
+         ellipsis = [10, 10, 15, 15]
+       elif len(breadcrumbs) == 2:
          ellipsis = [20, 40]
        else:
          ellipsis = [50]
@@ -235,7 +237,6 @@ ${_('student information online')}
         %else:
           ${self.loggedin_header(c.user)}
         %endif
-
         ${self.flash_messages()}
         ${next.body()}
       </div>

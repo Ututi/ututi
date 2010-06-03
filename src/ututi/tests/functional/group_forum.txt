@@ -160,7 +160,7 @@ Let's look into it:
 We could subscribe to email updates:
 
     >>> ubrowser.getControl('Subscribe to emails')
-    <SubmitControl name=None type='submit'>
+    <SubmitControl name=None type='submitbutton'>
 
 Let's post a reply:
 
@@ -170,7 +170,7 @@ Let's post a reply:
 By the act of replying, we were automatically subscribed:
 
     >>> ubrowser.getControl('Unsubscribe from emails')
-    <SubmitControl name=None type='submit'>
+    <SubmitControl name=None type='submitbutton'>
 
 The resulting email notification was sent to the admin user and to us:
 
@@ -205,7 +205,7 @@ Since we unsubscribed explicitly, we will not be automatically resubscribed
 again:
 
     >>> ubrowser.getControl('Subscribe to emails')
-    <SubmitControl name=None type='submit'>
+    <SubmitControl name=None type='submitbutton'>
 
 Forum-wide subscriptions
 ========================

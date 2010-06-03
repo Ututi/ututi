@@ -237,8 +237,58 @@ def group_action(method):
         c.group_payment_halfyear = int(config.get('group_payment_halfyear', 3000))
         c.group_file_limit = int(config.get('group_file_limit', 200 * 1024 * 1024))
         c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
+        c.group_menu_items = group_menu_items()
         return method(self, group)
     return _group_action
+
+
+def group_menu_items():
+    """Generate a list of all possible actions."""
+    if c.group.mailinglist_enabled:
+        forum_entry = {
+         'name': 'mailinglist',
+         'title': _('Mailing List'),
+         'link': url(controller='group', action='mailinglist', id=c.group.group_id),
+         'event': h.trackEvent(c.group, 'mailinglist', 'breadcrumb')}
+    else:
+        forum_entry = {
+         'name': 'forum',
+         'title': _('Forum'),
+         'link': url(controller='group', action='forum', id=c.group.group_id),
+         'event': h.trackEvent(c.group, 'forum', 'breadcrumb')}
+
+    files_entry = {
+         'name': 'files',
+         'title': _('Files'),
+         'link': url(controller='group', action='files', id=c.group.group_id),
+         'event': h.trackEvent(c.group, 'files', 'breadcrumb')
+        } if c.group.has_file_area else None
+
+    subjects_entry = {
+         'name': 'subjects',
+         'title': _('Subjects'),
+         'link': url(controller='group', action='subjects', id=c.group.group_id),
+         'event': h.trackEvent(c.group, 'subjects', 'breadcrumb') 
+        } if c.group.wants_to_watch_subjects else None
+
+    bcs = [
+        {'title': _("What's New?"),
+         'name': 'home',
+         'link': url(controller='group', action='home', id=c.group.group_id),
+         'event': h.trackEvent(c.group, 'home', 'breadcrumb')},
+        forum_entry,
+        {'title': _('Members'),
+         'name': 'members',
+         'link': url(controller='group', action='members', id=c.group.group_id),
+         'event': h.trackEvent(c.group, 'members', 'breadcrumb')}
+        ] + ([files_entry] if files_entry else []) + [
+        ] + ([subjects_entry] if subjects_entry else []) + [
+        {'title': _('Page'),
+         'name': 'page',
+         'link': url(controller='group', action='page', id=c.group.group_id),
+         'event': h.trackEvent(c.group, 'page', 'breadcrumb')},
+        ]
+    return bcs
 
 
 class GroupControllerBase(BaseController):
@@ -246,57 +296,14 @@ class GroupControllerBase(BaseController):
     def __before__(self):
         c.breadcrumbs = []
 
-    def _actions(self, selected):
-        """Generate a list of all possible actions.
-
-        The action with the name matching the `selected' parameter is
-        marked as selected.
-        """
-        if c.group.mailinglist_enabled:
-            forum_entry = {
-             'title': _('Mailing List'),
-             'link': url(controller='group', action='mailinglist', id=c.group.group_id),
-             'selected': selected == 'mailinglist',
-             'event': h.trackEvent(c.group, 'mailinglist', 'breadcrumb')}
+    def _breadcrumb(self, selected):
+        c.group_menu_current_item = selected # XXX needs a better place
+        for action in group_menu_items():
+            if action['name'] == selected:
+                return action
         else:
-            forum_entry = {
-             'title': _('Forum'),
-             'link': url(controller='group', action='forum', id=c.group.group_id),
-             'selected': selected == 'forum',
-             'event': h.trackEvent(c.group, 'forum', 'breadcrumb')}
+            return group_menu_items()[0]
 
-        files_entry = {
-             'title': _('Files'),
-             'link': url(controller='group', action='files', id=c.group.group_id),
-             'selected': selected == 'files',
-             'event': h.trackEvent(c.group, 'files', 'breadcrumb')
-            } if c.group.has_file_area else None
-
-        subjects_entry = {
-             'title': _('Subjects'),
-             'link': url(controller='group', action='subjects', id=c.group.group_id),
-             'selected': selected == 'subjects',
-             'event': h.trackEvent(c.group, 'subjects', 'breadcrumb') 
-            } if c.group.wants_to_watch_subjects else None
-
-        bcs = [
-            {'title': _("What's New?"),
-             'link': url(controller='group', action='home', id=c.group.group_id),
-             'selected': selected == 'home',
-             'event': h.trackEvent(c.group, 'home', 'breadcrumb')},
-            forum_entry,
-            {'title': _('Members'),
-             'link': url(controller='group', action='members', id=c.group.group_id),
-             'selected': selected == 'members',
-             'event': h.trackEvent(c.group, 'members', 'breadcrumb')}
-            ] + ([files_entry] if files_entry else []) + [
-            ] + ([subjects_entry] if subjects_entry else []) + [
-            {'title': _('Page'),
-             'link': url(controller='group', action='page', id=c.group.group_id),
-             'selected': selected == 'page',
-             'event': h.trackEvent(c.group, 'page', 'breadcrumb')},
-            ]
-        return bcs
 
 class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     """Controller for group actions."""
@@ -309,7 +316,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             redirect(url(controller='group', action='home', id=group.group_id))
 
     def _set_home_variables(self, group):
-        c.breadcrumbs.append(self._actions('home'))
+        c.breadcrumbs.append(self._breadcrumb('home'))
         c.events = group.group_events
         c.has_to_invite_members = (len(group.members) == 1 and
                                    len(group.invitations) == 0)
@@ -370,7 +377,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @group_action
     @ActionProtector("admin", "member")
     def edit_page(self, group):
-        c.breadcrumbs.append(self._actions('page'))
+        c.breadcrumbs.append(self._breadcrumb('page'))
         defaults = {
             'page_content': c.group.page,
             'page_public': 'public' if c.group.page_public else '',
@@ -397,7 +404,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         file = File.get(file_id)
         c.serve_file = file
 
-        c.breadcrumbs.append(self._actions('files'))
+        c.breadcrumbs.append(self._breadcrumb('files'))
 
         return render('group/files.mako')
 
@@ -597,7 +604,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @group_action
     @ActionProtector("member", "admin")
     def members(self, group):
-        c.breadcrumbs.append(self._actions('members'))
+        c.breadcrumbs.append(self._breadcrumb('members'))
         c.members = []
         for member in group.members:
             c.members.append({'roles': self._get_available_roles(member),
@@ -655,7 +662,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
 
         defaults.update(location)
 
-        c.breadcrumbs.append(self._actions('home'))
+        c.breadcrumbs.append(self._breadcrumb('home'))
 
         c.forum_types = [('mailinglist', _('Mailing list')),
                          ('forum', _('Web-based forum'))]
@@ -849,7 +856,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @group_action
     @ActionProtector("member", "admin")
     def subjects(self, group):
-        c.breadcrumbs.append(self._actions('subjects'))
+        c.breadcrumbs.append(self._breadcrumb('subjects'))
         c.list_open = request.GET.get('list', '') == 'open'
         return self._subjects(group)
 
@@ -1120,7 +1127,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @group_action
     @ActionProtector("member", "admin")
     def page(self, group):
-        c.breadcrumbs.append(self._actions('page'))
+        c.breadcrumbs.append(self._breadcrumb('page'))
         return render('group/page.mako')
 
     @group_action
@@ -1191,19 +1198,19 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
                     cancelurl=group.url(action='pay_cancel', qualified=True),
                     orderid='%s_%s_%s' % ('grouplimits', c.user.id, group.id)))
         c.payments = zip(payment_types, payment_amounts, payment_forms)
-        c.breadcrumbs.append(self._actions('home'))
+        c.breadcrumbs.append(self._breadcrumb('home'))
         return render_lang('group/pay.mako')
 
     @group_action
     @ActionProtector("member", "admin")
     def pay_accept(self, group):
-        c.breadcrumbs.append(self._actions('home'))
+        c.breadcrumbs.append(self._breadcrumb('home'))
         return render('group/pay_accept.mako')
 
     @group_action
     @ActionProtector("member", "admin")
     def pay_cancel(self, group):
-        c.breadcrumbs.append(self._actions('home'))
+        c.breadcrumbs.append(self._breadcrumb('home'))
         return render('group/pay_cancel.mako')
 
     @group_action

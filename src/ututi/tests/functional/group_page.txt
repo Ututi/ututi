@@ -19,7 +19,7 @@ At first the page should be empty.
 
 We can edit it of course:
 
-    >>> browser.getLink('Edit', index=1).click()
+    >>> browser.getLink('Edit', index=0).click()
     >>> browser.url
     'http://localhost/group/moderators/edit_page'
 
@@ -31,7 +31,7 @@ We can edit it of course:
 
 We can specify that the group's page is public, shown on the front page.
 
-    >>> browser.getLink('Edit', index=1).click()
+    >>> browser.getLink('Edit', index=0).click()
     >>> browser.getControl('Group page is visible to everybody').selected = True
     >>> browser.getControl('Save').click()
 

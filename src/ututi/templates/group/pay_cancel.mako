@@ -1,4 +1,4 @@
-<%inherit file="/group/home.mako" />
+<%inherit file="/group/base.mako" />
 
 <h1>${_("You have decided not to increase your group's file limit")}</h1>
 <br />

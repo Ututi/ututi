@@ -1,4 +1,4 @@
-<%inherit file="/group/home.mako" />
+<%inherit file="/group/base.mako" />
 <%namespace name="files" file="/sections/files.mako" />
 
 <%def name="title()">

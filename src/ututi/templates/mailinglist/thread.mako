@@ -1,13 +1,4 @@
-<%inherit file="/group/home.mako" />
-
-<%def name="title()">
-  ${c.group.title}
-</%def>
-
-<%def name="head_tags()">
-${parent.head_tags()}
-${h.javascript_link('/javascript/mailinglist.js')|n}
-</%def>
+<%inherit file="/mailinglist/base.mako" />
 
 <a class="back-link" href="${h.url_for(action='index')}">${_('Back to the topic list')}</a>
 <h1>${c.thread.subject}</h1>

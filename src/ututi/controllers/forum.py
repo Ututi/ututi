@@ -18,7 +18,7 @@ from ututi.lib.security import ActionProtector
 from ututi.lib.base import render
 from ututi.lib.helpers import check_crowds, flash
 from ututi.lib.security import deny
-from ututi.controllers.group import GroupControllerBase
+from ututi.controllers.group import GroupControllerBase, group_menu_items
 from ututi.model import Group, ForumCategory, ForumPost, SubscribedThread
 from ututi.model import get_supporters
 from ututi.model import meta
@@ -132,6 +132,7 @@ class ForumController(GroupControllerBase):
             if c.group is None:
                 abort(404)
             c.group_id = c.group.group_id
+            c.group_menu_items = group_menu_items()
             if c.group.mailinglist_enabled:
                 flash(_('The web-based forum for this group has been disabled.'
                         ' Please use the mailing list instead.'))
@@ -170,7 +171,7 @@ class ForumController(GroupControllerBase):
 
         if c.group is not None and self.can_post(c.user):
             # Only show tabs for members / people who can post.
-            c.breadcrumbs.append(self._actions('forum'))
+            c.breadcrumbs.append(self._breadcrumb('forum'))
 
     @group_action
     @protect_view
@@ -215,7 +216,7 @@ class ForumController(GroupControllerBase):
                              category_id=category_id, thread_id=thread_id))
 
     def _new_thread_form(self):
-        return render('forum/new.mako')
+        return render('forum/new_thread.mako')
 
     @category_action
     @ActionProtector("user")

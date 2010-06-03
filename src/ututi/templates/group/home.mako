@@ -1,13 +1,4 @@
-<%inherit file="/base.mako" />
-<%namespace file="/portlets/sections.mako" import="*"/>
-
-<%def name="title()">
-  ${c.group.title}
-</%def>
-
-<%def name="portlets()">
-${group_sidebar()}
-</%def>
+<%inherit file="/group/base.mako" />
 
 %if c.has_to_invite_members:
 <div id="invite_more_members" class="full_box">

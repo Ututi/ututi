@@ -1,4 +1,4 @@
-<%inherit file="/forum/index.mako" />
+<%inherit file="/forum/base.mako" />
 
 <a class="back-link" href="${url(controller=c.controller, action='thread', id=c.group_id, category_id=c.category.id, thread_id=c.thread.id)}">${_('Back to thread')}</a>
 <h1>${c.thread.title}</h1>

@@ -1,24 +1,4 @@
-<%inherit file="/base.mako" />
-<%namespace file="/portlets/sections.mako" import="*"/>
-<%namespace file="/portlets/forum.mako" import="*"/>
-
-<%def name="title()">
-  ${c.category.title}
-</%def>
-
-<%def name="portlets()">
-<div id="sidebar">
-  ${forum_info_portlet()}
-  <!-- forum crosslink -->
-  % if c.category.id == 2:
-    ${community_forum_posts_portlet()}
-  % elif c.category.id == 1:
-    ${bugs_forum_posts_portlet()}
-  % else:
-    ${group_sidebar()}
-  % endif
-</div>
-</%def>
+<%inherit file="/forum/base.mako" />
 
 % if c.group_id is not None:
     <a class="back-link" href="${url(controller=c.controller, action='categories', id=c.group_id)}">${_('Back to category list')}</a>
@@ -71,3 +51,4 @@
 
 ${forum_thread_list(c.category, n=10**10)}
 <!-- TODO: pagination -->
+

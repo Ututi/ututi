@@ -19,7 +19,7 @@ The link of the group leads to its home page.
     >>> browser.getLink('Moderatoriai').click()
     >>> browser.url
     'http://localhost/group/moderators/home'
-    >>> browser.printQuery('id("tabs")//div[@class="tab active"]//a/text()')
+    >>> browser.printQuery('//li[@class="current"]//a/text()')
     What's New?
 
 We can edit the group's information.
@@ -35,7 +35,7 @@ We can edit the group's information.
    >>> browser.getControl('Description').value = 'Ututi moderatorių grupė'
    >>> browser.getControl('Group logo').add_file(*make_file('test_logo.png'))
    >>> browser.getControl('Save').click()
-   >>> browser.printQuery('id("tabs")//div[@class="tab active"]//a/text()')
+   >>> browser.printQuery('id("moduleMenu")//li[@class="current"]//a/text()')
    What's New?
 
    >>> browser.printQuery("id('group_info_portlet')//img")

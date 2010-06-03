@@ -1,4 +1,4 @@
-<%inherit file="/group/pay/en.mako" />
+<%inherit file="/group/pay/base.mako" />
 
 <h1>${_("Make your group's file space unlimited")}</h1>
 <br />

@@ -10,7 +10,6 @@ Log in first.
 
 The subject:
 
-
     >>> browser.open('http://localhost/subject/vu/mat_analize')
     >>> browser.printQuery('id("BreadLinks")//li/a/text()')
     vu
@@ -18,5 +17,6 @@ The subject:
 The group:
 
     >>> browser.open('http://localhost/group/moderators')
-    >>> browser.printQuery('id("location")//div[@class="title"]/a/text()')
+    >>> browser.printQuery('id("BreadLinks")//li/a/text()')
     vu
+    Moderatoriai

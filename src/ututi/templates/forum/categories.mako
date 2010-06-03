@@ -1,4 +1,4 @@
-<%inherit file="/base.mako" />
+<%inherit file="/forum/base.mako" />
 <%namespace file="/portlets/forum.mako" import="*"/>
 <%namespace file="/portlets/sections.mako" import="*"/>
 <%namespace file="/forum/index.mako" import="*"/>

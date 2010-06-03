@@ -1,4 +1,4 @@
-<%inherit file="/mailinglist/thread.mako" />
+<%inherit file="/mailinglist/base.mako" />
 
 <%def name="title()">
 ${_('Message to the group')}

@@ -1,13 +1,4 @@
-<%inherit file="/group/home.mako" />
-<%namespace file="/portlets/sections.mako" import="*"/>
-
-<%def name="title()">
-  ${c.group.title}
-</%def>
-
-<%def name="portlets()">
-  ${group_sidebar()}
-</%def>
+<%inherit file="/mailinglist/base.mako" />
 
 <div id="page_header">
   % if h.check_crowds(['member', 'admin']):

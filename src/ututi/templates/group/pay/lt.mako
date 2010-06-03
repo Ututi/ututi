@@ -1,2 +1,3 @@
-<%inherit file="/group/pay/en.mako" />
-${parent.body()}
+<%inherit file="/group/pay/base.mako" />
+
+${self.pay_text()}

@@ -1,4 +1,4 @@
-<%inherit file="/group/home.mako" />
+<%inherit file="/group/base.mako" />
 
 <%def name="title()">
   ${c.group.title}
@@ -28,7 +28,6 @@
   </div>
 % endfor
 </%def>
-
 
 ${group_members(c.group)}
 <div style="clear: left;">

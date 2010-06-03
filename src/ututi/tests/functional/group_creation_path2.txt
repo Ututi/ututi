@@ -46,6 +46,7 @@ Let's create a simple group:
 After creating the group, we are redirected to the member invitation
 
     >>> browser.printQuery('//h1/text()')
+    Test group
     Group members
 
 Let us fill in several emails to invite.
@@ -115,7 +116,7 @@ We should be hailed by the welcome screen:
 
 The subject tab is hidden for public groups:
 
-    >>> browser.printQuery('id("tabs")//a/text()')
+    >>> browser.printQuery('id("moduleMenu")//a/text()')
     What's New?
     Forum
     Members
@@ -155,6 +156,7 @@ This time, let's try creating an academic group:
 After creating the group, we are redirected to the member invitation step:
 
     >>> browser.printQuery('//h1/text()')
+    Another test group
     Group members
 
 We've checked that already; let's move on.
@@ -212,6 +214,7 @@ Change the defaults to make sure the controls have an effect:
 After creating the group, we are redirected to the member invitation step:
 
     >>> browser.printQuery('//h1/text()')
+    Another test group
     Group members
 
 We've checked that already; let's move on.
@@ -225,7 +228,7 @@ The initial page will not suggest watching subjects (we opted out of it):
 
 The files and subjects tabs are hidden, as requested:
 
-    >>> browser.printQuery('id("tabs")//a/text()')
+    >>> browser.printQuery('id("moduleMenu")//a/text()')
     What's New?
     Forum
     Members

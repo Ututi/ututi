@@ -48,7 +48,10 @@ The bugs forum works just fine too:
 
     >>> browser.open('http://localhost/bugs')
 
-    >>> browser.getLink('New topic', index=1).click()
+    >>> browser.getLink('New topic', index=0).click()
+    >>> browser.url
+    'http://localhost/bugs/new_thread'
+
     >>> browser.getControl('Subject').value = 'Help!'
     >>> browser.getControl('Message').value = 'My ututi is borken!'
     >>> browser.getControl('Post').click()
@@ -77,9 +80,9 @@ Let's get back to the topic list:
 
 Links from the front page work:
 
-    >>> browser.getLink('Help!', index=1)
+    >>> browser.getLink('Help!', index=0)
     <Link text='Help!' url='http://localhost/bugs/thread/4'>
-    >>> browser.getLink('Help!', index=1).click()
+    >>> browser.getLink('Help!', index=0).click()
     >>> browser.printQuery('id("forum-thread")//div[@class="post-body"]/text()')
     My ututi is borken!
 

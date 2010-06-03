@@ -1,4 +1,4 @@
-<%inherit file="/group/home.mako" />
+<%inherit file="/group/base.mako" />
 
 <h1>${_('Edit group front page')}</h1>
 
