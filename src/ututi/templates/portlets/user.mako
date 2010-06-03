@@ -182,6 +182,22 @@
   </%self:action_portlet>
 </%def>
 
+<%def name="user_create_group_portlet(user=None)">
+  <%
+     if user is None:
+         user = c.user
+  %>
+  <%self:action_portlet id="group_create_portlet">
+    <%def name="header()">
+    <a ${h.trackEvent(None, 'click', 'user_new_group', 'action_portlets')} href="${url(controller='group', action='group_type')}">${_('create new group')}</a>
+    ${h.image('/images/details/icon_question.png',
+            alt=_("Communicate with your classmates, colleagues and friends, share files and news together!"),
+             class_='tooltip', style='margin-top: 4px;')|n}
+
+    </%def>
+  </%self:action_portlet>
+</%def>
+
 <%def name="user_recommend_portlet(user=None)">
   <%
      if user is None:

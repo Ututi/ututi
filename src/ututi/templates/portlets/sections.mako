@@ -10,6 +10,10 @@
   %if not 'files' in exclude:
   ${quick_file_upload_portlet(c.user.groups + c.user.watched_subjects, label='user_files')}
   %endif
+  %if not 'create_group' in exclude:
+  ${user_create_group_portlet()}
+  %endif
+
 ##  %if not 'create_subject' in exclude:
 ##  ${user_create_subject_portlet()}
 ##  %endif

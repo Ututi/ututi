@@ -585,4 +585,8 @@ div.action-portlet .content .header {
   line-height: 24px;
 }
 
+div.action-portlet .header .tooltip {
+  float: right;
+}
+
 /* end action portlets */
