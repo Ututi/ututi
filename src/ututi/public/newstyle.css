@@ -880,7 +880,7 @@ font-size: 11px;
         #CreatePubliCGroupLeft label span.address{
                 color:#666;
                 font-size:14px;
-                margin: 0 5px 0 -15px;
+                margin: 0;
                 width:140px;
                 display: inline;        
         }
