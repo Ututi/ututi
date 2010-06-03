@@ -1,5 +1,5 @@
 <%inherit file="/profile/base.mako" />
-<%namespace name="newlocationtag" file="/widgets/newlocationtag.mako" import="*"/>
+<%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*"/>
 
 <%def name="title()">
   ${c.user.fullname}
@@ -54,11 +54,13 @@
   </script>
 </%def>
 
-<h1>${_('Edit your profile')}</h1>
+<%def name="pagetitle()">
+${_('Profile settings')}
+</%def>
 
 <a class="back-link" href="${url(controller='profile', action='home')}">${_('back to the profile')}</a>
 
-<form method="post" action="${url(controller='profile', action='update')}" name="edit_profile_form" id="edit_profile_form" enctype="multipart/form-data">
+<form method="post" action="${url(controller='profile', action='update')}" name="edit_profile_form" id="edit_profile_form" enctype="multipart/form-data" class="fullForm">
   <table>
     <tr>
       <td style="width: 180px;">
@@ -77,6 +79,7 @@
         </div>
       </td>
       <td class="js-alternatives">
+        <fieldset>
         <h3>${_('Personal information')}</h3>
         ${h.input_line('fullname', _('Full name'))}
         <div class="form-field">
@@ -90,6 +93,7 @@
           <input type="file" name="logo_upload" id="logo_upload" class="line"/>
         </div>
         ${h.input_submit()}
+        </fieldset>
       </td>
     </tr>
   </table>
@@ -97,7 +101,8 @@
 
 <br />
 <form method="post" action="${url(controller='profile', action='update_contacts')}"
-      id="contacts_form">
+      id="contacts_form" class="fullForm">
+  <fieldset>
   <table>
     <tr>
       <td style="width: 180px;">&nbsp;</td>
@@ -110,10 +115,8 @@
       <td>
         %if c.gg_enabled:
           <div class="form-field">
-            <label for="gadugadu_uin">${_('Your GG number')}</label>
-            <div class="input-line"><div>
-                <input type="text" name="gadugadu_uin" id="gadugadu_uin" value="" class="line"/>
-            </div></div>
+            ${h.input_line('gadugadu_uin', _('Your GG number'))}
+
               %if c.user.gadugadu_uin:
                   %if not c.user.gadugadu_confirmed:
                     <div class="field-status">${_('(unconfirmed)')}</div>
@@ -152,10 +155,7 @@
           </div>
 
         <div class="form-field">
-          <label for="email">${_('Your email address')}</label>
-          <div class="input-line"><div>
-            <input type="text" name="email" id="email" value="" class="line"/>
-          </div></div>
+          ${h.input_line('email', _('Your email address'))}
           %if not c.user.isConfirmed:
           <div class="field-status">(unconfirmed)</div>
           <div>
@@ -178,6 +178,7 @@
       </td>
     </tr>
   </table>
+  </fieldset>
 </form>
 
 <br />
@@ -191,12 +192,14 @@
   <tr>
     <td style="width: 180px;">&nbsp;</td>
     <td>
-      <form method="post" action="${url(controller='profile', action='password')}" id="change_password_form">
+      <form method="post" action="${url(controller='profile', action='password')}" id="change_password_form" class="fullForm">
+        <fieldset>
         ${h.input_psw('password', _('Current password'))}
         ${h.input_psw('new_password', _('New password'))}
         ${h.input_psw('repeat_password', _('Repeat the new password'))}
-
+        <br />
         ${h.input_submit(_('Change password'))}
+        </fieldset>
       </form>
     </td>
   </tr>

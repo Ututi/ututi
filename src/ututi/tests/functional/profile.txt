@@ -35,6 +35,7 @@ This email is already in use, so we won't be able to use it.
 
 Let's try something unique
 
+    >>> browser.open('http://localhost/profile/edit')
     >>> form = browser.getForm('contacts_form')
     >>> form.getControl('Your email address').value = 'uniqueuser@ututi.lt'
     >>> form.getControl('Update contacts').click()

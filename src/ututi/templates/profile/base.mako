@@ -5,7 +5,11 @@
 ${user_sidebar()}
 </%def>
 
-<h1 class="pageTitle">${_('Home')}</h1>
+<%def name="pagetitle()">
+${_('Home')}
+</%def>
+
+<h1 class="pageTitle">${self.pagetitle()}</h1>
 <ul class="moduleMenu">
   <li class="current"><a href="${url(controller='profile', action='home')}">${_('Start')}<span class="edge"></span></a></li>
   <li><a href="${url(controller='profile', action='feed')}">${_("What's new?")}<span class="edge"></span></a></li>

@@ -97,6 +97,8 @@ div#pager {
 /* Form controls */
 span.error-message {
         color: red;
+        display: block;
+        margin-top: -5px;
 }
 .textField {
         display: inline-block;
