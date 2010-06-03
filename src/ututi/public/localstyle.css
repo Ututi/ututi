@@ -346,6 +346,11 @@ div.file_upload_progress div.failed {
 
 /* misc */
 
+form.inline-form,
+form.inline-form div {
+  display: inline;
+}
+
 .thank_you {
   padding-top: 7px;
   padding-bottom: 200px;
@@ -1059,3 +1064,24 @@ div.group-item {
 div.search-item div.description {
   margin: 0.1em 0;
 }
+
+/* flash messages */
+.flash-message {
+  background: #f2f2f2;
+  margin: 0 0 0.8em;
+  padding: 0.3em 6em 0.3em 0.5em;
+  position: relative;
+}
+
+.flash-message .close-link {
+  position: absolute;
+  top: 5px; right: 5px;
+  color: black;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.message {
+  color: #333333;
+}
+
