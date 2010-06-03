@@ -206,21 +206,23 @@
 </script>
 </%def>
 
-<%def name="right_pane(title)">
+<%def name="right_pane(title, sidebar=True)">
   <div id="CreatePubliCGroupRight">
     <div class="group-type-info">
       <h1 class="pageTitle">${title}</h1>
         ${caller.body()}
     </div>
 
-    <div id="sidebar">
-      <div class="search-header">
-        ${_('Recommended groups from your university and faculty')}
+    %if sidebar:
+      <div id="sidebar">
+        <div class="search-header">
+          ${_('Recommended groups from your university and faculty')}
+        </div>
+        <div class="message">
+          ${_('Enter your university and faculty and you will be able to see groups that are already here. If you find your group, join them!')}
+        </div>
       </div>
-      <div class="message">
-        ${_('Enter your university and faculty and you will be able to see groups that are already here. If you find your group, join them!')}
-      </div>
-    </div>
+    %endif
   </div>
 
 </%def>

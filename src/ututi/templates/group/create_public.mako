@@ -26,9 +26,9 @@ ${_('New public group')}
 
   </div>
 
-  ${self.group_live_search_js()}
+  ## ${self.group_live_search_js()}
 
-  <%self:right_pane title="${_('What can you do with public groups?')}">
+  <%self:right_pane title="${_('What can you do with public groups?')}" sidebar="">
       <ul>
         <li>Lorem ipsum dolor sit amet</li>
         <li>Lorem ipsum dolor sit amet dolor sit amet</li>
