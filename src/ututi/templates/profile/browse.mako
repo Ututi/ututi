@@ -10,7 +10,9 @@
 </%def>
 
 
-<h1>${_('Search')}</h1>
+<%def name="pagetitle()">
+${_('Search')}
+</%def>
 ${search_form(c.text, c.obj_type, c.tags, parts=['obj_type', 'text', 'tags'], target=url(controller='profile', action='search'))}
 
 ${universities_section(c.unis, url(controller='profile', action='browse'))}

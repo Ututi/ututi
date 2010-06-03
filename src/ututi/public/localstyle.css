@@ -699,3 +699,162 @@ input.text_button:hover {
   padding: 0;
   border-bottom: 1px solid #d45500;
 }
+
+/* university list */
+#university-list {
+  margin-top: 30px;
+  overflow: hidden;
+}
+
+.university_block {
+  padding-left: 36px;
+  width: 220px;
+  float: left;
+  font-size: 12px;
+  margin-top: 3px;
+  margin-right: 5px;
+  height: 35px;
+}
+
+.location_block {
+  padding-left: 36px;
+  font-size: 14px;
+  margin-top: 10px;
+  margin-right: 5px;
+}
+
+#location-search {
+  padding: 5px 10px;
+  background: #f5f5f5;
+  margin-top: 10px;
+}
+
+#location-search div.block-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #808080;
+}
+
+.location_block div.stats,
+.university_block div.stats {
+  color: #808080;
+  font-size: 11px;
+}
+
+.location_block div.logo,
+.university_block div.logo {
+  float: left;
+  margin-left: -36px;
+  height: 28px;
+  width: 26px;
+  vertical-align: middle;
+  line-height: 28px;
+}
+
+.location_block div.logo img,
+.university_block div.logo img {
+  vertical-align: middle;
+}
+
+#pager {
+  clear: left;
+}
+
+#pager.loading,
+#sorting.loading {
+  background: url("../images/details/icon_progress.gif") right center no-repeat;
+}
+
+#teaser_switch {
+  text-align: right;
+}
+
+#sorting a.active {
+  color: #4b4b4b;
+}
+
+/* end university list */
+
+/* search form */
+#page-content .search-controls {
+  width: 400px;
+  padding-right: 90px;
+}
+
+#page-content .search-controls.loading {
+  background: url("../images/details/search-loader.gif") right 40px no-repeat;
+}
+
+.search-controls .search-text {
+  width: 75%;
+  float: left;
+  height: 25px;
+  background: url("../images/borders/search-text.png") left center no-repeat;
+  padding-left: 5px;
+}
+
+.search-controls .search-text div {
+  height: 23px;
+  padding: 1px 0;
+  background: url("../images/borders/search-text.png") right center no-repeat;
+  padding-right: 5px;
+  line-height: 23px;
+}
+
+.search-controls .search-text input {
+  width: 100%;
+  font-size: 18px;
+  border: 0;
+  background: transparent url("../images/details/icon_eyes.png") right center no-repeat;
+}
+
+.search-controls .search-submit {
+  float: right;
+  margin-left: 3px;
+}
+
+.search-type {
+  margin: 0;
+  padding: 0;
+  padding-left: 10px;
+  height: 35px;
+  overflow: auto;
+  z-index: 100;
+  position: relative;
+  top: 1px;
+}
+
+.search-type .search-type-item {
+  float: left;
+  padding: 0 5px;
+  margin: 0;
+  font-size: 1.2em;
+  height: 35px;
+  line-height: 35px;
+  background: transparent url("../images/borders/search-type.png") bottom center repeat-x;
+  color: #d45500;
+  cursor: pointer;
+  text-transform: lowercase;
+}
+
+.search-type .active {
+  color: #333;
+  background: transparent url("../images/borders/search-type-active.png") bottom center no-repeat;
+  z-index: 1000;
+}
+
+.search-text-submit {
+  z-index: -100;
+}
+
+.search-tags {
+  margin-top: 5px;
+}
+
+.search-tags label {
+  text-transform: uppercase;
+  color: #888;
+  font-size: 0.85em;
+  padding-left: 25px;
+  background: transparent url("../images/details/icon_tag.png") left center no-repeat;
+}

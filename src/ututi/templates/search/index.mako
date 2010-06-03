@@ -117,9 +117,11 @@ ${h.javascript_link('/javascript/search.js')|n}
         </div>
       %endif
       <div class="search-submit">
-        <span class="btn-large">
-          <input type="submit" id="search-btn" value="${_('Search-btn')}"/>
-        </span>
+        <button class="btnMedium" type="submit" value="${_('Search-btn')}">
+          <span>
+            ${_('Search-btn')}
+          </span>
+        </button>
       </div>
       <br style="clear: left;"/>
     </div>
