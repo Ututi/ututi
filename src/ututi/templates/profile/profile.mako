@@ -6,7 +6,9 @@
 </%def>
 
 
-<h1>${_('What have I been doing?')}</h1>
+<%def name="pagetitle()">
+${_('What have I been doing?')}
+</%def>
 % if c.events:
   <ul id="event_list">
     % for event in c.events:
