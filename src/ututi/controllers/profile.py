@@ -151,9 +151,6 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             'home':
             {'title': _("What's New?"),
              'link': url(controller='profile', action='home')},
-            'files':
-            {'title': _("Files"),
-             'link': url(controller='profile', action='files')},
             'subjects':
             {'title': _("Subjects"),
              'link': url(controller='profile', action='subjects')}
@@ -201,12 +198,6 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         return render('profile/profile.mako')
 
     @ActionProtector("user")
-    def files(self):
-        c.breadcrumbs.append(self._actions('files'))
-        return render('profile/files.mako')
-
-
-    @ActionProtector("user")
     def home(self):
         if c.user.location is None:
             h.flash(_("You haven't told us where you are studying. "
@@ -222,7 +213,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             .filter(Event.author_id != c.user.id)\
             .order_by(desc(Event.created))\
             .limit(20).all()
-
+        c.action = 'home'
 
         return render('/profile/home.mako')
 
@@ -238,7 +229,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
 
         if not c.events:
             redirect(url(controller='profile', action='welcome'))
-
+        c.action = 'feed'
         return render('/profile/feed.mako')
 
     def _edit_form(self, defaults=None):
@@ -460,8 +451,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
 
     @ActionProtector("user")
     def welcome(self):
-        c.current_year = date.today().year
-        c.years = range(c.current_year - 10, c.current_year + 5)
+        c.action = 'home'
         return  render('profile/welcome.mako')
 
     @ActionProtector("user")

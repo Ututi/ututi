@@ -5,7 +5,9 @@
   ${parent.head_tags()}
 </%def>
 
-<h1>${_('Why we need support?')}</h1>
+<%def name="pagetitle()">
+${_('Why we need support?')}
+</%def>
 
 <p style="padding-top: 7px">${_('Ututi is just like wikipedia: every user can change, create, see and download the content for free.'
        '  But maintainance of servers, development and supervision requires recources.'
