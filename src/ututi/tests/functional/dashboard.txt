@@ -7,9 +7,5 @@ Just visit the dashboard first.
     >>> browser.url
     'http://localhost/home'
 
-    >>> browser.printQuery("//span[@class='title']/a/text()")
+    >>> browser.printQuery("//a[@class='subject_title']/text()")
     Matematinė analizė
-
-    >>> browser.getLink('ungrouped').click()
-    >>> browser.url
-    'http://localhost/home/feed'
