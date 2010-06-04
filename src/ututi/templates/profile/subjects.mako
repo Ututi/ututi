@@ -59,7 +59,7 @@ $(document).ready(function(){
 
 <%def name="header(title, update_url, selected)">
 <div class="hdr">
-  <span class="larger">${title|n}</span>
+  <h3 >${title|n}</h3>
   <div style="float:right;" class="small">
     ${_('Receive messages about updates in subjects')}
     <br />

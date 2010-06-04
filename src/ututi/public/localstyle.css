@@ -1085,3 +1085,68 @@ div.search-item div.description {
   color: #333333;
 }
 
+/* watched subjects */
+.personal_watched_subjects {
+  padding-left: 10px;
+}
+
+.personal_watched_subjects li.enabled {
+  list-style-type: none;
+  padding: 0 0 5px 20px;
+  background: transparent url("../images/details/icon_subject_small.png") left top no-repeat;
+}
+
+.personal_watched_subjects li.disabled {
+  list-style-type: none;
+  padding: 0 0 5px 20px;
+  background: transparent url("../images/details/dalykas_disabled.png") left top no-repeat;
+}
+
+.personal_watched_subjects li.enabled a {
+  color: #000;
+  text-size: 1em;
+}
+
+.personal_watched_subjects li.disabled a {
+  color: #999;
+  text-size: 1em;
+}
+
+.hdr {
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+
+.enabled .unignore_subject_button {
+  display: none;
+}
+
+.disabled .ignore_subject_button {
+  display: none;
+}
+
+.select_interval_form_done .in_progress_icon,
+.select_interval_form .in_progress_icon {
+  float: right;
+  display: none;
+}
+
+.select_interval_form_in_progress .done_icon,
+.select_interval_form .done_icon {
+  float: right;
+  display: none;
+}
+
+.select_interval_form_in_progress .in_progress_icon {
+  float: right;
+}
+
+.select_interval_form_done .done_icon{
+  float: right;
+}
+
+li.empty_note {
+  list-style-type: none;
+  color: #999;
+  text-size: 1em;
+}
