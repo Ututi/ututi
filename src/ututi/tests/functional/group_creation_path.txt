@@ -18,6 +18,7 @@ We can add a group at the url /groups/add.
 After creating the group, we are redirected to the member invitation
 
     >>> browser.printQuery('//h1/text()')
+    Test group
     Group members
 
 Let us fill in several emails to invite.
