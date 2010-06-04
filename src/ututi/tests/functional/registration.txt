@@ -74,7 +74,7 @@ What if we clicked the link again?
 
 
      >>> print browser.url
-     http://localhost/welcome
+     http://localhost/home
 
 We have been logged in after signing up. Now let's log out and test more unfortunate
 scenarios:

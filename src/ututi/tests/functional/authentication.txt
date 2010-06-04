@@ -4,9 +4,9 @@ Tests for logging in, logging out, access denied and all related things
 -------------------------
 Visiting a profile-related page should not crash if the user is not logged in.
     >>> browser = Browser()
-    >>> browser.open('http://localhost/welcome')
+    >>> browser.open('http://localhost/home')
     >>> browser.url
-    'http://localhost/?came_from=http%3A%2F%2Flocalhost%2Fwelcome'
+    'http://localhost/?came_from=http%3A%2F%2Flocalhost%2Fhome'
 
 
 -------------------------

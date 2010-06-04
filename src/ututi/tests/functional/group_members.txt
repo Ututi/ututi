@@ -76,6 +76,10 @@ Let's accept this invitation.
     >>> browser2.printQuery("//div[@class='flash-message']/span/text()")
     Close
     Congratulations! You are now a member of the group 'Moderatoriai'
+    Close
+    You haven't told us where you are studying. You can do this
+    . Thanks.
+
 
     >>> browser2.getLink('Moderatoriai').click()
     >>> browser2.getLink('Members').click()

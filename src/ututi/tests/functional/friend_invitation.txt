@@ -10,7 +10,7 @@ Testing ututi recommendation letters sent to friends
    >>> browser = Browser.logIn()
    >>> browser.open('http://localhost/profile/feed')
    >>> browser.url
-   'http://localhost/welcome'
+   'http://localhost/profile/feed'
 
 There should be a portlet with a form that let's us enter email addresses the recommendations will be sent to:
    >>> form = browser.getForm(id='ututi_recommendation_form')
@@ -35,7 +35,7 @@ There should be a portlet with a form that let's us enter email addresses the re
 And after all this we are redirected back to where we came from.
 
    >>> browser.url
-   'http://localhost/welcome'
+   'http://localhost/profile/feed'
 
 Plus, a status message is displayed:
    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
@@ -76,9 +76,6 @@ What if some of the emails were mistyped?
    <BLANKLINE>
    The Ututi team
    <BLANKLINE>
-
-   >>> browser.url
-   'http://localhost/welcome'
 
    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
    Close

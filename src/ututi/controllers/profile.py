@@ -204,9 +204,6 @@ class ProfileController(SearchBaseController, UniversityListMixin):
                       "You can do this <a href='%(edit_url)s'>here</a>. Thanks.") % dict(edit_url=url(controller='profile', action='edit')))
         c.breadcrumbs.append(self._actions('home'))
 
-        if not c.user.memberships and not c.user.watched_subjects:
-            redirect(url(controller='profile', action='welcome'))
-
         c.events = meta.Session.query(Event)\
             .filter(or_(Event.object_id.in_([s.id for s in c.user.all_watched_subjects]),
                         Event.object_id.in_([m.group.id for m in c.user.memberships])))\
@@ -227,8 +224,6 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             .order_by(desc(Event.created))\
             .limit(20).all()
 
-        if not c.events:
-            redirect(url(controller='profile', action='welcome'))
         c.action = 'feed'
         return render('/profile/feed.mako')
 
@@ -450,15 +445,8 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         return "OK"
 
     @ActionProtector("user")
-    def welcome(self):
-        c.action = 'home'
-        return  render('profile/welcome.mako')
-
-    @ActionProtector("user")
     def register_welcome(self):
-        c.current_year = date.today().year
-        c.years = range(c.current_year - 10, c.current_year + 5)
-        return  render('profile/welcome.mako')
+        return  render('profile/home.mako')
 
 
     @validate(schema=SearchSubmit, form='test', post_only = False, on_get = True)
@@ -606,12 +594,12 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         return render('/profile/support.mako')
 
     @ActionProtector("user")
-    @validate(schema=LocationForm, form='welcome')
+    @validate(schema=LocationForm, form='home')
     def update_location(self):
         c.user.location = self.form_result.get('location', None)
         meta.Session.commit()
         h.flash(_('Your university information has been updated.'))
-        redirect(url(controller='profile', action='welcome'))
+        redirect(url(controller='profile', action='home'))
 
     @ActionProtector("user")
     def js_update_location(self):
@@ -619,18 +607,18 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             fields = manual_validate(LocationForm)
             c.user.location = fields.get('location', None)
             meta.Session.commit()
-            return render_mako_def('/profile/welcome.mako','location_updated')
+            return render_mako_def('/profile/home.mako','location_updated')
         except Invalid, e:
             abort(400)
 
     @ActionProtector("user")
-    @validate(schema=LocationForm, form='welcome')
+    @validate(schema=LocationForm, form='home')
     def goto_location(self):
         if hasattr(self, 'form_result'):
             location = self.form_result.get('location', None)
             if location is not None:
                 redirect(location.url())
-        redirect(url(controller='profile', action='welcome'))
+        redirect(url(controller='profile', action='home'))
 
     @ActionProtector("user")
     @validate(schema=HideElementForm)
