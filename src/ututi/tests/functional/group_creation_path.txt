@@ -40,28 +40,28 @@ Let's add some watched subjects now:
 
     >>> browser.getLink('Watch subjects').click()
 
-We can create a new subject without leaving the subject form:
-
-    >>> browser.getLink('Create a new subject').click()
-    >>> browser.getControl(name='location-1').value = 'vu'
-    >>> browser.getControl('Title').value = 'Test subject'
-    >>> browser.getControl('Lecturer').value = 'Some guy'
-    >>> browser.getControl('Save').click()
-    >>> print browser.url
-    http://localhost/group/test/subjects
-
-The subject is added to the watched subject list automatically:
-
-    >>> browser.printQuery("id('watched-subjects')")
-    <ul id="watched-subjects">
-      <li class="">
-        <a href="/subject/vu/test_subject">Test subject</a>
-        ...
-      </li>
-      <li id="empty_subjects_msg" class="empty_msg hidden">
-      Your group is not watching any subjects. Add them by searching.
-    </li>
-    </ul>
+## We can create a new subject without leaving the subject form:
+##
+##     >>> browser.getLink('Create a new subject').click()
+##     >>> browser.getControl(name='location-1').value = 'vu'
+##     >>> browser.getControl('Title').value = 'Test subject'
+##     >>> browser.getControl('Lecturer').value = 'Some guy'
+##     >>> browser.getControl('Save').click()
+##     >>> print browser.url
+##     http://localhost/group/test/subjects
+##
+## The subject is added to the watched subject list automatically:
+##
+##     >>> browser.printQuery("id('watched-subjects')")
+##     <ul id="watched-subjects">
+##       <li class="">
+##         <a href="/subject/vu/test_subject">Test subject</a>
+##         ...
+##       </li>
+##       <li id="empty_subjects_msg" class="empty_msg hidden">
+##       Your group is not watching any subjects. Add them by searching.
+##     </li>
+##     </ul>
 
 The users should get emails:
 
@@ -356,6 +356,6 @@ Now let's kick out all of the members and delete the group:
 
     >>> browser.getControl('Delete group').click()
 
-Let's make sure our subjects are still in here:
-
-    >>> browser.open('http://localhost/subject/vu/test_subject')
+## Let's make sure our subjects are still in here:
+##
+##     >>> browser.open('http://localhost/subject/vu/test_subject')
