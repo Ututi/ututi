@@ -1839,6 +1839,11 @@ class ForumCategory(object):
 
         return sorted(threads, key=lambda t: t['created'], reverse=True)
 
+    def url(self, controller='forum'):
+        group_id = self.group.group_id if self.group is not None else None
+        return url(controller=controller, action='index',
+                   id=group_id, category_id=self.id)
+
 
 class ForumPost(ContentItem):
     """Forum post."""

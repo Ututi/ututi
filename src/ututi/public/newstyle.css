@@ -62,23 +62,26 @@ h1,h2,h3,h4,h5,h6 {
         display: none;
 }
 .green{
-color:#668000;
+    color:#668000;
+}
+.blark{
+    color:#333333;
 }
 .orange{
-color:#D45500;
+    color:#D45500;
 }
 .grey{
-color:#666;
+    color:#666;
 }
-.normal-font{
-font: 13px normal Arial,Helvetica,sans-serif;
-font-weight: normal;
+.normal-font {
+    font: 13px normal Arial,Helvetica,sans-serif;
+    font-weight: normal;
 }
-.anth3{
-font: 16px normal Arial,Helvetica,sans-serif;
+.anth3 {
+    font: 16px normal Arial,Helvetica,sans-serif;
 }
-.bold{
-font-weight:bold;
+.bold {
+    font-weight:bold;
 }
 
 /* begin pager */
@@ -1098,7 +1101,7 @@ color:#fff;
         background-image: none;
         height: 100%;
         padding:0;
-        margin-bottom:40px;
+        margin-bottom:20px;
 }
 .portletGroupFiles-single  {
         margin-bottom: 5px;
@@ -1183,20 +1186,21 @@ padding-left:5px;
 
 
 div.GroupFiles-nobg{
-background: none;
+    background: none;
 }
 div.GroupFiles-nobg p{
-padding-left:15px;
-padding-bottom:5px;
+    padding-left:15px;
+    padding-bottom:5px;
 }
-div.GroupFiles-single, div.message-list-on, div.message-list-off, div.message-list-on1, div.message-list-off1{
-height:40px;
-position:relative;
+div.GroupFiles-single, div.message-list-on, div.message-list-off,
+div.message-list-on1, div.message-list-off1 {
+    height: 40px;
+    position: relative;
 }
 div.GroupFiles-single h2{
-position:absolute;
-left:15px;
-top:10px;
+    position: absolute;
+    left: 15px;
+    top: 10px;
 }
 div.GroupFiles-single h2 span{
 padding-left:3px;
@@ -1244,26 +1248,31 @@ height:30px;
 padding: 5px 15px 0 15px;
 background: url("img/icons/search-type.png") repeat-x center bottom;
 }
-div.message-list-on, div.message-list-on1{
-border-bottom: 1px solid #ded8d8;
-background: url("img/icons/message-on.png") no-repeat 15px center;
+div.message-list-on, div.message-list-on1 {
+    border-bottom: 1px solid #ded8d8;
+    background: url("img/icons/message-on.png") no-repeat 15px center;
 }
 
-div.message-list-off, div.message-list-off1{
-background: url("img/icons/message-off.png") no-repeat 15px center;
+div.message-list-off, div.message-list-off1 {
+    background: url("img/icons/message-off.png") no-repeat 15px center;
 }
 
 div.message-list-on div.m-on, div.message-list-off div.m-on,
-div.message-list-on1 div.m-on, div.message-list-off1 div.m-on{
-padding:6px 0 0 45px;
-width:470px;
+div.message-list-on1 div.m-on, div.message-list-off1 div.m-on {
+    padding:6px 0 0 45px;
+    width:470px;
 }
 div.message-list-on div.user, div.message-list-off div.user,
-div.message-list-on1 div.user, div.message-list-off1 div.user{
-padding:6px 15px 0 0px;
-text-align:right;
-width:100px;
-background: url("img/icons/cross_small.png") no-repeat right 7px ;
+div.message-list-on1 div.user, div.message-list-off1 div.user {
+    padding: 6px 15px 0 0px;
+    text-align: right;
+    width: 100px;
+    background: url("img/icons/cross_small.png") no-repeat right 7px;
+}
+
+div.portletGroupFiles span.reply-count {
+    color: #333;
+    font-weight: normal;
 }
 
 
@@ -1300,61 +1309,67 @@ border-bottom: 1px solid #ded8d8;
 padding: 5px 0 5px 15px;
 }
 li.files_more{
-cursor: pointer;
-list-style-type: none;
-border-top: 1px solid #ded8d8;
-width:158px;
-margin: 0 0 0 15px;
-text-align:center;
+    cursor: pointer;
+    list-style-type: none;
+    border-top: 1px solid #ded8d8;
+    width:158px;
+    margin: 0 0 0 15px;
+    text-align:center;
 }
 li.files_more span{
-padding-right: 10px;
-background: url("img/icons/arrow-very-small-down.png") right center no-repeat;
+    padding-right: 10px;
+    background: url("img/icons/arrow-very-small-down.png") right center no-repeat;
 }
 
-li.kiti-failai-100{
-margin: 5px 0 0 0;
-padding:0 0 0 45px;
+div.kiti-failai-100 {
+    margin: 5px 0 0 0;
+    padding:0 0 0 45px;
 }
 
 div.GroupFiles h2, div.GroupFiles-nobg h2{
-padding: 9px 0 0 50px;
+    padding: 9px 0 0 50px;
 }
+
 div.GroupFiles-nobg h2{
-padding: 9px 0 0 15px;
+    padding: 9px 0 0 15px;
 }
+
 div.GroupFiles-nobg h2 span{
-padding-left: 5px;
+    padding-left: 5px;
 }
+
 div.delete-files h2{
-padding: 7px 0 0 38px;
+    padding: 7px 0 0 38px;
 }
+
 span.group-ind, span.group-but{
-position:absolute;
-right:5px;
-top:3px;
+    position:absolute;
+    right:5px;
+    top:3px;
 }
+
 div.single-title span.group-but-single{
-position:absolute;
-right:5px;
-top:12px;
+    position:absolute;
+    right:5px;
+    top:12px;
 }
+
 div.single-messages div.message-list-on,
 div.single-messages div.message-list-off,
 div.single-messages div.message-list-on1,
 div.single-messages div.message-list-off1{
-border-bottom: 1px solid #ded8d8;
+    border-bottom: 1px solid #ded8d8;
 }
+
 div.single-messages div.message-list-on1 div.user,
 div.single-messages div.message-list-off1 div.user{
-background:none;
-padding-right: 5px;
-width:115px;
+    background: none;
 }
-span.group-but-single{
-position:absolute;
-right:5px;
-top:15px;
+
+span.group-but-single {
+    position:absolute;
+    right:5px;
+    top:15px;
 }
 
 span.group-but{
@@ -1976,7 +1991,11 @@ padding-top:0;
 
 
 .floatleft{
-float: left;
+    float: left;
+}
+
+.floatright{
+    float: right;
 }
 
 .firsttime{

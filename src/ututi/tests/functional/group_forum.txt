@@ -29,7 +29,7 @@ There should be a default category, 'General':
 
 Let's start a thread:
 
-    >>> browser.getLink('New topic').click()
+    >>> browser.getControl('New topic').click()
     >>> browser.getControl(name='title').value = "What's up?"
     >>> browser.getControl(name='message').value = "How's everybody doin'?"
     >>> browser.getControl('Post').click()
@@ -104,19 +104,15 @@ Let's go back to the topic list.
 
     >>> browser.getLink('Back to the topic list').click()
 
-    >>> browser.printQuery('//td[@class="subject"]')
-    <td class="subject">
-      <a class="thread-subject" href="/group/moderators/forum/3/thread/3">What's up?</a>
-    </td>
+    >>> browser.printQuery('//a[@class="post-title"]')
+    <a href="/group/moderators/forum/3/thread/3" class="post-title">What's up?</a>
 
 And all the way up to the category list:
 
     >>> browser.getLink('Back to category list').click()
 
-    >>> browser.printQuery('//h2[@class="category"]')
-    <h2 class="category">
-      <a href="/group/moderators/forum/3">General</a>
-    </h2>
+    >>> browser.printQuery('//h2/a')
+    <a href="/group/moderators/forum/3" class="blark">General</a>
 
 
 Email subscriptions
@@ -145,13 +141,8 @@ Accept the group invitation
 
 We see the thread the admin has posted:
 
-    >>> ubrowser.printQuery('//td[@class="subject"]')
-    <td class="subject">
-      <a href="/group/moderators/forum/3/thread/3#unseen">
-                [N]
-              </a>
-      <a class="thread-subject unread" href="/group/moderators/forum/3/thread/3">What's up?</a>
-    </td>
+    >>> ubrowser.printQuery('//a[@class="post-title"]')
+    <a href="/group/moderators/forum/3/thread/3" class="post-title">What's up?</a>
 
 Let's look into it:
 
@@ -220,7 +211,7 @@ Now, the admin creates another thread:
 
     >>> browser.getLink('Back to the topic list').click()
 
-    >>> browser.getLink('New topic').click()
+    >>> browser.getControl('New topic').click()
     >>> browser.getControl(name='title').value = "Some news"
     >>> browser.getControl(name='message').value = "Notice this?"
     >>> browser.getControl('Post').click()

@@ -14,8 +14,7 @@
 <table id="forum-thread">
 % for forum_post in c.forum_posts:
   % if forum_post != c.forum_posts[0] and c.first_unseen and forum_post.id == c.first_unseen.id:
-    <tr>
-        <td colspan="2"><a name="unseen"></a><hr /><td>
+    <tr> <td colspan="2"><a name="unseen"></a><hr /><td>
     </tr>
   % endif
   <tr class="thread-post">
@@ -55,14 +54,13 @@
 
 % if c.can_post(c.user):
   <br />
-  <a name="reply"/>
+  <a name="reply"></a>
   <h2>${_('Reply')}</h2>
+  <br />
   <form method="post" action="${url(controller=c.controller, action='reply', id=c.group_id, category_id=c.category_id, thread_id=c.thread_id)}"
-       id="group_add_form" enctype="multipart/form-data">
-    <div class="form-field">
-      <label for="message">${_('Message')}</label>
-      <textarea class="line" name="message" id="message" cols="80" rows="10" style="width: 620px;"></textarea>
-    </div>
+       id="group_add_form" class="fullForm" enctype="multipart/form-data">
+    ${h.input_area('message', _('Message'))}
+    <br />
     ${h.input_submit(_('Reply'))}
   </form>
 % endif
