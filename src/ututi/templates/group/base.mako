@@ -22,6 +22,6 @@
 </ul>
 </%def>
 
-${group_menu()}
+${self.group_menu()}
 
 ${next.body()}

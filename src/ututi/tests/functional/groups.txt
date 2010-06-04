@@ -28,10 +28,10 @@ We can edit the group's information.
    >>> browser.url
    'http://localhost/group/moderators/edit'
 
-   >>> browser.getControl('Title').value
+   >>> browser.getControl('Group title').value
    'Moderatoriai'
 
-   >>> browser.getControl('Title').value = 'Ututi moderatoriai'
+   >>> browser.getControl('Group title').value = 'Ututi moderatoriai'
    >>> browser.getControl('Description').value = 'Ututi moderatorių grupė'
    >>> browser.getControl('Group logo').add_file(*make_file('test_logo.png'))
    >>> browser.getControl('Save').click()

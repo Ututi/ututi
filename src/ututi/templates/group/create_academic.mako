@@ -10,7 +10,7 @@
     <h1 class="pageTitle">${_('Create an academic group')}</h1>
 
     <form method="post" action="${url(controller='group', action='create_academic')}"
-         id="group_add_form" enctype="multipart/form-data">
+          id="group_settings_form" enctype="multipart/form-data">
 
       <fieldset>
         ${self.location_field()}

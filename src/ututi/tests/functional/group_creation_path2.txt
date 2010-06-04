@@ -128,7 +128,7 @@ defaults for public groups:
 
     >>> browser.getLink('Edit').click()
 
-    >>> browser.getControl('Title').value
+    >>> browser.getControl('Group title').value
     'Test group'
     >>> browser.getControl('Forum type').value
     ['forum']
@@ -173,7 +173,7 @@ Let's have a look at the settings:
 
     >>> browser.getLink('Edit').click()
 
-    >>> browser.getControl('Title').value
+    >>> browser.getControl('Group title').value
     'Another test group'
     >>> browser.getControl('Forum type').value
     ['mailinglist']
@@ -238,7 +238,7 @@ Let's have a look at the settings:
 
     >>> browser.getLink('Edit').click()
 
-    >>> browser.getControl('Title').value
+    >>> browser.getControl('Group title').value
     'Another test group'
     >>> browser.getControl('Forum type').value
     ['forum']

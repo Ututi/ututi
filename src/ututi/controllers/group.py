@@ -678,7 +678,8 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     def update(self, group):
         values = self.form_result
         group.title = values['title']
-        group.year = date(int(values['year']), 1, 1)
+        if values['year']:
+            group.year = date(int(values['year']), 1, 1)
         group.description = values['description']
         group.default_tab = values['default_tab']
         group.admins_approve_members = (

@@ -10,7 +10,7 @@ ${_('New public group')}
     <h1 class="pageTitle">${_('Create a public group')}</h1>
 
     <form method="post" action="${url(controller='group', action='create_public')}"
-         id="group_add_form" enctype="multipart/form-data">
+          id="group_settings_form" enctype="multipart/form-data">
 
       <fieldset>
         ${self.group_title_field()}

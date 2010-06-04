@@ -35,15 +35,13 @@
 
 <%def name="year_field()">
   <label for="year"><span class="labelText">${_("Year")}</span></label>
-  <label>
-    <form:error name="year" />
-    <select name="year" id="year" class="group_live_search">
-      <option value="">${_('Select the year')}</option>
-      %for year in c.years:
-        <option value="${year}">${year}</option>
-      %endfor
-    </select>
-  </label>
+  <form:error name="year" />
+  <select name="year" id="year" class="group_live_search">
+    <option value="">${_('Select the year')}</option>
+    %for year in c.years:
+      <option value="${year}">${year}</option>
+    %endfor
+  </select>
 </%def>
 
 <%def name="web_address_field()">
@@ -77,19 +75,19 @@
 <%def name="can_add_subjects()">
   <label class="checkbox">
     <input name="can_add_subjects" type="checkbox" />
-    <span class="labelText">${_("Group can subscribe to subjects")}</span>
+    ${_("Group can subscribe to subjects")}
   </label>
 </%def>
 
 <%def name="has_file_storage()">
   <label class="checkbox">
     <input name="file_storage" type="checkbox" />
-    <span class="labelText">${_("Group has a file storage area")}</span>
+    ${_("Group has a file storage area")}
   </label>
 </%def>
 
-<%def name="location_field()">
-  ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=True)}
+<%def name="location_field(live_search=True)">
+  ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=live_search)}
 </%def>
 
 <%def name="logo_field()">
@@ -102,15 +100,16 @@
 
 <%def name="description_field()">
   ${h.input_area('description', _('Description'))}
+  <br />
 </%def>
 
 <%def name="forum_type()">
-  <label for="forum_type">${_('Forum type')}</label>
+  <label for="forum_type"><span class="labelText">${_('Forum type')}</span></label>
   ${h.select("forum_type", c.forum_type, c.forum_types)}
 </%def>
 
 <%def name="forum_type_and_id()">
-  <label for="forum_type">${_('Forum type')}</label>
+  <label for="forum_type"><span class="labelText">${_('Forum type')}</span></label>
   ${h.select("forum_type", c.forum_type, c.forum_types)}
 
   <label for="group-id-field">
@@ -230,23 +229,26 @@
 <%def name="access_settings()">
   <h2>${_('Access settings')}</h2>
 
-  <label for="approve_new_members">
+  <label for="approve_new_members" class="radio">
     <span class="labelText">${_('New members')}</span>
     ${h.radio("approve_new_members", "none",
       label=_('Anyone can join the group any time'))}
+    <br />
     ${h.radio("approve_new_members", "admin",
       label=_('Administrators have to approve new members'))}
   </label>
 
-  <label for="forum_visibility">
+  <label for="forum_visibility" class="radio">
     <span class="labelText">${_('Group forum and mailing list visibility')}</span>
     ${h.radio("forum_visibility", "public", label=_('Public'))}
+    <br />
     ${h.radio("forum_visibility", "members", label=_('Members only'))}
   </label>
 
-  <label for="page_visibility">
+  <label for="page_visibility" class="radio">
     <span class="labelText">${_('Group page visibility')}</span>
     ${h.radio("page_visibility", "public", label=_('Public'))}
+    <br />
     ${h.radio("page_visibility", "members", label=_('Members only'))}
   </label>
 </%def>

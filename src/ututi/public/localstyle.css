@@ -51,17 +51,24 @@ table.group-type-choice td.button {
     vertical-align: top;
 }
 
+#group_settings_form {
+    display: inline-block;
+}
 
-#CreatePublicGroupLeft input[type=checkbox] {
-    width: 1em !important;
+#group_settings_form input[type=checkbox],
+#group_settings_form input[type=radio] {
+    width: 1em;
+    margin-left: 1em;
 }
-#CreatePublicGroupLeft input[type=radio] {
-    width: 1em !important;
+
+#group_settings_form input#logo_delete {
+    margin-left: 0;
 }
-#CreatePublicGroupLeft label.checkbox {
+
+#group_settings_form label.checkbox {
     display: block;
 }
-#CreatePublicGroupLeft label.checkbox span.labelText {
+#group_settings_form label.checkbox span.labelText {
     display: inline !important;
     width: 300px !important;
 }
