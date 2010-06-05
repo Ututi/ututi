@@ -1,4 +1,4 @@
-<%inherit file="/base.mako" />
+<%inherit file="/ubase-sidebar.mako" />
 <%namespace file="/portlets/subject.mako" import="*"/>
 <%namespace file="/portlets/banners/base.mako" import="*"/>
 
@@ -8,3 +8,5 @@
   ${ututi_prizes_portlet()}
 </div>
 </%def>
+
+${next.body()}

@@ -203,6 +203,10 @@ div.section div.controls label {
   vertical-align: middle;
 }
 
+div.folder_controls div {
+  float: left;
+}
+
 div.section div.controls .new-folder-name {
   margin-left: 5px;
   vertical-align: top;

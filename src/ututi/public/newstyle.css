@@ -1093,7 +1093,6 @@ color:#fff;
 .portletSetLocation , .portletSetLocation-nobg, .portletNewGroup, .portletNewDalykas, .portletGroupFiles  {
         background-image: url('img/icons/university_41.png');
         background-position: 10px 5px;
-        height: 70px;
         padding-left: 75px;
 }
 .portletGroupFiles, .portletGroupFiles-single  {
@@ -1402,10 +1401,12 @@ padding-bottom:5px;
 div.usergrupeleft ul, ul.GroupFilesList{
 list-style: none;
 }
-div.usergrupeleft ul li, ul.GroupFilesList li {
-                background: url('img/icons/tick_10.png') no-repeat 2px 3px;
-                padding-left: 15px;
-        }
+div.usergrupeleft ul li, ul.GroupFilesList li, div.usergrupeleft ul#prosList li {
+		background: url('img/icons/tick_10.png') no-repeat 2px 3px;
+		padding-left: 15px;
+                margin-top: 0;
+	}
+
 ul.GroupFilesList li.GroupFilesList{
                 background: url('img/icons/dots-file-off.png') no-repeat 2px 3px;
                 padding-left: 30px;

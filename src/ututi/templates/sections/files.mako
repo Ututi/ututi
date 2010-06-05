@@ -616,7 +616,7 @@ $(document).ready(function(){
         %if 'folder' in controls:
         <div style="float: left; margin-left: 20px;">
           <form action="${obj.url(action='create_folder')}">
-            <div>
+            <div class="folder_controls">
               ${h.input_line('folder', _('New folder:'), class_="new-folder-name", id="new_folder_input-%s"%section_id)}
               ${h.input_submit(_('create'), id="new_folder_button-%s" % section_id, class_="new_folder_button btn")}
             </div>

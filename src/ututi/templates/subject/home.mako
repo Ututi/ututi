@@ -53,7 +53,9 @@ ${c.subject.title}
    %else:
 	 ${_("The subject's description is empty.")}
    %endif
+   %if c.user:
    <div class="right_arrow1"><a href="${c.subject.url(action='edit')}"> ${_('Edit')}</a></div>
+   %endif
 </%self:rounded_block>
 
 <%self:rounded_block class_='portletGroupFiles' id="subject_files">
@@ -69,10 +71,12 @@ ${c.subject.title}
      count = len([page for page in c.subject.pages if not page.isDeleted()])
   %>
   <h2 class="portletTitle bold">${_("Subject's Wiki Pages")} (${count})</h2>
+  %if c.user:
   <span class="group-but">
       ${h.button_to(_('Create a wiki document'), url(controller='subjectpage', action='add', id=c.subject.subject_id, tags=c.subject.location_path),
                 method='GET')}
   </span>
+  %endif
 </div>
 % if c.subject.pages:
   % for n, page in enumerate(c.subject.pages):

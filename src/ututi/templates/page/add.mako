@@ -14,8 +14,10 @@ ${_('New page')}
 <h1>${_('New page')}</h1>
 
 <form method="post" action="${h.url_for(action='create')}"
-     id="page_add_form" enctype="multipart/form-data">
-  ${h.input_line('page_title', _('Title'))}
-  ${h.input_wysiwyg('page_content', _('Content'))}
-  ${h.input_submit()}
+     id="page_add_form" enctype="multipart/form-data" class="fullForm">
+  <fieldset>
+    ${h.input_line('page_title', _('Title'))}
+    ${h.input_wysiwyg('page_content', _('Content'))}
+    ${h.input_submit()}
+  </fieldset>
 </form>

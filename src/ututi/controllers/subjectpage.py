@@ -9,6 +9,7 @@ from pylons import tmpl_context as c, request, url
 from pylons.decorators import validate
 from pylons.controllers.util import abort, redirect
 
+from ututi.controllers.group import set_login_url
 from ututi.controllers.subject import subject_action
 from ututi.model import Subject, LocationTag, Page, PageVersion
 from ututi.model import meta
@@ -136,6 +137,7 @@ class SubjectpageController(BaseController):
         redirect(page.url())
 
     @subject_action
+    @ActionProtector("user")
     def add(self, subject):
         c.breadcrumbs = [{'link': c.subject.url(),
                           'title': c.subject.title},
@@ -144,6 +146,7 @@ class SubjectpageController(BaseController):
 
         return render('page/add.mako')
 
+    @set_login_url
     @validate(schema=PageForm, form='add')
     @ActionProtector("user")
     def create(self, id, tags):
