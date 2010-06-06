@@ -9,7 +9,6 @@ from pylons import tmpl_context as c, request, url
 from pylons.decorators import validate
 from pylons.controllers.util import abort, redirect
 
-from ututi.controllers.group import set_login_url
 from ututi.controllers.subject import subject_action
 from ututi.model import Subject, LocationTag, Page, PageVersion
 from ututi.model import meta
@@ -20,6 +19,14 @@ from ututi.lib.helpers import html_cleanup, literal, check_crowds
 from pylons.i18n import _
 
 log = logging.getLogger(__name__)
+
+def set_login_url(method):
+    def _set_login_url(self, id, tags):
+        c.login_form_url = url(controller='home',
+                               action='join',
+                               came_from=url.current())
+        return method(self, id, tags)
+    return _set_login_url
 
 
 class PageForm(Schema):
