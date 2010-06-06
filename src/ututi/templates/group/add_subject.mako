@@ -1,4 +1,4 @@
-<%inherit file="/group/home.mako" />
+<%inherit file="/group/base.mako" />
 <%namespace file="/subject/add.mako" name="subject" />
 <%namespace file="/group/add.mako" import="path_steps"/>
 
