@@ -182,7 +182,12 @@ ${parent.head_tags()}
 
 </div>
 %endif
-%if c.user.watched_subjects:
+<div id="subject_list">
+${subjects_block(c.user.watched_subjects)}
+</div>
+</div>
+<%def name="subjects_block(subjects)">
+%if subjects:
 <%self:rounded_block id="subject_description" class_='portletGroupFiles'>
   <div class="GroupFiles GroupFilesDalykai">
     <h2 class="portletTitle bold">
@@ -195,8 +200,8 @@ ${parent.head_tags()}
       ${h.button_to(_('add subject'), url(controller='profile', action='watch_subjects'))}
     </span>
   </div>
-  <div id="subject_list">
-    ${subject_list(c.user.watched_subjects)}
+  <div>
+    ${subject_list(subjects)}
   </div>
 </%self:rounded_block>
 %elif not c.user.hide_suggest_watch_subject:
@@ -232,7 +237,7 @@ ${parent.head_tags()}
 
 </%self:rounded_block>
 %endif
-</div>
+</%def>
 
 <%def name="subject_list(subjects)">
   <%

@@ -635,11 +635,11 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         subjects = c.user.all_watched_subjects
         subjects = sorted(subjects, key=lambda subject: subject.title)
 
-        return render_mako_def('/profile/home.mako','subject_list', subjects=subjects)
+        return render_mako_def('/profile/home.mako','subjects_block', subjects=subjects)
 
     @ActionProtector("user")
     def js_my_subjects(self):
         subjects = c.user.watched_subjects
         subjects = sorted(subjects, key=lambda subject: subject.title)
 
-        return render_mako_def('/profile/home.mako','subject_list', subjects=subjects)
+        return render_mako_def('/profile/home.mako','subjects_block', subjects=subjects)
