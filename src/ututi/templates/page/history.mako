@@ -12,19 +12,31 @@
 
 <div class="clear-left"></div>
 
-<table>
+<%self:rounded_block class_='portletGroupFiles' id="subject_history">
+<div class="GroupFilesWiki GroupFiles">
+  <h2 class="portletTitle bold">${c.page.title}</h2>
+</div>
+  <table id="wiki_history">
   % for version in c.page.versions:
-    <tr>
-      <td><a href="${version.created.url()}">${version.created.fullname}</a></td>
-      <td>${h.fmt_dt(version.created_on)}</td>
-      <td>
-          ${h.button_to(_('Show'), version.url(), method='POST')}
-      </td>
-      <td>
-        % if version is not c.page.versions[-1]:
-          ${h.button_to(_('Compare with previous'),  version.url(action='diff_with_previous'), method='POST')}
-        % endif
-      </td>
-    </tr>
+     <%
+        class_ = 'wiki-tekstas' if version is not c.page.versions[-1] else 'wiki-tekstas-last'
+     %>
+        <tr class="${class_}">
+          <td>
+            <a href="${version.created.url()}">${version.created.fullname}</a><span class="grey verysmall">, ${h.fmt_dt(version.created_on)}</span>
+          </td>
+          <td>
+            <div style="float: right;">
+              ${h.button_to(_('Show'), version.url(), method='POST')}
+            </div>
+            % if version is not c.page.versions[-1]:
+              <div style="float: right;">
+                ${h.button_to(_('Compare with previous'),  version.url(action='diff_with_previous'), method='POST')}
+              </div>
+            % endif
+
+          </td>
+        </tr>
   % endfor
-</table>
+  </table>
+</%self:rounded_block>

@@ -1217,3 +1217,28 @@ ul.post-attachments li {
   color: #d45500;
   font-style: normal;
 }
+
+/* wiki versions */
+
+#subject_history .GroupFilesWiki {
+    height: 40px;
+}
+
+#wiki_history {
+    border-spacing: 0;
+    width: 100%;
+}
+
+#wiki_history tr td {
+    height: 40px;
+    padding-left: 10px;
+    vertical-align: middle;
+}
+
+#wiki_history tr.wiki-tekstas td {
+    border-bottom: 1px solid #DED8D8;
+}
+
+#wiki_history tr td {
+    width: 50%;
+}
