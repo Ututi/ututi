@@ -1,5 +1,6 @@
 <%inherit file="/group/base.mako" />
 <%namespace file="/portlets/sections.mako" import="*"/>
+<%namespace file="/group/base.mako" import="*"/>
 
 <%def name="title()">
   ${c.group.title}

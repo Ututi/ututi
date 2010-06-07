@@ -2,7 +2,7 @@
 
 <div id="page_header">
   % if h.check_crowds(['member', 'admin']):
-    <a class="btn" href="${url(controller='mailinglist', action='new_thread', id=c.group.group_id)}"><span>${_("New topic")}</span></a>
+    ${h.button_to(_("New topic"), url(controller='mailinglist', action='new_thread', id=c.group.group_id))}
   % endif
 </div>
 <br class="clear-left"/>

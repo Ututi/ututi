@@ -19,7 +19,7 @@ from ututi.lib.mailer import send_email
 from ututi.lib.base import render
 from ututi.lib import helpers as h
 from ututi.controllers.files import serve_file
-from ututi.controllers.group import GroupControllerBase
+from ututi.controllers.group import GroupControllerBase, group_menu_items
 from ututi.model.mailing import GroupMailingListMessage
 from ututi.model import Group, meta
 
@@ -42,6 +42,7 @@ def group_action(method):
         c.security_context = group
         c.object_location = group.location
         c.group = group
+        c.group_menu_items = group_menu_items()
         c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
         return method(self, group)
     return _group_action
@@ -77,6 +78,7 @@ def group_mailinglist_action(method):
         c.security_context = group
         c.group = group
         c.object_location = group.location
+        c.group_menu_items = group_menu_items()
         c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
         return method(self, group, thread)
     return _group_action
@@ -102,6 +104,7 @@ def mailinglist_file_action(method):
         c.security_context = group
         c.object_location = group.location
         c.group = group
+        c.group_menu_items = group_menu_items()
         c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
         return method(self, group, message, file)
     return _group_action
