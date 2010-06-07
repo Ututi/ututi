@@ -159,7 +159,9 @@
   %for group in groups:
     <div class="live_search_group">
       <div class="group_logo">
-        <img class="group_logo" src="${group.url(action='logo', height=70, width=70)}" alt="${group.title}" />
+          <img height="70" width="70" class="group_logo"
+               src="${group.url(action='logo', height=70, width=70)}"
+               alt="${group.title}" />
       </div>
       <div class="group_information">
         <div>
@@ -171,7 +173,9 @@
           <div class="group_member">
             <div class="member_logo">
               <a href="${member.url()}" title="${member.fullname}">
-                <img src="${member.url(action='logo', height="15", width="15")}" alt="${member.fullname}" />
+                  <img height="15" width="15"
+                       src="${member.url(action='logo', height="15", width="15")}"
+                       alt="${member.fullname}" />
               </a>
             </div>
             ${h.ellipsis(member.fullname, 20)}
