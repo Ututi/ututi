@@ -30,7 +30,6 @@
           <span class="right_arrow"></span>
         </div>
         <div>
-          ## TODO: fix forums, fix mailing list public status
           %if group.is_member(c.user):
             <a href="${url(controller='mailinglist', action='new_thread', id=c.group.group_id)}" title="${_('Mailing list address')}">${group.group_id}@${c.mailing_list_host}</a>
           %elif c.user is not None:
