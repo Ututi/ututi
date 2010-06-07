@@ -17,16 +17,28 @@
 </%def>
 
 <%def name="item_tags(object, all=True)">
-  <div class="item-tags">
-    %if object.location and all:
-      %for tag in object.location.hierarchy(full=True):
-        ${location_tag_link(tag)}
-      %endfor
-    %endif
+  <span class="item-tags">
     %for tag in object.tags:
       ${tag_link(tag)}
     %endfor
-  </div>
+  </span>
+</%def>
+
+<%def name="item_location(object)">
+  %if object.location:
+ <span class="green">
+ <%
+    hierarchy_len = len(object.location.hierarchy())
+ %>
+
+ %for index, tag in enumerate(object.location.hierarchy(True)):
+   <a class="green" href="${tag.url()}">${tag.title_short}</a>
+   %if index != hierarchy_len - 1:
+        |
+   %endif
+ %endfor
+ </span>
+  %endif
 </%def>
 
 <%def name="generic(object)">
@@ -42,7 +54,12 @@
     <div class="description">
       ${object.description}
     </div>
-    ${item_tags(object)}
+    <div class="description">
+      ${item_location(object)}
+      %if object.tags:
+       | ${item_tags(object)}
+      %endif
+    </div>
   </div>
 </%def>
 
@@ -52,17 +69,44 @@
     <div class="description">
       ${object.description}
     </div>
-    ${item_tags(object)}
+    <div class="description">
+      ${item_location(object)}
+      | <a class="verysmall" href="${object.parent.url()}">${object.parent.title}</a>
+      %if object.parent.tags:
+       | ${item_tags(object.parent)}
+      %endif
+    </div>
   </div>
 </%def>
 
 <%def name="subject(object)">
   <div class="search-item snippet-subject">
-    <a href="${object.url()}" title="${object.title}" class="item-title larger">${object.title}</a>
+    <a href="${object.url()}" title="${object.title}" class="item-title bold larger">${object.title}</a>
     <div class="description">
-      ${object.lecturer}
+      ${item_location(object)}
+      % if object.lecturer:
+       | ${object.lecturer}
+      % endif
+      %if object.tags:
+       | ${item_tags(object)}
+      %endif
     </div>
-    ${item_tags(object)}
+    <dl class="stats">
+       <%
+           file_cnt = len(object.files)
+           page_cnt = len(object.pages)
+           group_cnt = object.group_count()
+           user_cnt = object.user_count()
+        %>
+
+        <dd class="files">${ungettext('%(count)s <span class="a11y">file</span>', '%(count)s <span class="a11y">files</span>', file_cnt) % dict(count = file_cnt)|n}</dd>
+        <dd class="pages">${ungettext('%(count)s <span class="a11y">wiki page</span>', '%(count)s <span class="a11y">wiki pages</span>', page_cnt) % dict(count = page_cnt)|n}</dd>
+        <dd class="watchedBy"><span class="a11y">${_('Watched by:')}</span> 
+          ${ungettext("%(count)s group", "%(count)s groups", group_cnt) % dict(count = group_cnt)|n}
+          ${_('and')}
+          ${ungettext("%(count)s member", "%(count)s members", user_cnt) % dict(count = user_cnt)|n}
+        </dd>
+    </dl>
   </div>
 </%def>
 
@@ -72,7 +116,13 @@
     <div class="description">
       ${h.ellipsis(object.last_version.plain_text, 250)}
     </div>
-    ${item_tags(object)}
+    <div class="description">
+      ${item_location(object)}
+      | <a class="verysmall" href="${object.subject[0].url()}">${object.subject[0].title}</a>
+      %if object.tags:
+       | ${item_tags(object)}
+      %endif
+    </div>
   </div>
 </%def>
 

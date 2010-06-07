@@ -1708,13 +1708,13 @@ li.remeju-list,
 #homePopularSubjects li, #SearchResults li, #UniversitiesRegion li {
     background: url('img/icons/subject_gray_18.png') no-repeat 3px top;
 }
-#homePopularSubjects dt, #SearchResults dt, #UniversitiesRegion dt {
+#homePopularSubjects dt, #SearchResults dt, #search-results dt, #UniversitiesRegion dt {
     font-size: 15px;
 }
 #UniversitiesRegion dt {
     font-size: 13px;
 }
-#homePopularSubjects dd, #SearchResults dd, #UniversitiesRegion dd  {
+#homePopularSubjects dd, #SearchResults dd, #search-results dd, #UniversitiesRegion dd  {
     background-position: left;
     background-repeat: no-repeat;
     font-size: 11px;
@@ -1747,7 +1747,8 @@ li.remeju-list,
     background: url('img/icons/dalykas-very-small.png')no-repeat top left;
     }
 
-    div.item-tags {
+    div.item-tags,
+    span.item-tags {
         background: url('img/icons/icon_tag.png')no-repeat top left;
         padding-left:25px;
 }

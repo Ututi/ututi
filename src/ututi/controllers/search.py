@@ -8,6 +8,7 @@ from pylons.decorators import validate
 from pylons import request, tmpl_context as c, url
 from pylons.templating import render_mako_def
 
+from ututi.model import BlogEntry, meta
 from ututi.lib.base import BaseController, render
 from ututi.lib.search import search_query, search_query_count, tag_search
 
@@ -60,6 +61,7 @@ class SearchController(SearchBaseController):
 
     @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
     def index(self):
+        c.blog_entries = meta.Session.query(BlogEntry).order_by(BlogEntry.created.desc()).limit(10).all()
         if c.user is not None and self.form_result == {}:
             redirect(url(controller='profile', action='browse'))
 

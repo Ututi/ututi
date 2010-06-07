@@ -36,7 +36,7 @@ page itself:
     <span class="close-link hide-parent">Close</span>
     <span>Document at http://localhost/admin/404 was not found, but maybe you are interested in something else?</span>
 
-    >>> browser.printQuery("id('body-container')/h1")
+    >>> browser.printQuery("id('mainContent')/h1")
     <h1>Search</h1>
 
 Some views are not accessible to simple users:
