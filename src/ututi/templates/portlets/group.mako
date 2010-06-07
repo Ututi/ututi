@@ -13,46 +13,79 @@
          group = c.group
   %>
 
-  <%self:portlet id="group_info_portlet">
+  <%self:uportlet id="group_info_portlet" portlet_class="MyProfile">
+
     <%def name="header()">
       <a ${h.trackEvent(c.group, 'home', 'portlet_header')} href="${group.url()}" title="${group.title}">${_('Group information')}</a>
     </%def>
-    %if group.logo is not None:
-      <img id="group-logo" src="${url(controller='group', action='logo', id=group.group_id, width=70, height=80)}" alt="logo" />
-    %endif
-    <div class="structured_info">
-      <h4>${group.title}</h4>
-      <span class="school-link"><a href="${group.location.url()}">${' | '.join(group.location.path)}</a></span><br />
+
+    <div class="profile">
+      <div class="floatleft avatar">
+        ##%if group.logo is not None:
+        <img id="group-logo" src="${url(controller='group', action='logo', id=group.group_id, width=70, height=70)}" alt="logo" />
+        ##%endif
+      </div>
+      <div class="floatleft personal-data">
+        <div><h2 class="grupes-portlete">${group.title}</h2></div>
+        <div>
+          <a href="${group.location.url()}">${' | '.join(group.location.title_path)}</a>
+          <span class="right_arrow"></span>
+        </div>
+        <div>
+          ## TODO: fix forums, fix mailing list public status
+          %if group.is_member(c.user):
+            <a href="${url(controller='mailinglist', action='new_thread', id=c.group.group_id)}" title="${_('Mailing list address')}">${group.group_id}@${c.mailing_list_host}</a>
+          %elif c.user is not None:
+            <a href="${url(controller='mailinglist', action='new_anonymous_post', id=c.group.group_id)}" title="${_('Mailing list address')}">${group.group_id}@${c.mailing_list_host}</a>
+          %endif
+        </div>
+        <div>${ungettext("%(count)s member", "%(count)s members", len(group.members)) % dict(count=len(group.members))}</div>
+      </div>
+      <div class="clear"></div>
+
+      <p class="grupes-aprasymas">
+        ${group.description}
+      </p>
+
       %if group.is_member(c.user):
-        <a href="${url(controller='mailinglist', action='new_thread', id=c.group.group_id)}" title="${_('Mailing list address')}">${group.group_id}@${c.mailing_list_host}</a><br />
-      %elif c.user is not None:
-        <a href="${url(controller='mailinglist', action='new_anonymous_post', id=c.group.group_id)}" title="${_('Mailing list address')}">${group.group_id}@${c.mailing_list_host}</a><br />
+        <div class="click2show">
+          <div class="remeju-sarasas click">
+            <a href="#">${_("More settings")}</a>
+          </div>
+          <div class="show" id="group_settings_block">
+            <div style="float: left">
+            %if group.is_subscribed(c.user):
+              ${h.button_to(_("Do not get email"), group.url(action='unsubscribe'), class_='btn inactive')}
+            %else:
+              ${h.button_to(_("Get email"), group.url(action='subscribe'), class_='btn')}
+            %endif
+            </div>
+            <div style="float: left">
+            ${h.button_to(_("Leave group"), group.url(action='leave'), class_='btn warning')}
+            </div>
+            %if group.is_admin(c.user):
+              <a href="${url(controller='group', action='edit', id=group.group_id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
+              <span class="right_arrow"></span>
+            %endif
+          </div>
+        </div>
       %endif
-      <span>
-        ${ungettext("%(count)s member", "%(count)s members", len(group.members)) % dict(count = len(group.members))}
-      </span>
-    </div>
-    <div class="description small">
-      ${group.description}
     </div>
 
-    <div class="footer click2show">
-      %if group.is_member(c.user):
-      <div id="group_settings_toggle" class="click">${_("more settings")}</div>
-      <div class="show" id="group_settings_block">
-        %if group.is_subscribed(c.user):
-        <a href="${group.url(action='unsubscribe')}" class="btn inactive"><span>${_("Do not get email")}</span></a>
-        %else:
-        <a href="${group.url(action='subscribe')}" class="btn"><span>${_("Get email")}</span></a>
-        %endif
-        <a href="${group.url(action='leave')}" class="btn warning"><span>${_("Leave group")}</span></a>
-        %if group.is_admin(c.user):
-        <a class="more" href="${url(controller='group', action='edit', id=group.group_id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
-        %endif
-      </div>
-      %endif
-    </div>
-  </%self:portlet>
+    ## TODO: not implemented
+    ##<div class="profile">Grupės privatiems failams liko:
+    ##  <img src="/img/icons/indicator.png" alt="" class="indicator">
+    ##  <span class="verysmall">150Mb</span>
+
+    ##  <form action="">
+    ##    <fieldset>
+    ##      <legend class="a11y">pridėti</legend>
+    ##      <label><span><button value="submit" class="btn"><span>gauti daugiau vietos</span></button></span></label>
+    ##    </fieldset>
+    ##  </form>
+    ##</div>
+
+  </%self:uportlet>
 </%def>
 
 <%def name="group_watched_subjects_portlet(group=None)">

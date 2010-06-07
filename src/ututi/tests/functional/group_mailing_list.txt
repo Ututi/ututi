@@ -236,7 +236,15 @@ email:
 Now let's unsubscribe from the mailing list as an administrator:
 
     >>> browser.open(browser.url)
-    >>> browser.getLink('Do not get email').click()
+
+    ## >>> browser.getLink('Do not get email').click()
+
+(Because of a TestBrowser bug, we have to do this by hand.)
+
+    >>> action_url = browser.getControl('Do not get email').mech_form.action
+    >>> res = app.post("/login",
+    ...                params={'login': 'admin@ututi.lt', 'password': 'asdasd'})
+    >>> res = app.post(action_url)
 
 And post one more message:
 

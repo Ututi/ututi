@@ -194,7 +194,6 @@ Both folders should be gone:
       </span>
     </h4>
     <h4 class="trash_heading">Trash</h4>
-    <h4>Moderatoriai</h4>
 
 Deleting files:
 
@@ -267,7 +266,7 @@ The disabled upload control is shown with a message encouraging users to pay for
     >>> cancel = browser.getLink('Go back').url
     >>> process = browser.getLink('Process payment').url
     >>> browser.getControl('Dummy pay 10 LTL').click()
-    >>> browser.printQuery('//h2/text()')
+    >>> browser.printQuery('id("mainContent")//h2/text()')
     You have increased your group's file limit!
 
 What if we had decided to cancel the payment?

@@ -1476,10 +1476,14 @@ class LocationTag(Tag):
 
     @property
     def path(self):
+        return [el.lower() for el in self.title_path]
+
+    @property
+    def title_path(self):
         location = self
         path = []
         while location:
-            path.append(location.title_short.lower())
+            path.append(location.title_short)
             location = location.parent
         return list(reversed(path))
 

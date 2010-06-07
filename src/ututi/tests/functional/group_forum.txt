@@ -111,7 +111,7 @@ And all the way up to the category list:
 
     >>> browser.getLink('Back to category list').click()
 
-    >>> browser.printQuery('//h2/a')
+    >>> browser.printQuery('id("mainContent")//h2/a')
     <a href="/group/moderators/forum/3" class="blark">General</a>
 
 
@@ -205,7 +205,15 @@ We can subscribe to the entire forum. Then we will be automatically
 subscribed to any new threads:
 
     >>> ubrowser.getLink('Back to the topic list').click()
-    >>> ubrowser.getLink('Get email').click()
+
+    ## >>> ubrowser.getControl('Get email').click()
+
+(Because of a TestBrowser bug, we have to do this by hand.)
+
+    >>> action_url = ubrowser.getControl('Get email').mech_form.action
+    >>> res = app.post("/login",
+    ...                params={'login': 'user@ututi.lt', 'password': 'password'})
+    >>> res = app.post(action_url)
 
 Now, the admin creates another thread:
 

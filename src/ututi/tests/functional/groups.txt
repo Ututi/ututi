@@ -38,13 +38,13 @@ We can edit the group's information.
    >>> browser.printQuery('id("moduleMenu")//li[@class="current"]//a/text()')
    What's New?
 
-   >>> browser.printQuery("id('group_info_portlet')//img")
-   <img id="group-logo" src="/group/moderators/logo/70/80" alt="logo" />
+   >>> browser.printQuery("id('group_info_portlet-content')//img")
+   <img id="group-logo" src="/group/moderators/logo/70/70" alt="logo" />
 
-   >>> browser.printQuery("id('group_info_portlet')//h4/text()")
+   >>> browser.printQuery("id('group_info_portlet-content')//h2/text()")
    Ututi moderatoriai
 
-   >>> browser.printQuery("id('group_info_portlet')//div[@class='description small']/text()")
+   >>> browser.printQuery("id('group_info_portlet-content')//p[@class='grupes-aprasymas']/text()")
    Ututi moderatorių grupė
 
 We can add a group at the url /groups/add.
@@ -64,8 +64,8 @@ After creating the group we should be redirected to the subject selection view:
 
 The group's logo is displayed in a portlet.
 
-    >>> browser.printQuery("id('group_info_portlet')//img")
-    <img id="group-logo" src="/group/test/logo/70/80" alt="logo" />
+    >>> browser.printQuery("id('group_info_portlet-content')//img")
+    <img id="group-logo" src="/group/test/logo/70/70" alt="logo" />
 
 Let's see what the group's default home page looks like:
 

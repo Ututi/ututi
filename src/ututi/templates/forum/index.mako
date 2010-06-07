@@ -15,7 +15,7 @@
     <div class="cbr"></div>
     <div class="single-title">
       <div class="floatleft bigbutton2">
-        <h2 class="portletTitle bold"><a href="${category.url()}" class="blark">${category.title}</a></h2>
+        <h2 class="portletTitle bold category-title"><a href="${category.url()}" class="blark">${category.title}</a></h2>
         <p class="grey verysmall">${category.description}</p>
       </div>
       <div style="float: right">

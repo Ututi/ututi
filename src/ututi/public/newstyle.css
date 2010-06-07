@@ -1433,9 +1433,12 @@ span.dalykai-qu {
 }
 
 .remeju-sarasas{
-    border-bottom: 1px solid #ded8d8;
     background: url('img/icons/remeju-icon.png') no-repeat center left;
     padding:5px 0 4px 15px;
+}
+
+div.open .remeju-sarasas{
+    border-bottom: 1px solid #ded8d8;
 }
 
 span.grupes-aprasymas {
