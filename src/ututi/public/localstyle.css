@@ -1157,3 +1157,55 @@ li.empty_note {
   color: #999;
   text-size: 1em;
 }
+
+/* forum thread */
+
+table#forum-thread {
+  margin-top: 20px;
+}
+
+table#forum-thread td {
+  padding-top: 25px;
+  vertical-align: top;
+}
+
+table#forum-thread td.author-logo {
+  width: 60px;
+  padding-bottom: 20px;
+  vertical-align: top;
+  text-align: center;
+}
+
+table#forum-thread td.message {
+  padding-bottom: 20px;
+  width: 500px;
+  border-bottom: 1px solid #828282;
+}
+
+table#forum-thread div.message-content {
+  padding-bottom: 10px;
+}
+
+table#forum-thread div.message-content a.expand-quote {
+  color: blue;
+  font-weight: bold;
+}
+
+table#forum-thread div.message-content div.quote {
+  font-size: small;
+}
+
+ul.post-attachments {
+  padding-left: 0;
+}
+
+ul.post-attachments li {
+  padding-left: 15px;
+  list-style-type: none;
+  background: white url("../images/details/icon_file.png") left center no-repeat;
+}
+
+#forum_info_portlet .structured_info span em {
+  color: #d45500;
+  font-style: normal;
+}

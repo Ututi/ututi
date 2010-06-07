@@ -27,25 +27,27 @@
       %endif
     </a>
   </td>
-  <td class="forum_post">
+  <td class="forum_post" style="border: 1px solid #eee">
     <div class="forum_post-header">
       <a href="${forum_post.created.url()}">${forum_post.created.fullname}</a>
       % for medal in forum_post.created.all_medals():
           ${medal.img_tag()}
       % endfor
       <span class="small">${h.fmt_dt(forum_post.created_on)}</span>
+      <div style="float:right">
+        % if c.can_manage_post(forum_post):
+          ${h.button_to(_('Edit'), url(controller=c.controller, action='edit', id=c.group_id, category_id=c.category_id, thread_id=forum_post.id))}
+          ${h.button_to(_('Delete') if forum_post != c.forum_posts[0] else _('Delete thread'), url(controller=c.controller, action='delete_post', id=c.group_id, category_id=c.category_id, thread_id=forum_post.id))}
+        % endif
+        % if c.can_post(c.user):
+          <a class="btn" href="#reply"><span>${_('Reply')}</span></a>
+        % endif
+      </div>
     </div>
     <div class="forum_post-content">
       <div class="post-body">
         ${h.nl2br(forum_post.message)}
       </div>
-      % if c.can_post(c.user):
-        <a class="btn" href="#reply"><span>${_('Reply')}</span></a>
-      % endif
-      % if c.can_manage_post(forum_post):
-        ${h.button_to(_('Edit'), url(controller=c.controller, action='edit', id=c.group_id, category_id=c.category_id, thread_id=forum_post.id))}
-        ${h.button_to(_('Delete') if forum_post != c.forum_posts[0] else _('Delete thread'), url(controller=c.controller, action='delete_post', id=c.group_id, category_id=c.category_id, thread_id=forum_post.id))}
-      % endif
     </div>
   </td>
 </tr>
