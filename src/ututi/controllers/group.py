@@ -633,6 +633,10 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
                   ] + ([subjects_link] if subjects_link else []) + [
                   ('page', _('Page'))]
 
+        c.forum_types = [('mailinglist', _('Mailing list')),
+                         ('forum', _('Web-based forum'))]
+        c.forum_type = 'mailinglist' if c.group.mailinglist_enabled else 'forum'
+
         return render('group/edit.mako')
 
     @group_action
@@ -663,10 +667,6 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         defaults.update(location)
 
         c.breadcrumbs.append(self._breadcrumb('home'))
-
-        c.forum_types = [('mailinglist', _('Mailing list')),
-                         ('forum', _('Web-based forum'))]
-        c.forum_type = 'mailinglist' if c.group.mailinglist_enabled else 'forum'
 
         defaults['forum_type'] = c.forum_type
 
