@@ -1,8 +1,8 @@
-<%inherit file="/base.mako" />
+<%inherit file="/ubase.mako" />
 
 <h1>Kas tai?</h1>
 
-<div>
+<div id="page_content">
 
   <p>
     <a href="${url('/')}">Ututi</a> – tai virtuali bendradarbiavimo aplinka akademinėms studentų grupėms, kurioje studentai bendrauja ir keičiasi aktualia studijų bei mokslo informacija. Tapę <a href="${url('/')}">„Ututi“</a> naudotojais Tu ir Tavo grupė galėsite:

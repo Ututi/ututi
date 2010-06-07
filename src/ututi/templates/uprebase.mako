@@ -12,9 +12,18 @@ ${_('student information online')}
 </%def>
 
 <%def name="body_class()">
-%if c.user is None:
-    noMenu
-%endif
+</%def>
+
+<%def name="anonymous_menu()">
+<p class="a11y">${_('Main menu')}</p>
+<div class="head-nav">
+  <ul>
+    <li><a href="${url(controller='home', action='index', qualified=True)}">${_('Home')}</a></li>
+    <li><a href="${url(controller='search', action='index', qualified=True)}">${_('Browse')}</a></li>
+    <li><a href="${url(controller='home', action='about', qualified=True)}">${_('About')}</a></li>
+    <li><a href="${url(controller='home', action='join', qualified=True)}">${_('Join')}</a></li>
+  </ul>
+</div>
 </%def>
 
 <%def name="breadcrumbs(breadcrumbs)">
@@ -101,6 +110,7 @@ ${_('student information online')}
   </script>
 
 </form>
+${self.anonymous_menu()}
 </%def>
 
 <%def name="loggedin_header(user)">

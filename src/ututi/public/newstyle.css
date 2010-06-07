@@ -2891,8 +2891,9 @@ li.expanded li.action a{ font-weight:bold; color:#ACBF50 !important; }
 .head-nav li{ float: left; border-right:2px solid #F6F6F6; height:22px; line-height:22px; }
 .head-nav a,
 .head-nav span{ display:block; padding:0 20px; font-weight:bold; font-size:13px; white-space:nowrap; color:#666; background-color:#E0E0E0; }
-.head-nav a:hover, .head-nav a:focus,
+.head-nav a:hover, .head-nav a:focus, 
 .head-nav span:hover, .head-nav span:focus{ color:#333; background-color:#E6E6E6; }
+.head-nav a:active { color:#D45500;}
 
 .loggedin-nav{ position: absolute; top:84px; right:5px; z-index: 100; }
 .loggedin-nav li.expandable{ background-color:transparent; }

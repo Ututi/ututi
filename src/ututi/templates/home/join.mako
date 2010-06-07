@@ -1,6 +1,6 @@
-<%inherit file="/ubase.mako" />
+<%inherit file="/ubase-nomenu.mako" />
 <%namespace file="/portlets/anonymous.mako" import="*"/>
-<%def name="anonymous_menu()"></%def>
+
 <%def name="body_class()">join anonymous_index noMenu</%def>
 <br />
 <table style="width: 955px;">
