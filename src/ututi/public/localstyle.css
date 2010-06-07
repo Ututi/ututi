@@ -1172,10 +1172,6 @@ li.empty_note {
 
 /* forum thread */
 
-table#forum-thread {
-  margin-top: 20px;
-}
-
 table#forum-thread td {
   padding-top: 25px;
   vertical-align: top;

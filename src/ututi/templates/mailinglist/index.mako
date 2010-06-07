@@ -10,31 +10,36 @@
 %if not c.messages:
   <span class="small">${_('No messages yet.')}</span>
 %else:
-<table id="forum-thread-list">
-<tr>
-  <th>${_('email subject')}</th>
-  <th>${_('replies')}</th>
-  <th>${_('latest email')}</th>
-  <th>${_('last author')}</th>
-</tr>
 
-% for message in c.messages:
-<tr>
-  <td class="subject">
-    <a class="thread-subject" href="${url(controller='mailinglist', action='thread', id=c.group.group_id, thread_id=message['thread_id'])}">
-      ${message['subject']}
-    </a>
-  </td>
-  <td class="count">
-    ${ungettext("%(count)s reply", "%(count)s replies", message['reply_count']) % dict(count = message['reply_count'])}
-  </td>
-  <td class="date">
-    ${h.fmt_dt(message['send'])}
-  </td>
-  <td class="author">
-    <a href="${message['author'].url()}">${message['author'].fullname}</a>
-  </td>
-</tr>
-% endfor
-</table>
-%endif
+    <div class="single-messages" id="single-messages">
+
+      % for message in c.messages:
+        <%
+            new_post = True
+            post_url =  url(controller='mailinglist', action='thread', id=c.group.group_id, thread_id=message['thread_id'])
+            post_title = message['subject']
+            post_text = message['body']
+            post_date = h.fmt_dt(message['send'])
+        %>
+        <div class="${'message-list-on' if new_post else 'message-list-off'}">
+          <div class="floatleft m-on">
+            <div class="orange ${'bold' if new_post else ''}">
+              <a href="${post_url}" class="post-title">${post_title}</a>
+              <span class="reply-count">
+                ${ungettext("%(count)s reply", "%(count)s replies", message['reply_count']) % dict(count = message['reply_count'])}
+              </span>
+            </div>
+            <div class="grey verysmall">${h.ellipsis(post_text, 50)}</div>
+          </div>
+          <div class="floatleft user">
+            <div class="orange bold verysmall">
+              <a href="${message['author'].url()}">${message['author'].fullname}</a>
+            </div>
+            <div class="grey verysmall">${post_date}</div>
+          </div>
+        </div>
+      % endfor
+
+    </div>
+
+% endif

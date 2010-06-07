@@ -147,6 +147,7 @@ class MailinglistController(GroupControllerBase):
                    'last_reply_date': message.posts[-1].sent,
                    'send': message.sent,
                    'author': message.author,
+                   'body': message.body,
                    'reply_count': len(message.posts) - 1,
                    'subject': message.subject}
             messages.append(msg)

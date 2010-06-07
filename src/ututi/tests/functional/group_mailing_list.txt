@@ -8,7 +8,7 @@ Test for group mailing list UI
 
 There are no threads posted at the moment:
 
-    >>> browser.printQuery("id('forum-thread-list')")
+    >>> browser.printQuery("id('single-messages')")
 
 Let's send some messages:
 
@@ -53,11 +53,12 @@ Data structures seem to be ok, let's see if they are displayed
 properly in the forum page:
 
     >>> browser.open('http://localhost/group/moderators/mailinglist')
-    >>> browser.printQuery("id('forum-thread-list')//td//text()")
+    >>> browser.printQuery("id('single-messages')//text()")
     Hello
     3 replies
-    2009 Jun 15, 14:05
+    Hi, I am just writing to tell you how wonderful...
     Adminas Adminovix
+    2009 Jun 15, 14:05
 
 
 Let's look at the attachment in the thread:
@@ -77,7 +78,7 @@ Let's look at the attachment in the thread:
 
 Let's post a new topic now:
 
-    >>> browser.getLink('New topic').click()
+    >>> browser.getControl('New topic').click()
 
     >>> browser.url
     'http://localhost/group/moderators/mailinglist/new_thread'
@@ -139,15 +140,13 @@ If we go back to the forum, we should see the new thread in the list
 of threads:
 
     >>> browser.getLink('Back to the topic list').click()
-    >>> browser.printQuery("id('forum-thread-list')//td//text()")
+    >>> browser.printQuery("id('single-messages')//text()")
     Hi mom
     0 replies
     ...
-    Adminas Adminovix
     Hello
     3 replies
     ...
-    Adminas Adminovix
 
 Let's go back to it now, and post a reply:
 

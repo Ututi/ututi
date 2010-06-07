@@ -1269,7 +1269,7 @@ div.message-list-on1 div.user, div.message-list-off1 div.user {
     background: url("img/icons/cross_small.png") no-repeat right 7px;
 }
 
-div.portletGroupFiles span.reply-count {
+div.single-messages span.reply-count {
     color: #333;
     font-weight: normal;
 }

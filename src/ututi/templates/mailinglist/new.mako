@@ -9,7 +9,7 @@ ${_('New topic')}
 <h1>${_('New topic')}</h1>
 
 <form method="post" action="${url(controller='mailinglist', action='post', id=c.group.group_id)}"
-     id="group_add_form" enctype="multipart/form-data">
+     id="group_add_form" class="fullForm" enctype="multipart/form-data">
   ${h.input_line('subject', _('Subject'))}
   ${h.input_area('message', _('Message'))}
   ${h.input_submit(_('Post'))}

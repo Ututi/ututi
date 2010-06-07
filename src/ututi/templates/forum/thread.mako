@@ -3,7 +3,7 @@
 <a class="back-link" href="${url(controller=c.controller, action='index', id=c.group_id, category_id=c.category_id)}">${_('Back to the topic list')}</a>
 <h1>${c.thread.title}</h1>
 
-<div>
+<div style="float: right">
   % if not c.subscribed:
     ${h.button_to(_('Subscribe to emails'), url(controller=c.controller, action='subscribe', id=c.group_id, category_id=c.category_id, thread_id=c.thread.id))}
   % else:
