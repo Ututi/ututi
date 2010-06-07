@@ -651,7 +651,8 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             'approve_new_members': 'admin' if group.admins_approve_members else 'none',
             'forum_visibility': 'public' if group.forum_is_public else 'members',
             'page_visibility': 'public' if group.page_public else 'members',
-            }
+            'forum_type': 'mailinglist' if group.mailinglist_enabled else 'forum',
+        }
 
         tags = dict([('tagsitem-%d' % n, tag.title)
                      for n, tag in enumerate(c.group.tags)])
@@ -667,8 +668,6 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         defaults.update(location)
 
         c.breadcrumbs.append(self._breadcrumb('home'))
-
-        defaults['forum_type'] = c.forum_type
 
         return htmlfill.render(self._edit_form(), defaults=defaults)
 
