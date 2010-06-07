@@ -21,9 +21,7 @@
 
     <div class="profile">
       <div class="floatleft avatar">
-        ##%if group.logo is not None:
         <img id="group-logo" src="${url(controller='group', action='logo', id=group.group_id, width=70, height=70)}" alt="logo" />
-        ##%endif
       </div>
       <div class="floatleft personal-data">
         <div><h2 class="grupes-portlete">${group.title}</h2></div>
@@ -63,13 +61,17 @@
             <div style="float: left">
             ${h.button_to(_("Leave group"), group.url(action='leave'), class_='btn warning')}
             </div>
-            %if group.is_admin(c.user):
-              <a href="${url(controller='group', action='edit', id=group.group_id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
-              <span class="right_arrow"></span>
-            %endif
           </div>
         </div>
       %endif
+
+      %if group.is_admin(c.user):
+      <div>
+        <a href="${url(controller='group', action='edit', id=group.group_id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
+        <span class="right_arrow"></span>
+      </div>
+      %endif
+
     </div>
 
     ## TODO: not implemented
