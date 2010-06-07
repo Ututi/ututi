@@ -99,9 +99,14 @@ div#pager {
 
 /* Form controls */
 span.error-message {
-    color: red;
-    display: block;
-    margin-top: -5px;
+        color: red;
+        display: block;
+        margin-top: -5px;
+        font-size: 10px;
+}
+
+.fullForm span.error-message {
+    margin-top: 0;
 }
 .textField {
     display: inline-block;
@@ -3481,3 +3486,69 @@ ul.post-attachments li {
 #wiki_history tr td {
     width: 50%;
 }
+
+/* registration form */
+#ututi_join_portlet .rounded-header,
+#ututi_join_portlet .rounded-right,
+#ututi_join_section_portlet .rounded-header,
+#ututi_join_section_portlet .rounded-right,
+#ututi_login_section_portlet .rounded-header,
+#ututi_login_section_portlet .rounded-right {
+  background: white;
+  height: 35px;
+  padding: 0;
+}
+
+#ututi_join_portlet .rounded-right h3,
+#ututi_join_section_portlet .rounded-right h3,
+#ututi_login_section_portlet .rounded-right h3 {
+  color: #333;
+  margin: 0;
+  text-transform: uppercase;
+  padding-bottom: 10px;
+  height: 30px;
+  font-size: 14px;
+  background: white url("../images/borders/registration_form.png") top center no-repeat;
+}
+
+body.anonymous_index #page-content #ututi_login_section_portlet .rounded-right h3 {
+  background-image: url("../images/borders/login_form.png");
+  padding: 0;
+  height: 5px;
+  font-size: 0;
+}
+
+body.anonymous_index #page-content #ututi_login_section_portlet .rounded-header,
+body.anonymous_index #page-content #ututi_login_section_portlet .rounded-right {
+  height: 5px;
+}
+
+
+body.anonymous_index #body-container #ututi_join_section_portlet .rounded-right,
+body.anonymous_index #body-container #ututi_join_section_portlet .rounded-header {
+  height: 45px;
+}
+
+body.anonymous_index #body-container #ututi_join_section_portlet .rounded-right h3 {
+  text-transform: none;
+  font-size: 18px;
+  height: 40px;
+}
+
+body.anonymous_index #ututi_join_portlet .content,
+body.anonymous_index #ututi_join_section_portlet .content {
+  border: 0px;
+  background: white url("../images/borders/registration_form.png") center bottom no-repeat;
+}
+
+body.anonymous_index #ututi_login_section_portlet .content {
+  border: 0px;
+  background: white url("../images/borders/login_form.png") center bottom no-repeat;
+}
+
+body.anonymous_index #ututi_join_section_portlet .content,
+body.anonymous_index #ututi_login_section_portlet .content {
+    padding: 0 0 10px 10px;
+}
+
+/* end registration form */
