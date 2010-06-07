@@ -206,7 +206,6 @@ ${_('student information online')}
     ${h.javascript_link('/javascript/jquery.qtip.min.js')}
     ${h.javascript_link('/javascript/tooltips.js')}
     ${h.stylesheet_link('/newstyle.css')}
-    ${h.stylesheet_link('/localstyle.css')}
     ${h.javascript_link('/javascript/expand.js')}
     ${h.javascript_link('/javascript/hide_parent.js')}
     ${h.javascript_link('/javascript/forms.js')}
