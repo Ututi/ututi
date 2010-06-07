@@ -469,7 +469,7 @@ CREATE TRIGGER update_subject_search AFTER INSERT OR UPDATE ON subjects
 /* A table for connecting tags and the tagged content */
 create table content_tags (id bigserial not null,
        content_item_id int8 not null references content_items(id) on delete cascade,
-       tag_id int8 references tags(id) not null,
+       tag_id int8 references tags(id) on delete cascade not null,
        primary key (id));;
 
 /* a trigger to set the page's location based on the location of the subject the page belongs to*/

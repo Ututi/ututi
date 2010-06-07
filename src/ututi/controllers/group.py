@@ -704,9 +704,9 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             group.logo = logo.file.read()
 
         #check to see what kind of tags we have got
-        tags = [tag.strip().lower() for tag in self.form_result.get('tagsitem', []) if len(tag.strip()) < 250]
+        tags = [tag.strip().lower() for tag in self.form_result.get('tagsitem', []) if len(tag.strip()) < 250 and tag.strip() != '']
         if tags == []:
-            tags = [tag.strip().lower() for tag in self.form_result.get('tags', '').split(',') if len(tag.strip()) < 250]
+            tags = [tag.strip().lower() for tag in self.form_result.get('tags', '').split(',') if len(tag.strip()) < 250 and tag.strip() != '']
 
         group.tags = []
         for tag in tags:

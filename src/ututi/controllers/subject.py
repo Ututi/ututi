@@ -197,9 +197,9 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
         subject.description = self.form_result.get('description', None)
 
         #check to see what kind of tags we have got
-        tags = [tag.strip().lower() for tag in self.form_result.get('tagsitem', []) if len(tag.strip().lower()) < 250]
+        tags = [tag.strip().lower() for tag in self.form_result.get('tagsitem', []) if len(tag.strip().lower()) < 250 and tag.strip() != '']
         if tags == []:
-            tags = [tag.strip().lower() for tag in self.form_result.get('tags', '').split(',') if len(tag.strip()) < 250]
+            tags = [tag.strip().lower() for tag in self.form_result.get('tags', '').split(',') if len(tag.strip()) < 250 and tag.strip() != '']
 
         subject.tags = []
         for tag in tags:
