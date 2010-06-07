@@ -28,7 +28,8 @@ def check_forum_setting(group):
     if not group.mailinglist_enabled:
         h.flash(_('The mailing list for this group has been disabled.'
                   ' Please use the web-based forum instead.'))
-        redirect(url(controller='forum', action='categories', id=id))
+        redirect(url(controller='forum', action='categories',
+                     id=group.group_id))
 
 
 def group_action(method):
