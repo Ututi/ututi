@@ -3417,7 +3417,6 @@ table#forum-thread td.forum_post {
 table#forum-thread td.message {
     padding-bottom: 20px;
     width: 500px;
-    border-bottom: 1px solid #828282;
 }
 
 table#forum-thread div.message-content {

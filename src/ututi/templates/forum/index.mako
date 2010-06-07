@@ -36,7 +36,7 @@
             post_text = forum_post['post'].message
             post_date = h.fmt_dt(forum_post['created'])
         %>
-        <div class="${'message-list-on' if new_post else 'message-list-off'}">
+        <div class="${'message-list-on1' if new_post else 'message-list-off1'}">
           <div class="floatleft m-on">
             <div class="orange ${'bold' if new_post else ''}">
               <a href="${post_url}" class="post-title">${post_title}</a>

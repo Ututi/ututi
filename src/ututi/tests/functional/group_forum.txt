@@ -63,7 +63,7 @@ A notification to subscribed group members has been sent by email:
 And we'll post a reply:
 
     >>> browser.getControl(name='message').value = 'Not too bad!'
-    >>> browser.getControl('Reply').click()
+    >>> browser.getForm(id="group_add_form").submit()
 
 Email notifications about the reply have also been sent:
 
@@ -156,7 +156,7 @@ We could subscribe to email updates:
 Let's post a reply:
 
     >>> ubrowser.getControl(name='message').value = 'I agree!'
-    >>> ubrowser.getControl('Reply').click()
+    >>> ubrowser.getForm(id="group_add_form").submit()
 
 By the act of replying, we were automatically subscribed:
 
@@ -174,7 +174,7 @@ Now, if, say, the admin posts a message, we will receive an email:
     >>> browser.getLink('Forum').click()
     >>> browser.getLink("What's up?").click()
     >>> browser.getControl(name='message').value = 'Indeed!'
-    >>> browser.getControl('Reply').click()
+    >>> browser.getForm(id="group_add_form").submit()
 
     >>> msg = mail_queue.pop()
     >>> msg.recipients
@@ -187,7 +187,7 @@ Let's unsubscribe from emails.
 Now any further replies will not be sent to us.
 
     >>> ubrowser.getControl(name='message').value = 'Right!'
-    >>> ubrowser.getControl('Reply').click()
+    >>> ubrowser.getForm(id="group_add_form").submit()
 
     >>> mail_queue.pop()
     <EmailInfo sender='info@ututi.lt' recipients=['admin@ututi.lt']>

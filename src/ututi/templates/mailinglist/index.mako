@@ -1,10 +1,11 @@
 <%inherit file="/mailinglist/base.mako" />
 
-<div id="page_header">
+<div style="float: right">
   % if h.check_crowds(['member', 'admin']):
     ${h.button_to(_("New topic"), url(controller='mailinglist', action='new_thread', id=c.group.group_id))}
   % endif
 </div>
+
 <br class="clear-left"/>
 
 %if not c.messages:
@@ -21,7 +22,7 @@
             post_text = message['body']
             post_date = h.fmt_dt(message['send'])
         %>
-        <div class="${'message-list-on' if new_post else 'message-list-off'}">
+        <div class="${'message-list-on1' if new_post else 'message-list-off1'}">
           <div class="floatleft m-on">
             <div class="orange ${'bold' if new_post else ''}">
               <a href="${post_url}" class="post-title">${post_title}</a>

@@ -1,10 +1,26 @@
 <%inherit file="/mailinglist/base.mako" />
 
-<a class="back-link" href="${h.url_for(action='index')}">${_('Back to the topic list')}</a>
+<div class="back-link">
+  <a class="back-link" href="${h.url_for(action='index')}">${_('Back to the topic list')}</a>
+</div>
+
 <h1>${c.thread.subject}</h1>
 
 <table id="forum-thread">
 % for message in c.messages:
+  <tr>
+    <td colspan="2" class="author">
+      <a href="${message.author.url()}">${message.author.fullname}</a>
+      % for medal in message.created.all_medals():
+          ${medal.img_tag()}
+      % endfor
+      <span class="created-on">${h.fmt_dt(message.sent)}</span>
+      <div style="float: right">
+        ${h.button_to(_('Reply'), url(controller='mailinglist', action='thread', id=c.group.group_id, thread_id=c.thread.id) + '#reply')}
+      </div>
+    </td>
+  </tr>
+
 <tr class="thread-post">
   <td class="author-logo">
     <a href="${message.author.url()}">
@@ -16,15 +32,10 @@
     </a>
   </td>
   <td class="message">
-    <div class="message-header">
-      <a href="${message.author.url()}">${message.author.fullname}</a>
-      <span class="small">${h.fmt_dt(message.sent)}</span>
-    </div>
     <div class="message-content">
       <div class="post-body">
         ${h.email_with_replies(message.body)}
       </div>
-      <a class="btn" href="#reply"><span>${_('Reply')}</span></a>
       % if message.attachments:
       <ul class="post-attachments">
         % for file in message.attachments:
@@ -41,7 +52,7 @@
 </table>
 
 % if h.check_crowds(['member', 'admin']):
-  <br />
+<div id="reply-section">
   <a name="reply"></a>
   <h2>${_('Reply')}</h2>
   <br />
@@ -51,4 +62,5 @@
     <br />
     ${h.input_submit(_('Reply'))}
   </form>
+</div>
 % endif
