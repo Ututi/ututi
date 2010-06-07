@@ -2520,6 +2520,10 @@ table.group-members th {
   padding: 3px 5px;
 }
 
+table.group-members select {
+  width: 11em;
+}
+
 .description {
   font-size: 0.9em;
   color: #888;

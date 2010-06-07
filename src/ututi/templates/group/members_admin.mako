@@ -10,23 +10,19 @@ ${h.javascript_link('/javascript/forms.js')|n}
 </%def>
 
 
-<div>
+<div style="padding-top: 1em;">
   <h2>${_('Invite your group mates')}</h2>
-  <form method="post" action="${url(controller='group', action='invite_members', id=c.group.group_id)}" id="member_invitation_form">
+  <form method="post" action="${url(controller='group', action='invite_members', id=c.group.group_id)}"
+      id="member_invitation_form" class="fullForm">
 
-    <div class="form-field">
-      <label for="emails">${_('Enter emails of the people you would like to invite to the group.')}</label>
-      <textarea name="emails" id="emails" rows="8" cols="60"></textarea>
-    </div>
-
-    <div class="form-field">
-      <span class="btn"><input type="submit" value="${_('Invite')}"/></span>
-    </div>
+    ${h.input_area('emails', _('Enter emails of the people you would like to invite to the group.'))}
+    <br />
+    ${h.input_submit(_('Invite'))}
   </form>
 </div>
 
 %if c.group.invitations:
-<div>
+<div style="padding-top: 1em;">
   <h2>${_('Invited users (invitations not accepted yet)')}</h2>
   <table class="group-invitations">
   % for invitation in c.group.invitations:
@@ -59,7 +55,7 @@ ${h.javascript_link('/javascript/forms.js')|n}
 %endif
 
 %if c.group.requests:
-<div>
+<div style="padding-top: 1em;">
   <h2>${_('Awaiting confirmation')}</h2>
   <table class="group-requests">
   % for request in c.group.requests:
@@ -92,7 +88,7 @@ ${h.javascript_link('/javascript/forms.js')|n}
 </div>
 %endif
 
-<h2>${_('Group members')}</h2>
+<h2 style="padding-top: 1em;">${_('Group members')}</h2>
 <table class="group-members">
   <tr>
     <th>${_('Name')}</th>
