@@ -1999,6 +1999,10 @@ padding-top:0;
     float: right;
 }
 
+.floatleft form {
+  float: left;
+}
+
 .firsttime{
 margin: auto 0;
 vertical-align:middle;

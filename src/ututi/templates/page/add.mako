@@ -18,6 +18,7 @@ ${_('New page')}
   <fieldset>
     ${h.input_line('page_title', _('Title'))}
     ${h.input_wysiwyg('page_content', _('Content'))}
+    <br />
     ${h.input_submit()}
   </fieldset>
 </form>

@@ -106,11 +106,11 @@ Let's look at the emails:
 
     >>> browser.reload()
     >>> browser.getLink('How to be awesome!').click()
-    >>> browser.getLink('Edit', url='page').click()
+    >>> browser.getControl('edit').click()
     >>> browser.getControl('Content').value = "Being Awesome is hard!"
     >>> browser.getControl('Save').click()
 
-    >>> browser.getLink('Edit', url='page').click()
+    >>> browser.getControl('edit').click()
     >>> browser.getControl('Content').value = "Being Awesome is very hard!"
     >>> browser.getControl('Save').click()
 

@@ -614,6 +614,14 @@ ul.autobox-hldr li.bit-box a.closebutton {
 
 **************************************************************************/
 
+#page_content {
+  padding: 0 10px;
+}
+
+#page_content li {
+  list-style-position: inside;
+}
+
 .clear-left, .clear-right {
   height: 0;
   margin: 0;

@@ -18,11 +18,11 @@
       <td><a href="${version.created.url()}">${version.created.fullname}</a></td>
       <td>${h.fmt_dt(version.created_on)}</td>
       <td>
-          ${h.button_to(_('Show'), version.url())}
+          ${h.button_to(_('Show'), version.url(), method='POST')}
       </td>
       <td>
         % if version is not c.page.versions[-1]:
-          ${h.button_to(_('Compare with previous'), version.url(action='diff_with_previous'))}
+          ${h.button_to(_('Compare with previous'),  version.url(action='diff_with_previous'), method='POST')}
         % endif
       </td>
     </tr>
