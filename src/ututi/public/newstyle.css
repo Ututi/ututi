@@ -1699,6 +1699,12 @@ li.remeju-list,
 #homeActiveGroups dd {
     display: block;
 }
+#homePopularSubjects li,
+#homeActiveUniversities li,
+#homeActiveGroups li {
+    height: 40px;
+}
+
 #homePopularSubjects, #SearchResults, #UniversitiesRegion {
     border-left: none;
     margin-right: -1px;
