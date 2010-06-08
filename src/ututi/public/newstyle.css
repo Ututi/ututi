@@ -1307,7 +1307,8 @@ div.single-title{
     border-bottom: 1px solid #ded8d8;
     padding: 5px 0 5px 15px;
 }
-li.files_more{
+
+.files_more{
     cursor: pointer;
     list-style-type: none;
     border-top: 1px solid #ded8d8;
@@ -1315,7 +1316,7 @@ li.files_more{
     margin: 0 0 0 15px;
     text-align:center;
 }
-li.files_more span{
+.files_more span{
     padding-right: 10px;
     background: url("img/icons/arrow-very-small-down.png") right center no-repeat;
 }

@@ -22,7 +22,7 @@ We should be able to click on a link that leads us to the page of the faculty.
     'http://localhost/school/vu'
 
     >>> browser.printQuery('//h1/text()')
-    vu department list
+    Vilniaus universitetas
 
     >>> browser.printQuery('//h2/text()')
     Search
@@ -33,8 +33,8 @@ We should be able to click on a link that leads us to the page of the faculty.
 
 There is a search form on this page and we should be able to use it.
 
-    >>> browser.getControl(name='text').value = 'prof.'
-    >>> browser.getControl('Search').click()
+    >>> browser.getControl(name='text', index=1).value = 'prof.'
+    >>> browser.getControl('Search', index=1).click()
     >>> browser.url
     'http://localhost/school/vu?obj_type=subject&text=prof.'
 

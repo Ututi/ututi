@@ -1,4 +1,4 @@
-<%inherit file="/base.mako" />
+<%inherit file="/ubase-sidebar.mako" />
 <%namespace file="/search/index.mako" import="search_form"/>
 <%namespace file="/search/index.mako" import="search_results"/>
 <%namespace file="/portlets/structure.mako" import="*"/>
@@ -15,39 +15,63 @@
   ${c.location.title} (${c.location.title_short}) - ${_('department list')}
 </%def>
 
-<h1 class="small-h1">${c.location.title_short} ${_('department list')}</h1>
+<h1 class="pageTitle">${c.location.title}</h1>
+<br />
 <%
    children = c.location.children
-   l = len(children)
-   children = [children[:l/2], children[l/2:]]
+   department_count = len(children)
+   departments_shown = 6
+   lft = children[:department_count/2]
+   rgt = children[department_count/2:]
+   if department_count % 2:
+     lft.append(None)
+   children = zip(lft, rgt)
 %>
-<table id="faculties-list">
-  <tr>
-    %for group in children:
-      <td style="width: 50%;">
-        %for department in group:
-        ${location_tag(department)}
-        %endfor
-      </td>
-    %endfor
-  </tr>
-</table>
+<div class="click2show">
+  <table id="faculties-list">
+      %for n, (dep_left, dep_right) in enumerate(children):
+      <%
+         cls = '' if n < departments_shown / 2 else 'show'
+      %>
+      <tr class="${cls}">
+        <td style="width: 50%;">
+          %if dep_left is not None:
+            ${location_tag(dep_left)}
+          %endif
+        </td>
+        <td style="width: 50%;">
+          %if dep_right is not None:
+            ${location_tag(dep_right)}
+          %endif
 
-
+        </td>
+      </tr>
+      %endfor
+  </table>
+  %if department_count > 6:
+  <div>
+    <span class="files_more">
+      <span class="green verysmall click hide">
+        ${ungettext("Show the other %(count)s department", "Show the other %(count)s departments", department_count - departments_shown ) % dict(count = department_count - departments_shown)}
+      </span>
+    </span>
+  </div>
+  %endif
+</div>
 <h2 class="underline">${_('Search')}</h2>
-%if c.came_from_search:
-<script type="text/javascript"><!--
-google_ad_client = "pub-1809251984220343";
-/* Universities ads menu - 728x15 */
-google_ad_slot = "1300049814";
-google_ad_width = 650;
-google_ad_height = 15;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script> 
-%endif
+##%if c.came_from_search:
+##<script type="text/javascript"><!--
+##google_ad_client = "pub-1809251984220343";
+##/* Universities ads menu - 728x15 */
+##google_ad_slot = "1300049814";
+##google_ad_width = 650;
+##google_ad_height = 15;
+##//-->
+##</script>
+##<script type="text/javascript"
+##src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+##</script> 
+##%endif
 
 ${search_form(c.text, c.obj_type, c.location.hierarchy,
   parts=['obj_type', 'text'], target=c.location.url(), js=True,
