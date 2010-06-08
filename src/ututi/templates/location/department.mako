@@ -1,4 +1,4 @@
-<%inherit file="/base.mako" />
+<%inherit file="/ubase-sidebar.mako" />
 <%namespace file="/search/index.mako" import="search_form"/>
 <%namespace file="/search/index.mako" import="search_results"/>
 <%namespace file="/portlets/structure.mako" import="*"/>
@@ -14,20 +14,22 @@
   ${c.location.parent.title_short} ${c.location.title} - ${_('subjects list')}
 </%def>
 
-<h1 class="small-h1"> ${c.location.parent.title_short} ${c.location.title}</h1>
-%if c.came_from_search:
-<script type="text/javascript"><!--
-google_ad_client = "pub-1809251984220343";
-/* Universities ads menu - 728x15 */
-google_ad_slot = "1300049814";
-google_ad_width = 650;
-google_ad_height = 15;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script> 
-%endif
+<h1 class="pageTitle">${c.location.parent.title_short} ${c.location.title}</h1>
+<br />
+
+##%if c.came_from_search:
+##<script type="text/javascript"><!--
+##google_ad_client = "pub-1809251984220343";
+##/* Universities ads menu - 728x15 */
+##google_ad_slot = "1300049814";
+##google_ad_width = 650;
+##google_ad_height = 15;
+##//-->
+##</script>
+##<script type="text/javascript"
+##src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+##</script> 
+##%endif
 
 ${search_form(c.text, c.obj_type, c.location.hierarchy,
   parts=['obj_type', 'text'], target=c.location.url(), js=True,

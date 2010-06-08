@@ -3320,14 +3320,14 @@ h3.search-results-title span {
     float: left;
     color: black;
     font-weight: normal;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 h3.search-results-title span.result-count {
     float: right;
     color: #black;
     font-weight: normal;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 div#search-results div.search-item {
