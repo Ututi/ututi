@@ -142,7 +142,7 @@ ${self.anonymous_menu()}
               </a>
             </li>
           %endfor
-          <li class="action"><a href="${url(controller='community', action='index')}">${_('Community')}</a></li>
+          <li class="action"><a href="${url(controller='group', action='group_type')}">${_('Create group')}</a></li>
 		</ul>
 	  </div>
 	</li>

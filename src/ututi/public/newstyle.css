@@ -510,7 +510,7 @@ ul#links-messages  {
     height: 100px;
     position: relative;
     font-size: 11px;
-    z-index: 100
+    z-index: 1000;
 }
 .menu ul li a, .menu ul li a:visited {
     display: block;
@@ -2890,7 +2890,7 @@ li.expanded li a{ padding:6px 21px 6px 6px; font-size:12px; font-weight:normal; 
 li.expanded li a:hover{ text-decoration:underline; }
 li.expanded li.action a{ font-weight:bold; color:#ACBF50 !important; }
 
-.head-nav{ position:absolute; top:84px; left:0; z-index: 100;}
+.head-nav{ position:absolute; top:84px; left:0; z-index: 1000;}
 .loggedin-nav li, 
 .head-nav li{ float: left; border-right:2px solid #F6F6F6; height:22px; line-height:22px; }
 .head-nav a,
