@@ -50,14 +50,14 @@
 
 <%def name="generic(object)">
   <div class="search-item snippet-generic">
-    <a href="${object.url()}" title="${object.title}" class="item-title larger">${object.title}</a>
+    <a href="${object.url()}" title="${object.title}" class="item-title larger bold">${object.title}</a>
     ${item_tags(object)}
   </div>
 </%def>
 
 <%def name="group(object)">
   <div class="search-item snippet-group">
-    <a href="${object.url()}" title="${object.title}" class="item-title larger">${object.title}</a>
+    <a href="${object.url()}" title="${object.title}" class="item-title larger bold">${object.title}</a>
     <div class="description">
       ${object.description}
     </div>
@@ -72,7 +72,7 @@
 
 <%def name="file(object)">
   <div class="search-item snippet-file">
-    <a href="${object.url()}" title="${object.title}" class="item-title larger">${object.title}</a>
+    <a href="${object.url()}" title="${object.title}" class="item-title larger bold">${object.title}</a>
     <div class="description">
       ${object.description}
     </div>
@@ -119,7 +119,7 @@
 
 <%def name="page(object)">
   <div class="search-item snippet-page">
-    <a href="${object.url()}" title="${object.title}" class="item-title larger">${object.title}</a>
+    <a href="${object.url()}" title="${object.title}" class="item-title larger bold">${object.title}</a>
     <div class="description">
       ${h.ellipsis(object.last_version.plain_text, 250)}
     </div>
@@ -139,7 +139,7 @@
     % if object.deleted_on is not None:
       <span style="color: red; font-weight: bold">${_('[DELETED]')}</span>
     % endif
-    <a href="${object.url()}" title="${object.title}" class="item-title larger">${object.title}</a>
+    <a href="${object.url()}" title="${object.title}" class="item-title larger bold">${object.title}</a>
     <span class="small" style="margin-left: 10px;">${h.fmt_dt(object.last_version.created_on)}</span>
     <a style="font-size: 0.9em;" href="${object.last_version.created.url()}">${object.last_version.created.fullname}</a>
     <div class="description">
