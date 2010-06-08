@@ -24,9 +24,8 @@ We should be able to click on a link that leads us to the page of the faculty.
     >>> browser.printQuery('//h1/text()')
     Vilniaus universitetas
 
-    >>> browser.printQuery('//h2/text()')
+    >>> browser.printQuery('id("mainContent")//h2/text()')
     Search in the university
-    Vilniaus universitetas
 
     >>> browser.printQuery('id("faculties-list")//div[@class="title"]/a/text()')
     Ekonomikos fakultetas
