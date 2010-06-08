@@ -39,35 +39,48 @@
         <div>${ungettext("%(count)s member", "%(count)s members", len(group.members)) % dict(count=len(group.members))}</div>
       </div>
       <div class="clear"></div>
-
-      <p class="grupes-aprasymas">
-        ${group.description}
-      </p>
-
-      %if group.is_member(c.user):
-        <div class="click2show">
-          <div class="remeju-sarasas click">
-            <a href="#">${_("More settings")}</a>
-          </div>
-          <div class="show" id="group_settings_block">
-            %if group.is_subscribed(c.user):
-            ${h.button_to(_("Do not get email"), group.url(action='unsubscribe'), class_='btn inactive')}
-            %else:
-            ${h.button_to(_("Get email"), group.url(action='subscribe'), class_='btn')}
-            %endif
-            ${h.button_to(_("Leave group"), group.url(action='leave'), class_='btn warning')}
-          </div>
-        </div>
-      %endif
-
-      %if group.is_admin(c.user):
-      <div class="floatright">
-        <a href="${url(controller='group', action='edit', id=group.group_id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
-        <span class="right_arrow"></span>
-      </div>
-      %endif
-      <br class="clear-right" />
     </div>
+    %if group.has_file_area:
+    <div class="profile">
+      ${_('Available space for private group files:')}
+      ${h.image('/images/details/pbar%d.png' % group.free_size_points, alt=h.file_size(group.size), class_='area_size_points')|n}
+      <span class="verysmall">${h.file_size(group.free_size)}</span>
+      ${h.button_to(_('Get more space'), group.url(action='pay'))}
+    </div>
+    %endif
+    <p class="grupes-aprasymas">
+      ${group.description}
+    </p>
+
+    %if group.is_member(c.user):
+    <div class="click2show">
+      <div class="remeju-sarasas click">
+        <a href="#">${_("More settings")}</a>
+      </div>
+      <div class="show" id="group_settings_block">
+        %if group.is_subscribed(c.user):
+        <div style="display: inline-block;">
+          ${h.button_to(_("Do not get email"), group.url(action='unsubscribe'), class_='btn inactive')}
+        </div>
+        %else:
+        <div style="display: inline-block;">
+          ${h.button_to(_("Get email"), group.url(action='subscribe'), class_='btn')}
+        </div>
+        %endif
+        <div style="display: inline-block;">
+          ${h.button_to(_("Leave group"), group.url(action='leave'), class_='btn warning')}
+        </div>
+      </div>
+    </div>
+    %endif
+
+    %if group.is_admin(c.user):
+    <div class="floatright">
+      <a href="${url(controller='group', action='edit', id=group.group_id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
+      <span class="right_arrow"></span>
+    </div>
+    %endif
+    <br class="clear-right" />
 
     ## TODO: not implemented
     ##<div class="profile">Grupės privatiems failams liko:

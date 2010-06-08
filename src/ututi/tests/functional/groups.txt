@@ -38,7 +38,7 @@ We can edit the group's information.
    >>> browser.printQuery('id("moduleMenu")//li[@class="current"]//a/text()')
    What's New?
 
-   >>> browser.printQuery("id('group_info_portlet-content')//img")
+   >>> browser.printQuery("id('group_info_portlet-content')//img[@id='group-logo']")
    <img id="group-logo" src="/group/moderators/logo/70/70" alt="logo" />
 
    >>> browser.printQuery("id('group_info_portlet-content')//h2/text()")
@@ -64,7 +64,7 @@ After creating the group we should be redirected to the subject selection view:
 
 The group's logo is displayed in a portlet.
 
-    >>> browser.printQuery("id('group_info_portlet-content')//img")
+    >>> browser.printQuery("id('group_info_portlet-content')//img[@id='group-logo']")
     <img id="group-logo" src="/group/test/logo/70/70" alt="logo" />
 
 Let's see what the group's default home page looks like:

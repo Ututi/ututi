@@ -984,7 +984,7 @@ div.tag {
 
 .portletModule {
     margin-top: 0;
-    padding: 5px 15px;
+    padding: 5px 10px;
 }
 .img-button{
     margin: 0 0 0 -3px;
@@ -1435,6 +1435,7 @@ span.dalykai-qu {
 .remeju-sarasas{
     background: url('img/icons/remeju-icon.png') no-repeat center left;
     padding:5px 0 4px 15px;
+    border-bottom: 1px solid #DED8D8;
 }
 
 div.open .remeju-sarasas{
