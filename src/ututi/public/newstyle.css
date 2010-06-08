@@ -2843,6 +2843,15 @@ MISC
 
  **************************************************************************/
 
+#file_upload_portlet_content .target_item .target {
+  color: #d45500;
+  padding: 2px 0;
+}
+
+#file_upload_portlet_content .target_item .target.hover {
+  font-weight: bold;
+}
+
 ul.group-listing {
     list-style-type: none;
 }
