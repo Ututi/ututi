@@ -726,7 +726,8 @@ div.right_arrow2{
 #aside div.orange form{
     margin-top:5px;
 }
-#aside .module-top h2{
+#aside .module-top h2,
+#aside .module-top h2 a{
     text-transform: uppercase;
     color: #333;
     font-weight: normal;

@@ -6,7 +6,7 @@
          location = c.location
   %>
 
-  <%self:portlet id="location_info_portlet">
+  <%self:uportlet id="location_info_portlet" portlet_class="MyProfile">
     <%def name="header()">
       %if location.parent is None:
         <a ${h.trackEvent(location, 'home', 'portlet_header')} href="${location.url()}" title="${location.title}">${_('University information')}</a>
@@ -14,42 +14,45 @@
         <a ${h.trackEvent(location, 'home', 'portlet_header')} href="${location.url()}" title="${location.title}">${_('Faculty information')}</a>
       %endif
     </%def>
-    %if location.logo is not None:
-      <img class="portlet-logo" id="structure-logo" src="${url(controller='structure', action='logo', id=location.id, width=70)}" alt="logo" />
-    %endif
-    <div class="structured_info">
-      <h4>${location.title}</h4>
-      %if location.site_url is not None:
-        <span class="small"><a href="${location.site_url}" title="${location.title}">${location.site_url}</a></span>
-      %endif
-    </div>
-    <br class="clear-left" />
-    <div id="location-stats">
-      <span>
+	<div class="profile">
+		<div class="floatleft avatar">
+          %if location.logo is not None:
+            <img class="portlet-logo" id="structure-logo" src="${url(controller='structure', action='logo', id=location.id, width=70, height=70)}" alt="logo" />
+          %endif
+		</div>
+		<div class="floatleft personal-data uni-name">
+			<div><h2 class="group-name">${location.title}</h2></div>
+            %if location.site_url is not None:
+			<div><a href="${location.site_url}">${location.site_url}</a></div>
+            %endif
+		</div>
+		<div class="clear"></div>
+	</div>
+	<ul class="uni-info">
+	  <li>
         <%
            cnt = location.count('subject')
         %>
-        ${ungettext("%(count)s <em>subject</em>", "%(count)s <em>subjects</em>", cnt) % dict(count = cnt)|n}
-      </span>
-      <span>
+        ${ungettext("<span class='bold'>%(count)s</span> subject", "<span class='bold'>%(count)s</span> subjects", cnt) % dict(count = cnt)|n}
+      </li>
+	  <li>
         <%
            cnt = location.count('group')
         %>
-        ${ungettext("%(count)s <em>group</em>", "%(count)s <em>groups</em>", cnt) % dict(count = cnt)|n}
-      </span>
-      <span>
+        ${ungettext("<span class='bold'>%(count)s</span> group", "<span class='bold'>%(count)s</span> groups", cnt) % dict(count = cnt)|n}
+      </li>
+	  <li>
         <%
            cnt = location.count('file')
         %>
-        ${ungettext("%(count)s <em>file</em>", "%(count)s <em>files</em>", cnt) % dict(count = cnt)|n}
-      </span>
-    </div>
-    <div class="footer">
-      %if h.check_crowds(['moderator']):
-        <a class="more" href="${location.url(action='edit')}" title="${_('Edit')}">${_('Edit')}</a>
-      %endif
-    </div>
-  </%self:portlet>
+        ${ungettext("<span class='bold'>%(count)s</span> file", "<span class='bold'>%(count)s</span> files", cnt) % dict(count = cnt)|n}
+      </li>
+
+	</ul>
+    %if h.check_crowds(['moderator']):
+      <div class="right_arrow"><a href="${location.url(action='edit')}">${_('Edit')}</a></div>
+    %endif
+  </%self:uportlet>
 </%def>
 
 <%def name="struct_groups_portlet(location=None)">
