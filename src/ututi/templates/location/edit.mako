@@ -1,4 +1,4 @@
-<%inherit file="/base.mako" />
+<%inherit file="/ubase-sidebar.mako" />
 <%namespace file="/portlets/structure.mako" import="*"/>
 
 <%def name="portlets()">
@@ -12,7 +12,7 @@
 </%def>
 
 <h1>${c.location.title}</h1>
-<form method="post" action="${c.location.url(action='update')}" name="edit_structure_form" enctype="multipart/form-data" class="edit-form">
+<form method="post" action="${c.location.url(action='update')}" name="edit_structure_form" enctype="multipart/form-data" class="edit-form fullForm">
       <div style="display: none;">
         <input type="hidden" name="old_path" value=""/>
       </div>
