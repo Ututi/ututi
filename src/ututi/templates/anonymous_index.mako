@@ -105,11 +105,10 @@
     <li style="background-image: url('img/icons/file_private_green_17.png');">${_('Private file storage')}</li>
     <li style="background-image: url('img/icons/subjects_green_17.png');">${_('A list of studied subjects')}</li>
   </ul>
-  <table style="position: absolute; bottom: 20px; width: 250px;">
-    <tr><td style="text-align: center;">
-        ${h.button_to(_('Create group'), url(controller='group', action='group_type'),  method='GET', class_='btnPlus btnLarge')}
-    </td></tr>
-  </table>
+  <div class="homeCreateGroup">
+    ${h.button_to(_('Create group'), url(controller='group', action='group_type'),  method='GET', class_='btnPlus btnLarge')}
+  </div>
+
 </div>
 <div id="homePopularSubjects">
   <h2>${_('Popular subjects')}</h2>

@@ -198,6 +198,7 @@ button.btnLarge span {
     display: block;
     transparent-space: nowrap;
     color: #333;
+    white-space: nowrap;
 }
 
 button.btn:hover span,
@@ -230,7 +231,7 @@ button.btn span {
     background: transparent url("img/buttons_bg_split.png") no-repeat left top;
 }
 
-* html button.btn span { height: 23px; }
+/* * html button.btn span { height: 23px; } */
 
 button.btnMedium {
     padding: 0 15px 0 0;
@@ -246,7 +247,7 @@ button.btnMedium span {
     background: transparent url("img/buttons_bg_split.png") no-repeat left -30px;
 }
 
-* html button.btnMedium span { height: 31px; }
+/* * html button.btnMedium span { height: 31px; } */
 
 button.btnLarge {
     padding: 0 15px 0 0;
@@ -262,7 +263,7 @@ button.btnLarge span {
     background: transparent url("img/buttons_bg_split.png") no-repeat left -70px;
 }
 
-* html button.btnLarge span { height: 38px; }
+/* * html button.btnLarge span { height: 38px; }*/
 
 button.btnLarge.btnPlus span {
     background-position: left -224px;
@@ -1608,10 +1609,12 @@ div.usergruperight {
 #homeRegisterBlock #registrationTeaser img {
     margin-bottom: 60px;
 }
-#homeRegisterBlock .homeRegisterStep {
+#homeRegisterBlock .homeRegisterStep,
+#homeCreateGroupBlock .homeCreateGroup {
     position: absolute;
     bottom: 20px;
-    width: 261px;
+    left: 0;
+    width: 311px;
     text-align: center;
 }
 #homeRegisterBlock .homeRegisterStep label {
