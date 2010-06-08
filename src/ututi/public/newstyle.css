@@ -921,10 +921,6 @@ div.profileOptionLinks div.drop{
     margin-top: 1.5em;
 }
 
-div.tag-widget {
-    margin-bottom: 1em;
-}
-
 /* Footer */
 #footer {
     position: relative;
@@ -2760,13 +2756,15 @@ ul.autobox-list li.active {
 
 /* autobx-hldr is the selected list */
 ul.autobox-hldr {
-    width: 390px;
     overflow: hidden;
     height: auto !important;
     border: 1px solid #ccc;
     padding: 4px 5px;
     font: 11px "Lucida Grande", "Verdana";
     margin: 0;
+    background: white;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
 }
 ul.autobox-hldr li {
     float: left;
@@ -3140,7 +3138,9 @@ input.text_button:hover {
 /* end university list */
 
 /* search form */
-#mainContent .search-controls {
+
+#mainContent .search-controls .search-type,
+#mainContent .search-controls .search-text-submit {
     width: 400px;
     padding-right: 90px;
 }
@@ -3212,7 +3212,9 @@ input.text_button:hover {
 }
 
 .search-tags {
-    margin-top: 5px;
+    margin-top: 10px;
+    padding: 10px;
+    background: #f2f2f2;
 }
 
 .search-tags label {
