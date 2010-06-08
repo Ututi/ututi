@@ -50,27 +50,23 @@
             <a href="#">${_("More settings")}</a>
           </div>
           <div class="show" id="group_settings_block">
-            <div style="float: left">
             %if group.is_subscribed(c.user):
-              ${h.button_to(_("Do not get email"), group.url(action='unsubscribe'), class_='btn inactive')}
+            ${h.button_to(_("Do not get email"), group.url(action='unsubscribe'), class_='btn inactive')}
             %else:
-              ${h.button_to(_("Get email"), group.url(action='subscribe'), class_='btn')}
+            ${h.button_to(_("Get email"), group.url(action='subscribe'), class_='btn')}
             %endif
-            </div>
-            <div style="float: left">
             ${h.button_to(_("Leave group"), group.url(action='leave'), class_='btn warning')}
-            </div>
           </div>
         </div>
       %endif
 
       %if group.is_admin(c.user):
-      <div>
+      <div class="floatright">
         <a href="${url(controller='group', action='edit', id=group.group_id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
         <span class="right_arrow"></span>
       </div>
       %endif
-
+      <br class="clear-right" />
     </div>
 
     ## TODO: not implemented
