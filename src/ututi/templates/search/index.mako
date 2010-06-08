@@ -177,7 +177,7 @@ ${h.javascript_link('/javascript/search.js')|n}
     ${location_tag_results()}
   %endif
   <h3 class="underline search-results-title">
-    <span>${_('results')}:</span>
+    <span>${_('search results')}:</span>
     <span class="result-count">(${ungettext("found %(count)s result", "found %(count)s results", results.item_count) % dict(count = results.item_count)})</span>
   </h3>
   %if c.results.item_count > 0:

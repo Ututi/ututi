@@ -2830,6 +2830,12 @@ MISC
 
  **************************************************************************/
 
+h2.overline {
+    margin: 15px 0;
+    border-top: 1px solid #ded8d8;
+    padding-top: 10px;
+}
+
 .larger {
     font-size: 1.1em;
 }
@@ -3174,7 +3180,7 @@ input.text_button:hover {
     width: 100%;
     font-size: 18px;
     border: 0;
-    background: transparent url("../images/details/icon_eyes.png") right center no-repeat;
+    /*background: transparent url("../images/details/icon_eyes.png") right center no-repeat;*/
 }
 
 .search-controls .search-submit {
@@ -3281,16 +3287,16 @@ h3.search-results-title {
 
 h3.search-results-title span {
     float: left;
-    color: #808080;
-    font-size: 0.8em;
+    color: black;
     font-weight: normal;
+    font-size: 12px;
 }
 
 h3.search-results-title span.result-count {
     float: right;
-    color: #808080;
-    font-size: 0.8em;
+    color: #black;
     font-weight: normal;
+    font-size: 12px;
 }
 
 div#search-results div.search-item {

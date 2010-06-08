@@ -58,7 +58,7 @@
   </div>
   %endif
 </div>
-<h2 class="underline">${_('Search')}</h2>
+<h2 class="overline">${_('Search in the university')}</h2>
 ##%if c.came_from_search:
 ##<script type="text/javascript"><!--
 ##google_ad_client = "pub-1809251984220343";
