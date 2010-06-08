@@ -18,8 +18,15 @@
 
 <%def name="item_tags(object, all=True)">
   <span class="item-tags">
-    %for tag in object.tags:
-      ${tag_link(tag)}
+    <%
+       length = len(object.tags)
+    %>
+    %for n, tag in enumerate(object.tags):
+      %if n != length -1:
+        ${tag_link(tag)},
+      %else:
+        ${tag_link(tag)}
+      %endif
     %endfor
   </span>
 </%def>
