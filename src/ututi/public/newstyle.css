@@ -731,8 +731,10 @@ div.right_arrow2{
     text-transform: uppercase;
     color: #333;
     font-weight: normal;
-    padding:9px 15px;
     font-size:13px;
+}
+#aside .module-top h2 {
+   padding:9px 15px;
 }
 #aside .module-content{
     padding:5px 15px;

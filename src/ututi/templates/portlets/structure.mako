@@ -29,19 +29,19 @@
 		<div class="clear"></div>
 	</div>
 	<ul class="uni-info">
-	  <li>
+      <li>
         <%
            cnt = location.count('subject')
         %>
         ${ungettext("<span class='bold'>%(count)s</span> subject", "<span class='bold'>%(count)s</span> subjects", cnt) % dict(count = cnt)|n}
       </li>
-	  <li>
+      <li>
         <%
            cnt = location.count('group')
         %>
         ${ungettext("<span class='bold'>%(count)s</span> group", "<span class='bold'>%(count)s</span> groups", cnt) % dict(count = cnt)|n}
       </li>
-	  <li>
+      <li>
         <%
            cnt = location.count('file')
         %>
