@@ -1124,6 +1124,10 @@ p.qu{
 .portletGroupFiles-single  {
     margin-bottom: 5px;
 }
+.portletGroupMailingList .single-title {
+    padding-left: 50px;
+    background: transparent url("../img/icons/message-large.png") 15px center no-repeat;
+}
 .portletSetLocation .label , .portletSetLocation-nobg .label, .portletNewGroup .label, .portletNewDalykas .label, .portletGroupFiles .label {
     display: inline-block;
     margin-right: 10px;
@@ -1268,6 +1272,10 @@ div.not-active {
 div.message-list-on, div.message-list-on1 {
     border-bottom: 1px solid #ded8d8;
     background: url("img/icons/message-on.png") no-repeat 15px center;
+}
+
+div.single-messages div.message-list-on.last, div.single-messages div.message-list-on1.last {
+    border-bottom: 0;
 }
 
 div.message-list-off, div.message-list-off1 {

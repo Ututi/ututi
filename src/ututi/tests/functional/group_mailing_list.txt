@@ -53,9 +53,9 @@ Data structures seem to be ok, let's see if they are displayed
 properly in the forum page:
 
     >>> browser.open('http://localhost/group/moderators/mailinglist')
-    >>> browser.printQuery("id('single-messages')//text()")
+    >>> browser.printQuery("//div[@class='single-messages']//text()")
     Hello
-    3 replies
+    (3 replies)
     Hi, I am just writing to tell you how wonderful...
     Adminas Adminovix
     2009 Jun 15, 14:05
@@ -133,12 +133,12 @@ If we go back to the forum, we should see the new thread in the list
 of threads:
 
     >>> browser.getLink('Back to the topic list').click()
-    >>> browser.printQuery("id('single-messages')//text()")
+    >>> browser.printQuery("//div[@class='single-messages']//text()")
     Hi mom
-    0 replies
+    (0 replies)
     ...
     Hello
-    3 replies
+    (3 replies)
     ...
 
 Let's go back to it now, and post a reply:
