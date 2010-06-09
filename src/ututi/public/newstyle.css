@@ -1510,7 +1510,7 @@ div.usergruperight {
     height: 420px;
     margin-left: 8px;
     margin-right: 7px;
-    margin-top: 20px;
+    margin-top: 5px;
     padding-left: 25px;
     padding-right: 25px;
     vertical-align: top;
@@ -1542,7 +1542,7 @@ div.usergruperight {
 #CreatePublicGroupLeft ul,
 #homeCreateGroupBlock ul {
     font-size: 13px;
-    line-height: 28px;
+    line-height: 2;
     list-style: none;
     margin-top: 10px;
 }
@@ -1580,10 +1580,10 @@ div.usergruperight {
     line-height: 15px;
 }
 #homeSearchNotesBlock form {
-    margin-top: 10px;
+    margin-top: 19px;
 }
 #homeSearchNotesBlock input {
-    width: 125px;
+    width: 160px;
            *width: 110px; /* IE7 */
 }
 #homeSearchNotesBlock .button {
@@ -1659,8 +1659,10 @@ div.usergruperight {
     margin: 0 auto;
 }
 #homeRegisterBlock #homeRegisterWelcome {
-    margin-top: 10px;
+    margin-top: 15px;
     font-size: 14px;
+    text-align: left;
+    line-height: 1.3;
 }
 
 #homeCreateGroupBlock {

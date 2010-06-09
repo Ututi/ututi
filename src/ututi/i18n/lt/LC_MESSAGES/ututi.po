@@ -1100,28 +1100,28 @@ msgstr ""
 "naudotis Ututi (šoninių blokelių meniu)."
 
 msgid "„Ututi“ blog"
-msgstr ""
+msgstr "Ututi blog'as"
 
 msgid "ututi_twitter_url"
-msgstr ""
+msgstr "http://twitter.com/ututi"
 
 msgid "„Ututi“ on twitter"
-msgstr ""
+msgstr "Uutti twitteryje"
 
 msgid "ututi_facebook_url"
-msgstr ""
+msgstr "http://facebook.com/ututi"
 
 msgid "„Ututi“ on Facebook"
-msgstr ""
+msgstr "Ututi Facebook'e"
 
 msgid "Join!"
-msgstr ""
+msgstr "Prisijunk"
 
 msgid "Login"
 msgstr "Prisijungti"
 
 msgid "remember me"
-msgstr ""
+msgstr "Įsimink"
 
 msgid "Search text"
 msgstr ""
@@ -1133,10 +1133,10 @@ msgid "Main menu"
 msgstr ""
 
 msgid "Home"
-msgstr ""
+msgstr "Pradžia"
 
 msgid "Browse"
-msgstr ""
+msgstr "Naršyk"
 
 msgid "Groups"
 msgstr "grupės"

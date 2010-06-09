@@ -85,7 +85,7 @@
   <div id="registrationTeaser" class="${'hidden' if c.show_registration else ''}">
     <img src="${url('/img/person.png')}" alt="${_('Register')}"/>
     <div id="homeRegisterWelcome">
-      ${_('home_register_welcome')}
+      ${_('Here you and your classmates can use the file storage for sharing information and create group for communication.')}
     </div>
     <div class="homeRegisterStep">
       <button class="btnLarge" type="button" id="homeRegisterStep"><span>${_('register')}</span></button>
