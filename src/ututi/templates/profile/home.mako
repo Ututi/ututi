@@ -50,7 +50,7 @@ ${parent.head_tags()}
 %endif
 
 <div id="SearchResults">
-%if c.user.memberships is not None:
+%if c.user.memberships:
 <%self:rounded_block id="subject_description" class_='portletGroupFiles'>
 	<div class="GroupFiles GroupFilesGroups">
       <h2 class="portletTitle bold">${_('Groups')}</h2>
