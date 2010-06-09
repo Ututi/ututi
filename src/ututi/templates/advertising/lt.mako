@@ -2,8 +2,7 @@
 
 <h1>Reklamuokitės Lietuvos studentams!</h1>
 
-<div class="text">
-
+<div class="static-content">
   <p>
     <a href="${url('/')}">Ututi</a> - tai virtuali bendradarbiavimo aplinka akademinėms studentų grupėms, 
     kurioje studentai bendrauja ir keičiasi aktualia studijų bei mokslo informacija. Šiuo metu 
