@@ -1,11 +1,6 @@
 <%inherit file="/mailinglist/base.mako" />
 
-
-  <div class="portlet portletSmall portletGroupFiles portletGroupMailingList">
-    <div class="ctl"></div>
-    <div class="ctr"></div>
-    <div class="cbl"></div>
-    <div class="cbr"></div>
+  <%self:rounded_block class_="portletGroupFiles portletGroupMailingList">
     <div class="single-title">
       <div class="floatleft bigbutton2">
         <h2 class="portletTitle bold category-title">${_('Group mail')}</h2>
@@ -57,7 +52,7 @@
 
     </div>
     %endif
-  </div>
+ </%self:rounded_block>
 
 
 
