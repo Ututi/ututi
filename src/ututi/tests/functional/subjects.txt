@@ -129,5 +129,5 @@ When creating a subject, the user can select to watch it:
     You are now watching the subject Testing subject
 
     >>> browser.open('/profile/subjects')
-    >>> browser.printQuery("//ul[@class='personal_watched_subjects']/li/a/text()")
+    >>> browser.printQuery("id('subject_settings')//ul/li//a/text()")
     Testing subject

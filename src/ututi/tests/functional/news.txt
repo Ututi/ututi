@@ -300,7 +300,7 @@ Admin should stop getting events in his daily news:
 Unless he starts watching the subject himself:
 
     >>> browser.open('http://localhost/profile/subjects')
-    >>> browser.getLink('Watch more subjects').click()
+    >>> browser.getControl('Add a subject').click()
     >>> browser.getLink('Watch').click()
 
     >>> browser.open('http://localhost/news/daily?date=2009-10-09')

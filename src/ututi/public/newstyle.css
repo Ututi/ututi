@@ -425,7 +425,7 @@ ul#links-messages  {
 }
 
 #SearchResults .grupes-links-list, #SearchResults .grupes-links-list-dalykai,
-#SearchResults .grupes-links-message
+#SearchResults .grupes-links-message, #subject_settings .grupes-links-list-dalykai
 {
     color: #666666;
     display: block;
@@ -435,11 +435,21 @@ ul#links-messages  {
     list-style: none;
     padding-right: 15px;
 }
+
+#subject_settings .grupes-links-list-dalykai {
+    height: auto;
+}
 #SearchResults .grupes-links-list-dalykai {
     height: 70px;
     margin-top: 0;
 }
-#SearchResults .grupes-links-list li, #SearchResults.grupes-links-messages li, #SearchResults .grupes-links-list-dalykai li, #SearchResults .grupes-links-list li.dalykai, #SearchResults .grupes-links-list li.failai, #SearchResults .grupes-links-list li.last {
+#SearchResults .grupes-links-list li,
+#SearchResults.grupes-links-messages li,
+#SearchResults .grupes-links-list-dalykai li,
+#subject_settings .grupes-links-list-dalykai li,
+#SearchResults .grupes-links-list li.dalykai,
+#SearchResults .grupes-links-list li.failai,
+#SearchResults .grupes-links-list li.last {
     background: url('img/icons/message-off-very-small.png') no-repeat left;
     border-right: 1px solid #e9e6e6;
     display: block;
@@ -451,11 +461,15 @@ ul#links-messages  {
     padding-left: 18px;
     padding-right: 18px;
 }
-#SearchResults .grupes-links-list-dalykai li{
+#SearchResults .grupes-links-list-dalykai li,
+#subject_settings .grupes-links-list-dalykai li {
     background: url('img/icons/dalykas-very-small.png') no-repeat left;
+    list-style-type: none;
+    padding-left: 18px;
     border-right: none;
     margin-top: 0;
     float: clear;
+    list-style-type: none;
 }
 #SearchResults .grupes-links-list-dalykai li dd{
     margin-top: 0;
@@ -1296,6 +1310,11 @@ div.GroupFilesContent-line-dal{
     padding: 5px 15px 15px 15px;
     position:relative;
 }
+#subject_settings div.GroupFilesContent-line-dal-last,
+#subject_settings div.GroupFilesContent-line-dal{
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
 
 div.GroupFilesContent-line-last, div.GroupFilesContent-line-dal-last{
     border-bottom: none;
@@ -1346,7 +1365,7 @@ div.delete-files h2{
     padding: 7px 0 0 38px;
 }
 
-span.group-ind, span.group-but{
+span.group-ind, span.group-but, div.group-but{
     position:absolute;
     right:5px;
     top:3px;
@@ -2843,6 +2862,11 @@ MISC
 
  **************************************************************************/
 
+select {
+    border: 1px solid #ccc;
+    color: #333;
+}
+
 #file_upload_portlet_content .target_item .target {
   color: #d45500;
   padding: 2px 0;
@@ -3388,21 +3412,31 @@ div.search-item div.description {
 .personal_watched_subjects li.enabled {
     list-style-type: none;
     padding: 0 0 5px 20px;
-    background: transparent url("../images/details/icon_subject_small.png") left top no-repeat;
+    background: transparent url("../img/icons/dalykas-very-small.png") left center no-repeat;
 }
 
 .personal_watched_subjects li.disabled {
     list-style-type: none;
     padding: 0 0 5px 20px;
-    background: transparent url("../images/details/dalykas_disabled.png") left top no-repeat;
+    background: transparent url("../img/icons/dalykas-very-small-off.png") left center no-repeat;
 }
 
-.personal_watched_subjects li.enabled a {
+#subject_settings li.disabled {
+    background: transparent url("../img/icons/dalykas-very-small-off.png") left center no-repeat;
+}
+
+#subject_settings li.enabled {
+    background: transparent url("../img/icons/dalykas-very-small.png") left center no-repeat;
+}
+
+.personal_watched_subjects li.enabled a,
+#subject_settings li.enabled a {
     color: #000;
     text-size: 1em;
 }
 
-.personal_watched_subjects li.disabled a {
+.personal_watched_subjects li.disabled a,
+#subject_settings li.disabled a {
     color: #999;
     text-size: 1em;
 }
@@ -3422,13 +3456,11 @@ div.search-item div.description {
 
 .select_interval_form_done .in_progress_icon,
 .select_interval_form .in_progress_icon {
-    float: right;
     display: none;
 }
 
 .select_interval_form_in_progress .done_icon,
 .select_interval_form .done_icon {
-    float: right;
     display: none;
 }
 
@@ -3440,10 +3472,12 @@ div.search-item div.description {
     float: right;
 }
 
-li.empty_note {
+li.empty_note,
+span.empty_note {
     list-style-type: none;
     color: #999;
     text-size: 1em;
+    padding: 5px 15px;
 }
 
 /* forum thread */
