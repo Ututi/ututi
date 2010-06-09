@@ -12,5 +12,6 @@ ${_('New topic')}
      id="group_add_form" class="fullForm" enctype="multipart/form-data">
   ${h.input_line('subject', _('Subject'))}
   ${h.input_area('message', _('Message'))}
+  <br />
   ${h.input_submit(_('Post'))}
 </form>

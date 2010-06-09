@@ -3503,6 +3503,7 @@ span.empty_note {
 
 table#forum-thread {
     border-collapse: collapse;
+    width: 100%;
 }
 
 table#forum-thread td {
@@ -3519,24 +3520,21 @@ table#forum-thread td.author-logo {
 
 table#forum-thread td.author {
     padding-left: 1em;
-    border-top: 1px solid #eee;
-    border-left: 1px solid #eee;
-    border-right: 1px solid #eee;
+    border-top: 1px solid #ded8d8;
 }
 table#forum-thread td.author-logo {
     padding-left: 1em;
-    border-left: 1px solid #eee;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #ded8d8;
     padding-right: 8px;
 }
 table#forum-thread td.forum_post {
-    border-right: 1px solid #eee;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #ded8d8;
     padding-bottom: 1.5em;
 }
 
 table#forum-thread td.message {
     padding-bottom: 20px;
+    border-bottom: 1px solid #ded8d8;
     width: 500px;
 }
 
@@ -3559,8 +3557,26 @@ table#forum-thread span.created-on {
 }
 
 div#reply-section {
-    margin-top: 2em;
+    margin-top: 1em;
     margin-left: 2em;
+}
+
+div#reply-section .labelText {
+    display: None;
+}
+
+div#reply-section .textField textarea {
+    width: 540px;
+    height: 150px;
+    background: none;
+    border: 1px solid #333;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+div#reply-section .textField .edgeTextArea {
+    background: none;
 }
 
 ul.post-attachments {

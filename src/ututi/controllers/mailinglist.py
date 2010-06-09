@@ -160,6 +160,7 @@ class MailinglistController(GroupControllerBase):
         if check_crowds(['member', 'admin']):
             c.breadcrumbs.append(self._breadcrumb('mailinglist'))
         c.messages = self._top_level_messages(group)
+        c.breadcrumbs.append(self._breadcrumb('mailinglist'))
         return render('mailinglist/index.mako')
 
     @group_mailinglist_action
@@ -173,6 +174,7 @@ class MailinglistController(GroupControllerBase):
         if check_crowds(['member', 'admin']):
             c.breadcrumbs.append(self._breadcrumb('mailinglist'))
         c.messages = thread.posts
+        c.breadcrumbs.append(self._breadcrumb('mailinglist'))
         return render('mailinglist/thread.mako')
 
     @group_mailinglist_action
@@ -202,6 +204,7 @@ class MailinglistController(GroupControllerBase):
     @group_action
     @ActionProtector("member", "admin")
     def new_thread(self, group):
+        c.breadcrumbs.append(self._breadcrumb('mailinglist'))
         return htmlfill.render(self._new_thread_form())
 
     def _recipients(self, group):
@@ -249,6 +252,7 @@ class MailinglistController(GroupControllerBase):
     @group_action
     @ActionProtector('user')
     def new_anonymous_post(self, group):
+        c.breadcrumbs.append(self._breadcrumb('mailinglist'))
         return htmlfill.render(self._new_anonymous_post_form())
 
     def _new_anonymous_post_form(self):

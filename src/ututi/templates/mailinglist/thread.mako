@@ -4,16 +4,20 @@
   <a class="back-link" href="${h.url_for(action='index')}">${_('Back to the topic list')}</a>
 </div>
 
-<h1>${c.thread.subject}</h1>
+
+<%self:rounded_block class_="portletGroupFiles portletMailingListThread">
+<div class="single-title">
+  <div class="floatleft bigbutton2">
+    <h2 class="portletTitle bold category-title">${c.thread.subject}</h2>
+  </div>
+  <div class="clear"></div>
+</div>
 
 <table id="forum-thread">
 % for message in c.messages:
   <tr>
     <td colspan="2" class="author">
       <a href="${message.author.url()}">${message.author.fullname}</a>
-      % for medal in message.created.all_medals():
-          ${medal.img_tag()}
-      % endfor
       <span class="created-on">${h.fmt_dt(message.sent)}</span>
       <div style="float: right">
         ${h.button_to(_('Reply'), url(controller='mailinglist', action='thread', id=c.group.group_id, thread_id=c.thread.id) + '#reply')}
@@ -64,3 +68,4 @@
   </form>
 </div>
 % endif
+</%self:rounded_block>

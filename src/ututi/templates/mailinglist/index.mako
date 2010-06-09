@@ -7,7 +7,7 @@
       </div>
       % if h.check_crowds(['member', 'admin']):
       <div style="float: right">
-        ${h.button_to(_("New topic"), url(controller='mailinglist', action='new_thread', id=c.group.group_id))}
+        ${h.button_to(_("New topic"), url(controller='mailinglist', action='new_thread', id=c.group.group_id), method='get')}
       </div>
       % endif
       <div class="clear"></div>
