@@ -3,6 +3,13 @@
 <%namespace file="/widgets/tags.mako" import="*"/>
 <%namespace file="/search/index.mako" import="search_form"/>
 <%namespace file="/search/index.mako" import="search_results"/>
+<%namespace file="/sections/content_snippets.mako" import="item_location"/>
+<%namespace file="/sections/content_snippets.mako" import="item_tags"/>
+
+
+<%def name="pagetitle()">
+${_('Add a subject')}
+</%def>
 
 <%def name="head_tags()">
 <script type="text/javascript">
@@ -21,11 +28,11 @@ $(document).ready(function(){
   $('.remove_subject_button').click(unselectSubject);
 
   $('.select_subject_button').click(function (event) {
-    var url = $(event.target).parent().prev('.select_url').val();
+    var url = $(event.target).closest('div').find('.select_url').val();
     $.ajax({type: "GET",
             url: url,
             success: function(msg){
-                $(event.target).parent().parent().parent().after($(msg)[0]).remove();
+                $(event.target).closest('.snippet-subject').after($(msg)[0]).remove();
                 var selected_subject = $(msg)[2];
                 $('#watched_subjects').append(selected_subject);
                 $('.remove_subject_button', selected_subject).click(unselectSubject);
@@ -40,12 +47,7 @@ ${parent.head_tags()}
 </%def>
 
 <%def name="subject_flash_message(subject)">
-  <div class="selected_subject_flash_message flash-message">
-    <span class="close-link" onclick="$(event.target).parent().remove();">${_('Close')}</span>
-    <span>
-      ${_('Subject %(subj)s was selected.') % dict(subj = h.link_to(subject.title, subject.url()))|n}
-    </span>
-  </div>
+  ${search_subject(subject, watched=True)}
 </%def>
 
 <%def name="watched_subject(subject, new = False)">
@@ -59,12 +61,11 @@ ${parent.head_tags()}
   </li>
 </%def>
 
-<div class="tip">${_('This is a list of the subjects You are watching. By clicking on the cross next to any subject,\
- You will not get any messages of the changes in it.')}</div>
-
-<div class="hdr">
-  <span class="larger">${_('Personally watched subjects')}</span>
+<div style="padding-top: 5px; padding-bottom: 10px;">
+  <a class="back-link" href="${url(controller='profile', action='subjects')}">${_('Back to subject list')}</a>
 </div>
+
+
 
 <ul id="watched_subjects" class="personal_watched_subjects">
 %if c.watched_subjects:
@@ -78,51 +79,63 @@ ${parent.head_tags()}
 %endif
 </ul>
 
-<div style="padding-top: 5px; padding-bottom: 10px;">
-  <a class="back-link" href="${url(controller='profile', action='subjects')}">${_('Back to subject list')}</a>
-</div>
+<br />
 
 ${search_form(text=c.text, obj_type='subject', tags=c.tags, parts=['text', 'tags'], target=c.search_target)}
 
-##overriding tag link definition
-<%def name="item_tags(object)">
-  <div class="item-tags">
-    %for tag in object.location.hierarchy(full=True):
-      ${tag_link(tag)}
-    %endfor
-    %for tag in object.tags:
-      ${tag_link(tag)}
-    %endfor
-  </div>
-</%def>
-
-<%def name="tag_link(tag)">
-    <a class="tag" title="${tag.title}" href="${url(controller='profile', action='watch_subjects', tags=', '.join(tag.hierarchy()))}">
-      ${tag.title}
-    </a>
-</%def>
-
-## overriding the search result item definition
-<%def name="search_subject(item)">
+<%def name="search_subject(subject, watched=False)">
+  %if not watched:
   <%
-     object = item.object
+     object = subject.object
   %>
+  %else:
+  <%
+     object = subject
+  %>
+  %endif
   <div class="search-item snippet-subject">
-    <div class="title">
-      <a href="${object.url()}" title="${object.title}" class="item-title larger">${object.title}</a>
+    <a href="${object.url()}" title="${object.title}" class="item-title bold larger">${h.ellipsis(object.title, 60)}</a>
+    <div style="float: right;" class="js-alternatives">
+      %if not watched:
       <input type="hidden" class="select_url"
-             value="${url(controller='profile', action='js_watch_subject', subject_id=item.object.id)}" />
-      <a href="${url(controller='profile', action='watch_subject', subject_id=item.object.id)}" class="select_subject_button btn">
+             value="${url(controller='profile', action='js_watch_subject', subject_id=object.id)}" />
+      <a href="${url(controller='profile', action='watch_subject', subject_id=object.id)}" class="select_subject_button non-js">
         <span>${_('Watch')}</span>
       </a>
+      <button class="btn js select_subject_button"><span>${_('Watch')}</span></button>
+      %else:
+      ${h.image('/img//icons/tick_big.png', 'ok')|n}
+      %endif
     </div>
 
     <div class="description">
-      ${object.lecturer}
+      ${item_location(object)}
+      % if object.lecturer:
+       | ${object.lecturer}
+      % endif
+      %if object.tags:
+       | ${item_tags(object)}
+      %endif
     </div>
-    ${item_tags(object)}
+    <dl class="stats">
+       <%
+           file_cnt = len(object.files)
+           page_cnt = len(object.pages)
+           group_cnt = object.group_count()
+           user_cnt = object.user_count()
+        %>
+
+        <dd class="files">${ungettext('%(count)s <span class="a11y">file</span>', '%(count)s <span class="a11y">files</span>', file_cnt) % dict(count = file_cnt)|n}</dd>
+        <dd class="pages">${ungettext('%(count)s <span class="a11y">wiki page</span>', '%(count)s <span class="a11y">wiki pages</span>', page_cnt) % dict(count = page_cnt)|n}</dd>
+        <dd class="watchedBy"><span class="a11y">${_('Watched by:')}</span> 
+          ${ungettext("%(count)s group", "%(count)s groups", group_cnt) % dict(count = group_cnt)|n}
+          ${_('and')}
+          ${ungettext("%(count)s member", "%(count)s members", user_cnt) % dict(count = user_cnt)|n}
+        </dd>
+    </dl>
   </div>
 </%def>
+
 
 %if c.results:
 ${search_results(c.results, display=search_subject)}
