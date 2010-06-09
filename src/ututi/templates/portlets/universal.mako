@@ -4,7 +4,7 @@
 %if len(targets) > 0:
   <%self:action_portlet id="file_upload_portlet" expanding="True" label='${label}'>
     <%def name="header()">
-      <span>${_('upload a file to..')}</span>
+      <span class="blark">${_('upload a file to..')}</span>
     </%def>
     <div id="completed">
     </div>

@@ -1453,9 +1453,13 @@ span.dalykai-qu {
 }
 
 .remeju-sarasas{
-    background: url('img/icons/remeju-icon.png') no-repeat center left;
+    background: url('img/icons/arrow-small-left.png') no-repeat center left;
     padding:5px 0 4px 15px;
     border-bottom: 1px solid #DED8D8;
+}
+
+.click2show.open .remeju-sarasas {
+    background-image: url('img/icons/arrow-small-down.png')
 }
 
 div.open .remeju-sarasas{
