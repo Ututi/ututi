@@ -283,3 +283,6 @@ test_all: bin/test bin/coverage instance/done instance/var/run/.s.PGSQL.${PGPORT
 
 migrate: instance/var/run/.s.PGSQL.${PGPORT}
 	${PWD}/bin/migrate development.ini
+
+downgrade: instance/var/run/.s.PGSQL.${PGPORT}
+	${PWD}/bin/migrate development.ini downgrade
