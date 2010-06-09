@@ -16,6 +16,7 @@ Let's fill out the search form.
     Moderatoriai
 
 And does type selection work?
+
     >>> form = browser.getForm('search_form')
     >>> form.getControl(name="obj_type").value = ["group"]
     >>> form.getControl('Search').click()
@@ -23,6 +24,7 @@ And does type selection work?
     Moderatoriai
 
 Test location search
+
     >>> from ututi.model import meta, LocationTag
     >>> vu = LocationTag.get(u'vu')
     >>> vu.description = u'Vilniaus Universitetas'
@@ -33,6 +35,7 @@ Test location search
     >>> form = browser.getForm('search_form')
 
 Let's fill out the search form.
+
     >>> form.getControl(name="text").value = "ekonomikos"
     >>> form.getControl('Search').click()
     >>> browser.printQuery("id('location-search')//div[@class='title']//a/text()")
