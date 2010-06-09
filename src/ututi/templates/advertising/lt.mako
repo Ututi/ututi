@@ -1,4 +1,4 @@
-<%inherit file="/advertising/en.mako" />
+<%inherit file="/ubase.mako" />
 
 <h1>Reklamuokitės Lietuvos studentams!</h1>
 

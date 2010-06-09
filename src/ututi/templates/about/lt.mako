@@ -1,4 +1,4 @@
-<%inherit file="/about/en.mako" />
+<%inherit file="/ubase.mako" />
 
 <h1>Kas tai?</h1>
 
