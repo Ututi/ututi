@@ -281,3 +281,5 @@ test_all: bin/test bin/coverage instance/done instance/var/run/.s.PGSQL.${PGPORT
 	$(MAKE) test_coverage
 	$(MAKE) test_translations
 
+migrate: instance/var/run/.s.PGSQL.${PGPORT}
+	${PWD}/bin/migrate development.ini
