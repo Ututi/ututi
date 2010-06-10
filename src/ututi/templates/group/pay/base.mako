@@ -1,15 +1,23 @@
 <%inherit file="/group/base.mako" />
 
+<%def name="group_menu()">
+</%def>
+
 <%def name="pay_text()">
+  <div class="back-link">
+    <a class="back-link" href="${c.group.url(action='files')}">
+      ${_("Go to the group's files")}</a>
+  </div>
+
   <h1>${_("Make your group's file space unlimited")}</h1>
-  <br />
+  <div class="static-content">
   ${_("The amount of group's private files is limited to %(limit)s. This is so because Ututi "
   "encourages users to store their files in publicly accessible subjects where they can "
   "be shared with all the users. But if You want to keep more than %(limit)s of files, "
   "You can do this.") % dict(limit = h.file_size(c.group_file_limit))}
-
-  <div class="orange_emph">
-    ${_('By paying Your group will be able to store an <em>unlimited amount of files</em>:')|n}
+  </div>
+  <div class="static-content">
+    ${_('By paying Your group will be able to store an <strong>unlimited amount of files</strong>:')|n}
   </div>
 
   %for period, amount, form in c.payments:
@@ -18,9 +26,7 @@
       %for key, val in form.fields:
         <input type="hidden" name="${key}" value="${val}" />
       %endfor
-      <span class="btn-large">
-        <input type="submit" value="${_('%d Lt') % (int(amount) / 100) }" />
-      </span>
+        ${h.input_submit(_('%d Lt') % (int(amount) / 100), class_='btnLarge')}
       <span class="larger">
         - ${period}
       </span>
@@ -28,9 +34,6 @@
   </div>
   %endfor
   <br class="clear-left" />
-  <div style="text-align: right;">
-    <a class="more" url="${c.group.url(action='files')}">${_("Back to the group's files")}</a>
-  </div>
 </%def>
 
 ${next.body()}

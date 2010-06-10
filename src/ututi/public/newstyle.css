@@ -3779,7 +3779,7 @@ body.anonymous_index #ututi_login_section_portlet .content {
 /* begin static content style (e.g. /about) */
 
 .static-content {
-    margin-bottom: 20px;
+    margin: 10px 0 10px 0;
     width: 600px;
 }
 
