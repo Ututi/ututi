@@ -122,9 +122,6 @@ invitation.
     >>> form.getControl('Login').click()
 
     >>> browser2.printQuery("//div[@class='flash-message']/span/text()")
-    Close
-    You haven't told us where you are studying. You can do this
-    . Thanks.
     Adminas Adminovix has sent you an invitation to group Test group. Do you want to become a member of this group?
 
 
@@ -134,9 +131,6 @@ Let's accept this invitation.
     >>> browser2.printQuery("//div[@class='flash-message']/span/text()")
     Close
     Congratulations! You are now a member of the group 'Test group'
-    Close
-    You haven't told us where you are studying. You can do this
-    . Thanks.
 
 
 Let's get the url from the first message
@@ -287,7 +281,8 @@ And the new member should be able to access the group now.
 
 Simple members noe also have access to the full subject watching page;
     >>> browser3.getLink('Subjects').click()
-    >>> browser3.printQuery('id("watched-subjects")//li/text()')
+    >>> browser3.getControl('add a subject').click()
+    >>> browser3.printQuery('id("watched_subjects")//li/text()')
     Your group is not watching any subjects. Add them by searching.
 
 Let's try to deny a user's request to join the group:

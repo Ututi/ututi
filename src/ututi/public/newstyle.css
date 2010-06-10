@@ -2915,6 +2915,16 @@ MISC
 
  **************************************************************************/
 
+.subject_description .snippet-subject {
+    padding: 5px 0 5px 50px;
+    background-position: 15px 5px;
+    border-bottom: 1px solid #ded8d8;
+}
+
+.subject_description .snippet-subject.last {
+    border-bottom: none;
+}
+
 select {
     border: 1px solid #ccc;
     color: #333;
@@ -3525,8 +3535,7 @@ div.search-item div.description {
     float: right;
 }
 
-li.empty_note,
-span.empty_note {
+.empty_note {
     list-style-type: none;
     color: #999;
     text-size: 1em;

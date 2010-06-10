@@ -5,19 +5,22 @@ Group subject watching
 
     >>> browser.open('http://localhost/group/moderators')
     >>> browser.getLink('Subjects', url='moderators').click()
+    >>> browser.getControl('add a subject').click()
 
-    >>> browser.printQuery("id('watched-subjects')")
-    <ul id="watched-subjects">
+    >>> browser.printQuery("id('watched_subjects')")
+    <ul id="watched_subjects" class="personal_watched_subjects">
       <li id="empty_subjects_msg" class="empty_msg ">
-      Your group is not watching any subjects. Add them by searching.
+    Your group is not watching any subjects. Add them by searching.
     </li>
     </ul>
 
-    >>> browser.printQuery("id('search-results')//a[@class='item-title larger']/text()")
+
+    >>> browser.printQuery("id('search-results')//a/text()")
     Matematinė analizė
+    vu
 
     >>> browser.getLink('Watch', url='mat_analize').click()
-    >>> browser.printQuery("id('watched-subjects')//a/text()")
+    >>> browser.printQuery("id('watched_subjects')//a/text()")
     Matematinė analizė
 
     >>> browser.printQuery("id('search-results')")
@@ -26,15 +29,16 @@ Group subject watching
 
     >>> browser.getLink(url='unwatch_subject').click()
 
-    >>> browser.printQuery("id('watched-subjects')")
-    <ul id="watched-subjects">
+    >>> browser.printQuery("id('watched_subjects')")
+    <ul id="watched_subjects" class="personal_watched_subjects">
       <li id="empty_subjects_msg" class="empty_msg ">
-      Your group is not watching any subjects. Add them by searching.
+    Your group is not watching any subjects. Add them by searching.
     </li>
     </ul>
 
-    >>> browser.printQuery("id('search-results')//a[@class='item-title larger']/text()")
+    >>> browser.printQuery("id('search-results')//a/text()")
     Matematinė analizė
+    vu
 
 These actions should have left an event trail on the group home page:
 
