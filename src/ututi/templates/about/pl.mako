@@ -1,4 +1,4 @@
-<%inherit file="/ubase.mako" />
+<%inherit file="/ubase-width.mako" />
 
 <h1>Czym jest Ututi?</h1>
 
