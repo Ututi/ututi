@@ -1165,7 +1165,7 @@ p.qu{
 .portletNewDalykas {
     background-image: url('img/icons/dalykai_new.png');
 }
-div.GroupFiles, div.GroupFiles-nobg, div.GroupFilesGroups, div.GroupFilesDalykai, div.GroupFilesCont, div.GroupFilesWiki{
+div.GroupFiles, div.GroupFiles-nobg, div.GroupFilesGroups, div.GroupFilesDalykai, div.GroupFilesCont, div.GroupFilesWiki, div.GroupWiki {
     border-bottom: 1px solid #ded8d8;
     background: url('img/icons/file-off-big.png') no-repeat 15px 5px #f6f6f6;
     height:40px;
@@ -1182,30 +1182,39 @@ div.GroupFilesWiki{
     height:40px;
 }
 
+div.GroupWiki{
+    background: url('img/icons/exams-off.png') no-repeat 15px 5px #f6f6f6;
+    height:50px;
+}
+
 div.wiki2{
-    width:355px;
+    width:480px;
 }
 div.wiki3{
-    padding-top:15px;
+    padding-top:10px;
 }
 div.wiki4{
     width:485px;
 }
 
-div.GroupFilesWiki p{
+div.GroupFilesWiki p,
+div.GroupWiki p {
     padding-left:50px;
 }
-div.GroupFilesWiki span.group-but1{
+div.GroupFilesWiki span.group-but1,
+div.GroupWiki span.group-but1 {
     position:absolute;
     top:15px;
     right:175px;
 }
-div.GroupFilesWiki span.group-but2{
+div.GroupFilesWiki span.group-but2,
+div.GroupWiki span.group-but2 {
     position:absolute;
     top:15px;
     right:55px;
 }
-div.GroupFilesWiki span.group-but{
+div.GroupFilesWiki span.group-but,
+div.GroupWiki span.group-but{
     top:7px;
 }
 div.GroupFilesDalykai span.right_arrow{
@@ -3668,7 +3677,8 @@ table.group-members th {
 
 /* wiki versions */
 
-#subject_history .GroupFilesWiki {
+#subject_history .GroupFilesWiki,
+#subject_history .GroupWiki {
     height: 40px;
 }
 

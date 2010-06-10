@@ -7,7 +7,7 @@
 <a class="back-link" href="${c.subject.url()}">${_('Go back to %(subject_title)s') % dict(subject_title=c.subject.title)}</a>
 
 <%self:rounded_block id="subject_description" class_='portletGroupFiles'>
-	<div class="GroupFiles GroupFilesWiki">
+	<div class="GroupFiles GroupWiki">
 		<div class="floatleft wiki2">
 			<h2 class="portletTitle bold">${c.page.title}</h2>
             %if c.page.last_version:
