@@ -91,7 +91,9 @@
         ${title}
       </%def>
 
-      ${h.literal(_('You like <a href="%(url)s">Ututi</a> and you want to contribute? Support us!') % dict(url=url('/')))}
+      <p class="blark">
+        ${h.literal(_('You like <a href="%(url)s">Ututi</a> and you want to contribute? Support us!') % dict(url=url('/')))}
+      </p>
       <div style="margin-top: 10px;">
       ${h.button_to(_('Support now'), url(controller='profile', action='support'), class_="btnMedium", method="GET")}
       </div>
@@ -173,7 +175,7 @@
   %>
   <%self:action_portlet id="subject_create_portlet">
     <%def name="header()">
-    <a ${h.trackEvent(None, 'click', 'user_new_subject', 'action_portlets')} href="${url(controller='subject', action='add')}">${_('create new subject')}</a>
+    <a class="blark" ${h.trackEvent(None, 'click', 'user_new_subject', 'action_portlets')} href="${url(controller='subject', action='add')}">${_('create new subject')}</a>
     ${h.image('/images/details/icon_question.png',
             alt=_("Store all the subject's files and notes in one place."),
              class_='tooltip', style='margin-top: 4px;')|n}
@@ -189,7 +191,7 @@
   %>
   <%self:action_portlet id="group_create_portlet">
     <%def name="header()">
-    <a ${h.trackEvent(None, 'click', 'user_new_group', 'action_portlets')} href="${url(controller='group', action='group_type')}">${_('create new group')}</a>
+    <a class="blark" ${h.trackEvent(None, 'click', 'user_new_group', 'action_portlets')} href="${url(controller='group', action='group_type')}">${_('create new group')}</a>
     ${h.image('/images/details/icon_question.png',
             alt=_("Communicate with your classmates, colleagues and friends, share files and news together!"),
              class_='tooltip', style='margin-top: 4px;')|n}
