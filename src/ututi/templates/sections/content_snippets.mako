@@ -89,6 +89,7 @@
 <%def name="subject(object)">
   <div class="search-item snippet-subject">
     <a href="${object.url()}" title="${object.title}" class="item-title bold larger">${object.title}</a>
+    <span class="verysmall">(${_('Subject rating:')} </span><span>${h.image('/images/details/stars%d.png' % object.rating(), alt='', class_='subject_rating')|n})</span>
     <div class="description">
       ${item_location(object)}
       % if object.lecturer:

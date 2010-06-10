@@ -181,4 +181,5 @@ ${_('Your group is not watching any subjects. Add them by searching.')}
       <a class="btn-large" href="${c.group.url(action='add_subject')}"><span>${_('Create a new subject')}</span></a>
     </div>
     %endif
+  </div>
 </div>

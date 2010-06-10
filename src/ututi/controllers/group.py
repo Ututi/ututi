@@ -855,10 +855,16 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @validate(schema=SearchSubmit, form='subjects', post_only=False, on_get=True)
     @group_action
     @ActionProtector("member", "admin")
-    def subjects(self, group):
+    def subjects_watch(self, group):
         c.breadcrumbs.append(self._breadcrumb('subjects'))
         c.list_open = request.GET.get('list', '') == 'open'
         return self._subjects(group)
+
+    @group_action
+    @ActionProtector("member", "admin")
+    def subjects(self, group):
+        c.breadcrumbs.append(self._breadcrumb('subjects'))
+        return render('group/subjects_list.mako')
 
     def _subjects(self, group):
         """
