@@ -902,6 +902,11 @@ div.profileOptionLinks div.drop{
     font-size: 12px;
     margin: 7px 0 0 0;
 }
+
+.hideLabels .labelText {
+    display: none !important;
+}
+
 .fullForm label .labelText,
 #group_settings_form label .labelText {
     display: block;
@@ -3595,12 +3600,12 @@ div.user-logo-link {
   float: left;
   margin: 10px;
   width: 100px;
-  height: 120px;
+  height: 140px;
   text-align: center;
 }
 
 div.user-logo-link div.user-logo {
-  height: 60px;
+  height: 70px;
   width: 60px;
   margin: 0 auto;
 }
