@@ -47,6 +47,8 @@
           %for tag in subject.tags:
             <a class="grey" href="${tag.url()}">${tag.title}</a>
           %endfor
+	% else:
+          ${_('There are no subject tags.')}
         % endif
         </div>
     </div>
