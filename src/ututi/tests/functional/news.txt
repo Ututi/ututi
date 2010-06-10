@@ -76,6 +76,7 @@ Pretend we lost it ;)
 Make some noise:
 
     >>> browser.getLink('Subjects').click()
+    >>> browser.getControl('add a subject').click()
     >>> browser.getLink(url="/group/moderators/watch_subject").click()
 
     >>> browser.getLink(url='mat_analize').click()

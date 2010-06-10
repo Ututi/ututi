@@ -106,8 +106,10 @@ By the way - we are looking at the group home page now:
 
 Let's watch some subjects:
 
-    >>> browser.getLink('Watch subjects').click()
-    >>> browser.getLink('Watch', url='mat_analize').click()
+    >>> browser.getLink('Subjects').click()
+    >>> browser.getControl('add a subject').click()
+    >>> subjects_url = browser.url
+    >>> browser.getLink('Watch').click()
     >>> browser.getLink("What's New?", url='group').click()
 
 And the subject watching box is gone:
@@ -116,7 +118,7 @@ And the subject watching box is gone:
 
 If we stop watching the subject though, the box reappears:
 
-    >>> browser.getLink('Subjects').click()
+    >>> browser.open(subjects_url)
     >>> browser.getLink(url='unwatch_subject').click()
     >>> browser.getLink("What's New?", url='group').click()
 

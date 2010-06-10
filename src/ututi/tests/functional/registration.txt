@@ -57,10 +57,6 @@ An email, requesting the confirmation of the email address entered is sent:
     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
     Close
     Your email jonas@example.com has been confirmed, thanks.
-    Close
-    You haven't told us where you are studying. You can do this
-    . Thanks.
-
 
 What if we clicked the link again?
 
@@ -68,10 +64,6 @@ What if we clicked the link again?
      >>> browser.printQuery("//div[@class='flash-message']/span/text()")
      Close
      Could not confirm email: invalid confirmation key.
-     Close
-     You haven't told us where you are studying. You can do this
-     . Thanks.
-
 
      >>> print browser.url
      http://localhost/home
