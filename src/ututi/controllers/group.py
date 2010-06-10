@@ -1223,3 +1223,8 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @ActionProtector("member", "admin")
     def payment_deferred(self, group):
         return render('group/payment_deferred.mako')
+
+    def js_check_id(self):
+        group_id = request.params.get('id')
+        exists = meta.Session.query(Group).filter(Group.group_id==group_id).count() != 0
+        return render_mako_def('group/create_base.mako', 'id_check_response', group_id=group_id, taken=exists)

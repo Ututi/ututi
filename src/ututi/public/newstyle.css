@@ -1584,12 +1584,12 @@ div.usergruperight {
     line-height: 28px;
 }
 
-#CreatePublicGroupLeft p.laisvas {
+#CreatePublicGroupLeft div#group-id-check div {
     border-top: 1px solid #e9e6e6;
     border-bottom: 1px solid #e9e6e6;
     text-align: center;
     width:430px;
-    padding: 15px 0 15px 0;
+    padding: 15px 0;
 }
 
 
@@ -2914,6 +2914,16 @@ END OF TAG WIDGET SECTION
 MISC
 
  **************************************************************************/
+
+#group-id-check .taken {
+    padding-left: 15px;
+    background: transparent url("../img/icons/alert_small.png") left center no-repeat;
+}
+
+#group-id-check .free {
+    padding-left: 15px;
+    background: transparent url("../img/icons/tick_10.png") left center no-repeat;
+}
 
 .subject_description .snippet-subject {
     padding: 5px 0 5px 50px;

@@ -11,6 +11,28 @@
 <%def name="head_tags()">
   ${parent.head_tags()}
   <%newlocationtag:head_tags />
+  <script type="text/javascript">
+  //<![CDATA[
+  function check_group_id() {
+    var id = $('input#group-id-field').val();
+    $('#group-id-check').load("${url(controller='group', action='js_check_id')}",
+           {'id': id});
+  }
+
+  function afterDelayedKeyup(selector, action, delay){
+    jQuery(selector).keyup(function(){
+      if(typeof(window['inputTimeout']) != "undefined"){
+        clearTimeout(inputTimeout);
+      }
+      inputTimeout = setTimeout(action, delay);
+    });
+  }
+  $(document).ready(function() {
+      afterDelayedKeyup('input#group-id-field',check_group_id,500);
+  });
+  //]]>
+  </script>
+
 </%def>
 
 <%def name="path_steps(step=0)">
@@ -28,6 +50,18 @@
 </div>
 </%def>
 
+<%def name="id_check_response(group_id, taken)">
+<div>
+<span class="${'taken' if taken else 'free'}">
+  http://ututi.lt/group/<span class="bold">${group_id}</span>
+  %if taken:
+    <span class="grey"> is taken.</span>
+  %else:
+    <span class="green"> is free!</span>
+  %endif
+</span>
+</div>
+</%def>
 
 <%def name="group_title_field()">
   ${h.input_line('title', _('Group title'))}
@@ -56,6 +90,7 @@
       <span class="edge"></span>
     </span>
   </label>
+  <div id="group-id-check"></div>
 </%def>
 
 <%def name="group_email_field()">
@@ -70,6 +105,7 @@
     </span>
      @groups.ututi.lt
   </label>
+  <div id="group-id-check"></div>
 </%def>
 
 <%def name="can_add_subjects()">
