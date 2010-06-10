@@ -81,7 +81,7 @@ Let's post a new topic now:
     >>> browser.getControl('New topic').click()
 
     >>> browser.url
-    'http://localhost/group/moderators/mailinglist/new_thread'
+    'http://localhost/group/moderators/mailinglist/new_thread?'
 
     >>> browser.getControl('Subject').value = "Hi mom"
     >>> browser.getControl('Message').value = u"I am doing fine. Send more cash."
