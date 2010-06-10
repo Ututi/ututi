@@ -61,7 +61,7 @@ $(document).ready(function(){
 </script>
 </%def>
 
-<%def name="subjects_block(title, update_url, selected, subjects, unwatch=False)">
+<%def name="subjects_block(title, update_url, selected, subjects, unwatch=False, my_subjects=False)">
 <%self:rounded_block class_='portletGroupFiles subject_description'>
   <div class="GroupFiles GroupFilesDalykai">
     <h2 class="portletTitle bold">
@@ -100,6 +100,11 @@ $(document).ready(function(){
       </span>
     %endif
   </div>
+  %if my_subjects:
+    <div style="padding: 0; margin-left: 20px; margin-top: 5px;">
+      ${h.button_to(_('Add a subject'), url(controller='profile', action='watch_subjects'), class_='btnMedium')}
+    </div>
+  %endif
 </%self:rounded_block>
 </%def>
 
@@ -108,7 +113,7 @@ $(document).ready(function(){
      count = len(subjects)
   %>
   %for n, subject in enumerate(subjects):
-  <div class="${'GroupFilesContent-line-dal' if n != count - 1 else 'GroupFilesContent-line-dal-last'}">
+  <div class="GroupFilesContent-line-dal">
 	<ul class="grupes-links-list-dalykai">
       %if not unwatch and subject in c.user.ignored_subjects:
         <% cls = 'disabled' %>
@@ -153,15 +158,10 @@ $(document).ready(function(){
 </%def>
 
 <div id="subject_settings">
-${subjects_block(_('Personally watched subjects'), url(controller='profile', action='set_receive_email_each'), c.user.receive_email_each, c.subjects, True)}
-
-<div style="padding-top: 5px; padding-bottom: 10px; margin-bottom: 20px;">
-  ${h.button_to(_('Add a subject'), url(controller='profile', action='watch_subjects'), class_='btnLarge')}
-</div>
-
+${subjects_block(_('Personally watched subjects'), url(controller='profile', action='set_receive_email_each'), c.user.receive_email_each, c.subjects, True, True)}
 
 %for group in c.groups:
-  ${subjects_block(_('%(group_title)s subjects') % dict(group_title=h.link_to(group.title, group.url())),
+  ${subjects_block(_("Group's %(group_title)s subjects") % dict(group_title=h.link_to(group.title, group.url())),
                    group.url(action='set_receive_email_each'), group.is_member(c.user).receive_email_each, group.watched_subjects, False)}
 %endfor
 </div>
