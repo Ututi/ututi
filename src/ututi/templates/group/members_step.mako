@@ -11,7 +11,7 @@ ${c.group.title}
   ${group_sidebar()}
 </%def>
 
-<h1>${_('Group creation')}</h1>
+<h1>${_('Add group members')}</h1>
 
 ${path_steps(1)}
 
