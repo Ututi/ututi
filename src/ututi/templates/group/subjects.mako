@@ -2,7 +2,7 @@
 <%namespace file="/widgets/tags.mako" import="*"/>
 <%namespace file="/search/index.mako" import="search_form"/>
 <%namespace file="/search/index.mako" import="search_results"/>
-<%namespace file="/sections/content_snippets.mako" import="item_tags, tag_link"/>
+<%namespace file="/sections/content_snippets.mako" import="item_tags, tag_link, item_location"/>
 
 <%def name="head_tags()">
 <script type="text/javascript">
@@ -14,7 +14,7 @@ $(document).ready(function(){
             url: url,
             success: function(msg){
                 $(event.target).parent().parent().remove();
-                if ($('#watched-subjects').children().size() == 1) {
+                if ($('#watched_subjects').children().size() == 1) {
                   $('#empty_subjects_msg').toggleClass('hidden');
                 }
 
@@ -25,18 +25,19 @@ $(document).ready(function(){
   $('.remove_subject_button').click(unselectSubject);
 
   $('.select_subject_button').click(function (event) {
-    var url = $(event.target).parent().prev('.select_url').val();
+    var url = $(event.target).closest('div').find('.select_url').val();
     $.ajax({type: "GET",
             url: url,
             success: function(msg){
-                $(event.target).parent().parent().parent().after($(msg)[0]).remove();
+                $(event.target).closest('.snippet-subject').after($(msg)[0]).remove();
                 var selected_subject = $(msg)[2];
-                $('#watched-subjects').append(selected_subject);
-                if (($('#watched-subjects').children().size() > 1) && (! $('#empty_subjects_msg').hasClass('hidden'))) {
+                $('#watched_subjects').append(selected_subject);
+                $('.remove_subject_button', selected_subject).click(unselectSubject);
+
+                if (($('#watched_subjects').children().size() > 1) && (! $('#empty_subjects_msg').hasClass('hidden'))) {
                   $('#empty_subjects_msg').toggleClass('hidden');
                 }
-                $('.remove_subject_button', selected_subject).click(unselectSubject);
-    }});
+     }});
     return false;
   });
 });
@@ -48,16 +49,11 @@ ${parent.head_tags()}
 </%def>
 
 <%def name="subject_flash_message(subject)">
-  <div class="selected_subject_flash_message flash-message">
-    <span class="close-link" onclick="$(event.target).parent().remove();">${_('Close')}</span>
-    <span>
-      ${_('Subject %(subj)s was selected.') % dict(subj = h.link_to(subject.title, subject.url()))|n}
-    </span>
-  </div>
+  ${search_subject(subject, watched=True)}
 </%def>
 
-<%def name="watched_subject(subject, new=False)">
-  <li class="${new and 'new' or ''}">
+<%def name="watched_subject(subject, new = False)">
+  <li class="enabled ${new and 'new' or ''}">
     <a href="${subject.url()}">${subject.title}</a>
     <input type="hidden" class="remove_url"
            value="${c.group.url(action='js_unwatch_subject', subject_id=subject.subject_id, subject_location_id=subject.location.id)}" />
@@ -86,24 +82,56 @@ ${parent.head_tags()}
 </%def>
 
 ## overriding the search result item definition
-<%def name="search_subject(item)">
+<%def name="search_subject(subject, watched=False)">
+  %if not watched:
   <%
-     object = item.object
+     object = subject.object
   %>
+  %else:
+  <%
+     object = subject
+  %>
+  %endif
   <div class="search-item snippet-subject">
-    <div class="title">
-      <a href="${object.url()}" title="${object.title}" class="item-title larger">${object.title}</a>
+    <a href="${object.url()}" title="${object.title}" class="item-title bold larger">${h.ellipsis(object.title, 60)}</a>
+    <div style="float: right;" class="js-alternatives">
+      %if not watched:
       <input type="hidden" class="select_url"
-             value="${c.group.url(action='js_watch_subject', subject_id=item.object.subject_id, subject_location_id=item.object.location.id)}" />
-      <a href="${c.group.url(action='watch_subject', subject_id=item.object.subject_id, subject_location_id=item.object.location.id)}"
-         class="select_subject_button btn"><span>${_('Watch')}</span></a>
-    </div>
+             value="${c.group.url(action='js_watch_subject', subject_id=object.subject_id, subject_location_id=object.location.id)}" />
+      <a href="${c.group.url(action='watch_subject', subject_id=object.subject_id, subject_location_id=object.location.id)}"
+         class="select_subject_button btn non-js"><span>${_('Watch')}</span></a>
+      <button class="btn js select_subject_button"><span>${_('Watch')}</span></button>
 
+      %else:
+      ${h.image('/img/icons/tick_big.png', 'ok')|n}
+      %endif
+    </div>
 
     <div class="description">
-      ${object.lecturer}
+      ${item_location(object)}
+      % if object.lecturer:
+       | ${object.lecturer}
+      % endif
+      %if object.tags:
+       | ${item_tags(object)}
+      %endif
     </div>
-    ${item_tags(object)}
+    <dl class="stats">
+       <%
+           file_cnt = len(object.files)
+           page_cnt = len(object.pages)
+           group_cnt = object.group_count()
+           user_cnt = object.user_count()
+        %>
+
+        <dd class="files">${ungettext('%(count)s <span class="a11y">file</span>', '%(count)s <span class="a11y">files</span>', file_cnt) % dict(count = file_cnt)|n}</dd>
+        <dd class="pages">${ungettext('%(count)s <span class="a11y">wiki page</span>', '%(count)s <span class="a11y">wiki pages</span>', page_cnt) % dict(count = page_cnt)|n}</dd>
+        <dd class="watchedBy"><span class="a11y">${_('Watched by:')}</span>
+          ${ungettext("%(count)s group", "%(count)s groups", group_cnt) % dict(count = group_cnt)|n}
+          ${_('and')}
+          ${ungettext("%(count)s member", "%(count)s members", user_cnt) % dict(count = user_cnt)|n}
+        </dd>
+    </dl>
   </div>
 </%def>
 
@@ -125,8 +153,11 @@ ${parent.head_tags()}
 %endif
 </%def>
 
-<div class="comment">${_('This is the list of subjects watched by this group. By selecting to watch subjects, the group will always be notified of any changes in them.')}</div>
-<ul id="watched-subjects">
+<div style="padding-top: 5px; padding-bottom: 10px;">
+  <a class="back-link" href="${c.group.url(action='subjects')}">${_('Back to subject list')}</a>
+</div>
+
+<ul id="watched_subjects"  class="personal_watched_subjects">
 %if c.group.watched_subjects:
 % for subject in c.group.watched_subjects:
   ${watched_subject(subject)}
@@ -145,41 +176,30 @@ ${_('Your group is not watching any subjects. Add them by searching.')}
 </li>
 </ul>
 
-<%
-   cls = ''
-   if not c.searched and not c.list_open:
-       cls = 'click2show'
-%>
-<div class="${cls}">
-  <div class="click" id="expand-search">
-    ${_('recommended subjects')}
+<div style="margin: 10px 0; overflow: auto;">
+  <h2 class="subjects-suggestions" style="float: left;">
+    ${_('Recommended subjects')}
+  </h2>
+
+  %if c.results:
+  <div style="float: right;">
+    ${h.button_to(_('Create a new subject'), c.group.url(action='add_subject'), method='get')}
   </div>
-  <div class="show">
-
-    <div style="margin: 10px 0; overflow: auto;">
-      <h2 class="subjects-suggestions" style="float: left;">
-        ${_('Recommended subjects')}
-      </h2>
-
-      %if c.results:
-        <a style="float: left; margin-left: 30px;" class="btn" href="${c.group.url(action='add_subject')}"><span>${_('Create a new subject')}</span></a>
-      %endif
-    </div>
-
-    %if not c.results:
-    <div class="create_item">
-      <a class="btn-large" href="${c.group.url(action='add_subject')}"><span>${_('Create a new subject')}</span></a>
-    </div>
-    %endif
-
-    ${search_form(text=c.text, obj_type='subject', tags=c.tags, parts=['text', 'tags'], target=c.search_target)}
-
-    %if c.results:
-    ${search_results(c.results, display=search_subject)}
-    % else:
-    <div class="create_item">
-      <a class="btn-large" href="${c.group.url(action='add_subject')}"><span>${_('Create a new subject')}</span></a>
-    </div>
-    %endif
-  </div>
+  %endif
 </div>
+
+%if not c.results:
+<div class="create_item">
+  <a class="btn-large" href="${c.group.url(action='add_subject')}"><span>${_('Create a new subject')}</span></a>
+</div>
+%endif
+
+${search_form(text=c.text, obj_type='subject', tags=c.tags, parts=['text', 'tags'], target=c.search_target)}
+
+%if c.results:
+${search_results(c.results, display=search_subject)}
+%else:
+<div class="create_item">
+  <a class="btn-large" href="${c.group.url(action='add_subject')}"><span>${_('Create a new subject')}</span></a>
+</div>
+%endif

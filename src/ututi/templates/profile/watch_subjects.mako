@@ -104,7 +104,7 @@ ${search_form(text=c.text, obj_type='subject', tags=c.tags, parts=['text', 'tags
       </a>
       <button class="btn js select_subject_button"><span>${_('Watch')}</span></button>
       %else:
-      ${h.image('/img//icons/tick_big.png', 'ok')|n}
+      ${h.image('/img/icons/tick_big.png', 'ok')|n}
       %endif
     </div>
 
