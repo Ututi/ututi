@@ -25,10 +25,17 @@
       </div>
       <div class="floatleft personal-data">
         <div><h2 class="grupes-portlete">${group.title}</h2></div>
+        %if not c.group.forum_is_public:
         <div>
           <a href="${group.location.url()}">${' | '.join(group.location.title_path)}</a>
           <span class="right_arrow"></span>
         </div>
+        %else:
+        <div>
+          <a href="${group.url()}">${group.url(qualified=True)}</a>
+        </div>
+        %endif
+        %if not c.group.forum_is_public:
         <div>
           %if group.is_member(c.user):
             <a href="${url(controller='mailinglist', action='new_thread', id=c.group.group_id)}" title="${_('Mailing list address')}">${group.group_id}@${c.mailing_list_host}</a>
@@ -36,11 +43,12 @@
             <a href="${url(controller='mailinglist', action='new_anonymous_post', id=c.group.group_id)}" title="${_('Mailing list address')}">${group.group_id}@${c.mailing_list_host}</a>
           %endif
         </div>
+        %endif
         <div>${ungettext("%(count)s member", "%(count)s members", len(group.members)) % dict(count=len(group.members))}</div>
       </div>
       <div class="clear"></div>
     </div>
-    %if group.has_file_area:
+    %if group.has_file_area and not c.group.forum_is_public:
     <div class="profile">
       ${_('Available space for private group files:')}
       ${h.image('/images/details/pbar%d.png' % group.free_size_points, alt=h.file_size(group.size), class_='area_size_points')|n}
