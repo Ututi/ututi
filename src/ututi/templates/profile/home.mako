@@ -250,7 +250,7 @@ ${subjects_block(c.user.watched_subjects)}
 		<dl>
 		  <dt>
             <span class="bold">
-              <a class="subject_title" href="${subject.url()}">${subject.title}</a>
+              <a class="subject_title" href="${subject.url()}">${h.ellipsis(subject.title, 60)}</a>
             </span>
             <span class="verysmall">   ${_('rating')} (</span><span>${h.image('/images/details/stars%d.png' % subject.rating(), alt='', class_='subject_rating')|n})</span></dt>
           %for index, tag in enumerate(subject.location.hierarchy(True)):
