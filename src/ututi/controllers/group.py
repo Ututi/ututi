@@ -1226,5 +1226,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
 
     def js_check_id(self):
         group_id = request.params.get('id')
+        is_email = request.params.get('is_email', '') == 'true'
+
         exists = meta.Session.query(Group).filter(Group.group_id==group_id).count() != 0
-        return render_mako_def('group/create_base.mako', 'id_check_response', group_id=group_id, taken=exists)
+        return render_mako_def('group/create_base.mako', 'id_check_response', group_id=group_id, taken=exists, is_email=is_email)

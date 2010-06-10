@@ -13,10 +13,10 @@
   <%newlocationtag:head_tags />
   <script type="text/javascript">
   //<![CDATA[
-  function check_group_id() {
+  function check_group_id(is_email) {
     var id = $('input#group-id-field').val();
     $('#group-id-check').load("${url(controller='group', action='js_check_id')}",
-           {'id': id});
+           {'id': id, 'is_email': is_email});
   }
 
   function afterDelayedKeyup(selector, action, delay){
@@ -27,9 +27,7 @@
       inputTimeout = setTimeout(action, delay);
     });
   }
-  $(document).ready(function() {
-      afterDelayedKeyup('input#group-id-field',check_group_id,500);
-  });
+
   //]]>
   </script>
 
@@ -50,10 +48,14 @@
 </div>
 </%def>
 
-<%def name="id_check_response(group_id, taken)">
+<%def name="id_check_response(group_id, taken, is_email)">
 <div>
 <span class="${'taken' if taken else 'free'}">
+  %if is_email:
+  <span class="bold">${group_id}</span>@${c.mailing_list_host}
+  %else:
   http://ututi.lt/group/<span class="bold">${group_id}</span>
+  %endif
   %if taken:
     <span class="grey"> is taken.</span>
   %else:
@@ -91,6 +93,12 @@
     </span>
   </label>
   <div id="group-id-check"></div>
+  <script type="text/javascript">
+  //<![CDATA[
+    afterDelayedKeyup('input#group-id-field',"check_group_id(false)",500);
+  //]]>
+  </script>
+
 </%def>
 
 <%def name="group_email_field()">
@@ -103,9 +111,15 @@
       <input class="address" type="text" id="group-id-field" name="id" />
       <span class="edge"></span>
     </span>
-     @groups.ututi.lt
+     @${c.mailing_list_host}
   </label>
   <div id="group-id-check"></div>
+  <script type="text/javascript">
+  //<![CDATA[
+    afterDelayedKeyup('input#group-id-field',"check_group_id(true)",500);
+  //]]>
+  </script>
+
 </%def>
 
 <%def name="can_add_subjects()">
