@@ -67,12 +67,16 @@
         </a>
       </div>
     % endif
+
+      <div style="margin: 5px 0 0 10px;">
+	% if c.user and messages:
+	${h.button_to(_('Mark all as read'), url(controller=c.controller, action='mark_category_as_read', id=c.group_id, category_id=category.id))}
+	% else:
+        ${_('There are no forum messages.')}
+	% endif
+      </div>
   </div>
 </%def>
 
 ${forum_thread_list(c.category, n=10000)}
 <!-- TODO: pagination -->
-
-% if c.user and c.category.posts:
-  ${h.button_to(_('Mark all as read'), url(controller=c.controller, action='mark_category_as_read', id=c.group_id, category_id=c.category.id))}
-% endif
