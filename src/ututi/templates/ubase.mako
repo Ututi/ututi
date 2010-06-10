@@ -1,4 +1,6 @@
 <%inherit file="/uprebase.mako" />
 
-${self.flash_messages()}
-${next.body()}
+<div id="mainContent">
+   ${self.flash_messages()}
+   ${next.body()}
+</div>
