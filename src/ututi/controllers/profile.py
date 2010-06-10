@@ -199,9 +199,6 @@ class ProfileController(SearchBaseController, UniversityListMixin):
 
     @ActionProtector("user")
     def home(self):
-        if c.user.location is None:
-            h.flash(_("You haven't told us where you are studying. "
-                      "You can do this <a href='%(edit_url)s'>here</a>. Thanks.") % dict(edit_url=url(controller='profile', action='edit')))
         c.breadcrumbs.append(self._actions('home'))
 
         c.events = meta.Session.query(Event)\
