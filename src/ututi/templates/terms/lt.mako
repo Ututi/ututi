@@ -1,4 +1,4 @@
-<%inherit file="/terms/en.mako" />
+<%inherit file="/ubase-width.mako" />
 
 <h1>Susitarimai ir sąlygos</h1>
 
