@@ -11,7 +11,7 @@ $(document).ready(function(){
             url: url,
             success: function(msg){
                 $(event.target).closest('.snippet-subject').remove();
-                if ($('#SearchResults').children().size() == 1) {
+                if ($('#SearchResults').children().size() == 2) {
                   $('#empty_subjects_msg').toggleClass('hidden');
                 }
 
@@ -20,6 +20,20 @@ $(document).ready(function(){
   }
 
   $('.remove_subject_button').click(unselectSubject);
+
+  $('.select_interval_form .each').change(function (event) {
+    var url = event.target.form.action;
+    $(event.target.form).removeClass('select_interval_form')
+                        .removeClass('select_interval_form_done')
+                        .addClass('select_interval_form_in_progress');
+    $.ajax({type: "GET",
+            url: url,
+            data: {'each': event.target.value, 'ajax': 'yes'},
+            success: function(msg){
+            $(event.target.form).removeClass('select_interval_form_in_progress')
+                                .addClass('select_interval_form_done');
+    }});
+  });
 
 });
 //]]>
@@ -44,16 +58,40 @@ ${parent.head_tags()}
     %if subjects:
       ${subject_list(subjects)}
     %endif
-    <span class="empty_note" id="empty_subjects_msg"${'style="display: none;"' if subjects else ''|n}>
+    <div class="search-item empty_note${' hidden' if subjects else ''|n}" id="empty_subjects_msg">
       ${_('No watched subjects were found.')}
-    </span>
+    </div>
+    <div class="search-item" style="padding-top: 15px;">
+      <form class="select_interval_form" action="${c.group.url(action='set_receive_email_each')}">
+        ${h.input_submit(_('Confirm'))}
+        <script type="text/javascript">
+          //<![CDATA[
+            $('.select_interval_form .btn').hide();
+          //]]>
+        </script>
+        <label for="each" class="blark">${_('Receive email notifications')}
+          <% selected = c.group.is_member(c.user).receive_email_each %>
+          <select name="each" class="each" style="font-size: 1em;">
+            %for v, t in [('hour', _('immediatelly')), ('day', _('at the end of the day')), ('never', _('never'))]:
+              %if v == selected:
+                <option selected="selected" value="${v}">${t}</option>
+              %else:
+                <option value="${v}">${t}</option>
+              %endif
+            %endfor
+          </select>
+        </label>
+        <img class="done_icon" src="${url('/images/details/icon_done.png')}" style="margin-right: 15px;"/>
+        <img class="in_progress_icon" src="${url('/images/details/icon_progress.gif')}" style="margin-right: 15px;"/>
+      </form>
+    </div>
 
   </div>
 </%self:rounded_block>
 </%def>
 
-<%def name="subject_item(object, last=False)">
-  <div class="search-item snippet-subject${' last' if last else ''}">
+<%def name="subject_item(object)">
+  <div class="search-item snippet-subject">
     <div style="float: right; margin-right: 15px;">
       <input type="hidden" class="remove_url"
              value="${c.group.url(action='js_unwatch_subject', subject_id=object.subject_id, subject_location_id=object.location.id)}" />
@@ -96,28 +134,8 @@ ${parent.head_tags()}
   <%
      count = len(subjects)
   %>
-  %for n, subject in enumerate(subjects):
-    ${subject_item(subject, n == count - 1)}
-##  <div class="${'GroupFilesContent-line-dal' if n != count - 1 else 'GroupFilesContent-line-dal-last'}">
-##    <ul class="grupes-links-list-dalykai">
-##      <li>
-
-##    	<dl>
-##    	  <dt>
-##            <span>
-##              <a class="subject_title blark" href="${subject.url()}">${subject.title}</a>
-##            </span>
-##            <input type="hidden" class="remove_url"
-##                   value="${url(controller='profile', action='js_unwatch_subject', subject_id=subject.id)}" />
-##            <a href="${url(controller='profile', action='unwatch_subject', subject_id=subject.id)}" class="remove_subject_button">
-##              ${h.image('/images/details/icon_cross_subjects.png', alt='unwatch')|n}
-##            </a>
-##          </dt>
-## 		</dl>
-##      </li>
-##    </ul>
-##    <br class="clear-left" />
-##  </div>
+  %for subject in subjects:
+    ${subject_item(subject)}
   %endfor
 </%def>
 

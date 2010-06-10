@@ -3526,8 +3526,7 @@ div.search-item div.description {
     float: right;
 }
 
-li.empty_note,
-span.empty_note {
+.empty_note {
     list-style-type: none;
     color: #999;
     text-size: 1em;
