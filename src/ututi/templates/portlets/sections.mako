@@ -31,18 +31,22 @@
   %if not 'info' in exclude:
   ${group_info_portlet()}
   %endif
-  %if not 'files' in exclude and c.group.has_file_area:
-  ${quick_file_upload_portlet([c.group] + c.group.watched_subjects, label='group_files')}
-  %endif
-  %if not 'forum' in exclude:
-  ${group_forum_post_portlet()}
-  %endif
-  %if not 'members' in exclude:
-  ${group_invite_member_portlet()}
-  %endif
-  ${ututi_prizes_portlet()}
-  %if not 'subjects' in exclude and c.group.wants_to_watch_subjects:
-  ${group_watched_subjects_portlet()}
+  %if not c.group.forum_is_public:
+    %if not 'files' in exclude and c.group.has_file_area:
+    ${quick_file_upload_portlet([c.group] + c.group.watched_subjects, label='group_files')}
+    %endif
+    %if not 'forum' in exclude:
+    ${group_forum_post_portlet()}
+    %endif
+    %if not 'members' in exclude:
+    ${group_invite_member_portlet()}
+    %endif
+    %if not 'subjects' in exclude and c.group.wants_to_watch_subjects:
+    ${group_watched_subjects_portlet()}
+    %endif
+    ${ututi_prizes_portlet()}
+  %else:
+    ${group_members_portlet()}
   %endif
 </div>
 </%def>

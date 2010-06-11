@@ -2915,6 +2915,16 @@ MISC
 
  **************************************************************************/
 
+.portlet .members_list div.user-logo-link {
+    height: 60px;
+    width: 60px;
+}
+
+.portlet .members_list div.user-logo-link div.user-logo {
+    height: 45px;
+    width: 45px;
+}
+
 #group-id-check .taken {
     padding-left: 15px;
     background: transparent url("../img/icons/alert_small.png") left center no-repeat;

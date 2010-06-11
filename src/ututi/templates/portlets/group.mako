@@ -90,20 +90,6 @@
     </div>
     %endif
     <br class="clear-right" />
-
-    ## TODO: not implemented
-    ##<div class="profile">Grupės privatiems failams liko:
-    ##  <img src="/img/icons/indicator.png" alt="" class="indicator">
-    ##  <span class="verysmall">150Mb</span>
-
-    ##  <form action="">
-    ##    <fieldset>
-    ##      <legend class="a11y">pridėti</legend>
-    ##      <label><span><button value="submit" class="btn"><span>gauti daugiau vietos</span></button></span></label>
-    ##    </fieldset>
-    ##  </form>
-    ##</div>
-
   </%self:uportlet>
 </%def>
 
@@ -112,28 +98,26 @@
      if group is None:
          group = c.group
   %>
-  <%self:portlet id="subject_portlet" portlet_class="inactive">
+  <%self:uportlet id="subject_portlet">
     <%def name="header()">
       <a ${h.trackEvent(c.group, 'subjects', 'portlet_header')} href="${group.url(action='subjects')}" title="${_('All watched subjects')}">${_('Watched subjects')}</a>
     </%def>
     %if not group.watched_subjects:
       ${_('Your group is not watching any subjects!')}
     %else:
-    <ul id="group-subjects" class="subjects-list">
+    <ul id="DalykaiList" class="subjects-list">
       % for subject in group.watched_subjects[:5]:
-      <li>
+      <li class="grupes-dalykai">
         <a href="${subject.url()}" title="${subject.title}">${h.ellipsis(subject.title, 35)}</a>
       </li>
       % endfor
     </ul>
     %endif
-    <div class="footer">
-      <span>
-        ${h.button_to(_('choose subjects'), group.url(action='subjects'))}
-        ${h.image('/images/details/icon_question.png', alt=_('Watching subjects means your group will be informed of all the changes that happen in these subjects: new files, new pages etc.'), class_='tooltip')|n}
-      </span>
+    <div class="secondModuleLayer">
+      <a style="float: right; margin-top: 4px;" class="right_arrow" href="${group.url(action='subjects')}">${_('all subjects')}</a>
+      ${h.button_to(_('choose subjects'), group.url(action='subjects'))}
     </div>
-  </%self:portlet>
+  </%self:uportlet>
 </%def>
 
 <%def name="group_forum_post_portlet(group=None)">
@@ -166,4 +150,41 @@
 
     </%def>
   </%self:action_portlet>
+</%def>
+
+<%def name="group_members_portlet(group=None)">
+  <%
+     if group is None:
+         group = c.group
+  %>
+  <%self:uportlet id="group_info_portlet" portlet_class="MyProfile">
+
+    <%def name="header()">
+      <a ${h.trackEvent(c.group, 'home', 'portlet_header')} href="${group.url(action='members')}" title="${_('''Group's members''')}">${_("Group's members")}</a>
+    </%def>
+    <div class="members_list">
+      %for member in group.members[:8]:
+        <div class="user-logo-link">
+          <div class="user-logo">
+            <a href="${url(controller="user", action="index", id=member.user.id)}" title="${member.user.fullname}">
+              %if member.user.logo is not None:
+                <img src="${url(controller='user', action='logo', id=member.user.id, width=45, height=45)}" alt="logo" />
+              %else:
+                ${h.image('/img/avatar-light-small.png', alt='logo')}
+              %endif
+            </a>
+          </div>
+          <div>
+            <a class="verysmall blark" href="${url(controller="user", action="index", id=member.user.id)}" title="${member.user.fullname}">
+              ${h.ellipsis(member.user.fullname, 10)}
+            </a>
+          </div>
+        </div>
+      %endfor
+        <br class="clear-left" />
+    </div>
+    %if not group.is_member(c.user):
+      ${h.button_to(_('become a member'), url(controller='group', action='request_join', id=group.group_id))}
+    %endif
+  </%self:uportlet>
 </%def>
