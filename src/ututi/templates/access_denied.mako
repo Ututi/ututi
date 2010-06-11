@@ -9,7 +9,11 @@ ${parent.head_tags()}
   <img src="${url('/images/details/icon_nope.png')}" />
 
   <div>
+  %if c.reason:
+    ${c.reason}
+  %else:
     ${_('You do not have the rights to see this page, or perform this action. Go back or go to the search page please.')}
+  %endif
   </div>
 
   % if request.referrer.startswith(url("/", qualified=True)):

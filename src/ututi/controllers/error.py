@@ -23,6 +23,7 @@ class ErrorController(SearchController):
         if resp is None:
             return render("/error.mako")
 
+        c.reason = req.environ.get('ututi.access_denied_reason', None)
         if resp.status_int == 403:
             return render("/access_denied.mako")
         elif resp.status_int == 404:

@@ -8,8 +8,7 @@ login form:
     >>> browser = Browser()
     >>> browser.open('http://localhost/admin/import_csv')
     >>> browser.url
-    'http://localhost/join?access_denied=True&came_from=http%3A%2F%2Flocalhost%2Fadmin%2Fimport_csv'
-
+    'http://localhost/login?came_from=http%3A%2F%2Flocalhost%2Fadmin%2Fimport_csv'
 
 Now if I type in the admin credentials:
 

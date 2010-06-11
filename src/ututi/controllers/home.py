@@ -406,7 +406,7 @@ class HomeController(UniversityListMixin):
 
     def join(self):
         c.came_from = request.params.get('came_from', False)
-        c.access_denied = request.params.get('access_denied', True)
+        c.access_denied = request.params.get('access_denied', False)
 
         return render('home/join.mako')
 

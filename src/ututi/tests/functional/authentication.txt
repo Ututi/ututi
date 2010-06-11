@@ -6,7 +6,7 @@ Visiting a profile-related page should not crash if the user is not logged in.
     >>> browser = Browser()
     >>> browser.open('http://localhost/home')
     >>> browser.url
-    'http://localhost/join?access_denied=True&came_from=http%3A%2F%2Flocalhost%2Fhome'
+    'http://localhost/login?came_from=http%3A%2F%2Flocalhost%2Fhome'
 
 
 -------------------------
@@ -51,7 +51,7 @@ Visiting a profile-related page should not crash if the user is not logged in.
 
     >>> browser.open('http://localhost/group/moderators/members')
     >>> browser.url
-    'http://localhost/join?access_denied=True&came_from=http%3A%2F%2Flocalhost%2Fgroup%2Fmoderators%2Fmembers'
+    'http://localhost/login?came_from=http%3A%2F%2Flocalhost%2Fgroup%2Fmoderators%2Fmembers'
 
     >>> form = browser.getForm('loginForm')
     >>> form.getControl('Email').value = "admin@ututi.lt"

@@ -111,24 +111,28 @@ class CrowdPredicate(object):
             raise NotAuthorizedError()
 
 
-def deny(reason, code=None):
+def deny(reason, code=403):
     if code is not None:
         response.status_int = code
 
+    # User is logged in, we don't want to tell him to log in again
+    if c.user and response.status_int == 401:
+        response.status_int = 403
+
     if response.status_int == 401:
         login_form_url =  c.login_form_url or url(controller='home',
-                                                  action='join',
-                                                  access_denied=True,
+                                                  action='login',
                                                   came_from=request.url)
         redirect(login_form_url)
 
+    request.environ['ututi.access_denied_reason'] = reason
     abort(response.status_int, comment=reason)
 
 
 class ActionProtector(BaseActionProtector):
 
     def default_denial_handler(self, reason):
-        deny(reason)
+        deny(reason, response.status_int)
 
     def __init__(self, *crowds, **kwargs):
         self.predicate = CrowdPredicate(*crowds)
