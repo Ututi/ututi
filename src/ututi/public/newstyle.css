@@ -2145,7 +2145,8 @@ div.filtrai .portlet-verysmall {
     dd a.uni {
         color: #668000;
     }
-    h3.underline {
+    h3.underline,
+    h2.underline {
         border-bottom: 1px solid #ded8d8;
         padding:5px;
     }
@@ -2914,6 +2915,81 @@ END OF TAG WIDGET SECTION
 MISC
 
  **************************************************************************/
+/* ututi feature list */
+#can_find {
+  margin-top: 20px;
+  padding-left: 80px;
+  height: 60px;
+  background: transparent url("../images/details/image_door.png") left center no-repeat;
+}
+
+#can_do {
+  height: 60px;
+  margin-top: 20px;
+  padding-left: 80px;
+  background: transparent url("../images/details/image_man.png") left center no-repeat;
+}
+
+#ututi_features {
+  margin: 20px 0 50px 0;
+}
+
+#ututi_features .q_mark {
+  padding-left: 35px;
+  background: transparent url("../images/details/questionmark.png") left top no-repeat;
+  font-size: 13px;
+  padding-bottom: 10px;
+}
+
+#ututi_features .q_mark h3 {
+  color: #d45500;
+  font-size: 16px;
+  padding-bottom: 5px;
+}
+
+#ututi_features h3 {
+  font-size: 16px;
+}
+
+#ututi_features em {
+  color: #d45500;
+  font-style: normal;
+}
+
+#login-page-form {
+  width: 350px;
+  margin: 0 auto;
+  padding-top: 30px;
+}
+
+div.permission-denied {
+  margin-top: 10px;
+  padding-left: 140px;
+  padding-top: 5px;
+  background: white url("../images/details/icon_nope.png") left top no-repeat;
+  height: 80px;
+}
+
+div.please-register {
+  margin-top: 10px;
+  padding-left: 140px;
+  padding-top: 5px;
+  background: white url("../images/details/icon_labas.png") left top no-repeat;
+  height: 80px;
+}
+
+#ututi_join_section_portlet {
+    width: 350px;
+}
+
+.group_description {
+    background: #f9f9f9;
+    border: 1px solid #ded8d8;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    padding: 10px 15px;
+    margin: 15px 0;
+}
 
 .portlet .members_list div.user-logo-link {
     height: 60px;
