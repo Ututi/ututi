@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-06-11 10:24+0300\n"
+"POT-Creation-Date: 2010-06-11 17:00+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2041,12 +2041,10 @@ msgstr ""
 msgid "Your group is not watching any subjects!"
 msgstr ""
 
-msgid "choose subjects"
+msgid "all subjects"
 msgstr ""
 
-msgid ""
-"Watching subjects means your group will be informed of all the changes that "
-"happen in these subjects: new files, new pages etc."
+msgid "choose subjects"
 msgstr ""
 
 msgid "email your group"
@@ -2059,6 +2057,12 @@ msgid "invite groupmates"
 msgstr ""
 
 msgid "Invite your groupmates to use Ututi with you."
+msgstr ""
+
+msgid "Group's members"
+msgstr ""
+
+msgid "become a member"
 msgstr ""
 
 msgid "Everywhere"
