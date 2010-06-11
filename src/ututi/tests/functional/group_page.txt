@@ -37,5 +37,5 @@ We can specify that the group's page is public, shown on the front page.
 
     >>> browser2 = Browser()
     >>> browser2.open('http://localhost/group/moderators')
-    >>> browser2.printQuery("id('group_page')/text()")
+    >>> browser2.printQuery("//div[@class='group_description']/text()")
     This is our group

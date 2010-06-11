@@ -77,13 +77,14 @@
     </%def>
       <form id="join_registration_form" method="post" action="${url(controller='home', action='join_register')}" class="fullForm">
         <fieldset>
+
         %if c.came_from:
           <input type="hidden" name="came_from" value="${c.came_from}" />
         %endif
 
         ${h.input_line('fullname', _('Fullname'))}
          % if c.email:
-          ${h.input_line('email', _('Email'), disabled="disabled", value="${c.email}")}
+          ${h.input_line('email', _('Email'), disabled="disabled", value=c.email)}
           <input  type="hidden" name="email" value="${c.email}" />
          % else:
            ${h.input_line('email', _('Email'))}
@@ -118,7 +119,7 @@
         %if c.login_error:
         <div class="error">${c.login_error}</div>
         %endif
-        ${h.input_line('login_username', _('Your email address'))}
+        ${h.input_line('login_username', _('Your email address'), value=request.params.get('login'))}
         ${h.input_psw('login_password', _('Password'))}
         ${h.input_submit(_('Login'))}
       </form>

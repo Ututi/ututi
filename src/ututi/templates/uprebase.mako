@@ -97,7 +97,7 @@ ${_('student information online')}
   <fieldset>
     <input type="hidden" name="came_from" value="${request.params.get('came_from', request.url)}" />
     <legend class="a11y">${_('Join!')}</legend>
-    <label class="textField"><span class="overlay">${_('Email')}:</span><input type="text" name="login" /><span class="edge"></span></label>
+    <label class="textField"><span class="overlay">${_('Email')}:</span><input type="text" name="login" value="${request.params.get('login')}"/><span class="edge"></span></label>
     <label class="textField"><span class="overlay">${_('Password')}</span><input type="password" name="password" /><span class="edge"></span></label>
     <button class="btn" type="submit" value="${_('Login')}"><span>${_('Login')}</span></button><br />
     <label id="rememberMe"><input type="checkbox"> ${_('remember me')}</label><br />
@@ -238,6 +238,10 @@ ${self.anonymous_menu()}
     </script>
   </head>
   <body class="${self.body_class()}">
+  % if c.serve_file:
+  <iframe style="display: none;" src="${c.serve_file.url()}"> </iframe>
+  % endif
+
     <div id="wrap">
       <div id="widthLimiter">
         ${breadcrumbs(c.breadcrumbs)}

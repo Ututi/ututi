@@ -47,6 +47,7 @@
     ${ututi_prizes_portlet()}
   %else:
     ${group_members_portlet()}
+    ${user_support_portlet()}
   %endif
 </div>
 </%def>

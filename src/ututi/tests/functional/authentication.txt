@@ -8,7 +8,6 @@ Visiting a profile-related page should not crash if the user is not logged in.
     >>> browser.url
     'http://localhost/login?came_from=http%3A%2F%2Flocalhost%2Fhome'
 
-
 -------------------------
 
     >>> browser = Browser()
@@ -38,9 +37,6 @@ Visiting a profile-related page should not crash if the user is not logged in.
     >>> form = browser.getForm('loginForm')
     >>> form.getControl('Email').value
     'admin@ututi.lt'
-
-    >>> 'Wrong password or username!' in browser.contents
-    True
 
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
@@ -81,9 +77,6 @@ Visiting a profile-related page should not crash if the user is not logged in.
     >>> form.getControl('Email').value = "admin@ututi.lt"
     >>> form.getControl('Password').value = "asd"
     >>> form.getControl('Login').click()
-
-    >>> 'Wrong password or username!' in browser.contents
-    True
 
     # XXX which one do we want?
     >>> browser.url

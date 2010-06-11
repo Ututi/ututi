@@ -153,19 +153,17 @@ First let us log out.
     </div>
 
 Let us fill out the registration form
-
-    >>> form = browser.getForm(id='registration_form')
+    >>> form = browser.getForm(id='join_registration_form')
     >>> form.getControl('Fullname').value = 'Jonas Petraitis Petrauskas'
 
 Email is filled in for us already:
-
     >>> form.getControl('Email').value
     'jonas@example.com'
 
     >>> form.getControl('Password').value = 'asdfgh'
     >>> form.getControl('Repeat password').value = 'asdfgh'
     >>> form.getControl(name='agree').value = True
-    >>> form.getControl('Register').click()
+    >>> form.getControl('Join').click()
 
 We should NOT get an email confirmation request.
 

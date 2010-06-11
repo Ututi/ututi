@@ -1,12 +1,10 @@
-<%inherit file="/ubase-width.mako" />
+<%inherit file="/base.mako" />
 
 <%def name="head_tags()">
 ${parent.head_tags()}
 </%def>
-<div id="access_denied">
-  <h1>${_('Permission denied!')}</h1>
 
-  <img src="${url('/images/details/icon_nope.png')}" />
+<h1>${_('Permission denied!')}</h1>
 
   <div>
   %if c.reason:
@@ -16,9 +14,8 @@ ${parent.head_tags()}
   %endif
   </div>
 
-  % if request.referrer.startswith(url("/", qualified=True)):
-  <a href="#" onclick="javascript: history.go(-1); return false;">${_('go back')}</a>
-  % else:
-  <a href="${url(controller='search', action='index')}">${_('go find something else')}</a>
-  % endif
-</div>
+% if request.referrer.startswith(url("/", qualified=True)):
+    <a href="#" onclick="javascript: history.go(-1); return false;">${_('go back')}</a>
+% else:
+    <a href="${url(controller='search', action='index')}">${_('go find something else')}</a>
+% endif

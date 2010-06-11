@@ -10,17 +10,17 @@ request group membership.
    >>> browser.url
    'http://localhost/group/moderators/home'
 
-   >>> browser.getControl('Join the group').click()
+   >>> browser.getControl('become a member').click()
    >>> browser.url
    'http://localhost/login?context_type=group_join&came_from=%2Fgroup%2Fmoderators%2Frequest_join'
 
-   >>> form = browser.getForm('registration_form')
+   >>> form = browser.getForm('join_registration_form')
    >>> form.getControl('Fullname').value = 'Jonas Petraitis Petrauskas'
    >>> form.getControl('Email').value = 'jonas@example.com'
    >>> form.getControl('Password').value = 'asdfgh'
    >>> form.getControl('Repeat password').value = 'asdfgh'
    >>> form.getControl(name='agree').value = True
-   >>> form.getControl('Register').click()
+   >>> form.getControl('Join').click()
 
    >>> browser.url
    'http://localhost/group/moderators/home'
@@ -62,7 +62,7 @@ Now, let's go to group settings and make the group public:
 Now, the previous user comes over and tries to join:
 
     >>> browser.open('http://localhost/group/test')
-    >>> browser.getControl('Join the group').click()
+    >>> browser.getControl('become a member').click()
 
 We're in the group.  For example, we can see the group's files now:
 

@@ -138,7 +138,7 @@ If a user, who has been invited to join a group requests to join it, we consider
     >>> browser3.url
     'http://localhost/group/moderators/home'
 
-    >>> browser3.getControl('Join the group').click()
+    >>> browser3.getControl('become a member').click()
     >>> browser3.printQuery("//div[@class='flash-message']/span/text()")
     Close
     You are now a member of the group Moderatoriai!

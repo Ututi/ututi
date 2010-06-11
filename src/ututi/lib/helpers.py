@@ -283,7 +283,7 @@ def input_line(name, title, value='', explanation=None, **kwargs):
         return HTML.div(c=[HTML.label(for_=name, c=[
             HTML.span(class_='labelText', c=[title]),
             HTML.span(class_='textField', c=[
-                HTML.input(type='text', name_=name, value='', **kwargs),
+                HTML.input(type='text', value=value, name_=name, **kwargs),
                 HTML.span(class_='edge')
                 ])]),
             HTML.literal('<form:error name="%s" />' % name)])
