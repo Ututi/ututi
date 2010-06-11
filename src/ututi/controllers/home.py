@@ -414,7 +414,7 @@ class HomeController(UniversityListMixin):
     def join_register(self):
         if hasattr(self, 'form_result'):
             user, email = self.__register_user(self.form_result)
-            redirect(c.came_from or url(controller='group', action='add'))
+            redirect(c.came_from or url(controller='profile', action='home'))
 
     def join_login(self):
         email = request.POST.get('login_username')
@@ -427,7 +427,7 @@ class HomeController(UniversityListMixin):
 
             if user is not None:
                 sign_in_user(email)
-                redirect(c.came_from or url(controller='group', action='add'))
+                redirect(c.came_from or url(controller='profile', action='home'))
 
         return render('/home/join.mako')
 
