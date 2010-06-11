@@ -162,7 +162,7 @@
     %endfor
   </ul>
   %endif
-  <p class="more"><a href="${url(controller='search', action='index')}">${_('All universities')}</a></p>
+  <p class="more"><a href="${url(controller='search', action='browse')}">${_('All universities')}</a></p>
 </div><div id="homeActiveGroups">
   <h2>${_('Latest groups')}</h2>
   %if c.groups:

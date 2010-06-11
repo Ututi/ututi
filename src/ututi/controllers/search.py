@@ -8,6 +8,7 @@ from pylons.decorators import validate
 from pylons import request, tmpl_context as c, url
 from pylons.templating import render_mako_def
 
+from ututi.controllers.home import UniversityListMixin
 from ututi.model import BlogEntry, meta
 from ututi.lib.base import BaseController, render
 from ututi.lib.search import search_query, search_query_count, tag_search
@@ -57,7 +58,7 @@ class SearchBaseController(BaseController):
     def _search_locations(self, text):
         c.tag_search = tag_search(text)
 
-class SearchController(SearchBaseController):
+class SearchController(SearchBaseController, UniversityListMixin):
 
     @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
     def index(self):
@@ -68,6 +69,16 @@ class SearchController(SearchBaseController):
         self._search()
         self._search_locations(c.text)
         return render('/search/index.mako')
+
+    def browse(self):
+        c.blog_entries = meta.Session.query(BlogEntry).order_by(BlogEntry.created.desc()).limit(10).all()
+        self._get_unis()
+
+        c.obj_type = '*'
+        if request.params.has_key('js'):
+            return render_mako_def('/anonymous_index/lt.mako','universities', unis=c.unis, ajax_url=url(controller='search', action='browse'))
+
+        return render('/search/browse.mako')
 
     @validate(schema=SearchSubmit, post_only = False, on_get = True)
     def search_js(self):
