@@ -117,7 +117,8 @@ def deny(reason, code=None):
 
     if response.status_int == 401:
         login_form_url =  c.login_form_url or url(controller='home',
-                                                  action='index',
+                                                  action='join',
+                                                  access_denied=True,
                                                   came_from=request.url)
         redirect(login_form_url)
 
