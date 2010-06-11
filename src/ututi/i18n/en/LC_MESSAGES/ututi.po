@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-05-27 14:54+0300\n"
+"PO-Revision-Date: 2010-06-11 10:24+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -361,12 +361,6 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#, python-format
-msgid ""
-"You haven't told us where you are studying. You can do this <a "
-"href='%(edit_url)s'>here</a>. Thanks."
-msgstr ""
-
 msgid "Your password has been changed!"
 msgstr ""
 
@@ -699,7 +693,9 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
-msgid "home_register_welcome"
+msgid ""
+"Here you and your classmates can use the file storage for sharing "
+"information and create group for communication."
 msgstr ""
 
 msgid "register"
@@ -1013,6 +1009,18 @@ msgid ""
 "people to use Ututi."
 msgstr ""
 
+msgid "Main menu"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "Browse"
+msgstr ""
+
+msgid "About"
+msgstr ""
+
 msgid "„Ututi“ blog"
 msgstr ""
 
@@ -1043,26 +1051,16 @@ msgstr ""
 msgid "search_"
 msgstr ""
 
-msgid "Main menu"
-msgstr ""
-
-msgid "Home"
-msgstr ""
-
-msgid "Browse"
-msgstr ""
-
 msgid "Groups"
 msgstr ""
 
 msgid "User menu"
 msgstr ""
 
-#, python-format
-msgid "inbox (%d)"
+msgid "Settings"
 msgstr ""
 
-msgid "exit"
+msgid "Public profile"
 msgstr ""
 
 msgid "ututi_link"
@@ -1391,13 +1389,10 @@ msgstr ""
 msgid "If you would like to join Ututi now, please follow this link:"
 msgstr ""
 
-msgid "New category"
-msgstr ""
-
 msgid "No categories yet."
 msgstr ""
 
-msgid "New topic"
+msgid "New category"
 msgstr ""
 
 msgid "Back to thread"
@@ -1412,6 +1407,9 @@ msgstr ""
 msgid "Back to category list"
 msgstr ""
 
+msgid "New topic"
+msgstr ""
+
 #, python-format
 msgid "%(count)s reply"
 msgid_plural "%(count)s replies"
@@ -1419,6 +1417,15 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid "Mark all as read"
+msgstr ""
+
+msgid "There are no forum messages."
+msgstr ""
+
+msgid "Category title"
+msgstr ""
+
+msgid "Create"
 msgstr ""
 
 msgid "Back to the topic list"
@@ -1430,22 +1437,16 @@ msgstr ""
 msgid "Post"
 msgstr ""
 
-msgid "Category title"
-msgstr ""
-
-msgid "Create"
-msgstr ""
-
 msgid "Subscribe to emails"
 msgstr ""
 
 msgid "Unsubscribe from emails"
 msgstr ""
 
-msgid "Reply"
+msgid "Delete thread"
 msgstr ""
 
-msgid "Delete thread"
+msgid "Reply"
 msgstr ""
 
 msgid "Recommended groups from your university and faculty"
@@ -1515,13 +1516,13 @@ msgstr ""
 msgid "Finish choosing subjects"
 msgstr ""
 
-msgid "New public group"
+msgid "New academic group"
 msgstr ""
 
-msgid "Create a public group"
+msgid "Create an academic group"
 msgstr ""
 
-msgid "What can you do with public groups?"
+msgid "What can you do with academic groups?"
 msgstr ""
 
 msgid "Group address on the web"
@@ -1563,6 +1564,27 @@ msgstr ""
 msgid "Group page visibility"
 msgstr ""
 
+msgid "New custom group"
+msgstr ""
+
+msgid "Create a custom group"
+msgstr ""
+
+msgid "What can you do with custom groups?"
+msgstr ""
+
+msgid "New public group"
+msgstr ""
+
+msgid "Create a public group"
+msgstr ""
+
+msgid "What can you do with public groups?"
+msgstr ""
+
+msgid "Back to group page"
+msgstr ""
+
 msgid "The file type is not supported."
 msgstr ""
 
@@ -1572,10 +1594,10 @@ msgstr ""
 msgid "Delete current logo"
 msgstr ""
 
-msgid "Tags"
+msgid "Default group tab"
 msgstr ""
 
-msgid "Default group tab"
+msgid "Tags"
 msgstr ""
 
 msgid "Edit group front page"
@@ -1604,6 +1626,24 @@ msgid "Public group"
 msgstr ""
 
 msgid "Custom group"
+msgstr ""
+
+msgid "Private file area"
+msgstr ""
+
+msgid "Registration with university subjects"
+msgstr ""
+
+msgid "Public group page"
+msgstr ""
+
+msgid "News publishing"
+msgstr ""
+
+msgid "No confirmation needed for membership"
+msgstr ""
+
+msgid "Pick the functionality you need yourself"
 msgstr ""
 
 msgid "Invite group members!"
@@ -1690,6 +1730,9 @@ msgstr ""
 msgid "Delete group"
 msgstr ""
 
+msgid "Add group members"
+msgstr ""
+
 msgid "The group's page is empty. Enter your description."
 msgstr ""
 
@@ -1725,28 +1768,40 @@ msgstr ""
 msgid "Back to the group's files"
 msgstr ""
 
-#, python-format
-msgid "Subject %(subj)s was selected."
-msgstr ""
-
 msgid "Watch"
 msgstr ""
 
-msgid ""
-"This is the list of subjects watched by this group. By selecting to watch"
-" subjects, the group will always be notified of any changes in them."
+msgid "Back to subject list"
 msgstr ""
 
 msgid "Your group is not watching any subjects. Add them by searching."
-msgstr ""
-
-msgid "recommended subjects"
 msgstr ""
 
 msgid "Recommended subjects"
 msgstr ""
 
 msgid "Create a new subject"
+msgstr ""
+
+msgid "add a subject"
+msgstr ""
+
+msgid "No watched subjects were found."
+msgstr ""
+
+msgid "Receive email notifications"
+msgstr ""
+
+msgid "immediatelly"
+msgstr ""
+
+msgid "at the end of the day"
+msgstr ""
+
+msgid "never"
+msgstr ""
+
+msgid "Subject rating:"
 msgstr ""
 
 msgid "Congratulations, you have created a new group!"
@@ -1756,9 +1811,21 @@ msgstr ""
 msgid ""
 "\n"
 "Ututi groups are a communication tool for you and your friends. Here\n"
+"your group can use the <a href=\"%(link_to_forums)s\">forums</a> and "
+"store\n"
+"private files.\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"Ututi groups are a communication tool for you and your friends. Here\n"
 "your group can use the <a href=\"%(link_to_forums)s\">forums</a>, keep\n"
 "private files and <a href=\"%(link_to_subjects)s\">watch subjects</a>\n"
 "you are studying.\n"
+msgstr ""
+
+msgid "Go to the group's files"
 msgstr ""
 
 msgid "Make your group's file space unlimited"
@@ -1773,8 +1840,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"By paying Your group will be able to store an <em>unlimited amount of "
-"files</em>:"
+"By paying Your group will be able to store an <strong>unlimited amount of"
+" files</strong>:"
 msgstr ""
 
 #, python-format
@@ -1842,19 +1909,19 @@ msgstr ""
 msgid "department list"
 msgstr ""
 
+#, python-format
+msgid "Show the other %(count)s department"
+msgid_plural "Show the other %(count)s departments"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Search in the university"
+msgstr ""
+
+msgid "Group mail"
+msgstr ""
+
 msgid "No messages yet."
-msgstr ""
-
-msgid "email subject"
-msgstr ""
-
-msgid "replies"
-msgstr ""
-
-msgid "latest email"
-msgstr ""
-
-msgid "last author"
 msgstr ""
 
 msgid "Message to the group"
@@ -1899,10 +1966,16 @@ msgstr ""
 msgid "Go back to %(subject_title)s"
 msgstr ""
 
-msgid "View history"
+msgid "Last edit: "
 msgstr ""
 
-msgid "Last edit:"
+msgid "edit"
+msgstr ""
+
+msgid "history"
+msgstr ""
+
+msgid "delete"
 msgstr ""
 
 msgid "Join Ututi"
@@ -1959,7 +2032,13 @@ msgstr ""
 msgid "Mailing list address"
 msgstr ""
 
-msgid "more settings"
+msgid "Available space for private group files:"
+msgstr ""
+
+msgid "Get more space"
+msgstr ""
+
+msgid "More settings"
 msgstr ""
 
 msgid "Do not get email"
@@ -2016,20 +2095,20 @@ msgid "Faculty information"
 msgstr ""
 
 #, python-format
-msgid "%(count)s <em>subject</em>"
-msgid_plural "%(count)s <em>subjects</em>"
+msgid "<span class='bold'>%(count)s</span> subject"
+msgid_plural "<span class='bold'>%(count)s</span> subjects"
 msgstr[0] ""
 msgstr[1] ""
 
 #, python-format
-msgid "%(count)s <em>group</em>"
-msgid_plural "%(count)s <em>groups</em>"
+msgid "<span class='bold'>%(count)s</span> group"
+msgid_plural "<span class='bold'>%(count)s</span> groups"
 msgstr[0] ""
 msgstr[1] ""
 
 #, python-format
-msgid "%(count)s <em>file</em>"
-msgid_plural "%(count)s <em>files</em>"
+msgid "<span class='bold'>%(count)s</span> file"
+msgid_plural "<span class='bold'>%(count)s</span> files"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -2042,34 +2121,34 @@ msgstr ""
 msgid "Subject information"
 msgstr ""
 
-msgid "Lecturer"
+msgid "Lecturer:"
 msgstr ""
 
-msgid "Subject rating:"
+msgid "The subject is watched by:"
 msgstr ""
 
 #, python-format
-msgid "<em>%(count)s</em> user"
-msgid_plural "<em>%(count)s</em> users"
+msgid "<span class='orange'>%(count)s</span> user"
+msgid_plural "<span class='orange'>%(count)s</span> users"
 msgstr[0] ""
 msgstr[1] ""
 
 #, python-format
-msgid "<em>%(count)s</em> group"
-msgid_plural "<em>%(count)s</em> groups"
+msgid "<span class='orange'>%(count)s</span> group"
+msgid_plural "<span class='orange'>%(count)s</span> groups"
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "Watch subject"
+msgid "There are no subject tags."
 msgstr ""
 
-msgid "Stop watching the subject"
+msgid "Add to my subjects"
 msgstr ""
 
-msgid "By watching a subject, you will be informed about all the changes in it."
+msgid "Remove from my subjects"
 msgstr ""
 
-msgid "Delete subject"
+msgid "edit subject information"
 msgstr ""
 
 msgid "upload a file to.."
@@ -2113,13 +2192,24 @@ msgstr ""
 msgid "supporters"
 msgstr ""
 
-msgid "My information"
+msgid "My profile"
 msgstr ""
 
-msgid "Edit profile"
+msgid "Files uploaded:"
+msgstr ""
+
+msgid "Edit your profile"
 msgstr ""
 
 msgid "create new subject"
+msgstr ""
+
+msgid "create new group"
+msgstr ""
+
+msgid ""
+"Communicate with your classmates, colleagues and friends, share files and"
+" news together!"
 msgstr ""
 
 msgid "recommend Ututi to your friends"
@@ -2152,7 +2242,13 @@ msgstr ""
 msgid "Read our blog"
 msgstr ""
 
-msgid "Edit your profile"
+msgid "Start"
+msgstr ""
+
+msgid "What's new?"
+msgstr ""
+
+msgid "Profile settings"
 msgstr ""
 
 msgid "back to the profile"
@@ -2220,22 +2316,9 @@ msgstr ""
 msgid "Repeat the new password"
 msgstr ""
 
-msgid "grouped"
-msgstr ""
-
-msgid "ungrouped"
-msgstr ""
-
 msgid ""
 "This is a list of all the recent events in the subjects you are watching "
 "and the groups you belong to."
-msgstr ""
-
-msgid "These are the files from the the subjects you or your group are watching."
-msgstr ""
-
-#, python-format
-msgid "Private files of the group %s"
 msgstr ""
 
 msgid "Filter by school:"
@@ -2247,25 +2330,78 @@ msgstr ""
 msgid "Create your group!"
 msgstr ""
 
-msgid "Latest messages"
+msgid "Your university information has been updated. Thank You."
 msgstr ""
 
-msgid "Latest events"
+msgid "Go to my department"
 msgstr ""
 
-msgid "No messages in group's forum"
+msgid "Tell us where you are studying"
 msgstr ""
 
-msgid "No events for the group."
+msgid "save"
 msgstr ""
 
-msgid "Group events"
+msgid "create group"
 msgstr ""
 
-msgid "Latest files"
+msgid "Write message"
 msgstr ""
 
-msgid "Latest pages"
+msgid "Group messages"
+msgstr ""
+
+msgid "Group subjects"
+msgstr ""
+
+msgid "Group files"
+msgstr ""
+
+msgid ""
+"It's simple - you only need to know the email addresses of your group "
+"mates!"
+msgstr ""
+
+msgid "Use the group's mailing list!"
+msgstr ""
+
+msgid "no, thanks"
+msgstr ""
+
+msgid "Show subjects from my groups"
+msgstr ""
+
+msgid "notification settings"
+msgstr ""
+
+msgid "add subject"
+msgstr ""
+
+msgid "Tell us what you are studying"
+msgstr ""
+
+msgid "Find materials shared by others"
+msgstr ""
+
+msgid "Get notifications about changes"
+msgstr ""
+
+msgid "Watch subject"
+msgstr ""
+
+msgid "watch subjects"
+msgstr ""
+
+msgid "rating"
+msgstr ""
+
+msgid "Lect."
+msgstr ""
+
+msgid "Files:"
+msgstr ""
+
+msgid "Wiki pages:"
 msgstr ""
 
 msgid "Very sad..."
@@ -2282,32 +2418,20 @@ msgstr ""
 msgid "You haven't contributed much, have you?"
 msgstr ""
 
-msgid "Receive messages about updates in subjects"
+msgid "Watched subjects notification settings"
 msgstr ""
 
-msgid "immediatelly"
+msgid "email notifications"
 msgstr ""
 
-msgid "at the end of the day"
-msgstr ""
-
-msgid "never"
-msgstr ""
-
-msgid "This is a list of the subjects You and/or groups You are in are watching."
+msgid "Add a subject"
 msgstr ""
 
 msgid "Personally watched subjects"
 msgstr ""
 
-msgid "Watch more subjects"
-msgstr ""
-
 #, python-format
-msgid "Subjects watched by %(group_title)s"
-msgstr ""
-
-msgid "This group is not watching any subjects."
+msgid "Group's %(group_title)s subjects"
 msgstr ""
 
 msgid "Why we need support?"
@@ -2347,66 +2471,10 @@ msgid ""
 "profile. Good luck continuing to use Ututi!"
 msgstr ""
 
-msgid ""
-"This is a list of the subjects You are watching. By clicking on the cross"
-" next to any subject, You will not get any messages of the changes in it."
-msgstr ""
-
-msgid "Back to subject list"
-msgstr ""
-
-msgid "Your university information has been updated. Thank You."
-msgstr ""
-
-msgid "Welcome to Ututi!"
-msgstr ""
-
-msgid ""
-"Ututi is your university online. Here You and Your class mates can create"
-" a <em>group</em> with a mailing list.You will be able to find the "
-"subject You are studying here at Ututi and share your study notes and "
-"files with others."
-msgstr ""
-
-msgid "Specify your university and faculty!"
-msgstr ""
-
-msgid "confirm"
-msgstr ""
-
-msgid "Join your group"
-msgstr ""
-
-msgid "Here You can find Your group or create one if it does not exist."
-msgstr ""
-
-msgid "your group"
-msgstr ""
-
-msgid "Find your subjects"
-msgstr ""
-
-msgid "Update your profile"
-msgstr ""
-
-msgid ""
-"Let Your friends know who You are, so they can trust the information You "
-"upload."
-msgstr ""
-
-msgid "edit your profile"
-msgstr ""
-
-msgid "New to Ututi? Don't know how to use it?"
-msgstr ""
-
-msgid "Find out more"
-msgstr ""
-
 msgid "Were you looking for a university or department?"
 msgstr ""
 
-msgid "results"
+msgid "search results"
 msgstr ""
 
 #, python-format
@@ -2539,6 +2607,9 @@ msgstr ""
 msgid "back to search"
 msgstr ""
 
+msgid "Lecturer"
+msgstr ""
+
 msgid "Brief description of the subject"
 msgstr ""
 
@@ -2565,16 +2636,16 @@ msgid ""
 "subjects list."
 msgstr ""
 
-msgid "Subject's description"
-msgstr ""
-
-msgid "Edit subject description"
-msgstr ""
-
 msgid "The subject's description is empty."
 msgstr ""
 
 msgid "Subject files"
+msgstr ""
+
+msgid "Subject's Wiki Pages"
+msgstr ""
+
+msgid "Create a wiki document"
 msgstr ""
 
 msgid "The subject has no pages yet - create one!"
