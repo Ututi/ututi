@@ -213,7 +213,7 @@ Let's try requesting to join the group:
     >>> form.getControl('Login').click()
 
     >>> browser3.open('http://localhost/group/test')
-    >>> browser3.getControl('Join the group').click()
+    >>> browser3.getControl('become a member').click()
     >>> browser3.printQuery("//div[@class='flash-message']/span/text()")
     Close
     Your request to join the group has been forwarded to the group's administrators. Thanks!
@@ -286,7 +286,7 @@ Simple members noe also have access to the full subject watching page;
 Let's try to deny a user's request to join the group:
     >>> browser4 = Browser.logIn('user3@ututi.lt', 'password')
     >>> browser4.open('http://localhost/group/test')
-    >>> browser4.getControl('Join the group').click()
+    >>> browser4.getControl('become a member').click()
     >>> browser4.printQuery("//div[@class='flash-message']/span/text()")
     Close
     Your request to join the group has been forwarded to the group's administrators. Thanks!

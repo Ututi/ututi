@@ -75,11 +75,14 @@
     <%def name="header()">
       ${_('Registration')}
     </%def>
-      <form id="join_registration_form" method="post" action="${url(controller='home', action='join_register')}" class="fullForm">
+      <form id="join_registration_form" method="post" action="${url(controller='home', action='register')}" class="fullForm">
         <fieldset>
 
         %if c.came_from:
           <input type="hidden" name="came_from" value="${c.came_from}" />
+        %endif
+        %if c.hash:
+          <input type="hidden" name="hash" value="${c.hash}" />
         %endif
 
         ${h.input_line('fullname', _('Fullname'))}
