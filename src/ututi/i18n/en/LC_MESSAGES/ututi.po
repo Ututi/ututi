@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-06-11 17:00+0300\n"
+"PO-Revision-Date: 2010-06-12 15:24+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -860,8 +860,8 @@ msgstr ""
 
 msgid ""
 "Group <em>forums</em>, subject <em>wikis</em>, <em>files</em>, lecture "
-"notes and <em>answers</em> to       questions that matter for your "
-"studies."
+"notes and <em>answers</em> to               questions that matter for "
+"your studies."
 msgstr ""
 
 msgid "What can you do here?"
@@ -869,7 +869,8 @@ msgstr ""
 
 msgid ""
 "Store <em>study materials</em> and pass them on for future generations, "
-"create <em>academic groups</em>       and communicate with groupmates."
+"create <em>academic groups</em>               and communicate with "
+"groupmates."
 msgstr ""
 
 msgid "Most popular subjects by users"
@@ -1679,16 +1680,10 @@ msgstr ""
 msgid "no, thank you"
 msgstr ""
 
-msgid "Group mailing list archives"
-msgstr ""
-
-msgid "Group forum"
+msgid "become a member"
 msgstr ""
 
 msgid "Group members"
-msgstr ""
-
-msgid "Join the group"
 msgstr ""
 
 msgid "Invite your group mates"
@@ -2080,9 +2075,6 @@ msgstr ""
 msgid "Group's members"
 msgstr ""
 
-msgid "become a member"
-msgstr ""
-
 msgid "Everywhere"
 msgstr ""
 
@@ -2353,6 +2345,9 @@ msgid "Write message"
 msgstr ""
 
 msgid "Group messages"
+msgstr ""
+
+msgid "Group forum"
 msgstr ""
 
 msgid "Group subjects"
