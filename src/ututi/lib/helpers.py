@@ -452,11 +452,10 @@ def url_for(*args, **kwargs):
     from pylons import url
     return url.current(*args, **kwargs)
 
-@beaker_cache(expire=3600, query_args=True, invalidate_on_startup=True)
 def department_listing(location_id, departments_shown):
     from ututi.model import Tag
     location = Tag.get(int(location_id))
-    children = location.get_children()
+    children = location.children
     department_count = len(children)
 
     lft = children[:department_count/2]
