@@ -4,6 +4,7 @@ The more specific and detailed routes should be defined first so they
 may take precedent over the more generic routes. For more information
 refer to the routes manual at http://routes.groovie.org/docs/
 """
+from paste.util.converters import asbool
 from routes import Mapper
 
 
@@ -28,9 +29,9 @@ def make_map(config):
     /advertising
     /statistics
     """
-
+    always_scan = asbool(config.get('always_scan', False))
     map = Mapper(directory=config['pylons.paths']['controllers'],
-                 always_scan=config['debug'])
+                 always_scan=always_scan)
     map.minimization = False
 
     map.redirect('/*path/?*get', '/{path}?{get}', _redirect_code='301 Moved Permanently')
@@ -288,5 +289,4 @@ def make_map(config):
     map.connect('/{controller}', action='index')
     map.connect('/{controller}/{action}')
     map.connect('/{controller}/{action}/{id}')
-
     return map
