@@ -32,7 +32,8 @@ bin/tags: buildout.cfg bin/buildout setup.py versions.cfg
 	$(BUILDOUT)
 
 export PGPORT ?= 4455
-PG_PATH = /usr/lib/postgresql/8.3
+
+PG_PATH = $(shell if test -d /usr/lib/postgresql/8.3; then echo /usr/lib/postgresql/8.3; else echo /usr/lib/postgresql/8.4; fi)
 
 instance/var/data/postgresql.conf:
 	mkdir -p ${PWD}/instance/var/data
