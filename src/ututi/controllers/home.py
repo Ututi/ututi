@@ -398,11 +398,11 @@ class HomeController(UniversityListMixin):
             else:
                 for v in status.values():
                     h.flash(v)
-                url = self.form_result.get('came_from', None)
-                if url is None:
+                came_from = self.form_result.get('came_from', None)
+                if came_from is None:
                     redirect(url(controller='profile', action='index'))
                 else:
-                    redirect(url.encode('utf-8'))
+                    redirect(came_from.encode('utf-8'))
 
     def join(self):
         c.came_from = request.params.get('came_from', False)
