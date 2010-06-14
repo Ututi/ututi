@@ -20,6 +20,7 @@ from datetime import date, datetime, timedelta
 from ututi.lib import urlify
 
 from pylons import config
+from pylons.decorators.cache import beaker_cache
 from pylons.templating import render_mako_def
 
 from sqlalchemy import orm, Column, Integer, Sequence, Table
@@ -1422,9 +1423,9 @@ class Tag(object):
     def get(cls, id):
         tag = meta.Session.query(cls)
         if isinstance(id, basestring):
-            tag.filter_by(title=id.lower())
+            tag = tag.filter_by(title=id.lower())
         else:
-            tag.filter_by(id=id)
+            tag = tag.filter_by(id=id)
         try:
             return tag.one()
         except NoResultFound:
@@ -1509,6 +1510,10 @@ class LocationTag(Tag):
         for child in self.children:
             flat.extend(child.flatten)
         return flat
+
+    @beaker_cache(expire=3600, query_args=True, invalidate_on_startup=True)
+    def get_children(self):
+        return self.children
 
     @classmethod
     def get(cls, path):

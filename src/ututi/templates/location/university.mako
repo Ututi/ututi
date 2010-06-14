@@ -15,18 +15,7 @@
   ${c.location.title} (${c.location.title_short}) - ${_('department list')}
 </%def>
 
-<h1 class="pageTitle">${c.location.title}</h1>
-<br />
-<%
-   children = c.location.children
-   department_count = len(children)
-   departments_shown = 6
-   lft = children[:department_count/2]
-   rgt = children[department_count/2:]
-   if department_count % 2:
-     lft.append(None)
-   children = zip(lft, rgt)
-%>
+<%def name="department_list(children, departments_shown, department_count)">
 <div class="click2show">
   <table id="faculties-list">
       %for n, (dep_left, dep_right) in enumerate(children):
@@ -58,6 +47,14 @@
   </div>
   %endif
 </div>
+</%def>
+
+
+<h1 class="pageTitle">${c.location.title}</h1>
+<br />
+
+${h.department_listing(c.location.id, 6)}
+
 <h2 class="overline">${_('Search in the university')}</h2>
 ##%if c.came_from_search:
 ##<script type="text/javascript"><!--

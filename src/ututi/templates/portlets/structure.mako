@@ -31,19 +31,19 @@
 	<ul class="uni-info">
       <li>
         <%
-           cnt = location.count('subject')
+           cnt = h.location_count(location.id, 'subject')
         %>
         ${ungettext("<span class='bold'>%(count)s</span> subject", "<span class='bold'>%(count)s</span> subjects", cnt) % dict(count = cnt)|n}
       </li>
       <li>
         <%
-           cnt = location.count('group')
+           cnt = h.location_count(location.id, 'group')
         %>
         ${ungettext("<span class='bold'>%(count)s</span> group", "<span class='bold'>%(count)s</span> groups", cnt) % dict(count = cnt)|n}
       </li>
       <li>
         <%
-           cnt = location.count('file')
+           cnt = h.location_count(location.id, 'file')
         %>
         ${ungettext("<span class='bold'>%(count)s</span> file", "<span class='bold'>%(count)s</span> files", cnt) % dict(count = cnt)|n}
       </li>
@@ -65,7 +65,7 @@
       ${_('Latest groups')}
     </%def>
     <%
-       groups = location.latest_groups()
+       groups = h.location_latest_groups(location.id, 5)
     %>
     % if not groups:
       ${_('There are no groups yet.')}

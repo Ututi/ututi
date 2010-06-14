@@ -4,6 +4,8 @@ Consists of functions to typically be used within templates, but also
 available to Controllers. This module is available to templates as 'h'.
 """
 
+from pylons.templating import render_mako_def
+from pylons.decorators.cache import beaker_cache
 from hashlib import md5
 import re
 import cgi
@@ -449,3 +451,35 @@ class mokejimai_form(object):
 def url_for(*args, **kwargs):
     from pylons import url
     return url.current(*args, **kwargs)
+
+@beaker_cache(expire=3600, query_args=True, invalidate_on_startup=True)
+def department_listing(location_id, departments_shown):
+    from ututi.model import Tag
+    location = Tag.get(int(location_id))
+    children = location.get_children()
+    department_count = len(children)
+
+    lft = children[:department_count/2]
+    rgt = children[department_count/2:]
+    if department_count % 2:
+        lft.append(None)
+    children = zip(lft, rgt)
+    return render_mako_def('/location/university.mako',
+                           'department_list',
+                           children=children,
+                           departments_shown=departments_shown,
+                           department_count=len(children))
+
+@beaker_cache(expire=3600, query_args=True, invalidate_on_startup=True)
+def location_latest_groups(location_id, limit=5):
+    from ututi.model import Tag, Group, meta
+    location = Tag.get(int(location_id))
+    ids = [t.id for t in location.flatten]
+    grps =  meta.Session.query(Group).filter(Group.location_id.in_(ids)).order_by(Group.created_on.desc()).limit(limit).all()
+    return grps
+
+@beaker_cache(expire=3600, query_args=True, invalidate_on_startup=True)
+def location_count(location_id, object_type=None):
+    from ututi.model import Tag
+    location = Tag.get(int(location_id))
+    return location.count(object_type)
