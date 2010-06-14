@@ -280,8 +280,8 @@ test_all: bin/test instance/done instance/var/run/.s.PGSQL.${PGPORT}
 	bin/test --all
 	$(MAKE) test_translations
 
-.PHONY: test_coverage
-test_coverage: bin/test bin/coverage instance/done instance/var/run/.s.PGSQL.${PGPORT}
+.PHONY: test_all_coverage
+test_all_coverage: bin/test bin/coverage instance/done instance/var/run/.s.PGSQL.${PGPORT}
 	rm -rf data/templates/
 	bin/coverage run bin/test --all
 	$(MAKE) test_coverage
