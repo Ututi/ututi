@@ -79,7 +79,9 @@ def test_empty_folders():
         >>> for file in list(group.files):
         ...     if file.folder == 'some folder':
         ...         group.files.remove(file)
+        ...         meta.Session.execute("SET ututi.active_user TO %d" % 1)
         ...         meta.Session.delete(file)
+        <sqlalchemy.engine.base.ResultProxy object at ...>
         >>> meta.Session.commit()
         >>> meta.Session.expire_all()
 
