@@ -1120,13 +1120,13 @@ msgid "„Ututi“ blog"
 msgstr "Blog Ututi"
 
 msgid "ututi_twitter_url"
-msgstr "ututi_twitter_url"
+msgstr "http://twitter.com/ututi"
 
 msgid "„Ututi“ on twitter"
 msgstr "Ututi na twitterze"
 
 msgid "ututi_facebook_url"
-msgstr "ututi_facebook_url"
+msgstr "http://facebook.com/ututipl"
 
 msgid "„Ututi“ on Facebook"
 msgstr "Ututi na Facebooku"
