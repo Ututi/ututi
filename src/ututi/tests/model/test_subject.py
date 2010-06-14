@@ -52,16 +52,26 @@ def test_subject_create():
         >>> [e.render() for e in evt]
         [u'New subject ... was created']
 
+        >>> s = Subject.get(LocationTag.get([u'vu']), 'some_id')
+        >>> mod_time = s.modified_on
+
     If we modify the subject, we should get a subject modification event.
 
         >>> s.description = u'New description'
+        >>> s.location = LocationTag.get([u'vu', u'mif'])
         >>> meta.Session.commit()
         >>> evt = meta.Session.query(Event).filter(Event.context == s).all()
         >>> [e.render() for e in evt]
         [u'New subject ... was created', u'Subject ... was modified']
 
-    """
+     And the subject's modification time should change:
+        >>> s = Subject.get(LocationTag.get([u'vu', u'mif']), 'some_id')
 
+     The modification time of the content item should be updated
+        >>> s.modified_on > mod_time
+        True
+
+    """
 
 def test_suite():
     suite = doctest.DocTestSuite(

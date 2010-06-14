@@ -582,7 +582,7 @@ CREATE FUNCTION on_content_update() RETURNS trigger AS $$
     END
 $$ LANGUAGE plpgsql;;
 
-CREATE TRIGGER on_content_update AFTER UPDATE ON content_items
+CREATE TRIGGER on_content_update BEFORE UPDATE ON content_items
     FOR EACH ROW EXECUTE PROCEDURE on_content_update();;
 
 
