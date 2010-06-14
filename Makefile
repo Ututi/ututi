@@ -275,7 +275,13 @@ update_expected_translations: bin/pofilter
 	mv ${PWD}/parts/test_translations/ ${PWD}/src/ututi/tests/expected_i18n_errors/
 
 .PHONY: test_all
-test_all: bin/test bin/coverage instance/done instance/var/run/.s.PGSQL.${PGPORT}
+test_all: bin/test instance/done instance/var/run/.s.PGSQL.${PGPORT}
+	rm -rf data/templates/
+	bin/test --all
+	$(MAKE) test_translations
+
+.PHONY: test_coverage
+test_coverage: bin/test bin/coverage instance/done instance/var/run/.s.PGSQL.${PGPORT}
 	rm -rf data/templates/
 	bin/coverage run bin/test --all
 	$(MAKE) test_coverage
