@@ -10,6 +10,7 @@ from webhelpers import paginate
 from paste.util.converters import asbool
 from pylons import request, tmpl_context as c, url, session, config, response
 from pylons.decorators import validate
+from pylons.decorators.cache import beaker_cache
 from pylons.controllers.util import abort, redirect
 from pylons.i18n import _, ungettext
 from pylons.templating import render_mako_def
@@ -100,6 +101,7 @@ def sign_in_user(email):
 class UniversityListMixin(BaseController):
     """ A mix-in for listing all the universitites (first level location tags) in the system."""
 
+    @beaker_cache(expire=3600, query_args=True, invalidate_on_startup=True)
     def _universities(self, sort_popularity=True, limit=None):
         unis = meta.Session.query(LocationTag).filter(LocationTag.parent == None).order_by(LocationTag.title.asc()).all()
         if sort_popularity:
@@ -109,10 +111,12 @@ class UniversityListMixin(BaseController):
 
         return unis
 
+    @beaker_cache(expire=3600, query_args=True, invalidate_on_startup=True)
     def _subjects(self):
         subjects = meta.Session.query(Subject).join(SearchItem).order_by(SearchItem.rating.desc()).limit(10).all()
         return subjects
 
+    @beaker_cache(expire=3600, query_args=True, invalidate_on_startup=True)
     def _groups(self):
         groups = meta.Session.query(Group).order_by(Group.created_on.desc()).limit(10).all()
         return groups
