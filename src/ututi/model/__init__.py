@@ -1845,6 +1845,11 @@ class ForumCategory(object):
 
     def url(self, controller='forum'):
         group_id = self.group.group_id if self.group is not None else None
+        if group_id is None:
+            if self.id == 1:
+                controller = 'community'
+            elif self.id == 2:
+                controller = 'bugs'
         return url(controller=controller, action='index',
                    id=group_id, category_id=self.id)
 
