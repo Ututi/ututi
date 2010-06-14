@@ -152,14 +152,19 @@ class UniqueEmail(validators.FancyValidator):
         'non_unique': _(u"The email already exists."),
         }
 
+    def __init__(self, *args, **kw):
+        validators.FancyValidator.__init__(self, *args, **kw)
+        self.completelyUnique = kw.get('completelyUnique', False)
+
     def validate_python(self, value, state):
         if value == '':
             raise Invalid(self.message("empty", state), value, state)
         else:
             existing = meta.Session.query(Email).filter_by(email=value.strip().lower()).first()
             id = c.user.id if c.user is not None else 0
-            if existing is not None and existing.user.id != id:
-                raise Invalid(self.message("non_unique", state), value, state)
+            if existing is not None:
+                if self.completelyUnique or existing.user.id != id:
+                    raise Invalid(self.message("non_unique", state), value, state)
 
 
 def manual_validate(schema, **state_kwargs):

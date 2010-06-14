@@ -184,3 +184,19 @@ After setting his location, he will not be shown the form again:
     >>> browser.printQuery("id('page-content')//h2/text()")
 
     >>> email = mail_queue.pop()
+
+---------------------------------------
+Test a curiuos case: if a logged-in user fills in a registration form, specifying his own email, uniqueness is not tested.
+
+    >>> browser = Browser.logIn()
+    >>> browser.open('http://localhost/join?came_from=%2Fschool%2Fvu')
+    >>> form = browser.getForm('join_registration_form')
+    >>> form.getControl('Fullname').value = 'domas'
+    >>> form.getControl('Email').value = 'admin@ututi.lt'
+    >>> form.getControl('Password').value = 'asdfgh'
+    >>> form.getControl('Repeat password').value = 'asdfgh'
+    >>> form.getControl(name='agree').value = True
+    >>> form.getControl('Join').click()
+
+    >>> browser.url
+    'http://localhost/register'

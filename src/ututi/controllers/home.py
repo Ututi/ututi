@@ -67,7 +67,7 @@ class RegistrationForm(Schema):
 
     msg = {'non_unique': _(u"This email has already been used to register.")}
     email = All(validators.Email(not_empty=True, strip=True),
-                UniqueEmail(messages=msg, strip=True))
+                UniqueEmail(messages=msg, strip=True, completelyUnique=True))
 
     msg = {'empty': _(u"Please enter your password to register."),
            'tooShort': _(u"The password must be at least 5 symbols long.")}
