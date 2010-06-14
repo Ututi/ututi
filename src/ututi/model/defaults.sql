@@ -351,6 +351,7 @@ CREATE FUNCTION update_group_worker(groups) RETURNS void AS $$
         search_id int8 := NULL;
         grp ALIAS FOR $1;
     BEGIN
+      EXECUTE set_ci_modtime(grp.id);
       SELECT content_item_id INTO search_id  FROM search_items WHERE content_item_id = grp.id;
       IF FOUND THEN
         UPDATE search_items SET terms = to_tsvector(coalesce(grp.title,''))
@@ -384,6 +385,7 @@ CREATE FUNCTION update_page_worker(page_versions) RETURNS void AS $$
         search_id int8 := NULL;
         page ALIAS FOR $1;
     BEGIN
+      EXECUTE set_ci_modtime(page.page_id);
       SELECT content_item_id INTO search_id  FROM search_items WHERE content_item_id = page.page_id;
       IF FOUND THEN
         UPDATE search_items SET terms = to_tsvector(coalesce(page.title,''))
@@ -411,6 +413,7 @@ CREATE FUNCTION update_file_worker(files) RETURNS void AS $$
         parent_type varchar(20) := NULL;
         file ALIAS FOR $1;
     BEGIN
+      EXECUTE set_ci_modtime(file.id);
       SELECT ci.content_type INTO parent_type FROM content_items ci WHERE ci.id = file.parent_id;
       IF parent_type = 'subject' THEN
         SELECT content_item_id INTO search_id  FROM search_items WHERE content_item_id = file.id;
@@ -440,6 +443,7 @@ CREATE FUNCTION update_subject_worker(subjects) RETURNS void AS $$
         search_id int8 := NULL;
         subject ALIAS FOR $1;
     BEGIN
+      EXECUTE set_ci_modtime(subject.id);
       SELECT content_item_id INTO search_id  FROM search_items WHERE content_item_id = subject.id;
       IF FOUND THEN
         UPDATE search_items SET terms = to_tsvector(coalesce(subject.title,''))
@@ -605,6 +609,13 @@ CREATE FUNCTION add_event(id int8, evtype varchar) RETURNS void AS $$
     BEGIN
       INSERT INTO events (object_id, author_id, event_type)
              VALUES (id, cast(current_setting('ututi.active_user') as int8), evtype);
+    END
+$$ LANGUAGE plpgsql;;
+
+CREATE FUNCTION set_ci_modtime(id int8) RETURNS void AS $$
+    BEGIN
+      UPDATE content_items SET modified_by = cast(current_setting('ututi.active_user') as int8),
+        modified_on = (now() at time zone 'UTC') WHERE id = id;
     END
 $$ LANGUAGE plpgsql;;
 
