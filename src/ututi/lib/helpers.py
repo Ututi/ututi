@@ -5,7 +5,6 @@ available to Controllers. This module is available to templates as 'h'.
 """
 
 from pylons.templating import render_mako_def
-from pylons.decorators.cache import beaker_cache
 from hashlib import md5
 import re
 import cgi
@@ -20,7 +19,7 @@ from webhelpers.html.builder import literal
 from webhelpers.html import HTML
 from webhelpers.html.tags import convert_boolean_attrs
 
-from ututi.lib.base import render_lang
+from ututi.lib.base import render_lang, u_cache
 from ututi.lib.latex import replace_latex_to_html as latex_to_html
 
 import pytz
@@ -469,7 +468,7 @@ def department_listing(location_id, departments_shown):
                            departments_shown=departments_shown,
                            department_count=len(children))
 
-@beaker_cache(expire=3600, query_args=True, invalidate_on_startup=True)
+@u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
 def location_latest_groups(location_id, limit=5):
     from ututi.model import Tag, Group, meta
     location = Tag.get(int(location_id))
@@ -477,7 +476,7 @@ def location_latest_groups(location_id, limit=5):
     grps =  meta.Session.query(Group).filter(Group.location_id.in_(ids)).order_by(Group.created_on.desc()).limit(limit).all()
     return grps
 
-@beaker_cache(expire=3600, query_args=True, invalidate_on_startup=True)
+@u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
 def location_count(location_id, object_type=None):
     from ututi.model import Tag
     location = Tag.get(int(location_id))
