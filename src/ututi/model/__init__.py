@@ -434,7 +434,8 @@ def setup_orm(engine):
                            autoload_with=engine)
     orm.mapper(Payment, payments_table,
                properties={'user': relation(User),
-                           'group': relation(Group, backref=backref('payments', order_by=payments_table.c.created.desc()))})
+                           'group': relation(Group, backref=backref('payments',
+                                                                    order_by=payments_table.c.created.desc()))})
 
     from ututi.model import mailing
     mailing.setup_orm(engine)
@@ -720,7 +721,7 @@ class User(object):
             ).count())
         is_supporter = bool(meta.Session.query(Payment
             ).filter_by(user=self, payment_type='support'
-            ).count())
+            ).filter_by(raw_error='').count())
 
         implicit_medals = {'support': is_moderator,
                            'admin': is_admin,
@@ -1112,8 +1113,10 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
 
     @property
     def paid(self):
-        if len(self.payments) > 0:
-            pmnt = self.payments[-1]
+        payments = [p for p in self.payments
+                    if p.raw_error == '']
+        if payments:
+            pmnt = payments[-1]
             period = 0
             if pmnt.amount == int(config.get('group_payment_month', 1000)):
                 period = 31
@@ -2019,7 +2022,8 @@ class Payment(object):
 def get_supporters():
     return sorted(list(set([payment.user for payment in
                             meta.Session.query(Payment)\
-                                .filter_by(payment_type='support')])),
+                                .filter_by(payment_type='support')\
+                                .filter_by(raw_error='')])),
                   key=lambda u:u.id)
 
 # Reimports for convenience

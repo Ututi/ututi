@@ -55,14 +55,28 @@ visible in the dummy payment page:
     >>> url
     'http://localhost/process_transaction?wp_lang=LIT&wp_paytext=Remiam%20remiam&wp_name=Jonas&wp_projectid=&wp_orderid=support_1&wp_amount=1000&wp_status=1&wp_currency=LTL&wp_surename=Petraitis&wp_error=&wp_test=1&wp__ss1=&wp__ss2=&wp_p_email=admin%40ututi.lt'
 
+    >>> url_fail = url.replace('wp_error=', 'wp_error=0x6')
+
+If the error status is not "null" the payment will get accepted, but
+the user will not get added to the supporter list:
+
+    >>> browser.open(url_fail)
+    >>> browser.contents
+    'OK'
+
+    >>> browser.addHeader('referer', 'http://localhost/pay')
+    >>> browser.open('http://localhost')
+    >>> browser.printQuery("id('supporter_list')")
+    <ul id="supporter_list" class="show"></ul>
+
 Let's click it, and register the payment in the database:
 
-    >>> browser.getLink('Process payment').click()
+    >>> browser.open(url)
     >>> browser.contents
     'OK'
 
     >>> from ututi.model import meta, Payment
-    >>> payment = meta.Session.query(Payment).one()
+    >>> payment = meta.Session.query(Payment).filter_by(raw_error='').one()
 
     >>> payment.amount
     1000L
