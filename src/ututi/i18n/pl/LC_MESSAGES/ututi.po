@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-06-14 19:10+0300\n"
+"PO-Revision-Date: 2010-06-15 17:02+0300\n"
 "Last-Translator: eri\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -819,76 +819,6 @@ msgstr "Wszystkie uczelnie"
 msgid "Latest groups"
 msgstr "Najnowsze grupy"
 
-msgid "student information online"
-msgstr "studencka wiedza w sieci"
-
-msgid "log out"
-msgstr "wyloguj się"
-
-msgid "groups"
-msgstr "grupy"
-
-msgid "Create a new group"
-msgstr "Utwórz nową grupę"
-
-msgid "New group"
-msgstr "Nowa grupa"
-
-msgid "community"
-msgstr "wspólnota"
-
-msgid "search"
-msgstr "szukaj"
-
-msgid "home"
-msgstr "profil"
-
-msgid "Change your personal information"
-msgstr "Zaktualizuj swoje dane osobowe"
-
-msgid "Change profile"
-msgstr "Popraw profil"
-
-msgid "Wrong password or username!"
-msgstr "Niepoprawne hasło lub login"
-
-msgid "forgotten password?"
-msgstr "Zapomniałeś hasła?"
-
-msgid "Close"
-msgstr "Zamknij"
-
-msgid "logo"
-msgstr "logo"
-
-msgid "UTUTI"
-msgstr "UTUTI"
-
-msgid ""
-"This is a testing version - this is just a copy of the information! "
-"Changes you make will not be persisted!"
-msgstr ""
-"To jest wersja testowa - to jest tylko kopia informacji! Zmiany przez "
-"Ciebie wprowadzone nie zostaną uwzględnione!"
-
-msgid "About Ututi"
-msgstr "O Ututi"
-
-msgid "ututi_blog_url"
-msgstr "http://blog.ututi.pl"
-
-msgid "U-blog"
-msgstr "U-blog"
-
-msgid "Advertising"
-msgstr "Reklama"
-
-msgid "Statistics"
-msgstr "Statystyki"
-
-msgid "Terms of use"
-msgstr "Regulamin"
-
 msgid "Error!"
 msgstr "Błąd!"
 
@@ -922,6 +852,9 @@ msgid ""
 "create <em>academic groups</em>               and communicate with "
 "groupmates."
 msgstr ""
+
+msgid "Statistics"
+msgstr "Statystyki"
 
 msgid "Most popular subjects by users"
 msgstr "Najpopularniejsze przedmioty według użytkowników"
@@ -1104,6 +1037,9 @@ msgstr ""
 "Stąd możesz też z łatwością utworzyć przedmiot, dodać plik, zaprosić do "
 "Ututi znajomych."
 
+msgid "student information online"
+msgstr "studencka wiedza w sieci"
+
 msgid "Main menu"
 msgstr "Menu główne"
 
@@ -1115,6 +1051,9 @@ msgstr "Szukaj"
 
 msgid "About"
 msgstr "About"
+
+msgid "ututi_blog_url"
+msgstr "http://blog.ututi.pl"
 
 msgid "„Ututi“ blog"
 msgstr "Blog Ututi"
@@ -1140,6 +1079,9 @@ msgstr "Login"
 msgid "remember me"
 msgstr "zapamiętaj mnie"
 
+msgid "forgotten password?"
+msgstr "Zapomniałeś hasła?"
+
 msgid "Search text"
 msgstr "Szukaj "
 
@@ -1158,6 +1100,15 @@ msgstr "Ustawienia"
 msgid "Public profile"
 msgstr "Profil publiczny"
 
+msgid "log out"
+msgstr "wyloguj się"
+
+msgid "Close"
+msgstr "Zamknij"
+
+msgid "UTUTI"
+msgstr "UTUTI"
+
 msgid "ututi_link"
 msgstr "ututi_link"
 
@@ -1166,6 +1117,12 @@ msgstr "UAB \"UTUTI\""
 
 msgid "About ututi"
 msgstr "O ututi"
+
+msgid "U-blog"
+msgstr "U-blog"
+
+msgid "Terms of use"
+msgstr "Regulamin"
 
 msgid "Adminstration dashboard"
 msgstr "Panel administracyjny"
@@ -1603,6 +1560,9 @@ msgstr "Usuń wątek"
 msgid "Reply"
 msgstr "Odpowiedź"
 
+msgid "New group"
+msgstr "Nowa grupa"
+
 msgid "Recommended groups from your university and faculty"
 msgstr "Polecane grupy z Twojej uczelni"
 
@@ -1804,6 +1764,39 @@ msgstr "Członkostwo bez potwierdzenia"
 msgid "Pick the functionality you need yourself"
 msgstr "Wybierz potrzebne Ci funkcje"
 
+msgid "Congratulations, you have created a new group!"
+msgstr "Gratulujemy utworzenia nowej grupy!"
+
+#, python-format
+msgid ""
+"\n"
+"Ututi groups are a communication tool for you and your friends. Here\n"
+"your group can use the <a href=\"%(link_to_forums)s\">forums</a> and "
+"store\n"
+"private files.\n"
+msgstr ""
+"\n"
+"Grupy Ututi - to narzędzie do komunikacji z kolegami i przyjaciółmi.\n"
+"Tutaj Twoja grupa może korzystać z  <a "
+"href=\"%(link_to_forums)s\">for</a> i przechowywać\n"
+"pliki widoczne tylko dla Twojej grupy.\n"
+
+#, python-format
+msgid ""
+"\n"
+"Ututi groups are a communication tool for you and your friends. Here\n"
+"your group can use the <a href=\"%(link_to_forums)s\">forums</a>, keep\n"
+"private files and <a href=\"%(link_to_subjects)s\">watch subjects</a>\n"
+"you are studying.\n"
+msgstr ""
+"\n"
+"Ututi grupy - to narzędzie do komunikacji z kolegami z grupy. Tutaj\n"
+"Twoja grupa może  korzystać z <a "
+"href=\"%(link_to_forums)s\">forum</a>,przechowywać\n"
+"prywatne pliki i <a href=\"%(link_to_subjects)s\">śledzić przedmioty</a>,"
+"\n"
+"których się uczysz.\n"
+
 msgid "Invite group members!"
 msgstr "Zaproś kolegów z Twojej grupy!"
 
@@ -1972,39 +1965,6 @@ msgstr "nigdy"
 msgid "Subject rating:"
 msgstr "Popularność przedmiotu:"
 
-msgid "Congratulations, you have created a new group!"
-msgstr "Gratulujemy utworzenia nowej grupy!"
-
-#, python-format
-msgid ""
-"\n"
-"Ututi groups are a communication tool for you and your friends. Here\n"
-"your group can use the <a href=\"%(link_to_forums)s\">forums</a> and "
-"store\n"
-"private files.\n"
-msgstr ""
-"\n"
-"Grupy Ututi - to narzędzie do komunikacji z kolegami i przyjaciółmi.\n"
-"Tutaj Twoja grupa może korzystać z  <a "
-"href=\"%(link_to_forums)s\">for</a> i przechowywać\n"
-"pliki widoczne tylko dla Twojej grupy.\n"
-
-#, python-format
-msgid ""
-"\n"
-"Ututi groups are a communication tool for you and your friends. Here\n"
-"your group can use the <a href=\"%(link_to_forums)s\">forums</a>, keep\n"
-"private files and <a href=\"%(link_to_subjects)s\">watch subjects</a>\n"
-"you are studying.\n"
-msgstr ""
-"\n"
-"Ututi grupy - to narzędzie do komunikacji z kolegami z grupy. Tutaj\n"
-"Twoja grupa może  korzystać z <a "
-"href=\"%(link_to_forums)s\">forum</a>,przechowywać\n"
-"prywatne pliki i <a href=\"%(link_to_subjects)s\">śledzić przedmioty</a>,"
-"\n"
-"których się uczysz.\n"
-
 msgid "Go to the group's files"
 msgstr "Przejdź do plików grupy"
 
@@ -2085,6 +2045,9 @@ msgstr "lista przedmiotów"
 
 msgid "Did not find what you were looking for?"
 msgstr "Nie znalazłeś tego, czego szukałeś?"
+
+msgid "Create a new group"
+msgstr "Utwórz nową grupę"
 
 msgid "Store all the subject's files and notes in one place."
 msgstr "Przechowuj pliki i notatki z tego przedmiotu w jednym miejcu."
@@ -2174,11 +2137,11 @@ msgstr "usuń"
 msgid "Join Ututi"
 msgstr "Dołącz do Ututi"
 
-msgid "Fullname"
-msgstr "Imię, nazwisko"
-
 msgid "Registration"
 msgstr "Rejestracja"
+
+msgid "Fullname"
+msgstr "Imię, nazwisko"
 
 msgid "Your email address"
 msgstr "Twój adres e-mail"
@@ -2894,9 +2857,6 @@ msgstr "Przedmiot nie posiada wiki notatek. Utwórz!"
 
 msgid "Member information"
 msgstr "O użytkowniku"
-
-msgid "Member's groups"
-msgstr "Grupy użytkownika"
 
 #, python-format
 msgid "What has %(user)s been up to?"

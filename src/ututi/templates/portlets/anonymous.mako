@@ -17,7 +17,7 @@
           <div class="input-line"><div>
             <input class="line" type="text" id="fullname" name="fullname" size="40"/>
           </div></div>
-          <label for="fullname">${_('Fullname')}</label>
+          <label for="fullname">${_('Full name')}</label>
         </div>
         <form:error name="email"/>
         <div class="form-field">

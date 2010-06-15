@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-06-14 19:10+0300\n"
+"PO-Revision-Date: 2010-06-15 17:02+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -773,74 +773,6 @@ msgstr ""
 msgid "Latest groups"
 msgstr ""
 
-msgid "student information online"
-msgstr ""
-
-msgid "log out"
-msgstr ""
-
-msgid "groups"
-msgstr ""
-
-msgid "Create a new group"
-msgstr ""
-
-msgid "New group"
-msgstr ""
-
-msgid "community"
-msgstr ""
-
-msgid "search"
-msgstr ""
-
-msgid "home"
-msgstr ""
-
-msgid "Change your personal information"
-msgstr ""
-
-msgid "Change profile"
-msgstr ""
-
-msgid "Wrong password or username!"
-msgstr ""
-
-msgid "forgotten password?"
-msgstr ""
-
-msgid "Close"
-msgstr ""
-
-msgid "logo"
-msgstr ""
-
-msgid "UTUTI"
-msgstr ""
-
-msgid ""
-"This is a testing version - this is just a copy of the information! "
-"Changes you make will not be persisted!"
-msgstr ""
-
-msgid "About Ututi"
-msgstr ""
-
-msgid "ututi_blog_url"
-msgstr ""
-
-msgid "U-blog"
-msgstr ""
-
-msgid "Advertising"
-msgstr ""
-
-msgid "Statistics"
-msgstr ""
-
-msgid "Terms of use"
-msgstr ""
-
 msgid "Error!"
 msgstr ""
 
@@ -871,6 +803,9 @@ msgid ""
 "Store <em>study materials</em> and pass them on for future generations, "
 "create <em>academic groups</em>               and communicate with "
 "groupmates."
+msgstr ""
+
+msgid "Statistics"
 msgstr ""
 
 msgid "Most popular subjects by users"
@@ -1010,6 +945,9 @@ msgid ""
 "people to use Ututi."
 msgstr ""
 
+msgid "student information online"
+msgstr ""
+
 msgid "Main menu"
 msgstr ""
 
@@ -1020,6 +958,9 @@ msgid "Browse"
 msgstr ""
 
 msgid "About"
+msgstr ""
+
+msgid "ututi_blog_url"
 msgstr ""
 
 msgid "„Ututi“ blog"
@@ -1046,6 +987,9 @@ msgstr ""
 msgid "remember me"
 msgstr ""
 
+msgid "forgotten password?"
+msgstr ""
+
 msgid "Search text"
 msgstr ""
 
@@ -1064,6 +1008,15 @@ msgstr ""
 msgid "Public profile"
 msgstr ""
 
+msgid "log out"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "UTUTI"
+msgstr ""
+
 msgid "ututi_link"
 msgstr ""
 
@@ -1071,6 +1024,12 @@ msgid "UAB „UTUTI“"
 msgstr ""
 
 msgid "About ututi"
+msgstr ""
+
+msgid "U-blog"
+msgstr ""
+
+msgid "Terms of use"
 msgstr ""
 
 msgid "Adminstration dashboard"
@@ -1450,6 +1409,9 @@ msgstr ""
 msgid "Reply"
 msgstr ""
 
+msgid "New group"
+msgstr ""
+
 msgid "Recommended groups from your university and faculty"
 msgstr ""
 
@@ -1647,6 +1609,27 @@ msgstr ""
 msgid "Pick the functionality you need yourself"
 msgstr ""
 
+msgid "Congratulations, you have created a new group!"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"Ututi groups are a communication tool for you and your friends. Here\n"
+"your group can use the <a href=\"%(link_to_forums)s\">forums</a> and "
+"store\n"
+"private files.\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"Ututi groups are a communication tool for you and your friends. Here\n"
+"your group can use the <a href=\"%(link_to_forums)s\">forums</a>, keep\n"
+"private files and <a href=\"%(link_to_subjects)s\">watch subjects</a>\n"
+"you are studying.\n"
+msgstr ""
+
 msgid "Invite group members!"
 msgstr ""
 
@@ -1799,27 +1782,6 @@ msgstr ""
 msgid "Subject rating:"
 msgstr ""
 
-msgid "Congratulations, you have created a new group!"
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"Ututi groups are a communication tool for you and your friends. Here\n"
-"your group can use the <a href=\"%(link_to_forums)s\">forums</a> and "
-"store\n"
-"private files.\n"
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"Ututi groups are a communication tool for you and your friends. Here\n"
-"your group can use the <a href=\"%(link_to_forums)s\">forums</a>, keep\n"
-"private files and <a href=\"%(link_to_subjects)s\">watch subjects</a>\n"
-"you are studying.\n"
-msgstr ""
-
 msgid "Go to the group's files"
 msgstr ""
 
@@ -1887,6 +1849,9 @@ msgid "subjects list"
 msgstr ""
 
 msgid "Did not find what you were looking for?"
+msgstr ""
+
+msgid "Create a new group"
 msgstr ""
 
 msgid "Store all the subject's files and notes in one place."
@@ -1976,10 +1941,10 @@ msgstr ""
 msgid "Join Ututi"
 msgstr ""
 
-msgid "Fullname"
+msgid "Registration"
 msgstr ""
 
-msgid "Registration"
+msgid "Fullname"
 msgstr ""
 
 msgid "Your email address"
@@ -2651,9 +2616,6 @@ msgid "The subject has no pages yet - create one!"
 msgstr ""
 
 msgid "Member information"
-msgstr ""
-
-msgid "Member's groups"
 msgstr ""
 
 #, python-format
