@@ -24,6 +24,12 @@ ${_('student information online')}
     <li><a class="orange" href="${url(controller='home', action='join', qualified=True, came_from=url.current())}">${_('Join')}</a></li>
   </ul>
 </div>
+<p class="a11y">${_('User menu')}</p>
+<div class="loggedin-nav" id="personal-data">
+	<ul>
+        <li><a href="#" id="feedback-link">${_('feedback')}</a></li>
+    </ul>
+</div>
 </%def>
 
 <%def name="breadcrumbs(breadcrumbs)">
@@ -152,6 +158,7 @@ ${self.anonymous_menu()}
 <p class="a11y">${_('User menu')}</p>
 <div class="loggedin-nav" id="personal-data">
 	<ul>
+        <li><a href="#" id="feedback-link">${_('feedback')}</a></li>
 ##		<li><a href="#"><strong>inbox (3)</strong></a></li>
 		<li class="expandable profile-nav">
 			<span class="fullname">${user.fullname}</span>
@@ -266,6 +273,30 @@ ${self.anonymous_menu()}
         <li><a ${nofollow} href="${_('ututi_blog_url')}">${_('U-blog')}</a></li>
         <li><a ${nofollow} href="${url(controller='home', action='terms')}">${_('Terms of use')}</a></li></ul>
     </div>
+    %if c.lang in ['lt', 'en']:
+    ${h.javascript_link('/javascript/uservoice.js')|n}
+    <script type="text/javascript">
+      var uservoiceOptions = {
+        key: 'ututi',
+        host: 'ututi.uservoice.com',
+        forum: '26068',
+        lang: 'en',
+        showTab: false
+      };
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.src = ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js";
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+      $('#feedback-link').click(function() {
+        UserVoice.Popin.show(uservoiceOptions); return false;
+      });
+    </script>
+    %else:
+      ${h.javascript_link('/javascript/sugester.js')|n}
+    %endif
 
   </body>
 </html>
