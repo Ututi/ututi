@@ -48,7 +48,7 @@
           </div>
           <div class="floatleft user">
             <div class="orange bold verysmall">
-              <a href="${forum_post['author'].url()}">${forum_post['author'].fullname}</a>
+              <a href="${forum_post['author'].url()}">${h.ellipsis(forum_post['author'].fullname, 30)}</a>
             </div>
             <div class="grey verysmall">${post_date}</div>
           </div>
