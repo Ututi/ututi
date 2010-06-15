@@ -238,6 +238,8 @@ def group_action(method):
         c.group_file_limit = int(config.get('group_file_limit', 200 * 1024 * 1024))
         c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
         c.group_menu_items = group_menu_items()
+        c.group_id = c.group.group_id
+        c.controller = self.controller_name
         return method(self, group)
     return _group_action
 
@@ -307,7 +309,7 @@ class GroupControllerBase(BaseController):
 
 class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     """Controller for group actions."""
-
+    controller_name = 'forum'
     @group_action
     def index(self, group):
         if check_crowds(["member", "admin"]):
