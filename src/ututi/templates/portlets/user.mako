@@ -40,7 +40,7 @@
      if title is None:
        title = _('My groups')
   %>
-  <%self:portlet id="group_portlet" portlet_class="inactive">
+  <%self:uportlet id="group_portlet" portlet_class="inactive">
     <%def name="header()">
       ${title}
     </%def>
@@ -74,7 +74,7 @@
     </div>
 
     %endif
-  </%self:portlet>
+  </%self:uportlet>
 </%def>
 
 <%def name="user_support_portlet(user=None, title=None, full=True)">

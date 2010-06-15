@@ -3,7 +3,6 @@
 
 <%def name="portlets()">
   ${user_information_portlet(user=c.user_info, full=False, title=_('Member information'))}
-  ${user_groups_portlet(user=c.user_info, title=_("Member's groups"), full=False)}
 </%def>
 
 
