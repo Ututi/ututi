@@ -25,6 +25,9 @@ I'd get redirected back to where I was trying to go:
 and even can see some actions:
 
     >>> browser.printQuery("//h1")
+    <h1 id="siteName">
+      <a rel="nofollow" onclick="_gaq.push(['_trackEvent', 'navigation', 'user_search', 'logo']);" href="/profile/browse" title="Ututi" id="ulogo">Ututi</a>
+    </h1>
     <h1>User import</h1>
     <h1>Structure import</h1>
     ...

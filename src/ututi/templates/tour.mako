@@ -1,4 +1,4 @@
-<%inherit file="/base.mako" />
+<%inherit file="/ubase.mako" />
 
 <%def name="body_class()">no_sidebar</%def>
 

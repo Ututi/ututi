@@ -12,13 +12,14 @@ and do something else:
     ...
     HTTPError: HTTP Error 500: Internal Server Error
 
-    >>> browser.printQuery("id('body-container')")
-    <div id="body-container">
+    >>> browser.printQuery("id('mainContent')")
+    <div id="mainContent">
+      <div id="flash-messages">
+    </div>
       <h1>Error!</h1>
       <img src="/images/details/icon_nope.png" />
       <div>
-    Oops, an error happened, please don't leave us, go back and try
-    doing something else or look for information.
+    Oops, an error happened, please don't leave us, go back and try doing something else or look for information.
     </div>
       <a href="/search">go find something</a>
     </div>
@@ -49,12 +50,13 @@ Some views are not accessible to simple users:
 Our access denied page looks just like an error page, but with a
 different error message:
 
-    >>> browser.printQuery("id('body-container')")
-    <div id="body-container">
+    >>> browser.printQuery("id('mainContent')")
+    <div id="mainContent">
+      <div id="flash-messages">
+    </div>
       <h1>Permission denied!</h1>
       <div>
-    You do not have the rights to see this page, or perform this
-    action. Go back or go to the search page please.
-    </div>
+        You do not have the rights to see this page, or perform this action. Go back or go to the search page please.
+      </div>
       <a href="/search">go find something else</a>
     </div>

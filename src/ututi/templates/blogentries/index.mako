@@ -1,4 +1,4 @@
-<%inherit file="/base.mako" />
+<%inherit file="/ubase-sidebar.mako" />
 <%namespace file="/portlets/user.mako" import="*"/>
 
 <%def name="head_tags()">
@@ -7,9 +7,7 @@
 </%def>
 
 <%def name="portlets()">
-<div id="sidebar">
   ${blog_portlet()}
-</div>
 </%def>
 
 <h1>${_('Blog snippets:')}</h1>

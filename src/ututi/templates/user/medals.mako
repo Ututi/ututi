@@ -1,10 +1,8 @@
-<%inherit file="/base.mako" />
+<%inherit file="/ubase-sidebar.mako" />
 <%namespace file="/portlets/user.mako" import="*"/>
 
 <%def name="portlets()">
-<div id="sidebar">
   ${user_information_portlet(user=c.user_info, full=False, title=_('Member information'))}
-</div>
 </%def>
 
 <h1 style="font-weight: bold">${c.user_info.fullname}</h1>

@@ -1,4 +1,4 @@
-<%inherit file="/base.mako" />
+<%inherit file="/ubase-width.mako" />
 
 <%def name="head_tags()">
   <title>UTUTI – student information online</title>
@@ -6,7 +6,7 @@
 
 <h1>${_('Reset your password')}</h1>
 
-<form method="post" action="${url(controller='home', action='recovery', key=c.key)}">
+<form method="post" action="${url(controller='home', action='recovery', key=c.key)}" class="fullForm">
   <div class="form-field">
     <input type="hidden" name="recovery_key" value="${c.key}"/>
     <label for="new_password">

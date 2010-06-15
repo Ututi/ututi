@@ -1,10 +1,7 @@
-<%inherit file="/base.mako" />
+<%inherit file="/ubase-width.mako" />
 
 <%def name="head_tags()">
   <title>UTUTI – student information online</title>
-</%def>
-
-<%def name="portlets()">
 </%def>
 
 <h1>${_('New blog snippet:')}</h1>

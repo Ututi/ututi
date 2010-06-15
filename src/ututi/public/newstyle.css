@@ -3896,3 +3896,84 @@ body.anonymous_index #ututi_login_section_portlet .content {
 
 
 /* end static content style */
+
+/* tour */
+/* take a tour style */
+#tour_navigation {
+  text-align: right;
+  margin: 10px 0;
+}
+
+#pager a,
+#pager span {
+  color: #333;
+  font-size: 14px;
+  padding: 4px;
+  margin: 0 2px;
+  font-weight: bold;
+}
+
+#pager span.pager_curpage {
+  font-size: 16px;
+}
+
+#pager a.activeSlide {
+  background: #ffccaa;
+}
+
+#tour_prev {
+  padding-left: 15px;
+  background: white url("../images/details/link_back.png") left center no-repeat;
+  color: #333;
+  font-weight: bold;
+}
+
+#tour_next {
+  padding-right: 15px;
+  background: url("../images/details/link_arrow.png") right center no-repeat;
+  color: #333;
+  font-weight: bold;
+
+}
+
+div.tour_slide {
+  height: 500px;
+  position: relative;
+}
+
+div.tour_slide div.image {
+  width: 606px;
+  float: left;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+div.tour_slide div.image img {
+  margin: 0;
+  padding: 0;
+}
+
+div.tour_slide div.text {
+  width: 300px;
+  float: right;
+  padding-left: 30px;
+}
+
+div.tour_slide div.text h2 {
+  margin: 5px 0;
+  font-weight: normal;
+  font-size: 22px;
+}
+
+a.anchor {
+  display: none;
+}
+
+div.tour_slide div.text div.join_link {
+  margin-top: 15px;
+  border-top: 1px solid #ded8d8;
+  padding-top: 5px;
+  line-height: 20px;
+}
+
+/* end tour */

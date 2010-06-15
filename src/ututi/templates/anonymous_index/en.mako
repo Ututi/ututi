@@ -1,4 +1,4 @@
-<%inherit file="/base.mako" />
+<%inherit file="/ubase.mako" />
 
 <%namespace file="/search/index.mako" import="search_form"/>
 <%namespace file="/portlets/anonymous.mako" import="*"/>

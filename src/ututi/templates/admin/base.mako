@@ -1,6 +1,3 @@
-<%inherit file="/base.mako" />
+<%inherit file="/ubase-width.mako" />
 
-<%def name="portlets()">
-<div id="sidebar">
-</div>
-</%def>
+${next.body()}
