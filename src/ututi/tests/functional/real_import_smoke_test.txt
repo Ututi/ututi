@@ -48,8 +48,7 @@ And upload all the files one by one:
     Email 190 from Jaroslav Šatkevič <jaroslav@akl.lt> was ignored
     Email 193 from Virginija.Cibarauske@flf.stud.vu.lt was ignored
 
-    >>> browser.open('http://localhost/group/archpio')
-    >>> browser.getLink('Mailing List').click()
+    >>> browser.open('http://localhost/group/archpio/forum')
     >>> browser.getLink('Pilot Post').click()
 
     >>> from ututi.lib.mailer import mail_queue
