@@ -91,8 +91,6 @@
       });
       $('#sort-alpha,#sort-popular').live("click", function() {
         var url = $('#'+$(this).attr('id')+'-url').val();
-        console.log('#'+$(this).attr('id')+'-url');
-        console.log(url);
         $('#sorting').addClass('loading');
         $('#university-list').load(url);
         return false;
