@@ -7,16 +7,6 @@
   ${c.group.title}
 </%def>
 
-<%def name="group_menu()">
-</%def>
-
-<h1 class="pageTitle">
-  ${self.title()}
-  <div style="float: right;">
-    ${h.button_to(_('become a member'), url(controller='group', action='request_join', id=c.group.group_id))}
-  </div>
-</h1>
-
 <div class="group_description">
   %if c.group.page_public and c.group.page != '':
     ${h.html_cleanup(c.group.page)|n,decode.utf8}
