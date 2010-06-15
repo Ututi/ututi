@@ -794,6 +794,12 @@ div.personal-data .right_arrow{
     padding: 0 0 0 20px;
 }
 
+div.personal-data em{
+    color: #D45500;
+    font-style: normal;
+    font-size: 1.1em;
+}
+
 div.personal-data div .question{
     padding: 2px 0 0 86px;
 }
@@ -3639,6 +3645,15 @@ div.search-item div.description {
 }
 
 /* forum thread */
+
+#group_latest_messages td.time {
+  width: 70px;
+  color: #808080;
+  font-size: 0.8em;
+  padding-left: 15px;
+  background: white url("../images/details/icon_message.png") left center no-repeat;
+}
+
 
 table#forum-thread {
     border-collapse: collapse;

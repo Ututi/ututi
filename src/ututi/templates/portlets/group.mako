@@ -48,7 +48,7 @@
       </div>
       <div class="clear"></div>
     </div>
-    %if group.has_file_area and not c.group.forum_is_public:
+    %if group.is_member(c.user) and group.has_file_area and not c.group.forum_is_public:
     <div class="profile">
       ${_('Available space for private group files:')}
       ${h.image('/images/details/pbar%d.png' % group.free_size_points, alt=h.file_size(group.size), class_='area_size_points')|n}
