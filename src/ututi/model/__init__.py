@@ -168,6 +168,13 @@ def setup_orm(engine):
                                autoload=True,
                                autoload_with=engine)
 
+    global regions_table
+    regions_table = Table("regions", meta.metadata,
+                               Column('title', Unicode(assert_unicode=True)),
+                               autoload=True,
+                               useexisting=True,
+                               autoload_with=engine)
+
     global tags_table
     tags_table = Table("tags", meta.metadata,
                                Column('id', Integer, Sequence('tags_id_seq'), primary_key=True),
@@ -188,7 +195,11 @@ def setup_orm(engine):
                inherits=Tag,
                polymorphic_on=tags_table.c.tag_type,
                polymorphic_identity='location',
-               properties = {'children': relation(LocationTag, order_by=LocationTag.title.asc(), backref=backref('parent', remote_side=tags_table.c.id))})
+               properties={'children': relation(LocationTag,
+                                                order_by=LocationTag.title.asc(),
+                                                backref=backref('parent',
+                                                                remote_side=tags_table.c.id)),
+                           'region': relation(Region, backref='tags')})
 
     orm.mapper(SimpleTag,
                inherits=tag_mapper,
@@ -219,6 +230,8 @@ def setup_orm(engine):
                properties = {'parent': relation(ContentItem,
                                                 primaryjoin=files_table.c.parent_id==content_items_table.c.id,
                                                 backref=backref("files", order_by=files_table.c.filename.asc()))})
+
+    orm.mapper(Region, regions_table)
 
     orm.mapper(ForumCategory, forum_categories_table,
                properties={'group': relation(Group,
@@ -1434,6 +1447,14 @@ class Tag(object):
     logo = logo_property()
 
 
+class Region(object):
+    """A geographical region."""
+
+    def __init__(self, title, country):
+        self.title = title
+        self.country = country # e.g., 'pl'
+
+
 class SimpleTag(Tag):
     """Class for simple (i.e. not location or hierarchy -aware) tags."""
 
@@ -1465,7 +1486,6 @@ class SimpleTag(Tag):
                    action=action,
                    tags=self.title,
                    **kwargs)
-
 
 
 class LocationTag(Tag):

@@ -122,9 +122,16 @@ create table file_downloads (file_id int8 references content_items(id) on delete
 create index user_id on file_downloads (user_id);;
 create index file_id on file_downloads (file_id);;
 
+/* A table for regions */
+create table regions (id bigserial not null,
+       title varchar(250) not null,
+       country varchar(2) not null,
+       primary key (id));;
+
 /* A table for tags (location and simple tags) */
 create table tags (id bigserial not null,
        parent_id int8 default null references tags(id) on delete cascade,
+       region_id int8 default null references regions(id) on delete restrict,
        title varchar(250) not null,
        title_short varchar(50) default null,
        description text default null,
