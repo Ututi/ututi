@@ -341,7 +341,8 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @ActionProtector("admin", "member")
     def welcome(self, group):
         self._set_home_variables(group)
-        return render('group/welcome.mako')
+        c.welcome = True
+        return render('group/home.mako')
 
     @group_action
     def request_join(self, group):

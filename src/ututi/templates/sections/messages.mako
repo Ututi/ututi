@@ -50,9 +50,7 @@
       <div style="display: inline;">
         <input type="hidden" name="action" value="reject"/>
         <input type="hidden" name="came_from" value="${request.url}"/>
-        <span class="btn">
-          <input type="submit" name="invitation_reject" value="${_('Reject')}"/>
-        </span>
+        ${h.input_submit(_('Reject'))}
       </div>
     </form>
     <form method="post"
@@ -62,9 +60,7 @@
       <div style="display: inline;">
         <input type="hidden" name="action" value="accept"/>
         <input type="hidden" name="came_from" value="${request.url}"/>
-        <span class="btn">
-          <input type="submit" name="invitation_accept" value="${_('Accept')}"/>
-        </span>
+        ${h.input_submit(_('Accept'))}
       </div>
     </form>
   </div>
@@ -96,9 +92,7 @@
         <input type="hidden" name="hash_code" value="${rq.hash}"/>
         <input type="hidden" name="action" value="confirm"/>
         <input type="hidden" name="came_from" value="${request.url}"/>
-        <span class="btn">
-          <input type="submit" value="${_('Confirm')}"/>
-        </span>
+        ${h.input_submit(_('Confirm'))}
       </div>
     </form>
     <form style="display: inline;" method="post" action="${url(controller='group', action='request', id=rq.group.group_id)}">
@@ -106,9 +100,7 @@
         <input type="hidden" name="hash_code" value="${rq.hash}"/>
         <input type="hidden" name="action" value="deny"/>
                 <input type="hidden" name="came_from" value="${request.url}"/>
-        <span class="btn">
-          <input type="submit" style="color: #888;" value="${_('Deny')}"/>
-        </span>
+        ${h.input_submit(_('Deny'))}
       </div>
     </form>
 

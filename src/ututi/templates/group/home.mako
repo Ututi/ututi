@@ -1,4 +1,25 @@
 <%inherit file="/group/base.mako" />
+%if c.welcome:
+<h1 style="margin-top: 15px;">${_('Congratulations, you have created a new group!')}</h1>
+<div style="margin: 10px 0;" class="group_description">
+%if c.group.forum_is_public:
+${h.literal(_("""
+Ututi groups are a communication tool for you and your friends. Here
+your group can use the <a href="%(link_to_forums)s">forums</a> and store
+private files.
+""") % dict(link_to_forums=c.group.url(action='forum')))}
+
+%else:
+${h.literal(_("""
+Ututi groups are a communication tool for you and your friends. Here
+your group can use the <a href="%(link_to_forums)s">forums</a>, keep
+private files and <a href="%(link_to_subjects)s">watch subjects</a>
+you are studying.
+""") % dict(link_to_forums=c.group.url(action='forum'),
+            link_to_subjects=c.group.url(action='subjects')))}
+%endif
+</div>
+%endif
 
 %if c.has_to_invite_members:
 <div id="invite_more_members" class="full_box">
@@ -16,7 +37,7 @@
             </div>
           </td>
           <td style="width: 170px; text-align: right;">
-            <a class="btn-large" href="${c.group.url(action='members')}"><span>${_('Invite friends')}</span></a>
+            ${h.button_to(_('Invite friends'), c.group.url(action='members'), class_='btnLarge')}
           </td>
         </tr>
       </table>

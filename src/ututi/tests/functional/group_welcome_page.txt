@@ -39,9 +39,13 @@ In which we see a box suggesting us to invite more members:
                 </div>
               </td>
               <td style="width: 170px; text-align: right;">
-                <a class="btn-large" href="/group/test/members">
-                  <span>Invite friends</span>
-                </a>
+                <form action="/group/test/members" class="button-to" method="post">
+                  <fieldset>
+                    <button class="btnLarge" type="submit" value="Invite friends">
+                      <span>Invite friends</span>
+                    </button>
+                  </fieldset>
+                </form>
               </td>
             </tr>
           </table>
@@ -83,7 +87,7 @@ Also we see a box that suggest us to watch some subjects:
 If we invite a member into the system, the member box should
 disappear:
 
-    >>> browser.getLink('Invite friends').click()
+    >>> browser.getControl('Invite friends').click()
     >>> emails = 'user@ututi.lt'
     >>> browser.getControl('Enter emails of the people you would like to invite to the group.').value = emails
     >>> browser.getControl('Invite').click()
