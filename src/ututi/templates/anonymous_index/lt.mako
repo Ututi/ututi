@@ -95,7 +95,6 @@
         $('#university-list').load(url);
         return false;
       });
-
     });
   //]]>
   </script>
