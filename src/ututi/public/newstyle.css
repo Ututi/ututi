@@ -2231,6 +2231,7 @@ div.filtrai .portlet-verysmall {
         display: none;
 }
 
+.content ol li,
 .content ul li {
     margin-left: 40px;
 }
