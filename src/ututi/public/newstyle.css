@@ -3993,3 +3993,9 @@ div.tour_slide div.text div.join_link {
 }
 
 /* end tour */
+
+/* structure */
+
+ul#location_structure ul {
+  margin-left: 2em;
+}

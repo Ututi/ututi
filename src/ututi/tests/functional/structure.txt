@@ -56,7 +56,7 @@ The new university is now shown.
 
 Now we shall try to edit a structural element.
 
-    >>> browser.getLink(text='Edit').click()
+    >>> browser.getLink(text='[Edit]').click()
 
     >>> form = browser.getForm(name='edit_structure_form')
     >>> print form.getControl('Title').value
@@ -75,7 +75,8 @@ Now we shall try to edit a structural element.
     >>> form.getControl('Save').click()
 
 Let's try to enter a title that is way too long:
-    >>> browser.getLink(text='Edit').click()
+
+    >>> browser.getLink(text='[Edit]').click()
 
     >>> form = browser.getForm(name='edit_structure_form')
     >>> form.getControl('Title').value = u'40 characters are not that much text rly'*10
@@ -121,7 +122,7 @@ You can import the structure tags from csv too:
 
 Let's delete one item:
 
-    >>> browser.getLink(text='Edit', index=2).click()
+    >>> browser.getLink(text='[Edit]', index=2).click()
     >>> browser.getControl('Delete', index=1).click()
 
 Its children should be gone too:

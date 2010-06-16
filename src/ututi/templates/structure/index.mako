@@ -13,24 +13,27 @@
            <img src="${url(controller='structure', action='logo', id=tag.id, width=60, height=60)}" />
         % endif
         %if c.user:
-            <a href="${url(controller='structure', action='edit', id=tag.id)}">${_('Edit')}</a>
+          <a class="edit" href="${url(controller='structure', action='edit', id=tag.id)}">${_('[Edit]')}</a>
         %endif
   </li>
   %if tag.children:
-      <ul>
+    <ul>
       %for child in tag.children:
-           ${location_tag(child)}
+        ${location_tag(child)}
       %endfor
-      </ul>
+    </ul>
   %endif
 </%def>
 
 %if c.structure:
-    <ul id="location_structure">
+  <ul id="location_structure">
     %for tag in c.structure:
-         ${location_tag(tag)}
+      ${location_tag(tag)}
     %endfor
+  </ul>
 %endif
+
+<br />
 
 %if c.user:
 <h2>${_('Create new')}</h2>
