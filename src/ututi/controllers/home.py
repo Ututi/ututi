@@ -101,8 +101,13 @@ class UniversityListMixin(BaseController):
     """ A mix-in for listing all the universitites (first level location tags) in the system."""
 
     @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
-    def _universities(self, sort_popularity=True, limit=None):
-        unis = meta.Session.query(LocationTag).filter(LocationTag.parent == None).order_by(LocationTag.title.asc()).all()
+    def _universities(self, sort_popularity=True, limit=None, region_id=None):
+        unis = meta.Session.query(LocationTag
+                ).filter(LocationTag.parent == None
+                ).order_by(LocationTag.title.asc())
+        if region_id:
+            unis = unis.filter_by(region_id=region_id)
+        unis = unis.all()
         if sort_popularity:
             unis.sort(key=lambda obj: obj.rating, reverse=True)
         if limit is not None:
@@ -121,14 +126,19 @@ class UniversityListMixin(BaseController):
         return groups
 
     def _get_unis(self):
-        """List all the universities in the system, paging and sorting according to request parameters."""
+        """List universities.
+
+        Paging and sorting are performed according to request parameters.
+        """
         c.sort = request.params.get('sort', 'popular')
-        unis = self._universities(c.sort == 'popular')
+        region_id = request.params.get('region_id')
+        unis = self._universities(sort_popularity=(c.sort == 'popular'),
+                                  region_id=region_id)
         c.unis = paginate.Page(
             unis,
             page=int(request.params.get('page', 1)),
-            items_per_page = 16,
-            item_count = len(unis),
+            items_per_page=16,
+            item_count=len(unis),
             **{'sort': c.sort}
             )
         c.teaser = not (request.params.has_key('page') or request.params.has_key('sort'))
