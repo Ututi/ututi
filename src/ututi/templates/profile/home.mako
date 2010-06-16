@@ -52,7 +52,7 @@ ${parent.head_tags()}
 <div id="SearchResults">
 %if c.user.memberships:
 <%self:rounded_block id="subject_description" class_='portletGroupFiles'>
-	<div class="GroupFiles GroupFilesGroups">
+  <div class="GroupFiles GroupFilesGroups">
       <h2 class="portletTitle bold">${_('Groups')}</h2>
       <span class="group-but">
         ${h.button_to(_('create group'), url(controller='group', action='group_type'))}
@@ -65,49 +65,49 @@ ${parent.head_tags()}
     <%
        group = membership.group
     %>
-	<div class="GroupFilesContent-line${' GroupFilesContent-line-last' if n == count -1 else ''}">
-		<div>
-			<div class="profile">
-				<div class="floatleft avatar-small">
+  <div class="GroupFilesContent-line${' GroupFilesContent-line-last' if n == count -1 else ''}">
+    <div>
+      <div class="profile">
+        <div class="floatleft avatar-small">
                     %if group.logo is not None:
                       <img class="group-logo" src="${url(controller='group', action='logo', id=group.group_id, width=36, height=35)}" alt="logo" />
                     %else:
                       ${h.image('/img/avatar-small.png', alt='logo', class_='group-logo')|n}
                     %endif
-				</div>
-				<div class="floatleft personal-data">
-				  <div class="anth3">
+        </div>
+        <div class="floatleft personal-data">
+          <div class="anth3">
                     <a class="orange bold anth3" href="${group.url()}">${group.title}</a>
                     (${ungettext("%(count)s member", "%(count)s members", len(group.members)) % dict(count = len(group.members))})</div>
-				  <div>
+          <div>
                     <a class="verysmall grey" href="${url(controller='mailinglist', action='new_thread', id=group.group_id)}" title="${_('Mailing list address')}">
                       ${group.group_id}@${c.mailing_list_host}
                     </a>
                   </div>
-				</div>
-				<div class="clear"></div>
-			</div>
-		</div>
-		<div class="grupes-links">
-			<ul class="grupes-links-list">
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
+    <div class="grupes-links">
+      <ul class="grupes-links-list">
               %if group.mailinglist_enabled:
-			  <li>
+        <li>
                 <a href="${url(controller='mailinglist', action='new_thread', id=group.group_id)}" title="${_('Mailing list address')}" class="green verysmall">
                   ${_('Write message')}
                 </a>
               </li>
-			  <li>
+        <li>
                 <a href="${url(controller='mailinglist', action='index', id=group.group_id)}" class="green verysmall">
                   ${_('Group messages')}
                 </a>
               </li>
               %else:
-			  <li>
+        <li>
                 <a href="${url(controller='forum', action='new_category', id=group.group_id)}" class="green verysmall">
                   ${_('Write message')}
                 </a>
               </li>
-			  <li>
+        <li>
                 <a href="${url(controller='forum', action='categories', id=group.group_id)}" class="green verysmall">
                   ${_('Group forum')}
                 </a>
@@ -115,22 +115,22 @@ ${parent.head_tags()}
               %endif
 
               %if group.wants_to_watch_subjects:
-			  <li class="dalykai">
+        <li class="dalykai">
                 <a href="${url(controller='group', action='subjects', id=group.group_id)}" class="green verysmall">
                   ${_('Group subjects')}
                 </a>
               </li>
               %endif
               %if group.has_file_area:
-			  <li class="failai last">
+        <li class="failai last">
                 <a href="${url(controller='group', action='files', id=group.group_id)}" class="green verysmall">
                   ${_('Group files')}
                 </a>
               </li>
               %endif
-			</ul>
-		</div>
-	</div>
+      </ul>
+    </div>
+  </div>
     %endfor
 </%self:rounded_block>
 %elif not c.user.hide_suggest_create_group:
@@ -245,10 +245,10 @@ ${subjects_block(c.user.watched_subjects)}
   %>
   %for n, subject in enumerate(subjects):
   <div class="${'GroupFilesContent-line-dal' if n != count - 1 else 'GroupFilesContent-line-dal-last'}">
-	<ul class="grupes-links-list-dalykai">
-	  <li>
-		<dl>
-		  <dt>
+  <ul class="grupes-links-list-dalykai">
+    <li>
+    <dl>
+      <dt>
             <span class="bold">
               <a class="subject_title" href="${subject.url()}">${h.ellipsis(subject.title, 60)}</a>
             </span>
@@ -258,20 +258,20 @@ ${subjects_block(c.user.watched_subjects)}
             <dd class="s-line">|</dd>
           %endfor
           %if subject.lecturer:
-		  <dd class="s-line">${_('Lect.')} <span class="orange" >${subject.lecturer}</span></dd>
+      <dd class="s-line">${_('Lect.')} <span class="orange" >${subject.lecturer}</span></dd>
           %endif
-		  <dt></dt>
-		  <dd class="files"><span >${_('Files:')}</span> ${len(subject.files)}</dd>
-		  <dd class="pages"><span >${_('Wiki pages:')}</span> ${len(subject.pages)}</dd>
-		  <dd class="watchedBy"><span >${_('The subject is watched by:')}</span>
+      <dt></dt>
+      <dd class="files"><span >${_('Files:')}</span> ${len(subject.files)}</dd>
+      <dd class="pages"><span >${_('Wiki pages:')}</span> ${len(subject.pages)}</dd>
+      <dd class="watchedBy"><span >${_('The subject is watched by:')}</span>
             ${ungettext("<span class='orange'>%(count)s</span> user", "<span class='orange'>%(count)s</span> users", subject.user_count()) % dict(count = subject.user_count())|n}
             ${_('and')}
             ${ungettext("<span class='orange'>%(count)s</span> group", "<span class='orange'>%(count)s</span> groups", subject.group_count()) % dict(count = subject.group_count())|n}
           </dd>
-		</dl>
-	  </li>
-	</ul>
-##	<div class="cross"><img src="img/icons/cross_big.png" alt=""></div>
+    </dl>
+    </li>
+  </ul>
+##  <div class="cross"><img src="img/icons/cross_big.png" alt=""></div>
   </div>
   %endfor
 </%def>
