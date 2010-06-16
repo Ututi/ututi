@@ -1,0 +1,17 @@
+INSERT INTO regions (country, title) VALUES
+    ('pl', 'Dolnośląskie'),
+    ('pl', 'Kujawsko-pomorskie'),
+    ('pl', 'Lubelskie'),
+    ('pl', 'Lubuskie'),
+    ('pl', 'Łódzkie'),
+    ('pl', 'Małopolskie'),
+    ('pl', 'Mazowieckie'),
+    ('pl', 'Opolskie'),
+    ('pl', 'Podkarpackie'),
+    ('pl', 'Podlaskie'),
+    ('pl', 'Pomorskie'),
+    ('pl', 'Śląskie'),
+    ('pl', 'Świętokrzyskie'),
+    ('pl', 'Warmińsko-mazurski'),
+    ('pl', 'Wielkopolskie'),
+    ('pl', 'Zachodniopomorskie');;
