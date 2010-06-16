@@ -22,7 +22,7 @@
   ${blog_portlet()}
 </%def>
 
-%if c.lang == 'pl' and 'region_id' not in request.params:
+%if c.tpl_lang == 'pl' and 'region_id' not in request.params:
   <h2>${_('Pick your region')}</h2>
 
   ${h.image('/img/poland-regions.png', alt=_('Regions of Poland'), id='region-map', usemap='#map')}
@@ -48,9 +48,5 @@
 
 %endif
 
-%if 'region_id' in request.params:
-  ${universities_section(c.unis, url(controller='profile', action='browse', region_id=request.params.get('region_id')))}
-%else:
-  ${universities_section(c.unis, url(controller='profile', action='browse'))}
-%endif
+${universities_section(c.unis, url(controller='profile', action='browse'))}
 <br class="clear-left" />
