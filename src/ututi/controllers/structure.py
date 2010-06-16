@@ -237,7 +237,7 @@ class StructureController(BaseController):
                             else:
                                 json['error'] = _('Choose a different short title')
                                 break
-                    except:
+                    except: # XXX
                         json['error'] = _('The short title must contain no spaces')
                         break
 
