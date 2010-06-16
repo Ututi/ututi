@@ -61,7 +61,7 @@
                      onclick="$('#pager').addClass('loading'); $('#university-list').load('%s'); return false;") }
     </div>
     <div id="sorting">
-      ${_('Sort  by: ')}
+      ${_('Sort by:')}
       <a id="sort-alpha" class="${c.sort == 'alpha' and 'active' or ''}" href="${url(ajax_url, sort='alpha')}">${'alphabetically'}</a>
       <input type="hidden" id="sort-alpha-url" name="sort-alpha-url" value="${url(ajax_url, sort='alpha', js=True)}" />
       <a id="sort-popular" class="${c.sort == 'popular' and 'active' or ''}" href="${url(ajax_url, sort='popular')}">${'by popularity'}</a>
