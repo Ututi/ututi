@@ -14,21 +14,21 @@
         <a ${h.trackEvent(location, 'home', 'portlet_header')} href="${location.url()}" title="${location.title}">${_('Faculty information')}</a>
       %endif
     </%def>
-	<div class="profile">
-		<div class="floatleft avatar">
+    <div class="profile">
+        <div class="floatleft avatar">
           %if location.logo is not None:
             <img class="portlet-logo" id="structure-logo" src="${url(controller='structure', action='logo', id=location.id, width=70, height=70)}" alt="logo" />
           %endif
-		</div>
-		<div class="floatleft personal-data uni-name">
-			<div><h2 class="group-name">${location.title}</h2></div>
+        </div>
+        <div class="floatleft personal-data uni-name">
+            <div><h2 class="group-name">${location.title}</h2></div>
             %if location.site_url is not None:
-			<div><a href="${location.site_url}">${location.site_url}</a></div>
+            <div><a href="${location.site_url}">${location.site_url}</a></div>
             %endif
-		</div>
-		<div class="clear"></div>
-	</div>
-	<ul class="uni-info">
+        </div>
+        <div class="clear"></div>
+    </div>
+    <ul class="uni-info">
       <li>
         <%
            cnt = h.location_count(location.id, 'subject')
@@ -48,7 +48,7 @@
         ${ungettext("<span class='bold'>%(count)s</span> file", "<span class='bold'>%(count)s</span> files", cnt) % dict(count = cnt)|n}
       </li>
 
-	</ul>
+    </ul>
     %if h.check_crowds(['moderator']):
       <div class="right_arrow"><a href="${location.url(action='edit')}">${_('Edit')}</a></div>
     %endif
