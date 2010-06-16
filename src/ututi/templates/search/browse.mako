@@ -23,7 +23,7 @@
 </%def>
 
 %if c.lang == 'pl' and 'region_id' not in request.params:
-    <h2>${_('Pick your region')}</h2>
+  <h2>${_('Pick your region')}</h2>
 
   ${h.image('/img/poland-regions.png', alt=_('Regions of Poland'), id='region-map', usemap='#map')}
 
