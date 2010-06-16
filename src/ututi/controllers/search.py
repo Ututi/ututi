@@ -73,6 +73,7 @@ class SearchController(SearchBaseController, UniversityListMixin):
     def browse(self):
         c.blog_entries = meta.Session.query(BlogEntry).order_by(BlogEntry.created.desc()).limit(10).all()
         self._get_unis()
+        c.teaser = False
 
         c.obj_type = '*'
         if request.params.has_key('js'):
