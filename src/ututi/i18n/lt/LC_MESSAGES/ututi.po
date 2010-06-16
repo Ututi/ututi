@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-06-15 17:06+0300\n"
+"PO-Revision-Date: 2010-06-16 13:52+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -1046,6 +1046,12 @@ msgstr "Naršyk"
 msgid "About"
 msgstr "Apie"
 
+msgid "User menu"
+msgstr "Naudotojo meniu"
+
+msgid "feedback"
+msgstr ""
+
 msgid "ututi_blog_url"
 msgstr "http://blog.ututi.lt"
 
@@ -1084,9 +1090,6 @@ msgstr "ieškoti"
 
 msgid "Groups"
 msgstr "grupės"
-
-msgid "User menu"
-msgstr "Naudotojo meniu"
 
 msgid "Settings"
 msgstr "Nustatymai"
@@ -1220,8 +1223,14 @@ msgstr[0] "rastas %(count)s naudotojas"
 msgstr[1] "rasti %(count)s naudotojai"
 msgstr[2] "rasta %(count)s naudotojų"
 
-msgid "Sort  by: "
-msgstr "Rūšiuoti pagal: "
+msgid "Sort by:"
+msgstr "Rikiuoti pagal:"
+
+msgid "name"
+msgstr "pavadinimą"
+
+msgid "popularity"
+msgstr "populiarumą"
 
 msgid "More universities"
 msgstr "Daugiau universitetų"
@@ -1633,6 +1642,9 @@ msgstr "pakviesti grupės draugus"
 msgid "Finish choosing subjects"
 msgstr "patvirtinti pasirinktus dalykus"
 
+msgid "become a member"
+msgstr "tapti nariu"
+
 msgid "New academic group"
 msgstr "Nauja akademinė grupė"
 
@@ -1641,6 +1653,18 @@ msgstr "Sukurk savo akademinę grupę"
 
 msgid "What can you do with academic groups?"
 msgstr "Ką galima turėti akademinėje grupėje?"
+
+msgid "Private file area"
+msgstr "Privatūs failai"
+
+msgid "Registration with university subjects"
+msgstr "Universitetinių dalykų pridėjimas"
+
+msgid " is taken."
+msgstr ""
+
+msgid " is free!"
+msgstr ""
 
 msgid "Group address on the web"
 msgstr "Grupės adresą"
@@ -1690,6 +1714,9 @@ msgstr "Sukurk grupę su savo pasirinkimais"
 msgid "What can you do with custom groups?"
 msgstr "Kuo yra gerai grupė su savo pasirinkimais?"
 
+msgid "Pick the functionality you need yourself"
+msgstr "Sukurk grupę ir pasirink, kokias funkcijas nori turėti."
+
 msgid "New public group"
 msgstr "Nauja vieša grupė"
 
@@ -1698,6 +1725,15 @@ msgstr "Sukurk viešą grupę"
 
 msgid "What can you do with public groups?"
 msgstr "Ką galima daryti su viešomis grupėmis?"
+
+msgid "Public group page"
+msgstr "Viešas grupės puslapis"
+
+msgid "News publishing"
+msgstr "Galimybė siųsti naujienas"
+
+msgid "No confirmation needed for membership"
+msgstr "Nėra narystės patvirtinimo"
 
 msgid "Back to group page"
 msgstr "Grįžti į grupės puslapį"
@@ -1746,24 +1782,6 @@ msgstr "Vieša grupė"
 
 msgid "Custom group"
 msgstr "Konfigūruojama grupė"
-
-msgid "Private file area"
-msgstr "Privatūs failai"
-
-msgid "Registration with university subjects"
-msgstr "Universitetinių dalykų pridėjimas"
-
-msgid "Public group page"
-msgstr "Viešas grupės puslapis"
-
-msgid "News publishing"
-msgstr "Galimybė siųsti naujienas"
-
-msgid "No confirmation needed for membership"
-msgstr "Nėra narystės patvirtinimo"
-
-msgid "Pick the functionality you need yourself"
-msgstr "Sukurk grupę ir pasirink, kokias funkcijas nori turėti."
 
 msgid "Congratulations, you have created a new group!"
 msgstr "Sveikiname Tave sukūrus grupę!"
@@ -1837,9 +1855,6 @@ msgstr "Stebėti dalykus"
 
 msgid "no, thank you"
 msgstr "ne, ačiū"
-
-msgid "become a member"
-msgstr "tapti nariu"
 
 msgid "Group members"
 msgstr "Grupės nariai"
@@ -2169,9 +2184,6 @@ msgstr[2] "<em>%(count)s</em> pranešimų"
 
 msgid "There are no messages."
 msgstr "Pranešimų nėra."
-
-msgid "more"
-msgstr "daugiau"
 
 msgid "Messages in community forum"
 msgstr "Bendruomenės forumo pranešimai"
@@ -2661,6 +2673,12 @@ msgstr ""
 "Tu ką tik prisidėjai prie Ututi tobulinimo! Už tai tavo profilyje "
 "neužilgo atsiras medalis,\n"
 "rodantis Ututi rėmėjo statusą. Sėkmės naudojantis Ututi!"
+
+msgid "Pick your region"
+msgstr ""
+
+msgid "Regions of Poland"
+msgstr ""
 
 msgid "Were you looking for a university or department?"
 msgstr "Gal ieškojai universiteto arba fakulteto?"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-06-15 17:02+0300\n"
+"POT-Creation-Date: 2010-06-16 13:51+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -947,6 +947,12 @@ msgstr ""
 msgid "About"
 msgstr ""
 
+msgid "User menu"
+msgstr ""
+
+msgid "feedback"
+msgstr ""
+
 msgid "ututi_blog_url"
 msgstr ""
 
@@ -984,9 +990,6 @@ msgid "search_"
 msgstr ""
 
 msgid "Groups"
-msgstr ""
-
-msgid "User menu"
 msgstr ""
 
 msgid "Settings"
@@ -1115,7 +1118,13 @@ msgid_plural "found %(count)s users"
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "Sort  by: "
+msgid "Sort by:"
+msgstr ""
+
+msgid "name"
+msgstr ""
+
+msgid "popularity"
 msgstr ""
 
 msgid "More universities"
@@ -1463,6 +1472,9 @@ msgstr ""
 msgid "Finish choosing subjects"
 msgstr ""
 
+msgid "become a member"
+msgstr ""
+
 msgid "New academic group"
 msgstr ""
 
@@ -1470,6 +1482,18 @@ msgid "Create an academic group"
 msgstr ""
 
 msgid "What can you do with academic groups?"
+msgstr ""
+
+msgid "Private file area"
+msgstr ""
+
+msgid "Registration with university subjects"
+msgstr ""
+
+msgid " is taken."
+msgstr ""
+
+msgid " is free!"
 msgstr ""
 
 msgid "Group address on the web"
@@ -1520,6 +1544,9 @@ msgstr ""
 msgid "What can you do with custom groups?"
 msgstr ""
 
+msgid "Pick the functionality you need yourself"
+msgstr ""
+
 msgid "New public group"
 msgstr ""
 
@@ -1527,6 +1554,15 @@ msgid "Create a public group"
 msgstr ""
 
 msgid "What can you do with public groups?"
+msgstr ""
+
+msgid "Public group page"
+msgstr ""
+
+msgid "News publishing"
+msgstr ""
+
+msgid "No confirmation needed for membership"
 msgstr ""
 
 msgid "Back to group page"
@@ -1573,24 +1609,6 @@ msgid "Public group"
 msgstr ""
 
 msgid "Custom group"
-msgstr ""
-
-msgid "Private file area"
-msgstr ""
-
-msgid "Registration with university subjects"
-msgstr ""
-
-msgid "Public group page"
-msgstr ""
-
-msgid "News publishing"
-msgstr ""
-
-msgid "No confirmation needed for membership"
-msgstr ""
-
-msgid "Pick the functionality you need yourself"
 msgstr ""
 
 msgid "Congratulations, you have created a new group!"
@@ -1644,9 +1662,6 @@ msgid "Watch subjects"
 msgstr ""
 
 msgid "no, thank you"
-msgstr ""
-
-msgid "become a member"
 msgstr ""
 
 msgid "Group members"
@@ -1951,9 +1966,6 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid "There are no messages."
-msgstr ""
-
-msgid "more"
 msgstr ""
 
 msgid "Messages in community forum"
@@ -2410,6 +2422,12 @@ msgid ""
 "You have just contributed to the development of Ututi! A medal, signifying "
 "your Ututi supporter status, should soon appear in your profile. Good luck "
 "continuing to use Ututi!"
+msgstr ""
+
+msgid "Pick your region"
+msgstr ""
+
+msgid "Regions of Poland"
 msgstr ""
 
 msgid "Were you looking for a university or department?"

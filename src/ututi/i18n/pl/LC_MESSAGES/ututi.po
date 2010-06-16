@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-06-15 17:07+0300\n"
+"PO-Revision-Date: 2010-06-16 13:51+0300\n"
 "Last-Translator: eri\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -1052,6 +1052,12 @@ msgstr "Szukaj"
 msgid "About"
 msgstr "About"
 
+msgid "User menu"
+msgstr "Menu użytkownika"
+
+msgid "feedback"
+msgstr ""
+
 msgid "ututi_blog_url"
 msgstr "http://blog.ututi.pl"
 
@@ -1090,9 +1096,6 @@ msgstr "szukaj_"
 
 msgid "Groups"
 msgstr "Grupy"
-
-msgid "User menu"
-msgstr "Menu użytkownika"
 
 msgid "Settings"
 msgstr "Ustawienia"
@@ -1226,8 +1229,14 @@ msgstr[0] "znaleziono  %(count)s użytkownika"
 msgstr[1] "znaleziono  %(count)s użytkowników"
 msgstr[2] "znaleziono  %(count)s użytkowników"
 
-msgid "Sort  by: "
-msgstr "Sortuj według: "
+msgid "Sort by:"
+msgstr ""
+
+msgid "name"
+msgstr ""
+
+msgid "popularity"
+msgstr ""
 
 msgid "More universities"
 msgstr "Więcej uczelni"
@@ -1634,6 +1643,9 @@ msgstr "Zaproś do grupy"
 msgid "Finish choosing subjects"
 msgstr "Zakończ wybór przedmiotów"
 
+msgid "become a member"
+msgstr ""
+
 msgid "New academic group"
 msgstr "Nowa grupa akademicka"
 
@@ -1642,6 +1654,18 @@ msgstr "Utwóórz grupę akademicką"
 
 msgid "What can you do with academic groups?"
 msgstr "Co możesz robić z grupami akademickimi?"
+
+msgid "Private file area"
+msgstr "Miejsce na pliki prywatne"
+
+msgid "Registration with university subjects"
+msgstr "Obserwowanie przedmiotów akademickich"
+
+msgid " is taken."
+msgstr ""
+
+msgid " is free!"
+msgstr ""
 
 msgid "Group address on the web"
 msgstr "Adres grupy na stronie"
@@ -1691,6 +1715,9 @@ msgstr "Utwórz grupę konfigurowaną"
 msgid "What can you do with custom groups?"
 msgstr "Co możesz robić z grupą konfigurowaną?"
 
+msgid "Pick the functionality you need yourself"
+msgstr "Wybierz potrzebne Ci funkcje"
+
 msgid "New public group"
 msgstr "Nowa grupa publiczna"
 
@@ -1699,6 +1726,15 @@ msgstr "Utwórz grupę publiczną"
 
 msgid "What can you do with public groups?"
 msgstr "Co można robić w publicznej grupie?"
+
+msgid "Public group page"
+msgstr "Publiczna strona grupy"
+
+msgid "News publishing"
+msgstr "Publikowanie nowości"
+
+msgid "No confirmation needed for membership"
+msgstr "Członkostwo bez potwierdzenia"
 
 msgid "Back to group page"
 msgstr "Powrót do strony grupy"
@@ -1745,24 +1781,6 @@ msgstr "Grupa publiczna"
 
 msgid "Custom group"
 msgstr "Grupa konfigurowana"
-
-msgid "Private file area"
-msgstr "Miejsce na pliki prywatne"
-
-msgid "Registration with university subjects"
-msgstr "Obserwowanie przedmiotów akademickich"
-
-msgid "Public group page"
-msgstr "Publiczna strona grupy"
-
-msgid "News publishing"
-msgstr "Publikowanie nowości"
-
-msgid "No confirmation needed for membership"
-msgstr "Członkostwo bez potwierdzenia"
-
-msgid "Pick the functionality you need yourself"
-msgstr "Wybierz potrzebne Ci funkcje"
 
 msgid "Congratulations, you have created a new group!"
 msgstr "Gratulujemy utworzenia nowej grupy!"
@@ -1838,9 +1856,6 @@ msgstr "Obserwuj przedmioty"
 
 msgid "no, thank you"
 msgstr "nie chcę"
-
-msgid "become a member"
-msgstr ""
 
 msgid "Group members"
 msgstr "Członkowie grupy"
@@ -2169,9 +2184,6 @@ msgstr[2] "<em>%(count)s</em> postów"
 
 msgid "There are no messages."
 msgstr "Brak wiadomości."
-
-msgid "more"
-msgstr "Więcej"
 
 msgid "Messages in community forum"
 msgstr "Nowa wiadomość na forum wspólnoty"
@@ -2663,6 +2675,12 @@ msgstr ""
 "Właśnie dołączyłeś do grona osób, które wsparły rozwój Ututi! Niedługo na"
 " Twoim profilu pojawi się odznaka donatora Ututi. Życzymy powodzenia w "
 "dalszym użytkowaniu Ututi!"
+
+msgid "Pick your region"
+msgstr ""
+
+msgid "Regions of Poland"
+msgstr ""
 
 msgid "Were you looking for a university or department?"
 msgstr "Szukałeś uczelni lub wydziału?"
