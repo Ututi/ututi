@@ -34,37 +34,46 @@
 
 %if c.user:
 <h2>${_('Create new')}</h2>
-<form method="post" action="${url(controller='structure', action='create')}" name="new_structure_form" id="new_structure_form" enctype="multipart/form-data">
-      <div>
-        <label for="title">${_('Title')}</label>
-        <input type="text" id="title" name="title"/>
-      </div>
-      <div>
-        <label for="title_short">${_('Short title')}</label>
-        <input type="text" id="title_short" name="title_short"/>
-      </div>
-      <div>
-        <label for="description">${_('Description')}</label>
-        <textarea class="ckeditor" name="description" id="description" cols="80" rows="25"></textarea>
-      </div>
-      <div>
-        <label for="parent">${_('Parent')}</label>
-        <select id="parent" name="parent">
-               <option value="0">${_('Select a parent')}</option>
-               %if c.structure:
-                   %for parent in c.structure:
-                        <option value="${parent.id}">${parent.title}</option>
-                   %endfor
-               %endif
-        </select>
-      </div>
-      <div>
-        <label for="logo_upload">${_('Logo')}</label>
-        <input type="file" name="logo_upload" id="logo_upload"/>
-      </div>
+<form method="post" action="${url(controller='structure', action='create')}"
+      name="new_structure_form" id="new_structure_form" class="fullForm"
+      enctype="multipart/form-data">
 
-      <div>
-        <input type="submit" value="${_('Save')}"/>
-      </div>
+   ${h.input_line('title', _('Title'))}
+   ${h.input_line('title_short', _('Short title'))}
+
+   <div>
+     <label for="description">${_('Description')}</label>
+     <textarea class="ckeditor" name="description" id="description" cols="80" rows="25"></textarea>
+   </div>
+
+   <div>
+     <label for="region">${_('Region')}</label>
+     <select id="region" name="region">
+       <option value="0">${_('(none)')}</option>
+       %for region in c.regions:
+         <option value="${region.id}">${region.title}</option>
+       %endfor
+     </select>
+   </div>
+
+   <div>
+     <label for="parent">${_('Parent')}</label>
+     <select id="parent" name="parent">
+            <option value="0">${_('Select a parent')}</option>
+            %if c.structure:
+                %for parent in c.structure:
+                     <option value="${parent.id}">${parent.title}</option>
+                %endfor
+            %endif
+     </select>
+   </div>
+
+   <label>${_('Logo')}
+     <form:error name="logo_upload"/>
+     <input type="file" name="logo_upload" id="logo_upload" />
+   </label>
+
+   <br />
+   ${h.input_submit(_('Create'))}
 </form>
 %endif

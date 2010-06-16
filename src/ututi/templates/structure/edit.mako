@@ -19,6 +19,16 @@
    </div>
 
    <div>
+     <label for="region">${_('Region')}</label>
+     <select id="region" name="region">
+       <option value="0">${_('(none)')}</option>
+       %for region in c.regions:
+         <option value="${region.id}">${region.title}</option>
+       %endfor
+     </select>
+   </div>
+
+   <div>
      <label for="parent">${_('Parent')}</label>
      <select id="parent" name="parent">
             <option value="0">${_('Select a parent')}</option>
@@ -42,6 +52,6 @@
    </label>
 
    <br />
-   ${h.input_submit(_('Save'))}
-   ${h.input_submit(_('Delete'))}
+   ${h.input_submit(_('Save'), name='action')}
+   ${h.input_submit(_('Delete'), name='action')}
 </form>

@@ -73,7 +73,7 @@ ${h.javascript_link('/javascript/js-alternatives.js')|n}
           </button>
         </div>
         <br class="clear-left"/>
-        <label for="logo_delete">
+        <label>
           <input type="checkbox" name="logo_delete" id="logo_delete" value="true"/>
           ${_('Delete current logo')}
         </label>

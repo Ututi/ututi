@@ -15,7 +15,7 @@ from ututi.lib.security import ActionProtector
 from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import ShortTitleValidator
-from ututi.model import meta, LocationTag, SimpleTag, Tag
+from ututi.model import meta, LocationTag, SimpleTag, Tag, Region
 from ututi.controllers.group import FileUploadTypeValidator
 
 log = logging.getLogger(__name__)
@@ -42,6 +42,7 @@ class NewStructureForm(Schema):
     allow_extra_fields = True
     title = validators.UnicodeString(not_empty=True, strip=True, max=250)
     title_short = validators.UnicodeString(not_empty=True, strip=True, max=50)
+    region = validators.Int()
     logo_upload = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
     description = validators.UnicodeString(strip=True)
     parent = StructureIdValidator()
@@ -77,6 +78,7 @@ class StructureController(BaseController):
     @ActionProtector("root")
     def index(self):
         c.structure = meta.Session.query(LocationTag).filter_by(parent=None).all()
+        c.regions = meta.Session.query(Region).all()
         return render('structure/index.mako')
 
     @validate(schema=NewStructureForm, form='index')
@@ -87,6 +89,7 @@ class StructureController(BaseController):
         structure = LocationTag(title=values['title'],
                                 title_short=values['title_short'],
                                 description=values['description'])
+        structure.region_id = int(values['region']) or None
 
         if values.get('logo_upload', None) is not None:
             logo = values['logo_upload']
@@ -112,15 +115,16 @@ class StructureController(BaseController):
             'title_short': c.item.title_short,
             'description': c.item.description,
             'parent': c.item.parent,
+            'region': c.item.region_id or 0,
             }
         c.structure = meta.Session.query(LocationTag).filter_by(parent=None).filter(LocationTag.id != item.id).all()
+        c.regions = meta.Session.query(Region).all()
         return htmlfill.render(self._edit_form(), defaults=defaults)
 
     @structure_action
     @validate(schema=EditStructureForm, form='_edit_form')
     @ActionProtector("root")
     def update(self, item):
-
         values = self.form_result
         if values.get('action', None) == _('Delete'):
             meta.Session.delete(c.item)
@@ -128,6 +132,7 @@ class StructureController(BaseController):
             c.item.title = values['title']
             c.item.title_short = values['title_short']
             c.item.description = values['description']
+            c.item.region_id = int(values['region']) or None
 
             if values['logo_delete']:
                 c.item.logo = None
