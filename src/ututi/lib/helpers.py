@@ -249,7 +249,7 @@ def email_with_replies(text):
 
 def html_cleanup(*args, **kwargs):
     from ututi.lib.validators import html_cleanup
-    return html_cleanup(*args, **kwargs)
+    return literal(html_cleanup(*args, **kwargs))
 
 
 def file_size(size):

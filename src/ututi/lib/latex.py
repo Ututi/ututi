@@ -1,10 +1,11 @@
 import cgi
 from StringIO import StringIO
 from urllib import urlencode
+from webhelpers.html.builder import literal
 
-latex_template =  '<img class="latex"'\
-                  ' alt="%(latex_alt)s"'\
-                  ' src="http://l.wordpress.com/latex.php?bg=ffffff&amp;fg=000000&amp;s=0&amp;%(latex_code)s" />'
+latex_template = '<img class="latex"'\
+                 ' alt="%(latex_alt)s"'\
+                 ' src="http://l.wordpress.com/latex.php?bg=ffffff&amp;fg=000000&amp;s=0&amp;%(latex_code)s" />'
 
 def convert_latex_to_html(text):
     return latex_template % {'latex_alt': text,
@@ -28,4 +29,4 @@ def replace_latex_to_html(text):
                 x = x % 2
         else:
             result.write(snippet)
-    return result.getvalue()
+    return literal(result.getvalue())
