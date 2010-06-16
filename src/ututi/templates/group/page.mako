@@ -8,7 +8,7 @@
 
 <div id="page_content">
   %if c.group.page != '':
-    ${h.html_cleanup(c.group.page)|n,decode.utf8}
+    ${h.html_cleanup(c.group.page)}
   %else:
     ${_("The group's page is empty. Enter your description.")}
   %endif
