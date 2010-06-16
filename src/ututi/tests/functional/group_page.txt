@@ -14,7 +14,7 @@ Let's find the group.
 
 At first the page should be empty.
 
-    >>> browser.printQuery('id("body-container")/text()')
+    >>> browser.printQuery('id("page_content")/text()')
     The group's page is empty. Enter your description.
 
 We can edit it of course:
@@ -26,7 +26,7 @@ We can edit it of course:
     >>> browser.getControl('Content').value = 'This is our group'
     >>> browser.getControl('Save').click()
 
-    >>> browser.printQuery('id("body-container")/text()')
+    >>> browser.printQuery('id("page_content")/text()')
     This is our group
 
 We can specify that the group's page is public, shown on the front page.

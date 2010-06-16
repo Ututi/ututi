@@ -1193,14 +1193,12 @@ div.GroupWiki{
     height:50px;
 }
 
-div.wiki2{
-    width:480px;
+div.wiki2 {
+    width: 400px;
 }
-div.wiki3{
-    padding-top:10px;
-}
-div.wiki4{
-    width:485px;
+
+div.wiki3 {
+    padding-top: 10px;
 }
 
 div.GroupFilesWiki p,
@@ -3075,11 +3073,14 @@ h2.overline {
 }
 
 #page_content {
-    padding: 0 10px;
+    padding-left: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
 }
 
-#page_content li {
+#page_content ul, #page_content ol {
     list-style-position: inside;
+    margin-left: 1em;
 }
 
 .clear-left, .clear-right {

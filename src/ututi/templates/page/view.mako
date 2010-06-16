@@ -7,16 +7,16 @@
 <a class="back-link" href="${c.subject.url()}">${_('Go back to %(subject_title)s') % dict(subject_title=c.subject.title)}</a>
 
 <%self:rounded_block id="subject_description" class_='portletGroupFiles'>
-	<div class="GroupFiles GroupWiki">
-		<div class="floatleft wiki2">
-			<h2 class="portletTitle bold">${c.page.title}</h2>
+    <div class="GroupFiles GroupWiki">
+        <div class="floatleft wiki2">
+            <h2 class="portletTitle bold">${c.page.title}</h2>
             %if c.page.last_version:
               <p><span class="grey verysmall">${_('Last edit: ')}
-              <a  class="orange verysmall" href="${c.page.last_version.created.url()}">${c.page.last_version.created.fullname}</a>
+              <a class="orange verysmall" href="${c.page.last_version.created.url()}">${c.page.last_version.created.fullname}</a>
               <span class="grey verysmall">${h.fmt_dt(c.page.last_version.created_on)}</span>
             %endif
-		</div>
-		<div class="floatleft wiki3">
+        </div>
+        <div class="floatleft wiki3">
           ${h.button_to(_('edit'), c.page.url(action='edit'), method='GET')}
           %if h.check_crowds(['user']):
             ${h.button_to(_('history'), c.page.url(action='history'), method='GET')}
@@ -28,10 +28,10 @@
               ${h.button_to(_('undelete'), c.page.url(action='undelete'))}
             %endif
           %endif
-		</div>
-	</div>
+        </div>
+    </div>
     <div id="page_content">
-      ${h.latex_to_html(h.html_cleanup(c.page.content))|n}
+      ${h.latex_to_html(h.html_cleanup(c.page.content))}
     </div>
 </%self:rounded_block>
 
