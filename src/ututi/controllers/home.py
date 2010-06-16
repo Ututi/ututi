@@ -141,7 +141,9 @@ class UniversityListMixin(BaseController):
             item_count=len(unis),
             **{'sort': c.sort}
             )
-        c.teaser = not (request.params.has_key('page') or request.params.has_key('sort'))
+        c.teaser = not (request.params.has_key('page')
+                        or request.params.has_key('sort')
+                        or request.params.has_key('region_id'))
 
 
 class HomeController(UniversityListMixin):
