@@ -58,10 +58,15 @@
     </div>
     <div id="sorting">
       ${_('Sort by:')}
-      <a id="sort-alpha" class="${c.sort == 'alpha' and 'active' or ''}" href="${url(ajax_url, sort='alpha')}">${_('name')}</a>
-      <input type="hidden" id="sort-alpha-url" name="sort-alpha-url" value="${url(ajax_url, sort='alpha', js=True)}" />
-      <a id="sort-popular" class="${c.sort == 'popular' and 'active' or ''}" href="${url(ajax_url, sort='popular')}">${_('popularity')}</a>
-      <input type="hidden" id="sort-popular-url" name="sort-popular-url" value="${url(ajax_url, sort='popular', js=True)}" />
+      <%
+        url_args = dict(sort='alpha')
+        if request.params.get('region_id'):
+            url_args['region_id'] = request.params.get('region_id')
+      %>
+      <a id="sort-alpha" class="${c.sort == 'alpha' and 'active' or ''}" href="${url(ajax_url, **url_args)}">${_('name')}</a>
+      <input type="hidden" id="sort-alpha-url" name="sort-alpha-url" value="${url(ajax_url, js=True, **url_args)}" />
+      <a id="sort-popular" class="${c.sort == 'popular' and 'active' or ''}" href="${url(ajax_url, **url_args)}">${_('popularity')}</a>
+      <input type="hidden" id="sort-popular-url" name="sort-popular-url" value="${url(ajax_url, js=True, **url_args)}" />
     </div>
 </%def>
 
@@ -150,7 +155,7 @@
       </div>
       <div id="ututi_features" class="${c.slideshow and 'hidden' or ''}">
         <div id="can_find">
-          <h3>${_('What can You find here?')}</h3>
+          <h3>${_('What can you find here?')}</h3>
           ${_('Group mailing lists, <a href="%(link)s" title="Subject list">subjects</a> files and lecture notes.') %\
             dict(link=url(controller='search', action='index', obj_type='subject'))|n}
         </div>

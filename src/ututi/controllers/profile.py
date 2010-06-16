@@ -165,7 +165,8 @@ class ProfileController(SearchBaseController, UniversityListMixin):
 
         c.obj_type = '*'
         if request.params.has_key('js'):
-            return render_mako_def('/anonymous_index/lt.mako','universities', unis=c.unis, ajax_url=url(controller='profile', action='browse'))
+            return render_mako_def('/anonymous_index/lt.mako', 'universities',
+                                   unis=c.unis, ajax_url=url(controller='profile', action='browse'))
 
         return render('/profile/browse.mako')
 
