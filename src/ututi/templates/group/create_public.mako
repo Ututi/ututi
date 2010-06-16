@@ -29,13 +29,14 @@ ${_('New public group')}
 
   </div>
 
+  ## Can't use live search because we do not have the year.
   ## ${self.group_live_search_js()}
 
   <%self:right_pane title="${_('What can you do with public groups?')}" sidebar="">
       <ul>
-        <li>Lorem ipsum dolor sit amet</li>
-        <li>Lorem ipsum dolor sit amet dolor sit amet</li>
-        <li>Lorem ipsum dolor sit amet</li>
-        <li>Lorem ipsum dolor sit amet dolor sit amet</li>
+        <li>${_('Web-based forum')}</li>
+        <li>${_('Public group page')}</li>
+        <li>${_('News publishing')}</li>
+        <li>${_('No confirmation needed for membership')}</li>
       </ul>
   </%self:right_pane>

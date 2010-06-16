@@ -37,9 +37,6 @@ ${_('New custom group')}
 
   <%self:right_pane title="${_('What can you do with custom groups?')}">
       <ul>
-        <li>Lorem ipsum dolor sit amet</li>
-        <li>Lorem ipsum dolor sit amet dolor sit amet</li>
-        <li>Lorem ipsum dolor sit amet</li>
-        <li>Lorem ipsum dolor sit amet dolor sit amet</li>
+        <li>${_('Pick the functionality you need yourself')}</li>
       </ul>
   </%self:right_pane>

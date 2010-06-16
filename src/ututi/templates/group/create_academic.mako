@@ -33,9 +33,8 @@
 
   <%self:right_pane title="${_('What can you do with academic groups?')}">
       <ul>
-        <li>Lorem ipsum dolor sit amet</li>
-        <li>Lorem ipsum dolor sit amet dolor sit amet</li>
-        <li>Lorem ipsum dolor sit amet</li>
-        <li>Lorem ipsum dolor sit amet dolor sit amet</li>
+        <li>${_('Mailing list')}</li>
+        <li>${_('Private file area')}</li>
+        <li>${_('Registration with university subjects')}</li>
       </ul>
   </%self:right_pane>
