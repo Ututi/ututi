@@ -1491,12 +1491,16 @@ class SimpleTag(Tag):
 class LocationTag(Tag):
     """Class representing the university and faculty tags."""
 
-    def __init__(self, title, title_short, description, parent=None, confirmed=True):
+    def __init__(self, title, title_short, description, parent=None, confirmed=True, region=None):
         self.parent = parent
         self.title = title
         self.title_short = title_short
         self.description = description
         self.confirmed = confirmed
+        if region is not None:
+            if parent is not None:
+                region = parent.region
+            self.region = region
 
     @property
     def path(self):

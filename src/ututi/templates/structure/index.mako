@@ -6,6 +6,7 @@
 </%def>
 
 <h1>${_('Browse the hierarchy')}</h1>
+<a href="${url(controller='structure', action='regions')}">Edit regions</a>
 <%def name="location_tag(tag)">
   <li>
     <a href="${tag.url()}" class="tag_link">${tag.title}</a>

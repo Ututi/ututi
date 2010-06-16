@@ -104,6 +104,22 @@ class StructureController(BaseController):
         meta.Session.commit()
         redirect(url(controller='structure', action='index'))
 
+    @ActionProtector("root")
+    def regions(self):
+        if request.params.get('action'):
+            for tag in meta.Session.query(LocationTag).order_by(LocationTag.parent_id.desc()).all():
+                region = request.params.get('tag-%s-region' % tag.id)
+                if region:
+                    region = int(region) if region != '0' else None
+                    if region is None and tag.parent:
+                        region = tag.parent.region_id
+                    tag.region_id = region
+            meta.Session.commit()
+            redirect(url(controller='structure', action='index'))
+        c.structure = meta.Session.query(LocationTag).filter_by(parent=None).all()
+        c.regions = meta.Session.query(Region).all()
+        return render('structure/regions.mako')
+
     def _edit_form(self):
         return render('structure/edit.mako')
 
