@@ -2288,6 +2288,15 @@ div.location-add-subform {
     border-bottom: 1px solid #ebe8e8;
 }
 
+div.location-add-subform input {
+    margin-left: 1em;
+}
+
+div.location-add-subform label {
+    display: block;
+    padding-top: 5px;
+}
+
 /*************************************************************************
 END OF NEW LOCATION WIDGET SECTION
  **************************************************************************/
@@ -3159,6 +3168,10 @@ li.expanded li.action a{ font-weight:bold; color:#ACBF50 !important; }
 
 #update-location-form button {
     margin-top: 20px;
+}
+
+#update-location-form div.location-add-subform button {
+    margin-top: 0.5em;
 }
 
 .portlet .right_cross {
