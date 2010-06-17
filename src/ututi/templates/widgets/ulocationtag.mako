@@ -17,7 +17,7 @@
    if titles == []:
        titles = [_('University'), _('Department'), _('Section')]
    if add_titles == []:
-       add_titles = [_('Add university'), _('Add deparment'), _('Add section')]
+       add_titles = [_('Add university'), _('Add department'), _('Add section')]
 %>
 
 <div class="location-tag-widget ${'horizontalLocationForm' if c.tpl_lang != 'pl' else ''}"
