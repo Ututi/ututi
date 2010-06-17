@@ -12,4 +12,3 @@
   </div>
   ${h.input_submit(_('Submit'))}
 </form>
-</table>
