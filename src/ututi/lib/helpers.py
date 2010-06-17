@@ -4,11 +4,11 @@ Consists of functions to typically be used within templates, but also
 available to Controllers. This module is available to templates as 'h'.
 """
 
+import os
 from pylons.templating import render_mako_def
 from hashlib import md5
 import re
 import cgi
-from datetime import datetime
 
 # Import helpers as desired, or define your own, ie:
 #from webhelpers.html.tags import checkbox, password
@@ -481,3 +481,11 @@ def location_count(location_id, object_type=None):
     from ututi.model import Tag
     location = Tag.get(int(location_id))
     return location.count(object_type)
+
+
+def path_with_hash(fn):
+    from pylons import config
+    assert fn.startswith('/'), fn
+    file_path = os.path.join(config['pylons.paths']['static_files'], fn[1:])
+    digest = md5(file(file_path).read()).hexdigest()
+    return '%s?hash=%s' % (fn, digest)

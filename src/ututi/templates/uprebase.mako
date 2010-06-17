@@ -218,18 +218,7 @@ ${self.anonymous_menu()}
     <script type="text/javascript">
       var lang = '${c.lang}';
     </script>
-    ${h.javascript_link('/javascript/jquery-1.3.2.min.js')}
-    ${h.javascript_link('/javascript/ajaxupload.3.5.js')}
-    ${h.javascript_link('/javascript/jquery.qtip.min.js')}
-    ${h.javascript_link('/javascript/tooltips.js')}
-    ${h.stylesheet_link('/newstyle.css')}
-    ${h.javascript_link('/javascript/expand.js')}
-    ${h.javascript_link('/javascript/hide_parent.js')}
-    ${h.javascript_link('/javascript/forms.js')}
-    ${self.head_tags()}
-    <title>
-      ${self.title()} - ${_('UTUTI')}
-    </title>
+
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', '${c.google_tracker}']);
@@ -241,8 +230,20 @@ ${self.anonymous_menu()}
       ga.setAttribute('async', 'true');
       document.documentElement.firstChild.appendChild(ga);
       })();
-
     </script>
+
+    ${h.stylesheet_link(h.path_with_hash('/newstyle.css'))}
+    ${h.javascript_link('/javascript/jquery-1.3.2.min.js')}
+    ${h.javascript_link('/javascript/ajaxupload.3.5.js')}
+    ${h.javascript_link('/javascript/jquery.qtip.min.js')}
+    ${h.javascript_link('/javascript/tooltips.js')}
+    ${h.javascript_link(h.path_with_hash('/javascript/expand.js'))}
+    ${h.javascript_link(h.path_with_hash('/javascript/hide_parent.js'))}
+    ${h.javascript_link(h.path_with_hash('/javascript/forms.js'))}
+    ${self.head_tags()}
+    <title>
+      ${self.title()} - ${_('UTUTI')}
+    </title>
   </head>
   <body class="${self.body_class()}">
   % if c.serve_file:
