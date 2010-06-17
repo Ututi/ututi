@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-06-16 13:51+0300\n"
+"POT-Creation-Date: 2010-06-17 12:24+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1134,6 +1134,9 @@ msgid "UTUTI - student information online"
 msgstr ""
 
 msgid "ututi_video_id"
+msgstr ""
+
+msgid "What can you find here?"
 msgstr ""
 
 #, python-format
@@ -2554,6 +2557,12 @@ msgid ""
 "membership?"
 msgstr ""
 
+msgid "Region"
+msgstr ""
+
+msgid "(none)"
+msgstr ""
+
 msgid "Parent"
 msgstr ""
 
@@ -2561,6 +2570,12 @@ msgid "Select a parent"
 msgstr ""
 
 msgid "Browse the hierarchy"
+msgstr ""
+
+msgid "[Edit]"
+msgstr ""
+
+msgid "Regions for locations"
 msgstr ""
 
 msgid "back to search"
@@ -2673,5 +2688,8 @@ msgid "enter the name or add a new one"
 msgstr ""
 
 msgid "enter the name"
+msgstr ""
+
+msgid "Add department"
 msgstr ""
 

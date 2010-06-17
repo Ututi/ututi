@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-06-16 13:52+0300\n"
+"PO-Revision-Date: 2010-06-17 12:25+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -1240,6 +1240,9 @@ msgstr "Ututi - studentų žinios tinkle"
 
 msgid "ututi_video_id"
 msgstr "stV09QR0JIR1xZQVhbWltYU1NQ"
+
+msgid "What can you find here?"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -2817,6 +2820,12 @@ msgstr ""
 "%(user)s nori prisijungti prie grupės %(group)s. Ar norite patvirtinti "
 "narystę?"
 
+msgid "Region"
+msgstr ""
+
+msgid "(none)"
+msgstr ""
+
 msgid "Parent"
 msgstr "Tėvinis elementas"
 
@@ -2825,6 +2834,12 @@ msgstr "Pasirinkite tėvinį elementą"
 
 msgid "Browse the hierarchy"
 msgstr "Hierarchijos naršymas"
+
+msgid "[Edit]"
+msgstr ""
+
+msgid "Regions for locations"
+msgstr ""
 
 msgid "back to search"
 msgstr "atgal į paiešką"
@@ -2937,4 +2952,7 @@ msgstr "įvesk pavadinimą arba sukurk naują"
 
 msgid "enter the name"
 msgstr "įvesk pavadinimą"
+
+msgid "Add department"
+msgstr ""
 
