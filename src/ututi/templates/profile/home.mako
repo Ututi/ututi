@@ -21,8 +21,8 @@ ${parent.head_tags()}
 %if c.user.location is not None:
 <div class="my-faculty"><a href="${c.user.location.url()}">${_('Go to my department')}</a></div>
 %else:
-  <%self:rounded_block id="user_location" class_="portletSetLocation ${'tallBlock' if c.tpl_lang == 'pl' else ''}">
-  <div class="inner">
+<%self:rounded_block id="user_location" class_="portletSetLocation">
+<div class="inner">
   <h2 class="portletTitle bold">${_('Tell us where you are studying')}</h2>
   <form method="post" action="${url(controller='profile', action='update_location')}" id="update-location-form">
     ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=True, label_class="label")}

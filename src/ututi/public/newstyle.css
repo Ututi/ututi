@@ -1126,7 +1126,6 @@ p.qu{
     background-position: 10px 5px;
     padding-left: 75px;
 }
-
 .portletGroupFiles, .portletGroupFiles-single  {
     background-color: #fff;
     background-image: none;
@@ -1134,11 +1133,9 @@ p.qu{
     padding:0;
     margin-bottom:20px;
 }
-
 .portletGroupFiles-single  {
     margin-bottom: 5px;
 }
-
 .portletGroupMailingList .single-title {
     padding-left: 50px;
     background: transparent url("../img/icons/message-large.png") 15px center no-repeat;
@@ -1157,12 +1154,6 @@ p.qu{
 }
 .portletSetLocation input, .portletSetLocation-nobg input, .portletNewGroup input, .portletNewDalykas input, .portletGroupFiles input {
     width: 190px;
-}
-
-.tallBlock {
-    display: block;
-    position: static;
-    min-height: 8em;
 }
 
 .portletSetLocation-nobg {
