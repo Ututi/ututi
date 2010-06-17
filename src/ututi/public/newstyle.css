@@ -3153,10 +3153,6 @@ li.expanded li.action a{ font-weight:bold; color:#ACBF50 !important; }
 .loggedin-nav .profile-nav div{ right:0; }
 
 /* user welcome page */
-#update-location-form div.form-field {
-    float: left;
-}
-
 #update-location-form button {
     margin-top: 20px;
 }
