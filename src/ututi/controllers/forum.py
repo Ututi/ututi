@@ -52,7 +52,7 @@ def initialize_forum(group):
         meta.Session.commit()
 
 
-class NewCategoryForm(Schema):
+class CategoryForm(Schema):
 
     title = validators.UnicodeString(not_empty=True, strip=True)
     description = validators.UnicodeString(not_empty=True, strip=True)
@@ -178,6 +178,32 @@ class ForumController(GroupControllerBase):
     def categories(self, id):
         return render('forum/categories.mako')
 
+    def _edit_category_form(self):
+        return render('forum/edit_category.mako')
+
+    @category_action
+    @validate(CategoryForm, form='_edit_category_form')
+    @protect_view
+    def edit_category(self, id, category_id):
+        if hasattr(self, 'form_result'):
+            c.category.title = self.form_result['title']
+            c.category.description = self.form_result['description']
+            meta.Session.commit()
+            redirect(url(controller=c.controller, action='categories',
+                         id=c.group_id))
+        return htmlfill.render(self._edit_category_form(),
+                               defaults={'title': c.category.title,
+                                         'description': c.category.description.decode('utf8')})
+
+    @category_action
+    @protect_view
+    def delete_category(self, id, category_id):
+        # This will not work if there are any threads in the category.
+        meta.Session.delete(c.category)
+        meta.Session.commit()
+        redirect(url(controller=c.controller, action='categories',
+                     id=c.group_id))
+
     @category_action
     @protect_view
     def index(self, id, category_id):
@@ -232,7 +258,7 @@ class ForumController(GroupControllerBase):
         return htmlfill.render(self._new_category_form())
 
     @group_action
-    @validate(NewCategoryForm, form='_new_category_form')
+    @validate(CategoryForm, form='_new_category_form')
     @ActionProtector("admin", "moderator")
     def create_category(self, id):
         category = ForumCategory(self.form_result['title'],

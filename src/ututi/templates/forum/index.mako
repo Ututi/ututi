@@ -19,6 +19,9 @@
           <a href="${category.url()}" class="blark">${category.title}</a>
         </h2>
         <p class="grey verysmall">${category.description}</p>
+        %if c.user and c.security_context and h.check_crowds(['admin', 'moderator']):
+            ${h.link_to(_('Edit category'), url(controller=c.controller, action='edit_category', id=c.group_id, category_id=category.id))}
+        %endif
       </div>
       <div style="float: right">
         ${h.button_to(_('New topic'), url(controller=c.controller, action='new_thread', id=c.group_id, category_id=category.id))}

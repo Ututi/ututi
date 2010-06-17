@@ -71,6 +71,14 @@ def make_map(config):
                 controller='forum',
                 action='index')
 
+    map.connect('/group/{id}/forum/{category_id}/edit',
+                controller='forum',
+                action='edit_category')
+
+    map.connect('/group/{id}/forum/{category_id}/delete',
+                controller='forum',
+                action='delete_category')
+
     map.connect('/group/{id}/forum/{category_id}/new_thread',
                 controller='forum',
                 action='new_thread')
