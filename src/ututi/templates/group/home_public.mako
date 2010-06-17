@@ -1,10 +1,21 @@
 <%inherit file="/group/base.mako" />
 <%namespace file="/portlets/group.mako" import="*"/>
+<%namespace file="/portlets/sections.mako" import="*"/>
 <%namespace file="/group/members.mako" import="group_members"/>
 <%namespace file="/forum/index.mako" import="forum_thread_list"/>
 
+<%namespace file="/portlets/banners/base.mako" import="*"/>
+<%namespace file="/portlets/user.mako" import="*"/>
+
 <%def name="title()">
   ${c.group.title}
+</%def>
+
+<%def name="portlets()">
+  ${group_info_portlet()}
+  <br />
+  ${ututi_prizes_portlet()}
+  ${user_support_portlet()}
 </%def>
 
 <div class="group_description">
