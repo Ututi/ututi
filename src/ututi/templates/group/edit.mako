@@ -1,5 +1,5 @@
 <%inherit file="/group/base.mako" />
-<%namespace name="newlocationtag" file="/widgets/newlocationtag.mako" import="*"/>
+<%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*"/>
 <%namespace file="/widgets/tags.mako" import="*"/>
 <%namespace file="/group/create_base.mako" import="*"/>
 

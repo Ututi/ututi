@@ -1,5 +1,5 @@
 <%inherit file="/group/create_base.mako" />
-<%namespace name="newlocationtag" file="/widgets/newlocationtag.mako" import="*"/>
+<%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*"/>
 <%namespace file="/group/add.mako" import="path_steps"/>
 
 <%def name="title()">

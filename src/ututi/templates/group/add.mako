@@ -1,5 +1,5 @@
 <%inherit file="/ubase-sidebar.mako" />
-<%namespace name="newlocationtag" file="/widgets/newlocationtag.mako" import="*"/>
+<%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*"/>
 
 <%def name="flash_messages()"></%def>
 
