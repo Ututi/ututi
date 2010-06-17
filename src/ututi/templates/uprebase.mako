@@ -26,7 +26,7 @@ ${_('student information online')}
 </div>
 <p class="a11y">${_('User menu')}</p>
 <div class="loggedin-nav" id="personal-data">
-	<ul>
+    <ul>
         <li><a href="#" id="feedback-link">${_('feedback')}</a></li>
     </ul>
 </div>
@@ -56,7 +56,7 @@ ${_('student information online')}
     <%
        cls = 'first' if index == 0 else 'second'
     %>
-	<li class="${cls}">
+    <li class="${cls}">
       <a href="${tag.url()}" ${h.trackEvent(None, '%s_breadcrumbs' % c.security_context.__class__.__name__, 'level%s' % index)} title="${tag.title}">
         ${tag.title_short}
       </a>
@@ -136,10 +136,10 @@ ${self.anonymous_menu()}
   <ul>
     <li><a href="${url(controller='profile', action='home')}">${_('Home')}</a></li>
     <li><a href="${url(controller='profile', action='browse')}">${_('Browse')}</a></li>
-	<li class="expandable group-nav">
-	  <span>${_('Groups')}</span>
-	  <div>
-		<ul>
+    <li class="expandable group-nav">
+      <span>${_('Groups')}</span>
+      <div>
+        <ul>
           %for mship in user.memberships:
             <li>
               <a href="${url(controller='group', action='index', id=mship.group.group_id)}"
@@ -149,28 +149,28 @@ ${self.anonymous_menu()}
             </li>
           %endfor
           <li class="action"><a href="${url(controller='group', action='group_type')}">${_('Create group')}</a></li>
-		</ul>
-	  </div>
-	</li>
+        </ul>
+      </div>
+    </li>
     <li><a href="${url(controller='community', action='index')}">${_('Community')}</a></li>
   </ul>
 </div>
 <p class="a11y">${_('User menu')}</p>
 <div class="loggedin-nav" id="personal-data">
-	<ul>
+    <ul>
         <li><a href="#" id="feedback-link">${_('feedback')}</a></li>
-##		<li><a href="#"><strong>inbox (3)</strong></a></li>
-		<li class="expandable profile-nav">
-			<span class="fullname">${user.fullname}</span>
-			<div>
-				<ul>
-					<li class="action"><a href="${url(controller='profile', action='edit')}">${_('Settings')}</a></li>
-					<li class="action"><a href="${url(controller='user', action='index', id=user.id)}">${_('Public profile')}</a></li>
-				</ul>
-			</div>
-		</li>
-		<li><a href="${url(controller='home', action='logout')}">${_('log out')}</a></li>
-	</ul>
+##      <li><a href="#"><strong>inbox (3)</strong></a></li>
+        <li class="expandable profile-nav">
+            <span class="fullname">${user.fullname}</span>
+            <div>
+                <ul>
+                    <li class="action"><a href="${url(controller='profile', action='edit')}">${_('Settings')}</a></li>
+                    <li class="action"><a href="${url(controller='user', action='index', id=user.id)}">${_('Public profile')}</a></li>
+                </ul>
+            </div>
+        </li>
+        <li><a href="${url(controller='home', action='logout')}">${_('log out')}</a></li>
+    </ul>
 </div>
 
 <script type="text/javascript">
