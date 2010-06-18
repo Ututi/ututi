@@ -25,63 +25,60 @@ And get to the group welcome page:
 
 In which we see a box suggesting us to invite more members:
 
-    >>> browser.printQuery("id('invite_more_members')")
-    <div id="invite_more_members" class="full_box">
-      <div class="wrapper">
-        <div class="inner">
-          <table>
-            <tr>
-              <td>
-                <h2>Invite group members!</h2>
-                <div class="description">
-                  It's easy - you just have to know their email addresses! You can
-                  use the group mailing list together then!
-                </div>
-              </td>
-              <td style="width: 170px; text-align: right;">
-                <form action="/group/test/members" class="button-to" method="post">
-                  <fieldset>
-                    <button class="btnLarge" type="submit" value="Invite friends">
-                      <span>Invite friends</span>
-                    </button>
-                  </fieldset>
-                </form>
-              </td>
-            </tr>
-          </table>
+    >>> browser.printQuery("id('invite_members_block')")
+    <div class="portlet portletSmall " id="invite_members_block">
+      <div class="ctl"></div>
+      <div class="ctr"></div>
+      <div class="cbl"></div>
+      <div class="cbr"></div>
+      <div class="floatleft usergrupeleft">
+        <h2 class="portletTitle bold">Invite group members!</h2>
+    <BLANKLINE>
+    It's easy - you just have to know their email addresses! You can
+    use the group mailing list together then!
+    <BLANKLINE>
         </div>
+      <div class="floatleft usergruperight">
+        <form action="/group/test/members" class="button-to" method="post">
+          <fieldset>
+            <button class="btnMedium" type="submit" value="Invite friends">
+              <span>Invite friends</span>
+            </button>
+          </fieldset>
+        </form>
       </div>
+      <br class="clear-left" />
     </div>
 
 Also we see a box that suggest us to watch some subjects:
 
-    >>> browser.printQuery("id('watch_more_subjects')")
-    <div id="watch_more_subjects" class="full_box">
-      <div class="wrapper">
-        <div class="inner">
-          <table>
-            <tr>
-              <td>
-                <h2>Watch subjects you are studying!</h2>
-                <div class="description">
-                  Find the subjects your group is studying and add them to the list
-                  of watched subjects.  Upload files for the subjects without any
-                  limitations!
-                </div>
-              </td>
-              <td style="width: 170px; text-align: right;">
-                <a class="btn-large" href="/group/test/subjects">
-                  <span>Watch subjects</span>
-                </a>
-                <br />
-                <span style="padding-right: 5px;">
-                  <a href="/group/test/home?do_not_watch=True" class="cancel_link">no, thank you</a>
-                </span>
-              </td>
-            </tr>
-          </table>
-        </div>
+    >>> browser.printQuery("id('watch_subjects_block')")
+    <div class="portlet portletSmall portletNewDalykas" id="watch_subjects_block">
+      <div class="ctl"></div>
+      <div class="ctr"></div>
+      <div class="cbl"></div>
+      <div class="cbr"></div>
+      <div class="floatleft usergrupeleft">
+        <h2 class="portletTitle bold">Watch subjects you are studying!</h2>
+        <ul id="prosList">
+          <li>Find materials shared by others</li>
+          <li>Get notifications about changes</li>
+        </ul>
       </div>
+      <div class="floatleft usergruperight">
+        <form action="/group/test/subjects" class="button-to" method="post">
+          <fieldset>
+            <button class="btn" type="submit" value="Watch subjects">
+              <span>Watch subjects</span>
+            </button>
+          </fieldset>
+        </form>
+        <br class="clear-left" />
+        <span style="float: left; padding-left: 2em;">
+          <a href="/group/test/home?do_not_watch=True" class="cancel_link">no, thank you</a>
+        </span>
+      </div>
+      <br class="clear-left" />
     </div>
 
 If we invite a member into the system, the member box should
@@ -96,10 +93,10 @@ disappear:
 When we go back to what's new, we only see the watch more subjects
 box:
 
-    >>> browser.printQuery("id('invite_more_members')")
+    >>> browser.printQuery("id('invite_members_block')")
 
-    >>> browser.printQuery("id('watch_more_subjects')")
-    <div id="watch_more_subjects" class="full_box">
+    >>> browser.printQuery("id('watch_subjects_block')")
+    <div class="portlet portletSmall portletNewDalykas" id="watch_subjects_block">
     ...
     </div>
 
@@ -118,7 +115,7 @@ Let's watch some subjects:
 
 And the subject watching box is gone:
 
-    >>> browser.printQuery("id('watch_more_subjects')")
+    >>> browser.printQuery("id('watch_subjects_block')")
 
 If we stop watching the subject though, the box reappears:
 
@@ -126,15 +123,15 @@ If we stop watching the subject though, the box reappears:
     >>> browser.getLink(url='unwatch_subject').click()
     >>> browser.getLink("What's New?", url='group').click()
 
-    >>> browser.printQuery("id('watch_more_subjects')")
-    <div id="watch_more_subjects" class="full_box">
+    >>> browser.printQuery("id('watch_subjects_block')")
+    <div class="portlet portletSmall portletNewDalykas" id="watch_subjects_block">
     ...
     </div>
 
 But we can just cancel it by clicking the 'no, thanks' link:
 
     >>> browser.getLink('no, thank you').click()
-    >>> browser.printQuery("id('watch_more_subjects')")
+    >>> browser.printQuery("id('watch_subjects_block')")
 
 And the box is no more.
 

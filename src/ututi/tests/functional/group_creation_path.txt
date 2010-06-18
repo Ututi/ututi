@@ -37,7 +37,7 @@ We should be hailed by the welcome screen:
 
 Let's add some watched subjects now:
 
-    >>> browser.getLink('Watch subjects').click()
+    >>> browser.getControl('Watch subjects').click()
 
 ## We can create a new subject without leaving the subject form:
 ##

@@ -41,7 +41,7 @@ use the group mailing list together then!
 %endif
 
 %if c.wants_to_watch_subjects:
-  <%self:rounded_block id="user_location" class_="portletNewDalykas">
+  <%self:rounded_block id="watch_subjects_block" class_="portletNewDalykas">
     <div class="floatleft usergrupeleft">
       <h2 class="portletTitle bold">${_('Watch subjects you are studying!')}</h2>
       <ul id="prosList">
@@ -50,27 +50,13 @@ use the group mailing list together then!
       </ul>
     </div>
     <div class="floatleft usergruperight">
-      <form action="${url(controller='profile', action='subjects')}" method="GET"
-            style="float: none">
-        <fieldset>
-          <legend class="a11y">${_('Watch subject')}</legend>
-          <label><button value="submit" class="btnMedium"><span>${_('watch subjects')}</span></button>
-          </label>
-        </fieldset>
-      </form>
-      <div class="right_cross"><a id="hide_suggest_watch_subject" href="">${_('no, thanks')}</a></div>
+       ${h.button_to(_('Watch subjects'), c.group.url(action='subjects'))}
+       <br class="clear-left" />
+       <span style="float: left; padding-left: 2em;">
+         <a href="${c.group.url(action='home', do_not_watch=True)}" class="cancel_link">${_('no, thank you')}</a>
+       </span>
     </div>
     <br class="clear-left" />
-    <script type="text/javascript">
-    //<![CDATA[
-      $('#hide_suggest_watch_subject').click(function() {
-          $(this).closest('.portlet').hide();
-          $.post('${url(controller='profile', action='js_hide_element')}',
-                 {type: 'hide_suggest_watch_subject'});
-          return false;
-      });
-    //]]>
-    </script>
   </%self:rounded_block>
 %endif
 
