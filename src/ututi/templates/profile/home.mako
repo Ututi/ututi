@@ -24,7 +24,8 @@ ${parent.head_tags()}
 <%self:rounded_block id="user_location" class_="portletSetLocation">
 <div class="inner">
   <h2 class="portletTitle bold">${_('Tell us where you are studying')}</h2>
-  <form method="post" action="${url(controller='profile', action='update_location')}" id="update-location-form">
+  <form method="post" action="${url(controller='profile', action='update_location')}" id="update-location-form"
+        style="float: none">
     ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=True, label_class="label")}
     ${h.input_submit(_('save'), id='user-location-submit')}
   </form>
@@ -141,7 +142,8 @@ ${parent.head_tags()}
     <p>${_("Use the group's mailing list!")}</p>
   </div>
   <div class="floatleft usergruperight">
-    <form action="${url(controller='group', action='group_type')}" method="GET">
+    <form action="${url(controller='group', action='group_type')}" method="GET"
+          style="float: none">
       <fieldset>
         <legend class="a11y">${_('Create group')}</legend>
         <label><button value="submit" class="btnMedium"><span>${_('create group')}</span></button>
@@ -214,7 +216,8 @@ ${subjects_block(c.user.watched_subjects)}
     </ul>
   </div>
   <div class="floatleft usergruperight">
-    <form action="${url(controller='profile', action='subjects')}" method="GET">
+    <form action="${url(controller='profile', action='subjects')}" method="GET"
+          style="float: none">
       <fieldset>
         <legend class="a11y">${_('Watch subject')}</legend>
         <label><button value="submit" class="btnMedium"><span>${_('watch subjects')}</span></button>

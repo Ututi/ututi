@@ -236,7 +236,6 @@ button.btn span {
 
 button.btnMedium {
     padding: 0 15px 0 0;
-    margin-right: 5px;
     font-size: 16px;
     text-align: center;
     background: transparent url("img/buttons_bg_split.png") no-repeat right -140px;
@@ -1497,7 +1496,7 @@ span.grupes-aprasymas {
     margin: 5px 0;
 }
 
-div.right_cross{
+div.right_cross {
     background: url('img/icons/cross_small.png') no-repeat center right;
     text-align: right;
     font-size:11px;
@@ -3172,12 +3171,6 @@ li.expanded li.action a{ font-weight:bold; color:#ACBF50 !important; }
 
 #update-location-form div.location-add-subform button {
     margin-top: 0.5em;
-}
-
-.portlet .right_cross {
-    position: absolute;
-    bottom: 0;
-    right: 5px;
 }
 
 /* action portlets */
