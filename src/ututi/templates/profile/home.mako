@@ -11,7 +11,7 @@ ${parent.head_tags()}
     <div class="wrapper">
       <div class="inner" style="height: 50px; font-weight: bold;">
         <br />
-        ${_('Your university information has been updated. Thank You.')}
+        ${_('Your university information has been updated. Thank you.')}
       </div>
     </div>
   </div>
