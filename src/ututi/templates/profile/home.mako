@@ -207,7 +207,7 @@ ${subjects_block(c.user.watched_subjects)}
 %elif not c.user.hide_suggest_watch_subject:
 <%self:rounded_block id="user_location" class_="portletNewDalykas">
   <div class="floatleft usergrupeleft">
-    <h2 class="portletTitle bold">${_('Tell us what you are studying')}</h2>
+    <h2 class="portletTitle bold">${_('Add studied subjects')}</h2>
     <ul id="prosList">
       <li>${_('Find materials shared by others')}</li>
       <li>${_('Get notifications about changes')}</li>
