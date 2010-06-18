@@ -136,7 +136,7 @@ ${parent.head_tags()}
 %elif not c.user.hide_suggest_create_group:
 <%self:rounded_block id="user_location" class_="portletNewGroup">
   <div class="floatleft usergrupeleft">
-    <h2 class="portletTitleBold">${_('Create a group')}</h2>
+    <h2 class="portletTitle bold">${_('Create a group')}</h2>
     <p>${_("It's simple - you only need to know the email addresses of your group mates!")}</p>
     <p>${_("Use the group's mailing list!")}</p>
   </div>
