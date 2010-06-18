@@ -446,7 +446,6 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     def register_welcome(self):
         return render('profile/home.mako')
 
-
     @validate(schema=SearchSubmit, form='test', post_only = False, on_get = True)
     @ActionProtector("user")
     def findgroup(self):
