@@ -612,17 +612,17 @@ create table events (
        primary key (id));;
 
 
-CREATE FUNCTION add_event(id int8, evtype varchar) RETURNS void AS $$
+CREATE FUNCTION add_event(event_id int8, evtype varchar) RETURNS void AS $$
     BEGIN
       INSERT INTO events (object_id, author_id, event_type)
-             VALUES (id, cast(current_setting('ututi.active_user') as int8), evtype);
+             VALUES (event_id, cast(current_setting('ututi.active_user') as int8), evtype);
     END
 $$ LANGUAGE plpgsql;;
 
-CREATE FUNCTION set_ci_modtime(id int8) RETURNS void AS $$
+CREATE FUNCTION set_ci_modtime(content_item_id int8) RETURNS void AS $$
     BEGIN
       UPDATE content_items SET modified_by = cast(current_setting('ututi.active_user') as int8),
-        modified_on = (now() at time zone 'UTC') WHERE id = id;
+        modified_on = (now() at time zone 'UTC') WHERE id = content_item_id;
     END
 $$ LANGUAGE plpgsql;;
 
