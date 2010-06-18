@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-06-18 14:12+0300\n"
+"PO-Revision-Date: 2010-06-18 16:39+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -1529,6 +1529,15 @@ msgstr "Zatwierdź"
 msgid "Back to category list"
 msgstr "Wróć do listy kategorii"
 
+msgid "Edit category"
+msgstr ""
+
+msgid "Delete category"
+msgstr ""
+
+msgid "Change"
+msgstr ""
+
 msgid "New topic"
 msgstr "Nowy temat"
 
@@ -1823,15 +1832,12 @@ msgstr "Zaproś kolegów z Twojej grupy!"
 
 msgid ""
 "\n"
-"              It's easy - you just have to know their email addresses! "
-"You can\n"
-"              use the group mailing list together then!\n"
-"              "
+"It's easy - you just have to know their email addresses! You can\n"
+"use the group mailing list together then!\n"
 msgstr ""
 "\n"
-"             To proste - musisz tylko znać ich e-maile!\n"
-"Ututi ułatwi Wam wzajemną komunikację nie tylko via e-mail. \n"
-"              "
+"To proste - musisz tylko znać ich e-maile!\n"
+"Ututi ułatwi Wam wzajemną komunikację nie tylko via e-mail.\n"
 
 msgid "Invite friends"
 msgstr "Zaproś przyjaciół"
@@ -1839,26 +1845,20 @@ msgstr "Zaproś przyjaciół"
 msgid "Watch subjects you are studying!"
 msgstr "Obserwuj przedmioty, których się uczysz!"
 
-msgid ""
-"\n"
-"              Find the subjects your group is studying and add them to "
-"the list\n"
-"              of watched subjects.  Upload files for the subjects without"
-" any\n"
-"              limitations!\n"
-"              "
-msgstr ""
-"\n"
-"             Bądź dobrze poinformowany o nowych plikach dodanych do "
-"Twoich przedmiotów.\n"
-"             Dziel się notatkami ze studiów bez żadnych ograniczeń. \n"
-"              "
+msgid "Find materials shared by others"
+msgstr "Znajdź materiały, które udostępniają inni"
 
-msgid "Watch subjects"
-msgstr "Dodaj przedmioty"
+msgid "Get notifications about changes"
+msgstr "Bądź poinformowany o zmianach"
 
-msgid "no, thank you"
-msgstr "nie chcę"
+msgid "Watch subject"
+msgstr "Obserwuj przedmiot"
+
+msgid "watch subjects"
+msgstr "obserwuj przedmioty"
+
+msgid "no, thanks"
+msgstr "nie, dzięki"
 
 msgid "Group members"
 msgstr "Członkowie grupy"
@@ -2343,6 +2343,9 @@ msgstr "Nie obserwujesz żadnego przedmiotu"
 msgid "More subjects"
 msgstr "Więcej przedmiotów"
 
+msgid "Watch subjects"
+msgstr "Dodaj przedmioty"
+
 msgid ""
 "Add watched subjects to your watched subjects' list and receive "
 "notifications about changes in these subjects"
@@ -2561,9 +2564,6 @@ msgstr "To proste - wystarczy, że znasz e-maile kolegów z grupy!"
 msgid "Use the group's mailing list!"
 msgstr "Skorzystaj z listy mailingowej grupy!"
 
-msgid "no, thanks"
-msgstr "nie, dzięki"
-
 msgid "Show subjects from my groups"
 msgstr "Pokaż przedmioty moich grup"
 
@@ -2572,21 +2572,6 @@ msgstr "ustawienia powiadomień"
 
 msgid "add subject"
 msgstr "dodaj przedmiot"
-
-msgid "Tell us what you are studying"
-msgstr "Powiedz, czego się uczysz"
-
-msgid "Find materials shared by others"
-msgstr "Znajdź materiały, które udostępniają inni"
-
-msgid "Get notifications about changes"
-msgstr "Bądź poinformowany o zmianach"
-
-msgid "Watch subject"
-msgstr "Obserwuj przedmiot"
-
-msgid "watch subjects"
-msgstr "obserwuj przedmioty"
 
 msgid "rating"
 msgstr "ranking"
@@ -2938,7 +2923,7 @@ msgstr "Dział"
 msgid "Add university"
 msgstr "Dodaj uczelnię"
 
-msgid "Add deparment"
+msgid "Add department"
 msgstr "Dodaj wydział"
 
 msgid "Add section"
@@ -2946,13 +2931,4 @@ msgstr "Dodaj kierunek"
 
 msgid "or"
 msgstr "lub"
-
-msgid "enter the name or add a new one"
-msgstr "wprowadź nazwę lub nadaj nową nazwę"
-
-msgid "enter the name"
-msgstr "podaj imię"
-
-msgid "Add department"
-msgstr "Dodaj wydział"
 

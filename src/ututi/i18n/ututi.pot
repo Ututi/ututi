@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-06-17 12:24+0300\n"
+"POT-Creation-Date: 2010-06-18 16:38+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1363,6 +1363,15 @@ msgstr ""
 msgid "Back to category list"
 msgstr ""
 
+msgid "Edit category"
+msgstr ""
+
+msgid "Delete category"
+msgstr ""
+
+msgid "Change"
+msgstr ""
+
 msgid "New topic"
 msgstr ""
 
@@ -1639,10 +1648,8 @@ msgstr ""
 
 msgid ""
 "\n"
-"              It's easy - you just have to know their email addresses! You "
-"can\n"
-"              use the group mailing list together then!\n"
-"              "
+"It's easy - you just have to know their email addresses! You can\n"
+"use the group mailing list together then!\n"
 msgstr ""
 
 msgid "Invite friends"
@@ -1651,20 +1658,19 @@ msgstr ""
 msgid "Watch subjects you are studying!"
 msgstr ""
 
-msgid ""
-"\n"
-"              Find the subjects your group is studying and add them to the "
-"list\n"
-"              of watched subjects.  Upload files for the subjects without any"
-"\n"
-"              limitations!\n"
-"              "
+msgid "Find materials shared by others"
 msgstr ""
 
-msgid "Watch subjects"
+msgid "Get notifications about changes"
 msgstr ""
 
-msgid "no, thank you"
+msgid "Watch subject"
+msgstr ""
+
+msgid "watch subjects"
+msgstr ""
+
+msgid "no, thanks"
 msgstr ""
 
 msgid "Group members"
@@ -2121,6 +2127,9 @@ msgstr ""
 msgid "More subjects"
 msgstr ""
 
+msgid "Watch subjects"
+msgstr ""
+
 msgid ""
 "Add watched subjects to your watched subjects' list and receive notifications"
 " about changes in these subjects"
@@ -2285,7 +2294,7 @@ msgstr ""
 msgid "Create your group!"
 msgstr ""
 
-msgid "Your university information has been updated. Thank You."
+msgid "Your university information has been updated. Thank you."
 msgstr ""
 
 msgid "Go to my department"
@@ -2321,9 +2330,6 @@ msgstr ""
 msgid "Use the group's mailing list!"
 msgstr ""
 
-msgid "no, thanks"
-msgstr ""
-
 msgid "Show subjects from my groups"
 msgstr ""
 
@@ -2331,21 +2337,6 @@ msgid "notification settings"
 msgstr ""
 
 msgid "add subject"
-msgstr ""
-
-msgid "Tell us what you are studying"
-msgstr ""
-
-msgid "Find materials shared by others"
-msgstr ""
-
-msgid "Get notifications about changes"
-msgstr ""
-
-msgid "Watch subject"
-msgstr ""
-
-msgid "watch subjects"
 msgstr ""
 
 msgid "rating"
@@ -2675,21 +2666,12 @@ msgstr ""
 msgid "Add university"
 msgstr ""
 
-msgid "Add deparment"
+msgid "Add department"
 msgstr ""
 
 msgid "Add section"
 msgstr ""
 
 msgid "or"
-msgstr ""
-
-msgid "enter the name or add a new one"
-msgstr ""
-
-msgid "enter the name"
-msgstr ""
-
-msgid "Add department"
 msgstr ""
 
