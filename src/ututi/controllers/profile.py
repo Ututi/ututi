@@ -444,7 +444,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
 
     @ActionProtector("user")
     def register_welcome(self):
-        return  render('profile/home.mako')
+        return render('profile/home.mako')
 
 
     @validate(schema=SearchSubmit, form='test', post_only = False, on_get = True)
