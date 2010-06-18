@@ -608,6 +608,10 @@ ul#links-messages  {
            *zoom: 1; /* IE7 */
 }
 
+#mainContent {
+    margin-top: 0;
+}
+
 #CreatePublicGroupLeft {
     width: 480px;
     border-right: 1px solid #e9e6e6;
@@ -946,6 +950,10 @@ div.profileOptionLinks div.drop{
 
 #group-logo-button {
     margin-top: 1.5em;
+}
+
+#invite_members_block div.usergrupeleft {
+    padding-right: 60px;
 }
 
 /* Footer */
@@ -2074,7 +2082,6 @@ div.filtrai .portlet{
 }
 
 div.filtrai .portlet-verysmall {
-
     padding-top:0;
 }
 

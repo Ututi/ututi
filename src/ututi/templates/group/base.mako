@@ -12,7 +12,7 @@
 
 <%def name="group_menu(show_title=True)">
 %if show_title:
-  <h1 class="pageTitle">
+  <h1 class="pageTitle" style="margin-top: 0">
     ${self.title()}
     %if not c.group.is_member(c.user):
       <div style="float: right;">
