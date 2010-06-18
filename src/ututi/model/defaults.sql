@@ -359,7 +359,7 @@ CREATE FUNCTION update_group_worker(groups) RETURNS void AS $$
         grp ALIAS FOR $1;
     BEGIN
       EXECUTE set_ci_modtime(grp.id);
-      SELECT content_item_id INTO search_id  FROM search_items WHERE content_item_id = grp.id;
+      SELECT content_item_id INTO search_id FROM search_items WHERE content_item_id = grp.id;
       IF FOUND THEN
         UPDATE search_items SET terms = to_tsvector(coalesce(grp.title,''))
           || to_tsvector(coalesce(grp.description, ''))
