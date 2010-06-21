@@ -114,7 +114,7 @@ $(document).ready(function(){
   %>
   %for n, subject in enumerate(subjects):
   <div class="GroupFilesContent-line-dal">
-	<ul class="grupes-links-list-dalykai">
+    <ul class="grupes-links-list-dalykai">
       %if not unwatch and subject in c.user.ignored_subjects:
         <% cls = 'disabled' %>
       %elif not unwatch:
@@ -123,8 +123,8 @@ $(document).ready(function(){
         <% cls = '' %>
       %endif
       <li class="${cls}">
-		<dl>
-		  <dt>
+        <dl>
+          <dt>
             <span>
               <a class="subject_title blark" href="${subject.url()}">${subject.title}</a>
             </span>
@@ -149,9 +149,9 @@ $(document).ready(function(){
             </a>
             %endif
           </dt>
-		</dl>
-	  </li>
-	</ul>
+        </dl>
+      </li>
+    </ul>
     <br class="clear-left" />
   </div>
   %endfor
