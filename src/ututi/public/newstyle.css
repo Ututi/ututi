@@ -464,6 +464,7 @@ ul#links-messages  {
 #SearchResults .grupes-links-list-dalykai li,
 #subject_settings .grupes-links-list-dalykai li {
     background: url('img/icons/dalykas-very-small.png') no-repeat left;
+    background-position: 0 5px;
     list-style-type: none;
     padding-left: 18px;
     border-right: none;
@@ -1146,6 +1147,17 @@ p.qu{
     padding-left: 50px;
     background: #f6f6f6 url("../img/icons/message-large.png") 15px center no-repeat;
 }
+.portletGroupMailingList .no-messages {
+    font-size: small;
+    padding-left: 12px;
+    padding-top: 10px;
+    padding-bottom: 8px;
+}
+
+#new_message_form .btn {
+    margin-top: 3px;
+}
+
 .portletSetLocation .label , .portletSetLocation-nobg .label, .portletNewGroup .label, .portletNewDalykas .label, .portletGroupFiles .label {
     display: inline-block;
     margin-right: 10px;
@@ -1187,7 +1199,7 @@ div.GroupFilesGroups{
     background: url('img/icons/grupe-big-off.png') no-repeat 15px 5px #f6f6f6;
 }
 div.GroupFilesDalykai{
-    background: url('img/icons/dalykas-off-big.png') no-repeat 15px 5px #f6f6f6;
+    background: url('img/icons/dalykas-off-big.png') no-repeat 10px 5px #f6f6f6;
 }
 div.GroupFilesWiki{
     background: url('img/icons/exams-off.png') no-repeat 15px 5px #f6f6f6;
@@ -1335,7 +1347,7 @@ div.GroupFilesContent{
     padding: 15px 15px 5px 15px;
 }
 div.GroupFilesContent-line, div.GroupFilesContent-line-last, div.GroupFilesContent-line-dal, div.GroupFilesContent-line-dal-last{
-    padding: 15px 15px 5px 15px;
+    padding: 10px 15px 5px 15px;
     border-bottom: 1px solid #ded8d8;
     position:relative;
 }
@@ -1361,6 +1373,7 @@ div.GroupFilesContent p.verysmall{
 
 div.single-title{
     border-bottom: 1px solid #ded8d8;
+    background: #f6f6f6;
     padding: 5px 0 5px 15px;
 }
 
@@ -1383,7 +1396,7 @@ div.kiti-failai-100 {
 }
 
 div.GroupFiles h2, div.GroupFiles-nobg h2{
-    padding: 9px 0 0 50px;
+    padding: 9px 0 0 45px;
 }
 
 div.GroupFiles-nobg h2{
@@ -1803,7 +1816,7 @@ li.remeju-list,
 #homePopularSubjects li, #SearchResults li, #UniversitiesRegion li {
     background: url('img/icons/subject_gray_18.png') no-repeat 3px top;
 }
-#homePopularSubjects dt, #SearchResults dt, #search-results dt, #UniversitiesRegion dt {
+#homePopularSubjects dt, #search-results dt, #UniversitiesRegion dt {
     font-size: 15px;
 }
 #UniversitiesRegion dt {
@@ -2149,7 +2162,7 @@ div.filtrai .portlet-verysmall {
     font-weight:bold;
 }
 h1 {
-  margin-top: 0.5em;
+  margin-top: 8px;
 }
 .clear{
     clear:both;
@@ -3034,8 +3047,8 @@ div.please-register {
 }
 
 .subject_description .snippet-subject {
-    padding: 5px 0 5px 50px;
-    background-position: 15px 5px;
+    padding: 10px 0 13px 30px;
+    background-position: 12px 12px;
     border-bottom: 1px solid #ded8d8;
 }
 
@@ -3510,6 +3523,10 @@ div.search-item {
     padding-left: 35px;
 }
 
+div.search-item dl.stats {
+    padding-top: 6px;
+}
+
 div.search-item { min-height:40px; }
 
 * html div.search-item { height:40px; }
@@ -3527,7 +3544,7 @@ div.snippet-file {
 }
 
 div.snippet-subject {
-    background: white url("../images/details/icon_type_subject.png") left 5px no-repeat;
+    background: white url("../img/icons/dalykas-very-small.png") left 5px no-repeat;
 }
 
 h3.search-results-title {
@@ -3691,8 +3708,8 @@ table#forum-thread td.author-logo {
 
 table#forum-thread td.author {
     padding-left: 1em;
-    border-top: 1px solid #ded8d8;
 }
+
 table#forum-thread td.author-logo {
     padding-left: 1em;
     border-bottom: 1px solid #ded8d8;
@@ -3732,6 +3749,10 @@ div#reply-section {
     margin-left: 2em;
 }
 
+div#reply-section h2 {
+    padding-bottom: 8px;
+}
+
 div#reply-section .labelText {
     display: None;
 }
@@ -3743,11 +3764,15 @@ div#reply-section .textField textarea {
     border: 1px solid #333;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 div#reply-section .textField .edgeTextArea {
     background: none;
+}
+
+div#reply-section button {
+    margin-bottom: 8px;
 }
 
 ul.post-attachments {

@@ -59,11 +59,9 @@
 <div id="reply-section">
   <a name="reply"></a>
   <h2>${_('Reply')}</h2>
-  <br />
   <form method="post" action="${url(controller='mailinglist', action='reply', thread_id=c.thread.id, id=c.group.group_id)}"
        id="group_add_form" class="fullForm" enctype="multipart/form-data">
     ${h.input_area('message', _('Message'))}
-    <br />
     ${h.input_submit(_('Reply'))}
   </form>
 </div>

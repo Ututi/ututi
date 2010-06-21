@@ -14,7 +14,9 @@
     </div>
 
     %if not c.messages:
-      <span class="small">${_('No messages yet.')}</span>
+    <div class="single-messages">
+      <div class="no-messages">${_('No messages yet.')}</div>
+    </div>
     %else:
     <div class="single-messages">
 
