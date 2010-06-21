@@ -136,6 +136,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
 
     def _edit_form(self):
         return render('subject/edit.mako')
+
     @subject_action
     @ActionProtector("user")
     def edit(self, subject):
@@ -176,7 +177,6 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
                     action='home',
                     id=subject.subject_id,
                     tags=subject.location_path))
-
 
     @subject_action
     @validate(schema=SubjectForm, form='_edit_form')
