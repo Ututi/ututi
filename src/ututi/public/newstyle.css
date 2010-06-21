@@ -625,6 +625,7 @@ ul#links-messages  {
     display: block;
     background: #f8f8f8 url('img/module_menu_bg.png') repeat-x bottom;
     height: 22px;
+    font-size: 12px;
     line-height: 22px;
     list-style: none;
     margin-top: 5px;
@@ -642,7 +643,7 @@ ul#links-messages  {
 }
 .moduleMenu li a {
     display: block;
-    padding-left: 8px;
+    padding-left: 15px;
     padding-right: 8px;
     position: relative;
               *height: 22px; /* IE7 */
@@ -1143,7 +1144,7 @@ p.qu{
 }
 .portletGroupMailingList .single-title {
     padding-left: 50px;
-    background: transparent url("../img/icons/message-large.png") 15px center no-repeat;
+    background: #f6f6f6 url("../img/icons/message-large.png") 15px center no-repeat;
 }
 .portletSetLocation .label , .portletSetLocation-nobg .label, .portletNewGroup .label, .portletNewDalykas .label, .portletGroupFiles .label {
     display: inline-block;
@@ -2520,6 +2521,12 @@ div.section div.controls label {
 
 div.folder_controls div {
     float: left;
+    margin-top: 3px;
+}
+
+div.folder_controls button {
+    margin-top: 2px;
+    margin-left: 3px;
 }
 
 div.section div.controls .new-folder-name {
@@ -2768,7 +2775,7 @@ div.single_upload {
 
 div.upload_dropdown .button,
 div.single_upload .button {
-    height: 19px;
+    height: 25px;
     background: transparent url("../images/file_dropdown.png") left center no-repeat;
     padding: 0;
     padding-left: 4px;
@@ -2777,16 +2784,10 @@ div.single_upload .button {
 
 div.upload_dropdown .button div.inner,
 div.single_upload .button div.inner {
-    height: 19px;
-    background: transparent url("../images/file_dropdown.png") right center no-repeat;
-    padding: 0;
-    padding-right: 20px;
+    height: 25px;
+    padding: 3px 20px 0 5px;
     margin: 0;
     cursor: pointer;
-}
-
-div.single_upload .button div.inner {
-    background: transparent url("../images/file_dropdown_single.png") right center no-repeat;
 }
 
 div.upload_dropdown .target_item {
