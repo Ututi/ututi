@@ -25,7 +25,7 @@
 % endif
 
 %if h.check_crowds(['root']):
-  <div>
+  <div style="clear: left; padding-top: 1em;">
     ${h.button_to(_('Log in as %(user)s') % dict(user=c.user_info.fullname), url=c.user_info.url(action='login_as'))}
   </div>
   <div style="clear: left; padding-top: 1em;">
