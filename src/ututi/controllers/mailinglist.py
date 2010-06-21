@@ -157,8 +157,6 @@ class MailinglistController(GroupControllerBase):
     @group_action
     @protect_view
     def index(self, group):
-        if check_crowds(['member', 'admin']):
-            c.breadcrumbs.append(self._breadcrumb('mailinglist'))
         c.messages = self._top_level_messages(group)
         c.breadcrumbs.append(self._breadcrumb('mailinglist'))
         return render('mailinglist/index.mako')
