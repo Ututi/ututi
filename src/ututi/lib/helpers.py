@@ -119,14 +119,9 @@ def button_to(title, url='', **html_options):
         html_options["type"] = "submit"
         html_options["value"] = title
 
-    if c.new_design:
-        #html_options.pop("value")
-        html_options.setdefault('class_', "btn")
-        return HTML.form(method=form_method, action=url, class_="button-to",
-                         c=[HTML.fieldset(c=[method_tag, HTML.button(c=[HTML.span(title)], **html_options)])])
-    else:
-        return HTML.form(method=form_method, action=url, class_="button-to",
-                         c=[HTML.div(method_tag, HTML.span(HTML.input(**html_options), class_="btn"))])
+    html_options.setdefault('class_', "btn")
+    return HTML.form(method=form_method, action=url, class_="button-to",
+                     c=[HTML.fieldset(c=[method_tag, HTML.button(c=[HTML.span(title)], **html_options)])])
 
 
 def support_button(name, amount, **html_options):
@@ -280,23 +275,13 @@ def input_line(name, title, value='', explanation=None, **kwargs):
 
     from pylons import tmpl_context as c
     kwargs.setdefault('id', name)
-    if c.new_design:
-        return HTML.div(c=[HTML.label(for_=name, c=[
-            HTML.span(class_='labelText', c=[title]),
-            HTML.span(class_='textField', c=[
-                HTML.input(type='text', value=value, name_=name, **kwargs),
-                HTML.span(class_='edge')
-                ])]),
-            HTML.literal('<form:error name="%s" />' % name)])
-    else:
-        return HTML.div(class_='form-field', c=[
-                HTML.label(for_=name, c=[title]),
-                HTML.literal('<form:error name="%s" />' % name),
-                HTML.div(class_='input-line', c=[
-                        HTML.div(c=[
-                                HTML.input(type='text', name_=name, value=value, **kwargs)])]),
-                expl
-                ])
+    return HTML.div(c=[HTML.label(for_=name, c=[
+        HTML.span(class_='labelText', c=[title]),
+        HTML.span(class_='textField', c=[
+            HTML.input(type='text', value=value, name_=name, **kwargs),
+            HTML.span(class_='edge')
+            ])]),
+        HTML.literal('<form:error name="%s" />' % name)])
 
 
 def input_psw(name, title, value='', explanation=None, **kwargs):
@@ -305,23 +290,13 @@ def input_psw(name, title, value='', explanation=None, **kwargs):
         expl = HTML.div(class_='explanation', c=explanation)
     from pylons import tmpl_context as c
     kwargs.setdefault('id', name)
-    if c.new_design:
-        return HTML.div(c=[HTML.label(for_=name, c=[
-            HTML.span(class_='labelText', c=[title]),
-            HTML.span(class_='textField', c=[
-                HTML.input(type='password', name_=name, value='', **kwargs),
-                HTML.span(class_='edge')
-                ])]),
-            HTML.literal('<form:error name="%s" />' % name)])
-    else:
-        return HTML.div(class_='form-field', c=[
-                HTML.label(for_=name, c=[title]),
-                HTML.literal('<form:error name="%s" />' % name),
-                HTML.div(class_='input-line', c=[
-                        HTML.div(c=[
-                                HTML.input(type='password', class_='line', id=name, name_=name, value='')])]),
-                expl
-                ])
+    return HTML.div(c=[HTML.label(for_=name, c=[
+        HTML.span(class_='labelText', c=[title]),
+        HTML.span(class_='textField', c=[
+            HTML.input(type='password', name_=name, value='', **kwargs),
+            HTML.span(class_='edge')
+            ])]),
+        HTML.literal('<form:error name="%s" />' % name)])
 
 
 def input_area(name, title, value='', cols='50', rows='5', explanation=None):
@@ -330,22 +305,14 @@ def input_area(name, title, value='', cols='50', rows='5', explanation=None):
         expl = HTML.div(class_='explanation', c=explanation)
 
     from pylons import tmpl_context as c
-    if c.new_design:
-        return HTML.label(c=[
-            HTML.span(class_='labelText', c=[title]),
-            HTML.literal('<form:error name="%s" />' % name),
-            HTML.span(class_='textField', c=[
-                HTML.textarea(name_=name, id_=name, cols=cols, rows=rows, c=[value]),
-                HTML.span(class_='edgeTextArea'),
-                expl
-                ])])
-    else:
-        return HTML.div(class_='form-field', c=[
-                HTML.label(for_=name, c=[title]),
-                HTML.literal('<form:error name="%s" />' % name),
-                HTML.textarea(class_='line', name_=name, id_=name, cols=cols, rows=rows, c=[value]),
-                expl
-                ])
+    return HTML.label(c=[
+        HTML.span(class_='labelText', c=[title]),
+        HTML.literal('<form:error name="%s" />' % name),
+        HTML.span(class_='textField', c=[
+            HTML.textarea(name_=name, id_=name, cols=cols, rows=rows, c=[value]),
+            HTML.span(class_='edgeTextArea'),
+            expl
+            ])])
 
 
 def input_wysiwyg(name, title, value='', cols='80', rows='15'):
@@ -363,16 +330,9 @@ def input_submit(text=None, name=None, **kwargs):
     if name is not None:
         kwargs['name'] = name
     from pylons import tmpl_context as c
-    if c.new_design:
-        kwargs.setdefault('class_', "btn")
-        kwargs.setdefault('value', text)
-        return HTML.button(c=[HTML.span(text)], **kwargs)
-    else:
-        return HTML.div(class_='form-field', c=[
-                HTML.span(class_='btn', c=[
-                    HTML.input(type_='submit', value=text, **kwargs)
-                    ])
-                ])
+    kwargs.setdefault('class_', "btn")
+    kwargs.setdefault('value', text)
+    return HTML.button(c=[HTML.span(text)], **kwargs)
 
 
 def link_to(label, url='', max_length=None, **attrs):

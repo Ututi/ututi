@@ -169,7 +169,12 @@ ${parent.head_tags()}
 
 %if c.user.memberships:
 <div>
-  <p><span><input type="checkbox" name="show_group_subjects" id="show_group_subjects" value="true"></span><span> ${_('Show subjects from my groups')}</span></p>
+  <p>
+    <label>
+      <input type="checkbox" name="show_group_subjects" id="show_group_subjects" value="true">
+      ${_('Show subjects from my groups')}
+    </label>
+  </span></p>
   <script type="text/javascript">
   //<![CDATA[
     $('#show_group_subjects').click(function() {
