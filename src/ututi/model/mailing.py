@@ -73,7 +73,12 @@ class UtutiEmail(email.message.Message):
         return decode_and_join_header(self.getHeader("from"))
 
     def getSubject(self):
-        return decode_and_join_header(self.getHeader("subject"))
+        subj = self.getHeader("subject")
+        if subj:
+            return decode_and_join_header(subj)
+        else:
+            from pylons.i18n import _
+            return _('(no subject)')
 
 
 def setup_orm(engine):

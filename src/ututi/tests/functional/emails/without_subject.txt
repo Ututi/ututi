@@ -1,0 +1,14 @@
+Return-Path: <admin@ututi.lt>
+Date: Mon, 15 Jun 2009 17:05:31 +0300
+From: Admin <admin@ututi.lt>
+To: %(to)s%(reply_to)s
+Reply-To: admin@ututi.lt
+Message-ID: <%(message_id)s>
+MIME-Version: 1.0
+Content-Disposition: inline
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Content-Type: text/plain; charset=us-ascii
+
+Hi, I am just writing to tell you how wonderful this system is.
+
+Admin

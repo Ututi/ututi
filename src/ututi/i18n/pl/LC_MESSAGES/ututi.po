@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-06-18 16:39+0300\n"
+"PO-Revision-Date: 2010-06-21 16:27+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -671,6 +671,9 @@ msgstr ""
 #, python-format
 msgid "Group %(link_to_group)s stopped watching subject %(link_to_subject)s"
 msgstr "Grupa %(link_to_group)s już nie obserwuje przedmiotu %(link_to_subject)s"
+
+msgid "(no subject)"
+msgstr ""
 
 msgid ""
 "You do not have the rights to see this page, or perform this action. Go "
@@ -1851,14 +1854,11 @@ msgstr "Znajdź materiały, które udostępniają inni"
 msgid "Get notifications about changes"
 msgstr "Bądź poinformowany o zmianach"
 
-msgid "Watch subject"
-msgstr "Obserwuj przedmiot"
+msgid "Watch subjects"
+msgstr "Dodaj przedmioty"
 
-msgid "watch subjects"
-msgstr "obserwuj przedmioty"
-
-msgid "no, thanks"
-msgstr "nie, dzięki"
+msgid "no, thank you"
+msgstr ""
 
 msgid "Group members"
 msgstr "Członkowie grupy"
@@ -2343,9 +2343,6 @@ msgstr "Nie obserwujesz żadnego przedmiotu"
 msgid "More subjects"
 msgstr "Więcej przedmiotów"
 
-msgid "Watch subjects"
-msgstr "Dodaj przedmioty"
-
 msgid ""
 "Add watched subjects to your watched subjects' list and receive "
 "notifications about changes in these subjects"
@@ -2564,6 +2561,9 @@ msgstr "To proste - wystarczy, że znasz e-maile kolegów z grupy!"
 msgid "Use the group's mailing list!"
 msgstr "Skorzystaj z listy mailingowej grupy!"
 
+msgid "no, thanks"
+msgstr "nie, dzięki"
+
 msgid "Show subjects from my groups"
 msgstr "Pokaż przedmioty moich grup"
 
@@ -2572,6 +2572,12 @@ msgstr "ustawienia powiadomień"
 
 msgid "add subject"
 msgstr "dodaj przedmiot"
+
+msgid "Watch subject"
+msgstr "Obserwuj przedmiot"
+
+msgid "watch subjects"
+msgstr "obserwuj przedmioty"
 
 msgid "rating"
 msgstr "ranking"

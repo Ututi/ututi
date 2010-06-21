@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-06-18 16:39+0300\n"
+"PO-Revision-Date: 2010-06-21 16:27+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -632,6 +632,9 @@ msgstr ""
 
 #, python-format
 msgid "Group %(link_to_group)s stopped watching subject %(link_to_subject)s"
+msgstr ""
+
+msgid "(no subject)"
 msgstr ""
 
 msgid ""
@@ -1681,13 +1684,10 @@ msgstr ""
 msgid "Get notifications about changes"
 msgstr ""
 
-msgid "Watch subject"
+msgid "Watch subjects"
 msgstr ""
 
-msgid "watch subjects"
-msgstr ""
-
-msgid "no, thanks"
+msgid "no, thank you"
 msgstr ""
 
 msgid "Group members"
@@ -2145,9 +2145,6 @@ msgstr ""
 msgid "More subjects"
 msgstr ""
 
-msgid "Watch subjects"
-msgstr ""
-
 msgid ""
 "Add watched subjects to your watched subjects' list and receive "
 "notifications about changes in these subjects"
@@ -2353,6 +2350,9 @@ msgstr ""
 msgid "Use the group's mailing list!"
 msgstr ""
 
+msgid "no, thanks"
+msgstr ""
+
 msgid "Show subjects from my groups"
 msgstr ""
 
@@ -2360,6 +2360,12 @@ msgid "notification settings"
 msgstr ""
 
 msgid "add subject"
+msgstr ""
+
+msgid "Watch subject"
+msgstr ""
+
+msgid "watch subjects"
 msgstr ""
 
 msgid "rating"

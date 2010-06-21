@@ -197,4 +197,19 @@ If a message gets posted more than once, it is simply ignored:
     >>> mail_queue
     []
 
+Messages without subjects get a default subject:
+
+    >>> send_test_message("without_subject.txt",
+    ...                   "31232615140531.GA23780@my_pc",
+    ...                   'moderators@groups.ututi.lt')
+
+    >>> email = mail_queue.pop()
+
+    >>> from ututi.model.mailing import UtutiEmail
+    >>> import email as email_mod
+    >>> message = email_mod.message_from_string(email.message, UtutiEmail)
+    >>> message.getSubject()
+    u'(no subject)'
+
 # XXX users need primary emails or emails associated with specific groups
+

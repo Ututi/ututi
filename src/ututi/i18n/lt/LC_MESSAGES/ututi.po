@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-06-21 13:16+0300\n"
+"PO-Revision-Date: 2010-06-21 16:27+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -660,6 +660,9 @@ msgstr "%(link_to_subject)s pridėtas prie grupės %(link_to_group)s dalykų."
 #, python-format
 msgid "Group %(link_to_group)s stopped watching subject %(link_to_subject)s"
 msgstr " %(link_to_subject)s ištrintas iš grupės %(link_to_group)s dalykų sąrašo."
+
+msgid "(no subject)"
+msgstr "(be temos)"
 
 msgid ""
 "You do not have the rights to see this page, or perform this action. Go "
@@ -1850,14 +1853,11 @@ msgstr "Ieškok studijų medžiagos, kurią įkėlė kiti"
 msgid "Get notifications about changes"
 msgstr "Gauk priminimus, kai dalykas papildomas"
 
-msgid "Watch subject"
-msgstr "stebėti dalyką"
+msgid "Watch subjects"
+msgstr "Stebėti dalykus"
 
-msgid "watch subjects"
-msgstr "stebėti dalykus"
-
-msgid "no, thanks"
-msgstr "Ne, ačiū"
+msgid "no, thank you"
+msgstr ""
 
 msgid "Group members"
 msgstr "Grupės nariai"
@@ -2345,9 +2345,6 @@ msgstr "Rask dalykus, kuriuos studijuoji ir pridėk prie \"savo dalykų\" sąra�
 msgid "More subjects"
 msgstr "Daugiau dalykų"
 
-msgid "Watch subjects"
-msgstr "Stebėti dalykus"
-
 msgid ""
 "Add watched subjects to your watched subjects' list and receive "
 "notifications about changes in these subjects"
@@ -2562,6 +2559,9 @@ msgstr "Tai paprasta - tau tereikia žinoti jų el. pašto adresus!"
 msgid "Use the group's mailing list!"
 msgstr "Naudokis grupės el. pašto konferencija!"
 
+msgid "no, thanks"
+msgstr "Ne, ačiū"
+
 msgid "Show subjects from my groups"
 msgstr "Rodyti grupės dalykus"
 
@@ -2570,6 +2570,12 @@ msgstr "priminimų apie dalykus nustatymai"
 
 msgid "add subject"
 msgstr "pridėti dalyką"
+
+msgid "Watch subject"
+msgstr "stebėti dalyką"
+
+msgid "watch subjects"
+msgstr "stebėti dalykus"
 
 msgid "rating"
 msgstr "reitingas"
