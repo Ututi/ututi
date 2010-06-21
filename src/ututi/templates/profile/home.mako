@@ -180,6 +180,7 @@ ${parent.head_tags()}
     $('#show_group_subjects').click(function() {
         if ($(this).attr('checked')) {
             $('#subject_list').load("${url(controller='profile', action='js_all_subjects')}");
+            // TODO: show a progress indicator as this takes a while.
         } else {
             $('#subject_list').load("${url(controller='profile', action='js_my_subjects')}");
         }
