@@ -24,7 +24,7 @@ $(document).ready(function(){
   $('.remove_subject_button').click(unselectSubject);
 
   $('.ignore_subject_button').click(function (event) {
-    var url = $(event.target).closest("li").children(".ignore_url").val();
+    var url = $('input.ignore_url', $(event.target).closest("li")).val();
     $.ajax({type: "GET",
             url: url,
             success: function(msg){
@@ -34,7 +34,7 @@ $(document).ready(function(){
   });
 
   $('.unignore_subject_button').click(function (event) {
-    var url = $(event.target).closest("li").children(".unignore_url").val();
+    var url = $('input.unignore_url', $(event.target).closest("li")).val();
     $.ajax({type: "GET",
             url: url,
             success: function(msg){
