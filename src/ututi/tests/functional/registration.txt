@@ -55,14 +55,12 @@ An email, requesting the confirmation of the email address entered is sent:
 
     >>> browser.open(urls[0])
     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
-    Close
     Your email jonas@example.com has been confirmed, thanks.
 
 What if we clicked the link again?
 
      >>> browser.open(urls[0])
      >>> browser.printQuery("//div[@class='flash-message']/span/text()")
-     Close
      Could not confirm email: invalid confirmation key.
 
      >>> print browser.url
@@ -174,11 +172,8 @@ A newly registered user will not have his location set, so he will be shown a fo
     >>> form.getControl(name='location-0').value = 'Vilniaus universitetas'
     >>> form.getControl('save').click()
     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
-    Close
     Your university information has been updated.
-    Close
-    Your
-    (jonas_new@example.com) is not confirmed! Please confirm your email by clicking on the link sent to your address or
+    Your email (jonas_new@example.com) is not confirmed! Please confirm your email by clicking on the link sent to your address or
 
 After setting his location, he will not be shown the form again:
     >>> browser.printQuery("id('page-content')//h2/text()")

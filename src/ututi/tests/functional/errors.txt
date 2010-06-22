@@ -34,7 +34,9 @@ page itself:
     HTTPError: HTTP Error 404: Not Found
 
     >>> browser.printQuery("//div[@class='flash-message']/span")
-    <span class="close-link hide-parent">Close</span>
+    <span class="close-link hide-parent">
+      <img alt="Close" src="/img/icons/bigX_15x15.png" />
+    </span>
     <span>Document at http://localhost/admin/404 was not found, but maybe you are interested in something else?</span>
 
     >>> browser.printQuery("id('mainContent')/h1")

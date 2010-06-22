@@ -129,7 +129,6 @@ Let's accept this invitation.
 
     >>> browser2.getControl("Accept").click()
     >>> browser2.printQuery("//div[@class='flash-message']/span/text()")
-    Close
     Congratulations! You are now a member of the group 'Test group'
 
 
@@ -215,7 +214,6 @@ Let's try requesting to join the group:
     >>> browser3.open('http://localhost/group/test')
     >>> browser3.getControl('become a member').click()
     >>> browser3.printQuery("//div[@class='flash-message']/span/text()")
-    Close
     Your request to join the group has been forwarded to the group's administrators. Thanks!
 
 The group's administrator should receive an email:
@@ -288,11 +286,8 @@ Let's try to deny a user's request to join the group:
     >>> browser4.open('http://localhost/group/test')
     >>> browser4.getControl('become a member').click()
     >>> browser4.printQuery("//div[@class='flash-message']/span/text()")
-    Close
     Your request to join the group has been forwarded to the group's administrators. Thanks!
-    Close
-    Your
-    (user3@ututi.lt) is not confirmed! Please confirm your email by clicking on the link sent to your address or
+    Your email (user3@ututi.lt) is not confirmed! Please confirm your email by clicking on the link sent to your address or
 
     >>> print mail_queue.pop().message
     MIME-Version: 1.0

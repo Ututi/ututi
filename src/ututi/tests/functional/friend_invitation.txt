@@ -39,7 +39,6 @@ And after all this we are redirected back to where we came from.
 
 Plus, a status message is displayed:
    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
-   Close
    1 invitation sent.
 
 -----------------------------------
@@ -78,9 +77,7 @@ What if some of the emails were mistyped?
    <BLANKLINE>
 
    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
-   Close
    Invalid emails: abra, bram, /n
-   Close
    2 invitations sent.
 
    >>> mail_queue[:] = []

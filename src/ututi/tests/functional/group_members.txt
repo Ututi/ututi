@@ -24,9 +24,7 @@ Let's try and invite a new member to the group.
     >>> browser.getControl('Enter emails of the people you would like to invite to the group.').value = 'user@ututi.lt, loser@ututi.lt, user2@ututi.lt, foo'
     >>> browser.getControl('Invite').click()
     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
-    Close
     Users invited.
-    Close
     Invalid email addresses detected: foo
 
 The user should be listed in the invited users table.
@@ -71,7 +69,6 @@ Let's accept this invitation.
 
     >>> browser2.getControl("Accept").click()
     >>> browser2.printQuery("//div[@class='flash-message']/span/text()")
-    Close
     Congratulations! You are now a member of the group 'Moderatoriai'
 
     >>> browser2.getLink('Moderatoriai').click()
@@ -105,7 +102,6 @@ our status. Now let's set the role of the other guy:
     >>> form.getControl(name='role').value = ['administrator']
     >>> form.getControl('Update').click()
     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
-    Close
     The status of the user Alternative user was updated.
 
 Now let's see if the view for the user has changed.
@@ -140,5 +136,4 @@ If a user, who has been invited to join a group requests to join it, we consider
 
     >>> browser3.getControl('become a member').click()
     >>> browser3.printQuery("//div[@class='flash-message']/span/text()")
-    Close
     You are now a member of the group Moderatoriai!

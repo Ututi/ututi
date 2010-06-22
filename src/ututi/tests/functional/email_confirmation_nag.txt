@@ -5,9 +5,11 @@ Test nagging users to confirm their emails
 
    >>> browser = Browser.logIn('user3@ututi.lt', 'password')
    >>> browser.printQuery("//div[@class='flash-message']/span")
-   <span class="close-link hide-parent">Close</span>
+   <span class="close-link hide-parent">
+     <img alt="Close" src="/img/icons/bigX_15x15.png" />
+   </span>
    <span>
-       Your <strong>email</strong> (user3@ututi.lt) is not confirmed! Please confirm your email by clicking on the link sent to your address or
+       Your email (user3@ututi.lt) is not confirmed! Please confirm your email by clicking on the link sent to your address or
        <form method="post" action="/profile/confirm_emails" id="email_confirmation_request" class="inline-form">
        <div>
          <input type="hidden" name="came_from" value="http://localhost/home" />
@@ -20,11 +22,15 @@ Test nagging users to confirm their emails
 
    >>> browser.getControl('get another confirmation email').click()
    >>> browser.printQuery("//div[@class='flash-message']/span")
-   <span class="close-link hide-parent">Close</span>
+   <span class="close-link hide-parent">
+     <img alt="Close" src="/img/icons/bigX_15x15.png" />
+   </span>
    <span>Confirmation message sent. Please check your email.</span>
-   <span class="close-link hide-parent">Close</span>
+   <span class="close-link hide-parent">
+     <img alt="Close" src="/img/icons/bigX_15x15.png" />
+   </span>
    <span>
-       Your <strong>email</strong> (user3@ututi.lt) is not confirmed! Please confirm your email by clicking on the link sent to your address or
+       Your email (user3@ututi.lt) is not confirmed! Please confirm your email by clicking on the link sent to your address or
        <form method="post" action="/profile/confirm_emails" id="email_confirmation_request" class="inline-form">
        <div>
          <input type="hidden" name="came_from" value="http://localhost/home" />
@@ -51,7 +57,6 @@ Test nagging users to confirm their emails
    >>> browser.open(urls[0])
 
    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
-   Close
    Your email user3@ututi.lt has been confirmed, thanks.
 
    >>> browser.printQuery("id('email_unconfirmed')")
