@@ -13,7 +13,7 @@
          group = c.group
   %>
 
-  <%self:uportlet id="group_info_portlet" portlet_class="MyProfile">
+  <%self:uportlet id="group_info_portlet" portlet_class="MyProfile first">
 
     <%def name="header()">
       <a ${h.trackEvent(c.group, 'home', 'portlet_header')} href="${group.url()}" title="${group.title}">${_('Group information')}</a>
@@ -157,7 +157,7 @@
      if group is None:
          group = c.group
   %>
-  <%self:uportlet id="group_info_portlet" portlet_class="MyProfile">
+  <%self:uportlet id="group_info_portlet" portlet_class="MyProfile first">
 
     <%def name="header()">
       <a ${h.trackEvent(c.group, 'home', 'portlet_header')} href="${group.url(action='members')}" title="${_('''Group's members''')}">${_("Group's members")}</a>
