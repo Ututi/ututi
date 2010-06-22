@@ -112,7 +112,9 @@ And all the way up to the category list:
     >>> browser.getLink('Back to category list').click()
 
     >>> browser.printQuery('id("mainContent")//h2/a')
-    <a href="/group/moderators/forum/3" class="blark">General</a>
+    <a href="/group/moderators/forum/3" class="grey">General</a>
+    <a class="edit-category" href="/group/moderators/forum/3/edit">Edit category</a>
+
 
 
 Email subscriptions
