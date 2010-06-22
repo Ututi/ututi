@@ -27,9 +27,7 @@
     </div>
     <div class="clear"></div>
     </div>
-    <br />
-    <hr />
-    <div class="description small">
+    <div class="description small" style="padding-top: 5px">
       ${c.category.description}
     </div>
   </%self:uportlet>
@@ -52,9 +50,10 @@
     %else:
       <div class="notice">${_("There are no messages.")}</div>
     %endif
-    <br style="clear: both;" />
     <div class="footer">
-      <div class="grey verysmall">${new_post_subtitle}</div>
+      <div class="grey verysmall" style="padding-top: 7px; padding-bottom: 7px">
+        ${new_post_subtitle}
+      </div>
       ${h.button_to(new_post_title, url(controller=controller, action='new_thread'))}
     </div>
   </%self:uportlet>

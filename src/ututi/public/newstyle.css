@@ -796,7 +796,7 @@ div#grupes-links span.mess{
     height:30px;
 }
 div.MyProfile div.profile div.personal-data{
-    padding: 0 0 5px 5px;
+    padding: 0 0 20px 5px;
 }
 div.personal-data .right_arrow{
     padding: 0 0 0 20px;
@@ -3716,6 +3716,12 @@ div.search-item div.description {
 a.edit-category {
     font-weight: normal;
     font-size: 12px;
+}
+
+#group_latest_messages {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ded8d8;
+    width: 275px;
 }
 
 #group_latest_messages td.time {
