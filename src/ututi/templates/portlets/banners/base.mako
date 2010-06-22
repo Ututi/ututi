@@ -8,7 +8,7 @@
   <%self:portlet id="banners_portlet" portlet_class="border-less">
   <%def name="header()">
   </%def>
-  <h2 class="bunner-heading">${_('Friends of ututi')}</h2>
+  <h2 class="banner-heading">${_('Friends of ututi')}</h2>
   <div class="structured_info">
     ${content}
   </div>
@@ -22,10 +22,10 @@
 </%def>
 <div class="structured_info">
     <a class="facebook-link" href="${_('facebook_link')}" title="${_('Find us on Facebook')}">
-      <img src="${url('/images/bunners/facebook.jpeg')}" alt="facebook" />
+      <img src="${url('/images/banners/facebook.jpeg')}" alt="facebook" />
     </a>
     <a class="blog-link" href="${_('blog_link')}" title="${_('Read our blog')}">
-      <img src="${url('/images/bunners/ublog.jpeg')}" alt="U-blog" />
+      <img src="${url('/images/banners/ublog.jpeg')}" alt="U-blog" />
     </a>
 
 </div>
@@ -58,9 +58,9 @@
  <%def name="header()">
  </%def>
  <div class="structured_info">
-   <div class="bunner">
+   <div class="banner">
      <a href="http://barcamp.lt/2010/02/barcamp-atkeliauja-i-kauna/">
-       <img src="${url('/images/bunners/barcamp.png')}" alt="" />
+       <img src="${url('/images/banners/barcamp.png')}" alt="" />
      </a>
    </div>
  </div>
@@ -73,14 +73,14 @@
 <%def name="header()">
 </%def>
 <div class="structured_info">
-  <div class="bunner">
+  <div class="banner">
     %if c.tpl_lang == 'lt':
     <a href="http://blog.ututi.lt/2009/12/7/ne-kaledines-u-dovanos">
-      <img src="${url('/images/bunners/UTUTI_dovanos.png')}" alt="" />
+      <img src="${url('/images/banners/UTUTI_dovanos.png')}" alt="" />
     </a>
     %elif c.tpl_lang == 'pl':
     <a href="http://blog.ututi.pl/2010/1/20/najaktywniejsi-w-styczniu">
-      <img src="${url('/images/bunners/UTUTI_prezenty.png')}" alt="" />
+      <img src="${url('/images/banners/UTUTI_prezenty.png')}" alt="" />
     </a>
     %endif
   </div>
