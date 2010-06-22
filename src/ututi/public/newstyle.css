@@ -3567,7 +3567,12 @@ div.snippet-file {
 }
 
 div.snippet-subject {
+    background: white url("../images/details/icon_type_subject.png") left 5px no-repeat;
+}
+
+#subject_settings div.snippet-subject {
     background: white url("../img/icons/dalykas-very-small.png") left 5px no-repeat;
+    background-position: 12px 12px;
 }
 
 h3.search-results-title {

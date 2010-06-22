@@ -52,7 +52,7 @@ ${parent.head_tags()}
 
 <div id="SearchResults">
 %if c.user.memberships:
-<%self:rounded_block id="subject_description" class_='portletGroupFiles'>
+<%self:rounded_block class_='portletGroupFiles smallTopMargin'>
   <div class="GroupFiles GroupFilesGroups">
       <h2 class="portletTitle bold">${_('Groups')}</h2>
       <span class="group-but">
