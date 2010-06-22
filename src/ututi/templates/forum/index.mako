@@ -1,14 +1,14 @@
 <%inherit file="/forum/base.mako" />
 
 % if c.group_id is not None:
-  <a class="back-link" href="${url(controller=c.controller, action='categories', id=c.group_id)}">${_('Back to category list')}</a>
+  <div class="back-link">
+    <a class="back-link" href="${url(controller=c.controller, action='categories', id=c.group_id)}">${_('Back to category list')}</a>
+  </div>
 % endif
 
-<h1>${c.category.title}</h1>
+<%def name="forum_thread_list(category, n, class_='')">
 
-<%def name="forum_thread_list(category, n)">
-
-  <div class="portlet portletSmall portletGroupFiles">
+  <div class="portlet portletSmall portletGroupFiles ${class_}">
     <div class="ctl"></div>
     <div class="ctr"></div>
     <div class="cbl"></div>
@@ -16,14 +16,14 @@
     <div class="single-title">
       <div class="floatleft bigbutton2">
         <h2 class="portletTitle bold category-title">
-          <a href="${category.url()}" class="blark">${category.title}</a>
+          <a href="${category.url()}" class="grey">${category.title}</a>
+          %if c.user and c.security_context and h.check_crowds(['admin', 'moderator']):
+            ${h.link_to(_('Edit category'), url(controller=c.controller, action='edit_category', id=c.group_id, category_id=category.id), class_='edit-category')}
+          %endif
         </h2>
         <p class="grey verysmall">${category.description}</p>
-        %if c.user and c.security_context and h.check_crowds(['admin', 'moderator']):
-            ${h.link_to(_('Edit category'), url(controller=c.controller, action='edit_category', id=c.group_id, category_id=category.id))}
-        %endif
       </div>
-      <div style="float: right">
+      <div style="float: right; padding-top: 4px">
         ${h.button_to(_('New topic'), url(controller=c.controller, action='new_thread', id=c.group_id, category_id=category.id))}
       </div>
       <div class="clear"></div>
@@ -73,9 +73,9 @@
       </div>
     % endif
 
-      <div style="margin: 5px 0 0 10px;">
+    <div style="padding: 10px 0 6px 10px;">
 	% if c.user and messages:
-	${h.button_to(_('Mark all as read'), url(controller=c.controller, action='mark_category_as_read', id=c.group_id, category_id=category.id))}
+        ${h.button_to(_('Mark all as read'), url(controller=c.controller, action='mark_category_as_read', id=c.group_id, category_id=category.id))}
 	% elif not messages:
         ${_('There are no forum messages.')}
 	% endif
@@ -83,5 +83,5 @@
   </div>
 </%def>
 
-${forum_thread_list(c.category, n=10000)}
+${forum_thread_list(c.category, n=10000, class_='smallTopMargin')}
 <!-- TODO: pagination -->

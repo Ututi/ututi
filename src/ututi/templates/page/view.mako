@@ -4,9 +4,11 @@
    ${h.ellipsis(c.page.title,30)} - ${h.ellipsis(c.subject.title, 30)}
 </%def>
 
-<a class="back-link" href="${c.subject.url()}">${_('Go back to %(subject_title)s') % dict(subject_title=c.subject.title)}</a>
+<div class="back-link">
+  <a class="back-link" href="${c.subject.url()}">${_('Go back to %(subject_title)s') % dict(subject_title=c.subject.title)}</a>
+</div>
 
-<%self:rounded_block id="subject_description" class_='portletGroupFiles'>
+<%self:rounded_block class_='portletGroupFiles smallTopMargin'>
   <div class="GroupFiles GroupWiki" style="height: auto; position: auto; padding-bottom: 10px">
         <div class="floatright wiki3">
           ${h.button_to(_('edit'), c.page.url(action='edit'), method='GET')}

@@ -14,12 +14,11 @@
     </div>
 
     %if not c.messages:
-    <div class="single-messages">
-      <div class="no-messages">${_('No messages yet.')}</div>
-    </div>
+      <div class="single-messages">
+        <div class="no-messages">${_('No messages yet.')}</div>
+      </div>
     %else:
     <div class="single-messages">
-
       <%
          messages = c.messages
          message_count = len(messages)

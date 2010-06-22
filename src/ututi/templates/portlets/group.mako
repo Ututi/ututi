@@ -53,7 +53,9 @@
       ${_('Available space for private group files:')}
       ${h.image('/images/details/pbar%d.png' % group.free_size_points, alt=h.file_size(group.size), class_='area_size_points')|n}
       <span class="verysmall">${h.file_size(group.free_size)}</span>
-      ${h.button_to(_('Get more space'), group.url(action='pay'))}
+      <div style="margin-top: 4px; margin-bottom: 3px">
+        ${h.button_to(_('Get more space'), group.url(action='pay'))}
+      </div>
     </div>
     %endif
     <p class="grupes-aprasymas">
@@ -67,15 +69,15 @@
       </div>
       <div class="show" id="group_settings_block">
         %if group.is_subscribed(c.user):
-        <div style="display: inline-block;">
+        <div style="display: inline-block; padding-top: 8px">
           ${h.button_to(_("Do not get email"), group.url(action='unsubscribe'), class_='btn inactive')}
         </div>
         %else:
-        <div style="display: inline-block;">
+        <div style="display: inline-block; padding-top: 8px">
           ${h.button_to(_("Get email"), group.url(action='subscribe'), class_='btn')}
         </div>
         %endif
-        <div style="display: inline-block;">
+        <div style="display: inline-block; padding-top: 8px">
           ${h.button_to(_("Leave group"), group.url(action='leave'), class_='btn warning')}
         </div>
       </div>
@@ -83,7 +85,7 @@
     %endif
 
     %if group.is_admin(c.user):
-    <div class="floatright">
+      <div class="floatright" style="margin-top: 6px">
       <span class="right_arrow">
         <a href="${url(controller='group', action='edit', id=group.group_id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
       </span>

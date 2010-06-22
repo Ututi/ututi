@@ -5,7 +5,7 @@
 </div>
 
 
-<%self:rounded_block class_="portletGroupFiles portletMailingListThread">
+<%self:rounded_block class_="portletGroupFiles portletMailingListThread smallTopMargin">
 <div class="single-title">
   <div class="floatleft bigbutton2">
     <h2 class="portletTitle bold category-title">${c.thread.subject}</h2>

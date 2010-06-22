@@ -5,7 +5,9 @@
 
 <%def name="group_menu()">
   <h1 class="pageTitle">${self.title()}</h1>
-  ${h.link_to(_('Back to group page'), c.group.url())}
+  <div class="back-link">
+    <a class="back-link" href="${c.group.url()}">${_('Back to group page')}</a>
+  </div>
 </%def>
 
 <%def name="head_tags()">
