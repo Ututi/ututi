@@ -133,7 +133,9 @@
         </div>
         <div class="floatleft personal-data">
             <div><h2>${user.fullname}</h2></div>
-            <div><a href="mailto:${user.emails[0].email}">${user.emails[0].email}</a></div>
+            % if h.check_crowds(['root']):
+              <div><a href="mailto:${user.emails[0].email}">${user.emails[0].email}</a></div>
+            % endif
             <div class="medals" id="user-medals">
               %for medal in user.all_medals():
                 ${medal.img_tag()}
