@@ -61,7 +61,7 @@ ${parent.head_tags()}
     <div class="search-item empty_note${' hidden' if subjects else ''|n}" id="empty_subjects_msg">
       ${_('No watched subjects were found.')}
     </div>
-    <div class="search-item" style="padding-top: 15px;">
+    <div class="search-item" style="padding-top: 10px;">
       <form class="select_interval_form" action="${c.group.url(action='set_receive_email_each')}">
         ${h.input_submit(_('Confirm'))}
         <script type="text/javascript">

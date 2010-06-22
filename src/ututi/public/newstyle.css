@@ -3532,9 +3532,13 @@ div.search-item dl.stats {
     padding-top: 6px;
 }
 
-div.search-item { min-height:40px; }
+div.search-item {
+    min-height: 27px;
+}
 
-* html div.search-item { height:40px; }
+* html div.search-item {
+    height:40px;
+}
 
 div.snippet-page {
     background: white url("../images/details/icon_type_page.png") left 5px no-repeat;
