@@ -29,12 +29,18 @@
           </span>
         </p>
         %if subject.lecturer:
-		<p><span class="green verysmall">${_('Lecturer:')}</span><span class="orange verysmall">${subject.lecturer}</span></p>
+          <p>
+            <span class="verysmall grey bold">${_('Lecturer:')}</span>
+            <span class="orange verysmall">${subject.lecturer}</span>
+          </p>
         %endif
     </div>
     <div class="dalyko-info">
-        <p><span class="verysmall">${_('Subject rating:')} </span><span>${h.image('/images/details/stars%d.png' % subject.rating(), alt='', class_='subject_rating')|n}</span></p>
-        <p><span class="verysmall">${_('The subject is watched by:')}</span>
+      <p>
+        <span class="verysmall grey bold">${_('Subject rating:')} </span>
+        <span>${h.image('/images/details/stars%d.png' % subject.rating(), alt='', class_='subject_rating')|n}</span>
+      </p>
+      <p><span class="verysmall grey bold">${_('The subject is watched by:')}</span>
           <span class="verysmall">
             ${ungettext("<span class='orange'>%(count)s</span> user", "<span class='orange'>%(count)s</span> users", subject.user_count()) % dict(count = subject.user_count())|n},
             ${ungettext("<span class='orange'>%(count)s</span> group", "<span class='orange'>%(count)s</span> groups", subject.group_count()) % dict(count = subject.group_count())|n}
@@ -61,7 +67,7 @@
            text = _('Remove from my subjects')
 
     %>
-    <div>
+    <div style="padding-top: 5px; padding-bottom: 5px">
       ${h.button_to(text, subject.url(action='watch'), class_=cls, method='GET')}
     </div>
     <div class="right_arrow"><a href="${url(controller='subject', action='edit', id=subject.subject_id, tags=c.subject.location_path)}">${_('edit subject information')}</a></div>

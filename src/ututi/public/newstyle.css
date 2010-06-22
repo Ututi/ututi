@@ -821,7 +821,9 @@ div.MyProfile div.profile div.personal-data h2.group-name{
     color: #333;
     font-weight: normal;
 }
-h2.group-name{
+h2.group-name {
+    padding-top: 3px;
+    padding-bottom: 3px;
     font-size: 16px;
     color: #333;
     font-weight: normal;
