@@ -5,21 +5,20 @@
     >${_('Back to the topic list')}</a>
 </div>
 
-<h1>${c.thread.title}</h1>
+  <%self:rounded_block class_="portletGroupFiles portletGroupMailingList smallTopMargin">
+
+<div class="single-title">
+  <div style="float: right">
+    % if not c.subscribed:
+      ${h.button_to(_('Subscribe to emails'), url(controller=c.controller, action='subscribe', id=c.group_id, category_id=c.category_id, thread_id=c.thread.id))}
+    % else:
+      ${h.button_to(_('Unsubscribe from emails'), url(controller=c.controller, action='unsubscribe', id=c.group_id, category_id=c.category_id, thread_id=c.thread.id))}
+    % endif
+  </div>
+  <h2 class="portletTitle bold category-title" style="padding-bottom: 7px">${c.thread.title}</h2>
+</div>
 
 <table id="forum-thread">
-  <tr>
-    <td colspan="2" style="padding-top: 0">
-      <div style="float: right">
-        % if not c.subscribed:
-          ${h.button_to(_('Subscribe to emails'), url(controller=c.controller, action='subscribe', id=c.group_id, category_id=c.category_id, thread_id=c.thread.id))}
-        % else:
-          ${h.button_to(_('Unsubscribe from emails'), url(controller=c.controller, action='unsubscribe', id=c.group_id, category_id=c.category_id, thread_id=c.thread.id))}
-        % endif
-      </div>
-    </td>
-  </tr>
-
 % for forum_post in c.forum_posts:
   % if forum_post != c.forum_posts[0] and c.first_unseen and forum_post.id == c.first_unseen.id:
     <tr> <td colspan="2"><a name="unseen"></a><hr /><td>
@@ -28,9 +27,6 @@
   <tr>
     <td colspan="2" class="author">
       <a href="${forum_post.created.url()}">${forum_post.created.fullname}</a>
-      % for medal in forum_post.created.all_medals():
-          ${medal.img_tag()}
-      % endfor
       <span class="created-on">${h.fmt_dt(forum_post.created_on)}</span>
         % if c.can_manage_post(forum_post):
           <div style="float:right">
@@ -81,3 +77,5 @@
     </form>
   </div>
 % endif
+
+</%self:rounded_block>
