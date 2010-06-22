@@ -125,6 +125,7 @@ class ForumController(GroupControllerBase):
         c.breadcrumbs = []
         c.controller = self.controller_name
         c.can_post = self.can_post
+        c.group_menu_current_item = 'forum'
 
     def set_up_context(self, id=None, category_id=None, thread_id=None):
         if id is not None:

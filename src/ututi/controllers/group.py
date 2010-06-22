@@ -298,14 +298,6 @@ class GroupControllerBase(BaseController):
     def __before__(self):
         c.breadcrumbs = []
 
-    def _breadcrumb(self, selected):
-        c.group_menu_current_item = selected # XXX needs a better place
-        for action in group_menu_items():
-            if action['name'] == selected:
-                return action
-        else:
-            return group_menu_items()[0]
-
 
 class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     """Controller for group actions."""
@@ -318,6 +310,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             redirect(url(controller='group', action='home', id=group.group_id))
 
     def _set_home_variables(self, group):
+        c.group_menu_current_item = 'home'
         c.events = group.group_events
         c.has_to_invite_members = (len(group.members) == 1 and
                                    len(group.invitations) == 0)
@@ -379,6 +372,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @group_action
     @ActionProtector("admin", "member")
     def edit_page(self, group):
+        c.group_menu_current_item = 'page'
         defaults = {
             'page_content': c.group.page,
             'page_public': 'public' if c.group.page_public else '',
@@ -404,6 +398,8 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
         file_id = request.GET.get('serve_file')
         file = File.get(file_id)
         c.serve_file = file
+
+        c.group_menu_current_item = 'files'
 
         return render('group/files.mako')
 
@@ -603,6 +599,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @group_action
     @ActionProtector("member", "admin")
     def members(self, group):
+        c.group_menu_current_item = 'members'
         c.members = []
         for member in group.members:
             c.members.append({'roles': self._get_available_roles(member),
@@ -664,6 +661,8 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
             location = []
 
         defaults.update(location)
+
+        c.group_menu_current_item = 'home'
 
         return htmlfill.render(self._edit_form(), defaults=defaults)
 
@@ -852,12 +851,14 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @group_action
     @ActionProtector("member", "admin")
     def subjects_watch(self, group):
+        c.group_menu_current_item = 'subjects'
         c.list_open = request.GET.get('list', '') == 'open'
         return self._subjects(group)
 
     @group_action
     @ActionProtector("member", "admin")
     def subjects(self, group):
+        c.group_menu_current_item = 'subjects'
         return render('group/subjects_list.mako')
 
     def _subjects(self, group):
@@ -1126,6 +1127,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     @group_action
     @ActionProtector("member", "admin")
     def page(self, group):
+        c.group_menu_current_item = 'page'
         return render('group/page.mako')
 
     @group_action
@@ -1196,16 +1198,19 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
                     cancelurl=group.url(action='pay_cancel', qualified=True),
                     orderid='%s_%s_%s' % ('grouplimits', c.user.id, group.id)))
         c.payments = zip(payment_types, payment_amounts, payment_forms)
+        c.group_menu_current_item = 'home'
         return render_lang('group/pay.mako')
 
     @group_action
     @ActionProtector("member", "admin")
     def pay_accept(self, group):
+        c.group_menu_current_item = 'home'
         return render('group/pay_accept.mako')
 
     @group_action
     @ActionProtector("member", "admin")
     def pay_cancel(self, group):
+        c.group_menu_current_item = 'home'
         return render('group/pay_cancel.mako')
 
     @group_action

@@ -158,6 +158,7 @@ class MailinglistController(GroupControllerBase):
     @protect_view
     def index(self, group):
         c.messages = self._top_level_messages(group)
+        c.group_menu_current_item = 'mailinglist'
         return render('mailinglist/index.mako')
 
     @group_mailinglist_action
@@ -168,6 +169,7 @@ class MailinglistController(GroupControllerBase):
         c.serve_file = file
 
         c.thread = thread
+        c.group_menu_current_item = 'mailinglist'
         c.messages = thread.posts
         return render('mailinglist/thread.mako')
 
@@ -198,6 +200,7 @@ class MailinglistController(GroupControllerBase):
     @group_action
     @ActionProtector("member", "admin")
     def new_thread(self, group):
+        c.group_menu_current_item = 'mailinglist'
         return htmlfill.render(self._new_thread_form())
 
     def _recipients(self, group):
@@ -245,6 +248,7 @@ class MailinglistController(GroupControllerBase):
     @group_action
     @ActionProtector('user')
     def new_anonymous_post(self, group):
+        c.group_menu_current_item = 'mailinglist'
         return htmlfill.render(self._new_anonymous_post_form())
 
     def _new_anonymous_post_form(self):
