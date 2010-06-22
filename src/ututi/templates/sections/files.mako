@@ -1,3 +1,5 @@
+<%namespace name="uprebase" file="/uprebase.mako" />
+
 <%def name="head_tags()">
 ${h.javascript_link('/javascript/jquery-ui-1.7.2.custom.min.js')|n}
 
@@ -517,6 +519,9 @@ $(document).ready(function(){
 </%def>
 
 <%def name="file_browser(obj, section_id=0, collapsible=False, title=None, comment=None, controls=['upload', 'folder', 'title'])">
+
+<%uprebase:rounded_block class_='portletGroupFiles' id="subject_files">
+
   <div class="section click2show ${collapsible and '' or 'open'} ${('size' in controls) and 'size_indicated' or ''}" id="file_section-${section_id}">
     <%
        cls_head = cls_container = ''
@@ -524,35 +529,41 @@ $(document).ready(function(){
            cls_head = 'click'
            cls_container = 'show'
     %>
-    %if 'title' in controls:
-    <h2 class="${cls_head}">
-      <span class="cont">
+
+    ##%if 'title' in controls:
+    <div class="GroupFiles" style="border-bottom: 0">
+      <h2 class="portletTitle bold ${cls_head}" style="border-bottom: 0;">
         %if title is None:
         ${h.ellipsis(obj.title, 80)}
         %else:
         ${h.ellipsis(title, 80)}
         %endif
-        <span class="small">(${ungettext("%(count)s file", "%(count)s files", obj.file_count) % dict(count = obj.file_count)})</span>
-      </span>
-      %if 'size' in controls:
-        ${free_space_indicator(obj)}
-      %endif
-      %if 'unlimited' in controls:
-      <span class="unlimited_size">${_('unlimited')}</span>
-      %endif
-    </h2>
-    %endif
-    %if 'size' in controls:
-      ${free_space_text(obj)}
-    %endif
+        <span style="font-weight: normal; font-size: 12px">(${ungettext("%(count)s file", "%(count)s files", obj.file_count) % dict(count=obj.file_count)})</span>
+        <span class="cont"></span>
+        %if 'size' in controls:
+            <div style="float: right; margin-top: -10px; margin-right: 8px">
+          %if 'size' in controls:
+            ${free_space_indicator(obj)}
+            <br />
+            ${free_space_text(obj)}
+          %endif
+        </div>
+        %endif
+        %if 'unlimited' in controls:
+        <span class="unlimited_size">${_('unlimited')}</span>
+        %endif
+      </h2>
+    </div>
+    ##%endif
 
-    %if comment:
-      <span class="comment">
-        ${comment}
-      </span>
-    %endif
 
     <div class="container ${cls_container}">
+      %if comment:
+        <div class="comment" style="padding-top: 10px">
+          ${comment}
+        </div>
+      %endif
+
       %if 'size' in controls:
       <input type="hidden" id="file_size_url-${section_id}"
              value="${obj.url(action='file_info')}" />
@@ -661,4 +672,7 @@ $(document).ready(function(){
       </div>
     </div>
   </div>
+
+</%uprebase:rounded_block>
+
 </%def>

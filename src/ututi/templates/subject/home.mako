@@ -58,12 +58,7 @@ ${c.subject.title}
    %endif
 </%self:rounded_block>
 
-<%self:rounded_block class_='portletGroupFiles' id="subject_files">
-<div class="GroupFiles">
-  <h2 class="portletTitle bold">${_('Subject files')} (${c.subject.file_count})</h2>
-</div>
 <%files:file_browser obj="${c.subject}", title="${_('Subject files')}", controls="['upload', 'folder']" />
-</%self:rounded_block>
 
 <%self:rounded_block class_='portletGroupFiles' id="subject_pages">
 <div class="GroupFiles GroupFilesWiki">

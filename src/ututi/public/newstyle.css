@@ -2474,11 +2474,9 @@ div.live_search_group a.btn {
  **************************************************************************/
 /* files section */
 div.section h2 {
-    color: black;
+    color: #666666;
     padding-bottom: 0.1em;
-    border-bottom: 1px solid #ded8d8;
     font-size: 1.2em;
-    font-weight: normal;
     margin-top: 5px;
 }
 
@@ -2730,8 +2728,10 @@ a.back-link {
 }
 
 .section .container {
+    border-top: 1px solid #ded8d8;
     padding-left: 20px;
     margin-bottom: 15px;
+    padding-bottom: 5px;
 }
 
 .file_rename_input_decorator {
@@ -3241,6 +3241,7 @@ div.action-portlet .textField textarea {
 }
 
 #ututi_recommendation_form label,
+#subject_files .comment,
 #file_upload_portlet .comment {
     color: #666;
     font-size: 11px;
