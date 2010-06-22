@@ -99,7 +99,7 @@
       </div>
       <br class="clear-left" />
       <div class="click2show">
-		<div class="right_arrow click"><a href="">${_("supporters")}</a></div>
+        <div class="right_arrow click"><a href="">${_("supporters")}</a></div>
         <ul id="supporter_list" class="show">
           %for supporter in c.ututi_supporters:
             <li>${h.link_to(supporter.fullname, supporter.url())}</li>
@@ -123,33 +123,32 @@
     <%def name="header()">
       ${title}
     </%def>
-	<div class="profile">
-		<div class="floatleft avatar">
-
+    <div class="profile">
+        <div class="floatleft avatar">
             %if user.logo is not None:
               <img src="${url(controller='user', action='logo', id=user.id, width=70, height=70)}" alt="logo" />
             %else:
               ${h.image('/img/profile-avatar.png', alt='logo')|n}\
             %endif
-		</div>
-		<div class="floatleft personal-data">
-			<div><h2>${user.fullname}</h2></div>
-			<div><a href="mailto:${user.emails[0].email}">${user.emails[0].email}</a></div>
-			<div class="medals" id="user-medals">
+        </div>
+        <div class="floatleft personal-data">
+            <div><h2>${user.fullname}</h2></div>
+            <div><a href="mailto:${user.emails[0].email}">${user.emails[0].email}</a></div>
+            <div class="medals" id="user-medals">
               %for medal in user.all_medals():
                 ${medal.img_tag()}
               %endfor
             </div>
-			<div>${_('Files uploaded:')}<span class="orange"> ${len(user.files())}</span></div>
-		</div>
-		<div class="clear"></div>
-	</div>
+            <div>${_('Files uploaded:')}<span class="orange"> ${len(user.files())}</span></div>
+        </div>
+        <div class="clear"></div>
+    </div>
 ##    <div class="profile">Šią savaitę dar gali atsisiųsti:<img src="img/icons/indicator.png" alt="" class="indicator"><span class="verysmall">75Mb</span>
 ##      <p class="img-button">
 ##        <form action="">
 ##          <fieldset>
-##    	    <legend class="a11y">pridėti</legend>
-##    	    <label><span><button value="submit" class="btn"><span>padidinti atsiuntimų kiekį</span></button></span></label>
+##          <legend class="a11y">pridėti</legend>
+##          <label><span><button value="submit" class="btn"><span>padidinti atsiuntimų kiekį</span></button></span></label>
 ##          </fieldset>
 ##        </form>
 ##      </p>
@@ -157,13 +156,13 @@
 ##    <div class="profile"><p>Nori daugiau?</p>
 ##      <div class="isplesk-button floatleft"><a href="">išplėsk profilį</a></div>
 ##      <p class="qu"><a href=""><img src="img/icons/question_sign.png" alt="" class="img-question-button"></a></p>
-##	</div>
+##  </div>
     %if user.site_url:
     <p class="user-link">
       <a href="${user.site_url}">${user.site_url}</a>
     </p>
     %endif
-	<div class="right_arrow"><a href="${url(controller='profile', action='edit')}">${_('Edit your profile')}</a></div>
+    <div class="right_arrow"><a href="${url(controller='profile', action='edit')}">${_('Edit your profile')}</a></div>
 
   </%self:uportlet>
 </%def>
