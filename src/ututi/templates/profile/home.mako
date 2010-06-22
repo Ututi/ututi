@@ -54,11 +54,13 @@ ${parent.head_tags()}
 %if c.user.memberships:
 <%self:rounded_block class_='portletGroupFiles smallTopMargin'>
   <div class="GroupFiles GroupFilesGroups">
+    <div class="single-title">
       <h2 class="portletTitle bold">${_('Groups')}</h2>
-      <span class="group-but">
-        ${h.button_to(_('create group'), url(controller='group', action='group_type'))}
-      </span>
     </div>
+    <span class="group-but">
+      ${h.button_to(_('create group'), url(controller='group', action='group_type'))}
+    </span>
+  </div>
     <%
        count = len(c.user.memberships)
     %>
@@ -196,7 +198,7 @@ ${subjects_block(c.user.watched_subjects)}
 </div>
 <%def name="subjects_block(subjects)">
 %if subjects:
-<%self:rounded_block id="subject_description" class_='portletGroupFiles'>
+<%self:rounded_block class_='portletGroupFiles'>
   <div class="GroupFiles GroupFilesDalykai">
     <h2 class="portletTitle bold">
       ${_('Subjects')}

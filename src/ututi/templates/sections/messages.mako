@@ -5,9 +5,11 @@
 %>
 %if c.user and not c.user.isConfirmed:
 <div class="flash-message">
-  <span class="close-link hide-parent">${_('Close')}</span>
+  <span class="close-link hide-parent">
+    ${h.image('/img/icons/bigX_15x15.png', alt=_('Close'))}
+  </span>
   <span>
-    ${_('Your <strong>email</strong> (%(email)s) is not confirmed! '
+    ${_('Your email (%(email)s) is not confirmed! '
     'Please confirm your email by clicking on the link sent '
     'to your address or ') % dict(email=c.user.emails[0].email) |n}
     <form method="post" action="${url(controller='profile', action='confirm_emails')}" id="email_confirmation_request" class="inline-form">
@@ -23,7 +25,9 @@
 
 %if c.user and c.gg_enabled and c.user.gadugadu_uin is not None and not c.user.gadugadu_confirmed:
 <div class="flash-message">
-  <span class="close-link hide-parent">${_('Close')}</span>
+  <span class="close-link hide-parent">
+    ${h.image('/img/icons/bigX_15x15.png', alt=_('Close'))}
+  </span>
   <span>
     ${_('Your <strong>gadu gadu number</strong> is not confirmed! Please confirm it by entering the code sent to you.')|n}
   </span>
