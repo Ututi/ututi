@@ -123,7 +123,7 @@
     <%def name="header()">
       ${title}
     </%def>
-    <div class="profile">
+    <div class="profile ${'bottomLine' if user.description or user.site_url else ''}">
         <div class="floatleft avatar">
             %if user.logo is not None:
               <img src="${url(controller='user', action='logo', id=user.id, width=70, height=70)}" alt="logo" />
@@ -159,12 +159,12 @@
 ##      <div class="isplesk-button floatleft"><a href="">išplėsk profilį</a></div>
 ##      <p class="qu"><a href=""><img src="img/icons/question_sign.png" alt="" class="img-question-button"></a></p>
 ##  </div>
+    <div class="about-self">${user.description}</div>
     %if user.site_url:
     <p class="user-link">
       <a href="${user.site_url}">${user.site_url}</a>
     </p>
     %endif
-    <div class="right_arrow"><a href="${url(controller='profile', action='edit')}">${_('Edit your profile')}</a></div>
 
   </%self:uportlet>
 </%def>

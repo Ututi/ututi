@@ -777,8 +777,10 @@ div.right_arrow2{
 }
 
 div.MyProfile div.profile{
-    border-bottom: 1px solid #ded8d8;
     padding:5px 0;
+}
+div.MyProfile div.bottomLine {
+    border-bottom: 1px solid #ded8d8;
 }
 div.MyProfile div.profile div.avatar{
     width:70px;
@@ -796,7 +798,10 @@ div#grupes-links span.mess{
     height:30px;
 }
 div.MyProfile div.profile div.personal-data{
-    padding: 0 0 20px 5px;
+    padding: 0 0 5px 5px;
+}
+div.MyProfile div.about-self {
+    padding-top: 5px;
 }
 div.personal-data .right_arrow{
     padding: 0 0 0 20px;
