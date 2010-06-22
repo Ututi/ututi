@@ -89,7 +89,7 @@
       % endfor
     </ul>
     %endif
-    <div class="footer">
+    <div class="footer" style="margin-top: 10px">
       ${h.link_to(_('All groups'), location.url(obj_type='group'), class_="right_arrow floatright")}
       ${h.button_to(_('Create group'), url(controller='group', action='add'))}
     </div>
