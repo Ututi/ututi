@@ -169,10 +169,6 @@ class ForumController(GroupControllerBase):
         else:
             c.thread = None
 
-        if c.group is not None and self.can_post(c.user):
-            # Only show tabs for members / people who can post.
-            c.breadcrumbs.append(self._breadcrumb('forum'))
-
     @group_action
     @protect_view
     def categories(self, id):
