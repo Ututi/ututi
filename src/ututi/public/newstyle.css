@@ -1197,7 +1197,7 @@ p.qu{
 }
 div.GroupFiles, div.GroupFiles-nobg, div.GroupFilesGroups, div.GroupFilesDalykai, div.GroupFilesCont, div.GroupFilesWiki, div.GroupWiki {
     border-bottom: 1px solid #ded8d8;
-    background: url('img/icons/file-off-big.png') no-repeat 15px 5px #f6f6f6;
+    background: url('img/icons/file-off-big.png') no-repeat 10px 5px #f6f6f6;
     height:40px;
     position:relative;
 }
@@ -1208,13 +1208,12 @@ div.GroupFilesDalykai{
     background: url('img/icons/dalykas-off-big.png') no-repeat 10px 5px #f6f6f6;
 }
 div.GroupFilesWiki{
-    background: url('img/icons/exams-off.png') no-repeat 15px 5px #f6f6f6;
+    background: url('img/icons/exams-off.png') no-repeat 10px 5px #f6f6f6;
     height:40px;
 }
 
 div.GroupWiki{
-    background: url('img/icons/exams-off.png') no-repeat 15px 5px #f6f6f6;
-    height:50px;
+    background: url('img/icons/exams-off.png') no-repeat 13px 7px #f6f6f6;
 }
 
 div.wiki2 {

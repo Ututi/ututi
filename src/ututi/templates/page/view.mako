@@ -7,26 +7,32 @@
 <a class="back-link" href="${c.subject.url()}">${_('Go back to %(subject_title)s') % dict(subject_title=c.subject.title)}</a>
 
 <%self:rounded_block id="subject_description" class_='portletGroupFiles'>
-    <div class="GroupFiles GroupWiki">
-        <div class="floatleft wiki2">
-            <h2 class="portletTitle bold">${c.page.title}</h2>
-            %if c.page.last_version:
-              <p><span class="grey verysmall">${_('Last edit: ')}
-              <a class="orange verysmall" href="${c.page.last_version.created.url()}">${c.page.last_version.created.fullname}</a>
-              <span class="grey verysmall">${h.fmt_dt(c.page.last_version.created_on)}</span>
-            %endif
-        </div>
-        <div class="floatleft wiki3">
+  <div class="GroupFiles GroupWiki" style="height: auto; position: auto; padding-bottom: 10px">
+        <div class="floatright wiki3">
           ${h.button_to(_('edit'), c.page.url(action='edit'), method='GET')}
-          %if h.check_crowds(['user']):
+        </div>
+        %if h.check_crowds(['user']):
+          <div class="floatright wiki3">
             ${h.button_to(_('history'), c.page.url(action='history'), method='GET')}
+          </div>
+        %endif
+        %if h.check_crowds(['moderator']):
+          %if not c.page.isDeleted():
+          <div class="floatright wiki3">
+            ${h.button_to(_('delete'), c.page.url(action='delete'))}
+          </div>
+          %else:
+          <div class="floatright wiki3">
+            ${h.button_to(_('undelete'), c.page.url(action='undelete'))}
+          </div>
           %endif
-          %if h.check_crowds(['moderator']):
-            %if not c.page.isDeleted():
-              ${h.button_to(_('delete'), c.page.url(action='delete'))}
-            %else:
-              ${h.button_to(_('undelete'), c.page.url(action='undelete'))}
-            %endif
+        %endif
+        <div class="wiki2">
+          <h2 class="portletTitle bold" style="padding-top: 3px; padding-left: 50px">${c.page.title}</h2>
+          %if c.page.last_version:
+            <p><span class="grey verysmall">${_('Last edit: ')}
+            <a class="orange verysmall" href="${c.page.last_version.created.url()}">${c.page.last_version.created.fullname}</a>
+            <span class="grey verysmall">${h.fmt_dt(c.page.last_version.created_on)}</span>
           %endif
         </div>
     </div>
