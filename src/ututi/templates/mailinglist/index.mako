@@ -54,7 +54,3 @@
     </div>
     %endif
  </%self:rounded_block>
-
-
-
-
