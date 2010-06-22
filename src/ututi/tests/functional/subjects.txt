@@ -18,10 +18,8 @@ The link of the subject leads to its home page.
     >>> browser.url
     'http://localhost/subject/vu/mat_analize'
     >>> browser.printQuery("id('mainContent')//h2/text()")
-    Subject files (0)
+    Subject files
     Subject's Wiki Pages (0)
-
-
 
 From there we can edit the subject.
 
