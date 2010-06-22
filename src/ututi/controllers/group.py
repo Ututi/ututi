@@ -616,7 +616,7 @@ class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
     def _edit_form(self):
         c.current_year = date.today().year
         c.years = range(c.current_year - 10, c.current_year + 5)
-        forum_link = ('mailinglist', _('Mailing List')
+        forum_link = (('mailinglist', _('Mailing List'))
                       if c.group.mailinglist_enabled
                       else ('forum', _('Forum')))
         files_link = ('files', _('Files')) if c.group.has_file_area else None
