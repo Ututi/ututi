@@ -41,18 +41,18 @@ ${c.subject.title}
  //-->
 </script>
 <script type="text/javascript"
-	src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
 %endif
 
 <%self:rounded_block id="subject_description">
-   %if c.subject.description:
    <div class="content">
-	 ${h.html_cleanup(c.subject.description)|n,decode.utf8}
+       %if c.subject.description:
+         ${h.html_cleanup(c.subject.description)}
+       %else:
+         ${_("The subject's description is empty.")}
+       %endif
    </div>
-   %else:
-	 ${_("The subject's description is empty.")}
-   %endif
    %if c.user:
    <div class="right_arrow1"><a href="${c.subject.url(action='edit')}"> ${_('Edit')}</a></div>
    %endif
@@ -75,7 +75,7 @@ ${c.subject.title}
 </div>
 % if c.subject.pages:
   % for n, page in enumerate(c.subject.pages):
-	% if not page.isDeleted() or h.check_crowds(['moderator']):
+    % if not page.isDeleted() or h.check_crowds(['moderator']):
      <%
         class_ = 'wiki-tekstas' if n < count - 1 else 'wiki-tekstas-last'
      %>
@@ -88,7 +88,7 @@ ${c.subject.title}
          ${h.ellipsis(page.last_version.plain_text, 250)}
        </p>
      </div>
-	% endif
+    % endif
   % endfor
 % else:
   <br />
