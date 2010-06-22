@@ -7,7 +7,7 @@
          subject = c.subject
   %>
 
-  <%self:uportlet id="subject_info_portlet">
+  <%self:uportlet id="subject_info_portlet" portlet_class="first">
     <%def name="header()">
       ${_('Subject information')}
     </%def>
