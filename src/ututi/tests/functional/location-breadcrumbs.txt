@@ -19,4 +19,3 @@ The group:
     >>> browser.open('http://localhost/group/moderators')
     >>> browser.printQuery('id("BreadLinks")//li/a/text()')
     vu
-    Moderatoriai
