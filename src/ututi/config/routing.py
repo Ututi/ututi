@@ -43,7 +43,7 @@ def make_map(config):
     map.connect('/error/{action}/{id}', controller='error')
 
     # static terms and about pages
-    map.connect('/banners', controller='home', action='banners')
+    map.connect('/bunners', controller='home', action='banners')
     map.connect('/terms', controller='home', action='terms')
     map.connect('/about', controller='home', action='about')
     map.connect('/advertising', controller='home', action='advertising')
