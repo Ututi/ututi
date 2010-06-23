@@ -30,8 +30,7 @@ from ututi.lib import gg
 
 from ututi.model.events import Event
 from ututi.model import get_supporters
-from ututi.model import Subject
-from ututi.model import LocationTag, BlogEntry
+from ututi.model import Subject, LocationTag, BlogEntry, PrivateMessage
 from ututi.model import meta, Email, Group, SearchItem
 from ututi.controllers.group import _filter_watched_subjects, FileUploadTypeValidator
 from ututi.controllers.search import SearchSubmit, SearchBaseController
@@ -589,6 +588,44 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     @ActionProtector("user")
     def support(self):
         return render('/profile/support.mako')
+
+    @ActionProtector("user")
+    def messages(self):
+        c.messages = meta.Session.query(PrivateMessage
+                ).filter_by(thread_id=None
+                ).filter(or_(PrivateMessage.recipient==c.user,
+                             PrivateMessage.sender==c.user),
+                ).order_by(PrivateMessage.id.desc()
+                ).all()
+        return render('/profile/messages.mako')
+
+    @ActionProtector("user")
+    def message(self, id):
+        c.message = PrivateMessage.get(id)
+        c.thread = c.message.thread()
+        for msg in c.thread:
+            if msg.recipient.id == c.user.id:
+                msg.is_read = True
+        meta.Session.commit()
+        return render('/profile/message.mako')
+
+    @ActionProtector("user")
+    def message_reply(self, id):
+        original = PrivateMessage.get(id)
+        recipient = original.sender if original.recipient.id == c.user.id else original.recipient
+        msg = PrivateMessage(c.user, recipient, original.subject,
+                             request.params.get('message'),
+                             thread_id=original.id)
+        meta.Session.add(msg)
+        meta.Session.commit()
+        redirect(url(controller='profile', action='message', id=id))
+
+    @ActionProtector("user")
+    def mark_messages_as_read(self):
+        for msg in meta.Session.query(PrivateMessage).filter_by(recipient=c.user).all():
+            msg.is_read = True
+        meta.Session.commit()
+        redirect(url(controller='profile', action='messages'))
 
     @ActionProtector("user")
     @validate(schema=LocationForm, form='home')

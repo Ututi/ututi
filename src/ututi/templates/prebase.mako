@@ -1,7 +1,7 @@
 <%namespace file="/sections/messages.mako" import="*"/>
 
 <%def name="title()">
-${_('student information online')}
+${_('Student information online')}
 </%def>
 
 <%def name="head_tags()">
@@ -154,8 +154,16 @@ ${self.anonymous_menu()}
 <p class="a11y">${_('User menu')}</p>
 <div class="loggedin-nav" id="personal-data">
     <ul>
-        <li><a href="#" id="feedback-link">${_('feedback')}</a></li>
-##      <li><a href="#"><strong>inbox (3)</strong></a></li>
+        <li>
+          <a id="inbox-link" href="${url(controller='profile', action='messages')}">
+          <% unread_messages = c.user.unread_messages() %>
+          %if unread_messages:
+            <strong>${_('Inbox')} (${unread_messages})</strong>
+          %else:
+            ${_('Inbox')}
+          %endif
+          </a>
+        </li>
         <li class="expandable profile-nav">
             <span class="fullname">${user.fullname}</span>
             <div>
@@ -273,7 +281,9 @@ ${self.anonymous_menu()}
       <ul>
         <li><a ${nofollow} href="${url(controller='home', action='about')}">${_('About ututi')}</a></li>
         <li><a ${nofollow} href="${_('ututi_blog_url')}">${_('U-blog')}</a></li>
-        <li><a ${nofollow} href="${url(controller='home', action='terms')}">${_('Terms of use')}</a></li></ul>
+        <li><a ${nofollow} href="${url(controller='home', action='terms')}">${_('Terms of use')}</a></li>
+        <li><a href="#" id="feedback-link">${_('Feedback')}</a></li>
+      </ul>
     </div>
     %if c.lang in ['lt', 'en']:
     ${h.javascript_link('/javascript/uservoice.js')|n}

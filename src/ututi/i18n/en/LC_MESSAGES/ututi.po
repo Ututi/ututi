@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-06-23 11:39+0300\n"
+"PO-Revision-Date: 2010-06-23 15:58+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -65,6 +65,12 @@ msgid "Community"
 msgstr ""
 
 msgid "Bugs"
+msgstr ""
+
+msgid "ututi-community"
+msgstr ""
+
+msgid "ututi-bugs"
 msgstr ""
 
 msgid "Post updated."
@@ -412,6 +418,9 @@ msgid "You have no right to delete this folder."
 msgstr ""
 
 msgid "New page"
+msgstr ""
+
+msgid "Message sent."
 msgstr ""
 
 msgid "Confirm the email for Ututi"
@@ -808,6 +817,102 @@ msgid ""
 "groupmates."
 msgstr ""
 
+msgid "Student information online"
+msgstr ""
+
+msgid "Main menu"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "Browse"
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "User menu"
+msgstr ""
+
+msgid "feedback"
+msgstr ""
+
+msgid "ututi_blog_url"
+msgstr ""
+
+msgid "„Ututi“ blog"
+msgstr ""
+
+msgid "ututi_twitter_url"
+msgstr ""
+
+msgid "„Ututi“ on twitter"
+msgstr ""
+
+msgid "ututi_facebook_url"
+msgstr ""
+
+msgid "„Ututi“ on Facebook"
+msgstr ""
+
+msgid "Join!"
+msgstr ""
+
+msgid "Login"
+msgstr ""
+
+msgid "remember me"
+msgstr ""
+
+msgid "forgotten password?"
+msgstr ""
+
+msgid "Search text"
+msgstr ""
+
+msgid "search_"
+msgstr ""
+
+msgid "Groups"
+msgstr ""
+
+msgid "Inbox"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Public profile"
+msgstr ""
+
+msgid "log out"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "UTUTI"
+msgstr ""
+
+msgid "ututi_link"
+msgstr ""
+
+msgid "UAB „UTUTI“"
+msgstr ""
+
+msgid "About ututi"
+msgstr ""
+
+msgid "U-blog"
+msgstr ""
+
+msgid "Terms of use"
+msgstr ""
+
+msgid "Feedback"
+msgstr ""
+
 msgid "Statistics"
 msgstr ""
 
@@ -946,96 +1051,6 @@ msgstr ""
 msgid ""
 "From here You can also easily create a subject, upload a file, invite "
 "people to use Ututi."
-msgstr ""
-
-msgid "student information online"
-msgstr ""
-
-msgid "Main menu"
-msgstr ""
-
-msgid "Home"
-msgstr ""
-
-msgid "Browse"
-msgstr ""
-
-msgid "About"
-msgstr ""
-
-msgid "User menu"
-msgstr ""
-
-msgid "feedback"
-msgstr ""
-
-msgid "ututi_blog_url"
-msgstr ""
-
-msgid "„Ututi“ blog"
-msgstr ""
-
-msgid "ututi_twitter_url"
-msgstr ""
-
-msgid "„Ututi“ on twitter"
-msgstr ""
-
-msgid "ututi_facebook_url"
-msgstr ""
-
-msgid "„Ututi“ on Facebook"
-msgstr ""
-
-msgid "Join!"
-msgstr ""
-
-msgid "Login"
-msgstr ""
-
-msgid "remember me"
-msgstr ""
-
-msgid "forgotten password?"
-msgstr ""
-
-msgid "Search text"
-msgstr ""
-
-msgid "search_"
-msgstr ""
-
-msgid "Groups"
-msgstr ""
-
-msgid "Settings"
-msgstr ""
-
-msgid "Public profile"
-msgstr ""
-
-msgid "log out"
-msgstr ""
-
-msgid "Close"
-msgstr ""
-
-msgid "UTUTI"
-msgstr ""
-
-msgid "ututi_link"
-msgstr ""
-
-msgid "UAB „UTUTI“"
-msgstr ""
-
-msgid "About ututi"
-msgstr ""
-
-msgid "U-blog"
-msgstr ""
-
-msgid "Terms of use"
 msgstr ""
 
 msgid "Adminstration dashboard"
@@ -2374,6 +2389,21 @@ msgstr ""
 msgid "Wiki pages:"
 msgstr ""
 
+msgid "Back to message list"
+msgstr ""
+
+msgid "New message"
+msgstr ""
+
+#, python-format
+msgid "%(count)s message"
+msgid_plural "%(count)s messages"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "No messages."
+msgstr ""
+
 msgid "Very sad..."
 msgstr ""
 
@@ -2650,6 +2680,9 @@ msgid "What has %(user)s been up to?"
 msgstr ""
 
 msgid "Nothing yet."
+msgstr ""
+
+msgid "Send message"
 msgstr ""
 
 #, python-format
