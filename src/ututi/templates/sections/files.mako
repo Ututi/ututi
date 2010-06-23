@@ -1,4 +1,4 @@
-<%namespace name="uprebase" file="/uprebase.mako" />
+<%namespace name="prebase" file="/prebase.mako" />
 
 <%def name="head_tags()">
 ${h.javascript_link('/javascript/jquery-ui-1.7.2.custom.min.js')|n}
@@ -520,7 +520,7 @@ $(document).ready(function(){
 
 <%def name="file_browser(obj, section_id=0, collapsible=False, title=None, comment=None, controls=['upload', 'folder', 'title'])">
 
-<%uprebase:rounded_block class_='portletGroupFiles' id="subject_files">
+<%prebase:rounded_block class_='portletGroupFiles' id="subject_files">
 
   <div class="section click2show ${collapsible and '' or 'open'} ${('size' in controls) and 'size_indicated' or ''}" id="file_section-${section_id}">
     <%
@@ -673,6 +673,6 @@ $(document).ready(function(){
     </div>
   </div>
 
-</%uprebase:rounded_block>
+</%prebase:rounded_block>
 
 </%def>

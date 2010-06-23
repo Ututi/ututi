@@ -1,4 +1,4 @@
-<%inherit file="/uprebase.mako" />
+<%inherit file="/prebase.mako" />
 
 <%def name="portlets()">
 </%def>
