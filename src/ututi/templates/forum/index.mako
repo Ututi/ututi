@@ -83,5 +83,5 @@
   </div>
 </%def>
 
-${forum_thread_list(c.category, n=10000, class_='smallTopMargin')}
+${forum_thread_list(c.category, n=10000, class_=('smallTopMargin' if c.group_id else 'mediumTopMargin'))}
 <!-- TODO: pagination -->

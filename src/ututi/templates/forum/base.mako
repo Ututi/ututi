@@ -8,7 +8,7 @@
 </%def>
 
 <%def name="portlets()">
-  <div id="sidebar">
+  <div id="sidebar" class="forum-sidebar">
     % if c.category is not None:
       ${forum_info_portlet()}
       <!-- forum crosslink -->

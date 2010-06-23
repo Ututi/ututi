@@ -685,9 +685,13 @@ ul#links-messages  {
 #aside .module-top{
     background: url('img/module-top-bg-grey.png') no-repeat center 3px;
     height: 28px;
-    margin:auto 0;
+    margin: auto 0;
     margin-top: 8px;
 }
+#aside .forum-sidebar .module-top {
+    margin-top: 0px;
+}
+
 #aside .first {
     margin-top: 0;
 }
@@ -3177,6 +3181,10 @@ h2.overline {
 
 .smallTopMargin {
     margin-top: 8px;
+}
+
+.mediumTopMargin {
+    margin-top: 11px;
 }
 
 .largerTopMargin {
