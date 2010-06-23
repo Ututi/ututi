@@ -602,6 +602,8 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     @ActionProtector("user")
     def message(self, id):
         c.message = PrivateMessage.get(id)
+        if not (c.user == c.message.sender or c.user == c.message.recipient):
+            abort(404)
         c.thread = c.message.thread()
         for msg in c.thread:
             if msg.recipient.id == c.user.id:
@@ -612,6 +614,8 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     @ActionProtector("user")
     def message_reply(self, id):
         original = PrivateMessage.get(id)
+        if not (c.user == original.sender or c.user == original.recipient):
+            abort(404)
         recipient = original.sender if original.recipient.id == c.user.id else original.recipient
         msg = PrivateMessage(c.user, recipient, original.subject,
                              request.params.get('message'),
