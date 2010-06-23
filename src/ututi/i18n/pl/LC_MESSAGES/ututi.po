@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-06-23 11:39+0300\n"
+"PO-Revision-Date: 2010-06-23 15:58+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -67,6 +67,12 @@ msgstr "Wspólnota"
 
 msgid "Bugs"
 msgstr "Bugi"
+
+msgid "ututi-community"
+msgstr ""
+
+msgid "ututi-bugs"
+msgstr ""
 
 msgid "Post updated."
 msgstr "Post został zaktualizowany"
@@ -433,6 +439,9 @@ msgstr "Nie możesz usunąć tej teczki."
 
 msgid "New page"
 msgstr "Nowa notatka"
+
+msgid "Message sent."
+msgstr ""
 
 msgid "Confirm the email for Ututi"
 msgstr "Zaakceptuj e-mail Ututi"
@@ -856,6 +865,102 @@ msgid ""
 "groupmates."
 msgstr ""
 
+msgid "Student information online"
+msgstr ""
+
+msgid "Main menu"
+msgstr "Menu główne"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Browse"
+msgstr "Szukaj"
+
+msgid "About"
+msgstr "About"
+
+msgid "User menu"
+msgstr "Menu użytkownika"
+
+msgid "feedback"
+msgstr ""
+
+msgid "ututi_blog_url"
+msgstr "http://blog.ututi.pl"
+
+msgid "„Ututi“ blog"
+msgstr "Blog Ututi"
+
+msgid "ututi_twitter_url"
+msgstr "http://twitter.com/ututi"
+
+msgid "„Ututi“ on twitter"
+msgstr "Ututi na twitterze"
+
+msgid "ututi_facebook_url"
+msgstr "http://facebook.com/ututipl"
+
+msgid "„Ututi“ on Facebook"
+msgstr "Ututi na Facebooku"
+
+msgid "Join!"
+msgstr "Dołącz"
+
+msgid "Login"
+msgstr "Login"
+
+msgid "remember me"
+msgstr "zapamiętaj mnie"
+
+msgid "forgotten password?"
+msgstr "Zapomniałeś hasła?"
+
+msgid "Search text"
+msgstr "Szukaj "
+
+msgid "search_"
+msgstr "szukaj_"
+
+msgid "Groups"
+msgstr "Grupy"
+
+msgid "Inbox"
+msgstr ""
+
+msgid "Settings"
+msgstr "Ustawienia"
+
+msgid "Public profile"
+msgstr "Profil publiczny"
+
+msgid "log out"
+msgstr "wyloguj się"
+
+msgid "Close"
+msgstr "Zamknij"
+
+msgid "UTUTI"
+msgstr "UTUTI"
+
+msgid "ututi_link"
+msgstr "http://ututi.pl"
+
+msgid "UAB „UTUTI“"
+msgstr "UAB \"UTUTI\""
+
+msgid "About ututi"
+msgstr "O ututi"
+
+msgid "U-blog"
+msgstr "U-blog"
+
+msgid "Terms of use"
+msgstr "Regulamin"
+
+msgid "Feedback"
+msgstr ""
+
 msgid "Statistics"
 msgstr "Statystyki"
 
@@ -1039,96 +1144,6 @@ msgid ""
 msgstr ""
 "Stąd możesz też z łatwością utworzyć przedmiot, dodać plik, zaprosić do "
 "Ututi znajomych."
-
-msgid "student information online"
-msgstr "studencka wiedza w sieci"
-
-msgid "Main menu"
-msgstr "Menu główne"
-
-msgid "Home"
-msgstr "Home"
-
-msgid "Browse"
-msgstr "Szukaj"
-
-msgid "About"
-msgstr "About"
-
-msgid "User menu"
-msgstr "Menu użytkownika"
-
-msgid "feedback"
-msgstr ""
-
-msgid "ututi_blog_url"
-msgstr "http://blog.ututi.pl"
-
-msgid "„Ututi“ blog"
-msgstr "Blog Ututi"
-
-msgid "ututi_twitter_url"
-msgstr "http://twitter.com/ututi"
-
-msgid "„Ututi“ on twitter"
-msgstr "Ututi na twitterze"
-
-msgid "ututi_facebook_url"
-msgstr "http://facebook.com/ututipl"
-
-msgid "„Ututi“ on Facebook"
-msgstr "Ututi na Facebooku"
-
-msgid "Join!"
-msgstr "Dołącz"
-
-msgid "Login"
-msgstr "Login"
-
-msgid "remember me"
-msgstr "zapamiętaj mnie"
-
-msgid "forgotten password?"
-msgstr "Zapomniałeś hasła?"
-
-msgid "Search text"
-msgstr "Szukaj "
-
-msgid "search_"
-msgstr "szukaj_"
-
-msgid "Groups"
-msgstr "Grupy"
-
-msgid "Settings"
-msgstr "Ustawienia"
-
-msgid "Public profile"
-msgstr "Profil publiczny"
-
-msgid "log out"
-msgstr "wyloguj się"
-
-msgid "Close"
-msgstr "Zamknij"
-
-msgid "UTUTI"
-msgstr "UTUTI"
-
-msgid "ututi_link"
-msgstr "http://ututi.pl"
-
-msgid "UAB „UTUTI“"
-msgstr "UAB \"UTUTI\""
-
-msgid "About ututi"
-msgstr "O ututi"
-
-msgid "U-blog"
-msgstr "U-blog"
-
-msgid "Terms of use"
-msgstr "Regulamin"
 
 msgid "Adminstration dashboard"
 msgstr "Panel administracyjny"
@@ -2585,6 +2600,22 @@ msgstr "Pliki:"
 msgid "Wiki pages:"
 msgstr "Wiki:"
 
+msgid "Back to message list"
+msgstr ""
+
+msgid "New message"
+msgstr ""
+
+#, python-format
+msgid "%(count)s message"
+msgid_plural "%(count)s messages"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "No messages."
+msgstr ""
+
 msgid "Very sad..."
 msgstr "Szkoda..."
 
@@ -2883,6 +2914,9 @@ msgstr "Czym się zajmował użytkownik %(user)s?"
 
 msgid "Nothing yet."
 msgstr "Na razie niczym."
+
+msgid "Send message"
+msgstr ""
 
 #, python-format
 msgid "Log in as %(user)s"

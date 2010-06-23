@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-06-23 11:51+0300\n"
+"PO-Revision-Date: 2010-06-23 16:00+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -67,6 +67,12 @@ msgstr "Bendruomenė"
 
 msgid "Bugs"
 msgstr "Klaidos"
+
+msgid "ututi-community"
+msgstr "ututi-community"
+
+msgid "ututi-bugs"
+msgstr "ututi-bugs"
 
 msgid "Post updated."
 msgstr "Įrašas atnaujintas."
@@ -430,6 +436,9 @@ msgstr "Negali trinti šio katalogo."
 
 msgid "New page"
 msgstr "Naujas puslapis"
+
+msgid "Message sent."
+msgstr "Pranešimas išsiųstas."
 
 msgid "Confirm the email for Ututi"
 msgstr "Patvirtink  el. pašto adresą"
@@ -843,6 +852,102 @@ msgid ""
 "groupmates."
 msgstr ""
 
+msgid "Student information online"
+msgstr "Informacija studentams internete"
+
+msgid "Main menu"
+msgstr "Pagrindinis meniu"
+
+msgid "Home"
+msgstr "Pradžia"
+
+msgid "Browse"
+msgstr "Naršyk"
+
+msgid "About"
+msgstr "Apie"
+
+msgid "User menu"
+msgstr "Naudotojo meniu"
+
+msgid "feedback"
+msgstr ""
+
+msgid "ututi_blog_url"
+msgstr "http://blog.ututi.lt"
+
+msgid "„Ututi“ blog"
+msgstr "Ututi blog'as"
+
+msgid "ututi_twitter_url"
+msgstr "http://twitter.com/ututi"
+
+msgid "„Ututi“ on twitter"
+msgstr "Uutti twitteryje"
+
+msgid "ututi_facebook_url"
+msgstr "http://facebook.com/ututi"
+
+msgid "„Ututi“ on Facebook"
+msgstr "Ututi Facebooke"
+
+msgid "Join!"
+msgstr "Prisijunk"
+
+msgid "Login"
+msgstr "Prisijungti"
+
+msgid "remember me"
+msgstr "Įsimink"
+
+msgid "forgotten password?"
+msgstr "Pamiršai slaptažodį?"
+
+msgid "Search text"
+msgstr "Paieškos tekstas"
+
+msgid "search_"
+msgstr "Ieškoti"
+
+msgid "Groups"
+msgstr "Grupės"
+
+msgid "Inbox"
+msgstr "Pranešimai"
+
+msgid "Settings"
+msgstr "Nustatymai"
+
+msgid "Public profile"
+msgstr "Viešas profilis"
+
+msgid "log out"
+msgstr "išeiti"
+
+msgid "Close"
+msgstr "Uždaryti"
+
+msgid "UTUTI"
+msgstr "UTUTI"
+
+msgid "ututi_link"
+msgstr "http://ututi.lt"
+
+msgid "UAB „UTUTI“"
+msgstr "UAB „UTUTI“"
+
+msgid "About ututi"
+msgstr "Apie ututi"
+
+msgid "U-blog"
+msgstr "Ututi blogas"
+
+msgid "Terms of use"
+msgstr "Naudojimosi sistema taisyklės"
+
+msgid "Feedback"
+msgstr ""
+
 msgid "Statistics"
 msgstr "Statistika"
 
@@ -1033,96 +1138,6 @@ msgstr ""
 "Iš čia tu gali sukurti dalyką, įkelti failą į pasirinktą\n"
 "dalyką ar grupę, pakviesti pažįstamus ir draugus\n"
 "naudotis Ututi (šoninių blokelių meniu)."
-
-msgid "student information online"
-msgstr "studentų žinios tinkle"
-
-msgid "Main menu"
-msgstr "Pagrindinis meniu"
-
-msgid "Home"
-msgstr "Pradžia"
-
-msgid "Browse"
-msgstr "Naršyk"
-
-msgid "About"
-msgstr "Apie"
-
-msgid "User menu"
-msgstr "Naudotojo meniu"
-
-msgid "feedback"
-msgstr ""
-
-msgid "ututi_blog_url"
-msgstr "http://blog.ututi.lt"
-
-msgid "„Ututi“ blog"
-msgstr "Ututi blog'as"
-
-msgid "ututi_twitter_url"
-msgstr "http://twitter.com/ututi"
-
-msgid "„Ututi“ on twitter"
-msgstr "Uutti twitteryje"
-
-msgid "ututi_facebook_url"
-msgstr "http://facebook.com/ututi"
-
-msgid "„Ututi“ on Facebook"
-msgstr "Ututi Facebooke"
-
-msgid "Join!"
-msgstr "Prisijunk"
-
-msgid "Login"
-msgstr "Prisijungti"
-
-msgid "remember me"
-msgstr "Įsimink"
-
-msgid "forgotten password?"
-msgstr "Pamiršai slaptažodį?"
-
-msgid "Search text"
-msgstr "Paieškos tekstas"
-
-msgid "search_"
-msgstr "Ieškoti"
-
-msgid "Groups"
-msgstr "Grupės"
-
-msgid "Settings"
-msgstr "Nustatymai"
-
-msgid "Public profile"
-msgstr "Viešas profilis"
-
-msgid "log out"
-msgstr "išeiti"
-
-msgid "Close"
-msgstr "Uždaryti"
-
-msgid "UTUTI"
-msgstr "UTUTI"
-
-msgid "ututi_link"
-msgstr "http://ututi.lt"
-
-msgid "UAB „UTUTI“"
-msgstr "UAB „UTUTI“"
-
-msgid "About ututi"
-msgstr "Apie ututi"
-
-msgid "U-blog"
-msgstr "Ututi blogas"
-
-msgid "Terms of use"
-msgstr "Naudojimosi sistema taisyklės"
 
 msgid "Adminstration dashboard"
 msgstr "Administravimas"
@@ -1676,10 +1691,10 @@ msgid "Registration with university subjects"
 msgstr "Universitetinių dalykų pridėjimas"
 
 msgid " is taken."
-msgstr ""
+msgstr " užimtas."
 
 msgid " is free!"
-msgstr ""
+msgstr " laisvas!"
 
 msgid "Group address on the web"
 msgstr "Grupės adresas"
@@ -1858,7 +1873,7 @@ msgid "Watch subjects"
 msgstr "Stebėti dalykus"
 
 msgid "no, thank you"
-msgstr ""
+msgstr "ne, ačiū"
 
 msgid "Group members"
 msgstr "Grupės nariai"
@@ -2581,6 +2596,22 @@ msgstr "Failų: "
 msgid "Wiki pages:"
 msgstr "Wiki puslapių:"
 
+msgid "Back to message list"
+msgstr "Atgal į pranešimų sąrašą"
+
+msgid "New message"
+msgstr "Naujas pranešimas"
+
+#, python-format
+msgid "%(count)s message"
+msgid_plural "%(count)s messages"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "No messages."
+msgstr "Pranešimų nėra."
+
 msgid "Very sad..."
 msgstr "Labai gaila..."
 
@@ -2822,7 +2853,7 @@ msgid "Browse the hierarchy"
 msgstr "Hierarchijos naršymas"
 
 msgid "[Edit]"
-msgstr ""
+msgstr "[Keisti]"
 
 msgid "Regions for locations"
 msgstr ""
@@ -2884,6 +2915,9 @@ msgstr "Ką nuveikė %(user)s?"
 msgid "Nothing yet."
 msgstr "Iki šiol nieko."
 
+msgid "Send message"
+msgstr "Siųsti pranešimą"
+
 #, python-format
 msgid "Log in as %(user)s"
 msgstr "Prisijungti kaip %(user)s"
@@ -2925,7 +2959,7 @@ msgid "Add university"
 msgstr "Sukurk universitetą"
 
 msgid "Add department"
-msgstr ""
+msgstr "Sukurk fakultetą"
 
 msgid "Add section"
 msgstr "Sukurk katedrą"

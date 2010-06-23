@@ -8,12 +8,15 @@ from pylons.controllers.util import abort, redirect
 from pylons import tmpl_context as c, request, url
 from routes.util import url_for
 
+from pylons.i18n import _
+
+import ututi.lib.helpers as h
 from ututi.controllers.home import sign_in_user
 from ututi.lib.security import ActionProtector
 from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
 
-from ututi.model import meta, User, ContentItem, Medal
+from ututi.model import meta, User, ContentItem, Medal, PrivateMessage
 from ututi.model.events import Event
 
 log = logging.getLogger(__name__)
@@ -97,6 +100,19 @@ class UserController(BaseController):
         meta.Session.delete(medal)
         meta.Session.commit()
         redirect(url.current(action='medals'))
+
+    @profile_action
+    def message(self, user):
+        c.recipient = user
+        if 'message' in request.params:
+            msg = PrivateMessage(c.user, c.recipient,
+                                 request.params.get('title'),
+                                 request.params.get('message'))
+            meta.Session.add(msg)
+            meta.Session.commit()
+            h.flash(_('Message sent.'))
+            redirect(url.current(action='index'))
+        return render('/profile/message_new.mako')
 
     def logo(self, id, width=None, height=None):
         try:

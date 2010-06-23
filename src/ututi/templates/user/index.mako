@@ -24,6 +24,10 @@
   ${_("Nothing yet.")}
 % endif
 
+<div style="clear: left; padding-top: 1em;">
+  ${h.button_to(_('Send message'), url=c.user_info.url(action='message'))}
+</div>
+
 %if h.check_crowds(['root']):
   <div style="clear: left; padding-top: 1em;">
     ${h.button_to(_('Log in as %(user)s') % dict(user=c.user_info.fullname), url=c.user_info.url(action='login_as'))}

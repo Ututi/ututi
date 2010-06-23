@@ -168,6 +168,13 @@ def setup_orm(engine):
                                autoload=True,
                                autoload_with=engine)
 
+    global private_messages
+    private_messages_table = Table("private_messages", meta.metadata,
+                                   Column('subject', Unicode(assert_unicode=True)),
+                                   Column('content', Unicode(assert_unicode=True)),
+                                   autoload=True,
+                                   autoload_with=engine)
+
     global regions_table
     regions_table = Table("regions", meta.metadata,
                                Column('title', Unicode(assert_unicode=True)),
@@ -230,6 +237,22 @@ def setup_orm(engine):
                properties = {'parent': relation(ContentItem,
                                                 primaryjoin=files_table.c.parent_id==content_items_table.c.id,
                                                 backref=backref("files", order_by=files_table.c.filename.asc()))})
+
+    orm.mapper(PrivateMessage, private_messages_table,
+               inherits=ContentItem,
+               inherit_condition=private_messages_table.c.id==ContentItem.id,
+               polymorphic_identity='private_message',
+               polymorphic_on=content_items_table.c.content_type,
+               properties = {
+                 'sender': relation(User,
+                      primaryjoin=private_messages_table.c.sender_id==users_table.c.id,
+                      backref=backref("messages_sent",
+                                      order_by=private_messages_table.c.id.asc())),
+                 'recipient': relation(User,
+                      primaryjoin=private_messages_table.c.recipient_id==users_table.c.id,
+                      backref=backref("messages_received",
+                                      order_by=private_messages_table.c.id.asc())),
+               })
 
     orm.mapper(Region, regions_table)
 
@@ -774,6 +797,9 @@ class User(object):
         return self.emails[0].confirmed
 
     logo = logo_property()
+
+    def unread_messages(self):
+        return meta.Session.query(PrivateMessage).filter_by(recipient=self, is_read=False).count()
 
 
 email_table = None
@@ -1445,6 +1471,26 @@ class Tag(object):
             return None
 
     logo = logo_property()
+
+
+class PrivateMessage(ContentItem):
+    """A private message from one user to another."""
+
+    def __init__(self, sender, recipient, subject, content, thread_id=None):
+        self.sender = sender
+        self.recipient = recipient
+        self.subject = subject
+        self.content = content
+        self.thread_id = thread_id
+
+    def thread(self):
+        return [self] + meta.Session.query(PrivateMessage
+                                           ).filter_by(thread_id=self.id
+                                           ).order_by(PrivateMessage.id
+                                           ).all()
+
+    def thread_length(self):
+        return meta.Session.query(PrivateMessage).filter_by(thread_id=self.id).count() + 1
 
 
 class Region(object):
