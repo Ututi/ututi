@@ -686,10 +686,6 @@ ul#links-messages  {
     background: url('img/module-top-bg-grey.png') no-repeat center 3px;
     height: 28px;
     margin: auto 0;
-    margin-top: 8px;
-}
-#aside .forum-sidebar .module-top {
-    margin-top: 0px;
 }
 
 #aside .first {
@@ -978,6 +974,10 @@ div.profileOptionLinks div.drop{
 
 #invite_members_block div.usergrupeleft {
     padding-right: 60px;
+}
+
+#invite_member_portlet {
+    margin-bottom: 9px;
 }
 
 /* Footer */
@@ -1307,6 +1307,14 @@ div.GroupFiles-single h2 span{
     background: url("img/search-type.png") repeat-x center bottom;
     background-image: url("../images/borders/search-type.png");
     color: #d45500;
+}
+
+#dalintis_portlet {
+    margin-bottom: 6px;
+}
+
+.forum-sidebar #group_info_portlet-header {
+    margin-top: 12px;
 }
 
 div.active {
