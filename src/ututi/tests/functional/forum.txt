@@ -5,15 +5,15 @@ Basic forum test
     >>> browser.getLink('Community').click()
 
     >>> browser.getControl('New topic').click()
-    >>> browser.getControl('Subject').value = 'Help!'
-    >>> browser.getControl('Message').value = 'My ututi is borken!'
+    >>> browser.getControl('Subject').value = 'Hello!'
+    >>> browser.getControl('Message').value = 'Hi guys!'
     >>> browser.getControl('Post').click()
 
     >>> browser.url
     'http://localhost/community/thread/3'
 
     >>> browser.printQuery('id("forum-thread")//div[@class="post-body"]/text()')
-    My ututi is borken!
+    Hi guys!
 
 Messages can be edited:
 
@@ -33,12 +33,12 @@ Let's get back to the topic list:
 
 Links from the front page work:
 
-    >>> browser.getLink('Help!')
-    <Link text='Help!' url='http://localhost/community/thread/3'>
+    >>> browser.getLink('Hello!')
+    <Link text='Hello!' url='http://localhost/community/thread/3'>
 
-    >>> browser.getLink('Help!').click()
+    >>> browser.getLink('Hello!').click()
     >>> browser.printQuery('id("forum-thread")//div[@class="post-body"]/text()')
-    My ututi is borken!
+    Hi guys!
 
 
 Bugs forum
@@ -92,4 +92,15 @@ A couple of email notifications about the forum posts have been sent:
     >>> mail_queue
     [<EmailInfo sender='info@ututi.lt' recipients=['admin@ututi.lt']>,
      <EmailInfo sender='info@ututi.lt' recipients=['admin@ututi.lt']>]
+
+    >>> print mail_queue[0].message
+    MIME...
+    Subject: [ututi-community] Hello!
+    ...
+
+    >>> print mail_queue[1].message
+    MIME...
+    Subject: [ututi-bugs] Help!
+    ...
+
     >>> del mail_queue[:]

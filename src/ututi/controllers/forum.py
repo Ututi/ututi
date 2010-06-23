@@ -327,11 +327,14 @@ class ForumController(GroupControllerBase):
                     except KeyError:
                         pass
 
+        ml_id = c.group_id
+        if not ml_id:
+            ml_id = {1: _('ututi-community'), 2: _('ututi-bugs')}[c.category.id]
         if recipients:
             re = 'Re: ' if not new_thread else ''
             send_email(config['ututi_email_from'],
                        config['ututi_email_from'],
-                       '[%s] %s%s' % (c.group_id, re, title),
+                       '[%s] %s%s' % (ml_id, re, title),
                        email_message,
                        message_id=self._generateMessageId(),
                        send_to=list(recipients))
