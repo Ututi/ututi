@@ -104,7 +104,7 @@ ${parent.head_tags()}
               </li>
               %else:
         <li>
-                <a href="${url(controller='forum', action='new_category', id=group.group_id)}" class="green verysmall">
+        <a href="${url(controller='forum', action='new_thread', id=group.group_id, category_id=group.forum_categories[0].id)}" class="green verysmall">
                   ${_('Write message')}
                 </a>
               </li>
