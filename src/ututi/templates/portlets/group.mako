@@ -49,11 +49,11 @@
       <div class="clear"></div>
     </div>
     %if group.is_member(c.user) and group.has_file_area and not c.group.forum_is_public:
-    <div class="profile">
+      <div class="profile topLine">
       ${_('Available space for private group files:')}
       ${h.image('/images/details/pbar%d.png' % group.free_size_points, alt=h.file_size(group.size), class_='area_size_points')|n}
       <span class="verysmall">${h.file_size(group.free_size)}</span>
-      <div style="margin-top: 4px; margin-bottom: 3px">
+      <div style="padding-top: 4px; padding-bottom: 7px" class="bottomLine">
         ${h.button_to(_('Get more space'), group.url(action='pay'))}
       </div>
     </div>

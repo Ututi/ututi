@@ -53,10 +53,8 @@ ${parent.head_tags()}
 <div id="SearchResults">
 %if c.user.memberships:
 <%self:rounded_block class_='portletGroupFiles smallTopMargin'>
-  <div class="GroupFiles GroupFilesGroups" style="border-bottom: 0">
-    <div class="single-title">
-      <h2 class="portletTitle bold">${_('Groups')}</h2>
-    </div>
+  <div class="GroupFiles GroupFilesGroups">
+    <h2 class="portletTitle bold">${_('Groups')}</h2>
     <span class="group-but">
       ${h.button_to(_('create group'), url(controller='group', action='group_type'))}
     </span>

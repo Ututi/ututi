@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-06-21 16:27+0300\n"
+"POT-Creation-Date: 2010-06-23 11:39+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1604,6 +1604,9 @@ msgstr ""
 msgid "Group page is visible to everybody"
 msgstr ""
 
+msgid "Group files"
+msgstr ""
+
 #, python-format
 msgid "You can keep up to %s of private group files here (e.g. pictures)"
 msgstr ""
@@ -1776,7 +1779,7 @@ msgstr ""
 msgid "Receive email notifications"
 msgstr ""
 
-msgid "immediatelly"
+msgid "immediately"
 msgstr ""
 
 msgid "at the end of the day"
@@ -1932,9 +1935,6 @@ msgstr ""
 msgid "Go back to %(subject_title)s"
 msgstr ""
 
-msgid "Last edit: "
-msgstr ""
-
 msgid "edit"
 msgstr ""
 
@@ -1942,6 +1942,9 @@ msgid "history"
 msgstr ""
 
 msgid "delete"
+msgstr ""
+
+msgid "Last edit: "
 msgstr ""
 
 msgid "Join Ututi"
@@ -2160,9 +2163,6 @@ msgstr ""
 msgid "Files uploaded:"
 msgstr ""
 
-msgid "Edit your profile"
-msgstr ""
-
 msgid "create new subject"
 msgstr ""
 
@@ -2318,9 +2318,6 @@ msgstr ""
 msgid "Group subjects"
 msgstr ""
 
-msgid "Group files"
-msgstr ""
-
 msgid "It's simple - you only need to know the email addresses of your group mates!"
 msgstr ""
 
@@ -2343,9 +2340,6 @@ msgid "Watch subject"
 msgstr ""
 
 msgid "watch subjects"
-msgstr ""
-
-msgid "rating"
 msgstr ""
 
 msgid "Lect."
@@ -2375,6 +2369,9 @@ msgid "Watched subjects notification settings"
 msgstr ""
 
 msgid "email notifications"
+msgstr ""
+
+msgid "immediatelly"
 msgstr ""
 
 msgid "Add a subject"
@@ -2524,8 +2521,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Your <strong>email</strong> (%(email)s) is not confirmed! Please confirm your"
-" email by clicking on the link sent to your address or "
+"Your email (%(email)s) is not confirmed! Please confirm your email by "
+"clicking on the link sent to your address or "
 msgstr ""
 
 msgid "get another confirmation email"

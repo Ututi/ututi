@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-06-21 16:27+0300\n"
+"PO-Revision-Date: 2010-06-23 11:39+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -1775,6 +1775,9 @@ msgstr "Edytuj stronę startową grupy"
 msgid "Group page is visible to everybody"
 msgstr "Strona grupy jest widoczna publicznie"
 
+msgid "Group files"
+msgstr "Pliki grupy"
+
 #, python-format
 msgid "You can keep up to %s of private group files here (e.g. pictures)"
 msgstr "Możesz przechowywać tu %s prywatnych plików grupy (n.p. zdjęć)"
@@ -1971,8 +1974,8 @@ msgstr "Nie znaleziono żadnego obserwowanego przedmiotu."
 msgid "Receive email notifications"
 msgstr "Otrzymuj powiadomienia via e-mail"
 
-msgid "immediatelly"
-msgstr "natychmiast"
+msgid "immediately"
+msgstr ""
 
 msgid "at the end of the day"
 msgstr "pod koniec dnia"
@@ -2140,9 +2143,6 @@ msgstr "Ogladasz starą wersję tej strony utworzoną przez %(link_to_user)s %(d
 msgid "Go back to %(subject_title)s"
 msgstr "Wróc do %(subject_title)s "
 
-msgid "Last edit: "
-msgstr "Ostatnie zmiany:"
-
 msgid "edit"
 msgstr "edytuj"
 
@@ -2151,6 +2151,9 @@ msgstr "historia"
 
 msgid "delete"
 msgstr "usuń"
+
+msgid "Last edit: "
+msgstr "Ostatnie zmiany:"
 
 msgid "Join Ututi"
 msgstr "Dołącz do Ututi"
@@ -2382,9 +2385,6 @@ msgstr "Mój profil"
 msgid "Files uploaded:"
 msgstr "Dodane pliki:"
 
-msgid "Edit your profile"
-msgstr "Popraw dane swego profilu"
-
 msgid "create new subject"
 msgstr "utwórz nowy przedmiot"
 
@@ -2550,9 +2550,6 @@ msgstr "Forum grupy"
 msgid "Group subjects"
 msgstr "Przedmioty grupy"
 
-msgid "Group files"
-msgstr "Pliki grupy"
-
 msgid ""
 "It's simple - you only need to know the email addresses of your group "
 "mates!"
@@ -2578,9 +2575,6 @@ msgstr "Obserwuj przedmiot"
 
 msgid "watch subjects"
 msgstr "obserwuj przedmioty"
-
-msgid "rating"
-msgstr "ranking"
 
 msgid "Lect."
 msgstr "Wykł."
@@ -2612,6 +2606,9 @@ msgstr "Ustawienia powiadomień o obserwowanych przedmiotach"
 
 msgid "email notifications"
 msgstr "powiadomienia e-mailem"
+
+msgid "immediatelly"
+msgstr "natychmiast"
 
 msgid "Add a subject"
 msgstr "Dodaj przedmiot"
@@ -2775,11 +2772,9 @@ msgstr "Nie odnaleziono żadnego pliku."
 
 #, python-format
 msgid ""
-"Your <strong>email</strong> (%(email)s) is not confirmed! Please confirm "
-"your email by clicking on the link sent to your address or "
+"Your email (%(email)s) is not confirmed! Please confirm your email by "
+"clicking on the link sent to your address or "
 msgstr ""
-"Twój <strong>email</strong> (%(email)s) nie zostal potwierdzony! "
-"Potwierdź go poprzez kliknięcie przysłanego przez nas linku lub "
 
 msgid "get another confirmation email"
 msgstr "uzyskaj nowy e-mail potwierdzający"

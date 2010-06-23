@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-06-22 17:58+0300\n"
+"PO-Revision-Date: 2010-06-23 11:39+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -1089,10 +1089,10 @@ msgid "Search text"
 msgstr "Paieškos tekstas"
 
 msgid "search_"
-msgstr "ieškoti"
+msgstr "Ieškoti"
 
 msgid "Groups"
-msgstr "grupės"
+msgstr "Grupės"
 
 msgid "Settings"
 msgstr "Nustatymai"
@@ -1774,6 +1774,9 @@ msgstr "Redaguoti grupės pagrindinį puslapį"
 msgid "Group page is visible to everybody"
 msgstr "Grupės puslapis matomas visiems"
 
+msgid "Group files"
+msgstr "Grupės failai"
+
 #, python-format
 msgid "You can keep up to %s of private group files here (e.g. pictures)"
 msgstr "Privatūs failai matomi TIK GRUPIOKAMS! Čia galite laikyti iki %s."
@@ -1967,8 +1970,8 @@ msgstr "Tu neturi prisidėjęs dalykų"
 msgid "Receive email notifications"
 msgstr "Gauti priminimus el.paštu"
 
-msgid "immediatelly"
-msgstr "iš karto"
+msgid "immediately"
+msgstr "iškart"
 
 msgid "at the end of the day"
 msgstr "dienos pabaigoje"
@@ -2138,9 +2141,6 @@ msgstr ""
 msgid "Go back to %(subject_title)s"
 msgstr "grįžti į %(subject_title)s"
 
-msgid "Last edit: "
-msgstr "Paskutinis taisymas:"
-
 msgid "edit"
 msgstr "taisyti"
 
@@ -2149,6 +2149,9 @@ msgstr "istorija"
 
 msgid "delete"
 msgstr "ištrinti"
+
+msgid "Last edit: "
+msgstr "Paskutinis taisymas:"
 
 msgid "Join Ututi"
 msgstr "Prisijunk prie Ututi"
@@ -2380,9 +2383,6 @@ msgstr "Mano profilis"
 msgid "Files uploaded:"
 msgstr "Įkelta failų:"
 
-msgid "Edit your profile"
-msgstr "redaguoti profilį"
-
 msgid "create new subject"
 msgstr "kurti naują dalyką"
 
@@ -2546,9 +2546,6 @@ msgstr "Grupės paštas"
 msgid "Group subjects"
 msgstr "Grupės dalykai"
 
-msgid "Group files"
-msgstr "Grupės failai"
-
 msgid ""
 "It's simple - you only need to know the email addresses of your group "
 "mates!"
@@ -2574,9 +2571,6 @@ msgstr "stebėti dalyką"
 
 msgid "watch subjects"
 msgstr "stebėti dalykus"
-
-msgid "rating"
-msgstr "reitingas"
 
 msgid "Lect."
 msgstr "Dėst."
@@ -2608,6 +2602,9 @@ msgstr "Priminimų apie dalykus nustatymai"
 
 msgid "email notifications"
 msgstr "priminimai į el. paštą"
+
+msgid "immediatelly"
+msgstr "iš karto"
 
 msgid "Add a subject"
 msgstr "Pridėti dalyką"
@@ -2771,8 +2768,8 @@ msgstr "Ištrintų failų nėra."
 
 #, python-format
 msgid ""
-"Your email (%(email)s) is not confirmed! Please confirm "
-"your email by clicking on the link sent to your address or "
+"Your email (%(email)s) is not confirmed! Please confirm your email by "
+"clicking on the link sent to your address or "
 msgstr ""
 "El. pašto adresas (%(email)s) nepatvirtintas!\n"
 "Turėjai el. paštu gauti patvirtinimo žinutę."

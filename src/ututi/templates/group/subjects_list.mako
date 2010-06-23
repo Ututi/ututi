@@ -13,6 +13,7 @@ $(document).ready(function(){
                 $(event.target).closest('.snippet-subject').remove();
                 if ($('#SearchResults').children().size() == 2) {
                   $('#empty_subjects_msg').toggleClass('hidden');
+                  $('').toggleClass('');
                 }
 
     }});
@@ -58,10 +59,12 @@ ${parent.head_tags()}
     %if subjects:
       ${subject_list(subjects)}
     %endif
-    <div class="search-item empty_note${' hidden' if subjects else ''|n}" id="empty_subjects_msg">
+    <div class="empty_note${' hidden' if subjects else ''|n}" 
+         id="empty_subjects_msg"
+         style="border-bottom: 1px solid #ded8d8">
       ${_('No watched subjects were found.')}
     </div>
-    <div class="search-item" style="padding-top: 10px;">
+    <div class="search-item" style="padding-top: 10px">
       <form class="select_interval_form" action="${c.group.url(action='set_receive_email_each')}">
         ${h.input_submit(_('Confirm'))}
         <script type="text/javascript">
@@ -72,7 +75,7 @@ ${parent.head_tags()}
         <label for="each" class="blark">${_('Receive email notifications')}
           <% selected = c.group.is_member(c.user).receive_email_each %>
           <select name="each" class="each" style="font-size: 1em;">
-            %for v, t in [('hour', _('immediatelly')), ('day', _('at the end of the day')), ('never', _('never'))]:
+            %for v, t in [('hour', _('immediately')), ('day', _('at the end of the day')), ('never', _('never'))]:
               %if v == selected:
                 <option selected="selected" value="${v}">${t}</option>
               %else:

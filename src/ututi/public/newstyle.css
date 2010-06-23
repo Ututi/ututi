@@ -779,6 +779,10 @@ div.right_arrow2{
 div.MyProfile div.profile{
     padding:5px 0;
 }
+
+div.MyProfile div.topLine {
+    border-top: 1px solid #ded8d8;
+}
 div.MyProfile div.bottomLine {
     border-bottom: 1px solid #ded8d8;
 }
@@ -1210,7 +1214,7 @@ div.GroupFiles, div.GroupFiles-nobg, div.GroupFilesGroups, div.GroupFilesDalykai
     position:relative;
 }
 div.GroupFilesGroups{
-    background: url('img/icons/grupe-big-off.png') no-repeat 15px 5px #f6f6f6;
+    background: url('img/icons/grupe-big-off.png') no-repeat 10px 5px #f6f6f6;
 }
 div.GroupFilesDalykai{
     background: url('img/icons/dalykas-off-big.png') no-repeat 10px 5px #f6f6f6;
@@ -3718,7 +3722,8 @@ div.search-item div.description {
     list-style-type: none;
     color: #999;
     text-size: 1em;
-    padding: 5px 15px;
+    padding: 10px 15px;
+    padding-left: 35px;
 }
 
 /* forum thread */
