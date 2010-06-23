@@ -233,7 +233,7 @@ ${self.anonymous_menu()}
       })();
     </script>
 
-    ${h.stylesheet_link(h.path_with_hash('/newstyle.css'))}
+    ${h.stylesheet_link(h.path_with_hash('/style.css'))}
     ${h.javascript_link('/javascript/jquery-1.3.2.min.js')}
     ${h.javascript_link('/javascript/ajaxupload.3.5.js')}
     ${h.javascript_link('/javascript/jquery.qtip.min.js')}
