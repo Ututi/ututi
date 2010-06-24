@@ -64,10 +64,9 @@ $(document).ready(function() {
     $(this).siblings('.location-add-subform').toggle();
     return false;
   });
-  $('.location-add-subform span.btn input').click(function() {
-    // XXX does not work with the new tag structure
+  $('.location-add-subform button').click(function() {
     errors = false;
-    el = $(".location-add-subform span.btn input");
+    el = $(".location-add-subform button");
     var ind = el.index(this);
     input = $("input.structure-complete");
     if (ind > 0) {
@@ -97,7 +96,7 @@ $(document).ready(function() {
              target = $('.js-target');
              $(target).removeClass('js-target');
              if (data.success != '') {
-               $('div.input-line div input.structure-complete', $(target).parent()).val(data.success).change();
+               $('input.structure-complete', $(target).parent()).val(data.success).change();
                $('input.title', target).val('')
                $('input.title-short', target).val('')
                $(target).toggle();

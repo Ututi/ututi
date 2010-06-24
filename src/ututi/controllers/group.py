@@ -151,6 +151,8 @@ class NewGroupForm(GroupForm):
 class CreateGroupFormBase(Schema):
     """A base class for group creation forms."""
 
+    allow_extra_fields = True
+
     pre_validators = [variabledecode.NestedVariables()]
 
     msg = {'empty': _(u"Please enter a title.")}
