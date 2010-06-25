@@ -6,7 +6,7 @@
 
 <div class="text">
 
-<h2>1.Licencja treści w serwisie</h2>
+<h2>1. Licencja treści w serwisie</h2>
 <p>
 Publiczna treść serwisu (dostępna anonimowym użytkownikom) publikowana 
 jest na warunkach licencji <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/"
