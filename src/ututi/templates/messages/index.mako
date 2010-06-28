@@ -1,4 +1,4 @@
-<%inherit file="/profile/base.mako" />
+<%inherit file="/messages/base.mako" />
 
 <%def name="pagetitle()">
   ##${_('Messages')}
@@ -32,7 +32,7 @@
       <div class="${'message-list-on1' if not is_read else 'message-list-off1'}">
         <div class="floatleft m-on">
           <div class="orange ${'bold' if not is_read else ''}">
-            <a href="${url(controller='profile', action='message', id=message.id)}"
+            <a href="${url(controller='messages', action='thread', id=message.id)}"
                class="post-title">${message.subject}</a>
             <span class="reply-count">
               (${ungettext("%(count)s message", "%(count)s messages", message.thread_length()) % dict(count=message.thread_length())})
@@ -52,7 +52,7 @@
 
   <div style="padding: 10px 0 6px 10px;">
     % if c.user and c.messages:
-      ${h.button_to(_('Mark all as read'), url(controller='profile', action='mark_messages_as_read'))}
+      ${h.button_to(_('Mark all as read'), url(controller='messages', action='mark_all_as_read'))}
     % elif not c.messages:
       ${_('No messages.')}
     % endif

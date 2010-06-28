@@ -16,7 +16,7 @@ from ututi.lib.security import ActionProtector
 from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
 
-from ututi.model import meta, User, ContentItem, Medal, PrivateMessage
+from ututi.model import meta, User, ContentItem, Medal
 from ututi.model.events import Event
 
 log = logging.getLogger(__name__)
@@ -100,20 +100,6 @@ class UserController(BaseController):
         meta.Session.delete(medal)
         meta.Session.commit()
         redirect(url.current(action='medals'))
-
-    @profile_action
-    @ActionProtector("user")
-    def message(self, user):
-        c.recipient = user
-        if 'message' in request.params:
-            msg = PrivateMessage(c.user, c.recipient,
-                                 request.params.get('title'),
-                                 request.params.get('message'))
-            meta.Session.add(msg)
-            meta.Session.commit()
-            h.flash(_('Message sent.'))
-            redirect(url.current(action='index'))
-        return render('/profile/message_new.mako')
 
     def logo(self, id, width=None, height=None):
         try:

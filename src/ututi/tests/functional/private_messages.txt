@@ -8,7 +8,7 @@ Users can send each other private messages.
 Initially the inbox is empty:
 
     >>> browser.printQuery("id('inbox-link')")
-    <a id="inbox-link" href="/profile/messages">
+    <a id="inbox-link" href="/messages">
       Inbox
     </a>
 
@@ -42,7 +42,7 @@ The other user should have received the message
 
     >>> browser2 = Browser.logIn('user2@ututi.lt', 'password')
     >>> browser2.printQuery("id('inbox-link')")
-    <a id="inbox-link" href="/profile/messages">
+    <a id="inbox-link" href="/messages">
       <strong>Inbox (1)</strong>
     </a>
 
@@ -55,7 +55,7 @@ The other user should have received the message
 There are no unread messages any more:
 
     >>> browser2.printQuery("id('inbox-link')")
-    <a id="inbox-link" href="/profile/messages">
+    <a id="inbox-link" href="/messages">
       Inbox
     </a>
 
@@ -78,6 +78,36 @@ The first user can see the reply:
     >>> browser = Browser.logIn('user@ututi.lt', 'password')
     >>> browser.getLink('Inbox (1)').click()
     >>> browser.getLink('First message').click()
-    >>> browser2.printQuery("//div[@class='post-body']/text()")
+    >>> browser.printQuery("//div[@class='post-body']/text()")
     First!
     Second!
+
+    >>> browser.getLink('Back to message list').click()
+
+Mark all messages as read
+-------------------------
+
+If you have several unread messages, you can mark them as read in one fell
+swoop.  Let's add a message:
+
+    >>> browser2.getControl('Message').value = 'Third!'
+    >>> browser2.getControl('Reply').click()
+
+There's one unread message:
+
+    >>> browser.reload()
+    >>> browser.printQuery("id('inbox-link')")
+    <a id="inbox-link" href="/messages">
+      <strong>Inbox (1)</strong>
+    </a>
+
+We can mark it as read:
+
+    >>> browser.getControl('Mark all as read').click()
+
+There are no unread messages now:
+
+    >>> browser.printQuery("id('inbox-link')")
+    <a id="inbox-link" href="/messages">
+      Inbox
+    </a>

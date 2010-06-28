@@ -155,7 +155,7 @@ ${self.anonymous_menu()}
 <div class="loggedin-nav" id="personal-data">
     <ul>
         <li>
-          <a id="inbox-link" href="${url(controller='profile', action='messages')}">
+          <a id="inbox-link" href="${url(controller='messages', action='index')}">
           <% unread_messages = c.user.unread_messages() %>
           %if unread_messages:
             <strong>${_('Inbox')} (${unread_messages})</strong>

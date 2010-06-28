@@ -26,7 +26,7 @@
 
 %if c.user is not None:
   <div style="clear: left; padding-top: 1em;">
-    ${h.button_to(_('Send message'), url=c.user_info.url(action='message'))}
+      ${h.button_to(_('Send message'), url(controller='messages', action='new_message', user_id=c.user_info.id))}
   </div>
 %endif
 

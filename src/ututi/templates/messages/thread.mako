@@ -1,7 +1,7 @@
-<%inherit file="/profile/base.mako" />
+<%inherit file="/messages/base.mako" />
 
 <div class="back-link">
-  <a class="back-link" href="${url(controller='profile', action='messages')}"
+  <a class="back-link" href="${url(controller='messages', action='index')}"
     >${_('Back to message list')}</a>
 </div>
 
@@ -51,7 +51,7 @@
   <a name="reply"></a>
   <h2>${_('Reply')}</h2>
   <br />
-  <form method="post" action="${url(controller='profile', action='message_reply', id=c.message.id)}"
+  <form method="post" action="${url(controller='messages', action='reply', id=c.message.id)}"
         id="message_reply_form" class="fullForm" enctype="multipart/form-data">
     ${h.input_area('message', _('Message'))}
     <br />
