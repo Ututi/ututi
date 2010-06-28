@@ -47,6 +47,9 @@ class MessagesController(BaseController):
                              request.params.get('message'),
                              thread_id=original.id)
         meta.Session.add(msg)
+        # Make sure this thread is unhidden on both sides.
+        original.hidden_by_sender = False
+        original.hidden_by_recipient = False
         meta.Session.commit()
         redirect(url(controller='messages', action='thread', id=id))
 
