@@ -112,6 +112,9 @@ CREATE TABLE private_messages (id int8 references content_items(id),
        hidden_by_recipient boolean default false,
        primary key (id));;
 
+CREATE INDEX sender_id ON private_messages (sender_id);;
+CREATE INDEX recipient_id ON private_messages (recipient_id);;
+
 /* A table for files */
 create table files (id int8 references content_items(id),
        md5 char(32),
