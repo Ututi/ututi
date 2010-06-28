@@ -22,7 +22,11 @@
   % endif
   <tr>
     <td colspan="2" class="author">
-      <a href="${message.sender.url()}">${message.sender.fullname}</a>
+      %if message.sender == c.user:
+        &rarr; <a href="${message.recipient.url()}">${message.recipient.fullname}</a>
+      %else:
+        <a href="${message.sender.url()}">${message.sender.fullname}</a>
+      %endif
       <span class="created-on">${h.fmt_dt(message.created_on)}</span>
     </td>
   </tr>

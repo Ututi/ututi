@@ -42,7 +42,11 @@
         </div>
         <div class="floatleft user">
           <div class="orange bold verysmall">
-            <a href="${message.sender.url()}">${h.ellipsis(message.sender.fullname, 30)}</a>
+            %if message.sender == c.user:
+              &rarr; <a href="${message.recipient.url()}">${h.ellipsis(message.recipient.fullname, 30)}</a>
+            %else:
+              <a href="${message.sender.url()}">${h.ellipsis(message.sender.fullname, 30)}</a>
+            %endif
           </div>
           <div class="grey verysmall">${h.fmt_dt(message.created_on)}</div>
         </div>
