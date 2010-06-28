@@ -111,3 +111,21 @@ There are no unread messages now:
     <a id="inbox-link" href="/messages">
       Inbox
     </a>
+
+Delete
+------
+
+Threads can be deleted.
+
+    >>> browser.printQuery("//a[@class='post-title']/text()")
+    First message
+    >>> browser.getControl('Delete').click()
+    >>> browser.printQuery("//a[@class='post-title']/text()")
+
+Deletion by recipient is independent from deletion by sender:
+
+    >>> browser2.getLink('Inbox').click()
+    >>> browser2.printQuery("//a[@class='post-title']/text()")
+    First message
+    >>> browser2.getControl('Delete').click()
+    >>> browser2.printQuery("//a[@class='post-title']/text()")

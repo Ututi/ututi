@@ -1,5 +1,5 @@
 from sqlalchemy.orm.exc import NoResultFound
-from sqlalchemy.sql.expression import or_
+from sqlalchemy.sql.expression import or_, and_
 from pylons import tmpl_context as c, config, request, url
 from pylons.controllers.util import redirect, abort
 from pylons.i18n import _
@@ -17,8 +17,10 @@ class MessagesController(BaseController):
     def index(self):
         c.messages = meta.Session.query(PrivateMessage
                 ).filter_by(thread_id=None
-                ).filter(or_(PrivateMessage.recipient==c.user,
-                             PrivateMessage.sender==c.user),
+                ).filter(or_(and_(PrivateMessage.recipient==c.user,
+                                  PrivateMessage.hidden_by_recipient == False),
+                             and_(PrivateMessage.sender==c.user,
+                                  PrivateMessage.hidden_by_sender == False)),
                 ).order_by(PrivateMessage.id.desc()
                 ).all()
         return render('/messages/index.mako')
@@ -47,6 +49,18 @@ class MessagesController(BaseController):
         meta.Session.add(msg)
         meta.Session.commit()
         redirect(url(controller='messages', action='thread', id=id))
+
+    @ActionProtector("user")
+    def delete(self, id):
+        message = PrivateMessage.get(id)
+        if c.user == message.recipient:
+            message.hidden_by_recipient = True
+        elif c.user == message.sender:
+            message.hidden_by_sender = True
+        else:
+            abort(404)
+        meta.Session.commit()
+        redirect(url(controller='messages', action='index'))
 
     @ActionProtector("user")
     def mark_all_as_read(self):

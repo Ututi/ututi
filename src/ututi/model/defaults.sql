@@ -108,6 +108,8 @@ CREATE TABLE private_messages (id int8 references content_items(id),
        subject varchar(500) not null,
        content text default '',
        is_read boolean default false,
+       hidden_by_sender boolean default false,
+       hidden_by_recipient boolean default false,
        primary key (id));;
 
 /* A table for files */
