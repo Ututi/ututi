@@ -28,7 +28,7 @@
   <div class="single-messages">
 
     % for message in c.messages:
-      <% is_read = all(m.is_read for m in message.thread()) %>
+      <% is_read = all((m.sender == c.user or m.is_read) for m in message.thread()) %>
       <div class="${'message-list-on1' if not is_read else 'message-list-off1'}">
         <div class="floatleft m-on">
           <div class="orange ${'bold' if not is_read else ''}">
