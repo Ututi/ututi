@@ -94,6 +94,8 @@ def category_action(method):
 def thread_action(method):
     def _thread_action(self, id=None, category_id=None, thread_id=None):
         self.set_up_context(id=id, category_id=category_id, thread_id=thread_id)
+        if c.thread is None:
+            abort(404)
         return method(self, id, category_id, thread_id)
     return _thread_action
 
@@ -150,6 +152,10 @@ class ForumController(GroupControllerBase):
             c.bugs_category = ForumCategory.get(2)
 
         if category_id is not None:
+            try:
+                category_id = int(category_id)
+            except ValueError:
+                abort(404)
             c.category = ForumCategory.get(category_id)
             if c.category is None:
                 abort(404)
@@ -163,10 +169,14 @@ class ForumController(GroupControllerBase):
             c.category = None
 
         if thread_id is not None:
+            try:
+                thread_id = int(thread_id)
+            except ValueError:
+                abort(404)
             c.thread = ForumPost.get(thread_id)
             if c.thread is None:
                 abort(404)
-            assert c.thread.category_id == int(c.category_id), repr(c.thread.category_id)
+            assert c.thread.category_id == int(c.category.id), repr(c.thread.category_id)
         else:
             c.thread = None
 
