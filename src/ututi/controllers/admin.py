@@ -27,7 +27,7 @@ from ututi.model import SimpleTag
 from ututi.model import UserSubjectMonitoring
 from ututi.model import Page
 from ututi.model import (meta, User, Email, LocationTag, Group, Subject,
-                         GroupMember, GroupMembershipType, File)
+                         GroupMember, GroupMembershipType, File, PrivateMessage)
 from ututi.lib import helpers as h
 
 
@@ -323,3 +323,16 @@ class AdminController(BaseController):
 
     def error(self):
         return 1 / 0
+
+    @ActionProtector("root")
+    def messages(self):
+        if 'message' in request.params:
+            title = request.params.get('title')
+            message = request.params.get('message')
+            users = meta.Session.query(User).all()
+            for recipient in users:
+                msg = PrivateMessage(c.user, recipient, title, message)
+                msg.hidden_by_sender = True
+            meta.Session.commit()
+            h.flash('Message sent to %d users.' % len(users))
+        return render('admin/messages.mako')
