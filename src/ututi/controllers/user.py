@@ -102,6 +102,7 @@ class UserController(BaseController):
         redirect(url.current(action='medals'))
 
     @profile_action
+    @ActionProtector("user")
     def message(self, user):
         c.recipient = user
         if 'message' in request.params:

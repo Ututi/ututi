@@ -24,9 +24,11 @@
   ${_("Nothing yet.")}
 % endif
 
-<div style="clear: left; padding-top: 1em;">
-  ${h.button_to(_('Send message'), url=c.user_info.url(action='message'))}
-</div>
+%if c.user is not None:
+  <div style="clear: left; padding-top: 1em;">
+    ${h.button_to(_('Send message'), url=c.user_info.url(action='message'))}
+  </div>
+%endif
 
 %if h.check_crowds(['root']):
   <div style="clear: left; padding-top: 1em;">
