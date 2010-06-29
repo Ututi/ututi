@@ -4120,3 +4120,17 @@ ul#location_structure ul {
 div.bunner {
     padding-top: 3px;
 }
+
+/* JQuery dialogs */
+
+body .ui-dialog-title {
+    color: #d45500;
+}
+
+body .ui-widget-header {
+    background: #eeeeee;
+}
+
+body .ui-widget, body .ui-widget button {
+    font: 13px normal Arial,Helvetica,sans-serif;
+}
