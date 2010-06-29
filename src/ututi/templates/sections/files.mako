@@ -252,11 +252,12 @@ $(document).ready(function(){
                             }
                         });
                         dlg.dialog("close");
+                        return false;
                     };
+                    $('form', dlg).submit(submit_func);
 
                     dlg.dialog({
-                        title: '${_('Suspicious file?')}',
-                        buttons: {'${_('Submit')}': submit_func}
+                        title: '${_('Suspicious file?')}'
                     });
                 }
         });
@@ -555,10 +556,11 @@ $(document).ready(function(){
 
 <%def name="flag_file(f)">
   <form method="post" action="." class="fullForm">
-      <div>
-    ${h.input_area('reason', _('Please state the reason why this file is inappropriate:'), cols=30)}
-    ${h.input_line('email', _('Your e-mail (for followup)'))}
-      </div>
+    <div>
+      ${h.input_area('reason', _('Please state the reason why this file is inappropriate:'), cols=30)}
+      ${h.input_line('reporter_email', _('Your e-mail (for followup)'))}
+      ${h.input_submit(_('Submit'))}
+    </div>
   </form>
 </%def>
 
