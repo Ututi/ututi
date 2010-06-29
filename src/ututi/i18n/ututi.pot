@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-06-23 15:58+0300\n"
+"POT-Creation-Date: 2010-06-29 14:25+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -332,6 +332,9 @@ msgstr ""
 msgid "Your message to the group was successfully sent."
 msgstr ""
 
+msgid "Message sent."
+msgstr ""
+
 #, python-format
 msgid "Ututi news: %(changes)s"
 msgstr ""
@@ -412,9 +415,6 @@ msgid "You have no right to delete this folder."
 msgstr ""
 
 msgid "New page"
-msgstr ""
-
-msgid "Message sent."
 msgstr ""
 
 msgid "Confirm the email for Ututi"
@@ -1103,6 +1103,18 @@ msgstr ""
 msgid "Subjects import"
 msgstr ""
 
+msgid "Subject"
+msgstr ""
+
+msgid "Message"
+msgstr ""
+
+msgid "Post"
+msgstr ""
+
+msgid "Sending..."
+msgstr ""
+
 #, python-format
 msgid "found %(count)s subject"
 msgid_plural "found %(count)s subjects"
@@ -1372,9 +1384,6 @@ msgstr ""
 msgid "Back to thread"
 msgstr ""
 
-msgid "Message"
-msgstr ""
-
 msgid "Submit"
 msgstr ""
 
@@ -1412,12 +1421,6 @@ msgid "Create"
 msgstr ""
 
 msgid "Back to the topic list"
-msgstr ""
-
-msgid "Subject"
-msgstr ""
-
-msgid "Post"
 msgstr ""
 
 msgid "Subscribe to emails"
@@ -1912,6 +1915,21 @@ msgid "Message to the group"
 msgstr ""
 
 #, python-format
+msgid "%(count)s message"
+msgid_plural "%(count)s messages"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "No messages."
+msgstr ""
+
+msgid "New message"
+msgstr ""
+
+msgid "Back to message list"
+msgstr ""
+
+#, python-format
 msgid "Back to %(subject_title)s"
 msgstr ""
 
@@ -2364,21 +2382,6 @@ msgid "Files:"
 msgstr ""
 
 msgid "Wiki pages:"
-msgstr ""
-
-msgid "Back to message list"
-msgstr ""
-
-msgid "New message"
-msgstr ""
-
-#, python-format
-msgid "%(count)s message"
-msgid_plural "%(count)s messages"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "No messages."
 msgstr ""
 
 msgid "Very sad..."

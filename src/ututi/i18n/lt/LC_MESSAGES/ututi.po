@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-06-23 16:00+0300\n"
+"PO-Revision-Date: 2010-06-29 14:27+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -353,6 +353,9 @@ msgstr "El. pašto konferencija grupei yra atjungta. Naudokite forumą!"
 msgid "Your message to the group was successfully sent."
 msgstr "Tavo žinutė grupiokams išsiųsta sėkmingai."
 
+msgid "Message sent."
+msgstr "Pranešimas išsiųstas."
+
 #, python-format
 msgid "Ututi news: %(changes)s"
 msgstr "Ututi naujienos:  %(changes)s"
@@ -436,9 +439,6 @@ msgstr "Negali trinti šio katalogo."
 
 msgid "New page"
 msgstr "Naujas puslapis"
-
-msgid "Message sent."
-msgstr "Pranešimas išsiųstas."
 
 msgid "Confirm the email for Ututi"
 msgstr "Patvirtink  el. pašto adresą"
@@ -1206,6 +1206,18 @@ msgstr "Grupių importavimas"
 msgid "Subjects import"
 msgstr "Dalykų importavimas"
 
+msgid "Subject"
+msgstr "Temos antraštė"
+
+msgid "Message"
+msgstr "Pranešimas"
+
+msgid "Post"
+msgstr "Rašyti pranešimą"
+
+msgid "Sending..."
+msgstr "Siunčiama..."
+
 #, python-format
 msgid "found %(count)s subject"
 msgid_plural "found %(count)s subjects"
@@ -1537,9 +1549,6 @@ msgstr "Nauja kategorija"
 msgid "Back to thread"
 msgstr "Grįžti į giją"
 
-msgid "Message"
-msgstr "Pranešimas"
-
 msgid "Submit"
 msgstr "Patvirtinti"
 
@@ -1547,13 +1556,13 @@ msgid "Back to category list"
 msgstr "Atgal į kategorijų sąrašą"
 
 msgid "Edit category"
-msgstr ""
+msgstr "Keisti kategoriją"
 
 msgid "Delete category"
-msgstr ""
+msgstr "Trinti kategoriją"
 
 msgid "Change"
-msgstr ""
+msgstr "Keisti"
 
 msgid "New topic"
 msgstr "Nauja tema"
@@ -1579,12 +1588,6 @@ msgstr "Kurti"
 
 msgid "Back to the topic list"
 msgstr "Grįžti į temų sąrašą"
-
-msgid "Subject"
-msgstr "Temos antraštė"
-
-msgid "Post"
-msgstr "Rašyti pranešimą"
 
 msgid "Subscribe to emails"
 msgstr "Užsiprenumeruoti į el. paštą"
@@ -2116,6 +2119,22 @@ msgid "Message to the group"
 msgstr "Laiškas grupei"
 
 #, python-format
+msgid "%(count)s message"
+msgid_plural "%(count)s messages"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "No messages."
+msgstr "Pranešimų nėra."
+
+msgid "New message"
+msgstr "Naujas pranešimas"
+
+msgid "Back to message list"
+msgstr "Atgal į pranešimų sąrašą"
+
+#, python-format
 msgid "Back to %(subject_title)s"
 msgstr "grįžti į %(subject_title)s"
 
@@ -2596,22 +2615,6 @@ msgstr "Failų: "
 msgid "Wiki pages:"
 msgstr "Wiki puslapių:"
 
-msgid "Back to message list"
-msgstr "Atgal į pranešimų sąrašą"
-
-msgid "New message"
-msgstr "Naujas pranešimas"
-
-#, python-format
-msgid "%(count)s message"
-msgid_plural "%(count)s messages"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-msgid "No messages."
-msgstr "Pranešimų nėra."
-
 msgid "Very sad..."
 msgstr "Labai gaila..."
 
@@ -2838,7 +2841,7 @@ msgstr ""
 "narystę?"
 
 msgid "Region"
-msgstr ""
+msgstr "Regionas"
 
 msgid "(none)"
 msgstr ""
