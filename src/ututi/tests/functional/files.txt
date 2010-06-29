@@ -55,7 +55,7 @@ After the download of the file, the downloaded files count in the user list shou
     Joined:
 
 
-The files is stored in our upload directory:
+The files are stored in our upload directory:
 
     >>> from ututi.tests.functional import listUploads
     >>> listUploads()
