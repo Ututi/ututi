@@ -178,7 +178,7 @@ def make_map(config):
                 controller='subjectfile')
 
     subject_actions = ['edit', 'watch', 'js_watch', 'update', 'delete',
-                       'undelete', 'create_folder', 'delete_folder',
+                       'undelete', 'flag', 'create_folder', 'delete_folder',
                        'js_create_folder', 'js_delete_folder', 'upload_file',
                        'upload_file_short']
 

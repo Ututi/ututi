@@ -9,7 +9,7 @@ from paste.util.converters import asbool
 from pylons.decorators import validate
 from pylons.templating import render_mako_def
 from pylons.controllers.util import abort
-from pylons import url
+from pylons import url, config
 from pylons import request, response, tmpl_context as c
 from pylons.controllers.util import forward, redirect
 
@@ -17,6 +17,7 @@ from ututi.lib.security import deny
 from ututi.lib.security import is_root
 from ututi.lib.security import check_crowds
 from ututi.lib.security import ActionProtector
+from ututi.lib.mailer import send_email
 from ututi.lib.base import BaseController, render
 from ututi.model import meta, File, ContentItem
 from ututi.lib.validators import ParentIdValidator
@@ -100,6 +101,18 @@ class BasefilesController(BaseController):
 
         return render_mako_def('/sections/files.mako','file', file=new_file, new_file=True)
 
+    def _flag(self, file):
+        if request.method == 'POST':
+            reason = request.POST.get('reason')
+            email = request.POST.get('email')
+            extra_vars = dict(f=file, reason=reason, email=email)
+            send_email(config['ututi_email_from'],
+                       config['ututi_email_from'],
+                       'Flagged file: %s' % file.filename,
+                       render('/emails/flagged_file.mako', extra_vars=extra_vars),
+                       send_to=[config['ututi_email_from']])
+        return render_mako_def('/sections/files.mako', 'flag_file', f=file)
+
 
 class FilesController(BasefilesController):
     """A controller for files. Handles listing, uploads and downloads."""
@@ -172,4 +185,3 @@ class FilesController(BasefilesController):
             redirect(url(controller='admin', action='deleted_files'))
         else:
             abort(400) #bad request
-

@@ -2,6 +2,8 @@
 
 <%def name="head_tags()">
 ${h.javascript_link('/javascript/jquery-ui-1.7.2.custom.min.js')|n}
+${h.javascript_link('/javascript/jquery.form.js')|n}
+${h.stylesheet_link('/jquery-ui-1.7.3.custom.css')}
 
 <script type="text/javascript">
 //<![CDATA[
@@ -231,6 +233,35 @@ $(document).ready(function(){
         }});
     }
 
+    function flagFile(event) {
+        var folder = $(event.target).closest('.folder');
+        var url = $(event.target).closest('.file').children('.flag_url').val();
+
+        $.ajax({type: "GET",
+                url: url,
+                success: function(src){
+                    var dlg = $('<div></div>');
+                    dlg.html(src);
+                    var submit_func = function () {
+                        $('form', dlg).ajaxSubmit({
+                            url: url,
+                            type: 'POST',
+                            dataType: 'json',
+                            success: function() {
+                                alert('OK');
+                            }
+                        });
+                        dlg.dialog("close");
+                    };
+
+                    dlg.dialog({
+                        title: '${_('Suspicious file?')}',
+                        buttons: {'${_('Submit')}': submit_func}
+                    });
+                }
+        });
+    }
+
     function restoreFile(event) {
         var folder = $(event.target).closest('.folder');
         var url = $(event.target).closest('.file').children('.restore_url').val();
@@ -265,6 +296,7 @@ $(document).ready(function(){
     }
 
     $('.delete_button').click(deleteFile);
+    $('.flag_button').click(flagFile);
     $('.restore_button').click(restoreFile);
     $('.rename_button').click(renameFile);
 
@@ -362,21 +394,21 @@ $(document).ready(function(){
 <%def name="file(file, new_file=False, hidden=False)">
   %if file.deleted is None:
             <li class="file${hidden and ' show' or ''}">
-            %if new_file:
-              ${h.image('/images/details/icon_drag_file_new.png', alt='file icon', class_='drag-target')|n}
-            %else:
-              ${h.image('/images/details/icon_drag_file.png', alt='file icon', class_='drag-target')|n}
-            %endif
-              ${h.link_to(file.title, file.url(), class_='filename')}
-            %if file.can_write():
-              <span class="file_rename_form hidden">
-                <span class="file_rename_input_decorator">
-                  <input class="file_rename_input" type="text" />
+              %if new_file:
+                ${h.image('/images/details/icon_drag_file_new.png', alt='file icon', class_='drag-target')|n}
+              %else:
+                ${h.image('/images/details/icon_drag_file.png', alt='file icon', class_='drag-target')|n}
+              %endif
+                ${h.link_to(file.title, file.url(), class_='filename')}
+              %if file.can_write():
+                <span class="file_rename_form hidden">
+                  <span class="file_rename_input_decorator">
+                    <input class="file_rename_input" type="text" />
+                  </span>
+                  ${h.input_submit(_('Rename'), class_='rename_confirm btn')}
                 </span>
-                ${h.input_submit(_('Rename'), class_='rename_confirm btn')}
-              </span>
-              <img src="${url('/images/details/icon_rename.png')}" alt="${_('edit file name')}" class="rename_button" />
-            %endif
+                <img src="${url('/images/details/icon_rename.png')}" alt="${_('edit file name')}" class="rename_button" />
+              %endif
               <span class="size">(${h.file_size(file.size)})</span>
               <span class="date">${h.fmt_dt(file.created_on)}</span>
               <a href="${url(controller='user', action='index', id=file.created_by)}" class="author">
@@ -385,11 +417,14 @@ $(document).ready(function(){
               <input class="move_url" type="hidden" value="${file.url(action='move')}" />
               <input class="copy_url" type="hidden" value="${file.url(action='copy')}" />
               <input class="delete_url" type="hidden" value="${file.url(action='delete')}" />
+              <input class="flag_url" type="hidden" value="${file.url(action='flag')}" />
               <input class="rename_url" type="hidden" value="${file.url(action='rename')}" />
               <input class="folder_title_value" type="hidden" value="${file.folder}" />
-            %if file.can_write():
-              <img src="${url('/images/delete.png')}" alt="${_('delete file')}" class="delete_button" />
-            %endif
+              %if file.can_write():
+                <img src="${url('/images/delete.png')}" alt="${_('delete file')}" class="delete_button" />
+              %else:
+                <img src="${url('/img/icons/flag-small.png')}" alt="${_('flag as suspicious')}" class="flag_button" />
+              %endif
             </li>
   %else: ## deleted file
             <li class="file">
@@ -516,6 +551,15 @@ $(document).ready(function(){
 
 <%def name="free_space_text(obj)">
   <div class="area_size">${_('free space:')} ${h.file_size(obj.free_size)}</div>
+</%def>
+
+<%def name="flag_file(f)">
+  <form method="post" action="." class="fullForm">
+      <div>
+    ${h.input_area('reason', _('Please state the reason why this file is inappropriate:'), cols=30)}
+    ${h.input_line('email', _('Your e-mail (for followup)'))}
+      </div>
+  </form>
 </%def>
 
 <%def name="file_browser(obj, section_id=0, collapsible=False, title=None, comment=None, controls=['upload', 'folder', 'title'])">

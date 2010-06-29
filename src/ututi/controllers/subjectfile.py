@@ -81,3 +81,6 @@ class SubjectfileController(BasefilesController):
     def copy(self, subject, file):
         return self._copy(subject, file)
 
+    @subject_file_action
+    def flag(self, subject, file):
+        return self._flag(file)
