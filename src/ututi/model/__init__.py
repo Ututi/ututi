@@ -775,7 +775,7 @@ class User(object):
 
         for medal_type, test_f in implicit_medals.items():
             if test_f and not has_medal(medal_type):
-                medals.append(Medal(self, medal_type))
+                medals.append(ImplicitMedal(self, medal_type))
         order = [m[0] for m in Medal.available_medals()]
         medals.sort(key=lambda m: order.index(m.medal_type))
         return medals
@@ -818,8 +818,12 @@ class Email(object):
             return None
 
 
-class Medal(object):
-    """A medal for a user."""
+class ImplicitMedal(object):
+    """Helper for medals.
+
+    This is a separate class from Medal so that implicit medals can be
+    instantiated without touching the database.
+    """
 
     MEDAL_IMG_PATH = '/images/medals/'
     MEDAL_SIZE = dict(height=26, width=26)
@@ -855,6 +859,10 @@ class Medal(object):
     def img_tag(self):
         return image(self.url(), alt=self.title(), title=self.title(),
                      **self.MEDAL_SIZE)
+
+
+class Medal(ImplicitMedal):
+    """A persistent medal for a user."""
 
 
 class Folder(list):
