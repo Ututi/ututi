@@ -627,7 +627,12 @@ class User(object):
         return validate_password(self.password, password)
 
     def files(self):
-        return [item for item in self.content_items if item.deleted_by is None and item.content_type == 'file']
+        return meta.Session.query(ContentItem).filter_by(
+                content_type='file', created=self, deleted_by=None).all()
+
+    def files_count(self):
+        return meta.Session.query(ContentItem).filter_by(
+                content_type='file', created=self, deleted_by=None).count()
 
     @classmethod
     def authenticate(cls, username, password):

@@ -141,7 +141,7 @@
                 ${medal.img_tag()}
               %endfor
             </div>
-            <div>${_('Files uploaded:')}<span class="orange"> ${len(user.files())}</span></div>
+            <div>${_('Files uploaded:')}<span class="orange"> ${user.files_count()}</span></div>
         </div>
         <div class="clear"></div>
     </div>
