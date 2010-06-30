@@ -2804,6 +2804,10 @@ a.back-link {
     background: white url("../images/details/arrow_expand_down.png") right center no-repeat;
 }
 
+.fileFlagForm textarea {
+    padding-bottom: 3px;
+}
+
 /*************************************************************************
 END OF FILES SECTION
  **************************************************************************/
@@ -4128,7 +4132,7 @@ body .ui-dialog-title {
 }
 
 body .ui-widget-header {
-    background: #eeeeee;
+    background: #e0e0e0;
 }
 
 body .ui-widget, body .ui-widget button {
