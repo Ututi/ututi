@@ -246,10 +246,12 @@ $(document).ready(function(){
                         $('form', dlg).ajaxSubmit({
                             url: url,
                             type: 'POST',
-                            dataType: 'json'
+                            success: function() {
+                                // hide flag link to indicate submission
+                                $(event.target).fadeOut(1000);
+                            }
                         });
                         dlg.dialog("close");
-                        $(event.target).hide(); // hide flag link
                         return false;
                     };
                     $('form', dlg).submit(submit_func);
@@ -556,7 +558,7 @@ $(document).ready(function(){
   <form method="post" action="." class="fullForm fileFlagForm">
     <div>
       ${h.input_area('reason', _('Please state the reason why this file is inappropriate:'), cols=30)}
-      ${h.input_line('reporter_email', _('Your e-mail (for followup, optional)'))}
+      ${h.input_line('reporter_email', _('Your e-mail (optional)'))}
       ${h.input_submit(_('Submit'))}
     </div>
   </form>
