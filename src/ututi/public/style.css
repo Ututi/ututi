@@ -4133,6 +4133,20 @@ body .ui-dialog-title {
 
 body .ui-widget-header {
     background: #e0e0e0;
+    border: 0;
+}
+
+body .ui-dialog {
+    padding: 0;
+    border: 3px solid #cccccc;
+}
+
+body .ui-dialog .ui-dialog-titlebar {
+    padding: 0 0 0 6px;
+}
+
+body .ui-corner-all {
+    -moz-border-radius: 0;
 }
 
 body .ui-widget, body .ui-widget button {
