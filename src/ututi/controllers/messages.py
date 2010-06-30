@@ -58,10 +58,8 @@ class MessagesController(BaseController):
         message = PrivateMessage.get(id)
         if c.user == message.recipient:
             message.hidden_by_recipient = True
-        elif c.user == message.sender:
+        if c.user == message.sender:
             message.hidden_by_sender = True
-        else:
-            abort(404)
         meta.Session.commit()
         redirect(url(controller='messages', action='index'))
 

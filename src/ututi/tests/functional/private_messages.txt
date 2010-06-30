@@ -143,3 +143,17 @@ Deletion by recipient is independent from deletion by sender:
     First message
     >>> browser2.getControl('Delete').click()
     >>> browser2.printQuery("//a[@class='post-title']/text()")
+
+Messages sent to self can be deleted too:
+
+    >>> browser2.open('http://localhost/user/3')
+    >>> browser2.getControl('Send message').click()
+    >>> browser2.getControl('Subject').value = 'Alter ego'
+    >>> browser2.getControl('Message').value = 'Talking to myself.'
+    >>> browser2.getControl('Post').click()
+
+    >>> browser2.getLink('Inbox').click()
+    >>> browser2.printQuery("//a[@class='post-title']/text()")
+    Alter ego
+    >>> browser2.getControl('Delete').click()
+    >>> browser2.printQuery("//a[@class='post-title']/text()")
