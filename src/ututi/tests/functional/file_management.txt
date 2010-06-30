@@ -199,17 +199,18 @@ Both folders should be gone:
 Flagging files:
 
     >>> print app.get('/subject/vu/mat_analize/file/3/flag').body
-    <form method="post" action="." class="fullForm">
-        <div>
-      <label><span class="labelText">Please state the reason why this file is inappropriate:</span><form:error name="reason" /><span class="textField"><textarea cols="30" id="reason" name="reason" rows="5"></textarea><span class="edgeTextArea"></span></span></label>
-      <div><label for="email"><span class="labelText">Your e-mail (for followup)</span><span class="textField"><input id="email" name="email" type="text" value="" /><span class="edge"></span></span></label><form:error name="email" /></div>
-        </div>
-    </form>
 
     >>> app.post('/subject/vu/mat_analize/file/3/flag',
     ...           params={'reason': 'Copyright violation',
     ...                   'email': 'mole@example.org'}).status
     '200 OK'
+    <form method="post" action="." class="fullForm fileFlagForm">
+      <div>
+        <label><span class="labelText">Please state the reason why the file 'text;for you.txt' is inappropriate:</span><form:error name="reason" /><span class="textField"><textarea cols="30" id="reason" name="reason" rows="5"></textarea><span class="edgeTextArea"></span></span></label>
+        <div><label for="reporter_email"><span class="labelText">Your e-mail (optional)</span><span class="textField"><input id="reporter_email" name="reporter_email" type="text" value="" /><span class="edge"></span></span></label><form:error name="reporter_email" /></div>
+        <button class="btn" value="Submit"><span>Submit</span></button>
+      </div>
+    </form>
 
 An email should have been sent:
 

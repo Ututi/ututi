@@ -557,7 +557,7 @@ $(document).ready(function(){
 <%def name="flag_file(f)">
   <form method="post" action="." class="fullForm fileFlagForm">
     <div>
-      ${h.input_area('reason', _('Please state the reason why this file is inappropriate:'), cols=30)}
+      ${h.input_area('reason', _("Please state the reason why the file '%s' is inappropriate:") % f.filename, cols=30)}
       ${h.input_line('reporter_email', _('Your e-mail (optional)'))}
       ${h.input_submit(_('Submit'))}
     </div>
