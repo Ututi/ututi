@@ -252,6 +252,7 @@ $(document).ready(function(){
                             }
                         });
                         dlg.dialog("close");
+                        $(event.target).hide(); // hide flag link
                         return false;
                     };
                     $('form', dlg).submit(submit_func);
