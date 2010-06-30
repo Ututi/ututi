@@ -157,3 +157,9 @@ Messages sent to self can be deleted too:
     Alter ego
     >>> browser2.getControl('Delete').click()
     >>> browser2.printQuery("//a[@class='post-title']/text()")
+
+The deleted message was marked as read:
+
+    >>> browser2.getLink('Inbox')
+    <Link text='Inbox' url='http://localhost/messages'>
+

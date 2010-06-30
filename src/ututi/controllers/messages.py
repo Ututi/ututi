@@ -58,6 +58,7 @@ class MessagesController(BaseController):
         message = PrivateMessage.get(id)
         if c.user == message.recipient:
             message.hidden_by_recipient = True
+            message.is_read = True
         if c.user == message.sender:
             message.hidden_by_sender = True
         meta.Session.commit()
