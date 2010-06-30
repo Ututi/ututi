@@ -246,10 +246,7 @@ $(document).ready(function(){
                         $('form', dlg).ajaxSubmit({
                             url: url,
                             type: 'POST',
-                            dataType: 'json',
-                            success: function() {
-                                alert('OK');
-                            }
+                            dataType: 'json'
                         });
                         dlg.dialog("close");
                         $(event.target).hide(); // hide flag link
