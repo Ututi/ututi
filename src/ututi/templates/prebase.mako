@@ -90,27 +90,47 @@ ${_('Student information online')}
 </%def>
 
 <%def name="anonymous_header()">
-<ul id="socialLinks">
-  <li id="blogLink"><a href="${_('ututi_blog_url')}">${_(u'„Ututi“ blog')}</a></li>
-  <li id="twitterLink"><a href="${_('ututi_twitter_url')}">${_(u'„Ututi“ on twitter')}</a></li>
-  <li id="facebookLink"><a href="${_('ututi_facebook_url')}">${_(u'„Ututi“ on Facebook')}</a></li>
-</ul>
 <form method="post" id="loginForm" action="${url('/login')}">
+
+  <div id="fb-root"></div>
+  <script src="http://connect.facebook.net/lt_LT/all.js"></script>
+  <script>
+    FB.init({appId: '110714995621590', status: true, cookie: true, xfbml: true});
+    // XXX set app id in configuration
+    FB.Event.subscribe('auth.sessionChange', function(response) {
+      if (response.session) {
+        // A user has logged in, and a new cookie has been saved
+        alert('FB logged in');
+      } else {
+        // The user has logged out, and the cookie has been cleared
+        alert('FB logged out');
+      }
+    });
+  </script>
+
+  <div id="federatedLogin">
+      ##${_('Connect using')}<br/>
+      <fb:login-button perms="email">Connect</fb:login-button>
+      <br />
+      <a href="${url(controller='home', action='google_register')}">
+        ${h.image('/img/google-logo.gif', alt='Log in using Google')}
+      </a>
+  </div>
+
   <fieldset>
     <input type="hidden" name="came_from" value="${request.params.get('came_from', request.url)}" />
     <legend class="a11y">${_('Join!')}</legend>
     <label class="textField"><span class="overlay">${_('Email')}:</span><input type="text" name="login" value="${request.params.get('login')}"/><span class="edge"></span></label>
     <label class="textField"><span class="overlay">${_('Password')}</span><input type="password" name="password" /><span class="edge"></span></label>
     <button class="btn" type="submit" value="${_('Login')}"><span>${_('Login')}</span></button><br />
-    <label id="rememberMe"><input type="checkbox"> ${_('remember me')}</label><br />
-    <a href="${url(controller='home', action='pswrecovery')}">${_('forgotten password?')}</a>
+    <a href="${url(controller='home', action='pswrecovery')}">${_('Forgotten password?')}</a>
+    <label id="rememberMe"><input type="checkbox"> ${_('Remember me')}</label>
   </fieldset>
   <script type="text/javascript">
     $(window).load(function() {
-    $(".textField .overlay").labelOver('over');
+      $(".textField .overlay").labelOver('over');
     });
   </script>
-
 </form>
 ${self.anonymous_menu()}
 </%def>

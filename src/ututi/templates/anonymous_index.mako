@@ -77,31 +77,21 @@
       <form:error name="agree"/>
       <label id="agreeWithTOC"><input type="checkbox" name="agree" value="true"/>${_('I agree to the ')} <a href="" onclick="return false;">${_('terms of use')}</a></label>
       <div style="text-align: center;">
-        <button class="btnLarge" type="submit" value="${_('Register')}"><span>${_('Register')}</span></button>
+        <button class="btnMedium" type="submit" value="${_('Register')}"><span>${_('Register')}</span></button>
       </div>
     </fieldset>
   </form>
 
-  <div>
-    <fb:login-button perms="email"></fb:login-button>
+  <div id="federated-login-comment">
+      ${_('... or connect using your Google or Facebook account:')}
   </div>
-  <div id="fb-root"></div>
-  <script src="http://connect.facebook.net/en_US/all.js"></script>
-  <script>
-    FB.init({appId: '110714995621590', status: true, cookie: true, xfbml: true});
-    // XXX set app id in configuration
-    FB.Event.subscribe('auth.sessionChange', function(response) {
-      if (response.session) {
-        // A user has logged in, and a new cookie has been saved
-        alert('FB logged in');
-      } else {
-        // The user has logged out, and the cookie has been cleared
-        alert('FB logged out');
-      }
-    });
-  </script>
 
-  <a href="${url(controller='home', action='google_register')}">Google</a>
+  <div id="register_openid">
+    <a href="${url(controller='home', action='google_register')}">
+      ${h.image('/img/google-logo.gif', alt='Log in using Google', class_='google-login')}
+    </a>
+    <fb:login-button perms="email">Connect</fb:login-button>
+  </div>
 
   </div>
   <div id="registrationTeaser" class="${'hidden' if c.show_registration else ''}">

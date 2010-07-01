@@ -348,22 +348,41 @@ button.btnMedium.btnExclamation {
     background-image: url('img/social/facebook_32.png');
 }
 #loginForm {
+    background: #ffffff;
+    padding-top: 8px;
+    padding-right: 0.5em;
+    width: 48em;
+    border: 1px solid #e9e6e6;
+    -moz-border-radius: 4px;
     position: absolute;
     right: 0;
-    text-align: right;
     top: 8px;
+}
+
+#loginForm fieldset {
+    text-align: right;
+    padding-right: 1em;
+}
+
+#loginForm #federatedLogin {
+    float: right;
+    height: 42px;
+    border-left: 2px solid #e9e6e6;
+    padding-left: 0.5em;
+    text-align: center;
 }
 
 #loginForm label {
     margin-left: 5px;
 }
-#loginForm .button {
+#loginForm button {
     top: -1px;
 }
 #loginForm #rememberMe {
     display: inline-block;
     margin-bottom: 4px;
     margin-top: 4px;
+    margin-left: 2em;
 }
 
 #searchForm {
@@ -1613,6 +1632,23 @@ div.usergruperight {
     text-align: center;
 }
 
+#federated-login-comment {
+    margin-top: 10px;
+    color: #333333;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#register_openid {
+    padding-top: 0.5em;
+}
+
+#register_openid img.google-login {
+    float: left;
+    margin-left: 2em;
+    margin-right: 1em;
+}
+
 #homeSearchNotesBlock p,
 #homeCreateGroupBlock p {
     color: #666666;
@@ -1694,8 +1730,9 @@ div.usergruperight {
     margin-top: 10px;
 }
 #homeRegisterBlock #registrationForm.shown form {
-    margin-top: 0;
+    margin-top: 10px;
 }
+
 #homeRegisterBlock label {
     display: block;
     font-size: 12px;
