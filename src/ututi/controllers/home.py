@@ -355,6 +355,7 @@ class HomeController(UniversityListMixin):
                 user.openid = session['confirmed_openid']
             elif session.get('confirmed_facebook_id'):
                 user.facebook_id = int(session['confirmed_openid'])
+            user.accepted_terms = datetime.today()
             email = self.form_result['email'].lower()
             user.emails = [Email(email)]
             if email == session.get('confirmed_email').lower():

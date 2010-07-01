@@ -2,7 +2,7 @@
 
 <div id="homeRegisterBlock">
   <div>
-    Foo bar
+    ${_('Please confirm that the following information about you is correct and check the box to accept the terms of use.')}
   </div>
   <div id="registrationForm" class="shown">
     <form id="registration_form" method="post"
