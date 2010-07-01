@@ -88,6 +88,21 @@ class RegistrationForm(Schema):
                                                  'repeat_password',
                                                  messages=msg)]
 
+class FederatedRegistrationForm(Schema):
+    """Registration form for openID/Facebook registrations."""
+
+    msg = {'missing': _(u"You must agree to the terms of use.")}
+    agree = validators.StringBool(messages=msg)
+
+    msg = {'empty': _(u"Please enter your name to register.")}
+    fullname = validators.String(not_empty=True, strip=True, messages=msg)
+
+    gadugadu = validators.Int()
+
+    msg = {'non_unique': _(u"This email has already been used to register.")}
+    email = All(validators.Email(not_empty=True, strip=True),
+                UniqueEmail(messages=msg, strip=True, completelyUnique=True))
+
 
 class RecommendationForm(Schema):
     """A schema for validating ututi recommendation submissions"""
@@ -98,6 +113,9 @@ class RecommendationForm(Schema):
 
 def sign_in_user(email):
     session['login'] = email
+    if 'openid_session' in session:
+        # Make sure the openID session does not stick around.
+        del session['openid_session']
     session.save()
 
 class UniversityListMixin(BaseController):
@@ -324,6 +342,35 @@ class HomeController(UniversityListMixin):
     def _pswrecovery_form(self):
         return render('home/recoveryform.mako')
 
+    def _federated_registration_form(self):
+        return render('home/federated_registration.mako')
+
+    @validate(FederatedRegistrationForm, form='_federated_registration_form')
+    def federated_registration(self):
+        if not session.get('confirmed_openid') or session.get('confirmed_facebook_id'):
+            redirect(url(controller='home', action='index'))
+        if hasattr(self, 'form_result'):
+            user = User(self.form_result['fullname'], None, gen_password=False)
+            if session.get('confirmed_openid'):
+                user.openid = session['confirmed_openid']
+            elif session.get('confirmed_facebook_id'):
+                user.facebook_id = int(session['confirmed_openid'])
+            email = self.form_result['email'].lower()
+            user.emails = [Email(email)]
+            if email == session.get('confirmed_email').lower():
+                user.emails[0].confirmed = True
+            meta.Session.add(user)
+            meta.Session.commit()
+            sign_in_user(email)
+            # TODO: take into account came_from.
+            redirect(url(controller='profile', action='register_welcome'))
+
+        # Render form: suggested name, suggested email, agree with conditions
+        defaults = dict(fullname=session.get('confirmed_fullname'),
+                        email=session.get('confirmed_email'))
+        return htmlfill.render(self._federated_registration_form(),
+                               defaults=defaults)
+
     def google_register(self):
         openid_session = session.get("openid_session", {})
         openid_store = None # stateless
@@ -363,14 +410,19 @@ class HomeController(UniversityListMixin):
             # This user has never logged in using OpenID before.
             user = User.get(email)
             if user is None:
-                # Looks like a totally new user.
-                # TODO: ask to confirm registration and agree to terms of use
-                raise ValueError('unknown user')
+                # New user?
+                session['confirmed_openid'] = identity_url
+                session['confirmed_facebook_id'] = None
+                session['confirmed_fullname'] = name
+                session['confirmed_email'] = email
+                session.save()
+                redirect(url(controller='home', action='federated_registration'))
+
             else:
-                # Existing user logging in using OpenID?
+                # Existing user logging in using OpenID.
+                h.flash(_('Your Google account "%s" has been linked to your existing Ututi account.') % email)
                 user.openid = identity_url
                 meta.Session.commit()
-                # TODO: verify?
                 sign_in_user(email)
                 # TODO: take into account came_from.
                 redirect(url(controller='home', action='index'))

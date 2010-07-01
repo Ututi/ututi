@@ -1,4 +1,4 @@
-<%inherit file="/ubase-nomenu.mako" />
+<%inherit file="/ubase.mako" />
 
 <div id="homeSearchNotesBlock">
   <h2>${_('Search for notes')}</h2>
