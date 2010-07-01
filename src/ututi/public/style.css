@@ -350,8 +350,8 @@ button.btnMedium.btnExclamation {
 #loginForm {
     background: #ffffff;
     padding-top: 8px;
-    padding-right: 0.5em;
-    width: 48em;
+    padding-right: 1em;
+    width: 47em;
     border: 1px solid #e9e6e6;
     -moz-border-radius: 4px;
     position: absolute;
@@ -370,6 +370,14 @@ button.btnMedium.btnExclamation {
     border-left: 2px solid #e9e6e6;
     padding-left: 0.5em;
     text-align: center;
+}
+#loginForm #federatedLoginHint {
+    font-weight: bold;
+    color: #808080;
+}
+
+#loginForm div#login-buttons img {
+    padding-top: 5px;
 }
 
 #loginForm label {

@@ -109,12 +109,13 @@ ${_('Student information online')}
   </script>
 
   <div id="federatedLogin">
-      ##${_('Connect using')}<br/>
-      <fb:login-button perms="email">Connect</fb:login-button>
-      <br />
-      <a href="${url(controller='home', action='google_register')}">
-        ${h.image('/img/google-logo.gif', alt='Log in using Google')}
+    <div id="federatedLoginHint">${_('Connect using')}</div>
+    <div id="login-buttons">
+      <fb:login-button size="icon" perms="email">Connect</fb:login-button>
+      <a href="${url(controller='home', action='google_register')}" class="google-login">
+          ${h.image('/img/google.gif', alt=_('Log in using Google'), height=15, width=15)}
       </a>
+    </div>
   </div>
 
   <fieldset>

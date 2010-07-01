@@ -352,7 +352,7 @@ class HomeController(UniversityListMixin):
         session.save()
         redirect(redirecturl)
 
-    def register_or_login(self, identity_url, name, email):
+    def _register_or_login(self, identity_url, name, email):
         user = User.get_byopenid(identity_url)
         if user is not None:
             # Existing user, log him in and proceed.
@@ -364,7 +364,7 @@ class HomeController(UniversityListMixin):
             user = User.get(email)
             if user is None:
                 # Looks like a totally new user.
-                # TODO: show a reduced registration form
+                # TODO: ask to confirm registration and agree to terms of use
                 raise ValueError('unknown user')
             else:
                 # Existing user logging in using OpenID?
@@ -388,7 +388,7 @@ class HomeController(UniversityListMixin):
             name = '%s %s' % (request.params.get('openid.ext1.value.firstname'),
                               request.params.get('openid.ext1.value.lastname'))
             email = request.params.get('openid.ext1.value.email')
-            return self.register_or_login(identity_url, name, email)
+            return self._register_or_login(identity_url, name, email)
         elif info.status == FAILURE and display_identifier:
             # In the case of failure, if info is non-None, it is the
             # URL that we were verifying. We include it in the error
