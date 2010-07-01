@@ -25,7 +25,8 @@ setup(
         "Babel",
         "translitcodec",
         "trans",
-        "translate-toolkit"
+        "translate-toolkit",
+        "python-openid",
     ],
     package_dir={'': 'src'},
     packages=find_packages('src'),

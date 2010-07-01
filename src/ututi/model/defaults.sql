@@ -3,6 +3,8 @@ create table users (
        id bigserial not null,
        fullname varchar(100),
        password char(36),
+       openid varchar(200) default null,
+       facebook_id bigint default null,
        site_url varchar(200) default null,
        description text default null,
        last_seen timestamp not null default (now() at time zone 'UTC'),

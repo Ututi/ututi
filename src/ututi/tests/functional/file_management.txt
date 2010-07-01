@@ -199,11 +199,6 @@ Both folders should be gone:
 Flagging files:
 
     >>> print app.get('/subject/vu/mat_analize/file/3/flag').body
-
-    >>> app.post('/subject/vu/mat_analize/file/3/flag',
-    ...           params={'reason': 'Copyright violation',
-    ...                   'email': 'mole@example.org'}).status
-    '200 OK'
     <form method="post" action="." class="fullForm fileFlagForm">
       <div>
         <label><span class="labelText">Please state the reason why the file 'text;for you.txt' is inappropriate:</span><form:error name="reason" /><span class="textField"><textarea cols="30" id="reason" name="reason" rows="5"></textarea><span class="edgeTextArea"></span></span></label>
@@ -211,6 +206,11 @@ Flagging files:
         <button class="btn" value="Submit"><span>Submit</span></button>
       </div>
     </form>
+
+    >>> app.post('/subject/vu/mat_analize/file/3/flag',
+    ...           params={'reason': 'Copyright violation',
+    ...                   'email': 'mole@example.org'}).status
+    '200 OK'
 
 An email should have been sent:
 

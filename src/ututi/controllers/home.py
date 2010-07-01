@@ -4,6 +4,9 @@ import string
 from datetime import datetime
 import simplejson
 
+from openid.consumer.consumer import Consumer, SUCCESS, FAILURE, DiscoveryFailure
+from openid.extensions import ax
+
 from formencode import Schema, validators, Invalid, All, htmlfill
 from webhelpers import paginate
 
@@ -320,6 +323,134 @@ class HomeController(UniversityListMixin):
 
     def _pswrecovery_form(self):
         return render('home/recoveryform.mako')
+
+    def google_register(self):
+        openid_session = session.get("openid_session", {})
+        openid_store = None # stateless
+        consumer = Consumer(openid_session, openid_store)
+        GOOGLE_OPENID = 'https://www.google.com/accounts/o8/id'
+        openid = GOOGLE_OPENID
+        try:
+            authrequest = consumer.begin(openid)
+        except DiscoveryFailure, e:
+            raise e # XXX
+
+        ax_req = ax.FetchRequest()
+        ax_req.add(ax.AttrInfo('http://axschema.org/namePerson/first',
+                               alias='firstname', required=True))
+        ax_req.add(ax.AttrInfo('http://axschema.org/namePerson/last',
+                               alias='lastname', required=True))
+        ax_req.add(ax.AttrInfo('http://schema.openid.net/contact/email',
+                               alias='email', required=True))
+        authrequest.addExtension(ax_req)
+
+        redirecturl = authrequest.redirectURL(
+            url(controller='home', action='index', qualified=True),
+            return_to=url(controller='home', action='google_verify', qualified=True))
+
+        session['openid_session'] = openid_session
+        session.save()
+        redirect(redirecturl)
+
+    def register_or_login(self, identity_url, name, email):
+        user = User.get_byopenid(identity_url)
+        if user is not None:
+            # Existing user, log him in and proceed.
+            sign_in_user(email)
+            # TODO: take into account came_from.
+            redirect(url(controller='home', action='index'))
+        else:
+            # This user has never logged in using OpenID before.
+            user = User.get(email)
+            if user is None:
+                # Looks like a totally new user.
+                # TODO: show a reduced registration form
+                raise ValueError('unknown user')
+            else:
+                # Existing user logging in using OpenID?
+                user.openid = identity_url
+                meta.Session.commit()
+                # TODO: verify?
+                sign_in_user(email)
+                # TODO: take into account came_from.
+                redirect(url(controller='home', action='index'))
+
+    def google_verify(self):
+        openid_session = session.get("openid_session", {})
+        openid_store = None # stateless
+        consumer = Consumer(openid_session, openid_store)
+        info = consumer.complete(request.params,
+                                 url('google_verify', qualified=True))
+        display_identifier = info.getDisplayIdentifier()
+
+        if info.status == SUCCESS:
+            identity_url = info.identity_url
+            name = '%s %s' % (request.params.get('openid.ext1.value.firstname'),
+                              request.params.get('openid.ext1.value.lastname'))
+            email = request.params.get('openid.ext1.value.email')
+            return self.register_or_login(identity_url, name, email)
+        elif info.status == FAILURE and display_identifier:
+            # In the case of failure, if info is non-None, it is the
+            # URL that we were verifying. We include it in the error
+            # message to help the user figure out what happened.
+            fmt = "Verification of %s failed: %s"
+            # TODO: cgi escape
+            message = fmt % (display_identifier, info.message)
+        elif info.status == consumer.CANCEL:
+            # cancelled
+            message = 'Verification cancelled'
+        elif info.status == consumer.SETUP_NEEDED:
+            if info.setup_url:
+                message = '<a href=%s>Setup needed</a>' % (
+                    quoteattr(info.setup_url),)
+            else:
+                # This means auth didn't succeed, but you're welcome to try
+                # non-immediate mode.
+                message = 'Setup needed'
+        else:
+            raise ValueError(info.status)
+
+        return message
+
+##  def login_POST(self):
+##      self.consumer = Consumer(self.openid_session, g.openid_store)
+##      openid = request.params.get('openid', None)
+##      if openid is None:
+##          return render('/login/form.mako')
+##      try:
+##          authrequest = self.consumer.begin(openid)
+##      except DiscoveryFailure, e:
+##          return redirect_to('/login')
+##      redirecturl = authrequest.redirectURL(h.url_for('main', qualified=True), return_to=h.url_for('verified',qualified=True), immediate=False)
+##     
+##      session['openid_session'] = self.openid_session
+##      session.save()
+##      return redirect_to(redirecturl)
+##  def verified(self):
+##      self.consumer = Consumer(self.openid_session, g.openid_store)
+##      info = self.consumer.complete(request.params, (h.url_for('verified', qualified=True)))
+##      if info.status == SUCCESS:
+##          sac_q = model.sac.query(model.Users)
+##          user = sac_q.get_by(openid = info.identity_url)
+##          if user is None:
+##              user = model.Users()
+##              user.openid = info.identity_url
+##              user.signup = datetime.utcnow()
+##          user.lastlogin = datetime.utcnow()
+##          sac_q.session.flush()
+##          session['openid'] = info.identity_url
+##          session.save()
+##          session.clear()
+##          return redirect_to('main')
+##      else:
+##          return redirect_to('/login')
+
+##  def logout(self):
+##      c.title = 'logged out'
+##      session.clear()
+##      session.save()
+##      return render('/login/logout.mako')
+
 
     @validate(PasswordRecoveryForm, form='_pswrecovery_form')
     def pswrecovery(self):

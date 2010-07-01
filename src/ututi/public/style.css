@@ -1691,7 +1691,7 @@ div.usergruperight {
 #homeRegisterBlock {}
 
 #homeRegisterBlock form {
-    margin-top: 50px;
+    margin-top: 10px;
 }
 #homeRegisterBlock #registrationForm.shown form {
     margin-top: 0;

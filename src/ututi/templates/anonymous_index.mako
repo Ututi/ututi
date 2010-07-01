@@ -81,6 +81,28 @@
       </div>
     </fieldset>
   </form>
+
+  <div>
+    <fb:login-button perms="email"></fb:login-button>
+  </div>
+  <div id="fb-root"></div>
+  <script src="http://connect.facebook.net/en_US/all.js"></script>
+  <script>
+    FB.init({appId: '110714995621590', status: true, cookie: true, xfbml: true});
+    // XXX set app id in configuration
+    FB.Event.subscribe('auth.sessionChange', function(response) {
+      if (response.session) {
+        // A user has logged in, and a new cookie has been saved
+        alert('FB logged in');
+      } else {
+        // The user has logged out, and the cookie has been cleared
+        alert('FB logged out');
+      }
+    });
+  </script>
+
+  <a href="${url(controller='home', action='google_register')}">Google</a>
+
   </div>
   <div id="registrationTeaser" class="${'hidden' if c.show_registration else ''}">
     <img src="${url('/img/person.png')}" alt="${_('Register')}"/>

@@ -234,6 +234,8 @@ def make_map(config):
     map.connect('/join/login', controller='home', action='join_login')
     map.connect('/join/login_register', controller='home', action='join_register')
     map.connect('/register', controller='home', action='register')
+    map.connect('/google_register', controller='home', action='google_register')
+    map.connect('/google_verify', controller='home', action='google_verify')
     map.connect('/password', controller='home', action='pswrecovery')
     map.connect('/process_transaction', controller='home', action='process_transaction')
     map.connect('/recovery/{key}', controller='home', action='recovery')
