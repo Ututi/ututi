@@ -354,6 +354,7 @@ button.btnMedium.btnExclamation {
     width: 47em;
     border: 1px solid #e9e6e6;
     -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
     position: absolute;
     right: 0;
     top: 8px;
