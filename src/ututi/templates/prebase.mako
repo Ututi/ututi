@@ -108,14 +108,36 @@ ${_('Student information online')}
 ##  });
   </script>
 
+  <script src="/javascript/jquery.blockUI.js"></script>
+  <div id="loading" style="display: none">
+      <h1>${_('Loading...')}</h1>
+  </div>
+  <script>
+      function show_loading_message() {
+          $.blockUI({
+              message: $('#loading'),
+              css: {
+                  border: 'none',
+                  padding: '25px',
+                  backgroundColor: '#000',
+                  '-webkit-border-radius': '10px',
+                  '-moz-border-radius': '10px',
+                  opacity: .5,
+                  color: '#fff'
+              }
+          });
+      }
+  </script>
+
   <div id="federatedLogin">
     <div id="federatedLoginHint">${_('Connect using')}</div>
     <div id="login-buttons">
-      <a href="${url(controller='home', action='google_register')}" class="google-login">
+      <a href="${url(controller='home', action='google_register')}" class="google-login"
+          onclick="show_loading_message(); return true">
           ${h.image('/img/google.gif', alt=_('Log in using Google'))}
       </a>
       <fb:login-button size="icon" perms="email"
-                       onlogin="window.location = '${url(controller='home', action='facebook_login')}'"
+        onlogin="show_loading_message(); window.location = '${url(controller='home', action='facebook_login')}'"
        >Connect</fb:login-button>
     </div>
   </div>
