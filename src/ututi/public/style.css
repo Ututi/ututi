@@ -374,10 +374,21 @@ button.btnMedium.btnExclamation {
 #loginForm #federatedLoginHint {
     font-weight: bold;
     color: #808080;
+    float: left;
+    margin-bottom: 3px;
 }
 
-#loginForm div#login-buttons img {
-    padding-top: 5px;
+#loginForm #federatedLogin .fb_button_simple {
+    float: left;
+    background-image: url("img/facebook-button.gif");
+    padding-bottom: 25px;
+    padding-right: 7px;
+}
+
+#loginForm #federatedLogin .google-login {
+    float: left;
+    padding-left: 10px;
+    padding-right: 12px;
 }
 
 #loginForm label {

@@ -83,7 +83,7 @@
   </form>
 
   <div id="federated-login-comment">
-      ${_('... or connect using your Google or Facebook account:')}
+      ${_('... or connect using your Google or Facebook account.')}
   </div>
 
   <div id="register_openid">
