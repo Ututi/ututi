@@ -209,7 +209,7 @@ Flagging files:
 
     >>> app.post('/subject/vu/mat_analize/file/3/flag',
     ...           params={'reason': 'Copyright violation',
-    ...                   'email': 'mole@example.org'}).status
+    ...                   'reporter_email': 'mole@example.org'}).status
     '200 OK'
 
 An email should have been sent:
