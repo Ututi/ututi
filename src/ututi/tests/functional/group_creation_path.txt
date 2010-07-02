@@ -143,8 +143,9 @@ First let us log out.
     >>> browser.getLink('log out').click()
     >>> browser.open(get_urls(msg)[-1])
 
-    >>> browser.queryHTML('//h1/text()')
-    ['Please register!']
+    >>> browser.printQuery('//h1/text()')
+    Loading...
+    Please register!
 
     >>> browser.printQuery("id('login_message')")
     <div id="login_message" class="please-register">
