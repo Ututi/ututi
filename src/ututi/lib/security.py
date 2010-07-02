@@ -12,6 +12,11 @@ def current_user():
     return User.get(login)
 
 
+def sign_in_user(email):
+    session['login'] = email
+    session.save()
+
+
 def is_root(user, context=None):
     return user is not None and user.id == 1
 

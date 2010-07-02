@@ -95,17 +95,17 @@ ${_('Student information online')}
   <div id="fb-root"></div>
   <script src="http://connect.facebook.net/lt_LT/all.js"></script>
   <script>
-    FB.init({appId: '110714995621590', status: true, cookie: true, xfbml: true});
-    // XXX set app id in configuration
-    FB.Event.subscribe('auth.sessionChange', function(response) {
-      if (response.session) {
-        // A user has logged in, and a new cookie has been saved
-        alert('FB logged in');
-      } else {
-        // The user has logged out, and the cookie has been cleared
-        alert('FB logged out');
-      }
-    });
+    FB.init({appId: '${c.facebook_app_id}', status: true,
+        cookie: true, xfbml: true});
+##  FB.Event.subscribe('auth.sessionChange', function(response) {
+##    if (response.session) {
+##      // A user has logged in, and a new cookie has been saved
+##      alert('FB logged in');
+##    } else {
+##      // The user has logged out, and the cookie has been cleared
+##      alert('FB logged out');
+##    }
+##  });
   </script>
 
   <div id="federatedLogin">

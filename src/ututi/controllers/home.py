@@ -26,7 +26,7 @@ import ututi.lib.helpers as h
 from ututi.lib import gg
 from ututi.lib.emails import email_confirmation_request, email_password_reset
 from ututi.lib.messaging import Message
-from ututi.lib.security import ActionProtector
+from ututi.lib.security import ActionProtector, sign_in_user
 from ututi.lib.validators import UniqueEmail
 from ututi.model import meta, User, Email, PendingInvitation, LocationTag, Payment, get_supporters
 from ututi.model import UserSubjectMonitoring, GroupSubjectMonitoring, Subject, Group, SearchItem
@@ -110,13 +110,6 @@ class RecommendationForm(Schema):
     recommend_emails = validators.UnicodeString(not_empty=False)
     came_from = validators.URL(require_tld=False)
 
-
-def sign_in_user(email):
-    session['login'] = email
-    if 'openid_session' in session:
-        # Make sure the openID session does not stick around.
-        del session['openid_session']
-    session.save()
 
 class UniversityListMixin(BaseController):
     """ A mix-in for listing all the universitites (first level location tags) in the system."""

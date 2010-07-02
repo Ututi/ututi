@@ -668,6 +668,13 @@ class User(object):
         except NoResultFound:
             return None
 
+    @classmethod
+    def get_byfbid(cls, facebook_id):
+        try:
+            return meta.Session.query(cls).filter_by(facebook_id=facebook_id).one()
+        except NoResultFound:
+            return None
+
     @property
     def ignored_subjects(self):
         umst = user_monitored_subjects_table
