@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-07-01 15:25+0300\n"
+"PO-Revision-Date: 2010-07-02 18:47+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -317,6 +317,19 @@ msgid ""
 "Only registered users can become members of a group, please register "
 "first."
 msgstr "Tylko zarejestrowani użytkownicy mogą dołączyć do grupy. Zaloguj się."
+
+msgid "Facebook did not provide your email address."
+msgstr ""
+
+#, python-format
+msgid "Your Google account \"%s\" has been linked to your existing Ututi account."
+msgstr ""
+
+#, python-format
+msgid ""
+"Your Facebook account \"%s\" has been linked to your existing Ututi "
+"account."
+msgstr ""
 
 msgid "Password recovery email sent. Please check your inbox."
 msgstr ""
@@ -743,6 +756,9 @@ msgstr "regulamin"
 msgid "Register"
 msgstr "Zaloguj się"
 
+msgid "... or connect using your Google or Facebook account."
+msgstr ""
+
 msgid ""
 "Here you and your classmates can use the file storage for sharing "
 "information and create group for communication."
@@ -886,23 +902,14 @@ msgstr "Menu użytkownika"
 msgid "feedback"
 msgstr ""
 
-msgid "ututi_blog_url"
-msgstr "http://blog.ututi.pl"
+msgid "Loading..."
+msgstr ""
 
-msgid "„Ututi“ blog"
-msgstr "Blog Ututi"
+msgid "Connect using"
+msgstr ""
 
-msgid "ututi_twitter_url"
-msgstr "http://twitter.com/ututi"
-
-msgid "„Ututi“ on twitter"
-msgstr "Ututi na twitterze"
-
-msgid "ututi_facebook_url"
-msgstr "http://facebook.com/ututipl"
-
-msgid "„Ututi“ on Facebook"
-msgstr "Ututi na Facebooku"
+msgid "Log in using Google"
+msgstr ""
 
 msgid "Join!"
 msgstr "Dołącz"
@@ -910,11 +917,11 @@ msgstr "Dołącz"
 msgid "Login"
 msgstr "Login"
 
-msgid "Remember me"
-msgstr "Zapamiętaj mnie"
-
 msgid "Forgotten password?"
 msgstr "Zapomniałeś hasła?"
+
+msgid "Remember me"
+msgstr "Zapamiętaj mnie"
 
 msgid "Search text"
 msgstr "Szukaj "
@@ -951,6 +958,9 @@ msgstr "UAB \"UTUTI\""
 
 msgid "About ututi"
 msgstr "O ututi"
+
+msgid "ututi_blog_url"
+msgstr "http://blog.ututi.pl"
 
 msgid "U-blog"
 msgstr "U-blog"
@@ -2055,6 +2065,11 @@ msgstr ""
 msgid "increase the limit"
 msgstr "podnieś limit"
 
+msgid ""
+"Please confirm that the following information about you is correct and "
+"check the box to accept the terms of use."
+msgstr ""
+
 msgid "Already have an account? Login!"
 msgstr "Masz swój profil? Zaloguj się!"
 
@@ -2735,6 +2750,9 @@ msgstr "Gotowe"
 msgid "File upload failed."
 msgstr "Plik nie został dodany."
 
+msgid "Suspicious file?"
+msgstr ""
+
 msgid "Rename"
 msgstr "Zmień nazwę"
 
@@ -2743,6 +2761,9 @@ msgstr "popraw nazwę"
 
 msgid "delete file"
 msgstr "usuń plik"
+
+msgid "flag as suspicious"
+msgstr ""
 
 msgid "deleted"
 msgstr "usunięto"
@@ -2768,6 +2789,13 @@ msgstr "(Usuń)"
 
 msgid "free space:"
 msgstr "wolna przestrzeń:"
+
+#, python-format
+msgid "Please state the reason why the file '%s' is inappropriate:"
+msgstr ""
+
+msgid "Your e-mail (optional)"
+msgstr ""
 
 msgid "unlimited"
 msgstr "nieograniczone"

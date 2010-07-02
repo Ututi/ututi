@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-07-01 15:25+0300\n"
+"PO-Revision-Date: 2010-07-02 18:49+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -314,6 +314,20 @@ msgid ""
 "Only registered users can become members of a group, please register "
 "first."
 msgstr "Tik registruoti vartotojai gali prisijungti prie grupės."
+
+msgid "Facebook did not provide your email address."
+msgstr ""
+
+#, python-format
+msgid "Your Google account \"%s\" has been linked to your existing Ututi account."
+msgstr "Jūsų Google paskyra \"%s\" susieta su sistemoje rasta Jūsų Ututi paskyra."
+
+#, python-format
+msgid ""
+"Your Facebook account \"%s\" has been linked to your existing Ututi "
+"account."
+msgstr ""
+"Jūsų Facebook paskyra \"%s\" susieta su sistemoje rasta Jūsų Ututi paskyra."
 
 msgid "Password recovery email sent. Please check your inbox."
 msgstr "Slaptažodžio atkūrimo laiškas išsiųstas. Pasitikrink pašto dėžutę."
@@ -732,6 +746,9 @@ msgstr "naudojimosi sistema taisyklėmis"
 msgid "Register"
 msgstr "registruotis"
 
+msgid "... or connect using your Google or Facebook account."
+msgstr "... arba prisijunkite naudodamiesi Google arba Facebook."
+
 msgid ""
 "Here you and your classmates can use the file storage for sharing "
 "information and create group for communication."
@@ -873,23 +890,14 @@ msgstr "Naudotojo meniu"
 msgid "feedback"
 msgstr ""
 
-msgid "ututi_blog_url"
-msgstr "http://blog.ututi.lt"
+msgid "Loading..."
+msgstr "Įkeliama..."
 
-msgid "„Ututi“ blog"
-msgstr "Ututi blog'as"
+msgid "Connect using"
+msgstr "Jungtis su"
 
-msgid "ututi_twitter_url"
-msgstr "http://twitter.com/ututi"
-
-msgid "„Ututi“ on twitter"
-msgstr "Uutti twitteryje"
-
-msgid "ututi_facebook_url"
-msgstr "http://facebook.com/ututi"
-
-msgid "„Ututi“ on Facebook"
-msgstr "Ututi Facebooke"
+msgid "Log in using Google"
+msgstr ""
 
 msgid "Join!"
 msgstr "Prisijunk"
@@ -897,11 +905,11 @@ msgstr "Prisijunk"
 msgid "Login"
 msgstr "Prisijungti"
 
+msgid "Forgotten password?"
+msgstr "Pamiršote slaptažodį?"
+
 msgid "Remember me"
 msgstr "Prisiminti mane"
-
-msgid "forgotten password?"
-msgstr "Pamiršote slaptažodį?"
 
 msgid "Search text"
 msgstr "Paieškos tekstas"
@@ -938,6 +946,9 @@ msgstr "UAB „UTUTI“"
 
 msgid "About ututi"
 msgstr "Apie ututi"
+
+msgid "ututi_blog_url"
+msgstr "http://blog.ututi.lt"
 
 msgid "U-blog"
 msgstr "Ututi blogas"
@@ -2051,6 +2062,11 @@ msgstr "Už <em>%d Lt</em> Tavo grupė galės laikyti <em>neribotą failų kiek�
 msgid "increase the limit"
 msgstr "padidinti limitą"
 
+msgid ""
+"Please confirm that the following information about you is correct and "
+"check the box to accept the terms of use."
+msgstr ""
+
 msgid "Already have an account? Login!"
 msgstr "Jau užsiregistravęs? Prisijunk!"
 
@@ -2731,6 +2747,9 @@ msgstr "Baigta"
 msgid "File upload failed."
 msgstr "Failo įkėlimas nepavyko."
 
+msgid "Suspicious file?"
+msgstr ""
+
 msgid "Rename"
 msgstr "Pervadinti"
 
@@ -2739,6 +2758,9 @@ msgstr "keisti failo pavadinimą"
 
 msgid "delete file"
 msgstr "ištrinti failą"
+
+msgid "flag as suspicious"
+msgstr ""
 
 msgid "deleted"
 msgstr "ištrinta"
@@ -2764,6 +2786,13 @@ msgstr "(Trinti)"
 
 msgid "free space:"
 msgstr "laisva vieta:"
+
+#, python-format
+msgid "Please state the reason why the file '%s' is inappropriate:"
+msgstr ""
+
+msgid "Your e-mail (optional)"
+msgstr ""
 
 msgid "unlimited"
 msgstr "neribota"

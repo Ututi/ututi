@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-06-29 14:25+0300\n"
+"POT-Creation-Date: 2010-07-02 18:47+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -295,6 +295,17 @@ msgid "Please register!"
 msgstr ""
 
 msgid "Only registered users can become members of a group, please register first."
+msgstr ""
+
+msgid "Facebook did not provide your email address."
+msgstr ""
+
+#, python-format
+msgid "Your Google account \"%s\" has been linked to your existing Ututi account."
+msgstr ""
+
+#, python-format
+msgid "Your Facebook account \"%s\" has been linked to your existing Ututi account."
 msgstr ""
 
 msgid "Password recovery email sent. Please check your inbox."
@@ -697,6 +708,9 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
+msgid "... or connect using your Google or Facebook account."
+msgstr ""
+
 msgid ""
 "Here you and your classmates can use the file storage for sharing information"
 " and create group for communication."
@@ -829,22 +843,13 @@ msgstr ""
 msgid "feedback"
 msgstr ""
 
-msgid "ututi_blog_url"
+msgid "Loading..."
 msgstr ""
 
-msgid "„Ututi“ blog"
+msgid "Connect using"
 msgstr ""
 
-msgid "ututi_twitter_url"
-msgstr ""
-
-msgid "„Ututi“ on twitter"
-msgstr ""
-
-msgid "ututi_facebook_url"
-msgstr ""
-
-msgid "„Ututi“ on Facebook"
+msgid "Log in using Google"
 msgstr ""
 
 msgid "Join!"
@@ -853,10 +858,10 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-msgid "remember me"
+msgid "Forgotten password?"
 msgstr ""
 
-msgid "forgotten password?"
+msgid "Remember me"
 msgstr ""
 
 msgid "Search text"
@@ -893,6 +898,9 @@ msgid "UAB „UTUTI“"
 msgstr ""
 
 msgid "About ututi"
+msgstr ""
+
+msgid "ututi_blog_url"
 msgstr ""
 
 msgid "U-blog"
@@ -1848,6 +1856,11 @@ msgstr ""
 msgid "increase the limit"
 msgstr ""
 
+msgid ""
+"Please confirm that the following information about you is correct and check "
+"the box to accept the terms of use."
+msgstr ""
+
 msgid "Already have an account? Login!"
 msgstr ""
 
@@ -2487,6 +2500,9 @@ msgstr ""
 msgid "File upload failed."
 msgstr ""
 
+msgid "Suspicious file?"
+msgstr ""
+
 msgid "Rename"
 msgstr ""
 
@@ -2494,6 +2510,9 @@ msgid "edit file name"
 msgstr ""
 
 msgid "delete file"
+msgstr ""
+
+msgid "flag as suspicious"
 msgstr ""
 
 msgid "deleted"
@@ -2518,6 +2537,13 @@ msgid "(Delete)"
 msgstr ""
 
 msgid "free space:"
+msgstr ""
+
+#, python-format
+msgid "Please state the reason why the file '%s' is inappropriate:"
+msgstr ""
+
+msgid "Your e-mail (optional)"
 msgstr ""
 
 msgid "unlimited"
