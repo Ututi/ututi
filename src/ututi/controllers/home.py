@@ -341,14 +341,14 @@ class HomeController(UniversityListMixin):
 
     @validate(FederatedRegistrationForm, form='_federated_registration_form')
     def federated_registration(self):
-        if not session.get('confirmed_openid') or session.get('confirmed_facebook_id'):
+        if not (session.get('confirmed_openid') or session.get('confirmed_facebook_id')):
             redirect(url(controller='home', action='index'))
         if hasattr(self, 'form_result'):
             user = User(self.form_result['fullname'], None, gen_password=False)
             if session.get('confirmed_openid'):
                 user.openid = session['confirmed_openid']
             elif session.get('confirmed_facebook_id'):
-                user.facebook_id = int(session['confirmed_openid'])
+                user.facebook_id = int(session['confirmed_facebook_id'])
             user.accepted_terms = datetime.today()
             email = self.form_result['email'].lower()
             user.emails = [Email(email)]
@@ -394,31 +394,54 @@ class HomeController(UniversityListMixin):
         session.save()
         redirect(redirecturl)
 
-    def _register_or_login(self, identity_url, name, email):
-        user = User.get_byopenid(identity_url)
+    def _facebook_name_and_email(self, facebook_id, fb_access_token):
+        graph = facebook.GraphAPI(fb_access_token)
+        user_profile = graph.get_object("me")
+        name = user_profile.get('name', '')
+        email = user_profile.get('email', '')
+        return name, email
+
+    def _register_or_login(self, name, email, google_id=None, facebook_id=None,
+                           fb_access_token=None):
+        assert bool(google_id) != bool(facebook_id)
+        if google_id:
+            user = User.get_byopenid(google_id)
+        elif facebook_id:
+            user = User.get_byfbid(facebook_id)
         if user is not None:
             # Existing user, log him in and proceed.
-            sign_in_user(email)
+            sign_in_user(user.emails[0].email)
             # TODO: take into account came_from.
             redirect(url(controller='home', action='index'))
         else:
-            # This user has never logged in using OpenID before.
+            # Facebook needs to be asked for the email separately.
+            if facebook_id:
+                name, email = self._facebook_name_and_email(facebook_id,
+                                                            fb_access_token)
+                if not email:
+                    h.flash(_('Facebook did not provide your email address.'))
+                    redirect(url(controller='home', action='index'))
+
+            # This user has never logged in using FB/Google before.
             user = User.get(email)
             if user is None:
                 # New user?
-                session['confirmed_openid'] = identity_url
-                session['confirmed_facebook_id'] = None
+                session['confirmed_openid'] = google_id
+                session['confirmed_facebook_id'] = facebook_id
                 session['confirmed_fullname'] = name
                 session['confirmed_email'] = email
                 session.save()
                 redirect(url(controller='home', action='federated_registration'))
-
             else:
-                # Existing user logging in using OpenID.
-                h.flash(_('Your Google account "%s" has been linked to your existing Ututi account.') % email)
-                user.openid = identity_url
+                # Existing user logging in using FB/Google.
+                if google_id:
+                    h.flash(_('Your Google account "%s" has been linked to your existing Ututi account.') % email)
+                    user.openid = google_id
+                elif facebook_id:
+                    h.flash(_('Your Facebook account "%s" has been linked to your existing Ututi account.') % email)
+                    user.facebook_id = facebook_id
                 meta.Session.commit()
-                sign_in_user(email)
+                sign_in_user(user.emails[0].email)
                 # TODO: take into account came_from.
                 redirect(url(controller='home', action='index'))
 
@@ -435,7 +458,7 @@ class HomeController(UniversityListMixin):
             name = '%s %s' % (request.params.get('openid.ext1.value.firstname'),
                               request.params.get('openid.ext1.value.lastname'))
             email = request.params.get('openid.ext1.value.email')
-            return self._register_or_login(identity_url, name, email)
+            return self._register_or_login(name, email, google_id=identity_url)
         elif info.status == FAILURE and display_identifier:
             # In the case of failure, if info is non-None, it is the
             # URL that we were verifying. We include it in the error
@@ -462,28 +485,10 @@ class HomeController(UniversityListMixin):
     def facebook_login(self):
         fb_user = facebook.get_user_from_cookie(request.cookies,
                          config['facebook.appid'], config['facebook.secret'])
-        if fb_user:# and not c.user:
-            # Facebook user.
-            from ututi.model import User
-            user = User.get_byfbid(fb_user['uid'])
-            if user is not None:
-                # Log in existing user.
-                sign_in_user(user.emails[0].email)
-            else:
-                # New user?
-                graph = facebook.GraphAPI(fb_user['access_token'])
-                user_profile = graph.get_object("me")
-                email = user_profile.get('email')
-                if email:
-                    user = User.get(email)
-                    if user is not None:
-                        # Existing user.
-                        user.facebook_id = fb_user['uid']
-                        sign_in_user(email)
-                        c.user = user
-                    else:
-                        # TODO: New user.
-                        raise
+        if fb_user:
+            uid = fb_user['uid']
+            return self._register_or_login(None, None, facebook_id=uid,
+                                       fb_access_token=fb_user['access_token'])
         # TODO: came_from?
         redirect(url(controller='home', action='index'))
 

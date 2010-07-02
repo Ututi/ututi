@@ -47,6 +47,13 @@ Action: show double form:
 2) standard login form (email & password) for association of Google/FB with
 an existing account.
 
+Unknown email
+-------------
+
+Scenario 1: Facebook user refused to give email
+
+Action: redirect back to front page, show message about email not provided.
+
 
 Account settings
 ================
