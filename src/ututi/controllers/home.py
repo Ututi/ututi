@@ -3,6 +3,7 @@ from random import Random
 import string
 from datetime import datetime
 import simplejson
+import facebook
 
 from openid.consumer.consumer import Consumer, SUCCESS, FAILURE, DiscoveryFailure
 from openid.extensions import ax
@@ -457,6 +458,34 @@ class HomeController(UniversityListMixin):
             raise ValueError(info.status)
 
         return message
+
+    def facebook_login(self):
+        fb_user = facebook.get_user_from_cookie(request.cookies,
+                         config['facebook.appid'], config['facebook.secret'])
+        if fb_user:# and not c.user:
+            # Facebook user.
+            from ututi.model import User
+            user = User.get_byfbid(fb_user['uid'])
+            if user is not None:
+                # Log in existing user.
+                sign_in_user(user.emails[0].email)
+            else:
+                # New user?
+                graph = facebook.GraphAPI(fb_user['access_token'])
+                user_profile = graph.get_object("me")
+                email = user_profile.get('email')
+                if email:
+                    user = User.get(email)
+                    if user is not None:
+                        # Existing user.
+                        user.facebook_id = fb_user['uid']
+                        sign_in_user(email)
+                        c.user = user
+                    else:
+                        # TODO: New user.
+                        raise
+        # TODO: came_from?
+        redirect(url(controller='home', action='index'))
 
 ##  def login_POST(self):
 ##      self.consumer = Consumer(self.openid_session, g.openid_store)

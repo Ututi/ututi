@@ -237,6 +237,7 @@ def make_map(config):
     map.connect('/federated_registration', controller='home', action='federated_registration')
     map.connect('/google_register', controller='home', action='google_register')
     map.connect('/google_verify', controller='home', action='google_verify')
+    map.connect('/facebook_login', controller='home', action='facebook_login')
     map.connect('/password', controller='home', action='pswrecovery')
     map.connect('/process_transaction', controller='home', action='process_transaction')
     map.connect('/recovery/{key}', controller='home', action='recovery')

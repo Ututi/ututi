@@ -4,7 +4,6 @@ Provides the BaseController class for subclassing.
 """
 import re
 from datetime import datetime
-import facebook
 
 from sqlalchemy.exc import InternalError
 from sqlalchemy.exc import InvalidRequestError
@@ -58,31 +57,7 @@ class BaseController(WSGIController):
         c.tags = None
         c.login_error = None
 
-        # Facebook login.
         c.user = current_user()
-        fb_user = facebook.get_user_from_cookie(request.cookies,
-                         config['facebook.appid'], config['facebook.secret'])
-        if fb_user:# and not c.user:
-            # Facebook user.
-            from ututi.model import User
-            user = User.get_byfbid(fb_user['uid'])
-            if user is not None:
-                # Log in existing user.
-                sign_in_user(user.emails[0].email)
-            else:
-                # New user?
-                graph = facebook.GraphAPI(fb_user['access_token'])
-                user_profile = graph.get_object("me")
-                email = user_profile['email']
-                user = User.get(email)
-                if user is not None:
-                    # Existing user.
-                    user.facebook_id = fb_user['uid']
-                    sign_in_user(email)
-                else:
-                    # TODO: New user.
-                    raise
-
         c.testing = asbool(config.get('testing', False))
         c.gg_enabled = asbool(config.get('gg_enabled', False))
         c.tpl_lang = config.get('tpl_lang', 'en')

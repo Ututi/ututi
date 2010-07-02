@@ -114,7 +114,9 @@ ${_('Student information online')}
       <a href="${url(controller='home', action='google_register')}" class="google-login">
           ${h.image('/img/google.gif', alt=_('Log in using Google'))}
       </a>
-      <fb:login-button size="icon" perms="email">Connect</fb:login-button>
+      <fb:login-button size="icon" perms="email"
+                       onlogin="window.location = '${url(controller='home', action='facebook_login')}'"
+       >Connect</fb:login-button>
     </div>
   </div>
 
