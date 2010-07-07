@@ -71,7 +71,7 @@ ${_('Profile settings')}
           </div>
         </div>
         <br style="clear: left;" />
-        <div class="form-field no-break">
+        <div class="no-break">
           <label for="logo_delete">
             <input type="checkbox" name="logo_delete" id="logo_delete" value="delete" class="line"/>
             ${_('Delete current logo')}
@@ -82,13 +82,13 @@ ${_('Profile settings')}
         <fieldset>
         <h3>${_('Personal information')}</h3>
         ${h.input_line('fullname', _('Full name'))}
-        <div class="form-field">
+        <div>
           ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=False)}
         </div>
         ${h.input_line('site_url', _('Address of your website or blog'))}
         ${h.input_area('description', _('About yourself'), rows='6', cols='50')}
 
-        <div class="form-field non-js">
+        <div class="non-js">
           <label for="logo_upload">${_('Personal logo')}</label>
           <input type="file" name="logo_upload" id="logo_upload" class="line"/>
         </div>
@@ -114,7 +114,7 @@ ${_('Profile settings')}
       <td style="width: 180px;">&nbsp;</td>
       <td>
         %if c.gg_enabled:
-          <div class="form-field">
+          <div>
             ${h.input_line('gadugadu_uin', _('Your GG number'))}
 
               %if c.user.gadugadu_uin:
@@ -136,7 +136,7 @@ ${_('Profile settings')}
                   %else:
                     <input type="hidden"  name="gadugadu_confirmation_key" />
                     <div class="field-status confirmed"><div>${_('number is confirmed')}</div></div>
-                    <div class="form-field no-break">
+                    <div class="no-break">
                       <label for="gadugadu_get_news">
                         <input type="checkbox" name="gadugadu_get_news"
                                id="gadugadu_get_news" class="line" />
@@ -154,7 +154,7 @@ ${_('Profile settings')}
             %endif
           </div>
 
-        <div class="form-field">
+        <div>
           ${h.input_line('email', _('Your email address'))}
           %if not c.user.isConfirmed:
           <div class="field-status">(unconfirmed)</div>
