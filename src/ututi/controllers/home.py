@@ -12,6 +12,7 @@ from openid.extensions import ax
 
 from formencode import Schema, validators, Invalid, All, htmlfill
 from webhelpers import paginate
+from xml.sax.saxutils import quoteattr
 
 from paste.util.converters import asbool
 from pylons import request, tmpl_context as c, url, session, config, response
@@ -468,7 +469,6 @@ class HomeController(UniversityListMixin):
             fmt = _("Verification of %s failed: %s")
             message = fmt % (display_identifier, cgi.escape(info.message))
         elif info.status == consumer.CANCEL:
-            # cancelled
             message = _('Verification cancelled')
         elif info.status == consumer.SETUP_NEEDED:
             if info.setup_url:
@@ -479,8 +479,11 @@ class HomeController(UniversityListMixin):
                 # non-immediate mode.
                 message = _('Setup needed')
         else:
-            raise ValueError(info.status) # XXX
-        return message # XXX
+            # This should not happen...  If it does, we want to know about it.
+            raise ValueError(info.status)
+        h.flash(message)
+        # TODO: came_from?
+        redirect(url(controller='home', action='index'))
 
     def facebook_login(self):
         fb_user = facebook.get_user_from_cookie(request.cookies,
