@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-07-02 18:49+0300\n"
+"PO-Revision-Date: 2010-07-07 18:09+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -327,7 +327,8 @@ msgid ""
 "Your Facebook account \"%s\" has been linked to your existing Ututi "
 "account."
 msgstr ""
-"Jūsų Facebook paskyra \"%s\" susieta su sistemoje rasta Jūsų Ututi paskyra."
+"Jūsų Facebook paskyra \"%s\" susieta su sistemoje rasta Jūsų Ututi "
+"paskyra."
 
 msgid "Password recovery email sent. Please check your inbox."
 msgstr "Slaptažodžio atkūrimo laiškas išsiųstas. Pasitikrink pašto dėžutę."
@@ -2384,6 +2385,12 @@ msgstr "ištrinti iš mano dalykų"
 msgid "edit subject information"
 msgstr "keisti dalyko informaciją"
 
+msgid "Similar subjects"
+msgstr "Panašūs dalykai"
+
+msgid "Lect."
+msgstr "Dėst."
+
 msgid "upload a file to.."
 msgstr "įkelti failą į.."
 
@@ -2621,9 +2628,6 @@ msgstr "stebėti dalyką"
 
 msgid "watch subjects"
 msgstr "stebėti dalykus"
-
-msgid "Lect."
-msgstr "Dėst."
 
 msgid "Files:"
 msgstr "Failų: "

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-07-02 18:47+0300\n"
+"PO-Revision-Date: 2010-07-07 18:09+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -2184,6 +2184,12 @@ msgstr ""
 msgid "edit subject information"
 msgstr ""
 
+msgid "Similar subjects"
+msgstr ""
+
+msgid "Lect."
+msgstr ""
+
 msgid "upload a file to.."
 msgstr ""
 
@@ -2411,9 +2417,6 @@ msgid "Watch subject"
 msgstr ""
 
 msgid "watch subjects"
-msgstr ""
-
-msgid "Lect."
 msgstr ""
 
 msgid "Files:"
