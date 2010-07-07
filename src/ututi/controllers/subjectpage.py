@@ -9,7 +9,7 @@ from pylons import tmpl_context as c, request, url
 from pylons.decorators import validate
 from pylons.controllers.util import abort, redirect
 
-from ututi.controllers.subject import subject_action
+from ututi.controllers.subject import subject_action, find_similar_subjects
 from ututi.model import Subject, LocationTag, Page, PageVersion
 from ututi.model import meta
 from ututi.lib.security import ActionProtector
@@ -57,6 +57,7 @@ def page_action(method):
 
         c.page = page
         c.subject = subject
+        c.similar_subjects = find_similar_subjects(subject)
         c.object_location = subject.location
         c.security_context = subject
         return method(self, subject, page)

@@ -89,3 +89,58 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 %endif
 
 </%def>
+
+<%def name="subject_similar_subjects_portlet(subject=None)">
+  <%
+     if subject is None:
+         subject = c.subject
+  %>
+  %if c.similar_subjects:
+  <%self:uportlet id="similar_subjects_portlet">
+    <%def name="header()">
+      ${_('Similar subjects')}
+    </%def>
+      <ul class="Dalykail">
+        <%
+           count_subjects = len(c.similar_subjects)
+        %>
+        %for index, item in enumerate(c.similar_subjects):
+		<li${index==count_subjects-1 and " class='Dalykail-last'" or ''}>
+		  <dl>
+            <%
+               subject = item.object
+               location = subject.location.hierarchy(True)
+               length = len(location)
+            %>
+
+			<dt><a href="${item.object.url()}">${subject.title}</a></dt>
+            %for n, tag in enumerate(location):
+              <dd class="s-line"><a class="uni" href="${tag.url()}" title="${tag.title}">${tag.title_short}</a></dd>
+              %if n != length -1:
+                <dd class="s-line">|</dd>
+              %endif
+            %endfor
+            %if subject.lecturer:
+			  <dd class="s-line">${_('Lect.')} ${subject.lecturer}</dd>
+            %endif
+			<dt></dt>
+            <%
+                file_cnt = len(subject.files)
+                page_cnt = len(subject.pages)
+                group_cnt = subject.group_count()
+                user_cnt = subject.user_count()
+             %>
+            <dd class="files">${ungettext('%(count)s <span class="a11y">file</span>', '%(count)s <span class="a11y">files</span>', file_cnt) % dict(count = file_cnt)|n}</dd>
+            <dd class="pages">${ungettext('%(count)s <span class="a11y">wiki page</span>', '%(count)s <span class="a11y">wiki pages</span>', page_cnt) % dict(count = page_cnt)|n}</dd>
+            <dd class="watchedBy"><span class="a11y">${_('Watched by:')}</span>
+              ${ungettext("%(count)s group", "%(count)s groups", group_cnt) % dict(count = group_cnt)|n}
+              ${_('and')}
+              ${ungettext("%(count)s member", "%(count)s members", user_cnt) % dict(count = user_cnt)|n}
+            </dd>
+		  </dl>
+		</li>
+        %endfor
+	  </ul>
+  </%self:uportlet>
+  %endif
+</%def>

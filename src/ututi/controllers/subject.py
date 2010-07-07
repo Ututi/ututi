@@ -14,15 +14,24 @@ from pylons.decorators import validate
 from pylons.controllers.util import redirect, abort
 from pylons.i18n import _
 
+from ututi.model import SearchItem
 from ututi.model import get_supporters
 from ututi.model import meta, LocationTag, Subject, File, SimpleTag
 from ututi.lib.security import ActionProtector, deny
+from ututi.lib.search import search
 from ututi.lib.fileview import FileViewMixin
-from ututi.lib.base import BaseController, render
+from ututi.lib.base import BaseController, render, u_cache
 from ututi.lib.validators import LocationTagsValidator, TagsValidator
 import ututi.lib.helpers as h
 
 log = logging.getLogger(__name__)
+
+@u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
+def find_similar_subjects(subject):
+    """ Finds 5 similar subject to the one given. """
+    def filter_out(query):
+        return query.filter(SearchItem.content_item_id != subject.id)
+    return search(text=subject.title, type='subject', disjunctive=True, limit=5, extra=filter_out)
 
 def subject_action(method):
     def _subject_action(self, id, tags):
@@ -35,6 +44,8 @@ def subject_action(method):
         c.security_context = subject
         c.object_location = subject.location
         c.subject = subject
+        c.similar_subjects = find_similar_subjects(subject)
+
         return method(self, subject)
     return _subject_action
 

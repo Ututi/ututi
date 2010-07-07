@@ -13,14 +13,14 @@ def search_query_count(query):
     count = meta.Session.execute(select([func.count()], from_obj=query.subquery())).scalar()
     return count
 
-def search_query(text=None, tags=None, obj_type=None, extra=None):
+def search_query(text=None, tags=None, obj_type=None, extra=None, disjunctive=False):
     """Prepare the search query according to the parameters given."""
 
     query = meta.Session.query(SearchItem)\
         .join(ContentItem)\
         .filter_by(deleted_by=None)
 
-    query = _search_query_text(query, text)
+    query = _search_query_text(query, text, disjunctive)
 
     query = _search_query_type(query, obj_type)
 
@@ -28,7 +28,7 @@ def search_query(text=None, tags=None, obj_type=None, extra=None):
         tags = tags.split(', ')
     query = _search_query_tags(query, tags)
 
-    query = _search_query_rank(query, obj_type, text)
+    query = _search_query_rank(query, obj_type, text, disjunctive)
 
     if extra is not None:
         query = extra(query)
@@ -46,7 +46,7 @@ def search_query(text=None, tags=None, obj_type=None, extra=None):
     return query
 
 
-def search(text=None, tags=None, type=None, extra=None):
+def search(text=None, tags=None, type=None, extra=None, disjunctive=False, limit=None):
     """
     A function that implements searching in the search_items table.
 
@@ -54,28 +54,42 @@ def search(text=None, tags=None, type=None, extra=None):
     text - the text string to search,
     tags - a list of tag titles,
     type - the type to search for (accepted values: 'group', 'page', 'subject'),
-    external - external callback to run on the query before fetching results.
+    extra - external callback to run on the query before fetching results.
+    disjunctive - if the query should be disjunctive (or), or conjunctive (and)
     """
 
-    query = search_query(text, tags, type, extra)
+    query = search_query(text, tags, type, extra, disjunctive)
+    if limit is not None:
+        query = query.limit(limit)
     return query.all()
 
-def _search_query_text(query, text=None):
+def _search_query_text(query, text=None, disjunctive=False):
     """Prepare the initial query, searching by text and ranking by the proximity."""
 
     if text is not None:
-        query = query.filter(SearchItem.terms.op('@@')(func.plainto_tsquery(text)))
+        if disjunctive:
+            text = text.replace(' ', ' | ')
+            query = query.filter(SearchItem.terms.op('@@')(func.to_tsquery(text)))
+        else:
+            query = query.filter(SearchItem.terms.op('@@')(func.plainto_tsquery(text)))
     return query
 
-def _search_query_rank(query, obj_type, text):
+def _search_query_rank(query, obj_type, text, disjunctive=False):
     """
     Rank query results, sorting by search rank for most content types and
     integrating the rating for subjects.
     """
-    if obj_type == 'subject':
-        query = query.order_by((SearchItem.rating * func.ts_rank_cd(SearchItem.terms, func.plainto_tsquery(text))).desc())
+    rank_func = None
+    if disjunctive:
+        text = text.replace(' ', ' | ')
+        rank_func = func.ts_rank_cd(SearchItem.terms, func.to_tsquery(text))
     else:
-        query = query.order_by(func.ts_rank_cd(SearchItem.terms, func.plainto_tsquery(text)))
+        rank_func = func.ts_rank_cd(SearchItem.terms, func.plainto_tsquery(text))
+
+    if obj_type == 'subject':
+        query = query.order_by((SearchItem.rating * rank_func).desc())
+    else:
+        query = query.order_by(rank_func.desc())
     return query
 
 def _search_query_type(query, obj_type):
