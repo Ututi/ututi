@@ -1,3 +1,4 @@
+import cgi
 import logging
 from random import Random
 import string
@@ -5,7 +6,8 @@ from datetime import datetime
 import simplejson
 import facebook
 
-from openid.consumer.consumer import Consumer, SUCCESS, FAILURE, DiscoveryFailure
+from openid.consumer import consumer
+from openid.consumer.consumer import Consumer, DiscoveryFailure
 from openid.extensions import ax
 
 from formencode import Schema, validators, Invalid, All, htmlfill
@@ -195,7 +197,7 @@ class HomeController(UniversityListMixin):
         subjects_ids, group_subjects_ids = [], []
         for a in c.most_watched_by_user: subjects_ids.append(a.subject_id)
         for a in c.most_watched_by_group: group_subjects_ids.append(a.subject_id)
- 
+
         c.subjects = meta.Session.query(Subject)\
             .filter(Subject.id.in_(subjects_ids))
         c.group_subjects = meta.Session.query(Subject)\
@@ -369,11 +371,11 @@ class HomeController(UniversityListMixin):
     def google_register(self):
         openid_session = session.get("openid_session", {})
         openid_store = None # stateless
-        consumer = Consumer(openid_session, openid_store)
+        c = Consumer(openid_session, openid_store)
         GOOGLE_OPENID = 'https://www.google.com/accounts/o8/id'
         openid = GOOGLE_OPENID
         try:
-            authrequest = consumer.begin(openid)
+            authrequest = c.begin(openid)
         except DiscoveryFailure, e:
             raise e # XXX
 
@@ -448,39 +450,37 @@ class HomeController(UniversityListMixin):
     def google_verify(self):
         openid_session = session.get("openid_session", {})
         openid_store = None # stateless
-        consumer = Consumer(openid_session, openid_store)
-        info = consumer.complete(request.params,
-                                 url('google_verify', qualified=True))
+        c = Consumer(openid_session, openid_store)
+        info = c.complete(request.params,
+                          url('google_verify', qualified=True))
         display_identifier = info.getDisplayIdentifier()
 
-        if info.status == SUCCESS:
+        if info.status == consumer.SUCCESS:
             identity_url = info.identity_url
             name = '%s %s' % (request.params.get('openid.ext1.value.firstname'),
                               request.params.get('openid.ext1.value.lastname'))
             email = request.params.get('openid.ext1.value.email')
             return self._register_or_login(name, email, google_id=identity_url)
-        elif info.status == FAILURE and display_identifier:
+        elif info.status == consumer.FAILURE and display_identifier:
             # In the case of failure, if info is non-None, it is the
             # URL that we were verifying. We include it in the error
             # message to help the user figure out what happened.
-            fmt = "Verification of %s failed: %s"
-            # TODO: cgi escape
-            message = fmt % (display_identifier, info.message)
+            fmt = _("Verification of %s failed: %s")
+            message = fmt % (display_identifier, cgi.escape(info.message))
         elif info.status == consumer.CANCEL:
             # cancelled
-            message = 'Verification cancelled'
+            message = _('Verification cancelled')
         elif info.status == consumer.SETUP_NEEDED:
             if info.setup_url:
-                message = '<a href=%s>Setup needed</a>' % (
+                message = _('<a href=%s>Setup needed</a>') % (
                     quoteattr(info.setup_url),)
             else:
                 # This means auth didn't succeed, but you're welcome to try
                 # non-immediate mode.
-                message = 'Setup needed'
+                message = _('Setup needed')
         else:
-            raise ValueError(info.status)
-
-        return message
+            raise ValueError(info.status) # XXX
+        return message # XXX
 
     def facebook_login(self):
         fb_user = facebook.get_user_from_cookie(request.cookies,
@@ -491,46 +491,6 @@ class HomeController(UniversityListMixin):
                                        fb_access_token=fb_user['access_token'])
         # TODO: came_from?
         redirect(url(controller='home', action='index'))
-
-##  def login_POST(self):
-##      self.consumer = Consumer(self.openid_session, g.openid_store)
-##      openid = request.params.get('openid', None)
-##      if openid is None:
-##          return render('/login/form.mako')
-##      try:
-##          authrequest = self.consumer.begin(openid)
-##      except DiscoveryFailure, e:
-##          return redirect_to('/login')
-##      redirecturl = authrequest.redirectURL(h.url_for('main', qualified=True), return_to=h.url_for('verified',qualified=True), immediate=False)
-##     
-##      session['openid_session'] = self.openid_session
-##      session.save()
-##      return redirect_to(redirecturl)
-##  def verified(self):
-##      self.consumer = Consumer(self.openid_session, g.openid_store)
-##      info = self.consumer.complete(request.params, (h.url_for('verified', qualified=True)))
-##      if info.status == SUCCESS:
-##          sac_q = model.sac.query(model.Users)
-##          user = sac_q.get_by(openid = info.identity_url)
-##          if user is None:
-##              user = model.Users()
-##              user.openid = info.identity_url
-##              user.signup = datetime.utcnow()
-##          user.lastlogin = datetime.utcnow()
-##          sac_q.session.flush()
-##          session['openid'] = info.identity_url
-##          session.save()
-##          session.clear()
-##          return redirect_to('main')
-##      else:
-##          return redirect_to('/login')
-
-##  def logout(self):
-##      c.title = 'logged out'
-##      session.clear()
-##      session.save()
-##      return render('/login/logout.mako')
-
 
     @validate(PasswordRecoveryForm, form='_pswrecovery_form')
     def pswrecovery(self):
