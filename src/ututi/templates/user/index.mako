@@ -5,8 +5,6 @@
   ${user_information_portlet(user=c.user_info, full=False, title=_('Member information'))}
 </%def>
 
-
-
 <%def name="title()">
   ${c.user_info.fullname}
 </%def>
@@ -26,7 +24,7 @@
 
 %if c.user is not None:
   <div style="clear: left; padding-top: 1em;">
-      ${h.button_to(_('Send message'), url(controller='messages', action='new_message', user_id=c.user_info.id))}
+    ${h.button_to(_('Send message'), url(controller='messages', action='new_message', user_id=c.user_info.id))}
   </div>
 %endif
 
