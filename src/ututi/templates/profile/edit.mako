@@ -73,7 +73,7 @@ ${_('Profile settings')}
         <br style="clear: left;" />
         <div class="no-break">
           <label for="logo_delete">
-            <input type="checkbox" name="logo_delete" id="logo_delete" value="delete" class="line"/>
+            <input type="checkbox" class="checkbox" name="logo_delete" id="logo_delete" value="delete" />
             ${_('Delete current logo')}
           </label>
         </div>

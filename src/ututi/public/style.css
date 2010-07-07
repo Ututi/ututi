@@ -982,6 +982,11 @@ div.profileOptionLinks div.drop{
     width: 270px;
     margin: 0 0 10px 0;
 }
+
+.fullForm input.checkbox {
+    width: 1em;
+}
+
 #group_settings_form label span.address{
     color: #666;
     font-size: 14px;
