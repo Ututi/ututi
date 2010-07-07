@@ -1,5 +1,6 @@
 from datetime import date
 import logging
+import facebook
 
 from pkg_resources import resource_stream
 
@@ -12,7 +13,7 @@ from formencode.api import Invalid
 from formencode.variabledecode import NestedVariables
 from webhelpers import paginate
 
-from pylons import request, tmpl_context as c, url
+from pylons import request, tmpl_context as c, url, config, session
 from pylons.templating import render_mako_def
 from pylons.controllers.util import abort, redirect
 
@@ -249,6 +250,39 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     def edit(self):
         return htmlfill.render(self._edit_form(),
                                defaults=self._edit_form_defaults())
+
+    @ActionProtector("user")
+    def link_google(self):
+        session['linking_to_user'] = c.user.id
+        session.save()
+        redirect(url(controller='home', action='google_register'))
+
+    @ActionProtector("user")
+    def unlink_google(self):
+        c.user.openid = None
+        meta.Session.commit()
+        h.flash(_('Your Google account has been unlinked.'))
+        redirect(url(controller='profile', action='edit'))
+
+    @ActionProtector("user")
+    def link_facebook(self):
+        fb_user = facebook.get_user_from_cookie(request.cookies,
+                         config['facebook.appid'], config['facebook.secret'])
+        if not fb_user:
+            h.flash(_("Failed to link Facebook account"))
+        else:
+            # TODO: check for uniqueness
+            c.user.facebook_id = int(fb_user['uid'])
+            meta.Session.commit()
+            h.flash(_("Linked to Facebook account."))
+        redirect(url(controller='profile', action='edit'))
+
+    @ActionProtector("user")
+    def unlink_facebook(self):
+        c.user.facebook_id = None
+        meta.Session.commit()
+        h.flash(_('Your Facebook account has been unlinked.'))
+        redirect(url(controller='profile', action='edit'))
 
     @validate(PasswordChangeForm, form='_edit_form',
               ignore_request=True, defaults=_edit_form_defaults)

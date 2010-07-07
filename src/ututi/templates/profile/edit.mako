@@ -182,6 +182,47 @@ ${_('Profile settings')}
 </form>
 
 <br />
+
+<table>
+  <tr>
+    <td style="width: 180px;">&nbsp;</td>
+    <td>
+      %if c.user.openid:
+        Google account: linked
+        ${h.button_to(_('Unlink'), url(controller='profile', action='unlink_google'))}
+      %else:
+        Link to
+        <a href="${url(controller='profile', action='link_google')}">
+          ${h.image('/img/google-logo.gif', alt='Google', class_='google-login')}
+        </a>
+      %endif
+    </td>
+  </tr>
+  <tr>
+    <td style="width: 180px;">&nbsp;</td>
+    <td>
+      %if c.user.facebook_id:
+        Facebook account: linked
+        ${h.button_to(_('Unlink'), url(controller='profile', action='unlink_facebook'))}
+      %else:
+        <div id="fb-root"></div>
+        <script src="http://connect.facebook.net/lt_LT/all.js"></script>
+        <script>
+          FB.init({appId: '${c.facebook_app_id}', status: true,
+              cookie: true, xfbml: true});
+        </script>
+
+        Link to
+        <fb:login-button perms="email"
+          onlogin="window.location = '${url(controller='profile', action='link_facebook')}'"
+         >Connect</fb:login-button>
+      %endif
+    </td>
+  </tr>
+</table>
+
+<br />
+
 <table>
   <tr>
     <td style="width: 180px;">&nbsp;</td>
