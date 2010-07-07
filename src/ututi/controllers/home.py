@@ -460,9 +460,12 @@ class HomeController(UniversityListMixin):
             identity_url = info.identity_url
             if 'linking_to_user' in session:
                 user = User.get_byid(session.pop('linking_to_user'))
-                user.openid = identity_url
-                meta.Session.commit()
-                h.flash(_('Linked to Google account.'))
+                if not User.get_byopenid(identity_url):
+                    user.openid = identity_url
+                    meta.Session.commit()
+                    h.flash(_('Linked to Google account.'))
+                else:
+                    h.flash(_('This Google account is already linked to another Ututi account.'))
                 redirect(url(controller='profile', action='edit'))
             name = '%s %s' % (request.params.get('openid.ext1.value.firstname'),
                               request.params.get('openid.ext1.value.lastname'))
