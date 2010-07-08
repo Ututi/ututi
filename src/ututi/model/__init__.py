@@ -10,6 +10,7 @@ import logging
 import warnings
 import string
 import StringIO
+import urllib
 from math import ceil
 from random import Random
 from binascii import a2b_base64, b2a_base64
@@ -807,6 +808,14 @@ class User(object):
         self.password = password
         if gen_password:
             self.password = generate_password(password)
+
+    def update_logo_from_facebook(self):
+        if self.logo:
+            return # Never overwrite a custom logo.
+        if not self.facebook_id:
+            return
+        photo_url = 'https://graph.facebook.com/%d/picture?type=large' % self.facebook_id
+        self.logo = urllib.urlopen(photo_url).read()
 
     def download(self, file):
         self.downloads.append(FileDownload(self, file))

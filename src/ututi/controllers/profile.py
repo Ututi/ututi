@@ -275,6 +275,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             facebook_id = int(fb_user['uid'])
             if not User.get_byfbid(facebook_id):
                 c.user.facebook_id = facebook_id
+                c.user.update_logo_from_facebook()
                 meta.Session.commit()
                 h.flash(_("Linked to Facebook account."))
             else:
