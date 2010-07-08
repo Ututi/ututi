@@ -271,7 +271,6 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         if not fb_user:
             h.flash(_("Failed to link Facebook account"))
         else:
-            # TODO: check for uniqueness
             facebook_id = int(fb_user['uid'])
             if not User.get_byfbid(facebook_id):
                 c.user.facebook_id = facebook_id
