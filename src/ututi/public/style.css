@@ -4222,6 +4222,10 @@ body .ui-dialog .ui-dialog-titlebar {
     padding: 0 0 0 6px;
 }
 
+body .ui-dialog .ui-dialog-content {
+    padding: 1em 1em;
+}
+
 body .ui-corner-all {
     -moz-border-radius: 0;
 }
