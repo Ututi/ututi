@@ -814,7 +814,7 @@ class User(object):
             return # Never overwrite a custom logo.
         if not self.facebook_id:
             return
-        photo_url = 'https://graph.facebook.com/%d/picture?type=large' % self.facebook_id
+        photo_url = 'https://graph.facebook.com/%s/picture?type=large' % self.facebook_id
         self.logo = urllib.urlopen(photo_url).read()
 
     def download(self, file):
