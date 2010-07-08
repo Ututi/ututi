@@ -416,9 +416,11 @@ def department_listing(location_id, departments_shown):
     location = Tag.get(int(location_id))
     children = location.children
     department_count = len(children)
-
-    lft = children[:department_count/2+1]
-    rgt = children[department_count/2+1:]
+    split_point = department_count/2
+    if department_count % 2:
+        split_point = split_point + 1
+    lft = children[:split_point]
+    rgt = children[split_point:]
     if department_count % 2:
         rgt.append(None)
     children = zip(lft, rgt)

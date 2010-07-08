@@ -19,10 +19,10 @@ def search_query(**kwargs):
     settings = {
         'text': None,
         'tags': None,
-        'type': None,
+        'obj_type': None,
         'extra': None,
         'disjunctive': False,
-        'use_rating': kwargs.get('type', '*') == 'subject',
+        'use_rating': kwargs.get('obj_type', '*') == 'subject',
         'rank_cutoff': None,
         'limit': None}
 
@@ -49,7 +49,7 @@ def search_query(**kwargs):
     log_msg = u"%(url)s \t %(text)s \t %(tags)s \t %(type)s \t %(count)i" % {"url": '', # pylons.url.current(),
                                                                              "text": settings['text'] is not None and settings['text'] or '',
                                                                              "tags": settings['tags'] is not None and ', '.join(settings['tags']) or '',
-                                                                             "type": settings['type'] is not None or '*',
+                                                                             "type": settings['obj_type'] is not None or '*',
                                                                              "count": cnt }
     if cnt == 0:
         log.warn(log_msg)
@@ -65,10 +65,11 @@ def search(**kwargs):
     The parameters are:
     text - the text string to search,
     tags - a list of tag titles,
-    type - the type to search for (accepted values: 'group', 'page', 'subject'),
+    obj_type - the type to search for (accepted values: 'group', 'page', 'subject'),
     extra - external callback to run on the query before fetching results.
     disjunctive - if the query should be disjunctive (or), or conjunctive (and)
     """
+
     query = search_query(**kwargs)
     if kwargs.get('limit', None):
         query = query.limit(kwargs.get('limit'))
@@ -114,7 +115,7 @@ def _search_query_rank(query, **kwargs):
 
 def _search_query_type(query, **kwargs):
     """Filter the query by object type."""
-    obj_type = kwargs.get('type')
+    obj_type = kwargs.get('obj_type')
     if obj_type is not None:
         query = query.filter(ContentItem.content_type == obj_type)
 
