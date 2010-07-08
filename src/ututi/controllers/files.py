@@ -104,7 +104,10 @@ class BasefilesController(BaseController):
     def _flag(self, file):
         if request.method == 'POST':
             reason = request.POST.get('reason')
-            email = request.POST.get('reporter_email')
+            if c.user:
+                email = c.user.emails[0].email
+            else:
+                email = request.POST.get('reporter_email')
             extra_vars = dict(f=file, reason=reason, email=email)
             send_email(config['ututi_email_from'],
                        config['ututi_email_from'],

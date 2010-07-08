@@ -202,14 +202,12 @@ Flagging files:
     <form method="post" action="." class="fullForm fileFlagForm">
       <div>
         <label><span class="labelText">Please state the reason why the file 'text;for you.txt' is inappropriate:</span><form:error name="reason" /><span class="textField"><textarea cols="30" id="reason" name="reason" rows="5"></textarea><span class="edgeTextArea"></span></span></label>
-        <div><label for="reporter_email"><span class="labelText">Your e-mail (optional)</span><span class="textField"><input id="reporter_email" name="reporter_email" type="text" value="" /><span class="edge"></span></span></label><form:error name="reporter_email" /></div>
         <button class="btn" value="Submit"><span>Submit</span></button>
       </div>
     </form>
 
     >>> app.post('/subject/vu/mat_analize/file/3/flag',
-    ...           params={'reason': 'Copyright violation',
-    ...                   'reporter_email': 'mole@example.org'}).status
+    ...           params={'reason': 'Copyright violation'}).status
     '200 OK'
 
 An email should have been sent:
@@ -224,7 +222,7 @@ An email should have been sent:
     parent: Matematinė analizė
     parent URL: http://localhost:80/subject/vu/mat_analize
     <BLANKLINE>
-    reporter: mole@example.org
+    reporter: admin@ututi.lt
     <BLANKLINE>
     reason:
     Copyright violation
@@ -268,7 +266,8 @@ Once the group's private files reach a limit, no more files can be uploaded.
     >>> print res.body
     {"text": "\n  <div class=\"area_size\">free space: 0.0 b</div>\n", "image": "\n  <img alt=\"23.0 b\" class=\"area_size_points\" src=\"/images/details/pbar5.png\" />\n", "section_id": "0"}
 
-The disabled upload control is shown with a message encouraging users to pay for the service.
+The disabled upload control is shown with a message encouraging users to pay
+for the service.
 
     >>> browser.open('http://localhost/group/moderators/files')
     >>> browser.printQuery('//div[@class="upload_control no_upload "]')
@@ -345,8 +344,8 @@ uploading is enabled again:
     ...
     </li>
 
-Oh, and since payments are not possible for the polish version, there is a page that explains it once the user has
-clicked on the payment button.
+Oh, and since payments are not possible for the polish version, there is a page
+that explains it once the user has clicked on the payment button.
 
     >>> import pylons.test
     >>> pylons.test.pylonsapp.config['tpl_lang'] = 'pl'
