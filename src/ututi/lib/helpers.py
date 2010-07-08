@@ -417,16 +417,16 @@ def department_listing(location_id, departments_shown):
     children = location.children
     department_count = len(children)
 
-    lft = children[:department_count/2]
-    rgt = children[department_count/2:]
+    lft = children[:department_count/2+1]
+    rgt = children[department_count/2+1:]
     if department_count % 2:
-        lft.append(None)
+        rgt.append(None)
     children = zip(lft, rgt)
     return render_mako_def('/location/university.mako',
                            'department_list',
                            children=children,
                            departments_shown=departments_shown,
-                           department_count=len(children))
+                           department_count=department_count)
 
 @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
 def location_latest_groups(location_id, limit=5):
