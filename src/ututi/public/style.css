@@ -3105,7 +3105,7 @@ MISC
 
 #login-screen #federated-login-buttons {
     padding-top: 2em;
-    padding-bottom: 2em;
+    padding-bottom: 1em;
     text-align: center;
 }
 

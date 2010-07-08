@@ -225,9 +225,7 @@ class HomeController(UniversityListMixin):
     def login(self):
         email = request.POST.get('login')
         password = request.POST.get('password')
-        destination = request.params.get('came_from',
-                                   url(controller='profile',
-                                      action='home'))
+        destination = c.came_from or url(controller='profile', action='home')
         filename = request.params.get('context', None)
 
         context_type = request.params.get('context_type', None)
@@ -360,8 +358,7 @@ class HomeController(UniversityListMixin):
             meta.Session.add(user)
             meta.Session.commit()
             sign_in_user(email)
-            # TODO: take into account came_from.
-            redirect(url(controller='profile', action='register_welcome'))
+            redirect(c.came_from or url(controller='profile', action='register_welcome'))
 
         # Render form: suggested name, suggested email, agree with conditions
         defaults = dict(fullname=session.get('confirmed_fullname'),
@@ -372,11 +369,11 @@ class HomeController(UniversityListMixin):
     def google_register(self):
         openid_session = session.get("openid_session", {})
         openid_store = None # stateless
-        c = Consumer(openid_session, openid_store)
+        cons = Consumer(openid_session, openid_store)
         GOOGLE_OPENID = 'https://www.google.com/accounts/o8/id'
         openid = GOOGLE_OPENID
         try:
-            authrequest = c.begin(openid)
+            authrequest = cons.begin(openid)
         except DiscoveryFailure, e:
             raise e # XXX
 
@@ -389,9 +386,11 @@ class HomeController(UniversityListMixin):
                                alias='email', required=True))
         authrequest.addExtension(ax_req)
 
+        kargs = dict(came_from=c.came_from) if c.came_from else {}
         redirecturl = authrequest.redirectURL(
             url(controller='home', action='index', qualified=True),
-            return_to=url(controller='home', action='google_verify', qualified=True))
+            return_to=url(controller='home', action='google_verify',
+                          qualified=True, **kargs))
 
         session['openid_session'] = openid_session
         session.save()
@@ -414,8 +413,7 @@ class HomeController(UniversityListMixin):
         if user is not None:
             # Existing user, log him in and proceed.
             sign_in_user(user.emails[0].email)
-            # TODO: take into account came_from.
-            redirect(url(controller='home', action='index'))
+            redirect(c.came_from or url(controller='home', action='index'))
         else:
             # Facebook needs to be asked for the email separately.
             if facebook_id:
@@ -423,7 +421,7 @@ class HomeController(UniversityListMixin):
                                                             fb_access_token)
                 if not email:
                     h.flash(_('Facebook did not provide your email address.'))
-                    redirect(url(controller='home', action='index'))
+                    redirect(c.came_from or url(controller='home', action='index'))
 
             # This user has never logged in using FB/Google before.
             user = User.get(email)
@@ -434,7 +432,8 @@ class HomeController(UniversityListMixin):
                 session['confirmed_fullname'] = name
                 session['confirmed_email'] = email
                 session.save()
-                redirect(url(controller='home', action='federated_registration'))
+                redirect(url(controller='home', action='federated_registration',
+                             came_from=c.came_from))
             else:
                 # Existing user logging in using FB/Google.
                 if google_id:
@@ -445,14 +444,13 @@ class HomeController(UniversityListMixin):
                     user.facebook_id = facebook_id
                 meta.Session.commit()
                 sign_in_user(user.emails[0].email)
-                # TODO: take into account came_from.
-                redirect(url(controller='home', action='index'))
+                redirect(c.came_from or url(controller='home', action='index'))
 
     def google_verify(self):
         openid_session = session.get("openid_session", {})
         openid_store = None # stateless
-        c = Consumer(openid_session, openid_store)
-        info = c.complete(request.params,
+        cons = Consumer(openid_session, openid_store)
+        info = cons.complete(request.params,
                           url('google_verify', qualified=True))
         display_identifier = info.getDisplayIdentifier()
 
@@ -488,11 +486,10 @@ class HomeController(UniversityListMixin):
                 # non-immediate mode.
                 message = _('Setup needed')
         else:
-            # This should not happen...  If it does, we want to know about it.
-            raise ValueError(info.status)
+            message = _('Authentication failed: %s') % info.message
+            # TODO: log info.status and info.message
         h.flash(message)
-        # TODO: came_from?
-        redirect(url(controller='home', action='index'))
+        redirect(c.came_from or url(controller='home', action='index'))
 
     def facebook_login(self):
         fb_user = facebook.get_user_from_cookie(request.cookies,
@@ -501,8 +498,7 @@ class HomeController(UniversityListMixin):
             uid = fb_user['uid']
             return self._register_or_login(None, None, facebook_id=uid,
                                        fb_access_token=fb_user['access_token'])
-        # TODO: came_from?
-        redirect(url(controller='home', action='index'))
+        redirect(c.came_from or url(controller='home', action='index'))
 
     @validate(PasswordRecoveryForm, form='_pswrecovery_form')
     def pswrecovery(self):

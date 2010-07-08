@@ -120,11 +120,27 @@
           <input type="hidden" name="came_from" value="${c.came_from}" />
         %endif
         %if c.login_error:
-        <div class="error">${c.login_error}</div>
+          <div class="error">${c.login_error}</div>
         %endif
         ${h.input_line('login_username', _('Your email address'), value=request.params.get('login'))}
         ${h.input_psw('login_password', _('Password'))}
         ${h.input_submit(_('Login'))}
       </form>
+
+      <div id="federated-login-note" style="padding-top: 2em">
+        ${_('Log in or register with your Google or Facebook account.')}
+      </div>
+      <div id="federated-login-buttons">
+        <a href="${url(controller='home', action='google_register', came_from=c.came_from)}" id="google-button">
+          ${h.image('/img/google-logo.gif', alt='Log in using Google', class_='google-login')}
+        </a>
+        <br />
+        ## We rely here on the fact that Facebook has been configured
+        ## by the login widget in the page header.
+        <fb:login-button perms="email"
+            onlogin="show_loading_message(); window.location = '${url(controller='home', action='facebook_login', came_from=c.came_from)}'"
+         >Connect</fb:login-button>
+      </div>
+
   </%self:portlet>
 </%def>
