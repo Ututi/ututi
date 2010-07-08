@@ -15,7 +15,7 @@ ${parent.head_tags()}
 
 
 <h1>${c.header}</h1>
-<table style="width: 100%;">
+<table style="width: 100%;" id="login-screen">
   <tr>
     <td style="vertical-align: top; padding: 15px 20px 0 0;">
       <div id="login_message" class="${c.message_class or 'permission-denied'}">
@@ -32,18 +32,17 @@ ${parent.head_tags()}
             ${ututi_login_section_portlet()}
           </div>
         %else:
-          <h2 class="underline">${_('Why should I join?')}</h3>
-          <div id="ututi_features">
-            <div id="can_find">
-              <h3>${_('What can You find here?')}</h3>
-              ${_('Group <em>forums</em>, subject <em>wikis</em>, <em>files</em>, lecture notes and <em>answers</em> to \
-              questions that matter for your studies.')|n}
-            </div>
-            <div id="can_do">
-              <h3>${_('What can you do here?')}</h3>
-              ${_('Store <em>study materials</em> and pass them on for future generations, create <em>academic groups</em> \
-              and communicate with groupmates.')|n}
-            </div>
+          <div id="federated-login-note">
+            ${_('Log in or register with your Google or Facebook account.')}
+          </div>
+          <div id="federated-login-buttons">
+            <a href="${url(controller='home', action='google_register')}" id="google-button">
+              ${h.image('/img/google-logo.gif', alt='Log in using Google', class_='google-login')}
+            </a>
+            <br />
+            <fb:login-button perms="email"
+              onlogin="show_loading_message(); window.location = '${url(controller='home', action='facebook_login')}'"
+             >Connect</fb:login-button>
           </div>
         %endif
 

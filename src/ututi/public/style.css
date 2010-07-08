@@ -3098,6 +3098,21 @@ MISC
   padding-top: 30px;
 }
 
+#login-screen #federated-login-note {
+    font-weight: bold;
+    text-align: center;
+}
+
+#login-screen #federated-login-buttons {
+    padding-top: 2em;
+    padding-bottom: 2em;
+    text-align: center;
+}
+
+#login-screen #federated-login-buttons #google-button img {
+    margin-bottom: 1em;
+}
+
 div.permission-denied {
   margin-top: 10px;
   padding-left: 140px;
