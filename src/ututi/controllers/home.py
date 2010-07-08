@@ -5,6 +5,7 @@ import string
 from datetime import datetime
 import simplejson
 import facebook
+import urllib
 
 from openid.consumer import consumer
 from openid.consumer.consumer import Consumer, DiscoveryFailure
@@ -337,6 +338,11 @@ class HomeController(UniversityListMixin):
     def _pswrecovery_form(self):
         return render('home/recoveryform.mako')
 
+    def _update_logo_from_facebook(self, user):
+        photo_url = 'https://graph.facebook.com/%d/picture?type=large' % user.facebook_id
+        user.logo = urllib.urlopen(photo_url).read()
+        meta.Session.commit()
+
     def _federated_registration_form(self):
         return render('home/federated_registration.mako')
 
@@ -350,6 +356,7 @@ class HomeController(UniversityListMixin):
                 user.openid = session['confirmed_openid']
             elif session.get('confirmed_facebook_id'):
                 user.facebook_id = int(session['confirmed_facebook_id'])
+                self._update_logo_from_facebook(user)
             user.accepted_terms = datetime.today()
             email = self.form_result['email'].lower()
             user.emails = [Email(email)]
