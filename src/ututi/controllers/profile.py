@@ -324,7 +324,6 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         tag = values.get('location', None)
         c.user.location = tag
 
-
         if values['logo_delete'] == 'delete' and c.user.logo is not None:
             c.user.logo = None
 
