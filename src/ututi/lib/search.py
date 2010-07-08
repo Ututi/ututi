@@ -95,12 +95,16 @@ def _search_query_rank(query, **kwargs):
     rank_func = None
     text = kwargs.get('text')
     disjunctive = kwargs.get('disjunctive')
+    rank_cutoff = kwargs.get('rank_cutoff')
 
     if disjunctive:
         text = text.replace(' ', ' | ')
         rank_func = func.ts_rank_cd(SearchItem.terms, func.to_tsquery(text))
     else:
         rank_func = func.ts_rank_cd(SearchItem.terms, func.plainto_tsquery(text))
+
+    if rank_cutoff is not None:
+        query = query.filter(rank_func >= rank_cutoff)
 
     if kwargs.get('use_rating'):
         query = query.order_by((SearchItem.rating * rank_func).desc())

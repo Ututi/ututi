@@ -31,7 +31,10 @@ def find_similar_subjects(subject):
     """ Finds 5 similar subject to the one given. """
     def filter_out(query):
         return query.filter(SearchItem.content_item_id != subject.id)
-    return search(text=subject.title, type='subject', disjunctive=True, limit=5, extra=filter_out)
+    results = search(text=subject.title, type='subject', disjunctive=False, limit=5, extra=filter_out)
+    if results:
+        return results
+    return search(text=subject.title, type='subject', tags=subject.location.hierarchy(), disjunctive=True, limit=5, extra=filter_out, rank_cutoff=0.1)
 
 def subject_action(method):
     def _subject_action(self, id, tags):
