@@ -32,7 +32,7 @@ from ututi.lib import gg
 from ututi.model.events import Event
 from ututi.model import get_supporters
 from ututi.model import Subject, LocationTag, BlogEntry, PrivateMessage
-from ututi.model import meta, Email, Group, SearchItem
+from ututi.model import meta, Email, Group, SearchItem, User
 from ututi.controllers.group import _filter_watched_subjects, FileUploadTypeValidator
 from ututi.controllers.search import SearchSubmit, SearchBaseController
 from ututi.controllers.home import sign_in_user
