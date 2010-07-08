@@ -23,35 +23,35 @@ def test_basic_search():
     A basic test: we set up a group and search for its text.
     Set the indexing language first, something the controllers always do for us.
 
-        >>> results = search(u'biologija')
+        >>> results = search(text=u'biologija')
         >>> [result.object.title for result in results]
         [u'Bioinformatikai', u'Biology students', u'Biologijos pagrindai']
 
     Let's try out the lithuanian spelling:
 
-        >>> [result.object.title for result in search(u'informatikos')]
+        >>> [result.object.title for result in search(text=u'informatikos')]
         [u'Bioinformatikai', u'Biology students']
 
     Let's search for a subject and see what we get:
 
-        >>> [result.object.title for result in search(u'biologija', type='subject')]
+        >>> [result.object.title for result in search(text=u'biologija', type='subject')]
         [u'Biologijos pagrindai']
 
     Let's try out the external query callback support:
 
-        >>> [result.object.title for result in search(u'biologija', extra=_query_filter)]
+        >>> [result.object.title for result in search(text=u'biologija', extra=_query_filter)]
         [u'Bioinformatikai']
 
     Let's filter by type:
-        >>> [result.object.title for result in search(u'biologija', type='group')]
+        >>> [result.object.title for result in search(text=u'biologija', type='group')]
         [u'Bioinformatikai', u'Biology students']
 
     No pages have been added yet:
-        >>> [result.object.title for result in search(u'biologija', type='page')]
+        >>> [result.object.title for result in search(text=u'biologija', type='page')]
         []
 
     Test file search:
-        >>> results = search(u'geografija')
+        >>> results = search(text=u'geografija')
         >>> [result.object.title for result in results]
         [u'geografija']
 
@@ -102,7 +102,7 @@ def test_tag_search():
         [(u'Ekologai', 'group'), (u'Test subject', 'subject'), (u'page title', 'page')]
 
     Take a look at the rating just cause they are here:
-        >>> [(result.rating, result.object.title) for result in search(u'pagrindai', type='subject')]
+        >>> [(result.rating, result.object.title) for result in search(text=u'pagrindai', type='subject')]
         [(2, u'Biologijos pagrindai'), (1, u'Test subject')]
     """
 

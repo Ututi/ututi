@@ -13,31 +13,43 @@ def search_query_count(query):
     count = meta.Session.execute(select([func.count()], from_obj=query.subquery())).scalar()
     return count
 
-def search_query(text=None, tags=None, obj_type=None, extra=None, disjunctive=False):
+def search_query(**kwargs):
     """Prepare the search query according to the parameters given."""
+
+    settings = {
+        'text': None,
+        'tags': None,
+        'type': None,
+        'extra': None,
+        'disjunctive': False,
+        'use_rating': kwargs.get('type', '*') == 'subject',
+        'rank_cutoff': None,
+        'limit': None}
+
+    settings.update(kwargs)
 
     query = meta.Session.query(SearchItem)\
         .join(ContentItem)\
         .filter_by(deleted_by=None)
 
-    query = _search_query_text(query, text, disjunctive)
+    query = _search_query_text(query, **settings)
 
-    query = _search_query_type(query, obj_type)
+    query = _search_query_type(query, **settings)
 
-    if isinstance(tags, basestring):
-        tags = tags.split(', ')
-    query = _search_query_tags(query, tags)
+    if isinstance(settings['tags'], basestring):
+        settings['tags'] = settings['tags'].split(', ')
+    query = _search_query_tags(query, **settings)
 
-    query = _search_query_rank(query, obj_type, text, disjunctive)
+    query = _search_query_rank(query, **settings)
 
-    if extra is not None:
-        query = extra(query)
+    if settings['extra'] is not None:
+        query = settings['extra'](query)
 
     cnt = search_query_count(query)
     log_msg = u"%(url)s \t %(text)s \t %(tags)s \t %(type)s \t %(count)i" % {"url": '', # pylons.url.current(),
-                                                                             "text": text is not None and text or '',
-                                                                             "tags": tags is not None and ', '.join(tags) or '',
-                                                                             "type": obj_type is not None or '*',
+                                                                             "text": settings['text'] is not None and settings['text'] or '',
+                                                                             "tags": settings['tags'] is not None and ', '.join(settings['tags']) or '',
+                                                                             "type": settings['type'] is not None or '*',
                                                                              "count": cnt }
     if cnt == 0:
         log.warn(log_msg)
@@ -46,7 +58,7 @@ def search_query(text=None, tags=None, obj_type=None, extra=None, disjunctive=Fa
     return query
 
 
-def search(text=None, tags=None, type=None, extra=None, disjunctive=False, limit=None):
+def search(**kwargs):
     """
     A function that implements searching in the search_items table.
 
@@ -57,16 +69,17 @@ def search(text=None, tags=None, type=None, extra=None, disjunctive=False, limit
     extra - external callback to run on the query before fetching results.
     disjunctive - if the query should be disjunctive (or), or conjunctive (and)
     """
-
-    query = search_query(text, tags, type, extra, disjunctive)
-    if limit is not None:
-        query = query.limit(limit)
+    query = search_query(**kwargs)
+    if kwargs.get('limit', None):
+        query = query.limit(kwargs.get('limit'))
     return query.all()
 
-def _search_query_text(query, text=None, disjunctive=False):
+def _search_query_text(query, **kwargs):
     """Prepare the initial query, searching by text and ranking by the proximity."""
 
-    if text is not None:
+    text = kwargs.get('text')
+    disjunctive = kwargs.get('disjunctive')
+    if text:
         if disjunctive:
             text = text.replace(' ', ' | ')
             query = query.filter(SearchItem.terms.op('@@')(func.to_tsquery(text)))
@@ -74,34 +87,39 @@ def _search_query_text(query, text=None, disjunctive=False):
             query = query.filter(SearchItem.terms.op('@@')(func.plainto_tsquery(text)))
     return query
 
-def _search_query_rank(query, obj_type, text, disjunctive=False):
+def _search_query_rank(query, **kwargs):
     """
     Rank query results, sorting by search rank for most content types and
     integrating the rating for subjects.
     """
     rank_func = None
+    text = kwargs.get('text')
+    disjunctive = kwargs.get('disjunctive')
+
     if disjunctive:
         text = text.replace(' ', ' | ')
         rank_func = func.ts_rank_cd(SearchItem.terms, func.to_tsquery(text))
     else:
         rank_func = func.ts_rank_cd(SearchItem.terms, func.plainto_tsquery(text))
 
-    if obj_type == 'subject':
+    if kwargs.get('use_rating'):
         query = query.order_by((SearchItem.rating * rank_func).desc())
     else:
         query = query.order_by(rank_func.desc())
     return query
 
-def _search_query_type(query, obj_type):
+def _search_query_type(query, **kwargs):
     """Filter the query by object type."""
+    obj_type = kwargs.get('type')
     if obj_type is not None:
         query = query.filter(ContentItem.content_type == obj_type)
 
     return query
 
-def _search_query_tags(query, tags):
+def _search_query_tags(query, **kwargs):
     """Filter the query by tags."""
 
+    tags = kwargs.get('tags')
     if tags is not None:
         stags = [] #simple tags
         ltags = [] #location tags
