@@ -58,7 +58,7 @@
         </div>
         <form:error name="agree"/>
         <div class="form-field" style="clear: right;">
-          <label for="agree">${_('I agree to the ')} <a href="${url(controller='home', action='terms')}">${_('terms of use')}</a></label>
+          <label for="agree">${_('I agree to the ')} <a rel="nofollow" href="${url(controller='home', action='terms')}">${_('terms of use')}</a></label>
           <input type="checkbox" name="agree" value="true" style="float: right;"/>
         </div>
         <div class="form-field" style="clear: right; text-align: right; padding: 15px 0 5px;">
@@ -101,7 +101,7 @@
          ${h.input_psw('new_password', _('Password'))}
          ${h.input_psw('repeat_password', _('Repeat password'))}
         <form:error name="agree"/>
-        <label id="agreeWithTOC"><input type="checkbox" name="agree" value="true"/>${_('I agree to the ')} <a href="" onclick="return false;">${_('terms of use')}</a></label>
+        <label id="agreeWithTOC"><input type="checkbox" name="agree" value="true"/>${_('I agree to the ')} <a href="${url(controller='home', action='terms')}" rel="nofollow">${_('terms of use')}</a></label>
         <div>
           ${h.input_submit(_('Join'))}
         </div>
