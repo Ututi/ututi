@@ -6,7 +6,7 @@ from pylons.i18n import _
 
 from ututi.lib.base import render
 from ututi.model import meta
-from ututi.lib.messaging import Message
+from ututi.lib.messaging import EmailMessage
 
 def email_confirmation_request(user, email):
     for user_email in user.emails:
@@ -21,7 +21,7 @@ def email_confirmation_request(user, email):
                                       'link': link,
                                       'html': False})
 
-            msg = Message(_('Confirm the email for Ututi'), text, force=True)
+            msg = EmailMessage(_('Confirm the email for Ututi'), text, force=True)
             msg.send(email)
 
 
@@ -34,7 +34,7 @@ def group_invitation_email(invitation, email):
             #the user is already using ututi, send a message inviting him to join the group
             text = render('/emails/invitation_user.mako',
                           extra_vars={'invitation': invitation})
-            msg = Message(_('Ututi group invitation'), text)
+            msg = EmailMessage(_('Ututi group invitation'), text)
             msg.send(email_instance.user)
         #if the email is not confirmed, nothing will be sent for now
         #XXX: if the user has several emails, send the invitation to one that is confirmed
@@ -44,7 +44,7 @@ def group_invitation_email(invitation, email):
         text = render('/emails/invitation_nonuser.mako',
                       extra_vars={'invitation': invitation})
 
-        msg = Message(_('Ututi group invitation'), text)
+        msg = EmailMessage(_('Ututi group invitation'), text)
         msg.send(email)
 
 
@@ -52,14 +52,14 @@ def email_password_reset(user, email):
     """Send an email to the user with a link to reset his password."""
     text = render('/emails/password_recovery.mako',
                   extra_vars={'user' : user})
-    msg = Message(_('Ututi password recovery'), text, force=True)
+    msg = EmailMessage(_('Ututi password recovery'), text, force=True)
     user.send(msg)
 
 
 def group_request_email(group, user):
     """Send an email to administrators of a group, informing of a membership request."""
     text = render('/emails/group_request.mako', extra_vars={'group': group, 'user': user})
-    msg = Message(_('Ututi group membership request'), text)
+    msg = EmailMessage(_('Ututi group membership request'), text)
     msg.send(group.administrators)
 
 def group_confirmation_email(group, user, status):
@@ -70,5 +70,5 @@ def group_confirmation_email(group, user, status):
     else:
         text = render('/emails/group_confirmation_deny.mako', extra_vars={'group': group, 'user': user})
 
-    msg = Message(_('Ututi group membership confirmation'), text, force=True)
+    msg = EmailMessage(_('Ututi group membership confirmation'), text, force=True)
     msg.send(user)

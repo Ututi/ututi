@@ -8,7 +8,7 @@ from paste.util.datetimeutil import parse_date
 from pylons import request
 from pylons.i18n import ungettext, _
 
-from ututi.lib.messaging import Message
+from ututi.lib.messaging import EmailMessage
 from ututi.lib.base import BaseController, render
 from ututi.model.events import FileUploadedEvent
 from ututi.model.events import PageCreatedEvent
@@ -129,7 +129,7 @@ class NewsController(BaseController):
                           extra_vars=extra_vars)
             html = render('/emails/news_html.mako',
                           extra_vars=extra_vars)
-            msg = Message(subject, text, html)
+            msg = EmailMessage(subject, text, html)
             log.info("Sent to <%s> to %s" % (subject,  user.fullname))
             user = user.send(msg)
 

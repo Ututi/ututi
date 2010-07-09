@@ -29,7 +29,7 @@ from ututi.lib.base import BaseController, render, render_lang, u_cache
 import ututi.lib.helpers as h
 from ututi.lib import gg
 from ututi.lib.emails import email_confirmation_request, email_password_reset
-from ututi.lib.messaging import Message
+from ututi.lib.messaging import EmailMessage
 from ututi.lib.security import ActionProtector, sign_in_user
 from ututi.lib.validators import UniqueEmail
 from ututi.model import meta, User, Email, PendingInvitation, LocationTag, Payment, get_supporters
@@ -565,7 +565,7 @@ class HomeController(UniversityListMixin):
                           extra_vars=extra_vars)
             html = render('/emails/recommendation_html.mako',
                           extra_vars=extra_vars)
-            msg = Message(_('%(fullname)s wants you to join Ututi') % dict(fullname = c.user.fullname), text, html)
+            msg = EmailMessage(_('%(fullname)s wants you to join Ututi') % dict(fullname = c.user.fullname), text, html)
 
             emails = self.form_result.get('recommend_emails', '').split()
             for line in emails:

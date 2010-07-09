@@ -8,10 +8,11 @@ from pylons import config
 import ututi
 
 from ututi.tests import PylonsLayer
-from ututi.lib.messaging import Message
+from ututi.lib.messaging import EmailMessage, GGMessage
 from ututi.model import User, Group, Email, meta
 from ututi.model import GroupMembershipType, GroupMember, LocationTag
 from ututi.lib.mailer import mail_queue
+from ututi.lib.gg import sent_messages as gg_queue
 
 def test_message_user():
     """Tests for messaging.
@@ -21,7 +22,7 @@ def test_message_user():
         >>> user = User.get("somebloke@somehost.com")
         >>> group = meta.Session.query(Group).first()
 
-        >>> msg = Message("the subject", "the text")
+        >>> msg = EmailMessage("the subject", "the text")
 
     If the user does not have a confirmed email address, the message should not be sent.
 
@@ -41,7 +42,7 @@ def test_message_user():
         <BLANKLINE>
         the text
 
-    Messages can also be sent the other way around:
+    EmailMessages can also be sent the other way around:
         >>> user.send(msg)
         >>> print mail_queue.pop().message
         MIME-Version: 1.0
@@ -57,6 +58,34 @@ def test_message_user():
 
     """
 
+
+def test_ggmessage_user():
+    """Tests for gadugadu messaging.
+
+        >>> config._push_object(pylons.test.pylonsapp.config)
+
+        >>> user = User.get("somebloke@somehost.com")
+
+        >>> msg = GGMessage("the message")
+
+    If the user does not have a confirmed email address, the message should not be sent.
+
+        >>> msg.send(user)
+        >>> len(gg_queue)
+        0
+
+    Unless it is forced:
+
+        >>> msg.force = True
+        >>> msg.send(user)
+        >>> print gg_queue.pop()
+        (345665L, 'the message')
+
+        >>> config._pop_object(pylons.test.pylonsapp.config)
+
+    """
+
+
 def test_message_list():
     """Sending messages to lists of recipients.
 
@@ -64,7 +93,7 @@ def test_message_list():
 
     This can be a list of emails.
 
-        >>> msg = Message("the subject", "the text")
+        >>> msg = EmailMessage("the subject", "the text")
         >>> msg.send(["email@host.com", "email2@example.com", "invalidemail"])
         >>> print mail_queue.pop().message
         MIME-Version: 1.0
@@ -96,7 +125,7 @@ def test_message_group():
         >>> config._push_object(pylons.test.pylonsapp.config)
 
         >>> g = Group.get("moderators")
-        >>> msg = Message("the subject", "the text")
+        >>> msg = EmailMessage("the subject", "the text")
         >>> msg.send(g)
         >>> print mail_queue.pop().message
         MIME-Version: 1.0
@@ -119,6 +148,8 @@ def test_setup(test):
     user = User(u"a new user", "his password")
     meta.Session.add(user)
     user.emails.append(Email("somebloke@somehost.com"))
+    user.gadugadu_uin = '345665'
+    user.gadugadu_confirmed = False
     meta.Session.commit()
 
     meta.Session.execute("SET ututi.active_user TO %d" % u.id)
