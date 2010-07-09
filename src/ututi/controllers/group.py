@@ -726,6 +726,16 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
 
     @group_action
     @ActionProtector("member", "admin")
+    def invite(self, group):
+        invited = request.params.get('ids[]')
+        if invited:
+            ids = invited.split(',')
+            h.flash(_('Invited %d friends' % len(ids)))
+            redirect(c.group.url())
+        return render('group/invite.mako')
+
+    @group_action
+    @ActionProtector("member", "admin")
     def upload_file(self, group):
         return self._upload_file(group)
 

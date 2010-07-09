@@ -257,6 +257,13 @@ ${self.anonymous_menu()}
       var lang = '${c.lang}';
     </script>
 
+    ## Break out of iframes automatically.
+    <script type="text/javascript">
+      if (top.location!= self.location) {
+          top.location = self.location.href;
+      }
+    </script>
+
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', '${c.google_tracker}']);
