@@ -7,16 +7,10 @@ from pylons import config
 
 log = logging.getLogger(__name__)
 
-class Message(object):
-
-    def __init__(self, subject, text, html=None, sender=None, force=False):
-        if sender is None:
-            self.sender = config['ututi_email_from']
-        else:
-            self.sender = sender
-        self.subject = subject
-        self.text = text
-        self.html = html
+class BaseMessage(object):
+    """Base class for all message types."""
+    def __init__(self, sender=None, force=False):
+        self.sender = sender
         self.force = force
 
     def send(self, recipient):
@@ -30,14 +24,29 @@ class Message(object):
                 #send the message to a user
                 #XXX the method of choosing the email of the user needs to be revised
                 recipient.send(self)
-            elif isinstance(recipient, basestring):
-                try:
-                    #XXX : need to validate emails
-                    EmailValidator.to_python(recipient)
-                    send_email(self.sender, recipient, self.subject, self.text,
-                               html_body=self.html)
-                except:
-                    log.debug("Invalid email %(email)s" % dict(email=recipient))
         else:
             raise RuntimeError("The message must have a subject and a text to be sent.")
 
+
+class Message(BaseMessage):
+    def __init__(self, subject, text, html=None, sender=None, force=False):
+        if sender is None:
+            sender = config['ututi_email_from']
+
+        super(Message, self).__init__(sender=sender, force=force)
+
+        self.subject = subject
+        self.text = text
+        self.html = html
+
+    def send(self, recipient):
+        if isinstance(recipient, basestring):
+            try:
+                #XXX : need to validate emails
+                EmailValidator.to_python(recipient)
+                send_email(self.sender, recipient, self.subject, self.text,
+                           html_body=self.html)
+            except:
+                log.debug("Invalid email %(email)s" % dict(email=recipient))
+        else:
+            BaseMessage.send(self,recipient=recipient)
