@@ -291,6 +291,14 @@ ${self.anonymous_menu()}
     </title>
   </head>
   <body class="${self.body_class()}">
+    %if c.testing:
+    <div style="width: 200px; position: absolute; top: 0; left: 0; z-index: 1000; background: #f7ff00; padding: 5px;" id="test_warning">
+      ${_('This is a testing version - this is just a copy of the information! Changes you make will not be persisted!')}
+    </div>
+    <script type="text/javascript">
+      $(document).ready(function(){$('#test_warning').click(function(){$(this).hide();})});
+    </script>
+    %endif
   % if c.serve_file:
   <iframe style="display: none;" src="${c.serve_file.url()}"> </iframe>
   % endif
