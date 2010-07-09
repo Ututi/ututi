@@ -608,8 +608,7 @@ class HomeController(UniversityListMixin):
                     redirect(came_from.encode('utf-8'))
 
     def join(self):
-        redirect(url(controller='home', action='login',
-                     register=True, came_from=c.came_from))
+        redirect(url(controller='home', action='login', came_from=c.came_from))
 
     @validate(schema=RegistrationForm(), form='join')
     def join_register(self):

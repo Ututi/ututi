@@ -295,13 +295,7 @@ def group_menu_items():
     return bcs
 
 
-class GroupControllerBase(BaseController):
-
-    def __before__(self):
-        c.breadcrumbs = []
-
-
-class GroupController(GroupControllerBase, FileViewMixin, SubjectAddMixin):
+class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
     """Controller for group actions."""
     controller_name = 'forum'
     @group_action

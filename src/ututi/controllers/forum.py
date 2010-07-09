@@ -18,7 +18,7 @@ from ututi.lib.security import ActionProtector
 from ututi.lib.base import render
 from ututi.lib.helpers import check_crowds, flash
 from ututi.lib.security import deny
-from ututi.controllers.group import GroupControllerBase, group_menu_items
+from ututi.controllers.group import group_menu_items
 from ututi.model import Group, ForumCategory, ForumPost, SubscribedThread
 from ututi.model import get_supporters
 from ututi.model import meta
@@ -118,7 +118,7 @@ def protect_edit(m):
     return fn
 
 
-class ForumController(GroupControllerBase):
+class ForumController(BaseController):
 
     controller_name = 'forum'
 

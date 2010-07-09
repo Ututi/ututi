@@ -16,10 +16,10 @@ from ututi.lib.security import deny
 from ututi.lib.security import check_crowds
 from ututi.lib.security import ActionProtector
 from ututi.lib.mailer import send_email
-from ututi.lib.base import render
+from ututi.lib.base import BaseController, render
 from ututi.lib import helpers as h
 from ututi.controllers.files import serve_file
-from ututi.controllers.group import GroupControllerBase, group_menu_items
+from ututi.controllers.group import group_menu_items
 from ututi.model.mailing import GroupMailingListMessage
 from ututi.model import Group, meta
 
@@ -133,7 +133,7 @@ class NewMailForm(NewReplyForm):
     subject = validators.UnicodeString(not_empty=True, strip=True)
 
 
-class MailinglistController(GroupControllerBase):
+class MailinglistController(BaseController):
 
     def _top_level_messages(self, group):
         message_objs = meta.Session.query(GroupMailingListMessage)\
