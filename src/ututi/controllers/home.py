@@ -95,6 +95,8 @@ class RegistrationForm(Schema):
 class FederatedRegistrationForm(Schema):
     """Registration form for openID/Facebook registrations."""
 
+    allow_extra_fields = True
+
     msg = {'missing': _(u"You must agree to the terms of use.")}
     agree = validators.StringBool(messages=msg)
 
@@ -241,7 +243,7 @@ class HomeController(UniversityListMixin):
         else:
             c.header = _('Permission denied!')
             c.message = _('Only registered users can perform this action. Please log in, or register an account on our system.')
-            c.show_login = False
+            c.show_login = True
         c.final_msg = _('If this is your first time visiting <a href="%(url)s">Ututi</a>, please register first.') % dict(url=url('/', qualified=True))
 
         if password is not None:
@@ -291,6 +293,7 @@ class HomeController(UniversityListMixin):
 
     @validate(schema=RegistrationForm(), form='register')
     def register(self, hash=None):
+        c.show_login = False
         c.show_registration = True
         if hasattr(self, 'form_result'):
             hash = self.form_result.get('hash', None)
@@ -332,7 +335,7 @@ class HomeController(UniversityListMixin):
 
             self._get_unis()
             (c.subjects, c.groups, c.universities) = (self._subjects(), self._groups(), self._universities(limit=10))
-            return render('/anonymous_index.mako')
+            return render('/login.mako')
 
     def _pswrecovery_form(self):
         return render('home/recoveryform.mako')
@@ -605,9 +608,8 @@ class HomeController(UniversityListMixin):
                     redirect(came_from.encode('utf-8'))
 
     def join(self):
-        c.came_from = request.params.get('came_from', False)
-        c.access_denied = request.params.get('access_denied', False)
-        return render('home/join.mako')
+        redirect(url(controller='home', action='login',
+                     register=True, came_from=c.came_from))
 
     @validate(schema=RegistrationForm(), form='join')
     def join_register(self):

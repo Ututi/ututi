@@ -360,6 +360,8 @@ button.btnMedium.btnExclamation {
     top: 8px;
 }
 
+
+
 #loginForm fieldset {
     text-align: right;
     padding-right: 1em;
@@ -3098,9 +3100,23 @@ MISC
   padding-top: 30px;
 }
 
-#login-screen #federated-login-note {
+#login-screen td.login-choice-box {
+    background: white url("../img/login-bg.png") left top no-repeat;
+    width: 310px;
+    vertical-align: top;
+    padding: 1em;
+}
+
+#login-screen td.login-choice-separator {
     font-weight: bold;
-    text-align: center;
+    color: #808080;
+    width: 8em;
+    font-size: 14px;
+}
+
+#login-screen .login-note {
+    font-weight: bold;
+    color: #666;
 }
 
 #login-screen #federated-login-buttons {
@@ -3113,12 +3129,26 @@ MISC
     margin-bottom: 1em;
 }
 
+#login-screen #join_login_form, #login-screen #join_registration_form {
+    padding-left: 2em;
+    padding-top: 2em;
+}
+
+#login-screen #join_login_form {
+    padding-bottom: 1em;
+}
+
+#login-screen input {
+    width: 242px;
+}
+
 div.permission-denied {
-  margin-top: 10px;
-  padding-left: 140px;
-  padding-top: 5px;
-  background: white url("../images/details/icon_nope.png") left top no-repeat;
-  height: 80px;
+    margin-top: 10px;
+    padding-left: 140px;
+    padding-top: 5px;
+    background: white url("../images/details/icon_nope.png") left top no-repeat;
+    height: 60px;
+    border-bottom: 2px solid #ebe8e8;
 }
 
 div.please-register {
@@ -4040,7 +4070,6 @@ table.group-members th {
   padding-bottom: 10px;
   height: 30px;
   font-size: 14px;
-  background: white url("../images/borders/registration_form.png") top center no-repeat;
 }
 
 body.anonymous_index #page-content #ututi_login_section_portlet .rounded-right h3 {
@@ -4065,17 +4094,6 @@ body.anonymous_index #body-container #ututi_join_section_portlet .rounded-right 
   text-transform: none;
   font-size: 18px;
   height: 40px;
-}
-
-body.anonymous_index #ututi_join_portlet .content,
-body.anonymous_index #ututi_join_section_portlet .content {
-  border: 0px;
-  background: white url("../images/borders/registration_form.png") center bottom no-repeat;
-}
-
-body.anonymous_index #ututi_login_section_portlet .content {
-  border: 0px;
-  background: white url("../images/borders/login_form.png") center bottom no-repeat;
 }
 
 body.anonymous_index #ututi_join_section_portlet .content,

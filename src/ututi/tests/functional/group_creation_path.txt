@@ -143,10 +143,6 @@ First let us log out.
     >>> browser.getLink('log out').click()
     >>> browser.open(get_urls(msg)[-1])
 
-    >>> browser.printQuery('//h1/text()')
-    Loading...
-    Please register!
-
     >>> browser.printQuery("id('login_message')")
     <div id="login_message" class="please-register">
     Only registered users can become members of a group, please register first.
@@ -154,7 +150,7 @@ First let us log out.
 
 Let us fill out the registration form
     >>> form = browser.getForm(id='join_registration_form')
-    >>> form.getControl('Fullname').value = 'Jonas Petraitis Petrauskas'
+    >>> form.getControl('Full name').value = 'Jonas Petraitis Petrauskas'
 
 Email is filled in for us already:
     >>> form.getControl('Email').value
@@ -163,7 +159,7 @@ Email is filled in for us already:
     >>> form.getControl('Password').value = 'asdfgh'
     >>> form.getControl('Repeat password').value = 'asdfgh'
     >>> form.getControl(name='agree').value = True
-    >>> form.getControl('Join').click()
+    >>> form.getControl('Register').click()
 
 We should NOT get an email confirmation request.
 

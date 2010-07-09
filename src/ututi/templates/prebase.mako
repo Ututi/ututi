@@ -92,13 +92,6 @@ ${_('Student information online')}
 <%def name="anonymous_header()">
 <form method="post" id="loginForm" action="${url('/login')}">
 
-  <div id="fb-root"></div>
-  <script src="http://connect.facebook.net/lt_LT/all.js"></script>
-  <script>
-    FB.init({appId: '${c.facebook_app_id}', status: true,
-        cookie: true, xfbml: true});
-  </script>
-
   <script src="/javascript/jquery.blockUI.js"></script>
   <div id="loading" style="display: none">
       <h1>${_('Loading...')}</h1>
@@ -353,6 +346,13 @@ ${self.anonymous_menu()}
     %else:
       ${h.javascript_link('/javascript/sugester.js')|n}
     %endif
+
+    <div id="fb-root"></div>
+    <script src="http://connect.facebook.net/lt_LT/all.js"></script>
+    <script>
+      FB.init({appId: '${c.facebook_app_id}', status: true,
+          cookie: true, xfbml: true});
+    </script>
 
   </body>
 </html>

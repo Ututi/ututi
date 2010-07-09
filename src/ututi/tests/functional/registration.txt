@@ -92,7 +92,7 @@ message is shown:
 Ok, now we forget to enter the email when registering. We should be redirected to the
 registration form and shown an error message that we've forgotten the email.
 
-    >>> form = browser.getForm('registration_form')
+    >>> form = browser.getForm('join_registration_form')
     >>> form.getControl('Full name').value = 'Domas Monkus'
     >>> form.getControl('Password').value = 'asdfgh'
     >>> form.getControl('Repeat password').value = 'asdfgh'
@@ -100,14 +100,14 @@ registration form and shown an error message that we've forgotten the email.
     >>> form.getControl(name='agree').value = True
     >>> form.getControl('Register').click()
     >>> browser.url
-    'http://localhost/register'
+    'http://localhost/register?register=True'
 
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Please enter an email address
 
 If we forget to enter the password, we should also get an error message.
 
-    >>> form = browser.getForm('registration_form')
+    >>> form = browser.getForm('join_registration_form')
     >>> form.getControl('Full name').value = 'Domas Monkus'
     >>> form.getControl('Email').value = 'domas@ututi.com'
     >>> form.getControl('Password').value = ''
@@ -115,7 +115,7 @@ If we forget to enter the password, we should also get an error message.
     >>> form.getControl(name='agree').value = True
     >>> form.getControl('Register').click()
     >>> browser.url
-    'http://localhost/register'
+    'http://localhost/register?register=True'
 
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Please enter your password to register.
@@ -123,7 +123,7 @@ If we forget to enter the password, we should also get an error message.
 
 If the passwords do not match we also get an error message.
 
-    >>> form = browser.getForm('registration_form')
+    >>> form = browser.getForm('join_registration_form')
     >>> form.getControl('Full name').value = 'Domas Monkus'
     >>> form.getControl('Password').value = 'abcdefgh'
     >>> form.getControl('Repeat password').value = 'abcdef'
@@ -131,7 +131,7 @@ If the passwords do not match we also get an error message.
     >>> form.getControl(name='agree').value = True
     >>> form.getControl('Register').click()
     >>> browser.url
-    'http://localhost/register'
+    'http://localhost/register?register=True'
 
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Passwords do not match.
@@ -139,7 +139,7 @@ If the passwords do not match we also get an error message.
 If such an email already exists, we also get an error message (later we should get a link to reset the password if
 we have forgotten it).
 
-    >>> form = browser.getForm('registration_form')
+    >>> form = browser.getForm('join_registration_form')
     >>> form.getControl('Full name').value = 'Domas Monkus'
     >>> form.getControl('Password').value = 'abcdefgh'
     >>> form.getControl('Repeat password').value = 'abcdefgh'
@@ -147,7 +147,7 @@ we have forgotten it).
     >>> form.getControl(name='agree').value = True
     >>> form.getControl('Register').click()
     >>> browser.url
-    'http://localhost/register'
+    'http://localhost/register?register=True'
 
     >>> browser.printQuery("//span[@class='error-message']/text()")
     This email has already been used to register.
@@ -186,12 +186,12 @@ Test a curiuos case: if a logged-in user fills in a registration form, specifyin
     >>> browser = Browser.logIn()
     >>> browser.open('http://localhost/join?came_from=%2Fschool%2Fvu')
     >>> form = browser.getForm('join_registration_form')
-    >>> form.getControl('Fullname').value = 'domas'
+    >>> form.getControl('Full name').value = 'domas'
     >>> form.getControl('Email').value = 'admin@ututi.lt'
     >>> form.getControl('Password').value = 'asdfgh'
     >>> form.getControl('Repeat password').value = 'asdfgh'
     >>> form.getControl(name='agree').value = True
-    >>> form.getControl('Join').click()
+    >>> form.getControl('Register').click()
 
     >>> browser.url
-    'http://localhost/register'
+    'http://localhost/register?register=True'

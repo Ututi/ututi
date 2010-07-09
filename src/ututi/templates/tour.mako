@@ -10,7 +10,7 @@
 <div class="join_link">
   ${_('Found out enough?')}
   <br />
-  <a class="btn-large" href="${url(controller='home', action='join')}">
+  <a class="btn-large" href="${url(controller='home', action='join', register=True)}">
     <span>
       ${_('Join Ututi!')}
     </span>

@@ -15,12 +15,12 @@ request group membership.
    'http://localhost/login?context_type=group_join&came_from=%2Fgroup%2Fmoderators%2Frequest_join'
 
    >>> form = browser.getForm('join_registration_form')
-   >>> form.getControl('Fullname').value = 'Jonas Petraitis Petrauskas'
+   >>> form.getControl('Full name').value = 'Jonas Petraitis Petrauskas'
    >>> form.getControl('Email').value = 'jonas@example.com'
    >>> form.getControl('Password').value = 'asdfgh'
    >>> form.getControl('Repeat password').value = 'asdfgh'
    >>> form.getControl(name='agree').value = True
-   >>> form.getControl('Join').click()
+   >>> form.getControl('Register').click()
 
    >>> browser.url
    'http://localhost/group/moderators/home'
