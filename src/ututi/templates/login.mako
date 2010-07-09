@@ -97,7 +97,7 @@ ${parent.head_tags()}
           <input type="hidden" name="hash" value="${c.hash}" />
         %endif
 
-        ${h.input_line('fullname', _('Fullname'))}
+        ${h.input_line('fullname', _('Full name'))}
          % if c.email:
           ${h.input_line('email', _('Email'), disabled="disabled", value=c.email)}
           <input  type="hidden" name="email" value="${c.email}" />
