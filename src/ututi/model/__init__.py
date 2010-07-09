@@ -1730,19 +1730,23 @@ class NotifyGG(MapperExtension):
         if instance.isNullFile():
             return
         from pylons import tmpl_context as c
-        from ututi.lib import gg
+        from ututi.lib.messaging import GGMessage
+
         recipients = []
         if isinstance(instance.parent, (Group, Subject)):
             for interested_user in instance.parent.recipients_gg():
                 if interested_user is not c.user:
                     recipients.append(interested_user.gadugadu_uin)
 
-        for uin in sorted(recipients):
-            msg = _("A new file has been uploaded for the %(title)s:")
-            gg.send_message(uin, msg % {
+            if recipients == []:
+                return
+
+            msg1 = GGMessage(_("A new file has been uploaded for the %(title)s:") % {
                     'title': instance.parent.title})
-            msg = "%s (%s)" % (instance.title, instance.url(qualified=True))
-            gg.send_message(uin, msg)
+            msg2 = GGMessage("%s (%s)" % (instance.title, instance.url(qualified=True)))
+
+            msg1.send(recipients)
+            msg2.send(recipients)
 
 
 class FileDownload(object):
