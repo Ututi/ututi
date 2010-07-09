@@ -378,12 +378,12 @@ Hmm, now what happens if user2 starts ignoring the subject:
 
     >>> from ututi.lib import gg
     >>> from pprint import pprint
-    >>> for msg in gg.sent_messages: print msg
-    (564321L, u'A new file has been uploaded for the Matematin\u0117 analiz\u0117:')
+    >>> for msg in sorted(gg.sent_messages): print msg
     (133465L, u'A new file has been uploaded for the Matematin\u0117 analiz\u0117:')
-    (564321L, u'f1.txt (http://localhost:80/subject/vu/mat_analize/file/9/get)')
     (133465L, u'f1.txt (http://localhost:80/subject/vu/mat_analize/file/9/get)')
     (564321L, u'A new file has been uploaded for the Matematin\u0117 analiz\u0117:')
+    (564321L, u'A new file has been uploaded for the Matematin\u0117 analiz\u0117:')
+    (564321L, u'f1.txt (http://localhost:80/subject/vu/mat_analize/file/9/get)')
     (564321L, u'f2.txt (http://localhost:80/subject/vu/mat_analize/file/10/get)')
 
     >>> gg.sent_messages[:] = []
