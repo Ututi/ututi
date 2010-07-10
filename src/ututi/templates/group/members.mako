@@ -30,7 +30,7 @@
 </%def>
 
 <div class="floatleft" style="clear: left; margin: 20px 0;">
-  <h2>${_('Invite your group mates')}</h2>
+  <h2>${_('Invite your classmates')}</h2>
   <form method="post" action="${url(controller='group', action='invite_members', id=c.group.group_id)}"
       id="member_invitation_form" class="fullForm hideLabels">
 

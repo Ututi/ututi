@@ -138,7 +138,7 @@ ${parent.head_tags()}
 <%self:rounded_block id="user_location" class_="portletNewGroup">
   <div class="floatleft usergrupeleft">
     <h2 class="portletTitle bold">${_('Create a group')}</h2>
-    <p>${_("It's simple - you only need to know the email addresses of your group mates!")}</p>
+    <p>${_("It's simple - you only need to know the email addresses of your classmates!")}</p>
     <p>${_("Use the group's mailing list!")}</p>
   </div>
   <div class="floatleft usergruperight">

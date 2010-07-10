@@ -30,10 +30,10 @@
   <div id="ututi_main_features">
     <div class="feature icon_file">
       <h2>${_('Unlimited file size')}</h2>
-      <span>${_('Store and share with your group mates without restrictions!')}</span>
+      <span>${_('Store and share with your classmates without restrictions!')}</span>
     </div>
     <div class="feature icon_group">
-      <h2>${_('Communicate with your group mates')}</h2>
+      <h2>${_('Communicate with your classmates')}</h2>
       <span>${_('All groups have their own mailing lists.')}</span>
     </div>
     <div class="feature icon_gadugadu">

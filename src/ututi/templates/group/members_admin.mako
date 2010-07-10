@@ -11,7 +11,7 @@ ${h.javascript_link('/javascript/forms.js')|n}
 
 
 <div class="floatleft" style="padding-top: 1em;">
-  <h2>${_('Invite your group mates')}</h2>
+  <h2>${_('Invite your classmates')}</h2>
   <form method="post" action="${url(controller='group', action='invite_members', id=c.group.group_id)}"
       id="member_invitation_form" class="fullForm">
 

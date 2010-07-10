@@ -108,7 +108,7 @@ Now let's see if the view for the user has changed.
 
     >>> browser2.reload()
     >>> browser2.printQuery('id("mainContent")//h2/text()')
-    Invite your group mates
+    Invite your classmates
     Invited users (invitations not accepted yet)
     Group members
 

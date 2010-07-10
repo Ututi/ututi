@@ -51,7 +51,7 @@
     <div class="text">
       <h2>${_('What groups can do: email')}</h2>
       <p>
-        ${_('It is a communication tool for You and Your group mates. '
+        ${_('It is a communication tool for You and Your classmates. '
         'Ututi groups work just like mailing lists: every member can '
         'receive these messages in their email account and can reply to '
         'them from there (You do not have to log on to Ututi every time). ')}
@@ -152,7 +152,7 @@
       <p>
         ${_('Here You can also choose to ignore the subjects watched by Your group - by '
         'clicking on the "eye" icon next to a subject You will stop receiving notifications about '
-        'its events, but other group mates will continue watching it. ')}
+        'its events, but other classmates will continue watching it. ')}
       </p>
       <br />
       <p>
