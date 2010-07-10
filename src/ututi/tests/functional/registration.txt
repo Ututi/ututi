@@ -84,7 +84,7 @@ message is shown:
     >>> form.getControl(name='agree').value = True
     >>> form.getControl('Register').click()
     >>> browser.url
-    'http://localhost/register'
+    'http://localhost/register?register=True'
 
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Please enter your name to register.
