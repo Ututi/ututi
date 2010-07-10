@@ -98,12 +98,12 @@ ${parent.head_tags()}
         %endif
 
         ${h.input_line('fullname', _('Full name'))}
-         % if c.email:
+        % if c.email:
           ${h.input_line('email', _('Email'), disabled="disabled", value=c.email)}
-          <input  type="hidden" name="email" value="${c.email}" />
-         % else:
-           ${h.input_line('email', _('Email'))}
-         % endif
+         <input type="hidden" name="email" value="${c.email}" />
+        % else:
+          ${h.input_line('email', _('Email'))}
+        % endif
         %if c.gg_enabled:
           ${h.input_line('gadugadu', _('Gadu gadu'))}
         %else:
