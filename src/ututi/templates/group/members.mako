@@ -29,7 +29,7 @@
 % endfor
 </%def>
 
-<div style="clear: left; margin: 20px 0;">
+<div class="floatleft" style="clear: left; margin: 20px 0;">
   <h2>${_('Invite your group mates')}</h2>
   <form method="post" action="${url(controller='group', action='invite_members', id=c.group.group_id)}"
       id="member_invitation_form" class="fullForm hideLabels">
@@ -39,5 +39,16 @@
     ${h.input_submit(_('Invite'))}
   </form>
 </div>
+
+<div class="floatleft" style="padding-top: 1em; width: 250px; text-align: center">
+  <h2>${_('Invite your classmates using Facebook')}</h2>
+  <div style="margin-top: 1em">
+    <a href="${c.group.url(action='invite_fb')}">
+      ${h.image('/img/facebook_pic.jpg', alt='Facebook')}
+    </a>
+  </div>
+</div>
+
+<div style="clear: both">&nbsp;</div>
 
 ${group_members(c.group)}

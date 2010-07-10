@@ -9,7 +9,7 @@ from pylons import tmpl_context as c, config, request, url
 from pylons.templating import render_mako_def
 from pylons.controllers.util import redirect, abort
 from pylons.decorators import validate, jsonify
-from pylons.i18n import _
+from pylons.i18n import ungettext, _
 
 from webhelpers import paginate
 
@@ -726,12 +726,14 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
 
     @group_action
     @ActionProtector("member", "admin")
-    def invite(self, group):
+    def invite_fb(self, group):
         invited = request.params.get('ids[]')
         if invited:
             ids = invited.split(',')
-            h.flash(_('Invited %d friends' % len(ids)))
-            redirect(c.group.url())
+            h.flash(ungettext('Invited %(num)d friend.',
+                              'Invited %(num)d friends.',
+                              len(ids)) % dict(num=len(ids)))
+            redirect(c.group.url(action='members'))
         return render('group/invite.mako')
 
     @group_action
