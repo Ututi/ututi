@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-07-07 18:09+0300\n"
+"POT-Creation-Date: 2010-07-10 14:08+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -168,6 +168,12 @@ msgstr ""
 msgid "Group information and settings updated."
 msgstr ""
 
+#, python-format
+msgid "Invited %(num)d friend."
+msgid_plural "Invited %(num)d friends."
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "Invitation cancelled"
 msgstr ""
 
@@ -308,6 +314,30 @@ msgstr ""
 msgid "Your Facebook account \"%s\" has been linked to your existing Ututi account."
 msgstr ""
 
+msgid "Linked to Google account."
+msgstr ""
+
+msgid "This Google account is already linked to another Ututi account."
+msgstr ""
+
+#, python-format
+msgid "Verification of %s failed: %s"
+msgstr ""
+
+msgid "Verification cancelled"
+msgstr ""
+
+#, python-format
+msgid "<a href=%s>Setup needed</a>"
+msgstr ""
+
+msgid "Setup needed"
+msgstr ""
+
+#, python-format
+msgid "Authentication failed: %s"
+msgstr ""
+
 msgid "Password recovery email sent. Please check your inbox."
 msgstr ""
 
@@ -373,6 +403,21 @@ msgid "This email is already in use."
 msgstr ""
 
 msgid "Search"
+msgstr ""
+
+msgid "Your Google account has been unlinked."
+msgstr ""
+
+msgid "Failed to link Facebook account"
+msgstr ""
+
+msgid "Linked to Facebook account."
+msgstr ""
+
+msgid "This Facebook account is already linked to another Ututi account."
+msgstr ""
+
+msgid "Your Facebook account has been unlinked."
 msgstr ""
 
 msgid "Your password has been changed!"
@@ -802,24 +847,31 @@ msgstr ""
 msgid "go find something"
 msgstr ""
 
-msgid "Why should I join?"
+msgid "Log in or register using your Google or Facebook account"
 msgstr ""
 
-msgid "What can You find here?"
+msgid "or"
 msgstr ""
 
-msgid ""
-"Group <em>forums</em>, subject <em>wikis</em>, <em>files</em>, lecture notes "
-"and <em>answers</em> to               questions that matter for your studies."
+msgid "Log in directly to Ututi"
 msgstr ""
 
-msgid "What can you do here?"
+msgid "Your email address"
 msgstr ""
 
-msgid ""
-"Store <em>study materials</em> and pass them on for future generations, "
-"create <em>academic groups</em>               and communicate with "
-"groupmates."
+msgid "Login"
+msgstr ""
+
+msgid "Forgotten password?"
+msgstr ""
+
+msgid "First time here?"
+msgstr ""
+
+msgid "Register!"
+msgstr ""
+
+msgid "Register as a new Ututi user"
 msgstr ""
 
 msgid "Student information online"
@@ -855,12 +907,6 @@ msgstr ""
 msgid "Join!"
 msgstr ""
 
-msgid "Login"
-msgstr ""
-
-msgid "Forgotten password?"
-msgstr ""
-
 msgid "Remember me"
 msgstr ""
 
@@ -889,6 +935,11 @@ msgid "Close"
 msgstr ""
 
 msgid "UTUTI"
+msgstr ""
+
+msgid ""
+"This is a testing version - this is just a copy of the information! Changes "
+"you make will not be persisted!"
 msgstr ""
 
 msgid "ututi_link"
@@ -1183,11 +1234,14 @@ msgid ""
 " files and lecture notes."
 msgstr ""
 
+msgid "What can you do here?"
+msgstr ""
+
 #, python-format
 msgid ""
 "Share <a href=\"%(subjects)s\" title=\"Subject list\">study materials</a>"
 "          create <a href=\"%(groups)s\" title=\"Group list\">academic "
-"groups</a>          and communicate with groupmates."
+"groups</a>          and communicate with classmates."
 msgstr ""
 
 msgid "presentation_url"
@@ -1705,6 +1759,22 @@ msgstr ""
 msgid "Group members"
 msgstr ""
 
+#, python-format
+msgid "Invite friends to %s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Join our group <a href=\"%s\">%s</a> in Ututi, a system for exchanging study "
+"materials and information."
+msgstr ""
+
+msgid "Join Ututi"
+msgstr ""
+
+msgid "Invite your friends to Ututi!"
+msgstr ""
+
 msgid "Invite your group mates"
 msgstr ""
 
@@ -1712,6 +1782,9 @@ msgid "Enter emails of the people you would like to invite to the group."
 msgstr ""
 
 msgid "Invite"
+msgstr ""
+
+msgid "Invite your classmates using Facebook"
 msgstr ""
 
 msgid "Invited users (invitations not accepted yet)"
@@ -1745,6 +1818,9 @@ msgid "Delete group"
 msgstr ""
 
 msgid "Add group members"
+msgstr ""
+
+msgid "Invite using Facebook"
 msgstr ""
 
 msgid "The group's page is empty. Enter your description."
@@ -1859,9 +1935,6 @@ msgstr ""
 msgid ""
 "Please confirm that the following information about you is correct and check "
 "the box to accept the terms of use."
-msgstr ""
-
-msgid "Already have an account? Login!"
 msgstr ""
 
 msgid "Reset your password"
@@ -1993,16 +2066,7 @@ msgstr ""
 msgid "Last edit: "
 msgstr ""
 
-msgid "Join Ututi"
-msgstr ""
-
 msgid "Registration"
-msgstr ""
-
-msgid "Fullname"
-msgstr ""
-
-msgid "Your email address"
 msgstr ""
 
 #, python-format
@@ -2080,13 +2144,13 @@ msgstr ""
 msgid "email your group"
 msgstr ""
 
-msgid "Write an email to the group's forum - accessible by all your groupmates."
+msgid "Write an email to the group's forum - accessible by all your classmates."
 msgstr ""
 
-msgid "invite groupmates"
+msgid "invite classmates"
 msgstr ""
 
-msgid "Invite your groupmates to use Ututi with you."
+msgid "Invite your classmates to use Ututi with you."
 msgstr ""
 
 msgid "Group's members"
@@ -2229,7 +2293,7 @@ msgstr ""
 msgid "recommend Ututi to your friends"
 msgstr ""
 
-msgid "Enter the emails of your groupmates, separated by commas or new lines."
+msgid "Enter the emails of your classmates, separated by commas or new lines."
 msgstr ""
 
 msgid "Send invitation"
@@ -2315,6 +2379,9 @@ msgid "email is confirmed"
 msgstr ""
 
 msgid "Update contacts"
+msgstr ""
+
+msgid "Unlink"
 msgstr ""
 
 msgid "Change your password"
@@ -2738,8 +2805,5 @@ msgid "Add department"
 msgstr ""
 
 msgid "Add section"
-msgstr ""
-
-msgid "or"
 msgstr ""
 

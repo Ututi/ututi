@@ -131,7 +131,7 @@
     <%def name="header()">
     <a class="blark" ${h.trackEvent(None, 'click', 'group_forum_post', 'action_portlets')} href="${url(controller='mailinglist', action='new_thread', id=group.group_id)}">${_('email your group')}</a>
     ${h.image('/images/details/icon_question.png',
-            alt=_("Write an email to the group's forum - accessible by all your groupmates."),
+            alt=_("Write an email to the group's forum - accessible by all your classmates."),
              class_='tooltip', style='margin-top: 4px;')|n}
 
     </%def>
@@ -145,9 +145,9 @@
   %>
   <%self:action_portlet id="invite_member_portlet">
     <%def name="header()">
-    <a class="blark" ${h.trackEvent(None, 'click', 'group_invite_members', 'action_portlets')} href="${group.url(action='members')}">${_('invite groupmates')}</a>
+    <a class="blark" ${h.trackEvent(None, 'click', 'group_invite_members', 'action_portlets')} href="${group.url(action='members')}">${_('invite classmates')}</a>
     ${h.image('/images/details/icon_question.png',
-            alt=_("Invite your groupmates to use Ututi with you."),
+            alt=_("Invite your classmates to use Ututi with you."),
              class_='tooltip', style='margin-top: 4px;')|n}
 
     </%def>

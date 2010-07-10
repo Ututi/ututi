@@ -14,7 +14,7 @@ Testing ututi recommendation letters sent to friends
 
 There should be a portlet with a form that let's us enter email addresses the recommendations will be sent to:
    >>> form = browser.getForm(id='ututi_recommendation_form')
-   >>> form.getControl('Enter the emails of your groupmates, separated by commas or new lines.').value = 'somenewuser@example.com'
+   >>> form.getControl('Enter the emails of your classmates, separated by commas or new lines.').value = 'somenewuser@example.com'
    >>> form.getControl('Send invitation').click()
    >>> printEmails()
    [u'somenewuser@example.com']
@@ -45,7 +45,7 @@ Plus, a status message is displayed:
 What if some of the emails were mistyped?
 
    >>> form = browser.getForm(id='ututi_recommendation_form')
-   >>> form.getControl('Enter the emails of your groupmates, separated by commas or new lines.').value = 'someneweruser@example.com, abra, bram /n user@example.com'
+   >>> form.getControl('Enter the emails of your classmates, separated by commas or new lines.').value = 'someneweruser@example.com, abra, bram /n user@example.com'
    >>> form.getControl('Send invitation').click()
    >>> print len(mail_queue)
    2
@@ -85,7 +85,7 @@ What if some of the emails were mistyped?
 -------------------------
 What if some of the emails belong to people already using ututi?
    >>> form = browser.getForm(id='ututi_recommendation_form')
-   >>> form.getControl('Enter the emails of your groupmates, separated by commas or new lines.').value = 'admin@ututi.lt'
+   >>> form.getControl('Enter the emails of your classmates, separated by commas or new lines.').value = 'admin@ututi.lt'
    >>> form.getControl('Send invitation').click()
    >>> print len(mail_queue)
    0

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-07-09 15:30+0300\n"
+"PO-Revision-Date: 2010-07-10 14:09+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -168,6 +168,13 @@ msgstr "Palikti šią grupę"
 
 msgid "Group information and settings updated."
 msgstr "Grupės informacija ir nustatymai atnaujinti."
+
+#, python-format
+msgid "Invited %(num)d friend."
+msgid_plural "Invited %(num)d friends."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "Invitation cancelled"
 msgstr "Pakvietimas atšauktas"
@@ -330,6 +337,30 @@ msgstr ""
 "Jūsų Facebook paskyra \"%s\" susieta su sistemoje rasta Jūsų Ututi "
 "paskyra."
 
+msgid "Linked to Google account."
+msgstr ""
+
+msgid "This Google account is already linked to another Ututi account."
+msgstr ""
+
+#, python-format
+msgid "Verification of %s failed: %s"
+msgstr ""
+
+msgid "Verification cancelled"
+msgstr ""
+
+#, python-format
+msgid "<a href=%s>Setup needed</a>"
+msgstr ""
+
+msgid "Setup needed"
+msgstr ""
+
+#, python-format
+msgid "Authentication failed: %s"
+msgstr ""
+
 msgid "Password recovery email sent. Please check your inbox."
 msgstr "Slaptažodžio atkūrimo laiškas išsiųstas. Pasitikrink pašto dėžutę."
 
@@ -401,6 +432,21 @@ msgstr "Toks el. pašto adresas jau naudojamas."
 
 msgid "Search"
 msgstr "Paieška"
+
+msgid "Your Google account has been unlinked."
+msgstr ""
+
+msgid "Failed to link Facebook account"
+msgstr ""
+
+msgid "Linked to Facebook account."
+msgstr ""
+
+msgid "This Facebook account is already linked to another Ututi account."
+msgstr ""
+
+msgid "Your Facebook account has been unlinked."
+msgstr ""
 
 msgid "Your password has been changed!"
 msgstr "Tavo slaptažodis sėkmingai pakeistas!"
@@ -849,25 +895,31 @@ msgstr "Uoj, klaidelė... Grįžk atgal ir pabandyk paspausti kur nors kitur. "
 msgid "go find something"
 msgstr "ieškoti ko nors kito"
 
-msgid "Why should I join?"
-msgstr "Kodėl turėčiau jungtis?"
-
-msgid "What can You find here?"
-msgstr "Ką čia galima rasti?"
-
-msgid ""
-"Group <em>forums</em>, subject <em>wikis</em>, <em>files</em>, lecture "
-"notes and <em>answers</em> to               questions that matter for "
-"your studies."
+msgid "Log in or register using your Google or Facebook account"
 msgstr ""
 
-msgid "What can you do here?"
-msgstr "Ką čia galima veikti?"
+msgid "or"
+msgstr "arba"
 
-msgid ""
-"Store <em>study materials</em> and pass them on for future generations, "
-"create <em>academic groups</em>               and communicate with "
-"groupmates."
+msgid "Log in directly to Ututi"
+msgstr ""
+
+msgid "Your email address"
+msgstr "El. pašto adresas"
+
+msgid "Login"
+msgstr "Prisijungti"
+
+msgid "Forgotten password?"
+msgstr "Pamiršote slaptažodį?"
+
+msgid "First time here?"
+msgstr ""
+
+msgid "Register!"
+msgstr ""
+
+msgid "Register as a new Ututi user"
 msgstr ""
 
 msgid "Student information online"
@@ -903,12 +955,6 @@ msgstr ""
 msgid "Join!"
 msgstr "Prisijunk"
 
-msgid "Login"
-msgstr "Prisijungti"
-
-msgid "Forgotten password?"
-msgstr "Pamiršote slaptažodį?"
-
 msgid "Remember me"
 msgstr "Prisiminti mane"
 
@@ -938,6 +984,11 @@ msgstr "Uždaryti"
 
 msgid "UTUTI"
 msgstr "UTUTI"
+
+msgid ""
+"This is a testing version - this is just a copy of the information! "
+"Changes you make will not be persisted!"
+msgstr ""
 
 msgid "ututi_link"
 msgstr "http://ututi.lt"
@@ -1294,11 +1345,14 @@ msgstr ""
 "Grupių forumus, studijų <a href=\"%(link)s\" title=\"Dalykų "
 "sąrašas\">dalykus</a> failus ir konspektus."
 
+msgid "What can you do here?"
+msgstr "Ką čia galima veikti?"
+
 #, python-format
 msgid ""
 "Share <a href=\"%(subjects)s\" title=\"Subject list\">study materials</a>"
 "          create <a href=\"%(groups)s\" title=\"Group list\">academic "
-"groups</a>          and communicate with groupmates."
+"groups</a>          and communicate with classmates."
 msgstr ""
 "Dalintis <a href=\"%(subjects)s\" title=\"Dalykų sąrašsa\">studijų "
 "medžiaga</a>, kurti <a href=\"%(groups)s\" title=\"Grupių "
@@ -1893,6 +1947,22 @@ msgstr "ne, ačiū"
 msgid "Group members"
 msgstr "Grupės nariai"
 
+#, python-format
+msgid "Invite friends to %s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Join our group <a href=\"%s\">%s</a> in Ututi, a system for exchanging "
+"study materials and information."
+msgstr ""
+
+msgid "Join Ututi"
+msgstr "Prisijunk prie Ututi"
+
+msgid "Invite your friends to Ututi!"
+msgstr ""
+
 msgid "Invite your group mates"
 msgstr "Pakviesti grupės draugus"
 
@@ -1901,6 +1971,9 @@ msgstr "Įvesk žmonių, kuriuos nori pakviesti į šią grupę, el. pašto adre
 
 msgid "Invite"
 msgstr "Pakviesti"
+
+msgid "Invite your classmates using Facebook"
+msgstr ""
 
 msgid "Invited users (invitations not accepted yet)"
 msgstr "Pakviesti naudotojai (dar nepriėmę pakvietimų)"
@@ -1934,6 +2007,9 @@ msgstr "Ištrinti grupę"
 
 msgid "Add group members"
 msgstr "Pridėti grupės narius"
+
+msgid "Invite using Facebook"
+msgstr ""
 
 msgid "The group's page is empty. Enter your description."
 msgstr "Grupės puslapis vis dar tuščias - brūkštelk porą žodžių :)"
@@ -2068,9 +2144,6 @@ msgid ""
 "check the box to accept the terms of use."
 msgstr ""
 
-msgid "Already have an account? Login!"
-msgstr "Jau užsiregistravęs? Prisijunk!"
-
 msgid "Reset your password"
 msgstr "Atstatyti slaptažodį"
 
@@ -2204,17 +2277,8 @@ msgstr "ištrinti"
 msgid "Last edit: "
 msgstr "Paskutinis taisymas:"
 
-msgid "Join Ututi"
-msgstr "Prisijunk prie Ututi"
-
 msgid "Registration"
 msgstr "Registracija"
-
-msgid "Fullname"
-msgstr "Vardas, pavardė"
-
-msgid "Your email address"
-msgstr "El. pašto adresas"
 
 #, python-format
 msgid "<em>%(count)s</em> active poster"
@@ -2296,13 +2360,13 @@ msgstr "pasirinkti dalykus"
 msgid "email your group"
 msgstr "rašyti laišką grupei"
 
-msgid "Write an email to the group's forum - accessible by all your groupmates."
+msgid "Write an email to the group's forum - accessible by all your classmates."
 msgstr "Parašyk laišką į grupės forumą, kurį skaito visi tavo grupiokai."
 
-msgid "invite groupmates"
+msgid "invite classmates"
 msgstr "pakviesti grupiokus"
 
-msgid "Invite your groupmates to use Ututi with you."
+msgid "Invite your classmates to use Ututi with you."
 msgstr "Pakviesk grupiokus į Ututi!"
 
 msgid "Group's members"
@@ -2456,7 +2520,7 @@ msgstr ""
 msgid "recommend Ututi to your friends"
 msgstr "rekomenduok Ututi draugams"
 
-msgid "Enter the emails of your groupmates, separated by commas or new lines."
+msgid "Enter the emails of your classmates, separated by commas or new lines."
 msgstr ""
 "Įvesk grupiokų el. pašto adresus, po vieną į eilutę arba atskirtus "
 "kableliais"
@@ -2549,6 +2613,9 @@ msgstr "el. pašto adresas patvirtintas"
 
 msgid "Update contacts"
 msgstr "Atnaujinti kontaktus"
+
+msgid "Unlink"
+msgstr ""
 
 msgid "Change your password"
 msgstr "Pakeisk savo slaptažodį"
@@ -2999,7 +3066,4 @@ msgstr "Sukurk fakultetą"
 
 msgid "Add section"
 msgstr "Sukurk katedrą"
-
-msgid "or"
-msgstr "arba"
 

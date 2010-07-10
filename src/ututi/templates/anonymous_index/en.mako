@@ -168,7 +168,7 @@
           <h3>${_('What can you do here?')}</h3>
           ${_('Share <a href="%(subjects)s" title="Subject list">study materials</a>\
           create <a href="%(groups)s" title="Group list">academic groups</a>\
-          and communicate with groupmates.') % dict(subjects=url(controller='search', action='index', obj_type='subject'),\
+          and communicate with classmates.') % dict(subjects=url(controller='search', action='index', obj_type='subject'),\
                                                     groups=url(controller='search', action='index', obj_type='group'))|n}
         </div>
       </div>

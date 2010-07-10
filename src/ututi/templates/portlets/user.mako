@@ -217,7 +217,7 @@
           action="${url(controller='home', action='send_recommendations')}" id="ututi_recommendation_form">
       <div class="form-field">
         <input type="hidden" name="came_from" value="${request.url}" />
-        <label class="textField" for="recommend_emails">${_('Enter the emails of your groupmates, separated by commas or new lines.')}
+        <label class="textField" for="recommend_emails">${_('Enter the emails of your classmates, separated by commas or new lines.')}
           <textarea name="recommend_emails" id="recommend_emails" rows="4"></textarea>
         </label>
       </div>
