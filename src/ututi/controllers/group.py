@@ -3,6 +3,8 @@ import logging
 from datetime import date
 from os.path import splitext
 
+import facebook
+
 from pkg_resources import resource_stream
 
 from pylons import tmpl_context as c, config, request, url
@@ -727,6 +729,15 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
     @group_action
     @ActionProtector("member", "admin")
     def invite_fb(self, group):
+        fb_user = facebook.get_user_from_cookie(request.cookies,
+                         config['facebook.appid'], config['facebook.secret'])
+        graph = facebook.GraphAPI(fb_user['access_token'])
+        friends = graph.get_object("me/friends")
+
+        # XXX Slow!
+        c.friend_ids = [f['id'] for f in friends['data']
+                        if User.get_byfbid(f['id'])]
+
         invited = request.params.get('ids[]')
         if invited:
             ids = invited.split(',')
