@@ -11,6 +11,9 @@ from openid.consumer.consumer import Consumer, DiscoveryFailure
 from openid.extensions import ax
 
 from formencode import Schema, validators, Invalid, All, htmlfill
+from formencode.compound import Pipe
+from formencode.foreach import ForEach
+from formencode.variabledecode import NestedVariables
 from webhelpers import paginate
 from xml.sax.saxutils import quoteattr
 
@@ -31,7 +34,7 @@ from ututi.lib import gg
 from ututi.lib.emails import email_confirmation_request, email_password_reset
 from ututi.lib.messaging import EmailMessage
 from ututi.lib.security import ActionProtector, sign_in_user
-from ututi.lib.validators import UniqueEmail
+from ututi.lib.validators import UniqueEmail, LocationTagsValidator
 from ututi.model import meta, User, Email, PendingInvitation, LocationTag, Payment, get_supporters
 from ututi.model import UserSubjectMonitoring, GroupSubjectMonitoring, Subject, Group, SearchItem
 
@@ -96,6 +99,7 @@ class FederatedRegistrationForm(Schema):
     """Registration form for openID/Facebook registrations."""
 
     allow_extra_fields = True
+    pre_validators = [NestedVariables()]
 
     msg = {'missing': _(u"You must agree to the terms of use.")}
     agree = validators.StringBool(messages=msg)
@@ -108,6 +112,9 @@ class FederatedRegistrationForm(Schema):
     msg = {'non_unique': _(u"This email has already been used to register.")}
     email = All(validators.Email(not_empty=True, strip=True),
                 UniqueEmail(messages=msg, strip=True, completelyUnique=True))
+
+    location = Pipe(ForEach(validators.String(strip=True)),
+                    LocationTagsValidator())
 
 
 class RecommendationForm(Schema):
@@ -359,6 +366,8 @@ class HomeController(UniversityListMixin):
             user.emails = [Email(email)]
             if email == session.get('confirmed_email').lower():
                 user.emails[0].confirmed = True
+
+            user.location = self.form_result['location']
             meta.Session.add(user)
             meta.Session.commit()
             sign_in_user(email)
@@ -439,8 +448,9 @@ class HomeController(UniversityListMixin):
                 session['confirmed_fullname'] = name
                 session['confirmed_email'] = email
                 session.save()
+                kargs = dict(came_from=c.came_from) if c.came_from else {}
                 redirect(url(controller='home', action='federated_registration',
-                             came_from=c.came_from))
+                             **kargs))
             else:
                 # Existing user logging in using FB/Google.
                 if google_id:

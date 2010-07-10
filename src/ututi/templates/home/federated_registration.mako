@@ -1,11 +1,24 @@
-<%inherit file="/ubase-nomenu.mako" />
+<%inherit file="/ubase-sidebar.mako" />
+<%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*"/>
+<%namespace file="/portlets/user.mako" import="*" />
 
-<div id="homeRegisterBlock">
-  <div>
-    ${_('Please confirm that the following information about you is correct and check the box to accept the terms of use.')}
-  </div>
-  <div id="registrationForm" class="shown">
-    <form id="registration_form" method="post"
+<%def name="title()">
+  Personal information
+</%def>
+
+<%def name="portlets()">
+  ${blog_portlet()}
+  ${user_support_portlet()}
+</%def>
+
+<%def name="head_tags()">
+  <%newlocationtag:head_tags />
+</%def>
+
+<h1>${_('Personal information')}</h1>
+
+<div style="-moz-border-radius: 5px; border: 1px solid #ded8d8; background: #f6f6f6; padding: 1em; margin-top: 1em;">
+    <form id="registration_form" method="post" class="fullForm"
           action="${url(controller='home', action='federated_registration')}">
       <fieldset>
         %if c.hash:
@@ -15,6 +28,12 @@
         %if c.came_from:
           <input type="hidden" name="came_from" value="${c.came_from}" />
         %endif
+
+    <div style="font-size: 14px; font-weight: bold">${_('1. Personal information')}</div>
+    <div style="margin-top: 1em; margin-bottom: 1em; color: #666">
+      ${_("You have to provide an email address to be able to participate in your group's mailing list.")}
+    </div>
+
         <form:error name="fullname"/>
         <label>
           <span class="labelText">${_('Full name')}</span>
@@ -44,12 +63,25 @@
         <input type="hidden" id="gadugadu" name="gadugadu"/>
         %endif
 
-        <form:error name="agree"/>
-        <label id="agreeWithTOC"><input type="checkbox" name="agree" value="true"/>${_('I agree to the ')} <a href="" onclick="return false;">${_('terms of use')}</a></label>
-        <div style="text-align: center;">
-          <button class="btnMedium" type="submit" value="${_('Register')}"><span>${_('Register')}</span></button>
+
+    <div style="font-size: 14px; font-weight: bold; border-top: 1px solid #ded8d8; padding-top: 1em; margin-top: 0.5em"
+      >${_('2. School')}</div>
+    <div style="margin-top: 1em; margin-bottom: 1em; color: #666">
+        ${_("Ututi is an application for students, so it is important for us to know where you study. These data can be changed later in your profile settings screen.")}
+    </div>
+
+        <div>
+          ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=False)}
         </div>
+
+    ## TODO: Phone number.
+
+        <div style="margin-top: 1em">
+          <form:error name="agree"/>
+          <label id="agreeWithTOC"><input type="checkbox" name="agree" value="true"/>${_('I agree to the ')} <a href="" onclick="return false;">${_('terms of use')}</a></label>
+        </div>
+
+        <button class="btnMedium" type="submit" value="${_('Register')}"><span>${_('Register')}</span></button>
       </fieldset>
     </form>
-  </div>
 </div>
