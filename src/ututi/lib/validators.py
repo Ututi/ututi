@@ -59,15 +59,23 @@ class LocationTagsValidator(validators.FancyValidator):
     """A validator that tests if the specified location tags are correct."""
 
     messages = {
-        'badTag': _(u"Location does not exist.")
+        'badTag': _(u"Location does not exist."),
+        'empty': _(u"Please specify your university."),
         }
 
+    _notfoundmarker = object()
+
     def _to_python(self, value, state):
-        return LocationTag.get_by_title(value)
+        if not any(value):
+            return None
+        return LocationTag.get_by_title(value) or self._notfoundmarker
 
     def validate_python(self, value, state):
-        if value is None:
+        if value is self._notfoundmarker:
             raise Invalid(self.message('badTag', state), value, state)
+        if value is None and self.not_empty:
+            raise Invalid(self.message('empty', state), value, state)
+
 
 class LocationIdValidator(validators.FormValidator):
 
