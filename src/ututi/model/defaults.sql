@@ -3,8 +3,6 @@ create table users (
        id bigserial not null,
        fullname varchar(100),
        password char(36),
-       openid varchar(200) default null unique,
-       facebook_id bigint default null unique,
        site_url varchar(200) default null,
        description text default null,
        last_seen timestamp not null default (now() at time zone 'UTC'),
@@ -18,6 +16,8 @@ create table users (
        gadugadu_get_news boolean default false,
        hide_suggest_create_group boolean default false,
        hide_suggest_watch_subject boolean default false,
+       openid varchar(200) default null unique,
+       facebook_id bigint default null unique,
        primary key (id));;
 
 CREATE FUNCTION check_gadugadu() RETURNS trigger AS $$
@@ -148,14 +148,14 @@ create table regions (id bigserial not null,
 /* A table for tags (location and simple tags) */
 create table tags (id bigserial not null,
        parent_id int8 default null references tags(id) on delete cascade,
-       region_id int8 default null references regions(id) on delete restrict,
        title varchar(250) not null,
        title_short varchar(50) default null,
        description text default null,
-       site_url varchar(200) default null,
        logo bytea default null,
        tag_type varchar(10) default null,
+       site_url varchar(200) default null,
        confirmed bool default true,
+       region_id int8 default null references regions(id) on delete restrict,
        primary key (id));;
 
 alter table users add column location_id int8 default null references tags(id) on delete set null;;
@@ -181,10 +181,10 @@ create table groups (
        default_tab varchar(20) default 'home',
        page_public bool default false,
        wants_to_watch_subjects bool default true,
-       has_file_area bool default true,
        admins_approve_members bool default true,
        forum_is_public bool default false,
        mailinglist_enabled bool default true,
+       has_file_area bool default true,
        primary key (id));;
 
 /* An enumerator for membership types in groups */
@@ -199,8 +199,8 @@ create table group_members (
        user_id int8 references users(id) not null,
        membership_type varchar(20) references group_membership_types(membership_type) not null,
        subscribed bool default true,
-       subscribed_to_forum bool default false,
        receive_email_each varchar(30) default 'day',
+       subscribed_to_forum bool default false,
        primary key (group_id, user_id));;
 
 
@@ -315,11 +315,11 @@ insert into forum_categories (group_id, title, description)
 
 CREATE TABLE forum_posts (
        id int8 not null references content_items(id),
-       thread_id int8 references forum_posts,
-       category_id int8 not null references forum_categories(id),
+       thread_id int8 not null references forum_posts,
        title varchar(500) not null,
        message text not null,
        parent_id int8 default null references content_items(id) on delete cascade,
+       category_id int8 not null references forum_categories(id),
        primary key(id));;
 
 
@@ -364,8 +364,8 @@ create table group_mailing_list_attachments (
 /* A table for search indexing */
 create table search_items (
        content_item_id int8 not null references content_items(id) on delete cascade,
-       rating int not null default 0,
        terms tsvector,
+       rating int not null default 0,
        primary key (content_item_id));;
 
 create index search_items_idx on search_items using gin(terms);;
@@ -410,7 +410,7 @@ CREATE FUNCTION update_page_worker(page_versions) RETURNS void AS $$
         page ALIAS FOR $1;
     BEGIN
       EXECUTE set_ci_modtime(page.page_id);
-      SELECT content_item_id INTO search_id  FROM search_items WHERE content_item_id = page.page_id;
+      SELECT content_item_id INTO search_id FROM search_items WHERE content_item_id = page.page_id;
       IF FOUND THEN
         UPDATE search_items SET terms = to_tsvector(coalesce(page.title,''))
           || to_tsvector(coalesce(page.content,'')) WHERE content_item_id=search_id;
@@ -700,7 +700,7 @@ CREATE FUNCTION file_event_trigger() RETURNS trigger AS $$
 $$ LANGUAGE plpgsql;;
 
 
-CREATE TRIGGER file_event_trigger AFTER INSERT ON files
+CREATE TRIGGER file_event_trigger AFTER INSERT OR UPDATE ON files
     FOR EACH ROW EXECUTE PROCEDURE file_event_trigger();;
 
 
@@ -831,7 +831,6 @@ create table payments (
        referrer text,
        query_string text,
 
-       raw_projectid varchar(250),
        raw_orderid varchar(250),
        raw_lang varchar(250),
        raw_amount varchar(250),
@@ -844,17 +843,11 @@ create table payments (
        raw_status varchar(250),
        raw_error varchar(250),
        raw_test varchar(250),
+       raw_projectid varchar(250),
        raw_p_email varchar(250),
        raw_payamount varchar(250),
        raw_paycurrency varchar(250),
        raw_version varchar(250),
-
-       raw_merchantid varchar(250), -- deprecated
-       raw_transaction2 varchar(250), -- deprecated
-       raw_transaction varchar(250), -- deprecated
-       raw_payment varchar(250), -- deprecated
-       raw_user varchar(250), -- deprecated
-       raw_payent_type varchar(250), -- deprecated
 
        primary key (id));;
 
