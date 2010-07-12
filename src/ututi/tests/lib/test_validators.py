@@ -67,7 +67,12 @@ def test_phonenumbervalidator():
         >>> v.to_python('8 (699) 123456', {})
         Traceback (most recent call last):
             ...
-        Invalid: Invalid phone number; use the format +37069912345
+        Invalid: Phone number too long; use the format +37069912345
+
+        >>> v.to_python('8 (699) 1234', {})
+        Traceback (most recent call last):
+            ...
+        Invalid: Phone number too short; use the format +37069912345
 
     + is not allowed in the middle of the string:
 

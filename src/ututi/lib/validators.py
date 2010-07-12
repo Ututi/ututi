@@ -104,6 +104,8 @@ class PhoneNumberValidator(validators.FancyValidator):
 
     messages = {
         'invalid': _(u"Invalid phone number; use the format +37069912345"),
+        'tooLong': _(u"Phone number too long; use the format +37069912345"),
+        'tooShort': _(u"Phone number too short; use the format +37069912345"),
         'empty': _("The field may not be left empty.")
         }
 
@@ -113,7 +115,11 @@ class PhoneNumberValidator(validators.FancyValidator):
             raise Invalid(self.message('empty', state), value, state)
         if s.startswith('8'):
             s = '+370' + s[1:]
-        if not len(s) == 12 or s.count('+') != 1:
+        if len(s) < 12:
+            raise Invalid(self.message('tooShort', state), value, state)
+        if len(s) > 12:
+            raise Invalid(self.message('tooLong', state), value, state)
+        if s.count('+') != 1:
             raise Invalid(self.message('invalid', state), value, state)
         return s
 
