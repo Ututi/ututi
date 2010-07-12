@@ -13,7 +13,7 @@
         <fb:req-choice url='${url(controller='home', action='index', qualified=True)}' label='${_('Join Ututi')}' />
                        ">
         <fb:multi-friend-selector max="20" actiontext="${_('Invite your friends to Ututi!')}"
-                       showborder="true" rows="5" cols="7" exclude_ids="${','.join(c.friend_ids)}">
+                                  showborder="true" rows="5" cols="7" exclude_ids="${c.exclude_ids}">
       </fb:request-form>
     </fb:fbml>
   </script>
