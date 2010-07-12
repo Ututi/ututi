@@ -18,6 +18,8 @@ create table users (
        hide_suggest_watch_subject boolean default false,
        openid varchar(200) default null unique,
        facebook_id bigint default null unique,
+       phone_number varchar(20) default null,
+       phone_confirmed boolean default false,
        primary key (id));;
 
 CREATE FUNCTION check_gadugadu() RETURNS trigger AS $$
