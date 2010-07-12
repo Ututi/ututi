@@ -731,10 +731,16 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
     def invite_fb(self, group):
         fb_user = facebook.get_user_from_cookie(request.cookies,
                          config['facebook.appid'], config['facebook.secret'])
-        if fb_user is None:
-            pass # XXX We're not logged on to Facebook; ask to log on.
-        graph = facebook.GraphAPI(fb_user['access_token'])
-        friends = graph.get_object("me/friends")
+        c.has_facebook = fb_user is not None
+        if c.has_facebook:
+            try:
+                graph = facebook.GraphAPI(fb_user['access_token'])
+                friends = graph.get_object("me/friends")
+            except facebook.GraphAPIError:
+                c.has_facebook = False
+        if not c.has_facebook:
+            # Ask to log on to facebook.
+            return render('group/invite.mako')
 
         friend_ids = [f['id'] for f in friends['data']]
         friend_users = meta.Session.query(User.facebook_id).filter(
