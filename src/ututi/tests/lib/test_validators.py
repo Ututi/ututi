@@ -47,6 +47,9 @@ def test_phonenumbervalidator():
         >>> from ututi.lib.validators import PhoneNumberValidator
         >>> v = PhoneNumberValidator()
 
+        >>> print v.to_python('', {})
+        None
+
     The widget validates Lithuanian phone numbers. It supports two formats,
     with the international prefix and without one:
 

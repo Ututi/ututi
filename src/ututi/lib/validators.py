@@ -110,9 +110,12 @@ class PhoneNumberValidator(validators.FancyValidator):
         }
 
     def _to_python(self, value, state):
+        if not value.strip():
+            if self.not_empty:
+                raise Invalid(self.message('empty', state), value, state)
+            else:
+                return None
         s = re.sub(r'[^\d\+]', '', value) # strip away all non-numeric chars.
-        if self.not_empty and not s:
-            raise Invalid(self.message('empty', state), value, state)
         if s.startswith('8'):
             s = '+370' + s[1:]
         if len(s) < 12:
