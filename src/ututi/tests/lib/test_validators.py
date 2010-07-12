@@ -2,7 +2,7 @@ from zope.testing import doctest
 from ututi.tests import PylonsLayer
 
 def test_html_cleanup():
-    """Tests the html cleanup code.
+    """Test the html cleanup code.
 
     The cleanup should remove script tags.
 
@@ -37,6 +37,44 @@ def test_html_cleanup():
         >>> html_cleanup(input)
         '<a>Text</a><img href="a.img"><span>Text</span><div>Text</div>'
 
+
+    """
+
+
+def test_phonenumbervalidator():
+    """Test for PhoneNumberValidator.
+
+        >>> from ututi.lib.validators import PhoneNumberValidator
+        >>> v = PhoneNumberValidator()
+
+    The widget validates Lithuanian phone numbers. It supports two formats,
+    with the international prefix and without one:
+
+        >>> v.to_python('+37069912345', {})
+        '+37069912345'
+        >>> v.to_python('869912345', {})
+        '+37069912345'
+
+    Extra characters are stripped away:
+
+        >>> v.to_python('8-699-12345', {})
+        '+37069912345'
+        >>> v.to_python('8 (699) 12345', {})
+        '+37069912345'
+
+    Length of the number is validated:
+
+        >>> v.to_python('8 (699) 123456', {})
+        Traceback (most recent call last):
+            ...
+        Invalid: Invalid phone number; use the format +37069912345
+
+    + is not allowed in the middle of the string:
+
+        >>> v.to_python('8+699+123', {})
+        Traceback (most recent call last):
+            ...
+        Invalid: Invalid phone number; use the format +37069912345
 
     """
 

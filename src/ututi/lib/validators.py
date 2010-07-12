@@ -71,10 +71,10 @@ class LocationTagsValidator(validators.FancyValidator):
         return LocationTag.get_by_title(value) or self._notfoundmarker
 
     def validate_python(self, value, state):
-        if value is self._notfoundmarker:
-            raise Invalid(self.message('badTag', state), value, state)
         if value is None and self.not_empty:
             raise Invalid(self.message('empty', state), value, state)
+        elif value is self._notfoundmarker:
+            raise Invalid(self.message('badTag', state), value, state)
 
 
 class LocationIdValidator(validators.FormValidator):
@@ -97,6 +97,30 @@ class LocationIdValidator(validators.FormValidator):
             raise Invalid(self.message('duplicate', state),
                           form_dict, state,
                           error_dict={'title_short' : Invalid(self.message('duplicate', state), form_dict, state)})
+
+
+class PhoneNumberValidator(validators.FancyValidator):
+    """A validator for Lithuanian phone numbers."""
+
+    messages = {
+        'invalid': _(u"Invalid phone number; use the format +37069912345"),
+        'empty': _("The field may not be left empty.")
+        }
+
+    def _to_python(self, value, state):
+        s = re.sub(r'[^\d\+]', '', value)
+        if self.not_empty and not s:
+            raise Invalid(self.message('empty', state), value, state)
+        if s.startswith('8'):
+            s = '+370' + s[1:]
+        if not len(s) == 12 or s.count('+') != 1:
+            raise Invalid(self.message('invalid', state), value, state)
+        return s
+
+    def validate_python(self, value, state):
+        if value is None and self.not_empty:
+            raise Invalid(self.message('empty', state), value, state)
+
 
 class InURLValidator(validators.FancyValidator):
     """ A validator for strings that appear in urls"""
