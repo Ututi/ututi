@@ -65,7 +65,7 @@
 
 
     <div style="font-size: 14px; font-weight: bold; border-top: 1px solid #ded8d8; padding-top: 1em; margin-top: 0.5em"
-      >${_('2. School')}</div>
+      >${_('2. School (optional)')}</div>
     <div style="margin-top: 1em; margin-bottom: 1em; color: #666">
         ${_("Ututi is an application for students, so it is important for us to know where you study. These data can be changed later in your profile settings screen.")}
     </div>
@@ -75,6 +75,21 @@
         </div>
 
     ## TODO: Phone number.
+
+    <div style="font-size: 14px; font-weight: bold; border-top: 1px solid #ded8d8; padding-top: 1em; margin-top: 0.5em"
+      >${_('3. Phone number (optional)')}</div>
+    <div style="margin-top: 1em; margin-bottom: 1em; color: #666">
+      ${_("We need your phone number so that you could send and receive SMS messages from the group. Don't worry, we will never send advertisements.")}
+    </div>
+
+        <form:error name="phone"/>
+        <label>
+          <span class="labelText">${_('Phone number')}</span>
+          <span class="textField">
+            <input type="text" name="phone" value="" />
+            <span class="edge"></span>
+          </span>
+        </label>
 
         <div style="margin-top: 1em">
           <form:error name="agree"/>

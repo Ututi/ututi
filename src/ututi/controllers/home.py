@@ -34,7 +34,7 @@ from ututi.lib import gg
 from ututi.lib.emails import email_confirmation_request, email_password_reset
 from ututi.lib.messaging import EmailMessage
 from ututi.lib.security import ActionProtector, sign_in_user
-from ututi.lib.validators import UniqueEmail, LocationTagsValidator
+from ututi.lib.validators import UniqueEmail, LocationTagsValidator, PhoneNumberValidator
 from ututi.model import meta, User, Email, PendingInvitation, LocationTag, Payment, get_supporters
 from ututi.model import UserSubjectMonitoring, GroupSubjectMonitoring, Subject, Group, SearchItem
 
@@ -114,7 +114,9 @@ class FederatedRegistrationForm(Schema):
                 UniqueEmail(messages=msg, strip=True, completelyUnique=True))
 
     location = Pipe(ForEach(validators.String(strip=True)),
-                    LocationTagsValidator())
+                    LocationTagsValidator(not_empty=False))
+
+    phone = PhoneNumberValidator(not_empty=False)
 
 
 class RecommendationForm(Schema):
@@ -368,6 +370,7 @@ class HomeController(UniversityListMixin):
                 user.emails[0].confirmed = True
 
             user.location = self.form_result['location']
+            user.phone_number = self.form_result['phone']
             meta.Session.add(user)
             meta.Session.commit()
             sign_in_user(email)
