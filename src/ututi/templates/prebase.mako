@@ -92,27 +92,6 @@ ${_('Student information online')}
 <%def name="anonymous_header()">
 <form method="post" id="loginForm" action="${url('/login')}">
 
-  <script src="/javascript/jquery.blockUI.js"></script>
-  <div id="loading" style="display: none">
-      <h1>${_('Loading...')}</h1>
-  </div>
-  <script>
-      function show_loading_message() {
-          $.blockUI({
-              message: $('#loading'),
-              css: {
-                  border: 'none',
-                  padding: '25px',
-                  backgroundColor: '#000',
-                  '-webkit-border-radius': '10px',
-                  '-moz-border-radius': '10px',
-                  opacity: .5,
-                  color: '#fff'
-              }
-          });
-      }
-  </script>
-
   <div id="federatedLogin">
     <div id="federatedLoginHint">${_('Connect using')}</div>
     <div id="login-buttons">
@@ -282,6 +261,7 @@ ${self.anonymous_menu()}
     ${h.javascript_link('/javascript/ajaxupload.3.5.js')}
     ${h.javascript_link('/javascript/jquery.qtip.min.js')}
     ${h.javascript_link('/javascript/tooltips.js')}
+    ${h.javascript_link('/javascript/jquery.blockUI.js')}
     ${h.javascript_link(h.path_with_hash('/javascript/expand.js'))}
     ${h.javascript_link(h.path_with_hash('/javascript/hide_parent.js'))}
     ${h.javascript_link(h.path_with_hash('/javascript/forms.js'))}
@@ -353,6 +333,27 @@ ${self.anonymous_menu()}
     %else:
       ${h.javascript_link('/javascript/sugester.js')|n}
     %endif
+
+    <script src="/javascript/jquery.blockUI.js"></script>
+    <div id="loading" style="display: none">
+        <h1>${_('Loading...')}</h1>
+    </div>
+    <script>
+        function show_loading_message() {
+            $.blockUI({
+                message: $('#loading'),
+                css: {
+                    border: 'none',
+                    padding: '25px',
+                    backgroundColor: '#000',
+                    '-webkit-border-radius': '10px',
+                    '-moz-border-radius': '10px',
+                    opacity: .5,
+                    color: '#fff'
+                }
+            });
+        }
+    </script>
 
     <div id="fb-root"></div>
     <script src="http://connect.facebook.net/lt_LT/all.js"></script>
