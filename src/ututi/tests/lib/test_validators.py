@@ -62,6 +62,11 @@ def test_phonenumbervalidator():
         >>> v.to_python('8 (699) 12345', {})
         '+37069912345'
 
+    Perhaps the validator is a bit too open about what it accepts?
+
+        >>> v.to_python('foo8bar699xyzzy12345', {})
+        '+37069912345'
+
     Length of the number is validated:
 
         >>> v.to_python('8 (699) 123456', {})
