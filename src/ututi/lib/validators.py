@@ -117,10 +117,6 @@ class PhoneNumberValidator(validators.FancyValidator):
             raise Invalid(self.message('invalid', state), value, state)
         return s
 
-    def validate_python(self, value, state):
-        if value is None and self.not_empty:
-            raise Invalid(self.message('empty', state), value, state)
-
 
 class InURLValidator(validators.FancyValidator):
     """ A validator for strings that appear in urls"""
