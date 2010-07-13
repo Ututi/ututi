@@ -67,7 +67,7 @@ ${_('Profile settings')}
         <div class="js-alternatives" id="user-logo">
           <img src="${url(controller='profile', action='logo', width='120', height='200')}" alt="User logo" id="user-logo-editable"/>
           <div>
-          <div class="btn"><div id="user-logo-button" >${_('Change logo')}</div></div>
+            <div id="user-logo-button" >${_('Change logo')}</div>
           </div>
         </div>
         <br style="clear: left;" />

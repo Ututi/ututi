@@ -3998,6 +3998,12 @@ div.user-logo-link div {
   text-align: center;
 }
 
+div#user-logo-button {
+    margin-left: 1.5em;
+    margin-top: 4px;
+    color: #d45500;
+}
+
 /* end user block */
 
 /* members screen */
