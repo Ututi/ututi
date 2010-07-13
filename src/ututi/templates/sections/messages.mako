@@ -29,7 +29,7 @@
     ${h.image('/img/icons/bigX_15x15.png', alt=_('Close'))}
   </span>
   <span>
-    ${_('Your <strong>gadu gadu number</strong> is not confirmed! Please confirm it by entering the code sent to you.')|n}
+      ${_('Your <strong>gadu gadu number</strong> is not confirmed! Please <a href="%s">confirm</a> it by entering the code sent to you.') % url(controller='profile', action='edit')|n}
   </span>
 </div>
 %endif
