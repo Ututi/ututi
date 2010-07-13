@@ -256,7 +256,6 @@ class HomeController(UniversityListMixin):
         c.final_msg = _('If this is your first time visiting <a href="%(url)s">Ututi</a>, please register first.') % dict(url=url('/', qualified=True))
 
         if password is not None:
-            user = None
             user = User.authenticate(email, password.encode('utf-8'))
             c.header = _('Wrong username or password!')
             c.message = _('You seem to have entered your username and password wrong, please try again!')
@@ -298,7 +297,6 @@ class HomeController(UniversityListMixin):
 
         sign_in_user(email)
         return (user, email)
-
 
     @validate(schema=RegistrationForm(), form='register')
     def register(self, hash=None):
@@ -358,11 +356,7 @@ class HomeController(UniversityListMixin):
             redirect(url(controller='home', action='index'))
         if hasattr(self, 'form_result'):
             user = User(self.form_result['fullname'], None, gen_password=False)
-            if session.get('confirmed_openid'):
-                user.openid = session['confirmed_openid']
-            elif session.get('confirmed_facebook_id'):
-                user.facebook_id = int(session['confirmed_facebook_id'])
-                user.update_logo_from_facebook()
+            self._bind_user(user)
             user.accepted_terms = datetime.today()
             email = self.form_result['email'].lower()
             user.emails = [Email(email)]
@@ -381,6 +375,33 @@ class HomeController(UniversityListMixin):
                         email=session.get('confirmed_email'))
         return htmlfill.render(self._federated_registration_form(),
                                defaults=defaults)
+
+    def _bind_user(self, user):
+        """Bind user to FB/Google account (retrieve info from session)."""
+        if session.get('confirmed_openid'):
+            user.openid = session['confirmed_openid']
+            h.flash(_('Your Google account has been associated with your Ututi account.'))
+        elif session.get('confirmed_facebook_id'):
+            user.facebook_id = int(session['confirmed_facebook_id'])
+            user.update_logo_from_facebook()
+            h.flash(_('Your Facebook account has been associated with your Ututi account.'))
+
+    def associate_account(self):
+        """Associate an Ututi account with a Google/FB account."""
+        email = request.POST.get('login_username')
+        password = request.POST.get('login_password')
+        destination = c.came_from or url(controller='profile', action='home')
+
+        if password is not None:
+            user = User.authenticate(email, password.encode('utf-8'))
+            if user is not None:
+                sign_in_user(email)
+                self._bind_user(User.get(email))
+                meta.Session.commit()
+                redirect(str(destination))
+            else:
+                c.login_error = _('Wrong username or password!')
+        return render('/home/associate_account.mako')
 
     def google_register(self):
         openid_session = session.get("openid_session", {})
@@ -634,7 +655,6 @@ class HomeController(UniversityListMixin):
         password = request.POST.get('login_password')
 
         if password is not None:
-            user = None
             user = User.authenticate(email, password.encode('utf-8'))
             c.login_error = _('Wrong username or password!')
 

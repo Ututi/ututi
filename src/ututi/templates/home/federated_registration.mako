@@ -74,8 +74,6 @@
           ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=False)}
         </div>
 
-    ## TODO: Phone number.
-
     <div style="font-size: 14px; font-weight: bold; border-top: 1px solid #ded8d8; padding-top: 1em; margin-top: 0.5em"
       >${_('3. Phone number (optional)')}</div>
     <div style="margin-top: 1em; margin-bottom: 1em; color: #666">
@@ -97,6 +95,11 @@
         </div>
 
         <button class="btnMedium" type="submit" value="${_('Register')}"><span>${_('Register')}</span></button>
+
+        <span style="margin-left: 1em">
+          ${h.link_to(_('I am already a registered Ututi user'), url(controller='home', action='associate_account'))}
+        </span>
+
       </fieldset>
     </form>
 </div>
