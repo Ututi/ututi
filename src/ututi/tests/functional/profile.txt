@@ -12,7 +12,6 @@ Each user will have a profile that is accessible via the url /profile/{id}.
     >>> browser = Browser()
     >>> browser.open('http://localhost/user/1')
     >>> browser.printQuery('//h1/text()')
-    Loading...
     What has Adminas Adminovix been up to?
 
 Now we'll try editing our profile information. First we need to log in.

@@ -336,7 +336,7 @@ ${self.anonymous_menu()}
 
     <script src="/javascript/jquery.blockUI.js"></script>
     <div id="loading" style="display: none">
-        <h1>${_('Loading...')}</h1>
+        ${_('Loading...')}
     </div>
     <script>
         function show_loading_message() {
@@ -348,6 +348,7 @@ ${self.anonymous_menu()}
                     backgroundColor: '#000',
                     '-webkit-border-radius': '10px',
                     '-moz-border-radius': '10px',
+                    'font-size': '26px',
                     opacity: .5,
                     color: '#fff'
                 }
