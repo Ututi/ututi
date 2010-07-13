@@ -743,9 +743,10 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
             return render('group/invite.mako')
 
         friend_ids = [f['id'] for f in friends['data']]
-        friend_users = meta.Session.query(User.facebook_id).filter(
+        friend_users = meta.Session.query(User).filter(
                                 User.facebook_id.in_(friend_ids)).all()
-        c.exclude_ids = ','.join(str(u[0]) for u in friend_users)
+        c.exclude_ids = ','.join(str(u.facebook_id) for u in friend_users
+                                 if c.group.is_member(u))
 
         invited = request.params.get('ids[]')
         if invited:
