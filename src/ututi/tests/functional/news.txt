@@ -44,13 +44,13 @@ Add their gadugadu numbers:
 
 Pretend we lost it ;)
 
-    >>> browser2.getControl('send code again').click()
+    >>> browser2.getControl('Send code again').click()
     >>> msg = gg.sent_messages.pop()
     >>> gg.sent_messages.pop()
     (564321L, u'To confirm your gadu gadu enter this code in your profile page.')
 
     >>> browser2.getControl(name='gadugadu_confirmation_key').value = msg[1]
-    >>> browser2.getControl('OK').click()
+    >>> browser2.getControl('Submit code').click()
 
     >>> browser2.getControl('Receive news into gg').click()
     >>> browser2.getControl('Update contacts').click()
@@ -64,7 +64,7 @@ Pretend we lost it ;)
     >>> msg = gg.sent_messages.pop()
     >>> ignore = gg.sent_messages.pop()
     >>> browser3.getControl(name='gadugadu_confirmation_key').value = msg[1]
-    >>> browser3.getControl('OK').click()
+    >>> browser3.getControl('Submit code').click()
 
     >>> browser3.getControl('Receive news into gg').click()
 

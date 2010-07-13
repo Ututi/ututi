@@ -294,6 +294,7 @@ class HomeController(UniversityListMixin):
         if gadugadu_uin:
             user.gadugadu_uin = gadugadu_uin
             gg.confirmation_request(user)
+            meta.Session.commit()
 
         sign_in_user(email)
         return (user, email)
