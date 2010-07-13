@@ -121,18 +121,19 @@ ${_('Profile settings')}
                   %if not c.user.gadugadu_confirmed:
                     <div class="field-status">${_('(unconfirmed)')}</div>
                     <div>
-                    <input type="submit"
-                           class="text_button"
-                           value="${_('send code again')}" name='resend_gadugadu_code'
-                           style="font-size: 13px;" />
+                        ${h.input_submit(_('Send code again'), name='resend_gadugadu_code')}
                     </div>
                     ${_("""If you want to confirm your GaduGadu number,
                          please enter the code that you have received
                          in your GG. Also don't forget to add Ututi
                         (<a href="gg:5437377">5437377</a>) to your friends.""")|n}
                     <br />
-                    <input type="text" name="gadugadu_confirmation_key" />
-                    <span class="btn" style="margin: 0;"><input name="confirm_gadugadu" value="${_('OK')}" type="submit"></span>
+                    <div class="floatleft" style="width: 290px">
+                        ${h.input_line('gadugadu_confirmation_key', '')}
+                    </div>
+                    <div class="floatleft">
+                      ${h.input_submit(_('Submit code'), name='confirm_gadugadu')}
+                    </div>
                   %else:
                     <input type="hidden"  name="gadugadu_confirmation_key" />
                     <div class="field-status confirmed"><div>${_('number is confirmed')}</div></div>
@@ -154,7 +155,7 @@ ${_('Profile settings')}
             %endif
           </div>
 
-        <div>
+        <div style="clear: left">
           ${h.input_line('email', _('Your email address'))}
           %if not c.user.isConfirmed:
           <div class="field-status">(unconfirmed)</div>
