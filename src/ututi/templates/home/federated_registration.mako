@@ -21,18 +21,18 @@
     <form id="registration_form" method="post" class="fullForm"
           action="${url(controller='home', action='federated_registration')}">
       <fieldset>
-        %if c.hash:
-          <input type="hidden" name="hash" value="${c.hash}"/>
-        %endif
-        <form:error name="came_from"/>
+        <form:error name="invitation_hash"/>
+
+        <input type="hidden" name="invitation_hash" value="" />
+
         %if c.came_from:
           <input type="hidden" name="came_from" value="${c.came_from}" />
         %endif
 
-    <div style="font-size: 14px; font-weight: bold">${_('1. Personal information')}</div>
-    <div style="margin-top: 1em; margin-bottom: 1em; color: #666">
-      ${_("You have to provide an email address to be able to participate in your group's mailing list.")}
-    </div>
+        <div style="font-size: 14px; font-weight: bold">${_('1. Personal information')}</div>
+        <div style="margin-top: 1em; margin-bottom: 1em; color: #666">
+          ${_("You have to provide an email address to be able to participate in your group's mailing list.")}
+        </div>
 
         <form:error name="fullname"/>
         <label>
@@ -51,16 +51,16 @@
           </span>
         </label>
         %if c.gg_enabled:
-        <form:error name="gadugadu"/>
-        <label>
-          <span class="labelText">${_('Gadu gadu')}</span>
-          <span class="textField">
-            <input type="text" name="gadugadu" value=""/>
-            <span class="edge"></span>
-          </span>
-        </label>
+          <form:error name="gadugadu"/>
+          <label>
+            <span class="labelText">${_('Gadu gadu')}</span>
+            <span class="textField">
+              <input type="text" name="gadugadu" value=""/>
+              <span class="edge"></span>
+            </span>
+          </label>
         %else:
-        <input type="hidden" id="gadugadu" name="gadugadu"/>
+          <input type="hidden" id="gadugadu" name="gadugadu"/>
         %endif
 
 

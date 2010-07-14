@@ -101,6 +101,8 @@ class FederatedRegistrationForm(Schema):
     allow_extra_fields = True
     pre_validators = [NestedVariables()]
 
+    invitation_hash = validators.String(not_empty=False)
+
     msg = {'missing': _(u"You must agree to the terms of use.")}
     agree = validators.StringBool(messages=msg)
 
@@ -301,11 +303,11 @@ class HomeController(UniversityListMixin):
 
     @validate(schema=RegistrationForm(), form='register')
     def register(self, hash=None):
-        request.GET['register'] = True
+        c.hash = hash
         c.show_login = False
         c.show_registration = True
         if hasattr(self, 'form_result'):
-            hash = self.form_result.get('hash', None)
+            # Form validation was successful.
             if hash is not None:
                 invitation = PendingInvitation.get(hash)
                 if invitation is not None and invitation.email == self.form_result['email'].lower():
@@ -329,10 +331,9 @@ class HomeController(UniversityListMixin):
                                                  url(controller='profile',
                                                      action='register_welcome'))))
         else:
+            # Form validation failed.
             if hash is not None:
-                c.hash = hash
                 invitation = PendingInvitation.get(hash)
-                # TODO: put invitation in session for FB/Google registration?
                 if invitation is not None:
                     c.email = invitation.email
                     c.message_class = 'please-register'
@@ -359,7 +360,7 @@ class HomeController(UniversityListMixin):
             redirect(url(controller='home', action='index'))
         if hasattr(self, 'form_result'):
             user = User(self.form_result['fullname'], None, gen_password=False)
-            self._bind_user(user)
+            self._bind_user(user, flash=False)
             user.accepted_terms = datetime.today()
             email = self.form_result['email'].lower()
             user.emails = [Email(email)]
@@ -371,23 +372,38 @@ class HomeController(UniversityListMixin):
             meta.Session.add(user)
             meta.Session.commit()
             sign_in_user(email)
-            redirect(c.came_from or url(controller='profile', action='register_welcome'))
+
+            invitation_hash = self.form_result.get('invitation_hash', '')
+            if invitation_hash:
+                invitation = PendingInvitation.get(invitation_hash)
+                if invitation is not None:
+                    invitation.group.add_member(user)
+                    meta.Session.delete(invitation)
+                    meta.Session.commit()
+                    redirect(url(controller='group', action='home',
+                                 id=invitation.group.group_id))
+
+            redirect(c.came_from or url(controller='profile',
+                                        action='register_welcome'))
 
         # Render form: suggested name, suggested email, agree with conditions
         defaults = dict(fullname=session.get('confirmed_fullname'),
-                        email=session.get('confirmed_email'))
+                    email=session.get('confirmed_email'),
+                    invitation_hash=request.params.get('invitation_hash', ''))
         return htmlfill.render(self._federated_registration_form(),
                                defaults=defaults)
 
-    def _bind_user(self, user):
+    def _bind_user(self, user, flash=True):
         """Bind user to FB/Google account (retrieve info from session)."""
         if session.get('confirmed_openid'):
             user.openid = session['confirmed_openid']
-            h.flash(_('Your Google account has been associated with your Ututi account.'))
+            if flash:
+                h.flash(_('Your Google account has been associated with your Ututi account.'))
         elif session.get('confirmed_facebook_id'):
             user.facebook_id = int(session['confirmed_facebook_id'])
             user.update_logo_from_facebook()
-            h.flash(_('Your Facebook account has been associated with your Ututi account.'))
+            if flash:
+                h.flash(_('Your Facebook account has been associated with your Ututi account.'))
 
     def associate_account(self):
         """Associate an Ututi account with a Google/FB account."""
@@ -426,15 +442,24 @@ class HomeController(UniversityListMixin):
                                alias='email', required=True))
         authrequest.addExtension(ax_req)
 
-        kargs = dict(came_from=c.came_from) if c.came_from else {}
         redirecturl = authrequest.redirectURL(
             url(controller='home', action='index', qualified=True),
             return_to=url(controller='home', action='google_verify',
-                          qualified=True, **kargs))
+                          qualified=True, **self._auth_args()))
 
         session['openid_session'] = openid_session
         session.save()
         redirect(redirecturl)
+
+    def _auth_args(self):
+        """Return a dict of arguments to pass through FB/Google auth."""
+        kargs = dict()
+        if c.came_from:
+            kargs['came_from'] = c.came_from
+        invitation_hash = request.params.get('invitation_hash')
+        if invitation_hash:
+            kargs['invitation_hash'] = invitation_hash
+        return kargs
 
     def _facebook_name_and_email(self, facebook_id, fb_access_token):
         graph = facebook.GraphAPI(fb_access_token)
@@ -475,9 +500,8 @@ class HomeController(UniversityListMixin):
                 session['confirmed_fullname'] = name
                 session['confirmed_email'] = email
                 session.save()
-                kargs = dict(came_from=c.came_from) if c.came_from else {}
                 redirect(url(controller='home', action='federated_registration',
-                             **kargs))
+                             **self._auth_args()))
             else:
                 # Existing user logging in using FB/Google.
                 if google_id:

@@ -12,7 +12,7 @@ ${parent.head_tags()}
 <%def name="portlets()">
 </%def>
 
-%if not request.params.get('register') or c.hash:
+%if not c.show_registration or c.hash:
   <div style="font-size: 20px">
     ${c.header}
   </div>
@@ -33,14 +33,14 @@ ${parent.head_tags()}
       ${_('Log in or register using your Google or Facebook account')}
     </div>
     <div id="federated-login-buttons">
-      <a href="${url(controller='home', action='google_register', came_from=c.came_from)}" id="google-button">
+      <a href="${url(controller='home', action='google_register', came_from=c.came_from, invitation_hash=c.hash)}" id="google-button">
         ${h.image('/img/google-logo.gif', alt='Log in using Google', class_='google-login')}
       </a>
       <br />
       ## We rely here on the fact that Facebook has been configured
       ## by the login widget in the page header.
       <fb:login-button perms="email"
-          onlogin="show_loading_message(); window.location = '${url(controller='home', action='facebook_login', came_from=c.came_from)}'"
+          onlogin="show_loading_message(); window.location = '${url(controller='home', action='facebook_login', came_from=c.came_from, invitation_hash=c.hash)}'"
        >Connect</fb:login-button>
     </div>
   </td>
@@ -51,7 +51,7 @@ ${parent.head_tags()}
 
   <td class="login-choice-box">
 
-    <div id="login-fields" ${"style='display: none'" if request.params.get('register') else ''}>
+    <div id="login-fields" ${"style='display: none'" if c.show_registration else ''}>
       <div class="login-note">
         ${_('Log in directly to Ututi')}
       </div>
@@ -82,19 +82,16 @@ ${parent.head_tags()}
       </div>
     </div>
 
-    <div id="register-fields" ${"style='display: none'" if not request.params.get('register') else ''}>
+    <div id="register-fields" ${"style='display: none'" if not c.show_registration else ''}>
       <div class="login-note">
         ${_('Register as a new Ututi user')}
       </div>
 
-      <form id="join_registration_form" method="post" action="${url(controller='home', action='register')}" class="fullForm">
+      <form id="join_registration_form" method="post" action="${url.current(action='register')}" class="fullForm">
         <fieldset>
 
         %if c.came_from:
           <input type="hidden" name="came_from" value="${c.came_from}" />
-        %endif
-        %if c.hash:
-          <input type="hidden" name="hash" value="${c.hash}" />
         %endif
 
         ${h.input_line('fullname', _('Full name'))}
