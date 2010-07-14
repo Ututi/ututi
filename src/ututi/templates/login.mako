@@ -12,7 +12,7 @@ ${parent.head_tags()}
 <%def name="portlets()">
 </%def>
 
-%if not request.params.get('register'):
+%if not request.params.get('register') or c.hash:
   <div style="font-size: 20px">
     ${c.header}
   </div>

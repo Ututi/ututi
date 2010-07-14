@@ -332,6 +332,7 @@ class HomeController(UniversityListMixin):
             if hash is not None:
                 c.hash = hash
                 invitation = PendingInvitation.get(hash)
+                # TODO: put invitation in session for FB/Google registration?
                 if invitation is not None:
                     c.email = invitation.email
                     c.message_class = 'please-register'
