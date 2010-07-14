@@ -193,6 +193,7 @@ def setup_orm(engine):
                                useexisting=True,
                                autoload=True,
                                autoload_with=engine)
+
     tag_mapper = orm.mapper(Tag,
                             tags_table,
                             polymorphic_on=tags_table.c.tag_type,
@@ -474,6 +475,17 @@ def setup_orm(engine):
                properties={'user': relation(User),
                            'group': relation(Group, backref=backref('payments',
                                                                     order_by=payments_table.c.created.desc()))})
+
+    global sms_table
+    sms_table = Table("sms", meta.metadata,
+                               Column('message_text', Unicode(assert_unicode=True)),
+                               useexisting=True,
+                               autoload=True,
+                               autoload_with=engine)
+    orm.mapper(SMS,
+               sms_table,
+               properties = {'sender' : relation(User, primaryjoin=sms_table.c.sender_uid==users_table.c.id),
+                             'recipient' : relation(User, primaryjoin=sms_table.c.recipient_uid==users_table.c.id)})
 
     from ututi.model import mailing
     mailing.setup_orm(engine)
@@ -2165,3 +2177,11 @@ from ututi.model.mailing import GroupMailingListMessage
 # group -> subjects (pages, files) + group + pages + files + members
 
 #   conversation, comment (feedback)
+
+sms_table = None
+class SMS(object):
+    """ Object for SMS messages stored in the database. """
+
+    def __init__(self, **kwargs):
+        for key, value in kwargs.items():
+            setattr(self, key, value)
