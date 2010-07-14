@@ -60,7 +60,7 @@ class SubjectForm(Schema):
     pre_validators = [NestedVariables()]
 
     location = Pipe(ForEach(validators.UnicodeString(strip=True, max=250)),
-                    LocationTagsValidator())
+                    LocationTagsValidator(not_empty=True))
 
     title = validators.UnicodeString(not_empty=True, strip=True)
     lecturer = validators.UnicodeString(strip=True)

@@ -103,6 +103,7 @@ class LogoUpload(Schema):
 
 class GroupForm(Schema):
     """A schema for validating group edits and submits."""
+
     pre_validators = [NestedVariables()]
 
     allow_extra_fields = True
@@ -142,10 +143,11 @@ class EditGroupForm(GroupForm):
 
 class NewGroupForm(GroupForm):
     """A schema for validating new group forms."""
+    # Deprecated.
 
     pre_validators = [variabledecode.NestedVariables()]
     location = Pipe(ForEach(validators.String(strip=True)),
-                    LocationTagsValidator())
+                    LocationTagsValidator(not_empty=True))
 
     id = Pipe(validators.String(strip=True, min=4, max=20), GroupIdValidator())
 
@@ -160,7 +162,7 @@ class CreateGroupFormBase(Schema):
     msg = {'empty': _(u"Please enter a title.")}
     title = validators.UnicodeString(not_empty=True, messages=msg)
     location = Pipe(ForEach(validators.String(strip=True)),
-                    LocationTagsValidator())
+                    LocationTagsValidator(not_empty=True))
     msg = {'empty': _(u"Please enter a group identifier."),
            'tooShort': _(u"The group identifier must be at least 4 characters long.")}
     id = Pipe(validators.String(strip=True, min=4, max=20, messages=msg),
@@ -555,6 +557,7 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
     @validate(schema=NewGroupForm, form='_add_form')
     @ActionProtector("user")
     def new_group(self):
+        # Deprecated.
         if hasattr(self, 'form_result'):
             values = self.form_result
 
