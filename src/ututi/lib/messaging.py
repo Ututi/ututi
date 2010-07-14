@@ -5,6 +5,7 @@ from formencode.api import Invalid
 
 from ututi.lib.mailer import send_email
 from ututi.lib.gg import send_message as send_gg
+from ututi.lib.sms import send_sms
 from pylons import config
 
 log = logging.getLogger(__name__)
@@ -55,6 +56,7 @@ class EmailMessage(Message):
         else:
             raise RuntimeError("The message must have a subject and a text to be sent.")
 
+
 class GGMessage(Message):
     """A gadugadu message."""
     def __init__(self, text, force=False):
@@ -70,5 +72,24 @@ class GGMessage(Message):
                 send_gg(recipient, self.text)
             except Invalid:
                 log.debug("Invalid gg number %(gg)s" % dict(gg=recipient))
+        else:
+            Message.send(self,recipient=recipient)
+
+
+class SMSMessage(Message):
+    def __init__(self, text, force=False, sender=None):
+        self.text = text
+        self.sender = sender
+        self.recipient = None
+        super(SMSMessage, self).__init__(sender=sender, force=force)
+
+    def send(self, recipient):
+        if isinstance(recipient, basestring):
+            try:
+                #XXX: validate phone number
+                send_sms(recipient, self.text, self.sender, self.recipient)
+                pass
+            except Invalid:
+                log.debug("Invalid phone number %(num)s" % dict(num=recipient))
         else:
             Message.send(self,recipient=recipient)
