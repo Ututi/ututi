@@ -11,21 +11,25 @@ from sqlalchemy import func
 from magic import from_buffer
 from datetime import date
 from webhelpers import paginate
+from formencode.schema import Schema
+from formencode.validators import String
 
 from babel.dates import parse_date
 from babel.dates import format_date
 
 from pylons import request, tmpl_context as c, config, url
 from pylons.controllers.util import redirect, abort
+from pylons.decorators import validate
 
 from random import Random
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
+from ututi.lib.validators import PhoneNumberValidator
 from ututi.model.events import Event
 from ututi.model import FileDownload
 from ututi.model import SimpleTag
 from ututi.model import UserSubjectMonitoring
-from ututi.model import Page
+from ututi.model import Page, SMS
 from ututi.model import (meta, User, Email, LocationTag, Group, Subject,
                          GroupMember, GroupMembershipType, File, PrivateMessage)
 from ututi.lib import helpers as h
@@ -52,6 +56,12 @@ def store_file(file_obj, file_name):
         file_obj.store(open(os.path.join(path, file_name)))
     else:
         file_obj.store('Whatever!')
+
+
+class SMSForm(Schema):
+    allow_extra_fields = False
+    number = PhoneNumberValidator()
+    message = String(min=1, max=130)
 
 
 class AdminController(BaseController):
@@ -282,6 +292,26 @@ class AdminController(BaseController):
         c.files = self._make_pages(files)
 
         return render('admin/files.mako')
+
+    @ActionProtector('root')
+    def sms(self):
+        messages = meta.Session.query(SMS)\
+            .order_by(SMS.created.desc())
+
+        c.messages = self._make_pages(messages)
+        return render('admin/sms.mako')
+
+    @ActionProtector('root')
+    @validate(schema=SMSForm, form='sms')
+    def send_sms(self):
+        if hasattr(self, 'form_result'):
+            msg = SMS(sender=c.user,
+                      recipient_number=self.form_result.get('number'),
+                      message_text=self.form_result.get('message'))
+            meta.Session.add(msg)
+            meta.Session.commit()
+            h.flash('Message sent to number %s' % self.form_result.get('number'))
+        redirect(url(controller='admin', action='sms'))
 
     @ActionProtector('root')
     def deleted_files(self):

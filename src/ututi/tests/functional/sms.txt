@@ -1,0 +1,29 @@
+SMS admin screen testing
+========================
+
+The admin should have a new link on his dashboard, that lets him view all the sms messages that have passed through our system.
+
+    >>> browser = Browser.logIn()
+    >>> browser.open('http://localhost/admin')
+    >>> browser.getLink('SMSs').click()
+    >>> browser.url
+    'http://localhost/admin/sms'
+
+The should be no messages just yet.
+    >>> browser.printQuery('id("message_list")//td/text()')
+
+However, we can fill out a form and send one message to a number of our choosing:
+    >>> form = browser.getForm('sms_form')
+    >>> form.getControl('Number').value = '+37061300034'
+    >>> form.getControl('Message').value = 'Some message'
+    >>> form.getControl('Send').click()
+
+    >>> browser.url
+    'http://localhost/admin/sms'
+
+After the message has been sent, it should be listed in the archive:
+    >>> browser.printQuery('id("message_list")//td/text()')
+    +37061300034
+    Some message
+    ...
+    Not yet sent
