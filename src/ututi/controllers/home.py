@@ -111,10 +111,6 @@ class FederatedRegistrationForm(Schema):
 
     gadugadu = validators.Int()
 
-    msg = {'non_unique': _(u"This email has already been used to register.")}
-    email = All(validators.Email(not_empty=True, strip=True),
-                UniqueEmail(messages=msg, strip=True, completelyUnique=True))
-
     location = Pipe(ForEach(validators.String(strip=True)),
                     LocationTagsValidator(not_empty=False))
 
@@ -358,20 +354,19 @@ class HomeController(UniversityListMixin):
     def federated_registration(self):
         if not (session.get('confirmed_openid') or session.get('confirmed_facebook_id')):
             redirect(url(controller='home', action='index'))
+        c.email = session.get('confirmed_email').lower()
         if hasattr(self, 'form_result'):
             user = User(self.form_result['fullname'], None, gen_password=False)
             self._bind_user(user, flash=False)
             user.accepted_terms = datetime.today()
-            email = self.form_result['email'].lower()
-            user.emails = [Email(email)]
-            if email == session.get('confirmed_email').lower():
-                user.emails[0].confirmed = True
+            user.emails = [Email(c.email)]
+            user.emails[0].confirmed = True
 
             user.location = self.form_result['location']
             user.phone_number = self.form_result['phone']
             meta.Session.add(user)
             meta.Session.commit()
-            sign_in_user(email)
+            sign_in_user(c.email)
 
             invitation_hash = self.form_result.get('invitation_hash', '')
             if invitation_hash:
@@ -388,7 +383,7 @@ class HomeController(UniversityListMixin):
 
         # Render form: suggested name, suggested email, agree with conditions
         defaults = dict(fullname=session.get('confirmed_fullname'),
-                    email=session.get('confirmed_email'),
+                    email=c.email,
                     invitation_hash=request.params.get('invitation_hash', ''))
         return htmlfill.render(self._federated_registration_form(),
                                defaults=defaults)

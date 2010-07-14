@@ -30,8 +30,9 @@
         %endif
 
         <div style="font-size: 14px; font-weight: bold">${_('1. Personal information')}</div>
-        <div style="margin-top: 1em; margin-bottom: 1em; color: #666">
-          ${_("You have to provide an email address to be able to participate in your group's mailing list.")}
+
+        <div>
+            ${_('Email address:')} ${c.email}
         </div>
 
         <form:error name="fullname"/>
@@ -42,14 +43,7 @@
             <span class="edge"></span>
           </span>
         </label>
-        <form:error name="email"/>
-        <label>
-          <span class="labelText">${_('Email')}</span>
-          <span class="textField">
-            <input type="text" name="email" value="${c.email}"/>
-            <span class="edge"></span>
-          </span>
-        </label>
+
         %if c.gg_enabled:
           <form:error name="gadugadu"/>
           <label>
