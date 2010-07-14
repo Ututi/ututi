@@ -301,6 +301,7 @@ class HomeController(UniversityListMixin):
 
     @validate(schema=RegistrationForm(), form='register')
     def register(self, hash=None):
+        request.GET['register'] = True
         c.show_login = False
         c.show_registration = True
         if hasattr(self, 'form_result'):

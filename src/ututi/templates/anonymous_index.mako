@@ -20,7 +20,7 @@
   <h2>${_('Join')}</h2>
 
   <div id="registrationForm" class="${'shown' if c.show_registration else 'hidden'}">
-    <form id="registration_form" method="post" action="${url(controller='home', action='register', register=True)}">
+    <form id="registration_form" method="post" action="${url(controller='home', action='register')}">
     <fieldset>
       %if c.hash:
         <input type="hidden" name="hash" value="${c.hash}"/>

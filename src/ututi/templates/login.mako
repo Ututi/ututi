@@ -87,7 +87,7 @@ ${parent.head_tags()}
         ${_('Register as a new Ututi user')}
       </div>
 
-      <form id="join_registration_form" method="post" action="${url(controller='home', action='register', register=True)}" class="fullForm">
+      <form id="join_registration_form" method="post" action="${url(controller='home', action='register')}" class="fullForm">
         <fieldset>
 
         %if c.came_from:

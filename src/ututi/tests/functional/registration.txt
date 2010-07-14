@@ -84,7 +84,7 @@ message is shown:
     >>> form.getControl(name='agree').value = True
     >>> form.getControl('Register').click()
     >>> browser.url
-    'http://localhost/register?register=True'
+    'http://localhost/register'
 
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Please enter your name to register.
@@ -100,7 +100,7 @@ registration form and shown an error message that we've forgotten the email.
     >>> form.getControl(name='agree').value = True
     >>> form.getControl('Register').click()
     >>> browser.url
-    'http://localhost/register?register=True'
+    'http://localhost/register'
 
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Please enter an email address
@@ -115,7 +115,7 @@ If we forget to enter the password, we should also get an error message.
     >>> form.getControl(name='agree').value = True
     >>> form.getControl('Register').click()
     >>> browser.url
-    'http://localhost/register?register=True'
+    'http://localhost/register'
 
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Please enter your password to register.
@@ -131,7 +131,7 @@ If the passwords do not match we also get an error message.
     >>> form.getControl(name='agree').value = True
     >>> form.getControl('Register').click()
     >>> browser.url
-    'http://localhost/register?register=True'
+    'http://localhost/register'
 
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Passwords do not match.
@@ -147,7 +147,7 @@ we have forgotten it).
     >>> form.getControl(name='agree').value = True
     >>> form.getControl('Register').click()
     >>> browser.url
-    'http://localhost/register?register=True'
+    'http://localhost/register'
 
     >>> browser.printQuery("//span[@class='error-message']/text()")
     This email has already been used to register.
@@ -194,4 +194,4 @@ Test a curiuos case: if a logged-in user fills in a registration form, specifyin
     >>> form.getControl('Register').click()
 
     >>> browser.url
-    'http://localhost/register?register=True'
+    'http://localhost/register'
