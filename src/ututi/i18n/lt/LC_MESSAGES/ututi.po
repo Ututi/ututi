@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-07-10 14:22+0300\n"
+"PO-Revision-Date: 2010-07-15 15:33+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -188,7 +188,7 @@ msgstr "Nariai sėkmingai pakviesti!"
 
 #, python-format
 msgid "Invalid email addresses detected: %s"
-msgstr "Aptikome neteisingus el. pašto adresus: %s"
+msgstr "Netaisyklingi el. pašto adresai: %s"
 
 #, python-format
 msgid "Congratulations! You are now a member of the group '%s'"
@@ -196,7 +196,7 @@ msgstr "Sveikiname prisijungus prie grupės '%s' !"
 
 #, python-format
 msgid "Invitation to group '%s' rejected."
-msgstr "Kvietimas į grupę '%s' buvo atmestas. Liūdna.."
+msgstr "Kvietimas į grupę '%s' atmestas.."
 
 #, python-format
 msgid "Group membership denied to %s."
@@ -253,7 +253,7 @@ msgid "This email has already been used to register."
 msgstr "Toks el. paštas jau užregistruotas."
 
 msgid "You have to be logged in to download a file!"
-msgstr "Iš pradžių turi prisijungti, jeigu nori atsisiųsti failą."
+msgstr "Jei nori parsisiųsti failą, teks prisijungti."
 
 #, python-format
 msgid ""
@@ -321,6 +321,12 @@ msgid ""
 "Only registered users can become members of a group, please register "
 "first."
 msgstr "Tik registruoti vartotojai gali prisijungti prie grupės."
+
+msgid "Your Google account has been associated with your Ututi account."
+msgstr ""
+
+msgid "Your Facebook account has been associated with your Ututi account."
+msgstr ""
 
 msgid "Facebook did not provide your email address."
 msgstr ""
@@ -530,16 +536,28 @@ msgstr "Netinkamas slaptažodis"
 msgid "Location does not exist."
 msgstr "Tokios vietos nėra."
 
+msgid "Please specify your university."
+msgstr ""
+
 msgid "Such short title already exists, choose a different one."
 msgstr "Tokia santrumpa jau egzistuoja - sugalvok kitą."
+
+msgid "Invalid phone number; use the format +37069912345"
+msgstr ""
+
+msgid "Phone number too long; use the format +37069912345"
+msgstr ""
+
+msgid "Phone number too short; use the format +37069912345"
+msgstr ""
+
+msgid "The field may not be left empty."
+msgstr "Šio lauko negalima palikti tuščio."
 
 msgid "The field may only contain letters, numbers and the characters + - _"
 msgstr ""
 "Šiame lauke galima įrašyti tik lotyniškas raides, skaičius bei simbolius "
 "+ - _"
-
-msgid "The field may not be left empty."
-msgstr "Šio lauko negalima palikti tuščio."
 
 msgid "The tag is too long."
 msgstr "Žyma per ilga."
@@ -943,9 +961,6 @@ msgstr "Naudotojo meniu"
 msgid "feedback"
 msgstr ""
 
-msgid "Loading..."
-msgstr "Įkeliama..."
-
 msgid "Connect using"
 msgstr "Jungtis su"
 
@@ -1010,6 +1025,9 @@ msgstr "Naudojimosi sistema taisyklės"
 
 msgid "Feedback"
 msgstr ""
+
+msgid "Loading..."
+msgstr "Įkeliama..."
 
 msgid "Statistics"
 msgstr "Statistika"
@@ -1957,8 +1975,8 @@ msgid ""
 "study materials and information."
 msgstr ""
 
-msgid "Join Ututi"
-msgstr "Prisijunk prie Ututi"
+msgid "Join group"
+msgstr ""
 
 msgid "Invite your friends to Ututi!"
 msgstr ""
@@ -2139,9 +2157,45 @@ msgstr "Už <em>%d Lt</em> Tavo grupė galės laikyti <em>neribotą failų kiek�
 msgid "increase the limit"
 msgstr "padidinti limitą"
 
+msgid "Associate an existing Ututi account"
+msgstr ""
+
+msgid "Enter the user name and password for your existing Ututi account."
+msgstr ""
+
+msgid "Log in & associate"
+msgstr ""
+
+msgid "Personal information"
+msgstr "Asmeninė informacija"
+
+msgid "1. Personal information"
+msgstr ""
+
+msgid "Email address:"
+msgstr ""
+
+msgid "2. School (optional)"
+msgstr ""
+
 msgid ""
-"Please confirm that the following information about you is correct and "
-"check the box to accept the terms of use."
+"Ututi is an application for students, so it is important for us to know "
+"where you study. These data can be changed later in your profile settings"
+" screen."
+msgstr ""
+
+msgid "3. Phone number (optional)"
+msgstr ""
+
+msgid ""
+"We need your phone number so that you could send and receive SMS messages"
+" from the group. Don't worry, we will never send advertisements."
+msgstr ""
+
+msgid "Phone number"
+msgstr ""
+
+msgid "I am already a registered Ututi user"
 msgstr ""
 
 msgid "Reset your password"
@@ -2276,6 +2330,9 @@ msgstr "ištrinti"
 
 msgid "Last edit: "
 msgstr "Paskutinis taisymas:"
+
+msgid "Join Ututi"
+msgstr "Prisijunk prie Ututi"
 
 msgid "Registration"
 msgstr "Registracija"
@@ -2561,9 +2618,6 @@ msgstr "Profilio nustatymai"
 msgid "back to the profile"
 msgstr "grįžti į profilį"
 
-msgid "Personal information"
-msgstr "Asmeninė informacija"
-
 msgid "Address of your website or blog"
 msgstr "Nuosavo puslapio arba blog'o adresas"
 
@@ -2582,8 +2636,8 @@ msgstr "Tavo GG numeris"
 msgid "(unconfirmed)"
 msgstr "(nepatvirtintas)"
 
-msgid "send code again"
-msgstr "siųsti kodą dar kartą"
+msgid "Send code again"
+msgstr ""
 
 msgid ""
 "If you want to confirm your GaduGadu number,\n"
@@ -2596,8 +2650,8 @@ msgstr ""
 "įvesk gautą kodą. Taip pat nepamiršk pridėti Ututi\n"
 "(<a href=\"gg:5437377\">5437377</a>) prie savo draugų."
 
-msgid "OK"
-msgstr "Okay"
+msgid "Submit code"
+msgstr ""
 
 msgid "number is confirmed"
 msgstr "numeris patvirtintas"
@@ -2911,12 +2965,11 @@ msgstr ""
 msgid "get another confirmation email"
 msgstr "Negavai?"
 
+#, python-format
 msgid ""
-"Your <strong>gadu gadu number</strong> is not confirmed! Please confirm "
-"it by entering the code sent to you."
+"Your <strong>gadu gadu number</strong> is not confirmed! Please <a "
+"href=\"%s\">confirm</a> it by entering the code sent to you."
 msgstr ""
-"Tavo <strong>gadu gadu numeris</strong> yra nepatvirtintas! Patvirtink jį"
-" su tau išsiųstu kodu."
 
 #, python-format
 msgid ""

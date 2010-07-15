@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-07-10 14:22+0300\n"
+"PO-Revision-Date: 2010-07-15 15:33+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -309,6 +309,12 @@ msgid ""
 "first."
 msgstr ""
 
+msgid "Your Google account has been associated with your Ututi account."
+msgstr ""
+
+msgid "Your Facebook account has been associated with your Ututi account."
+msgstr ""
+
 msgid "Facebook did not provide your email address."
 msgstr ""
 
@@ -508,13 +514,25 @@ msgstr ""
 msgid "Location does not exist."
 msgstr ""
 
+msgid "Please specify your university."
+msgstr ""
+
 msgid "Such short title already exists, choose a different one."
 msgstr ""
 
-msgid "The field may only contain letters, numbers and the characters + - _"
+msgid "Invalid phone number; use the format +37069912345"
+msgstr ""
+
+msgid "Phone number too long; use the format +37069912345"
+msgstr ""
+
+msgid "Phone number too short; use the format +37069912345"
 msgstr ""
 
 msgid "The field may not be left empty."
+msgstr ""
+
+msgid "The field may only contain letters, numbers and the characters + - _"
 msgstr ""
 
 msgid "The tag is too long."
@@ -905,9 +923,6 @@ msgstr ""
 msgid "feedback"
 msgstr ""
 
-msgid "Loading..."
-msgstr ""
-
 msgid "Connect using"
 msgstr ""
 
@@ -971,6 +986,9 @@ msgid "Terms of use"
 msgstr ""
 
 msgid "Feedback"
+msgstr ""
+
+msgid "Loading..."
 msgstr ""
 
 msgid "Statistics"
@@ -1787,7 +1805,7 @@ msgid ""
 "study materials and information."
 msgstr ""
 
-msgid "Join Ututi"
+msgid "Join group"
 msgstr ""
 
 msgid "Invite your friends to Ututi!"
@@ -1951,9 +1969,45 @@ msgstr ""
 msgid "increase the limit"
 msgstr ""
 
+msgid "Associate an existing Ututi account"
+msgstr ""
+
+msgid "Enter the user name and password for your existing Ututi account."
+msgstr ""
+
+msgid "Log in & associate"
+msgstr ""
+
+msgid "Personal information"
+msgstr ""
+
+msgid "1. Personal information"
+msgstr ""
+
+msgid "Email address:"
+msgstr ""
+
+msgid "2. School (optional)"
+msgstr ""
+
 msgid ""
-"Please confirm that the following information about you is correct and "
-"check the box to accept the terms of use."
+"Ututi is an application for students, so it is important for us to know "
+"where you study. These data can be changed later in your profile settings"
+" screen."
+msgstr ""
+
+msgid "3. Phone number (optional)"
+msgstr ""
+
+msgid ""
+"We need your phone number so that you could send and receive SMS messages"
+" from the group. Don't worry, we will never send advertisements."
+msgstr ""
+
+msgid "Phone number"
+msgstr ""
+
+msgid "I am already a registered Ututi user"
 msgstr ""
 
 msgid "Reset your password"
@@ -2083,6 +2137,9 @@ msgid "delete"
 msgstr ""
 
 msgid "Last edit: "
+msgstr ""
+
+msgid "Join Ututi"
 msgstr ""
 
 msgid "Registration"
@@ -2353,9 +2410,6 @@ msgstr ""
 msgid "back to the profile"
 msgstr ""
 
-msgid "Personal information"
-msgstr ""
-
 msgid "Address of your website or blog"
 msgstr ""
 
@@ -2374,7 +2428,7 @@ msgstr ""
 msgid "(unconfirmed)"
 msgstr ""
 
-msgid "send code again"
+msgid "Send code again"
 msgstr ""
 
 msgid ""
@@ -2385,7 +2439,7 @@ msgid ""
 "friends."
 msgstr ""
 
-msgid "OK"
+msgid "Submit code"
 msgstr ""
 
 msgid "number is confirmed"
@@ -2681,9 +2735,10 @@ msgstr ""
 msgid "get another confirmation email"
 msgstr ""
 
+#, python-format
 msgid ""
-"Your <strong>gadu gadu number</strong> is not confirmed! Please confirm "
-"it by entering the code sent to you."
+"Your <strong>gadu gadu number</strong> is not confirmed! Please <a "
+"href=\"%s\">confirm</a> it by entering the code sent to you."
 msgstr ""
 
 #, python-format

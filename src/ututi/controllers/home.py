@@ -358,6 +358,8 @@ class HomeController(UniversityListMixin):
         if hasattr(self, 'form_result'):
             user = User(self.form_result['fullname'], None, gen_password=False)
             self._bind_user(user, flash=False)
+            if user.facebook_id:
+                self._bind_facebook_invitations(user)
             user.accepted_terms = datetime.today()
             user.emails = [Email(c.email)]
             user.emails[0].confirmed = True
@@ -399,6 +401,13 @@ class HomeController(UniversityListMixin):
             user.update_logo_from_facebook()
             if flash:
                 h.flash(_('Your Facebook account has been associated with your Ututi account.'))
+
+    def _bind_facebook_invitations(self, user):
+        invitations = meta.Session.query(PendingInvitation).filter_by(
+                            facebook_id=user.facebook_id, user_id=None
+                            ).all()
+        for invitation in invitations:
+            invitation.user = user
 
     def associate_account(self):
         """Associate an Ututi account with a Google/FB account."""
@@ -505,6 +514,7 @@ class HomeController(UniversityListMixin):
                 elif facebook_id:
                     h.flash(_('Your Facebook account "%s" has been linked to your existing Ututi account.') % email)
                     user.facebook_id = facebook_id
+                    self._bind_facebook_invitations(user)
                     if not user.logo:
                         user.update_logo_from_facebook()
                 meta.Session.commit()

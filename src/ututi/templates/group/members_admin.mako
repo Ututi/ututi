@@ -21,7 +21,7 @@ ${h.javascript_link('/javascript/forms.js')|n}
   </form>
 </div>
 
-<div class="floatleft" style="padding-top: 1em; width: 250px; text-align: center">
+<div class="floatleft" style="padding-top: 1em; width: 230px; text-align: center">
   <h2>${_('Invite your classmates using Facebook')}</h2>
   <div style="margin-top: 1em">
     <a href="${c.group.url(action='invite_fb')}">
@@ -36,31 +36,33 @@ ${h.javascript_link('/javascript/forms.js')|n}
 <div style="padding-top: 1em;">
   <h2>${_('Invited users (invitations not accepted yet)')}</h2>
   <table class="group-invitations">
-  % for invitation in c.group.invitations:
-  <tr>
-    <td class="date">
-      ${h.fmt_dt(invitation.created)}
-    </td>
-    <td class="email">
-      ${invitation.email}
-    </td>
-    <td class="actions">
-      <form style="display: inline;" method="post" action="${url(controller='group', action='invite_members', id=c.group.group_id)}">
-        <div style="display: inline;">
-          <input type="hidden" name="emails" value="${invitation.email}" />
-          <input type="submit" class="text_button" value="${_('Send invitation again')}"/>
-        </div>
-      </form>
+  %for invitation in c.group.invitations:
+    %if invitation.active and invitation.email:
+      <tr>
+        <td class="date">
+          ${h.fmt_dt(invitation.created)}
+        </td>
+        <td class="email">
+          ${invitation.email}
+        </td>
+        <td class="actions">
+          <form style="display: inline;" method="post" action="${url(controller='group', action='invite_members', id=c.group.group_id)}">
+            <div style="display: inline;">
+              <input type="hidden" name="emails" value="${invitation.email}" />
+              <input type="submit" class="text_button" value="${_('Send invitation again')}"/>
+            </div>
+          </form>
 
-      <form style="display: inline;" method="post" action="${url(controller='group', id=c.group.group_id, action='cancel_invitation')}">
-        <div style="display: inline;">
-          <input type="hidden" name="email" value="${invitation.email}" />
-          <input type="submit" class="text_button" style="color: #888;" value="${_('Cancel invitation')}"/>
-        </div>
-      </form>
-    </td>
-  </tr>
-  % endfor
+          <form style="display: inline;" method="post" action="${url(controller='group', id=c.group.group_id, action='cancel_invitation')}">
+            <div style="display: inline;">
+              <input type="hidden" name="email" value="${invitation.email}" />
+              <input type="submit" class="text_button" style="color: #888;" value="${_('Cancel invitation')}"/>
+            </div>
+          </form>
+        </td>
+      </tr>
+    %endif
+  %endfor
   </table>
 </div>
 %endif

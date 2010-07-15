@@ -732,6 +732,19 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
     @group_action
     @ActionProtector("member", "admin")
     def invite_fb(self, group):
+        # Handle POST.
+        invited = request.params.get('ids[]')
+        if invited:
+            ids = invited.split(',')
+            for facebook_id in ids:
+                group.invite_fb_user(int(facebook_id), c.user)
+            meta.Session.commit()
+            h.flash(ungettext('Invited %(num)d friend.',
+                              'Invited %(num)d friends.',
+                              len(ids)) % dict(num=len(ids)))
+            redirect(c.group.url(action='members'))
+
+        # Render page.
         fb_user = facebook.get_user_from_cookie(request.cookies,
                          config['facebook.appid'], config['facebook.secret'])
         c.has_facebook = fb_user is not None
@@ -750,14 +763,6 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
                                 User.facebook_id.in_(friend_ids)).all()
         c.exclude_ids = ','.join(str(u.facebook_id) for u in friend_users
                                  if c.group.is_member(u))
-
-        invited = request.params.get('ids[]')
-        if invited:
-            ids = invited.split(',')
-            h.flash(ungettext('Invited %(num)d friend.',
-                              'Invited %(num)d friends.',
-                              len(ids)) % dict(num=len(ids)))
-            redirect(c.group.url(action='members'))
         return render('group/invite.mako')
 
     @group_action
@@ -952,11 +957,10 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
         if hasattr(self, 'form_result'):
             email = self.form_result.get('email', '')
             invitation = meta.Session.query(PendingInvitation
-                    ).filter(PendingInvitation.group == group
-                    ).filter(PendingInvitation.email == email
+                    ).filter_by(group=group, email=email, active=True
                     ).first()
             if invitation is not None:
-                meta.Session.delete(invitation)
+                invitation.active = False
                 meta.Session.commit()
                 h.flash(_('Invitation cancelled'))
         redirect(url(controller='group', action='members', id=group.group_id))
@@ -977,21 +981,22 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
 
     def _clear_requests(self, group, user):
         """Delete any pending invitations or requests for the group with the given email."""
-        request = meta.Session.query(PendingRequest).filter(PendingRequest.group == group)\
-            .filter(PendingRequest.user == user).first()
-        invitation = meta.Session.query(PendingInvitation).filter(PendingInvitation.group == group)\
-            .filter(PendingInvitation.email == user.emails[0].email).first()
+        request = meta.Session.query(PendingRequest).filter_by(group=group, user=user).first()
         if request is not None:
             meta.Session.delete(request)
-        if invitation is not None:
-            meta.Session.delete(invitation)
+        invitations = meta.Session.query(PendingInvitation
+                ).filter_by(group=group, user=user, active=True
+                ).all()
+        for invitation in invitations:
+            invitation.active = False
 
     def _check_handshakes(self, group, user):
-        """Check if the user already has a request to join the group or an invitation"""
-        request = meta.Session.query(PendingRequest).filter(PendingRequest.group == group)\
-            .filter(PendingRequest.user == user).first()
-        invitation = meta.Session.query(PendingInvitation).filter(PendingInvitation.group == group)\
-            .filter(PendingInvitation.email == user.emails[0].email).first()
+        """Check if the user already has a request to join the group or an invitation."""
+        request = meta.Session.query(PendingRequest
+                 ).filter_by(group=group, user=user).first()
+        invitation = meta.Session.query(PendingInvitation
+                 ).filter_by(group=group, user=user, active=True
+                 ).first()
         return request is not None and 'request' or invitation is not None and 'invitation'
 
     def _send_invitations(self, group, emails):
@@ -1022,19 +1027,17 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
     def invitation(self, group):
         """Act on the invitation of the current user to this group."""
         if hasattr(self, 'form_result'):
-            try:
-                invitation = meta.Session.query(PendingInvitation).filter(PendingInvitation.group == group)\
-                    .filter(PendingInvitation.user == c.user).one()
+            invitations = meta.Session.query(PendingInvitation
+                            ).filter_by(group=group, user=c.user, active=True
+                            ).all()
+            if invitations:
                 if self.form_result.get('action', '') == 'accept':
                     group.add_member(c.user)
                     h.flash(_("Congratulations! You are now a member of the group '%s'") % group.title)
                 else:
                     h.flash(_("Invitation to group '%s' rejected.") % group.title)
-
                 self._clear_requests(group, c.user)
                 meta.Session.commit()
-            except NoResultFound:
-                pass
 
             came_from = self.form_result.get('came_from', None)
             if came_from is None:

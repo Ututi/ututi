@@ -800,7 +800,9 @@ CREATE TABLE group_invitations (
        user_id int8 references users(id) default null,
        group_id int8 not null references groups(id) on delete cascade,
        author_id int8 not null references users(id),
+       facebook_id int8 default null,
        hash varchar(32) not null unique,
+       active boolean default true,
        primary key (hash),
        unique(group_id, email));;
 

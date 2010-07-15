@@ -40,7 +40,7 @@
   </form>
 </div>
 
-<div class="floatleft" style="padding-top: 1em; width: 250px; text-align: center">
+<div class="floatleft" style="padding-top: 1em; width: 230px; text-align: center">
   <h2>${_('Invite your classmates using Facebook')}</h2>
   <div style="margin-top: 1em">
     <a href="${c.group.url(action='invite_fb')}">

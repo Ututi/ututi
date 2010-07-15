@@ -1098,7 +1098,9 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
         user = User.get(email)
         if user is None or not self.is_member(user):
             try:
-                invitation = meta.Session.query(PendingInvitation).filter_by(email=email, group=self).one()
+                invitation = meta.Session.query(PendingInvitation
+                        ).filter_by(email=email, group=self, active=True
+                        ).one()
                 invitation.created = datetime.today()
             except NoResultFound:
                 invitation = PendingInvitation(email, author=author, group=self)
@@ -1108,6 +1110,17 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
         else:
             return None
 
+    def invite_fb_user(self, facebook_id, author):
+        invitations = meta.Session.query(PendingInvitation
+                    ).filter_by(facebook_id=facebook_id, group=self, active=True
+                    ).all()
+        if not invitations:
+            invitation = PendingInvitation(facebook_id=int(facebook_id),
+                                           group=self, author=author)
+            # If the user is already in the system, bind immediately.
+            invitation.user = User.get_byfbid(facebook_id)
+            meta.Session.add(invitation)
+
     def request_join(self, user):
         request = PendingRequest(user, group=self)
         meta.Session.add(request)
@@ -1116,7 +1129,6 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
     def snippet(self):
         """Render the group's information."""
         return render_mako_def('/sections/content_snippets.mako','group', object=self)
-
 
     def __init__(self, group_id, title=u'', location=None, year=None, description=u''):
         self.group_id = group_id.strip().lower()
@@ -1274,17 +1286,20 @@ group_requests_table = None
 
 class PendingInvitation(object):
     """The group invites a user."""
-    def __init__(self, email, group = None, author=None):
+
+    def __init__(self, email=None, group=None, author=None, facebook_id=None):
         self.author = author
         self.hash = ''.join(Random().sample(string.ascii_lowercase, 8))
         if group is not None:
             self.group = group
 
-        user = User.get(email)
-        if user is not None:
-            self.user = user
+        if email:
+            user = User.get(email)
+            if user is not None:
+                self.user = user
 
         self.email = email
+        self.facebook_id = facebook_id
 
     @classmethod
     def get(cls, hash):
