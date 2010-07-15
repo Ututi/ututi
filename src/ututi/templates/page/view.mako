@@ -1,8 +1,6 @@
 <%inherit file="/page/base.mako" />
 
-<%def name="title()">
-   ${h.ellipsis(c.page.title,30)} - ${h.ellipsis(c.subject.title, 30)}
-</%def>
+<%def name="title()">${h.ellipsis(c.page.title,30)} - ${h.ellipsis(c.subject.title, 30)}</%def>
 
 <div class="back-link">
   <a class="back-link" href="${c.subject.url()}">${_('Go back to %(subject_title)s') % dict(subject_title=c.subject.title)}</a>
