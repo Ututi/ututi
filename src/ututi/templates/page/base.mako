@@ -4,8 +4,10 @@
 
 <%def name="head_tags()">
   ${parent.head_tags()}
-  <meta property="og:title" content="${c.page.title}"/>
-  <meta property="og:url" content="${c.page.url(qualified=True)}"/>
+  %if c.page:
+    <meta property="og:title" content="${c.page.title}"/>
+    <meta property="og:url" content="${c.page.url(qualified=True)}"/>
+  %endif
  </%def>
 
 <%def name="portlets()">
