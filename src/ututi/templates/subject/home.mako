@@ -5,11 +5,14 @@
 <%def name="head_tags()">
     ${parent.head_tags()}
    <%files:head_tags />
+
+   <meta property="og:title" content="${c.subject.title}"/>
+   <meta property="og:url" content="${c.subject.url(qualified=True)}"/>
+   ## Need an HTML stripper here for this to work properly.
+   ##<meta property="og:description" content="${c.subject.description}|h.html_cleanup"/>
 </%def>
 
-<%def name="title()">
-${c.subject.title}
-</%def>
+<%def name="title()">${c.subject.title}</%def>
 
 <h1 class="pageTitle">${c.subject.title}</h1>
 
@@ -54,7 +57,7 @@ ${c.subject.title}
        %endif
    </div>
    %if c.user:
-   <div class="right_arrow1"><a href="${c.subject.url(action='edit')}"> ${_('Edit')}</a></div>
+   <div class="right_arrow1"><a href="${c.subject.url(action='edit')}">${_('Edit')}</a></div>
    %endif
 </%self:rounded_block>
 

@@ -12,7 +12,7 @@
       ${_('Subject information')}
     </%def>
     <div class="dalyko-info">
-        <h2 class="group-name">${subject.title}</h2>	
+        <h2 class="group-name">${subject.title}</h2>
     </div>
     <div class="dalyko-info">
         <p>
@@ -36,6 +36,9 @@
         %endif
     </div>
     <div class="dalyko-info">
+      <div style="float: right; margin-top: 3px">
+        <fb:like width="90" layout="button_count"show_faces="false" url=${subject.url(qualified=True)}></fb:like>
+      </div>
       <p>
         <span class="verysmall grey bold">${_('Subject rating:')} </span>
         <span>${h.image('/images/details/stars%d.png' % subject.rating(), alt='', class_='subject_rating')|n}</span>
@@ -53,7 +56,7 @@
           %for tag in subject.tags:
             <a class="grey" href="${tag.url()}">${tag.title}</a>
           %endfor
-	% else:
+        % else:
           ${_('There are no subject tags.')}
         % endif
         </div>
@@ -105,15 +108,15 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
            count_subjects = len(c.similar_subjects)
         %>
         %for index, item in enumerate(c.similar_subjects):
-		<li${index==count_subjects-1 and " class='Dalykail-last'" or ''}>
-		  <dl>
+                <li${index==count_subjects-1 and " class='Dalykail-last'" or ''}>
+                  <dl>
             <%
                subject = item.object
                location = subject.location.hierarchy(True)
                length = len(location)
             %>
 
-			<dt><a href="${item.object.url()}">${subject.title}</a></dt>
+                        <dt><a href="${item.object.url()}">${subject.title}</a></dt>
             %for n, tag in enumerate(location):
               <dd class="s-line"><a class="uni" href="${tag.url()}" title="${tag.title}">${tag.title_short}</a></dd>
               %if n != length -1:
@@ -121,9 +124,9 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
               %endif
             %endfor
             %if subject.lecturer:
-			  <dd class="s-line">${_('Lect.')} ${subject.lecturer}</dd>
+                          <dd class="s-line">${_('Lect.')} ${subject.lecturer}</dd>
             %endif
-			<dt></dt>
+                        <dt></dt>
             <%
                 file_cnt = len(subject.files)
                 page_cnt = len(subject.pages)
@@ -137,10 +140,10 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
               ${_('and')}
               ${ungettext("%(count)s member", "%(count)s members", user_cnt) % dict(count = user_cnt)|n}
             </dd>
-		  </dl>
-		</li>
+                  </dl>
+                </li>
         %endfor
-	  </ul>
+          </ul>
   </%self:uportlet>
   %endif
 </%def>
