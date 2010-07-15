@@ -37,7 +37,7 @@
     </div>
     <div class="dalyko-info">
       <div style="float: right; margin-top: 3px">
-        <fb:like width="90" layout="button_count"show_faces="false" url=${subject.url(qualified=True)}></fb:like>
+        <fb:like width="90" layout="button_count" show_faces="false" url=${subject.url(qualified=True)}></fb:like>
       </div>
       <p>
         <span class="verysmall grey bold">${_('Subject rating:')} </span>
