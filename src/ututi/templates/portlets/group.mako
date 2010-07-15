@@ -46,6 +46,9 @@
         %endif
         <div>${ungettext("%(count)s member", "%(count)s members", len(group.members)) % dict(count=len(group.members))}</div>
       </div>
+      ##<div style="float: left; margin-top: 3px">
+      ##  <fb:like width="90" show_faces="false" url=${group.url(qualified=True)}></fb:like>
+      ##</div>
       <div class="clear"></div>
     </div>
     %if group.is_member(c.user) and group.has_file_area and not c.group.forum_is_public:

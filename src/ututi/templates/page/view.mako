@@ -29,6 +29,9 @@
           </div>
           %endif
         %endif
+        <div style="float: right; margin-top: 11px">
+          <fb:like width="90" layout="button_count" show_faces="false" url="${c.page.url(qualified=True)}"></fb:like>
+        </div>
         <div class="wiki2">
           <h2 class="portletTitle bold" style="padding-top: 3px; padding-left: 50px">${c.page.title}</h2>
           %if c.page.last_version:
