@@ -147,13 +147,39 @@ ${_('Profile settings')}
                     </div>
                   %endif
               %else:
-                <input type="hidden"  name="gadugadu_confirmation_key" />
+                <input type="hidden" name="gadugadu_confirmation_key" />
               %endif
-            %else:
-              <input type="hidden"  name="gadugadu_uin" />
-              <input type="hidden"  name="gadugadu_confirmation_key" />
-            %endif
           </div>
+        %else:
+          <input type="hidden" name="gadugadu_uin" />
+          <input type="hidden" name="gadugadu_confirmation_key" />
+        %endif
+
+        <div style="clear: left">
+          ${h.input_line('phone_number', _('Mobile phone number'))}
+
+          %if c.user.phone_number:
+            %if not c.user.phone_confirmed:
+              <div class="field-status">${_('(unconfirmed)')}</div>
+              <div>
+                ${h.input_submit(_('Send code again'), name='resend_phone_code')}
+              </div>
+              ${_("""Please enter the code that you should have received by SMS.""")}
+              <br />
+              <div class="floatleft" style="width: 290px">
+                ${h.input_line('phone_confirmation_key', '')}
+              </div>
+              <div class="floatleft">
+                ${h.input_submit(_('Submit code'), name='confirm_phone')}
+              </div>
+            %else:
+              <input type="hidden"  name="phone_confirmation_key" />
+              <div class="field-status confirmed"><div>${_('number is confirmed')}</div></div>
+            %endif
+          %else:
+            <input type="hidden" name="phone_confirmation_key" />
+          %endif
+        </div>
 
         <div style="clear: left">
           ${h.input_line('email', _('Your email address'))}

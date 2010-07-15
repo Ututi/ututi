@@ -1,6 +1,10 @@
 import logging
 
+from datetime import datetime
 from ututi.model import meta
+from hashlib import md5
+
+from pylons.i18n import _
 
 log = logging.getLogger(__name__)
 
@@ -14,3 +18,11 @@ def send_sms(number, text, sender, recipient=None):
               sender=sender,
               recipient=recipient)
     meta.Session.add(msg)
+
+
+def confirmation_request(user):
+    hash = md5(datetime.now().isoformat() + str(user.phone_number)).hexdigest()
+    hash = hash[:5]
+    user.phone_confirmation_key = hash
+    msg = _("Ututi registration code: %s") % hash
+    send_sms(user.phone_number, msg, sender=user, recipient=user)

@@ -45,7 +45,6 @@ class EmailMessage(Message):
         if hasattr(self, "subject") and hasattr(self, "text"):
             if isinstance(recipient, basestring):
                 try:
-                    #XXX : need to validate emails
                     EmailValidator.to_python(recipient)
                     send_email(self.sender, recipient, self.subject, self.text,
                                  html_body=self.html)
@@ -59,15 +58,14 @@ class EmailMessage(Message):
 
 class GGMessage(Message):
     """A gadugadu message."""
+
     def __init__(self, text, force=False):
         self.text = text
-
         super(GGMessage, self).__init__(sender=None, force=force)
 
     def send(self, recipient):
         if type(recipient) in (basestring, int, long):
             try:
-                #XXX : need to validate emails
                 IntValidator.to_python(recipient)
                 send_gg(recipient, self.text)
             except Invalid:
@@ -77,6 +75,8 @@ class GGMessage(Message):
 
 
 class SMSMessage(Message):
+    """An SMS message."""
+
     def __init__(self, text, force=False, sender=None):
         self.text = text
         self.sender = sender
@@ -86,9 +86,7 @@ class SMSMessage(Message):
     def send(self, recipient):
         if isinstance(recipient, basestring):
             try:
-                #XXX: validate phone number
                 send_sms(recipient, self.text, self.sender, self.recipient)
-                pass
             except Invalid:
                 log.debug("Invalid phone number %(num)s" % dict(num=recipient))
         else:

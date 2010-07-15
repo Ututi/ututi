@@ -20,6 +20,7 @@ create table users (
        facebook_id bigint default null unique,
        phone_number varchar(20) default null,
        phone_confirmed boolean default false,
+       phone_confirmation_key char(32) default '',
        primary key (id));;
 
 CREATE FUNCTION check_gadugadu() RETURNS trigger AS $$

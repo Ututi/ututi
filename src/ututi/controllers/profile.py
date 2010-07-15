@@ -25,9 +25,9 @@ from ututi.lib.emails import email_confirmation_request
 from ututi.lib.security import ActionProtector
 from ututi.lib.search import search_query, search_query_count
 from ututi.lib.image import serve_image
-from ututi.lib.validators import UserPasswordValidator, UniqueEmail, LocationTagsValidator, manual_validate
+from ututi.lib.validators import UserPasswordValidator, UniqueEmail, LocationTagsValidator, manual_validate, PhoneNumberValidator
 from ututi.lib.forms import validate
-from ututi.lib import gg
+from ututi.lib import gg, sms
 
 from ututi.model.events import Event
 from ututi.model import get_supporters
@@ -97,6 +97,27 @@ class GaduGaduConfirmationNumber(validators.FormValidator):
                       error_dict={'gadugadu_confirmation_key': Invalid(self.message('invalid', state), form_dict, state)})
 
 
+class PhoneConfirmationNumber(validators.FormValidator):
+
+    messages = {
+        'invalid': _(u"This is not the confirmation code we sent you."),
+    }
+
+    def validate_python(self, form_dict, state):
+        if not form_dict['phone_confirmation_key']:
+            return
+        if not form_dict['confirm_phone'] and not form_dict['update_contacts']:
+            return
+        if (form_dict['phone_confirmation_key'] and
+            c.user.phone_number == form_dict['phone_number'] and
+            c.user.phone_confirmation_key.strip() == form_dict['phone_confirmation_key']):
+            return
+
+        raise Invalid(self.message('invalid', state),
+                      form_dict, state,
+                      error_dict={'phone_confirmation_key': Invalid(self.message('invalid', state), form_dict, state)})
+
+
 class ContactForm(Schema):
 
     allow_extra_fields = False
@@ -105,20 +126,25 @@ class ContactForm(Schema):
     email = All(validators.Email(not_empty=True, strip=True),
                 UniqueEmail(messages=msg, strip=True))
 
-
     gadugadu_uin = validators.Int()
-    gadugadu_confirmation_key = validators.String()
+    phone_number = PhoneNumberValidator()
+
     gadugadu_get_news = validators.StringBool(if_missing=False)
 
+    gadugadu_confirmation_key = validators.String()
+    phone_confirmation_key = validators.String()
+
     confirm_email = validators.Bool()
-
     confirm_gadugadu = validators.Bool()
+    confirm_phone = validators.Bool()
 
+    resend_phone_code = validators.Bool()
     resend_gadugadu_code = validators.Bool()
 
     update_contacts = validators.Bool()
 
-    chained_validators = [GaduGaduConfirmationNumber()]
+    chained_validators = [GaduGaduConfirmationNumber(),
+                          PhoneConfirmationNumber()]
 
 
 class LogoUpload(Schema):
@@ -233,6 +259,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             'email': c.user.emails[0].email,
             'gadugadu_uin': c.user.gadugadu_uin,
             'gadugadu_get_news': c.user.gadugadu_get_news,
+            'phone_number': c.user.phone_number,
             'fullname': c.user.fullname,
             'site_url': c.user.site_url,
             'description': c.user.description,
@@ -588,6 +615,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
                 meta.Session.commit()
                 sign_in_user(email)
 
+            # handle GG
             gadugadu_uin = self.form_result['gadugadu_uin']
             gadugadu_confirmation_key = self.form_result['gadugadu_confirmation_key']
 
@@ -608,9 +636,24 @@ class ProfileController(SearchBaseController, UniversityListMixin):
                 c.user.gadugadu_get_news = self.form_result['gadugadu_get_news']
                 meta.Session.commit()
 
-            redirect(url(controller='profile', action='edit'))
-        else:
-            redirect(url(controller='profile', action='edit'))
+            # handle phone number
+            phone_number = self.form_result['phone_number']
+            phone_confirmation_key = self.form_result['phone_confirmation_key']
+
+            if self.form_result['resend_phone_code']:
+                sms.confirmation_request(c.user)
+                meta.Session.commit()
+            elif phone_number != c.user.phone_number:
+                c.user.phone_number = phone_number
+                c.user.phone_confirmed = False
+                if phone_number:
+                    sms.confirmation_request(c.user)
+                meta.Session.commit()
+            elif phone_confirmation_key:
+                c.user.phone_confirmed = True
+                meta.Session.commit()
+
+        redirect(url(controller='profile', action='edit'))
 
     @ActionProtector("user")
     def thank_you(self):
