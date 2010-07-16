@@ -702,6 +702,13 @@ class User(object):
         except NoResultFound:
             return None
 
+    @classmethod
+    def get_byphone(cls, phone_number):
+        try:
+            return meta.Session.query(cls).filter_by(phone_number=phone_number).one()
+        except NoResultFound:
+            return None
+
     @property
     def ignored_subjects(self):
         umst = user_monitored_subjects_table
