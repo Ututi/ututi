@@ -3,8 +3,8 @@
 <%namespace file="/search/index.mako" import="search_form"/>
 
 <%def name="head_tags()">
-${parent.head_tags()}
-<meta name="robots" content="noindex, nofollow" />
+  ${parent.head_tags()}
+  <meta name="robots" content="noindex, nofollow" />
 </%def>
 
 <%def name="body_class()">anonymous_index</%def>
