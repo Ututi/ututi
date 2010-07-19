@@ -1,7 +1,7 @@
 <%inherit file="/messages/base.mako" />
 
 <%def name="pagetitle()">
-  ##${_('Messages')}
+  ${_('Messages')}
 </%def>
 
 ##<div class="back-link">

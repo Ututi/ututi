@@ -5,6 +5,10 @@
   ${parent.head_tags()}
 </%def>
 
+<%def name="pagetitle()">
+  ${_("What's new?")}
+</%def>
+
 ##<div class="display_selection">
 ##  <a href="${url(controller='profile', action='home')}" ${h.trackEvent(None, 'click', 'grouped_events', 'dashboard')}>${_('grouped')}</a>
 ##  <a href="${url(controller='profile', action='feed')}" class="active" ${h.trackEvent(None, 'click', 'ungrouped_events', 'dashboard')}>${_('ungrouped')}</a>
