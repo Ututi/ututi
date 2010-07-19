@@ -2244,6 +2244,13 @@ class SMS(object):
         for key, value in kwargs.items():
             setattr(self, key, value)
 
+    @classmethod
+    def get(cls, id):
+        try:
+            return meta.Session.query(cls).filter_by(id=id).one()
+        except NoResultFound:
+            return None
+
 
 received_sms_messages = None
 class ReceivedSMSMessage(object):
