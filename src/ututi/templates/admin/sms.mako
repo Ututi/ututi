@@ -1,4 +1,4 @@
-<%inherit file="/admin/base.mako" />
+<%inherit file="/ubase.mako" />
 
 <%def name="head_tags()">
   <title>UTUTI – student information online</title>
@@ -19,18 +19,17 @@
       <th style="width: 30%;">${_('Message')}</th>
       <th>${_('Created')}</th>
       <th>${_('Status')}</th>
+      <th>${_('Last send')}</th>
     </tr>
 
     <%
        status_messages = {
          None: _('Not yet sent'),
-         0: _('sent'),
-         1: _('login problem'),
-         2: _('smsc problem'),
-         3: _('country not allowed'),
-         4: _('params problem'),
-         6: _('operator not allowed'),
-         7: _('ip not allowed')}
+         1: _('sent'),
+         2: _('delivery failure'),
+         4: _('buffered'),
+         8: _('smsc submit'),
+         16: _('smsc reject')}
        %>
     %for msg in c.messages:
     <tr>
@@ -44,8 +43,11 @@
       <td>${msg.message_text}</td>
       <td>${h.fmt_dt(msg.created)}</td>
       <td>
-        %if msg.status is None:
-          ${status_messages[msg.status]}
+        ${status_messages[msg.status]}
+      </td>
+      <td>
+        %if msg.sent:
+          ${h.fmt_dt(msg.sent)}
         %endif
       </td>
     </tr>
