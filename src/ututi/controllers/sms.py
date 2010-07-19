@@ -1,6 +1,7 @@
 from pylons import tmpl_context as c, request, url
 from ututi.lib.base import BaseController
 from ututi.lib.mailer import send_email
+from ututi.model import SMS, meta
 
 from pylons import config
 
@@ -23,8 +24,18 @@ class SmsController(BaseController):
         for key in params.keys():
             text += "%s : %s \n" % (key, request.params.get(key, '-'))
 
+        # simulate the delivery report
+        import urllib2
+        urllib2.urlopen(request.params.get('dlr-url')+'&status=1')
+
         send_email(sender=config.get('ututi_email_from', 'info@ututi.lt'),
                    recipient=config.get('ututi_email_from', 'info@ututi.lt'),
                    subject='SMS dummy send',
                    body=text)
 
+    def status(self):
+
+        sms_id = request.params.get('id')
+        sms = SMS.get(sms_id)
+        sms.status = request.params.get('status')
+        meta.Session.commit()
