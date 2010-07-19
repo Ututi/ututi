@@ -1,34 +1,60 @@
+import logging
+
 from pylons import tmpl_context as c, config, request, url
 from pylons.controllers.util import redirect, abort
 from pylons.i18n import _
 
-from ututi.model import meta, Group, User
+from ututi.model import meta, Group, User, ReceivedSMSMessage
 from ututi.lib.messaging import SMSMessage
 from ututi.lib.base import render, BaseController
 import ututi.lib.helpers as h
+
+
+log = logging.getLogger(__name__)
 
 
 MAX_GROUP_MEMBERS = 40
 
 
 class SmspayController(BaseController):
-    """SMS payment"""
+    """SMS payment."""
 
     def group_message(self):
-        keyword = request.params.get('keyword')
-        assert keyword == 'TXT UGR', keyword
-        message_id = request.params.get('message_id')
-        sig = request.params.get('sig') # TODO: check signature
-        test = request.params.get('test', False)
+        self.received_message = ReceivedSMSMessage('paid_group_message',
+                                                   request_url=request.url)
+        meta.Session.add(self.received_message)
+        self.received_message.check_fortumo_sig()
+
+        message = self._handle_group_message()
+
+        self.received_message.result = message
+        meta.Session.commit()
+
+        return message
+
+    def _handle_group_message(self):
+        recv = self.received_message
+        recv.success = False
+
+        recv.test = request.params.get('test', False)
+
+        message = request.params.get('message')
+        recv.message_text = message
 
         sender_phone = request.params.get('sender')
-        message = request.params.get('message')
+        recv.sender_phone_number = sender_phone
 
         sender = User.get_byphone('+' + sender_phone)
+        recv.sender = sender
+
         if sender is None:
             return _('Unknown sender: +%s') % sender_phone
 
-        group_id, text = message.split(None, 1) # XXX
+        parts = message.split(None, 1)
+        if len(parts) != 2:
+            return _('Invalid group message: %s') % message
+
+        group_id, text = parts
 
         group = Group.get(group_id)
         if group is None:
@@ -38,19 +64,26 @@ class SmspayController(BaseController):
             return _('%s is not a member of %s') % (sender.fullname, group.title)
 
         if len(group.members) > MAX_GROUP_MEMBERS:
-            return _('More than %d members in the group, cannot send message.') % len(group.members)
+            return _('More than %d members in the group, cannot send message.'
+                     ) % len(group.members)
 
         # TODO Charge sender.
 
         # Send message.
-        message = SMSMessage(text, sender=sender)
-        group.send(message)
+        group.send(SMSMessage(text, sender=sender))
 
-        #TODO: bounce in case of errors?
-
-        meta.Session.commit()
+        recv.success = True
         return _('SMS message sent to group %s.') % group_id
 
     def group_message_bill(self):
-        print request.params
+        """Billing message handler.
+
+        This handler is called to report successful billing for MT (Mobile
+        Terminating) billing.
+
+        MT billing is used in Lithuania; Poland uses MO (Mobile Originating)
+        billing.
+        """
+        log.info('SMS MT billing report: ' + repr(request.params))
+        # TODO
         return 'ok'

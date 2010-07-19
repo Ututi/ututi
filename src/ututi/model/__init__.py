@@ -484,8 +484,21 @@ def setup_orm(engine):
                                autoload_with=engine)
     orm.mapper(SMS,
                sms_table,
-               properties = {'sender' : relation(User, primaryjoin=sms_table.c.sender_uid==users_table.c.id),
-                             'recipient' : relation(User, primaryjoin=sms_table.c.recipient_uid==users_table.c.id)})
+               properties = {'sender': relation(User, primaryjoin=sms_table.c.sender_uid==users_table.c.id),
+                             'recipient': relation(User, primaryjoin=sms_table.c.recipient_uid==users_table.c.id)})
+
+    global received_sms_messages
+    received_sms_messages = Table("received_sms_messages", meta.metadata,
+                               Column('message_text', Unicode(assert_unicode=True)),
+                               useexisting=True,
+                               autoload=True,
+                               autoload_with=engine)
+    orm.mapper(ReceivedSMSMessage,
+               received_sms_messages,
+               properties = {
+                    'sender': relation(User, primaryjoin=received_sms_messages.c.sender_id==users_table.c.id),
+                    'group': relation(Group, primaryjoin=received_sms_messages.c.group_id==groups_table.c.group_id),
+               })
 
     from ututi.model import mailing
     mailing.setup_orm(engine)
@@ -2213,3 +2226,20 @@ class SMS(object):
     def __init__(self, **kwargs):
         for key, value in kwargs.items():
             setattr(self, key, value)
+
+
+received_sms_messages = None
+class ReceivedSMSMessage(object):
+    """An incoming SMS message."""
+
+    def __init__(self, message_type, request_url):
+        self.message_type = message_type
+        self.request_url = request_url
+
+    def request_params(self):
+        query_string = urlparse.urlparse(self.request_url)
+        return dict(urllib.parse_qsl(query_string))
+
+    def check_fortumo_sig(self):
+        sig = self.request_params()['sig']
+        # TODO: check signature, raise exception if check fails
