@@ -1091,19 +1091,6 @@ CREATE TRIGGER update_subject_count_pages AFTER INSERT OR UPDATE OR DELETE ON pa
 CREATE TRIGGER update_subject_count_content_items AFTER INSERT OR UPDATE OR DELETE ON content_items
     FOR EACH ROW EXECUTE PROCEDURE update_subject_count_content_items();;
 
-CREATE TABLE sms (
-       id bigserial not null,
-       sender_uid int8 references users(id) on delete cascade not null,
-       recipient_uid int8 references users(id) on delete cascade default null,
-       recipient_number varchar(20),
-       message_text text not null,
-       created timestamp not null default (now() at time zone 'UTC'),
-       processed timestamp default null,
-       sent timestamp default null,
-       status int default null,
-       primary key (id));
-
-
 CREATE TABLE received_sms_messages (
        id bigserial not null,
        sender_id int8 references users(id),
@@ -1116,4 +1103,26 @@ CREATE TABLE received_sms_messages (
        result text,
        request_url text,
        test boolean default false,
+       primary key (id));
+
+CREATE TABLE outgoing_group_sms_messages (
+       id bigserial not null,
+       created timestamp not null default (now() at time zone 'UTC'),
+       sender_id int8 not null references users(id),
+       group_id int8 not null references groups(id),
+       message_text text not null,
+       primary key (id));
+
+
+CREATE TABLE sms (
+       id bigserial not null,
+       outgoing_group_message_id int8 references outgoing_group_sms_messages(id),
+       sender_uid int8 references users(id) on delete cascade not null,
+       recipient_uid int8 references users(id) on delete cascade default null,
+       recipient_number varchar(20),
+       message_text text not null,
+       created timestamp not null default (now() at time zone 'UTC'),
+       processed timestamp default null,
+       sent timestamp default null,
+       status int default null,
        primary key (id));

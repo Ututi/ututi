@@ -4,7 +4,7 @@ from pylons import tmpl_context as c, config, request, url
 from pylons.controllers.util import redirect, abort
 from pylons.i18n import _
 
-from ututi.model import meta, Group, User, ReceivedSMSMessage
+from ututi.model import meta, Group, User, ReceivedSMSMessage, OutgoingGroupSMSMessage
 from ututi.lib.messaging import SMSMessage
 from ututi.lib.base import render, BaseController
 import ututi.lib.helpers as h
@@ -70,7 +70,10 @@ class SmspayController(BaseController):
         # TODO Charge sender.
 
         # Send message.
-        group.send(SMSMessage(text, sender=sender))
+        msg = OutgoingGroupSMSMessage(sender=sender, group=group,
+                                      message_text=text)
+        meta.Session.add(msg)
+        msg.send()
 
         recv.success = True
         return _('SMS message sent to group %s.') % group_id

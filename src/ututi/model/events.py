@@ -269,6 +269,15 @@ class ForumPostCreatedEvent(Event):
                 'link_to_message': link_to(self.post.title, self.post.url(new=True), 35)}
 
 
+class SMSMessageSentEvent(Event):
+    """Event fired when someone sends an SMS message to the group."""
+
+    def render(self):
+        return _("SMS message to group by %(author)s: %s") % {
+            'author': link_to(self.context.sender),
+            'text': self.context.text}
+
+
 class GroupMemberJoinedEvent(Event):
     """Event fired when members join groups."""
 
@@ -401,6 +410,13 @@ def setup_orm(engine):
                inherits=Event,
                polymorphic_on=events_table.c.event_type,
                polymorphic_identity='forum_post_created',
+               properties = {'post': relation(ForumPost,
+                                 primaryjoin=forum_posts_table.c.id==events_table.c.post_id)})
+
+    orm.mapper(SMSMessageSentEvent, events_table,
+               inherits=Event,
+               polymorphic_on=events_table.c.event_type,
+               polymorphic_identity='sms_message_sent',
                properties = {'post': relation(ForumPost,
                                  primaryjoin=forum_posts_table.c.id==events_table.c.post_id)})
 

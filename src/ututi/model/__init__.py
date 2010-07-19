@@ -1,6 +1,7 @@
 """The application's model objects"""
 import PIL
 from PIL import Image
+import urlparse
 import sys
 import os
 import hashlib
@@ -36,6 +37,7 @@ from sqlalchemy.orm.interfaces import MapperExtension
 
 from ututi.migration import GreatMigrator
 from ututi.model import meta
+from ututi.lib.messaging import SMSMessage
 from ututi.lib.helpers import image
 from ututi.lib.emails import group_invitation_email
 from ututi.lib.security import check_crowds
@@ -498,6 +500,19 @@ def setup_orm(engine):
                properties = {
                     'sender': relation(User, primaryjoin=received_sms_messages.c.sender_id==users_table.c.id),
                     'group': relation(Group, primaryjoin=received_sms_messages.c.group_id==groups_table.c.group_id),
+               })
+
+    global outgoing_group_sms_messages
+    outgoing_group_sms_messages = Table("outgoing_group_sms_messages", meta.metadata,
+                               Column('message_text', Unicode(assert_unicode=True)),
+                               useexisting=True,
+                               autoload=True,
+                               autoload_with=engine)
+    orm.mapper(OutgoingGroupSMSMessage,
+               outgoing_group_sms_messages,
+               properties = {
+                    'sender': relation(User, primaryjoin=outgoing_group_sms_messages.c.sender_id==users_table.c.id),
+                    'group': relation(Group, primaryjoin=outgoing_group_sms_messages.c.group_id==groups_table.c.id),
                })
 
     from ututi.model import mailing
@@ -2237,9 +2252,27 @@ class ReceivedSMSMessage(object):
         self.request_url = request_url
 
     def request_params(self):
-        query_string = urlparse.urlparse(self.request_url)
-        return dict(urllib.parse_qsl(query_string))
+        query_string = urlparse.urlparse(self.request_url).query
+        return dict(urlparse.parse_qsl(query_string))
 
     def check_fortumo_sig(self):
         sig = self.request_params()['sig']
         # TODO: check signature, raise exception if check fails
+
+
+outgoing_group_sms_messages_table = None
+class OutgoingGroupSMSMessage(object):
+    """An SMS message that has been sent to a group.
+
+    A single such message maps to multiple peer-to-peer SMS messages.
+    """
+
+    def __init__(self, sender, group, message_text):
+        self.sender = sender
+        self.group = group
+        self.message_text = message_text
+
+    def send(self):
+        """Queue peer-to-peer messages for each recipient."""
+        # TODO: connect individual SMS objects with self
+        self.group.send(SMSMessage(self.message_text, sender=self.sender))

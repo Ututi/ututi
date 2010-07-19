@@ -90,4 +90,4 @@ class SMSMessage(Message):
             except Invalid:
                 log.debug("Invalid phone number %(num)s" % dict(num=recipient))
         else:
-            Message.send(self,recipient=recipient)
+            Message.send(self, recipient=recipient)
