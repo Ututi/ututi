@@ -39,7 +39,7 @@ class SmspayController(BaseController):
         sender = User.get_byphone('+' + sender_phone)
         recv.sender = sender
 
-        secret = '1541796ef4ac15e96c0d8fcabf60e806'
+        secret = '1541796ef4ac15e96c0d8fcabf60e806' # XXX
         if not self.received_message.check_fortumo_sig(secret):
             # Something fishy is going on...
             meta.Session.commit()
@@ -77,7 +77,7 @@ class SmspayController(BaseController):
         sender = User.get_byphone('+' + sender_phone)
         recv.sender = sender
 
-        secret = '32eebb638597dec58c39a34b85afc7b4'
+        secret = '32eebb638597dec58c39a34b85afc7b4' # XXX
         if not self.received_message.check_fortumo_sig(secret):
             # Something fishy is going on...
             meta.Session.commit()

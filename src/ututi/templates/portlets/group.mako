@@ -193,3 +193,20 @@
     %endif
   </%self:uportlet>
 </%def>
+
+<%def name="group_sms_portlet(group=None)">
+  <%
+     if group is None:
+         group = c.group
+  %>
+  <%self:uportlet id="group_sms_portlet">
+    <%def name="header()">
+      ${_('Send SMS message')}
+    </%def>
+    <form method='post' action="${url(controller='group', action='send_sms', id=group.group_id)}">
+        <input type="hidden" name="current_url" value="${url.current()}" />
+        ${h.input_area('sms_message', _('Send an SMS to the group:'), cols=35)}
+        ${h.input_submit(_('Send'))} ${_('(%d messages remaining)') % c.user.sms_messages_remaining}
+    </form>
+  </%self:uportlet>
+</%def>

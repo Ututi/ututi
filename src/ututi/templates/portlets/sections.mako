@@ -29,7 +29,10 @@
 <%def name="group_sidebar(exclude=[])">
 <div id="sidebar">
   %if not 'info' in exclude:
-  ${group_info_portlet()}
+    ${group_info_portlet()}
+  %endif
+  %if not 'sms' in exclude and c.group.is_member(c.user):
+    ${group_sms_portlet()}
   %endif
   %if not c.group.forum_is_public:
     %if not 'files' in exclude and c.group.has_file_area:

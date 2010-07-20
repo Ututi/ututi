@@ -30,7 +30,7 @@ from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render, render_lang
 from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator, TagsValidator
 
-from ututi.model import LocationTag, User, GroupMember, GroupMembershipType, File
+from ututi.model import LocationTag, User, GroupMember, GroupMembershipType, File, OutgoingGroupSMSMessage
 from ututi.model import meta, Group, SimpleTag, Subject, ContentItem, PendingInvitation, PendingRequest
 from ututi.controllers.subject import SubjectAddMixin
 from ututi.controllers.subject import NewSubjectForm
@@ -301,7 +301,9 @@ def group_menu_items():
 
 class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
     """Controller for group actions."""
+
     controller_name = 'forum'
+
     @group_action
     def index(self, group):
         if check_crowds(["member", "admin"]):
@@ -1143,6 +1145,25 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
     def subscribe(self, group):
         group.set_subscription(c.user, True)
         redirect(request.referrer)
+
+    @group_action
+    def send_sms(self, group):
+        needed = len(group.members)
+        if c.user.sms_messages_remaining < needed:
+            h.flash(_('Not enough SMS credits: %d needed, but you have only %d.')
+                    % (len(group.members), c.user.sms_messages_remaining))
+            redirect(request.params.get('current_url'))
+
+        text = request.params.get('sms_message')
+        # TODO: check message length
+        c.user.sms_messages_remaining -= needed
+        msg = OutgoingGroupSMSMessage(sender=c.user, group=group,
+                                      message_text=text)
+        meta.Session.add(msg)
+        msg.send()
+        meta.Session.commit()
+        h.flash(_('SMS sent!'))
+        redirect(request.params.get('current_url'))
 
     @group_action
     @ActionProtector("member", "admin")
