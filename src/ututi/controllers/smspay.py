@@ -13,7 +13,6 @@ import ututi.lib.helpers as h
 log = logging.getLogger(__name__)
 
 
-MAX_GROUP_MEMBERS = 40
 
 
 class SmspayController(BaseController):
@@ -67,9 +66,10 @@ class SmspayController(BaseController):
         if not group.is_member(sender):
             return _('%s is not a member of %s') % (sender.fullname, group.title)
 
+        max_group_members = config.get('sms_max_group_members', 40)
         if len(group.members) > MAX_GROUP_MEMBERS:
             return _('More than %d members in the group, cannot send message.'
-                     ) % len(group.members)
+                     ) % MAX_GROUP_MEMBERS
 
         # Send message.
         msg = OutgoingGroupSMSMessage(sender=sender, group=group,
