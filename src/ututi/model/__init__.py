@@ -2257,13 +2257,12 @@ class ReceivedSMSMessage(object):
         query_string = urlparse.urlparse(self.request_url).query
         return dict(urlparse.parse_qsl(query_string, keep_blank_values=True))
 
-    def check_fortumo_sig(self):
-        FORTUMO_SECRET = '32eebb638597dec58c39a34b85afc7b4' # TODO: move to config
+    def check_fortumo_sig(self, secret):
         s = ''
         for k, v in sorted(self.request_params().items()):
             if k != 'sig':
                 s += '%s=%s' % (k, v)
-        s += FORTUMO_SECRET
+        s += secret
         correct_sig = hashlib.md5(s).hexdigest()
 
         request_sig = self.request_params()['sig']

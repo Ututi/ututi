@@ -18,16 +18,48 @@ log = logging.getLogger(__name__)
 class SmspayController(BaseController):
     """SMS payment."""
 
+    def personal_sms_deposit(self):
+        self.received_message = ReceivedSMSMessage('personal_sms_deposit',
+                                                   request_url=request.url)
+        meta.Session.add(self.received_message)
+        message = self._handle_personal_sms_deposit()
+        self.received_message.result = message
+        meta.Session.commit()
+        return message
+
+    def _handle_personal_sms_deposit(self):
+        recv = self.received_message
+        recv.success = False
+
+        recv.test = request.params.get('test', False)
+
+        sender_phone = request.params.get('sender')
+        recv.sender_phone_number = sender_phone
+
+        sender = User.get_byphone('+' + sender_phone)
+        recv.sender = sender
+
+        secret = '1541796ef4ac15e96c0d8fcabf60e806'
+        if not self.received_message.check_fortumo_sig(secret):
+            # Something fishy is going on...
+            meta.Session.commit()
+            raise ValueError('Invalid Fortumo signature!')
+
+        if sender is None:
+            return _('Your phone number (+%s) is not registered in Ututi.') % sender_phone
+
+        sender.sms_messages_remaining += 100
+
+        recv.success = True
+        return _('Purchased 100 SMS messages; now you have %d.') % sender.sms_messages_remaining
+
     def group_message(self):
         self.received_message = ReceivedSMSMessage('paid_group_message',
                                                    request_url=request.url)
         meta.Session.add(self.received_message)
-
         message = self._handle_group_message()
-
         self.received_message.result = message
         meta.Session.commit()
-
         return message
 
     def _handle_group_message(self):
@@ -45,7 +77,8 @@ class SmspayController(BaseController):
         sender = User.get_byphone('+' + sender_phone)
         recv.sender = sender
 
-        if not self.received_message.check_fortumo_sig():
+        secret = '32eebb638597dec58c39a34b85afc7b4'
+        if not self.received_message.check_fortumo_sig(secret):
             # Something fishy is going on...
             meta.Session.commit()
             raise ValueError('Invalid Fortumo signature!')
