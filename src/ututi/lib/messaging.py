@@ -12,8 +12,10 @@ log = logging.getLogger(__name__)
 
 class Message(object):
     """Base class for all message types."""
-    def __init__(self, sender=None, force=False):
+
+    def __init__(self, sender=None, parent=None, force=False):
         self.sender = sender
+        self.parent = parent
         self.force = force
 
     def send(self, recipient):
@@ -77,16 +79,17 @@ class GGMessage(Message):
 class SMSMessage(Message):
     """An SMS message."""
 
-    def __init__(self, text, force=False, sender=None):
+    def __init__(self, text, force=False, sender=None, parent=None):
         self.text = text
         self.sender = sender
         self.recipient = None
-        super(SMSMessage, self).__init__(sender=sender, force=force)
+        super(SMSMessage, self).__init__(sender=sender, parent=parent, force=force)
 
     def send(self, recipient):
         if isinstance(recipient, basestring):
             try:
-                send_sms(recipient, self.text, self.sender, self.recipient)
+                send_sms(recipient, self.text, self.sender, self.recipient,
+                         parent=self.parent)
             except Invalid:
                 log.debug("Invalid phone number %(num)s" % dict(num=recipient))
         else:

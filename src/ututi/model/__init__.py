@@ -478,17 +478,6 @@ def setup_orm(engine):
                            'group': relation(Group, backref=backref('payments',
                                                                     order_by=payments_table.c.created.desc()))})
 
-    global sms_table
-    sms_table = Table("sms", meta.metadata,
-                               Column('message_text', Unicode(assert_unicode=True)),
-                               useexisting=True,
-                               autoload=True,
-                               autoload_with=engine)
-    orm.mapper(SMS,
-               sms_table,
-               properties = {'sender': relation(User, primaryjoin=sms_table.c.sender_uid==users_table.c.id),
-                             'recipient': relation(User, primaryjoin=sms_table.c.recipient_uid==users_table.c.id)})
-
     global received_sms_messages
     received_sms_messages = Table("received_sms_messages", meta.metadata,
                                Column('message_text', Unicode(assert_unicode=True)),
@@ -514,6 +503,19 @@ def setup_orm(engine):
                     'sender': relation(User, primaryjoin=outgoing_group_sms_messages_table.c.sender_id==users_table.c.id),
                     'group': relation(Group, primaryjoin=outgoing_group_sms_messages_table.c.group_id==groups_table.c.id),
                })
+
+    global sms_table
+    sms_table = Table("sms", meta.metadata,
+                               Column('message_text', Unicode(assert_unicode=True)),
+                               useexisting=True,
+                               autoload=True,
+                               autoload_with=engine)
+    orm.mapper(SMS,
+               sms_table,
+               properties = {'sender': relation(User, primaryjoin=sms_table.c.sender_uid==users_table.c.id),
+                             'recipient': relation(User, primaryjoin=sms_table.c.recipient_uid==users_table.c.id),
+                             'outgoing_group_message': relation(OutgoingGroupSMSMessage, primaryjoin=sms_table.c.outgoing_group_message_id==outgoing_group_sms_messages_table.c.id),
+                             })
 
     from ututi.model import mailing
     mailing.setup_orm(engine)
@@ -2283,4 +2285,5 @@ class OutgoingGroupSMSMessage(object):
     def send(self):
         """Queue peer-to-peer messages for each recipient."""
         # TODO: connect individual SMS objects with self
-        self.group.send(SMSMessage(self.message_text, sender=self.sender))
+        self.group.send(SMSMessage(self.message_text, sender=self.sender,
+                                   parent=self))
