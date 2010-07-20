@@ -168,6 +168,7 @@ The screen will suggest watching subjects:
     Watch subjects you are studying!
     <BLANKLINE>
     Another test group
+    Send SMS message
 
 Let's have a look at the settings:
 
@@ -226,6 +227,7 @@ The initial page will not suggest watching subjects (we opted out of it):
     Invite group members!
     <BLANKLINE>
     Another test group
+    Send SMS message
 
 The files and subjects tabs are hidden, as requested:
 
