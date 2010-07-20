@@ -316,7 +316,7 @@ CREATE TABLE received_sms_messages (
        group_id int8 references groups(id),
        sender_phone_number varchar(20) default null,
        message_type varchar(30),
-       message_text text not null,
+       message_text text,
        received timestamp not null default (now() at time zone 'UTC'),
        success boolean default null,
        result text,

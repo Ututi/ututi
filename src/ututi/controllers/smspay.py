@@ -23,7 +23,6 @@ class SmspayController(BaseController):
         self.received_message = ReceivedSMSMessage('paid_group_message',
                                                    request_url=request.url)
         meta.Session.add(self.received_message)
-        self.received_message.check_fortumo_sig()
 
         message = self._handle_group_message()
 
@@ -46,6 +45,11 @@ class SmspayController(BaseController):
 
         sender = User.get_byphone('+' + sender_phone)
         recv.sender = sender
+
+        if not self.received_message.check_fortumo_sig():
+            # Something fishy is going on...
+            meta.Session.commit()
+            raise ValueError('Invalid Fortumo signature!')
 
         if sender is None:
             return _('Unknown sender: +%s') % sender_phone

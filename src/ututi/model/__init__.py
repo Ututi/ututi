@@ -2253,11 +2253,19 @@ class ReceivedSMSMessage(object):
 
     def request_params(self):
         query_string = urlparse.urlparse(self.request_url).query
-        return dict(urlparse.parse_qsl(query_string))
+        return dict(urlparse.parse_qsl(query_string, keep_blank_values=True))
 
     def check_fortumo_sig(self):
-        sig = self.request_params()['sig']
-        # TODO: check signature, raise exception if check fails
+        FORTUMO_SECRET = '32eebb638597dec58c39a34b85afc7b4' # TODO: move to config
+        s = ''
+        for k, v in sorted(self.request_params().items()):
+            if k != 'sig':
+                s += '%s=%s' % (k, v)
+        s += FORTUMO_SECRET
+        correct_sig = hashlib.md5(s).hexdigest()
+
+        request_sig = self.request_params()['sig']
+        return request_sig == correct_sig
 
 
 outgoing_group_sms_messages_table = None
