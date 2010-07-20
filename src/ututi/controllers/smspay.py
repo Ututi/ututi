@@ -71,8 +71,6 @@ class SmspayController(BaseController):
             return _('More than %d members in the group, cannot send message.'
                      ) % len(group.members)
 
-        # TODO Charge sender.
-
         # Send message.
         msg = OutgoingGroupSMSMessage(sender=sender, group=group,
                                       message_text=text)
