@@ -299,6 +299,43 @@ $$ LANGUAGE plpgsql;;
 CREATE TRIGGER set_thread_id BEFORE INSERT OR UPDATE ON group_mailing_list_messages
     FOR EACH ROW EXECUTE PROCEDURE set_thread_id();;
 
+/* SMS */
+
+CREATE TABLE outgoing_group_sms_messages (
+       id bigserial not null,
+       created timestamp not null default (now() at time zone 'UTC'),
+       sender_id int8 not null references users(id),
+       group_id int8 not null references groups(id),
+       message_text text not null,
+       primary key (id));
+
+
+CREATE TABLE received_sms_messages (
+       id bigserial not null,
+       sender_id int8 references users(id),
+       group_id int8 references groups(id),
+       sender_phone_number varchar(20) default null,
+       message_type varchar(30),
+       message_text text not null,
+       received timestamp not null default (now() at time zone 'UTC'),
+       success boolean default null,
+       result text,
+       request_url text,
+       test boolean default false,
+       primary key (id));
+
+CREATE TABLE sms (
+       id bigserial not null,
+       outgoing_group_message_id int8 references outgoing_group_sms_messages(id),
+       sender_uid int8 references users(id) on delete cascade not null,
+       recipient_uid int8 references users(id) on delete cascade default null,
+       recipient_number varchar(20),
+       message_text text not null,
+       created timestamp not null default (now() at time zone 'UTC'),
+       processed timestamp default null,
+       sent timestamp default null,
+       status int default null,
+       primary key (id));
 
 /* Forums */
 
@@ -310,10 +347,10 @@ CREATE TABLE forum_categories (
        primary key (id));
 
 
-insert into forum_categories (group_id, title, description)
-    values (null, 'Community', 'Ututi community forum');
-insert into forum_categories (group_id, title, description)
-    values (null, 'Report a bug', 'Report bugs here' );
+INSERT INTO forum_categories (group_id, title, description)
+    VALUES (NULL, 'Community', 'Ututi community forum');
+INSERT INTO forum_categories (group_id, title, description)
+    VALUES (NULL, 'Report a bug', 'Report bugs here' );
 
 
 CREATE TABLE forum_posts (
@@ -352,7 +389,6 @@ $$ LANGUAGE plpgsql;;
 
 CREATE TRIGGER set_forum_thread_id BEFORE INSERT OR UPDATE ON forum_posts
     FOR EACH ROW EXECUTE PROCEDURE set_forum_thread_id();;
-
 
 
 /* A table that tracks attachments for messages */
@@ -629,6 +665,7 @@ create table events (
        subject_id int8 references subjects(id) on delete cascade default null,
        message_id int8 references group_mailing_list_messages(id) on delete cascade default null,
        post_id int8 references forum_posts(id) on delete cascade default null,
+       sms_id int8 references outgoing_group_sms_messages(id) on delete cascade default null,
        primary key (id));;
 
 
@@ -792,6 +829,19 @@ $$ LANGUAGE plpgsql;;
 
 CREATE TRIGGER group_subject_event_trigger AFTER INSERT OR DELETE ON group_watched_subjects
     FOR EACH ROW EXECUTE PROCEDURE group_subject_event_trigger();;
+
+
+CREATE FUNCTION outgoing_group_sms_event_trigger() RETURNS trigger AS $$
+    BEGIN
+      INSERT INTO events (object_id, author_id, event_type, sms_id)
+             VALUES (NEW.group_id, NEW.sender_id, 'sms_message_sent', NEW.id);
+      RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+
+CREATE TRIGGER outgoing_group_sms_event_trigger AFTER INSERT ON outgoing_group_sms_messages
+    FOR EACH ROW EXECUTE PROCEDURE outgoing_group_sms_event_trigger();;
 
 
 /* Table for storing invitations to a group */
@@ -1090,39 +1140,3 @@ CREATE TRIGGER update_subject_count_pages AFTER INSERT OR UPDATE OR DELETE ON pa
 
 CREATE TRIGGER update_subject_count_content_items AFTER INSERT OR UPDATE OR DELETE ON content_items
     FOR EACH ROW EXECUTE PROCEDURE update_subject_count_content_items();;
-
-CREATE TABLE received_sms_messages (
-       id bigserial not null,
-       sender_id int8 references users(id),
-       group_id int8 references groups(id),
-       sender_phone_number varchar(20) default null,
-       message_type varchar(30),
-       message_text text not null,
-       received timestamp not null default (now() at time zone 'UTC'),
-       success boolean default null,
-       result text,
-       request_url text,
-       test boolean default false,
-       primary key (id));
-
-CREATE TABLE outgoing_group_sms_messages (
-       id bigserial not null,
-       created timestamp not null default (now() at time zone 'UTC'),
-       sender_id int8 not null references users(id),
-       group_id int8 not null references groups(id),
-       message_text text not null,
-       primary key (id));
-
-
-CREATE TABLE sms (
-       id bigserial not null,
-       outgoing_group_message_id int8 references outgoing_group_sms_messages(id),
-       sender_uid int8 references users(id) on delete cascade not null,
-       recipient_uid int8 references users(id) on delete cascade default null,
-       recipient_number varchar(20),
-       message_text text not null,
-       created timestamp not null default (now() at time zone 'UTC'),
-       processed timestamp default null,
-       sent timestamp default null,
-       status int default null,
-       primary key (id));

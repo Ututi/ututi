@@ -1,3 +1,4 @@
+import cgi
 import datetime
 
 from sqlalchemy.schema import Table
@@ -7,7 +8,7 @@ from sqlalchemy import orm
 from pylons.i18n import ungettext, _
 
 from ututi.model.mailing import GroupMailingListMessage
-from ututi.model import Group, Subject, User, File, Page, ContentItem, ForumPost
+from ututi.model import Group, Subject, User, File, Page, ContentItem, ForumPost, OutgoingGroupSMSMessage
 from ututi.model import meta
 from ututi.lib.helpers import link_to, ellipsis
 
@@ -273,9 +274,9 @@ class SMSMessageSentEvent(Event):
     """Event fired when someone sends an SMS message to the group."""
 
     def render(self):
-        return _("SMS message to group by %(author)s: %s") % {
-            'author': link_to(self.context.sender),
-            'text': self.context.text}
+        return _("%(link_to_author)s sent an SMS: <em>%(text)s</em>") % {
+            'link_to_author': link_to(self.outgoing_sms.sender.fullname, self.outgoing_sms.sender.url()),
+            'text': cgi.escape(self.outgoing_sms.message_text)}
 
 
 class GroupMemberJoinedEvent(Event):
@@ -352,7 +353,7 @@ class GroupStoppedWatchingSubjects(Event):
 
 def setup_orm(engine):
     from ututi.model import files_table, pages_table, subjects_table
-    from ututi.model import forum_posts_table
+    from ututi.model import forum_posts_table, outgoing_group_sms_messages_table
     from ututi.model.mailing import group_mailing_list_messages_table
     global events_table
     events_table = Table(
@@ -417,8 +418,8 @@ def setup_orm(engine):
                inherits=Event,
                polymorphic_on=events_table.c.event_type,
                polymorphic_identity='sms_message_sent',
-               properties = {'post': relation(ForumPost,
-                                 primaryjoin=forum_posts_table.c.id==events_table.c.post_id)})
+               properties={'outgoing_sms': relation(OutgoingGroupSMSMessage,
+                    primaryjoin=outgoing_group_sms_messages_table.c.id==events_table.c.sms_id)})
 
     orm.mapper(GroupMemberJoinedEvent, events_table,
                inherits=Event,

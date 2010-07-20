@@ -502,17 +502,17 @@ def setup_orm(engine):
                     'group': relation(Group, primaryjoin=received_sms_messages.c.group_id==groups_table.c.group_id),
                })
 
-    global outgoing_group_sms_messages
-    outgoing_group_sms_messages = Table("outgoing_group_sms_messages", meta.metadata,
+    global outgoing_group_sms_messages_table
+    outgoing_group_sms_messages_table = Table("outgoing_group_sms_messages", meta.metadata,
                                Column('message_text', Unicode(assert_unicode=True)),
                                useexisting=True,
                                autoload=True,
                                autoload_with=engine)
     orm.mapper(OutgoingGroupSMSMessage,
-               outgoing_group_sms_messages,
+               outgoing_group_sms_messages_table,
                properties = {
-                    'sender': relation(User, primaryjoin=outgoing_group_sms_messages.c.sender_id==users_table.c.id),
-                    'group': relation(Group, primaryjoin=outgoing_group_sms_messages.c.group_id==groups_table.c.id),
+                    'sender': relation(User, primaryjoin=outgoing_group_sms_messages_table.c.sender_id==users_table.c.id),
+                    'group': relation(Group, primaryjoin=outgoing_group_sms_messages_table.c.group_id==groups_table.c.id),
                })
 
     from ututi.model import mailing
