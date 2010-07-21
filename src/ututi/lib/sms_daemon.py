@@ -1,7 +1,7 @@
 import sys, time, os
 from daemon import Daemon
 from urllib import urlencode
-from urllib2 import urlopen
+from urllib2 import urlopen, URLError
 
 class MyDaemon(Daemon):
     def run(self):
@@ -24,8 +24,9 @@ class MyDaemon(Daemon):
 
         while True:
             results = list(connection.execute("select id, recipient_number, message_text\
-                                               from sms where status is null\
-                                               and (sent is null or sent < (now() at time zone 'UTC') - interval '1 minute')\
+                                               from sms_outbox where sending_status is null\
+                                               and delivery_status is null\
+                                               and (processed is null or processed < (now() at time zone 'UTC') - interval '1 minute')\
                                                order by created asc limit 5"))
             for result in results:
                 sms_id, sms_to, sms_text = result
@@ -41,7 +42,7 @@ class MyDaemon(Daemon):
                     'dlr-url': sms_dlr_url % sms_id,
                     'text': sms_text}
                 url = '%s?%s' % (sms_url, urlencode(message))
-                results = connection.execute("update sms set sent = (now() at time zone 'UTC') where id = %d" % sms_id)
+                results = connection.execute("update sms_outbox set processed = (now() at time zone 'UTC') where id = %d" % sms_id)
                 urlopen(url)
                 time.sleep(1)
             time.sleep(5)
