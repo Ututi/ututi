@@ -23,13 +23,22 @@
     </tr>
 
     <%
-       status_messages = {
+       delivery_status_messages = {
          None: _('Not yet sent'),
          1: _('sent'),
          2: _('delivery failure'),
          4: _('buffered'),
          8: _('smsc submit'),
          16: _('smsc reject')}
+       sending_status_messages = {
+         None: _('Not yet sent'),
+         0: _('Message sent'),
+         1: _('SMSC login problem'),
+         2: _('SMSC error'),
+         3: _('Country not allowed'),
+         4: _('Missing params'),
+         6: _('Operator not allowed'),
+         7: _('IP not allowed')}
        %>
     %for msg in c.messages:
     <tr>
@@ -43,11 +52,17 @@
       <td>${msg.message_text}</td>
       <td>${h.fmt_dt(msg.created)}</td>
       <td>
-        ${status_messages[msg.status]}
+        %if msg.delivery_status:
+          ${delivery_status_messages[msg.delivery_status]}
+        %else:
+          ${sending_status_messages[msg.sending_status]}
+        %endif
       </td>
       <td>
-        %if msg.sent:
-          ${h.fmt_dt(msg.sent)}
+        %if msg.delivered:
+          ${h.fmt_dt(msg.delivered)}
+        %elif msg.processed:
+          ${h.fmt_dt(msg.processed)}
         %endif
       </td>
     </tr>
