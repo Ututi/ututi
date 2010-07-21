@@ -50,6 +50,7 @@ class MyDaemon(Daemon):
                 if pid:
                     continue
                 else:
+                    # XXX Semaphores probably won't work as expected with fork().
                     sending_sema.acquire()
                     sms_id, sms_to, sms_text = result
                     message = {
@@ -75,10 +76,10 @@ class MyDaemon(Daemon):
                         log.debug('SMS send (sms id %d)', sms_id)
                         tx.commit()
                     except ValueError:
-                        tx.rollback()
                         log.error('Invalid responce from SMSC: %s (sms id %d)', (msg, sms_id))
+                        tx.rollback()
                     except URLError:
-                        log.error('SMSC connection error (sms id %d)', sms_id )
+                        log.error('SMSC connection error (sms id %d)', sms_id)
                         tx.rollback()
                         #TODO: logging
                     finally:
