@@ -1266,6 +1266,12 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
     def paid(self):
         return self.private_files_lock_date is not None and self.private_files_lock_date >= datetime.utcnow()
 
+    def purchase_days(self, days):
+        start_date = self.private_files_lock_date
+        if start_date is None or start_date < datetime.utcnow():
+            start_date = datetime.utcnow()
+        self.private_files_lock_date = start_date + timedelta(days=days)
+
 
 group_members_table = None
 
@@ -2206,10 +2212,7 @@ class Payment(object):
                     period = 200
                 else:
                     raise ValueError('Invalid payment amount: %d' % self.amount)
-                start_date = self.group.private_files_lock_date
-                if start_date is None or start_date < datetime.utcnow():
-                    start_date = datetime.utcnow()
-                self.group.private_files_lock_date = start_date + timedelta(days=period)
+                self.group.purchase_days(period)
 
         self.valid = True
         self.processed = True
