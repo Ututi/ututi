@@ -505,7 +505,7 @@ def setup_orm(engine):
                })
 
     global sms_table
-    sms_table = Table("sms", meta.metadata,
+    sms_table = Table("sms_outbox", meta.metadata,
                                Column('message_text', Unicode(assert_unicode=True)),
                                useexisting=True,
                                autoload=True,

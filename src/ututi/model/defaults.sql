@@ -325,7 +325,7 @@ CREATE TABLE received_sms_messages (
        test boolean default false,
        primary key (id));
 
-CREATE TABLE sms (
+CREATE TABLE sms_outbox (
        id bigserial not null,
        outgoing_group_message_id int8 references outgoing_group_sms_messages(id),
        sender_uid int8 references users(id) on delete cascade not null,
