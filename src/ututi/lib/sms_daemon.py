@@ -2,6 +2,7 @@ import sys, time, os
 from daemon import Daemon
 from urllib import urlencode
 from urllib2 import urlopen, URLError
+from threading import BoundedSemaphore
 
 class MyDaemon(Daemon):
     def run(self):
@@ -22,6 +23,9 @@ class MyDaemon(Daemon):
         sms_dlr_url = config.get('sms.dlr-url')
         sms_dlr_mask = config.get('sms.dlr-mask')
 
+        sms_thread_count = config.get('sms.thread_count', 5)
+        sending_sema = BoundedSemaphore(sms_thread_count)
+
         while True:
             results = list(connection.execute("select id, recipient_number, message_text\
                                                from sms_outbox where sending_status is null\
@@ -29,36 +33,44 @@ class MyDaemon(Daemon):
                                                and (processed is null or processed < (now() at time zone 'UTC') - interval '1 minute')\
                                                order by created asc limit 5"))
             for result in results:
-                sms_id, sms_to, sms_text = result
-                #out = open("/home/domas/results.txt", "a")
-                #out.write("%d -> %s : %s \n" % tuple(result))
-                #out.close()
-                message = {
-                    'user': sms_user,
-                    'password': sms_password,
-                    'to': sms_to,
-                    'from': sms_from,
-                    'dlr-mask': sms_dlr_mask,
-                    'dlr-url': sms_dlr_url % sms_id,
-                    'text': sms_text}
-                url = '%s?%s' % (sms_url, urlencode(message))
 
-                #processing time should not be rolled back
-                results = connection.execute("update sms_outbox set processed = (now() at time zone 'UTC') where id = %d" % sms_id)
-                tx = connection.begin()
-                try:
-                    response = urlopen(url)
-                    msg = response.read()
-                    status, message = msg.split(';')
+                #fork
+                pid = os.fork()
 
-                    status = int(status)
-                    results = connection.execute("update sms_outbox set sending_status = %d where id = %d" % (status, sms_id))
-                    tx.commit()
-                except ValueError, URLError:
-                    tx.rollback()
-                    #TODO: logging
-                time.sleep(1)
+                if pid:
+                    continue
+                else:
+                    sending_sema.acquire()
+                    sms_id, sms_to, sms_text = result
+                    message = {
+                        'user': sms_user,
+                        'password': sms_password,
+                        'to': sms_to,
+                        'from': sms_from,
+                        'dlr-mask': sms_dlr_mask,
+                        'dlr-url': sms_dlr_url % sms_id,
+                        'text': sms_text}
+                    url = '%s?%s' % (sms_url, urlencode(message))
+
+                    #processing time should not be rolled back
+                    results = connection.execute("update sms_outbox set processed = (now() at time zone 'UTC') where id = %d" % sms_id)
+                    tx = connection.begin()
+                    try:
+                        response = urlopen(url)
+                        msg = response.read()
+                        status, message = msg.split(';')
+
+                        status = int(status)
+                        results = connection.execute("update sms_outbox set sending_status = %d where id = %d" % (status, sms_id))
+                        tx.commit()
+                    except ValueError, URLError:
+                        tx.rollback()
+                        #TODO: logging
+                    finally:
+                        sending_sema.release()
+                        os._exit(os.EX_OK)
             time.sleep(5)
+
 
 def main():
     daemon = MyDaemon('/tmp/daemon-example.pid')
