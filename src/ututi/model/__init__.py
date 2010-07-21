@@ -1264,20 +1264,7 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
 
     @property
     def paid(self):
-        # TODO: rework this
-        payments = [p for p in self.payments
-                    if p.raw_error == '']
-        if payments:
-            pmnt = payments[-1]
-            period = 0
-            if pmnt.amount == int(config.get('group_payment_month', 1000)):
-                period = 31
-            elif pmnt.amount == int(config.get('group_payment_quarter', 2000)):
-                period = 100
-            elif pmnt.amount == int(config.get('group_payment_halfyear', 3000)):
-                period = 200
-            return pmnt.created - datetime.utcnow() <= timedelta(days=period)
-        return False
+        return self.private_files_lock_date is not None and self.private_files_lock_date >= datetime.utcnow()
 
 
 group_members_table = None
@@ -2199,6 +2186,9 @@ class Payment(object):
 
     def process(self):
         payment_type, payment_info = self.raw_orderid.split('_', 1)
+        self.payment_type = payment_type
+        self.amount = int(self.raw_amount)
+
         if payment_type == 'support':
             user_id = payment_info
             self.user = User.get_byid(int(user_id))
@@ -2207,8 +2197,20 @@ class Payment(object):
             self.user = User.get_byid(int(user_id))
             self.group = Group.get(int(group_id))
 
-        self.payment_type = payment_type
-        self.amount = int(self.raw_amount)
+            if self.raw_error == '':
+                if self.amount == int(config.get('group_payment_month', 1000)):
+                    period = 31
+                elif self.amount == int(config.get('group_payment_quarter', 2000)):
+                    period = 100
+                elif self.amount == int(config.get('group_payment_halfyear', 3000)):
+                    period = 200
+                else:
+                    raise ValueError('Invalid payment amount: %d' % self.amount)
+                start_date = self.group.private_files_lock_date
+                if start_date is None or start_date < datetime.utcnow():
+                    start_date = datetime.utcnow()
+                self.group.private_files_lock_date = start_date + timedelta(days=period)
+
         self.valid = True
         self.processed = True
 
