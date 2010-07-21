@@ -1264,6 +1264,7 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
 
     @property
     def paid(self):
+        # TODO: rework this
         payments = [p for p in self.payments
                     if p.raw_error == '']
         if payments:

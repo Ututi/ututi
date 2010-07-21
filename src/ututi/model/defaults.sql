@@ -189,6 +189,8 @@ create table groups (
        forum_is_public bool default false,
        mailinglist_enabled bool default true,
        has_file_area bool default true,
+       private_files_lock_date timestamp default null,
+       private_files_credits int8 default 0,
        primary key (id));;
 
 /* An enumerator for membership types in groups */
@@ -645,8 +647,10 @@ CREATE TRIGGER on_content_create BEFORE INSERT ON content_items
 /* a trigger to update the date and user who modified the object */
 CREATE FUNCTION on_content_update() RETURNS trigger AS $$
     BEGIN
-      NEW.modified_by = current_setting('ututi.active_user');
-      NEW.modified_on = (now() at time zone 'UTC');
+      IF CAST(current_setting('ututi.active_user') AS int8) > 0 THEN
+        NEW.modified_by = current_setting('ututi.active_user');
+        NEW.modified_on = (now() at time zone 'UTC');
+      END IF;
       RETURN NEW;
     END
 $$ LANGUAGE plpgsql;;
@@ -680,8 +684,10 @@ $$ LANGUAGE plpgsql;;
 
 CREATE FUNCTION set_ci_modtime(content_item_id int8) RETURNS void AS $$
     BEGIN
-      UPDATE content_items SET modified_by = cast(current_setting('ututi.active_user') as int8),
-        modified_on = (now() at time zone 'UTC') WHERE id = content_item_id;
+      IF CAST(current_setting('ututi.active_user') AS int8) > 0 THEN
+        UPDATE content_items SET modified_by = cast(current_setting('ututi.active_user') as int8),
+          modified_on = (now() at time zone 'UTC') WHERE id = content_item_id;
+      END IF;
     END
 $$ LANGUAGE plpgsql;;
 
