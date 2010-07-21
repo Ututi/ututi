@@ -1,4 +1,7 @@
-from pylons import tmpl_context as c, request, url
+from datetime import datetime
+
+from pylons import request
+
 from ututi.lib.base import BaseController
 from ututi.lib.mailer import send_email
 from ututi.model import SMS, meta
@@ -26,7 +29,7 @@ class SmsController(BaseController):
 
         # simulate the delivery report
         import urllib2
-        urllib2.urlopen(request.params.get('dlr-url')+'&status=1')
+        urllib2.urlopen(request.params.get('dlr-url')+'&status=1&time=1279709763.685117')
 
         send_email(sender=config.get('ututi_email_from', 'info@ututi.lt'),
                    recipient=config.get('sms.dummy_send', 'info@ututi.lt'),
@@ -39,4 +42,5 @@ class SmsController(BaseController):
         sms_id = request.params.get('id')
         sms = SMS.get(sms_id)
         sms.delivery_status = request.params.get('status')
+        sms.delivered = datetime.fromtimestamp(float(request.params.get('time')))
         meta.Session.commit()

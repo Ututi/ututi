@@ -334,7 +334,6 @@ CREATE TABLE sms_outbox (
        message_text text not null,
        created timestamp not null default (now() at time zone 'UTC'),
        processed timestamp default null,
-       sent timestamp default null,
        delivered timestamp default null,
        sending_status int default null,
        delivery_status int default null,
