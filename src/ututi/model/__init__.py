@@ -2290,6 +2290,5 @@ class OutgoingGroupSMSMessage(object):
 
     def send(self):
         """Queue peer-to-peer messages for each recipient."""
-        # TODO: connect individual SMS objects with self
         self.group.send(SMSMessage(self.message_text, sender=self.sender,
                                    parent=self))
