@@ -3,7 +3,7 @@ import logging
 from daemon import Daemon
 from urllib import urlencode
 from urllib2 import urlopen, URLError
-from threading import BoundedSemaphore
+from threading import BoundedSemaphore, Thread
 
 class MyDaemon(Daemon):
     def run(self):
@@ -26,12 +26,13 @@ class MyDaemon(Daemon):
         engine = engine_from_config(config)
         connection = engine.connect()
 
-        sms_url = config.get('sms.url')
-        sms_user = config.get('sms.user')
-        sms_password = config.get('sms.password')
-        sms_from = config.get('sms.from')
-        sms_dlr_url = config.get('sms.dlr-url')
-        sms_dlr_mask = config.get('sms.dlr-mask')
+        sms_config = {
+            'url' : config.get('sms.url'),
+            'user' : config.get('sms.user'),
+            'password' : config.get('sms.password'),
+            'from' : config.get('sms.from'),
+            'dlr-url' : config.get('sms.dlr-url'),
+            'dlr-mask' : config.get('sms.dlr-mask')}
 
         sms_thread_count = config.get('sms.thread_count', 5)
         sending_sema = BoundedSemaphore(sms_thread_count)
@@ -43,48 +44,9 @@ class MyDaemon(Daemon):
                                                and (processed is null or processed < (now() at time zone 'UTC') - interval '1 minute')\
                                                order by created asc limit 5"))
             for result in results:
+                thr = SenderThread(sending_sema, engine, tuple(result), sms_config, logging)
+                thr.start()
 
-                #fork
-                pid = os.fork()
-
-                if pid:
-                    continue
-                else:
-                    # XXX Semaphores probably won't work as expected with fork().
-                    sending_sema.acquire()
-                    sms_id, sms_to, sms_text = result
-                    message = {
-                        'user': sms_user,
-                        'password': sms_password,
-                        'to': sms_to,
-                        'from': sms_from,
-                        'dlr-mask': sms_dlr_mask,
-                        'dlr-url': sms_dlr_url % sms_id,
-                        'text': sms_text}
-                    url = '%s?%s' % (sms_url, urlencode(message))
-
-                    #processing time should not be rolled back
-                    results = connection.execute("update sms_outbox set processed = (now() at time zone 'UTC') where id = %d" % sms_id)
-                    tx = connection.begin()
-                    try:
-                        response = urlopen(url)
-                        msg = response.read()
-                        status, message = msg.split(';')
-
-                        status = int(status)
-                        results = connection.execute("update sms_outbox set sending_status = %d where id = %d" % (status, sms_id))
-                        log.debug('SMS send (sms id %d)', sms_id)
-                        tx.commit()
-                    except ValueError:
-                        log.error('Invalid responce from SMSC: %s (sms id %d)', (msg, sms_id))
-                        tx.rollback()
-                    except URLError:
-                        log.error('SMSC connection error (sms id %d)', sms_id)
-                        tx.rollback()
-                        #TODO: logging
-                    finally:
-                        sending_sema.release()
-                        os._exit(os.EX_OK)
             time.sleep(5)
 
 
@@ -119,3 +81,53 @@ def main():
     else:
         print "usage: %s start|stop|restart" % sys.argv[0]
         sys.exit(2)
+
+
+class SenderThread(Thread):
+    def __init__(self, semaphore, db_engine, sms, sms_config, log):
+        Thread.__init__(self)
+        self.semaphore = semaphore
+        self.sms = sms
+        self.db_engine = db_engine
+        self.sms_config = sms_config
+        self.log = log
+
+    def run(self):
+        self.semaphore.acquire()
+
+        connection = self.db_engine.connect()
+
+        sms_id, sms_to, sms_text = self.sms
+
+        message = {
+            'user': self.sms_config['user'],
+            'password': self.sms_config['password'],
+            'to': sms_to,
+            'from': self.sms_config['from'],
+            'dlr-mask': self.sms_config['dlr-mask'],
+            'dlr-url': self.sms_config['dlr-url'] % sms_id,
+            'text': sms_text}
+        url = '%s?%s' % (self.sms_config['url'], urlencode(message))
+
+        #processing time should not be rolled back
+        results = connection.execute("update sms_outbox set processed = (now() at time zone 'UTC') where id = %d" % sms_id)
+
+        tx = connection.begin()
+        try:
+            response = urlopen(url)
+            msg = response.read()
+            status, message = msg.split(';')
+
+            status = int(status)
+            results = connection.execute("update sms_outbox set sending_status = %d where id = %d" % (status, sms_id))
+            self.log.info('SMS sent (sms id %d)', sms_id)
+            tx.commit()
+        except ValueError:
+            self.log.error('Invalid responce from SMSC: %s (sms id %d)', (msg, sms_id))
+            tx.rollback()
+        except URLError:
+            tx.rollback()
+            self.log.error('SMSC connection error (sms id %d)', sms_id )
+        finally:
+            connection.close()
+            self.semaphore.release()
