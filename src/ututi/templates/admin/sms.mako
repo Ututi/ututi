@@ -25,7 +25,7 @@
     <%
        delivery_status_messages = {
          None: _('Not yet sent'),
-         1: _('sent'),
+         1: _('delivered'),
          2: _('delivery failure'),
          4: _('buffered'),
          8: _('smsc submit'),

@@ -38,5 +38,5 @@ class SmsController(BaseController):
 
         sms_id = request.params.get('id')
         sms = SMS.get(sms_id)
-        sms.status = request.params.get('status')
+        sms.delivery_status = request.params.get('status')
         meta.Session.commit()
