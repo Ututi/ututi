@@ -88,7 +88,10 @@ class MyDaemon(Daemon):
 
 
 def main():
-    daemon = MyDaemon('/tmp/daemon-example.pid')
+
+    pid_file = os.environ.get('SMSD_PID_FILE', 'smsd.pid')
+    pid_file = os.path.abspath(pid_file)
+    daemon = MyDaemon(pid_file)
     config_file = sys.argv[1] if len(sys.argv) > 2 else 'development.ini'
 
     config_file = os.path.abspath(config_file)
