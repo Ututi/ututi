@@ -19,7 +19,7 @@ def test_messages():
         >>> sms.id
         1L
 
-        >>> [(sms.message_text, sms.status) for sms in meta.Session.query(SMS).all()]
+        >>> [(sms.message_text, sms.sending_status) for sms in meta.Session.query(SMS).all()]
         [(u'Test message.', None)]
     """
 

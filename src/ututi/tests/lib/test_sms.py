@@ -2,7 +2,7 @@ from zope.testing import doctest
 from ututi.tests import PylonsLayer
 
 def test_sms():
-    """Test the function urlify.
+    """Test sms sending.
 
         >>> from ututi.lib.sms import send_sms
         >>> from ututi.model import SMS, User, meta
@@ -11,7 +11,7 @@ def test_sms():
         >>> send_sms('+37061300034', u'Message text', u)
         >>> meta.Session.commit()
 
-        >>> [(sms.message_text, sms.status) for sms in meta.Session.query(SMS).all()]
+        >>> [(sms.message_text, sms.sending_status) for sms in meta.Session.query(SMS).all()]
         [(u'Message text', None)]
     """
 
