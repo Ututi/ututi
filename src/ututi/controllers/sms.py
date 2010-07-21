@@ -29,9 +29,10 @@ class SmsController(BaseController):
         urllib2.urlopen(request.params.get('dlr-url')+'&status=1')
 
         send_email(sender=config.get('ututi_email_from', 'info@ututi.lt'),
-                   recipient=config.get('ututi_email_from', 'info@ututi.lt'),
+                   recipient=config.get('sms.dummy_send', 'info@ututi.lt'),
                    subject='SMS dummy send',
                    body=text)
+        return '0;Message sent'
 
     def status(self):
 
