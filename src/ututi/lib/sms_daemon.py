@@ -1,4 +1,5 @@
 import sys, time, os
+import logging
 from daemon import Daemon
 from urllib import urlencode
 from urllib2 import urlopen, URLError
@@ -7,9 +8,18 @@ from threading import BoundedSemaphore
 class MyDaemon(Daemon):
     def run(self):
         # database connect
+
+        log_file = os.environ.get('SMSD_LOG_FILE')
+        logging.basicConfig(filename=log_file,
+                            format='%(asctime)s %(levelname)-8s %(message)s',
+                            datefmt='%a, %d %b %Y %H:%M:%S',
+                            level=logging.DEBUG)
+
+        logging.info('SMSD started')
+
         from sqlalchemy import engine_from_config
         from paste.deploy.loadwsgi import ConfigLoader
-        config_file = os.environ['CONFIG_FILE']
+        config_file = os.environ['SMSD_CONFIG_FILE']
         clo = ConfigLoader(config_file)
 
         config = dict(clo.parser.items('app:main'))
@@ -62,8 +72,13 @@ class MyDaemon(Daemon):
 
                         status = int(status)
                         results = connection.execute("update sms_outbox set sending_status = %d where id = %d" % (status, sms_id))
+                        log.debug('SMS send (sms id %d)', sms_id)
                         tx.commit()
-                    except ValueError, URLError:
+                    except ValueError:
+                        tx.rollback()
+                        log.error('Invalid responce from SMSC: %s (sms id %d)', (msg, sms_id))
+                    except URLError:
+                        log.error('SMSC connection error (sms id %d)', sms_id )
                         tx.rollback()
                         #TODO: logging
                     finally:
@@ -77,9 +92,14 @@ def main():
     config_file = sys.argv[1] if len(sys.argv) > 2 else 'development.ini'
 
     config_file = os.path.abspath(config_file)
-    os.environ['CONFIG_FILE'] = config_file
+    os.environ['SMSD_CONFIG_FILE'] = config_file
+
     pgport = os.environ.get("PGPORT", "4455")
     os.environ["PGPORT"] = pgport 
+
+    log_file = os.environ.get("SMSD_LOG_FILE", 'smsd.log')
+    log_file = os.path.abspath(log_file)
+    os.environ['SMSD_LOG_FILE'] = log_file
 
     if len(sys.argv) == 2:
         if 'start' == sys.argv[1]:
