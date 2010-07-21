@@ -335,7 +335,9 @@ CREATE TABLE sms (
        created timestamp not null default (now() at time zone 'UTC'),
        processed timestamp default null,
        sent timestamp default null,
-       status int default null,
+       delivered timestamp default null,
+       sending_status int default null,
+       delivery_status int default null,
        primary key (id));
 
 /* Forums */
