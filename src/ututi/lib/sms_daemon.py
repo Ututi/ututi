@@ -42,8 +42,21 @@ class MyDaemon(Daemon):
                     'dlr-url': sms_dlr_url % sms_id,
                     'text': sms_text}
                 url = '%s?%s' % (sms_url, urlencode(message))
+
+                #processing time should not be rolled back
                 results = connection.execute("update sms_outbox set processed = (now() at time zone 'UTC') where id = %d" % sms_id)
-                urlopen(url)
+                tx = connection.begin()
+                try:
+                    response = urlopen(url)
+                    msg = response.read()
+                    status, message = msg.split(';')
+
+                    status = int(status)
+                    results = connection.execute("update sms_outbox set sending_status = %d where id = %d" % (status, sms_id))
+                    tx.commit()
+                except ValueError, URLError:
+                    tx.rollback()
+                    #TODO: logging
                 time.sleep(1)
             time.sleep(5)
 
