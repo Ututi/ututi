@@ -54,9 +54,8 @@ def main():
 
     pid_file = os.environ.get('SMSD_PID_FILE', 'smsd.pid')
     pid_file = os.path.abspath(pid_file)
-    daemon = MyDaemon(pid_file)
-    config_file = sys.argv[1] if len(sys.argv) > 2 else 'development.ini'
 
+    config_file = os.environ.get('SMSD_CONFIG_FILE', 'development.ini')
     config_file = os.path.abspath(config_file)
     os.environ['SMSD_CONFIG_FILE'] = config_file
 
@@ -66,6 +65,8 @@ def main():
     log_file = os.environ.get("SMSD_LOG_FILE", 'smsd.log')
     log_file = os.path.abspath(log_file)
     os.environ['SMSD_LOG_FILE'] = log_file
+
+    daemon = MyDaemon(pid_file)
 
     if len(sys.argv) == 2:
         if 'start' == sys.argv[1]:
