@@ -1148,7 +1148,7 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
 
     @group_action
     def send_sms(self, group):
-        needed = len(group.members)
+        needed = len([m for m in group.members if m.user.phone_number and m.user.phone_confirmed])
         if c.user.sms_messages_remaining < needed:
             h.flash(_('Not enough SMS credits: %d needed, but you have only %d.')
                     % (len(group.members), c.user.sms_messages_remaining))
@@ -1162,7 +1162,7 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
         meta.Session.add(msg)
         msg.send()
         meta.Session.commit()
-        h.flash(_('SMS sent!'))
+        h.flash(_('SMS sent! (%d credits used up, %d remaining)') % (needed, c.user.sms_messages_remaining))
         redirect(request.params.get('current_url'))
 
     @group_action
