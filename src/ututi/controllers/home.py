@@ -566,6 +566,13 @@ class HomeController(UniversityListMixin):
         h.flash(message)
         redirect(c.came_from or url(controller='home', action='index'))
 
+    def test_facebook_login(self):
+        assert config.get('facebook.testing')
+        self._facebook_name_and_email = lambda id, token: ('John Smith', 'john.smith@example.com')
+        return self._register_or_login(None, None, facebook_id=0xfaceb006,
+                                       fb_access_token=-42)
+
+
     def facebook_login(self):
         fb_user = facebook.get_user_from_cookie(request.cookies,
                          config['facebook.appid'], config['facebook.secret'])

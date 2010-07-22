@@ -1,0 +1,36 @@
+Registration using Facebook Connect
+-----------------------------------
+
+If a user tries to log on using Facebook, but is not found, they are redirected
+to the federated registration page
+
+    >>> browser = Browser()
+    >>> browser.open('/home/test_facebook_login')
+    >>> browser.url
+    'http://localhost/federated_registration'
+
+They can fill out the form and register here:
+
+    >>> browser.getControl(name='agree').value = True
+    >>> browser.getControl('Register').click()
+
+    >>> browser.url
+    'http://localhost/register/welcome'
+
+We're in!
+
+
+Logging in with Facebook Connect
+--------------------------------
+
+Our FB account is already associated with our Ututi user, so logging in is just
+a single click away:
+
+    >>> browser2 = Browser()
+    >>> browser2.open('/home/test_facebook_login')
+
+    >>> browser2.url
+    'http://localhost/home'
+
+    >>> browser2.printQuery('id("personal-data")//span[@class="fullname"]/text()')
+    John Smith

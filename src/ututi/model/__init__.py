@@ -879,7 +879,15 @@ class User(object):
         if not self.facebook_id:
             return
         photo_url = 'https://graph.facebook.com/%s/picture?type=large' % self.facebook_id
-        self.logo = urllib.urlopen(photo_url).read()
+        try:
+            logo = urllib.urlopen(photo_url).read()
+        except IOError:
+            pass
+        else:
+            try:
+                self.logo = logo
+            except IOError:
+                pass
 
     def download(self, file):
         self.downloads.append(FileDownload(self, file))
