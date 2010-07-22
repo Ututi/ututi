@@ -512,10 +512,11 @@ def setup_orm(engine):
                                autoload_with=engine)
     orm.mapper(SMS,
                sms_table,
-               properties = {'sender': relation(User, primaryjoin=sms_table.c.sender_uid==users_table.c.id),
-                             'recipient': relation(User, primaryjoin=sms_table.c.recipient_uid==users_table.c.id),
-                             'outgoing_group_message': relation(OutgoingGroupSMSMessage, primaryjoin=sms_table.c.outgoing_group_message_id==outgoing_group_sms_messages_table.c.id),
-                             })
+               properties={'sender': relation(User, primaryjoin=sms_table.c.sender_uid==users_table.c.id),
+                           'recipient': relation(User, primaryjoin=sms_table.c.recipient_uid==users_table.c.id),
+                           'outgoing_group_message': relation(OutgoingGroupSMSMessage, primaryjoin=sms_table.c.outgoing_group_message_id==outgoing_group_sms_messages_table.c.id,
+                                                              backref='individual_messages'),
+                           })
 
     from ututi.model import mailing
     mailing.setup_orm(engine)

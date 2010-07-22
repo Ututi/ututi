@@ -17,13 +17,13 @@ We should be redirected to the registration form:
 
 Let's register:
 
-   >>> form = browser.getForm('join_registration_form')
-   >>> form.getControl('Full name').value = 'Jonas Petraitis Petrauskas'
-   >>> form.getControl('Email').value = 'jonas@example.com'
-   >>> form.getControl('Password').value = 'asdfgh'
-   >>> form.getControl('Repeat password').value = 'asdfgh'
-   >>> form.getControl(name='agree').value = True
-   >>> form.getControl('Register').click()
+    >>> form = browser.getForm('join_registration_form')
+    >>> form.getControl('Full name').value = 'Jonas Petraitis Petrauskas'
+    >>> form.getControl('Email').value = 'jonas@example.com'
+    >>> form.getControl('Password').value = 'asdfgh'
+    >>> form.getControl('Repeat password').value = 'asdfgh'
+    >>> form.getControl(name='agree').value = True
+    >>> form.getControl('Register').click()
 
 (We have been sent an email confirmation message.)
 
