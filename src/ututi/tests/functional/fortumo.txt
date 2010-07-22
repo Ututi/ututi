@@ -11,7 +11,7 @@ Signatures
 
 The Fortumo signature of incoming notifications is checked:
 
-    >>> app.get('/smspay/personal_sms_credits?test=test&sender=123&sig=123')
+    >>> app.get('/fortumo/personal_sms_credits?test=test&sender=123&sig=123')
     Traceback (most recent call last):
     ...
     ValueError: Invalid Fortumo signature!
@@ -32,10 +32,10 @@ We'll define a helper:
     >>> import urllib
     >>> def make_request(message_type, params):
     ...     params['test'] = 'test'
-    ...     msg = ReceivedSMSMessage(message_type, 'http://test/smspay/%s?%s' % (message_type, urllib.urlencode(params)))
+    ...     msg = ReceivedSMSMessage(message_type, 'http://test/fortumo/%s?%s' % (message_type, urllib.urlencode(params)))
     ...     sig = msg.calculate_fortumo_sig()
     ...     params['sig'] = sig
-    ...     return app.get('/smspay/%s?%s' % (message_type, urllib.urlencode(params)))
+    ...     return app.get('/fortumo/%s?%s' % (message_type, urllib.urlencode(params)))
 
 Also, we will register a user with a mobile phone:
 
@@ -77,9 +77,9 @@ The requests should have been logged in the database:
     >>> msgs = meta.Session.query(ReceivedSMSMessage).all()
     >>> for msg in msgs:
     ...     print msg.request_url
-    http://localhost/smspay/personal_sms_credits?test=test&sender=123&sig=123
-    http://localhost/smspay/personal_sms_credits?test=test&sig=...&sender=37067812345
-    http://localhost/smspay/personal_sms_credits?test=test&sig=...&sender=37067812345
+    http://localhost/fortumo/personal_sms_credits?test=test&sender=123&sig=123
+    http://localhost/fortumo/personal_sms_credits?test=test&sig=...&sender=37067812345
+    http://localhost/fortumo/personal_sms_credits?test=test&sig=...&sender=37067812345
 
 The success attribute indicates if the notification was processed:
 

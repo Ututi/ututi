@@ -13,8 +13,8 @@ import ututi.lib.helpers as h
 log = logging.getLogger(__name__)
 
 
-class SmspayController(BaseController):
-    """SMS payment."""
+class FortumoController(BaseController):
+    """Payment by SMS."""
 
     def personal_sms_credits(self):
         """Buy 100 personal SMS messages."""
@@ -29,6 +29,7 @@ class SmspayController(BaseController):
         return self._receive_message('group_space_large')
 
     def group_message(self):
+        """Send a message to a group."""
         return self._receive_message('group_message')
 
     def _receive_message(self, message_type):
