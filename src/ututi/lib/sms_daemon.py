@@ -99,6 +99,14 @@ class SenderThread(Thread):
         connection = self.db_engine.connect()
 
         sms_id, sms_to, sms_text = self.sms
+        sms_text = sms_text.decode('utf-8')
+
+        coding=1
+        try:
+            sms_text = sms_text.encode('ascii')
+        except UnicodeError:
+            sms_text = sms_text.encode('utf-16be')
+            coding=2
 
         message = {
             'user': self.sms_config['user'],
@@ -107,6 +115,7 @@ class SenderThread(Thread):
             'from': self.sms_config['from'],
             'dlr-mask': self.sms_config['dlr-mask'],
             'dlr-url': self.sms_config['dlr-url'] % sms_id,
+            'coding': coding,
             'text': sms_text}
         url = '%s?%s' % (self.sms_config['url'], urlencode(message))
 
