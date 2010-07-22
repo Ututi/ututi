@@ -115,8 +115,12 @@ class SenderThread(Thread):
             'from': self.sms_config['from'],
             'dlr-mask': self.sms_config['dlr-mask'],
             'dlr-url': self.sms_config['dlr-url'] % sms_id,
-            'coding': coding,
             'text': sms_text}
+
+        # apparently coding=1 does not mean ascii
+        if coding != 1:
+            message['coding'] = coding
+
         url = '%s?%s' % (self.sms_config['url'], urlencode(message))
 
         #processing time should not be rolled back
