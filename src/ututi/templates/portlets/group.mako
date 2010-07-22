@@ -203,10 +203,20 @@
     <%def name="header()">
       ${_('Send SMS message')}
     </%def>
-    <form method='post' action="${url(controller='group', action='send_sms', id=group.group_id)}">
-        <input type="hidden" name="current_url" value="${url.current()}" />
-        ${h.input_area('sms_message', _('Send an SMS to the group:'), cols=35)}
-        ${h.input_submit(_('Send'))} ${_('(%d messages remaining)') % c.user.sms_messages_remaining}
-    </form>
+
+    %if c.user.sms_messages_remaining:
+      ${_('(%d messages remaining)') % c.user.sms_messages_remaining}
+      <form method='post' action="${url(controller='group', action='send_sms', id=group.group_id)}">
+          <input type="hidden" name="current_url" value="${url.current()}" />
+          ${h.input_area('sms_message', _('Send an SMS to the group:'), cols=35)}
+          ${h.input_submit(_('Send'))}
+      </form>
+    %else:
+      ${_('You need to buy credits to be able to send SMS messages to the group')}
+      % if not c.user.phone_confirmed:
+        ${_('You need to confirm your phone in your <a href="%s">profile</a>.') % url(controller='profile', action='edit')}
+      % endif
+      ${_('Send an SMS to number 1337 with the content "TXT U2FILES10" to buy some credits.')}
+    %endif
   </%self:uportlet>
 </%def>
