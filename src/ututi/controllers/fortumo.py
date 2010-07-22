@@ -32,6 +32,21 @@ class FortumoController(BaseController):
         """Send a message to a group."""
         return self._receive_message('group_message')
 
+    def billing(self):
+        """Billing message handler.
+
+        This handler is called to report successful billing for MT (Mobile
+        Terminating) billing.
+
+        MT billing is used in Lithuania; Poland uses MO (Mobile Originating)
+        billing.
+        """
+        if request.params.get('status') != 'OK':
+            # TODO: Nicer way of informing about the error?
+            raise ValueError('Billing error: %s' % request.url)
+        log.info('Billing notification: %s' % repr(request.url))
+        return 'ok'
+
     def _receive_message(self, message_type):
         msg = ReceivedSMSMessage(message_type, request_url=request.url)
         msg.success = False
@@ -105,18 +120,3 @@ class FortumoController(BaseController):
 
         msg.success = True
         return _('SMS message sent to group %s.') % group_id
-
-    def billing(self):
-        """Billing message handler.
-
-        This handler is called to report successful billing for MT (Mobile
-        Terminating) billing.
-
-        MT billing is used in Lithuania; Poland uses MO (Mobile Originating)
-        billing.
-        """
-        if request.params.get('status') != 'OK':
-            # TODO: Nicer way of informing about the error?
-            raise ValueError('Billing error: %s' % request.url)
-        log.info('Billing notification: %s' % repr(request.url))
-        return 'ok'
