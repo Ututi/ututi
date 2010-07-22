@@ -12,6 +12,8 @@ development.db
 tags
 TAGS
 ID
+smsd.log
+smsd.pid
 .installed.cfg
 coverage/*
 backup/*
