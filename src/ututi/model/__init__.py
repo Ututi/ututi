@@ -2270,16 +2270,22 @@ class ReceivedSMSMessage(object):
         query_string = urlparse.urlparse(self.request_url).query
         return dict(urlparse.parse_qsl(query_string, keep_blank_values=True))
 
-    def check_fortumo_sig(self, secret):
+    def _get_secret(self):
+        secret = config.get('fortumo.%s.secret' % self.message_type)
+        if not secret:
+            raise ValueError('Secret not configured for %r' % self.message_type)
+        return secret
+
+    def calculate_fortumo_sig(self):
         s = ''
         for k, v in sorted(self.request_params().items()):
             if k != 'sig':
                 s += '%s=%s' % (k, v)
-        s += secret
-        correct_sig = hashlib.md5(s).hexdigest()
+        s += self._get_secret()
+        return hashlib.md5(s).hexdigest()
 
-        request_sig = self.request_params()['sig']
-        return request_sig == correct_sig
+    def check_fortumo_sig(self):
+        return self.request_params()['sig'] == self.calculate_fortumo_sig()
 
 
 outgoing_group_sms_messages_table = None

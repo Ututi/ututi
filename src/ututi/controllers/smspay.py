@@ -38,8 +38,7 @@ class SmspayController(BaseController):
         sender = User.get_byphone('+' + sender_phone)
         recv.sender = sender
 
-        secret = '1541796ef4ac15e96c0d8fcabf60e806' # XXX
-        if not self.received_message.check_fortumo_sig(secret):
+        if not self.received_message.check_fortumo_sig():
             # Something fishy is going on...
             meta.Session.commit()
             raise ValueError('Invalid Fortumo signature!')
@@ -57,8 +56,7 @@ class SmspayController(BaseController):
         self.received_message = ReceivedSMSMessage('group_space_small',
                                                    request_url=request.url)
         meta.Session.add(self.received_message)
-        message = self._handle_group_space_deposit(value=2,
-                                   secret='1e5962f5bd7e9926014b3ea3f4cdec61')
+        message = self._handle_group_space_deposit(value=2)
         self.received_message.result = message
         meta.Session.commit()
         return message
@@ -68,13 +66,12 @@ class SmspayController(BaseController):
         self.received_message = ReceivedSMSMessage('group_space_large',
                                                    request_url=request.url)
         meta.Session.add(self.received_message)
-        message = self._handle_group_space_deposit(value=10,
-                                   secret='1a357a4bea2fa52c9927b17cfe40cfb3')
+        message = self._handle_group_space_deposit(value=10)
         self.received_message.result = message
         meta.Session.commit()
         return message
 
-    def _handle_group_space_deposit(self, value, secret=None):
+    def _handle_group_space_deposit(self, value):
         recv = self.received_message
         recv.success = False
 
@@ -89,7 +86,7 @@ class SmspayController(BaseController):
         sender = User.get_byphone('+' + sender_phone)
         recv.sender = sender
 
-        if not self.received_message.check_fortumo_sig(secret):
+        if not self.received_message.check_fortumo_sig():
             # Something fishy is going on...
             meta.Session.commit()
             raise ValueError('Invalid Fortumo signature!')
@@ -130,8 +127,7 @@ class SmspayController(BaseController):
         sender = User.get_byphone('+' + sender_phone)
         recv.sender = sender
 
-        secret = '32eebb638597dec58c39a34b85afc7b4' # XXX
-        if not self.received_message.check_fortumo_sig(secret):
+        if not self.received_message.check_fortumo_sig():
             # Something fishy is going on...
             meta.Session.commit()
             raise ValueError('Invalid Fortumo signature!')
@@ -166,7 +162,7 @@ class SmspayController(BaseController):
         recv.success = True
         return _('SMS message sent to group %s.') % group_id
 
-    def group_message_bill(self):
+    def billing(self):
         """Billing message handler.
 
         This handler is called to report successful billing for MT (Mobile
@@ -175,6 +171,8 @@ class SmspayController(BaseController):
         MT billing is used in Lithuania; Poland uses MO (Mobile Originating)
         billing.
         """
-        log.info('SMS MT billing report: ' + repr(request.params))
-        # TODO
+        if request.params.get('status') != 'OK':
+            # TODO: Nicer way of informing about the error?
+            raise ValueError('Billing error: %s' % request.url)
+        log.info('Billing notification: %s' % repr(request.url))
         return 'ok'
