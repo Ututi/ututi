@@ -102,7 +102,6 @@ div#pager {
 span.error-message {
         color: red;
         margin-top: -5px;
-        padding-left: 4em;
         font-size: 10px;
 }
 
@@ -983,6 +982,14 @@ div.profileOptionLinks div.drop{
 #group_settings_form label input, #group_settings_form input {
     width: 270px;
     margin: 0 0 10px 0;
+}
+
+.fullForm label input.error {
+    margin: 0;
+}
+
+.fullForm .error-container {
+    margin-bottom: 10px;
 }
 
 .fullForm input.checkbox {
@@ -3100,7 +3107,7 @@ MISC
 }
 
 #login-screen td.login-choice-box {
-    background: white url("../img/login-bg.png") left top no-repeat;
+    background: white url("../img/login-bg.png") left bottom no-repeat;
     width: 310px;
     vertical-align: top;
     padding: 1em;
