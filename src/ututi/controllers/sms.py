@@ -29,7 +29,10 @@ class SmsController(BaseController):
 
         # simulate the delivery report
         import urllib2
-        urllib2.urlopen(request.params.get('dlr-url')+'&status=1&time=1279709763.685117')
+        url = request.params.get('dlr-url')
+        url = url.replace('%d', '1')
+        url = url.replace('%T', '1279709763.685117')
+        urllib2.urlopen(url)
 
         send_email(sender=config.get('ututi_email_from', 'info@ututi.lt'),
                    recipient=config.get('sms.dummy_send', 'info@ututi.lt'),

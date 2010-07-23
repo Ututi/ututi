@@ -31,7 +31,7 @@ After the message has been sent, it should be listed in the archive:
 There is also an sms controller, that at least at the moment can send dummy sms messages (via email).
 Will be used for testing.
 
-    >>> browser.open('http://localhost/sms/send?user=ututi&password=ututi&from=ututi&to=+37061300034&text=an%20sms&dlr-url=http%3A%2F%2Flocalhost%2Fsms%2Fstatus?id=1')
+    >>> browser.open('http://localhost/sms/send?user=ututi&password=ututi&from=ututi&to=+37061300034&text=an%20sms&dlr-url=http%3A%2F%2Flocalhost%2Fsms%2Fstatus?id=1%26status=1%26time=1279709763.685117')
     >>> from ututi.lib.mailer import mail_queue
     >>> print mail_queue.pop().message
     MIME-Version: 1.0
@@ -43,7 +43,7 @@ Will be used for testing.
     to :  37061300034
     from : ututi
     user : ututi
-    dlr-url : http://localhost/sms/status?id=1
+    dlr-url : http://localhost/sms/status?id=1&status=1&time=1279709763.685117
     text : an sms
     password : ututi
     coding : -
