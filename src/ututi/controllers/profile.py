@@ -263,6 +263,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             'fullname': c.user.fullname,
             'site_url': c.user.site_url,
             'description': c.user.description,
+            'profile_is_public': c.user.profile_is_public,
             }
         if c.user.location is not None:
             location = dict([('location-%d' % n, tag)
@@ -339,9 +340,9 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     @validate(ProfileForm, form='_edit_form', defaults=_edit_form_defaults)
     @ActionProtector("user")
     def update(self):
-        fields = ('fullname', 'logo_upload', 'logo_delete', 'site_url', 'description', 'location')
+        fields = ('fullname', 'logo_upload', 'logo_delete', 'site_url',
+                  'description', 'profile_is_public', 'location')
         values = {}
-
         for field in fields:
             values[field] = self.form_result.get(field, None)
 
@@ -349,6 +350,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         c.user.site_url = values['site_url']
         c.user.description = values['description']
         tag = values.get('location', None)
+        c.user.profile_is_public = bool(values['profile_is_public'])
         c.user.location = tag
 
         if values['logo_delete'] == 'delete' and c.user.logo is not None:

@@ -12,7 +12,7 @@ from pylons.i18n import _
 
 import ututi.lib.helpers as h
 from ututi.controllers.home import sign_in_user
-from ututi.lib.security import ActionProtector
+from ututi.lib.security import ActionProtector, deny
 from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
 
@@ -40,6 +40,8 @@ class UserController(BaseController):
 
     @profile_action
     def index(self, user):
+        if not user.profile_is_public and not c.user:
+            deny(_('This user profile is not public'), 401)
         c.user_info = user
         c.breadcrumbs = [
             {'title': user.fullname,

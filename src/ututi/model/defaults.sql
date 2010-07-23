@@ -22,6 +22,7 @@ create table users (
        phone_confirmed boolean default false,
        phone_confirmation_key char(32) default '',
        sms_messages_remaining int8 default 0,
+       profile_is_public boolean default true,
        primary key (id));;
 
 CREATE FUNCTION check_gadugadu() RETURNS trigger AS $$

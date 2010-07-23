@@ -700,7 +700,7 @@ class HomeController(UniversityListMixin):
                 sign_in_user(email)
                 redirect(c.came_from or url(controller='profile', action='home'))
 
-        return render('/home/join.mako')
+        return render('/login.mako')
 
     def process_transaction(self):
         prefix = 'wp_'

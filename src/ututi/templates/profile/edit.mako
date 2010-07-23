@@ -85,8 +85,18 @@ ${_('Profile settings')}
         <div>
           ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=False)}
         </div>
+
         ${h.input_line('site_url', _('Address of your website or blog'))}
         ${h.input_area('description', _('About yourself'), rows='6', cols='50')}
+
+        <div style="padding-top: 5px">
+          <label for="profile_is_public">
+            <input type="checkbox" name="profile_is_public"
+                   id="profile_is_public" />
+
+            ${_('Show my profile to unregistered users and search engines')}
+          </label>
+        </div>
 
         <div class="non-js">
           <label for="logo_upload">${_('Personal logo')}</label>
