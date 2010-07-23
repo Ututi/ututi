@@ -212,8 +212,8 @@
           ${h.input_submit(_('Send'))}
           <div>
               ## XXX i18n
-              <span id="sms_message_symbols">0</span> characters
-              (<span id="sms_message_credits">${len(c.group.recipients_sms())}</span> SMS credits to send)
+              <span id="sms_message_symbols">140</span> characters remaining
+              (cost: <span id="sms_message_credits">${len(c.group.recipients_sms())}</span> SMS credits)
           </div>
       </form>
       <script>
@@ -221,7 +221,6 @@
               $('textarea#sms_message').keyup(function() {
                 var el = $('#sms_message')[0];
                 var s = el.value;
-                $('#sms_message_symbols').text(s.length);
                 var ascii = true;
                 for (var i = 0; i < s.length; i++) {
                     var c = s.charCodeAt(i);
@@ -230,13 +229,31 @@
                         break;
                     }
                 }
+                var sms_recipients = ${len(c.group.recipients_sms())};
+                var text_length = s.length;
 
                 // Please keep math in sync with Python controller code.
-                var SMS_RECIPIENTS = ${len(c.group.recipients_sms())};
-                var msgs = Math.floor((s.length - 1) * (ascii ? 1 : 2) / 140) + 1;
-                // TODO: calculate credits precisely;
-                var cost = SMS_RECIPIENTS * msgs;
+                // -----
+                var msg_length = text_length * (ascii ? 1 : 2);
+                if (msg_length <= 140) {
+                    msgs = 1;
+                } else {
+                    msgs = 1 + Math.floor((msg_length - 1) / 134);
+                }
+                var cost = sms_recipients * msgs;
+                // -----
+
                 $('#sms_message_credits').text(cost);
+
+                var chars_remaining;
+                if (msg_length <= 140) {
+                    chars_remaining = (140 - msg_length);
+                } else {
+                    chars_remaining = 134 - (msg_length % 134)
+                }
+                if (!ascii)
+                    chars_remaining = chars_remaining / 2;
+                $('#sms_message_symbols').text(chars_remaining);
               });
           });
       </script>

@@ -1149,32 +1149,36 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
     @group_action
     def send_sms(self, group):
         text = request.params.get('sms_message')
-        sms_recipients = c.group.recipients_sms()
 
-        # Plese keep math in sync with the Javascript widget.
+        sms_recipients = c.group.recipients_sms()
         ascii = True
         try:
             text.decode('utf8').encode('ascii')
         except UnicodeEncodeError:
             ascii = False
-        msgs = (len(text) - 1) * (1 if ascii else 2) // 140 + 1
-        # TODO: make calculation more precise 
-        needed = sms_recipients * msgs
 
-        # TODO: calculate credits precisely
-        if c.user.sms_messages_remaining < needed:
+        # Plese keep math in sync with the Javascript widget.
+        # -----
+        msg_length = text_length * (1 if ascii else 2)
+        if msg_legth <= 140:
+            msgs = 1
+        else:
+            msgs = 1 + (msg_length - 1) // 134
+        cost = sms_recipients * msgs
+        # -----
+
+        if c.user.sms_messages_remaining < cost:
             h.flash(_('Not enough SMS credits: %d needed, but you have only %d.')
                     % (len(group.members), c.user.sms_messages_remaining))
             redirect(request.params.get('current_url'))
 
-        # TODO: check message length
-        c.user.sms_messages_remaining -= needed
+        c.user.sms_messages_remaining -= cost
         msg = OutgoingGroupSMSMessage(sender=c.user, group=group,
                                       message_text=text)
         meta.Session.add(msg)
         msg.send()
         meta.Session.commit()
-        h.flash(_('SMS sent! (%d credits used up, %d remaining)') % (needed, c.user.sms_messages_remaining))
+        h.flash(_('SMS sent! (%d credits used up, %d remaining)') % (cost, c.user.sms_messages_remaining))
         redirect(request.params.get('current_url'))
 
     @group_action
