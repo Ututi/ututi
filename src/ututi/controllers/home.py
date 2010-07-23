@@ -19,7 +19,6 @@ from xml.sax.saxutils import quoteattr
 
 from paste.util.converters import asbool
 from pylons import request, tmpl_context as c, url, session, config, response
-from pylons.decorators import validate
 from pylons.controllers.util import abort, redirect
 from pylons.i18n import _, ungettext
 from pylons.templating import render_mako_def
@@ -34,7 +33,7 @@ from ututi.lib import gg
 from ututi.lib.emails import email_confirmation_request, email_password_reset
 from ututi.lib.messaging import EmailMessage
 from ututi.lib.security import ActionProtector, sign_in_user
-from ututi.lib.validators import UniqueEmail, LocationTagsValidator, PhoneNumberValidator
+from ututi.lib.validators import validate, UniqueEmail, LocationTagsValidator, PhoneNumberValidator
 from ututi.model import meta, User, Email, PendingInvitation, LocationTag, Payment, get_supporters
 from ututi.model import UserSubjectMonitoring, GroupSubjectMonitoring, Subject, Group, SearchItem
 

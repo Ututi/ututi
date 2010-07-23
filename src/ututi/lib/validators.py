@@ -1,12 +1,30 @@
 import re
 from lxml.html.clean import Cleaner
 
-from formencode import validators, Invalid
+from formencode import validators, Invalid, htmlfill
 from pylons.i18n import _
 from pylons import tmpl_context as c
 
+from pylons.decorators import validate as old_validate
+
 from ututi.model import meta, Email
 from ututi.model import Subject, Group, ContentItem, LocationTag
+
+
+def u_error_formatter(error):
+    return '<div class="error-container"><span class="error-message">%s</span></div>\n' % (
+        htmlfill.html_quote(error))
+
+
+def validate(schema=None, validators=None, form=None, variable_decode=False,
+             dict_char='.', list_char='-', post_only=True, state=None,
+             on_get=False, **htmlfill_kwargs):
+    htmlfill_kwargs['error_formatters']= {'default' : u_error_formatter}
+    return old_validate(schema=schema, validators=validators, form=form,
+                        variable_decode=variable_decode, dict_char=dict_char,
+                        list_char=list_char, post_only=post_only, state=state,
+                        on_get=on_get, **htmlfill_kwargs)
+
 
 def html_cleanup(input):
     cleaner = Cleaner(

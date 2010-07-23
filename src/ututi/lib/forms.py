@@ -9,6 +9,8 @@ from pylons.decorators import encode_formencode_errors
 from pylons.decorators import determine_response_charset
 from pylons.decorators import PylonsFormEncodeState
 
+from ututi.lib.validators import u_error_formatter
+
 log = logging.getLogger(__name__)
 
 
@@ -70,6 +72,7 @@ def validate(schema=None, validators=None, form=None, variable_decode=False,
                 pass
 
     """
+    htmlfill_kwargs['error_formatters']= {'default' : u_error_formatter}
     if state is None:
         state = PylonsFormEncodeState
     def wrapper(func, self, *args, **kwargs):
