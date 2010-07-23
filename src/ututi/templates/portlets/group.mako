@@ -229,7 +229,7 @@
                         break;
                     }
                 }
-                var sms_recipients = ${len(c.group.recipients_sms())};
+                var n_recipients = ${len(c.group.recipients_sms())};
                 var text_length = s.length;
 
                 // Please keep math in sync with Python controller code.
@@ -240,7 +240,7 @@
                 } else {
                     msgs = 1 + Math.floor((msg_length - 1) / 134);
                 }
-                var cost = sms_recipients * msgs;
+                var cost = n_recipients * msgs;
                 // -----
 
                 $('#sms_message_credits').text(cost);

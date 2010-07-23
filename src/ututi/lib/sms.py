@@ -28,3 +28,23 @@ def confirmation_request(user):
     user.phone_confirmation_key = hash
     msg = _("Ututi registration code: %s") % hash
     send_sms(user.phone_number, msg, sender=user, recipient=user)
+
+
+def sms_cost(text, n_recipients=1):
+    text_length = len(text)
+    ascii = True
+    try:
+        text.decode('utf8').encode('ascii')
+    except UnicodeEncodeError:
+        ascii = False
+
+    # Please keep math in sync with the Javascript widget.
+    # -----
+    msg_length = text_length * (1 if ascii else 2)
+    if msg_length <= 140:
+        msgs = 1
+    else:
+        msgs = 1 + (msg_length - 1) // 134
+    cost = n_recipients * msgs
+    # -----
+    return cost

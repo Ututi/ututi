@@ -27,6 +27,7 @@ from sqlalchemy.orm.exc import NoResultFound
 import ututi.lib.helpers as h
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.image import serve_image
+from ututi.lib.sms import sms_cost
 from ututi.lib.base import BaseController, render, render_lang
 from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator, TagsValidator
 
@@ -1149,24 +1150,7 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
     @group_action
     def send_sms(self, group):
         text = request.params.get('sms_message')
-
-        sms_recipients = c.group.recipients_sms()
-        ascii = True
-        try:
-            text.decode('utf8').encode('ascii')
-        except UnicodeEncodeError:
-            ascii = False
-
-        # Plese keep math in sync with the Javascript widget.
-        # -----
-        msg_length = text_length * (1 if ascii else 2)
-        if msg_legth <= 140:
-            msgs = 1
-        else:
-            msgs = 1 + (msg_length - 1) // 134
-        cost = sms_recipients * msgs
-        # -----
-
+        cost = sms_cost(text, n_recipients=len(c.group.recipients_sms()))
         if c.user.sms_messages_remaining < cost:
             h.flash(_('Not enough SMS credits: %d needed, but you have only %d.')
                     % (len(group.members), c.user.sms_messages_remaining))
