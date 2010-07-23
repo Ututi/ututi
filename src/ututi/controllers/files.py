@@ -3,6 +3,7 @@ import mimetypes
 import re
 
 from formencode.schema import Schema
+from formencode import htmlfill
 from paste.fileapp import FileApp
 from paste.util.converters import asbool
 
@@ -113,7 +114,7 @@ class BasefilesController(BaseController):
                        'Flagged file: %s' % file.filename,
                        render('/emails/flagged_file.mako', extra_vars=extra_vars),
                        send_to=[config['ututi_email_from']])
-        return render_mako_def('/sections/files.mako', 'flag_file', f=file)
+        return htmlfill.render(render_mako_def('/sections/files.mako', 'flag_file', f=file))
 
 
 class FilesController(BasefilesController):
