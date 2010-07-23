@@ -1157,6 +1157,12 @@ p.qu{
     position: absolute;
     _display: none; /* IE6 */
 }
+
+.portlet.portletGroupFiles .cbl,
+.portlet.portletGroupFiles .cbr {
+    background-image: url('img/portlets_bg_white.png');
+}
+
 .portlet .ctl, .portlet-verysmall .ctl {
     background-position: left top;
     left: -1px;
