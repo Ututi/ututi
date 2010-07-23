@@ -1148,13 +1148,24 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
 
     @group_action
     def send_sms(self, group):
-        needed = len([m for m in group.members if m.user.phone_number and m.user.phone_confirmed])
+        text = request.params.get('sms_message')
+        sms_recipients = c.group.recipients_sms()
+
+        # Plese keep math in sync with the Javascript widget.
+        ascii = True
+        try:
+            text.decode('utf8').encode('ascii')
+        except UnicodeEncodeError:
+            ascii = False
+        msgs = (len(text) - 1) * (1 if ascii else 2) // 140 + 1
+        needed = sms_recipients * msgs
+
+        # TODO: calculate credits precisely
         if c.user.sms_messages_remaining < needed:
             h.flash(_('Not enough SMS credits: %d needed, but you have only %d.')
                     % (len(group.members), c.user.sms_messages_remaining))
             redirect(request.params.get('current_url'))
 
-        text = request.params.get('sms_message')
         # TODO: check message length
         c.user.sms_messages_remaining -= needed
         msg = OutgoingGroupSMSMessage(sender=c.user, group=group,

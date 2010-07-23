@@ -210,7 +210,36 @@
           <input type="hidden" name="current_url" value="${url.current()}" />
           ${h.input_area('sms_message', _('Send an SMS to the group:'), cols=35)}
           ${h.input_submit(_('Send'))}
+          <div>
+              ## XXX i18n
+              <span id="sms_message_symbols">0</span> characters
+              (<span id="sms_message_credits">${len(c.group.recipients_sms())}</span> SMS credits to send)
+          </div>
       </form>
+      <script>
+          $(document).ready(function() {
+              $('textarea#sms_message').keyup(function() {
+                var el = $('#sms_message')[0];
+                var s = el.value;
+                $('#sms_message_symbols').text(s.length);
+                var ascii = true;
+                for (var i = 0; i < s.length; i++) {
+                    var c = s.charCodeAt(i);
+                    if (c > 127) {
+                        ascii = false;
+                        break;
+                    }
+                }
+
+                // Please keep math in sync with Python controller code.
+                var SMS_RECIPIENTS = ${len(c.group.recipients_sms())};
+                var msgs = Math.floor((s.length - 1) * (ascii ? 1 : 2) / 140) + 1;
+                // TODO: calculate credits precisely;
+                var cost = SMS_RECIPIENTS * msgs;
+                $('#sms_message_credits').text(cost);
+              });
+          });
+      </script>
     %else:
       ${_('You need to buy credits to be able to send SMS messages to the group')}
       % if not c.user.phone_confirmed:
