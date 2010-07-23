@@ -1077,6 +1077,13 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
                 if (recipient.user.gadugadu_get_news and
                     recipient.user.gadugadu_confirmed)]
 
+    def recipients_sms(self):
+        recipients = meta.Session.query(GroupMember).\
+            filter_by(group=self).all()
+        return [recipient.user for recipient in recipients
+                if (recipient.user.phone_number and
+                    recipient.user.phone_confirmed)]
+
     @classmethod
     def get(cls, id):
         query = meta.Session.query(cls)
