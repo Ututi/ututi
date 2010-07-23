@@ -1271,6 +1271,7 @@ p.qu{
 }
 .portletNewDalykas {
     background-image: url('img/icons/dalykai_new.png');
+    background-color: #f6f6f6;
 }
 div.GroupFiles, div.GroupFiles-nobg, div.GroupFilesGroups, div.GroupFilesDalykai, div.GroupFilesCont, div.GroupFilesWiki, div.GroupWiki {
     border-bottom: 1px solid #ded8d8;
