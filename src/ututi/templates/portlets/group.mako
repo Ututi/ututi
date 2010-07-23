@@ -216,7 +216,7 @@
       % if not c.user.phone_confirmed:
         ${_('You need to confirm your phone in your <a href="%s">profile</a>.') % url(controller='profile', action='edit')}
       % endif
-      ${_('Send an SMS to number 1337 with the content "TXT U2FILES10" to buy some credits.')}
+      ${_('Send an SMS to number 1337 with the content "TXT&nbsp;U2FILES10" to buy some credits.')}
     %endif
   </%self:uportlet>
 </%def>
