@@ -1158,6 +1158,7 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
         except UnicodeEncodeError:
             ascii = False
         msgs = (len(text) - 1) * (1 if ascii else 2) // 140 + 1
+        # TODO: make calculation more precise 
         needed = sms_recipients * msgs
 
         # TODO: calculate credits precisely
