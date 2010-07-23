@@ -984,10 +984,12 @@ div.profileOptionLinks div.drop{
     margin: 0 0 10px 0;
 }
 
-.fullForm label input.error {
+.fullForm label input.error,
+#group_settings_form label input.error {
     margin: 0;
 }
 
+#group_settings_form .error-container,
 .fullForm .error-container {
     margin-bottom: 10px;
 }

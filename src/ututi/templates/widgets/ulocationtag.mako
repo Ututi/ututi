@@ -22,7 +22,6 @@
 
 <div class="location-tag-widget ${'horizontalLocationForm' if c.tpl_lang != 'pl' else ''}"
      id="newlocationwidget-${self.newlocationwidget_id}">
-  <form:error name="location"/>
   %for i in range(number):
     <div class="location-tag-field form-field" id="location-tag-field-${i}">
       <label class="${label_class}">
@@ -51,6 +50,7 @@
       %endif
     </div>
   %endfor
+  <form:error name="location"/>
 </div>
 </%def>
 

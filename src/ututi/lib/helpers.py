@@ -307,19 +307,19 @@ def input_area(name, title, value='', cols='50', rows='5', explanation=None):
     from pylons import tmpl_context as c
     return HTML.label(c=[
         HTML.span(class_='labelText', c=[title]),
-        HTML.literal('<form:error name="%s" />' % name),
         HTML.span(class_='textField', c=[
             HTML.textarea(name_=name, id_=name, cols=cols, rows=rows, c=[value]),
             HTML.span(class_='edgeTextArea'),
             expl
-            ])])
+            ]),
+        HTML.literal('<form:error name="%s" />' % name)])
 
 
 def input_wysiwyg(name, title, value='', cols='80', rows='15'):
     return HTML.div(class_='form-field', c=[
             HTML.label(for_=name, c=[title]),
-            HTML.literal('<form:error name="%s" />' % name),
-            HTML.textarea(class_='ckeditor', name_=name, id_=name, cols=cols, rows=rows, c=[value])
+            HTML.textarea(class_='ckeditor', name_=name, id_=name, cols=cols, rows=rows, c=[value]),
+            HTML.literal('<form:error name="%s" />' % name)
             ])
 
 
