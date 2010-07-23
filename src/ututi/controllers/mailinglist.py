@@ -3,7 +3,6 @@ import re
 from sqlalchemy.sql.expression import desc
 from formencode import Schema, validators, htmlfill
 
-from pylons.decorators import validate
 from pylons.controllers.util import redirect
 from pylons.controllers.util import abort
 from pylons import url
@@ -17,6 +16,7 @@ from ututi.lib.security import check_crowds
 from ututi.lib.security import ActionProtector
 from ututi.lib.mailer import send_email
 from ututi.lib.base import BaseController, render
+from ututi.lib.validators import validate
 from ututi.lib import helpers as h
 from ututi.controllers.files import serve_file
 from ututi.controllers.group import group_menu_items

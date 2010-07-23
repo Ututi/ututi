@@ -10,7 +10,7 @@ from pkg_resources import resource_stream
 from pylons import tmpl_context as c, config, request, url
 from pylons.templating import render_mako_def
 from pylons.controllers.util import redirect, abort
-from pylons.decorators import validate, jsonify
+from pylons.decorators import jsonify
 from pylons.i18n import ungettext, _
 
 from webhelpers import paginate
@@ -29,7 +29,7 @@ from ututi.lib.fileview import FileViewMixin
 from ututi.lib.image import serve_image
 from ututi.lib.sms import sms_cost
 from ututi.lib.base import BaseController, render, render_lang
-from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator, TagsValidator
+from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator, TagsValidator, validate
 
 from ututi.model import LocationTag, User, GroupMember, GroupMembershipType, File, OutgoingGroupSMSMessage
 from ututi.model import meta, Group, SimpleTag, Subject, ContentItem, PendingInvitation, PendingRequest

@@ -4,7 +4,6 @@ from formencode import Schema, variabledecode
 from webhelpers import paginate
 
 from pylons.controllers.util import redirect
-from pylons.decorators import validate
 from pylons import request, tmpl_context as c, url
 from pylons.templating import render_mako_def
 
@@ -12,6 +11,7 @@ from ututi.controllers.home import UniversityListMixin
 from ututi.model import BlogEntry, meta
 from ututi.lib.base import BaseController, render
 from ututi.lib.search import search_query, search_query_count, tag_search
+from ututi.lib.validators import validate
 
 log = logging.getLogger(__name__)
 

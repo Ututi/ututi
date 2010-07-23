@@ -10,7 +10,6 @@ from formencode.compound import Pipe
 from formencode import Schema, validators, htmlfill
 
 from pylons import tmpl_context as c, request, url
-from pylons.decorators import validate
 from pylons.controllers.util import redirect, abort
 from pylons.i18n import _
 
@@ -21,7 +20,7 @@ from ututi.lib.security import ActionProtector, deny
 from ututi.lib.search import search
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.base import BaseController, render, u_cache
-from ututi.lib.validators import LocationTagsValidator, TagsValidator
+from ututi.lib.validators import LocationTagsValidator, TagsValidator, validate
 import ututi.lib.helpers as h
 
 log = logging.getLogger(__name__)

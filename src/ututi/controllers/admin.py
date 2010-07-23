@@ -19,12 +19,11 @@ from babel.dates import format_date
 
 from pylons import request, tmpl_context as c, config, url
 from pylons.controllers.util import redirect, abort
-from pylons.decorators import validate
 
 from random import Random
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
-from ututi.lib.validators import PhoneNumberValidator
+from ututi.lib.validators import PhoneNumberValidator, validate
 from ututi.model.events import Event
 from ututi.model import FileDownload
 from ututi.model import SimpleTag

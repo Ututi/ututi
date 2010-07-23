@@ -8,13 +8,13 @@ from sqlalchemy import or_
 from pylons.controllers.util import abort
 from pylons import request, tmpl_context as c, url
 from pylons.controllers.util import redirect
-from pylons.decorators import validate, jsonify
+from pylons.decorators import jsonify
 from pylons.i18n import _
 
 from ututi.lib.security import ActionProtector
 from ututi.lib.image import serve_image
 from ututi.lib.base import BaseController, render
-from ututi.lib.validators import ShortTitleValidator
+from ututi.lib.validators import ShortTitleValidator, validate
 from ututi.model import meta, LocationTag, SimpleTag, Tag, Region
 from ututi.controllers.group import FileUploadTypeValidator
 

@@ -3,7 +3,6 @@ from datetime import date
 from pylons import url, tmpl_context as c
 from pylons.controllers.util import redirect, abort
 from pylons.i18n import _
-from pylons.decorators import validate
 
 from formencode import Schema, validators, htmlfill
 from sqlalchemy.orm.exc import NoResultFound
@@ -12,6 +11,7 @@ from ututi.lib.security import ActionProtector
 from ututi.model import meta, BlogEntry
 from ututi.lib.base import BaseController, render
 from ututi.lib import helpers as h
+from ututi.lib.validators import validate
 
 
 class SnippetForm(Schema):

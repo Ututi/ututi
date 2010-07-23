@@ -8,7 +8,6 @@ from sqlalchemy.orm.exc import NoResultFound
 from formencode.schema import Schema
 from formencode import validators, htmlfill
 
-from pylons.decorators import validate
 from pylons.controllers.util import abort
 from pylons.controllers.util import redirect, redirect
 from pylons.i18n import _
@@ -18,6 +17,7 @@ from ututi.lib.security import ActionProtector
 from ututi.lib.base import render
 from ututi.lib.helpers import check_crowds, flash
 from ututi.lib.security import deny
+from ututi.lib.validators import validate
 from ututi.controllers.group import group_menu_items
 from ututi.model import Group, ForumCategory, ForumPost, SubscribedThread
 from ututi.model import get_supporters

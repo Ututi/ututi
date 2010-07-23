@@ -4,12 +4,11 @@ from formencode import Schema, validators, compound, htmlfill
 from pylons.controllers.util import redirect, abort
 from pylons import tmpl_context as c, url
 from pylons.i18n import _
-from pylons.decorators import validate
 from pylons.templating import render_mako_def
 
 import ututi.lib.helpers as h
 from ututi.lib.base import render
-from ututi.lib.validators import LocationIdValidator, ShortTitleValidator
+from ututi.lib.validators import LocationIdValidator, ShortTitleValidator, validate
 from ututi.model import LocationTag, meta
 from ututi.controllers.group import FileUploadTypeValidator
 from ututi.controllers.search import SearchSubmit, SearchBaseController

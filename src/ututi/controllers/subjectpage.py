@@ -6,7 +6,6 @@ from formencode import Schema, validators, htmlfill
 from lxml.html.diff import htmldiff
 
 from pylons import tmpl_context as c, request, url
-from pylons.decorators import validate
 from pylons.controllers.util import abort, redirect
 
 from ututi.controllers.subject import subject_action, find_similar_subjects
@@ -15,7 +14,7 @@ from ututi.model import meta
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
 from ututi.lib.helpers import html_cleanup, literal, check_crowds
-
+from ututi.lib.validators import validate
 from pylons.i18n import _
 
 log = logging.getLogger(__name__)

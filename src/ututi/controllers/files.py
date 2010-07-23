@@ -6,7 +6,6 @@ from formencode.schema import Schema
 from paste.fileapp import FileApp
 from paste.util.converters import asbool
 
-from pylons.decorators import validate
 from pylons.templating import render_mako_def
 from pylons.controllers.util import abort
 from pylons import url, config
@@ -20,7 +19,7 @@ from ututi.lib.security import ActionProtector
 from ututi.lib.mailer import send_email
 from ututi.lib.base import BaseController, render
 from ututi.model import meta, File, ContentItem
-from ututi.lib.validators import ParentIdValidator
+from ututi.lib.validators import ParentIdValidator, validate
 from sqlalchemy.orm.exc import NoResultFound
 from pylons.i18n import _
 from routes import url_for
