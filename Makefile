@@ -295,3 +295,9 @@ migrate: instance/var/run/.s.PGSQL.${PGPORT}
 
 downgrade: instance/var/run/.s.PGSQL.${PGPORT}
 	${PWD}/bin/migrate development.ini downgrade
+
+start_sms: instance/var/run/.s.PGSQL.${PGPORT}
+	${PWD}/bin/sms_daemon start
+
+stop_sms:
+	${PWD}/bin/sms_daemon stop
