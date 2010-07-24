@@ -260,9 +260,9 @@
     %else:
       ${_('You need to buy credits to be able to send SMS messages to the group')}
       % if not c.user.phone_confirmed:
-        ${_('You need to confirm your phone in your <a href="%s">profile</a>.') % url(controller='profile', action='edit')}
+        ${_('You need to confirm your phone in your <a href="%s">profile</a>.') % url(controller='profile', action='edit')|n}
       % endif
-      ${_('Send an SMS to number 1337 with the content "TXT&nbsp;U2FILES10" to buy some credits.')}
+      ${_('Send an SMS to number 1337 with the content "TXT&nbsp;U2FILES10" to buy some credits.')|n}
     %endif
   </%self:uportlet>
 </%def>
