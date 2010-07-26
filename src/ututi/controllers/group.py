@@ -232,7 +232,7 @@ class GroupInviteCancelForm(Schema):
 def group_action(method):
     def _group_action(self, id=None):
         if id is None:
-            redirect(url(controller='search', obj_type='group'))
+            redirect(url(controller='search', action='index', obj_type='group'))
         group = Group.get(id)
         if group is None:
             abort(404)
@@ -1255,6 +1255,29 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
                     orderid='%s_%s_%s' % ('grouplimits', c.user.id, group.id)))
         c.payments = zip(payment_types, payment_amounts, payment_forms)
         c.group_menu_current_item = 'home'
+
+        months_purchased = int(request.params.get('months', 0))
+        if months_purchased and check_crowds(['admin'], context=group):
+            if months_purchased == 1 and group.private_files_credits >= 10:
+                group.private_files_credits -= 10
+                group.purchase_days(31)
+            elif months_purchased == 3 and group.private_files_credits >= 20:
+                group.private_files_credits -= 20
+                group.purchase_days(100)
+            elif months_purchased == 6 and group.private_files_credits >= 30:
+                group.private_files_credits -= 30
+                group.purchase_days(200)
+            else:
+                raise ValueError(months_purchased)
+            meta.Session.commit()
+            h.flash(_('Purchased %s months for private file area.') % months_purchased)
+            redirect(url(controller='group', action='pay', id=group.group_id))
+
+        if request.params.get('give') and c.testing:
+            group.private_files_credits += int(request.params.get('give'))
+            meta.Session.commit()
+            redirect(url(controller='group', action='pay', id=group.group_id))
+
         return render_lang('group/pay.mako')
 
     @group_action
@@ -1273,27 +1296,6 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
     @ActionProtector("member", "admin")
     def payment_deferred(self, group):
         return render('group/payment_deferred.mako')
-
-    @group_action
-    @ActionProtector("admin")
-    def use_credits(self, group):
-        months_purchased = request.params.get('months')
-        if months_purchased == '1' and group.private_files_credits >= 10:
-            group.private_files_credits -= 10
-            group.purchase_days(31)
-        elif months_purchased == '3' and group.private_files_credits >= 20:
-            group.private_files_credits -= 20
-            group.purchase_days(100)
-        elif months_purchased == '6' and group.private_files_credits >= 30:
-            group.private_files_credits -= 30
-            group.purchase_days(200)
-        elif months_purchased is None:
-            return render('group/use_credits.mako')
-        else:
-            raise ValueError(months_purchased)
-        meta.Session.commit()
-        h.flash(_('Purchased %s months for private file area.') % months_purchased)
-        redirect(group.url())
 
     def js_check_id(self):
         group_id = request.params.get('id')

@@ -34,6 +34,41 @@
   </div>
   %endfor
   <br class="clear-left" />
+
+  <div class="static-content">
+      ${_('You can also pay for group space by SMS.')}
+      ${_('First, get some credits by sending an SMS "<strong>TXT&nbsp;UFILES2&nbsp;%(group_id)s</strong>" (2 Lt) or "<strong>TXT&nbsp;UFILES10&nbsp;%(group_id)s</strong>" (10 Lt) to the number 1337.') % dict(group_id=c.group.group_id) |n}
+      ## TODO: pay by bank
+      ${_('1 month costs 10 credits, 3 months cost 20 credits, 6 months cost 30 credits.') |n}
+  </div>
+
+  <div>${_('You have <strong>%d</strong> credits.') % c.group.private_files_credits |n}</div>
+
+  <div>${_('Your private file area is available until <strong>%s</strong>.') % c.group.private_files_lock_date.date().isoformat() |n}</div>
+
+  %if h.check_crowds(['admin']):
+    %if c.group.private_files_credits < 10:
+      ${_('You need more credits to buy group space.')}
+    %endif
+    %if c.group.private_files_credits >= 10:
+      ${h.button_to(_('Purchase 1 month for 10 credits'), url.current(months=1))}
+    %endif
+    %if c.group.private_files_credits >= 20:
+      ${h.button_to(_('Purchase 3 months for 20 credits'), url.current(months=3))}
+    %endif
+    %if c.group.private_files_credits >= 30:
+      ${h.button_to(_('Purchase 6 months for 30 credits'), url.current(months=6))}
+    %endif
+  %else:
+    <div>${_('Ask your group admin to purchase space with the credits.')}</div>
+  %endif
+
+  %if c.testing:
+    <div style="padding-top: 1em">
+      ${h.button_to(_('Gimme 5 credits!'), url.current(give=5))}
+    </div>
+  %endif
+
 </%def>
 
 ${next.body()}
