@@ -14,8 +14,8 @@
 
 <%def name="title()">${c.subject.title}</%def>
 
-<div style="float: right">
-  <fb:like width="200" show_faces="false" url="${c.subject.url(qualified=True)}"></fb:like>
+<div style="float: right; margin-top: 10px;">
+  <fb:like width="90" layout="button_count" show_faces="false" url="${c.subject.url(qualified=True)}"></fb:like>
 </div>
 <h1 class="pageTitle">${c.subject.title}</h1>
 
