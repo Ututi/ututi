@@ -60,7 +60,7 @@ class StructureviewController(SearchBaseController):
             self.form_result['obj_type'] = 'subject'
         self._search()
 
-        return render_mako_def('/search/index.mako','search_results', results=c.results, controller='structureview', action='index')
+        return render_mako_def('/search/index.mako','search_results', results=c.results, controller='structureview', action='search_js')
 
     @location_action
     @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
