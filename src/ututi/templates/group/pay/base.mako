@@ -44,7 +44,9 @@
 
   <div>${_('You have <strong>%d</strong> credits.') % c.group.private_files_credits |n}</div>
 
-  <div>${_('Your private file area is available until <strong>%s</strong>.') % c.group.private_files_lock_date.date().isoformat() |n}</div>
+  %if c.group.private_files_lock_date:
+    <div>${_('Your private file area is available until <strong>%s</strong>.') % c.group.private_files_lock_date.date().isoformat() |n}</div>
+  %endif
 
   %if h.check_crowds(['admin']):
     %if c.group.private_files_credits < 10:
