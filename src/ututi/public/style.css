@@ -2668,7 +2668,7 @@ div.section div.controls div.single_upload {
     margin-right: 5px;
     height: 20px;
     z-index: 10000;
-    width: 150px;
+    width: 200px;
     background: white;
 }
 
@@ -2957,6 +2957,7 @@ div.upload_dropdown .target_item.last {
 div.upload_dropdown .target_item.last div {
     background: transparent url("../images/file_dropdown_block.png") right -40px no-repeat;
 }
+
 /*************************************************************************
 END OF UPLOAD DROPDOWN SECTION
  **************************************************************************/

@@ -274,21 +274,20 @@ for the service.
     <div class="upload_control no_upload ">
       <table>
         <tr>
-          <td>
-            <div style="float: left;" class="btn inactive">
-              <div>upload file to...</div>
-            </div>
-          </td>
-          <td>
-            <a style="float: left;" class="btn" href="/group/moderators/pay" title="Increase file area limits">
-              <span>Increase limits</span>
-            </a>
+          <td colspan="2" style="text-align: center;">
+            <form action="/group/moderators/pay" class="button-to" method="post">
+              <fieldset>
+                <button class="btn" type="submit" value="Increase limits">
+                  <span>Increase limits</span>
+                </button>
+              </fieldset>
+            </form>
           </td>
         </tr>
       </table>
     </div>
 
-    >>> browser.getLink('Increase limits').click()
+    >>> browser.getControl('Increase limits').click()
     >>> browser.url
     'http://localhost/group/moderators/pay'
 

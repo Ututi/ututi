@@ -636,13 +636,8 @@ $(document).ready(function(){
         %>
         <div class="upload_control no_upload ${'' if obj.upload_status == obj.LIMIT_REACHED else 'hidden'}">
           <table><tr>
-              <td>
-                <div style="float: left;" class="btn inactive"><div>${_('upload file to...')}</div></div>
-              </td>
-              <td>
-                <a style="float: left;" class="btn" href="${obj.url(action='pay')}" title="${_('Increase file area limits')}">
-                  <span>${_('Increase limits')}</span>
-                </a>
+              <td colspan="2" style="text-align: center;">
+                ${h.button_to(_('Increase limits'), obj.url(action='pay'))}
               </td>
           </tr></table>
         </div>
