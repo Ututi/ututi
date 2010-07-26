@@ -36,10 +36,10 @@
   <br class="clear-left" />
 
   <div class="static-content">
-      ${_('You can also pay for group space by SMS.')}
-      ${_('First, get some credits by sending an SMS "<strong>TXT&nbsp;UFILES2&nbsp;%(group_id)s</strong>" (2 Lt) or "<strong>TXT&nbsp;UFILES10&nbsp;%(group_id)s</strong>" (10 Lt) to the number 1337.') % dict(group_id=c.group.group_id) |n}
-      ## TODO: pay by bank
-      ${_('1 month costs 10 credits, 3 months cost 20 credits, 6 months cost 30 credits.') |n}
+    ${_('You can also pay for group space by SMS.')}
+    ${_('First, get some credits by sending an SMS "<strong>TXT&nbsp;UFILES2&nbsp;%(group_id)s</strong>" (2 Lt) or "<strong>TXT&nbsp;UFILES10&nbsp;%(group_id)s</strong>" (10 Lt) to the number 1337.') % dict(group_id=c.group.group_id) |n}
+    ## TODO: pay by bank
+    ${_('1 month costs 10 credits, 3 months cost 20 credits, 6 months cost 30 credits.') |n}
   </div>
 
   <div>${_('You have <strong>%d</strong> credits.') % c.group.private_files_credits |n}</div>
