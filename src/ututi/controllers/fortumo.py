@@ -55,6 +55,9 @@ class FortumoController(BaseController):
         msg.message_text = request.params.get('message')
         msg.sender = User.get_byphone('+' + msg.sender_phone_number)
         meta.Session.add(msg)
+        log.info('Fortumo notification "%s" from +%s: text: %s; url: %s' % (
+                msg.message_type, msg.sender_phone_number, msg.message_text,
+                msg.request_url))
         if not msg.check_fortumo_sig():
             # Something fishy is going on...
             meta.Session.commit()
