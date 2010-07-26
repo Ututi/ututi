@@ -118,6 +118,16 @@ class PhoneConfirmationNumber(validators.FormValidator):
                       error_dict={'phone_confirmation_key': Invalid(self.message('invalid', state), form_dict, state)})
 
 
+class PhoneForm(Schema):
+    allow_extra_fields = True
+    phone_number = PhoneNumberValidator()
+
+
+class PhoneConfirmationForm(Schema):
+    allow_extra_fields = True
+    phone_confirmation_key = validators.String()
+
+
 class ContactForm(Schema):
 
     allow_extra_fields = False
@@ -197,7 +207,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         return render('/profile/browse.mako')
 
     @ActionProtector("user")
-    @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
+    @validate(schema=SearchSubmit, form='index', post_only=False, on_get=True)
     def search(self):
         c.breadcrumbs = [{'title': _('Search'), 'link': url(controller='profile', action='browse')}]
         self._search()
@@ -205,7 +215,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         return render('/profile/search.mako')
 
     @ActionProtector("user")
-    @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
+    @validate(schema=SearchSubmit, form='index', post_only=False, on_get=True)
     def search_js(self):
         self._search()
         return render_mako_def('/search/index.mako','search_results', results=c.results, controller='profile', action='search')
@@ -683,9 +693,47 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             fields = manual_validate(LocationForm)
             c.user.location = fields.get('location', None)
             meta.Session.commit()
-            return render_mako_def('/profile/home.mako','location_updated')
+            return render_mako_def('/profile/home.mako', 'location_updated')
         except Invalid, e:
             abort(400)
+
+    @ActionProtector("user")
+    @validate(schema=PhoneForm, form='home')
+    def update_phone(self):
+        c.user.location = self.form_result.get('phone_number', None)
+        meta.Session.commit()
+        h.flash(_('Your phone number has been updated.'))
+        redirect(url(controller='profile', action='home'))
+
+    @ActionProtector("user")
+    def js_update_phone(self):
+        try:
+            fields = manual_validate(PhoneForm)
+            c.user.phone_number = fields.get('phone_number', None)
+            c.user.phone_confirmed = False
+            if c.user.phone_number:
+                sms.confirmation_request(c.user)
+            meta.Session.commit()
+            return render_mako_def('/profile/home.mako', 'phone_updated')
+        except Invalid, e:
+            abort(400)
+
+    @ActionProtector("user")
+    @validate(schema=PhoneConfirmationForm, form='home')
+    def confirm_phone(self):
+        c.user.location = self.form_result.get('phone_confirmation_key', None)
+        meta.Session.commit()
+        h.flash(_('Your university information has been updated.'))
+        redirect(url(controller='profile', action='home'))
+
+    @ActionProtector("user")
+    def js_confirm_phone(self):
+        key = request.params.get('phone_confirmation_key')
+        if key.strip() != c.user.phone_confirmation_key.strip():
+            abort(400) # XXX
+        c.user.phone_confirmed = True
+        meta.Session.commit()
+        return render_mako_def('/profile/home.mako', 'phone_confirmed')
 
     @ActionProtector("user")
     @validate(schema=LocationForm, form='home')

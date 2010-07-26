@@ -15,22 +15,21 @@ ${parent.head_tags()}
       </div>
     </div>
   </div>
-
 </%def>
 
 %if c.user.location is not None:
 <div class="my-faculty"><a href="${c.user.location.url()}">${_('Go to my department')}</a></div>
 %else:
-<%self:rounded_block id="user_location" class_="portletSetLocation">
-<div class="inner">
-  <h2 class="portletTitle bold">${_('Tell us where you are studying')}</h2>
-  <form method="post" action="${url(controller='profile', action='update_location')}" id="update-location-form"
-        style="float: none">
-    ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=True, label_class="label")}
-    ${h.input_submit(_('save'), id='user-location-submit')}
-  </form>
-</div>
-</%self:rounded_block>
+  <%self:rounded_block id="user_location" class_="portletSetLocation">
+  <div class="inner">
+    <h2 class="portletTitle bold">${_('Tell us where you are studying')}</h2>
+    <form method="post" action="${url(controller='profile', action='update_location')}" id="update-location-form"
+          style="float: none">
+      ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=True, label_class="label")}
+      ${h.input_submit(_('save'), id='user-location-submit')}
+    </form>
+  </div>
+  </%self:rounded_block>
   <script type="text/javascript">
   //<![CDATA[
 
@@ -49,6 +48,91 @@ ${parent.head_tags()}
   //]]>
   </script>
 %endif
+
+%if c.user.phone_number is None:
+  <%self:rounded_block id="user_phone" class_="portletSetLocation">
+  <div class="inner">
+    <h2 class="portletTitle bold">${_("What's your phone number?")}</h2>
+    <form method="post" action="${url(controller='profile', action='update_phone_number')}" id="update-phone-number-form"
+          style="float: none">
+      <div class="floatleft">
+        ${h.input_line('phone_number', _('Mobile phone number:'))}
+      </div>
+      <div class="floatleft">
+        ${h.input_submit(_('save'), id='user-phone-submit')}
+      </div>
+      <div class="clear"></div>
+    </form>
+  </div>
+  </%self:rounded_block>
+  <script type="text/javascript">
+  //<![CDATA[
+
+  $('#user-phone-submit').click(function() {
+    $('#user_phone').addClass('loading');
+    $.post('${url(controller='profile', action='js_update_phone')}',
+      $(this).parents('form').serialize(),
+      function(data, status) {
+        if (status == 'success') {
+          $('#user_phone').replaceWith(data);
+        }
+        $('#user_phone').removeClass('loading');
+      });
+    return false;
+  });
+  //]]>
+  </script>
+%endif
+
+<%def name="phone_updated()">
+  <%self:rounded_block id="user_phone_confirm" class_="portletSetLocation">
+  <div class="inner">
+    <h2 class="portletTitle bold">${_("Please confirm your phone number")}</h2>
+    <form method="post" action="${url(controller='profile', action='confirm_phone_number')}" id="confirm-phone-number-form"
+          style="float: none">
+      <div class="floatleft">
+        ${h.input_line('phone_confirmation_key', _('Confirmation code:'))}
+      </div>
+      <div class="floatleft">
+        ${h.input_submit(_('save'), id='confirmation-code-submit')}
+      </div>
+      <div class="clear"></div>
+    </form>
+  </div>
+  </%self:rounded_block>
+  <script type="text/javascript">
+  //<![CDATA[
+
+  $('#confirmation-code-submit').click(function() {
+    $('#user_phone_confirm').addClass('loading');
+    $.post('${url(controller='profile', action='js_confirm_phone')}',
+      $(this).parents('form').serialize(),
+      function(data, status) {
+        if (status == 'success') {
+          $('#user_phone_confirm .inner').replaceWith(data);
+        }
+        $('#user_phone_confirm').removeClass('loading');
+      });
+    return false;
+  });
+  //]]>
+  </script>
+</%def>
+
+%if c.user.phone_number is not None and not c.user.phone_confirmed:
+  ${phone_updated()}
+%endif
+
+<%def name="phone_confirmed()">
+  <div id="phone_confirmed">
+    <div class="wrapper">
+      <div class="inner" style="height: 50px; font-weight: bold;">
+        <br />
+        ${_('Your phone has been confirmed. Thank you.')}
+      </div>
+    </div>
+  </div>
+</%def>
 
 <div id="SearchResults">
 %if c.user.memberships:
