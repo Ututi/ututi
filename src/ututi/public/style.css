@@ -1160,6 +1160,8 @@ p.qu{
     _display: none; /* IE6 */
 }
 
+.portlet.portletModule .cbl,
+.portlet.portletModule .cbr,
 .portlet.portletGroupFiles .cbl,
 .portlet.portletGroupFiles .cbr {
     background-image: url('img/portlets_bg_white.png');
