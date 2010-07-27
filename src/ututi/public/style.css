@@ -3583,10 +3583,6 @@ input.text_button:hover {
     background: url("../images/details/icon_progress.gif") right center no-repeat;
 }
 
-#teaser_switch {
-    text-align: right;
-}
-
 #sorting a.active {
     color: #4b4b4b;
 }

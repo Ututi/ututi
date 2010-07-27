@@ -2,6 +2,7 @@ import logging
 
 from formencode import Schema, validators, compound, htmlfill
 from pylons.controllers.util import redirect, abort
+from pylons import request
 from pylons import tmpl_context as c, url
 from pylons.i18n import _
 from pylons.templating import render_mako_def
@@ -10,6 +11,7 @@ import ututi.lib.helpers as h
 from ututi.lib.base import render
 from ututi.lib.validators import LocationIdValidator, ShortTitleValidator, validate
 from ututi.model import LocationTag, meta
+from ututi.controllers.home import UniversityListMixin
 from ututi.controllers.group import FileUploadTypeValidator
 from ututi.controllers.search import SearchSubmit, SearchBaseController
 
@@ -41,7 +43,7 @@ class LocationEditForm(Schema):
         ]
 
 
-class StructureviewController(SearchBaseController):
+class StructureviewController(SearchBaseController, UniversityListMixin):
 
     def _breadcrumbs(self, location):
         c.breadcrumbs = []
@@ -73,6 +75,11 @@ class StructureviewController(SearchBaseController):
         self._search()
 
         if location.parent is None:
+            self._get_departments(location)
+            if request.params.has_key('js'):
+                return render_mako_def('/anonymous_index/en.mako', 'universities',
+                                   unis=c.departments, ajax_url=location.url(), collapse=False, collapse_text=_('More departments'))
+
             return render('location/university.mako')
         else:
             return render('location/department.mako')

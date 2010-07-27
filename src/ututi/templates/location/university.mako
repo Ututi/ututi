@@ -15,45 +15,10 @@
   ${c.location.title} (${c.location.title_short}) - ${_('department list')}
 </%def>
 
-<%def name="department_list(children, departments_shown, department_count)">
-<div class="click2show">
-  <table id="faculties-list">
-      %for n, (dep_left, dep_right) in enumerate(children):
-      <%
-         cls = '' if n < departments_shown / 2 else 'show'
-      %>
-      <tr class="${cls}">
-        <td style="width: 50%;">
-          %if dep_left is not None:
-            ${location_tag(dep_left)}
-          %endif
-        </td>
-        <td style="width: 50%;">
-          %if dep_right is not None:
-            ${location_tag(dep_right)}
-          %endif
-
-        </td>
-      </tr>
-      %endfor
-  </table>
-  %if department_count > 6:
-  <div>
-    <span class="files_more">
-      <span class="green verysmall click hide">
-        ${ungettext("Show the other %(count)s department", "Show the other %(count)s departments", department_count - departments_shown ) % dict(count = department_count - departments_shown)}
-      </span>
-    </span>
-  </div>
-  %endif
-</div>
-</%def>
-
-
 <h1 class="pageTitle">${c.location.title}</h1>
 <br />
 
-${h.department_listing(c.location.id, 6)}
+${universities_section(c.departments, c.location.url(), collapse=True, collapse_text=_('More departments'))}
 
 <h2 class="overline">${_('Search in the university')}</h2>
 ##%if c.came_from_search:

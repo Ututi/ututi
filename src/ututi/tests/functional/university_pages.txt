@@ -27,7 +27,7 @@ We should be able to click on a link that leads us to the page of the faculty.
     >>> browser.printQuery('id("mainContent")//h2/text()')
     Search in the university
 
-    >>> browser.printQuery('id("faculties-list")//div[@class="title"]/a/text()')
+    >>> browser.printQuery('id("university-list")//div[@class="title"]/a/text()')
     Ekonomikos fakultetas
     Geografijos fakultetas
 

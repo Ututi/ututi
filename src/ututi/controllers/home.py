@@ -142,6 +142,22 @@ class UniversityListMixin(BaseController):
         return unis
 
     @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
+    def _departments(self, parent, sort_popularity=True, limit=None, region_id=None):
+        depts = meta.Session.query(LocationTag
+                ).filter(LocationTag.parent == parent
+                ).order_by(LocationTag.title.asc())
+        if region_id:
+            depts = depts.filter_by(region_id=region_id)
+        depts = depts.all()
+        if sort_popularity:
+            depts.sort(key=lambda obj: obj.rating, reverse=True)
+        if limit is not None:
+            depts = depts[:limit]
+
+        return depts
+
+
+    @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
     def _subjects(self):
         subjects = meta.Session.query(Subject).join(SearchItem).order_by(SearchItem.rating.desc()).limit(10).all()
         return subjects
@@ -170,6 +186,24 @@ class UniversityListMixin(BaseController):
         c.teaser = not (request.params.has_key('page')
                         or request.params.has_key('sort')
                         or request.params.has_key('region_id'))
+
+
+    def _get_departments(self, location):
+        c.sort = request.params.get('sort', 'popular')
+        region_id = request.params.get('region_id')
+        departments = self._departments(parent=location,sort_popularity=(c.sort == 'popular'),
+                                  region_id=region_id)
+        c.departments = paginate.Page(
+            departments,
+            page=int(request.params.get('page', 1)),
+            items_per_page=16,
+            item_count=len(departments),
+            **{'sort': c.sort}
+            )
+        c.teaser = not (request.params.has_key('page')
+                        or request.params.has_key('sort')
+                        or request.params.has_key('region_id'))
+
 
 
 class HomeController(UniversityListMixin):

@@ -411,25 +411,6 @@ def url_for(*args, **kwargs):
     from pylons import url
     return url.current(*args, **kwargs)
 
-def department_listing(location_id, departments_shown):
-    from ututi.model import Tag
-    location = Tag.get(int(location_id))
-    children = location.children
-    department_count = len(children)
-    split_point = department_count/2
-    if department_count % 2:
-        split_point = split_point + 1
-    lft = children[:split_point]
-    rgt = children[split_point:]
-    if department_count % 2:
-        rgt.append(None)
-    children = zip(lft, rgt)
-    return render_mako_def('/location/university.mako',
-                           'department_list',
-                           children=children,
-                           departments_shown=departments_shown,
-                           department_count=department_count)
-
 @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
 def location_latest_groups(location_id, limit=5):
     from ututi.model import Tag, Group, meta

@@ -76,14 +76,22 @@
     </div>
 </%def>
 
-<%def name="universities_section(unis, ajax_url, collapse=True)">
+<%def name="universities_section(unis, ajax_url, collapse=True, collapse_text=None)">
+  <%
+     if collapse_text is None:
+       collapse_text = _('More universities')
+  %>
   <div id="university-list" class="${c.teaser and 'collapsed_list' or ''}">
     ${universities(unis, ajax_url)}
   </div>
   %if collapse:
     %if c.teaser:
       <div id="teaser_switch" style="display: none;">
-        <a href="#" class="more">${_('More universities')}</a>
+        <span class="files_more">
+          <a class="green verysmall">
+            ${collapse_text}
+          </a>
+        </span>
       </div>
     %endif
     <script type="text/javascript">
