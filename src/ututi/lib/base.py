@@ -56,6 +56,7 @@ class BaseController(WSGIController):
         c.text = None
         c.tags = None
         c.login_error = None
+        c.pylons_config = config
 
         c.user = current_user()
         c.testing = asbool(config.get('testing', False))

@@ -204,8 +204,13 @@
       ${_('Send SMS message')}
     </%def>
 
+    <div>
+      ${_('Send a message to number 1337 (2 Lt): "TXT&nbsp;%(sms_code)s&nbsp;%(group_id)s&nbsp;Your message"') % dict(sms_code=c.pylons_config.get('fortumo.personal_sms_credits.code', 'U2TISMS'), group_id=c.group.group_id) |n}
+    </div>
+
     %if c.user.sms_messages_remaining:
-      ${_('(%d messages remaining)') % c.user.sms_messages_remaining}
+      ## TODO: ngettext
+      ${_('(%d SMS credits remaining)') % c.user.sms_messages_remaining}
       <form method='post' action="${url(controller='group', action='send_sms', id=group.group_id)}">
           <input type="hidden" name="current_url" value="${url.current()}" />
           ${h.input_area('sms_message', _('Send an SMS to the group:'), cols=35)}
@@ -262,7 +267,7 @@
       % if not c.user.phone_confirmed:
         ${_('You need to confirm your phone in your <a href="%s">profile</a>.') % url(controller='profile', action='edit')|n}
       % endif
-      ${_('Send an SMS to number 1337 with the content "TXT&nbsp;U2TISMS" (price: 10 Lt) to buy 100 credits.')|n}
+      ${_('Send an SMS to number 1337 with the content "TXT&nbsp;%(sms_code)s" (price: 10 Lt) to buy 100 credits.') % dict(sms_code=c.pylons_config.get('fortumo.personal_sms_credits.code', 'U2TISMS')) |n}
     %endif
   </%self:uportlet>
 </%def>
