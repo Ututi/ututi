@@ -63,14 +63,16 @@
     <div id="sorting">
       ${_('Sort by:')}
       <%
-        url_args = dict(sort='alpha')
-        if request.params.get('region_id'):
-            url_args['region_id'] = request.params.get('region_id')
+         url_args_alpha = dict(sort='alpha')
+         url_args_pop = dict(sort='popular')
+         if request.params.get('region_id'):
+             url_args_alpha['region_id'] = request.params.get('region_id')
+             url_args_pop['region_id'] = request.params.get('region_id')
       %>
-      <a id="sort-alpha" class="${c.sort == 'alpha' and 'active' or ''}" href="${url(ajax_url, **url_args)}">${_('name')}</a>
-      <input type="hidden" id="sort-alpha-url" name="sort-alpha-url" value="${url(ajax_url, js=True, **url_args)}" />
-      <a id="sort-popular" class="${c.sort == 'popular' and 'active' or ''}" href="${url(ajax_url, **url_args)}">${_('popularity')}</a>
-      <input type="hidden" id="sort-popular-url" name="sort-popular-url" value="${url(ajax_url, js=True, **url_args)}" />
+      <a id="sort-alpha" class="${c.sort == 'alpha' and 'active' or ''}" href="${url(ajax_url, **url_args_alpha)}">${_('name')}</a>
+      <input type="hidden" id="sort-alpha-url" name="sort-alpha-url" value="${url(ajax_url, js=True, **url_args_alpha)}" />
+      <a id="sort-popular" class="${c.sort == 'popular' and 'active' or ''}" href="${url(ajax_url, **url_args_pop)}">${_('popularity')}</a>
+      <input type="hidden" id="sort-popular-url" name="sort-popular-url" value="${url(ajax_url, js=True, **url_args_pop)}" />
     </div>
 </%def>
 
@@ -99,16 +101,22 @@
             });
           return false;
         });
-        $('#sort-alpha,#sort-popular').live("click", function() {
-          var url = $('#'+$(this).attr('id')+'-url').val();
-          $('#sorting').addClass('loading');
-          $('#university-list').load(url);
-          return false;
-        });
       });
     //]]>
     </script>
   %endif
+  <script type="text/javascript">
+  //<![CDATA[
+    $(document).ready(function() {
+      $('#sort-alpha,#sort-popular').live("click", function() {
+        var url = $('#'+$(this).attr('id')+'-url').val();
+        $('#sorting').addClass('loading');
+        $('#university-list').load(url);
+        return false;
+      });
+    });
+  //]]>
+  </script>
 </%def>
 
   <h1>${_('UTUTI - student information online')}</h1>
