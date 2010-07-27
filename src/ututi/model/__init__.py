@@ -2319,4 +2319,4 @@ class OutgoingGroupSMSMessage(object):
     def send(self):
         """Queue peer-to-peer messages for each recipient."""
         self.group.send(SMSMessage(self.message_text, sender=self.sender,
-                                   parent=self))
+                                   parent=self, ignored_recipients=[self.sender]))

@@ -44,7 +44,12 @@ def ftest_setUp(test):
     email = Email('user2@ututi.lt')
     email.confirmed = True
     alt_user.emails.append(email)
+    alt_user.phone_number = '+37067412345'
+    alt_user.phone_confirmed = True
     g2.add_member(alt_user)
+
+    u.phone_number = '+37067812375'
+    u.phone_confirmed = True
 
     #and a third one with an uncofirmed email
     alt_user = User(u'Third user', 'password', True)

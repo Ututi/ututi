@@ -3,10 +3,12 @@ import logging
 from formencode.validators import Email as EmailValidator, Int as IntValidator
 from formencode.api import Invalid
 
+from pylons import config
+
 from ututi.lib.mailer import send_email
 from ututi.lib.gg import send_message as send_gg
 from ututi.lib.sms import send_sms
-from pylons import config
+
 
 log = logging.getLogger(__name__)
 

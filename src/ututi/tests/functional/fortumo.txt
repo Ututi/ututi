@@ -116,17 +116,6 @@ If the sender is not registered in Ututi, an error is returned:
 Group space
 -----------
 
-We will need a group:
-
-    >>> browser2 = Browser.logIn('user@ututi.lt', 'password')
-    >>> browser2.open('http://localhost/groups/group_type')
-    >>> browser2.getControl(name='create-public-group').click()
-    >>> browser2.getControl('Group address on the web').value = 'testgroup'
-    >>> browser2.getControl('Group title').value = 'Test group'
-    >>> browser2.getControl(name='location-0').value = 'Vilniaus universitetas'
-    >>> browser2.getControl('Continue').click()
-    >>> browser2.getControl("Continue").click()
-
 You can buy credits for group space by SMS:
 
     >>> make_request('group_space_small',
@@ -146,12 +135,15 @@ If you specify an invalid group id, you will get an error:
 Message to group
 ----------------
 
-You can send an SMS to the entire group:
+You can send an SMS to the entire group
+(notice that the sender, who is a member, will not get the message):
 
     >>> make_request('group_message',
-    ...              dict(sender='37067812345', message='testgroup Hello!')).body
+    ...              dict(sender='37067412345', message='testgroup Hello!')).body
     'SMS message sent to group testgroup.'
     >>> from ututi.lib.sms import sms_queue
+    >>> print sms_queue
+    [('+37067812375', u'Hello!')]
 
 Unregistered users may not send a message to the group:
 
