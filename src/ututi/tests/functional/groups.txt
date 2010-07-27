@@ -12,6 +12,7 @@ A list of all groups is shown at /groups.
 
     >>> browser.open('http://localhost/admin/groups')
     >>> browser.printQuery("id('group_list')//li/a/text()")
+    Testing group (2)
     Moderatoriai (1)
 
 The link of the group leads to its home page.
@@ -117,6 +118,7 @@ You can import more groups using the admin interface.
     >>> form.getControl('Upload').click()
     >>> browser.open('http://localhost/admin/groups')
     >>> browser.printQuery("id('group_list')//li/a/text()")
+    Testing group (2)
     Ututi moderatoriai (1)
     Test group (1)
     Imported group (0)

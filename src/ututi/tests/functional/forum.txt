@@ -10,7 +10,7 @@ Basic forum test
     >>> browser.getControl('Post').click()
 
     >>> browser.url
-    'http://localhost/community/thread/3'
+    'http://localhost/community/thread/4'
 
     >>> browser.printQuery('id("forum-thread")//div[@class="post-body"]/text()')
     Hi guys!
@@ -19,12 +19,12 @@ Messages can be edited:
 
     >>> browser.getControl('Edit').click()
     >>> browser.url
-    'http://localhost/community/thread/3/edit'
+    'http://localhost/community/thread/4/edit'
 
 Let's get back to the topic list:
 
     >>> browser.getLink('Back to thread')
-    <Link text='Back to thread' url='http://localhost/community/thread/3'>
+    <Link text='Back to thread' url='http://localhost/community/thread/4'>
     >>> browser.getLink('Back to thread').click()
 
     >>> browser.getLink('Back to the topic list')
@@ -34,7 +34,7 @@ Let's get back to the topic list:
 Links from the front page work:
 
     >>> browser.getLink('Hello!')
-    <Link text='Hello!' url='http://localhost/community/thread/3'>
+    <Link text='Hello!' url='http://localhost/community/thread/4'>
 
     >>> browser.getLink('Hello!').click()
     >>> browser.printQuery('id("forum-thread")//div[@class="post-body"]/text()')
@@ -57,7 +57,7 @@ The bugs forum works just fine too:
     >>> browser.getControl('Post').click()
 
     >>> browser.url
-    'http://localhost/bugs/thread/4'
+    'http://localhost/bugs/thread/5'
 
     >>> browser.printQuery('id("forum-thread")//div[@class="post-body"]/text()')
     My ututi is borken!
@@ -66,12 +66,12 @@ Messages can be edited:
 
     >>> browser.getControl('Edit').click()
     >>> browser.url
-    'http://localhost/bugs/thread/4/edit'
+    'http://localhost/bugs/thread/5/edit'
 
 Let's get back to the topic list:
 
     >>> browser.getLink('Back to thread')
-    <Link text='Back to thread' url='http://localhost/bugs/thread/4'>
+    <Link text='Back to thread' url='http://localhost/bugs/thread/5'>
     >>> browser.getLink('Back to thread').click()
 
     >>> browser.getLink('Back to the topic list')
@@ -81,7 +81,7 @@ Let's get back to the topic list:
 Links from the front page work:
 
     >>> browser.getLink('Help!', index=0)
-    <Link text='Help!' url='http://localhost/bugs/thread/4'>
+    <Link text='Help!' url='http://localhost/bugs/thread/5'>
     >>> browser.getLink('Help!', index=0).click()
     >>> browser.printQuery('id("forum-thread")//div[@class="post-body"]/text()')
     My ututi is borken!

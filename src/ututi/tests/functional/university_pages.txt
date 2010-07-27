@@ -49,7 +49,7 @@ The information portlet should show the most important information about the uni
       <span class="bold">1</span> subject
     </li>
     <li>
-      <span class="bold">1</span> group
+      <span class="bold">2</span> groups
     </li>
     <li>
       <span class="bold">0</span> files

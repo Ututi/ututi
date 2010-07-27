@@ -129,8 +129,8 @@ And look at the emails:
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
-    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
-    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was created.
+    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/6) was created.
     <BLANKLINE>
     If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
     <BLANKLINE>
@@ -139,8 +139,8 @@ And look at the emails:
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
-    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
-    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
+    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/6) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was updated.
     <BLANKLINE>
     If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
     <BLANKLINE>
@@ -149,8 +149,8 @@ And look at the emails:
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
-    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
-    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was updated.
     <BLANKLINE>
     If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
     <BLANKLINE>
@@ -192,8 +192,8 @@ And we continue uploading files:
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
-    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
-    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was created.
+    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/6) was created.
     <BLANKLINE>
     If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
     <BLANKLINE>
@@ -202,10 +202,10 @@ And we continue uploading files:
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
-    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
-    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
-    - File f1.txt (http://localhost/subject/vu/mat_analize/file/9/get) was uploaded.
-    - File f2.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
+    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/6) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was updated.
+    - File f1.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
+    - File f2.txt (http://localhost/subject/vu/mat_analize/file/11/get) was uploaded.
     <BLANKLINE>
     If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
     <BLANKLINE>
@@ -214,10 +214,10 @@ And we continue uploading files:
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
-    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
-    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
-    - File f1.txt (http://localhost/subject/vu/mat_analize/file/9/get) was uploaded.
-    - File f2.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was updated.
+    - File f1.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
+    - File f2.txt (http://localhost/subject/vu/mat_analize/file/11/get) was uploaded.
     <BLANKLINE>
     If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
     <BLANKLINE>
@@ -233,13 +233,19 @@ And we continue uploading files:
 Let's try hourly now:
 
     >>> browser.open('http://localhost/profile/subjects')
+
+See what notification intervals have been set:
+    >>> browser.getControl(name='each', index=1).displayValue, browser.getControl(name='each', index=0).displayValue, browser.getControl(name='each', index=2).displayValue
+    (['at the end of the day'], ['at the end of the day'], ['at the end of the day'])
+
     >>> browser.getControl(name='each', index=1).displayValue
     ['at the end of the day']
     >>> browser.getControl(name='each', index=1).displayValue = ['immediatelly']
     >>> browser.getControl('Confirm', index=1).click()
 
-    >>> browser.getControl(name='each', index=1).displayValue
-    ['immediatelly']
+These should have changed:
+    >>> browser.getControl(name='each', index=1).displayValue, browser.getControl(name='each', index=0).displayValue, browser.getControl(name='each', index=2).displayValue
+    (['at the end of the day'], ['at the end of the day'], ['immediatelly'])
 
     >>> meta.Session.commit()
     >>> browser.open('http://localhost/news/hourly?date=2009-10-08&hour=11')
@@ -250,8 +256,8 @@ Let's try hourly now:
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
-    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
-    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was created.
+    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/6) was created.
     <BLANKLINE>
     If you want to stop getting these emails - you can change your
     subscription settings in your watched subject page
@@ -276,10 +282,10 @@ Admin should stop getting events in his daily news:
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
-    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
-    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
-    - File f1.txt (http://localhost/subject/vu/mat_analize/file/9/get) was uploaded.
-    - File f2.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
+    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/6) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was updated.
+    - File f1.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
+    - File f2.txt (http://localhost/subject/vu/mat_analize/file/11/get) was uploaded.
     <BLANKLINE>
     If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
     <BLANKLINE>
@@ -288,10 +294,10 @@ Admin should stop getting events in his daily news:
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
-    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
-    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
-    - File f1.txt (http://localhost/subject/vu/mat_analize/file/9/get) was uploaded.
-    - File f2.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was updated.
+    - File f1.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
+    - File f2.txt (http://localhost/subject/vu/mat_analize/file/11/get) was uploaded.
     <BLANKLINE>
     If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
     <BLANKLINE>
@@ -312,8 +318,8 @@ Unless he starts watching the subject himself:
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
-    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
-    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was created.
+    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/6) was created.
     <BLANKLINE>
     If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
     <BLANKLINE>
@@ -322,10 +328,10 @@ Unless he starts watching the subject himself:
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
-    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
-    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
-    - File f1.txt (http://localhost/subject/vu/mat_analize/file/9/get) was uploaded.
-    - File f2.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
+    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/6) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was updated.
+    - File f1.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
+    - File f2.txt (http://localhost/subject/vu/mat_analize/file/11/get) was uploaded.
     <BLANKLINE>
     If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
     <BLANKLINE>
@@ -334,10 +340,10 @@ Unless he starts watching the subject himself:
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
-    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
-    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
-    - File f1.txt (http://localhost/subject/vu/mat_analize/file/9/get) was uploaded.
-    - File f2.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was updated.
+    - File f1.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
+    - File f2.txt (http://localhost/subject/vu/mat_analize/file/11/get) was uploaded.
     <BLANKLINE>
     If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
     <BLANKLINE>
@@ -356,8 +362,8 @@ Hmm, now what happens if user2 starts ignoring the subject:
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
-    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
-    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/5) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was created.
+    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/6) was created.
     <BLANKLINE>
     If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
     <BLANKLINE>
@@ -366,10 +372,10 @@ Hmm, now what happens if user2 starts ignoring the subject:
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
-    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was created.
-    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/3) was updated.
-    - File f1.txt (http://localhost/subject/vu/mat_analize/file/9/get) was uploaded.
-    - File f2.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was updated.
+    - File f1.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
+    - File f2.txt (http://localhost/subject/vu/mat_analize/file/11/get) was uploaded.
     <BLANKLINE>
     If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
     <BLANKLINE>
@@ -380,11 +386,11 @@ Hmm, now what happens if user2 starts ignoring the subject:
     >>> from pprint import pprint
     >>> for msg in sorted(gg.sent_messages): print msg
     (133465L, u'A new file has been uploaded for the Matematin\u0117 analiz\u0117:')
-    (133465L, u'f1.txt (http://localhost:80/subject/vu/mat_analize/file/9/get)')
+    (133465L, u'f1.txt (http://localhost:80/subject/vu/mat_analize/file/10/get)')
     (564321L, u'A new file has been uploaded for the Matematin\u0117 analiz\u0117:')
     (564321L, u'A new file has been uploaded for the Matematin\u0117 analiz\u0117:')
-    (564321L, u'f1.txt (http://localhost:80/subject/vu/mat_analize/file/9/get)')
-    (564321L, u'f2.txt (http://localhost:80/subject/vu/mat_analize/file/10/get)')
+    (564321L, u'f1.txt (http://localhost:80/subject/vu/mat_analize/file/10/get)')
+    (564321L, u'f2.txt (http://localhost:80/subject/vu/mat_analize/file/11/get)')
 
     >>> gg.sent_messages[:] = []
 
@@ -392,7 +398,7 @@ Regression test - file moves should not send events!
 
     >>> count = len(meta.Session.query(Event).all())
 
-    >>> res = app.post("/subject/vu/mat_analize/file/9/move",
+    >>> res = app.post("/subject/vu/mat_analize/file/10/move",
     ...                params={'target_folder': 'Some folder'})
 
     >>> len(meta.Session.query(Event).all()) == count

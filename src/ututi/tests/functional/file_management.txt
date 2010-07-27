@@ -14,7 +14,7 @@ File upload:
     <BLANKLINE>
     <li class="file">
       <img alt="file icon" class="drag-target" src="/images/details/icon_drag_file_new.png" />
-      <a class="filename" href="/subject/vu/mat_analize/file/3/get">text;for you.txt</a>
+      <a class="filename" href="/subject/vu/mat_analize/file/4/get">text;for you.txt</a>
       <span class="file_rename_form hidden">
         <span class="file_rename_input_decorator">
           <input class="file_rename_input" type="text" />
@@ -27,11 +27,11 @@ File upload:
       <a href="/user/1" class="author">
         Adminas Adminovix
       </a>
-      <input class="move_url" type="hidden" value="/subject/vu/mat_analize/file/3/move" />
-      <input class="copy_url" type="hidden" value="/subject/vu/mat_analize/file/3/copy" />
-      <input class="delete_url" type="hidden" value="/subject/vu/mat_analize/file/3/delete" />
-      <input class="flag_url" type="hidden" value="/subject/vu/mat_analize/file/3/flag" />
-      <input class="rename_url" type="hidden" value="/subject/vu/mat_analize/file/3/rename" />
+      <input class="move_url" type="hidden" value="/subject/vu/mat_analize/file/4/move" />
+      <input class="copy_url" type="hidden" value="/subject/vu/mat_analize/file/4/copy" />
+      <input class="delete_url" type="hidden" value="/subject/vu/mat_analize/file/4/delete" />
+      <input class="flag_url" type="hidden" value="/subject/vu/mat_analize/file/4/flag" />
+      <input class="rename_url" type="hidden" value="/subject/vu/mat_analize/file/4/rename" />
       <input class="folder_title_value" type="hidden" value="" />
       <img src="/images/delete.png" alt="delete file" class="delete_button" />
     </li>
@@ -43,7 +43,7 @@ File upload:
     >>> print dedent(res.body)
     <li class="file">
       ...
-      <a class="filename" href="/subject/vu/mat_analize/file/4/get">image.png</a>
+      <a class="filename" href="/subject/vu/mat_analize/file/5/get">image.png</a>
       ...
     </li>
 
@@ -63,7 +63,7 @@ File upload:
     >>> print dedent(res.body)
     <li class="file">
       ...
-      <a class="filename" href="/group/moderators/file/5/get">other_text.txt</a>
+      <a class="filename" href="/group/moderators/file/6/get">other_text.txt</a>
       ...
     </li>
 
@@ -73,7 +73,7 @@ File upload:
     >>> print dedent(res.body)
     <li class="file">
       ...
-      <a class="filename" href="/group/moderators/file/6/get">more_text.txt</a>
+      <a class="filename" href="/group/moderators/file/7/get">more_text.txt</a>
       ...
     </li>
 
@@ -109,7 +109,7 @@ Empty folder creation:
         </div>
 
     >>> browser = Browser.logIn()
-    >>> browser.open('http://localhost/subject/vu/mat_analize/file/7/get')
+    >>> browser.open('http://localhost/subject/vu/mat_analize/file/8/get')
     Traceback (most recent call last):
     ...
     HTTPError: HTTP Error 404: Not Found
@@ -198,7 +198,7 @@ Both folders should be gone:
 
 Flagging files:
 
-    >>> print app.get('/subject/vu/mat_analize/file/3/flag').body
+    >>> print app.get('/subject/vu/mat_analize/file/4/flag').body
     <form method="post" action="." class="fullForm fileFlagForm">
       <div>
         <label><span class="labelText">Please state the reason why the file 'text;for you.txt' is inappropriate:</span><span class="textField"><textarea cols="30" id="reason" name="reason" rows="5"></textarea><span class="edgeTextArea"></span></span></label>
@@ -206,7 +206,7 @@ Flagging files:
       </div>
     </form>
 
-    >>> app.post('/subject/vu/mat_analize/file/3/flag',
+    >>> app.post('/subject/vu/mat_analize/file/4/flag',
     ...           params={'reason': 'Copyright violation'}).status
     '200 OK'
 
@@ -217,7 +217,7 @@ An email should have been sent:
     A file has been flagged as inappropriate.
     <BLANKLINE>
     filename: 'text;for you.txt'
-    file URL: http://localhost:80/subject/vu/mat_analize/file/3/get
+    file URL: http://localhost:80/subject/vu/mat_analize/file/4/get
     <BLANKLINE>
     parent: Matematinė analizė
     parent URL: http://localhost:80/subject/vu/mat_analize
@@ -229,16 +229,16 @@ An email should have been sent:
 
 Deleting files:
 
-    >>> app.get('/subject/vu/mat_analize/file/3/delete').status
+    >>> app.get('/subject/vu/mat_analize/file/4/delete').status
     '200 OK'
 
-    >>> app.get('/group/moderators/file/5/delete').status
+    >>> app.get('/group/moderators/file/6/delete').status
     '200 OK'
 
-    >>> app.get('/subject/vu/mat_analize/file/3/get', expect_errors=True).status
+    >>> app.get('/subject/vu/mat_analize/file/4/get', expect_errors=True).status
     '404 Not Found'
 
-    >>> app.get('/group/moderators/file/5/get', expect_errors=True).status
+    >>> app.get('/group/moderators/file/6/get', expect_errors=True).status
     '404 Not Found'
 
 Group payments:
@@ -339,7 +339,7 @@ uploading is enabled again:
     >>> print dedent(res.body)
     <li class="file">
     ...
-      <a class="filename" href="/group/moderators/file/12/get">over.txt</a>
+      <a class="filename" href="/group/moderators/file/13/get">over.txt</a>
     ...
     </li>
 

@@ -151,6 +151,7 @@ You can send an SMS to the entire group:
     >>> make_request('group_message',
     ...              dict(sender='37067812345', message='testgroup Hello!')).body
     'SMS message sent to group testgroup.'
+    >>> from ututi.lib.sms import sms_queue
 
 Unregistered users may not send a message to the group:
 

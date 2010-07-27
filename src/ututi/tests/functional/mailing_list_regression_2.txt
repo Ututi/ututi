@@ -12,7 +12,7 @@ Regression test for unicode characters in the message with attachment
     >>> mail_queue[0].payload().decode('utf-8').split('\n')
     [u'AAAA, tiesa, u\u017emir\u0161au k\u0105 nors prikabinti!',
      u'',
-     u'4aJcvJ.jpeg - http://localhost/group/moderators/mailinglist/file/3/4']
+     u'4aJcvJ.jpeg - http://localhost/group/moderators/mailinglist/file/4/5']
 
     >>> len(mail_queue)
     1

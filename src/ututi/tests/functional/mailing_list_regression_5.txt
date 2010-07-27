@@ -6,7 +6,7 @@ Regression test for emails with forwarded messages
     >>> from ututi.tests.functional import send_test_message
 
     >>> send_test_message('google_bug_3.txt')
-    >>> browser.open("http://localhost/group/moderators/forum/thread/3")
+    >>> browser.open("http://localhost/group/moderators/forum/thread/4")
 
     >>> from ututi.lib.mailer import mail_queue
     >>> print mail_queue[0].payload()
@@ -30,7 +30,7 @@ Regression test for emails with forwarded messages
     <BLANKLINE>
     Kvieciu visus, kam idomu :)
     <BLANKLINE>
-    agoros programa.doc - http://localhost/group/moderators/mailinglist/file/3/5
+    agoros programa.doc - http://localhost/group/moderators/mailinglist/file/4/6
 
     >>> len(mail_queue)
     1

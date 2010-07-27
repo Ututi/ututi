@@ -14,7 +14,7 @@ Events and watching
     >>> browser.open('http://localhost/profile/index/1')
     >>> browser.printQuery("id('event_list')/li")
     <li>
-          A new file <a href="/subject/vu/mat_analize/file/3/get">text.txt</a> for a subject <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a>
+          A new file <a href="/subject/vu/mat_analize/file/4/get">text.txt</a> for a subject <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a>
           was uploaded <span class="event_time">(...)</span>
     </li>
     <li>
@@ -33,11 +33,11 @@ Events and watching
     >>> browser.open('http://localhost/profile/index/1')
     >>> browser.printQuery("id('event_list')/li")
     <li>
-          A new file <a href="/group/moderators/file/4/get">text.txt</a> for a group <a href="/group/moderators">Moderatoriai</a>
+          A new file <a href="/group/moderators/file/5/get">text.txt</a> for a group <a href="/group/moderators">Moderatoriai</a>
           was uploaded <span class="event_time">(...)</span>
     </li>
     <li>
-          A new file <a href="/subject/vu/mat_analize/file/3/get">text.txt</a> for a subject <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a>
+          A new file <a href="/subject/vu/mat_analize/file/4/get">text.txt</a> for a subject <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a>
           was uploaded <span class="event_time">(...)</span>
     </li>
     <li>
@@ -55,16 +55,16 @@ Events and watching
     >>> browser.open('http://localhost/profile/index/1')
     >>> browser.printQuery("id('event_list')/li")
     <li>
-          New email post <a href="/group/moderators/mailinglist/thread/5">Also - an attachment</a>
+          New email post <a href="/group/moderators/mailinglist/thread/6">Also - an attachment</a>
           was posted on <a href="/group/moderators">Moderatoriai</a>
           mailing list <span class="event_time">(...)</span>
     </li>
     <li>
-          A new file <a href="/group/moderators/file/4/get">text.txt</a> for a group <a href="/group/moderators">Moderatoriai</a>
+          A new file <a href="/group/moderators/file/5/get">text.txt</a> for a group <a href="/group/moderators">Moderatoriai</a>
           was uploaded <span class="event_time">(...)</span>
     </li>
     <li>
-          A new file <a href="/subject/vu/mat_analize/file/3/get">text.txt</a> for a subject <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a>
+          A new file <a href="/subject/vu/mat_analize/file/4/get">text.txt</a> for a subject <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a>
           was uploaded <span class="event_time">(...)</span>
     </li>
     <li>

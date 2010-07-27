@@ -22,7 +22,7 @@ And add a page for it.
 We should get redirected to the index view of the page we just created.
 
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize/page/3'
+    'http://localhost/subject/vu/mat_analize/page/4'
 
     >>> browser.printQuery("//h2[@class='portletTitle bold']/text()")
     How to be awesome!
@@ -41,7 +41,7 @@ Let's edit the page now.
 And see how it works.
 
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize/page/3'
+    'http://localhost/subject/vu/mat_analize/page/4'
 
     >>> browser.printQuery("//h2[@class='portletTitle bold']/text()")
     How to be awesome!
@@ -125,7 +125,7 @@ We should see the page on the list of pages, even though it has been deleted:
       <div class="wiki-tekstas-last">
         <p>
           <span class="orange bold">
-            <a href="/subject/vu/mat_analize/page/3" title="How to be awesome!">How to be awesome!</a>
+            <a href="/subject/vu/mat_analize/page/4" title="How to be awesome!">How to be awesome!</a>
           </span>
           <span class="grey verysmall"> ... </span>
           <span class="orange verysmall">
@@ -172,7 +172,7 @@ Now the page shows up in the index again without the "deleted" marker:
       <div class="wiki-tekstas-last">
         <p>
           <span class="orange bold">
-            <a href="/subject/vu/mat_analize/page/3" title="How to be awesome!">How to be awesome!</a>
+            <a href="/subject/vu/mat_analize/page/4" title="How to be awesome!">How to be awesome!</a>
           </span>
           <span class="grey verysmall"> ... </span>
           <span class="orange verysmall">

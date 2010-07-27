@@ -6,7 +6,7 @@ Regression test for group email being in cc
     >>> from ututi.tests.functional import send_test_message
 
     >>> send_test_message('adomas_group_bug_1.txt', '1', 'moderatos@ututi.lt')
-    >>> browser.open("http://localhost/group/moderators/forum/thread/3")
+    >>> browser.open("http://localhost/group/moderators/forum/thread/4")
 
     >>> from ututi.lib.mailer import mail_queue
     >>> len(mail_queue)

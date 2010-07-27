@@ -40,4 +40,4 @@ Let's try changing the location of the subject to get a clash with another subje
     >>> browser.getControl(name='location-1').value = ''
     >>> browser.getControl('Save').click()
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize-3'
+    'http://localhost/subject/vu/mat_analize-4'

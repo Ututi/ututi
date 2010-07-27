@@ -112,14 +112,14 @@ Anonymous users should be able to download small files (for testing: up to 10 by
 
     >>> browser.getLink('text.txt').click()
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize/file/3/get'
+    'http://localhost/subject/vu/mat_analize/file/4/get'
 
 But not larger ones:
 
     >>> browser.open('http://localhost/subject/vu/mat_analize')
     >>> browser.getLink('text2.txt').click()
     >>> browser.url
-    'http://localhost/login?came_from=%2Fsubject%2Fvu%2Fmat_analize%3Fserve_file%3D4&context=text2.txt'
+    'http://localhost/login?came_from=%2Fsubject%2Fvu%2Fmat_analize%3Fserve_file%3D5&context=text2.txt'
 
     >>> form = browser.getForm('loginForm')
     >>> form.getControl('Email').value = "user@ututi.lt"
@@ -127,7 +127,7 @@ But not larger ones:
     >>> form.getControl('Login').click()
 
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize?serve_file=4'
+    'http://localhost/subject/vu/mat_analize?serve_file=5'
 
     >>> browser.getLink('log out').click()
 

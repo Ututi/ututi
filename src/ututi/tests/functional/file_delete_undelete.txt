@@ -31,11 +31,11 @@
 
 Deleting files:
 
-    >>> res = app.get('/files/delete/3')
     >>> res = app.get('/files/delete/4')
     >>> res = app.get('/files/delete/5')
     >>> res = app.get('/files/delete/6')
     >>> res = app.get('/files/delete/7')
+    >>> res = app.get('/files/delete/8')
 
 Delete the folder too:
     >>> res = app.get('/subject/vu/mat_analize/js_delete_folder?folder=Foldah')

@@ -25,8 +25,11 @@ def ftest_setUp(test):
     u = User.get('admin@ututi.lt')
     meta.Session.execute("SET ututi.active_user TO %d" % u.id)
     g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date(date.today().year, 1, 1), u'U2ti moderatoriai.')
+    g2 = Group('testgroup', u'Testing group', LocationTag.get(u'vu'), date(date.today().year, 1, 1), u'Testing group')
     meta.Session.add(g)
+    meta.Session.add(g2)
     g.add_member(u, True)
+    g2.add_member(u, True)
 
     #add an alternative user
     alt_user = User(u'Alternative user', 'password', True)
@@ -41,6 +44,7 @@ def ftest_setUp(test):
     email = Email('user2@ututi.lt')
     email.confirmed = True
     alt_user.emails.append(email)
+    g2.add_member(alt_user)
 
     #and a third one with an uncofirmed email
     alt_user = User(u'Third user', 'password', True)

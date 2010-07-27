@@ -65,7 +65,7 @@ Let's look at the attachment in the thread:
 
     >>> browser.getLink('Hello').click()
     >>> browser.getLink('README.txt')
-    <Link text='README.txt' url='http://localhost/group/moderators/mailinglist/file/6/7'>
+    <Link text='README.txt' url='http://localhost/group/moderators/mailinglist/file/7/8'>
 
     >>> url = browser.url
     >>> browser.getLink('README.txt').click()
@@ -111,7 +111,7 @@ The email gets sent to all the members of the group:
 And we get redirected to our newly created thread
 
     >>> browser.url
-    'http://localhost/group/moderators/mailinglist/thread/8'
+    'http://localhost/group/moderators/mailinglist/thread/9'
 
     >>> browser.printQuery("//tr[@class='thread-post']")
     <tr class="thread-post">
@@ -168,7 +168,7 @@ The email gets sent.
 We still should be looking at the thread:
 
     >>> browser.url
-    'http://localhost/group/moderators/mailinglist/thread/8'
+    'http://localhost/group/moderators/mailinglist/thread/9'
 
 And our new message should be in the list:
 
