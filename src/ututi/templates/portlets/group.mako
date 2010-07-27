@@ -218,7 +218,7 @@
           <div>
               ## XXX i18n
               <span id="sms_message_symbols">140</span> characters remaining
-              (cost: <span id="sms_message_credits">${len(c.group.recipients_sms())}</span> SMS credits)
+              (cost: <span id="sms_message_credits">${len(c.group.recipients_sms(sender=c.user))}</span> SMS credits)
           </div>
       </form>
       <script>
@@ -234,7 +234,7 @@
                         break;
                     }
                 }
-                var n_recipients = ${len(c.group.recipients_sms())};
+                var n_recipients = ${len(c.group.recipients_sms(sender=c.user))};
                 var text_length = s.length;
 
                 // Please keep math in sync with Python controller code.

@@ -1150,7 +1150,7 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
     @group_action
     def send_sms(self, group):
         text = request.params.get('sms_message')
-        cost = sms_cost(text, n_recipients=len(c.group.recipients_sms()))
+        cost = sms_cost(text, n_recipients=len(c.group.recipients_sms(sender=c.user)))
         if c.user.sms_messages_remaining < cost:
             h.flash(_('Not enough SMS credits: %d needed, but you have only %d.')
                     % (len(group.members), c.user.sms_messages_remaining))

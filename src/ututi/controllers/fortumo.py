@@ -109,7 +109,7 @@ class FortumoController(BaseController):
             return _('Invalid group: %s') % group_id
 
         max_group_members = config.get('sms_max_group_members', 40)
-        if len(group.recipients_sms()) > max_group_members:
+        if len(group.recipients_sms(sender=msg.sender)) > max_group_members:
             return _('More than %d recipients, cannot send message.'
                      ) % max_group_members
 
