@@ -36,7 +36,7 @@ ${search_form(c.text, c.obj_type, c.location.hierarchy,
   js_target=c.location.url(action='search_js'))}
 
 
-  ${search_results(c.results)}
+  ${search_results(c.results, controller='structureview', action='search_js')}
 
   %if c.user:
     %if c.obj_type == 'group':
