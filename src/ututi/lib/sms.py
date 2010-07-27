@@ -1,10 +1,13 @@
 import logging
 
 from datetime import datetime
-from ututi.model import meta
 from hashlib import md5
+from paste.util.converters import asbool
 
 from pylons.i18n import _
+from pylons import config
+
+from ututi.model import meta
 
 log = logging.getLogger(__name__)
 
@@ -21,6 +24,9 @@ def send_sms(number, text, sender, recipient=None, parent=None):
         msg.outgoing_group_message = parent
     meta.Session.add(msg)
 
+    hold_emails = asbool(config.get('hold_emails', False))
+    if hold_emails:
+        sms_queue.append((msg.recipient.phone_number, msg.message_text))
 
 def confirmation_request(user):
     hash = md5(datetime.now().isoformat() + str(user.phone_number)).hexdigest()
