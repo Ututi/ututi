@@ -106,10 +106,11 @@ ${parent.head_tags()}
   $('#confirmation-code-submit').click(function() {
     $('#user_phone_confirm').addClass('loading');
     $.post('${url(controller='profile', action='js_confirm_phone')}',
-      $(this).parents('form').serialize(),
+    $('form#confirm-phone-number-form').serialize(),
       function(data, status) {
         if (status == 'success') {
           $('#user_phone_confirm .inner').replaceWith(data);
+          $('#confirm-phone-flash-message').hide();
         }
         $('#user_phone_confirm').removeClass('loading');
       });

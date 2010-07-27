@@ -35,7 +35,7 @@
 %endif
 
 %if c.user and c.gg_enabled and c.user.phone_number is not None and not c.user.phone_confirmed:
-<div class="flash-message">
+<div class="flash-message" id="confirm-phone-flash-message">
   <span class="close-link hide-parent">
     ${h.image('/img/icons/bigX_15x15.png', alt=_('Close'))}
   </span>
