@@ -123,8 +123,11 @@ def test_message_list():
 
     This can be a list of emails.
 
-        >>> msg = EmailMessage("the subject", "the text")
-        >>> msg.send(["email@host.com", "email2@example.com", "invalidemail"])
+        >>> msg = EmailMessage("the subject", "the text", ignored_recipients=["ignored@example.com"])
+        >>> msg.send(["email@host.com", "email2@example.com", "invalidemail", "ignored@example.com"])
+
+    One recipient is invalid, one is ignored, so only two emails should be left.
+
         >>> print mail_queue.pop().message
         MIME-Version: 1.0
         Content-Type: text/plain; charset="us-ascii"

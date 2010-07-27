@@ -13,10 +13,11 @@ log = logging.getLogger(__name__)
 class Message(object):
     """Base class for all message types."""
 
-    def __init__(self, sender=None, parent=None, force=False):
+    def __init__(self, sender=None, parent=None, force=False, ignored_recipients=[]):
         self.sender = sender
         self.parent = parent
         self.force = force
+        self.ignored_recipients = ignored_recipients
 
     def send(self, recipient):
         from ututi.model import User, Group
@@ -33,17 +34,19 @@ class Message(object):
 
 class EmailMessage(Message):
     """Email message."""
-    def __init__(self, subject, text, html=None, sender=None, force=False):
+    def __init__(self, subject, text, html=None, sender=None, force=False, ignored_recipients=[]):
         if sender is None:
             sender = config['ututi_email_from']
 
-        super(EmailMessage, self).__init__(sender=sender, force=force)
+        super(EmailMessage, self).__init__(sender=sender, force=force, ignored_recipients=ignored_recipients)
 
         self.subject = subject
         self.text = text
         self.html = html
 
     def send(self, recipient):
+        if recipient in self.ignored_recipients:
+            return
         if hasattr(self, "subject") and hasattr(self, "text"):
             if isinstance(recipient, basestring):
                 try:
@@ -61,11 +64,13 @@ class EmailMessage(Message):
 class GGMessage(Message):
     """A gadugadu message."""
 
-    def __init__(self, text, force=False):
+    def __init__(self, text, force=False,  ignored_recipients=[]):
         self.text = text
-        super(GGMessage, self).__init__(sender=None, force=force)
+        super(GGMessage, self).__init__(sender=None, force=force, ignored_recipients=ignored_recipients)
 
     def send(self, recipient):
+        if recipient in self.ignored_recipients:
+            return
         if type(recipient) in (basestring, int, long):
             try:
                 IntValidator.to_python(recipient)
@@ -79,13 +84,16 @@ class GGMessage(Message):
 class SMSMessage(Message):
     """An SMS message."""
 
-    def __init__(self, text, force=False, sender=None, parent=None):
+    def __init__(self, text, force=False, sender=None, parent=None, ignored_recipients=[]):
         self.text = text
         self.sender = sender
         self.recipient = None
-        super(SMSMessage, self).__init__(sender=sender, parent=parent, force=force)
+        super(SMSMessage, self).__init__(sender=sender, parent=parent, force=force, ignored_recipients=ignored_recipients)
 
     def send(self, recipient):
+        if recipient in self.ignored_recipients:
+            return
+
         if isinstance(recipient, basestring):
             try:
                 send_sms(recipient, self.text, self.sender, self.recipient,
