@@ -74,40 +74,41 @@
     </div>
 </%def>
 
-<%def name="universities_section(unis, ajax_url)">
+<%def name="universities_section(unis, ajax_url, collapse=True)">
   <div id="university-list" class="${c.teaser and 'collapsed_list' or ''}">
     ${universities(unis, ajax_url)}
   </div>
-  %if c.teaser:
-    <div id="teaser_switch" style="display: none;">
-      <a href="#" class="more">${_('More universities')}</a>
-    </div>
+  %if collapse:
+    %if c.teaser:
+      <div id="teaser_switch" style="display: none;">
+        <a href="#" class="more">${_('More universities')}</a>
+      </div>
+    %endif
+    <script type="text/javascript">
+    //<![CDATA[
+      $(document).ready(function() {
+        $('#university-list.collapsed_list').data("preheight", $('#university-list.collapsed_list').height()).css('height', '115px');
+        $('#teaser_switch').show();
+        $('#teaser_switch a').click(function() {
+          $('#teaser_switch').hide();
+          $('#university-list').animate({
+            height: $('#university-list').data("preheight")},
+            200, "linear",
+            function() {
+              $('#university-list').css('height', 'auto');
+            });
+          return false;
+        });
+        $('#sort-alpha,#sort-popular').live("click", function() {
+          var url = $('#'+$(this).attr('id')+'-url').val();
+          $('#sorting').addClass('loading');
+          $('#university-list').load(url);
+          return false;
+        });
+      });
+    //]]>
+    </script>
   %endif
-  <script type="text/javascript">
-  //<![CDATA[
-    $(document).ready(function() {
-      $('#university-list.collapsed_list').data("preheight", $('#university-list.collapsed_list').height()).css('height', '115px');
-      $('#teaser_switch').show();
-      $('#teaser_switch a').click(function() {
-        $('#teaser_switch').hide();
-        $('#university-list').animate({
-          height: $('#university-list').data("preheight")},
-          200, "linear",
-          function() {
-            $('#university-list').css('height', 'auto');
-          });
-        return false;
-      });
-      $('#sort-alpha,#sort-popular').live("click", function() {
-        var url = $('#'+$(this).attr('id')+'-url').val();
-        $('#sorting').addClass('loading');
-        $('#university-list').load(url);
-        return false;
-      });
-
-    });
-  //]]>
-  </script>
 </%def>
 
   <h1>${_('UTUTI - student information online')}</h1>
