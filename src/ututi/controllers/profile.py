@@ -50,6 +50,7 @@ class LocationForm(Schema):
 
 class ProfileForm(LocationForm):
     """A schema for validating user profile forms."""
+
     fullname = validators.String(not_empty=True)
     site_url = validators.URL()
 
@@ -662,7 +663,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
                     sms.confirmation_request(c.user)
                 meta.Session.commit()
             elif phone_confirmation_key:
-                c.user.phone_confirmed = True
+                c.user.confirm_phone_number()
                 meta.Session.commit()
 
         redirect(url(controller='profile', action='edit'))
@@ -723,7 +724,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     def confirm_phone(self):
         c.user.location = self.form_result.get('phone_confirmation_key', None)
         meta.Session.commit()
-        h.flash(_('Your university information has been updated.'))
+        h.flash(_('Your phone number has been confirmed.'))
         redirect(url(controller='profile', action='home'))
 
     @ActionProtector("user")
@@ -731,7 +732,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         key = request.params.get('phone_confirmation_key')
         if key.strip() != c.user.phone_confirmation_key.strip():
             abort(400) # XXX
-        c.user.phone_confirmed = True
+        c.user.confirm_phone_number()
         meta.Session.commit()
         return render_mako_def('/profile/home.mako', 'phone_confirmed')
 

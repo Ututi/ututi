@@ -736,9 +736,19 @@ class User(object):
     @classmethod
     def get_byphone(cls, phone_number):
         try:
-            return meta.Session.query(cls).filter_by(phone_number=phone_number).one()
+            return meta.Session.query(cls).filter_by(
+                    phone_number=phone_number, phone_confirmed=True).one()
         except NoResultFound:
             return None
+
+    def confirm_phone_number(self):
+        # If there is another user with the same number, mark his phone
+        # as unconfirmed.  This way there is only one person with a specific
+        # confirmed phone number at any time.
+        other = User.get_byphone(self.phone_number)
+        if other is not None:
+            other.phone_confirmed = False
+        self.phone_confirmed = True
 
     @property
     def ignored_subjects(self):
