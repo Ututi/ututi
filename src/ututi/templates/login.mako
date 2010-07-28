@@ -13,7 +13,7 @@
 </%def>
 
 %if not c.show_registration or c.hash:
-  <div style="font-size: 20px">
+  <div style="font-size: 20px; padding-top: 7px">
     ${c.header}
   </div>
 
