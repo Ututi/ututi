@@ -112,7 +112,7 @@ ${_('Student information online')}
     <label class="textField"><span class="overlay">${_('Password')}</span><input type="password" name="password" /><span class="edge"></span></label>
     <button class="btn" type="submit" value="${_('Login')}"><span>${_('Login')}</span></button><br />
     <a href="${url(controller='home', action='pswrecovery')}">${_('Forgotten password?')}</a>
-    <label id="rememberMe"><input type="checkbox"> ${_('Remember me')}</label>
+    <label id="rememberMe" for="remember"><input name="remember" value="true" type="checkbox"/> ${_('Remember me')}</label>
   </fieldset>
   <script type="text/javascript">
     $(window).load(function() {

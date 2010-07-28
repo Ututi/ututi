@@ -4,16 +4,25 @@ from pylons.controllers.util import redirect
 
 from repoze.what.predicates import NotAuthorizedError
 from repoze.what.plugins.pylonshq.protectors import ActionProtector as BaseActionProtector
+from datetime import datetime, timedelta
 
 def current_user():
     from ututi.model import User
     login = session.get('login', '')
-    password = session.get('password', '')
+    expires = session.get('expires', None)
+
+    if expires is not None and datetime.today() - expires > timedelta(hours=1):
+        return None
+
+    if expires is not None:
+        #extend session expiration by one more hour
+        session['expires'] = datetime.today() + timedelta(hours=1)
     return User.get(login)
 
 
-def sign_in_user(email):
+def sign_in_user(email, long_session=False):
     session['login'] = email
+    session['expires'] = datetime.today() + timedelta(hours=1) if not long_session else None
     session.save()
 
 

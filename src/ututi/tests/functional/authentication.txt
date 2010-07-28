@@ -142,3 +142,21 @@ But not larger ones:
     Traceback (most recent call last):
     ...
     HTTPError: HTTP Error 403: Forbidden
+
+----------------------------------
+
+Checking the 'remember me' checkbox should create an unlimited session:
+
+    >>> browser = Browser()
+    >>> form = browser.getForm('loginForm')
+    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl(name='remember').value = True
+    >>> form.getControl('Login').click()
+
+    >>> browser.open('http://localhost/profile/session_info')
+    >>> print browser.contents
+    login => admin@ututi.lt
+    expires => None
+    _accessed_time => ...
+    _creation_time => ...

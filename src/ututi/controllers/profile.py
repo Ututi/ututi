@@ -768,3 +768,11 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         subjects = sorted(subjects, key=lambda subject: subject.title)
 
         return render_mako_def('/profile/home.mako','subjects_block', subjects=subjects)
+
+    @ActionProtector("root")
+    def session_info(self):
+        """ Display session values for testing purposes. """
+        ret = ""
+        for key, value in session.items():
+            ret += "%s => %s\n" % (key, value)
+        return ret

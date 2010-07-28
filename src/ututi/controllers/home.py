@@ -267,6 +267,7 @@ class HomeController(UniversityListMixin):
     def login(self):
         email = request.POST.get('login')
         password = request.POST.get('password')
+        remember = True if request.POST.get('remember', None) else False
         destination = c.came_from or url(controller='profile', action='home')
         filename = request.params.get('context', None)
 
@@ -292,7 +293,7 @@ class HomeController(UniversityListMixin):
             c.message = _('You seem to have entered your username and password wrong, please try again!')
 
             if user is not None:
-                sign_in_user(email)
+                sign_in_user(email, long_session=remember)
                 redirect(str(destination))
 
         return render('/login.mako')

@@ -1,0 +1,3 @@
+2010 07 28 14:56
+Altered development.ini (line 60), added:
+beaker.session.cookie_expires = false
