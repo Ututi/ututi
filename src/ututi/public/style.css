@@ -98,6 +98,11 @@ div#pager {
     font-weight: bold;
 }
 
+.user_file_count {
+    font-weight: bold;
+    color: #808080;
+}
+
 /* Form controls */
 span.error-message {
         color: red;
