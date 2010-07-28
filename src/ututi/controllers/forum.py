@@ -13,7 +13,7 @@ from pylons.controllers.util import redirect, redirect
 from pylons.i18n import _
 from pylons import tmpl_context as c, url, config
 
-from ututi.lib.security import ActionProtector
+from ututi.lib.security import ActionProtector, check_crowds
 from ututi.lib.base import render
 from ututi.lib.helpers import check_crowds, flash
 from ututi.lib.security import deny
@@ -105,6 +105,11 @@ def protect_view(m):
         if c.group is not None:
             if not c.group.forum_is_public and not check_crowds(['member', 'moderator']):
                 deny("This forum is not public", 401)
+            if c.group.mailinglist_enabled:
+                flash(_('The web-based forum for this group has been disabled.'
+                        ' Please use the mailing list instead.'))
+                redirect(url(controller='mailinglist', action='index', id=c.group_id))
+
         return m(*args, **kwargs)
     return fn
 
@@ -136,10 +141,6 @@ class ForumController(BaseController):
                 abort(404)
             c.group_id = c.group.group_id
             c.group_menu_items = group_menu_items()
-            if c.group.mailinglist_enabled:
-                flash(_('The web-based forum for this group has been disabled.'
-                        ' Please use the mailing list instead.'))
-                redirect(url(controller='mailinglist', action='index', id=id))
             c.object_location = c.group.location
             c.security_context = c.group
             c.breadcrumbs.append({'title': c.group.title, 'link': c.group.url()})
