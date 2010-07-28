@@ -1213,7 +1213,14 @@ p.qu{
      color:#fff;
 }
 
-.portletSetLocation , .portletSetLocation-nobg, .portletNewGroup, .portletNewDalykas, .portletGroupFiles  {
+.portletConfirmPhone {
+    background-image: url('img/icons/phone.png');
+    background-position: 23px 5px;
+    padding-left: 75px;
+}
+
+.portletSetLocation, .portletSetLocation-nobg,
+.portletNewGroup, .portletNewDalykas, .portletGroupFiles  {
     background-image: url('img/icons/university_41.png');
     background-position: 10px 5px;
     padding-left: 75px;
@@ -1243,19 +1250,38 @@ p.qu{
     margin-top: 3px;
 }
 
-.portletSetLocation .label , .portletSetLocation-nobg .label, .portletNewGroup .label, .portletNewDalykas .label, .portletGroupFiles .label {
+p.explanation {
+    color: #666;
+    font-size: 12px;
+}
+
+.portletConfirmPhone h2.portletTitle {
+    padding-bottom: 5px;
+}
+
+.portletSetLocation .label ,
+.portletSetLocation-nobg .label,
+.portletNewGroup .label,
+.portletNewDalykas .label,
+.portletGroupFiles .label,
+.portletConfirmPhone .label {
     display: inline-block;
     margin-right: 10px;
     margin-top: 5px;
     vertical-align: bottom;
     width: 200px;
 }
-.portletSetLocation .button, .portletGroupFiles .button {
+.portletSetLocation .button,
+.portletGroupFiles .button {
     vertical-align: bottom;
     margin-left: -8px;
     margin-bottom: -2px;
 }
-.portletSetLocation input, .portletSetLocation-nobg input, .portletNewGroup input, .portletNewDalykas input, .portletGroupFiles input {
+.portletSetLocation input,
+.portletSetLocation-nobg input,
+.portletNewGroup input,
+.portletNewDalykas input,
+.portletGroupFiles input {
     width: 190px;
 }
 

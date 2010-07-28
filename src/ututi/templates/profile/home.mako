@@ -50,15 +50,18 @@ ${parent.head_tags()}
 %endif
 
 %if c.user.phone_number is None:
-  <%self:rounded_block id="user_phone" class_="portletSetLocation">
+  <%self:rounded_block id="user_phone" class_="portletConfirmPhone">
   <div class="inner">
     <h2 class="portletTitle bold">${_("What's your phone number?")}</h2>
+    <p class="explanation">
+      ${_("We need your phone number so that you could send and receive SMS messages from the group. Don't worry, we will never send advertisements.")}
+    </p>
     <form method="post" action="${url(controller='profile', action='update_phone_number')}" id="update-phone-number-form"
-          style="float: none">
+          style="float: none; padding-top: 5px">
       <div class="floatleft">
-        ${h.input_line('phone_number', _('Mobile phone number:'))}
+        ${h.input_line('phone_number', _('Mobile phone number: '))}
       </div>
-      <div class="floatleft">
+      <div class="floatleft" style="padding-left: 3px; margin-top: -1px">
         ${h.input_submit(_('save'), id='user-phone-submit')}
       </div>
       <div class="clear"></div>
@@ -85,15 +88,18 @@ ${parent.head_tags()}
 %endif
 
 <%def name="phone_updated()">
-  <%self:rounded_block id="user_phone_confirm" class_="portletSetLocation">
+  <%self:rounded_block id="user_phone_confirm" class_="portletConfirmPhone">
   <div class="inner">
     <h2 class="portletTitle bold">${_("Please confirm your phone number")}</h2>
+    <p class="explanation">
+      ${_("Enter the confirmation code that you received by SMS to prove that this number belongs to you.")}
+    </p>
     <form method="post" action="${url(controller='profile', action='confirm_phone_number')}" id="confirm-phone-number-form"
-          style="float: none">
+          style="float: none; padding-top: 5px ">
       <div class="floatleft">
-        ${h.input_line('phone_confirmation_key', _('Confirmation code:'))}
+        ${h.input_line('phone_confirmation_key', _('Confirmation code: '))}
       </div>
-      <div class="floatleft">
+      <div class="floatleft" style="padding-left: 3px; margin-top: -1px">
         ${h.input_submit(_('save'), id='confirmation-code-submit')}
       </div>
       <div class="clear"></div>
