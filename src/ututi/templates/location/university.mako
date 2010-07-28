@@ -16,7 +16,6 @@
 </%def>
 
 <h1 class="pageTitle">${c.location.title}</h1>
-<br />
 
 ${universities_section(c.departments, c.location.url(), collapse=True, collapse_text=_('More departments'))}
 
