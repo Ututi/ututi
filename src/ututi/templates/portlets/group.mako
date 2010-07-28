@@ -51,7 +51,7 @@
       ##</div>
       <div class="clear"></div>
     </div>
-    %if group.is_member(c.user) and group.has_file_area:
+    %if (group.is_member(c.user) or c.security_context and h.check_crowds(['admin', 'moderator'])) and group.has_file_area:
       <div class="profile topLine">
       ${_('Available space for private group files:')}
       ${h.image('/images/details/pbar%d.png' % group.free_size_points, alt=h.file_size(group.size), class_='area_size_points')|n}
@@ -65,7 +65,7 @@
       ${group.description}
     </p>
 
-    %if group.is_member(c.user):
+    %if group.is_member(c.user) or c.security_context and h.check_crowds(['admin', 'moderator']):
     <div class="click2show">
       <div class="remeju-sarasas click">
         <a href="#">${_("More settings")}</a>
@@ -87,7 +87,7 @@
     </div>
     %endif
 
-    %if group.is_admin(c.user):
+    %if group.is_admin(c.user) or c.security_context and h.check_crowds(['admin', 'moderator']):
       <div class="floatright" style="margin-top: 6px">
       <span class="right_arrow">
         <a href="${url(controller='group', action='edit', id=group.group_id)}" title="${_('Edit group settings')}">${_('Edit')}</a>

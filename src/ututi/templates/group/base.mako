@@ -22,7 +22,7 @@
   </h1>
 %endif
 
-%if c.group.is_member(c.user):
+%if c.group.is_member(c.user) or c.security_context and h.check_crowds(['admin', 'moderator']):
 <ul class="moduleMenu" id="moduleMenu">
     %for menu_item in c.group_menu_items:
       <li class="${'current' if menu_item['name'] == c.group_menu_current_item else ''}">
