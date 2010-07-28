@@ -7,18 +7,11 @@ ${parent.head_tags()}
 </%def>
 
 <%def name="location_updated()">
-  <div id="user_location">
-    <div class="wrapper">
-      <div class="inner" style="height: 50px; font-weight: bold;">
-        <br />
-        ${_('Your university information has been updated. Thank you.')}
-      </div>
-    </div>
-  </div>
+  <div class="my-faculty"><a href="${c.user.location.url()}">${_('Go to my department')}</a></div>
 </%def>
 
 %if c.user.location is not None:
-<div class="my-faculty"><a href="${c.user.location.url()}">${_('Go to my department')}</a></div>
+  <div class="my-faculty"><a href="${c.user.location.url()}">${_('Go to my department')}</a></div>
 %else:
   <%self:rounded_block id="user_location" class_="portletSetLocation">
   <div class="inner">
@@ -27,6 +20,7 @@ ${parent.head_tags()}
           style="float: none">
       ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=True, label_class="label")}
       ${h.input_submit(_('save'), id='user-location-submit')}
+      <div id="location-error" class="error-container" style="display: none"><span class="error-message">${_('Please enter a university.')}</span></div>
     </form>
   </div>
   </%self:rounded_block>
@@ -34,12 +28,16 @@ ${parent.head_tags()}
   //<![CDATA[
 
   $('#user-location-submit').click(function() {
+    if (!($('#location-0-0').val())) {
+      $('#location-error').show();
+      return false;
+    }
     $('#user_location').addClass('loading');
     $.post('${url(controller='profile', action='js_update_location')}',
       $(this).parents('form').serialize(),
       function(data, status) {
         if (status == 'success') {
-          $('#user_location .inner').replaceWith(data);
+          $('#user_location').replaceWith(data);
         }
         $('#user_location').removeClass('loading');
       });
@@ -60,6 +58,7 @@ ${parent.head_tags()}
           style="float: none; padding-top: 5px">
       <div class="floatleft">
         ${h.input_line('phone_number', _('Mobile phone number: '))}
+        <div id="phone-error" style="display: none; padding-left: 135px" class="error-container"><span class="error-message">${_('Please enter a phone number.')}</span></div>
       </div>
       <div class="floatleft" style="padding-left: 3px; margin-top: -1px">
         ${h.input_submit(_('save'), id='user-phone-submit')}
@@ -72,6 +71,10 @@ ${parent.head_tags()}
   //<![CDATA[
 
   $('#user-phone-submit').click(function() {
+    if (!($('#phone_number').val())) {
+      $('#phone-error').show();
+      return false;
+    }
     $('#user_phone').addClass('loading');
     $.post('${url(controller='profile', action='js_update_phone')}',
       $(this).parents('form').serialize(),
@@ -98,6 +101,8 @@ ${parent.head_tags()}
           style="float: none; padding-top: 5px ">
       <div class="floatleft">
         ${h.input_line('phone_confirmation_key', _('Confirmation code: '))}
+        <div id="phone-confirmation-code-missing" style="display: none; padding-left: 115px" class="error-container"><span class="error-message">${_('Please enter a confirmation key.')}</span></div>
+        <div id="phone-confirmation-code-invalid" style="display: none; padding-left: 115px" class="error-container"><span class="error-message">${_('Invalid confirmation key.')}</span></div>
       </div>
       <div class="floatleft" style="padding-left: 3px; margin-top: -1px">
         ${h.input_submit(_('save'), id='confirmation-code-submit')}
@@ -110,13 +115,21 @@ ${parent.head_tags()}
   //<![CDATA[
 
   $('#confirmation-code-submit').click(function() {
+    $('#phone-confirmation-code-invalid').hide();
+    if (!($('#phone_confirmation_key').val())) {
+      $('#phone-confirmation-code-missing').show();
+      return false;
+    }
+    $('#phone-confirmation-code-missing').hide();
     $('#user_phone_confirm').addClass('loading');
     $.post('${url(controller='profile', action='js_confirm_phone')}',
-    $('form#confirm-phone-number-form').serialize(),
+      $('form#confirm-phone-number-form').serialize(),
       function(data, status) {
-        if (status == 'success') {
-          $('#user_phone_confirm .inner').replaceWith(data);
+        if ((status == 'success') && (data != '')) {
           $('#confirm-phone-flash-message').hide();
+          $('#user_phone_confirm').hide();
+        } else {
+          $('#phone-confirmation-code-invalid').show();
         }
         $('#user_phone_confirm').removeClass('loading');
       });

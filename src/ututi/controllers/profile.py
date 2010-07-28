@@ -731,7 +731,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     def js_confirm_phone(self):
         key = request.params.get('phone_confirmation_key')
         if key.strip() != c.user.phone_confirmation_key.strip():
-            abort(400) # XXX
+            return ''
         c.user.confirm_phone_number()
         meta.Session.commit()
         return render_mako_def('/profile/home.mako', 'phone_confirmed')
