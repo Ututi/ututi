@@ -141,7 +141,7 @@ span.error-message {
 
 .textField textarea {
     background: url('img/textarea_bg.png') no-repeat left top;
-    height: 90px;
+    height: 88px;
 }
 .textField .edge, .textField .edgeTextArea {
     background: url('img/inputs_bg.png') no-repeat right top;
@@ -3491,7 +3491,7 @@ div.action-portlet .header .tooltip {
 div.action-portlet .textField textarea {
     background-image: url('img/textarea_small.png');
     width: 275px;
-    height: 90px;
+    height: 88px;
 }
 
 /* end action portlets */
