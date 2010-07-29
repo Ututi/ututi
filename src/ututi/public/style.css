@@ -411,6 +411,26 @@ button.btnMedium.btnExclamation {
     margin-left: 2em;
 }
 
+.federated-registration-form {
+    -moz-border-radius: 5px;
+    border: 1px solid #ded8d8;
+    background: #f6f6f6;
+    padding: 1em;
+    margin-top: 1em;
+}
+
+.federated-registration-form .heading {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.federated-registration-form .comment {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    color: #666;
+    font-size: 12px
+}
+
 #searchForm {
     background: url('img/portlet_search_bg.gif');
     height: 22px;

@@ -17,7 +17,7 @@
 
 <h1>${_('Personal information')}</h1>
 
-<div style="-moz-border-radius: 5px; border: 1px solid #ded8d8; background: #f6f6f6; padding: 1em; margin-top: 1em;">
+<div class="federated-registration-form">
     <form id="registration_form" method="post" class="fullForm"
           action="${url(controller='home', action='federated_registration')}">
       <fieldset>
@@ -29,8 +29,8 @@
           <input type="hidden" name="came_from" value="${c.came_from}" />
         %endif
 
-        <div style="font-size: 14px; font-weight: bold">${_('1. Personal information')}</div>
-        <div style="margin-top: 1em; margin-bottom: 1em; color: #666; font-size: 12px">
+        <div class="heading">${_('1. Personal information')}</div>
+        <div class="comment">
             ${_("Please check that your personal information is correct.")}
         </div>
 
@@ -69,9 +69,8 @@
         %endif
 
 
-    <div style="font-size: 14px; font-weight: bold; border-top: 1px solid #ded8d8; padding-top: 1em; margin-top: 0.5em"
-      >${_('2. School (optional)')}</div>
-    <div style="margin-top: 1em; margin-bottom: 1em; color: #666; font-size: 12px">
+    <div class="heading">${_('2. School (optional)')}</div>
+    <div class="comment">
         ${_("Ututi is an application for students, so it is important for us to know where you study. These data can be changed later in your profile settings screen.")}
     </div>
 
@@ -79,9 +78,8 @@
           ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=False)}
         </div>
 
-    <div style="font-size: 14px; font-weight: bold; border-top: 1px solid #ded8d8; padding-top: 1em; margin-top: 0.5em"
-      >${_('3. Phone number (optional)')}</div>
-    <div style="margin-top: 1em; margin-bottom: 1em; color: #666; font-size: 12px">
+    <div class="heading">${_('3. Phone number (optional)')}</div>
+    <div class="comment">
       ${_("We need your phone number so that you could send and receive SMS messages from the group. Don't worry, we will never send advertisements.")}
     </div>
 
