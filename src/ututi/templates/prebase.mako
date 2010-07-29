@@ -115,9 +115,7 @@ ${_('Student information online')}
     <label id="rememberMe" for="remember"><input name="remember" value="true" type="checkbox"/> ${_('Remember me')}</label>
   </fieldset>
   <script type="text/javascript">
-    $(window).load(function() {
       $(".textField .overlay").labelOver('over');
-    });
   </script>
 </form>
 ${self.anonymous_menu()}
