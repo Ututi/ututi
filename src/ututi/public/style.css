@@ -4357,3 +4357,7 @@ body .ui-corner-all {
 body .ui-widget, body .ui-widget button {
     font: 13px normal Arial,Helvetica,sans-serif;
 }
+
+body .ui-widget button.btnMedium {
+    font: 16px normal Arial,Helvetica,sans-serif;
+}
