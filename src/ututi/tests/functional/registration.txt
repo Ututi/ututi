@@ -164,8 +164,6 @@ Bug fix confirm: passwords with non-ascii chars would crash the registration.
     >>> form.getControl(name='agree').value = True
     >>> form.getControl('Register').click()
 
-    >>> browser.printQuery("//span[@class='error-message']/text()")
-
 A newly registered user will not have his location set, so he will be shown a form to set it:
 
     >>> form = browser.getForm('update-location-form')
