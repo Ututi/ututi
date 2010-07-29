@@ -899,8 +899,8 @@ class User(object):
             except IOError:
                 pass
 
-    def download(self, file):
-        self.downloads.append(FileDownload(self, file))
+    def download(self, file, range_start=None, range_end=None):
+        self.downloads.append(FileDownload(self, file, range_start, range_end))
 
     @property
     def isConfirmed(self):
@@ -1845,9 +1845,11 @@ class NotifyGG(MapperExtension):
 class FileDownload(object):
     """Class representing the user downloading a certain file."""
 
-    def __init__(self, user, file):
+    def __init__(self, user, file, range_start=None, range_end=None):
         self.user = user
         self.file = file
+        self.range_start = range_start
+        self.range_end = range_end
 
 
 class File(ContentItem):

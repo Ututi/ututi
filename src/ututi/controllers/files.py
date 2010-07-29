@@ -49,7 +49,13 @@ class BasefilesController(BaseController):
         if file.deleted is not None or file.isNullFile():
             abort(404)
         if c.user:
-            c.user.download(file)
+            range_start = None
+            range_end = None
+
+            if request.range is not None:
+                (range_start, range_end, file_len) = request.range.content_range(length=file.filesize)
+
+            c.user.download(file, range_start, range_end)
             meta.Session.commit()
         return serve_file(file)
 

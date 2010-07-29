@@ -227,6 +227,18 @@ An email should have been sent:
     reason:
     Copyright violation
 
+Partial requests:
+    >>> app.get('/subject/vu/mat_analize/file/4/get', expect_errors=True).body
+    'Test'
+
+    >>> app.get('/subject/vu/mat_analize/file/4/get', expect_errors=True, headers={'Range':'bytes=2-3'}).body
+    'st'
+
+Check if the partial download ranges were recorded:
+    >>> from ututi.model import meta, FileDownload
+    >>> print [(fd.file_id, fd.range_start, fd.range_end) for fd in meta.Session.query(FileDownload).filter_by(user_id=1).all()]
+    [(4L, None, None), (4L, 2L, 4L)]
+
 Deleting files:
 
     >>> app.get('/subject/vu/mat_analize/file/4/delete').status
