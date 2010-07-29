@@ -31,7 +31,7 @@
           <span class="right_arrow"></span>
         </div>
         %else:
-        <div>
+        <div style="width: 190px">
           <a href="${group.url()}">${group.url(qualified=True)}</a>
         </div>
         %endif
@@ -52,10 +52,10 @@
       <div class="clear"></div>
     </div>
     %if (group.is_member(c.user) or c.security_context and h.check_crowds(['admin', 'moderator'])) and group.has_file_area:
-      <div class="profile topLine">
-      ${_('Available space for private group files:')}
-      ${h.image('/images/details/pbar%d.png' % group.free_size_points, alt=h.file_size(group.size), class_='area_size_points')|n}
+    <div class="profile topLine grey" style="font-size: 11px">
+      <span class="bold">${_('Available space for private group files:')}</span>
       <span class="verysmall">${h.file_size(group.free_size)}</span>
+      ${h.image('/images/details/pbar%d.png' % group.free_size_points, alt=h.file_size(group.size), class_='area_size_points')|n}
       <div style="padding-top: 4px; padding-bottom: 7px" class="bottomLine">
         ${h.button_to(_('Get more space'), group.url(action='pay'))}
       </div>
@@ -199,28 +199,41 @@
      if group is None:
          group = c.group
   %>
-  <%self:uportlet id="group_sms_portlet">
+  <%self:uportlet id="group_sms_portlet" portlet_class="MyProfile">
     <%def name="header()">
-      ${_('Send SMS message')}
+      ${_('Send SMS message to group')}
     </%def>
 
-    <div>
-      ${_('Send a message to number 1337 (2 Lt): "TXT&nbsp;%(sms_code)s&nbsp;%(group_id)s&nbsp;Your message"') % dict(sms_code=c.pylons_config.get('fortumo.personal_sms_credits.code', 'U2TISMS'), group_id=c.group.group_id) |n}
+    <div class="character-counter">
+      <span id="sms_message_symbols">140</span> characters / <span id="sms_messages_num">1</span> messages
     </div>
+    <span>${_('Message text:')}</span>
+
+    ##<div>
+    ##  ${_('Send a message to number 1337 (2 Lt): "TXT&nbsp;%(sms_code)s&nbsp;%(group_id)s&nbsp;Your message"') % dict(sms_code=c.pylons_config.get('fortumo.personal_sms_credits.code', 'U2TISMS'), group_id=c.group.group_id) |n}
+    ##</div>
 
     %if c.user.sms_messages_remaining:
-      ## TODO: ngettext
-      ${_('(%d SMS credits remaining)') % c.user.sms_messages_remaining}
       <form method='post' action="${url(controller='group', action='send_sms', id=group.group_id)}">
           <input type="hidden" name="current_url" value="${url.current()}" />
-          ${h.input_area('sms_message', _('Send an SMS to the group:'), cols=35)}
+          ${h.input_area('sms_message', '', cols=35)}
           ${h.input_submit(_('Send'))}
-          <div>
-              ## XXX i18n
-              <span id="sms_message_symbols">140</span> characters remaining
-              (cost: <span id="sms_message_credits">${len(c.group.recipients_sms(sender=c.user))}</span> SMS credits)
-          </div>
       </form>
+
+      <div class="cost">
+          <span class="cost-header">${_("Cost:")}</span>
+          <span id="sms_message_credits">${len(c.group.recipients_sms(sender=c.user))}</span> SMS credits
+          <img style="margin-bottom: -3px" src="/images/details/icon_question.png" class="tooltip " alt="${_('One SMS credits allows you to send one SMS message to a single recipient. When sending a message to a group, one credit is charged for every recipient.')}.">
+      </div>
+
+      <div class="credits-remaining">
+          <span class="credits-header">${_('Credits remaining:')}</span>
+          <span>${c.user.sms_messages_remaining}</span>
+          <div style="padding-top: 3px">
+            ${h.button_to(_('Purchase credits'), '')}
+          </div>
+      </div>
+
       <script>
           $(document).ready(function() {
               $('textarea#sms_message').keyup(function() {
@@ -248,6 +261,7 @@
                 var cost = n_recipients * msgs;
                 // -----
 
+                $('#sms_messages_num').text(msgs);
                 $('#sms_message_credits').text(cost);
 
                 var chars_remaining;

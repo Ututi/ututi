@@ -1275,7 +1275,7 @@ p.qu{
     margin-top: 3px;
 }
 
-p.explanation {
+.explanation {
     color: #666;
     font-size: 12px;
 }
@@ -2663,7 +2663,7 @@ div.area_size {
 
 img.area_size_points {
     margin-top: 5px;
-    float: right;
+    margin-left: 5px;
 }
 
 span.unlimited_size {
@@ -3255,6 +3255,33 @@ div.please-register {
 .portlet .members_list div.user-logo-link div.user-logo {
     height: 45px;
     width: 45px;
+}
+
+#group_sms_portlet-content .character-counter {
+    color: #666;
+    font-size: 11px;
+    float: right;
+    margin-right: 8px;
+}
+
+#group_sms_portlet-content .cost {
+    font-size: 11px;
+    border-bottom: 1px solid #ded8d8;
+    padding-bottom: 5px;
+}
+
+#group_sms_portlet-content .cost-header,
+#group_sms_portlet-content .credits-header {
+    font-weight: bold;
+    color: #666;
+}
+
+#group_sms_portlet-content .credits-remaining {
+    font-size: 11px;
+    padding-top: 7px;
+}
+
+#group_sms_portlet-content .credits-remaining-section {
 }
 
 #group-id-check .taken {
