@@ -773,6 +773,8 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     def session_info(self):
         """ Display session values for testing purposes. """
         ret = ""
-        for key, value in session.items():
+        items = session.items()
+        items.sort()
+        for key, value in items:
             ret += "%s => %s\n" % (key, value)
         return ret

@@ -1,3 +1,6 @@
+from random import Random
+import string
+
 from pylons import response, url, request, session, tmpl_context as c, config
 from pylons.controllers.util import abort
 from pylons.controllers.util import redirect
@@ -9,20 +12,22 @@ from datetime import datetime, timedelta
 def current_user():
     from ututi.model import User
     login = session.get('login', '')
-    expires = session.get('expires', None)
+    session_secret = session.get('cookie_secret', None)
+    cookie_secret = request.cookies.get('ututi_session_lifetime', None)
 
-    if expires is not None and datetime.today() - expires > timedelta(hours=1):
+    if session_secret != cookie_secret:
+        session.delete()
+        response.delete_cookie('ututi_session_lifetime')
         return None
 
-    if expires is not None:
-        #extend session expiration by one more hour
-        session['expires'] = datetime.today() + timedelta(hours=1)
     return User.get(login)
 
 
 def sign_in_user(email, long_session=False):
     session['login'] = email
-    session['expires'] = datetime.today() + timedelta(hours=1) if not long_session else None
+    session['cookie_secret'] = ''.join(Random().sample(string.ascii_lowercase, 20))
+    expiration_time = 3600*24*30 if long_session else None
+    response.set_cookie('ututi_session_lifetime', session['cookie_secret'], max_age = expiration_time)
     session.save()
 
 

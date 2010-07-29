@@ -301,6 +301,7 @@ class HomeController(UniversityListMixin):
     def logout(self):
         if 'login' in session:
             del session['login']
+        response.delete_cookie('ututi_session_lifetime')
         session.save()
         redirect(url(controller='home', action='index'))
 

@@ -156,7 +156,7 @@ Checking the 'remember me' checkbox should create an unlimited session:
 
     >>> browser.open('http://localhost/profile/session_info')
     >>> print browser.contents
-    login => admin@ututi.lt
-    expires => None
     _accessed_time => ...
     _creation_time => ...
+    cookie_secret => ...
+    login => admin@ututi.lt
