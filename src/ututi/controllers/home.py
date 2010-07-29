@@ -382,6 +382,7 @@ class HomeController(UniversityListMixin):
         return render('home/recoveryform.mako')
 
     def _federated_registration_form(self):
+        c.email = session.get('confirmed_email', '').lower()
         return render('home/federated_registration.mako')
 
     @validate(FederatedRegistrationForm, form='_federated_registration_form')

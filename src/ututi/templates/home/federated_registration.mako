@@ -30,9 +30,8 @@
         %endif
 
         <div style="font-size: 14px; font-weight: bold">${_('1. Personal information')}</div>
-
-        <div>
-            ${_('Email address:')} ${c.email}
+        <div style="margin-top: 1em; margin-bottom: 1em; color: #666; font-size: 12px">
+            ${_("Patikrinkite, ar informacija apie Jus teisinga.")}
         </div>
 
         <form:error name="fullname"/>
@@ -42,6 +41,18 @@
             <input type="text" name="fullname"/>
             <span class="edge"></span>
           </span>
+        </label>
+
+        <label>
+          <span class="labelText">${_('Email address:')}</span>
+          <span class="textField">
+            <input type="text" id="email-field" name="email" disabled="disabled" value="${c.email}"/>
+            <span class="edge"></span>
+          </span>
+          <script>
+            $('input#email-field').val('${c.email}');
+          </script>
+
         </label>
 
         %if c.gg_enabled:
