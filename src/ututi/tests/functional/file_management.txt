@@ -22,7 +22,7 @@ File upload:
         <button class="rename_confirm btn" value="Rename"><span>Rename</span></button>
       </span>
       <img src="/images/details/icon_rename.png" alt="edit file name" class="rename_button" />
-      <span class="size">(4.0 b)</span>
+      <span class="size">(4.0 B)</span>
       <span class="date">...</span>
       <a href="/user/1" class="author">
         Adminas Adminovix
@@ -50,7 +50,7 @@ File upload:
     >>> res = app.post("/group/moderators/file_info",
     ...                params={'section_id': 0})
     >>> print res.body
-    {"text": "\n  <div class=\"area_size\">free space: 20.0 b</div>\n", "image": "\n  <img alt=\"0.0 b\" class=\"area_size_points\" src=\"/images/details/pbar0.png\" />\n", "section_id": "0"}
+    {"text": "\n  <div class=\"area_size\">free space: 20.0 B</div>\n", "image": "\n  <img alt=\"0.0 B\" class=\"area_size_points\" src=\"/images/details/pbar0.png\" />\n", "section_id": "0"}
 
     >>> res = app.post("/group/moderators/upload_status",
     ...                params={'section_id': 0})
@@ -80,7 +80,7 @@ File upload:
     >>> res = app.post("/group/moderators/file_info",
     ...                params={'section_id': 0})
     >>> print res.body
-    {"text": "\n  <div class=\"area_size\">free space: 8.0 b</div>\n", "image": "\n  <img alt=\"12.0 b\" class=\"area_size_points\" src=\"/images/details/pbar3.png\" />\n", "section_id": "0"}
+    {"text": "\n  <div class=\"area_size\">free space: 8.0 B</div>\n", "image": "\n  <img alt=\"12.0 B\" class=\"area_size_points\" src=\"/images/details/pbar3.png\" />\n", "section_id": "0"}
 
     >>> res = app.post("/group/moderators/upload_status",
     ...                params={'section_id': 0})
@@ -264,7 +264,7 @@ Once the group's private files reach a limit, no more files can be uploaded.
     >>> res = app.post("/group/moderators/file_info",
     ...                params={'section_id': 0})
     >>> print res.body
-    {"text": "\n  <div class=\"area_size\">free space: 0.0 b</div>\n", "image": "\n  <img alt=\"23.0 b\" class=\"area_size_points\" src=\"/images/details/pbar5.png\" />\n", "section_id": "0"}
+    {"text": "\n  <div class=\"area_size\">free space: 0.0 B</div>\n", "image": "\n  <img alt=\"23.0 B\" class=\"area_size_points\" src=\"/images/details/pbar5.png\" />\n", "section_id": "0"}
 
 The disabled upload control is shown with a message encouraging users to pay
 for the service.
