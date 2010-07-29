@@ -3264,10 +3264,15 @@ div.please-register {
     margin-right: 8px;
 }
 
+#group_sms_portlet-content .recipients {
+    font-size: 11px;
+}
+
 #group_sms_portlet-content .cost {
     font-size: 11px;
     border-bottom: 1px solid #ded8d8;
     padding-bottom: 5px;
+    padding-top: 4px;
 }
 
 #group_sms_portlet-content .cost-header,
