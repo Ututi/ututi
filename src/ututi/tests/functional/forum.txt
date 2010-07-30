@@ -104,3 +104,12 @@ A couple of email notifications about the forum posts have been sent:
     ...
 
     >>> del mail_queue[:]
+
+We should be able to search for messages posted in public forums:
+
+    >>> browser.open('http://localhost/search')
+    >>> form = browser.getForm('search_form')
+    >>> form.getControl(name="text").value = "borken"
+    >>> form.getControl('Search').click()
+    >>> browser.printQuery("id('search-results')//a[@class='item-title larger bold']/text()")
+    Help!

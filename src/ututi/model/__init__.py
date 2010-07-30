@@ -2155,6 +2155,10 @@ class ForumPost(ContentItem):
         else:
             return None
 
+    def snippet(self):
+        """Render the post's information."""
+        return render_mako_def('/sections/content_snippets.mako','forum_post', object=self)
+
 
 seen_threads_table = None
 class SeenThread(object):

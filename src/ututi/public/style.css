@@ -3803,6 +3803,10 @@ div.snippet-page {
     background: white url("../images/details/icon_type_page.png") left 5px no-repeat;
 }
 
+div.snippet-forum_post {
+    background: white url("../images/details/icon_type_message.png") left 5px no-repeat;
+}
+
 div.snippet-group {
     background: white url("../images/details/icon_type_group.png") left 5px no-repeat;
 }

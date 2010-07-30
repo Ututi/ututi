@@ -149,3 +149,23 @@
     ${item_tags(object, all=False)}
   </div>
 </%def>
+
+<%def name="forum_post(object)">
+  <div class="search-item snippet-forum_post">
+    <a href="${object.url()}" title="${object.title}" class="item-title larger bold">${object.title}</a>
+    <div class="description">
+      ${h.ellipsis(object.message, 150)}
+    </div>
+    <div class="description">
+      %if object.category.group:
+        ${h.link_to(object.category.group.title, object.category.group.url())}
+        | ${item_location(object.category.group)}
+        %if object.tags:
+         | ${item_tags(object.category.group)}
+        %endif
+      %else:
+        ${h.link_to(object.category.title, object.category.url())}
+      %endif
+    </div>
+  </div>
+</%def>
