@@ -1,5 +1,6 @@
 <%inherit file="/group/base.mako" />
 <%namespace file="/group/members.mako" import="group_members_invite_section"/>
+<%namespace file="/portlets/base.mako" import="uportlet"/>
 
 <%def name="title()">
   ${c.group.title}
@@ -14,8 +15,20 @@ ${h.javascript_link('/javascript/forms.js')|n}
 ${group_members_invite_section()}
 
 %if c.group.invitations:
-<div style="padding-top: 1em;">
-  <h2>${_('Invited users (invitations not accepted yet)')}</h2>
+<div class="portlet portletSmall portletGroupFiles mediumTopMargin">
+  <div class="ctl"></div>
+  <div class="ctr"></div>
+  <div class="cbl"></div>
+  <div class="cbr"></div>
+  <div class="single-title">
+    <div class="floatleft bigbutton2">
+      <h2 class="portletTitle bold category-title">
+        ${_('Invited users (invitations not accepted yet)')}
+      </h2>
+    </div>
+    <div class="clear"></div>
+  </div>
+
   <table class="group-invitations">
   %for invitation in c.group.invitations:
     %if invitation.active and invitation.email:
@@ -49,8 +62,20 @@ ${group_members_invite_section()}
 %endif
 
 %if c.group.requests:
-<div style="padding-top: 1em;">
-  <h2>${_('Awaiting confirmation')}</h2>
+<div class="portlet portletSmall portletGroupFiles mediumTopMargin">
+  <div class="ctl"></div>
+  <div class="ctr"></div>
+  <div class="cbl"></div>
+  <div class="cbr"></div>
+  <div class="single-title">
+    <div class="floatleft bigbutton2">
+      <h2 class="portletTitle bold category-title">
+        ${_('Awaiting confirmation')}
+      </h2>
+    </div>
+    <div class="clear"></div>
+  </div>
+
   <table class="group-requests">
   % for request in c.group.requests:
   <tr>
@@ -79,52 +104,68 @@ ${group_members_invite_section()}
   </tr>
   % endfor
   </table>
+
 </div>
 %endif
 
-<h2 style="padding-top: 1em;">${_('Group members')}</h2>
-<table class="group-members">
-  <tr>
-    <th>${_('Name')}</th>
-    <th>${_('Email')}</th>
-    <th>${_('Last seen')}</th>
-    <th>${_('Status')}</th>
-  </tr>
-% for member in c.members:
-  <tr>
-    <td>
-      <a href="${member['user'].url()}" title="${member['title']}">
-        ${member['title']}
-      </a>
-    </td>
-    <td>
-      ${member['user'].emails[0].email}
-    </td>
-    <td>
-      ${member['last_seen']}
-    </td>
-    <td>
-      <form method="post" action="${c.group.url(action='update_membership')}" class="autosubmit-form" id="update-membership-${member['user'].id}">
-        <div>
-          <input type="hidden" name="user_id" value="${member['user'].id}"/>
-          <select name="role">
-            %for role in member['roles']:
-              %if role['selected']:
-                <option value="${role['type']}" selected="selected">${role['title']}</option>
-              %else:
-                <option value="${role['type']}">${role['title']}</option>
-              %endif
-            %endfor
-          </select>
-          <span class="btn">
-            <input type="submit" value="${_('Update')}"/>
-          </span>
-        </div>
-      </form>
-    </td>
-  </tr>
-% endfor
-</table>
+<div class="portlet portletSmall portletGroupFiles mediumTopMargin">
+  <div class="ctl"></div>
+  <div class="ctr"></div>
+  <div class="cbl"></div>
+  <div class="cbr"></div>
+  <div class="single-title">
+    <div class="floatleft bigbutton2">
+      <h2 class="portletTitle bold category-title">
+        ${_('Group members')}
+      </h2>
+    </div>
+    <div class="clear"></div>
+  </div>
+
+  <table class="group-members">
+    <tr>
+      <th>${_('Name')}</th>
+      <th>${_('Email')}</th>
+      <th>${_('Last seen')}</th>
+      <th>${_('Status')}</th>
+    </tr>
+  % for member in c.members:
+    <tr>
+      <td>
+        <a href="${member['user'].url()}" title="${member['title']}">
+          ${member['title']}
+        </a>
+      </td>
+      <td>
+        ${member['user'].emails[0].email}
+      </td>
+      <td>
+        ${member['last_seen']}
+      </td>
+      <td>
+        <form method="post" action="${c.group.url(action='update_membership')}" class="autosubmit-form" id="update-membership-${member['user'].id}">
+          <div>
+            <input type="hidden" name="user_id" value="${member['user'].id}"/>
+            <select name="role">
+              %for role in member['roles']:
+                %if role['selected']:
+                  <option value="${role['type']}" selected="selected">${role['title']}</option>
+                %else:
+                  <option value="${role['type']}">${role['title']}</option>
+                %endif
+              %endfor
+            </select>
+            <span class="btn">
+              <input type="submit" value="${_('Update')}"/>
+            </span>
+          </div>
+        </form>
+      </td>
+    </tr>
+  % endfor
+  </table>
+</div>
+
 %if len(c.group.members) == 1:
 <br />
 ${h.button_to(_('Delete group'), c.group.url(action='delete'))}
