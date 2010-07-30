@@ -125,7 +125,7 @@ ${group_members_invite_section()}
   <table class="group-members">
     <tr>
       <th>${_('User')}</th>
-      <th>${_('Phone')}</th>
+      <th>${_('Phone number')}</th>
       <th>${_('Last seen')}</th>
       <th>${_('Status')}</th>
     </tr>
