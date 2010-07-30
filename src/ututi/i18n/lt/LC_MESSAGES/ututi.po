@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-07-30 12:40+0300\n"
+"PO-Revision-Date: 2010-07-30 13:03+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -2091,13 +2091,16 @@ msgid "Invite your classmates"
 msgstr "Pakviesti grupės draugus"
 
 msgid "Enter emails of the people you would like to invite to the group."
-msgstr "Įvesk žmonių, kuriuos nori pakviesti į šią grupę, el. pašto adresus."
+msgstr ""
 
 msgid "Invite"
 msgstr "Pakviesti"
 
 msgid "Invite your classmates using Facebook"
 msgstr "Pakviesk grupiokus naudodamas Facebook"
+
+msgid "Enter emails of your classmates."
+msgstr "Įvesk grupės draugų el. pašto adresus."
 
 msgid "Invited users (invitations not accepted yet)"
 msgstr "Pakviesti naudotojai (dar nepriėmę pakvietimų)"

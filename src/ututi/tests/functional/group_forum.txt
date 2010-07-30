@@ -123,8 +123,8 @@ Email subscriptions
 Let's invite a few more members for testing:
 
     >>> browser.open('http://localhost/group/moderators/members')
-    >>> browser.getControl('Enter emails of the people you would like to'
-    ... ' invite to the group.').value = 'user@ututi.lt, user2@ututi.lt'
+    >>> emails = 'user@ututi.lt, user2@ututi.lt'
+    >>> browser.getControl(name='emails').value = emails
     >>> browser.getControl('Invite').click()
 
 Drop the email invitations, those are not interesting:

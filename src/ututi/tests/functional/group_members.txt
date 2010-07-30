@@ -21,7 +21,8 @@ Let's find the group.
 
 Let's try and invite a new member to the group.
 
-    >>> browser.getControl('Enter emails of the people you would like to invite to the group.').value = 'user@ututi.lt, loser@ututi.lt, user2@ututi.lt, foo'
+    >>> emails = 'user@ututi.lt, loser@ututi.lt, user2@ututi.lt, foo'
+    >>> browser.getControl(name='emails').value = emails
     >>> browser.getControl('Invite').click()
     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
     Users invited.

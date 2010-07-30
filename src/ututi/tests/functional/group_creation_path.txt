@@ -22,7 +22,8 @@ After creating the group, we are redirected to the member invitation
 
 Let us fill in several emails to invite.
 
-    >>> browser.getControl('Enter emails of the people you would like to invite to the group.').value='user@ututi.lt, jonas@example.com, admin@ututi.lt'
+    >>> emails = 'user@ututi.lt, jonas@example.com, admin@ututi.lt'
+    >>> browser.getControl(name='emails').value = emails
     >>> browser.getControl('Invite').click()
 
     >>> print browser.url
@@ -169,7 +170,8 @@ And we are redirected to the group that invited us.
     'http://localhost/group/test/home'
 
     >>> browser.open("http://localhost/group/test/members")
-    >>> browser.getControl('Enter emails of the people you would like to invite to the group.').value = 'user3@ututi.com'
+    >>> emails = 'user3@ututi.com'
+    >>> browser.getControl(name='emails').value = emails
     >>> browser.getControl('Invite').click()
     >>> print mail_queue.pop().message
     MIME-Version: 1.0

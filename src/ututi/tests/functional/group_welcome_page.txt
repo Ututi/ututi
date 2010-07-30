@@ -86,7 +86,7 @@ disappear:
 
     >>> browser.getControl('Invite friends').click()
     >>> emails = 'user@ututi.lt'
-    >>> browser.getControl('Enter emails of the people you would like to invite to the group.').value = emails
+    >>> browser.getControl(name='emails').value = emails
     >>> browser.getControl('Invite').click()
     >>> browser.getLink('Test group').click()
 
