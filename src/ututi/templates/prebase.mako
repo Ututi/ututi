@@ -307,9 +307,10 @@ ${self.anonymous_menu()}
         <li><a href="#" id="feedback-link">${_('Feedback')}</a></li>
       </ul>
     </div>
-    %if c.lang in ['lt', 'en']:
+    %if c.lang in ['lt', 'en', 'pl']:
     ${h.javascript_link('/javascript/uservoice.js')|n}
     <script type="text/javascript">
+      %if c.lang in ['lt', 'en']:
       var uservoiceOptions = {
         key: 'ututi',
         host: 'ututi.uservoice.com',
@@ -317,6 +318,15 @@ ${self.anonymous_menu()}
         lang: 'en',
         showTab: false
       };
+      %else:
+      var uservoiceOptions = {
+        key: 'ututipl',
+        host: 'ututipl.uservoice.com',
+        forum: '69159',
+        lang: 'pl',
+        showTab: false
+      };
+      %endif
       function _loadUserVoice() {
         var s = document.createElement('script');
         s.src = ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js";
@@ -328,8 +338,6 @@ ${self.anonymous_menu()}
         UserVoice.Popin.show(uservoiceOptions); return false;
       });
     </script>
-    %else:
-      ${h.javascript_link('/javascript/sugester.js')|n}
     %endif
 
     <script src="/javascript/jquery.blockUI.js"></script>
