@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-07-15 15:33+0300\n"
+"POT-Creation-Date: 2010-07-30 10:38+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,6 +36,38 @@ msgid "Files"
 msgstr ""
 
 msgid "You have no right to download this file."
+msgstr ""
+
+#, python-format
+msgid "Your phone number (+%s) is not registered in Ututi."
+msgstr ""
+
+#, python-format
+msgid "You have purchased 100 SMS messages for 10 Lt; now you have %d messages."
+msgstr ""
+
+#, python-format
+msgid "Invalid group: %s"
+msgstr ""
+
+#, python-format
+msgid "Added %d credits to group space account; now there are %d."
+msgstr ""
+
+#, python-format
+msgid "Invalid group message: %s"
+msgstr ""
+
+#, python-format
+msgid "The phone number %s is not associated with a Ututi user"
+msgstr ""
+
+#, python-format
+msgid "More than %d recipients, cannot send message."
+msgstr ""
+
+#, python-format
+msgid "SMS message sent to group %s."
 msgstr ""
 
 msgid "Community page"
@@ -223,6 +255,14 @@ msgstr ""
 msgid "Group '%(group_title)s' has been deleted!"
 msgstr ""
 
+#, python-format
+msgid "Not enough SMS credits: %d needed, but you have only %d."
+msgstr ""
+
+#, python-format
+msgid "SMS sent! (%d credits used up, %d remaining)"
+msgstr ""
+
 msgid "month"
 msgstr ""
 
@@ -230,6 +270,10 @@ msgid "3 months"
 msgstr ""
 
 msgid "6 months"
+msgstr ""
+
+#, python-format
+msgid "Purchased %s months for private file area."
 msgstr ""
 
 msgid "Please enter your password to register."
@@ -445,6 +489,12 @@ msgstr ""
 msgid "Your university information has been updated."
 msgstr ""
 
+msgid "Your phone number has been updated."
+msgstr ""
+
+msgid "Your phone number has been confirmed."
+msgstr ""
+
 msgid "The element does not exist."
 msgstr ""
 
@@ -458,6 +508,9 @@ msgid "Choose a different short title"
 msgstr ""
 
 msgid "The short title must contain no spaces"
+msgstr ""
+
+msgid "More departments"
 msgstr ""
 
 msgid "Information updated."
@@ -479,6 +532,9 @@ msgstr ""
 msgid "New page"
 msgstr ""
 
+msgid "This user profile is not public"
+msgstr ""
+
 msgid "Confirm the email for Ututi"
 msgstr ""
 
@@ -498,6 +554,10 @@ msgid "To confirm your gadu gadu enter this code in your profile page."
 msgstr ""
 
 msgid "Save"
+msgstr ""
+
+#, python-format
+msgid "Ututi registration code: %s"
 msgstr ""
 
 msgid "Invalid password"
@@ -644,27 +704,11 @@ msgid "A new folder '%(folder_title)s' for a group %(link_to_group)s was uploade
 msgstr ""
 
 #, python-format
-msgid "%(link_to_context)s > %(link_to_file)s (new) "
-msgstr ""
-
-#, python-format
-msgid "%(link_to_file)s (new)"
-msgstr ""
-
-#, python-format
 msgid "New subject %(link_to_subject)s was created"
 msgstr ""
 
 #, python-format
-msgid "%(link_to_context)s (new subject)"
-msgstr ""
-
-#, python-format
 msgid "Subject %(link_to_subject)s was modified"
-msgstr ""
-
-#, python-format
-msgid "%(link_to_context)s (subject changed)"
 msgstr ""
 
 #, python-format
@@ -678,27 +722,15 @@ msgid "New forum post %(link_to_message)s posted on %(link_to_group)s forums"
 msgstr ""
 
 #, python-format
+msgid "%(link_to_author)s sent an SMS: <em>%(text)s</em>"
+msgstr ""
+
+#, python-format
 msgid "Member %(link_to_user)s joined the group %(link_to_group)s"
 msgstr ""
 
 #, python-format
-msgid "%(link_to_context)s > %(link_to_user)s (joined)"
-msgstr ""
-
-#, python-format
-msgid "%(link_to_user)s (joined)"
-msgstr ""
-
-#, python-format
 msgid "Member %(link_to_user)s left the group %(link_to_group)s"
-msgstr ""
-
-#, python-format
-msgid "%(link_to_context)s > %(link_to_user)s (left)"
-msgstr ""
-
-#, python-format
-msgid "%(link_to_user)s (left)"
 msgstr ""
 
 #, python-format
@@ -1190,6 +1222,75 @@ msgid "Post"
 msgstr ""
 
 msgid "Sending..."
+msgstr ""
+
+msgid "SMS messages"
+msgstr ""
+
+#, python-format
+msgid "found %(count)s message"
+msgid_plural "found %(count)s messages"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Sender"
+msgstr ""
+
+msgid "Recipient"
+msgstr ""
+
+msgid "Created"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Last send"
+msgstr ""
+
+msgid "Not yet sent"
+msgstr ""
+
+msgid "delivered"
+msgstr ""
+
+msgid "delivery failure"
+msgstr ""
+
+msgid "buffered"
+msgstr ""
+
+msgid "smsc submit"
+msgstr ""
+
+msgid "smsc reject"
+msgstr ""
+
+msgid "Message sent"
+msgstr ""
+
+msgid "SMSC login problem"
+msgstr ""
+
+msgid "SMSC error"
+msgstr ""
+
+msgid "Country not allowed"
+msgstr ""
+
+msgid "Missing params"
+msgstr ""
+
+msgid "Operator not allowed"
+msgstr ""
+
+msgid "IP not allowed"
+msgstr ""
+
+msgid "Send"
+msgstr ""
+
+msgid "Number"
 msgstr ""
 
 #, python-format
@@ -1829,9 +1930,6 @@ msgstr ""
 msgid "Last seen"
 msgstr ""
 
-msgid "Status"
-msgstr ""
-
 msgid "Delete group"
 msgstr ""
 
@@ -1934,6 +2032,48 @@ msgstr ""
 msgid "%d Lt"
 msgstr ""
 
+msgid "You can also pay for group space by SMS."
+msgstr ""
+
+#, python-format
+msgid ""
+"First, get some credits by sending an SMS "
+"\"<strong>TXT&nbsp;%(sms_code2)s&nbsp;%(group_id)s</strong>\" (2 Lt) or "
+"\"<strong>TXT&nbsp;%(sms_code10)s&nbsp;%(group_id)s</strong>\" (10 Lt) to the"
+" number 1337."
+msgstr ""
+
+msgid "1 month costs 10 credits, 3 months cost 20 credits, 6 months cost 30 credits."
+msgstr ""
+
+#, python-format
+msgid "You have <strong>%d</strong> credits."
+msgstr ""
+
+#, python-format
+msgid "Your private file area is available until <strong>%s</strong>."
+msgstr ""
+
+msgid "You need more credits to buy group space."
+msgstr ""
+
+msgid "Purchase 1 month for 10 credits"
+msgstr ""
+
+msgid "Purchase 3 months for 20 credits"
+msgstr ""
+
+msgid "Purchase 6 months for 30 credits"
+msgstr ""
+
+msgid ""
+"Only admins can spend credits to purchase space. Ask your group admin once "
+"there are enough credits in your account."
+msgstr ""
+
+msgid "Gimme 5 credits!"
+msgstr ""
+
 msgid ""
 "The amount of group's private files is limited to 200 Mb. This is so because "
 "Ututi encourages users to store their files in publicly accessible subjects "
@@ -1963,6 +2103,9 @@ msgid "Personal information"
 msgstr ""
 
 msgid "1. Personal information"
+msgstr ""
+
+msgid "Please check that your personal information is correct."
 msgstr ""
 
 msgid "Email address:"
@@ -2035,12 +2178,6 @@ msgstr ""
 msgid "department list"
 msgstr ""
 
-#, python-format
-msgid "Show the other %(count)s department"
-msgid_plural "Show the other %(count)s departments"
-msgstr[0] ""
-msgstr[1] ""
-
 msgid "Search in the university"
 msgstr ""
 
@@ -2051,6 +2188,12 @@ msgid "No messages yet."
 msgstr ""
 
 msgid "Message to the group"
+msgstr ""
+
+msgid "Start"
+msgstr ""
+
+msgid "What's new?"
 msgstr ""
 
 #, python-format
@@ -2212,6 +2355,87 @@ msgstr ""
 msgid "Group's members"
 msgstr ""
 
+msgid "Send SMS message to group"
+msgstr ""
+
+msgid "Message text:"
+msgstr ""
+
+msgid "No one in this group has confirmed their phone numbers."
+msgstr ""
+
+msgid "recipients"
+msgstr ""
+
+msgid "Cost:"
+msgstr ""
+
+msgid "SMS credits"
+msgstr ""
+
+msgid ""
+"One SMS credits allows you to send one SMS message to a single recipient. "
+"When sending a message to a group, one credit is charged for every recipient."
+msgstr ""
+
+msgid "Credits in your personal account:"
+msgstr ""
+
+msgid "Purchase credits"
+msgstr ""
+
+msgid ""
+"SMS credits can be used to send SMS messages to members of a group. There are"
+" two ways to purchase SMS credits:"
+msgstr ""
+
+msgid "SMS message"
+msgstr ""
+
+msgid ""
+"Send an SMS message to number <span style=\"font-size: 14px\">1337</span> "
+"with the following content:"
+msgstr ""
+
+msgid ""
+"The SMS costs <strong>5 Lt</strong> and <strong>50 credits</strong> will be "
+"added to your account (one credit is one SMS to a single person)."
+msgstr ""
+
+msgid "E-banking"
+msgstr ""
+
+msgid "If you pay by bank, <strong>a large discount applies</strong>."
+msgstr ""
+
+msgid "5 Lt"
+msgstr ""
+
+msgid "credits"
+msgstr ""
+
+msgid "10 Lt"
+msgstr ""
+
+msgid "20 Lt"
+msgstr ""
+
+msgid "Purchase SMS credits"
+msgstr ""
+
+msgid "You need to buy credits to be able to send SMS messages to the group."
+msgstr ""
+
+#, python-format
+msgid "You need to confirm your phone in your <a href=\"%s\">profile</a>."
+msgstr ""
+
+#, python-format
+msgid ""
+"Send an SMS to number 1337 with the content \"TXT&nbsp;%(sms_code)s\" (price:"
+" 10 Lt) to buy 100 credits."
+msgstr ""
+
 msgid "Everywhere"
 msgstr ""
 
@@ -2335,6 +2559,9 @@ msgstr ""
 msgid "Files uploaded:"
 msgstr ""
 
+msgid "Files downloaded:"
+msgstr ""
+
 msgid "create new subject"
 msgstr ""
 
@@ -2376,12 +2603,6 @@ msgstr ""
 msgid "Read our blog"
 msgstr ""
 
-msgid "Start"
-msgstr ""
-
-msgid "What's new?"
-msgstr ""
-
 msgid "Profile settings"
 msgstr ""
 
@@ -2392,6 +2613,9 @@ msgid "Address of your website or blog"
 msgstr ""
 
 msgid "About yourself"
+msgstr ""
+
+msgid "Show my profile to unregistered users and search engines"
 msgstr ""
 
 msgid "Personal logo"
@@ -2423,6 +2647,12 @@ msgid "number is confirmed"
 msgstr ""
 
 msgid "Receive news into gg"
+msgstr ""
+
+msgid "Mobile phone number"
+msgstr ""
+
+msgid "Please enter the code that you should have received by SMS."
 msgstr ""
 
 msgid "get confirmation email"
@@ -2463,9 +2693,6 @@ msgstr ""
 msgid "Create your group!"
 msgstr ""
 
-msgid "Your university information has been updated. Thank you."
-msgstr ""
-
 msgid "Go to my department"
 msgstr ""
 
@@ -2473,6 +2700,38 @@ msgid "Tell us where you are studying"
 msgstr ""
 
 msgid "save"
+msgstr ""
+
+msgid "Please enter a university."
+msgstr ""
+
+msgid "What's your phone number?"
+msgstr ""
+
+msgid "Mobile phone number: "
+msgstr ""
+
+msgid "Please enter a phone number."
+msgstr ""
+
+msgid "Please confirm your phone number"
+msgstr ""
+
+msgid ""
+"Enter the confirmation code that you received by SMS to prove that this "
+"number belongs to you."
+msgstr ""
+
+msgid "Confirmation code: "
+msgstr ""
+
+msgid "Please enter a confirmation key."
+msgstr ""
+
+msgid "Invalid confirmation key."
+msgstr ""
+
+msgid "Your phone has been confirmed. Thank you."
 msgstr ""
 
 msgid "create group"
@@ -2672,16 +2931,13 @@ msgstr ""
 msgid "unlimited"
 msgstr ""
 
-msgid "upload file to..."
-msgstr ""
-
-msgid "Increase file area limits"
-msgstr ""
-
 msgid "Increase limits"
 msgstr ""
 
 msgid "Upload file"
+msgstr ""
+
+msgid "upload file to..."
 msgstr ""
 
 msgid "New folder:"
@@ -2714,6 +2970,12 @@ msgstr ""
 msgid ""
 "Your <strong>gadu gadu number</strong> is not confirmed! Please <a "
 "href=\"%s\">confirm</a> it by entering the code sent to you."
+msgstr ""
+
+#, python-format
+msgid ""
+"Your phone is not confirmed! Please <a href=\"%s\">confirm</a> it by entering"
+" the code sent to you."
 msgstr ""
 
 #, python-format

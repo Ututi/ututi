@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-07-15 15:33+0300\n"
+"PO-Revision-Date: 2010-07-30 10:38+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -38,6 +38,38 @@ msgstr "Failai"
 
 msgid "You have no right to download this file."
 msgstr "Deja, Tu neturi teisės atsisiųsti šio failo."
+
+#, python-format
+msgid "Your phone number (+%s) is not registered in Ututi."
+msgstr ""
+
+#, python-format
+msgid "You have purchased 100 SMS messages for 10 Lt; now you have %d messages."
+msgstr ""
+
+#, python-format
+msgid "Invalid group: %s"
+msgstr ""
+
+#, python-format
+msgid "Added %d credits to group space account; now there are %d."
+msgstr ""
+
+#, python-format
+msgid "Invalid group message: %s"
+msgstr ""
+
+#, python-format
+msgid "The phone number %s is not associated with a Ututi user"
+msgstr ""
+
+#, python-format
+msgid "More than %d recipients, cannot send message."
+msgstr ""
+
+#, python-format
+msgid "SMS message sent to group %s."
+msgstr ""
 
 msgid "Community page"
 msgstr "Bendruomenės puslapis"
@@ -225,6 +257,14 @@ msgstr "Negalite ištrinti grupės, kol joje yra narių!"
 msgid "Group '%(group_title)s' has been deleted!"
 msgstr "Grupė '%(group_title)s' buvo ištrinta."
 
+#, python-format
+msgid "Not enough SMS credits: %d needed, but you have only %d."
+msgstr ""
+
+#, python-format
+msgid "SMS sent! (%d credits used up, %d remaining)"
+msgstr ""
+
 msgid "month"
 msgstr "mėnuo"
 
@@ -233,6 +273,10 @@ msgstr "3 mėnesiai"
 
 msgid "6 months"
 msgstr "6 mėnesiai"
+
+#, python-format
+msgid "Purchased %s months for private file area."
+msgstr ""
 
 msgid "Please enter your password to register."
 msgstr "Įvesk slaptažodį."
@@ -473,6 +517,12 @@ msgstr "Nepavyko patvirtinti adreso: neteisingas patvirtinimo raktas."
 msgid "Your university information has been updated."
 msgstr "Tavo universiteto informacija atnaujinta."
 
+msgid "Your phone number has been updated."
+msgstr ""
+
+msgid "Your phone number has been confirmed."
+msgstr ""
+
 msgid "The element does not exist."
 msgstr "Šis elementas neegzistuoja."
 
@@ -487,6 +537,9 @@ msgstr "Sugalvok kitą trumpinį"
 
 msgid "The short title must contain no spaces"
 msgstr "Santrumpoje negali būti tarpų"
+
+msgid "More departments"
+msgstr ""
 
 msgid "Information updated."
 msgstr "Informacija atnaujinta."
@@ -506,6 +559,9 @@ msgstr "Negali trinti šio katalogo."
 
 msgid "New page"
 msgstr "Naujas puslapis"
+
+msgid "This user profile is not public"
+msgstr ""
 
 msgid "Confirm the email for Ututi"
 msgstr "Patvirtink  el. pašto adresą"
@@ -529,6 +585,10 @@ msgstr ""
 
 msgid "Save"
 msgstr "Saugoti"
+
+#, python-format
+msgid "Ututi registration code: %s"
+msgstr ""
 
 msgid "Invalid password"
 msgstr "Netinkamas slaptažodis"
@@ -684,28 +744,12 @@ msgstr ""
 "failuose."
 
 #, python-format
-msgid "%(link_to_context)s > %(link_to_file)s (new) "
-msgstr "%(link_to_context)s > %(link_to_file)s (naujas) "
-
-#, python-format
-msgid "%(link_to_file)s (new)"
-msgstr "%(link_to_file)s (naujas)"
-
-#, python-format
 msgid "New subject %(link_to_subject)s was created"
 msgstr "Sukurtas naujas dalykas %(link_to_subject)s"
 
 #, python-format
-msgid "%(link_to_context)s (new subject)"
-msgstr "%(link_to_context)s (naujas dalykas)"
-
-#, python-format
 msgid "Subject %(link_to_subject)s was modified"
 msgstr "Dalykas %(link_to_subject)s buvo redaguotas."
-
-#, python-format
-msgid "%(link_to_context)s (subject changed)"
-msgstr "%(link_to_context)s (dalykas pasikeitė)"
 
 #, python-format
 msgid ""
@@ -718,28 +762,16 @@ msgid "New forum post %(link_to_message)s posted on %(link_to_group)s forums"
 msgstr "Naujas forumo įrašas %(link_to_message)s grupėje %(link_to_group)s"
 
 #, python-format
+msgid "%(link_to_author)s sent an SMS: <em>%(text)s</em>"
+msgstr ""
+
+#, python-format
 msgid "Member %(link_to_user)s joined the group %(link_to_group)s"
 msgstr "%(link_to_user)s prisijungė prie grupės %(link_to_group)s."
 
 #, python-format
-msgid "%(link_to_context)s > %(link_to_user)s (joined)"
-msgstr "%(link_to_context)s > %(link_to_user)s (prisijungė)"
-
-#, python-format
-msgid "%(link_to_user)s (joined)"
-msgstr "%(link_to_user)s (prisijungė)"
-
-#, python-format
 msgid "Member %(link_to_user)s left the group %(link_to_group)s"
 msgstr " %(link_to_user)s išėjo iš grupės %(link_to_group)s."
-
-#, python-format
-msgid "%(link_to_context)s > %(link_to_user)s (left)"
-msgstr "%(link_to_context)s > %(link_to_user)s (paliko)"
-
-#, python-format
-msgid "%(link_to_user)s (left)"
-msgstr "%(link_to_user)s (paliko)"
 
 #, python-format
 msgid "Group %(link_to_group)s started watching subject %(link_to_subject)s"
@@ -914,13 +946,13 @@ msgid "go find something"
 msgstr "ieškoti ko nors kito"
 
 msgid "Log in or register using your Google or Facebook account"
-msgstr ""
+msgstr "Prisijunk arba registruokis per savo Google ar Facebook paskyrą"
 
 msgid "or"
 msgstr "arba"
 
 msgid "Log in directly to Ututi"
-msgstr ""
+msgstr "Junkis tiesiai į Ututi"
 
 msgid "Your email address"
 msgstr "El. pašto adresas"
@@ -932,13 +964,13 @@ msgid "Forgotten password?"
 msgstr "Pamiršote slaptažodį?"
 
 msgid "First time here?"
-msgstr ""
+msgstr "Pirmą kartą čia?"
 
 msgid "Register!"
-msgstr ""
+msgstr "Registruokis!"
 
 msgid "Register as a new Ututi user"
-msgstr ""
+msgstr "Registruokis kaip naujas Ututi narys"
 
 msgid "Student information online"
 msgstr "Informacija studentams internete"
@@ -959,13 +991,13 @@ msgid "User menu"
 msgstr "Naudotojo meniu"
 
 msgid "feedback"
-msgstr ""
+msgstr "atsiliepimai"
 
 msgid "Connect using"
 msgstr "Jungtis su"
 
 msgid "Log in using Google"
-msgstr ""
+msgstr "Prisijunk naudodamas Google"
 
 msgid "Join!"
 msgstr "Prisijunk"
@@ -1004,6 +1036,8 @@ msgid ""
 "This is a testing version - this is just a copy of the information! "
 "Changes you make will not be persisted!"
 msgstr ""
+"Tai yra bandomojo versija, naudojanti duomenų kopiją! Pakeitimai nebus "
+"išsaugomi!"
 
 msgid "ututi_link"
 msgstr "http://ututi.lt"
@@ -1024,7 +1058,7 @@ msgid "Terms of use"
 msgstr "Naudojimosi sistema taisyklės"
 
 msgid "Feedback"
-msgstr ""
+msgstr "Atsiliepimai"
 
 msgid "Loading..."
 msgstr "Įkeliama..."
@@ -1299,6 +1333,76 @@ msgstr "Rašyti pranešimą"
 msgid "Sending..."
 msgstr "Siunčiama..."
 
+msgid "SMS messages"
+msgstr "SMS žinutės"
+
+#, python-format
+msgid "found %(count)s message"
+msgid_plural "found %(count)s messages"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "Sender"
+msgstr "Siuntėjas"
+
+msgid "Recipient"
+msgstr "Gavėjas"
+
+msgid "Created"
+msgstr "Sukurta"
+
+msgid "Status"
+msgstr "Statusas"
+
+msgid "Last send"
+msgstr "Paskutinis siuntimas"
+
+msgid "Not yet sent"
+msgstr "Dar neišsiųsta"
+
+msgid "delivered"
+msgstr "pristatyta"
+
+msgid "delivery failure"
+msgstr "pristatymo klaida"
+
+msgid "buffered"
+msgstr "užlaikyta"
+
+msgid "smsc submit"
+msgstr "smsc submit"
+
+msgid "smsc reject"
+msgstr "smsc reject"
+
+msgid "Message sent"
+msgstr "Žinutė išsiųsta"
+
+msgid "SMSC login problem"
+msgstr "SMSC prisijungimo problema"
+
+msgid "SMSC error"
+msgstr "SMSC klaida"
+
+msgid "Country not allowed"
+msgstr "Šalis neleidžiama"
+
+msgid "Missing params"
+msgstr "Trūksta parametrų"
+
+msgid "Operator not allowed"
+msgstr "Operatorius neleidžiamas"
+
+msgid "IP not allowed"
+msgstr "IP neleidžiamas"
+
+msgid "Send"
+msgstr "Siųsti"
+
+msgid "Number"
+msgstr "Numeris"
+
 #, python-format
 msgid "found %(count)s subject"
 msgid_plural "found %(count)s subjects"
@@ -1353,7 +1457,7 @@ msgid "ututi_video_id"
 msgstr "stV09QR0JIR1xZQVhbWltYU1NQ"
 
 msgid "What can you find here?"
-msgstr ""
+msgstr "Ką čia gali rasti?"
 
 #, python-format
 msgid ""
@@ -1967,19 +2071,21 @@ msgstr "Grupės nariai"
 
 #, python-format
 msgid "Invite friends to %s"
-msgstr ""
+msgstr "Pakviesk draugus į %s"
 
 #, python-format
 msgid ""
 "Join our group <a href=\"%s\">%s</a> in Ututi, a system for exchanging "
 "study materials and information."
 msgstr ""
+"Prisijunk prie mūsų grupės <a href=\"%s\">%s</a> Ututi sistemoje,\n"
+"skirtoje studijų medžiagos ir informacijos mainams."
 
 msgid "Join group"
-msgstr ""
+msgstr "Prisijunk prie grupės"
 
 msgid "Invite your friends to Ututi!"
-msgstr ""
+msgstr "Pakviesk savo draugus į Ututi!"
 
 msgid "Invite your classmates"
 msgstr "Pakviesti grupės draugus"
@@ -1991,7 +2097,7 @@ msgid "Invite"
 msgstr "Pakviesti"
 
 msgid "Invite your classmates using Facebook"
-msgstr ""
+msgstr "Pakviesk grupiokus naudodamas Facebook"
 
 msgid "Invited users (invitations not accepted yet)"
 msgstr "Pakviesti naudotojai (dar nepriėmę pakvietimų)"
@@ -2017,9 +2123,6 @@ msgstr "Vardas"
 msgid "Last seen"
 msgstr "Paskutinį sykį matytas"
 
-msgid "Status"
-msgstr "Statusas"
-
 msgid "Delete group"
 msgstr "Ištrinti grupę"
 
@@ -2027,7 +2130,7 @@ msgid "Add group members"
 msgstr "Pridėti grupės narius"
 
 msgid "Invite using Facebook"
-msgstr ""
+msgstr "Pakviesti per Facebook"
 
 msgid "The group's page is empty. Enter your description."
 msgstr "Grupės puslapis vis dar tuščias - brūkštelk porą žodžių :)"
@@ -2135,6 +2238,50 @@ msgstr "Sumokėjus Jūsų grupės galės kelti <strong>neribota failų kiekį</s
 msgid "%d Lt"
 msgstr "%d Lt"
 
+msgid "You can also pay for group space by SMS."
+msgstr "Už grupės failų talpyklą galima sumokėti ir SMS žinute."
+
+#, python-format
+msgid ""
+"First, get some credits by sending an SMS "
+"\"<strong>TXT&nbsp;%(sms_code2)s&nbsp;%(group_id)s</strong>\" (2 Lt) or "
+"\"<strong>TXT&nbsp;%(sms_code10)s&nbsp;%(group_id)s</strong>\" (10 Lt) to"
+" the number 1337."
+msgstr ""
+
+msgid ""
+"1 month costs 10 credits, 3 months cost 20 credits, 6 months cost 30 "
+"credits."
+msgstr ""
+
+#, python-format
+msgid "You have <strong>%d</strong> credits."
+msgstr "Tu turi <strong>%d</strong> kreditų."
+
+#, python-format
+msgid "Your private file area is available until <strong>%s</strong>."
+msgstr "Privati failų talpykla apmokėta iki <strong>%s</strong>."
+
+msgid "You need more credits to buy group space."
+msgstr ""
+
+msgid "Purchase 1 month for 10 credits"
+msgstr ""
+
+msgid "Purchase 3 months for 20 credits"
+msgstr ""
+
+msgid "Purchase 6 months for 30 credits"
+msgstr ""
+
+msgid ""
+"Only admins can spend credits to purchase space. Ask your group admin "
+"once there are enough credits in your account."
+msgstr ""
+
+msgid "Gimme 5 credits!"
+msgstr ""
+
 msgid ""
 "The amount of group's private files is limited to 200 Mb. This is so "
 "because Ututi encourages users to store their files in publicly "
@@ -2170,6 +2317,9 @@ msgid "Personal information"
 msgstr "Asmeninė informacija"
 
 msgid "1. Personal information"
+msgstr ""
+
+msgid "Please check that your personal information is correct."
 msgstr ""
 
 msgid "Email address:"
@@ -2243,13 +2393,6 @@ msgstr "Logotipas"
 msgid "department list"
 msgstr "fakultetų sąrašas"
 
-#, python-format
-msgid "Show the other %(count)s department"
-msgid_plural "Show the other %(count)s departments"
-msgstr[0] "Rodyti kitą %(count)s fakultetą"
-msgstr[1] "Rodyti kitus %(count)s fakultetus"
-msgstr[2] "Rodyti kitus %(count)s fakultetų"
-
 msgid "Search in the university"
 msgstr "Paieška universitete"
 
@@ -2261,6 +2404,12 @@ msgstr "Žinučių kol kas nėra - parašyk bent vieną :)"
 
 msgid "Message to the group"
 msgstr "Laiškas grupei"
+
+msgid "Start"
+msgstr "Pradėti"
+
+msgid "What's new?"
+msgstr "Kas naujo?"
 
 #, python-format
 msgid "%(count)s message"
@@ -2429,6 +2578,88 @@ msgstr "Pakviesk grupiokus į Ututi!"
 msgid "Group's members"
 msgstr "Grupės nariai"
 
+msgid "Send SMS message to group"
+msgstr ""
+
+msgid "Message text:"
+msgstr ""
+
+msgid "No one in this group has confirmed their phone numbers."
+msgstr ""
+
+msgid "recipients"
+msgstr ""
+
+msgid "Cost:"
+msgstr ""
+
+msgid "SMS credits"
+msgstr ""
+
+msgid ""
+"One SMS credits allows you to send one SMS message to a single recipient."
+" When sending a message to a group, one credit is charged for every "
+"recipient."
+msgstr ""
+
+msgid "Credits in your personal account:"
+msgstr ""
+
+msgid "Purchase credits"
+msgstr ""
+
+msgid ""
+"SMS credits can be used to send SMS messages to members of a group. There"
+" are two ways to purchase SMS credits:"
+msgstr ""
+
+msgid "SMS message"
+msgstr ""
+
+msgid ""
+"Send an SMS message to number <span style=\"font-size: 14px\">1337</span>"
+" with the following content:"
+msgstr ""
+
+msgid ""
+"The SMS costs <strong>5 Lt</strong> and <strong>50 credits</strong> will "
+"be added to your account (one credit is one SMS to a single person)."
+msgstr ""
+
+msgid "E-banking"
+msgstr ""
+
+msgid "If you pay by bank, <strong>a large discount applies</strong>."
+msgstr ""
+
+msgid "5 Lt"
+msgstr ""
+
+msgid "credits"
+msgstr ""
+
+msgid "10 Lt"
+msgstr ""
+
+msgid "20 Lt"
+msgstr ""
+
+msgid "Purchase SMS credits"
+msgstr ""
+
+msgid "You need to buy credits to be able to send SMS messages to the group."
+msgstr ""
+
+#, python-format
+msgid "You need to confirm your phone in your <a href=\"%s\">profile</a>."
+msgstr ""
+
+#, python-format
+msgid ""
+"Send an SMS to number 1337 with the content \"TXT&nbsp;%(sms_code)s\" "
+"(price: 10 Lt) to buy 100 credits."
+msgstr ""
+
 msgid "Everywhere"
 msgstr "visur"
 
@@ -2561,6 +2792,9 @@ msgstr "Mano profilis"
 msgid "Files uploaded:"
 msgstr "Įkelta failų:"
 
+msgid "Files downloaded:"
+msgstr ""
+
 msgid "create new subject"
 msgstr "kurti naują dalyką"
 
@@ -2606,12 +2840,6 @@ msgstr "http://blog.ututi.lt"
 msgid "Read our blog"
 msgstr "Mūsų blogas"
 
-msgid "Start"
-msgstr "Pradėti"
-
-msgid "What's new?"
-msgstr "Kas naujo?"
-
 msgid "Profile settings"
 msgstr "Profilio nustatymai"
 
@@ -2623,6 +2851,9 @@ msgstr "Nuosavo puslapio arba blog'o adresas"
 
 msgid "About yourself"
 msgstr "Šiek tiek informacijos apie save"
+
+msgid "Show my profile to unregistered users and search engines"
+msgstr ""
 
 msgid "Personal logo"
 msgstr "Tavo nuotrauka"
@@ -2658,6 +2889,12 @@ msgstr "numeris patvirtintas"
 
 msgid "Receive news into gg"
 msgstr "Gauti naujienas į GG"
+
+msgid "Mobile phone number"
+msgstr ""
+
+msgid "Please enter the code that you should have received by SMS."
+msgstr ""
 
 msgid "get confirmation email"
 msgstr "gauti patvirtinimo el. laišką"
@@ -2697,9 +2934,6 @@ msgstr "Nėra grupės, kurios ieškojai?"
 msgid "Create your group!"
 msgstr "Sukurti savo grupę"
 
-msgid "Your university information has been updated. Thank you."
-msgstr "Tavo universiteto informacija atnaujinta. Ačiū."
-
 msgid "Go to my department"
 msgstr "Eiti į mano fakultetą"
 
@@ -2708,6 +2942,38 @@ msgstr "Pasakyk, kur studijuoji"
 
 msgid "save"
 msgstr "saugoti"
+
+msgid "Please enter a university."
+msgstr ""
+
+msgid "What's your phone number?"
+msgstr ""
+
+msgid "Mobile phone number: "
+msgstr ""
+
+msgid "Please enter a phone number."
+msgstr ""
+
+msgid "Please confirm your phone number"
+msgstr ""
+
+msgid ""
+"Enter the confirmation code that you received by SMS to prove that this "
+"number belongs to you."
+msgstr ""
+
+msgid "Confirmation code: "
+msgstr ""
+
+msgid "Please enter a confirmation key."
+msgstr ""
+
+msgid "Invalid confirmation key."
+msgstr ""
+
+msgid "Your phone has been confirmed. Thank you."
+msgstr ""
 
 msgid "create group"
 msgstr "kurti grupę"
@@ -2922,17 +3188,14 @@ msgstr ""
 msgid "unlimited"
 msgstr "neribota"
 
-msgid "upload file to..."
-msgstr "įkelti failą į..."
-
-msgid "Increase file area limits"
-msgstr "Padidinti failų srities limitą"
-
 msgid "Increase limits"
 msgstr "Padidinti limitą"
 
 msgid "Upload file"
 msgstr "Įkelti failą"
+
+msgid "upload file to..."
+msgstr "įkelti failą į..."
 
 msgid "New folder:"
 msgstr "Kurti aplanką"
@@ -2969,6 +3232,12 @@ msgstr "Negavai?"
 msgid ""
 "Your <strong>gadu gadu number</strong> is not confirmed! Please <a "
 "href=\"%s\">confirm</a> it by entering the code sent to you."
+msgstr ""
+
+#, python-format
+msgid ""
+"Your phone is not confirmed! Please <a href=\"%s\">confirm</a> it by "
+"entering the code sent to you."
 msgstr ""
 
 #, python-format
