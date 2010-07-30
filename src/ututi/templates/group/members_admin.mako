@@ -124,8 +124,8 @@ ${group_members_invite_section()}
 
   <table class="group-members">
     <tr>
-      <th>${_('Name')}</th>
-      <th>${_('Email')}</th>
+      <th>${_('User')}</th>
+      <th>${_('Phone')}</th>
       <th>${_('Last seen')}</th>
       <th>${_('Status')}</th>
     </tr>
@@ -135,9 +135,14 @@ ${group_members_invite_section()}
         <a href="${member['user'].url()}" title="${member['title']}">
           ${member['title']}
         </a>
+        <div>
+          ${member['user'].emails[0].email}
+        </div>
       </td>
       <td>
-        ${member['user'].emails[0].email}
+        % if member['user'].phone_number:
+          ${member['user'].phone_number if member['user'].phone_confirmed else _('unconfirmed')}
+        % endif
       </td>
       <td>
         ${member['last_seen']}
