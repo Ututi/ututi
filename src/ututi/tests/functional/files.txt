@@ -25,6 +25,18 @@ Having uploaded the file, we should be presented with a list of all files presen
     >>> browser.contents
     'The contents of the file.'
 
+The download count of files is shown in the user's home portlet:
+    >>> browser.open('http://localhost/home')
+    >>> browser.printQuery('//div[@class="file_stats"]/span/text()')
+    1
+    1 (25.0 B)
+
+.. and in his public profile:
+    >>> browser.open('http://localhost/user/1')
+    >>> browser.printQuery('//div[@class="file_stats"]/span/text()')
+    1
+    1 (25.0 B)
+
 After the download of the file, the downloaded files count in the user list should indicate this:
 
     >>> browser.open('http://localhost/admin/users')

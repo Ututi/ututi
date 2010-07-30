@@ -136,7 +136,7 @@ create table files (id int8 references content_items(id),
 
 create index md5 on files (md5);;
 
-create table file_downloads (file_id int8 references content_items(id) on delete cascade,
+create table file_downloads (file_id int8 references files(id) on delete cascade,
        user_id int8 references users(id),
        range_start int8 default null,
        range_end int8 default null,

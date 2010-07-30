@@ -29,7 +29,7 @@ from sqlalchemy import orm, Column, Integer, Sequence, Table
 from sqlalchemy.types import Unicode
 from sqlalchemy.exc import DatabaseError, SAWarning
 from sqlalchemy.orm.exc import NoResultFound
-from sqlalchemy.orm import relation, backref, deferred
+from sqlalchemy.orm import relation, backref, deferred, eagerload
 from sqlalchemy import func
 from sqlalchemy.sql.expression import desc
 from sqlalchemy.sql.expression import and_, or_
@@ -297,7 +297,7 @@ def setup_orm(engine):
     orm.mapper(FileDownload,
                file_downloads_table,
                properties = {'user' : relation(User, backref='downloads'),
-                             'file' : relation(File)})
+                             'file' : relation(File, lazy=False)})
 
     global emails_table
     emails_table = Table("emails", meta.metadata,
@@ -901,6 +901,24 @@ class User(object):
 
     def download(self, file, range_start=None, range_end=None):
         self.downloads.append(FileDownload(self, file, range_start, range_end))
+
+    def download_count(self):
+        download_count = meta.Session.query(FileDownload)\
+            .filter(FileDownload.user==self)\
+            .filter(FileDownload.range_start==None)\
+            .filter(FileDownload.range_end==None).count()
+        return download_count
+
+    def download_size(self):
+        download_size = meta.Session.query(func.sum(File.filesize))\
+            .filter(FileDownload.file_id==File.id)\
+            .filter(FileDownload.user==self)\
+            .filter(FileDownload.range_start==None)\
+            .filter(FileDownload.range_end==None)\
+            .scalar()
+        if not download_size:
+            return 0
+        return int(download_size)
 
     @property
     def isConfirmed(self):
