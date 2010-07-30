@@ -303,7 +303,7 @@ for the service.
     >>> browser.url
     'http://localhost/group/moderators/pay'
 
-    >>> browser.getControl('10 Lt').click()
+    >>> browser.getControl('10 Lt', index=0).click()
     >>> browser.url
     'http://localhost/pay'
 
