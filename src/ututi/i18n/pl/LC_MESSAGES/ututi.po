@@ -3158,7 +3158,7 @@ msgid "restore file"
 msgstr "przywróć plik"
 
 msgid "Here"
-msgstr "bieżący folder"
+msgstr "Podstawowy folder"
 
 msgid "There are no files here, this folder is empty!"
 msgstr "Brak dokumentów. Folder jest pusty."
@@ -3210,7 +3210,7 @@ msgstr ""
 "miejsca dla prywatnych plików grupy."
 
 msgid "Trash"
-msgstr "Chłam"
+msgstr "Śmietnik"
 
 msgid "There are no deleted files."
 msgstr "Nie odnaleziono żadnego pliku."

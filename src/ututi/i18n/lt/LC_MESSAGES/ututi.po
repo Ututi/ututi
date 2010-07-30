@@ -3160,7 +3160,7 @@ msgid "restore file"
 msgstr "atstatyti failą"
 
 msgid "Here"
-msgstr "tiesiog čia"
+msgstr "Pagrindinis katalogas"
 
 msgid "There are no files here, this folder is empty!"
 msgstr "Čia failų nėra, aplankas tuščias!"
