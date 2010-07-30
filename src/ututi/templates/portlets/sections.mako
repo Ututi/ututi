@@ -31,9 +31,6 @@
   %if not 'info' in exclude:
     ${group_info_portlet()}
   %endif
-  %if not 'sms' in exclude and c.group.is_member(c.user):
-    ${group_sms_portlet()}
-  %endif
   %if not c.group.forum_is_public:
     %if not 'files' in exclude and c.group.has_file_area:
     ${quick_file_upload_portlet([c.group] + c.group.watched_subjects, label='group_files')}
@@ -44,8 +41,8 @@
     %if not 'members' in exclude:
     ${group_invite_member_portlet()}
     %endif
-    %if not 'subjects' in exclude and c.group.wants_to_watch_subjects:
-    ${group_watched_subjects_portlet()}
+    %if not 'sms' in exclude and c.group.is_member(c.user):
+      ${group_sms_portlet()}
     %endif
     ${ututi_prizes_portlet()}
   %else:

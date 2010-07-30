@@ -98,33 +98,6 @@
   </%self:uportlet>
 </%def>
 
-<%def name="group_watched_subjects_portlet(group=None)">
-  <%
-     if group is None:
-         group = c.group
-  %>
-  <%self:uportlet id="subject_portlet">
-    <%def name="header()">
-      <a ${h.trackEvent(c.group, 'subjects', 'portlet_header')} href="${group.url(action='subjects')}" title="${_('All watched subjects')}">${_('Watched subjects')}</a>
-    </%def>
-    %if not group.watched_subjects:
-      ${_('Your group is not watching any subjects!')}
-    %else:
-    <ul id="DalykaiList" class="subjects-list">
-      % for subject in group.watched_subjects[:5]:
-      <li class="grupes-dalykai">
-        <a href="${subject.url()}" title="${subject.title}">${h.ellipsis(subject.title, 35)}</a>
-      </li>
-      % endfor
-    </ul>
-    %endif
-    <div class="secondModuleLayer">
-      <a style="float: right; margin-top: 4px;" class="right_arrow" href="${group.url(action='subjects')}">${_('all subjects')}</a>
-      ${h.button_to(_('choose subjects'), group.url(action='subjects'))}
-    </div>
-  </%self:uportlet>
-</%def>
-
 <%def name="group_forum_post_portlet(group=None)">
   <%
      if group is None:
