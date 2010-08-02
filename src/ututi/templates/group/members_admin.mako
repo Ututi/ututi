@@ -29,11 +29,11 @@ ${group_members_invite_section()}
     <div class="clear"></div>
   </div>
 
-  <table class="group-invitations">
+  <table class="group-invitations" style="width: 100%">
   %for invitation in c.group.invitations:
     %if invitation.active and invitation.email:
       <tr>
-        <td class="date">
+          <td class="date">
           ${h.fmt_dt(invitation.created)}
         </td>
         <td class="email">
@@ -41,17 +41,13 @@ ${group_members_invite_section()}
         </td>
         <td class="actions">
           <form style="display: inline;" method="post" action="${url(controller='group', action='invite_members', id=c.group.group_id)}">
-            <div style="display: inline;">
               <input type="hidden" name="emails" value="${invitation.email}" />
-              <input type="submit" class="text_button" value="${_('Send invitation again')}"/>
-            </div>
+              <input type="submit" class="text_button" value="${_('Send again')}" />
           </form>
 
           <form style="display: inline;" method="post" action="${url(controller='group', id=c.group.group_id, action='cancel_invitation')}">
-            <div style="display: inline;">
               <input type="hidden" name="email" value="${invitation.email}" />
-              <input type="submit" class="text_button" style="color: #888;" value="${_('Cancel invitation')}"/>
-            </div>
+              <input type="submit" class="text_button" style="color: #888;" value="${_('Cancel')}" />
           </form>
         </td>
       </tr>
@@ -80,8 +76,8 @@ ${group_members_invite_section()}
   % for request in c.group.requests:
   <tr>
     <td class="email">
-      <a href="${url(controller='user', action='index', id=request.user.id)}" title="${request.user.fullname}">
-        ${request.user.fullname}
+      <a href="${url(controller='user', action='index', id=request.user.id)}" title="${request.user.fullname}"
+         >${request.user.fullname}
       </a>
       (${request.user.emails[0].email})
     </td>
@@ -129,9 +125,9 @@ ${group_members_invite_section()}
       <th>${_('Last seen')}</th>
       <th>${_('Status')}</th>
     </tr>
-  % for member in c.members:
-    <tr>
-      <td>
+    % for i, member in enumerate(c.members):
+    <tr ${"class='last'" if i == len(c.members)-1 else ""}>
+      <td class="member-info">
         <a href="${member['user'].url()}" title="${member['title']}">
           ${member['title']}
         </a>
@@ -139,15 +135,17 @@ ${group_members_invite_section()}
           ${member['user'].emails[0].email}
         </div>
       </td>
-      <td>
+      <td class="phone">
         % if member['user'].phone_number:
           ${member['user'].phone_number if member['user'].phone_confirmed else _('unconfirmed')}
+        % else:
+          <em>${_('not provided')}</em>
         % endif
       </td>
-      <td>
+      <td class="last-seen">
         ${member['last_seen']}
       </td>
-      <td>
+      <td class="actions">
         <form method="post" action="${c.group.url(action='update_membership')}" class="autosubmit-form" id="update-membership-${member['user'].id}">
           <div>
             <input type="hidden" name="user_id" value="${member['user'].id}"/>

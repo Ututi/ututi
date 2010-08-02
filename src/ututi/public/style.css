@@ -4113,14 +4113,32 @@ div#user-logo-button {
 
 /* members screen */
 
+table.group-invitations,
+table.group-requests,
+table.group-members {
+    width: 100%;
+    padding-left: 0.6em;
+}
+
 table.group-invitations td,
 table.group-requests td {
-  padding: 0.4em;
-  border: none;
+    padding: 0.4em;
+    border: none;
 }
 
 table.group-invitations td.date {
-  color: #888;
+    color: #888;
+    width: 9em;
+}
+
+table.group-invitations td.actions input,
+table.group-requests td.actions input {
+    width: 6em;
+}
+
+table.group-invitations td.actions,
+table.group-requests td.actions {
+    width: 14em;
 }
 
 table.group-members th {
@@ -4131,6 +4149,30 @@ table.group-members td,
 table.group-members th {
   border-bottom: 1px solid #ded8d8;
   padding: 3px 5px;
+}
+
+table.group-members tr.last td {
+  border-bottom: 0;
+}
+
+table.group-members th {
+  text-align: left;
+}
+
+table.group-members td.phone {
+  width: 8em;
+}
+
+table.group-members td.last-seen {
+  width: 11em;
+}
+
+table.group-members td.actions {
+  width: 11em;
+}
+
+table.group-members td.actions select {
+  width: 10em;
 }
 
 /* wiki versions */

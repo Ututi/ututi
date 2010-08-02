@@ -40,12 +40,12 @@ The user should be listed in the invited users table.
 
 The link to send another invitation should send another invitation email.
 
-    >>> browser.getControl('Send invitation again', index=1).click()
+    >>> browser.getControl('Send again', index=1).click()
     >>> len(mail_queue)
     4
 
 In case we change our mind, the group moderator can cancel the invitation.
-    >>> browser.getControl('Cancel invitation', index=0).click()
+    >>> browser.getControl('Cancel', index=0).click()
     >>> browser.printQuery("//table[@class='group-invitations']/tr/td[@class='email']/text()")
     user2@ututi.lt
     user@ututi.lt
