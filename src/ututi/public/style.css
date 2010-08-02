@@ -4116,17 +4116,17 @@ div#user-logo-button {
 
 /* end purchase credits dialog */
 
-#purchase-credits-dialog .description {
+.payment-dialog .description {
     font-size: 14px;
 }
 
-#purchase-credits-dialog .left-column {
+.payment-dialog .left-column {
     width: 270px;
     float: left;
     padding-right: 1em;
 }
 
-#purchase-credits-dialog .title {
+.payment-dialog .title {
     font-size: 16px;
     font-weight: bold;
     color: #666;
@@ -4134,26 +4134,26 @@ div#user-logo-button {
     padding-bottom: 0.5em;
 }
 
-#purchase-credits-dialog .left-column .sms-content {
+.payment-dialog .left-column .sms-content {
     font-size: 14px;
     padding: 0.5em;
 }
 
-#purchase-credits-dialog .right-column {
+.payment-dialog .right-column {
     width: 270px;
     float: left;
     border-left: 1px solid #ded8d8;
     padding-left: 1em
 }
 
-#purchase-credits-dialog .right-column .description {
+.payment-dialog .right-column .description {
     padding-bottom: 10px;
 }
 
-#purchase-credits-dialog .right-column .old-price {
-    text-decoration: line-through:
+.payment-dialog .right-column .old-price {
+    text-decoration: line-through;
 }
-#purchase-credits-dialog .right-column .new-price {
+.payment-dialog .right-column .new-price {
     font-size: 16px:
 }
 

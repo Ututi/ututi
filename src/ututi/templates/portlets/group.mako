@@ -57,8 +57,89 @@
       <span class="verysmall">${h.file_size(group.free_size)}</span>
       ${h.image('/images/details/pbar%d.png' % group.free_size_points, alt=h.file_size(group.size), class_='area_size_points')|n}
       <div style="padding-top: 4px; padding-bottom: 7px" class="bottomLine">
-        ${h.button_to(_('Get more space'), group.url(action='pay'))}
+        <form>
+          ${h.input_submit(_('Get more space'), id='get-space-button')}
+        </form>
       </div>
+
+          ## XXX
+          ${h.javascript_link('/javascript/jquery-ui-1.7.2.custom.min.js')|n}
+          ${h.javascript_link('/javascript/jquery.form.js')|n}
+          ${h.stylesheet_link('/jquery-ui-1.7.3.custom.css')}
+
+          <div id="get-space-dialog" class="payment-dialog" style="display: none">
+              <div class="description">
+
+  ${_("The amount of group's private files is limited to %(limit)s. This is so because Ututi "
+  "encourages users to store their files in publicly accessible subjects where they can "
+  "be shared with all the users. But if you want to keep more than %(limit)s of files, "
+  "you can do this.") % dict(limit=h.file_size(c.group_file_limit))}
+
+              </div>
+              <div style="clear: both"></div>
+
+              <div class="left-column">
+                  <div class="title">
+                      ${_('SMS message')}
+                  </div>
+                  <div>
+                    ${_('Send an SMS message to number <span style="font-size: 14px">1337</span> with the following content:')|n}
+                  </div>
+                  <div class="sms-content">TXT ${c.pylons_config.get('fortumo.group_space_small.code')} ${c.group.group_id}</div>
+                  <div>
+                    ${_('The SMS costs <strong>5 Lt</strong> and will increase your file limit to <strong>5&nbsp;GB</strong> for another month.')|n}
+                  </div>
+                  %if c.group.private_files_lock_date:
+                    <div>${_('Your private file area is limited to 5&nbsp;GB until <strong>%s</strong>.') % c.group.private_files_lock_date.date().isoformat() |n}</div>
+                  %endif
+              </div>
+
+              <div class="right-column">
+                  <div class="title">
+                      ${_('E-banking')}
+                  </div>
+                  <div class="description">
+                      ${_('If you pay by bank, a discount applies.')|n}
+                  </div>
+
+                  <table>
+
+                    %for period, amount, form in c.payments:
+                      <tr>
+                        <td>
+                        <form action="${form.action}" method="POST">
+                          %for key, val in form.fields:
+                            <input type="hidden" name="${key}" value="${val}" />
+                          %endfor
+                          ${h.input_submit(_('%d Lt') % (int(amount) / 100), class_='btnMedium')}
+                        </form>
+                        </td>
+                        <td>
+                          <span class="larger">
+                            - ${period}
+                          </span>
+                        </td>
+                      </tr>
+
+                    %endfor
+
+                  </table>
+
+              </div>
+          </div>
+
+          <script>
+            $('#get-space-button').click(function() {
+                var dlg = $('#get-space-dialog').dialog({
+                    title: '${_('Purchase SMS credits')}',
+                    width: 600
+                });
+                dlg.dialog("open");
+                return false;
+            });
+          </script>
+
+
     </div>
     %endif
     <p class="grupes-aprasymas">
@@ -215,11 +296,12 @@
             </form>
           </div>
 
+          ## XXX
           ${h.javascript_link('/javascript/jquery-ui-1.7.2.custom.min.js')|n}
           ${h.javascript_link('/javascript/jquery.form.js')|n}
           ${h.stylesheet_link('/jquery-ui-1.7.3.custom.css')}
 
-          <div id="purchase-credits-dialog" style="display: none">
+          <div id="purchase-credits-dialog" class="payment-dialog" style="display: none">
               <div class="description">
                 ${_('SMS credits can be used to send SMS messages to members of a group. There are two ways to purchase SMS credits:')}
               </div>
