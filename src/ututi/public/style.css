@@ -4142,7 +4142,7 @@ table.group-requests td.actions {
 }
 
 table.group-members th {
-  color: #888;
+  color: #666;
 }
 
 table.group-members td,
@@ -4157,10 +4157,12 @@ table.group-members tr.last td {
 
 table.group-members th {
   text-align: left;
+  font-size: 11px;
 }
 
 table.group-members td.phone {
   width: 8em;
+  text-align: center;
 }
 
 table.group-members td.last-seen {
@@ -4168,11 +4170,12 @@ table.group-members td.last-seen {
 }
 
 table.group-members td.actions {
-  width: 11em;
+  width: 9em;
 }
 
 table.group-members td.actions select {
-  width: 10em;
+  width: 11em;
+  font-size: 11px;
 }
 
 /* wiki versions */

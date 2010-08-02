@@ -14,7 +14,7 @@ ${h.javascript_link('/javascript/forms.js')|n}
 
 ${group_members_invite_section()}
 
-%if c.group.invitations:
+%if [inv for inv in c.group.invitations if inv.active and inv.email]:
 <div class="portlet portletSmall portletGroupFiles mediumTopMargin">
   <div class="ctl"></div>
   <div class="ctr"></div>
@@ -121,7 +121,7 @@ ${group_members_invite_section()}
   <table class="group-members">
     <tr>
       <th>${_('User')}</th>
-      <th>${_('Phone number')}</th>
+      <th style="text-align: center">${_('Phone number')}</th>
       <th>${_('Last seen')}</th>
       <th>${_('Status')}</th>
     </tr>
@@ -139,7 +139,7 @@ ${group_members_invite_section()}
         % if member['user'].phone_number:
           ${member['user'].phone_number if member['user'].phone_confirmed else _('unconfirmed')}
         % else:
-          <em>${_('not provided')}</em>
+          -
         % endif
       </td>
       <td class="last-seen">
