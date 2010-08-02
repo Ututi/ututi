@@ -50,14 +50,13 @@ After creating the group, we are redirected to the member invitation
 
 Let us fill in several emails to invite.
 
-    >>> browser.getControl('Enter emails of the people you would like'
-    ...     ' to invite to the group.').value = 'petras@ututi.lt, admin@ututi.lt'
+    >>> browser.getControl(name='emails').value = 'petras@ututi.lt, admin@ututi.lt'
     >>> browser.getControl('Invite').click()
 
     >>> print browser.url
     http://localhost/group/test/invite_members_step
 
-    >>> browser.getControl("Continue").click()
+    >>> browser.getControl("Finish").click()
 
 Users should get emails.
 
@@ -179,7 +178,7 @@ After creating the group, we are redirected to the member invitation step:
 
 We've checked that already; let's move on.
 
-    >>> browser.getControl("Continue").click()
+    >>> browser.getControl("Finish").click()
 
 The screen will suggest watching subjects:
 
@@ -239,7 +238,7 @@ After creating the group, we are redirected to the member invitation step:
 
 We've checked that already; let's move on.
 
-    >>> browser.getControl("Continue").click()
+    >>> browser.getControl("Finish").click()
 
 The initial page will not suggest watching subjects (we opted out of it):
 

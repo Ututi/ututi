@@ -49,7 +49,7 @@ Let's add a new group:
 
 We won't invite anyone for now:
 
-    >>> abrowser.getControl('Continue').click()
+    >>> abrowser.getControl('Finish').click()
 
 Now, let's go to group settings and make the group public:
 

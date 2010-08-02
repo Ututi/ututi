@@ -29,7 +29,7 @@ Let us fill in several emails to invite.
     >>> print browser.url
     http://localhost/group/test/invite_members_step
 
-    >>> browser.getControl("Continue").click()
+    >>> browser.getControl("Finish").click()
 
 We should be hailed by the welcome screen:
 

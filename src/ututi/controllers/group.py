@@ -243,17 +243,18 @@ def group_action(method):
         c.group_payment_quarter = int(config.get('group_payment_quarter', 2000))
         c.group_payment_halfyear = int(config.get('group_payment_halfyear', 3000))
 
-        payment_forms = []
-        payment_types = [_('month'), _('3 months'), _('6 months')]
-        payment_amounts = [c.group_payment_month, c.group_payment_quarter, c.group_payment_halfyear]
-        for amount in payment_amounts:
-            payment_forms.append(h.mokejimai_form(
-                    transaction_type='grouplimits',
-                    amount=amount,
-                    accepturl=group.url(action='pay_accept', qualified=True),
-                    cancelurl=group.url(action='pay_cancel', qualified=True),
-                    orderid='%s_%s_%s' % ('grouplimits', c.user.id, group.id)))
-        c.payments = zip(payment_types, payment_amounts, payment_forms)
+        if c.user:
+            payment_forms = []
+            payment_types = [_('month'), _('3 months'), _('6 months')]
+            payment_amounts = [c.group_payment_month, c.group_payment_quarter, c.group_payment_halfyear]
+            for amount in payment_amounts:
+                payment_forms.append(h.mokejimai_form(
+                        transaction_type='grouplimits',
+                        amount=amount,
+                        accepturl=group.url(action='pay_accept', qualified=True),
+                        cancelurl=group.url(action='pay_cancel', qualified=True),
+                        orderid='%s_%s_%s' % ('grouplimits', c.user.id, group.id)))
+            c.payments = zip(payment_types, payment_amounts, payment_forms)
 
         c.group_file_limit = int(config.get('group_file_limit', 200 * 1024 * 1024))
         c.breadcrumbs = [{'title': group.title, 'link': group.url()}]

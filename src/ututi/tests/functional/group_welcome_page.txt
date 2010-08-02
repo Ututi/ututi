@@ -16,7 +16,7 @@ We can add a group at the url /groups/add.
 
 We skip the member invitation step:
 
-    >>> browser.getControl("Continue").click()
+    >>> browser.getControl("Finish").click()
 
 And get to the group welcome page:
 
