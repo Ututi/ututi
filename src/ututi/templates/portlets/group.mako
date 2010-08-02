@@ -220,29 +220,29 @@
           ${h.stylesheet_link('/jquery-ui-1.7.3.custom.css')}
 
           <div id="purchase-credits-dialog" style="display: none">
-              <div style="font-size: 14px">
+              <div class="description">
                 ${_('SMS credits can be used to send SMS messages to members of a group. There are two ways to purchase SMS credits:')}
               </div>
               <div style="clear: both"></div>
 
-              <div style="width: 270px; float: left; padding-right: 1em">
-                  <div style="font-size: 16px; font-weight: bold; color: #666; padding-top: 1em; padding-bottom: 0.5em">
+              <div class="left-column">
+                  <div class="title">
                       ${_('SMS message')}
                   </div>
                   <div>
                     ${_('Send an SMS message to number <span style="font-size: 14px">1337</span> with the following content:')|n}
                   </div>
-                  <div style="font-size: 14px; padding: 0.5em">TXT ${c.pylons_config.get('fortumo.personal_sms_credits.code')} ${c.group.group_id}</div>
+                  <div class="sms-content">TXT ${c.pylons_config.get('fortumo.personal_sms_credits.code')} ${c.group.group_id}</div>
                   <div>
                     ${_('The SMS costs <strong>5 Lt</strong> and <strong>50 credits</strong> will be added to your account (one credit is one SMS to a single person).')|n}
                   </div>
               </div>
 
-              <div style="width: 270px; float: left; border-left: 1px solid #ded8d8; padding-left: 1em">
-                  <div style="font-size: 16px; font-weight: bold; color: #666; padding-top: 1em; padding-bottom: 0.5em">
+              <div class="right-column">
+                  <div class="title">
                       ${_('E-banking')}
                   </div>
-                  <div style="padding-bottom: 10px">
+                  <div class="description">
                       ${_('If you pay by bank, <strong>a large discount applies</strong>.')|n}
                   </div>
 
@@ -252,8 +252,8 @@
                         ${h.button_to(_('5 Lt'), '', class_='btnMedium')}
                       </td>
                       <td>
-                        <span style="text-decoration: line-through">50</span>
-                        <span style="font-size: 16px">70</span>
+                        <span class="old-price">50</span>
+                        <span class="new-price">70</span>
                         ${_('credits')}
                       </td>
                     </tr>
@@ -262,8 +262,8 @@
                         ${h.button_to(_('10 Lt'), '', class_='btnMedium')}
                       </td>
                       <td>
-                        <span style="text-decoration: line-through">100</span>
-                        <span style="font-size: 16px">150</span>
+                        <span class="old-price">100</span>
+                        <span class="new-price">150</span>
                         ${_('credits')}
                       </td>
                     </tr>
@@ -272,8 +272,8 @@
                         ${h.button_to(_('20 Lt'), '', class_='btnMedium')}
                       </td>
                       <td>
-                        <span style="text-decoration: line-through">200</span>
-                        <span style="font-size: 16px">350</span>
+                        <span class="old-price">200</span>
+                        <span class="new-price">350</span>
                         ${_('credits')}
                       </td>
                     </tr>
@@ -284,10 +284,11 @@
 
           <script>
             $('#purchase-credits-button').click(function() {
-                $('#purchase-credits-dialog').dialog({
+                var dlg = $('#purchase-credits-dialog').dialog({
                     title: '${_('Purchase SMS credits')}',
                     width: 600
                 });
+                dlg.dialog("open");
                 return false;
             });
           </script>
