@@ -59,6 +59,13 @@ ${parent.head_tags()}
       <div class="floatleft">
         ${h.input_line('phone_number', _('Mobile phone number: '))}
         <div id="phone-error" style="display: none; padding-left: 135px" class="error-container"><span class="error-message">${_('Please enter a phone number.')}</span></div>
+        <div id="user-phone-invalid" style="display: none; padding-left: 135px" class="error-container">
+          <span class="error-message">
+              ${_('The entered phone number is invalid.')}
+              <br />
+              ${_('(use the format +37067812345)')}
+          </span>
+        </div>
       </div>
       <div class="floatleft" style="padding-left: 3px; margin-top: -1px">
         ${h.input_submit(_('save'), id='user-phone-submit')}
@@ -71,6 +78,9 @@ ${parent.head_tags()}
   //<![CDATA[
 
   $('#user-phone-submit').click(function() {
+    $('#user-phone-invalid').hide();
+    $('#phone-error').hide();
+
     if (!($('#phone_number').val())) {
       $('#phone-error').show();
       return false;
@@ -79,8 +89,10 @@ ${parent.head_tags()}
     $.post('${url(controller='profile', action='js_update_phone')}',
       $(this).parents('form').serialize(),
       function(data, status) {
-        if (status == 'success') {
+        if ((status == 'success') && (data != '')) {
           $('#user_phone').replaceWith(data);
+        } else {
+          $('#user-phone-invalid').show();
         }
         $('#user_phone').removeClass('loading');
       });

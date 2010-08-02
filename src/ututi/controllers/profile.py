@@ -717,7 +717,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             meta.Session.commit()
             return render_mako_def('/profile/home.mako', 'phone_updated')
         except Invalid, e:
-            abort(400)
+            return ''
 
     @ActionProtector("user")
     @validate(schema=PhoneConfirmationForm, form='home')
