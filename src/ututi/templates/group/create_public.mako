@@ -12,8 +12,8 @@ ${_('New public group')}
 
     ${path_steps(0)}
 
-    <form method="post" action="${url(controller='group', action='create_public')}"
-          id="group_settings_form" enctype="multipart/form-data">
+    <form method="post" id="group_settings_form" enctype="multipart/form-data"
+          action="${url(controller='group', action='create_public')}">
 
       <fieldset>
         ${self.group_title_field()}
