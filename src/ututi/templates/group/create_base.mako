@@ -176,7 +176,15 @@
     <span class="mailinglist-choice">@groups.ututi.lt</span>
   </label>
 
+  <div id="group-id-check"></div>
   <script type="text/javascript">
+  //<![CDATA[
+    afterDelayedKeyup('input#group-id-field', "check_group_id(true)",500);
+  //]]>
+  </script>
+
+  <script type="text/javascript">
+  //<![CDATA[
       $(document).ready(function() {
           $('select#forum_type').change(function() {
               if (this.value == 'mailinglist') {
@@ -188,6 +196,7 @@
               };
           });
       });
+  //]]>
   </script>
 
 </%def>
