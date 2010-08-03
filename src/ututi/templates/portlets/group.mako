@@ -139,7 +139,6 @@
             });
           </script>
 
-
     </div>
     %endif
     <p class="grupes-aprasymas">

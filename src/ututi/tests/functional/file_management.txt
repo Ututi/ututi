@@ -310,8 +310,8 @@ for the service.
     >>> cancel = browser.getLink('Go back').url
     >>> process = browser.getLink('Process payment').url
     >>> browser.getControl('Dummy pay 10 LTL').click()
-    >>> browser.printQuery('id("mainContent")//h2/text()')
-    You have increased your group's file limit!
+    >>> browser.printQuery('id("got-space-dialog")/div/text()')
+    Congratulations! You have increased the group's private file limit.
 
 What if we had decided to cancel the payment?
     >>> browser.open(cancel)

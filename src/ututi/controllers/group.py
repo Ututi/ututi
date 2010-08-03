@@ -1286,8 +1286,8 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
     @group_action
     @ActionProtector("member", "admin")
     def pay_accept(self, group):
-        c.group_menu_current_item = 'home'
-        return render('group/pay_accept.mako')
+        redirect(url(controller='group', action='files',
+                     id=group.group_id, just_paid=True))
 
     @group_action
     @ActionProtector("member", "admin")

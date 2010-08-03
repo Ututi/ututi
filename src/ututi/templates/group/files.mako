@@ -25,3 +25,32 @@
   <span>${_('Add more subjects')}</span>
 </a>
 %endif
+
+%if request.GET.get('just_paid'):
+  <div id="got-space-dialog" style="display: none">
+      <div style="font-size: 14px; color: #666; font-weight: bold"
+          >${_("Congratulations! You have increased the group's private file limit.")}</div>
+
+      %if c.group.private_files_lock_date:
+        <div style="padding-top: 1em; padding-bottom: 1em">
+          ${_("You can now store up to 5&nbsp;GB in your group's private area until <strong>%s</strong>.") % c.group.private_files_lock_date.date().isoformat() |n}
+          ${_('Have fun using Ututi groups!')}
+        </div>
+      %endif
+
+      <div style="padding-left: 120px">
+        ${h.image('/images/happy_cat.png', alt=_('Happy cat'))}
+      </div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+        var dlg = $('#got-space-dialog').dialog({
+            title: '${_('Thanks!')}',
+            width: 500
+        });
+        dlg.dialog("open");
+        return false;
+    });
+  </script>
+%endif
