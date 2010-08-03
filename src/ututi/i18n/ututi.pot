@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-07-30 13:03+0300\n"
+"POT-Creation-Date: 2010-08-03 11:42+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -143,6 +143,15 @@ msgstr ""
 msgid "The group identifier must be at least 4 characters long."
 msgstr ""
 
+msgid "month"
+msgstr ""
+
+msgid "3 months"
+msgstr ""
+
+msgid "6 months"
+msgstr ""
+
 msgid "Mailing List"
 msgstr ""
 
@@ -261,15 +270,6 @@ msgstr ""
 
 #, python-format
 msgid "SMS sent! (%d credits used up, %d remaining)"
-msgstr ""
-
-msgid "month"
-msgstr ""
-
-msgid "3 months"
-msgstr ""
-
-msgid "6 months"
 msgstr ""
 
 #, python-format
@@ -1813,6 +1813,24 @@ msgstr ""
 msgid "Add more subjects"
 msgstr ""
 
+msgid "Congratulations! You have increased the group's private file limit."
+msgstr ""
+
+#, python-format
+msgid ""
+"You can now store up to 5&nbsp;GB in your group's private area until "
+"<strong>%s</strong>."
+msgstr ""
+
+msgid "Have fun using Ututi groups!"
+msgstr ""
+
+msgid "Happy cat"
+msgstr ""
+
+msgid "Thanks!"
+msgstr ""
+
 msgid "Choose group type"
 msgstr ""
 
@@ -1897,7 +1915,7 @@ msgstr ""
 msgid "Invite your classmates"
 msgstr ""
 
-msgid "Enter emails of the people you would like to invite to the group."
+msgid "Enter emails of your classmates."
 msgstr ""
 
 msgid "Invite"
@@ -1906,16 +1924,16 @@ msgstr ""
 msgid "Invite your classmates using Facebook"
 msgstr ""
 
-msgid "Enter emails of your classmates."
+msgid "Finish"
 msgstr ""
 
 msgid "Invited users (invitations not accepted yet)"
 msgstr ""
 
-msgid "Send invitation again"
+msgid "Send again"
 msgstr ""
 
-msgid "Cancel invitation"
+msgid "Cancel"
 msgstr ""
 
 msgid "Awaiting confirmation"
@@ -1927,10 +1945,16 @@ msgstr ""
 msgid "Deny"
 msgstr ""
 
-msgid "Name"
+msgid "User"
+msgstr ""
+
+msgid "Phone number"
 msgstr ""
 
 msgid "Last seen"
+msgstr ""
+
+msgid "unconfirmed"
 msgstr ""
 
 msgid "Delete group"
@@ -1939,24 +1963,7 @@ msgstr ""
 msgid "Add group members"
 msgstr ""
 
-msgid "Invite using Facebook"
-msgstr ""
-
 msgid "The group's page is empty. Enter your description."
-msgstr ""
-
-msgid "You have increased your group's file limit!"
-msgstr ""
-
-msgid ""
-"Once we get confirmation that the payment has been transfered, your group "
-"will be able to store an unlimited amount of files."
-msgstr ""
-
-msgid "Good luck using Ututi groups!"
-msgstr ""
-
-msgid "back to the group's files"
 msgstr ""
 
 msgid "You have decided not to increase your group's file limit"
@@ -1965,6 +1972,9 @@ msgstr ""
 msgid ""
 "We hope you did not increase uour group's file limit because you decided to "
 "store files in the public subject folders and share them with everybody :)"
+msgstr ""
+
+msgid "back to the group's files"
 msgstr ""
 
 msgid "Paying for the group is not possible at the moment"
@@ -2128,9 +2138,6 @@ msgstr ""
 msgid ""
 "We need your phone number so that you could send and receive SMS messages "
 "from the group. Don't worry, we will never send advertisements."
-msgstr ""
-
-msgid "Phone number"
 msgstr ""
 
 msgid "I am already a registered Ututi user"
@@ -2316,6 +2323,40 @@ msgstr ""
 msgid "Get more space"
 msgstr ""
 
+#, python-format
+msgid ""
+"The amount of group's private files is limited to %(limit)s. This is so "
+"because Ututi encourages users to store their files in publicly accessible "
+"subjects where they can be shared with all the users. But if you want to keep"
+" more than %(limit)s of files, you can do this."
+msgstr ""
+
+msgid "SMS message"
+msgstr ""
+
+msgid ""
+"Send an SMS message to number <span style=\"font-size: 14px\">1337</span> "
+"with the following content:"
+msgstr ""
+
+msgid ""
+"The SMS costs <strong>5 Lt</strong> and will increase your file limit to "
+"<strong>5&nbsp;GB</strong> for another month."
+msgstr ""
+
+#, python-format
+msgid "Your private file area is limited to 5&nbsp;GB until <strong>%s</strong>."
+msgstr ""
+
+msgid "E-banking"
+msgstr ""
+
+msgid "If you pay by bank, a discount applies."
+msgstr ""
+
+msgid "Purchase SMS credits"
+msgstr ""
+
 msgid "More settings"
 msgstr ""
 
@@ -2326,21 +2367,6 @@ msgid "Get email"
 msgstr ""
 
 msgid "Edit group settings"
-msgstr ""
-
-msgid "All watched subjects"
-msgstr ""
-
-msgid "Watched subjects"
-msgstr ""
-
-msgid "Your group is not watching any subjects!"
-msgstr ""
-
-msgid "all subjects"
-msgstr ""
-
-msgid "choose subjects"
 msgstr ""
 
 msgid "email your group"
@@ -2392,20 +2418,9 @@ msgid ""
 " two ways to purchase SMS credits:"
 msgstr ""
 
-msgid "SMS message"
-msgstr ""
-
-msgid ""
-"Send an SMS message to number <span style=\"font-size: 14px\">1337</span> "
-"with the following content:"
-msgstr ""
-
 msgid ""
 "The SMS costs <strong>5 Lt</strong> and <strong>50 credits</strong> will be "
 "added to your account (one credit is one SMS to a single person)."
-msgstr ""
-
-msgid "E-banking"
 msgstr ""
 
 msgid "If you pay by bank, <strong>a large discount applies</strong>."
@@ -2421,9 +2436,6 @@ msgid "10 Lt"
 msgstr ""
 
 msgid "20 Lt"
-msgstr ""
-
-msgid "Purchase SMS credits"
 msgstr ""
 
 msgid "You need to buy credits to be able to send SMS messages to the group."
@@ -2521,6 +2533,9 @@ msgid "upload a file to.."
 msgstr ""
 
 msgid "Quickly upload files to your groups and subjects."
+msgstr ""
+
+msgid "Watched subjects"
 msgstr ""
 
 msgid "You are not watching any subjects."
@@ -2715,6 +2730,12 @@ msgid "Mobile phone number: "
 msgstr ""
 
 msgid "Please enter a phone number."
+msgstr ""
+
+msgid "The entered phone number is invalid."
+msgstr ""
+
+msgid "(use the format +37067812345)"
 msgstr ""
 
 msgid "Please confirm your phone number"

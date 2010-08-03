@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-07-30 13:03+0300\n"
+"PO-Revision-Date: 2010-08-03 11:43+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -144,6 +144,15 @@ msgstr "Įveskite grupės el. pašto konferencijos/forumo ID."
 msgid "The group identifier must be at least 4 characters long."
 msgstr "ID turi būti ne trumpesnis nei 4 simboliai."
 
+msgid "month"
+msgstr "mėnuo"
+
+msgid "3 months"
+msgstr "3 mėnesiai"
+
+msgid "6 months"
+msgstr "6 mėnesiai"
+
 msgid "Mailing List"
 msgstr "Grupės paštas"
 
@@ -264,15 +273,6 @@ msgstr ""
 #, python-format
 msgid "SMS sent! (%d credits used up, %d remaining)"
 msgstr ""
-
-msgid "month"
-msgstr "mėnuo"
-
-msgid "3 months"
-msgstr "3 mėnesiai"
-
-msgid "6 months"
-msgstr "6 mėnesiai"
 
 #, python-format
 msgid "Purchased %s months for private file area."
@@ -1036,7 +1036,7 @@ msgid ""
 "This is a testing version - this is just a copy of the information! "
 "Changes you make will not be persisted!"
 msgstr ""
-"Tai yra bandomojo versija, naudojanti duomenų kopiją! Pakeitimai nebus "
+"Tai yra bandomoji versija, naudojanti duomenų kopiją! Pakeitimai nebus "
 "išsaugomi!"
 
 msgid "ututi_link"
@@ -1990,6 +1990,24 @@ msgstr "Privatūs failai matomi TIK GRUPIOKAMS! Čia galite laikyti iki %s."
 msgid "Add more subjects"
 msgstr "Pridėk daugiau dalykų"
 
+msgid "Congratulations! You have increased the group's private file limit."
+msgstr ""
+
+#, python-format
+msgid ""
+"You can now store up to 5&nbsp;GB in your group's private area until "
+"<strong>%s</strong>."
+msgstr ""
+
+msgid "Have fun using Ututi groups!"
+msgstr ""
+
+msgid "Happy cat"
+msgstr ""
+
+msgid "Thanks!"
+msgstr ""
+
 msgid "Choose group type"
 msgstr "Pasirink grupės tipą"
 
@@ -2090,8 +2108,8 @@ msgstr "Pakviesk savo draugus į Ututi!"
 msgid "Invite your classmates"
 msgstr "Pakviesti grupės draugus"
 
-msgid "Enter emails of the people you would like to invite to the group."
-msgstr ""
+msgid "Enter emails of your classmates."
+msgstr "Įvesk grupės draugų el. pašto adresus."
 
 msgid "Invite"
 msgstr "Pakviesti"
@@ -2099,17 +2117,17 @@ msgstr "Pakviesti"
 msgid "Invite your classmates using Facebook"
 msgstr "Pakviesk grupiokus naudodamas Facebook"
 
-msgid "Enter emails of your classmates."
-msgstr "Įvesk grupės draugų el. pašto adresus."
+msgid "Finish"
+msgstr ""
 
 msgid "Invited users (invitations not accepted yet)"
 msgstr "Pakviesti naudotojai (dar nepriėmę pakvietimų)"
 
-msgid "Send invitation again"
-msgstr "Siųsti pakvietimą dar kartą"
+msgid "Send again"
+msgstr ""
 
-msgid "Cancel invitation"
-msgstr "Atšaukti pakvietimą"
+msgid "Cancel"
+msgstr ""
 
 msgid "Awaiting confirmation"
 msgstr "Laukiama patvirtinimo"
@@ -2120,11 +2138,17 @@ msgstr "Patvirtinti"
 msgid "Deny"
 msgstr "Atmesti"
 
-msgid "Name"
-msgstr "Vardas"
+msgid "User"
+msgstr ""
+
+msgid "Phone number"
+msgstr ""
 
 msgid "Last seen"
 msgstr "Paskutinį sykį matytas"
+
+msgid "unconfirmed"
+msgstr ""
 
 msgid "Delete group"
 msgstr "Ištrinti grupę"
@@ -2132,27 +2156,8 @@ msgstr "Ištrinti grupę"
 msgid "Add group members"
 msgstr "Pridėti grupės narius"
 
-msgid "Invite using Facebook"
-msgstr "Pakviesti per Facebook"
-
 msgid "The group's page is empty. Enter your description."
 msgstr "Grupės puslapis vis dar tuščias - brūkštelk porą žodžių :)"
-
-msgid "You have increased your group's file limit!"
-msgstr "Super! Tu ką tik padidinai savo grupės failų limitą."
-
-msgid ""
-"Once we get confirmation that the payment has been transfered, your group"
-" will be able to store an unlimited amount of files."
-msgstr ""
-"Kai tik gausime apmokėjimo patvirtinimą, Tavo grupė galės naudotis "
-"neribojamo dydžio failų saugykla."
-
-msgid "Good luck using Ututi groups!"
-msgstr "Malonaus naudojimosi Ututi grupėmis!"
-
-msgid "back to the group's files"
-msgstr "grįžti į grupės failus"
 
 msgid "You have decided not to increase your group's file limit"
 msgstr "Tu nepadidinai grupės failų limito."
@@ -2164,6 +2169,9 @@ msgid ""
 msgstr ""
 "Tikimės, kad nedidini failų limito, nes nusprendei nuo šiol visus grupės "
 "failus laikyti dalykų kataloguose ir pasidalinti jais su kitais :)"
+
+msgid "back to the group's files"
+msgstr "grįžti į grupės failus"
 
 msgid "Paying for the group is not possible at the moment"
 msgstr ""
@@ -2343,9 +2351,6 @@ msgstr ""
 msgid ""
 "We need your phone number so that you could send and receive SMS messages"
 " from the group. Don't worry, we will never send advertisements."
-msgstr ""
-
-msgid "Phone number"
 msgstr ""
 
 msgid "I am already a registered Ututi user"
@@ -2537,6 +2542,40 @@ msgstr "Privatiems failams liko vietos:"
 msgid "Get more space"
 msgstr "Gauk daugiau vietos"
 
+#, python-format
+msgid ""
+"The amount of group's private files is limited to %(limit)s. This is so "
+"because Ututi encourages users to store their files in publicly "
+"accessible subjects where they can be shared with all the users. But if "
+"you want to keep more than %(limit)s of files, you can do this."
+msgstr ""
+
+msgid "SMS message"
+msgstr ""
+
+msgid ""
+"Send an SMS message to number <span style=\"font-size: 14px\">1337</span>"
+" with the following content:"
+msgstr ""
+
+msgid ""
+"The SMS costs <strong>5 Lt</strong> and will increase your file limit to "
+"<strong>5&nbsp;GB</strong> for another month."
+msgstr ""
+
+#, python-format
+msgid "Your private file area is limited to 5&nbsp;GB until <strong>%s</strong>."
+msgstr ""
+
+msgid "E-banking"
+msgstr ""
+
+msgid "If you pay by bank, a discount applies."
+msgstr ""
+
+msgid "Purchase SMS credits"
+msgstr ""
+
 msgid "More settings"
 msgstr "Daugiau nustatymų"
 
@@ -2548,23 +2587,6 @@ msgstr "Gauti el. laiškus"
 
 msgid "Edit group settings"
 msgstr "Keisti grupės nustatymus"
-
-msgid "All watched subjects"
-msgstr "Visi stebimi dalykai"
-
-msgid "Watched subjects"
-msgstr "Stebimi dalykai"
-
-msgid "Your group is not watching any subjects!"
-msgstr ""
-"Rask dalykus, kuriuos studijuoja tavo grupė ir pridėk prie \"grupės "
-"dalykų\" sąrašo."
-
-msgid "all subjects"
-msgstr "visi dalykai"
-
-msgid "choose subjects"
-msgstr "pasirinkti dalykus"
 
 msgid "email your group"
 msgstr "rašyti laišką grupei"
@@ -2616,20 +2638,9 @@ msgid ""
 " are two ways to purchase SMS credits:"
 msgstr ""
 
-msgid "SMS message"
-msgstr ""
-
-msgid ""
-"Send an SMS message to number <span style=\"font-size: 14px\">1337</span>"
-" with the following content:"
-msgstr ""
-
 msgid ""
 "The SMS costs <strong>5 Lt</strong> and <strong>50 credits</strong> will "
 "be added to your account (one credit is one SMS to a single person)."
-msgstr ""
-
-msgid "E-banking"
 msgstr ""
 
 msgid "If you pay by bank, <strong>a large discount applies</strong>."
@@ -2645,9 +2656,6 @@ msgid "10 Lt"
 msgstr ""
 
 msgid "20 Lt"
-msgstr ""
-
-msgid "Purchase SMS credits"
 msgstr ""
 
 msgid "You need to buy credits to be able to send SMS messages to the group."
@@ -2751,6 +2759,9 @@ msgstr "įkelti failą į.."
 
 msgid "Quickly upload files to your groups and subjects."
 msgstr "Greitas failų įkėlimas į grupes ir dalykus."
+
+msgid "Watched subjects"
+msgstr "Stebimi dalykai"
 
 msgid "You are not watching any subjects."
 msgstr "Rask dalykus, kuriuos studijuoji ir pridėk prie \"savo dalykų\" sąrašo."
@@ -2956,6 +2967,12 @@ msgid "Mobile phone number: "
 msgstr ""
 
 msgid "Please enter a phone number."
+msgstr ""
+
+msgid "The entered phone number is invalid."
+msgstr ""
+
+msgid "(use the format +37067812345)"
 msgstr ""
 
 msgid "Please confirm your phone number"
