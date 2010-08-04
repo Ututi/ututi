@@ -1120,7 +1120,7 @@ div.tag {
 
 .portletModule {
     margin-top: 0;
-    padding: 5px 10px;
+    padding: 5px 14px;
 }
 .img-button{
     margin: 0 0 0 -3px;
@@ -3260,30 +3260,67 @@ div.please-register {
 #group_sms_portlet-content .character-counter {
     color: #666;
     font-size: 11px;
-    float: right;
-    margin-right: 8px;
+    float: left;
+    margin-top: 8px;
+    margin-left: 3px;
 }
 
 #group_sms_portlet-content .recipients {
+    margin-left: 120px;
     font-size: 11px;
 }
 
 #group_sms_portlet-content .cost {
+    float: right;
     font-size: 11px;
-    border-bottom: 1px solid #ded8d8;
     padding-bottom: 5px;
-    padding-top: 4px;
+    padding-top: 6px;
 }
 
 #group_sms_portlet-content .cost-header,
 #group_sms_portlet-content .credits-header {
     font-weight: bold;
     color: #666;
+    font-size: 13px;
 }
 
 #group_sms_portlet-content .credits-remaining {
     font-size: 11px;
+    padding-top: 3px;
+}
+
+#group_sms_portlet-content .credits-remaining .credit-info {
     padding-top: 7px;
+    padding-bottom: 20px;
+}
+
+#group_sms_portlet-content .num-credits-remaining {
+    padding-left: 5px;
+    font-size: 16px;
+}
+
+#group_sms_portlet-content .sms-box {
+    background: #e6e6e6;
+    margin: -10px;
+    padding: 10px;
+    padding-top: 2px;
+}
+
+#group_sms_portlet-content .phone-message-block {
+    font-size: 11px;
+}
+
+#group_sms_portlet-content .phone-message-block .block-head {
+    padding-top: 15px;
+    padding-bottom: 3px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #ff6600;
+}
+
+#group_sms_portlet-content .group-sms-content {
+    font-weight: bold;
+    padding-top: 3px;
 }
 
 #group-id-check .taken {
@@ -4114,8 +4151,6 @@ div#user-logo-button {
 /* purchase credits dialog */
 
 
-/* end purchase credits dialog */
-
 .payment-dialog .description {
     font-size: 14px;
 }
@@ -4156,6 +4191,8 @@ div#user-logo-button {
 .payment-dialog .right-column .new-price {
     font-size: 16px:
 }
+
+/* end purchase credits dialog */
 
 /* members screen */
 
