@@ -929,6 +929,9 @@ class User(object):
     def unread_messages(self):
         return meta.Session.query(PrivateMessage).filter_by(recipient=self, is_read=False).count()
 
+    def purchase_sms_credits(self, credits):
+        self.sms_messages_remaining += credits
+
 
 email_table = None
 
@@ -2259,6 +2262,13 @@ class Payment(object):
             if self.raw_error == '':
                 period = {'1': 31, '2': 100, '3': 200}[payment_type[-1]]
                 self.group.purchase_days(period)
+        elif payment_type.startswith('smspayment'):
+            user_id = int(payment_info)
+            self.user = User.get_byid(int(user_id))
+            if self.raw_error == '':
+                plan = payment_type[-1]
+                credits = int(config['sms_payment%s_credits' % plan])
+                self.user.purchase_sms_credits(credits)
 
         self.valid = True
         self.processed = True

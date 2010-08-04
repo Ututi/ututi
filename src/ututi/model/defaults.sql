@@ -193,7 +193,7 @@ create table groups (
        mailinglist_enabled bool default true,
        has_file_area bool default true,
        private_files_lock_date timestamp default null,
-       private_files_credits int8 default 0,
+       private_files_credits int8 default 0, /* XXX remove */
        primary key (id));;
 
 /* An enumerator for membership types in groups */

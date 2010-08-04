@@ -72,7 +72,7 @@ class FortumoController(BaseController):
     def _handle_personal_sms_credits(self, msg):
         if msg.sender is None:
             return _('Your phone number (+%s) is not registered in Ututi.') % msg.sender_phone_number
-        msg.sender.sms_messages_remaining += 100
+        msg.sender.purchase_sms_credits(100)
         msg.success = True
         return _('You have purchased 100 SMS messages for 10 Lt; now you have %d messages.') % msg.sender.sms_messages_remaining
 

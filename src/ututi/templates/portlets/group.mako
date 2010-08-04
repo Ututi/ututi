@@ -328,36 +328,26 @@
                   </div>
 
                   <table>
-                    <tr>
-                      <td>
-                        ${h.button_to(_('5 Lt'), '', class_='btnMedium')}
-                      </td>
-                      <td>
-                        <span class="old-price">50</span>
-                        <span class="new-price">70</span>
-                        ${_('credits')}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        ${h.button_to(_('10 Lt'), '', class_='btnMedium')}
-                      </td>
-                      <td>
-                        <span class="old-price">100</span>
-                        <span class="new-price">150</span>
-                        ${_('credits')}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        ${h.button_to(_('20 Lt'), '', class_='btnMedium')}
-                      </td>
-                      <td>
-                        <span class="old-price">200</span>
-                        <span class="new-price">350</span>
-                        ${_('credits')}
-                      </td>
-                    </tr>
+                    %for credits, amount, form in c.sms_payments:
+                      <tr>
+                        <td>
+                        <form action="${form.action}" method="POST">
+                          %for key, val in form.fields:
+                            <input type="hidden" name="${key}" value="${val}" />
+                          %endfor
+                          ${h.input_submit(_('%d Lt') % (int(amount) / 100), class_='btnMedium')}
+                        </form>
+                        </td>
+                        <td>
+                          <span class="larger">
+                            <span class="old-price">${amount / 10}</span>
+                            <span class="new-price">${credits}</span>
+                            ${_('credits')}
+                          </span>
+                        </td>
+                      </tr>
+
+                    %endfor
                   </table>
 
               </div>
