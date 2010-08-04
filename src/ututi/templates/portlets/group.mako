@@ -350,18 +350,21 @@
           </div>
 
           <script>
-            $('#purchase-credits-button').click(function() {
-                var dlg = $('#purchase-credits-dialog').dialog({
-                    title: '${_('Purchase SMS credits')}',
-                    width: 600
-                });
-                dlg.dialog("open");
-                return false;
-            });
+          //<![CDATA[
+              $('#purchase-credits-button').click(function() {
+                  var dlg = $('#purchase-credits-dialog').dialog({
+                      title: '${_('Purchase SMS credits')}',
+                      width: 600
+                  });
+                  dlg.dialog("open");
+                  return false;
+              });
+          //]]>
           </script>
       </div>
 
       <script>
+      //<![CDATA[
           $(document).ready(function() {
               $('textarea#sms_message').keyup(function() {
                 var el = $('#sms_message')[0];
@@ -402,6 +405,7 @@
                 $('#sms_message_symbols').text(chars_remaining);
               });
           });
+      //]]>
       </script>
     %else:
       ${_('You need to buy credits to be able to send SMS messages to the group.')}
