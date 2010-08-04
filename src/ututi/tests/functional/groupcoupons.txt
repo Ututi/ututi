@@ -1,0 +1,39 @@
+Group Coupon testing
+====================
+
+The admin should have a new link on his dashboard, that lets him view all active and inactive group coupons.
+
+    >>> browser = Browser.logIn()
+    >>> browser.open('http://localhost/admin')
+    >>> browser.getLink('Group coupons').click()
+    >>> browser.url
+    'http://localhost/admin/group_coupons'
+
+    >>> form = browser.getForm('coupon_form')
+    >>> form.getControl('Code').value = 'ABcd'
+    >>> form.getControl('Action').displayValue = ['SMS Credits']
+    >>> form.getControl('Credit count (for sms credits)').value = '50'
+    >>> form.getControl('Valid until').value = '09/30/2010'
+    >>> form.getControl('Save').click()
+
+    >>> browser.url
+    'http://localhost/admin/group_coupons'
+
+    >>> browser.printQuery('id("coupon_list")//td/text()')
+    ABCD
+    ...
+    2010 Sep 30, 00:00
+    smscredits
+    50
+    0
+
+It should be impossible to create another coupon with the same code.
+    >>> form = browser.getForm('coupon_form')
+    >>> form.getControl('Code').value = 'ABcd'
+    >>> form.getControl('Action').displayValue = ['SMS Credits']
+    >>> form.getControl('Credit count (for sms credits)').value = '50'
+    >>> form.getControl('Valid until').value = '09/30/2010'
+    >>> form.getControl('Save').click()
+
+    >>> browser.printQuery("//span[@class='error-message']/text()")
+    Such coupon code already exists, choose a different one.

@@ -11,7 +11,12 @@ from sqlalchemy import func
 from magic import from_buffer
 from datetime import date
 from webhelpers import paginate
+from formencode.compound import Any
 from formencode.schema import Schema
+from formencode.validators import Int
+from formencode.validators import Constant
+from formencode.validators import DateConverter
+from formencode.validators import OneOf
 from formencode.validators import String
 
 from babel.dates import parse_date
@@ -23,12 +28,12 @@ from pylons.controllers.util import redirect, abort
 from random import Random
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
-from ututi.lib.validators import PhoneNumberValidator, validate
+from ututi.lib.validators import PhoneNumberValidator, GroupCouponValidator, validate
 from ututi.model.events import Event
 from ututi.model import FileDownload
 from ututi.model import SimpleTag
 from ututi.model import UserSubjectMonitoring
-from ututi.model import Page, SMS
+from ututi.model import Page, SMS, GroupCoupon
 from ututi.model import (meta, User, Email, LocationTag, Group, Subject,
                          GroupMember, GroupMembershipType, File, PrivateMessage)
 from ututi.lib import helpers as h
@@ -61,6 +66,15 @@ class SMSForm(Schema):
     allow_extra_fields = False
     number = PhoneNumberValidator()
     message = String(min=1, max=130)
+
+
+class GroupCouponForm(Schema):
+    allow_extra_fields = False
+    code = GroupCouponValidator(check_collision=True)
+    action = OneOf(['smscredits', 'unlimitedspace'])
+    credit_count = Any(Constant(''), Int(min=0))
+    day_count = Any(Constant(''), Int(min=0))
+    valid_until = DateConverter()
 
 
 class AdminController(BaseController):
@@ -365,3 +379,26 @@ class AdminController(BaseController):
             meta.Session.commit()
             h.flash('Message sent to %d users.' % len(users))
         return render('admin/messages.mako')
+
+
+    @ActionProtector("root")
+    @validate(schema=GroupCouponForm, form='group_coupons')
+    def group_coupons(self):
+        groupcoupons = meta.Session.query(GroupCoupon).order_by(GroupCoupon.valid_until.desc()).order_by(GroupCoupon.created.desc())
+        c.groupcoupons = self._make_pages(groupcoupons)
+        return render('admin/groupcoupons.mako')
+
+    @ActionProtector("root")
+    @validate(schema=GroupCouponForm, form='group_coupons')
+    def add_coupon(self):
+        if hasattr(self, 'form_result'):
+            coupon = GroupCoupon(code=self.form_result['code'],
+                                 valid_until=self.form_result['valid_until'],
+                                 action=self.form_result['action'])
+            if coupon.action == 'smscredits':
+                coupon.credit_count = self.form_result['credit_count']
+            elif coupon.action == 'unlimitedspace':
+                coupon.day_count = self.form_result['day_count']
+            meta.Session.add(coupon)
+            meta.Session.commit()
+        redirect(url(controller='admin', action='group_coupons'))

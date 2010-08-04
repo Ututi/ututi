@@ -7,6 +7,7 @@ from pylons import config, tmpl_context as c
 
 from pylons.decorators import validate as old_validate
 
+from ututi.model import GroupCoupon
 from ututi.model import meta, Email
 from ututi.model import Subject, Group, ContentItem, LocationTag
 
@@ -284,3 +285,24 @@ class ParentIdValidator(validators.FancyValidator):
         if value is None or not isinstance(value, (Group, Subject)):
             raise Invalid(self.message('badId', state), value, state)
 
+
+class GroupCouponValidator(validators.FancyValidator):
+    """ Validate Group Coupon codes. Check for both collisions (creation) and existance (usage)."""
+    messages = {
+        'duplicate': _(u"Such coupon code already exists, choose a different one."),
+        'not_exist': _(u"Such a coupon code does not exist.")
+    }
+
+    def __init__(self, check_collision=True, **kwargs):
+        self.check_collision = check_collision
+        validators.FancyValidator.__init__(self, **kwargs)
+
+    def validate_python(self, value, state):
+        coupon = GroupCoupon.get(value)
+        error = None
+        if coupon is not None and self.check_collision:
+            error = 'duplicate'
+        elif coupon is None and not self.check_collision:
+            error = 'not_exist'
+        if error is not None:
+            raise Invalid(self.message(error, state), value, state)
