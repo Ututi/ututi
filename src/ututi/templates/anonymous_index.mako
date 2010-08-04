@@ -92,7 +92,7 @@
     </a>
     <fb:login-button perms="email"
       onlogin="show_loading_message(); window.location = '${url(controller='home', action='facebook_login')}'"
-     >Connect</fb:login-button>
+     >${_('Connect')}</fb:login-button>
   </div>
 
   </div>

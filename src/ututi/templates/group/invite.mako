@@ -29,6 +29,6 @@
 
   <fb:login-button perms="email"
      onlogin="show_loading_message(); window.location = '${c.group.url(action='invite_fb')}'"
-   >Connect</fb:login-button>
+   >${_('Connect')}</fb:login-button>
 
 %endif

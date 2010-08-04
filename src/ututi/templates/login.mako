@@ -41,7 +41,7 @@
       ## by the login widget in the page header.
       <fb:login-button perms="email"
           onlogin="show_loading_message(); window.location = '${url(controller='home', action='facebook_login', came_from=c.came_from, invitation_hash=c.hash)}'"
-       >Connect</fb:login-button>
+       >${_('Connect')}</fb:login-button>
     </div>
   </td>
 

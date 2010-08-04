@@ -252,7 +252,7 @@ ${_('Profile settings')}
         Link to
         <fb:login-button perms="email"
           onlogin="window.location = '${url(controller='profile', action='link_facebook')}'"
-         >Connect</fb:login-button>
+         >${_('Connect')}</fb:login-button>
       %endif
     </td>
   </tr>
