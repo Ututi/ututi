@@ -43,6 +43,10 @@ ${next.body()}
       <div style="font-size: 14px; color: #666; font-weight: bold"
           >${_("Congratulations! You have purchased %s personal SMS credits.") % request.GET.get('paid_sms')}</div>
 
+      <div>
+        ${_("You can use these credits to send %s messages. For example, if your group has 20 members with registered phone numbers, one message will cost 20 SMS credits.") % request.GET.get('paid_sms')}
+      </div>
+
       <div style="padding-left: 120px">
         ${h.image('/images/happy_cat.png', alt=_('Happy cat'))}
       </div>
