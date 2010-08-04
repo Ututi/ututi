@@ -175,11 +175,22 @@ insert into tags (title, title_short, description, parent_id, tag_type)
 /* Add location field to the content item table */
 alter table content_items add column location_id int8 default null references tags(id) on delete set null;;
 
+/* A table for group coupons */
+create table group_coupons (
+       id varchar(20) not null,
+       created timestamp not null default (now() at time zone 'UTC'),
+       valid_until timestamp not null,
+       action varchar(40) not null,
+       credit_count int default null,
+       day_count int default null,
+       primary key (id));;
+
 /* A table for groups */
 create table groups (
        id int8 references content_items(id),
        group_id varchar(250) not null unique,
        title varchar(250) not null,
+       coupon_id varchar(250) null references group_coupons(id) on delete set null,
        year date not null,
        description text,
        page text not null default '',

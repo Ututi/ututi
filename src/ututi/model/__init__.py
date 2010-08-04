@@ -384,6 +384,12 @@ def setup_orm(engine):
                          autoload=True,
                          autoload_with=engine)
 
+    global group_coupons_table
+    group_coupons_table = Table("group_coupons", meta.metadata,
+                                useexisting=True,
+                                autoload=True,
+                                autoload_with=engine)
+
     global group_watched_subjects_table
     group_watched_subjects_table = Table("group_watched_subjects", meta.metadata,
                                          autoload=True,
@@ -403,6 +409,8 @@ def setup_orm(engine):
                             'group': relation(Group)
                             })
 
+    orm.mapper(GroupCoupon, group_coupons_table,
+               properties ={'groups': relation(Group, backref="coupon", lazy=True)})
 
     global group_invitations_table
     group_invitations_table = Table("group_invitations", meta.metadata,
@@ -1092,6 +1100,26 @@ class GroupSubjectMonitoring(object):
 
     def __init__(self, group, subject, ignored=False):
         self.group, self.subject, self.ignored = group, subject, ignored
+
+
+class GroupCoupon(object):
+    """GroupCoupon object - give groups special gifts on creation."""
+    def __init__(self, code, valid_until, action, **kwargs):
+        self.id = code.upper()
+        self.valid_until = valid_until
+        self.action = action
+        for (key, value) in kwargs.items():
+            setattr(self, key, value)
+
+    @classmethod
+    def get(cls, code):
+        try:
+            return meta.Session.query(cls).filter_by(id=code.upper()).one()
+        except NoResultFound:
+            return None
+
+    def active(self):
+        return self.valid_until >= datetime.today()
 
 
 class Group(ContentItem, FolderMixin, LimitedUploadMixin):
