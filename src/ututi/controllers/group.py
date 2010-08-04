@@ -252,7 +252,8 @@ def group_action(method):
                     h.mokejimai_form(
                         transaction_type='grouplimits' + str(i+1),
                         amount=amount,
-                        accepturl=group.url(action='pay_accept', qualified=True),
+                        accepturl=group.url(action='files', paid_space=payment_types[i], qualified=True),
+                        # XXX
                         cancelurl=group.url(action='pay_cancel', qualified=True),
                         orderid='%s%d_%s_%s' % ('grouplimits', i+1, c.user.id, group.id))
                              for i, amount in enumerate(payment_amounts)]
@@ -273,8 +274,8 @@ def group_action(method):
                     h.mokejimai_form(
                         transaction_type='smspayment' + str(i+1),
                         amount=amount,
-                        # TODO: custom views for SMS payments
-                        accepturl=group.url(action='pay_accept', qualified=True),
+                        accepturl=group.url(action='members', paid_sms=payment_types[i], qualified=True),
+                        # XXX
                         cancelurl=group.url(action='pay_cancel', qualified=True),
                         orderid='%s%d_%s' % ('smspayment', i+1, c.user.id))
                              for i, amount in enumerate(payment_amounts)]
