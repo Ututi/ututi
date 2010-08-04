@@ -83,7 +83,7 @@
                       ${_('SMS message')}
                   </div>
                   <div>
-                    ${_('Send an SMS message to number <span style="font-size: 14px">1337</span> with the following content:')|n}
+                    ${_('Send an SMS message to number <span style="font-size: 14px">%(phone)s</span> with the following content:') % dict(phone=c.pylons_config.get('fortumo.phone_number', '1337')) |n}
                   </div>
                   <div class="sms-content">TXT ${c.pylons_config.get('fortumo.group_space_small.code')} ${c.group.group_id}</div>
                   <div>
@@ -262,10 +262,6 @@
     </div>
     <span>${_('Message text:')}</span>
 
-    ##<div>
-    ##  ${_('Send a message to number 1337 (2 Lt): "TXT&nbsp;%(sms_code)s&nbsp;%(group_id)s&nbsp;Your message"') % dict(sms_code=c.pylons_config.get('fortumo.personal_sms_credits.code', 'U2TISMS'), group_id=c.group.group_id) |n}
-    ##</div>
-
     %if c.user.sms_messages_remaining:
       <form method='post' action="${url(controller='group', action='send_sms', id=group.group_id)}">
           <input type="hidden" name="current_url" value="${url.current()}" />
@@ -311,7 +307,7 @@
                       ${_('SMS message')}
                   </div>
                   <div>
-                    ${_('Send an SMS message to number <span style="font-size: 14px">1337</span> with the following content:')|n}
+                    ${_('Send an SMS message to number <span style="font-size: 14px">%(phone)s</span> with the following content:') % dict(phone=c.pylons_config.get('fortumo.phone_number', '1337')) |n}
                   </div>
                   <div class="sms-content">TXT ${c.pylons_config.get('fortumo.personal_sms_credits.code')} ${c.group.group_id}</div>
                   <div>
@@ -412,7 +408,7 @@
       % if not c.user.phone_confirmed:
         ${_('You need to confirm your phone in your <a href="%s">profile</a>.') % url(controller='profile', action='edit')|n}
       % endif
-      ${_('Send an SMS to number 1337 with the content "TXT&nbsp;%(sms_code)s" (price: 10 Lt) to buy 100 credits.') % dict(sms_code=c.pylons_config.get('fortumo.personal_sms_credits.code', 'U2TISMS')) |n}
+      ${_('Send an SMS to number %(phone)s with the content "TXT&nbsp;%(sms_code)s" (price: 10 Lt) to buy 100 credits.') % dict(sms_code=c.pylons_config.get('fortumo.personal_sms_credits.code', 'U2TISMS'), phone=c.pylons_config.get('fortumo.phone_number', '1337')) |n}
     %endif
   </%self:uportlet>
 </%def>

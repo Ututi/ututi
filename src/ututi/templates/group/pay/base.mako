@@ -37,7 +37,7 @@
 
   <div class="static-content">
     ${_('You can also pay for group space by SMS.')}
-    ${_('First, get some credits by sending an SMS "<strong>TXT&nbsp;%(sms_code2)s&nbsp;%(group_id)s</strong>" (2 Lt) or "<strong>TXT&nbsp;%(sms_code10)s&nbsp;%(group_id)s</strong>" (10 Lt) to the number 1337.') % dict(group_id=c.group.group_id, sms_code2=c.pylons_config.get('fortumo.group_space_small.code', 'UFILES2'), sms_code10=c.pylons_config.get('fortumo.group_space_large.code', 'UFILES10')) |n}
+    ${_('First, get some credits by sending an SMS "<strong>TXT&nbsp;%(sms_code2)s&nbsp;%(group_id)s</strong>" (2 Lt) or "<strong>TXT&nbsp;%(sms_code10)s&nbsp;%(group_id)s</strong>" (10 Lt) to the number %(phone)s.') % dict(group_id=c.group.group_id, sms_code2=c.pylons_config.get('fortumo.group_space_small.code', 'UFILES2'), sms_code10=c.pylons_config.get('fortumo.group_space_large.code', 'UFILES10'), phone=c.pylons_config.get('fortumo.phone_number', '1337')) |n}
     ## TODO: pay by bank
     ${_('1 month costs 10 credits, 3 months cost 20 credits, 6 months cost 30 credits.') |n}
   </div>
