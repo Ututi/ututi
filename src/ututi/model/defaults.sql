@@ -21,7 +21,7 @@ create table users (
        phone_number varchar(20) default null,
        phone_confirmed boolean default false,
        phone_confirmation_key char(32) default '',
-       sms_messages_remaining int8 default 50,
+       sms_messages_remaining int8 default 30,
        profile_is_public boolean default true,
        primary key (id));;
 
