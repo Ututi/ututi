@@ -239,22 +239,23 @@ def group_action(method):
         c.security_context = group
         c.object_location = group.location
         c.group = group
-        c.group_payment_month = int(config.get('group_payment_month', 1000))
-        c.group_payment_quarter = int(config.get('group_payment_quarter', 2000))
-        c.group_payment_halfyear = int(config.get('group_payment_halfyear', 3000))
 
         if c.user:
-            payment_forms = []
             payment_types = [_('month'), _('3 months'), _('6 months')]
-            payment_amounts = [c.group_payment_month, c.group_payment_quarter, c.group_payment_halfyear]
-            for amount in payment_amounts:
-                payment_forms.append(h.mokejimai_form(
-                        transaction_type='grouplimits',
+            payment_amounts = [int(config.get(payment_id, default))
+                                   for payment_id, default in
+                                       ['group_payment_month', 1000],
+                                       ['group_payment_quarter', 2000],
+                                       ['group_payment_halfyear', 3000]]
+            payment_forms = [
+                    h.mokejimai_form(
+                        transaction_type='grouplimits' + str(i+1),
                         amount=amount,
                         accepturl=group.url(action='pay_accept', qualified=True),
                         cancelurl=group.url(action='pay_cancel', qualified=True),
-                        orderid='%s_%s_%s' % ('grouplimits', c.user.id, group.id)))
-            c.payments = zip(payment_types, payment_amounts, payment_forms)
+                        orderid='%s%d_%s_%s' % ('grouplimits', i+1, c.user.id, group.id))
+                             for i, amount in enumerate(payment_amounts)]
+            c.filearea_payments = zip(payment_types, payment_amounts, payment_forms)
 
         c.group_file_limit = int(config.get('group_file_limit', 200 * 1024 * 1024))
         c.breadcrumbs = [{'title': group.title, 'link': group.url()}]

@@ -2251,20 +2251,13 @@ class Payment(object):
         if payment_type == 'support':
             user_id = payment_info
             self.user = User.get_byid(int(user_id))
-        elif payment_type == 'grouplimits':
+        elif payment_type.startswith('grouplimits'):
             user_id, group_id = payment_info.split('_', 1)
             self.user = User.get_byid(int(user_id))
             self.group = Group.get(int(group_id))
 
             if self.raw_error == '':
-                if self.amount == int(config.get('group_payment_month', 1000)):
-                    period = 31
-                elif self.amount == int(config.get('group_payment_quarter', 2000)):
-                    period = 100
-                elif self.amount == int(config.get('group_payment_halfyear', 3000)):
-                    period = 200
-                else:
-                    raise ValueError('Invalid payment amount: %d' % self.amount)
+                period = {'1': 31, '2': 100, '3': 200}[payment_type[-1]]
                 self.group.purchase_days(period)
 
         self.valid = True

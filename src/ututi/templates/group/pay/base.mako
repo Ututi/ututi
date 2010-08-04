@@ -20,7 +20,7 @@
     ${_('By paying Your group will be able to store an <strong>unlimited amount of files</strong>:')|n}
   </div>
 
-  %for period, amount, form in c.payments:
+  %for period, amount, form in c.filearea_payments:
   <div style="margin: 5px; float: left;">
     <form action="${form.action}" method="POST">
       %for key, val in form.fields:

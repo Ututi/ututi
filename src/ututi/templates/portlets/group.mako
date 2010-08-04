@@ -104,7 +104,7 @@
 
                   <table>
 
-                    %for period, amount, form in c.payments:
+                    %for period, amount, form in c.filearea_payments:
                       <tr>
                         <td>
                         <form action="${form.action}" method="POST">
