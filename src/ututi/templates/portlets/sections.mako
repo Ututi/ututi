@@ -44,7 +44,9 @@
     %if not 'sms' in exclude and c.group.is_member(c.user):
       ${group_sms_portlet()}
     %endif
-    ${ututi_prizes_portlet()}
+    <div style="padding-top: 1em">
+      ${ututi_prizes_portlet()}
+    </div>
   %else:
     ${group_members_portlet()}
     ${user_support_portlet()}
