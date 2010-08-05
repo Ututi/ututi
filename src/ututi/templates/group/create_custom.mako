@@ -29,7 +29,7 @@ ${_('New custom group')}
         ${self.access_settings()}
 
         <br />
-
+        ${self.coupon_field()}
         ${h.input_submit(_('Continue'), class_='btnMedium', id="continue-button")}
       </fieldset>
     </form>

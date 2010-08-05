@@ -435,3 +435,10 @@ def path_with_hash(fn):
     file_path = os.path.join(config['pylons.paths']['static_files'], fn[1:])
     digest = md5(file(file_path).read()).hexdigest()
     return '%s?hash=%s' % (fn, digest)
+
+def coupons_available(user):
+    from ututi.model import meta, GroupCoupon
+    return meta.Session\
+        .query(GroupCoupon)\
+        .filter(~GroupCoupon.id.in_([coup.id for coup in user.coupons]))\
+        .all()

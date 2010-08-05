@@ -19,6 +19,12 @@
            {'id': id, 'is_email': is_email});
   }
 
+  function check_group_coupon() {
+    var code = $('input#group-coupon-field').val();
+    $('#group-coupon-check').load("${url(controller='group', action='js_check_coupon')}",
+           {'code': code});
+  }
+
   function afterDelayedKeyup(selector, action, delay){
     jQuery(selector).keyup(function(){
       if(typeof(window['inputTimeout']) != "undefined"){
@@ -65,6 +71,18 @@
 </div>
 </%def>
 
+<%def name="coupon_check_response(coupon_code, available)">
+<div>
+<span class="${'valid' if available else 'invalid'}">
+  %if available:
+    <span class="green">${_('Coupon code is valid!')}</span>
+  %else:
+    <span class="grey">${_('Coupon code is invalid.')}</span>
+  %endif
+</span>
+</div>
+</%def>
+
 <%def name="group_title_field()">
   ${h.input_line('title', _('Group title'))}
 </%def>
@@ -98,7 +116,28 @@
     afterDelayedKeyup('input#group-id-field',"check_group_id(false)",500);
   //]]>
   </script>
+</%def>
 
+<%def name="coupon_field()">
+  %if h.coupons_available(c.user):
+    <label for="group-coupon-field">
+      <span class="labelText">${_("Gift coupon code")}</span>
+    </label>
+    <label>
+      <span class="textField">
+        <input class="coupon" type="text" id="group-coupon-field" name="coupon_code" />
+        <span class="edge"></span>
+      </span>
+    </label>
+    <div id="group-coupon-check">
+      <form:error name="coupon_code" />
+    </div>
+    <script type="text/javascript">
+    //<![CDATA[
+      afterDelayedKeyup('input#group-coupon-field',"check_group_coupon()",500);
+    //]]>
+    </script>
+  %endif
 </%def>
 
 <%def name="group_email_field()">

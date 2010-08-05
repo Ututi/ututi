@@ -45,6 +45,7 @@ from nous.mailpost import copy_chunked
 
 from zope.cachedescriptors.property import Lazy
 
+from pylons.i18n.translation import ungettext
 from pylons.i18n import _
 
 log = logging.getLogger(__name__)
@@ -418,6 +419,11 @@ def setup_orm(engine):
     orm.mapper(GroupCoupon, group_coupons_table,
                properties ={'groups': relation(Group, secondary=coupon_usage_table, backref="coupons", lazy=True),
                             'users': relation(User, secondary=coupon_usage_table, backref="coupons", lazy=True)})
+
+    orm.mapper(CouponUsage, coupon_usage_table,
+               properties ={'group': relation(Group, lazy=True),
+                            'user': relation(User, lazy=True),
+                            'coupon': relation(GroupCoupon, lazy=True)})
 
     global group_invitations_table
     group_invitations_table = Table("group_invitations", meta.metadata,
@@ -1109,6 +1115,13 @@ class GroupSubjectMonitoring(object):
         self.group, self.subject, self.ignored = group, subject, ignored
 
 
+class CouponUsage(object):
+    """Coupon usage record."""
+    def __init__(self, coupon, user, group):
+        self.coupon = coupon
+        self.user = user
+        self.group = group
+
 class GroupCoupon(object):
     """GroupCoupon object - give groups special gifts on creation."""
     def __init__(self, code, valid_until, action, **kwargs):
@@ -1130,16 +1143,31 @@ class GroupCoupon(object):
         """ Ensure that a coupon is used only once per user or per group and has not expired yet. """
         valid = self.valid_until >= datetime.today()
         if valid and user is not None:
-            valid = valid and user not in coupon.users
+            valid = valid and user not in self.users
         if valid and group is not None:
-            valid = valid and group not in coupon.groups
+            valid = valid and group not in self.groups
         return valid
 
-    def apply(self, group):
+    def description(self):
+        strings = {
+            'unlimitedspace': ungettext("unlimited group private files for %(day_count)d day",
+                                        "unlimited group private files for %(day_count)d days",
+                                        self.day_count) % dict(day_count = self.day_count)}
+        return strings[self.action]
+
+    def apply(self, group, user):
         if self.action == 'unlimitedspace':
-            pass
+            if self.active(user, group) and group.has_file_area:
+                end_date = group.private_files_lock_date or datetime.today()
+                end_date += timedelta(days=self.day_count)
+                group.private_files_lock_date = end_date
+
+                c_u = CouponUsage(coupon=self, group=group, user=user)
+                meta.Session.add(c_u)
+                return True
         else:
             raise AttributeError("Cannot apply unknown GroupCoupon action %s !" % self.action)
+        return False
 
 
 class Group(ContentItem, FolderMixin, LimitedUploadMixin):

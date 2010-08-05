@@ -16,7 +16,7 @@ from pylons.i18n import ungettext, _
 from webhelpers import paginate
 
 from formencode import Schema, validators, Invalid, variabledecode, htmlfill
-from formencode.compound import Pipe
+from formencode.compound import Pipe, Any
 from formencode.foreach import ForEach
 
 from formencode.variabledecode import NestedVariables
@@ -29,8 +29,9 @@ from ututi.lib.fileview import FileViewMixin
 from ututi.lib.image import serve_image
 from ututi.lib.sms import sms_cost
 from ututi.lib.base import BaseController, render, render_lang
-from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator, TagsValidator, validate
+from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator, TagsValidator, GroupCouponValidator, validate
 
+from ututi.model import GroupCoupon
 from ututi.model import LocationTag, User, GroupMember, GroupMembershipType, File, OutgoingGroupSMSMessage
 from ututi.model import meta, Group, SimpleTag, Subject, ContentItem, PendingInvitation, PendingRequest
 from ututi.controllers.subject import SubjectAddMixin
@@ -170,6 +171,8 @@ class CreateGroupFormBase(Schema):
               GroupIdValidator())
     logo_upload = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
     description = validators.UnicodeString()
+    coupon_code = Any(validators.Constant(''),
+                                          GroupCouponValidator(check_collision=False))
 
 
 class CreatePublicGroupForm(CreateGroupFormBase):
@@ -409,6 +412,14 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
     def _edit_page_form(self):
         return render('group/edit_page.mako')
 
+    def _apply_coupon(self, group, form_values):
+        code = form_values.get('coupon_code', None)
+        coupon = GroupCoupon.get(code)
+        if coupon.apply(group, c.user):
+            h.flash(_("Great! You have used a coupon code and will now get %s !") % coupon.description())
+        else:
+            h.flash(_("Sorry. We were not able to apply that coupon."))
+
     @group_action
     @ActionProtector("admin", "member")
     def edit_page(self, group):
@@ -480,7 +491,7 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
                 group.logo = logo.file.read()
 
             group.add_member(c.user, admin=True)
-
+            self._apply_coupon(group, values)
             meta.Session.commit()
             redirect(url(controller='group', action='invite_members_step', id=values['id']))
 
@@ -518,7 +529,7 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
                 group.logo = logo.file.read()
 
             group.add_member(c.user, admin=True)
-
+            self._apply_coupon(group, values)
             meta.Session.commit()
             redirect(url(controller='group', action='invite_members_step', id=values['id']))
         return htmlfill.render(self._create_public_form())
@@ -563,7 +574,7 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
                 group.logo = logo.file.read()
 
             group.add_member(c.user, admin=True)
-
+            self._apply_coupon(group, values)
             meta.Session.commit()
             redirect(url(controller='group', action='invite_members_step', id=values['id']))
         defaults = {'can_add_subjects': True,
@@ -1306,3 +1317,9 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
 
         exists = meta.Session.query(Group).filter(Group.group_id==group_id).count() != 0
         return render_mako_def('group/create_base.mako', 'id_check_response', group_id=group_id, taken=exists, is_email=is_email)
+
+    def js_check_coupon(self):
+        code = request.params.get('code')
+        coupon = GroupCoupon.get(code)
+        available = coupon is not None and coupon.active()
+        return render_mako_def('group/create_base.mako', 'coupon_check_response', coupon_code=code, available=available)

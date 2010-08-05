@@ -23,7 +23,7 @@
         ${self.group_title_field()}
         ${self.logo_field()}
         ${self.description_field()}
-
+        ${self.coupon_field()}
         ${h.input_submit(_('Continue'), class_='btnMedium', id="continue-button")}
       </fieldset>
     </form>

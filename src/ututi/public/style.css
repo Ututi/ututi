@@ -1036,7 +1036,8 @@ div.profileOptionLinks div.drop{
     margin-top: 6px;
     margin-bottom: 6px;
 }
-#group_settings_form input.address {
+#group_settings_form input.address,
+#group_settings_form input.coupon {
     width: 142px;
 }
 #group_settings_form label.button {
@@ -1792,7 +1793,8 @@ div.usergruperight {
     line-height: 28px;
 }
 
-#CreatePublicGroupLeft div#group-id-check div {
+div#group-id-check div,
+div#group-coupon-check div {
     border-top: 1px solid #e9e6e6;
     border-bottom: 1px solid #e9e6e6;
     text-align: center;
@@ -3372,12 +3374,14 @@ div.please-register {
     padding-top: 3px;
 }
 
-#group-id-check .taken {
+#group-id-check .taken,
+#group-coupon-check .invalid {
     padding-left: 15px;
     background: transparent url("../img/icons/alert_small.png") left center no-repeat;
 }
 
-#group-id-check .free {
+#group-id-check .free,
+#group-coupon-check .valid {
     padding-left: 15px;
     background: transparent url("../img/icons/tick_10.png") left center no-repeat;
 }
