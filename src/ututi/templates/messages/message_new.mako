@@ -9,7 +9,7 @@ ${_('New message')}
 ##</div>
 
 <form method="post" action="${url(controller='messages', action='new_message', user_id=c.recipient.id)}"
-      id="new_message_form" class="fullForm" enctype="multipart/form-data">
+    id="new_message_form" class="fullForm" enctype="multipart/form-data">
   ${h.input_line('title', _('Subject'))}
   ${h.input_area('message', _('Message'))}
   <br />
