@@ -1281,29 +1281,6 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
     @ActionProtector("member", "admin")
     def pay(self, group):
         c.group_menu_current_item = 'home'
-
-        months_purchased = int(request.params.get('months', 0))
-        if months_purchased and check_crowds(['admin'], context=group):
-            if months_purchased == 1 and group.private_files_credits >= 10:
-                group.private_files_credits -= 10
-                group.purchase_days(31)
-            elif months_purchased == 3 and group.private_files_credits >= 20:
-                group.private_files_credits -= 20
-                group.purchase_days(100)
-            elif months_purchased == 6 and group.private_files_credits >= 30:
-                group.private_files_credits -= 30
-                group.purchase_days(200)
-            else:
-                raise ValueError(months_purchased)
-            meta.Session.commit()
-            h.flash(_('Purchased %s months for private file area.') % months_purchased)
-            redirect(url(controller='group', action='pay', id=group.group_id))
-
-        if request.params.get('give') and c.testing:
-            group.private_files_credits += int(request.params.get('give'))
-            meta.Session.commit()
-            redirect(url(controller='group', action='pay', id=group.group_id))
-
         return render_lang('group/pay.mako')
 
     @group_action

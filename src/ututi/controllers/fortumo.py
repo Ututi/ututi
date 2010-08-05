@@ -20,13 +20,9 @@ class FortumoController(BaseController):
         """Buy 100 personal SMS messages."""
         return self._receive_message('personal_sms_credits')
 
-    def group_space_small(self):
+    def group_space(self):
         """Deposit money for group space by SMS."""
-        return self._receive_message('group_space_small')
-
-    def group_space_large(self):
-        """Deposit money for group space by SMS."""
-        return self._receive_message('group_space_large')
+        return self._receive_message('group_space')
 
     def group_message(self):
         """Send a message to a group."""
@@ -76,23 +72,17 @@ class FortumoController(BaseController):
         msg.success = True
         return _('You have purchased 100 SMS messages for 10 Lt; now you have %d messages.') % msg.sender.sms_messages_remaining
 
-    def _handle_group_space_small(self, msg):
-        return self._handle_group_space(msg, value=2)
-
-    def _handle_group_space_large(self, msg):
-        return self._handle_group_space(msg, value=10)
-
-    def _handle_group_space(self, msg, value):
+    def _handle_group_space(self, msg):
         group_id = msg.message_text.strip()
         group = Group.get(group_id)
         if group is None:
             return _('Invalid group: %s') % group_id
 
-        group.private_files_credits += value
+        group.purchase_days(31)
 
         msg.success = True
-        return _('Added %d credits to group space account; now there are %d.'
-                 ) % (value, group.private_files_credits)
+        return _('Purchased another month of group space for "%s" (until %s).'
+                 ) % (group.group_id, group.private_files_lock_date.date().isoformat())
 
     def _handle_group_message(self, msg):
         parts = msg.message_text.split(None, 1)
