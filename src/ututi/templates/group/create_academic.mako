@@ -33,4 +33,9 @@
   ${self.group_live_search_js()}
 
   <%self:right_pane title="${_('Recommended groups')}">
+    <ul>
+      <li>${_('Enter your university and department')}</li>
+      <li>${_('Find existing groups')}</li>
+      <li>${_('Join one')}</li>
+    </ul>
   </%self:right_pane>

@@ -40,4 +40,5 @@ ${_('New public group')}
         <li>${_('News publishing')}</li>
         <li>${_('No confirmation needed for membership')}</li>
       </ul>
+
   </%self:right_pane>

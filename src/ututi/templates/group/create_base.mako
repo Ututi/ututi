@@ -162,6 +162,8 @@
   <label for="forum_type"><span class="labelText">${_('Forum type')}</span></label>
   ${h.select("forum_type", c.forum_type, c.forum_types)}
 
+  <div style="height: 5px"></div>
+
   <label for="group-id-field">
     <span class="labelText mailinglist-choice">${_("Group e-mail address")}</span>
     <span class="labelText forum-choice" style="display: none">${_("Group address on the web")}</span>
@@ -274,23 +276,9 @@
       <h1 class="pageTitle">${title}</h1>
         ${caller.body()}
 
-        %if sidebar:
-          <ul>
-            <li>${_('Enter your university and department')}</li>
-            <li>${_('Find existing groups')}</li>
-            <li>${_('Join one')}</li>
-          </ul>
-        %endif
-
     </div>
 
     <div id="sidebar">
-        ##<div class="search-header">
-        ##  ${_('Recommended groups from your university and faculty')}
-        ##</div>
-        ##<div class="message">
-        ##  ${_('Enter your university and faculty and you will be able to see groups that are already here. If you find your group, join them!')}
-        ##</div>
     </div>
   </div>
 

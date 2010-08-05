@@ -12,9 +12,12 @@ ${_('New custom group')}
           id="group_settings_form" enctype="multipart/form-data">
 
       <fieldset>
+        <h2>${_('Group data')}</h2>
+
         ${self.group_title_field()}
         ${self.logo_field()}
         ${self.description_field()}
+        <div style="height: 12px"></div>
         ${self.forum_type_and_id()}
         <div style="height: 5px"></div>
         ${self.location_field()}
@@ -35,8 +38,10 @@ ${_('New custom group')}
 
   ${self.group_live_search_js()}
 
-  <%self:right_pane title="${_('What can you do with custom groups?')}">
+  <%self:right_pane title="${_('Set up your own group')}">
       <ul>
-        <li>${_('Pick the functionality you need yourself')}</li>
+        <li>${_('Choose the means of communication')}</li>
+        <li>${_('Choose the visibility of a group')}</li>
+        <li>${_('Choose a way to register in this group')}</li>
       </ul>
   </%self:right_pane>

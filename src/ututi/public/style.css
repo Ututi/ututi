@@ -979,7 +979,7 @@ div.profileOptionLinks div.drop{
 
 /* group_settings_form forms*/
 #group_settings_form {
-    padding: 0 0 0 15px;
+    margin-left: 15px;
     width: 90%;
 }
 #group_settings_form select {
@@ -2558,7 +2558,19 @@ table.group-type-choice td.button {
     display: inline-block;
 }
 
-#group_settings_form input[type=checkbox],
+#group_settings_form h2 {
+    color: #666;
+    font-size: 16px;
+    font-weight: bold;
+    padding-top: 12px;
+    padding-bottom: 8px;
+    margin-left: -15px;
+}
+
+#group_settings_form input[type=checkbox] {
+    width: 1em;
+}
+
 #group_settings_form input[type=radio] {
     width: 1em;
     margin-left: 1em;
