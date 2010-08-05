@@ -425,7 +425,7 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
     def update_page(self, group):
         page_content = self.form_result['page_content']
         if page_content is None:
-            page_content = ''
+            page_content = u''
         group.page = page_content
         group.page_public = (self.form_result.get('page_public', False) == 'public')
         meta.Session.commit()
