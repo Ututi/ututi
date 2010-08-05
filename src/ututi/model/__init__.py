@@ -666,12 +666,12 @@ class User(object):
             if email.confirmed or msg.force:
                 msg.send(email.email)
             else:
-                log.info("Could not send message to uncofirmed email %(email)s" % dict(email=email.email))
+                log.info("Could not send message to unconfirmed email %(email)s" % dict(email=email.email))
         elif isinstance(msg, GGMessage):
             if self.gadugadu_confirmed or msg.force:
                 msg.send(self.gadugadu_uin)
             else:
-                log.info("Could not send message to uncofirmed gadugadu account %(gg)s" % dict(gg=self.gadugadu_uin))
+                log.info("Could not send message to unconfirmed gadugadu account %(gg)s" % dict(gg=self.gadugadu_uin))
         elif isinstance(msg, SMSMessage):
             if self.phone_number is not None and (self.phone_confirmed or msg.force):
                 msg.recipient=self
