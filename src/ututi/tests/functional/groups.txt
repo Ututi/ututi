@@ -45,9 +45,6 @@ We can edit the group's information.
    >>> browser.printQuery("id('group_info_portlet-content')//h2/text()")
    Ututi moderatoriai
 
-   >>> browser.printQuery("id('group_info_portlet-content')//p[@class='grupes-aprasymas']/text()")
-   Ututi moderatorių grupė
-
 We can add a group at the url /groups/add.
 
     >>> browser.open('http://localhost/groups/add')
