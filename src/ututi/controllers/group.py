@@ -414,11 +414,12 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
 
     def _apply_coupon(self, group, form_values):
         code = form_values.get('coupon_code', None)
-        coupon = GroupCoupon.get(code)
-        if coupon.apply(group, c.user):
-            h.flash(_("Great! You have used a coupon code and will now get %s !") % coupon.description())
-        else:
-            h.flash(_("Sorry. We were not able to apply that coupon."))
+        if code is not None:
+            coupon = GroupCoupon.get(code)
+            if coupon.apply(group, c.user):
+                h.flash(_("Great! You have used a coupon code and will now get %s !") % coupon.description())
+            else:
+                h.flash(_("Sorry. We were not able to apply that coupon."))
 
     @group_action
     @ActionProtector("admin", "member")

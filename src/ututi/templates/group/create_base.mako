@@ -137,6 +137,8 @@
       afterDelayedKeyup('input#group-coupon-field',"check_group_coupon()",500);
     //]]>
     </script>
+  %else:
+    <input type="hidden" name="coupon_code" value=""/>
   %endif
 </%def>
 
