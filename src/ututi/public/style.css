@@ -183,6 +183,7 @@ button.btn,
 button.btnMedium,
 button.btnLarge {
     position: relative;
+    font-family: arial, sans-serif;
     border: 0;
     padding: 0;
     cursor: pointer;
@@ -225,7 +226,7 @@ button.btnLarge:hover span {
 button.btn {
     padding: 0 15px 0 0;
     margin-right: 5px;
-    font-size: 12px;
+    font-size: 13px;
     text-align: center;
     background: transparent url("img/buttons_bg_split.png") no-repeat right -110px;
 }
