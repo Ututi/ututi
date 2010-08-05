@@ -66,7 +66,7 @@
 </%def>
 
 <%def name="group_title_field()">
-  ${h.input_line('title', _('Group title'), id='group-title-field')}
+  ${h.input_line('title', _('Group title'))}
 </%def>
 
 <%def name="year_field()">
