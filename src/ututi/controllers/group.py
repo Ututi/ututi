@@ -78,7 +78,7 @@ class GroupIdValidator(validators.FancyValidator):
             if g is not None:
                 raise Invalid(self.message('duplicate', state), value, state)
 
-            usernameRE = re.compile(r"^[^ \t\n\r@<>()\\/+]+$", re.I)
+            usernameRE = re.compile(r"^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*$", re.I)
             if not usernameRE.search(value):
                 raise Invalid(self.message('badId', state), value, state)
 
@@ -1316,7 +1316,13 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
         group_id = request.params.get('id')
         is_email = request.params.get('is_email', '') == 'true'
 
-        exists = meta.Session.query(Group).filter(Group.group_id==group_id).count() != 0
+        exists = len(group_id) < 4 or len(group_id) > 20
+
+        try:
+            GroupIdValidator.to_python(group_id)
+        except Invalid:
+            exists = True
+
         return render_mako_def('group/create_base.mako', 'id_check_response', group_id=group_id, taken=exists, is_email=is_email)
 
     def js_check_coupon(self):

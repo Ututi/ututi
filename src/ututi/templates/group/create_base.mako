@@ -63,7 +63,7 @@
   http://ututi.lt/group/<span class="bold">${group_id}</span>
   %endif
   %if taken:
-    <span class="grey">${_(' is taken.')}</span>
+    <span class="grey">${_(' is invalid.')}</span>
   %else:
     <span class="green">${_(' is free!')}</span>
   %endif
