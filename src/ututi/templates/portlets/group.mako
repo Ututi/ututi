@@ -52,9 +52,9 @@
       <div class="clear"></div>
     </div>
     %if (group.is_member(c.user) or c.security_context and h.check_crowds(['admin', 'moderator'])) and group.has_file_area:
-    <div class="profile topLine grey" style="font-size: 11px">
-      <span class="bold">${_('Available space for private group files:')}</span>
-      <span class="verysmall">${h.file_size(group.free_size)}</span>
+    <div class="profile topLine grey">
+      <span class="bold">${_('Remaining private space:')}</span>
+      <span>${h.file_size(group.free_size)}</span>
       ${h.image('/images/details/pbar%d.png' % group.free_size_points, alt=h.file_size(group.size), class_='area_size_points')|n}
       <div style="padding-top: 4px; padding-bottom: 7px" class="bottomLine">
         <form>
@@ -136,14 +136,11 @@
 
     </div>
     %endif
-    <p class="grupes-aprasymas">
-      ${group.description}
-    </p>
 
     %if group.is_member(c.user) or c.security_context and h.check_crowds(['admin', 'moderator']):
     <div class="click2show">
-      <div class="remeju-sarasas click">
-        <a href="#">${_("More settings")}</a>
+      <div class="click more_settings">
+        <span class="green verysmall">${_("More settings")}</span>
       </div>
       <div class="show" id="group_settings_block">
         %if group.is_subscribed(c.user):
