@@ -90,35 +90,35 @@
               </div>
 
               <div class="right-column">
-                  <div class="title">
-                      ${_('E-banking')}
-                  </div>
-                  <div class="description">
-                      ${_('If you pay by bank, a discount applies.')|n}
-                  </div>
+                <div class="title">
+                  ${_('E-banking')}
+                </div>
+                <div class="description">
+                  ${_('If you pay by bank, a discount applies.')|n}
+                </div>
 
-                  <table>
+                <table>
 
-                    %for period, amount, form in c.filearea_payments:
-                      <tr>
-                        <td>
-                        <form action="${form.action}" method="POST">
-                          %for key, val in form.fields:
-                            <input type="hidden" name="${key}" value="${val}" />
-                          %endfor
-                          ${h.input_submit(_('%d Lt') % (int(amount) / 100), class_='btnMedium')}
-                        </form>
-                        </td>
-                        <td>
-                          <span class="larger">
-                            - ${period}
-                          </span>
-                        </td>
-                      </tr>
+                  %for period, amount, form in c.filearea_payments:
+                    <tr>
+                      <td>
+                      <form action="${form.action}" method="POST">
+                        %for key, val in form.fields:
+                          <input type="hidden" name="${key}" value="${val}" />
+                        %endfor
+                        ${h.input_submit(_('%d Lt') % (int(amount) / 100), class_='btnMedium')}
+                      </form>
+                      </td>
+                      <td>
+                        <span class="larger">
+                          - ${period}
+                        </span>
+                      </td>
+                    </tr>
 
-                    %endfor
+                  %endfor
 
-                  </table>
+                </table>
 
               </div>
           </div>

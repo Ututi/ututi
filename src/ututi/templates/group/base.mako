@@ -90,3 +90,57 @@ ${next.body()}
     });
   </script>
 %endif
+
+%if request.GET.get('cancelled_space_payment'):
+    <div id="cancelled-space-dialog" style="display: none">
+      <div style="font-size: 14px; color: #666; font-weight: bold"
+        >${_("You have decided not to increase your group's private file limit.")}</div>
+
+      <div style="padding-top: 1em; padding-bottom: 1em">
+        ${_('Perhaps you will change your mind later?')}
+        ${_('Have fun using Ututi groups!')}
+      </div>
+
+      <div style="padding-left: 120px">
+        ${h.image('/images/sad_cat.jpg', alt=_('Sad cat'))}
+      </div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+        var dlg = $('#cancelled-space-dialog').dialog({
+            title: '${_('Thanks!')}',
+            width: 500
+        });
+        dlg.dialog("open");
+        return false;
+    });
+  </script>
+%endif
+
+%if request.GET.get('cancelled_sms_payment'):
+    <div id="cancelled-sms-dialog" style="display: none">
+      <div style="font-size: 14px; color: #666; font-weight: bold"
+        >${_("You have decided not to buy extra SMS credits.")}</div>
+
+      <div style="padding-top: 1em; padding-bottom: 1em">
+        ${_('Perhaps you will change your mind later?')}
+        ${_('Have fun using Ututi groups!')}
+      </div>
+
+      <div style="padding-left: 120px">
+        ${h.image('/images/sad_cat.jpg', alt=_('Sad cat'))}
+      </div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+        var dlg = $('#cancelled-sms-dialog').dialog({
+            title: '${_('Thanks!')}',
+            width: 500
+        });
+        dlg.dialog("open");
+        return false;
+    });
+  </script>
+%endif

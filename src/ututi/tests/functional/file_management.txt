@@ -318,9 +318,10 @@ for the service.
 
 What if we had decided to cancel the payment?
     >>> browser.open(cancel)
-    >>> browser.printQuery('//h1/text()')
-    Moderatoriai
-    You have decided not to increase your group's file limit
+    >>> browser.printQuery('id("cancelled-space-dialog")/div/text()')
+    You have decided not to increase your group's private file limit.
+    Perhaps you will change your mind later?
+    Have fun using Ututi groups!
 
 Anyway, let's process the payment:
 
