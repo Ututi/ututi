@@ -3343,6 +3343,11 @@ div.please-register {
     font-size: 16px;
 }
 
+#group_sms_portlet-content .num-credits-remaining.shortage {
+    color: #f00;
+    font-weight: bold;
+}
+
 #group_sms_portlet-content .sms-box {
     background: #e6e6e6;
     margin: -10px;
@@ -3484,7 +3489,7 @@ h2.overline {
     margin-left: 1em;
 }
 
-.clear-left, .clear-right {
+.clear-left, .clear-right, .clear-both {
     height: 0;
     margin: 0;
     padding: 0;
@@ -3497,6 +3502,10 @@ h2.overline {
 
 .clear-right {
     clear: right;
+}
+
+.clear-both {
+    clear: both;
 }
 
 .click2show .show {

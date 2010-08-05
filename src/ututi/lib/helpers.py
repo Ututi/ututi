@@ -299,16 +299,19 @@ def input_psw(name, title, value='', explanation=None, **kwargs):
         HTML.literal('<form:error name="%s" />' % name)])
 
 
-def input_area(name, title, value='', cols='50', rows='5', explanation=None):
+def input_area(name, title, value='', cols='50', rows='5', explanation=None, disabled=False):
     expl = None
     if explanation is not None:
         expl = HTML.div(class_='explanation', c=explanation)
+    kwargs = {}
+    if disabled:
+        kwargs['disabled'] = 'disabled'
 
     from pylons import tmpl_context as c
     return HTML.label(c=[
         HTML.span(class_='labelText', c=[title]),
         HTML.span(class_='textField', c=[
-            HTML.textarea(name_=name, id_=name, cols=cols, rows=rows, c=[value]),
+            HTML.textarea(name_=name, id_=name, cols=cols, rows=rows, c=[value], **kwargs),
             HTML.span(class_='edgeTextArea'),
             expl
             ]),

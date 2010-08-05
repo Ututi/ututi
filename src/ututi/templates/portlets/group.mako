@@ -160,7 +160,7 @@
     %endif
 
     %if group.is_admin(c.user) or c.security_context and h.check_crowds(['admin', 'moderator']):
-      <div class="floatright" style="margin-top: 6px">
+      <div class="floatright">
       <span class="right_arrow">
         <a href="${url(controller='group', action='edit', id=group.group_id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
       </span>
@@ -256,7 +256,7 @@
 
       <div class="credit-info">
         <span class="credits-header">${_('Credits left:')}</span>
-        <span class="num-credits-remaining">${c.user.sms_messages_remaining}</span>
+        <span class="num-credits-remaining ${'shortage' if not c.user.can_send_sms(group) else ''}">${c.user.sms_messages_remaining}</span>
         <div style="float: right">
           <form>
             ${h.input_submit(_('Purchase credits'), id='purchase-credits-button')}
@@ -337,30 +337,28 @@
 
         <form method='post' action="${url(controller='group', action='send_sms', id=group.group_id)}">
             <input type="hidden" name="current_url" value="${url.current()}" />
-            ${h.input_area('sms_message', '', cols=35)}
+            ${h.input_area('sms_message', '', value=('' if c.user.can_send_sms(group) else _('You do not have enough SMS credits to send a message to this group.')), cols=35, disabled=not c.user.can_send_sms(group))}
             %if not c.group.recipients_sms(sender=c.user):
               <div class="error-container">
                 <span class="error-message">${_('No one in this group has confirmed their phone numbers.')}</span>
               </div>
             %endif
-            %if c.user.sms_messages_remaining < len(c.group.recipients_sms(sender=c.user)):
-              <div class="error-container">
-                <span class="error-message">${_('You do not have enough credits to send a message to this group.')}</span>
+
+            %if c.user.can_send_sms(group):
+              <div style="padding-top: 4px; float: left">
+                ${h.input_submit(_('Send'))}
+              </div>
+              <div class="character-counter">
+                  <span id="sms_message_symbols">140</span> / <span id="sms_messages_num">1</span>
               </div>
             %endif
-            <div style="padding-top: 4px; float: left">
-              ${h.input_submit(_('Send'))}
-            </div>
-            <div class="character-counter">
-                <span id="sms_message_symbols">140</span> / <span id="sms_messages_num">1</span>
-            </div>
 
             <div class="cost">
-                <span class="cost-header">${_("Cost:")}</span>
-                <span id="sms_message_credits">${len(c.group.recipients_sms(sender=c.user))}</span> ${_('SMS credits')}
-                <img style="margin-bottom: -3px" src="/images/details/icon_question.png" class="tooltip " alt="${_('One SMS credit allows you to send one SMS message to a single recipient. When sending a message to a group, one credit is charged for every recipient.')}">
+              <span class="cost-header">${_("Cost:")}</span>
+              <span id="sms_message_credits">${len(c.group.recipients_sms(sender=c.user))}</span> ${_('SMS credits')}
+              <img style="margin-bottom: -3px" src="/images/details/icon_question.png" class="tooltip " alt="${_('One SMS credit allows you to send one SMS message to a single recipient. When sending a message to a group, one credit is charged for every recipient.')}">
             </div>
-            <div class="clear-left"></div>
+            <div class="clear-both"></div>
         </form>
 
         <script>

@@ -932,6 +932,9 @@ class User(object):
     def purchase_sms_credits(self, credits):
         self.sms_messages_remaining += credits
 
+    def can_send_sms(self, group):
+        return self.sms_messages_remaining > len(group.recipients_sms(sender=self))
+
 
 email_table = None
 
