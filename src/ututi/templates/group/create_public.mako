@@ -18,12 +18,13 @@ ${_('New public group')}
       <fieldset>
         ${self.group_title_field()}
         ${self.web_address_field()}
+        <div style="height: 5px"></div>
         ${self.location_field()}
 
         ${self.logo_field()}
         ${self.description_field()}
 
-        ${h.input_submit(_('Continue'), class_='btnMedium')}
+        ${h.input_submit(_('Continue'), class_='btnMedium', id="continue-button")}
       </fieldset>
     </form>
 

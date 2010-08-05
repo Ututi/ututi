@@ -19,11 +19,12 @@
         ${self.location_field()}
         ${self.year_field()}
         ${self.group_email_field()}
+        <div style="height: 5px"></div>
         ${self.group_title_field()}
         ${self.logo_field()}
         ${self.description_field()}
 
-        ${h.input_submit(_('Continue'), class_='btnLarge')}
+        ${h.input_submit(_('Continue'), class_='btnMedium', id="continue-button")}
       </fieldset>
     </form>
 
@@ -31,10 +32,5 @@
 
   ${self.group_live_search_js()}
 
-  <%self:right_pane title="${_('What can you do with academic groups?')}">
-      <ul>
-        <li>${_('Mailing list')}</li>
-        <li>${_('Private file area')}</li>
-        <li>${_('Registration with university subjects')}</li>
-      </ul>
+  <%self:right_pane title="${_('Recommended groups')}">
   </%self:right_pane>

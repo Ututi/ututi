@@ -27,7 +27,7 @@ ${_('New custom group')}
 
         <br />
 
-        ${h.input_submit(_('Continue'), class_='btnLarge')}
+        ${h.input_submit(_('Continue'), class_='btnMedium', id="continue-button")}
       </fieldset>
     </form>
 

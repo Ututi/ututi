@@ -6,7 +6,8 @@
 ${_('Choose group type')}
 </%def>
 
-<h1 class="pageTitle">${_('What kind of a group do you want to create?')}</h1>
+<h1 class="pageTitle" style="padding-top: 8px"
+    >${_('What kind of a group do you want to create?')}</h1>
 
 <table class="group-type-choice">
   <tr class="group-type">

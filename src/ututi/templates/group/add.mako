@@ -19,6 +19,7 @@ ${_('New group')}
 <%def name="portlets()">
   <div class="search-header">
     ${_('Recommended groups from your university and faculty')}
+    baz
   </div>
   <div class="message">
     ${_('Enter your university and faculty and you will be able to see groups that are already here. If you find your group, join them!')}
@@ -112,9 +113,9 @@ ${path_steps()}
 </script>
 
 <%def name="live_search(groups)">
-<div class="search-header">
-  ${_('Recommended groups from your university and faculty')}
-</div>
+<h1 class="pageTitle">
+  ${_('Recommended groups')}
+</h1>
 %if len(groups) > 0:
   %for group in groups:
     <div class="live_search_group">
@@ -124,7 +125,9 @@ ${path_steps()}
       <div class="group_information">
         <div>
           <a class="group_title" href="${group.url()}" title="${group.title}">${h.ellipsis(group.title, 30)}</a>
-          <a class="btn" href="${group.url()}"><span>${_('join')}</span></a>
+          <div class="floatright" style="padding-top: 3px">
+            ${h.button_to('Join', group.url())}
+          </div>
         </div>
         <div class="group_members">
           %for member in group.last_seen_members[:4]:

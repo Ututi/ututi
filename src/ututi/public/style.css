@@ -991,7 +991,7 @@ div.profileOptionLinks div.drop{
 }
 .fullForm label,
 #group_settings_form label {
-    font-size: 12px;
+    font-size: 13px;
     margin: 7px 0 0 0;
 }
 
@@ -2576,6 +2576,10 @@ table.group-type-choice td.button {
     width: 300px !important;
 }
 
+#group_settings_form #continue-button {
+    margin-top: 5px;
+}
+
 /* group live search */
 
 #CreatePublicGroupRight div.search-header {
@@ -2634,6 +2638,10 @@ div.live_search_group a.btn {
 #sidebar .message {
     background: #e6e6e6;
     padding: 10px;
+}
+
+#sidebar h1 {
+    margin-bottom: 10px;
 }
 /* end group live search */
 

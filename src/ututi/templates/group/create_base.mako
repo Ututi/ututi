@@ -66,7 +66,7 @@
 </%def>
 
 <%def name="group_title_field()">
-  ${h.input_line('title', _('Group title'))}
+  ${h.input_line('title', _('Group title'), id='group-title-field')}
 </%def>
 
 <%def name="year_field()">
@@ -211,9 +211,9 @@
 </%def>
 
 <%def name="live_search(groups)">
-<div class="search-header">
-  ${_('Recommended groups from your university and faculty')}
-</div>
+<h1 class="pageTitle">
+  ${_('Recommended groups')}
+</h1>
 %if len(groups) > 0:
   %for group in groups:
     <div class="live_search_group">
@@ -273,18 +273,25 @@
     <div class="group-type-info">
       <h1 class="pageTitle">${title}</h1>
         ${caller.body()}
+
+        %if sidebar:
+          <ul>
+            <li>${_('Enter your university and department')}</li>
+            <li>${_('Find existing groups')}</li>
+            <li>${_('Join one')}</li>
+          </ul>
+        %endif
+
     </div>
 
-    %if sidebar:
-      <div id="sidebar">
-        <div class="search-header">
-          ${_('Recommended groups from your university and faculty')}
-        </div>
-        <div class="message">
-          ${_('Enter your university and faculty and you will be able to see groups that are already here. If you find your group, join them!')}
-        </div>
-      </div>
-    %endif
+    <div id="sidebar">
+        ##<div class="search-header">
+        ##  ${_('Recommended groups from your university and faculty')}
+        ##</div>
+        ##<div class="message">
+        ##  ${_('Enter your university and faculty and you will be able to see groups that are already here. If you find your group, join them!')}
+        ##</div>
+    </div>
   </div>
 
 </%def>
