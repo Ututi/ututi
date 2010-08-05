@@ -1189,8 +1189,8 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
         text = request.params.get('sms_message')
         cost = sms_cost(text, n_recipients=len(c.group.recipients_sms(sender=c.user)))
         if c.user.sms_messages_remaining < cost:
-            h.flash(_('Not enough SMS credits: %d needed, but you have only %d.')
-                    % (len(group.members), c.user.sms_messages_remaining))
+            h.flash(_('Not enough SMS credits: you need %d, but you have only %d.')
+                    % (cost, c.user.sms_messages_remaining))
             redirect(request.params.get('current_url'))
 
         c.user.sms_messages_remaining -= cost

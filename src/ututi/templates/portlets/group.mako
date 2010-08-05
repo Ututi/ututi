@@ -346,6 +346,11 @@
                 <span class="error-message">${_('No one in this group has confirmed their phone numbers.')}</span>
               </div>
             %endif
+            %if c.user.sms_messages_remaining < len(c.group.recipients_sms(sender=c.user)):
+              <div class="error-container">
+                <span class="error-message">${_('You do not have enough credits to send a message to this group.')}</span>
+              </div>
+            %endif
             <div style="padding-top: 4px; float: left">
               ${h.input_submit(_('Send'))}
             </div>
