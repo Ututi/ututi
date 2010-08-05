@@ -26,19 +26,19 @@ And get to the group welcome page:
 In which we see a box suggesting us to invite more members:
 
     >>> browser.printQuery("id('invite_members_block')")
-    <div class="portlet portletSmall " id="invite_members_block">
+    <div class="portlet portletSmall portletInviteMembers" id="invite_members_block">
       <div class="ctl"></div>
       <div class="ctr"></div>
       <div class="cbl"></div>
       <div class="cbr"></div>
-      <div class="floatleft usergrupeleft">
+      <div class="floatleft usergrupeleft" style="width: 320px">
         <h2 class="portletTitle bold">Invite group members!</h2>
     <BLANKLINE>
     It's easy - you just have to know their email addresses! You can
     use the group mailing list together then!
     <BLANKLINE>
         </div>
-      <div class="floatleft usergruperight">
+      <div class="floatright">
         <form action="/group/test/members" class="button-to" method="post">
           <fieldset>
             <button class="btnMedium" type="submit" value="Invite friends">
@@ -65,16 +65,16 @@ Also we see a box that suggest us to watch some subjects:
           <li>Get notifications about changes</li>
         </ul>
       </div>
-      <div class="floatleft usergruperight">
+      <div class="floatright">
         <form action="/group/test/subjects" class="button-to" method="post">
           <fieldset>
-            <button class="btn" type="submit" value="Watch subjects">
+            <button class="btnMedium" type="submit" value="Watch subjects">
               <span>Watch subjects</span>
             </button>
           </fieldset>
         </form>
         <br class="clear-left" />
-        <span style="float: left; padding-left: 2em;">
+        <span style="float: left; padding-left: 3.5em;">
           <a href="/group/test/home?do_not_watch=True" class="cancel_link">no, thank you</a>
         </span>
       </div>
