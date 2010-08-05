@@ -16,7 +16,7 @@ ${_('New custom group')}
         ${self.logo_field()}
         ${self.description_field()}
         ${self.forum_type_and_id()}
-
+        <div style="height: 5px"></div>
         ${self.location_field()}
         ${self.year_field()}
 
