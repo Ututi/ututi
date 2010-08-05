@@ -301,10 +301,14 @@
     ${h.radio("forum_visibility", "public", label=_('Public'))}
     <br />
     ${h.radio("forum_visibility", "members", label=_('Members only'))}
+
   </label>
 
   <label for="page_visibility" class="radio">
-    <span class="labelText">${_('Group page visibility')}</span>
+      <span class="labelText">
+        ${_('Group page visibility')}
+        ${h.image('/images/details/icon_question.png', alt=_('The group page can be used for news, description of the group, calendaring, timetables, etc.'), class_='tooltip')|n}
+      </span>
     ${h.radio("page_visibility", "public", label=_('Public'))}
     <br />
     ${h.radio("page_visibility", "members", label=_('Members only'))}

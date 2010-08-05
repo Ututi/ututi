@@ -3425,7 +3425,41 @@ h2.overline {
 #page_content {
     padding-left: 1em;
     padding-top: 1em;
-    padding-bottom: 1em;
+    padding-bottom: 8px;
+}
+
+#page-placeholder-frame {
+    margin-top: 8px;
+    margin-bottom: 5px;
+}
+
+#page-placeholder {
+    padding-top: 3px;
+    padding-left: 5px;
+}
+
+#page-placeholder h2 {
+    color: #666;
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+#page-placeholder p {
+    padding-bottom: 15px;
+}
+
+#page-placeholder ul {
+    list-style: none;
+    padding-bottom: 15px;
+}
+
+#page-placeholder ul li {
+    background: url('img/icons/tick_10.png') no-repeat 2px 3px;
+    margin-left: 5px;
+    padding-left: 15px;
+    padding-bottom: 5px;
+    margin-top: 0;
 }
 
 #page_content ul, #page_content ol {
