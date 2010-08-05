@@ -11,8 +11,7 @@ The admin should have a new link on his dashboard, that lets him view all active
 
     >>> form = browser.getForm('coupon_form')
     >>> form.getControl('Code').value = 'ABcd'
-    >>> form.getControl('Action').displayValue = ['SMS Credits']
-    >>> form.getControl('Credit count (for sms credits)').value = '50'
+    >>> form.getControl('Day count (for unlimited space)').value = '50'
     >>> form.getControl('Valid until').value = '09/30/2010'
     >>> form.getControl('Save').click()
 
@@ -23,15 +22,14 @@ The admin should have a new link on his dashboard, that lets him view all active
     ABCD
     ...
     2010 Sep 30, 00:00
-    smscredits
+    unlimitedspace
     50
     0
 
 It should be impossible to create another coupon with the same code.
     >>> form = browser.getForm('coupon_form')
     >>> form.getControl('Code').value = 'ABcd'
-    >>> form.getControl('Action').displayValue = ['SMS Credits']
-    >>> form.getControl('Credit count (for sms credits)').value = '50'
+    >>> form.getControl('Day count (for unlimited space)').value = '50'
     >>> form.getControl('Valid until').value = '09/30/2010'
     >>> form.getControl('Save').click()
 

@@ -72,7 +72,6 @@ class GroupCouponForm(Schema):
     allow_extra_fields = False
     code = GroupCouponValidator(check_collision=True)
     action = OneOf(['smscredits', 'unlimitedspace'])
-    credit_count = Any(Constant(''), Int(min=0))
     day_count = Any(Constant(''), Int(min=0))
     valid_until = DateConverter()
 

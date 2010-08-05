@@ -51,13 +51,7 @@ tr.inactive {
 <form method="post" action="${url(controller='admin', action='add_coupon')}"
       name="coupon_form" id="coupon_form" enctype="multipart/form-data" class="fullForm">
   ${h.input_line('code', _('Code'))}
-  <label for="action">${_('Action')}</label>
-  <select name="action" id="action">
-    <option value="">${_('Select')}</option>
-    <option value="smscredits">${_('SMS Credits')}</option>
-    <option value="unlimitedspace">${_('Unlimited space')}</option>
-  </select>
-  ${h.input_line('credit_count', _('Credit count (for sms credits)'))}
+  ${h.input_line('action', _('Action'), value="unlimitedspace", readonly="true")}
   ${h.input_line('day_count', _('Day count (for unlimited space)'))}
   ${h.input_line('valid_until', _('Valid until'))}
   <br />
@@ -67,22 +61,5 @@ tr.inactive {
 <script type="text/javascript">
   $(document).ready(function() {
     $('#valid_until').datepicker({ dateFormat: 'mm/dd/yy' });
-    $('#action').change(function() {
-        act = $(this).val();
-        switch(act) {
-            case 'smscredits':
-              $('#credit_count').val('').closest('label').show();
-              $('#day_count').val('').closest('label').hide();
-              break;
-            case 'unlimitedspace':
-              $('#credit_count').val('').closest('label').hide();
-              $('#day_count').val('').closest('label').show();
-              break;
-            default:
-              $('#credit_count').val('').closest('label').hide();
-              $('#day_count').val('').closest('label').hide();
-        }
-
-    });
   });
 </script>
