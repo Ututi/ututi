@@ -356,7 +356,7 @@
             <div class="cost">
                 <span class="cost-header">${_("Cost:")}</span>
                 <span id="sms_message_credits">${len(c.group.recipients_sms(sender=c.user))}</span> ${_('SMS credits')}
-                <img style="margin-bottom: -3px" src="/images/details/icon_question.png" class="tooltip " alt="${_('One SMS credits allows you to send one SMS message to a single recipient. When sending a message to a group, one credit is charged for every recipient.')}">
+                <img style="margin-bottom: -3px" src="/images/details/icon_question.png" class="tooltip " alt="${_('One SMS credit allows you to send one SMS message to a single recipient. When sending a message to a group, one credit is charged for every recipient.')}">
             </div>
             <div class="clear-left"></div>
         </form>
