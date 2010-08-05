@@ -384,6 +384,12 @@ def setup_orm(engine):
                          autoload=True,
                          autoload_with=engine)
 
+    global coupon_usage_table
+    coupon_usage_table = Table("coupon_usage", meta.metadata,
+                               useexisting=True,
+                               autoload=True,
+                               autoload_with=engine)
+
     global group_coupons_table
     group_coupons_table = Table("group_coupons", meta.metadata,
                                 useexisting=True,
@@ -410,7 +416,8 @@ def setup_orm(engine):
                             })
 
     orm.mapper(GroupCoupon, group_coupons_table,
-               properties ={'groups': relation(Group, backref="coupon", lazy=True)})
+               properties ={'groups': relation(Group, secondary=coupon_usage_table, backref="coupons", lazy=True),
+                            'users': relation(User, secondary=coupon_usage_table, backref="coupons", lazy=True)})
 
     global group_invitations_table
     group_invitations_table = Table("group_invitations", meta.metadata,
@@ -1105,6 +1112,7 @@ class GroupSubjectMonitoring(object):
 class GroupCoupon(object):
     """GroupCoupon object - give groups special gifts on creation."""
     def __init__(self, code, valid_until, action, **kwargs):
+        """ Actions used at the moment are: smscredits, unlimitedspace. """
         self.id = code.upper()
         self.valid_until = valid_until
         self.action = action
@@ -1118,8 +1126,20 @@ class GroupCoupon(object):
         except NoResultFound:
             return None
 
-    def active(self):
-        return self.valid_until >= datetime.today()
+    def active(self, user=None, group=None):
+        """ Ensure that a coupon is used only once per user or per group and has not expired yet. """
+        valid = self.valid_until >= datetime.today()
+        if valid and user is not None:
+            valid = valid and user not in coupon.users
+        if valid and group is not None:
+            valid = valid and group not in coupon.groups
+        return valid
+
+    def apply(self, group):
+        if self.action == 'unlimitedspace':
+            pass
+        else:
+            raise AttributeError("Cannot apply unknown GroupCoupon action %s !" % self.action)
 
 
 class Group(ContentItem, FolderMixin, LimitedUploadMixin):

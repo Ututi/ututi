@@ -7,4 +7,8 @@ create table group_coupons (
        day_count int default null,
        primary key (id));;
 
-alter table groups add column coupon_id varchar(250) null references group_coupons(id) on delete set null;
+create table coupon_usage (
+       coupon_id varchar(20) not null references group_coupons(id),
+       group_id int8 default null references groups(id),
+       user_id int8 not null references users(id),
+       primary key (coupon_id, user_id));;

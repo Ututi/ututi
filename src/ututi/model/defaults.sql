@@ -190,7 +190,6 @@ create table groups (
        id int8 references content_items(id),
        group_id varchar(250) not null unique,
        title varchar(250) not null,
-       coupon_id varchar(250) null references group_coupons(id) on delete set null,
        year date not null,
        description text,
        page text not null default '',
@@ -205,6 +204,13 @@ create table groups (
        has_file_area bool default true,
        private_files_lock_date timestamp default null,
        primary key (id));;
+
+/* track coupon usage */
+create table coupon_usage (
+       coupon_id varchar(20) not null references group_coupons(id),
+       group_id int8 default null references groups(id),
+       user_id int8 not null references users(id),
+       primary key (coupon_id, user_id));;
 
 /* An enumerator for membership types in groups */
 create table group_membership_types (
