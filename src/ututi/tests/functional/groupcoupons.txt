@@ -1,6 +1,22 @@
 Group Coupon testing
 ====================
 
+When there are no available coupons, the coupon code input field should be invisible.
+
+    >>> browser2 = Browser.logIn()
+    >>> browser2.open('http://localhost/groups/group_type')
+    >>> browser2.getControl(name='create-academic-group').click()
+
+    >>> browser2.getControl('Group e-mail address').value = 'test2'
+    >>> browser2.getControl('Group title').value = 'Another test group'
+    >>> browser2.getControl('Year').value = ['2010']
+    >>> browser2.getControl(name='location-0').value = 'Vilniaus universitetas'
+    >>> browser2.getControl('Gift coupon code')
+    Traceback (most recent call last):
+    ...
+    LookupError: label 'Gift coupon code'
+
+
 The admin should have a new link on his dashboard, that lets him view all active and inactive group coupons.
 
     >>> browser = Browser.logIn()
@@ -35,3 +51,32 @@ It should be impossible to create another coupon with the same code.
 
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Such coupon code already exists, choose a different one.
+
+When there are no available coupons, the coupon code input field should be invisible.
+
+    >>> browser2.open('http://localhost/groups/group_type')
+    >>> browser2.getControl(name='create-academic-group').click()
+
+    >>> browser2.getControl('Group e-mail address').value = 'test2'
+    >>> browser2.getControl('Group title').value = 'Another test group'
+    >>> browser2.getControl('Year').value = ['2010']
+    >>> browser2.getControl(name='location-0').value = 'Vilniaus universitetas'
+    >>> browser2.getControl('Gift coupon code').value = 'abcd'
+    >>> browser2.getControl('Continue').click()
+
+    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
+
+
+And once again, having used the coupon, since there are no more coupons available, the field will not be shown:
+
+    >>> browser2.open('http://localhost/groups/group_type')
+    >>> browser2.getControl(name='create-academic-group').click()
+
+    >>> browser2.getControl('Group e-mail address').value = 'test2'
+    >>> browser2.getControl('Group title').value = 'Another test group'
+    >>> browser2.getControl('Year').value = ['2010']
+    >>> browser2.getControl(name='location-0').value = 'Vilniaus universitetas'
+    >>> browser2.getControl('Gift coupon code')
+    Traceback (most recent call last):
+    ...
+    LookupError: label 'Gift coupon code'
