@@ -1390,9 +1390,9 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
     @property
     def available_size(self):
         if self.paid:
-            return int(config.get('paid_group_file_limits', 5*1024**1))
+            return int(config.get('paid_group_file_limit', 5 * 1024**3))
         else:
-            return int(config.get('group_file_limit', 100*1024**2))
+            return int(config.get('group_file_limit', 100 * 1024**2))
 
     @property
     def paid(self):
