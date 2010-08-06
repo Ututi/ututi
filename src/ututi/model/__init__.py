@@ -956,6 +956,7 @@ class User(object):
 
     def purchase_sms_credits(self, credits):
         self.sms_messages_remaining += credits
+        log.info("user %(id)d (%(fullname)s) purchased %(credits)s credits; current balance: %(current)d credits." % dict(id=self.id, fullname=self.fullname, credits=credits, current=self.sms_messages_remaining))
 
     def can_send_sms(self, group):
         return self.sms_messages_remaining > len(group.recipients_sms(sender=self))
@@ -1403,6 +1404,10 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
         start_date = self.private_files_lock_date
         if start_date is None or start_date < datetime.utcnow():
             start_date = datetime.utcnow()
+        log.info("purchased %(days)s days for group %(id)d (%(title)s); current=%(current)s; new=%(new)s." % dict(
+                id=self.id, title=self.title, days=days,
+                current=self.private_files_lock_date.date().isoformat() if self.private_files_lock_date else 'none',
+                new=(start_date + timedelta(days=days)).date().isoformat()))
         self.private_files_lock_date = start_date + timedelta(days=days)
 
 
