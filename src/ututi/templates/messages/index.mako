@@ -4,6 +4,10 @@
   ${_('Messages')}
 </%def>
 
+<div class="tip">
+  ${_('You can send a new message to a user from his or her public profile page.')}
+</div>
+
 ##<div class="back-link">
 ##  <a class="back-link" href="${url(controller='profile', action='home')}">${_('Back to profile')}</a>
 ##</div>
@@ -64,10 +68,6 @@
     % endif
   </div>
 
-</div>
-
-<div style="font-size: 11px; color: #666">
-  ${_('You can send a new message to a user from his or her public profile page.')}
 </div>
 
 <script>
