@@ -47,7 +47,7 @@ ${parent.head_tags()}
   </script>
 %endif
 
-%if c.user.phone_number is None:
+%if c.user.phone_number is None and not 'suggest_enter_phone' in c.user.hidden_blocks_list:
   <%self:rounded_block id="user_phone" class_="portletConfirmPhone">
   <div class="inner">
     <h2 class="portletTitle bold">${_("What's your phone number?")}</h2>
@@ -70,12 +70,19 @@ ${parent.head_tags()}
       <div class="floatleft" style="padding-left: 3px; margin-top: -1px">
         ${h.input_submit(_('save'), id='user-phone-submit')}
       </div>
+      <div class="right_cross"><a id="hide_suggest_enter_phone" href="">${_('no, thanks')}</a></div>
       <div class="clear"></div>
     </form>
   </div>
   </%self:rounded_block>
   <script type="text/javascript">
   //<![CDATA[
+    $('#hide_suggest_enter_phone').click(function() {
+        $(this).closest('.portlet').hide();
+        $.post('${url(controller='profile', action='js_hide_element')}',
+               {type: 'suggest_enter_phone'});
+        return false;
+    });
 
   $('#user-phone-submit').click(function() {
     $('#user-phone-invalid').hide();
