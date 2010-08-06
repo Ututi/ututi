@@ -60,12 +60,12 @@ Also, we will register a user with a mobile phone:
 Now let's try to make a request.
 
     >>> make_request('personal_sms_credits', dict(sender='37067812345')).body
-    'You have purchased 100 SMS messages for 10 Lt; now you have 130 messages.'
+    'You have purchased 100 SMS messages for 10 Lt; you now have 130 credits.'
 
 Seems to work.
 
     >>> make_request('personal_sms_credits', dict(sender='37067812345')).body
-    'You have purchased 100 SMS messages for 10 Lt; now you have 230 messages.'
+    'You have purchased 100 SMS messages for 10 Lt; you now have 230 credits.'
 
 Logging
 -------
@@ -105,7 +105,7 @@ Personal SMS deposit
 Works, as already shown:
 
     >>> make_request('personal_sms_credits', dict(sender='37067812345')).body
-    'You have purchased 100 SMS messages for 10 Lt; now you have 330 messages.'
+    'You have purchased 100 SMS messages for 10 Lt; you now have 330 credits.'
 
 If the sender is not registered in Ututi, an error is returned:
 

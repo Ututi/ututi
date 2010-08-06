@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-08-06 16:35+0300\n"
+"POT-Creation-Date: 2010-08-06 16:41+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,8 +43,10 @@ msgid "Your phone number (+%s) is not registered in Ututi."
 msgstr ""
 
 #, python-format
-msgid "You have purchased 100 SMS messages for 10 Lt; now you have %d messages."
-msgstr ""
+msgid "You have purchased 100 SMS messages for 10 Lt; you now have %(num)d credits."
+msgid_plural "You have purchased 100 SMS messages for 10 Lt; you now have %(num)d credits."
+msgstr[0] ""
+msgstr[1] ""
 
 #, python-format
 msgid "Invalid group: %s"
@@ -63,8 +65,10 @@ msgid "The phone number %s is not associated with a Ututi user"
 msgstr ""
 
 #, python-format
-msgid "More than %d recipients, cannot send message."
-msgstr ""
+msgid "More than %d recipient, cannot send message."
+msgid_plural "More than %d recipients, cannot send message."
+msgstr[0] ""
+msgstr[1] ""
 
 #, python-format
 msgid "SMS message sent to group %s."

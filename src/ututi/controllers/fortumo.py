@@ -2,7 +2,7 @@ import logging
 
 from pylons import tmpl_context as c, config, request, url
 from pylons.controllers.util import redirect, abort
-from pylons.i18n import _
+from pylons.i18n import _, ungettext
 
 from ututi.model import meta, Group, User, ReceivedSMSMessage, OutgoingGroupSMSMessage
 from ututi.lib.messaging import SMSMessage
@@ -70,7 +70,11 @@ class FortumoController(BaseController):
             return _('Your phone number (+%s) is not registered in Ututi.') % msg.sender_phone_number
         msg.sender.purchase_sms_credits(100)
         msg.success = True
-        return _('You have purchased 100 SMS messages for 10 Lt; now you have %d messages.') % msg.sender.sms_messages_remaining
+        return ungettext(
+             'You have purchased 100 SMS messages for 10 Lt; you now have %(num)d credits.',
+             'You have purchased 100 SMS messages for 10 Lt; you now have %(num)d credits.',
+             msg.sender.sms_messages_remaining
+             ) % dict(num=msg.sender.sms_messages_remaining)
 
     def _handle_group_space(self, msg):
         group_id = msg.message_text.strip()
@@ -100,8 +104,10 @@ class FortumoController(BaseController):
 
         max_group_members = config.get('sms_max_group_members', 40)
         if len(group.recipients_sms(sender=msg.sender)) > max_group_members:
-            return _('More than %d recipients, cannot send message.'
-                     ) % max_group_members
+            return ungettext(
+                    'More than %d recipient, cannot send message.',
+                    'More than %d recipients, cannot send message.',
+                    max_group_members) % max_group_members
 
         # Send message.
         msg = OutgoingGroupSMSMessage(sender=msg.sender, group=group,

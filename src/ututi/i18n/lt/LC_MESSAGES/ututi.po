@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-08-06 16:36+0300\n"
+"PO-Revision-Date: 2010-08-06 16:43+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -40,8 +40,15 @@ msgid "Your phone number (+%s) is not registered in Ututi."
 msgstr "Telefono numeris (+%s) neregistruotas Ututi sistemoje."
 
 #, python-format
-msgid "You have purchased 100 SMS messages for 10 Lt; now you have %d messages."
-msgstr "Nupirkote 100 SMS žinučių už 10 Lt; dabar turite %d kreditų."
+msgid ""
+"You have purchased 100 SMS messages for 10 Lt; you now have %(num)d "
+"credits."
+msgid_plural ""
+"You have purchased 100 SMS messages for 10 Lt; you now have %(num)d "
+"credits."
+msgstr[0] "Nupirkote 100 SMS kreditų už 10 Lt, dabar turite %(num)d kreditą."
+msgstr[1] "Nupirkote 100 SMS kreditų už 10 Lt, dabar turite %(num)d kreditus."
+msgstr[2] "Nupirkote 100 SMS kreditų už 10 Lt, dabar turite %(num)d kreditų."
 
 #, python-format
 msgid "Invalid group: %s"
@@ -60,8 +67,11 @@ msgid "The phone number %s is not associated with a Ututi user"
 msgstr "Telefono numeris %s nesusietas su Ututi naudotoju"
 
 #, python-format
-msgid "More than %d recipients, cannot send message."
-msgstr "Daugiau negu %d gavėjų, nepavyko išsiųsti žinutės."
+msgid "More than %d recipient, cannot send message."
+msgid_plural "More than %d recipients, cannot send message."
+msgstr[0] "Nepavyko išsiųsti žinutės - daugiau negu %d gavėjas."
+msgstr[1] "Nepavyko išsiųsti žinutės - daugiau negu %d gavėjai."
+msgstr[2] "Nepavyko išsiųsti žinutės - daugiau negu %d gavėjų."
 
 #, python-format
 msgid "SMS message sent to group %s."

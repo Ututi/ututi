@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-08-06 16:35+0300\n"
+"PO-Revision-Date: 2010-08-06 16:42+0300\n"
 "Last-Translator: \n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -44,8 +44,15 @@ msgid "Your phone number (+%s) is not registered in Ututi."
 msgstr "Twój numer telefonu (+%s) nie jest zarejestrowany na Ututi."
 
 #, python-format
-msgid "You have purchased 100 SMS messages for 10 Lt; now you have %d messages."
-msgstr "Kupiłeś 100 wiadomości SMS za 10 zł, teraz masz %s wiadomości."
+msgid ""
+"You have purchased 100 SMS messages for 10 Lt; you now have %(num)d "
+"credits."
+msgid_plural ""
+"You have purchased 100 SMS messages for 10 Lt; you now have %(num)d "
+"credits."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #, python-format
 msgid "Invalid group: %s"
@@ -64,8 +71,11 @@ msgid "The phone number %s is not associated with a Ututi user"
 msgstr "Ten numer telefonu nie należy do użytkownika Ututi"
 
 #, python-format
-msgid "More than %d recipients, cannot send message."
-msgstr "Wiadomość nie może być wysłana do więcej niż %d odbiorców."
+msgid "More than %d recipient, cannot send message."
+msgid_plural "More than %d recipients, cannot send message."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #, python-format
 msgid "SMS message sent to group %s."
