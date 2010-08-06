@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-08-06 16:02+0300\n"
+"POT-Creation-Date: 2010-08-06 16:35+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -269,6 +269,14 @@ msgstr ""
 
 #, python-format
 msgid "Group '%(group_title)s' has been deleted!"
+msgstr ""
+
+msgid "Why would you want to send an empty SMS message?"
+msgstr ""
+
+msgid ""
+"Nobody received your message... No other group members have confirmed their "
+"phone numbers yet. Please encourage them to do so!"
 msgstr ""
 
 #, python-format
@@ -2298,6 +2306,9 @@ msgstr ""
 msgid "What's new?"
 msgstr ""
 
+msgid "You can send a new message to a user from his or her public profile page."
+msgstr ""
+
 #, python-format
 msgid "%(count)s message"
 msgid_plural "%(count)s messages"
@@ -2305,9 +2316,6 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid "No messages."
-msgstr ""
-
-msgid "You can send a new message to a user from his or her public profile page."
 msgstr ""
 
 msgid "New message"

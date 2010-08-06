@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-08-06 16:06+0300\n"
+"PO-Revision-Date: 2010-08-06 16:36+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -268,6 +268,16 @@ msgstr "Negalite ištrinti grupės, kol joje yra narių!"
 #, python-format
 msgid "Group '%(group_title)s' has been deleted!"
 msgstr "Grupė '%(group_title)s' buvo ištrinta."
+
+msgid "Why would you want to send an empty SMS message?"
+msgstr "Kam siuntinėti tuščias SMS žinutes?"
+
+msgid ""
+"Nobody received your message... No other group members have confirmed "
+"their phone numbers yet. Please encourage them to do so!"
+msgstr ""
+"Niekas negavo tavo pranešimo... Nei vienas iš grupės draugų dar neįvedė "
+"savo telefono numerio. Paragink juos tai padaryti!"
 
 #, python-format
 msgid "Not enough SMS credits: you need %d, but you have only %d."
@@ -2522,6 +2532,9 @@ msgstr "Pradėti"
 msgid "What's new?"
 msgstr "Kas naujo?"
 
+msgid "You can send a new message to a user from his or her public profile page."
+msgstr "Naują žinutę naudotojui galite išsiųsti iš jo viešo profilio puslapio."
+
 #, python-format
 msgid "%(count)s message"
 msgid_plural "%(count)s messages"
@@ -2531,9 +2544,6 @@ msgstr[2] "%(count)s žinučių"
 
 msgid "No messages."
 msgstr "Žinučių nėra."
-
-msgid "You can send a new message to a user from his or her public profile page."
-msgstr "Naują žinutę naudotojui galite išsiųsti iš jo viešo profilio puslapio."
 
 msgid "New message"
 msgstr "Nauja žinutė"

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-08-06 16:02+0300\n"
+"PO-Revision-Date: 2010-08-06 16:35+0300\n"
 "Last-Translator: \n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -276,6 +276,14 @@ msgstr "Nie możesz usunąć grupy, do której ktoś należy!"
 #, python-format
 msgid "Group '%(group_title)s' has been deleted!"
 msgstr "Grupa '%(group_title)s' została usunięta!"
+
+msgid "Why would you want to send an empty SMS message?"
+msgstr ""
+
+msgid ""
+"Nobody received your message... No other group members have confirmed "
+"their phone numbers yet. Please encourage them to do so!"
+msgstr ""
 
 #, python-format
 msgid "Not enough SMS credits: you need %d, but you have only %d."
@@ -2526,6 +2534,9 @@ msgstr "Start"
 msgid "What's new?"
 msgstr "Nowości"
 
+msgid "You can send a new message to a user from his or her public profile page."
+msgstr ""
+
 #, python-format
 msgid "%(count)s message"
 msgid_plural "%(count)s messages"
@@ -2535,9 +2546,6 @@ msgstr[2] "%(count)s wiadomości"
 
 msgid "No messages."
 msgstr "Nie ma wiadomości."
-
-msgid "You can send a new message to a user from his or her public profile page."
-msgstr ""
 
 msgid "New message"
 msgstr "Nowa wiadomość"

@@ -1199,7 +1199,13 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
     @group_action
     def send_sms(self, group):
         text = request.params.get('sms_message')
+        if not text.strip():
+            h.flash(_('Why would you want to send an empty SMS message?'))
+            redirect(request.params.get('current_url'))
         cost = sms_cost(text, n_recipients=len(c.group.recipients_sms(sender=c.user)))
+        if cost == 0:
+            h.flash(_('Nobody received your message... No other group members have confirmed their phone numbers yet. Please encourage them to do so!'))
+            redirect(request.params.get('current_url'))
         if c.user.sms_messages_remaining < cost:
             h.flash(_('Not enough SMS credits: you need %d, but you have only %d.')
                     % (cost, c.user.sms_messages_remaining))
