@@ -303,13 +303,13 @@ for the service.
     >>> browser.url
     'http://localhost/group/moderators/pay'
 
-    >>> browser.getControl('10 Lt', index=0).click()
+    >>> browser.getControl('5 Lt', index=0).click()
     >>> browser.url
     'http://localhost/pay'
 
     >>> cancel = browser.getLink('Go back').url
     >>> process = browser.getLink('Process payment').url
-    >>> browser.getControl('Dummy pay 10 LTL').click()
+    >>> browser.getControl('Dummy pay 5 LTL').click()
     >>> browser.printQuery('id("got-space-dialog")/div/text()')
     Congratulations! You have increased the group's private file limit.
     You can now store up to 5 GB in your group's private area. Time period extension: month.
