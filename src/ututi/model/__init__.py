@@ -679,6 +679,10 @@ class User(object):
         email = self.emails[0]
         return email
 
+    @property
+    def hidden_blocks_list(self):
+        return self.hidden_blocks.strip().split(' ')
+
     def send(self, msg):
         """Send a message to the user."""
         from ututi.lib.messaging import EmailMessage, GGMessage, SMSMessage

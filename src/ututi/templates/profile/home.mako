@@ -250,7 +250,7 @@ ${parent.head_tags()}
   </div>
     %endfor
 </%self:rounded_block>
-%elif not c.user.hide_suggest_create_group:
+%elif not 'suggest_create_group' in c.user.hidden_blocks_list:
 <%self:rounded_block id="user_location" class_="portletNewGroup">
   <div class="floatleft usergrupeleft">
     <h2 class="portletTitle bold">${_('Create a group')}</h2>
@@ -274,7 +274,7 @@ ${parent.head_tags()}
     $('#hide_suggest_create_group').click(function() {
         $(this).closest('.portlet').hide();
         $.post('${url(controller='profile', action='js_hide_element')}',
-               {type: 'hide_suggest_create_group'});
+               {type: 'suggest_create_group'});
         return false;
     });
   //]]>
@@ -328,7 +328,7 @@ ${subjects_block(c.user.watched_subjects)}
     ${subject_list(subjects)}
   </div>
 </%self:rounded_block>
-%elif not c.user.hide_suggest_watch_subject:
+%elif 'suggest_watch_subject' in c.user.hidden_blocks_list:
 <%self:rounded_block id="user_location" class_="portletNewDalykas">
   <div class="floatleft usergrupeleft">
     <h2 class="portletTitle bold">${_('Watch subjects you are studying!')}</h2>
@@ -354,7 +354,7 @@ ${subjects_block(c.user.watched_subjects)}
     $('#hide_suggest_watch_subject').click(function() {
         $(this).closest('.portlet').hide();
         $.post('${url(controller='profile', action='js_hide_element')}',
-               {type: 'hide_suggest_watch_subject'});
+               {type: 'suggest_watch_subject'});
         return false;
     });
   //]]>
