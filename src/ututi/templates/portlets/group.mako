@@ -54,6 +54,9 @@
     %if (group.is_member(c.user) or c.security_context and h.check_crowds(['admin', 'moderator'])) and group.has_file_area:
     <div class="profile topLine grey">
       <span class="bold">${_('Remaining private space:')}</span>
+      %if group.paid:
+      <span>${_('unlimited')}</span>
+      %else:
       <span>${h.file_size(group.free_size)}</span>
       ${h.image('/images/details/pbar%d.png' % group.free_size_points, alt=h.file_size(group.size), class_='area_size_points')|n}
       <div style="padding-top: 4px; padding-bottom: 7px" class="bottomLine">
@@ -133,7 +136,7 @@
                 return false;
             });
           </script>
-
+          %endif
     </div>
     %endif
 
