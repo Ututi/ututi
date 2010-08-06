@@ -254,10 +254,12 @@ def file_size(size):
                 ("G", 2**40),
                 ("T", 2**50)]
     for suf, lim in suffixes:
-        if size > lim:
+        if size >= lim:
             continue
+        elif size % (lim // 2**10) == 0:
+            return "%s %sB" % (size // (lim // 2**10), suf)
         else:
-            return "%s %sB" % (round(size / float(lim/2**10), 2), suf)
+            return "%s %sB" % (round(size / float(lim // 2**10), 2), suf)
 
 
 def trackEvent(obj, action, label, category='navigation'):

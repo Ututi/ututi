@@ -157,6 +157,47 @@ def test_email_with_replies():
     """
 
 
+def test_file_size():
+    """
+
+        >>> from ututi.lib.helpers import file_size
+
+        >>> file_size(0)
+        '0 B'
+        >>> file_size(1)
+        '1 B'
+
+        >>> file_size(1023)
+        '1023 B'
+        >>> file_size(1024)
+        '1 kB'
+        >>> file_size(1025)
+        '1.0 kB'
+
+        >>> file_size(2047)
+        '2.0 kB'
+        >>> file_size(2048)
+        '2 kB'
+        >>> file_size(2049)
+        '2.0 kB'
+
+        >>> file_size(2**20-1)
+        '1024.0 kB'
+        >>> file_size(2**20)
+        '1 MB'
+        >>> file_size(2**20+1)
+        '1.0 MB'
+
+        >>> file_size(3 * 2**20 - 1)
+        '3.0 MB'
+        >>> file_size(3 * 2**20)
+        '3 MB'
+        >>> file_size(3 * 2**20 + 1)
+        '3.0 MB'
+
+    """
+
+
 def test_suite():
     suite = doctest.DocTestSuite(
         optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |
