@@ -420,7 +420,7 @@ $(document).ready(function(){
               <input class="folder_title_value" type="hidden" value="${file.folder}" />
               %if file.can_write():
                 <img src="${url('/images/delete.png')}" alt="${_('delete file')}" class="delete_button" />
-              %else:
+              %elif file.parent.flaggable_files:
                 <img src="${url('/img/icons/flag-small.png')}" alt="${_('flag as suspicious')}" class="flag_button" />
               %endif
             </li>

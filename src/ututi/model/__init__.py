@@ -1042,6 +1042,8 @@ class Folder(list):
 
 class FolderMixin(object):
 
+    flaggable_files = True
+
     @property
     def folders_dict(self):
         result = {'': Folder('', parent=self)}
@@ -1171,6 +1173,8 @@ class GroupCoupon(object):
 
 
 class Group(ContentItem, FolderMixin, LimitedUploadMixin):
+
+    flaggable_files = False
 
     def send(self, msg):
         msg.send([mship.user for mship in self.members])

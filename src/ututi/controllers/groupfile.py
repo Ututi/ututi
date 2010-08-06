@@ -75,7 +75,3 @@ class GroupfileController(BasefilesController):
     @ActionProtector('member', 'admin')
     def copy(self, group, file):
         return self._copy(group, file)
-
-    @group_file_action
-    def flag(self, subject, file):
-        return self._flag(file)
