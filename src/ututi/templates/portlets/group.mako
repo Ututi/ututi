@@ -126,7 +126,7 @@
           <script>
             $('#get-space-button').click(function() {
                 var dlg = $('#get-space-dialog').dialog({
-                    title: '${_('Purchase SMS credits')}',
+                    title: '${_('Purchase group private space')}',
                     width: 600
                 });
                 dlg.dialog("open");
