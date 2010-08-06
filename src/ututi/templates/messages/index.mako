@@ -66,6 +66,10 @@
 
 </div>
 
+<div style="font-size: 11px; color: #666">
+  ${_('You can send a new message to a user from his or her public profile page.')}
+</div>
+
 <script>
     $('.delete-message-link').click(function() {
         $(this).siblings('form').submit();

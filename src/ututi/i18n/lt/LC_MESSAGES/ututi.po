@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-08-06 15:21+0300\n"
+"PO-Revision-Date: 2010-08-06 16:04+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -2525,18 +2525,21 @@ msgstr "Kas naujo?"
 #, python-format
 msgid "%(count)s message"
 msgid_plural "%(count)s messages"
-msgstr[0] "%(count)s pranešimas"
-msgstr[1] "%(count)s pranešimai"
-msgstr[2] "%(count)s pranešimų"
+msgstr[0] "%(count)s žinutė"
+msgstr[1] "%(count)s žinutės"
+msgstr[2] "%(count)s žinučių"
 
 msgid "No messages."
-msgstr "Pranešimų nėra."
+msgstr "Žinučių nėra."
+
+msgid "You can send a new message to a user from his or her public profile page."
+msgstr "Naują žinutę naudotojui galite išsiųsti iš jo viešo profilio puslapio."
 
 msgid "New message"
-msgstr "Naujas pranešimas"
+msgstr "Nauja žinutė"
 
 msgid "Back to message list"
-msgstr "Atgal į pranešimų sąrašą"
+msgstr "Atgal į žinučių sąrašą"
 
 #, python-format
 msgid "Back to %(subject_title)s"

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-08-06 15:17+0300\n"
+"PO-Revision-Date: 2010-08-06 16:02+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -2325,6 +2325,9 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid "No messages."
+msgstr ""
+
+msgid "You can send a new message to a user from his or her public profile page."
 msgstr ""
 
 msgid "New message"
