@@ -1079,11 +1079,6 @@ class LimitedUploadMixin(object):
         upload_status = self.free_size > 0 and self.CAN_UPLOAD or self.LIMIT_REACHED
 
         have_root_folder = len(self.folders) == 1
-        if self.paid and have_root_folder:
-            return self.CAN_UPLOAD_SINGLE_FOLDER
-        elif self.paid:
-            return self.CAN_UPLOAD
-
         can_upload = upload_status == self.CAN_UPLOAD
         if can_upload and have_root_folder:
             return self.CAN_UPLOAD_SINGLE_FOLDER
@@ -1394,7 +1389,10 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
 
     @property
     def available_size(self):
-        return int(config.get('group_file_limit', 100*1024**2))
+        if self.paid:
+            return int(config.get('paid_group_file_limits', 5*1024**1))
+        else:
+            return int(config.get('group_file_limit', 100*1024**2))
 
     @property
     def paid(self):
@@ -1608,6 +1606,15 @@ class Subject(ContentItem, FolderMixin, LimitedUploadMixin):
 
     def group_count(self):
         return len(self.watching_groups)
+
+    @property
+    def upload_status(self):
+        """Information on the group's file upload limits."""
+        have_root_folder = len(self.folders) == 1
+        if have_root_folder:
+            return self.CAN_UPLOAD_SINGLE_FOLDER
+        else:
+            return self.CAN_UPLOAD
 
 
 pages_table = None

@@ -10,11 +10,8 @@
    <%files:head_tags />
 </%def>
 
-%if c.group.paid:
-  <%files:file_browser obj="${c.group}" title="${_('Group files')}" controls="['upload', 'folder', 'unlimited']"/>
-%else:
-  <%files:file_browser obj="${c.group}" comment="${_('You can keep up to %s of private group files here (e.g. pictures)') % h.file_size(c.group.available_size)}" controls="['upload', 'folder', 'size']"/>
-%endif
+<%files:file_browser obj="${c.group}" comment="${_('You can keep up to %s of private group files here (e.g. pictures)') % h.file_size(c.group.available_size)}" controls="['upload', 'folder', 'size']"/>
+
 
 % for n, subject in enumerate(c.group.watched_subjects):
   <%files:file_browser obj="${subject}" section_id="${n + 1}" collapsible="True"/>
