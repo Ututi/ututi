@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-08-04 02:18+0300\n"
+"PO-Revision-Date: 2010-08-06 12:02+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -51,7 +51,7 @@ msgid "Invalid group: %s"
 msgstr ""
 
 #, python-format
-msgid "Added %d credits to group space account; now there are %d."
+msgid "Purchased another month of group space for \"%s\" (until %s)."
 msgstr ""
 
 #, python-format
@@ -188,6 +188,13 @@ msgstr ""
 msgid "Your request to join the group is still being processed."
 msgstr ""
 
+#, python-format
+msgid "Great! You have used a coupon code and will now get %s !"
+msgstr ""
+
+msgid "Sorry. We were not able to apply that coupon."
+msgstr ""
+
 msgid "The group's front page was updated."
 msgstr ""
 
@@ -265,15 +272,11 @@ msgid "Group '%(group_title)s' has been deleted!"
 msgstr ""
 
 #, python-format
-msgid "Not enough SMS credits: %d needed, but you have only %d."
+msgid "Not enough SMS credits: you need %d, but you have only %d."
 msgstr ""
 
 #, python-format
 msgid "SMS sent! (%d credits used up, %d remaining)"
-msgstr ""
-
-#, python-format
-msgid "Purchased %s months for private file area."
 msgstr ""
 
 msgid "Please enter your password to register."
@@ -604,7 +607,13 @@ msgstr ""
 msgid "The email already exists."
 msgstr ""
 
-msgid "Id does not reference what we either a group or a subject."
+msgid "Id does not reference a group or a subject."
+msgstr ""
+
+msgid "Such coupon code already exists, choose a different one."
+msgstr ""
+
+msgid "Such a coupon code does not exist."
 msgstr ""
 
 msgid "Admin"
@@ -630,6 +639,12 @@ msgstr ""
 
 msgid "Group admin"
 msgstr ""
+
+#, python-format
+msgid "unlimited group private files for %(day_count)d day"
+msgid_plural "unlimited group private files for %(day_count)d days"
+msgstr[0] ""
+msgstr[1] ""
 
 #, python-format
 msgid "A new file has been uploaded for the %(title)s:"
@@ -814,6 +829,9 @@ msgid "Register"
 msgstr ""
 
 msgid "... or connect using your Google or Facebook account."
+msgstr ""
+
+msgid "Connect"
 msgstr ""
 
 msgid ""
@@ -1211,6 +1229,39 @@ msgid_plural "found %(count)s events"
 msgstr[0] ""
 msgstr[1] ""
 
+msgid "Group Coupons"
+msgstr ""
+
+#, python-format
+msgid "found %(count)s coupon"
+msgid_plural "found %(count)s coupons"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Code"
+msgstr ""
+
+msgid "Created"
+msgstr ""
+
+msgid "Valid until"
+msgstr ""
+
+msgid "Action"
+msgstr ""
+
+msgid "Parameter"
+msgstr ""
+
+msgid "Groups using"
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid "Day count (for unlimited space)"
+msgstr ""
+
 msgid "CSV File"
 msgstr ""
 
@@ -1251,9 +1302,6 @@ msgid "Sender"
 msgstr ""
 
 msgid "Recipient"
-msgstr ""
-
-msgid "Created"
 msgstr ""
 
 msgid "Status"
@@ -1682,7 +1730,7 @@ msgstr ""
 msgid "Continue"
 msgstr ""
 
-msgid "join"
+msgid "Recommended groups"
 msgstr ""
 
 msgid "No groups found"
@@ -1706,28 +1754,78 @@ msgstr ""
 msgid "become a member"
 msgstr ""
 
+#, python-format
+msgid "Congratulations! You have purchased %s personal SMS credits."
+msgstr ""
+
+#, python-format
+msgid ""
+"You can use these credits to send %s messages. For example, if your group"
+" has 20 members with registered phone numbers, one message will cost 20 "
+"SMS credits."
+msgstr ""
+
+msgid "Happy cat"
+msgstr ""
+
+msgid "Thanks!"
+msgstr ""
+
+msgid "Congratulations! You have increased the group's private file limit."
+msgstr ""
+
+#, python-format
+msgid ""
+"You can now store up to 5&nbsp;GB in your group's private area. Time "
+"period extension: %s."
+msgstr ""
+
+msgid "Have fun using Ututi groups!"
+msgstr ""
+
+msgid "You have decided not to increase your group's private file limit."
+msgstr ""
+
+msgid "Perhaps you will change your mind later?"
+msgstr ""
+
+msgid "Sad cat"
+msgstr ""
+
+msgid "You have decided not to buy extra SMS credits."
+msgstr ""
+
 msgid "New academic group"
 msgstr ""
 
 msgid "Create an academic group"
 msgstr ""
 
-msgid "What can you do with academic groups?"
+msgid "Enter your university and department"
 msgstr ""
 
-msgid "Private file area"
+msgid "Find existing groups"
 msgstr ""
 
-msgid "Registration with university subjects"
+msgid "Join one"
 msgstr ""
 
-msgid " is taken."
+msgid " is invalid."
 msgstr ""
 
 msgid " is free!"
 msgstr ""
 
+msgid "Coupon code is valid!"
+msgstr ""
+
+msgid "Coupon code is invalid."
+msgstr ""
+
 msgid "Group address on the web"
+msgstr ""
+
+msgid "Gift coupon code"
 msgstr ""
 
 msgid "Group e-mail address"
@@ -1740,6 +1838,9 @@ msgid "Group has a file storage area"
 msgstr ""
 
 msgid "Forum type"
+msgstr ""
+
+msgid "join"
 msgstr ""
 
 msgid "Access settings"
@@ -1766,16 +1867,30 @@ msgstr ""
 msgid "Group page visibility"
 msgstr ""
 
+msgid ""
+"The group page can be used for news, description of the group, "
+"calendaring, timetables, etc."
+msgstr ""
+
 msgid "New custom group"
 msgstr ""
 
 msgid "Create a custom group"
 msgstr ""
 
-msgid "What can you do with custom groups?"
+msgid "Group data"
 msgstr ""
 
-msgid "Pick the functionality you need yourself"
+msgid "Set up your own group"
+msgstr ""
+
+msgid "Choose the means of communication"
+msgstr ""
+
+msgid "Choose the visibility of a group"
+msgstr ""
+
+msgid "Choose a way to register in this group"
 msgstr ""
 
 msgid "New public group"
@@ -1830,24 +1945,6 @@ msgstr ""
 msgid "Add more subjects"
 msgstr ""
 
-msgid "Congratulations! You have increased the group's private file limit."
-msgstr ""
-
-#, python-format
-msgid ""
-"You can now store up to 5&nbsp;GB in your group's private area until "
-"<strong>%s</strong>."
-msgstr ""
-
-msgid "Have fun using Ututi groups!"
-msgstr ""
-
-msgid "Happy cat"
-msgstr ""
-
-msgid "Thanks!"
-msgstr ""
-
 msgid "Choose group type"
 msgstr ""
 
@@ -1861,6 +1958,15 @@ msgid "Public group"
 msgstr ""
 
 msgid "Custom group"
+msgstr ""
+
+msgid "Private file area"
+msgstr ""
+
+msgid "Registration with university subjects"
+msgstr ""
+
+msgid "Pick the functionality you need yourself"
 msgstr ""
 
 msgid "Congratulations, you have created a new group!"
@@ -1981,7 +2087,38 @@ msgstr ""
 msgid "Add group members"
 msgstr ""
 
-msgid "The group's page is empty. Enter your description."
+msgid "What is a group page and who sees it?"
+msgstr ""
+
+msgid ""
+"The group page is the face of the group. It may be public or visible only"
+" to group members, depending on configuration."
+msgstr ""
+
+#, python-format
+msgid ""
+"You can change visibility settings in the <a href=\"%s\">group "
+"settings</a> screen."
+msgstr ""
+
+msgid "What are the uses of a group page?"
+msgstr ""
+
+msgid ""
+"Calendaring. Read this <a href=\"http://blog.ututi.lt/2009/05/28"
+"/naudotoju-isradingumas/\">blog post</a> for more information."
+msgstr ""
+
+msgid "A news board for timetables and posters."
+msgstr ""
+
+msgid "Description of the group for users who are not members of the group yet."
+msgstr ""
+
+msgid "Edit your group page now!"
+msgstr ""
+
+msgid "Edit page"
 msgstr ""
 
 msgid "You have decided not to increase your group's file limit"
@@ -2064,50 +2201,6 @@ msgstr ""
 msgid "%d Lt"
 msgstr ""
 
-msgid "You can also pay for group space by SMS."
-msgstr ""
-
-#, python-format
-msgid ""
-"First, get some credits by sending an SMS "
-"\"<strong>TXT&nbsp;%(sms_code2)s&nbsp;%(group_id)s</strong>\" (2 Lt) or "
-"\"<strong>TXT&nbsp;%(sms_code10)s&nbsp;%(group_id)s</strong>\" (10 Lt) to"
-" the number 1337."
-msgstr ""
-
-msgid ""
-"1 month costs 10 credits, 3 months cost 20 credits, 6 months cost 30 "
-"credits."
-msgstr ""
-
-#, python-format
-msgid "You have <strong>%d</strong> credits."
-msgstr ""
-
-#, python-format
-msgid "Your private file area is available until <strong>%s</strong>."
-msgstr ""
-
-msgid "You need more credits to buy group space."
-msgstr ""
-
-msgid "Purchase 1 month for 10 credits"
-msgstr ""
-
-msgid "Purchase 3 months for 20 credits"
-msgstr ""
-
-msgid "Purchase 6 months for 30 credits"
-msgstr ""
-
-msgid ""
-"Only admins can spend credits to purchase space. Ask your group admin "
-"once there are enough credits in your account."
-msgstr ""
-
-msgid "Gimme 5 credits!"
-msgstr ""
-
 msgid ""
 "The amount of group's private files is limited to 200 Mb. This is so "
 "because Ututi encourages users to store their files in publicly "
@@ -2117,7 +2210,7 @@ msgstr ""
 
 #, python-format
 msgid ""
-"For <em>%d Lt</em> Your group will be able to store an <em>unlimited "
+"For <em>%d Lt</em> your group will be able to store an <em>unlimited "
 "amount of files</em>:"
 msgstr ""
 
@@ -2253,9 +2346,6 @@ msgstr ""
 msgid "Restore previous"
 msgstr ""
 
-msgid "Edit page"
-msgstr ""
-
 #, python-format
 msgid "Back to %(page_title)s"
 msgstr ""
@@ -2339,7 +2429,10 @@ msgstr ""
 msgid "Mailing list address"
 msgstr ""
 
-msgid "Available space for private group files:"
+msgid "Remaining private space:"
+msgstr ""
+
+msgid "unlimited"
 msgstr ""
 
 msgid "Get more space"
@@ -2356,9 +2449,10 @@ msgstr ""
 msgid "SMS message"
 msgstr ""
 
+#, python-format
 msgid ""
-"Send an SMS message to number <span style=\"font-size: 14px\">1337</span>"
-" with the following content:"
+"Send an SMS message to number <span style=\"font-size: "
+"14px\">%(phone)s</span> with the following content:"
 msgstr ""
 
 msgid ""
@@ -2409,28 +2503,13 @@ msgstr ""
 msgid "Send SMS message to group"
 msgstr ""
 
-msgid "Message text:"
-msgstr ""
-
-msgid "No one in this group has confirmed their phone numbers."
-msgstr ""
-
-msgid "recipients"
-msgstr ""
-
-msgid "Cost:"
-msgstr ""
-
-msgid "SMS credits"
-msgstr ""
-
 msgid ""
-"One SMS credits allows you to send one SMS message to a single recipient."
-" When sending a message to a group, one credit is charged for every "
-"recipient."
+"Send an SMS message to all your classmates. The service is paid by SMS "
+"credits (1 credit = 1 SMS message to one person). The cost of an SMS "
+"message depends on the number of members in the group."
 msgstr ""
 
-msgid "Credits in your personal account:"
+msgid "Credits left:"
 msgstr ""
 
 msgid "Purchase credits"
@@ -2449,29 +2528,42 @@ msgstr ""
 msgid "If you pay by bank, <strong>a large discount applies</strong>."
 msgstr ""
 
-msgid "5 Lt"
-msgstr ""
-
 msgid "credits"
 msgstr ""
 
-msgid "10 Lt"
+msgid "Message text:"
 msgstr ""
 
-msgid "20 Lt"
+msgid "Recipients:"
 msgstr ""
 
-msgid "You need to buy credits to be able to send SMS messages to the group."
+msgid "You do not have enough SMS credits to send a message to this group."
 msgstr ""
 
-#, python-format
-msgid "You need to confirm your phone in your <a href=\"%s\">profile</a>."
+msgid "No one in this group has confirmed their phone numbers."
+msgstr ""
+
+msgid "Cost:"
+msgstr ""
+
+msgid "SMS credits"
+msgstr ""
+
+msgid ""
+"One SMS credit allows you to send one SMS message to a single recipient. "
+"When sending a message to a group, one credit is charged for every "
+"recipient."
+msgstr ""
+
+msgid "Send a message from your phone!"
 msgstr ""
 
 #, python-format
 msgid ""
-"Send an SMS to number 1337 with the content \"TXT&nbsp;%(sms_code)s\" "
-"(price: 10 Lt) to buy 100 credits."
+"You can send a message to your group directly from your phone. The "
+"message costs <strong>2 Lt</strong>, which pays for the delivery of the "
+"message to all recipients (your SMS credits will not be charged). Send "
+"the following text to number %(phone)s:"
 msgstr ""
 
 msgid "Everywhere"
@@ -2764,6 +2856,9 @@ msgstr ""
 msgid "(use the format +37067812345)"
 msgstr ""
 
+msgid "no, thanks"
+msgstr ""
+
 msgid "Please confirm your phone number"
 msgstr ""
 
@@ -2805,9 +2900,6 @@ msgid ""
 msgstr ""
 
 msgid "Use the group's mailing list!"
-msgstr ""
-
-msgid "no, thanks"
 msgstr ""
 
 msgid "Show subjects from my groups"
@@ -2978,9 +3070,6 @@ msgid "Please state the reason why the file '%s' is inappropriate:"
 msgstr ""
 
 msgid "Your e-mail (optional)"
-msgstr ""
-
-msgid "unlimited"
 msgstr ""
 
 msgid "Increase limits"

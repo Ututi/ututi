@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-08-04 02:18+0300\n"
+"PO-Revision-Date: 2010-08-06 12:02+0300\n"
 "Last-Translator: \n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -52,8 +52,8 @@ msgid "Invalid group: %s"
 msgstr "Nieaktywna grupa:%s"
 
 #, python-format
-msgid "Added %d credits to group space account; now there are %d."
-msgstr "Do profilu Twojej grupy dodano %s punktów. Teraz jest ich %d."
+msgid "Purchased another month of group space for \"%s\" (until %s)."
+msgstr ""
 
 #, python-format
 msgid "Invalid group message: %s"
@@ -193,6 +193,13 @@ msgstr "Już należysz do tej grupy."
 msgid "Your request to join the group is still being processed."
 msgstr "Twoje zgłoszenie jeszcze nie zostało zaakceptowane."
 
+#, python-format
+msgid "Great! You have used a coupon code and will now get %s !"
+msgstr ""
+
+msgid "Sorry. We were not able to apply that coupon."
+msgstr ""
+
 msgid "The group's front page was updated."
 msgstr "Strona główna grupy została zaktualizowana."
 
@@ -271,16 +278,12 @@ msgid "Group '%(group_title)s' has been deleted!"
 msgstr "Grupa '%(group_title)s' została usunięta!"
 
 #, python-format
-msgid "Not enough SMS credits: %d needed, but you have only %d."
-msgstr "Za mało punktów SMS: potrzebne Ci  %d, a masz %d."
+msgid "Not enough SMS credits: you need %d, but you have only %d."
+msgstr ""
 
 #, python-format
 msgid "SMS sent! (%d credits used up, %d remaining)"
 msgstr "Wiadomość została wysłana! (%d punkty wykorzystano, %d zostało)"
-
-#, python-format
-msgid "Purchased %s months for private file area."
-msgstr " Nabyte %s miesięcy na prywatną przestrzeń dla plików."
 
 msgid "Please enter your password to register."
 msgstr "Wprowadź hasło."
@@ -633,8 +636,14 @@ msgstr "Wprowadź aktualny e-mail."
 msgid "The email already exists."
 msgstr "Taki e-mail już istnieje."
 
-msgid "Id does not reference what we either a group or a subject."
-msgstr "ID nie sugeruje, czy jest to grupa, czy przedmiot."
+msgid "Id does not reference a group or a subject."
+msgstr ""
+
+msgid "Such coupon code already exists, choose a different one."
+msgstr ""
+
+msgid "Such a coupon code does not exist."
+msgstr ""
 
 msgid "Admin"
 msgstr "Admin"
@@ -659,6 +668,13 @@ msgstr "Moderator"
 
 msgid "Group admin"
 msgstr "Administrator grupy"
+
+#, python-format
+msgid "unlimited group private files for %(day_count)d day"
+msgid_plural "unlimited group private files for %(day_count)d days"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #, python-format
 msgid "A new file has been uploaded for the %(title)s:"
@@ -862,6 +878,9 @@ msgid "... or connect using your Google or Facebook account."
 msgstr ""
 "...albo połącz się korzystając z Twojego konta Google lub profilu na "
 "Facebooku."
+
+msgid "Connect"
+msgstr ""
 
 msgid ""
 "Here you and your classmates can use the file storage for sharing "
@@ -1320,6 +1339,40 @@ msgstr[0] "znaleziono %(count)s wydarzenie"
 msgstr[1] "znaleziono %(count)s wydarzenia"
 msgstr[2] "znaleziono %(count)s wydarzeń"
 
+msgid "Group Coupons"
+msgstr ""
+
+#, python-format
+msgid "found %(count)s coupon"
+msgid_plural "found %(count)s coupons"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "Code"
+msgstr ""
+
+msgid "Created"
+msgstr "Utworzył"
+
+msgid "Valid until"
+msgstr ""
+
+msgid "Action"
+msgstr ""
+
+msgid "Parameter"
+msgstr ""
+
+msgid "Groups using"
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid "Day count (for unlimited space)"
+msgstr ""
+
 msgid "CSV File"
 msgstr "Plik CSV"
 
@@ -1362,9 +1415,6 @@ msgstr "Nadawca"
 
 msgid "Recipient"
 msgstr "Odbiorca"
-
-msgid "Created"
-msgstr "Utworzył"
 
 msgid "Status"
 msgstr "Status"
@@ -1851,8 +1901,8 @@ msgstr "Moderatorzy"
 msgid "Continue"
 msgstr "Kontynuuj"
 
-msgid "join"
-msgstr "dołącz"
+msgid "Recommended groups"
+msgstr ""
 
 msgid "No groups found"
 msgstr "Nie znaleziono żadnej grupy"
@@ -1875,29 +1925,79 @@ msgstr "Zakończ wybór przedmiotów"
 msgid "become a member"
 msgstr "zostań członkiem"
 
+#, python-format
+msgid "Congratulations! You have purchased %s personal SMS credits."
+msgstr ""
+
+#, python-format
+msgid ""
+"You can use these credits to send %s messages. For example, if your group"
+" has 20 members with registered phone numbers, one message will cost 20 "
+"SMS credits."
+msgstr ""
+
+msgid "Happy cat"
+msgstr ""
+
+msgid "Thanks!"
+msgstr ""
+
+msgid "Congratulations! You have increased the group's private file limit."
+msgstr ""
+
+#, python-format
+msgid ""
+"You can now store up to 5&nbsp;GB in your group's private area. Time "
+"period extension: %s."
+msgstr ""
+
+msgid "Have fun using Ututi groups!"
+msgstr ""
+
+msgid "You have decided not to increase your group's private file limit."
+msgstr ""
+
+msgid "Perhaps you will change your mind later?"
+msgstr ""
+
+msgid "Sad cat"
+msgstr ""
+
+msgid "You have decided not to buy extra SMS credits."
+msgstr ""
+
 msgid "New academic group"
 msgstr "Nowa grupa akademicka"
 
 msgid "Create an academic group"
 msgstr "Utwóórz grupę akademicką"
 
-msgid "What can you do with academic groups?"
-msgstr "Co możesz robić z grupami akademickimi?"
+msgid "Enter your university and department"
+msgstr ""
 
-msgid "Private file area"
-msgstr "Miejsce na pliki prywatne"
+msgid "Find existing groups"
+msgstr ""
 
-msgid "Registration with university subjects"
-msgstr "Obserwowanie przedmiotów akademickich"
+msgid "Join one"
+msgstr ""
 
-msgid " is taken."
-msgstr "pobrano."
+msgid " is invalid."
+msgstr ""
 
 msgid " is free!"
 msgstr "wolne!"
 
+msgid "Coupon code is valid!"
+msgstr ""
+
+msgid "Coupon code is invalid."
+msgstr ""
+
 msgid "Group address on the web"
 msgstr "Adres grupy na stronie"
+
+msgid "Gift coupon code"
+msgstr ""
 
 msgid "Group e-mail address"
 msgstr "Adres e-mail grupy"
@@ -1910,6 +2010,9 @@ msgstr "Grupy mają miejsce do gromadzenia plików"
 
 msgid "Forum type"
 msgstr "Rodzaj forum"
+
+msgid "join"
+msgstr "dołącz"
 
 msgid "Access settings"
 msgstr "Ustawienia dostępu"
@@ -1935,17 +2038,31 @@ msgstr "Tylko członkowie"
 msgid "Group page visibility"
 msgstr "Widoczność strony grupy"
 
+msgid ""
+"The group page can be used for news, description of the group, "
+"calendaring, timetables, etc."
+msgstr ""
+
 msgid "New custom group"
 msgstr "Nowa grupa konfugurowana"
 
 msgid "Create a custom group"
 msgstr "Utwórz grupę konfigurowaną"
 
-msgid "What can you do with custom groups?"
-msgstr "Co możesz robić z grupą konfigurowaną?"
+msgid "Group data"
+msgstr ""
 
-msgid "Pick the functionality you need yourself"
-msgstr "Wybierz potrzebne Ci funkcje"
+msgid "Set up your own group"
+msgstr ""
+
+msgid "Choose the means of communication"
+msgstr ""
+
+msgid "Choose the visibility of a group"
+msgstr ""
+
+msgid "Choose a way to register in this group"
+msgstr ""
 
 msgid "New public group"
 msgstr "Nowa grupa publiczna"
@@ -1999,24 +2116,6 @@ msgstr "Możesz przechowywać tu %s prywatnych plików grupy (n.p. zdjęć)"
 msgid "Add more subjects"
 msgstr "Dodaj więcej przedmiotów"
 
-msgid "Congratulations! You have increased the group's private file limit."
-msgstr ""
-
-#, python-format
-msgid ""
-"You can now store up to 5&nbsp;GB in your group's private area until "
-"<strong>%s</strong>."
-msgstr ""
-
-msgid "Have fun using Ututi groups!"
-msgstr ""
-
-msgid "Happy cat"
-msgstr ""
-
-msgid "Thanks!"
-msgstr ""
-
 msgid "Choose group type"
 msgstr "Wybierz rodzaj grupy"
 
@@ -2031,6 +2130,15 @@ msgstr "Grupa publiczna"
 
 msgid "Custom group"
 msgstr "Grupa konfigurowana"
+
+msgid "Private file area"
+msgstr "Miejsce na pliki prywatne"
+
+msgid "Registration with university subjects"
+msgstr "Obserwowanie przedmiotów akademickich"
+
+msgid "Pick the functionality you need yourself"
+msgstr "Wybierz potrzebne Ci funkcje"
 
 msgid "Congratulations, you have created a new group!"
 msgstr "Gratulujemy utworzenia nowej grupy!"
@@ -2167,8 +2275,39 @@ msgstr "Usuń grupę"
 msgid "Add group members"
 msgstr "Dodaj czlonków grupy"
 
-msgid "The group's page is empty. Enter your description."
-msgstr "Strona grupy jest pusta. Napisz coś o grupie..."
+msgid "What is a group page and who sees it?"
+msgstr ""
+
+msgid ""
+"The group page is the face of the group. It may be public or visible only"
+" to group members, depending on configuration."
+msgstr ""
+
+#, python-format
+msgid ""
+"You can change visibility settings in the <a href=\"%s\">group "
+"settings</a> screen."
+msgstr ""
+
+msgid "What are the uses of a group page?"
+msgstr ""
+
+msgid ""
+"Calendaring. Read this <a href=\"http://blog.ututi.lt/2009/05/28"
+"/naudotoju-isradingumas/\">blog post</a> for more information."
+msgstr ""
+
+msgid "A news board for timetables and posters."
+msgstr ""
+
+msgid "Description of the group for users who are not members of the group yet."
+msgstr ""
+
+msgid "Edit your group page now!"
+msgstr ""
+
+msgid "Edit page"
+msgstr "Edytuj stronę"
 
 msgid "You have decided not to increase your group's file limit"
 msgstr "Zdecydwałeś się nie zwiększać limitu transferu plików."
@@ -2260,54 +2399,6 @@ msgstr "Zapłać i przechowuj <strong>nieograniczoną liczbę plików</strong>:"
 msgid "%d Lt"
 msgstr "%d zł"
 
-msgid "You can also pay for group space by SMS."
-msgstr "Płacić za dodatkową przestrzeń dla grupy można też SMSem."
-
-#, python-format
-msgid ""
-"First, get some credits by sending an SMS "
-"\"<strong>TXT&nbsp;%(sms_code2)s&nbsp;%(group_id)s</strong>\" (2 Lt) or "
-"\"<strong>TXT&nbsp;%(sms_code10)s&nbsp;%(group_id)s</strong>\" (10 Lt) to"
-" the number 1337."
-msgstr ""
-
-msgid ""
-"1 month costs 10 credits, 3 months cost 20 credits, 6 months cost 30 "
-"credits."
-msgstr ""
-"1 miesiąc kosztuje 10 punktów, 3 miesiące - 20 punktów, 6 miesięcy - 30 "
-"punktów."
-
-#, python-format
-msgid "You have <strong>%d</strong> credits."
-msgstr "Masz <strong>%d</strong> punktów."
-
-#, python-format
-msgid "Your private file area is available until <strong>%s</strong>."
-msgstr "Twoja prywatna przestrzeń na pliki jest dostępna do <strong>%s</strong>."
-
-msgid "You need more credits to buy group space."
-msgstr "Aby zwiększyć przestrzeń dla grupy, potrzebujesz więcej punktów."
-
-msgid "Purchase 1 month for 10 credits"
-msgstr "Kup 1 miesiąc za 10 punktów."
-
-msgid "Purchase 3 months for 20 credits"
-msgstr "Kup 3 miesiące za 20 punktów."
-
-msgid "Purchase 6 months for 30 credits"
-msgstr "Kup 6 miesięcy za 30 punktów"
-
-msgid ""
-"Only admins can spend credits to purchase space. Ask your group admin "
-"once there are enough credits in your account."
-msgstr ""
-"Tylko administrator grupy może zamienić punkty na przestrzeń dla grupy. "
-"Zapytaj administratora, czy wystarczy mu na to punktów."
-
-msgid "Gimme 5 credits!"
-msgstr "Daj mi 5 punktów!"
-
 msgid ""
 "The amount of group's private files is limited to 200 Mb. This is so "
 "because Ututi encourages users to store their files in publicly "
@@ -2322,11 +2413,9 @@ msgstr ""
 
 #, python-format
 msgid ""
-"For <em>%d Lt</em> Your group will be able to store an <em>unlimited "
+"For <em>%d Lt</em> your group will be able to store an <em>unlimited "
 "amount of files</em>:"
 msgstr ""
-"Nieograniczona przestrzeń do przechowywania prywatnych plików grupy "
-"będzie dostępna za <em>%d zł</em>"
 
 msgid "increase the limit"
 msgstr "podnieś limit"
@@ -2466,9 +2555,6 @@ msgstr "Wróć do historii"
 msgid "Restore previous"
 msgstr "Odtwórz poprzednie"
 
-msgid "Edit page"
-msgstr "Edytuj stronę"
-
 #, python-format
 msgid "Back to %(page_title)s"
 msgstr "Wróć do %(page_title)s"
@@ -2555,8 +2641,11 @@ msgstr "O grupie"
 msgid "Mailing list address"
 msgstr "Adres listy mailingowej"
 
-msgid "Available space for private group files:"
-msgstr "Dostępna przestrzeń na pliki grupy"
+msgid "Remaining private space:"
+msgstr ""
+
+msgid "unlimited"
+msgstr "nieograniczone"
 
 msgid "Get more space"
 msgstr "Zwiększ przestrzeń"
@@ -2577,12 +2666,11 @@ msgstr ""
 msgid "SMS message"
 msgstr "Wiadomość SMS"
 
+#, python-format
 msgid ""
-"Send an SMS message to number <span style=\"font-size: 14px\">1337</span>"
-" with the following content:"
+"Send an SMS message to number <span style=\"font-size: "
+"14px\">%(phone)s</span> with the following content:"
 msgstr ""
-"Wyślij wiadomość SMS na numer <span style=\"font-size: 14px\">1337</span>"
-" . Treść wiadomości:"
 
 msgid ""
 "The SMS costs <strong>5 Lt</strong> and will increase your file limit to "
@@ -2637,32 +2725,14 @@ msgstr "Członkowie grupy"
 msgid "Send SMS message to group"
 msgstr "Wyślij wiadomość do grupy"
 
-msgid "Message text:"
-msgstr "Treść wiadomości:"
-
-msgid "No one in this group has confirmed their phone numbers."
-msgstr "Żaden członek tej grupy nie potwierdził swojego numeru telefonu."
-
-msgid "recipients"
-msgstr "odbiorcy"
-
-msgid "Cost:"
-msgstr "Koszt:"
-
-msgid "SMS credits"
-msgstr "Punkty SMS"
-
 msgid ""
-"One SMS credits allows you to send one SMS message to a single recipient."
-" When sending a message to a group, one credit is charged for every "
-"recipient."
+"Send an SMS message to all your classmates. The service is paid by SMS "
+"credits (1 credit = 1 SMS message to one person). The cost of an SMS "
+"message depends on the number of members in the group."
 msgstr ""
-"Jeden punkt SMS pozwala wysłać wiadomość SMS do jednego użytkownika. "
-"Wysyłając wiadomość SMS do grupy, system pobiera punkty za wiadomość do "
-"każdego odbiorcy z grupy."
 
-msgid "Credits in your personal account:"
-msgstr "Punkty na Twoim prywatnym koncie:"
+msgid "Credits left:"
+msgstr ""
 
 msgid "Purchase credits"
 msgstr "Kup punkty"
@@ -2685,32 +2755,43 @@ msgstr ""
 msgid "If you pay by bank, <strong>a large discount applies</strong>."
 msgstr "Płacąc przelewem, <strong> dostajesz rabat </strong>."
 
-msgid "5 Lt"
-msgstr "5 zł"
-
 msgid "credits"
 msgstr "punkty"
 
-msgid "10 Lt"
-msgstr "10 zł"
+msgid "Message text:"
+msgstr "Treść wiadomości:"
 
-msgid "20 Lt"
-msgstr "20 zł"
+msgid "Recipients:"
+msgstr ""
 
-msgid "You need to buy credits to be able to send SMS messages to the group."
-msgstr "Aby móc wysyłać wiadomości SMS do grupy, musisz wykupić punkty."
+msgid "You do not have enough SMS credits to send a message to this group."
+msgstr ""
 
-#, python-format
-msgid "You need to confirm your phone in your <a href=\"%s\">profile</a>."
-msgstr "Zweryfikuj swój numer telefonu w Twoim <a href=\"%s\">profilu</a>."
+msgid "No one in this group has confirmed their phone numbers."
+msgstr "Żaden członek tej grupy nie potwierdził swojego numeru telefonu."
+
+msgid "Cost:"
+msgstr "Koszt:"
+
+msgid "SMS credits"
+msgstr "Punkty SMS"
+
+msgid ""
+"One SMS credit allows you to send one SMS message to a single recipient. "
+"When sending a message to a group, one credit is charged for every "
+"recipient."
+msgstr ""
+
+msgid "Send a message from your phone!"
+msgstr ""
 
 #, python-format
 msgid ""
-"Send an SMS to number 1337 with the content \"TXT&nbsp;%(sms_code)s\" "
-"(price: 10 Lt) to buy 100 credits."
+"You can send a message to your group directly from your phone. The "
+"message costs <strong>2 Lt</strong>, which pays for the delivery of the "
+"message to all recipients (your SMS credits will not be charged). Send "
+"the following text to number %(phone)s:"
 msgstr ""
-"Wyślij SMS pod numer telefonu  1337 o treści  \"TXT&nbsp;%(sms_code)s\" "
-"(cena: 10 zł) i kup 100 punktów."
 
 msgid "Everywhere"
 msgstr "Wszędzie"
@@ -3020,6 +3101,9 @@ msgstr "Wprowadzony numer telefonu nie jest poprawny."
 msgid "(use the format +37067812345)"
 msgstr "(korzystaj z formatu +48123456789)"
 
+msgid "no, thanks"
+msgstr "nie, dzięki"
+
 msgid "Please confirm your phone number"
 msgstr "Potwierdź, proszę, Twój numer telefonu"
 
@@ -3064,9 +3148,6 @@ msgstr "To proste - musisz jedynie znać adresy e-mail kolegów z grupy!"
 
 msgid "Use the group's mailing list!"
 msgstr "Skorzystaj z listy mailingowej grupy!"
-
-msgid "no, thanks"
-msgstr "nie, dzięki"
 
 msgid "Show subjects from my groups"
 msgstr "Pokaż przedmioty moich grup"
@@ -3251,9 +3332,6 @@ msgstr "Podaj powód, dlaczego plik '%s' jest nieodpowiedni:"
 
 msgid "Your e-mail (optional)"
 msgstr "Twój e-mail (opcjonalnie)"
-
-msgid "unlimited"
-msgstr "nieograniczone"
 
 msgid "Increase limits"
 msgstr "Podnieś limit"

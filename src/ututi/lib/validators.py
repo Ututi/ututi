@@ -256,7 +256,7 @@ class ParentIdValidator(validators.FancyValidator):
     """
 
     messages = {
-        'badId': _(u"Id does not reference what we either a group or a subject.")
+        'badId': _(u"Id does not reference a group or a subject.")
         }
 
     def _to_python(self, value, state):
