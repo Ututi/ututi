@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-08-06 12:02+0300\n"
+"PO-Revision-Date: 2010-08-06 15:17+0300\n"
 "Last-Translator: \n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -2106,9 +2106,6 @@ msgstr "Edytuj stronę startową grupy"
 msgid "Group page is visible to everybody"
 msgstr "Strona grupy jest widoczna publicznie"
 
-msgid "Group files"
-msgstr "Pliki grupy"
-
 #, python-format
 msgid "You can keep up to %s of private group files here (e.g. pictures)"
 msgstr "Możesz przechowywać tu %s prywatnych plików grupy (n.p. zdjęć)"
@@ -2644,9 +2641,6 @@ msgstr "Adres listy mailingowej"
 msgid "Remaining private space:"
 msgstr ""
 
-msgid "unlimited"
-msgstr "nieograniczone"
-
 msgid "Get more space"
 msgstr "Zwiększ przestrzeń"
 
@@ -2673,12 +2667,9 @@ msgid ""
 msgstr ""
 
 msgid ""
-"The SMS costs <strong>5 Lt</strong> and will increase your file limit to "
+"The SMS costs <strong>7 Lt</strong> and will increase your file limit to "
 "<strong>5&nbsp;GB</strong> for another month."
 msgstr ""
-"Koszt SMSa <strong>5 zł</strong>. Wykupienie go pozwoli podnieść limit "
-"przestrzeni Twojej grupy w przyszłym miesiącu do "
-"<strong>5&nbsp;GB</strong>"
 
 #, python-format
 msgid "Your private file area is limited to 5&nbsp;GB until <strong>%s</strong>."
@@ -2692,8 +2683,8 @@ msgstr "Bankowość elektroniczna"
 msgid "If you pay by bank, a discount applies."
 msgstr "Jeśli wolisz płacić przelewem, dostaniesz rabat."
 
-msgid "Purchase SMS credits"
-msgstr "Kup punkty SMS"
+msgid "Purchase group private space"
+msgstr ""
 
 msgid "More settings"
 msgstr "Więcej ustawień"
@@ -2757,6 +2748,9 @@ msgstr "Płacąc przelewem, <strong> dostajesz rabat </strong>."
 
 msgid "credits"
 msgstr "punkty"
+
+msgid "Purchase SMS credits"
+msgstr "Kup punkty SMS"
 
 msgid "Message text:"
 msgstr "Treść wiadomości:"
@@ -3141,6 +3135,9 @@ msgstr "Forum grupy"
 msgid "Group subjects"
 msgstr "Przedmioty grupy"
 
+msgid "Group files"
+msgstr "Pliki grupy"
+
 msgid ""
 "It's simple - you only need to know the email addresses of your "
 "classmates!"
@@ -3332,6 +3329,9 @@ msgstr "Podaj powód, dlaczego plik '%s' jest nieodpowiedni:"
 
 msgid "Your e-mail (optional)"
 msgstr "Twój e-mail (opcjonalnie)"
+
+msgid "unlimited"
+msgstr "nieograniczone"
 
 msgid "Increase limits"
 msgstr "Podnieś limit"

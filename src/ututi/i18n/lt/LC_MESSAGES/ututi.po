@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-08-06 12:02+0300\n"
+"PO-Revision-Date: 2010-08-06 15:21+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -2100,9 +2100,6 @@ msgstr "Redaguoti grupės pagrindinį puslapį"
 msgid "Group page is visible to everybody"
 msgstr "Grupės puslapis matomas visiems"
 
-msgid "Group files"
-msgstr "Grupės failai"
-
 #, python-format
 msgid "You can keep up to %s of private group files here (e.g. pictures)"
 msgstr "Privatūs failai matomi TIK GRUPIOKAMS! Čia galite laikyti iki %s."
@@ -2487,7 +2484,7 @@ msgid "subjects list"
 msgstr "dalykų sąrašas"
 
 msgid "Did not find what you were looking for?"
-msgstr "Nerandi to, ko ieškai? "
+msgstr "Nerandi to, ko ieškai?"
 
 msgid "Create a new group"
 msgstr "sukurti naują grupę"
@@ -2642,9 +2639,6 @@ msgstr "Grupės el. konferencijos (el. pašto) adresas"
 msgid "Remaining private space:"
 msgstr "Liko vietos:"
 
-msgid "unlimited"
-msgstr "neribota"
-
 msgid "Get more space"
 msgstr "Gauk daugiau vietos"
 
@@ -2672,10 +2666,10 @@ msgstr ""
 "14px\">%(phone)s</span> su tokiu turiniu:"
 
 msgid ""
-"The SMS costs <strong>5 Lt</strong> and will increase your file limit to "
+"The SMS costs <strong>7 Lt</strong> and will increase your file limit to "
 "<strong>5&nbsp;GB</strong> for another month."
 msgstr ""
-"SMS kainuoja <strong>5 Lt</strong> ir padidins failų srities limitą iki "
+"SMS kainuoja <strong>7 Lt</strong>. Failų limitas bus padidintas iki "
 "<strong>5&nbsp;GB</strong> papildomam mėnesiui."
 
 #, python-format
@@ -2688,8 +2682,8 @@ msgstr "E-bankai"
 msgid "If you pay by bank, a discount applies."
 msgstr "Jei mokate per banką, taikoma nuolaida."
 
-msgid "Purchase SMS credits"
-msgstr "Pirkti SMS kreditų"
+msgid "Purchase group private space"
+msgstr "Pirkti privačią grupės vietą"
 
 msgid "More settings"
 msgstr "Daugiau nustatymų"
@@ -2755,6 +2749,9 @@ msgstr "Jei mokate banku, taikoma <strong>didelė nuolaida</strong>."
 
 msgid "credits"
 msgstr "kreditų"
+
+msgid "Purchase SMS credits"
+msgstr "Pirkti SMS kreditų"
 
 msgid "Message text:"
 msgstr "Žinutės tekstas:"
@@ -2867,13 +2864,13 @@ msgid "There are no subject tags."
 msgstr "Dalykas neturi žymų - įveskite bent vieną..."
 
 msgid "Add to my subjects"
-msgstr "pridėti prie mano dalykų "
+msgstr "Pridėti prie mano dalykų "
 
 msgid "Remove from my subjects"
-msgstr "ištrinti iš mano dalykų"
+msgstr "Ištrinti iš mano dalykų"
 
 msgid "edit subject information"
-msgstr "keisti dalyko informaciją"
+msgstr "Keisti dalyko informaciją"
 
 msgid "Similar subjects"
 msgstr "Panašūs dalykai"
@@ -3082,7 +3079,7 @@ msgid "Tell us where you are studying"
 msgstr "Pasakyk, kur studijuoji"
 
 msgid "save"
-msgstr "saugoti"
+msgstr "Saugoti"
 
 msgid "Please enter a university."
 msgstr "Įveskite universitetą"
@@ -3128,7 +3125,7 @@ msgid "Your phone has been confirmed. Thank you."
 msgstr "Telefono numeris patvirtintas. Ačiū!"
 
 msgid "create group"
-msgstr "kurti grupę"
+msgstr "Kurti grupę"
 
 msgid "Write message"
 msgstr "rašyti žinutę"
@@ -3141,6 +3138,9 @@ msgstr "Grupės paštas"
 
 msgid "Group subjects"
 msgstr "Grupės dalykai"
+
+msgid "Group files"
+msgstr "Grupės failai"
 
 msgid ""
 "It's simple - you only need to know the email addresses of your "
@@ -3185,7 +3185,7 @@ msgid "What have I been doing?"
 msgstr "Ir ką gi aš nuveikiau?"
 
 msgid "You haven't contributed much, have you?"
-msgstr "Ne itin daug padaryta, ką?"
+msgstr "Ne itin daug nuveikta?.."
 
 msgid "Watched subjects notification settings"
 msgstr "Priminimų apie dalykus nustatymai"
@@ -3226,7 +3226,7 @@ msgid ""
 "If you donate at least 50 Lt, you will receive a gift &mdash; an Ututi "
 "T-shirt. You can donate this amount in parts."
 msgstr ""
-"Parėmusiems 50lt ir daugiau, įteiksime mažą dovanėlę &mdash;  Ututi "
+"Parėmusiems 50 Lt ir daugiau įteiksime mažą dovanėlę &mdash;  Ututi "
 "marškinėlius. Remti galima dalimis."
 
 msgid "I want to donate:"
@@ -3334,6 +3334,9 @@ msgstr "Nurodykite, kodėl failas '%s' netinkamas:"
 msgid "Your e-mail (optional)"
 msgstr "El. pašto adresas (nebūtina)"
 
+msgid "unlimited"
+msgstr "neribota"
+
 msgid "Increase limits"
 msgstr "Padidinti limitą"
 
@@ -3347,7 +3350,7 @@ msgid "New folder:"
 msgstr "Kurti aplanką"
 
 msgid "create"
-msgstr "sukurti"
+msgstr "Sukurti"
 
 msgid ""
 "No more space for private files. We recommend moving files into subjects "
@@ -3402,7 +3405,7 @@ msgid "Reject"
 msgstr "Atmesti"
 
 msgid "Accept"
-msgstr "patvirtinti"
+msgstr "Patvirtinti"
 
 #, python-format
 msgid ""
