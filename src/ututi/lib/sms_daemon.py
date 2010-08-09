@@ -1,5 +1,6 @@
 import sys, time, os
 import logging
+import hashlib
 from daemon import Daemon
 from urllib import urlencode
 from urllib2 import urlopen, URLError
@@ -22,7 +23,7 @@ def main():
     log_file = os.path.abspath(log_file)
     os.environ['SMSD_LOG_FILE'] = log_file
 
-    daemon = MyDaemon(pid_file)
+    daemon = SMSDaemon(pid_file)
 
     if len(sys.argv) == 2:
         if 'start' == sys.argv[1]:
@@ -40,7 +41,9 @@ def main():
         sys.exit(2)
 
 
-class MyDaemon(Daemon):
+class SMSDaemon(Daemon):
+    """A daemon that sends SMS messages."""
+
     def run(self):
         # database connect
 
@@ -62,12 +65,16 @@ class MyDaemon(Daemon):
         connection = engine.connect()
 
         sms_config = {
-            'url' : config.get('sms.url'),
-            'user' : config.get('sms.user'),
-            'password' : config.get('sms.password'),
-            'from' : config.get('sms.from'),
-            'dlr-url' : config.get('sms.dlr-url'),
-            'dlr-mask' : config.get('sms.dlr-mask')}
+            'url': config.get('sms.url'),
+            'user': config.get('sms.user'),
+            'password': config.get('sms.password'),
+            'from': config.get('sms.from'),
+            'dlr-url': config.get('sms.dlr-url'),
+            'dlr-mask': config.get('sms.dlr-mask'),
+            'smsapi.pl.url': config.get('smsapi.pl.url'),
+            'smsapi.pl.username': config.get('smsapi.pl.username'),
+            'smsapi.pl.password': config.get('smsapi.pl.password'),
+            }
 
         sms_thread_count = config.get('sms.thread_count', 5)
         sending_sema = BoundedSemaphore(sms_thread_count)
@@ -86,6 +93,8 @@ class MyDaemon(Daemon):
 
 
 class SenderThread(Thread):
+    """A thread that sends a single SMS."""
+
     def __init__(self, semaphore, db_engine, sms, sms_config, log):
         Thread.__init__(self)
         self.semaphore = semaphore
@@ -96,9 +105,22 @@ class SenderThread(Thread):
 
     def run(self):
         self.semaphore.acquire()
-
         connection = self.db_engine.connect()
 
+        try:
+            sms_id, sms_to, sms_text = self.sms
+            if sms_to.startswith('+37'):
+                self.send_using_vertex()
+            elif sms_to.startswith('+48'):
+                self.send_using_smsapi_pl()
+            else:
+                raise ValueError('Unknown country: %s' % sms_to)
+        finally:
+            connection.close()
+            self.semaphore.release()
+
+    def send_using_vertex(self):
+        """Send SMS through Vertex."""
         sms_id, sms_to, sms_text = self.sms
         sms_text = sms_text.decode('utf-8')
 
@@ -127,7 +149,7 @@ class SenderThread(Thread):
         #processing time should not be rolled back
         results = connection.execute("update sms_outbox set processed = (now() at time zone 'UTC') where id = %d" % sms_id)
         self.log.debug('Message text (sms id %d): %s', (sms_id, sms_text))
-        self.log.debug('Sending sms (sms id %d): %s' % (sms_id, url))
+        self.log.debug('Sending sms [Vertex] (sms id %d): %s' % (sms_id, url))
         tx = connection.begin()
         try:
             response = urlopen(url)
@@ -144,6 +166,48 @@ class SenderThread(Thread):
         except URLError:
             tx.rollback()
             self.log.error('SMSC connection error (sms id %d)', sms_id )
-        finally:
-            connection.close()
-            self.semaphore.release()
+
+    def send_using_smsapi_pl(self):
+        """Send SMS through smsapi.pl."""
+        sms_id, sms_to, sms_text = self.sms
+        sms_text = sms_text.decode('utf-8')
+
+        password_digest = hashlib.md5(self.sms_config['smsapi.pl.password']).hexdigest()
+
+        params = {'username': self.sms_config['smsapi.pl.username'],
+                  'password': password_digest,
+                  'to': sms_to,
+                  'message': sms_text.encode('utf-8'),
+                  'encoding': 'utf-8',
+                  'eco': 1,
+                  #'from': 'Ututi.pl', -- not supported for ecoSMS
+                  }
+
+        url = '%s?%s' % (self.sms_config['smsapi.pl.url'], urlencode(params))
+
+        #processing time should not be rolled back
+        results = connection.execute("update sms_outbox set processed = (now() at time zone 'UTC') where id = %d" % sms_id)
+        self.log.debug('Message text (sms id %d): %s', (sms_id, sms_text))
+        self.log.debug('Sending sms [smsapi.pl] (sms id %d): %s' % (sms_id, url))
+        tx = connection.begin()
+        try:
+            response = urlopen(url)
+            msg = response.read()
+            self.log.debug('response: msg')
+            success, result = msg.split(':')
+            if success == 'OK':
+                status = 0
+            else:
+                status = int(result)
+            delivery_status = 1
+
+            results = connection.execute("update sms_outbox set sending_status = %d where id = %d" % (status, sms_id))
+            results = connection.execute("update sms_outbox set delivery_status = %d where id = %d" % (delivery_status, sms_id))
+            self.log.info('SMS sent (sms id %d)', sms_id)
+            tx.commit()
+        except ValueError:
+            self.log.error('Invalid response from smsapi.pl: %s (sms id %d)', (msg, sms_id))
+            tx.rollback()
+        except URLError:
+            tx.rollback()
+            self.log.error('smsapi.pl connection error (sms id %d)', sms_id )
