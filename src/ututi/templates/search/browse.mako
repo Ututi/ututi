@@ -50,3 +50,6 @@
 
 ${universities_section(c.unis, url(controller='profile', action='browse'))}
 <br class="clear-left" />
+
+<h2>${_('Search')}</h2>
+${search_form(c.text, c.obj_type, c.tags, parts=['obj_type', 'text', 'tags'], target=url(controller='search', action='index'))}
