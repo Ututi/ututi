@@ -55,6 +55,15 @@ def test_basic_search():
         >>> [result.object.title for result in results]
         [u'geografija']
 
+    """
+
+def test_search_regressions():
+    """
+    Disjunctive double spaces don't break search:
+
+        >>> results = search(text=u'biologija  informatika', disjunctive=True)
+        >>> [result.object.title for result in results]
+        [u'Bioinformatikai', u'Biology students', u'Biologijos pagrindai']
 
     """
 

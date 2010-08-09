@@ -1,5 +1,6 @@
 from ututi.model import meta, SearchItem, SimpleTag, LocationTag, ContentItem, TagSearchItem
 import logging
+import re
 
 from sqlalchemy.sql import func, select
 from sqlalchemy.sql.expression import or_
@@ -82,7 +83,7 @@ def _search_query_text(query, **kwargs):
     disjunctive = kwargs.get('disjunctive')
     if text:
         if disjunctive:
-            text = text.replace(' ', ' | ')
+            text = re.sub(r'\s+', ' | ', text.strip())
             query = query.filter(SearchItem.terms.op('@@')(func.to_tsquery(text)))
         else:
             query = query.filter(SearchItem.terms.op('@@')(func.plainto_tsquery(text)))
@@ -99,7 +100,7 @@ def _search_query_rank(query, **kwargs):
     rank_cutoff = kwargs.get('rank_cutoff')
 
     if disjunctive:
-        text = text.replace(' ', ' | ')
+        text = re.sub(r'\s+', ' | ', text.strip())
         rank_func = func.ts_rank_cd(SearchItem.terms, func.to_tsquery(text))
     else:
         rank_func = func.ts_rank_cd(SearchItem.terms, func.plainto_tsquery(text))
