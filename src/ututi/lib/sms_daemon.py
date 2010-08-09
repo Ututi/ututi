@@ -105,7 +105,7 @@ class SenderThread(Thread):
 
     def run(self):
         self.semaphore.acquire()
-        connection = self.db_engine.connect()
+        self.connection = self.db_engine.connect()
 
         try:
             sms_id, sms_to, sms_text = self.sms
@@ -116,7 +116,7 @@ class SenderThread(Thread):
             else:
                 raise ValueError('Unknown country: %s' % sms_to)
         finally:
-            connection.close()
+            self.connection.close()
             self.semaphore.release()
 
     def send_using_vertex(self):
@@ -147,17 +147,17 @@ class SenderThread(Thread):
         url = '%s?%s' % (self.sms_config['url'], urlencode(message))
 
         #processing time should not be rolled back
-        results = connection.execute("update sms_outbox set processed = (now() at time zone 'UTC') where id = %d" % sms_id)
+        results = self.connection.execute("update sms_outbox set processed = (now() at time zone 'UTC') where id = %d" % sms_id)
         self.log.debug('Message text (sms id %d): %s', (sms_id, sms_text))
         self.log.debug('Sending sms [Vertex] (sms id %d): %s' % (sms_id, url))
-        tx = connection.begin()
+        tx = self.connection.begin()
         try:
             response = urlopen(url)
             msg = response.read()
             status, message = msg.split(';')
 
             status = int(status)
-            results = connection.execute("update sms_outbox set sending_status = %d where id = %d" % (status, sms_id))
+            results = self.connection.execute("update sms_outbox set sending_status = %d where id = %d" % (status, sms_id))
             self.log.info('SMS sent (sms id %d)', sms_id)
             tx.commit()
         except ValueError:
@@ -186,23 +186,22 @@ class SenderThread(Thread):
         url = '%s?%s' % (self.sms_config['smsapi.pl.url'], urlencode(params))
 
         #processing time should not be rolled back
-        results = connection.execute("update sms_outbox set processed = (now() at time zone 'UTC') where id = %d" % sms_id)
+        results = self.connection.execute("update sms_outbox set processed = (now() at time zone 'UTC') where id = %d" % sms_id)
         self.log.debug('Message text (sms id %d): %s', (sms_id, sms_text))
         self.log.debug('Sending sms [smsapi.pl] (sms id %d): %s' % (sms_id, url))
-        tx = connection.begin()
+        tx = self.connection.begin()
         try:
             response = urlopen(url)
             msg = response.read()
-            self.log.debug('response: msg')
-            success, result = msg.split(':')
+            success, result = msg.split(':', 1)
             if success == 'OK':
                 status = 0
             else:
                 status = int(result)
             delivery_status = 1
 
-            results = connection.execute("update sms_outbox set sending_status = %d where id = %d" % (status, sms_id))
-            results = connection.execute("update sms_outbox set delivery_status = %d where id = %d" % (delivery_status, sms_id))
+            results = self.connection.execute("update sms_outbox set sending_status = %d where id = %d" % (status, sms_id))
+            results = self.connection.execute("update sms_outbox set delivery_status = %d where id = %d" % (delivery_status, sms_id))
             self.log.info('SMS sent (sms id %d)', sms_id)
             tx.commit()
         except ValueError:
