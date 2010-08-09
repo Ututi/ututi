@@ -5,6 +5,41 @@ from urllib import urlencode
 from urllib2 import urlopen, URLError
 from threading import BoundedSemaphore, Thread
 
+
+def main():
+
+    pid_file = os.environ.get('SMSD_PID_FILE', 'smsd.pid')
+    pid_file = os.path.abspath(pid_file)
+
+    config_file = os.environ.get('SMSD_CONFIG_FILE', 'development.ini')
+    config_file = os.path.abspath(config_file)
+    os.environ['SMSD_CONFIG_FILE'] = config_file
+
+    pgport = os.environ.get("PGPORT", "4455")
+    os.environ["PGPORT"] = pgport 
+
+    log_file = os.environ.get("SMSD_LOG_FILE", 'smsd.log')
+    log_file = os.path.abspath(log_file)
+    os.environ['SMSD_LOG_FILE'] = log_file
+
+    daemon = MyDaemon(pid_file)
+
+    if len(sys.argv) == 2:
+        if 'start' == sys.argv[1]:
+            daemon.start()
+        elif 'stop' == sys.argv[1]:
+            daemon.stop()
+        elif 'restart' == sys.argv[1]:
+            daemon.restart()
+        else:
+            print "Unknown command"
+            sys.exit(2)
+            sys.exit(0)
+    else:
+        print "usage: %s start|stop|restart" % sys.argv[0]
+        sys.exit(2)
+
+
 class MyDaemon(Daemon):
     def run(self):
         # database connect
@@ -48,40 +83,6 @@ class MyDaemon(Daemon):
                 thr.start()
 
             time.sleep(5)
-
-
-def main():
-
-    pid_file = os.environ.get('SMSD_PID_FILE', 'smsd.pid')
-    pid_file = os.path.abspath(pid_file)
-
-    config_file = os.environ.get('SMSD_CONFIG_FILE', 'development.ini')
-    config_file = os.path.abspath(config_file)
-    os.environ['SMSD_CONFIG_FILE'] = config_file
-
-    pgport = os.environ.get("PGPORT", "4455")
-    os.environ["PGPORT"] = pgport 
-
-    log_file = os.environ.get("SMSD_LOG_FILE", 'smsd.log')
-    log_file = os.path.abspath(log_file)
-    os.environ['SMSD_LOG_FILE'] = log_file
-
-    daemon = MyDaemon(pid_file)
-
-    if len(sys.argv) == 2:
-        if 'start' == sys.argv[1]:
-            daemon.start()
-        elif 'stop' == sys.argv[1]:
-            daemon.stop()
-        elif 'restart' == sys.argv[1]:
-            daemon.restart()
-        else:
-            print "Unknown command"
-            sys.exit(2)
-            sys.exit(0)
-    else:
-        print "usage: %s start|stop|restart" % sys.argv[0]
-        sys.exit(2)
 
 
 class SenderThread(Thread):
