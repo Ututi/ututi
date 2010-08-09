@@ -196,12 +196,14 @@ class SenderThread(Thread):
             success, result = msg.split(':', 1)
             if success == 'OK':
                 status = 0
+                self.log.info('smsapi.pl replied:', result)
             else:
                 status = int(result)
+                self.log.info('smsapi.pl delivery failed!')
             delivery_status = 1
 
-            results = self.connection.execute("update sms_outbox set sending_status = %d where id = %d" % (status, sms_id))
-            results = self.connection.execute("update sms_outbox set delivery_status = %d where id = %d" % (delivery_status, sms_id))
+            self.connection.execute("update sms_outbox set sending_status = %d where id = %d" % (status, sms_id))
+            self.connection.execute("update sms_outbox set delivery_status = %d where id = %d" % (delivery_status, sms_id))
             self.log.info('SMS sent (sms id %d)', sms_id)
             tx.commit()
         except ValueError:
