@@ -138,7 +138,7 @@ class SenderThread(Thread):
             self.log.info('SMS sent (sms id %d)', sms_id)
             tx.commit()
         except ValueError:
-            self.log.error('Invalid responce from SMSC: %s (sms id %d)', (msg, sms_id))
+            self.log.error('Invalid response from SMSC: %s (sms id %d)', (msg, sms_id))
             tx.rollback()
         except URLError:
             tx.rollback()
