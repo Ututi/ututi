@@ -654,6 +654,8 @@ def generate_password(password):
 
 def validate_password(reference, password):
     """Verify a password given the original hash."""
+    if not reference:
+        return False
     try:
         ref = a2b_base64(reference)
     except binascii.Error:

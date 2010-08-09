@@ -78,6 +78,8 @@ def test_generate_validate_password():
 
         >>> validate_password('', 'asdasd')
         False
+        >>> validate_password(None, 'asdasd')
+        False
 
     And even if the hash is valid, a different password will not get
     through:
