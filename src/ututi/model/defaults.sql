@@ -325,16 +325,16 @@ CREATE TRIGGER set_thread_id BEFORE INSERT OR UPDATE ON group_mailing_list_messa
 CREATE TABLE outgoing_group_sms_messages (
        id bigserial not null,
        created timestamp not null default (now() at time zone 'UTC'),
-       sender_id int8 not null references users(id),
-       group_id int8 not null references groups(id),
+       sender_id int8 not null references users(id) on delete cascade,
+       group_id int8 not null references groups(id) on delete cascade,
        message_text text not null,
        primary key (id));
 
 
 CREATE TABLE received_sms_messages (
        id bigserial not null,
-       sender_id int8 references users(id),
-       group_id int8 references groups(id),
+       sender_id int8 references users(id) on delete cascade,
+       group_id int8 references groups(id) on delete cascade,
        sender_phone_number varchar(20) default null,
        message_type varchar(30),
        message_text text,
@@ -347,7 +347,7 @@ CREATE TABLE received_sms_messages (
 
 CREATE TABLE sms_outbox (
        id bigserial not null,
-       outgoing_group_message_id int8 references outgoing_group_sms_messages(id),
+       outgoing_group_message_id int8 references outgoing_group_sms_messages(id) on delete cascade,
        sender_uid int8 references users(id) on delete cascade not null,
        recipient_uid int8 references users(id) on delete cascade default null,
        recipient_number varchar(20),
