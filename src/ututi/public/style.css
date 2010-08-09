@@ -3697,14 +3697,14 @@ div.action-portlet .textField textarea {
 #blog_portlet-content #entries {
     font-size: 14px;
     line-height: 14px;
-    height: 40px;
+    height: 50px;
     overflow: visible;
     padding: 0;
 }
 
 #blog_portlet-content #entries .teaser {
-    height: 40px;
-    width: 290px;
+    height: 50px;
+    width: 270px;
     margin: 0;
     margin-top:5px;
 }
