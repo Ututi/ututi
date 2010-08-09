@@ -125,7 +125,7 @@ class SenderThread(Thread):
 
         #processing time should not be rolled back
         results = connection.execute("update sms_outbox set processed = (now() at time zone 'UTC') where id = %d" % sms_id)
-        self.log.debug('Message text (sms is %d): %s', (sms_id, sms_text))
+        self.log.debug('Message text (sms id %d): %s', (sms_id, sms_text))
         self.log.debug('Sending sms (sms id %d): %s' % (sms_id, url))
         tx = connection.begin()
         try:
