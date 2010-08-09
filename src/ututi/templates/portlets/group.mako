@@ -423,6 +423,6 @@
       </div>
 
       <div class="clear-left"></div>
-    </div>
+
   </%self:uportlet>
 </%def>
