@@ -126,3 +126,18 @@ When creating a subject, the user can select to watch it:
     >>> browser.open('/profile/subjects')
     >>> browser.printQuery("id('subject_settings')//ul/li//a/text()")
     Testing subject
+
+Subject names with parentheses should not cause problems:
+
+    >>> browser.open('/home')
+    >>> browser.getLink('create new subject').click()
+    >>> browser.url
+    'http://localhost/subjects/add'
+
+    >>> browser.getControl(name='location-1').value = 'vu'
+    >>> browser.getControl('Title').value = 'Šiuolaikinė anglų kalba (akademinis skaitymas)'
+    >>> browser.getControl('Lecturer').value = 'Some guy'
+    >>> browser.getControl('Start watching this subject personally').selected = True
+    >>> browser.getControl('Save').click()
+    >>> print browser.url
+    http://localhost/subject/vu/siuolaikine_anglu_ka

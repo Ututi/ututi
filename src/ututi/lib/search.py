@@ -1,5 +1,5 @@
-from ututi.model import meta, SearchItem, SimpleTag, LocationTag, ContentItem, TagSearchItem
 import logging
+import string
 import re
 
 from sqlalchemy.sql import func, select
@@ -7,6 +7,8 @@ from sqlalchemy.sql.expression import or_
 from sqlalchemy.orm import aliased
 
 import pylons
+
+from ututi.model import meta, SearchItem, SimpleTag, LocationTag, ContentItem, TagSearchItem
 
 log = logging.getLogger(__name__)
 
@@ -29,9 +31,14 @@ def search_query(**kwargs):
 
     settings.update(kwargs)
 
+    settings['text_original'] = settings['text']
+
     query = meta.Session.query(SearchItem)\
         .join(ContentItem)\
         .filter_by(deleted_by=None)
+
+    if settings['text'] is not None:
+        settings['text'] = _search_query_prepare_text(**settings)
 
     query = _search_query_text(query, **settings)
 
@@ -48,7 +55,7 @@ def search_query(**kwargs):
 
     cnt = search_query_count(query)
     log_msg = u"%(url)s \t %(text)s \t %(tags)s \t %(type)s \t %(count)i" % {"url": '', # pylons.url.current(),
-                                                                             "text": settings['text'] is not None and settings['text'] or '',
+                                                                             "text": settings['text_original'] is not None and settings['text_original'] or '',
                                                                              "tags": settings['tags'] is not None and ', '.join(settings['tags']) or '',
                                                                              "type": settings['obj_type'] is not None or '*',
                                                                              "count": cnt }
@@ -76,17 +83,23 @@ def search(**kwargs):
         query = query.limit(kwargs.get('limit'))
     return query.all()
 
+def _search_query_prepare_text(**kwargs):
+    text = kwargs.get('text')
+    disjunctive = kwargs.get('disjunctive')
+    regex = re.compile('[%s]' % re.escape(string.punctuation + string.whitespace))
+
+    separator = ' | ' if disjunctive else ' & '
+
+    text = [regex.sub('', st) for st in text.split(' ')]
+    text = separator.join([st for st in text if len(st) > 1])
+    return text
+
 def _search_query_text(query, **kwargs):
     """Prepare the initial query, searching by text and ranking by the proximity."""
 
     text = kwargs.get('text')
-    disjunctive = kwargs.get('disjunctive')
     if text:
-        if disjunctive:
-            text = re.sub(r'\s+', ' | ', text.strip())
-            query = query.filter(SearchItem.terms.op('@@')(func.to_tsquery(text)))
-        else:
-            query = query.filter(SearchItem.terms.op('@@')(func.plainto_tsquery(text)))
+        query = query.filter(SearchItem.terms.op('@@')(func.to_tsquery(text)))
     return query
 
 def _search_query_rank(query, **kwargs):
@@ -96,14 +109,9 @@ def _search_query_rank(query, **kwargs):
     """
     rank_func = None
     text = kwargs.get('text')
-    disjunctive = kwargs.get('disjunctive')
     rank_cutoff = kwargs.get('rank_cutoff')
 
-    if disjunctive:
-        text = re.sub(r'\s+', ' | ', text.strip())
-        rank_func = func.ts_rank_cd(SearchItem.terms, func.to_tsquery(text))
-    else:
-        rank_func = func.ts_rank_cd(SearchItem.terms, func.plainto_tsquery(text))
+    rank_func = func.ts_rank_cd(SearchItem.terms, func.to_tsquery(text))
 
     if rank_cutoff is not None:
         query = query.filter(rank_func >= rank_cutoff)
