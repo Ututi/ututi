@@ -9,6 +9,7 @@ from sqlalchemy.orm import aliased
 import pylons
 
 from ututi.model import meta, SearchItem, SimpleTag, LocationTag, ContentItem, TagSearchItem
+from ututi.model import Group
 
 log = logging.getLogger(__name__)
 
@@ -48,7 +49,10 @@ def search_query(**kwargs):
         settings['tags'] = settings['tags'].split(', ')
     query = _search_query_tags(query, **settings)
 
-    query = _search_query_rank(query, **settings)
+    if settings['text'] is None:
+        query = _search_query_default_sorting(query, **settings)
+    else:
+        query = _search_query_rank(query, **settings)
 
     if settings['extra'] is not None:
         query = settings['extra'](query)
@@ -120,6 +124,20 @@ def _search_query_rank(query, **kwargs):
         query = query.order_by((SearchItem.rating * rank_func).desc())
     else:
         query = query.order_by(rank_func.desc())
+    return query
+
+def _search_query_default_sorting(query, **kwargs):
+    """
+    Apply default ordering of results when no search string is specified.
+    """
+    obj_type = kwargs['obj_type']
+    if obj_type in ['page', 'file', 'forum_post']:
+        query = query.order_by(ContentItem.modified_on.desc())
+    elif obj_type == 'group':
+        query = query.join((Group, Group.id==SearchItem.content_item_id))
+        query = query.order_by([Group.forum_is_public.desc(), ContentItem.modified_on.desc()])
+    elif obj_type == 'subject':
+        query = query.order_by(SearchItem.rating.desc())
     return query
 
 def _search_query_type(query, **kwargs):
