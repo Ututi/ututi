@@ -73,7 +73,7 @@ ${_('Profile settings')}
         <br style="clear: left;" />
         <div class="no-break">
           <label for="logo_delete">
-            <input type="checkbox" class="checkbox" name="logo_delete" id="logo_delete" value="delete" />
+            <input type="checkbox" class="checkbox" name="logo_delete" id="logo_delete" value="delete"/>
             ${_('Delete current logo')}
           </label>
         </div>
@@ -91,7 +91,7 @@ ${_('Profile settings')}
 
         <div style="padding-top: 5px">
           <label for="profile_is_public">
-            <input type="checkbox" name="profile_is_public"
+            <input type="checkbox" name="profile_is_public" class="checkbox"
                    id="profile_is_public" />
 
             ${_('Show my profile to unregistered users and search engines')}
@@ -149,7 +149,7 @@ ${_('Profile settings')}
                     <div class="field-status confirmed"><div>${_('number is confirmed')}</div></div>
                     <div class="no-break">
                       <label for="gadugadu_get_news">
-                        <input type="checkbox" name="gadugadu_get_news"
+                        <input type="checkbox" name="gadugadu_get_news" class="checkbox"
                                id="gadugadu_get_news" class="line" />
 
                         ${_('Receive news into gg')}
