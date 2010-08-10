@@ -21,9 +21,9 @@ ${_('Why we need support?')}
 <h3>${_('I want to donate:')}</h3>
 
 <div style="padding: 2px;">
-${h.support_button('5lt', 500, type='image', src=url('/images/5ltl.png'), alt=_('5 litas'))}
-${h.support_button('10lt', 1000, type='image', src=url('/images/10ltl.png'), alt=_('10 litas'))}
-${h.support_button('50lt', 5000, type='image', src=url('/images/50ltl.png'), alt=_('50 litas'))}
+  ${h.support_button('5lt', 500, type='image', src=url('/images/5ltl.png'), alt=_('5 litas'))}
+  ${h.support_button('10lt', 1000, type='image', src=url('/images/10ltl.png'), alt=_('10 litas'))}
+  ${h.support_button('50lt', 5000, type='image', src=url('/images/50ltl.png'), alt=_('50 litas'))}
 </div>
 
 <br class="clear-left" />
