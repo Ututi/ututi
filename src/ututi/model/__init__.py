@@ -1099,7 +1099,7 @@ class LimitedUploadMixin(object):
 
     @property
     def free_size(self):
-        """The size of files in group private area is limited to 200 Mb."""
+        """The size of files in group private area is limited to 200 MB."""
         avail = max(0, self.available_size - self.size)
         return avail
 
@@ -1413,6 +1413,7 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
                 current=self.private_files_lock_date.date().isoformat() if self.private_files_lock_date else 'none',
                 new=(start_date + timedelta(days=days)).date().isoformat()))
         self.private_files_lock_date = start_date + timedelta(days=days)
+        self.ending_period_notification_sent = False
 
 
 group_members_table = None
@@ -2024,7 +2025,7 @@ class File(ContentItem):
         return result
 
     def isNullFile(self):
-        return self.md5 == None
+        return self.md5 is None
 
     def snippet(self):
         """Render a short snippet with the basic item's information. Used in search to render the results."""

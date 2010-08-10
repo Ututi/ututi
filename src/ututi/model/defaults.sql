@@ -202,6 +202,8 @@ create table groups (
        mailinglist_enabled bool default true,
        has_file_area bool default true,
        private_files_lock_date timestamp default null,
+       ending_period_notification_sent bool default false,
+       out_of_space_notification_sent bool default false,
        primary key (id));;
 
 /* track coupon usage */

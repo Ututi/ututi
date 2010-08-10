@@ -403,3 +403,80 @@ Regression test - file moves should not send events!
 
     >>> len(meta.Session.query(Event).all()) == count
     True
+
+
+Group space notifications
+=========================
+
+Groups are pinged when they run out of private file space, or when their
+private files subscription is about to expire.
+
+    >>> from ututi.model.events import Group
+
+    >>> group = Group.get('testgroup')
+    >>> group.private_files_lock_date = datetime.date(2009, 10, 15)
+    >>> meta.Session.commit()
+
+Four days in advance is too early:
+
+    >>> browser.open('http://localhost/news/daily?date=2009-10-11')
+    >>> printEmails()
+
+Three days is right:
+
+    >>> browser.open('http://localhost/news/daily?date=2009-10-12')
+    >>> msg = mail_queue.pop() # Pop one copy of the message.
+    >>> printEmails()
+    ['admin@ututi.lt']
+    Hello,
+    <BLANKLINE>
+    the private space subscription for the Ututi group "Testing group"
+    is about to expire.  When it expires, you will not be able to upload
+    more files to your file area.  Please extend your subscription on the
+    <a href="/group/testgroup">group page</a>.
+    --
+    The Ututi team
+
+    >>> mail_queue[:] = []
+
+Reminders are not repeated:
+
+    >>> browser.open('http://localhost/news/daily?date=2009-10-12')
+    >>> printEmails()
+
+Groups are also pinged when they fill up the private group files.
+
+We'll add an over-limit file to the group:
+
+    >>> attachment = 'x' * 100
+    >>> res = app.post("/login",
+    ...                params={'login': 'admin@ututi.lt', 'password': 'asdasd'})
+    >>> res = app.post("/group/testgroup/upload_file",
+    ...                params={'folder': ''},
+    ...                upload_files=[('attachment', "somefile.txt", attachment)])
+
+(The upload triggers a GG message, which we shall ignore.)
+
+    >>> gg.sent_messages[:] = []
+
+And, here are the notifications:
+
+    >>> browser.open('http://localhost/news/daily?date=2009-10-10')
+    >>> msg = mail_queue.pop() # Pop one copy of the message.
+    >>> printEmails()
+    ['admin@ututi.lt']
+    Hello,
+    <BLANKLINE>
+    your group "Testing group" has just run out of private group space.
+    If you want to use private group space further, please purchase a subscription
+    on the <a href="/group/testgroup">group page</a>, and the group file limit
+    will be raised to 5 GB.
+    --
+    The Ututi team
+
+    >>> mail_queue[:] = []
+
+Again, they come only once:
+
+    >>> browser.open('http://localhost/news/daily?date=2009-10-10')
+    >>> printEmails()

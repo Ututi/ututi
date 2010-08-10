@@ -133,8 +133,41 @@ class NewsController(BaseController):
             log.info("Sent to <%s> to %s" % (subject,  user.fullname))
             user = user.send(msg)
 
+    def _send_ending_period_reminder(self, group):
+        subject = _('The private space subscription for "%s" is about to expire')
+        extra_vars = dict(group=group)
+        text = render('/emails/group_space_ending.mako', extra_vars=extra_vars)
+        msg = EmailMessage(subject, text)
+        group.send(msg)
+        group.ending_period_notification_sent = True
+
+    def _send_out_of_space_notification(self, group):
+        """Send a notification to a group that it has run out of private space."""
+        subject = _('The Ututi group "%s" has run out of private file space')
+        extra_vars = dict(group=group)
+        text = render('/emails/group_space_full.mako', extra_vars=extra_vars)
+        msg = EmailMessage(subject, text)
+        group.send(msg)
+        group.out_of_space_notification_sent = True
+
+    def _send_group_space_reminders(self):
+        date = parse_date(request.params.get('date'))
+        max_expiry_date = date + datetime.timedelta(days=3)
+        for group in meta.Session.query(Group).all():
+            # Group space purchase period is about to end?
+            if (group.private_files_lock_date
+                and group.private_files_lock_date.date() <= max_expiry_date
+                and not group.ending_period_notification_sent):
+                self._send_ending_period_reminder(group)
+                meta.Session.commit()
+            # Group space has run out?
+            if group.free_size == 0 and not group.out_of_space_notification_sent:
+                self._send_out_of_space_notification(group)
+                meta.Session.commit()
+
     def hourly(self):
         self._send_news('hour', hours=1)
 
     def daily(self):
         self._send_news('day', days=1)
+        self._send_group_space_reminders()
