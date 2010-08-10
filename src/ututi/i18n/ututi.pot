@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-08-10 12:30+0300\n"
+"POT-Creation-Date: 2010-08-10 14:15+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -322,6 +322,14 @@ msgid "You have to log in or register to join a group!"
 msgstr ""
 
 msgid "After logging in or registering, your request to join the group will be sent."
+msgstr ""
+
+msgid "Please log in to donate"
+msgstr ""
+
+msgid ""
+"Please log in before you donate so that we can associate the money you donate"
+" with your account."
 msgstr ""
 
 msgid "Permission denied!"
@@ -2989,6 +2997,9 @@ msgid "Regions of Poland"
 msgstr ""
 
 msgid "Were you looking for a university or department?"
+msgstr ""
+
+msgid "detailed search"
 msgstr ""
 
 msgid "show-subjects"

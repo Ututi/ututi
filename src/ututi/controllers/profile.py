@@ -676,8 +676,12 @@ class ProfileController(SearchBaseController, UniversityListMixin):
     def no_thank_you(self):
         return render('/profile/no_thank_you.mako')
 
-    @ActionProtector("user")
     def support(self):
+        if not c.user:
+            redirect(url(controller='home',
+                         action='login',
+                         came_from=url(controller='profile', action='support'),
+                         context_type='support'))
         return render('/profile/support.mako')
 
     @ActionProtector("user")

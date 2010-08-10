@@ -281,6 +281,10 @@ class HomeController(UniversityListMixin):
             c.header = _('You have to log in or register to join a group!')
             c.message = _('After logging in or registering, your request to join the group will be sent.')
             c.show_login = True
+        elif context_type == 'support':
+            c.header = _('Please log in to donate')
+            c.message = _('Please log in before you donate so that we can associate the money you donate with your account.')
+            c.show_login = True
         else:
             c.header = _('Permission denied!')
             c.message = _('Only registered users can perform this action. Please log in, or register an account on our system.')
