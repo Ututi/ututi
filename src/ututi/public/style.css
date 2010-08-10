@@ -4316,12 +4316,12 @@ table.group-invitations td.date {
 
 table.group-invitations td.actions input,
 table.group-requests td.actions input {
-    width: 6em;
+    width: 100px;
 }
 
 table.group-invitations td.actions,
 table.group-requests td.actions {
-    width: 14em;
+    width: 210px;
 }
 
 table.group-members th {
