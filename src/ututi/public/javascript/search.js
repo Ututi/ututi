@@ -20,4 +20,23 @@ $(document).ready(function() {
     $(this).addClass('active');
     $(this).siblings('.search-type-item').removeClass('active');
   });
+
+  $('#search-type-file').click(function() {
+    $(this).parents('.search-type').find('select').val('file').change();
+    $(this).addClass('active');
+    $(this).siblings('.search-type-item').removeClass('active');
+  });
+
+  $('#search-type-page').click(function() {
+    $(this).parents('.search-type').find('select').val('page').change();
+    $(this).addClass('active');
+    $(this).siblings('.search-type-item').removeClass('active');
+  });
+  $('#search-type-forum_post').click(function() {
+    $(this).parents('.search-type').find('select').val('forum_post').change();
+    $(this).addClass('active');
+    $(this).siblings('.search-type-item').removeClass('active');
+  });
+
+
 });

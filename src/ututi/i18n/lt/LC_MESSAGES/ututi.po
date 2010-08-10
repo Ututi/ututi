@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-08-09 20:19+0300\n"
+"PO-Revision-Date: 2010-08-10 12:30+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -3284,6 +3284,27 @@ msgstr "Lenkijos regionai"
 
 msgid "Were you looking for a university or department?"
 msgstr "Gal ieškojai universiteto arba fakulteto?"
+
+msgid "show-subjects"
+msgstr "dalykus"
+
+msgid "show-files"
+msgstr "failus"
+
+msgid "show-pages"
+msgstr "puslapius"
+
+msgid "show-groups"
+msgstr "grupes"
+
+msgid "show-posts"
+msgstr "žinutes"
+
+msgid "show-everything"
+msgstr "viską"
+
+msgid "Show only:"
+msgstr "Rodyti tik:"
 
 msgid "search results"
 msgstr "paieškos rezultatai"

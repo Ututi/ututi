@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-08-09 20:19+0300\n"
+"POT-Creation-Date: 2010-08-10 12:30+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2989,6 +2989,27 @@ msgid "Regions of Poland"
 msgstr ""
 
 msgid "Were you looking for a university or department?"
+msgstr ""
+
+msgid "show-subjects"
+msgstr ""
+
+msgid "show-files"
+msgstr ""
+
+msgid "show-pages"
+msgstr ""
+
+msgid "show-groups"
+msgstr ""
+
+msgid "show-posts"
+msgstr ""
+
+msgid "show-everything"
+msgstr ""
+
+msgid "Show only:"
 msgstr ""
 
 msgid "search results"

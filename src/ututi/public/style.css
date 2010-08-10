@@ -1448,8 +1448,6 @@ div.GroupFiles-single h2 span{
     margin: 0;
     height: 35px;
     line-height: 35px;
-    background: url("img/search-type.png") repeat-x center bottom;
-    background-image: url("../images/borders/search-type.png");
     color: #d45500;
 }
 
@@ -1460,7 +1458,7 @@ div.GroupFiles-single h2 span{
 .forum-sidebar #group_info_portlet-header {
     margin-top: 12px;
 }
-
+/*
 div.active {
     color: #333;
     height:30px;
@@ -1479,6 +1477,7 @@ div.not-active {
     padding: 5px 15px 0 15px;
     background: url("img/icons/search-type.png") repeat-x center bottom;
 }
+*/
 div.message-list-on, div.message-list-on1 {
     border-bottom: 1px solid #ded8d8;
     background: url("img/icons/message-on.png") no-repeat 15px center;
@@ -3814,7 +3813,6 @@ input.text_button:hover {
 
 /* search form */
 
-#mainContent .search-controls .search-type,
 #mainContent .search-controls .search-text-submit {
     width: 400px;
     padding-right: 90px;
@@ -3853,7 +3851,7 @@ input.text_button:hover {
 }
 
 .search-type {
-    margin: 0;
+    margin: 5px 0;
     padding: 0;
     padding-left: 10px;
     height: 35px;
@@ -3861,29 +3859,59 @@ input.text_button:hover {
     z-index: 100;
     position: relative;
     top: 1px;
+    background: #f2f2f2;
+}
+
+
+.search-type .search-type-label {
+    float: left;
+    padding: 0 10px 0 5px;
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: bold;
+    height: 35px;
+    line-height: 35px;
+    color: #666;
 }
 
 .search-type .search-type-item {
     float: left;
-    padding: 0 5px;
-    margin: 0;
+    padding: 0 5px 0 17px;
+    margin: 0 0 0 10px;
     font-size: 1.2em;
     height: 35px;
     line-height: 35px;
-    background: transparent url("../images/borders/search-type.png") bottom center repeat-x;
     color: #d45500;
     cursor: pointer;
-    text-transform: lowercase;
 }
+
+#search-type-subject {
+    background: url("/img/icons/icon-subject-tiny.png") left center no-repeat;
+}
+
+#search-type-file {
+    background: url("/img/icons/icon-file-tiny.png") left center no-repeat;
+}
+
+#search-type-page {
+    background: url("/img/icons/icon-page-tiny.png") left center no-repeat;
+}
+
+#search-type-group {
+    background: url("/img/icons/icon-group-tiny.png") left center no-repeat;
+}
+
+#search-type-forum_post {
+    background: url("/img/icons/icon-post-tiny.png") left center no-repeat;
+}
+
+#search-type-any {
+    padding-left: 0;
+}
+
 
 .search-type .active {
-    color: #333;
-    background: transparent url("../images/borders/search-type-active.png") bottom center no-repeat;
-    z-index: 1000;
-}
-
-.search-text-submit {
-    z-index: -100;
+    font-weight: bold;
 }
 
 .search-tags {

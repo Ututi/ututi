@@ -79,33 +79,6 @@ ${h.javascript_link('/javascript/search.js')|n}
 %>
 <div class="search-controls">
   <form method="get" action="${target}" id="search_form">
-    %if 'obj_type' in parts:
-    <%
-       types = [('*', _('Everywhere')), ('group', _('Groups')), ('subject', _('in-Subjects'))]
-    %>
-    <div class="search-type js-alternatives">
-      <div class="js">
-        %for value, title in types:
-          <%
-             cls = value == obj_type and 'active' or ''
-             id = value == '*' and 'any' or value
-          %>
-          <div id="search-type-${id}" class="search-type-item ${cls}">${title}</div>
-        %endfor
-      </div>
-      <div class="non-js">
-        <select name="obj_type" id="obj_type">
-          %for value, title in types:
-            %if value == obj_type:
-              <option value="${value}" selected="selected">${title}</option>
-            %else:
-              <option value="${value}">${title}</option>
-            %endif
-          %endfor
-        </select>
-      </div>
-    </div>
-    %endif
     <div class="search-text-submit">
       %if 'text' in parts:
         <div class="search-text">
@@ -128,6 +101,34 @@ ${h.javascript_link('/javascript/search.js')|n}
           <label for="tags">${_('Filter by school:')}</label>
           ${tags_widget(tags, all_tags=True)}
       </div>
+    %endif
+    %if 'obj_type' in parts:
+    <%
+       types = [('subject', _('show-subjects')), ('file', _('show-files')), ('page', _('show-pages')), ('group', _('show-groups')), ('forum_post', _('show-posts')), ('*', _('show-everything'))]
+    %>
+    <div class="search-type js-alternatives">
+      <div class="js">
+        <div class="search-type-label">${_('Show only:')}</div>
+        %for value, title in types:
+          <%
+             cls = value == obj_type and 'active' or ''
+             id = value == '*' and 'any' or value
+          %>
+          <div id="search-type-${id}" class="search-type-item ${cls}">${title}</div>
+        %endfor
+      </div>
+      <div class="non-js">
+        <select name="obj_type" id="obj_type">
+          %for value, title in types:
+            %if value == obj_type:
+              <option value="${value}" selected="selected">${title}</option>
+            %else:
+              <option value="${value}">${title}</option>
+            %endif
+          %endfor
+        </select>
+      </div>
+    </div>
     %endif
 
   </form>
