@@ -97,10 +97,13 @@ ${h.javascript_link('/javascript/search.js')|n}
       <br style="clear: left;"/>
     </div>
     %if 'tags' in parts:
-      <div class="search-tags">
+    <div class="click2show" id="search-options">
+      <span class="search-expand hide click">${_('detailed search')}</span>
+      <div class="search-tags show">
           <label for="tags">${_('Filter by school:')}</label>
           ${tags_widget(tags, all_tags=True)}
       </div>
+    </div>
     %endif
     %if 'obj_type' in parts:
     <%
