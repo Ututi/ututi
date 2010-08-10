@@ -62,15 +62,21 @@
          % endfor
        </td>
 
-       <td style="font-weight: bold; white-space: nowrap; color: #5a0; padding-right: 10px">
+       <td style="font-weight: bold; white-space: nowrap; padding-right: 10px">
          % if user.phone_confirmed:
-           P
+           <span style="color: #a00">
+             P
+           </span>
          % endif
          % if user.openid:
-           G
+           <span style="color: #0f0">
+             G
+           </span>
          % endif
          % if user.facebook_id:
-           F
+           <span style="color: #00f">
+             F
+           </span>
          % endif
        </td>
 
