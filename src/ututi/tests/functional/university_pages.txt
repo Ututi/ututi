@@ -36,7 +36,7 @@ There is a search form on this page and we should be able to use it.
     >>> browser.getControl(name='text', index=1).value = 'prof.'
     >>> browser.getControl('Search', index=1).click()
     >>> browser.url
-    'http://localhost/school/vu?obj_type=subject&text=prof.'
+    'http://localhost/school/vu?text=prof.&obj_type=subject'
 
     >>> browser.printQuery("//div[@class='search-item snippet-subject']/a/text()")
     Matematinė analizė
