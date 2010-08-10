@@ -22,7 +22,7 @@ After creating the group, we are redirected to the member invitation
 
 Let us fill in several emails to invite.
 
-    >>> emails = 'user@ututi.lt, jonas@example.com, admin@ututi.lt'
+    >>> emails = 'user@ututi.lt, Jonas@example.com, admin@ututi.lt'
     >>> browser.getControl(name='emails').value = emails
     >>> browser.getControl('Invite').click()
 
@@ -72,7 +72,7 @@ The users should get emails:
     Content-Type: text/plain; charset="us-ascii"
     Content-Transfer-Encoding: 7bit
     From: info@ututi.lt
-    To: jonas@example.com
+    To: Jonas@example.com
     Subject: Ututi group invitation
     <BLANKLINE>
     Hi,
@@ -155,7 +155,7 @@ Let us fill out the registration form
 
 Email is filled in for us already:
     >>> form.getControl('Email').value
-    'jonas@example.com'
+    'Jonas@example.com'
 
     >>> form.getControl('Password').value = 'asdfgh'
     >>> form.getControl('Repeat password').value = 'asdfgh'

@@ -341,7 +341,7 @@ class HomeController(UniversityListMixin):
             # Form validation was successful.
             if hash is not None:
                 invitation = PendingInvitation.get(hash)
-                if invitation is not None and invitation.email == self.form_result['email'].lower():
+                if invitation is not None and invitation.email.lower() == self.form_result['email'].lower():
                     user, email = self.__register_user(self.form_result, False)
                     invitation.group.add_member(user)
                     meta.Session.delete(invitation)
