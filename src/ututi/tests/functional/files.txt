@@ -40,31 +40,19 @@ The download count of files is shown in the user's home portlet:
 After the download of the file, the downloaded files count in the user list should indicate this:
 
     >>> browser.open('http://localhost/admin/users')
-    >>> browser.printQuery('id("user_list")//li//text()')
-    Third user
-    Downloads: 0 (0 B) 0 unique
-    Uploads: 0
-    Pages: 0
-    Messages: 0
-    Joined:
-    Second user
-    Downloads: 0 (0 B) 0 unique
-    Uploads: 0
-    Pages: 0
-    Messages: 0
-    Joined:
-    Alternative user
-    Downloads: 0 (0 B) 0 unique
-    Uploads: 0
-    Pages: 0
-    Messages: 0
-    Joined:
-    Adminas Adminovix
-    Downloads: 1 (25 B) 1 unique
-    Uploads: 0
-    Pages: 0
-    Messages: 0
-    Joined:
+    >>> browser.printQuery('id("user_list")')
+    <table id="user_list">
+      <tr style="text-align: center">
+        <th></th>
+        <th>Name</th>
+        ...
+      </tr>
+      <tr style="background: #FFFFFF">
+        <td> 1. </td>
+        <td style="white-space: nowrap">
+          <a href="/user/4">Third user</a>
+        </td>
+    ...
 
 
 The files are stored in our upload directory:

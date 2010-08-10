@@ -12,11 +12,12 @@ First we log in to be able to see the user list.
 
 There is one initial user:
 
-    >>> browser.printQuery("id('user_list')//li/a/text()")
-    Third user
-    Second user
-    Alternative user
-    Adminas Adminovix
+    >>> browser.printQuery("id('user_list')")
+    <table...
+    ...Third user...
+    ...Second user...
+    ...Alternative user...
+    ...Adminas Adminovix...
 
 We go to the import page. There we have a form to upload a user CSV file:
 
@@ -29,12 +30,9 @@ We go to the import page. There we have a form to upload a user CSV file:
     ...                                       'users.csv')
     >>> form.getControl('Upload').click()
     >>> browser.open('http://localhost/admin/users')
-    >>> browser.printQuery("id('user_list')//li/a/text()")
-    Domas Monkus
-    Third user
-    Second user
-    Alternative user
-    Adminas Adminovix
+    >>> browser.printQuery("id('user_list')")
+    <table...
+    ...Domas Monkus...
 
 Now we will log out and see if we can log back in as the imported user.
 

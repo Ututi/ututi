@@ -95,7 +95,7 @@
           ${messages}
         </td>
         <td style="text-align: center; white-space: nowrap">
-          ${h.fmt_dt(user.accepted_terms)}
+          ${h.fmt_dt(user.accepted_terms) if user.accepted_terms else ''}
         </td>
         % if user.logo is not None:
            <td>
