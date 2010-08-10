@@ -3819,7 +3819,7 @@ input.text_button:hover {
 }
 
 #mainContent .search-controls.loading {
-    background: url("../images/details/search-loader.gif") right 40px no-repeat;
+    background: url("../images/details/search-loader-small.gif") right top no-repeat;
 }
 
 .search-controls .search-text {
