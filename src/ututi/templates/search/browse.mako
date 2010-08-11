@@ -22,7 +22,7 @@
   ${blog_portlet()}
 </%def>
 
-${search_form(c.text, c.obj_type, c.tags, parts=['obj_type', 'text', 'tags'], target=url(controller='search', action='index'))}
+${search_form(c.text, c.obj_type, c.tags, parts=['text'], target=url(controller='search', action='index'))}
 
 %if c.tpl_lang == 'pl' and 'region_id' not in request.params:
   <h2>${_('Pick your region')}</h2>
