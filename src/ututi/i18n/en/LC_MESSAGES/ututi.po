@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-08-10 14:15+0300\n"
+"PO-Revision-Date: 2010-08-11 17:00+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -479,6 +479,14 @@ msgstr[1] ""
 
 #, python-format
 msgid "Ututi news: %(file_changes)s and %(page_changes)s"
+msgstr ""
+
+#, python-format
+msgid "The private space subscription for \"%s\" is about to expire"
+msgstr ""
+
+#, python-format
+msgid "The Ututi group \"%s\" has run out of private file space"
 msgstr ""
 
 msgid "This is not the confirmation code we sent you."
@@ -1560,6 +1568,32 @@ msgstr ""
 
 #, python-format
 msgid "You may confirm or deny this request here: %(url)s ."
+msgstr ""
+
+#, python-format
+msgid ""
+"Hello,\n"
+"\n"
+"the private space subscription for the Ututi group \"%(group_title)s\"\n"
+"is about to expire.  When it expires, you will not be able to upload\n"
+"more files to your file area.  Please extend your subscription on the\n"
+"<a href=\"%(group_url)s\">group page</a>.\n"
+"--\n"
+"The Ututi team\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"Hello,\n"
+"\n"
+"your group \"%(group_title)s\" has just run out of private group space.\n"
+"If you want to use private group space further, please purchase a "
+"subscription\n"
+"on the <a href=\"%(group_url)s\">group page</a>, and the group file limit"
+"\n"
+"will be raised to 5 GB.\n"
+"--\n"
+"The Ututi team\n"
 msgstr ""
 
 #, python-format

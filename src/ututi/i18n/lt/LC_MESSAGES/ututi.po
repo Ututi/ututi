@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-08-10 14:18+0300\n"
+"PO-Revision-Date: 2010-08-11 17:00+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -344,7 +344,8 @@ msgid ""
 "Please log in before you donate so that we can associate the money you "
 "donate with your account."
 msgstr ""
-"Prieš aukodami prisijunkite, kad galėtume aukojamus pinigus susieti su Jūsų paskyra."
+"Prieš aukodami prisijunkite, kad galėtume aukojamus pinigus susieti su "
+"Jūsų paskyra."
 
 msgid "Permission denied!"
 msgstr "Deja, neturi teisių to padaryti."
@@ -501,6 +502,14 @@ msgstr[2] "%(page_count)d naujų puslapių"
 #, python-format
 msgid "Ututi news: %(file_changes)s and %(page_changes)s"
 msgstr "Ututi naujienos: %(file_changes)s ir %(page_changes)s"
+
+#, python-format
+msgid "The private space subscription for \"%s\" is about to expire"
+msgstr ""
+
+#, python-format
+msgid "The Ututi group \"%s\" has run out of private file space"
+msgstr ""
 
 msgid "This is not the confirmation code we sent you."
 msgstr "Tai nėra tas patvirtinimo kodas, kurį mes Tau siuntėme."
@@ -1679,6 +1688,32 @@ msgstr "%(fullname)s nori tapti grupės %(groupname)s nariu."
 #, python-format
 msgid "You may confirm or deny this request here: %(url)s ."
 msgstr "Norėdamas patvirtinti arba atmesti prašymą spausk čia: %(url)s"
+
+#, python-format
+msgid ""
+"Hello,\n"
+"\n"
+"the private space subscription for the Ututi group \"%(group_title)s\"\n"
+"is about to expire.  When it expires, you will not be able to upload\n"
+"more files to your file area.  Please extend your subscription on the\n"
+"<a href=\"%(group_url)s\">group page</a>.\n"
+"--\n"
+"The Ututi team\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"Hello,\n"
+"\n"
+"your group \"%(group_title)s\" has just run out of private group space.\n"
+"If you want to use private group space further, please purchase a "
+"subscription\n"
+"on the <a href=\"%(group_url)s\">group page</a>, and the group file limit"
+"\n"
+"will be raised to 5 GB.\n"
+"--\n"
+"The Ututi team\n"
+msgstr ""
 
 #, python-format
 msgid ""
