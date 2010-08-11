@@ -64,30 +64,32 @@ ${parent.head_tags()}
          style="border-bottom: 1px solid #ded8d8">
       ${_('No watched subjects were found.')}
     </div>
-    <div class="search-item" style="padding-top: 10px">
-      <form class="select_interval_form" action="${c.group.url(action='set_receive_email_each')}">
-        ${h.input_submit(_('Confirm'))}
-        <script type="text/javascript">
-          //<![CDATA[
-            $('.select_interval_form .btn').hide();
-          //]]>
-        </script>
-        <label for="each" class="blark">${_('Receive email notifications')}
-          <% selected = c.group.is_member(c.user).receive_email_each %>
-          <select name="each" class="each" style="font-size: 1em;">
-            %for v, t in [('hour', _('immediately')), ('day', _('at the end of the day')), ('never', _('never'))]:
-              %if v == selected:
-                <option selected="selected" value="${v}">${t}</option>
-              %else:
-                <option value="${v}">${t}</option>
-              %endif
-            %endfor
-          </select>
-        </label>
-        <img class="done_icon" src="${url('/images/details/icon_done.png')}" style="margin-right: 15px;"/>
-        <img class="in_progress_icon" src="${url('/images/details/icon_progress.gif')}" style="margin-right: 15px;"/>
-      </form>
-    </div>
+    %if c.group.is_member(c.user):
+      <div class="search-item" style="padding-top: 10px">
+        <form class="select_interval_form" action="${c.group.url(action='set_receive_email_each')}">
+          ${h.input_submit(_('Confirm'))}
+          <script type="text/javascript">
+            //<![CDATA[
+              $('.select_interval_form .btn').hide();
+            //]]>
+          </script>
+          <label for="each" class="blark">${_('Receive email notifications')}
+            <% selected = c.group.is_member(c.user).receive_email_each %>
+            <select name="each" class="each" style="font-size: 1em;">
+              %for v, t in [('hour', _('immediately')), ('day', _('at the end of the day')), ('never', _('never'))]:
+                %if v == selected:
+                  <option selected="selected" value="${v}">${t}</option>
+                %else:
+                  <option value="${v}">${t}</option>
+                %endif
+              %endfor
+            </select>
+          </label>
+          <img class="done_icon" src="${url('/images/details/icon_done.png')}" style="margin-right: 15px;"/>
+          <img class="in_progress_icon" src="${url('/images/details/icon_progress.gif')}" style="margin-right: 15px;"/>
+        </form>
+      </div>
+    %endif
 
   </div>
 </%self:rounded_block>
