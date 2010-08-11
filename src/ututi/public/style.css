@@ -711,7 +711,7 @@ ul#links-messages  {
 }
 .moduleMenu li a {
     display: block;
-    padding-left: 15px;
+    padding-left: 10px;
     padding-right: 8px;
     position: relative;
               *height: 22px; /* IE7 */
