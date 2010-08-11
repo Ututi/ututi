@@ -340,7 +340,7 @@ $(document).ready(function(){
     $('.rename_confirm').click(performFileRename);
 
     $('.new_folder_button').click(function (event) {
-        newFolder(event.target);
+        newFolder($(this));
         return false;
     });
 
