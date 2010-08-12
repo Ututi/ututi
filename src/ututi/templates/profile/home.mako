@@ -309,9 +309,10 @@ ${parent.head_tags()}
 </div>
 %endif
 <div id="subject_list">
-${subjects_block(c.user.watched_subjects)}
+  ${subjects_block(c.user.watched_subjects)}
 </div>
 </div>
+
 <%def name="subjects_block(subjects)">
 %if subjects:
 <%self:rounded_block class_='portletGroupFiles'>
@@ -388,12 +389,16 @@ ${subjects_block(c.user.watched_subjects)}
       <dd class="s-line">${_('Lect.')} <span class="orange" >${subject.lecturer}</span></dd>
           %endif
       <dt></dt>
-      <dd class="files"><span >${_('Files:')}</span> ${len(subject.files)}</dd>
-      <dd class="pages"><span >${_('Wiki pages:')}</span> ${len(subject.pages)}</dd>
+      <dd class="files"><span >${_('Files:')}</span> ${subject.n_files()}</dd>
+      <dd class="pages"><span >${_('Wiki pages:')}</span> ${subject.n_pages()}</dd>
+      <%
+         user_count = subject.user_count()
+         group_count = subject.group_count()
+      %>
       <dd class="watchedBy"><span >${_('The subject is watched by:')}</span>
-            ${ungettext("<span class='orange'>%(count)s</span> user", "<span class='orange'>%(count)s</span> users", subject.user_count()) % dict(count = subject.user_count())|n}
+            ${ungettext("<span class='orange'>%(count)s</span> user", "<span class='orange'>%(count)s</span> users", user_count) % dict(count=user_count)|n}
             ${_('and')}
-            ${ungettext("<span class='orange'>%(count)s</span> group", "<span class='orange'>%(count)s</span> groups", subject.group_count()) % dict(count = subject.group_count())|n}
+            ${ungettext("<span class='orange'>%(count)s</span> group", "<span class='orange'>%(count)s</span> groups", group_count) % dict(count=group_count)|n}
           </dd>
     </dl>
     </li>
