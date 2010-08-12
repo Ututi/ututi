@@ -121,7 +121,7 @@ ${_('Student information online')}
 ${self.anonymous_menu()}
 </%def>
 
-<%def name="loggedin_header(user)">
+<%def name="loggedin_header()">
 <form id="searchForm" action="${url(controller='profile', action='search')}">
     <fieldset>
         <legend class="a11y">${_('Search')}</legend>
@@ -142,11 +142,11 @@ ${self.anonymous_menu()}
       <span>${_('Groups')}</span>
       <div>
         <ul>
-          %for mship in user.memberships:
+          %for group in c.user.groups:
             <li>
-              <a href="${url(controller='group', action='index', id=mship.group.group_id)}"
-                 ${h.trackEvent(None, 'group_home', 'top_menu')} title="${mship.group.title}">
-                ${h.ellipsis(mship.group.title, 18)}
+              <a href="${url(controller='group', action='index', id=group.group_id)}"
+                 ${h.trackEvent(None, 'group_home', 'top_menu')} title="${group.title}">
+                ${h.ellipsis(group.title, 18)}
               </a>
             </li>
           %endfor
@@ -171,11 +171,11 @@ ${self.anonymous_menu()}
           </a>
         </li>
         <li class="expandable profile-nav">
-            <span class="fullname">${user.fullname}</span>
+            <span class="fullname">${c.user.fullname}</span>
             <div>
                 <ul>
                     <li class="action"><a href="${url(controller='profile', action='edit')}">${_('Settings')}</a></li>
-                    <li class="action"><a href="${url(controller='user', action='index', id=user.id)}">${_('Public profile')}</a></li>
+                    <li class="action"><a href="${url(controller='user', action='index', id=c.user.id)}">${_('Public profile')}</a></li>
                 </ul>
             </div>
         </li>
@@ -290,7 +290,7 @@ ${self.anonymous_menu()}
         %if c.user is None:
           ${self.anonymous_header()}
         %else:
-          ${self.loggedin_header(c.user)}
+          ${self.loggedin_header()}
         %endif
 
         ${next.body()}
