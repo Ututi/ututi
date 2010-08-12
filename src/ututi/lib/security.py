@@ -39,13 +39,17 @@ def is_moderator(user, context=None):
     if user is None:
         return False
 
-    from ututi.model import File
+    from ututi.model import meta, File, LocationTag, Group, GroupMember
+
     if isinstance(context, File):
         context = context.parent
 
-    moderator_tags = [group.location for group in user.groups
-                      if group.moderators]
-    from ututi.model import LocationTag
+    moderator_tags = meta.Session.query(LocationTag
+            ).join(Group
+            ).join(GroupMember
+            ).filter(Group.moderators == True
+            ).filter(GroupMember.user == user
+            ).all()
 
     if isinstance(context, LocationTag):
         location = context
