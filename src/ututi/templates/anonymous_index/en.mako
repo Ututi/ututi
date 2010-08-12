@@ -31,19 +31,19 @@
   <div class="stats">
     <span>
         <%
-           cnt = uni.count('subject')
+          cnt = h.location_count(uni.id, 'subject')
         %>
-        ${ungettext("%(count)s subject", "%(count)s subjects", cnt) % dict(count = cnt)|n}
+        ${ungettext("%(count)s subject", "%(count)s subjects", cnt) % dict(count=cnt)|n}
     </span>
     <span>
         <%
-           cnt = uni.count('group')
+          cnt = h.location_count(uni.id, 'group')
         %>
         ${ungettext("%(count)s group", "%(count)s groups", cnt) % dict(count = cnt)|n}
     </span>
     <span>
         <%
-           cnt = uni.count('file')
+          cnt = h.location_count(uni.id, 'file')
         %>
         ${ungettext("%(count)s file", "%(count)s files", cnt) % dict(count = cnt)|n}
     </span>
