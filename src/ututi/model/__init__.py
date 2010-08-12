@@ -1,5 +1,4 @@
 """The application's model objects"""
-import profilehooks
 import PIL
 from PIL import Image
 import urlparse
