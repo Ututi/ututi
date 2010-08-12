@@ -1,4 +1,5 @@
 """The application's model objects"""
+import profilehooks
 import PIL
 from PIL import Image
 import urlparse
@@ -1615,7 +1616,7 @@ class Subject(ContentItem, FolderMixin, LimitedUploadMixin):
         return events
 
     def user_count(self):
-        return len([w_u for w_u in self.watching_users if not w_u.ignored])
+        return meta.Session.query(UserSubjectMonitoring).filter_by(subject=self, ignored=False).count()
 
     def group_count(self):
         return len(self.watching_groups)
@@ -1628,6 +1629,12 @@ class Subject(ContentItem, FolderMixin, LimitedUploadMixin):
             return self.CAN_UPLOAD_SINGLE_FOLDER
         else:
             return self.CAN_UPLOAD
+
+    def n_files(self):
+        return meta.Session.query(File).filter_by(parent=self).count()
+
+    def n_pages(self):
+        return len(self.pages)
 
 
 pages_table = None
