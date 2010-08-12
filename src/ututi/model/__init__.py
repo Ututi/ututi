@@ -866,8 +866,7 @@ class User(object):
 
     @property
     def groups(self):
-        return [membership.group
-                for membership in self.memberships]
+        return meta.Session.query(Group).join(GroupMember).filter(GroupMember.user == self).all()
 
     def all_medals(self):
         """Return a list of medals for this user, including implicit medals."""
