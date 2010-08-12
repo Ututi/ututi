@@ -159,9 +159,9 @@
        logo_style = ''
        if university.logo is not None:
            logo_style = 'background-image: url(%s);' % url(controller='structure', action='logo', id=university.id, width=20, height=20)
-           subject_cnt = h.location_count(university.id, 'subject')
-           group_cnt = h.location_count(university.id, 'group')
-           file_cnt = h.location_count(university.id, 'file')
+       subject_cnt = h.location_count(university.id, 'subject')
+       group_cnt = h.location_count(university.id, 'group')
+       file_cnt = h.location_count(university.id, 'file')
     %>
     <li style="${logo_style|n}">
       <dl>
