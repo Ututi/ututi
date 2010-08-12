@@ -719,6 +719,13 @@ class User(object):
         return meta.Session.query(ContentItem).filter_by(
                 content_type='file', created=self, deleted_by=None).count()
 
+    def group_requests(self):
+        return meta.Session.query(PendingRequest
+                ).join(Group).join(GroupMember
+                ).filter(GroupMember.user == self
+                ).filter(GroupMember.membership_type == 'administrator'
+                ).all()
+
     @classmethod
     def authenticate(cls, username, password):
         try:

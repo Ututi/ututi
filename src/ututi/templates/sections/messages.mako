@@ -93,13 +93,7 @@
        user = c.user
 %>
 %if user:
-  <%
-     groups = [mship.group for mship in user.memberships if mship.membership_type == 'administrator' and mship.group.requests != []]
-     requests = []
-     for group in groups:
-       requests.extend(group.requests)
-  %>
-  %for rq in requests:
+  %for rq in user.group_requests():
   <div class="flash-message">
     <span>
       ${_(u"%(user)s wants to join the group %(group)s. Do you want to confirm this membership?") % dict(user=rq.user.fullname, group=rq.group.title)}
