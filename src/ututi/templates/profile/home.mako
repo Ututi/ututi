@@ -174,7 +174,8 @@ ${parent.head_tags()}
 </%def>
 
 <div id="SearchResults">
-%if c.user.memberships:
+<% groups = c.user.groups %>
+%if groups:
 <%self:rounded_block class_='portletGroupFiles smallTopMargin'>
   <div class="GroupFiles GroupFilesGroups">
     <h2 class="portletTitle bold">${_('Groups')}</h2>
@@ -182,14 +183,8 @@ ${parent.head_tags()}
       ${h.button_to(_('create group'), url(controller='group', action='group_type'))}
     </span>
   </div>
-    <%
-       count = len(c.user.memberships)
-    %>
-    %for n, membership in enumerate(c.user.memberships):
-    <%
-       group = membership.group
-    %>
-  <div class="GroupFilesContent-line${' GroupFilesContent-line-last' if n == count -1 else ''}">
+    %for n, group in enumerate(groups):
+    <div class="GroupFilesContent-line${' GroupFilesContent-line-last' if n == len(groups) -1 else ''}">
     <div>
       <div class="profile">
         <div class="floatleft avatar-small">
