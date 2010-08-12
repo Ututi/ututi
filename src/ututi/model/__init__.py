@@ -1194,11 +1194,11 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
                     recipient.user.gadugadu_confirmed)]
 
     def recipients_sms(self, sender=None):
-        members = meta.Session.query(GroupMember).\
-            filter_by(group=self).all()
-        recipients = [member.user for member in members
-                if (member.user.phone_number and
-                    member.user.phone_confirmed)]
+        recipients = meta.Session.query(GroupMember
+                        ).join(User
+                        ).filter(GroupMember.group == self
+                        ).filter(User.phone_confirmed == True
+                        ).all()
         if sender is not None and sender in recipients:
             recipients.remove(sender)
         return recipients
