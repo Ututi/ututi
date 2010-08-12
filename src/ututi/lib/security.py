@@ -9,6 +9,8 @@ from repoze.what.predicates import NotAuthorizedError
 from repoze.what.plugins.pylonshq.protectors import ActionProtector as BaseActionProtector
 from datetime import datetime, timedelta
 
+from ututi.lib.cache import u_cache
+
 def current_user():
     from ututi.model import User
     login = session.get('login', '')
@@ -116,6 +118,11 @@ def check_crowds(crowds, user=None, context=None):
         context = c.security_context
     if user is None:
         user = c.user
+    return cached_check_crowds(crowds, user, context)
+
+
+@u_cache(expire=5, query_args=True, invalidate_on_startup=True)
+def cached_check_crowds(crowds, user, context):
     for crowd in crowds:
         if crowd_checkers[crowd](user, context):
             return True

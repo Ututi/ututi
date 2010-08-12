@@ -17,13 +17,9 @@ from pylons.templating import pylons_globals, render_mako as render
 from pylons import tmpl_context as c, config, request, response
 from pylons.i18n.translation import get_lang
 
+from ututi.lib.cache import u_cache
 from ututi.lib.security import current_user, sign_in_user
 from ututi.model import meta
-
-
-def u_cache(**kwargs):
-    kwargs['cache_response'] = False
-    return beaker_cache(**kwargs)
 
 
 class BaseController(WSGIController):
