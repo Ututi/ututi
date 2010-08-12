@@ -1493,7 +1493,7 @@ group_invitations_table = None
 
 class PendingRequest(object):
     """The user requests to join a group."""
-    def __init__(self, user, group = None):
+    def __init__(self, user, group=None):
         self.hash = ''.join(Random().sample(string.ascii_lowercase, 8))
         if group is not None:
             self.group = group
