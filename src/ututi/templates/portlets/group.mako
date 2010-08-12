@@ -331,13 +331,14 @@
     </div>
 
     <div class="sms-box">
+      <% recipients = c.group.recipients_sms(sender=c.user) %>
       <span>${_('Message text:')}</span>
-      <span class="recipients">${_('Recipients:')} ${len(c.group.recipients_sms(sender=c.user))}</span>
+      <span class="recipients">${_('Recipients:')} ${len(recipients)}</span>
 
         <form method='post' action="${url(controller='group', action='send_sms', id=group.group_id)}">
             <input type="hidden" name="current_url" value="${url.current()}" />
             ${h.input_area('sms_message', '', value=('' if c.user.can_send_sms(group) else _('You do not have enough SMS credits to send a message to this group.')), cols=35, disabled=not c.user.can_send_sms(group))}
-            %if not c.group.recipients_sms(sender=c.user):
+            %if not recipients:
               <div class="error-container">
                 <span class="error-message">${_('No one in this group has confirmed their phone numbers.')}</span>
               </div>
@@ -354,7 +355,7 @@
 
             <div class="cost">
               <span class="cost-header">${_("Cost:")}</span>
-              <span id="sms_message_credits">${len(c.group.recipients_sms(sender=c.user))}</span> ${_('SMS credits')}
+              <span id="sms_message_credits">${len(recipients)}</span> ${_('SMS credits')}
               <img style="margin-bottom: -3px" src="/images/details/icon_question.png" class="tooltip " alt="${_('One SMS credit allows you to send one SMS message to a single recipient. When sending a message to a group, one credit is charged for every recipient.')}">
             </div>
             <div class="clear-both"></div>
@@ -374,7 +375,7 @@
                           break;
                       }
                   }
-                  var n_recipients = ${len(c.group.recipients_sms(sender=c.user))};
+                  var n_recipients = ${len(recipients)};
                   var text_length = s.length;
 
                   // Please keep math in sync with Python controller code.
