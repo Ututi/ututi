@@ -30,7 +30,7 @@ ${group_members_invite_section()}
   </div>
 
   <table class="group-invitations" style="width: 100%">
-  %for invitation in c.group.invitations:
+    %for invitation in sorted(c.group.invitations, key=lambda inv: inv.created):
     %if invitation.active and invitation.email:
       <tr>
           <td class="date">

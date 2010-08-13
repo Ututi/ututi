@@ -30,8 +30,8 @@ Let's try and invite a new member to the group.
 
 The user should be listed in the invited users table.
     >>> browser.printQuery("//table[@class='group-invitations']/tr/td[@class='email']/text()")
-    loser@ututi.lt
     user2@ututi.lt
+    loser@ututi.lt
     user@ututi.lt
 
     >>> len(mail_queue)
@@ -45,7 +45,7 @@ The link to send another invitation should send another invitation email.
     4
 
 In case we change our mind, the group moderator can cancel the invitation.
-    >>> browser.getControl('Cancel', index=0).click()
+    >>> browser.getControl('Cancel', index=2).click()
     >>> browser.printQuery("//table[@class='group-invitations']/tr/td[@class='email']/text()")
     user2@ututi.lt
     user@ututi.lt
