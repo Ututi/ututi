@@ -173,117 +173,123 @@ ${parent.head_tags()}
   </div>
 </%def>
 
-<div id="SearchResults">
-<% groups = c.user.groups %>
-%if groups:
-<%self:rounded_block class_='portletGroupFiles smallTopMargin'>
-  <div class="GroupFiles GroupFilesGroups">
-    <h2 class="portletTitle bold">${_('Groups')}</h2>
-    <span class="group-but">
-      ${h.button_to(_('create group'), url(controller='group', action='group_type'))}
-    </span>
-  </div>
-    %for n, group in enumerate(groups):
-    <div class="GroupFilesContent-line${' GroupFilesContent-line-last' if n == len(groups) -1 else ''}">
-    <div>
-      <div class="profile">
-        <div class="floatleft avatar-small">
-                    %if group.logo is not None:
-                      <img class="group-logo" src="${url(controller='group', action='logo', id=group.group_id, width=36, height=35)}" alt="logo" />
-                    %else:
-                      ${h.image('/img/avatar-small.png', alt='logo', class_='group-logo')|n}
-                    %endif
+<%def name="group_list()">
+  <div id="SearchResults">
+  <% groups = c.user.groups %>
+  %if groups:
+  <%self:rounded_block class_='portletGroupFiles smallTopMargin'>
+    <div class="GroupFiles GroupFilesGroups">
+      <h2 class="portletTitle bold">${_('Groups')}</h2>
+      <span class="group-but">
+        ${h.button_to(_('create group'), url(controller='group', action='group_type'))}
+      </span>
+    </div>
+      %for n, group in enumerate(groups):
+      <div class="GroupFilesContent-line${' GroupFilesContent-line-last' if n == len(groups) -1 else ''}">
+      <div>
+        <div class="profile">
+          <div class="floatleft avatar-small">
+            %if group.has_logo():
+              ${h.image('/img/avatar-small.png', alt='logo', class_='group-logo')|n}
+            %else:
+              <img class="group-logo" src="${url(controller='group', action='logo', id=group.group_id, width=36, height=35)}" alt="logo" />
+            %endif
+          </div>
+          <div class="floatleft personal-data">
+            <div class="anth3">
+              <a class="orange bold anth3" href="${group.url()}">${group.title}</a>
+              <% n_members = h.group_members(group.id) %>
+              (${ungettext("%(count)s member", "%(count)s members", n_members) % dict(count=n_members)})</div>
+              <div>
+                <a class="verysmall grey" href="${url(controller='mailinglist', action='new_thread', id=group.group_id)}" title="${_('Mailing list address')}">
+                ${group.group_id}@${c.mailing_list_host}
+                </a>
+              </div>
+          </div>
+          <div class="clear"></div>
         </div>
-        <div class="floatleft personal-data">
-          <div class="anth3">
-                    <a class="orange bold anth3" href="${group.url()}">${group.title}</a>
-                    (${ungettext("%(count)s member", "%(count)s members", len(group.members)) % dict(count = len(group.members))})</div>
-          <div>
-                    <a class="verysmall grey" href="${url(controller='mailinglist', action='new_thread', id=group.group_id)}" title="${_('Mailing list address')}">
-                      ${group.group_id}@${c.mailing_list_host}
-                    </a>
-                  </div>
-        </div>
-        <div class="clear"></div>
+      </div>
+      <div class="grupes-links">
+        <ul class="grupes-links-list">
+                %if group.mailinglist_enabled:
+          <li>
+                  <a href="${url(controller='mailinglist', action='new_thread', id=group.group_id)}" title="${_('Mailing list address')}" class="green verysmall">
+                    ${_('Write message')}
+                  </a>
+                </li>
+          <li>
+                  <a href="${url(controller='mailinglist', action='index', id=group.group_id)}" class="green verysmall">
+                    ${_('Group messages')}
+                  </a>
+                </li>
+                %else:
+          <li>
+          <a href="${url(controller='forum', action='new_thread', id=group.group_id, category_id=group.forum_categories[0].id)}" class="green verysmall">
+                    ${_('Write message')}
+                  </a>
+                </li>
+          <li>
+                  <a href="${url(controller='forum', action='categories', id=group.group_id)}" class="green verysmall">
+                    ${_('Group forum')}
+                  </a>
+                </li>
+                %endif
+
+                %if group.wants_to_watch_subjects:
+          <li class="dalykai">
+                  <a href="${url(controller='group', action='subjects', id=group.group_id)}" class="green verysmall">
+                    ${_('Group subjects')}
+                  </a>
+                </li>
+                %endif
+                %if group.has_file_area:
+          <li class="failai last">
+                  <a href="${url(controller='group', action='files', id=group.group_id)}" class="green verysmall">
+                    ${_('Group files')}
+                  </a>
+                </li>
+                %endif
+        </ul>
       </div>
     </div>
-    <div class="grupes-links">
-      <ul class="grupes-links-list">
-              %if group.mailinglist_enabled:
-        <li>
-                <a href="${url(controller='mailinglist', action='new_thread', id=group.group_id)}" title="${_('Mailing list address')}" class="green verysmall">
-                  ${_('Write message')}
-                </a>
-              </li>
-        <li>
-                <a href="${url(controller='mailinglist', action='index', id=group.group_id)}" class="green verysmall">
-                  ${_('Group messages')}
-                </a>
-              </li>
-              %else:
-        <li>
-        <a href="${url(controller='forum', action='new_thread', id=group.group_id, category_id=group.forum_categories[0].id)}" class="green verysmall">
-                  ${_('Write message')}
-                </a>
-              </li>
-        <li>
-                <a href="${url(controller='forum', action='categories', id=group.group_id)}" class="green verysmall">
-                  ${_('Group forum')}
-                </a>
-              </li>
-              %endif
-
-              %if group.wants_to_watch_subjects:
-        <li class="dalykai">
-                <a href="${url(controller='group', action='subjects', id=group.group_id)}" class="green verysmall">
-                  ${_('Group subjects')}
-                </a>
-              </li>
-              %endif
-              %if group.has_file_area:
-        <li class="failai last">
-                <a href="${url(controller='group', action='files', id=group.group_id)}" class="green verysmall">
-                  ${_('Group files')}
-                </a>
-              </li>
-              %endif
-      </ul>
+      %endfor
+  </%self:rounded_block>
+  %elif not 'suggest_create_group' in c.user.hidden_blocks_list:
+  <%self:rounded_block id="user_location" class_="portletNewGroup">
+    <div class="floatleft usergrupeleft">
+      <h2 class="portletTitle bold">${_('Create a group')}</h2>
+      <p>${_("It's simple - you only need to know the email addresses of your classmates!")}</p>
+      <p>${_("Use the group's mailing list!")}</p>
     </div>
-  </div>
-    %endfor
-</%self:rounded_block>
-%elif not 'suggest_create_group' in c.user.hidden_blocks_list:
-<%self:rounded_block id="user_location" class_="portletNewGroup">
-  <div class="floatleft usergrupeleft">
-    <h2 class="portletTitle bold">${_('Create a group')}</h2>
-    <p>${_("It's simple - you only need to know the email addresses of your classmates!")}</p>
-    <p>${_("Use the group's mailing list!")}</p>
-  </div>
-  <div class="floatleft usergruperight">
-    <form action="${url(controller='group', action='group_type')}" method="GET"
-          style="float: none">
-      <fieldset>
-        <legend class="a11y">${_('Create group')}</legend>
-        <label><button value="submit" class="btnMedium"><span>${_('create group')}</span></button>
-        </label>
-      </fieldset>
-    </form>
-    <div class="right_cross"><a id="hide_suggest_create_group" href="">${_('no, thanks')}</a></div>
-  </div>
-  <br class="clear-left" />
-  <script type="text/javascript">
-  //<![CDATA[
-    $('#hide_suggest_create_group').click(function() {
-        $(this).closest('.portlet').hide();
-        $.post('${url(controller='profile', action='js_hide_element')}',
-               {type: 'suggest_create_group'});
-        return false;
-    });
-  //]]>
-  </script>
+    <div class="floatleft usergruperight">
+      <form action="${url(controller='group', action='group_type')}" method="GET"
+            style="float: none">
+        <fieldset>
+          <legend class="a11y">${_('Create group')}</legend>
+          <label><button value="submit" class="btnMedium"><span>${_('create group')}</span></button>
+          </label>
+        </fieldset>
+      </form>
+      <div class="right_cross"><a id="hide_suggest_create_group" href="">${_('no, thanks')}</a></div>
+    </div>
+    <br class="clear-left" />
+    <script type="text/javascript">
+    //<![CDATA[
+      $('#hide_suggest_create_group').click(function() {
+          $(this).closest('.portlet').hide();
+          $.post('${url(controller='profile', action='js_hide_element')}',
+                 {type: 'suggest_create_group'});
+          return false;
+      });
+    //]]>
+    </script>
+  
+  </%self:rounded_block>
+  %endif
 
-</%self:rounded_block>
-%endif
+</%def>
+
+${group_list()}
 
 %if c.user.memberships:
 <div>

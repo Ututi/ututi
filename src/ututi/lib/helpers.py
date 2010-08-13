@@ -431,6 +431,12 @@ def location_count(location_id, object_type=None):
     return location.count(object_type)
 
 
+@u_cache(expire=3600, invalidate_on_startup=True)
+def group_members(group_id):
+    from ututi.model import meta, GroupMember
+    return meta.Session.query(GroupMember).filter_by(group_id=group_id).count()
+
+
 def path_with_hash(fn):
     from pylons import config
     assert fn.startswith('/'), fn

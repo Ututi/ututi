@@ -1232,6 +1232,9 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
                                       .filter(gmt.c.group_id == self.id)\
                                       .order_by(User.last_seen.desc()).all()
 
+    def has_logo(self):
+        return bool(meta.Session.query(Group).filter_by(id=self.id).filter(Group.raw_logo != None).count())
+
     def is_subscribed(self, user):
         membership = GroupMember.get(user, self)
         if self.mailinglist_enabled:
