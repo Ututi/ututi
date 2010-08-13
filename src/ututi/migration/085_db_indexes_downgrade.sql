@@ -1,0 +1,16 @@
+drop index user_medals_user_id;
+drop index files_parent_id_idx;
+drop index file_downloads_user_id_idx;
+drop index group_members_group_id_idx;
+drop index group_members_user_id_idx;
+drop INDEX forum_categories_group_id_idx;
+drop INDEX forum_posts_thread_id;
+drop INDEX forum_posts_parent_id;
+drop INDEX forum_posts_category_id;
+drop INDEX subscribed_threads_user_id;
+drop index events_author_id_idx;
+drop index group_invitations_user_id_idx;
+drop index group_invitations_group_id_idx;
+drop index group_invitations_author_id_idx;
+drop index group_requests_user_id_idx;
+drop index group_requests_group_id_idx;

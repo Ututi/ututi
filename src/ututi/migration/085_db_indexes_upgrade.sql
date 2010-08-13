@@ -1,0 +1,16 @@
+create index user_medals_user_id on user_medals(user_id);
+create index files_parent_id_idx on files(parent_id);
+create index file_downloads_user_id_idx on file_downloads(user_id);
+create index group_members_group_id_idx on group_members(group_id);
+create index group_members_user_id_idx on group_members(user_id);
+CREATE INDEX forum_categories_group_id_idx ON forum_categories(group_id);
+CREATE INDEX forum_posts_thread_id ON forum_posts(thread_id);
+CREATE INDEX forum_posts_parent_id ON forum_posts(parent_id);
+CREATE INDEX forum_posts_category_id ON forum_posts(category_id);
+CREATE INDEX subscribed_threads_user_id ON subscribed_threads(user_id);
+create index events_author_id_idx on events(author_id);
+create index group_invitations_user_id_idx on group_invitations(user_id);
+create index group_invitations_group_id_idx on group_invitations(group_id);
+create index group_invitations_author_id_idx on group_invitations(author_id);
+create index group_requests_user_id_idx on group_requests(user_id);
+create index group_requests_group_id_idx on group_requests(group_id);

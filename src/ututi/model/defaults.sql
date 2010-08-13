@@ -78,6 +78,8 @@ create table user_medals (
        primary key (id),
        unique(user_id, medal_type));;
 
+create index user_medals_user_id on user_medals(user_id);
+
 insert into user_medals (user_id, medal_type) values (1, 'admin2');
 
 /* A generic table for Ututi objects */
@@ -133,6 +135,7 @@ create table files (id int8 references content_items(id),
        parent_id int8 default null references content_items(id) on delete set null,
        primary key (id));;
 
+create index files_parent_id_idx on files(parent_id);
 create index md5 on files (md5);;
 
 create table file_downloads (file_id int8 references files(id) on delete cascade,
@@ -141,6 +144,8 @@ create table file_downloads (file_id int8 references files(id) on delete cascade
        range_end int8 default null,
        download_time timestamp not null default (now() at time zone 'UTC'),
        primary key(file_id, user_id, download_time));;
+
+create index file_downloads_user_id_idx on file_downloads(user_id);
 
 create index user_id on file_downloads (user_id);;
 create index file_id on file_downloads (file_id);;
@@ -229,6 +234,8 @@ create table group_members (
        subscribed_to_forum bool default false,
        primary key (group_id, user_id));;
 
+create index group_members_group_id_idx on group_members(group_id);
+create index group_members_user_id_idx on group_members(user_id);
 
 insert into group_membership_types (membership_type)
                       values ('administrator');;
@@ -370,6 +377,7 @@ CREATE TABLE forum_categories (
        description text not null default '',
        primary key (id));
 
+CREATE INDEX forum_categories_group_id_idx ON forum_categories(group_id);
 
 INSERT INTO forum_categories (group_id, title, description)
     VALUES (NULL, 'Community', 'Ututi community forum');
@@ -386,6 +394,9 @@ CREATE TABLE forum_posts (
        category_id int8 not null references forum_categories(id),
        primary key(id));;
 
+CREATE INDEX forum_posts_thread_id ON forum_posts(thread_id);
+CREATE INDEX forum_posts_parent_id ON forum_posts(parent_id);
+CREATE INDEX forum_posts_category_id ON forum_posts(category_id);
 
 CREATE TABLE seen_threads (
        thread_id int8 not null references forum_posts,
@@ -393,12 +404,13 @@ CREATE TABLE seen_threads (
        visited_on timestamp not null default '2000-01-01',
        primary key(thread_id, user_id));;
 
-
 CREATE TABLE subscribed_threads (
        thread_id int8 not null references forum_posts,
        user_id int8 not null references users(id),
        active boolean default true,
        primary key(thread_id, user_id));;
+
+CREATE INDEX subscribed_threads_user_id ON subscribed_threads(user_id);
 
 
 CREATE FUNCTION set_forum_thread_id() RETURNS trigger AS $$
@@ -726,6 +738,7 @@ create table events (
        sms_id int8 references outgoing_group_sms_messages(id) on delete cascade default null,
        primary key (id));;
 
+create index events_author_id_idx on events(author_id);
 
 CREATE FUNCTION add_event(event_id int8, evtype varchar) RETURNS void AS $$
     BEGIN
@@ -917,6 +930,10 @@ CREATE TABLE group_invitations (
        primary key (hash),
        unique(group_id, email));;
 
+create index group_invitations_user_id_idx on group_invitations(user_id);
+create index group_invitations_group_id_idx on group_invitations(group_id);
+create index group_invitations_author_id_idx on group_invitations(author_id);
+
 /* Table for storing requests to join a group */
 CREATE TABLE group_requests (
        created timestamp not null default (now() at time zone 'UTC'),
@@ -924,6 +941,9 @@ CREATE TABLE group_requests (
        group_id int8 not null references groups(id) on delete cascade,
        hash char(8) not null unique,
        primary key (hash));;
+
+create index group_requests_user_id_idx on group_requests(user_id);
+create index group_requests_group_id_idx on group_requests(group_id);
 
 /* blog entries */
 create table blog (
