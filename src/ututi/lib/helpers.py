@@ -437,6 +437,17 @@ def group_members(group_id):
     return meta.Session.query(GroupMember).filter_by(group_id=group_id).count()
 
 
+@u_cache(expire=3600, invalidate_on_startup=True)
+def subject_file_count(subject_id):
+    from ututi.model import meta, File
+    return meta.Session.query(File).filter_by(parent_id=subject_id).count()
+
+@u_cache(expire=3600, invalidate_on_startup=True)
+def subject_page_count(subject_id):
+    from ututi.model import Subject
+    return len(Subject.get_by_id(subject_id).pages)
+
+
 def path_with_hash(fn):
     from pylons import config
     assert fn.startswith('/'), fn

@@ -374,11 +374,8 @@ ${group_list()}
 </%def>
 
 <%def name="subject_list(subjects)">
-  <%
-     count = len(subjects)
-  %>
   %for n, subject in enumerate(subjects):
-  <div class="${'GroupFilesContent-line-dal' if n != count - 1 else 'GroupFilesContent-line-dal-last'}">
+    <div class="${'GroupFilesContent-line-dal' if n != len(subjects) - 1 else 'GroupFilesContent-line-dal-last'}">
   <ul class="grupes-links-list-dalykai">
     <li>
     <dl>
@@ -395,8 +392,8 @@ ${group_list()}
       <dd class="s-line">${_('Lect.')} <span class="orange" >${subject.lecturer}</span></dd>
           %endif
       <dt></dt>
-      <dd class="files"><span >${_('Files:')}</span> ${subject.n_files()}</dd>
-      <dd class="pages"><span >${_('Wiki pages:')}</span> ${subject.n_pages()}</dd>
+      <dd class="files"><span >${_('Files:')}</span> ${h.subject_file_count(subject.id)}</dd>
+      <dd class="pages"><span >${_('Wiki pages:')}</span> ${h.subject_page_count(subject.id)}</dd>
       <%
          user_count = subject.user_count()
          group_count = subject.group_count()
