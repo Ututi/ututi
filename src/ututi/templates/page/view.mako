@@ -32,10 +32,11 @@
         </div>
         <div class="wiki2">
           <h2 class="portletTitle bold" style="padding-top: 3px; padding-left: 50px">${c.page.title}</h2>
-          %if c.page.last_version:
+          <% last_version = c.page.last_version %>
+          %if last_version:
             <p><span class="grey verysmall">${_('Last edit: ')}
-            <a class="orange verysmall" href="${c.page.last_version.created.url()}">${c.page.last_version.created.fullname}</a>
-            <span class="grey verysmall">${h.fmt_dt(c.page.last_version.created_on)}</span>
+            <a class="orange verysmall" href="${last_version.created.url()}">${last_version.created.fullname}</a>
+            <span class="grey verysmall">${h.fmt_dt(last_version.created_on)}</span>
           %endif
         </div>
     </div>
