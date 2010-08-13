@@ -637,34 +637,44 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
         else:
             redirect(url(controller='group', action='add'))
 
-    def _get_available_roles(self, member):
-        roles = ({'type' : 'administrator', 'title' : _('Administrator')},
-                 {'type' : 'member', 'title' : _('Member')},
-                 {'type' : 'not-member', 'title': _('Leave group')})
-        active_role = member.is_admin and 'administrator' or 'member'
-        for role in roles:
-            role['selected'] = role['type'] == active_role
-        if member.is_admin and len(c.group.administrators) == 1:
-            roles = [role for role in roles
-                     if role['type'] == 'administrator']
-        return roles
-
     @group_action
     @ActionProtector("member", "admin")
     def members(self, group):
         c.group_menu_current_item = 'members'
-        c.members = []
-        for member in group.members:
-            c.members.append({'roles': self._get_available_roles(member),
-                              'user': member.user,
-                              'title': member.user.fullname,
-                              'last_seen': h.fmt_dt(member.user.last_seen),
-                              })
-        c.members.sort(key=lambda member: member['title'])
+        self._set_up_member_info(group)
         if check_crowds(['admin', 'moderator'], context=group):
             return render('group/members_admin.mako')
         else:
             return render('group/members.mako')
+
+    def _set_up_member_info(self, group):
+        membertypes_users = meta.Session.query(GroupMember.membership_type, User
+                                ).filter(GroupMember.user_id == User.id
+                                ).filter(GroupMember.group_id == c.group.id
+                                ).all()
+        c.members = []
+        single_admin = (c.group.n_administrators() == 1)
+        for membership_type, user in membertypes_users:
+            is_admin = membership_type == 'administrator'
+            c.members.append({'roles': self._get_available_roles(is_admin, single_admin),
+                              'user': user,
+                              'title': user.fullname,
+                              'last_seen': h.fmt_dt(user.last_seen),
+                              })
+        c.members.sort(key=lambda member: member['title'])
+
+    def _get_available_roles(self, member_is_admin, single_administrator=False):
+        roles = ({'type' : 'administrator', 'title' : _('Administrator')},
+                 {'type' : 'member', 'title' : _('Member')},
+                 {'type' : 'not-member', 'title': _('Leave group')})
+        active_role = 'administrator' if member_is_admin else 'member'
+        for role in roles:
+            role['selected'] = role['type'] == active_role
+        if member_is_admin and single_administrator:
+            # Do not allow the last admin to relinquish privileges.
+            roles = [role for role in roles
+                     if role['type'] == 'administrator']
+        return roles
 
     def _edit_form(self):
         c.current_year = date.today().year

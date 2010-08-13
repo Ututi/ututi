@@ -1267,6 +1267,9 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
         admin_type = GroupMembershipType.get('administrator')
         return [membership.user for membership in self.members if membership.role == admin_type]
 
+    def n_administrators(self):
+        return meta.Session.query(GroupMember).filter_by(group=self, membership_type='administrator').count()
+
     def add_member(self, user, admin=False):
         if not self.is_member(user):
             membership = GroupMember(user, self, admin)
