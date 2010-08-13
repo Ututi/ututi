@@ -235,17 +235,26 @@ Let's try hourly now:
     >>> browser.open('http://localhost/profile/subjects')
 
 See what notification intervals have been set:
-    >>> browser.getControl(name='each', index=1).displayValue, browser.getControl(name='each', index=0).displayValue, browser.getControl(name='each', index=2).displayValue
-    (['at the end of the day'], ['at the end of the day'], ['at the end of the day'])
 
+    >>> browser.getControl(name='each', index=0).displayValue
+    ['at the end of the day']
     >>> browser.getControl(name='each', index=1).displayValue
     ['at the end of the day']
-    >>> browser.getControl(name='each', index=1).displayValue = ['immediatelly']
-    >>> browser.getControl('Confirm', index=1).click()
+    >>> browser.getControl(name='each', index=2).displayValue
+    ['at the end of the day']
+
+    >>> browser.getControl(name='each', index=2).displayValue
+    ['at the end of the day']
+    >>> browser.getControl(name='each', index=2).displayValue = ['immediatelly']
+    >>> browser.getControl('Confirm', index=2).click()
 
 These should have changed:
-    >>> browser.getControl(name='each', index=1).displayValue, browser.getControl(name='each', index=0).displayValue, browser.getControl(name='each', index=2).displayValue
-    (['at the end of the day'], ['at the end of the day'], ['immediatelly'])
+    >>> browser.getControl(name='each', index=0).displayValue
+    ['at the end of the day']
+    >>> browser.getControl(name='each', index=1).displayValue
+    ['at the end of the day']
+    >>> browser.getControl(name='each', index=2).displayValue
+    ['immediatelly']
 
     >>> meta.Session.commit()
     >>> browser.open('http://localhost/news/hourly?date=2009-10-08&hour=11')
