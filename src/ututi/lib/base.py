@@ -3,6 +3,8 @@
 Provides the BaseController class for subclassing.
 """
 import re
+import logging
+import time
 from datetime import datetime
 
 from sqlalchemy.exc import InternalError
@@ -21,6 +23,7 @@ from ututi.lib.cache import u_cache
 from ututi.lib.security import current_user, sign_in_user
 from ututi.model import meta
 
+perflog = logging.getLogger('performance')
 
 class BaseController(WSGIController):
 
@@ -76,6 +79,7 @@ class BaseController(WSGIController):
             environ['repoze.who.identity'] = c.user.id
             c.user.last_seen = datetime.utcnow()
             meta.Session.commit()
+            user_email = c.user.emails[0].email
         else:
             #the user is anonymous - check if he is coming from google search
             referrer = request.headers.get('referer', '')
@@ -85,6 +89,10 @@ class BaseController(WSGIController):
                 c.came_from_search = True
             else:
                 c.came_from_search = request.cookies.get('camefromsearch', None) == 'yes'
+            user_email = 'ANONYMOUS'
+
+        request_start_walltime = time.time()
+        request_start_cputime = time.clock()
 
         try:
             return WSGIController.__call__(self, environ, start_response)
@@ -96,6 +104,16 @@ class BaseController(WSGIController):
                 # controller this call raises an error
                 pass
             meta.Session.remove()
+
+            # Performance logging.
+            perflog.log(logging.INFO,
+                'request %(controller)s.%(action)s %(duration).4f %(duration_cpu).4f %(user_email)s'
+                 % dict(controller=environ['pylons.routes_dict'].get('controller'),
+                        action=environ['pylons.routes_dict'].get('action'),
+                        duration=time.time() - request_start_walltime,
+                        duration_cpu=time.clock() - request_start_cputime,
+                        user_email=user_email))
+
 
 def render_lang(template_name, extra_vars=None, cache_key=None,
                 cache_type=None, cache_expire=None):
