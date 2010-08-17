@@ -43,15 +43,6 @@ def fix_public_forum_metadata(forum):
         meta.Session.commit()
 
 
-def initialize_forum(group):
-    if not meta.Session.query(ForumCategory).filter_by(group=group).count():
-        category = ForumCategory(_('General'),
-                                 _('Discussions on anything and everything'),
-                                 group=group)
-        meta.Session.add(category)
-        meta.Session.commit()
-
-
 class CategoryForm(Schema):
 
     title = validators.UnicodeString(not_empty=True, strip=True)
@@ -144,8 +135,6 @@ class ForumController(BaseController):
             c.object_location = c.group.location
             c.security_context = c.group
             c.breadcrumbs.append({'title': c.group.title, 'link': c.group.url()})
-            if category_id is None: # (crude optimization)
-                initialize_forum(c.group)
         else:
             c.group = None
             c.group_id = None

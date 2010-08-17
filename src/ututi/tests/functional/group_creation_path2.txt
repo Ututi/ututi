@@ -155,7 +155,7 @@ Since the group is public, the message should be indexed in search:
     Supah!
     >>> browser2.getLink('Supah!').click()
     >>> browser2.url
-    'http://localhost/group/test/forum/3/thread/5'
+    'http://localhost/group/test/forum/5/thread/5'
 
 Academic groups
 ---------------

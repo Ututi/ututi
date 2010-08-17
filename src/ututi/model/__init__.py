@@ -1324,6 +1324,11 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
         self.year = year
         self.description = description
 
+        # Add a default forum category.
+        self.forum_categories.append(
+                ForumCategory(_('General'),
+                _('Discussions on anything and everything')))
+
     @property
     def all_messages(self):
         return meta.Session.query(GroupMailingListMessage)\
