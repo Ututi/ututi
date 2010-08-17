@@ -214,7 +214,7 @@ create table groups (
 /* track coupon usage */
 create table coupon_usage (
        coupon_id varchar(20) not null references group_coupons(id),
-       group_id int8 default null references groups(id),
+       group_id int8 default null references groups(id) on delete cascade,
        user_id int8 not null references users(id),
        primary key (coupon_id, user_id));;
 
@@ -228,7 +228,7 @@ create table group_membership_types (
 create table group_members (
        group_id int8 references groups(id) on delete cascade not null,
        user_id int8 references users(id) not null,
-       membership_type varchar(20) references group_membership_types(membership_type) not null,
+       membership_type varchar(20) not null references group_membership_types(membership_type) on delete cascade,
        subscribed bool default true,
        receive_email_each varchar(30) default 'day',
        subscribed_to_forum bool default false,
@@ -254,7 +254,7 @@ create table subjects (id int8 not null references content_items(id),
 
 create table user_monitored_subjects (
        user_id int8 references users(id) not null,
-       subject_id int8 not null references subjects(id),
+       subject_id int8 not null references subjects(id) on delete cascade,
        ignored bool default false,
        primary key (user_id, subject_id, ignored));;
 
@@ -265,7 +265,7 @@ create table pages (
        primary key(id));;
 
 create table page_versions(id int8 not null references content_items(id),
-       page_id int8 references pages(id) not null,
+       page_id int8 not null references pages(id) on delete cascade,
        title varchar(255) not null default '',
        content text not null default '',
        primary key (id));;
@@ -273,15 +273,15 @@ create table page_versions(id int8 not null references content_items(id),
 /* A table linking pages and subjects */
 
 create table subject_pages (
-       subject_id int8 not null references subjects(id),
-       page_id int8 not null references pages(id),
+       subject_id int8 not null references subjects(id) on delete cascade,
+       page_id int8 not null references pages(id) on delete cascade,
        primary key (subject_id, page_id));;
 
 /* A table that tracks subjects watched by a group  */
 
 create table group_watched_subjects (
        group_id int8 references groups(id) on delete cascade not null,
-       subject_id int8 not null references subjects(id),
+       subject_id int8 not null references subjects(id) on delete cascade,
        primary key (group_id, subject_id));;
 
 /* A table for group mailing list emails */
@@ -372,7 +372,7 @@ CREATE TABLE sms_outbox (
 
 CREATE TABLE forum_categories (
        id bigserial not null,
-       group_id int8 null references groups(id),
+       group_id int8 null references groups(id) on delete cascade,
        title varchar(255) not null default '',
        description text not null default '',
        primary key (id));
@@ -387,11 +387,11 @@ INSERT INTO forum_categories (group_id, title, description)
 
 CREATE TABLE forum_posts (
        id int8 not null references content_items(id),
-       thread_id int8 not null references forum_posts,
+       thread_id int8 not null references forum_posts on delete cascade,
        title varchar(500) not null,
        message text not null,
        parent_id int8 default null references content_items(id) on delete cascade,
-       category_id int8 not null references forum_categories(id),
+       category_id int8 not null references forum_categories(id) on delete cascade,
        primary key(id));;
 
 CREATE INDEX forum_posts_thread_id ON forum_posts(thread_id);
