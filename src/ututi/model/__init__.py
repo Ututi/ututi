@@ -1200,14 +1200,13 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
                     recipient.user.gadugadu_confirmed)]
 
     def recipients_sms(self, sender=None):
-        recipients = meta.Session.query(GroupMember
+        query = meta.Session.query(GroupMember
                         ).join(User
                         ).filter(GroupMember.group == self
-                        ).filter(User.phone_confirmed == True
-                        ).all()
-        if sender is not None and sender in recipients:
-            recipients.remove(sender)
-        return recipients
+                        ).filter(User.phone_confirmed == True)
+        if sender is not None:
+            query = query.filter(User.id != sender.id)
+        return query.all()
 
     @classmethod
     def get(cls, id):
