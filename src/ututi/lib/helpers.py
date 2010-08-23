@@ -416,13 +416,20 @@ def url_for(*args, **kwargs):
     from pylons import url
     return url.current(*args, **kwargs)
 
+
 @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
 def location_latest_groups(location_id, limit=5):
     from ututi.model import Tag, Group, meta
     location = Tag.get(int(location_id))
     ids = [t.id for t in location.flatten]
     grps =  meta.Session.query(Group).filter(Group.location_id.in_(ids)).order_by(Group.created_on.desc()).limit(limit).all()
-    return grps
+    return [{'logo': group.logo,
+             'url': group.url(),
+             'title': group.title,
+             'group_id': group.group_id,
+             'member_count': len(group.members)}
+            for group in grps]
+
 
 @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
 def location_count(location_id, object_type=None):

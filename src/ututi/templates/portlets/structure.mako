@@ -74,14 +74,14 @@
       % for group in groups:
       <li>
         <div>
-          %if group.logo is not None:
-            <img class="group-logo" src="${url(controller='group', action='logo', id=group.group_id, width=35, height=35)}" alt="logo" />
+          %if group['logo'] is not None:
+            <img class="group-logo" src="${url(controller='group', action='logo', id=group['group_id'], width=35, height=35)}" alt="logo" />
           %else:
             ${h.image('/images/details/icon_group_35x35.png', alt='logo', class_='group-logo')|n}
           %endif
             <span>
-              <a href="${group.url()}" >${group.title}</a>
-              (${ungettext("%(count)s member", "%(count)s members", len(group.members)) % dict(count = len(group.members))})
+              <a href="${group['url']}" >${group['title']}</a>
+              (${ungettext("%(count)s member", "%(count)s members", group['member_count']) % dict(count = group['member_count'])})
             </span>
             <br class="clear-left"/>
         </div>
