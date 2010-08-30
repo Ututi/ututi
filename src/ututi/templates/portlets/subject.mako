@@ -93,11 +93,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 
 </%def>
 
-<%def name="subject_similar_subjects_portlet(subject=None)">
-  <%
-     if subject is None:
-         subject = c.subject
-  %>
+<%def name="subject_similar_subjects_portlet()">
   %if c.similar_subjects:
   <%self:uportlet id="similar_subjects_portlet">
     <%def name="header()">
@@ -111,34 +107,33 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
                 <li${index==count_subjects-1 and " class='Dalykail-last'" or ''}>
                   <dl>
             <%
-               subject = item.object
-               location = subject.location.hierarchy(True)
+               location = item['location']
                length = len(location)
             %>
 
-                        <dt><a href="${item.object.url()}">${subject.title}</a></dt>
+                        <dt><a href="${item['url']}">${item['title']}</a></dt>
             %for n, tag in enumerate(location):
               <dd class="s-line"><a class="uni" href="${tag.url()}" title="${tag.title}">${tag.title_short}</a></dd>
               %if n != length -1:
                 <dd class="s-line">|</dd>
               %endif
             %endfor
-            %if subject.lecturer:
-                          <dd class="s-line">${_('Lect.')} ${subject.lecturer}</dd>
+            %if item['lecturer']:
+              <dd class="s-line">${_('Lect.')} ${item['lecturer']}</dd>
             %endif
                         <dt></dt>
             <%
-                file_cnt = len(subject.files)
-                page_cnt = len(subject.pages)
-                group_cnt = subject.group_count()
-                user_cnt = subject.user_count()
+                file_cnt = item['file_cnt']
+                page_cnt = item['page_cnt']
+                group_cnt = item['group_cnt']
+                user_cnt = item['user_cnt']
              %>
-            <dd class="files">${ungettext('%(count)s <span class="a11y">file</span>', '%(count)s <span class="a11y">files</span>', file_cnt) % dict(count = file_cnt)|n}</dd>
-            <dd class="pages">${ungettext('%(count)s <span class="a11y">wiki page</span>', '%(count)s <span class="a11y">wiki pages</span>', page_cnt) % dict(count = page_cnt)|n}</dd>
+            <dd class="files">${ungettext('%(count)s <span class="a11y">file</span>', '%(count)s <span class="a11y">files</span>', file_cnt) % dict(count=file_cnt)|n}</dd>
+            <dd class="pages">${ungettext('%(count)s <span class="a11y">wiki page</span>', '%(count)s <span class="a11y">wiki pages</span>', page_cnt) % dict(count=page_cnt)|n}</dd>
             <dd class="watchedBy"><span class="a11y">${_('Watched by:')}</span>
-              ${ungettext("%(count)s group", "%(count)s groups", group_cnt) % dict(count = group_cnt)|n}
+              ${ungettext("%(count)s group", "%(count)s groups", group_cnt) % dict(count=group_cnt)|n}
               ${_('and')}
-              ${ungettext("%(count)s member", "%(count)s members", user_cnt) % dict(count = user_cnt)|n}
+              ${ungettext("%(count)s member", "%(count)s members", user_cnt) % dict(count=user_cnt)|n}
             </dd>
                   </dl>
                 </li>
