@@ -13,7 +13,10 @@ def main(args):
     users = {}
 
     for row in perflog:
-        time, level, logger, cls, controller_action, walltime, cputime, uid = row.split()
+        try:
+            time, level, logger, cls, controller_action, walltime, cputime, uid = row.split()
+        except ValueError:
+            continue
 
         # Stats by controller.
         controller_stats = controllers.get(controller_action, (0.0, 0.0, 0))
