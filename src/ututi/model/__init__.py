@@ -1645,6 +1645,17 @@ class Subject(ContentItem, FolderMixin, LimitedUploadMixin):
     def n_pages(self):
         return len(self.pages)
 
+    def info_dict(self):
+        """Cacheable dict containing essential info about this subject."""
+        return {'location': self.location.hierarchy(True),
+                'title': self.title,
+                'url': self.url(),
+                'lecturer': self.lecturer,
+                'file_cnt': len(self.files),
+                'page_cnt': len(self.pages),
+                'group_cnt': self.group_count(),
+                'user_cnt': self.user_count()}
+
 
 pages_table = None
 

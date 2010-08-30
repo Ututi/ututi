@@ -33,15 +33,7 @@ def find_similar_subjects(subject):
     results = search(text=subject.title, obj_type='subject', disjunctive=False, limit=5, extra=filter_out)
     if not results:
         results = search(text=subject.title, obj_type='subject', tags=subject.location.hierarchy(), disjunctive=True, limit=5, extra=filter_out, rank_cutoff=0.1)
-    return [{'location': r.object.location.hierarchy(True),
-             'title': r.object.title,
-             'url': r.object.url(),
-             'lecturer': r.object.lecturer,
-             'file_cnt': len(r.object.files),
-             'page_cnt': len(r.object.pages),
-             'group_cnt': r.object.group_count(),
-             'user_cnt': r.object.user_count()}
-            for r in results]
+    return [item.object.info_dict() for item in results]
 
 def subject_action(method):
     def _subject_action(self, id, tags):
