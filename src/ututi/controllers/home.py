@@ -124,7 +124,7 @@ class RecommendationForm(Schema):
 
 
 class UniversityListMixin(BaseController):
-    """ A mix-in for listing all the universitites (first level location tags) in the system."""
+    """ A mix-in for listing all the universities (first level location tags) in the system."""
 
     @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
     def _universities(self, sort_popularity=True, limit=None, region_id=None):
