@@ -53,9 +53,9 @@
       <td>${h.fmt_dt(msg.created)}</td>
       <td>
         %if msg.delivery_status:
-          ${delivery_status_messages[msg.delivery_status]}
+          ${delivery_status_messages.get(msg.delivery_status, 'unknown: %d' % msg.delivery_status)}
         %else:
-          ${sending_status_messages[msg.sending_status]}
+          ${sending_status_messages.get(msg.sending_status, 'unknown: %d' % msg.sending_status)}
         %endif
       </td>
       <td>
