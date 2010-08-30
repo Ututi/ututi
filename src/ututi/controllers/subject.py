@@ -33,6 +33,7 @@ def find_similar_subjects(subject):
     results = search(text=subject.title, obj_type='subject', disjunctive=False, limit=5, extra=filter_out)
     if results:
         return results
+    # XXX return dicts
     return search(text=subject.title, obj_type='subject', tags=subject.location.hierarchy(), disjunctive=True, limit=5, extra=filter_out, rank_cutoff=0.1)
 
 def subject_action(method):

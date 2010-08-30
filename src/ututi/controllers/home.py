@@ -139,6 +139,7 @@ class UniversityListMixin(BaseController):
         if limit is not None:
             unis = unis[:limit]
 
+        # XXX return dicts
         return unis
 
     @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
@@ -154,17 +155,19 @@ class UniversityListMixin(BaseController):
         if limit is not None:
             depts = depts[:limit]
 
+        # XXX return dicts
         return depts
-
 
     @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
     def _subjects(self):
         subjects = meta.Session.query(Subject).join(SearchItem).order_by(SearchItem.rating.desc()).limit(10).all()
+        # XXX return dicts
         return subjects
 
     @u_cache(expire=3600, query_args=True, invalidate_on_startup=True, cache_response=False)
     def _groups(self):
         groups = meta.Session.query(Group).order_by(Group.created_on.desc()).limit(10).all()
+        # XXX return dicts
         return groups
 
     def _get_unis(self):
