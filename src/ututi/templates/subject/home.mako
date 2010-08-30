@@ -24,9 +24,7 @@
   %if h.check_crowds(['moderator']):
   <div style="float: left;"><span class="message"><span>${_('Subject has been deleted, you can restore it if you want to.')}</span></span></div>
   <div style="float: left; margin-left: 6px;">
-    <a class="btn" href="${c.subject.url(action='undelete')}" title="${_('Restore deleted subject')}">
-      <span>${_('Restore subject')}</span>
-    </a>
+    ${h.button_to(_('Restore subject'), c.subject.url(action='undelete'))}
   </div>
   %else:
   <span class="message"><span>${_('Subject has been deleted, it will soon disappear from your watched subjects list.')}</span></span>

@@ -67,6 +67,9 @@
            text = _('Remove from my subjects')
 
     %>
+    %if h.check_crowds(['moderator']) and not c.subject.deleted:
+      ${h.button_to(_('Delete subject'), c.subject.url(action='delete'), class_='btn btnNegative')}
+    %endif
     <div style="padding-top: 5px; padding-bottom: 5px">
       ${h.button_to(text, subject.url(action='watch'), class_=cls, method='GET')}
     </div>
