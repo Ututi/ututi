@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-08-16 10:15+0300\n"
+"POT-Creation-Date: 2010-08-30 13:03+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -84,12 +84,6 @@ msgid "Ututi bugs"
 msgstr ""
 
 msgid "Report Ututi bugs here."
-msgstr ""
-
-msgid "General"
-msgstr ""
-
-msgid "Discussions on anything and everything"
 msgstr ""
 
 msgid ""
@@ -374,6 +368,9 @@ msgid "Your Google account has been associated with your Ututi account."
 msgstr ""
 
 msgid "Your Facebook account has been associated with your Ututi account."
+msgstr ""
+
+msgid "Authentication failed, please try again."
 msgstr ""
 
 msgid "Facebook did not provide your email address."
@@ -665,6 +662,12 @@ msgid "unlimited group private files for %(day_count)d day"
 msgid_plural "unlimited group private files for %(day_count)d days"
 msgstr[0] ""
 msgstr[1] ""
+
+msgid "General"
+msgstr ""
+
+msgid "Discussions on anything and everything"
+msgstr ""
 
 #, python-format
 msgid "A new file has been uploaded for the %(title)s:"

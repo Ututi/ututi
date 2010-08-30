@@ -475,7 +475,8 @@ class HomeController(UniversityListMixin):
         try:
             authrequest = cons.begin(openid)
         except DiscoveryFailure, e:
-            raise e # XXX
+            h.flash(_('Authentication failed, please try again.'))
+            redirect(c.came_from or url(controller='home', action='index'))
 
         ax_req = ax.FetchRequest()
         ax_req.add(ax.AttrInfo('http://axschema.org/namePerson/first',
