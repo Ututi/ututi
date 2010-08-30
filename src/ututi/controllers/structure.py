@@ -237,8 +237,11 @@ class StructureController(BaseController):
             for index, item in enumerate(newlocation):
                 if item['title'] == '' and location[index] != '':
                     try:
-                        parent = meta.Session.query(LocationTag).filter(LocationTag.title == location[index]).filter(LocationTag.parent == parent).one()
-                    except:
+                        parent = meta.Session.query(LocationTag
+                                ).filter(LocationTag.title == location[index]
+                                ).filter(LocationTag.parent == parent
+                                ).one()
+                    except: # XXX bare except
                         break
                 else:
                     try:
@@ -253,7 +256,7 @@ class StructureController(BaseController):
                             else:
                                 json['error'] = _('Choose a different short title')
                                 break
-                    except: # XXX
+                    except: # XXX bare except
                         json['error'] = _('The short title must contain no spaces')
                         break
 
