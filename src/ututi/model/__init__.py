@@ -1968,6 +1968,18 @@ class LocationTag(Tag):
         grps =  meta.Session.query(Group).filter(Group.location_id.in_(ids)).order_by(Group.created_on.desc()).limit(5).all()
         return grps
 
+    def info_dict(self):
+        """Cacheable dict containing essential info about this subject."""
+        return {'has_logo': bool(self.logo is not None),
+                'id': self.id,
+                'parent_id': self.parent_id,
+                'parent_has_logo': self.parent is not None and self.parent.logo is not None,
+                'url': self.url(),
+                'title': self.title,
+                'n_subjects': self.count('subject'),
+                'n_groups': self.count('group'),
+                'n_files': self.count('file')}
+
 
 def cleanupFileName(filename):
     return filename.split('\\')[-1].split('/')[-1]

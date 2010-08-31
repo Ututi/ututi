@@ -129,7 +129,8 @@
   %if c.subjects:
   <ul>
     %for subject in c.subjects:
-    <li>      <dl>
+    <li>
+      <dl>
         <dt><a href="${subject.url()}">${subject.title}</a></dt>
         <%
            file_cnt = len(subject.files)
@@ -157,19 +158,19 @@
     %for university in c.universities:
     <%
        logo_style = ''
-       if university.logo is not None:
-           logo_style = 'background-image: url(%s);' % url(controller='structure', action='logo', id=university.id, width=20, height=20)
-       subject_cnt = h.location_count(university.id, 'subject')
-       group_cnt = h.location_count(university.id, 'group')
-       file_cnt = h.location_count(university.id, 'file')
+       if university['has_logo']:
+           logo_style = 'background-image: url(%s);' % url(controller='structure', action='logo', id=university['id'], width=20, height=20)
+       subject_cnt = h.location_count(university['id'], 'subject')
+       group_cnt = h.location_count(university['id'], 'group')
+       file_cnt = h.location_count(university['id'], 'file')
     %>
     <li style="${logo_style|n}">
       <dl>
-        <dt><a href="${university.url()}">${university.title}</a></dt>
+        <dt><a href="${university['url']}">${university['title']}</a></dt>
         <dd>
-          ${ungettext("%(count)s subject", "%(count)s subjects", subject_cnt) % dict(count = subject_cnt)|n},
-          ${ungettext("%(count)s group", "%(count)s groups", group_cnt) % dict(count = group_cnt)|n},
-          ${ungettext("%(count)s file", "%(count)s files", file_cnt) % dict(count = file_cnt)|n}
+          ${ungettext("%(count)s subject", "%(count)s subjects", subject_cnt) % dict(count=subject_cnt)|n},
+          ${ungettext("%(count)s group", "%(count)s groups", group_cnt) % dict(count=group_cnt)|n},
+          ${ungettext("%(count)s file", "%(count)s files", file_cnt) % dict(count=file_cnt)|n}
         </dd>
       </dl>
     </li>

@@ -139,8 +139,7 @@ class UniversityListMixin(BaseController):
         if limit is not None:
             unis = unis[:limit]
 
-        # XXX return dicts
-        return unis
+        return [uni.info_dict() for uni in unis]
 
     @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
     def _departments(self, parent, sort_popularity=True, limit=None, region_id=None):
@@ -155,8 +154,7 @@ class UniversityListMixin(BaseController):
         if limit is not None:
             depts = depts[:limit]
 
-        # XXX return dicts
-        return depts
+        return [dept.info_dict() for dept in depts]
 
     @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
     def _subjects(self):

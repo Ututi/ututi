@@ -16,32 +16,23 @@
 
 <%def name="university(uni)">
 <div class="university_block">
-  %if uni.logo is not None:
+  %if uni['has_logo']:
   <div class="logo">
-    <img src="${url(controller='structure', action='logo', id=uni.id, width=26, height=26)}" alt="logo" />
+    <img src="${url(controller='structure', action='logo', id=uni['id'], width=26, height=26)}" alt="logo" />
   </div>
   %endif
   <div class="title">
-    <a href="${uni.url()}" title="${uni.title}">${h.ellipsis(uni.title, 38)}</a>
+    <a href="${uni['url']}" title="${uni['title']}">${h.ellipsis(uni['title'], 38)}</a>
   </div>
   <div class="stats">
     <span>
-        <%
-           cnt = uni.count('subject')
-        %>
-        ${ungettext("%(count)s subject", "%(count)s subjects", cnt) % dict(count = cnt)|n}
+      ${ungettext("%(count)s subject", "%(count)s subjects", uni['n_subjects']) % dict(count=uni['n_subjects'])|n}
     </span>
     <span>
-        <%
-           cnt = uni.count('group')
-        %>
-        ${ungettext("%(count)s group", "%(count)s groups", cnt) % dict(count = cnt)|n}
+      ${ungettext("%(count)s group", "%(count)s groups", uni['n_groups']) % dict(count=uni['n_groups'])|n}
     </span>
     <span>
-        <%
-           cnt = uni.count('file')
-        %>
-        ${ungettext("%(count)s file", "%(count)s files", cnt) % dict(count = cnt)|n}
+      ${ungettext("%(count)s file", "%(count)s files", uni['n_files']) % dict(count=uni['n_files'])|n}
     </span>
   </div>
 </div>
