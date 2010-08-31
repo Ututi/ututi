@@ -186,7 +186,7 @@
     <%
        logo_style = ''
        if group['has_logo']:
-           logo_style = 'background-image: url(%s);' % url(controller='group', action='logo', id=group.group_id, width=20, height=20)
+           logo_style = 'background-image: url(%s);' % url(controller='group', action='logo', id=group['group_id'], width=20, height=20)
     %>
     <li style="${logo_style|n}">
       <dl>
