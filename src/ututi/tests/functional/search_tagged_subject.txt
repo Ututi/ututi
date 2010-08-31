@@ -20,5 +20,12 @@ Try looking for a subject that does not exist, while passing a tag that exists.
    >>> browser.getControl(name="text", index=1).value = 'analizai'
    >>> browser.getControl(name='tags').value = 'matematika'
 
-# XXX failing test
+Regression test:
+
+   >>> browser.getControl('Search', index=1).click()
+
+Another regression test:
+
+   >>> browser.getControl(name="text", index=1).value = ''
+   >>> o = browser.getControl(name='obj_type').displayValue = ['files']
    >>> browser.getControl('Search', index=1).click()

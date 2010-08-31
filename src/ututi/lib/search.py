@@ -47,7 +47,7 @@ def search_query(**kwargs):
 
     if isinstance(settings['tags'], basestring):
         settings['tags'] = settings['tags'].split(', ')
-    query = _search_query_tags(query, **settings)
+    query = _search_query_tags(query, settings)
 
     if settings['text'] is None:
         query = _search_query_default_sorting(query, **settings)
@@ -132,10 +132,12 @@ def _search_query_default_sorting(query, **kwargs):
     """
     obj_type = kwargs['obj_type']
     if obj_type in ['page', 'file', 'forum_post']:
-        query = query.order_by(ContentItem.modified_on.desc())
+        if not kwargs.get('grouped_search_items'):
+            query = query.order_by(ContentItem.modified_on.desc())
     elif obj_type == 'group':
-        query = query.join((Group, Group.id==SearchItem.content_item_id))
-        query = query.order_by([Group.forum_is_public.desc(), ContentItem.modified_on.desc()])
+        if not kwargs.get('grouped_search_items'):
+            query = query.join((Group, Group.id==SearchItem.content_item_id))
+            query = query.order_by([Group.forum_is_public.desc(), ContentItem.modified_on.desc()])
     elif obj_type == 'subject':
         query = query.order_by(SearchItem.rating.desc())
     return query
@@ -148,10 +150,10 @@ def _search_query_type(query, **kwargs):
 
     return query
 
-def _search_query_tags(query, **kwargs):
+def _search_query_tags(query, settings):
     """Filter the query by tags."""
 
-    tags = kwargs.get('tags')
+    tags = settings.get('tags')
     if tags is not None:
         stags = [] #simple tags
         ltags = [] #location tags
@@ -181,6 +183,11 @@ def _search_query_tags(query, **kwargs):
 
         if len(stags) > 0:
             query = query.join(ContentItem.tags).filter(SimpleTag.id.in_(stags)).group_by(SearchItem).having(func.count(SearchItem.content_item_id) == len(stags))
+            # We're grouping by search item, so ordering by other fields
+            # will not possible. Let's mark that down. We'll avoid sorting
+            # by other fields in the future. This is a misfeature, but it's
+            # a corner case...
+            settings['grouped_search_items'] = True
 
         if len(ltags) > 0:
             intersect = None
