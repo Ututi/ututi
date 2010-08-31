@@ -312,6 +312,13 @@ class HomeController(UniversityListMixin):
         fullname = self.form_result['fullname']
         password = self.form_result['new_password']
         email = self.form_result['email'].lower()
+
+        user = User.get(email)
+        if user:
+            # A user with this email exists, just sign them in.
+            sign_in_user(email)
+            return (user, email)
+
         gadugadu_uin = self.form_result['gadugadu']
 
         user = User(fullname, password)
@@ -395,18 +402,21 @@ class HomeController(UniversityListMixin):
             redirect(url(controller='home', action='index'))
         c.email = session.get('confirmed_email').lower()
         if hasattr(self, 'form_result'):
-            user = User(self.form_result['fullname'], None, gen_password=False)
-            self._bind_user(user, flash=False)
-            if user.facebook_id:
-                self._bind_facebook_invitations(user)
-            user.accepted_terms = datetime.today()
-            user.emails = [Email(c.email)]
-            user.emails[0].confirmed = True
+            user = User.get(c.email)
+            if not user:
+                # Make sure that such a user does not exist.
+                user = User(self.form_result['fullname'], None, gen_password=False)
+                self._bind_user(user, flash=False)
+                if user.facebook_id:
+                    self._bind_facebook_invitations(user)
+                user.accepted_terms = datetime.today()
+                user.emails = [Email(c.email)]
+                user.emails[0].confirmed = True
 
-            user.location = self.form_result['location']
-            user.phone_number = self.form_result['phone']
-            meta.Session.add(user)
-            meta.Session.commit()
+                user.location = self.form_result['location']
+                user.phone_number = self.form_result['phone']
+                meta.Session.add(user)
+                meta.Session.commit()
             sign_in_user(c.email)
 
             invitation_hash = self.form_result.get('invitation_hash', '')
