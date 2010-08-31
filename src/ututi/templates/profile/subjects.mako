@@ -77,7 +77,7 @@ $(document).ready(function(){
         </script>
         <label for="each" class="grey verysmall">${_('email notifications')}
           <select name="each" class="each" style="font-size: 1em;">
-            %for v, t in [('hour', _('immediatelly')), ('day', _('at the end of the day')), ('never', _('never'))]:
+            %for v, t in [('hour', _('immediately')), ('day', _('at the end of the day')), ('never', _('never'))]:
               %if v == selected:
                 <option selected="selected" value="${v}">${t}</option>
               %else:

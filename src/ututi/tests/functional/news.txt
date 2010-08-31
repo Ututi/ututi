@@ -245,7 +245,7 @@ See what notification intervals have been set:
 
     >>> browser.getControl(name='each', index=2).displayValue
     ['at the end of the day']
-    >>> browser.getControl(name='each', index=2).displayValue = ['immediatelly']
+    >>> browser.getControl(name='each', index=2).displayValue = ['immediately']
     >>> browser.getControl('Confirm', index=2).click()
 
 These should have changed:
@@ -254,7 +254,7 @@ These should have changed:
     >>> browser.getControl(name='each', index=1).displayValue
     ['at the end of the day']
     >>> browser.getControl(name='each', index=2).displayValue
-    ['immediatelly']
+    ['immediately']
 
     >>> meta.Session.commit()
     >>> browser.open('http://localhost/news/hourly?date=2009-10-08&hour=11')

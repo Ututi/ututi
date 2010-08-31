@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-08-30 13:03+0300\n"
+"PO-Revision-Date: 2010-08-31 16:43+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -2696,6 +2696,9 @@ msgstr ""
 msgid "Remove from my subjects"
 msgstr ""
 
+msgid "Delete subject"
+msgstr ""
+
 msgid "edit subject information"
 msgstr ""
 
@@ -3007,9 +3010,6 @@ msgstr ""
 msgid "email notifications"
 msgstr ""
 
-msgid "immediatelly"
-msgstr ""
-
 msgid "Add a subject"
 msgstr ""
 
@@ -3268,9 +3268,6 @@ msgid "back to the subject"
 msgstr ""
 
 msgid "Subject has been deleted, you can restore it if you want to."
-msgstr ""
-
-msgid "Restore deleted subject"
 msgstr ""
 
 msgid "Restore subject"

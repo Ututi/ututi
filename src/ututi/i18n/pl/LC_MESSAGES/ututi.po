@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-08-30 13:03+0300\n"
+"PO-Revision-Date: 2010-08-31 16:43+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -2987,6 +2987,9 @@ msgstr "Dodaj do moich przedmiotów"
 msgid "Remove from my subjects"
 msgstr "Usuń z moich przedmiotów"
 
+msgid "Delete subject"
+msgstr ""
+
 msgid "edit subject information"
 msgstr "popraw informacje o przedmiocie"
 
@@ -3315,9 +3318,6 @@ msgstr "Ustawienia powiadomień o obserwowanych przedmiotach"
 msgid "email notifications"
 msgstr "powiadomienia e-mailem"
 
-msgid "immediatelly"
-msgstr "natychmiast"
-
 msgid "Add a subject"
 msgstr "Dodaj przedmiot"
 
@@ -3600,9 +3600,6 @@ msgstr "wróć do przedmiotu"
 
 msgid "Subject has been deleted, you can restore it if you want to."
 msgstr "Przedmiot został usunięty, ale możesz go jeszcze przywrócić."
-
-msgid "Restore deleted subject"
-msgstr "Odtwórz usunięte przedmioty"
 
 msgid "Restore subject"
 msgstr "Odtwórz przedmioty"

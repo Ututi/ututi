@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-08-30 13:07+0300\n"
+"PO-Revision-Date: 2010-08-31 16:43+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -2939,6 +2939,9 @@ msgstr "Pridėti prie mano dalykų "
 msgid "Remove from my subjects"
 msgstr "Ištrinti iš mano dalykų"
 
+msgid "Delete subject"
+msgstr ""
+
 msgid "edit subject information"
 msgstr "Keisti dalyko informaciją"
 
@@ -3263,9 +3266,6 @@ msgstr "Priminimų apie dalykus nustatymai"
 msgid "email notifications"
 msgstr "priminimai į el. paštą"
 
-msgid "immediatelly"
-msgstr "iš karto"
-
 msgid "Add a subject"
 msgstr "Pridėti dalyką"
 
@@ -3550,9 +3550,6 @@ msgstr "Grįžti į dalyką"
 
 msgid "Subject has been deleted, you can restore it if you want to."
 msgstr "Dalykas buvo ištrintas. Jūs galite jį atstatyti."
-
-msgid "Restore deleted subject"
-msgstr "Atstatyti ištrintą dalyką"
 
 msgid "Restore subject"
 msgstr "Atstatyti dalyką"
