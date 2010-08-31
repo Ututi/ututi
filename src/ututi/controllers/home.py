@@ -432,10 +432,20 @@ class HomeController(UniversityListMixin):
     def _bind_user(self, user, flash=True):
         """Bind user to FB/Google account (retrieve info from session)."""
         if session.get('confirmed_openid'):
+            if User.get_byopenid(session['confirmed_openid']):
+                # This rarely happens, but we have to check to avoid an error.
+                if flash:
+                    h.flash(_('This Google account is already linked to another Ututi account.'))
+                return
             user.openid = session['confirmed_openid']
             if flash:
                 h.flash(_('Your Google account has been associated with your Ututi account.'))
         elif session.get('confirmed_facebook_id'):
+            if User.get_byfbid(session['confirmed_facebook_id']):
+                # This rarely happens, but we have to check to avoid an error.
+                if flash:
+                    h.flash(_('This Facebook account is already linked to another Ututi account.'))
+                return
             user.facebook_id = int(session['confirmed_facebook_id'])
             user.update_logo_from_facebook()
             if flash:
