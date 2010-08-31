@@ -131,12 +131,12 @@
     %for subject in c.subjects:
     <li>
       <dl>
-        <dt><a href="${subject.url()}">${subject.title}</a></dt>
+        <dt><a href="${subject['url']}">${subject['title']}</a></dt>
         <%
-           file_cnt = len(subject.files)
-           page_cnt = len(subject.pages)
-           group_cnt = subject.group_count()
-           user_cnt = subject.user_count()
+           file_cnt = subject['file_cnt']
+           page_cnt = subject['page_cnt']
+           group_cnt = subject['group_cnt']
+           user_cnt = subject['user_cnt']
         %>
         <dd class="files">${ungettext('%(count)s <span class="a11y">file</span>', '%(count)s <span class="a11y">files</span>', file_cnt) % dict(count = file_cnt)|n}</dd>
         <dd class="pages">${ungettext('%(count)s <span class="a11y">wiki page</span>', '%(count)s <span class="a11y">wiki pages</span>', page_cnt) % dict(count = page_cnt)|n}</dd>
@@ -185,19 +185,19 @@
     %for group in c.groups:
     <%
        logo_style = ''
-       if group.logo is not None:
+       if group['has_logo']:
            logo_style = 'background-image: url(%s);' % url(controller='group', action='logo', id=group.group_id, width=20, height=20)
     %>
     <li style="${logo_style|n}">
       <dl>
-        <dt><a href="${group.url()}">${group.title}</a></dt>
+        <dt><a href="${group['url']}">${group['title']}</a></dt>
         <dd>
           <%
-             hierarchy = group.location.hierarchy(True)
+             hierarchy = group['hierarchy']
              total_hierarchy = len(hierarchy)
           %>
           %for n, tag in enumerate(hierarchy):
-            <a href="${tag.url()}" title="${tag.title}">${tag.title_short}</a>
+            <a href="${tag['url']}" title="${tag['title']}">${tag['title_short']}</a>
             %if n != total_hierarchy - 1:
              |
             %endif

@@ -159,14 +159,12 @@ class UniversityListMixin(BaseController):
     @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
     def _subjects(self):
         subjects = meta.Session.query(Subject).join(SearchItem).order_by(SearchItem.rating.desc()).limit(10).all()
-        # XXX return dicts
-        return subjects
+        return [subject.info_dict() for subject in subjects]
 
     @u_cache(expire=3600, query_args=True, invalidate_on_startup=True, cache_response=False)
     def _groups(self):
         groups = meta.Session.query(Group).order_by(Group.created_on.desc()).limit(10).all()
-        # XXX return dicts
-        return groups
+        return [group.info_dict() for group in groups]
 
     def _get_unis(self):
         """List universities.

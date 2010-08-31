@@ -1431,6 +1431,17 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
         self.private_files_lock_date = start_date + timedelta(days=days)
         self.ending_period_notification_sent = False
 
+    def info_dict(self):
+        """Cacheable dict containing essential info about this subject."""
+        return {'has_logo': self.logo is not None,
+                'url': self.url(),
+                'title': self.title,
+                'hierarchy': [dict(title=tag.title,
+                                   title_short=tag.title_short,
+                                   url=tag.url())
+                              for tag in self.location.hierarchy(True)],
+                }
+
 
 group_members_table = None
 
