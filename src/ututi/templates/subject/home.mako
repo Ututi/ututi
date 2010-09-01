@@ -80,10 +80,7 @@
 % if c.subject.pages:
   % for n, page in enumerate(c.subject.pages):
     % if not page.isDeleted() or h.check_crowds(['moderator']):
-     <%
-        class_ = 'wiki-tekstas' if n < count - 1 else 'wiki-tekstas-last'
-     %>
-     <div class="${class_}">
+     <div class="${'wiki-tekstas' if n < count - 1 else 'wiki-tekstas-last'}">
        <p><span class="orange bold"><a href="${page.url()}" title="${page.title}">${page.title}</a></span>
          <span class="grey verysmall"> ${h.fmt_dt(page.last_version.created_on)} </span>
          <span class="orange verysmall"><a href="${page.last_version.created.url()}">${page.last_version.created.fullname}</a></span>
