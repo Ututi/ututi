@@ -3,7 +3,8 @@ User profiles
 
     >>> from pkg_resources import resource_stream
     >>> def make_file(filename, upload_name=None):
-    ...     if upload_name is None: upload_name = filename
+    ...     if upload_name is None:
+    ...         upload_name = filename
     ...     stream = resource_stream("ututi.tests.functional.import", filename)
     ...     return (stream, 'text/plain', upload_name)
 
@@ -79,7 +80,7 @@ The size of the image should be as was specified in the request.
     >>> im.size
     (45, 45)
 
-The original logo can be retreived too:
+The original logo can be retrieved too:
 
     >>> browser.open('http://localhost/user/1/logo')
     >>> im = Image.open(StringIO.StringIO(browser.contents))

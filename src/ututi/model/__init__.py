@@ -741,8 +741,8 @@ class User(object):
     def get(cls, username):
         """Get a user by his email or id."""
         try:
-            if isinstance(id, (long, int)):
-                return meta.Session.query(cls).filter_by(id=id).one()
+            if isinstance(username, (long, int)):
+                return meta.Session.query(cls).filter_by(id=username).one()
             else:
                 return meta.Session.query(Email).filter_by(email=username.lower()).one().user
         except NoResultFound:

@@ -2,6 +2,8 @@ import PIL
 from PIL import Image
 import StringIO
 
+from pkg_resources import resource_stream
+
 from pylons import response
 from pylons.controllers.util import abort, etag_cache
 from sqlalchemy.orm.exc import NoResultFound
@@ -10,24 +12,34 @@ from ututi.lib.cache import u_cache
 from ututi.model import Group, User, LocationTag, meta
 
 
-def serve_logo(obj_type, obj_id, width=None, height=None, default_img_path=None):
-    img_data = prepare_logo(obj_type, obj_id, width, height, default_img_path)
+def serve_logo(obj_type, obj_id, width=None, height=None,
+               default_img_path=None, cache=True):
+    if cache:
+        img_data = prepare_logo_cached(obj_type, obj_id, width, height, default_img_path)
+    else:
+        img_data = prepare_logo(obj_type, obj_id, width, height, default_img_path)
+
     if img_data is None:
         abort(404)
     response.headers['Content-Disposition'] = 'inline'
     response.headers['Content-Length'] = len(img_data)
     response.headers['Content-Type'] = 'image/png'
 
-    # Clear the default cache headers
-    del response.headers['Cache-Control']
-    del response.headers['Pragma']
-    response.cache_expires(seconds=3600, public=True)
-    etag_cache(str(hash(img_data)))
+    if cache:
+        # Clear the default cache headers
+        del response.headers['Cache-Control']
+        del response.headers['Pragma']
+        response.cache_expires(seconds=3600, public=True)
+        etag_cache(str(hash(img_data)))
 
     return img_data
 
 
 @u_cache(expire=3600, query_args=False, invalidate_on_startup=True)
+def prepare_logo_cached(obj_type, obj_id, width=None, height=None, default_img_path=None):
+    return prepare_logo(obj_type, obj_id, width=width, height=height, default_img_path=default_img_path)
+
+
 def prepare_logo(obj_type, obj_id, width=None, height=None, default_img_path=None):
     obj_cls = {'group': Group, 'user': User, 'locationtag': LocationTag}[obj_type]
     obj = obj_cls.get(obj_id)
