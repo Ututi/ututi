@@ -53,7 +53,9 @@ class BasefilesController(BaseController):
             range_end = None
 
             if request.range is not None:
-                (range_start, range_end, file_len) = request.range.content_range(length=file.filesize)
+                c_range = request.range.content_range(length=file.filesize)
+                if c_range is not None:
+                    (range_start, range_end, file_len) = c_range
 
             c.user.download(file, range_start, range_end)
             meta.Session.commit()
