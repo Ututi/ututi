@@ -30,7 +30,8 @@ def serve_logo(obj_type, obj_id, width=None, height=None,
         del response.headers['Cache-Control']
         del response.headers['Pragma']
         response.cache_expires(seconds=3600, public=True)
-        etag_cache(str(hash(img_data)))
+
+    etag_cache(str(hash(img_data)))
 
     return img_data
 
