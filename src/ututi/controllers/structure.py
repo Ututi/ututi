@@ -186,18 +186,16 @@ class StructureController(BaseController):
         else:
             query = query.filter(LocationTag.parent==None)
 
-
         results = []
 
         for tag in query.order_by(LocationTag.title.asc()).all():
             has_children = meta.Session.query(LocationTag).filter(LocationTag.parent==tag).all() != []
             results.append({'id': tag.title_short, 'title': tag.title, 'path': '/'.join(tag.path), 'has_children': has_children})
 
-        return {'values' : results, 'depth' : depth, 'id' : '#%s .location-%i' % (widget_id, depth)}
+        return {'values': results, 'depth': depth, 'id': '#%s .location-%i' % (widget_id, depth)}
 
     def autocomplete_all_tags(self, all=False):
         return self.autocomplete_tags(True)
-
 
     @jsonify
     def autocomplete_tags(self, all=False):
@@ -225,10 +223,7 @@ class StructureController(BaseController):
     @jsonify
     def js_add_tag(self):
         if hasattr(self, 'form_result'):
-            json = {
-                'success': '',
-                'error': ''
-                }
+            json = {'success': '', 'error': ''}
             parent = None
             created = None
             location = self.form_result['location']
