@@ -1,7 +1,6 @@
 import PIL
 from PIL import Image
 import StringIO
-import datetime
 
 from pylons import response
 from pylons.controllers.util import abort, etag_cache
@@ -23,7 +22,7 @@ def serve_logo(obj_type, obj_id, width=None, height=None, default_img_path=None)
     del response.headers['Cache-Control']
     del response.headers['Pragma']
     response.cache_expires(seconds=3600, public=True)
-    etag_cache(datetime.date.today().isoformat())
+    etag_cache(str(hash(img_data)))
 
     return img_data
 
