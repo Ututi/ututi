@@ -43,6 +43,7 @@
         <th></th>
         <th>Name</th>
         <th></th>
+        <th>Groups</th>
         <th>Downloads</th>
         <th>Uploads</th>
         <th>Pages</th>
@@ -80,6 +81,12 @@
          % endif
        </td>
 
+        <td style="text-align: center">
+          <% n_groups = len(user.groups) %>
+          <span style="${'font-weight: bold' if n_groups > 0 else 'color: #aaa'}">
+            ${n_groups}
+          </span>
+        </td>
         <td>
           ${downloads} (${h.file_size(int(downloads_size))})
           <br />
