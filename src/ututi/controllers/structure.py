@@ -77,8 +77,8 @@ class StructureController(BaseController):
 
     @ActionProtector("root")
     def index(self):
-        c.structure = meta.Session.query(LocationTag).filter_by(parent=None).all()
-        c.regions = meta.Session.query(Region).all()
+        c.structure = meta.Session.query(LocationTag).filter_by(parent=None).order_by(LocationTag.id).all()
+        c.regions = meta.Session.query(Region).order_by(Region.id).all()
         return render('structure/index.mako')
 
     @validate(schema=NewStructureForm, form='index')
@@ -116,8 +116,8 @@ class StructureController(BaseController):
                     tag.region_id = region
             meta.Session.commit()
             redirect(url(controller='structure', action='index'))
-        c.structure = meta.Session.query(LocationTag).filter_by(parent=None).all()
-        c.regions = meta.Session.query(Region).all()
+        c.structure = meta.Session.query(LocationTag).filter_by(parent=None).order_by(LocationTag.id).all()
+        c.regions = meta.Session.query(Region).order_by(Region.id).all()
         return render('structure/regions.mako')
 
     def _edit_form(self):
