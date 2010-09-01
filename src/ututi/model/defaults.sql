@@ -167,7 +167,8 @@ create table tags (id bigserial not null,
        site_url varchar(200) default null,
        confirmed bool default true,
        region_id int8 default null references regions(id) on delete restrict,
-       primary key (id));;
+       primary key (id),
+       unique(parent_id, title_short));;
 
 alter table users add column location_id int8 default null references tags(id) on delete set null;;
 
