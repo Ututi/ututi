@@ -1,7 +1,5 @@
 import logging
 
-from pkg_resources import resource_stream
-
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql.expression import desc
 from pylons.controllers.util import abort, redirect
