@@ -26,7 +26,7 @@ from sqlalchemy.orm.exc import NoResultFound
 
 import ututi.lib.helpers as h
 from ututi.lib.fileview import FileViewMixin
-from ututi.lib.image import serve_image
+from ututi.lib.image import serve_logo
 from ututi.lib.sms import sms_cost
 from ututi.lib.base import BaseController, render, render_lang
 from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator, TagsValidator, GroupCouponValidator, validate
@@ -782,14 +782,8 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
         redirect(url(controller='group', action='home', id=group.group_id))
 
     def logo(self, id, width=None, height=None):
-        group = Group.get(id)
-        if group is None:
-            abort(404)
-        if group.logo is not None:
-            return serve_image(group.logo, width=width, height=height)
-        else:
-            stream = resource_stream("ututi", "public/images/details/icon_group_large.png").read()
-            return serve_image(stream, width, height)
+        return serve_logo('group', id, width=width, height=height,
+                default_img_path="public/images/details/icon_group_large.png")
 
     @group_action
     @ActionProtector("member", "admin")

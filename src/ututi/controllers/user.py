@@ -13,7 +13,7 @@ from pylons.i18n import _
 import ututi.lib.helpers as h
 from ututi.controllers.home import sign_in_user
 from ututi.lib.security import ActionProtector, deny
-from ututi.lib.image import serve_image
+from ututi.lib.image import serve_logo
 from ututi.lib.base import BaseController, render
 
 from ututi.model import meta, User, ContentItem, Medal
@@ -104,13 +104,5 @@ class UserController(BaseController):
         redirect(url.current(action='medals'))
 
     def logo(self, id, width=None, height=None):
-        try:
-            user = meta.Session.query(User).filter_by(id=id).one()
-        except NoResultFound:
-            abort(404)
-        else:
-            if user.logo is not None:
-                return serve_image(user.logo, width, height)
-            else:
-                stream = resource_stream("ututi", "public/images/details/icon_user.png").read()
-                return serve_image(stream, width, height)
+        return serve_logo('user', id, width=width, height=height,
+                default_img_path="public/images/details/icon_user.png")

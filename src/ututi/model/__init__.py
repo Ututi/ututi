@@ -706,7 +706,6 @@ class User(object):
             else:
                 log.info("Could not send message to uncofirmed phone number %(num)s" % dict(num=self.phone_number))
 
-
     def checkPassword(self, password):
         """Check the user's password."""
         return validate_password(self.password, password)
@@ -740,9 +739,12 @@ class User(object):
 
     @classmethod
     def get(cls, username):
-        """Get a user by his email."""
+        """Get a user by his email or id."""
         try:
-            return meta.Session.query(Email).filter_by(email=username.lower()).one().user
+            if isinstance(id, (long, int)):
+                return meta.Session.query(cls).filter_by(id=id).one()
+            else:
+                return meta.Session.query(Email).filter_by(email=username.lower()).one().user
         except NoResultFound:
             return None
 
@@ -958,6 +960,9 @@ class User(object):
         return self.emails[0].confirmed
 
     logo = logo_property()
+
+    def has_logo(self):
+        return bool(meta.Session.query(User).filter_by(id=self.id).filter(User.raw_logo != None).count())
 
     def unread_messages(self):
         return meta.Session.query(PrivateMessage).filter_by(recipient=self, is_read=False).count()
@@ -1212,7 +1217,7 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
     def get(cls, id):
         query = meta.Session.query(cls)
         try:
-            if isinstance (id, (long, int)):
+            if isinstance(id, (long, int)):
                 return query.filter_by(id=id).one()
             else:
                 return query.filter(func.lower(cls.group_id)==id.strip().lower()).one()
@@ -1230,9 +1235,6 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
                                       gmt.c.user_id == users_table.c.id))\
                                       .filter(gmt.c.group_id == self.id)\
                                       .order_by(User.last_seen.desc()).all()
-
-    def has_logo(self):
-        return bool(meta.Session.query(Group).filter_by(id=self.id).filter(Group.raw_logo != None).count())
 
     def is_subscribed(self, user):
         membership = GroupMember.get(user, self)
@@ -1409,6 +1411,9 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
 
     logo = logo_property()
 
+    def has_logo(self):
+        return bool(meta.Session.query(Group).filter_by(id=self.id).filter(Group.raw_logo != None).count())
+
     @property
     def available_size(self):
         if self.paid:
@@ -1433,7 +1438,7 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
 
     def info_dict(self):
         """Cacheable dict containing essential info about this subject."""
-        return {'has_logo': self.logo is not None,
+        return {'has_logo': self.has_logo(),
                 'group_id': self.group_id,
                 'url': self.url(),
                 'title': self.title,
@@ -1777,6 +1782,9 @@ class Tag(object):
 
     logo = logo_property()
 
+    def has_logo(self):
+        return bool(meta.Session.query(Tag).filter_by(id=self.id).filter(Tag.raw_logo != None).count())
+
 
 class PrivateMessage(ContentItem):
     """A private message from one user to another."""
@@ -1892,6 +1900,12 @@ class LocationTag(Tag):
 
     @classmethod
     def get(cls, path):
+        if isinstance(path, (long, int)):
+            tag_id = int(path)
+            try:
+                return meta.Session.query(cls).filter_by(id=tag_id).one()
+            except NoResultFound:
+                return None
 
         if isinstance(path, basestring):
             path = path.split('/')

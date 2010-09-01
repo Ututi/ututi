@@ -1,21 +1,55 @@
 import PIL
 from PIL import Image
 import StringIO
+import datetime
 
 from pylons import response
-from pylons.controllers.util import abort
+from pylons.controllers.util import abort, etag_cache
+from sqlalchemy.orm.exc import NoResultFound
+
+from ututi.lib.cache import u_cache
+from ututi.model import Group, User, LocationTag, meta
 
 
-def serve_image(image, width=None, height=None):
+def serve_logo(obj_type, obj_id, width=None, height=None, default_img_path=None):
+    img_data = prepare_logo(obj_type, obj_id, width, height, default_img_path)
+    if img_data is None:
+        abort(404)
     response.headers['Content-Disposition'] = 'inline'
+    response.headers['Content-Length'] = len(img_data)
+    response.headers['Content-Type'] = 'image/png'
+
+    # Clear the default cache headers
+    del response.headers['Cache-Control']
+    del response.headers['Pragma']
+    response.cache_expires(seconds=3600, public=True)
+    etag_cache(datetime.date.today().isoformat())
+
+    return img_data
+
+
+@u_cache(expire=3600, query_args=False, invalidate_on_startup=True)
+def prepare_logo(obj_type, obj_id, width=None, height=None, default_img_path=None):
+    obj_cls = {'group': Group, 'user': User, 'locationtag': LocationTag}[obj_type]
+    obj = obj_cls.get(obj_id)
+    if obj is None:
+        return None
+
+    if obj.has_logo():
+        return prepare_image(obj.logo, width, height)
+    elif default_img_path is not None:
+        stream = resource_stream("ututi", default_img_path).read()
+        return prepare_image(stream, width, height)
+    else:
+        return None
+
+
+def prepare_image(image, width=None, height=None):
     img = Image.open(StringIO.StringIO(image))
     if width is not None or height is not None:
         img = resize_image(img, width=width, height=height)
-
     buffer = StringIO.StringIO()
     img.save(buffer, "PNG")
-    response.headers['Content-Length'] = buffer.len
-    response.headers['Content-Type'] = 'image/png'
     return buffer.getvalue()
 
 

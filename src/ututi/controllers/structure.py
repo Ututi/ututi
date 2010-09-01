@@ -12,7 +12,7 @@ from pylons.decorators import jsonify
 from pylons.i18n import _
 
 from ututi.lib.security import ActionProtector
-from ututi.lib.image import serve_image
+from ututi.lib.image import serve_logo
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import ShortTitleValidator, validate
 from ututi.model import meta, LocationTag, SimpleTag, Tag, Region
@@ -165,11 +165,7 @@ class StructureController(BaseController):
         redirect(url(controller='structure', action='index'))
 
     def logo(self, id, width=None, height=None):
-        tag = meta.Session.query(LocationTag).filter_by(id=id).one()
-        if tag.logo is not None:
-            return serve_image(tag.logo, width, height)
-        else:
-            abort(404)
+        return serve_logo('locationtag', int(id), width=width, height=height)
 
     @validate(schema=AutoCompletionForm, post_only=False, on_get=True)
     @jsonify

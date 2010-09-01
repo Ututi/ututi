@@ -24,7 +24,7 @@ from ututi.lib.base import render
 from ututi.lib.emails import email_confirmation_request
 from ututi.lib.security import ActionProtector
 from ututi.lib.search import search_query, search_query_count
-from ututi.lib.image import serve_image
+from ututi.lib.image import serve_logo
 from ututi.lib.validators import UserPasswordValidator, UniqueEmail, LocationTagsValidator, manual_validate, PhoneNumberValidator
 from ututi.lib.forms import validate
 from ututi.lib import gg, sms
@@ -588,11 +588,8 @@ class ProfileController(SearchBaseController, UniversityListMixin):
 
     @ActionProtector("user")
     def logo(self, width=None, height=None):
-        if c.user.logo is not None:
-            return serve_image(c.user.logo, width, height)
-        else:
-            stream = resource_stream("ututi", "public/images/user_ico.png").read()
-            return serve_image(stream, width, height)
+        return serve_logo('user', c.user.id, width=width, height=height,
+                default_img_path="public/images/user_ico.png")
 
     @ActionProtector("user")
     def set_receive_email_each(self):
