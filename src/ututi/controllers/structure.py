@@ -166,7 +166,10 @@ class StructureController(BaseController):
 
     def logo(self, id, width=None, height=None):
         tag = meta.Session.query(LocationTag).filter_by(id=id).one()
-        return serve_image(tag.logo, width, height)
+        if tag.logo is not None:
+            return serve_image(tag.logo, width, height)
+        else:
+            abort(404)
 
     @validate(schema=AutoCompletionForm, post_only=False, on_get=True)
     @jsonify

@@ -7,19 +7,16 @@ from pylons.controllers.util import abort
 
 
 def serve_image(image, width=None, height=None):
-    if image is not None:
-        response.headers['Content-Disposition'] = 'inline'
-        img = Image.open(StringIO.StringIO(image))
-        if width is not None or height is not None:
-            img = resize_image(img, width=width, height=height)
+    response.headers['Content-Disposition'] = 'inline'
+    img = Image.open(StringIO.StringIO(image))
+    if width is not None or height is not None:
+        img = resize_image(img, width=width, height=height)
 
-        buffer = StringIO.StringIO()
-        img.save(buffer, "PNG")
-        response.headers['Content-Length'] = buffer.len
-        response.headers['Content-Type'] = 'image/png'
-        return buffer.getvalue()
-    else:
-        abort(404)
+    buffer = StringIO.StringIO()
+    img.save(buffer, "PNG")
+    response.headers['Content-Length'] = buffer.len
+    response.headers['Content-Type'] = 'image/png'
+    return buffer.getvalue()
 
 
 def resize_image(image, width=300, height=300):
