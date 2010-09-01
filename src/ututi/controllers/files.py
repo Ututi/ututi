@@ -30,6 +30,7 @@ log = logging.getLogger(__name__)
 
 class UndeleteForm(Schema):
     """A schema for validating file undelete forms."""
+
     allow_extra_fields = True
     parent_id = ParentIdValidator()
 
