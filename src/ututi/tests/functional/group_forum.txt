@@ -59,7 +59,7 @@ A notification to subscribed group members has been sent by email:
     <BLANKLINE>
     --
     You can find the thread online here:
-    http://localhost/group/moderators/forum/4/thread/4
+    http://localhost/group/moderators/forum/.../thread/...
     <BLANKLINE>
     The Ututi team
     <BLANKLINE>
@@ -89,7 +89,7 @@ Email notifications about the reply have also been sent:
     <BLANKLINE>
     --
     You can find the thread online here:
-    http://localhost/group/moderators/forum/4/thread/4
+    http://localhost/group/moderators/forum/.../thread/...
     <BLANKLINE>
     The Ututi team
     <BLANKLINE>
@@ -109,15 +109,15 @@ Let's go back to the topic list.
     >>> browser.getLink('Back to the topic list').click()
 
     >>> browser.printQuery('//a[@class="post-title"]')
-    <a href="/group/moderators/forum/4/thread/4" class="post-title">What's up?</a>
+    <a href="/group/moderators/forum/.../thread/..." class="post-title">What's up?</a>
 
 And all the way up to the category list:
 
     >>> browser.getLink('Back to category list').click()
 
     >>> browser.printQuery('id("mainContent")//h2/a')
-    <a href="/group/moderators/forum/4" class="grey">General</a>
-    <a class="edit-category" href="/group/moderators/forum/4/edit">Edit category</a>
+    <a href="/group/moderators/forum/..." class="grey">General</a>
+    <a class="edit-category" href="/group/moderators/forum/.../edit">Edit category</a>
 
 
 
@@ -148,7 +148,7 @@ Accept the group invitation
 We see the thread the admin has posted:
 
     >>> ubrowser.printQuery('//a[@class="post-title"]')
-    <a href="/group/moderators/forum/4/thread/4" class="post-title">What's up?</a>
+    <a href="/group/moderators/forum/.../thread/..." class="post-title">What's up?</a>
 
 Let's look into it:
 
