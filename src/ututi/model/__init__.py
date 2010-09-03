@@ -1664,7 +1664,10 @@ class Subject(ContentItem, FolderMixin, LimitedUploadMixin):
 
     def info_dict(self):
         """Cacheable dict containing essential info about this subject."""
-        return {'location': self.location.hierarchy(True),
+        return {'hierarchy': [dict(title=tag.title,
+                                   title_short=tag.title_short,
+                                   url=tag.url())
+                              for tag in self.location.hierarchy(True)],
                 'title': self.title,
                 'url': self.url(),
                 'lecturer': self.lecturer,

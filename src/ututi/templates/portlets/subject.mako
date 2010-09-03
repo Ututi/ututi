@@ -107,14 +107,13 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
                 <li${index==count_subjects-1 and " class='Dalykail-last'" or ''}>
                   <dl>
             <%
-               location = item['location']
-               length = len(location)
+               location = item['hierarchy']
             %>
 
                         <dt><a href="${item['url']}">${item['title']}</a></dt>
             %for n, tag in enumerate(location):
-              <dd class="s-line"><a class="uni" href="${tag.url()}" title="${tag.title}">${tag.title_short}</a></dd>
-              %if n != length -1:
+              <dd class="s-line"><a class="uni" href="${tag['url']}" title="${tag['title']}">${tag['title_short']}</a></dd>
+              %if n != len(location) -1:
                 <dd class="s-line">|</dd>
               %endif
             %endfor
