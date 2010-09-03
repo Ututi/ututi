@@ -864,7 +864,9 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
         meta.Session.commit()
 
     def _unwatch_subject(self, group):
-        group.watched_subjects.remove(self._getSubject())
+        subject = self._getSubject()
+        if subject in group.watched_subjects:
+            group.watched_subjects.remove(subject)
         meta.Session.commit()
 
     @group_action
