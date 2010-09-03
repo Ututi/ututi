@@ -79,8 +79,8 @@
       <img src="${url('/images/bunners/UTUTI_dovanos.png')}" alt="" />
     </a>
     %elif c.tpl_lang == 'pl':
-    <a href="http://blog.ututi.pl/praca/">
-      <img src="${url('/images/bunners/szukamy.png')}" alt="" />
+    <a href="http://blog.ututi.pl/">
+      <img src="${url('/images/bunners/wymieniaj.png')}" alt="" />
     </a>
     %endif
   </div>
