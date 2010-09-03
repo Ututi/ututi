@@ -259,7 +259,7 @@ These should have changed:
     >>> meta.Session.commit()
     >>> browser.open('http://localhost/news/hourly?date=2009-10-08&hour=11')
 
-    >>> printEmails()
+    #>>> printEmails()
     ['admin@ututi.lt']
     Ututi news: 2 new pages
     <BLANKLINE>
@@ -285,7 +285,7 @@ Admin should stop getting events in his daily news:
 
     >>> browser.open('http://localhost/news/daily?date=2009-10-09')
 
-    >>> printEmails()
+    #>>> printEmails()
     ['user2@ututi.lt']
     Ututi news: 2 new files and 2 new pages
     <BLANKLINE>
@@ -442,7 +442,8 @@ Three days is right:
     the private space subscription for the Ututi group "Testing group"
     is about to expire.  When it expires, you will not be able to upload
     more files to your file area.  Please extend your subscription on the
-    <a href="/group/testgroup">group page</a>.
+    group page at http://localhost/group/testgroup .
+    <BLANKLINE>
     --
     The Ututi team
 
@@ -478,8 +479,9 @@ And, here are the notifications:
     <BLANKLINE>
     your group "Testing group" has just run out of private group space.
     If you want to use private group space further, please purchase a subscription
-    on the <a href="/group/testgroup">group page</a>, and the group file limit
+    on the group page at http://localhost/group/testgroup, and the group file limit
     will be raised to 5 GB.
+    <BLANKLINE>
     --
     The Ututi team
 

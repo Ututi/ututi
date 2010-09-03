@@ -134,7 +134,7 @@ class NewsController(BaseController):
             user = user.send(msg)
 
     def _send_ending_period_reminder(self, group):
-        subject = _('The private space subscription for "%s" is about to expire')
+        subject = _('The private space subscription for "%s" is about to expire') % group.title
         extra_vars = dict(group=group)
         text = render('/emails/group_space_ending.mako', extra_vars=extra_vars)
         msg = EmailMessage(subject, text)
@@ -143,7 +143,7 @@ class NewsController(BaseController):
 
     def _send_out_of_space_notification(self, group):
         """Send a notification to a group that it has run out of private space."""
-        subject = _('The Ututi group "%s" has run out of private file space')
+        subject = _('The Ututi group "%s" has run out of private file space') % group.title
         extra_vars = dict(group=group)
         text = render('/emails/group_space_full.mako', extra_vars=extra_vars)
         msg = EmailMessage(subject, text)
