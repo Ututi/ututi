@@ -26,14 +26,15 @@ import ututi.lib.helpers as h
 log = logging.getLogger(__name__)
 
 @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
-def find_similar_subjects(subject):
-    """ Finds 5 similar subject to the one given. """
+def find_similar_subjects(subject, n=5):
+    """Find 5 similar subjects to the one given."""
     def filter_out(query):
         return query.filter(SearchItem.content_item_id != subject.id)
-    results = search(text=subject.title, obj_type='subject', disjunctive=False, limit=5, extra=filter_out)
+    results = search(text=subject.title, obj_type='subject', disjunctive=False, limit=n, extra=filter_out)
     if not results:
         results = search(text=subject.title, obj_type='subject', tags=subject.location.hierarchy(), disjunctive=True, limit=5, extra=filter_out, rank_cutoff=0.1)
     return [item.object.info_dict() for item in results]
+
 
 def subject_action(method):
     def _subject_action(self, id, tags):
