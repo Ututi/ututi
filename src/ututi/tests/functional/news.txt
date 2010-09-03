@@ -259,7 +259,7 @@ These should have changed:
     >>> meta.Session.commit()
     >>> browser.open('http://localhost/news/hourly?date=2009-10-08&hour=11')
 
-    #>>> printEmails()
+    >>> printEmails()
     ['admin@ututi.lt']
     Ututi news: 2 new pages
     <BLANKLINE>
@@ -285,7 +285,7 @@ Admin should stop getting events in his daily news:
 
     >>> browser.open('http://localhost/news/daily?date=2009-10-09')
 
-    #>>> printEmails()
+    >>> printEmails()
     ['user2@ututi.lt']
     Ututi news: 2 new files and 2 new pages
     <BLANKLINE>
