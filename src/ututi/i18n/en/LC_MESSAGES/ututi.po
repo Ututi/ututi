@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-09-03 11:04+0300\n"
+"PO-Revision-Date: 2010-09-06 15:24+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -1027,6 +1027,9 @@ msgid "search_"
 msgstr ""
 
 msgid "Groups"
+msgstr ""
+
+msgid "All groups"
 msgstr ""
 
 msgid "Inbox"
@@ -2664,9 +2667,6 @@ msgstr[1] ""
 msgid "There are no groups yet."
 msgstr ""
 
-msgid "All groups"
-msgstr ""
-
 msgid "Subject information"
 msgstr ""
 
@@ -3277,27 +3277,6 @@ msgstr ""
 msgid ""
 "Subject has been deleted, it will soon disappear from your watched "
 "subjects list."
-msgstr ""
-
-msgid ""
-"A subject page is a place for all information related to a particular "
-"course."
-msgstr ""
-
-msgid ""
-"Collecting course notes in Word? Writing things down on a computer during"
-" lectures? You can store your notes here, where they can be read and "
-"edited by your classmates."
-msgstr ""
-
-msgid "Create wiki document"
-msgstr ""
-
-msgid ""
-"You may upload course notes, sample tasks and solutions, coursework "
-"examples. You can also upload <strong>very</strong> large files (do not "
-"abuse this feature though, the moderators will promptly delete any "
-"inappropriate material)."
 msgstr ""
 
 msgid "The subject's description is empty."
