@@ -323,7 +323,7 @@ class HomeController(UniversityListMixin):
 
         user = User(fullname, password)
         user.emails = [Email(email)]
-        user.accepted_terms = datetime.today()
+        user.accepted_terms = datetime.utcnow()
         #all newly registered users are marked when they agree to the terms of use
 
         meta.Session.add(user)
@@ -409,7 +409,7 @@ class HomeController(UniversityListMixin):
                 self._bind_user(user, flash=False)
                 if user.facebook_id:
                     self._bind_facebook_invitations(user)
-                user.accepted_terms = datetime.today()
+                user.accepted_terms = datetime.utcnow()
                 user.emails = [Email(c.email)]
                 user.emails[0].confirmed = True
 

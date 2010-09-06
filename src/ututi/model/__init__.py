@@ -1156,7 +1156,7 @@ class GroupCoupon(object):
 
     def active(self, user=None, group=None):
         """ Ensure that a coupon is used only once per user or per group and has not expired yet. """
-        valid = self.valid_until >= datetime.today()
+        valid = self.valid_until >= datetime.utcnow()
         if valid and user is not None:
             valid = valid and user not in self.users
         if valid and group is not None:
@@ -1173,7 +1173,7 @@ class GroupCoupon(object):
     def apply(self, group, user):
         if self.action == 'unlimitedspace':
             if self.active(user, group) and group.has_file_area:
-                end_date = group.private_files_lock_date or datetime.today()
+                end_date = group.private_files_lock_date or datetime.utcnow()
                 end_date += timedelta(days=self.day_count)
                 group.private_files_lock_date = end_date
 
@@ -1286,7 +1286,7 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
                 invitation = meta.Session.query(PendingInvitation
                         ).filter_by(email=email, group=self, active=True
                         ).one()
-                invitation.created = datetime.today()
+                invitation.created = datetime.utcnow()
             except NoResultFound:
                 invitation = PendingInvitation(email, author=author, group=self)
                 meta.Session.add(invitation)
