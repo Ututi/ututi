@@ -14,7 +14,7 @@ Pick a subject.
     >>> browser.getLink(u'Matematin\u0117 analiz\u0117'.encode('utf-8')).click()
 
 And add a page for it.
-    >>> browser.getControl('Create a wiki document').click()
+    >>> browser.getControl('Create a wiki document', index=0).click()
     >>> browser.getControl('Title').value = "How to be awesome!"
     >>> browser.getControl('Content').value = "Being Awesome is easy!"
     >>> browser.getControl('Save').click()
