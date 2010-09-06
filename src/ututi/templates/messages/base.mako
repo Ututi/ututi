@@ -14,7 +14,7 @@ ${_('Home')}
 <ul class="moduleMenu">
   <li><a href="${url(controller='profile', action='home')}">${_('Start')}<span class="edge"></span></a></li>
   <li><a href="${url(controller='profile', action='feed')}">${_("What's new?")}<span class="edge"></span></a></li>
-  <li class="current"><a href="${url(controller='messages', action='index')}">${_("Messages")}<span class="edge"></span></a></li>
+  <li class="current"><a href="${url(controller='messages', action='index')}">${_("Inbox")}<span class="edge"></span></a></li>
 </ul>
 
 ${next.body()}
