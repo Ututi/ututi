@@ -563,6 +563,54 @@ $(document).ready(function(){
   </form>
 </%def>
 
+<%def name="upload_control(obj, section_id=0)">
+
+  <input type="hidden" id="file_upload_url-${section_id}"
+         value="${obj.url(action='upload_file')}" />
+  <input type="hidden" id="create_folder_url-${section_id}"
+         value="${obj.url(action='js_create_folder')}" />
+  <input type="hidden" id="delete_folder_url-${section_id}"
+         value="${obj.url(action='js_delete_folder')}" />
+  <input type="hidden" class="id" value="${obj.id}" />
+
+  <div id="file_upload_progress-${section_id}" class="file_upload_progress">
+  </div>
+  <%
+      n = len(obj.folders)
+  %>
+  <div class="upload_control no_upload ${'' if obj.upload_status == obj.LIMIT_REACHED else 'hidden'}">
+    <table><tr>
+        <td colspan="2" style="text-align: center;">
+          ${h.button_to(_('Increase limits'), obj.url(action='pay'))}
+        </td>
+    </tr></table>
+  </div>
+  <div class="upload_control single_upload ${'' if obj.upload_status == obj.CAN_UPLOAD_SINGLE_FOLDER else 'hidden'}">
+    <div class="button"><div class="inner">
+      <%self:folder_button folder="${obj.folders[0]}" section_id="${section_id}" fid="${0}" title="${_('Upload file')}" />
+    </div></div>
+  </div>
+  <div class="upload_control file_upload upload_dropdown click2show ${'' if obj.upload_status == obj.CAN_UPLOAD else 'hidden'}">
+    <div class="click button">
+      <div class="inner">
+        ${_('upload file to...')}
+      </div>
+    </div>
+    <div class="show target_list file_upload_dropdown" id="file_upload_dropdown-${section_id}">
+      %for fid, folder in enumerate(obj.folders):
+      <%
+         cls = ''
+         if fid == 0:
+             cls = 'first'
+         if fid == n - 1:
+             cls = 'last'
+      %>
+      <%self:folder_button folder="${folder}" section_id="${section_id}" fid="${fid}" cls="${cls}"/>
+      %endfor
+    </div>
+  </div>
+</%def>
+
 <%def name="file_browser(obj, section_id=0, collapsible=False, title=None, comment=None, controls=['upload', 'folder', 'title'])">
 
 <%prebase:rounded_block class_='portletGroupFiles' id="subject_files">
@@ -586,12 +634,10 @@ $(document).ready(function(){
         <span style="font-weight: normal; font-size: 12px">(${ungettext("%(count)s file", "%(count)s files", obj.file_count) % dict(count=obj.file_count)})</span>
         <span class="cont"></span>
         %if 'size' in controls:
-            <div style="float: right; margin-top: -10px; margin-right: 8px">
-          %if 'size' in controls:
-            ${free_space_indicator(obj)}
-            <br />
-            ${free_space_text(obj)}
-          %endif
+          <div style="float: right; margin-top: -10px; margin-right: 8px">
+          ${free_space_indicator(obj)}
+          <br />
+          ${free_space_text(obj)}
         </div>
         %endif
         %if 'unlimited' in controls:
@@ -610,58 +656,15 @@ $(document).ready(function(){
       %endif
 
       %if 'size' in controls:
-      <input type="hidden" id="file_size_url-${section_id}"
-             value="${obj.url(action='file_info')}" />
-      <input type="hidden" id="upload_status_url-${section_id}"
-             value="${obj.url(action='upload_status')}" />
-
+        <input type="hidden" id="file_size_url-${section_id}"
+               value="${obj.url(action='file_info')}" />
+        <input type="hidden" id="upload_status_url-${section_id}"
+               value="${obj.url(action='upload_status')}" />
       %endif
-      <input type="hidden" id="file_upload_url-${section_id}"
-             value="${obj.url(action='upload_file')}" />
-      <input type="hidden" id="create_folder_url-${section_id}"
-             value="${obj.url(action='js_create_folder')}" />
-      <input type="hidden" id="delete_folder_url-${section_id}"
-             value="${obj.url(action='js_delete_folder')}" />
-      <input type="hidden" class="id" value="${obj.id}" />
       %if c.user:
       <div class="controls">
         %if 'upload' in controls:
-        <div id="file_upload_progress-${section_id}" class="file_upload_progress">
-        </div>
-        <%
-            n = len(obj.folders)
-        %>
-        <div class="upload_control no_upload ${'' if obj.upload_status == obj.LIMIT_REACHED else 'hidden'}">
-          <table><tr>
-              <td colspan="2" style="text-align: center;">
-                ${h.button_to(_('Increase limits'), obj.url(action='pay'))}
-              </td>
-          </tr></table>
-        </div>
-        <div class="upload_control single_upload ${'' if obj.upload_status == obj.CAN_UPLOAD_SINGLE_FOLDER else 'hidden'}">
-          <div class="button"><div class="inner">
-            <%self:folder_button folder="${obj.folders[0]}" section_id="${section_id}" fid="${0}" title="${_('Upload file')}" />
-          </div></div>
-        </div>
-        <div class="upload_control file_upload upload_dropdown click2show ${'' if obj.upload_status == obj.CAN_UPLOAD else 'hidden'}">
-          <div class="click button">
-            <div class="inner">
-              ${_('upload file to...')}
-            </div>
-          </div>
-          <div class="show target_list file_upload_dropdown" id="file_upload_dropdown-${section_id}">
-            %for fid, folder in enumerate(obj.folders):
-            <%
-               cls = ''
-               if fid == 0:
-                   cls = 'first'
-               if fid == n - 1:
-                   cls = 'last'
-            %>
-            <%self:folder_button folder="${folder}" section_id="${section_id}" fid="${fid}" cls="${cls}"/>
-            %endfor
-          </div>
-        </div>
+          ${upload_control(obj, section_id=section_id)}
         %endif
 
         %if 'folder' in controls:

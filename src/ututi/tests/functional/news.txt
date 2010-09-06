@@ -93,14 +93,14 @@ Let's look at the emails:
 
     >>> browser2.open(browser.url)
 
-    >>> browser2.getControl('Create a wiki document').click()
+    >>> browser2.getControl('Create a wiki document', index=0).click()
     >>> browser2.getControl('Title').value = "How to be awesome!"
     >>> browser2.getControl('Content').value = "Being Awesome is easy!"
     >>> browser2.getControl('Save').click()
 
     >>> browser3.open(browser.url)
 
-    >>> browser3.getControl('Create a wiki document').click()
+    >>> browser3.getControl('Create a wiki document', index=0).click()
     >>> browser3.getControl('Title').value = "How to be more awesome!"
     >>> browser3.getControl('Content').value = "Being more Awesome is easy too!"
     >>> browser3.getControl('Save').click()

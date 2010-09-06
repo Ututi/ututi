@@ -483,11 +483,42 @@ ul#links-messages  {
     list-style: none;
     display: block;
 }
-#links-messages ul li{
+#links-messages ul li {
     background: url('img/icons/search-type.png') repeat-x bottom center;
 }
-#links-messages ul li.active{
+#links-messages ul li.active {
     background: url('img/icons/search-type-active.png') repeat-x bottom center;
+}
+
+.subject-intro-block {
+    padding-left: 12px;
+    padding-top: 1px;
+}
+
+.subject-intro-block h2 {
+    color: #666;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+ul.subject-intro-message {
+    list-style: none;
+    margin-top: 15px;
+}
+
+ul.subject-intro-message li {
+    background: url('img/icons/tick_big.png') no-repeat 2px 11px;
+    padding: 10px 0 5px 25px;
+    margin:0 0 0 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+ul.subject-intro-message span.heading {
+    color: #D45500;
+    font-weight: bold;
 }
 
 #SearchResults .grupes-links-list, #SearchResults .grupes-links-list-dalykai,
