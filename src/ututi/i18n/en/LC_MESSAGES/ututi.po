@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-09-06 15:24+0300\n"
+"PO-Revision-Date: 2010-09-06 17:45+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -3161,9 +3161,6 @@ msgstr ""
 msgid "Your e-mail (optional)"
 msgstr ""
 
-msgid "unlimited"
-msgstr ""
-
 msgid "Increase limits"
 msgstr ""
 
@@ -3171,6 +3168,9 @@ msgid "Upload file"
 msgstr ""
 
 msgid "upload file to..."
+msgstr ""
+
+msgid "unlimited"
 msgstr ""
 
 msgid "New folder:"
@@ -3279,7 +3279,51 @@ msgid ""
 "subjects list."
 msgstr ""
 
+msgid ""
+"A subject page is a place for all information related to a particular "
+"course."
+msgstr ""
+
+msgid ""
+"Collecting course notes in Word? Writing things down on a computer during"
+" lectures? You can store your notes here, where they can be read and "
+"edited by your classmates."
+msgstr ""
+
+msgid "Create a wiki document"
+msgstr ""
+
+msgid ""
+"You may upload course notes, sample tasks and solutions, coursework "
+"examples. You can also upload <strong>very</strong> large files (do not "
+"abuse this feature though, the moderators will promptly delete any "
+"inappropriate material)."
+msgstr ""
+
+msgid "Upload files"
+msgstr ""
+
 msgid "The subject's description is empty."
+msgstr ""
+
+msgid ""
+"You may upload course notes, solutions, examples, and everything else "
+"that does not violate copyright."
+msgstr ""
+
+msgid ""
+"Ututi files are associated with a specific course at a specific "
+"university, so they are much easier to find."
+msgstr ""
+
+msgid ""
+"Files may be uploaded and downloaded by anyone, so they are easier to "
+"share between all students taking a given course."
+msgstr ""
+
+msgid ""
+"You can upload <strong>very large</strong> files, so you do not need to "
+"worry about available space or delete old files to upload new ones."
 msgstr ""
 
 msgid "Subject files"
@@ -3288,10 +3332,16 @@ msgstr ""
 msgid "Subject's Wiki Pages"
 msgstr ""
 
-msgid "Create a wiki document"
+msgid "The subject has no pages yet - create one!"
 msgstr ""
 
-msgid "The subject has no pages yet - create one!"
+msgid "Shared course notes"
+msgstr ""
+
+msgid "Personal course notes written down during a lecture"
+msgstr ""
+
+msgid "Any text that you want to collaborate on with your classmates"
 msgstr ""
 
 msgid "Member information"
