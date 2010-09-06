@@ -259,6 +259,9 @@ These should have changed:
     >>> meta.Session.commit()
     >>> browser.open('http://localhost/news/hourly?date=2009-10-08&hour=11')
 
+XXX Uncomment these tests and fix failures.  FWIW, the test started failing
+after commit 5d21e3cdb91863d7843dfc80cd6dd72284dd931d.
+
     ##>>> printEmails()
     ['admin@ututi.lt']
     Ututi news: 2 new pages
