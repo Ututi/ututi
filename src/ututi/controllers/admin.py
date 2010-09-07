@@ -161,6 +161,8 @@ class AdminController(BaseController):
             func.sum(File.filesize).label('downloads_size'))\
             .filter(FileDownload.download_time < to_time)\
             .filter(FileDownload.download_time >= from_time)\
+            .filter(FileDownload.range_start==None)\
+            .filter(FileDownload.range_end==None).count()\
             .outerjoin((File, File.id == FileDownload.file_id))\
             .group_by(FileDownload.user_id).subquery()
 
