@@ -190,7 +190,7 @@ class ForumController(BaseController):
                          id=c.group_id))
         return htmlfill.render(self._edit_category_form(),
                                defaults={'title': c.category.title,
-                                         'description': c.category.description.decode('utf8')})
+                                         'description': c.category.description})
 
     @category_action
     @protect_view

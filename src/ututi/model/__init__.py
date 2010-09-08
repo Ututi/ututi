@@ -128,6 +128,8 @@ def setup_orm(engine):
 
     global forum_categories_table
     forum_categories_table = Table("forum_categories", meta.metadata,
+                         Column('title', Unicode(assert_unicode=True)),
+                         Column('description', Unicode(assert_unicode=True)),
                          autoload=True,
                          autoload_with=engine)
 
