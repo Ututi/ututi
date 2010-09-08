@@ -53,9 +53,10 @@ class EmailMessage(Message):
             if isinstance(recipient, basestring):
                 try:
                     EmailValidator.to_python(recipient)
+                    recipient.encode('ascii')
                     send_email(self.sender, recipient, self.subject, self.text,
                                  html_body=self.html)
-                except Invalid:
+                except (Invalid, UnicodeEncodeError):
                     log.debug("Invalid email %(email)s" % dict(email=recipient))
             else:
                 Message.send(self,recipient=recipient)

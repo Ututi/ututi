@@ -1064,6 +1064,7 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
             for email in filter(bool, line.split(',')):
                 try:
                     validators.Email.to_python(email)
+                    email.encode('ascii')
                     user = User.get(email)
                     if user is not None and self._check_handshakes(group, user) == 'request':
                         group.add_member(user)
@@ -1072,7 +1073,7 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
                     else:
                         count = count + 1
                         group.invite_user(email, c.user)
-                except Invalid:
+                except (Invalid, UnicodeEncodeError):
                     failed.append(email)
         if count > 0:
             h.flash(_("Users invited."))
