@@ -49,26 +49,26 @@
 </script>
 %endif
 
-<% blank_subject = not c.subject.n_files() and not c.subject.pages %>
+<% blank_subject = not c.subject.n_files(False) and not c.subject.pages %>
 
 %if blank_subject:
   <%self:rounded_block class_='subject-intro-block' id="subject-intro-block">
     %if c.user:
       <div class="right_arrow1" style="float: right" ><a href="${c.subject.url(action='edit')}">${_('Edit')}</a></div>
     %endif
-    <h2>${'What is a subject page?'}</h2>
+    <h2 style="margin-top: 5px">${_('What is a subject page?')}</h2>
     <p>${_('A subject page is a place for all information related to a particular course.')}</p>
 
-    <h2>${'Where do I start?'}</h2>
+    <h2>${_('Where do I start?')}</h2>
     <ul class="subject-intro-message">
       <li>
-        <span class="heading">${'Create wiki pages for a subject'}</span>
+        <span class="heading">${_('Create wiki pages for a subject')}</span>
         ${_('Collecting course notes in Word? Writing things down on a computer during lectures? You can store your notes here, where they can be read and edited by your classmates.')}
         ${h.button_to(_('Create a wiki document'), url(controller='subjectpage', action='add', id=c.subject.subject_id, tags=c.subject.location_path),
                   method='GET')}
       </li>
       <li>
-      <span class="heading">${'Upload course files'}</span>
+      <span class="heading">${_('Upload course files')}</span>
         ${_('You may upload course notes, sample tasks and solutions, coursework examples. You can also upload <strong>very</strong> large files (do not abuse this feature though, the moderators will promptly delete any inappropriate material).')|n}
       </li>
 
@@ -92,22 +92,33 @@
     %endif
   </%self:rounded_block>
 %elif not blank_subject:
-  <%self:rounded_block id="subject_description">
-    <div class="content">
-      ${_("The subject's description is empty.")}
-    </div>
+
+  <%self:rounded_block class_='subject-intro-block' id="subject-intro-block">
     %if c.user:
-      <div class="right_arrow1"><a href="${c.subject.url(action='edit')}">${_('Edit')}</a></div>
+      <div class="right_arrow1" style="float: right" ><a href="${c.subject.url(action='edit')}">${_('Edit')}</a></div>
     %endif
+    <h2 style="margin-top: 5px">${_('What is a subject page?')}</h2>
+    <p>${_('A subject page is a place for all information related to a particular course.')}</p>
+
+    <h2 style="margin-bottom: 5px">${_('Where do I start?')}</h2>
+    <ul class="subject-intro-message" style="margin-top: 5px">
+      <li>
+        <span class="heading">${_('Enter a subject description,')}</span>
+        ${_('so that others would find their way around more easily.')}
+        ${h.button_to(_('Create a subject description'), c.subject.url(action='edit'))}
+      </li>
+
+    </ul>
   </%self:rounded_block>
+
 %endif
 
-%if not c.subject.n_files() and not blank_subject:
+%if not c.subject.n_files(False) and not blank_subject:
 <%self:rounded_block class_='subject-intro-block' id="subject-intro-block-files">
-  <h2 style="padding-top: 10px">${'Upload study material'}</h2>
+  <h2 style="margin-top: 5px">${_('Upload study material')}</h2>
   <p>${_('You may upload course notes, solutions, examples, and everything else that does not violate copyright.')}</p>
 
-  <h2>${'Why is Ututi file storage superior to others?'}</h2>
+  <h2>${_('Why is Ututi file storage superior to others?')}</h2>
   <ul class="subject-intro-message">
     <li>
       ${_('Ututi files are associated with a specific course at a specific university, so they are much easier to find.')}
@@ -124,7 +135,7 @@
 </%self:rounded_block>
 %endif
 
-<div id="file-browser" ${"style='display: none'" if not c.subject.n_files() else ''}>
+<div id="file-browser" ${"style='display: none'" if not c.subject.n_files(False) else ''}>
   <%files:file_browser obj="${c.subject}" title="${_('Subject files')}" controls="['upload', 'folder']" />
 </div>
 
@@ -178,14 +189,14 @@
 
 %else:
 
-<div id="page-intro" ${"style='display: none'" if not c.subject.n_pages() else ''}>
+    <div id="page-intro" ${"style='display: none'" if blank_subject else ''}>
 
   <%self:rounded_block class_='subject-intro-block' id="subject-intro-block-pages">
-    <h2>${'Create wiki documents'}</h2>
+    <h2 style="margin-top: 5px">${_('Create wiki documents')}</h2>
     <p>
       ${_('Collecting course notes in Word? Writing things down on a computer during lectures? You can store your notes here, where they can be read and edited by your classmates.')}
     </p>
-    <h2>${'What is a wiki document?'}</h2>
+    <h2>${_('What is a wiki document?')}</h2>
     <p>
       ${_('Collecting course notes in Word? Writing things down on a computer during lectures? You can store your notes here, where they can be read and edited by your classmates.')}
     </p>

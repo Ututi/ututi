@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-09-06 17:45+0300\n"
+"PO-Revision-Date: 2010-09-08 11:22+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -3580,12 +3580,21 @@ msgid ""
 "subjects list."
 msgstr "Dalykas buvo ištrintas. Artimiausiu metu jis dings iš Jūsų įvykių sąrašo."
 
+msgid "What is a subject page?"
+msgstr "Kas yra dalyko puslapis?"
+
 msgid ""
 "A subject page is a place for all information related to a particular "
 "course."
 msgstr ""
 "Dalyko puslapis - tai vieta visai informacijai, susijusiai su tam tikru "
 "kursu."
+
+msgid "Where do I start?"
+msgstr "Kur pradėti?"
+
+msgid "Create wiki pages for a subject"
+msgstr "Kurti wiki puslapius dalykui"
 
 msgid ""
 "Collecting course notes in Word? Writing things down on a computer during"
@@ -3599,6 +3608,9 @@ msgstr ""
 
 msgid "Create a wiki document"
 msgstr "Sukurk wiki dokumentą"
+
+msgid "Upload course files"
+msgstr "Siųsti dalyko failus"
 
 msgid ""
 "You may upload course notes, sample tasks and solutions, coursework "
@@ -3614,8 +3626,17 @@ msgstr ""
 msgid "Upload files"
 msgstr "Kelk studijų failus"
 
-msgid "The subject's description is empty."
-msgstr "Dalyko aprašymas tuščias."
+msgid "Enter a subject description,"
+msgstr "Įveskite dalyko aprašymą,"
+
+msgid "so that others would find their way around more easily."
+msgstr "kad kitiems būtų lengviau susigaudyti."
+
+msgid "Create a subject description"
+msgstr "Sukurkite dalyko aprašymą"
+
+msgid "Upload study material"
+msgstr "Siųsti dalyko failus"
 
 msgid ""
 "You may upload course notes, solutions, examples, and everything else "
@@ -3623,6 +3644,9 @@ msgid ""
 msgstr ""
 "Galite siųsti konspektus, sprendimus, pavyzdžius ir visa kita, kas "
 "nepažeidžia autorinių teisių."
+
+msgid "Why is Ututi file storage superior to others?"
+msgstr "Kuo Ututi failų saugykla geresnė už kitas?"
 
 msgid ""
 "Ututi files are associated with a specific course at a specific "
@@ -3654,6 +3678,12 @@ msgstr "Dalyko wiki puslapiai"
 
 msgid "The subject has no pages yet - create one!"
 msgstr "Dalykas dar neturi puslapių - sukurkite!"
+
+msgid "Create wiki documents"
+msgstr "Kurti wiki dokumentus"
+
+msgid "What is a wiki document?"
+msgstr "Kas yra wiki dokumentas?"
 
 msgid "Shared course notes"
 msgstr "Bendri konspektai"

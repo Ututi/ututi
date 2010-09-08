@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-09-06 17:45+0300\n"
+"PO-Revision-Date: 2010-09-08 11:20+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -3279,9 +3279,18 @@ msgid ""
 "subjects list."
 msgstr ""
 
+msgid "What is a subject page?"
+msgstr ""
+
 msgid ""
 "A subject page is a place for all information related to a particular "
 "course."
+msgstr ""
+
+msgid "Where do I start?"
+msgstr ""
+
+msgid "Create wiki pages for a subject"
 msgstr ""
 
 msgid ""
@@ -3291,6 +3300,9 @@ msgid ""
 msgstr ""
 
 msgid "Create a wiki document"
+msgstr ""
+
+msgid "Upload course files"
 msgstr ""
 
 msgid ""
@@ -3303,12 +3315,24 @@ msgstr ""
 msgid "Upload files"
 msgstr ""
 
-msgid "The subject's description is empty."
+msgid "Enter a subject description,"
+msgstr ""
+
+msgid "so that others would find their way around more easily."
+msgstr ""
+
+msgid "Create a subject description"
+msgstr ""
+
+msgid "Upload study material"
 msgstr ""
 
 msgid ""
 "You may upload course notes, solutions, examples, and everything else "
 "that does not violate copyright."
+msgstr ""
+
+msgid "Why is Ututi file storage superior to others?"
 msgstr ""
 
 msgid ""
@@ -3333,6 +3357,12 @@ msgid "Subject's Wiki Pages"
 msgstr ""
 
 msgid "The subject has no pages yet - create one!"
+msgstr ""
+
+msgid "Create wiki documents"
+msgstr ""
+
+msgid "What is a wiki document?"
 msgstr ""
 
 msgid "Shared course notes"

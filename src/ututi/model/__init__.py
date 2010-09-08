@@ -1656,8 +1656,11 @@ class Subject(ContentItem, FolderMixin, LimitedUploadMixin):
         else:
             return self.CAN_UPLOAD
 
-    def n_files(self):
-        return meta.Session.query(File).filter_by(parent=self).count()
+    def n_files(self, include_deleted=True):
+        query = meta.Session.query(File).filter_by(parent=self)
+        if not include_deleted:
+            query = query.filter_by(deleted_on=None)
+        return query.count()
 
     def n_pages(self):
         return len(self.pages)
