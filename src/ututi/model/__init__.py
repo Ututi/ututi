@@ -2195,6 +2195,8 @@ class File(ContentItem):
 
     @classmethod
     def get(self, file_id):
+        if file_id is None:
+            return None
         try:
             file_id = int(file_id)
         except ValueError:
