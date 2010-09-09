@@ -79,7 +79,7 @@
       <img src="${url('/images/bunners/UTUTI_dovanos.png')}" alt="" />
     </a>
     %elif c.tpl_lang == 'pl':
-    <a href="http://blog.ututi.pl/">
+    <a href="http://blog.ututi.pl/2010/08/wymieniaj-notatki-na-podreczniki/">
       <img src="${url('/images/bunners/wymieniaj.png')}" alt="" />
     </a>
     %endif
