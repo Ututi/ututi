@@ -2196,6 +2196,10 @@ class File(ContentItem):
     @classmethod
     def get(self, file_id):
         try:
+            file_id = int(file_id)
+        except ValueError:
+            return None
+        try:
             return meta.Session.query(File).filter_by(id=file_id).one()
         except NoResultFound:
             return None
