@@ -3,6 +3,7 @@
 <%namespace file="/portlets/universal.mako" import="*"/>
 <%namespace file="/portlets/search.mako" import="*"/>
 <%namespace file="/portlets/banners/base.mako" import="*"/>
+<%namespace file="/portlets/facebook.mako" import="*"/>
 
 <%def name="user_sidebar(exclude=[])">
 <div id="sidebar">
@@ -19,9 +20,7 @@
   %if not 'recommend' in exclude:
   ${user_recommend_portlet()}
   %endif
-  %if not 'blog' in exclude:
-  ${blog_portlet()}
-  %endif
+  ${facebook_likebox_portlet()}
   ${user_support_portlet()}
 </div>
 </%def>

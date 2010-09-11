@@ -1,11 +1,11 @@
 <%inherit file="/ubase-sidebar.mako" />
 <%namespace file="/widgets/tags.mako" import="*"/>
-<%namespace file="/portlets/user.mako" import="*"/>
+<%namespace file="/portlets/facebook.mako" import="*"/>
 
 <%def name="body_class()">anonymous_index</%def>
 
 <%def name="portlets()">
-  ${blog_portlet()}
+  ${facebook_likebox_portlet()}
 </%def>
 
 <%def name="title()">

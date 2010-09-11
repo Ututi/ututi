@@ -1,5 +1,5 @@
 <%inherit file="/ubase-sidebar.mako" />
-<%namespace file="/portlets/user.mako" import="*"/>
+<%namespace file="/portlets/facebook.mako" import="*"/>
 <%namespace file="/anonymous_index/en.mako" import="universities_section"/>
 <%namespace file="/search/index.mako" import="search_form"/>
 
@@ -19,7 +19,7 @@
 </%def>
 
 <%def name="portlets()">
-  ${blog_portlet()}
+  ${facebook_likebox_portlet()}
 </%def>
 
 ${search_form(c.text, c.obj_type, c.tags, parts=['text'], target=url(controller='search', action='index'))}
