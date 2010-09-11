@@ -76,15 +76,16 @@ The users should get emails:
     Subject: Ututi group invitation
     <BLANKLINE>
     Hi,
+    <BLANKLINE>
     Your friend Adminas Adminovix is using Ututi.lt, a portal for students, and
-    wants to invite you to a group Test group < http://localhost/group/test >.  In Ututi
-    you can find coursework, share files with other members of the group
-    and use the group forums.
+    wants to invite you to a group Test group http://localhost/group/test.  
+    In Ututi you can find coursework, share files with other members of 
+    the group and use the group forums.
     <BLANKLINE>
     Since you do not appear to be a Ututi user at the moment, to become a
     member of this group, you need to register first.
     <BLANKLINE>
-    You may register by following this link: < http://localhost/register/... >
+    You may register by following this link: http://localhost/register/...
     <BLANKLINE>
     --
     The Ututi team
@@ -182,15 +183,16 @@ And we are redirected to the group that invited us.
     Subject: Ututi group invitation
     <BLANKLINE>
     Hi,
+    <BLANKLINE>
     Your friend Jonas Petraitis Petrauskas is using Ututi.lt, a portal for students, and
-    wants to invite you to a group Test group < http://localhost/group/test >.  In Ututi
-    you can find coursework, share files with other members of the group
-    and use the group forums.
+    wants to invite you to a group Test group (http://localhost/group/test).  
+    In Ututi you can find coursework, share files with other members of 
+    the group and use the group forums.
     <BLANKLINE>
     Since you do not appear to be a Ututi user at the moment, to become a
     member of this group, you need to register first.
     <BLANKLINE>
-    You may register by following this link: < http://localhost/register/... >
+    You may register by following this link: http://localhost/register/...
     <BLANKLINE>
     --
     The Ututi team

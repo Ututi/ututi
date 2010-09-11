@@ -94,15 +94,16 @@ This user is not a member, so he gets a more verbose email.
     Subject: Ututi group invitation
     <BLANKLINE>
     Hi,
+    <BLANKLINE>
     Your friend Jonas Petraitis Petrauskas is using Ututi.lt, a portal for students, and
-    wants to invite you to a group Test group < http://localhost/group/test >.  In Ututi
-    you can find coursework, share files with other members of the group
-    and use the group forums.
+    wants to invite you to a group Test group (http://localhost/group/test).  
+    In Ututi you can find coursework, share files with other members of 
+    the group and use the group forums.
     <BLANKLINE>
     Since you do not appear to be a Ututi user at the moment, to become a
     member of this group, you need to register first.
     <BLANKLINE>
-    You may register by following this link: < http://localhost/register/... >
+    You may register by following this link: http://localhost/register/...
     <BLANKLINE>
     --
     The Ututi team
