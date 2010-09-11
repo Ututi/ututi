@@ -196,11 +196,7 @@
     <p>
       ${_('Collecting course notes in Word? Writing things down on a computer during lectures? You can store your notes here, where they can be read and edited by your classmates.')}
     </p>
-    <h2>${_('What is a wiki document?')}</h2>
-    <p>
-      ${_('Collecting course notes in Word? Writing things down on a computer during lectures? You can store your notes here, where they can be read and edited by your classmates.')}
-    </p>
-
+    <h2>${_('What can be a wiki document?')}</h2>
     <ul class="subject-intro-message">
       <li>${_('Shared course notes')}</li>
       <li>${_('Personal course notes written down during a lecture')}</li>
