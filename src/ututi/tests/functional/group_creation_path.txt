@@ -78,7 +78,7 @@ The users should get emails:
     Hi,
     <BLANKLINE>
     Your friend Adminas Adminovix is using Ututi.lt, a portal for students, and
-    wants to invite you to a group Test group http://localhost/group/test.  
+    wants to invite you to a group Test group (http://localhost/group/test).  
     In Ututi you can find coursework, share files with other members of 
     the group and use the group forums.
     <BLANKLINE>
