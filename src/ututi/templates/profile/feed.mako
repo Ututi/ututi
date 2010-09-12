@@ -9,7 +9,6 @@
   ${_("What's new?")}
 </%def>
 
-
 <div class="tip">
 ${_('This is a list of all the recent events in the subjects you are watching and the groups you belong to.')}
 </div>
@@ -17,8 +16,8 @@ ${_('This is a list of all the recent events in the subjects you are watching an
 <ul id="event_list">
 % for event in c.events:
 <li>
-  % if event.when() >= c.user.last_seen_feed.date().isoformat():
-     <strong>${event.render()|n} <span class="event_time">(${event.when()})</span></stong>
+  % if event.created >= c.user.last_seen_feed:
+     <strong>${event.render()|n} <span class="event_time">(${event.when()})</span></strong>
   % else:
      ${event.render()|n} <span class="event_time">(${event.when()})</span>
   % endif
