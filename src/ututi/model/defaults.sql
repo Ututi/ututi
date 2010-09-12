@@ -6,6 +6,7 @@ create table users (
        site_url varchar(200) default null,
        description text default null,
        last_seen timestamp not null default (now() at time zone 'UTC'),
+       last_seen_feed timestamp not null default (now() at time zone 'UTC'),
        recovery_key varchar(10) default null,
        logo bytea default null,
        accepted_terms timestamp default null,

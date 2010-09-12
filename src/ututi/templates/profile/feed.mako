@@ -13,10 +13,15 @@
 <div class="tip">
 ${_('This is a list of all the recent events in the subjects you are watching and the groups you belong to.')}
 </div>
+
 <ul id="event_list">
 % for event in c.events:
 <li>
-  ${event.render()|n} <span class="event_time">(${event.when()})</span>
+  % if event.when() >= c.user.last_seen_feed.date().isoformat():
+     <strong>${event.render()|n} <span class="event_time">(${event.when()})</span></stong>
+  % else:
+     ${event.render()|n} <span class="event_time">(${event.when()})</span>
+  % endif
 </li>
 % endfor
 </ul>

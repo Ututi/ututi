@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 import logging
 import facebook
 
@@ -253,7 +253,14 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             .limit(20).all()
 
         c.action = 'feed'
-        return render('/profile/feed.mako')
+
+        result = render('/profile/feed.mako')
+
+        '''Register new newsfeed visit.'''
+        c.user.last_seen_feed = datetime.utcnow()
+        meta.Session.commit()
+
+        return result
 
     def _edit_form(self, defaults=None):
         return render('profile/edit.mako')
