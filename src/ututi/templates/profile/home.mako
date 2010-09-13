@@ -410,3 +410,34 @@ ${group_list()}
   </div>
   %endfor
 </%def>
+
+% if c.fb_random_post:
+  <script type="text/javascript">
+  //<![CDATA[
+
+  $(document).ready(function() {
+FB.ui(
+   {
+     method: 'stream.publish',
+     message: '${c.fb_random_post}',
+     attachment: {
+       name: 'Ututi - your university online',
+//       caption: 'The Facebook Connect JavaScript SDK',
+       description: (
+         '${_('Ututi is Your university online. Here You and Your class mates can create your group online, use the mailing list for communication and the file storage for sharing information.')}'
+       ),
+       href: '${url('/', qualified=True)}'
+     },
+     action_links: [
+       { text: 'Labas rytas', href: 'ututi.lt' }
+     ],
+     user_message_prompt: '${_('Share your thoughts about Ututi')}'
+   },
+   function(response) {
+   // We don't need any response messages
+   }
+ );
+});
+  //]]>
+  </script>
+% endif

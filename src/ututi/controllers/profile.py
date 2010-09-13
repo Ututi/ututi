@@ -1,6 +1,7 @@
 from datetime import date, datetime
 import logging
 import facebook
+import random
 
 from pkg_resources import resource_stream
 
@@ -518,6 +519,15 @@ class ProfileController(SearchBaseController, UniversityListMixin):
 
     @ActionProtector("user")
     def register_welcome(self):
+        if request.params.get('fb'):
+            FB_POST_MESSAGES = [_('I like it'),
+                                _('I joined too ;)'),
+                                _('Nice tool for students.'),
+                                _('Maybe You will also find it useful'),
+                                _('I found my University on Ututi ;)'),
+                                _('Where are your notes?')]
+            c.fb_random_post = random.choice(FB_POST_MESSAGES)
+
         return render('profile/home.mako')
 
     @validate(schema=SearchSubmit, form='test', post_only = False, on_get = True)
