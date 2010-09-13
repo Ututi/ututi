@@ -417,10 +417,12 @@ class HomeController(UniversityListMixin):
                     redirect(url(controller='group', action='home',
                                  id=invitation.group.group_id))
 
-            fb = bool(user.facebook_id)
+            kwargs = dict()
+            if user.facebook_id:
+                kwargs['fb'] = True
 
             redirect(c.came_from or url(controller='profile',
-                                        action='register_welcome', fb=fb))
+                                        action='register_welcome', **kwargs))
 
         # Render form: suggested name, suggested email, agree with conditions
         defaults = dict(fullname=session.get('confirmed_fullname'),
