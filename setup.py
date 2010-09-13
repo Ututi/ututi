@@ -27,6 +27,7 @@ setup(
         "trans",
         "translate-toolkit",
         "python-openid",
+        "pygeoip",
     ],
     package_dir={'': 'src'},
     packages=find_packages('src'),

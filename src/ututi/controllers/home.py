@@ -32,7 +32,7 @@ import ututi.lib.helpers as h
 from ututi.lib import gg
 from ututi.lib.emails import email_confirmation_request, email_password_reset
 from ututi.lib.messaging import EmailMessage
-from ututi.lib.security import ActionProtector, sign_in_user
+from ututi.lib.security import ActionProtector, sign_in_user, set_geolocation
 from ututi.lib.validators import validate, UniqueEmail, LocationTagsValidator, PhoneNumberValidator
 from ututi.model import meta, User, Region, Email, PendingInvitation, LocationTag, Payment, get_supporters
 from ututi.model import UserSubjectMonitoring, GroupSubjectMonitoring, Subject, Group, SearchItem
@@ -233,6 +233,8 @@ class HomeController(UniversityListMixin):
 
         c.locations = meta.Session.query(Region, func.count(User.id)).filter(LocationTag.region_id == Region.id).filter(User.location_id == LocationTag.id).group_by(Region).all()
 
+        c.geo_locations = meta.Session.query(User.location_city, func.count(User.id)).group_by(User.location_city).all()
+
         return render('/statistics.mako')
 
     def terms(self):
@@ -284,6 +286,10 @@ class HomeController(UniversityListMixin):
             c.message = _('You seem to have entered your username and password wrong, please try again!')
 
             if user is not None:
+                # Adding user location by IP
+                set_geolocation(email)
+
+                # Loging in
                 sign_in_user(email, long_session=remember)
                 redirect(str(destination))
 
@@ -530,6 +536,9 @@ class HomeController(UniversityListMixin):
         elif facebook_id:
             user = User.get_byfbid(facebook_id)
         if user is not None:
+            # Adding user location by IP
+            set_geolocation(user.email.email)
+
             # Existing user, log him in and proceed.
             if facebook_id and not user.logo:
                 user.update_logo_from_facebook()
@@ -748,6 +757,7 @@ class HomeController(UniversityListMixin):
             c.login_error = _('Wrong username or password!')
 
             if user is not None:
+                set_geolocation(email)
                 sign_in_user(email)
                 redirect(c.came_from or url(controller='profile', action='home'))
 
