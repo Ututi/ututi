@@ -34,7 +34,7 @@ from ututi.lib.emails import email_confirmation_request, email_password_reset
 from ututi.lib.messaging import EmailMessage
 from ututi.lib.security import ActionProtector, sign_in_user
 from ututi.lib.validators import validate, UniqueEmail, LocationTagsValidator, PhoneNumberValidator
-from ututi.model import meta, User, Email, PendingInvitation, LocationTag, Payment, get_supporters
+from ututi.model import meta, User, Region, Email, PendingInvitation, LocationTag, Payment, get_supporters
 from ututi.model import UserSubjectMonitoring, GroupSubjectMonitoring, Subject, Group, SearchItem
 
 log = logging.getLogger(__name__)
@@ -228,22 +228,10 @@ class HomeController(UniversityListMixin):
     def advertising(self):
         return render_lang('/advertising.mako')
 
+    @ActionProtector("marketingist")
     def statistics(self):
-        c.most_watched_by_user = meta.Session.query(UserSubjectMonitoring.subject_id, func.count(UserSubjectMonitoring.user_id))\
-            .group_by(UserSubjectMonitoring.subject_id)\
-            .order_by(desc(func.count(UserSubjectMonitoring.user_id))).limit(20)
-        c.most_watched_by_group = meta.Session.query(GroupSubjectMonitoring.subject_id, func.count(GroupSubjectMonitoring.group_id))\
-            .group_by(GroupSubjectMonitoring.subject_id)\
-            .order_by(desc(func.count(GroupSubjectMonitoring.group_id))).limit(20)
 
-        subjects_ids, group_subjects_ids = [], []
-        for a in c.most_watched_by_user: subjects_ids.append(a.subject_id)
-        for a in c.most_watched_by_group: group_subjects_ids.append(a.subject_id)
-
-        c.subjects = meta.Session.query(Subject)\
-            .filter(Subject.id.in_(subjects_ids))
-        c.group_subjects = meta.Session.query(Subject)\
-            .filter(Subject.id.in_(group_subjects_ids))
+        c.locations = meta.Session.query(Region, func.count(User.id)).filter(LocationTag.region_id == Region.id).filter(User.location_id == LocationTag.id).group_by(Region).all()
 
         return render('/statistics.mako')
 

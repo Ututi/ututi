@@ -36,6 +36,26 @@ def sign_in_user(email, long_session=False):
 def is_root(user, context=None):
     return user is not None and user.id == 1
 
+def is_marketingist(user, context=None):
+    if user is None:
+        return False
+
+    from ututi.model import meta, File, LocationTag, Group, GroupMember
+
+    if isinstance(context, File):
+        context = context.parent
+
+    moderator_tags = meta.Session.query(LocationTag
+            ).join(Group
+            ).join(GroupMember
+            ).filter(Group.moderators == True
+            ).filter(GroupMember.user == user
+            ).all()
+
+    if moderator_tags: 
+        return True
+
+    return False
 
 def is_moderator(user, context=None):
     if user is None:
@@ -103,6 +123,7 @@ def is_smallfile(user, context=None):
 
 crowd_checkers = {
     "root": is_root,
+    "marketingist": is_marketingist,
     "moderator": is_moderator,
     "admin": is_admin,
     "member": is_member,

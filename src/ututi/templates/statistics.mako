@@ -7,26 +7,11 @@
 <h1>${_('Statistics')}</h1>
 
 <div class="stats">
-  <h2>${_('Most popular subjects by users')}</h2>
 
   <ul id="subject_list">
-    %for n, subj in enumerate(c.subjects):  
+    %for region, cnt in c.locations:  
      <li>
-       <a href="${subj.url()}" class="subject-link">${subj.title}</a>
-       (${c.most_watched_by_user[n].count}  ${_('watchers')})
-     </li>
-    %endfor
-  </ul>
-</div>
-
-<div class="stats">
-  <h2>${_('Most popular subjects by groups')}</h2>
-
-  <ul id="subject_list">
-    %for n, subj in enumerate(c.group_subjects):  
-     <li>
-       <a href="${subj.url()}" class="subject-link">${subj.title}</a>
-       (${c.most_watched_by_group[n].count} ${_('watchers')})
+       ${region.title} ${cnt}
      </li>
     %endfor
   </ul>
