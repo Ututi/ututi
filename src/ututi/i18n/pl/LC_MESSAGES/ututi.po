@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-09-12 00:24+0300\n"
+"PO-Revision-Date: 2010-09-13 21:21+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -561,6 +561,24 @@ msgstr "Twój e-mail %s został potwierdzony, dziękujemy."
 msgid "Could not confirm email: invalid confirmation key."
 msgstr "E-mail nie może zostać potwierdzony: błędny kod potwierdzający"
 
+msgid "I like it"
+msgstr ""
+
+msgid "I joined too ;)"
+msgstr ""
+
+msgid "Nice tool for students."
+msgstr ""
+
+msgid "Maybe You will also find it useful"
+msgstr ""
+
+msgid "I found my University on Ututi ;)"
+msgstr ""
+
+msgid "Where are your notes?"
+msgstr ""
+
 msgid "Your university information has been updated."
 msgstr "Informacje o Twojej uczelni zostały zaktualizowane."
 
@@ -1100,9 +1118,6 @@ msgstr "Grupy"
 msgid "All groups"
 msgstr "Wszystkie grupy"
 
-msgid "Inbox"
-msgstr "Skrzynka odbiorcza"
-
 msgid "Settings"
 msgstr "Ustawienia"
 
@@ -1152,14 +1167,11 @@ msgstr "Ładuje..."
 msgid "Statistics"
 msgstr "Statystyki"
 
-msgid "Most popular subjects by users"
-msgstr "Najpopularniejsze przedmioty według użytkowników"
+msgid "Statistics by Region"
+msgstr ""
 
-msgid "watchers"
-msgstr "obserwatorzy"
-
-msgid "Most popular subjects by groups"
-msgstr "Najpopularniejsze przedmioty wedlug grup"
+msgid "Statistics by Geo location"
+msgstr ""
 
 msgid "Found out enough?"
 msgstr "Dowiedziałeś się wystarczająco?"
@@ -2605,6 +2617,9 @@ msgstr "Start"
 msgid "What's new?"
 msgstr "Najnowsze"
 
+msgid "Inbox"
+msgstr "Skrzynka odbiorcza"
+
 msgid "You can send a new message to a user from his or her public profile page."
 msgstr ""
 "Możesz wysłać nową wiadomość do użytkownika przez jego lub jej publiczną "
@@ -3264,6 +3279,15 @@ msgstr "Pliki:"
 
 msgid "Wiki pages:"
 msgstr "Wiki:"
+
+msgid ""
+"Ututi is Your university online. Here You and Your class mates can create"
+" your group online, use the mailing list for communication and the file "
+"storage for sharing information."
+msgstr ""
+
+msgid "Share your thoughts about Ututi"
+msgstr ""
 
 msgid "Very sad..."
 msgstr "Szkoda..."

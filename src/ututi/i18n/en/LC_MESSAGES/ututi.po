@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-09-12 00:24+0300\n"
+"PO-Revision-Date: 2010-09-13 21:21+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -526,6 +526,24 @@ msgstr ""
 msgid "Could not confirm email: invalid confirmation key."
 msgstr ""
 
+msgid "I like it"
+msgstr ""
+
+msgid "I joined too ;)"
+msgstr ""
+
+msgid "Nice tool for students."
+msgstr ""
+
+msgid "Maybe You will also find it useful"
+msgstr ""
+
+msgid "I found my University on Ututi ;)"
+msgstr ""
+
+msgid "Where are your notes?"
+msgstr ""
+
 msgid "Your university information has been updated."
 msgstr ""
 
@@ -1032,9 +1050,6 @@ msgstr ""
 msgid "All groups"
 msgstr ""
 
-msgid "Inbox"
-msgstr ""
-
 msgid "Settings"
 msgstr ""
 
@@ -1082,13 +1097,10 @@ msgstr ""
 msgid "Statistics"
 msgstr ""
 
-msgid "Most popular subjects by users"
+msgid "Statistics by Region"
 msgstr ""
 
-msgid "watchers"
-msgstr ""
-
-msgid "Most popular subjects by groups"
+msgid "Statistics by Geo location"
 msgstr ""
 
 msgid "Found out enough?"
@@ -2383,6 +2395,9 @@ msgstr ""
 msgid "What's new?"
 msgstr ""
 
+msgid "Inbox"
+msgstr ""
+
 msgid "You can send a new message to a user from his or her public profile page."
 msgstr ""
 
@@ -2989,6 +3004,15 @@ msgid "Files:"
 msgstr ""
 
 msgid "Wiki pages:"
+msgstr ""
+
+msgid ""
+"Ututi is Your university online. Here You and Your class mates can create"
+" your group online, use the mailing list for communication and the file "
+"storage for sharing information."
+msgstr ""
+
+msgid "Share your thoughts about Ututi"
 msgstr ""
 
 msgid "Very sad..."

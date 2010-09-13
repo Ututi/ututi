@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-09-12 00:32+0300\n"
+"PO-Revision-Date: 2010-09-13 21:26+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
@@ -492,6 +492,24 @@ msgstr "Tavo el. pašto adresas %s patvirtintas, ačiū."
 
 msgid "Could not confirm email: invalid confirmation key."
 msgstr "Nepavyko patvirtinti adreso: neteisingas patvirtinimo raktas."
+
+msgid "I like it"
+msgstr "Man patiko"
+
+msgid "I joined too ;)"
+msgstr "Išbandžiau ir aš ;)"
+
+msgid "Nice tool for students."
+msgstr "Puikus irankis studentams."
+
+msgid "Maybe You will also find it useful"
+msgstr "Gal ir jums pravers :)"
+
+msgid "I found my University on Ututi ;)"
+msgstr "Surask savo universitetą Ututyje!"
+
+msgid "Where are your notes?"
+msgstr "Kur Tavo konspektai?"
 
 msgid "Your university information has been updated."
 msgstr "Tavo universiteto informacija atnaujinta."
@@ -1000,9 +1018,6 @@ msgstr "Grupės"
 msgid "All groups"
 msgstr "Visos grupės"
 
-msgid "Inbox"
-msgstr "Žinutės"
-
 msgid "Settings"
 msgstr "Nustatymai"
 
@@ -1048,14 +1063,11 @@ msgstr "Įkeliama..."
 msgid "Statistics"
 msgstr "Statistika"
 
-msgid "Most popular subjects by users"
-msgstr "Populiariausi dalykai"
+msgid "Statistics by Region"
+msgstr "Statistika pagal regioną"
 
-msgid "watchers"
-msgstr "stebėtojai"
-
-msgid "Most popular subjects by groups"
-msgstr "Grupių dažniausiai stebimi dalykai"
+msgid "Statistics by Geo location"
+msgstr "Statistika pagal geo lokaciją (naudotojų IP)"
 
 msgid "Found out enough?"
 msgstr "Sužinojai pakankamai?"
@@ -2351,6 +2363,9 @@ msgstr "Pradėti"
 msgid "What's new?"
 msgstr "Kas naujo?"
 
+msgid "Inbox"
+msgstr "Žinutės"
+
 msgid "You can send a new message to a user from his or her public profile page."
 msgstr "Naują žinutę naudotojui galite išsiųsti iš jo viešo profilio puslapio."
 
@@ -2933,6 +2948,12 @@ msgstr "Failų: "
 
 msgid "Wiki pages:"
 msgstr "Wiki puslapių:"
+
+msgid "Ututi is Your university online. Here You and Your class mates can create your group online, use the mailing list for communication and the file storage for sharing information."
+msgstr "Ututi - tai internetinė sistema studentams, kurios tikslas - nei daug, nei mažai - pakeisti tai, kaip studentai kaupia ir dalinasi studijų medžiaga. "
+
+msgid "Share your thoughts about Ututi"
+msgstr "Pasidalinks savo mintimis apie Ututi"
 
 msgid "Very sad..."
 msgstr "Labai gaila..."
