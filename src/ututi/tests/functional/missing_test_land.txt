@@ -11,7 +11,7 @@ I am visiting them so they would get translated properly.
     >>> browser.getControl('Save').click()
     >>> browser.open('http://localhost/group/moderators/forum/new_category')
     >>> browser.open('http://localhost/tour')
-    >>> browser.open('http://localhost/statistics')
+    >>> browser.open('http://localhost/stats')
 
 Polish frontpage:
     >>> from pylons import config
