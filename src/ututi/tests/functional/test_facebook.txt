@@ -15,7 +15,7 @@ They can fill out the form and register here:
     >>> browser.getControl('Register').click()
 
     >>> browser.url
-    'http://localhost/register/welcome'
+    'http://localhost/register/welcome?fb=True'
 
 We're in!
 
