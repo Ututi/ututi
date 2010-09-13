@@ -19,7 +19,7 @@ ${_('Home')}
       	     (${unread_feed_messages})
           %endif
           <span class="edge"></span></a></li>
-  <li><a href="${url(controller='messages', action='index')}">
+  <li><a id='inbox-link' href="${url(controller='messages', action='index')}">
           <% unread_messages = c.user.unread_messages() %>
           %if unread_messages:
   	     <strong>${_("Inbox")} (${unread_messages})</strong>

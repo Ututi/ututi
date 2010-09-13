@@ -10,6 +10,7 @@ Initially the inbox is empty:
     >>> browser.printQuery("id('inbox-link')")
     <a id="inbox-link" href="/messages">
       Inbox
+      <span class="edge"></span>
     </a>
 
 Sending messages
@@ -27,14 +28,6 @@ Let's send a message:
     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
     Message sent.
 
-The message is visible in the mailbox:
-
-    >>> browser.getLink('Inbox').click()
-    >>> browser.getLink('First message').click()
-
-    >>> browser.printQuery("//div[@class='post-body']/text()")
-    First!
-
 Receiving messages
 ------------------
 
@@ -44,6 +37,7 @@ The other user should have received the message
     >>> browser2.printQuery("id('inbox-link')")
     <a id="inbox-link" href="/messages">
       <strong>Inbox (1)</strong>
+      <span class="edge"></span>
     </a>
 
     >>> browser2.getLink('Inbox (1)').click()
@@ -54,16 +48,20 @@ The other user should have received the message
 
 There are no unread messages any more:
 
+    >>> browser2.getLink('Start').click()
     >>> browser2.printQuery("id('inbox-link')")
     <a id="inbox-link" href="/messages">
       Inbox
+      <span class="edge"></span>
     </a>
 
 Replying
 --------
 
-Let's reply:
+Let's go to first message and reply:
 
+    >>> browser2.getLink('Inbox').click()
+    >>> browser2.getLink('First message').click()
     >>> browser2.getControl('Message').value = 'Second!'
     >>> browser2.getControl('Reply').click()
 
@@ -95,21 +93,25 @@ swoop.  Let's add a message:
 
 There's one unread message:
 
-    >>> browser.reload()
+    >>> browser.getLink('Start').click()
     >>> browser.printQuery("id('inbox-link')")
     <a id="inbox-link" href="/messages">
       <strong>Inbox (1)</strong>
+      <span class="edge"></span>
     </a>
 
 We can mark it as read:
 
+    >>> browser.getLink('Inbox (1)').click()
     >>> browser.getControl('Mark all as read').click()
 
 There are no unread messages now:
 
+    >>> browser.getLink('Start').click()
     >>> browser.printQuery("id('inbox-link')")
     <a id="inbox-link" href="/messages">
       Inbox
+      <span class="edge"></span>
     </a>
 
 Delete
@@ -152,6 +154,7 @@ Messages sent to self can be deleted too:
     >>> browser2.getControl('Message').value = 'Talking to myself.'
     >>> browser2.getControl('Post').click()
 
+    >>> browser2.getLink('Home').click()
     >>> browser2.getLink('Inbox').click()
     >>> browser2.printQuery("//a[@class='post-title']/text()")
     Alter ego
