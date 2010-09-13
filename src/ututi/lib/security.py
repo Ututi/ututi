@@ -1,6 +1,5 @@
 from random import Random
 import string
-import os
 
 from pylons import response, url, request, session, tmpl_context as c, config
 from pylons.controllers.util import abort
@@ -10,10 +9,7 @@ from repoze.what.predicates import NotAuthorizedError
 from repoze.what.plugins.pylonshq.protectors import ActionProtector as BaseActionProtector
 from datetime import datetime, timedelta
 
-import ututi
 from ututi.lib.cache import u_cache
-
-GEOIP_DB_PATH = os.path.join(ututi.__path__[0], '..', 'GeoIPCity.dat')
 
 def current_user():
     from ututi.model import User
@@ -27,18 +23,6 @@ def current_user():
         return None
 
     return User.get(login)
-
-def set_geolocation(email):
-    # Adding user location by IP
-    import pygeoip
-    from ututi.model import meta, User
-
-    gi = pygeoip.GeoIP(GEOIP_DB_PATH)
-    u = User.get(email)
-    user_ip = request.headers['X-Forwarded-For']
-    u.location_country = gi.record_by_addr(user_ip)['country_code']
-    u.location_city = gi.record_by_addr(user_ip)['city']
-    meta.Session.commit()
 
 def sign_in_user(email, long_session=False):
     session['login'] = email
