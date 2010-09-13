@@ -3,6 +3,7 @@ import pygeoip
 import ututi
 
 from pylons import request
+from ututi.model import meta
 
 GEOIP_DB_PATH = os.path.join(ututi.__path__[0], '..', 'GeoIPCity.dat')
 gi = pygeoip.GeoIP(GEOIP_DB_PATH)
