@@ -7,6 +7,8 @@ create table users (
        description text default null,
        last_seen timestamp not null default (now() at time zone 'UTC'),
        last_seen_feed timestamp not null default (now() at time zone 'UTC'),
+       location_country varchar(5) default null,
+       location_city varchar(30) default null,
        recovery_key varchar(10) default null,
        logo bytea default null,
        accepted_terms timestamp default null,
