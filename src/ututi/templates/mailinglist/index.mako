@@ -48,6 +48,7 @@
             </div>
             <div class="grey verysmall">${post_date}</div>
           </div>
+          <br style="clear: left;" />
         </div>
       % endfor
 

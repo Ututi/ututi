@@ -56,6 +56,7 @@
           </div>
           <div class="grey verysmall">${h.fmt_dt(message.created_on)}</div>
         </div>
+        <br style="clear: left;" />
       </div>
     % endfor
   </div>
