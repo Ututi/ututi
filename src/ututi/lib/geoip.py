@@ -12,10 +12,14 @@ gi = pygeoip.GeoIP(GEOIP_DB_PATH)
 def set_geolocation(user):
     user_ip = request.headers.get('X-Forwarded-For')
     if user_ip:
-        record = gi.record_by_addr(user_ip)
-        if (user.location_country != record['country_code']
-            or user.location_city != record['city']):
-            user.location_country = record['country_code']
-            user.location_city = record['city']
+        try:
+            record = gi.record_by_addr(user_ip)
+        except pygeoip.GeoIPError:
+            return
+        country_code = record.get('country_code')
+        city = record.get('city')
+        if user.location_country != country_code or user.location_city != city:
+            user.location_country = country_code
+            user.location_city = city
             meta.Session.commit()
 

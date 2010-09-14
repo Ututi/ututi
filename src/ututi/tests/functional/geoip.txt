@@ -16,3 +16,9 @@ User should have location city and country.
     'Vilnius'
     >>> user.location_country
     'LT'
+
+Malformed headers don't break the application:
+
+    >>> res = app.post("/login",
+    ...                params={'login': 'user@ututi.lt', 'password': 'password'},
+    ...                headers={'X-Forwarded-For': 'wtf'})
