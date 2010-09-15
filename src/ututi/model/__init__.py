@@ -1466,7 +1466,7 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
                 'hierarchy': [dict(title=tag.title,
                                    title_short=tag.title_short,
                                    url=tag.url())
-                              for tag in self.location.hierarchy(True)],
+                              for tag in self.location.hierarchy(True)] if self.location is not None else [],
                 }
 
 
