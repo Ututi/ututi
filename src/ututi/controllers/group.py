@@ -141,6 +141,9 @@ class EditGroupForm(GroupForm):
     forum_visibility = validators.OneOf(['public', 'members'])
     page_visibility = validators.OneOf(['public', 'members'])
     forum_type = validators.OneOf(['mailinglist', 'forum'])
+    location = Pipe(ForEach(validators.String(strip=True)),
+                    LocationTagsValidator(not_empty=True))
+
 
 
 class NewGroupForm(GroupForm):
@@ -971,7 +974,7 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
             if c.tags is None:
                 c.tags = self.form_result.get('tags', None).split(', ')
         else:
-            c.tags = c.group.location.hierarchy()
+            c.tags = c.group.location.hierarchy() if c.group.location is not None else []
         c.tags = ', '.join(filter(bool, c.tags))
 
         sids = [s.id for s in group.watched_subjects]
