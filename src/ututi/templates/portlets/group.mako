@@ -27,8 +27,10 @@
         <div><h2 class="grupes-portlete">${group.title}</h2></div>
         %if not c.group.forum_is_public:
         <div>
+          %if group.location:
           <a href="${group.location.url()}">${' | '.join(group.location.title_path)}</a>
           <span class="right_arrow"></span>
+          %endif
         </div>
         %else:
         <div style="width: 190px">
