@@ -1458,7 +1458,7 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
         self.ending_period_notification_sent = False
 
     def info_dict(self):
-        """Cacheable dict containing essential info about this subject."""
+        """Cacheable dict containing essential info about this group."""
         return {'has_logo': self.has_logo(),
                 'group_id': self.group_id,
                 'url': self.url(),
