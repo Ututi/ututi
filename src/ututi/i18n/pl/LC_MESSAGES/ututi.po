@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-09-14 21:19+0300\n"
+"PO-Revision-Date: 2010-09-18 02:12+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
@@ -2104,7 +2104,7 @@ msgid "What is a group page and who sees it?"
 msgstr "Czym jest strona grupy i kto ją widzi?"
 
 msgid "The group page is the face of the group. It may be public or visible only to group members, depending on configuration."
-msgstr "STrona grupy to wizytówka Twojej grupy. Może być publiczna lub dostępna wyłącznie dla jej członków, w zależności od wybranych ustwień."
+msgstr "Strona grupy to wizytówka Twojej grupy. Może być publiczna lub dostępna wyłącznie dla jej członków, w zależności od wybranych ustwień."
 
 #, python-format
 msgid "You can change visibility settings in the <a href=\"%s\">group settings</a> screen."
@@ -2306,7 +2306,7 @@ msgid "Start"
 msgstr "Start"
 
 msgid "What's new?"
-msgstr "Najnowsze"
+msgstr "Powiadomienia"
 
 msgid "Inbox"
 msgstr "Skrzynka odbiorcza"
