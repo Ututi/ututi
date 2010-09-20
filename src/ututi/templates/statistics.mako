@@ -8,10 +8,14 @@
 
 <div class="stats">
   <h2>${_('Statistics by Region')}</h2>
+  <div class="comment">
+      ${_('Here you see information how many people are added information where they are study.')}
+  </div>
+
   <ul id="subject_list">
-    %for region, cnt in c.locations:  
+    %for region, cnt in c.locations:
      <li>
-       ${region.title} ${cnt}
+       <a href="/browse?region_id=${region.id}">${region.title}</a> ${cnt}
      </li>
     %endfor
   </ul>
@@ -19,8 +23,11 @@
 
 <div class="stats">
   <h2>${_('Statistics by Geo location')}</h2>
+  <div class="comment">
+      ${_('Here you see how many people in some cities was logedin more than 2 times.')}
+  </div>
   <ul id="subject_list">
-    %for city, cnt in c.geo_locations:  
+    %for city, cnt in c.geo_locations:
      <li>
        ${city} ${cnt}
      </li>

@@ -4623,15 +4623,20 @@ div.tour_slide div.text div.join_link {
 div.stats {
   float: left;
   margin-left: 50px;
+  width: 250px;
 }
 
 div.stats h2 {
   font-size: 22px;
-  margin: 10px 0;
+  margin: 10px 0 5px 0;
 }
 
 div.stats ul {
   margin-left: 20px;
+}
+
+div.stats .comment {
+  margin-bottom: 10px;
 }
 
 /* end statistics css */
