@@ -145,8 +145,9 @@ ${parent.head_tags()}
       $('form#confirm-phone-number-form').serialize(),
       function(data, status) {
         if ((status == 'success') && (data != '')) {
+          $('#user_phone_confirm div.inner').html(data);
           $('#confirm-phone-flash-message').hide();
-          $('#user_phone_confirm').hide();
+          //$('#user_phone_confirm').hide();
         } else {
           $('#phone-confirmation-code-invalid').show();
         }
