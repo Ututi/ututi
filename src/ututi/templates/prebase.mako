@@ -150,8 +150,8 @@ ${self.anonymous_menu()}
               </a>
             </li>
           %endfor
-          <li class="action"><a href="${url(controller='search', action='index', obj_type='group')}">${_('All groups')}</a></li>
-          <li class="action"><a href="${url(controller='group', action='group_type')}">${_('Create group')}</a></li>
+          <li class="action"><a ${h.trackEvent(None, 'all_groups', 'menu')} href="${url(controller='search', action='index', obj_type='group')}">${_('All groups')}</a></li>
+          <li class="action"><a ${h.trackEvent(None, 'create_group', 'menu')} href="${url(controller='group', action='group_type')}">${_('Create group')}</a></li>
         </ul>
       </div>
     </li>

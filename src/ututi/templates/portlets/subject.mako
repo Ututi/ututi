@@ -110,7 +110,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
                location = item['hierarchy']
             %>
 
-                        <dt><a href="${item['url']}">${item['title']}</a></dt>
+                        <dt><a ${h.trackEvent(None, 'similar_subjects', 'subject','subject')} href="${item['url']}">${item['title']}</a></dt>
             %for n, tag in enumerate(location):
               <dd class="s-line"><a class="uni" href="${tag['url']}" title="${tag['title']}">${tag['title_short']}</a></dd>
               %if n != len(location) -1:

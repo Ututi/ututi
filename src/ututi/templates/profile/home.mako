@@ -182,7 +182,7 @@ ${parent.head_tags()}
     <div class="GroupFiles GroupFilesGroups">
       <h2 class="portletTitle bold">${_('Groups')}</h2>
       <span class="group-but">
-        ${h.button_to(_('create group'), url(controller='group', action='group_type'))}
+        ${h.button_to(_('create group'), url(controller='group', action='group_type'), onclick="_gaq.push(['_trackEvent', 'profile', 'groups', 'create_group']);")}
       </span>
     </div>
       %for n, group in enumerate(groups):
@@ -198,11 +198,11 @@ ${parent.head_tags()}
           </div>
           <div class="floatleft personal-data">
             <div class="anth3">
-              <a class="orange bold anth3" href="${group.url()}">${group.title}</a>
+              <a class="orange bold anth3" ${h.trackEvent(Null, 'groups', 'title', 'profile')} href="${group.url()}">${group.title}</a>
               <% n_members = h.group_members(group.id) %>
               (${ungettext("%(count)s member", "%(count)s members", n_members) % dict(count=n_members)})</div>
               <div>
-                <a class="verysmall grey" href="${url(controller='mailinglist', action='new_thread', id=group.group_id)}" title="${_('Mailing list address')}">
+                <a class="verysmall grey" ${h.trackEvent(Null, 'groups', 'mailinglist', 'profile')} href="${url(controller='mailinglist', action='new_thread', id=group.group_id)}" title="${_('Mailing list address')}">
                 ${group.group_id}@${c.mailing_list_host}
                 </a>
               </div>
@@ -214,23 +214,23 @@ ${parent.head_tags()}
         <ul class="grupes-links-list">
                 %if group.mailinglist_enabled:
           <li>
-                  <a href="${url(controller='mailinglist', action='new_thread', id=group.group_id)}" title="${_('Mailing list address')}" class="green verysmall">
+                  <a ${h.trackEvent(Null, 'groups', 'write_message', 'profile')} href="${url(controller='mailinglist', action='new_thread', id=group.group_id)}" title="${_('Mailing list address')}" class="green verysmall">
                     ${_('Write message')}
                   </a>
                 </li>
           <li>
-                  <a href="${url(controller='mailinglist', action='index', id=group.group_id)}" class="green verysmall">
+                  <a ${h.trackEvent(Null, 'groups', 'messages_or_forum', 'profile')} href="${url(controller='mailinglist', action='index', id=group.group_id)}" class="green verysmall">
                     ${_('Group messages')}
                   </a>
                 </li>
                 %else:
           <li>
-          <a href="${url(controller='forum', action='new_thread', id=group.group_id, category_id=group.forum_categories[0].id)}" class="green verysmall">
+          <a  ${h.trackEvent(Null, 'groups', 'write_message', 'profile')} href="${url(controller='forum', action='new_thread', id=group.group_id, category_id=group.forum_categories[0].id)}" class="green verysmall">
                     ${_('Write message')}
                   </a>
                 </li>
           <li>
-                  <a href="${url(controller='forum', action='categories', id=group.group_id)}" class="green verysmall">
+                  <a ${h.trackEvent(Null, 'groups', 'messages_or_forum', 'profile')} href="${url(controller='forum', action='categories', id=group.group_id)}" class="green verysmall">
                     ${_('Group forum')}
                   </a>
                 </li>
@@ -238,14 +238,14 @@ ${parent.head_tags()}
 
                 %if group.wants_to_watch_subjects:
           <li class="dalykai">
-                  <a href="${url(controller='group', action='subjects', id=group.group_id)}" class="green verysmall">
+                  <a ${h.trackEvent(Null, 'groups', 'subjects', 'profile')} href="${url(controller='group', action='subjects', id=group.group_id)}" class="green verysmall">
                     ${_('Group subjects')}
                   </a>
                 </li>
                 %endif
                 %if group.has_file_area:
           <li class="failai last">
-                  <a href="${url(controller='group', action='files', id=group.group_id)}" class="green verysmall">
+                  <a ${h.trackEvent(Null, 'groups', 'files', 'profile')} href="${url(controller='group', action='files', id=group.group_id)}" class="green verysmall">
                     ${_('Group files')}
                   </a>
                 </li>
