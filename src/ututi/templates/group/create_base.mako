@@ -1,3 +1,4 @@
+
 <%inherit file="/ubase.mako" />
 
 <%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*"/>
@@ -143,6 +144,7 @@
 </%def>
 
 <%def name="group_email_field()">
+  <input type="hidden" name="forum_type" value="mailinglist"/>
   <label for="group-id-field">
     <span class="labelText">${_("Group e-mail address")}</span>
   </label>
@@ -216,7 +218,7 @@
       <input class="address" type="text" id="group-id-field" name="id" />
       <span class="edge"></span>
     </span>
-    <span class="mailinglist-choice">@groups.ututi.lt</span>
+    <span class="mailinglist-choice">${c.mailing_list_host}</span>
   </label>
 
   <div id="group-id-check"></div>
