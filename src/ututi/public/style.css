@@ -3790,8 +3790,9 @@ input.text_button:hover {
 .location_block {
     padding-left: 36px;
     font-size: 14px;
-    margin-top: 10px;
+    margin-top: 15px;
     margin-right: 5px;
+    clear: left;
 }
 
 #location-search {
@@ -4622,7 +4623,7 @@ div.tour_slide div.text div.join_link {
 
 div.stats {
   float: left;
-  margin-left: 50px;
+  margin-left: 0px;
   width: 250px;
 }
 

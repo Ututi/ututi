@@ -27,7 +27,7 @@
   %endif
 
   <div class="title">
-    <a href="${uni['url']}" title="${uni['title']}">${h.ellipsis(uni['title'], 38)}</a>
+    <a href="${uni['url']}" title="${uni['title']}">${h.ellipsis(uni['title'], 36)}</a>
   </div>
   <div class="stats">
     <span>
