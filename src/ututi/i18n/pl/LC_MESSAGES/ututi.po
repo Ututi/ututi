@@ -1015,7 +1015,7 @@ msgid "Search text"
 msgstr "Szukaj "
 
 msgid "search_"
-msgstr "szukaj_"
+msgstr "szukaj"
 
 msgid "Groups"
 msgstr "Grupy"
