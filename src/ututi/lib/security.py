@@ -9,7 +9,9 @@ from repoze.what.predicates import NotAuthorizedError
 from repoze.what.plugins.pylonshq.protectors import ActionProtector as BaseActionProtector
 from datetime import datetime, timedelta
 
+from ututi.mode import User
 from ututi.lib.cache import u_cache
+from ututi.lib.geoip import set_geolocation
 
 def current_user():
     from ututi.model import User
@@ -25,6 +27,8 @@ def current_user():
     return User.get(login)
 
 def sign_in_user(email, long_session=False):
+    set_geolocation(User.get(email))
+
     session['login'] = email
     session['cookie_secret'] = ''.join(Random().sample(string.ascii_lowercase, 20))
     expiration_time = 3600*24*30 if long_session else None

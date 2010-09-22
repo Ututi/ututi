@@ -287,7 +287,6 @@ class HomeController(UniversityListMixin):
             c.message = _('You seem to have entered your username and password wrong, please try again!')
 
             if user is not None:
-                set_geolocation(User.get(email))
                 sign_in_user(email, long_session=remember)
                 redirect(str(destination))
 
@@ -540,7 +539,6 @@ class HomeController(UniversityListMixin):
             if facebook_id and not user.logo:
                 user.update_logo_from_facebook()
                 meta.Session.commit()
-            set_geolocation(user)
             sign_in_user(user.emails[0].email)
             redirect(c.came_from or url(controller='home', action='index'))
         else:
@@ -755,7 +753,6 @@ class HomeController(UniversityListMixin):
             c.login_error = _('Wrong username or password!')
 
             if user is not None:
-                set_geolocation(User.get(email))
                 sign_in_user(email)
                 redirect(c.came_from or url(controller='profile', action='home'))
 
