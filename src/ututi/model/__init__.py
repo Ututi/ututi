@@ -39,7 +39,7 @@ from ututi.migration import GreatMigrator
 from ututi.model import meta
 from ututi.lib.messaging import SMSMessage
 from ututi.lib.helpers import image
-from ututi.lib.emails import group_invitation_email
+from ututi.lib.emails import group_invitation_email, group_space_bought_email
 from ututi.lib.security import check_crowds
 from nous.mailpost import copy_chunked
 
@@ -1456,6 +1456,7 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin):
                 new=(start_date + timedelta(days=days)).date().isoformat()))
         self.private_files_lock_date = start_date + timedelta(days=days)
         self.ending_period_notification_sent = False
+        group_space_bought_email(self)
 
     def info_dict(self):
         """Cacheable dict containing essential info about this group."""

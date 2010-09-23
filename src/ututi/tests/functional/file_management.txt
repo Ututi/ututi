@@ -329,6 +329,14 @@ Anyway, let's process the payment:
     >>> print browser.contents
     OK
 
+Check if an email to group members is being sent:
+    >>> from ututi.lib.mailer import mail_queue
+    >>> print len(mail_queue)
+    1
+
+    >>> mail_queue.pop().payload()
+    "Space for private files was bought for 'Moderatoriai' group.\n\nUtuti team\n"
+
     >>> browser.open('http://localhost/group/moderators/files')
 
 Once the group has been paid for and the payment has been processed,

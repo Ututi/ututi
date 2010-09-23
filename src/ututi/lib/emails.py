@@ -72,3 +72,11 @@ def group_confirmation_email(group, user, status):
 
     msg = EmailMessage(_('Ututi group membership confirmation'), text, force=True)
     msg.send(user)
+
+
+def group_space_bought_email(group):
+    """Send an email to all group users when private group space are bought."""
+    text = render('/emails/group_space_bought.mako', extra_vars={'group': group})
+    msg = EmailMessage(_('Group space bought'), text)
+    msg.send(group)
+
