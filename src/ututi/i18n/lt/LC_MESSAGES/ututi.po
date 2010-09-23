@@ -3737,7 +3737,7 @@ msgid "Nothing yet."
 msgstr "Iki šiol nieko."
 
 msgid "Send message"
-msgstr "Siųsti pranešimą"
+msgstr "Siųsti žinutę"
 
 #, python-format
 msgid "Log in as %(user)s"
