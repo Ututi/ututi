@@ -108,6 +108,7 @@ $(document).ready(function(){
           name: 'attachment',
           data: {folder: folder},
           onSubmit : function(file, ext, iframe){
+              $('.upload_dropdown').children('.click').click();
               iframe['progress_indicator'] = $(document.createElement('div'));
               iframe['progress_indicator'].appendTo(progress_area).text(file);
               iframe['progress_ticker'] = $(document.createElement('span'));
