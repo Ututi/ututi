@@ -41,6 +41,7 @@ from ututi.lib.messaging import SMSMessage
 from ututi.lib.helpers import image
 from ututi.lib.emails import group_invitation_email, group_space_bought_email
 from ututi.lib.security import check_crowds
+from ututi.lib.group_payment_info import GroupPaymentInfo
 from nous.mailpost import copy_chunked
 
 from zope.cachedescriptors.property import Lazy
@@ -1206,7 +1207,7 @@ class GroupCoupon(object):
         return False
 
 
-class Group(ContentItem, FolderMixin, LimitedUploadMixin):
+class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
 
     flaggable_files = False
 

@@ -70,7 +70,7 @@
   ${_("The amount of group's private files is limited to %(limit)s. This is so because Ututi "
   "encourages users to store their files in publicly accessible subjects where they can "
   "be shared with all the users. But if you want to keep more than %(limit)s of files, "
-  "you can do this.") % dict(limit=h.file_size(c.group_file_limit))}
+  "you can do this.") % dict(limit=h.file_size(c.group.group_file_limit()))}
 
               </div>
               <div style="clear: both"></div>
@@ -101,7 +101,7 @@
 
                 <table>
 
-                  %for period, amount, form in c.filearea_payments:
+                  %for period, amount, form in c.group.filearea_payments():
                     <tr>
                       <td>
                       <form action="${form.action}" method="POST">
@@ -293,7 +293,7 @@
                 </div>
 
                 <table>
-                  %for credits, amount, form in c.sms_payments:
+                  %for credits, amount, form in c.group.sms_payments():
                     <tr>
                       <td>
                       <form action="${form.action}" method="POST">
