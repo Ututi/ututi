@@ -63,6 +63,7 @@ ${_('Search')}
   %for result in results:
     ${search_location_tag(result.tag)}
   %endfor
+<br />
 </div>
 %endif
 </%def>

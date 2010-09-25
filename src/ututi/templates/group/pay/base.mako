@@ -14,13 +14,13 @@
   ${_("The amount of group's private files is limited to %(limit)s. This is so because Ututi "
   "encourages users to store their files in publicly accessible subjects where they can "
   "be shared with all the users. But if You want to keep more than %(limit)s of files, "
-  "You can do this.") % dict(limit = h.file_size(c.group_file_limit))}
+  "You can do this.") % dict(limit = h.file_size(c.group.group_file_limit()))}
   </div>
   <div class="static-content">
     ${_('By paying Your group will be able to store an <strong>unlimited amount of files</strong>:')|n}
   </div>
 
-  %for period, amount, form in c.filearea_payments:
+  %for period, amount, form in c.group.filearea_payments():
   <div style="margin: 5px; float: left;">
     <form action="${form.action}" method="POST">
       %for key, val in form.fields:

@@ -246,47 +246,6 @@ def group_action(method):
         c.security_context = group
         c.object_location = group.location
         c.group = group
-
-        if c.user:
-            # File area payments.
-            payment_types = [_('month'), _('3 months'), _('6 months')]
-            payment_amounts = [int(config.get(payment_id, default))
-                                   for payment_id, default in
-                                       ['group_payment_month', 1000],
-                                       ['group_payment_quarter', 2000],
-                                       ['group_payment_halfyear', 3000]]
-            payment_forms = [
-                    h.mokejimai_form(
-                        transaction_type='grouplimits' + str(i+1),
-                        amount=amount,
-                        accepturl=group.url(action='files', paid_space=payment_types[i], qualified=True),
-                        cancelurl=group.url(action='files', cancelled_space_payment=True, qualified=True),
-                        orderid='%s%d_%s_%s' % ('grouplimits', i+1, c.user.id, group.id))
-                             for i, amount in enumerate(payment_amounts)]
-            c.filearea_payments = zip(payment_types, payment_amounts, payment_forms)
-
-            # SMS payments.
-            payment_types = [config.get(payment_type, default)
-                                   for payment_type, default in
-                                       ['sms_payment1_credits', 70],
-                                       ['sms_payment2_credits', 150],
-                                       ['sms_payment3_credits', 350]]
-            payment_amounts = [int(config.get(payment_id, default))
-                                   for payment_id, default in
-                                       ['sms_payment1_cost', 500],
-                                       ['sms_payment2_cost', 1000],
-                                       ['sms_payment3_cost', 2000]]
-            payment_forms = [
-                    h.mokejimai_form(
-                        transaction_type='smspayment' + str(i+1),
-                        amount=amount,
-                        accepturl=group.url(action='members', paid_sms=payment_types[i], qualified=True),
-                        cancelurl=group.url(action='members', cancelled_sms_payment=True, qualified=True),
-                        orderid='%s%d_%s' % ('smspayment', i+1, c.user.id))
-                             for i, amount in enumerate(payment_amounts)]
-            c.sms_payments = zip(payment_types, payment_amounts, payment_forms)
-
-        c.group_file_limit = int(config.get('group_file_limit', 200 * 1024 * 1024))
         c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
         c.group_menu_items = group_menu_items()
         c.group_id = c.group.group_id
