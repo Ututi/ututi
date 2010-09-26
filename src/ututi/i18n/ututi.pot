@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-09-14 21:15+0300\n"
+"POT-Creation-Date: 2010-09-26 23:22+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -139,15 +139,6 @@ msgid "Please enter a group identifier."
 msgstr ""
 
 msgid "The group identifier must be at least 4 characters long."
-msgstr ""
-
-msgid "month"
-msgstr ""
-
-msgid "3 months"
-msgstr ""
-
-msgid "6 months"
 msgstr ""
 
 msgid "Mailing List"
@@ -596,7 +587,19 @@ msgstr ""
 msgid "Ututi group membership confirmation"
 msgstr ""
 
+msgid "Group space bought"
+msgstr ""
+
 msgid "To confirm your gadu gadu enter this code in your profile page."
+msgstr ""
+
+msgid "month"
+msgstr ""
+
+msgid "3 months"
+msgstr ""
+
+msgid "6 months"
 msgstr ""
 
 msgid "Save"
@@ -1086,7 +1089,15 @@ msgstr ""
 msgid "Statistics by Region"
 msgstr ""
 
+msgid ""
+"Here you see information how many people are added information where they are"
+" study."
+msgstr ""
+
 msgid "Statistics by Geo location"
+msgstr ""
+
+msgid "Here you see how many people in some cities was logedin more than 2 times."
 msgstr ""
 
 msgid "Found out enough?"
@@ -1568,6 +1579,10 @@ msgstr ""
 
 #, python-format
 msgid "You may confirm or deny this request here: %(url)s ."
+msgstr ""
+
+#, python-format
+msgid "Space for private files was bought for '%(groupname)s' group."
 msgstr ""
 
 #, python-format
