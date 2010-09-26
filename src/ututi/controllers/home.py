@@ -233,7 +233,7 @@ class HomeController(UniversityListMixin):
     def statistics(self):
         c.locations = meta.Session.query(Region, func.count(User.id)).filter(LocationTag.region_id == Region.id).filter(User.location_id == LocationTag.id).group_by(Region).all()
 
-        c.geo_locations = meta.Session.query(User.location_city, func.count(User.id)).group_by(User.location_city).all()
+        c.geo_locations = meta.Session.query(User.location_city, func.count(User.id)).group_by(User.location_city).order_by(desc(func.count(User.id))).all()
 
         return render('/statistics.mako')
 
