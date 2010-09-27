@@ -2,7 +2,7 @@ import cgi
 import logging
 from random import Random
 import string
-from datetime import datetime
+from datetime import datetime, date, timedelta
 import simplejson
 import facebook
 
@@ -16,6 +16,9 @@ from formencode.foreach import ForEach
 from formencode.variabledecode import NestedVariables
 from webhelpers import paginate
 from xml.sax.saxutils import quoteattr
+
+from babel.dates import format_date
+from babel.dates import parse_date
 
 from paste.util.converters import asbool
 from pylons import request, tmpl_context as c, url, session, config, response
@@ -37,6 +40,7 @@ from ututi.lib.geoip import set_geolocation
 from ututi.lib.validators import validate, UniqueEmail, LocationTagsValidator, PhoneNumberValidator
 from ututi.model import meta, User, Region, Email, PendingInvitation, LocationTag, Payment, get_supporters
 from ututi.model import UserSubjectMonitoring, GroupSubjectMonitoring, Subject, Group, SearchItem
+from ututi.model.events import Event
 
 log = logging.getLogger(__name__)
 
@@ -234,6 +238,28 @@ class HomeController(UniversityListMixin):
         c.locations = meta.Session.query(Region, func.count(User.id)).filter(LocationTag.region_id == Region.id).filter(User.location_id == LocationTag.id).group_by(Region).all()
 
         c.geo_locations = meta.Session.query(User.location_city, func.count(User.id)).group_by(User.location_city).order_by(desc(func.count(User.id))).all()
+
+        # Getting last week date range
+        locale = config.get('locale')
+        from_time_str = format_date(date.today() - timedelta(7),
+                                    format="short",
+                                    locale=locale)
+        to_time_str = format_date(date.today() + timedelta(1),
+                                    format="short",
+                                    locale=locale)
+        from_time = parse_date(from_time_str, locale=locale)
+        to_time = parse_date(to_time_str, locale=locale)
+
+        uploads_stmt = meta.Session.query(
+            Event.author_id,
+            func.count(Event.created).label('uploads_count'))\
+            .filter(Event.event_type == 'file_uploaded')\
+            .filter(Event.created < to_time)\
+            .filter(Event.created >= from_time)\
+            .group_by(Event.author_id).order_by(desc('uploads_count')).limit(10).subquery()
+        c.active_users = meta.Session.query(User,
+                                            uploads_stmt.c.uploads_count.label('uploads'))\
+                                            .join((uploads_stmt, uploads_stmt.c.author_id == User.id)).all()
 
         return render('/statistics.mako')
 

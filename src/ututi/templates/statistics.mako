@@ -34,3 +34,17 @@
     %endfor
   </ul>
 </div>
+
+<div class="stats">
+  <h2>${_('Most active user')}</h2>
+  <div class="comment">
+      ${_('Here you see most altruistic users.')}
+  </div>
+  <ul id="subject_list">
+    %for user, cnt in c.active_users:
+     <li>
+       <a href="/user/${user.id}">${user.fullname}</a> (${user.location_city}): ${cnt}
+     </li>
+    %endfor
+  </ul>
+</div>
