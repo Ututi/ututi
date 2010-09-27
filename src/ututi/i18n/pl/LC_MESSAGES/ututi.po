@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-09-26 23:31+0300\n"
+"PO-Revision-Date: 2010-09-27 14:18+0300\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
@@ -1082,6 +1082,12 @@ msgstr "Statystyki według geolokacji (IP)"
 
 msgid "Here you see how many people in some cities was logedin more than 2 times."
 msgstr "Informacja o tym ile ludzi w których miastach logują się do Ututi."
+
+msgid "Most active user"
+msgstr "Najaktywniejsi użytkownicy"
+
+msgid "Here you see most altruistic users."
+msgstr "Użytkownicy, którzy dodali najwięcej plików w ostatnim tygodniu."
 
 msgid "Found out enough?"
 msgstr "Dowiedziałeś się wystarczająco?"

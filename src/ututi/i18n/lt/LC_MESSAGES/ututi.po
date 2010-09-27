@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-09-26 23:29+0300\n"
+"PO-Revision-Date: 2010-09-27 14:17+0300\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
@@ -1077,6 +1077,12 @@ msgstr "Statistika pagal geo lokaciją (naudotojų IP)"
 
 msgid "Here you see how many people in some cities was logedin more than 2 times."
 msgstr "Čia matoma kiek žmonių iš kokių miestų buvo prisijungę prie Ututi."
+
+msgid "Most active user"
+msgstr "Aktyviausi naudotojai"
+
+msgid "Here you see most altruistic users."
+msgstr "Naudotojai kurie pridėjo daugiausia failų."
 
 msgid "Found out enough?"
 msgstr "Sužinojai pakankamai?"
