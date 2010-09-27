@@ -1,4 +1,6 @@
-<%inherit file="/ubase-width.mako" />
+<%inherit file="/prebase.mako" />
+
+<div id="statsContent">
 
 <%def name="title()">
   Statistics
@@ -47,4 +49,6 @@
      </li>
     %endfor
   </ul>
+</div>
+
 </div>

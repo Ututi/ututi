@@ -4621,10 +4621,19 @@ div.tour_slide div.text div.join_link {
 
 /* CSS for statistics view */
 
+#statsContent {
+    display: inline-block;
+    margin: 20px 40px 0 0;
+    vertical-align: top;
+    width: 900px;
+           *display: inline; /* IE7 */
+           *zoom: 1; /* IE7 */
+}
+
 div.stats {
   float: left;
-  margin-left: 0px;
-  width: 250px;
+  margin-left: 20px;
+  width: 280px;
 }
 
 div.stats h2 {
