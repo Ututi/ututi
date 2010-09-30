@@ -367,7 +367,7 @@ ${self.anonymous_menu()}
     %endif
     <script>
       FB.init({appId: '${c.facebook_app_id}', status: true,
-          cookie: true, xfbml: true});
+          cookie: true, xfbml: true, channelUrl: '${url(controller='home', action='fbchannel')}'});
     </script>
 
   </body>
