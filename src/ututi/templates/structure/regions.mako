@@ -12,7 +12,7 @@
   <li>
     ${tag.title}
     %if c.user:
-      <select name="tag-${tag.id}-region" style="position: absolute; left: 300px">
+      <select name="tag-${tag.id}-region" style="position: absolute; left: 500px">
         <option value="0">${_('(none)')}</option>
         %for region in c.regions:
           <option value="${region.id}"
