@@ -30,6 +30,7 @@ from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import PhoneNumberValidator, GroupCouponValidator, validate
 from ututi.model.events import Event
+from ututi.model import Region
 from ututi.model import FileDownload
 from ututi.model import SimpleTag
 from ututi.model import UserSubjectMonitoring
@@ -218,10 +219,12 @@ class AdminController(BaseController):
     @ActionProtector("root")
     def import_structure(self):
         for line in self._getReader():
-            title = line[1]
             title_short = line[0]
+            title = line[1]
             description = line[2]
             parent = line[3]
+            region_title = line[4]
+            site_url = line[5]
 
             tag = LocationTag.get([parent, title_short])
             if tag is None:
@@ -231,6 +234,9 @@ class AdminController(BaseController):
             tag.title = title
             tag.title_short = title_short
             tag.description = description
+            tag.site_url = site_url
+            if region_title:
+                tag.region = meta.Session.query(Region).filter_by(title=region_title).one()
 
             meta.Session.add(tag)
             if parent:

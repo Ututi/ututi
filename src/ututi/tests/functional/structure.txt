@@ -102,8 +102,8 @@ You can import the structure tags from csv too:
     >>> import cStringIO
     >>> from textwrap import dedent
     >>> csv_file = dedent("""\
-    ... VU, Vilniaus Universitetas, ,
-    ... gmf, Gamtos Mokslu Fakultetas, , vu
+    ... VU, Vilniaus Universitetas, , , ,
+    ... gmf, Gamtos Mokslu Fakultetas, , vu, ,
     ... """)
 
     >>> form.getControl('CSV File').add_file(cStringIO.StringIO(csv_file), 'text/plain', 'structure.csv')

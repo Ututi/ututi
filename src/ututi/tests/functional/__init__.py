@@ -13,7 +13,8 @@ from zope.testing import doctest
 from nous.mailpost import processEmailAndPost
 
 import ututi
-from ututi.model import Group, meta, LocationTag, SimpleTag, User, Subject, Email
+from ututi.model import (Group, meta, LocationTag, SimpleTag, User,
+                         Subject, Email, Region)
 
 def ftest_setUp(test):
     ututi.tests.setUp(test)
@@ -21,6 +22,10 @@ def ftest_setUp(test):
     l = LocationTag.get(u'vu')
     f = LocationTag(u'Geografijos fakultetas', u'gf', u'', l)
     meta.Session.add(f)
+
+
+    r = Region(u'Mazowieckie', u'lt')
+    meta.Session.add(r)
 
     u = User.get('admin@ututi.lt')
     meta.Session.execute("SET ututi.active_user TO %d" % u.id)

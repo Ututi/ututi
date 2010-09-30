@@ -1,218 +1,226 @@
-AKOLEGIJA,Alytaus kolegija,,
-IF,Inžinerijos fakultetas,,AKOLEGIJA
-IRTF,Informacijos ir ryšių technologijų fakultetas,,AKOLEGIJA
-VF,Vadybos fakultetas,,AKOLEGIJA
-ISM,ISM vadybos ir ekonomikos universitetas,,
-KAUKO,Kauno kolegija,,
-ETF,Ekonomikos ir teisės fakultetas,,KAUKO
-JVMF,J.Vienožinskio menų fakultetas,,KAUKO
-KF,Kraštotvarkos fakultetas,,KAUKO
-KJRF,Kėdainių J.Radvilos fakultetas,,KAUKO
-SPF,Sveikatos priežiūros fakultetas,,KAUKO
-TF,Technologijų fakultetas,,KAUKO
-VVF,Verslo vadybos fakultetas,,KAUKO
-KLK,Klaipėdos kolegija,,
-PF,Pedagogikos fakultetas,,KLK
-SF,Sveikatos fakultetas,,KLK
-KLVK,Klaipėdos verslo kolegija,,
-KMAIK,Kauno miškų ir aplinkos inžinerijos kolegija,,
-AIF,Aplinkos inžinerijos fakultetas,,KMAIK
-MDŽF,Miškų dekoratyviųjų želdynų fakultetas,,KMAIK
-KMU,Kauno medicinos universitetas,,
-FF,Farmacijos fakultetas,,KMU
-MF,Medicinos fakultetas,,KMU
-OF,Odontologijos fakultetas,,KMU
-SF,Slaugos fakultetas,,KMU
-VSF,Visuomenės sveikatos fakultetas,,KMU
-KOLPING,Kolpingo kolegija,,
-KTK,Kauno technikos kolegija,,
-EF,Elektromechanikos fakultetas ,,KTK
-SF,Statybos fakultetas,,KTK
-KTU,Kauno technologijos uiversitetas,,
-CTF,Cheminės technologijos fakultetas,,KTU
-DTF,Dizaino ir technologijų fakultetas,,KTU
-EirVI,Elektros valdymo ir inžinerijos fakultetas,,KTU
-EVF,Ekonomikos ir vadybos fakultetas,,KTU
-FMF,Fundamentaliųjų mokslų fakultetas,,KTU
-HMF,Humanitarinių mokslų fakultetas,,KTU
-IF,Informatikos fakultetas,,KTU
-MMF,Mechanikos ir mechatronikos fakultetas,,KTU
-PTF,Panevėžio instituto Technologijų fakultetas,,KTU
-SAF,Statybos ir architektūros fakultetas,,KTU
-SMF,Socialinių mokslų fakultetas,,KTU
-TEF,Telekomunikacijų ir elektronikos fakultetas,,KTU
-TSC,Tarptautinių studijų centras,,KTU
-KU,Klaipėdos universitetas,,
-GMMF,Gamtos ir matematikos mokslų ,,KU
-HMF,Humanitarinių mokslų ,,KU
-JI,Jūreivystės institutas,,KU
-JTF,Jūrų technikos fakultetas,,KU
-MF,Menų fakultetas,,KU
-PF,Pedagogikos fakultetas,,KU
-SMF,Socialinių mokslų fakultetas  ,,KU
-SVMF,Sveikatos mokslų fakultetas,,KU
-TSI,Tęstinių studijų institutas,,KU
-KVK,Kauno verslo kolegija,,
-KVTK,Klaipėdos verslo ir technologijų kolegija,,
-TF,Technologijų fakultetas,,KVTK
-VF,Verslo fakultetas,,KVTK
-LAJM,Lietuvos jūreivystės kolegija,,
-LCC ,LCC tarptautinis universitetas,,
-LKA,Generolo Jono Žemaičio Lietuvos karo akademija,,
-LKKA,Lietuvos kūno kultūros akademija,,
-SBMF,Sporto biomedicinos fakultetas,,LKKA
-SEF,Sporto edukologijos fakultetas,,LKKA
-LMTA,Lietuvos muzikos ir teatro akademija,,
-FMF,Fortepijono ir muzikologijos fakultetas,,LMTA
-ICHMF,Instrumentinės ir chorinės muzikos fakultetas,,LMTA
-KF,Kauno fakultetas,,LMTA
-MI,Muzikologijos institutas,,LMTA
-TKF,Teatro ir kino fakultetas,,LMTA
-LUNI,Laisvasis Universitetas,,
-Alytaus LUNI,Alytaus LUNI,,LUNI
-KF,Kauno fakultetas,,LUNI
-LUNI EkoTROBA,LUNI EkoTROBA,,LUNI
-LUNI Kaunas,LUNI Kaunas,,LUNI
-LUNI Klaipėda,LUNI Klaipėda,,LUNI
-LUNI Kuršėnai,LUNI Kuršėnai,,LUNI
-LUNI Panevėžys,LUNI Panevėžys,,LUNI
-LUNI Vilnius,LUNI Vilnius,,LUNI
-VF,Vilniaus fakultetas,,LUNI
-LVA,Lietuvos veterinarijos akademija,,
-GTF,Gyvulininkystės technologijos fakultetas,,LVA
-VF,Veterinarijos fakultetas,,LVA
-LŽŪU,Lietuvos žemės ūkio universitetas,,
-AF,Agronomijos fakultetas,,LŽŪU
-EVF,Ekonomikos ir vadybos fakultetas,,LŽŪU
-MEF,Miškų ir ekologijos fakultetas,,LŽŪU
-VŪŽF,Vandens ūkio ir žemėtvarkos fakultetas,,LŽŪU
-ŽŪIF,Žemės ūkio inžinerijos fakultetas,,LŽŪU
-MARKO,Marijampolės kolegija,,
-ECDF,Edukologijos ir socialinio darbo fakultetas,,MARKO
-VTF,Verslo ir technologijų fakultetas,,MARKO
-MRU,Mykolo Romerio universitetas,,
-EFVF,Ekonomikos ir finansų valdymo fakultetas,,MRU
-SIF,Socialinės informatikos fakultetas,,MRU
-SPF,Socialinės politikos fakultetas,,MRU
-SVPF,Strateginio valdymo ir politikos fakultetas,,MRU
-TF,Teisės fakultetas,,MRU
-VAF,Viešojo administravimo fakultetas,,MRU
-VSF,Viešojo saugumo fakultetas,,MRU
-PANKO,Panevėžio kolegija,,
-MSMF,Medicinos ir socialinių mokslų fakultetas,,PANKO
-RF,Rokiškio filialas,,PANKO
-VTF,Verslo ir technologijų fakultetas,,PANKO
-RSK,Religijos studijų kolegija,,
-SMK,Socialinių mokslų kolegija,,
-TKS,Telšių kunigų seminarija,,
-UKO,Utenos kolegija,,
-SPSRF,Sveikatos priežiūros ir socialinės rūpybos fakultetas,,UKO
-VTF,Verslo ir technologijų fakultetas,,UKO
-VDA,Vilniaus dailės akademija,,
-ADF,Architektūros ir dizaino fakultetas,,VDA
-DI,Dailėtyros institutas,,VDA
-DIC,Dizaino inovacijų centras,,VDA
-HSMF,Humanitarinių ir socialinių mokslų fakultetas,,VDA
-KDF,Kauno dailės fakultetas,,VDA
-TDF,Telšių dailės fakultetas,,VDA
-VTMF,Vizualiojo ir taikomojo meno fakultetas,,VDA
-VDU,Vytauto Didžiojo universitetas,,
-EVF,Ekonomikos ir vadybos fakultetas,,VDU
-EVF,Ekonomikos ir vadybos fakultetas ,,VDU
-GMF,Gamtos mokslÅ³ fakultetas ,,VDU
-GMF,Gamtos mokslų fakultetas,,VDU
-HMF,HumanitariniÅ³ mokslÅ³ fakultetas ,,VDU
-HMF,Humanitarinių mokslų fakultetas,,VDU
-IF,Informatikos fakultetas,,VDU
-IF,Informatikos fakultetas ,,VDU
-KTF,KatalikÅ³ teologijos fakultetas ,,VDU
-KTF,Katalikų teologijos fakultetas ,,VDU
-MF,Menų fakultetas,,VDU
-MF,MenÅ³ fakultetas ,,VDU
-PMDF,Politikos mokslų ir diplomatijos fakultetas ,,VDU
-PMDF,Politikos mokslų ir diplomatijos fakultetas ,,VDU
-SGF,Socialinės gerovės fakultetas ,,VDU
-SGF,Socialinės gerovės fakultetas ,,VDU
-SMF,Socialinių mokslų fakultetas  ,,VDU
-SMF,Socialinių mokslų fakultetas  ,,VDU
-TF,Teisės fakultetas ,,VDU
-TF,Teisės fakultetas,,VDU
-VGTU,Vilniaus Gedimino technikos universitetas,,
-AGAI,Antano Gustaičio aviacijos institutas,,VGTU
-AIF,Aplinkos inžinerijos fakultetas,,VGTU
-ArchFak,Architektūros fakultetas,,VGTU
-EF,Elektronikos fakultetas,,VGTU
-FMF,Fundamentinių mokslų fakultetas,,VGTU
-HI,Humanitarinis institutas,,VGTU
-MF,Mechanikos fakultetas,,VGTU
-SF,Statybos fakultetas,,VGTU
-TIF,Transporto inžinerijos fakultetas,,VGTU
-TSc,Tarptautinių studijų centras,,VGTU
-VVF,Verslo vadybos fakultetas,,VGTU
-VIKO,Vilniaus kolegija,,
-ATF,Agrotechnologijų fakultetas,,VIKO
-DTF,Dizaino ir technologijų fakultetas,,VIKO
-EIF,Elektronikos ir informatikos fakultetas,,VIKO
-EKF,Ekonomikos fakultetas,,VIKO
-MEF,Menų fakultetas,,VIKO
-PDF,Pedagogikos fakultetas,,VIKO
-SPF,Sveikatos priežiūros fakultetas,,VIKO
-VVF,Verslo vadybos fakultetas,,VIKO
-VKK,Vilniaus kooperacijos kolegija,,
-VLVK,Vakarų Lietuvos verslo kolegija,,
-VSAM,Vilniaus siuvėjų ir automechanikų mokykla,,
-AR,Automobilių remontininkai,,VSAM
-VTDK,Vilniaus technologijų ir dizaino kolegija,,
-DF,Dizaino fakultetas,,VTDK
-PVGTF,Petro Vileišio geležinkelio transporto fakultetas,,VTDK
-SF,Statybos fakultetas,,VTDK
-TF,Technikos fakultetas,,VTDK
-VTVK,Vilniaus teisės ir verslo kolegija,,
-EF,Ekonomikos fakultetas,,VTVK
-HMF,Humanitarinių mokslų fakultetas,,VTVK
-IF,Informatikos fakultetas,,VTVK
-TF,Teisės fakultetas ,,VTVK
-VU,Vilniaus universitetas,,
-ChF,Chemijos fakultetas,,VU
-EF,Ekonomikos fakultetas,,VU
-FF,Fizikos fakultetas,,VU
-FLF,Filologijos fakultetas,,VU
-FsF,Filosofijos fakultetas,,VU
-GMF,Gamtos mokslų fakultetas,,VU
-IF,Istorijos fakultetas,,VU
-KF,Komunikacijos fakultetas,,VU
-KHF,Kauno humanitarinis fakultetas,,VU
-LSC,Lyčių studijų centras,,VU
-MF,Medicinos fakultetas,,VU
-MIF,Matematikos ir Informatikos fakultetas,,VU
-NSC,Vilniaus nuotolinių studijų centras,,VU
-OC,Orientalistikos centras,,VU
-RSTC,Religijos studijų ir tyrimų centras,,VU
-SSC,Sveikatos ir sporto centras,,VU
-TF,Teisės fakultetas,,VU
-TSPMI,Tarptautinių santykių ir politikos mokslų institutas,,VU
-UKI,Užsienio kalbų institutas,,VU
-VVeK,Vilniaus verslo kolegija,,
-VVK,Vilniaus vadybos aukštoji mokykla,,
-VŠJKS,Vilniaus Šv. Juozapo kunigų seminarija,,
-ŠK,Šiaulių kolegija,,
-SF,Sveikatos fakultetas,,ŠK
-VTF,Verslo ir technologijų fakultetas,,ŠK
-ŠKVTKK,Šiaulių krašto vadybos, teisės ir kalbų kolegija,,
-ŠLK,Šiaurės Lietuvos kolegija,,
-ŠU,Šiaulių universitetas,,
-EF,Edukologijos fakultetas,,ŠU
-GMF,Gamtos mokslų fakultetas,,ŠU
-HF,Humanitarinis fakultetas,,ŠU
-LSC,Lyčių studijų centras,,ŠU
-MF,Menų fakultetas,,ŠU
-MIF,Matematikos ir informatikos fakultetas,,ŠU
-SGNSF,Socialinės gerovės ir negalės studijų fakultetas,,ŠU
-SMF,Socialinių mokslų fakultetas  ,,ŠU
-TF,Technologijos fakultetas,,ŠU
-TSI,Tęstinių studijų institutas,,ŠU
-ŽEMKO,Žemaitijos kolegija,,
-MPF,Menų ir pedagogikos fakultetas,,ŽEMKO
-MSC,Mažeikių studijų centras,,ŽEMKO
-TF,Technologijų fakultetas,,ŽEMKO
-VF,Vadybos fakultetas,,ŽEMKO
+"AKOLEGIJA","Alytaus kolegija",,,,
+"IF","Inžinerijos fakultetas",,"AKOLEGIJA",,
+"IRTF","Informacijos ir ryšių technologijų fakultetas",,"AKOLEGIJA",,
+"VF","Vadybos fakultetas",,"AKOLEGIJA",,
+"ISM","ISM vadybos ir ekonomikos universitetas",,,,
+"KAUKO","Kauno kolegija",,,,
+"ETF","Ekonomikos ir teisės fakultetas",,"KAUKO",,
+"JVMF","J.Vienožinskio menų fakultetas",,"KAUKO",,
+"KF","Kraštotvarkos fakultetas",,"KAUKO",,
+"KJRF","Kėdainių J.Radvilos fakultetas",,"KAUKO",,
+"SPF","Sveikatos priežiūros fakultetas",,"KAUKO",,
+"TF","Technologijų fakultetas",,"KAUKO",,
+"VVF","Verslo vadybos fakultetas",,"KAUKO",,
+"KLK","Klaipėdos kolegija",,,,
+"PF","Pedagogikos fakultetas",,"KLK",,
+"SF","Sveikatos fakultetas",,"KLK",,
+"KLVK","Klaipėdos verslo kolegija",,,,
+"KMAIK","Kauno miškų ir aplinkos inžinerijos kolegija",,,,
+"AIF","Aplinkos inžinerijos fakultetas",,"KMAIK",,
+"MDŽF","Miškų dekoratyviųjų želdynų fakultetas",,"KMAIK",,
+"KMU","Kauno medicinos universitetas",,,,
+"FF","Farmacijos fakultetas",,"KMU",,
+"MF","Medicinos fakultetas",,"KMU",,
+"OF","Odontologijos fakultetas",,"KMU",,
+"SF","Slaugos fakultetas",,"KMU",,
+"VSF","Visuomenės sveikatos fakultetas",,"KMU",,
+"KOLPING","Kolpingo kolegija",,,,
+"KTK","Kauno technikos kolegija",,,,
+"EF","Elektromechanikos fakultetas ",,"KTK",,
+"SF","Statybos fakultetas",,"KTK",,
+"KTU","Kauno technologijos uiversitetas",,,,
+"CTF","Cheminės technologijos fakultetas",,"KTU",,
+"DTF","Dizaino ir technologijų fakultetas",,"KTU",,
+"EirVI","Elektros valdymo ir inžinerijos fakultetas",,"KTU",,
+"EVF","Ekonomikos ir vadybos fakultetas",,"KTU",,
+"FMF","Fundamentaliųjų mokslų fakultetas",,"KTU",,
+"HMF","Humanitarinių mokslų fakultetas",,"KTU",,
+"IF","Informatikos fakultetas",,"KTU",,
+"MMF","Mechanikos ir mechatronikos fakultetas",,"KTU",,
+"PTF","Panevėžio instituto Technologijų fakultetas",,"KTU",,
+"SAF","Statybos ir architektūros fakultetas",,"KTU",,
+"SMF","Socialinių mokslų fakultetas",,"KTU",,
+"TEF","Telekomunikacijų ir elektronikos fakultetas",,"KTU",,
+"TSC","Tarptautinių studijų centras",,"KTU",,
+"KU","Klaipėdos universitetas",,,,
+"GMMF","Gamtos ir matematikos mokslų ",,"KU",,
+"HMF","Humanitarinių mokslų ",,"KU",,
+"JI","Jūreivystės institutas",,"KU",,
+"JTF","Jūrų technikos fakultetas",,"KU",,
+"MF","Menų fakultetas",,"KU",,
+"PF","Pedagogikos fakultetas",,"KU",,
+"SMF","Socialinių mokslų fakultetas  ",,"KU",,
+"SVMF","Sveikatos mokslų fakultetas",,"KU",,
+"TSI","Tęstinių studijų institutas",,"KU",,
+"KVK","Kauno verslo kolegija",,,,
+"KVTK","Klaipėdos verslo ir technologijų kolegija",,,,
+"TF","Technologijų fakultetas",,"KVTK",,
+"VF","Verslo fakultetas",,"KVTK",,
+"LAJM","Lietuvos jūreivystės kolegija",,,,
+"LCC ","LCC tarptautinis universitetas",,,,
+"LKA","Generolo Jono Žemaičio Lietuvos karo akademija",,,,
+"LKKA","Lietuvos kūno kultūros akademija",,,,
+"SBMF","Sporto biomedicinos fakultetas",,"LKKA",,
+"SEF","Sporto edukologijos fakultetas",,"LKKA",,
+"LMTA","Lietuvos muzikos ir teatro akademija",,,,
+"FMF","Fortepijono ir muzikologijos fakultetas",,"LMTA",,
+"ICHMF","Instrumentinės ir chorinės muzikos fakultetas",,"LMTA",,
+"KF","Kauno fakultetas",,"LMTA",,
+"MI","Muzikologijos institutas",,"LMTA",,
+"TKF","Teatro ir kino fakultetas",,"LMTA",,
+"LUNI","Laisvasis Universitetas",,,,
+"Alytaus LUNI","Alytaus LUNI",,"LUNI",,
+"KF","Kauno fakultetas",,"LUNI",,
+"LUNI EkoTROBA","LUNI EkoTROBA",,"LUNI",,
+"LUNI Kaunas","LUNI Kaunas",,"LUNI",,
+"LUNI Klaipėda","LUNI Klaipėda",,"LUNI",,
+"LUNI Kuršėnai","LUNI Kuršėnai",,"LUNI",,
+"LUNI Panevėžys","LUNI Panevėžys",,"LUNI",,
+"LUNI Vilnius","LUNI Vilnius",,"LUNI",,
+"VF","Vilniaus fakultetas",,"LUNI",,
+"LVA","Lietuvos veterinarijos akademija",,,,
+"GTF","Gyvulininkystės technologijos fakultetas",,"LVA",,
+"VF","Veterinarijos fakultetas",,"LVA",,
+"LŽŪU","Lietuvos žemės ūkio universitetas",,,,
+"AF","Agronomijos fakultetas",,"LŽŪU",,
+"EVF","Ekonomikos ir vadybos fakultetas",,"LŽŪU",,
+"MEF","Miškų ir ekologijos fakultetas",,"LŽŪU",,
+"VŪŽF","Vandens ūkio ir žemėtvarkos fakultetas",,"LŽŪU",,
+"ŽŪIF","Žemės ūkio inžinerijos fakultetas",,"LŽŪU",,
+"MARKO","Marijampolės kolegija",,,,
+"ECDF","Edukologijos ir socialinio darbo fakultetas",,"MARKO",,
+"VTF","Verslo ir technologijų fakultetas",,"MARKO",,
+"MRU","Mykolo Romerio universitetas",,,,
+"EFVF","Ekonomikos ir finansų valdymo fakultetas",,"MRU",,
+"SIF","Socialinės informatikos fakultetas",,"MRU",,
+"SPF","Socialinės politikos fakultetas",,"MRU",,
+"SVPF","Strateginio valdymo ir politikos fakultetas",,"MRU",,
+"TF","Teisės fakultetas",,"MRU",,
+"VAF","Viešojo administravimo fakultetas",,"MRU",,
+"VSF","Viešojo saugumo fakultetas",,"MRU",,
+"PANKO","Panevėžio kolegija",,,,
+"MSMF","Medicinos ir socialinių mokslų fakultetas",,"PANKO",,
+"RF","Rokiškio filialas",,"PANKO",,
+"VTF","Verslo ir technologijų fakultetas",,"PANKO",,
+"RSK","Religijos studijų kolegija",,,,
+"SMK","Socialinių mokslų kolegija",,,,
+"TKS","Telšių kunigų seminarija",,,,
+"UKO","Utenos kolegija",,,,
+"SPSRF","Sveikatos priežiūros ir socialinės rūpybos fakultetas",,"UKO",,
+"VTF","Verslo ir technologijų fakultetas",,"UKO",,
+"VDA","Vilniaus dailės akademija",,,,
+"ADF","Architektūros ir dizaino fakultetas",,"VDA",,
+"DI","Dailėtyros institutas",,"VDA",,
+"DIC","Dizaino inovacijų centras",,"VDA",,
+"HSMF","Humanitarinių ir socialinių mokslų fakultetas",,"VDA",,
+"KDF","Kauno dailės fakultetas",,"VDA",,
+"TDF","Telšių dailės fakultetas",,"VDA",,
+"VTMF","Vizualiojo ir taikomojo meno fakultetas",,"VDA",,
+"VDU","Vytauto Didžiojo universitetas",,,,
+"EVF","Ekonomikos ir vadybos fakultetas",,"VDU",,
+"EVF","Ekonomikos ir vadybos fakultetas ",,"VDU",,
+"GMF","Gamtos mokslÅ³ fakultetas ",,"VDU",,
+"GMF","Gamtos mokslų fakultetas",,"VDU",,
+"HMF","HumanitariniÅ³ mokslÅ³ fakultetas ",,"VDU",,
+"HMF","Humanitarinių mokslų fakultetas",,"VDU",,
+"IF","Informatikos fakultetas",,"VDU",,
+"IF","Informatikos fakultetas ",,"VDU",,
+"KTF","KatalikÅ³ teologijos fakultetas ",,"VDU",,
+"KTF","Katalikų teologijos fakultetas ",,"VDU",,
+"MF","Menų fakultetas",,"VDU",,
+"MF","MenÅ³ fakultetas ",,"VDU",,
+"PMDF","Politikos mokslų ir diplomatijos fakultetas ",,"VDU",,
+"PMDF","Politikos mokslų ir diplomatijos fakultetas ",,"VDU",,
+"SGF","Socialinės gerovės fakultetas ",,"VDU",,
+"SGF","Socialinės gerovės fakultetas ",,"VDU",,
+"SMF","Socialinių mokslų fakultetas  ",,"VDU",,
+"SMF","Socialinių mokslų fakultetas  ",,"VDU",,
+"TF","Teisės fakultetas ",,"VDU",,
+"TF","Teisės fakultetas",,"VDU",,
+"VGTU","Vilniaus Gedimino technikos universitetas",,,,
+"AGAI","Antano Gustaičio aviacijos institutas",,"VGTU",,
+"AIF","Aplinkos inžinerijos fakultetas",,"VGTU",,
+"ArchFak","Architektūros fakultetas",,"VGTU",,
+"EF","Elektronikos fakultetas",,"VGTU",,
+"FMF","Fundamentinių mokslų fakultetas",,"VGTU",,
+"HI","Humanitarinis institutas",,"VGTU",,
+"MF","Mechanikos fakultetas",,"VGTU",,
+"SF","Statybos fakultetas",,"VGTU",,
+"TIF","Transporto inžinerijos fakultetas",,"VGTU",,
+"TSc","Tarptautinių studijų centras",,"VGTU",,
+"VVF","Verslo vadybos fakultetas",,"VGTU",,
+"VIKO","Vilniaus kolegija",,,,
+"ATF","Agrotechnologijų fakultetas",,"VIKO",,
+"DTF","Dizaino ir technologijų fakultetas",,"VIKO",,
+"EIF","Elektronikos ir informatikos fakultetas",,"VIKO",,
+"EKF","Ekonomikos fakultetas",,"VIKO",,
+"MEF","Menų fakultetas",,"VIKO",,
+"PDF","Pedagogikos fakultetas",,"VIKO",,
+"SPF","Sveikatos priežiūros fakultetas",,"VIKO",,
+"VVF","Verslo vadybos fakultetas",,"VIKO",,
+"VKK","Vilniaus kooperacijos kolegija",,,,
+"VLVK","Vakarų Lietuvos verslo kolegija",,,,
+"VSAM","Vilniaus siuvėjų ir automechanikų mokykla",,,,
+"AR","Automobilių remontininkai",,"VSAM",,
+"VTDK","Vilniaus technologijų ir dizaino kolegija",,,,
+"DF","Dizaino fakultetas",,"VTDK",,
+"PVGTF","Petro Vileišio geležinkelio transporto fakultetas",,"VTDK",,
+"SF","Statybos fakultetas",,"VTDK",,
+"TF","Technikos fakultetas",,"VTDK",,
+"VTVK","Vilniaus teisės ir verslo kolegija",,,,
+"EF","Ekonomikos fakultetas",,"VTVK",,
+"HMF","Humanitarinių mokslų fakultetas",,"VTVK",,
+"IF","Informatikos fakultetas",,"VTVK",,
+"TF","Teisės fakultetas ",,"VTVK",,
+"VU","Vilniaus universitetas",,,,
+"ChF","Chemijos fakultetas",,"VU",,
+"EF","Ekonomikos fakultetas",,"VU",,
+"FF","Fizikos fakultetas",,"VU",,
+"FLF","Filologijos fakultetas",,"VU",,
+"FsF","Filosofijos fakultetas",,"VU",,
+"GMF","Gamtos mokslų fakultetas",,"VU",,
+"IF","Istorijos fakultetas",,"VU",,
+"KF","Komunikacijos fakultetas",,"VU",,
+"KHF","Kauno humanitarinis fakultetas",,"VU",,
+"LSC","Lyčių studijų centras",,"VU",,
+"MF","Medicinos fakultetas",,"VU",,
+"MIF","Matematikos ir Informatikos fakultetas",,"VU",,
+"NSC","Vilniaus nuotolinių studijų centras",,"VU",,
+"OC","Orientalistikos centras",,"VU",,
+"RSTC","Religijos studijų ir tyrimų centras",,"VU",,
+"SSC","Sveikatos ir sporto centras",,"VU",,
+"TF","Teisės fakultetas",,"VU",,
+"TSPMI","Tarptautinių santykių ir politikos mokslų institutas",,"VU",,
+"UKI","Užsienio kalbų institutas",,"VU",,
+"VVeK","Vilniaus verslo kolegija",,,,
+"VVK","Vilniaus vadybos aukštoji mokykla",,,,
+"VŠJKS","Vilniaus Šv. Juozapo kunigų seminarija",,,,
+"ŠK","Šiaulių kolegija",,,,
+"SF","Sveikatos fakultetas",,"ŠK",,
+"VTF","Verslo ir technologijų fakultetas",,"ŠK",,
+"ŠKVTKK","Šiaulių krašto vadybos"," teisės ir kalbų kolegija",,,
+"ŠLK","Šiaurės Lietuvos kolegija",,,,
+"ŠU","Šiaulių universitetas",,,,
+"EF","Edukologijos fakultetas",,"ŠU",,
+"GMF","Gamtos mokslų fakultetas",,"ŠU",,
+"HF","Humanitarinis fakultetas",,"ŠU",,
+"LSC","Lyčių studijų centras",,"ŠU",,
+"MF","Menų fakultetas",,"ŠU",,
+"MIF","Matematikos ir informatikos fakultetas",,"ŠU",,
+"SGNSF","Socialinės gerovės ir negalės studijų fakultetas",,"ŠU",,
+"SMF","Socialinių mokslų fakultetas  ",,"ŠU",,
+"TF","Technologijos fakultetas",,"ŠU",,
+"TSI","Tęstinių studijų institutas",,"ŠU",,
+"ŽEMKO","Žemaitijos kolegija",,,,
+"MPF","Menų ir pedagogikos fakultetas",,"ŽEMKO",,
+"MSC","Mažeikių studijų centras",,"ŽEMKO",,
+"TF","Technologijų fakultetas",,"ŽEMKO",,
+"VF","Vadybos fakultetas",,"ŽEMKO",,
+"WAT","Wojskowa Akademia Techniczna im. Jarosława Dąbrowskiego w Warszawie",,,"Mazowieckie","www.wat.edu.pl"
+"WCY","Wydział cybernetyki",,"WAT","Mazowieckie",
+"WIG","Wydział Inżynierii Lądowej i Geodezji",,"WAT","Mazowieckie",
+"WTC","Wydział Nowych Technologii i Chemii",,"WAT","Mazowieckie",
+"WEL","Wydział Elektroniki",,"WAT","Mazowieckie",
+"WME","Wydział Mechaniczny",,"WAT","Mazowieckie",
+"WMT","Wydział Mechatroniki",,"WAT","Mazowieckie",
+"WTW","Wydział Techniki Wojskowej",,"WAT","Mazowieckie",
