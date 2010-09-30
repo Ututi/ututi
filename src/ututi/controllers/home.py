@@ -266,6 +266,9 @@ class HomeController(UniversityListMixin):
     def terms(self):
         return render_lang('/terms.mako')
 
+    def fbchannel(self):
+        return render('/fbchannel.mako')
+
     def robots(self):
         response.headers['Content-Type'] = 'text/plain'
         if asbool(config.get('testing', False)):
