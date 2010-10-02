@@ -22,3 +22,16 @@ Malformed headers don't break the application:
     >>> res = app.post("/login",
     ...                params={'login': 'user@ututi.lt', 'password': 'password'},
     ...                headers={'X-Forwarded-For': 'wtf'})
+
+Lets try login from Polish IP with non ASCI symbols in city name.
+
+    >>> res = app.post("/login",
+    ...                params={'login': 'user@ututi.lt', 'password': 'password'},
+    ...                headers={'X-Forwarded-For': '194.126.165.6'})
+
+    >>> from ututi.model import User
+    >>> user = User.get('user@ututi.lt')
+    >>> user.location_city
+    'Chorz\xc3\xb3w'
+    >>> user.location_country
+    'PL'

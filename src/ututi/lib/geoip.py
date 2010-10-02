@@ -17,7 +17,7 @@ def set_geolocation(user):
         except pygeoip.GeoIPError:
             return
         country_code = record.get('country_code')
-        city = record.get('city')
+        city = unicode(record.get('city'), 'iso-8859-1')
         if user.location_country != country_code or user.location_city != city:
             user.location_country = country_code
             user.location_city = city
