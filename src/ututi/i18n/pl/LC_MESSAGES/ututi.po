@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-09-27 14:18+0300\n"
-"Last-Translator: Jaro <jaro@akl.lt>\n"
+"PO-Revision-Date: 2010-09-30 20:23+0100\n"
+"Last-Translator: eri\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 "MIME-Version: 1.0\n"
@@ -572,7 +572,7 @@ msgid "Ututi group membership confirmation"
 msgstr "Potwierdzenie przyjęcia do ututi grupy "
 
 msgid "Group space bought"
-msgstr ""
+msgstr "Przestrzeń kupiona przez grupę"
 
 msgid "To confirm your gadu gadu enter this code in your profile page."
 msgstr "Potwierdź swój numer gg poprzez wpisanie tego kodu na stronie Twego profilu."
@@ -1521,7 +1521,7 @@ msgstr "Możesz zaakcetować lub odrzucić to zgłoszenie tutaj: %(url)s ."
 
 #, python-format
 msgid "Space for private files was bought for '%(groupname)s' group."
-msgstr ""
+msgstr "Grupa '%(groupname)s kupiła przestrzeń na plki prywatne."
 
 #, python-format
 msgid ""
@@ -2507,7 +2507,7 @@ msgid "Send SMS message to group"
 msgstr "Wyślij wiadomość do grupy"
 
 msgid "Send an SMS message to all your classmates. The service is paid by SMS credits (1 credit = 1 SMS message to one person). The cost of an SMS message depends on the number of members in the group."
-msgstr "Wyslij wiadomość SMS do wszystkich kolegów z grupy. Usługa jest opłacana punktami SMS ( 1 punkt= jedna wiadomość do jednego odbiorcy). Koszt wysłania wiadomości SMS do grupy zależy od liczby jej członków."
+msgstr "Wyślij wiadomość SMS do wszystkich kolegów z grupy. Usługa jest opłacana punktami SMS ( 1 punkt= jedna wiadomość do jednego odbiorcy). Koszt wysłania wiadomości SMS do grupy zależy od liczby jej członków."
 
 msgid "Credits left:"
 msgstr "Pozostało punktów:"
@@ -2556,7 +2556,7 @@ msgstr "Wyślij wiadomość ze swego telefonu!"
 
 #, python-format
 msgid "You can send a message to your group directly from your phone. The message costs <strong>2 Lt</strong>, which pays for the delivery of the message to all recipients (your SMS credits will not be charged). Send the following text to number %(phone)s:"
-msgstr "Możesz wysłać wiadomość do całej Twojej grupy ze swojej komórki. Koszt takiego SMSa <strong>2 zł</strong> (+ VAT). Kowoty tej wstarczy na wysłanie wiadomości do wszystkich odbiorców (punkty SMS nie zostaną potrącone). Wyślij wiadomość o następującej treści na numer %(phone)s:"
+msgstr "Możesz wysłać wiadomość do całej Twojej grupy ze swojej komórki. Koszt takiego SMSa <strong>2 zł</strong> (+ VAT). Kwoty tej wstarczy na wysłanie wiadomości do wszystkich odbiorców (punkty SMS nie zostaną potrącone). Wyślij wiadomość o następującej treści na numer %(phone)s:"
 
 msgid "Everywhere"
 msgstr "Wszędzie"
