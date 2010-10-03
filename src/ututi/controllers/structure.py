@@ -241,7 +241,8 @@ class StructureController(BaseController):
                     try:
                         ShortTitleValidator.to_python(item['title_short'])
 
-                        existing = meta.Session.query(LocationTag).filter(func.lower(LocationTag.title_short) == item['title_short'].lower())\
+                        existing = meta.Session.query(LocationTag).filter(or_(func.lower(LocationTag.title_short) == item['title_short'].lower(),
+                                                                              func.lower(LocationTag.title) == item['title'].lower()))\
                             .filter(LocationTag.parent == parent).first()
                         if existing is not None:
                             if existing.title.lower() == item['title'].lower():
