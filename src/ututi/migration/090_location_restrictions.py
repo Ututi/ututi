@@ -11,6 +11,7 @@ def upgrade(engine, language):
         #delete the duplicates
         for (tag,) in tags[1:]:
             connection.execute("update content_items set location_id = %d where location_id = %d" % (first_tag, tag))
+            connection.execute("update users set location_id = %d where location_id = %d" % (first_tag, tag))
             connection.execute("delete from tags where id = %d" % tag)
 
 def downgrade(engine, language):
