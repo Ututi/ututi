@@ -186,7 +186,7 @@ class MailinglistController(BaseController):
                              reply_to=last_post.message_id,
                              send_to=self._recipients(group),
                              list_id=group.list_address)
-        post = GroupMailingListMessage.fromMessageText(unicode(message))
+        post = GroupMailingListMessage.fromMessageText(message)
         post.group = group
         post.reply_to = last_post
         meta.Session.commit()
@@ -229,7 +229,7 @@ class MailinglistController(BaseController):
                              message_id=self._generateMessageId(),
                              send_to=self._recipients(group),
                              list_id=group.list_address)
-        post = GroupMailingListMessage.fromMessageText(unicode(message))
+        post = GroupMailingListMessage.fromMessageText(message)
         post.group = group
         meta.Session.commit()
         redirect(url(controller='mailinglist',
@@ -265,7 +265,7 @@ class MailinglistController(BaseController):
                              message_id=self._generateMessageId(),
                              send_to=self._recipients(group),
                              list_id=group.list_address)
-        post = GroupMailingListMessage.fromMessageText(unicode(message))
+        post = GroupMailingListMessage.fromMessageText(message)
         post.group = group
         meta.Session.commit()
         h.flash(_('Your message to the group was successfully sent.'))
