@@ -13,7 +13,7 @@ User should have location city and country.
     >>> from ututi.model import User
     >>> user = User.get('user@ututi.lt')
     >>> user.location_city
-    'Vilnius'
+    u'Vilnius'
     >>> user.location_country
     'LT'
 
@@ -32,7 +32,7 @@ Lets try login from Polish IP with non ASCI symbols in city name.
     >>> from ututi.model import User
     >>> user = User.get('user@ututi.lt')
     >>> user.location_city
-    'Chorz\xc3\xb3w'
+    u'Chorz\xf3w'
     >>> user.location_country
     'PL'
 
