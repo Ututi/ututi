@@ -35,3 +35,10 @@ Lets try login from Polish IP with non ASCI symbols in city name.
     'Chorz\xc3\xb3w'
     >>> user.location_country
     'PL'
+
+None in location_city don't braak the application:
+
+    >>> res = app.post("/login",
+    ...                params={'login': 'user@ututi.lt', 'password': 'password'},
+    ...                headers={'X-Forwarded-For': '213.102.4.19'})
+
