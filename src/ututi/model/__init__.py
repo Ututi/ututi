@@ -160,6 +160,7 @@ def setup_orm(engine):
                         Column('id', Integer, Sequence('users_id_seq'), primary_key=True),
                         Column('fullname', Unicode(assert_unicode=True)),
                         Column('description', Unicode(assert_unicode=True)),
+                        Column('location_city', Unicode(assert_unicode=True)),
                         Column('site_url', Unicode(assert_unicode=True)),
                         autoload=True,
                         useexisting=True,

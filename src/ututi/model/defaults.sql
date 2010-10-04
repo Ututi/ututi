@@ -302,7 +302,7 @@ create table group_mailing_list_messages (
        thread_group_id int8 references groups(id) on delete cascade not null,
        author_id int8 references users(id) not null,
        subject varchar(500) not null,
-       original text not null,
+       original bytea not null,
        sent timestamp not null,
        constraint reply_to
        foreign key (reply_to_message_id, reply_to_group_id) references group_mailing_list_messages(message_id, group_id),

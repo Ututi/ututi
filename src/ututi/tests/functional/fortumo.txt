@@ -121,6 +121,25 @@ You can buy credits for group space by SMS:
     ...              dict(sender='37067812345', message='testgroup')).body
     'Purchased another month of group space for "testgroup" (until ...).'
 
+This should send an email:
+
+    >>> from ututi.lib.mailer import mail_queue
+
+    >>> print len(mail_queue)
+    2
+
+    >>> msg = mail_queue.pop()
+    >>> msg.payload()
+    "Space for private files was bought for 'Testing group' group.\n\nUtuti team\n"
+    >>> msg.recipients
+    ['user2@ututi.lt']
+
+    >>> msg = mail_queue.pop()
+    >>> msg.payload()
+    "Space for private files was bought for 'Testing group' group.\n\nUtuti team\n"
+    >>> msg.recipients
+    ['admin@ututi.lt']
+
 If you specify an invalid group id, you will get an error:
 
     >>> make_request('group_space',
