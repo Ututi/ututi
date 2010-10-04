@@ -40,7 +40,7 @@ class ReceivemailController(BaseController):
         mime_type_list = request.POST.getall("mime-type[]")
         file_name_list = request.POST.getall("filename[]")
 
-        message_text = request.POST['Mail']
+        message_text = request.str_POST['Mail']
         try:
             message = GroupMailingListMessage.fromMessageText(message_text)
         except MessageAlreadyExists:

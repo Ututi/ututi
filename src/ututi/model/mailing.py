@@ -88,7 +88,6 @@ def setup_orm(engine):
         "group_mailing_list_messages",
         meta.metadata,
         Column('subject', Unicode(assert_unicode=True)),
-        Column('original', Unicode(assert_unicode=True)),
         autoload=True,
         autoload_with=engine)
     global group_mailing_list_attachments_table
@@ -136,7 +135,7 @@ class GroupMailingListMessage(ContentItem):
 
     @property
     def body(self):
-        message = email.message_from_string(self.original.encode('utf-8'), UtutiEmail)
+        message = email.message_from_string(self.original, UtutiEmail)
 
         while message.is_multipart():
             message = message.get_payload()[0]
@@ -167,7 +166,7 @@ class GroupMailingListMessage(ContentItem):
                 continue
             footer += '\n%s - %s' % (attachment.title, attachment_url)
 
-        message = email.message_from_string(self.original.encode('utf-8'), UtutiEmail)
+        message = email.message_from_string(self.original, UtutiEmail)
 
         address = "%s@%s" % (self.group.group_id,
                              config.get('mailing_list_host'))
@@ -195,7 +194,7 @@ class GroupMailingListMessage(ContentItem):
 
     @classmethod
     def fromMessageText(cls, message_text):
-        message = email.message_from_string(message_text.encode('utf-8'), UtutiEmail)
+        message = email.message_from_string(message_text, UtutiEmail)
         message_id = message.getMessageId()
 
         mailing_list_host = config.get('mailing_list_host')
