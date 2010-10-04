@@ -23,7 +23,7 @@ class EmailInfo(object):
         self.sender, self.recipients, self.message = sender, recipients, message
 
     def payload(self):
-        message = message_from_string(self.message.encode('utf-8'))
+        message = message_from_string(self.message)
         while message.is_multipart():
             message = message.get_payload()[0]
         return message.get_payload(decode=True)

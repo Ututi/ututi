@@ -11,4 +11,22 @@ Regression test for group email being in cc
     >>> from ututi.lib.mailer import mail_queue
     >>> print len(mail_queue)
     1
+
+    >>> print mail_queue.pop().payload().decode('ISO-8859-2')
+    Witam przyjacielu,
+    <BLANKLINE>
+    narazie nie wiem skąd wziąć więcej polskich liter i dlaczego żaden list
+    nie trafia do celu, jednak coś w tym musi być ;)
+    <BLANKLINE>
+    ołówek łóżko łabędź, bąk
+    <BLANKLINE>
+    --
+    Jaro
+    <BLANKLINE>
+
+    >>> send_test_message('lithuanian_encoding_test.txt')
+    >>> print mail_queue.pop().payload().decode('ISO-8859-13')
+    Laiškas žalias ir ąžuolas šalia.
+    <BLANKLINE>
+
     >>> mail_queue[:] = []
