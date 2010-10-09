@@ -177,19 +177,21 @@ class MailinglistController(BaseController):
     @validate(NewReplyForm)
     @ActionProtector("member", "admin")
     def reply(self, group, thread):
-        last_post = thread.posts[-1]
-        message = send_email(c.user.emails[0].email,
-                             c.group.list_address,
-                             u"Re: %s" % thread.subject,
-                             self.form_result['message'],
-                             message_id=self._generateMessageId(),
-                             reply_to=last_post.message_id,
-                             send_to=self._recipients(group),
-                             list_id=group.list_address)
-        post = GroupMailingListMessage.fromMessageText(message)
-        post.group = group
-        post.reply_to = last_post
-        meta.Session.commit()
+        if hasattr(self, 'form_result'):
+            last_post = thread.posts[-1]
+            message = send_email(c.user.emails[0].email,
+                                 c.group.list_address,
+                                 u"Re: %s" % thread.subject,
+                                 self.form_result['message'],
+                                 message_id=self._generateMessageId(),
+                                 reply_to=last_post.message_id,
+                                 send_to=self._recipients(group),
+                                 list_id=group.list_address)
+            post = GroupMailingListMessage.fromMessageText(message)
+            post.group = group
+            post.reply_to = last_post
+            meta.Session.commit()
+
         redirect(url(controller='mailinglist',
                     action='thread',
                     id=group.group_id, thread_id=thread.id))
