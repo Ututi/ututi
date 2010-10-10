@@ -66,7 +66,7 @@
     % if len(messages) > n:
       <div class="kiti-failai-100">
         <a href="${category.url()}">
-          <span class="green verysmall">parodyti kitus <span class="bold green verysmall">(${len(messages) - n})</span> failus</span>
+          <span class="green verysmall">${ungettext("Show other %(count)s message", "Show other %(count)s messages", (len(messages)- n)) % dict(count = (len(messages)- n))}</span>
           <span>
             <img src="/img/icons/arrow-very-small-down.png" alt="">
           </span>
