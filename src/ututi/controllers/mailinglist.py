@@ -9,6 +9,8 @@ from pylons import url
 from pylons import tmpl_context as c, config, request
 from pylons.i18n import _
 
+from webhelpers import paginate
+
 from mimetools import choose_boundary
 from ututi.model import File
 from ututi.lib.security import deny
@@ -157,7 +159,13 @@ class MailinglistController(BaseController):
     @group_action
     @protect_view
     def index(self, group):
-        c.messages = self._top_level_messages(group)
+        messages = self._top_level_messages(group)
+        c.messages = paginate.Page(
+                messages,
+                page=int(request.params.get('page', 1)),
+                item_count = len(messages),
+                items_per_page = 20,
+                )
         c.group_menu_current_item = 'mailinglist'
         return render('mailinglist/index.mako')
 

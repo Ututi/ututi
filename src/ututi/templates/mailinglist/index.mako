@@ -51,6 +51,7 @@
           <br style="clear: left;" />
         </div>
       % endfor
+    <div id="pager">${c.messages.pager(format='~3~') }</div>
 
     </div>
     %endif
