@@ -8,6 +8,7 @@ from pylons.controllers.util import abort
 from pylons import url
 from pylons import tmpl_context as c, config, request
 from pylons.i18n import _
+from pylons.templating import render_mako_def
 
 from webhelpers import paginate
 
@@ -167,6 +168,8 @@ class MailinglistController(BaseController):
                 items_per_page = 20,
                 )
         c.group_menu_current_item = 'mailinglist'
+        if request.params.has_key('js'):
+            return render_mako_def('mailinglist/index.mako', 'listThreads')
         return render('mailinglist/index.mako')
 
     @group_mailinglist_action

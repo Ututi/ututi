@@ -1,24 +1,8 @@
 <%inherit file="/mailinglist/base.mako" />
 
-  <%self:rounded_block class_="portletGroupFiles portletGroupMailingList">
-    <div class="single-title">
-      <div class="floatleft bigbutton2">
-        <h2 class="portletTitle bold category-title">${_('Group mail')}</h2>
-      </div>
-      % if h.check_crowds(['member', 'admin']):
-      <div style="float: right">
-        ${h.button_to(_("New topic"), url(controller='mailinglist', action='new_thread', id=c.group.group_id), method='get')}
-      </div>
-      % endif
-      <div class="clear"></div>
-    </div>
 
-    %if not c.messages:
-      <div class="single-messages">
-        <div class="no-messages">${_('No messages yet.')}</div>
-      </div>
-    %else:
-    <div class="single-messages">
+  <%def name="listThreads()">
+    <div class="single-messages" id="single-messages">
       <%
          messages = c.messages
          message_count = len(messages)
@@ -51,8 +35,33 @@
           <br style="clear: left;" />
         </div>
       % endfor
-    <div id="pager">${c.messages.pager(format='~3~') }</div>
 
+      <div id="pager">
+        ${messages.pager(format='~3~', partial_param='js',
+                       controller='mailinglist',
+                       onclick='$("#pager").addClass("loading"); $("#single-messages").load("%s"); $(document).scrollTop($("#single-messages").scrollTop()); return false;') }
+      </div>
     </div>
+  </%def>
+
+  <%self:rounded_block class_="portletGroupFiles portletGroupMailingList">
+    <div class="single-title">
+      <div class="floatleft bigbutton2">
+        <h2 class="portletTitle bold category-title">${_('Group mail')}</h2>
+      </div>
+      % if h.check_crowds(['member', 'admin']):
+      <div style="float: right">
+        ${h.button_to(_("New topic"), url(controller='mailinglist', action='new_thread', id=c.group.group_id), method='get')}
+      </div>
+      % endif
+      <div class="clear"></div>
+    </div>
+
+    %if not c.messages:
+      <div class="single-messages" id="single-messages">
+        <div class="no-messages">${_('No messages yet.')}</div>
+      </div>
+    %else:
+      ${listThreads()}
     %endif
  </%self:rounded_block>
