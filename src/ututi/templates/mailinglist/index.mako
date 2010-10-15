@@ -4,12 +4,12 @@
   <%def name="listThreads()">
     <div class="single-messages" id="single-messages">
       <%
-         messages = c.messages
-         message_count = len(messages)
+         message_count = len(c.messages)
       %>
 
-      % for index, message in enumerate(messages):
+      % for index, message_obj in enumerate(c.messages):
         <%
+            message = message_obj.info_dict()
             new_post = True
             post_url =  url(controller='mailinglist', action='thread', id=c.group.group_id, thread_id=message['thread_id'])
             post_title = message['subject']
@@ -37,7 +37,7 @@
       % endfor
 
       <div id="pager">
-        ${messages.pager(format='~3~', partial_param='js',
+        ${c.messages.pager(format='~3~', partial_param='js',
                        controller='mailinglist',
                        onclick='$("#pager").addClass("loading"); $("#single-messages").load("%s"); $(document).scrollTop($("#single-messages").scrollTop()); return false;') }
       </div>

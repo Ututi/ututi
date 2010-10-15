@@ -138,33 +138,20 @@ class NewMailForm(NewReplyForm):
 
 class MailinglistController(BaseController):
 
-    def _top_level_messages(self, group):
-        message_objs = meta.Session.query(GroupMailingListMessage)\
-            .filter_by(group_id=group.id, reply_to=None)\
-            .order_by(desc(GroupMailingListMessage.sent))\
-            .all()
-        messages = []
-        for message in message_objs:
-            msg = {'thread_id': message.id,
-                   'last_reply_author_id': message.posts[-1].author,
-                   'last_reply_author_title': message.posts[-1].author.fullname,
-                   'last_reply_date': message.posts[-1].sent,
-                   'send': message.sent,
-                   'author': message.author,
-                   'body': message.body,
-                   'reply_count': len(message.posts) - 1,
-                   'subject': message.subject}
-            messages.append(msg)
-        return messages
-
     @group_action
     @protect_view
     def index(self, group):
-        messages = self._top_level_messages(group)
+        message_objs = meta.Session.query(GroupMailingListMessage)\
+            .filter_by(group_id=group.id, reply_to=None)\
+            .order_by(desc(GroupMailingListMessage.sent))
+        message_count = meta.Session.query(GroupMailingListMessage)\
+            .filter_by(group_id=group.id, reply_to=None)\
+            .order_by(desc(GroupMailingListMessage.sent))\
+            .count()
         c.messages = paginate.Page(
-                messages,
+                message_objs,
                 page=int(request.params.get('page', 1)),
-                item_count = len(messages),
+                item_count =  message_count,
                 items_per_page = 20,
                 )
         c.group_menu_current_item = 'mailinglist'

@@ -130,6 +130,17 @@ def setup_orm(engine):
 class GroupMailingListMessage(ContentItem):
     """Message in the group mailing list."""
 
+    def info_dict(self):
+        return {'thread_id': self.id,
+                'last_reply_author_id': self.posts[-1].author,
+                'last_reply_author_title': self.posts[-1].author.fullname,
+                'last_reply_date': self.posts[-1].sent,
+                'send': self.sent,
+                'author': self.author,
+                'body': self.body,
+                'reply_count': len(self.posts) - 1,
+                'subject': self.subject}
+
     def url(self):
         return self.group.url(controller='mailinglist', action='thread', thread_id=self.thread.id)
 
