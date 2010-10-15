@@ -8,7 +8,8 @@ Test for group mailing list UI
 
 There are no threads posted at the moment:
 
-    >>> browser.printQuery("id('single-messages')")
+    >>> browser.printQuery("id('single-messages')//text()")
+    No messages yet.
 
 Let's send some messages:
 
