@@ -543,6 +543,25 @@ def setup_orm(engine):
                                                               backref='individual_messages'),
                            })
 
+    global notifications_table
+    notifications_table = Table("notifications", meta.metadata,
+                               Column('content', Unicode(assert_unicode=True)),
+                               autoload=True,
+                               autoload_with=engine)
+
+    global notifications_viewed_table
+    notifications_viewed_table = Table("notifications_viewed", meta.metadata,
+                               autoload=True,
+                               autoload_with=engine)
+
+    orm.mapper(Notification,
+               notifications_table,
+               properties={
+                 'users': relation(User,
+                                   secondary=notifications_viewed_table,
+                                   backref="seen_notifications"),
+                          })
+
     from ututi.model import mailing
     mailing.setup_orm(engine)
 
@@ -2569,3 +2588,13 @@ class OutgoingGroupSMSMessage(object):
         """Queue peer-to-peer messages for each recipient."""
         self.group.send(SMSMessage(self.message_text, sender=self.sender,
                                    parent=self, ignored_recipients=[self.sender]))
+
+
+notifications_table = None
+notifications_viewed_table = None
+class Notification(object):
+    """Class for users notifications """
+
+    def __init__(self, content, valid_until):
+        self.content = content
+        self.valid_until = valid_until
