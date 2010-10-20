@@ -1,0 +1,35 @@
+Notification testing
+====================
+
+The admin should have a new link on his dashboard, that lets him view all active and inactive group coupons.
+
+    >>> browser = Browser.logIn()
+    >>> browser.open('http://localhost/admin')
+    >>> browser.getLink('Notifications').click()
+    >>> browser.url
+    'http://localhost/admin/notifications'
+
+    >>> form = browser.getForm('notifications_form')
+    >>> form.getControl('Notification text').value = 'safdsfasddf'
+    >>> form.getControl('Valid until').value = '09/30/2030'
+    >>> form.getControl('Save').click()
+
+    >>> browser.url
+    'http://localhost/admin/notifications'
+
+    >>> browser.printQuery('id("notifications_list")//td/text()')
+    safdsfasddf
+    2030-09-30
+
+    >>> browser.getLink('Edit').click()
+    >>> form = browser.getForm('notification_form')
+    >>> form.getControl('Notification text').value = 'Hi!'
+    >>> form.getControl('Valid until').value = '10/30/2030'
+    >>> form.getControl('Save').click()
+
+    >>> browser.url
+    'http://localhost/admin/notifications'
+
+    >>> browser.printQuery('id("notifications_list")//td/text()')
+    Hi!
+    2030-10-30

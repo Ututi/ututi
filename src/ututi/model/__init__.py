@@ -2598,3 +2598,6 @@ class Notification(object):
     def __init__(self, content, valid_until):
         self.content = content
         self.valid_until = valid_until
+
+    def active(self):
+        return self.valid_until > date.today()

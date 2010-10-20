@@ -11,6 +11,7 @@ from sqlalchemy import func
 from magic import from_buffer
 from datetime import date
 from webhelpers import paginate
+from formencode import htmlfill
 from formencode.compound import Any
 from formencode.schema import Schema
 from formencode.validators import Int
@@ -37,6 +38,7 @@ from ututi.model import UserSubjectMonitoring
 from ututi.model import Page, SMS, GroupCoupon
 from ututi.model import (meta, User, Email, LocationTag, Group, Subject,
                          GroupMember, GroupMembershipType, File, PrivateMessage)
+from ututi.model import Notification
 from ututi.lib import helpers as h
 
 
@@ -75,6 +77,12 @@ class GroupCouponForm(Schema):
     action = OneOf(['smscredits', 'unlimitedspace'])
     day_count = Any(Constant(''), Int(min=0))
     valid_until = DateConverter()
+
+
+class NotificationForm(Schema):
+    allow_extra_fields = True
+    valid_until = DateConverter(not_empty=True)
+    content = String(min=1)
 
 
 class AdminController(BaseController):
@@ -409,3 +417,43 @@ class AdminController(BaseController):
             meta.Session.add(coupon)
             meta.Session.commit()
         redirect(url(controller='admin', action='group_coupons'))
+
+    @ActionProtector("root")
+    def notifications(self):
+        notifications = meta.Session.query(Notification).order_by(Notification.id.asc())
+        c.notifications = self._make_pages(notifications)
+        return render('admin/notifications.mako')
+
+    @ActionProtector("root")
+    @validate(schema=NotificationForm, form='notifications')
+    def add_notification(self):
+        if hasattr(self, 'form_result'):
+            notification = Notification(content=self.form_result['content'],
+                                 valid_until=self.form_result['valid_until'])
+            meta.Session.add(notification)
+            meta.Session.commit()
+        redirect(url(controller='admin', action='notifications'))
+
+    @ActionProtector("root")
+    def _edit_notification_form(self):
+        return render('admin/notification_edit.mako')
+
+    @ActionProtector("root")
+    def edit_notification(self, id):
+        c.notification = meta.Session.query(Notification).filter(Notification.id == id).one()
+        defaults = {
+            'id': c.notification.id,
+            'content': c.notification.content,
+            'valid_until': c.notification.valid_until.strftime('%m/%d/%Y') }
+        return htmlfill.render(self._edit_notification_form(), defaults)
+
+    @ActionProtector("root")
+    @validate(schema=NotificationForm, form='_edit_notification_form')
+    def update_notification(self):
+        if hasattr(self, 'form_result'):
+            id = self.form_result['id']
+            notification = meta.Session.query(Notification).filter(Notification.id == id).one()
+            notification.content = self.form_result['content']
+            notification.valid_until = self.form_result['valid_until']
+            meta.Session.commit()
+        redirect(url(controller='admin', action='notifications'))
