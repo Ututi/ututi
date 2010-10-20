@@ -4705,6 +4705,14 @@ body .ui-widget button.btnMedium {
   margin: 15px 0;
 }
 
+.wall_item.seen {
+  color: #888;
+}
+
+.wall_item.seen a {
+  color: #d48e5f;
+}
+
 .wall_item .event_time {
   margin-top: 5px;
   background: transparent url("../images/details/icon_event.png") left center no-repeat;

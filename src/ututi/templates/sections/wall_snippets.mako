@@ -1,5 +1,6 @@
-<%def name="wall_item()">
-<div class="wall_item ${caller.classes()}">
+<%def name="wall_item(event)">
+<%def name="seen_status()">${'not_seen' if event.created > c.user.last_seen_feed else 'seen'}</%def>
+<div class="wall_item ${caller.classes()} ${seen_status()}">
   <div class="description">
     ${caller.body()}
   </div>
@@ -12,16 +13,8 @@
 </div>
 </%def>
 
-<%def name="generic(object)">
-  <%self:wall_item>
-    <%def name="classes()">generic</%def>
-    <%def name="when()">${object.when()}</%def>
-    ${object.render()|n}
-  </%self:wall_item>
-</%def>
-
 <%def name="file_uploaded_subject(event)">
-  <%self:wall_item>
+  <%self:wall_item event="${event}">
     <%def name="classes()">file_uploaded subject_event</%def>
     <%def name="content()">
       <div class="file_link">
@@ -36,7 +29,7 @@
 </%def>
 
 <%def name="folder_created_subject(event)">
-  <%self:wall_item>
+  <%self:wall_item event="${event}">
     <%def name="classes()">folder_created subject_event</%def>
     <%def name="when()">${event.when()}</%def>
     ${_("%(user_link)s has created a new folder %(folder_name)s in the subject %(subject_link)s.") % \
@@ -47,7 +40,7 @@
 </%def>
 
 <%def name="file_uploaded_group(event)">
-  <%self:wall_item>
+  <%self:wall_item event="${event}">
     <%def name="classes()">file_uploaded group_event</%def>
     <%def name="content()">
       <div class="file_link">
@@ -62,7 +55,7 @@
 </%def>
 
 <%def name="folder_created_group(event)">
-  <%self:wall_item>
+  <%self:wall_item event="${event}">
     <%def name="classes()">folder_created group_event</%def>
     <%def name="when()">${event.when()}</%def>
     ${_("%(user_link)s has created a new folder %(folder_name)s in the group %(group_link)s.") % \
@@ -73,7 +66,7 @@
 </%def>
 
 <%def name="subject_modified(event)">
-  <%self:wall_item>
+  <%self:wall_item event="${event}">
     <%def name="classes()">subject_event subject_modified</%def>
     <%def name="when()">${event.when()}</%def>
     ${_("%(user_link)s has edited the subject %(subject_link)s.") % \
@@ -83,7 +76,7 @@
 </%def>
 
 <%def name="subject_created(event)">
-  <%self:wall_item>
+  <%self:wall_item event="${event}">
     <%def name="classes()">subject_event subject_created</%def>
     <%def name="when()">${event.when()}</%def>
     ${_("%(user_link)s has created the subject %(subject_link)s.") % \
@@ -93,7 +86,7 @@
 </%def>
 
 <%def name="mailinglistpost_created(event)">
-  <%self:wall_item>
+  <%self:wall_item event="${event}">
     <%def name="classes()">message_event mailinglistpost_created</%def>
     <%def name="content()">${h.nl2br(h.ellipsis(event.message.body, 100))}</%def>
     <%def name="when()">${event.when()}</%def>
@@ -105,7 +98,7 @@
 </%def>
 
 <%def name="forumpost_created(event)">
-  <%self:wall_item>
+  <%self:wall_item event="${event}">
     <%def name="classes()">message_event forumpost_created</%def>
     <%def name="content()">${h.nl2br(h.ellipsis(event.message.message, 100))}</%def>
     <%def name="when()">${event.when()}</%def>
@@ -117,7 +110,7 @@
 </%def>
 
 <%def name="sms_sent(event)">
-  <%self:wall_item>
+  <%self:wall_item event="${event}">
     <%def name="classes()">sms_event sms_sent</%def>
     <%def name="content()">${event.sms_text()}</%def>
     <%def name="when()">${event.when()}</%def>
@@ -128,7 +121,7 @@
 </%def>
 
 <%def name="groupmember_joined(event)">
-  <%self:wall_item>
+  <%self:wall_item event="${event}">
     <%def name="classes()">group_event groupmember_joined</%def>
     <%def name="when()">${event.when()}</%def>
     ${_("%(user_link)s joined the group %(group_link)s.") % \
@@ -138,7 +131,7 @@
 </%def>
 
 <%def name="groupmember_left(event)">
-  <%self:wall_item>
+  <%self:wall_item event="${event}">
     <%def name="classes()">group_event groupmember_left</%def>
     <%def name="when()">${event.when()}</%def>
     ${_("%(user_link)s left the group %(group_link)s.") % \
@@ -148,7 +141,7 @@
 </%def>
 
 <%def name="groupsubject_start(event)">
-  <%self:wall_item>
+  <%self:wall_item event="${event}">
     <%def name="classes()">group_event groupsubject_start</%def>
     <%def name="content()">
       <div class="subject_link">
@@ -163,7 +156,7 @@
 </%def>
 
 <%def name="groupsubject_stop(event)">
-  <%self:wall_item>
+  <%self:wall_item event="${event}">
     <%def name="classes()">group_event groupsubject_stop</%def>
     <%def name="content()">
       <div class="subject_link">
@@ -178,7 +171,7 @@
 </%def>
 
 <%def name="page_created(event)">
-  <%self:wall_item>
+  <%self:wall_item event="${event}">
     <%def name="classes()">page_event page_created</%def>
     <%def name="when()">${event.when()}</%def>
     ${_("%(user_link)s has created a page %(page_link)s in the subject %(subject_link)s.") % \
@@ -189,7 +182,7 @@
 </%def>
 
 <%def name="page_modified(event)">
-  <%self:wall_item>
+  <%self:wall_item event="${event}">
     <%def name="classes()">page_event page_modified</%def>
     <%def name="when()">${event.when()}</%def>
     ${_("%(user_link)s has modified a page %(page_link)s in the subject %(subject_link)s.") % \
