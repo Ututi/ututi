@@ -5,6 +5,7 @@ from sqlalchemy.schema import Table
 from sqlalchemy.orm import backref
 from sqlalchemy.orm import relation
 from sqlalchemy import orm
+from pylons.templating import render_mako_def
 from pylons.i18n import ungettext, _
 
 from ututi.model.mailing import GroupMailingListMessage
@@ -48,6 +49,10 @@ class Event(object):
     def render(self):
         raise NotImplementedError()
 
+    def snippet(self):
+        raise NotImplementedError()
+        #return render_mako_def('/sections/wall_snippets.mako', 'generic', object=self)
+
 
 class PageCreatedEvent(Event):
     """Event fired when a page is created.
@@ -69,6 +74,9 @@ class PageCreatedEvent(Event):
         return _("New page %(link_to_page)s of a subject %(link_to_subject)s was created") % {
             'link_to_subject': link_to(self.context.title, self.context.url()),
             'link_to_page': link_to(self.page.title, self.page.url())}
+
+    def snippet(self):
+        return render_mako_def('/sections/wall_snippets.mako', 'page_created', event=self)
 
 
 class PageModifiedEvent(Event):
@@ -104,6 +112,9 @@ class PageModifiedEvent(Event):
             return _("Page %(link_to_page)s of a subject %(link_to_subject)s was updated") % {
                 'link_to_subject': link_to(self.context.title, self.context.url()),
                 'link_to_page': link_to(self.page.title, self.page.url())}
+
+    def snippet(self):
+        return render_mako_def('/sections/wall_snippets.mako', 'page_modified', event=self)
 
 
 class FileUploadedEvent(Event):
@@ -159,6 +170,18 @@ class FileUploadedEvent(Event):
                     'link_to_group': link_to(self.context.title, self.context.url()),
                     'folder_title': self.file.folder}
 
+    def snippet(self):
+        if self.file.md5 is not None:
+            if isinstance(self.file.parent, Subject):
+                return render_mako_def('/sections/wall_snippets.mako', 'file_uploaded_subject', event=self)
+            elif isinstance(self.file.parent, Group):
+                return render_mako_def('/sections/wall_snippets.mako', 'file_uploaded_group', event=self)
+        else:
+            if isinstance(self.file.parent, Subject):
+                return render_mako_def('/sections/wall_snippets.mako', 'folder_created_subject', event=self)
+            elif isinstance(self.file.parent, Group):
+                return render_mako_def('/sections/wall_snippets.mako', 'folder_created_group', event=self)
+
 
 class SubjectCreatedEvent(Event):
     """Event fired when a new subject is created."""
@@ -167,6 +190,8 @@ class SubjectCreatedEvent(Event):
         return _("New subject %(link_to_subject)s was created") % {
             'link_to_subject': link_to(self.context.title, self.context.url())}
 
+    def snippet(self):
+        return render_mako_def('/sections/wall_snippets.mako', 'subject_created', event=self)
 
 class SubjectModifiedEvent(Event):
     """Event fired when a subject is modified."""
@@ -175,6 +200,8 @@ class SubjectModifiedEvent(Event):
         return _("Subject %(link_to_subject)s was modified") % {
             'link_to_subject': link_to(self.context.title, self.context.url())}
 
+    def snippet(self):
+        return render_mako_def('/sections/wall_snippets.mako', 'subject_modified', event=self)
 
 class MailinglistPostCreatedEvent(Event):
     """Event fired when someone posts a message on the group mailing list.
@@ -186,6 +213,9 @@ class MailinglistPostCreatedEvent(Event):
         return _("New email post %(link_to_message)s was posted on %(link_to_group)s mailing list") % {
             'link_to_group': link_to(self.context.title, self.context.url()),
             'link_to_message': link_to(self.message.subject, self.message.url())}
+
+    def snippet(self):
+        return render_mako_def('/sections/wall_snippets.mako', 'mailinglistpost_created', event=self)
 
 
 class ForumPostCreatedEvent(Event):
@@ -199,6 +229,9 @@ class ForumPostCreatedEvent(Event):
             'link_to_group': link_to(self.context.title, self.context.url(new=True)),
             'link_to_message': link_to(self.post.title, self.post.url(new=True))}
 
+    def snippet(self):
+        return render_mako_def('/sections/wall_snippets.mako', 'forumpost_created', event=self)
+
 
 class SMSMessageSentEvent(Event):
     """Event fired when someone sends an SMS message to the group."""
@@ -206,7 +239,13 @@ class SMSMessageSentEvent(Event):
     def render(self):
         return _("%(link_to_author)s sent an SMS: <em>%(text)s</em>") % {
             'link_to_author': link_to(self.outgoing_sms.sender.fullname, self.outgoing_sms.sender.url()),
-            'text': cgi.escape(self.outgoing_sms.message_text)}
+            'text': self.sms_text()}
+
+    def snippet(self):
+        return render_mako_def('/sections/wall_snippets.mako', 'sms_sent', event=self)
+
+    def sms_text(self):
+        return cgi.escape(self.outgoing_sms.message_text)
 
 
 class GroupMemberJoinedEvent(Event):
@@ -217,6 +256,9 @@ class GroupMemberJoinedEvent(Event):
             'link_to_group': link_to(self.context.title, self.context.url()),
             'link_to_user': link_to(self.user.fullname, self.user.url())}
 
+    def snippet(self):
+        return render_mako_def('/sections/wall_snippets.mako', 'groupmember_joined', event=self)
+
 
 class GroupMemberLeftEvent(Event):
     """Event fired when members leave groups."""
@@ -225,6 +267,9 @@ class GroupMemberLeftEvent(Event):
         return _("Member %(link_to_user)s left the group %(link_to_group)s") % {
             'link_to_group': link_to(self.context.title, self.context.url()),
             'link_to_user': link_to(self.user.fullname, self.user.url())}
+
+    def snippet(self):
+        return render_mako_def('/sections/wall_snippets.mako', 'groupmember_left', event=self)
 
 
 class GroupStartedWatchingSubjects(Event):
@@ -235,6 +280,9 @@ class GroupStartedWatchingSubjects(Event):
             'link_to_group': link_to(self.context.title, self.context.url()),
             'link_to_subject': link_to(self.subject.title, self.subject.url())}
 
+    def snippet(self):
+        return render_mako_def('/sections/wall_snippets.mako', 'groupsubject_start', event=self)
+
 
 class GroupStoppedWatchingSubjects(Event):
     """Event fired when group stops watching a subject."""
@@ -243,6 +291,9 @@ class GroupStoppedWatchingSubjects(Event):
         return _("Group %(link_to_group)s stopped watching subject %(link_to_subject)s") % {
             'link_to_group': link_to(self.context.title, self.context.url()),
             'link_to_subject': link_to(self.subject.title, self.subject.url())}
+
+    def snippet(self):
+        return render_mako_def('/sections/wall_snippets.mako', 'groupsubject_stop', event=self)
 
 
 def setup_orm(engine):

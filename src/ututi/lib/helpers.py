@@ -468,3 +468,18 @@ def coupons_available(user):
         .query(GroupCoupon)\
         .filter(~GroupCoupon.id.in_([coup.id for coup in user.coupons]))\
         .all()
+
+def object_link(object):
+    """Render a complete link to an object, dispatching on object type."""
+    from ututi.model import Subject, Group, User, File, ForumPost, Page
+    from ututi.model.mailing import GroupMailingListMessage
+    if type(object) in [Subject, Group, Page]:
+        return link_to(object.title, object.url())
+    elif isinstance(object, User):
+        return link_to(object.fullname, object.url())
+    elif isinstance(object, File):
+        return link_to(object.filename, object.url())
+    elif isinstance(object, GroupMailingListMessage):
+        return link_to(object.subject, object.url())
+    elif isinstance(object, ForumPost):
+        return link_to(object.title, object.url(new=True))
