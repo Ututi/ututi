@@ -1225,3 +1225,18 @@ CREATE TRIGGER update_subject_count_pages AFTER INSERT OR UPDATE OR DELETE ON pa
 
 CREATE TRIGGER update_subject_count_content_items AFTER INSERT OR UPDATE OR DELETE ON content_items
     FOR EACH ROW EXECUTE PROCEDURE update_subject_count_content_items();;
+
+/* notification */
+CREATE TABLE notifications (
+       id bigserial NOT NULL,
+       content text,
+       valid_until date NOT NULL,
+       primary key (id));;
+
+/* notification - user relationship*/
+
+CREATE TABLE notifications_viewed (
+       user_id int8 NOT NULL REFERENCES users(id),
+       notification_id int8 NOT NULL REFERENCES notifications(id)
+);;
+
