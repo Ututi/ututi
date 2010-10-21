@@ -214,6 +214,26 @@ ${self.anonymous_menu()}
   ${invitation_messages(c.user)}
   ${request_messages(c.user)}
   ${confirmation_messages(c.user)}
+
+%if c.user_notification:
+<div class="user-notification flash-message">
+  <div>
+    ${c.user_notification.content|n}
+  </div>
+  <div class="user-notification-response">
+    <a href='#' onclick="
+       $.ajax({
+         url:'${url(controller = 'notifications', action='set_notification_as_viewed', id=c.user_notification.id, user_id = c.user.id)}',
+         success: function(){
+           $('.user-notification').fadeOut();
+         }
+       })">
+      ${_('No, thanks')}
+    </a>
+  </div>
+</div>
+%endif
+
 </div>
 </%def>
 

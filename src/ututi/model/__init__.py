@@ -31,6 +31,7 @@ from sqlalchemy.exc import DatabaseError, SAWarning
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm import relation, backref, deferred, eagerload
 from sqlalchemy import func
+from sqlalchemy.sql.expression import not_
 from sqlalchemy.sql.expression import desc
 from sqlalchemy.sql.expression import and_, or_
 from sqlalchemy.orm.interfaces import MapperExtension
@@ -2601,3 +2602,8 @@ class Notification(object):
 
     def active(self):
         return self.valid_until > date.today()
+
+    @classmethod
+    def unseen_user_notification(cls, user):
+        seen_notifications = [n.id for n in user.seen_notifications]
+        return meta.Session.query(cls).filter(not_(cls.id.in_(seen_notifications))).order_by(cls.id.asc()).first()

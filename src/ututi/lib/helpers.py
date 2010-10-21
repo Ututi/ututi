@@ -347,7 +347,6 @@ def link_to(label, url='', max_length=None, **attrs):
 
     return orig_link_to(label, url, **attrs)
 
-
 class mokejimai_form(object):
 
     def __init__(self, transaction_type='support', amount=0, **kwargs):

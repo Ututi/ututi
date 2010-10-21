@@ -120,5 +120,4 @@
   </div>
   %endfor
 %endif
-
 </%def>

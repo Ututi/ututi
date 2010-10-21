@@ -91,6 +91,12 @@ class BaseController(WSGIController):
                 c.came_from_search = request.cookies.get('camefromsearch', None) == 'yes'
             user_email = 'ANONYMOUS'
 
+        from ututi.model import Notification
+        #find notification for the user
+        c.user_notification = None
+        if c.user is not None:
+              c.user_notification = Notification.unseen_user_notification(c.user)
+
         request_start_walltime = time.time()
         request_start_cputime = time.clock()
 
