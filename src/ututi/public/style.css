@@ -4770,3 +4770,7 @@ body .ui-widget button.btnMedium {
 .input-line, .input-line input{
     width: 200px;
 }
+
+.admin-logo-link a{
+    font-weight: bold;
+}

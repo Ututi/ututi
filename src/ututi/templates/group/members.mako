@@ -1,3 +1,4 @@
+
 <%inherit file="/group/base.mako" />
 
 <%def name="title()">
@@ -10,9 +11,18 @@
        group = c.group
 %>
 % for member in group.members:
-  <div class="user-logo-link">
+  <div
+     %if group.is_admin(member.user):
+     class="user-logo-link admin-logo-link"
+     %else:
+     class="user-logo-link"
+     %endif
+  >
+
+
     <div class="user-logo">
-      <a href="${url(controller="user", action="index", id=member.user.id)}" class="${'admin' if member.admin}" title="${member.user.fullname}">
+      <a href="${url(controller="user", action="index", id=member.user.id)}"
+         title="${member.user.fullname}">
         %if member.user.logo is not None:
           <img src="${url(controller='user', action='logo', id=member.user.id, width=60, height=70)}" alt="logo" />
         %else:

@@ -14,7 +14,7 @@
     </label>
     <form:error name='new_password' />
     <div class="textField input-line"><div>
-        <input type="password" size="60" name="new_password" id="new_password" class="line"/>
+        <input type="password" size="30" name="new_password" id="new_password" class="line"/>
         <span class="edge"></span>
     </div></div>
   </div>
@@ -24,7 +24,7 @@
     </label>
     <form:error name='repeat_password' />
     <div class="textField input-line"><div>
-        <input type="password" size="60" name="repeat_password" id="repeat_password" class="line"/>
+        <input type="password" size="30" name="repeat_password" id="repeat_password" class="line"/>
         <span class="edge"></span>
     </div></div>
   </div>
