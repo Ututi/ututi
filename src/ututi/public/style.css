@@ -4698,3 +4698,67 @@ body .ui-widget, body .ui-widget button {
 body .ui-widget button.btnMedium {
     font: 16px normal Arial,Helvetica,sans-serif;
 }
+
+/* User wall */
+.wall_item {
+  padding-left: 40px;
+  margin: 15px 0;
+}
+
+.wall_item.seen {
+  color: #888;
+}
+
+.wall_item.seen a {
+  color: #d48e5f;
+}
+
+.wall_item .event_time {
+  margin-top: 5px;
+  background: transparent url("../images/details/icon_event.png") left center no-repeat;
+  padding-left: 15px;
+  font-size: 0.85em;
+  color: #666;
+}
+
+.wall_item .content {
+  margin: 10px 0 10px 10px;
+}
+
+.wall_item.subject_event {
+  background: transparent url("../img/icons/subject-medium-gray.png") left top no-repeat;
+}
+
+.wall_item.group_event {
+  background: transparent url("../img/icons/grupe-big-off.png") left top no-repeat;
+}
+
+.wall_item.message_event {
+  background: transparent url("../img/icons/message-large.png") left top no-repeat;
+}
+
+.wall_item.sms_event {
+  background: transparent url("../img/icons/sms.png") left top no-repeat;
+}
+
+.wall_item.page_event {
+  background: transparent url("../img/icons/page.png") left top no-repeat;
+}
+
+.wall_item.file_uploaded .file_link {
+  padding-left: 35px;
+  padding-top: 10px;
+  height: 25px;
+  background: transparent url("../img/icons/file-off-big.png") left center no-repeat;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.wall_item .subject_link {
+  padding-left: 35px;
+  padding-top: 10px;
+  height: 25px;
+  background: transparent url("../img/icons/subject-medium-gray.png") left center no-repeat;
+  font-size: 1.1em;
+  font-weight: bold;
+}
