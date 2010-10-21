@@ -113,7 +113,7 @@ span.error-message {
 .fullForm span.error-message {
     margin-top: 0;
 }
-.textField {
+.textField, .formField {
     display: inline-block;
     padding-right: 5px;
     position: relative;
@@ -4761,4 +4761,12 @@ body .ui-widget button.btnMedium {
   background: transparent url("../img/icons/subject-medium-gray.png") left center no-repeat;
   font-size: 1.1em;
   font-weight: bold;
+}
+
+.input-line{
+    display: block;
+}
+
+.input-line, .input-line input{
+    width: 200px;
 }
