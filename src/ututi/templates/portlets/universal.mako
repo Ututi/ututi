@@ -60,7 +60,7 @@
     %for obj in targets:
     <div class="upload target_item">
       <input type="hidden" name="upload_url" value="${obj.url(action='upload_file_short')}"/>
-      <div class="target">${h.ellipsis(obj.title, 25)}</div>
+      <div class="target">${h.ellipsis(obj.title, 35)}</div>
     </div>
     %endfor
   </%self:action_portlet>
