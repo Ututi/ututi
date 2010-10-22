@@ -4774,3 +4774,36 @@ body .ui-widget button.btnMedium {
 .admin-logo-link a{
     font-weight: bold;
 }
+
+#homeSearchNotesBlock p, #homeCreateGroupBlock p{
+    margin-top: 0px;
+}
+
+
+a.home-link-to-create-group, a.link-to-user-join, a.link-to-search-for-notes{
+    display: block;
+    cursor: pointer;
+}
+
+a.frontpage-title-link{
+    color:#808080;
+}
+a.frontpage-title-link:hover{
+    color:#808080;
+    text-decoration: none;
+}
+
+
+a.home-link-to-create-group{
+    height:138px;
+    margin:30px auto 42px;
+    width:170px;
+}
+
+a.link-to-search-for-notes{
+    width: 170px;
+    height:155px;
+    margin:20px auto 35px;
+}
+
+

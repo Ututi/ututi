@@ -1,7 +1,10 @@
 <%inherit file="/ubase-nomenu.mako" />
 
 <div id="homeSearchNotesBlock">
-  <h2>${_('Search for notes')}</h2>
+  <h2>
+    <a href="#" class="frontpage-title-link" onclick="$('#search_form_portlet').submit()">${_('Search for notes')}</a>
+  </h2>
+<a class="link-to-search-for-notes" onclick="$('#search_form_portlet').submit()"></a>
   <p>${_('Your study materials')}</p>
   <ul>
     <li>${_('Subjects and files')}</li>
@@ -17,7 +20,9 @@
     </fieldset>
   </form>
 </div><div id="homeRegisterBlock">
-  <h2>${_('Join')}</h2>
+  <h2>
+    <a class="frontpage-title-link" href='#' onclick="$('#homeRegisterStep').click()">${_('Join')}</a>    
+  </h2>
 
   <div id="registrationForm" class="${'shown' if c.show_registration else 'hidden'}">
     <form id="registration_form" method="post" action="${url(controller='home', action='register')}">
@@ -97,7 +102,9 @@
 
   </div>
   <div id="registrationTeaser" class="${'hidden' if c.show_registration else ''}">
-    <img src="${url('/img/person.png')}" alt="${_('Register')}"/>
+    <a href='#' onclick="$('#homeRegisterStep').click()">
+      <img src="${url('/img/person.png')}" alt="${_('Register')}"/>
+    </a>
     <div id="homeRegisterWelcome">
       ${_('Here you and your classmates can use the file storage for sharing information and create group for communication.')}
     </div>
@@ -112,7 +119,9 @@
     </script>
   </div>
 </div><div id="homeCreateGroupBlock">
-  <h2>${_('Create a group')}</h2>
+    <h2><a class="frontpage-title-link" href="${url(controller='group', action='group_type')}">${_("Create a group")}</a></h2>
+
+  <a class="home-link-to-create-group" href="${url(controller='group', action='group_type')}"></a>
   <p>${_('Groups have')}</p>
   <ul>
     <li style="background-image: url('img/icons/comment_green_17.png');">${_('A mailing list or forum')}</li>
