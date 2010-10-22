@@ -238,7 +238,7 @@ test_translations: bin/pofilter
 # warning when that happens
 .PHONY: test_coverage
 test_coverage: bin/coverage .coverage
-	bin/coverage report --include "data/*" | awk  '{print $$1}' | sed s/data/src\\/ututi/ | sort > parts/test/covered_templates.txt
+	bin/coverage report --include "data/*" | grep '^data/' | awk  '{print $$1}' | sed s/data/src\\/ututi/ | sort > parts/test/covered_templates.txt
 	find src/ututi -name "*.mako" | sort > parts/test/all_templates.txt
 	diff -u parts/test/all_templates.txt parts/test/covered_templates.txt || true
 
