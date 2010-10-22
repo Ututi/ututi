@@ -134,11 +134,11 @@ coverage: bin/test bin/coverage instance/done instance/var/run/.s.PGSQL.${PGPORT
 .PHONY: coverage_report
 coverage_report: bin/test .coverage
 	rm -rf coverage
-	bin/coverage html -d ./coverage/ --omit=/usr,src/ututi/tests,$(HOME)/.buildout,src/ututi/migration,eggs
+	bin/coverage html -d ./coverage/ --omit="src/ututi/migration/*","src/ututi/tests/*","/*/eggs/*","eggs/*"
 
 .PHONY: coverage_report_hudson
 coverage_report_hudson: bin/coverage .coverage
-	bin/coverage xml --omit=/usr,src/ututi/tests,$(HOME)/.buildout,src/ututi/migration,eggs
+	bin/coverage xml --omit="src/ututi/migration/*","src/ututi/tests/*","/*/eggs/*","eggs/*"
 
 .PHONY: extract-translations
 extract-translations: bin/py
@@ -236,11 +236,11 @@ test_translations: bin/pofilter
 # warning when that happens
 .PHONY: test_coverage
 test_coverage: bin/coverage .coverage
-	bin/coverage report --omit=/usr,eggs,src/ututi/tests,$(HOME)/.buildout,src/ututi/migration | grep mako | awk  '{print $$1}' | sed s/data/src\\/ututi/ | sort > parts/test/covered_templates.txt
+	bin/coverage report --include "data/*" | awk  '{print $$1}' | sed s/data/src\\/ututi/ | sort > parts/test/covered_templates.txt
 	find src/ututi -name "*.mako" | sort > parts/test/all_templates.txt
 	diff -u parts/test/all_templates.txt parts/test/covered_templates.txt || true
 
-	bin/coverage report --omit=/usr,eggs,src/ututi/tests,$(HOME)/.buildout,src/ututi/migration | grep -v mako | grep '^src/' | awk  '{print $$1}' | sort > parts/test/covered_code.txt
+	bin/coverage report --omit="src/ututi/migration/*","src/ututi/tests/*" --include="src/*" | grep '^src/' | awk  '{print $$1}' | sort > parts/test/covered_code.txt
 	find src/ututi -name "*.py" | grep -v "src/ututi/migration" | grep -v "src/ututi/tests" | sed s/\\.py// | sort > parts/test/all_code.txt
 	diff -u parts/test/all_code.txt parts/test/covered_code.txt || true
 
