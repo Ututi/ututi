@@ -31,7 +31,7 @@
       </a>
     </div>
     <div>
-      <a href="${url(controller="user", action="index", id=member.user.id)}" title="${member.user.fullname}">
+      <a href="${url(controller="user", action="index", id=member.user.id)}" title="${member.user.fullname}" class="link-to-user-profile">
         ${member.user.fullname}
       </a>
     </div>

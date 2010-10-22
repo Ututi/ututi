@@ -270,7 +270,7 @@ After the confirmation, the new member should receive an email:
 And the new member should be able to access the group now.
 
     >>> browser3.open('http://localhost/group/test/members')
-    >>> browser3.printQuery("//div[@class='user-logo-link']/div/a/text()")
+    >>> browser3.printQuery("//a[@class='link-to-user-profile']/text()")
     Adminas Adminovix
     Alternative user
     Jonas Petraitis Petrauskas

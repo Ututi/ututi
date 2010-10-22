@@ -74,9 +74,14 @@ Let's accept this invitation.
 
     >>> browser2.getLink('Moderatoriai').click()
     >>> browser2.getLink('Members').click()
-    >>> browser2.printQuery("//div[@class='user-logo-link']/div/a/text()")
+    >>> browser2.printQuery("//a[@class='link-to-user-profile']/text()")
     Adminas Adminovix
     Alternative user
+
+Admin should be marked:
+
+    >>> browser2.printQuery("//div[@class='user-logo-link admin-logo-link']/div/a/text()")
+    Adminas Adminovix
 
 Now let's return to the admin session and see if we can set the role of the new user.
 
