@@ -131,14 +131,16 @@ coverage: bin/test bin/coverage instance/done instance/var/run/.s.PGSQL.${PGPORT
 	rm -rf .coverage
 	bin/coverage run bin/test
 
+COVERAGE_OMIT_PARAMS="src/ututi/migration/*","src/ututi/tests/*","/*/eggs/*","eggs/*","src/facebook*","src/daemon*"
+
 .PHONY: coverage_report
 coverage_report: bin/test .coverage
 	rm -rf coverage
-	bin/coverage html -d ./coverage/ --omit="src/ututi/migration/*","src/ututi/tests/*","/*/eggs/*","eggs/*"
+	bin/coverage html -d ./coverage/ --omit=$(COVERAGE_OMIT_PARAMS)
 
 .PHONY: coverage_report_hudson
 coverage_report_hudson: bin/coverage .coverage
-	bin/coverage xml --omit="src/ututi/migration/*","src/ututi/tests/*","/*/eggs/*","eggs/*"
+	bin/coverage xml --omit=$(COVERAGE_OMIT_PARAMS)
 
 .PHONY: extract-translations
 extract-translations: bin/py
@@ -240,7 +242,7 @@ test_coverage: bin/coverage .coverage
 	find src/ututi -name "*.mako" | sort > parts/test/all_templates.txt
 	diff -u parts/test/all_templates.txt parts/test/covered_templates.txt || true
 
-	bin/coverage report --omit="src/ututi/migration/*","src/ututi/tests/*" --include="src/*" | grep '^src/' | awk  '{print $$1}' | sort > parts/test/covered_code.txt
+	bin/coverage report --omit="src/ututi/migration/*","src/ututi/tests/*","src/facebook*","src/daemon*" --include="src/*" | grep '^src/' | awk  '{print $$1}' | sort > parts/test/covered_code.txt
 	find src/ututi -name "*.py" | grep -v "src/ututi/migration" | grep -v "src/ututi/tests" | sed s/\\.py// | sort > parts/test/all_code.txt
 	diff -u parts/test/all_code.txt parts/test/covered_code.txt || true
 
