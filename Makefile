@@ -136,6 +136,10 @@ coverage_report: bin/test .coverage
 	rm -rf coverage
 	bin/coverage html -d ./coverage/ --omit=/usr,src/ututi/tests,$(HOME)/.buildout,src/ututi/migration
 
+.PHONY: coverage_report_hudson
+coverage_report_hudson: bin/coverage .coverage
+	bin/coverage xml --omit=/usr,src/ututi/tests,$(HOME)/.buildout,src/ututi/migration
+
 .PHONY: extract-translations
 extract-translations: bin/py
 	bin/py setup.py extract_messages --no-location
@@ -223,7 +227,7 @@ test_translations: bin/pofilter
 	bin/pofilter --progress=none -t xmltags -t printf --ututi ${PWD}/src/ututi/i18n/ -o ${PWD}/parts/test_translations/
 	diff -r -u ${PWD}/src/ututi/tests/expected_i18n_errors/lt ${PWD}/parts/test_translations/lt
 
-.coverage:
+.coverage: bin/coverage bin/test
 	bin/coverage run bin/test
 
 # Test for files that were not touched at all such files may contain
