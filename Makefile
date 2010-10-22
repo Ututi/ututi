@@ -127,7 +127,7 @@ clean:
 	find src/ -name '*.pyc' -exec rm '{}' ';'
 
 .PHONY: coverage
-coverage: bin/test
+coverage: bin/test bin/coverage instance/done instance/var/run/.s.PGSQL.${PGPORT}
 	rm -rf .coverage
 	bin/coverage run bin/test
 
