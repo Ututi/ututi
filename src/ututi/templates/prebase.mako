@@ -215,17 +215,6 @@ ${self.anonymous_menu()}
   ${request_messages(c.user)}
   ${confirmation_messages(c.user)}
 
-
-<script language="javascript" type="text/javascript">
-  alert('${_("Your browser is not supported. Please update your browser or download one of theses:\\n\
-Google Chrome (http://www.chrome.lt)\\n\
-Mozilla Firefox (http://www.mozilla.org)\\n\
-Opera (http://www.opera.com)")}');
-</script>
-
-
-
-
 %if c.user_notification:
 <div class="user-notification flash-message">
   <div>
