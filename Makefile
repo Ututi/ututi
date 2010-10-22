@@ -134,11 +134,11 @@ coverage: bin/test bin/coverage instance/done instance/var/run/.s.PGSQL.${PGPORT
 .PHONY: coverage_report
 coverage_report: bin/test .coverage
 	rm -rf coverage
-	bin/coverage html -d ./coverage/ --omit=/usr,src/ututi/tests,$(HOME)/.buildout,src/ututi/migration
+	bin/coverage html -d ./coverage/ --omit=/usr,src/ututi/tests,$(HOME)/.buildout,src/ututi/migration,eggs
 
 .PHONY: coverage_report_hudson
 coverage_report_hudson: bin/coverage .coverage
-	bin/coverage xml --omit=/usr,src/ututi/tests,$(HOME)/.buildout,src/ututi/migration
+	bin/coverage xml --omit=/usr,src/ututi/tests,$(HOME)/.buildout,src/ututi/migration,eggs
 
 .PHONY: extract-translations
 extract-translations: bin/py
