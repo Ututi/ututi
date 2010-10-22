@@ -22,6 +22,9 @@ bin/buildout: bootstrap.py
 bin/test: buildout.cfg bin/buildout setup.py versions.cfg
 	$(BUILDOUT)
 
+bin/coverage: buildout.cfg bin/buildout setup.py versions.cfg
+	$(BUILDOUT)
+
 bin/py: buildout.cfg bin/buildout setup.py versions.cfg
 	$(BUILDOUT)
 
