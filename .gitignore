@@ -17,3 +17,4 @@ smsd.pid
 .installed.cfg
 coverage/*
 backup/*
+performance.log
