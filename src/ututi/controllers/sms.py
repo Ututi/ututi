@@ -45,5 +45,5 @@ class SmsController(BaseController):
         sms_id = request.params.get('id')
         sms = SMS.get(sms_id)
         sms.delivery_status = request.params.get('status')
-        sms.delivered = datetime.utcfromtimestamp(float(request.params.get('time')))
+        sms.delivered = datetime.utcnow()
         meta.Session.commit()
