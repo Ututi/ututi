@@ -1,0 +1,12 @@
+Tests for anonymous_index template
+-----------------------------------
+
+Check if with no user we are redirected to root path
+
+    >>> browser = Browser()
+    >>> browser.open('http://localhost')
+    >>> browser.url
+    'http://localhost'
+
+
+
