@@ -60,10 +60,8 @@ use the group mailing list together then!
   </%self:rounded_block>
 %endif
 
-<ul id="event_list">
+<div id="wall_items">
 % for event in c.events:
-<li>
-  ${event.render()|n} <span class="event_time">(${event.when()})</span>
-</li>
+  ${event.snippet()}
 % endfor
-</ul>
+</div>

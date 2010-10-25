@@ -43,18 +43,19 @@ Group subject watching
 These actions should have left an event trail on the group home page:
 
     >>> browser.getLink("What's New?", url='group').click()
-    >>> browser.printQuery("id('event_list')")
-    <ul id="event_list">
-      <li>
-      Group <a href="/group/moderators">Moderatoriai</a> stopped watching subject <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a>
-        <span class="event_time">(... second... ago)</span>
-      </li>
-      <li>
-      Group <a href="/group/moderators">Moderatoriai</a> started watching subject <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a>
-        <span class="event_time">(... second... ago)</span>
-      </li>
-      <li>
-      Member <a href="/user/1">Adminas Adminovix</a> joined the group <a href="/group/moderators">Moderatoriai</a>
-        <span class="event_time">(... second... ago)</span>
-      </li>
-    </ul>
+    >>> browser.printQuery("id('wall_items')//div[@class='description']//text()")
+    The group
+    Moderatoriai
+    has stopped watching the subject
+    Matematinė analizė
+    .
+    The group
+    Moderatoriai
+    has started watching the subject
+    Matematinė analizė
+    .
+    <BLANKLINE>
+    Adminas Adminovix
+    joined the group
+    Moderatoriai
+    .

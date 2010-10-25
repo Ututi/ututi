@@ -99,7 +99,7 @@
 <%def name="forumpost_created(event)">
   <%self:wall_item event="${event}">
     <%def name="classes()">message_event forumpost_created</%def>
-    <%def name="content()">${h.nl2br(h.ellipsis(event.message.message, 100))}</%def>
+    <%def name="content()">${h.nl2br(h.ellipsis(event.post.message, 100))}</%def>
     <%def name="when()">${event.when()}</%def>
     ${_("%(user_link)s has posted a new message %(message_link)s in the forum %(group_link)s.") % \
        dict(user_link=h.object_link(event.user),
