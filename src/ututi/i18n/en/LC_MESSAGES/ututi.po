@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-09-27 14:16+0300\n"
+"PO-Revision-Date: 2010-10-25 14:31+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -1065,6 +1065,9 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
+msgid "No, thanks"
+msgstr ""
+
 msgid "UTUTI"
 msgstr ""
 
@@ -1356,6 +1359,24 @@ msgstr ""
 msgid "Sending..."
 msgstr ""
 
+msgid "Notification"
+msgstr ""
+
+msgid "Editing"
+msgstr ""
+
+msgid "Notification text"
+msgstr ""
+
+msgid "Content"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Notifications"
+msgstr ""
+
 msgid "SMS messages"
 msgstr ""
 
@@ -1550,9 +1571,6 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-msgid "Content"
-msgstr ""
-
 msgid "Update"
 msgstr ""
 
@@ -1562,7 +1580,40 @@ msgstr ""
 msgid "New entry"
 msgstr ""
 
-msgid "Edit"
+msgid "New book"
+msgstr ""
+
+msgid "back to search"
+msgstr ""
+
+msgid "Book Cover"
+msgstr ""
+
+msgid "Author"
+msgstr ""
+
+msgid "Publisher"
+msgstr ""
+
+msgid "Book Year"
+msgstr ""
+
+msgid "Course"
+msgstr ""
+
+msgid "Location"
+msgstr ""
+
+msgid "Price"
+msgstr ""
+
+msgid "Tags"
+msgstr ""
+
+msgid "Brief description of the book"
+msgstr ""
+
+msgid "Start watching this book personally"
 msgstr ""
 
 #, python-format
@@ -1749,6 +1800,12 @@ msgstr ""
 #, python-format
 msgid "%(count)s reply"
 msgid_plural "%(count)s replies"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "Show other %(count)s message"
+msgid_plural "Show other %(count)s messages"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -2022,9 +2079,6 @@ msgid "Delete current logo"
 msgstr ""
 
 msgid "Default group tab"
-msgstr ""
-
-msgid "Tags"
 msgstr ""
 
 msgid "Edit group front page"
@@ -3274,6 +3328,82 @@ msgid ""
 "membership?"
 msgstr ""
 
+#, python-format
+msgid "%(user_link)s has uploaded a new file in the subject %(subject_link)s."
+msgstr ""
+
+#, python-format
+msgid ""
+"%(user_link)s has created a new folder %(folder_name)s in the subject "
+"%(subject_link)s."
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has uploaded a new file in the group %(group_link)s."
+msgstr ""
+
+#, python-format
+msgid ""
+"%(user_link)s has created a new folder %(folder_name)s in the group "
+"%(group_link)s."
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has edited the subject %(subject_link)s."
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has created the subject %(subject_link)s."
+msgstr ""
+
+#, python-format
+msgid ""
+"%(user_link)s has posted a new message %(message_link)s to the group "
+"%(group_link)s."
+msgstr ""
+
+#, python-format
+msgid ""
+"%(user_link)s has posted a new message %(message_link)s in the forum "
+"%(group_link)s."
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has sent an sms to the group %(group_link)s."
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s joined the group %(group_link)s."
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s left the group %(group_link)s."
+msgstr ""
+
+#, python-format
+msgid ""
+"The group %(group_link)s has started watching the subject "
+"%(subject_link)s."
+msgstr ""
+
+#, python-format
+msgid ""
+"The group %(group_link)s has stopped watching the subject "
+"%(subject_link)s."
+msgstr ""
+
+#, python-format
+msgid ""
+"%(user_link)s has created a page %(page_link)s in the subject "
+"%(subject_link)s."
+msgstr ""
+
+#, python-format
+msgid ""
+"%(user_link)s has modified a page %(page_link)s in the subject "
+"%(subject_link)s."
+msgstr ""
+
 msgid "Region"
 msgstr ""
 
@@ -3293,9 +3423,6 @@ msgid "[Edit]"
 msgstr ""
 
 msgid "Regions for locations"
-msgstr ""
-
-msgid "back to search"
 msgstr ""
 
 msgid "Lecturer"
