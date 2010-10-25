@@ -19,10 +19,74 @@ and do something else:
       <h1>Error!</h1>
       <img src="/images/details/icon_nope.png" />
       <div>
-    Oops, an error happened, please don't leave us, go back and try doing something else or look for information.
-    </div>
+      Oops, an error happened, please don't leave us, go back and try doing something else or look for information.<br />
+      Our trained monkeys are fixing this error now. If You wish, You can kick monkeys or shout on them
+      <form id="error_message_form" class="fullForm" method="post" action="/error/send_error">
+          <div>
+            <label>
+              <span class="labelText">Shout message</span>
+              <span class="textField">
+                <textarea cols="50" id="error_message" name="error_message" rows="5"></textarea>
+                <span class="edgeTextArea"></span>
+              </span>
+              <error name="error_message"></error>
+            </label>
+            <div>
+              <button class="btn" name="submit" value="kick">
+                <span>Kick monkeys</span>
+              </button>
+              <button class="btn" name="submit" value="shout">
+                <span>Shout on monkeys</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
       <a href="/search">go find something</a>
     </div>
+
+User can send error message by clicking shout on monkeys
+    >>> browser.open('http://localhost/admin/error')
+    Traceback (most recent call last):
+    ...
+    HTTPError: HTTP Error 500: Internal Server Error
+
+    >>> browser.getControl('Shout message').value = "Bad bad monkeys"
+    >>> browser.getControl('shout').click()
+    >>> from ututi.lib.mailer import mail_queue
+
+    >>> mail_queue.pop().payload()
+    'Bad bad monkeys'
+
+After that user will be redirected to "search" area and the flash message will be shown
+
+     >>> browser.url
+     'http://localhost/profile/browse'
+
+     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
+     Monkeys are ashamed of what you said and now going to fix problem. Until they do that, try to search for something else.
+
+User can send constant error message (no mather what hy type in "shout message") by clicking on "Kick monkeys"
+
+    >>> browser.open('http://localhost/admin/error')
+    Traceback (most recent call last):
+    ...
+    HTTPError: HTTP Error 500: Internal Server Error
+
+    >>> browser.getControl('Shout message').value = "Bad bad monkeys"
+    >>> browser.getControl('kick').click()
+    >>> from ututi.lib.mailer import mail_queue
+
+    >>> mail_queue.pop().payload()
+    'User kicked monkeys'
+
+After that user will be redirected to "search" area and the flash message will be shown
+
+     >>> browser.url
+     'http://localhost/profile/browse'
+
+     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
+     Auch! Monkeys were kicked and trying to work harder.  Until they do that, try to search for something else.
 
 While not found pages show a flash message indicating that the url
 they have entered is not found, and include the search form in the

@@ -1,8 +1,14 @@
 from pylons import request, tmpl_context as c
+import ututi.lib.helpers as h
 
 from ututi.model import get_supporters
 from ututi.lib.base import BaseController, render
+from ututi.lib.mailer import send_email
 
+from pylons.i18n import _
+from pylons import url, config
+
+from pylons.controllers.util import redirect
 
 from ututi.controllers.search import SearchController
 class ErrorController(SearchController):
@@ -36,3 +42,19 @@ class ErrorController(SearchController):
             return render('/search/index.mako')
 
         return render("/error.mako")
+
+    def send_error(self):
+        if request.method == 'POST':
+            sender = _('guest')
+            action = request.POST.get('submit')
+            message = ""
+            if c.user:
+                sender = c.user.emails[0].email
+            if action == "shout":
+                h.flash(_('Monkeys are ashamed of what you said and now going to fix problem. Until they do that, try to search for something else.'))
+                message = request.POST.get('error_message')
+            elif action == "kick":
+                message = _("User kicked monkeys")
+                h.flash(_('Auch! Monkeys were kicked and trying to work harder.  Until they do that, try to search for something else.'))
+            send_email(sender, config.get('error_email', 'errors.ututi.lt'), "["+_("Error message")+"]", message)
+        redirect(url(controller='search', action="index"))

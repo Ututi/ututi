@@ -4798,4 +4798,7 @@ a.link-to-search-for-notes{
     margin:20px auto 35px;
 }
 
-
+#error_message_form{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
