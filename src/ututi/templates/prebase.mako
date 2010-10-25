@@ -221,14 +221,14 @@ ${self.anonymous_menu()}
     ${c.user_notification.content|n}
   </div>
   <div class="user-notification-response">
-    <a href='#' onclick="
+    <a class="close-link" href='#' onclick="
        $.ajax({
          url:'${url(controller = 'notifications', action='set_notification_as_viewed', id=c.user_notification.id, user_id = c.user.id)}',
          success: function(){
            $('.user-notification').fadeOut();
          }
        })">
-      ${_('No, thanks')}
+      ${h.image('/img/icons/bigX_15x15.png', alt=_('No, thanks'))}
     </a>
   </div>
 </div>
