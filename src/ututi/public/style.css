@@ -4809,6 +4809,12 @@ a.link-to-search-for-notes{
     margin-bottom: 10px;
 }
 
+#error-container {
+  height: 200px;
+  background: transparent url("images/angry_monkey.jpg") right bottom no-repeat;
+  padding-bottom: 30px;
+}
+
 .folow-us-icons{
     position:absolute;
     right:5px;

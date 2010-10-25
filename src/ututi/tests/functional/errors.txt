@@ -12,38 +12,15 @@ and do something else:
     ...
     HTTPError: HTTP Error 500: Internal Server Error
 
-    >>> browser.printQuery("id('mainContent')")
-    <div id="mainContent">
-      <div id="flash-messages">
-    </div>
-      <h1>Error!</h1>
-      <img src="/images/details/icon_nope.png" />
-      <div>
-      Oops, an error happened, please don't leave us, go back and try doing something else or look for information.<br />
-      Our trained monkeys are fixing this error now. If You wish, You can kick monkeys or shout on them
-      <form id="error_message_form" class="fullForm" method="post" action="/error/send_error">
-          <div>
-            <label>
-              <span class="labelText">Shout message</span>
-              <span class="textField">
-                <textarea cols="50" id="error_message" name="error_message" rows="5"></textarea>
-                <span class="edgeTextArea"></span>
-              </span>
-              <error name="error_message"></error>
-            </label>
-            <div>
-              <button class="btn" name="submit" value="kick">
-                <span>Kick monkeys</span>
-              </button>
-              <button class="btn" name="submit" value="shout">
-                <span>Shout on monkeys</span>
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-      <a href="/search">go find something</a>
-    </div>
+    >>> browser.printQuery("id('error-message')/text()")
+    Oops, an error happened, please don't leave us, go back and try doing something else or look for information.
+    Our highly trained monkeys are fixing this problem right now.
+
+    >>> browser.printQuery("//button/span/text()")
+    search_
+    Shout!
+    Kick a monkey!
+
 
 User can send error message by clicking shout on monkeys
     >>> browser.open('http://localhost/admin/error')
@@ -51,8 +28,8 @@ User can send error message by clicking shout on monkeys
     ...
     HTTPError: HTTP Error 500: Internal Server Error
 
-    >>> browser.getControl('Shout message').value = "Bad bad monkeys"
-    >>> browser.getControl('shout').click()
+    >>> browser.getControl('If You wish, You can shout at the monkeys:').value = "Bad bad monkeys"
+    >>> browser.getControl('shout', index=1).click()
     >>> from ututi.lib.mailer import mail_queue
 
     >>> mail_queue.pop().payload()
@@ -73,7 +50,7 @@ User can send constant error message (no mather what hy type in "shout message")
     ...
     HTTPError: HTTP Error 500: Internal Server Error
 
-    >>> browser.getControl('Shout message').value = "Bad bad monkeys"
+    >>> browser.getControl('If You wish, You can shout at the monkeys:').value = "Bad bad monkeys"
     >>> browser.getControl('kick').click()
     >>> from ututi.lib.mailer import mail_queue
 
