@@ -1,6 +1,5 @@
 <%def name="wall_item(event)">
-<%def name="seen_status()">${'not_seen' if event.created > c.user.last_seen_feed else 'seen'}</%def>
-<div class="wall_item ${caller.classes()} ${seen_status()}">
+<div class="wall_item ${caller.classes()}">
   <div class="description">
     ${caller.body()}
   </div>
