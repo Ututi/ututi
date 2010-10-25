@@ -377,7 +377,10 @@ def setup_orm(engine):
     orm.mapper(GroupMember,
                group_members_table,
                properties = {'user': relation(User, backref='memberships'),
-                             'group': relation(Group, backref=backref('members', cascade='save-update, merge, delete')),
+                             'group': relation(Group,
+                                               backref=backref('members',
+                                                               cascade='save-update, merge, delete',
+                                                               order_by=group_members_table.c.membership_type.asc())),
                              'role': relation(GroupMembershipType)})
 
 
