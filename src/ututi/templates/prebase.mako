@@ -321,6 +321,18 @@ ${self.anonymous_menu()}
         <li><a ${nofollow} href="${url(controller='home', action='terms')}">${_('Terms of use')}</a></li>
         <li><a href="#" id="feedback-link">${_('Feedback')}</a></li>
       </ul>
+      <div class="folow-us-icons">
+      <a href="${config.get('folow_us_facebook', 'http://www.facebook.com/ututi')}">
+        ${h.image('/img/social/facebook_32.png', alt=_('Follow us on Facebook'))}
+      </a>
+      <a href="${config.get('folow_us_twitter', 'http://twitter.com/ututi')}">
+        ${h.image('/img/social/twitter_32.png', alt=_('Follow us on Twitter'))}
+      </a>
+      <a href="${config.get('folow_us_ublog', 'http://blog.ututi.lt')}">
+        ${h.image('/img/social/ublog_32.png', alt=_('Read about us in blog'))}
+      </a>
+
+      </div>
     </div>
     %if c.lang in ['lt', 'en', 'pl']:
     ${h.javascript_link('/javascript/uservoice.js')|n}
