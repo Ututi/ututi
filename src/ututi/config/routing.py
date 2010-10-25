@@ -217,6 +217,7 @@ def make_map(config):
     map.connect('/school/*path/update', controller='structureview', action='update')
     map.connect('/school/*path/edit', controller='structureview', action='edit')
     map.connect('/school/*path/search_js', controller='structureview', action='search_js')
+    map.connect('/school/*path/{action}', controller='structureview', action='wall')
     map.connect('/school/*path', controller='structureview', action='index')
 
     # other user views

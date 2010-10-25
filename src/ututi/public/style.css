@@ -734,6 +734,11 @@ ul.subject-intro-message span.heading {
     text-transform: uppercase;
     *zoom: 1; /* IE7 */
 }
+
+.moduleMenu.location_tabs {
+    margin: 15px 0;
+}
+
 .moduleMenu li {
     display: inline-block;
     vertical-align: top;

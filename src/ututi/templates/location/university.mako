@@ -19,7 +19,20 @@
 
 ${universities_section(c.departments, c.location.url(), collapse=True, collapse_text=_('More departments'))}
 
-<h2 class="overline">${_('Search in the university')}</h2>
+<%def name="tabs()">
+<ul class="moduleMenu location_tabs" id="moduleMenu">
+    %for menu_item in c.structure_menu_items:
+      <li class="${'current' if menu_item['name'] == c.structure_menu_current_item else ''}">
+        <a href="${menu_item['link']}">${menu_item['title']}
+            <span class="edge"></span>
+        </a></li>
+    %endfor
+</ul>
+</%def>
+
+${tabs()}
+
+<h2>${_('Search in the university')}</h2>
 ##%if c.came_from_search:
 ##<script type="text/javascript"><!--
 ##google_ad_client = "pub-1809251984220343";

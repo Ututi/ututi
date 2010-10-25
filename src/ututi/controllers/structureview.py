@@ -27,8 +27,21 @@ def location_action(method):
         c.security_context = location
         c.object_location = None
         c.location = location
+        c.structure_menu_items = structure_menu_items()
         return method(self, location)
     return _location_action
+
+def structure_menu_items():
+    return [
+        {'title': _("Groups"),
+         'name': 'groups',
+         'link': c.location.url(action='groups')},
+        {'title': _("Subjects"),
+         'name': 'subjects',
+         'link': c.location.url(action='subjects')},
+        {'title': _("Updates"),
+         'name': 'index',
+         'link': c.location.url(action='index')}]
 
 
 class LocationEditForm(Schema):
@@ -67,6 +80,7 @@ class StructureviewController(SearchBaseController, UniversityListMixin):
     @location_action
     @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
     def index(self, location):
+        c.structure_menu_current_item = 'index'
         self._breadcrumbs(location)
 
         self.form_result['tagsitem'] = location.hierarchy()

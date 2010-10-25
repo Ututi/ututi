@@ -2,6 +2,7 @@
 <%namespace file="/search/index.mako" import="search_form"/>
 <%namespace file="/search/index.mako" import="search_results"/>
 <%namespace file="/portlets/structure.mako" import="*"/>
+<%namespace file="/location/university.mako" import="tabs"/>
 
 <%def name="portlets()">
 <div id="sidebar">
@@ -16,6 +17,8 @@
 
 <h1 class="pageTitle">${c.location.parent.title_short} ${c.location.title}</h1>
 <br />
+
+${tabs()}
 
 ##%if c.came_from_search:
 ##<script type="text/javascript"><!--
