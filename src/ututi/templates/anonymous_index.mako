@@ -2,9 +2,9 @@
 
 <div id="homeSearchNotesBlock">
   <h2>
-    <a href="#" class="frontpage-title-link" onclick="$('#search_form_portlet').submit()">${_('Search for notes')}</a>
+    <a href="${url(controller='search', action='index', obj_type='subject')}" class="frontpage-title-link">${_('Search for notes')}</a>
   </h2>
-<a class="link-to-search-for-notes" onclick="$('#search_form_portlet').submit()"></a>
+<a class="link-to-search-for-notes" href="${url(controller='search', action='index', obj_type='subject')}"></a>
   <p>${_('Your study materials')}</p>
   <ul>
     <li>${_('Subjects and files')}</li>
