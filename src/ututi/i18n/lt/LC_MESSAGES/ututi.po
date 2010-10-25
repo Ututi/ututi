@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-10-25 14:31+0300\n"
+"PO-Revision-Date: 2010-10-25 15:24+0300\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -28,6 +28,25 @@ msgid ""
 "Document at %(url)s was not found, but maybe you are interested in "
 "something else?"
 msgstr "Dokumentas pagal nuorodą %(url)s nerastas, bet galbūt ieškai ko nors dar?"
+
+msgid "guest"
+msgstr ""
+
+msgid ""
+"Monkeys are ashamed of what you said and now going to fix problem. Until "
+"they do that, try to search for something else."
+msgstr ""
+
+msgid "User kicked monkeys"
+msgstr ""
+
+msgid ""
+"Auch! Monkeys were kicked and trying to work harder.  Until they do that,"
+" try to search for something else."
+msgstr ""
+
+msgid "Error message"
+msgstr ""
 
 msgid "Files"
 msgstr "Failai"
@@ -1019,6 +1038,20 @@ msgid ""
 "something else or look for information."
 msgstr "Uoj, klaidelė... Grįžk atgal ir pabandyk paspausti kur nors kitur. "
 
+msgid ""
+"Our trained monkeys are fixing this error now. If You wish, You can kick "
+"monkeys or shout on them"
+msgstr ""
+
+msgid "Shout message"
+msgstr ""
+
+msgid "Kick monkeys"
+msgstr ""
+
+msgid "Shout on monkeys"
+msgstr ""
+
 msgid "go find something"
 msgstr "ieškoti ko nors kito"
 
@@ -1989,7 +2022,7 @@ msgstr[2] "%(count)s atsakymų"
 #, python-format
 msgid "Show other %(count)s message"
 msgid_plural "Show other %(count)s messages"
-msgstr[0] "Rodyti likusią žinutę"
+msgstr[0] "Rodyti likusią %(count)s žinutę"
 msgstr[1] "Rodyti likusias %(count)s žinutes"
 msgstr[2] "Rodyti likusias %(count)s žinučių"
 

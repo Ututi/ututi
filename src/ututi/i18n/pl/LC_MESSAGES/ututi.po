@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-10-25 14:31+0300\n"
+"PO-Revision-Date: 2010-10-25 15:23+0300\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -32,6 +32,25 @@ msgid ""
 "Document at %(url)s was not found, but maybe you are interested in "
 "something else?"
 msgstr "Dokument %(url)s nie został odnaleziony. Może interesuje Cię coś innego?"
+
+msgid "guest"
+msgstr ""
+
+msgid ""
+"Monkeys are ashamed of what you said and now going to fix problem. Until "
+"they do that, try to search for something else."
+msgstr ""
+
+msgid "User kicked monkeys"
+msgstr ""
+
+msgid ""
+"Auch! Monkeys were kicked and trying to work harder.  Until they do that,"
+" try to search for something else."
+msgstr ""
+
+msgid "Error message"
+msgstr ""
 
 msgid "Files"
 msgstr "Pliki"
@@ -1043,6 +1062,20 @@ msgid ""
 msgstr ""
 "Ups! Wystąpił błąd. Wróć do poprzedniej czynności lub poszukaj innej "
 "informacji."
+
+msgid ""
+"Our trained monkeys are fixing this error now. If You wish, You can kick "
+"monkeys or shout on them"
+msgstr ""
+
+msgid "Shout message"
+msgstr ""
+
+msgid "Kick monkeys"
+msgstr ""
+
+msgid "Shout on monkeys"
+msgstr ""
 
 msgid "go find something"
 msgstr "poszukaj czegoś"
