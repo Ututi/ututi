@@ -6,12 +6,9 @@ ${parent.head_tags()}
 
 
 <h1>${_('Error!')}</h1>
-
-<img src="${url('/images/details/icon_nope.png')}" />
-
+<br/>
 <div id="error-container">
   <div id="error-message">
-    ${_("Oops, an error happened, please don't leave us, go back and try doing something else or look for information.")}<br />
     ${_("Our highly trained monkeys are fixing this problem right now.")}
   </div>
   <form id="error_message_form" class="fullForm" method="post" action="${url(controller='error', action='send_error')}" >

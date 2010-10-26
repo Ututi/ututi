@@ -13,7 +13,6 @@ and do something else:
     HTTPError: HTTP Error 500: Internal Server Error
 
     >>> browser.printQuery("id('error-message')/text()")
-    Oops, an error happened, please don't leave us, go back and try doing something else or look for information.
     Our highly trained monkeys are fixing this problem right now.
 
     >>> browser.printQuery("//button/span/text()")
