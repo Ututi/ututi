@@ -786,3 +786,12 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         for key, value in items:
             ret += "%s => %s\n" % (key, value)
         return ret
+
+    @ActionProtector("user")
+    def set_location(self):
+        location_id = request.params.get('location_id')
+        c.user.location_id = location_id
+        meta.Session.commit()
+        location = meta.Session.query(LocationTag).filter_by(id=location_id).one()
+        redirect(url(controller='structureview', action='index', path='/'.join(location.path)))
+

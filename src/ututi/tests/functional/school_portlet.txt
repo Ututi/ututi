@@ -1,0 +1,31 @@
+School portlet tests
+====================
+
+Not logged in user can see students number of university
+
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/school/vu')
+    >>> browser.printQuery("//li[@class='studentsNumber']")
+    <li class="studentsNumber">
+      <span class="bold">0</span> students
+          </li>
+
+But he can't see butto "I study here"
+
+    >>> browser.printQuery("//form[@id='i_study_here']")
+
+Logged user ca see button "I study here"
+
+    >>> browser = Browser.logIn()
+    >>> browser.open('http://localhost/school/vu')
+    >>> browser.printQuery("//form[@id='i_study_here_form']")
+    <form id="i_study_here_form" method="post" action="/profile/set_location?location_id=1">
+      <button class="btn" value="I study here">
+        <span>I study here</span>
+      </button>
+    </form>
+
+Logged user can join university by clicking button
+
+     >>> browser.getControl('I study here').click()
+     >>> browser.printQuery("//form[@id='i_study_here_form']")

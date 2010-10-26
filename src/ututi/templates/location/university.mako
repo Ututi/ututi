@@ -2,12 +2,13 @@
 <%namespace file="/search/index.mako" import="search_form"/>
 <%namespace file="/search/index.mako" import="search_results"/>
 <%namespace file="/portlets/structure.mako" import="*"/>
+<%namespace file="/portlets/school.mako" import="*"/>
 <%namespace file="/anonymous_index/en.mako" import="*"/>
 
 <%def name="portlets()">
 <div id="sidebar">
   ${struct_info_portlet()}
-  ${struct_groups_portlet()}
+  ${school_members_portlet()}
 </div>
 </%def>
 

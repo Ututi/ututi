@@ -4838,3 +4838,21 @@ a.link-to-search-for-notes{
     right:5px;
     top:12px;
 }
+
+.students_list div.user-logo-link{
+    margin: 3px;
+}
+
+.studentsNumber{
+    text-align:right;
+}
+
+ul.universityMembersInfo{
+    margin-top:20px;
+    margin-bottom:0px;
+}
+
+ul.universityMembersInfo li{
+    overflow: hidden;
+    width: 43%;
+}

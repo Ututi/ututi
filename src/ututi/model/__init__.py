@@ -2059,6 +2059,14 @@ class LocationTag(Tag):
                 'n_groups': self.count('group'),
                 'n_files': self.count('file')}
 
+    def get_students(self, limit=None):
+        ids = [t.id for t in self.flatten]
+        students = meta.Session.query(User).filter(User.location_id.in_(ids)).order_by(User.last_seen.desc()).limit(limit).all()
+        return students
+
+    def students_number(self):
+        ids = [t.id for t in self.flatten]
+        return meta.Session.query(User).filter(User.location_id.in_(ids)).count()
 
 def cleanupFileName(filename):
     return filename.split('\\')[-1].split('/')[-1]
