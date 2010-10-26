@@ -18,3 +18,4 @@ smsd.pid
 coverage/*
 backup/*
 performance.log
+.coverage
