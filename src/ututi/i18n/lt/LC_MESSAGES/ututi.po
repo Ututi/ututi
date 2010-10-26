@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-10-25 15:24+0300\n"
+"PO-Revision-Date: 2010-10-26 10:04+0300\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -30,23 +30,27 @@ msgid ""
 msgstr "Dokumentas pagal nuorodą %(url)s nerastas, bet galbūt ieškai ko nors dar?"
 
 msgid "guest"
-msgstr ""
+msgstr "svečias"
 
 msgid ""
-"Monkeys are ashamed of what you said and now going to fix problem. Until "
-"they do that, try to search for something else."
+"Monkeys are ashamed of what you said and are now working even harder to "
+"fix the problem. Until they do that, try to search for something else."
 msgstr ""
+"Beždžionėlės susigėdo dėl to, ką pasakei ir dabar dar labiau stengiasi "
+"ištaisyti klaidą. Iki tol gali paieškoti ko nors kitko."
 
 msgid "User kicked monkeys"
-msgstr ""
+msgstr "Lankytojas įspyrė beždžionėlėms"
 
 msgid ""
-"Auch! Monkeys were kicked and trying to work harder.  Until they do that,"
-" try to search for something else."
+"Ouch! Monkeys were kicked and are trying to work harder.  Until they fix "
+"this, try to search for something else."
 msgstr ""
+"Ai! Beždžionėlė gavo spyrį ir dabar stengiasi geriau dirbti. Kol ji "
+"sutvarkys problemą, pabandyk paieškoti ko nors kitko."
 
 msgid "Error message"
-msgstr ""
+msgstr "Klaida"
 
 msgid "Files"
 msgstr "Failai"
@@ -600,6 +604,12 @@ msgstr "Sugalvok kitą trumpinį"
 msgid "The short title must contain no spaces"
 msgstr "Santrumpoje negali būti tarpų"
 
+msgid "Groups"
+msgstr "Grupės"
+
+msgid "Updates"
+msgstr "Atnaujinimai"
+
 msgid "More departments"
 msgstr "Daugiau fakultetų"
 
@@ -1038,28 +1048,33 @@ msgid ""
 "something else or look for information."
 msgstr "Uoj, klaidelė... Grįžk atgal ir pabandyk paspausti kur nors kitur. "
 
-msgid ""
-"Our trained monkeys are fixing this error now. If You wish, You can kick "
-"monkeys or shout on them"
-msgstr ""
+msgid "Our highly trained monkeys are fixing this problem right now."
+msgstr "Mūsų treniruotos beždžionėlės jau tvarko šią problemą."
 
-msgid "Shout message"
-msgstr ""
+msgid "If You wish, You can shout at the monkeys:"
+msgstr "Jei nori, gali jas aprėkti:"
 
-msgid "Kick monkeys"
-msgstr ""
+msgid "Shout!"
+msgstr "Rėkti!"
 
-msgid "Shout on monkeys"
-msgstr ""
+msgid "or"
+msgstr "arba"
+
+msgid "Kick a monkey!"
+msgstr "Įspirk beždžionėlei!"
 
 msgid "go find something"
 msgstr "ieškoti ko nors kito"
 
+msgid ""
+"Image from flickr: "
+"http://www.flickr.com/photos/orinrobertjohn/13069655/sizes/o/in/photostream/"
+msgstr ""
+"Paveiksliukas iš flickr: "
+"http://www.flickr.com/photos/orinrobertjohn/13069655/sizes/o/in/photostream/"
+
 msgid "Log in or register using your Google or Facebook account"
 msgstr "Prisijunk arba registruokis per savo Google ar Facebook paskyrą"
-
-msgid "or"
-msgstr "arba"
 
 msgid "Log in directly to Ututi"
 msgstr "Junkis tiesiai į Ututi"
@@ -1121,9 +1136,6 @@ msgstr "Paieškos tekstas"
 msgid "search_"
 msgstr "Ieškoti"
 
-msgid "Groups"
-msgstr "Grupės"
-
 msgid "All groups"
 msgstr "Visos grupės"
 
@@ -1172,6 +1184,15 @@ msgstr "Naudojimosi sistema taisyklės"
 
 msgid "Feedback"
 msgstr "Atsiliepimai"
+
+msgid "Follow us on Facebook"
+msgstr "Sek mus Facebook'e"
+
+msgid "Follow us on Twitter"
+msgstr "Sek mus Twitter'yje"
+
+msgid "Read about us in blog"
+msgstr "Skaityk mūsų blogą"
 
 msgid "Loading..."
 msgstr "Įkeliama..."

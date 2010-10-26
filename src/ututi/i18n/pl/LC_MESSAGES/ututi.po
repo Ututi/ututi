@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-10-25 15:23+0300\n"
+"PO-Revision-Date: 2010-10-26 10:04+0300\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -37,16 +37,16 @@ msgid "guest"
 msgstr ""
 
 msgid ""
-"Monkeys are ashamed of what you said and now going to fix problem. Until "
-"they do that, try to search for something else."
+"Monkeys are ashamed of what you said and are now working even harder to "
+"fix the problem. Until they do that, try to search for something else."
 msgstr ""
 
 msgid "User kicked monkeys"
 msgstr ""
 
 msgid ""
-"Auch! Monkeys were kicked and trying to work harder.  Until they do that,"
-" try to search for something else."
+"Ouch! Monkeys were kicked and are trying to work harder.  Until they fix "
+"this, try to search for something else."
 msgstr ""
 
 msgid "Error message"
@@ -613,6 +613,12 @@ msgstr "Wybierz inną nazwę skróconą"
 msgid "The short title must contain no spaces"
 msgstr "Skrócona nazwa nie powinna zawierać spacji"
 
+msgid "Groups"
+msgstr "Grupy"
+
+msgid "Updates"
+msgstr ""
+
 msgid "More departments"
 msgstr "Więcej wydziałów"
 
@@ -1063,30 +1069,33 @@ msgstr ""
 "Ups! Wystąpił błąd. Wróć do poprzedniej czynności lub poszukaj innej "
 "informacji."
 
-msgid ""
-"Our trained monkeys are fixing this error now. If You wish, You can kick "
-"monkeys or shout on them"
+msgid "Our highly trained monkeys are fixing this problem right now."
 msgstr ""
 
-msgid "Shout message"
+msgid "If You wish, You can shout at the monkeys:"
 msgstr ""
 
-msgid "Kick monkeys"
+msgid "Shout!"
 msgstr ""
 
-msgid "Shout on monkeys"
+msgid "or"
+msgstr "lub"
+
+msgid "Kick a monkey!"
 msgstr ""
 
 msgid "go find something"
 msgstr "poszukaj czegoś"
 
+msgid ""
+"Image from flickr: "
+"http://www.flickr.com/photos/orinrobertjohn/13069655/sizes/o/in/photostream/"
+msgstr ""
+
 msgid "Log in or register using your Google or Facebook account"
 msgstr ""
 "Zaloguj się lub zarejestruj się korzystając ze swego konta Google lub "
 "Facebook"
-
-msgid "or"
-msgstr "lub"
 
 msgid "Log in directly to Ututi"
 msgstr "Zaloguj się od razu do Ututi"
@@ -1148,9 +1157,6 @@ msgstr "Szukaj "
 msgid "search_"
 msgstr "szukaj"
 
-msgid "Groups"
-msgstr "Grupy"
-
 msgid "All groups"
 msgstr "Wszystkie grupy"
 
@@ -1199,6 +1205,15 @@ msgstr "Regulamin"
 
 msgid "Feedback"
 msgstr "Feedback"
+
+msgid "Follow us on Facebook"
+msgstr ""
+
+msgid "Follow us on Twitter"
+msgstr ""
+
+msgid "Read about us in blog"
+msgstr ""
 
 msgid "Loading..."
 msgstr "Ładuje..."
