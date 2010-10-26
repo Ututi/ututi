@@ -41,7 +41,7 @@ After that user will be redirected to "search" area and the flash message will b
      'http://localhost/profile/browse'
 
      >>> browser.printQuery("//div[@class='flash-message']/span/text()")
-     Monkeys are ashamed of what you said and now going to fix problem. Until they do that, try to search for something else.
+     Monkeys are ashamed of what you said and are now working even harder to fix the problem. Until they do that, try to search for something else.
 
 User can send constant error message (no mather what hy type in "shout message") by clicking on "Kick monkeys"
 
@@ -63,7 +63,7 @@ After that user will be redirected to "search" area and the flash message will b
      'http://localhost/profile/browse'
 
      >>> browser.printQuery("//div[@class='flash-message']/span/text()")
-     Auch! Monkeys were kicked and trying to work harder.  Until they do that, try to search for something else.
+     Ouch! Monkeys were kicked and are trying to work harder.  Until they fix this, try to search for something else.
 
 While not found pages show a flash message indicating that the url
 they have entered is not found, and include the search form in the

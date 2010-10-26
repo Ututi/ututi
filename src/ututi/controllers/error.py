@@ -51,10 +51,10 @@ class ErrorController(SearchController):
             if c.user:
                 sender = c.user.emails[0].email
             if action == "shout":
-                h.flash(_('Monkeys are ashamed of what you said and now going to fix problem. Until they do that, try to search for something else.'))
+                h.flash(_('Monkeys are ashamed of what you said and are now working even harder to fix the problem. Until they do that, try to search for something else.'))
                 message = request.POST.get('error_message')
             elif action == "kick":
                 message = _("User kicked monkeys")
-                h.flash(_('Auch! Monkeys were kicked and trying to work harder.  Until they do that, try to search for something else.'))
+                h.flash(_('Ouch! Monkeys were kicked and are trying to work harder.  Until they fix this, try to search for something else.'))
             send_email(sender, config.get('error_email', 'errors.ututi.lt'), "["+_("Error message")+"]", message)
         redirect(url(controller='search', action="index"))
