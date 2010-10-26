@@ -11,6 +11,7 @@ from formencode import validators, htmlfill
 from pylons.controllers.util import abort
 from pylons.controllers.util import redirect, redirect
 from pylons.i18n import _
+from pylons import request
 from pylons import tmpl_context as c, url, config
 
 from ututi.lib.security import ActionProtector, check_crowds
@@ -235,6 +236,9 @@ class ForumController(BaseController):
                    category_id=category_id, thread_id=thread_id)
         c.thread.mark_as_seen_by(c.user)
         meta.Session.commit()
+        if request.params.has_key('js'):
+            return _('Reply sent')
+
         redirect(url(controller=c.controller, action='thread', id=id,
                              category_id=category_id, thread_id=thread_id))
 

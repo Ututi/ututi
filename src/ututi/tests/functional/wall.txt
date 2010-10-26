@@ -65,3 +65,43 @@ Clear the mail_queue before doing anything:
     >>> form.getControl('Send reply').click()
     >>> mail_queue.pop().payload()
     'I am replying'
+
+    >>> mail_queue[:] = []
+
+Let's check forum messages:
+    >>> browser2 = Browser.logIn()
+    >>> browser2.getLink('Testing group').click()
+
+    >>> browser2.getLink('Forum').click()
+    >>> browser2.url
+    'http://localhost/group/testgroup/forum'
+
+    >>> browser2.getControl('New topic').click()
+    >>> browser2.getControl('Subject').value = 'This is a new forum thread!'
+    >>> browser2.getControl('Message').value = 'And I am starting it!'
+    >>> browser2.getControl('Post').click()
+    >>> browser2.url
+    'http://localhost/group/testgroup/forum/4/thread/8'
+
+    >>> mail_queue[:] = []
+
+No events yet:
+    >>> browser = Browser.logIn('user2@ututi.lt', 'password')
+    >>> browser.getLink('Home').click()
+    >>> browser.getLink("What's new?").click()
+    >>> browser.url
+    'http://localhost/home/feed'
+
+    >>> browser.printQuery('id("wall")//div[@class="content"]//text()')
+    And I am starting it!
+
+    >>> form = browser.getForm('forum_reply_form', index=0)
+    >>> form.getControl(name='message').value = 'I am replying to your forum post'
+    >>> form.getControl('Send reply').click()
+    >>> print mail_queue.pop().payload()
+    Second user posted on the 'Testing group' forum:
+    I am replying to your forum post
+    --
+    You can find the thread online here:
+    http://localhost/group/testgroup/forum/4/thread/8
+    The Ututi team

@@ -127,6 +127,18 @@
     <%def name="classes()">message_event forumpost_created</%def>
     <%def name="content()">${h.nl2br(h.ellipsis(event.post.message, 100))}</%def>
     <%def name="when()">${event.when()}</%def>
+    <%def name="action_link()">${_('Reply')}</%def>
+    <%def name="action()">
+      <%base:rounded_block>
+      <form method="post" action="${url(controller='forum', action='reply', id=event.context.group_id, category_id=event.post.category_id, thread_id=event.post.thread_id)}"
+            id="forum_reply_form" class="fullForm" enctype="multipart/form-data">
+        ${h.input_area('message', '', rows=2)}
+        <div class="line">
+          ${h.input_submit(_('Send reply'), class_='btn mailinglist_wall_reply')}
+        </div>
+      </form>
+      </%base:rounded_block>
+    </%def>
     ${_("%(user_link)s has posted a new message %(message_link)s in the forum %(group_link)s.") % \
        dict(user_link=h.object_link(event.user),
             group_link=h.object_link(event.context),

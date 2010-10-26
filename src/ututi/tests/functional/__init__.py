@@ -54,6 +54,7 @@ def ftest_setUp(test):
     alt_user.phone_number = '+37067412345'
     alt_user.phone_confirmed = True
     g2.add_member(alt_user)
+    g2.mailinglist_enabled = False
 
     u.phone_number = '+37067812375'
     u.phone_confirmed = True
