@@ -124,3 +124,17 @@ Oh, and we can upload logos too
 
     >>> browser.printQuery("id('structure-logo')")
     <img class="portlet-logo" id="structure-logo" src="/structure/3/logo/70/70" alt="logo" />
+
+University and department pages have tabs from now on:
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/school/ku/ggf')
+    >>> browser.getLink('Groups').click()
+    Traceback (most recent call last):
+    ...
+    httperror_seek_wrapper: HTTP Error 404: Not Found
+
+    >>> browser.open('http://localhost/school/ku/ggf')
+    >>> browser.getLink('Subjects').click()
+    Traceback (most recent call last):
+    ...
+    httperror_seek_wrapper: HTTP Error 404: Not Found
