@@ -10,7 +10,7 @@ $(document).ready(function(){
                 if (status == 'success') {
                   $('#wall').prepend($('<div class="action-reply">'+data+'</div>'));
                 }
-                $('.wall_item.loading').children('.action').hide();
+                $('.wall_item.loading').children('.action').fadeOut();
                 $('.wall_item.loading').removeClass('loading');
               });
             return false;
