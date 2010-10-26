@@ -4856,3 +4856,17 @@ ul.universityMembersInfo li{
     overflow: hidden;
     width: 43%;
 }
+
+.title-with-logo{
+
+}
+
+.title-with-logo h1{
+    display:inline-block;
+}
+
+.title-with-logo img{
+    vertical-align:middle;
+    margin-right: 10px;
+}
+

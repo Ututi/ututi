@@ -16,7 +16,15 @@
   ${c.location.title} (${c.location.title_short}) - ${_('department list')}
 </%def>
 
-<h1 class="pageTitle">${c.location.title}</h1>
+
+%if c.location.logo is not None:
+<div class="title-with-logo">
+  <img class="portlet-logo" id="structure-logo" src="${url(controller='structure', action='logo', id=c.location.id, width=70, height=70)}" alt="logo" />
+%else:
+<div>
+%endif
+  <h1 class="pageTitle">${c.location.title}</h1>
+</div>
 
 ${universities_section(c.departments, c.location.url(), collapse=True, collapse_text=_('More departments'))}
 
