@@ -64,6 +64,7 @@ def ftest_setUp(test):
     email = Email('user3@ututi.lt')
     email.confirmed = False
     alt_user.emails.append(email)
+    g.add_member(alt_user)
 
     subj = Subject(u'mat_analize', u'Matematin\u0117 analiz\u0117', LocationTag.get(u'vu'), u'prof. E. Misevi\u010dius')
     meta.Session.add(subj)

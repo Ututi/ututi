@@ -1,5 +1,7 @@
+<%namespace name="base" file="/prebase.mako" import="rounded_block"/>
+
 <%def name="wall_item(event)">
-<div class="wall_item ${caller.classes()}">
+<div class="wall_item click2show ${caller.classes()}">
   <div class="description">
     ${caller.body()}
   </div>
@@ -8,7 +10,19 @@
       ${caller.content()}
     </div>
   %endif
-  <div class="event_time">${caller.when()}</div>
+  <div class="event_time">
+    ${caller.when()}
+    %if hasattr(caller, "action_link"):
+      <a href='#' class="click hide action_link">
+        ${caller.action_link()}
+      </a>
+    %endif
+  </div>
+  %if hasattr(caller, "action"):
+    <div class="action show">
+      ${caller.action()}
+    </div>
+  %endif
 </div>
 </%def>
 
@@ -89,6 +103,18 @@
     <%def name="classes()">message_event mailinglistpost_created</%def>
     <%def name="content()">${h.nl2br(h.ellipsis(event.message.body, 100))}</%def>
     <%def name="when()">${event.when()}</%def>
+    <%def name="action_link()">${_('Reply')}</%def>
+    <%def name="action()">
+      <%base:rounded_block>
+      <form method="post" action="${url(controller='mailinglist', action='reply', thread_id=event.message.thread.id, id=event.context.group_id)}"
+            id="mail_reply_form" class="wallForm">
+        ${h.input_area('message', '', rows=2)}
+        <div class="line">
+          ${h.input_submit(_('Send reply'), class_='btn mailinglist_wall_reply')}
+        </div>
+      </form>
+      </%base:rounded_block>
+    </%def>
     ${_("%(user_link)s has posted a new message %(message_link)s to the group %(group_link)s.") % \
        dict(user_link=h.object_link(event.user),
             group_link=h.object_link(event.context),

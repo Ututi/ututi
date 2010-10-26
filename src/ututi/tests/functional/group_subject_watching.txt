@@ -43,7 +43,7 @@ Group subject watching
 These actions should have left an event trail on the group home page:
 
     >>> browser.getLink("What's New?", url='group').click()
-    >>> browser.printQuery("id('wall_items')//div[@class='description']//text()")
+    >>> browser.printQuery("id('wall')//div[@class='description']//text()")
     The group
     Moderatoriai
     has stopped watching the subject
@@ -54,8 +54,11 @@ These actions should have left an event trail on the group home page:
     has started watching the subject
     Matematinė analizė
     .
-    <BLANKLINE>
     Adminas Adminovix
+    joined the group
+    Moderatoriai
+    .
+    Third user
     joined the group
     Moderatoriai
     .

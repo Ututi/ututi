@@ -54,6 +54,7 @@ There is also a table listing all the group's members:
 
     >>> browser.printQuery("//table[@class='group-members']/tr/td/a/text()")
     Adminas Adminovix
+    Third user
 
     >>> mail_queue[:] = []
 
@@ -76,6 +77,7 @@ Let's accept this invitation.
     >>> browser2.getLink('Members').click()
     >>> browser2.printQuery("//a[@class='link-to-user-profile']/text()")
     Adminas Adminovix
+    Third user
     Alternative user
 
 Admin should be marked:
@@ -89,6 +91,7 @@ Now let's return to the admin session and see if we can set the role of the new 
     >>> browser.printQuery("//table[@class='group-members']/tr/td/a/text()")
     Adminas Adminovix
     Alternative user
+    Third user
 
 For kicks, let's try to make ourself a non-admin.
 

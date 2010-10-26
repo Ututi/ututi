@@ -1,0 +1,67 @@
+Test user wall functionality
+============================
+
+    >>> browser = Browser.logIn('user3@ututi.lt', 'password')
+
+No events yet:
+
+    >>> browser.getLink("What's new?").click()
+    >>> browser.url
+    'http://localhost/home/feed'
+
+    >>> browser.printQuery('id("wall")//div[@class="description"]//text()')
+    Adminas Adminovix
+    joined the group
+    Moderatoriai
+    .
+    Adminas Adminovix
+    has created the subject
+    Matematinė analizė
+    .
+
+But let's send some emails:
+
+    >>> from ututi.tests.functional import send_test_message
+    >>> send_test_message('simple_email.txt', '1', to='moderators@groups.ututi.lt')
+    >>> send_test_message('simple_email.txt', '2', to='moderators@groups.ututi.lt', reply_to='1')
+    >>> send_test_message('simple_email.txt', '3', to='moderators@groups.ututi.lt', reply_to='1')
+
+    >>> browser.getLink("What's new?").click()
+    >>> browser.printQuery('id("wall")//div[@class="description"]//text()')
+    Adminas Adminovix
+    has posted a new message
+    Hello
+    to the group
+    Moderatoriai
+    .
+    Adminas Adminovix
+    has posted a new message
+    Hello
+    to the group
+    Moderatoriai
+    .
+    Adminas Adminovix
+    has posted a new message
+    Hello
+    to the group
+    Moderatoriai
+    .
+    Adminas Adminovix
+    joined the group
+    Moderatoriai
+    .
+    Adminas Adminovix
+    has created the subject
+    Matematinė analizė
+    .
+
+Clear the mail_queue before doing anything:
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> mail_queue[:] = []
+
+    >>> form = browser.getForm('mail_reply_form', index=0)
+    >>> form.getControl(name='message').value = 'I am replying'
+    >>> form.getControl('Send reply').click()
+    >>> mail_queue.pop().payload()
+    'I am replying'

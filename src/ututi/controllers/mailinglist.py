@@ -190,6 +190,9 @@ class MailinglistController(BaseController):
             post.reply_to = last_post
             meta.Session.commit()
 
+        if request.params.has_key('js'):
+            return _('Reply sent')
+
         redirect(url(controller='mailinglist',
                     action='thread',
                     id=group.group_id, thread_id=thread.id))

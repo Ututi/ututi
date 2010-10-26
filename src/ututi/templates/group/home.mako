@@ -1,5 +1,10 @@
 <%inherit file="/group/base.mako" />
 
+<%def name="head_tags()">
+  ${parent.head_tags()}
+  ${h.javascript_link('/javascript/wall.js')}
+</%def>
+
 %if c.welcome:
   <h1>${_('Congratulations, you have created a new group!')}</h1>
 
@@ -60,7 +65,7 @@ use the group mailing list together then!
   </%self:rounded_block>
 %endif
 
-<div id="wall_items">
+<div id="wall">
 % for event in c.events:
   ${event.snippet()}
 % endfor
