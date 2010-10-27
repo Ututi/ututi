@@ -313,7 +313,7 @@ class GroupStoppedWatchingSubjects(Event):
 
 def setup_orm(engine):
     from ututi.model import files_table, pages_table, subjects_table
-    from ututi.model import forum_posts_table, outgoing_group_sms_messages_table, private_messages_table
+    from ututi.model import forum_posts_table, outgoing_group_sms_messages_table, private_messages_table, users_table
     from ututi.model.mailing import group_mailing_list_messages_table
     global events_table
     events_table = Table(
@@ -327,7 +327,8 @@ def setup_orm(engine):
                polymorphic_on=events_table.c.event_type,
                polymorphic_identity='generic',
                properties = {'context': relation(ContentItem, backref=backref('events', cascade='save-update, merge, delete')),
-                             'user': relation(User, backref='events')})
+                             'user': relation(User, backref='events',
+                                              primaryjoin=users_table.c.id==events_table.c.author_id)})
 
     orm.mapper(PageCreatedEvent, events_table,
                inherits=Event,
@@ -386,7 +387,9 @@ def setup_orm(engine):
                polymorphic_on=events_table.c.event_type,
                polymorphic_identity='private_message_sent',
                properties={'private_message': relation(PrivateMessage,
-                    primaryjoin=private_messages_table.c.id==events_table.c.private_message_id)})
+                                                       primaryjoin=private_messages_table.c.id==events_table.c.private_message_id),
+                           'recipient': relation(User,
+                                                 primaryjoin=users_table.c.id==events_table.c.recipient_id)})
 
     orm.mapper(GroupMemberJoinedEvent, events_table,
                inherits=Event,
