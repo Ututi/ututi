@@ -733,6 +733,7 @@ create table events (
        id bigserial not null,
        object_id int8 default null references content_items(id) on delete cascade,
        author_id int8 references users(id) not null,
+       recipient_id int8 default null references users(id),
        created timestamp not null default (now() at time zone 'UTC'),
        event_type varchar(30),
        file_id int8 references files(id) on delete cascade default null,
@@ -924,8 +925,8 @@ CREATE TRIGGER outgoing_group_sms_event_trigger AFTER INSERT ON outgoing_group_s
 
 CREATE FUNCTION private_message_event_trigger() RETURNS trigger AS $$
     BEGIN
-      INSERT INTO events (author_id, event_type, private_message_id)
-             VALUES (NEW.sender_id, 'private_message_sent', NEW.id);
+      INSERT INTO events (recipient_id, author_id, event_type, private_message_id)
+             VALUES (NEW.recipient_id, NEW.sender_id, 'private_message_sent', NEW.id);
       RETURN NEW;
     END
 $$ LANGUAGE plpgsql;;
