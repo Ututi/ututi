@@ -128,3 +128,30 @@ Let's check the sms replies:
 
 
     >>> sms_queue[:] = []
+
+
+Let's check private messages:
+    >>> browser.open('http://localhost/user/1')
+    >>> browser.getControl('Send message').click()
+    >>> browser.getControl('Message').value = 'I am sending you a message!'
+    >>> browser.getControl('Subject').value = 'A message from me!'
+    >>> browser.getControl('Post').click()
+
+    >>> browser2.getLink('Home').click()
+    >>> browser2.getLink("What's new?").click()
+    >>> browser2.printQuery('id("wall")//div[@class="content"]//text()')
+    I am sending you a message!
+    Replying to an sms!
+    I am replying to your forum post
+    I am replying
+
+    >>> form = browser2.getForm('message_reply_form', index=0)
+    >>> form.getControl(name='message').value = 'I am replying to your message!'
+    >>> form.getControl('Send reply').click()
+
+    >>> browser.getLink('Home').click()
+    >>> browser.getLink('Inbox').click()
+    >>> browser.getLink('A message from me!').click()
+    >>> browser.printQuery('//div[@class="post-body"]/text()')
+    I am sending you a message!
+    I am replying to your message!

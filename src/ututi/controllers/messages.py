@@ -51,6 +51,9 @@ class MessagesController(BaseController):
         original.hidden_by_sender = False
         original.hidden_by_recipient = False
         meta.Session.commit()
+        if request.params.has_key('js'):
+            return _('Message sent.')
+        h.flash(_('Message sent.'))
         redirect(url(controller='messages', action='thread', id=id))
 
     @ActionProtector("user")

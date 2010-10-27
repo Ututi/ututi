@@ -170,7 +170,19 @@
     <%def name="classes()">privatemessage_event privatemessage_sent</%def>
     <%def name="content()">${event.message_text()}</%def>
     <%def name="when()">${event.when()}</%def>
-    ${_("%(user_link)s has sent a private message \"%(subject)s\" to you.") % \
+    <%def name="action_link()">${_('Reply')}</%def>
+    <%def name="action()">
+      <%base:rounded_block>
+      <form method="post" action="${url(controller='messages', action='reply', id=event.private_message.id)}"
+            id="message_reply_form" class="wallForm">
+        ${h.input_area('message', '', rows=2)}
+        <div class="line">
+          ${h.input_submit(_('Send reply'), class_='btn action_submit')}
+        </div>
+      </form>
+      </%base:rounded_block>
+    </%def>
+    ${_("%(user_link)s has sent you a private message \"%(subject)s\".") % \
        dict(user_link=h.object_link(event.user),
             subject=event.message_text()) | n}
   </%self:wall_item>
