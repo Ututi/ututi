@@ -741,6 +741,7 @@ create table events (
        message_id int8 references group_mailing_list_messages(id) on delete cascade default null,
        post_id int8 references forum_posts(id) on delete cascade default null,
        sms_id int8 references outgoing_group_sms_messages(id) on delete cascade default null,
+       private_message_id int8 references private_messages(id) on delete cascade default null,
        primary key (id));;
 
 create index events_author_id_idx on events(author_id);
