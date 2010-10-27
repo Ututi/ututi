@@ -125,3 +125,6 @@ Let's check the sms replies:
     2
     >>> sms_queue.pop()
     ('+37067812375', u'Replying to an sms!')
+
+
+    >>> sms_queue[:] = []
