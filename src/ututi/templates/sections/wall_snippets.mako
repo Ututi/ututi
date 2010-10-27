@@ -1,7 +1,7 @@
 <%namespace name="base" file="/prebase.mako" import="rounded_block"/>
 
 <%def name="wall_item(event)">
-<div class="wall_item click2show ${caller.classes()}">
+<div class="wall_item click2show ${caller.classes()}" id="wallevent-${event.id}">
   <div class="description">
     ${caller.body()}
   </div>
