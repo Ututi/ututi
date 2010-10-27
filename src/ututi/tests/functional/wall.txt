@@ -105,3 +105,23 @@ No events yet:
     You can find the thread online here:
     http://localhost/group/testgroup/forum/4/thread/8
     The Ututi team
+
+Let's check the sms replies:
+    >>> browser2.getLink('Testing group').click()
+    >>> browser2.getControl(name='sms_message').value = 'Sending an sms!'
+    >>> browser2.getControl('Send', index=2).click()
+
+    >>> browser.getLink('Home').click()
+    >>> browser.getLink("What's new?").click()
+    >>> browser.printQuery('id("wall")//div[@class="content"]//text()')
+    Sending an sms!
+    And I am starting it!
+
+    >>> browser.getControl(name='sms_message').value = 'Replying to an sms!'
+    >>> browser.getControl('Send', index=0).click()
+
+    >>> from ututi.lib.sms import sms_queue
+    >>> len(sms_queue)
+    2
+    >>> sms_queue.pop()
+    ('+37067812375', u'Replying to an sms!')

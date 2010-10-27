@@ -1194,6 +1194,8 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
         meta.Session.add(msg)
         msg.send()
         meta.Session.commit()
+        if request.params.has_key('js'):
+            return _('SMS reply sent')
         h.flash(_('SMS sent! (%d credits used up, %d remaining)') % (cost, c.user.sms_messages_remaining))
         redirect(request.params.get('current_url'))
 

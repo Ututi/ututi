@@ -1,4 +1,5 @@
 <%namespace name="base" file="/prebase.mako" import="rounded_block"/>
+<%namespace file="/widgets/sms.mako" import="sms_widget"/>
 
 <%def name="wall_item(event)">
 <div class="wall_item click2show ${caller.classes()}" id="wallevent-${event.id}">
@@ -110,7 +111,7 @@
             id="mail_reply_form" class="wallForm">
         ${h.input_area('message', '', rows=2)}
         <div class="line">
-          ${h.input_submit(_('Send reply'), class_='btn mailinglist_wall_reply')}
+          ${h.input_submit(_('Send reply'), class_='btn action_submit')}
         </div>
       </form>
       </%base:rounded_block>
@@ -134,7 +135,7 @@
             id="forum_reply_form" class="fullForm" enctype="multipart/form-data">
         ${h.input_area('message', '', rows=2)}
         <div class="line">
-          ${h.input_submit(_('Send reply'), class_='btn mailinglist_wall_reply')}
+          ${h.input_submit(_('Send reply'), class_='btn action_submit')}
         </div>
       </form>
       </%base:rounded_block>
@@ -151,6 +152,13 @@
     <%def name="classes()">sms_event sms_sent</%def>
     <%def name="content()">${event.sms_text()}</%def>
     <%def name="when()">${event.when()}</%def>
+    <%def name="action_link()">${_('Reply')}</%def>
+    <%def name="action()">
+      <%base:rounded_block>
+      ${sms_widget(c.user, event.context)}
+      </%base:rounded_block>
+    </%def>
+
     ${_("%(user_link)s has sent an sms to the group %(group_link)s.") % \
        dict(user_link=h.object_link(event.user),
             group_link=h.object_link(event.context)) | n}

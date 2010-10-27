@@ -3342,7 +3342,7 @@ div.please-register {
     width: 45px;
 }
 
-#group_sms_portlet-content .character-counter {
+.sms-widget .character-counter {
     color: #666;
     font-size: 11px;
     float: left;
@@ -3350,61 +3350,61 @@ div.please-register {
     margin-left: 3px;
 }
 
-#group_sms_portlet-content .recipients {
+.sms-widget .recipients {
     margin-left: 120px;
     font-size: 11px;
 }
 
-#group_sms_portlet-content #sms_message {
+.sms-widget #sms_message {
     width: 260px;
 }
 
-#group_sms_portlet-content .cost {
+.sms-widget .cost {
     float: right;
     font-size: 11px;
     padding-bottom: 5px;
     padding-top: 6px;
 }
 
-#group_sms_portlet-content .cost-header,
-#group_sms_portlet-content .credits-header {
+.sms-widget .cost-header,
+.sms-widget .credits-header {
     font-weight: bold;
     color: #666;
     font-size: 13px;
 }
 
-#group_sms_portlet-content .credits-remaining {
+.sms-widget .credits-remaining {
     font-size: 11px;
     padding-top: 3px;
 }
 
-#group_sms_portlet-content .credits-remaining .credit-info {
+.sms-widget .credits-remaining .credit-info {
     padding-top: 7px;
     padding-bottom: 20px;
 }
 
-#group_sms_portlet-content .num-credits-remaining {
+.sms-widget .num-credits-remaining {
     padding-left: 5px;
     font-size: 16px;
 }
 
-#group_sms_portlet-content .num-credits-remaining.shortage {
+.sms-widget .num-credits-remaining.shortage {
     color: #f00;
     font-weight: bold;
 }
 
-#group_sms_portlet-content .sms-box {
+.sms-widget .sms-box {
     background: #e6e6e6;
     margin: -10px;
     padding: 10px;
     padding-top: 2px;
 }
 
-#group_sms_portlet-content .phone-message-block {
+.sms-widget .phone-message-block {
     font-size: 11px;
 }
 
-#group_sms_portlet-content .phone-message-block .block-head {
+.sms-widget .phone-message-block .block-head {
     padding-top: 15px;
     padding-bottom: 3px;
     font-size: 13px;
@@ -3412,7 +3412,7 @@ div.please-register {
     color: #ff6600;
 }
 
-#group_sms_portlet-content .group-sms-content {
+.sms-widget .group-sms-content {
     font-weight: bold;
     padding-top: 3px;
 }
@@ -4764,6 +4764,14 @@ body .ui-widget button.btnMedium {
   background: transparent url("../img/icons/subject-medium-gray.png") left center no-repeat;
   font-size: 1.1em;
   font-weight: bold;
+}
+
+.wall_item .sms-widget #sms_message {
+    width: 420px;
+}
+
+.wall_item .sms-widget .sms-box {
+    background: transparent;
 }
 
 .wall_item .action {
