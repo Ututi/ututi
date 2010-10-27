@@ -165,6 +165,18 @@
   </%self:wall_item>
 </%def>
 
+<%def name="privatemessage_sent(event)">
+  <%self:wall_item event="${event}">
+    <%def name="classes()">privatemessage_event privatemessage_sent</%def>
+    <%def name="content()">${event.message_text()}</%def>
+    <%def name="when()">${event.when()}</%def>
+    ${_("%(user_link)s has sent a private message \"%(subject)s\" to you.") % \
+       dict(user_link=h.object_link(event.user),
+            subject=event.message_text()) | n}
+  </%self:wall_item>
+</%def>
+
+
 <%def name="groupmember_joined(event)">
   <%self:wall_item event="${event}">
     <%def name="classes()">group_event groupmember_joined</%def>

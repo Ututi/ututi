@@ -4736,7 +4736,8 @@ body .ui-widget button.btnMedium {
   background: transparent url("../img/icons/grupe-big-off.png") left top no-repeat;
 }
 
-.wall_item.message_event {
+.wall_item.message_event,
+.wall_item.privatemessage_event {
   background: transparent url("../img/icons/message-large.png") left top no-repeat;
 }
 

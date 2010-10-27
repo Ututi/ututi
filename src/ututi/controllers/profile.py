@@ -248,7 +248,8 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         c.breadcrumbs.append(self._actions('home'))
         c.events = meta.Session.query(Event)\
             .filter(or_(Event.object_id.in_([s.id for s in c.user.all_watched_subjects]),
-                        Event.object_id.in_([m.group.id for m in c.user.memberships])))\
+                        Event.object_id.in_([m.group.id for m in c.user.memberships]),
+                        Event.recipient_id == c.user.id))\
             .filter(Event.author_id != c.user.id)\
             .order_by(desc(Event.created))\
             .limit(20).all()
