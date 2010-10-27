@@ -918,10 +918,20 @@ CREATE FUNCTION outgoing_group_sms_event_trigger() RETURNS trigger AS $$
     END
 $$ LANGUAGE plpgsql;;
 
-
 CREATE TRIGGER outgoing_group_sms_event_trigger AFTER INSERT ON outgoing_group_sms_messages
     FOR EACH ROW EXECUTE PROCEDURE outgoing_group_sms_event_trigger();;
 
+
+CREATE FUNCTION private_message_event_trigger() RETURNS trigger AS $$
+    BEGIN
+      INSERT INTO events (author_id, event_type, private_message_id)
+             VALUES (NEW.sender_id, 'private_message_sent', NEW.id);
+      RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+CREATE TRIGGER private_message_event_trigger AFTER INSERT ON private_messages
+    FOR EACH ROW EXECUTE PROCEDURE private_message_event_trigger();;
 
 /* Table for storing invitations to a group */
 CREATE TABLE group_invitations (
