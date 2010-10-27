@@ -9,7 +9,7 @@ from pylons.templating import render_mako_def
 from pylons.i18n import ungettext, _
 
 from ututi.model.mailing import GroupMailingListMessage
-from ututi.model import Group, Subject, User, File, Page, ContentItem, ForumPost, OutgoingGroupSMSMessage
+from ututi.model import Group, Subject, User, File, Page, ContentItem, ForumPost, OutgoingGroupSMSMessage, PrivateMessage
 from ututi.model import meta
 from ututi.lib.helpers import link_to, ellipsis
 
@@ -248,6 +248,21 @@ class SMSMessageSentEvent(Event):
         return cgi.escape(self.outgoing_sms.message_text)
 
 
+class PrivateMessageSentEvent(Event):
+    """Event fired when someone sends a private message to the user."""
+
+    def render(self):
+        return _("%(link_to_author)s sent an private message: <em>%(text)s</em>") % {
+            'link_to_author': link_to(self.private_message.sender.fullname, self.outgoing_sms.sender.url()),
+            'text': self.message_text()}
+
+    def snippet(self):
+        return render_mako_def('/sections/wall_snippets.mako', 'privatemessage_sent', event=self)
+
+    def message_text(self):
+        return cgi.escape(self.private_message.content)
+
+
 class GroupMemberJoinedEvent(Event):
     """Event fired when members join groups."""
 
@@ -298,7 +313,7 @@ class GroupStoppedWatchingSubjects(Event):
 
 def setup_orm(engine):
     from ututi.model import files_table, pages_table, subjects_table
-    from ututi.model import forum_posts_table, outgoing_group_sms_messages_table
+    from ututi.model import forum_posts_table, outgoing_group_sms_messages_table, private_messages_table
     from ututi.model.mailing import group_mailing_list_messages_table
     global events_table
     events_table = Table(
@@ -365,6 +380,13 @@ def setup_orm(engine):
                polymorphic_identity='sms_message_sent',
                properties={'outgoing_sms': relation(OutgoingGroupSMSMessage,
                     primaryjoin=outgoing_group_sms_messages_table.c.id==events_table.c.sms_id)})
+
+    orm.mapper(PrivateMessageSentEvent, events_table,
+               inherits=Event,
+               polymorphic_on=events_table.c.event_type,
+               polymorphic_identity='private_message_sent',
+               properties={'private_message': relation(PrivateMessage,
+                    primaryjoin=private_messages_table.c.id==events_table.c.private_message_id)})
 
     orm.mapper(GroupMemberJoinedEvent, events_table,
                inherits=Event,

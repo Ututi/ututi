@@ -177,7 +177,7 @@ def setup_orm(engine):
                                autoload=True,
                                autoload_with=engine)
 
-    global private_messages
+    global private_messages_table
     private_messages_table = Table("private_messages", meta.metadata,
                                    Column('subject', Unicode(assert_unicode=True)),
                                    Column('content', Unicode(assert_unicode=True)),
