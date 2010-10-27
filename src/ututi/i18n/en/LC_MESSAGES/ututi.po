@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-10-26 10:04+0300\n"
+"PO-Revision-Date: 2010-10-27 18:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -112,6 +112,9 @@ msgstr ""
 msgid ""
 "The web-based forum for this group has been disabled. Please use the "
 "mailing list instead."
+msgstr ""
+
+msgid "Reply sent"
 msgstr ""
 
 msgid "Community"
@@ -293,6 +296,9 @@ msgstr ""
 
 #, python-format
 msgid "Not enough SMS credits: you need %d, but you have only %d."
+msgstr ""
+
+msgid "SMS reply sent"
 msgstr ""
 
 #, python-format
@@ -832,6 +838,10 @@ msgid "%(link_to_author)s sent an SMS: <em>%(text)s</em>"
 msgstr ""
 
 #, python-format
+msgid "%(link_to_author)s sent an private message: <em>%(text)s</em>"
+msgstr ""
+
+#, python-format
 msgid "Member %(link_to_user)s joined the group %(link_to_group)s"
 msgstr ""
 
@@ -996,11 +1006,6 @@ msgid "Latest groups"
 msgstr ""
 
 msgid "Error!"
-msgstr ""
-
-msgid ""
-"Oops, an error happened, please don't leave us, go back and try doing "
-"something else or look for information."
 msgstr ""
 
 msgid "Our highly trained monkeys are fixing this problem right now."
@@ -2703,71 +2708,17 @@ msgstr ""
 msgid "Send SMS message to group"
 msgstr ""
 
-msgid ""
-"Send an SMS message to all your classmates. The service is paid by SMS "
-"credits (1 credit = 1 SMS message to one person). The cost of an SMS "
-"message depends on the number of members in the group."
+msgid "School's members"
 msgstr ""
 
-msgid "Credits left:"
-msgstr ""
-
-msgid "Purchase credits"
-msgstr ""
-
-msgid ""
-"SMS credits can be used to send SMS messages to members of a group. There"
-" are two ways to purchase SMS credits:"
-msgstr ""
-
-msgid ""
-"The SMS costs <strong>5 Lt</strong> and <strong>50 credits</strong> will "
-"be added to your account (one credit is one SMS to a single person)."
-msgstr ""
-
-msgid "If you pay by bank, <strong>a large discount applies</strong>."
-msgstr ""
-
-msgid "credits"
-msgstr ""
-
-msgid "Purchase SMS credits"
-msgstr ""
-
-msgid "Message text:"
-msgstr ""
-
-msgid "Recipients:"
-msgstr ""
-
-msgid "You do not have enough SMS credits to send a message to this group."
-msgstr ""
-
-msgid "No one in this group has confirmed their phone numbers."
-msgstr ""
-
-msgid "Cost:"
-msgstr ""
-
-msgid "SMS credits"
-msgstr ""
-
-msgid ""
-"One SMS credit allows you to send one SMS message to a single recipient. "
-"When sending a message to a group, one credit is charged for every "
-"recipient."
-msgstr ""
-
-msgid "Send a message from your phone!"
+msgid "I study here"
 msgstr ""
 
 #, python-format
-msgid ""
-"You can send a message to your group directly from your phone. The "
-"message costs <strong>2 Lt</strong>, which pays for the delivery of the "
-"message to all recipients (your SMS credits will not be charged). Send "
-"the following text to number %(phone)s:"
-msgstr ""
+msgid "<span class='bold'>%(count)s</span> student"
+msgid_plural "<span class='bold'>%(count)s</span> students"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "Everywhere"
 msgstr ""
@@ -3404,6 +3355,9 @@ msgstr ""
 msgid "%(user_link)s has created the subject %(subject_link)s."
 msgstr ""
 
+msgid "Send reply"
+msgstr ""
+
 #, python-format
 msgid ""
 "%(user_link)s has posted a new message %(message_link)s to the group "
@@ -3418,6 +3372,10 @@ msgstr ""
 
 #, python-format
 msgid "%(user_link)s has sent an sms to the group %(group_link)s."
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has sent you a private message \"%(subject)s\"."
 msgstr ""
 
 #, python-format
@@ -3627,6 +3585,75 @@ msgid "Award a medal"
 msgstr ""
 
 msgid "Award"
+msgstr ""
+
+msgid ""
+"Send an SMS message to all your classmates. The service is paid by SMS "
+"credits (1 credit = 1 SMS message to one person). The cost of an SMS "
+"message depends on the number of members in the group."
+msgstr ""
+
+msgid "Credits left:"
+msgstr ""
+
+msgid "Purchase credits"
+msgstr ""
+
+msgid ""
+"SMS credits can be used to send SMS messages to members of a group. There"
+" are two ways to purchase SMS credits:"
+msgstr ""
+
+msgid ""
+"The SMS costs <strong>5 Lt</strong> and <strong>50 credits</strong> will "
+"be added to your account (one credit is one SMS to a single person)."
+msgstr ""
+
+msgid "If you pay by bank, <strong>a large discount applies</strong>."
+msgstr ""
+
+msgid "credits"
+msgstr ""
+
+msgid "Purchase SMS credits"
+msgstr ""
+
+msgid "Message text:"
+msgstr ""
+
+msgid "Recipients:"
+msgstr ""
+
+msgid "You do not have enough SMS credits to send a message to this group."
+msgstr ""
+
+msgid "No one in this group has confirmed their phone numbers."
+msgstr ""
+
+msgid "Cost:"
+msgstr ""
+
+msgid "SMS credits"
+msgstr ""
+
+msgid ""
+"One SMS credit allows you to send one SMS message to a single recipient. "
+"When sending a message to a group, one credit is charged for every "
+"recipient."
+msgstr ""
+
+msgid "Send a message from your phone!"
+msgstr ""
+
+#, python-format
+msgid ""
+"You can send a message to your group directly from your phone. The "
+"message costs <strong>2 Lt</strong>, which pays for the delivery of the "
+"message to all recipients (your SMS credits will not be charged). Send "
+"the following text to number %(phone)s:"
+msgstr ""
+
+msgid "Your text"
 msgstr ""
 
 msgid "Full title"

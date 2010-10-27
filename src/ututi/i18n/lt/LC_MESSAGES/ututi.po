@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-10-26 10:04+0300\n"
+"PO-Revision-Date: 2010-10-27 18:11+0300\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -116,6 +116,9 @@ msgid ""
 "The web-based forum for this group has been disabled. Please use the "
 "mailing list instead."
 msgstr "Forumas grupei yra atjungtas. Naudokite el. pašto konferenciją!"
+
+msgid "Reply sent"
+msgstr "Atsakymas išsiųstas."
 
 msgid "Community"
 msgstr "Bendruomenė"
@@ -300,6 +303,9 @@ msgstr ""
 #, python-format
 msgid "Not enough SMS credits: you need %d, but you have only %d."
 msgstr "Nepakanka SMS kreditų: reikia %d, bet turite tik %d."
+
+msgid "SMS reply sent"
+msgstr "SMS atsakymas išsiųstas."
 
 #, python-format
 msgid "SMS sent! (%d credits used up, %d remaining)"
@@ -869,6 +875,10 @@ msgid "%(link_to_author)s sent an SMS: <em>%(text)s</em>"
 msgstr "%(link_to_author)s išsiuntė SMS: <em>%(text)s</em>"
 
 #, python-format
+msgid "%(link_to_author)s sent an private message: <em>%(text)s</em>"
+msgstr "%(link_to_author)s atsiuntė tau privačią žinutę: <em>%(text)s</em>"
+
+#, python-format
 msgid "Member %(link_to_user)s joined the group %(link_to_group)s"
 msgstr "%(link_to_user)s prisijungė prie grupės %(link_to_group)s."
 
@@ -1042,11 +1052,6 @@ msgstr "Naujausios grupės"
 
 msgid "Error!"
 msgstr "Klaidelė..."
-
-msgid ""
-"Oops, an error happened, please don't leave us, go back and try doing "
-"something else or look for information."
-msgstr "Uoj, klaidelė... Grįžk atgal ir pabandyk paspausti kur nors kitur. "
 
 msgid "Our highly trained monkeys are fixing this problem right now."
 msgstr "Mūsų treniruotos beždžionėlės jau tvarko šią problemą."
@@ -2957,85 +2962,18 @@ msgstr "Grupės nariai"
 msgid "Send SMS message to group"
 msgstr "Siųsti SMS žinutę grupei"
 
-msgid ""
-"Send an SMS message to all your classmates. The service is paid by SMS "
-"credits (1 credit = 1 SMS message to one person). The cost of an SMS "
-"message depends on the number of members in the group."
-msgstr ""
-"Išsiųskite SMS žinutę visiems grupės draugams. Už paslaugą mokama SMS "
-"kreditais (1 kreditas = 1 SMS žinutė vienam gavėjui). SMS žinutės kaina "
-"priklauso nuo gavėjų skaičiaus."
+msgid "School's members"
+msgstr "Nariai"
 
-msgid "Credits left:"
-msgstr "Liko kreditų:"
-
-msgid "Purchase credits"
-msgstr "Pirkti kreditus"
-
-msgid ""
-"SMS credits can be used to send SMS messages to members of a group. There"
-" are two ways to purchase SMS credits:"
-msgstr ""
-"SMS kreditai naudojami siųsti SMS žinutes grupės nariams. Yra du būdai "
-"nusipirkti SMS kreditų:"
-
-msgid ""
-"The SMS costs <strong>5 Lt</strong> and <strong>50 credits</strong> will "
-"be added to your account (one credit is one SMS to a single person)."
-msgstr ""
-"SMS kainuoja <strong>5 Lt</strong>, jūsų paskyra bus papildyta <strong>50"
-" kreditų</strong>.(vienas kreditas - viena SMS vienam žmogui)."
-
-msgid "If you pay by bank, <strong>a large discount applies</strong>."
-msgstr "Jei mokate banku, taikoma <strong>didelė nuolaida</strong>."
-
-msgid "credits"
-msgstr "kreditų"
-
-msgid "Purchase SMS credits"
-msgstr "Pirkti SMS kreditų"
-
-msgid "Message text:"
-msgstr "Žinutės tekstas:"
-
-msgid "Recipients:"
-msgstr "Gavėjų:"
-
-msgid "You do not have enough SMS credits to send a message to this group."
-msgstr "Neturite pakankamai SMS kreditų, kad galėtumėte siųsti žinutę šiai grupei."
-
-msgid "No one in this group has confirmed their phone numbers."
-msgstr "Niekas šioje grupėje nepatvirtino savo telefono numerių!"
-
-msgid "Cost:"
-msgstr "Kaina:"
-
-msgid "SMS credits"
-msgstr "SMS krediŧų"
-
-msgid ""
-"One SMS credit allows you to send one SMS message to a single recipient. "
-"When sending a message to a group, one credit is charged for every "
-"recipient."
-msgstr ""
-"Vienas SMS kreditas leidžia išsiųsti vieną SMS žinutę vienam gavėjui. Kai"
-" siunčiate žinutę grupei, vienas kreditas skaičiuojamas už kiekvieną "
-"grupės narį, užregistravusį savo telefono numerį."
-
-msgid "Send a message from your phone!"
-msgstr "Siųskite žinutę grupei iš telefono!"
+msgid "I study here"
+msgstr "Aš studijuoju čia!"
 
 #, python-format
-msgid ""
-"You can send a message to your group directly from your phone. The "
-"message costs <strong>2 Lt</strong>, which pays for the delivery of the "
-"message to all recipients (your SMS credits will not be charged). Send "
-"the following text to number %(phone)s:"
-msgstr ""
-"Galite išsiųsti žinutę grupei tiesiai iš telefono. Žinutė kainuoja "
-"<strong>2 Lt</strong>. Į kainą itrauktas žinučių gavėjams išsiuntimas, "
-"todėl SMS kreditai nebus nuskaičiuojami. Siųskite šį tekstą numeriu "
-"%(phone)s:"
+msgid "<span class='bold'>%(count)s</span> student"
+msgid_plural "<span class='bold'>%(count)s</span> students"
+msgstr[0] "<span class='bold'>%(count)s</span> studentas"
+msgstr[1] "<span class='bold'>%(count)s</span> studentai"
+msgstr[2] "<span class='bold'>%(count)s</span> studentų"
 
 msgid "Everywhere"
 msgstr "visur"
@@ -3724,6 +3662,9 @@ msgstr "%(user_link)s pakeitė dalyką %(subject_link)s."
 msgid "%(user_link)s has created the subject %(subject_link)s."
 msgstr "%(user_link)s sukūrė dalyką %(subject_link)s."
 
+msgid "Send reply"
+msgstr "Siųsti atsakymą"
+
 #, python-format
 msgid ""
 "%(user_link)s has posted a new message %(message_link)s to the group "
@@ -3739,6 +3680,10 @@ msgstr "%(user_link)s parašė naują žinutę %(message_link)s forume %(group_l
 #, python-format
 msgid "%(user_link)s has sent an sms to the group %(group_link)s."
 msgstr "%(user_link)s išsiuntė sms grupei %(group_link)s."
+
+#, python-format
+msgid "%(user_link)s has sent you a private message \"%(subject)s\"."
+msgstr "%(user_link)s atsiuntė tau privačią žinutę \"%(subject)s\"."
 
 #, python-format
 msgid "%(user_link)s joined the group %(group_link)s."
@@ -3967,6 +3912,89 @@ msgstr "Apdovanoti medaliu"
 
 msgid "Award"
 msgstr "Apdovanojimas"
+
+msgid ""
+"Send an SMS message to all your classmates. The service is paid by SMS "
+"credits (1 credit = 1 SMS message to one person). The cost of an SMS "
+"message depends on the number of members in the group."
+msgstr ""
+"Išsiųskite SMS žinutę visiems grupės draugams. Už paslaugą mokama SMS "
+"kreditais (1 kreditas = 1 SMS žinutė vienam gavėjui). SMS žinutės kaina "
+"priklauso nuo gavėjų skaičiaus."
+
+msgid "Credits left:"
+msgstr "Liko kreditų:"
+
+msgid "Purchase credits"
+msgstr "Pirkti kreditus"
+
+msgid ""
+"SMS credits can be used to send SMS messages to members of a group. There"
+" are two ways to purchase SMS credits:"
+msgstr ""
+"SMS kreditai naudojami siųsti SMS žinutes grupės nariams. Yra du būdai "
+"nusipirkti SMS kreditų:"
+
+msgid ""
+"The SMS costs <strong>5 Lt</strong> and <strong>50 credits</strong> will "
+"be added to your account (one credit is one SMS to a single person)."
+msgstr ""
+"SMS kainuoja <strong>5 Lt</strong>, jūsų paskyra bus papildyta <strong>50"
+" kreditų</strong>.(vienas kreditas - viena SMS vienam žmogui)."
+
+msgid "If you pay by bank, <strong>a large discount applies</strong>."
+msgstr "Jei mokate banku, taikoma <strong>didelė nuolaida</strong>."
+
+msgid "credits"
+msgstr "kreditų"
+
+msgid "Purchase SMS credits"
+msgstr "Pirkti SMS kreditų"
+
+msgid "Message text:"
+msgstr "Žinutės tekstas:"
+
+msgid "Recipients:"
+msgstr "Gavėjų:"
+
+msgid "You do not have enough SMS credits to send a message to this group."
+msgstr "Neturite pakankamai SMS kreditų, kad galėtumėte siųsti žinutę šiai grupei."
+
+msgid "No one in this group has confirmed their phone numbers."
+msgstr "Niekas šioje grupėje nepatvirtino savo telefono numerių!"
+
+msgid "Cost:"
+msgstr "Kaina:"
+
+msgid "SMS credits"
+msgstr "SMS krediŧų"
+
+msgid ""
+"One SMS credit allows you to send one SMS message to a single recipient. "
+"When sending a message to a group, one credit is charged for every "
+"recipient."
+msgstr ""
+"Vienas SMS kreditas leidžia išsiųsti vieną SMS žinutę vienam gavėjui. Kai"
+" siunčiate žinutę grupei, vienas kreditas skaičiuojamas už kiekvieną "
+"grupės narį, užregistravusį savo telefono numerį."
+
+msgid "Send a message from your phone!"
+msgstr "Siųskite žinutę grupei iš telefono!"
+
+#, python-format
+msgid ""
+"You can send a message to your group directly from your phone. The "
+"message costs <strong>2 Lt</strong>, which pays for the delivery of the "
+"message to all recipients (your SMS credits will not be charged). Send "
+"the following text to number %(phone)s:"
+msgstr ""
+"Galite išsiųsti žinutę grupei tiesiai iš telefono. Žinutė kainuoja "
+"<strong>2 Lt</strong>. Į kainą itrauktas žinučių gavėjams išsiuntimas, "
+"todėl SMS kreditai nebus nuskaičiuojami. Siųskite šį tekstą numeriu "
+"%(phone)s:"
+
+msgid "Your text"
+msgstr "Tekstas"
 
 msgid "Full title"
 msgstr "Visas pavadinimas"

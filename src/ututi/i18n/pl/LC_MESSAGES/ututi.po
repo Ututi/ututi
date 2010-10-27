@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-10-26 10:04+0300\n"
+"PO-Revision-Date: 2010-10-27 18:11+0300\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -118,6 +118,9 @@ msgid ""
 "The web-based forum for this group has been disabled. Please use the "
 "mailing list instead."
 msgstr "Forum grupy zostało wyłączone. Skorzystaj z listy mailingowej."
+
+msgid "Reply sent"
+msgstr ""
 
 msgid "Community"
 msgstr "Wspólnota"
@@ -306,6 +309,9 @@ msgstr ""
 #, python-format
 msgid "Not enough SMS credits: you need %d, but you have only %d."
 msgstr "Zbyt mało punktów SMS: potrzebujesz %d, masz jedynie %d."
+
+msgid "SMS reply sent"
+msgstr ""
 
 #, python-format
 msgid "SMS sent! (%d credits used up, %d remaining)"
@@ -884,6 +890,10 @@ msgid "%(link_to_author)s sent an SMS: <em>%(text)s</em>"
 msgstr "%(link_to_author)s wysłał wiadomość SMS: <em>%(text)s</em>"
 
 #, python-format
+msgid "%(link_to_author)s sent an private message: <em>%(text)s</em>"
+msgstr ""
+
+#, python-format
 msgid "Member %(link_to_user)s joined the group %(link_to_group)s"
 msgstr "Użytkownik %(link_to_user)s dołączył do grupy %(link_to_group)s"
 
@@ -1061,13 +1071,6 @@ msgstr "Najnowsze grupy"
 
 msgid "Error!"
 msgstr "Błąd!"
-
-msgid ""
-"Oops, an error happened, please don't leave us, go back and try doing "
-"something else or look for information."
-msgstr ""
-"Ups! Wystąpił błąd. Wróć do poprzedniej czynności lub poszukaj innej "
-"informacji."
 
 msgid "Our highly trained monkeys are fixing this problem right now."
 msgstr ""
@@ -2978,86 +2981,18 @@ msgstr "Członkowie grupy"
 msgid "Send SMS message to group"
 msgstr "Wyślij wiadomość do grupy"
 
-msgid ""
-"Send an SMS message to all your classmates. The service is paid by SMS "
-"credits (1 credit = 1 SMS message to one person). The cost of an SMS "
-"message depends on the number of members in the group."
+msgid "School's members"
 msgstr ""
-"Wyślij wiadomość SMS do wszystkich kolegów z grupy. Usługa jest opłacana "
-"punktami SMS ( 1 punkt= jedna wiadomość do jednego odbiorcy). Koszt "
-"wysłania wiadomości SMS do grupy zależy od liczby jej członków."
 
-msgid "Credits left:"
-msgstr "Pozostało punktów:"
-
-msgid "Purchase credits"
-msgstr "Kup punkty"
-
-msgid ""
-"SMS credits can be used to send SMS messages to members of a group. There"
-" are two ways to purchase SMS credits:"
+msgid "I study here"
 msgstr ""
-"Punkty SMS można wymienić na wiadomości SMS do kolegów z grupy. Są dwa "
-"sposoby aby je zdobyć:"
-
-msgid ""
-"The SMS costs <strong>5 Lt</strong> and <strong>50 credits</strong> will "
-"be added to your account (one credit is one SMS to a single person)."
-msgstr ""
-"Koszt jednego SMSa <strong>7.32 zł</strong>. <strong>50 punktów </strong>"
-" zostanie dodane na Twoje konto (za jeden punkt możesz wysłać jedną "
-"wiadomość SMS do jednego odbiorcy)."
-
-msgid "If you pay by bank, <strong>a large discount applies</strong>."
-msgstr "Płacąc przelewem, <strong> dostajesz rabat </strong>."
-
-msgid "credits"
-msgstr "pkt."
-
-msgid "Purchase SMS credits"
-msgstr "Kup punkty SMS"
-
-msgid "Message text:"
-msgstr "Treść wiadomości:"
-
-msgid "Recipients:"
-msgstr "Adresaci:"
-
-msgid "You do not have enough SMS credits to send a message to this group."
-msgstr "Masz zbyt mało punktów SMS do wysłania wiadomości do tej grupy."
-
-msgid "No one in this group has confirmed their phone numbers."
-msgstr "Żaden członek tej grupy nie potwierdził swojego numeru telefonu."
-
-msgid "Cost:"
-msgstr "Koszt:"
-
-msgid "SMS credits"
-msgstr "Punkty SMS"
-
-msgid ""
-"One SMS credit allows you to send one SMS message to a single recipient. "
-"When sending a message to a group, one credit is charged for every "
-"recipient."
-msgstr ""
-"Jeden punkt SMS umożliwia Ci wysłanie 1 wiadomości SMS do jednej osoby. "
-"Wysyłając wiadomość do grupy, za kazdego odbiorcę zostanie pobrany jeden "
-"punkt SMS."
-
-msgid "Send a message from your phone!"
-msgstr "Wyślij wiadomość ze swego telefonu!"
 
 #, python-format
-msgid ""
-"You can send a message to your group directly from your phone. The "
-"message costs <strong>2 Lt</strong>, which pays for the delivery of the "
-"message to all recipients (your SMS credits will not be charged). Send "
-"the following text to number %(phone)s:"
-msgstr ""
-"Możesz wysłać wiadomość do całej Twojej grupy ze swojej komórki. Koszt "
-"takiego SMSa <strong>2 zł</strong> (+ VAT). Kwoty tej wstarczy na "
-"wysłanie wiadomości do wszystkich odbiorców (punkty SMS nie zostaną "
-"potrącone). Wyślij wiadomość o następującej treści na numer %(phone)s:"
+msgid "<span class='bold'>%(count)s</span> student"
+msgid_plural "<span class='bold'>%(count)s</span> students"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "Everywhere"
 msgstr "Wszędzie"
@@ -3743,6 +3678,9 @@ msgstr ""
 msgid "%(user_link)s has created the subject %(subject_link)s."
 msgstr ""
 
+msgid "Send reply"
+msgstr ""
+
 #, python-format
 msgid ""
 "%(user_link)s has posted a new message %(message_link)s to the group "
@@ -3757,6 +3695,10 @@ msgstr ""
 
 #, python-format
 msgid "%(user_link)s has sent an sms to the group %(group_link)s."
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has sent you a private message \"%(subject)s\"."
 msgstr ""
 
 #, python-format
@@ -3984,6 +3926,90 @@ msgstr "Wyróżnij medalem"
 
 msgid "Award"
 msgstr "Wyróżnij"
+
+msgid ""
+"Send an SMS message to all your classmates. The service is paid by SMS "
+"credits (1 credit = 1 SMS message to one person). The cost of an SMS "
+"message depends on the number of members in the group."
+msgstr ""
+"Wyślij wiadomość SMS do wszystkich kolegów z grupy. Usługa jest opłacana "
+"punktami SMS ( 1 punkt= jedna wiadomość do jednego odbiorcy). Koszt "
+"wysłania wiadomości SMS do grupy zależy od liczby jej członków."
+
+msgid "Credits left:"
+msgstr "Pozostało punktów:"
+
+msgid "Purchase credits"
+msgstr "Kup punkty"
+
+msgid ""
+"SMS credits can be used to send SMS messages to members of a group. There"
+" are two ways to purchase SMS credits:"
+msgstr ""
+"Punkty SMS można wymienić na wiadomości SMS do kolegów z grupy. Są dwa "
+"sposoby aby je zdobyć:"
+
+msgid ""
+"The SMS costs <strong>5 Lt</strong> and <strong>50 credits</strong> will "
+"be added to your account (one credit is one SMS to a single person)."
+msgstr ""
+"Koszt jednego SMSa <strong>7.32 zł</strong>. <strong>50 punktów </strong>"
+" zostanie dodane na Twoje konto (za jeden punkt możesz wysłać jedną "
+"wiadomość SMS do jednego odbiorcy)."
+
+msgid "If you pay by bank, <strong>a large discount applies</strong>."
+msgstr "Płacąc przelewem, <strong> dostajesz rabat </strong>."
+
+msgid "credits"
+msgstr "pkt."
+
+msgid "Purchase SMS credits"
+msgstr "Kup punkty SMS"
+
+msgid "Message text:"
+msgstr "Treść wiadomości:"
+
+msgid "Recipients:"
+msgstr "Adresaci:"
+
+msgid "You do not have enough SMS credits to send a message to this group."
+msgstr "Masz zbyt mało punktów SMS do wysłania wiadomości do tej grupy."
+
+msgid "No one in this group has confirmed their phone numbers."
+msgstr "Żaden członek tej grupy nie potwierdził swojego numeru telefonu."
+
+msgid "Cost:"
+msgstr "Koszt:"
+
+msgid "SMS credits"
+msgstr "Punkty SMS"
+
+msgid ""
+"One SMS credit allows you to send one SMS message to a single recipient. "
+"When sending a message to a group, one credit is charged for every "
+"recipient."
+msgstr ""
+"Jeden punkt SMS umożliwia Ci wysłanie 1 wiadomości SMS do jednej osoby. "
+"Wysyłając wiadomość do grupy, za kazdego odbiorcę zostanie pobrany jeden "
+"punkt SMS."
+
+msgid "Send a message from your phone!"
+msgstr "Wyślij wiadomość ze swego telefonu!"
+
+#, python-format
+msgid ""
+"You can send a message to your group directly from your phone. The "
+"message costs <strong>2 Lt</strong>, which pays for the delivery of the "
+"message to all recipients (your SMS credits will not be charged). Send "
+"the following text to number %(phone)s:"
+msgstr ""
+"Możesz wysłać wiadomość do całej Twojej grupy ze swojej komórki. Koszt "
+"takiego SMSa <strong>2 zł</strong> (+ VAT). Kwoty tej wstarczy na "
+"wysłanie wiadomości do wszystkich odbiorców (punkty SMS nie zostaną "
+"potrącone). Wyślij wiadomość o następującej treści na numer %(phone)s:"
+
+msgid "Your text"
+msgstr ""
 
 msgid "Full title"
 msgstr "Pełna nazwa"
