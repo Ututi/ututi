@@ -121,11 +121,8 @@ Let's check the sms replies:
     >>> browser.getControl('Send', index=0).click()
 
     >>> from ututi.lib.sms import sms_queue
-    >>> len(sms_queue)
-    2
     >>> sms_queue.pop()
     ('+37067812375', u'Replying to an sms!')
-
 
     >>> sms_queue[:] = []
 
