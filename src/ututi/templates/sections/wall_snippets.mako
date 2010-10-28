@@ -182,9 +182,9 @@
       </form>
       </%base:rounded_block>
     </%def>
-    ${_("%(user_link)s has sent you a private message \"%(subject)s\".") % \
+    ${_("%(user_link)s has sent you a private message \"%(msg_link)s\".") % \
        dict(user_link=h.object_link(event.user),
-            subject=event.message_text()) | n}
+            msg_link=h.object_link(event.private_message)) | n}
   </%self:wall_item>
 </%def>
 

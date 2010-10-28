@@ -1849,6 +1849,10 @@ class PrivateMessage(ContentItem):
         self.content = content
         self.thread_id = thread_id
 
+    def url(self):
+        id = self.thread_id if self.thread_id is not None else self.id
+        return url(controller='messages', action='thread', id=id)
+
     def thread(self):
         return [self] + meta.Session.query(PrivateMessage
                                            ).filter_by(thread_id=self.id
