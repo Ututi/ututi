@@ -43,6 +43,7 @@ class MessagesController(BaseController):
         if not (c.user == original.sender or c.user == original.recipient):
             abort(404)
         recipient = original.sender if original.recipient.id == c.user.id else original.recipient
+        original.is_read = True
         msg = PrivateMessage(c.user, recipient, original.subject,
                              request.params.get('message'),
                              thread_id=original.id)
