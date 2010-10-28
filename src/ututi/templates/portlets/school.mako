@@ -1,6 +1,6 @@
 <%inherit file="/portlets/base.mako"/>
 
-<%def name="school_members_portlet(school=None)">
+<%def name="school_members_portlet(title=None, school=None)">
   <%
      if school is None:
          school = c.location
@@ -8,7 +8,7 @@
   <%self:uportlet id="school_info_portlet" portlet_class="MyProfile first">
 
     <%def name="header()">
-      ${_("School's members")}
+      ${title}
     </%def>
     <div class="members_list students_list">
 
@@ -45,11 +45,12 @@
     </div>
     <ul class="uni-info universityMembersInfo">
      <li>
-     %if c.user is not None and c.user.location is None:
-     <form id="i_study_here_form" method="post" action="${url(controller='profile',action='set_location', location_id=school.id)}">
-       ${h.input_submit(_("I study here"))}
-     </form>
+     %if (c.user is not None) and ((c.user.location is None) or ((c.user.location is not c.location) and (c.user.location in c.location.hierarchy(True)))):
+       <form id="i_study_here_form" method="post" action="${url(controller='profile',action='set_location', location_id=school.id)}">
+         ${h.input_submit(_("I study here"))}
+       </form>
     %endif
+     </li>
     <script type="text/javascript">
            $('#i_study_here_form').ajaxForm(function() {
               $('#i_study_here_form').hide() ;
@@ -57,7 +58,6 @@
               $('.user-logo-link:first').fadeIn();
            });
    </script>
-     </li>
      <%
          students_number = school.students_number()
         %>

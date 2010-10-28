@@ -8,7 +8,7 @@
 <%def name="portlets()">
 <div id="sidebar">
   ${struct_info_portlet()}
-  ${school_members_portlet()}
+  ${school_members_portlet(_("School's members"))}
 </div>
 </%def>
 
