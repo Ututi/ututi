@@ -152,3 +152,71 @@ Let's check private messages:
     >>> browser.printQuery('//div[@class="post-body"]/text()')
     I am sending you a message!
     I am replying to your message!
+
+Of course, we can change what we see on our wall:
+    >>> browser2.getLink('Home').click()
+    >>> browser2.getLink("What's new?").click()
+    >>> browser2.printQuery('id("wall")//div[@class="description"]//text()')
+    Second user
+    has sent you a private message "
+    A message from me!
+    ".
+    Second user
+    has sent an sms to the group
+    Testing group
+    .
+    SMS credits can be used to send SMS messages to members of a group. There are two ways to purchase SMS credits:
+    If you pay by bank,
+    a large discount applies
+    .
+    Second user
+    has posted a new message
+    This is a new forum thread!
+    in the forum
+    Testing group
+    .
+    Third user
+    has posted a new message
+    Re: Hello
+    to the group
+    Moderatoriai
+    .
+    Second user
+    joined the group
+    Testing group
+    .
+    Third user
+    joined the group
+    Moderatoriai
+    .
+
+    >>> browser2.getLink('Edit shown updates.').click()
+    >>> browser2.getControl('Mailing list posts').click()
+    >>> browser2.getControl('Save').click()
+    >>> browser2.printQuery('id("wall")//div[@class="description"]//text()')
+    Second user
+    has sent you a private message "
+    A message from me!
+    ".
+    Second user
+    has sent an sms to the group
+    Testing group
+    .
+    SMS credits can be used to send SMS messages to members of a group. There are two ways to purchase SMS credits:
+    If you pay by bank,
+    a large discount applies
+    .
+    Second user
+    has posted a new message
+    This is a new forum thread!
+    in the forum
+    Testing group
+    .
+    Second user
+    joined the group
+    Testing group
+    .
+    Third user
+    joined the group
+    Moderatoriai
+    .

@@ -49,6 +49,12 @@ class LocationForm(Schema):
                     LocationTagsValidator())
 
 
+class WallSettingsForm(Schema):
+    allow_extra_fields = True
+    filter_extra_fields = True
+    events = ForEach(validators.String())
+
+
 class ProfileForm(LocationForm):
     """A schema for validating user profile forms."""
 
@@ -251,6 +257,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
                         Event.object_id.in_([m.group.id for m in c.user.memberships]),
                         Event.recipient_id == c.user.id))\
             .filter(Event.author_id != c.user.id)\
+            .filter(~Event.event_type.in_(c.user.ignored_events_list))\
             .order_by(desc(Event.created))\
             .limit(20).all()
 
@@ -796,3 +803,22 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         location = meta.Session.query(LocationTag).filter_by(id=location_id).one()
         redirect(url(controller='structureview', action='index', path='/'.join(location.path)))
 
+
+    def _wall_settings_form(self):
+        c.event_types = Event.event_types()
+        return render('profile/wall_settings.mako')
+
+    @ActionProtector("user")
+    @validate(schema=WallSettingsForm, form='_wall_settings_form')
+    def wall_settings(self):
+        if hasattr(self, 'form_result'):
+            c.user.update_ignored_events(self.form_result.get('events', []))
+            meta.Session.commit()
+            h.flash(_('Your wall settings have been updated.'))
+            redirect(url(controller='profile', action='feed'))
+        defaults = {
+            'events': c.user.ignored_events_list
+            }
+
+        return htmlfill.render(self._wall_settings_form(),
+                               defaults=defaults)

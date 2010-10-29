@@ -4879,3 +4879,28 @@ ul.universityMembersInfo li{
     margin-right: 10px;
 }
 
+/* Forms with grouped controls */
+
+.fullForm .collection div.children {
+  margin-bottom: 10px;
+}
+.fullForm .collection .expander {
+  float: left;
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+  background: url("../images/details/expand_right.png") center center no-repeat;
+  cursor: pointer;
+}
+
+.fullForm .open .expander {
+  background: url("../images/details/expand_down.png") center center no-repeat;
+}
+
+.fullForm .collection .children {
+  padding-left: 15px;
+}
+
+.fullForm .form_item {
+  margin-left: 25px;
+}
