@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-10-29 15:14+0300\n"
+"PO-Revision-Date: 2010-10-29 22:45+0300\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -185,8 +185,8 @@ msgstr "Forum"
 msgid "Subjects"
 msgstr "Przedmioty"
 
-msgid "What's New?"
-msgstr "Co nowego?"
+msgid "News wall"
+msgstr ""
 
 msgid "Members"
 msgstr "Użytkownicy"
@@ -236,6 +236,9 @@ msgstr "Członek"
 
 msgid "Leave group"
 msgstr "Opuść grupę"
+
+msgid "What's New?"
+msgstr "Co nowego?"
 
 msgid "Group information and settings updated."
 msgstr "Informacje o grupie oraz ustawienia zostały zaktualizowane."
@@ -2785,9 +2788,6 @@ msgstr "Wiadomość do grupy"
 msgid "Start"
 msgstr "Start"
 
-msgid "What's new?"
-msgstr "Powiadomienia"
-
 msgid "Inbox"
 msgstr "Skrzynka odbiorcza"
 
@@ -3267,6 +3267,9 @@ msgstr "Nowe hasło"
 msgid "Repeat the new password"
 msgstr "Wpisz ponownie nowe hasło"
 
+msgid "What's new?"
+msgstr "Powiadomienia"
+
 msgid ""
 "This is a list of all the recent events in the subjects you are watching "
 "and the groups you belong to."
@@ -3524,6 +3527,9 @@ msgid "Watched group subjects"
 msgstr ""
 
 msgid "Subject updates"
+msgstr ""
+
+msgid "Which events do You want to see on Your wall?"
 msgstr ""
 
 msgid "Pick your region"

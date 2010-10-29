@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-10-29 15:14+0300\n"
+"PO-Revision-Date: 2010-10-29 22:45+0300\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -179,8 +179,8 @@ msgstr "Forumas"
 msgid "Subjects"
 msgstr "Dalykai"
 
-msgid "What's New?"
-msgstr "Kas naujo?"
+msgid "News wall"
+msgstr "Siena"
 
 msgid "Members"
 msgstr "Nariai"
@@ -230,6 +230,9 @@ msgstr "Narys"
 
 msgid "Leave group"
 msgstr "Palikti šią grupę"
+
+msgid "What's New?"
+msgstr "Kas naujo?"
 
 msgid "Group information and settings updated."
 msgstr "Grupės informacija ir nustatymai atnaujinti."
@@ -2769,9 +2772,6 @@ msgstr "Laiškas grupei"
 msgid "Start"
 msgstr "Pradėti"
 
-msgid "What's new?"
-msgstr "Kas naujo?"
-
 msgid "Inbox"
 msgstr "Žinutės"
 
@@ -3244,6 +3244,9 @@ msgstr "Naujas slaptažodis"
 msgid "Repeat the new password"
 msgstr "Pakartok naują slaptažodį"
 
+msgid "What's new?"
+msgstr "Kas naujo?"
+
 msgid ""
 "This is a list of all the recent events in the subjects you are watching "
 "and the groups you belong to."
@@ -3503,6 +3506,9 @@ msgstr "Grupių stebimi dalykai"
 
 msgid "Subject updates"
 msgstr "Dalykų pokyčiai"
+
+msgid "Which events do You want to see on Your wall?"
+msgstr "Kuriuos įvykius nori matyti savo sienoje?"
 
 msgid "Pick your region"
 msgstr "Pasirinkite regioną"

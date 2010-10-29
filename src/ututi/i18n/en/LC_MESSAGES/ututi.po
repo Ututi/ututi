@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-10-29 15:13+0300\n"
+"PO-Revision-Date: 2010-10-29 22:45+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -176,7 +176,7 @@ msgstr ""
 msgid "Subjects"
 msgstr ""
 
-msgid "What's New?"
+msgid "News wall"
 msgstr ""
 
 msgid "Members"
@@ -226,6 +226,9 @@ msgid "Member"
 msgstr ""
 
 msgid "Leave group"
+msgstr ""
+
+msgid "What's New?"
 msgstr ""
 
 msgid "Group information and settings updated."
@@ -2529,9 +2532,6 @@ msgstr ""
 msgid "Start"
 msgstr ""
 
-msgid "What's new?"
-msgstr ""
-
 msgid "Inbox"
 msgstr ""
 
@@ -2975,6 +2975,9 @@ msgstr ""
 msgid "Repeat the new password"
 msgstr ""
 
+msgid "What's new?"
+msgstr ""
+
 msgid ""
 "This is a list of all the recent events in the subjects you are watching "
 "and the groups you belong to."
@@ -3214,6 +3217,9 @@ msgid "Watched group subjects"
 msgstr ""
 
 msgid "Subject updates"
+msgstr ""
+
+msgid "Which events do You want to see on Your wall?"
 msgstr ""
 
 msgid "Pick your region"
