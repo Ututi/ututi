@@ -1020,6 +1020,13 @@ class User(object):
     def can_send_sms(self, group):
         return self.sms_messages_remaining > len(group.recipients_sms(sender=self))
 
+    @property
+    def ignored_events_list(self):
+        return self.ignored_events.split(',')
+
+    def update_ignored_events(self, events):
+        self.ignored_events = ','.join(events)
+
 
 email_table = None
 
