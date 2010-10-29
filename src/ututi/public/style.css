@@ -4714,6 +4714,7 @@ body .ui-widget button.btnMedium {
 
 /* User wall */
 .wall_item {
+  position: relative;
   padding-left: 40px;
   margin: 15px 0;
 }
@@ -4793,6 +4794,20 @@ body .ui-widget button.btnMedium {
 .wallForm div.line {
   margin: 5px 0;
 }
+
+.wall_item .hide_me {
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  display: none;
+  width: 15px;
+  height: 15px;
+}
+
+.wall_item:hover .hide_me {
+  display: block;
+}
+
 
 .input-line{
     display: block;

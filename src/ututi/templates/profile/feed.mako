@@ -16,7 +16,11 @@ ${_('This is a list of all the recent events in the subjects you are watching an
 <a href="${url(controller='profile', action='wall_settings')}">${_('Edit shown updates.')}</a>
 </div>
 
-% for event in c.events:
-  ${event.snippet()}
-% endfor
+%if c.events:
+  % for event in c.events:
+    ${event.snippet()}
+  % endfor
+%else:
+  ${_('Sorry, nothing new at the moment.')}
+%endif
 </div>

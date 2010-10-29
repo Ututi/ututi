@@ -2,7 +2,16 @@
 <%namespace file="/widgets/sms.mako" import="sms_widget"/>
 
 <%def name="wall_item(event)">
-<div class="wall_item click2show ${caller.classes()}" id="wallevent-${event.id}">
+<div class="wall_item click2show ${caller.classes()} type_${event.event_type}" id="wallevent-${event.id}">
+  <div class="hide_me">
+    <form method="POST" action="${url(controller='profile', action='hide_event')}">
+      <div>
+        <input type="hidden" name="event_type" value="${event.event_type}" class="event_type"/>
+        <input type="image" src="/images/details/icon_fail.png" title="${_('Ignore events like this')}" class="hide_event"/>
+      </div>
+    </form>
+  </div>
+
   <div class="description">
     ${caller.body()}
   </div>

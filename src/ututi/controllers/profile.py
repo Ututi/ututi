@@ -822,3 +822,15 @@ class ProfileController(SearchBaseController, UniversityListMixin):
 
         return htmlfill.render(self._wall_settings_form(),
                                defaults=defaults)
+
+    @ActionProtector("user")
+    def hide_event(self):
+        etype = request.params.get('event_type')
+        events = c.user.ignored_events_list
+        events.append(etype)
+        c.user.update_ignored_events(events)
+        meta.Session.commit()
+        if request.params.has_key('js'):
+            return 'ok'
+        else:
+            redirect(url(controller='profile', action='feed'))

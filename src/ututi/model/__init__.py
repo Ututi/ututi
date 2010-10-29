@@ -1025,7 +1025,7 @@ class User(object):
         return self.ignored_events.split(',')
 
     def update_ignored_events(self, events):
-        self.ignored_events = ','.join(events)
+        self.ignored_events = ','.join(list(set(events)))
 
 
 email_table = None
