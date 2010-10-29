@@ -28,6 +28,7 @@ from ututi.lib.search import search_query, search_query_count
 from ututi.lib.image import serve_logo
 from ututi.lib.validators import UserPasswordValidator, UniqueEmail, LocationTagsValidator, manual_validate, PhoneNumberValidator
 from ututi.lib.forms import validate
+from ututi.lib.events import event_types_grouped
 from ututi.lib import gg, sms
 
 from ututi.model.events import Event
@@ -805,19 +806,22 @@ class ProfileController(SearchBaseController, UniversityListMixin):
 
 
     def _wall_settings_form(self):
-        c.event_types = Event.event_types()
+        c.event_types = event_types_grouped(Event.event_types())
         return render('profile/wall_settings.mako')
 
     @ActionProtector("user")
     @validate(schema=WallSettingsForm, form='_wall_settings_form')
     def wall_settings(self):
         if hasattr(self, 'form_result'):
-            c.user.update_ignored_events(self.form_result.get('events', []))
+            events = set(self.form_result.get('events', []))
+            events = list(set(Event.event_types()) - events)
+            c.user.update_ignored_events(events)
             meta.Session.commit()
             h.flash(_('Your wall settings have been updated.'))
             redirect(url(controller='profile', action='feed'))
+
         defaults = {
-            'events': c.user.ignored_events_list
+            'events': list(set(Event.event_types()) - set(c.user.ignored_events_list))
             }
 
         return htmlfill.render(self._wall_settings_form(),

@@ -56,6 +56,7 @@ labels = {
   %endif
 </%def>
 <br />
+<div>${_('Which events do You want to see on Your wall?')}</div>
 <form method="POST" action="${url(controller='profile', action='wall_settings')}" class="fullForm" id="wall_settings_form">
 %for key, item in c.event_types.items():
   ${form_item(item)}
