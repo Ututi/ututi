@@ -42,7 +42,7 @@ Group subject watching
 
 These actions should have left an event trail on the group home page:
 
-    >>> browser.getLink("What's New?", url='group').click()
+    >>> browser.getLink("News wall", url='group').click()
     >>> browser.printQuery("id('wall')//div[@class='description']//text()")
     The group
     Moderatoriai

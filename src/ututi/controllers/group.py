@@ -280,11 +280,11 @@ def group_menu_items():
          'name': 'subjects',
          'title': _('Subjects'),
          'link': url(controller='group', action='subjects', id=c.group.group_id),
-         'event': h.trackEvent(c.group, 'subjects', 'breadcrumb') 
+         'event': h.trackEvent(c.group, 'subjects', 'breadcrumb')
         } if c.group.wants_to_watch_subjects else None
 
     bcs = [
-        {'title': _("What's New?"),
+        {'title': _("News wall"),
          'name': 'home',
          'link': url(controller='group', action='home', id=c.group.group_id),
          'event': h.trackEvent(c.group, 'home', 'breadcrumb')},

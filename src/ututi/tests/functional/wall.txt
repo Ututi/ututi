@@ -5,7 +5,7 @@ Test user wall functionality
 
 No events yet:
 
-    >>> browser.getLink("What's new?").click()
+    >>> browser.getLink("News wall").click()
     >>> browser.url
     'http://localhost/home/feed'
 
@@ -26,7 +26,7 @@ But let's send some emails:
     >>> send_test_message('simple_email.txt', '2', to='moderators@groups.ututi.lt', reply_to='1')
     >>> send_test_message('simple_email.txt', '3', to='moderators@groups.ututi.lt', reply_to='1')
 
-    >>> browser.getLink("What's new?").click()
+    >>> browser.getLink("News wall").click()
     >>> browser.printQuery('id("wall")//div[@class="description"]//text()')
     Adminas Adminovix
     has posted a new message
@@ -88,7 +88,7 @@ Let's check forum messages:
 No events yet:
     >>> browser = Browser.logIn('user2@ututi.lt', 'password')
     >>> browser.getLink('Home').click()
-    >>> browser.getLink("What's new?").click()
+    >>> browser.getLink("News wall").click()
     >>> browser.url
     'http://localhost/home/feed'
 
@@ -112,7 +112,7 @@ Let's check the sms replies:
     >>> browser2.getControl('Send', index=2).click()
 
     >>> browser.getLink('Home').click()
-    >>> browser.getLink("What's new?").click()
+    >>> browser.getLink("News wall").click()
     >>> browser.printQuery('id("wall")//div[@class="content"]//text()')
     Sending an sms!
     And I am starting it!
@@ -135,7 +135,7 @@ Let's check private messages:
     >>> browser.getControl('Post').click()
 
     >>> browser2.getLink('Home').click()
-    >>> browser2.getLink("What's new?").click()
+    >>> browser2.getLink("News wall").click()
     >>> browser2.printQuery('id("wall")//div[@class="content"]//text()')
     I am sending you a message!
     Replying to an sms!
@@ -155,7 +155,7 @@ Let's check private messages:
 
 Of course, we can change what we see on our wall:
     >>> browser2.getLink('Home').click()
-    >>> browser2.getLink("What's new?").click()
+    >>> browser2.getLink("News wall").click()
     >>> browser2.printQuery('id("wall")//div[@class="description"]//text()')
     Second user
     has sent you a private message "

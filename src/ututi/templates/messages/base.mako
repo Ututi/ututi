@@ -13,7 +13,7 @@ ${_('Home')}
 
 <ul class="moduleMenu">
   <li><a href="${url(controller='profile', action='home')}">${_('Start')}</a></li>
-  <li><a href="${url(controller='profile', action='feed')}">${_("What's new?")}</a></li>
+  <li><a href="${url(controller='profile', action='feed')}">${_("News wall")}</a></li>
   <li class="current"><a href="${url(controller='messages', action='index')}">${_("Inbox")}<span class="edge"></span></a></li>
 </ul>
 

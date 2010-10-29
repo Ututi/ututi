@@ -116,7 +116,7 @@ We should be hailed by the welcome screen:
 The subject tab is hidden for public groups:
 
     >>> browser.printQuery('id("moduleMenu")//a/text()')
-    What's New?
+    News wall
     Forum
     Members
     Files
@@ -252,7 +252,7 @@ The initial page will not suggest watching subjects (we opted out of it):
 The files and subjects tabs are hidden, as requested:
 
     >>> browser.printQuery('id("moduleMenu")//a/text()')
-    What's New?
+    News wall
     Forum
     Members
     Page

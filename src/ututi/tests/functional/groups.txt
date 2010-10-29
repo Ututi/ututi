@@ -21,7 +21,7 @@ The link of the group leads to its home page.
     >>> browser.url
     'http://localhost/group/moderators/home'
     >>> browser.printQuery('//li[@class="current"]//a/text()')
-    What's New?
+    News wall
 
 We can edit the group's information.
 
@@ -37,7 +37,7 @@ We can edit the group's information.
    >>> browser.getControl('Group logo').add_file(*make_file('test_logo.png'))
    >>> browser.getControl('Save').click()
    >>> browser.printQuery('id("moduleMenu")//li[@class="current"]//a/text()')
-   What's New?
+   News wall
 
    >>> browser.printQuery("id('group_info_portlet-content')//img[@id='group-logo']")
    <img id="group-logo" src="/group/moderators/logo/70/70" alt="logo" />

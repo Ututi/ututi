@@ -13,7 +13,7 @@ ${_('Home')}
 %if c.action:
 <ul class="moduleMenu">
   <li class="${'current' if c.action == 'home' else ''}"><a href="${url(controller='profile', action='home')}">${_('Start')}<span class="edge"></span></a></li>
-  <li class="${'current' if c.action == 'feed' else ''}"><a href="${url(controller='profile', action='feed')}">${_("What's new?")}
+  <li class="${'current' if c.action == 'feed' else ''}"><a href="${url(controller='profile', action='feed')}">${_("News wall")}
       	  <% unread_feed_messages = c.user.unread_feed_messages() %>
           %if unread_feed_messages:
       	     (${unread_feed_messages})
