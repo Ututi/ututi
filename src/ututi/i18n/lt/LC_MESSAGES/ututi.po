@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-10-27 18:11+0300\n"
+"PO-Revision-Date: 2010-10-29 15:14+0300\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -594,6 +594,9 @@ msgstr "Telefono numeris atnaujintas."
 
 msgid "Your phone number has been confirmed."
 msgstr "Telefono numeris patvirtintas."
+
+msgid "Your wall settings have been updated."
+msgstr "Tavo sienos nustatymai pakeisti"
 
 msgid "The element does not exist."
 msgstr "Šis elementas neegzistuoja."
@@ -2721,6 +2724,9 @@ msgstr "Įveskite savo el. pašto adresą"
 msgid "Recover password"
 msgstr "Atstatyti slaptažodį"
 
+msgid "Faculty's members"
+msgstr "Fakulteto nariai"
+
 msgid "subjects list"
 msgstr "dalykų sąrašas"
 
@@ -2741,6 +2747,9 @@ msgstr "Internetinis puslapis"
 
 msgid "Logo"
 msgstr "Logotipas"
+
+msgid "School's members"
+msgstr "Nariai"
 
 msgid "department list"
 msgstr "fakultetų sąrašas"
@@ -2961,9 +2970,6 @@ msgstr "Grupės nariai"
 
 msgid "Send SMS message to group"
 msgstr "Siųsti SMS žinutę grupei"
-
-msgid "School's members"
-msgstr "Nariai"
 
 msgid "I study here"
 msgstr "Aš studijuoju čia!"
@@ -3245,6 +3251,12 @@ msgstr ""
 "Čia rodomi paskutiniai pakeitimai stebimuose dalykuose bei grupėse "
 "kurioms priklausai."
 
+msgid "Edit shown updates."
+msgstr "Redaguoti sienos nustatymus"
+
+msgid "Sorry, nothing new at the moment."
+msgstr "Deja, šiuo metu nieko naujo"
+
 msgid "Filter by school:"
 msgstr "Filtruoti pagal mokymo įstaigą"
 
@@ -3444,6 +3456,54 @@ msgstr ""
 "neužilgo atsiras medalis,\n"
 "rodantis Ututi rėmėjo statusą. Sėkmės naudojantis Ututi!"
 
+msgid "Wall settings"
+msgstr "Sienos nustatymai"
+
+msgid "Forum posts"
+msgstr "Forumų pranešimai"
+
+msgid "Private messages"
+msgstr "Privačios žinutės"
+
+msgid "New subjects watched by group"
+msgstr "Nauji grupės stebimi dalykai"
+
+msgid "Subjects no longer watched by group"
+msgstr "Dalykai, kurių grupė nebestebi"
+
+msgid "Mailing list posts"
+msgstr "El. pašto konferencijų laiškai"
+
+msgid "Changes in subjects"
+msgstr "Pokyčiai dalykuose"
+
+msgid "New group members"
+msgstr "Nauji grupių nariai"
+
+msgid "People who left groups"
+msgstr "Žmonės, palikę grupes"
+
+msgid "File uploads"
+msgstr "Failų įkėlimai"
+
+msgid "Changes in wiki pages"
+msgstr "Wiki puslapių pokyčiai"
+
+msgid "New subjects"
+msgstr "Nauji dalykai"
+
+msgid "New wiki pages"
+msgstr "Nauji wiki puslapiai"
+
+msgid "Page changes"
+msgstr "Wiki puslapių pokyčiai"
+
+msgid "Watched group subjects"
+msgstr "Grupių stebimi dalykai"
+
+msgid "Subject updates"
+msgstr "Dalykų pokyčiai"
+
 msgid "Pick your region"
 msgstr "Pasirinkite regioną"
 
@@ -3630,6 +3690,9 @@ msgstr ""
 "%(user)s nori prisijungti prie grupės %(group)s. Ar norite patvirtinti "
 "narystę?"
 
+msgid "Ignore events like this"
+msgstr "Nerodyti tokių įvykių"
+
 #, python-format
 msgid "%(user_link)s has uploaded a new file in the subject %(subject_link)s."
 msgstr "%(user_link)s įkėlė naują failą dalyke %(subject_link)s."
@@ -3682,8 +3745,8 @@ msgid "%(user_link)s has sent an sms to the group %(group_link)s."
 msgstr "%(user_link)s išsiuntė sms grupei %(group_link)s."
 
 #, python-format
-msgid "%(user_link)s has sent you a private message \"%(subject)s\"."
-msgstr "%(user_link)s atsiuntė tau privačią žinutę \"%(subject)s\"."
+msgid "%(user_link)s has sent you a private message \"%(msg_link)s\"."
+msgstr "%(user_link)s atsiuntė tau privačią žinutę \"%(msg_link)s\"."
 
 #, python-format
 msgid "%(user_link)s joined the group %(group_link)s."

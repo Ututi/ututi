@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-10-27 18:11+0300\n"
+"PO-Revision-Date: 2010-10-29 15:14+0300\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -603,6 +603,9 @@ msgstr "Twój numer telefonu został zaktualizowany."
 
 msgid "Your phone number has been confirmed."
 msgstr "Twój numer telefonu został potwierdzony."
+
+msgid "Your wall settings have been updated."
+msgstr ""
 
 msgid "The element does not exist."
 msgstr "Element nie istnieje."
@@ -2737,6 +2740,9 @@ msgstr "Wprowadź swój e-mail"
 msgid "Recover password"
 msgstr "Odzyskaj hasło"
 
+msgid "Faculty's members"
+msgstr ""
+
 msgid "subjects list"
 msgstr "lista przedmiotów"
 
@@ -2757,6 +2763,9 @@ msgstr "Strona internetowa"
 
 msgid "Logo"
 msgstr "Logo"
+
+msgid "School's members"
+msgstr ""
 
 msgid "department list"
 msgstr "lista wydziałów"
@@ -2980,9 +2989,6 @@ msgstr "Członkowie grupy"
 
 msgid "Send SMS message to group"
 msgstr "Wyślij wiadomość do grupy"
-
-msgid "School's members"
-msgstr ""
 
 msgid "I study here"
 msgstr ""
@@ -3266,6 +3272,12 @@ msgid ""
 "and the groups you belong to."
 msgstr "Ostatnie zmiany w obserwowanych przez Ciebie przedmiotach i grupach."
 
+msgid "Edit shown updates."
+msgstr ""
+
+msgid "Sorry, nothing new at the moment."
+msgstr ""
+
 msgid "Filter by school:"
 msgstr "Szukaj według uczelni"
 
@@ -3466,6 +3478,54 @@ msgstr ""
 " Twoim profilu pojawi się odznaka donatora Ututi. Życzymy powodzenia w "
 "dalszym użytkowaniu Ututi!"
 
+msgid "Wall settings"
+msgstr ""
+
+msgid "Forum posts"
+msgstr ""
+
+msgid "Private messages"
+msgstr ""
+
+msgid "New subjects watched by group"
+msgstr ""
+
+msgid "Subjects no longer watched by group"
+msgstr ""
+
+msgid "Mailing list posts"
+msgstr ""
+
+msgid "Changes in subjects"
+msgstr ""
+
+msgid "New group members"
+msgstr ""
+
+msgid "People who left groups"
+msgstr ""
+
+msgid "File uploads"
+msgstr ""
+
+msgid "Changes in wiki pages"
+msgstr ""
+
+msgid "New subjects"
+msgstr ""
+
+msgid "New wiki pages"
+msgstr ""
+
+msgid "Page changes"
+msgstr ""
+
+msgid "Watched group subjects"
+msgstr ""
+
+msgid "Subject updates"
+msgstr ""
+
 msgid "Pick your region"
 msgstr "Wybierz województwo"
 
@@ -3650,6 +3710,9 @@ msgstr ""
 "%(user)s chcą dołączyć do grupy %(group)s. Czy chcesz ich przyjąć do "
 "grupy?"
 
+msgid "Ignore events like this"
+msgstr ""
+
 #, python-format
 msgid "%(user_link)s has uploaded a new file in the subject %(subject_link)s."
 msgstr ""
@@ -3698,7 +3761,7 @@ msgid "%(user_link)s has sent an sms to the group %(group_link)s."
 msgstr ""
 
 #, python-format
-msgid "%(user_link)s has sent you a private message \"%(subject)s\"."
+msgid "%(user_link)s has sent you a private message \"%(msg_link)s\"."
 msgstr ""
 
 #, python-format

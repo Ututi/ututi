@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-10-27 18:11+0300\n"
+"POT-Creation-Date: 2010-10-29 15:13+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -555,6 +555,9 @@ msgid "Your phone number has been updated."
 msgstr ""
 
 msgid "Your phone number has been confirmed."
+msgstr ""
+
+msgid "Your wall settings have been updated."
 msgstr ""
 
 msgid "The element does not exist."
@@ -2458,6 +2461,9 @@ msgstr ""
 msgid "Recover password"
 msgstr ""
 
+msgid "Faculty's members"
+msgstr ""
+
 msgid "subjects list"
 msgstr ""
 
@@ -2477,6 +2483,9 @@ msgid "Website"
 msgstr ""
 
 msgid "Logo"
+msgstr ""
+
+msgid "School's members"
 msgstr ""
 
 msgid "department list"
@@ -2683,9 +2692,6 @@ msgid "Group's members"
 msgstr ""
 
 msgid "Send SMS message to group"
-msgstr ""
-
-msgid "School's members"
 msgstr ""
 
 msgid "I study here"
@@ -2948,6 +2954,12 @@ msgid ""
 "the groups you belong to."
 msgstr ""
 
+msgid "Edit shown updates."
+msgstr ""
+
+msgid "Sorry, nothing new at the moment."
+msgstr ""
+
 msgid "Filter by school:"
 msgstr ""
 
@@ -3128,6 +3140,54 @@ msgid ""
 "continuing to use Ututi!"
 msgstr ""
 
+msgid "Wall settings"
+msgstr ""
+
+msgid "Forum posts"
+msgstr ""
+
+msgid "Private messages"
+msgstr ""
+
+msgid "New subjects watched by group"
+msgstr ""
+
+msgid "Subjects no longer watched by group"
+msgstr ""
+
+msgid "Mailing list posts"
+msgstr ""
+
+msgid "Changes in subjects"
+msgstr ""
+
+msgid "New group members"
+msgstr ""
+
+msgid "People who left groups"
+msgstr ""
+
+msgid "File uploads"
+msgstr ""
+
+msgid "Changes in wiki pages"
+msgstr ""
+
+msgid "New subjects"
+msgstr ""
+
+msgid "New wiki pages"
+msgstr ""
+
+msgid "Page changes"
+msgstr ""
+
+msgid "Watched group subjects"
+msgstr ""
+
+msgid "Subject updates"
+msgstr ""
+
 msgid "Pick your region"
 msgstr ""
 
@@ -3299,6 +3359,9 @@ msgid ""
 "membership?"
 msgstr ""
 
+msgid "Ignore events like this"
+msgstr ""
+
 #, python-format
 msgid "%(user_link)s has uploaded a new file in the subject %(subject_link)s."
 msgstr ""
@@ -3347,7 +3410,7 @@ msgid "%(user_link)s has sent an sms to the group %(group_link)s."
 msgstr ""
 
 #, python-format
-msgid "%(user_link)s has sent you a private message \"%(subject)s\"."
+msgid "%(user_link)s has sent you a private message \"%(msg_link)s\"."
 msgstr ""
 
 #, python-format
