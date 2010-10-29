@@ -1134,6 +1134,12 @@ div.profileOptionLinks div.drop{
     background: transparent;
 }
 
+.folow-us-icons{
+    position:absolute;
+    right:5px;
+    top:12px;
+}
+
 /* Portlets */
 .portlet, #SearchResults, .portletModule, .portlet-verysmall {
     background-repeat: no-repeat;
@@ -4840,12 +4846,6 @@ a.link-to-search-for-notes{
   height: 200px;
   background: transparent url("images/angry_monkey.jpg") right bottom no-repeat;
   padding-bottom: 30px;
-}
-
-.folow-us-icons{
-    position:absolute;
-    right:5px;
-    top:12px;
 }
 
 .students_list div.user-logo-link{
