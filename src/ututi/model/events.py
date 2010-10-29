@@ -53,6 +53,36 @@ class Event(object):
         raise NotImplementedError()
         #return render_mako_def('/sections/wall_snippets.mako', 'generic', object=self)
 
+    @classmethod
+    def event_types(cls):
+        """Return a list of distinct event types."""
+        groups = {
+            'group_started_watching_subject': 'group_watched_subjects',
+            'group_stopped_watching_subject': 'group_watched_subjects',
+            'subject_modified': 'subjects',
+            'subject_created': 'subjects',
+            'member_joined': 'group_members',
+            'member_left': 'group_members',
+            'page_modified': 'page_events',
+            'page_created': 'page_events'}
+
+        types = meta.Session.query(events_table.c.event_type).distinct().all()
+
+        collected = {}
+        #init the groups
+        for group in groups.values():
+            collected[group] = dict(
+                id='grp_%s' % group,
+                children=[])
+        #put the events into groups
+        for evt in types:
+            evt = evt[0]
+            group = groups.get(evt, None)
+            if group is not None:
+                collected[group]['children'].append(evt)
+            else:
+                collected[evt] = evt
+        return collected
 
 class PageCreatedEvent(Event):
     """Event fired when a page is created.
