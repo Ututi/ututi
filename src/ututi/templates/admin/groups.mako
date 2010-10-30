@@ -4,22 +4,57 @@
   <title>UTUTI – student information online</title>
 </%def>
 
+<style type="text/css">
+  table#groups_list th {
+    font-weight: bold;
+    padding: 5px;
+  }
+</style>
+
 <h1>${_('Groups')}</h1>
 
 %if c.groups:
-    <ol id="group_list">
-    %for group in c.groups:
-         <li>
-                <a href="${url(controller='group', action='home', id=group.group_id)}" class="group-link">${group.title} (${len(group.members)})</a>
-                <div>${h.fmt_dt(group.created_on)}</div>
-                <div>Emails: ${group.message_count}</div>
-                <div>Files: ${len(group.files)}</div>
-                <div>Watched subjects: ${len(group.watched_subjects)}</div>
-                <div>Invitations: ${len(group.invitations)}</div>
-         % if group.logo is not None:
-                <img src="${url(controller='group', action='logo', id=group.group_id, width=100)}" />
-         % endif
-         </li>
+    <table class="groups_list">
+    %for n, group in enumerate(c.groups):
+    %if n % 20 == 0:
+      <tr style="text-align: center">
+        <th></th>
+        <th>Name (members)</th>
+        <th>Region</th>
+        <th>Emails</th>
+        <th>Files</th>
+        <th>Subjects</th>
+        <th>Invitations</th>
+        <th>Creation date</th>
+        <th>Logo</th>
+      </tr>
+    %endif
+    <tr style="background: ${n % 2 and '#EEEEEE' or '#FFFFFF'}">
+       <td>
+         ${c.groups.last_item - n}.
+       </td>
+       <td>
+         <a href="${url(controller='group', action='home', id=group.group_id)}">${group.title} (${len(group.members)})</a>
+       </td>
+       <td>
+         %if group.location:
+            %if group.location.region:
+               ${group.location.region.title}
+            %endif
+         %endif
+       </td>
+       <td>${group.message_count}</td>
+       <td>${len(group.files)}</td>
+       <td>${len(group.watched_subjects)}</td>
+       <td>${len(group.invitations)}</td>
+       <td>${h.fmt_dt(group.created_on)}</td>
+       % if group.logo is not None:
+          <td>
+            <img style="padding: 3px;" src="${url(controller='group', action='logo', id=group.group_id, width=72, height=72)}" />
+          </td>
+       % endif
+    </tr>
     %endfor
-    </ul>
+  </table>
+  <div id="pager">${c.groups.pager(format='~3~') }</div>
 %endif

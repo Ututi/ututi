@@ -356,7 +356,16 @@ class AdminController(BaseController):
 
     @ActionProtector("root")
     def groups(self):
-        c.groups = meta.Session.query(Group).order_by(Group.id).all()
+        groups = meta.Session.query(Group).order_by(desc(Group.id)).all()
+        order_by = request.params.get('order_by', 'id')
+
+        c.groups = paginate.Page(
+            groups,
+            page=int(request.params.get('page', 1)),
+            item_count=len(groups) or 0,
+            items_per_page=100,
+            order_by=order_by,
+            )
         return render('admin/groups.mako')
 
     @ActionProtector("root")
