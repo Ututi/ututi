@@ -1,5 +1,29 @@
 <%inherit file="/portlets/base.mako"/>
 
+<%def name="user_logo_link(user, style=None)">
+<div class="user-logo-link"
+%if style is not None:
+     style = ${style}
+%endif
+>
+  <div class="user-logo">
+    <a href="${url(controller="user", action="index", id=user.id)}"
+       title="${user.fullname}">
+      %if user.logo is not None:
+      <img src="${url(controller='user', action='logo', id=user.id, width=45, height=45)}" alt="logo" />
+      %else:
+      ${h.image('/img/avatar-light-small.png', alt='logo')}
+      %endif
+    </a>
+  </div>
+  <div>
+    <a href="${url(controller="user", action="index", id=user.id)}" title="${user.fullname}" class="link-to-user-profile">
+      ${h.wraped_text(user.fullname, 10)|n}
+    </a>
+  </div>
+</div>
+</%def>
+
 <%def name="school_members_portlet(title=None, school=None)">
   <%
      if school is None:
@@ -12,34 +36,24 @@
     </%def>
     <div class="members_list students_list">
 
-%if c.user is not None and c.user.location is not None:
-      <div class="user-logo-link" style="display:none">
-        <div class="user-logo">
-          <a href="${url(controller="user", action="index", id=c.user.id)}" title="${c.user.fullname}">
-            %if c.user.logo is not None:
-            <img src="${url(controller='user', action='logo', id=c.user.id, width=45, height=45)}" alt="logo" />
-            %else:
-            ${h.image('/img/avatar-light-small.png', alt='logo')}
-            %endif
-          </a>
-        </div>
-      </div>
-%endif
       <%
-         school_students = school.get_students(8)
-         %>
-      %for student in school_students:
-      <div class="user-logo-link">
-        <div class="user-logo">
-          <a href="${url(controller="user", action="index", id=student.id)}" title="${student.fullname}">
-            %if student.logo is not None:
-            <img src="${url(controller='user', action='logo', id=student.id, width=45, height=45)}" alt="logo" />
-            %else:
-            ${h.image('/img/avatar-light-small.png', alt='logo')}
-            %endif
-          </a>
-        </div>
-      </div>
+         students_number = 8
+         school_students = school.get_students(students_number)
+      %>
+      <div>
+      <% count = 0 %>
+      %for i, student in enumerate(school_students):
+          %if i == 0 or i == students_number/2:
+              <% count += 1 %>
+              <div id="members_pack_${count}" class="members-pack">
+              %if i == 0 and c.user is not None and (c.user.location is None or (c.user.location is not None and c.user.location in c.location.hierarchy(True))):
+                  ${user_logo_link(c.user, "display:none")}
+              %endif
+          %endif
+          ${user_logo_link(student)}
+          %if i == students_number/2 - 1 or i == students_number-1:
+              </div>
+          %endif
       %endfor
       <br class="clear-left" />
     </div>
@@ -54,8 +68,8 @@
     <script type="text/javascript">
            $('#i_study_here_form').ajaxForm(function() {
               $('#i_study_here_form').hide() ;
-              $('.user-logo-link:last').hide();
-              $('.user-logo-link:first').fadeIn();
+              $('#members_pack_1 .user-logo-link:last').hide();
+              $('#members_pack_1 .user-logo-link:first').fadeIn();
            });
    </script>
      <%

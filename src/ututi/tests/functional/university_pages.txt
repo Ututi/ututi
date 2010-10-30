@@ -129,12 +129,21 @@ University and department pages have tabs from now on:
     >>> browser = Browser()
     >>> browser.open('http://localhost/school/ku/ggf')
     >>> browser.getLink('Groups').click()
-    Traceback (most recent call last):
-    ...
-    httperror_seek_wrapper: HTTP Error 404: Not Found
+    >>> browser.url
+    'http://localhost/school/ku/ggf/groups'
 
+    >>> browser.open('http://localhost/school/ku')
+    >>> browser.getLink('Groups').click()
+    >>> browser.url
+    'http://localhost/school/ku/groups'
+
+    >>> browser = Browser()
     >>> browser.open('http://localhost/school/ku/ggf')
     >>> browser.getLink('Subjects').click()
-    Traceback (most recent call last):
-    ...
-    httperror_seek_wrapper: HTTP Error 404: Not Found
+    >>> browser.url
+    'http://localhost/school/ku/ggf/subjects'
+
+    >>> browser.open('http://localhost/school/ku')
+    >>> browser.getLink('Subjects').click()
+    >>> browser.url
+    'http://localhost/school/ku/subjects'

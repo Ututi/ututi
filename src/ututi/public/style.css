@@ -3343,9 +3343,18 @@ div.please-register {
     width: 60px;
 }
 
+.portlet .students_list div.user-logo-link {
+    height: auto;
+    width: 60px;
+}
+
 .portlet .members_list div.user-logo-link div.user-logo {
     height: 45px;
     width: 45px;
+}
+
+.portlet .students_list .members-pack{
+    float: left;
 }
 
 .sms-widget .character-counter {
@@ -4877,7 +4886,6 @@ ul.universityMembersInfo{
 }
 
 ul.universityMembersInfo li{
-    overflow: hidden;
     width: 43%;
 }
 

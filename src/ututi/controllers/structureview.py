@@ -101,6 +101,62 @@ class StructureviewController(SearchBaseController, UniversityListMixin):
     def _edit_form(self):
         return render('location/edit.mako')
 
+
+    @location_action
+    @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
+    def subjects(self, location):
+        c.structure_menu_current_item = 'subjects'
+        self._breadcrumbs(location)
+
+        self.form_result['tagsitem'] = location.hierarchy()
+        if self.form_result.get('obj_type', None) is None:
+            self.form_result['obj_type'] = 'subject'
+        self._search()
+
+        if location.parent is None:
+            self._get_departments(location)
+            if request.params.has_key('js'):
+                return render_mako_def('/anonymous_index/en.mako', 'universities',
+                                   unis=c.departments, ajax_url=location.url(), collapse=False, collapse_text=_('More departments'))
+            return render('location/university_subjects.mako')
+        else:
+            return render('location/department_subjects.mako')
+
+    @location_action
+    @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
+    def groups(self, location):
+        c.structure_menu_current_item = 'groups'
+        self._breadcrumbs(location)
+
+        self.form_result['tagsitem'] = location.hierarchy()
+        if self.form_result.get('obj_type', None) is None:
+            self.form_result['obj_type'] = 'group'
+        self._search()
+
+        if location.parent is None:
+            self._get_departments(location)
+            if request.params.has_key('js'):
+                return render_mako_def('/anonymous_index/en.mako', 'universities',
+                                   unis=c.departments, ajax_url=location.url(), collapse=False, collapse_text=_('More departments'))
+            return render('location/university_groups.mako')
+        else:
+            return render('location/department_groups.mako')
+
+    @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
+    def groups_search_js(self, location):
+        self.form_result['tagsitem'] = location.hierarchy()
+        self.form_result['obj_type'] = 'groups'
+        self._search()
+        return render_mako_def('/search/index.mako','search_results', results=c.results, controller='structureview', action='search_js')
+
+    @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
+    def subjects_search_js(self, location):
+        self.form_result['tagsitem'] = location.hierarchy()
+        self.form_result['obj_type'] = 'subject'
+        self._search()
+        return render_mako_def('/search/index.mako','search_results', results=c.results, controller='structureview', action='search_js')
+
+
     @location_action
     def edit(self, location):
         defaults = {

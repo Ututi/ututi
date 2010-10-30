@@ -203,6 +203,27 @@ def nl2br(text):
 EXPAND_QUOTED_TEXT_LINK = ('<a class="expand-quote" href="#">[...]</a>'
                            '<div class="quote" style="display: none">')
 
+def wraped_text(text, max_length = 10, break_symbol = "<br />"):
+    """Returning text separated with breaks"""
+    words = text.split()
+
+    #TODO: add short words join if they are not exceeding max_length
+    word_pairs = []
+    for i, word in enumerate(words):
+        if i != 0 and len(words[i-1]) + len(word) < max_length:
+            words[i] = words[i-1] + " " + word
+            words.remove(words[i-1])
+
+    splited_text = []
+    for word in words:
+        step = 0
+        while step < len(word):
+            part = word[step:(max_length+step)]
+            step += max_length
+            splited_text.append(part)
+            splited_text.append(break_symbol)
+    splited_text.pop() #removing last break
+    return ''.join(splited_text)
 
 def email_with_replies(text):
     lines = cgi.escape(text).split("\n")
