@@ -14,7 +14,7 @@
 <h1>${_('Groups')}</h1>
 
 %if c.groups:
-    <table class="groups_list">
+    <table id="groups_list">
     %for n, group in enumerate(c.groups):
     %if n % 20 == 0:
       <tr style="text-align: center">

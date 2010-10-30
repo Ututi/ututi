@@ -11,9 +11,9 @@ A list of all groups is shown at /groups.
     >>> browser = Browser.logIn()
 
     >>> browser.open('http://localhost/admin/groups')
-    >>> browser.printQuery("id('group_list')//li/a/text()")
-    Moderatoriai (2)
+    >>> browser.printQuery("id('groups_list')//td/a/text()")
     Testing group (2)
+    Moderatoriai (2)
 
 The link of the group leads to its home page.
 
@@ -114,8 +114,8 @@ You can import more groups using the admin interface.
     ...                                       'users.csv')
     >>> form.getControl('Upload').click()
     >>> browser.open('http://localhost/admin/groups')
-    >>> browser.printQuery("id('group_list')//li/a/text()")
-    Ututi moderatoriai (2)
-    Testing group (2)
-    Test group (1)
+    >>> browser.printQuery("id('groups_list')//td/a/text()")
     Imported group (0)
+    Test group (1)
+    Testing group (2)
+    Ututi moderatoriai (2)
