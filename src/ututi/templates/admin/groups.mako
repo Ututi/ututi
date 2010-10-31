@@ -14,6 +14,9 @@
 <h1>${_('Groups')}</h1>
 
 %if c.groups:
+<h3 class="underline search-results-title">
+  <span class="result-count">(${ungettext("found %(count)s group", "found %(count)s groups", c.groups.item_count) % dict(count = c.groups.item_count)})</span>
+</h3>
     <table id="groups_list">
     %for n, group in enumerate(c.groups):
     %if n % 20 == 0:
@@ -31,7 +34,7 @@
     %endif
     <tr style="background: ${n % 2 and '#EEEEEE' or '#FFFFFF'}">
        <td>
-         ${c.groups.last_item - n}.
+         ${c.groups.first_item + n}.
        </td>
        <td>
          <a href="${url(controller='group', action='home', id=group.group_id)}">${group.title} (${len(group.members)})</a>
