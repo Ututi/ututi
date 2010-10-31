@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-10-29 22:45+0300\n"
+"PO-Revision-Date: 2010-10-31 15:12+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -1495,6 +1495,13 @@ msgstr "Pridėti"
 
 msgid "Day count (for unlimited space)"
 msgstr "Dienų skaičius (neribotai vietai)"
+
+#, python-format
+msgid "found %(count)s group"
+msgid_plural "found %(count)s groups"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "CSV File"
 msgstr "CSV failas"
@@ -3509,6 +3516,9 @@ msgstr "Dalykų pokyčiai"
 
 msgid "Which events do You want to see on Your wall?"
 msgstr "Kuriuos įvykius nori matyti savo sienoje?"
+
+msgid "back to the wall"
+msgstr "Atgal į atnaujinimų sieną"
 
 msgid "Pick your region"
 msgstr "Pasirinkite regioną"

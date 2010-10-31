@@ -4797,8 +4797,8 @@ body .ui-widget button.btnMedium {
 
 .wall_item .hide_me {
   position: absolute;
-  left: 3px;
-  top: 3px;
+  right: 0;
+  top: 0;
   display: none;
   width: 15px;
   height: 15px;

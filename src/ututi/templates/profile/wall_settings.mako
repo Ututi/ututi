@@ -55,14 +55,18 @@ labels = {
   </div>
   %endif
 </%def>
-<br />
-<div>${_('Which events do You want to see on Your wall?')}</div>
+
+<div class="tip">${_('Which events do You want to see on Your wall?')}</div>
+<br/>
 <form method="POST" action="${url(controller='profile', action='wall_settings')}" class="fullForm" id="wall_settings_form">
 %for key, item in c.event_types.items():
   ${form_item(item)}
 %endfor
 ${h.input_submit('Save')}
 </form>
+<br/>
+<a class="back-link" href="${url(controller='profile', action='feed')}">${_('back to the wall')}</a>
+
 
 <script type="text/javascript">
 

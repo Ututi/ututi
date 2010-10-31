@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-10-29 22:45+0300\n"
+"PO-Revision-Date: 2010-10-31 15:12+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -1509,6 +1509,13 @@ msgstr "Dodaj"
 
 msgid "Day count (for unlimited space)"
 msgstr "Liczba dni (na nieograniczoną przestrzeń)"
+
+#, python-format
+msgid "found %(count)s group"
+msgid_plural "found %(count)s groups"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "CSV File"
 msgstr "Plik CSV"
@@ -3530,6 +3537,9 @@ msgid "Subject updates"
 msgstr ""
 
 msgid "Which events do You want to see on Your wall?"
+msgstr ""
+
+msgid "back to the wall"
 msgstr ""
 
 msgid "Pick your region"
