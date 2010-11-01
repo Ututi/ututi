@@ -40,7 +40,7 @@ class SearchBaseController(BaseController):
             search_params['text'] = c.text
         if c.tags:
             search_params['tags'] = c.tags
-        if c.obj_type != '*' and c.obj_type in ('group', 'page', 'subject', 'forum_post', 'file'):
+        if c.obj_type != '*':
             search_params['obj_type'] = c.obj_type
 
         c.page = int(request.params.get('page', 1))

@@ -2,7 +2,7 @@
 <%namespace file="/search/index.mako" import="search_results"/>
 
 <%def name="search_content()">
-${search_form(c.text, 'groups', c.location.hierarchy,
+${search_form(c.text, 'group', c.location.hierarchy,
     parts=['text'], target=c.location.url(action="groups"), js=True,
     js_target=c.location.url(action='groups_search_js'))}
 

@@ -110,7 +110,7 @@ class StructureviewController(SearchBaseController, UniversityListMixin):
 
         self.form_result['tagsitem'] = location.hierarchy()
         if self.form_result.get('obj_type', None) is None:
-            self.form_result['obj_type'] = 'subject'
+            self.form_result['obj_type'] = 'subject,file,page'
         self._search()
 
         if location.parent is None:
@@ -141,23 +141,6 @@ class StructureviewController(SearchBaseController, UniversityListMixin):
             return render('location/university_groups.mako')
         else:
             return render('location/department_groups.mako')
-
-    @location_action
-    @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
-    def groups_search_js(self, location):
-        self.form_result['tagsitem'] = location.hierarchy()
-        self.form_result['obj_type'] = 'groups'
-        self._search()
-        return render_mako_def('/search/index.mako','search_results', results=c.results, controller='structureview', action='search_js')
-
-    @location_action
-    @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
-    def subjects_search_js(self, location):
-        self.form_result['tagsitem'] = location.hierarchy()
-        self.form_result['obj_type'] = 'subject'
-        self._search()
-        return render_mako_def('/search/index.mako','search_results', results=c.results, controller='structureview', action='search_js')
-
 
     @location_action
     def edit(self, location):

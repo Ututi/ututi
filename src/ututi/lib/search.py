@@ -146,7 +146,10 @@ def _search_query_type(query, **kwargs):
     """Filter the query by object type."""
     obj_type = kwargs.get('obj_type')
     if obj_type is not None:
-        query = query.filter(ContentItem.content_type == obj_type)
+        if not isinstance(obj_type, list):
+            obj_type = obj_type.split(',')
+
+        query = query.filter(ContentItem.content_type.in_(obj_type))
 
     return query
 

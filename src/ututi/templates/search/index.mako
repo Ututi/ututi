@@ -133,6 +133,8 @@ ${h.javascript_link('/javascript/search.js')|n}
         </select>
       </div>
     </div>
+    %else:
+      <input type="hidden" name="obj_type" value="${obj_type}" />
     %endif
 
   </form>
