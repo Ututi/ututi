@@ -3353,6 +3353,10 @@ div.please-register {
     width: 45px;
 }
 
+.portlet .members_list div.user-logo-link a {
+    font-size: 9px;
+}
+
 .portlet .students_list .members-pack{
     float: left;
 }
