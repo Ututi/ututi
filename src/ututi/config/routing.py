@@ -219,6 +219,8 @@ def make_map(config):
     map.connect('/school/*path/search_js', controller='structureview', action='search_js')
     map.connect('/school/*path/groups', controller='structureview', action='groups')
     map.connect('/school/*path/subjects', controller='structureview', action='subjects')
+    map.connect('/school/*path/groups_js', controller='structureview', action='groups_search_js')
+    map.connect('/school/*path/subjects_js', controller='structureview', action='subjects_search_js')
     map.connect('/school/*path', controller='structureview', action='index')
 
     # other user views

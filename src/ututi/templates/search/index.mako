@@ -89,7 +89,7 @@ ${h.javascript_link('/javascript/search.js')|n}
         </div>
       %endif
       <div class="search-submit">
-        <button class="btnMedium" type="submit" value="${_('Search-btn')}">
+        <button class="btnMedium" type="submit" value="${_('Search-btn')}" id="search-btn">
           <span>
             ${_('Search-btn')}
           </span>
