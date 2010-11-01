@@ -4,7 +4,7 @@
 <%def name="search_content()">
 ${search_form(c.text, 'group', c.location.hierarchy,
     parts=['text'], target=c.location.url(action="groups"), js=True,
-    js_target=c.location.url(action='groups_search_js'))}
+    js_target=c.location.url(action='search_js'))}
 
   ${search_results(c.results, controller='structureview', action='search_js')}
 
@@ -15,4 +15,4 @@ ${search_form(c.text, 'group', c.location.hierarchy,
       ${h.image('/images/details/icon_question.png', alt=_('Create your group, invite your classmates and use the mailing list, upload private group files'), class_='tooltip')|n}
     </div>
   %endif
-</%def> 
+</%def>

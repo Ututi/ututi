@@ -5,8 +5,6 @@
 <%namespace file="/portlets/school.mako" import="*"/>
 <%namespace file="/anonymous_index/en.mako" import="*"/>
 
-
-
 <%def name="title()">
   ${c.location.title} (${c.location.title_short}) - ${_('department list')}
 </%def>
@@ -33,26 +31,15 @@
 </ul>
 </%def>
 
+<%def name="portlets()">
+<div id="sidebar">
+  ${struct_info_portlet()}
+  ${school_members_portlet(_("School's members"))}
+</div>
+</%def>
+
 ${location_title()}
 ${universities_section(c.departments, c.location.url(), collapse=True, collapse_text=_('More departments'))}
 ${tabs()}
 
-<h2>${_('Search in the university')}</h2>
-
-${self.search_content()}
-
-##%if c.came_from_search:
-##<script type="text/javascript"><!--
-##google_ad_client = "pub-1809251984220343";
-##/* Universities ads menu - 728x15 */
-##google_ad_slot = "1300049814";
-##google_ad_width = 650;
-##google_ad_height = 15;
-##//-->
-##</script>
-##<script type="text/javascript"
-##src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-##</script> 
-##%endif
-
-
+${next.body()}

@@ -1,9 +1,3 @@
-%if c.location.parent is None:
-<%inherit file="/location/university.mako" />
-%else:
-<%inherit file="/location/department.mako" />
-%endif
-<%namespace file="/location/university.mako" import="*"/>
 <%namespace file="/search/index.mako" import="search_form"/>
 <%namespace file="/search/index.mako" import="search_results"/>
 
