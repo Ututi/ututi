@@ -7,9 +7,18 @@ from pylons import tmpl_context as c, url
 from pylons.i18n import _
 from pylons.templating import render_mako_def
 
+from ututi.model.events import Event
+from sqlalchemy.orm.query import aliased
+from sqlalchemy.sql.expression import and_
+from sqlalchemy.sql.expression import or_
+from sqlalchemy.sql.expression import desc
+
 import ututi.lib.helpers as h
 from ututi.lib.base import render
 from ututi.lib.validators import LocationIdValidator, ShortTitleValidator, validate
+from ututi.model import Subject
+from ututi.model import Group
+from ututi.model import ContentItem
 from ututi.model import LocationTag, meta
 from ututi.controllers.home import UniversityListMixin
 from ututi.controllers.group import FileUploadTypeValidator
@@ -81,12 +90,28 @@ class StructureviewController(SearchBaseController, UniversityListMixin):
     @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
     def index(self, location):
         c.structure_menu_current_item = 'index'
-        self._breadcrumbs(location)
+        children = [child.id for child in location.flatten]
+        subj_events = meta.Session.query(Event)\
+            .join((Subject, Event.object_id == Subject.id))\
+            .filter(Subject.location_id.in_(children))
 
-        self.form_result['tagsitem'] = location.hierarchy()
-        if self.form_result.get('obj_type', None) is None:
-            self.form_result['obj_type'] = 'subject'
-        self._search()
+        if c.user is not None:
+            subj_events = subj_events.filter(Event.author_id != c.user.id)\
+            .filter(~Event.event_type.in_(c.user.ignored_events_list))
+
+        grp_events = meta.Session.query(Event)\
+            .join((Group, Event.object_id == Group.id))\
+            .filter(Group.location_id.in_(children))\
+            .filter(Group.forum_is_public == True)\
+
+        if c.user is not None:
+            grp_events = grp_events.filter(Event.author_id != c.user.id)\
+            .filter(~Event.event_type.in_(c.user.ignored_events_list))
+
+        c.events = grp_events.union(subj_events).order_by(desc(Event.created))\
+            .limit(20).all()
+
+        self._breadcrumbs(location)
 
         if location.parent is None:
             self._get_departments(location)

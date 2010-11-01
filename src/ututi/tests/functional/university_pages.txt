@@ -24,19 +24,19 @@ We should be able to click on a link that leads us to the page of the faculty.
     >>> browser.printQuery('//h1/text()')
     Vilniaus universitetas
 
-    >>> browser.printQuery('id("mainContent")//h2/text()')
-    Search in the university
+    >>> browser.printQuery('//div[@class="tip"]/text()')
+    This is a list of all the recent events in the subjects and groups of this university.
 
     >>> browser.printQuery('id("university-list")//div[@class="title"]/a/text()')
     Ekonomikos fakultetas
     Geografijos fakultetas
 
 There is a search form on this page and we should be able to use it.
-
+    >>> browser.getLink('Subjects').click()
     >>> browser.getControl(name='text', index=1).value = 'prof.'
     >>> browser.getControl('Search', index=1).click()
     >>> browser.url
-    'http://localhost/school/vu?text=prof.&obj_type=subject'
+    'http://localhost/school/vu/subjects?text=prof.&obj_type=subject%2Cfile%2Cpage'
 
     >>> browser.printQuery("//div[@class='search-item snippet-subject']/a/text()")
     Matematinė analizė
