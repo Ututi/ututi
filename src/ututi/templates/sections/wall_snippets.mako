@@ -3,6 +3,7 @@
 
 <%def name="wall_item(event)">
 <div class="wall_item click2show ${caller.classes()} type_${event.event_type}" id="wallevent-${event.id}">
+  %if c.user is not None:
   <div class="hide_me">
     <form method="POST" action="${url(controller='profile', action='hide_event')}">
       <div>
@@ -11,7 +12,7 @@
       </div>
     </form>
   </div>
-
+  %endif
   <div class="description">
     ${caller.body()}
   </div>
