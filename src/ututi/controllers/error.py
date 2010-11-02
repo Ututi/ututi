@@ -2,7 +2,7 @@ from pylons import request, tmpl_context as c
 import ututi.lib.helpers as h
 
 from ututi.model import get_supporters
-from ututi.lib.base import BaseController, render
+from ututi.lib.base import render
 from ututi.lib.mailer import send_email
 
 from pylons.i18n import _
@@ -33,8 +33,6 @@ class ErrorController(SearchController):
         if resp.status_int == 403:
             return render("/access_denied.mako")
         elif resp.status_int == 404:
-            from ututi.lib import helpers as h
-            from pylons.i18n import _
             h.flash(_("Document at %(url)s was not found, but maybe you are interested in something else?") % {
                     'url': req.url.encode('ascii', 'ignore')})
             self.form_result = {}
@@ -56,5 +54,5 @@ class ErrorController(SearchController):
             elif action == "kick":
                 message = _("User kicked monkeys")
                 h.flash(_('Ouch! Monkeys were kicked and are trying to work harder.  Until they fix this, try to search for something else.'))
-            send_email(sender, config.get('error_email', 'errors.ututi.lt'), "["+_("Error message")+"]", message)
+            send_email(sender, config.get('error_email', 'errors@ututi.lt'), "["+_("Error message")+"]", message)
         redirect(url(controller='search', action="index"))
