@@ -25,7 +25,6 @@ setup(
         "Babel",
         "translitcodec",
         "trans",
-        "translate-toolkit",
         "python-openid",
         "pygeoip",
     ],

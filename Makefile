@@ -227,7 +227,7 @@ test_migration_2: instance/var/run/.s.PGSQL.${PGPORT}
 
 .PHONY: test_translations
 test_translations: bin/pofilter
-	bin/pofilter --progress=none -t xmltags -t printf --ututi ${PWD}/src/ututi/i18n/ -o ${PWD}/parts/test_translations/
+	bin/pofilter --progress=none -t xmltags -t printf --nous ${PWD}/src/ututi/i18n/ -o ${PWD}/parts/test_translations/
 	diff -r -u ${PWD}/src/ututi/tests/expected_i18n_errors/lt ${PWD}/parts/test_translations/lt
 
 .coverage: bin/coverage bin/test
@@ -249,7 +249,7 @@ test_coverage: bin/coverage .coverage
 
 .PHONY: update_expected_translations
 update_expected_translations: bin/pofilter
-	bin/pofilter --progress=none -t xmltags -t printf --ututi ${PWD}/src/ututi/i18n/ -o ${PWD}/parts/test_translations/
+	bin/pofilter --progress=none -t xmltags -t printf --nous ${PWD}/src/ututi/i18n/ -o ${PWD}/parts/test_translations/
 	rm -rf ${PWD}/src/ututi/tests/expected_i18n_errors/
 	mv ${PWD}/parts/test_translations/ ${PWD}/src/ututi/tests/expected_i18n_errors/
 
