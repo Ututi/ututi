@@ -95,14 +95,13 @@
 
   <form method='post' action="${url(controller='group', action='send_sms', id=group.group_id)}">
     <input type="hidden" name="current_url" value="${url.current()}" />
-    <%
-        message = ""
-        if user.can_send_sms(group):
-            message = "\n\n\n-- "+user.fullname
-        else:
-            message = _('You do not have enough SMS credits to send a message to this group.')
-    %>
-    ${h.input_area('sms_message', '', value=message, cols=35, disabled=not user.can_send_sms(group))}
+
+    %if user.can_send_sms(group):
+      ${h.input_area('sms_message', '', value="\n\n\n-- %s" % user.fullname, cols=35)}
+    %else:
+      ${h.input_area('sms_message', '', _('You do not have enough SMS credits to send a message to this group.'), cols=35, disabled=True)}
+    %endif
+
     %if not recipients:
     <div class="error-container">
       <span class="error-message">${_('No one in this group has confirmed their phone numbers.')}</span>
