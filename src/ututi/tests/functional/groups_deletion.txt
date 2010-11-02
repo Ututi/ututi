@@ -12,7 +12,7 @@ When I login, I go to groups creation to create public group
     >>> browser.getControl('Department').value = "Ekonomikos fakultetas"
     >>> browser.getControl('Continue').click()
 
-Then i succesfully create a group
+Then I succesfully create a group
 
     >>> browser.url
     'http://localhost/group/testing-one-two-tree/invite_members_step'
@@ -45,11 +45,13 @@ I create a forum topic
     'http://localhost/group/testing-one-two-tree/forum/5/thread/5'
 
 Other user can read forum post
+
     >>> browser2 = Browser.logIn('user2@ututi.lt', 'password')
     >>> browser2.open('http://localhost/group/testing-one-two-tree/forum/5/thread/5')
     >>> browser2.getControl('Subscribe').click()
 
 First user can delete group
+
     >>> browser.open('http://localhost/group/testing-one-two-tree/members')
     >>> browser.getControl('Delete group').click()
     >>> browser.printQuery("//div[@class='flash-message']")
@@ -59,3 +61,13 @@ First user can delete group
       </span>
       <span>Group 'testing one two tree' has been deleted!</span>
     </div>
+
+XXX The email in the queue is sent because of the post to the forum,
+admin posts to the forum and still gets the email about the post he
+just made.
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> mail_queue
+    [<EmailInfo sender='info@ututi.lt' recipients=['admin@ututi.lt']>]
+
+    >>> mail_queue[:] = []
