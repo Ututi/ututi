@@ -42,7 +42,7 @@ After that user will be redirected to "search" area and the flash message will b
      >>> browser.printQuery("//div[@class='flash-message']/span/text()")
      Monkeys are ashamed of what you said and are now working even harder to fix the problem. Until they do that, try to search for something else.
 
-User can send constant error message (no mather what hy type in "shout message") by clicking on "Kick monkeys"
+User can send constant error message (no matter what he types in "shout message") by clicking on "Kick monkeys"
 
     >>> browser.open('http://localhost/admin/error')
     Traceback (most recent call last):
