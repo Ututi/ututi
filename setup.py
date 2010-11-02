@@ -25,9 +25,9 @@ setup(
         "translitcodec",
         "trans",
         "python-openid",
-        "pygeoip",
         "nous.pylons.grok",
-        "nous.pylons.testing"
+        "nous.pylons.testing",
+        "nous.pylons.geoip"
     ],
     package_dir={'': 'src'},
     packages=find_packages('src'),
