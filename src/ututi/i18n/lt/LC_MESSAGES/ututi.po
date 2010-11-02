@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-10-31 15:12+0200\n"
+"PO-Revision-Date: 2010-11-02 16:37+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -718,11 +718,41 @@ msgstr ""
 msgid "The tag is too long."
 msgstr "Žyma per ilga."
 
-msgid "Enter a valid email."
-msgstr "Ei! Įvesk teisingą el. paštą."
+msgid "Please enter an email address"
+msgstr "Reikalingas el. pašto adresas"
+
+msgid "An email address must contain a single @"
+msgstr "El. pašto adrese turėtų būti @"
+
+#, python-format
+msgid ""
+"The username portion of the email address is invalid (the portion before "
+"the @: %(username)s)"
+msgstr ""
+"The username portion of the email address is invalid (the portion before "
+"the @: %(username)s)"
+
+#, python-format
+msgid "An error occured when trying to connect to the server: %(error)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"The domain portion of the email address is invalid (the portion after the"
+" @: %(domain)s)"
+msgstr ""
+
+#, python-format
+msgid ""
+"The domain of the email address does not exist (the portion after the @: "
+"%(domain)s)"
+msgstr ""
 
 msgid "The email already exists."
 msgstr "Toks el. paštas jau yra."
+
+msgid "Enter a valid email."
+msgstr "Ei! Įvesk teisingą el. paštą."
 
 msgid "Id does not reference a group or a subject."
 msgstr "Id nenurodo į grupę ar dalyką."
@@ -2260,6 +2290,14 @@ msgstr "Privačių failų saugyklą"
 msgid "Forum type"
 msgstr "Forumo tipas"
 
+msgid ""
+"<p>In e-mail conference all mails, sended to specific adress will be "
+"forwarded direcly to all members.</p>                   <p>In forum there"
+" is posibility to create subforums, but only subscribed members get "
+"e-mail notifications about new messages in forum, and not messages it "
+"self.</p>"
+msgstr ""
+
 msgid "join"
 msgstr "prisijungti"
 
@@ -2740,14 +2778,19 @@ msgstr "Fakulteto nariai"
 msgid "subjects list"
 msgstr "dalykų sąrašas"
 
-msgid "Did not find what you were looking for?"
-msgstr "Nerandi to, ko ieškai?"
+msgid "department list"
+msgstr "fakultetų sąrašas"
 
-msgid "Create a new group"
-msgstr "sukurti naują grupę"
+msgid "School's members"
+msgstr "Nariai"
 
-msgid "Store all the subject's files and notes in one place."
-msgstr "Laikyk visus dalyko failus ir užrašus vienoje vietoje."
+msgid ""
+"This is a list of all the recent events in the subjects and groups of "
+"this university."
+msgstr ""
+
+msgid "Sorry, nothing new at the moment."
+msgstr "Deja, šiuo metu nieko naujo"
 
 msgid "Short title"
 msgstr "Trumpinys"
@@ -2758,14 +2801,11 @@ msgstr "Internetinis puslapis"
 msgid "Logo"
 msgstr "Logotipas"
 
-msgid "School's members"
-msgstr "Nariai"
+msgid "Did not find what you were looking for?"
+msgstr "Nerandi to, ko ieškai?"
 
-msgid "department list"
-msgstr "fakultetų sąrašas"
-
-msgid "Search in the university"
-msgstr "Paieška universitete"
+msgid "Create a new group"
+msgstr "sukurti naują grupę"
 
 msgid "Group mail"
 msgstr "Grupės paštas"
@@ -3129,6 +3169,9 @@ msgstr "Parsiųsta failų:"
 msgid "create new subject"
 msgstr "kurti naują dalyką"
 
+msgid "Store all the subject's files and notes in one place."
+msgstr "Laikyk visus dalyko failus ir užrašus vienoje vietoje."
+
 msgid "create new group"
 msgstr "kurti naują grupę"
 
@@ -3263,9 +3306,6 @@ msgstr ""
 
 msgid "Edit shown updates."
 msgstr "Redaguoti sienos nustatymus"
-
-msgid "Sorry, nothing new at the moment."
-msgstr "Deja, šiuo metu nieko naujo"
 
 msgid "Filter by school:"
 msgstr "Filtruoti pagal mokymo įstaigą"

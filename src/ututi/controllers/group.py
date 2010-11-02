@@ -29,7 +29,7 @@ from ututi.lib.fileview import FileViewMixin
 from ututi.lib.image import serve_logo
 from ututi.lib.sms import sms_cost
 from ututi.lib.base import BaseController, render, render_lang
-from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator, TagsValidator, GroupCouponValidator, validate
+from ututi.lib.validators import HtmlSanitizeValidator, TranslatedEmailValidator, LocationTagsValidator, TagsValidator, GroupCouponValidator, validate
 
 from ututi.model import GroupCoupon
 from ututi.model import LocationTag, User, GroupMember, GroupMembershipType, File, OutgoingGroupSMSMessage
@@ -1033,7 +1033,7 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
         for line in emails:
             for email in filter(bool, line.split(',')):
                 try:
-                    validators.Email.to_python(email)
+                    TranslatedEmailValidator.to_python(email)
                     email.encode('ascii')
                     user = User.get(email)
                     if user is not None and self._check_handshakes(group, user) == 'request':

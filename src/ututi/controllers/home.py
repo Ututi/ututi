@@ -37,7 +37,7 @@ from ututi.lib.emails import email_confirmation_request, email_password_reset
 from ututi.lib.messaging import EmailMessage
 from ututi.lib.security import ActionProtector, sign_in_user
 from ututi.lib.geoip import set_geolocation
-from ututi.lib.validators import validate, UniqueEmail, LocationTagsValidator, PhoneNumberValidator
+from ututi.lib.validators import validate, UniqueEmail, TranslatedEmailValidator,  LocationTagsValidator, PhoneNumberValidator
 from ututi.model import meta, User, Region, Email, PendingInvitation, LocationTag, Payment, get_supporters
 from ututi.model import UserSubjectMonitoring, GroupSubjectMonitoring, Subject, Group, SearchItem
 from ututi.model.events import Event
@@ -47,8 +47,7 @@ log = logging.getLogger(__name__)
 class PasswordRecoveryForm(Schema):
     allow_extra_fields = False
     email = All(
-         validators.String(not_empty=True, strip=True),
-         validators.Email()
+         TranslatedEmailValidator(not_empty=True)
          )
 
 
@@ -80,7 +79,7 @@ class RegistrationForm(Schema):
     fullname = validators.String(not_empty=True, strip=True, messages=msg)
 
     msg = {'non_unique': _(u"This email has already been used to register.")}
-    email = All(validators.Email(not_empty=True, strip=True),
+    email = All(TranslatedEmailValidator(not_empty=True, strip=True),
                 UniqueEmail(messages=msg, strip=True, completelyUnique=True))
 
     msg = {'empty': _(u"Please enter your password to register."),
@@ -727,7 +726,7 @@ class HomeController(UniversityListMixin):
             for line in emails:
                 for email in filter(bool, line.split(',')):
                     try:
-                        validators.Email.to_python(email)
+                        TranslatedEmailValidator.to_python(email)
                         exists = meta.Session.query(Email).filter(Email.email == email).first()
                         if exists is None:
                             count = count + 1

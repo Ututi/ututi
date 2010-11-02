@@ -208,6 +208,17 @@ class TagsValidator(validators.FormValidator):
                                   form_dict, state,
                                   error_dict={'tags' : Invalid(self.message('too_long', state), form_dict, state)})
 
+class TranslatedEmailValidator(validators.Email):
+    messages = {
+        'empty': _('Please enter an email address'),
+        'noAt': _('An email address must contain a single @'),
+        'badUsername': _('The username portion of the email address is invalid (the portion before the @: %(username)s)'),
+        'socketError': _('An error occured when trying to connect to the server: %(error)s'),
+        'badDomain': _('The domain portion of the email address is invalid (the portion after the @: %(domain)s)'),
+        'domainDoesNotExist': _('The domain of the email address does not exist (the portion after the @: %(domain)s)'),
+        'non_unique': _(u"The email already exists."),
+    }
+
 class UniqueEmail(validators.FancyValidator):
 
     messages = {

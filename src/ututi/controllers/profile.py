@@ -26,7 +26,7 @@ from ututi.lib.emails import email_confirmation_request
 from ututi.lib.security import ActionProtector
 from ututi.lib.search import search_query, search_query_count
 from ututi.lib.image import serve_logo
-from ututi.lib.validators import UserPasswordValidator, UniqueEmail, LocationTagsValidator, manual_validate, PhoneNumberValidator
+from ututi.lib.validators import UserPasswordValidator, TranslatedEmailValidator, UniqueEmail, LocationTagsValidator, manual_validate, PhoneNumberValidator
 from ututi.lib.forms import validate
 from ututi.lib.events import event_types_grouped
 from ututi.lib import gg, sms
@@ -142,7 +142,7 @@ class ContactForm(Schema):
     allow_extra_fields = False
 
     msg = {'non_unique': _(u"This email is already in use.")}
-    email = All(validators.Email(not_empty=True, strip=True),
+    email = All(TranslatedEmailValidator(not_empty=True, strip=True),
                 UniqueEmail(messages=msg, strip=True))
 
     gadugadu_uin = validators.Int()
