@@ -950,7 +950,7 @@ CREATE TABLE group_invitations (
        hash varchar(32) not null unique,
        active boolean default true,
        primary key (hash),
-       unique(group_id, email));;
+       unique(group_id, email, active));;
 
 create index group_invitations_user_id_idx on group_invitations(user_id);
 create index group_invitations_group_id_idx on group_invitations(group_id);

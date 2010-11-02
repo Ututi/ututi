@@ -138,6 +138,14 @@ And the user is not a member of this group anymore:
     ...
     httperror_seek_wrapper: HTTP Error 403: Forbidden
 
+What happens if we try to invite that member again?
+    >>> browser = browser.logIn()
+    >>> browser.open('http://localhost/group/moderators')
+    >>> browser.getLink('Members').click()
+    >>> browser.getControl(name='emails', index=0).value = 'user@ututi.lt'
+    >>> browser.getControl('Invite').click()
+
+
 If a user, who has been invited to join a group requests to join it, we consider this as an acceptance of the invitation.
     >>> browser3 = Browser.logIn('user2@ututi.lt', 'password')
     >>> browser3.open('http://localhost/group/moderators')

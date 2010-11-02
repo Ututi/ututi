@@ -1016,7 +1016,7 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
                 ).filter_by(group=group, user=user, active=True
                 ).all()
         for invitation in invitations:
-            invitation.active = False
+            invitation.active = None
 
     def _check_handshakes(self, group, user):
         """Check if the user already has a request to join the group or an invitation."""
