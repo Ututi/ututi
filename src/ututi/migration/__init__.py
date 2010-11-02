@@ -5,8 +5,7 @@ import pkg_resources
 
 from martian.scan import module_info_from_dotted_name
 
-MIN_VERSION = 98
-
+MIN_VERSION = 100
 
 def sql_migrate(name):
     base_name = name.split('.')[-1]

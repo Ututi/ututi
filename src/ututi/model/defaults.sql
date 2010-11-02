@@ -684,23 +684,27 @@ $$ LANGUAGE plpgsql;;
 CREATE TRIGGER set_page_location AFTER INSERT ON subject_pages
     FOR EACH ROW EXECUTE PROCEDURE set_page_location();;
 
-/* a trigger to update the page's tags when the subject's location changes */
-CREATE FUNCTION update_page_location() RETURNS trigger AS $$
+/* a trigger to update the page and file tags when the subject's location changes */
+CREATE FUNCTION update_item_location() RETURNS trigger AS $$
     BEGIN
-      IF NEW.content_type <> 'subject' OR NEW.location_id = OLD.location_id THEN
+      IF (NEW.content_type <> 'subject' AND NEW.content_type <> 'group') OR NEW.location_id = OLD.location_id THEN
         RETURN NEW;
       END IF;
       UPDATE content_items SET location_id = NEW.location_id
              FROM subject_pages s
              WHERE s.page_id = id
              AND s.subject_id = NEW.id;
+      UPDATE content_items ci set location_id = NEW.location_id
+             FROM files f
+             WHERE f.id = ci.id
+             AND f.parent_id = NEW.id;
 
       RETURN NEW;
     END
 $$ LANGUAGE plpgsql;;
 
-CREATE TRIGGER update_page_location AFTER UPDATE ON content_items
-    FOR EACH ROW EXECUTE PROCEDURE update_page_location();;
+CREATE TRIGGER update_item_location AFTER UPDATE ON content_items
+    FOR EACH ROW EXECUTE PROCEDURE update_item_location();;
 
 /* a trigger to update the date and user who created the object */
 CREATE FUNCTION on_content_create() RETURNS trigger AS $$
