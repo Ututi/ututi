@@ -1,7 +1,6 @@
 <%inherit file="/ubase.mako" />
 
 <%namespace file="/search/index.mako" import="search_form"/>
-<%namespace file="/portlets/anonymous.mako" import="*"/>
 <%namespace file="/portlets/banners/base.mako" import="*"/>
 
 <%def name="body_class()">anonymous_index pl_specific</%def>
