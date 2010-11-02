@@ -204,6 +204,10 @@
 <%def name="forum_type_and_id()">
   <label for="forum_type"><span class="labelText">${_('Forum type')}</span></label>
   ${h.select("forum_type", c.forum_type, c.forum_types)}
+  ${h.image('/images/details/icon_question.png',
+            alt=_("<p>In e-mail conference all mails, sended to specific adress will be forwarded direcly to all members.</p>\
+                   <p>In forum there is posibility to create subforums, but only subscribed members get e-mail notifications about new messages in forum, and not messages it self.</p>"),
+             class_='tooltip', style='margin-top: 4px;')|n}
 
   <div style="height: 5px"></div>
 

@@ -1061,6 +1061,10 @@ div.profileOptionLinks div.drop{
     width: 1em;
 }
 
+#group_settings_form img.tooltip{
+    vertical-align: text-bottom;
+}
+
 #group_settings_form label span.address{
     color: #666;
     font-size: 14px;
