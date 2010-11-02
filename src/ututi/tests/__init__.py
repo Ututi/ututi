@@ -104,7 +104,7 @@ def layerTestTearDown(cls):
     teardown_db_defaults(meta.engine)
     meta.Session.rollback()
     meta.Session.remove()
-    from ututi.grok.grokker import the_multi_grokker
+    from nous.pylons.grok import the_multi_grokker
     the_multi_grokker.clear()
     if len(gg.sent_messages) > 0:
         print >> sys.stderr, "GG queue is NOT EMPTY!"

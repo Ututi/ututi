@@ -10,7 +10,6 @@ setup(
     install_requires=[
         "Pylons",
         "SQLAlchemy",
-        "grokcore.component",
         "z3c.testsetup",
         "repoze.what-pylons",
         "psycopg2",
@@ -27,6 +26,7 @@ setup(
         "trans",
         "python-openid",
         "pygeoip",
+        "nous.pylons.grok"
     ],
     package_dir={'': 'src'},
     packages=find_packages('src'),
