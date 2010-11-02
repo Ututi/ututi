@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-11-02 16:37+0200\n"
+"PO-Revision-Date: 2010-11-02 21:44+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -734,19 +734,19 @@ msgstr ""
 
 #, python-format
 msgid "An error occured when trying to connect to the server: %(error)s"
-msgstr ""
+msgstr "Klaida bandant prisijungti prie serverio: %(error)s"
 
 #, python-format
 msgid ""
 "The domain portion of the email address is invalid (the portion after the"
 " @: %(domain)s)"
-msgstr ""
+msgstr "El. pašto adreso domeno dalis (po @ simbolio: %(domain)s) netinkama."
 
 #, python-format
 msgid ""
 "The domain of the email address does not exist (the portion after the @: "
 "%(domain)s)"
-msgstr ""
+msgstr "El. pašto adreso domenas (dalis po @: %(domain)s) neegzistuoja."
 
 msgid "The email already exists."
 msgstr "Toks el. paštas jau yra."
@@ -2890,12 +2890,6 @@ msgstr "ištrinti"
 
 msgid "Last edit: "
 msgstr "Paskutinis taisymas:"
-
-msgid "Join Ututi"
-msgstr "Prisijunk prie Ututi"
-
-msgid "Registration"
-msgstr "Registracija"
 
 #, python-format
 msgid "<em>%(count)s</em> active poster"
