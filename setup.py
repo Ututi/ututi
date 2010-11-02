@@ -26,7 +26,8 @@ setup(
         "trans",
         "python-openid",
         "pygeoip",
-        "nous.pylons.grok"
+        "nous.pylons.grok",
+        "nous.pylons.testing"
     ],
     package_dir={'': 'src'},
     packages=find_packages('src'),
