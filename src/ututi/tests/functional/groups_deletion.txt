@@ -1,0 +1,61 @@
+Group deletion tests
+====================
+
+When I login, I go to groups creation to create public group
+
+    >>> browser = Browser.logIn()
+    >>> browser.open('http://localhost/groups/create_public?create-public-group')
+
+    >>> browser.getControl('title').value = "testing one two tree"
+    >>> browser.getControl('Group address on the web').value = "testing-one-two-tree"
+    >>> browser.getControl('University').value = "Vilniaus universitetas"
+    >>> browser.getControl('Department').value = "Ekonomikos fakultetas"
+    >>> browser.getControl('Continue').click()
+
+Then i succesfully create a group
+
+    >>> browser.url
+    'http://localhost/group/testing-one-two-tree/invite_members_step'
+
+    >>> browser.getControl('Finish').click()
+
+    >>> browser.url
+    'http://localhost/group/testing-one-two-tree/welcome'
+
+I am the only member of that group
+
+    >>> browser.printQuery("//div[@class='user-logo']")
+    <div class="user-logo">
+      <a href="/user/1" title="Adminas Adminovix">
+        <img alt="logo" src="/img/avatar-light-small.png" />
+      </a>
+    </div>
+
+I create a forum topic
+
+    >>> browser.open('http://localhost/group/testing-one-two-tree/forum')
+    >>> browser.getControl('New topic').click()
+    >>> browser.url
+    'http://localhost/group/testing-one-two-tree/forum/5/new_thread'
+
+    >>> browser.getControl('Subject').value = "some title"
+    >>> browser.getControl('Message').value = "Hi, there! Whats up?"
+    >>> browser.getControl('Post').click()
+    >>> browser.url
+    'http://localhost/group/testing-one-two-tree/forum/5/thread/5'
+
+Other user can read forum post
+    >>> browser2 = Browser.logIn('user2@ututi.lt', 'password')
+    >>> browser2.open('http://localhost/group/testing-one-two-tree/forum/5/thread/5')
+    >>> browser2.getControl('Subscribe').click()
+
+First user can delete group
+    >>> browser.open('http://localhost/group/testing-one-two-tree/members')
+    >>> browser.getControl('Delete group').click()
+    >>> browser.printQuery("//div[@class='flash-message']")
+    <div class="flash-message">
+      <span class="close-link hide-parent">
+        <img alt="Close" src="/img/icons/bigX_15x15.png" />
+      </span>
+      <span>Group 'testing one two tree' has been deleted!</span>
+    </div>
