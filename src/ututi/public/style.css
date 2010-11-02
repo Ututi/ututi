@@ -4733,7 +4733,7 @@ body .ui-widget button.btnMedium {
 .wall_item {
   position: relative;
   padding-left: 40px;
-  margin: 15px 0;
+  margin: 15px 0 15px 15px;
 }
 
 .wall_item.loading {
