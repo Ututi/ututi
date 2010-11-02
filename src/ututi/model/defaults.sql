@@ -405,13 +405,13 @@ CREATE INDEX forum_posts_parent_id ON forum_posts(parent_id);
 CREATE INDEX forum_posts_category_id ON forum_posts(category_id);
 
 CREATE TABLE seen_threads (
-       thread_id int8 not null references forum_posts,
+       thread_id int8 not null references forum_posts on delete cascade,
        user_id int8 not null references users(id),
        visited_on timestamp not null default '2000-01-01',
        primary key(thread_id, user_id));;
 
 CREATE TABLE subscribed_threads (
-       thread_id int8 not null references forum_posts,
+       thread_id int8 not null references forum_posts on delete cascade,
        user_id int8 not null references users(id),
        active boolean default true,
        primary key(thread_id, user_id));;
