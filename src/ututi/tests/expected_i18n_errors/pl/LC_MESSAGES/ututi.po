@@ -1,0 +1,7 @@
+# (pofilter) xmltags: checks that XML/HTML tags have not been translated
+msgid ""
+"Calendaring. Read this <a href=\"http://blog.ututi.lt/2009/05/28"
+"/naudotoju-isradingumas/\">blog post</a> for more information."
+msgstr ""
+"Kalendarium. Zapoznaj się z <a href=\"http://blog.ututi.pl/2010/10"
+"/grupowy-planer-na-ututi-prosze-bardzo/\">blog post</a>."
