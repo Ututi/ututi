@@ -42,15 +42,15 @@ def location_action(method):
 
 def structure_menu_items():
     return [
-        {'title': _("Groups"),
-         'name': 'groups',
-         'link': c.location.url(action='groups')},
+        {'title': _("Updates"),
+         'name': 'index',
+         'link': c.location.url(action='index')},
         {'title': _("Subjects"),
          'name': 'subjects',
          'link': c.location.url(action='subjects')},
-        {'title': _("Updates"),
-         'name': 'index',
-         'link': c.location.url(action='index')}]
+        {'title': _("Groups"),
+         'name': 'groups',
+         'link': c.location.url(action='groups')}]
 
 
 class LocationEditForm(Schema):
