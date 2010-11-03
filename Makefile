@@ -202,28 +202,28 @@ test_migration: instance/var/run/.s.PGSQL.${PGPORT}
 	droplang plpgsql development -h ${PWD}/instance/var/run/ || true
 	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
 	${PG_PATH}/bin/pg_restore -d development -h ${PWD}/instance/var/run --no-owner < backup/dbdump || true
-	${PG_PATH}/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > before_migration.txt
+	${PG_PATH}/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ development -s > before_migration.txt
 	${PWD}/bin/migrate development.ini upgrade_once
-	${PG_PATH}/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > after_migration.txt
+	${PG_PATH}/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ development -s > after_migration.txt
 	${PWD}/bin/migrate development.ini downgrade
-	${PG_PATH}/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > after_downgrade.txt
+	${PG_PATH}/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ development -s > after_downgrade.txt
 
 .PHONY: dbdump
 dbdump: instance/var/run/.s.PGSQL.${PGPORT}
-	${PG_PATH}/bin/pg_dump --format=c -h ${PWD}/instance/var/run/ -p 4455 -d development > dbdump
+	${PG_PATH}/bin/pg_dump --format=c -h ${PWD}/instance/var/run/ -d development > dbdump
 
 .PHONY: test_migration_2
 test_migration_2: instance/var/run/.s.PGSQL.${PGPORT}
 	psql -h ${PWD}/instance/var/run/ -d development -c "drop schema public cascade"
 	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
 	${PWD}/bin/paster setup-app development.ini
-	${PG_PATH}/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > default.txt
+	${PG_PATH}/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ development -s > default.txt
 	psql -h ${PWD}/instance/var/run/ -d development -c "drop schema public cascade"
 	droplang plpgsql development -h ${PWD}/instance/var/run/ || true
 	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
 	${PG_PATH}/bin/pg_restore -d development -h ${PWD}/instance/var/run --no-owner < backup/dbdump || true
 	${PWD}/bin/migrate development.ini
-	${PG_PATH}/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ -p 4455 -d development -s > actual.txt
+	${PG_PATH}/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ development -s > actual.txt
 
 .PHONY: test_translations
 test_translations: bin/pofilter
