@@ -19,12 +19,3 @@ def urlify(text, maxlen=None):
     if maxlen is not None:
         text = text[:maxlen]
     return text
-
-
-def monkeypatch():
-    old_extract_tb = traceback.extract_tb
-    def _extract_tb(*args, **kwargs):
-        result = old_extract_tb(*args, **kwargs)
-        return [(filename, lineno, function, line or '')
-                for (filename, lineno, function, line) in result]
-    traceback.extract_tb = _extract_tb

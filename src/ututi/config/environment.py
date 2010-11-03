@@ -10,7 +10,6 @@ from sqlalchemy import engine_from_config
 
 import ututi.lib.app_globals as app_globals
 import ututi.lib.helpers
-from ututi.lib import monkeypatch
 from ututi.config.routing import make_map
 from ututi.model import init_model
 
@@ -29,7 +28,6 @@ def load_environment(global_conf, app_conf):
     object
     """
     config = FixedPylonsConfig()
-    monkeypatch()
 
     pgport = os.environ.get("PGPORT", "4455")
     os.environ["PGPORT"] = pgport
