@@ -318,7 +318,7 @@ class ForumController(BaseController):
 
         recipients = set()
         for subscription in thread.subscriptions:
-            if subscription.active:
+            if subscription.active and subscription.user.id != c.user.id:
                 for email in subscription.user.emails:
                     if email.confirmed:
                         recipients.add(email.email)

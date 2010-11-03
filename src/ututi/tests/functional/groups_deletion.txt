@@ -61,13 +61,3 @@ First user can delete group
       </span>
       <span>Group 'testing one two tree' has been deleted!</span>
     </div>
-
-XXX The email in the queue is sent because of the post to the forum,
-admin posts to the forum and still gets the email about the post he
-just made.
-
-    >>> from ututi.lib.mailer import mail_queue
-    >>> mail_queue
-    [<EmailInfo sender='info@ututi.lt' recipients=['admin@ututi.lt']>]
-
-    >>> mail_queue[:] = []
