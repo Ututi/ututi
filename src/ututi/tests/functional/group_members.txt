@@ -155,3 +155,18 @@ If a user, who has been invited to join a group requests to join it, we consider
     >>> browser3.getControl('become a member').click()
     >>> browser3.printQuery("//div[@class='flash-message']/span/text()")
     You are now a member of the group Moderatoriai!
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> print mail_queue.pop().payload()
+    Hi,
+    Your friend Adminas Adminovix wants to invite you to the group
+    Moderatoriai < http://localhost/group/moderators >. After joining you will be able to
+    watch subjects your group is studying, share files with other members
+    of the group and use the group forum.
+    <BLANKLINE>
+    You may accept or reject the invitation here: < http://localhost/group/moderators/invitation >
+    <BLANKLINE>
+    We hope you will find Ututi useful!
+    <BLANKLINE>
+    --
+    The Ututi team
