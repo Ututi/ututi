@@ -4803,7 +4803,9 @@ body .ui-widget button.btnMedium {
   width: 450px;
 }
 
-.wall_item .action_link {
+.wall_item .action_link,
+.wall_item .truncate_more_link,
+.wall_item .truncate_less_link {
   margin-left: 10px;
   color: #668000;
 }

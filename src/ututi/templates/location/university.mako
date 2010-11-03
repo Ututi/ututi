@@ -4,6 +4,13 @@
 <%namespace file="/portlets/structure.mako" import="*"/>
 <%namespace file="/portlets/school.mako" import="*"/>
 <%namespace file="/anonymous_index/en.mako" import="*"/>
+<%namespace name="wall" file="/sections/wall_snippets.mako" import="head_tags"/>
+
+<%def name="head_tags()">
+  ${parent.head_tags()}
+  ${wall.head_tags()}
+</%def>
+
 
 <div id='wall'>
 <div class="tip">

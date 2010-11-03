@@ -1,6 +1,22 @@
 <%namespace name="base" file="/prebase.mako" import="rounded_block"/>
 <%namespace file="/widgets/sms.mako" import="sms_widget"/>
 
+<%def name="head_tags()">
+  ${h.javascript_link('/javascript/jquery.jtruncate.pack.js')}
+  ${h.javascript_link('/javascript/wall.js')}
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('span.truncated').jTruncate({
+          length: 150,
+          minTrail: 50,
+          moreText: "${_('More')}",
+          lessText: "${_('Less')}",
+          moreAni: 300,
+          lessAni: 200});
+    });
+  </script>
+</%def>
+
 <%def name="wall_item(event)">
 <div class="wall_item click2show ${caller.classes()} type_${event.event_type}" id="wallevent-${event.id}">
   %if c.user is not None:
@@ -112,7 +128,9 @@
 <%def name="mailinglistpost_created(event)">
   <%self:wall_item event="${event}">
     <%def name="classes()">message_event mailinglistpost_created</%def>
-    <%def name="content()">${h.nl2br(h.ellipsis(event.message.body, 100))}</%def>
+    <%def name="content()">
+      <span class="truncated">${h.nl2br(event.message.body)}</span>
+    </%def>
     <%def name="when()">${event.when()}</%def>
     <%def name="action_link()">${_('Reply')}</%def>
     <%def name="action()">
@@ -136,7 +154,9 @@
 <%def name="forumpost_created(event)">
   <%self:wall_item event="${event}">
     <%def name="classes()">message_event forumpost_created</%def>
-    <%def name="content()">${h.nl2br(h.ellipsis(event.post.message, 100))}</%def>
+    <%def name="content()">
+      <span class="truncated">${h.nl2br(event.post.message)}</span>
+    </%def>
     <%def name="when()">${event.when()}</%def>
     <%def name="action_link()">${_('Reply')}</%def>
     <%def name="action()">
@@ -178,7 +198,9 @@
 <%def name="privatemessage_sent(event)">
   <%self:wall_item event="${event}">
     <%def name="classes()">privatemessage_event privatemessage_sent</%def>
-    <%def name="content()">${event.message_text()}</%def>
+    <%def name="content()">
+      <span class="truncated">${h.nl2br(event.message_text())}</span>
+    </%def>
     <%def name="when()">${event.when()}</%def>
     <%def name="action_link()">${_('Reply')}</%def>
     <%def name="action()">

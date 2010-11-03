@@ -1,8 +1,9 @@
 <%inherit file="/group/base.mako" />
+<%namespace name="wall" file="/sections/wall_snippets.mako" import="head_tags"/>
 
 <%def name="head_tags()">
   ${parent.head_tags()}
-  ${h.javascript_link('/javascript/wall.js')}
+  ${wall.head_tags()}
 </%def>
 
 %if c.welcome:
