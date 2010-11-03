@@ -86,22 +86,28 @@ Links from the front page work:
     >>> browser.printQuery('id("forum-thread")//div[@class="post-body"]/text()')
     My ututi is borken!
 
+    >>> browser2 = Browser.logIn('user2@ututi.lt', 'password')
+    >>> browser2.open('http://localhost/bugs/thread/5')
+    >>> browser2.getControl('Reply', index=0).click()
+    >>> browser2.getControl('Message').value = 'it sure is'
+    >>> browser2.getControl('Reply', index=1).click()
+
 A couple of email notifications about the forum posts have been sent:
 
     >>> from ututi.lib.mailer import mail_queue
     >>> mail_queue
-    [<EmailInfo sender='info@ututi.lt' recipients=['admin@ututi.lt']>,
-     <EmailInfo sender='info@ututi.lt' recipients=['admin@ututi.lt']>]
+    [<EmailInfo sender='info@ututi.lt' recipients=['admin@ututi.lt']>]
 
-    >>> print mail_queue[0].message
-    MIME...
-    Subject: [ututi-community] Hello!
-    ...
-
-    >>> print mail_queue[1].message
-    MIME...
-    Subject: [ututi-bugs] Help!
-    ...
+    >>> print mail_queue[0].payload()
+    Second user posted on the 'Bugs' forum:
+    <BLANKLINE>
+    it sure is
+    <BLANKLINE>
+    --
+    You can find the thread online here:
+    http://localhost/bugs/thread/5
+    <BLANKLINE>
+    The Ututi team
 
     >>> del mail_queue[:]
 

@@ -38,71 +38,47 @@ Let's start a thread:
     >>> browser.getControl(name='message').value = "How's everybody doin'?"
     >>> browser.getControl('Post').click()
 
-A notification to subscribed group members has been sent by email:
+Let's post a reply:
+    >>> browser2 = Browser.logIn('user3@ututi.lt', 'password')
+    >>> browser2.getLink('Moderatoriai').click()
+    >>> browser2.getLink('Forum').click()
+    >>> browser2.getLink("What's up?").click()
+    >>> browser2.getControl('Message').value = 'Not too bad'
+    >>> browser2.getControl('Reply', index=1).click()
 
+A notification to subscribed group members has been sent by email:
     >>> from ututi.lib.mailer import mail_queue
     >>> msg = mail_queue.pop()
     >>> msg.recipients
     ['admin@ututi.lt']
-    >>> print msg.message
-    MIME-Version: 1.0
-    Content-Type: text/plain; charset="us-ascii"
-    Content-Transfer-Encoding: 7bit
-    From: info@ututi.lt
-    To: info@ututi.lt
-    Subject: [moderators] What's up?
-    Message-ID: <...>
+    >>> print msg.payload()
+    Third user posted on the 'Moderatoriai' forum:
     <BLANKLINE>
-    Adminas Adminovix posted on the 'Moderatoriai' forum:
-    <BLANKLINE>
-    How's everybody doin'?
+    Not too bad
     <BLANKLINE>
     --
     You can find the thread online here:
-    http://localhost/group/moderators/forum/.../thread/...
+    http://localhost/group/moderators/forum/3/thread/4
     <BLANKLINE>
     The Ututi team
-    <BLANKLINE>
 
 And we'll post a reply:
 
     >>> browser.getControl(name='message').value = 'Not too bad!'
     >>> browser.getForm(id="group_add_form").submit()
 
-Email notifications about the reply have also been sent:
-
-    >>> msg = mail_queue.pop()
-    >>> msg.recipients
-    ['admin@ututi.lt']
-    >>> print msg.message
-    MIME-Version: 1.0
-    Content-Type: text/plain; charset="us-ascii"
-    Content-Transfer-Encoding: 7bit
-    From: info@ututi.lt
-    To: info@ututi.lt
-    Subject: [moderators] Re: What's up?
-    Message-ID: <...>
-    <BLANKLINE>
-    Adminas Adminovix posted on the 'Moderatoriai' forum:
-    <BLANKLINE>
-    Not too bad!
-    <BLANKLINE>
-    --
-    You can find the thread online here:
-    http://localhost/group/moderators/forum/.../thread/...
-    <BLANKLINE>
-    The Ututi team
-    <BLANKLINE>
-
 We can see the messages we posted:
 
     >>> browser.printQuery('//div[@class="post-body"]')
     <div class="post-body">
-            How's everybody doin'?
-          </div>
+              How's everybody doin'?
+            </div>
     <div class="post-body">
-            Not too bad!
-          </div>
+              Not too bad
+            </div>
+    <div class="post-body">
+              Not too bad!
+            </div>
 
 Let's go back to the topic list.
 
@@ -169,11 +145,11 @@ By the act of replying, we were automatically subscribed:
     >>> ubrowser.getControl('Unsubscribe from emails')
     <SubmitControl name=None type='submitbutton'>
 
-The resulting email notification was sent to the admin user and to us:
+The resulting email notification was sent to the admin user and not to us:
 
     >>> msg = mail_queue.pop()
     >>> msg.recipients
-    ['user@ututi.lt', 'admin@ututi.lt']
+    ['admin@ututi.lt']
 
 Now, if, say, the admin posts a message, we will receive an email:
 
@@ -184,7 +160,7 @@ Now, if, say, the admin posts a message, we will receive an email:
 
     >>> msg = mail_queue.pop()
     >>> msg.recipients
-    ['user@ututi.lt', 'admin@ututi.lt']
+    ['user@ututi.lt']
 
 Let's unsubscribe from emails.
 
@@ -233,4 +209,4 @@ Now, the admin creates another thread:
 And the user is automatically subscribed to it:
 
     >>> mail_queue.pop()
-    <EmailInfo sender='info@ututi.lt' recipients=['user@ututi.lt', 'admin@ututi.lt']>
+    <EmailInfo sender='info@ututi.lt' recipients=['user@ututi.lt']>
