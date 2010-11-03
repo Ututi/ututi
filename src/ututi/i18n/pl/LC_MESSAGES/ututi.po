@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-11-02 22:01+0200\n"
+"PO-Revision-Date: 2010-11-03 14:31+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -625,11 +625,11 @@ msgstr "Wybierz inną nazwę skróconą"
 msgid "The short title must contain no spaces"
 msgstr "Skrócona nazwa nie powinna zawierać spacji"
 
-msgid "Groups"
-msgstr "Grupy"
-
 msgid "Updates"
 msgstr ""
+
+msgid "Groups"
+msgstr "Grupy"
 
 msgid "More departments"
 msgstr "Więcej wydziałów"
@@ -3756,6 +3756,12 @@ msgid ""
 msgstr ""
 "%(user)s chcą dołączyć do grupy %(group)s. Czy chcesz ich przyjąć do "
 "grupy?"
+
+msgid "More"
+msgstr ""
+
+msgid "Less"
+msgstr ""
 
 msgid "Ignore events like this"
 msgstr ""

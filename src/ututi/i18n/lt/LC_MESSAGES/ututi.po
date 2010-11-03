@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-11-02 22:01+0200\n"
+"PO-Revision-Date: 2010-11-03 14:31+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -616,11 +616,11 @@ msgstr "Sugalvok kitą trumpinį"
 msgid "The short title must contain no spaces"
 msgstr "Santrumpoje negali būti tarpų"
 
-msgid "Groups"
-msgstr "Grupės"
-
 msgid "Updates"
 msgstr "Atnaujinimai"
+
+msgid "Groups"
+msgstr "Grupės"
 
 msgid "More departments"
 msgstr "Daugiau fakultetų"
@@ -2925,7 +2925,7 @@ msgid "You found a bug in our system? Something is broken? Report it."
 msgstr "Radai sistemoje klaidą? Kas nors neveikia? Pranešk apie tai čia."
 
 msgid "Messages in Bugs forum"
-msgstr "<strong>Sistemos klaidų</strong> forumo pranešimai"
+msgstr "<strong>Klaidų</strong> forumo pranešimai"
 
 msgid "Report a bug"
 msgstr "Pranešk apie klaidą"
@@ -3742,6 +3742,12 @@ msgid ""
 msgstr ""
 "%(user)s nori prisijungti prie grupės %(group)s. Ar norite patvirtinti "
 "narystę?"
+
+msgid "More"
+msgstr ""
+
+msgid "Less"
+msgstr ""
 
 msgid "Ignore events like this"
 msgstr "Nerodyti tokių įvykių"
