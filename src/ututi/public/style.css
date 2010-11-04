@@ -2977,6 +2977,10 @@ a.forward-link {
     padding-right: 15px;
     background: url("../images/details/link_arrow.png") right center no-repeat;
 }
+a.forward-link-to{
+    padding-left: 15px;
+    background: url("../images/details/link_arrow.png") left center no-repeat;
+}
 
 div.back-link {
     margin-left: 2px;
@@ -4936,4 +4940,21 @@ ul.universityMembersInfo li{
 
 .fullForm .form_item {
   margin-left: 25px;
+}
+
+
+/* Books base */
+#books-header-search{
+    position: absolute;
+    right:0;
+    top:17px;
+}
+
+#books-container #mainContent{
+    margin: 0 0 0 20px;
+    width: 656px;
+}
+
+#books-container #aside{
+    margin: 0px;
 }

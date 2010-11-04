@@ -289,6 +289,7 @@ class HomeController(UniversityListMixin):
         filename = request.params.get('context', None)
 
         context_type = request.params.get('context_type', None)
+        c.show_warning = True
 
         if filename is not None:
             c.header = _('You have to be logged in to download a file!')
@@ -302,6 +303,12 @@ class HomeController(UniversityListMixin):
             c.header = _('Please log in to donate')
             c.message = _('Please log in before you donate so that we can associate the money you donate with your account.')
             c.show_login = True
+        elif context_type == "books_login":
+            c.show_registration
+            c.show_warning = False
+        elif context_type == "books_register":
+            c.show_login = True
+            c.show_warning = False
         else:
             c.header = _('Permission denied!')
             c.message = _('Only registered users can perform this action. Please log in, or register an account on our system.')

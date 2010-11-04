@@ -20,7 +20,7 @@ ${_('New book')}
   <form:error name="book_cover_upload" />
     <label>
       <span class="labelText">${_('Book Cover')}</span>
-      <input type="file" name="book_cover_upload" id="book_cover_upload" class="line"/>
+      <input type="file" name="cover" id="book_cover_upload" class="line"/>
   </label>
 </%def>
 
@@ -30,14 +30,29 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
 <form method="post" action="${action}"
      id="book_add_form" enctype="multipart/form-data" class="fullForm">
   <fieldset>
-  ${h.input_line('title', _('Title'))}
-  ${h.input_line('author', _('Author'))}
-  ${h.input_line('publisher', _('Publisher'))}
-  ${h.input_line('book_year', _('Book Year'))}
-  ${location_widget(2)}
-  ${h.input_line('subject', _('Course'))}
-  ${h.input_line('location', _('Location'))}
-  ${h.input_line('price', _('Price'))}
+  <div class="basic-book-info">
+    ${h.input_line('title', _('Title'))}
+    ${h.input_line('author', _('Author'))}
+    <div class="form-field">
+      <label for="description">${_('Brief description of the book')}</label>
+      <textarea class="line ckeditor" name="description" id="description" cols="60" rows="5"></textarea>
+    </div>
+ </div>
+  <div class="extra-book-info">
+    ${h.input_line('publisher', _('Publisher'))}
+    ${h.input_line('pages_number', _('Pages number'))}
+    ${h.input_line('year', _('Book Year'))}
+  </div>
+  <div class="book-owner-info">
+    ${location_widget(2)}
+    ${h.input_line('subject', _('Course'))}
+    <input type="checkbox" name="show_phone" value="True" /> ${_('Show my phone number')}
+  </div>
+  <div class="book-transfer-info">
+    ${h.input_line('price', _('Price'))}
+    ${h.input_line('location', _('Location'))}
+  </div>
+
   ${self.book_cover_field()}
   <br class="clear-left"/>
   <div class="form-field">
@@ -45,11 +60,7 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
     ${tags_widget()}
   </div>
   <br />
-  <div class="form-field">
-    <label for="description">${_('Brief description of the book')}</label>
-    <textarea class="line ckeditor" name="description" id="description" cols="60" rows="5"></textarea>
-  </div>
-  <br />
+
 <!--
   <div class="form-field check-field">
     <label for="watch_book">
@@ -60,10 +71,11 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
 -->
   <br />
   <div>
+
     ${h.input_submit(_('Save'))}
   </div>
   </fieldset>
 </form>
 </%def>
 
-<%self:form action="${url(controller='book', action='create')}" personal="True"/>
+<%self:form action="${url(controller='books', action='create')}" personal="True"/>

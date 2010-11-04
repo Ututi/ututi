@@ -14,7 +14,7 @@ ${_('Student information online')}
 <p class="a11y">${_('Main menu')}</p>
 <div class="head-nav">
   <ul>
-    <li><a href="${url(controller='home', action='index', qualified=True)}">${_('Home')}</a></li>
+    <li><a href="${url(controller='books', action='index')}">${_('Home')}</a></li>
     <li><a href="${url(controller='search', action='browse', qualified=True)}">${_('Browse')}</a></li>
     <li><a href="${url(controller='home', action='about', qualified=True)}">${_('About')}</a></li>
     <li><a class="orange" href="${url(controller='home', action='register', qualified=True, came_from=url.current())}">${_('Join')}</a></li>

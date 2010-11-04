@@ -1,11 +1,111 @@
-<%inherit file="/ubase-sidebar.mako" />
+<%inherit file="/prebase.mako" />
 <%namespace file="/portlets/user.mako" import="*"/>
 <%namespace file="/portlets/banners/base.mako" import="*"/>
+<%namespace file="/portlets/books.mako" import="*"/>
 
-<%def name="portlets()">
-  ${ututi_prizes_portlet()}
-  ${user_support_portlet()}
+
+<%def name="anonymous_header()">
+${self.anonymous_menu()}
 </%def>
 
-${next.body()}
+<%def name="portlets()">
+${books_menu()}
+</%def>
+
+<%def name="main_menu()">
+<p class="a11y">${_('Main menu')}</p>
+<div class="head-nav">
+  <ul>
+    <li><a href="${url(controller='books', action='index')}">${_('Home')}</a></li>
+    <li><a href="${url(controller='books', action='about')}">${_('About U-Books')}</a></li>
+    <li><a href="${url(controller='books', action='forum')}">${_('Forum')}</a></li>
+    <li><a class="orange" href="${url(controller='books', action='add')}">${_('Upload a Book')}</a></li>
+  </ul>
+</div>
+</%def>
+
+<%def name="anonymous_menu()">
+${local.main_menu()}
+<p class="a11y">${_('Login')}</p>
+<div class="loggedin-nav">
+    <ul>
+      <li>
+        <a href="${url(controller='home', action='login', context_type='books_login', came_from=url.current())}">
+          ${_('Login')}
+        </a>
+      </li>
+      <li>
+        <a href="${url(controller='home', action='login', context_type='books_register', came_from=url.current())}">
+          ${_('Register')}
+        </a>
+      </li>
+    </ul>
+</div>
+</%def>
+
+<%def name="loggedin_menu()">
+<div id="books-header-search">
+  <a class="forward-link-to" href="${url(controller='home', action='index')}">ututi</a>
+  <form id="searchForm" action="${url(controller='profile', action='search')}">
+    <fieldset>
+      <legend class="a11y">${_('Search')}</legend>
+      <label class="textField">
+        <span class="a11y">${_('Search text')}</span>
+        <input type="text" name="text"/>
+        <span class="edge"></span>
+      </label>
+      ${h.input_submit(_('search_'))}
+    </fieldset>
+  </form>
+</div>
+${local.main_menu()}
+<div class="loggedin-nav" id="personal-data">
+    <ul>
+        <li class="expandable profile-nav">
+            <span class="fullname">${c.user.fullname}</span>
+            <div>
+                <ul>
+                    <li class="action"><a href="${url(controller='profile', action='edit')}">${_('Settings')}</a></li>
+                    <li class="action"><a href="${url(controller='user', action='index', id=c.user.id)}">${_('Public profile')}</a></li>
+                </ul>
+            </div>
+        </li>
+        <li><a href="${url(controller='home', action='logout')}">${_('log out')}</a></li>
+    </ul>
+</div>
+<script type="text/javascript">
+  // nav ul li expandable
+    $('ul li.expandable').toggle(function() {
+    $(this).addClass('expanded').find('div:last-child ul').show();
+    }, function(){
+        $(this).removeClass('expanded').find('div:last-child ul').hide();
+    }).click(function(){ // remove selection
+        if(document.selection && document.selection.empty) {
+            document.selection.empty() ;
+        } else if(window.getSelection) {
+            var s = window.getSelection();
+            if(s && s.removeAllRanges)
+                s.removeAllRanges();
+        }
+    }).find('li a').click(function(ev){
+        ev.preventDefault();
+        window.location.href = $(this).attr('href');
+    });
+</script>
+
+</%def>
+
+<%def name="loggedin_header()">
+  ${self.loggedin_menu()}
+</%def>
+
+<div id ="books-container">
+<div id="aside">
+  ${self.portlets()}
+</div>
+<div id="mainContent">
+  ${self.flash_messages()}
+  ${next.body()}
+</div>
+</div>
 
