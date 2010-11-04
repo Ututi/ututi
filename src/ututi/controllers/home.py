@@ -304,7 +304,6 @@ class HomeController(UniversityListMixin):
             c.message = _('Please log in before you donate so that we can associate the money you donate with your account.')
             c.show_login = True
         elif context_type == "books_login":
-            c.show_registration
             c.show_warning = False
         elif context_type == "books_register":
             c.show_login = True
