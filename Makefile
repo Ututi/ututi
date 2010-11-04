@@ -259,7 +259,7 @@ test_all: bin/test instance/done instance/var/run/.s.PGSQL.${PGPORT}
 	! git --no-pager grep 'console.log' -- *.js *.mako *.html | grep -v '\(jquery\|ckeditor\|uservoice\)'
 	! git --no-pager grep 'pdb.set_trace' -- *.py
 	rm -rf data/templates/
-	bin/test --all
+	bin/test --all -vvv
 	$(MAKE) test_translations
 
 .PHONY: test_all_coverage
