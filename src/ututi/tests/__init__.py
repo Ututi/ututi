@@ -35,38 +35,62 @@ here_dir = os.path.dirname(os.path.abspath(__file__))
 conf_dir = os.path.dirname(os.path.dirname(os.path.dirname(here_dir)))
 
 
-def layerSetUp(cls):
+def zopeComponentLayerSetUp(cls):
     # Zope component setup
     zcSetUp()
     EventPlacelessSetup().setUp()
 
-    if pylons.test.pylonsapp is None:
-        SetupCommand('setup-app').run([conf_dir + '/%s' % cls.config])
-        pylons.test.pylonsapp = loadapp('config:%s' % cls.config,
-                                        relative_to=conf_dir)
 
-        def create_fn():
-            return pylons.test.pylonsapp
-        install_opener()
-        wsgi_intercept.add_wsgi_intercept('localhost', 80, create_fn)
+def pylonsAppLayerSetUp(cls):
+    if pylons.test.pylonsapp is not None:
+        raise Exception
+    SetupCommand('setup-app').run([conf_dir + '/%s' % cls.config])
+    pylons.test.pylonsapp = loadapp('config:%s' % cls.config,
+                                    relative_to=conf_dir)
 
 
-def layerTearDown(cls):
-    try:
-        shutil.rmtree(pylons.test.pylonsapp.config['files_path'])
-    except OSError:
-        pass
-    # Zope component tear down
+def wsgiInterceptLayerSetUp(cls):
+    def create_fn():
+        return pylons.test.pylonsapp
+    install_opener()
+    wsgi_intercept.add_wsgi_intercept('localhost', 80, create_fn)
 
-    # meta.engine = None
+
+def wsgiInterceptLayerTearDown(cls):
+    wsgi_intercept.remove_wsgi_intercept()
+    uninstall_opener()
+
+
+def pylonsAppLayerTearDown(cls):
     from sqlalchemy.schema import MetaData
     meta.metadata = MetaData()
     from sqlalchemy.orm import clear_mappers
     clear_mappers()
-    zcTearDown()
     pylons.test.pylonsapp = None
-    wsgi_intercept.remove_wsgi_intercept()
-    uninstall_opener()
+
+
+def zopeComponentLayerTearDown(cls):
+    zcTearDown()
+
+
+def ututiLayerTearDown(cls):
+    try:
+        shutil.rmtree(pylons.test.pylonsapp.config['files_path'])
+    except OSError:
+        pass
+
+
+def layerSetUp(cls):
+    zopeComponentLayerSetUp(cls)
+    pylonsAppLayerSetUp(cls)
+    wsgiInterceptLayerSetUp(cls)
+
+
+def layerTearDown(cls):
+    wsgiInterceptLayerTearDown(cls)
+    ututiLayerTearDown(cls)
+    pylonsAppLayerTearDown(cls)
+    zopeComponentLayerTearDown(cls)
 
 
 def layerTestSetUp(cls):
