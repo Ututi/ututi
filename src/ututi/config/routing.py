@@ -190,6 +190,9 @@ def make_map(config):
                 controller='subject',
                 action='home')
 
+    # books
+    map.connect('/books', controller='books', action='index')
+
     # user profiles
     map.connect('/user/{id}', controller='user', action='index')
     map.connect('/user/{id}/{action}', controller='user')
