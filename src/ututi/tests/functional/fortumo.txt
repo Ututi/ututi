@@ -27,14 +27,16 @@ Let's construct a proper signature.
 
 We'll define a helper:
 
-    >>> from ututi.model import ReceivedSMSMessage
-    >>> import urllib
-    >>> def make_request(message_type, params):
-    ...     params['test'] = 'test'
-    ...     msg = ReceivedSMSMessage(message_type, 'http://test/fortumo/%s?%s' % (message_type, urllib.urlencode(params)))
-    ...     sig = msg.calculate_fortumo_sig()
-    ...     params['sig'] = sig
-    ...     return app.get('/fortumo/%s?%s' % (message_type, urllib.urlencode(params)))
+.. code-block:: python
+
+    from ututi.model import ReceivedSMSMessage
+    import urllib
+    def make_request(message_type, params):
+        params['test'] = 'test'
+        msg = ReceivedSMSMessage(message_type, 'http://test/fortumo/%s?%s' % (message_type, urllib.urlencode(params)))
+        sig = msg.calculate_fortumo_sig()
+        params['sig'] = sig
+        return app.get('/fortumo/%s?%s' % (message_type, urllib.urlencode(params)))
 
 Also, we will register a user with a mobile phone:
 

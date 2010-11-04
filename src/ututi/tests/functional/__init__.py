@@ -10,6 +10,19 @@ import pylons.test
 
 import doctest
 
+import manuel
+old_absolute_import = manuel.absolute_import
+def new_absolute_import(name):
+    if name == 'doctest':
+        return doctest
+    return old_absolute_import(name)
+
+manuel.absolute_import = new_absolute_import
+import manuel.codeblock
+import manuel.doctest
+import manuel.testing
+import manuel.capture
+
 from nous.mailpost import processEmailAndPost
 
 import ututi
@@ -109,12 +122,13 @@ def collect_ftests(package=None, level=None,
                    doctest.NORMALIZE_WHITESPACE |
                    doctest.REPORT_ONLY_FIRST_FAILURE)
     suites = []
+    m = manuel.doctest.Manuel(optionflags=optionflags)
+    m += manuel.codeblock.Manuel()
+    m += manuel.capture.Manuel()
     for filename in filenames:
-        suite = doctest.DocFileSuite(filename,
-                                     package=package,
-                                     optionflags=optionflags,
-                                     setUp=ftest_setUp,
-                                     tearDown=ututi.tests.tearDown)
+        suite = manuel.testing.TestSuite(m, filename,
+                                         setUp=ftest_setUp,
+                                         tearDown=ututi.tests.tearDown)
         suite.layer = layer
         if level is not None:
             suite.level = level
