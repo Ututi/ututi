@@ -267,13 +267,13 @@ ${self.anonymous_menu()}
     </script>
 
     ${h.stylesheet_link(h.path_with_hash('/style.css'))}
-    ${h.stylesheet_link('/jquery-ui-1.7.3.custom.css')}
-    ${h.javascript_link('/javascript/jquery-1.3.2.min.js')}
+    ${h.stylesheet_link('/jquery-ui-1.8.6.custom.css')}
+    ${h.javascript_link('/javascript/jquery-1.4.3.min.js')}
     ${h.javascript_link('/javascript/ajaxupload.3.5.js')}
     ${h.javascript_link('/javascript/jquery.qtip.min.js')}
     ${h.javascript_link('/javascript/tooltips.js')}
     ${h.javascript_link('/javascript/jquery.blockUI.js')}
-    ${h.javascript_link('/javascript/jquery-ui-1.7.2.custom.min.js')|n}
+    ${h.javascript_link('/javascript/jquery-ui-1.8.6.custom.min.js')|n}
     ${h.javascript_link('/javascript/jquery.form.js')|n}
     ${h.javascript_link(h.path_with_hash('/javascript/expand.js'))}
     ${h.javascript_link(h.path_with_hash('/javascript/hide_parent.js'))}
