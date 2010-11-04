@@ -1,8 +1,6 @@
 <%inherit file="/ubase.mako" />
 
 <%def name="head_tags()">
-  ${h.javascript_link('/javascript/jquery-ui-1.7.2.custom.min.js')}
-  ${h.stylesheet_link(h.path_with_hash('/jquery-ui-1.7.3.custom.css'))}
   <title>UTUTI – student information online</title>
 </%def>
 

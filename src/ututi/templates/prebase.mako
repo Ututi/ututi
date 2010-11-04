@@ -267,7 +267,6 @@ ${self.anonymous_menu()}
     </script>
 
     ${h.stylesheet_link(h.path_with_hash('/style.css'))}
-    ${h.stylesheet_link('/jquery-ui-1.8.6.custom.css')}
     ${h.javascript_link('/javascript/jquery-1.4.3.min.js')}
     ${h.javascript_link('/javascript/ajaxupload.3.5.js')}
     ${h.javascript_link('/javascript/jquery.qtip.min.js')}
@@ -405,10 +404,14 @@ ${self.anonymous_menu()}
   </body>
 </html>
 
-<%def name="rounded_block(class_='', id=None)">
+<%def name="rounded_block(class_='', id=None, style=None)">
 <div class="portlet portletSmall ${class_}"
      %if id is not None:
        id="${id}"
+     %endif
+
+     %if style is not None:
+       style="${style}"
      %endif
 >
   <div class="ctl"></div>
