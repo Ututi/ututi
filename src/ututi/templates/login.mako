@@ -12,19 +12,19 @@
 <%def name="portlets()">
 </%def>
 
-%if not c.show_registration or c.hash:
-  <div style="font-size: 20px; padding-top: 7px">
-    ${c.header}
-  </div>
+%if c.show_warning and (not c.show_registration or c.hash:
+<div style="font-size: 20px; padding-top: 7px">
+  ${c.header}
+</div>
 
-  <div id="login_message" class="${c.message_class or 'permission-denied'}">
-    ${c.message|n}
-    %if c.final_msg:
-    <p>
-      ${c.final_msg|n}
-    </p>
-    %endif
-  </div>
+<div id="login_message" class="${c.message_class or 'permission-denied'}">
+  ${c.message|n}
+  %if c.final_msg:
+  <p>
+    ${c.final_msg|n}
+  </p>
+  %endif
+</div>
 %endif
 
 <table id="login-screen">
