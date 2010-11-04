@@ -25,7 +25,7 @@ from pylons import config
 from pylons.decorators.cache import beaker_cache
 from pylons.templating import render_mako_def
 
-from sqlalchemy import orm, Column, Integer, Sequence, Table
+from sqlalchemy import orm, Column, Integer, Date, Sequence, Table
 from sqlalchemy.types import Unicode
 from sqlalchemy.exc import DatabaseError, SAWarning
 from sqlalchemy.orm.exc import NoResultFound
@@ -566,11 +566,33 @@ def setup_orm(engine):
                                    backref="seen_notifications"),
                           })
 
+    global books_table
+    books_table = Table("books", meta.metadata,
+                        Column('id', Integer, Sequence('books_id_seq'), primary_key=True),
+                        #Column('owner_id', Integer),
+                        Column('title', Unicode(assert_unicode=True)),
+                        Column('description', Unicode(assert_unicode=True)),
+                        Column('author', Unicode(assert_unicode=True)),
+                        Column('publisher', Unicode(assert_unicode=True)),
+                        Column('year', Date),
+                        Column('location', Unicode(assert_unicode=True)),
+                        autoload=True,
+                        autoload_with=engine)
+
+    book_mapper = orm.mapper(Book,
+                             books_table,
+                             properties={
+                                 'owner': relation(User,
+                                 backref="books", foreign_keys=User.id),
+                                 })
+
     from ututi.model import mailing
     mailing.setup_orm(engine)
 
     from ututi.model import events
     events.setup_orm(engine)
+
+
 
 
 def reset_db(engine):
@@ -2629,3 +2651,11 @@ class Notification(object):
     def unseen_user_notification(cls, user):
         seen_notifications = [n.id for n in user.seen_notifications]
         return meta.Session.query(cls).filter(and_(not_(cls.id.in_(seen_notifications)), cls.valid_until > date.today())).order_by(cls.id.asc()).first()
+
+class Book(object):
+    """Book that can be shared by user"""
+
+    def __init__(self, owner_id, title, price):
+        self.price = price
+        self.title = title
+        self.owner_id = owner_id
