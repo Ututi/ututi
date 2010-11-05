@@ -569,13 +569,12 @@ def setup_orm(engine):
     global books_table
     books_table = Table("books", meta.metadata,
                         Column('id', Integer, Sequence('books_id_seq'), primary_key=True),
-                        #Column('owner_id', Integer),
                         Column('title', Unicode(assert_unicode=True)),
                         Column('description', Unicode(assert_unicode=True)),
                         Column('author', Unicode(assert_unicode=True)),
                         Column('publisher', Unicode(assert_unicode=True)),
-                        Column('year', Date),
                         Column('location', Unicode(assert_unicode=True)),
+                        useexisting=True,
                         autoload=True,
                         autoload_with=engine)
 
