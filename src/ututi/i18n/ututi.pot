@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-11-03 14:31+0200\n"
+"POT-Creation-Date: 2010-11-08 00:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,6 +24,9 @@ msgid "Blog snippet deleted."
 msgstr ""
 
 msgid "Blog snippet updated."
+msgstr ""
+
+msgid "Book was added succesfully"
 msgstr ""
 
 #, python-format
@@ -1667,7 +1670,13 @@ msgstr ""
 msgid "Author"
 msgstr ""
 
+msgid "Brief description of the book"
+msgstr ""
+
 msgid "Publisher"
+msgstr ""
+
+msgid "Pages number"
 msgstr ""
 
 msgid "Book Year"
@@ -1676,19 +1685,28 @@ msgstr ""
 msgid "Course"
 msgstr ""
 
-msgid "Location"
+msgid "Show my phone number"
 msgstr ""
 
 msgid "Price"
 msgstr ""
 
+msgid "Location"
+msgstr ""
+
 msgid "Tags"
 msgstr ""
 
-msgid "Brief description of the book"
+msgid "Start watching this book personally"
 msgstr ""
 
-msgid "Start watching this book personally"
+msgid "About U-Books"
+msgstr ""
+
+msgid "Upload a Book"
+msgstr ""
+
+msgid "free"
 msgstr ""
 
 #, python-format
@@ -2619,6 +2637,18 @@ msgid "delete"
 msgstr ""
 
 msgid "Last edit: "
+msgstr ""
+
+msgid "All Books"
+msgstr ""
+
+msgid "Books for school"
+msgstr ""
+
+msgid "Books for students"
+msgstr ""
+
+msgid "Other"
 msgstr ""
 
 #, python-format

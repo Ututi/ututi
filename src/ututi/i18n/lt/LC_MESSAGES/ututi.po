@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-11-03 14:31+0200\n"
+"PO-Revision-Date: 2010-11-08 00:51+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -22,6 +22,9 @@ msgstr "Blogo ištrauka pašalinta."
 
 msgid "Blog snippet updated."
 msgstr "Blogo ištrauka atnaujinta."
+
+msgid "Book was added succesfully"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1810,7 +1813,13 @@ msgstr ""
 msgid "Author"
 msgstr ""
 
+msgid "Brief description of the book"
+msgstr ""
+
 msgid "Publisher"
+msgstr ""
+
+msgid "Pages number"
 msgstr ""
 
 msgid "Book Year"
@@ -1819,19 +1828,28 @@ msgstr ""
 msgid "Course"
 msgstr ""
 
-msgid "Location"
+msgid "Show my phone number"
 msgstr ""
 
 msgid "Price"
 msgstr ""
 
+msgid "Location"
+msgstr ""
+
 msgid "Tags"
 msgstr "Žymos"
 
-msgid "Brief description of the book"
+msgid "Start watching this book personally"
 msgstr ""
 
-msgid "Start watching this book personally"
+msgid "About U-Books"
+msgstr ""
+
+msgid "Upload a Book"
+msgstr ""
+
+msgid "free"
 msgstr ""
 
 #, python-format
@@ -2893,6 +2911,18 @@ msgstr "ištrinti"
 
 msgid "Last edit: "
 msgstr "Paskutinis taisymas:"
+
+msgid "All Books"
+msgstr ""
+
+msgid "Books for school"
+msgstr ""
+
+msgid "Books for students"
+msgstr ""
+
+msgid "Other"
+msgstr ""
 
 #, python-format
 msgid "<em>%(count)s</em> active poster"
