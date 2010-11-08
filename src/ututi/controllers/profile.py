@@ -977,7 +977,7 @@ class ProfileController(SearchBaseController, UniversityListMixin, MailinglistBa
         Message type is chosen accordingly.
         """
         if isinstance(recipient, Group):
-            if recipient.mailinglist_enabled:
+            if not recipient.mailinglist_enabled:
                 post = ForumPost(subject, message, category_id=category_id,
                                  thread_id=None)
                 meta.Session.add(post)
@@ -990,7 +990,6 @@ class ProfileController(SearchBaseController, UniversityListMixin, MailinglistBa
                                          message)
                 return post
         elif isinstance(recipient, User):
-            import pdb; pdb.set_trace();
             msg = PrivateMessage(c.user,
                                  recipient,
                                  subject,

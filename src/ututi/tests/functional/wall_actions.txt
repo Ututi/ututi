@@ -1,0 +1,54 @@
+Test user wall actions
+======================
+
+   >>> browser = Browser.logIn('user@ututi.lt', 'password')
+   >>> browser.getLink("News wall").click()
+
+   >>> form = browser.getForm(id='message_form')
+   >>> form.getControl('Group or user:').value = 'Second user'
+   >>> form.getControl(name='subject').value = 'Sending you a message from my wall!'
+   >>> form.getControl(name='message').value = 'Booyah'
+   >>> form.getControl('Send').click()
+
+   >>> browser2 = Browser.logIn('user2@ututi.lt', 'password')
+   >>> browser2.getLink('News wall').click()
+   >>> browser2.printQuery('id("wall")//div[@class="description"]//text()')
+   Alternative user
+   has sent you a private message "
+   Sending you a message from my wall!
+   ".
+   Adminas Adminovix
+   joined the group
+   Testing group
+   .
+
+   >>> browser = Browser.logIn('user3@ututi.lt', 'password')
+   >>> browser.getLink("News wall").click()
+
+   >>> form = browser.getForm(id='message_form')
+   >>> form.getControl('Group or user:').value = 'moderatoriai'
+   >>> form.getControl(name='subject').value = 'Sending my group a message from my wall!'
+   >>> form.getControl(name='message').value = 'Booyah'
+   >>> form.getControl('Send').click()
+
+   >>> browser2 = Browser.logIn()
+   >>> browser2.getLink('News wall').click()
+   >>> browser2.printQuery('id("wall")//div[@class="description"]//text()')
+   Third user
+   has posted a new message
+   Sending my group a message from my wall!
+   to the group
+   Moderatoriai
+   .
+   <BLANKLINE>
+   Second user
+   joined the group
+   Testing group
+   .
+   <BLANKLINE>
+   Third user
+   joined the group
+   Moderatoriai
+   .
+
+

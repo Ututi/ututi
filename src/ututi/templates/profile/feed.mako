@@ -31,7 +31,7 @@
 
 <div id="dashboard_action_blocks">
 <%self:rounded_block id="send_message_block" class_="dashboard_action_block" style="display: none;">
-  <form method="${url(controller='profile', action='send_message')}" id="message_form">
+  <form method="POST" action="${url(controller='profile', action='send_message')}" id="message_form">
     <input type="hidden" name="rcpt_id" id="rcpt_id" value=""/>
     ${h.input_line('rcpt', _('Group or user:'), id='rcpt')}
     <div class="formField" style="display: none;">
