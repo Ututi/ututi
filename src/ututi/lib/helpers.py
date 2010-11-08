@@ -225,7 +225,7 @@ def wraped_text(text, max_length = 10, break_symbol = "<br />"):
     splited_text.pop() #removing last break
     return ''.join(splited_text)
 
-def email_with_replies(text):
+def email_with_replies(text, omit=False):
     lines = cgi.escape(text).split("\n")
     # First preprocessing stage: remove consecutive newlines.
     cleaned_lines = []
@@ -252,14 +252,17 @@ def email_with_replies(text):
                 del result[-1]
             if not result:
                 result.append('')
-            result[-1] += ' ' + EXPAND_QUOTED_TEXT_LINK
+            if not omit:
+                result[-1] += ' ' + EXPAND_QUOTED_TEXT_LINK
         elif in_quote and not line_is_quoted:
             # Quote ended.
             in_quote = False
-            result[-1] += '</div>'
+            if not omit:
+                result[-1] += '</div>'
             if line:
                 result.append('')
-        result.append(line)
+        if not in_quote or not omit:
+            result.append(line)
     return literal('<br />'.join(result))
 
 

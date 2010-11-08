@@ -15,6 +15,7 @@
           lessAni: 200});
     });
   </script>
+  ${h.javascript_link('/javascript/mailinglist.js')}
 </%def>
 
 <%def name="wall_item(event)">
@@ -129,7 +130,7 @@
   <%self:wall_item event="${event}">
     <%def name="classes()">message_event mailinglistpost_created</%def>
     <%def name="content()">
-      <span class="truncated">${h.nl2br(event.message.body)}</span>
+      <span class="truncated">${h.email_with_replies(event.message.body, True)}</span>
     </%def>
     <%def name="when()">${event.when()}</%def>
     <%def name="action_link()">${_('Reply')}</%def>
