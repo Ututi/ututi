@@ -15,6 +15,7 @@ from formencode.variabledecode import NestedVariables
 from webhelpers import paginate
 
 from pylons import request, tmpl_context as c, url, config, session
+from pylons.decorators import jsonify
 from pylons.templating import render_mako_def
 from pylons.controllers.util import abort, redirect
 
@@ -26,14 +27,17 @@ from ututi.lib.emails import email_confirmation_request
 from ututi.lib.security import ActionProtector
 from ututi.lib.search import search_query, search_query_count
 from ututi.lib.image import serve_logo
-from ututi.lib.validators import UserPasswordValidator, TranslatedEmailValidator, UniqueEmail, LocationTagsValidator, manual_validate, PhoneNumberValidator
+from ututi.lib.mailinglist import MailinglistBaseController
+from ututi.lib.validators import UserPasswordValidator, TranslatedEmailValidator, UniqueEmail,\
+    LocationTagsValidator, manual_validate, PhoneNumberValidator, js_validate
 from ututi.lib.forms import validate
 from ututi.lib.events import event_types_grouped
 from ututi.lib import gg, sms
 
 from ututi.model.events import Event
+from ututi.model import GroupMember
 from ututi.model import get_supporters
-from ututi.model import Subject, LocationTag, BlogEntry, PrivateMessage
+from ututi.model import Subject, LocationTag, BlogEntry, PrivateMessage, ForumPost
 from ututi.model import meta, Email, Group, SearchItem, User
 from ututi.controllers.group import _filter_watched_subjects, FileUploadTypeValidator
 from ututi.controllers.search import SearchSubmit, SearchBaseController
@@ -171,13 +175,96 @@ class LogoUpload(Schema):
     logo = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
 
 
+class MessageRcpt(validators.FormValidator):
+    """
+    Validate the universal message post form.
+    Check if the recipient's id has been specified in the js field, if not,
+    check if enough text has been input to identify the recipient.
+    """
+    messages = {
+        'invalid': _(u"The recipient is not specified."),
+    }
+
+    def validate_python(self, form_dict, state):
+        recipient = form_dict['rcpt']
+        recipient_id = form_dict['rcpt_id']
+
+        rcpt_obj = None
+
+        if recipient_id.startswith('g_'):
+            try:
+                id = int(recipient_id[2:])
+                rcpt_obj = Group.get(id)
+            except ValueError:
+                rcpt_obj = None
+
+        elif recipient_id.startswith('u_'):
+            try:
+                id = int(recipient_id[2:])
+                rcpt_obj = User.get(id)
+            except ValueError:
+                rcpt_obj = None
+
+        else:
+            (groups, classmates, users) = _message_rcpt(recipient, c.user)
+            collection = groups + classmates + users
+            if len(collection) == 1:
+                rcpt_obj = collection[0]
+
+        if rcpt_obj is None:
+            raise Invalid(self.message('invalid', state),
+                          form_dict, state,
+                          error_dict={'rcpt': Invalid(self.message('invalid', state), form_dict, state)})
+        else:
+            form_dict['recipient'] = rcpt_obj
+
+
+class MessageForm(Schema):
+    """Validate universal form for sending messages from the dashboard."""
+    allow_extra_fields = True
+    subject = validators.String(not_empty=True)
+    message = validators.String(not_empty=True)
+    chained_validators = [MessageRcpt()]
+
+
 class HideElementForm(Schema):
-    """Ajax submit validator to hide welcome screen widgets."""
-    allow_extra_fields = False
-    type = validators.OneOf(['suggest_create_group', 'suggest_watch_subject', 'suggest_enter_phone'])
+     """Ajax submit validator to hide welcome screen widgets."""
+     allow_extra_fields = False
+     type = validators.OneOf(['suggest_create_group', 'suggest_watch_subject', 'suggest_enter_phone'])
 
 
-class ProfileController(SearchBaseController, UniversityListMixin):
+def _message_rcpt(term, current_user):
+    """
+    Return possible message recipients based on the query term.
+
+    The idea is to first search for groups and classmates (members of the groups the user belongs to).
+
+    If these are not found, we search for all users in general, limiting the results to 10 items.
+    """
+
+    groups = meta.Session.query(Group)\
+        .filter(or_(Group.group_id.ilike('%%%s%%' % term),
+                    Group.title.ilike('%%%s%%' % term)))\
+        .filter(Group.id.in_([g.group.id for g in current_user.memberships]))\
+        .all()
+
+    classmates = meta.Session.query(User)\
+        .filter(User.fullname.ilike('%%%s%%' % term))\
+        .join(User.memberships)\
+        .join(GroupMember.group)\
+        .filter(Group.id.in_([g.group.id for g in current_user.memberships]))\
+        .all()
+
+    users = []
+    if len(groups) == 0 and len(classmates) == 0:
+        users = meta.Session.query(User)\
+            .filter(User.fullname.ilike('%%%s%%' % term))\
+            .limit(10)\
+            .all()
+
+    return (groups, classmates, users)
+
+class ProfileController(SearchBaseController, UniversityListMixin, MailinglistBaseController):
     """A controller for the user's personal information and actions."""
 
     def __before__(self):
@@ -271,6 +358,29 @@ class ProfileController(SearchBaseController, UniversityListMixin):
         meta.Session.commit()
 
         return result
+
+    @ActionProtector("user")
+    @jsonify
+    def message_rcpt_js(self):
+        term = request.params.get('term', None)
+        if term is None or len(term) < 1:
+            return {'data' : []}
+
+        (groups, classmates, others) = _message_rcpt(term, c.user)
+
+        groups = [
+            dict(label=_('Group: %s') % group.title,
+                 id='g_%d' % group.id,
+                 categories=[dict(id=cat.id, title=cat.title)
+                             for cat in group.forum_categories]
+                             if not group.mailinglist_enabled else [])
+            for group in groups]
+
+        classmates = [dict(label=_('Member: %s (%s)') % (u.fullname, u.emails[0].email),
+                           id='u_%d'%u.id) for u in classmates]
+        users = [dict(label=_('Member: %s') % (u.fullname),
+                      id='u_%d' % u.id) for u in others]
+        return dict(data=groups+classmates+users)
 
     def _edit_form(self, defaults=None):
         return render('profile/edit.mako')
@@ -829,6 +939,7 @@ class ProfileController(SearchBaseController, UniversityListMixin):
 
     @ActionProtector("user")
     def hide_event(self):
+        """Hide an event from the user's wall, add the event ttype to the ignored events list."""
         etype = request.params.get('event_type')
         events = c.user.ignored_events_list
         events.append(etype)
@@ -838,3 +949,52 @@ class ProfileController(SearchBaseController, UniversityListMixin):
             return 'ok'
         else:
             redirect(url(controller='profile', action='feed'))
+
+    @ActionProtector("user")
+    @js_validate(schema=MessageForm())
+    @jsonify
+    def send_message_js(self):
+        self._send_message(
+            self.form_result['recipient'],
+            self.form_result['subject'],
+            self.form_result['message'],
+            self.form_result.get('category_id', None))
+        return {'success': True}
+
+    @ActionProtector("user")
+    @validate(schema=MessageForm(), form='feed')
+    def send_message(self):
+        self._send_message(
+            self.form_result['recipient'],
+            self.form_result['subject'],
+            self.form_result['message'],
+            self.form_result.get('category_id', None))
+        redirect(url(controller='profile', action='feed'))
+
+    def _send_message(self, recipient, subject, message, category_id=None):
+        """
+        Send a message to the recipient. The recipient is either a group or a user.
+        Message type is chosen accordingly.
+        """
+        if isinstance(recipient, Group):
+            if recipient.mailinglist_enabled:
+                post = ForumPost(subject, message, category_id=category_id,
+                                 thread_id=None)
+                meta.Session.add(post)
+                meta.Session.commit()
+                return post
+            else:
+                post = self.post_message(recipient,
+                                         c.user,
+                                         subject,
+                                         message)
+                return post
+        elif isinstance(recipient, User):
+            import pdb; pdb.set_trace();
+            msg = PrivateMessage(c.user,
+                                 recipient,
+                                 subject,
+                                 message)
+            meta.Session.add(msg)
+            meta.Session.commit()
+            return msg

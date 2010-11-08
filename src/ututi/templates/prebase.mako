@@ -273,6 +273,7 @@ ${self.anonymous_menu()}
     ${h.javascript_link('/javascript/tooltips.js')}
     ${h.javascript_link('/javascript/jquery.blockUI.js')}
     ${h.javascript_link('/javascript/jquery-ui-1.8.6.custom.min.js')|n}
+    ${h.stylesheet_link(h.path_with_hash('/jquery-ui-1.8.6.custom.css'))}
     ${h.javascript_link('/javascript/jquery.form.js')|n}
     ${h.javascript_link(h.path_with_hash('/javascript/expand.js'))}
     ${h.javascript_link(h.path_with_hash('/javascript/hide_parent.js'))}

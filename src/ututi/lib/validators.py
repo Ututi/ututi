@@ -1,10 +1,14 @@
 import re
+from webob.multidict import UnicodeMultiDict
+from decorator import decorator
 from lxml.html.clean import Cleaner
 
-from formencode import validators, Invalid, htmlfill
+from formencode import validators, Invalid, htmlfill, variabledecode
+import formencode
 from pylons.i18n import _
 from pylons import config, tmpl_context as c
 
+from pylons.decorators import PylonsFormEncodeState
 from pylons.decorators import validate as old_validate
 
 from ututi.model import GroupCoupon
@@ -317,3 +321,112 @@ class GroupCouponValidator(validators.FancyValidator):
             error = 'not_exist'
         if error is not None:
             raise Invalid(self.message(error, state), value, state)
+
+def js_validate(schema=None, validators=None, form=None, variable_decode=False,
+             dict_char='.', list_char='-', post_only=True, state=None,
+             on_get=False, ignore_request=False, defaults=None, **htmlfill_kwargs):
+    """Validate input either for a FormEncode schema, or individual
+    validators
+
+    Given a form schema or dict of validators, validate will attempt to
+    validate the schema or validator list.
+
+    If validation was successful, the valid result dict will be saved
+    as ``self.form_result``. Otherwise, the action will be re-run as if
+    it was a GET, and the output will be filled by FormEncode's
+    htmlfill to fill in the form field errors.
+
+    ``schema``
+        Refers to a FormEncode Schema object to use during validation.
+    ``form``
+        Method used to display the form, which will be used to get the
+        HTML representation of the form for error filling.
+    ``variable_decode``
+        Boolean to indicate whether FormEncode's variable decode
+        function should be run on the form input before validation.
+    ``dict_char``
+        Passed through to FormEncode. Toggles the form field naming
+        scheme used to determine what is used to represent a dict. This
+        option is only applicable when used with variable_decode=True.
+    ``list_char``
+        Passed through to FormEncode. Toggles the form field naming
+        scheme used to determine what is used to represent a list. This
+        option is only applicable when used with variable_decode=True.
+    ``post_only``
+        Boolean that indicates whether or not GET (query) variables
+        should be included during validation.
+
+        .. warning::
+            ``post_only`` applies to *where* the arguments to be
+            validated come from. It does *not* restrict the form to
+            only working with post, merely only checking POST vars.
+    ``state``
+        Passed through to FormEncode for use in validators that utilize
+        a state object.
+    ``on_get``
+        Whether to validate on GET requests. By default only POST
+        requests are validated.
+
+    Example::
+
+        class SomeController(BaseController):
+
+            def create(self, id):
+                return render('/myform.mako')
+
+            @validate(schema=model.forms.myshema(), form='create')
+            def update(self, id):
+                # Do something with self.form_result
+                pass
+
+    """
+    if state is None:
+        state = PylonsFormEncodeState
+    def wrapper(func, self, *args, **kwargs):
+        """Decorator Wrapper function"""
+        request = self._py_object.request
+        errors = {}
+
+        # Skip the validation if on_get is False and its a GET
+        if not on_get and request.environ['REQUEST_METHOD'] == 'GET':
+            return func(self, *args, **kwargs)
+
+        # If they want post args only, use just the post args
+        if post_only:
+            params = request.POST
+        else:
+            params = request.params
+
+        is_unicode_params = isinstance(params, UnicodeMultiDict)
+        params = params.mixed()
+        if variable_decode:
+            decoded = variabledecode.variable_decode(params, dict_char,
+                                                     list_char)
+        else:
+            decoded = params
+
+        if schema:
+            try:
+                self.form_result = schema.to_python(decoded, state)
+            except formencode.Invalid, e:
+                errors = e.unpack_errors(variable_decode, dict_char, list_char)
+        if validators:
+            if isinstance(validators, dict):
+                if not hasattr(self, 'form_result'):
+                    self.form_result = {}
+                for field, validator in validators.iteritems():
+                    try:
+                        self.form_result[field] = \
+                            validator.to_python(decoded.get(field), state)
+                    except formencode.Invalid, error:
+                        errors[field] = error
+
+        if errors:
+            import simplejson
+            output = {}
+            output['success'] = False
+            output['errors'] = errors
+            return simplejson.dumps(output)
+        return func(self, *args, **kwargs)
+
+    return decorator(wrapper)

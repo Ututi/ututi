@@ -60,7 +60,7 @@ Clear the mail_queue before doing anything:
     >>> from ututi.lib.mailer import mail_queue
     >>> mail_queue[:] = []
 
-    >>> form = browser.getForm('mail_reply_form', index=0)
+    >>> form = browser.getForm('mail_reply_form', index=1)
     >>> form.getControl(name='message').value = 'I am replying'
     >>> form.getControl('Send reply').click()
     >>> mail_queue.pop().payload()
@@ -118,7 +118,7 @@ Let's check the sms replies:
     And I am starting it!
 
     >>> browser.getControl(name='sms_message').value = 'Replying to an sms!'
-    >>> browser.getControl('Send', index=0).click()
+    >>> browser.getControl('Send', index=1).click()
 
     >>> from ututi.lib.sms import sms_queue
     >>> sms_queue.pop()

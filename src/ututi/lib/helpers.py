@@ -298,13 +298,14 @@ def input_line(name, title, value='', explanation=None, **kwargs):
 
     from pylons import tmpl_context as c
     kwargs.setdefault('id', name)
-    return HTML.div(c=[HTML.label(for_=name, c=[
-        HTML.span(class_='labelText', c=[title]),
-        HTML.span(class_='textField', c=[
-            HTML.input(type='text', value=value, name_=name, **kwargs),
-            HTML.span(class_='edge')
-            ])]),
-        HTML.literal('<form:error name="%s" />' % name)])
+    return HTML.div(class_='formField',
+                    c=[HTML.label(for_=name, c=[
+                    HTML.span(class_='labelText', c=[title]),
+                    HTML.span(class_='textField', c=[
+                            HTML.input(type='text', value=value, name_=name, **kwargs),
+                            HTML.span(class_='edge')
+                            ])]),
+                       HTML.literal('<form:error name="%s" />' % name)])
 
 
 def input_psw(name, title, value='', explanation=None, **kwargs):
@@ -313,16 +314,17 @@ def input_psw(name, title, value='', explanation=None, **kwargs):
         expl = HTML.div(class_='explanation', c=explanation)
     from pylons import tmpl_context as c
     kwargs.setdefault('id', name)
-    return HTML.div(c=[HTML.label(for_=name, c=[
-        HTML.span(class_='labelText', c=[title]),
-        HTML.span(class_='textField', c=[
-            HTML.input(type='password', name_=name, value='', **kwargs),
-            HTML.span(class_='edge')
-            ])]),
-        HTML.literal('<form:error name="%s" />' % name)])
+    return HTML.div(class_='formField',
+                    c=[HTML.label(for_=name, c=[
+                    HTML.span(class_='labelText', c=[title]),
+                    HTML.span(class_='textField', c=[
+                            HTML.input(type='password', name_=name, value='', **kwargs),
+                            HTML.span(class_='edge')
+                            ])]),
+                       HTML.literal('<form:error name="%s" />' % name)])
 
 
-def input_area(name, title, value='', cols='50', rows='5', explanation=None, disabled=False):
+def input_area(name, title, value='', cols='50', rows='5', explanation=None, disabled=False, **kwargs):
     expl = None
     if explanation is not None:
         expl = HTML.div(class_='explanation', c=explanation)

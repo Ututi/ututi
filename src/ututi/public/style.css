@@ -24,7 +24,6 @@ body.noMenu {
 #wrap{
     position: relative;
     width: 980px;
-
     min-height: 100%;
     height: auto !important;
     height: 100%;
@@ -108,6 +107,11 @@ span.error-message {
         color: red;
         margin-top: -5px;
         font-size: 10px;
+}
+
+div.error-message {
+    color: red;
+    font-size: 10px;
 }
 
 .fullForm span.error-message {
@@ -566,7 +570,8 @@ ul.subject-intro-message span.heading {
     padding-left: 18px;
     border-right: none;
     margin-top: 0;
-    float: clear;
+    float: left;
+    clear: left;
     list-style-type: none;
 }
 #SearchResults .grupes-links-list-dalykai li dd{
@@ -1490,7 +1495,7 @@ div.GroupFiles-single h2 span{
 
 .search-type .search-type-item{
     float: left;
-    padding: 0 įpx;
+    padding: 0 5px;
     margin: 0;
     height: 35px;
     line-height: 35px;
@@ -4079,7 +4084,7 @@ h3.search-results-title span {
 
 h3.search-results-title span.result-count {
     float: right;
-    color: #black;
+    color: black;
     font-weight: normal;
     font-size: 14px;
 }
@@ -4152,13 +4157,13 @@ div.search-item div.description {
 .personal_watched_subjects li.enabled a,
 #subject_settings li.enabled a {
     color: #000;
-    text-size: 1em;
+    font-size: 1em;
 }
 
 .personal_watched_subjects li.disabled a,
 #subject_settings li.disabled a {
     color: #999;
-    text-size: 1em;
+    font-size: 1em;
 }
 
 .hdr {
@@ -4195,7 +4200,7 @@ div.search-item div.description {
 .empty_note {
     list-style-type: none;
     color: #999;
-    text-size: 1em;
+    font-size: 1em;
     padding: 10px 15px;
     padding-left: 35px;
 }
@@ -4395,7 +4400,7 @@ div#user-logo-button {
     text-decoration: line-through;
 }
 .payment-dialog .right-column .new-price {
-    font-size: 16px:
+    font-size: 16px;
 }
 
 /* end purchase credits dialog */
@@ -4942,19 +4947,74 @@ ul.universityMembersInfo li{
   margin-left: 25px;
 }
 
-
 /* Books base */
-#books-header-search{
+#books-header-search {
     position: absolute;
     right:0;
     top:17px;
 }
 
-#books-container #mainContent{
+#books-container #mainContent {
     margin: 0 0 0 20px;
     width: 656px;
 }
 
-#books-container #aside{
+#books-container #aside {
     margin: 0px;
+}
+
+/* Dashboard actions block */
+#dashboard_actions .action {
+  margin-right: 15px;
+}
+#dashboard_actions #send_message {
+  padding-left: 20px;
+  background: url("../img/icons/message-off-very-small.png") left center no-repeat;
+}
+#dashboard_actions #upload_file {
+  padding-left: 20px;
+  background: url("../img/icons/files_13.png") left center no-repeat;
+}
+#dashboard_actions #create_wiki {
+  padding-left: 20px;
+  background: url("../img/icons/pages_13.png") left center no-repeat;
+}
+
+.dashboard_action_block form {
+  padding-bottom: 15px;
+}
+
+.dashboard_action_block #rcpt,
+.dashboard_action_block #message_subject,
+.dashboard_action_block #category_id {
+  width: 350px;
+}
+
+.dashboard_action_block .formField {
+  width: 500px;
+  margin: 5px 0;
+}
+
+.dashboard_action_block .formField label {
+  float: right;
+}
+
+.dashboard_action_block .labelText {
+  margin-right: 15px;
+}
+
+.dashboard_action_block textarea {
+  border: 1px solid #888;
+  background: white;
+  width: 500px;
+  margin: 5px 50px;
+}
+
+.dashboard_action_block .formArea {
+  text-align: center;
+}
+
+.dashboard_action_block .formSubmit {
+  float: right;
+  margin: 5px 50px;
 }
