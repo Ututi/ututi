@@ -7,7 +7,7 @@ from pylons import config
 
 import ututi
 
-from ututi.tests import PylonsLayer
+from ututi.tests import UtutiLayer
 from ututi.lib.messaging import EmailMessage, GGMessage, SMSMessage
 from ututi.model import User, Group, Email, SMS, meta
 from ututi.model import GroupMembershipType, GroupMember, LocationTag
@@ -207,6 +207,6 @@ def test_suite():
         optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |
         doctest.NORMALIZE_WHITESPACE,
         setUp=test_setup)
-    suite.layer = PylonsLayer
+    suite.layer = UtutiLayer
     return suite
 

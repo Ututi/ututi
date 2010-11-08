@@ -6,7 +6,7 @@ from pylons import config
 from ututi.model import LocationTag, GroupMembershipType, GroupMember, Group, User, meta
 from ututi.model import meta, Subject, Page, SimpleTag, File
 
-from ututi.tests import PylonsLayer
+from ututi.tests import UtutiLayer
 import ututi
 
 from ututi.lib.search import search
@@ -139,7 +139,7 @@ def test_suite():
         doctest.NORMALIZE_WHITESPACE,
         setUp=test_setup,
         tearDown=tear_down)
-    suite.layer = PylonsLayer
+    suite.layer = UtutiLayer
     return suite
 
 

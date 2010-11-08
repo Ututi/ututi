@@ -2,7 +2,7 @@ from zope.testing import doctest
 
 from ututi.model import LocationTag, User, meta
 
-from ututi.tests import PylonsLayer
+from ututi.tests import UtutiLayer
 import ututi
 
 from ututi.lib.search import tag_search
@@ -28,7 +28,7 @@ def test_suite():
         doctest.NORMALIZE_WHITESPACE,
         setUp=test_setup,
         tearDown=tear_down)
-    suite.layer = PylonsLayer
+    suite.layer = UtutiLayer
     return suite
 
 

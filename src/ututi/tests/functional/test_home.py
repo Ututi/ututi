@@ -17,5 +17,5 @@ def test_suite():
     suite = doctest.DocTestSuite(optionflags=optionflags,
                                  setUp=ututi.tests.setUp,
                                  tearDown=ututi.tests.tearDown)
-    suite.layer = ututi.tests.PylonsLayer
+    suite.layer = ututi.tests.UtutiLayer
     return suite

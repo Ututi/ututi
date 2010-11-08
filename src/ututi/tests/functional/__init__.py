@@ -79,7 +79,7 @@ def ftest_setUp(test):
 
 
 def collect_ftests(package=None, level=None,
-                   layer=ututi.tests.PylonsLayer,
+                   layer=ututi.tests.UtutiLayer,
                    filenames=None, exclude=None):
     """Collect all functional doctest files in a given package.
 

@@ -1,5 +1,5 @@
 from zope.testing import doctest
-from ututi.tests import PylonsLayer
+from ututi.tests import UtutiLayer
 
 def test_urlify():
     """Test the function urlify.
@@ -29,5 +29,5 @@ def test_suite():
     suite = doctest.DocTestSuite(
         optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |
         doctest.NORMALIZE_WHITESPACE)
-    suite.layer = PylonsLayer
+    suite.layer = UtutiLayer
     return suite

@@ -9,7 +9,7 @@ from ututi.model import meta
 
 from ututi.model import GroupMembershipType, GroupMember
 
-from ututi.tests import PylonsLayer
+from ututi.tests import UtutiLayer
 import ututi
 
 
@@ -280,7 +280,7 @@ def test_suite():
         optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |
         doctest.NORMALIZE_WHITESPACE,
         setUp=test_setup)
-    suite.layer = PylonsLayer
+    suite.layer = UtutiLayer
     return suite
 
 

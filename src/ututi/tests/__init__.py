@@ -35,67 +35,8 @@ here_dir = os.path.dirname(os.path.abspath(__file__))
 conf_dir = os.path.dirname(os.path.dirname(os.path.dirname(here_dir)))
 
 
-def zopeComponentLayerSetUp(cls):
-    # Zope component setup
-    zcSetUp()
-    EventPlacelessSetup().setUp()
-
-
-def pylonsAppLayerSetUp(cls):
-    if pylons.test.pylonsapp is not None:
-        raise Exception
-    SetupCommand('setup-app').run([conf_dir + '/%s' % cls.config])
-    pylons.test.pylonsapp = loadapp('config:%s' % cls.config,
-                                    relative_to=conf_dir)
-
-
-def wsgiInterceptLayerSetUp(cls):
-    def create_fn():
-        return pylons.test.pylonsapp
-    install_opener()
-    wsgi_intercept.add_wsgi_intercept('localhost', 80, create_fn)
-
-
-def wsgiInterceptLayerTearDown(cls):
-    wsgi_intercept.remove_wsgi_intercept()
-    uninstall_opener()
-
-
-def pylonsAppLayerTearDown(cls):
-    from sqlalchemy.schema import MetaData
-    meta.metadata = MetaData()
-    from sqlalchemy.orm import clear_mappers
-    clear_mappers()
-    pylons.test.pylonsapp = None
-
-
-def zopeComponentLayerTearDown(cls):
-    zcTearDown()
-
-
-def ututiLayerTearDown(cls):
-    try:
-        shutil.rmtree(pylons.test.pylonsapp.config['files_path'])
-    except OSError:
-        pass
-
-
-def layerSetUp(cls):
-    zopeComponentLayerSetUp(cls)
-    pylonsAppLayerSetUp(cls)
-    wsgiInterceptLayerSetUp(cls)
-
-
-def layerTearDown(cls):
-    wsgiInterceptLayerTearDown(cls)
-    ututiLayerTearDown(cls)
-    pylonsAppLayerTearDown(cls)
-    zopeComponentLayerTearDown(cls)
-
-
 def layerTestSetUp(cls):
     config = pylons.test.pylonsapp.config
-    config['tpl_lang'] = 'lt'
     translator = _get_translator(config.get('lang'), pylons_config=config)
     pylons.translator._push_object(translator)
     url._push_object(URLGenerator(pylons.test.pylonsapp.config['routes.map'], environ))
@@ -103,15 +44,6 @@ def layerTestSetUp(cls):
     # meta.metadata.create_all(meta.engine)
     teardown_db_defaults(meta.engine, quiet=True)
     initialize_db_defaults(meta.engine)
-    mail_queue[:] = []
-    gg.sent_messages[:] = []
-    try:
-        shutil.rmtree(config['files_path'])
-    except OSError:
-        pass
-    os.makedirs(config['files_path'])
-    # Keep random stable in tests
-    random.seed(123)
 
 
 def layerTestTearDown(cls):
@@ -124,8 +56,6 @@ def layerTestTearDown(cls):
     teardown_db_defaults(meta.engine)
     meta.Session.rollback()
     meta.Session.remove()
-    from nous.pylons.grok import the_multi_grokker
-    the_multi_grokker.clear()
     if len(gg.sent_messages) > 0:
         print >> sys.stderr, "GG queue is NOT EMPTY!"
 
@@ -135,46 +65,109 @@ def layerTestTearDown(cls):
     shutil.rmtree(config['files_path'])
 
 
-class PylonsLayer(object):
-
-    config = 'test.ini'
+class GrokLayer(object):
 
     @classmethod
     def setUp(cls):
-        layerSetUp(cls)
+        if cls != GrokLayer:
+            return
+        # Zope component setup
+        zcSetUp()
+        EventPlacelessSetup().setUp()
 
     @classmethod
     def tearDown(cls):
-        layerTearDown(cls)
+        if cls != GrokLayer:
+            return
+        zcTearDown()
+
+    @classmethod
+    def testTearDown(cls):
+        if cls != GrokLayer:
+            return
+        from nous.pylons.grok import the_multi_grokker
+        the_multi_grokker.clear()
+
+
+class WsgiInterceptLayer(object):
+
+    @classmethod
+    def setUp(cls):
+        def create_fn():
+            return pylons.test.pylonsapp
+        install_opener()
+        wsgi_intercept.add_wsgi_intercept('localhost', 80, create_fn)
+
+    @classmethod
+    def tearDown(cls):
+        wsgi_intercept.remove_wsgi_intercept()
+        uninstall_opener()
+
+
+def PylonsBaseLayer(config_file):
+
+    PylonsAppBaseLayer = type('PylonsLayer(%s)' % config_file, (), {})
+
+    def setUp(cls):
+        if pylons.test.pylonsapp is not None:
+            import pdb; pdb.set_trace()
+            raise Exception
+        SetupCommand('setup-app').run([conf_dir + '/%s' % cls.config])
+        pylons.test.pylonsapp = loadapp('config:%s' % cls.config,
+                                        relative_to=conf_dir)
+
+    def tearDown(cls):
+        from sqlalchemy.schema import MetaData
+        meta.metadata = MetaData()
+        from sqlalchemy.orm import clear_mappers
+        clear_mappers()
+        pylons.test.pylonsapp = None
+
+    PylonsAppBaseLayer.config = config_file
+    PylonsAppBaseLayer.setUp = classmethod(setUp)
+    PylonsAppBaseLayer.tearDown = classmethod(tearDown)
+
+    class PylonsTestBrowserLayer(PylonsAppBaseLayer, WsgiInterceptLayer):
+        setUp = tearDown = testSetUp = testTearDown = \
+            classmethod(lambda cls: None)
+    return PylonsTestBrowserLayer
+
+
+class UtutiBaseLayer(object):
+
+    @classmethod
+    def tearDown(cls):
+        try:
+            shutil.rmtree(pylons.test.pylonsapp.config['files_path'])
+        except OSError:
+            pass
 
     @classmethod
     def testSetUp(cls):
         layerTestSetUp(cls)
+        config = pylons.test.pylonsapp.config
+        config['tpl_lang'] = 'lt'
+        mail_queue[:] = []
+        gg.sent_messages[:] = []
+        try:
+            shutil.rmtree(config['files_path'])
+        except OSError:
+            pass
+        os.makedirs(config['files_path'])
+        # Keep random stable in tests
+        random.seed(123)
 
     @classmethod
     def testTearDown(cls):
         layerTestTearDown(cls)
 
 
-class PylonsErrorLayer(object):
+class UtutiLayer(GrokLayer, PylonsBaseLayer('test.ini'), UtutiBaseLayer):
+    """Ututi layer that tests with tests config"""
 
-    config = 'errors.ini'
 
-    @classmethod
-    def setUp(cls):
-        layerSetUp(cls)
-
-    @classmethod
-    def tearDown(cls):
-        layerTearDown(cls)
-
-    @classmethod
-    def testSetUp(cls):
-        layerTestSetUp(cls)
-
-    @classmethod
-    def testTearDown(cls):
-        layerTestTearDown(cls)
+class UtutiErrorsLayer(GrokLayer, PylonsBaseLayer('errors.ini'), UtutiBaseLayer):
+    """Ututi layer that tests with errors config"""
 
 
 class UtutiTestBrowser(NousTestBrowser):
