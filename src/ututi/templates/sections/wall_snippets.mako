@@ -10,7 +10,7 @@
           length: 150,
           minTrail: 50,
           moreText: "${_('More')}",
-          lessText: "${_('Less')}",
+          lessText: "",
           moreAni: 300,
           lessAni: 200});
     });
