@@ -4741,8 +4741,11 @@ body .ui-widget button.btnMedium {
 /* User wall */
 .wall_item {
   position: relative;
-  padding-left: 40px;
-  margin: 15px 0 15px 15px;
+  padding: 15px 0 15px 55px;
+  border-bottom: 1px solid #a8a8a8;
+  background-color: transparent;
+  background-position: 15px 15px;
+  background-repeat: no-repeat;
 }
 
 .wall_item.loading {
@@ -4762,24 +4765,24 @@ body .ui-widget button.btnMedium {
 }
 
 .wall_item.subject_event {
-  background: transparent url("../img/icons/subject-medium-gray.png") left top no-repeat;
+  background-image: url("../img/icons/subject-medium-gray.png");
 }
 
 .wall_item.group_event {
-  background: transparent url("../img/icons/grupe-big-off.png") left top no-repeat;
+  background-image: url("../img/icons/grupe-big-off.png");
 }
 
 .wall_item.message_event,
 .wall_item.privatemessage_event {
-  background: transparent url("../img/icons/message-large.png") left top no-repeat;
+  background-image: url("../img/icons/message-large.png");
 }
 
 .wall_item.sms_event {
-  background: transparent url("../img/icons/sms.png") left top no-repeat;
+  background-image: url("../img/icons/sms.png");
 }
 
 .wall_item.page_event {
-  background: transparent url("../img/icons/page.png") left top no-repeat;
+  background-image: url("../img/icons/page.png");
 }
 
 .wall_item.file_uploaded .file_link {
@@ -4825,8 +4828,8 @@ body .ui-widget button.btnMedium {
 
 .wall_item .hide_me {
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 10px;
+  top: 10px;
   display: none;
   width: 15px;
   height: 15px;
