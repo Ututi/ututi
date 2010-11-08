@@ -50,5 +50,7 @@ Test user wall actions
    joined the group
    Moderatoriai
    .
+   >>> from ututi.lib.mailer import mail_queue
+   >>> del mail_queue[:]
 
 
