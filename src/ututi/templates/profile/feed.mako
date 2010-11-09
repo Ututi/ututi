@@ -51,8 +51,21 @@
     </div>
     <br class="clearLeft" />
   </form>
+</%self:rounded_block>
+
+<%self:rounded_block id="upload_file_block" class_="dashboard_action_block" style="display: none;">
+  <form id="file_form">
+    <input type="hidden" name="file_rcpt_id" id="file_rcpt_id" value=""/>
+    ${h.input_line('rcpt_file', _('Group or subject:'), id='rcpt_file')}
+    <div class="formSubmit">
+      ${h.input_submit(_('Upload file'), id="file_upload_submit")}
+    </div>
+    <br class="clearLeft" />
+  </form>
+</%self:rounded_block>
 <script type="text/javascript">
 $(function(){
+    /* message block */
     $( "#rcpt" ).autocomplete({
 	source: function(request, response) {
             $.getJSON("${url(controller='profile', action='message_rcpt_js')}",
@@ -103,9 +116,62 @@ $(function(){
         }
         return false;
     });
+    /* file block */
+    $('#file_upload_submit').click(function(){return false;});
+    var file_upload = new AjaxUpload($('#file_upload_submit'),
+        {action: "${url(controller='profile', action='upload_file_js')}",
+         name: 'attachment',
+         data: {folder: '', target_id: ''},
+         onSubmit: function(file, ext, iframe){
+             iframe['progress_indicator'] = $(document.createElement('div'));
+             $('#upload_file_block').append(iframe['progress_indicator']);
+             iframe['progress_indicator'].text(file);
+             iframe['progress_ticker'] = $(document.createElement('span'));
+             iframe['progress_ticker'].appendTo(iframe['progress_indicator']).text(' Uploading');
+             var progress_ticker = iframe['progress_ticker'];
+             var interval;
+
+             // Uploding -> Uploading. -- Uploading...
+             interval = window.setInterval(function(){
+                 var text = progress_ticker.text();
+                 if (text.length < 13){
+                     progress_ticker.text(text + '.');
+                 } else {
+                     progress_ticker.text('Uploading');
+                 }
+             }, 200);
+             iframe['interval'] = interval;
+         },
+         onComplete: function(file, response, iframe){
+             if (response != 'UPLOAD_FAILED') {
+                 iframe['progress_indicator'].remove();
+                 $('#file_upload_form').find('input, textarea').val('');
+                 $('#upload_file').click();
+                 $('#dashboard_action_blocks').after('<div class="action-reply">'+"${_('File uploaded.')}"+'</div>');
+             } else {
+                 $('#dashboard_action_blocks').after('<div class="action-reply">'+"${_('File upload failed.')}"+'</div>');
+             }
+             window.clearInterval(iframe['interval']);
+         }
+        });
+    file_upload.disable();
+    $( "#rcpt_file" ).autocomplete({
+	source: function(request, response) {
+            $.getJSON("${url(controller='profile', action='file_rcpt_js')}",
+                      request, function( data, status, xhr ) {
+			  response(data.data);
+		      });
+        },
+	minLength: 2,
+        select: function(event, ui) {
+            $(this).closest('form').find('#file_rcpt_id').val(ui.item.id);
+            file_upload.setData({folder: '', target_id: ui.item.id});
+            file_upload.enable();
+        }
+    });
+
 });
 </script>
-</%self:rounded_block>
 </div>
 
 <div id='wall'>

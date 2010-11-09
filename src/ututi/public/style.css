@@ -4989,6 +4989,7 @@ ul.universityMembersInfo li{
 }
 
 .dashboard_action_block #rcpt,
+.dashboard_action_block #rcpt_file,
 .dashboard_action_block #message_subject,
 .dashboard_action_block #category_id {
   width: 350px;
@@ -5021,6 +5022,15 @@ ul.universityMembersInfo li{
 .dashboard_action_block .formSubmit {
   float: right;
   margin: 5px 50px;
+}
+
+#upload_file_block .formSubmit {
+  margin: 5px 0 0 10px;
+  float: left;
+}
+
+#upload_file_block .formField {
+  float: left;
 }
 
 .clearboth {

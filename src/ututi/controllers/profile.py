@@ -22,6 +22,7 @@ from pylons.controllers.util import abort, redirect
 from pylons.i18n import _
 
 import ututi.lib.helpers as h
+from ututi.lib.fileview import FileViewMixin
 from ututi.lib.base import render
 from ututi.lib.emails import email_confirmation_request
 from ututi.lib.security import ActionProtector
@@ -232,6 +233,22 @@ class HideElementForm(Schema):
      allow_extra_fields = False
      type = validators.OneOf(['suggest_create_group', 'suggest_watch_subject', 'suggest_enter_phone'])
 
+def _file_rcpt(term, current_user):
+    """
+    Return possible recipients for a file upload (for the current user).
+    """
+    groups = meta.Session.query(Group)\
+        .filter(or_(Group.group_id.ilike('%%%s%%' % term),
+                    Group.title.ilike('%%%s%%' % term)))\
+        .filter(Group.id.in_([g.group.id for g in current_user.memberships]))\
+        .all()
+
+    subjects = meta.Session.query(Subject)\
+        .filter(Subject.title.ilike('%%%s%%' % term))\
+        .filter(Subject.id.in_([s.id for s in current_user.all_watched_subjects]))\
+        .all()
+    return (groups, subjects)
+
 
 def _message_rcpt(term, current_user):
     """
@@ -264,7 +281,7 @@ def _message_rcpt(term, current_user):
 
     return (groups, classmates, users)
 
-class ProfileController(SearchBaseController, UniversityListMixin, MailinglistBaseController):
+class ProfileController(SearchBaseController, UniversityListMixin, MailinglistBaseController, FileViewMixin):
     """A controller for the user's personal information and actions."""
 
     def __before__(self):
@@ -381,6 +398,26 @@ class ProfileController(SearchBaseController, UniversityListMixin, MailinglistBa
         users = [dict(label=_('Member: %s') % (u.fullname),
                       id='u_%d' % u.id) for u in others]
         return dict(data=groups+classmates+users)
+
+    @ActionProtector("user")
+    @jsonify
+    def file_rcpt_js(self):
+        term = request.params.get('term', None)
+        if term is None or len(term) < 1:
+            return {'data' : []}
+
+        (groups, subjects) = _file_rcpt(term, c.user)
+
+        groups = [
+            dict(label=_('Group: %s') % group.title,
+                 id='g_%d' % group.id)
+            for group in groups]
+
+        subjects = [
+            dict(label=_('Subject: %s') % subject.title,
+                 id='s_%d' % subject.id)
+            for subject in subjects]
+        return dict(data=groups+subjects)
 
     def _edit_form(self, defaults=None):
         return render('profile/edit.mako')
@@ -997,3 +1034,17 @@ class ProfileController(SearchBaseController, UniversityListMixin, MailinglistBa
             meta.Session.add(msg)
             meta.Session.commit()
             return msg
+
+    @ActionProtector("user")
+    def upload_file_js(self):
+        target_id = request.params.get('target_id')
+        target = None
+        if target_id.startswith('g_'):
+            target = Group.get(int(target_id[2:]))
+        elif target_id.startswith('s_'):
+            target = Subject.get_by_id(int(target_id[2:]))
+
+        if target is None:
+            return 'UPLOAD_FAILED'
+
+        return self._upload_file(target)
