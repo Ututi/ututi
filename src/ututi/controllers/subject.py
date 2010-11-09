@@ -25,6 +25,16 @@ import ututi.lib.helpers as h
 
 log = logging.getLogger(__name__)
 
+def subject_menu_items():
+    return [
+        {'title': _("Files"),
+         'name': 'home',
+         'link': c.subject.url(action='home')},
+        {'title': _("Pages"),
+         'name': 'pages',
+         'link': c.subject.url(action='pages')}]
+
+
 @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
 def find_similar_subjects(subject, n=5):
     """Find 5 similar subjects to the one given."""
@@ -48,7 +58,7 @@ def subject_action(method):
         c.object_location = subject.location
         c.subject = subject
         c.similar_subjects = find_similar_subjects(subject)
-
+        c.structure_menu_items = subject_menu_items()
         return method(self, subject)
     return _subject_action
 
@@ -115,12 +125,23 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
 
     @subject_action
     def home(self, subject):
+        c.structure_menu_current_item = 'home'
         file_id = request.GET.get('serve_file')
         file = File.get(file_id)
         c.serve_file = file
         c.breadcrumbs = [{'link': subject.url(),
                           'title': subject.title}]
-        return render('subject/home.mako')
+        return render('subject/home_files.mako')
+
+    @subject_action
+    def pages(self, subject):
+        c.structure_menu_current_item = 'pages'
+        c.breadcrumbs = [{'link': subject.url(),
+                          'title': subject.title}]
+        if  not c.subject.n_files(False) and not c.subject.pages:
+            c.structure_menu_current_item = 'home'
+            return render('subject/home_files.mako')
+        return render('subject/home_pages.mako')
 
     def _add_form(self):
         return render('subject/add.mako')
