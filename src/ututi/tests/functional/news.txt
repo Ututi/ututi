@@ -100,12 +100,14 @@ Let's look at the emails:
 
     >>> browser3.open(browser.url)
 
+    >>> browser3.getLink('Pages').click()
     >>> browser3.getControl('Create a wiki document', index=0).click()
     >>> browser3.getControl('Title').value = "How to be more awesome!"
     >>> browser3.getControl('Content').value = "Being more Awesome is easy too!"
     >>> browser3.getControl('Save').click()
 
     >>> browser.reload()
+    >>> browser.getLink('Pages').click()
     >>> browser.getLink('How to be awesome!').click()
     >>> browser.getControl('edit').click()
     >>> browser.getControl('Content').value = "Being Awesome is hard!"

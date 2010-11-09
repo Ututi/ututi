@@ -104,6 +104,7 @@ Let's go back:
 
 We should see the page on the list of pages, even though it has been deleted:
 
+    >>> browser.getLink('Pages').click()
     >>> browser.printQuery("id('subject_pages')")
     <div class="portlet portletSmall portletGroupFiles" id="subject_pages">
       <div class="ctl"></div>
@@ -151,6 +152,7 @@ We could delete it again if we wanted to:
 Now the page shows up in the index again without the "deleted" marker:
 
     >>> browser.getLink('Go back to Matematin\xc4\x97 analiz\xc4\x97').click()
+    >>> browser.getLink('Pages').click()
     >>> browser.printQuery("id('subject_pages')")
     <div class="portlet portletSmall portletGroupFiles" id="subject_pages">
       <div class="ctl"></div>
