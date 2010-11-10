@@ -11,8 +11,7 @@ ${search_form(c.text, 'subject,file,page', c.location.hierarchy,
   %if c.user:
     <div class="create_item">
       <span class="notice">${_('Did not find what you were looking for?')}</span>
-      ${h.button_to(_('Create a new group'), url(controller='group', action='add'))}
-      ${h.image('/images/details/icon_question.png', alt=_('Create your group, invite your classmates and use the mailing list, upload private group files'), class_='tooltip')|n}
+      ${h.button_to(_('Create a new subject'), url(controller='subject', action='add'))}
     </div>
   %endif
 </%def>

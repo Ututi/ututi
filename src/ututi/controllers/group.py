@@ -603,7 +603,7 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
             meta.Session.commit()
             redirect(url(controller='group', action='invite_members_step', id=values['id']))
         else:
-            redirect(url(controller='group', action='add'))
+            redirect(url(controller='group', action='group_type'))
 
     @group_action
     @ActionProtector("member", "admin")

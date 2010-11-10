@@ -68,7 +68,7 @@
     <div class="footer">
       ${h.link_to(_('More groups'), url(controller='profile', action='search', obj_type='group'), class_="more")}
       <span>
-        ${h.button_to(_('Create group'), url(controller='group', action='add'))}
+        ${h.button_to(_('Create group'), url(controller='group', action='group_type'))}
         ${h.image('/images/details/icon_question.png', alt=_('Create your group, invite your classmates and use the mailing list, upload private group files'), class_='tooltip')|n}
       </span>
     </div>
