@@ -18,11 +18,7 @@
       <fieldset>
         ${self.location_field()}
         ${self.year_field()}
-        %if c.tpl_lang == 'lt':
-          ${self.group_email_field()}
-        %elif c.tpl_lang == 'pl':
-          ${self.forum_type_and_id()}
-        %endif
+        ${self.forum_type_and_id()}
         <div style="height: 5px"></div>
         ${self.group_title_field()}
         ${self.logo_field()}

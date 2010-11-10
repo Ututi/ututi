@@ -429,10 +429,9 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
     def _create_academic_form(self):
         c.current_year = date.today().year
         c.years = range(c.current_year - 10, c.current_year + 5)
-        if c.tpl_lang == 'pl':
-            c.forum_type = 'mailinglist'
-            c.forum_types = [('mailinglist', _('Mailing list')),
-                             ('forum', _('Web-based forum'))]
+        c.forum_type = 'mailinglist'
+        c.forum_types = [('mailinglist', _('Mailing list')),
+                         ('forum', _('Web-based forum'))]
         return render('group/create_academic.mako')
 
     @set_login_url
@@ -449,8 +448,7 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
                           description=values['description'],
                           year=date(year, 1, 1))
 
-            if c.tpl_lang == 'pl':
-                group.mailinglist_enabled = (self.form_result['forum_type'] == 'mailinglist')
+            group.mailinglist_enabled = (self.form_result['forum_type'] == 'mailinglist')
 
             tag = values.get('location', None)
             group.location = tag
