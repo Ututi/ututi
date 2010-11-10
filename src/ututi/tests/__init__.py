@@ -3,20 +3,12 @@
 import sys
 import random
 import shutil
-import wsgi_intercept
 
-from wsgi_intercept.urllib2_intercept import uninstall_opener
-from wsgi_intercept.urllib2_intercept import install_opener
-from paste.deploy import loadapp
-from pylons import url
-from routes.util import URLGenerator
-from paste.script.appinstall import SetupCommand
-
-from zope.component.testing import setUp as zcSetUp, tearDown as zcTearDown
-from zope.component.eventtesting import PlacelessSetup as EventPlacelessSetup
+from nous.pylons.testing import LayerBase, CompositeLayer
+from nous.pylons.testing import PylonsTestBrowserLayer
+from nous.pylons.grok.testing import GrokLayer
 
 import pylons.test
-from pylons.i18n.translation import _get_translator
 
 from nous.pylons.testing.browser import NousTestBrowser, NousTestApp
 
@@ -26,125 +18,23 @@ from ututi.model import meta
 from ututi.lib.mailer import mail_queue
 from ututi.lib import gg
 
-__all__ = ['environ', 'url']
-
-environ = {}
-
 import os
 here_dir = os.path.dirname(os.path.abspath(__file__))
 conf_dir = os.path.dirname(os.path.dirname(os.path.dirname(here_dir)))
 
 
-def layerTestSetUp(cls):
-    config = pylons.test.pylonsapp.config
-    translator = _get_translator(config.get('lang'), pylons_config=config)
-    pylons.translator._push_object(translator)
-    url._push_object(URLGenerator(pylons.test.pylonsapp.config['routes.map'], environ))
-    # XXX Set up database here
-    # meta.metadata.create_all(meta.engine)
-    teardown_db_defaults(meta.engine, quiet=True)
-    initialize_db_defaults(meta.engine)
+class UtutiBaseLayer(LayerBase):
 
-
-def layerTestTearDown(cls):
-    config = pylons.test.pylonsapp.config
-    url._pop_object()
-    pylons.translator._pop_object()
-    meta.Session.execute("SET ututi.active_user TO 0")
-    meta.Session.close()
-    # XXX Tear down database here
-    teardown_db_defaults(meta.engine)
-    meta.Session.rollback()
-    meta.Session.remove()
-    if len(gg.sent_messages) > 0:
-        print >> sys.stderr, "GG queue is NOT EMPTY!"
-
-    if len(mail_queue) > 0:
-        print >> sys.stderr, "Mail queue is NOT EMPTY!"
-
-    shutil.rmtree(config['files_path'])
-
-
-class GrokLayer(object):
-
-    @classmethod
-    def setUp(cls):
-        if cls != GrokLayer:
-            return
-        # Zope component setup
-        zcSetUp()
-        EventPlacelessSetup().setUp()
-
-    @classmethod
-    def tearDown(cls):
-        if cls != GrokLayer:
-            return
-        zcTearDown()
-
-    @classmethod
-    def testTearDown(cls):
-        if cls != GrokLayer:
-            return
-        from nous.pylons.grok import the_multi_grokker
-        the_multi_grokker.clear()
-
-
-class WsgiInterceptLayer(object):
-
-    @classmethod
-    def setUp(cls):
-        def create_fn():
-            return pylons.test.pylonsapp
-        install_opener()
-        wsgi_intercept.add_wsgi_intercept('localhost', 80, create_fn)
-
-    @classmethod
-    def tearDown(cls):
-        wsgi_intercept.remove_wsgi_intercept()
-        uninstall_opener()
-
-
-def PylonsBaseLayer(config_file):
-
-    PylonsAppBaseLayer = type('PylonsLayer(%s)' % config_file, (), {})
-
-    def setUp(cls):
-        if pylons.test.pylonsapp is not None:
-            import pdb; pdb.set_trace()
-            raise Exception
-        SetupCommand('setup-app').run([conf_dir + '/%s' % cls.config])
-        pylons.test.pylonsapp = loadapp('config:%s' % cls.config,
-                                        relative_to=conf_dir)
-
-    def tearDown(cls):
-        from sqlalchemy.schema import MetaData
-        meta.metadata = MetaData()
-        from sqlalchemy.orm import clear_mappers
-        clear_mappers()
-        pylons.test.pylonsapp = None
-
-    PylonsAppBaseLayer.config = config_file
-    PylonsAppBaseLayer.setUp = classmethod(setUp)
-    PylonsAppBaseLayer.tearDown = classmethod(tearDown)
-
-    class PylonsTestBrowserLayer(PylonsAppBaseLayer, WsgiInterceptLayer):
-        setUp = tearDown = testSetUp = testTearDown = \
-            classmethod(lambda cls: None)
-    return PylonsTestBrowserLayer
-
-
-class UtutiBaseLayer(object):
-
-    @classmethod
-    def tearDown(cls):
+    def tearDown(self):
         try:
             shutil.rmtree(pylons.test.pylonsapp.config['files_path'])
         except OSError:
             pass
 
-    @classmethod
-    def testSetUp(cls):
-        layerTestSetUp(cls)
+    def testSetUp(self):
+        teardown_db_defaults(meta.engine, quiet=True)
+        initialize_db_defaults(meta.engine)
+
         config = pylons.test.pylonsapp.config
         config['tpl_lang'] = 'lt'
         mail_queue[:] = []
@@ -157,17 +47,35 @@ class UtutiBaseLayer(object):
         # Keep random stable in tests
         random.seed(123)
 
-    @classmethod
-    def testTearDown(cls):
-        layerTestTearDown(cls)
+    def testTearDown(self):
+        config = pylons.test.pylonsapp.config
+        if len(gg.sent_messages) > 0:
+            print >> sys.stderr, "\n===\nGG queue is NOT EMPTY!"
+
+        if len(mail_queue) > 0:
+            print >> sys.stderr, "\n===\nMail queue is NOT EMPTY!"
+
+        shutil.rmtree(config['files_path'])
+
+        # XXX Tear down database here
+        meta.Session.execute("SET ututi.active_user TO 0")
+        meta.Session.close()
+
+        teardown_db_defaults(meta.engine)
+        meta.Session.rollback()
+        meta.Session.remove()
 
 
-class UtutiLayer(GrokLayer, PylonsBaseLayer('test.ini'), UtutiBaseLayer):
-    """Ututi layer that tests with tests config"""
+UtutiLayer = CompositeLayer(GrokLayer,
+                            PylonsTestBrowserLayer('test.ini', conf_dir),
+                            UtutiBaseLayer(),
+                            name='UtutiLayer')
 
 
-class UtutiErrorsLayer(GrokLayer, PylonsBaseLayer('errors.ini'), UtutiBaseLayer):
-    """Ututi layer that tests with errors config"""
+UtutiErrorsLayer = CompositeLayer(GrokLayer,
+                                  PylonsTestBrowserLayer('errors.ini', conf_dir),
+                                  UtutiBaseLayer(),
+                                  name='UtutiErrorsLayer')
 
 
 class UtutiTestBrowser(NousTestBrowser):
