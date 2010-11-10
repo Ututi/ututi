@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-11-08 00:51+0200\n"
+"PO-Revision-Date: 2010-11-10 13:21+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -555,8 +555,27 @@ msgstr "Błędny kod!"
 msgid "This email is already in use."
 msgstr "Ten e-mail już jest w systemie."
 
+msgid "The recipient is not specified."
+msgstr ""
+
 msgid "Search"
 msgstr "Szukaj"
+
+#, python-format
+msgid "Group: %s"
+msgstr ""
+
+#, python-format
+msgid "Member: %s (%s)"
+msgstr ""
+
+#, python-format
+msgid "Member: %s"
+msgstr ""
+
+#, python-format
+msgid "Subject: %s"
+msgstr ""
 
 msgid "Your Google account has been unlinked."
 msgstr "Twoje konto Google zostało odłączone"
@@ -616,6 +635,9 @@ msgstr "Twój numer telefonu został potwierdzony."
 msgid "Your wall settings have been updated."
 msgstr "Ustawienia (strony)  zostały zaktualizowane."
 
+msgid "Wiki page created."
+msgstr ""
+
 msgid "The element does not exist."
 msgstr "Element nie istnieje."
 
@@ -642,6 +664,9 @@ msgstr "Więcej wydziałów"
 
 msgid "Information updated."
 msgstr "Informacje zostały zaktualizowane."
+
+msgid "Wiki notes"
+msgstr ""
 
 #, python-format
 msgid "You are now watching the subject %s"
@@ -3355,6 +3380,42 @@ msgstr "Wpisz ponownie nowe hasło"
 msgid "What's new?"
 msgstr "Powiadomienia"
 
+msgid "Share with others"
+msgstr ""
+
+msgid "send a message"
+msgstr ""
+
+msgid "upload a file"
+msgstr ""
+
+msgid "create a wiki page"
+msgstr ""
+
+msgid "Group or user:"
+msgstr ""
+
+msgid "Category"
+msgstr ""
+
+msgid "Subject:"
+msgstr ""
+
+msgid "Group or subject:"
+msgstr ""
+
+msgid "Upload file"
+msgstr "Załaduj plik"
+
+msgid "File uploaded."
+msgstr ""
+
+msgid "File upload failed."
+msgstr "Plik nie został dodany."
+
+msgid "Wiki page created\\."
+msgstr ""
+
 msgid ""
 "This is a list of all the recent events in the subjects you are watching "
 "and the groups you belong to."
@@ -3672,9 +3733,6 @@ msgstr "Dodaje"
 msgid "Done"
 msgstr "Gotowe"
 
-msgid "File upload failed."
-msgstr "Plik nie został dodany."
-
 msgid "Suspicious file?"
 msgstr "Podejrzany plik?"
 
@@ -3724,9 +3782,6 @@ msgstr "Twój e-mail (opcjonalnie)"
 
 msgid "Increase limits"
 msgstr "Podnieś limit"
-
-msgid "Upload file"
-msgstr "Załaduj plik"
 
 msgid "upload file to..."
 msgstr "dodaj plik do..."
@@ -3802,9 +3857,6 @@ msgstr ""
 "grupy?"
 
 msgid "More"
-msgstr ""
-
-msgid "Less"
 msgstr ""
 
 msgid "Ignore events like this"

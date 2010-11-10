@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-11-08 00:51+0200\n"
+"PO-Revision-Date: 2010-11-10 13:21+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -543,8 +543,27 @@ msgstr "Tai nėra tas patvirtinimo kodas, kurį mes Tau siuntėme."
 msgid "This email is already in use."
 msgstr "Toks el. pašto adresas jau naudojamas."
 
+msgid "The recipient is not specified."
+msgstr ""
+
 msgid "Search"
 msgstr "Paieška"
+
+#, python-format
+msgid "Group: %s"
+msgstr ""
+
+#, python-format
+msgid "Member: %s (%s)"
+msgstr ""
+
+#, python-format
+msgid "Member: %s"
+msgstr ""
+
+#, python-format
+msgid "Subject: %s"
+msgstr ""
 
 msgid "Your Google account has been unlinked."
 msgstr "Google paskyra atsieta."
@@ -604,6 +623,9 @@ msgstr "Telefono numeris patvirtintas."
 msgid "Your wall settings have been updated."
 msgstr "Tavo sienos nustatymai pakeisti"
 
+msgid "Wiki page created."
+msgstr ""
+
 msgid "The element does not exist."
 msgstr "Šis elementas neegzistuoja."
 
@@ -630,6 +652,9 @@ msgstr "Daugiau fakultetų"
 
 msgid "Information updated."
 msgstr "Informacija atnaujinta."
+
+msgid "Wiki notes"
+msgstr "Wiki užrašai"
 
 #, python-format
 msgid "You are now watching the subject %s"
@@ -3324,6 +3349,42 @@ msgstr "Pakartok naują slaptažodį"
 msgid "What's new?"
 msgstr "Kas naujo?"
 
+msgid "Share with others"
+msgstr ""
+
+msgid "send a message"
+msgstr ""
+
+msgid "upload a file"
+msgstr ""
+
+msgid "create a wiki page"
+msgstr ""
+
+msgid "Group or user:"
+msgstr ""
+
+msgid "Category"
+msgstr ""
+
+msgid "Subject:"
+msgstr ""
+
+msgid "Group or subject:"
+msgstr ""
+
+msgid "Upload file"
+msgstr "Įkelti failą"
+
+msgid "File uploaded."
+msgstr ""
+
+msgid "File upload failed."
+msgstr "Failo įkėlimas nepavyko."
+
+msgid "Wiki page created\\."
+msgstr ""
+
 msgid ""
 "This is a list of all the recent events in the subjects you are watching "
 "and the groups you belong to."
@@ -3642,9 +3703,6 @@ msgstr "Keliamas"
 msgid "Done"
 msgstr "Baigta"
 
-msgid "File upload failed."
-msgstr "Failo įkėlimas nepavyko."
-
 msgid "Suspicious file?"
 msgstr "Įtartinas failas?"
 
@@ -3694,9 +3752,6 @@ msgstr "El. pašto adresas (nebūtina)"
 
 msgid "Increase limits"
 msgstr "Padidinti limitą"
-
-msgid "Upload file"
-msgstr "Įkelti failą"
 
 msgid "upload file to..."
 msgstr "įkelti failą į..."
@@ -3774,9 +3829,6 @@ msgstr ""
 "narystę?"
 
 msgid "More"
-msgstr ""
-
-msgid "Less"
 msgstr ""
 
 msgid "Ignore events like this"

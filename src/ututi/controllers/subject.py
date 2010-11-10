@@ -30,7 +30,7 @@ def subject_menu_items():
         {'title': _("Files"),
          'name': 'home',
          'link': c.subject.url(action='home')},
-        {'title': _("Pages"),
+        {'title': _("Wiki notes"),
          'name': 'pages',
          'link': c.subject.url(action='pages')}]
 

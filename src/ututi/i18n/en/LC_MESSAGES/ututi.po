@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-11-08 00:51+0200\n"
+"PO-Revision-Date: 2010-11-10 13:21+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -517,7 +517,26 @@ msgstr ""
 msgid "This email is already in use."
 msgstr ""
 
+msgid "The recipient is not specified."
+msgstr ""
+
 msgid "Search"
+msgstr ""
+
+#, python-format
+msgid "Group: %s"
+msgstr ""
+
+#, python-format
+msgid "Member: %s (%s)"
+msgstr ""
+
+#, python-format
+msgid "Member: %s"
+msgstr ""
+
+#, python-format
+msgid "Subject: %s"
 msgstr ""
 
 msgid "Your Google account has been unlinked."
@@ -578,6 +597,9 @@ msgstr ""
 msgid "Your wall settings have been updated."
 msgstr ""
 
+msgid "Wiki page created."
+msgstr ""
+
 msgid "The element does not exist."
 msgstr ""
 
@@ -603,6 +625,9 @@ msgid "More departments"
 msgstr ""
 
 msgid "Information updated."
+msgstr ""
+
+msgid "Wiki notes"
 msgstr ""
 
 #, python-format
@@ -3048,6 +3073,42 @@ msgstr ""
 msgid "What's new?"
 msgstr ""
 
+msgid "Share with others"
+msgstr ""
+
+msgid "send a message"
+msgstr ""
+
+msgid "upload a file"
+msgstr ""
+
+msgid "create a wiki page"
+msgstr ""
+
+msgid "Group or user:"
+msgstr ""
+
+msgid "Category"
+msgstr ""
+
+msgid "Subject:"
+msgstr ""
+
+msgid "Group or subject:"
+msgstr ""
+
+msgid "Upload file"
+msgstr ""
+
+msgid "File uploaded."
+msgstr ""
+
+msgid "File upload failed."
+msgstr ""
+
+msgid "Wiki page created\\."
+msgstr ""
+
 msgid ""
 "This is a list of all the recent events in the subjects you are watching "
 "and the groups you belong to."
@@ -3346,9 +3407,6 @@ msgstr ""
 msgid "Done"
 msgstr ""
 
-msgid "File upload failed."
-msgstr ""
-
 msgid "Suspicious file?"
 msgstr ""
 
@@ -3396,9 +3454,6 @@ msgid "Your e-mail (optional)"
 msgstr ""
 
 msgid "Increase limits"
-msgstr ""
-
-msgid "Upload file"
 msgstr ""
 
 msgid "upload file to..."
@@ -3464,9 +3519,6 @@ msgid ""
 msgstr ""
 
 msgid "More"
-msgstr ""
-
-msgid "Less"
 msgstr ""
 
 msgid "Ignore events like this"
