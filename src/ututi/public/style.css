@@ -4990,6 +4990,8 @@ ul.universityMembersInfo li{
 
 .dashboard_action_block #rcpt,
 .dashboard_action_block #rcpt_file,
+.dashboard_action_block #rcpt_wiki,
+.dashboard_action_block #page_title,
 .dashboard_action_block #message_subject,
 .dashboard_action_block #category_id {
   width: 350px;

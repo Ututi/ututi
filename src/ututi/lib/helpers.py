@@ -346,7 +346,7 @@ def input_area(name, title, value='', cols='50', rows='5', explanation=None, dis
         HTML.literal('<form:error name="%s" />' % name)])
 
 
-def input_wysiwyg(name, title, value='', cols='80', rows='15'):
+def input_wysiwyg(name, title, value='', cols='60', rows='15'):
     return HTML.div(class_='form-field', c=[
             HTML.label(for_=name, c=[title]),
             HTML.textarea(class_='ckeditor', name_=name, id_=name, cols=cols, rows=rows, c=[value]),

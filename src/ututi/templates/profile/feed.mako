@@ -13,7 +13,7 @@
 <%self:rounded_block id="dashboard_actions">
 <div class="tip">${_('Share with others')}</div>
 <a class="action" id="send_message" href="#">${_('send a message')}</a>
-<a class="action" id="upload_file" href="#">${_('upload a files')}</a>
+<a class="action" id="upload_file" href="#">${_('upload a file')}</a>
 <a class="action" id="create_wiki" href="#">${_('create a wiki page')}</a>
 <script type="text/javascript">
   $('#dashboard_actions a.action').toggle(function(){
@@ -63,6 +63,25 @@
     <br class="clearLeft" />
   </form>
 </%self:rounded_block>
+
+<%self:rounded_block id="create_wiki_block" class_="dashboard_action_block" style="display: none;">
+  <form method="POST" action="${url(controller='profile', action='create_wiki')}" id="wiki_form">
+    <input type="hidden" value="" name="wiki_rcpt_id" id="wiki_rcpt_id" />
+    ${h.input_line('rcpt_wiki', _('Subject:'), id='rcpt_wiki')}
+    <div class="formField">
+      ${h.input_line('page_title', _('Title'), id='page_title')}
+    </div>
+    <div>
+      ${h.input_wysiwyg('page_content', '')}
+    </div>
+    <div class="formSubmit">
+      ${h.input_submit(_('Save'), id="wiki_create_send")}
+    </div>
+    <br class="clearLeft" />
+  </form>
+</%self:rounded_block>
+
+${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
 <script type="text/javascript">
 $(function(){
     /* message block */
@@ -164,10 +183,51 @@ $(function(){
         },
 	minLength: 2,
         select: function(event, ui) {
-            $(this).closest('form').find('#file_rcpt_id').val(ui.item.id);
             file_upload.setData({folder: '', target_id: ui.item.id});
             file_upload.enable();
         }
+    });
+    /* wiki mode */
+    $( "#rcpt_wiki" ).autocomplete({
+	source: function(request, response) {
+            $.getJSON("${url(controller='profile', action='wiki_rcpt_js')}",
+                      request, function( data, status, xhr ) {
+			  response(data.data);
+		      });
+        },
+	minLength: 2,
+        select: function(event, ui) {
+            $(this).closest('form').find('#wiki_rcpt_id').val(ui.item.id);
+        }
+    });
+    $('#wiki_create_send').click(function(){
+        form = $(this).closest('form');
+
+        for ( instance in CKEDITOR.instances )
+            CKEDITOR.instances[instance].updateElement();
+
+
+        title = $('#page_title', form).val();
+        content = $('#page_content', form).val();
+
+        if ((title != '') && (content != '')) {
+            $.post("${url(controller='profile', action='create_wiki_js')}",
+                   $(this).closest('form').serialize(),
+                   function(data, status) {
+                       if (data.success != true) {
+                           for (var key in data.errors) {
+                               var error = data.errors[key];
+                               $('#'+key).parent().after($('<div class="error-message">'+error+'</div>'));
+                           }
+                       } else {
+                           $('#wiki_form').find('input, textarea').val('');
+                           $('#create_wiki').click();
+                           $('#dashboard_action_blocks').after('<div class="action-reply">'+"${_('Wiki page created\.')}"+'</div>');
+                       }
+                   },
+                   "json");
+        }
+        return false;
     });
 
 });

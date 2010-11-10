@@ -22,6 +22,7 @@ from pylons.controllers.util import abort, redirect
 from pylons.i18n import _
 
 import ututi.lib.helpers as h
+from ututi.model import Page
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.base import render
 from ututi.lib.emails import email_confirmation_request
@@ -233,6 +234,49 @@ class HideElementForm(Schema):
      allow_extra_fields = False
      type = validators.OneOf(['suggest_create_group', 'suggest_watch_subject', 'suggest_enter_phone'])
 
+
+class WikiRcpt(validators.FormValidator):
+    """
+    Validate the universal wiki page create form.
+    Check if the recipient's id has been specified in the js field, if not,
+    check if enough text has been input to identify the recipient.
+    """
+    messages = {
+        'invalid': _(u"The recipient is not specified."),
+    }
+
+    def validate_python(self, form_dict, state):
+        recipient = form_dict['rcpt_wiki']
+        recipient_id = form_dict['wiki_rcpt_id']
+
+        rcpt_obj = None
+        if recipient_id:
+            try:
+                id = int(recipient_id)
+                rcpt_obj = Subject.get_by_id(id)
+            except ValueError:
+                rcpt_obj = None
+        else:
+            subjects = _wiki_rcpt(recipient, c.user)
+            if len(subjects) == 1:
+                rcpt_obj = subjects[0]
+
+        if rcpt_obj is None:
+            raise Invalid(self.message('invalid', state),
+                          form_dict, state,
+                          error_dict={'rcpt_wiki': Invalid(self.message('invalid', state), form_dict, state)})
+        else:
+            form_dict['target'] = rcpt_obj
+
+
+class WikiForm(Schema):
+    """Validate universal form for creating wiki pages from the dashboard."""
+    allow_extra_fields = True
+    page_title = validators.UnicodeString(strip=True, not_empty=True)
+    page_content = validators.UnicodeString(strip=True, not_empty=True)
+    chained_validators = [WikiRcpt()]
+
+
 def _file_rcpt(term, current_user):
     """
     Return possible recipients for a file upload (for the current user).
@@ -280,6 +324,16 @@ def _message_rcpt(term, current_user):
             .all()
 
     return (groups, classmates, users)
+
+
+def _wiki_rcpt(term, current_user):
+    """ Return possible wiki recipients based on the query term. """
+    subjects = meta.Session.query(Subject)\
+        .filter(Subject.title.ilike('%%%s%%' % term))\
+        .filter(Subject.id.in_([s.id for s in current_user.all_watched_subjects]))\
+        .all()
+    return subjects
+
 
 class ProfileController(SearchBaseController, UniversityListMixin, MailinglistBaseController, FileViewMixin):
     """A controller for the user's personal information and actions."""
@@ -418,6 +472,21 @@ class ProfileController(SearchBaseController, UniversityListMixin, MailinglistBa
                  id='s_%d' % subject.id)
             for subject in subjects]
         return dict(data=groups+subjects)
+
+    @ActionProtector("user")
+    @jsonify
+    def wiki_rcpt_js(self):
+        term = request.params.get('term', None)
+        if term is None or len(term) < 1:
+            return {'data' : []}
+
+        subjects = _wiki_rcpt(term, c.user)
+
+        subjects = [
+            dict(label=subject.title,
+                 id=subject.id)
+            for subject in subjects]
+        return dict(data=subjects)
 
     def _edit_form(self, defaults=None):
         return render('profile/edit.mako')
@@ -1006,6 +1075,7 @@ class ProfileController(SearchBaseController, UniversityListMixin, MailinglistBa
             self.form_result['subject'],
             self.form_result['message'],
             self.form_result.get('category_id', None))
+        h.flash(_('Message sent.'))
         redirect(url(controller='profile', action='feed'))
 
     def _send_message(self, recipient, subject, message, category_id=None):
@@ -1048,3 +1118,30 @@ class ProfileController(SearchBaseController, UniversityListMixin, MailinglistBa
             return 'UPLOAD_FAILED'
 
         return self._upload_file(target)
+
+    @ActionProtector("user")
+    @js_validate(schema=WikiForm())
+    @jsonify
+    def create_wiki_js(self):
+        self._create_wiki_page(
+            self.form_result['target'],
+            self.form_result['page_title'],
+            self.form_result['page_content'])
+        return dict(success=True)
+
+    @ActionProtector("user")
+    @validate(schema=WikiForm(), form='feed')
+    def create_wiki(self):
+        self._create_wiki_page(
+            self.form_result['target'],
+            self.form_result['page_title'],
+            self.form_result['page_content'])
+        h.flash(_('Wiki page created.'))
+        redirect(url(controller='profile', action='feed'))
+
+    def _create_wiki_page(self, target, title, content):
+        page = Page(title, content)
+        target.pages.append(page)
+        meta.Session.add(page)
+        meta.Session.commit()
+        return page
