@@ -273,21 +273,22 @@ Other ututi users, who do not belong to the group can also post messages
     >>> browser.getControl('Post').click()
 
 This message will be sent to all group members:
+
      >>> len(mail_queue)
      1
 
-    >>> msg = mail_queue.pop()
-    >>> print msg.message
-    MIME-Version: 1.0
-    Content-Type: text/plain; charset="us-ascii"
-    Content-Transfer-Encoding: 7bit
-    From: user2@ututi.lt
-    To: moderators@groups.ututi.lt
-    Subject: Hi group!
-    ...
-    Reply-To: moderators@groups.ututi.lt
-    Errors-To: errors@ututi.lt
-    List-Id: moderators@groups.ututi.lt
-    This is my message
+     >>> msg = mail_queue.pop()
+     >>> print msg.message
+     MIME-Version: 1.0
+     Content-Type: text/plain; charset="us-ascii"
+     Content-Transfer-Encoding: 7bit
+     From: user2@ututi.lt
+     To: moderators@groups.ututi.lt
+     Subject: Hi group!
+     ...
+     Reply-To: moderators@groups.ututi.lt
+     Errors-To: errors@ututi.lt
+     List-Id: moderators@groups.ututi.lt
+     This is my message
 
      >>> mail_queue[:] = []
