@@ -1,0 +1,17 @@
+Regression test for group email being in cc
+===========================================
+
+    >>> browser = Browser.logIn()
+
+    >>> from ututi.tests.functional import send_test_message
+
+    >>> send_test_message('dropbox.txt')
+    >>> browser.open("http://localhost/group/moderators/mailinglist/thread/4")
+    >>> browser.printQuery("""id('mainContent')//div[@class="single-title"]//h2/text()""")
+    Jacek Gurziński invited you to Dropbox
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> print len(mail_queue)
+    1
+
+    >>> mail_queue[:] = []

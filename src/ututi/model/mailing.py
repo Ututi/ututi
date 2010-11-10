@@ -44,7 +44,7 @@ def decode_and_join_header(header):
         if part[1]:
             result.append(part[0].decode(part[1]))
         else:
-            result.append(part[0])
+            result.append(part[0].decode('utf-8', 'ignore'))
     return u' '.join(result)
 
 
