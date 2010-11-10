@@ -171,10 +171,25 @@ create table tags (id bigserial not null,
        site_url varchar(200) default null,
        confirmed bool default true,
        region_id int8 default null references regions(id) on delete restrict,
+       parent_id_indexed int8 not null default 0,
        primary key (id),
        unique(parent_id, title));;
 
-create unique index parent_title_unique_idx on tags(parent_id, title_short);;
+CREATE FUNCTION tag_parent_not_null() RETURNS trigger AS $tag_parent$
+    BEGIN
+        IF NEW.parent_id IS NULL THEN
+           NEW.parent_id_indexed := 0;
+        ELSE
+           NEW.parent_id_indexed := NEW.parent_id;
+        END IF;
+        RETURN NEW;
+    END
+$tag_parent$ LANGUAGE plpgsql;;
+
+CREATE TRIGGER tag_parent_not_null BEFORE INSERT OR UPDATE ON tags
+    FOR EACH ROW EXECUTE PROCEDURE tag_parent_not_null();;
+
+create unique index parent_title_unique_idx on tags(parent_id_indexed, title_short);;
 
 alter table users add column location_id int8 default null references tags(id) on delete set null;;
 
