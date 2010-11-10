@@ -257,7 +257,7 @@ class PrivateMessageSentEvent(Event):
 
     def render(self):
         return _("%(link_to_author)s sent an private message: <em>%(text)s</em>") % {
-            'link_to_author': link_to(self.private_message.sender.fullname, self.outgoing_sms.sender.url()),
+            'link_to_author': link_to(self.private_message.sender.fullname, self.private_message.sender.url()),
             'text': self.message_text()}
 
     def snippet(self):
