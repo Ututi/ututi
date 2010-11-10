@@ -3,7 +3,7 @@
 <%def name="title()">${h.ellipsis(c.page.title,30)} - ${h.ellipsis(c.subject.title, 30)}</%def>
 
 <div class="back-link">
-  <a class="back-link" href="${c.subject.url()}">${_('Go back to %(subject_title)s') % dict(subject_title=c.subject.title)}</a>
+  <a class="back-link" href="${c.subject.url(action="pages")}">${_('Go back to %(subject_title)s') % dict(subject_title=c.subject.title)}</a>
 </div>
 
 <%self:rounded_block class_='portletGroupFiles smallTopMargin'>
