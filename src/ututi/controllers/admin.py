@@ -38,7 +38,7 @@ from ututi.model import UserSubjectMonitoring
 from ututi.model import Page, SMS, GroupCoupon
 from ututi.model import (meta, User, Email, LocationTag, Group, Subject,
                          GroupMember, GroupMembershipType, File, PrivateMessage)
-from ututi.model import Notification
+from ututi.model import Notification, City
 from ututi.lib import helpers as h
 
 
@@ -84,6 +84,10 @@ class NotificationForm(Schema):
     valid_until = DateConverter(not_empty=True)
     content = String(min=1)
 
+
+class CityForm(Schema):
+    allow_extra_fields = True
+    name = String(min=1)
 
 class AdminController(BaseController):
     """Controler for system administration."""
@@ -466,3 +470,46 @@ class AdminController(BaseController):
             notification.valid_until = self.form_result['valid_until']
             meta.Session.commit()
         redirect(url(controller='admin', action='notifications'))
+
+    @ActionProtector("root")
+    def cities(self):
+        cities = meta.Session.query(City).order_by(City.name.asc())
+        c.cities = self._make_pages(cities)
+        return render('admin/cities.mako')
+
+    @ActionProtector("root")
+    @validate(schema=CityForm, form='cities')
+    def create_city(self):
+        if hasattr(self, 'form_result'):
+            city = City(name=self.form_result['name'])
+            meta.Session.add(city)
+            meta.Session.commit()
+        redirect(url(controller="admin", action="cities"))
+
+    @ActionProtector("root")
+    def _edit_city_form(self):
+        return render('admin/city_edit.mako')
+
+    @ActionProtector("root")
+    def edit_city(self, id):
+        c.city = meta.Session.query(City).filter(City.id == id).one()
+        defaults = {
+            'id': c.city.id,
+            'name': c.city.name}
+        return htmlfill.render(self._edit_city_form(), defaults)
+
+    @ActionProtector("root")
+    @validate(schema=CityForm, form='cities')
+    def update_city(self, id):
+        city = meta.Session.query(City).filter(City.id == id).one()
+        if hasattr(self, 'form_result'):
+            city.name = self.form_result['name']
+            meta.Session.commit()
+        redirect(url(controller="admin", action="cities"))
+
+    @ActionProtector("root")
+    def delete_city(self, id):
+        city = meta.Session.query(City).filter(City.id == id).one()
+        meta.Session.delete(city)
+        meta.Session.commit()
+        redirect(url(controller="admin", action="cities"))

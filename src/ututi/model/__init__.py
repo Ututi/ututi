@@ -60,6 +60,7 @@ def init_model(engine):
 
 
 def process_logo(value):
+
     if value is None:
         return
 
@@ -572,8 +573,6 @@ def setup_orm(engine):
                         Column('title', Unicode(assert_unicode=True)),
                         Column('description', Unicode(assert_unicode=True)),
                         Column('author', Unicode(assert_unicode=True)),
-                        Column('publisher', Unicode(assert_unicode=True)),
-                        Column('location', Unicode(assert_unicode=True)),
                         useexisting=True,
                         autoload=True,
                         autoload_with=engine)
@@ -581,8 +580,21 @@ def setup_orm(engine):
     book_mapper = orm.mapper(Book,
                              books_table,
                              properties={
-                                 'owner': relation(User,
-                                 backref="books", foreign_keys=User.id),
+                                 'owner': relation(User, backref="books"),
+                                 'raw_logo': deferred(books_table.c.logo),
+                                 })
+
+    global cities_table
+    cities_table = Table("cities", meta.metadata,
+                         Column('name', Unicode(assert_unicode=True)),
+                         useexisting=True,
+                         autoload=True,
+                         autoload_with=engine)
+
+    city_mapper = orm.mapper(City,
+                             cities_table,
+                             properties={
+                                'books': relation(Book, backref="city"),
                                  })
 
     from ututi.model import mailing
@@ -590,8 +602,6 @@ def setup_orm(engine):
 
     from ututi.model import events
     events.setup_orm(engine)
-
-
 
 
 def reset_db(engine):
@@ -2658,3 +2668,33 @@ class Book(object):
         self.price = price
         self.title = title
         self.owner_id = owner_id
+
+    @classmethod
+    def get(cls, id):
+        book = meta.Session.query(cls)
+        if isinstance(id, basestring):
+            book = book.filter_by(title=id.lower())
+        else:
+            book = book.filter_by(id=id)
+        try:
+            return book.one()
+        except NoResultFound:
+            return None
+
+    logo = logo_property()
+
+    def has_logo(self):
+        return bool(meta.Session.query(Book).filter_by(id=self.id).filter(Book.raw_logo != None).count())
+
+class City(object):
+    """Class for representing cities"""
+    def __init__(self, name):
+        self.name = name
+
+    def get(cls, id):
+        city = meta.Session.query(cls)
+        city = city.filter_by(id=id)
+        try:
+            return city.one()
+        except NoResultFound:
+            return None

@@ -1,7 +1,7 @@
 Notification testing
 ====================
 
-The admin should have a new link on his dashboard, that lets him view all active and inactive group coupons.
+The admin should have a new link on his dashboard, that lets him view all active and inactive notifications.
 
     >>> browser = Browser.logIn()
     >>> browser.open('http://localhost/admin')

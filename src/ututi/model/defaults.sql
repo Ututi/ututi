@@ -1258,20 +1258,24 @@ CREATE TABLE notifications_viewed (
        notification_id int8 NOT NULL REFERENCES notifications(id)
 );;
 
+
 /* Books */
+
+create table cities (
+       id bigserial not null,
+       name text not null default '',
+       primary key (id));;
+
 
 CREATE TABLE books (
        id bigserial NOT NULL,
        title varchar(100) NOT NULL,
        description text,
        author varchar(100),
-       year date,
-       publisher varchar(100),
-       pages_number int,
-       location varchar(100),
        price float NOT NULL,
-       cover bytea DEFAULT NULL,
+       logo bytea DEFAULT NULL,
        owner_id int8 NOT NULL REFERENCES users(id) on delete cascade,
        show_phone boolean DEFAULT TRUE,
+       city_id int8 NOT NULL REFERENCES cities(id) on delete restrict,
        PRIMARY KEY (id)
 );;

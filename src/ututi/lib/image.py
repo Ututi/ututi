@@ -9,7 +9,7 @@ from pylons.controllers.util import abort, etag_cache
 from sqlalchemy.orm.exc import NoResultFound
 
 from ututi.lib.cache import u_cache
-from ututi.model import Group, User, LocationTag, meta
+from ututi.model import Group, User, LocationTag, meta, Book
 
 
 def serve_logo(obj_type, obj_id, width=None, height=None,
@@ -40,7 +40,7 @@ def prepare_logo_cached(obj_type, obj_id, width=None, height=None, default_img_p
 
 
 def prepare_logo(obj_type, obj_id, width=None, height=None, default_img_path=None):
-    obj_cls = {'group': Group, 'user': User, 'locationtag': LocationTag}[obj_type]
+    obj_cls = {'book': Book, 'group': Group, 'user': User, 'locationtag': LocationTag}[obj_type]
     obj = obj_cls.get(obj_id)
     if obj is None:
         return None

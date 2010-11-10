@@ -14,16 +14,19 @@
           <span class="book-location-name"> ${book.location}</span>
           <br />
       %endif
-          <span class="book-price-title">${_('Price')}:</span>
-          <span class="book-location-name">
-            %if book.price == 0:
-            ${_('free')}
-            %else:
-            ${book.price} Lt
-            %endif
-          </span>
-          <br />
-          ${h.button_to("more", url(controller="books", action="show", id=book.id))}
+      <span class="book-price-title">${_('Price')}:</span>
+      <span class="book-location-name">
+        %if book.price == 0:
+        ${_('free')}
+        %else:
+        ${book.price} Lt
+        %endif
+      </span>
+      <br />
+      ${h.button_to(_("more"), url(controller="books", action="show", id=book.id))}
+      %if c.user is book.owner:
+      ${h.button_to(_("Edit"), url(controller="books", action="edit", id=book.id))}
+      %endif
     </div>
   </div>
 </div>
@@ -34,5 +37,6 @@
 %for book in c.books:
     ${book_information(book)}
 %endfor
+  <div id="pager">${c.books.pager(format='~3~') }</div>
 </div>
 

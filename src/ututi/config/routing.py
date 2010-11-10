@@ -192,6 +192,11 @@ def make_map(config):
 
     # books
     map.connect('/books', controller='books', action='index')
+    map.connect('/books/{id}/logo/{width}/{height}',
+                controller='books', action='logo')
+    map.connect('/books/{id}/logo/{width}',
+                controller='books', action='logo')
+
 
     # user profiles
     map.connect('/user/{id}', controller='user', action='index')

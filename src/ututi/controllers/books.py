@@ -1,6 +1,8 @@
 import logging
 
+import string
 from datetime import datetime, date
+from formencode.validators import Number
 from formencode.variabledecode import NestedVariables
 from formencode.foreach import ForEach
 from formencode.compound import Pipe
@@ -16,73 +18,136 @@ from pylons.i18n import _
 from ututi.controllers.group import FileUploadTypeValidator
 from ututi.model import Book, meta
 import ututi.lib.helpers as h
+from ututi.lib.validators import LocationTagsValidator
+from ututi.lib.image import serve_logo
 from ututi.lib.forms import validate
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render, render_lang, u_cache
 from pylons import request, tmpl_context as c, url, config, session
+from webhelpers import paginate
 
-#class BookForm(Schema):
-#    """A schema for validating new books forms."""
-#
-#    allow_extra_fields = True
-#
-#    pre_validators = [NestedVariables()]
-#
-#    location = Pipe(ForEach(validators.UnicodeString(strip=True, max=250)),
-#                    LocationTagsValidator(not_empty=True))
-#
-#    title = validators.UnicodeString(not_empty=True, strip=True)
-#    lecturer = validators.UnicodeString(strip=True)
-#    chained_validators = [
-#        TagsValidator()
-#        ]
-#
-#
-#class NewBookForm(BookForm):
-#    pass
-#
 
-class CoverUpload(Schema):
-    """A schema for validating books uploads."""
-    cover = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
+class PriceValidator(Number):
+    """Number validator that accepts numbers with dot and with comma (i.e. 3.14 and 3,14)"""
+
+    messages = {
+        'number': _("Please enter a number")
+    }
+
+    def _to_python(self, value, state):
+        value = string.replace(value, ',', '.')
+        return super(PriceValidator, self)._to_python(value, state)
+
+class BookForm(Schema):
+    pre_validators = [NestedVariables()]
+    allow_extra_fields = True
+
+    logo = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
+    title = validators.UnicodeString(not_empty=True)
+    author = validators.UnicodeString(not_empty=True)
+    price = PriceValidator(not_empty=True)
+    description = validators.UnicodeString()
+    location = Pipe(ForEach(validators.UnicodeString(strip=True)),
+                    LocationTagsValidator())
+
 
 class BooksController(BaseController):
+    def _make_pages(self, items):
+        return paginate.Page(items,
+                             page=int(request.params.get('page', 1)),
+                             item_count=items.count() or 0,
+                             items_per_page=100)
+
+
 
     def index(self):
-        c.books = meta.Session.query(Book).all()
+        books = meta.Session.query(Book)
+        c.books = self._make_pages(books)
         return render('books/index.mako')
 
-    @validate(CoverUpload)
+    @validate(schema=BookForm, form='_add')
     @ActionProtector("user")
     def create(self):
-        title = request.POST['title']
-        price = request.POST['price']
-        owner_id = c.user.id
-        book = Book(owner_id, title, price)
-        book.author = request.POST['author']
-        book.publisher = request.POST['publisher']
-        book.description = request.POST['description']
-        pages_number = request.POST['pages_number']
-        if pages_number is None:
-            pages_number = 01
-            book.pages_number = pages_number
-        if request.POST['year'] is not None:
-            book.year = datetime.strptime(request.POST['year'], "%Y").date()
-        if request.POST['cover'] is not None:
-            book.cover = request.POST['cover'].file.read()
-        book.location = request.POST['location']
-        meta.Session.add(book)
-        meta.Session.commit()
-        h.flash(_('Book was added succesfully'))
-        redirect(url(controller='books', action='index'))
+        if hasattr(self, 'form_result'):
+            title = self.form_result['title']
+            price = self.form_result['price']
+            book = Book(c.user.id, title, price)
+            book.author = self.form_result['author']
+            book.description = self.form_result['description']
+            if self.form_result['logo'] is not None and self.form_result['logo'] != '':
+                book.logo = self.form_result['logo'].file.read()
+            book.location = self.form_result['location']
+            meta.Session.add(book)
+            meta.Session.commit()
+            h.flash(_('Book was added succesfully'))
+            redirect(url(controller='books', action='show', id=book.id))
+        else:
+            return self._add()
 
     @ActionProtector("user")
-    def add(self):
+    def _add(self):
         return render('books/add.mako')
 
-    def show(self):
+    def add(self):
+        return self._add()
+
+    def show(self, id):
+        c.book = meta.Session.query(Book).filter(Book.id == id).one()
         return render('books/show.mako')
 
+    def _edit(self):
+        return render('books/edit.mako')
+
+    @ActionProtector("user")
+    def edit(self, id):
+        book = meta.Session.query(Book).filter(Book.id == id).one()
+        if book.owner != c.user:
+            h.flash(_('Only owner of this book can do this action'))
+            redirect(url(controller="books", action="index"))
+
+        defaults = {
+            'title': book.title,
+            'author': book.author,
+            'description': book.description,
+            'price': book.price,
+            'department': book.department,
+            'city': book.city
+        }
+        if book.location is not None:
+            location = dict([('location-%d' % n, tag)
+                             for n, tag in enumerate(book.location.hierarchy())])
+        else:
+            location = []
+
+        defaults.update(location)
+
+        return htmlfill.render(self._edit(), defaults=defaults)
+
+    @validate(BookForm, form='_edit')
     @ActionProtector("user")
     def update(self):
-        redirect(url(controller='books', action='show'))
+        if hasattr(self, 'form_result'):
+            book = meta.Session.query(Book).filter(Book.id == self.form_result['id']).one()
+            book.title = self.form_result['title']
+            book.price = self.form_result['price']
+            book.owner_id = c.user.id
+            book.author = self.form_result['author']
+            book.publisher = self.form_result['publisher']
+            book.description = self.form_result['description']
+            pages_number = self.form_result['pages_number']
+            if pages_number is None:
+                pages_number = 0
+                book.pages_number = pages_number
+            if self.form_result['release_date'] is not None:
+                book.release_date = date(self.form_result['release_date'], 1, 1)
+            if self.form_result['delete_logo']:
+                book.logo = None
+            elif self.form_result['logo'] is not None and self.form_result['logo'] != '':
+                book.logo = self.form_result['logo'].file.read()
+            book.location = self.form_result['location']
+            meta.Session.commit()
+            h.flash(_('Book was updated succesfully'))
+            redirect(url(controller='books', action='show', id=book.id))
+
+    def logo(self, id, width=None, height=None):
+        return serve_logo('book', int(id), width=width, height=height)

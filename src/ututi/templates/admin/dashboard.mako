@@ -18,4 +18,5 @@
   <li>${h.link_to('SMSs', url(controller='admin', action='sms'))}</li>
   <li>${h.link_to('Group coupons', url(controller='admin', action='group_coupons'))}</li>
   <li>${h.link_to('Notifications', url(controller='admin', action='notifications'))}</li>
+  <li>${h.link_to('Cities', url(controller='admin', action='cities'))}</li>
 </ul>

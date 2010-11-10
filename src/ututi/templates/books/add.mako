@@ -8,7 +8,7 @@
 ${_('New book')}
 </%def>
 
-<a class="back-link" href="${url(controller='profile', action='search')}">${_('back to search')}</a>
+<a class="back-link" href="${url(controller='books', action='index')}">${_('back to catalog')}</a>
 <h1>${_('New book')}</h1>
 
 
@@ -16,66 +16,53 @@ ${_('New book')}
 <%newlocationtag:head_tags />
 </%def>
 
-<%def name="book_cover_field()">
-  <form:error name="book_cover_upload" />
-    <label>
-      <span class="labelText">${_('Book Cover')}</span>
-      <input type="file" name="cover" id="book_cover_upload" class="line"/>
-  </label>
+<%def name="book_logo_field()">
+<form:error name="book_logo_upload" />
+<label>
+  <span class="labelText">${_('Book Cover')}</span>
+  <input type="file" name="logo" id="book_logo_upload" class="line"/>
+</label>
 </%def>
 
 
-<%def name="form(action, personal=False)">
+<%def name="form(action)">
 ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
 <form method="post" action="${action}"
      id="book_add_form" enctype="multipart/form-data" class="fullForm">
   <fieldset>
+  <div class="book-logo">
+    ${self.book_logo_field()}
+  </div>
   <div class="basic-book-info">
     ${h.input_line('title', _('Title'))}
     ${h.input_line('author', _('Author'))}
-    <div class="form-field">
-      <label for="description">${_('Brief description of the book')}</label>
-      <textarea class="line ckeditor" name="description" id="description" cols="60" rows="5"></textarea>
-    </div>
- </div>
-  <div class="extra-book-info">
-    ${h.input_line('publisher', _('Publisher'))}
-    ${h.input_line('pages_number', _('Pages number'))}
-    ${h.input_line('year', _('Book Year'))}
+    <select name="book_department">
+      <option value="university">${_('University')}</option>
+      <option value="school">${_('School')}</option>
+      <option value="other">${_('Other')}</option>
+    </select>
+    ${h.input_area('description', _('Brief description of the book'))}
   </div>
-  <div class="book-owner-info">
+  <div id="university_fields">
     ${location_widget(2)}
     ${h.input_line('subject', _('Course'))}
     <input type="checkbox" name="show_phone" value="True" /> ${_('Show my phone number')}
   </div>
   <div class="book-transfer-info">
     ${h.input_line('price', _('Price'))}
-    ${h.input_line('location', _('Location'))}
+    <select name="city">
+      %for city in c.cities:
+      <option value="${city.name}">${c.city.name)}</option>
+      %endfor
+    </select>
+    ${h.input_line('City', _('City'))}
   </div>
-
-  ${self.book_cover_field()}
-  <br class="clear-left"/>
-  <div class="form-field">
-    <label for="tags">${_('Tags')}</label>
-    ${tags_widget()}
-  </div>
-  <br />
-
-<!--
-  <div class="form-field check-field">
-    <label for="watch_book">
-      <input type="checkbox" name="watch_book" id="watch_book" value="watch"/>
-      ${_('Start watching this book personally')}
-    </label>
-  </div>
--->
   <br />
   <div>
-
     ${h.input_submit(_('Save'))}
   </div>
   </fieldset>
 </form>
 </%def>
 
-<%self:form action="${url(controller='books', action='create')}" personal="True"/>
+<%self:form action="${url(controller='books', action='create')}"/>
