@@ -11,7 +11,7 @@ Events and watching
     ...                upload_files=[("attachment", "text.txt", "Test")])
 
 
-    >>> browser.open('http://localhost/profile/index/1')
+    >>> browser.open('http://localhost/profile/index')
     >>> browser.printQuery("id('event_list')/li")
     <li>
           A new file <a href="/subject/vu/mat_analize/file/4/get">text.txt</a> for a subject <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a>
@@ -30,7 +30,7 @@ Events and watching
     ...                params={'folder': ''},
     ...                upload_files=[("attachment", "text.txt", "Test")])
 
-    >>> browser.open('http://localhost/profile/index/1')
+    >>> browser.open('http://localhost/profile/index')
     >>> browser.printQuery("id('event_list')/li")
     <li>
           A new file <a href="/group/moderators/file/5/get">text.txt</a> for a group <a href="/group/moderators">Moderatoriai</a>
@@ -52,7 +52,7 @@ Events and watching
     >>> from ututi.tests.functional import send_test_message
     >>> send_test_message('email_with_attachment.txt', '4', to='moderators@groups.ututi.lt')
 
-    >>> browser.open('http://localhost/profile/index/1')
+    >>> browser.open('http://localhost/profile/index')
     >>> browser.printQuery("id('event_list')/li")
     <li>
           New email post <a href="/group/moderators/mailinglist/thread/6">Also - an attachment</a>
