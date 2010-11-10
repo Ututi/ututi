@@ -10,7 +10,6 @@
 <h2>${_('Editing')}</h2>
 <form method="post" action="${url(controller='admin', action='update_city', id=c.city.id)}"
       name="city_form" id="city_form" class="fullForm">
-  <input type="hidden" name="id" value=""/>
   ${h.input_line('name', _('Name'))}
   <br />
   <div>
