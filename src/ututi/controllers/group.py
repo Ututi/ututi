@@ -636,7 +636,7 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
     def _get_available_roles(self, member_is_admin, single_administrator=False):
         roles = ({'type' : 'administrator', 'title' : _('Administrator')},
                  {'type' : 'member', 'title' : _('Member')},
-                 {'type' : 'not-member', 'title': _('Leave group')})
+                 {'type' : 'not-member', 'title': _('Delete member')})
         active_role = 'administrator' if member_is_admin else 'member'
         for role in roles:
             role['selected'] = role['type'] == active_role

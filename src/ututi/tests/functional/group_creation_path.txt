@@ -331,15 +331,15 @@ Now let's kick out all of the members and delete the group:
     >>> browser.getLink('Members').click()
 
     >>> form = browser.getForm(id='update-membership-2')
-    >>> form.getControl(name='role').displayValue = ['Leave group']
+    >>> form.getControl(name='role').displayValue = ['Delete member']
     >>> form.getControl('Update').click()
 
     >>> form = browser.getForm(id='update-membership-3')
-    >>> form.getControl(name='role').displayValue = ['Leave group']
+    >>> form.getControl(name='role').displayValue = ['Delete member']
     >>> form.getControl('Update').click()
 
     >>> form = browser.getForm(id='update-membership-5')
-    >>> form.getControl(name='role').displayValue = ['Leave group']
+    >>> form.getControl(name='role').displayValue = ['Delete member']
     >>> form.getControl('Update').click()
 
     >>> browser.getControl('Delete group').click()
