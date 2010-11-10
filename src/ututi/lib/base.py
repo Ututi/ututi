@@ -77,6 +77,8 @@ class BaseController(WSGIController):
         # Record the time the user was last seen.
         if c.user is not None:
             environ['repoze.who.identity'] = c.user.id
+            from ututi.model import User
+            meta.Session.query(User).filter_by(id=c.user.id).with_lockmode('update').one()
             c.user.last_seen = datetime.utcnow()
             meta.Session.commit()
             user_email = c.user.emails[0].email
