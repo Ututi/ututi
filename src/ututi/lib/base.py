@@ -57,7 +57,6 @@ class BaseController(WSGIController):
         c.login_error = None
         c.pylons_config = config
 
-        c.user = current_user()
         c.testing = asbool(config.get('testing', False))
         c.gg_enabled = asbool(config.get('gg_enabled', False))
         c.tpl_lang = config.get('tpl_lang', 'en')
@@ -74,30 +73,37 @@ class BaseController(WSGIController):
         else:
             c.lang = lang[0]
 
-        # Record the time the user was last seen.
-        if c.user is not None:
-            environ['repoze.who.identity'] = c.user.id
-            from ututi.model import User
-            meta.Session.query(User).filter_by(id=c.user.id).with_lockmode('update').one()
-            c.user.last_seen = datetime.utcnow()
-            meta.Session.commit()
-            user_email = c.user.emails[0].email
-        else:
-            #the user is anonymous - check if he is coming from google search
-            referrer = request.headers.get('referer', '')
-            r = re.compile('www\.google\.[a-zA-Z]{2,4}/[url|search]')
-            if r.search(referrer) is not None:
-                response.set_cookie('camefromsearch', 'yes', expires=3600)
-                c.came_from_search = True
+        succeeded = False
+        try:
+            # Record the time the user was last seen.
+            c.user = current_user()
+            if c.user is not None:
+                environ['repoze.who.identity'] = c.user.id
+                from ututi.model import User
+                meta.Session.query(User).filter_by(id=c.user.id).with_lockmode('update').one()
+                c.user.last_seen = datetime.utcnow()
+                meta.Session.commit()
+                user_email = c.user.emails[0].email
             else:
-                c.came_from_search = request.cookies.get('camefromsearch', None) == 'yes'
-            user_email = 'ANONYMOUS'
+                #the user is anonymous - check if he is coming from google search
+                referrer = request.headers.get('referer', '')
+                r = re.compile('www\.google\.[a-zA-Z]{2,4}/[url|search]')
+                if r.search(referrer) is not None:
+                    response.set_cookie('camefromsearch', 'yes', expires=3600)
+                    c.came_from_search = True
+                else:
+                    c.came_from_search = request.cookies.get('camefromsearch', None) == 'yes'
+                user_email = 'ANONYMOUS'
 
-        from ututi.model import Notification
-        #find notification for the user
-        c.user_notification = None
-        if c.user is not None:
-              c.user_notification = Notification.unseen_user_notification(c.user)
+            from ututi.model import Notification
+            #find notification for the user
+            c.user_notification = None
+            if c.user is not None:
+                  c.user_notification = Notification.unseen_user_notification(c.user)
+            succeeded = True
+        finally:
+            if not succeeded:
+                meta.Session.remove()
 
         request_start_walltime = time.time()
         request_start_cputime = time.clock()
