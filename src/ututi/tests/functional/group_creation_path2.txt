@@ -205,6 +205,25 @@ Let's have a look at the settings:
     >>> browser.getControl(name='page_visibility').value
     ['members']
 
+Let's create academic group with forum:
+
+    >>> browser.open('http://localhost/groups/group_type')
+    >>> browser.getControl(name='create-academic-group').click()
+
+    >>> browser.getControl('Group e-mail address').value = 'test2_with_forum'
+    >>> browser.getControl('Group title').value = 'Another test group'
+    >>> browser.getControl('Year').value = ['2009']
+    >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
+    >>> browser.getControl('Forum type').value = ['forum']
+    >>> browser.getControl('Continue').click()
+    >>> browser.getControl("Finish").click()
+
+Let's check its type:
+
+    >>> browser.getLink('Edit').click()
+    >>> browser.getControl('Forum type').value
+    ['forum']
+
 Custom groups
 -------------
 
