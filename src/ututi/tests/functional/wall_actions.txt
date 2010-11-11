@@ -13,14 +13,10 @@ Test user wall actions
    >>> browser2 = Browser.logIn('user2@ututi.lt', 'password')
    >>> browser2.getLink('News wall').click()
    >>> browser2.printQuery('id("wall")//div[@class="description"]//text()')
-   Alternative user
-   has sent you a private message "
-   Sending you a message from my wall!
-   ".
-   Adminas Adminovix
-   joined the group
-   Testing group
-   .
+   <BLANKLINE>
+   Alternative user has sent you a private message " Sending you a message from my wall! ".
+   Adminas Adminovix has created the group Testing group .
+   Adminas Adminovix joined the group Testing group .
 
    >>> browser = Browser.logIn('user3@ututi.lt', 'password')
    >>> browser.getLink("News wall").click()

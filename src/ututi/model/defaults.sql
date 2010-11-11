@@ -868,7 +868,7 @@ CREATE FUNCTION group_creation_event_trigger() RETURNS trigger AS $$
     END
 $$ LANGUAGE plpgsql;;
 
-CREATE TRIGGER group_creation_event_trigger BEFORE INSERT OR UPDATE ON groups
+CREATE TRIGGER group_creation_event_trigger BEFORE INSERT ON groups
     FOR EACH ROW EXECUTE PROCEDURE group_creation_event_trigger();;
 
 CREATE FUNCTION group_mailing_list_message_event_trigger() RETURNS trigger AS $$
