@@ -55,6 +55,10 @@ These actions should have left an event trail on the group home page:
     Matematinė analizė
     .
     Adminas Adminovix
+    has created the group
+    Moderatoriai
+    .
+    Adminas Adminovix
     joined the group
     Moderatoriai
     .
