@@ -17,10 +17,10 @@ Let's send some messages:
     >>> send_test_message('simple_email.txt', '1', to='moderators@groups.ututi.lt')
     >>> send_test_message('simple_email.txt', '2', to='moderators@groups.ututi.lt', reply_to='1')
     >>> send_test_message('simple_email.txt', '3', to='moderators@groups.ututi.lt', reply_to='1')
+
+This message get's nowhere as it is for the wrong group:
+
     >>> send_test_message('simple_email.txt', '17', to='modorators@groups.ututi.lt', reply_to='1')
-    Traceback (most recent call last):
-    ...
-    HTTPError: HTTP Error 404: Not Found
 
     >>> send_test_message('email_with_attachment.txt', '4', to='moderators@groups.ututi.lt', reply_to='2')
 
@@ -291,4 +291,9 @@ This message will be sent to all group members:
      List-Id: moderators@groups.ututi.lt
      This is my message
 
-     >>> mail_queue[:] = []
+Though if the same user would try and post the email through the web,
+it would fail:
+
+     >>> send_test_message('email_from_user2.txt', '33', to='moderators@groups.ututi.lt')
+     >>> len(mail_queue)
+     0

@@ -228,11 +228,10 @@ class GroupMailingListMessage(ContentItem):
                     break
 
         #use the numerical group id
-        if g is not None:
-            group_id = g.id
-        else:
-            from pylons.controllers.util import abort
-            abort(404)
+        if g is None:
+            return
+
+        group_id = g.id
 
         if cls.get(message_id, group_id):
             raise MessageAlreadyExists(message_id, group_id)

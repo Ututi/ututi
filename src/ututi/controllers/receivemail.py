@@ -4,6 +4,7 @@ from pylons import request
 from pylons.controllers.util import abort
 
 from ututi.lib.base import BaseController
+from ututi.model import Group
 from ututi.model import GroupMailingListMessage
 from ututi.model import File
 from ututi.model import meta
@@ -46,16 +47,23 @@ class ReceivemailController(BaseController):
         except MessageAlreadyExists:
             return "Ok!"
 
+        if message is None:
+            return "Silent bounce!"
+
         if message.author is None:
-            abort(404)
+            return "Silent bounce!"
 
         if message.group_id is None:
-            abort(404)
+            return "Silent bounce!"
 
         meta.Session.execute("SET ututi.active_user TO %d" % message.author.id)
         request.environ['repoze.who.identity'] = message.author.id
 
         meta.Session.add(message)
+
+        group = Group.get(message.group_id)
+        if not group.is_member(message.author):
+            return "Silent bounce!"
 
         meta.Session.commit() # to keep message and attachment ids stable
         attachments = []
