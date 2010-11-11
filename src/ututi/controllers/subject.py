@@ -139,8 +139,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
         c.breadcrumbs = [{'link': subject.url(),
                           'title': subject.title}]
         if  not c.subject.n_files(False) and not c.subject.pages:
-            c.structure_menu_current_item = 'home'
-            return render('subject/home_files.mako')
+            redirect(subject.url(action= 'home'))
         return render('subject/home_pages.mako')
 
     def _add_form(self):
