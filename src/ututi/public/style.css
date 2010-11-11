@@ -117,7 +117,7 @@ div.error-message {
 .fullForm span.error-message {
     margin-top: 0;
 }
-.textField, .formField {
+.textField {
     display: inline-block;
     padding-right: 5px;
     position: relative;
