@@ -126,6 +126,16 @@
   </%self:wall_item>
 </%def>
 
+<%def name="group_created(event)">
+  <%self:wall_item event="${event}">
+    <%def name="classes()">group_event group_created</%def>
+    <%def name="when()">${event.when()}</%def>
+    ${_("%(user_link)s has created the group %(subject_link)s.") % \
+       dict(user_link=h.object_link(event.user),
+            subject_link=h.object_link(event.context)) | n}
+  </%self:wall_item>
+</%def>
+
 <%def name="mailinglistpost_created(event)">
   <%self:wall_item event="${event}">
     <%def name="classes()">message_event mailinglistpost_created</%def>

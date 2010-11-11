@@ -851,6 +851,16 @@ $$ LANGUAGE plpgsql;;
 CREATE TRIGGER subject_event_trigger BEFORE INSERT OR UPDATE ON subjects
     FOR EACH ROW EXECUTE PROCEDURE subject_event_trigger();;
 
+CREATE FUNCTION group_creation_event_trigger() RETURNS trigger AS $$
+    BEGIN
+      EXECUTE add_event(NEW.id, cast('group_created' as varchar));
+      RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+CREATE TRIGGER group_creation_event_trigger BEFORE INSERT OR UPDATE ON groups
+    FOR EACH ROW EXECUTE PROCEDURE group_creation_event_trigger();;
+
 CREATE FUNCTION group_mailing_list_message_event_trigger() RETURNS trigger AS $$
     BEGIN
       INSERT INTO events (object_id, author_id, event_type, message_id)

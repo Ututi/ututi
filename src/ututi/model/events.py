@@ -197,6 +197,17 @@ class SubjectCreatedEvent(Event):
     def snippet(self):
         return render_mako_def('/sections/wall_snippets.mako', 'subject_created', event=self)
 
+class GroupCreatedEvent(Event):
+    """Event fired when a new group is created."""
+
+    def render(self):
+        return _("New group %(link_to_group)s was created") % {
+            'link_to_group': link_to(self.context.title, self.context.url())}
+
+    def snippet(self):
+        return render_mako_def('/sections/wall_snippets.mako', 'group_created', event=self)
+
+
 class SubjectModifiedEvent(Event):
     """Event fired when a subject is modified."""
 
@@ -359,6 +370,11 @@ def setup_orm(engine):
                inherits=Event,
                polymorphic_on=events_table.c.event_type,
                polymorphic_identity='subject_created')
+
+    orm.mapper(GroupCreatedEvent, events_table,
+               inherits=Event,
+               polymorphic_on=events_table.c.event_type,
+               polymorphic_identity='group_created')
 
     orm.mapper(SubjectModifiedEvent, events_table,
                inherits=Event,
