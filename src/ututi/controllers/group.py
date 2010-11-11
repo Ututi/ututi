@@ -174,8 +174,8 @@ class CreateGroupFormBase(Schema):
               GroupIdValidator())
     logo_upload = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
     description = validators.UnicodeString()
-    coupon_code = Any(validators.Constant(''),
-                                          GroupCouponValidator(check_collision=False))
+    coupon_code = Any(GroupCouponValidator(check_collision=False),
+                      validators.Empty())
 
 
 class CreatePublicGroupForm(CreateGroupFormBase):

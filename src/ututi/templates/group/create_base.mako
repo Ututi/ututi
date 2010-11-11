@@ -22,8 +22,12 @@
 
   function check_group_coupon() {
     var code = $('input#group-coupon-field').val();
-    $('#group-coupon-check').load("${url(controller='group', action='js_check_coupon')}",
-           {'code': code});
+    if (code != '') {
+      $('#group-coupon-check').load("${url(controller='group', action='js_check_coupon')}",
+             {'code': code});
+    } else {
+      $('#group-coupon-check').html('');
+    }
   }
 
   function afterDelayedKeyup(selector, action, delay){
