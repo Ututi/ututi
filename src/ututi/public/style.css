@@ -1284,7 +1284,8 @@ p.qu{
     right: -1px;
     width: 5px;
 }
-.portletSmall, .portlet-verysmall  { background-color: #f6f6f6; }
+#mainContent .portletSmall,
+#mainContent .portlet-verysmall  { background-color: #f6f6f6; }
 
 
 
