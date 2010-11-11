@@ -608,6 +608,19 @@ def setup_orm(engine):
 
 
 
+    global science_types_table
+    science_types_table = Table("science_types", meta.metadata,
+                                Column('name', Unicode(assert_unicode=True)),
+                                useexisting=True,
+                                autoload=True,
+                                autoload_with=engine)
+
+    science_type_mapper = orm.mapper(ScienceType,
+                                     science_types_table,
+                                     properties={
+                                         'books': relation(Book, backref="science_type"),
+                                          })
+
     from ututi.model import mailing
     mailing.setup_orm(engine)
 
@@ -2674,6 +2687,7 @@ class Notification(object):
 
 class Book(object):
     """Book that can be shared by user"""
+    departments = ["university", "school", "other"]
 
     def __init__(self, owner_id, title, price):
         self.price = price
@@ -2710,6 +2724,7 @@ class City(object):
         except NoResultFound:
             return None
 
+
 class SchoolGrade(object):
     """Class for representing school grades"""
     def __init__(self, name):
@@ -2722,3 +2737,14 @@ class SchoolGrade(object):
             return grade.one()
         except NoResultFound:
             return None
+
+
+class ScienceType (object):
+    """Representation of book science type"""
+
+    def __init__(self, name, book_department_id):
+        self.name = name
+        self.book_department_id = book_department_id
+
+    def book_department(self):
+        return Book.departments[self.book_department_id]

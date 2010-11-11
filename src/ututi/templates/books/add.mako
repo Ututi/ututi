@@ -36,11 +36,7 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
   <div class="basic-book-info">
     ${h.input_line('title', _('Title'))}
     ${h.input_line('author', _('Author'))}
-    <select name="book_department">
-      <option value="university">${_('University')}</option>
-      <option value="school">${_('School')}</option>
-      <option value="other">${_('Other')}</option>
-    </select>
+    ${h.book_departments_select}
     ${h.input_area('description', _('Brief description of the book'))}
   </div>
   <div id="university_fields">

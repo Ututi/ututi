@@ -1270,8 +1270,15 @@ create table school_grades (
 create table cities (
        id bigserial not null,
        name text not null default '',
-       primary key (id));;
+       primary key (id)
+);;
 
+CREATE TABLE science_types (
+       id bigserial NOT NULL,
+       name varchar(100) NOT NULL,
+       book_department_id int8 NOT NULL,
+       PRIMARY KEY (id)
+);;
 
 CREATE TABLE books (
        id bigserial NOT NULL,
@@ -1283,5 +1290,6 @@ CREATE TABLE books (
        owner_id int8 NOT NULL REFERENCES users(id) on delete cascade,
        show_phone boolean DEFAULT TRUE,
        city_id int8 NOT NULL REFERENCES cities(id) on delete restrict,
+       science_type_id int8 NOT NULL REFERENCES science_types(id) on delete restrict,
        PRIMARY KEY (id)
 );;

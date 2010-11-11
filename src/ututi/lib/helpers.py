@@ -22,6 +22,8 @@ from webhelpers.html.tags import convert_boolean_attrs
 from ututi.lib.base import render_lang, u_cache
 from ututi.lib.latex import replace_latex_to_html as latex_to_html
 
+from pylons.i18n import _
+
 import pytz
 
 
@@ -223,7 +225,7 @@ def wraped_text(text, max_length = 10, break_symbol = "<br />"):
             splited_text.append(part)
             splited_text.append(break_symbol)
     splited_text.pop() #removing last break
-    return ''.join(splited_text)
+    return literal(''.join(splited_text))
 
 def email_with_replies(text, omit=False):
     lines = cgi.escape(text).split("\n")
@@ -508,3 +510,15 @@ def object_link(object):
         return link_to(object.subject, object.url())
     elif isinstance(object, ForumPost):
         return link_to(object.title, object.url(new=True))
+
+def book_departments_select(label, book_departments):
+
+    html = ""
+    html += "<label>"
+    html += label + ": "
+    html += '<select name="book_department_id">'
+    for book_department in book_departments:
+        html += "<option value='{0}'>{1}</option>".format(book_departments.index(book_department), _(book_department.capitalize()))
+    html += '</select>'
+    html += '</label>'
+    return literal(html)

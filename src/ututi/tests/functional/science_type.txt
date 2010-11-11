@@ -1,0 +1,49 @@
+Tests for book science types administration
+===========================================
+
+The admin should have a new link on his dashboard, that lets him view all active and inactive group coupons.
+
+    >>> browser = Browser.logIn()
+    >>> browser.open('http://localhost/admin')
+    >>> browser.getLink('Book science types').click()
+    >>> browser.url
+    'http://localhost/admin/science_types'
+
+Admin can create science type.
+
+    >>> form = browser.getForm('science_type_form')
+    >>> form.getControl('Name').value = 'Humanitariai mokslai'
+    >>> form.getControl('Book department').value = ['1']
+    >>> form.getControl('Save').click()
+
+    >>> browser.url
+    'http://localhost/admin/science_types'
+
+    >>> browser.printQuery('id("science_types_list")//td/text()')
+    Humanitariai mokslai
+    School
+
+Admin can edit science type.
+
+    >>> browser.getLink('Edit').click()
+    >>> form = browser.getForm('science_type_form')
+    >>> form.getControl('Name').value = 'neHumanitariai mokslai'
+    >>> form.getControl('Book department').value = ['0']
+    >>> form.getControl('Edit').click()
+
+    >>> browser.url
+    'http://localhost/admin/science_types'
+
+    >>> browser.printQuery('id("science_types_list")//td/text()')
+    neHumanitariai mokslai
+    University
+
+Admin can delete city.
+
+    >>> browser.url
+    'http://localhost/admin/science_types'
+    >>> browser.getLink('Edit').click()
+    >>> browser.getLink('Delete').click()
+    >>> browser.url
+    'http://localhost/admin/science_types'
+    >>> browser.printQuery('id("science_types_list")//td/text()')

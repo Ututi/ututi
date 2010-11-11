@@ -38,7 +38,7 @@ from ututi.model import UserSubjectMonitoring
 from ututi.model import Page, SMS, GroupCoupon
 from ututi.model import (meta, User, Email, LocationTag, Group, Subject,
                          GroupMember, GroupMembershipType, File, PrivateMessage)
-from ututi.model import Notification, City, SchoolGrade
+from ututi.model import Notification, City, ScienceType, Book
 from ututi.lib import helpers as h
 
 
@@ -89,9 +89,16 @@ class CityForm(Schema):
     allow_extra_fields = True
     name = String(min=1)
 
+
 class SchoolGradeForm(Schema):
     allow_extra_fields = True
     name = String(min=1)
+
+
+class ScienceTypeForm(Schema):
+    allow_extra_fields = True
+    name = String(min=3)
+    book_department_id = Int()
 
 
 class AdminController(BaseController):
@@ -504,7 +511,7 @@ class AdminController(BaseController):
         return htmlfill.render(self._edit_city_form(), defaults)
 
     @ActionProtector("root")
-    @validate(schema=CityForm, form='cities')
+    @validate(schema=CityForm, form='_edit_city_form')
     def update_city(self, id):
         city = meta.Session.query(City).filter(City.id == id).one()
         if hasattr(self, 'form_result'):
@@ -562,3 +569,49 @@ class AdminController(BaseController):
             meta.Session.add(school_grade)
             meta.Session.commit()
         redirect(url(controller="admin", action="school_grades"))
+
+    def science_types(self):
+        science_types = meta.Session.query(ScienceType).order_by(ScienceType.book_department_id.asc(), ScienceType.name.asc())
+        c.book_departments = Book.departments
+        c.science_types = self._make_pages(science_types)
+        return render('admin/science_types.mako')
+
+    @ActionProtector("root")
+    @validate(schema=ScienceTypeForm, form='science_types')
+    def create_science_type(self):
+        if hasattr(self, 'form_result'):
+            science_type = ScienceType(name=self.form_result['name'], book_department_id=self.form_result['book_department_id'])
+            meta.Session.add(science_type)
+            meta.Session.commit()
+        redirect(url(controller="admin", action="science_types"))
+
+    @ActionProtector("root")
+    def _edit_science_type_form(self):
+        c.book_departments = Book.departments
+        return render('admin/science_type_edit.mako')
+
+    @ActionProtector("root")
+    def edit_science_type(self, id):
+        c.science_type = meta.Session.query(ScienceType).filter(ScienceType.id == id).one()
+        defaults = {
+            'id': c.science_type.id,
+            'name': c.science_type.name,
+            'book_department_id': c.science_type.book_department_id}
+        return htmlfill.render(self._edit_science_type_form(), defaults)
+
+    @ActionProtector("root")
+    @validate(schema=ScienceTypeForm, form='_edit_science_type_form')
+    def update_science_type(self, id):
+        science_type = meta.Session.query(ScienceType).filter(ScienceType.id == id).one()
+        if hasattr(self, 'form_result'):
+            science_type.name = self.form_result['name']
+            science_type.book_department_id = self.form_result['book_department_id']
+            meta.Session.commit()
+        redirect(url(controller="admin", action="science_types"))
+
+    @ActionProtector("root")
+    def delete_science_type(self, id):
+        science_type = meta.Session.query(ScienceType).filter(ScienceType.id == id).one()
+        meta.Session.delete(science_type)
+        meta.Session.commit()
+        redirect(url(controller="admin", action="science_types"))
