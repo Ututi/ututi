@@ -38,7 +38,7 @@ from ututi.model import UserSubjectMonitoring
 from ututi.model import Page, SMS, GroupCoupon
 from ututi.model import (meta, User, Email, LocationTag, Group, Subject,
                          GroupMember, GroupMembershipType, File, PrivateMessage)
-from ututi.model import Notification, City
+from ututi.model import Notification, City, SchoolGrade
 from ututi.lib import helpers as h
 
 
@@ -88,6 +88,11 @@ class NotificationForm(Schema):
 class CityForm(Schema):
     allow_extra_fields = True
     name = String(min=1)
+
+class SchoolGradeForm(Schema):
+    allow_extra_fields = True
+    name = String(min=1)
+
 
 class AdminController(BaseController):
     """Controler for system administration."""
@@ -513,3 +518,47 @@ class AdminController(BaseController):
         meta.Session.delete(city)
         meta.Session.commit()
         redirect(url(controller="admin", action="cities"))
+
+    @ActionProtector("root")
+    def school_grades(self):
+        school_grade = meta.Session.query(SchoolGrade).order_by(SchoolGrade.id.asc())
+        c.school_grades = self._make_pages(school_grade)
+        return render('admin/school_grades.mako')
+
+    @ActionProtector("root")
+    def _edit_school_grade_form(self):
+        return render('admin/school_grade_edit.mako')
+
+
+    @ActionProtector("root")
+    def edit_school_grade(self, id):
+        c.school_grade = meta.Session.query(SchoolGrade).filter(SchoolGrade.id == id).one()
+        defaults = {'id': c.school_grade.id,
+                    'name': c.school_grade.name}
+        return htmlfill.render(self._edit_school_grade_form(), defaults)
+
+    @ActionProtector("root")
+    @validate(schema=SchoolGradeForm, form='school_grade')
+    def update_school_grade(self, id):
+        school_grade = meta.Session.query(SchoolGrade).filter(SchoolGrade.id == id).one()
+        if hasattr(self, 'form_result'):
+            school_grade.name = self.form_result['name']
+            meta.Session.commit()
+        redirect(url(controller="admin", action="school_grades"))
+
+    @ActionProtector("root")
+    def delete_school_grade(self, id):
+        school_grade = meta.Session.query(SchoolGrade).filter(SchoolGrade.id == id).one()
+        meta.Session.delete(school_grade)
+        meta.Session.commit()
+        redirect(url(controller="admin", action="school_grades"))
+
+
+    @ActionProtector("root")
+    @validate(schema=SchoolGradeForm, form='school_grade')
+    def create_school_grade(self):
+        if hasattr(self, 'form_result'):
+            school_grade = SchoolGrade(name=self.form_result['name'])
+            meta.Session.add(school_grade)
+            meta.Session.commit()
+        redirect(url(controller="admin", action="school_grades"))

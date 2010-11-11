@@ -1261,6 +1261,12 @@ CREATE TABLE notifications_viewed (
 
 /* Books */
 
+create table school_grades (
+       id bigserial not null,
+       name varchar(20) not null default '',
+       primary key (id));;
+
+
 create table cities (
        id bigserial not null,
        name text not null default '',

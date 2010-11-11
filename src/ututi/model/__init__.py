@@ -596,6 +596,17 @@ def setup_orm(engine):
                              properties={
                                 'books': relation(Book, backref="city"),
                                  })
+    global school_grades_table
+    school_grades_table = Table("school_grades", meta.metadata,
+                          Column('name', Unicode(assert_unicode=True)),
+                          useexisting=True,
+                          autoload=True,
+                          autoload_with=engine)
+
+    school_grade_mapper = orm.mapper(SchoolGrade,
+                             school_grades_table)
+
+
 
     from ututi.model import mailing
     mailing.setup_orm(engine)
@@ -2696,5 +2707,18 @@ class City(object):
         city = city.filter_by(id=id)
         try:
             return city.one()
+        except NoResultFound:
+            return None
+
+class SchoolGrade(object):
+    """Class for representing school grades"""
+    def __init__(self, name):
+        self.name = name
+
+    def get(cls, id):
+        grade = meta.Session.query(cls)
+        grade = grade.filter_by(id=id)
+        try:
+            return grade.one()
         except NoResultFound:
             return None
