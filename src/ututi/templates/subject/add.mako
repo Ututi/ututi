@@ -30,7 +30,7 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
   <fieldset>
   ${h.input_line('title', _('Title'))}
   ${h.input_line('lecturer', _('Lecturer'))}
-  ${location_widget(2)}
+  ${location_widget(2, add_new=(c.tpl_lang=='pl'))}
   <br class="clear-left"/>
   <div class="form-field">
     <label for="tags">${_('Tags')}</label>
