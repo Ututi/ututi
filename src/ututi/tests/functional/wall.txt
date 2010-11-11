@@ -10,14 +10,9 @@ No events yet:
     'http://localhost/home/feed'
 
     >>> browser.printQuery('id("wall")//div[@class="description"]//text()')
-    Adminas Adminovix
-    joined the group
-    Moderatoriai
-    .
-    Adminas Adminovix
-    has created the subject
-    Matematinė analizė
-    .
+    Adminas Adminovix has created the group Moderatoriai .
+    Adminas Adminovix joined the group Moderatoriai .
+    Adminas Adminovix has created the subject Matematinė analizė .
 
 But let's send some emails:
 
@@ -25,6 +20,7 @@ But let's send some emails:
     >>> send_test_message('simple_email.txt', '1', to='moderators@groups.ututi.lt')
     >>> send_test_message('simple_email.txt', '2', to='moderators@groups.ututi.lt', reply_to='1')
     >>> send_test_message('simple_email.txt', '3', to='moderators@groups.ututi.lt', reply_to='1')
+
 
     >>> browser.getLink("News wall").click()
     >>> browser.printQuery('id("wall")//div[@class="description"]//text()')
@@ -44,6 +40,10 @@ But let's send some emails:
     has posted a new message
     Hello
     to the group
+    Moderatoriai
+    .
+    Adminas Adminovix
+    has created the group
     Moderatoriai
     .
     Adminas Adminovix
