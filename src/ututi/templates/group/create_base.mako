@@ -364,6 +364,16 @@
     <br />
     ${h.radio("page_visibility", "members", label=_('Members only'))}
   </label>
+
+  <label for="mailing_list_moderation" class="radio">
+      <span class="labelText">
+        ${_('Who can send messages to the mailing list')}
+        ${h.image('/images/details/icon_question.png', alt=_('If you select moderated, you can pick the people who you want to allow to post to the mailing list.'), class_='tooltip')|n}
+      </span>
+    ${h.radio("mailinglist_moderated", "members", label=_('Members only'))}
+    <br />
+    ${h.radio("mailinglist_moderated", "moderated", label=_('Moderated'))}
+  </label>
 </%def>
 
 ${next.body()}

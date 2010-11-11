@@ -226,6 +226,7 @@ create table groups (
        private_files_lock_date timestamp default null,
        ending_period_notification_sent bool default false,
        out_of_space_notification_sent bool default false,
+       mailinglist_moderated bool default false,
        primary key (id));;
 
 /* track coupon usage */
