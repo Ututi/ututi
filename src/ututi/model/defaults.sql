@@ -1289,7 +1289,7 @@ create table school_grades (
 
 create table cities (
        id bigserial not null,
-       name text not null default '',
+       name varchar(100) not null default '',
        primary key (id)
 );;
 
