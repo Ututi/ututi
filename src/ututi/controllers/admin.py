@@ -38,7 +38,8 @@ from ututi.model import SimpleTag
 from ututi.model import UserSubjectMonitoring
 from ututi.model import Page, SMS, GroupCoupon
 from ututi.model import (meta, User, Email, LocationTag, Group, Subject,
-                         GroupMember, GroupMembershipType, File, PrivateMessage)
+                         GroupMember, GroupMembershipType, File, PrivateMessage,
+                         SchoolGrade)
 from ututi.model import Notification, City, ScienceType, Book
 from ututi.lib import helpers as h
 
