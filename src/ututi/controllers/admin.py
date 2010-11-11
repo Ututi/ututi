@@ -33,6 +33,7 @@ from ututi.lib.validators import PhoneNumberValidator, GroupCouponValidator, val
 from ututi.model.events import Event
 from ututi.model import Region
 from ututi.model import FileDownload
+from ututi.model import SchoolGrade
 from ututi.model import SimpleTag
 from ututi.model import UserSubjectMonitoring
 from ututi.model import Page, SMS, GroupCoupon
