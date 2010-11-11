@@ -2,6 +2,7 @@ from datetime import date
 from zope.testing import doctest
 
 from ututi.model import LocationTag, GroupMembershipType, GroupMember, Group, File, User, meta
+from ututi.model.events import Event
 
 from ututi.tests import UtutiLayer
 import ututi
@@ -16,6 +17,21 @@ def printTree(group):
             print folder.title + ":"
             for file in folder:
                 print '   ' + file.title
+
+
+def test_group_create():
+    """Test group creation event.
+
+    Add event, when creating group:
+
+        >>> g = Group('testgroup', u'Testing group', LocationTag.get(u'vu'), date(date.today().year, 1, 1), u'Testing group')
+        >>> meta.Session.add(g)
+        >>> meta.Session.commit()
+        >>> res = meta.Session.execute("SET ututi.active_user TO 1")
+        >>> evt = meta.Session.query(Event).filter(Event.context == g).all()
+        >>> [e.render() for e in evt]
+        [u'New group ... was created']
+    """
 
 
 def test_group_files():
