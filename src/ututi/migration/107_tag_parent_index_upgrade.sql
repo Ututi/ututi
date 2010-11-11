@@ -1,21 +1,14 @@
+drop index parent_title_unique_idx;
 alter table tags add column parent_id_indexed int8 not null default 0;;
- 
-CREATE FUNCTION tag_parent_not_null() RETURNS trigger AS $tag_parent$
+
+CREATE FUNCTION tag_title_lowercase() RETURNS trigger AS $tag_parent$
     BEGIN
         NEW.title_short = LOWER(NEW.title_short);
-        IF NEW.parent_id IS NULL THEN
-           NEW.parent_id_indexed := 0;
-        ELSE
-           NEW.parent_id_indexed := NEW.parent_id;
-        END IF;
-
         RETURN NEW;
     END
 $tag_parent$ LANGUAGE plpgsql;;
 
-CREATE TRIGGER tag_parent_not_null BEFORE INSERT OR UPDATE ON tags
-    FOR EACH ROW EXECUTE PROCEDURE tag_parent_not_null();;
+CREATE TRIGGER tag_title_lowercase BEFORE INSERT OR UPDATE ON tags
+    FOR EACH ROW EXECUTE PROCEDURE tag_title_lowercase();;
 
-drop index parent_title_unique_idx on tags;
-
-create unique index parent_title_unique_idx on tags(parent_id_indexed, title_short);;
+create unique index parent_title_unique_idx on tags(coalesce(parent_id, 0), title_short);;

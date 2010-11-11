@@ -62,10 +62,23 @@ def test_LocationTag_get():
 
         >>> tag = LocationTag.get(u'ktu')
         >>> tag.title_short, tag.title
-        (u'KTU', u'Kauno Technologijos Universitetas')
+        (u'ktu', u'Kauno Technologijos Universitetas')
 
     """
 
+def test_unique_locationtag():
+    """
+    It should be impossible to have conflicting location tags.
+    >>> meta.Session.add(LocationTag(u'Kauno Technologijos Universitetas', u'KTU', u''))
+    >>> meta.Session.commit()
+    >>> meta.Session.add(LocationTag(u'Kauno Technologijos Universitetas', u'KTU', u''))
+    >>> meta.Session.commit()
+    Traceback (most recent call last):
+    ...
+    IntegrityError: (IntegrityError) duplicate key value violates unique constraint "parent_title_unique_idx"
+    ...
+    >>> meta.Session.rollback()
+    """
 
 def test_suite():
     suite = doctest.DocTestSuite(
