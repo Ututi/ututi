@@ -2,6 +2,7 @@ alter table tags add column parent_id_indexed int8 not null default 0;;
  
 CREATE FUNCTION tag_parent_not_null() RETURNS trigger AS $tag_parent$
     BEGIN
+        NEW.title_short = LOWER(NEW.title_short);
         IF NEW.parent_id IS NULL THEN
            NEW.parent_id_indexed := 0;
         ELSE
