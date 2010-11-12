@@ -78,8 +78,14 @@
 
 <%self:rounded_block id="create_wiki_block" class_="dashboard_action_block" style="display: none;">
   <form method="POST" action="${url(controller='profile', action='create_wiki')}" id="wiki_form">
-    <input type="hidden" value="" name="wiki_rcpt_id" id="wiki_rcpt_id" />
-    ${h.input_line('rcpt_wiki', _('Subject:'), id='rcpt_wiki')}
+    <div class="formField">
+      <label for="wiki_rcpt_id">
+        <span class="labelText">${_('Subject:')}</span>
+        <span class="textField">
+          ${h.select('wiki_rcpt_id', None, c.wiki_recipients)}
+        </span>
+      </label>
+    </div>
     ${h.input_line('page_title', _('Title'), id='page_title')}
     <div style="clear: right;">
       ${h.input_wysiwyg('page_content', '')}
@@ -187,18 +193,6 @@ $(function(){
         file_upload.setData({folder: '', target_id: $(this).val()});
     });
     /* wiki mode */
-    $( "#rcpt_wiki" ).autocomplete({
-	source: function(request, response) {
-            $.getJSON("${url(controller='profile', action='wiki_rcpt_js')}",
-                      request, function( data, status, xhr ) {
-			  response(data.data);
-		      });
-        },
-	minLength: 2,
-        select: function(event, ui) {
-            $(this).closest('form').find('#wiki_rcpt_id').val(ui.item.id);
-        }
-    });
     $('#wiki_create_send').click(function(){
         form = $(this).closest('form');
 

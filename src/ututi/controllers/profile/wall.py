@@ -140,39 +140,15 @@ class MessageForm(Schema):
     message = validators.String(not_empty=True)
     chained_validators = [MessageRcpt()]
 
-
-class WikiRcpt(validators.FormValidator):
-    """
-    Validate the universal wiki page create form.
-    Check if the recipient's id has been specified in the js field, if not,
-    check if enough text has been input to identify the recipient.
-    """
+class SubjectIdValidator(validators.OneOf):
+    """Validate subject id by list available in runtime."""
     messages = {
-        'invalid': _(u"The recipient is not specified."),
-    }
-
-    def validate_python(self, form_dict, state):
-        recipient = form_dict['rcpt_wiki']
-        recipient_id = form_dict['wiki_rcpt_id']
-
-        rcpt_obj = None
-        if recipient_id:
-            try:
-                id = int(recipient_id)
-                rcpt_obj = Subject.get_by_id(id)
-            except ValueError:
-                rcpt_obj = None
-        else:
-            subjects = _wiki_rcpt(recipient, c.user)
-            if len(subjects) == 1:
-                rcpt_obj = subjects[0]
-
-        if rcpt_obj is None:
-            raise Invalid(self.message('invalid', state),
-                          form_dict, state,
-                          error_dict={'rcpt_wiki': Invalid(self.message('invalid', state), form_dict, state)})
-        else:
-            form_dict['target'] = rcpt_obj
+        'invalid': _("Invalid subject"),
+        'notIn': _("Invalid subject"),
+        }
+    def validate_python(self, value, state):
+        self.list = [str(s.id) for s in _wiki_rcpt(c.user)]
+        super(SubjectIdValidator, self).validate_python(value, state)
 
 
 class WikiForm(Schema):
@@ -180,7 +156,7 @@ class WikiForm(Schema):
     allow_extra_fields = True
     page_title = validators.UnicodeString(strip=True, not_empty=True)
     page_content = validators.UnicodeString(strip=True, not_empty=True)
-    chained_validators = [WikiRcpt()]
+    wiki_rcpt_id = SubjectIdValidator()
 
 
 class WallMixin(MailinglistBaseController, FileViewMixin):
@@ -264,8 +240,9 @@ class WallMixin(MailinglistBaseController, FileViewMixin):
     @js_validate(schema=WikiForm())
     @jsonify
     def create_wiki_js(self):
+        target = Subject.get_by_id(self.form_result['wiki_rcpt_id'])
         self._create_wiki_page(
-            self.form_result['target'],
+            target,
             self.form_result['page_title'],
             self.form_result['page_content'])
         return dict(success=True)
@@ -273,8 +250,9 @@ class WallMixin(MailinglistBaseController, FileViewMixin):
     @ActionProtector("user")
     @validate(schema=WikiForm(), form='feed')
     def create_wiki(self):
+        target = Subject.get_by_id(self.form_result['wiki_rcpt_id'])
         self._create_wiki_page(
-            self.form_result['target'],
+            target,
             self.form_result['page_title'],
             self.form_result['page_content'])
         h.flash(_('Wiki page created.'))
@@ -330,7 +308,7 @@ class WallMixin(MailinglistBaseController, FileViewMixin):
             c.subjects_list_link =  c.user.location.url(action='subjects')
 
         c.file_recipients = self._file_rcpt()
-        c.wiki_recipients = []
+        c.wiki_recipients = self._wiki_rcpt()
 
         result = render('/profile/feed.mako')
 
@@ -374,17 +352,6 @@ class WallMixin(MailinglistBaseController, FileViewMixin):
             items.append(('s_%d' % subject.id, _('Subject: %s') % subject.title))
         return items
 
-    @ActionProtector("user")
-    @jsonify
-    def wiki_rcpt_js(self):
-        term = request.params.get('term', None)
-        if term is None or len(term) < 1:
-            return {'data' : []}
-
-        subjects = _wiki_rcpt(term, c.user)
-
-        subjects = [
-            dict(label=subject.title,
-                 id=subject.id)
-            for subject in subjects]
-        return dict(data=subjects)
+    def _wiki_rcpt(self):
+        subjects = _wiki_rcpt(c.user)
+        return[(subject.id, subject.title) for subject in subjects]

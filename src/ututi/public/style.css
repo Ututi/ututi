@@ -1292,10 +1292,10 @@ p.qu{
     right: -1px;
     width: 5px;
 }
-#mainContent .portletSmall,
-#mainContent .portlet-verysmall  { background-color: #f6f6f6; }
 
-
+#dashboard_action_blocks .portletSmall,
+#dashboard_action_blocks .portlet-verysmall,
+#dashboard_actions  { background-color: #f6f6f6; }
 
 .portletSmall .ctl { background-position: left top;     }
 .portletSmall .ctr { background-position: right top; }
@@ -4999,7 +4999,7 @@ ul.universityMembersInfo li{
 
 .dashboard_action_block #rcpt,
 .dashboard_action_block #file_rcpt_id,
-.dashboard_action_block #rcpt_wiki,
+.dashboard_action_block #wiki_rcpt_id,
 .dashboard_action_block #page_title,
 .dashboard_action_block #message_subject,
 .dashboard_action_block #category_id {
