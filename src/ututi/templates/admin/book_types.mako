@@ -4,8 +4,8 @@
   <title>UTUTI – student information online</title>
 </%def>
 
-%if c.cities:
-  <table id="cities_list" style="width: 100%;">
+%if c.book_types:
+  <table id="book_types_list" style="width: 100%;">
     <tr>
       <th>${_('Book_Type')}</th>
     </tr>

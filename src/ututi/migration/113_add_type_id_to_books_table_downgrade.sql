@@ -1,0 +1,2 @@
+-- alter table users drop column net_worth;
+-- drop table admins;
