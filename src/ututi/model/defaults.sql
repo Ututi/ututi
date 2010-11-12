@@ -1300,6 +1300,12 @@ CREATE TABLE science_types (
        PRIMARY KEY (id)
 );;
 
+create table book_types (
+       id bigserial not null,
+       name varchar(100) not null,
+       primary key (id)
+);;
+
 CREATE TABLE books (
        id bigserial NOT NULL,
        title varchar(100) NOT NULL,
@@ -1310,6 +1316,7 @@ CREATE TABLE books (
        owner_id int8 NOT NULL REFERENCES users(id) on delete cascade,
        show_phone boolean DEFAULT TRUE,
        city_id int8 NOT NULL REFERENCES cities(id) on delete restrict,
+       type_id int8 NOT NULL REFERENCES book_types(id) on delete restrict,
        science_type_id int8 NOT NULL REFERENCES science_types(id) on delete restrict,
        PRIMARY KEY (id)
 );;

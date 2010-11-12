@@ -33,13 +33,13 @@ from ututi.lib.validators import PhoneNumberValidator, GroupCouponValidator, val
 from ututi.model.events import Event
 from ututi.model import Region
 from ututi.model import FileDownload
-from ututi.model import SchoolGrade
 from ututi.model import SimpleTag
 from ututi.model import UserSubjectMonitoring
 from ututi.model import Page, SMS, GroupCoupon
 from ututi.model import (meta, User, Email, LocationTag, Group, Subject,
                          GroupMember, GroupMembershipType, File, PrivateMessage)
-from ututi.model import Notification, City, ScienceType, Book
+from ututi.model import Notification, City, ScienceType, SchoolGrade, Book, BookType
+
 from ututi.lib import helpers as h
 
 
@@ -100,6 +100,11 @@ class ScienceTypeForm(Schema):
     allow_extra_fields = True
     name = String(min=3)
     book_department_id = Int()
+
+
+class BookTypeForm(Schema):
+    allow_extra_fields = True
+    name = String(min=1)
 
 
 class AdminController(BaseController):
@@ -616,3 +621,46 @@ class AdminController(BaseController):
         meta.Session.delete(science_type)
         meta.Session.commit()
         redirect(url(controller="admin", action="science_types"))
+
+    @ActionProtector("root")
+    def book_types(self):
+        book_types = meta.Session.query(BookType).order_by(BookType.name.asc())
+        c.book_types = self._make_pages(book_types)
+        return render('admin/book_types.mako')
+
+    @ActionProtector("root")
+    @validate(schema=BookTypeForm, form='book_types')
+    def create_book_type(self):
+        if hasattr(self, 'form_result'):
+            book_type = BookType(name=self.form_result['name'])
+            meta.Session.add(book_type)
+            meta.Session.commit()
+        redirect(url(controller="admin", action="book_types"))
+
+    @ActionProtector("root")
+    def _edit_book_type_form(self):
+        return render('admin/book_type_edit.mako')
+
+    @ActionProtector("root")
+    def edit_book_type(self, id):
+        c.book_type = meta.Session.query(BookType).filter(BookType.id == id).one()
+        defaults = {
+            'id': c.book_type.id,
+            'name': c.book_type.name}
+        return htmlfill.render(self._edit_book_type_form(), defaults)
+
+    @ActionProtector("root")
+    @validate(schema=BookTypeForm, form='_edit_book_type_form')
+    def update_book_type(self, id):
+        book_type = meta.Session.query(BookType).filter(BookType.id == id).one()
+        if hasattr(self, 'form_result'):
+            book_type.name = self.form_result['name']
+            meta.Session.commit()
+        redirect(url(controller="admin", action="book_types"))
+
+    @ActionProtector("root")
+    def delete_book_type(self, id):
+        book_type = meta.Session.query(BookType).filter(BookType.id == id).one()
+        meta.Session.delete(book_type)
+        meta.Session.commit()
+        redirect(url(controller="admin", action="book_types"))

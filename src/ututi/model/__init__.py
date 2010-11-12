@@ -621,6 +621,21 @@ def setup_orm(engine):
                                          'books': relation(Book, backref="science_type"),
                                           })
 
+
+    global book_types_table
+    book_types_table = Table("book_types", meta.metadata,
+                         Column('name', Unicode(assert_unicode=True)),
+                         useexisting=True,
+                         autoload=True,
+                         autoload_with=engine)
+
+    book_type_mapper = orm.mapper(BookType,
+                             book_types_table,
+                             properties={
+                                'books': relation(Book, backref="type"),
+                                 })
+
+
     from ututi.model import mailing
     mailing.setup_orm(engine)
 
@@ -2748,3 +2763,17 @@ class ScienceType (object):
 
     def book_department(self):
         return Book.departments[self.book_department_id]
+
+
+class BookType(object):
+    """Class for representing types of book, like test, literature, etc."""
+    def __init__(self, name):
+        self.name = name
+
+    def get(cls, id):
+        book_type = meta.Session.query(cls)
+        book_type = book_type.filter_by(id=id)
+        try:
+            return book_type.one()
+        except NoResultFound:
+            return None
