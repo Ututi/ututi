@@ -15,6 +15,7 @@ And upload all the files one by one:
     >>> import_csv(browser, 'import_users', 'export_users.csv')
     >>> import_csv(browser, 'import_structure', 'export_structure.csv')
     >>> import_csv(browser, 'import_groups', 'export_groups.csv')
+    >>> import_csv(browser, 'import_group_members', 'export_group_members.csv')
 
     >>> from urllib2 import HTTPError
     >>> from pkg_resources import resource_string
@@ -35,18 +36,6 @@ And upload all the files one by one:
     ...         except HTTPError, e:
     ...             message = email.message_from_string(email_text, UtutiEmail)
     ...             print "Email %d from %s was ignored" % (n, message.getFrom())
-    Email 0 from Jarekas <jaro@akl.lt> was ignored
-    Email 2 from Jarekas <jaroslav@akl.lt> was ignored
-    Email 7 from Jaroslav Šatkevič <jaroslav@akl.lt> was ignored
-    Email 12 from Jaroslav Šatkevič <jaroslav@akl.lt> was ignored
-    Email 13 from Jaroslav Šatkevič <jaroslav@akl.lt> was ignored
-    Email 15 from Jaroslav Šatkevič <jaroslav@akl.lt> was ignored
-    Email 142 from Jaroslav Šatkevič <jaroslav@akl.lt> was ignored
-    Email 145 from Jaroslav Šatkevič <jaroslav@akl.lt> was ignored
-    Email 146 from Jaroslav Šatkevič <jaroslav@akl.lt> was ignored
-    Email 148 from Domas Monkus <domas@ututi.com> was ignored
-    Email 190 from Jaroslav Šatkevič <jaroslav@akl.lt> was ignored
-    Email 193 from Virginija.Cibarauske@flf.stud.vu.lt was ignored
 
     >>> browser.open('http://localhost/group/archpio/forum')
     >>> browser.getLink('2').click()
@@ -54,5 +43,5 @@ And upload all the files one by one:
 
     >>> from ututi.lib.mailer import mail_queue
     >>> len(mail_queue)
-    184
+    176
     >>> mail_queue[:] = []

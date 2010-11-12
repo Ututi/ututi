@@ -247,6 +247,22 @@ class AdminController(BaseController):
         redirect(url(controller='admin', action='users'))
 
     @ActionProtector("root")
+    def import_group_members(self):
+        for line in self._getReader():
+            group_id = line[0]
+            user_id = line[1].lower()
+            user_id = email_map.get(user_id, user_id)
+            is_admin = line[2] == u'True'
+
+            user = User.get(user_id)
+            group = Group.get(group_id)
+            if group is not None and user is not None:
+                group.add_member(user, is_admin)
+
+            meta.Session.commit()
+        redirect(url(controller='admin', action='import_csv'))
+
+    @ActionProtector("root")
     def import_structure(self):
         for line in self._getReader():
             title_short = line[0]
