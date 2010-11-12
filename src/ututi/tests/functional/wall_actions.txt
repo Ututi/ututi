@@ -53,7 +53,6 @@ Test user wall actions
    >>> browser = Browser.logIn('user3@ututi.lt', 'password')
    >>> browser.getLink("News wall").click()
    >>> form = browser.getForm(id='wiki_form')
-   >>> form.getControl('Subject').value = 'Matematinė analizė'
    >>> form.getControl(name='page_title').value = 'A wiki page'
    >>> form.getControl(name='page_content').value = 'This wiki page was created from my wall!'
    >>> form.getControl('Save').click()
