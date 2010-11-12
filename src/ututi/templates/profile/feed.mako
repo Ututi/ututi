@@ -245,6 +245,6 @@ ${_('This is a list of all the recent events in the subjects you are watching an
     ${event.snippet()}
   % endfor
 %else:
-  ${_('Sorry, nothing new at the moment.')}
+  ${_('This is the Ututi wall. Here you will find notifications about things that concern you such changes in your groups and the subjects you are watching. Start by <a href="%(create_group_link)s">creating</a> or <a href="%(groups_list_link)s">joining</a> a group and watching some <a href="%(subjects_list_link)s">subjects</a>.') % dict(create_group_link = url(controller = 'group', action = 'group_type'), groups_list_link = c.groups_list_link , subjects_list_link = c.subjects_list_link) | n}
 %endif
 </div>

@@ -324,6 +324,12 @@ class WallMixin(MailinglistBaseController, FileViewMixin):
             .limit(20).all()
 
         c.action = 'feed'
+        if c.user.location is None:
+            c.groups_list_link = '/search?obj_type=group'
+            c.subjects_list_link = '/search?obj_type=subject'
+        else:
+            c.groups_list_link = c.user.location.url(action='groups')
+            c.subjects_list_link =  c.user.location.url(action='subjects')
 
         result = render('/profile/feed.mako')
 
