@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-11-10 13:21+0200\n"
+"PO-Revision-Date: 2010-11-12 16:25+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -23,7 +23,16 @@ msgstr "Blogo ištrauka pašalinta."
 msgid "Blog snippet updated."
 msgstr "Blogo ištrauka atnaujinta."
 
+msgid "Please enter a number"
+msgstr ""
+
 msgid "Book was added succesfully"
+msgstr ""
+
+msgid "Only owner of this book can do this action"
+msgstr ""
+
+msgid "Book was updated succesfully"
 msgstr ""
 
 #, python-format
@@ -231,8 +240,8 @@ msgstr "Administratorius"
 msgid "Member"
 msgstr "Narys"
 
-msgid "Leave group"
-msgstr "Palikti šią grupę"
+msgid "Delete member"
+msgstr ""
 
 msgid "What's New?"
 msgstr "Kas naujo?"
@@ -537,33 +546,57 @@ msgstr "Greitai baigsis grupės '%s' privačios vietos galiojimo laikas"
 msgid "The Ututi group \"%s\" has run out of private file space"
 msgstr "Grupėje \"%s\" baigėsi privačių failų vieta."
 
-msgid "This is not the confirmation code we sent you."
-msgstr "Tai nėra tas patvirtinimo kodas, kurį mes Tau siuntėme."
+msgid "The element does not exist."
+msgstr "Šis elementas neegzistuoja."
 
-msgid "This email is already in use."
-msgstr "Toks el. pašto adresas jau naudojamas."
+msgid "Delete"
+msgstr "Trinti"
 
-msgid "The recipient is not specified."
-msgstr ""
+msgid "The entry already exists"
+msgstr "Toks įrašas jau egzistuoja"
+
+msgid "Choose a different short title"
+msgstr "Sugalvok kitą trumpinį"
+
+msgid "The short title must contain no spaces"
+msgstr "Santrumpoje negali būti tarpų"
+
+msgid "Updates"
+msgstr "Atnaujinimai"
+
+msgid "Groups"
+msgstr "Grupės"
+
+msgid "More departments"
+msgstr "Daugiau fakultetų"
+
+msgid "Information updated."
+msgstr "Informacija atnaujinta."
+
+msgid "Wiki notes"
+msgstr "Wiki užrašai"
+
+#, python-format
+msgid "You are now watching the subject %s"
+msgstr "Tu prisidėjai %s prie savo dalykų."
+
+msgid "The subject has been added to your watched subjects list."
+msgstr "Dalykas pridėtas prie tavo dalykų sąrašo."
+
+msgid "The subject has been removed from your watched subjects list."
+msgstr "Dalykas ištrintas iš tavo dalykų sąrašo."
+
+msgid "You have no right to delete this folder."
+msgstr "Negali trinti šio katalogo."
+
+msgid "New page"
+msgstr "Naujas puslapis"
+
+msgid "This user profile is not public"
+msgstr "Šio naudotojo profilis nėra viešai prieinamas"
 
 msgid "Search"
 msgstr "Paieška"
-
-#, python-format
-msgid "Group: %s"
-msgstr ""
-
-#, python-format
-msgid "Member: %s (%s)"
-msgstr ""
-
-#, python-format
-msgid "Member: %s"
-msgstr ""
-
-#, python-format
-msgid "Subject: %s"
-msgstr ""
 
 msgid "Your Google account has been unlinked."
 msgstr "Google paskyra atsieta."
@@ -620,60 +653,36 @@ msgstr "Telefono numeris atnaujintas."
 msgid "Your phone number has been confirmed."
 msgstr "Telefono numeris patvirtintas."
 
-msgid "Your wall settings have been updated."
-msgstr "Tavo sienos nustatymai pakeisti"
+msgid "This is not the confirmation code we sent you."
+msgstr "Tai nėra tas patvirtinimo kodas, kurį mes Tau siuntėme."
+
+msgid "This email is already in use."
+msgstr "Toks el. pašto adresas jau naudojamas."
+
+msgid "The recipient is not specified."
+msgstr ""
 
 msgid "Wiki page created."
 msgstr ""
 
-msgid "The element does not exist."
-msgstr "Šis elementas neegzistuoja."
-
-msgid "Delete"
-msgstr "Trinti"
-
-msgid "The entry already exists"
-msgstr "Toks įrašas jau egzistuoja"
-
-msgid "Choose a different short title"
-msgstr "Sugalvok kitą trumpinį"
-
-msgid "The short title must contain no spaces"
-msgstr "Santrumpoje negali būti tarpų"
-
-msgid "Updates"
-msgstr "Atnaujinimai"
-
-msgid "Groups"
-msgstr "Grupės"
-
-msgid "More departments"
-msgstr "Daugiau fakultetų"
-
-msgid "Information updated."
-msgstr "Informacija atnaujinta."
-
-msgid "Wiki notes"
-msgstr "Wiki užrašai"
+msgid "Your wall settings have been updated."
+msgstr "Tavo sienos nustatymai pakeisti"
 
 #, python-format
-msgid "You are now watching the subject %s"
-msgstr "Tu prisidėjai %s prie savo dalykų."
+msgid "Group: %s"
+msgstr ""
 
-msgid "The subject has been added to your watched subjects list."
-msgstr "Dalykas pridėtas prie tavo dalykų sąrašo."
+#, python-format
+msgid "Member: %s (%s)"
+msgstr ""
 
-msgid "The subject has been removed from your watched subjects list."
-msgstr "Dalykas ištrintas iš tavo dalykų sąrašo."
+#, python-format
+msgid "Member: %s"
+msgstr ""
 
-msgid "You have no right to delete this folder."
-msgstr "Negali trinti šio katalogo."
-
-msgid "New page"
-msgstr "Naujas puslapis"
-
-msgid "This user profile is not public"
-msgstr "Šio naudotojo profilis nėra viešai prieinamas"
+#, python-format
+msgid "Subject: %s"
+msgstr ""
 
 msgid "Confirm the email for Ututi"
 msgstr "Patvirtink  el. pašto adresą"
@@ -919,6 +928,10 @@ msgstr ""
 #, python-format
 msgid "New subject %(link_to_subject)s was created"
 msgstr "Sukurtas naujas dalykas %(link_to_subject)s"
+
+#, python-format
+msgid "New group %(link_to_group)s was created"
+msgstr ""
 
 #, python-format
 msgid "Subject %(link_to_subject)s was modified"
@@ -1468,6 +1481,30 @@ msgstr ""
 "dalyką ar grupę, pakviesti pažįstamus ir draugus\n"
 "naudotis Ututi (šoninių blokelių meniu)."
 
+msgid "Book_Type"
+msgstr ""
+
+msgid "Editing"
+msgstr "Redagavimas"
+
+msgid "Name"
+msgstr ""
+
+msgid "Edit"
+msgstr "Keisti"
+
+msgid "Book types"
+msgstr ""
+
+msgid "Add"
+msgstr "Pridėti"
+
+msgid "City"
+msgstr ""
+
+msgid "Cities"
+msgstr ""
+
 msgid "Adminstration dashboard"
 msgstr "Administravimas"
 
@@ -1548,9 +1585,6 @@ msgstr "Parametras"
 msgid "Groups using"
 msgstr "Naudojančios grupės"
 
-msgid "Add"
-msgstr "Pridėti"
-
 msgid "Day count (for unlimited space)"
 msgstr "Dienų skaičius (neribotai vietai)"
 
@@ -1576,6 +1610,9 @@ msgstr "Grupių importavimas"
 msgid "Subjects import"
 msgstr "Dalykų importavimas"
 
+msgid "Group members import"
+msgstr ""
+
 msgid "Subject"
 msgstr "Temos antraštė"
 
@@ -1591,20 +1628,29 @@ msgstr "Siunčiama..."
 msgid "Notification"
 msgstr "Pranešimas"
 
-msgid "Editing"
-msgstr "Redagavimas"
-
 msgid "Notification text"
 msgstr "Pranešimo tekstas"
 
 msgid "Content"
 msgstr "Turinys"
 
-msgid "Edit"
-msgstr "Keisti"
-
 msgid "Notifications"
 msgstr "Pranešimai"
+
+msgid "School grade"
+msgstr ""
+
+msgid "School grades"
+msgstr ""
+
+msgid "Science type"
+msgstr ""
+
+msgid "Book department"
+msgstr ""
+
+msgid "Science types"
+msgstr ""
 
 msgid "SMS messages"
 msgstr "SMS žinutės"
@@ -1829,8 +1875,8 @@ msgstr "Naujas įrašas"
 msgid "New book"
 msgstr ""
 
-msgid "back to search"
-msgstr "atgal į paiešką"
+msgid "back to catalog"
+msgstr ""
 
 msgid "Book Cover"
 msgstr ""
@@ -1839,15 +1885,6 @@ msgid "Author"
 msgstr ""
 
 msgid "Brief description of the book"
-msgstr ""
-
-msgid "Publisher"
-msgstr ""
-
-msgid "Pages number"
-msgstr ""
-
-msgid "Book Year"
 msgstr ""
 
 msgid "Course"
@@ -1859,22 +1896,34 @@ msgstr ""
 msgid "Price"
 msgstr ""
 
-msgid "Location"
-msgstr ""
-
-msgid "Tags"
-msgstr "Žymos"
-
-msgid "Start watching this book personally"
-msgstr ""
-
 msgid "About U-Books"
 msgstr ""
 
 msgid "Upload a Book"
 msgstr ""
 
+msgid "Location"
+msgstr ""
+
 msgid "free"
+msgstr ""
+
+msgid "more"
+msgstr ""
+
+msgid "Back to catalog"
+msgstr ""
+
+msgid "Book cover"
+msgstr ""
+
+msgid "Book year"
+msgstr ""
+
+msgid "Publisher"
+msgstr ""
+
+msgid "national_currency"
 msgstr ""
 
 #, python-format
@@ -2431,6 +2480,9 @@ msgstr "Trinti dabartinį logo"
 
 msgid "Default group tab"
 msgstr "Pradinis grupės skirtukas"
+
+msgid "Tags"
+msgstr "Žymos"
 
 msgid "Edit group front page"
 msgstr "Redaguoti grupės pagrindinį puslapį"
@@ -3049,6 +3101,9 @@ msgstr "Negauti el. laiškų"
 msgid "Get email"
 msgstr "Gauti el. laiškus"
 
+msgid "Leave group"
+msgstr "Palikti šią grupę"
+
 msgid "Edit group settings"
 msgstr "Keisti grupės nustatymus"
 
@@ -3394,6 +3449,20 @@ msgstr ""
 
 msgid "Edit shown updates."
 msgstr "Redaguoti sienos nustatymus"
+
+#, python-format
+msgid ""
+"This is the Ututi wall. Here you will find notifications about things "
+"that concern you such as changes in your groups and the subjects you are "
+"watching. Start by <a href=\"%(create_group_link)s\">creating</a> or <a "
+"href=\"%(groups_list_link)s\">joining</a> a group and watching some <a "
+"href=\"%(subjects_list_link)s\">subjects</a>."
+msgstr ""
+"Čia Ututi siena. Čia rasi pranešimus apie tave dominančius įvykius, "
+"kaip kad pokyčiai tavo grupėse ir dalykuose, kuriuos stebi. "
+"Pradžioje gali <a href=\"%(create_group_link)s\">sukurti</a> arba <a "
+"href=\"%(groups_list_link)s\">prisijungti</a> prie grupės ir pradėti stebėti kelis <a "
+"href=\"%(subjects_list_link)s\">dalykus</a>."
 
 msgid "Filter by school:"
 msgstr "Filtruoti pagal mokymo įstaigą"
@@ -3866,6 +3935,10 @@ msgstr "%(user_link)s pakeitė dalyką %(subject_link)s."
 msgid "%(user_link)s has created the subject %(subject_link)s."
 msgstr "%(user_link)s sukūrė dalyką %(subject_link)s."
 
+#, python-format
+msgid "%(user_link)s has created the group %(subject_link)s."
+msgstr ""
+
 msgid "Send reply"
 msgstr "Siųsti atsakymą"
 
@@ -3941,6 +4014,9 @@ msgstr "[Keisti]"
 
 msgid "Regions for locations"
 msgstr "Vietų regionai"
+
+msgid "back to search"
+msgstr "atgal į paiešką"
 
 msgid "Lecturer"
 msgstr "Dėstytojas"

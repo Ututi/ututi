@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-11-10 13:21+0200\n"
+"PO-Revision-Date: 2010-11-12 16:25+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -27,7 +27,16 @@ msgstr "Wątek usunięty."
 msgid "Blog snippet updated."
 msgstr "Aktualizacja wątku na blogu."
 
+msgid "Please enter a number"
+msgstr ""
+
 msgid "Book was added succesfully"
+msgstr ""
+
+msgid "Only owner of this book can do this action"
+msgstr ""
+
+msgid "Book was updated succesfully"
 msgstr ""
 
 #, python-format
@@ -240,8 +249,8 @@ msgstr "Administrator"
 msgid "Member"
 msgstr "Członek"
 
-msgid "Leave group"
-msgstr "Opuść grupę"
+msgid "Delete member"
+msgstr ""
 
 msgid "What's New?"
 msgstr "Co nowego?"
@@ -549,33 +558,57 @@ msgstr "Subskrypcja prywatnej przestrzeni grupy na  \"%s\\ niedługo się kończ
 msgid "The Ututi group \"%s\" has run out of private file space"
 msgstr "Grupa \"%s\" nie posiada już prywatnej przestrzeni na pliki."
 
-msgid "This is not the confirmation code we sent you."
-msgstr "Błędny kod!"
+msgid "The element does not exist."
+msgstr "Element nie istnieje."
 
-msgid "This email is already in use."
-msgstr "Ten e-mail już jest w systemie."
+msgid "Delete"
+msgstr "Usuń"
 
-msgid "The recipient is not specified."
+msgid "The entry already exists"
+msgstr "Taki wpis już istnieje"
+
+msgid "Choose a different short title"
+msgstr "Wybierz inną nazwę skróconą"
+
+msgid "The short title must contain no spaces"
+msgstr "Skrócona nazwa nie powinna zawierać spacji"
+
+msgid "Updates"
+msgstr "Aktualizacje"
+
+msgid "Groups"
+msgstr "Grupy"
+
+msgid "More departments"
+msgstr "Więcej wydziałów"
+
+msgid "Information updated."
+msgstr "Informacje zostały zaktualizowane."
+
+msgid "Wiki notes"
 msgstr ""
+
+#, python-format
+msgid "You are now watching the subject %s"
+msgstr "Obserwujesz przedmiot %s"
+
+msgid "The subject has been added to your watched subjects list."
+msgstr "Przedmiot został dodany do listy obserwowanych przedmiotów."
+
+msgid "The subject has been removed from your watched subjects list."
+msgstr "Przedmiot został usunięty z listy obserwowanych przedmiotów."
+
+msgid "You have no right to delete this folder."
+msgstr "Nie możesz usunąć tej teczki."
+
+msgid "New page"
+msgstr "Nowa notatka"
+
+msgid "This user profile is not public"
+msgstr "Profil tego użytkownika nie jest publiczny"
 
 msgid "Search"
 msgstr "Szukaj"
-
-#, python-format
-msgid "Group: %s"
-msgstr ""
-
-#, python-format
-msgid "Member: %s (%s)"
-msgstr ""
-
-#, python-format
-msgid "Member: %s"
-msgstr ""
-
-#, python-format
-msgid "Subject: %s"
-msgstr ""
 
 msgid "Your Google account has been unlinked."
 msgstr "Twoje konto Google zostało odłączone"
@@ -632,60 +665,36 @@ msgstr "Twój numer telefonu został zaktualizowany."
 msgid "Your phone number has been confirmed."
 msgstr "Twój numer telefonu został potwierdzony."
 
-msgid "Your wall settings have been updated."
-msgstr "Ustawienia (strony)  zostały zaktualizowane."
+msgid "This is not the confirmation code we sent you."
+msgstr "Błędny kod!"
+
+msgid "This email is already in use."
+msgstr "Ten e-mail już jest w systemie."
+
+msgid "The recipient is not specified."
+msgstr ""
 
 msgid "Wiki page created."
 msgstr ""
 
-msgid "The element does not exist."
-msgstr "Element nie istnieje."
+msgid "Your wall settings have been updated."
+msgstr "Ustawienia (strony)  zostały zaktualizowane."
 
-msgid "Delete"
-msgstr "Usuń"
-
-msgid "The entry already exists"
-msgstr "Taki wpis już istnieje"
-
-msgid "Choose a different short title"
-msgstr "Wybierz inną nazwę skróconą"
-
-msgid "The short title must contain no spaces"
-msgstr "Skrócona nazwa nie powinna zawierać spacji"
-
-msgid "Updates"
-msgstr "Aktualizacje"
-
-msgid "Groups"
-msgstr "Grupy"
-
-msgid "More departments"
-msgstr "Więcej wydziałów"
-
-msgid "Information updated."
-msgstr "Informacje zostały zaktualizowane."
-
-msgid "Wiki notes"
+#, python-format
+msgid "Group: %s"
 msgstr ""
 
 #, python-format
-msgid "You are now watching the subject %s"
-msgstr "Obserwujesz przedmiot %s"
+msgid "Member: %s (%s)"
+msgstr ""
 
-msgid "The subject has been added to your watched subjects list."
-msgstr "Przedmiot został dodany do listy obserwowanych przedmiotów."
+#, python-format
+msgid "Member: %s"
+msgstr ""
 
-msgid "The subject has been removed from your watched subjects list."
-msgstr "Przedmiot został usunięty z listy obserwowanych przedmiotów."
-
-msgid "You have no right to delete this folder."
-msgstr "Nie możesz usunąć tej teczki."
-
-msgid "New page"
-msgstr "Nowa notatka"
-
-msgid "This user profile is not public"
-msgstr "Profil tego użytkownika nie jest publiczny"
+#, python-format
+msgid "Subject: %s"
+msgstr ""
 
 msgid "Confirm the email for Ututi"
 msgstr "Zaakceptuj e-mail Ututi"
@@ -933,6 +942,10 @@ msgstr "Do grupy %(link_to_group)s został dodany nowy folder %(folder_title)s! 
 #, python-format
 msgid "New subject %(link_to_subject)s was created"
 msgstr "Został dodany nowy przedmiot %(link_to_subject)s"
+
+#, python-format
+msgid "New group %(link_to_group)s was created"
+msgstr ""
 
 #, python-format
 msgid "Subject %(link_to_subject)s was modified"
@@ -1487,6 +1500,30 @@ msgstr ""
 "Stąd możesz też z łatwością utworzyć przedmiot, dodać plik, zaprosić do "
 "Ututi znajomych."
 
+msgid "Book_Type"
+msgstr ""
+
+msgid "Editing"
+msgstr "Edycja"
+
+msgid "Name"
+msgstr ""
+
+msgid "Edit"
+msgstr "Popraw"
+
+msgid "Book types"
+msgstr ""
+
+msgid "Add"
+msgstr "Dodaj"
+
+msgid "City"
+msgstr ""
+
+msgid "Cities"
+msgstr ""
+
 msgid "Adminstration dashboard"
 msgstr "Panel administracyjny"
 
@@ -1567,9 +1604,6 @@ msgstr "Parametr"
 msgid "Groups using"
 msgstr "Grupy korzystają z"
 
-msgid "Add"
-msgstr "Dodaj"
-
 msgid "Day count (for unlimited space)"
 msgstr "Liczba dni (na nieograniczoną przestrzeń)"
 
@@ -1595,6 +1629,9 @@ msgstr "Importuj grupy"
 msgid "Subjects import"
 msgstr "Importuj przedmioty"
 
+msgid "Group members import"
+msgstr ""
+
 msgid "Subject"
 msgstr "Temat"
 
@@ -1610,20 +1647,29 @@ msgstr "Wysyła..."
 msgid "Notification"
 msgstr "Powiadomienie"
 
-msgid "Editing"
-msgstr "Edycja"
-
 msgid "Notification text"
 msgstr "Treść powiadomienia"
 
 msgid "Content"
 msgstr "Zawartość"
 
-msgid "Edit"
-msgstr "Popraw"
-
 msgid "Notifications"
 msgstr "Powiadomienia"
+
+msgid "School grade"
+msgstr ""
+
+msgid "School grades"
+msgstr ""
+
+msgid "Science type"
+msgstr ""
+
+msgid "Book department"
+msgstr ""
+
+msgid "Science types"
+msgstr ""
 
 msgid "SMS messages"
 msgstr "Wiadomości SMS"
@@ -1849,8 +1895,8 @@ msgstr "Nowe odwiedziny"
 msgid "New book"
 msgstr "Nowa książka"
 
-msgid "back to search"
-msgstr "powróc do wyszukiwania"
+msgid "back to catalog"
+msgstr ""
 
 msgid "Book Cover"
 msgstr "Okładka książki"
@@ -1861,15 +1907,6 @@ msgstr "Autor"
 msgid "Brief description of the book"
 msgstr "Krótki opis książki"
 
-msgid "Publisher"
-msgstr "Wydawca"
-
-msgid "Pages number"
-msgstr ""
-
-msgid "Book Year"
-msgstr "Rok wydania (jeśli chodzi o książkę)"
-
 msgid "Course"
 msgstr "Kurs (wiele znaczeń)"
 
@@ -1879,22 +1916,34 @@ msgstr ""
 msgid "Price"
 msgstr "Cena"
 
-msgid "Location"
-msgstr "Lokalizacja / położenie"
-
-msgid "Tags"
-msgstr "Tagi"
-
-msgid "Start watching this book personally"
-msgstr "Rozpocznij obserwowanie tej książki osobiście"
-
 msgid "About U-Books"
 msgstr ""
 
 msgid "Upload a Book"
 msgstr ""
 
+msgid "Location"
+msgstr "Lokalizacja / położenie"
+
 msgid "free"
+msgstr ""
+
+msgid "more"
+msgstr ""
+
+msgid "Back to catalog"
+msgstr ""
+
+msgid "Book cover"
+msgstr ""
+
+msgid "Book year"
+msgstr ""
+
+msgid "Publisher"
+msgstr "Wydawca"
+
+msgid "national_currency"
 msgstr ""
 
 #, python-format
@@ -2447,6 +2496,9 @@ msgstr "Usuń aktualne logo"
 
 msgid "Default group tab"
 msgstr "Podstawowy widok"
+
+msgid "Tags"
+msgstr "Tagi"
 
 msgid "Edit group front page"
 msgstr "Edytuj stronę startową grupy"
@@ -3076,6 +3128,9 @@ msgstr "Nie otrzymuj e-maili"
 msgid "Get email"
 msgstr "Otrzymuj e-maile"
 
+msgid "Leave group"
+msgstr "Opuść grupę"
+
 msgid "Edit group settings"
 msgstr "Zmień ustawienia grupy"
 
@@ -3423,6 +3478,15 @@ msgstr "Ostatnie zmiany w obserwowanych przez Ciebie przedmiotach i grupach."
 
 msgid "Edit shown updates."
 msgstr "Edytuj pokazane aktualizacje"
+
+#, python-format
+msgid ""
+"This is the Ututi wall. Here you will find notifications about things "
+"that concern you such as changes in your groups and the subjects you are "
+"watching. Start by <a href=\"%(create_group_link)s\">creating</a> or <a "
+"href=\"%(groups_list_link)s\">joining</a> a group and watching some <a "
+"href=\"%(subjects_list_link)s\">subjects</a>."
+msgstr ""
 
 msgid "Filter by school:"
 msgstr "Szukaj według uczelni"
@@ -3894,6 +3958,10 @@ msgstr "%(user_link)s edytował przedmiot %(subject_link)s."
 msgid "%(user_link)s has created the subject %(subject_link)s."
 msgstr "%(user_link)s stworzył przedmiot %(subject_link)s."
 
+#, python-format
+msgid "%(user_link)s has created the group %(subject_link)s."
+msgstr ""
+
 msgid "Send reply"
 msgstr "Wyślij odpowiedź"
 
@@ -3977,6 +4045,9 @@ msgstr "[Edytuj]"
 
 msgid "Regions for locations"
 msgstr "Lokalizacja"
+
+msgid "back to search"
+msgstr "powróc do wyszukiwania"
 
 msgid "Lecturer"
 msgstr "Wykładowca"
