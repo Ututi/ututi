@@ -27,19 +27,18 @@ from ututi.lib import helpers as h
 from ututi.model.events import Event
 from ututi.model import ForumPost, PrivateMessage, Page, User, Subject, meta, GroupMember, Group
 
-def _file_rcpt(term, current_user):
+def _file_rcpt(current_user):
     """
     Return possible recipients for a file upload (for the current user).
     """
     groups = meta.Session.query(Group)\
-        .filter(or_(Group.group_id.ilike('%%%s%%' % term),
-                    Group.title.ilike('%%%s%%' % term)))\
         .filter(Group.id.in_([g.group.id for g in current_user.memberships]))\
+        .order_by(Group.title.asc())\
         .all()
 
     subjects = meta.Session.query(Subject)\
-        .filter(Subject.title.ilike('%%%s%%' % term))\
         .filter(Subject.id.in_([s.id for s in current_user.all_watched_subjects]))\
+        .order_by(Subject.title.asc())\
         .all()
     return (groups, subjects)
 
@@ -76,10 +75,9 @@ def _message_rcpt(term, current_user):
     return (groups, classmates, users)
 
 
-def _wiki_rcpt(term, current_user):
+def _wiki_rcpt(current_user):
     """ Return possible wiki recipients based on the query term. """
     subjects = meta.Session.query(Subject)\
-        .filter(Subject.title.ilike('%%%s%%' % term))\
         .filter(Subject.id.in_([s.id for s in current_user.all_watched_subjects]))\
         .all()
     return subjects
@@ -331,6 +329,9 @@ class WallMixin(MailinglistBaseController, FileViewMixin):
             c.groups_list_link = c.user.location.url(action='groups')
             c.subjects_list_link =  c.user.location.url(action='subjects')
 
+        c.file_recipients = self._file_rcpt()
+        c.wiki_recipients = []
+
         result = render('/profile/feed.mako')
 
         '''Register new newsfeed visit.'''
@@ -362,25 +363,16 @@ class WallMixin(MailinglistBaseController, FileViewMixin):
                       id='u_%d' % u.id) for u in others]
         return dict(data=groups+classmates+users)
 
-    @ActionProtector("user")
-    @jsonify
-    def file_rcpt_js(self):
-        term = request.params.get('term', None)
-        if term is None or len(term) < 1:
-            return {'data' : []}
+    def _file_rcpt(self):
+        (groups, subjects) = _file_rcpt(c.user)
 
-        (groups, subjects) = _file_rcpt(term, c.user)
+        items = []
+        for group in groups:
+            items.append(('g_%d' % group.id, _('Group: %s') % group.title))
 
-        groups = [
-            dict(label=_('Group: %s') % group.title,
-                 id='g_%d' % group.id)
-            for group in groups]
-
-        subjects = [
-            dict(label=_('Subject: %s') % subject.title,
-                 id='s_%d' % subject.id)
-            for subject in subjects]
-        return dict(data=groups+subjects)
+        for subject in subjects:
+            items.append(('s_%d' % subject.id, _('Subject: %s') % subject.title))
+        return items
 
     @ActionProtector("user")
     @jsonify

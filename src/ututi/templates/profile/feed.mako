@@ -61,8 +61,14 @@
 
 <%self:rounded_block id="upload_file_block" class_="dashboard_action_block" style="display: none;">
   <form id="file_form">
-    <input type="hidden" name="file_rcpt_id" id="file_rcpt_id" value=""/>
-    ${h.input_line('rcpt_file', _('Group or subject:'), id='rcpt_file')}
+    <div class="formField">
+      <label for="file_rcpt_id">
+        <span class="labelText">${_('Group or subject:')}</span>
+        <span class="textField">
+          ${h.select('file_rcpt_id', None, c.file_recipients)}
+        </span>
+      </label>
+    </div>
     <div class="formSubmit">
       ${h.input_submit(_('Upload file'), id="file_upload_submit")}
     </div>
@@ -74,10 +80,8 @@
   <form method="POST" action="${url(controller='profile', action='create_wiki')}" id="wiki_form">
     <input type="hidden" value="" name="wiki_rcpt_id" id="wiki_rcpt_id" />
     ${h.input_line('rcpt_wiki', _('Subject:'), id='rcpt_wiki')}
-    <div class="formField">
-      ${h.input_line('page_title', _('Title'), id='page_title')}
-    </div>
-    <div>
+    ${h.input_line('page_title', _('Title'), id='page_title')}
+    <div style="clear: right;">
       ${h.input_wysiwyg('page_content', '')}
     </div>
     <div class="formSubmit">
@@ -146,7 +150,7 @@ $(function(){
     var file_upload = new AjaxUpload($('#file_upload_submit'),
         {action: "${url(controller='profile', action='upload_file_js')}",
          name: 'attachment',
-         data: {folder: '', target_id: ''},
+         data: {folder: '', target_id: $('#file_rcpt_id').val()},
          onSubmit: function(file, ext, iframe){
              iframe['progress_indicator'] = $(document.createElement('div'));
              $('#upload_file_block').append(iframe['progress_indicator']);
@@ -179,19 +183,8 @@ $(function(){
              window.clearInterval(iframe['interval']);
          }
         });
-    file_upload.disable();
-    $( "#rcpt_file" ).autocomplete({
-	source: function(request, response) {
-            $.getJSON("${url(controller='profile', action='file_rcpt_js')}",
-                      request, function( data, status, xhr ) {
-			  response(data.data);
-		      });
-        },
-	minLength: 2,
-        select: function(event, ui) {
-            file_upload.setData({folder: '', target_id: ui.item.id});
-            file_upload.enable();
-        }
+    $( "#file_rcpt_id" ).change(function(){
+        file_upload.setData({folder: '', target_id: $(this).val()});
     });
     /* wiki mode */
     $( "#rcpt_wiki" ).autocomplete({
