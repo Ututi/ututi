@@ -182,6 +182,14 @@ div.error-message {
     height: 30px;
 }
 
+select option {
+  background: white;
+}
+
+select {
+  background: white;
+}
+
 /* buttons */
 button.btn,
 button.btnMedium,
