@@ -1,5 +1,5 @@
-Regression test for group email being in cc
-===========================================
+Regression test for utf-8 characters in email subject
+=====================================================
 
     >>> browser = Browser.logIn()
 
