@@ -1316,7 +1316,7 @@ CREATE TABLE books (
        logo bytea DEFAULT NULL,
        owner_id int8 NOT NULL REFERENCES users(id) on delete cascade,
        show_phone boolean DEFAULT TRUE,
-       city_id int8 NOT NULL REFERENCES cities(id) on delete restrict,
+       city_id int8 DEFAULT NULL REFERENCES cities(id) on delete restrict,
        type_id int8 NOT NULL REFERENCES book_types(id) on delete restrict,
        science_type_id int8 NOT NULL REFERENCES science_types(id) on delete restrict,
        PRIMARY KEY (id)
