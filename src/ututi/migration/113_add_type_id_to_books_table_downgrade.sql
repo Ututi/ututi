@@ -1,2 +1,1 @@
--- alter table users drop column net_worth;
--- drop table admins;
+alter table books drop column type_id;;

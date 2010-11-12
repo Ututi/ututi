@@ -1,7 +1,1 @@
--- alter table users add column net_worth integer not null default 0;
--- alter table users add column last_daily_money timestamp not null default (now() at time zone 'UTC');
--- create table admins (
---        id bigserial not null,
---        login varchar(20) not null,
---        password char(36),
---        primary key(id));;
+alter table books add column type_id int8 NOT NULL REFERENCES book_types(id) on delete restrict

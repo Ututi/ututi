@@ -46,12 +46,10 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
   </div>
   <div class="book-transfer-info">
     ${h.input_line('price', _('Price'))}
-    <select name="city">
-      %for city in c.cities:
-      <option value="${city.name}">${c.city.name)}</option>
-      %endfor
-    </select>
-    ${h.input_line('City', _('City'))}
+##    ${select_by_id_and_name(_('Science type'), 'science_type_id', c.science_types)}
+##    ${select_by_id_and_name(_('Type'), 'type_id', c.book_types)}
+##    ${select_by_id_and_name(_('City'), 'city_id', c.cities)}
+##    ${select_by_id_and_name(_('Class grade', 'class_grade_id', c.class_grades))}
   </div>
   <br />
   <div>

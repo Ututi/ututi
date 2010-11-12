@@ -16,7 +16,7 @@ from pylons.controllers.util import redirect
 from pylons.i18n import _
 
 from ututi.controllers.group import FileUploadTypeValidator
-from ututi.model import Book, meta
+from ututi.model import Book, meta, City, BookType, SchoolGrade, ScienceType
 import ututi.lib.helpers as h
 from ututi.lib.validators import LocationTagsValidator
 from ututi.lib.image import serve_logo
@@ -65,6 +65,13 @@ class BooksController(BaseController):
         c.books = self._make_pages(books)
         return render('books/index.mako')
 
+    def _load_defaults(self):
+        c.book_departments = Book.departments
+        c.book_types = meta.Session.query(BookType).all()
+        c.school_grades = meta.Session.query(SchoolGrade).all()
+        c.cities = meta.Session.query(City).all()
+        c.science_types = meta.Session.query(ScienceType).all()
+
     @validate(schema=BookForm, form='_add')
     @ActionProtector("user")
     def create(self):
@@ -86,6 +93,7 @@ class BooksController(BaseController):
 
     @ActionProtector("user")
     def _add(self):
+        self._load_defaults
         return render('books/add.mako')
 
     def add(self):
