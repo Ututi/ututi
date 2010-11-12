@@ -16,15 +16,21 @@
 <a class="action" id="upload_file" href="#">${_('upload a file')}</a>
 <a class="action" id="create_wiki" href="#">${_('create a wiki page')}</a>
 <script type="text/javascript">
-  $('#dashboard_actions a.action').toggle(function(){
-    id = $(this).attr('id');
-    $('#'+id+'_block').slideDown(300);
-    return false;
-  },
-  function() {
-    id = $(this).attr('id');
-    $('#'+id+'_block').slideUp(300);
-    return false;
+  $('#dashboard_actions a.action').click(function(){
+      id = $(this).attr('id');
+      if ($(this).hasClass('open')) {
+          $(this).removeClass('open');
+          $('#'+id+'_block').slideUp(300);
+      } else {
+          $('#dashboard_actions a.open').each(function(){
+              $(this).removeClass('open');
+              cls_id = $(this).attr('id');
+              $('#'+cls_id+'_block').slideUp(300);
+          });
+          $(this).addClass('open');
+          $('#'+id+'_block').slideDown(300);
+      }
+      return false;
   });
 </script>
 </%self:rounded_block>
