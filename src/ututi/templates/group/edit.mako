@@ -117,6 +117,18 @@ ${h.javascript_link('/javascript/js-alternatives.js')|n}
 
         ${access_settings()}
 
+%if False:
+  <label for="mailing_list_moderation" class="radio">
+      <span class="labelText">
+        ${_('Who can send messages to the mailing list')}
+        ${h.image('/images/details/icon_question.png', alt=_('If you select moderated, you can pick the people who you want to allow to post to the mailing list.'), class_='tooltip')|n}
+      </span>
+    ${h.radio("mailinglist_moderated", "members", label=_('Members only'))}
+    <br />
+    ${h.radio("mailinglist_moderated", "moderated", label=_('Moderated'))}
+  </label>
+%endif
+
         <br />
 
         ${h.input_submit()}

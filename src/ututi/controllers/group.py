@@ -140,11 +140,11 @@ class EditGroupForm(GroupForm):
     approve_new_members = validators.OneOf(['none', 'admin'])
     forum_visibility = validators.OneOf(['public', 'members'])
     page_visibility = validators.OneOf(['public', 'members'])
-    mailinglist_moderated = validators.OneOf(['members', 'moderated'])
+    # mailinglist_moderated = validators.OneOf(['members', 'moderated'])
+    mailinglist_moderated = validators.Constant('members', not_empty=False, if_missing='members')
     forum_type = validators.OneOf(['mailinglist', 'forum'])
     location = Pipe(ForEach(validators.String(strip=True)),
                     LocationTagsValidator(not_empty=True))
-
 
 
 class NewGroupForm(GroupForm):
@@ -200,7 +200,6 @@ class CreateCustomGroupForm(CreateGroupFormBase):
     forum_type = validators.OneOf(['mailinglist', 'forum'])
     approve_new_members = validators.OneOf(['none', 'admin'])
     forum_visibility = validators.OneOf(['public', 'members'])
-    mailinglist_moderated = validators.OneOf(['members', 'moderated'])
     page_visibility = validators.OneOf(['public', 'members'])
 
 
@@ -535,8 +534,7 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
                     self.form_result['approve_new_members'] == 'admin')
             group.forum_is_public = (
                     self.form_result['forum_visibility'] == 'public')
-            group.mailinglist_moderated = (
-                    self.form_result['mailinglist_moderated'] == 'moderated')
+            group.mailinglist_moderated = False
             group.page_public = (
                     self.form_result['page_visibility'] == 'public')
 
@@ -554,7 +552,6 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
                     'file_storage': True,
                     'approve_new_members': 'admin',
                     'forum_visibility': 'public',
-                    'mailinglist_moderated': 'members',
                     'page_visibility': 'public'}
         return htmlfill.render(self._create_custom_form(), defaults=defaults)
 
@@ -681,7 +678,6 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
             'default_tab': group.default_tab,
             'approve_new_members': 'admin' if group.admins_approve_members else 'none',
             'forum_visibility': 'public' if group.forum_is_public else 'members',
-            'mailinglist_moderated': 'moderated'if group.mailinglist_moderated else 'members',
             'page_visibility': 'public' if group.page_public else 'members',
             'mailinglist_moderated': 'moderated' if group.mailinglist_moderated else 'members',
             'forum_type': 'mailinglist' if group.mailinglist_enabled else 'forum',
