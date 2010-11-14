@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-11-12 16:25+0200\n"
+"POT-Creation-Date: 2010-11-15 01:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -622,6 +622,9 @@ msgid "This email is already in use."
 msgstr ""
 
 msgid "The recipient is not specified."
+msgstr ""
+
+msgid "Invalid subject"
 msgstr ""
 
 msgid "Wiki page created."
@@ -2254,6 +2257,17 @@ msgid "Default group tab"
 msgstr ""
 
 msgid "Tags"
+msgstr ""
+
+msgid "Who can send messages to the mailing list"
+msgstr ""
+
+msgid ""
+"If you select moderated, you can pick the people who you want to allow to "
+"post to the mailing list."
+msgstr ""
+
+msgid "Moderated"
 msgstr ""
 
 msgid "Edit group front page"
