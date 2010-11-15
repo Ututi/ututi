@@ -311,12 +311,6 @@ class WallMixin(MailinglistBaseController, FileViewMixin):
 
         c.events = self._user_events()
         c.action = 'feed'
-        if c.user.location is None:
-            c.groups_list_link = '/search?obj_type=group'
-            c.subjects_list_link = '/search?obj_type=subject'
-        else:
-            c.groups_list_link = c.user.location.url(action='groups')
-            c.subjects_list_link =  c.user.location.url(action='subjects')
 
         c.file_recipients = self._file_rcpt()
         c.wiki_recipients = self._wiki_rcpt()
