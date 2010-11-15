@@ -96,8 +96,7 @@ class StructureviewController(SearchBaseController, UniversityListMixin):
             .filter(Subject.location_id.in_(children))
 
         if c.user is not None:
-            subj_events = subj_events.filter(Event.author_id != c.user.id)\
-                .filter(~Event.event_type.in_(c.user.ignored_events_list))
+            subj_events = subj_events.filter(~Event.event_type.in_(c.user.ignored_events_list))
 
         grp_events = meta.Session.query(Event)\
             .join((Group, Event.object_id == Group.id))\
@@ -105,8 +104,7 @@ class StructureviewController(SearchBaseController, UniversityListMixin):
             .filter(Group.forum_is_public == True)
 
         if c.user is not None:
-            grp_events = grp_events.filter(Event.author_id != c.user.id)\
-                .filter(~Event.event_type.in_(c.user.ignored_events_list))
+            grp_events = grp_events.filter(~Event.event_type.in_(c.user.ignored_events_list))
 
         c.events = grp_events.union(subj_events).order_by(desc(Event.created))\
             .limit(20).all()
