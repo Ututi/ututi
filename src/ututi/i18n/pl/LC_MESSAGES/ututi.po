@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-11-15 02:53+0200\n"
+"PO-Revision-Date: 2010-11-15 14:28+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -2945,12 +2945,6 @@ msgstr "Nie znalazłeś tego, czego szukałeś?"
 msgid "Create a new group"
 msgstr "Utwórz nową grupę"
 
-msgid "Moderation queue"
-msgstr ""
-
-msgid "No messages to be moderated yet."
-msgstr ""
-
 msgid "Group mail"
 msgstr "Poczta grupy"
 
@@ -4016,6 +4010,12 @@ msgstr "%(user_link)s  wysłał wiadomość sms do grupy %(group_link)s."
 #, python-format
 msgid "%(user_link)s has sent you a private message \"%(msg_link)s\"."
 msgstr "%(user_link)s wysłał(-a) wiadomość prywatną  \"%(msg_link)s\"."
+
+#, python-format
+msgid ""
+"%(user_link)s has sent %(recipient_link)s a private message "
+"\"%(msg_link)s\"."
+msgstr ""
 
 #, python-format
 msgid "%(user_link)s joined the group %(group_link)s."

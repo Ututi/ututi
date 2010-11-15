@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-11-15 02:53+0200\n"
+"PO-Revision-Date: 2010-11-15 14:36+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -241,7 +241,7 @@ msgid "Member"
 msgstr "Narys"
 
 msgid "Delete member"
-msgstr ""
+msgstr "Šalinti narį"
 
 msgid "What's New?"
 msgstr "Kas naujo?"
@@ -660,32 +660,32 @@ msgid "This email is already in use."
 msgstr "Toks el. pašto adresas jau naudojamas."
 
 msgid "The recipient is not specified."
-msgstr ""
+msgstr "Nenurodytas gavėjas"
 
 msgid "Invalid subject"
-msgstr ""
+msgstr "Netinkamas dalykas"
 
 msgid "Wiki page created."
-msgstr ""
+msgstr "Wiki puslapis sukurtas"
 
 msgid "Your wall settings have been updated."
 msgstr "Tavo sienos nustatymai pakeisti"
 
 #, python-format
 msgid "Group: %s"
-msgstr ""
+msgstr "Grupė: %s"
 
 #, python-format
 msgid "Member: %s (%s)"
-msgstr ""
+msgstr "Narys: %s (%s)"
 
 #, python-format
 msgid "Member: %s"
-msgstr ""
+msgstr "Narys: %s"
 
 #, python-format
 msgid "Subject: %s"
-msgstr ""
+msgstr "Dalykas: %s"
 
 msgid "Confirm the email for Ututi"
 msgstr "Patvirtink  el. pašto adresą"
@@ -934,7 +934,7 @@ msgstr "Sukurtas naujas dalykas %(link_to_subject)s"
 
 #, python-format
 msgid "New group %(link_to_group)s was created"
-msgstr ""
+msgstr "Buvo sukurta nauja grupė %(link_to_group)s ."
 
 #, python-format
 msgid "Subject %(link_to_subject)s was modified"
@@ -1614,7 +1614,7 @@ msgid "Subjects import"
 msgstr "Dalykų importavimas"
 
 msgid "Group members import"
-msgstr ""
+msgstr "Grupės narių importavimas"
 
 msgid "Subject"
 msgstr "Temos antraštė"
@@ -2488,15 +2488,15 @@ msgid "Tags"
 msgstr "Žymos"
 
 msgid "Who can send messages to the mailing list"
-msgstr ""
+msgstr "Kas gali siųsti laiškus į el. pašto konferenciją"
 
 msgid ""
 "If you select moderated, you can pick the people who you want to allow to"
 " post to the mailing list."
-msgstr ""
+msgstr "Pasirinkę 'moderuojama', galėsite pasirinkti, kuriems žmonėms bus leidžiama rašyti į grupės konferenciją."
 
 msgid "Moderated"
-msgstr ""
+msgstr "Moderuojama"
 
 msgid "Edit group front page"
 msgstr "Redaguoti grupės pagrindinį puslapį"
@@ -2899,7 +2899,7 @@ msgstr "Nariai"
 msgid ""
 "This is a list of all the recent events in the subjects and groups of "
 "this university."
-msgstr ""
+msgstr "Naujausių universiteto grupių ir dalykų pasikeitimų sąrašas."
 
 msgid "Sorry, nothing new at the moment."
 msgstr "Deja, šiuo metu nieko naujo"
@@ -2918,12 +2918,6 @@ msgstr "Nerandi to, ko ieškai?"
 
 msgid "Create a new group"
 msgstr "sukurti naują grupę"
-
-msgid "Moderation queue"
-msgstr ""
-
-msgid "No messages to be moderated yet."
-msgstr ""
 
 msgid "Group mail"
 msgstr "Grupės paštas"
@@ -3425,34 +3419,34 @@ msgid "What's new?"
 msgstr "Kas naujo?"
 
 msgid "Share with others"
-msgstr ""
+msgstr "Dalinkis su kitais"
 
 msgid "send a message"
-msgstr ""
+msgstr "išsiųsk žinutę"
 
 msgid "upload a file"
-msgstr ""
+msgstr "įkelk failą"
 
 msgid "create a wiki page"
-msgstr ""
+msgstr "sukurk wiki puslapį"
 
 msgid "Group or user:"
-msgstr ""
+msgstr "Grupė arba narys:"
 
 msgid "Category"
-msgstr ""
+msgstr "Forumo kategorija"
 
 msgid "Subject:"
-msgstr ""
+msgstr "Dalykas:"
 
 msgid "Group or subject:"
-msgstr ""
+msgstr "Grupė arba dalykas:"
 
 msgid "Upload file"
 msgstr "Įkelti failą"
 
 msgid "File uploaded."
-msgstr ""
+msgstr "Failas įkeltas."
 
 msgid "File upload failed."
 msgstr "Failo įkėlimas nepavyko."
@@ -3918,7 +3912,7 @@ msgstr ""
 "narystę?"
 
 msgid "More"
-msgstr ""
+msgstr "Daugiau"
 
 msgid "Ignore events like this"
 msgstr "Nerodyti tokių įvykių"
@@ -3957,7 +3951,7 @@ msgstr "%(user_link)s sukūrė dalyką %(subject_link)s."
 
 #, python-format
 msgid "%(user_link)s has created the group %(subject_link)s."
-msgstr ""
+msgstr "%(user_link)s sukūrė grupę %(subject_link)s."
 
 msgid "Send reply"
 msgstr "Siųsti atsakymą"
@@ -3981,6 +3975,12 @@ msgstr "%(user_link)s išsiuntė sms grupei %(group_link)s."
 #, python-format
 msgid "%(user_link)s has sent you a private message \"%(msg_link)s\"."
 msgstr "%(user_link)s atsiuntė tau privačią žinutę \"%(msg_link)s\"."
+
+#, python-format
+msgid ""
+"%(user_link)s has sent %(recipient_link)s a private message "
+"\"%(msg_link)s\"."
+msgstr "%(user_link)s išsiuntė %(recipient_link)s privačią žinutę %(msg_link)s\"."
 
 #, python-format
 msgid "%(user_link)s joined the group %(group_link)s."

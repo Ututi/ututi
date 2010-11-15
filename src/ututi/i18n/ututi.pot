@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-11-15 02:53+0200\n"
+"POT-Creation-Date: 2010-11-15 14:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2649,12 +2649,6 @@ msgstr ""
 msgid "Create a new group"
 msgstr ""
 
-msgid "Moderation queue"
-msgstr ""
-
-msgid "No messages to be moderated yet."
-msgstr ""
-
 msgid "Group mail"
 msgstr ""
 
@@ -3633,6 +3627,10 @@ msgstr ""
 
 #, python-format
 msgid "%(user_link)s has sent you a private message \"%(msg_link)s\"."
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has sent %(recipient_link)s a private message \"%(msg_link)s\"."
 msgstr ""
 
 #, python-format
