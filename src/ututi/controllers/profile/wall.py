@@ -294,7 +294,6 @@ class WallMixin(MailinglistBaseController, FileViewMixin):
             .filter(or_(Event.object_id.in_([s.id for s in c.user.all_watched_subjects]),
                         Event.object_id.in_([m.group.id for m in c.user.memberships]),
                         Event.recipient_id == c.user.id))\
-            .filter(Event.author_id != c.user.id)\
             .filter(~Event.event_type.in_(c.user.ignored_events_list))\
             .order_by(desc(Event.created))\
             .limit(20).all()
