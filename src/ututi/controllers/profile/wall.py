@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from pylons.templating import render_mako_def
 from pylons.decorators import validate
 from pylons.decorators import jsonify
 from pylons.controllers.util import redirect
@@ -14,6 +15,7 @@ from formencode.schema import Schema
 from formencode import validators
 from formencode import htmlfill
 
+from sqlalchemy.sql.expression import and_
 from sqlalchemy.sql.expression import desc
 from sqlalchemy.sql.expression import or_
 
@@ -288,16 +290,26 @@ class WallMixin(MailinglistBaseController, FileViewMixin):
                                defaults=defaults)
 
     @ActionProtector("user")
-    def feed(self):
-        c.breadcrumbs.append(self._actions('home'))
-        c.events = meta.Session.query(Event)\
+    def feed_js(self):
+        events = self._user_events()
+        return render_mako_def('/sections/wall_snippets.mako', 'render_events', events=events)
+
+    def _user_events(self):
+        return meta.Session.query(Event)\
             .filter(or_(Event.object_id.in_([s.id for s in c.user.all_watched_subjects]),
                         Event.object_id.in_([m.group.id for m in c.user.memberships]),
-                        Event.recipient_id == c.user.id))\
+                        Event.recipient_id == c.user.id,
+                        and_(Event.event_type=='private_message_sent',
+                             Event.user == c.user)))\
             .filter(~Event.event_type.in_(c.user.ignored_events_list))\
             .order_by(desc(Event.created))\
             .limit(20).all()
 
+    @ActionProtector("user")
+    def feed(self):
+        c.breadcrumbs.append(self._actions('home'))
+
+        c.events = self._user_events()
         c.action = 'feed'
         if c.user.location is None:
             c.groups_list_link = '/search?obj_type=group'

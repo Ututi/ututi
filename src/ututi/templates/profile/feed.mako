@@ -4,6 +4,11 @@
   <title>UTUTI – student information online</title>
   ${parent.head_tags()}
   ${wall.head_tags()}
+  <script type="text/javascript">
+    function reload_wall() {
+      $('#wall').load("${url(controller='profile', action='feed_js')}");
+    };
+  </script>
 </%def>
 
 <%def name="pagetitle()">
@@ -144,7 +149,8 @@ $(function(){
                        } else {
                            $('#message_form').find('input, textarea').val('');
                            $('#send_message').click();
-                           $('#dashboard_action_blocks').after('<div class="action-reply">'+"${_('Message sent.')}"+'</div>');
+                           reload_wall();
+                           //$('#dashboard_action_blocks').after('<div class="action-reply">'+"${_('Message sent.')}"+'</div>');
                        }
                    },
                    "json");
@@ -182,7 +188,8 @@ $(function(){
                  iframe['progress_indicator'].remove();
                  $('#file_upload_form').find('input, textarea').val('');
                  $('#upload_file').click();
-                 $('#dashboard_action_blocks').after('<div class="action-reply">'+"${_('File uploaded.')}"+'</div>');
+                 reload_wall();
+                 //$('#dashboard_action_blocks').after('<div class="action-reply">'+"${_('File uploaded.')}"+'</div>');
              } else {
                  $('#dashboard_action_blocks').after('<div class="action-reply">'+"${_('File upload failed.')}"+'</div>');
              }
@@ -215,7 +222,8 @@ $(function(){
                        } else {
                            $('#wiki_form').find('input, textarea').val('');
                            $('#create_wiki').click();
-                           $('#dashboard_action_blocks').after('<div class="action-reply">'+"${_('Wiki page created\.')}"+'</div>');
+                           reload_wall();
+                           //$('#dashboard_action_blocks').after('<div class="action-reply">'+"${_('Wiki page created\.')}"+'</div>');
                        }
                    },
                    "json");
@@ -228,16 +236,16 @@ $(function(){
 </div>
 
 <div id='wall'>
-<div class="tip">
-${_('This is a list of all the recent events in the subjects you are watching and the groups you belong to.')}
-<a href="${url(controller='profile', action='wall_settings')}">${_('Edit shown updates.')}</a>
-</div>
+  <div class="tip">
+    ${_('This is a list of all the recent events in the subjects you are watching and the groups you belong to.')}
+    <a href="${url(controller='profile', action='wall_settings')}">${_('Edit shown updates.')}</a>
+  </div>
 
-%if c.events:
-  % for event in c.events:
-    ${event.snippet()}
-  % endfor
-%else:
-  ${_('This is the Ututi wall. Here you will find notifications about things that concern you such as changes in your groups and the subjects you are watching. Start by <a href="%(create_group_link)s">creating</a> or <a href="%(groups_list_link)s">joining</a> a group and watching some <a href="%(subjects_list_link)s">subjects</a>.') % dict(create_group_link = url(controller = 'group', action = 'group_type'), groups_list_link = c.groups_list_link , subjects_list_link = c.subjects_list_link) | n}
-%endif
+  %if c.events:
+    % for event in c.events:
+      ${event.snippet()}
+    % endfor
+  %else:
+    ${_('This is the Ututi wall. Here you will find notifications about things that concern you such as changes in your groups and the subjects you are watching. Start by <a href="%(create_group_link)s">creating</a> or <a href="%(groups_list_link)s">joining</a> a group and watching some <a href="%(subjects_list_link)s">subjects</a>.') % dict(create_group_link = url(controller = 'group', action = 'group_type'), groups_list_link = c.groups_list_link , subjects_list_link = c.subjects_list_link) | n}
+  %endif
 </div>

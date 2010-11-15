@@ -12,6 +12,7 @@ No events yet:
     >>> browser.printQuery('id("wall")//div[@class="description"]//text()')
     Adminas Adminovix has created the group Moderatoriai .
     Adminas Adminovix joined the group Moderatoriai .
+    Third user joined the group Moderatoriai .
     Adminas Adminovix has created the subject Matematinė analizė .
 
 But let's send some emails:
@@ -24,36 +25,13 @@ But let's send some emails:
 
     >>> browser.getLink("News wall").click()
     >>> browser.printQuery('id("wall")//div[@class="description"]//text()')
-    Adminas Adminovix
-    has posted a new message
-    Hello
-    to the group
-    Moderatoriai
-    .
-    Adminas Adminovix
-    has posted a new message
-    Hello
-    to the group
-    Moderatoriai
-    .
-    Adminas Adminovix
-    has posted a new message
-    Hello
-    to the group
-    Moderatoriai
-    .
-    Adminas Adminovix
-    has created the group
-    Moderatoriai
-    .
-    Adminas Adminovix
-    joined the group
-    Moderatoriai
-    .
-    Adminas Adminovix
-    has created the subject
-    Matematinė analizė
-    .
+    Adminas Adminovix has posted a new message Hello to the group Moderatoriai .
+    Adminas Adminovix has posted a new message Hello to the group Moderatoriai .
+    Adminas Adminovix has posted a new message Hello to the group Moderatoriai .
+    Adminas Adminovix has created the group Moderatoriai .
+    Adminas Adminovix has created the subject Matematinė analizė .
+    Adminas Adminovix joined the group Moderatoriai .
+    Third user joined the group Moderatoriai .
 
 Clear the mail_queue before doing anything:
 
@@ -115,6 +93,7 @@ Let's check the sms replies:
     >>> browser.getLink("News wall").click()
     >>> browser.printQuery('id("wall")//div[@class="content"]//text()')
     Sending an sms!
+    I am replying to your forum post
     And I am starting it!
 
     >>> browser.getControl(name='sms_message').value = 'Replying to an sms!'
@@ -139,8 +118,16 @@ Let's check private messages:
     >>> browser2.printQuery('id("wall")//div[@class="content"]//text()')
     I am sending you a message!
     Replying to an sms!
+    Sending an sms!
     I am replying to your forum post
+    And I am starting it!
     I am replying
+    Hi, I am just writing to tell you how wonderful this system is.
+    Admin
+    Hi, I am just writing to tell you how wonderful this system is.
+    Admin
+    Hi, I am just writing to tell you how wonderful this system is.
+    Admin
 
     >>> form = browser2.getForm('message_reply_form', index=0)
     >>> form.getControl(name='message').value = 'I am replying to your message!'
@@ -157,66 +144,44 @@ Of course, we can change what we see on our wall:
     >>> browser2.getLink('Home').click()
     >>> browser2.getLink("News wall").click()
     >>> browser2.printQuery('id("wall")//div[@class="description"]//text()')
-    Second user
-    has sent you a private message "
-    A message from me!
-    ".
-    Second user
-    has sent an sms to the group
-    Testing group
-    .
+    Adminas Adminovix has sent Second user a private message " A message from me! ".
+    Second user has sent you a private message " A message from me! ".
+    Second user has sent an sms to the group Testing group .
     SMS credits can be used to send SMS messages to members of a group. There are two ways to purchase SMS credits:
-    If you pay by bank,
-    a large discount applies
-    .
-    Second user
-    has posted a new message
-    This is a new forum thread!
-    in the forum
-    Testing group
-    .
-    Third user
-    has posted a new message
-    Re: Hello
-    to the group
-    Moderatoriai
-    .
-    Second user
-    joined the group
-    Testing group
-    .
-    Third user
-    joined the group
-    Moderatoriai
-    .
+    If you pay by bank, a large discount applies .
+    Adminas Adminovix has sent an sms to the group Testing group .
+    SMS credits can be used to send SMS messages to members of a group. There are two ways to purchase SMS credits:
+    If you pay by bank, a large discount applies .
+    Second user has posted a new message This is a new forum thread! in the forum Testing group .
+    Adminas Adminovix has posted a new message This is a new forum thread! in the forum Testing group .
+    Third user has posted a new message Re: Hello to the group Moderatoriai .
+    Adminas Adminovix has posted a new message Hello to the group Moderatoriai .
+    Adminas Adminovix has posted a new message Hello to the group Moderatoriai .
+    Adminas Adminovix has posted a new message Hello to the group Moderatoriai .
+    Second user joined the group Testing group .
+    Adminas Adminovix joined the group Testing group .
+    Adminas Adminovix has created the group Testing group .
+    Adminas Adminovix has created the group Moderatoriai .
+    Adminas Adminovix joined the group Moderatoriai .
+    Third user joined the group Moderatoriai .
 
     >>> browser2.getLink('Edit shown updates.').click()
     >>> browser2.getControl('Mailing list posts').click()
     >>> browser2.getControl('Save').click()
     >>> browser2.printQuery('id("wall")//div[@class="description"]//text()')
-    Second user
-    has sent you a private message "
-    A message from me!
-    ".
-    Second user
-    has sent an sms to the group
-    Testing group
-    .
+    Adminas Adminovix has sent Second user a private message " A message from me! ".
+    Second user has sent you a private message " A message from me! ".
+    Second user has sent an sms to the group Testing group .
     SMS credits can be used to send SMS messages to members of a group. There are two ways to purchase SMS credits:
-    If you pay by bank,
-    a large discount applies
-    .
-    Second user
-    has posted a new message
-    This is a new forum thread!
-    in the forum
-    Testing group
-    .
-    Second user
-    joined the group
-    Testing group
-    .
-    Third user
-    joined the group
-    Moderatoriai
-    .
+    If you pay by bank, a large discount applies .
+    Adminas Adminovix has sent an sms to the group Testing group .
+    SMS credits can be used to send SMS messages to members of a group. There are two ways to purchase SMS credits:
+    If you pay by bank, a large discount applies .
+    Second user has posted a new message This is a new forum thread! in the forum Testing group .
+    Adminas Adminovix has posted a new message This is a new forum thread! in the forum Testing group .
+    Adminas Adminovix has created the group Moderatoriai .
+    Third user joined the group Moderatoriai .
+    Second user joined the group Testing group .
+    Adminas Adminovix joined the group Testing group .
+    Adminas Adminovix has created the group Testing group .
+    Adminas Adminovix joined the group Moderatoriai .

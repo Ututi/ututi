@@ -225,9 +225,16 @@
       </form>
       </%base:rounded_block>
     </%def>
-    ${_("%(user_link)s has sent you a private message \"%(msg_link)s\".") % \
-       dict(user_link=h.object_link(event.user),
-            msg_link=h.object_link(event.private_message)) | n}
+    %if event.user != c.user:
+      ${_("%(user_link)s has sent you a private message \"%(msg_link)s\".") % \
+         dict(user_link=h.object_link(event.user),
+              msg_link=h.object_link(event.private_message)) | n}
+    %else:
+      ${_("%(user_link)s has sent %(recipient_link)s a private message \"%(msg_link)s\".") % \
+         dict(user_link=h.object_link(event.user),
+              recipient_link=h.object_link(event.recipient),
+              msg_link=h.object_link(event.private_message)) | n}
+    %endif
   </%self:wall_item>
 </%def>
 
@@ -302,4 +309,14 @@
             page_link=h.object_link(event.page),
             user_link=h.object_link(event.user)) | n}
   </%self:wall_item>
+</%def>
+
+<%def name="render_events(events=None)">
+  <%
+     if events is None:
+       events = c.events
+  %>
+  % for event in events:
+    ${event.snippet()}
+  % endfor
 </%def>
