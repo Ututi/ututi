@@ -140,8 +140,7 @@ class EditGroupForm(GroupForm):
     approve_new_members = validators.OneOf(['none', 'admin'])
     forum_visibility = validators.OneOf(['public', 'members'])
     page_visibility = validators.OneOf(['public', 'members'])
-    # mailinglist_moderated = validators.OneOf(['members', 'moderated'])
-    mailinglist_moderated = validators.Constant('members', not_empty=False, if_missing='members')
+    mailinglist_moderated = validators.OneOf(['members', 'moderated'])
     forum_type = validators.OneOf(['mailinglist', 'forum'])
     location = Pipe(ForEach(validators.String(strip=True)),
                     LocationTagsValidator(not_empty=True))

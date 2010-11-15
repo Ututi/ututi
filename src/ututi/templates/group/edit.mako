@@ -117,7 +117,6 @@ ${h.javascript_link('/javascript/js-alternatives.js')|n}
 
         ${access_settings()}
 
-%if False:
   <label for="mailing_list_moderation" class="radio">
       <span class="labelText">
         ${_('Who can send messages to the mailing list')}
@@ -127,7 +126,6 @@ ${h.javascript_link('/javascript/js-alternatives.js')|n}
     <br />
     ${h.radio("mailinglist_moderated", "moderated", label=_('Moderated'))}
   </label>
-%endif
 
         <br />
 
