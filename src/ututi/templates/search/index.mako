@@ -68,7 +68,7 @@ ${_('Search')}
 %endif
 </%def>
 
-<%def name="search_form(text='', obj_type='*', tags='', parts=['obj_type', 'text', 'tags'], target=None, js_target=None, js=False)">
+<%def name="search_form(text='', obj_type='*', tags='', parts=['obj_type', 'text'], target=None, js_target=None, js=False)">
 ${h.javascript_link('/javascript/js-alternatives.js')|n}
 ${h.javascript_link('/javascript/search.js')|n}
 <%
@@ -97,15 +97,6 @@ ${h.javascript_link('/javascript/search.js')|n}
       </div>
       <br style="clear: left;"/>
     </div>
-    %if 'tags' in parts:
-    <div class="click2show" id="search-options">
-      <span class="search-expand hide click">${_('detailed search')}</span>
-      <div class="search-tags show">
-          <label for="tags">${_('Filter by school:')}</label>
-          ${tags_widget(tags, all_tags=True)}
-      </div>
-    </div>
-    %endif
     %if 'obj_type' in parts:
     <%
        types = [('subject', _('show-subjects')), ('file', _('show-files')), ('page', _('show-pages')), ('group', _('show-groups')), ('forum_post', _('show-posts')), ('*', _('show-everything'))]

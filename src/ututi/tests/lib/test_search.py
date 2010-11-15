@@ -67,55 +67,6 @@ def test_search_regressions():
 
     """
 
-
-def test_tag_search():
-    r"""Tests searching with tags.
-
-    First, let's create a few items that we can search for.
-
-    Now let's try searching for them by tags only
-
-        >>> [result.object.title for result in search(tags=[u'test tag'])]
-        [u'Biology students']
-
-    We can combine location and simple tags
-
-        >>> [result.object.title for result in search(tags=[u'test tag', u'vu'])]
-        [u'Biology students']
-
-    Let's add another tag and try searching for it. Nothing has been tagged with it, so we should
-    get an empty list.
-
-        >>> tg = SimpleTag(u'empty tag')
-        >>> meta.Session.add(tg)
-        >>> meta.Session.commit()
-        >>> res = meta.Session.execute("SET default_text_search_config TO 'public.lt'")
-
-        >>> [result.object.title for result in search(tags=[u'test tag', u'empty tag'])]
-        []
-
-        >>> [result.object.title for result in search(tags=[u'test tag', u'empty new tag'])]
-        []
-
-    What about pages? They inherit their tags from the subjects they belong to. Let's see if they show up in
-    search results.
-
-        >>> sorted([result.object.title for result in search(tags=[u'a tag'])])
-        [u'Test subject', u'page title']
-
-        >>> [result.object.title for result in search(text=u'puslapis', tags=[u'a tag'])]
-        [u'page title']
-
-    Mixed tags are the tags that are matched by both location tags and simple tags.
-        >>> sorted([(result.object.title, result.object.content_type) for result in search(tags=[u'Ekologijos fakultetas'])])
-        [(u'Ekologai', 'group'), (u'Test subject', 'subject'), (u'page title', 'page')]
-
-    Take a look at the rating just cause they are here:
-        >>> [(result.rating, result.object.title) for result in search(text=u'pagrindai', obj_type='subject')]
-        [(2, u'Biologijos pagrindai'), (1, u'Test subject')]
-    """
-
-
 def test_location_search():
     r"""Testing filtering by location.
 
@@ -131,6 +82,16 @@ def test_location_search():
 
         >>> sorted([result.object.title for result in search(tags=[u'ef', u'ktu'])])
         [u'Ekologai']
+
+    Let's search for a non-existant tag.
+
+        >>> [result.object.title for result in search(tags=[u'noneversity'])]
+        []
+
+    Take a look at the rating just cause they are here:
+        >>> [(result.rating, result.object.title) for result in search(text=u'pagrindai', obj_type='subject')]
+        [(2, u'Biologijos pagrindai'), (1, u'Test subject')]
+
     """
 
 def test_suite():
