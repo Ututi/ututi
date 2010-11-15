@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-11-15 01:01+0200\n"
+"PO-Revision-Date: 2010-11-15 02:53+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -2918,6 +2918,12 @@ msgstr "Nerandi to, ko ieškai?"
 
 msgid "Create a new group"
 msgstr "sukurti naują grupę"
+
+msgid "Moderation queue"
+msgstr ""
+
+msgid "No messages to be moderated yet."
+msgstr ""
 
 msgid "Group mail"
 msgstr "Grupės paštas"
