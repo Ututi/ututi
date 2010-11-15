@@ -317,6 +317,7 @@ create table group_mailing_list_messages (
        subject varchar(500) not null,
        original bytea not null,
        sent timestamp not null,
+       in_moderation_queue boolean default false,
        constraint reply_to
        foreign key (reply_to_message_id, reply_to_group_id) references group_mailing_list_messages(message_id, group_id),
        constraint thread

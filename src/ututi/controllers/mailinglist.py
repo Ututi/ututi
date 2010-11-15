@@ -141,10 +141,10 @@ class MailinglistController(MailinglistBaseController):
     @protect_view
     def index(self, group):
         message_objs = meta.Session.query(GroupMailingListMessage)\
-            .filter_by(group_id=group.id, reply_to=None)\
+            .filter_by(group_id=group.id, reply_to=None, in_moderation_queue=False)\
             .order_by(desc(GroupMailingListMessage.sent))
         message_count = meta.Session.query(GroupMailingListMessage)\
-            .filter_by(group_id=group.id, reply_to=None)\
+            .filter_by(group_id=group.id, reply_to=None, in_moderation_queue=False)\
             .order_by(desc(GroupMailingListMessage.sent))\
             .count()
         c.messages = paginate.Page(
@@ -238,3 +238,30 @@ class MailinglistController(MailinglistBaseController):
                                  self.form_result['message'])
         h.flash(_('Your message to the group was successfully sent.'))
         redirect(group.url())
+
+    @group_action
+    @ActionProtector("admin")
+    def administration(self, group):
+        message_objs = meta.Session.query(GroupMailingListMessage)\
+            .filter_by(group_id=group.id, in_moderation_queue=True)\
+            .order_by(desc(GroupMailingListMessage.sent))
+        message_count = meta.Session.query(GroupMailingListMessage)\
+            .filter_by(group_id=group.id, in_moderation_queue=True)\
+            .order_by(desc(GroupMailingListMessage.sent))\
+            .count()
+        c.messages = paginate.Page(
+                message_objs,
+                page=int(request.params.get('page', 1)),
+                item_count =  message_count,
+                items_per_page = 20,
+                )
+        c.group_menu_current_item = 'mailinglist'
+        return render('mailinglist/administration.mako')
+
+    @group_mailinglist_action
+    @ActionProtector("admin")
+    def moderate_post(self, group, thread):
+        c.thread = thread
+        c.group_menu_current_item = 'mailinglist'
+        c.messages = thread.posts
+        return render('mailinglist/moderate_post.mako')

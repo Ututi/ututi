@@ -1,6 +1,5 @@
 <%inherit file="/mailinglist/base.mako" />
 
-
   <%def name="listThreads(action='thread', show_reply_count=True)">
     <div class="single-messages" id="single-messages">
       <%
@@ -55,6 +54,11 @@
       % if h.check_crowds(['member', 'admin']):
       <div style="float: right">
         ${h.button_to(_("New topic"), url(controller='mailinglist', action='new_thread', id=c.group.group_id), method='get')}
+      </div>
+      % endif
+      % if h.check_crowds(['admin']):
+      <div style="float: right">
+        ${h.button_to(_("Administration"), c.group.url(controller='mailinglist', action='administration'), method='get')}
       </div>
       % endif
       <div class="clear"></div>

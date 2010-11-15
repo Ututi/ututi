@@ -131,6 +131,10 @@ def make_map(config):
                 controller='mailinglist',
                 action='thread')
 
+    map.connect('/group/{id}/mailinglist/moderate_post/{thread_id}',
+                controller='mailinglist',
+                action='moderate_post')
+
     map.connect('/group/{id}/mailinglist/thread/{thread_id}/reply',
                 controller='mailinglist',
                 action='reply')

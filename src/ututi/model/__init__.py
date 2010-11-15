@@ -1455,10 +1455,9 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
 
     @property
     def all_messages(self):
-        return meta.Session.query(GroupMailingListMessage)\
-            .filter_by(group_id=self.id)\
-            .order_by(GroupMailingListMessage.sent.desc())\
-            .all()
+        return (meta.Session.query(GroupMailingListMessage)
+                .filter_by(group_id=self.id, in_moderation_queue=False)
+                .order_by(GroupMailingListMessage.sent.desc())).all()
 
     def top_level_messages(self, sort=False, limit=None):
         if self.mailinglist_enabled:
@@ -1471,7 +1470,7 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
                                       GroupMailingListMessage.thread_group_id,
                                       func.max(GroupMailingListMessage.sent).label('last_msg'))\
                                       .group_by(GroupMailingListMessage.thread_message_id, GroupMailingListMessage.thread_group_id)\
-                                      .filter_by(group_id=self.id)\
+                                      .filter_by(group_id=self.id, in_moderation_queue=False)\
                                       .order_by(desc('last_msg'))
         if limit is not None:
             messages = messages.limit(limit)
@@ -1528,7 +1527,7 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
     def message_count(self):
         from ututi.model.mailing import GroupMailingListMessage
         return meta.Session.query(GroupMailingListMessage)\
-            .filter_by(group_id=self.id, reply_to=None)\
+            .filter_by(group_id=self.id, reply_to=None, in_moderation_queue=False)\
             .order_by(desc(GroupMailingListMessage.sent))\
             .count()
 

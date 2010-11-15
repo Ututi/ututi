@@ -1,0 +1,56 @@
+Tests for group mailing list moderation queue
+=============================================
+
+The default setting allows only group members post emails to the
+mailing list, so if someone sends an email to the mailing list while
+not being on it, the email is just ignored:
+
+    >>> from ututi.tests.functional import send_test_message
+    >>> send_test_message('email_from_user2.txt', '33', to='moderators@groups.ututi.lt')
+
+    >>> browser = Browser.logIn('admin@ututi.lt', 'asdasd')
+    >>> browser.getLink('Moderatoriai').click()
+    >>> browser.getLink('Mailing List').click()
+    >>> browser.printQuery('//div[@class="no-messages"]/text()')
+    No messages yet.
+
+Now if we go to the group settings page and set it so it would allow
+other people to post emails to our mailing list, a moderation queue
+get's enabled and all the emails that are sent to the group from
+non-group members will get posted into the queue.
+
+First we go to the settings page and set the value:
+
+    >>> browser.getLink('Edit').click()
+    >>> browser.getControl('Moderated').click()
+    >>> browser.getControl('Save').click()
+
+This time if we post the email, we will still not get it in our
+mailing list:
+
+    >>> send_test_message('email_from_user2.txt', '33', to='moderators@groups.ututi.lt')
+
+    >>> browser.getLink('Mailing List').click()
+    >>> browser.printQuery('//div[@class="no-messages"]/text()')
+    No messages yet.
+
+No email messages will be sent to group members either:
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> len(mail_queue)
+    0
+
+But we will see it in the moderation queue:
+
+    >>> browser.getControl('Administration').click()
+    >>> browser.printQuery("//div[@class='single-messages']//text()")
+    Hello
+    Hi, I am just writing to tell you how wonderful...
+    2009 Jun 15, 14:05
+
+We can see the content of the message by clicking on it's title:
+
+    >>> browser.getLink('Hello').click()
+    >>> browser.printQuery("//div[@class='post-body']//text()")
+    Hi, I am just writing to tell you how wonderful this system is.
+    User2

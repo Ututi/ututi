@@ -1,7 +1,6 @@
 import logging
 
 from pylons import request
-from pylons.controllers.util import abort
 
 from ututi.lib.base import BaseController
 from ututi.model import Group
@@ -63,7 +62,10 @@ class ReceivemailController(BaseController):
 
         group = Group.get(message.group_id)
         if not group.is_member(message.author):
-            return "Silent bounce!"
+            if group.mailinglist_moderated:
+                message.in_moderation_queue = True
+            else:
+                return "Silent bounce!"
 
         meta.Session.commit() # to keep message and attachment ids stable
         attachments = []
@@ -84,7 +86,11 @@ class ReceivemailController(BaseController):
 
         message.attachments.extend(attachments)
 
-        self._queueMessage(message)
+        if not message.in_moderation_queue:
+            # only send emails for messages that don't have to be
+            # moderated first
+            self._queueMessage(message)
+
         meta.Session.commit()
         # Only send actual emails if commit succeeds
         self._sendQueuedMessages()

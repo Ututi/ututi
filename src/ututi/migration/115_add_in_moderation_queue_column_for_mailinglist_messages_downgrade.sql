@@ -1,0 +1,1 @@
+alter table group_mailing_list_messages drop column in_moderation_queue;
