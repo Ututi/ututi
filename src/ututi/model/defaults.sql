@@ -6,9 +6,6 @@ create table users (
        site_url varchar(200) default null,
        description text default null,
        last_seen timestamp not null default (now() at time zone 'UTC'),
-       last_seen_feed timestamp not null default (now() at time zone 'UTC'),
-       location_country varchar(5) default null,
-       location_city varchar(30) default null,
        recovery_key varchar(10) default null,
        logo bytea default null,
        accepted_terms timestamp default null,
@@ -17,7 +14,6 @@ create table users (
        gadugadu_confirmed boolean default false,
        gadugadu_confirmation_key char(32) default '',
        gadugadu_get_news boolean default false,
-       hidden_blocks text default '',
        openid varchar(200) default null unique,
        facebook_id bigint default null unique,
        phone_number varchar(20) default null,
@@ -25,6 +21,10 @@ create table users (
        phone_confirmation_key char(32) default '',
        sms_messages_remaining int8 default 30,
        profile_is_public boolean default true,
+       hidden_blocks text default '',
+       last_seen_feed timestamp not null default (now() at time zone 'UTC'),
+       location_country varchar(5) default null,
+       location_city varchar(30) default null,
        ignored_events text default '',
        primary key (id));;
 
@@ -144,9 +144,9 @@ create index md5 on files (md5);;
 
 create table file_downloads (file_id int8 references files(id) on delete cascade,
        user_id int8 references users(id),
+       download_time timestamp not null default (now() at time zone 'UTC'),
        range_start int8 default null,
        range_end int8 default null,
-       download_time timestamp not null default (now() at time zone 'UTC'),
        primary key(file_id, user_id, download_time));;
 
 create index file_downloads_user_id_idx on file_downloads(user_id);
@@ -162,7 +162,6 @@ create table regions (id bigserial not null,
 
 /* A table for tags (location and simple tags) */
 create table tags (id bigserial not null,
-       parent_id int8 default null references tags(id) on delete cascade,
        title varchar(250) not null,
        title_short varchar(50) default null,
        description text default null,
@@ -171,6 +170,7 @@ create table tags (id bigserial not null,
        site_url varchar(200) default null,
        confirmed bool default true,
        region_id int8 default null references regions(id) on delete restrict,
+       parent_id int8 default null references tags(id) on delete cascade,
        primary key (id),
        unique(parent_id, title));;
 
@@ -375,13 +375,13 @@ CREATE TABLE received_sms_messages (
 
 CREATE TABLE sms_outbox (
        id bigserial not null,
-       outgoing_group_message_id int8 references outgoing_group_sms_messages(id) on delete cascade,
        sender_uid int8 references users(id) on delete cascade not null,
        recipient_uid int8 references users(id) on delete cascade default null,
        recipient_number varchar(20),
        message_text text not null,
        created timestamp not null default (now() at time zone 'UTC'),
        processed timestamp default null,
+       outgoing_group_message_id int8 references outgoing_group_sms_messages(id) on delete cascade,
        delivered timestamp default null,
        sending_status int default null,
        delivery_status int default null,
@@ -470,7 +470,7 @@ CREATE FUNCTION update_group_worker(groups) RETURNS void AS $$
         grp ALIAS FOR $1;
     BEGIN
       EXECUTE set_ci_modtime(grp.id);
-      SELECT content_item_id INTO search_id FROM search_items WHERE content_item_id = grp.id;
+      SELECT content_item_id INTO search_id  FROM search_items WHERE content_item_id = grp.id;
       IF FOUND THEN
         UPDATE search_items SET terms = to_tsvector(coalesce(grp.title,''))
           || to_tsvector(coalesce(grp.description, ''))
@@ -504,7 +504,7 @@ CREATE FUNCTION update_page_worker(page_versions) RETURNS void AS $$
         page ALIAS FOR $1;
     BEGIN
       EXECUTE set_ci_modtime(page.page_id);
-      SELECT content_item_id INTO search_id FROM search_items WHERE content_item_id = page.page_id;
+      SELECT content_item_id INTO search_id  FROM search_items WHERE content_item_id = page.page_id;
       IF FOUND THEN
         UPDATE search_items SET terms = to_tsvector(coalesce(page.title,''))
           || to_tsvector(coalesce(page.content,'')) WHERE content_item_id=search_id;
@@ -874,7 +874,7 @@ CREATE FUNCTION group_creation_event_trigger() RETURNS trigger AS $$
     END
 $$ LANGUAGE plpgsql;;
 
-CREATE TRIGGER group_creation_event_trigger BEFORE INSERT ON groups
+CREATE TRIGGER group_created_event_trigger BEFORE INSERT ON groups
     FOR EACH ROW EXECUTE PROCEDURE group_creation_event_trigger();;
 
 CREATE FUNCTION group_mailing_list_message_event_trigger() RETURNS trigger AS $$
@@ -978,8 +978,8 @@ CREATE TABLE group_invitations (
        user_id int8 references users(id) default null,
        group_id int8 not null references groups(id) on delete cascade,
        author_id int8 not null references users(id),
-       facebook_id int8 default null,
        hash varchar(32) not null unique,
+       facebook_id int8 default null,
        active boolean default true,
        primary key (hash),
        unique(group_id, email, active));;
@@ -1294,20 +1294,20 @@ CREATE TABLE notifications_viewed (
 
 create table school_grades (
        id bigserial not null,
-       name varchar(20) not null default '',
+       name varchar(20) not null,
        primary key (id));;
 
 
 create table cities (
        id bigserial not null,
-       name varchar(100) not null default '',
+       name varchar(100) not null,
        primary key (id)
 );;
 
 CREATE TABLE science_types (
        id bigserial NOT NULL,
        name varchar(100) NOT NULL,
-       book_department_id int8 NOT NULL,
+       book_department_id int8 NOT NULL, -- actualy an enum
        PRIMARY KEY (id)
 );;
 
@@ -1327,7 +1327,7 @@ CREATE TABLE books (
        owner_id int8 NOT NULL REFERENCES users(id) on delete cascade,
        show_phone boolean DEFAULT TRUE,
        city_id int8 DEFAULT NULL REFERENCES cities(id) on delete restrict,
-       type_id int8 NOT NULL REFERENCES book_types(id) on delete restrict,
        science_type_id int8 NOT NULL REFERENCES science_types(id) on delete restrict,
+       type_id int8 NOT NULL REFERENCES book_types(id) on delete restrict,
        PRIMARY KEY (id)
 );;
