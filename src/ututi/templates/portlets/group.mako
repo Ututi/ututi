@@ -41,7 +41,7 @@
             <div>
               %if group.is_member(c.user):
                 <a href="${url(controller='mailinglist', action='new_thread', id=c.group.group_id)}" title="${_('Mailing list address')}">${group.group_id}@${c.mailing_list_host}</a>
-              %else:
+              %elif group.mailinglist_moderated:
                 <a href="${url(controller='mailinglist', action='new_anonymous_post', id=c.group.group_id)}" title="${_('Mailing list address')}">${group.group_id}@${c.mailing_list_host}</a>
               %endif
             </div>

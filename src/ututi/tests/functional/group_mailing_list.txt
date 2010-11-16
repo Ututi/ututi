@@ -262,17 +262,31 @@ And clean up the email queue:
     4
     >>> mail_queue[:] = []
 
-Other ututi users, who do not belong to the group can also post messages
+Other ututi users, who do not belong to the group can also post
+messages, but only if group is set to moderated:
 
-    >>> browser = Browser.logIn('user2@ututi.lt', 'password')
-    >>> browser.open('http://localhost/group/moderators')
-    >>> browser.getLink('moderators@groups.ututi.lt').click()
+    >>> user2 = Browser.logIn('user2@ututi.lt', 'password')
+    >>> user2.open('http://localhost/group/moderators')
+    >>> 'moderators@groups.ututi.lt' not in user2.contents
+    True
 
-    >>> browser.getControl('Subject').value = "Hi group!"
-    >>> browser.getControl('Message').value = u"This is my message"
-    >>> browser.getControl('Post').click()
+Let's allow non-group members to post messages to our mailing list:
 
-This message will be sent to all group members:
+    >>> browser.getLink('Edit').click()
+    >>> browser.getControl('Moderated').click()
+    >>> browser.getControl('Save').click()
+
+Now the user can see the link, and should be able to post a new
+message:
+
+    >>> user2.reload()
+    >>> user2.getLink('moderators@groups.ututi.lt').click()
+    >>> user2.getControl('Subject').value = "Hi group!"
+    >>> user2.getControl('Message').value = u"This is my message"
+    >>> user2.getControl('Post').click()
+
+This message will be sent to all group members (XXX we should queue it
+in the moderation queue):
 
      >>> len(mail_queue)
      1
