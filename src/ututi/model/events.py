@@ -218,6 +218,7 @@ class SubjectModifiedEvent(Event):
     def snippet(self):
         return render_mako_def('/sections/wall_snippets.mako', 'subject_modified', event=self)
 
+
 class MailinglistPostCreatedEvent(Event):
     """Event fired when someone posts a message on the group mailing list.
 
@@ -226,6 +227,21 @@ class MailinglistPostCreatedEvent(Event):
 
     def render(self):
         return _("New email post %(link_to_message)s was posted on %(link_to_group)s mailing list") % {
+            'link_to_group': link_to(self.context.title, self.context.url()),
+            'link_to_message': link_to(self.message.subject, self.message.url())}
+
+    def snippet(self):
+        return render_mako_def('/sections/wall_snippets.mako', 'mailinglistpost_created', event=self)
+
+
+class ModeratedPostCreated(Event):
+    """Event fired when someone posts a message on the moderation queue.
+
+    Has an attribute `message' pointing to the message added.
+    """
+
+    def render(self):
+        return _("New email post %(link_to_message)s was posted in %(link_to_group)s moderation queue") % {
             'link_to_group': link_to(self.context.title, self.context.url()),
             'link_to_message': link_to(self.message.subject, self.message.url())}
 
@@ -385,6 +401,13 @@ def setup_orm(engine):
                inherits=Event,
                polymorphic_on=events_table.c.event_type,
                polymorphic_identity='mailinglist_post_created',
+               properties = {'message': relation(GroupMailingListMessage,
+                                                 primaryjoin=group_mailing_list_messages_table.c.id==events_table.c.message_id)})
+
+    orm.mapper(ModeratedPostCreated, events_table,
+               inherits=Event,
+               polymorphic_on=events_table.c.event_type,
+               polymorphic_identity='moderated_post_created',
                properties = {'message': relation(GroupMailingListMessage,
                                                  primaryjoin=group_mailing_list_messages_table.c.id==events_table.c.message_id)})
 

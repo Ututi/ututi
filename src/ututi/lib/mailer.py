@@ -35,21 +35,8 @@ class EmailInfo(object):
     __repr__ = __str__
 
 
-def send_email(sender, recipient, subject, body, html_body=None,
-               message_id=None, reply_to=None, send_to=None, list_id=None):
-    """Send an email.
-
-    All arguments should be Unicode strings (plain ASCII works as well).
-
-    Only the real name part of sender and recipient addresses may contain
-    non-ASCII characters.
-
-    The email will be properly MIME encoded and delivered though SMTP to
-    localhost port 25.  This is easy to change if you want something different.
-
-    The charset of the email will be the first one out of US-ASCII, ISO-8859-1
-    and UTF-8 that can represent all the characters occurring in the email.
-    """
+def compose_email(sender, recipient, subject, body, html_body=None,
+                  message_id=None, reply_to=None, send_to=None, list_id=None):
 
     # Header class is smart enough to try US-ASCII, then the charset we
     # provide, then fall back to UTF-8.
@@ -110,14 +97,33 @@ def send_email(sender, recipient, subject, body, html_body=None,
         msg['Errors-To'] = config.get('email_to', 'errors@ututi.lt')
         msg['List-Id'] = list_id
 
+    return msg.as_string()
+
+
+def send_email(sender, recipient, subject, body, html_body=None,
+               message_id=None, reply_to=None, send_to=None, list_id=None):
+    """Send an email.
+
+    All arguments should be Unicode strings (plain ASCII works as well).
+
+    Only the real name part of sender and recipient addresses may contain
+    non-ASCII characters.
+
+    The email will be properly MIME encoded and delivered though SMTP to
+    localhost port 25.  This is easy to change if you want something different.
+
+    The charset of the email will be the first one out of US-ASCII, ISO-8859-1
+    and UTF-8 that can represent all the characters occurring in the email.
+    """
+    msgstr = compose_email(sender, recipient, subject, body, html_body,
+                           message_id, reply_to, send_to, list_id)
+
     if send_to is None:
         send_to = recipient
 
-    msgstr = msg.as_string()
     log.debug(sender)
     log.debug(send_to)
     log.debug(msgstr)
-
     raw_send_email(sender, send_to, msgstr)
     return msgstr
 
