@@ -26,26 +26,26 @@
       </div>
       <div class="floatleft personal-data">
         <div><h2 class="grupes-portlete">${group.title}</h2></div>
-        %if not c.group.forum_is_public:
-        <div>
-          %if group.location:
-          <a href="${group.location.url()}">${' | '.join(group.location.title_path)}</a>
-          <span class="right_arrow"></span>
-          %endif
-        </div>
+        %if c.group.forum_is_public:
+          <div style="width: 190px">
+            <a href="${group.url()}">${group.url(qualified=True)}</a>
+          </div>
         %else:
-        <div style="width: 190px">
-          <a href="${group.url()}">${group.url(qualified=True)}</a>
-        </div>
-        %endif
-        %if not c.group.forum_is_public:
-        <div>
-          %if group.is_member(c.user):
-            <a href="${url(controller='mailinglist', action='new_thread', id=c.group.group_id)}" title="${_('Mailing list address')}">${group.group_id}@${c.mailing_list_host}</a>
-          %elif c.user is not None:
-            <a href="${url(controller='mailinglist', action='new_anonymous_post', id=c.group.group_id)}" title="${_('Mailing list address')}">${group.group_id}@${c.mailing_list_host}</a>
+          <div>
+            %if group.location:
+            <a href="${group.location.url()}">${' | '.join(group.location.title_path)}</a>
+            <span class="right_arrow"></span>
+            %endif
+          </div>
+          %if c.user is not None:
+            <div>
+              %if group.is_member(c.user):
+                <a href="${url(controller='mailinglist', action='new_thread', id=c.group.group_id)}" title="${_('Mailing list address')}">${group.group_id}@${c.mailing_list_host}</a>
+              %else:
+                <a href="${url(controller='mailinglist', action='new_anonymous_post', id=c.group.group_id)}" title="${_('Mailing list address')}">${group.group_id}@${c.mailing_list_host}</a>
+              %endif
+            </div>
           %endif
-        </div>
         %endif
         <div>${ungettext("%(count)s member", "%(count)s members", len(group.members)) % dict(count=len(group.members))}</div>
       </div>
