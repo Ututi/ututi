@@ -582,6 +582,7 @@ def setup_orm(engine):
                              properties={
                                  'owner': relation(User, backref="books"),
                                  'raw_logo': deferred(books_table.c.logo),
+                                 'location': relation(LocationTag, backref="Books"),
                                  })
 
     global cities_table
