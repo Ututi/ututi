@@ -1,4 +1,5 @@
 User-agent: *
 Disallow: /sms/status
+User-agent: Googlebot
 Disallow: /news/hourly
 Disallow: /news/weekly
