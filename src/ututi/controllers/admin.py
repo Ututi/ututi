@@ -99,8 +99,7 @@ class SchoolGradeForm(Schema):
 class ScienceTypeForm(Schema):
     allow_extra_fields = True
     name = String(min=3)
-    book_department_id = Int()
-
+    department_id = Int(min=0)
 
 class BookTypeForm(Schema):
     allow_extra_fields = True
@@ -602,7 +601,7 @@ class AdminController(BaseController):
     @validate(schema=ScienceTypeForm, form='science_types')
     def create_science_type(self):
         if hasattr(self, 'form_result'):
-            science_type = ScienceType(name=self.form_result['name'], book_department_id=self.form_result['book_department_id'])
+            science_type = ScienceType(name=self.form_result['name'], book_department_id=self.form_result['department_id'])
             meta.Session.add(science_type)
             meta.Session.commit()
         redirect(url(controller="admin", action="science_types"))
@@ -627,7 +626,7 @@ class AdminController(BaseController):
         science_type = meta.Session.query(ScienceType).filter(ScienceType.id == id).one()
         if hasattr(self, 'form_result'):
             science_type.name = self.form_result['name']
-            science_type.book_department_id = self.form_result['book_department_id']
+            science_type.book_department_id = self.form_result['department_id']
             meta.Session.commit()
         redirect(url(controller="admin", action="science_types"))
 

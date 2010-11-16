@@ -1329,5 +1329,8 @@ CREATE TABLE books (
        city_id int8 DEFAULT NULL REFERENCES cities(id) on delete restrict,
        science_type_id int8 NOT NULL REFERENCES science_types(id) on delete restrict,
        type_id int8 NOT NULL REFERENCES book_types(id) on delete restrict,
+       department_id int8 NOT NULL,
+       school_grade_id int8 NOT NULL REFERENCES school_grades(id) on delete restrict,
+       course varchar(100) default '',
        PRIMARY KEY (id)
 );;

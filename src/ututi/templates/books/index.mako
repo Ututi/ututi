@@ -6,12 +6,15 @@
   </div>
   <div class="book-textual-info">
     <h3 class="book-title">${book.title}</h3>
+    <div class="book-cover">
+      <img src="${url(controller='books', action='logo', id=book.id, width=150, height=200)}" alt="${_('Book cover')}" />
+    </div>
     <div>
-      ${book.author}<br />
-      ${h.ellipsis(book.description, 100)|n}
-      %if book.location:
-          <span class="book-location-title">${_('Location')}:</span>
-          <span class="book-location-name"> ${book.location}</span>
+      ${_('Author')}: ${book.author}<br />
+      ${h.ellipsis(book.description, 100)|n}<br />
+      %if book.city:
+          <span class="book-location-title">${_('City')}:</span>
+          <span class="book-location-name"> ${book.city.name}</span>
           <br />
       %endif
       <span class="book-price-title">${_('Price')}:</span>

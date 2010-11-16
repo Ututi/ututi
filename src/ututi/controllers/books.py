@@ -49,7 +49,7 @@ class BookForm(Schema):
     description = validators.UnicodeString()
     location = Pipe(ForEach(validators.UnicodeString(strip=True)),
                     LocationTagsValidator())
-
+    #KAIP PADARYT CONDITIONAL VALIDATION???
 
 class BooksController(BaseController):
     def _make_pages(self, items):
@@ -78,12 +78,16 @@ class BooksController(BaseController):
         if hasattr(self, 'form_result'):
             title = self.form_result['title']
             price = self.form_result['price']
-            book = Book(c.user.id, title, price)
+            book = Book(c.user.id, title, price, self.form_result['city_id'], self.form_result['type_id'], self.form_result['science_type_id'], self.form_result['department_id'])
             book.author = self.form_result['author']
             book.description = self.form_result['description']
             if self.form_result['logo'] is not None and self.form_result['logo'] != '':
                 book.logo = self.form_result['logo'].file.read()
             book.location = self.form_result['location']
+            book.show_phone = self.form_result['show_phone'] == True
+            book.course = self.form_result['course']
+            book.school_grade_id = self.form_result['school_grade_id']
+
             meta.Session.add(book)
             meta.Session.commit()
             h.flash(_('Book was added succesfully'))
@@ -93,10 +97,17 @@ class BooksController(BaseController):
 
     @ActionProtector("user")
     def _add(self):
-        self._load_defaults
         return render('books/add.mako')
 
     def add(self):
+        c.book_departments = Book.departments
+        c.book_types = meta.Session.query(BookType).all()
+        c.school_grades = meta.Session.query(SchoolGrade).all()
+        c.cities = meta.Session.query(City).all()
+        c.all_science_types = meta.Session.query(ScienceType).all()
+        c.university_science_types = meta.Session.query(ScienceType).filter(ScienceType.book_department_id==Book.department["university"]).all()
+        c.school_science_types = meta.Session.query(ScienceType).filter(ScienceType.book_department_id==Book.department['school']).all()
+        c.other_science_types = meta.Session.query(ScienceType).filter(ScienceType.book_department_id==Book.department['other']).all()
         return self._add()
 
     def show(self, id):
@@ -116,10 +127,15 @@ class BooksController(BaseController):
         defaults = {
             'title': book.title,
             'author': book.author,
+            'show_phone': book.show_phone,
+            'course': book.course,
+            'school_grade_id': book.school_grade_id,
+            'science_type_id': book.science_type_id,
             'description': book.description,
             'price': book.price,
-            'department': book.department,
-            'city': book.city
+            'department_id': book.department_id,
+            'city_id': book.city_id,
+            'type_id': book.type_id
         }
         if book.location is not None:
             location = dict([('location-%d' % n, tag)

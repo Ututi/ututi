@@ -511,28 +511,32 @@ def object_link(object):
     elif isinstance(object, ForumPost):
         return link_to(object.title, object.url(new=True))
 
-def book_departments_select(label, book_departments):
+def book_departments_select(label, book_departments, on_change=None):
     """Renders select box for book departments"""
     html = ""
     html += "<label>"
     html += label + ": "
-    html += '<select name="book_department_id">'
+    if on_change:
+        on_change = 'onChange = "'+on_change+'"'
+    else:
+        on_change = ""
+    html += '<select id="department_id_select" name="department_id" '+on_change +'>'
     for book_department in book_departments:
         html += "<option value='{0}'>{1}</option>".format(book_departments.index(book_department), _(book_department.capitalize()))
     html += '</select>'
     html += '</label>'
     return literal(html)
 
+def list_for_select(objects_list, **kwargs):
+    """Generates double array with object ids and names list"""
+    tuple_list = []
+    if not hasattr(kwargs, "value"):
+        kwargs['value'] = "id"
+    if not hasattr(kwargs, "label"):
+        kwargs['label'] = "name"
+    if not hasattr(kwargs, "no_blank"):
+        tuple_list.append(["", ""])
 
-def select_by_id_and_name(label, field_name, objects):
-    """Render select box for any object selecting value
-    by object.id, and representing name by object.name"""
-    html = ""
-    html += "<label>"
-    html += label + ": "
-    html += '<select name="book_department_id">'
-    for obj in objects:
-        html += "<option value='{0}'>{1}</option>".format(obj.id, obj.name)
-    html += '</select>'
-    html += '</label>'
-    return literal(html)
+    for object in objects_list:
+        tuple_list.append( [getattr(object, kwargs['value']), getattr(object, kwargs['label'])] )
+    return tuple_list

@@ -604,7 +604,10 @@ def setup_orm(engine):
                           autoload_with=engine)
 
     school_grade_mapper = orm.mapper(SchoolGrade,
-                             school_grades_table)
+                             school_grades_table,
+                                     properties={
+                                       'books': relation(Book, backref="school_grade"),
+                                        })
 
 
 
@@ -2702,11 +2705,19 @@ class Notification(object):
 class Book(object):
     """Book that can be shared by user"""
     departments = ["university", "school", "other"]
+    department = {"university" : departments.index("university"),
+                  "school" : departments.index("school"),
+                  "other" : departments.index("other")}
 
-    def __init__(self, owner_id, title, price):
+    def __init__(self, owner_id, title, price, city_id, type_id, science_type_id, department_id):
         self.price = price
         self.title = title
         self.owner_id = owner_id
+        self.city_id = city_id
+        self.type_id = type_id
+        self.science_type_id = science_type_id
+        self.department_id = department_id
+
 
     @classmethod
     def get(cls, id):

@@ -1,47 +1,59 @@
 Book creation tests
 ===================
 
-##    >>> from pkg_resources import resource_stream
-##    >>> def make_file(filename):
-##    ...     stream = resource_stream("ututi.tests.functional.import", filename)
-##    ...     return (stream, 'text/plain', filename)
-##
-##
-##
-##When I'm not logged in, I can't add book. Not logged user will be redirected to login path
-##
-##    >>> browser = Browser()
-##    >>> browser.open('http://localhost/books/add')
-##    >>> browser.url
-##    'http://localhost/login?came_from=http%3A%2F%2Flocalhost%2Fbooks%2Fadd'
-##
-##When I log in, I can enter add book area.
-##
-##    >>> browser = Browser.logIn()
-##    >>> browser.open('http://localhost/books/add')
-##    >>> browser.url
-##    'http://localhost/books/add'
-##
-##Then I enter my new book information with error - price is n/a. I should get a warning about that.
-##
-##     >>> browser.getControl('Title').value = "My beautiful book"
-##     >>> browser.getControl('Author').value = "Mr. God"
-##     >>> browser.getControl('Brief description of the book').value = "A perfect book for evening"
-##     >>> browser.getControl('Price').value = "it's a price!"
-##     >>> browser.getControl('Cover').add_file(*make_file('test_logo.png'))
-##     >>> browser.getControl('Save').click()
-##     >>> browser.url
-##     'http://localhost/books/create'
-##     >>> browser.printQuery("//span[@class='error-message']")
-##     <span class="error-message">Please enter a number</span>
-##
-##Then I enter my new book information, which must be correct. After that i should be redirected to my new book page.
-##     >>> browser.open('http://localhost/books/add')
-##     >>> browser.getControl('Title').value = "My beautiful book"
-##     >>> browser.getControl('Author').value = "Mr. God"
-##     >>> browser.getControl('Brief description of the book').value = "A perfect book for evening"
-##     >>> browser.getControl('Price').value = "1000,00"
-##     >>> browser.getControl('Cover').add_file(*make_file('test_logo.png'))
-##     >>> browser.getControl('Save').click()
-##     >>> browser.url
-     'http://localhost/books/show/1'
+    >>> from pkg_resources import resource_stream
+    >>> def make_file(filename):
+    ...     stream = resource_stream("ututi.tests.functional.import", filename)
+    ...     return (stream, 'text/plain', filename)
+
+    >>> browser = Browser.logIn()
+    >>> browser.open('http://localhost/admin/science_types')
+    >>> form = browser.getForm('science_type_form')
+    >>> form.getControl('Name').value = 'Humanitariai mokslai'
+    >>> form.getControl('Book department').value = ['1']
+    >>> form.getControl('Save').click()
+
+    >>> browser.open('http://localhost/admin/book_types')
+    >>> form = browser.getForm('book_type_form')
+    >>> form.getControl('Name').value = 'Vadovėlis'
+    >>> form.getControl('Save').click()
+
+    >>> browser.open('http://localhost/admin/cities')
+    >>> form = browser.getForm('city_form')
+    >>> form.getControl('Name').value = 'Vilnius'
+    >>> form.getControl('Save').click()
+
+    >>> browser.open('http://localhost/admin/school_grades')
+    >>> form = browser.getForm('school_grade_form')
+    >>> form.getControl('Name').value = '1 kl.'
+    >>> form.getControl('Save').click()
+
+When I'm not logged in, I can't add book. Not logged user will be redirected to login path
+
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/books/add')
+    >>> browser.url
+    'http://localhost/login?came_from=http%3A%2F%2Flocalhost%2Fbooks%2Fadd'
+
+When I log in, I can enter add book area.
+
+    >>> browser = Browser.logIn()
+    >>> browser.open('http://localhost/books/add')
+    >>> browser.url
+    'http://localhost/books/add'
+
+Then I enter my new book information and confirm changes
+
+    >>> browser.getControl('Title').value = "My beautiful book"
+    >>> browser.getControl('Author').value = "Mr. God"
+    >>> browser.getControl('Brief description of the book').value = "A perfect book for evening"
+    >>> browser.getControl('Book department').value = ['1']
+    >>> browser.getControl('School grade').value = ['1']
+    >>> browser.getControl('Science type').value = ['1']
+    >>> browser.getControl('Book type').value = ['1']
+    >>> browser.getControl('City').value = ['1']
+    >>> browser.getControl('Price').value = "1000.00"
+    >>> browser.getControl('Book cover').add_file(*make_file('test_logo.png'))
+    >>> browser.getControl('Save').click()
+    >>> browser.url
+    'http://localhost/books/show/1'
