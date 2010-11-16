@@ -25,7 +25,7 @@ DOWNGRADE_FILE_TEMPLATE = """\
 -- drop table admins;
 """
 
-def new_version(name):
+def new_version(name, editor='vim'):
     # Increment version number in __init__.
     conf_file = file('__init__.py').read()
     old_version = re.search('MIN_VERSION = (.*)', conf_file).group(1)
@@ -45,7 +45,7 @@ def new_version(name):
     downgrade_fn = '%03d_%s_downgrade.sql' % (version, name)
     file(downgrade_fn, 'w').write(DOWNGRADE_FILE_TEMPLATE)
     os.system('git diff ../model/defaults.sql >> %s' % downgrade_fn)
-    os.system('vim %s %s' % (upgrade_fn, downgrade_fn))
+    os.system('%s %s %s' % (editor, upgrade_fn, downgrade_fn))
     os.system('git add %s' % upgrade_fn)
     os.system('git add %s' % downgrade_fn)
 
@@ -53,7 +53,10 @@ def new_version(name):
 if __name__ == '__main__':
     try:
         name = sys.argv[1]
+        editor = 'vim'
+        if len(sys.argv) > 2:
+            editor = sys.argv[2]
     except IndexError:
-        print 'Usage: ./new_version.py [version_name]'
+        print 'Usage: ./new_version.py version_name [editor]'
         sys.exit(1)
-    new_version(name)
+    new_version(name, editor)
