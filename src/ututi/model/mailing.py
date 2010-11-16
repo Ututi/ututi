@@ -131,22 +131,35 @@ class GroupMailingListMessage(ContentItem):
     """Message in the group mailing list."""
 
     def info_dict(self):
-        if self.author is not None:
-            author = {'title': self.author.fullname,
-                      'url': self.author.url}
-        else:
-            author_name, author_address = parseaddr(self.mime_message['From'])
-            author = {'title': '%s <%s>' % (author_name, author_address),
-                      'url': 'mailto:%s' % author_address}
         return {'thread_id': self.id,
                 'send': self.sent,
-                'author': author,
+                'author': {'title': self.author_title,
+                           'url': self.author_url},
                 'body': self.body,
                 'reply_count': len(self.posts) - 1,
                 'subject': self.subject}
 
+    @property
+    def author_url(self):
+        if self.author:
+            return self.author.url()
+        else:
+            author_name, author_address = parseaddr(self.mime_message['From'])
+            return 'mailto:%s' % author_address
+
+    @property
+    def author_title(self):
+        if self.author:
+            return self.author.fullname
+        else:
+            author_name, author_address = parseaddr(self.mime_message['From'])
+            return '%s <%s>' % (author_name, author_address)
+
     def url(self):
-        return self.group.url(controller='mailinglist', action='thread', thread_id=self.thread.id)
+        if not self.in_moderation_queue:
+            return self.group.url(controller='mailinglist', action='thread', thread_id=self.thread.id)
+        else:
+            return self.group.url(controller='mailinglist', action='moderate_post', thread_id=self.thread.id)
 
     @property
     def body(self):

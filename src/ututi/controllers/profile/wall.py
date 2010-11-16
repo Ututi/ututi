@@ -162,6 +162,7 @@ class WikiForm(Schema):
 
 
 class WallMixin(MailinglistBaseController, FileViewMixin):
+
     @ActionProtector("user")
     def hide_event(self):
         """Hide an event from the user's wall, add the event ttype to the ignored events list."""
@@ -295,12 +296,17 @@ class WallMixin(MailinglistBaseController, FileViewMixin):
         return render_mako_def('/sections/wall_snippets.mako', 'render_events', events=events)
 
     def _user_events(self):
+        user_is_admin_of_groups = [membership.group_id
+                                   for membership in c.user.memberships
+                                   if membership.membership_type == 'administrator']
         return meta.Session.query(Event)\
             .filter(or_(Event.object_id.in_([s.id for s in c.user.all_watched_subjects]),
                         Event.object_id.in_([m.group.id for m in c.user.memberships]),
                         Event.recipient_id == c.user.id,
                         and_(Event.event_type=='private_message_sent',
                              Event.user == c.user)))\
+            .filter(or_(Event.event_type != 'moderated_post_created',
+                        Event.object_id.in_(user_is_admin_of_groups)))\
             .filter(~Event.event_type.in_(c.user.ignored_events_list))\
             .order_by(desc(Event.created))\
             .limit(20).all()

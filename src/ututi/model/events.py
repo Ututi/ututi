@@ -240,13 +240,17 @@ class ModeratedPostCreated(Event):
     Has an attribute `message' pointing to the message added.
     """
 
+    def link_to_author(self):
+        info_dict = self.message.info_dict()
+        return link_to(info_dict['author']['title'], info_dict['author']['url'])
+
     def render(self):
         return _("New email post %(link_to_message)s was posted in %(link_to_group)s moderation queue") % {
             'link_to_group': link_to(self.context.title, self.context.url()),
             'link_to_message': link_to(self.message.subject, self.message.url())}
 
     def snippet(self):
-        return render_mako_def('/sections/wall_snippets.mako', 'mailinglistpost_created', event=self)
+        return render_mako_def('/sections/wall_snippets.mako', 'moderated_post_created', event=self)
 
 
 class ForumPostCreatedEvent(Event):

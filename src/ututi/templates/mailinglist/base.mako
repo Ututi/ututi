@@ -18,7 +18,7 @@
 <%def name="render_message(message, post_class='thread-post', show_actions=True)">
   <tr>
     <td colspan="2" class="author">
-      <a href="${message.author.url()}">${message.author.fullname}</a>
+      <a href="${message.author_url}">${message.author_title}</a>
       <span class="created-on">${h.fmt_dt(message.sent)}</span>
       %if show_actions:
       <div style="float: right">
@@ -30,8 +30,8 @@
 
 <tr class="${post_class}">
   <td class="author-logo">
-    <a href="${message.author.url()}">
-      %if message.author.logo is not None:
+    <a href="${message.author_url}">
+      %if message.author and message.author.logo is not None:
         <img alt="user-logo" src="${url(controller='user', action='logo', id=message.author.id, width='45', height='60')}"/>
       %else:
         ${h.image('/images/user_logo_45x60.png', alt='logo', id='group-logo')|n}

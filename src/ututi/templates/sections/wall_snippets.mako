@@ -162,6 +162,20 @@
   </%self:wall_item>
 </%def>
 
+<%def name="moderated_post_created(event)">
+  <%self:wall_item event="${event}">
+    <%def name="classes()">message_event mailinglistpost_created</%def>
+    <%def name="content()">
+      <span class="truncated">${h.email_with_replies(event.message.body, True)}</span>
+    </%def>
+    <%def name="when()">${event.when()}</%def>
+    ${_("%(user_link)s has posted a new message %(message_link)s to the group's %(group_link)s moderation queue.") % \
+         dict(user_link=event.link_to_author(),
+              group_link=h.object_link(event.context),
+              message_link=h.object_link(event.message)) | n}
+  </%self:wall_item>
+</%def>
+
 <%def name="forumpost_created(event)">
   <%self:wall_item event="${event}">
     <%def name="classes()">message_event forumpost_created</%def>

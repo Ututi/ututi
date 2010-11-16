@@ -70,7 +70,7 @@ Now we should see 2 messages in the list:
     Second user
     2009 Jun 15, 14:05
     <BLANKLINE>
-    Hello
+    Hello from varlius
     Confirm your varlius registration!
     Click the l...
     Varlius <varlius@example.com>
