@@ -29,7 +29,7 @@
           </div>
           <div class="floatleft user">
             <div class="orange bold verysmall">
-              <a href="${message['author'].url()}">${message['author'].fullname}</a>
+              <a href="${message['author']['url']}">${message['author']['title']}</a>
             </div>
             <div class="grey verysmall">${post_date}</div>
           </div>

@@ -49,23 +49,16 @@ class ReceivemailController(BaseController):
         if message is None:
             return "Silent bounce!"
 
-        if message.author is None:
-            return "Silent bounce!"
-
         if message.group_id is None:
             return "Silent bounce!"
 
-        meta.Session.execute("SET ututi.active_user TO %d" % message.author.id)
-        request.environ['repoze.who.identity'] = message.author.id
+        if message.author is not None:
+            meta.Session.execute("SET ututi.active_user TO %d" % message.author.id)
+            request.environ['repoze.who.identity'] = message.author.id
+        else:
+            meta.Session.execute("SET ututi.active_user TO ''")
 
         meta.Session.add(message)
-
-        group = Group.get(message.group_id)
-        if not group.is_member(message.author):
-            if group.mailinglist_moderated:
-                message.in_moderation_queue = True
-            else:
-                return "Silent bounce!"
 
         meta.Session.commit() # to keep message and attachment ids stable
         attachments = []

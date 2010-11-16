@@ -89,7 +89,7 @@ insert into user_medals (user_id, medal_type) values (1, 'admin2');
 /* A generic table for Ututi objects */
 create table content_items (id bigserial not null,
        content_type varchar(20) not null default '',
-       created_by int8 references users(id) not null,
+       created_by int8 references users(id),
        created_on timestamp not null default (now() at time zone 'UTC'),
        modified_by int8 references users(id) default null,
        modified_on timestamp not null default (now() at time zone 'UTC'),
@@ -313,7 +313,7 @@ create table group_mailing_list_messages (
        reply_to_group_id int8 references groups(id) on delete cascade default null,
        thread_message_id varchar(320) not null,
        thread_group_id int8 references groups(id) on delete cascade not null,
-       author_id int8 references users(id) not null,
+       author_id int8 references users(id),
        subject varchar(500) not null,
        original bytea not null,
        sent timestamp not null,
@@ -722,7 +722,11 @@ CREATE TRIGGER update_item_location AFTER UPDATE ON content_items
 /* a trigger to update the date and user who created the object */
 CREATE FUNCTION on_content_create() RETURNS trigger AS $$
     BEGIN
-      NEW.created_by = current_setting('ututi.active_user');
+      IF (current_setting('ututi.active_user') <> '') THEN
+        NEW.created_by = current_setting('ututi.active_user');
+      ELSE
+        NEW.created_by = NULL;
+      END IF;
       NEW.created_on = (now() at time zone 'UTC');
       RETURN NEW;
     END
@@ -750,7 +754,7 @@ CREATE TRIGGER on_content_update BEFORE UPDATE ON content_items
 create table events (
        id bigserial not null,
        object_id int8 default null references content_items(id) on delete cascade,
-       author_id int8 references users(id) not null,
+       author_id int8 references users(id),
        recipient_id int8 default null references users(id),
        created timestamp not null default (now() at time zone 'UTC'),
        event_type varchar(30),
@@ -875,8 +879,13 @@ CREATE TRIGGER group_creation_event_trigger BEFORE INSERT ON groups
 
 CREATE FUNCTION group_mailing_list_message_event_trigger() RETURNS trigger AS $$
     BEGIN
-      INSERT INTO events (object_id, author_id, event_type, message_id)
-             VALUES (NEW.group_id, cast(current_setting('ututi.active_user') as int8), 'mailinglist_post_created', NEW.id);
+      IF NEW.in_moderation_queue THEN
+        INSERT INTO events (object_id, author_id, event_type, message_id)
+               VALUES (NEW.group_id, NEW.author_id, 'moderated_post_created', NEW.id);
+      ELSE
+        INSERT INTO events (object_id, author_id, event_type, message_id)
+               VALUES (NEW.group_id, cast(current_setting('ututi.active_user') as int8), 'mailinglist_post_created', NEW.id);
+      END IF;
       RETURN NEW;
     END
 $$ LANGUAGE plpgsql;;

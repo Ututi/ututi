@@ -131,12 +131,16 @@ class GroupMailingListMessage(ContentItem):
     """Message in the group mailing list."""
 
     def info_dict(self):
+        if self.author is not None:
+            author = {'title': self.author.fullname,
+                      'url': self.author.url}
+        else:
+            author_name, author_address = parseaddr(self.mime_message['From'])
+            author = {'title': '%s <%s>' % (author_name, author_address),
+                      'url': 'mailto:%s' % author_address}
         return {'thread_id': self.id,
-                'last_reply_author_id': self.posts[-1].author,
-                'last_reply_author_title': self.posts[-1].author.fullname,
-                'last_reply_date': self.posts[-1].sent,
                 'send': self.sent,
-                'author': self.author,
+                'author': author,
                 'body': self.body,
                 'reply_count': len(self.posts) - 1,
                 'subject': self.subject}
@@ -220,6 +224,7 @@ class GroupMailingListMessage(ContentItem):
             if suffix in mailing_list_hosts:
                 group_ids.append(prefix)
 
+        # XXX what if I CC message to 2 groups at the same time?
         g = None
         if group_ids:
             for group_id in group_ids:
@@ -235,6 +240,16 @@ class GroupMailingListMessage(ContentItem):
 
         if cls.get(message_id, group_id):
             raise MessageAlreadyExists(message_id, group_id)
+
+        mime_message = mimetools.Message(StringIO(message_text))
+        author_name, author_address = parseaddr(mime_message['From'])
+        author = User.get(author_address)
+        in_moderation_queue = False
+        if author is None or not g.is_member(author):
+            if g.mailinglist_moderated:
+                in_moderation_queue = True
+            else:
+                return # Bounce
 
         reply_to_message_id = message.getHeader('in-reply-to')
         reply_to = cls.get(reply_to_message_id, group_id)
@@ -252,7 +267,8 @@ class GroupMailingListMessage(ContentItem):
                    group_id,
                    message.getSubject(),
                    message.getDate(),
-                   reply_to)
+                   reply_to,
+                   in_moderation_queue)
 
     @classmethod
     def get(cls, message_id, group_id):
@@ -271,7 +287,9 @@ class GroupMailingListMessage(ContentItem):
                  group_id,
                  subject,
                  sent,
-                 reply_to=None):
+                 reply_to=None,
+                 in_moderation_queue=False):
+        self.in_moderation_queue = in_moderation_queue
         self.original = message_text
         self.author = self.getAuthor()
         self.message_id = message_id

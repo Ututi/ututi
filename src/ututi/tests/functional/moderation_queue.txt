@@ -7,6 +7,7 @@ not being on it, the email is just ignored:
 
     >>> from ututi.tests.functional import send_test_message
     >>> send_test_message('email_from_user2.txt', '33', to='moderators@groups.ututi.lt')
+    >>> send_test_message('email_from_non_ututi.txt', '42', to='moderators@groups.ututi.lt')
 
     >>> browser = Browser.logIn('admin@ututi.lt', 'asdasd')
     >>> browser.getLink('Moderatoriai').click()
@@ -54,3 +55,23 @@ We can see the content of the message by clicking on it's title:
     >>> browser.printQuery("//div[@class='post-body']//text()")
     Hi, I am just writing to tell you how wonderful this system is.
     User2
+
+Messages from non-ututi users are treated in a special way, as these
+messages don't have an author:
+
+    >>> send_test_message('email_from_non_ututi.txt', '42', to='moderators@groups.ututi.lt')
+
+Now we should see 2 messages in the list:
+
+    >>> browser.getLink('Back to the moderation queue').click()
+    >>> browser.printQuery("//div[@class='single-messages']//text()")
+    Hello
+    Hi, I am just writing to tell you how wonderful...
+    Second user
+    2009 Jun 15, 14:05
+    <BLANKLINE>
+    Hello
+    Confirm your varlius registration!
+    Click the l...
+    Varlius <varlius@example.com>
+    2009 Jun 15, 14:05

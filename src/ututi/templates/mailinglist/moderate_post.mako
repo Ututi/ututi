@@ -1,7 +1,7 @@
 <%inherit file="/mailinglist/base.mako" />
 
 <div class="back-link">
-  <a class="back-link" href="${h.url_for(action='index')}">${_('Back to the topic list')}</a>
+  <a class="back-link" href="${h.url_for(action='administration')}">${_('Back to the moderation queue')}</a>
 </div>
 
 <%self:rounded_block class_="portletGroupFiles portletMailingListThread smallTopMargin">
