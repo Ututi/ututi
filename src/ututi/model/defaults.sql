@@ -26,6 +26,7 @@ create table users (
        location_country varchar(5) default null,
        location_city varchar(30) default null,
        ignored_events text default '',
+       user_type varchar(10) not null default 'user',
        primary key (id));;
 
 CREATE FUNCTION check_gadugadu() RETURNS trigger AS $$
