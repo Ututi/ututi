@@ -76,4 +76,4 @@ so we stay on the same page.
 
     >>> browser.getControl('Reject', index=1).click()
     >>> print browser.url
-    http://localhost/group/moderators/mailinglist/administration?thread_id=4
+    http://localhost/group/moderators/mailinglist/administration
