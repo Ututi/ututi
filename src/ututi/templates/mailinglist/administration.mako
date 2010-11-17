@@ -1,5 +1,12 @@
 <%inherit file="/mailinglist/base.mako" />
 
+<%def name="listThreadsActions()">
+  <div class="floatleft moderation-actions">
+    ${h.button_to(_('Accept'), '#')}
+    ${h.button_to(_('Reject'), '#')}
+  </div>
+</%def>
+
 <div class="back-link">
   <a class="back-link" href="${h.url_for(action='index')}">${_('Back to the topic list')}</a>
 </div>
@@ -11,7 +18,7 @@
     </div>
     <div class="clear"></div>
   </div>
-  <div class="single-messages" id="single-messages">
+  <div class="single-messages with-moderation-actions" id="single-messages">
   %if not c.messages:
       <div class="no-messages">${_('No messages to be moderated yet.')}</div>
   %else:

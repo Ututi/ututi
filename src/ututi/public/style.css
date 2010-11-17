@@ -5060,3 +5060,16 @@ ul.universityMembersInfo li{
 .clearboth {
   display: inline;
 }
+
+/* moderation queue specifics */
+
+div.moderation-actions {
+    width: 155px;
+    padding: 6px 0px;
+}
+
+div.with-moderation-actions div.m-on {
+    width: 285px;
+}
+
+/* end moderation queue specifics */

@@ -44,10 +44,9 @@ No email messages will be sent to group members either:
 But we will see it in the moderation queue:
 
     >>> browser.getControl('Administration').click()
-    >>> browser.printQuery("//div[@class='single-messages']//text()")
+    >>> browser.printQuery("id('single-messages')//div[contains(@class, 'm-on')]//text()")
     Hello
     Hi, I am just writing to tell you how wonderful...
-    2009 Jun 15, 14:05
 
 We can see the content of the message by clicking on it's title:
 
@@ -64,14 +63,17 @@ messages don't have an author:
 Now we should see 2 messages in the list:
 
     >>> browser.getLink('Back to the moderation queue').click()
-    >>> browser.printQuery("//div[@class='single-messages']//text()")
+    >>> browser.printQuery("id('single-messages')//div[contains(@class, 'm-on')]//text()")
     Hello
     Hi, I am just writing to tell you how wonderful...
-    Second user
-    2009 Jun 15, 14:05
     <BLANKLINE>
     Hello from varlius
     Confirm your varlius registration!
     Click the l...
-    Varlius <varlius@example.com>
-    2009 Jun 15, 14:05
+
+We can click "Accept" and "Reject" buttons. They don't do anything yet,
+so we stay on the same page.
+
+    >>> browser.getControl('Reject', index=1).click()
+    >>> print browser.url
+    http://localhost/group/moderators/mailinglist/administration?thread_id=4
