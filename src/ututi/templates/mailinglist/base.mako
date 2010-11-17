@@ -57,6 +57,9 @@
 </tr>
 </%def>
 
+<%def name="listThreadsActions()">
+</%def>
+
 <%def name="listThreads(action='thread', show_reply_count=True)">
     <%
        message_count = len(c.messages)
@@ -89,6 +92,7 @@
           </div>
           <div class="grey verysmall">${post_date}</div>
         </div>
+        ${self.listThreadsActions()}
         <br style="clear: left;" />
       </div>
     % endfor
