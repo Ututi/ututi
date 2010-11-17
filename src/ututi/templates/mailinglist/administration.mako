@@ -11,13 +11,11 @@
     </div>
     <div class="clear"></div>
   </div>
+  <div class="single-messages" id="single-messages">
   %if not c.messages:
-    <div class="single-messages" id="single-messages">
       <div class="no-messages">${_('No messages to be moderated yet.')}</div>
-    </div>
   %else:
-    <div class="single-messages" id="single-messages">
       ${self.listThreads(action='moderate_post', show_reply_count=False)}
-    </div>
   %endif
+  </div>
 </%self:rounded_block>
