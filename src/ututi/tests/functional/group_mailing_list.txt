@@ -289,10 +289,9 @@ This message will appear in the moderation queue:
 
     >>> browser.getLink('Mailing List').click()
     >>> browser.getControl('Administration').click()
-    >>> browser.printQuery("//div[@class='single-messages']//text()")
+    >>> browser.printQuery("id('single-messages')//div[contains(@class, 'm-on')]//text()")
     Hi group!
     This is my message
-    ...
 
 After we accept the message, the message will get sent to all the
 members of the group (XXX not implemented):
