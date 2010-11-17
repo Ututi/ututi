@@ -29,7 +29,7 @@ def test_get_users():
 
         >>> list(meta.Session.query(User)\
         ...     .from_statement(select([literal_column("*")]).select_from(func.get_users_by_email('admin@ututi.lt'))))
-        [<ututi.model.User object at ...>]
+        [<ututi.model.users.User object at ...>]
 
         >>> meta.Session.close()
 

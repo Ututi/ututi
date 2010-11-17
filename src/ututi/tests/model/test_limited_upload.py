@@ -4,7 +4,8 @@ from zope.testing import doctest
 import pylons.test
 from pylons import config
 
-from ututi.model import LocationTag, GroupMembershipType, GroupMember, Group, File, User, meta
+from ututi.model import LocationTag, Group, File, meta
+from ututi.model.users import User
 
 from ututi.tests import UtutiLayer
 import ututi

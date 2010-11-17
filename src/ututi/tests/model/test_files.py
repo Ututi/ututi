@@ -1,7 +1,8 @@
 from datetime import date
 from zope.testing import doctest
 
-from ututi.model import LocationTag, GroupMembershipType, GroupMember, Group, File, User, Subject, meta
+from ututi.model import LocationTag, GroupMembershipType, GroupMember, Group, File, Subject, meta
+from ututi.model.users import User
 
 from ututi.tests import UtutiLayer
 import ututi

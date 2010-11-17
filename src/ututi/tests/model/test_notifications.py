@@ -1,7 +1,8 @@
 from zope.testing import doctest
 import datetime
 
-from ututi.model import Notification, User, meta
+from ututi.model import Notification, meta
+from ututi.model.users import User
 from ututi.tests import UtutiLayer
 
 import ututi

@@ -3,8 +3,8 @@ from datetime import date
 from zope.testing import doctest
 
 from ututi.model import Group
-from ututi.model import Subject, LocationTag, Email, User
-from ututi.model import generate_salt, generate_password, validate_password
+from ututi.model import Subject, LocationTag
+from ututi.model.users import generate_salt, generate_password, validate_password, Email, User
 from ututi.model import meta
 
 from ututi.model import GroupMembershipType, GroupMember
@@ -137,7 +137,7 @@ def test_User_get():
         >>> admin = User.get('admin@ututi.lt')
 
         >>> admin
-        <ututi.model.User object at ...>
+        <ututi.model.users.User object at ...>
 
         >>> admin.fullname
         u'Adminas Adminovix'

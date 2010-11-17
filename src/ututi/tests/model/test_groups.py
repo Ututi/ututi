@@ -1,7 +1,8 @@
 from datetime import date
 from zope.testing import doctest
 
-from ututi.model import LocationTag, GroupMembershipType, GroupMember, Group, File, User, meta
+from ututi.model import LocationTag, GroupMembershipType, GroupMember, Group, File, meta
+from ututi.model.users import User
 from ututi.model.events import Event
 
 from ututi.tests import UtutiLayer
@@ -57,7 +58,7 @@ def test_group_files():
         [<ututi.model.File object at ...>, <ututi.model.File object at ...>]
 
         >>> group.last_seen_members
-        [<ututi.model.User object at ...>]
+        [<ututi.model.users.User object at ...>]
 
         >>> printTree(group)
         Another text file
