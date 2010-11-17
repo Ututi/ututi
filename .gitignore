@@ -19,3 +19,4 @@ coverage/*
 backup/*
 performance.log
 .coverage
+*.swp
