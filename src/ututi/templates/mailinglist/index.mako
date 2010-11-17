@@ -23,6 +23,8 @@
         <div class="no-messages">${_('No messages yet.')}</div>
       </div>
     %else:
-      ${self.listThreads()}
+      <div class="single-messages" id="single-messages">
+        ${self.listThreads()}
+      </div>
     %endif
  </%self:rounded_block>

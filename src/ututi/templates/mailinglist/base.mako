@@ -58,7 +58,6 @@
 </%def>
 
 <%def name="listThreads(action='thread', show_reply_count=True)">
-  <div class="single-messages" id="single-messages">
     <%
        message_count = len(c.messages)
     %>
@@ -100,7 +99,6 @@
                                  '$(document).scrollTop($("#single-messages").scrollTop());'
                                  ' return false;') }
     </div>
-  </div>
 </%def>
 
 ${next.body()}
