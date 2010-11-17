@@ -43,7 +43,7 @@ class ErrorController(SearchController):
 
     def send_error(self):
         if request.method == 'POST':
-            sender = _('guest')
+            sender = config.get('ututi_emails_from', 'info@ututi.lt')
             action = request.POST.get('submit')
             message = ""
             if c.user:
