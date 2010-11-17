@@ -31,10 +31,7 @@ from sqlalchemy.sql.expression import and_, or_
 from sqlalchemy.orm.interfaces import MapperExtension
 
 from ututi.migration import GreatMigrator
-from ututi.model.users import Medal
-from ututi.model.users import Email
-from ututi.model.users import UserSubjectMonitoring
-from ututi.model.users import User
+from ututi.model.users import Medal, Email, UserSubjectMonitoring, User, Teacher
 from ututi.model.util import logo_property
 from ututi.model import meta
 from ututi.lib.messaging import SMSMessage
@@ -242,12 +239,18 @@ def setup_orm(engine):
                                                 backref='subscriptions'),
                              'user': relation(User)})
 
-    orm.mapper(User,
+    user_mapper = orm.mapper(User,
+                             users_table,
+                             properties = {'emails': relation(Email, backref='user'),
+                                           'medals': relation(Medal, backref='user'),
+                                           'raw_logo': deferred(users_table.c.logo),
+                                           'location': relation(LocationTag, backref=backref('users', lazy=True))})
+    orm.mapper(Teacher,
                users_table,
-               properties = {'emails': relation(Email, backref='user'),
-                             'medals': relation(Medal, backref='user'),
-                             'raw_logo': deferred(users_table.c.logo),
-                             'location': relation(LocationTag, backref=backref('users', lazy=True))})
+               polymorphic_on=users_table.c.user_type,
+               polymorphic_identity='teacher',
+               inherits=user_mapper)
+
 
     orm.mapper(FileDownload,
                file_downloads_table,

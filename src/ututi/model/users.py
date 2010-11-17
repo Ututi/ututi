@@ -459,3 +459,10 @@ class ImplicitMedal(object):
 
 class Medal(ImplicitMedal):
     """A persistent medal for a user."""
+
+
+class Teacher(User):
+    """A separate class for the teachers at Ututi."""
+    def __init__(self, **kwargs):
+        self.teacher_verified = False
+        super(Teacher, self).__init__(**kwargs)
