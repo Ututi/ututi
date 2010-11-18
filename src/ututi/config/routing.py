@@ -127,21 +127,8 @@ def make_map(config):
     map.connect('/group/{id}/mailinglist/{action}',
                 controller='mailinglist')
 
-    map.connect('/group/{id}/mailinglist/thread/{thread_id}',
-                controller='mailinglist',
-                action='thread')
-
-    map.connect('/group/{id}/mailinglist/moderate_post/{thread_id}',
-                controller='mailinglist',
-                action='moderate_post')
-
-    map.connect('/group/{id}/mailinglist/accept_post/{thread_id}',
-                controller='mailinglist',
-                action='accept_post')
-
-    map.connect('/group/{id}/mailinglist/reject_post/{thread_id}',
-                controller='mailinglist',
-                action='reject_post')
+    map.connect('/group/{id}/mailinglist/{action}/{thread_id}',
+                controller='mailinglist')
 
     map.connect('/group/{id}/mailinglist/thread/{thread_id}/reply',
                 controller='mailinglist',
