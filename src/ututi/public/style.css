@@ -5076,3 +5076,12 @@ div.with-moderation-actions div.m-on {
 }
 
 /* end moderation queue specifics */
+
+/* Teacher registration */
+.login-choice-box .bullet {
+  margin: 20px 5px;
+  padding-left: 20px;
+  background: transparent url("img/icons/tick_big.png") left 4px no-repeat;
+  font-size: 1.1em;
+}
+/* End Teacher registration */

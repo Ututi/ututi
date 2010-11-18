@@ -35,6 +35,17 @@
   <td class="login-choice-separator">
   </td>
   <td class="login-choice-box">
-    Some text
+    <div style="margin-top: 60px;">
+      <div class="bullet">
+        ${_('After registering, You will need to be confirmed as a teacher by our administrators.')}
+      </div>
+      <div class="bullet">
+        ${_('Be sure to specify your university email address as this will make it easier for us to verify You as a teacher.')}
+      </div>
+      <div class="bullet">
+        ${_('If You teach at more than one university, specify Your primary one: You will be able to specify Your information in more detail once You'\
+        ' have registered.')}
+      </div>
+    </div>
   </td>
 </table>
