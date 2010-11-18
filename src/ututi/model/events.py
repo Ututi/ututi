@@ -218,8 +218,15 @@ class SubjectModifiedEvent(Event):
     def snippet(self):
         return render_mako_def('/sections/wall_snippets.mako', 'subject_modified', event=self)
 
+class PostCreatedEventBase(Event):
+    """Base class for mailing list post related events.""" 
 
-class MailinglistPostCreatedEvent(Event):
+    def link_to_author(self):
+        info_dict = self.message.info_dict()
+        return link_to(info_dict['author']['title'], info_dict['author']['url'])
+
+
+class MailinglistPostCreatedEvent(PostCreatedEventBase):
     """Event fired when someone posts a message on the group mailing list.
 
     Has an attribute `message' pointing to the message added.
@@ -234,15 +241,11 @@ class MailinglistPostCreatedEvent(Event):
         return render_mako_def('/sections/wall_snippets.mako', 'mailinglistpost_created', event=self)
 
 
-class ModeratedPostCreated(Event):
+class ModeratedPostCreated(PostCreatedEventBase):
     """Event fired when someone posts a message on the moderation queue.
 
     Has an attribute `message' pointing to the message added.
     """
-
-    def link_to_author(self):
-        info_dict = self.message.info_dict()
-        return link_to(info_dict['author']['title'], info_dict['author']['url'])
 
     def render(self):
         return _("New email post %(link_to_message)s was posted in %(link_to_group)s moderation queue") % {

@@ -156,7 +156,7 @@
       </%base:rounded_block>
     </%def>
     ${_("%(user_link)s has posted a new message %(message_link)s to the group %(group_link)s.") % \
-       dict(user_link=h.object_link(event.user),
+       dict(user_link=event.link_to_author(),
             group_link=h.object_link(event.context),
             message_link=h.object_link(event.message)) | n}
   </%self:wall_item>
