@@ -1332,7 +1332,7 @@ CREATE TABLE books (
        science_type_id int8 NOT NULL REFERENCES science_types(id) on delete restrict,
        type_id int8 NOT NULL REFERENCES book_types(id) on delete restrict,
        department_id int8 NOT NULL,
-       school_grade_id int8 NOT NULL REFERENCES school_grades(id) on delete restrict,
+       school_grade_id int8 REFERENCES school_grades(id) on delete restrict,
        course varchar(100) default '',
        location_id int8 REFERENCES tags(id),
        PRIMARY KEY (id)

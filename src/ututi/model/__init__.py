@@ -2248,13 +2248,13 @@ class Book(object):
                   "school" : departments.index("school"),
                   "other" : departments.index("other")}
 
-    def __init__(self, owner_id, title, price, city_id, type_id, science_type_id, department_id):
+    def __init__(self, owner, title, price, city, type, science_type, department_id):
         self.price = price
         self.title = title
-        self.owner_id = owner_id
-        self.city_id = city_id
-        self.type_id = type_id
-        self.science_type_id = science_type_id
+        self.owner = owner
+        self.city = city
+        self.type = type
+        self.science_type = science_type
         self.department_id = department_id
 
 

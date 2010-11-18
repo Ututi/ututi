@@ -38,9 +38,9 @@ ${book_attribute(_('Book type'), c.book.type.name)}
 %if c.book.department_id == c.book.department['university']:
   ${_('School')}:
   %if c.book.location.parent:
-    ${location.parent.title_short}
+    ${c.book.location.parent.title_short}
   %endif
-  ${location.title} ${c.book.course}
+  ${c.book.location.title} ${c.book.course}
 %elif c.book.department_id == c.book.department['school']:
   ${_('School grade')}: ${c.book.school_grade.name}
 %endif

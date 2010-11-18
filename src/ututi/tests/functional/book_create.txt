@@ -9,8 +9,32 @@ Book creation tests
     >>> browser = Browser.logIn()
     >>> browser.open('http://localhost/admin/science_types')
     >>> form = browser.getForm('science_type_form')
-    >>> form.getControl('Name').value = 'Humanitariai mokslai'
+    >>> form.getControl('Name').value = 'Fizika'
     >>> form.getControl('Book department').value = ['1']
+    >>> form.getControl('Save').click()
+
+    >>> browser.open('http://localhost/admin/science_types')
+    >>> form = browser.getForm('science_type_form')
+    >>> form.getControl('Name').value = 'Matematika'
+    >>> form.getControl('Book department').value = ['1']
+    >>> form.getControl('Save').click()
+
+    >>> browser.open('http://localhost/admin/science_types')
+    >>> form = browser.getForm('science_type_form')
+    >>> form.getControl('Name').value = 'Realiniai mokslai'
+    >>> form.getControl('Book department').value = ['0']
+    >>> form.getControl('Save').click()
+
+    >>> browser.open('http://localhost/admin/science_types')
+    >>> form = browser.getForm('science_type_form')
+    >>> form.getControl('Name').value = 'Humanitariniai mokslai'
+    >>> form.getControl('Book department').value = ['0']
+    >>> form.getControl('Save').click()
+
+    >>> browser.open('http://localhost/admin/science_types')
+    >>> form = browser.getForm('science_type_form')
+    >>> form.getControl('Name').value = 'Kita'
+    >>> form.getControl('Book department').value = ['2']
     >>> form.getControl('Save').click()
 
     >>> browser.open('http://localhost/admin/book_types')
@@ -42,14 +66,14 @@ When I log in, I can enter add book area.
     >>> browser.url
     'http://localhost/books/add'
 
-Then I enter my new book information and confirm changes
+Then I enter my new school book information and confirm changes
 
     >>> browser.getControl('Title').value = "My beautiful book"
     >>> browser.getControl('Author').value = "Mr. God"
     >>> browser.getControl('Brief description of the book').value = "A perfect book for evening"
     >>> browser.getControl('Book department').value = ['1']
     >>> browser.getControl('School grade').value = ['1']
-    >>> browser.getControl('Science type').value = ['1']
+    >>> browser.getControl(name = 'school_science_type').value = ['1']
     >>> browser.getControl('Book type').value = ['1']
     >>> browser.getControl('City').value = ['1']
     >>> browser.getControl('Price').value = "1000.00"
@@ -57,3 +81,67 @@ Then I enter my new book information and confirm changes
     >>> browser.getControl('Save').click()
     >>> browser.url
     'http://localhost/books/show/1'
+
+Then I edit my new school book information, change it to "other" type and confirm changes
+    >>> browser.open('http://localhost/books/edit/1')
+    >>> browser.getControl('Title').value = "My other book"
+    >>> browser.getControl('Author').value = "Mr. other"
+    >>> browser.getControl('Brief description of the book').value = "A changed perfect book"
+    >>> browser.getControl('Book department').value = ['2']
+    >>> browser.getControl(name = 'other_science_type').value = ['5']
+    >>> browser.getControl('Book type').value = ['1']
+    >>> browser.getControl('City').value = ['1']
+    >>> browser.getControl('Price').value = "999.00"
+    >>> browser.getControl('Book cover').add_file(*make_file('test_logo.png'))
+    >>> browser.getControl('Save').click()
+    >>> browser.url
+    'http://localhost/books/show/1'
+
+Then I edit my new school book information again, and make mistake
+    >>> browser.open('http://localhost/books/edit/1')
+    >>> browser.getControl('Title').value = ""
+    >>> browser.getControl('Author').value = "Mr. other"
+    >>> browser.getControl('Brief description of the book').value = "A changed perfect book"
+    >>> browser.getControl('Book department').value = ['2']
+    >>> browser.getControl('Book type').value = ['1']
+    >>> browser.getControl('City').value = ['1']
+    >>> browser.getControl('Price').value = "999.00"
+    >>> browser.getControl('Book cover').add_file(*make_file('test_logo.png'))
+    >>> browser.getControl('Save').click()
+    >>> browser.url
+    'http://localhost/books/update'
+
+I enter my new university book information and confirm changes
+
+    >>> browser.open('http://localhost/books/add')
+    >>> browser.getControl('Title').value = "My beautiful book"
+    >>> browser.getControl('Author').value = "Mr. God"
+    >>> browser.getControl('Brief description of the book').value = "A perfect book for evening"
+    >>> browser.getControl('Book department').value = ['0']
+    >>> browser.getControl(name='location-0').value = "Vilniaus universitetas"
+    >>> browser.getControl('Department').value = "Ekonomikos fakultetas"
+    >>> browser.getControl('Book type').value = ['1']
+    >>> browser.getControl('City').value = ['1']
+    >>> browser.getControl(name = 'university_science_type').value = ['3']
+    >>> browser.getControl('Price').value = "50,00"
+    >>> browser.getControl('Book cover').add_file(*make_file('test_logo.png'))
+    >>> browser.getControl('Save').click()
+    >>> browser.url
+    'http://localhost/books/show/2'
+
+I enter my new other type book information and confirm changes
+
+    >>> browser.open('http://localhost/books/add')
+    >>> browser.getControl('Title').value = "My beautiful book"
+    >>> browser.getControl('Author').value = "Mr. God"
+    >>> browser.getControl('Brief description of the book').value = "A perfect book for evening"
+    >>> browser.getControl('Book department').value = ['2']
+    >>> browser.getControl('Book type').value = ['1']
+    >>> browser.getControl('City').value = ['1']
+    >>> browser.getControl(name = 'other_science_type').value = ['5']
+    >>> browser.getControl('Price').value = "50,00"
+    >>> browser.getControl('Book cover').add_file(*make_file('test_logo.png'))
+    >>> browser.getControl('Save').click()
+    >>> browser.url
+    'http://localhost/books/show/3'
+

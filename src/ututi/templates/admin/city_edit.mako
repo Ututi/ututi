@@ -13,10 +13,8 @@
   ${h.input_line('name', _('Name'))}
   <br />
   <div>
-  ${h.input_submit(_('Edit'))} arba
-##  <div style="display:inline-block; position:relative; top:8px">
+    ${h.input_submit(_('Edit'))} arba
     ${h.link_to(_("Delete"), url(controller="admin", action="delete_city", id=c.city.id))}
-##  </div>
   </div>
 </form>
 

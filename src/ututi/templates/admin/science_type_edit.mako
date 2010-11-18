@@ -1,4 +1,6 @@
 <%inherit file="/ubase.mako" />
+<%namespace name="books" file="/books/add.mako" import="book_departments_select"/>
+
 
 <%def name="head_tags()">
   <title>UTUTI – student information online</title>
@@ -10,7 +12,7 @@
       name="science_type_form" id="science_type_form" class="fullForm">
   ${h.input_line('name', _('Name'))}
   <br />
-  ${h.book_departments_select(_('Book department'), c.book_departments)}
+  <%books:book_departments_select />
   <br />
   <div>
   ${h.input_submit(_('Edit'))} ${_('or')}

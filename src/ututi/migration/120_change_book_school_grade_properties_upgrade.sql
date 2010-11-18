@@ -1,0 +1,1 @@
+ALTER TABLE books ALTER COLUMN school_grade_id DROP NOT NULL;;

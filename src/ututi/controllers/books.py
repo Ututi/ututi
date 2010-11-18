@@ -11,6 +11,7 @@ from formencode import Schema, validators, htmlfill
 #from routes.util import url_for
 
 
+from formencode.api import Invalid
 
 from pylons.controllers.util import redirect
 from pylons.i18n import _
@@ -38,6 +39,87 @@ class PriceValidator(Number):
         value = string.replace(value, ',', '.')
         return super(PriceValidator, self)._to_python(value, state)
 
+
+class BookValidator(validators.FormValidator):
+    """
+    Validate the universal message post form.
+    Check if the recipient's id has been specified in the js field, if not,
+    check if enough text has been input to identify the recipient.
+    """
+    messages = {
+        'invalid_science_type': _(u"Specify correct science type."),
+        'invalid_book_department': _(u"Specify correct book department."),
+        'no_location_specified': _(u"Specify correct location."),
+        'no_type_specified': _(u"Specify book type."),
+        'no_science_type_specified': _(u"Specify science type."),
+        'wrong_science_type':  _(u"Wrong science type specified."),
+        'no_city_specified': _(u"Specify city."),
+        'no_school_grade_specified': _(u"Please specify school grade"),
+    }
+
+    def validate_python(self, form_dict, state):
+        try:
+            department_id = int(form_dict['department_id'])
+        except ValueError:
+            raise Invalid(self.message('invalid_book_department', state),
+                          form_dict, state,
+                          error_dict={'department_id': Invalid(self.message('invalid_book_department', state), form_dict, state)})
+
+        if department_id is None:
+            raise Invalid(self.message('invalid_book_department', state),
+                          form_dict, state,
+                          error_dict={'department_id': Invalid(self.message('invalid_book_department', state), form_dict, state)})
+        form_dict['department_id'] = department_id
+
+        try:
+            city_id = int(form_dict['city'])
+            form_dict['city'] = meta.Session.query(City).filter(City.id == city_id).one()
+        except ValueError:
+            raise Invalid(self.message('no_city_specified', state),
+                          form_dict, state,
+                          error_dict={'city': Invalid(self.message('no_city_specified', state), form_dict, state)})
+        try:
+            type_id = int(form_dict['type'])
+            form_dict['type'] = meta.Session.query(BookType).filter(BookType.id == type_id).one()
+        except ValueError:
+            raise Invalid(self.message('no_type_specified', state),
+                          form_dict, state,
+                          error_dict={'type': Invalid(self.message('no_type_specified', state), form_dict, state)})
+
+        if form_dict['department_id'] == Book.department['university']:
+            form_dict['science_type'] = form_dict['university_science_type']
+            if form_dict['location'] is None:
+                raise Invalid(self.message('no_location_specified', state),
+                          form_dict, state,
+                          error_dict={'location': Invalid(self.message('no_location_specified', state), form_dict, state)})
+            form_dict['school_grade'] = None
+        elif form_dict['department_id'] == Book.department['school']:
+            form_dict['science_type'] = form_dict['school_science_type']
+            try:
+                school_grade_id = int(form_dict['school_grade'])
+                form_dict['school_grade'] = meta.Session.query(SchoolGrade).filter(SchoolGrade.id == school_grade_id).one()
+            except ValueError:
+                raise Invalid(self.message('no_school_grade_specified', state),
+                          form_dict, state,
+                          error_dict={'school_grade': Invalid(self.message('no_school_grade_specified', state), form_dict, state)})
+            form_dict['location'] = None
+        elif form_dict['department_id'] == Book.department['other']:
+            form_dict['science_type'] = form_dict['other_science_type']
+            form_dict['location'] = None
+            form_dict['school_grade'] = None
+
+        try:
+            science_type_id = int(form_dict['science_type'])
+            form_dict['science_type'] = meta.Session.query(ScienceType).filter(ScienceType.id == science_type_id).one()
+        except ValueError:
+            raise Invalid(self.message('no_science_type_specified', state),
+                          form_dict, state,
+                          error_dict={'science_type': Invalid(self.message('no_science_type_specified', state), form_dict, state)})
+        del form_dict['university_science_type']
+        del form_dict['school_science_type']
+        del form_dict['other_science_type']
+
+
 class BookForm(Schema):
     pre_validators = [NestedVariables()]
     allow_extra_fields = True
@@ -49,7 +131,9 @@ class BookForm(Schema):
     description = validators.UnicodeString()
     location = Pipe(ForEach(validators.UnicodeString(strip=True)),
                     LocationTagsValidator())
-    #KAIP PADARYT CONDITIONAL VALIDATION???
+    show_phone = validators.Bool()
+    delete_logo = validators.Bool()
+    chained_validators = [BookValidator()]
 
 class BooksController(BaseController):
     def _make_pages(self, items):
@@ -70,7 +154,9 @@ class BooksController(BaseController):
         c.book_types = meta.Session.query(BookType).all()
         c.school_grades = meta.Session.query(SchoolGrade).all()
         c.cities = meta.Session.query(City).all()
-        c.science_types = meta.Session.query(ScienceType).all()
+        c.university_science_types = meta.Session.query(ScienceType).filter(ScienceType.book_department_id==Book.department["university"]).all()
+        c.school_science_types = meta.Session.query(ScienceType).filter(ScienceType.book_department_id==Book.department['school']).all()
+        c.other_science_types = meta.Session.query(ScienceType).filter(ScienceType.book_department_id==Book.department['other']).all()
 
     @validate(schema=BookForm, form='_add')
     @ActionProtector("user")
@@ -78,36 +164,33 @@ class BooksController(BaseController):
         if hasattr(self, 'form_result'):
             title = self.form_result['title']
             price = self.form_result['price']
-            book = Book(c.user.id, title, price, self.form_result['city_id'], self.form_result['type_id'], self.form_result['science_type_id'], self.form_result['department_id'])
+            book = Book(owner = c.user,
+                        title = title,
+                        price = price,
+                        city = self.form_result['city'],
+                        type = self.form_result['type'],
+                        science_type = self.form_result['science_type'],
+                        department_id = self.form_result['department_id'])
             book.author = self.form_result['author']
             book.description = self.form_result['description']
             if self.form_result['logo'] is not None and self.form_result['logo'] != '':
                 book.logo = self.form_result['logo'].file.read()
             book.location = self.form_result['location']
-            book.show_phone = self.form_result['show_phone'] == True
+            book.show_phone = self.form_result['show_phone']
             book.course = self.form_result['course']
-            book.school_grade_id = self.form_result['school_grade_id']
-
+            book.school_grade = self.form_result['school_grade']
             meta.Session.add(book)
             meta.Session.commit()
             h.flash(_('Book was added succesfully'))
             redirect(url(controller='books', action='show', id=book.id))
-        else:
-            return self._add()
 
     @ActionProtector("user")
     def _add(self):
+        self._load_defaults()
+        c.current_science_types = meta.Session.query(ScienceType).all()
         return render('books/add.mako')
 
     def add(self):
-        c.book_departments = Book.departments
-        c.book_types = meta.Session.query(BookType).all()
-        c.school_grades = meta.Session.query(SchoolGrade).all()
-        c.cities = meta.Session.query(City).all()
-        c.all_science_types = meta.Session.query(ScienceType).all()
-        c.university_science_types = meta.Session.query(ScienceType).filter(ScienceType.book_department_id==Book.department["university"]).all()
-        c.school_science_types = meta.Session.query(ScienceType).filter(ScienceType.book_department_id==Book.department['school']).all()
-        c.other_science_types = meta.Session.query(ScienceType).filter(ScienceType.book_department_id==Book.department['other']).all()
         return self._add()
 
     def show(self, id):
@@ -115,36 +198,48 @@ class BooksController(BaseController):
         return render('books/show.mako')
 
     def _edit(self):
+        self._load_defaults()
+        if c.book is not None and c.book != "" and c.book.department_id:
+            c.current_science_types = meta.Session.query(ScienceType).filter(ScienceType.book_department_id == c.book.department_id).all()
+        else:
+            c.current_science_types = meta.Session.query(ScienceType).all()
         return render('books/edit.mako')
 
     @ActionProtector("user")
     def edit(self, id):
-        book = meta.Session.query(Book).filter(Book.id == id).one()
-        if book.owner != c.user:
+        c.book = meta.Session.query(Book).filter(Book.id == id).one()
+        if c.book.owner != c.user:
             h.flash(_('Only owner of this book can do this action'))
             redirect(url(controller="books", action="index"))
 
         defaults = {
-            'title': book.title,
-            'author': book.author,
-            'show_phone': book.show_phone,
-            'course': book.course,
-            'school_grade_id': book.school_grade_id,
-            'science_type_id': book.science_type_id,
-            'description': book.description,
-            'price': book.price,
-            'department_id': book.department_id,
-            'city_id': book.city_id,
-            'type_id': book.type_id
+            'id': c.book.id,
+            'title': c.book.title,
+            'author': c.book.author,
+            'show_phone': c.book.show_phone,
+            'course': c.book.course,
+            'school_grade': (c.book.school_grade.id if c.book.school_grade else None),
+            c.book.departments[c.book.science_type.book_department_id] + '_science_type': c.book.science_type.id,
+            'description': c.book.description,
+            'price': c.book.price,
+            'department_id': c.book.department_id,
+            'city': c.book.city.id,
+            'type': c.book.type.id
         }
-        if book.location is not None:
+
+        if c.book.location is not None:
             location = dict([('location-%d' % n, tag)
-                             for n, tag in enumerate(book.location.hierarchy())])
+                             for n, tag in enumerate(c.book.location.hierarchy())])
         else:
             location = []
 
         defaults.update(location)
 
+        self._load_defaults()
+        if c.book.department_id:
+            c.current_science_types = meta.Session.query(ScienceType).filter(ScienceType.book_department_id == c.book.department_id).all()
+        else:
+            c.current_science_types = meta.Session.query(ScienceType).all()
         return htmlfill.render(self._edit(), defaults=defaults)
 
     @validate(BookForm, form='_edit')
@@ -154,21 +249,20 @@ class BooksController(BaseController):
             book = meta.Session.query(Book).filter(Book.id == self.form_result['id']).one()
             book.title = self.form_result['title']
             book.price = self.form_result['price']
-            book.owner_id = c.user.id
+            book.city = self.form_result['city']
+            book.type = self.form_result['type']
+            book.science_type = self.form_result['science_type']
+            book.department_id = self.form_result['department_id']
             book.author = self.form_result['author']
-            book.publisher = self.form_result['publisher']
             book.description = self.form_result['description']
-            pages_number = self.form_result['pages_number']
-            if pages_number is None:
-                pages_number = 0
-                book.pages_number = pages_number
-            if self.form_result['release_date'] is not None:
-                book.release_date = date(self.form_result['release_date'], 1, 1)
-            if self.form_result['delete_logo']:
+            if self.form_result['delete_logo'] == True:
                 book.logo = None
             elif self.form_result['logo'] is not None and self.form_result['logo'] != '':
                 book.logo = self.form_result['logo'].file.read()
             book.location = self.form_result['location']
+            book.show_phone = self.form_result['show_phone']
+            book.course = self.form_result['course']
+            book.school_grade = self.form_result['school_grade']
             meta.Session.commit()
             h.flash(_('Book was updated succesfully'))
             redirect(url(controller='books', action='show', id=book.id))
