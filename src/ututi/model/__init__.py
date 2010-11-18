@@ -241,6 +241,8 @@ def setup_orm(engine):
 
     user_mapper = orm.mapper(User,
                              users_table,
+                             polymorphic_on=users_table.c.user_type,
+                             polymorphic_identity='user',
                              properties = {'emails': relation(Email, backref='user'),
                                            'medals': relation(Medal, backref='user'),
                                            'raw_logo': deferred(users_table.c.logo),

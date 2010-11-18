@@ -1,0 +1,20 @@
+Test registration of teachers
+=============================
+
+
+   >>> browser = Browser()
+
+There currently is no ink visible to the teacher registration, so let's type in that url:
+   >>> browser.open('http://localhost/teacher/register')
+   >>> form = browser.getForm(id='teacher_registration_form')
+   >>> form.getControl('Full name').value = 'Mr. teacher'
+   >>> form.getControl('Email').value = 'teacher@vu.lt'
+   >>> form.getControl('Position').value = 'Tutor'
+   >>> form.getControl(name='new_password').value = 'mapassword'
+   >>> form.getControl(name='repeat_password').value = 'mapassword'
+   >>> form.getControl(name='location-0').value = 'Vilniaus universitetas'
+   >>> form.getControl(name='agree').value = True
+   >>> form.getControl('Register').click()
+
+   >>> browser.url
+   'http://localhost/register/welcome'

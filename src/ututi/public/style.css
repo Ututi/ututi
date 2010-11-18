@@ -1070,8 +1070,11 @@ div.profileOptionLinks div.drop{
     margin-bottom: 10px;
 }
 
-.fullForm input.checkbox {
+input.checkbox,
+#login-screen input.checkbox,
+#group_settings_form input.checkbox {
     width: 1em;
+    margin: 0 5px 0 0;
 }
 
 #group_settings_form img.tooltip{
