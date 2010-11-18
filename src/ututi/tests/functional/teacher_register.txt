@@ -1,10 +1,11 @@
 Test registration of teachers
 =============================
 
-
    >>> browser = Browser()
 
-There currently is no ink visible to the teacher registration, so let's type in that url:
+There currently is no link visible to the teacher registration, so
+let's type in that url:
+
    >>> browser.open('http://localhost/teacher/register')
    >>> form = browser.getForm(id='teacher_registration_form')
    >>> form.getControl('Full name').value = 'Mr. teacher'
@@ -18,3 +19,10 @@ There currently is no ink visible to the teacher registration, so let's type in 
 
    >>> browser.url
    'http://localhost/register/welcome'
+
+Teahcer gets a confirmation email so he could approve his
+registration:
+
+   >>> from ututi.lib.mailer import mail_queue
+   >>> mail_queue.pop()
+   <EmailInfo sender='info@ututi.lt' recipients=[u'teacher@vu.lt']>
