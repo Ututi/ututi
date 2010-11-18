@@ -9,6 +9,12 @@
   <div class="floatleft bigbutton2">
     <h2 class="portletTitle bold category-title">${c.thread.subject}</h2>
   </div>
+  <div style="float: right">
+    ${h.button_to(_("Reject"), c.thread.url(action='reject_post'))}
+  </div>
+  <div style="float: right">
+    ${h.button_to(_("Accept"), c.thread.url(action='accept_post'))}
+  </div>
   <div class="clear"></div>
 </div>
 

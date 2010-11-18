@@ -269,13 +269,27 @@ class MailinglistController(MailinglistBaseController):
     @group_mailinglist_action
     @ActionProtector("admin")
     def accept_post(self, group, thread):
-        thread.in_moderation_queue = False
+        thread.accept()
+        meta.Session.commit()
+        redirect(thread.url())
+
+    @group_mailinglist_action
+    @ActionProtector("admin")
+    def reject_post(self, group, thread):
+        thread.reject()
+        meta.Session.commit()
+        redirect(group.url(controller='mailinglist', action='administration'))
+
+    @group_mailinglist_action
+    @ActionProtector("admin")
+    def accept_post_from_list(self, group, thread):
+        thread.accept()
         meta.Session.commit()
         redirect(request.referrer)
 
     @group_mailinglist_action
     @ActionProtector("admin")
-    def reject_post(self, group, thread):
-        meta.Session.delete(thread)
+    def reject_post_from_list(self, group, thread):
+        thread.reject()
         meta.Session.commit()
         redirect(request.referrer)

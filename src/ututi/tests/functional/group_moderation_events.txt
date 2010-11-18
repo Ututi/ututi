@@ -56,3 +56,27 @@ of the message:
     Click the link now!
     Sincerely,
     Varlius staff
+
+Administrator can click "Accept" button to approve the message.
+From this view he gets redirected to the mailing list, where the
+approved message has appeared:
+
+    >>> browser.getControl('Accept').click()
+    >>> print browser.url
+    http://localhost/group/moderators/mailinglist/thread/5
+
+    >>> browser.printQuery("//div[@class='post-body']//text()")
+    Confirm your varlius registration!
+    Click the link now!
+    Sincerely,
+    Varlius staff
+
+Now if user refreshes his wall, he sees the message at the top:
+
+    >>> user3.reload()
+    >>> user3.printQuery('id("wall")//div[@class="description"]//text()')
+    Varlius <varlius@example.com> has posted a new message Hello from varlius to the group Moderatoriai .
+    Adminas Adminovix has created the group Moderatoriai .
+    Adminas Adminovix joined the group Moderatoriai .
+    Third user joined the group Moderatoriai .
+    Adminas Adminovix has created the subject Matematinė analizė .

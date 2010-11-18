@@ -2,8 +2,8 @@
 
 <%def name="listThreadsActions(message)">
   <div class="floatleft moderation-actions">
-    ${h.button_to(_('Accept'), url=message.url(action='accept_post'))}
-    ${h.button_to(_('Reject'), url=message.url(action='reject_post'))}
+    ${h.button_to(_('Accept'), url=message.url(action='accept_post_from_list'))}
+    ${h.button_to(_('Reject'), url=message.url(action='reject_post_from_list'))}
   </div>
 </%def>
 

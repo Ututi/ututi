@@ -77,9 +77,10 @@ app.post is used because of the bug in TestBrowser redirection behaviour.
     >>> action_url = browser.getControl('Reject', index=1).mech_form.action
     >>> res = app.post("/login",
     ...                params={'login': 'admin@ututi.lt', 'password': 'asdasd'})
-    >>> res = app.post(action_url)
-    >>> res.status
-    '302 Found'
+    >>> res = app.post(action_url,
+    ...                headers=[('referer', browser.url)])
+    >>> print res.status, res.location
+    302 Found http://localhost/group/moderators/mailinglist/administration
 
 The second message was rejected so it is not shown in the moderation queue,
 only the first message is left:
@@ -108,11 +109,10 @@ In the administration view one message is still left. Let's approve it:
 
     >>> browser.getControl('Administration').click()
     >>> action_url = browser.getControl('Accept').mech_form.action
-    >>> res = app.post("/login",
-    ...                params={'login': 'admin@ututi.lt', 'password': 'asdasd'})
-    >>> res = app.post(action_url)
-    >>> res.status
-    '302 Found'
+    >>> res = app.post(action_url,
+    ...                headers=[('referer', browser.url)])
+    >>> print res.status, res.location
+    302 Found http://localhost/group/moderators/mailinglist/administration
 
 Now the message should appear in the actual mailing list:
 
@@ -122,10 +122,17 @@ Now the message should appear in the actual mailing list:
     (0 replies)
     Hi, I am just writing to tell you how wonderful...
 
+The corresponding event is removed from wall:
+
     >>> browser.getLink('News wall').click()
     >>> browser.printQuery('id("wall")//div[@class="description"]//text()')
     Second user has posted a new message Hello to the group Moderatoriai .
-    Second user has posted a new message Hello to the group's Moderatoriai moderation queue.
     Adminas Adminovix has created the group Moderatoriai .
     Adminas Adminovix joined the group Moderatoriai .
     Third user joined the group Moderatoriai .
+
+XXX Test looking at an approved message without an author.
+XXX Test moderation events not being sent through email.
+XXX Test flash messages warning about the redirects, when they are not intuitive.
+XXX Test redirection behavior, if administrator tries to view a message already accepted/rejected by someone else.
+XXX Test message approval via the wall (possibly in separate functional test).

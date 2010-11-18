@@ -313,3 +313,16 @@ class GroupMailingListMessage(ContentItem):
         self.group_id = group_id
         self.reply_to = reply_to
         self.body
+
+    def accept(self):
+        from ututi.model.events import Event
+        self.in_moderation_queue = False
+        event = meta.Session.query(Event)\
+                        .filter_by(message_id=self.id, event_type='moderated_post_created').one()
+        # XXX querying meta.Session.query(ModeratedPostCreated).filter_by(message_id=self.id)
+        # retrieves multiple records. Why???
+        meta.Session.delete(event)
+
+    def reject(self):
+        meta.Session.delete(self)
+
