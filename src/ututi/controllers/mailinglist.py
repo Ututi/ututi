@@ -269,7 +269,8 @@ class MailinglistController(MailinglistBaseController):
     @group_mailinglist_action
     @ActionProtector("admin")
     def accept_post(self, group, thread):
-        # Dummy redirect for now
+        thread.in_moderation_queue = False
+        meta.Session.commit()
         redirect(request.referrer)
 
     @group_mailinglist_action

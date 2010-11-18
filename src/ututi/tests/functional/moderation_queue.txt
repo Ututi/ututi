@@ -97,3 +97,35 @@ The corresponding event is removed from the wall as well:
     Adminas Adminovix has created the group Moderatoriai .
     Adminas Adminovix joined the group Moderatoriai .
     Third user joined the group Moderatoriai .
+
+Let's get back to the mailing list. Still no messages here:
+
+    >>> browser.getLink('Mailing List').click()
+    >>> browser.printQuery('//div[@class="no-messages"]/text()')
+    No messages yet.
+
+In the administration view one message is still left. Let's approve it:
+
+    >>> browser.getControl('Administration').click()
+    >>> action_url = browser.getControl('Accept').mech_form.action
+    >>> res = app.post("/login",
+    ...                params={'login': 'admin@ututi.lt', 'password': 'asdasd'})
+    >>> res = app.post(action_url)
+    >>> res.status
+    '302 Found'
+
+Now the message should appear in the actual mailing list:
+
+    >>> browser.getLink('Mailing List').click()
+    >>> browser.printQuery("id('single-messages')//div[contains(@class, 'm-on')]//text()") # doctest: -ELLIPSIS
+    Hello
+    (0 replies)
+    Hi, I am just writing to tell you how wonderful...
+
+    >>> browser.getLink('News wall').click()
+    >>> browser.printQuery('id("wall")//div[@class="description"]//text()')
+    Second user has posted a new message Hello to the group Moderatoriai .
+    Second user has posted a new message Hello to the group's Moderatoriai moderation queue.
+    Adminas Adminovix has created the group Moderatoriai .
+    Adminas Adminovix joined the group Moderatoriai .
+    Third user joined the group Moderatoriai .
