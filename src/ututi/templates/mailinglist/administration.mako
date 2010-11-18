@@ -1,9 +1,9 @@
 <%inherit file="/mailinglist/base.mako" />
 
-<%def name="listThreadsActions()">
+<%def name="listThreadsActions(message)">
   <div class="floatleft moderation-actions">
-    ${h.button_to(_('Accept'), '#')}
-    ${h.button_to(_('Reject'), '#')}
+    ${h.button_to(_('Accept'), url=message.url(action='accept_post'))}
+    ${h.button_to(_('Reject'), url=message.url(action='reject_post'))}
   </div>
 </%def>
 

@@ -57,7 +57,7 @@
 </tr>
 </%def>
 
-<%def name="listThreadsActions()">
+<%def name="listThreadsActions(message)">
 </%def>
 
 <%def name="listThreads(action='thread', show_reply_count=True)">
@@ -92,7 +92,7 @@
           </div>
           <div class="grey verysmall">${post_date}</div>
         </div>
-        ${self.listThreadsActions()}
+        ${self.listThreadsActions(message_obj)}
         <br style="clear: left;" />
       </div>
     % endfor

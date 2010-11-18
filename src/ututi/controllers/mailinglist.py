@@ -265,3 +265,16 @@ class MailinglistController(MailinglistBaseController):
         c.group_menu_current_item = 'mailinglist'
         c.messages = thread.posts
         return render('mailinglist/moderate_post.mako')
+
+    @group_mailinglist_action
+    @ActionProtector("admin")
+    def accept_post(self, group, thread):
+        # Dummy redirect for now
+        redirect(request.referrer)
+
+    @group_mailinglist_action
+    @ActionProtector("admin")
+    def reject_post(self, group, thread):
+        meta.Session.delete(thread)
+        meta.Session.commit()
+        redirect(request.referrer)

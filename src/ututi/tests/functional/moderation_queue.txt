@@ -71,9 +71,29 @@ Now we should see 2 messages in the list:
     Confirm your varlius registration!
     Click the l...
 
-We can click "Accept" and "Reject" buttons. They don't do anything yet,
-so we stay on the same page.
+We click "Reject" button for the second message and get redirected to the same page.
+app.post is used because of the bug in TestBrowser redirection behaviour.
 
-    >>> browser.getControl('Reject', index=1).click()
-    >>> print browser.url
-    http://localhost/group/moderators/mailinglist/administration
+    >>> action_url = browser.getControl('Reject', index=1).mech_form.action
+    >>> res = app.post("/login",
+    ...                params={'login': 'admin@ututi.lt', 'password': 'asdasd'})
+    >>> res = app.post(action_url)
+    >>> res.status
+    '302 Found'
+
+The second message was rejected so it is not shown in the moderation queue,
+only the first message is left:
+
+    >>> browser.reload()
+    >>> browser.printQuery("id('single-messages')//div[contains(@class, 'm-on')]//text()") # doctest: -ELLIPSIS
+    Hello
+    Hi, I am just writing to tell you how wonderful...
+
+The corresponding event is removed from the wall as well:
+
+    >>> browser.getLink("News wall").click()
+    >>> browser.printQuery('id("wall")//div[@class="description"]//text()')
+    Second user has posted a new message Hello to the group's Moderatoriai moderation queue.
+    Adminas Adminovix has created the group Moderatoriai .
+    Adminas Adminovix joined the group Moderatoriai .
+    Third user joined the group Moderatoriai .
