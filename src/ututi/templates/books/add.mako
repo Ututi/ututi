@@ -75,7 +75,7 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
   <div class="book-logo">
     ${self.book_logo_field()}
     <label
-       %if not (c.book is None or c.book == "" or c.book.logo is None or c.book.logo == ""):
+       %if c.book is None or c.book == "" or c.book.logo is None or c.book.logo == "":
         style="display:none"
       %endif
      >
