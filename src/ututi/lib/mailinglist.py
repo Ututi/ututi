@@ -9,16 +9,6 @@ from ututi.lib.mailer import compose_email
 
 
 class MailinglistBaseController(BaseController):
-    def _recipients(self, group):
-        recipients = []
-        for member in group.members:
-            if not member.subscribed:
-                continue
-            for email in member.user.emails:
-                if email.confirmed:
-                    recipients.append(email.email)
-                    break
-        return recipients
 
     def _generateMessageId(self):
         host = config.get('mailing_list_host', '')
@@ -30,13 +20,13 @@ class MailinglistBaseController(BaseController):
                                subject,
                                message,
                                message_id=self._generateMessageId(),
-                               send_to=self._recipients(group),
+                               send_to=group.recipients_mailinglist(),
                                reply_to=reply_to,
                                list_id=group.list_address)
         post = GroupMailingListMessage.fromMessageText(msgstr)
         post.group = group
         meta.Session.commit()
         if not post.in_moderation_queue:
-            raw_send_email(user.emails[0].email, self._recipients(group), msgstr)
+            raw_send_email(user.emails[0].email, group.recipients_mailinglist(), msgstr)
         return post
 
