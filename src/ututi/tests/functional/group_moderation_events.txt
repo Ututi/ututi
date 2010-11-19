@@ -11,7 +11,7 @@ Set Up:
 
     >>> from ututi.tests.functional import send_test_message
     >>> send_test_message('email_from_user2.txt', '33', to='moderators@groups.ututi.lt')
-    >>> send_test_message('email_from_non_ututi.txt', '42', to='moderators@groups.ututi.lt')
+    >>> send_test_message('email_from_non_ututi.txt', '42', to='moderators@groups.ututi.lt', subject='Hello from varlius')
 
 Only group administrators can see and moderate the messages in the
 group moderation queue, so message posted in moderation queue events

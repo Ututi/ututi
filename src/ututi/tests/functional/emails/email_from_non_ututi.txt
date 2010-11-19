@@ -3,7 +3,7 @@ Date: Mon, 15 Jun 2009 17:05:31 +0300
 From: Varlius <varlius@example.com>
 To: %(to)s%(reply_to)s
 Reply-To: varlius@example.com
-Subject: Hello from varlius
+Subject: %(subject)s
 Message-ID: <%(message_id)s>
 MIME-Version: 1.0
 Content-Disposition: inline

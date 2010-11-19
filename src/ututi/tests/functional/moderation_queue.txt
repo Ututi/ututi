@@ -7,7 +7,7 @@ not being on it, the email is just ignored:
 
     >>> from ututi.tests.functional import send_test_message
     >>> send_test_message('email_from_user2.txt', '33', to='moderators@groups.ututi.lt')
-    >>> send_test_message('email_from_non_ututi.txt', '42', to='moderators@groups.ututi.lt')
+    >>> send_test_message('email_from_non_ututi.txt', '42', to='moderators@groups.ututi.lt', subject='Hello from varlius')
 
     >>> browser = Browser.logIn('admin@ututi.lt', 'asdasd')
     >>> browser.getLink('Moderatoriai').click()
@@ -58,7 +58,7 @@ We can see the content of the message by clicking on it's title:
 Messages from non-ututi users are treated in a special way, as these
 messages don't have an author:
 
-    >>> send_test_message('email_from_non_ututi.txt', '42', to='moderators@groups.ututi.lt')
+    >>> send_test_message('email_from_non_ututi.txt', '42', to='moderators@groups.ututi.lt', subject='Hello from varlius')
 
 Now we should see 2 messages in the list:
 
@@ -136,3 +136,4 @@ XXX Test moderation events not being sent through email.
 XXX Test flash messages warning about the redirects, when they are not intuitive.
 XXX Test redirection behavior, if administrator tries to view a message already accepted/rejected by someone else.
 XXX Test message approval via the wall (possibly in separate functional test).
+XXX Test bulletproofness of accept/reject methods.

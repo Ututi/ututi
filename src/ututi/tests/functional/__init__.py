@@ -122,7 +122,7 @@ def listUploads(files_path=None):
                 print full_name.replace(files_path, "/uploads")
 
 
-def send_test_message(email_file, message_id='', to='', reply_to=None):
+def send_test_message(email_file, message_id='', to='', reply_to=None, subject=''):
     message = resource_string("ututi.tests.functional.emails", email_file)
     if reply_to is not None:
         reply_to = "\nIn-Reply-To: <%s>" % reply_to
@@ -132,7 +132,8 @@ def send_test_message(email_file, message_id='', to='', reply_to=None):
     if message_id or to or reply_to:
         message = message % {'message_id': message_id,
                              'to': to,
-                             'reply_to': reply_to}
+                             'reply_to': reply_to,
+                             'subject': subject}
 
     processEmailAndPost('http://localhost/got_mail',
                         message,
