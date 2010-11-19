@@ -1,11 +1,15 @@
 
 from datetime import datetime
 
+from pylons import request
+from pylons import session
 from pylons import url
 from pylons.controllers.util import redirect
+from pylons import tmpl_context as c
 from pylons.i18n import _
 
 from formencode import validators
+from formencode.htmlfill_schemabuilder import htmlfill
 from formencode.variabledecode import NestedVariables
 from formencode.foreach import ForEach
 from formencode.compound import Pipe
@@ -19,9 +23,18 @@ from ututi.lib.validators import validate
 from ututi.lib.validators import UniqueEmail
 from ututi.lib.validators import TranslatedEmailValidator
 from ututi.lib.base import BaseController, render
+from ututi.model import PendingInvitation
 from ututi.model import meta
+from ututi.model.users import User
 from ututi.model.users import Email
 from ututi.model.users import Teacher
+from ututi.controllers.federation import FederatedRegistrationForm, FederationMixin
+
+class TeacherFederatedRegistrationForm(FederatedRegistrationForm):
+    location = Pipe(ForEach(validators.String(strip=True)),
+                    LocationTagsValidator(not_empty=True))
+
+    position = validators.String(strip=True, not_empty=True)
 
 
 class TeacherRegistrationForm(Schema):
@@ -60,7 +73,7 @@ class TeacherRegistrationForm(Schema):
                                                  messages=msg)]
 
 
-class TeacherController(BaseController):
+class TeacherController(BaseController, FederationMixin):
     """Controller dealing with teacher registration."""
     def _registration_form(self):
         return render('/teacher/register.mako')
@@ -88,3 +101,45 @@ class TeacherController(BaseController):
             redirect(url(controller='profile', action='register_welcome'))
 
         return self._registration_form()
+
+    def _federated_registration_form(self):
+        c.email = session.get('confirmed_email', '').lower()
+        return render('teacher/federated_registration.mako')
+
+    @validate(TeacherFederatedRegistrationForm, form='_federated_registration_form')
+    def federated_registration(self):
+        if not (session.get('confirmed_openid') or session.get('confirmed_facebook_id')):
+            redirect(url(controller='home', action='index'))
+        c.email = session.get('confirmed_email').lower()
+        if hasattr(self, 'form_result'):
+            user = User.get(c.email)
+            if not user:
+                # Make sure that such a user does not exist.
+                user = Teacher(fullname=self.form_result['fullname'],
+                               password=None,
+                               gen_password=False)
+                self._bind_user(user, flash=False)
+                if user.facebook_id:
+                    self._bind_facebook_invitations(user)
+                user.accepted_terms = datetime.utcnow()
+                user.emails = [Email(c.email)]
+                user.emails[0].confirmed = True
+
+                user.location = self.form_result['location']
+
+                meta.Session.add(user)
+                meta.Session.commit()
+            sign_in_user(c.email)
+
+            kwargs = dict()
+            if user.facebook_id:
+                kwargs['fb'] = True
+
+            redirect(c.came_from or url(controller='profile',
+                                        action='register_welcome', **kwargs))
+
+        # Render form: suggested name, suggested email, agree with conditions
+        defaults = dict(fullname=session.get('confirmed_fullname'),
+                    email=c.email)
+        return htmlfill.render(self._federated_registration_form(),
+                               defaults=defaults)

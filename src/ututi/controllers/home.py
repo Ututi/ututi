@@ -4,9 +4,6 @@ import string
 from datetime import datetime, date, timedelta
 
 from formencode import Schema, validators, Invalid, All, htmlfill
-from formencode.compound import Pipe
-from formencode.foreach import ForEach
-from formencode.variabledecode import NestedVariables
 from webhelpers import paginate
 
 from babel.dates import format_date
@@ -28,11 +25,11 @@ from ututi.lib import gg
 from ututi.lib.emails import email_confirmation_request, email_password_reset
 from ututi.lib.messaging import EmailMessage
 from ututi.lib.security import ActionProtector, sign_in_user
-from ututi.lib.validators import validate, UniqueEmail, TranslatedEmailValidator,  LocationTagsValidator, PhoneNumberValidator
+from ututi.lib.validators import validate, UniqueEmail, TranslatedEmailValidator
 from ututi.model import meta, User, Region, Email, PendingInvitation, LocationTag, Payment, get_supporters
 from ututi.model import Subject, Group, SearchItem
 from ututi.model.events import Event
-from ututi.controllers.federation import FederationMixin
+from ututi.controllers.federation import FederationMixin, FederatedRegistrationForm
 
 log = logging.getLogger(__name__)
 
@@ -89,27 +86,6 @@ class RegistrationForm(Schema):
     chained_validators = [validators.FieldsMatch('new_password',
                                                  'repeat_password',
                                                  messages=msg)]
-
-class FederatedRegistrationForm(Schema):
-    """Registration form for openID/Facebook registrations."""
-
-    allow_extra_fields = True
-    pre_validators = [NestedVariables()]
-
-    invitation_hash = validators.String(not_empty=False)
-
-    msg = {'missing': _(u"You must agree to the terms of use.")}
-    agree = validators.StringBool(messages=msg)
-
-    msg = {'empty': _(u"Please enter your name to register.")}
-    fullname = validators.String(not_empty=True, strip=True, messages=msg)
-
-    gadugadu = validators.Int()
-
-    location = Pipe(ForEach(validators.String(strip=True)),
-                    LocationTagsValidator(not_empty=False))
-
-    phone = PhoneNumberValidator(not_empty=False)
 
 
 class RecommendationForm(Schema):

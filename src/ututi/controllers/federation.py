@@ -1,6 +1,11 @@
 
 import cgi
 
+from formencode import validators
+from formencode.foreach import ForEach
+from formencode.compound import Pipe
+from formencode.variabledecode import NestedVariables
+from formencode.schema import Schema
 from openid.consumer import consumer
 from openid.consumer.consumer import Consumer, DiscoveryFailure
 from openid.extensions import ax
@@ -15,9 +20,34 @@ from pylons.i18n import _
 from ututi.model.users import User
 from ututi.model import PendingInvitation
 from ututi.model import meta
+from ututi.lib.validators import PhoneNumberValidator
+from ututi.lib.validators import LocationTagsValidator
 from ututi.lib.security import sign_in_user
 from ututi.lib.base import BaseController, render
 import ututi.lib.helpers as h
+
+
+class FederatedRegistrationForm(Schema):
+    """Registration form for openID/Facebook registrations."""
+
+    allow_extra_fields = True
+    pre_validators = [NestedVariables()]
+
+    invitation_hash = validators.String(not_empty=False)
+
+    msg = {'missing': _(u"You must agree to the terms of use.")}
+    agree = validators.StringBool(messages=msg)
+
+    msg = {'empty': _(u"Please enter your name to register.")}
+    fullname = validators.String(not_empty=True, strip=True, messages=msg)
+
+    gadugadu = validators.Int()
+
+    location = Pipe(ForEach(validators.String(strip=True)),
+                    LocationTagsValidator(not_empty=False))
+
+    phone = PhoneNumberValidator(not_empty=False)
+
 
 class FederationMixin(object):
     def _bind_user(self, user, flash=True):
@@ -51,11 +81,11 @@ class FederationMixin(object):
 
 
 
-class FederationController(BaseController):
+class FederationController(BaseController, FederationMixin):
     def fbchannel(self):
         return render('/fbchannel.mako')
 
-    def google_register(self, u_type=None):
+    def google_register(self):
         openid_session = session.get("openid_session", {})
         openid_store = None # stateless
         cons = Consumer(openid_session, openid_store)
@@ -77,8 +107,8 @@ class FederationController(BaseController):
         authrequest.addExtension(ax_req)
 
         kargs = self._auth_args()
-        if u_type is not None:
-            kargs['u_type'] = u_type
+        if 'u_type' in request.params.keys():
+            kargs['u_type'] = request.params.get('u_type')
 
         redirecturl = authrequest.redirectURL(
             url(controller='home', action='index', qualified=True),
@@ -107,6 +137,7 @@ class FederationController(BaseController):
         return name, email
 
     def google_verify(self):
+        u_type = request.params.get('u_type', None) #user type, for registering teachers
         openid_session = session.get("openid_session", {})
         openid_store = None # stateless
         cons = Consumer(openid_session, openid_store)
@@ -128,7 +159,7 @@ class FederationController(BaseController):
             name = '%s %s' % (request.params.get('openid.ext1.value.firstname'),
                               request.params.get('openid.ext1.value.lastname'))
             email = request.params.get('openid.ext1.value.email')
-            return self._register_or_login(name, email, google_id=identity_url)
+            return self._register_or_login(name, email, google_id=identity_url, u_type=u_type)
         elif info.status == consumer.FAILURE and display_identifier:
             # In the case of failure, if info is non-None, it is the
             # URL that we were verifying. We include it in the error
@@ -170,7 +201,7 @@ class FederationController(BaseController):
 
 
     def _register_or_login(self, name, email, google_id=None, facebook_id=None,
-                           fb_access_token=None):
+                           fb_access_token=None, u_type=None):
         assert bool(google_id) != bool(facebook_id)
         if google_id:
             user = User.get_byopenid(google_id)
@@ -201,8 +232,12 @@ class FederationController(BaseController):
                 session['confirmed_fullname'] = name
                 session['confirmed_email'] = email
                 session.save()
-                redirect(url(controller='home', action='federated_registration',
-                             **self._auth_args()))
+                if u_type is None:
+                    redirect(url(controller='home', action='federated_registration',
+                                 **self._auth_args()))
+                elif u_type == 'teacher':
+                    redirect(url(controller='teacher', action='federated_registration',
+                                 **self._auth_args()))
             else:
                 # Existing user logging in using FB/Google.
                 if google_id:
@@ -227,9 +262,10 @@ class FederationController(BaseController):
     def facebook_login(self):
         fb_user = facebook.get_user_from_cookie(request.cookies,
                          config['facebook.appid'], config['facebook.secret'])
+        u_type = request.params.get('u_type', None) #user type, for registering teachers
         if fb_user:
             uid = fb_user['uid']
             return self._register_or_login(None, None, facebook_id=uid,
-                                       fb_access_token=fb_user['access_token'])
+                                           fb_access_token=fb_user['access_token'],
+                                           u_type=u_type)
         redirect(c.came_from or url(controller='home', action='index'))
-

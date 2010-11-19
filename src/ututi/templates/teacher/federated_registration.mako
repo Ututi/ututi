@@ -19,7 +19,7 @@
 
 <div class="federated-registration-form">
     <form id="registration_form" method="post" class="fullForm"
-          action="${url(controller='home', action='federated_registration')}">
+          action="${url(controller='teacher', action='federated_registration')}">
       <fieldset>
         <form:error name="invitation_hash"/>
 
@@ -54,43 +54,21 @@
           </script>
 
         </label>
+        <input type="hidden" id="gadugadu" name="gadugadu"/>
 
-        %if c.gg_enabled:
-          <form:error name="gadugadu"/>
-          <label>
-            <span class="labelText">${_('Gadu gadu')}</span>
-            <span class="textField">
-              <input type="text" name="gadugadu" value=""/>
-              <span class="edge"></span>
-            </span>
-          </label>
-        %else:
-          <input type="hidden" id="gadugadu" name="gadugadu"/>
-        %endif
-
-
-    <div class="heading">${_('2. School (optional)')}</div>
+    <div class="heading">${_('2. School')}</div>
     <div class="comment">
-        ${_("Ututi is an application for students, so it is important for us to know where you study. These data can be changed later in your profile settings screen.")}
+        ${_("Tell us where You teach, so that we can verify You. Additional schools can be added after registration.")}
     </div>
 
         <div>
           ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=False)}
         </div>
+        <div>
+          ${h.input_line('position', _('Position'))}
+        </div>
 
-    <div class="heading">${_('3. Phone number (optional)')}</div>
-    <div class="comment">
-      ${_("We need your phone number so that you could send and receive SMS messages from the group. Don't worry, we will never send advertisements.")}
-    </div>
-
-        <form:error name="phone"/>
-        <label>
-          <span class="labelText">${_('Phone number')}</span>
-          <span class="textField">
-            <input type="text" name="phone" value="" />
-            <span class="edge"></span>
-          </span>
-        </label>
+        <input type="hidden" name="phone" value="" />
 
         <div style="margin-top: 1em">
           <form:error name="agree"/>

@@ -39,14 +39,14 @@
       ${_('Log in or register using your Google or Facebook account')}
     </div>
     <div id="federated-login-buttons">
-      <a href="${url(controller='teacher', action='google_register')}" id="google-button">
+      <a href="${url(controller='federation', action='google_register', u_type='teacher')}" id="google-button">
         ${h.image('/img/google-logo.gif', alt='Log in using Google', class_='google-login')}
       </a>
       <br />
       ## We rely here on the fact that Facebook has been configured
       ## by the login widget in the page header.
       <fb:login-button perms="email"
-          onlogin="show_loading_message(); window.location = '${url(controller='teacher', action='facebook_login')}'"
+          onlogin="show_loading_message(); window.location = '${url(controller='federation', action='facebook_login', u_type='teacher')}'"
        >${_('Connect')}</fb:login-button>
     </div>
 
