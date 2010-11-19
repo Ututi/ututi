@@ -1,9 +1,54 @@
 <%inherit file="/mailinglist/base.mako" />
 
+<%def name="head_tags()">
+  ${parent.head_tags()}
+  <script type="text/javascript">
+  $(document).ready(function(){
+      $('.btn-accept, .btn-reject').click(function() {
+          var panel = $(this).closest('.moderation-actions');
+          panel.addClass('loading');
+          var form = $(this).closest('form');
+          $.ajax({
+            url: form.attr('action') + '?js=1',
+            success: function(data) {
+              panel.html(data)
+              var message = panel.closest('.message-list-on1, .message-list-off1')
+            },
+            error: function(data) {
+              panel.removeClass('loading');
+              panel.addClass('error');
+            }
+          });
+          return false;
+      });
+  });
+  </script>
+</%def>
+
 <%def name="listThreadsActions(message)">
-  <div class="floatleft moderation-actions">
-    ${h.button_to(_('Accept'), url=message.url(action='accept_post_from_list'))}
-    ${h.button_to(_('Reject'), url=message.url(action='reject_post_from_list'))}
+  <div class="floatright moderation-actions">
+    <div class="loading-message">
+      ${_('Working...')}
+    </div>
+    <div class="error-message">
+      ${h.literal(_('Error: could not reach server.<br /> Please try refreshing the page.'))}
+    </div>
+    <div class="moderation-action-buttons">
+      ${h.button_to(_('Accept'), url=message.url(action='accept_post_from_list'), class_='btn btn-accept')}
+      ${h.button_to(_('Reject'), url=message.url(action='reject_post_from_list'), class_='btn btn-reject')}
+    </div>
+  </div>
+</%def>
+
+<%def name="acceptedMessage()">
+  <div class="accepted-message">
+    ${_('Message accepted')}
+  </div>
+</%def>
+
+<%def name="rejectedMessage()">
+  <div class="rejected-message">
+    ${_('Message rejected')}
   </div>
 </%def>
 
@@ -22,7 +67,7 @@
   %if not c.messages:
       <div class="no-messages">${_('No messages to be moderated yet.')}</div>
   %else:
-      ${self.listThreads(action='moderate_post', show_reply_count=False)}
+      ${self.listThreads(action='moderate_post', show_reply_count=False, pager=False)}
   %endif
   </div>
 </%self:rounded_block>

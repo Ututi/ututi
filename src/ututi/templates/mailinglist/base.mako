@@ -60,12 +60,12 @@
 <%def name="listThreadsActions(message)">
 </%def>
 
-<%def name="listThreads(action='thread', show_reply_count=True)">
+<%def name="listThreads(action='thread', show_reply_count=True, pager=True)">
     <%
        message_count = len(c.messages)
     %>
 
-    % for index, message_obj in enumerate(c.messages):
+    %for index, message_obj in enumerate(c.messages):
       <%
           message = message_obj.info_dict()
           new_post = True
@@ -86,16 +86,17 @@
           </div>
           <div class="grey verysmall">${h.ellipsis(post_text, 50)}</div>
         </div>
-        <div class="floatleft user">
+        ${self.listThreadsActions(message_obj)}
+        <div class="floatright user">
           <div class="orange bold verysmall">
             <a href="${message['author']['url']}">${message['author']['title']}</a>
           </div>
           <div class="grey verysmall">${post_date}</div>
         </div>
-        ${self.listThreadsActions(message_obj)}
-        <br style="clear: left;" />
+        <br style="clear: both;" />
       </div>
-    % endfor
+    %endfor
+    %if pager:
     <div id="pager">
       ${c.messages.pager(format='~3~', partial_param='js',
                          controller='mailinglist',
@@ -103,6 +104,7 @@
                                  '$(document).scrollTop($("#single-messages").scrollTop())});'
                                  ' return false;') }
     </div>
+    %endif
 </%def>
 
 ${next.body()}

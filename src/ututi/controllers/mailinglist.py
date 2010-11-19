@@ -242,19 +242,9 @@ class MailinglistController(MailinglistBaseController):
     @group_action
     @ActionProtector("admin")
     def administration(self, group):
-        message_objs = meta.Session.query(GroupMailingListMessage)\
+        c.messages = meta.Session.query(GroupMailingListMessage)\
             .filter_by(group_id=group.id, in_moderation_queue=True)\
-            .order_by(desc(GroupMailingListMessage.sent))
-        message_count = meta.Session.query(GroupMailingListMessage)\
-            .filter_by(group_id=group.id, in_moderation_queue=True)\
-            .order_by(desc(GroupMailingListMessage.sent))\
-            .count()
-        c.messages = paginate.Page(
-                message_objs,
-                page=int(request.params.get('page', 1)),
-                item_count =  message_count,
-                items_per_page = 20,
-                )
+            .order_by(desc(GroupMailingListMessage.sent)).all()
         c.group_menu_current_item = 'mailinglist'
         return render('mailinglist/administration.mako')
 
@@ -285,6 +275,8 @@ class MailinglistController(MailinglistBaseController):
     def accept_post_from_list(self, group, thread):
         thread.accept()
         meta.Session.commit()
+        if request.params.has_key('js'):
+            return render_mako_def('mailinglist/administration.mako', 'acceptedMessage')
         redirect(request.referrer)
 
     @group_mailinglist_action
@@ -292,4 +284,6 @@ class MailinglistController(MailinglistBaseController):
     def reject_post_from_list(self, group, thread):
         thread.reject()
         meta.Session.commit()
+        if request.params.has_key('js'):
+            return render_mako_def('mailinglist/administration.mako', 'rejectedMessage')
         redirect(request.referrer)

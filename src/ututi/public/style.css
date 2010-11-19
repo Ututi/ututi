@@ -5068,12 +5068,49 @@ ul.universityMembersInfo li{
 /* moderation queue specifics */
 
 div.moderation-actions {
-    width: 155px;
+    width: auto;
     padding: 6px 0px;
 }
 
+div.moderation-actions .loading-message,
+div.moderation-actions .error-message {
+    display: none;
+    padding: 6px 15px 6px 25px;
+}
+
+div.moderation-actions.loading .loading-message {
+    display: block;
+    background: url("../images/details/icon_progress.gif") left center no-repeat;
+}
+
+div.moderation-actions.error .error-message {
+    display: block;
+}
+
+div.moderation-actions.loading .moderation-action-buttons,
+div.moderation-actions.error .moderation-action-buttons {
+    display: none;
+}
+
+div.moderation-actions .accepted-message {
+    padding: 6px 15px 6px 25px;
+    background: url("img/icons/tick_big.png") left center no-repeat;
+}
+
+div.moderation-actions .rejected-message {
+    padding: 6px 15px 6px 25px;
+    background: url("img/icons/cross_big.png") left center no-repeat;
+}
+
+div.moderation-actions form {
+    float: left;
+    /* Keeps buttons in one line. 
+     * Otherwise fieldset occupies 100% for some reason.
+     */
+}
+
 div.with-moderation-actions div.m-on {
-    width: 285px;
+    width: auto;
 }
 
 /* end moderation queue specifics */
