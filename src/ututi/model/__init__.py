@@ -248,7 +248,6 @@ def setup_orm(engine):
                                            'raw_logo': deferred(users_table.c.logo),
                                            'location': relation(LocationTag, backref=backref('users', lazy=True))})
     orm.mapper(Teacher,
-               users_table,
                polymorphic_on=users_table.c.user_type,
                polymorphic_identity='teacher',
                inherits=user_mapper)

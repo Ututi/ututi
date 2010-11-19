@@ -22,6 +22,10 @@ def test_create_teacher():
        >>> user
        <ututi.model.users.Teacher object at ...
 
+When querying for teachers, only teacher objects should be returned:
+       >>> [t for t in meta.Session.query(Teacher).all()]
+       [<ututi.model.users.Teacher object ...
+
     """
 
 
