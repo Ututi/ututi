@@ -90,6 +90,7 @@ class TeacherController(BaseController, FederationMixin):
             teacher = Teacher(fullname=fullname,
                               password=password,
                               gen_password=True)
+            teacher.teacher_position = position
             teacher.emails = [Email(email)]
             teacher.accepted_terms = datetime.utcnow()
             meta.Session.add(teacher)
@@ -121,6 +122,7 @@ class TeacherController(BaseController, FederationMixin):
                 self._bind_user(user, flash=False)
                 if user.facebook_id:
                     self._bind_facebook_invitations(user)
+                user.teacher_position = position
                 user.accepted_terms = datetime.utcnow()
                 user.emails = [Email(c.email)]
                 user.emails[0].confirmed = True
