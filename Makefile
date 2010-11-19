@@ -285,3 +285,6 @@ start_sms: instance/var/run/.s.PGSQL.${PGPORT}
 
 stop_sms:
 	${PWD}/bin/sms_daemon stop
+
+ssh:
+	ssh -nNT -R 7137:localhost:5000 u2ti.com
