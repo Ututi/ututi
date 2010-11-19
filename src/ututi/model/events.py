@@ -360,7 +360,7 @@ def setup_orm(engine):
         autoload=True,
         autoload_with=engine)
 
-    orm.mapper(Event,
+    event_mapper = orm.mapper(Event,
                events_table,
                polymorphic_on=events_table.c.event_type,
                polymorphic_identity='generic',
@@ -368,72 +368,72 @@ def setup_orm(engine):
                              'user': relation(User, backref='events',
                                               primaryjoin=users_table.c.id==events_table.c.author_id)})
 
-    orm.mapper(PageCreatedEvent, events_table,
-               inherits=Event,
+    orm.mapper(PageCreatedEvent,
+               inherits=event_mapper,
                polymorphic_on=events_table.c.event_type,
                polymorphic_identity='page_created',
                properties = {'page': relation(Page,
                                               primaryjoin=pages_table.c.id==events_table.c.page_id)})
 
-    orm.mapper(PageModifiedEvent, events_table,
-               inherits=Event,
+    orm.mapper(PageModifiedEvent,
+               inherits=event_mapper,
                polymorphic_on=events_table.c.event_type,
                polymorphic_identity='page_modified',
                properties = {'page': relation(Page,
                                               primaryjoin=pages_table.c.id==events_table.c.page_id)})
 
-    orm.mapper(FileUploadedEvent, events_table,
-               inherits=Event,
+    orm.mapper(FileUploadedEvent,
+               inherits=event_mapper,
                polymorphic_on=events_table.c.event_type,
                polymorphic_identity='file_uploaded',
                properties = {'file': relation(File,
                                               primaryjoin=files_table.c.id==events_table.c.file_id)})
 
-    orm.mapper(SubjectCreatedEvent, events_table,
-               inherits=Event,
+    orm.mapper(SubjectCreatedEvent,
+               inherits=event_mapper,
                polymorphic_on=events_table.c.event_type,
                polymorphic_identity='subject_created')
 
-    orm.mapper(GroupCreatedEvent, events_table,
-               inherits=Event,
+    orm.mapper(GroupCreatedEvent,
+               inherits=event_mapper,
                polymorphic_on=events_table.c.event_type,
                polymorphic_identity='group_created')
 
-    orm.mapper(SubjectModifiedEvent, events_table,
-               inherits=Event,
+    orm.mapper(SubjectModifiedEvent,
+               inherits=event_mapper,
                polymorphic_on=events_table.c.event_type,
                polymorphic_identity='subject_modified')
 
-    orm.mapper(MailinglistPostCreatedEvent, events_table,
-               inherits=Event,
+    orm.mapper(MailinglistPostCreatedEvent,
+               inherits=event_mapper,
                polymorphic_on=events_table.c.event_type,
                polymorphic_identity='mailinglist_post_created',
                properties = {'message': relation(GroupMailingListMessage,
                                                  primaryjoin=group_mailing_list_messages_table.c.id==events_table.c.message_id)})
 
-    orm.mapper(ModeratedPostCreated, events_table,
-               inherits=Event,
+    orm.mapper(ModeratedPostCreated,
+               inherits=event_mapper,
                polymorphic_on=events_table.c.event_type,
                polymorphic_identity='moderated_post_created',
                properties = {'message': relation(GroupMailingListMessage,
                                                  primaryjoin=group_mailing_list_messages_table.c.id==events_table.c.message_id)})
 
-    orm.mapper(ForumPostCreatedEvent, events_table,
-               inherits=Event,
+    orm.mapper(ForumPostCreatedEvent,
+               inherits=event_mapper,
                polymorphic_on=events_table.c.event_type,
                polymorphic_identity='forum_post_created',
                properties = {'post': relation(ForumPost,
                                  primaryjoin=forum_posts_table.c.id==events_table.c.post_id)})
 
-    orm.mapper(SMSMessageSentEvent, events_table,
-               inherits=Event,
+    orm.mapper(SMSMessageSentEvent,
+               inherits=event_mapper,
                polymorphic_on=events_table.c.event_type,
                polymorphic_identity='sms_message_sent',
                properties={'outgoing_sms': relation(OutgoingGroupSMSMessage,
                     primaryjoin=outgoing_group_sms_messages_table.c.id==events_table.c.sms_id)})
 
-    orm.mapper(PrivateMessageSentEvent, events_table,
-               inherits=Event,
+    orm.mapper(PrivateMessageSentEvent,
+               inherits=event_mapper,
                polymorphic_on=events_table.c.event_type,
                polymorphic_identity='private_message_sent',
                properties={'private_message': relation(PrivateMessage,
@@ -441,25 +441,25 @@ def setup_orm(engine):
                            'recipient': relation(User,
                                                  primaryjoin=users_table.c.id==events_table.c.recipient_id)})
 
-    orm.mapper(GroupMemberJoinedEvent, events_table,
-               inherits=Event,
+    orm.mapper(GroupMemberJoinedEvent,
+               inherits=event_mapper,
                polymorphic_on=events_table.c.event_type,
                polymorphic_identity='member_joined')
 
-    orm.mapper(GroupMemberLeftEvent, events_table,
-               inherits=Event,
+    orm.mapper(GroupMemberLeftEvent,
+               inherits=event_mapper,
                polymorphic_on=events_table.c.event_type,
                polymorphic_identity='member_left')
 
-    orm.mapper(GroupStartedWatchingSubjects, events_table,
-               inherits=Event,
+    orm.mapper(GroupStartedWatchingSubjects,
+               inherits=event_mapper,
                polymorphic_on=events_table.c.event_type,
                polymorphic_identity='group_started_watching_subject',
                properties = {'subject': relation(Subject,
                                                  primaryjoin=subjects_table.c.id==events_table.c.subject_id)})
 
-    orm.mapper(GroupStoppedWatchingSubjects, events_table,
-               inherits=Event,
+    orm.mapper(GroupStoppedWatchingSubjects,
+               inherits=event_mapper,
                polymorphic_on=events_table.c.event_type,
                polymorphic_identity='group_stopped_watching_subject',
                properties = {'subject': relation(Subject,
