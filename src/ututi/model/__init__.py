@@ -878,6 +878,17 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
             query = query.filter(User.id != sender.id)
         return query.all()
 
+    def recipients_mailinglist(self):
+        recipients = []
+        for member in self.members:
+            if not member.subscribed:
+                continue
+            for email in member.user.emails:
+                if email.confirmed:
+                    recipients.append(email.email)
+                    break
+        return recipients
+
     @classmethod
     def get(cls, id):
         query = meta.Session.query(cls)
