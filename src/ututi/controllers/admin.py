@@ -37,7 +37,8 @@ from ututi.model import SimpleTag
 from ututi.model import UserSubjectMonitoring
 from ututi.model import Page, SMS, GroupCoupon
 from ututi.model import (meta, User, Email, LocationTag, Group, Subject,
-                         GroupMember, GroupMembershipType, File, PrivateMessage)
+                         GroupMember, GroupMembershipType, File, PrivateMessage,
+                         Teacher)
 from ututi.model import Notification, City, ScienceType, SchoolGrade, Book, BookType
 
 from ututi.lib import helpers as h
@@ -679,3 +680,24 @@ class AdminController(BaseController):
         meta.Session.delete(book_type)
         meta.Session.commit()
         redirect(url(controller="admin", action="book_types"))
+
+    @ActionProtector("root")
+    def teachers(self):
+        c.teachers = meta.Session.query(Teacher).filter(Teacher.teacher_verified == False).all()
+        return render('admin/teachers.mako')
+
+    @ActionProtector("root")
+    def teacher_status(self, command, id):
+        teacher = meta.Session.query(Teacher).filter(Teacher.id == id).filter(Teacher.teacher_verified==False).one()
+        if command == 'confirm':
+            teacher.teacher_verified = True
+            meta.Session.commit()
+            h.flash('Teacher confirmed.')
+        else:
+            from ututi.model import users_table
+            conn = meta.engine.connect()
+            upd = users_table.update().where(users_table.c.id==id).values(user_type='user', teacher_verified=None, teacher_position=None)
+            conn.execute(upd)
+            h.flash('Teacher rejected.')
+
+        redirect(url(controller="admin", action="teachers"))

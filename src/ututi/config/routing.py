@@ -263,6 +263,7 @@ def make_map(config):
     map.connect('/admin/blog', controller='blog', action='index')
     map.connect('/admin/blog/{action}', controller='blog')
     map.connect('/admin/blog/{action}/{id}', controller='blog', action='edit')
+    map.connect('/admin/teacher_status/{command}/{id}', controller='admin', action='teacher_status')
 
 
     map.connect('/structure/completions/{text}', controller='structure', action='completions')
