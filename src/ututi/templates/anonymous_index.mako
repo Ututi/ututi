@@ -92,11 +92,11 @@
   </div>
 
   <div id="register_openid">
-    <a href="${url(controller='home', action='google_register')}">
+    <a href="${url(controller='federation', action='google_register')}">
       ${h.image('/img/google-logo.gif', alt='Log in using Google', class_='google-login')}
     </a>
     <fb:login-button perms="email"
-      onlogin="show_loading_message(); window.location = '${url(controller='home', action='facebook_login')}'"
+      onlogin="show_loading_message(); window.location = '${url(controller='federation', action='facebook_login')}'"
      >${_('Connect')}</fb:login-button>
   </div>
 

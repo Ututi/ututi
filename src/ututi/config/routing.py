@@ -238,7 +238,7 @@ def make_map(config):
 
     # CUSTOM ROUTES HERE
     map.connect('/sitemap.xml', controller='sitemap', action='index')
-    map.connect('/channel.html', controller='home', action='fbchannel')
+    map.connect('/channel.html', controller='federation', action='fbchannel')
     map.connect('/', controller='home', action='index')
     map.connect('/login', controller='home', action='login')
     map.connect('/logout', controller='home', action='logout')
@@ -247,9 +247,9 @@ def make_map(config):
     map.connect('/join/login_register', controller='home', action='join_register')
     map.connect('/register', controller='home', action='register')
     map.connect('/federated_registration', controller='home', action='federated_registration')
-    map.connect('/google_register', controller='home', action='google_register')
-    map.connect('/google_verify', controller='home', action='google_verify')
-    map.connect('/facebook_login', controller='home', action='facebook_login')
+    map.connect('/google_register', controller='federation', action='google_register')
+    map.connect('/google_verify', controller='federation', action='google_verify')
+    map.connect('/facebook_login', controller='federation', action='facebook_login')
     map.connect('/password', controller='home', action='pswrecovery')
     map.connect('/process_transaction', controller='home', action='process_transaction')
     map.connect('/recovery/{key}', controller='home', action='recovery')

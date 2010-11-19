@@ -5,7 +5,7 @@ If a user tries to log on using Facebook, but is not found, they are redirected
 to the federated registration page
 
     >>> browser = Browser()
-    >>> browser.open('/home/test_facebook_login')
+    >>> browser.open('/federation/test_facebook_login')
     >>> browser.url
     'http://localhost/federated_registration'
 
@@ -27,7 +27,7 @@ Our FB account is already associated with our Ututi user, so logging in is just
 a single click away:
 
     >>> browser2 = Browser()
-    >>> browser2.open('/home/test_facebook_login')
+    >>> browser2.open('/federation/test_facebook_login')
 
     >>> browser2.url
     'http://localhost/home'
