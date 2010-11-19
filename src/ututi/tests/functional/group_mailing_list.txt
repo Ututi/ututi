@@ -312,3 +312,18 @@ members of the group (XXX not implemented):
 #     Errors-To: errors@ututi.lt
 #     List-Id: moderators@groups.ututi.lt
 #     This is my message
+
+Regression test for broken ajax paging
+--------------------------------------
+
+Let's try loading the content of the page as if we were making an ajax request:
+
+    >>> browser.open('http://localhost/group/moderators/mailinglist?js=1&page=1')
+    >>> browser.printQuery("//div[contains(@class, 'm-on')]//text()")
+    Hi mom
+    (3 replies)
+    I am doing fine. Send more cash.
+    <BLANKLINE>
+    Hello
+    (3 replies)
+    Hi, I am just writing to tell you how wonderful...

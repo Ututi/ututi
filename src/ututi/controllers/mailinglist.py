@@ -155,7 +155,7 @@ class MailinglistController(MailinglistBaseController):
                 )
         c.group_menu_current_item = 'mailinglist'
         if request.params.has_key('js'):
-            return render_mako_def('mailinglist/index.mako', 'listThreads')
+            return render_mako_def('mailinglist/base.mako', 'listThreads')
         return render('mailinglist/index.mako')
 
     @group_mailinglist_action
