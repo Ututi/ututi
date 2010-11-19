@@ -99,8 +99,8 @@
     <div id="pager">
       ${c.messages.pager(format='~3~', partial_param='js',
                          controller='mailinglist',
-                         onclick='$("#pager").addClass("loading"); $("#single-messages").load("%s");'
-                                 '$(document).scrollTop($("#single-messages").scrollTop());'
+                         onclick='$("#pager").addClass("loading"); $("#single-messages").load("%s", function() {'
+                                 '$(document).scrollTop($("#single-messages").scrollTop())});'
                                  ' return false;') }
     </div>
 </%def>
