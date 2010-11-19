@@ -8,7 +8,7 @@ import ututi
 def test_create_teacher():
     r"""Test creation of the teacher type.
 
-       >>> from ututi.model.users import Teacher
+       >>> from ututi.model.users import Teacher, User
        >>> teacher = Teacher(fullname=u'Petras', password='qwerty', gen_password=True)
        >>> meta.Session.add(teacher)
        >>> meta.Session.commit()
@@ -17,6 +17,10 @@ def test_create_teacher():
        False
        >>> teacher.user_type
        'teacher'
+
+       >>> user = User.get_byid(teacher.id)
+       >>> user
+       <ututi.model.users.Teacher object at ...
 
     """
 
