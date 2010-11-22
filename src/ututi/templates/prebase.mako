@@ -17,7 +17,7 @@ ${_('Student information online')}
     <li><a href="${url(controller='books', action='index')}">${_('Home')}</a></li>
     <li><a href="${url(controller='search', action='browse', qualified=True)}">${_('Browse')}</a></li>
     <li><a href="${url(controller='home', action='about', qualified=True)}">${_('About')}</a></li>
-    <li><a class="orange" href="${url(controller='home', action='register', qualified=True, came_from=url.current())}">${_('Join')}</a></li>
+    <li><a class="orange" href="${url(controller='home', action='register', qualified=True, came_from=c.came_from)}">${_('Join')}</a></li>
   </ul>
 </div>
 <p class="a11y">${_('User menu')}</p>
@@ -106,7 +106,7 @@ ${_('Student information online')}
   </div>
 
   <fieldset>
-    <input type="hidden" name="came_from" value="${request.params.get('came_from', request.url)}" />
+    <input type="hidden" name="came_from" value="${c.came_from}" />
     <legend class="a11y">${_('Join!')}</legend>
     <label class="textField"><span class="overlay">${_('Email')}:</span><input type="text" name="login" value="${request.params.get('login')}"/><span class="edge"></span></label>
     <label class="textField"><span class="overlay">${_('Password')}</span><input type="password" name="password" /><span class="edge"></span></label>

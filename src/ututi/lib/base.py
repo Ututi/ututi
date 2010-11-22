@@ -16,6 +16,7 @@ from paste.util.converters import asbool
 from pylons.decorators.cache import beaker_cache
 from pylons.controllers import WSGIController
 from pylons.templating import pylons_globals, render_mako as render
+from pylons import url
 from pylons import tmpl_context as c, config, request, response
 from pylons.i18n.translation import get_lang
 
@@ -64,7 +65,7 @@ class BaseController(WSGIController):
         c.google_tracker = config['google_tracker']
         c.facebook_app_id = config.get('facebook.appid')
 
-        c.came_from = request.params.get('came_from', '')
+        c.came_from = request.params.get('came_from', url.current())
         c.came_from_search = False #if the user came from google search
 
         lang = get_lang()
