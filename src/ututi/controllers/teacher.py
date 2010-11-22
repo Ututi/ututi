@@ -97,7 +97,7 @@ class TeacherController(BaseController, FederationMixin):
             meta.Session.commit()
 
             email_confirmation_request(teacher, email)
-            sign_in_user(email)
+            sign_in_user(teacher)
 
             redirect(url(controller='profile', action='register_welcome'))
 
@@ -131,7 +131,7 @@ class TeacherController(BaseController, FederationMixin):
 
                 meta.Session.add(user)
                 meta.Session.commit()
-            sign_in_user(c.email)
+                sign_in_user(user)
 
             kwargs = dict()
             if user.facebook_id:

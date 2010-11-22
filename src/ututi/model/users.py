@@ -114,7 +114,7 @@ class User(object):
         if user is None:
             return None
         if validate_password(user.password, password):
-            return username
+            return user
         else:
             return None
 

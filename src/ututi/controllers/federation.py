@@ -191,7 +191,7 @@ class FederationController(BaseController, FederationMixin):
         if password is not None:
             user = User.authenticate(email, password.encode('utf-8'))
             if user is not None:
-                sign_in_user(email)
+                sign_in_user(user)
                 self._bind_user(User.get(email))
                 meta.Session.commit()
                 redirect(str(destination))
@@ -212,7 +212,7 @@ class FederationController(BaseController, FederationMixin):
             if facebook_id and not user.logo:
                 user.update_logo_from_facebook()
                 meta.Session.commit()
-            sign_in_user(user.emails[0].email)
+            sign_in_user(user)
             redirect(c.came_from or url(controller='home', action='index'))
         else:
             # Facebook needs to be asked for the email separately.
@@ -250,7 +250,7 @@ class FederationController(BaseController, FederationMixin):
                     if not user.logo:
                         user.update_logo_from_facebook()
                 meta.Session.commit()
-                sign_in_user(user.emails[0].email)
+                sign_in_user(user)
                 redirect(c.came_from or url(controller='home', action='index'))
 
     def test_facebook_login(self):

@@ -57,7 +57,7 @@ class UserController(BaseController):
     @profile_action
     @ActionProtector("root")
     def login_as(self, user):
-        sign_in_user(user.emails[0].email)
+        sign_in_user(user)
         redirect(url(controller='profile', action='home'))
 
     @profile_action

@@ -25,11 +25,10 @@ def current_user():
 
     return User.get(login)
 
-def sign_in_user(email, long_session=False):
-    from ututi.model import User
-    set_geolocation(User.get(email))
+def sign_in_user(user, long_session=False):
+    set_geolocation(user)
 
-    session['login'] = email
+    session['login'] = user.emails[0].email
     session['cookie_secret'] = ''.join(Random().sample(string.ascii_lowercase, 20))
     expiration_time = 3600*24*30 if long_session else None
     response.set_cookie('ututi_session_lifetime', session['cookie_secret'], max_age = expiration_time)

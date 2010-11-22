@@ -368,7 +368,7 @@ class ProfileController(SearchBaseController, UniversityListMixin, WallMixin, Wa
                 c.user.emails[0].confirmed = False
                 email_confirmation_request(c.user, email)
                 meta.Session.commit()
-                sign_in_user(email)
+                sign_in_user(c.user)
 
             # handle GG
             gadugadu_uin = self.form_result['gadugadu_uin']

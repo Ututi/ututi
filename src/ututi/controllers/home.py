@@ -285,7 +285,7 @@ class HomeController(UniversityListMixin, FederationMixin):
             c.message = _('You seem to have entered your username and password wrong, please try again!')
 
             if user is not None:
-                sign_in_user(email, long_session=remember)
+                sign_in_user(user, long_session=remember)
                 redirect(str(destination))
 
         return render('/login.mako')
@@ -305,7 +305,7 @@ class HomeController(UniversityListMixin, FederationMixin):
         user = User.get(email)
         if user:
             # A user with this email exists, just sign them in.
-            sign_in_user(email)
+            sign_in_user(user)
             return (user, email)
 
         gadugadu_uin = self.form_result['gadugadu']
@@ -328,7 +328,7 @@ class HomeController(UniversityListMixin, FederationMixin):
             gg.confirmation_request(user)
             meta.Session.commit()
 
-        sign_in_user(email)
+        sign_in_user(user)
         return (user, email)
 
     @validate(schema=RegistrationForm(), form='register')
@@ -406,7 +406,7 @@ class HomeController(UniversityListMixin, FederationMixin):
                 user.phone_number = self.form_result['phone']
                 meta.Session.add(user)
                 meta.Session.commit()
-            sign_in_user(c.email)
+            sign_in_user(user)
 
             invitation_hash = self.form_result.get('invitation_hash', '')
             if invitation_hash:
@@ -464,7 +464,7 @@ class HomeController(UniversityListMixin, FederationMixin):
                 user.emails[0].confirmed = True
                 meta.Session.commit()
                 h.flash(_('Your password has been updated. Welcome back!'))
-                sign_in_user(user.emails[0].email)
+                sign_in_user(user)
                 redirect(url(controller='profile', action='index'))
             else:
                 defaults={'recovery_key': key}
@@ -548,7 +548,7 @@ class HomeController(UniversityListMixin, FederationMixin):
             c.login_error = _('Wrong username or password!')
 
             if user is not None:
-                sign_in_user(email)
+                sign_in_user(user)
                 redirect(c.came_from or url(controller='profile', action='home'))
 
         return render('/login.mako')
