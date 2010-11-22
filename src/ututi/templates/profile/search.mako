@@ -13,4 +13,4 @@ ${_('Search')}
 </%def>
 
 ${search_form(c.text, c.obj_type, c.tags, parts=['obj_type', 'text', 'tags'], target=url(controller='profile', action='search'), js_target=url(controller='profile', action='search_js'), js=True)}
-${search_results(c.results)}
+${search_results(c.results, controller='profile', action='search_js')}

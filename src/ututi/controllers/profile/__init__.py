@@ -90,7 +90,7 @@ class ProfileController(SearchBaseController, UniversityListMixin, WallMixin, Wa
     @validate(schema=SearchSubmit, form='index', post_only=False, on_get=True)
     def search_js(self):
         self._search()
-        return render_mako_def('/search/index.mako','search_results', results=c.results, controller='profile', action='search')
+        return render_mako_def('/search/index.mako','search_results', results=c.results, controller='profile', action='search_js')
 
     @ActionProtector("user")
     def index(self):
