@@ -139,7 +139,6 @@ Approved messages got sent to the members of the group:
 
     >>> mail_queue[:] = []
 
-XXX Test looking at an approved message without an author.
 XXX Test moderation events being sent through email.
 XXX Test flash messages warning about the redirects, when they are not intuitive.
 XXX Test redirection behavior, if administrator tries to view a message already accepted/rejected by someone else.
