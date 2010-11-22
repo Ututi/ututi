@@ -13,6 +13,8 @@ from zope.testing import doctest
 from nous.mailpost import processEmailAndPost
 
 import ututi
+from ututi.lib.mailer import mail_queue
+from ututi.model.events import Event
 from ututi.model import (Group, meta, LocationTag, SimpleTag, User,
                          Subject, Email, Region)
 
@@ -162,3 +164,15 @@ def dump_database():
     shutil.copyfileobj(p.stdout, open("dbdump", "w"))
     shutil.rmtree("files_dump", ignore_errors=True)
     shutil.copytree(pylons.test.pylonsapp.config["files_path"], "files_dump")
+
+
+def setEventTime(dt):
+    for event in meta.Session.query(Event).all():
+        event.created = dt
+    meta.Session.commit()
+
+
+def printEmails():
+    for email in sorted(mail_queue, key=lambda e: e.recipients):
+        print email.recipients
+        print email.payload()

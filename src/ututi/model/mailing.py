@@ -320,6 +320,8 @@ class GroupMailingListMessage(ContentItem):
             from ututi.model.events import ModeratedPostCreated
             event = meta.Session.query(ModeratedPostCreated).filter_by(message_id=self.id).one()
             meta.Session.delete(event)
+            meta.Session.commit()
+            self.send(self.group.recipients_mailinglist())
 
     def reject(self):
         meta.Session.delete(self)

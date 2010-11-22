@@ -131,8 +131,16 @@ The corresponding event is removed from wall:
     Adminas Adminovix joined the group Moderatoriai .
     Third user joined the group Moderatoriai .
 
+Approved messages got sent to the members of the group:
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> len(mail_queue)
+    1
+
+    >>> mail_queue[:] = []
+
 XXX Test looking at an approved message without an author.
-XXX Test moderation events not being sent through email.
+XXX Test moderation events being sent through email.
 XXX Test flash messages warning about the redirects, when they are not intuitive.
 XXX Test redirection behavior, if administrator tries to view a message already accepted/rejected by someone else.
 XXX Test message approval via the wall (possibly in separate functional test).

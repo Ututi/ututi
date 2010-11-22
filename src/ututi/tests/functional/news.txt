@@ -2,19 +2,9 @@
 Some helper functions to list all the emails sent, and to set the
 times of the events:
 
-    >>> from ututi.lib.mailer import mail_queue
     >>> import datetime
     >>> from ututi.model import meta
-    >>> from ututi.model.events import Event
-
-    >>> def setEventTime(dt):
-    ...     for event in meta.Session.query(Event).all():
-    ...         event.created = dt
-
-    >>> def printEmails():
-    ...     for email in sorted(mail_queue, key=lambda e: e.recipients):
-    ...         print email.recipients
-    ...         print email.payload()
+    >>> from ututi.tests.functional import printEmails, setEventTime
 
 We log in:
 
@@ -30,6 +20,7 @@ Let's invite a couple of users into our group:
     >>> Browser.logIn('user@ututi.lt', 'password').getControl('Accept').click()
     >>> Browser.logIn('user2@ututi.lt', 'password').getControl('Accept').click()
 
+    >>> from ututi.lib.mailer import mail_queue
     >>> mail_queue[:] = []
 
 Add their gadugadu numbers:
@@ -258,7 +249,6 @@ These should have changed:
     >>> browser.getControl(name='each', index=2).displayValue
     ['immediately']
 
-    >>> meta.Session.commit()
     >>> browser.open('http://localhost/news/hourly?date=2009-10-08&hour=11')
 
 XXX Uncomment these tests and fix failures.  FWIW, the test started failing
@@ -410,6 +400,7 @@ Hmm, now what happens if user2 starts ignoring the subject:
 
 Regression test - file moves should not send events!
 
+    >>> from ututi.model.events import Event
     >>> count = len(meta.Session.query(Event).all())
 
     >>> res = app.post("/subject/vu/mat_analize/file/10/move",

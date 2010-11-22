@@ -80,3 +80,25 @@ Now if user refreshes his wall, he sees the message at the top:
     Adminas Adminovix joined the group Moderatoriai .
     Third user joined the group Moderatoriai .
     Adminas Adminovix has created the subject Matematinė analizė .
+
+All the emails for accepted messages have been sent:
+
+    >>> from ututi.tests.functional import printEmails
+    >>> printEmails()
+    ['admin@ututi.lt']
+    Confirm your varlius registration!
+    Click the link now!
+    Sincerely,
+    Varlius staff
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> mail_queue[:] = []
+
+#    >>> import datetime
+#    >>> from ututi.model import meta
+#    >>> from ututi.tests.functional import printEmails, setEventTime
+#
+#    >>> setEventTime(datetime.datetime(2009, 10, 9, 10, 15))
+#    >>> browser.open('http://localhost/news/daily?date=2009-10-10')
+#    >>> browser.open('http://localhost/news/hourly?date=2009-10-08&hour=11')
+
