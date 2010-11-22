@@ -14,15 +14,15 @@
       ${h.literal(_('Error: could not reach server.'))}
     </div>
     <div class="moderation-action-buttons">
-      ${h.button_to(_('Accept'), url=message.url(action='accept_post_from_list'), class_='btn btn-accept')}
+      ${h.button_to(_('Approve'), url=message.url(action='approve_post_from_list'), class_='btn btn-approve')}
       ${h.button_to(_('Reject'), url=message.url(action='reject_post_from_list'), class_='btn btn-reject')}
     </div>
   </div>
 </%def>
 
-<%def name="acceptedMessage()">
-  <div class="accepted-message">
-    ${_('Message accepted')}
+<%def name="approvedMessage()">
+  <div class="approved-message">
+    ${_('Message approved')}
   </div>
 </%def>
 

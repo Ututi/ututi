@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $('.btn-accept, .btn-reject').click(function() {
+  $('.btn-approve, .btn-reject').click(function() {
       var panel = $(this).closest('.moderation-actions');
       panel.addClass('loading');
       $.ajax({

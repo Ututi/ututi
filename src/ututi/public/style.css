@@ -5096,7 +5096,7 @@ div.moderation-actions.loading .moderation-action-buttons {
     display: none;
 }
 
-div.moderation-actions .accepted-message {
+div.moderation-actions .approved-message {
     padding: 6px 15px 6px 25px;
     background: url("img/icons/tick_big.png") left center no-repeat;
 }

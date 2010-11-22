@@ -13,7 +13,7 @@
     ${h.button_to(_("Reject"), c.thread.url(action='reject_post'))}
   </div>
   <div style="float: right">
-    ${h.button_to(_("Accept"), c.thread.url(action='accept_post'))}
+    ${h.button_to(_("Approve"), c.thread.url(action='approve_post'))}
   </div>
   <div class="clear"></div>
 </div>

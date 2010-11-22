@@ -57,11 +57,23 @@ of the message:
     Sincerely,
     Varlius staff
 
-Administrator can click "Accept" button to approve the message.
-From this view he gets redirected to the mailing list, where the
+Administrator can click "Approve" button to approve the message.
+From this view he gets redirected to the moderation queue:
+
+    >>> browser.getControl('Approve').click()
+    >>> print browser.url
+    http://localhost/group/moderators/mailinglist/administration
+
+A flash message shows the title of the message, that has just been
+approved:
+
+    >>> browser.printQuery("//div[@class='flash-message']//text()")
+    Message Hello from varlius has been approved.
+
+We can click on the message link to go to the mailing list, where the
 approved message has appeared:
 
-    >>> browser.getControl('Accept').click()
+    >>> browser.getLink('Hello from varlius').click()
     >>> print browser.url
     http://localhost/group/moderators/mailinglist/thread/5
 
@@ -91,7 +103,7 @@ Now if user refreshes his wall, he sees the message at the top:
       <a>Adminas Adminovix</a> has created the subject <a>Matematin&#279; analiz&#279;</a>.
     </div>
 
-All the emails for accepted messages have been sent:
+All the emails for approved messages have been sent:
 
     >>> from ututi.tests.functional import printEmails
     >>> printEmails()

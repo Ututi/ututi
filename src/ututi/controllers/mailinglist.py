@@ -261,25 +261,29 @@ class MailinglistController(MailinglistBaseController):
 
     @group_mailinglist_action
     @ActionProtector("admin")
-    def accept_post(self, group, thread):
-        thread.accept()
+    def approve_post(self, group, thread):
+        thread.approve()
         meta.Session.commit()
-        redirect(thread.url())
+        h.flash(_("Message %(link_to_message)s has been approved.") % {
+            'link_to_message': h.link_to(thread.subject, thread.url())
+        })
+        redirect(group.url(controller='mailinglist', action='administration'))
 
     @group_mailinglist_action
     @ActionProtector("admin")
     def reject_post(self, group, thread):
         thread.reject()
         meta.Session.commit()
+        h.flash(_("Message has been rejected."))
         redirect(group.url(controller='mailinglist', action='administration'))
 
     @group_mailinglist_action
     @ActionProtector("admin")
-    def accept_post_from_list(self, group, thread):
-        thread.accept()
+    def approve_post_from_list(self, group, thread):
+        thread.approve()
         meta.Session.commit()
         if request.params.has_key('js'):
-            return render_mako_def('mailinglist/administration.mako', 'acceptedMessage')
+            return render_mako_def('mailinglist/administration.mako', 'approvedMessage')
         redirect(request.referrer)
 
     @group_mailinglist_action

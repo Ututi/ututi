@@ -314,7 +314,7 @@ class GroupMailingListMessage(ContentItem):
         self.reply_to = reply_to
         self.body
 
-    def accept(self):
+    def approve(self):
         if self.in_moderation_queue:
             self.in_moderation_queue = False
             from ututi.model.events import ModeratedPostCreated

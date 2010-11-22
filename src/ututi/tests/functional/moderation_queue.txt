@@ -108,7 +108,7 @@ Let's get back to the mailing list. Still no messages here:
 In the administration view one message is still left. Let's approve it:
 
     >>> browser.getControl('Administration').click()
-    >>> action_url = browser.getControl('Accept').mech_form.action
+    >>> action_url = browser.getControl('Approve').mech_form.action
     >>> res = app.post(action_url,
     ...                headers=[('referer', browser.url)])
     >>> print res.status, res.location
@@ -141,6 +141,6 @@ Approved messages got sent to the members of the group:
 
 XXX Test moderation events being sent through email.
 XXX Test flash messages warning about the redirects, when they are not intuitive.
-XXX Test redirection behavior, if administrator tries to view a message already accepted/rejected by someone else.
+XXX Test redirection behavior, if administrator tries to view a message already approved/rejected by someone else.
 XXX Test message approval via the wall (possibly in separate functional test).
-XXX Test bulletproofness of accept/reject methods.
+XXX Test bulletproofness of approved/reject methods.
