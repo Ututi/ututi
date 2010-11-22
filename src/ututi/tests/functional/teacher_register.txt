@@ -31,7 +31,7 @@ Teachers can also register using facebook:
     >>> browser = Browser()
     >>> browser.open('/federation/test_facebook_teacher_login')
     >>> browser.url
-    'http://localhost/teacher/federated_registration?came_from=%2Ffederation%2Ftest_facebook_teacher_login'
+    'http://localhost/teacher/federated_registration'
     >>> browser.getControl(name='agree').value = True
     >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
     >>> browser.getControl('Position').value = 'Tutor'
