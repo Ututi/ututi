@@ -205,6 +205,6 @@ ${h.javascript_link('/javascript/search.js')|n}
 <h1>${_('Search')}</h1>
 ${search_form(c.text, c.obj_type, c.tags, parts=['obj_type', 'text', 'tags'], js=True,  js_target=url(controller='search', action='search_js'))}
 
-${search_results(c.results)}
+${search_results(c.results, controller='search', action='search_js')}
 
 

@@ -85,5 +85,5 @@ class SearchController(SearchBaseController, UniversityListMixin):
     def search_js(self):
         self._search()
         self._search_locations(c.text)
-        return render_mako_def('/search/index.mako','search_results', results=c.results, controller='search', action='index')
+        return render_mako_def('/search/index.mako','search_results', results=c.results, controller='search', action='search_js')
 
