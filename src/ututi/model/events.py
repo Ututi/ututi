@@ -64,6 +64,8 @@ class PageCreatedEvent(Event):
     Has an attribute `page' pointing to the page that was added.
     """
 
+    category = 'page'
+
     def text_news(self):
         return _('Page %(page_title)s (%(page_url)s) was created.') % {
             'page_title': self.page.title,
@@ -88,6 +90,8 @@ class PageModifiedEvent(Event):
 
     Has an attribute `page' pointing to the page that was modified.
     """
+
+    category = 'page'
 
     def text_news(self):
         if not self.page.isDeleted():
@@ -126,6 +130,8 @@ class FileUploadedEvent(Event):
 
     Has an attribute `file' pointing to the file that was uploaded.
     """
+
+    category = 'file'
 
     def isEmptyFile(self):
         return self.file.isNullFile()
@@ -246,6 +252,18 @@ class ModeratedPostCreated(PostCreatedEventBase):
 
     Has an attribute `message' pointing to the message added.
     """
+
+    category = 'moderation'
+
+    def text_news(self):
+        return _('There are %(number_of_messages)d waiting in the moderation queue (%(moderation_queue_link)s)' % {
+                'number_of_messages': 0,
+                'moderation_queue_link': self.context.url(controller='mailinglist', action='administration', qualified=True)})
+
+    def html_news(self):
+        return _('There are %(number_of_messages)d waiting in the <a href="%(moderation_queue_link)s">moderation queue</a>' % {
+                'number_of_messages': 0,
+                'moderation_queue_link': self.context.url(controller='mailinglist', action='administration', qualified=True)})
 
     def render(self):
         return _("New email post %(link_to_message)s was posted in %(link_to_group)s moderation queue") % {

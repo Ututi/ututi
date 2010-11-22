@@ -74,12 +74,22 @@ approved message has appeared:
 Now if user refreshes his wall, he sees the message at the top:
 
     >>> user3.reload()
-    >>> user3.printQuery('id("wall")//div[@class="description"]//text()')
-    Varlius <varlius@example.com> has posted a new message Hello from varlius to the group Moderatoriai .
-    Adminas Adminovix has created the group Moderatoriai .
-    Adminas Adminovix joined the group Moderatoriai .
-    Third user joined the group Moderatoriai .
-    Adminas Adminovix has created the subject Matematinė analizė .
+    >>> user3.printQuery('#wall .description', selector='cssselect', include_attributes=[''])
+    <div>
+      <a>Varlius &lt;varlius@example.com&gt;</a> has posted a new message <a>Hello from varlius</a> to the group <a>Moderatoriai</a>.
+    </div>
+    <div>
+      <a>Adminas Adminovix</a> has created the group <a>Moderatoriai</a>.
+    </div>
+    <div>
+      <a>Adminas Adminovix</a> joined the group <a>Moderatoriai</a>.
+    </div>
+    <div>
+      <a>Third user</a> joined the group <a>Moderatoriai</a>.
+    </div>
+    <div>
+      <a>Adminas Adminovix</a> has created the subject <a>Matematin&#279; analiz&#279;</a>.
+    </div>
 
 All the emails for accepted messages have been sent:
 
@@ -94,11 +104,23 @@ All the emails for accepted messages have been sent:
     >>> from ututi.lib.mailer import mail_queue
     >>> mail_queue[:] = []
 
-#    >>> import datetime
-#    >>> from ututi.model import meta
-#    >>> from ututi.tests.functional import printEmails, setEventTime
-#
-#    >>> setEventTime(datetime.datetime(2009, 10, 9, 10, 15))
-#    >>> browser.open('http://localhost/news/daily?date=2009-10-10')
-#    >>> browser.open('http://localhost/news/hourly?date=2009-10-08&hour=11')
+    >>> import datetime
+    >>> from ututi.model import meta
+    >>> from ututi.tests.functional import printEmails, setEventTime
 
+    >>> setEventTime(datetime.datetime(2009, 10, 9, 10, 15))
+    >>> browser.open('http://localhost/news/daily?date=2009-10-10')
+    >>> browser.open('http://localhost/news/hourly?date=2009-10-08&hour=11')
+
+
+    >>> from ututi.tests.functional import printEmails
+    >>> printEmails()
+    ['admin@ututi.lt']
+    Ututi news: %(changes)s
+    Moderatoriai (http://localhost/group/moderators)
+    - There are 0 waiting in the moderation queue (http://localhost/group/moderators/mailinglist/administration)
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+
+    >>> mail_queue[:] = []
+
+XXX moderation message count is missing in the body and subject

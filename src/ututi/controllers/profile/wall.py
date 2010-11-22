@@ -323,7 +323,7 @@ class WallMixin(MailinglistBaseController, FileViewMixin):
 
         result = render('/profile/feed.mako')
 
-        '''Register new newsfeed visit.'''
+        # Register new newsfeed visit.
         c.user.last_seen_feed = datetime.utcnow()
         meta.Session.commit()
 

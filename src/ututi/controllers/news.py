@@ -10,6 +10,7 @@ from pylons.i18n import ungettext, _
 
 from ututi.lib.messaging import EmailMessage
 from ututi.lib.base import BaseController, render
+from ututi.model.events import ModeratedPostCreated
 from ututi.model.events import FileUploadedEvent
 from ututi.model.events import PageCreatedEvent
 from ututi.model.events import PageModifiedEvent
@@ -30,7 +31,8 @@ class NewsController(BaseController):
             .filter(Event.created < to_time)\
             .filter(Event.created >= from_time)\
             .filter(or_(Event.file_id != None,
-                        Event.page_id != None))\
+                        Event.page_id != None,
+                        Event.event_type == 'moderated_post_created'))\
             .order_by(desc(Event.created))\
             .all()
         return events
@@ -87,8 +89,7 @@ class NewsController(BaseController):
     def _format_event(self, event):
         return {'text_item': event.text_news(),
                 'html_item': event.html_news(),
-                'type': ((isinstance(event, (PageModifiedEvent, PageCreatedEvent)) and 'page') or
-                         (isinstance(event, FileUploadedEvent) and 'file'))}
+                'type': event.category}
 
     def _get_sections(self, events):
         sections = {}
@@ -119,8 +120,13 @@ class NewsController(BaseController):
                           ev.context not in user.ignored_subjects
                           and not ev.isEmptyFile())]
 
+            # process moderation events
+            events = [ev for ev in events
+                      if not isinstance(ev, ModeratedPostCreated) or ev.context.is_admin(user)]
+
             if not events:
                 continue
+
             sections = self._get_sections(events)
             subject = self._subject(sections)
             extra_vars = {'sections': sections,
