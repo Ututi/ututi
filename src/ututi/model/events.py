@@ -259,14 +259,20 @@ class ModeratedPostCreated(PostCreatedEventBase):
         return meta.Session.query(ModeratedPostCreated).filter_by(object_id=self.context.id).count()
 
     def text_news(self):
-        return _('There are %(number_of_messages)d waiting in the moderation queue (%(moderation_queue_link)s)' % {
-                'number_of_messages': self.count_of_messages_in_queue(),
-                'moderation_queue_link': self.context.url(controller='mailinglist', action='administration', qualified=True)})
+        count = self.count_of_messages_in_queue()
+        text = ungettext('There is %(number_of_messages)d message in the moderation queue (%(moderation_queue_link)s)',
+                         'There are %(number_of_messages)d messages in the moderation queue (%(moderation_queue_link)s)', count) % {
+            'number_of_messages': count,
+            'moderation_queue_link': self.context.url(controller='mailinglist', action='administration', qualified=True)}
+        return text
 
     def html_news(self):
-        return _('There are %(number_of_messages)d waiting in the <a href="%(moderation_queue_link)s">moderation queue</a>' % {
-                'number_of_messages': self.count_of_messages_in_queue(),
-                'moderation_queue_link': self.context.url(controller='mailinglist', action='administration', qualified=True)})
+        count = self.count_of_messages_in_queue()
+        text = ungettext('There is %(number_of_messages)d message waiting in the <a href="%(moderation_queue_link)s">moderation queue</a>',
+                         'There are %(number_of_messages)d waiting in the <a href="%(moderation_queue_link)s">moderation queue</a>', count) % {
+            'number_of_messages': count,
+            'moderation_queue_link': self.context.url(controller='mailinglist', action='administration', qualified=True)}
+        return text
 
     def render(self):
         return _("New email post %(link_to_message)s was posted in %(link_to_group)s moderation queue") % {

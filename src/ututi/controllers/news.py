@@ -59,7 +59,7 @@ class NewsController(BaseController):
         dt = datetime.timedelta(days=days, hours=hours)
         return (dtend - dt, dtend)
 
-    def _subject(self, sections):
+    def _subject(self, sections, events):
         pages = files = 0
         for section in sections:
             for event in section['events']:
@@ -75,6 +75,7 @@ class NewsController(BaseController):
         page_changes = ungettext('%(page_count)d new page',
                                  '%(page_count)d new pages', pages) % {
             'page_count': pages}
+
         if pages and files:
             subject = _('Ututi news: %(file_changes)s and %(page_changes)s')
             subject = subject % {'file_changes': file_changes,
@@ -83,6 +84,12 @@ class NewsController(BaseController):
             subject = subject % {'changes': file_changes}
         elif pages:
             subject = subject % {'changes': page_changes}
+        else:
+            messages = len([event for event in events if event.category == 'moderation'])
+            moderation_changes = ungettext('%(message_count)d new message awaiting moderation',
+                                           '%(message_count)d new messages awaiting moderation', messages) % {
+                'message_count': messages}
+            subject = subject % {'changes': moderation_changes}
 
         return   subject
 
@@ -116,9 +123,10 @@ class NewsController(BaseController):
         for uid, events in recipient_to_events.items():
             user = User.get_byid(uid)
             events = [ev for ev in events
-                      if (ev.user.id != uid and
-                          ev.context not in user.ignored_subjects
-                          and not ev.isEmptyFile())]
+                      if (ev.user is None or
+                          (ev.user.id != uid and
+                           ev.context not in user.ignored_subjects
+                           and not ev.isEmptyFile()))]
 
             # process moderation events
             events = [ev for ev in events
@@ -128,7 +136,7 @@ class NewsController(BaseController):
                 continue
 
             sections = self._get_sections(events)
-            subject = self._subject(sections)
+            subject = self._subject(sections, events)
             extra_vars = {'sections': sections,
                           'subject': subject}
             text = render('/emails/news_text.mako',

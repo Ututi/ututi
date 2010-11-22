@@ -112,15 +112,33 @@ All the emails for accepted messages have been sent:
     >>> browser.open('http://localhost/news/daily?date=2009-10-10')
     >>> browser.open('http://localhost/news/hourly?date=2009-10-08&hour=11')
 
-
     >>> from ututi.tests.functional import printEmails
     >>> printEmails()
     ['admin@ututi.lt']
-    Ututi news: %(changes)s
+    Ututi news: 1 new message awaiting moderation
     Moderatoriai (http://localhost/group/moderators)
-    - There are 1 waiting in the moderation queue (http://localhost/group/moderators/mailinglist/administration)
+    - There is 1 message in the moderation queue (http://localhost/group/moderators/mailinglist/administration)
     If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
 
     >>> mail_queue[:] = []
 
-XXX moderation message count is missing in the body and subject
+Let's try it with more messages in the queue:
+
+    >>> for x in range(2):
+    ...      send_test_message('email_from_non_ututi.txt', 43 + x, to='moderators@groups.ututi.lt', subject='Hello from varlius')
+
+    >>> setEventTime(datetime.datetime(2009, 10, 9, 10, 15))
+    >>> browser.open('http://localhost/news/daily?date=2009-10-10')
+    >>> browser.open('http://localhost/news/hourly?date=2009-10-08&hour=11')
+    >>> printEmails()
+    ['admin@ututi.lt']
+    Ututi news: 3 new messages awaiting moderation
+    <BLANKLINE>
+    Moderatoriai (http://localhost/group/moderators)
+    <BLANKLINE>
+    - There are 3 messages in the moderation queue (http://localhost/group/moderators/mailinglist/administration)
+    <BLANKLINE>
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    <BLANKLINE>
+
+    >>> mail_queue[:] = []
