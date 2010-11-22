@@ -322,7 +322,12 @@ class GroupMailingListMessage(ContentItem):
             meta.Session.delete(event)
             meta.Session.commit()
             self.send(self.group.recipients_mailinglist())
+            return True
+        return False
 
     def reject(self):
-        meta.Session.delete(self)
+        if self.in_moderation_queue:
+            meta.Session.delete(self)
+            return True
+        return False
 

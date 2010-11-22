@@ -139,8 +139,105 @@ Approved messages got sent to the members of the group:
 
     >>> mail_queue[:] = []
 
+Let us navigate to the navigation queue one more time. We see a message
+saying that the queue is empty:
+
+    >>> browser.getLink('Mailing List').click()
+    >>> browser.getControl('Administration').click()
+    >>> browser.printQuery('//div[@class="no-messages"]//text()')
+    No messages to be moderated yet.
+
+Four more emails arrive. We can see them if we reload the page:
+
+    >>> for id, subj in [(42, 'one'), (84, 'two'), (168, 'three'), (336, 'four')]:
+    ...     send_test_message('email_from_non_ututi.txt', str(id), to='moderators@groups.ututi.lt', subject=subj)
+    >>> browser.reload()
+    >>> browser.printQuery("id('single-messages')//div[contains(@class, 'm-on')]//text()") # doctest: -ELLIPSIS
+    one Confirm your varlius registration!  Click the l...
+    two Confirm your varlius registration!  Click the l...
+    three Confirm your varlius registration!  Click the l...
+    four Confirm your varlius registration!  Click the l...
+
+Let us click on the message to view it's text, and approve it from there.
+We are redirected back to the moderation queue:
+
+    >>> browser.getLink('one').click()
+    >>> approve_url = browser.getControl('Approve').mech_form.action
+    >>> reject_url = browser.getControl('Reject').mech_form.action
+    >>> browser.getControl('Approve').click()
+    >>> print browser.url
+    http://localhost/group/moderators/mailinglist/administration
+
+A flash message shows the title of the message, that has just been
+approved:
+
+    >>> browser.printQuery("//div[@class='flash-message']//text()")
+    Message one has been approved.
+
+Attempts to manually approve or reject the same message result in
+redirection to the moderation queue with an appropriate flash message:
+
+    >>> browser.open(approve_url)
+    >>> print browser.url
+    http://localhost/group/moderators/mailinglist/administration
+    >>> browser.printQuery("//div[@class='flash-message']//text()")
+    Message one could not be approved.
+    >>> browser.open(reject_url)
+    >>> print browser.url
+    http://localhost/group/moderators/mailinglist/administration
+    >>> browser.printQuery("//div[@class='flash-message']//text()")
+    Message one could not be rejected.
+
+We are not able to reject the message because it was already approved.
+The later flash contains link to the message we're trying to reject, so
+let's view it.
+
+    >>> browser.getLink('one').click()
+    >>> print browser.url
+    http://localhost/group/moderators/mailinglist/thread/6
+
+If we go back and click on the second message and reject it, we are again 
+redirected to moderation queue and an appropriate message is displayed:
+
+    >>> browser.goBack()
+    >>> browser.getLink('two').click()
+    >>> approve_url = browser.getControl('Approve').mech_form.action
+    >>> reject_url = browser.getControl('Reject').mech_form.action
+    >>> browser.getControl('Reject').click()
+    >>> print browser.url
+    http://localhost/group/moderators/mailinglist/administration
+    >>> browser.printQuery("//div[@class='flash-message']//text()")
+    Message two has been rejected.
+
+Attempts to approve or reject this message again will result in 404
+errors, because the message is gone and lost forever:
+
+    >>> browser.open(approve_url)
+    Traceback (most recent call last):
+    ...
+    HTTPError: HTTP Error 404: Not Found
+    >>> browser.open(reject_url)
+    Traceback (most recent call last):
+    ...
+    HTTPError: HTTP Error 404: Not Found
+
+Let's go back to the moderation queue, and moderate third and fourth
+messages via ajax calls. Appropriate message snippets are rendered:
+
+    >>> browser.open('http://localhost/group/moderators/mailinglist/administration')
+    >>> approve_url = browser.getControl('Approve', index=0).mech_form.action
+    >>> reject_url = browser.getControl('Reject', index=1).mech_form.action
+    >>> browser.open(approve_url + '?js=1')
+    >>> print browser.contents
+    <div class="approved-message">
+      Message approved
+    </div>
+    >>> browser.open(reject_url + '?js=1')
+    >>> print browser.contents
+    <div class="rejected-message">
+      Message rejected
+    </div>
+
 XXX Test moderation events being sent through email.
-XXX Test flash messages warning about the redirects, when they are not intuitive.
-XXX Test redirection behavior, if administrator tries to view a message already approved/rejected by someone else.
 XXX Test message approval via the wall (possibly in separate functional test).
-XXX Test bulletproofness of approved/reject methods.
+

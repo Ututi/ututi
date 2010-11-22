@@ -262,25 +262,36 @@ class MailinglistController(MailinglistBaseController):
     @group_mailinglist_action
     @ActionProtector("admin")
     def approve_post(self, group, thread):
-        thread.approve()
-        meta.Session.commit()
-        h.flash(_("Message %(link_to_message)s has been approved.") % {
-            'link_to_message': h.link_to(thread.subject, thread.url())
-        })
+        if thread.approve():
+            meta.Session.commit()
+            h.flash(_("Message %(link_to_message)s has been approved.") % {
+                'link_to_message': h.link_to(thread.subject, thread.url())
+            })
+        else:
+            h.flash(_("Message %(link_to_message)s could not be approved.") % {
+                'link_to_message': h.link_to(thread.subject, thread.url())
+            })
         redirect(group.url(controller='mailinglist', action='administration'))
 
     @group_mailinglist_action
     @ActionProtector("admin")
     def reject_post(self, group, thread):
-        thread.reject()
-        meta.Session.commit()
-        h.flash(_("Message has been rejected."))
+        if thread.reject():
+            meta.Session.commit()
+            h.flash(_("Message %(message_subject)s has been rejected.") % {
+                'message_subject': thread.subject
+            })
+        else:
+            h.flash(_("Message %(link_to_message)s could not be rejected.") % {
+                'link_to_message': h.link_to(thread.subject, thread.url())
+            })
         redirect(group.url(controller='mailinglist', action='administration'))
 
     @group_mailinglist_action
     @ActionProtector("admin")
     def approve_post_from_list(self, group, thread):
         thread.approve()
+        # XXX check for return value
         meta.Session.commit()
         if request.params.has_key('js'):
             return render_mako_def('mailinglist/administration.mako', 'approvedMessage')
@@ -290,6 +301,7 @@ class MailinglistController(MailinglistBaseController):
     @ActionProtector("admin")
     def reject_post_from_list(self, group, thread):
         thread.reject()
+        # XXX check for return value
         meta.Session.commit()
         if request.params.has_key('js'):
             return render_mako_def('mailinglist/administration.mako', 'rejectedMessage')
