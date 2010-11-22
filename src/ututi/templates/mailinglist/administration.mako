@@ -2,33 +2,11 @@
 
 <%def name="head_tags()">
   ${parent.head_tags()}
-  <script type="text/javascript">
-  $(document).ready(function(){
-      $('.btn-accept, .btn-reject').click(function() {
-          var panel = $(this).closest('.moderation-actions');
-          panel.addClass('loading');
-          $.ajax({
-            url: $(this).closest('form').attr('action') + '?js=1',
-            success: function(data) {
-              panel.removeClass('loading');
-              panel.removeClass('error');
-              panel.html(data);
-              panel.closest('.message-list-on1, .message-list-off1')
-                .find('a').addClass('disabled').removeAttr('href');
-            },
-            error: function(data) {
-              panel.removeClass('loading');
-              panel.addClass('error');
-            }
-          });
-          return false;
-      });
-  });
-  </script>
+  ${h.javascript_link('/javascript/moderation.js')}
 </%def>
 
 <%def name="listThreadsActions(message)">
-  <div class="floatright moderation-actions">
+  <div class="moderation-actions">
     <div class="loading-message">
       ${_('Working...')}
     </div>
@@ -58,7 +36,7 @@
   <a class="back-link" href="${h.url_for(action='index')}">${_('Back to the topic list')}</a>
 </div>
 
-<%self:rounded_block class_="portletGroupFiles portletGroupMailingList">
+<%self:rounded_block class_="moderation-queue portletGroupFiles portletGroupMailingList">
   <div class="single-title">
     <div class="floatleft bigbutton2">
       <h2 class="portletTitle bold category-title">${_('Moderation queue')}</h2>

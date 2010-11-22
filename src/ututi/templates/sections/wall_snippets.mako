@@ -1,5 +1,6 @@
 <%namespace name="base" file="/prebase.mako" import="rounded_block"/>
 <%namespace file="/widgets/sms.mako" import="sms_widget"/>
+<%namespace name="moderation" file="/mailinglist/administration.mako" />
 
 <%def name="head_tags()">
   ${h.javascript_link('/javascript/jquery.jtruncate.pack.js')}
@@ -16,6 +17,7 @@
     });
   </script>
   ${h.javascript_link('/javascript/mailinglist.js')}
+  ${h.javascript_link('/javascript/moderation.js')}
 </%def>
 
 <%def name="wall_item(event)">
@@ -173,6 +175,12 @@
          dict(user_link=event.link_to_author(),
               group_link=h.object_link(event.context),
               message_link=h.object_link(event.message)) | n}
+    <%def name="action_link()">${_('Moderate')}</%def>
+    <%def name="action()">
+      <%base:rounded_block>
+      ${moderation.listThreadsActions(event.message)}
+      </%base:rounded_block>
+    </%def>
   </%self:wall_item>
 </%def>
 
