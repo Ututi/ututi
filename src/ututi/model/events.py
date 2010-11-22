@@ -255,14 +255,17 @@ class ModeratedPostCreated(PostCreatedEventBase):
 
     category = 'moderation'
 
+    def count_of_messages_in_queue(self):
+        return meta.Session.query(ModeratedPostCreated).filter_by(object_id=self.context.id).count()
+
     def text_news(self):
         return _('There are %(number_of_messages)d waiting in the moderation queue (%(moderation_queue_link)s)' % {
-                'number_of_messages': 0,
+                'number_of_messages': self.count_of_messages_in_queue(),
                 'moderation_queue_link': self.context.url(controller='mailinglist', action='administration', qualified=True)})
 
     def html_news(self):
         return _('There are %(number_of_messages)d waiting in the <a href="%(moderation_queue_link)s">moderation queue</a>' % {
-                'number_of_messages': 0,
+                'number_of_messages': self.count_of_messages_in_queue(),
                 'moderation_queue_link': self.context.url(controller='mailinglist', action='administration', qualified=True)})
 
     def render(self):

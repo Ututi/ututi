@@ -118,7 +118,7 @@ All the emails for accepted messages have been sent:
     ['admin@ututi.lt']
     Ututi news: %(changes)s
     Moderatoriai (http://localhost/group/moderators)
-    - There are 0 waiting in the moderation queue (http://localhost/group/moderators/mailinglist/administration)
+    - There are 1 waiting in the moderation queue (http://localhost/group/moderators/mailinglist/administration)
     If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
 
     >>> mail_queue[:] = []
