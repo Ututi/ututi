@@ -51,3 +51,11 @@ Let's enter the password wrong:
     'http://localhost/login'
 
 Still permission is denied.
+
+Testing if a bug, where login emails where incorrectly stripped
+    >>> browser = Browser()
+    >>> browser.addHeader('X-Forwarded-For', '62.80.225.102')
+    >>> form = browser.getForm('loginForm')
+    >>> form.getControl('Email').value = "admin@ututi.lt "
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()

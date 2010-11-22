@@ -824,15 +824,13 @@ class User(object):
 
     @classmethod
     def authenticate(cls, username, password):
-        try:
-            user = meta.Session.query(Email).filter_by(email=username.strip().lower()).one().user
-            if validate_password(user.password, password):
-                return username
-            else:
-                return None
-        except NoResultFound:
+        user = cls.get(username)
+        if user is None:
             return None
-        return None
+        if validate_password(user.password, password):
+            return username
+        else:
+            return None
 
     @classmethod
     def get(cls, username):
@@ -841,7 +839,7 @@ class User(object):
             if isinstance(username, (long, int)):
                 return meta.Session.query(cls).filter_by(id=username).one()
             else:
-                return meta.Session.query(Email).filter_by(email=username.lower()).one().user
+                return meta.Session.query(Email).filter_by(email=username.strip().lower()).one().user
         except NoResultFound:
             return None
 
