@@ -102,3 +102,18 @@ different error message:
       </div>
       <a href="/search">go find something else</a>
     </div>
+
+If a user gets a 404 page while not being logged-in and then logs in, he should be redirected to the frontpage.
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/asdfasdf')
+    Traceback (most recent call last):
+    ...
+    HTTPError: HTTP Error 404: Not Found
+
+    >>> form = browser.getForm('loginForm')
+    >>> form.getControl('Email').value = "admin@ututi.lt "
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
+
+    >>> browser.url
+    'http://localhost/home'

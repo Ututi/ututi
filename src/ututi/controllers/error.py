@@ -26,6 +26,7 @@ class ErrorController(SearchController):
         c.ututi_supporters = get_supporters()
         resp = request.environ.get('pylons.original_response')
         req = request.environ.get('pylons.original_request')
+        c.came_from = url.current()
         if resp is None:
             return render("/error.mako")
 
@@ -37,6 +38,7 @@ class ErrorController(SearchController):
                     'url': req.url.encode('ascii', 'ignore')})
             self.form_result = {}
             self._search()
+            c.came_from = url('/')
             return render('/search/index.mako')
 
         return render("/error.mako")
