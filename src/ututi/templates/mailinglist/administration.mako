@@ -7,12 +7,14 @@
       $('.btn-accept, .btn-reject').click(function() {
           var panel = $(this).closest('.moderation-actions');
           panel.addClass('loading');
-          var form = $(this).closest('form');
           $.ajax({
-            url: form.attr('action') + '?js=1',
+            url: $(this).closest('form').attr('action') + '?js=1',
             success: function(data) {
-              panel.html(data)
-              var message = panel.closest('.message-list-on1, .message-list-off1')
+              panel.removeClass('loading');
+              panel.removeClass('error');
+              panel.html(data);
+              panel.closest('.message-list-on1, .message-list-off1')
+                .find('a').addClass('disabled').removeAttr('href');
             },
             error: function(data) {
               panel.removeClass('loading');
@@ -31,7 +33,7 @@
       ${_('Working...')}
     </div>
     <div class="error-message">
-      ${h.literal(_('Error: could not reach server.<br /> Please try refreshing the page.'))}
+      ${h.literal(_('Error: could not reach server.'))}
     </div>
     <div class="moderation-action-buttons">
       ${h.button_to(_('Accept'), url=message.url(action='accept_post_from_list'), class_='btn btn-accept')}

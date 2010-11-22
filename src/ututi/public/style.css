@@ -5065,10 +5065,10 @@ ul.universityMembersInfo li{
   display: inline;
 }
 
-/* moderation queue specifics */
+/* moderation queue administration */
 
 div.moderation-actions {
-    width: auto;
+    width: 200px;
     padding: 6px 0px;
 }
 
@@ -5087,8 +5087,7 @@ div.moderation-actions.error .error-message {
     display: block;
 }
 
-div.moderation-actions.loading .moderation-action-buttons,
-div.moderation-actions.error .moderation-action-buttons {
+div.moderation-actions.loading .moderation-action-buttons {
     display: none;
 }
 
@@ -5104,7 +5103,7 @@ div.moderation-actions .rejected-message {
 
 div.moderation-actions form {
     float: left;
-    /* Keeps buttons in one line. 
+    /* Keeps buttons in one line.
      * Otherwise fieldset occupies 100% for some reason.
      */
 }
@@ -5113,7 +5112,12 @@ div.with-moderation-actions div.m-on {
     width: auto;
 }
 
-/* end moderation queue specifics */
+a.disabled, a.disabled:hover {
+    color: #999;
+    text-decoration: none;
+}
+
+/* end moderation queue administration */
 
 /* Teacher registration */
 .login-choice-box .bullet {

@@ -6,7 +6,7 @@ from formencode import Schema, validators, htmlfill
 from pylons.controllers.util import redirect
 from pylons.controllers.util import abort
 from pylons import url
-from pylons import tmpl_context as c, request
+from pylons import tmpl_context as c, request, response
 from pylons.i18n import _
 from pylons.templating import render_mako_def
 
@@ -246,11 +246,14 @@ class MailinglistController(MailinglistBaseController):
             .filter_by(group_id=group.id, in_moderation_queue=True)\
             .order_by(desc(GroupMailingListMessage.sent)).all()
         c.group_menu_current_item = 'mailinglist'
+        response.cache_expires(seconds=0)
         return render('mailinglist/administration.mako')
 
     @group_mailinglist_action
     @ActionProtector("admin")
     def moderate_post(self, group, thread):
+        if not thread.in_moderation_queue:
+            redirect(thread.url())
         c.thread = thread
         c.group_menu_current_item = 'mailinglist'
         c.messages = thread.posts
