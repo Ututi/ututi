@@ -259,6 +259,13 @@ class FederationController(BaseController, FederationMixin):
         return self._register_or_login(None, None, facebook_id=0xfaceb006,
                                        fb_access_token=-42)
 
+    def test_facebook_teacher_login(self):
+        assert config.get('facebook.testing')
+        self._facebook_name_and_email = lambda id, token: ('John Smith', 'john.smith@example.com')
+        return self._register_or_login(None, None, facebook_id=0xfaceb006,
+                                       fb_access_token=-42, u_type='teacher')
+
+
     def facebook_login(self):
         fb_user = facebook.get_user_from_cookie(request.cookies,
                          config['facebook.appid'], config['facebook.secret'])

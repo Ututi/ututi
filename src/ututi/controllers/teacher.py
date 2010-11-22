@@ -122,7 +122,7 @@ class TeacherController(BaseController, FederationMixin):
                 self._bind_user(user, flash=False)
                 if user.facebook_id:
                     self._bind_facebook_invitations(user)
-                user.teacher_position = position
+                user.teacher_position = self.form_result['position']
                 user.accepted_terms = datetime.utcnow()
                 user.emails = [Email(c.email)]
                 user.emails[0].confirmed = True
