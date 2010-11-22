@@ -43,7 +43,7 @@ Group subject watching
 These actions should have left an event trail on the group home page:
 
     >>> browser.getLink("News wall", url='group').click()
-    >>> browser.printQuery("id('wall')//div[@class='description']", include_attributes=[''])
+    >>> browser.printQuery("#wall .description", selector='cssselect', include_attributes=[''])
     <div>
         The group <a>Moderatoriai</a> has stopped watching the subject <a>Matematin&#279; analiz&#279;</a>.
     </div>
