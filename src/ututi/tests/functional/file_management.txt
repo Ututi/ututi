@@ -283,10 +283,10 @@ for the service.
 
     >>> browser.open('http://localhost/group/moderators/files')
     >>> browser.printQuery('//div[@class="upload_control no_upload "]')
-    <div class="upload_control no_upload ">
+    <div class="upload_control no_upload">
       <table>
         <tr>
-          <td colspan="2" style="text-align: center;">
+          <td colspan="2">
             <form action="/group/moderators/pay" class="button-to" method="post">
               <fieldset>
                 <button class="btn" type="submit" value="Increase limits">
@@ -342,14 +342,14 @@ Check if an email to group members is being sent:
 Once the group has been paid for and the payment has been processed,
 uploading is enabled again:
 
-    >>> browser.printQuery('//div[@class="upload_control no_upload "]')
+    >>> browser.printQuery('//div[@class="upload_control no_upload"]')
 
     >>> browser.printQuery('//div[@class="show target_list file_upload_dropdown"]')
     <div class="show target_list file_upload_dropdown" id="file_upload_dropdown-0">
       <div class="target_item first">
         <div class="upload target" id="file_upload_button-0-0">Here</div>
       </div>
-      <div class="target_item ">
+      <div class="target_item">
         <div class="upload target" id="file_upload_button-0-1">Also a folder</div>
       </div>
       <div class="target_item last">

@@ -42,14 +42,14 @@ After the download of the file, the downloaded files count in the user list shou
     >>> browser.open('http://localhost/admin/users')
     >>> browser.printQuery('id("user_list")')
     <table id="user_list">
-      <tr style="text-align: center">
+      <tr>
         <th></th>
         <th>Name</th>
         ...
       </tr>
-      <tr style="background: #FFFFFF">
+      <tr>
         <td> 1. </td>
-        <td style="white-space: nowrap">
+        <td>
           <a href="/user/4">Third user</a>
         </td>
     ...

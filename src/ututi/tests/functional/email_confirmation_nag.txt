@@ -14,7 +14,7 @@ Test nagging users to confirm their emails
        <div>
          <input type="hidden" name="came_from" value="http://localhost/home" />
          <input type="hidden" name="email" value="user3@ututi.lt" />
-         <input type="submit" class="text_button" value="get another confirmation email" style="font-size: 13px;" />
+         <input type="submit" class="text_button" value="get another confirmation email" />
        </div>
      </form>
    </span>
@@ -35,7 +35,7 @@ Test nagging users to confirm their emails
        <div>
          <input type="hidden" name="came_from" value="http://localhost/home" />
          <input type="hidden" name="email" value="user3@ututi.lt" />
-         <input type="submit" class="text_button" value="get another confirmation email" style="font-size: 13px;" />
+         <input type="submit" class="text_button" value="get another confirmation email" />
        </div>
      </form>
    </span>
