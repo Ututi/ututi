@@ -694,13 +694,7 @@ class ContentItem(object):
 
 users_table = None
 user_monitored_subjects_table = None
-
-
-
 email_table = None
-
-
-
 
 
 class Folder(list):
