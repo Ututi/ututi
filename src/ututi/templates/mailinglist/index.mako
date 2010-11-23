@@ -12,7 +12,9 @@
       % endif
       % if h.check_crowds(['admin']):
       <div style="float: right">
-        ${h.button_to(_("Administration"), c.group.url(controller='mailinglist', action='administration'), method='get')}
+        <% class_ = 'btn bold' if c.moderation_count else 'btn' %>
+        ${h.button_to(_("Moderation queue (%(moderation_count)s)") % dict(moderation_count=c.moderation_count),
+          c.group.url(controller='mailinglist', action='administration'), method='get', class_=class_)}
       </div>
       % endif
       <div class="clear"></div>

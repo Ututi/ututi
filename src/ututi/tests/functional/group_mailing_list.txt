@@ -288,7 +288,7 @@ message:
 This message will appear in the moderation queue:
 
     >>> browser.getLink('Mailing List').click()
-    >>> browser.getControl('Administration').click()
+    >>> browser.getControl('Moderation queue (1)').click()
     >>> browser.printQuery("id('single-messages')//div[contains(@class, 'm-on')]//text()")
     Hi group!
     This is my message

@@ -147,6 +147,9 @@ class MailinglistController(MailinglistBaseController):
             .filter_by(group_id=group.id, reply_to=None, in_moderation_queue=False)\
             .order_by(desc(GroupMailingListMessage.sent))\
             .count()
+        c.moderation_count = meta.Session.query(GroupMailingListMessage)\
+            .filter_by(group_id=group.id, in_moderation_queue=True)\
+            .count()
         c.messages = paginate.Page(
                 message_objs,
                 page=int(request.params.get('page', 1)),

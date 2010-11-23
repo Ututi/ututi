@@ -41,9 +41,11 @@ No email messages will be sent to group members either:
     >>> len(mail_queue)
     0
 
-But we will see it in the moderation queue:
+But we will see it in the moderation queue. Note here, that the button
+linking to the moderation queue also show the number of messages awaiting
+moderation:
 
-    >>> browser.getControl('Administration').click()
+    >>> browser.getControl('Moderation queue (1)').click()
     >>> browser.printQuery("id('single-messages')//div[contains(@class, 'm-on')]//text()")
     Hello
     Hi, I am just writing to tell you how wonderful...
@@ -107,7 +109,7 @@ Let's get back to the mailing list. Still no messages here:
 
 In the administration view one message is still left. Let's approve it:
 
-    >>> browser.getControl('Administration').click()
+    >>> browser.getControl('Moderation queue (1)').click()
     >>> action_url = browser.getControl('Approve').mech_form.action
     >>> res = app.post(action_url,
     ...                headers=[('referer', browser.url)])
@@ -143,7 +145,7 @@ Let us navigate to the navigation queue one more time. We see a message
 saying that the queue is empty:
 
     >>> browser.getLink('Mailing List').click()
-    >>> browser.getControl('Administration').click()
+    >>> browser.getControl('Moderation queue (0)').click()
     >>> browser.printQuery('//div[@class="no-messages"]//text()')
     No messages to be moderated yet.
 
