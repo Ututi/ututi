@@ -2377,10 +2377,10 @@ msgid "Group e-mail address"
 msgstr "El. pašto konferencija"
 
 msgid "Group can subscribe to subjects"
-msgstr "Grupės studijuojamus dalykus"
+msgstr "Grupė gali būti susiejama su studijuojamais dalykais"
 
 msgid "Group has a file storage area"
-msgstr "Privačių failų saugyklą"
+msgstr "Grupė turi privačią failų saugyklą"
 
 msgid "Forum type"
 msgstr "Forumo tipas"
