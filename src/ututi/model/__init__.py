@@ -2331,3 +2331,6 @@ class BookType(object):
             return book_type.one()
         except NoResultFound:
             return None
+
+    def name_for_url(self):
+        return self.name.lower().replace(" ", "-")

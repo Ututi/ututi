@@ -18,6 +18,7 @@ ${books_menu()}
   <ul>
     <li><a href="${url(controller='books', action='index')}">${_('Home')}</a></li>
     <li><a href="${url(controller='books', action='about')}">${_('About U-Books')}</a></li>
+    <li><a href="${url(controller='books', action='catalog')}">${_('Catalog')}</a></li>
     <li><a href="${url(controller='books', action='forum')}">${_('Forum')}</a></li>
     <li><a class="orange" href="${url(controller='books', action='add')}">${_('Upload a Book')}</a></li>
   </ul>

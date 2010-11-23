@@ -195,6 +195,15 @@ def make_map(config):
                 controller='books', action='logo')
     map.connect('/books/{id}/logo/{width}',
                 controller='books', action='logo')
+    map.connect('/books/catalog/{books_department}/location/{location_id}', controller="books", action="catalog")
+    map.connect('/books/catalog/{books_department}/location/{location_id}/science/{science_type_id}', controller="books", action="catalog")
+    map.connect('/books/catalog/{books_department}/science/{science_type_id}', controller="books", action="catalog")
+    map.connect('/books/catalog/{books_department}/science/{science_type_id}', controller="books", action="catalog")
+    map.connect('/books/catalog/{books_department}/{books_type_name}/science/{science_type_id}', controller="books", action="catalog")
+    map.connect('/books/catalog/{books_department}/{books_type_name}/school_grade/{school_grade_id}', controller="books", action="catalog")
+    map.connect('/books/catalog/{books_department}/{books_type_name}/location/{location_id}', controller="books", action="catalog")
+    map.connect('/books/catalog/{books_department}/{books_type_name}', controller="books", action="catalog")
+    map.connect('/books/catalog/{books_department}', controller="books", action="catalog")
 
 
     # user profiles

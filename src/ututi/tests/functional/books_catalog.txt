@@ -1,0 +1,137 @@
+Tests for filtering books in books catalog
+==========================================
+
+    >>> browser = Browser.logIn()
+    >>> browser.open('http://localhost/admin/science_types')
+    >>> form = browser.getForm('science_type_form')
+    >>> form.getControl('Name').value = 'Fizika'
+    >>> form.getControl('Book department').value = ['1']
+    >>> form.getControl('Save').click()
+
+    >>> browser.open('http://localhost/admin/science_types')
+    >>> form = browser.getForm('science_type_form')
+    >>> form.getControl('Name').value = 'Matematika'
+    >>> form.getControl('Book department').value = ['1']
+    >>> form.getControl('Save').click()
+
+    >>> browser.open('http://localhost/admin/science_types')
+    >>> form = browser.getForm('science_type_form')
+    >>> form.getControl('Name').value = 'Realiniai mokslai'
+    >>> form.getControl('Book department').value = ['0']
+    >>> form.getControl('Save').click()
+
+    >>> browser.open('http://localhost/admin/science_types')
+    >>> form = browser.getForm('science_type_form')
+    >>> form.getControl('Name').value = 'Humanitariniai mokslai'
+    >>> form.getControl('Book department').value = ['0']
+    >>> form.getControl('Save').click()
+
+    >>> browser.open('http://localhost/admin/science_types')
+    >>> form = browser.getForm('science_type_form')
+    >>> form.getControl('Name').value = 'Kita'
+    >>> form.getControl('Book department').value = ['2']
+    >>> form.getControl('Save').click()
+
+    >>> browser.open('http://localhost/admin/science_types')
+    >>> form = browser.getForm('science_type_form')
+    >>> form.getControl('Name').value = 'Visai kita'
+    >>> form.getControl('Book department').value = ['2']
+    >>> form.getControl('Save').click()
+
+    >>> browser.open('http://localhost/admin/book_types')
+    >>> form = browser.getForm('book_type_form')
+    >>> form.getControl('Name').value = 'Vadovėlis'
+    >>> form.getControl('Save').click()
+
+    >>> browser.open('http://localhost/admin/cities')
+    >>> form = browser.getForm('city_form')
+    >>> form.getControl('Name').value = 'Vilnius'
+    >>> form.getControl('Save').click()
+
+    >>> browser.open('http://localhost/admin/school_grades')
+    >>> form = browser.getForm('school_grade_form')
+    >>> form.getControl('Name').value = '1 kl.'
+    >>> form.getControl('Save').click()
+
+    >>> browser = Browser.logIn()
+    >>> browser.open('http://localhost/books/add')
+    >>> browser.url
+    'http://localhost/books/add'
+
+    >>> browser.getControl('Title').value = "My beautiful book 1"
+    >>> browser.getControl('Author').value = "Mr. God"
+    >>> browser.getControl('Brief description of the book').value = "A perfect book for evening"
+    >>> browser.getControl('Book department').value = ['1']
+    >>> browser.getControl('School grade').value = ['1']
+    >>> browser.getControl(name = 'school_science_type').value = ['1']
+    >>> browser.getControl('Book type').value = ['1']
+    >>> browser.getControl('City').value = ['1']
+    >>> browser.getControl('Price').value = "1000.00"
+    >>> browser.getControl('Save').click()
+    >>> browser.url
+    'http://localhost/books/show/1'
+
+    >>> browser.open('http://localhost/books/add')
+    >>> browser.getControl('Title').value = "My beautiful book 2"
+    >>> browser.getControl('Author').value = "Mr. God"
+    >>> browser.getControl('Brief description of the book').value = "A perfect book for evening"
+    >>> browser.getControl('Book department').value = ['2']
+    >>> browser.getControl('Book type').value = ['1']
+    >>> browser.getControl('City').value = ['1']
+    >>> browser.getControl(name = 'other_science_type').value = ['5']
+    >>> browser.getControl('Price').value = "50,00"
+    >>> browser.getControl('Save').click()
+
+    >>> browser.open('http://localhost/books/add')
+    >>> browser.getControl('Title').value = "My beautiful book 3"
+    >>> browser.getControl('Author').value = "Mr. God"
+    >>> browser.getControl('Brief description of the book').value = "A perfect book for evening"
+    >>> browser.getControl('Book department').value = ['0']
+    >>> browser.getControl(name='location-0').value = "Vilniaus universitetas"
+    >>> browser.getControl('Department').value = "Ekonomikos fakultetas"
+    >>> browser.getControl('Book type').value = ['1']
+    >>> browser.getControl('City').value = ['1']
+    >>> browser.getControl(name = 'university_science_type').value = ['3']
+    >>> browser.getControl('Price').value = "50,00"
+    >>> browser.getControl('Save').click()
+
+I open books catalog to see all books
+
+    >>> browser.open('http://localhost/books/catalog')
+    >>> browser.printQuery("//h3[@class='book-title']")
+    <h3 class="book-title">My beautiful book 1</h3>
+    <h3 class="book-title">My beautiful book 2</h3>
+    <h3 class="book-title">My beautiful book 3</h3>
+
+    >>> browser.open('http://localhost/books/catalog/university')
+    >>> browser.printQuery("//h3[@class='book-title']")
+    <h3 class="book-title">My beautiful book 3</h3>
+
+    >>> browser.open('http://localhost/books/catalog/university/science/3')
+    >>> browser.printQuery("//h3[@class='book-title']")
+    <h3 class="book-title">My beautiful book 3</h3>
+
+    >>> browser.open('http://localhost/books/catalog/university/science/4')
+    >>> browser.printQuery("//h3[@class='book-title']")
+
+    >>> browser.open('http://localhost/books/catalog/school')
+    >>> browser.printQuery("//h3[@class='book-title']")
+    <h3 class="book-title">My beautiful book 1</h3>
+
+    >>> browser.open('http://localhost/books/catalog/school/science/1')
+    >>> browser.printQuery("//h3[@class='book-title']")
+    <h3 class="book-title">My beautiful book 1</h3>
+
+    >>> browser.open('http://localhost/books/catalog/school/science/2')
+    >>> browser.printQuery("//h3[@class='book-title']")
+
+    >>> browser.open('http://localhost/books/catalog/other')
+    >>> browser.printQuery("//h3[@class='book-title']")
+    <h3 class="book-title">My beautiful book 2</h3>
+
+    >>> browser.open('http://localhost/books/catalog/other/science/5')
+    >>> browser.printQuery("//h3[@class='book-title']")
+    <h3 class="book-title">My beautiful book 2</h3>
+
+    >>> browser.open('http://localhost/books/catalog/other/science/6')
+    >>> browser.printQuery("//h3[@class='book-title']")

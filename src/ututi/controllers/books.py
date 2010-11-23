@@ -9,6 +9,8 @@ from formencode.compound import Pipe
 from formencode import Schema, validators, htmlfill
 #from pylons import tmpl_context as c, request, url
 #from routes.util import url_for
+from sqlalchemy.sql import func
+from sqlalchemy.sql.expression import and_
 
 
 from formencode.api import Invalid
@@ -17,6 +19,7 @@ from pylons.controllers.util import redirect
 from pylons.i18n import _
 
 from ututi.controllers.group import FileUploadTypeValidator
+from ututi.model import LocationTag
 from ututi.model import Book, meta, City, BookType, SchoolGrade, ScienceType
 import ututi.lib.helpers as h
 from ututi.lib.validators import LocationTagsValidator
@@ -154,6 +157,9 @@ class BooksController(BaseController):
         c.book_types = meta.Session.query(BookType).all()
         c.school_grades = meta.Session.query(SchoolGrade).all()
         c.cities = meta.Session.query(City).all()
+        self._load_science_types()
+
+    def _load_science_types(self):
         c.university_science_types = meta.Session.query(ScienceType).filter(ScienceType.book_department_id==Book.department["university"]).all()
         c.school_science_types = meta.Session.query(ScienceType).filter(ScienceType.book_department_id==Book.department['school']).all()
         c.other_science_types = meta.Session.query(ScienceType).filter(ScienceType.book_department_id==Book.department['other']).all()
@@ -269,3 +275,60 @@ class BooksController(BaseController):
 
     def logo(self, id, width=None, height=None):
         return serve_logo('book', int(id), width=width, height=height)
+
+    def _catalog_form(self):
+        c.book_types = meta.Session.query(BookType).all()
+        return render('books/catalog.mako')
+
+    def catalog(self, books_department=None, books_type_name=None, science_type_id=None, location_id=None, school_grade_id=None):
+        books_department_id = None
+        books_type_id = None
+        school_grade = None
+        science_type = None
+        location = None
+        #self._load_science_types()
+        if books_department is not None:
+            c.books_department = books_department
+            books_department_id = Book.department[books_department]
+        if books_type_name is not None:
+            c.books_type = meta.Session.query(BookType).filter(func.lower(BookType.name)==books_type_name.replace("-", " ")).one()
+        if location_id is not None:
+            location = meta.Session.query(LocationTag).filter(LocationTag.id == location_id).one()
+        if books_department_id is not None:
+            c.current_science_types = meta.Session.query(ScienceType).filter(ScienceType.book_department_id == books_department_id)
+            if books_department == "university":
+                if location_id is not None and location is not None:
+                    if location.parent is not None:
+                        c.locations = meta.Session.query(LocationTag
+                                                         ).filter(LocationTag.parent == location.parent
+                                                                  ).order_by(LocationTag.title.asc())
+                    else:
+                        c.locations = meta.Session.query(LocationTag
+                                                         ).filter(LocationTag.parent == location
+                                                                  ).order_by(LocationTag.title.asc())
+                else:
+                    c.locations = meta.Session.query(LocationTag
+                                                     ).filter(LocationTag.parent == None
+                                                              ).order_by(LocationTag.title.asc())
+            elif books_department == "school":
+                c.school_grades = meta.Session.query(SchoolGrade)
+                if school_grade_id is not None:
+                    school_grade = meta.Session.query(SchoolGrade).filter(SchoolGrade.id == school_grade_id).one()
+        if science_type_id is not None:
+            c.science_type = meta.Session.query(ScienceType).filter(ScienceType.id == science_type_id).one()
+        c.current_science_types = meta.Session.query(ScienceType).filter(ScienceType.book_department_id == books_department_id).all()
+        #book filtering:
+        books = meta.Session.query(Book)
+        if location is not None:
+            children = [child.id for child in location.flatten]
+            books = books.filter(Book.location_id.in_(children))
+        if books_department_id is not None:
+            books = books.filter(Book.department_id == books_department_id)
+        if school_grade is not None:
+            books = books.filter(Book.school_grade == school_grade)
+        if c.books_type is not None and c.books_type != "":
+            books = books.filter(Book.type == c.books_type)
+        if c.science_type is not None and c.science_type != "":
+            books = books.filter(Book.science_type == c.science_type)
+        c.books = self._make_pages(books)
+        return self._catalog_form()
