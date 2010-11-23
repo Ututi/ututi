@@ -17,9 +17,9 @@
   </div>
 </%def>
 
-<%def name="warningMessage(message)">
+<%def name="warningMessage()">
   <div class="warning-message">
-    ${message}
+    ${_('Message already approved')}
   </div>
 </%def>
 
