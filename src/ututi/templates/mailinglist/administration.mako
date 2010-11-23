@@ -5,21 +5,6 @@
   ${h.javascript_link('/javascript/moderation.js')}
 </%def>
 
-<%def name="listThreadsActions(message)">
-  <div class="moderation-actions">
-    <div class="loading-message">
-      ${_('Working...')}
-    </div>
-    <div class="error-message">
-      ${h.literal(_('Error: could not reach server.'))}
-    </div>
-    <div class="moderation-action-buttons">
-      ${h.button_to(_('Approve'), url=message.url(action='approve_post_from_list'), class_='btn btn-approve')}
-      ${h.button_to(_('Reject'), url=message.url(action='reject_post_from_list'), class_='btn btn-reject')}
-    </div>
-  </div>
-</%def>
-
 <%def name="approvedMessage()">
   <div class="approved-message">
     ${_('Message approved')}
@@ -29,6 +14,27 @@
 <%def name="rejectedMessage()">
   <div class="rejected-message">
     ${_('Message rejected')}
+  </div>
+</%def>
+
+<%def name="warningMessage(message)">
+  <div class="warning-message">
+    ${message}
+  </div>
+</%def>
+
+<%def name="listThreadsActions(message)">
+  <div class="moderation-actions">
+    <div class="loading-message">
+      ${_('Working...')}
+    </div>
+  <div class="error-message">
+    ${_('Error: could not reach server or this message was already moderated. Please try refreshing the page.')}
+  </div>
+    <div class="moderation-action-buttons">
+      ${h.button_to(_('Approve'), url=message.url(action='approve_post_from_list'), class_='btn btn-approve')}
+      ${h.button_to(_('Reject'), url=message.url(action='reject_post_from_list'), class_='btn btn-reject')}
+    </div>
   </div>
 </%def>
 

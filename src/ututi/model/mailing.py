@@ -315,19 +315,12 @@ class GroupMailingListMessage(ContentItem):
         self.body
 
     def approve(self):
-        if self.in_moderation_queue:
-            self.in_moderation_queue = False
-            from ututi.model.events import ModeratedPostCreated
-            event = meta.Session.query(ModeratedPostCreated).filter_by(message_id=self.id).one()
-            meta.Session.delete(event)
-            meta.Session.commit()
-            self.send(self.group.recipients_mailinglist())
-            return True
-        return False
+        self.in_moderation_queue = False
+        from ututi.model.events import ModeratedPostCreated
+        event = meta.Session.query(ModeratedPostCreated).filter_by(message_id=self.id).one()
+        meta.Session.delete(event)
+        meta.Session.commit()
+        self.send(self.group.recipients_mailinglist())
 
     def reject(self):
-        if self.in_moderation_queue:
-            meta.Session.delete(self)
-            return True
-        return False
-
+        meta.Session.delete(self)

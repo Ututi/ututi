@@ -5080,20 +5080,29 @@ ul.universityMembersInfo li{
 div.moderation-actions .loading-message,
 div.moderation-actions .error-message {
     display: none;
-    padding: 6px 15px 6px 25px;
 }
 
 div.moderation-actions.loading .loading-message {
     display: block;
-    background: url("../images/details/icon_progress.gif") left center no-repeat;
+    padding: 6px 15px 6px 25px;
+    background: url("images/details/icon_progress.gif") left center no-repeat;
 }
 
 div.moderation-actions.error .error-message {
     display: block;
+    padding: 6px 15px 6px 25px;
+    background: url("img/icons/alert_small.png") 5px center no-repeat;
 }
 
-div.moderation-actions.loading .moderation-action-buttons {
+div.moderation-actions.loading .moderation-action-buttons,
+div.moderation-actions.error .moderation-action-buttons {
     display: none;
+}
+
+div.moderation-actions .warning-message {
+    padding: 6px 15px 6px 25px;
+    background: url("images/details/icon_exclamation.png") 5px center no-repeat;
+    color: red;
 }
 
 div.moderation-actions .approved-message {

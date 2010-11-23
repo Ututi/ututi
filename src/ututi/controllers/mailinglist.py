@@ -262,13 +262,14 @@ class MailinglistController(MailinglistBaseController):
     @group_mailinglist_action
     @ActionProtector("admin")
     def approve_post(self, group, thread):
-        if thread.approve():
+        if thread.in_moderation_queue:
+            thread.approve()
             meta.Session.commit()
             h.flash(_("Message %(link_to_message)s has been approved.") % {
                 'link_to_message': h.link_to(thread.subject, thread.url())
             })
         else:
-            h.flash(_("Message %(link_to_message)s could not be approved.") % {
+            h.flash(_("Could not approve %(link_to_message)s as it was already approved.") % {
                 'link_to_message': h.link_to(thread.subject, thread.url())
             })
         redirect(group.url(controller='mailinglist', action='administration'))
@@ -276,13 +277,14 @@ class MailinglistController(MailinglistBaseController):
     @group_mailinglist_action
     @ActionProtector("admin")
     def reject_post(self, group, thread):
-        if thread.reject():
+        if thread.in_moderation_queue:
+            thread.reject()
             meta.Session.commit()
             h.flash(_("Message %(message_subject)s has been rejected.") % {
                 'message_subject': thread.subject
             })
         else:
-            h.flash(_("Message %(link_to_message)s could not be rejected.") % {
+            h.flash(_("Could not reject %(link_to_message)s as it was already approved.") % {
                 'link_to_message': h.link_to(thread.subject, thread.url())
             })
         redirect(group.url(controller='mailinglist', action='administration'))
@@ -290,19 +292,37 @@ class MailinglistController(MailinglistBaseController):
     @group_mailinglist_action
     @ActionProtector("admin")
     def approve_post_from_list(self, group, thread):
-        thread.approve()
-        # XXX check for return value
-        meta.Session.commit()
-        if request.params.has_key('js'):
-            return render_mako_def('mailinglist/administration.mako', 'approvedMessage')
+        if thread.in_moderation_queue:
+            thread.approve()
+            meta.Session.commit()
+            if request.params.has_key('js'):
+                return render_mako_def('mailinglist/administration.mako',
+                                       'approvedMessage')
+
+        elif request.params.has_key('js'):
+            return render_mako_def('mailinglist/administration.mako',
+                                   'warningMessage',
+                                   message=_('Message already approved'))
+
+        # We don't show flash message here, because normally
+        # this method should be called via ajax.
         redirect(request.referrer)
 
     @group_mailinglist_action
     @ActionProtector("admin")
     def reject_post_from_list(self, group, thread):
-        thread.reject()
-        # XXX check for return value
-        meta.Session.commit()
-        if request.params.has_key('js'):
-            return render_mako_def('mailinglist/administration.mako', 'rejectedMessage')
+        if thread.in_moderation_queue:
+            thread.reject()
+            meta.Session.commit()
+            if request.params.has_key('js'):
+                return render_mako_def('mailinglist/administration.mako',
+                                       'rejectedMessage')
+
+        elif request.params.has_key('js'):
+            return render_mako_def('mailinglist/administration.mako',
+                                   'warningMessage',
+                                   message=_('Message already approved'))
+
+        # We don't show flash message here, because normally
+        # this method should be called via ajax.
         redirect(request.referrer)

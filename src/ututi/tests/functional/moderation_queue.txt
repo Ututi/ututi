@@ -181,12 +181,14 @@ redirection to the moderation queue with an appropriate flash message:
     >>> print browser.url
     http://localhost/group/moderators/mailinglist/administration
     >>> browser.printQuery("//div[@class='flash-message']//text()")
-    Message one could not be approved.
+    Could not approve one as it was already approved.
+
     >>> browser.open(reject_url)
     >>> print browser.url
     http://localhost/group/moderators/mailinglist/administration
     >>> browser.printQuery("//div[@class='flash-message']//text()")
-    Message one could not be rejected.
+    Could not reject one as it was already approved.
+
 
 We are not able to reject the message because it was already approved.
 The later flash contains link to the message we're trying to reject, so
@@ -225,19 +227,46 @@ Let's go back to the moderation queue, and moderate third and fourth
 messages via ajax calls. Appropriate message snippets are rendered:
 
     >>> browser.open('http://localhost/group/moderators/mailinglist/administration')
-    >>> approve_url = browser.getControl('Approve', index=0).mech_form.action
-    >>> reject_url = browser.getControl('Reject', index=1).mech_form.action
-    >>> browser.open(approve_url + '?js=1')
+    >>> approve_url_1 = browser.getControl('Approve', index=0).mech_form.action
+    >>> approve_url_2 = browser.getControl('Approve', index=1).mech_form.action
+    >>> reject_url_1 = browser.getControl('Reject', index=0).mech_form.action
+    >>> reject_url_2 = browser.getControl('Reject', index=1).mech_form.action
+    >>> browser.open(approve_url_1 + '?js=1')
     >>> print browser.contents
     <div class="approved-message">
       Message approved
     </div>
-    >>> browser.open(reject_url + '?js=1')
+    >>> browser.open(reject_url_2 + '?js=1')
     >>> print browser.contents
     <div class="rejected-message">
       Message rejected
     </div>
 
+If message was already approved, repeating ajax calls renders appropriate
+warning messages:
+
+    >>> browser.open(approve_url_1 + '?js=1')
+    >>> print browser.contents
+    <div class="warning-message">
+      Message already approved
+    </div>
+    >>> browser.open(reject_url_1 + '?js=1')
+    >>> print browser.contents
+    <div class="warning-message">
+      Message already approved
+    </div>
+
+For rejected messages, 404 are returned:
+
+    >>> browser.open(approve_url_2 + '?js=1')
+    Traceback (most recent call last):
+    ...
+    HTTPError: HTTP Error 404: Not Found
+    >>> browser.open(reject_url_2 + '?js=1')
+    Traceback (most recent call last):
+    ...
+    HTTPError: HTTP Error 404: Not Found
+
+XXX Assert that mailing queue is correct
 XXX Test moderation events being sent through email.
 XXX Test message approval via the wall (possibly in separate functional test).
-
