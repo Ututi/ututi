@@ -169,16 +169,18 @@
 
 </%def>
 
-<%def name="can_add_subjects()">
-  <label class="checkbox">
-    <input name="can_add_subjects" type="checkbox" />
+<%def name="can_add_subjects(enabled=True)">
+  <% disabled_attr = '' if enabled else ' disabled="disabled"' %>
+  <label class="checkbox"${disabled_attr}>
+    <input name="can_add_subjects" type="checkbox"${disabled_attr} />
     ${_("Group can subscribe to subjects")}
   </label>
 </%def>
 
-<%def name="has_file_storage()">
-  <label class="checkbox">
-    <input name="file_storage" type="checkbox" />
+<%def name="has_file_storage(enabled=True)">
+  <% disabled_attr = '' if enabled else ' disabled="disabled"' %>
+  <label class="checkbox"${disabled_attr}>
+    <input name="file_storage" type="checkbox"${disabled_attr} />
     ${_("Group has a file storage area")}
   </label>
 </%def>
