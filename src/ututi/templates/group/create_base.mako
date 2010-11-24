@@ -170,19 +170,25 @@
 
 </%def>
 
-<%def name="can_add_subjects(enabled=True)">
+<%def name="can_add_subjects(enabled=True, tooltip_text=None)">
   <% disabled_attr = '' if enabled else ' disabled="disabled"' %>
   <label class="checkbox"${disabled_attr}>
     <input name="can_add_subjects" type="checkbox"${disabled_attr} />
     ${_("Group can subscribe to subjects")}
+    %if tooltip_text is not None:
+      ${tooltip(tooltip_text)}
+    %endif
   </label>
 </%def>
 
-<%def name="has_file_storage(enabled=True)">
+<%def name="has_file_storage(enabled=True, tooltip_text=None)">
   <% disabled_attr = '' if enabled else ' disabled="disabled"' %>
   <label class="checkbox"${disabled_attr}>
     <input name="file_storage" type="checkbox"${disabled_attr} />
     ${_("Group has a file storage area")}
+    %if tooltip_text is not None:
+      ${tooltip(tooltip_text)}
+    %endif
   </label>
 </%def>
 
