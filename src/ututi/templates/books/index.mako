@@ -35,7 +35,19 @@
 </div>
 </%def>
 
+<%def name="ubooks_advicer()">
+<div id="what_is_ubooks">
+  <h3>${_("U-Books - what's that?")}</h3>
+  ${h.button_to(_("Add book"), url(controller="books", action="add"))}
+  <ul class="ubooks_explanation">
+    <li>${_("It's school books exchange / selling place.")}</li>
+    <li>${_("It's place where you can get cheap stydy book.")}</li>
+    <li>${_("It's place where you find new owner for you old good textbook.")}</li>
+  </ul>
+</div>
+</%def>
 
+<%self:ubooks_advicer />
 <div>
 %for book in c.books:
     ${book_information(book)}
