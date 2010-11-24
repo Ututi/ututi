@@ -8,8 +8,8 @@ Let's log in to create a group:
     >>> browser.getControl(name='create-custom-group').click()
 
 We specify group's title, e-mail address (identifier) and university.
-Since we're using "Custom create" form, we are able to specify that this group 
-will not need subscription to subjects or file storate area:
+Since we're using "Custom create" form, we are able to specify that this group
+will not need subscription to subjects or file storage area:
 
     >>> browser.getControl('Group title').value = 'Belzebubai'
     >>> browser.getControl('Group e-mail address').value = 'belzebubai'
@@ -27,11 +27,11 @@ inviting any members:
 
 Let's assert that "Files" and "Subjects" tabs are not available:
 
-    >>> browser.getLink('Files').click()
+    >>> browser.getLink('Files')
     Traceback (most recent call last):
     ...
     LinkNotFoundError
-    >>> browser.getLink('Subjects').click()
+    >>> browser.getLink('Subjects')
     Traceback (most recent call last):
     ...
     LinkNotFoundError
@@ -43,10 +43,10 @@ enable file storage area:
     >>> browser.getControl(name='file_storage').value = True
     >>> browser.getControl('Save').click()
 
-Now "Subjects" tab is still unavailable, but "Files" tab became available 
-and we can browse there:
+Now "Subjects" tab is still unavailable, but "Files" tab became
+available and we can browse there:
 
-    >>> browser.getLink('Subjects').click()
+    >>> browser.getLink('Subjects')
     Traceback (most recent call last):
     ...
     LinkNotFoundError
@@ -62,10 +62,8 @@ If we now go to the edit form, we will notice that file storage
 checkbox has become disabled:
 
     >>> browser.getLink('Edit').click()
-    >>> browser.getControl(name='file_storage').value = False
-    Traceback (most recent call last):
-    ...
-    AttributeError: item is disabled
+    >>> browser.getControl(name='file_storage').disabled
+    True
 
 Let's enable subject subscriptions though:
 
@@ -81,14 +79,11 @@ We can now go to "Subjects" tab and watch one:
 In the "Edit" page now both checkboxes should be disabled:
 
     >>> browser.getLink('Edit').click()
-    >>> browser.getControl(name='file_storage').value = False
-    Traceback (most recent call last):
-    ...
-    AttributeError: item is disabled
-    >>> browser.getControl(name='can_add_subjects').value = False
-    Traceback (most recent call last):
-    ...
-    AttributeError: item is disabled
+    >>> browser.getControl(name='file_storage').disabled
+    True
+
+    >>> browser.getControl(name='can_add_subjects').disabled
+    True
 
 Let's go and delete a file, that we created earlier:
 
@@ -101,7 +96,7 @@ Now we can again disable "Files" tab:
     >>> browser.getLink('Edit').click()
     >>> browser.getControl(name='file_storage').value = False
     >>> browser.getControl('Save').click()
-    >>> browser.getLink('Files').click()
+    >>> browser.getLink('Files')
     Traceback (most recent call last):
     ...
     LinkNotFoundError
@@ -114,11 +109,12 @@ tab as well:
     >>> browser.getLink('Edit').click()
     >>> browser.getControl(name='can_add_subjects').value = False
     >>> browser.getControl('Save').click()
-    >>> browser.getLink('Subjects').click()
+    >>> browser.getLink('Subjects')
     Traceback (most recent call last):
     ...
     LinkNotFoundError
-    >>> browser.getLink('Files').click()
+
+    >>> browser.getLink('Files')
     Traceback (most recent call last):
     ...
     LinkNotFoundError
@@ -138,9 +134,7 @@ checkbox will again become disabled:
 
     >>> res = browser.app.get('/group/belzebubai/file/5/restore')
     >>> browser.getLink('Edit').click()
-    >>> browser.getControl(name='file_storage').value = False
-    Traceback (most recent call last):
-    ...
-    AttributeError: item is disabled
+    >>> browser.getControl(name='file_storage').disabled
+    True
 
 That completes the exercise. Have a good day!
