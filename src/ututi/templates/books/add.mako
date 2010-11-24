@@ -36,17 +36,15 @@
 </%def>
 
 <%def name="selectbox(field_name, label, objects, hidden=False, use_custom_error_field = True)">
-%if objects:
-    <label>${label}:
-      %if hidden == True:
-      ${h.select(field_name, None, h.list_for_select(objects, blank_value="blank"), style="display: none;")}
-      %else:
-      ${h.select(field_name, None, h.list_for_select(objects, blank_value="blank"))}
-      %endif
-    </label>
-    %if use_custom_error_field:
-        <form:error name="${field_name}">
-    %endif
+<label>${label}:
+  %if hidden == True:
+  ${h.select(field_name, None, h.list_for_select(objects, blank_value="blank"), style="display: none;")}
+  %else:
+  ${h.select(field_name, None, h.list_for_select(objects, blank_value="blank"))}
+  %endif
+</label>
+%if use_custom_error_field:
+<form:error name="${field_name}" />
 %endif
 </%def>
 
