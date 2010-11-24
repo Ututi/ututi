@@ -4432,6 +4432,7 @@ div#user-logo-button {
 
 /* members screen */
 
+.light-table table,
 table.group-invitations,
 table.group-requests,
 table.group-members {
@@ -4460,20 +4461,25 @@ table.group-requests td.actions {
     width: 210px;
 }
 
+.light-table table th,
 table.group-members th {
   color: #666;
 }
 
+.light-table table td,
+.light-table table th,
 table.group-members td,
 table.group-members th {
   border-bottom: 1px solid #ded8d8;
   padding: 3px 5px;
 }
 
+.light-table table tr.last td,
 table.group-members tr.last td {
   border-bottom: 0;
 }
 
+.light-table table th,
 table.group-members th {
   text-align: left;
   font-size: 11px;
@@ -4488,6 +4494,7 @@ table.group-members td.last-seen {
   width: 11em;
 }
 
+.light-table table td.actions,
 table.group-members td.actions {
   width: 9em;
 }

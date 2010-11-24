@@ -1,7 +1,7 @@
 <%inherit file="/ubase-width.mako" />
 <%namespace name="b" file="standard_blocks.mako" />
 
-<%b:light_table title="Example light table" items="${range(5)}" class_="group-members">
+<%b:light_table title="Example light table" items="${range(5)}" class_="light-table">
   <%def name="row(item)">
     <td>
       Some data
@@ -12,7 +12,7 @@
   </%def>
 </%b:light_table>
 
-<%b:light_table title="Example light table with header and footer" items="${range(5)}" class_="group-members">
+<%b:light_table title="Example light table with header and footer" items="${range(5)}" class_="light-table">
   <%def name="header(items)">
     <th>${_('The data')}</th>
     <th>${_('The actions')}</th>
