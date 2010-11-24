@@ -24,7 +24,7 @@
     %endfor
     %if hasattr(caller, 'footer'):
       <tr class="last">
-        ${caller.last_row(items)}
+        ${caller.footer(items)}
       </tr>
     %endif
   </table>
