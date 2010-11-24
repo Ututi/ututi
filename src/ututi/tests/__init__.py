@@ -80,6 +80,8 @@ UtutiErrorsLayer = CompositeLayer(GrokLayer,
 
 class UtutiTestBrowser(NousTestBrowser):
 
+    app = None
+
     def printCssQuery(self, query, **kwargs):
         return self.printQuery(query, selector='cssselect', **kwargs)
 
@@ -90,6 +92,9 @@ class UtutiTestBrowser(NousTestBrowser):
         form.getControl('Email').value = email
         form.getControl('Password').value = password
         form.getControl('Login').click()
+
+        browser.app = NousTestApp(pylons.test.pylonsapp)
+        res = browser.app.post("/login", params={'login': email, 'password': password})
         return browser
 
 
