@@ -332,3 +332,10 @@ class BooksController(BaseController):
             books = books.filter(Book.science_type == c.science_type)
         c.books = self._make_pages(books)
         return self._catalog_form()
+
+    @ActionProtector("user")
+    def my_books(self):
+        books = meta.Session.query(Book).filter(Book.owner == c.user)
+        c.books = self._make_pages(books)
+        return render('books/my_books.mako')
+
