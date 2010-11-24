@@ -345,3 +345,8 @@ class MailinglistController(MailinglistBaseController):
             return self._reject_post(group, thread, ajax=True)
         else:
             return self._reject_post(group, thread, redirecturl=request.referrer)
+
+    @group_action
+    @ActionProtector("admin")
+    def add_to_whitelist(self, group):
+        redirect(group.url(controller='mailinglist', action='administration'))
