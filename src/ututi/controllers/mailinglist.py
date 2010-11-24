@@ -23,6 +23,7 @@ from ututi.lib import helpers as h
 from ututi.controllers.files import serve_file
 from ututi.controllers.group import group_menu_items
 from ututi.model.mailing import GroupMailingListMessage
+from ututi.model import GroupWhitelistItem
 from ututi.model import Group, meta
 
 
@@ -349,4 +350,9 @@ class MailinglistController(MailinglistBaseController):
     @group_action
     @ActionProtector("admin")
     def add_to_whitelist(self, group):
+        item = GroupWhitelistItem()
+        item.group = group
+        item.email = request.params.get('email')
+        group.whitelist.append(item)
+        meta.Session.commit()
         redirect(group.url(controller='mailinglist', action='administration'))

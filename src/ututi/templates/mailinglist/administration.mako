@@ -48,10 +48,10 @@
                 class_="group-whitelist">
   <%def name="row(item)">
      <td class="email">
-       <a href="mailto:%{item.email}">${item.email}</a>
+       <a href="mailto:${item.email}">${item.email}</a>
      </td>
      <td class="actions">
-       %if item.not_invited_to_group(c.group):
+       %if item.not_invited_to_group:
        <form style="display: inline;" method="post" action="${c.group.url(action='invite_members')}">
          <input type="hidden" name="emails" value="${item.email}" />
          <input type="submit" class="text_button" value="${_('Invite to group')}" />

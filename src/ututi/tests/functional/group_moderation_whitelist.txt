@@ -21,3 +21,8 @@ automatically:
     >>> browser.getControl('Moderation queue (2)').click()
     >>> browser.getControl('Email:').value = 'varlius@example.com'
     >>> browser.getControl('Add').click()
+
+The new item should be in the list:
+
+    >>> browser.printCssQuery('.group-whitelist .email a')
+    <a href="mailto:varlius@example.com">varlius@example.com</a>
