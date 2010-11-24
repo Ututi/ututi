@@ -1,0 +1,146 @@
+Tests editing of group's "Files" and "Subjects" options after the group is created
+==================================================================================
+
+Let's log in to create a group:
+
+    >>> browser = Browser.logIn()
+    >>> browser.getLink('create new group').click()
+    >>> browser.getControl(name='create-custom-group').click()
+
+We specify group's title, e-mail address (identifier) and university.
+Since we're using "Custom create" form, we are able to specify that this group 
+will not need subscription to subjects or file storate area:
+
+    >>> browser.getControl('Group title').value = 'Belzebubai'
+    >>> browser.getControl('Group e-mail address').value = 'belzebubai'
+    >>> browser.getControl('University').value = 'Vilniaus Universitetas'
+    >>> browser.getControl(name='can_add_subjects').value = False
+    >>> browser.getControl(name='file_storage').value = False
+    >>> browser.getControl('Continue').click()
+
+We are redirected to the member invitation and just click "Finish", without
+inviting any members:
+
+    >>> browser.printQuery('//h1/text()')
+    Add group members
+    >>> browser.getControl('Finish').click()
+
+Let's assert that "Files" and "Subjects" tabs are not available:
+
+    >>> browser.getLink('Files').click()
+    Traceback (most recent call last):
+    ...
+    LinkNotFoundError
+    >>> browser.getLink('Subjects').click()
+    Traceback (most recent call last):
+    ...
+    LinkNotFoundError
+
+Suppose we changed our mind. We go to edit group's settings and
+enable file storage area:
+
+    >>> browser.getLink('Edit').click()
+    >>> browser.getControl(name='file_storage').value = True
+    >>> browser.getControl('Save').click()
+
+Now "Subjects" tab is still unavailable, but "Files" tab became available 
+and we can browse there:
+
+    >>> browser.getLink('Subjects').click()
+    Traceback (most recent call last):
+    ...
+    LinkNotFoundError
+    >>> browser.getLink('Files').click()
+
+Since we're watching at files, let's add one:
+
+    >>> res = browser.app.post("/group/belzebubai/upload_file",
+    ...                params={'folder': ''},
+    ...                upload_files=[("attachment", "blzbb.txt", "Belzebubijos teritorijos")])
+
+If we now go to the edit form, we will notice that file storage
+checkbox has become disabled:
+
+    >>> browser.getLink('Edit').click()
+    >>> browser.getControl(name='file_storage').value = False
+    Traceback (most recent call last):
+    ...
+    AttributeError: item is disabled
+
+Let's enable subject subscriptions though:
+
+    >>> browser.getControl(name='can_add_subjects').value = True
+    >>> browser.getControl('Save').click()
+
+We can now go to "Subjects" tab and watch one:
+
+    >>> browser.getLink('Subjects').click()
+    >>> browser.getControl('add a subject').click()
+    >>> browser.getLink('Watch', url='mat_analize').click()
+
+In the "Edit" page now both checkboxes should be disabled:
+
+    >>> browser.getLink('Edit').click()
+    >>> browser.getControl(name='file_storage').value = False
+    Traceback (most recent call last):
+    ...
+    AttributeError: item is disabled
+    >>> browser.getControl(name='can_add_subjects').value = False
+    Traceback (most recent call last):
+    ...
+    AttributeError: item is disabled
+
+Let's go and delete a file, that we created earlier:
+
+    >>> browser.getLink('Back to group page').click()
+    >>> browser.getLink('Files').click()
+    >>> res = browser.app.get('/files/delete/5')
+
+Now we can again disable "Files" tab:
+
+    >>> browser.getLink('Edit').click()
+    >>> browser.getControl(name='file_storage').value = False
+    >>> browser.getControl('Save').click()
+    >>> browser.getLink('Files').click()
+    Traceback (most recent call last):
+    ...
+    LinkNotFoundError
+
+Let's remove the subject we've added before and disable "Subjects"
+tab as well:
+
+    >>> browser.getLink('Subjects').click()
+    >>> browser.getLink(url='unwatch_subject').click()
+    >>> browser.getLink('Edit').click()
+    >>> browser.getControl(name='can_add_subjects').value = False
+    >>> browser.getControl('Save').click()
+    >>> browser.getLink('Subjects').click()
+    Traceback (most recent call last):
+    ...
+    LinkNotFoundError
+    >>> browser.getLink('Files').click()
+    Traceback (most recent call last):
+    ...
+    LinkNotFoundError
+
+If we enable file storage area, we find previously deleted
+items in the recycle bin:
+
+    >>> browser.getLink('Edit').click()
+    >>> browser.getControl(name='file_storage').value = True
+    >>> browser.getControl('Save').click()
+    >>> browser.getLink('Files').click()
+    >>> browser.printQuery('//ul[contains(@class, "trash_folder")]//span[@class="file_name"]//text()')
+    blzbb.txt
+
+If we undelete the file, in 'Edit' page file storage area
+checkbox will again become disabled:
+
+    >>> res = browser.app.get('/group/belzebubai/file/5/restore')
+    >>> browser.getLink('Edit').click()
+    >>> browser.getControl(name='file_storage').value = False
+    Traceback (most recent call last):
+    ...
+    AttributeError: item is disabled
+
+That completes the exercise. Have a good day!

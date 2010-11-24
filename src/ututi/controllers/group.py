@@ -144,6 +144,8 @@ class EditGroupForm(GroupForm):
     forum_type = validators.OneOf(['mailinglist', 'forum'])
     location = Pipe(ForEach(validators.String(strip=True)),
                     LocationTagsValidator(not_empty=True))
+    can_add_subjects = validators.Bool()
+    file_storage = validators.Bool()
 
 
 class NewGroupForm(GroupForm):
@@ -675,6 +677,8 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
             'tags': ', '.join([tag.title for tag in c.group.tags]),
             'year': group.year.year,
             'default_tab': group.default_tab,
+            'can_add_subjects': group.wants_to_watch_subjects,
+            'file_storage': group.has_file_area,
             'approve_new_members': 'admin' if group.admins_approve_members else 'none',
             'forum_visibility': 'public' if group.forum_is_public else 'members',
             'page_visibility': 'public' if group.page_public else 'members',
@@ -718,6 +722,14 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
         group.mailinglist_moderated = (
                 self.form_result['mailinglist_moderated'] == 'moderated')
         group.mailinglist_enabled = (self.form_result['forum_type'] == 'mailinglist')
+
+        if not (group.is_watching_subjects() and \
+                group.wants_to_watch_subjects):
+            group.wants_to_watch_subjects = bool(self.form_result['can_add_subjects'])
+
+        if not (group.is_storing_files() and \
+                group.has_file_area):
+            group.has_file_area = bool(self.form_result['file_storage'])
 
         # Fix default tab setting if needed.
         if group.default_tab == 'forum' and group.mailinglist_enabled:

@@ -63,7 +63,6 @@ ${h.javascript_link('/javascript/js-alternatives.js')|n}
   </script>
 </%def>
 
-
 <form method="post" action="${url(controller='group', action='update', id=c.group.group_id)}" name="edit_profile_form" enctype="multipart/form-data"
       id="group_settings_form">
   <table>
@@ -99,6 +98,22 @@ ${h.javascript_link('/javascript/js-alternatives.js')|n}
             <span class="labelText">${_('Default group tab')}</span>
         </label>
         ${h.select("default_tab", c.group.default_tab, c.tabs)}
+
+        %if c.group.is_watching_subjects() and c.group.wants_to_watch_subjects:
+          ${can_add_subjects(enabled=False,
+                             tooltip_text=_("This setting cannot be disabled, because "
+                                            "the group is currently watching some subjects."))}
+        %else:
+          ${can_add_subjects()}
+        %endif
+
+        %if c.group.is_storing_files() and c.group.has_file_area:
+          ${has_file_storage(enabled=False,
+                             tooltip_text=_("This setting cannot be disabled, because "
+                                            "the group is currently storing some private files."))}
+        %else:
+          ${has_file_storage()}
+        %endif
 
         <label for="tags"><span class="labelText">${_('Tags')}</span></label>
         ${tags_widget([])}

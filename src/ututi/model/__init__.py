@@ -1066,6 +1066,20 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
             files = files.limit(limit)
         return files.all()
 
+    def is_storing_files(self):
+        """Tells whether the group is currently storing files
+           privately (deleted files do not count)."""
+        for f in self.files:
+            if not f.isNullFile() and f.deleted_by is None:
+                return True
+
+        return False
+
+    def is_watching_subjects(self):
+        """Tells whether the group is currently watching
+           any subjects."""
+        return len(self.watched_subjects) > 0
+
     @property
     def group_events(self):
         return self.filtered_events()
