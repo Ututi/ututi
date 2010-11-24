@@ -268,6 +268,7 @@ def make_map(config):
 
     map.connect('/got_mail', controller='receivemail', action='index')
     map.connect('/admin', controller='admin', action='index')
+    map.connect('/admin/example_blocks', controller='admin', action='example_blocks')
 
     map.connect('/admin/blog', controller='blog', action='index')
     map.connect('/admin/blog/{action}', controller='blog')

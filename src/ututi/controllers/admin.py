@@ -701,3 +701,7 @@ class AdminController(BaseController):
             h.flash('Teacher rejected.')
 
         redirect(url(controller="admin", action="teachers"))
+
+    @ActionProtector("root")
+    def example_blocks(self):
+        return render('sections/example_blocks.mako')
