@@ -1137,6 +1137,10 @@ class GroupWhitelistItem(object):
 
     not_invited_to_group = True
 
+    def __init__(self, group, email):
+        self.group = group
+        self.email = email
+
 
 group_members_table = None
 

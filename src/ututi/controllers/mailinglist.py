@@ -350,9 +350,6 @@ class MailinglistController(MailinglistBaseController):
     @group_action
     @ActionProtector("admin")
     def add_to_whitelist(self, group):
-        item = GroupWhitelistItem()
-        item.group = group
-        item.email = request.params.get('email')
-        group.whitelist.append(item)
+        item = GroupWhitelistItem(group, request.params.get('email'))
         meta.Session.commit()
         redirect(group.url(controller='mailinglist', action='administration'))
