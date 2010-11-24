@@ -1,3 +1,5 @@
+<%namespace file="/sections/content_snippets.mako" import="tooltip" />
+
 <%def name="sms_widget(user=None, group=None)">
 <%
     if user is None:
@@ -120,7 +122,9 @@
     <div class="cost">
       <span class="cost-header">${_("Cost:")}</span>
       <span id="sms_message_credits">${len(recipients)}</span> ${_('SMS credits')}
-      <img style="margin-bottom: -3px" src="/images/details/icon_question.png" class="tooltip " alt="${_('One SMS credit allows you to send one SMS message to a single recipient. When sending a message to a group, one credit is charged for every recipient.')}">
+      ${tooltip(_("one SMS credit allows you to send one SMS message to a single recipient. "
+                  "When sending a message to a group, one credit is charged for every recipient."),
+                style="margin-bottom: -3px")}
     </div>
     <div class="clear-both"></div>
   </form>
@@ -176,7 +180,6 @@
 <div class="phone-message-block">
   <div class="block-head">
     ${_('Send a message from your phone!')}
-    ##<img style="margin-bottom: -3px" src="/images/details/icon_question.png" class="tooltip " alt="${_('')}">
   </div>
 
   <div>

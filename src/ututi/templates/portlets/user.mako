@@ -1,4 +1,5 @@
 <%inherit file="/portlets/base.mako"/>
+<%namespace file="/sections/content_snippets.mako" import="tooltip" />
 
 <%def name="user_subjects_portlet(user=None)">
   <%
@@ -24,9 +25,8 @@
     ${h.link_to(_('More subjects'), url(controller='profile', action='search', obj_type='subject'), class_="more")}
     <span>
       ${h.button_to(_('Watch subjects'), url(controller='profile', action='subjects', id=user.id))}
-      ${h.image('/images/details/icon_question.png',
-                alt=_("Add watched subjects to your watched subjects' list and receive notifications about changes in these subjects"),
-                class_='tooltip')|n}
+      ${tooltip(_("Add watched subjects to your watched subjects' list and receive notifications "
+                  "about changes in these subjects"))}
     </span>
 
   </%self:portlet>
@@ -69,7 +69,7 @@
       ${h.link_to(_('More groups'), url(controller='profile', action='search', obj_type='group'), class_="more")}
       <span>
         ${h.button_to(_('Create group'), url(controller='group', action='group_type'))}
-        ${h.image('/images/details/icon_question.png', alt=_('Create your group, invite your classmates and use the mailing list, upload private group files'), class_='tooltip')|n}
+        ${tooltip(_('Create your group, invite your classmates and use the mailing list, upload private group files'))}
       </span>
     </div>
 
@@ -181,9 +181,8 @@
   <%self:action_portlet id="subject_create_portlet">
     <%def name="header()">
     <a class="blark" ${h.trackEvent(None, 'click', 'user_new_subject', 'action_portlets')} href="${url(controller='subject', action='add')}">${_('create new subject')}</a>
-    ${h.image('/images/details/icon_question.png',
-            alt=_("Store all the subject's files and notes in one place."),
-             class_='tooltip', style='margin-top: 4px;')|n}
+    ${tooltip(_("Store all the subject's files and notes in one place."),
+              style='margin-top: 4px;')}
 
     </%def>
   </%self:action_portlet>
@@ -197,9 +196,8 @@
   <%self:action_portlet id="group_create_portlet">
     <%def name="header()">
     <a class="blark" ${h.trackEvent(None, 'click', 'user_new_group', 'action_portlets')} href="${url(controller='group', action='group_type')}">${_('create new group')}</a>
-    ${h.image('/images/details/icon_question.png',
-            alt=_("Communicate with your classmates, colleagues and friends, share files and news together!"),
-             class_='tooltip', style='margin-top: 4px;')|n}
+    ${tooltip(_("Communicate with your classmates, colleagues and friends, share files and news together!"),
+              style='margin-top: 4px;')}
 
     </%def>
   </%self:action_portlet>

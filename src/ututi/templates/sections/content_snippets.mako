@@ -169,3 +169,10 @@
     </div>
   </div>
 </%def>
+
+<%def name="tooltip(text, style=None)">
+  ${h.literal(h.image('/images/details/icon_question.png', 
+              alt=text,
+              class_='tooltip',
+              style=style))}
+</%def>

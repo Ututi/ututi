@@ -2,6 +2,7 @@
 <%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*"/>
 <%namespace file="/widgets/tags.mako" import="*"/>
 <%namespace file="/group/create_base.mako" import="*"/>
+<%namespace file="/sections/content_snippets.mako" import="tooltip" />
 
 <%def name="group_menu()">
   <h1 class="pageTitle">${self.title()}</h1>
@@ -120,7 +121,8 @@ ${h.javascript_link('/javascript/js-alternatives.js')|n}
   <label for="mailing_list_moderation" class="radio">
       <span class="labelText">
         ${_('Who can send messages to the mailing list')}
-        ${h.image('/images/details/icon_question.png', alt=_('If you select moderated, you can pick the people who you want to allow to post to the mailing list.'), class_='tooltip')|n}
+        ${tooltip(_("If you select moderated, you can pick the people "
+                    "who you want to allow to post to the mailing list."))}
       </span>
     ${h.radio("mailinglist_moderated", "members", label=_('Members only'))}
     <br />

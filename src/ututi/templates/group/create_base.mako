@@ -1,7 +1,8 @@
 
 <%inherit file="/ubase.mako" />
 
-<%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*"/>
+<%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*" />
+<%namespace file="/sections/content_snippets.mako" import="tooltip" />
 
 <%def name="title()">
   ${_('Create group')} <!-- Override this -->
@@ -210,10 +211,10 @@
 <%def name="forum_type_and_id()">
   <label for="forum_type"><span class="labelText">${_('Forum type')}</span></label>
   ${h.select("forum_type", c.forum_type, c.forum_types)}
-  ${h.image('/images/details/icon_question.png',
-            alt=_("<p>In an e-mail conference all messages, sent to the group's address will be forwarded to all members.</p>\
-                   <p>In a forum there is the posibility to create subforums, and subscribed members get e-mail notifications about new messages, not the messages themselves.</p>"),
-             class_='tooltip', style='margin-top: 4px;')|n}
+  ${tooltip(_(
+    "<p>In an e-mail conference all messages, sent to the group's address will be forwarded to all members.</p>"
+    "<p>In a forum there is the posibility to create subforums, and subscribed members get e-mail notifications"
+    "about new messages, not the messages themselves.</p>"), style='margin-top: 4px;')}
 
   <div style="height: 5px"></div>
 
@@ -360,7 +361,7 @@
   <label for="page_visibility" class="radio">
       <span class="labelText">
         ${_('Group page visibility')}
-        ${h.image('/images/details/icon_question.png', alt=_('The group page can be used for news, description of the group, calendaring, timetables, etc.'), class_='tooltip')|n}
+        ${tooltip(_('The group page can be used for news, description of the group, calendaring, timetables, etc.'))}
       </span>
     ${h.radio("page_visibility", "public", label=_('Public'))}
     <br />

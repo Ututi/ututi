@@ -1,5 +1,6 @@
 <%inherit file="/ubase-sidebar.mako" />
 <%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*"/>
+<%namespace file="/sections/content_snippets.mako" import="tooltip" />
 
 <%def name="flash_messages()"></%def>
 
@@ -44,9 +45,7 @@ ${_('New group')}
 </%def>
 
 <h1>${_('Create your Ututi group and start sharing!')}
-  ${h.image('/images/details/icon_question.png',
-            alt=_('Create your group, invite your classmates and use the mailing list, upload private group files'),
-            class_='tooltip')|n}
+    ${tooltip(_('Create your group, invite your classmates and use the mailing list, upload private group files'))}
 </h1>
 
 ${path_steps()}
