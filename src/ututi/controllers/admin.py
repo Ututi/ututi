@@ -618,7 +618,7 @@ class AdminController(BaseController):
         defaults = {
             'id': c.science_type.id,
             'name': c.science_type.name,
-            'book_department_id': c.science_type.book_department_id}
+            'department_id': c.science_type.book_department_id}
         return htmlfill.render(self._edit_science_type_form(), defaults)
 
     @ActionProtector("root")
