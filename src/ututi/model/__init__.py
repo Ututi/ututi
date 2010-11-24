@@ -347,6 +347,11 @@ def setup_orm(engine):
                          autoload=True,
                          autoload_with=engine)
 
+    global group_whitelist_table
+    group_whitelist_table = Table("group_whitelist", meta.metadata,
+                                  autoload=True,
+                                  autoload_with=engine)
+
     global coupon_usage_table
     coupon_usage_table = Table("coupon_usage", meta.metadata,
                                useexisting=True,
@@ -372,6 +377,12 @@ def setup_orm(engine):
                                                          backref=backref("watching_groups", lazy=True),
                                                          secondary=group_watched_subjects_table),
                             'raw_logo': deferred(groups_table.c.logo)})
+
+    orm.mapper(GroupWhitelistItem, group_whitelist_table,
+               properties = {'group': relation(Group,
+                                               backref=backref('whitelist',
+                                                               cascade='save-update, merge, delete',
+                                                               order_by=group_whitelist_table.c.id.asc()))})
 
     orm.mapper(GroupSubjectMonitoring, group_watched_subjects_table,
                properties ={'subject': relation(Subject),
@@ -846,7 +857,6 @@ class GroupCoupon(object):
 
 class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
 
-    whitelist = []
     flaggable_files = False
 
     def send(self, msg):
@@ -1118,6 +1128,14 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
                                    url=tag.url())
                               for tag in self.location.hierarchy(True)] if self.location is not None else [],
                 }
+
+
+group_whitelist_table = None
+
+class GroupWhitelistItem(object):
+    """Group mailing list whitelist item"""
+
+    not_invited_to_group = True
 
 
 group_members_table = None

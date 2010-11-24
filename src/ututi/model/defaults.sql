@@ -232,6 +232,13 @@ create table groups (
        mailinglist_moderated bool not null default false,
        primary key (id));;
 
+/* group mailinglist whitelist */
+create table group_whitelist (
+       id bigserial not null,
+       group_id int8 default null references groups(id) on delete cascade,
+       email varchar(320) not null,
+       primary key (id));;
+
 /* track coupon usage */
 create table coupon_usage (
        coupon_id varchar(20) not null references group_coupons(id),
