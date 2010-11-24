@@ -20,3 +20,4 @@ backup/*
 performance.log
 .coverage
 *.swp
+var/log/*
