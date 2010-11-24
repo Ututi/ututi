@@ -80,6 +80,9 @@ UtutiErrorsLayer = CompositeLayer(GrokLayer,
 
 class UtutiTestBrowser(NousTestBrowser):
 
+    def printCssQuery(self, query, **kwargs):
+        return self.printQuery(query, selector='cssselect', **kwargs)
+
     @classmethod
     def logIn(cls, email='admin@ututi.lt', password='asdasd'):
         browser = cls()
