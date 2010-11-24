@@ -4433,6 +4433,7 @@ div#user-logo-button {
 /* members screen */
 
 .light-table table,
+.group-whitelist table,
 table.group-invitations,
 table.group-requests,
 table.group-members {
@@ -4468,6 +4469,7 @@ table.group-members th {
 
 .light-table table td,
 .light-table table th,
+.group-whitelist table td,
 table.group-members td,
 table.group-members th {
   border-bottom: 1px solid #ded8d8;
@@ -4475,6 +4477,7 @@ table.group-members th {
 }
 
 .light-table table tr.last td,
+.group-whitelist table tr.last td,
 table.group-members tr.last td {
   border-bottom: 0;
 }
@@ -4494,6 +4497,10 @@ table.group-members td.last-seen {
   width: 11em;
 }
 
+.group-whitelist table td.actions {
+  width: 18em;
+}
+
 .light-table table td.actions,
 table.group-members td.actions {
   width: 9em;
@@ -4502,6 +4509,10 @@ table.group-members td.actions {
 table.group-members td.actions select {
   width: 11em;
   font-size: 11px;
+}
+
+.group-whitelist table input {
+  width: 8em;
 }
 
 /* wiki versions */

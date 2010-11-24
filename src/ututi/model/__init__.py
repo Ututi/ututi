@@ -846,6 +846,7 @@ class GroupCoupon(object):
 
 class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
 
+    whitelist = []
     flaggable_files = False
 
     def send(self, msg):
