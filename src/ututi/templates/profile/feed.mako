@@ -1,7 +1,6 @@
 <%inherit file="/profile/base.mako" />
 <%namespace name="wall" file="/sections/wall_snippets.mako" import="head_tags"/>
 <%def name="head_tags()">
-  <title>UTUTI – student information online</title>
   ${parent.head_tags()}
   ${wall.head_tags()}
   <script type="text/javascript">
