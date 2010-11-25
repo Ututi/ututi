@@ -3,7 +3,7 @@
 <%namespace file="/search/index.mako" import="search_results"/>
 <%namespace file="/portlets/structure.mako" import="*"/>
 <%namespace file="/portlets/school.mako" import="*"/>
-<%namespace file="/anonymous_index/en.mako" import="*"/>
+<%namespace file="/anonymous_index/en.mako" import="universities_section"/>
 
 <%def name="title()">
   ${c.location.title} (${c.location.title_short}) - ${_('department list')}

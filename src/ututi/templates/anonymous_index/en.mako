@@ -72,10 +72,11 @@
      if collapse_text is None:
        collapse_text = _('More universities')
   %>
+  %if unis:
   <div id="university-list" class="${c.teaser and 'collapsed_list' or ''}">
     ${universities(unis, ajax_url)}
   </div>
-  %if collapse:
+  %if collapse and len(unis) > 6:
     %if c.teaser:
       <div id="teaser_switch" style="display: none;">
         <span class="files_more">
@@ -116,6 +117,7 @@
     });
   //]]>
   </script>
+  %endif
 </%def>
 
   <h1>${_('UTUTI - student information online')}</h1>
