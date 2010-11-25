@@ -1,4 +1,7 @@
 import re
+
+from os.path import splitext
+
 from webob.multidict import UnicodeMultiDict
 from decorator import decorator
 from lxml.html.clean import Cleaner
@@ -300,6 +303,19 @@ class ParentIdValidator(validators.FancyValidator):
         if value is None or not isinstance(value, (Group, Subject)):
             raise Invalid(self.message('badId', state), value, state)
 
+class FileUploadTypeValidator(validators.FancyValidator):
+    """ A validator to check uploaded file types."""
+
+    __unpackargs__ = ('allowed_types')
+
+    messages = {
+        'bad_type': _(u"Bad file type, only files of the types '%(allowed)s' are supported.")
+        }
+
+    def validate_python(self, value, state):
+        if value is not None:
+            if splitext(value.filename)[1].lower() not in self.allowed_types:
+                raise Invalid(self.message('bad_type', state, allowed=', '.join(self.allowed_types)), value, state)
 
 class GroupCouponValidator(validators.FancyValidator):
     """ Validate Group Coupon codes. Check for both collisions (creation) and existance (usage)."""

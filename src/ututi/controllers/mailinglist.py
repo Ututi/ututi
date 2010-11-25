@@ -16,9 +16,9 @@ from ututi.model import File
 from ututi.lib.security import deny
 from ututi.lib.security import check_crowds
 from ututi.lib.security import ActionProtector
-from ututi.lib.base import render
+from ututi.lib.base import render, BaseController
 from ututi.lib.validators import validate
-from ututi.lib.mailinglist import MailinglistBaseController
+from ututi.lib.mailinglist import post_message
 from ututi.lib import helpers as h
 from ututi.controllers.files import serve_file
 from ututi.controllers.group import group_menu_items
@@ -136,7 +136,7 @@ class NewMailForm(NewReplyForm):
     subject = validators.UnicodeString(not_empty=True, strip=True)
 
 
-class MailinglistController(MailinglistBaseController):
+class MailinglistController(BaseController):
 
     @group_action
     @protect_view
@@ -180,11 +180,11 @@ class MailinglistController(MailinglistBaseController):
     def reply(self, group, thread):
         if hasattr(self, 'form_result'):
             last_post = thread.posts[-1]
-            post = self.post_message(group,
-                                     c.user,
-                                     u"Re: %s" % thread.subject,
-                                     self.form_result['message'],
-                                     reply_to=last_post.message_id)
+            post = post_message(group,
+                                c.user,
+                                u"Re: %s" % thread.subject,
+                                self.form_result['message'],
+                                reply_to=last_post.message_id)
 
         if request.params.has_key('js'):
             return _('Reply sent')
@@ -206,10 +206,10 @@ class MailinglistController(MailinglistBaseController):
     @validate(NewMailForm, form='_new_thread_form')
     @ActionProtector("member", "admin")
     def post(self, group):
-        post = self.post_message(group,
-                                 c.user,
-                                 self.form_result['subject'],
-                                 self.form_result['message'])
+        post = post_message(group,
+                            c.user,
+                            self.form_result['subject'],
+                            self.form_result['message'])
         redirect(url(controller='mailinglist',
                     action='thread',
                     id=group.group_id, thread_id=post.id))
@@ -236,10 +236,10 @@ class MailinglistController(MailinglistBaseController):
     @validate(NewMailForm, form='_new_anonymous_post_form')
     @ActionProtector("user")
     def post_anonymous(self, group):
-        post = self.post_message(group,
-                                 c.user,
-                                 self.form_result['subject'],
-                                 self.form_result['message'])
+        post = post_message(group,
+                            c.user,
+                            self.form_result['subject'],
+                            self.form_result['message'])
         h.flash(_('Your message to the group was successfully sent.'))
         redirect(group.url())
 

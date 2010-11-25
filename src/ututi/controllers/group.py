@@ -27,13 +27,15 @@ from sqlalchemy.orm.exc import NoResultFound
 import ututi.lib.helpers as h
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.image import serve_logo
+from ututi.lib.search import _filter_watched_subjects
 from ututi.lib.sms import sms_cost
 from ututi.lib.base import BaseController, render, render_lang
-from ututi.lib.validators import HtmlSanitizeValidator, TranslatedEmailValidator, LocationTagsValidator, TagsValidator, GroupCouponValidator, validate
+from ututi.lib.validators import HtmlSanitizeValidator, TranslatedEmailValidator, LocationTagsValidator, TagsValidator, GroupCouponValidator, FileUploadTypeValidator, validate
 
 from ututi.model import GroupCoupon
 from ututi.model import LocationTag, User, GroupMember, GroupMembershipType, File, OutgoingGroupSMSMessage
 from ututi.model import meta, Group, SimpleTag, Subject, ContentItem, PendingInvitation, PendingRequest
+from ututi.controllers.profile.wall import WallMixin
 from ututi.controllers.subject import SubjectAddMixin
 from ututi.controllers.subject import NewSubjectForm
 from ututi.controllers.search import SearchSubmit
@@ -52,14 +54,6 @@ def set_login_url(method):
                                came_from=url.current())
         return method(self)
     return _set_login_url
-
-
-def _filter_watched_subjects(sids):
-    """A modifier for the subjects query, which excludes subjects already being watched."""
-    def _filter(query):
-        return query.filter(not_(ContentItem.id.in_(sids)))
-    return _filter
-
 
 class GroupIdValidator(validators.FancyValidator):
     """A validator that makes sure the group id is unique."""
@@ -81,21 +75,6 @@ class GroupIdValidator(validators.FancyValidator):
             usernameRE = re.compile(r"^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*$", re.I)
             if not usernameRE.search(value):
                 raise Invalid(self.message('badId', state), value, state)
-
-
-class FileUploadTypeValidator(validators.FancyValidator):
-    """ A validator to check uploaded file types."""
-
-    __unpackargs__ = ('allowed_types')
-
-    messages = {
-        'bad_type': _(u"Bad file type, only files of the types '%(allowed)s' are supported.")
-        }
-
-    def validate_python(self, value, state):
-        if value is not None:
-            if splitext(value.filename)[1].lower() not in self.allowed_types:
-                raise Invalid(self.message('bad_type', state, allowed=', '.join(self.allowed_types)), value, state)
 
 
 class LogoUpload(Schema):

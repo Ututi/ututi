@@ -15,13 +15,12 @@ from sqlalchemy.sql.expression import desc
 
 import ututi.lib.helpers as h
 from ututi.lib.base import render
-from ututi.lib.validators import LocationIdValidator, ShortTitleValidator, validate
+from ututi.lib.validators import LocationIdValidator, ShortTitleValidator, FileUploadTypeValidator, validate
 from ututi.model import Subject
 from ututi.model import Group
 from ututi.model import ContentItem
 from ututi.model import LocationTag, meta
 from ututi.controllers.home import UniversityListMixin
-from ututi.controllers.group import FileUploadTypeValidator
 from ututi.controllers.search import SearchSubmit, SearchBaseController
 
 log = logging.getLogger(__name__)

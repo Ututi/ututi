@@ -19,12 +19,12 @@ from sqlalchemy.sql.expression import and_
 from sqlalchemy.sql.expression import desc
 from sqlalchemy.sql.expression import or_
 
-from ututi.lib.base import render
+from ututi.lib.base import render, BaseController
 from ututi.lib.events import event_types_grouped
 from ututi.lib.validators import js_validate
 from ututi.lib.security import ActionProtector
 from ututi.lib.fileview import FileViewMixin
-from ututi.lib.mailinglist import MailinglistBaseController
+from ututi.lib.mailinglist import post_message
 from ututi.lib import helpers as h
 from ututi.model.events import Event
 from ututi.model import ForumPost, PrivateMessage, Page, User, Subject, meta, GroupMember, Group
@@ -161,7 +161,7 @@ class WikiForm(Schema):
     wiki_rcpt_id = SubjectIdValidator()
 
 
-class WallMixin(MailinglistBaseController, FileViewMixin):
+class WallMixin(FileViewMixin):
 
     @ActionProtector("user")
     def hide_event(self):
@@ -211,10 +211,10 @@ class WallMixin(MailinglistBaseController, FileViewMixin):
                 meta.Session.commit()
                 return post
             else:
-                post = self.post_message(recipient,
-                                         c.user,
-                                         subject,
-                                         message)
+                post = post_message(recipient,
+                                    c.user,
+                                    subject,
+                                    message)
                 return post
         elif isinstance(recipient, User):
             msg = PrivateMessage(c.user,

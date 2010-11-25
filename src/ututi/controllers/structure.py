@@ -14,9 +14,8 @@ from pylons.i18n import _
 from ututi.lib.security import ActionProtector
 from ututi.lib.image import serve_logo
 from ututi.lib.base import BaseController, render
-from ututi.lib.validators import ShortTitleValidator, validate
+from ututi.lib.validators import ShortTitleValidator, FileUploadTypeValidator, validate
 from ututi.model import meta, LocationTag, SimpleTag, Tag, Region
-from ututi.controllers.group import FileUploadTypeValidator
 
 log = logging.getLogger(__name__)
 

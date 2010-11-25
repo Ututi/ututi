@@ -18,7 +18,7 @@ from formencode.api import Invalid
 from pylons.controllers.util import redirect
 from pylons.i18n import _
 
-from ututi.controllers.group import FileUploadTypeValidator
+from ututi.lib.validators import FileUploadTypeValidator
 from ututi.model import LocationTag
 from ututi.model import Book, meta, City, BookType, SchoolGrade, ScienceType
 import ututi.lib.helpers as h

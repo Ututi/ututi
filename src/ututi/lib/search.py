@@ -3,7 +3,7 @@ import string
 import re
 
 from sqlalchemy.sql import func, select
-from sqlalchemy.sql.expression import or_
+from sqlalchemy.sql.expression import or_, not_
 from sqlalchemy.orm import aliased
 
 import pylons
@@ -198,3 +198,9 @@ def tag_search(text, count=5):
     if count is not None:
         query = query.limit(count)
     return query.all()
+
+def _filter_watched_subjects(sids):
+    """A modifier for the subjects query, which excludes subjects already being watched."""
+    def _filter(query):
+        return query.filter(not_(ContentItem.id.in_(sids)))
+    return _filter

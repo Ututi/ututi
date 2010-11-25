@@ -11,10 +11,10 @@ from ututi.model import Subject, meta
 from ututi.lib.validators import validate
 from ututi.lib.search import search_query_count
 from ututi.lib.search import search_query
+from ututi.lib.search import _filter_watched_subjects
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import render
 from ututi.controllers.search import SearchSubmit
-from ututi.controllers.group import _filter_watched_subjects
 
 class WatchedSubjectsMixin(object):
     @ActionProtector("user")
