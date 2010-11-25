@@ -5013,7 +5013,7 @@ ul.universityMembersInfo li{
 /* Book information */
 
 .book-information{
-    margin-bottom: 40px;
+    margin-top: 40px;
 }
 
 .book-information .book-title{
@@ -5055,6 +5055,20 @@ ul.universityMembersInfo li{
     color: #999999;
     font-size: 16px;
 }
+
+/*My books*/
+.my-books-content h1{
+    color:#666666;
+}
+.my-books-content .user-name{
+    margin-right: 20px;
+    font-weight: bold;
+}
+.my-books-content .user-name, .my-books-content .owned-books-number{
+    color: #666666;
+    font-size: 14px;
+}
+
 
 /* Dashboard actions block */
 #dashboard_actions .action {
