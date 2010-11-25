@@ -2298,7 +2298,14 @@ class Book(object):
         self.type = type
         self.science_type = science_type
         self.department_id = department_id
+        self.reset_expiration_time()
 
+    def reset_expiration_time(self):
+        validation_time = timedelta(days=30)
+        self.valid_until = datetime.utcnow() + validation_time
+
+    def is_available(self):
+        return self.valid_until >= datetime.utcnow()
 
     @classmethod
     def get(cls, id):

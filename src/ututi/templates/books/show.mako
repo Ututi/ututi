@@ -1,4 +1,5 @@
 <%inherit file="/books/base.mako" />
+<%namespace name="books" file="/books/add.mako" />
 
 <%def name = "book_attribute(label, value, **attrs)">
 <%
@@ -48,7 +49,6 @@ ${book_attribute(_('Science type'), c.book.science_type.name)}
 ${book_attribute(_('City'), c.book.city.name)}
 ${book_attribute(_('Price'), '%.2f' % c.book.price + " " + _('national_currency'), class_="book-price", none_value_text = _('free'), is_value_none = c.book.price == 0)}
 <div class="owner-information">
-  %if c.book.owner.phone_number and c.book.show_phone:
-  ${book_attribute(_('Phone'), c.book.owner.phone_number)}
-  %endif
+  <p>${_("Owner information")}</p>
+  <%books:user_information user="${c.book.owner}" />
 </div>

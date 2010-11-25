@@ -148,6 +148,7 @@ class BooksController(BaseController):
 
 
     def index(self):
+        c.book_types = meta.Session.query(BookType).all()
         books = meta.Session.query(Book)
         c.books = self._make_pages(books)
         return render('books/index.mako')
@@ -192,6 +193,7 @@ class BooksController(BaseController):
 
     @ActionProtector("user")
     def _add(self):
+        c.book_types = meta.Session.query(BookType).all()
         self._load_defaults()
         c.current_science_types = meta.Session.query(ScienceType).all()
         return render('books/add.mako')
@@ -200,6 +202,7 @@ class BooksController(BaseController):
         return self._add()
 
     def show(self, id):
+        c.book_types = meta.Session.query(BookType).all()
         c.book = meta.Session.query(Book).filter(Book.id == id).one()
         return render('books/show.mako')
 
@@ -213,6 +216,7 @@ class BooksController(BaseController):
 
     @ActionProtector("user")
     def edit(self, id):
+        c.book_types = meta.Session.query(BookType).all()
         c.book = meta.Session.query(Book).filter(Book.id == id).one()
         if c.book.owner != c.user:
             h.flash(_('Only owner of this book can do this action'))
@@ -335,7 +339,15 @@ class BooksController(BaseController):
 
     @ActionProtector("user")
     def my_books(self):
+        c.book_types = meta.Session.query(BookType).all()
         books = meta.Session.query(Book).filter(Book.owner == c.user)
         c.books = self._make_pages(books)
         return render('books/my_books.mako')
 
+    @ActionProtector("user")
+    def restore_book(self, book):
+        if c.user and c.user == book.owner:
+            book.reset_expiration_time()
+            meta.Session.commit()
+        else:
+            h.flash(_("You don't have rights to make this action"))
