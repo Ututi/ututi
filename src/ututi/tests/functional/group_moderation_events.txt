@@ -136,6 +136,9 @@ All the emails for approved messages have been sent:
 
 Let's try it with more messages in the queue:
 
+    >>> browser.open('http://localhost/group/moderators/mailinglist/administration')
+    >>> browser.click('Remove')
+
     >>> for x in range(2):
     ...      send_test_message('email_from_non_ututi.txt', 43 + x, to='moderators@groups.ututi.lt', subject='Hello from varlius')
 

@@ -4,6 +4,8 @@ import sys
 import random
 import shutil
 
+from ClientForm import ControlNotFoundError
+from mechanize._mechanize import LinkNotFoundError
 from nous.pylons.testing import LayerBase, CompositeLayer
 from nous.pylons.testing import PylonsTestBrowserLayer
 from nous.pylons.grok.testing import GrokLayer
@@ -81,6 +83,28 @@ UtutiErrorsLayer = CompositeLayer(GrokLayer,
 class UtutiTestBrowser(NousTestBrowser):
 
     app = None
+
+    def click(self, text, name=None, url=None, id=None, index=0):
+        if url is not None or id is not None:
+            return self.getLink(text, url, id, index).click()
+        elif name is not None:
+            return self.getControl(text, name, index).click()
+        else:
+            try:
+                controls = [self.getControl(text, name, index)]
+            except ControlNotFoundError:
+                controls = []
+            try:
+                links = [self.getLink(text, url, id, index)]
+            except LinkNotFoundError:
+                links = []
+
+            clickables = controls + links
+            if not clickables:
+                raise LinkNotFoundError()
+            elif len(clickables) > 1:
+                return clickables
+            return clickables[0].click()
 
     def printCssQuery(self, query, **kwargs):
         return self.printQuery(query, selector='cssselect', **kwargs)

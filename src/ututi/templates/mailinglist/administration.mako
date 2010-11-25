@@ -57,7 +57,7 @@
          <input type="submit" class="text_button" value="${_('Invite to group')}" />
        </form>
        %endif
-       <form style="display: inline;" method="post" action="${c.group.url(action='remove_from_whitelist')}">
+       <form style="display: inline;" method="post" action="${c.group.url(controller='mailinglist', action='remove_from_whitelist')}">
          <input type="hidden" name="email" value="${item.email}" />
          <input type="submit" class="text_button" style="color: #888;" value="${_('Remove')}" />
        </form>
@@ -65,7 +65,7 @@
   </%def>
   <%def name="footer(items)">
      <td colspan="2">
-       <form method="post" action="${c.group.url(controller='mailinglist', action='add_to_whitelist')}">
+       <form id="whitelist_email_form" method="post" action="${c.group.url(controller='mailinglist', action='add_to_whitelist')}">
          <div style="padding-top: 5px" >
            <label class="textField" for="email" style="float: left">
              <span class="labelText">Email:</span>
@@ -74,6 +74,9 @@
            </label>
            <div style="float: left; padding-left: 5px;">
              ${h.input_submit('Add')}
+           </div>
+           <div id="whitelist_email_error" style="float: left; padding-left: 5px;">
+             <form:error name="email"/>
            </div>
          </div>
        </form>

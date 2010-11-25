@@ -26,3 +26,108 @@ The new item should be in the list:
 
     >>> browser.printCssQuery('.group-whitelist .email a')
     <a href="mailto:varlius@example.com">varlius@example.com</a>
+
+If the new item is not a valid email address we should get an error,
+and the emails list should not get modified:
+
+    >>> browser.getControl('Email:').value = 'varliusexample.com'
+    >>> browser.getControl('Add').click()
+
+    >>> browser.printCssQuery('.group-whitelist .email a')
+    <a href="mailto:varlius@example.com">varlius@example.com</a>
+
+    >>> browser.printCssQuery('#whitelist_email_error')
+    <div id="whitelist_email_error">
+      <div class="error-container">
+        <span class="error-message">An email address must contain a single @</span>
+      </div>
+    </div>
+
+If we try adding an email that is in the list already, nothing
+happens (maybe we should still highligth the item added?):
+
+    >>> browser.getControl('Email:').value = 'varlius@example.com'
+    >>> browser.getControl('Add').click()
+
+    >>> browser.printCssQuery('.group-whitelist .email a')
+    <a href="mailto:varlius@example.com">varlius@example.com</a>
+
+Let's remove the email from the list:
+
+    >>> browser.click('Remove')
+
+The list should be empty:
+
+    >>> browser.printCssQuery('.group-whitelist .email a')
+
+Approving a message automatically adds the email to the whitelist:
+
+    >>> action_url = browser.getControl('Approve', index=0).mech_form.action
+    >>> res = browser.app.post(action_url,
+    ...                        headers=[('referer', browser.url)])
+    >>> print res.status, res.location
+    302 Found http://localhost/group/moderators/mailinglist/administration
+
+    >>> browser.open(res.location)
+    >>> browser.printCssQuery('.group-whitelist .email a')
+    <a href="mailto:user2@ututi.lt">user2@ututi.lt</a>
+
+    >>> action_url = browser.getControl('Approve', index=0).mech_form.action
+    >>> res = browser.app.post(action_url, headers=[('referer', browser.url)])
+
+    >>> browser.open(res.location)
+    >>> browser.printCssQuery('.group-whitelist .email a')
+    <a href="mailto:user2@ututi.lt">user2@ututi.lt</a>
+    <a href="mailto:varlius@example.com">varlius@example.com</a>
+
+As we approved both messages, there are 2 messages in the queue. Let's
+remove them:
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> email = mail_queue.pop()
+    >>> email = mail_queue.pop()
+
+Now if we'll post a new email from one of the addresses in the
+whitelis, it will get approved automatically:
+
+    >>> send_test_message('email_from_user2.txt', '35', to='moderators@groups.ututi.lt')
+    >>> send_test_message('email_from_non_ututi.txt', '45', to='moderators@groups.ututi.lt', subject='Hello from varlius 2')
+
+    >>> from ututi.tests.functional import printEmails
+    >>> printEmails()
+    ['admin@ututi.lt']
+    Hi, I am just writing to tell you how wonderful this system is.
+    User2
+    <BLANKLINE>
+    ['admin@ututi.lt']
+    Confirm your varlius registration!
+    Click the link now!
+    Sincerely,
+    Varlius staff
+
+    >>> mail_queue[:] = []
+
+Let's try half a whitelist:
+
+    >>> browser.click('Remove', index=0)
+
+    >>> send_test_message('email_from_user2.txt', '36', to='moderators@groups.ututi.lt')
+    >>> send_test_message('email_from_non_ututi.txt', '47', to='moderators@groups.ututi.lt', subject='Hello from varlius 3')
+
+    >>> printEmails()
+    ['admin@ututi.lt']
+    Confirm your varlius registration!
+    Click the link now!
+    Sincerely,
+    Varlius staff
+
+    >>> mail_queue[:] = []
+
+The other message is in the moderation queue, as expected:
+
+    >>> browser.open(res.location)
+    >>> browser.printCssQuery('.m-on div', include_attributes=[''])
+    <div>
+      <a>Hello</a>
+    </div>
+    <div>Hi, I am just writing to tell you how wonderful...</div>

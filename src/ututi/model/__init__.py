@@ -1143,6 +1143,11 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
                               for tag in self.location.hierarchy(True)] if self.location is not None else [],
                 }
 
+    def add_email_to_whitelist(self, email):
+        if not meta.Session.query(GroupWhitelistItem)\
+                .filter_by(group_id=self.id, email=email).all():
+            return GroupWhitelistItem(self, email)
+        return None
 
 group_whitelist_table = None
 

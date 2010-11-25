@@ -260,7 +260,10 @@ class GroupMailingListMessage(ContentItem):
         author_name, author_address = parseaddr(mime_message['From'])
         author = User.get(author_address)
         in_moderation_queue = False
-        if author is None or not g.is_member(author):
+
+        whitelist = [i.email for i in g.whitelist]
+        if not (author_address in whitelist or
+                author is not None and g.is_member(author)):
             if g.mailinglist_moderated:
                 in_moderation_queue = True
             else:
@@ -316,6 +319,8 @@ class GroupMailingListMessage(ContentItem):
 
     def approve(self):
         self.in_moderation_queue = False
+        author_name, author_address = parseaddr(self.mime_message['From'])
+        self.group.add_email_to_whitelist(author_address)
         from ututi.model.events import ModeratedPostCreated
         event = meta.Session.query(ModeratedPostCreated).filter_by(message_id=self.id).one()
         meta.Session.delete(event)

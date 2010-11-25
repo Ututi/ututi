@@ -17,7 +17,7 @@ from ututi.lib.security import deny
 from ututi.lib.security import check_crowds
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import render, BaseController
-from ututi.lib.validators import validate
+from ututi.lib.validators import validate, TranslatedEmailValidator
 from ututi.lib.mailinglist import post_message
 from ututi.lib import helpers as h
 from ututi.controllers.files import serve_file
@@ -134,6 +134,12 @@ class NewMailForm(NewReplyForm):
     """A schema for validating group edits."""
 
     subject = validators.UnicodeString(not_empty=True, strip=True)
+
+
+class WhitelistEmailForm(Schema):
+    """Schema that validates a single email field."""
+
+    email = TranslatedEmailValidator(not_empty=True, strip=True)
 
 
 class MailinglistController(BaseController):
@@ -348,8 +354,21 @@ class MailinglistController(BaseController):
             return self._reject_post(group, thread, redirecturl=request.referrer)
 
     @group_action
+    @validate(WhitelistEmailForm, form='administration')
     @ActionProtector("admin")
     def add_to_whitelist(self, group):
-        item = GroupWhitelistItem(group, request.params.get('email'))
-        meta.Session.commit()
+        if hasattr(self, 'form_result'):
+            group.add_email_to_whitelist(self.form_result['email'])
+            meta.Session.commit()
+        redirect(group.url(controller='mailinglist', action='administration'))
+
+    @group_action
+    @validate(WhitelistEmailForm, form='administration')
+    @ActionProtector("admin")
+    def remove_from_whitelist(self, group):
+        if hasattr(self, 'form_result'):
+            for item in meta.Session.query(GroupWhitelistItem).filter_by(group_id=group.id,
+                                                                         email=self.form_result['email']).all():
+                meta.Session.delete(item)
+                meta.Session.commit()
         redirect(group.url(controller='mailinglist', action='administration'))
