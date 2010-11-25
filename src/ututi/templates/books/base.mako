@@ -62,16 +62,17 @@ ${local.main_menu()}
 ${local.main_menu()}
 <div class="loggedin-nav" id="personal-data">
     <ul>
-        <li class="expandable profile-nav">
-            <span class="fullname">${c.user.fullname}</span>
-            <div>
-                <ul>
-                    <li class="action"><a href="${url(controller='profile', action='edit')}">${_('Settings')}</a></li>
-                    <li class="action"><a href="${url(controller='user', action='index', id=c.user.id)}">${_('Public profile')}</a></li>
-                </ul>
-            </div>
-        </li>
-        <li><a href="${url(controller='home', action='logout')}">${_('log out')}</a></li>
+      <li>${h.link_to(_("My books"), url(controller="books", action="my_books"))}</li>
+      <li class="expandable profile-nav">
+        <span class="fullname">${c.user.fullname}</span>
+        <div>
+          <ul>
+            <li class="action"><a href="${url(controller='profile', action='edit')}">${_('Settings')}</a></li>
+            <li class="action"><a href="${url(controller='user', action='index', id=c.user.id)}">${_('Public profile')}</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a href="${url(controller='home', action='logout')}">${_('log out')}</a></li>
     </ul>
 </div>
 <script type="text/javascript">
