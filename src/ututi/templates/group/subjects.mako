@@ -188,18 +188,11 @@ ${_('Your group is not watching any subjects. Add them by searching.')}
   %endif
 </div>
 
-%if not c.results:
-<div class="create_item">
-  <a class="btn-large" href="${c.group.url(action='add_subject')}"><span>${_('Create a new subject')}</span></a>
-</div>
-%endif
-
 ${search_form(text=c.text, obj_type='subject', tags=c.tags, parts=['text', 'tags'], target=c.search_target)}
 
 %if c.results:
 ${search_results(c.results, display=search_subject)}
 %else:
-<div class="create_item">
-  <a class="btn-large" href="${c.group.url(action='add_subject')}"><span>${_('Create a new subject')}</span></a>
-</div>
+<br />
+${h.button_to(_('Create a new subject'), c.group.url(action='add_subject'), method='get')}
 %endif
