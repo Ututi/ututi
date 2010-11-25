@@ -9,9 +9,7 @@ Group subject watching
 
     >>> browser.printQuery("id('watched_subjects')")
     <ul id="watched_subjects" class="personal_watched_subjects">
-      <li id="empty_subjects_msg" class="empty_msg">
-    Your group is not watching any subjects. Add them by searching.
-    </li>
+      <li id="empty_subjects_msg" class="empty_msg">Your group is not watching any subjects. Add them by searching.</li>
     </ul>
 
 
@@ -31,9 +29,7 @@ Group subject watching
 
     >>> browser.printQuery("id('watched_subjects')")
     <ul id="watched_subjects" class="personal_watched_subjects">
-      <li id="empty_subjects_msg" class="empty_msg">
-    Your group is not watching any subjects. Add them by searching.
-    </li>
+      <li id="empty_subjects_msg" class="empty_msg">Your group is not watching any subjects. Add them by searching.</li>
     </ul>
 
     >>> browser.printQuery("id('search-results')//a/text()")

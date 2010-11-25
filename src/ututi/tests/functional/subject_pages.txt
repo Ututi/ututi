@@ -28,9 +28,7 @@ We should get redirected to the index view of the page we just created.
     How to be awesome!
 
     >>> browser.printQuery("id('page_content')")
-    <div id="page_content">
-      Being Awesome is easy!
-    </div>
+    <div id="page_content">Being Awesome is easy!</div>
 
 Let's edit the page now.
 
@@ -47,9 +45,7 @@ And see how it works.
     How to be awesome!
 
     >>> browser.printQuery("id('page_content')")
-    <div id="page_content">
-      Being Awesome is very easy!
-    </div>
+    <div id="page_content">Being Awesome is very easy!</div>
 
 What about our brand new embedded latex syntax:
 
@@ -85,9 +81,7 @@ We can also look at the previous version:
     </div>
 
     >>> browser.printQuery("id('page_content')")
-    <div id="page_content">
-      Being Awesome is very easy!
-    </div>
+    <div id="page_content">Being Awesome is very easy!</div>
 
     >>> browser.getLink('Go back to history').click()
     >>> browser.getLink('Go back to page').click()
@@ -127,14 +121,12 @@ We should see the page on the list of pages, even though it has been deleted:
           <span class="orange bold">
             <a href="/subject/vu/mat_analize/page/4" title="How to be awesome!">How to be awesome!</a>
           </span>
-          <span class="grey verysmall"> ... </span>
+          <span class="grey verysmall">...</span>
           <span class="orange verysmall">
             <a href="/user/1">Adminas Adminovix</a>
           </span>
         </p>
-        <p>
-             Yeah! Being Awesome is very easy! $$\sum_{n=1}^\infty a_n$$
-           </p>
+        <p>Yeah! Being Awesome is very easy! $$\sum_{n=1}^\infty a_n$$</p>
       </div>
     </div>
 
@@ -174,14 +166,12 @@ Now the page shows up in the index again without the "deleted" marker:
           <span class="orange bold">
             <a href="/subject/vu/mat_analize/page/4" title="How to be awesome!">How to be awesome!</a>
           </span>
-          <span class="grey verysmall"> ... </span>
+          <span class="grey verysmall">...</span>
           <span class="orange verysmall">
             <a href="/user/1">Adminas Adminovix</a>
           </span>
         </p>
-        <p>
-             Yeah! Being Awesome is very easy! $$\sum_{n=1}^\infty a_n$$
-           </p>
+        <p>Yeah! Being Awesome is very easy! $$\sum_{n=1}^\infty a_n$$</p>
       </div>
     </div>
 

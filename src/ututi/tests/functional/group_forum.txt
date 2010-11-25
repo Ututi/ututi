@@ -70,15 +70,9 @@ And we'll post a reply:
 We can see the messages we posted:
 
     >>> browser.printQuery('//div[@class="post-body"]')
-    <div class="post-body">
-              How's everybody doin'?
-            </div>
-    <div class="post-body">
-              Not too bad
-            </div>
-    <div class="post-body">
-              Not too bad!
-            </div>
+    <div class="post-body">How's everybody doin'?</div>
+    <div class="post-body">Not too bad</div>
+    <div class="post-body">Not too bad!</div>
 
 Let's go back to the topic list.
 

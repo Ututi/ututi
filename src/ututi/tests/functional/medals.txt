@@ -29,5 +29,4 @@ Now we'll take away the medal:
 The medal is no more:
 
     >>> browser.printQuery('id("user-medals")')
-    <div class="medals" id="user-medals">
-    </div>
+    <div class="medals" id="user-medals"></div>

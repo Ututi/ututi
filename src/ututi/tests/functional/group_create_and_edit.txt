@@ -126,8 +126,8 @@ items in the recycle bin:
     >>> browser.getControl(name='file_storage').value = True
     >>> browser.getControl('Save').click()
     >>> browser.getLink('Files').click()
-    >>> browser.printQuery('//ul[contains(@class, "trash_folder")]//span[@class="file_name"]//text()')
-    blzbb.txt
+    >>> browser.printCssQuery('ul.trash_folder .file_name')
+    <span class="file_name">blzbb.txt</span>
 
 If we undelete the file, in 'Edit' page file storage area
 checkbox will again become disabled:

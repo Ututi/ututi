@@ -94,12 +94,9 @@ different error message:
 
     >>> browser.printQuery("id('mainContent')")
     <div id="mainContent">
-      <div id="flash-messages">
-    </div>
+      <div id="flash-messages"></div>
       <h1>Permission denied!</h1>
-      <div>
-        You do not have the rights to see this page, or perform this action. Go back or go to the search page please.
-      </div>
+      <div>You do not have the rights to see this page, or perform this action. Go back or go to the search page please.</div>
       <a href="/search">go find something else</a>
     </div>
 

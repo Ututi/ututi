@@ -146,9 +146,7 @@ First let us log out.
     >>> browser.open(get_urls(msg)[-1])
 
     >>> browser.printQuery("id('login_message')")
-    <div id="login_message" class="please-register">
-    Only registered users can become members of a group, please register first.
-    </div>
+    <div id="login_message" class="please-register">Only registered users can become members of a group, please register first.</div>
 
 Let us fill out the registration form
     >>> form = browser.getForm(id='join_registration_form')

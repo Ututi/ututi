@@ -48,7 +48,7 @@ After the download of the file, the downloaded files count in the user list shou
         ...
       </tr>
       <tr>
-        <td> 1. </td>
+        <td>1.</td>
         <td>
           <a href="/user/4">Third user</a>
         </td>
