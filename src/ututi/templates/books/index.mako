@@ -26,9 +26,14 @@
         %endif
       </span>
       <br />
+      %if can_edit:
+        %if c.user is book.owner:
+        <div class="edit-button-container">
+          ${h.button_to(_("Edit"), url(controller="books", action="edit", id=book.id))}
+        </div>
+        %endif
+      %else:
       ${h.button_to(_("more"), url(controller="books", action="show", id=book.id))}
-      %if can_edit and c.user is book.owner:
-      ${h.button_to(_("Edit"), url(controller="books", action="edit", id=book.id))}
       %endif
     </div>
   </div>

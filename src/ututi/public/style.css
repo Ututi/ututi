@@ -5069,6 +5069,13 @@ ul.universityMembersInfo li{
     font-size: 14px;
 }
 
+.my-books-content .edit-button-container{
+    text-align: right;
+}
+
+.my-books-content button.btn span {
+padding:3px 15px 0 30px;
+}
 
 /* Dashboard actions block */
 #dashboard_actions .action {

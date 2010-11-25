@@ -7,7 +7,7 @@
   <h1>${_('My books')}: ${owned_books_number}</h1>
   %if c.books is not None and c.books != "":
   %for book in c.books:
-  <%books:book_information book="${book}" />
+  <%books:book_information book="${book}" can_edit="True" />
   %endfor
   <div id="pager">${c.books.pager(format='~3~') }</div>
   %else:
