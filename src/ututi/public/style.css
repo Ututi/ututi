@@ -5010,6 +5010,52 @@ ul.universityMembersInfo li{
     margin: 0px;
 }
 
+/* Book information */
+
+.book-information{
+    margin-bottom: 40px;
+}
+
+.book-information .book-title{
+    color:#666666;
+    font-weight:bold;
+}
+
+.book-information .book-cover{
+    display:inline-block;
+    vertical-align:top;
+    width:90px;
+    height: 120px;
+}
+
+.book-information .book-textual-info{
+    display:inline-block;
+    width:560px;
+    vertical-align:top;
+}
+
+.book-information .book-author, .book-information .book-description{
+    color: #b0b0b0;
+}
+
+.book-information .book-city-label{
+    font-weight: bold;
+}
+
+.book-information .book-city-label, .book-information .book-city-name{
+    color: #4e4e4e;
+}
+
+.book-information .book-price-label{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.book-information .book-price{
+    color: #999999;
+    font-size: 16px;
+}
+
 /* Dashboard actions block */
 #dashboard_actions .action {
   margin-right: 15px;
