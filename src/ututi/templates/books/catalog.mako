@@ -83,13 +83,17 @@ if c.books_type is not None and c.books_type != "":
 </script>
 <div class="ordering">
   <div class="order-books-by">
+    %if c.books_department or c.current_science_types:
     ${_('Order by')}:
+    %endif
     %if c.books_department == "university":
     <a href="#" onclick="show_department_list()">${_('Universities')}</a>
     %elif c.books_department == "school":
     <a href="#" onclick="show_department_list()">${_('School grades')}</a>
     %endif
+    %if c.current_science_types:
     <a href="#" onclick="show_science_types()">${_('Science types')}</a>
+    %endif
   </div>
   <div>
     %if c.books_department == "university":
