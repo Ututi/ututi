@@ -51,7 +51,7 @@
         ${h.select("category_id", None, [], id='category_id')}
       </label>
     </div>
-    ${h.input_line('subject', _('Subject:'), id="message_subject")}
+    ${h.input_line('subject', _('Message subject:'), id="message_subject")}
     <div class="formArea">
       <label>
         <textarea name="message" id="message" rows="5" rows="50"></textarea>
