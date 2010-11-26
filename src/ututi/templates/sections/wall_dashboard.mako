@@ -1,9 +1,5 @@
 <%doc>
   Wall dashboard snippets, works together with dashboard.js.
-
-  Context variables used:
-  - c.file_recipients
-  - c.wiki_recipients
 </%doc>
 
 <%namespace name="base" file="/prebase.mako" import="rounded_block"/>
@@ -50,7 +46,7 @@
   </%base:rounded_block>
 </%def>
 
-<%def name="upload_file_block()">
+<%def name="upload_file_block(file_recipients)">
   <%base:rounded_block id="upload_file_block" class_="dashboard_action_block">
     <a name="upload-file"></a>
     <form id="file_form">
@@ -59,7 +55,7 @@
         <label for="file_rcpt_id">
           <span class="labelText">${_('Group or subject:')}</span>
           <span class="textField">
-            ${h.select('file_rcpt_id', None, c.file_recipients)}
+            ${h.select('file_rcpt_id', None, file_recipients)}
           </span>
         </label>
       </div>
@@ -72,7 +68,7 @@
   </%base:rounded_block>
 </%def>
 
-<%def name="create_wiki_block()">
+<%def name="create_wiki_block(wiki_recipients)">
   <%base:rounded_block id="create_wiki_block" class_="dashboard_action_block">
     <a name="create-wiki"></a>
     <form method="POST" action="${url(controller='profile', action='create_wiki')}" id="wiki_form">
@@ -81,7 +77,7 @@
         <label for="wiki_rcpt_id">
           <span class="labelText">${_('Subject:')}</span>
           <span class="textField">
-            ${h.select('wiki_rcpt_id', None, c.wiki_recipients)}
+            ${h.select('wiki_rcpt_id', None, wiki_recipients)}
           </span>
         </label>
       </div>
@@ -97,17 +93,21 @@
   </%base:rounded_block>
 </%def>
 
-<%def name="dashboard()">
+<%def name="wall_reload_url()">
+  ## Hidden action url, used to ajax-refresh the wall.
+  <input id="wall-reload-url" type="hidden" value="${url(controller='profile', action='feed_js')}" />
+</%def>
+
+<%def name="dashboard(file_recipients, wiki_recipients)">
 
   ${self.action_block()}
 
-  ## Hidden action url, used to ajax-refresh the wall.
-  <input id="wall-reload-url" type="hidden" value="${url(controller='profile', action='feed_js')}" />
+  ${self.wall_reload_url()}
 
   <div id="dashboard_action_blocks">
     ${self.send_message_block()}
-    ${self.upload_file_block()}
-    ${self.create_wiki_block()}
+    ${self.upload_file_block(file_recipients)}
+    ${self.create_wiki_block(wiki_recipients)}
   </div>
 
 </%def>
