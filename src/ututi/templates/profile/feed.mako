@@ -11,7 +11,7 @@
   ${_("What's new?")}
 </%def>
 
-${dashboard.dashboard(c.file_recipients, c.wiki_recipients)}
+${dashboard.dashboard(None, c.file_recipients, c.wiki_recipients)}
 
 <div id='wall'>
   <div class="tip">
