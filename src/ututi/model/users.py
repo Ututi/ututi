@@ -268,6 +268,13 @@ class User(object):
         from ututi.model import GroupMember
         return meta.Session.query(Group).join(GroupMember).filter(GroupMember.user == self).all()
 
+    @property
+    def groups_uploadable(self):
+        from ututi.model import Group
+        from ututi.model import GroupMember
+        return meta.Session.query(Group).join(GroupMember).filter(GroupMember.user == self)\
+            .filter(Group.has_file_area == True).all()
+
     def all_medals(self):
         """Return a list of medals for this user, including implicit medals."""
         from ututi.model import GroupMember, Payment

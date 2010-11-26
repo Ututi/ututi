@@ -9,7 +9,7 @@
 <div id="sidebar">
   ${user_information_portlet()}
   %if not 'files' in exclude:
-  ${quick_file_upload_portlet(c.user.groups + c.user.watched_subjects, label='user_files')}
+  ${quick_file_upload_portlet(c.user.groups_uploadable + c.user.watched_subjects, label='user_files')}
   %endif
   %if not 'create_group' in exclude:
   ${user_create_group_portlet()}
