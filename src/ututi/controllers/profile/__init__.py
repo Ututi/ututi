@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 import logging
 import facebook
 import random
@@ -112,6 +112,29 @@ class ProfileController(SearchBaseController, UniversityListMixin, WallMixin, Wa
         c.action = 'home'
 
         return render('/profile/home.mako')
+
+    @ActionProtector("user")
+    def feed_js(self):
+        events = self._user_events()
+        return render_mako_def('/sections/wall_snippets.mako', 'render_events', events=events)
+
+    @ActionProtector("user")
+    def feed(self):
+        c.breadcrumbs.append(self._actions('home'))
+
+        c.events = self._user_events()
+        c.action = 'feed'
+
+        c.file_recipients = self._file_rcpt()
+        c.wiki_recipients = self._wiki_rcpt()
+
+        result = render('/profile/feed.mako')
+
+        # Register new newsfeed visit.
+        c.user.last_seen_feed = datetime.utcnow()
+        meta.Session.commit()
+
+        return result
 
     def _edit_form(self, defaults=None):
         return render('profile/edit.mako')

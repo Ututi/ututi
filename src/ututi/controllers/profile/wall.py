@@ -1,6 +1,3 @@
-from datetime import datetime
-
-from pylons.templating import render_mako_def
 from pylons.decorators import validate
 from pylons.decorators import jsonify
 from pylons.controllers.util import redirect
@@ -19,7 +16,7 @@ from sqlalchemy.sql.expression import and_
 from sqlalchemy.sql.expression import desc
 from sqlalchemy.sql.expression import or_
 
-from ututi.lib.base import render, BaseController
+from ututi.lib.base import render
 from ututi.lib.events import event_types_grouped
 from ututi.lib.validators import js_validate
 from ututi.lib.security import ActionProtector
@@ -175,7 +172,7 @@ class WallMixin(FileViewMixin):
         if request.params.has_key('js'):
             return 'ok'
         else:
-            redirect(url(controller='profile', action='feed'))
+            redirect(self._redirect_url())
 
     @ActionProtector("user")
     @js_validate(schema=MessageForm())
@@ -197,7 +194,7 @@ class WallMixin(FileViewMixin):
             self.form_result['message'],
             self.form_result.get('category_id', None))
         h.flash(_('Message sent.'))
-        redirect(url(controller='profile', action='feed'))
+        redirect(self._redirect_url())
 
     def _send_message(self, recipient, subject, message, category_id=None):
         """
@@ -262,7 +259,7 @@ class WallMixin(FileViewMixin):
             self.form_result['page_title'],
             self.form_result['page_content'])
         h.flash(_('Wiki page created.'))
-        redirect(url(controller='profile', action='feed'))
+        redirect(self._redirect_url())
 
     def _create_wiki_page(self, target, title, content):
         page = Page(title, content)
@@ -284,7 +281,7 @@ class WallMixin(FileViewMixin):
             c.user.update_ignored_events(events)
             meta.Session.commit()
             h.flash(_('Your wall settings have been updated.'))
-            redirect(url(controller='profile', action='feed'))
+            redirect(self._redirect_url())
 
         defaults = {
             'events': list(set(Event.event_types()) - set(c.user.ignored_events_list))
@@ -292,11 +289,6 @@ class WallMixin(FileViewMixin):
 
         return htmlfill.render(self._wall_settings_form(),
                                defaults=defaults)
-
-    @ActionProtector("user")
-    def feed_js(self):
-        events = self._user_events()
-        return render_mako_def('/sections/wall_snippets.mako', 'render_events', events=events)
 
     def _user_events(self):
         user_is_admin_of_groups = [membership.group_id
@@ -313,24 +305,6 @@ class WallMixin(FileViewMixin):
             .filter(~Event.event_type.in_(c.user.ignored_events_list))\
             .order_by(desc(Event.created))\
             .limit(20).all()
-
-    @ActionProtector("user")
-    def feed(self):
-        c.breadcrumbs.append(self._actions('home'))
-
-        c.events = self._user_events()
-        c.action = 'feed'
-
-        c.file_recipients = self._file_rcpt()
-        c.wiki_recipients = self._wiki_rcpt()
-
-        result = render('/profile/feed.mako')
-
-        # Register new newsfeed visit.
-        c.user.last_seen_feed = datetime.utcnow()
-        meta.Session.commit()
-
-        return result
 
     @ActionProtector("user")
     @jsonify
@@ -369,3 +343,8 @@ class WallMixin(FileViewMixin):
     def _wiki_rcpt(self):
         subjects = _wiki_rcpt(c.user)
         return[(subject.id, subject.title) for subject in subjects]
+
+    def _redirect_url(self):
+        """This is the default redirect url of wall methods.
+           Subclasses should override it."""
+        return url(controller='profile', action='feed')
