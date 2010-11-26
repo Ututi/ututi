@@ -139,6 +139,7 @@ class NewMailForm(NewReplyForm):
 class WhitelistEmailForm(Schema):
     """Schema that validates a single email field."""
 
+    allow_extra_fields = True
     email = TranslatedEmailValidator(not_empty=True, strip=True)
 
 
@@ -372,3 +373,9 @@ class MailinglistController(BaseController):
                 meta.Session.delete(item)
                 meta.Session.commit()
         redirect(group.url(controller='mailinglist', action='administration'))
+
+    @group_action
+    @ActionProtector("admin")
+    def whitelist_js(self, group):
+        return render_mako_def('mailinglist/administration.mako',
+                               'group_whitelist', group=group)

@@ -131,3 +131,16 @@ The other message is in the moderation queue, as expected:
       <a>Hello</a>
     </div>
     <div>Hi, I am just writing to tell you how wonderful...</div>
+
+If Ajax will refresh the whitelist, it should get the same items as
+that we saw on the page:
+
+    >>> browser.open('http://localhost/group/moderators/mailinglist/whitelist_js')
+    >>> contents = browser.contents
+    >>> print contents
+    <div...
+    </div>
+
+    >>> browser.open(res.location)
+    >>> contents in browser.contents
+    True

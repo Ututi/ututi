@@ -43,8 +43,9 @@
   <a class="back-link" href="${h.url_for(action='index')}">${_('Back to the topic list')}</a>
 </div>
 
+<%def name="group_whitelist(group)">
 <%b:light_table title="${_('Emails that are allowed to post to the mailing list of this group')}"
-                items="${c.group.whitelist}"
+                items="${group.whitelist}"
                 class_="group-whitelist">
   <%def name="row(item)">
      <td class="email">
@@ -52,12 +53,12 @@
      </td>
      <td class="actions">
        %if item.not_invited_to_group:
-       <form style="display: inline;" method="post" action="${c.group.url(action='invite_members')}">
+       <form style="display: inline;" method="post" action="${group.url(action='invite_members')}">
          <input type="hidden" name="emails" value="${item.email}" />
          <input type="submit" class="text_button" value="${_('Invite to group')}" />
        </form>
        %endif
-       <form style="display: inline;" method="post" action="${c.group.url(controller='mailinglist', action='remove_from_whitelist')}">
+       <form style="display: inline;" method="post" action="${group.url(controller='mailinglist', action='remove_from_whitelist')}">
          <input type="hidden" name="email" value="${item.email}" />
          <input type="submit" class="text_button" style="color: #888;" value="${_('Remove')}" />
        </form>
@@ -65,7 +66,9 @@
   </%def>
   <%def name="footer(items)">
      <td colspan="2">
-       <form id="whitelist_email_form" method="post" action="${c.group.url(controller='mailinglist', action='add_to_whitelist')}">
+       <form id="whitelist_email_form" method="post" action="${group.url(controller='mailinglist', action='add_to_whitelist')}">
+         <input type="hidden"
+                id="reload_url" name="reload_url" value="${group.url(controller='mailinglist', action='whitelist_js')}" />
          <div style="padding-top: 5px" >
            <label class="textField" for="email" style="float: left">
              <span class="labelText">Email:</span>
@@ -88,6 +91,9 @@
     </tr>
   </%def>
 </%b:light_table>
+</%def>
+
+<%self:group_whitelist group="${c.group}" />
 
 <%self:rounded_block class_="moderation-queue portletGroupFiles portletGroupMailingList">
   <div class="single-title">
