@@ -75,14 +75,6 @@ def _message_rcpt(term, current_user):
     return (groups, classmates, users)
 
 
-def _wiki_rcpt(current_user):
-    """ Return possible wiki recipients based on the query term. """
-    subjects = meta.Session.query(Subject)\
-        .filter(Subject.id.in_([s.id for s in current_user.all_watched_subjects]))\
-        .all()
-    return subjects
-
-
 class WallSettingsForm(Schema):
     allow_extra_fields = True
     filter_extra_fields = True
@@ -152,7 +144,7 @@ class SubjectIdValidator(validators.OneOf):
         'notIn': _("Invalid subject"),
         }
     def validate_python(self, value, state):
-        self.list = [str(s.id) for s in _wiki_rcpt(c.user)]
+        self.list = [str(s.id) for s in c.user.all_watched_subjects]
         super(SubjectIdValidator, self).validate_python(value, state)
 
 
@@ -346,8 +338,8 @@ class WallMixin(FileViewMixin):
         return items
 
     def _wiki_rcpt(self):
-        subjects = _wiki_rcpt(c.user)
-        return[(subject.id, subject.title) for subject in subjects]
+        return [(subject.id, subject.title)
+                for subject in c.user.all_watched_subjects]
 
     def _redirect_url(self):
         """This is the default redirect url of wall methods.
