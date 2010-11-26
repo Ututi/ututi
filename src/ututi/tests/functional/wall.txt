@@ -85,9 +85,11 @@ No events yet:
     The Ututi team
 
 Let's check the sms replies:
+
     >>> browser2.getLink('Testing group').click()
-    >>> browser2.getControl(name='sms_message').value = 'Sending an sms!'
-    >>> browser2.getControl('Send', index=2).click()
+    >>> form = browser2.getForm('sms-portlet-form')
+    >>> form.getControl(name='sms_message').value = 'Sending an sms!'
+    >>> form.getControl('Send').click()
 
     >>> browser.getLink('Home').click()
     >>> browser.getLink("News wall").click()

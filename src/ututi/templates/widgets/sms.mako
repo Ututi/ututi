@@ -95,7 +95,7 @@
   <span>${_('Message text:')}</span>
   <span class="recipients">${_('Recipients:')} ${len(recipients)}</span>
 
-  <form method='post' action="${url(controller='group', action='send_sms', id=group.group_id)}">
+  <form id="sms-portlet-form" method='post' action="${url(controller='group', action='send_sms', id=group.group_id)}">
     <input type="hidden" name="current_url" value="${url.current()}" />
 
     %if user.can_send_sms(group):
