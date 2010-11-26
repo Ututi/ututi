@@ -5,6 +5,9 @@
 <script type="text/javascript">
 //<![CDATA[
 $(document).ready(function(){
+    $('.clickBlock .clickAction').click(function(){
+        $(this).closest('.clickBlock').toggleClass('open').find('.showBlock').toggle();
+    });
 
     function folderReceive(event, ui) {
 
@@ -614,14 +617,14 @@ $(document).ready(function(){
 
 <%def name="file_browser(obj, section_id=0, collapsible=False, title=None, comment=None, controls=['upload', 'folder', 'title'])">
 
-<%prebase:rounded_block class_='portletGroupFiles' id="subject_files">
+<%prebase:rounded_block class_="portletGroupFiles clickBlock ${collapsible and 'collapsible' or 'open'}" id="subject_files">
 
-  <div class="section click2show ${collapsible and '' or 'open'} ${('size' in controls) and 'size_indicated' or ''}" id="file_section-${section_id}">
+  <div class="section ${collapsible and '' or 'open'} ${('size' in controls) and 'size_indicated' or ''}" id="file_section-${section_id}">
     <%
        cls_head = cls_container = ''
        if collapsible:
-           cls_head = 'click'
-           cls_container = 'show'
+           cls_head = 'clickAction'
+           cls_container = 'showBlock'
     %>
 
     ##%if 'title' in controls:

@@ -1267,8 +1267,15 @@ p.qu{
 .portlet.portletModule .cbl,
 .portlet.portletModule .cbr,
 .portlet.portletGroupFiles .cbl,
-.portlet.portletGroupFiles .cbr {
+.portlet.portletGroupFiles .cbr,
+.portlet.clickBlock.open .cbl,
+.portlet.clickBlock.open .cbr {
     background-image: url('img/portlets_bg_white.png');
+}
+
+.portlet.clickBlock .cbl,
+.portlet.clickBlock .cbr {
+    background-image: url('img/portlets_bg_gray.png');
 }
 
 .portlet .ctl, .portlet-verysmall .ctl {
@@ -2787,14 +2794,16 @@ span.unlimited_size {
 }
 
 /* expanding section headings  */
-.click2show h2.click .cont {
+.click2show h2.click .cont,
+.clickBlock h2.clickAction .cont {
     padding-right: 15px;
-    background: white url("../images/details/arrow_expand_down.png") right center no-repeat;
+    background: transparent url("../images/details/arrow_expand_down.png") right center no-repeat;
 }
 
-.click2show.open h2.click .cont {
+.click2show.open h2.click .cont,
+.clickBlock.open h2.clickAction .cont {
     padding-right: 15px;
-    background: white url("../images/details/arrow_expand_right.png") right center no-repeat;
+    background: transparent url("../images/details/arrow_expand_right.png") right center no-repeat;
 }
 
 .section h2 .comment {
@@ -3600,11 +3609,13 @@ h2.overline {
     clear: both;
 }
 
-.click2show .show {
+.click2show .show,
+.clickBlock .showBlock {
     display: none;
 }
 
 .click2show .click,
+.clickAction,
 .clickable {
     cursor: pointer;
 }
