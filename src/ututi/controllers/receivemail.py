@@ -30,15 +30,21 @@ class ReceivemailController(BaseController):
         file_name_list = request.POST.getall("filename[]")
 
         message_text = request.str_POST['Mail']
+        message = GroupMailingListMessage.parseMessage(message_text)
+        group = message.getGroup()
+
+        if group is None:
+            return "Silent bounce!"
+
+        if not group.mailinglist_enabled:
+            return "Silent bounce!"
+
         try:
             message = GroupMailingListMessage.fromMessageText(message_text)
         except MessageAlreadyExists:
             return "Ok!"
 
         if message is None:
-            return "Silent bounce!"
-
-        if message.group_id is None:
             return "Silent bounce!"
 
         if message.author is not None:

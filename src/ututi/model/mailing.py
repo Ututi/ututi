@@ -50,6 +50,40 @@ def decode_and_join_header(header):
 
 class UtutiEmail(email.message.Message):
 
+    def getBody(self):
+        message = self
+        while message.is_multipart():
+            message = message.get_payload()[0]
+
+        charset = message.get_content_charset('utf-8')
+        # fall back, in case we are being tricked
+        if charset == 'us-ascii':
+            charset = 'utf-8'
+        payload = message.get_payload(decode=True)
+        return payload.decode(charset)
+
+    def getGroup(self):
+        mailing_list_host = config.get('mailing_list_host')
+        mailing_list_hosts = [mailing_list_host,
+                              'lists.ututi.lt']
+
+        group_ids = []
+        for name, address in self.getToAddresses():
+            if '@' not in address:
+                continue
+            prefix, suffix = address.split('@')
+            if suffix in mailing_list_hosts:
+                group_ids.append(prefix)
+
+        # XXX what if I CC message to 2 groups at the same time?
+        g = None
+        if group_ids:
+            for group_id in group_ids:
+                g = Group.get(group_id)
+                if g is not None:
+                    break
+        return g
+
     def getHeader(self, header):
         for key, value in self._headers:
             if key.lower() == header.lower():
@@ -166,16 +200,7 @@ class GroupMailingListMessage(ContentItem):
     @property
     def body(self):
         message = email.message_from_string(self.original, UtutiEmail)
-
-        while message.is_multipart():
-            message = message.get_payload()[0]
-
-        charset = message.get_content_charset('utf-8')
-        # fall back, in case we are being tricked
-        if charset == 'us-ascii':
-            charset = 'utf-8'
-        payload = message.get_payload(decode=True)
-        return payload.decode(charset)
+        return message.getBody()
 
     def getAuthor(self):
         author_name, author_address = parseaddr(self.mime_message['From'])
@@ -223,29 +248,14 @@ class GroupMailingListMessage(ContentItem):
                        message.as_string())
 
     @classmethod
+    def parseMessage(cls, message_text):
+        return email.message_from_string(message_text, UtutiEmail)
+
+    @classmethod
     def fromMessageText(cls, message_text):
-        message = email.message_from_string(message_text, UtutiEmail)
+        message = cls.parseMessage(message_text)
         message_id = message.getMessageId()
-
-        mailing_list_host = config.get('mailing_list_host')
-        mailing_list_hosts = [mailing_list_host,
-                              'lists.ututi.lt']
-
-        group_ids = []
-        for name, address in message.getToAddresses():
-            if '@' not in address:
-                continue
-            prefix, suffix = address.split('@')
-            if suffix in mailing_list_hosts:
-                group_ids.append(prefix)
-
-        # XXX what if I CC message to 2 groups at the same time?
-        g = None
-        if group_ids:
-            for group_id in group_ids:
-                g = Group.get(group_id)
-                if g is not None:
-                    break
+        g = message.getGroup()
 
         #use the numerical group id
         if g is None:
