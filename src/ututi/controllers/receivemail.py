@@ -2,6 +2,7 @@ import logging
 
 from pylons import request
 
+from ututi.lib.forums import make_forum_post
 from ututi.lib.base import BaseController
 from ututi.model import Group
 from ututi.model import GroupMailingListMessage
@@ -39,7 +40,20 @@ class ReceivemailController(BaseController):
 
         if not group.mailinglist_enabled:
             if author is not None and group.is_member(author):
-                pass # XXX post the message to group forum
+                meta.Session.execute("SET ututi.active_user TO %d" % author.id)
+                request.environ['repoze.who.identity'] = author.id
+                if not group.forum_categories:
+                    return 'Ok!'
+                post = make_forum_post(author,
+                                       message.getSubject(),
+                                       message.getBody(),
+                                       group.id,
+                                       category_id=group.forum_categories[0].id,
+                                       thread_id=None,
+                                       controller='forum')
+                meta.Session.add(post)
+                meta.Session.commit()
+                return 'Ok!'
             return "Silent bounce!"
 
         try:

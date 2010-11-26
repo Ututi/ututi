@@ -1,5 +1,3 @@
-from mimetools import choose_boundary
-
 from formencode.schema import Schema
 from formencode import validators, htmlfill
 
@@ -8,7 +6,7 @@ from ututi.lib.base import BaseController
 from pylons.controllers.util import abort, redirect
 from pylons import request
 from pylons.i18n import _
-from pylons import tmpl_context as c, url, config
+from pylons import tmpl_context as c, url
 
 from ututi.lib.security import ActionProtector, check_crowds
 from ututi.lib.base import render
