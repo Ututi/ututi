@@ -1,6 +1,6 @@
 <%inherit file="/group/base.mako" />
 <%namespace file="/subject/add.mako" name="subject" />
-<%namespace file="/group/add.mako" import="path_steps"/>
+<%namespace file="/group/create_base.mako" import="path_steps"/>
 
 <%def name="title()">
 ${_('New subject')}

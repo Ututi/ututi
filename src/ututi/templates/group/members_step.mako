@@ -1,6 +1,6 @@
 <%inherit file="/ubase-sidebar.mako" />
 
-<%namespace file="/group/add.mako" import="path_steps"/>
+<%namespace file="/group/create_base.mako" import="path_steps"/>
 <%namespace file="/group/members.mako" import="group_members_invite_section"/>
 <%namespace file="/portlets/sections.mako" import="*"/>
 

@@ -1,5 +1,4 @@
 <%inherit file="/group/create_base.mako" />
-<%namespace file="/group/add.mako" import="path_steps"/>
 
 <%def name="title()">
 ${_('New custom group')}
@@ -9,7 +8,7 @@ ${_('New custom group')}
   <div id="CreatePublicGroupLeft">
     <h1 class="pageTitle">${_('Create a custom group')}</h1>
 
-    ${path_steps(0)}
+    ${self.path_steps(0)}
 
     <form method="post" action="${url(controller='group', action='create_custom')}"
           id="group_settings_form" enctype="multipart/form-data">

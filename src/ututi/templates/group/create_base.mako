@@ -4,6 +4,21 @@
 <%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*" />
 <%namespace file="/sections/content_snippets.mako" import="tooltip" />
 
+<%def name="path_steps(step=0)">
+<div id="steps">
+  %for index, title in enumerate([_('Group settings'), _('Member invitations')]):
+<%
+   cls=''
+   if step == index:
+       cls='active'%>
+    <span class="step ${cls}">
+      <span class="number">${index + 1}</span>
+      <span class="title">${title}</span>
+    </span>
+  %endfor
+</div>
+</%def>
+
 <%def name="title()">
   ${_('Create group')} <!-- Override this -->
 </%def>

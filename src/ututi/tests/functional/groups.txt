@@ -47,13 +47,15 @@ We can edit the group's information.
 
 We can add a group at the url /groups/add.
 
-    >>> browser.open('http://localhost/groups/add')
-    >>> browser.getControl('Group email address').value = 'test'
-    >>> browser.getControl('Group title').value = 'Test group'
-    >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
-    >>> browser.getControl('Group logo').add_file(*make_file('test_logo.png'))
-    >>> browser.getControl('Year').value = ['2009']
-    >>> browser.getControl('Continue').click()
+   >>> browser.open('http://localhost/')
+   >>> browser.getLink('Create group').click()
+   >>> browser.getControl('Create group', index=0).click()
+   >>> browser.getControl('Group e-mail address').value = 'test'
+   >>> browser.getControl('Group title').value = 'Test group'
+   >>> browser.getControl('Year').value = ['2009']
+   >>> browser.getControl('Group logo').add_file(*make_file('test_logo.png'))
+   >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
+   >>> browser.getControl('Continue').click()
 
 After creating the group we should be redirected to the subject selection view:
 
@@ -71,34 +73,38 @@ Let's see what the group's default home page looks like:
 
 However, group ids are checked for uniqueness.
 
-    >>> browser.open('http://localhost/groups/add')
-    >>> browser.getControl('Group email address').value = 'Test'
-    >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
-    >>> browser.getControl('Group title').value = 'Test group'
-    >>> browser.getControl('Continue').click()
-    >>> browser.printQuery("//span[@class='error-message']/text()")
-    Such id already exists, choose a different one.
+   >>> browser.getLink('Create group').click()
+   >>> browser.getControl('Create group', index=0).click()
+   >>> browser.getControl('Group e-mail address').value = 'Test'
+   >>> browser.getControl('Group title').value = 'Test group'
+   >>> browser.getControl('Year').value = ['2009']
+   >>> browser.getControl('Group logo').add_file(*make_file('test_logo.png'))
+   >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
+   >>> browser.getControl('Continue').click()
+
+   >>> browser.printQuery("//span[@class='error-message']/text()")
+   Such id already exists, choose a different one.
 
 And they must be valid local parts of email addresses.
 
-    >>> browser.getControl('Group email address').value = 'test test'
+    >>> browser.getControl('Group e-mail address').value = 'test test'
     >>> browser.getControl('Continue').click()
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Id cannot be used as an email address.
 
 Slashes are also not allowed
-    >>> browser.getControl('Group email address').value = 'test/test'
+    >>> browser.getControl('Group e-mail address').value = 'test/test'
     >>> browser.getControl('Continue').click()
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Id cannot be used as an email address.
 
-    >>> browser.getControl('Group email address').value = 'test\test'
+    >>> browser.getControl('Group e-mail address').value = 'test\test'
     >>> browser.getControl('Continue').click()
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Id cannot be used as an email address.
 
 And plus signs for that matter
-    >>> browser.getControl('Group email address').value = 'test+test'
+    >>> browser.getControl('Group e-mail address').value = 'test+test'
     >>> browser.getControl('Continue').click()
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Id cannot be used as an email address.

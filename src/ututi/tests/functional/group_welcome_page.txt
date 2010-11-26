@@ -7,8 +7,9 @@ First of all let's log in;
 
 We can add a group at the url /groups/add.
 
-    >>> browser.open('http://localhost/groups/add')
-    >>> browser.getControl('Group email address').value = 'test'
+    >>> browser.getLink('Create group').click()
+    >>> browser.getControl('Create group', index=0).click()
+    >>> browser.getControl('Group e-mail address').value = 'test'
     >>> browser.getControl('Group title').value = 'Test group'
     >>> browser.getControl('Year').value = ['2009']
     >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'

@@ -399,11 +399,6 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
 
         return render('group/files.mako')
 
-    def _add_form(self):
-        current_year = date.today().year
-        c.years = range(current_year - 12, current_year + 3)
-        return render('group/add.mako')
-
     def group_type(self):
         return render('group/group_type.mako')
 
@@ -534,58 +529,6 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
                     'forum_visibility': 'public',
                     'page_visibility': 'public'}
         return htmlfill.render(self._create_custom_form(), defaults=defaults)
-
-    @validate(schema=GroupAddingForm, post_only=False, on_get=True)
-    @ActionProtector("user")
-    def add(self):
-        #some initial date may be submitted as a get request
-        if hasattr(self, 'form_result'):
-            location = LocationTag.get(self.form_result.get('location', ''))
-            if location is not None:
-                location = dict([('location-%d' % n, tag)
-                                 for n, tag in enumerate(location.hierarchy())])
-            else:
-                location = []
-        else:
-            location = []
-
-        defaults = {
-            'year': self.form_result.get('year',  '')
-            }
-        defaults.update(location)
-
-        return htmlfill.render(self._add_form(), defaults=defaults)
-
-    @validate(schema=NewGroupForm, form='_add_form')
-    @ActionProtector("user")
-    def new_group(self):
-        # Deprecated.
-        if hasattr(self, 'form_result'):
-            values = self.form_result
-
-            group = Group(group_id=values['id'],
-                          title=values['title'],
-                          description=values['description'],
-                          year=date(int(values['year']), 1, 1))
-
-            tag = values.get('location', None)
-            group.location = tag
-
-            meta.Session.add(group)
-
-            if values['logo_upload'] is not None:
-                logo = values['logo_upload']
-                group.logo = logo.file.read()
-
-            group.add_member(c.user, admin=True)
-
-            if is_root(c.user):
-                group.moderators = values['moderators']
-
-            meta.Session.commit()
-            redirect(url(controller='group', action='invite_members_step', id=values['id']))
-        else:
-            redirect(url(controller='group', action='group_type'))
 
     @group_action
     @ActionProtector("member", "admin")
@@ -1238,7 +1181,7 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
                 groups = groups.filter(Group.location_id.in_([loc.id for loc in location.flatten]))
             if year != '':
                 groups = groups.filter(Group.year == date(int(year), 1, 1))
-            return render_mako_def('group/add.mako', 'live_search', groups=groups.all())
+            return render_mako_def('group/create_base.mako', 'live_search', groups=groups.all())
         else:
             abort(404)
 

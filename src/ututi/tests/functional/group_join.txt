@@ -40,11 +40,12 @@ If a group is public, administrators do not have to approve new members.
 
 Let's add a new group:
 
-    >>> abrowser.open('http://localhost/groups/add')
-    >>> abrowser.getControl('Group email address').value = 'test'
+    >>> abrowser.getLink('Create group').click()
+    >>> abrowser.getControl('Create group', index=0).click()
+    >>> abrowser.getControl('Group e-mail address').value = 'test'
     >>> abrowser.getControl('Group title').value = 'Test group'
-    >>> abrowser.getControl(name='location-0').value = 'Vilniaus universitetas'
     >>> abrowser.getControl('Year').value = ['2009']
+    >>> abrowser.getControl(name='location-0').value = 'Vilniaus universitetas'
     >>> abrowser.getControl('Continue').click()
 
 We won't invite anyone for now:

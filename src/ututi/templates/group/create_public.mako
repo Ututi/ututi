@@ -1,6 +1,5 @@
 <%inherit file="/group/create_base.mako" />
 <%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*"/>
-<%namespace file="/group/add.mako" import="path_steps"/>
 
 <%def name="title()">
 ${_('New public group')}
@@ -10,7 +9,7 @@ ${_('New public group')}
   <div id="CreatePublicGroupLeft">
     <h1 class="pageTitle">${_('Create a public group')}</h1>
 
-    ${path_steps(0)}
+    ${self.path_steps(0)}
 
     <form method="post" id="group_settings_form" enctype="multipart/form-data"
           action="${url(controller='group', action='create_public')}">
