@@ -125,6 +125,11 @@ class MessageRcpt(validators.FormValidator):
             if len(collection) == 1:
                 rcpt_obj = collection[0]
 
+        #check for group membership
+        if isinstance(rcpt_obj, Group):
+            if not rcpt_obj.is_member(c.user):
+                rcpt_obj = None
+
         if rcpt_obj is None:
             raise Invalid(self.message('invalid', state),
                           form_dict, state,
