@@ -290,26 +290,32 @@ class ForumController(BaseController):
                          thread_id=thread_id)
         meta.Session.add(post)
         meta.Session.commit()
-
         meta.Session.refresh(post)
-        thread = ForumPost.get(post.thread_id)
+
+        # Subscribe logged in user to the thread
         subscription = SubscribedThread.get_or_create(post.thread_id, c.user,
                                                       activate=True)
 
-        if c.group_id:
-            if new_thread:
-                # This is a new thread; automatically subscribe all interested
-                # members.
-                for member in c.group.members:
-                    if member.subscribed_to_forum:
-                        SubscribedThread.get_or_create(post.thread_id, member.user,
-                                                       activate=True)
+        # If this is a new thread; automatically subscribe all
+        # interested members.
+        if c.group_id and new_thread:
+            for member in c.group.members:
+                if member.subscribed_to_forum:
+                    SubscribedThread.get_or_create(post.thread_id, member.user,
+                                                   activate=True)
 
-            forum_title = c.group.title
+        self._send_emails(post, c.group_id, c.category.id)
+        return post
+
+    def _send_emails(self, post, group_id=None, category_id=None):
+        if group_id:
+            forum_title = Group.get(group_id).title
         else:
-            forum_title = _('Community') if c.category.id == 1 else _('Bugs')
+            forum_title = _('Community') if c.category_id == 1 else _('Bugs')
 
-        extra_vars = dict(message=message, person_title=c.user.fullname, forum_title=forum_title,
+        thread = ForumPost.get(post.thread_id)
+        new_thread = thread.is_thread()
+        extra_vars = dict(message=post.message, person_title=c.user.fullname, forum_title=forum_title,
             thread_url=url(controller=c.controller, action='thread',
                            id=c.group_id, category_id=c.category.id,
                            thread_id=post.thread_id, qualified=True))
@@ -338,11 +344,10 @@ class ForumController(BaseController):
             re = 'Re: ' if not new_thread else ''
             send_email(config['ututi_email_from'],
                        config['ututi_email_from'],
-                       '[%s] %s%s' % (ml_id, re, title),
+                       '[%s] %s%s' % (ml_id, re, post.title),
                        email_message,
                        message_id=self._generateMessageId(),
                        send_to=list(recipients))
-        return post
 
     def _edit_post_form(self):
         return render('forum/edit.mako')
