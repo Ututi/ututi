@@ -3604,6 +3604,7 @@ h2.overline {
     display: none;
 }
 
+.click2show .click,
 .clickable {
     cursor: pointer;
 }
