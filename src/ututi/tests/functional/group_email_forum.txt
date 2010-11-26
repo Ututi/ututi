@@ -14,19 +14,12 @@ Now let's try writing a couple of messages to the forum:
     >>> from ututi.tests.functional import send_test_message
     >>> send_test_message('email_from_user2.txt', '33', to='moderators@groups.ututi.lt')
     >>> send_test_message('email_from_non_ututi.txt', '42', to='moderators@groups.ututi.lt', subject='Hello from varlius')
-
-Both of them get ignored:
-
-    >>> browser.click('Forum')
-    >>> browser.printCssQuery('.forum_category_footer')
-    <div class="forum_category_footer">There are no forum messages.</div>
-
-But if a member of the group sends such an email, it gets posted into
-the first category of this forum:
-
     >>> send_test_message('email_with_attachment.txt', '47', to='moderators@groups.ututi.lt')
 
-    >>> browser.reload()
+Two first emails get ignored, but if a member of the group sends such
+an email, it gets posted into the first category of this forum:
+
+    >>> browser.click('Forum')
     >>> browser.printCssQuery('.post-title , .m-on .verysmall', include_attributes=[''])
     <a>Also - an attachment</a>
     <div>Also, I just wanted to send you this file:</div>
