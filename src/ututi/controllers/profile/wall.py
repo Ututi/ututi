@@ -315,7 +315,7 @@ class WallMixin(FileViewMixin):
         groups = [
             dict(label=_('Group: %s') % group.title,
                  id='g_%d' % group.id,
-                 categories=[dict(id=cat.id, title=cat.title)
+                 categories=[dict(value=cat.id, title=cat.title)
                              for cat in group.forum_categories]
                              if not group.mailinglist_enabled else [])
             for group in groups]
