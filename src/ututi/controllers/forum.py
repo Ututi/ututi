@@ -232,8 +232,9 @@ class ForumController(BaseController):
     @validate(NewReplyForm, form='_new_reply_form')
     @ActionProtector("user")
     def reply(self, id, category_id, thread_id):
-        self._post(c.thread.title, self.form_result['message'],
-                   category_id=category_id, thread_id=thread_id)
+        self._post(c.user, c.thread.title, self.form_result['message'],
+                   group_id=c.group_id, category_id=category_id,
+                   thread_id=thread_id, controller=c.controller)
         c.thread.mark_as_seen_by(c.user)
         meta.Session.commit()
         if request.params.has_key('js'):
@@ -273,9 +274,11 @@ class ForumController(BaseController):
     @validate(NewTopicForm, form='_new_thread_form')
     @ActionProtector("user")
     def post(self, id, category_id):
-        post = self._post(title=self.form_result['title'],
+        post = self._post(user=c.user,
+                          title=self.form_result['title'],
                           message=self.form_result['message'],
-                          category_id=c.category.id)
+                          group_id=c.group_id, category_id=c.category.id,
+                          controller=c.controller)
         redirect(url(controller=c.controller, action='thread', id=c.group_id,
                              category_id=c.category.id, thread_id=post.id))
 
@@ -283,7 +286,7 @@ class ForumController(BaseController):
         host = config.get('mailing_list_host', '')
         return "%s@%s" % (choose_boundary(), host)
 
-    def _post(self, title, message, category_id, thread_id=None):
+    def _post(self, user, title, message, group_id, category_id, thread_id=None, controller=None):
         new_thread = thread_id is None
 
         post = ForumPost(title, message, category_id=category_id,
@@ -293,38 +296,39 @@ class ForumController(BaseController):
         meta.Session.refresh(post)
 
         # Subscribe logged in user to the thread
-        subscription = SubscribedThread.get_or_create(post.thread_id, c.user,
+        subscription = SubscribedThread.get_or_create(post.thread_id, user,
                                                       activate=True)
 
         # If this is a new thread; automatically subscribe all
         # interested members.
-        if c.group_id and new_thread:
-            for member in c.group.members:
+        if group_id and new_thread:
+            group = Group.get(group_id)
+            for member in group.members:
                 if member.subscribed_to_forum:
                     SubscribedThread.get_or_create(post.thread_id, member.user,
                                                    activate=True)
 
-        self._send_emails(post, c.group_id, c.category.id)
+        self._send_emails(user, post, group_id, category_id, controller=controller)
         return post
 
-    def _send_emails(self, post, group_id=None, category_id=None):
+    def _send_emails(self, user, post, group_id=None, category_id=None, controller=''):
         if group_id:
             forum_title = Group.get(group_id).title
         else:
-            forum_title = _('Community') if c.category_id == 1 else _('Bugs')
+            forum_title = _('Community') if category_id == 1 else _('Bugs')
 
         thread = ForumPost.get(post.thread_id)
         new_thread = thread.is_thread()
-        extra_vars = dict(message=post.message, person_title=c.user.fullname, forum_title=forum_title,
-            thread_url=url(controller=c.controller, action='thread',
-                           id=c.group_id, category_id=c.category.id,
+        extra_vars = dict(message=post.message, person_title=user.fullname, forum_title=forum_title,
+            thread_url=url(controller=controller, action='thread',
+                           id=group_id, category_id=category_id,
                            thread_id=post.thread_id, qualified=True))
         email_message = render('/emails/forum_message.mako',
                                extra_vars=extra_vars)
 
         recipients = set()
         for subscription in thread.subscriptions:
-            if subscription.active and subscription.user.id != c.user.id:
+            if subscription.active and subscription.user.id != user.id:
                 for email in subscription.user.emails:
                     if email.confirmed:
                         recipients.add(email.email)
@@ -337,9 +341,9 @@ class ForumController(BaseController):
                     except KeyError:
                         pass
 
-        ml_id = c.group_id
+        ml_id = group_id
         if not ml_id:
-            ml_id = {1: _('ututi-community'), 2: _('ututi-bugs')}[c.category.id]
+            ml_id = {1: _('ututi-community'), 2: _('ututi-bugs')}[int(category_id)]
         if recipients:
             re = 'Re: ' if not new_thread else ''
             send_email(config['ututi_email_from'],
