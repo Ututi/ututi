@@ -1,11 +1,8 @@
 import re
 import logging
 from datetime import date
-from os.path import splitext
 
 import facebook
-
-from pkg_resources import resource_stream
 
 from pylons import tmpl_context as c, config, request, url
 from pylons.templating import render_mako_def
@@ -21,11 +18,9 @@ from formencode.foreach import ForEach
 
 from formencode.variabledecode import NestedVariables
 
-from sqlalchemy.sql.expression import not_
 from sqlalchemy.orm.exc import NoResultFound
 
 import ututi.lib.helpers as h
-from ututi.lib.fileview import FileViewMixin
 from ututi.lib.image import serve_logo
 from ututi.lib.search import _filter_watched_subjects
 from ututi.lib.sms import sms_cost
@@ -34,7 +29,7 @@ from ututi.lib.validators import HtmlSanitizeValidator, TranslatedEmailValidator
 
 from ututi.model import GroupCoupon
 from ututi.model import LocationTag, User, GroupMember, GroupMembershipType, File, OutgoingGroupSMSMessage
-from ututi.model import meta, Group, SimpleTag, Subject, ContentItem, PendingInvitation, PendingRequest
+from ututi.model import meta, Group, SimpleTag, Subject, PendingInvitation, PendingRequest
 from ututi.controllers.profile.wall import WallMixin
 from ututi.controllers.subject import SubjectAddMixin
 from ututi.controllers.subject import NewSubjectForm
@@ -283,8 +278,33 @@ def group_menu_items():
         ]
     return bcs
 
+class GroupWallMixin(WallMixin):
 
-class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
+    def _msg_rcpt(self):
+        if c.group.mailinglist_enabled:
+            forum_categories = []
+        else:
+            forum_categories= [(cat.id, cat.title)
+                               for cat in c.group.forum_categories]
+
+        return ('g_%d' % c.group.id, _('Group: %s') % c.group.title, forum_categories)
+
+    def _file_rcpt(self):
+        items = []
+        items.append(('g_%d' % c.group.id, _('Group: %s') % c.group.title))
+        for subject in c.group.watched_subjects:
+            items.append(('s_%d' % subject.id, _('Subject: %s') % subject.title))
+        return items
+
+    def _wiki_rcpt(self):
+        subjects = c.group.watched_subjects
+        return[(subject.id, subject.title) for subject in subjects]
+
+    def _redirect_url(self):
+        """Override wall's dashboard action redirection url."""
+        return url(controller='group', action='home')
+
+class GroupController(BaseController, SubjectAddMixin, GroupWallMixin):
     """Controller for group actions."""
 
     controller_name = 'forum'
@@ -304,6 +324,11 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
         c.wants_to_watch_subjects = (len(group.watched_subjects) == 0 and
                                      group.wants_to_watch_subjects)
 
+        # wall's dashboard variables
+        c.file_recipients = self._file_rcpt()
+        c.wiki_recipients = self._wiki_rcpt()
+        c.msg_recipient = self._msg_rcpt()
+
     @group_action
     def home(self, group):
         if check_crowds(["member", "admin"]):
@@ -317,6 +342,12 @@ class GroupController(BaseController, FileViewMixin, SubjectAddMixin):
                               'link': url(controller='group', action='home', id=c.group.group_id)}]
 
             return render('group/home_public.mako')
+
+    @group_action
+    @ActionProtector("admin", "member")
+    def feed_js(self, group):
+        events = group.group_events
+        return render_mako_def('/sections/wall_snippets.mako', 'render_events', events=events)
 
     @group_action
     @ActionProtector("admin", "member")

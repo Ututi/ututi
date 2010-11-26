@@ -1,9 +1,11 @@
 <%inherit file="/group/base.mako" />
 <%namespace name="wall" file="/sections/wall_snippets.mako" import="head_tags"/>
+<%namespace name="dashboard" file="/group/wall_dashboard.mako" />
 
 <%def name="head_tags()">
   ${parent.head_tags()}
   ${wall.head_tags()}
+  ${dashboard.head_tags()}
 </%def>
 
 %if c.welcome:
@@ -65,6 +67,8 @@ use the group mailing list together then!
     <br class="clear-left" />
   </%self:rounded_block>
 %endif
+
+${dashboard.dashboard(c.msg_recipient, c.file_recipients, c.wiki_recipients)}
 
 <div id="wall">
 % for event in c.events:
