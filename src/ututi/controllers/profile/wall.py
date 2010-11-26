@@ -35,6 +35,7 @@ def _file_rcpt(current_user):
     """
     groups = meta.Session.query(Group)\
         .filter(Group.id.in_([g.group.id for g in current_user.memberships]))\
+        .filter(Group.has_file_area == True)\
         .order_by(Group.title.asc())\
         .all()
 
@@ -231,6 +232,8 @@ class WallMixin(FileViewMixin):
         target = None
         if target_id.startswith('g_'):
             target = Group.get(int(target_id[2:]))
+            if not target.is_member(c.user):
+                target = None
         elif target_id.startswith('s_'):
             target = Subject.get_by_id(int(target_id[2:]))
 
