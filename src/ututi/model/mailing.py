@@ -50,6 +50,10 @@ def decode_and_join_header(header):
 
 class UtutiEmail(email.message.Message):
 
+    def getAuthor(self):
+        author_name, author_address = parseaddr(self.getHeader("from"))
+        return User.get(author_address)
+
     def getBody(self):
         message = self
         while message.is_multipart():

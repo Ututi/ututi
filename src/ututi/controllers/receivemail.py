@@ -32,11 +32,14 @@ class ReceivemailController(BaseController):
         message_text = request.str_POST['Mail']
         message = GroupMailingListMessage.parseMessage(message_text)
         group = message.getGroup()
+        author = message.getAuthor()
 
         if group is None:
             return "Silent bounce!"
 
         if not group.mailinglist_enabled:
+            if author is not None and group.is_member(author):
+                pass # XXX post the message to group forum
             return "Silent bounce!"
 
         try:

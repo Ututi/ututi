@@ -74,13 +74,13 @@
       </div>
     % endif
 
-    <div style="padding: 10px 0 6px 10px;">
+    <div class="forum_category_footer" style="padding: 10px 0 6px 10px;">
 	% if c.user and messages:
         ${h.button_to(_('Mark all as read'), url(controller=c.controller, action='mark_category_as_read', id=c.group_id, category_id=category.id))}
 	% elif not messages:
         ${_('There are no forum messages.')}
 	% endif
-      </div>
+    </div>
   </div>
 </%def>
 

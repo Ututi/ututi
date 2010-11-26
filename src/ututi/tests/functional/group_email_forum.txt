@@ -1,0 +1,22 @@
+Tests for group mailing list moderation events
+==============================================
+
+Set Up:
+
+    >>> browser = Browser.logIn('admin@ututi.lt', 'asdasd')
+    >>> browser.getLink('Moderatoriai').click()
+    >>> browser.getLink('Edit').click()
+    >>> browser.getControl('Forum type').value = ['forum']
+    >>> browser.getControl('Save').click()
+
+Now let's try writing a couple of messages to the forum:
+
+    >>> from ututi.tests.functional import send_test_message
+    >>> send_test_message('email_from_user2.txt', '33', to='moderators@groups.ututi.lt')
+    >>> send_test_message('email_from_non_ututi.txt', '42', to='moderators@groups.ututi.lt', subject='Hello from varlius')
+
+Both of them get ignored:
+
+    >>> browser.click('Forum')
+    >>> browser.printCssQuery('.forum_category_footer')
+    <div class="forum_category_footer">There are no forum messages.</div>

@@ -4,7 +4,6 @@ import sys
 import random
 import shutil
 
-from ClientForm import ControlNotFoundError
 from mechanize._mechanize import LinkNotFoundError
 from nous.pylons.testing import LayerBase, CompositeLayer
 from nous.pylons.testing import PylonsTestBrowserLayer
@@ -92,7 +91,7 @@ class UtutiTestBrowser(NousTestBrowser):
         else:
             try:
                 controls = [self.getControl(text, name, index)]
-            except ControlNotFoundError:
+            except LookupError:
                 controls = []
             try:
                 links = [self.getLink(text, url, id, index)]
