@@ -4,6 +4,7 @@
 <%def name="head_tags()">
   ${parent.head_tags()}
   ${wall.head_tags()}
+  ${dashboard.head_tags()}
 </%def>
 
 <%def name="pagetitle()">

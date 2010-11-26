@@ -5095,6 +5095,18 @@ padding:3px 15px 0 30px;
   background: url("../img/icons/pages_13.png") left center no-repeat;
 }
 
+#upload-failed-error-message {
+    display: none;
+}
+
+.upload-failed #upload-failed-error-message {
+    display: block;
+}
+
+.dashboard_action_block {
+    display: none; /* Initially hidden */
+}
+
 .dashboard_action_block form {
   padding-bottom: 15px;
 }
