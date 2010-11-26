@@ -7,8 +7,7 @@ from formencode.foreach import ForEach
 from formencode.api import Invalid
 from formencode.variabledecode import NestedVariables
 from ututi.lib.validators import UserPasswordValidator, TranslatedEmailValidator, UniqueEmail,\
-    LocationTagsValidator, PhoneNumberValidator
-from ututi.controllers.group import FileUploadTypeValidator
+    LocationTagsValidator, PhoneNumberValidator, FileUploadTypeValidator
 
 
 class LocationForm(Schema):
