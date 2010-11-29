@@ -12,12 +12,12 @@
 </%def>
 
 ${dashboard.dashboard(None, c.file_recipients, c.wiki_recipients)}
+<div class="tip">
+  ${_('This is a list of all the recent events in the subjects you are watching and the groups you belong to.')}
+  <a href="${url(controller='profile', action='wall_settings')}">${_('Edit shown updates.')}</a>
+</div>
 
 <div id='wall'>
-  <div class="tip">
-    ${_('This is a list of all the recent events in the subjects you are watching and the groups you belong to.')}
-    <a href="${url(controller='profile', action='wall_settings')}">${_('Edit shown updates.')}</a>
-  </div>
 
   %if c.events:
     % for event in c.events:
