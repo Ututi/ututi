@@ -310,7 +310,8 @@ class GroupWallMixin(WallMixin):
 
     def _redirect_url(self):
         """Override wall's dashboard action redirection url."""
-        return url(controller='group', action='home')
+        return url(controller='group', action='home', id=c.group.group_id)
+
 
 class GroupController(BaseController, SubjectAddMixin, GroupWallMixin):
     """Controller for group actions."""
