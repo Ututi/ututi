@@ -164,10 +164,9 @@
 
     %if group.is_admin(c.user) or c.security_context and h.check_crowds(['admin', 'moderator']):
       <div class="floatright">
-      <span class="right_arrow">
-        <a href="${url(controller='group', action='edit', id=group.group_id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
-      </span>
-    </div>
+        <a class="right_arrow" href="${url(controller='group', action='edit', id=group.group_id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
+      </div>
+
     %endif
     <br class="clear-right" />
   </%self:uportlet>
