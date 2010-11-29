@@ -299,7 +299,8 @@ class GroupWallMixin(WallMixin):
 
     def _file_rcpt(self):
         items = []
-        items.append(('g_%d' % c.group.id, _('Group: %s') % c.group.title))
+        if c.group.has_file_area:
+            items.append(('g_%d' % c.group.id, _('Group: %s') % c.group.title))
         for subject in c.group.watched_subjects:
             items.append(('s_%d' % subject.id, _('Subject: %s') % subject.title))
         return items
