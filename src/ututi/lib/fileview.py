@@ -32,6 +32,10 @@ class FileViewMixin(object):
         meta.Session.commit()
 
     def _upload_file_basic(self, obj):
+        from ututi.model import Group
+        if isinstance(self, Group) and not self.has_file_area:
+            return None
+
         file = request.params['attachment']
         folder = request.params['folder']
         if obj.upload_status != obj.LIMIT_REACHED:
