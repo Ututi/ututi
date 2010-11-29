@@ -137,6 +137,7 @@ $(document).ready(function() {
                      reload_wall();
                  } else {
                      $('#upload_file_block').addClass('upload-failed');
+                     $('#dashboard_action_blocks').after('<div class="action-reply">'+"${_('File upload failed.')}"+'</div>');
                  }
                  window.clearInterval(iframe['interval']);
              }

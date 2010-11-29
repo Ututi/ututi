@@ -1,9 +1,12 @@
 from pylons.templating import render_mako_def
 
+from pylons.controllers.util import abort
 from pylons import request, tmpl_context as c
 from ututi.model import File, meta
 
 from mimetools import choose_boundary
+
+
 
 
 class FileViewMixin(object):
@@ -33,7 +36,7 @@ class FileViewMixin(object):
 
     def _upload_file_basic(self, obj):
         from ututi.model import Group
-        if isinstance(self, Group) and not self.has_file_area:
+        if isinstance(obj, Group) and not obj.has_file_area:
             return None
 
         file = request.params['attachment']

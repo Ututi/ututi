@@ -772,41 +772,35 @@ class GroupController(BaseController, SubjectAddMixin, GroupWallMixin):
     @set_login_url_to_referrer
     @ActionProtector("member", "admin")
     def upload_file(self, group):
-        if group.has_file_area:
-            return self._upload_file(group)
+        return self._upload_file(group)
 
     @group_action
     @set_login_url_to_referrer
     @ActionProtector("member", "admin")
     def upload_file_short(self, group):
-        if group.has_file_area:
-            return self._upload_file_short(group)
+        return self._upload_file_short(group)
 
     @group_action
     @ActionProtector("member", "admin")
     def create_folder(self, group):
-        if group.has_file_area:
-            self._create_folder(group)
+        self._create_folder(group)
         redirect(request.referrer)
 
     @group_action
     @ActionProtector("admin")
     def delete_folder(self, group):
-        if group.has_file_area:
-            self._delete_folder(group)
+        self._delete_folder(group)
         redirect(request.referrer)
 
     @group_action
     @ActionProtector("member", "admin")
     def js_create_folder(self, group):
-        if group.has_file_area:
-            return self._create_folder(group)
+        return self._create_folder(group)
 
     @group_action
     @ActionProtector("admin")
     def js_delete_folder(self, group):
-        if group.has_file_area:
-            return self._delete_folder(group)
+        return self._delete_folder(group)
 
     def _getSubject(self):
         location_id = request.GET['subject_location_id']
