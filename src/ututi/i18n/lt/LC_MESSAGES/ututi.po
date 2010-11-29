@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-11-29 10:53+0200\n"
+"PO-Revision-Date: 2010-11-29 11:25+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -705,7 +705,7 @@ msgid "Invalid subject"
 msgstr "Netinkamas dalykas"
 
 msgid "Wiki page created."
-msgstr "Wiki puslapis sukurtas"
+msgstr "Wiki užrašai sukurti"
 
 msgid "Your wall settings have been updated."
 msgstr "Tavo sienos nustatymai pakeisti"
@@ -1172,9 +1172,9 @@ msgstr[2] "%(count)s <span class=\"a11y\">failų</span>"
 #, python-format
 msgid "%(count)s <span class=\"a11y\">wiki page</span>"
 msgid_plural "%(count)s <span class=\"a11y\">wiki pages</span>"
-msgstr[0] "%(count)s <span class=\"a11y\">wiki puslapis</span>"
-msgstr[1] "%(count)s <span class=\"a11y\">wiki puslapiai</span>"
-msgstr[2] "%(count)s <span class=\"a11y\">wiki puslapių</span>"
+msgstr[0] "%(count)s <span class=\"a11y\">wiki užrašas</span>"
+msgstr[1] "%(count)s <span class=\"a11y\">wiki užrašai</span>"
+msgstr[2] "%(count)s <span class=\"a11y\">wiki užrašų</span>"
 
 msgid "Watched by:"
 msgstr "Stebi:"
@@ -1415,7 +1415,7 @@ msgid ""
 msgstr ""
 "Tai tavo akademinės grupės ir studijų dalykai, kuriuose\n"
 "gali laikyti su jais susiijusią medžiagą: kelti failus,\n"
-"kurti wiki puslapius, aprašyti dalyką."
+"kurti wiki užrašus, aprašyti dalyką."
 
 msgid "All these things are combined in the handy Ututi system."
 msgstr "Visi šie dalykai yra sujungti į patogią Ututi sistemą."
@@ -3754,7 +3754,7 @@ msgid "Files:"
 msgstr "Failų: "
 
 msgid "Wiki pages:"
-msgstr "Wiki puslapių:"
+msgstr "Wiki užrašų:"
 
 msgid ""
 "Ututi is Your university online. Here You and Your class mates can create"
@@ -3878,16 +3878,16 @@ msgid "File uploads"
 msgstr "Failų įkėlimai"
 
 msgid "Changes in wiki pages"
-msgstr "Wiki puslapių pokyčiai"
+msgstr "Wiki užrašų pokyčiai"
 
 msgid "New subjects"
 msgstr "Nauji dalykai"
 
 msgid "New wiki pages"
-msgstr "Nauji wiki puslapiai"
+msgstr "Nauji wiki užrašai"
 
 msgid "Page changes"
-msgstr "Wiki puslapių pokyčiai"
+msgstr "Wiki užrašų pakeitimai"
 
 msgid "Watched group subjects"
 msgstr "Grupių stebimi dalykai"
@@ -4091,7 +4091,7 @@ msgid "upload a file"
 msgstr "įkelk failą"
 
 msgid "create a wiki page"
-msgstr "sukurk wiki puslapį"
+msgstr "sukurk wiki užrašus"
 
 msgid "Group or user:"
 msgstr "Grupė arba narys:"
@@ -4202,7 +4202,7 @@ msgstr "Grupė %(group_link)s nebestebi dalyko %(subject_link)s."
 msgid ""
 "%(user_link)s has created a page %(page_link)s in the subject "
 "%(subject_link)s."
-msgstr "%(user_link)s sukūrė wiki puslapį %(page_link)s dalyke %(subject_link)s."
+msgstr "%(user_link)s sukūrė wiki užrašus %(page_link)s dalyke %(subject_link)s."
 
 #, python-format
 msgid ""
@@ -4274,7 +4274,7 @@ msgid "Where do I start?"
 msgstr "Kur pradėti?"
 
 msgid "Create wiki pages for a subject"
-msgstr "Kurti wiki puslapius dalykui"
+msgstr "Kurti wiki užrašus dalykui"
 
 msgid ""
 "Collecting course notes in Word? Writing things down on a computer during"
@@ -4287,7 +4287,7 @@ msgstr ""
 "studijuojantys šį dalyką."
 
 msgid "Create a wiki document"
-msgstr "Sukurk wiki dokumentą"
+msgstr "Sukurk wiki užrašus"
 
 msgid "Upload course files"
 msgstr "Siųsti dalyko failus"
@@ -4354,16 +4354,16 @@ msgid "Subject files"
 msgstr "Dalyko failai"
 
 msgid "Subject's Wiki Pages"
-msgstr "Dalyko wiki puslapiai"
+msgstr "Dalyko wiki užrašai"
 
 msgid "The subject has no pages yet - create one!"
 msgstr "Dalykas dar neturi puslapių - sukurkite!"
 
 msgid "Create wiki documents"
-msgstr "Kurti wiki dokumentus"
+msgstr "Kurti wiki užrašus"
 
 msgid "What can be a wiki document?"
-msgstr "Kas gali būti wiki dokumentu?"
+msgstr "Kas gali būti wiki užrašais?"
 
 msgid "Shared course notes"
 msgstr "Bendri konspektai"
