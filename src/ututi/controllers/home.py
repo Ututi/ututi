@@ -243,6 +243,8 @@ class HomeController(UniversityListMixin, FederationMixin):
                       '',
                       'User-agent: Googlebot',
                       'Disallow: /passwords',
+                      'Disallow: /news/hourly',
+                      'Disallow: /news/weekly',
                       'Allow: /']
             return '\n'.join(robots)
 
