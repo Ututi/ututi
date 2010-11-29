@@ -100,7 +100,7 @@ $(document).ready(function() {
 
     /* File upload actions.
      */
-    if ($("#file_upload_block").length > 0) {
+    if ($("#upload_file_block").length > 0) {
 
         file_upload_url = $("#file-upload-url").val();
         $('#file_upload_submit').click(function(){return false;});
