@@ -100,48 +100,52 @@ $(document).ready(function() {
 
     /* File upload actions.
      */
-    file_upload_url = $("#file-upload-url").val();
-    $('#file_upload_submit').click(function(){return false;});
-    var file_upload = new AjaxUpload($('#file_upload_submit'),
-        {action: file_upload_url,
-         name: 'attachment',
-         data: {folder: '', target_id: $('#file_rcpt_id').val()},
-         onSubmit: function(file, ext, iframe){
-             iframe['progress_indicator'] = $(document.createElement('div'));
-             $('#upload_file_block').append(iframe['progress_indicator']);
-             iframe['progress_indicator'].text(file);
-             iframe['progress_ticker'] = $(document.createElement('span'));
-             iframe['progress_ticker'].appendTo(iframe['progress_indicator']).text(' Uploading');
-             var progress_ticker = iframe['progress_ticker'];
-             var interval;
+    if ($("#file_upload_block").length > 0) {
 
-             // Uploding -> Uploading. -- Uploading...
-             interval = window.setInterval(function(){
-                 var text = progress_ticker.text();
-                 if (text.length < 13){
-                     progress_ticker.text(text + '.');
+        file_upload_url = $("#file-upload-url").val();
+        $('#file_upload_submit').click(function(){return false;});
+        var file_upload = new AjaxUpload($('#file_upload_submit'),
+            {action: file_upload_url,
+             name: 'attachment',
+             data: {folder: '', target_id: $('#file_rcpt_id').val()},
+             onSubmit: function(file, ext, iframe){
+                 iframe['progress_indicator'] = $(document.createElement('div'));
+                 $('#upload_file_block').append(iframe['progress_indicator']);
+                 iframe['progress_indicator'].text(file);
+                 iframe['progress_ticker'] = $(document.createElement('span'));
+                 iframe['progress_ticker'].appendTo(iframe['progress_indicator']).text(' Uploading');
+                 var progress_ticker = iframe['progress_ticker'];
+                 var interval;
+
+                 // Uploding -> Uploading. -- Uploading...
+                 interval = window.setInterval(function(){
+                     var text = progress_ticker.text();
+                     if (text.length < 13){
+                         progress_ticker.text(text + '.');
+                     } else {
+                         progress_ticker.text('Uploading');
+                     }
+                 }, 200);
+                 iframe['interval'] = interval;
+             },
+             onComplete: function(file, response, iframe){
+                 if (response != 'UPLOAD_FAILED') {
+                     iframe['progress_indicator'].remove();
+                     $('#file_upload_form').find('input, textarea').val('');
+                     $('#upload_file').click();
+                     $('#upload_file_block').removeClass('upload-failed');
+                     reload_wall();
                  } else {
-                     progress_ticker.text('Uploading');
+                     $('#upload_file_block').addClass('upload-failed');
                  }
-             }, 200);
-             iframe['interval'] = interval;
-         },
-         onComplete: function(file, response, iframe){
-             if (response != 'UPLOAD_FAILED') {
-                 iframe['progress_indicator'].remove();
-                 $('#file_upload_form').find('input, textarea').val('');
-                 $('#upload_file').click();
-                 $('#upload_file_block').removeClass('upload-failed');
-                 reload_wall();
-             } else {
-                 $('#upload_file_block').addClass('upload-failed');
+                 window.clearInterval(iframe['interval']);
              }
-             window.clearInterval(iframe['interval']);
-         }
+            });
+        $('#file_rcpt_id').change(function(){
+            file_upload.setData({folder: '', target_id: $(this).val()});
         });
-    $('#file_rcpt_id').change(function(){
-        file_upload.setData({folder: '', target_id: $(this).val()});
-    });
+
+    }
 
     /* Create wiki actions.
      */

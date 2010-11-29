@@ -9,15 +9,6 @@
   ${h.javascript_link('/javascript/ckeditor/ckeditor.js')}
 </%def>
 
-<%def name="action_block()">
-  <%base:rounded_block id="dashboard_actions">
-  <div class="tip">${_('Share with others')}</div>
-  <a class="action" id="send_message" href="#send-message">${_('send a message')}</a>
-  <a class="action" id="upload_file" href="#upload-file">${_('upload a file')}</a>
-  <a class="action" id="create_wiki" href="#create-wiki">${_('create a wiki page')}</a>
-  </%base:rounded_block>
-</%def>
-
 <%def name="send_message_block(msg_recipients)">
   <%base:rounded_block id="send_message_block" class_="dashboard_action_block">
     <a name="send-message"></a>
@@ -100,14 +91,37 @@
 
 <%def name="dashboard(msg_recipients, file_recipients, wiki_recipients)">
 
-  ${self.action_block()}
+  <%
+  show_messages = True
+  show_files = bool(len(file_recipients))
+  show_wiki = bool(len(wiki_recipients))
+  %>
+
+  <%base:rounded_block id="dashboard_actions">
+  <div class="tip">${_('Share with others')}</div>
+  % if show_messages:
+  <a class="action" id="send_message" href="#send-message">${_('send a message')}</a>
+  % endif
+  % if show_files:
+  <a class="action" id="upload_file" href="#upload-file">${_('upload a file')}</a>
+  % endif
+  % if show_wiki:
+  <a class="action" id="create_wiki" href="#create-wiki">${_('create a wiki page')}</a>
+  % endif
+  </%base:rounded_block>
 
   ${self.wall_reload_url()}
 
   <div id="dashboard_action_blocks">
+    % if show_messages:
     ${self.send_message_block(msg_recipients)}
+    % endif
+    % if show_files:
     ${self.upload_file_block(file_recipients)}
+    % endif
+    % if show_wiki:
     ${self.create_wiki_block(wiki_recipients)}
+    % endif
   </div>
 
 </%def>
