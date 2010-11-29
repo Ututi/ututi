@@ -1154,7 +1154,7 @@ group_whitelist_table = None
 class GroupWhitelistItem(object):
     """Group mailing list whitelist item"""
 
-    not_invited_to_group = True
+    not_invited_to_group = False
 
     def __init__(self, group, email):
         self.group = group
