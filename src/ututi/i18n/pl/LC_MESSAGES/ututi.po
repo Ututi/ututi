@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-11-15 14:28+0200\n"
+"PO-Revision-Date: 2010-11-29 10:53+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -30,6 +30,30 @@ msgstr "Aktualizacja wątku na blogu."
 msgid "Please enter a number"
 msgstr "Proszę podać numer"
 
+msgid "Specify correct science type."
+msgstr ""
+
+msgid "Specify correct book department."
+msgstr ""
+
+msgid "Specify correct location."
+msgstr ""
+
+msgid "Specify book type."
+msgstr ""
+
+msgid "Specify science type."
+msgstr ""
+
+msgid "Wrong science type specified."
+msgstr ""
+
+msgid "Specify city."
+msgstr ""
+
+msgid "Please specify school grade"
+msgstr ""
+
 msgid "Book was added succesfully"
 msgstr "Książka została dodana"
 
@@ -39,14 +63,14 @@ msgstr "Tylko właściciel tej książki można wykonać wybraną czynność"
 msgid "Book was updated succesfully"
 msgstr "Książka została zaktualizowana"
 
+msgid "You don't have rights to make this action"
+msgstr ""
+
 #, python-format
 msgid ""
 "Document at %(url)s was not found, but maybe you are interested in "
 "something else?"
 msgstr "Dokument %(url)s nie został odnaleziony. Może interesuje Cię coś innego?"
-
-msgid "guest"
-msgstr "gość"
 
 msgid ""
 "Monkeys are ashamed of what you said and are now working even harder to "
@@ -68,6 +92,70 @@ msgstr ""
 
 msgid "Error message"
 msgstr "Komunikat o błędzie "
+
+msgid "You must agree to the terms of use."
+msgstr "Musisz zaakceptować regulamin."
+
+msgid "Please enter your name to register."
+msgstr "Podaj własną nazwę użytkownika."
+
+msgid "This Google account is already linked to another Ututi account."
+msgstr "Ten profil Google już jest połączony z innym profilem na Ututi."
+
+msgid "Your Google account has been associated with your Ututi account."
+msgstr "Twoje konto Google zostało zintegrowane z profilem Ututi."
+
+msgid "This Facebook account is already linked to another Ututi account."
+msgstr ""
+"Ten profil  Facebook już jest połączony z profilem innego użytkownika "
+"Ututi."
+
+msgid "Your Facebook account has been associated with your Ututi account."
+msgstr "Twój profil na Facebooku został zintegrowany z profilem Ututi."
+
+msgid "Authentication failed, please try again."
+msgstr "Nieudana weryfikacja, spróbuj jeszcze raz"
+
+msgid "Linked to Google account."
+msgstr "Połączony z profilem Google."
+
+#, python-format
+msgid "Verification of %s failed: %s"
+msgstr "Weryfikacja %s niepowieodła się: %s"
+
+msgid "Verification cancelled"
+msgstr "Weryfikacja odrzucona"
+
+#, python-format
+msgid "<a href=%s>Setup needed</a>"
+msgstr "<a href=%s> Potrzebne ustawienia</a>"
+
+msgid "Setup needed"
+msgstr "Wymagane ustawienia"
+
+#, python-format
+msgid "Authentication failed: %s"
+msgstr "Weryfikacja nie powiodła się: %s"
+
+msgid "Wrong username or password!"
+msgstr "Niepoprawny login lub hasło!"
+
+msgid "Facebook did not provide your email address."
+msgstr "Facebook nie daje Ci adresu e-mail."
+
+#, python-format
+msgid "Your Google account \"%s\" has been linked to your existing Ututi account."
+msgstr ""
+"Twoje konto Google \"%s\" zostało zintegrowane z już istniejącym profilem"
+" Ututi. "
+
+#, python-format
+msgid ""
+"Your Facebook account \"%s\" has been linked to your existing Ututi "
+"account."
+msgstr ""
+"Twoje konto na Facebooku \"%s\" zostało zintegrowane z już istniejącym "
+"profilem Ututi. "
 
 msgid "Files"
 msgstr "Pliki"
@@ -139,18 +227,6 @@ msgstr "Forum grupy zostało wyłączone. Skorzystaj z listy mailingowej."
 msgid "Reply sent"
 msgstr "Odpowiedz wysłana"
 
-msgid "Community"
-msgstr "Wspólnota"
-
-msgid "Bugs"
-msgstr "Bugi"
-
-msgid "ututi-community"
-msgstr "wspólnota - Ututi"
-
-msgid "ututi-bugs"
-msgstr "Ututi blędy"
-
 msgid "Post updated."
 msgstr "Post został zaktualizowany"
 
@@ -180,10 +256,6 @@ msgstr "Takie ID już istnieje. Wybierz inne."
 msgid "Id cannot be used as an email address."
 msgstr "ID nie może być wykorzystywane jako adres e-mail"
 
-#, python-format
-msgid "Bad file type, only files of the types '%(allowed)s' are supported."
-msgstr "Niewłaściwy rodzaj pliku. Dozwolone formaty:'%(allowed)s'"
-
 msgid "Please enter a title."
 msgstr "Podaj tytuł"
 
@@ -210,6 +282,14 @@ msgstr "Użytkownicy"
 
 msgid "Page"
 msgstr "Strona"
+
+#, python-format
+msgid "Group: %s"
+msgstr "Grupa %s"
+
+#, python-format
+msgid "Subject: %s"
+msgstr "Przedmiot: %s"
 
 msgid "You have to log in or register to request group membership."
 msgstr "Aby dołączyć do grupy musisz zalogować się lub zarejestrować."
@@ -346,12 +426,6 @@ msgstr "Hasło powinno zawierać przynajmniej 5 symboli."
 msgid "Passwords do not match."
 msgstr "Wprowadzone przez Ciebie hasła są różne."
 
-msgid "You must agree to the terms of use."
-msgstr "Musisz zaakceptować regulamin."
-
-msgid "Please enter your name to register."
-msgstr "Podaj własną nazwę użytkownika."
-
 msgid "This email has already been used to register."
 msgstr "Ten email już jest w naszej bazie danych."
 
@@ -402,9 +476,6 @@ msgid ""
 " register first."
 msgstr "Po raz pierwszy na <a href=\"%(url)s\">Ututi</a>? Zaloguj się."
 
-msgid "Wrong username or password!"
-msgstr "Niepoprawny login lub hasło!"
-
 msgid ""
 "You seem to have entered your username and password wrong, please try "
 "again!"
@@ -433,61 +504,6 @@ msgid ""
 "Only registered users can become members of a group, please register "
 "first."
 msgstr "Tylko zarejestrowani użytkownicy mogą dołączyć do grupy. Zaloguj się."
-
-msgid "This Google account is already linked to another Ututi account."
-msgstr "Ten profil Google już jest połączony z innym profilem na Ututi."
-
-msgid "Your Google account has been associated with your Ututi account."
-msgstr "Twoje konto Google zostało zintegrowane z profilem Ututi."
-
-msgid "This Facebook account is already linked to another Ututi account."
-msgstr ""
-"Ten profil  Facebook już jest połączony z profilem innego użytkownika "
-"Ututi."
-
-msgid "Your Facebook account has been associated with your Ututi account."
-msgstr "Twój profil na Facebooku został zintegrowany z profilem Ututi."
-
-msgid "Authentication failed, please try again."
-msgstr "Nieudana weryfikacja, spróbuj jeszcze raz"
-
-msgid "Facebook did not provide your email address."
-msgstr "Facebook nie daje Ci adresu e-mail."
-
-#, python-format
-msgid "Your Google account \"%s\" has been linked to your existing Ututi account."
-msgstr ""
-"Twoje konto Google \"%s\" zostało zintegrowane z już istniejącym profilem"
-" Ututi. "
-
-#, python-format
-msgid ""
-"Your Facebook account \"%s\" has been linked to your existing Ututi "
-"account."
-msgstr ""
-"Twoje konto na Facebooku \"%s\" zostało zintegrowane z już istniejącym "
-"profilem Ututi. "
-
-msgid "Linked to Google account."
-msgstr "Połączony z profilem Google."
-
-#, python-format
-msgid "Verification of %s failed: %s"
-msgstr "Weryfikacja %s niepowieodła się: %s"
-
-msgid "Verification cancelled"
-msgstr "Weryfikacja odrzucona"
-
-#, python-format
-msgid "<a href=%s>Setup needed</a>"
-msgstr "<a href=%s> Potrzebne ustawienia</a>"
-
-msgid "Setup needed"
-msgstr "Wymagane ustawienia"
-
-#, python-format
-msgid "Authentication failed: %s"
-msgstr "Weryfikacja nie powiodła się: %s"
 
 msgid "Password recovery email sent. Please check your inbox."
 msgstr ""
@@ -527,6 +543,22 @@ msgstr "Lista mailingowa tej grupy została wyłączona. Skorzystaj z forum."
 msgid "Your message to the group was successfully sent."
 msgstr "Twoja wiadomość do grupy została pomyślnie wysłana."
 
+#, python-format
+msgid "Message %(link_to_message)s has been approved."
+msgstr ""
+
+#, python-format
+msgid "Could not approve %(link_to_message)s as it was already approved."
+msgstr ""
+
+#, python-format
+msgid "Message %(link_to_message)s has been rejected."
+msgstr ""
+
+#, python-format
+msgid "Could not reject %(link_to_message)s as it was already approved."
+msgstr ""
+
 msgid "Message sent."
 msgstr "Wiadomość wysłana"
 
@@ -551,6 +583,13 @@ msgstr[2] "%(page_count)d nowych notatek"
 #, python-format
 msgid "Ututi news: %(file_changes)s and %(page_changes)s"
 msgstr "Nowe na Ututi: %(file_changes)s i %(page_changes)s"
+
+#, python-format
+msgid "%(message_count)d new message awaiting moderation"
+msgid_plural "%(message_count)d new messages awaiting moderation"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #, python-format
 msgid "The private space subscription for \"%s\" is about to expire"
@@ -686,20 +725,12 @@ msgid "Your wall settings have been updated."
 msgstr "Ustawienia (strony)  zostały zaktualizowane."
 
 #, python-format
-msgid "Group: %s"
-msgstr "Grupa %s"
-
-#, python-format
 msgid "Member: %s (%s)"
 msgstr "Użytkownik: %s (%s)"
 
 #, python-format
 msgid "Member: %s"
 msgstr "Użytkownik: %s"
-
-#, python-format
-msgid "Subject: %s"
-msgstr "Przedmiot: %s"
 
 msgid "Confirm the email for Ututi"
 msgstr "Zaakceptuj e-mail Ututi"
@@ -718,6 +749,18 @@ msgstr "Potwierdzenie przyjęcia do ututi grupy "
 
 msgid "Group space bought"
 msgstr "Przestrzeń kupiona przez grupę"
+
+msgid "Community"
+msgstr "Wspólnota"
+
+msgid "Bugs"
+msgstr "Bugi"
+
+msgid "ututi-community"
+msgstr "wspólnota - Ututi"
+
+msgid "ututi-bugs"
+msgstr "Ututi blędy"
 
 msgid "To confirm your gadu gadu enter this code in your profile page."
 msgstr ""
@@ -809,35 +852,15 @@ msgstr "Wprowadź aktualny e-mail."
 msgid "Id does not reference a group or a subject."
 msgstr "Id nie odnosi się ani do grupy, ani do przedmiotu."
 
+#, python-format
+msgid "Bad file type, only files of the types '%(allowed)s' are supported."
+msgstr "Niewłaściwy rodzaj pliku. Dozwolone formaty:'%(allowed)s'"
+
 msgid "Such coupon code already exists, choose a different one."
 msgstr "Taki kod już istnieje, wybierz inny."
 
 msgid "Such a coupon code does not exist."
 msgstr "Taki kod nie istnieje."
-
-msgid "Admin"
-msgstr "Admin"
-
-msgid "Distinguished moderator"
-msgstr "Znakomity moderator"
-
-msgid "Champion"
-msgstr "Mistrz"
-
-msgid "Distinguished user"
-msgstr "Wyróżniający się użytkownik"
-
-msgid "Gold sponsor"
-msgstr "Złoty sponsor"
-
-msgid "Sponsor"
-msgstr "Sponsor"
-
-msgid "Moderator"
-msgstr "Moderator"
-
-msgid "Group admin"
-msgstr "Administrator grupy"
 
 #, python-format
 msgid "unlimited group private files for %(day_count)d day"
@@ -965,6 +988,34 @@ msgstr ""
 "mailingowej %(link_to_group)s"
 
 #, python-format
+msgid ""
+"There is %(number_of_messages)d message in the moderation queue "
+"(%(moderation_queue_link)s)"
+msgid_plural ""
+"There are %(number_of_messages)d messages in the moderation queue "
+"(%(moderation_queue_link)s)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, python-format
+msgid ""
+"There is %(number_of_messages)d message waiting in the <a "
+"href=\"%(moderation_queue_link)s\">moderation queue</a>"
+msgid_plural ""
+"There are %(number_of_messages)d waiting in the <a "
+"href=\"%(moderation_queue_link)s\">moderation queue</a>"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, python-format
+msgid ""
+"New email post %(link_to_message)s was posted in %(link_to_group)s "
+"moderation queue"
+msgstr ""
+
+#, python-format
 msgid "New forum post %(link_to_message)s posted on %(link_to_group)s forums"
 msgstr ""
 "Nowy post %(link_to_message)s  został zamieszczony na forum "
@@ -998,6 +1049,30 @@ msgstr "Grupa %(link_to_group)s przestała obserwować przedmiot %(link_to_subje
 
 msgid "(no subject)"
 msgstr "(brak tematu)"
+
+msgid "Admin"
+msgstr "Admin"
+
+msgid "Distinguished moderator"
+msgstr "Znakomity moderator"
+
+msgid "Champion"
+msgstr "Mistrz"
+
+msgid "Distinguished user"
+msgstr "Wyróżniający się użytkownik"
+
+msgid "Gold sponsor"
+msgstr "Złoty sponsor"
+
+msgid "Sponsor"
+msgstr "Sponsor"
+
+msgid "Moderator"
+msgstr "Moderator"
+
+msgid "Group admin"
+msgstr "Administrator grupy"
 
 msgid ""
 "You do not have the rights to see this page, or perform this action. Go "
@@ -1750,6 +1825,31 @@ msgstr[0] "znaleziono  %(count)s wydarzenie"
 msgstr[1] "znaleziono  %(count)s wydarzenia"
 msgstr[2] "znaleziono  %(count)s wydarzeń"
 
+msgid "Unverified teachers"
+msgstr ""
+
+#, python-format
+msgid "%(count)s teacher"
+msgid_plural "%(count)s teachers"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "Fullname"
+msgstr ""
+
+msgid "University"
+msgstr "Uczelnia"
+
+msgid "Position"
+msgstr ""
+
+msgid "Confirm"
+msgstr "Zaakceptuj"
+
+msgid "Deny"
+msgstr "Odmów"
+
 msgid "Ututi users:"
 msgstr "Użytkownicy Ututi:"
 
@@ -1897,14 +1997,14 @@ msgstr "Wątki z bloga:"
 msgid "New entry"
 msgstr "Nowe odwiedziny"
 
-msgid "New book"
-msgstr "Nowa książka"
-
-msgid "back to catalog"
-msgstr "powrót do katalogu"
-
-msgid "Book Cover"
+msgid "Book cover"
 msgstr "Okładka książki"
+
+msgid "Phone"
+msgstr ""
+
+msgid "Delete logo"
+msgstr ""
 
 msgid "Author"
 msgstr "Autor"
@@ -1915,41 +2015,80 @@ msgstr "Krótki opis książki"
 msgid "Course"
 msgstr "Kurs (wiele znaczeń)"
 
+msgid "Price"
+msgstr "Cena"
+
 msgid "Show my phone number"
 msgstr "Pokaż mój numer telefonu"
 
-msgid "Price"
-msgstr "Cena"
+msgid "Book type"
+msgstr ""
+
+msgid "back to catalog"
+msgstr "powrót do katalogu"
+
+msgid "New book"
+msgstr "Nowa książka"
 
 msgid "About U-Books"
 msgstr "O U-Books"
 
+msgid "Catalog"
+msgstr ""
+
 msgid "Upload a Book"
 msgstr " Dodaj książkę"
 
-msgid "Location"
-msgstr "Lokalizacja / położenie"
+msgid "My books"
+msgstr ""
+
+msgid "Order by"
+msgstr ""
+
+msgid "Universities"
+msgstr ""
+
+msgid "Edit book"
+msgstr ""
 
 msgid "free"
 msgstr "wolny"
 
+msgid "national_currency"
+msgstr "krajowa_waluta"
+
 msgid "more"
 msgstr "więcej"
+
+msgid "U-Books - what's that?"
+msgstr ""
+
+msgid "Add book"
+msgstr ""
+
+msgid "It's school books exchange / selling place."
+msgstr ""
+
+msgid "It's place where you can get cheap stydy book."
+msgstr ""
+
+msgid "It's place where you find new owner for you old good textbook."
+msgstr ""
+
+msgid "Books added"
+msgstr ""
+
+msgid "You haven't added any books yet."
+msgstr ""
 
 msgid "Back to catalog"
 msgstr "Powrót do katalogu"
 
-msgid "Book cover"
-msgstr "Okładka książki"
+msgid "School"
+msgstr ""
 
-msgid "Book year"
-msgstr "Rok wydania"
-
-msgid "Publisher"
-msgstr "Wydawca"
-
-msgid "national_currency"
-msgstr "krajowa_waluta"
+msgid "Owner information"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -2232,65 +2371,6 @@ msgstr "Usuń wątek"
 msgid "Reply"
 msgstr "Odpowiedź"
 
-msgid "New group"
-msgstr "Nowa grupa"
-
-msgid "Recommended groups from your university and faculty"
-msgstr "Polecane grupy z Twojej uczelni"
-
-msgid ""
-"Enter your university and faculty and you will be able to see groups that"
-" are already here. If you find your group, join them!"
-msgstr ""
-"Wprowadź nazwę swojej uczelni i wydziału i zobacz, jakie grupy z Twojej "
-"uczelni już zostały uworzone. Jeżeli Twoje grupy już tu są - dołącz!"
-
-msgid "Group settings"
-msgstr "Ustawienia grupy"
-
-msgid "Member invitations"
-msgstr "Zaproszenia"
-
-msgid "Create your Ututi group and start sharing!"
-msgstr "Utwórz własną grupę na Ututi i zacznij się dzielić!"
-
-msgid ""
-"Create your group, invite your classmates and use the mailing list, "
-"upload private group files"
-msgstr ""
-"Utwórz swoją grupę, zaproś kolegów, korzystaj z listy mailingowej, "
-"zamieszczaj dokumenty grupy"
-
-msgid "Group title"
-msgstr "Nazwa grupy"
-
-msgid "Group email address"
-msgstr "E-mail grupy"
-
-msgid "Your group's email address at Ututi"
-msgstr "E-mail Twojej grupy na Ututi"
-
-msgid "Year"
-msgstr "Rok rozpoczęcia nauki"
-
-msgid "Select the year"
-msgstr "Wybierz rok"
-
-msgid "Group logo"
-msgstr "Logo grupy"
-
-msgid "Moderators"
-msgstr "Moderatorzy"
-
-msgid "Continue"
-msgstr "Kontynuuj"
-
-msgid "Recommended groups"
-msgstr "Poelcane grupy"
-
-msgid "No groups found"
-msgstr "Nie znaleziono żadnej grupy"
-
 msgid "New subject"
 msgstr "Nowy przedmiot"
 
@@ -2363,6 +2443,12 @@ msgstr "Nowa grupa akademicka"
 msgid "Create an academic group"
 msgstr "Utwóórz grupę akademicką"
 
+msgid "Continue"
+msgstr "Kontynuuj"
+
+msgid "Recommended groups"
+msgstr "Poelcane grupy"
+
 msgid "Enter your university and department"
 msgstr "Wprowadź swoją uczelnię i wydział"
 
@@ -2371,6 +2457,12 @@ msgstr "Znajdź już istniejącą grupę"
 
 msgid "Join one"
 msgstr "Dołącz"
+
+msgid "Group settings"
+msgstr "Ustawienia grupy"
+
+msgid "Member invitations"
+msgstr "Zaproszenia"
 
 msgid " is invalid."
 msgstr "jest nieaktywny."
@@ -2383,6 +2475,15 @@ msgstr "Kupon jest ważny!"
 
 msgid "Coupon code is invalid."
 msgstr "Kupon jest nieważny."
+
+msgid "Group title"
+msgstr "Nazwa grupy"
+
+msgid "Year"
+msgstr "Rok rozpoczęcia nauki"
+
+msgid "Select the year"
+msgstr "Wybierz rok"
 
 msgid "Group address on the web"
 msgstr "Adres grupy na stronie"
@@ -2399,23 +2500,27 @@ msgstr "Grupy mogą obserwować zmiany w przedmiotach"
 msgid "Group has a file storage area"
 msgstr "Grupy mają miejsce do gromadzenia plików"
 
+msgid "Group logo"
+msgstr "Logo grupy"
+
 msgid "Forum type"
 msgstr "Rodzaj forum"
 
 msgid ""
 "<p>In an e-mail conference all messages, sent to the group's address will"
-" be forwarded to all members.</p>                   <p>In a forum there "
-"is the posibility to create subforums, and subscribed members get e-mail "
-"notifications about new messages, not the messages themselves.</p>"
+" be forwarded to all members.</p><p>In a forum there is the posibility to"
+" create subforums, and subscribed members get e-mail notificationsabout "
+"new messages, not the messages themselves.</p>"
 msgstr ""
-"<p>W konferencji e-mail wszystkie wiadomości, wysyłane na adres grupy "
-"zostaną przekazane do wszystkich członków.</p>                   <p>W "
-"forum jest możliwości stworzenia subfora, i użytkownicy subskrybujący "
-"otrzymują e-mail z powiadomieniem o nowych wiadomościach, a nie same "
-"wiadomości.</p>"
+
+msgid "Moderators"
+msgstr "Moderatorzy"
 
 msgid "join"
 msgstr "dołącz"
+
+msgid "No groups found"
+msgstr "Nie znaleziono żadnej grupy"
 
 msgid "Access settings"
 msgstr "Ustawienia dostępu"
@@ -2435,8 +2540,8 @@ msgstr "Widoczność forum i listy mailingowej grupy"
 msgid "Public"
 msgstr "Publiczne"
 
-msgid "Members only"
-msgstr "Tylko członkowie"
+msgid "Visible only to members"
+msgstr ""
 
 msgid "Group page visibility"
 msgstr "Widoczność strony grupy"
@@ -2502,6 +2607,16 @@ msgstr "Usuń aktualne logo"
 msgid "Default group tab"
 msgstr "Podstawowy widok"
 
+msgid ""
+"This setting cannot be disabled, because the group is currently watching "
+"some subjects."
+msgstr ""
+
+msgid ""
+"This setting cannot be disabled, because the group is currently storing "
+"some private files."
+msgstr ""
+
 msgid "Tags"
 msgstr "Tagi"
 
@@ -2512,6 +2627,9 @@ msgid ""
 "If you select moderated, you can pick the people who you want to allow to"
 " post to the mailing list."
 msgstr ""
+
+msgid "Members only"
+msgstr "Tylko członkowie"
 
 msgid "Moderated"
 msgstr ""
@@ -2664,12 +2782,6 @@ msgstr "Odrzuć"
 msgid "Awaiting confirmation"
 msgstr "Czeka na potwierdzenie"
 
-msgid "Confirm"
-msgstr "Zaakceptuj"
-
-msgid "Deny"
-msgstr "Odmów"
-
 msgid "User"
 msgstr "Użytkownik"
 
@@ -2789,6 +2901,24 @@ msgstr "nigdy"
 
 msgid "Subject rating:"
 msgstr "Popularność przedmiotu:"
+
+msgid "Category"
+msgstr "Kategoria"
+
+msgid "Message subject:"
+msgstr ""
+
+msgid "Group or subject:"
+msgstr "Grupa lub przedmiot"
+
+msgid "Upload file"
+msgstr "Załaduj plik"
+
+msgid "File upload failed."
+msgstr "Plik nie został dodany."
+
+msgid "Subject:"
+msgstr "Temat"
 
 msgid "Go to the group's files"
 msgstr "Przejdź do plików grupy"
@@ -2945,11 +3075,63 @@ msgstr "Nie znalazłeś tego, czego szukałeś?"
 msgid "Create a new group"
 msgstr "Utwórz nową grupę"
 
+msgid ""
+"Create your group, invite your classmates and use the mailing list, "
+"upload private group files"
+msgstr ""
+"Utwórz swoją grupę, zaproś kolegów, korzystaj z listy mailingowej, "
+"zamieszczaj dokumenty grupy"
+
+msgid "Message approved"
+msgstr ""
+
+msgid "Message rejected"
+msgstr ""
+
+msgid "Message already approved"
+msgstr ""
+
+msgid "Working..."
+msgstr ""
+
+msgid ""
+"Error: could not reach server or this message was already moderated. "
+"Please try refreshing the page."
+msgstr ""
+
+msgid "Approve"
+msgstr ""
+
+msgid "Reject"
+msgstr "Odmów"
+
+msgid "Emails that are allowed to post to the mailing list of this group"
+msgstr ""
+
+msgid "Invite to group"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Moderation queue"
+msgstr ""
+
+msgid "No messages to be moderated yet."
+msgstr ""
+
 msgid "Group mail"
 msgstr "Poczta grupy"
 
+#, python-format
+msgid "Moderation queue (%(moderation_count)s)"
+msgstr ""
+
 msgid "No messages yet."
 msgstr "Brak wiadomości"
+
+msgid "Back to the moderation queue"
+msgstr ""
 
 msgid "Message to the group"
 msgstr "Wiadomość do grupy"
@@ -3451,42 +3633,6 @@ msgstr "Wpisz ponownie nowe hasło"
 msgid "What's new?"
 msgstr "Powiadomienia"
 
-msgid "Share with others"
-msgstr "Podziel się z innymi"
-
-msgid "send a message"
-msgstr "wyślij wiadomość"
-
-msgid "upload a file"
-msgstr "dodaj plik"
-
-msgid "create a wiki page"
-msgstr "utwórz wiki stronę"
-
-msgid "Group or user:"
-msgstr "Grupa lub użytkownik"
-
-msgid "Category"
-msgstr "Kategoria"
-
-msgid "Subject:"
-msgstr "Temat"
-
-msgid "Group or subject:"
-msgstr "Grupa lub przedmiot"
-
-msgid "Upload file"
-msgstr "Załaduj plik"
-
-msgid "File uploaded."
-msgstr "Pliki zostały zaktualizowane."
-
-msgid "File upload failed."
-msgstr "Plik nie został dodany."
-
-msgid "Wiki page created\\."
-msgstr "Utworzono wiki stronę"
-
 msgid ""
 "This is a list of all the recent events in the subjects you are watching "
 "and the groups you belong to."
@@ -3515,6 +3661,9 @@ msgstr "Szukaj według uczelni"
 
 msgid "Did not find the group you were looking for?"
 msgstr "Nie odnalazłeś grupy, której szukałeś?"
+
+msgid "New group"
+msgstr "Nowa grupa"
 
 msgid "Create your group!"
 msgstr "Utwórz Twoją grupę!"
@@ -3773,9 +3922,6 @@ msgstr "Regiony Polski"
 msgid "Were you looking for a university or department?"
 msgstr "Szukałeś uczelni lub wydziału?"
 
-msgid "detailed search"
-msgstr "wyszukiwanie szczegółowe"
-
 msgid "show-subjects"
 msgstr "przedmioty"
 
@@ -3812,6 +3958,12 @@ msgstr "Brak wyników."
 
 msgid "[DELETED]"
 msgstr "[USUNIĘTE]"
+
+msgid "The data"
+msgstr ""
+
+msgid "The actions"
+msgstr ""
 
 msgid "Uploading"
 msgstr "Dodaje"
@@ -3928,9 +4080,6 @@ msgid ""
 "become a member of this group?"
 msgstr "%(author)s zaprosił Cię do grupy %(group)s. Czy chcesz do niej dołączyć? "
 
-msgid "Reject"
-msgstr "Odmów"
-
 msgid "Accept"
 msgstr "Zaakceptuj"
 
@@ -3941,6 +4090,21 @@ msgid ""
 msgstr ""
 "%(user)s chcą dołączyć do grupy %(group)s. Czy chcesz ich przyjąć do "
 "grupy?"
+
+msgid "Share with others"
+msgstr "Podziel się z innymi"
+
+msgid "send a message"
+msgstr "wyślij wiadomość"
+
+msgid "upload a file"
+msgstr "dodaj plik"
+
+msgid "create a wiki page"
+msgstr "utwórz wiki stronę"
+
+msgid "Group or user:"
+msgstr "Grupa lub użytkownik"
 
 msgid "More"
 msgstr "Więcej"
@@ -3994,6 +4158,15 @@ msgid ""
 msgstr ""
 "%(user_link)s opublikował nową wiadomość %(message_link)s do grupy "
 "%(group_link)s."
+
+#, python-format
+msgid ""
+"%(user_link)s has posted a new message %(message_link)s to the group's "
+"%(group_link)s moderation queue."
+msgstr ""
+
+msgid "Moderate"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -4215,6 +4388,42 @@ msgstr "Prywatne notatki spisane podczas zajęć akademickich "
 msgid "Any text that you want to collaborate on with your classmates"
 msgstr "Dowolny tekst który chcesz opracować wspólnie z kolegami z grupy"
 
+msgid "2. School"
+msgstr ""
+
+msgid ""
+"Tell us where You teach, so that we can verify You. Additional schools "
+"can be added after registration."
+msgstr ""
+
+msgid "Register as a teacher"
+msgstr ""
+
+msgid "Be patient"
+msgstr ""
+
+msgid ""
+"After registering, You will need to be confirmed as a teacher by our "
+"administrators."
+msgstr ""
+
+msgid "University email"
+msgstr ""
+
+msgid ""
+"Specify your university email address - this will make it easier to "
+"verify You as a teacher."
+msgstr ""
+
+msgid "Several universities?"
+msgstr ""
+
+msgid ""
+"If You teach at more than one university, specify Your primary one: You "
+"will be able to specify Your information in more detail once You have "
+"registered."
+msgstr ""
+
 msgid "Member information"
 msgstr "O użytkowniku"
 
@@ -4308,13 +4517,10 @@ msgid "SMS credits"
 msgstr "Punkty SMS"
 
 msgid ""
-"One SMS credit allows you to send one SMS message to a single recipient. "
+"one SMS credit allows you to send one SMS message to a single recipient. "
 "When sending a message to a group, one credit is charged for every "
 "recipient."
 msgstr ""
-"Jeden punkt SMS umożliwia Ci wysłanie 1 wiadomości SMS do jednej osoby. "
-"Wysyłając wiadomość do grupy, za kazdego odbiorcę zostanie pobrany jeden "
-"punkt SMS."
 
 msgid "Send a message from your phone!"
 msgstr "Wyślij wiadomość ze swego telefonu!"
@@ -4339,9 +4545,6 @@ msgstr "Pełna nazwa"
 
 msgid "e.g. LKKA"
 msgstr "n.p. UWM"
-
-msgid "University"
-msgstr "Uczelnia"
 
 msgid "Department"
 msgstr "Wydział"

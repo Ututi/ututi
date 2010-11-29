@@ -246,8 +246,8 @@ Change the defaults to make sure the controls have an effect:
     >>> browser.getControl('Group has a file storage area').click()
 
     >>> browser.getControl('Anyone can join the group any time').click()
-    >>> browser.getControl('Members only', index=0).click()
-    >>> browser.getControl('Members only', index=1).click()
+    >>> browser.getControl('Visible only to members', index=0).click()
+    >>> browser.getControl('Visible only to members', index=1).click()
 
     >>> browser.getControl('Continue').click()
 

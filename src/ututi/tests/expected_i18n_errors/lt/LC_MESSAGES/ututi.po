@@ -1,4 +1,22 @@
 # (pofilter) xmltags: checks that XML/HTML tags have not been translated
+#, python-format
+msgid ""
+"There is %(number_of_messages)d message waiting in the <a "
+"href=\"%(moderation_queue_link)s\">moderation queue</a>"
+msgid_plural ""
+"There are %(number_of_messages)d waiting in the <a "
+"href=\"%(moderation_queue_link)s\">moderation queue</a>"
+msgstr[0] ""
+"<a href=\\\"%(moderation_queue_link)s\\\">Moderavimo eilėje</a> laukia "
+"%(number_of_messages)d žinutė."
+msgstr[1] ""
+"<a href=\\\"%(moderation_queue_link)s\\\">Moderavimo eilėje</a> laukia "
+"%(number_of_messages)d žinutės."
+msgstr[2] ""
+"<a href=\\\"%(moderation_queue_link)s\\\">Moderavimo eilėje</a> laukia "
+"%(number_of_messages)d žinučių."
+
+# (pofilter) xmltags: checks that XML/HTML tags have not been translated
 msgid ""
 "Calendaring. Read this <a href=\"http://blog.ututi.lt/2009/05/28"
 "/naudotoju-isradingumas/\">blog post</a> for more information."

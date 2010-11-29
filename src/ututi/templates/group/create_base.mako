@@ -375,7 +375,7 @@
     <span class="labelText">${_('Group forum and mailing list visibility')}</span>
     ${h.radio("forum_visibility", "public", label=_('Public'))}
     <br />
-    ${h.radio("forum_visibility", "members", label=_('Members only'))}
+    ${h.radio("forum_visibility", "members", label=_('Visible only to members'))}
 
   </label>
 
@@ -386,7 +386,7 @@
       </span>
     ${h.radio("page_visibility", "public", label=_('Public'))}
     <br />
-    ${h.radio("page_visibility", "members", label=_('Members only'))}
+    ${h.radio("page_visibility", "members", label=_('Visible only to members'))}
   </label>
 </%def>
 
