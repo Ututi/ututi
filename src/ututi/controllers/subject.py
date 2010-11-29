@@ -25,6 +25,14 @@ import ututi.lib.helpers as h
 
 log = logging.getLogger(__name__)
 
+
+def set_login_url_to_referrer(method):
+    def _set_login_url(self, subject):
+        c.login_form_url = request.referrer
+        return method(self, subject)
+    return _set_login_url
+
+
 def subject_menu_items():
     return [
         {'title': _("Files"),
@@ -248,11 +256,13 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
                     tags=subject.location_path))
 
     @subject_action
+    @set_login_url_to_referrer
     @ActionProtector("user")
     def upload_file(self, subject):
         return self._upload_file(subject)
 
     @subject_action
+    @set_login_url_to_referrer
     @ActionProtector("user")
     def upload_file_short(self, subject):
         return self._upload_file_short(subject)

@@ -50,6 +50,14 @@ def set_login_url(method):
         return method(self)
     return _set_login_url
 
+
+def set_login_url_to_referrer(method):
+    def _set_login_url(self, group):
+        c.login_form_url = request.referrer
+        return method(self, group)
+    return _set_login_url
+
+
 class GroupIdValidator(validators.FancyValidator):
     """A validator that makes sure the group id is unique."""
 
@@ -759,12 +767,14 @@ class GroupController(BaseController, SubjectAddMixin, GroupWallMixin):
         return render('group/invite.mako')
 
     @group_action
+    @set_login_url_to_referrer
     @ActionProtector("member", "admin")
     def upload_file(self, group):
         if group.has_file_area:
             return self._upload_file(group)
 
     @group_action
+    @set_login_url_to_referrer
     @ActionProtector("member", "admin")
     def upload_file_short(self, group):
         if group.has_file_area:
