@@ -4,6 +4,7 @@
 <%namespace file="/portlets/structure.mako" import="*"/>
 <%namespace file="/portlets/school.mako" import="*"/>
 <%namespace file="/location/base_university.mako" import="*"/>
+<%namespace file="/sections/content_snippets.mako" import="tabs"/>
 
 <%def name="portlets()">
 <div id="sidebar">

@@ -3,6 +3,7 @@
 <%namespace file="/search/index.mako" import="search_results"/>
 <%namespace file="/portlets/structure.mako" import="*"/>
 <%namespace file="/portlets/school.mako" import="*"/>
+<%namespace file="/sections/content_snippets.mako" import="tabs"/>
 <%namespace file="/anonymous_index/en.mako" import="universities_section"/>
 
 <%def name="title()">
@@ -18,17 +19,6 @@
   %endif
     <h1 class="pageTitle">${c.location.title}</h1>
   </div>
-</%def>
-
-<%def name="tabs()">
-<ul class="moduleMenu location_tabs" id="moduleMenu">
-    %for menu_item in c.structure_menu_items:
-      <li class="${'current' if menu_item['name'] == c.structure_menu_current_item else ''}">
-        <a href="${menu_item['link']}">${menu_item['title']}
-            <span class="edge"></span>
-        </a></li>
-    %endfor
-</ul>
 </%def>
 
 <%def name="portlets()">
