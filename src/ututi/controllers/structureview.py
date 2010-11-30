@@ -8,9 +8,6 @@ from pylons.i18n import _
 from pylons.templating import render_mako_def
 
 from ututi.model.events import Event
-from sqlalchemy.orm.query import aliased
-from sqlalchemy.sql.expression import and_
-from sqlalchemy.sql.expression import or_
 from sqlalchemy.sql.expression import desc
 
 import ututi.lib.helpers as h
@@ -18,7 +15,6 @@ from ututi.lib.base import render
 from ututi.lib.validators import LocationIdValidator, ShortTitleValidator, FileUploadTypeValidator, validate
 from ututi.model import Subject
 from ututi.model import Group
-from ututi.model import ContentItem
 from ututi.model import LocationTag, meta
 from ututi.controllers.home import UniversityListMixin
 from ututi.controllers.search import SearchSubmit, SearchBaseController
@@ -35,7 +31,7 @@ def location_action(method):
         c.security_context = location
         c.object_location = None
         c.location = location
-        c.structure_menu_items = structure_menu_items()
+        c.tabs = structure_menu_items()
         return method(self, location)
     return _location_action
 
@@ -88,7 +84,7 @@ class StructureviewController(SearchBaseController, UniversityListMixin):
     @location_action
     @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
     def index(self, location):
-        c.structure_menu_current_item = 'index'
+        c.current_tab = 'index'
         children = [child.id for child in location.flatten]
         subj_events = meta.Session.query(Event)\
             .join((Subject, Event.object_id == Subject.id))\
@@ -127,7 +123,7 @@ class StructureviewController(SearchBaseController, UniversityListMixin):
     @location_action
     @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
     def subjects(self, location):
-        c.structure_menu_current_item = 'subjects'
+        c.current_tab = 'subjects'
         self._breadcrumbs(location)
 
         self.form_result['tagsitem'] = location.hierarchy()
@@ -147,7 +143,7 @@ class StructureviewController(SearchBaseController, UniversityListMixin):
     @location_action
     @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
     def groups(self, location):
-        c.structure_menu_current_item = 'groups'
+        c.current_tab = 'groups'
         self._breadcrumbs(location)
 
         self.form_result['tagsitem'] = location.hierarchy()

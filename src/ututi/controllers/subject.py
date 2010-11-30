@@ -2,8 +2,6 @@ import logging
 from random import Random
 import string
 
-from datetime import datetime
-
 from formencode.variabledecode import NestedVariables
 from formencode.foreach import ForEach
 from formencode.compound import Pipe
@@ -66,7 +64,7 @@ def subject_action(method):
         c.object_location = subject.location
         c.subject = subject
         c.similar_subjects = find_similar_subjects(subject)
-        c.structure_menu_items = subject_menu_items()
+        c.tabs = subject_menu_items()
         return method(self, subject)
     return _subject_action
 
@@ -133,7 +131,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
 
     @subject_action
     def home(self, subject):
-        c.structure_menu_current_item = 'home'
+        c.current_tab = 'home'
         file_id = request.GET.get('serve_file')
         file = File.get(file_id)
         c.serve_file = file
@@ -143,7 +141,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
 
     @subject_action
     def pages(self, subject):
-        c.structure_menu_current_item = 'pages'
+        c.current_tab = 'pages'
         c.breadcrumbs = [{'link': subject.url(),
                           'title': subject.title}]
         if  not c.subject.n_files(False) and not c.subject.pages:

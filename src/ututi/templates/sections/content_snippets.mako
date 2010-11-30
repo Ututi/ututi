@@ -178,10 +178,10 @@
 </%def>
 
 <%def name="tabs()">
-<ul class="moduleMenu location_tabs" id="moduleMenu">
-    %for menu_item in c.structure_menu_items:
-      <li class="${'current' if menu_item['name'] == c.structure_menu_current_item else ''}">
-        <a href="${menu_item['link']}">${menu_item['title']}
+<ul class="moduleMenu tabs" id="moduleMenu">
+    %for tab in c.tabs:
+      <li class="${'current' if tab['name'] == c.default_tab else ''}">
+        <a href="${tab['link']}">${tab['title']}
             <span class="edge"></span>
         </a></li>
     %endfor

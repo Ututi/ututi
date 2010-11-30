@@ -17,7 +17,6 @@ from pylons.controllers.util import abort, redirect
 from pylons.i18n import _
 
 import ututi.lib.helpers as h
-from ututi.lib.base import BaseController
 from ututi.lib.base import render
 from ututi.lib.emails import email_confirmation_request
 from ututi.lib.search import search_query
@@ -138,22 +137,20 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
         return defaults
 
     def _edit_profile_form(self):
-        c.structure_menu_items = self._edit_tabs()
-        c.structure_menu_current_item = 'profile'
+        self._set_settings_tabs(current_tab='profile')
         return render('profile/edit_profile.mako')
 
     def _edit_contacts_form(self):
-        c.structure_menu_items = self._edit_tabs()
-        c.structure_menu_current_item = 'contacts'
+        self._set_settings_tabs(current_tab='contacts')
         return render('profile/edit_contacts.mako')
 
     def _edit_password_form(self):
-        c.structure_menu_items = self._edit_tabs()
-        c.structure_menu_current_item = 'password'
+        self._set_settings_tabs(current_tab='password')
         return render('profile/edit_password.mako')
 
-    def _edit_tabs(self):
-        return [
+    def _set_settings_tabs(self, current_tab):
+        c.current_tab = current_tab
+        c.tabs = [
             {'title': _("Personal information"),
              'name': 'profile',
              'link': url(controller='profile', action='edit')},
@@ -163,6 +160,11 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
             {'title': _("Change password"),
              'name': 'password',
              'link': url(controller='profile', action='edit_password')}]
+
+    @ActionProtector("user")
+    def edit(self):
+        return htmlfill.render(self._edit_profile_form(),
+                               defaults=self._edit_form_defaults())
 
     @ActionProtector("user")
     def edit_contacts(self):
@@ -438,11 +440,6 @@ class UserProfileController(ProfileControllerBase):
         c.action = 'home'
 
         return render('/profile/home.mako')
-
-    @ActionProtector("user")
-    def edit(self):
-        return htmlfill.render(self._edit_profile_form(),
-                               defaults=self._edit_form_defaults())
 
     @ActionProtector("user")
     def register_welcome(self):
