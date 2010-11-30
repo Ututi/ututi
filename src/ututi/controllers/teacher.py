@@ -23,6 +23,7 @@ from ututi.lib.validators import validate
 from ututi.lib.validators import UniqueEmail
 from ututi.lib.validators import TranslatedEmailValidator
 from ututi.lib.base import BaseController, render
+from ututi.lib import helpers as h
 from ututi.model import PendingInvitation
 from ututi.model import meta
 from ututi.model.users import User
@@ -99,7 +100,7 @@ class TeacherController(BaseController, FederationMixin):
             teacher_registered_email(teacher)
             email_confirmation_request(teacher, email)
             sign_in_user(teacher)
-
+            h.flash(_('All teacher tools will be available to You once our team confirms You as a teacher. Thank You!'))
             redirect(url(controller='profile', action='register_welcome'))
 
         return self._registration_form()
@@ -133,6 +134,7 @@ class TeacherController(BaseController, FederationMixin):
                 meta.Session.add(user)
                 meta.Session.commit()
                 teacher_registered_email(user)
+                h.flash(_('All teacher tools will be available to You once our team confirms You as a teacher. Thank You!'))
                 sign_in_user(user)
 
             kwargs = dict()

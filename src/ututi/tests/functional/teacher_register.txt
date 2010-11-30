@@ -20,6 +20,11 @@ let's type in that url:
     >>> browser.url
     'http://localhost/register/welcome'
 
+    >>> browser.printQuery("//div[@class='flash-message']//span/text()")
+    All teacher tools will be available to You once our team confirms You as a teacher. Thank You!
+    Your email (teacher@vu.lt) is not confirmed! Please confirm your email by clicking on the link sent to your address or
+
+
 Teacher gets a confirmation email so he could approve his
 registration. And the team gets a notification:
 
