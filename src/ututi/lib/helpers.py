@@ -529,14 +529,9 @@ def book_departments_select(label, book_departments, on_change=None):
 
 def list_for_select(objects_list, **kwargs):
     """Generates double array with object ids and names list"""
-    tuple_list = []
-    if not hasattr(kwargs, "value"):
-        kwargs['value'] = "id"
-    if not hasattr(kwargs, "label"):
-        kwargs['label'] = "name"
-    if not hasattr(kwargs, "no_blank"):
-        tuple_list.append(["", ""])
-
+    tuple_list = [("", "")]
+    kwargs['value'] = "id"
+    kwargs['label'] = "name"
     for object in objects_list:
-        tuple_list.append( [getattr(object, kwargs['value']), getattr(object, kwargs['label'])] )
+        tuple_list.append([object.id, object.name])
     return tuple_list
