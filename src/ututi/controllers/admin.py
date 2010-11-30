@@ -5,6 +5,7 @@ import logging
 import base64
 import datetime
 
+from sqlalchemy.sql.expression import or_
 from sqlalchemy.sql.expression import desc
 from sqlalchemy.sql.expression import not_
 from sqlalchemy import func
@@ -86,6 +87,12 @@ class NotificationForm(Schema):
     allow_extra_fields = True
     valid_until = DateConverter(not_empty=True)
     content = String(min=1)
+
+
+class TeacherSearchForm(Schema):
+    allow_extra_fields = True
+    user_id = Int(not_empty=False)
+    user_name = String(not_empty=False)
 
 
 class CityForm(Schema):
@@ -683,8 +690,21 @@ class AdminController(BaseController):
         redirect(url(controller="admin", action="book_types"))
 
     @ActionProtector("root")
+    @validate(schema=TeacherSearchForm, form='teachers')
     def teachers(self):
         c.teachers = meta.Session.query(Teacher).filter(Teacher.teacher_verified == False).all()
+        if hasattr(self, 'form_result'):
+            user_id = self.form_result.get('user_id', None)
+            user_name = self.form_result.get('user_name', None)
+            c.found_users = []
+            if user_id is not None or user_name is not None:
+                users = meta.Session.query(User).join(Email)
+                if user_id is not None:
+                    users = users.filter(User.id == user_id)
+                elif user_name is not None:
+                    users = users.filter(or_(User.fullname.ilike('%%%s%%' % user_name),
+                                             Email.email.ilike('%%%s%%' % user_name)))
+                c.found_users = users.all()
         return render('admin/teachers.mako')
 
     @ActionProtector("root")
@@ -703,6 +723,20 @@ class AdminController(BaseController):
             teacher_confirmed_email(teacher, False)
             conn.execute(upd)
             h.flash('Teacher rejected.')
+
+        redirect(url(controller="admin", action="teachers"))
+
+    @ActionProtector("root")
+    def teacher_convert(self, id):
+        teacher = meta.Session.query(User).filter(User.id == id).one()
+
+        from ututi.model import users_table
+        # a hack: cannot update a polymorphic descriptor column using the orm (rejecting a teacher is basically converting him into a user)
+        conn = meta.engine.connect()
+        upd = users_table.update().where(users_table.c.id==id).values(user_type='teacher', teacher_verified=True, teacher_position=None)
+        teacher_confirmed_email(teacher, True)
+        conn.execute(upd)
+        h.flash('User is now a teacher.')
 
         redirect(url(controller="admin", action="teachers"))
 

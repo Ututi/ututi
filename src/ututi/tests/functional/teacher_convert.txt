@@ -1,0 +1,41 @@
+Test converting users into teachers
+===================================
+
+    >>> browser = Browser.logIn()
+    >>> browser.open('http://localhost/admin')
+    >>> browser.getLink('Teachers').click()
+
+Find a user by his id:
+
+    >>> form = browser.getForm(id='user_search')
+    >>> form.getControl('User ID').value = '2'
+    >>> form.getControl('Find').click()
+    >>> browser.printQuery("id('teacher_list')//td[@class='name']//text()")
+    Alternative user
+
+And make him a teacher:
+
+    >>> browser.getControl('Make a teacher').click()
+
+He should receive and email:
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> print mail_queue.pop().payload()
+    Alternative user,
+    Your request to join Ututi as a teacher has been confirmed!
+    You may now visit your Ututi dashboard here: http://localhost/ .
+    At Ututi you will be able to::
+    - Create your own profile with all Your courses and materials.
+    - Easily publish Your lecture notes so that Your students can find and access them.
+    - Easily communicate with Your students.
+    The Ututi team
+
+Oh, we can also lookup users by their names:
+    >>> form = browser.getForm(id='user_search')
+    >>> form.getControl('User name').value = 'user'
+    >>> form.getControl('Find').click()
+    >>> browser.printQuery("id('teacher_list')//td[@class='name']//text()")
+    Alternative user
+    Second user
+    Third user
+
