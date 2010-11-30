@@ -18,7 +18,7 @@ $(document).ready(function() {
 
     /* Attach dashboard actions.
      */
-    $('#dashboard_actions a.action').click(function(){
+    $('#dashboard_actions a.action').filter(':not(.inactive)').click(function(){
         var id = $(this).attr('id');
         if ($(this).hasClass('open')) {
             $(this).removeClass('open');

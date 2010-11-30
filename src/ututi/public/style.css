@@ -53,6 +53,10 @@ a:hover {
     color: #ff7901;
     text-decoration: underline;
 }
+a.inactive:hover {
+    text-decoration: none;
+    color: inherit;
+}
 h1,h2,h3,h4,h5,h6 {
     font-family: Arial,Helvetica,sans-serif;
     font-weight: normal;
@@ -5101,6 +5105,10 @@ padding:3px 15px 0 30px;
 #dashboard_actions .action {
   margin-right: 15px;
 }
+#dashboard_actions .action.inactive {
+  color: #888;
+}
+
 #dashboard_actions #send_message {
   padding-left: 20px;
   background: url("../img/icons/message-off-very-small.png") left center no-repeat;

@@ -3,15 +3,16 @@
 </%doc>
 
 <%namespace name="base" file="/prebase.mako" import="rounded_block"/>
+<%namespace file="/sections/content_snippets.mako" import="tooltip" />
 
 <%def name="head_tags()">
   ${h.javascript_link('/javascript/dashboard.js')}
   ${h.javascript_link('/javascript/ckeditor/ckeditor.js')}
 </%def>
 
-<%def name="send_message_block(msg_recipients)">
+<%def name="send_message_block(msg_recipients, active=True)">
   <%base:rounded_block id="send_message_block" class_="dashboard_action_block">
-    <a name="send-message"></a>
+    <a class="${not active and 'inactive' or ''}" name="send-message"></a>
     <form method="POST" action="${url(controller='profile', action='send_message')}" id="message_form">
       <input id="message-rcpt-url" type="hidden" value="${url(controller='profile', action='message_rcpt_js')}" />
       <input id="message-send-url" type="hidden" value="${url(controller='profile', action='send_message_js')}" />
@@ -37,9 +38,9 @@
   </%base:rounded_block>
 </%def>
 
-<%def name="upload_file_block(file_recipients)">
+<%def name="upload_file_block(file_recipients, active=True)">
   <%base:rounded_block id="upload_file_block" class_="dashboard_action_block">
-    <a name="upload-file"></a>
+    <a class="${not active and 'inactive' or ''}" name="upload-file"></a>
     <form id="file_form">
       <input id="file-upload-url" type="hidden" value="${url(controller='profile', action='upload_file_js')}" />
       <div class="formField">
@@ -59,9 +60,9 @@
   </%base:rounded_block>
 </%def>
 
-<%def name="create_wiki_block(wiki_recipients)">
+<%def name="create_wiki_block(wiki_recipients, active=True)">
   <%base:rounded_block id="create_wiki_block" class_="dashboard_action_block">
-    <a name="create-wiki"></a>
+    <a class="${not active and 'inactive' or ''}" name="create-wiki"></a>
     <form method="POST" action="${url(controller='profile', action='create_wiki')}" id="wiki_form">
       <input id="create-wiki-url" type="hidden" value="${url(controller='profile', action='create_wiki_js')}" />
       <div class="formField">
@@ -99,29 +100,23 @@
 
   <%base:rounded_block id="dashboard_actions">
   <div class="tip">${_('Share with others')}</div>
-  % if show_messages:
-  <a class="action" id="send_message" href="#send-message">${_('send a message')}</a>
-  % endif
-  % if show_files:
-  <a class="action" id="upload_file" href="#upload-file">${_('upload a file')}</a>
-  % endif
-  % if show_wiki:
-  <a class="action" id="create_wiki" href="#create-wiki">${_('create a wiki page')}</a>
-  % endif
+  <a class="action ${not show_messages and 'inactive' or ''}" id="send_message" href="#send-message">${_('send a message')}</a>
+  %if not show_files:
+  ${tooltip(_('You need to be a member of a group or have subjects that you are studying to be able to quickly upload files.'))}
+  %endif
+  <a class="action ${not show_files and 'inactive' or ''}" id="upload_file" href="#upload-file">${_('upload a file')}</a>
+  %if not show_files:
+  ${tooltip(_('You or your group need to have subjects that you are studying to be able to quickly create wiki notes in them.'))}
+  %endif
+  <a class="action ${not show_wiki and 'inactive' or ''}" id="create_wiki" href="#create-wiki">${_('create a wiki page')}</a>
   </%base:rounded_block>
 
   ${self.wall_reload_url()}
 
   <div id="dashboard_action_blocks">
-    % if show_messages:
-    ${self.send_message_block(msg_recipients)}
-    % endif
-    % if show_files:
-    ${self.upload_file_block(file_recipients)}
-    % endif
-    % if show_wiki:
-    ${self.create_wiki_block(wiki_recipients)}
-    % endif
+    ${self.send_message_block(msg_recipients, active=show_messages)}
+    ${self.upload_file_block(file_recipients, active=show_files)}
+    ${self.create_wiki_block(wiki_recipients, active=show_wiki)}
   </div>
 
 </%def>
