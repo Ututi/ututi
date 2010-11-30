@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-11-29 11:25+0200\n"
+"PO-Revision-Date: 2010-11-30 06:53+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -2509,7 +2509,7 @@ msgstr "Rodzaj forum"
 msgid ""
 "<p>In an e-mail conference all messages, sent to the group's address will"
 " be forwarded to all members.</p><p>In a forum there is the posibility to"
-" create subforums, and subscribed members get e-mail notificationsabout "
+" create subforums, and subscribed members get e-mail notifications about "
 "new messages, not the messages themselves.</p>"
 msgstr ""
 
@@ -4091,6 +4091,9 @@ msgstr ""
 "%(user)s chcą dołączyć do grupy %(group)s. Czy chcesz ich przyjąć do "
 "grupy?"
 
+msgid "Group or user:"
+msgstr "Grupa lub użytkownik"
+
 msgid "Share with others"
 msgstr "Podziel się z innymi"
 
@@ -4102,9 +4105,6 @@ msgstr "dodaj plik"
 
 msgid "create a wiki page"
 msgstr "utwórz wiki stronę"
-
-msgid "Group or user:"
-msgstr "Grupa lub użytkownik"
 
 msgid "More"
 msgstr "Więcej"

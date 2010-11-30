@@ -234,7 +234,7 @@
   ${h.select("forum_type", c.forum_type, c.forum_types)}
   ${tooltip(_(
     "<p>In an e-mail conference all messages, sent to the group's address will be forwarded to all members.</p>"
-    "<p>In a forum there is the posibility to create subforums, and subscribed members get e-mail notifications"
+    "<p>In a forum there is the posibility to create subforums, and subscribed members get e-mail notifications "
     "about new messages, not the messages themselves.</p>"), style='margin-top: 4px;')}
 
   <div style="height: 5px"></div>
