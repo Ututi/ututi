@@ -28,4 +28,3 @@ insert into science_types (name, book_department_id) values
 ('Geografija', 1),
 ('Biologija', 1),
 ('Kita', 2);;
-
