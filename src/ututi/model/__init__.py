@@ -434,6 +434,11 @@ def setup_orm(engine):
                                         autoload=True,
                                         autoload_with=engine)
 
+    orm.mapper(UserSubjectMonitoring, user_monitored_subjects_table,
+               properties ={'subject': relation(Subject, backref=backref("watching_users", lazy=True)),
+                            'user': relation(User)
+                            })
+
     # ignoring error about unknown column type for now
     warnings.simplefilter("ignore", SAWarning)
 
