@@ -10,7 +10,7 @@
   ${h.javascript_link('/javascript/ckeditor/ckeditor.js')}
 </%def>
 
-<%def name="send_message_block(msg_recipients, active=True)">
+<%def name="send_message_block(msg_recipients)">
   <%base:rounded_block id="send_message_block" class_="dashboard_action_block">
     <a class="${not active and 'inactive' or ''}" name="send-message"></a>
     <form method="POST" action="${url(controller='profile', action='send_message')}" id="message_form">
@@ -38,7 +38,7 @@
   </%base:rounded_block>
 </%def>
 
-<%def name="upload_file_block(file_recipients, active=True)">
+<%def name="upload_file_block(file_recipients)">
   <%base:rounded_block id="upload_file_block" class_="dashboard_action_block">
     <a class="${not active and 'inactive' or ''}" name="upload-file"></a>
     <form id="file_form">
@@ -60,7 +60,7 @@
   </%base:rounded_block>
 </%def>
 
-<%def name="create_wiki_block(wiki_recipients, active=True)">
+<%def name="create_wiki_block(wiki_recipients)">
   <%base:rounded_block id="create_wiki_block" class_="dashboard_action_block">
     <a class="${not active and 'inactive' or ''}" name="create-wiki"></a>
     <form method="POST" action="${url(controller='profile', action='create_wiki')}" id="wiki_form">
@@ -114,9 +114,9 @@
   ${self.wall_reload_url()}
 
   <div id="dashboard_action_blocks">
-    ${self.send_message_block(msg_recipients, active=show_messages)}
-    ${self.upload_file_block(file_recipients, active=show_files)}
-    ${self.create_wiki_block(wiki_recipients, active=show_wiki)}
+    ${self.send_message_block(msg_recipients)}
+    ${self.upload_file_block(file_recipients)}
+    ${self.create_wiki_block(wiki_recipients)}
   </div>
 
 </%def>
