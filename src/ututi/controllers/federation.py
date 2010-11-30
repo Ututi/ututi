@@ -152,7 +152,7 @@ class FederationController(BaseController, FederationMixin):
                     h.flash(_('Linked to Google account.'))
                 else:
                     h.flash(_('This Google account is already linked to another Ututi account.'))
-                redirect(url(controller='profile', action='edit'))
+                redirect(url(controller='profile', action='edit_contacts'))
             name = '%s %s' % (request.params.get('openid.ext1.value.firstname'),
                               request.params.get('openid.ext1.value.lastname'))
             email = request.params.get('openid.ext1.value.email')

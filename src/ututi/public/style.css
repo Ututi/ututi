@@ -225,7 +225,6 @@ button.btnLarge:hover span {
     color: black;
 }
 
-
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     /* Safari and Google Chrome only - fix margins */
     button.btn span,
@@ -4395,6 +4394,15 @@ div#user-logo-button {
 }
 
 /* end user block */
+
+/* edit profile */
+
+#edit_profile_form div#user-logo {
+    float: left;
+    margin: 30px;
+}
+
+/* end edit profile */
 
 /* purchase credits dialog */
 

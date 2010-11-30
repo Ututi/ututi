@@ -136,9 +136,6 @@ class ProfileController(SearchBaseController, UniversityListMixin, WallMixin, Wa
 
         return result
 
-    def _edit_form(self, defaults=None):
-        return render('profile/edit.mako')
-
     def _edit_form_defaults(self):
         defaults = {
             'email': c.user.emails[0].email,
@@ -159,9 +156,46 @@ class ProfileController(SearchBaseController, UniversityListMixin, WallMixin, Wa
 
         return defaults
 
+    def _edit_profile_form(self):
+        c.structure_menu_items = self._edit_tabs()
+        c.structure_menu_current_item = 'profile'
+        return render('profile/edit_profile.mako')
+
+    def _edit_contacts_form(self):
+        c.structure_menu_items = self._edit_tabs()
+        c.structure_menu_current_item = 'contacts'
+        return render('profile/edit_contacts.mako')
+
+    def _edit_password_form(self):
+        c.structure_menu_items = self._edit_tabs()
+        c.structure_menu_current_item = 'password'
+        return render('profile/edit_password.mako')
+
+    def _edit_tabs(self):
+        return [
+            {'title': _("Personal information"),
+             'name': 'profile',
+             'link': url(controller='profile', action='edit')},
+            {'title': _("Contact information"),
+             'name': 'contacts',
+             'link': url(controller='profile', action='edit_contacts')},
+            {'title': _("Change password"),
+             'name': 'password',
+             'link': url(controller='profile', action='edit_password')}]
+
     @ActionProtector("user")
     def edit(self):
-        return htmlfill.render(self._edit_form(),
+        return htmlfill.render(self._edit_profile_form(),
+                               defaults=self._edit_form_defaults())
+
+    @ActionProtector("user")
+    def edit_contacts(self):
+        return htmlfill.render(self._edit_contacts_form(),
+                               defaults=self._edit_form_defaults())
+
+    @ActionProtector("user")
+    def edit_password(self):
+        return htmlfill.render(self._edit_password_form(),
                                defaults=self._edit_form_defaults())
 
     @ActionProtector("user")
@@ -175,7 +209,7 @@ class ProfileController(SearchBaseController, UniversityListMixin, WallMixin, Wa
         c.user.openid = None
         meta.Session.commit()
         h.flash(_('Your Google account has been unlinked.'))
-        redirect(url(controller='profile', action='edit'))
+        redirect(url(controller='profile', action='edit_contacts'))
 
     @ActionProtector("user")
     def link_facebook(self):
@@ -192,26 +226,26 @@ class ProfileController(SearchBaseController, UniversityListMixin, WallMixin, Wa
                 h.flash(_("Linked to Facebook account."))
             else:
                 h.flash(_('This Facebook account is already linked to another Ututi account.'))
-        redirect(url(controller='profile', action='edit'))
+        redirect(url(controller='profile', action='edit_contacts'))
 
     @ActionProtector("user")
     def unlink_facebook(self):
         c.user.facebook_id = None
         meta.Session.commit()
         h.flash(_('Your Facebook account has been unlinked.'))
-        redirect(url(controller='profile', action='edit'))
+        redirect(url(controller='profile', action='edit_contacts'))
 
-    @validate(PasswordChangeForm, form='_edit_form',
+    @validate(PasswordChangeForm, form='_edit_password_form',
               ignore_request=True, defaults=_edit_form_defaults)
     @ActionProtector("user")
-    def password(self):
+    def change_password(self):
         if hasattr(self, 'form_result'):
             c.user.update_password(self.form_result['new_password'].encode('utf-8'))
             meta.Session.commit()
             h.flash(_('Your password has been changed!'))
             redirect(url(controller='profile', action='home'))
         else:
-            redirect(url(controller='profile', action='edit'))
+            redirect(url(controller='profile', action='edit_password'))
 
     @validate(LogoUpload)
     @ActionProtector("user")
@@ -222,7 +256,7 @@ class ProfileController(SearchBaseController, UniversityListMixin, WallMixin, Wa
             meta.Session.commit()
             return ''
 
-    @validate(ProfileForm, form='_edit_form', defaults=_edit_form_defaults)
+    @validate(ProfileForm, form='_edit_profile_form', defaults=_edit_form_defaults)
     @ActionProtector("user")
     def update(self):
         fields = ('fullname', 'logo_upload', 'logo_delete', 'site_url',
@@ -247,7 +281,7 @@ class ProfileController(SearchBaseController, UniversityListMixin, WallMixin, Wa
 
         meta.Session.commit()
         h.flash(_('Your profile was updated.'))
-        redirect(url(controller='profile', action='home'))
+        redirect(url(controller='profile', action='edit'))
 
     def confirm_emails(self):
         if c.user is not None:
@@ -259,7 +293,7 @@ class ProfileController(SearchBaseController, UniversityListMixin, WallMixin, Wa
             if dest is not None:
                 redirect(dest.encode('utf-8'))
             else:
-                redirect(url(controller='profile', action='edit'))
+                redirect(url(controller='profile', action='edit_contacts'))
         else:
             redirect(url(controller='home', action='home'))
 
@@ -375,14 +409,14 @@ class ProfileController(SearchBaseController, UniversityListMixin, WallMixin, Wa
             return 'OK'
         redirect(url(controller='profile', action='subjects'))
 
-    @validate(ContactForm, form='_edit_form', defaults=_edit_form_defaults)
+    @validate(ContactForm, form='_edit_contacts_form', defaults=_edit_form_defaults)
     @ActionProtector("user")
     def update_contacts(self):
         if hasattr(self, 'form_result'):
             if self.form_result['confirm_email']:
                 h.flash(_('Confirmation message sent. Please check your email.'))
                 email_confirmation_request(c.user, c.user.emails[0].email)
-                redirect(url(controller='profile', action='edit'))
+                redirect(url(controller='profile', action='edit_contacts'))
 
             # handle email
             email = self.form_result['email']
@@ -431,7 +465,7 @@ class ProfileController(SearchBaseController, UniversityListMixin, WallMixin, Wa
                 c.user.confirm_phone_number()
                 meta.Session.commit()
 
-        redirect(url(controller='profile', action='edit'))
+        redirect(url(controller='profile', action='edit_contacts'))
 
     @ActionProtector("user")
     def thank_you(self):
