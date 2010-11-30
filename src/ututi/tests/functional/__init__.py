@@ -1,4 +1,4 @@
-#
+# -*- encoding: utf-8 -*-
 import os
 import unittest
 import subprocess
@@ -176,3 +176,60 @@ def printEmails():
     for email in sorted(mail_queue, key=lambda e: e.recipients):
         print email.recipients
         print email.payload()
+
+
+def setUpBooks(browser):
+    # Add some disciplines
+    browser.open('http://localhost/admin/science_types')
+    form = browser.getForm('science_type_form')
+    form.getControl('Name').value = 'Fizika'
+    form.getControl('Book department').value = ['1']
+    form.getControl('Save').click()
+
+    browser.open('http://localhost/admin/science_types')
+    form = browser.getForm('science_type_form')
+    form.getControl('Name').value = 'Matematika'
+    form.getControl('Book department').value = ['1']
+    form.getControl('Save').click()
+
+    browser.open('http://localhost/admin/science_types')
+    form = browser.getForm('science_type_form')
+    form.getControl('Name').value = 'Realiniai mokslai'
+    form.getControl('Book department').value = ['0']
+    form.getControl('Save').click()
+
+    browser.open('http://localhost/admin/science_types')
+    form = browser.getForm('science_type_form')
+    form.getControl('Name').value = 'Humanitariniai mokslai'
+    form.getControl('Book department').value = ['0']
+    form.getControl('Save').click()
+
+    browser.open('http://localhost/admin/science_types')
+    form = browser.getForm('science_type_form')
+    form.getControl('Name').value = 'Kita'
+    form.getControl('Book department').value = ['2']
+    form.getControl('Save').click()
+
+    browser.open('http://localhost/admin/science_types')
+    form = browser.getForm('science_type_form')
+    form.getControl('Name').value = 'Visai kita'
+    form.getControl('Book department').value = ['2']
+    form.getControl('Save').click()
+
+    # Add a book type
+    browser.open('http://localhost/admin/book_types')
+    form = browser.getForm('book_type_form')
+    form.getControl('Name').value = 'Vadovėlis'
+    form.getControl('Save').click()
+
+    # Add some cities
+    browser.open('http://localhost/admin/cities')
+    form = browser.getForm('city_form')
+    form.getControl('Name').value = 'Vilnius'
+    form.getControl('Save').click()
+
+    # Add a school grade
+    browser.open('http://localhost/admin/school_grades')
+    form = browser.getForm('school_grade_form')
+    form.getControl('Name').value = '1 kl.'
+    form.getControl('Save').click()
