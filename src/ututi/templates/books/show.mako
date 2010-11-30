@@ -47,7 +47,7 @@ ${book_attribute(_('Book type'), c.book.type.name)}
 %endif
 ${book_attribute(_('Science type'), c.book.science_type.name)}
 ${book_attribute(_('City'), c.book.city.name)}
-${book_attribute(_('Price'), '%.2f' % c.book.price + " " + _('national_currency'), class_="book-price", none_value_text = _('free'), is_value_none = c.book.price == 0)}
+${book_attribute(_('Price'), c.book.price, class_="book-price")}
 <div class="owner-information">
   <p>${_("Owner information")}</p>
   <%books:user_information user="${c.book.owner}" />

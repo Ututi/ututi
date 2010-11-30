@@ -30,19 +30,6 @@ from ututi.lib.base import BaseController, render, render_lang, u_cache
 from pylons import request, tmpl_context as c, url, config, session
 from webhelpers import paginate
 
-
-class PriceValidator(Number):
-    """Number validator that accepts numbers with dot and with comma (i.e. 3.14 and 3,14)"""
-
-    messages = {
-        'number': _("Please enter a number")
-    }
-
-    def _to_python(self, value, state):
-        value = string.replace(value, ',', '.')
-        return super(PriceValidator, self)._to_python(value, state)
-
-
 class BookValidator(validators.FormValidator):
     """
     Validate the universal message post form.
@@ -130,7 +117,7 @@ class BookForm(Schema):
     logo = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
     title = validators.UnicodeString(not_empty=True)
     author = validators.UnicodeString(not_empty=True)
-    price = PriceValidator(not_empty=True)
+    price = validators.UnicodeString(not_empty=True)#PriceValidator(not_empty=True)
     description = validators.UnicodeString()
     location = Pipe(ForEach(validators.UnicodeString(strip=True)),
                     LocationTagsValidator())

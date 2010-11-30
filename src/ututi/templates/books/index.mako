@@ -19,11 +19,7 @@
       %endif
       <span class="book-price-label">${_('Price')}:</span>
       <span class="book-price">
-        %if book.price == 0:
-        ${_('free')}
-        %else:
-        ${book.price} ${_('national_currency')}
-        %endif
+        ${book.price}
       </span>
       <br />
       %if can_edit:
