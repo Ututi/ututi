@@ -1,56 +1,18 @@
 Book creation tests
 ===================
 
+Set up
+------
+
+    >>> browser = Browser.logIn()
+    >>> from ututi.tests.functional import setUpBooks
+    >>> setUpBooks(browser)
+    >>> browser.open('http://localhost/books/')
+
     >>> from pkg_resources import resource_stream
     >>> def make_file(filename):
     ...     stream = resource_stream("ututi.tests.functional.import", filename)
     ...     return (stream, 'text/plain', filename)
-
-    >>> browser = Browser.logIn()
-    >>> browser.open('http://localhost/admin/science_types')
-    >>> form = browser.getForm('science_type_form')
-    >>> form.getControl('Name').value = 'Fizika'
-    >>> form.getControl('Book department').value = ['1']
-    >>> form.getControl('Save').click()
-
-    >>> browser.open('http://localhost/admin/science_types')
-    >>> form = browser.getForm('science_type_form')
-    >>> form.getControl('Name').value = 'Matematika'
-    >>> form.getControl('Book department').value = ['1']
-    >>> form.getControl('Save').click()
-
-    >>> browser.open('http://localhost/admin/science_types')
-    >>> form = browser.getForm('science_type_form')
-    >>> form.getControl('Name').value = 'Realiniai mokslai'
-    >>> form.getControl('Book department').value = ['0']
-    >>> form.getControl('Save').click()
-
-    >>> browser.open('http://localhost/admin/science_types')
-    >>> form = browser.getForm('science_type_form')
-    >>> form.getControl('Name').value = 'Humanitariniai mokslai'
-    >>> form.getControl('Book department').value = ['0']
-    >>> form.getControl('Save').click()
-
-    >>> browser.open('http://localhost/admin/science_types')
-    >>> form = browser.getForm('science_type_form')
-    >>> form.getControl('Name').value = 'Kita'
-    >>> form.getControl('Book department').value = ['2']
-    >>> form.getControl('Save').click()
-
-    >>> browser.open('http://localhost/admin/book_types')
-    >>> form = browser.getForm('book_type_form')
-    >>> form.getControl('Name').value = 'Vadovėlis'
-    >>> form.getControl('Save').click()
-
-    >>> browser.open('http://localhost/admin/cities')
-    >>> form = browser.getForm('city_form')
-    >>> form.getControl('Name').value = 'Vilnius'
-    >>> form.getControl('Save').click()
-
-    >>> browser.open('http://localhost/admin/school_grades')
-    >>> form = browser.getForm('school_grade_form')
-    >>> form.getControl('Name').value = '1 kl.'
-    >>> form.getControl('Save').click()
 
 When I'm not logged in, I can't add book. Not logged user will be redirected to login path
 
