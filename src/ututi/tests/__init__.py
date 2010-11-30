@@ -3,7 +3,9 @@
 import sys
 import random
 import shutil
+import urllib
 
+from zope.testbrowser.browser import Link
 from mechanize._mechanize import LinkNotFoundError
 from nous.pylons.testing import LayerBase, CompositeLayer
 from nous.pylons.testing import PylonsTestBrowserLayer
@@ -84,26 +86,32 @@ class UtutiTestBrowser(NousTestBrowser):
     app = None
 
     def click(self, text, name=None, url=None, id=None, index=0):
+        controls = []
         if url is not None or id is not None:
-            return self.getLink(text, url, id, index).click()
+            controls.append(self.getLink(text, url, id, index))
         elif name is not None:
-            return self.getControl(text, name, index).click()
+            controls.append(self.getControl(text, name, index))
         else:
             try:
-                controls = [self.getControl(text, name, index)]
+                controls.append(self.getControl(text, name, index))
             except LookupError:
-                controls = []
+                pass
             try:
-                links = [self.getLink(text, url, id, index)]
+                controls.append(self.getLink(text, url, id, index))
             except LinkNotFoundError:
-                links = []
+                pass
 
-            clickables = controls + links
-            if not clickables:
+            if not controls:
                 raise LinkNotFoundError()
-            elif len(clickables) > 1:
-                return clickables
-            return clickables[0].click()
+            elif len(controls) > 1:
+                return controls
+            control = controls[0]
+
+            # XXX work around url quoting bug in our testing infrastructure
+            if isinstance(control, Link):
+                control.mech_link.absolute_url = urllib.unquote(control.mech_link.absolute_url)
+
+            return control.click()
 
     def printCssQuery(self, query, **kwargs):
         return self.printQuery(query, selector='cssselect', **kwargs)

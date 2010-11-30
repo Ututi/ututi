@@ -13,7 +13,7 @@ Set up
 Now let's add some books:
 
     >>> browser.click('Upload a Book')
-    >>> browser.getControl('Title').value = "My beautiful book 1"
+    >>> browser.getControl('Title').value = "My physics book"
     >>> browser.getControl('Author').value = "Mr. God"
     >>> browser.getControl('Brief description of the book').value = "A perfect book for the evening"
     >>> browser.getControl('Book department').displayValue = ['School']
@@ -33,66 +33,67 @@ The book gets added and we get redirected to it's display view.
     >>> browser.getControl('Title').value = "My beautiful book 2"
     >>> browser.getControl('Author').value = "Mr. God"
     >>> browser.getControl('Brief description of the book').value = "A perfect book for evening"
-    >>> browser.getControl('Book department').value = ['2']
-    >>> browser.getControl('Book type').value = ['1']
-    >>> browser.getControl('City').value = ['1']
-    >>> browser.getControl(name = 'other_science_type').value = ['5']
+    >>> browser.getControl('Book department').displayValue = ['Other']
+    >>> browser.getControl('Book type').displayValue = ['Vadovėlis']
+    >>> browser.getControl('City').displayValue = ['Vilnius']
+    >>> browser.getControl(name='other_science_type').displayValue = ['Kita']
+
     >>> browser.getControl('Price').value = "50,00"
     >>> browser.getControl('Save').click()
 
     >>> browser.click('Upload a Book')
-    >>> browser.getControl('Title').value = "My beautiful book 3"
+    >>> browser.getControl('Title').value = "University book"
     >>> browser.getControl('Author').value = "Mr. God"
     >>> browser.getControl('Brief description of the book').value = "A perfect book for evening"
-    >>> browser.getControl('Book department').value = ['0']
+    >>> browser.getControl('Book department').displayValue = ['University']
     >>> browser.getControl(name='location-0').value = "Vilniaus universitetas"
     >>> browser.getControl('Department').value = "Ekonomikos fakultetas"
-    >>> browser.getControl('Book type').value = ['1']
-    >>> browser.getControl('City').value = ['1']
-    >>> browser.getControl(name = 'university_science_type').value = ['3']
+    >>> browser.getControl('Book type').displayValue = ['Vadovėlis']
+    >>> browser.getControl('City').displayValue = ['Vilnius']
+    >>> browser.getControl(name='university_science_type').displayValue = ['Realiniai mokslai']
     >>> browser.getControl('Price').value = "50,00"
     >>> browser.getControl('Save').click()
 
 Then we go to the books catalog:
 
     >>> browser.click('All Books')
-    >>> browser.printQuery("//h3[@class='book-title']")
-    <h3 class="book-title">My beautiful book 1</h3>
+    >>> browser.printCssQuery("h3.book-title")
+    <h3 class="book-title">My physics book</h3>
     <h3 class="book-title">My beautiful book 2</h3>
-    <h3 class="book-title">My beautiful book 3</h3>
+    <h3 class="book-title">University book</h3>
 
-# XXX make this one work
-#    >>> browser.click('Books for students')
+We can't just go and see the whole category such as all the books for
+students, so let's go to the subtype instead:
 
     >>> browser.open('http://localhost/books/catalog/university')
-    >>> browser.printQuery("//h3[@class='book-title']")
-    <h3 class="book-title">My beautiful book 3</h3>
+    >>> browser.printCssQuery("h3.book-title")
+    <h3 class="book-title">University book</h3>
 
     >>> browser.open('http://localhost/books/catalog/university/science/3')
-    >>> browser.printQuery("//h3[@class='book-title']")
-    <h3 class="book-title">My beautiful book 3</h3>
+    >>> browser.printCssQuery("h3.book-title")
+    <h3 class="book-title">University book</h3>
 
     >>> browser.open('http://localhost/books/catalog/university/science/4')
-    >>> browser.printQuery("//h3[@class='book-title']")
+    >>> browser.printCssQuery("h3.book-title")
 
     >>> browser.open('http://localhost/books/catalog/school')
-    >>> browser.printQuery("//h3[@class='book-title']")
-    <h3 class="book-title">My beautiful book 1</h3>
+    >>> browser.printCssQuery("h3.book-title")
+    <h3 class="book-title">My physics book</h3>
 
     >>> browser.open('http://localhost/books/catalog/school/science/1')
-    >>> browser.printQuery("//h3[@class='book-title']")
-    <h3 class="book-title">My beautiful book 1</h3>
+    >>> browser.printCssQuery("h3.book-title")
+    <h3 class="book-title">My physics book</h3>
 
     >>> browser.open('http://localhost/books/catalog/school/science/2')
-    >>> browser.printQuery("//h3[@class='book-title']")
+    >>> browser.printCssQuery("h3.book-title")
 
     >>> browser.open('http://localhost/books/catalog/other')
-    >>> browser.printQuery("//h3[@class='book-title']")
+    >>> browser.printCssQuery("h3.book-title")
     <h3 class="book-title">My beautiful book 2</h3>
 
     >>> browser.open('http://localhost/books/catalog/other/science/5')
-    >>> browser.printQuery("//h3[@class='book-title']")
+    >>> browser.printCssQuery("h3.book-title")
     <h3 class="book-title">My beautiful book 2</h3>
 
     >>> browser.open('http://localhost/books/catalog/other/science/6')
-    >>> browser.printQuery("//h3[@class='book-title']")
+    >>> browser.printCssQuery("h3.book-title")
