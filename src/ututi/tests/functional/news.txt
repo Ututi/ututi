@@ -26,7 +26,7 @@ Let's invite a couple of users into our group:
 Add their gadugadu numbers:
 
     >>> browser2 = Browser.logIn('user2@ututi.lt', 'password')
-    >>> browser2.open('http://localhost/profile/edit')
+    >>> browser2.open('http://localhost/profile/edit/contacts')
     >>> browser2.getControl(name='gadugadu_uin').value = "564321"
     >>> browser2.getControl('Update contacts').click()
 
@@ -47,7 +47,7 @@ Pretend we lost it ;)
     >>> browser2.getControl('Update contacts').click()
 
     >>> browser3 = Browser.logIn('user@ututi.lt', 'password')
-    >>> browser3.open('http://localhost/profile/edit')
+    >>> browser3.open('http://localhost/profile/edit/contacts')
     >>> browser3.getControl(name='gadugadu_uin').value = "133465"
     >>> browser3.getControl('Update contacts').click()
 
@@ -162,7 +162,7 @@ Now let's upload a couple of files:
 
 Oh and in the mean time - a user sets his GG number to some nonsense:
 
-    >>> browser3.open('http://localhost/profile/edit')
+    >>> browser3.open('http://localhost/profile/edit/contacts')
     >>> browser3.getControl(name='gadugadu_uin').value = ""
     >>> browser3.getControl('Update contacts').click()
 

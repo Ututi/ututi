@@ -238,7 +238,7 @@ class ProfileController(SearchBaseController, UniversityListMixin, WallMixin, Wa
     @validate(PasswordChangeForm, form='_edit_password_form',
               ignore_request=True, defaults=_edit_form_defaults)
     @ActionProtector("user")
-    def change_password(self):
+    def password(self):
         if hasattr(self, 'form_result'):
             c.user.update_password(self.form_result['new_password'].encode('utf-8'))
             meta.Session.commit()

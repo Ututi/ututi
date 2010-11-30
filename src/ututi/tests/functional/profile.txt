@@ -24,7 +24,7 @@ Now we'll try editing our profile information. First we need to log in.
 
 The user should be able to change his email:
 
-    >>> browser.open('http://localhost/profile/edit')
+    >>> browser.open('http://localhost/profile/edit/contacts')
     >>> form = browser.getForm('contacts_form')
     >>> form.getControl('Your email address').value = 'user@ututi.lt'
     >>> form.getControl('Update contacts').click()
@@ -36,14 +36,15 @@ This email is already in use, so we won't be able to use it.
 
 Let's try something unique
 
-    >>> browser.open('http://localhost/profile/edit')
+    >>> browser.open('http://localhost/profile/edit/contacts')
     >>> form = browser.getForm('contacts_form')
     >>> form.getControl('Your email address').value = 'uniqueuser@ututi.lt'
     >>> form.getControl('Update contacts').click()
 
     >>> browser.printQuery("//span[@class='error-message']/text()")
 
-The should be an email confirmation request in our inbox:
+There should be an email confirmation request in our inbox:
+
     >>> from ututi.lib.mailer import mail_queue
     >>> len(mail_queue)
     1
