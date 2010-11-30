@@ -151,13 +151,13 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
     def _set_settings_tabs(self, current_tab):
         c.current_tab = current_tab
         c.tabs = [
-            {'title': _("Personal information"),
+            {'title': _("Profile"),
              'name': 'profile',
              'link': url(controller='profile', action='edit')},
-            {'title': _("Contact information"),
+            {'title': _("Contacts"),
              'name': 'contacts',
              'link': url(controller='profile', action='edit_contacts')},
-            {'title': _("Change password"),
+            {'title': _("Password"),
              'name': 'password',
              'link': url(controller='profile', action='edit_password')}]
 
