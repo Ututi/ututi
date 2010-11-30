@@ -114,6 +114,11 @@ def setup_orm(engine):
                         useexisting=True,
                         autoload_with=engine)
 
+    global teacher_subjects_table
+    teacher_subjects_table = Table("teacher_tought_subjects", meta.metadata,
+                                   autoload=True,
+                                   autoload_with=engine)
+
     global content_items_table
     content_items_table = Table("content_items", meta.metadata,
                                 autoload=True,
@@ -251,8 +256,9 @@ def setup_orm(engine):
     orm.mapper(Teacher,
                polymorphic_on=users_table.c.user_type,
                polymorphic_identity='teacher',
-               inherits=user_mapper)
-
+               inherits=user_mapper,
+               properties = {'tought_subjects' : relation(Subject,
+                                                          secondary=teacher_subjects_table)})
 
     orm.mapper(FileDownload,
                file_downloads_table,
@@ -426,11 +432,6 @@ def setup_orm(engine):
     user_monitored_subjects_table = Table("user_monitored_subjects", meta.metadata,
                                         autoload=True,
                                         autoload_with=engine)
-
-    orm.mapper(UserSubjectMonitoring, user_monitored_subjects_table,
-               properties ={'subject': relation(Subject, backref=backref("watching_users", lazy=True)),
-                            'user': relation(User)
-                            })
 
     # ignoring error about unknown column type for now
     warnings.simplefilter("ignore", SAWarning)

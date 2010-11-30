@@ -28,7 +28,27 @@ When querying for teachers, only teacher objects should be returned:
 
     """
 
+def test_teacher_subjects():
+    r"""Test linking teachers to the subjects they teach:
 
+       >>> from ututi.model.users import Teacher
+       >>> from ututi.model import Subject, LocationTag
+       >>> teacher = Teacher(fullname=u'Petras', password='qwerty', gen_password=True)
+       >>> meta.Session.add(teacher)
+       >>> meta.Session.commit()
+
+       >>> teacher.tought_subjects
+       []
+
+       >>> res = meta.Session.execute("SET ututi.active_user TO 1")
+       >>> s = Subject('subject_id', u'Subject title', LocationTag.get([u'vu']))
+       >>> meta.Session.add(s)
+       >>> teacher.tought_subjects.append(s)
+       >>> meta.Session.commit()
+
+       >>> teacher.tought_subjects
+       [<ututi.model.Subject object at ...>]
+    """
 def test_suite():
     suite = doctest.DocTestSuite(
         optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |

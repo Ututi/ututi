@@ -1347,3 +1347,9 @@ CREATE TABLE books (
        valid_until timestamp not null default (now() at time zone 'UTC'),
        PRIMARY KEY (id)
 );;
+
+/* a table for linking subjects with teachers */
+create table teacher_tought_subjects (
+       user_id int8 references users(id) not null,
+       subject_id int8 not null references subjects(id) on delete cascade,
+       primary key (user_id, subject_id));;
