@@ -17,7 +17,7 @@ from formencode.compound import All
 from formencode.schema import Schema
 
 from ututi.lib.security import sign_in_user
-from ututi.lib.emails import email_confirmation_request
+from ututi.lib.emails import email_confirmation_request, teacher_registered_email
 from ututi.lib.validators import LocationTagsValidator
 from ututi.lib.validators import validate
 from ututi.lib.validators import UniqueEmail
@@ -96,7 +96,7 @@ class TeacherController(BaseController, FederationMixin):
             teacher.accepted_terms = datetime.utcnow()
             meta.Session.add(teacher)
             meta.Session.commit()
-
+            teacher_registered_email(teacher)
             email_confirmation_request(teacher, email)
             sign_in_user(teacher)
 
@@ -132,6 +132,7 @@ class TeacherController(BaseController, FederationMixin):
 
                 meta.Session.add(user)
                 meta.Session.commit()
+                teacher_registered_email(user)
                 sign_in_user(user)
 
             kwargs = dict()

@@ -89,3 +89,9 @@ def teacher_confirmed_email(teacher, confirmed):
         text = render('/emails/teacher_rejected.mako', extra_vars={'teacher': teacher, 'config':config})
     msg = EmailMessage(_('Your account has been confirmed!'), text, force=True)
     msg.send(teacher)
+
+def teacher_registered_email(teacher):
+    """Notify team of a new teacher."""
+    text = render('/emails/teacher_registered.mako', extra_vars={'teacher': teacher})
+    msg = EmailMessage(_('New teacher!'), text, force=True)
+    msg.send(config.get('ututi_email_from', 'info@ututi.pl'))
