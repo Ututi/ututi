@@ -258,7 +258,8 @@ def setup_orm(engine):
                polymorphic_identity='teacher',
                inherits=user_mapper,
                properties = {'tought_subjects' : relation(Subject,
-                                                          secondary=teacher_subjects_table)})
+                                                          secondary=teacher_subjects_table,
+                                                          backref="teachers")})
 
     orm.mapper(FileDownload,
                file_downloads_table,

@@ -48,6 +48,9 @@ def test_teacher_subjects():
 
        >>> teacher.tought_subjects
        [<ututi.model.Subject object at ...>]
+
+       >>> s.teachers
+       [<ututi.model.users.Teacher object at ...>]
     """
 def test_suite():
     suite = doctest.DocTestSuite(
