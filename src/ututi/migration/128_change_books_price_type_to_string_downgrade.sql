@@ -1,0 +1,2 @@
+ALTER TABLE books DROP COLUMN price;
+ALTER TABLE books ADD COLUMN price float DEFAULT 0 NOT NULL;

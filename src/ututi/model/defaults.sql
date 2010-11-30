@@ -1333,7 +1333,7 @@ CREATE TABLE books (
        title varchar(100) NOT NULL,
        description text,
        author varchar(100),
-       price float NOT NULL,
+       price varchar(250) DEFAULT '' NOT NULL,
        logo bytea DEFAULT NULL,
        owner_id int8 NOT NULL REFERENCES users(id) on delete cascade,
        show_phone boolean DEFAULT TRUE,

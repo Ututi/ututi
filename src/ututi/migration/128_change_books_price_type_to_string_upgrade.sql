@@ -1,0 +1,2 @@
+ALTER TABLE books DROP COLUMN price;
+ALTER TABLE books ADD COLUMN  price varchar(250) DEFAULT '' NOT NULL;
