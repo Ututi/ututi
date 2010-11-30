@@ -41,6 +41,7 @@ PG_PATH = $(shell if test -d /usr/lib/postgresql/8.3; then echo /usr/lib/postgre
 instance/var/data/postgresql.conf:
 	mkdir -p ${PWD}/instance/var/data
 	${PG_PATH}/bin/initdb -D ${PWD}/instance/var/data -E UNICODE
+	echo 'fsync = off' >> instance/var/data/postgresql.conf
 
 instance/var/data/initialized:
 	${PG_PATH}/bin/createuser --createdb    --no-createrole --no-superuser --login admin -h ${PWD}/instance/var/run
