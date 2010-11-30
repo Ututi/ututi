@@ -35,17 +35,9 @@
 </label>
 </%def>
 
-<%def name="selectbox(field_name, label, objects, hidden=False, use_custom_error_field = True)">
-<label>${label}:
-  %if hidden == True:
-  ${h.select(field_name, None, h.list_for_select(objects, blank_value="blank"), style="display: none;")}
-  %else:
-  ${h.select(field_name, None, h.list_for_select(objects, blank_value="blank"))}
-  %endif
-</label>
-%if use_custom_error_field:
+<%def name="selectbox(field_name, label, objects)">
+<label>${label}: ${h.select(field_name, None, h.list_for_select(objects, blank_value="blank"))}</label>
 <form:error name="${field_name}" />
-%endif
 </%def>
 
 <%def name="user_information(user, full=True, title=None)">
@@ -127,16 +119,16 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
     <%self:selectbox field_name = "school_grade" label="${_('School grade')}", objects="${c.school_grades}" />
   </div>
   <div class="science_type_field">
-    <%self:selectbox field_name = "science_type" label="${_('Science type')}", objects="${c.current_science_types}" use_custom_error_field="False" />
+    <%self:selectbox field_name = "science_type" label="${_('Science type')}", objects="${c.current_science_types}" />
   </div>
   <div id="department_science_type_field_0" class="science_type_field" style="display: none">
-    <%self:selectbox field_name = "university_science_type" label="${_('Science type')}", objects="${c.university_science_types}" use_custom_error_field="False" />
+    <%self:selectbox field_name = "university_science_type" label="${_('Science type')}", objects="${c.university_science_types}" />
   </div>
   <div id="department_science_type_field_1" class="science_type_field" style="display: none;">
-    <%self:selectbox field_name = "school_science_type" label="${_('Science type')}", objects="${c.school_science_types}" use_custom_error_field="False" />
+    <%self:selectbox field_name = "school_science_type" label="${_('Science type')}", objects="${c.school_science_types}" />
   </div>
   <div id="department_science_type_field_2" class="science_type_field" style="display: none;">
-    <%self:selectbox field_name = "other_science_type" label="${_('Science type')}", objects="${c.other_science_types}" use_custom_error_field="False" />
+    <%self:selectbox field_name = "other_science_type" label="${_('Science type')}", objects="${c.other_science_types}" />
   </div>
   <form:error name="science_type" />
   <div class="book-transfer-info">
