@@ -3,6 +3,7 @@ import hashlib
 from routes import url_for
 
 from pylons.i18n import _
+from pylons import config
 
 from ututi.lib.base import render
 from ututi.model import meta
@@ -80,3 +81,11 @@ def group_space_bought_email(group):
     msg = EmailMessage(_('Group space bought'), text)
     msg.send(group)
 
+def teacher_confirmed_email(teacher, confirmed):
+    """Send an email to a teacher once he has been confirmed."""
+    if confirmed:
+        text = render('/emails/teacher_confirmed.mako', extra_vars={'teacher': teacher, 'config':config})
+    else:
+        text = render('/emails/teacher_rejected.mako', extra_vars={'teacher': teacher, 'config':config})
+    msg = EmailMessage(_('Your account has been confirmed!'), text, force=True)
+    msg.send(teacher)

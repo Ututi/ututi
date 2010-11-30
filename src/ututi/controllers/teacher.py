@@ -92,6 +92,7 @@ class TeacherController(BaseController, FederationMixin):
                               gen_password=True)
             teacher.teacher_position = position
             teacher.emails = [Email(email)]
+            teacher.location = location
             teacher.accepted_terms = datetime.utcnow()
             meta.Session.add(teacher)
             meta.Session.commit()

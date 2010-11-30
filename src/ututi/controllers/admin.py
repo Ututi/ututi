@@ -30,6 +30,7 @@ from random import Random
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import PhoneNumberValidator, GroupCouponValidator, validate
+from ututi.lib.emails import teacher_confirmed_email
 from ututi.model.events import Event
 from ututi.model import Region
 from ututi.model import FileDownload
@@ -692,11 +693,14 @@ class AdminController(BaseController):
         if command == 'confirm':
             teacher.teacher_verified = True
             meta.Session.commit()
+            teacher_confirmed_email(teacher, True)
             h.flash('Teacher confirmed.')
         else:
             from ututi.model import users_table
+            # a hack: cannot update a polymorphic descriptor column using the orm (rejecting a teacher is basically converting him into a user)
             conn = meta.engine.connect()
             upd = users_table.update().where(users_table.c.id==id).values(user_type='user', teacher_verified=None, teacher_position=None)
+            teacher_confirmed_email(teacher, False)
             conn.execute(upd)
             h.flash('Teacher rejected.')
 

@@ -22,4 +22,5 @@
   <li>${h.link_to('School grades', url(controller='admin', action='school_grades'))}</li>
   <li>${h.link_to('Book science types', url(controller='admin', action='science_types'))}</li>
   <li>${h.link_to('Book types', url(controller='admin', action='book_types'))}</li>
+  <li>${h.link_to('Teachers', url(controller='admin', action='teachers'))}</li>
 </ul>

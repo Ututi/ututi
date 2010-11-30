@@ -12,7 +12,7 @@
     <span class="result-count">(${ungettext("%(count)s teacher", "%(count)s teachers", len(c.teachers)) % dict(count = len(c.teachers))})</span>
   </h3>
 
-  <table id="message_list" style="width: 100%;">
+  <table id="teacher_list" style="width: 100%;">
     <tr>
       <th>${_('Fullname')}</th>
       <th>${_('Email')}</th>
@@ -23,9 +23,15 @@
 
     %for teacher in c.teachers:
     <tr>
-      <td><a href="${teacher.url()}" class="author-link">${teacher.fullname}</a></td>
+      <td class="name"><a href="${teacher.url()}" class="author-link">${teacher.fullname}</a></td>
       <td>${teacher.emails[0].email}</td>
-      <td><a href="${teacher.location.url()}">${', '.join(teacher.location.hierarchy())}</a></td>
+      <td>
+        %if teacher.location is not None:
+        <a href="${teacher.location.url()}">${', '.join(teacher.location.hierarchy())}</a>
+        %else:
+        -
+        %endif
+      </td>
       <td>${teacher.teacher_position}</td>
       <td>
         <div style="float: left">${h.button_to(_('Confirm'), url(controller='admin', action='teacher_status', command='confirm', id=teacher.id))}</div>

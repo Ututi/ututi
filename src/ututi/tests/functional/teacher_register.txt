@@ -40,3 +40,32 @@ Teachers can also register using facebook:
     >>> browser.url
     'http://localhost/register/welcome?fb=True'
 
+The administrator should now see a request to confirm a teacher:
+    >>> browser2 = Browser.logIn()
+    >>> browser2.open('http://localhost/admin')
+    >>> browser2.getLink('Teachers').click()
+    >>> browser2.printQuery("id('teacher_list')//td[@class='name']//text()")
+    Mr. teacher
+    John Smith
+
+Let's try and accept the second teacher:
+    >>> browser2.getControl('Confirm', index=1).click()
+    >>> print mail_queue.pop().payload()
+    John Smith,
+    Your request to join Ututi as a teacher has been confirmed!
+    You may now visit your Ututi dashboard here: http://localhost/ .
+    At Ututi you will be able to::
+    - Create your own profile with all Your courses and materials.
+    - Easily publish Your lecture notes so that Your students can find and access them.
+    - Easily communicate with Your students.
+    The Ututi team
+
+TODO: check if the user now can act as a teacher
+
+Let's also reject the first teacher:
+    >>> browser2.getControl('Deny', index=0).click()
+    >>> print mail_queue.pop().payload()
+    Mr. teacher,
+    Your request to join Ututi as a teacher has been rejected.
+    If this was a misunderstanding, please contact us directly at: info@ututi.lt.
+    The Ututi team
