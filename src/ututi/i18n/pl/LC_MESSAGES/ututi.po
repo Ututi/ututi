@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-11-30 06:53+0200\n"
+"PO-Revision-Date: 2010-11-30 16:13+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -26,9 +26,6 @@ msgstr "Wątek usunięty."
 
 msgid "Blog snippet updated."
 msgstr "Aktualizacja wątku na blogu."
-
-msgid "Please enter a number"
-msgstr "Proszę podać numer"
 
 msgid "Specify correct science type."
 msgstr ""
@@ -749,6 +746,12 @@ msgstr "Potwierdzenie przyjęcia do ututi grupy "
 
 msgid "Group space bought"
 msgstr "Przestrzeń kupiona przez grupę"
+
+msgid "Your account has been confirmed!"
+msgstr ""
+
+msgid "New teacher!"
+msgstr ""
 
 msgid "Community"
 msgstr "Wspólnota"
@@ -1825,6 +1828,15 @@ msgstr[0] "znaleziono  %(count)s wydarzenie"
 msgstr[1] "znaleziono  %(count)s wydarzenia"
 msgstr[2] "znaleziono  %(count)s wydarzeń"
 
+msgid "Fullname"
+msgstr ""
+
+msgid "University"
+msgstr "Uczelnia"
+
+msgid "Make a teacher"
+msgstr ""
+
 msgid "Unverified teachers"
 msgstr ""
 
@@ -1835,12 +1847,6 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-msgid "Fullname"
-msgstr ""
-
-msgid "University"
-msgstr "Uczelnia"
-
 msgid "Position"
 msgstr ""
 
@@ -1849,6 +1855,18 @@ msgstr "Zaakceptuj"
 
 msgid "Deny"
 msgstr "Odmów"
+
+msgid "Make any user a teacher:"
+msgstr ""
+
+msgid "User ID"
+msgstr ""
+
+msgid "User name or email fragment"
+msgstr ""
+
+msgid "Find"
+msgstr ""
 
 msgid "Ututi users:"
 msgstr "Użytkownicy Ututi:"
@@ -2050,12 +2068,6 @@ msgstr ""
 
 msgid "Edit book"
 msgstr ""
-
-msgid "free"
-msgstr "wolny"
-
-msgid "national_currency"
-msgstr "krajowa_waluta"
 
 msgid "more"
 msgstr "więcej"
@@ -2302,6 +2314,40 @@ msgstr "Do zobaczenia, <br/>U-Team"
 
 msgid "If you would like to join Ututi now, please follow this link:"
 msgstr "Chcesz dołączyc do Ututi teraz? Kliknij:"
+
+msgid "Your request to join Ututi as a teacher has been confirmed!"
+msgstr ""
+
+#, python-format
+msgid "You may now visit your Ututi dashboard here: %(url)s ."
+msgstr ""
+
+msgid "At Ututi you will be able to:"
+msgstr ""
+
+msgid "Create your own profile with all Your courses and materials."
+msgstr ""
+
+msgid ""
+"Easily publish Your lecture notes so that Your students can find and "
+"access them."
+msgstr ""
+
+msgid "Easily communicate with Your students."
+msgstr ""
+
+msgid "A new teacher has registered:"
+msgstr ""
+
+msgid "Ututi"
+msgstr ""
+
+msgid "Your request to join Ututi as a teacher has been rejected."
+msgstr ""
+
+#, python-format
+msgid "If this was a misunderstanding, please contact us directly at: %(email)s."
+msgstr ""
 
 msgid "No categories yet."
 msgstr "Jeszcze nie ma żadnej kategorii"
@@ -3297,10 +3343,8 @@ msgstr ""
 
 msgid ""
 "The SMS costs <strong>7 Lt</strong> and will increase your file limit to "
-"<strong>5&nbsp;GB</strong> for another month."
+"<strong>7&nbsp;GB</strong> for another month."
 msgstr ""
-"Koszt jednego SMSa <strong>4.88 zł </strong>. Zwiększy on przestrzeń na "
-"pliki Twojej grupy do <strong>5&nbsp;GB</strong>  (na okres 1 miesiąca)."
 
 #, python-format
 msgid "Your private file area is limited to 5&nbsp;GB until <strong>%s</strong>."

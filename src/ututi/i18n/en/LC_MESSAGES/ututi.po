@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-11-30 06:52+0200\n"
+"PO-Revision-Date: 2010-11-30 16:13+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -24,9 +24,6 @@ msgid "Blog snippet deleted."
 msgstr ""
 
 msgid "Blog snippet updated."
-msgstr ""
-
-msgid "Please enter a number"
 msgstr ""
 
 msgid "Specify correct science type."
@@ -707,6 +704,12 @@ msgid "Ututi group membership confirmation"
 msgstr ""
 
 msgid "Group space bought"
+msgstr ""
+
+msgid "Your account has been confirmed!"
+msgstr ""
+
+msgid "New teacher!"
 msgstr ""
 
 msgid "Community"
@@ -1691,6 +1694,15 @@ msgid_plural "found %(count)s subjects"
 msgstr[0] ""
 msgstr[1] ""
 
+msgid "Fullname"
+msgstr ""
+
+msgid "University"
+msgstr ""
+
+msgid "Make a teacher"
+msgstr ""
+
 msgid "Unverified teachers"
 msgstr ""
 
@@ -1700,12 +1712,6 @@ msgid_plural "%(count)s teachers"
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "Fullname"
-msgstr ""
-
-msgid "University"
-msgstr ""
-
 msgid "Position"
 msgstr ""
 
@@ -1713,6 +1719,18 @@ msgid "Confirm"
 msgstr ""
 
 msgid "Deny"
+msgstr ""
+
+msgid "Make any user a teacher:"
+msgstr ""
+
+msgid "User ID"
+msgstr ""
+
+msgid "User name or email fragment"
+msgstr ""
+
+msgid "Find"
 msgstr ""
 
 msgid "Ututi users:"
@@ -1900,12 +1918,6 @@ msgstr ""
 msgid "Edit book"
 msgstr ""
 
-msgid "free"
-msgstr ""
-
-msgid "national_currency"
-msgstr ""
-
 msgid "more"
 msgstr ""
 
@@ -2091,6 +2103,40 @@ msgid "Looking forward to meeting you,<br/>The Ututi team"
 msgstr ""
 
 msgid "If you would like to join Ututi now, please follow this link:"
+msgstr ""
+
+msgid "Your request to join Ututi as a teacher has been confirmed!"
+msgstr ""
+
+#, python-format
+msgid "You may now visit your Ututi dashboard here: %(url)s ."
+msgstr ""
+
+msgid "At Ututi you will be able to:"
+msgstr ""
+
+msgid "Create your own profile with all Your courses and materials."
+msgstr ""
+
+msgid ""
+"Easily publish Your lecture notes so that Your students can find and "
+"access them."
+msgstr ""
+
+msgid "Easily communicate with Your students."
+msgstr ""
+
+msgid "A new teacher has registered:"
+msgstr ""
+
+msgid "Ututi"
+msgstr ""
+
+msgid "Your request to join Ututi as a teacher has been rejected."
+msgstr ""
+
+#, python-format
+msgid "If this was a misunderstanding, please contact us directly at: %(email)s."
 msgstr ""
 
 msgid "No categories yet."
@@ -3014,7 +3060,7 @@ msgstr ""
 
 msgid ""
 "The SMS costs <strong>7 Lt</strong> and will increase your file limit to "
-"<strong>5&nbsp;GB</strong> for another month."
+"<strong>7&nbsp;GB</strong> for another month."
 msgstr ""
 
 #, python-format
