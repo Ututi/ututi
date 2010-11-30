@@ -191,7 +191,7 @@ ${parent.head_tags()}
         <div class="profile">
           <div class="floatleft avatar-small">
             %if group.has_logo():
-              ${h.image('/img/avatar-small.png', alt='logo', class_='group-logo')|n}
+              ${h.image(url(controller='group', action='logo', id=group.group_id, width=35, height=35), alt='logo', class_='group-logo')|n}
             %else:
               <img class="group-logo" src="${url(controller='group', action='logo', id=group.group_id, width=36, height=35)}" alt="logo" />
             %endif
