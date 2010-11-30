@@ -126,6 +126,10 @@ class BookForm(Schema):
     chained_validators = [BookValidator()]
 
 class BooksController(BaseController):
+
+    def __before__(self):
+        c.book_types = meta.Session.query(BookType).all()
+
     def _make_pages(self, items):
         return paginate.Page(items,
                              page=int(request.params.get('page', 1)),
@@ -135,14 +139,12 @@ class BooksController(BaseController):
 
 
     def index(self):
-        c.book_types = meta.Session.query(BookType).all()
         books = meta.Session.query(Book)
         c.books = self._make_pages(books)
         return render('books/index.mako')
 
     def _load_defaults(self):
         c.book_departments = Book.departments
-        c.book_types = meta.Session.query(BookType).all()
         c.school_grades = meta.Session.query(SchoolGrade).all()
         c.cities = meta.Session.query(City).all()
         self._load_science_types()
@@ -180,7 +182,6 @@ class BooksController(BaseController):
 
     @ActionProtector("user")
     def _add(self):
-        c.book_types = meta.Session.query(BookType).all()
         self._load_defaults()
         c.current_science_types = meta.Session.query(ScienceType).all()
         return render('books/add.mako')
@@ -189,7 +190,6 @@ class BooksController(BaseController):
         return self._add()
 
     def show(self, id):
-        c.book_types = meta.Session.query(BookType).all()
         c.book = meta.Session.query(Book).filter(Book.id == id).one()
         return render('books/show.mako')
 
@@ -203,7 +203,6 @@ class BooksController(BaseController):
 
     @ActionProtector("user")
     def edit(self, id):
-        c.book_types = meta.Session.query(BookType).all()
         c.book = meta.Session.query(Book).filter(Book.id == id).one()
         if c.book.owner != c.user:
             h.flash(_('Only owner of this book can do this action'))
@@ -268,7 +267,6 @@ class BooksController(BaseController):
         return serve_logo('book', int(id), width=width, height=height)
 
     def _catalog_form(self):
-        c.book_types = meta.Session.query(BookType).all()
         return render('books/catalog.mako')
 
     def catalog(self, books_department=None, books_type_name=None, science_type_id=None, location_id=None, school_grade_id=None):
@@ -326,7 +324,6 @@ class BooksController(BaseController):
 
     @ActionProtector("user")
     def my_books(self):
-        c.book_types = meta.Session.query(BookType).all()
         books = meta.Session.query(Book).filter(Book.owner == c.user)
         c.books = self._make_pages(books)
         return render('books/my_books.mako')
