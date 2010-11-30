@@ -34,7 +34,7 @@
         ${_('SMS message')}
       </div>
       <div>
-        ${_('Send an SMS message to number <span style="font-size: 14px">%(phone)s</span> with the following content:') % dict(phone=c.pylons_config.get('fortumo.phone_number', '1337')) |n}
+        ${_('Send an SMS message to number <span style="font-size: 14px">%(phone)s</span> with the following content:') % dict(phone=c.pylons_config.get('fortumo.personal_sms_credits.number', '1337')) |n}
       </div>
       <div class="sms-content">TXT ${c.pylons_config.get('fortumo.personal_sms_credits.code')} ${group.group_id}</div>
       <div>
@@ -183,7 +183,7 @@
   </div>
 
   <div>
-    ${_('You can send a message to your group directly from your phone. The message costs <strong>2 Lt</strong>, which pays for the delivery of the message to all recipients (your SMS credits will not be charged). Send the following text to number %(phone)s:') % dict(phone=c.pylons_config.get('fortumo.phone_number', '1337')) |n}
+    ${_('You can send a message to your group directly from your phone. The message costs <strong>2 Lt</strong>, which pays for the delivery of the message to all recipients (your SMS credits will not be charged). Send the following text to number %(phone)s:') % dict(phone=c.pylons_config.get('fortumo.group_message.number', '1337')) |n}
   </div>
 
   <div class="group-sms-content">

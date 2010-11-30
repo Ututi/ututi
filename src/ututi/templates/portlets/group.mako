@@ -82,11 +82,11 @@
                       ${_('SMS message')}
                   </div>
                   <div>
-                    ${_('Send an SMS message to number <span style="font-size: 14px">%(phone)s</span> with the following content:') % dict(phone=c.pylons_config.get('fortumo.phone_number', '1337')) |n}
+                    ${_('Send an SMS message to number <span style="font-size: 14px">%(phone)s</span> with the following content:') % dict(phone=c.pylons_config.get('fortumo.group_space.number', '1337')) |n}
                   </div>
                   <div class="sms-content">TXT ${c.pylons_config.get('fortumo.group_space.code')} ${c.group.group_id}</div>
                   <div>
-                    ${_('The SMS costs <strong>7 Lt</strong> and will increase your file limit to <strong>5&nbsp;GB</strong> for another month.')|n}
+                    ${_('The SMS costs <strong>7 Lt</strong> and will increase your file limit to <strong>7&nbsp;GB</strong> for another month.')|n}
                   </div>
                   %if c.group.private_files_lock_date:
                     <div>${_('Your private file area is limited to 5&nbsp;GB until <strong>%s</strong>.') % c.group.private_files_lock_date.date().isoformat() |n}</div>
