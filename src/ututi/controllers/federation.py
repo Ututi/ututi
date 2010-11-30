@@ -82,9 +82,6 @@ class FederationMixin(object):
 
 
 class FederationController(BaseController, FederationMixin):
-    def fbchannel(self):
-        return render('/fbchannel.mako')
-
     def google_register(self):
         openid_session = session.get("openid_session", {})
         openid_store = None # stateless

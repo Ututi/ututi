@@ -179,6 +179,9 @@ class UniversityListMixin(BaseController):
 
 class HomeController(UniversityListMixin, FederationMixin):
 
+    def fbchannel(self):
+        return render('/fbchannel.mako')
+
     def __before__(self):
         c.ututi_supporters = get_supporters()
 
