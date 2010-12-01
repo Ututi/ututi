@@ -11,18 +11,6 @@ ${parent.head_tags()}
 //<![CDATA[
 
 $(document).ready(function(){
-  function unselectSubject(event) {
-    var url = $(event.target).parent().prev('.remove_url').val();
-    $.ajax({type: "GET",
-            url: url,
-            success: function(msg){
-                $(event.target).closest('ul').parent().remove();
-    }});
-    return false;
-  }
-
-  $('.remove_subject_button').click(unselectSubject);
-
   $('.ignore_subject_button').click(function (event) {
     var url = $('input.ignore_url', $(event.target).closest("li")).val();
     $.ajax({type: "GET",
@@ -81,7 +69,7 @@ $(document).ready(function(){
 </script>
 </%def>
 
-<%def name="subjects_block(title, update_url, selected, subjects, unwatch=False, group=None)">
+<%def name="subjects_block(title, update_url, selected, subjects, group=None)">
 <%self:rounded_block class_='portletGroupFiles subject_description'>
   <div class="GroupFiles GroupFilesGroups ${not group and 'ProfileSubjects' or ''}">
     <h2 class="portletTitle bold">
@@ -118,18 +106,13 @@ $(document).ready(function(){
 
   <div>
     %if subjects:
-      ${subject_list(subjects, unwatch)}
+      ${subject_list(subjects, group)}
     %elif group is None:
       <span class="empty_note">
         ${_('No watched subjects were found.')}
       </span>
     %endif
   </div>
-  %if group is None:
-    <div style="padding: 0; margin-left: 20px; margin-top: 5px;">
-      ${h.button_to(_('Add a subject'), url(controller='profile', action='watch_subjects'), class_='btnMedium')}
-    </div>
-  %endif
 </%self:rounded_block>
 </%def>
 
@@ -175,16 +158,16 @@ $(document).ready(function(){
 </div>
 </%def>
 
-<%def name="subject_list(subjects, unwatch=False)">
+<%def name="subject_list(subjects, group=None)">
   <%
      count = len(subjects)
   %>
 %for n, subject in enumerate(subjects):
 <div class="GroupFilesContent-line-dal">
   <ul class="grupes-links-list-dalykai">
-    %if not unwatch and subject in c.user.ignored_subjects:
+    %if group is not None and subject in c.user.ignored_subjects:
       <% cls = 'disabled' %>
-    %elif not unwatch:
+    %elif group is not None:
       <% cls = 'enabled' %>
     %else:
       <% cls = '' %>
@@ -195,13 +178,7 @@ $(document).ready(function(){
           <span>
             <a class="subject_title blark" href="${subject.url()}">${subject.title}</a>
           </span>
-          %if unwatch:
-          <input type="hidden" class="remove_url"
-                 value="${url(controller='profile', action='js_unwatch_subject', subject_id=subject.id)}" />
-          <a href="${url(controller='profile', action='unwatch_subject', subject_id=subject.id)}" class="remove_subject_button">
-            ${h.image('/images/details/icon_cross_subjects.png', alt='unwatch')|n}
-          </a>
-          %else:
+          %if group is not None:
           <input type="hidden" class="ignore_url"
                  value="${url(controller='profile', action='js_ignore_subject', subject_id=subject.id)}" />
           <input type="hidden" class="unignore_url"
@@ -225,10 +202,10 @@ $(document).ready(function(){
 </%def>
 
 <div id="subject_settings">
-${subjects_block(_('Personally watched subjects'), url(controller='profile', action='set_receive_email_each'), c.user.receive_email_each, c.subjects, True)}
+${subjects_block(_('Personally watched subjects'), url(controller='profile', action='set_receive_email_each'), c.user.receive_email_each, c.subjects)}
 
 %for group in c.groups:
   ${subjects_block(_("Group's %(group_title)s subjects") % dict(group_title=h.link_to(group.title, group.url())),
-                   group.url(action='set_receive_email_each'), group.is_member(c.user).receive_email_each, group.watched_subjects, False, group)}
+                   group.url(action='set_receive_email_each'), group.is_member(c.user).receive_email_each, group.watched_subjects, group)}
 %endfor
 </div>
