@@ -550,5 +550,28 @@ class UserProfileController(ProfileControllerBase):
         return render_mako_def('/profile/home.mako', 'phone_confirmed')
 
 
-class TeacherProfileController(UserProfileController):
-    pass
+class TeacherProfileController(ProfileControllerBase):
+    def _actions(self, selected):
+        """Generate a list of all possible actions.
+
+        The action with the name matching the `selected' parameter is
+        marked as selected.
+        """
+        bcs = {
+            'home':
+            {'title': _("What's New?"),
+             'link': url(controller='profile', action='home')},
+            }
+        if selected in bcs.keys():
+            return bcs[selected]
+
+    @ActionProtector("user")
+    def home(self):
+        c.breadcrumbs.append(self._actions('home'))
+        c.action = 'home'
+
+        return render('/profile/teacher_home.mako')
+
+    @ActionProtector("user")
+    def register_welcome(self):
+        return render('profile/teacher_home.mako')
