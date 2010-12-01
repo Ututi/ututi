@@ -1,14 +1,12 @@
-from datetime import date, datetime
+from datetime import datetime
 import logging
 import facebook
 import random
 
 from sqlalchemy.orm.exc import NoResultFound
-from sqlalchemy.sql.expression import desc, asc, func
+from sqlalchemy.sql.expression import desc
 from formencode import htmlfill
 from formencode.api import Invalid
-
-from webhelpers import paginate
 
 from pylons import request, tmpl_context as c, url, config, session
 from pylons.templating import render_mako_def
@@ -20,7 +18,6 @@ import ututi.lib.helpers as h
 from ututi.lib.base import render
 from ututi.lib.emails import email_confirmation_request
 from ututi.lib.events import event_types_grouped
-from ututi.lib.search import search_query
 from ututi.lib.security import ActionProtector
 from ututi.lib.image import serve_logo
 from ututi.lib.forms import validate
@@ -30,7 +27,7 @@ from ututi.lib.validators import manual_validate
 from ututi.model.events import Event
 from ututi.model import get_supporters
 from ututi.model import LocationTag, BlogEntry
-from ututi.model import meta, Email, Group, SearchItem, User
+from ututi.model import meta, Email, User
 from ututi.controllers.profile.validators import HideElementForm
 from ututi.controllers.profile.validators import ContactForm, LocationForm, LogoUpload, PhoneConfirmationForm, PhoneForm, ProfileForm, PasswordChangeForm
 from ututi.controllers.profile.wall import WallMixin, WallSettingsForm
@@ -551,15 +548,6 @@ class UserProfileController(ProfileControllerBase):
         c.user.confirm_phone_number()
         meta.Session.commit()
         return render_mako_def('/profile/home.mako', 'phone_confirmed')
-
-    @ActionProtector("user")
-    @validate(schema=LocationForm, form='home')
-    def goto_location(self):
-        if hasattr(self, 'form_result'):
-            location = self.form_result.get('location', None)
-            if location is not None:
-                redirect(location.url())
-        redirect(url(controller='profile', action='home'))
 
 
 class TeacherProfileController(UserProfileController):
