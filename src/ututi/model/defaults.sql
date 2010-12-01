@@ -1336,7 +1336,6 @@ CREATE TABLE books (
        price varchar(250) DEFAULT '' NOT NULL,
        logo bytea DEFAULT NULL,
        owner_id int8 NOT NULL REFERENCES users(id) on delete cascade,
-       show_phone boolean DEFAULT TRUE,
        city_id int8 DEFAULT NULL REFERENCES cities(id) on delete restrict,
        science_type_id int8 NOT NULL REFERENCES science_types(id) on delete restrict,
        type_id int8 NOT NULL REFERENCES book_types(id) on delete restrict,
@@ -1344,6 +1343,9 @@ CREATE TABLE books (
        school_grade_id int8 REFERENCES school_grades(id) on delete restrict,
        course varchar(100) default '',
        location_id int8 REFERENCES tags(id),
+       owner_name varchar(50) not null,
+       owner_phone varchar(50) not null,
+       owner_email varchar(100) not null,
        valid_until timestamp not null default (now() at time zone 'UTC'),
        PRIMARY KEY (id)
 );;
