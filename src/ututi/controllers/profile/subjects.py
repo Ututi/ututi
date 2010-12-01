@@ -31,14 +31,6 @@ class WatchedSubjectsMixin(object):
 
         return render_mako_def('/profile/home.mako','subjects_block', subjects=subjects)
 
-    @ActionProtector("user")
-    def subjects(self):
-        c.breadcrumbs.append(self._actions('subjects'))
-        self._set_settings_tabs(current_tab='notifications')
-        c.subjects = c.user.watched_subjects
-        c.groups = c.user.groups
-        return render('profile/subjects.mako')
-
     @validate(schema=SearchSubmit, form='watch_subjects', post_only=False, on_get=True)
     @ActionProtector("user")
     def watch_subjects(self):

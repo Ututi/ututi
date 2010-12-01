@@ -207,6 +207,18 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
                                defaults=defaults)
 
     @ActionProtector("user")
+    def subjects(self):
+        # TODO:
+        # * rename this method to 'notifications'
+        # * breadcrumbs should be unified for all user settings
+        #
+        # c.breadcrumbs.append(self._actions('subjects'))
+        self._set_settings_tabs(current_tab='notifications')
+        c.subjects = c.user.watched_subjects
+        c.groups = c.user.groups
+        return render('profile/notifications.mako')
+
+    @ActionProtector("user")
     def link_google(self):
         session['linking_to_user'] = c.user.id
         session.save()
