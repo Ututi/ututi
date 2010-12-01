@@ -132,6 +132,7 @@
 </%def>
 
 <%def name="subject_list(subjects)">
+<div id="SearchResults">
 %for n, subject in enumerate(subjects):
 <div class="${'GroupFilesContent-line-dal' if n != len(subjects) - 1 else 'GroupFilesContent-line-dal-last'}">
   <ul class="grupes-links-list-dalykai">
@@ -166,6 +167,7 @@
   </ul>
 </div>
 %endfor
+</div>
 </%def>
 
 
