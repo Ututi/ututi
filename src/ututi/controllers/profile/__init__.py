@@ -7,16 +7,16 @@ from ututi.controllers.profile.controllers import UserProfileController, Teacher
 
 log = logging.getLogger(__name__)
 
-class ProfileController(BaseController):
+def ProfileController():
     """
     This is the generic profile controller.
     All interactions are handled by either the UserProfileController
     of the TeacherProfileController, depending on the user.
     """
+    user = current_user()
+    if isinstance(user, Teacher):
+        return TeacherProfileController()
+    else:
+        return UserProfileController()
 
-    def __new__(self):
-        user = current_user()
-        if isinstance(user, Teacher):
-            return TeacherProfileController()
-        else:
-            return UserProfileController()
+ProfileController.__bases__ = []
