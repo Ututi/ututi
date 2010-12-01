@@ -224,7 +224,6 @@ def make_map(config):
     #user registration path
     map.connect('/welcome', controller='profile', action='welcome')
     map.connect('/register/welcome', controller='profile', action='register_welcome')
-    map.connect('/findgroup', controller='profile', action='findgroup')
 
     map.connect('/profile/logo/{width}/{height}',
                 controller='profile',
