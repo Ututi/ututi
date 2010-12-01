@@ -10,6 +10,7 @@
 
 
 <%def name="head_tags()">
+${parent.head_tags()}
 <%newlocationtag:head_tags />
 </%def>
 

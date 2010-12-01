@@ -3,6 +3,9 @@
 <%namespace file="/portlets/banners/base.mako" import="*"/>
 <%namespace file="/portlets/books.mako" import="*"/>
 
+<%def name="head_tags()">
+${h.stylesheet_link(h.path_with_hash('/books.css'))}
+</%def>
 
 <%def name="anonymous_header()">
 ${self.anonymous_menu()}
@@ -18,8 +21,6 @@ ${books_menu()}
   <ul>
     <li><a href="${url(controller='books', action='index')}">${_('Home')}</a></li>
     <li><a href="${url(controller='books', action='about')}">${_('About U-Books')}</a></li>
-    <li><a href="${url(controller='books', action='catalog')}">${_('Catalog')}</a></li>
-    <li><a href="${url(controller='books', action='forum')}">${_('Forum')}</a></li>
     <li><a class="orange" href="${url(controller='books', action='add')}">${_('Upload a Book')}</a></li>
   </ul>
 </div>
@@ -45,20 +46,6 @@ ${local.main_menu()}
 </%def>
 
 <%def name="loggedin_menu()">
-<div id="books-header-search">
-  <a class="forward-link-to" href="${url(controller='home', action='index')}">ututi</a>
-  <form id="searchForm" action="${url(controller='profile', action='search')}">
-    <fieldset>
-      <legend class="a11y">${_('Search')}</legend>
-      <label class="textField">
-        <span class="a11y">${_('Search text')}</span>
-        <input type="text" name="text"/>
-        <span class="edge"></span>
-      </label>
-      ${h.input_submit(_('search_'))}
-    </fieldset>
-  </form>
-</div>
 ${local.main_menu()}
 <div class="loggedin-nav" id="personal-data">
     <ul>

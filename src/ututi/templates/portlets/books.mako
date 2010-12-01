@@ -1,5 +1,4 @@
 <%inherit file="/portlets/base.mako"/>
-<%namespace file="/portlets/user.mako" import="user_support_portlet"/>
 
 <%def name="book_types(book_types, books_department)">
 %if book_types is not None and book_types != "":
@@ -41,7 +40,7 @@
     </%def>
     <%self:book_types book_types="${c.book_types}" books_department="other" />
   </%self:action_portlet>
-  ${user_support_portlet()}
+
  <script type="text/javascript">
    //<![CDATA[
    $(document).ready(function(){
@@ -49,4 +48,20 @@
    });
    //]]>
  </script>
+ <%self:uportlet id="search_portlet" portlet_class="orange">
+   <%def name="header()">
+     ${_('Search')}
+   </%def>
+   <form action="${url(controller='books', action='search')}">
+     <fieldset>
+       <legend class="a11y">${_('Search')}</legend>
+       <label class="textField">
+         <span class="a11y">${_('Search text')}</span>
+         <input type="text" name="text"/>
+         <span class="edge"></span>
+       </label>
+       ${h.input_submit(_('search_'))}
+     </fieldset>
+   </form>
+ </%self:uportlet>
 </%def>
