@@ -511,22 +511,6 @@ def object_link(object):
     elif isinstance(object, ForumPost):
         return link_to(object.title, object.url(new=True))
 
-def book_departments_select(label, book_departments, on_change=None):
-    """Renders select box for book departments"""
-    html = ""
-    html += "<label>"
-    html += label + ": "
-    if on_change:
-        on_change = 'onChange = "'+on_change+'"'
-    else:
-        on_change = ""
-    html += '<select id="department_id_select" name="department_id" '+on_change +'>'
-    for book_department in book_departments:
-        html += "<option value='{0}'>{1}</option>".format(book_departments.index(book_department), _(book_department.capitalize()))
-    html += '</select>'
-    html += '</label>'
-    return literal(html)
-
 def list_for_select(objects_list, **kwargs):
     """Generates double array with object ids and names list"""
     tuple_list = [("", "")]
