@@ -248,7 +248,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
             c.user.update_password(self.form_result['new_password'].encode('utf-8'))
             meta.Session.commit()
             h.flash(_('Your password has been changed!'))
-            redirect(url(controller='profile', action='home'))
+            redirect(url(controller='profile', action='edit_password'))
         else:
             redirect(url(controller='profile', action='edit_password'))
 
