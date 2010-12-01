@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-11-30 16:13+0200\n"
+"PO-Revision-Date: 2010-12-01 16:41+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -628,11 +628,34 @@ msgstr "Negali trinti šio katalogo."
 msgid "New page"
 msgstr "Naujas puslapis"
 
+msgid ""
+"All teacher tools will be available to You once our team confirms You as "
+"a teacher. Thank You!"
+msgstr ""
+
 msgid "This user profile is not public"
 msgstr "Šio naudotojo profilis nėra viešai prieinamas"
 
 msgid "Search"
 msgstr "Paieška"
+
+msgid "Profile"
+msgstr ""
+
+msgid "Contacts"
+msgstr ""
+
+msgid "Password"
+msgstr "Slaptažodis"
+
+msgid "Wall"
+msgstr ""
+
+msgid "Notifications"
+msgstr "Pranešimai"
+
+msgid "Your wall settings have been updated."
+msgstr "Tavo sienos nustatymai pakeisti"
 
 msgid "Your Google account has been unlinked."
 msgstr "Google paskyra atsieta."
@@ -703,9 +726,6 @@ msgstr "Netinkamas dalykas"
 
 msgid "Wiki page created."
 msgstr "Wiki užrašai sukurti"
-
-msgid "Your wall settings have been updated."
-msgstr "Tavo sienos nustatymai pakeisti"
 
 #, python-format
 msgid "Member: %s (%s)"
@@ -1112,9 +1132,6 @@ msgstr "El. paštas"
 
 msgid "Gadu gadu"
 msgstr "Gadu gadu"
-
-msgid "Password"
-msgstr "Slaptažodis"
 
 msgid "Repeat password"
 msgstr "Pakartoti slaptažodį"
@@ -1729,9 +1746,6 @@ msgstr "Pranešimo tekstas"
 msgid "Content"
 msgstr "Turinys"
 
-msgid "Notifications"
-msgstr "Pranešimai"
-
 msgid "School grade"
 msgstr ""
 
@@ -2043,13 +2057,13 @@ msgstr ""
 msgid "About U-Books"
 msgstr ""
 
-msgid "Catalog"
-msgstr ""
-
 msgid "Upload a Book"
 msgstr ""
 
 msgid "My books"
+msgstr ""
+
+msgid "Catalog"
 msgstr ""
 
 msgid "Order by"
@@ -3184,7 +3198,7 @@ msgid "Message to the group"
 msgstr "Laiškas grupei"
 
 msgid "Start"
-msgstr "Pradėti"
+msgstr "Pradžia"
 
 msgid "Inbox"
 msgstr "Žinutės"
@@ -3588,26 +3602,11 @@ msgstr "http://blog.ututi.lt"
 msgid "Read our blog"
 msgstr "Mūsų blogas"
 
-msgid "Profile settings"
-msgstr "Profilio nustatymai"
+msgid "back to home page"
+msgstr ""
 
-msgid "back to the profile"
-msgstr "grįžti į profilį"
-
-msgid "Address of your website or blog"
-msgstr "Nuosavo puslapio arba blog'o adresas"
-
-msgid "About yourself"
-msgstr "Šiek tiek informacijos apie save"
-
-msgid "Show my profile to unregistered users and search engines"
-msgstr "Rodyti profilį neregistruotiems naudotojams ir paieškos varikliams"
-
-msgid "Personal logo"
-msgstr "Tavo nuotrauka"
-
-msgid "Contact data"
-msgstr "Kontaktiniai duomenys"
+msgid "Contact information"
+msgstr ""
 
 msgid "Your GG number"
 msgstr "Tavo GG numeris"
@@ -3620,14 +3619,10 @@ msgstr "Siųsti kodą dar kartą"
 
 msgid ""
 "If you want to confirm your GaduGadu number,\n"
-"                         please enter the code that you have received\n"
-"                         in your GG. Also don't forget to add Ututi\n"
-"                        (<a href=\"gg:5437377\">5437377</a>) to your "
-"friends."
+"                     please enter the code that you have received\n"
+"                     in your GG. Also don't forget to add Ututi\n"
+"                    (<a href=\"gg:5437377\">5437377</a>) to your friends."
 msgstr ""
-"Norėdamas patvirtinti savo GaduGadu numerį,\n"
-"įvesk gautą kodą. Taip pat nepamiršk pridėti Ututi\n"
-"(<a href=\"gg:5437377\">5437377</a>) prie savo draugų."
 
 msgid "Submit code"
 msgstr "Patvirtinti"
@@ -3656,8 +3651,8 @@ msgstr "Atnaujinti kontaktus"
 msgid "Unlink"
 msgstr "Atsieti"
 
-msgid "Change your password"
-msgstr "Pakeisk savo slaptažodį"
+msgid "Link to"
+msgstr ""
 
 msgid "Current password"
 msgstr "Dabartinis slaptažodis"
@@ -3667,6 +3662,21 @@ msgstr "Naujas slaptažodis"
 
 msgid "Repeat the new password"
 msgstr "Pakartok naują slaptažodį"
+
+msgid "Profile settings"
+msgstr "Profilio nustatymai"
+
+msgid "Address of your website or blog"
+msgstr "Nuosavo puslapio arba blog'o adresas"
+
+msgid "About yourself"
+msgstr "Šiek tiek informacijos apie save"
+
+msgid "Show my profile to unregistered users and search engines"
+msgstr "Rodyti profilį neregistruotiems naudotojams ir paieškos varikliams"
+
+msgid "Personal logo"
+msgstr "Tavo nuotrauka"
 
 msgid "What's new?"
 msgstr "Kas naujo?"
@@ -3695,66 +3705,8 @@ msgstr ""
 "href=\"%(groups_list_link)s\">prisijungti</a> prie grupės ir pradėti "
 "stebėti kelis <a href=\"%(subjects_list_link)s\">dalykus</a>."
 
-msgid "Filter by school:"
-msgstr "Filtruoti pagal mokymo įstaigą"
-
-msgid "Did not find the group you were looking for?"
-msgstr "Nėra grupės, kurios ieškojai?"
-
-msgid "New group"
-msgstr "nauja grupė"
-
-msgid "Create your group!"
-msgstr "Sukurti savo grupę"
-
 msgid "Go to my department"
 msgstr "Eiti į mano fakultetą"
-
-msgid "Tell us where you are studying"
-msgstr "Pasakyk, kur studijuoji"
-
-msgid "save"
-msgstr "Saugoti"
-
-msgid "Please enter a university."
-msgstr "Įveskite universitetą"
-
-msgid "What's your phone number?"
-msgstr "Koks Jūsų mob. telefono numeris?"
-
-msgid "Mobile phone number: "
-msgstr "Telefono numeris: "
-
-msgid "Please enter a phone number."
-msgstr "Įveskite telefono numerį"
-
-msgid "The entered phone number is invalid."
-msgstr "Įvestas numeris netinkamas."
-
-msgid "(use the format +37067812345)"
-msgstr "(naudokite formatą +37067812345)"
-
-msgid "no, thanks"
-msgstr "Ne, ačiū"
-
-msgid "Please confirm your phone number"
-msgstr "Patvirtinkite telefono numerį"
-
-msgid ""
-"Enter the confirmation code that you received by SMS to prove that this "
-"number belongs to you."
-msgstr ""
-"Įveskite patvirtinimo kodą, gautą SMS žinute, kad įrodytumėte, jog šis  "
-"telefono numeris priklauso jums. (pvz.: +37069912345)"
-
-msgid "Confirmation code: "
-msgstr "Patvirtinimo kodas: "
-
-msgid "Please enter a confirmation key."
-msgstr "Įveskite patvirtinimo kodą."
-
-msgid "Invalid confirmation key."
-msgstr "Netinkamas patvirtinimo kodas."
 
 msgid "Your phone has been confirmed. Thank you."
 msgstr "Telefono numeris patvirtintas. Ačiū!"
@@ -3785,6 +3737,15 @@ msgstr "Paprasta - pakanka žinoti grupės draugų el. pašto adresus!"
 msgid "Use the group's mailing list!"
 msgstr "Naudokis grupės el. pašto konferencija!"
 
+msgid "no, thanks"
+msgstr "Ne, ačiū"
+
+msgid "Files:"
+msgstr "Failų: "
+
+msgid "Wiki pages:"
+msgstr "Wiki užrašų:"
+
 msgid "Show subjects from my groups"
 msgstr "Rodyti grupės dalykus"
 
@@ -3793,18 +3754,6 @@ msgstr "priminimų apie dalykus nustatymai"
 
 msgid "add subject"
 msgstr "pridėti dalyką"
-
-msgid "Watch subject"
-msgstr "stebėti dalyką"
-
-msgid "watch subjects"
-msgstr "stebėti dalykus"
-
-msgid "Files:"
-msgstr "Failų: "
-
-msgid "Wiki pages:"
-msgstr "Wiki užrašų:"
 
 msgid ""
 "Ututi is Your university online. Here You and Your class mates can create"
@@ -3818,6 +3767,55 @@ msgstr ""
 msgid "Share your thoughts about Ututi"
 msgstr "Pasidalinks savo mintimis apie Ututi"
 
+msgid "Tell us where you are studying"
+msgstr "Pasakyk, kur studijuoji"
+
+msgid "save"
+msgstr "Saugoti"
+
+msgid "Please enter a university."
+msgstr "Įveskite universitetą"
+
+msgid "What's your phone number?"
+msgstr "Koks Jūsų mob. telefono numeris?"
+
+msgid "Mobile phone number: "
+msgstr "Telefono numeris: "
+
+msgid "Please enter a phone number."
+msgstr "Įveskite telefono numerį"
+
+msgid "The entered phone number is invalid."
+msgstr "Įvestas numeris netinkamas."
+
+msgid "(use the format +37067812345)"
+msgstr "(naudokite formatą +37067812345)"
+
+msgid "Please confirm your phone number"
+msgstr "Patvirtinkite telefono numerį"
+
+msgid ""
+"Enter the confirmation code that you received by SMS to prove that this "
+"number belongs to you."
+msgstr ""
+"Įveskite patvirtinimo kodą, gautą SMS žinute, kad įrodytumėte, jog šis  "
+"telefono numeris priklauso jums. (pvz.: +37069912345)"
+
+msgid "Confirmation code: "
+msgstr "Patvirtinimo kodas: "
+
+msgid "Please enter a confirmation key."
+msgstr "Įveskite patvirtinimo kodą."
+
+msgid "Invalid confirmation key."
+msgstr "Netinkamas patvirtinimo kodas."
+
+msgid "Watch subject"
+msgstr "stebėti dalyką"
+
+msgid "watch subjects"
+msgstr "stebėti dalykus"
+
 msgid "Very sad..."
 msgstr "Labai gaila..."
 
@@ -3828,11 +3826,8 @@ msgstr ""
 "Mums labai gaila, kad nusprendėte neparemti Ututi. Tikimės, kad dar "
 "grįšite ir paremsite mus kitą kartą. Sėkmės!"
 
-msgid "What have I been doing?"
-msgstr "Ir ką gi aš nuveikiau?"
-
-msgid "You haven't contributed much, have you?"
-msgstr "Ne itin daug nuveikta?.."
+msgid "back to the profile"
+msgstr "grįžti į profilį"
 
 msgid "Watched subjects notification settings"
 msgstr "Priminimų apie dalykus nustatymai"
@@ -3843,12 +3838,24 @@ msgstr "priminimai į el. paštą"
 msgid "Add a subject"
 msgstr "Pridėti dalyką"
 
+msgid "Group's mailing list"
+msgstr ""
+
+msgid "Group's forum"
+msgstr ""
+
 msgid "Personally watched subjects"
 msgstr "Asmeniškai stebimi dalykai"
 
 #, python-format
 msgid "Group's %(group_title)s subjects"
 msgstr "Grupės %(group_title)s dalykai"
+
+msgid "What have I been doing?"
+msgstr "Ir ką gi aš nuveikiau?"
+
+msgid "You haven't contributed much, have you?"
+msgstr "Ne itin daug nuveikta?.."
 
 msgid "Why we need support?"
 msgstr "Kodėl mums reikia paramos?"
@@ -3884,6 +3891,15 @@ msgstr "10 litų"
 
 msgid "50 litas"
 msgstr "50 litų"
+
+msgid "Welcome to Ututi!"
+msgstr ""
+
+msgid ""
+"At the moment You are not confirmed as a teacher. Our administrators have"
+" been notified and will verify You shortly. Until then some restriction "
+"may apply to what You are allowed to do."
+msgstr ""
 
 msgid "Thank you for supporting Ututi!"
 msgstr "Ačiū, kad palaikai Ututi!"
@@ -3948,8 +3964,8 @@ msgstr "Dalykų pokyčiai"
 msgid "Which events do You want to see on Your wall?"
 msgstr "Kuriuos įvykius nori matyti savo sienoje?"
 
-msgid "back to the wall"
-msgstr "Atgal į atnaujinimų sieną"
+msgid "Notification settings"
+msgstr ""
 
 msgid "Pick your region"
 msgstr "Pasirinkite regioną"
@@ -4140,8 +4156,18 @@ msgstr "Dalinkis su kitais"
 msgid "send a message"
 msgstr "išsiųsk žinutę"
 
+msgid ""
+"You need to be a member of a group or have subjects that you are studying"
+" to be able to quickly upload files."
+msgstr ""
+
 msgid "upload a file"
 msgstr "įkelk failą"
+
+msgid ""
+"You or your group need to have subjects that you are studying to be able "
+"to quickly create wiki notes in them."
+msgstr ""
 
 msgid "create a wiki page"
 msgstr "sukurk wiki užrašus"

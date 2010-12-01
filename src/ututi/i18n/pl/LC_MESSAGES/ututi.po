@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-11-30 16:13+0200\n"
+"PO-Revision-Date: 2010-12-01 16:41+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -642,11 +642,34 @@ msgstr "Nie możesz usunąć tej teczki."
 msgid "New page"
 msgstr "Nowa notatka"
 
+msgid ""
+"All teacher tools will be available to You once our team confirms You as "
+"a teacher. Thank You!"
+msgstr ""
+
 msgid "This user profile is not public"
 msgstr "Profil tego użytkownika nie jest publiczny"
 
 msgid "Search"
 msgstr "Szukaj"
+
+msgid "Profile"
+msgstr ""
+
+msgid "Contacts"
+msgstr ""
+
+msgid "Password"
+msgstr "Hasło"
+
+msgid "Wall"
+msgstr ""
+
+msgid "Notifications"
+msgstr "Powiadomienia"
+
+msgid "Your wall settings have been updated."
+msgstr "Ustawienia (strony)  zostały zaktualizowane."
 
 msgid "Your Google account has been unlinked."
 msgstr "Twoje konto Google zostało odłączone"
@@ -717,9 +740,6 @@ msgstr "Nieprawidłowy temat"
 
 msgid "Wiki page created."
 msgstr "Wiki strona została utworzona"
-
-msgid "Your wall settings have been updated."
-msgstr "Ustawienia (strony)  zostały zaktualizowane."
 
 #, python-format
 msgid "Member: %s (%s)"
@@ -1120,9 +1140,6 @@ msgstr "E-mail"
 
 msgid "Gadu gadu"
 msgstr "Gadu Gadu"
-
-msgid "Password"
-msgstr "Hasło"
 
 msgid "Repeat password"
 msgstr "Powtórz hasło"
@@ -1736,9 +1753,6 @@ msgstr "Treść powiadomienia"
 msgid "Content"
 msgstr "Zawartość"
 
-msgid "Notifications"
-msgstr "Powiadomienia"
-
 msgid "School grade"
 msgstr "Szkolna ocena"
 
@@ -2051,13 +2065,13 @@ msgstr "Nowa książka"
 msgid "About U-Books"
 msgstr "O U-Books"
 
-msgid "Catalog"
-msgstr ""
-
 msgid "Upload a Book"
 msgstr " Dodaj książkę"
 
 msgid "My books"
+msgstr ""
+
+msgid "Catalog"
 msgstr ""
 
 msgid "Order by"
@@ -3592,26 +3606,11 @@ msgstr "http://blog.ututi.pl"
 msgid "Read our blog"
 msgstr "Czytaj nasz blog"
 
-msgid "Profile settings"
-msgstr "Ustawienia profilu"
+msgid "back to home page"
+msgstr ""
 
-msgid "back to the profile"
-msgstr "wróć do profilu"
-
-msgid "Address of your website or blog"
-msgstr "Adres Twojej strony lub bloga"
-
-msgid "About yourself"
-msgstr "O Tobie"
-
-msgid "Show my profile to unregistered users and search engines"
-msgstr "Pokazuj mój profil niezarejestrowanym użytkownikom i wyszukiwarkom"
-
-msgid "Personal logo"
-msgstr "Twoje logo"
-
-msgid "Contact data"
-msgstr "Dane kontaktowe"
+msgid "Contact information"
+msgstr ""
 
 msgid "Your GG number"
 msgstr "Twoje GG"
@@ -3624,16 +3623,10 @@ msgstr "Wyślij kod ponownie"
 
 msgid ""
 "If you want to confirm your GaduGadu number,\n"
-"                         please enter the code that you have received\n"
-"                         in your GG. Also don't forget to add Ututi\n"
-"                        (<a href=\"gg:5437377\">5437377</a>) to your "
-"friends."
+"                     please enter the code that you have received\n"
+"                     in your GG. Also don't forget to add Ututi\n"
+"                    (<a href=\"gg:5437377\">5437377</a>) to your friends."
 msgstr ""
-"Jeżeli chcesz uzyskać potwierdzenie Twojego e-maila,\n"
-"                       wprowadź kod otrzymany \n"
-"                       na Twoje gg. Nie zapomnij też dodać UTUTI\n"
-"                        (<a href=\"gg:5437377\">5437377</a>) do listy "
-"znajomych."
 
 msgid "Submit code"
 msgstr "Potwierdź kod"
@@ -3662,8 +3655,8 @@ msgstr "Zaktualizuj listę kontaktową"
 msgid "Unlink"
 msgstr "Nie łącz"
 
-msgid "Change your password"
-msgstr "Zmień hasło"
+msgid "Link to"
+msgstr ""
 
 msgid "Current password"
 msgstr "Aktualne hasło"
@@ -3673,6 +3666,21 @@ msgstr "Nowe hasło"
 
 msgid "Repeat the new password"
 msgstr "Wpisz ponownie nowe hasło"
+
+msgid "Profile settings"
+msgstr "Ustawienia profilu"
+
+msgid "Address of your website or blog"
+msgstr "Adres Twojej strony lub bloga"
+
+msgid "About yourself"
+msgstr "O Tobie"
+
+msgid "Show my profile to unregistered users and search engines"
+msgstr "Pokazuj mój profil niezarejestrowanym użytkownikom i wyszukiwarkom"
+
+msgid "Personal logo"
+msgstr "Twoje logo"
 
 msgid "What's new?"
 msgstr "Powiadomienia"
@@ -3700,66 +3708,8 @@ msgstr ""
 "obserwowania niektórych <a "
 "href=\"%(subjects_list_link)s\">przedmiotów</a>."
 
-msgid "Filter by school:"
-msgstr "Szukaj według uczelni"
-
-msgid "Did not find the group you were looking for?"
-msgstr "Nie odnalazłeś grupy, której szukałeś?"
-
-msgid "New group"
-msgstr "Nowa grupa"
-
-msgid "Create your group!"
-msgstr "Utwórz Twoją grupę!"
-
 msgid "Go to my department"
 msgstr "Przejdź do mego wydziału"
-
-msgid "Tell us where you are studying"
-msgstr "Podaj nazwę swojej uczelni"
-
-msgid "save"
-msgstr "zachowaj"
-
-msgid "Please enter a university."
-msgstr "Wpisz nazwę uczelni"
-
-msgid "What's your phone number?"
-msgstr "Jaki jest Twój numer telefonu?"
-
-msgid "Mobile phone number: "
-msgstr "Numer telefonu komórkowego:"
-
-msgid "Please enter a phone number."
-msgstr "Wpisz, proszę, numer telefonu."
-
-msgid "The entered phone number is invalid."
-msgstr "Wprowadzony numer telefonu nie jest poprawny."
-
-msgid "(use the format +37067812345)"
-msgstr "(korzystaj z formatu +48123456789)"
-
-msgid "no, thanks"
-msgstr "nie, dzięki"
-
-msgid "Please confirm your phone number"
-msgstr "Potwierdź, proszę, Twój numer telefonu"
-
-msgid ""
-"Enter the confirmation code that you received by SMS to prove that this "
-"number belongs to you."
-msgstr ""
-"Wprowadź kod potwierdzający, wysłany przez SMS. Operacja zakończy proces "
-"weryfikacji Twojego numeru telefonu. "
-
-msgid "Confirmation code: "
-msgstr "Kod potwierdzający:"
-
-msgid "Please enter a confirmation key."
-msgstr "Wprowadź, proszę, kod potwierdzający."
-
-msgid "Invalid confirmation key."
-msgstr "Kod potwierdzający jest nieważny."
 
 msgid "Your phone has been confirmed. Thank you."
 msgstr "Twój numer telefonu został potwierdzony. Dziękujemy."
@@ -3790,6 +3740,15 @@ msgstr "To proste - musisz jedynie znać adresy e-mail kolegów z grupy!"
 msgid "Use the group's mailing list!"
 msgstr "Skorzystaj z listy mailingowej grupy!"
 
+msgid "no, thanks"
+msgstr "nie, dzięki"
+
+msgid "Files:"
+msgstr "Pliki:"
+
+msgid "Wiki pages:"
+msgstr "Wiki:"
+
 msgid "Show subjects from my groups"
 msgstr "Pokaż przedmioty moich grup"
 
@@ -3798,18 +3757,6 @@ msgstr "ustawienia powiadomień"
 
 msgid "add subject"
 msgstr "dodaj przedmiot"
-
-msgid "Watch subject"
-msgstr "Obserwuj przedmiot"
-
-msgid "watch subjects"
-msgstr "obserwuj przedmioty"
-
-msgid "Files:"
-msgstr "Pliki:"
-
-msgid "Wiki pages:"
-msgstr "Wiki:"
 
 msgid ""
 "Ututi is Your university online. Here You and Your class mates can create"
@@ -3824,6 +3771,55 @@ msgstr ""
 msgid "Share your thoughts about Ututi"
 msgstr "Podziel się myślami o Ututi"
 
+msgid "Tell us where you are studying"
+msgstr "Podaj nazwę swojej uczelni"
+
+msgid "save"
+msgstr "zachowaj"
+
+msgid "Please enter a university."
+msgstr "Wpisz nazwę uczelni"
+
+msgid "What's your phone number?"
+msgstr "Jaki jest Twój numer telefonu?"
+
+msgid "Mobile phone number: "
+msgstr "Numer telefonu komórkowego:"
+
+msgid "Please enter a phone number."
+msgstr "Wpisz, proszę, numer telefonu."
+
+msgid "The entered phone number is invalid."
+msgstr "Wprowadzony numer telefonu nie jest poprawny."
+
+msgid "(use the format +37067812345)"
+msgstr "(korzystaj z formatu +48123456789)"
+
+msgid "Please confirm your phone number"
+msgstr "Potwierdź, proszę, Twój numer telefonu"
+
+msgid ""
+"Enter the confirmation code that you received by SMS to prove that this "
+"number belongs to you."
+msgstr ""
+"Wprowadź kod potwierdzający, wysłany przez SMS. Operacja zakończy proces "
+"weryfikacji Twojego numeru telefonu. "
+
+msgid "Confirmation code: "
+msgstr "Kod potwierdzający:"
+
+msgid "Please enter a confirmation key."
+msgstr "Wprowadź, proszę, kod potwierdzający."
+
+msgid "Invalid confirmation key."
+msgstr "Kod potwierdzający jest nieważny."
+
+msgid "Watch subject"
+msgstr "Obserwuj przedmiot"
+
+msgid "watch subjects"
+msgstr "obserwuj przedmioty"
+
 msgid "Very sad..."
 msgstr "Szkoda..."
 
@@ -3834,11 +3830,8 @@ msgstr ""
 "Szkoda, że nie zdecydowałeś się wesprzeć Ututi. Miejmy nadzieję, że "
 "uczynisz to w nie tak odległej przyszłości ;) Powodzenia!"
 
-msgid "What have I been doing?"
-msgstr "Moja aktywność"
-
-msgid "You haven't contributed much, have you?"
-msgstr "Za dużo tu raczej nie zdziałałeś..."
+msgid "back to the profile"
+msgstr "wróć do profilu"
 
 msgid "Watched subjects notification settings"
 msgstr "Ustawienia powiadomień o obserwowanych przedmiotach"
@@ -3849,12 +3842,24 @@ msgstr "powiadomienia e-mailem"
 msgid "Add a subject"
 msgstr "Dodaj przedmiot"
 
+msgid "Group's mailing list"
+msgstr ""
+
+msgid "Group's forum"
+msgstr ""
+
 msgid "Personally watched subjects"
 msgstr "Przedmioty obserwowane osobiście"
 
 #, python-format
 msgid "Group's %(group_title)s subjects"
 msgstr "Przedmioty grupy %(group_title)s"
+
+msgid "What have I been doing?"
+msgstr "Moja aktywność"
+
+msgid "You haven't contributed much, have you?"
+msgstr "Za dużo tu raczej nie zdziałałeś..."
 
 msgid "Why we need support?"
 msgstr "Dlaczego potrzebujemy wsparcia"
@@ -3890,6 +3895,15 @@ msgstr "10 zlotych"
 
 msgid "50 litas"
 msgstr "50 złotych"
+
+msgid "Welcome to Ututi!"
+msgstr ""
+
+msgid ""
+"At the moment You are not confirmed as a teacher. Our administrators have"
+" been notified and will verify You shortly. Until then some restriction "
+"may apply to what You are allowed to do."
+msgstr ""
 
 msgid "Thank you for supporting Ututi!"
 msgstr "Dziękujemy za wsparcie Ututi!"
@@ -3954,8 +3968,8 @@ msgstr "Aktualizacja przedm"
 msgid "Which events do You want to see on Your wall?"
 msgstr "Jakie wydarzenia chcesz zobaczyć na swojej tablicy?"
 
-msgid "back to the wall"
-msgstr "Wróć do (strony)"
+msgid "Notification settings"
+msgstr ""
 
 msgid "Pick your region"
 msgstr "Wybierz województwo"
@@ -4144,8 +4158,18 @@ msgstr "Podziel się z innymi"
 msgid "send a message"
 msgstr "wyślij wiadomość"
 
+msgid ""
+"You need to be a member of a group or have subjects that you are studying"
+" to be able to quickly upload files."
+msgstr ""
+
 msgid "upload a file"
 msgstr "dodaj plik"
+
+msgid ""
+"You or your group need to have subjects that you are studying to be able "
+"to quickly create wiki notes in them."
+msgstr ""
 
 msgid "create a wiki page"
 msgstr "utwórz wiki stronę"
