@@ -92,9 +92,6 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
   <div id="department_1" class="department">
     <%self:selectbox field_name = "school_grade" label="${_('School grade')}", objects="${c.school_grades}" />
   </div>
-  <div class="science_type_field">
-    <%self:selectbox field_name = "science_type" label="${_('Science type')}", objects="${c.current_science_types}" />
-  </div>
   <div id="department_science_type_field_0" class="science_type_field" style="display: none">
     <%self:selectbox field_name = "university_science_type" label="${_('Science type')}", objects="${c.university_science_types}" />
   </div>
