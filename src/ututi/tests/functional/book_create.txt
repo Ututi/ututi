@@ -85,6 +85,12 @@ Then I update my profile information and insert phone number
 
     >>> browser.click('Update contacts')
 
+I get confirmation sms
+
+    >>> from ututi.lib.sms import sms_queue
+    >>> sms_queue.pop()
+    (u'+37067422222', u'Ututi registration code: ...')
+
 When I add a book, now I see autofilled phone field with my phone number from profile
 
     >>> browser.open('http://localhost/books')
