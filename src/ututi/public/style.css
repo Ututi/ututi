@@ -4182,7 +4182,7 @@ div.search-item div.description {
 }
 
 #subject_settings .mailing-option li.disabled {
-    background: transparent url("../img/icons/message-off-very-small.png") left center no-repeat;
+    background: transparent url("../img/icons/message-very-off-very-small.png") left center no-repeat;
 }
 
 #subject_settings li.enabled {
