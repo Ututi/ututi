@@ -1,5 +1,9 @@
 <%inherit file="/profile/edit.mako" />
 
+<%def name="pagetitle()">
+${_('Contact information')}
+</%def>
+
 <form method="post" action="${url(controller='profile', action='update_contacts')}"
       id="contacts_form" class="fullForm">
   <fieldset>

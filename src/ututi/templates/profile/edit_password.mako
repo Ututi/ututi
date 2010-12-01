@@ -1,5 +1,9 @@
 <%inherit file="/profile/edit.mako" />
 
+<%def name="pagetitle()">
+${_('Change password')}
+</%def>
+
 <form method="post" action="${url(controller='profile', action='password')}" id="change_password_form" class="fullForm">
   <fieldset>
   ${h.input_psw('password', _('Current password'))}

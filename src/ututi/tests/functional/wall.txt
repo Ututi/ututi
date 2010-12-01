@@ -170,6 +170,8 @@ Of course, we can change what we see on our wall:
     >>> browser2.getLink('Edit shown updates.').click()
     >>> browser2.getControl('Mailing list posts').click()
     >>> browser2.getControl('Save').click()
+    >>> browser2.getLink('back to home page').click()
+    >>> browser2.getLink('News wall').click()
     >>> browser2.printQuery('id("wall")//div[@class="description"]//text()')
     Adminas Adminovix has sent Second user a private message " A message from me! ".
     Second user has sent you a private message " A message from me! ".

@@ -19,6 +19,7 @@ from pylons.i18n import _
 import ututi.lib.helpers as h
 from ututi.lib.base import render
 from ututi.lib.emails import email_confirmation_request
+from ututi.lib.events import event_types_grouped
 from ututi.lib.search import search_query
 from ututi.lib.security import ActionProtector
 from ututi.lib.image import serve_logo
@@ -32,7 +33,7 @@ from ututi.model import LocationTag, BlogEntry
 from ututi.model import meta, Email, Group, SearchItem, User
 from ututi.controllers.profile.validators import HideElementForm
 from ututi.controllers.profile.validators import ContactForm, LocationForm, LogoUpload, PhoneConfirmationForm, PhoneForm, ProfileForm, PasswordChangeForm
-from ututi.controllers.profile.wall import WallMixin
+from ututi.controllers.profile.wall import WallMixin, WallSettingsForm
 from ututi.controllers.profile.subjects import WatchedSubjectsMixin
 from ututi.controllers.search import SearchSubmit, SearchBaseController
 from ututi.controllers.home import sign_in_user
@@ -148,6 +149,11 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
         self._set_settings_tabs(current_tab='password')
         return render('profile/edit_password.mako')
 
+    def _wall_settings_form(self):
+        c.event_types = event_types_grouped(Event.event_types())
+        self._set_settings_tabs(current_tab='wall')
+        return render('profile/wall_settings.mako')
+
     def _set_settings_tabs(self, current_tab):
         c.current_tab = current_tab
         c.tabs = [
@@ -159,7 +165,10 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
              'link': url(controller='profile', action='edit_contacts')},
             {'title': _("Password"),
              'name': 'password',
-             'link': url(controller='profile', action='edit_password')}]
+             'link': url(controller='profile', action='edit_password')},
+            {'title': _("Wall"),
+             'name': 'wall',
+             'link': url(controller='profile', action='wall_settings')}]
 
     @ActionProtector("user")
     def edit(self):
@@ -175,6 +184,24 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
     def edit_password(self):
         return htmlfill.render(self._edit_password_form(),
                                defaults=self._edit_form_defaults())
+
+    @ActionProtector("user")
+    @validate(schema=WallSettingsForm, form='_wall_settings_form')
+    def wall_settings(self):
+        if hasattr(self, 'form_result'):
+            events = set(self.form_result.get('events', []))
+            events = list(set(Event.event_types()) - events)
+            c.user.update_ignored_events(events)
+            meta.Session.commit()
+            h.flash(_('Your wall settings have been updated.'))
+            redirect(url(controller='profile', action='wall_settings'))
+
+        defaults = {
+            'events': list(set(Event.event_types()) - set(c.user.ignored_events_list))
+            }
+
+        return htmlfill.render(self._wall_settings_form(),
+                               defaults=defaults)
 
     @ActionProtector("user")
     def link_google(self):

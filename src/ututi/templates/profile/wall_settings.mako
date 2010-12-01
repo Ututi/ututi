@@ -1,11 +1,11 @@
-<%inherit file="/profile/base.mako" />
+<%inherit file="/profile/edit.mako" />
 
 <%def name="title()">
   ${c.user.fullname}
 </%def>
 
 <%def name="pagetitle()">
-${_('Wall settings')}
+  ${_('Wall settings')}
 </%def>
 
 <%
@@ -49,8 +49,8 @@ labels = {
   %else:
   <div class="form_item">
     <label for="${item}">
-       <input name="events" id="${item}" type="checkbox" value="${item}" class="checkbox child" />
-       ${labels.get(item, item)}
+      <input name="events" id="${item}" type="checkbox" value="${item}" class="checkbox child" />
+      ${labels.get(item, item)}
     </label>
   </div>
   %endif
@@ -62,11 +62,8 @@ labels = {
 %for key, item in c.event_types.items():
   ${form_item(item)}
 %endfor
-${h.input_submit('Save')}
+${h.input_submit('Save', class_='btnMedium')}
 </form>
-<br />
-<a class="back-link" href="${url(controller='profile', action='feed')}">${_('back to the wall')}</a>
-
 
 <script type="text/javascript">
 

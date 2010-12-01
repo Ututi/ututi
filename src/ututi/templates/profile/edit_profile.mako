@@ -1,6 +1,10 @@
 <%inherit file="/profile/edit.mako" />
 <%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*"/>
 
+<%def name="pagetitle()">
+${_('Profile settings')}
+</%def>
+
 <%def name="head_tags()">
   ${parent.head_tags()}
   ${h.javascript_link('/javascript/js-alternatives.js')|n}

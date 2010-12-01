@@ -6,10 +6,10 @@
 </%def>
 
 <%def name="pagetitle()">
-${_('Profile settings')}
+${_('Settings')}
 </%def>
 
-<a class="back-link" href="${url(controller='profile', action='home')}">${_('back to the profile')}</a>
+<a class="back-link" href="${url(controller='profile', action='home')}">${_('back to home page')}</a>
 
 ${tabs()}
 

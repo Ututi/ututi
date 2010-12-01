@@ -10,14 +10,11 @@ from formencode.api import Invalid
 from formencode.foreach import ForEach
 from formencode.schema import Schema
 from formencode import validators
-from formencode import htmlfill
 
 from sqlalchemy.sql.expression import and_
 from sqlalchemy.sql.expression import desc
 from sqlalchemy.sql.expression import or_
 
-from ututi.lib.base import render
-from ututi.lib.events import event_types_grouped
 from ututi.lib.validators import js_validate
 from ututi.lib.security import ActionProtector
 from ututi.lib.fileview import FileViewMixin
@@ -264,28 +261,6 @@ class WallMixin(FileViewMixin):
         meta.Session.add(page)
         meta.Session.commit()
         return page
-
-    def _wall_settings_form(self):
-        c.event_types = event_types_grouped(Event.event_types())
-        return render('profile/wall_settings.mako')
-
-    @ActionProtector("user")
-    @validate(schema=WallSettingsForm, form='_wall_settings_form')
-    def wall_settings(self):
-        if hasattr(self, 'form_result'):
-            events = set(self.form_result.get('events', []))
-            events = list(set(Event.event_types()) - events)
-            c.user.update_ignored_events(events)
-            meta.Session.commit()
-            h.flash(_('Your wall settings have been updated.'))
-            redirect(self._redirect_url())
-
-        defaults = {
-            'events': list(set(Event.event_types()) - set(c.user.ignored_events_list))
-            }
-
-        return htmlfill.render(self._wall_settings_form(),
-                               defaults=defaults)
 
     def _user_events(self):
         user_is_admin_of_groups = [membership.group_id
