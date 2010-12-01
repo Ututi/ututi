@@ -310,9 +310,11 @@ Admin should stop getting events in his daily news:
 
 Unless he starts watching the subject himself:
 
-    >>> browser.open('http://localhost/profile/edit/notifications')
-    >>> browser.getControl('Add a subject').click()
-    >>> browser.getLink('Watch').click()
+XXX HOW DO I START WATCHING SUBJECTS? The watch subject link in the
+welcome portlet is taking me to the notification view...
+
+    >>> browser.open('http://localhost/subject/vu/mat_analize')
+    >>> browser.click('Add to my subjects')
 
     >>> browser.open('http://localhost/news/daily?date=2009-10-09')
 

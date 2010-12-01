@@ -18,6 +18,7 @@ from nous.pylons.testing.browser import NousTestBrowser, NousTestApp
 from ututi.model import teardown_db_defaults
 from ututi.model import initialize_db_defaults
 from ututi.model import meta
+from ututi.lib.sms import sms_queue
 from ututi.lib.mailer import mail_queue
 from ututi.lib import gg
 
@@ -41,6 +42,7 @@ class UtutiBaseLayer(LayerBase):
         config = pylons.test.pylonsapp.config
         config['tpl_lang'] = 'lt'
         mail_queue[:] = []
+        sms_queue[:] = []
         gg.sent_messages[:] = []
         try:
             shutil.rmtree(config['files_path'])
@@ -57,6 +59,9 @@ class UtutiBaseLayer(LayerBase):
 
         if len(mail_queue) > 0:
             print >> sys.stderr, "\n===\nMail queue is NOT EMPTY!"
+
+        if len(sms_queue) > 0:
+            print >> sys.stderr, "\n===\nSMS queue is NOT EMPTY!"
 
         shutil.rmtree(config['files_path'])
 
