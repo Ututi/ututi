@@ -1144,12 +1144,16 @@ class GroupController(BaseController, SubjectAddMixin, GroupWallMixin):
     @ActionProtector("member", "admin")
     def unsubscribe(self, group):
         group.set_subscription(c.user, False)
+        if request.params.has_key('js'):
+            return 'ok'
         redirect(request.referrer)
 
     @group_action
     @ActionProtector("member", "admin")
     def subscribe(self, group):
         group.set_subscription(c.user, True)
+        if request.params.has_key('js'):
+            return 'ok'
         redirect(request.referrer)
 
     @group_action

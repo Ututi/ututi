@@ -4178,8 +4178,16 @@ div.search-item div.description {
     background: transparent url("../img/icons/dalykas-very-small-off.png") left center no-repeat;
 }
 
+#subject_settings .mailing-option li.disabled {
+    background: transparent url("../images/bullet_large.png") left center no-repeat;
+}
+
 #subject_settings li.enabled {
     background: transparent url("../img/icons/dalykas-very-small.png") left center no-repeat;
+}
+
+#subject_settings .mailing-option li.enabled {
+    background: transparent url("../images/bullet_orange.png") left center no-repeat;
 }
 
 .personal_watched_subjects li.enabled a,
@@ -4199,11 +4207,13 @@ div.search-item div.description {
     padding-bottom: 10px;
 }
 
-.enabled .unignore_subject_button {
+.enabled .unignore_subject_button,
+.enabled .subscribe_group_button {
     display: none;
 }
 
-.disabled .ignore_subject_button {
+.disabled .ignore_subject_button,
+.disabled .unsubscribe_group_button {
     display: none;
 }
 
