@@ -125,7 +125,7 @@ And look at the emails:
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was created.
     - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/6) was created.
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user2@ututi.lt']
     Ututi news: 2 new pages
@@ -135,7 +135,7 @@ And look at the emails:
     - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/6) was created.
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was updated.
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user@ututi.lt']
     Ututi news: 2 new pages
@@ -145,7 +145,7 @@ And look at the emails:
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was created.
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was updated.
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
 
 
@@ -188,7 +188,7 @@ And we continue uploading files:
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was created.
     - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/6) was created.
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user2@ututi.lt']
     Ututi news: 2 new files and 2 new pages
@@ -200,7 +200,7 @@ And we continue uploading files:
     - File f1.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
     - File f2.txt (http://localhost/subject/vu/mat_analize/file/11/get) was uploaded.
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user@ututi.lt']
     Ututi news: 2 new files and 2 new pages
@@ -212,7 +212,7 @@ And we continue uploading files:
     - File f1.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
     - File f2.txt (http://localhost/subject/vu/mat_analize/file/11/get) was uploaded.
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
 
     >>> mail_queue[:] = []
@@ -225,7 +225,7 @@ And we continue uploading files:
 
 Let's try hourly now:
 
-    >>> browser.open('http://localhost/profile/subjects')
+    >>> browser.open('http://localhost/profile/edit/notifications')
 
 See what notification intervals have been set:
 
@@ -265,7 +265,7 @@ after commit 5d21e3cdb91863d7843dfc80cd6dd72284dd931d.
     <BLANKLINE>
     If you want to stop getting these emails - you can change your
     subscription settings in your watched subject page
-    (http://localhost/profile/subjects).
+    (http://localhost/profile/edit/notifications).
     <BLANKLINE>
 
     >>> mail_queue[:] = []
@@ -291,7 +291,7 @@ Admin should stop getting events in his daily news:
     - File f1.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
     - File f2.txt (http://localhost/subject/vu/mat_analize/file/11/get) was uploaded.
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user@ututi.lt']
     Ututi news: 2 new files and 2 new pages
@@ -303,14 +303,14 @@ Admin should stop getting events in his daily news:
     - File f1.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
     - File f2.txt (http://localhost/subject/vu/mat_analize/file/11/get) was uploaded.
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
 
     >>> mail_queue[:] = []
 
 Unless he starts watching the subject himself:
 
-    >>> browser.open('http://localhost/profile/subjects')
+    >>> browser.open('http://localhost/profile/edit/notifications')
     >>> browser.getControl('Add a subject').click()
     >>> browser.getLink('Watch').click()
 
@@ -325,7 +325,7 @@ Unless he starts watching the subject himself:
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was created.
     - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/6) was created.
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user2@ututi.lt']
     Ututi news: 2 new files and 2 new pages
@@ -337,7 +337,7 @@ Unless he starts watching the subject himself:
     - File f1.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
     - File f2.txt (http://localhost/subject/vu/mat_analize/file/11/get) was uploaded.
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user@ututi.lt']
     Ututi news: 2 new files and 2 new pages
@@ -349,14 +349,14 @@ Unless he starts watching the subject himself:
     - File f1.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
     - File f2.txt (http://localhost/subject/vu/mat_analize/file/11/get) was uploaded.
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
 
     >>> mail_queue[:] = []
 
 Hmm, now what happens if user2 starts ignoring the subject:
 
-    >>> browser2.open('http://localhost/profile/subjects')
+    >>> browser2.open('http://localhost/profile/edit/notifications')
     >>> browser2.getLink(url='ignore_subject').click()
 
     >>> browser.open('http://localhost/news/daily?date=2009-10-09')
@@ -369,7 +369,7 @@ Hmm, now what happens if user2 starts ignoring the subject:
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was created.
     - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/6) was created.
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user@ututi.lt']
     Ututi news: 2 new files and 2 new pages
@@ -381,7 +381,7 @@ Hmm, now what happens if user2 starts ignoring the subject:
     - File f1.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
     - File f2.txt (http://localhost/subject/vu/mat_analize/file/11/get) was uploaded.
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/subjects).
+    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
 
     >>> mail_queue[:] = []
