@@ -5,7 +5,16 @@
 <%namespace file="/portlets/banners/base.mako" import="*"/>
 <%namespace file="/portlets/facebook.mako" import="*"/>
 
+<%def name="teacher_sidebar(exclude=[])">
+<div id="sidebar">
+  ${user_information_portlet()}
+</div>
+</%def>
+
 <%def name="user_sidebar(exclude=[])">
+%if c.user.is_teacher:
+  ${teacher_sidebar(exclude)}
+%else:
 <div id="sidebar">
   ${user_information_portlet()}
   %if not 'files' in exclude:
@@ -23,6 +32,7 @@
   ${facebook_likebox_portlet()}
   ${user_support_portlet()}
 </div>
+%endif
 </%def>
 
 <%def name="group_sidebar(exclude=[])">

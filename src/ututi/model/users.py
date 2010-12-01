@@ -56,6 +56,8 @@ def validate_password(reference, password):
 
 class User(object):
     """The User object - Ututi users."""
+    is_teacher = False
+
     @property
     def email(self):
         email = self.emails[0]
@@ -468,6 +470,8 @@ class Medal(ImplicitMedal):
 
 class Teacher(User):
     """A separate class for the teachers at Ututi."""
+    is_teacher = True
+
     def __init__(self, **kwargs):
         self.teacher_verified = False
         super(Teacher, self).__init__(**kwargs)
