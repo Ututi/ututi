@@ -180,7 +180,7 @@
 <%def name="tabs()">
 <ul class="moduleMenu tabs" id="moduleMenu">
     %for tab in c.tabs:
-      <li class="${'current' if tab['name'] == c.default_tab else ''}">
+      <li class="${'current' if tab['name'] == c.current_tab else ''}">
         <a href="${tab['link']}">${tab['title']}
             <span class="edge"></span>
         </a></li>
