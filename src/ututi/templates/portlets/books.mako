@@ -8,7 +8,7 @@
     <li>${h.link_to(book_type.name,
                     url(controller="books",
                         action="catalog",
-                        books_type_name=book_type.name.lower().replace(" ", "-"),
+                        books_type_name=book_type.name,
                         books_department=books_department)
           )}
     </li>

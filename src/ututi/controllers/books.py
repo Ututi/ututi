@@ -275,12 +275,12 @@ class BooksController(BaseController):
         school_grade = None
         science_type = None
         location = None
-        #self._load_science_types()
         if books_department is not None:
             c.books_department = books_department
             books_department_id = Book.department[books_department]
+
         if books_type_name is not None:
-            c.books_type = meta.Session.query(BookType).filter(func.lower(BookType.name)==books_type_name.replace("-", " ")).one()
+            c.books_type = meta.Session.query(BookType).filter(BookType.name==books_type_name).one()
         if location_id is not None:
             location = meta.Session.query(LocationTag).filter(LocationTag.id == location_id).one()
         if books_department_id is not None:
