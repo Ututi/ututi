@@ -16,7 +16,7 @@ and do something else:
     Our highly trained monkeys are fixing this problem right now.
 
     >>> browser.printQuery("//button/span/text()")
-    search_
+    search
     Shout!
     Kick a monkey!
 
