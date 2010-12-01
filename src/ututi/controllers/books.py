@@ -2,6 +2,7 @@ import logging
 
 import string
 from datetime import datetime, date
+from formencode.compound import to_python
 from formencode.validators import Number
 from formencode.variabledecode import NestedVariables
 from formencode.foreach import ForEach
@@ -32,28 +33,15 @@ from ututi.lib.base import BaseController, render, render_lang, u_cache
 from pylons import request, tmpl_context as c, url, config, session
 from webhelpers import paginate
 
-class BookValidator(validators.FormValidator):
-    """
-    Validate the universal message post form.
-    Check if the recipient's id has been specified in the js field, if not,
-    check if enough text has been input to identify the recipient.
-    """
-    messages = {
-        'no_location_specified': _(u"Specify correct location."),
-    }
 
-    def validate_python(self, form_dict, state):
-        if form_dict['department'].name == 'university':
-            if form_dict['location'] is None:
-                raise Invalid(self.message('no_location_specified', state),
-                          form_dict, state,
-                          error_dict={'location': Invalid(self.message('no_location_specified', state), form_dict, state)})
-            form_dict['school_grade'] = None
-        elif form_dict['department'].name == 'school':
-            form_dict['location'] = None
-        elif form_dict['department'].name == 'other':
-            form_dict['location'] = None
-            form_dict['school_grade'] = None
+class ChainedSubFormValidator(validators.FormValidator):
+
+    dispatch_on = None
+    sub_forms = {}
+
+    def _to_python(self, value_dict, state):
+        # XXX relying on the fact that field we dispatch on has a name
+        return self.sub_forms.get(value_dict[self.dispatch_on].name).to_python(value_dict, state)
 
 
 class BaseValidator(validators.FancyValidator):
@@ -162,38 +150,61 @@ class SchoolGradeValidator(BaseValidator):
         return meta.Session.query(SchoolGrade).filter(SchoolGrade.id == school_grade_id).one()
 
 
-class BookForm(Schema):
-    pre_validators = [NestedVariables()]
-    allow_extra_fields = True
+class BookSubFormBase(Schema):
 
+    allow_extra_fields = True
     logo = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
     title = validators.UnicodeString(not_empty=True)
     author = validators.UnicodeString(not_empty=True)
     price = validators.UnicodeString()
     description = validators.UnicodeString()
     delete_logo = validators.Bool()
-    chained_validators = [BookValidator()]
 
     city = CityValidator(not_empty=True)
     book_type = BookTypeValidator(not_empty=True)
 
-    department = BookDepartmentValidator(not_empty=True)
-
-    # University fields
-    university_science_type = ScienceTypeValidator()
-    location = Pipe(ForEach(validators.UnicodeString(strip=True)),
-                    LocationTagsValidator())
-
-    # School fields
-    school_science_type = ScienceTypeValidator()
-    school_grade = SchoolGradeValidator()
-
-    # Other fields
-    other_science_type = ScienceTypeValidator()
-
     owner_email = TranslatedEmailValidator()
     owner_name = validators.UnicodeString()
     owner_phone = PhoneNumberValidator()
+
+    # XXX Setting default sub section values to None
+    university_science_type = validators.Constant(None)
+    location = validators.Constant(None)
+    school_science_type = validators.Constant(None)
+    school_grade = validators.Constant(None)
+    other_science_type = validators.Constant(None)
+
+
+class UniversityBookForm(BookSubFormBase):
+
+    university_science_type = ScienceTypeValidator(not_empty=True)
+    location = Pipe(ForEach(validators.UnicodeString(strip=True)),
+                    LocationTagsValidator(not_empty=True))
+
+
+class SchoolBookForm(BookSubFormBase):
+
+    school_science_type = ScienceTypeValidator(not_empty=True)
+    school_grade = SchoolGradeValidator(not_empty=True)
+
+
+class OtherBookForm(BookSubFormBase):
+
+    other_science_type = ScienceTypeValidator(not_empty=True)
+
+
+class BookForm(Schema):
+
+    pre_validators = [NestedVariables()]
+    allow_extra_fields = True
+
+    department = BookDepartmentValidator(not_empty=True)
+
+    chained_validators = [ChainedSubFormValidator(
+            dispatch_on='department',
+            sub_forms = {'university': UniversityBookForm,
+                         'school': SchoolBookForm,
+                         'other': OtherBookForm})]
 
 
 class BooksController(BaseController):
