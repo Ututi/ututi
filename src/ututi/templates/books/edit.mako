@@ -71,7 +71,7 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
   <div class="book-transfer-info">
     ${h.input_line('price', _('Price'))}
     <p>
-      <label>${_('Book type')}: ${h.select("type", None, [(o.id, o.name) for o in c.book_types])}</label>
+      <label>${_('Book type')}: ${h.select("book_type", None, [(o.id, o.name) for o in c.book_types])}</label>
     </p>
     <p>
       <label>${_('City')}: ${h.select("city", None, [(o.id, o.name) for o in c.cities])}</label>

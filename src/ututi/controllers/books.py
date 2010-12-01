@@ -40,27 +40,9 @@ class BookValidator(validators.FormValidator):
     """
     messages = {
         'no_location_specified': _(u"Specify correct location."),
-        'no_type_specified': _(u"Specify book type."),
-        'no_city_specified': _(u"Specify city."),
-        'no_school_grade_specified': _(u"Please specify school grade"),
     }
 
     def validate_python(self, form_dict, state):
-        try:
-            city_id = int(form_dict['city'])
-            form_dict['city'] = meta.Session.query(City).filter(City.id == city_id).one()
-        except ValueError:
-            raise Invalid(self.message('no_city_specified', state),
-                          form_dict, state,
-                          error_dict={'city': Invalid(self.message('no_city_specified', state), form_dict, state)})
-        try:
-            type_id = int(form_dict['type'])
-            form_dict['type'] = meta.Session.query(BookType).filter(BookType.id == type_id).one()
-        except ValueError:
-            raise Invalid(self.message('no_type_specified', state),
-                          form_dict, state,
-                          error_dict={'type': Invalid(self.message('no_type_specified', state), form_dict, state)})
-
         if form_dict['department'].name == 'university':
             if form_dict['location'] is None:
                 raise Invalid(self.message('no_location_specified', state),
@@ -68,27 +50,29 @@ class BookValidator(validators.FormValidator):
                           error_dict={'location': Invalid(self.message('no_location_specified', state), form_dict, state)})
             form_dict['school_grade'] = None
         elif form_dict['department'].name == 'school':
-            try:
-                school_grade_id = int(form_dict['school_grade'])
-                form_dict['school_grade'] = meta.Session.query(SchoolGrade).filter(SchoolGrade.id == school_grade_id).one()
-            except ValueError:
-                raise Invalid(self.message('no_school_grade_specified', state),
-                          form_dict, state,
-                          error_dict={'school_grade': Invalid(self.message('no_school_grade_specified', state), form_dict, state)})
             form_dict['location'] = None
         elif form_dict['department'].name == 'other':
             form_dict['location'] = None
             form_dict['school_grade'] = None
 
 
-class BookDepartmentValidator(validators.FancyValidator):
-
-    messages = {
-        'invalid_book_department': _(u"Specify correct book department."),
-        'empty': _(u"Specify book department.")
-        }
+class BaseValidator(validators.FancyValidator):
 
     _notfoundmarker = object()
+
+    def validate_python(self, value, state):
+        if value is None and self.not_empty:
+            raise Invalid(self.message('empty', state), value, state)
+        elif value is self._notfoundmarker:
+            raise Invalid(self.message('invalid', state), value, state)
+
+
+class BookDepartmentValidator(BaseValidator):
+
+    messages = {
+        'invalid': _(u"Specify correct book department."),
+        'empty': _(u"Specify book department.")
+        }
 
     def _to_python(self, value, state):
         if not value:
@@ -100,22 +84,14 @@ class BookDepartmentValidator(validators.FancyValidator):
 
         return department
 
-    def validate_python(self, value, state):
-        if value is None and self.not_empty:
-            raise Invalid(self.message('empty', state), value, state)
-        elif value is self._notfoundmarker:
-            raise Invalid(self.message('invalid_book_department', state), value, state)
 
-
-class ScienceTypeValidator(validators.FancyValidator):
+class ScienceTypeValidator(BaseValidator):
     """A validator that tests if the selected science type is correct."""
 
     messages = {
-        'invalid_science_type': _(u"Specify correct science type."),
+        'invalid': _(u"Specify correct science type."),
         'empty': _(u"Specify science type.")
         }
-
-    _notfoundmarker = object()
 
     def _to_python(self, value, state):
         if not value:
@@ -127,11 +103,63 @@ class ScienceTypeValidator(validators.FancyValidator):
             return self._notfoundmarker
         return meta.Session.query(ScienceType).filter(ScienceType.id == science_type_id).one()
 
-    def validate_python(self, value, state):
-        if value is None and self.not_empty:
-            raise Invalid(self.message('empty', state), value, state)
-        elif value is self._notfoundmarker:
-            raise Invalid(self.message('invalid_science_type', state), value, state)
+
+class CityValidator(BaseValidator):
+    """A validator for city fields."""
+
+    messages = {
+        'invalid': _(u"Selected city is not valid."),
+        'empty': _(u"Specify a city please.")
+        }
+
+    def _to_python(self, value, state):
+        if not value:
+            return None
+
+        try:
+            city_id = int(value)
+        except ValueError:
+            return self._notfoundmarker
+
+        return meta.Session.query(City).filter(City.id == city_id).one()
+
+
+class BookTypeValidator(BaseValidator):
+
+    messages = {
+        'invalid': _(u"Selected book type is not valid."),
+        'empty': _(u"Specify book type.")
+        }
+
+    def _to_python(self, value, state):
+        if not value:
+            return None
+
+        try:
+            type_id = int(value)
+        except ValueError:
+            return self._notfoundmarker
+
+        return meta.Session.query(BookType).filter(BookType.id == type_id).one()
+
+
+class SchoolGradeValidator(BaseValidator):
+
+    messages = {
+        'invalid': _(u"Selected school grade is not valid."),
+        'empty': _(u"Please specify school grade")
+        }
+
+    def _to_python(self, value, state):
+        if not value:
+            return None
+
+        try:
+            school_grade_id = int(value)
+        except ValueError:
+            return self._notfoundmarker
+
+        return meta.Session.query(SchoolGrade).filter(SchoolGrade.id == school_grade_id).one()
 
 
 class BookForm(Schema):
@@ -141,19 +169,32 @@ class BookForm(Schema):
     logo = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
     title = validators.UnicodeString(not_empty=True)
     author = validators.UnicodeString(not_empty=True)
-    price = validators.UnicodeString(not_empty=True)
+    price = validators.UnicodeString()
     description = validators.UnicodeString()
-    location = Pipe(ForEach(validators.UnicodeString(strip=True)),
-                    LocationTagsValidator())
     delete_logo = validators.Bool()
     chained_validators = [BookValidator()]
-    university_science_type = ScienceTypeValidator()
-    school_science_type = ScienceTypeValidator()
-    other_science_type = ScienceTypeValidator()
+
+    city = CityValidator(not_empty=True)
+    book_type = BookTypeValidator(not_empty=True)
+
     department = BookDepartmentValidator(not_empty=True)
-    owner_email = TranslatedEmailValidator(not_empty = False)
-    owner_name = validators.UnicodeString(not_empty=False)
-    owner_phone = PhoneNumberValidator(not_empty=False)
+
+    # University fields
+    university_science_type = ScienceTypeValidator()
+    location = Pipe(ForEach(validators.UnicodeString(strip=True)),
+                    LocationTagsValidator())
+
+    # School fields
+    school_science_type = ScienceTypeValidator()
+    school_grade = SchoolGradeValidator()
+
+    # Other fields
+    other_science_type = ScienceTypeValidator()
+
+    owner_email = TranslatedEmailValidator()
+    owner_name = validators.UnicodeString()
+    owner_phone = PhoneNumberValidator()
+
 
 class BooksController(BaseController):
 
@@ -208,7 +249,7 @@ class BooksController(BaseController):
                         title = title,
                         price = price,
                         city = self.form_result['city'],
-                        type = self.form_result['type'],
+                        type = self.form_result['book_type'],
                         science_type = science_type,
                         department = self.form_result['department'])
 
@@ -268,7 +309,7 @@ class BooksController(BaseController):
             'price': c.book.price,
             'department': c.book.department,
             'city': c.book.city.id,
-            'type': c.book.type.id,
+            'book_type': c.book.type.id,
             'owner_name': c.book.owner_name,
             'owner_phone': c.book.owner_phone,
             'owner_email': c.book.owner_email
@@ -293,7 +334,7 @@ class BooksController(BaseController):
             book.title = self.form_result['title']
             book.price = self.form_result['price']
             book.city = self.form_result['city']
-            book.type = self.form_result['type']
+            book.type = self.form_result['book_type']
             book.science_type = self._get_science_type()
             book.department = self.form_result['department']
             book.author = self.form_result['author']
@@ -314,6 +355,11 @@ class BooksController(BaseController):
 
     def logo(self, id, width=None, height=None):
         return serve_logo('book', int(id), width=width, height=height)
+
+    def search(self):
+        books = meta.Session.query(Book)
+        c.books = self._make_pages(books)
+        return render('books/catalog.mako')
 
     def _catalog_form(self):
         return render('books/catalog.mako')

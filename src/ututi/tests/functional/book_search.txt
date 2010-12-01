@@ -1,0 +1,29 @@
+Tests for book search
+=====================
+
+Set up
+------
+
+    >>> browser = Browser.logIn()
+
+    >>> from ututi.tests.functional import setUpBooks
+    >>> setUpBooks(browser)
+    >>> browser.open('http://localhost/books/')
+
+Now let's find some books:
+
+    >>> browser.click('search')
+
+Hmm, we found no books, must be because we did not add any yet. Let's
+fix that:
+
+    >>> browser.click('Upload a Book')
+    >>> browser.getControl('Title').value = "My physics book"
+    >>> browser.getControl('Author').value = "Mr. God"
+    >>> browser.getControl('Book department').displayValue = ['Other']
+    >>> browser.getControl('Book type').value = ['1']
+    >>> browser.getControl('City').displayValue = ['Vilnius']
+
+#    >>> browser.getControl('Save').click()
+
+    >>> browser.printCssQuery('.error-message')

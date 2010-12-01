@@ -105,7 +105,7 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
   <div class="book-transfer-info">
     ${h.input_line('price', _('Price'))}
     <p>
-      <%self:selectbox field_name = "type" label="${_('Book type')}", objects="${c.book_types}" />
+      <%self:selectbox field_name = "book_type" label="${_('Book type')}", objects="${c.book_types}" />
     </p>
     <p>
       <%self:selectbox field_name = "city" label="${_('City')}", objects="${c.cities}" />
