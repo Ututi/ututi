@@ -14,7 +14,7 @@ ${parent.head_tags()}
 <%newlocationtag:head_tags />
 </%def>
 
-<%def name="book_departments_select(field_name='department_id', label = None)">
+<%def name="book_departments_select(field_name='department', label = None)">
 <label>
   <%
   book_departments = []
@@ -46,12 +46,12 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
 
 <script language="javascript" type="text/javascript">//<![CDATA[
   function show_department(){
-      department_id = $('select#department_id option:selected').attr('value')
+      department = $('select#department option:selected').attr('value')
       $('.department').hide();
       $('.science_type_field').hide();
-      if(department_id != ""){
-          $('#department_science_type_field_'+department_id).show();
-          $('#department_'+department_id).show();
+      if(department != ""){
+          $('#department_science_type_field_'+department).show();
+          $('#department_'+department).show();
       }else{
           $('.science_type_field').hide();
       }
@@ -77,7 +77,12 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
     ${h.input_line('title', _('Title'))}
     ${h.input_line('author', _('Author'))}
     ${h.input_area('description', _('Brief description of the book'))}<br />
-    <%self:book_departments_select />
+   <label>
+     <%
+     book_departments = [("", "")] + [(dep.name, dep.title) for dep in c.book_departments]
+     %>
+     ${_('Book department')} : ${h.select('department', None, book_departments)}
+   </label>
     <form:error name="department_id">
  </div>
   <div id="department_0" class="department">

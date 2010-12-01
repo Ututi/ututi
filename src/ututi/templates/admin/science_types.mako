@@ -16,7 +16,7 @@
     %for science_type in c.science_types:
     <tr>
       <td>${science_type.name}</td>
-      <td>${_(science_type.book_department().capitalize())}</td>
+      <td>${_(science_type.book_department.title)}</td>
       <td>${h.link_to(_('Edit'), url(controller="admin", action="edit_science_type", id=science_type.id)) }</td>
     </tr>
     %endfor

@@ -32,17 +32,17 @@ ${h.link_to(_('Back to catalog'), url(controller="books", action="index"), class
 <div class="book-cover">
   <img src="${url(controller='books', action='logo', id=c.book.id, width=150, height=200)}" alt="${_('Book cover')}" />
 </div>
-<div class="books-description">${c.book.description|n}</div>
+<div class="books-description">${c.book.description}</div>
 ${book_attribute(_('Author'), c.book.author)}
-${book_attribute(_('Book department'),_(c.book.departments[c.book.department_id]))}
+${book_attribute(_('Book department'),_(c.book.department.name))}
 ${book_attribute(_('Book type'), c.book.type.name)}
-%if c.book.department_id == c.book.department['university']:
+%if c.book.department.name == 'university':
   ${_('School')}:
   %if c.book.location.parent:
     ${c.book.location.parent.title_short}
   %endif
   ${c.book.location.title} ${c.book.course}
-%elif c.book.department_id == c.book.department['school']:
+%elif c.book.department.name == 'school':
   ${_('School grade')}: ${c.book.school_grade.name}
 %endif
 ${book_attribute(_('Science type'), c.book.science_type.name)}

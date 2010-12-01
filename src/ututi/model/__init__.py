@@ -2295,21 +2295,63 @@ class Notification(object):
         seen_notifications = [n.id for n in user.seen_notifications]
         return meta.Session.query(cls).filter(and_(not_(cls.id.in_(seen_notifications)), cls.valid_until > date.today())).order_by(cls.id.asc()).first()
 
+
+class Department(object):
+
+    names = ['university', 'school', 'other']
+    departments_by_id = {}
+    departments_by_name = {}
+
+    @classmethod
+    def initialize(cls):
+        for id, name in enumerate(cls.names):
+            department = Department(id, name, name.capitalize())
+            cls.departments_by_id[id] = department
+            cls.departments_by_name[name] = department
+
+    @classmethod
+    def get(cls, id):
+        if id in cls.departments_by_id:
+            return cls.departments_by_id[id]
+        return None
+
+    @classmethod
+    def getByName(cls, name):
+        if name in cls.departments_by_name:
+            return cls.departments_by_name[name]
+
+    def __init__(self, id, name, title):
+        self.id = id
+        self.name = name
+        self.title = title
+
+# Initialize departments
+Department.initialize()
+
+
 class Book(object):
     """Book that can be shared by user"""
-    departments = ["university", "school", "other"]
-    department = {"university" : departments.index("university"),
-                  "school" : departments.index("school"),
-                  "other" : departments.index("other")}
 
-    def __init__(self, owner, title, price, city, type, science_type, department_id):
+    @apply
+    def department():
+        def setDepartment(self, value):
+            if value is None:
+                self.department_id = None
+            self.department_id = value.id
+
+        def getDepartment(self):
+            return Department.get(self.department_id)
+
+        return property(getDepartment, setDepartment)
+
+    def __init__(self, owner, title, price, city, type, science_type, department):
         self.price = price
         self.title = title
         self.owner = owner
         self.city = city
         self.type = type
         self.science_type = science_type
-        self.department_id = department_id
+        self.department = department
         self.reset_expiration_time()
 
     def reset_expiration_time(self):
@@ -2364,15 +2406,29 @@ class SchoolGrade(object):
             return None
 
 
-class ScienceType (object):
+class ScienceType(object):
     """Representation of book science type"""
 
     def __init__(self, name, book_department_id):
         self.name = name
         self.book_department_id = book_department_id
 
-    def book_department(self):
-        return Book.departments[self.book_department_id]
+    @classmethod
+    def getByDepartment(self, department):
+        return meta.Session.query(ScienceType).filter(
+            ScienceType.book_department_id==department.id).all()
+
+    @apply
+    def book_department():
+        def setDepartment(self, value):
+            if value is None:
+                self.book_department_id = None
+            self.book_department_id = value.id
+
+        def getDepartment(self):
+            return Department.get(self.book_department_id)
+
+        return property(getDepartment, setDepartment)
 
 
 class BookType(object):

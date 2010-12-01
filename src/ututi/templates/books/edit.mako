@@ -40,7 +40,12 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
     ${h.input_line('title', _('Title'))}
     ${h.input_line('author', _('Author'))}
     ${h.input_area('description', _('Brief description of the book'))}<br />
-    <%book_form:book_departments_select />
+    <label>
+      <%
+         book_departments = [("", "")] + [(dep.name, dep.title) for dep in c.book_departments]
+         %>
+      ${_('Book department')} : ${h.select('department', None, book_departments)}
+    </label>
     <form:error name="department_id">
  </div>
   <div id="department_0" class="department">
@@ -48,28 +53,28 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
     ${h.input_line('course', _('Course'))}
   </div>
   <div id="department_1" class="department">
-    <label>${_('School grade')}: ${h.select("school_grade", None, h.list_for_select(c.school_grades))}</label>
+    <label>${_('School grade')}: ${h.select("school_grade", None, [(o.id, o.name) for o in c.school_grades])}</label>
  </div>
   <div class="science_type_field">
-    <label>${_('Science types')}: ${h.select("science_type", None, h.list_for_select(c.current_science_types))}</label>
+    <label>${_('Science types')}: ${h.select("science_type", None, [(o.id, o.name) for o in  c.current_science_types])}</label>
   </div>
   <div id="department_science_type_field_0" class="science_type_field" style="display: none">
-    <label>${_('Science types')}: ${h.select("university_science_type", None, h.list_for_select(c.university_science_types))}</label>
+    <label>${_('Science types')}: ${h.select("university_science_type", None, [(o.id, o.name) for o in  c.university_science_types])}</label>
   </div>
   <div id="department_science_type_field_1" class="science_type_field" style="display: none;">
-    <label>${_('Science types')}: ${h.select("school_science_type", None, h.list_for_select(c.school_science_types))}</label>
+    <label>${_('Science types')}: ${h.select("school_science_type", None, [(o.id, o.name) for o in  c.school_science_types])}</label>
   </div>
   <div id="department_science_type_field_2" class="science_type_field" style="display: none;">
-    <label>${_('Science types')}: ${h.select("other_science_type", None, h.list_for_select(c.other_science_types))}</label>
+    <label>${_('Science types')}: ${h.select("other_science_type", None, [(o.id, o.name) for o in  c.other_science_types])}</label>
   </div>
   <form:error name="science_type" />
   <div class="book-transfer-info">
     ${h.input_line('price', _('Price'))}
     <p>
-      <label>${_('Book type')}: ${h.select("type", None, h.list_for_select(c.book_types))}</label>
+      <label>${_('Book type')}: ${h.select("type", None, [(o.id, o.name) for o in c.book_types])}</label>
     </p>
     <p>
-      <label>${_('City')}: ${h.select("city", None, h.list_for_select(c.cities))}</label>
+      <label>${_('City')}: ${h.select("city", None, [(o.id, o.name) for o in c.cities])}</label>
     </p>
     <p>
     </p>

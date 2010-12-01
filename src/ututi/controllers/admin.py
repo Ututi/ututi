@@ -33,6 +33,7 @@ from ututi.lib.base import BaseController, render
 from ututi.lib.validators import PhoneNumberValidator, GroupCouponValidator, validate
 from ututi.lib.emails import teacher_confirmed_email
 from ututi.model.events import Event
+from ututi.model import Department
 from ututi.model import Region
 from ututi.model import FileDownload
 from ututi.model import SimpleTag
@@ -108,7 +109,7 @@ class SchoolGradeForm(Schema):
 class ScienceTypeForm(Schema):
     allow_extra_fields = True
     name = String(min=3)
-    department_id = Int(min=0)
+    department = Int(min=0)
 
 class BookTypeForm(Schema):
     allow_extra_fields = True
@@ -602,7 +603,7 @@ class AdminController(BaseController):
 
     def science_types(self):
         science_types = meta.Session.query(ScienceType).order_by(ScienceType.book_department_id.asc(), ScienceType.name.asc())
-        c.book_departments = Book.departments
+        c.book_departments = Department.names
         c.science_types = self._make_pages(science_types)
         return render('admin/science_types.mako')
 
@@ -610,14 +611,14 @@ class AdminController(BaseController):
     @validate(schema=ScienceTypeForm, form='science_types')
     def create_science_type(self):
         if hasattr(self, 'form_result'):
-            science_type = ScienceType(name=self.form_result['name'], book_department_id=self.form_result['department_id'])
+            science_type = ScienceType(name=self.form_result['name'], book_department_id=self.form_result['department'])
             meta.Session.add(science_type)
             meta.Session.commit()
         redirect(url(controller="admin", action="science_types"))
 
     @ActionProtector("root")
     def _edit_science_type_form(self):
-        c.book_departments = Book.departments
+        c.book_departments = Department.names
         return render('admin/science_type_edit.mako')
 
     @ActionProtector("root")
@@ -626,7 +627,7 @@ class AdminController(BaseController):
         defaults = {
             'id': c.science_type.id,
             'name': c.science_type.name,
-            'department_id': c.science_type.book_department_id}
+            'department': c.science_type.book_department_id}
         return htmlfill.render(self._edit_science_type_form(), defaults)
 
     @ActionProtector("root")
@@ -635,7 +636,7 @@ class AdminController(BaseController):
         science_type = meta.Session.query(ScienceType).filter(ScienceType.id == id).one()
         if hasattr(self, 'form_result'):
             science_type.name = self.form_result['name']
-            science_type.book_department_id = self.form_result['department_id']
+            science_type.book_department_id = self.form_result['department']
             meta.Session.commit()
         redirect(url(controller="admin", action="science_types"))
 

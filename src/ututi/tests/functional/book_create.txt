@@ -97,7 +97,7 @@ Then I edit my new school book information, change it to "other" type and confir
     >>> browser.getControl('Title').value = "My other book"
     >>> browser.getControl('Author').value = "Mr. other"
     >>> browser.getControl('Brief description of the book').value = "A changed perfect book"
-    >>> browser.getControl('Book department').value = ['2']
+    >>> browser.getControl('Book department').displayValue = ['Other']
     >>> browser.getControl(name = 'other_science_type').value = ['5']
     >>> browser.getControl('Book type').value = ['1']
     >>> browser.getControl('City').value = ['1']
@@ -113,7 +113,7 @@ Then I edit my new school book information again, and make mistake
     >>> browser.getControl('Title').value = ""
     >>> browser.getControl('Author').value = "Mr. other"
     >>> browser.getControl('Brief description of the book').value = "A changed perfect book"
-    >>> browser.getControl('Book department').value = ['2']
+    >>> browser.getControl('Book department').displayValue = ['Other']
     >>> browser.getControl('Book type').value = ['1']
     >>> browser.getControl('City').value = ['1']
     >>> browser.getControl('Price').value = "999.00"
@@ -128,7 +128,7 @@ I enter my new university book information and confirm changes
     >>> browser.getControl('Title').value = "My beautiful book"
     >>> browser.getControl('Author').value = "Mr. God"
     >>> browser.getControl('Brief description of the book').value = "A perfect book for evening"
-    >>> browser.getControl('Book department').value = ['0']
+    >>> browser.getControl('Book department').displayValue = ['University']
     >>> browser.getControl(name='location-0').value = "Vilniaus universitetas"
     >>> browser.getControl('Department').value = "Ekonomikos fakultetas"
     >>> browser.getControl('Book type').value = ['1']
@@ -146,7 +146,7 @@ I enter my new other type book information and confirm changes
     >>> browser.getControl('Title').value = "My beautiful book"
     >>> browser.getControl('Author').value = "Mr. God"
     >>> browser.getControl('Brief description of the book').value = "A perfect book for evening"
-    >>> browser.getControl('Book department').value = ['2']
+    >>> browser.getControl('Book department').displayValue = ['Other']
     >>> browser.getControl('Book type').value = ['1']
     >>> browser.getControl('City').value = ['1']
     >>> browser.getControl(name = 'other_science_type').value = ['5']
