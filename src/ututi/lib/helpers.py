@@ -510,12 +510,3 @@ def object_link(object):
         return link_to(object.subject, object.url())
     elif isinstance(object, ForumPost):
         return link_to(object.title, object.url(new=True))
-
-def list_for_select(objects_list, **kwargs):
-    """Generates double array with object ids and names list"""
-    tuple_list = [("", "")]
-    kwargs['value'] = "id"
-    kwargs['label'] = "name"
-    for object in objects_list:
-        tuple_list.append([object.id, object.name])
-    return tuple_list

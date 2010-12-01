@@ -37,7 +37,7 @@ ${parent.head_tags()}
 </%def>
 
 <%def name="selectbox(field_name, label, objects)">
-<label>${label}: ${h.select(field_name, None, h.list_for_select(objects, blank_value="blank"))}</label>
+<label>${label}: ${h.select(field_name, None, [("", "")] + [(obj.id, obj.name) for obj in objects])}</label>
 <form:error name="${field_name}" />
 </%def>
 
