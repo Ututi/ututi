@@ -2325,6 +2325,9 @@ class Department(object):
         self.name = name
         self.title = title
 
+    def __repr__(self):
+        return '<ututi.model.Department %d: %s>' % (self.id, self.title)
+
 # Initialize departments
 Department.initialize()
 
