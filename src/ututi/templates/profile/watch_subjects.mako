@@ -1,4 +1,4 @@
-<%inherit file="/profile/edit.mako" />
+<%inherit file="/profile/base.mako" />
 
 <%namespace file="/widgets/tags.mako" import="*"/>
 <%namespace file="/search/index.mako" import="search_form"/>
