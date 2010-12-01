@@ -1445,6 +1445,9 @@ div.GroupFilesWiki{
     background: url('img/icons/exams-off.png') no-repeat 10px 5px #f6f6f6;
     height:40px;
 }
+div.ProfileSubjects {
+    background: url('images/user_logo_small.png') no-repeat 10px 5px #f6f6f6;
+}
 
 div.GroupWiki{
     background: url('img/icons/exams-off.png') no-repeat 13px 7px #f6f6f6;
@@ -4179,7 +4182,7 @@ div.search-item div.description {
 }
 
 #subject_settings .mailing-option li.disabled {
-    background: transparent url("../images/bullet_large.png") left center no-repeat;
+    background: transparent url("../img/icons/message-off-very-small.png") left center no-repeat;
 }
 
 #subject_settings li.enabled {
@@ -4187,7 +4190,7 @@ div.search-item div.description {
 }
 
 #subject_settings .mailing-option li.enabled {
-    background: transparent url("../images/bullet_orange.png") left center no-repeat;
+    background: transparent url("../img/icons/message-on-very-small.png") left center no-repeat;
 }
 
 .personal_watched_subjects li.enabled a,

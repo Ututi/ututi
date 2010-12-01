@@ -83,7 +83,7 @@ $(document).ready(function(){
 
 <%def name="subjects_block(title, update_url, selected, subjects, unwatch=False, group=None)">
 <%self:rounded_block class_='portletGroupFiles subject_description'>
-  <div class="GroupFiles GroupFilesDalykai">
+  <div class="GroupFiles GroupFilesGroups ${not group and 'ProfileSubjects' or ''}">
     <h2 class="portletTitle bold">
       ${title|n}
     </h2>
