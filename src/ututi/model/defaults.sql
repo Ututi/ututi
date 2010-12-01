@@ -1343,9 +1343,9 @@ CREATE TABLE books (
        school_grade_id int8 REFERENCES school_grades(id) on delete restrict,
        course varchar(100) default '',
        location_id int8 REFERENCES tags(id),
-       owner_name varchar(50) not null,
-       owner_phone varchar(50) not null,
-       owner_email varchar(100) not null,
+       owner_name varchar(50) DEFAULT '' NOT NULL,
+       owner_phone varchar(50) DEFAULT '' NOT NULL,
+       owner_email varchar(100) DEFAULT '' NOT NULL,
        valid_until timestamp not null default (now() at time zone 'UTC'),
        PRIMARY KEY (id)
 );;

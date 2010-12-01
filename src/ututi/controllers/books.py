@@ -18,7 +18,9 @@ from formencode.api import Invalid
 from pylons.controllers.util import redirect
 from pylons.i18n import _
 
-from ututi.lib.validators import FileUploadTypeValidator
+from ututi.lib.validators import PhoneNumberValidator
+from ututi.lib.validators import FileUploadTypeValidator, TranslatedEmailValidator
+
 from ututi.model import LocationTag
 from ututi.model import Book, meta, City, BookType, SchoolGrade, ScienceType
 import ututi.lib.helpers as h
@@ -117,14 +119,15 @@ class BookForm(Schema):
     logo = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
     title = validators.UnicodeString(not_empty=True)
     author = validators.UnicodeString(not_empty=True)
-    price = validators.UnicodeString(not_empty=True)#PriceValidator(not_empty=True)
+    price = validators.UnicodeString(not_empty=True)
     description = validators.UnicodeString()
     location = Pipe(ForEach(validators.UnicodeString(strip=True)),
                     LocationTagsValidator())
-    show_phone = validators.Bool()
     delete_logo = validators.Bool()
     chained_validators = [BookValidator()]
-
+    owner_email = TranslatedEmailValidator(not_empty = False)
+    owner_name = validators.UnicodeString(not_empty=False)
+    owner_phone = PhoneNumberValidator(not_empty=False)
 class BooksController(BaseController):
 
     def __before__(self):
@@ -172,7 +175,9 @@ class BooksController(BaseController):
             if self.form_result['logo'] is not None and self.form_result['logo'] != '':
                 book.logo = self.form_result['logo'].file.read()
             book.location = self.form_result['location']
-            book.show_phone = self.form_result['show_phone']
+            book.owner_name = self.form_result['owner_name']
+            book.owner_phone = self.form_result['owner_phone']
+            book.owner_email = self.form_result['owner_email']
             book.course = self.form_result['course']
             book.school_grade = self.form_result['school_grade']
             meta.Session.add(book)
@@ -183,6 +188,10 @@ class BooksController(BaseController):
     @ActionProtector("user")
     def _add(self):
         self._load_defaults()
+        c.user_phone_number = c.user.phone_number
+        last_user_book = meta.Session.query(Book).filter(Book.owner == c.user).order_by(Book.id.desc()).first()
+        if not(c.user_phone_number) and last_user_book:
+            c.user_phone_number = last_user_book.owner_phone
         c.current_science_types = meta.Session.query(ScienceType).all()
         return render('books/add.mako')
 
@@ -194,6 +203,7 @@ class BooksController(BaseController):
         return render('books/show.mako')
 
     def _edit(self):
+
         self._load_defaults()
         if c.book is not None and c.book != "" and c.book.department_id:
             c.current_science_types = meta.Session.query(ScienceType).filter(ScienceType.book_department_id == c.book.department_id).all()
@@ -212,7 +222,6 @@ class BooksController(BaseController):
             'id': c.book.id,
             'title': c.book.title,
             'author': c.book.author,
-            'show_phone': c.book.show_phone,
             'course': c.book.course,
             'school_grade': (c.book.school_grade.id if c.book.school_grade else None),
             c.book.departments[c.book.science_type.book_department_id] + '_science_type': c.book.science_type.id,
@@ -220,7 +229,10 @@ class BooksController(BaseController):
             'price': c.book.price,
             'department_id': c.book.department_id,
             'city': c.book.city.id,
-            'type': c.book.type.id
+            'type': c.book.type.id,
+            'owner_name': c.book.owner_name,
+            'owner_phone': c.book.owner_phone,
+            'owner_email': c.book.owner_email
         }
 
         if c.book.location is not None:
@@ -256,7 +268,9 @@ class BooksController(BaseController):
             elif self.form_result['logo'] is not None and self.form_result['logo'] != '':
                 book.logo = self.form_result['logo'].file.read()
             book.location = self.form_result['location']
-            book.show_phone = self.form_result['show_phone']
+            book.owner_name = self.form_result['owner_name']
+            book.owner_phone = self.form_result['owner_phone']
+            book.owner_email = self.form_result['owner_email']
             book.course = self.form_result['course']
             book.school_grade = self.form_result['school_grade']
             meta.Session.commit()

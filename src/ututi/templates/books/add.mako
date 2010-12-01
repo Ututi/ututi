@@ -41,38 +41,6 @@ ${parent.head_tags()}
 <form:error name="${field_name}" />
 </%def>
 
-<%def name="user_information(user, full=True, title=None)">
-<div class="profile ${'bottomLine' if user.description or user.site_url else ''}">
-  <div class="floatleft avatar">
-    %if user.logo is not None:
-    <img src="${url(controller='user', action='logo', id=user.id, width=70, height=70)}" alt="logo" />
-    %else:
-    ${h.image('/img/profile-avatar.png', alt='logo')|n}\
-    %endif
-  </div>
-  <div class="floatleft personal-data">
-    <div><h2>${user.fullname}</h2></div>
-    %if h.check_crowds(['root']):
-    <div><a href="mailto:${user.emails[0].email}">${user.emails[0].email}</a></div>
-    %endif
-    %if user.phone_number is not None and user.phone_number != "":
-    <div class="user-phone-number">
-      ${_('Phone')}: ${c.user.phone_number}
-    </div>
-    %endif
-    <div class="medals" id="user-medals">
-      %for medal in user.all_medals():
-      ${medal.img_tag()}
-      %endfor
-    </div>
-  </div>
-  <div class="clear"></div>
-</div>
-%if user.site_url:
-%endif
-</%def>
-
-
 <%def name="form(action)">
 ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
 
@@ -134,7 +102,6 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
   <form:error name="science_type" />
   <div class="book-transfer-info">
     ${h.input_line('price', _('Price'))}
-    <input type="checkbox" name="show_phone" value="1" checked="checked" /> ${_('Show my phone number')}
     <p>
       <%self:selectbox field_name = "type" label="${_('Book type')}", objects="${c.book_types}" />
     </p>
@@ -145,9 +112,22 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
     </p>
   </div>
   <br />
-  <div>
-    <%self:user_information user="${c.user}" />
-    ${h.input_submit(_('Save'))}
+
+  <div class="owner-information">
+    <div class="floatleft avatar">
+      %if c.user.logo is not None:
+      <img src="${url(controller='user', action='logo', id=c.user.id, width=70, height=70)}" alt="logo" />
+      %else:
+      ${h.image('/img/profile-avatar.png', alt='logo')|n}\
+      %endif
+    </div>
+    <div class="floatleft owner-information-fields">
+      <h2>${_('Enter your cotact information:')}</h2>
+      ${h.input_line("owner_name", _("Name"), c.user.fullname)}
+      ${h.input_line("owner_phone", _("Phone"), c.user_phone_number)}
+      ${h.input_line("owner_email", _("E-mail"), (c.user.emails[0].email if c.user.emails[0] else ""))}
+      ${h.input_submit(_('Save'))}
+    </div>
   </div>
   </fieldset>
 </form>

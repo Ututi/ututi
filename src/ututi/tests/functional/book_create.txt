@@ -28,21 +28,69 @@ When I log in, I can enter add book area.
     >>> browser.url
     'http://localhost/books/add'
 
+
+Setting up user profile information
+-----------------------------------
+
+    >>> browser.open('http://localhost')
+    >>> browser.click('Settings')
+    >>> browser.click('Contacts')
+    >>> browser.getControl('Mobile phone number').value = ""
+    >>> browser.click('Update contacts')
+    >>> browser.open('http://localhost/books/add')
+
 Then I enter my new school book information and confirm changes
 
-    >>> browser.getControl('Title').value = "My beautiful book"
+    >>> browser.getControl('Title').value = "My school book"
     >>> browser.getControl('Author').value = "Mr. God"
     >>> browser.getControl('Brief description of the book').value = "A perfect book for evening"
-    >>> browser.getControl('Book department').value = ['1']
-    >>> browser.getControl('School grade').value = ['1']
-    >>> browser.getControl(name = 'school_science_type').value = ['1']
-    >>> browser.getControl('Book type').value = ['1']
-    >>> browser.getControl('City').value = ['1']
-    >>> browser.getControl('Price').value = "1000.00"
+    >>> browser.getControl('Book department').displayValue = ['School']
+    >>> browser.getControl('School grade').displayValue = ['1 kl.']
+    >>> browser.getControl(name = 'school_science_type').displayValue = ['Fizika']
+    >>> browser.getControl('Book type').displayValue = ['Vadovėlis']
+    >>> browser.getControl('City').displayValue = ['Vilnius']
+    >>> browser.getControl('Price').value = "Nemokama!"
     >>> browser.getControl('Book cover').add_file(*make_file('test_logo.png'))
-    >>> browser.getControl('Save').click()
+    >>> browser.getControl(name='owner_name').value
+    'Adminas Adminovix'
+    >>> browser.getControl(name='owner_email').value
+    'admin@ututi.lt'
+
+Couse I haven't filled my phone number it should by empty
+
+    >>> browser.getControl(name='owner_phone').value
+    ''
+
+Then I enter my phone number
+
+    >>> browser.getControl(name='owner_phone').value = '+37067411111'
+
+Then I save my book
+
+    >>> browser.click('Save')
     >>> browser.url
     'http://localhost/books/show/1'
+
+When I add second book, my earlyer inserted phone book must by autofiled by the number of my last book
+
+    >>> browser.click('Upload a Book')
+    >>> browser.getControl(name='owner_phone').value
+    '+37067411111'
+
+Then I update my profile information and insert phone number
+
+    >>> browser.click('Settings')
+    >>> browser.click('Contacts')
+    >>> browser.getControl('Mobile phone number').value = "+37067422222"
+
+    >>> browser.click('Update contacts')
+
+When I add a book, now I see autofilled phone field with my phone number from profile
+
+    >>> browser.open('http://localhost/books')
+    >>> browser.click('Upload a Book')
+    >>> browser.getControl(name='owner_phone').value
+    '+37067422222'
 
 Then I edit my new school book information, change it to "other" type and confirm changes
     >>> browser.open('http://localhost/books/edit/1')
@@ -60,6 +108,7 @@ Then I edit my new school book information, change it to "other" type and confir
     'http://localhost/books/show/1'
 
 Then I edit my new school book information again, and make mistake
+
     >>> browser.open('http://localhost/books/edit/1')
     >>> browser.getControl('Title').value = ""
     >>> browser.getControl('Author').value = "Mr. other"
