@@ -105,7 +105,7 @@
   ${tooltip(_('You need to be a member of a group or have subjects that you are studying to be able to quickly upload files.'))}
   %endif
   <a class="action ${not show_files and 'inactive' or ''}" id="upload_file" href="#upload-file">${_('upload a file')}</a>
-  %if not show_files:
+  %if not show_wiki:
   ${tooltip(_('You or your group need to have subjects that you are studying to be able to quickly create wiki notes in them.'))}
   %endif
   <a class="action ${not show_wiki and 'inactive' or ''}" id="create_wiki" href="#create-wiki">${_('create a wiki page')}</a>
