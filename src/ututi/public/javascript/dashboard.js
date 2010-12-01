@@ -129,15 +129,14 @@ $(document).ready(function() {
                  iframe['interval'] = interval;
              },
              onComplete: function(file, response, iframe){
+                 iframe['progress_indicator'].remove();
                  if (response != 'UPLOAD_FAILED') {
-                     iframe['progress_indicator'].remove();
                      $('#file_upload_form').find('input, textarea').val('');
                      $('#upload_file').click();
                      $('#upload_file_block').removeClass('upload-failed');
                      reload_wall();
                  } else {
-                     $('#upload_file_block').addClass('upload-failed');
-                     $('#dashboard_action_blocks').after('<div class="action-reply">'+"${_('File upload failed.')}"+'</div>');
+                     $('#upload-failed-error-message').fadeIn(500);
                  }
                  window.clearInterval(iframe['interval']);
              }

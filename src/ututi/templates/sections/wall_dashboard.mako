@@ -55,9 +55,9 @@
         ${h.input_submit(_('Upload file'), id="file_upload_submit")}
       </div>
       <br class="clearLeft" />
-      <div id="upload-failed-error-message" class="action-reply">${_('File upload failed.')}</div>
     </form>
   </%base:rounded_block>
+  <div id="upload-failed-error-message" class="action-reply">${_('File upload failed.')}</div>
 </%def>
 
 <%def name="create_wiki_block(wiki_recipients)">

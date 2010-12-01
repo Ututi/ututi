@@ -5126,10 +5126,6 @@ padding:3px 15px 0 30px;
     display: none;
 }
 
-.upload-failed #upload-failed-error-message {
-    display: block;
-}
-
 .dashboard_action_block {
     display: none; /* Initially hidden */
 }
