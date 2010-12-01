@@ -1,4 +1,4 @@
-<%inherit file="/profile/base.mako" />
+<%inherit file="/profile/edit.mako" />
 
 <%def name="pagetitle()">
 ${_('Watched subjects notification settings')}

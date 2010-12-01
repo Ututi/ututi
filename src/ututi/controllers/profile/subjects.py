@@ -34,6 +34,7 @@ class WatchedSubjectsMixin(object):
     @ActionProtector("user")
     def subjects(self):
         c.breadcrumbs.append(self._actions('subjects'))
+        self._set_settings_tabs(current_tab='notifications')
         c.subjects = c.user.watched_subjects
         c.groups = c.user.groups
         return render('profile/subjects.mako')

@@ -61,13 +61,7 @@ ${parent.head_tags()}
   </li>
 </%def>
 
-<div style="padding-top: 5px; padding-bottom: 10px;">
-  <a class="back-link" href="${url(controller='profile', action='subjects')}">${_('Back to subject list')}</a>
-</div>
-
-
-
-<ul id="watched_subjects" class="personal_watched_subjects">
+<ul id="watched_subjects" class="personal_watched_subjects" style="padding-top: 10px">
 %if c.watched_subjects:
   % for subject in c.watched_subjects:
       ${watched_subject(subject)}
@@ -78,6 +72,11 @@ ${parent.head_tags()}
   </li>
 %endif
 </ul>
+%if c.watched_subjects:
+  <div style="padding: 5px;">
+    <a class="forward-link-to" href="${url(controller='profile', action='subjects')}"> ${_('Notification settings')}</a>
+  </div>
+%endif
 
 <br />
 

@@ -168,7 +168,10 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
              'link': url(controller='profile', action='edit_password')},
             {'title': _("Wall"),
              'name': 'wall',
-             'link': url(controller='profile', action='wall_settings')}]
+             'link': url(controller='profile', action='wall_settings')},
+            {'title': _("Notifications"),
+             'name': 'notifications',
+             'link': url(controller='profile', action='subjects')}]
 
     @ActionProtector("user")
     def edit(self):
