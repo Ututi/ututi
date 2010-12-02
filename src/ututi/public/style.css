@@ -307,7 +307,7 @@ button.btnMedium.btnExclamation {
 
 /* Header */
 #siteName a, #siteName2 a{
-    background: url('img/site_logo.gif') no-repeat left;
+    background: url('img/site_logo_xmas.gif') no-repeat left;
     display: block;
     height: 68px;
     left: 0;
@@ -318,7 +318,7 @@ button.btnMedium.btnExclamation {
     width: 0;
 }
 #siteName2 a{
-    background: url('img/site_logo_collapsed.gif') no-repeat left;
+    background: url('img/site_logo_collapsed_xmas.gif') no-repeat left;
     padding-left: 65px;
     }
     #socialLinks, #BreadLinks {
