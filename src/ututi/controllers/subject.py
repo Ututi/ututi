@@ -219,6 +219,38 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
                     tags=subject.location_path))
 
     @subject_action
+    @ActionProtector("verified_teacher")
+    def teach(self, subject):
+        if not c.user.teaches(subject):
+            c.user.teach_subject(subject)
+            h.flash(_("The course has been added to your taught courses list."))
+        else:
+            h.flash(_("The course is already in your taught courses list."))
+
+        meta.Session.commit()
+
+        redirect(url(controller='subject',
+                    action='home',
+                    id=subject.subject_id,
+                    tags=subject.location_path))
+
+    @subject_action
+    @ActionProtector("teacher")
+    def unteach(self, subject):
+        if c.user.teaches(subject):
+            c.user.unteach_subject(subject)
+            h.flash(_("The course has been removed from your taught courses list."))
+        else:
+            h.flash(_("The course was not in your taught courses list."))
+
+        meta.Session.commit()
+
+        redirect(url(controller='subject',
+                    action='home',
+                    id=subject.subject_id,
+                    tags=subject.location_path))
+
+    @subject_action
     @validate(schema=SubjectForm, form='_edit_form')
     @ActionProtector("user")
     def update(self, subject):
