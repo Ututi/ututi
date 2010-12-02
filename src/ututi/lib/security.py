@@ -7,7 +7,6 @@ from pylons.controllers.util import redirect
 
 from repoze.what.predicates import NotAuthorizedError
 from repoze.what.plugins.pylonshq.protectors import ActionProtector as BaseActionProtector
-from datetime import datetime, timedelta
 
 from ututi.lib.cache import u_cache
 from ututi.lib.geoip import set_geolocation
@@ -110,6 +109,9 @@ def is_user(user, context=None):
 def is_teacher(user, context=None):
     return user is not None and user.is_teacher
 
+def is_verified_teacher(user, context=None):
+    return user is not None and user.is_teacher and user.teacher_verified
+
 def is_owner(user, context=None):
     return context.created is user
 
@@ -134,6 +136,7 @@ crowd_checkers = {
     "deleter": is_deleter,
     "user": is_user,
     "teacher": is_teacher,
+    "verified_teacher": is_verified_teacher,
     "smallfile": is_smallfile,
     }
 
