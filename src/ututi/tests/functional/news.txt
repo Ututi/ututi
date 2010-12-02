@@ -125,7 +125,7 @@ And look at the emails:
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was created.
     - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/6) was created.
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/edit/notifications).
+    If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user2@ututi.lt']
     Ututi news: 2 new pages
@@ -135,7 +135,7 @@ And look at the emails:
     - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/6) was created.
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was updated.
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/edit/notifications).
+    If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user@ututi.lt']
     Ututi news: 2 new pages
@@ -145,7 +145,7 @@ And look at the emails:
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was created.
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was updated.
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/edit/notifications).
+    If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
 
 
@@ -188,7 +188,7 @@ And we continue uploading files:
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was created.
     - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/6) was created.
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/edit/notifications).
+    If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user2@ututi.lt']
     Ututi news: 2 new files and 2 new pages
@@ -200,7 +200,7 @@ And we continue uploading files:
     - File f1.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
     - File f2.txt (http://localhost/subject/vu/mat_analize/file/11/get) was uploaded.
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/edit/notifications).
+    If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user@ututi.lt']
     Ututi news: 2 new files and 2 new pages
@@ -212,7 +212,7 @@ And we continue uploading files:
     - File f1.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
     - File f2.txt (http://localhost/subject/vu/mat_analize/file/11/get) was uploaded.
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/edit/notifications).
+    If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
 
     >>> mail_queue[:] = []
@@ -291,7 +291,7 @@ Admin should stop getting events in his daily news:
     - File f1.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
     - File f2.txt (http://localhost/subject/vu/mat_analize/file/11/get) was uploaded.
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/edit/notifications).
+    If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user@ututi.lt']
     Ututi news: 2 new files and 2 new pages
@@ -303,7 +303,7 @@ Admin should stop getting events in his daily news:
     - File f1.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
     - File f2.txt (http://localhost/subject/vu/mat_analize/file/11/get) was uploaded.
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/edit/notifications).
+    If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
 
     >>> mail_queue[:] = []
@@ -327,7 +327,7 @@ welcome portlet is taking me to the notification view...
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was created.
     - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/6) was created.
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/edit/notifications).
+    If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user2@ututi.lt']
     Ututi news: 2 new files and 2 new pages
@@ -339,7 +339,7 @@ welcome portlet is taking me to the notification view...
     - File f1.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
     - File f2.txt (http://localhost/subject/vu/mat_analize/file/11/get) was uploaded.
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/edit/notifications).
+    If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user@ututi.lt']
     Ututi news: 2 new files and 2 new pages
@@ -351,7 +351,7 @@ welcome portlet is taking me to the notification view...
     - File f1.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
     - File f2.txt (http://localhost/subject/vu/mat_analize/file/11/get) was uploaded.
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/edit/notifications).
+    If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
 
     >>> mail_queue[:] = []
@@ -371,7 +371,7 @@ Hmm, now what happens if user2 starts ignoring the subject:
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/page/4) was created.
     - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/page/6) was created.
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/edit/notifications).
+    If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user@ututi.lt']
     Ututi news: 2 new files and 2 new pages
@@ -383,7 +383,7 @@ Hmm, now what happens if user2 starts ignoring the subject:
     - File f1.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
     - File f2.txt (http://localhost/subject/vu/mat_analize/file/11/get) was uploaded.
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your watched subject page (http://localhost/profile/edit/notifications).
+    If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
 
     >>> mail_queue[:] = []
