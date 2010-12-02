@@ -508,7 +508,7 @@ class UserProfileController(ProfileControllerBase):
             c.user.location = fields.get('location', None)
             meta.Session.commit()
             return render_mako_def('/profile/home.mako', 'location_updated')
-        except Invalid, e:
+        except Invalid:
             abort(400)
 
     @ActionProtector("user")
@@ -529,7 +529,7 @@ class UserProfileController(ProfileControllerBase):
                 sms.confirmation_request(c.user)
             meta.Session.commit()
             return render_mako_def('/profile/home.mako', 'phone_updated')
-        except Invalid, e:
+        except Invalid:
             return ''
 
     @ActionProtector("user")
