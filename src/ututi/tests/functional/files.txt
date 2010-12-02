@@ -32,6 +32,7 @@ The download count of files is shown in the user's home portlet:
     1 (25 B)
 
 .. and in his public profile:
+
     >>> browser.open('http://localhost/user/1')
     >>> browser.printQuery('//div[@class="file_stats"]/span/text()')
     1
@@ -40,20 +41,16 @@ The download count of files is shown in the user's home portlet:
 After the download of the file, the downloaded files count in the user list should indicate this:
 
     >>> browser.open('http://localhost/admin/users')
-    >>> browser.printQuery('id("user_list")')
-    <table id="user_list">
-      <tr>
-        <th></th>
-        <th>Name</th>
-        ...
-      </tr>
-      <tr>
-        <td>1.</td>
-        <td>
-          <a href="/user/4">Third user</a>
-        </td>
-    ...
 
+We print the second and the fifth columns of the table:
+
+    >>> browser.printCssQuery('th:nth-child(2), th:nth-child(5), td:nth-child(2), td:nth-child(5)', include_attributes=[''])
+    <th>Name</th>                           <th>Downloads</th>
+    <td> <a>Benas</a> </td>                 <td> 0 (0 B) <br /> 0 unique </td>
+    <td> <a>Third user</a> </td>            <td> 0 (0 B) <br /> 0 unique </td>
+    <td> <a>Second user</a> </td>           <td> 0 (0 B) <br /> 0 unique </td>
+    <td> <a>Alternative user</a> </td>      <td> 0 (0 B) <br /> 0 unique </td>
+    <td> <a>Adminas Adminovix</a> ... </td> <td> 1 (25 B) <br /> 1 unique </td>
 
 The files are stored in our upload directory:
 
