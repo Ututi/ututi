@@ -475,3 +475,14 @@ class Teacher(User):
     def __init__(self, **kwargs):
         self.teacher_verified = False
         super(Teacher, self).__init__(**kwargs)
+
+    def teaches(self, subject):
+        return subject in self.tought_subjects
+
+    def teach_subject(self, subject):
+        if not self.teaches(subject):
+            self.tought_subjects.append(subject)
+
+    def unteach_subject(self, subject):
+        if self.teaches(subject):
+            self.tought_subjects.remove(subject)
