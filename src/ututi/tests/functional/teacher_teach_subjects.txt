@@ -1,0 +1,35 @@
+Test teacher's "teaching subjects" functionality
+================================================
+
+Let's login as a verified teacher:
+
+    >>> browser = Browser()
+    >>> form = browser.getForm('loginForm')
+    >>> form.getControl('Email').value = "benas@ututi.lt"
+    >>> form.getControl('Password').value = "password"
+    >>> form.getControl('Login').click()
+
+There's yet no nice way to add subjects! As for now, Benas
+visits subject page directly:
+
+    >>> browser.open('http://localhost/subject/vu/mat_analize')
+
+Teacher can click "I teach this course" button. He is then stays on
+the course page and a flash message is displayed:
+
+    >>> browser.getControl("I teach this course").click()
+    >>> browser.url
+    'http://localhost/subject/vu/mat_analize'
+
+    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
+    The course has been added to your taught courses list.
+
+If he wants to, he can say that he is no longer teaching this course.
+Again, an appropriate flash message is displayed:
+
+    >>> browser.getControl("Remove from my taught courses").click()
+    >>> browser.url
+    'http://localhost/subject/vu/mat_analize'
+
+    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
+    The course has been removed from your taught courses list.

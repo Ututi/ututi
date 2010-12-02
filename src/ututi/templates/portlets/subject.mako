@@ -59,19 +59,23 @@
         </div>
     </div>
     %if c.user is not None:
-    <%
-       cls = 'btn'
-       text = _('Add to my subjects')
-       if c.user.watches(subject):
-           cls = 'btn btnNegative'
-           text = _('Remove from my subjects')
-
-    %>
     %if h.check_crowds(['moderator']) and not c.subject.deleted:
       ${h.button_to(_('Delete subject'), c.subject.url(action='delete'), class_='btn btnNegative')}
     %endif
     <div style="padding-top: 5px; padding-bottom: 5px">
-      ${h.button_to(text, subject.url(action='watch'), class_=cls, method='GET')}
+      %if c.user.is_teacher:
+        %if c.user.teaches(subject):
+          ${h.button_to(_("Remove from my taught courses"), subject.url(action='unteach'), class_='btn btnNegative', method='GET')}
+        %elif c.user.teacher_verified:
+          ${h.button_to(_("I teach this course"), subject.url(action='teach'), class_='btn', method='GET')}
+        %endif
+      %else:
+        %if c.user.watches(subject):
+          ${h.button_to(_("Remove from my subjects"), subject.url(action='watch'), class_='btn btnNegative', method='GET')}
+        %else:
+          ${h.button_to(_("Add to my subjects"), subject.url(action='watch'), class_='btn', method='GET')}
+        %endif
+      %endif
     </div>
     <div class="right_arrow"><a href="${url(controller='subject', action='edit', id=subject.subject_id, tags=c.subject.location_path)}">${_('edit subject information')}</a></div>
     %endif
