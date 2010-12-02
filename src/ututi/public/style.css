@@ -1445,9 +1445,6 @@ div.GroupFilesWiki{
     background: url('img/icons/exams-off.png') no-repeat 10px 5px #f6f6f6;
     height:40px;
 }
-div.ProfileSubjects {
-    background: url('images/user_logo_small.png') no-repeat 10px 5px #f6f6f6;
-}
 
 div.GroupWiki{
     background: url('img/icons/exams-off.png') no-repeat 13px 7px #f6f6f6;
@@ -1585,7 +1582,6 @@ div.single-messages span.reply-count {
     color: #333;
     font-weight: normal;
 }
-
 
 div.delete-files{
     border-top: 1px solid #ded8d8;
@@ -4179,6 +4175,10 @@ div.search-item div.description {
 
 #subject_settings li.disabled {
     background: transparent url("../img/icons/dalykas-very-small-off.png") left center no-repeat;
+}
+
+#subject_settings .mailing-option {
+    background: #F6F6F6;
 }
 
 #subject_settings .mailing-option li.disabled {

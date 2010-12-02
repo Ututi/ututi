@@ -71,7 +71,7 @@ $(document).ready(function(){
 
 <%def name="subjects_block(title, update_url, selected, subjects, group=None)">
 <%self:rounded_block class_='portletGroupFiles subject_description'>
-  <div class="GroupFiles GroupFilesGroups ${not group and 'ProfileSubjects' or ''}">
+  <div class="GroupFiles GroupFilesGroups ${not group and 'GroupFilesDalykai' or ''}">
     <h2 class="portletTitle bold">
       ${title|n}
     </h2>
@@ -117,7 +117,7 @@ $(document).ready(function(){
 </%def>
 
 <%def name="subscription_option(group)">
-<div class="GroupFilesContent-line-dal mailing-option ">
+<div class="GroupFilesContent-line-dal mailing-option">
   <ul class="grupes-links-list-dalykai">
     %if group.is_subscribed(c.user):
       <% cls = 'enabled' %>
@@ -162,8 +162,8 @@ $(document).ready(function(){
   <%
      count = len(subjects)
   %>
-%for n, subject in enumerate(subjects):
-<div class="GroupFilesContent-line-dal">
+%for n, subject in enumerate(subjects, 1):
+<div class="GroupFilesContent-line-dal${n == count and '-last' or ''}">
   <ul class="grupes-links-list-dalykai">
     %if group is not None and subject in c.user.ignored_subjects:
       <% cls = 'disabled' %>
@@ -202,10 +202,10 @@ $(document).ready(function(){
 </%def>
 
 <div id="subject_settings">
-${subjects_block(_('Personally watched subjects'), url(controller='profile', action='set_receive_email_each'), c.user.receive_email_each, c.subjects)}
+${subjects_block(_("Personally watched subjects' notifications"), url(controller='profile', action='set_receive_email_each'), c.user.receive_email_each, c.subjects)}
 
 %for group in c.groups:
-  ${subjects_block(_("Group's %(group_title)s subjects") % dict(group_title=h.link_to(group.title, group.url())),
+  ${subjects_block(_("Group's %(group_title)s notifications") % dict(group_title=h.link_to(group.title, group.url())),
                    group.url(action='set_receive_email_each'), group.is_member(c.user).receive_email_each, group.watched_subjects, group)}
 %endfor
 </div>
