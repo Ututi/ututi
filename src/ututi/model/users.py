@@ -268,7 +268,7 @@ class User(object):
     def groups(self):
         from ututi.model import Group
         from ututi.model import GroupMember
-        return meta.Session.query(Group).join(GroupMember).filter(GroupMember.user == self).all()
+        return meta.Session.query(Group).join(GroupMember).order_by(Group.title.asc()).filter(GroupMember.user == self).all()
 
     @property
     def groups_uploadable(self):
