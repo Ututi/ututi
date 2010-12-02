@@ -13,6 +13,7 @@ Set up
 Now let's find some books:
 
     >>> browser.click('search')
+    >>> browser.printCssQuery('.book-title')
 
 Hmm, we found no books, must be because we did not add any yet. Let's
 fix that:
@@ -21,9 +22,23 @@ fix that:
     >>> browser.getControl('Title').value = "My physics book"
     >>> browser.getControl('Author').value = "Mr. God"
     >>> browser.getControl('Book department').displayValue = ['Other']
-    >>> browser.getControl('Book type').value = ['1']
+    >>> browser.getControl('Book type').displayValue = ['Vadovėlis']
+    >>> browser.getControl(name='other_science_type').displayValue = ['Kita']
     >>> browser.getControl('City').displayValue = ['Vilnius']
+    >>> browser.getControl('Save').click()
 
-#    >>> browser.getControl('Save').click()
+Now let's go find it:
 
-    >>> browser.printCssQuery('.error-message')
+    >>> browser.click('search')
+    >>> browser.printCssQuery('.book-title')
+    <h3 class="book-title">My physics book</h3>
+
+Let's type some string that will not match neither the book title nor
+the description:
+
+    >>> browser.getControl('Search text').value = 'My maths book'
+    >>> browser.click('search')
+
+#    >>> browser.printCssQuery('.book-title')
+
+See, we found no books.

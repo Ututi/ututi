@@ -199,6 +199,8 @@ class BookForm(Schema):
 class BooksController(BaseController):
 
     def __before__(self):
+        c.selected_books_department = None
+        c.book = None
         c.book_types = meta.Session.query(BookType).all()
 
     def _make_pages(self, items):
@@ -285,7 +287,6 @@ class BooksController(BaseController):
         return render('books/show.mako')
 
     def _edit(self):
-
         self._load_defaults()
         return render('books/edit.mako')
 
@@ -359,25 +360,32 @@ class BooksController(BaseController):
     def search(self):
         books = meta.Session.query(Book)
         c.books = self._make_pages(books)
-        return render('books/catalog.mako')
-
-    def _catalog_form(self):
-        return render('books/catalog.mako')
+        return render('books/search.mako')
 
     def catalog(self, books_department=None, books_type_name=None, science_type_id=None, location_id=None, school_grade_id=None):
-        books_type_id = None
+        c.selected_books_department = books_department
+        c.books_department = books_department
         school_grade = None
         science_type = None
         location = None
 
+        c.current_science_types = []
         c.book_department = None
         if books_department is not None:
             c.book_department = Department.getByName(books_department)
+            c.current_science_types = ScienceType.getByDepartment(c.book_department)
 
+        c.url_params = {}
+        c.books_type = None
         if books_type_name is not None:
             c.books_type = meta.Session.query(BookType).filter(BookType.name==books_type_name).one()
+            c.url_params['books_type_name'] = books_type_name
+
         if location_id is not None:
             location = meta.Session.query(LocationTag).filter(LocationTag.id == location_id).one()
+
+        c.locations = None
+        c.school_grades = None
         if c.book_department is not None:
             if c.book_department.name == "university":
                 if location_id is not None and location is not None:
@@ -397,8 +405,11 @@ class BooksController(BaseController):
                 c.school_grades = meta.Session.query(SchoolGrade)
                 if school_grade_id is not None:
                     school_grade = meta.Session.query(SchoolGrade).filter(SchoolGrade.id == school_grade_id).one()
+
+        c.science_type = None
         if science_type_id is not None:
             c.science_type = meta.Session.query(ScienceType).filter(ScienceType.id == science_type_id).one()
+
         #book filtering:
         books = meta.Session.query(Book)
         if location is not None:
@@ -408,12 +419,12 @@ class BooksController(BaseController):
             books = books.filter(Book.department_id == c.book_department.id)
         if school_grade is not None:
             books = books.filter(Book.school_grade == school_grade)
-        if c.books_type is not None and c.books_type != "":
+        if c.books_type is not None:
             books = books.filter(Book.type == c.books_type)
-        if c.science_type is not None and c.science_type != "":
+        if c.science_type is not None:
             books = books.filter(Book.science_type == c.science_type)
         c.books = self._make_pages(books)
-        return self._catalog_form()
+        return render('books/catalog.mako')
 
     @ActionProtector("user")
     def my_books(self):

@@ -58,6 +58,8 @@ class BaseController(WSGIController):
         c.login_error = None
         c.pylons_config = config
 
+        c.fb_random_post = None
+
         c.testing = asbool(config.get('testing', False))
         c.gg_enabled = asbool(config.get('gg_enabled', False))
         c.tpl_lang = config.get('tpl_lang', 'en')

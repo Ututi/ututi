@@ -16,7 +16,7 @@
 %endif
 </%def>
 
-<%def name="books_menu()">
+<%def name="books_menu(selected_books_department=None)">
   <%self:action_portlet id="button-to-all-books">
     <%def name="header()">
     <a class="blark" href="${url(controller='books', action='catalog')}">${_('All Books')}</a>
@@ -41,13 +41,15 @@
     <%self:book_types book_types="${c.book_types}" books_department="other" />
   </%self:action_portlet>
 
+ %if selected_books_department:
  <script type="text/javascript">
    //<![CDATA[
    $(document).ready(function(){
-     $('#button-to-'+'${c.books_department}'+'-books_content .click').click();
+     $('#button-to-'+'${selected_books_department}'+'-books_content .click').click();
    });
    //]]>
  </script>
+ %endif
  <%self:uportlet id="search_portlet" portlet_class="orange">
    <%def name="header()">
      ${_('Search')}

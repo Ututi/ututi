@@ -60,6 +60,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
                                   " specific profile controller.")
 
     def __before__(self):
+        c.action = None
         c.ututi_supporters = get_supporters()
         if c.user is not None:
             c.breadcrumbs = [{'title': c.user.fullname, 'link': url(controller='profile', action='home')}]

@@ -50,9 +50,6 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
   <div id="department_1" class="department">
     <label>${_('School grade')}: ${h.select("school_grade", None, [(o.id, o.name) for o in c.school_grades])}</label>
  </div>
-  <div class="science_type_field">
-    <label>${_('Science types')}: ${h.select("science_type", None, [(o.id, o.name) for o in  c.current_science_types])}</label>
-  </div>
   <div id="department_science_type_field_0" class="science_type_field" style="display: none">
     <label>${_('Science types')}: ${h.select("university_science_type", None, [(o.id, o.name) for o in  c.university_science_types])}</label>
   </div>
