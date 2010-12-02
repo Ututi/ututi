@@ -43,6 +43,7 @@ from ututi.model import (meta, User, Email, LocationTag, Group, Subject,
                          GroupMember, GroupMembershipType, File, PrivateMessage,
                          Teacher)
 from ututi.model import Notification, City, ScienceType, SchoolGrade, Book, BookType
+from ututi.controllers.books import BookDepartmentValidator
 
 from ututi.lib import helpers as h
 
@@ -109,7 +110,7 @@ class SchoolGradeForm(Schema):
 class ScienceTypeForm(Schema):
     allow_extra_fields = True
     name = String(min=3)
-    department = Int(min=0)
+    department = BookDepartmentValidator(not_empty = True)
 
 class BookTypeForm(Schema):
     allow_extra_fields = True
