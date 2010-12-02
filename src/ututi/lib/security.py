@@ -107,6 +107,8 @@ def is_admin(user, context=None):
 def is_user(user, context=None):
     return user is not None
 
+def is_teacher(user, context=None):
+    return user is not None and user.is_teacher
 
 def is_owner(user, context=None):
     return context.created is user
@@ -131,6 +133,7 @@ crowd_checkers = {
     "owner": is_owner,
     "deleter": is_deleter,
     "user": is_user,
+    "teacher": is_teacher,
     "smallfile": is_smallfile,
     }
 
