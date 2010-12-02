@@ -167,7 +167,7 @@ ${parent.head_tags()}
   </ul>
 </div>
 <div class="floatleft usergruperight">
-  <form action="${url(controller='profile', action='subjects')}" method="GET"
+  <form action="${url(controller='profile', action='watch_subjects')}" method="GET"
         style="float: none">
     <fieldset>
       <legend class="a11y">${_('Watch subject')}</legend>

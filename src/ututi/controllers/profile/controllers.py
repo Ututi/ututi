@@ -168,7 +168,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
              'link': url(controller='profile', action='wall_settings')},
             {'title': _("Notifications"),
              'name': 'notifications',
-             'link': url(controller='profile', action='subjects')}]
+             'link': url(controller='profile', action='notifications')}]
 
     @ActionProtector("user")
     def edit(self):
@@ -204,12 +204,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
                                defaults=defaults)
 
     @ActionProtector("user")
-    def subjects(self):
-        # TODO:
-        # * rename this method to 'notifications'
-        # * breadcrumbs should be unified for all user settings
-        #
-        # c.breadcrumbs.append(self._actions('subjects'))
+    def notifications(self):
         self._set_settings_tabs(current_tab='notifications')
         c.subjects = c.user.watched_subjects
         c.groups = c.user.groups
@@ -338,7 +333,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
             meta.Session.commit()
         if request.params.get('ajax'):
             return 'OK'
-        redirect(url(controller='profile', action='subjects'))
+        redirect(url(controller='profile', action='notifications'))
 
     @validate(ContactForm, form='_edit_contacts_form', defaults=_edit_form_defaults)
     @ActionProtector("user")
@@ -454,7 +449,7 @@ class UserProfileController(ProfileControllerBase):
              'link': url(controller='profile', action='home')},
             'subjects':
             {'title': _("Subjects"),
-             'link': url(controller='profile', action='subjects')}
+             'link': url(controller='profile', action='watch_subjects')}
             }
         if selected in bcs.keys():
             return bcs[selected]

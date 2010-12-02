@@ -8,5 +8,5 @@ ${section['title']} (${section['url']})
 %endfor
 %endfor
 
-${_('If you want to stop getting these emails - you can change your subscription settings in your watched subject page (%(url)s).') % dict(
-    url=url(controller='profile', action='subjects', qualified=True)) }
+${_('If you want to stop getting these emails - you can change your subscription settings in your notification settings page (%(url)s).') % dict(
+    url=url(controller='profile', action='notifications', qualified=True)) }

@@ -245,7 +245,7 @@ def make_map(config):
     map.connect('/profile/edit/contacts', controller='profile', action='edit_contacts')
     map.connect('/profile/edit/password', controller='profile', action='edit_password')
     map.connect('/profile/edit/wall', controller='profile', action='wall_settings')
-    map.connect('/profile/edit/notifications', controller='profile', action='subjects')
+    map.connect('/profile/edit/notifications', controller='profile', action='notifications')
     map.connect('/profile/{action}', controller='profile')
 
     # CUSTOM ROUTES HERE
