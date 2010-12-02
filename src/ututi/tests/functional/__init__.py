@@ -15,7 +15,7 @@ from nous.mailpost import processEmailAndPost
 import ututi
 from ututi.lib.mailer import mail_queue
 from ututi.model.events import Event
-from ututi.model import (Group, meta, LocationTag, SimpleTag, User,
+from ututi.model import (Group, meta, LocationTag, SimpleTag, User, Teacher,
                          Subject, Email, Region)
 
 def ftest_setUp(test):
@@ -75,6 +75,14 @@ def ftest_setUp(test):
 
     t = SimpleTag(u'simple_tag')
     meta.Session.add(t)
+
+    #add a verified teacher Benas
+    mr_teacher = Teacher(fullname=u'Benas', password='password', gen_password=True)
+    mr_teacher.teacher_verified = True
+    meta.Session.add(mr_teacher)
+    email = Email('benas@ututi.lt')
+    email.confirmed = True
+    mr_teacher.emails.append(email)
 
     meta.Session.commit()
     meta.Session.execute("SET ututi.active_user TO 0")
