@@ -77,12 +77,7 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
     ${h.input_line('title', _('Title'))}
     ${h.input_line('author', _('Author'))}
     ${h.input_area('description', _('Brief description of the book'))}<br />
-   <label>
-     <%
-     book_departments = [("", "")] + [(dep.name, dep.title) for dep in c.book_departments]
-     %>
-     ${_('Book department')} : ${h.select('department', None, book_departments)}
-   </label>
+    <label>${_('Book department')}: ${h.select('department', None, c.book_departments)}</label>
     <form:error name="department_id">
  </div>
   <div id="department_0" class="department">

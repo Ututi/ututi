@@ -2303,6 +2303,11 @@ class Department(object):
     departments_by_name = {}
 
     @classmethod
+    def values(cls):
+        return [cls.getByName(name)
+                for name in cls.names]
+
+    @classmethod
     def initialize(cls):
         for id, name in enumerate(cls.names):
             department = Department(id, name, name.capitalize())
