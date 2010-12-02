@@ -1,22 +1,13 @@
-import logging
-
-import string
-from datetime import datetime, date
-from formencode.compound import to_python
-from formencode.validators import Number
 from formencode.variabledecode import NestedVariables
 from formencode.foreach import ForEach
 from formencode.compound import Pipe
 from formencode import Schema, validators, htmlfill
-#from pylons import tmpl_context as c, request, url
-#from routes.util import url_for
-from sqlalchemy.sql import func
-from sqlalchemy.sql.expression import and_
-
-
 from formencode.api import Invalid
 
+from webhelpers import paginate
+
 from pylons.controllers.util import redirect
+from pylons import request, tmpl_context as c, url
 from pylons.i18n import _
 
 from ututi.lib.validators import PhoneNumberValidator
@@ -29,9 +20,7 @@ from ututi.lib.validators import LocationTagsValidator
 from ututi.lib.image import serve_logo
 from ututi.lib.forms import validate
 from ututi.lib.security import ActionProtector
-from ututi.lib.base import BaseController, render, render_lang, u_cache
-from pylons import request, tmpl_context as c, url, config, session
-from webhelpers import paginate
+from ututi.lib.base import BaseController, render
 
 
 class ChainedSubFormValidator(validators.FormValidator):
