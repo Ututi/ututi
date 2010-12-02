@@ -604,7 +604,7 @@ class AdminController(BaseController):
 
     def science_types(self):
         science_types = meta.Session.query(ScienceType).order_by(ScienceType.book_department_id.asc(), ScienceType.name.asc())
-        c.book_departments = Department.names
+        c.book_departments = [('', '')] + [(d.name, d.title) for d in Department.values()]
         c.science_types = self._make_pages(science_types)
         return render('admin/science_types.mako')
 
@@ -612,14 +612,14 @@ class AdminController(BaseController):
     @validate(schema=ScienceTypeForm, form='science_types')
     def create_science_type(self):
         if hasattr(self, 'form_result'):
-            science_type = ScienceType(name=self.form_result['name'], book_department_id=self.form_result['department'])
+            science_type = ScienceType(name=self.form_result['name'], book_department_id=self.form_result['department'].id)
             meta.Session.add(science_type)
             meta.Session.commit()
         redirect(url(controller="admin", action="science_types"))
 
     @ActionProtector("root")
     def _edit_science_type_form(self):
-        c.book_departments = Department.names
+        c.book_departments = [('', '')] + [(d.name, d.title) for d in Department.values()]
         return render('admin/science_type_edit.mako')
 
     @ActionProtector("root")
@@ -637,7 +637,7 @@ class AdminController(BaseController):
         science_type = meta.Session.query(ScienceType).filter(ScienceType.id == id).one()
         if hasattr(self, 'form_result'):
             science_type.name = self.form_result['name']
-            science_type.book_department_id = self.form_result['department']
+            science_type.book_department_id = self.form_result['department'].id
             meta.Session.commit()
         redirect(url(controller="admin", action="science_types"))
 

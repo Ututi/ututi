@@ -14,20 +14,6 @@ ${parent.head_tags()}
 <%newlocationtag:head_tags />
 </%def>
 
-<%def name="book_departments_select(field_name='department', label = None)">
-<label>
-  <%
-  book_departments = []
-  book_departments.append(["", ""])
-  for book_department in c.book_departments:
-      book_departments.append([c.book_departments.index(book_department), book_department.capitalize()])
-      if label is None:
-          label = _('Book department')
-  %>
-  ${label} : ${h.select(field_name, None, book_departments)}
-</label>
-</%def>
-
 <%def name="book_logo_field()">
 <form:error name="book_logo_upload" />
 <label>

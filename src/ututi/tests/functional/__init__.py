@@ -191,37 +191,37 @@ def setUpBooks(browser):
     browser.open('http://localhost/admin/science_types')
     form = browser.getForm('science_type_form')
     form.getControl('Name').value = 'Fizika'
-    form.getControl('Book department').value = ['1']
+    form.getControl('Book department').displayValue = ['School']
     form.getControl('Save').click()
 
     browser.open('http://localhost/admin/science_types')
     form = browser.getForm('science_type_form')
     form.getControl('Name').value = 'Matematika'
-    form.getControl('Book department').value = ['1']
+    form.getControl('Book department').displayValue = ['School']
     form.getControl('Save').click()
 
     browser.open('http://localhost/admin/science_types')
     form = browser.getForm('science_type_form')
     form.getControl('Name').value = 'Realiniai mokslai'
-    form.getControl('Book department').value = ['0']
+    form.getControl('Book department').displayValue = ['University']
     form.getControl('Save').click()
 
     browser.open('http://localhost/admin/science_types')
     form = browser.getForm('science_type_form')
     form.getControl('Name').value = 'Humanitariniai mokslai'
-    form.getControl('Book department').value = ['0']
+    form.getControl('Book department').displayValue = ['University']
     form.getControl('Save').click()
 
     browser.open('http://localhost/admin/science_types')
     form = browser.getForm('science_type_form')
     form.getControl('Name').value = 'Kita'
-    form.getControl('Book department').value = ['2']
+    form.getControl('Book department').displayValue = ['Other']
     form.getControl('Save').click()
 
     browser.open('http://localhost/admin/science_types')
     form = browser.getForm('science_type_form')
     form.getControl('Name').value = 'Visai kita'
-    form.getControl('Book department').value = ['2']
+    form.getControl('Book department').displayValue = ['Other']
     form.getControl('Save').click()
 
     # Add a book type

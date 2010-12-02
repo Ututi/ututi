@@ -13,7 +13,7 @@ Admin can create science type.
 
     >>> form = browser.getForm('science_type_form')
     >>> form.getControl('Name').value = 'Humanitariai mokslai'
-    >>> form.getControl('Book department').value = ['1']
+    >>> form.getControl('Book department').displayValue = ['School']
     >>> form.getControl('Save').click()
 
     >>> browser.url
@@ -28,7 +28,7 @@ Admin can edit science type.
     >>> browser.getLink('Edit').click()
     >>> form = browser.getForm('science_type_form')
     >>> form.getControl('Name').value = 'neHumanitariai mokslai'
-    >>> form.getControl('Book department').value = ['0']
+    >>> form.getControl('Book department').displayValue = ['University']
     >>> form.getControl('Edit').click()
 
     >>> browser.url
