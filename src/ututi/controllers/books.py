@@ -1,3 +1,5 @@
+from sqlalchemy import func
+
 from formencode.variabledecode import NestedVariables
 from formencode.foreach import ForEach
 from formencode.compound import Pipe
@@ -14,6 +16,7 @@ from ututi.lib.validators import PhoneNumberValidator
 from ututi.lib.validators import FileUploadTypeValidator, TranslatedEmailValidator
 from ututi.model import Department
 from ututi.model import LocationTag
+from ututi.model import SearchItem
 from ututi.model import Book, meta, City, BookType, SchoolGrade, ScienceType
 import ututi.lib.helpers as h
 from ututi.lib.validators import LocationTagsValidator
@@ -361,6 +364,19 @@ class BooksController(BaseController):
     def search(self):
         c.search_text = request.params.get('text', '')
         books = search_query(text=c.search_text, obj_type='book')
+        all_cities_book_count = books.count()
+
+        books_with_cities = books.join((Book, Book.id==SearchItem.content_item_id)).join(City)
+        cities = meta.Session.query(func.count(City.name).label('book_count'), City.name).select_from(
+            books_with_cities.subquery()
+            ).group_by(City.name).order_by('book_count').all()
+
+        c.filter_cities = [('', _("All cities (%(book_count)s)") % {'book_count': all_cities_book_count})]
+        for book_count, city in cities:
+            c.filter_cities.append(_("%(city)s (%(book_count)s)" % {
+                        'city': city,
+                        'book_count': book_count}))
+
         c.books = self._make_pages(books)
         return render('books/search.mako')
 

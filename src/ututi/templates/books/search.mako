@@ -33,7 +33,15 @@
 
 <div id="search_results_header">
   <h2>Search results</h2>
-  <div id="city_select_dropdown">${h.select(None, None, [('Visi miestai (1100)', 'Visi miestai (1100)')])}</div>
+  <div id="city_select_dropdown">
+    <form action="${url(controller='books', action='search', text=c.text)}">
+    <label>
+      <span class="a11y">${_('City')}</span>
+      ${h.select('city', None, c.filter_cities)}
+    </label>
+    <span class="a11y">${h.input_submit(_('Filter'))}</span>
+    </form>
+  </div>
   <br style="clear: both;"/>
 </div>
 

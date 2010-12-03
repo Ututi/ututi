@@ -55,3 +55,16 @@ The search term is displayed in the search box:
 
     >>> browser.getForm(id='search_form').getControl(name='text').value
     'physics'
+
+In the search header area we have a dropdown that we can use to filter
+our search results by city. By default it is set to 'all cities' and
+displays the total amount of books that matched our search query:
+
+    >>> browser.getControl(name='city').displayValue
+    ['All cities (1)']
+
+We can pick any city that has books matching our search criteria:
+
+    >>> browser.getControl(name='city').displayOptions
+    ['All cities (1)',
+     'Vilnius (1)']
