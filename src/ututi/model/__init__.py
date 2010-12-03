@@ -274,7 +274,7 @@ def setup_orm(engine):
                teacher_groups_table,
                properties = {'group' : relation(Group, lazy=True),
                              'teacher' : relation(Teacher,
-                                                  backref='student_groups_raw')})
+                                                  backref='student_groups')})
 
     orm.mapper(FileDownload,
                file_downloads_table,

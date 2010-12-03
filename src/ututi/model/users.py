@@ -488,21 +488,6 @@ class Teacher(User):
         if self.teaches(subject):
             self.taught_subjects.remove(subject)
 
-    @property
-    def student_groups(self):
-        groups = []
-        for group in self.student_groups_raw:
-            if group.group_id is None:
-                #generic group with just an email address
-                groups.append(group)
-            else:
-                #there is a Ututi group linked
-                groups.append(group.group)
-        return groups
-
-    def addGroup(self, group):
-        self.student_groups_raw.append(group)
-
 
 class GroupNotFoundException(Exception):
     pass

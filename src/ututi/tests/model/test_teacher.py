@@ -73,7 +73,7 @@ def test_teacher_groups():
 Let's add a yahoo group:
        >>> res = meta.Session.execute("SET ututi.active_user TO 1")
        >>> tg = TeacherGroup(u'Some yahooers', u'group@groups.yahoo.com')
-       >>> teacher.addGroup(tg)
+       >>> teacher.student_groups.append(tg)
        >>> meta.Session.commit()
        >>> res = meta.Session.execute("SET ututi.active_user TO 1")
        >>> teacher.student_groups
@@ -83,12 +83,12 @@ Let's add a yahoo group:
 Let's add a ututi group:
        >>> res = meta.Session.execute("SET ututi.active_user TO 1")
        >>> tg = TeacherGroup(u'Some Ututi users', 'moderators@groups.ututi.lt')
-       >>> teacher.addGroup(tg)
+       >>> teacher.student_groups.append(tg)
        >>> meta.Session.commit()
        >>> res = meta.Session.execute("SET ututi.active_user TO 1")
        >>> teacher.student_groups
        [<ututi.model.users.TeacherGroup object at ...>,
-        <ututi.model.Group object at ...>]
+        <ututi.model.users.TeacherGroup object at ...>]
 
     """
 
