@@ -1386,3 +1386,12 @@ create table teacher_taught_subjects (
        user_id int8 references users(id) not null,
        subject_id int8 not null references subjects(id) on delete cascade,
        primary key (user_id, subject_id));;
+
+/* a table for linking teachers with their groups: ututi groups and other */
+create table teacher_groups (
+       id bigserial NOT NULL,
+       user_id int8 references users(id) not null,
+       title varchar(500) not null,
+       email varchar(320) not null,
+       group_id int8 default null references groups(id) on delete cascade,
+       primary key (id));;

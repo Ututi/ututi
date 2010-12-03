@@ -16,6 +16,7 @@ from ututi.model import meta
 from ututi.lib.helpers import image
 
 from pylons.i18n import _
+from pylons import config
 
 log = logging.getLogger(__name__)
 
@@ -486,3 +487,36 @@ class Teacher(User):
     def unteach_subject(self, subject):
         if self.teaches(subject):
             self.taught_subjects.remove(subject)
+
+    @property
+    def student_groups(self):
+        groups = []
+        for group in self.student_groups_raw:
+            if group.group_id is None:
+                #generic group with just an email address
+                groups.append(group)
+            else:
+                #there is a Ututi group linked
+                groups.append(group.group)
+        return groups
+
+    def addGroup(self, group):
+        self.student_groups_raw.append(group)
+
+
+class GroupNotFoundException(Exception):
+    pass
+
+
+class TeacherGroup(object):
+    def __init__(self, title, email):
+        from ututi.model import Group
+        self.title = title
+        self.email = email
+        hostname = config.get('mailing_list_host', 'groups.ututi.lt')
+        if email.endswith(hostname):
+            group = Group.get(email[:-(len(hostname)+1)])
+            if group is not None:
+                self.group = group
+            else:
+                raise GroupNotFoundException()

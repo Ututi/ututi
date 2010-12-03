@@ -1,5 +1,10 @@
+from datetime import date
+
 from zope.testing import doctest
 
+from ututi.model.users import User
+from ututi.model import LocationTag
+from ututi.model import Group
 from ututi.model import meta
 
 from ututi.tests import UtutiLayer
@@ -8,7 +13,7 @@ import ututi
 def test_create_teacher():
     r"""Test creation of the teacher type.
 
-       >>> from ututi.model.users import Teacher, User
+       >>> from ututi.model.users import Teacher
        >>> teacher = Teacher(fullname=u'Petras', password='qwerty', gen_password=True)
        >>> meta.Session.add(teacher)
        >>> meta.Session.commit()
@@ -32,7 +37,7 @@ def test_teacher_subjects():
     r"""Test linking teachers to the subjects they teach:
 
        >>> from ututi.model.users import Teacher
-       >>> from ututi.model import Subject, LocationTag
+       >>> from ututi.model import Subject
        >>> teacher = Teacher(fullname=u'Petras', password='qwerty', gen_password=True)
        >>> meta.Session.add(teacher)
        >>> meta.Session.commit()
@@ -52,6 +57,41 @@ def test_teacher_subjects():
        >>> s.teachers
        [<ututi.model.users.Teacher object at ...>]
     """
+
+def test_teacher_groups():
+    r"""Test linking teachers to student groups:
+
+       >>> from ututi.model.users import Teacher, TeacherGroup
+       >>> from ututi.model import Subject
+       >>> teacher = Teacher(fullname=u'Petras', password='qwerty', gen_password=True)
+       >>> meta.Session.add(teacher)
+       >>> meta.Session.commit()
+
+       >>> teacher.groups
+       []
+
+Let's add a yahoo group:
+       >>> res = meta.Session.execute("SET ututi.active_user TO 1")
+       >>> tg = TeacherGroup(u'Some yahooers', u'group@groups.yahoo.com')
+       >>> teacher.addGroup(tg)
+       >>> meta.Session.commit()
+       >>> res = meta.Session.execute("SET ututi.active_user TO 1")
+       >>> teacher.student_groups
+       [<ututi.model.users.TeacherGroup object at ...>]
+
+
+Let's add a ututi group:
+       >>> res = meta.Session.execute("SET ututi.active_user TO 1")
+       >>> tg = TeacherGroup(u'Some Ututi users', 'moderators@groups.ututi.lt')
+       >>> teacher.addGroup(tg)
+       >>> meta.Session.commit()
+       >>> res = meta.Session.execute("SET ututi.active_user TO 1")
+       >>> teacher.student_groups
+       [<ututi.model.users.TeacherGroup object at ...>,
+        <ututi.model.Group object at ...>]
+
+    """
+
 def test_suite():
     suite = doctest.DocTestSuite(
         optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |
@@ -64,3 +104,8 @@ def test_suite():
 def test_setup(test):
     """Create some models needed for the tests."""
     ututi.tests.setUp(test)
+    meta.Session.execute("SET ututi.active_user TO 1")
+    g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date.today(), u'U2ti moderatoriai.')
+    meta.Session.add(g)
+    meta.Session.commit()
+    meta.Session.execute("SET ututi.active_user TO 1")

@@ -31,7 +31,7 @@ from sqlalchemy.sql.expression import and_, or_
 from sqlalchemy.orm.interfaces import MapperExtension
 
 from ututi.migration import GreatMigrator
-from ututi.model.users import Medal, Email, UserSubjectMonitoring, User, Teacher
+from ututi.model.users import Medal, Email, UserSubjectMonitoring, User, Teacher, TeacherGroup
 from ututi.model.util import logo_property
 from ututi.model import meta
 from ututi.lib.messaging import SMSMessage
@@ -47,13 +47,16 @@ from pylons.i18n import _
 
 log = logging.getLogger(__name__)
 
+users_table = None
+user_monitored_subjects_table = None
+email_table = None
+teacher_groups_table = None
+
 def init_model(engine):
     """Call me before using any of the tables or classes in the model"""
     ## Reflected tables must be defined and mapped here
     meta.Session.configure(bind=engine)
     meta.engine = engine
-
-
 
 
 def setup_orm(engine):
@@ -118,6 +121,11 @@ def setup_orm(engine):
     teacher_subjects_table = Table("teacher_taught_subjects", meta.metadata,
                                    autoload=True,
                                    autoload_with=engine)
+
+    global teacher_groups_table
+    teacher_groups_table = Table("teacher_groups", meta.metadata,
+                                 autoload=True,
+                                 autoload_with=engine)
 
     global content_items_table
     content_items_table = Table("content_items", meta.metadata,
@@ -253,6 +261,7 @@ def setup_orm(engine):
                                            'medals': relation(Medal, backref='user'),
                                            'raw_logo': deferred(users_table.c.logo),
                                            'location': relation(LocationTag, backref=backref('users', lazy=True))})
+
     orm.mapper(Teacher,
                polymorphic_on=users_table.c.user_type,
                polymorphic_identity='teacher',
@@ -260,6 +269,12 @@ def setup_orm(engine):
                properties = {'taught_subjects' : relation(Subject,
                                                           secondary=teacher_subjects_table,
                                                           backref="teachers")})
+
+    orm.mapper(TeacherGroup,
+               teacher_groups_table,
+               properties = {'group' : relation(Group, lazy=True),
+                             'teacher' : relation(Teacher,
+                                                  backref='student_groups_raw')})
 
     orm.mapper(FileDownload,
                file_downloads_table,
@@ -705,11 +720,6 @@ class ContentItem(object):
             if self.search_item.rating >= limit:
                 return level
         return 0
-
-
-users_table = None
-user_monitored_subjects_table = None
-email_table = None
 
 
 class Folder(list):
