@@ -37,6 +37,16 @@ the course page and a flash message is displayed:
     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
     The course has been added to your taught courses list.
 
+This course is now displayed in his home page:
+
+    >>> browser.getLink('Home').click()
+    >>> browser.printQuery("id('subject_list')//a[@class='subject_title']/text()")
+    Matematinė analizė
+
+He can click the link to visit course's home page:
+
+    >>> browser.getLink('Matematinė analizė').click()
+
 If he wants to, he can say that he is no longer teaching this course.
 Again, an appropriate flash message is displayed:
 
