@@ -395,6 +395,24 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
         redirect(url(controller='profile', action='edit_contacts'))
 
     @ActionProtector("user")
+    @validate(schema=LocationForm, form='home')
+    def update_location(self):
+        c.user.location = self.form_result.get('location', None)
+        meta.Session.commit()
+        h.flash(_('Your university information has been updated.'))
+        redirect(url(controller='profile', action='home'))
+
+    @ActionProtector("user")
+    def js_update_location(self):
+        try:
+            fields = manual_validate(LocationForm)
+            c.user.location = fields.get('location', None)
+            meta.Session.commit()
+            return render_mako_def('/profile/home_base.mako', 'location_updated')
+        except Invalid:
+            abort(400)
+
+    @ActionProtector("user")
     def thank_you(self):
         return render('/profile/thank_you.mako')
 
@@ -488,24 +506,6 @@ class UserProfileController(ProfileControllerBase):
             c.fb_random_post = random.choice(FB_POST_MESSAGES)
 
         return render('profile/home.mako')
-
-    @ActionProtector("user")
-    @validate(schema=LocationForm, form='home')
-    def update_location(self):
-        c.user.location = self.form_result.get('location', None)
-        meta.Session.commit()
-        h.flash(_('Your university information has been updated.'))
-        redirect(url(controller='profile', action='home'))
-
-    @ActionProtector("user")
-    def js_update_location(self):
-        try:
-            fields = manual_validate(LocationForm)
-            c.user.location = fields.get('location', None)
-            meta.Session.commit()
-            return render_mako_def('/profile/home.mako', 'location_updated')
-        except Invalid:
-            abort(400)
 
     @ActionProtector("user")
     @validate(schema=PhoneForm, form='home')

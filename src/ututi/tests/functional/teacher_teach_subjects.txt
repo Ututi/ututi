@@ -9,8 +9,21 @@ Let's login as a verified teacher:
     >>> form.getControl('Password').value = "password"
     >>> form.getControl('Login').click()
 
-There's yet no nice way to add subjects! As for now, Benas
-visits subject page directly:
+This teacher hasn't specified his location, so the home page
+asks him to do it right now:
+
+    >>> browser.getControl('University').value = 'Vilniaus universitetas'
+    >>> browser.getControl('Department').value = 'Ekonomikos fakultetas'
+    >>> browser.getControl('save').click()
+
+A link to the specified department appears:
+
+    >>> browser.getLink('Go to my department').click()
+    >>> browser.printQuery("//h1[@class='pageTitle']/text()")
+    Ekonomikos fakultetas
+
+XXX now there should be a way to find subjects for adding, even from
+department's page. Benas visits subject's page directly:
 
     >>> browser.open('http://localhost/subject/vu/mat_analize')
 

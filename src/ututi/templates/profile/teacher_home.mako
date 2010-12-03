@@ -1,9 +1,5 @@
 <%inherit file="/profile/home_base.mako" />
 
-<%def name="location_updated()">
-<div class="my-faculty"><a href="${c.user.location.url()}">${_('Go to my department')}</a></div>
-</%def>
-
 <%def name="teacher_unverified_nag()">
 <%self:rounded_block id="teacher_unverified" class_="portletTeacherUnverified">
 <div class="inner">
@@ -20,7 +16,7 @@
 %if c.user.location is not None:
 ${self.location_updated()}
 %else:
-${self.location_nag()}
+${self.location_nag(_('Tell us where you work'))}
 %endif
 
 %if not c.user.teacher_verified:

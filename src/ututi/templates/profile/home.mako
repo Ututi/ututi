@@ -1,9 +1,5 @@
 <%inherit file="/profile/home_base.mako" />
 
-<%def name="location_updated()">
-<div class="my-faculty"><a href="${c.user.location.url()}">${_('Go to my department')}</a></div>
-</%def>
-
 <%def name="phone_confirmed()">
 <div id="phone_confirmed">
   <div class="wrapper">
@@ -174,7 +170,7 @@
 %if c.user.location is not None:
 ${self.location_updated()}
 %else:
-${self.location_nag()}
+${self.location_nag(_('Tell us where you are studying'))}
 %endif
 
 %if c.user.phone_number is None and not 'suggest_enter_phone' in c.user.hidden_blocks_list:
