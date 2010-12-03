@@ -50,24 +50,24 @@ ${book_attribute(_('City'), c.book.city.name)}
 ${book_attribute(_('Price'), c.book.price, class_="book-price")}
 <div class="owner-information">
   <p>${_("Owner information")}</p>
-  <div class="profile ${'bottomLine' if c.book.owner.description or c.book.owner.site_url else ''}">
+  <div class="profile ${'bottomLine' if c.book.created.description or c.book.created.site_url else ''}">
     <div class="floatleft avatar">
-      %if c.book.owner.logo is not None:
-      <img src="${url(controller='user', action='logo', id=c.book.owner.id, width=70, height=70)}" alt="logo" />
+      %if c.book.created.logo is not None:
+      <img src="${url(controller='user', action='logo', id=c.book.created.id, width=70, height=70)}" alt="logo" />
       %else:
       ${h.image('/img/profile-avatar.png', alt='logo')|n}\
       %endif
     </div>
     <div class="floatleft personal-data">
-      <div><h2>${c.book.owner.fullname}</h2></div>
-      <div><a href="mailto:${c.book.owner.emails[0].email}">${c.book.owner.emails[0].email}</a></div>
-      %if c.book.owner.phone_number is not None and c.book.owner.phone_number != "":
+      <div><h2>${c.book.created.fullname}</h2></div>
+      <div><a href="mailto:${c.book.created.emails[0].email}">${c.book.created.emails[0].email}</a></div>
+      %if c.book.created.phone_number is not None and c.book.created.phone_number != "":
       <div class="user-phone-number">
-        ${_('Phone')}: ${c.book.owner.phone_number}
+        ${_('Phone')}: ${c.book.created.phone_number}
       </div>
     %endif
     <div class="medals" id="user-medals">
-      %for medal in c.book.owner.all_medals():
+      %for medal in c.book.created.all_medals():
       ${medal.img_tag()}
       %endfor
     </div>

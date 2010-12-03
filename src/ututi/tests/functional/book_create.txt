@@ -69,7 +69,7 @@ Then I save my book
 
     >>> browser.click('Save')
     >>> browser.url
-    'http://localhost/books/show/1'
+    'http://localhost/books/show/4'
 
 When I add second book, my earlyer inserted phone book must by autofiled by the number of my last book
 
@@ -99,7 +99,8 @@ When I add a book, now I see autofilled phone field with my phone number from pr
     '+37067422222'
 
 Then I edit my new school book information, change it to "other" type and confirm changes
-    >>> browser.open('http://localhost/books/edit/1')
+
+    >>> browser.open('http://localhost/books/edit/4')
     >>> browser.getControl('Title').value = "My other book"
     >>> browser.getControl('Author').value = "Mr. other"
     >>> browser.getControl('Brief description of the book').value = "A changed perfect book"
@@ -111,11 +112,11 @@ Then I edit my new school book information, change it to "other" type and confir
     >>> browser.getControl('Book cover').add_file(*make_file('test_logo.png'))
     >>> browser.getControl('Save').click()
     >>> browser.url
-    'http://localhost/books/show/1'
+    'http://localhost/books/show/4'
 
 Then I edit my new school book information again, and make mistake
 
-    >>> browser.open('http://localhost/books/edit/1')
+    >>> browser.open('http://localhost/books/edit/4')
     >>> browser.getControl('Title').value = ""
     >>> browser.getControl('Author').value = "Mr. other"
     >>> browser.getControl('Brief description of the book').value = "A changed perfect book"
@@ -144,7 +145,7 @@ I enter my new university book information and confirm changes
     >>> browser.getControl('Book cover').add_file(*make_file('test_logo.png'))
     >>> browser.getControl('Save').click()
     >>> browser.url
-    'http://localhost/books/show/2'
+    'http://localhost/books/show/5'
 
 I enter my new other type book information and confirm changes
 
@@ -160,5 +161,5 @@ I enter my new other type book information and confirm changes
     >>> browser.getControl('Book cover').add_file(*make_file('test_logo.png'))
     >>> browser.getControl('Save').click()
     >>> browser.url
-    'http://localhost/books/show/3'
+    'http://localhost/books/show/6'
 

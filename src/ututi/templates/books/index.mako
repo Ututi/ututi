@@ -23,7 +23,7 @@
       </span>
       <br />
       %if can_edit:
-        %if c.user is book.owner:
+        %if c.user is book.created:
         <div class="edit-button-container">
           ${h.button_to(_("Edit"), url(controller="books", action="edit", id=book.id))}
         </div>

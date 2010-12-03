@@ -19,6 +19,7 @@ import ututi.lib.helpers as h
 from ututi.lib.validators import LocationTagsValidator
 from ututi.lib.image import serve_logo
 from ututi.lib.forms import validate
+from ututi.lib.search import search_query
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
 
@@ -274,7 +275,7 @@ class BooksController(BaseController):
     def _add(self):
         self._load_defaults()
         c.user_phone_number = c.user.phone_number
-        last_user_book = meta.Session.query(Book).filter(Book.owner == c.user).order_by(Book.id.desc()).first()
+        last_user_book = meta.Session.query(Book).filter(Book.created == c.user).order_by(Book.id.desc()).first()
         if not(c.user_phone_number) and last_user_book:
             c.user_phone_number = last_user_book.owner_phone
         return render('books/add.mako')
@@ -293,7 +294,7 @@ class BooksController(BaseController):
     @ActionProtector("user")
     def edit(self, id):
         c.book = meta.Session.query(Book).filter(Book.id == id).one()
-        if c.book.owner != c.user:
+        if c.book.created != c.user:
             h.flash(_('Only owner of this book can do this action'))
             redirect(url(controller="books", action="index"))
 
@@ -358,7 +359,7 @@ class BooksController(BaseController):
         return serve_logo('book', int(id), width=width, height=height)
 
     def search(self):
-        books = meta.Session.query(Book)
+        books = search_query(text=request.params['text'], obj_type='book')
         c.books = self._make_pages(books)
         return render('books/search.mako')
 
@@ -434,7 +435,7 @@ class BooksController(BaseController):
 
     @ActionProtector("user")
     def restore_book(self, book):
-        if c.user and c.user == book.owner:
+        if c.user == book.created:
             book.reset_expiration_time()
             meta.Session.commit()
         else:

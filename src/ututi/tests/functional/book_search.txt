@@ -27,7 +27,7 @@ fix that:
     >>> browser.getControl('City').displayValue = ['Vilnius']
     >>> browser.getControl('Save').click()
 
-Now let's go find it:
+Now let's go find it (empty search query returns all results):
 
     >>> browser.click('search')
     >>> browser.printCssQuery('.book-title')
@@ -39,6 +39,14 @@ the description:
     >>> browser.getControl('Search text').value = 'My maths book'
     >>> browser.click('search')
 
-#    >>> browser.printCssQuery('.book-title')
+    >>> browser.printCssQuery('.book-title')
+
+Entering physics returns the book though:
+
+    >>> browser.getControl('Search text').value = 'physics'
+    >>> browser.click('search')
+
+    >>> browser.printCssQuery('.book-title')
+    <h3 class="book-title">My physics book</h3>
 
 See, we found no books.

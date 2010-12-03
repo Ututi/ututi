@@ -540,7 +540,6 @@ def setup_orm(engine):
 
     global books_table
     books_table = Table("books", meta.metadata,
-                        Column('id', Integer, Sequence('books_id_seq'), primary_key=True),
                         Column('title', Unicode(assert_unicode=True)),
                         Column('description', Unicode(assert_unicode=True)),
                         Column('author', Unicode(assert_unicode=True)),
@@ -548,13 +547,11 @@ def setup_orm(engine):
                         autoload=True,
                         autoload_with=engine)
 
-    book_mapper = orm.mapper(Book,
-                             books_table,
-                             properties={
-                                 'owner': relation(User, backref="books"),
-                                 'raw_logo': deferred(books_table.c.logo),
-                                 'location': relation(LocationTag, backref="Books"),
-                                 })
+    book_mapper = orm.mapper(Book, books_table,
+                             inherits=ContentItem,
+                             polymorphic_identity='book',
+                             polymorphic_on=content_items_table.c.content_type,
+                             properties={'raw_logo': deferred(books_table.c.logo)})
 
     global cities_table
     cities_table = Table("cities", meta.metadata,
@@ -2337,7 +2334,7 @@ class Department(object):
 Department.initialize()
 
 
-class Book(object):
+class Book(ContentItem):
     """Book that can be shared by user"""
 
     @apply
