@@ -49,7 +49,7 @@
         <div class="floatleft user">
           <div class="orange bold verysmall">
             %if message.sender == c.user:
-              &rarr; <a href="${message.recipient.url()}">${h.ellipsis(message.recipient.fullname, 30)}</a>
+              <a href="${message.recipient.url()}">${h.ellipsis(message.recipient.fullname, 30)}</a>
             %else:
               <a href="${message.sender.url()}">${h.ellipsis(message.sender.fullname, 30)}</a>
             %endif
