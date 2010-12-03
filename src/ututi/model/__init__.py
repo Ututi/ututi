@@ -115,7 +115,7 @@ def setup_orm(engine):
                         autoload_with=engine)
 
     global teacher_subjects_table
-    teacher_subjects_table = Table("teacher_tought_subjects", meta.metadata,
+    teacher_subjects_table = Table("teacher_taught_subjects", meta.metadata,
                                    autoload=True,
                                    autoload_with=engine)
 
@@ -257,7 +257,7 @@ def setup_orm(engine):
                polymorphic_on=users_table.c.user_type,
                polymorphic_identity='teacher',
                inherits=user_mapper,
-               properties = {'tought_subjects' : relation(Subject,
+               properties = {'taught_subjects' : relation(Subject,
                                                           secondary=teacher_subjects_table,
                                                           backref="teachers")})
 

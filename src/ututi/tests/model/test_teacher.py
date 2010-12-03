@@ -37,16 +37,16 @@ def test_teacher_subjects():
        >>> meta.Session.add(teacher)
        >>> meta.Session.commit()
 
-       >>> teacher.tought_subjects
+       >>> teacher.taught_subjects
        []
 
        >>> res = meta.Session.execute("SET ututi.active_user TO 1")
        >>> s = Subject('subject_id', u'Subject title', LocationTag.get([u'vu']))
        >>> meta.Session.add(s)
-       >>> teacher.tought_subjects.append(s)
+       >>> teacher.taught_subjects.append(s)
        >>> meta.Session.commit()
 
-       >>> teacher.tought_subjects
+       >>> teacher.taught_subjects
        [<ututi.model.Subject object at ...>]
 
        >>> s.teachers

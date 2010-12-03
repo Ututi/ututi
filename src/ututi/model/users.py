@@ -477,12 +477,12 @@ class Teacher(User):
         super(Teacher, self).__init__(**kwargs)
 
     def teaches(self, subject):
-        return subject in self.tought_subjects
+        return subject in self.taught_subjects
 
     def teach_subject(self, subject):
         if not self.teaches(subject):
-            self.tought_subjects.append(subject)
+            self.taught_subjects.append(subject)
 
     def unteach_subject(self, subject):
         if self.teaches(subject):
-            self.tought_subjects.remove(subject)
+            self.taught_subjects.remove(subject)
