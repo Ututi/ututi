@@ -127,6 +127,29 @@
 </div>
 </%def>
 
+<%def name="subjects_block(subjects)">
+  %if subjects:
+  <%self:rounded_block class_='portletGroupFiles'>
+  <div class="GroupFiles GroupFilesDalykai">
+    <h2 class="portletTitle bold">
+      ${_('Subjects')}
+      <span class="right_arrow verysmall normal normal-font">
+        <a href="${url(controller='profile', action='notifications')}"> ${_('notification settings')}</a>
+      </span>
+    </h2>
+    <span class="group-but">
+      ${h.button_to(_('add subject'), url(controller='profile', action='watch_subjects'))}
+    </span>
+  </div>
+  <div>
+    ${self.subject_list(subjects)}
+  </div>
+  </%self:rounded_block>
+  %elif 'suggest_watch_subject' not in c.user.hidden_blocks_list:
+  ${self.watch_subject_nag()}
+  %endif
+</%def>
+
 %if c.user.location is not None:
 ${self.location_updated()}
 %else:
@@ -165,26 +188,7 @@ ${group_list()}
 %endif
 
 <div id="subject_list">
-  %if c.user.watched_subjects:
-  <%self:rounded_block class_='portletGroupFiles'>
-  <div class="GroupFiles GroupFilesDalykai">
-    <h2 class="portletTitle bold">
-      ${_('Subjects')}
-      <span class="right_arrow verysmall normal normal-font">
-        <a href="${url(controller='profile', action='notifications')}"> ${_('notification settings')}</a>
-      </span>
-    </h2>
-    <span class="group-but">
-      ${h.button_to(_('add subject'), url(controller='profile', action='watch_subjects'))}
-    </span>
-  </div>
-  <div>
-    ${self.subject_list(c.user.watched_subjects)}
-  </div>
-  </%self:rounded_block>
-  %elif 'suggest_watch_subject' not in c.user.hidden_blocks_list:
-  ${self.watch_subject_nag()}
-  %endif
+  ${subjects_block(c.user.watched_subjects)}
 </div>
 
 % if c.fb_random_post:
