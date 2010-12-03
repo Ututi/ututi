@@ -39,6 +39,8 @@ the description:
     >>> browser.getControl('Search text').value = 'My maths book'
     >>> browser.click('search')
 
+See, we found no books.
+
     >>> browser.printCssQuery('.book-title')
 
 Entering physics returns the book though:
@@ -49,4 +51,7 @@ Entering physics returns the book though:
     >>> browser.printCssQuery('.book-title')
     <h3 class="book-title">My physics book</h3>
 
-See, we found no books.
+The search term is displayed in the search box:
+
+    >>> browser.getForm(id='search_form').getControl(name='text').value
+    'physics'

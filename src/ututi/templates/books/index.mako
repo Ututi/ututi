@@ -3,7 +3,11 @@
 <%def name="book_information(book, can_edit = False)">
 <div class="book-information">
   <div class="book-cover">
-    <img src="${url(controller='books', action='logo', id=book.id, width=80, height=120)}" alt="${_('Book cover')}" />
+    %if book.logo is not None:
+      <img src="${url(controller='books', action='logo', id=book.id, width=80, height=120)}" alt="${_('Book cover')}" />
+    %else:
+      <img src="${url('/images/books/default_book_icon.png')}" alt="${_('Book cover')}" />
+    %endif
   </div>
   <div class="book-textual-info">
     <h3 class="book-title">${book.title}</h3>

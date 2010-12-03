@@ -359,7 +359,8 @@ class BooksController(BaseController):
         return serve_logo('book', int(id), width=width, height=height)
 
     def search(self):
-        books = search_query(text=request.params['text'], obj_type='book')
+        c.search_text = request.params.get('text', '')
+        books = search_query(text=c.search_text, obj_type='book')
         c.books = self._make_pages(books)
         return render('books/search.mako')
 
