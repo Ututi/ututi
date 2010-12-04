@@ -1,5 +1,6 @@
 from sqlalchemy import func
 
+from sqlalchemy.sql.expression import desc
 from formencode.variabledecode import NestedVariables
 from formencode.foreach import ForEach
 from formencode.compound import Pipe
@@ -85,6 +86,18 @@ class ScienceTypeValidator(BaseValidator):
         return meta.Session.query(ScienceType).filter(ScienceType.id == science_type_id).one()
 
 
+def city_from_string(string, not_found=None):
+    if not string:
+        return None
+
+    try:
+        city_id = int(string)
+    except ValueError:
+        return not_found
+
+    return meta.Session.query(City).filter(City.id == city_id).one()
+
+
 class CityValidator(BaseValidator):
     """A validator for city fields."""
 
@@ -94,16 +107,7 @@ class CityValidator(BaseValidator):
         }
 
     def _to_python(self, value, state):
-        if not value:
-            return None
-
-        try:
-            city_id = int(value)
-        except ValueError:
-            return self._notfoundmarker
-
-        return meta.Session.query(City).filter(City.id == city_id).one()
-
+        return city_from_string(value, not_found=self._notfoundmarker)
 
 class BookTypeValidator(BaseValidator):
 
@@ -363,19 +367,27 @@ class BooksController(BaseController):
 
     def search(self):
         c.search_text = request.params.get('text', '')
-        books = search_query(text=c.search_text, obj_type='book')
-        all_cities_book_count = books.count()
+        c.selected_city_id = request.params.get('city', '')
+        c.selected_city = city_from_string(c.selected_city_id)
+        search_results = search_query(text=c.search_text, obj_type='book')
 
-        books_with_cities = books.join((Book, Book.id==SearchItem.content_item_id)).join(City)
-        cities = meta.Session.query(func.count(City.name).label('book_count'), City.name).select_from(
-            books_with_cities.subquery()
-            ).group_by(City.name).order_by('book_count').all()
+        books = search_results
+        if c.selected_city is not None:
+            books = (search_results
+                     .join((Book, Book.id == SearchItem.content_item_id))
+                     .join(City).filter(City.id == c.selected_city.id))
 
-        c.filter_cities = [('', _("All cities (%(book_count)s)") % {'book_count': all_cities_book_count})]
-        for book_count, city in cities:
-            c.filter_cities.append(_("%(city)s (%(book_count)s)" % {
-                        'city': city,
-                        'book_count': book_count}))
+        cities = meta.Session.query(City.id,
+                                    City.name,
+                                    func.count(Book.id.distinct()).label('book_count'))\
+            .join(Book, search_results.subquery()).filter(Book.id != None).group_by(City.name, City.id).order_by(desc('book_count')).all()
+
+        c.filter_cities = [('', _("All cities (%(book_count)s)") % {'book_count': search_results.count()})]
+
+        for city_id, city_name, book_count in cities:
+            c.filter_cities.append((city_id, _("%(city)s (%(book_count)s)" % {
+                            'city': city_name,
+                            'book_count': book_count})))
 
         c.books = self._make_pages(books)
         return render('books/search.mako')

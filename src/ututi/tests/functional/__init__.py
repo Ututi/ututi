@@ -236,6 +236,10 @@ def setUpBooks(browser):
     form.getControl('Name').value = 'Vilnius'
     form.getControl('Save').click()
 
+    form = browser.getForm('city_form')
+    form.getControl('Name').value = 'Kaunas'
+    form.getControl('Save').click()
+
     # Add a school grade
     browser.open('http://localhost/admin/school_grades')
     form = browser.getForm('school_grade_form')

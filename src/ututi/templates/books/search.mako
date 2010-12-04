@@ -37,7 +37,7 @@
     <form action="${url(controller='books', action='search', text=c.text)}">
     <label>
       <span class="a11y">${_('City')}</span>
-      ${h.select('city', None, c.filter_cities)}
+      ${h.select('city', [c.selected_city_id], c.filter_cities)}
     </label>
     <span class="a11y">${h.input_submit(_('Filter'))}</span>
     </form>
