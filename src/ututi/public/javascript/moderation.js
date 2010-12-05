@@ -10,6 +10,7 @@ $(document).ready(function(){
           panel.html(data);
           panel.closest('.message-list-on1, .message-list-off1, .wall_item')
             .find('a').addClass('disabled').removeAttr('href');
+          reload_whitelist();
         },
         error: function(data) {
           panel.removeClass('loading');
@@ -25,20 +26,15 @@ $(document).ready(function(){
       $.ajax({
         url: action_url,
         success: function(data) {
-            panel.removeClass('loading');
-            panel.removeClass('error');
             $('.group-whitelist').html(data);
         },
         error: function(data) {
-          panel.removeClass('loading');
-          panel.addClass('error');
         }
       });
     };
 
   $('.btn-approve').click(function() {
       approve_reject(this);
-      reload_whitelist();
       return false;
   });
 

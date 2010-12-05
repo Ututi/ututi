@@ -76,9 +76,13 @@ def group_mailinglist_action(method):
         thread = meta.Session.query(GroupMailingListMessage).filter_by(
                     id=thread_id).first()
         if (thread is None or
-            thread.thread != thread or
             thread.group != group):
             abort(404)
+
+        if (thread.thread != thread and
+            not thread.in_moderation_queue):
+            abort(404)
+
         c.security_context = group
         c.group = group
         c.object_location = group.location
