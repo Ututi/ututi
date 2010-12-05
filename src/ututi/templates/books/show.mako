@@ -65,12 +65,19 @@ ${book_attribute(_('Price'), c.book.price, class_="book-price")}
       <div class="user-phone-number">
         ${_('Phone')}: ${c.book.owner.phone_number}
       </div>
-    %endif
-    <div class="medals" id="user-medals">
-      %for medal in c.book.owner.all_medals():
-      ${medal.img_tag()}
-      %endfor
+      %endif
+      <div class="medals" id="user-medals">
+        %for medal in c.book.owner.all_medals():
+        ${medal.img_tag()}
+        %endfor
+      </div>
     </div>
+    <div class="private-message-container">
+      <form action="${url(controller='books', action='private_message')}">
+        <input type="hidden" name="book_id" value="${c.book.id}" />
+        ${h.input_area("message", "Message")}
+        ${h.input_submit("Send message")}
+      </form>
     </div>
     <div class="clear"></div>
   </div>

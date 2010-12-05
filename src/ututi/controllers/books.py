@@ -1,4 +1,5 @@
 from formencode.variabledecode import NestedVariables
+from sqlalchemy.orm.exc import NoResultFound
 from formencode.foreach import ForEach
 from formencode.compound import Pipe
 from formencode import Schema, validators, htmlfill
@@ -6,16 +7,19 @@ from formencode.api import Invalid
 
 from webhelpers import paginate
 
+from pylons.controllers.util import  abort
 from pylons.controllers.util import redirect
 from pylons import request, tmpl_context as c, url
 from pylons.i18n import _
 
 from ututi.lib.validators import PhoneNumberValidator
 from ututi.lib.validators import FileUploadTypeValidator, TranslatedEmailValidator
+from ututi.model import PrivateMessage
 from ututi.model import Department
 from ututi.model import LocationTag
 from ututi.model import Book, meta, City, BookType, SchoolGrade, ScienceType
 import ututi.lib.helpers as h
+from ututi.model import User
 from ututi.lib.validators import LocationTagsValidator
 from ututi.lib.image import serve_logo
 from ututi.lib.forms import validate
@@ -428,3 +432,29 @@ class BooksController(BaseController):
             meta.Session.commit()
         else:
             h.flash(_("You don't have rights to make this action"))
+
+    @ActionProtector("user")
+    def private_message(self):
+        user_id = request.params.get('user_id')
+        c.book = meta.Session.query(Book).filter(Book.id == request.params.get('book_id')).one()
+        try:
+            c.recipient = meta.Session.query(User).filter_by(id=c.book.owner.id).one()
+        except NoResultFound:
+            abort(404)
+
+        if 'message' in request.params:
+            message_text = """%(user_name)s sent you a private message, asking about book %(book_title)s (%(book_url)s):
+
+                           %(message)s""" % {"user_name" : c.user.fullname,
+                                "book_url" : url(qualified=True, controller="books", action="show", id=c.book.id),
+                                "book_title" : c.book.title,
+                                "message" : request.params.get('message')}
+
+            msg = PrivateMessage(c.user, c.recipient,
+                                 _("%(ubooks_label)s: %(user_name)s asks about book %(book_title)s") %\
+                                     {"ubooks_label" : _('uBooks'), "user_name" : c.user.fullname, "book_title" : c.book.title},
+                                  message_text)
+            meta.Session.add(msg)
+            meta.Session.commit()
+            h.flash(_('Message sent.'))
+        return render('books/show.mako')
