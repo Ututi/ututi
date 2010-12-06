@@ -15,6 +15,8 @@ from pylons.controllers.util import redirect
 from pylons import request, tmpl_context as c, url
 from pylons.i18n import _
 
+from datetime import datetime
+
 from ututi.lib.validators import PhoneNumberValidator
 from ututi.lib.validators import FileUploadTypeValidator, TranslatedEmailValidator
 from ututi.model import PrivateMessage
@@ -30,7 +32,6 @@ from ututi.lib.forms import validate
 from ututi.lib.search import search_query
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
-
 
 class ChainedSubFormValidator(validators.FormValidator):
 
@@ -310,7 +311,6 @@ class BooksController(BaseController):
             redirect(url(controller="books", action="index"))
 
         department_control_id = c.book.department.name + '_science_type'
-
         defaults = {
             'id': c.book.id,
             'title': c.book.title,
@@ -320,7 +320,7 @@ class BooksController(BaseController):
             department_control_id: c.book.science_type.id,
             'description': c.book.description,
             'price': c.book.price,
-            'department': c.book.department,
+            'department': c.book.department.name,
             'city': c.book.city.id,
             'book_type': c.book.type.id,
             'owner_name': c.book.owner_name,
@@ -362,6 +362,7 @@ class BooksController(BaseController):
             book.owner_email = self.form_result['owner_email']
             book.course = self.form_result['course']
             book.school_grade = self.form_result['school_grade']
+            book.reset_expiration_time()
             meta.Session.commit()
             h.flash(_('Book was updated succesfully'))
             redirect(url(controller='books', action='show', id=book.id))
@@ -463,16 +464,20 @@ class BooksController(BaseController):
     @ActionProtector("user")
     def my_books(self):
         books = meta.Session.query(Book).filter(Book.created == c.user)
-        c.books = self._make_pages(books)
+        c.active_books = books.filter(Book.valid_until >= datetime.utcnow()).all()
+        c.expired_books = books.filter(Book.valid_until < datetime.utcnow()).all()
+        c.owned_books_number = len(c.active_books) + len(c.expired_books)
         return render('books/my_books.mako')
 
     @ActionProtector("user")
-    def restore_book(self, book):
+    def restore_book(self, id):
+        book = meta.Session.query(Book).filter(Book.id == id).one()
         if c.user == book.created:
             book.reset_expiration_time()
             meta.Session.commit()
         else:
             h.flash(_("You don't have rights to make this action"))
+        redirect(url(controller="books", action="my_books"))
 
     @ActionProtector("user")
     def private_message(self):

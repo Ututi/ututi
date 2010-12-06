@@ -16,7 +16,7 @@ import ututi
 from ututi.lib.mailer import mail_queue
 from ututi.model.events import Event
 from ututi.model import (Group, meta, LocationTag, SimpleTag, User, Teacher,
-                         Subject, Email, Region)
+                         Subject, Email, Region, Book)
 
 def ftest_setUp(test):
     ututi.tests.setUp(test)
@@ -245,3 +245,14 @@ def setUpBooks(browser):
     form = browser.getForm('school_grade_form')
     form.getControl('Name').value = '1 kl.'
     form.getControl('Save').click()
+
+def setBooksExpirationTime(dt):
+    for book in meta.Session.query(Book).all():
+        book.valid_until = dt
+    meta.Session.commit()
+
+def booksExpirationDates():
+    expiration_date = []
+    for book in meta.Session.query(Book).all():
+       expiration_date.append(book.valid_until)
+    return expiration_date
