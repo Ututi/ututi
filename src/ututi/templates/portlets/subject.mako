@@ -28,11 +28,21 @@
           %endfor
           </span>
         </p>
-        %if subject.lecturer:
-          <p>
-            <span class="verysmall grey bold">${_('Lecturer:')}</span>
-            <span class="orange verysmall">${subject.lecturer}</span>
-          </p>
+        %if subject.teachers:
+          <p> <span class="verysmall grey bold">
+            ${_("Lecturer:") if len(subject.teachers) == 1 else _("Lecturers:")}
+          </span> </p>
+          <ul class="teacher-list verysmall">
+          %for teacher in subject.teachers:
+            <li>${h.link_to(teacher.fullname, teacher.url())}</li>
+          %endfor
+          </ul>
+        %elif subject.lecturer:
+          <p> <span class="verysmall grey bold">${_('Lecturer:')}</span> </p>
+          <ul class="teacher-list verysmall">
+            <li>${subject.lecturer}</li>
+          </ul>
+          <span class="orange verysmall"></span>
         %endif
     </div>
     <div class="dalyko-info">

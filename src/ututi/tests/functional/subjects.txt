@@ -26,14 +26,18 @@ From there we can edit the subject.
 
 The changed information should be visible in the sidebar block.
 
-    >>> browser.printQuery('//div[@class="dalyko-info"]//p/span/text()')
+    >>> browser.printQuery('//div[@class="dalyko-info"]//text()')
+    Matematinė analizė
+    vu
     Lecturer:
     Some other guy
     Subject rating:
     The subject is watched by:
+    1
     user,
+    0
     groups
-
+    There are no subject tags.
 
 The subject's portlet contains a link that can be used to start watching the subject.
 
