@@ -36,12 +36,11 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
       $('.department').hide();
       $('.science_type_field').hide();
       if(department != ""){
-          $('#department_science_type_field_'+department).show();
+          $('#'+department+'_science_type').show();
           $('#department_'+department).show();
       }else{
           $('.science_type_field').hide();
       }
-
   }
 //]]></script>
 
@@ -59,20 +58,20 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
     <label>${_('Book department')}: ${h.select('department', None, c.book_departments)}</label>
     <form:error name="department_id">
  </div>
-  <div id="department_0" class="department">
+  <div id="department_university" class="department">
     ${location_widget(2)}
     ${h.input_line('course', _('Course'))}
   </div>
-  <div id="department_1" class="department">
+  <div id="department_school" class="department">
     <%self:selectbox field_name = "school_grade" label="${_('School grade')}", objects="${c.school_grades}" />
   </div>
-  <div id="department_science_type_field_0" class="science_type_field" style="display: none">
+  <div id="university_science_type" class="science_type_field" style="display: none">
     <%self:selectbox field_name = "university_science_type" label="${_('Science type')}", objects="${c.university_science_types}" />
   </div>
-  <div id="department_science_type_field_1" class="science_type_field" style="display: none;">
+  <div id="school_science_type" class="science_type_field" style="display: none;">
     <%self:selectbox field_name = "school_science_type" label="${_('Science type')}", objects="${c.school_science_types}" />
   </div>
-  <div id="department_science_type_field_2" class="science_type_field" style="display: none;">
+  <div id="other_science_type" class="science_type_field" style="display: none;">
     <%self:selectbox field_name = "other_science_type" label="${_('Science type')}", objects="${c.other_science_types}" />
   </div>
   <form:error name="science_type" />
@@ -109,7 +108,7 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
 </form>
 <script type="text/javascript">
   show_department();
-  $('#department_id').change(show_department);
+  $('#department').change(show_department);
 </script>
 </%def>
 
