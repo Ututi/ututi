@@ -2435,6 +2435,10 @@ h1 {
     dd a.uni {
         color: #668000;
     }
+    a.uni {
+        color: #668000;
+        text-transform: uppercase;
+    }
     h3.underline,
     h2.underline {
         border-bottom: 1px solid #ded8d8;

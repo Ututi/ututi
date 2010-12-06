@@ -46,6 +46,40 @@
 </%self:rounded_block>
 </%def>
 
+<%def name="subject_list(subjects)">
+<div id="SearchResults">
+%for n, subject in enumerate(subjects):
+<div class="${'GroupFilesContent-line-dal' if n != len(subjects) - 1 else 'GroupFilesContent-line-dal-last'}">
+  <ul class="grupes-links-list-dalykai">
+    <li>
+        <span class="bold" style="margin-right: 5px">
+          <a class="subject_title" href="${subject.url()}">${h.ellipsis(subject.title, 60)}</a>
+        </span>
+        %for index, tag in enumerate(subject.location.hierarchy(True), 1):
+          %if index != 1:
+          |
+          %endif
+          <a class="uni" href="${tag.url()}" title="${tag.title}">${tag.title_short}</a>
+        %endfor
+        <dt></dt>
+        <dd class="files"><span >${_('Files:')}</span> ${h.subject_file_count(subject.id)}</dd>
+        <dd class="pages"><span >${_('Wiki pages:')}</span> ${h.subject_page_count(subject.id)}</dd>
+        <%
+           user_count = subject.user_count()
+           group_count = subject.group_count()
+           %>
+        <dd class="watchedBy"><span >${_('The subject is watched by:')}</span>
+          ${ungettext("<span class='orange'>%(count)s</span> user", "<span class='orange'>%(count)s</span> users", user_count) % dict(count=user_count)|n}
+          ${_('and')}
+          ${ungettext("<span class='orange'>%(count)s</span> group", "<span class='orange'>%(count)s</span> groups", group_count) % dict(count=group_count)|n}
+        </dd>
+    </li>
+  </ul>
+</div>
+%endfor
+</div>
+</%def>
+
 %if not c.user.teacher_verified:
   ${teacher_unverified_nag()}
 %endif
