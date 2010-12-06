@@ -462,7 +462,7 @@ class BooksController(BaseController):
 
     @ActionProtector("user")
     def my_books(self):
-        books = meta.Session.query(Book).filter(Book.owner == c.user)
+        books = meta.Session.query(Book).filter(Book.created == c.user)
         c.books = self._make_pages(books)
         return render('books/my_books.mako')
 
@@ -479,7 +479,7 @@ class BooksController(BaseController):
         user_id = request.params.get('user_id')
         c.book = meta.Session.query(Book).filter(Book.id == request.params.get('book_id')).one()
         try:
-            c.recipient = meta.Session.query(User).filter_by(id=c.book.owner.id).one()
+            c.recipient = meta.Session.query(User).filter_by(id=c.book.created.id).one()
         except NoResultFound:
             abort(404)
 
