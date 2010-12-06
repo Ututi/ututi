@@ -1,10 +1,24 @@
+<%def name="rounded_block(class_='', id=None, style=None)">
+<div class="rounded-block ${class_}"
+     %if id is not None:
+       id="${id}"
+     %endif
 
-<%def name="light_table(title, items, class_)">
-<div class="portlet portletSmall portletGroupFiles mediumTopMargin ${class_}">
+     %if style is not None:
+       style="${style}"
+     %endif
+>
   <div class="ctl"></div>
   <div class="ctr"></div>
   <div class="cbl"></div>
   <div class="cbr"></div>
+
+  ${caller.body()}
+</div>
+</%def>
+
+<%def name="light_table(title, items, class_='')">
+<%self:rounded_block class_="light-table ${class_}">
   <div class="single-title">
     <div class="floatleft">
       <h2 class="portletTitle bold category-title">${title}</h2>
@@ -39,32 +53,29 @@
       ${caller.empty_rows()}
     %endif
   </table>
-</div>
+</%self:rounded_block>
 </%def>
 
-<%def name="item_list(title, items, class_)">
-<div class="rounded_block ${class_}">
-  <div class="ctl"></div>
-  <div class="ctr"></div>
-  <div class="cbl"></div>
-  <div class="cbr"></div>
-  <div class="large_header">
+<%def name="item_list(title, items, class_='')">
+<%self:rounded_block class_="item-list ${class_}">
+  <div class="large-header">
     <h2 class="portletTitle bold category-title">
       ${title}
       %if hasattr(caller, 'header_link'):
-      <span class="header_link">
+      <span class="header-link">
         ${caller.header_link()}
       </span>
       %endif
     </h2>
     %if hasattr(caller, 'header_button'):
-    <span class="header_button">
+    <span class="header-button">
       ${caller.header_button()}
     </span>
     %endif
     <div class="clear"></div>
   </div>
   <div>
+  <div class="block-content">
     %if items:
       %for item in items[:-1]:
         <div class="row">
@@ -86,5 +97,5 @@
       </div>
     %endif
   </div>
-</div>
+</%self:rounded_block>
 </%def>

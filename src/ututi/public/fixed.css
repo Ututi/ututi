@@ -1,5 +1,5 @@
 /* rounded blocks */
-.rounded_block {
+.rounded-block {
     background-repeat: no-repeat;
     border-left: 1px solid #ded8d8;
     border-right: 1px solid #ded8d8;
@@ -13,10 +13,14 @@
     _border: 1px solid #ded8d8; /* IE6 */
 }
 
-.rounded_block .ctl,
-.rounded_block .ctr,
-.rounded_block .cbl,
-.rounded_block .cbr {
+.rounded-block .block-content {
+    padding: 5px 10px;
+}
+
+.rounded-block .ctl,
+.rounded-block .ctr,
+.rounded-block .cbl,
+.rounded-block .cbr {
     background-image: url('img/portlets_bg.png');
     background-repeat: no-repeat;
     display: block;
@@ -26,7 +30,7 @@
     _display: none; /* IE6 */
 }
 
-.rounded_block .ctl {
+.rounded-block .ctl {
     background-position: left top;
     left: -1px;
     right: 4px;
@@ -34,14 +38,14 @@
     _width: 100%; /* IE6 */
 }
 
-.rounded_block .ctr {
+.rounded-block .ctr {
     background-position: right top;
     right: -1px;
     top: -5px;
     width: 5px;
 }
 
-.rounded_block .cbl {
+.rounded-block .cbl {
     background-image: url('img/portlets_bg_white.png');
     background-position: left -5px;
     bottom: -5px;
@@ -49,7 +53,7 @@
     right: 4px;
 }
 
-.rounded_block .cbr {
+.rounded-block .cbr {
     background-image: url('img/portlets_bg_white.png');
     background-position: right -5px;
     bottom: -5px;
@@ -57,25 +61,25 @@
     width: 5px;
 }
 
-.rounded_block .large_header {
+.rounded-block .large-header {
     background: #f6f6f6;
     border-bottom: 1px solid #ded8d8;
     height:40px;
     position:relative;
 }
 
-.rounded_block .large_header h2 {
+.rounded-block .large-header h2 {
     float: left;
     margin: 9px 0 0 10px;
 }
 
-.rounded_block .large_header .header_button {
+.rounded-block .large-header .header-button {
     position: absolute;
     right: 5px;
     top: 9px;
 }
 
-.rounded_block .large_header .header_link {
+.rounded-block .large-header .header-link {
     font-weight: normal;
     font-size: 11px;
 }
