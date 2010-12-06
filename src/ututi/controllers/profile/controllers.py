@@ -60,6 +60,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
                                   " specific profile controller.")
 
     def __before__(self):
+        c.action = None
         c.ututi_supporters = get_supporters()
         if c.user is not None:
             c.breadcrumbs = [{'title': c.user.fullname, 'link': url(controller='profile', action='home')}]
@@ -168,7 +169,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
              'link': url(controller='profile', action='wall_settings')},
             {'title': _("Notifications"),
              'name': 'notifications',
-             'link': url(controller='profile', action='subjects')}]
+             'link': url(controller='profile', action='notifications')}]
 
     @ActionProtector("user")
     def edit(self):
@@ -204,12 +205,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
                                defaults=defaults)
 
     @ActionProtector("user")
-    def subjects(self):
-        # TODO:
-        # * rename this method to 'notifications'
-        # * breadcrumbs should be unified for all user settings
-        #
-        # c.breadcrumbs.append(self._actions('subjects'))
+    def notifications(self):
         self._set_settings_tabs(current_tab='notifications')
         c.subjects = c.user.watched_subjects
         c.groups = c.user.groups
@@ -338,7 +334,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
             meta.Session.commit()
         if request.params.get('ajax'):
             return 'OK'
-        redirect(url(controller='profile', action='subjects'))
+        redirect(url(controller='profile', action='notifications'))
 
     @validate(ContactForm, form='_edit_contacts_form', defaults=_edit_form_defaults)
     @ActionProtector("user")
@@ -399,6 +395,24 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
         redirect(url(controller='profile', action='edit_contacts'))
 
     @ActionProtector("user")
+    @validate(schema=LocationForm, form='home')
+    def update_location(self):
+        c.user.location = self.form_result.get('location', None)
+        meta.Session.commit()
+        h.flash(_('Your university information has been updated.'))
+        redirect(url(controller='profile', action='home'))
+
+    @ActionProtector("user")
+    def js_update_location(self):
+        try:
+            fields = manual_validate(LocationForm)
+            c.user.location = fields.get('location', None)
+            meta.Session.commit()
+            return render_mako_def('/profile/home_base.mako', 'location_updated')
+        except Invalid:
+            abort(400)
+
+    @ActionProtector("user")
     def thank_you(self):
         return render('/profile/thank_you.mako')
 
@@ -454,7 +468,7 @@ class UserProfileController(ProfileControllerBase):
              'link': url(controller='profile', action='home')},
             'subjects':
             {'title': _("Subjects"),
-             'link': url(controller='profile', action='subjects')}
+             'link': url(controller='profile', action='watch_subjects')}
             }
         if selected in bcs.keys():
             return bcs[selected]
@@ -494,24 +508,6 @@ class UserProfileController(ProfileControllerBase):
         return render('profile/home.mako')
 
     @ActionProtector("user")
-    @validate(schema=LocationForm, form='home')
-    def update_location(self):
-        c.user.location = self.form_result.get('location', None)
-        meta.Session.commit()
-        h.flash(_('Your university information has been updated.'))
-        redirect(url(controller='profile', action='home'))
-
-    @ActionProtector("user")
-    def js_update_location(self):
-        try:
-            fields = manual_validate(LocationForm)
-            c.user.location = fields.get('location', None)
-            meta.Session.commit()
-            return render_mako_def('/profile/home.mako', 'location_updated')
-        except Invalid, e:
-            abort(400)
-
-    @ActionProtector("user")
     @validate(schema=PhoneForm, form='home')
     def update_phone(self):
         c.user.location = self.form_result.get('phone_number', None)
@@ -529,7 +525,7 @@ class UserProfileController(ProfileControllerBase):
                 sms.confirmation_request(c.user)
             meta.Session.commit()
             return render_mako_def('/profile/home.mako', 'phone_updated')
-        except Invalid, e:
+        except Invalid:
             return ''
 
     @ActionProtector("user")

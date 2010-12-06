@@ -16,6 +16,7 @@ from ututi.model import meta
 from ututi.lib.helpers import image
 
 from pylons.i18n import _
+from pylons import config
 
 log = logging.getLogger(__name__)
 
@@ -268,7 +269,7 @@ class User(object):
     def groups(self):
         from ututi.model import Group
         from ututi.model import GroupMember
-        return meta.Session.query(Group).join(GroupMember).filter(GroupMember.user == self).all()
+        return meta.Session.query(Group).join(GroupMember).order_by(Group.title.asc()).filter(GroupMember.user == self).all()
 
     @property
     def groups_uploadable(self):
@@ -477,12 +478,30 @@ class Teacher(User):
         super(Teacher, self).__init__(**kwargs)
 
     def teaches(self, subject):
-        return subject in self.tought_subjects
+        return subject in self.taught_subjects
 
     def teach_subject(self, subject):
         if not self.teaches(subject):
-            self.tought_subjects.append(subject)
+            self.taught_subjects.append(subject)
 
     def unteach_subject(self, subject):
         if self.teaches(subject):
-            self.tought_subjects.remove(subject)
+            self.taught_subjects.remove(subject)
+
+
+class GroupNotFoundException(Exception):
+    pass
+
+
+class TeacherGroup(object):
+    def __init__(self, title, email):
+        from ututi.model import Group
+        self.title = title
+        self.email = email
+        hostname = config.get('mailing_list_host', 'groups.ututi.lt')
+        if email.endswith(hostname):
+            group = Group.get(email[:-(len(hostname)+1)])
+            if group is not None:
+                self.group = group
+            else:
+                raise GroupNotFoundException()

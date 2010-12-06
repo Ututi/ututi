@@ -24,7 +24,7 @@
 
     ${h.link_to(_('More subjects'), url(controller='profile', action='search', obj_type='subject'), class_="more")}
     <span>
-      ${h.button_to(_('Watch subjects'), url(controller='profile', action='subjects', id=user.id))}
+      ${h.button_to(_('Watch subjects'), url(controller='profile', action='watch_subjects', id=user.id))}
       ${tooltip(_("Add watched subjects to your watched subjects' list and receive notifications "
                   "about changes in these subjects"))}
     </span>

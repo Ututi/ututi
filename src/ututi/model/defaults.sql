@@ -1329,13 +1329,12 @@ create table book_types (
 );;
 
 CREATE TABLE books (
-       id bigserial NOT NULL,
+       id int8 references content_items(id),
        title varchar(100) NOT NULL,
        description text,
        author varchar(100),
        price varchar(250) DEFAULT '' NOT NULL,
        logo bytea DEFAULT NULL,
-       owner_id int8 NOT NULL REFERENCES users(id) on delete cascade,
        city_id int8 DEFAULT NULL REFERENCES cities(id) on delete restrict,
        science_type_id int8 NOT NULL REFERENCES science_types(id) on delete restrict,
        type_id int8 NOT NULL REFERENCES book_types(id) on delete restrict,
@@ -1350,9 +1349,49 @@ CREATE TABLE books (
        PRIMARY KEY (id)
 );;
 
+CREATE FUNCTION update_book_worker(books) RETURNS void AS $$
+    DECLARE
+        search_id int8 := NULL;
+        parent_type varchar(20) := NULL;
+        book ALIAS FOR $1;
+    BEGIN
+      EXECUTE set_ci_modtime(book.id);
+      SELECT content_item_id INTO search_id  FROM search_items WHERE content_item_id = book.id;
+      IF FOUND THEN
+        UPDATE search_items SET terms = to_tsvector(coalesce(book.title,''))
+          || to_tsvector(coalesce(book.description,''))
+          || to_tsvector(coalesce(book.author,''))
+          WHERE content_item_id=search_id;
+      ELSE
+        INSERT INTO search_items (content_item_id, terms) VALUES (book.id,
+          to_tsvector(coalesce(book.title,''))
+          || to_tsvector(coalesce(book.description,''))
+          || to_tsvector(coalesce(book.author, '')));
+      END IF;
+    END
+$$ LANGUAGE plpgsql;;
+
+CREATE FUNCTION update_book_search() RETURNS trigger AS $$
+    BEGIN
+      PERFORM update_book_worker(NEW);
+      RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+CREATE TRIGGER update_book_search AFTER INSERT OR UPDATE ON books
+    FOR EACH ROW EXECUTE PROCEDURE update_book_search();;
+
 /* a table for linking subjects with teachers */
-/* XXX: taught not tought */
-create table teacher_tought_subjects (
+create table teacher_taught_subjects (
        user_id int8 references users(id) not null,
        subject_id int8 not null references subjects(id) on delete cascade,
        primary key (user_id, subject_id));;
+
+/* a table for linking teachers with their groups: ututi groups and other */
+create table teacher_groups (
+       id bigserial NOT NULL,
+       user_id int8 references users(id) not null,
+       title varchar(500) not null,
+       email varchar(320) not null,
+       group_id int8 default null references groups(id) on delete cascade,
+       primary key (id));;

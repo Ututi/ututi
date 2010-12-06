@@ -51,13 +51,6 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
   <input type="hidden" name="id" value=""/>
   <div class="book-logo">
     ${self.book_logo_field()}
-    <label
-       %if c.book is None or c.book == "" or c.book.logo is None or c.book.logo == "":
-        style="display:none"
-      %endif
-     >
-      <input type="checkbox" name="delete_logo" value="1"/> ${_('Delete logo')}
-    </label>
   </div>
   <div class="basic-book-info">
     ${h.input_line('title', _('Title'))}

@@ -31,7 +31,7 @@ from sqlalchemy.sql.expression import and_, or_
 from sqlalchemy.orm.interfaces import MapperExtension
 
 from ututi.migration import GreatMigrator
-from ututi.model.users import Medal, Email, UserSubjectMonitoring, User, Teacher
+from ututi.model.users import Medal, Email, UserSubjectMonitoring, User, Teacher, TeacherGroup
 from ututi.model.util import logo_property
 from ututi.model import meta
 from ututi.lib.messaging import SMSMessage
@@ -47,13 +47,16 @@ from pylons.i18n import _
 
 log = logging.getLogger(__name__)
 
+users_table = None
+user_monitored_subjects_table = None
+email_table = None
+teacher_groups_table = None
+
 def init_model(engine):
     """Call me before using any of the tables or classes in the model"""
     ## Reflected tables must be defined and mapped here
     meta.Session.configure(bind=engine)
     meta.engine = engine
-
-
 
 
 def setup_orm(engine):
@@ -115,9 +118,14 @@ def setup_orm(engine):
                         autoload_with=engine)
 
     global teacher_subjects_table
-    teacher_subjects_table = Table("teacher_tought_subjects", meta.metadata,
+    teacher_subjects_table = Table("teacher_taught_subjects", meta.metadata,
                                    autoload=True,
                                    autoload_with=engine)
+
+    global teacher_groups_table
+    teacher_groups_table = Table("teacher_groups", meta.metadata,
+                                 autoload=True,
+                                 autoload_with=engine)
 
     global content_items_table
     content_items_table = Table("content_items", meta.metadata,
@@ -253,13 +261,20 @@ def setup_orm(engine):
                                            'medals': relation(Medal, backref='user'),
                                            'raw_logo': deferred(users_table.c.logo),
                                            'location': relation(LocationTag, backref=backref('users', lazy=True))})
+
     orm.mapper(Teacher,
                polymorphic_on=users_table.c.user_type,
                polymorphic_identity='teacher',
                inherits=user_mapper,
-               properties = {'tought_subjects' : relation(Subject,
+               properties = {'taught_subjects' : relation(Subject,
                                                           secondary=teacher_subjects_table,
                                                           backref="teachers")})
+
+    orm.mapper(TeacherGroup,
+               teacher_groups_table,
+               properties = {'group' : relation(Group, lazy=True),
+                             'teacher' : relation(Teacher,
+                                                  backref='student_groups')})
 
     orm.mapper(FileDownload,
                file_downloads_table,
@@ -540,7 +555,6 @@ def setup_orm(engine):
 
     global books_table
     books_table = Table("books", meta.metadata,
-                        Column('id', Integer, Sequence('books_id_seq'), primary_key=True),
                         Column('title', Unicode(assert_unicode=True)),
                         Column('description', Unicode(assert_unicode=True)),
                         Column('author', Unicode(assert_unicode=True)),
@@ -548,13 +562,11 @@ def setup_orm(engine):
                         autoload=True,
                         autoload_with=engine)
 
-    book_mapper = orm.mapper(Book,
-                             books_table,
-                             properties={
-                                 'owner': relation(User, backref="books"),
-                                 'raw_logo': deferred(books_table.c.logo),
-                                 'location': relation(LocationTag, backref="Books"),
-                                 })
+    book_mapper = orm.mapper(Book, books_table,
+                             inherits=ContentItem,
+                             polymorphic_identity='book',
+                             polymorphic_on=content_items_table.c.content_type,
+                             properties={'raw_logo': deferred(books_table.c.logo)})
 
     global cities_table
     cities_table = Table("cities", meta.metadata,
@@ -708,11 +720,6 @@ class ContentItem(object):
             if self.search_item.rating >= limit:
                 return level
         return 0
-
-
-users_table = None
-user_monitored_subjects_table = None
-email_table = None
 
 
 class Folder(list):
@@ -2337,7 +2344,7 @@ class Department(object):
 Department.initialize()
 
 
-class Book(object):
+class Book(ContentItem):
     """Book that can be shared by user"""
 
     @apply

@@ -1,0 +1,83 @@
+/* rounded blocks */
+.rounded_block {
+    background-repeat: no-repeat;
+    border-left: 1px solid #ded8d8;
+    border-right: 1px solid #ded8d8;
+    display: block;
+    margin-bottom: 15px;
+    margin-top: 20px;
+    position: relative;
+    _margin-bottom: 15px; /* IE6 */
+    _margin-top: 15px; /* IE6 */
+    _padding: 10px; /* IE6 */
+    _border: 1px solid #ded8d8; /* IE6 */
+}
+
+.rounded_block .ctl,
+.rounded_block .ctr,
+.rounded_block .cbl,
+.rounded_block .cbr {
+    background-image: url('img/portlets_bg.png');
+    background-repeat: no-repeat;
+    display: block;
+    font-size: 2px;
+    height: 5px;
+    position: absolute;
+    _display: none; /* IE6 */
+}
+
+.rounded_block .ctl {
+    background-position: left top;
+    left: -1px;
+    right: 4px;
+    top: -5px;
+    _width: 100%; /* IE6 */
+}
+
+.rounded_block .ctr {
+    background-position: right top;
+    right: -1px;
+    top: -5px;
+    width: 5px;
+}
+
+.rounded_block .cbl {
+    background-image: url('img/portlets_bg_white.png');
+    background-position: left -5px;
+    bottom: -5px;
+    left: -1px;
+    right: 4px;
+}
+
+.rounded_block .cbr {
+    background-image: url('img/portlets_bg_white.png');
+    background-position: right -5px;
+    bottom: -5px;
+    right: -1px;
+    width: 5px;
+}
+
+.rounded_block .large_header {
+    background: #f6f6f6;
+    border-bottom: 1px solid #ded8d8;
+    height:40px;
+    position:relative;
+}
+
+.rounded_block .large_header h2 {
+    float: left;
+    margin: 9px 0 0 10px;
+}
+
+.rounded_block .large_header .header_button {
+    position: absolute;
+    right: 5px;
+    top: 9px;
+}
+
+.rounded_block .large_header .header_link {
+    font-weight: normal;
+    font-size: 11px;
+}
+
+

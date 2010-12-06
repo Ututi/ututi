@@ -186,6 +186,7 @@ class HomeController(UniversityListMixin, FederationMixin):
         c.ututi_supporters = get_supporters()
 
     def index(self):
+        c.show_registration = False
         if c.user is not None:
             redirect(url(controller='profile', action='home'))
         else:
@@ -252,6 +253,7 @@ class HomeController(UniversityListMixin, FederationMixin):
             return '\n'.join(robots)
 
     def login(self):
+        c.show_registration = None
         email = request.POST.get('login')
         password = request.POST.get('password')
         remember = True if request.POST.get('remember', None) else False

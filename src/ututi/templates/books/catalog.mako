@@ -1,15 +1,6 @@
 <%inherit file="/books/base.mako" />
 <%namespace file="/books/index.mako" name="books" import="book_information"/>
 
-<%
-url_params = {}
-if c.books_type is not None and c.books_type != "":
-    url_params['books_type_name'] = c.books_type.name_for_url()
-%>
-
-
-
-
 <%def name="science_list()">
 <div class="science_types_list">
   %for science_type in c.current_science_types:
@@ -18,7 +9,7 @@ if c.books_type is not None and c.books_type != "":
               url(controller = "books",
                   action="catalog",
                   books_department= c.books_department,
-                  science_type_id = science_type.id, **url_params))}
+                  science_type_id = science_type.id, **c.url_params))}
   </div>
   %endfor
 </div>
@@ -32,7 +23,7 @@ if c.books_type is not None and c.books_type != "":
           url(controller = "books",
               action="catalog",
               books_department= c.books_department,
-              school_grade_id = school_grade.id, **url_params))}
+              school_grade_id = school_grade.id, **c.url_params))}
   </div>
   %endfor
 </div>
@@ -46,13 +37,13 @@ if c.books_type is not None and c.books_type != "":
           url(controller = "books",
               action="catalog",
               books_department= c.books_department,
-              location_id = location.id, **url_params))}
+              location_id = location.id, **c.url_params))}
   </div>
   %endfor
 </div>
 </%def>
 
-%if c.books_department is not None and c.books_department != "":
+%if c.books_department:
 <div class="book-breadcrumbs">
   ${_('Catalog')}: ${h.link_to(_(c.books_department.capitalize()),
                  url(controller="books",
@@ -63,7 +54,7 @@ if c.books_type is not None and c.books_type != "":
                 url(controller="books",
                     action="catalog",
                     books_department = c.books_department,
-                    **url_params))}
+                    **c.url_params))}
   %endif
 </div>
 %endif
@@ -107,9 +98,7 @@ if c.books_type is not None and c.books_type != "":
   </div>
 </div>
 <script language="javascript" type="text/javascript">//<![CDATA[
-    %if (c.science_type is not None and c.science_type != "") or\
-        ( (c.locations is None or c.locations == "") and\
-          (c.school_grades is None or c.school_grades == "") ):
+    %if c.science_type or (c.locations and c.school_grades):
     show_science_types();
     %else:
     show_department_list();

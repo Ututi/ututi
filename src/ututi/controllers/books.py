@@ -1,3 +1,6 @@
+from sqlalchemy import func
+
+from sqlalchemy.sql.expression import desc
 from formencode.variabledecode import NestedVariables
 from sqlalchemy.orm.exc import NoResultFound
 from formencode.foreach import ForEach
@@ -17,12 +20,14 @@ from ututi.lib.validators import FileUploadTypeValidator, TranslatedEmailValidat
 from ututi.model import PrivateMessage
 from ututi.model import Department
 from ututi.model import LocationTag
+from ututi.model import SearchItem
 from ututi.model import Book, meta, City, BookType, SchoolGrade, ScienceType
 import ututi.lib.helpers as h
 from ututi.model import User
 from ututi.lib.validators import LocationTagsValidator
 from ututi.lib.image import serve_logo
 from ututi.lib.forms import validate
+from ututi.lib.search import search_query
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
 
@@ -85,6 +90,18 @@ class ScienceTypeValidator(BaseValidator):
         return meta.Session.query(ScienceType).filter(ScienceType.id == science_type_id).one()
 
 
+def city_from_string(string, not_found=None):
+    if not string:
+        return None
+
+    try:
+        city_id = int(string)
+    except ValueError:
+        return not_found
+
+    return meta.Session.query(City).filter(City.id == city_id).one()
+
+
 class CityValidator(BaseValidator):
     """A validator for city fields."""
 
@@ -94,16 +111,7 @@ class CityValidator(BaseValidator):
         }
 
     def _to_python(self, value, state):
-        if not value:
-            return None
-
-        try:
-            city_id = int(value)
-        except ValueError:
-            return self._notfoundmarker
-
-        return meta.Session.query(City).filter(City.id == city_id).one()
-
+        return city_from_string(value, not_found=self._notfoundmarker)
 
 class BookTypeValidator(BaseValidator):
 
@@ -203,6 +211,8 @@ class BookForm(Schema):
 class BooksController(BaseController):
 
     def __before__(self):
+        c.selected_books_department = None
+        c.book = None
         c.book_types = meta.Session.query(BookType).all()
 
     def _make_pages(self, items):
@@ -276,7 +286,7 @@ class BooksController(BaseController):
     def _add(self):
         self._load_defaults()
         c.user_phone_number = c.user.phone_number
-        last_user_book = meta.Session.query(Book).filter(Book.owner == c.user).order_by(Book.id.desc()).first()
+        last_user_book = meta.Session.query(Book).filter(Book.created == c.user).order_by(Book.id.desc()).first()
         if not(c.user_phone_number) and last_user_book:
             c.user_phone_number = last_user_book.owner_phone
         return render('books/add.mako')
@@ -289,14 +299,13 @@ class BooksController(BaseController):
         return render('books/show.mako')
 
     def _edit(self):
-
         self._load_defaults()
         return render('books/edit.mako')
 
     @ActionProtector("user")
     def edit(self, id):
         c.book = meta.Session.query(Book).filter(Book.id == id).one()
-        if c.book.owner != c.user:
+        if c.book.created != c.user:
             h.flash(_('Only owner of this book can do this action'))
             redirect(url(controller="books", action="index"))
 
@@ -361,27 +370,56 @@ class BooksController(BaseController):
         return serve_logo('book', int(id), width=width, height=height)
 
     def search(self):
-        books = meta.Session.query(Book)
-        c.books = self._make_pages(books)
-        return render('books/catalog.mako')
+        c.search_text = request.params.get('text', '')
+        c.selected_city_id = request.params.get('city', '')
+        c.selected_city = city_from_string(c.selected_city_id)
+        search_results = search_query(text=c.search_text, obj_type='book')
 
-    def _catalog_form(self):
-        return render('books/catalog.mako')
+        books = search_results
+        if c.selected_city is not None:
+            books = (search_results
+                     .join((Book, Book.id == SearchItem.content_item_id))
+                     .join(City).filter(City.id == c.selected_city.id))
+
+        cities = meta.Session.query(City.id,
+                                    City.name,
+                                    func.count(Book.id.distinct()).label('book_count'))\
+            .join(Book, search_results.subquery()).filter(Book.id != None).group_by(City.name, City.id).order_by(desc('book_count')).all()
+
+        c.filter_cities = [('', _("All cities (%(book_count)s)") % {'book_count': search_results.count()})]
+
+        for city_id, city_name, book_count in cities:
+            c.filter_cities.append((city_id, _("%(city)s (%(book_count)s)" % {
+                            'city': city_name,
+                            'book_count': book_count})))
+
+        c.books = self._make_pages(books)
+        return render('books/search.mako')
 
     def catalog(self, books_department=None, books_type_name=None, science_type_id=None, location_id=None, school_grade_id=None):
-        books_type_id = None
+        c.selected_books_department = books_department
+        c.books_department = books_department
         school_grade = None
         science_type = None
         location = None
 
+        c.current_science_types = []
         c.book_department = None
         if books_department is not None:
             c.book_department = Department.getByName(books_department)
+            c.current_science_types = ScienceType.getByDepartment(c.book_department)
 
+        c.url_params = {}
+        c.books_type = None
         if books_type_name is not None:
             c.books_type = meta.Session.query(BookType).filter(BookType.name==books_type_name).one()
+            c.url_params['books_type_name'] = books_type_name
+
         if location_id is not None:
             location = meta.Session.query(LocationTag).filter(LocationTag.id == location_id).one()
+
+        c.locations = None
+        c.school_grades = None
         if c.book_department is not None:
             if c.book_department.name == "university":
                 if location_id is not None and location is not None:
@@ -401,8 +439,11 @@ class BooksController(BaseController):
                 c.school_grades = meta.Session.query(SchoolGrade)
                 if school_grade_id is not None:
                     school_grade = meta.Session.query(SchoolGrade).filter(SchoolGrade.id == school_grade_id).one()
+
+        c.science_type = None
         if science_type_id is not None:
             c.science_type = meta.Session.query(ScienceType).filter(ScienceType.id == science_type_id).one()
+
         #book filtering:
         books = meta.Session.query(Book)
         if location is not None:
@@ -412,12 +453,12 @@ class BooksController(BaseController):
             books = books.filter(Book.department_id == c.book_department.id)
         if school_grade is not None:
             books = books.filter(Book.school_grade == school_grade)
-        if c.books_type is not None and c.books_type != "":
+        if c.books_type is not None:
             books = books.filter(Book.type == c.books_type)
-        if c.science_type is not None and c.science_type != "":
+        if c.science_type is not None:
             books = books.filter(Book.science_type == c.science_type)
         c.books = self._make_pages(books)
-        return self._catalog_form()
+        return render('books/catalog.mako')
 
     @ActionProtector("user")
     def my_books(self):
@@ -427,7 +468,7 @@ class BooksController(BaseController):
 
     @ActionProtector("user")
     def restore_book(self, book):
-        if c.user and c.user == book.owner:
+        if c.user == book.created:
             book.reset_expiration_time()
             meta.Session.commit()
         else:

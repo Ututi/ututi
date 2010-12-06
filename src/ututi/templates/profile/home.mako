@@ -1,9 +1,5 @@
 <%inherit file="/profile/home_base.mako" />
 
-<%def name="location_updated()">
-<div class="my-faculty"><a href="${c.user.location.url()}">${_('Go to my department')}</a></div>
-</%def>
-
 <%def name="phone_confirmed()">
 <div id="phone_confirmed">
   <div class="wrapper">
@@ -131,50 +127,33 @@
 </div>
 </%def>
 
-<%def name="subject_list(subjects)">
-<div id="SearchResults">
-%for n, subject in enumerate(subjects):
-<div class="${'GroupFilesContent-line-dal' if n != len(subjects) - 1 else 'GroupFilesContent-line-dal-last'}">
-  <ul class="grupes-links-list-dalykai">
-    <li>
-      <dl>
-        <dt>
-          <span class="bold">
-            <a class="subject_title" href="${subject.url()}">${h.ellipsis(subject.title, 60)}</a>
-          </span>
-          <span class="verysmall">(${_('Subject rating:')} </span><span>${h.image('/images/details/stars%d.png' % subject.rating(), alt='', class_='subject_rating')}<span class="verysmall">)</span></span>
-          %for index, tag in enumerate(subject.location.hierarchy(True)):
-          <dd class="s-line"><a class="uni" href="${tag.url()}" title="${tag.title}">${tag.title_short}</a></dd>
-          <dd class="s-line">|</dd>
-          %endfor
-          %if subject.lecturer:
-          <dd class="s-line">${_('Lect.')} <span class="orange" >${subject.lecturer}</span></dd>
-          %endif
-        <dt></dt>
-        <dd class="files"><span >${_('Files:')}</span> ${h.subject_file_count(subject.id)}</dd>
-        <dd class="pages"><span >${_('Wiki pages:')}</span> ${h.subject_page_count(subject.id)}</dd>
-        <%
-           user_count = subject.user_count()
-           group_count = subject.group_count()
-           %>
-        <dd class="watchedBy"><span >${_('The subject is watched by:')}</span>
-          ${ungettext("<span class='orange'>%(count)s</span> user", "<span class='orange'>%(count)s</span> users", user_count) % dict(count=user_count)|n}
-          ${_('and')}
-          ${ungettext("<span class='orange'>%(count)s</span> group", "<span class='orange'>%(count)s</span> groups", group_count) % dict(count=group_count)|n}
-        </dd>
-      </dl>
-    </li>
-  </ul>
-</div>
-%endfor
-</div>
+<%def name="subjects_block(subjects)">
+  %if subjects:
+  <%self:rounded_block class_='portletGroupFiles'>
+  <div class="GroupFiles GroupFilesDalykai">
+    <h2 class="portletTitle bold">
+      ${_('Subjects')}
+      <span class="right_arrow verysmall normal normal-font">
+        <a href="${url(controller='profile', action='notifications')}"> ${_('notification settings')}</a>
+      </span>
+    </h2>
+    <span class="group-but">
+      ${h.button_to(_('add subject'), url(controller='profile', action='watch_subjects'))}
+    </span>
+  </div>
+  <div>
+    ${self.subject_list(subjects)}
+  </div>
+  </%self:rounded_block>
+  %elif 'suggest_watch_subject' not in c.user.hidden_blocks_list:
+  ${self.watch_subject_nag()}
+  %endif
 </%def>
-
 
 %if c.user.location is not None:
 ${self.location_updated()}
 %else:
-${self.location_nag()}
+${self.location_nag(_('Tell us where you are studying'))}
 %endif
 
 %if c.user.phone_number is None and not 'suggest_enter_phone' in c.user.hidden_blocks_list:
@@ -209,26 +188,7 @@ ${group_list()}
 %endif
 
 <div id="subject_list">
-  %if c.user.watched_subjects:
-  <%self:rounded_block class_='portletGroupFiles'>
-  <div class="GroupFiles GroupFilesDalykai">
-    <h2 class="portletTitle bold">
-      ${_('Subjects')}
-      <span class="right_arrow verysmall normal normal-font">
-        <a href="${url(controller='profile', action='subjects')}"> ${_('notification settings')}</a>
-      </span>
-    </h2>
-    <span class="group-but">
-      ${h.button_to(_('add subject'), url(controller='profile', action='watch_subjects'))}
-    </span>
-  </div>
-  <div>
-    ${subject_list(c.user.watched_subjects)}
-  </div>
-</%self:rounded_block>
-%elif 'suggest_watch_subject' not in c.user.hidden_blocks_list:
-${self.watch_subject_nag()}
-%endif
+  ${subjects_block(c.user.watched_subjects)}
 </div>
 
 % if c.fb_random_post:

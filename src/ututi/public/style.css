@@ -307,7 +307,7 @@ button.btnMedium.btnExclamation {
 
 /* Header */
 #siteName a, #siteName2 a{
-    background: url('img/site_logo.gif') no-repeat left;
+    background: url('img/site_logo_xmas.gif') no-repeat left;
     display: block;
     height: 68px;
     left: 0;
@@ -318,7 +318,7 @@ button.btnMedium.btnExclamation {
     width: 0;
 }
 #siteName2 a{
-    background: url('img/site_logo_collapsed.gif') no-repeat left;
+    background: url('img/site_logo_collapsed_xmas.gif') no-repeat left;
     padding-left: 65px;
     }
     #socialLinks, #BreadLinks {
@@ -1445,9 +1445,6 @@ div.GroupFilesWiki{
     background: url('img/icons/exams-off.png') no-repeat 10px 5px #f6f6f6;
     height:40px;
 }
-div.ProfileSubjects {
-    background: url('images/user_logo_small.png') no-repeat 10px 5px #f6f6f6;
-}
 
 div.GroupWiki{
     background: url('img/icons/exams-off.png') no-repeat 13px 7px #f6f6f6;
@@ -1585,7 +1582,6 @@ div.single-messages span.reply-count {
     color: #333;
     font-weight: normal;
 }
-
 
 div.delete-files{
     border-top: 1px solid #ded8d8;
@@ -4181,6 +4177,10 @@ div.search-item div.description {
     background: transparent url("../img/icons/dalykas-very-small-off.png") left center no-repeat;
 }
 
+#subject_settings .mailing-option {
+    background: #F6F6F6;
+}
+
 #subject_settings .mailing-option li.disabled {
     background: transparent url("../img/icons/message-very-off-very-small.png") left center no-repeat;
 }
@@ -5029,89 +5029,6 @@ ul.universityMembersInfo li{
 
 .fullForm .form_item {
   margin-left: 25px;
-}
-
-/* Books base */
-#books-header-search {
-    position: absolute;
-    right:0;
-    top:17px;
-}
-
-#books-container #mainContent {
-    margin: 0 0 0 20px;
-    width: 656px;
-}
-
-#books-container #aside {
-    margin: 0px;
-}
-
-/* Book information */
-
-.book-information{
-    margin-top: 40px;
-}
-
-.book-information .book-title{
-    color:#666666;
-    font-weight:bold;
-}
-
-.book-information .book-cover{
-    display:inline-block;
-    vertical-align:top;
-    width:90px;
-    height: 120px;
-}
-
-.book-information .book-textual-info{
-    display:inline-block;
-    width:560px;
-    vertical-align:top;
-}
-
-.book-information .book-author, .book-information .book-description{
-    color: #b0b0b0;
-}
-
-.book-information .book-city-label{
-    font-weight: bold;
-}
-
-.book-information .book-city-label, .book-information .book-city-name{
-    color: #4e4e4e;
-}
-
-.book-information .book-price-label{
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.book-information .book-price{
-    color: #999999;
-    font-size: 16px;
-}
-
-/*My books*/
-.my-books-content h1{
-    color:#666666;
-}
-.my-books-content .user-name{
-    margin-right: 20px;
-    font-weight: bold;
-}
-.my-books-content .user-name, .my-books-content .owned-books-number{
-    color: #666666;
-    font-size: 14px;
-}
-
-.my-books-content .edit-button-container{
-    text-align: right;
-}
-
-.my-books-content button.btn span {
-padding:3px 15px 0 30px;
 }
 
 /* Dashboard actions block */

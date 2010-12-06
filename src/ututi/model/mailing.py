@@ -190,16 +190,19 @@ class GroupMailingListMessage(ContentItem):
         if self.author:
             return self.author.fullname
         else:
-            author_name, author_address = parseaddr(self.mime_message['From'])
+            author_name, author_address = parseaddr(decode_and_join_header(self.mime_message['From']))
             return '%s <%s>' % (author_name, author_address)
 
     def url(self, action=None):
-        if action == None:
-            if not self.in_moderation_queue:
-                action = 'thread'
-            else:
+        if self.in_moderation_queue:
+            if action == None:
                 action = 'moderate_post'
-        return self.group.url(controller='mailinglist', action=action, thread_id=self.thread.id)
+            thread_id = self.id
+        else:
+            if action == None:
+                action = 'thread'
+            thread_id = self.thread.id
+        return self.group.url(controller='mailinglist', action=action, thread_id=thread_id)
 
     @property
     def body(self):

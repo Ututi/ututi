@@ -31,3 +31,18 @@
     </td>
   </%def>
 </%b:light_table>
+
+<%b:item_list title='List of items' items="${range(5)}" class_='items_list'>
+  <%def name="header_link()">
+    <a href="#">this is a link</a>
+  </%def>
+  <%def name="header_button()">
+    ${h.button_to('a button', '#')}
+  </%def>
+  <%def name="row(item)">
+    Item ${item}
+  </%def>
+  <%def name="last_row(item)">
+    Last item ${item}
+  </%def>
+</%b:item_list>

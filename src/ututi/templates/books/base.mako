@@ -12,7 +12,7 @@ ${self.anonymous_menu()}
 </%def>
 
 <%def name="portlets()">
-${books_menu()}
+${books_menu(c.selected_books_department)}
 </%def>
 
 <%def name="main_menu()">

@@ -1,0 +1,1 @@
+alter table teacher_tought_subjects rename to teacher_taught_subjects;

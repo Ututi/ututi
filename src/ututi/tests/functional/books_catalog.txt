@@ -27,7 +27,7 @@ Now let's add some books:
 The book gets added and we get redirected to it's display view.
 
     >>> browser.url
-    'http://localhost/books/show/1'
+    'http://localhost/books/show/4'
 
     >>> browser.click('Upload a Book')
     >>> browser.getControl('Title').value = "My beautiful book 2"

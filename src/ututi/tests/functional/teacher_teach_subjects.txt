@@ -9,8 +9,21 @@ Let's login as a verified teacher:
     >>> form.getControl('Password').value = "password"
     >>> form.getControl('Login').click()
 
-There's yet no nice way to add subjects! As for now, Benas
-visits subject page directly:
+This teacher hasn't specified his location, so the home page
+asks him to do it right now:
+
+    >>> browser.getControl('University').value = 'Vilniaus universitetas'
+    >>> browser.getControl('Department').value = 'Ekonomikos fakultetas'
+    >>> browser.getControl('save').click()
+
+A link to the specified department appears:
+
+    >>> browser.getLink('Go to my department').click()
+    >>> browser.printQuery("//h1[@class='pageTitle']/text()")
+    Ekonomikos fakultetas
+
+XXX now there should be a way to find subjects for adding, even from
+department's page. Benas visits subject's page directly:
 
     >>> browser.open('http://localhost/subject/vu/mat_analize')
 
@@ -23,6 +36,16 @@ the course page and a flash message is displayed:
 
     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
     The course has been added to your taught courses list.
+
+This course is now displayed in his home page:
+
+    >>> browser.getLink('Home').click()
+    >>> browser.printQuery("id('subject_list')//a[@class='subject_title']/text()")
+    Matematinė analizė
+
+He can click the link to visit course's home page:
+
+    >>> browser.getLink('Matematinė analizė').click()
 
 If he wants to, he can say that he is no longer teaching this course.
 Again, an appropriate flash message is displayed:

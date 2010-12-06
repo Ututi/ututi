@@ -120,9 +120,9 @@ When creating a subject, the user can select to watch it:
     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
     You are now watching the subject Testing subject
 
-    >>> browser.open('/profile/subjects')
-    >>> browser.printCssQuery(".subject_title", include_attributes=[''])
-    <a>Testing subject</a>
+    >>> browser.open('/profile/watch_subjects')
+    >>> browser.printQuery("id('watched_subjects')//text()")
+    Testing subject
 
 Subject names with parentheses should not cause problems:
 
