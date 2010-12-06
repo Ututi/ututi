@@ -1,15 +1,13 @@
 import csv
-import string
 import os
 import logging
-import base64
 import datetime
+
+from pylons.controllers.util import redirect
 
 from sqlalchemy.sql.expression import or_
 from sqlalchemy.sql.expression import desc
-from sqlalchemy.sql.expression import not_
 from sqlalchemy import func
-from magic import from_buffer
 from datetime import date
 from webhelpers import paginate
 from formencode import htmlfill
@@ -25,9 +23,7 @@ from babel.dates import parse_date
 from babel.dates import format_date
 
 from pylons import request, tmpl_context as c, config, url
-from pylons.controllers.util import redirect, abort
 
-from random import Random
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import PhoneNumberValidator, GroupCouponValidator, validate
@@ -37,12 +33,10 @@ from ututi.model import Department
 from ututi.model import Region
 from ututi.model import FileDownload
 from ututi.model import SimpleTag
-from ututi.model import UserSubjectMonitoring
-from ututi.model import Page, SMS, GroupCoupon
+from ututi.model import SMS, GroupCoupon
 from ututi.model import (meta, User, Email, LocationTag, Group, Subject,
-                         GroupMember, GroupMembershipType, File, PrivateMessage,
-                         Teacher)
-from ututi.model import Notification, City, ScienceType, SchoolGrade, Book, BookType
+                         File, PrivateMessage, Teacher)
+from ututi.model import Notification, City, ScienceType, SchoolGrade, BookType
 from ututi.controllers.books import BookDepartmentValidator
 
 from ututi.lib import helpers as h
@@ -306,7 +300,6 @@ class AdminController(BaseController):
         for row in self._getReader():
             uni_id = row[5]
             fac_id = row[4]
-            location = LocationTag.get([uni_id, fac_id])
 
             id, title, desc, year = row[:4]
             group = Group.get(id)
@@ -333,7 +326,6 @@ class AdminController(BaseController):
             location_path = reversed(row[2:4])
             tags = filter(bool, [tag.strip() for tag in row[5].split(',')])
             description = row[-2]
-            id = ''.join(Random().sample(string.ascii_lowercase, 8)) # use random id first
             location = LocationTag.get(location_path)
 
             #do not import duplicates
@@ -745,3 +737,7 @@ class AdminController(BaseController):
     @ActionProtector("root")
     def example_blocks(self):
         return render('sections/example_blocks.mako')
+
+    @ActionProtector("root")
+    def example_lists(self):
+        return render('sections/example_lists.mako')
