@@ -109,8 +109,13 @@ class WatchedSubjectsMixin(object):
 
     @ActionProtector("user")
     def unwatch_subject(self):
+        # XXX this will need to be refactored.
         self._unwatch_subject()
-        redirect(request.referrer)
+        if request.params.has_key('js'):
+            return 'OK'
+        else:
+            h.flash(_("The subject has been removed from your watched subjects list."))
+            redirect(request.referrer)
 
     @ActionProtector("user")
     def js_unwatch_subject(self):

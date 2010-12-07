@@ -150,11 +150,13 @@ ul.teacher-list {
         background: url('img/icons/watching_13.png') no-repeat left center;
     }
 
+    .subject-description .unwatch-button,
     .subject-description .unteach-button {
         float: right;
         display: none;
     }
 
+    .subject-description:hover .unwatch-button,
     .subject-description:hover .unteach-button {
         display: block;
     }
