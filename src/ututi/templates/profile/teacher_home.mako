@@ -1,6 +1,25 @@
 <%inherit file="/profile/home_base.mako" />
 <%namespace file="/sections/standard_buttons.mako" import="close_button" />
 
+<%def name="head_tags()">
+${parent.head_tags()}
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.unteach-button').click(function() {
+      var actionurl = this.href + '&js=1';
+      var container = $(this).closest('.subject-description');
+      $.post(actionurl, function(status) {
+        if (status == 'OK')
+          container.slideUp('fast', function() {
+            $(this).remove();
+          });
+      });
+      return false;
+    });
+  });
+</script>
+</%def>
+
 <%def name="teacher_unverified_nag()">
 <%self:rounded_block id="teacher_unverified" class_="portletTeacherUnverified">
 <div class="inner">
