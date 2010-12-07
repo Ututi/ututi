@@ -95,3 +95,11 @@ It doesn't show in the home page as well:
     >>> browser.getLink('Home').click()
     >>> browser.printQuery("id('subject_list')//div[@class='subject-description-list']//dt//text()")
     Logika
+
+Teacher can also say that he is no longer teaching a course directly from his
+home page. If he clicks the button, he stays on the home page and flash message
+appears:
+
+    >>> browser.getLink(url='/profile/unteach_subject?subject_id=4').click()
+    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
+    The course has been removed from your taught courses list.

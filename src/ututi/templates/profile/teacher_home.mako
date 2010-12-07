@@ -1,4 +1,5 @@
 <%inherit file="/profile/home_base.mako" />
+<%namespace file="/sections/standard_buttons.mako" import="close_button" />
 
 <%def name="teacher_unverified_nag()">
 <%self:rounded_block id="teacher_unverified" class_="portletTeacherUnverified">
@@ -51,6 +52,7 @@
   <dl>
     %for n, subject in enumerate(subjects):
     <div class="subject-description ${'with-top-line' if n else ''}">
+      ${close_button(url(controller='profile', action='unteach_subject', subject_id=subject.id), class_='unteach-button')}
       <div>
         <dt>
           <a href="${subject.url()}">${h.ellipsis(subject.title, 60)}</a>

@@ -1,5 +1,6 @@
 
 from pylons.controllers.util import redirect
+from pylons.i18n import _
 from pylons.templating import render_mako_def
 from pylons import request
 from pylons import url
@@ -15,6 +16,7 @@ from ututi.lib.search import _filter_watched_subjects
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import render
 from ututi.controllers.search import SearchSubmit
+import ututi.lib.helpers as h
 
 class WatchedSubjectsMixin(object):
     @ActionProtector("user")
@@ -85,6 +87,10 @@ class WatchedSubjectsMixin(object):
         c.user.unwatchSubject(self._getSubject())
         meta.Session.commit()
 
+    def _unteach_subject(self):
+        c.user.unteach_subject(self._getSubject())
+        meta.Session.commit()
+
     @ActionProtector("user")
     def watch_subject(self):
         self._watch_subject()
@@ -110,6 +116,15 @@ class WatchedSubjectsMixin(object):
     def js_unwatch_subject(self):
         self._unwatch_subject()
         return "OK"
+
+    @ActionProtector("teacher")
+    def unteach_subject(self):
+        self._unteach_subject()
+        if request.params.has_key('js'):
+            return 'OK'
+        else:
+            h.flash(_("The course has been removed from your taught courses list."))
+            redirect(request.referrer)
 
     def _ignore_subject(self):
         c.user.ignoreSubject(self._getSubject())
