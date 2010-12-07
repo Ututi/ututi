@@ -19,9 +19,9 @@ Hmm, we found no books, must be because we did not add any yet. Let's
 fix that:
 
     >>> browser.click('Upload a Book')
-    >>> browser.getControl('Title').value = "My physics book"
+    >>> browser.getControl('Book title').value = "My physics book"
     >>> browser.getControl('Author').value = "Mr. God"
-    >>> browser.getControl('Book department').displayValue = ['Other']
+    >>> browser.getControl(name="department").value = ['other']
     >>> browser.getControl('Book type').displayValue = ['Vadovėlis']
     >>> browser.getControl(name='other_science_type').displayValue = ['Kita']
     >>> browser.getControl('City').displayValue = ['Vilnius']
@@ -73,18 +73,18 @@ If we add one more book to this city, and another book to another
 city, the widget should reflect that:
 
     >>> browser.click('Upload a Book')
-    >>> browser.getControl('Title').value = "My other physics book"
+    >>> browser.getControl('Book title').value = "My other physics book"
     >>> browser.getControl('Author').value = "Mr. Good"
-    >>> browser.getControl('Book department').displayValue = ['Other']
+    >>> browser.getControl(name='department').value = ['other']
     >>> browser.getControl('Book type').displayValue = ['Vadovėlis']
     >>> browser.getControl(name='other_science_type').displayValue = ['Kita']
     >>> browser.getControl('City').displayValue = ['Vilnius']
     >>> browser.getControl('Save').click()
 
     >>> browser.click('Upload a Book')
-    >>> browser.getControl('Title').value = "My other maths book"
+    >>> browser.getControl('Book title').value = "My other maths book"
     >>> browser.getControl('Author').value = "Goody good"
-    >>> browser.getControl('Book department').displayValue = ['Other']
+    >>> browser.getControl(name='department').value = ['other']
     >>> browser.getControl('Book type').displayValue = ['Vadovėlis']
     >>> browser.getControl(name='other_science_type').displayValue = ['Kita']
     >>> browser.getControl('City').displayValue = ['Kaunas']

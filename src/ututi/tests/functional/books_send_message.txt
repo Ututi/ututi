@@ -11,10 +11,10 @@ Set up
     >>> browser.open('http://localhost/books/')
 
     >>> browser.click('Upload a Book')
-    >>> browser.getControl('Title').value = "My physics book"
+    >>> browser.getControl('Book title').value = "My physics book"
     >>> browser.getControl('Author').value = "Mr. God"
-    >>> browser.getControl('Brief description of the book').value = "A perfect book for the evening"
-    >>> browser.getControl('Book department').displayValue = ['School']
+    >>> browser.getControl('Comment').value = "A perfect book for the evening"
+    >>> browser.getControl(name='department').value = ['school']
     >>> browser.getControl('School grade').displayValue = ['1 kl.']
     >>> browser.getControl(name='school_science_type').displayValue = ['Fizika']
     >>> browser.getControl('Book type').displayValue = ['Vadovėlis']

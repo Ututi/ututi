@@ -4,11 +4,6 @@
 
 <%namespace file="/widgets/tags.mako" import="*"/>
 
-<%def name="form_title(title)">
-<h1>${title}</h1>
-</%def>
-
-
 <%def name="head_tags()">
 ${parent.head_tags()}
 <%newlocationtag:head_tags />
@@ -17,7 +12,7 @@ ${parent.head_tags()}
 <%def name="book_logo_field()">
 <form:error name="book_logo_upload" />
 <label>
-  <span class="labelText">${_('Book cover')}</span>
+  <span class="labelText">${_('Image')}</span>
   <input type="file" name="logo" id="book_logo_upload" class="line"/>
 </label>
 </%def>
@@ -27,91 +22,100 @@ ${parent.head_tags()}
 <form:error name="${field_name}" />
 </%def>
 
-<%def name="form(action)">
+<%def name="form(action, title)">
 ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
-
 <script language="javascript" type="text/javascript">//<![CDATA[
-  function show_department(){
-      department = $('select#department option:selected').attr('value')
-      $('.department').hide();
-      $('.science_type_field').hide();
-      if(department != ""){
-          $('#'+department+'_science_type').show();
-          $('#department_'+department).show();
-      }else{
-          $('.science_type_field').hide();
-      }
-  }
+function show_department(){
+    if($('input.department_selection:checked').first()){
+        department = $('input.department_selection:checked').first().attr('value');
+    }
+    $('.department').hide();
+    $('.science_type_field').hide();
+    $('.department-dependent-field').hide();
+    if(department){
+        $('.department-dependent-field').show();
+        $('#'+department+'_science_type').show();
+        $('#'+department+'-fields').show();
+    }
+}
 //]]></script>
 
 <form method="post" action="${action}"
-     id="book_add_form" enctype="multipart/form-data" class="fullForm">
+      id="book_add_form" enctype="multipart/form-data" class="fullForm">
   <fieldset>
-  <input type="hidden" name="id" value=""/>
-  <div class="book-logo">
-    ${self.book_logo_field()}
-  </div>
-  <div class="basic-book-info">
-    ${h.input_line('title', _('Title'))}
-    ${h.input_line('author', _('Author'))}
-    ${h.input_area('description', _('Brief description of the book'))}<br />
-    <label>${_('Book department')}: ${h.select('department', None, c.book_departments)}</label>
-    <form:error name="department_id">
- </div>
-  <div id="department_university" class="department">
-    ${location_widget(2)}
-    ${h.input_line('course', _('Course'))}
-  </div>
-  <div id="department_school" class="department">
-    <%self:selectbox field_name = "school_grade" label="${_('School grade')}", objects="${c.school_grades}" />
-  </div>
-  <div id="university_science_type" class="science_type_field" style="display: none">
-    <%self:selectbox field_name = "university_science_type" label="${_('Science type')}", objects="${c.university_science_types}" />
-  </div>
-  <div id="school_science_type" class="science_type_field" style="display: none;">
-    <%self:selectbox field_name = "school_science_type" label="${_('Science type')}", objects="${c.school_science_types}" />
-  </div>
-  <div id="other_science_type" class="science_type_field" style="display: none;">
-    <%self:selectbox field_name = "other_science_type" label="${_('Science type')}", objects="${c.other_science_types}" />
-  </div>
-  <form:error name="science_type" />
-  <div class="book-transfer-info">
-    ${h.input_line('price', _('Price'))}
-    <p>
-      <%self:selectbox field_name = "book_type" label="${_('Book type')}", objects="${c.book_types}" />
-    </p>
-    <p>
-      <%self:selectbox field_name = "city" label="${_('City')}", objects="${c.cities}" />
-    </p>
-    <p>
-    </p>
-  </div>
-  <br />
+    <div class="portlet book-form-block">
+      <div class="ctl"></div>
+      <div class="ctr"></div>
 
-  <div class="owner-information">
-    <div class="floatleft avatar">
-      %if c.user.logo is not None:
-      <img src="${url(controller='user', action='logo', id=c.user.id, width=70, height=70)}" alt="logo" />
-      %else:
-      ${h.image('/img/profile-avatar.png', alt='logo')|n}\
-      %endif
+      <div class="inner">
+        <h1 class="book-form-title">${title}</h1>
+        <div class="basic-book-info">
+          ${h.input_line('title', _('Book title'), class_="wide")}
+          ${h.input_line('author', _('Author'))}
+        </div>
+        <input type="hidden" name="id" value=""/>
+        <div class="book-logo">
+          ${self.book_logo_field()}
+        </div>
+        <div class="department-dependent-field">
+          ${h.input_area('description', _('Comment'))}
+        </div>
+        %for department in c.book_departments:
+        ${h.radio("department", department[0], class_="department_selection")} ${department[1]}
+        %endfor
+        <form:error name="department_id" />
+      </div>
+      <div id="university-fields" class="department">
+        ${location_widget(2)}
+        ${h.input_line('course', _('Course'))}
+      </div>
+      <div id="school-fields" class="department">
+        <%self:selectbox field_name = "school_grade" label="${_('School grade')}", objects="${c.school_grades}" />
+      </div>
+      <div id="university_science_type" class="science_type_field" style="display: none">
+        <%self:selectbox field_name = "university_science_type" label="${_('Science type')}", objects="${c.university_science_types}" />
+      </div>
+      <div id="school_science_type" class="science_type_field" style="display: none;">
+        <%self:selectbox field_name = "school_science_type" label="${_('Science type')}", objects="${c.school_science_types}" />
+      </div>
+      <div id="other_science_type" class="science_type_field" style="display: none;">
+        <%self:selectbox field_name = "other_science_type" label="${_('Science type')}", objects="${c.other_science_types}" />
+      </div>
+      <form:error name="science_type" />
+      <div class="book-transfer-info department-dependent-field">
+        ${h.input_line('price', _('Price'))}
+        <p>
+          <%self:selectbox field_name = "book_type" label="${_('Book type')}", objects="${c.book_types}" />
+        </p>
+        <p>
+          <%self:selectbox field_name = "city" label="${_('City')}", objects="${c.cities}" />
+        </p>
+        <p>
+        </p>
+      </div>
+      <br />
     </div>
-    <div class="floatleft owner-information-fields">
-      <h2>${_('Enter your cotact information:')}</h2>
-      ${h.input_line("owner_name", _("Name"), c.user.fullname)}
-      ${h.input_line("owner_phone", _("Phone"), c.user_phone_number)}
-      ${h.input_line("owner_email", _("E-mail"), (c.user.emails[0].email if c.user.emails[0] else ""))}
-      ${h.input_submit(_('Save'))}
+
+    <div class="rounded-block book-form-block">
+      <div class="cbl"></div>
+      <div class="cbr"></div>
+
+
+      <div class="inner">
+        <h1 class="book-form-title">${_('Owner information')}</h1>
+        <div class="owner-information">
+          ${h.input_line("owner_name", _("Full name"), c.user.fullname)}
+          ${h.input_line("owner_email", _("Email"), (c.user.emails[0].email if c.user.emails[0] else ""))}
+          ${h.input_line("owner_phone", _("Phone number"), c.user_phone_number)}
+          <div class="submit-button">${h.input_submit(_('Save'))}</div>
+        </div>
+      </div>
     </div>
-  </div>
   </fieldset>
 </form>
 <script type="text/javascript">
   show_department();
-  $('#department').change(show_department);
+  $("input[name='department']").change(show_department);
 </script>
 </%def>
-
-<a class="back-link" href="${url(controller='books', action='index')}">${_('back to catalog')}</a>
-<%self:form_title title="${_('New book')}" />
-<%self:form action="${url(controller='books', action='create')}"/>
+<%self:form action="${url(controller='books', action='create')}" title="${_('New book')}"/>

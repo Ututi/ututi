@@ -13,10 +13,10 @@ Set up
 Now let's add some books:
 
     >>> browser.click('Upload a Book')
-    >>> browser.getControl('Title').value = "My physics book"
+    >>> browser.getControl('Book title').value = "My physics book"
     >>> browser.getControl('Author').value = "Mr. God"
-    >>> browser.getControl('Brief description of the book').value = "A perfect book for the evening"
-    >>> browser.getControl('Book department').displayValue = ['School']
+    >>> browser.getControl('Comment').value = "A perfect book for the evening"
+    >>> browser.getControl(name='department').value = ['school']
     >>> browser.getControl('School grade').displayValue = ['1 kl.']
     >>> browser.getControl(name='school_science_type').displayValue = ['Fizika']
     >>> browser.getControl('Book type').displayValue = ['Vadovėlis']
@@ -30,10 +30,10 @@ The book gets added and we get redirected to it's display view.
     'http://localhost/books/show/4'
 
     >>> browser.click('Upload a Book')
-    >>> browser.getControl('Title').value = "My beautiful book 2"
+    >>> browser.getControl('Book title').value = "My beautiful book 2"
     >>> browser.getControl('Author').value = "Mr. God"
-    >>> browser.getControl('Brief description of the book').value = "A perfect book for evening"
-    >>> browser.getControl('Book department').displayValue = ['Other']
+    >>> browser.getControl('Comment').value = "A perfect book for evening"
+    >>> browser.getControl(name='department').value = ['other']
     >>> browser.getControl('Book type').displayValue = ['Vadovėlis']
     >>> browser.getControl('City').displayValue = ['Vilnius']
     >>> browser.getControl(name='other_science_type').displayValue = ['Kita']
@@ -42,10 +42,10 @@ The book gets added and we get redirected to it's display view.
     >>> browser.getControl('Save').click()
 
     >>> browser.click('Upload a Book')
-    >>> browser.getControl('Title').value = "University book"
+    >>> browser.getControl('Book title').value = "University book"
     >>> browser.getControl('Author').value = "Mr. God"
-    >>> browser.getControl('Brief description of the book').value = "A perfect book for evening"
-    >>> browser.getControl('Book department').displayValue = ['University']
+    >>> browser.getControl('Comment').value = "A perfect book for evening"
+    >>> browser.getControl(name='department').value = ['university']
     >>> browser.getControl(name='location-0').value = "Vilniaus universitetas"
     >>> browser.getControl('Department').value = "Ekonomikos fakultetas"
     >>> browser.getControl('Book type').displayValue = ['Vadovėlis']

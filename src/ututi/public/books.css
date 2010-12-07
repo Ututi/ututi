@@ -3,7 +3,7 @@
    width: 180px;
 }
 
-.search_block {
+.search_block, .book-form-block {
     background-color: #F6F6F6;
     background-position: 23px 5px;
     margin-bottom: 24px;
@@ -11,6 +11,23 @@
     margin-right: 15px;
     padding-left: 25px;
     padding-bottom: 15px;
+}
+
+
+/* Books base */
+#books-header-search {
+    position: absolute;
+    right:0;
+    top:17px;
+}
+
+#books-container #mainContent {
+    margin: 0 0 0 20px;
+    width: 656px;
+}
+
+#books-container #aside {
+    margin: 0px;
 }
 
 #search_results_header {
@@ -27,20 +44,32 @@
     float: right;
 }
 
-/* Books base */
-#books-header-search {
+/*Books form*/
+
+.book-form-block{
+    margin-top:7px;
+    border-bottom: 1px solid #DED8D8;
+}
+
+h1.book-form-title{
+    font-size: 24px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.rounded-block.book-form-block {
+    background-color: #FFF;
+    margin-top: 0px;
+    padding-top:1px;
+}
+
+.portlet.book-form-block {
+    margin-bottom: 0px;
+}
+.book-form-block .submit-button{
+    bottom: 24px;
     position: absolute;
-    right:0;
-    top:17px;
-}
-
-#books-container #mainContent {
-    margin: 0 0 0 20px;
-    width: 656px;
-}
-
-#books-container #aside {
-    margin: 0px;
+    right: 15px;
 }
 
 /* Book information */

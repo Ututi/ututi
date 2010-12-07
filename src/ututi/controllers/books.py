@@ -230,7 +230,7 @@ class BooksController(BaseController):
         return render('books/index.mako')
 
     def _load_defaults(self):
-        c.book_departments = [('', '')] + [(d.name, d.title) for d in Department.values()]
+        c.book_departments = [(d.name, d.title) for d in Department.values()]
         c.school_grades = meta.Session.query(SchoolGrade).all()
         c.cities = meta.Session.query(City).all()
         self._load_science_types()
