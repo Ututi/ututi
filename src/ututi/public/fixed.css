@@ -119,13 +119,18 @@ ul.teacher-list {
     .subject-description dt {
         font-weight: bold;
         font-size: 13px;
+        margin-right: 10px;
     }
 
     .subject-description dd {
-        margin-left: 15px;
+        margin-right: 15px;
     }
 
-    .subject-description dd.tags, .subject-description dd.tags a {
+    .subject-description dd.location {
+        margin-right: 0px; /* Lecturer follows */
+    }
+
+    .subject-description dd.location, .subject-description dd.location a {
         color: #668000;
         text-transform: uppercase;
     }

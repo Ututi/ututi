@@ -76,7 +76,7 @@ ${parent.head_tags()}
         <dt>
           <a href="${subject.url()}">${h.ellipsis(subject.title, 60)}</a>
         </dt>
-        <dd class="tags">
+        <dd class="location">
           %for index, tag in enumerate(subject.location.hierarchy(True), 1):
             %if index != 1:
             | ## Separator
@@ -86,7 +86,7 @@ ${parent.head_tags()}
         </dd>
       </div>
       <div style="margin-top: 5px">
-        <span class="tiny-text">
+        <span class="tiny-text" style="margin-right: 5px">
           ${_('Add:')}
         </span>
         <dd class="files">
