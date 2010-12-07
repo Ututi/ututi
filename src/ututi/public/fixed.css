@@ -101,3 +101,65 @@ ul.teacher-list {
         padding-left: 12px;
         margin: 2px 0px;
     }
+
+/* SUBJECT DESCRIPTION
+ */
+
+.subject-description {
+    color: #666666;
+    font-size: 11px;
+    padding: 10px 15px 10px 30px;
+    background: url("img/icons/dalykas-very-small.png") no-repeat 10px 10px;
+}
+
+    .subject-description dt, .subject-description dd {
+        display: inline;
+    }
+
+    .subject-description dt {
+        font-weight: bold;
+        font-size: 13px;
+    }
+
+    .subject-description dd {
+        margin-left: 15px;
+    }
+
+    .subject-description dd.tags, .subject-description dd.tags a {
+        color: #668000;
+        text-transform: uppercase;
+    }
+
+    .subject-description dd.files {
+        padding-left: 18px;
+        background: url('img/icons/files_13.png') no-repeat left center;
+    }
+
+    .subject-description dd.pages {
+        padding-left: 18px;
+        background: url('img/icons/pages_13.png') no-repeat left center;
+    }
+
+    .subject-description dd.watch-count {
+        padding-left: 18px;
+        background: url('img/icons/watching_13.png') no-repeat left center;
+    }
+
+/* UTILITY CLASSES
+ */
+
+.with-bottom-line {
+    border-bottom: 1px solid #DED8D8;
+}
+
+.with-top-line {
+    border-top: 1px solid #DED8D8;
+}
+
+.small-text {
+    font-size: 11px;
+}
+
+.tiny-text {
+    font-size: 10px;
+}
