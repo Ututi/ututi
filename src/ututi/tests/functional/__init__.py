@@ -73,6 +73,9 @@ def ftest_setUp(test):
     meta.Session.add(subj)
     alt_user.watchSubject(subj)
 
+    subj = Subject(u'logika', u'Logika', LocationTag.get(u'vu'), u'doc. S. Norgela')
+    meta.Session.add(subj)
+
     t = SimpleTag(u'simple_tag')
     meta.Session.add(t)
 

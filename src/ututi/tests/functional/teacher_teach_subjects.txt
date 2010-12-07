@@ -61,14 +61,26 @@ If we click on the link, we are redirected to Benas' page:
 The selected course is now displayed in his home page:
 
     >>> browser.getLink('Home').click()
-    >>> browser.printQuery("id('subject_list')//a[@class='subject_title']/text()")
+    >>> browser.printQuery("id('subject_list')//div[@class='subject-description-list']//dt//text()")
     Matematinė analizė
 
-He can click the link to visit course's home page:
+Let's teach one more subject:
+
+    >>> browser.open('http://localhost/subject/vu/logika')
+    >>> browser.getControl("I teach this course").click()
+
+It is also listed in the home page:
+
+    >>> browser.getLink('Home').click()
+    >>> browser.printQuery("id('subject_list')//div[@class='subject-description-list']//dt//text()")
+    Matematinė analizė
+    Logika
+
+He can click the link to visit some course's home page:
 
     >>> browser.getLink('Matematinė analizė').click()
 
-If he wants to, he can say that he is no longer teaching this course.
+If teacher wants to, he can say that he is no longer teaching this course.
 Again, an appropriate flash message is displayed:
 
     >>> browser.getControl("Remove from my taught courses").click()
@@ -77,3 +89,9 @@ Again, an appropriate flash message is displayed:
 
     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
     The course has been removed from your taught courses list.
+
+It doesn't show in the home page as well:
+
+    >>> browser.getLink('Home').click()
+    >>> browser.printQuery("id('subject_list')//div[@class='subject-description-list']//dt//text()")
+    Logika
