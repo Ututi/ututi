@@ -79,20 +79,9 @@ page is responsible for that functionality, so teacher is directed there:
     >>> browser.url
     'http://localhost/subject/vu/mat_analize'
 
-Let's teach one more subject:
-
-    >>> browser.open('http://localhost/subject/vu/logika')
-    >>> browser.getControl("I teach this course").click()
-
-It is also listed in the home page:
-
-    >>> browser.getLink('Home').click()
-    >>> browser.printQuery("id('subject_list')//div[@class='subject-description-list']//dt//text()")
-    Matematinė analizė
-    Logika
-
 He can click the link to visit some course's home page:
 
+    >>> browser.goBack()
     >>> browser.getLink('Matematinė analizė').click()
 
 If teacher wants to, he can say that he is no longer teaching this course.
@@ -109,12 +98,20 @@ It doesn't show in the home page as well:
 
     >>> browser.getLink('Home').click()
     >>> browser.printQuery("id('subject_list')//div[@class='subject-description-list']//dt//text()")
-    Logika
 
 Teacher can also say that he is no longer teaching a course directly from his
 home page. If he clicks the button, he stays on the home page and flash message
-appears:
+appears. So let's again add and remove the course from taught courses list:
 
-    >>> browser.getLink(url='/profile/unteach_subject?subject_id=4').click()
+    >>> browser.open('http://localhost/subject/vu/mat_analize')
+    >>> browser.getControl("I teach this course").click()
+    >>> browser.url
+    'http://localhost/subject/vu/mat_analize'
+
+    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
+    The course has been added to your taught courses list.
+
+    >>> browser.getLink('Home').click()
+    >>> browser.getLink(url='/profile/unteach_subject?subject_id=3').click()
     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
     The course has been removed from your taught courses list.
