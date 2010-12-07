@@ -64,6 +64,21 @@ The selected course is now displayed in his home page:
     >>> browser.printQuery("id('subject_list')//div[@class='subject-description-list']//dt//text()")
     Matematinė analizė
 
+Teacher can click "Create wiki page" link to be directed straight to 
+page creation view:
+
+    >>> browser.getLink("Create wiki page").click()
+    >>> browser.url
+    'http://localhost/subject/vu/mat_analize/pages/add'
+
+As for files, there is no "add file" view available, and subjects home
+page is responsible for that functionality, so teacher is directed there:
+
+    >>> browser.goBack()
+    >>> browser.getLink("Upload file").click()
+    >>> browser.url
+    'http://localhost/subject/vu/mat_analize'
+
 Let's teach one more subject:
 
     >>> browser.open('http://localhost/subject/vu/logika')

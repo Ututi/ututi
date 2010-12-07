@@ -90,10 +90,12 @@ ${parent.head_tags()}
           ${_('Add:')}
         </span>
         <dd class="files">
-          ${_('Files:')} ${h.subject_file_count(subject.id)}
+          <a href="${subject.url()}">${_("Upload file")}</a>
+          (${h.subject_file_count(subject.id)})
         </dd>
         <dd class="pages">
-          ${_('Wiki pages:')} ${h.subject_page_count(subject.id)}
+          <a href="${url(controller='subjectpage', action='add', id=subject.subject_id, tags=subject.location_path)}">${_("Create wiki page")}</a>
+          (${h.subject_page_count(subject.id)})
         </dd>
         <dd class="watch-count">
           <%
