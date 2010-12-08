@@ -164,7 +164,7 @@ ${parent.head_tags()}
         </dd>
       </div>
       <div style="margin-top: 5px">
-        <dd class="location">
+        <dd class="location-tags">
           %for index, tag in enumerate(subject.location.hierarchy(True)):
           <a href="${tag.url()}" title="${tag.title}">${tag.title_short}</a>
           |

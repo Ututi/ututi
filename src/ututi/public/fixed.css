@@ -126,13 +126,8 @@ ul.teacher-list {
         margin-right: 15px;
     }
 
-    .subject-description dd.location {
+    .subject-description dd.location-tags {
         margin-right: 0px; /* Lecturer follows */
-    }
-
-    .subject-description dd.location, .subject-description dd.location a {
-        color: #668000;
-        text-transform: uppercase;
     }
 
     .subject-description dd.files {
@@ -191,6 +186,14 @@ ul.teacher-list {
         display: inline-block;
         width: 400px;
     }
+
+/* COMMON LOOKS
+ */
+
+.location-tags, .location-tags a {
+    color: #668000;
+    text-transform: uppercase;
+}
 
 /* UTILITY CLASSES
  */

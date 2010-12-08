@@ -33,18 +33,17 @@
 
 <%def name="item_location(object)">
   %if object.location:
- <span class="green">
- <%
+  <%
     hierarchy_len = len(object.location.hierarchy())
- %>
-
- %for index, tag in enumerate(object.location.hierarchy(True)):
-   <a class="green" href="${tag.url()}">${tag.title_short}</a>
-   %if index != hierarchy_len - 1:
+  %>
+  <span class="location-tags">
+  %for index, tag in enumerate(object.location.hierarchy(True)):
+    <a href="${tag.url()}">${tag.title_short}</a>
+    %if index != hierarchy_len - 1:
         |
-   %endif
- %endfor
- </span>
+    %endif
+  %endfor
+  </span>
   %endif
 </%def>
 

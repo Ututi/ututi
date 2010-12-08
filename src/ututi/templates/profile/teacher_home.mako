@@ -76,7 +76,7 @@ ${parent.head_tags()}
         <dt>
           <a href="${subject.url()}">${h.ellipsis(subject.title, 60)}</a>
         </dt>
-        <dd class="location">
+        <dd class="location-tags">
           %for index, tag in enumerate(subject.location.hierarchy(True), 1):
             %if index != 1:
             | ## Separator

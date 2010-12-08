@@ -4,7 +4,7 @@
 <%namespace file="/portlets/subject.mako" import="*"/>
 <%namespace file="/portlets/user.mako" import="*"/>
 <%namespace file="/portlets/banners/base.mako" import="*"/>
-
+<%namespace file="/sections/content_snippets.mako" import="item_location" />
 <%namespace file="/widgets/tags.mako" import="*"/>
 
 <%def name="title()">
@@ -31,7 +31,7 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
 
   %if c.user.location is not None:
   <div id="location-preview">
-    ${", ".join(c.user.location.hierarchy())}
+    ${item_location(c.user)}
     <a id="location-edit-link" href="#">${_("Edit")}</a>
   </div>
   <div id="location-edit">
