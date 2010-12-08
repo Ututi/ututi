@@ -156,6 +156,10 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
     def add(self):
         return self._add_form()
 
+    @ActionProtector("verified_teacher")
+    def teacher_add(self):
+        return render('subject/teacher_add.mako')
+
     @validate(schema=NewSubjectForm, form='_add_form')
     @ActionProtector("user")
     def create(self):
@@ -164,6 +168,10 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
 
         subj = self._create_subject()
         meta.Session.commit()
+
+        if c.user.is_teacher:
+            c.user.teach_subject(subj)
+            meta.Session.commit()
 
         if self.form_result.has_key('watch_subject'):
             c.user.watchSubject(subj)

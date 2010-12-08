@@ -1,0 +1,81 @@
+Test teacher's create subject workflow
+======================================
+
+Let's login as a verified teacher:
+
+    >>> browser = Browser()
+    >>> form = browser.getForm('loginForm')
+    >>> form.getControl('Email').value = "benas@ututi.lt"
+    >>> form.getControl('Password').value = "password"
+    >>> form.getControl('Login').click()
+
+We go directly to subject creation page:
+
+    >>> browser.open('http://localhost/subject/teacher_add')
+
+Observe that the page doesn't show "Lecturer's" field.
+Instead, a hidden value with teacher's name is silently submitted:
+
+    >>> browser.getControl(name="lecturer").value
+    'Benas'
+
+The teacher hasn't specified his location yet, so location fields
+are displayed empty:
+
+    >>> browser.getControl('University').value
+    ''
+
+    >>> browser.getControl('Department').value
+    ''
+
+Let's fill out the form to create the subject:
+
+    >>> browser.getControl('University').value = 'Vilniaus universitetas'
+    >>> browser.getControl('Department').value = 'Ekonomikos fakultetas'
+    >>> browser.getControl('Title').value = 'Never nude'
+    >>> browser.getControl('Save').click()
+    >>> print browser.url
+    http://localhost/subject/vu/ef/never_nude
+
+On the subject page Benas is listed as the lecturer:
+
+    >>> browser.printQuery(".dalyko-info .teacher-list li", selector='cssselect', include_attributes=[''])
+    <li>
+        <a>Benas</a>
+    </li>
+
+This subject also appears on teacher's homepage:
+
+    >>> browser.getLink('Home').click()
+    >>> browser.printQuery("id('subject_list')//div[@class='subject-description-list']//dt//text()")
+    Never nude
+
+While on the home page, let's fill in location information:
+
+    >>> browser.getControl('University').value = 'Vilniaus universitetas'
+    >>> browser.getControl('Department').value = 'Ekonomikos fakultetas'
+    >>> browser.getControl('save').click()
+
+If teacher now tries to add another subject, location fields will be prefilled
+by default (and hidden via CSS or javascript, he may edit them if he wants to):
+
+    >>> browser.open('http://localhost/subject/teacher_add')
+    >>> browser.getControl('University').value
+    'Vilniaus universitetas'
+
+    >>> browser.getControl('Department').value
+    'Ekonomikos fakultetas'
+
+Let's fill out the form to create the subject:
+
+    >>> browser.getControl('Title').value = 'Always naked'
+    >>> browser.getControl('Save').click()
+    >>> print browser.url
+    http://localhost/subject/vu/ef/always_naked
+
+This subject also appears on teacher's homepage:
+
+    >>> browser.getLink('Home').click()
+    >>> browser.printQuery("id('subject_list')//div[@class='subject-description-list']//dt//text()")
+    Never nude
+    Always naked
