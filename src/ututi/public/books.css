@@ -78,18 +78,15 @@ h1.book-form-title{
 }
 
 .book-form-field-block select{
-    width: 260px;
+    width: 280px;
 }
 
 .book-form-field-block.odd-field-block{
-    margin-right: 60px;
+    margin-right: 30px;
 }
 
-.book-form-field-block label input{
-    width: 250px;
-}
 
-label.department-field-block{
+label.department-field-select-block{
     margin-right:30px;
 }
 

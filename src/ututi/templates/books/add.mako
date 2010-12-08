@@ -32,13 +32,9 @@ function show_department(){
     if($('input.department_selection:checked').first()){
         department = $('input.department_selection:checked').first().attr('value');
     }
-    $('.department').hide();
-    $('.science_type_field').hide();
-    $('.department-dependent-field').hide();
+    $('.department-field-block').hide();
     if(department){
-        $('.department-dependent-field').show();
-        $('#'+department+'_science_type').show();
-        $('#'+department+'-fields').show();
+        $('.'+department+'-field-block').show();
     }
 }
 //]]></script>
@@ -60,42 +56,43 @@ function show_department(){
         <div class="book-logo">
           ${self.book_logo_field()}
         </div>
+        <div>
+          <div>
+            ${h.input_line('price', _('Price'))}
+          </div>
+        </div>
+        <div>
         %for department in c.book_departments:
-        <label class="department-field-block">
+        <label class="department-field-select-block">
           ${h.radio("department", department[0], class_="department_selection")}
           ${department[1]}
         </label>
         %endfor
+        </div>
         <form:error name="department_id" />
-      </div>
-      <div id="school-fields" class="book-form-field-block odd-field-block">
-        <%self:selectbox field_name = "school_grade" label="${_('School grade')}", objects="${c.school_grades}" />
-      </div>
-      <div id="university_science_type" class="science_type_field book-form-field-block" style="display: none">
-        <%self:selectbox field_name = "university_science_type" label="${_('Science type')}", objects="${c.university_science_types}" />
-      </div>
-      <div id="school_science_type" class="science_type_field book-form-field-block" style="display: none;">
-        <%self:selectbox field_name = "school_science_type" label="${_('Discipline')}", objects="${c.school_science_types}" />
-      </div>
-      <div id="other_science_type" class="science_type_field book-form-field-block" style="display: none;">
-        <%self:selectbox field_name = "other_science_type" label="${_('Science type')}", objects="${c.other_science_types}" />
-      </div>
-      <form:error name="science_type" />
-      <div class="book-form-field-block odd-field-block">
-        <%self:selectbox field_name = "book_type" label="${_('Type')}", objects="${c.book_types}" />
-      </div>
-      <div class="book-form-field-block">
+        <div>
+          <div class="school-field-block department-field-block book-form-field-block odd-field-block">
+            <%self:selectbox field_name = "school_grade" label="${_('School grade')}", objects="${c.school_grades}" />
+          </div>
+          <div class="university-field-block department-field-block science_type_field book-form-field-block" style="display: none">
+            <%self:selectbox field_name = "university_science_type" label="${_('Science type')}", objects="${c.university_science_types}" />
+          </div>
+          <div class="school-field-block department-field-block book-form-field-block" style="display: none;">
+            <%self:selectbox field_name = "school_science_type" label="${_('Discipline')}", objects="${c.school_science_types}" />
+          </div>
+          <form:error name="science_type" />
+        </div>
+        <div class="school-field-block university-field-block department-field-block book-form-field-block odd-field-block">
+          <%self:selectbox field_name = "book_type" label="${_('Type')}", objects="${c.book_types}" />
+        </div>
+        <div class="school-field-block university-field-block other-field-block department-field-block book-form-field-block">
         <%self:selectbox field_name = "city" label="${_('City')}", objects="${c.cities}" />
-      </div>
-      <div class="book-form-field-block">
-        ${h.input_line('price', _('Price'))}
-      </div>
-      <br />
-      <div class="comment-field-block department-dependent-field">
-        ${h.input_area('description', _('Comment'))}
+        </div>
+        <div class="comment-field-block school-field-block university-field-block other-field-block department-field-block">
+          ${h.input_area('description', _('Comment'))}
+        </div>
       </div>
     </div>
-
     <div class="rounded-block book-form-block">
       <div class="cbl"></div>
       <div class="cbr"></div>
