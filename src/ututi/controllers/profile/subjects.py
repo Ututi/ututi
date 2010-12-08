@@ -1,6 +1,5 @@
 
 from pylons.controllers.util import redirect
-from pylons.i18n import _
 from pylons.templating import render_mako_def
 from pylons import request
 from pylons import url
@@ -87,6 +86,10 @@ class WatchedSubjectsMixin(object):
         c.user.unwatchSubject(self._getSubject())
         meta.Session.commit()
 
+    def _teach_subject(self):
+        c.user.teach_subject(self._getSubject())
+        meta.Session.commit()
+
     def _unteach_subject(self):
         c.user.unteach_subject(self._getSubject())
         meta.Session.commit()
@@ -94,10 +97,29 @@ class WatchedSubjectsMixin(object):
     @ActionProtector("user")
     def watch_subject(self):
         self._watch_subject()
-        redirect(request.referrer)
+        if request.params.has_key('js'):
+            return 'OK'
+        else:
+            h.flash(render_mako_def('subject/flash_messages.mako',
+                                    'watch_subject',
+                                    subject=self._getSubject()))
+            redirect(request.referrer)
+
+    @ActionProtector("user")
+    def unwatch_subject(self):
+        self._unwatch_subject()
+        if request.params.has_key('js'):
+            return 'OK'
+        else:
+            h.flash(render_mako_def('subject/flash_messages.mako',
+                                    'unwatch_subject',
+                                    subject=self._getSubject()))
+            redirect(request.referrer)
 
     @ActionProtector("user")
     def js_watch_subject(self):
+        # This action is used in watch_subjects view and
+        # differs from above ones by returning specific snippets.
         self._watch_subject()
         return render_mako_def('profile/watch_subjects.mako',
                                'subject_flash_message',
@@ -108,19 +130,22 @@ class WatchedSubjectsMixin(object):
                             new = True)
 
     @ActionProtector("user")
-    def unwatch_subject(self):
-        # XXX this will need to be refactored.
+    def js_unwatch_subject(self):
+        # This is a pair of js_watch_subject action used in
+        # watch_subjects view.
         self._unwatch_subject()
+        return "OK"
+
+    @ActionProtector("verified_teacher")
+    def teach_subject(self):
+        self._teach_subject()
         if request.params.has_key('js'):
             return 'OK'
         else:
-            h.flash(_("The subject has been removed from your watched subjects list."))
+            h.flash(render_mako_def('subject/flash_messages.mako',
+                                    'teach_subject',
+                                    subject=self._getSubject()))
             redirect(request.referrer)
-
-    @ActionProtector("user")
-    def js_unwatch_subject(self):
-        self._unwatch_subject()
-        return "OK"
 
     @ActionProtector("teacher")
     def unteach_subject(self):
@@ -128,7 +153,9 @@ class WatchedSubjectsMixin(object):
         if request.params.has_key('js'):
             return 'OK'
         else:
-            h.flash(_("The course has been removed from your taught courses list."))
+            h.flash(render_mako_def('subject/flash_messages.mako',
+                                    'unteach_subject',
+                                    subject=self._getSubject()))
             redirect(request.referrer)
 
     def _ignore_subject(self):

@@ -10,6 +10,7 @@ from formencode import Schema, validators, htmlfill
 from pylons import tmpl_context as c, request, url
 from pylons.controllers.util import redirect, abort
 from pylons.i18n import _
+from pylons.templating import render_mako_def
 
 from ututi.model import SearchItem
 from ututi.model import get_supporters
@@ -223,7 +224,9 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
     def teach(self, subject):
         if not c.user.teaches(subject):
             c.user.teach_subject(subject)
-            h.flash(_("The course has been added to your taught courses list."))
+            h.flash(render_mako_def('subject/flash_messages.mako',
+                                    'teach_subject',
+                                    subject=subject))
         else:
             h.flash(_("The course is already in your taught courses list."))
 
@@ -239,7 +242,9 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
     def unteach(self, subject):
         if c.user.teaches(subject):
             c.user.unteach_subject(subject)
-            h.flash(_("The course has been removed from your taught courses list."))
+            h.flash(render_mako_def('subject/flash_messages.mako',
+                                    'unteach_subject',
+                                    subject=subject))
         else:
             h.flash(_("The course was not in your taught courses list."))
 
