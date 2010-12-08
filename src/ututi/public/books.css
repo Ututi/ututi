@@ -72,6 +72,35 @@ h1.book-form-title{
     right: 15px;
 }
 
+.book-form-field-block{
+    display: inline-block;
+    margin: 10px 0 0 0;
+}
+
+.book-form-field-block select{
+    width: 260px;
+}
+
+.book-form-field-block.odd-field-block{
+    margin-right: 60px;
+}
+
+.book-form-field-block label input{
+    width: 250px;
+}
+
+label.department-field-block{
+    margin-right:30px;
+}
+
+.comment-field-block .textField{
+    width: 95%;
+}
+
+.comment-field-block textarea{
+    width: 100%;
+}
+
 /* Book information */
 
 .book-information{
