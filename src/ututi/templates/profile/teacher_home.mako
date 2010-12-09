@@ -79,7 +79,7 @@ ${parent.head_tags()}
         <dd class="location-tags">
           %for index, tag in enumerate(subject.location.hierarchy(True), 1):
             %if index != 1:
-            | ## Separator
+            |
             %endif
             <a href="${tag.url()}" title="${tag.title}">${tag.title_short}</a>
           %endfor
