@@ -16,7 +16,7 @@
 }
 
     .rounded-block .block-content {
-        padding: 0;
+        padding: 5px 10px;
     }
 
     .rounded-block .ctl,

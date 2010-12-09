@@ -75,22 +75,22 @@
     %endif
     <div class="clear"></div>
   </div>
-  <div class="block-content">
-    %if items:
-      %for item in items[:-1]:
-      <div class="row">
-        ${caller.row(item)}
-      </div>
-      %endfor
-      <div class="row last">
-        ${caller.row(items[-1])}
-      </div>
-    %elif hasattr(caller, 'empty_rows'):
-      <div class="empty">
-        ${caller.empty_rows()}
-      </div>
-    %endif
-  </div>
+
+  %if items:
+    %for item in items[:-1]:
+    <div class="row">
+      ${caller.row(item)}
+    </div>
+    %endfor
+    <div class="row last">
+      ${caller.row(items[-1])}
+    </div>
+  %elif hasattr(caller, 'empty_rows'):
+    <div class="empty">
+      ${caller.empty_rows()}
+    </div>
+  %endif
+
   %if hasattr(caller, 'footer'):
   <div class="footer">
     ${caller.footer()}
