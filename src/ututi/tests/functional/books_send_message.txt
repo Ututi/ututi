@@ -17,7 +17,7 @@ Set up
     >>> browser.getControl(name='department').value = ['school']
     >>> browser.getControl('School grade').displayValue = ['1 kl.']
     >>> browser.getControl(name='school_science_type').displayValue = ['Fizika']
-    >>> browser.getControl('Book type').displayValue = ['Vadovėlis']
+    >>> browser.getControl('Type').displayValue = ['Vadovėlis']
     >>> browser.getControl('City').displayValue = ['Vilnius']
     >>> browser.getControl('Price').value = "1000.00"
     >>> browser.getControl('Save').click()
@@ -50,11 +50,11 @@ Book owner will get my message
 
     >>> browser.click('Inbox (1)')
     >>> browser.printCssQuery(".post-title")
-    <a href="/messages/thread/5" class="post-title">uBooks: Second user asks about book My physics book</a>
+    <a href="/messages/thread/6" class="post-title">uBooks: Second user asks about book My physics book</a>
     >>> browser.click('uBooks: Second user asks about book My physics book')
     >>> browser.printCssQuery(".post-body")
 	<div class="post-body">
-      Second user sent you a private message, asking about book My physics book (http://localhost/books/show/4):<br />	  <br />
+      Second user sent you a private message, asking about book My physics book (http://localhost/books/show/5):<br />	  <br />
       Hi, I will buy your book!
 	</div>
     >>> ##TODO: make test to check mails

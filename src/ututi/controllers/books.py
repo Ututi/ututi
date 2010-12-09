@@ -3,8 +3,6 @@ from sqlalchemy import func
 from sqlalchemy.sql.expression import desc
 from formencode.variabledecode import NestedVariables
 from sqlalchemy.orm.exc import NoResultFound
-from formencode.foreach import ForEach
-from formencode.compound import Pipe
 from formencode import Schema, validators, htmlfill
 from formencode.api import Invalid
 
@@ -21,12 +19,10 @@ from ututi.lib.validators import PhoneNumberValidator
 from ututi.lib.validators import FileUploadTypeValidator, TranslatedEmailValidator
 from ututi.model import PrivateMessage
 from ututi.model import Department
-from ututi.model import LocationTag
 from ututi.model import SearchItem
 from ututi.model import Book, meta, City, BookType, SchoolGrade, ScienceType
 import ututi.lib.helpers as h
 from ututi.model import User
-from ututi.lib.validators import LocationTagsValidator
 from ututi.lib.image import serve_logo
 from ututi.lib.forms import validate
 from ututi.lib.search import search_query
@@ -159,11 +155,10 @@ class BookSubFormBase(Schema):
     title = validators.UnicodeString(not_empty=True)
     author = validators.UnicodeString(not_empty=True)
     price = validators.UnicodeString()
-    description = validators.UnicodeString()
+    description = validators.UnicodeString(not_empty=False)
     delete_logo = validators.Bool()
 
     city = CityValidator(not_empty=True)
-    book_type = BookTypeValidator(not_empty=True)
 
     owner_email = TranslatedEmailValidator()
     owner_name = validators.UnicodeString()
@@ -171,28 +166,22 @@ class BookSubFormBase(Schema):
 
     # XXX Setting default sub section values to None
     university_science_type = validators.Constant(None)
-    location = validators.Constant(None)
     school_science_type = validators.Constant(None)
     school_grade = validators.Constant(None)
-    other_science_type = validators.Constant(None)
+    book_type = validators.Constant(None)
 
 
 class UniversityBookForm(BookSubFormBase):
 
     university_science_type = ScienceTypeValidator(not_empty=True)
-    location = Pipe(ForEach(validators.UnicodeString(strip=True)),
-                    LocationTagsValidator(not_empty=True))
+    book_type = BookTypeValidator(not_empty=True)
 
 
 class SchoolBookForm(BookSubFormBase):
 
     school_science_type = ScienceTypeValidator(not_empty=True)
     school_grade = SchoolGradeValidator(not_empty=True)
-
-
-class OtherBookForm(BookSubFormBase):
-
-    other_science_type = ScienceTypeValidator(not_empty=True)
+    book_type = BookTypeValidator(not_empty=True)
 
 
 class BookForm(Schema):
@@ -206,7 +195,7 @@ class BookForm(Schema):
             dispatch_on='department',
             sub_forms = {'university': UniversityBookForm,
                          'school': SchoolBookForm,
-                         'other': OtherBookForm})]
+                         'other': BookSubFormBase})]
 
 
 class BooksController(BaseController):
@@ -238,17 +227,15 @@ class BooksController(BaseController):
     def _load_science_types(self):
         c.university_science_types = ScienceType.getByDepartment(Department.getByName('university'))
         c.school_science_types = ScienceType.getByDepartment(Department.getByName('school'))
-        c.other_science_types = ScienceType.getByDepartment(Department.getByName('other'))
 
     def _get_science_type(self):
         department = self.form_result['department']
         form = self.form_result
+        science_type = None
         if department.name == 'university':
             science_type = form['university_science_type']
         elif department.name == 'school':
             science_type = form['school_science_type']
-        else:
-            science_type = form['other_science_type']
         return science_type
 
     @validate(schema=BookForm, form='_add')
@@ -264,20 +251,18 @@ class BooksController(BaseController):
                         title = title,
                         price = price,
                         city = self.form_result['city'],
-                        type = self.form_result['book_type'],
-                        science_type = science_type,
                         department = self.form_result['department'])
 
             book.author = self.form_result['author']
             book.description = self.form_result['description']
             if self.form_result['logo'] is not None and self.form_result['logo'] != '':
                 book.logo = self.form_result['logo'].file.read()
-            book.location = self.form_result['location']
             book.owner_name = self.form_result['owner_name']
             book.owner_phone = self.form_result['owner_phone']
             book.owner_email = self.form_result['owner_email']
-            book.course = self.form_result['course']
             book.school_grade = self.form_result['school_grade']
+            book.type = self.form_result['book_type']
+            book.science_type = science_type
             meta.Session.add(book)
             meta.Session.commit()
             h.flash(_('Book was added succesfully'))
@@ -315,26 +300,18 @@ class BooksController(BaseController):
             'id': c.book.id,
             'title': c.book.title,
             'author': c.book.author,
-            'course': c.book.course,
             'school_grade': (c.book.school_grade.id if c.book.school_grade else None),
-            department_control_id: c.book.science_type.id,
+            department_control_id: (c.book.science_type.id if c.book.science_type else None),
             'description': c.book.description,
             'price': c.book.price,
             'department': c.book.department.name,
             'city': c.book.city.id,
-            'book_type': c.book.type.id,
+            'book_type': (c.book.type.id if c.book.type else None),
             'owner_name': c.book.owner_name,
             'owner_phone': c.book.owner_phone,
             'owner_email': c.book.owner_email
         }
 
-        if c.book.location is not None:
-            location = dict([('location-%d' % n, tag)
-                             for n, tag in enumerate(c.book.location.hierarchy())])
-        else:
-            location = []
-
-        defaults.update(location)
 
         self._load_defaults()
         return htmlfill.render(self._edit(), defaults=defaults)
@@ -356,11 +333,9 @@ class BooksController(BaseController):
                 book.logo = None
             elif self.form_result['logo'] is not None and self.form_result['logo'] != '':
                 book.logo = self.form_result['logo'].file.read()
-            book.location = self.form_result['location']
             book.owner_name = self.form_result['owner_name']
             book.owner_phone = self.form_result['owner_phone']
             book.owner_email = self.form_result['owner_email']
-            book.course = self.form_result['course']
             book.school_grade = self.form_result['school_grade']
             book.reset_expiration_time()
             meta.Session.commit()
@@ -397,12 +372,11 @@ class BooksController(BaseController):
         c.books = self._make_pages(books)
         return render('books/search.mako')
 
-    def catalog(self, books_department=None, books_type_name=None, science_type_id=None, location_id=None, school_grade_id=None):
+    def catalog(self, books_department=None, books_type_name=None, science_type_id=None, school_grade_id=None):
         c.selected_books_department = books_department
         c.books_department = books_department
         school_grade = None
         science_type = None
-        location = None
 
         c.current_science_types = []
         c.book_department = None
@@ -416,30 +390,11 @@ class BooksController(BaseController):
             c.books_type = meta.Session.query(BookType).filter(BookType.name==books_type_name).one()
             c.url_params['books_type_name'] = books_type_name
 
-        if location_id is not None:
-            location = meta.Session.query(LocationTag).filter(LocationTag.id == location_id).one()
-
-        c.locations = None
         c.school_grades = None
-        if c.book_department is not None:
-            if c.book_department.name == "university":
-                if location_id is not None and location is not None:
-                    if location.parent is not None:
-                        c.locations = meta.Session.query(LocationTag
-                                                         ).filter(LocationTag.parent == location.parent
-                                                                  ).order_by(LocationTag.title.asc())
-                    else:
-                        c.locations = meta.Session.query(LocationTag
-                                                         ).filter(LocationTag.parent == location
-                                                                  ).order_by(LocationTag.title.asc())
-                else:
-                    c.locations = meta.Session.query(LocationTag
-                                                     ).filter(LocationTag.parent == None
-                                                              ).order_by(LocationTag.title.asc())
-            elif books_department == "school":
-                c.school_grades = meta.Session.query(SchoolGrade)
-                if school_grade_id is not None:
-                    school_grade = meta.Session.query(SchoolGrade).filter(SchoolGrade.id == school_grade_id).one()
+        if books_department == "school":
+            c.school_grades = meta.Session.query(SchoolGrade)
+            if school_grade_id is not None:
+                school_grade = meta.Session.query(SchoolGrade).filter(SchoolGrade.id == school_grade_id).one()
 
         c.science_type = None
         if science_type_id is not None:
@@ -447,9 +402,6 @@ class BooksController(BaseController):
 
         #book filtering:
         books = meta.Session.query(Book)
-        if location is not None:
-            children = [child.id for child in location.flatten]
-            books = books.filter(Book.location_id.in_(children))
         if c.book_department is not None:
             books = books.filter(Book.department_id == c.book_department.id)
         if school_grade is not None:

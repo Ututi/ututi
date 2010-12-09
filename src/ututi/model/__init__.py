@@ -2359,13 +2359,11 @@ class Book(ContentItem):
 
         return property(getDepartment, setDepartment)
 
-    def __init__(self, owner, title, price, city, type, science_type, department):
+    def __init__(self, owner, title, price, city, department):
         self.price = price
         self.title = title
         self.owner = owner
         self.city = city
-        self.type = type
-        self.science_type = science_type
         self.department = department
         self.reset_expiration_time()
 

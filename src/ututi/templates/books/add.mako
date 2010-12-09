@@ -59,6 +59,7 @@ function show_department(){
         <div>
           <div>
             ${h.input_line('price', _('Price'))}
+            <form:error name="price" />
           </div>
         </div>
         <div>
@@ -69,7 +70,7 @@ function show_department(){
         </label>
         %endfor
         </div>
-        <form:error name="department_id" />
+        <form:error name="department" />
         <div>
           <div class="school-field-block department-field-block book-form-field-block odd-field-block">
             <%self:selectbox field_name = "school_grade" label="${_('School grade')}", objects="${c.school_grades}" />
@@ -81,6 +82,8 @@ function show_department(){
             <%self:selectbox field_name = "school_science_type" label="${_('Discipline')}", objects="${c.school_science_types}" />
           </div>
           <form:error name="science_type" />
+          <form:error name="university_science_type" />
+          <form:error name="school_type" />
         </div>
         <div class="school-field-block university-field-block department-field-block book-form-field-block odd-field-block">
           <%self:selectbox field_name = "book_type" label="${_('Type')}", objects="${c.book_types}" />
