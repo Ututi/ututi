@@ -1,12 +1,10 @@
 <%inherit file="/books/base.mako" />
 
-<%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*"/>
 
 <%namespace file="/widgets/tags.mako" import="*"/>
 
 <%def name="head_tags()">
 ${parent.head_tags()}
-<%newlocationtag:head_tags />
 </%def>
 
 <%def name="book_logo_field()">
