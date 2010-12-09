@@ -86,13 +86,22 @@
             font-size: 11px;
         }
 
-    .rounded-block .row {
+    .rounded-block .row,
+    .rounded-block .footer {
         padding: 10px 15px 5px 15px;
-        border-bottom: 1px solid #ded8d8;
         position: relative;
     }
+
+    .rounded-block .row {
+        border-bottom: 1px solid #ded8d8;
+    }
+
         .rounded-block .row.last {
             border-bottom: 0 none;
+        }
+
+        .rounded-block.with-footer .row.last {
+            border-bottom: 1px solid #ded8d8;
         }
 
 
