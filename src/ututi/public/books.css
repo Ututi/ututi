@@ -91,11 +91,17 @@ label.department-field-select-block{
 }
 
 .comment-field-block .textField{
-    width: 97%;
+    width: 585px;
 }
 
 .comment-field-block textarea{
-    width: 100%;
+    width: 580px;
+    background-image: url("img/textarea_bg_wide.png");
+}
+
+label input.wide{
+    background-image: url("img/inputs_bg_wide.png");
+    width: 580px;
 }
 
 /* Book information */
