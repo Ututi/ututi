@@ -302,14 +302,14 @@ class BooksController(BaseController):
             'author': c.book.author,
             'school_grade': (c.book.school_grade.id if c.book.school_grade else None),
             department_control_id: (c.book.science_type.id if c.book.science_type else None),
-            'description': c.book.description,
-            'price': c.book.price,
-            'department': c.book.department.name,
-            'city': c.book.city.id,
-            'book_type': (c.book.type.id if c.book.type else None),
-            'owner_name': c.book.owner_name,
-            'owner_phone': c.book.owner_phone,
-            'owner_email': c.book.owner_email
+           'description': c.book.description,
+           'price': c.book.price,
+           'department': c.book.department.name,
+           'city': c.book.city.id,
+           'book_type': (c.book.type.id if c.book.type else None),
+           'owner_name': c.book.owner_name,
+           'owner_phone': c.book.owner_phone,
+           'owner_email': c.book.owner_email
         }
 
 

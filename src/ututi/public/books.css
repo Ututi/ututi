@@ -104,6 +104,31 @@ label input.wide{
     width: 580px;
 }
 
+.book-logo-block, .main-book-fields-block{
+    display: inline-block;
+    width: 298px;
+}
+
+.book-logo-block{
+    vertical-align:top;
+    text-align: right;
+}
+
+.book-logo-block a.back-link{
+    background: url("../images/details/link_back_trn.png") no-repeat scroll left center transparent;
+    padding-left: 35px;
+}
+
+.book-logo-block img.book_image{
+    margin-top: 20px;
+    margin-right: 45px;
+}
+
+.book-logo-block .detele-logo-field{
+    margin-left: 135px;
+    margin-top: 5px;
+    text-align:left;
+}
 /* Book information */
 
 .book-information{

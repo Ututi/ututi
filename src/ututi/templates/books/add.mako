@@ -8,11 +8,7 @@ ${parent.head_tags()}
 </%def>
 
 <%def name="book_logo_field()">
-<form:error name="book_logo_upload" />
-<label>
-  <span class="labelText">${_('Image')}</span>
-  <input type="file" name="logo" id="book_logo_upload" class="line"/>
-</label>
+
 </%def>
 
 <%def name="selectbox(field_name, label, objects)">
@@ -52,7 +48,11 @@ function show_department(){
         </div>
         <input type="hidden" name="id" value=""/>
         <div class="book-logo">
-          ${self.book_logo_field()}
+	  <label>
+	    <span class="labelText">${_('Image')}</span>
+	    <input type="file" name="logo" id="book_logo_upload" class="line"/>
+	  </label>
+	  <form:error name="book_logo_upload" />
         </div>
         <div>
           <div>
