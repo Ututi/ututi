@@ -16,7 +16,7 @@
 }
 
     .rounded-block .block-content {
-        padding: 5px 10px;
+        padding: 0;
     }
 
     .rounded-block .ctl,
@@ -84,6 +84,15 @@
         .rounded-block .large-header .header-link {
             font-weight: normal;
             font-size: 11px;
+        }
+
+    .rounded-block .row {
+        padding: 10px 15px 5px 15px;
+        border-bottom: 1px solid #ded8d8;
+        position: relative;
+    }
+        .rounded-block .row.last {
+            border-bottom: 0 none;
         }
 
 
