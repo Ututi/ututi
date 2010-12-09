@@ -22,7 +22,7 @@ from sqlalchemy.orm.exc import NoResultFound
 
 import ututi.lib.helpers as h
 from ututi.lib.image import serve_logo
-from ututi.lib.search import _filter_watched_subjects
+from ututi.lib.search import _exclude_subjects
 from ututi.lib.sms import sms_cost
 from ututi.lib.base import BaseController, render, render_lang
 from ututi.lib.validators import HtmlSanitizeValidator, TranslatedEmailValidator, LocationTagsValidator, TagsValidator, GroupCouponValidator, FileUploadTypeValidator, validate
@@ -932,7 +932,7 @@ class GroupController(BaseController, SubjectAddMixin, GroupWallMixin):
             search_params['tags'] = c.tags
         search_params['obj_type'] = 'subject'
 
-        query = search_query(extra=_filter_watched_subjects(sids), **search_params)
+        query = search_query(extra=_exclude_subjects(sids), **search_params)
         if self.form_result != {}:
             c.searched = True
 

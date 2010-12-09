@@ -11,7 +11,7 @@ from ututi.model import Subject, meta
 from ututi.lib.validators import validate
 from ututi.lib.search import search_query_count
 from ututi.lib.search import search_query
-from ututi.lib.search import _filter_watched_subjects
+from ututi.lib.search import _exclude_subjects
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import render
 from ututi.controllers.search import SearchSubmit
@@ -61,14 +61,13 @@ class WatchedSubjectsMixin(object):
             search_params['tags'] = c.tags
         search_params['obj_type'] = 'subject'
 
-        query = search_query(extra=_filter_watched_subjects(sids), **search_params)
-        if search_params != {}:
-            c.results = paginate.Page(
-                query,
-                page=int(request.params.get('page', 1)),
-                items_per_page = 10,
-                item_count = search_query_count(query),
-                **search_params)
+        query = search_query(extra=_exclude_subjects(sids), **search_params)
+        c.results = paginate.Page(
+            query,
+            page=int(request.params.get('page', 1)),
+            items_per_page = 10,
+            item_count = search_query_count(query),
+            **search_params)
 
         c.watched_subjects = c.user.watched_subjects
 
