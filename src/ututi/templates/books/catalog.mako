@@ -4,12 +4,14 @@
 <%def name="science_list()">
 <div class="science_types_list">
   %for science_type in c.current_science_types:
-  <div class="science_type">
-  ${h.link_to(science_type.name,
-              url(controller = "books",
-                  action="catalog",
-                  books_department= c.books_department,
-                  science_type_id = science_type.id, **c.url_params))}
+  <div class="science_type filter-list-item">
+    ${h.link_to(science_type.name,
+    url(controller = "books",
+    action="catalog",
+    books_department= c.books_department,
+    science_type_id = science_type.id, **c.url_params))}
+
+    <div class="books-number">${len(science_type.books)} ${_('books')}</div>
   </div>
   %endfor
 </div>
@@ -18,26 +20,13 @@
 <%def name="school_grades_list()">
 <div class="department_members_list">
   %for school_grade in c.school_grades:
-  <div class="school_grade">
+  <div class="school_grade filter-list-item">
     ${h.link_to(school_grade.name,
           url(controller = "books",
               action="catalog",
               books_department= c.books_department,
               school_grade_id = school_grade.id, **c.url_params))}
-  </div>
-  %endfor
-</div>
-</%def>
-
-<%def name="locations_list()">
-<div class="department_members_list">
-  %for location in c.locations:
-  <div class="location">
-    ${h.link_to(location.title,
-          url(controller = "books",
-              action="catalog",
-              books_department= c.books_department,
-              location_id = location.id, **c.url_params))}
+    <div class="books-number">${len(school_grade.books)} ${_('books')}</div>
   </div>
   %endfor
 </div>
@@ -59,8 +48,10 @@
 </div>
 %endif
 
-<script language="javascript" type="text/javascript">
-//<![CDATA[
+<div class="ordering">
+  %if c.books_department == "school":
+  <script language="javascript" type="text/javascript">
+    //<![CDATA[
     function show_department_list(){
         $('.science_type').hide();
         $('.department_members_list').show();
@@ -70,9 +61,40 @@
         $('.department_members_list').hide();
         $('.science_type').show();
     }
-//]]>
-</script>
-<div id="search_results_header">
+    //]]>
+  </script>
+
+  <div class="books-header">
+    %if c.books_department or c.current_science_types:
+    <span class="title">${_('Order by')}:</span>
+    %endif
+
+    <a href="#" class="order-criteria" onclick="show_department_list();return false;">${_('School grades')}</a>
+
+    %if c.current_science_types:
+    <a href="#" class="order-criteria" onclick="show_science_types();return false;">${_('Disciplines')}</a>
+    %endif
+  </div>
+  <div>
+    ${school_grades_list()}
+  </div>
+  <div>
+    ${science_list()}
+  </div>
+  %elif c.books_department == "university":
+  <div class="books-header">
+    <span class="title">${_('Science types')}:</span>
+  </div>
+  <div>
+    ${science_list()}
+  </div>
+  %endif
+</div>
+
+
+
+
+<div class="books-header">
   <h2>${_('All books')}</h2>
   <div id="city_select_dropdown">
     <label>
@@ -91,31 +113,7 @@
   <br style="clear: both;"/>
 </div>
 
-<div class="ordering">
-  <div class="order-books-by">
-    %if c.books_department or c.current_science_types:
-    ${_('Order by')}:
-    %endif
-    %if c.books_department == "university":
-    <a href="#" onclick="show_department_list()">${_('Universities')}</a>
-    %elif c.books_department == "school":
-    <a href="#" onclick="show_department_list()">${_('School grades')}</a>
-    %endif
-    %if c.current_science_types:
-    <a href="#" onclick="show_science_types()">${_('Science types')}</a>
-    %endif
-  </div>
-  <div>
-    %if c.books_department == "university":
-    ${locations_list()}
-    %elif c.books_department == "school":
-    ${school_grades_list()}
-    %endif
-  </div>
-  <div>
-    ${science_list()}
-  </div>
-</div>
+%if c.books_department=="school":
 <script language="javascript" type="text/javascript">//<![CDATA[
     %if c.science_type or (c.locations and c.school_grades):
     show_science_types();
@@ -123,6 +121,7 @@
     show_department_list();
     %endif
 //]]></script>
+%endif
 
 
 <div>
