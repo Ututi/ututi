@@ -256,6 +256,10 @@ ul.teacher-list {
         display: none;
     }
 
+    .subject-description .button-to {
+        float: right;
+    }
+
     .subject-description:hover .unwatch-button,
     .subject-description:hover .unteach-button {
         display: block;

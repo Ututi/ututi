@@ -1,9 +1,28 @@
-<%namespace file="/sections/standard_buttons.mako" import="close_button" />
+<%namespace file="/sections/standard_buttons.mako" import="close_button, watch_button, teach_button" />
 
-<%def name="subject_listitem(subject, n)">
+<%def name="subject_listitem_button(subject)">
+## Renders appropriate action button.
+## Probably not a good idea this implicit thing.
+
+  %if c.user.is_teacher:
+    %if c.user.teacher(subject):
+      ${close_button(url(controller='profile', action='unteach_subject', subject_id=subject.id), class_='unteach-button')}
+    %else:
+      ${teach_button(url(controller='profile', action='teach_subject', subject_id=subject.id))}
+    %endif
+  %else:
+    %if c.user.watches(subject):
+      ${close_button(url(controller='profile', action='unwatch_subject', subject_id=subject.id), class_='unwatch-button')}
+    %else:
+      ${watch_button(url(controller='profile', action='watch_subject', subject_id=subject.id))}
+    %endif
+  %endif
+</%def>
+
+<%def name="subject_listitem(subject, n, with_buttons=True)">
   <div class="subject-description ${'with-top-line' if n else ''}">
-    %if c.user is not None and c.user.watches(subject):
-    ${close_button(url(controller='profile', action='unwatch_subject', subject_id=subject.id), class_='unwatch-button')}
+    %if c.user is not None and with_buttons:
+      ${subject_listitem_button(subject)}
     %endif
     <div>
       <dt>
