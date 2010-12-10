@@ -354,7 +354,33 @@ welcome portlet is taking me to the notification view...
     If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
 
+
+If the user changes notification periods to 'never', he should not receive emails:
+    >>> browser.open('http://localhost/profile/subjects')
+    >>> browser.getControl(name='each', index=0).displayValue = ['never']
+    >>> browser.getControl('Confirm', index=0).click()
+    >>> browser.getControl(name='each', index=1).displayValue = ['never']
+    >>> browser.getControl('Confirm', index=1).click()
+    >>> browser.getControl(name='each', index=2).displayValue = ['never']
+    >>> browser.getControl('Confirm', index=2).click()
     >>> mail_queue[:] = []
+    >>> browser.open('http://localhost/news/daily?date=2009-10-09')
+
+No emails for admin:
+    >>> printEmails()
+    ['user2@ututi.lt']
+    ...
+    ['user@ututi.lt']
+    ...
+
+And reset the values of notification periods to what they were:
+    >>> browser.open('http://localhost/profile/subjects')
+    >>> browser.getControl(name='each', index=0).displayValue = ['at the end of the day']
+    >>> browser.getControl('Confirm', index=0).click()
+    >>> browser.getControl(name='each', index=1).displayValue = ['at the end of the day']
+    >>> browser.getControl('Confirm', index=1).click()
+    >>> browser.getControl(name='each', index=2).displayValue = ['immediately']
+    >>> browser.getControl('Confirm', index=2).click()
 
 Hmm, now what happens if user2 starts ignoring the subject:
 

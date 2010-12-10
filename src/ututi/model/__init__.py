@@ -1273,10 +1273,13 @@ class Subject(ContentItem, FolderMixin, LimitedUploadMixin):
             all_recipients.extend(group.recipients(period))
 
         usms = meta.Session.query(UserSubjectMonitoring).\
+            join((User, UserSubjectMonitoring.user_id==User.id)).\
             filter(UserSubjectMonitoring.subject==self).\
             join(User).\
             filter(User.receive_email_each==period).all()
+
         recipients = [usm.user for usm in usms]
+
         all_recipients.extend(recipients)
         return list(set(all_recipients))
 
