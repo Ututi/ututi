@@ -262,7 +262,7 @@ button.btnMedium {
 }
 
 button.btnMedium span {
-    padding: 5px 0 0 15px;
+    padding: 7px 0 0 15px;
     height: 26px;
     background: transparent url("img/buttons_bg_split.png") no-repeat left -30px;
 }
@@ -300,7 +300,14 @@ button.btnMedium.btnExclamation span {
     padding-left: 25px;
 }
 
-button.btnMedium.btnExclamation {
+button.btnMedium.btnTeacher span {
+    background-position: left -411px;
+    color: #d45500;
+    padding-left: 25px;
+}
+
+button.btnMedium.btnExclamation,
+button.btnMedium.btnTeacher {
     background-position: right -374px;
 }
 
