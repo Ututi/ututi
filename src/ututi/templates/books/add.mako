@@ -61,14 +61,14 @@ function show_department(){
           </div>
         </div>
         <div>
-        %for department in c.book_departments:
-        <label class="department-field-select-block">
-          ${h.radio("department", department[0], class_="department_selection")}
-          ${department[1]}
-        </label>
-        %endfor
+          %for department in c.book_departments:
+          <label class="department-field-select-block">
+            ${h.radio("department", department[0], class_="department_selection")}
+            ${department[1]}
+          </label>
+          %endfor
+          <form:error name="department" />
         </div>
-        <form:error name="department" />
         <div>
           <div class="school-field-block department-field-block book-form-field-block odd-field-block">
             <%self:selectbox field_name = "school_grade" label="${_('School grade')}", objects="${c.school_grades}" />

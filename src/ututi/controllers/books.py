@@ -54,7 +54,8 @@ class BookDepartmentValidator(BaseValidator):
 
     messages = {
         'invalid': _(u"Specify correct book department."),
-        'empty': _(u"Specify book department.")
+        'empty': _(u"Specify book department."),
+        'missing': _(u"Specify book department.")
         }
 
     def _to_python(self, value, state):
@@ -160,9 +161,9 @@ class BookSubFormBase(Schema):
 
     city = CityValidator(not_empty=True)
 
-    owner_email = TranslatedEmailValidator()
-    owner_name = validators.UnicodeString()
-    owner_phone = PhoneNumberValidator()
+    owner_email = TranslatedEmailValidator(not_empty=False)
+    owner_name = validators.UnicodeString(not_empty=False)
+    owner_phone = PhoneNumberValidator(not_empty=False)
 
     # XXX Setting default sub section values to None
     university_science_type = validators.Constant(None)
@@ -196,6 +197,17 @@ class BookForm(Schema):
             sub_forms = {'university': UniversityBookForm,
                          'school': SchoolBookForm,
                          'other': BookSubFormBase})]
+
+def book_action(method):
+    def _book_action(self, id=None):
+        if id is None:
+            redirect(url(controller='books', action='index'))
+        book = Book.get(id)
+        if book is None:
+            abort(404)
+        c.book = book
+        return method(self, book)
+    return _book_action
 
 
 class BooksController(BaseController):
@@ -312,15 +324,14 @@ class BooksController(BaseController):
            'owner_email': c.book.owner_email
         }
 
-
         self._load_defaults()
         return htmlfill.render(self._edit(), defaults=defaults)
 
+    @book_action
     @validate(BookForm, form='_edit')
     @ActionProtector("user")
-    def update(self, id):
+    def update(self, book):
         if hasattr(self, 'form_result'):
-            book = meta.Session.query(Book).filter(Book.id == self.form_result['id']).one()
             book.title = self.form_result['title']
             book.price = self.form_result['price']
             book.city = self.form_result['city']
@@ -331,7 +342,7 @@ class BooksController(BaseController):
             book.description = self.form_result['description']
             if self.form_result['delete_logo'] == True:
                 book.logo = None
-            elif self.form_result['logo'] is not None and self.form_result['logo'] != '':
+            elif self.form_result['logo']:
                 book.logo = self.form_result['logo'].file.read()
             book.owner_name = self.form_result['owner_name']
             book.owner_phone = self.form_result['owner_phone']
@@ -341,8 +352,6 @@ class BooksController(BaseController):
             meta.Session.commit()
             h.flash(_('Book was updated succesfully'))
             redirect(url(controller='books', action='show', id=book.id))
-        else:
-            c.book = meta.Session.query(Book).filter(Book.id == id).one()
 
     def logo(self, id, width=None, height=None):
         return serve_logo('book', int(id), width=width, height=height)

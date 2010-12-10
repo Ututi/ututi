@@ -191,6 +191,7 @@ def make_map(config):
 
     # books
     map.connect('/books', controller='books', action='index')
+    map.connect('/books/{id}/update', controller='books', action='update')
     map.connect('/books/{id}/logo/{width}/{height}',
                 controller='books', action='logo')
     map.connect('/books/{id}/logo/{width}',
@@ -204,7 +205,6 @@ def make_map(config):
     map.connect('/books/catalog/{books_department}/{books_type_name}/location/{location_id}', controller="books", action="catalog")
     map.connect('/books/catalog/{books_department}/{books_type_name}', controller="books", action="catalog")
     map.connect('/books/catalog/{books_department}', controller="books", action="catalog")
-    map.connect('/books/update/{id}', controller='books', action='index')
 
 
     # user profiles

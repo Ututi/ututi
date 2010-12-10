@@ -12,9 +12,17 @@ function show_department(){
         $('.'+department+'-field-block').show();
     }
 }
+
+function toggle_file_upload(){
+    if($('#delete_logo:checked').val() != null){
+        $('.book-logo').hide();
+    }else{
+        $('.book-logo').show();
+    }
+}
 //]]></script>
 
-<form method="post" action="${url(controller='books', action='update')}"
+<form method="post" action="${url(controller='books', action='update', id=c.book.id)}"
       id="book_add_form" enctype="multipart/form-data" class="fullForm">
   <fieldset>
     <div class="portlet book-form-block">
@@ -28,15 +36,14 @@ function show_department(){
             ${h.input_line('title', _('Book title'))}
             ${h.input_line('author', _('Author'))}
           </div>
-          <input type="hidden" name="id" value=""/>
-          <div class="book-logo">
-  	    <label>
-	      <span class="labelText">${_('Image')}</span>
-	      <input type="file" name="logo" id="book_logo_upload" class="line"/>
-	    </label>
-    	    <form:error name="book_logo_upload" />
-          </div>
-          <div>
+	      <div class="book-logo">
+		    <label>
+		      <span class="labelText">${_('Image')}</span>
+		      <input type="file" name="logo" id="book_logo_upload" class="line"/>
+		    </label>
+		    <form:error name="book_logo_upload" />
+	      </div>
+	      <div>
             ${h.input_line('price', _('Price'))}
             <form:error name="price" />
           </div>
@@ -47,7 +54,7 @@ function show_department(){
 	  %if c.book.logo is not None:
 	    <img class="book_image" src="${url(controller='books', action='logo', id=c.book.id, width=100, height=130)}" alt="${_('Book cover')}" /><br />
 	    <div class="detele-logo-field">
-	      <input type="checkbox" name="delete_logo" value="True"/> ${_('Delete image')}
+	      <input type="checkbox" name="delete_logo" id="delete_logo" value="True"/> ${_('Delete image')}
 	    </div>
 	  %else:
 	    <img class="book_image" src="${url('/images/books/default_book_icon.png')}" alt="${_('Book cover')}" />
@@ -86,10 +93,26 @@ function show_department(){
           ${h.input_area('description', _('Comment'))}
         </div>
       </div>
+      <input type="hidden" name="id" value=""/>
+    </div>
+    <div class="rounded-block book-form-block">
+      <div class="cbl"></div>
+      <div class="cbr"></div>
+      <div class="inner">
+        <h1 class="book-form-title">${_('Owner information')}</h1>
+        <div class="owner-information">
+          ${h.input_line("owner_name", _("Full name"))}
+          ${h.input_line("owner_email", _("Email"))}
+          ${h.input_line("owner_phone", _("Phone number"))}
+          <div class="submit-button">${h.input_submit(_('Save'))}</div>
+        </div>
+      </div>
     </div>
   </fieldset>
 </form>
 <script type="text/javascript">
   show_department();
+  toggle_file_upload()
   $("input[name='department']").change(show_department);
+  $('#delete_logo').change(toggle_file_upload);
 </script>

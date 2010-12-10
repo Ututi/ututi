@@ -103,8 +103,8 @@ Then I edit my new school book information, change it to "other" type and confir
     >>> browser.open('http://localhost/books/edit/4')
     >>> browser.getControl('Book title').value = "My other book"
     >>> browser.getControl('Author').value = "Mr. other"
-    >>> browser.getControl('Comment').value = "A changed perfect book"
     >>> browser.getControl(name='department').value = ['other']
+    >>> browser.getControl('Comment').value = "A changed perfect book"
     >>> browser.getControl('City').displayValue = ['Vilnius']
     >>> browser.getControl('Price').value = "999.00"
     >>> browser.getControl('Image').add_file(*make_file('test_logo.png'))
@@ -125,7 +125,7 @@ Then I edit my new school book information again, and make mistake
     >>> browser.getControl('Image').add_file(*make_file('test_logo.png'))
     >>> browser.getControl('Save').click()
     >>> browser.url
-    'http://localhost/books/update'
+    'http://localhost/books/4/update'
 
 I enter my new university book information and confirm changes
 
