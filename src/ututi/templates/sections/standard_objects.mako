@@ -26,7 +26,7 @@
     %endif
     <div>
       <dt>
-        <a class="subject_title" href="${subject.url()}">${h.ellipsis(subject.title, 60)}</a>
+        <a class="subject-title" href="${subject.url()}">${h.ellipsis(subject.title, 60)}</a>
       </dt>
       <dd class="rating">
         ( ${_('Subject rating:')} ${h.image('/images/details/stars%d.png' % subject.rating(), alt='', class_='subject_rating')} )
@@ -66,6 +66,32 @@
         "<span class='orange'>%(count)s</span> groups",
         group_count) % dict(count=group_count)|n}
       </dd>
+    </div>
+  </div>
+</%def>
+
+<%def name="subject_listitem_minimal(subject, n, with_buttons=True)">
+  <div class="subject-description ${'with-top-line' if n else ''}">
+    %if c.user is not None and with_buttons:
+      ${subject_listitem_button(subject)}
+    %endif
+    <div>
+      <dt>
+        <a class="subject-title" href="${subject.url()}">${h.ellipsis(subject.title, 60)}</a>
+      </dt>
+    </div>
+    <div style="margin-top: 5px">
+      <dd class="location-tags">
+        %for index, tag in enumerate(subject.location.hierarchy(True)):
+        <a href="${tag.url()}" title="${tag.title}">${tag.title_short}</a>
+        |
+        %endfor
+      </dd>
+      %if subject.lecturer:
+      <dd class="lecturer">
+        ${_('Lect.')} <span class="orange" >${subject.lecturer}</span>
+      </dd>
+      %endif
     </div>
   </div>
 </%def>
