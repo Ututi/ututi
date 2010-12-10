@@ -6,6 +6,8 @@
 
 <h1>${_('Adminstration dashboard')}</h1>
 
+<h2>${_('Ututi controls:')}</h2>
+
 <ul>
   <li>${h.link_to('Users', url(controller='admin', action='users'))}</li>
   <li>${h.link_to('Groups', url(controller='admin', action='groups'))}</li>
@@ -24,3 +26,10 @@
   <li>${h.link_to('Book types', url(controller='admin', action='book_types'))}</li>
   <li>${h.link_to('Teachers', url(controller='admin', action='teachers'))}</li>
 </ul>
+
+<h2>${_('Standard UI patterns/objects')}</h2>
+<ol>
+  <li>${h.link_to('Standard blocks', url(controller='admin', action='example_blocks'))}</li>
+  <li>${h.link_to('Standard lists', url(controller='admin', action='example_lists'))}</li>
+  <li>${h.link_to('Standard objects', url(controller='admin', action='example_objects'))}</li>
+</ol>

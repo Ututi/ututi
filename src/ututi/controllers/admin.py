@@ -741,3 +741,9 @@ class AdminController(BaseController):
     @ActionProtector("root")
     def example_lists(self):
         return render('sections/example_lists.mako')
+
+    @ActionProtector("root")
+    def example_objects(self):
+        c.subject = meta.Session.query(Subject).first()
+        return render('sections/example_objects.mako')
+
