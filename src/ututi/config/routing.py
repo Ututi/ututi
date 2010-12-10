@@ -204,6 +204,7 @@ def make_map(config):
     map.connect('/books/catalog/{books_department}/{books_type_name}/location/{location_id}', controller="books", action="catalog")
     map.connect('/books/catalog/{books_department}/{books_type_name}', controller="books", action="catalog")
     map.connect('/books/catalog/{books_department}', controller="books", action="catalog")
+    map.connect('/books/update/{id}', controller='books', action='index')
 
 
     # user profiles

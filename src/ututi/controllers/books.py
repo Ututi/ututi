@@ -318,7 +318,7 @@ class BooksController(BaseController):
 
     @validate(BookForm, form='_edit')
     @ActionProtector("user")
-    def update(self):
+    def update(self, id):
         if hasattr(self, 'form_result'):
             book = meta.Session.query(Book).filter(Book.id == self.form_result['id']).one()
             book.title = self.form_result['title']
@@ -341,6 +341,8 @@ class BooksController(BaseController):
             meta.Session.commit()
             h.flash(_('Book was updated succesfully'))
             redirect(url(controller='books', action='show', id=book.id))
+        else:
+            c.book = meta.Session.query(Book).filter(Book.id == id).one()
 
     def logo(self, id, width=None, height=None):
         return serve_logo('book', int(id), width=width, height=height)
