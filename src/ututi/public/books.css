@@ -30,17 +30,17 @@
     margin: 0px;
 }
 
-#search_results_header {
+#all-books-header, #search_results_header {
     background: #f1f1f1;
     padding: 5px 10px 5px 10px;
     margin-right: 15px;
 }
 
-#search_results_header H2 {
+#search_results_header H2, #all-books-header h2 {
     float: left;
 }
 
-#search_results_header #city_select_dropdown {
+#search_results_header #city_select_dropdown, #all-books-header #city_select_dropdown {
     float: right;
 }
 

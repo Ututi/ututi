@@ -72,6 +72,25 @@
     }
 //]]>
 </script>
+<div id="search_results_header">
+  <h2>${_('All books')}</h2>
+  <div id="city_select_dropdown">
+    <label>
+      <span class="a11y">${_('City')}</span>
+      <form id="cities-select" action="${url(controller='books', action='catalog')}">
+        ${h.select('city', [c.selected_city_id], c.filter_cities)}
+      </form>
+      <script language="javascript" type="text/javascript">//<![CDATA[
+        $('#city').change(function(){
+            $('form#cities-select').submit();
+          });
+      //]]></script>
+
+    </label>
+  </div>
+  <br style="clear: both;"/>
+</div>
+
 <div class="ordering">
   <div class="order-books-by">
     %if c.books_department or c.current_science_types:
