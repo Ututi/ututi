@@ -57,6 +57,7 @@
 </%def>
 
 <%def name="item_list(title, items, class_='')">
+<% if hasattr(caller, 'footer'): class_ += ' with-footer' %>
 <%self:rounded_block class_="item-list ${class_}">
   <div class="large-header">
     <h2 class="portletTitle bold category-title">
@@ -74,28 +75,26 @@
     %endif
     <div class="clear"></div>
   </div>
-  <div>
-  <div class="block-content">
-    %if items:
-      %for item in items[:-1]:
-        <div class="row">
-          ${caller.row(item)}
-        </div>
-      %endfor
-      %if hasattr(caller, 'last_row'):
-        <div class="row last">
-          ${caller.last_row(items[-1])}
-        </div>
-      %else:
-        <div class="row">
-          ${caller.row(items[-1])}
-        </div>
-      %endif
-    %elif hasattr(caller, 'empty_rows'):
-      <div class="empty">
-        ${caller.empty_rows()}
-      </div>
-    %endif
+
+  %if items:
+    %for item in items[:-1]:
+    <div class="row">
+      ${caller.row(item)}
+    </div>
+    %endfor
+    <div class="row last">
+      ${caller.row(items[-1])}
+    </div>
+  %elif hasattr(caller, 'empty_rows'):
+    <div class="empty">
+      ${caller.empty_rows()}
+    </div>
+  %endif
+
+  %if hasattr(caller, 'footer'):
+  <div class="footer">
+    ${caller.footer()}
   </div>
+  %endif
 </%self:rounded_block>
 </%def>

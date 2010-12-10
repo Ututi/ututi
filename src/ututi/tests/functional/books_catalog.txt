@@ -19,7 +19,7 @@ Now let's add some books:
     >>> browser.getControl(name='department').value = ['school']
     >>> browser.getControl('School grade').displayValue = ['1 kl.']
     >>> browser.getControl(name='school_science_type').displayValue = ['Fizika']
-    >>> browser.getControl('Book type').displayValue = ['Vadovėlis']
+    >>> browser.getControl('Type').displayValue = ['Vadovėlis']
     >>> browser.getControl('City').displayValue = ['Vilnius']
     >>> browser.getControl('Price').value = "1000.00"
     >>> browser.getControl('Save').click()
@@ -34,9 +34,7 @@ The book gets added and we get redirected to it's display view.
     >>> browser.getControl('Author').value = "Mr. God"
     >>> browser.getControl('Comment').value = "A perfect book for evening"
     >>> browser.getControl(name='department').value = ['other']
-    >>> browser.getControl('Book type').displayValue = ['Vadovėlis']
     >>> browser.getControl('City').displayValue = ['Vilnius']
-    >>> browser.getControl(name='other_science_type').displayValue = ['Kita']
 
     >>> browser.getControl('Price').value = "50,00"
     >>> browser.getControl('Save').click()
@@ -44,11 +42,9 @@ The book gets added and we get redirected to it's display view.
     >>> browser.click('Upload a Book')
     >>> browser.getControl('Book title').value = "University book"
     >>> browser.getControl('Author').value = "Mr. God"
-    >>> browser.getControl('Comment').value = "A perfect book for evening"
     >>> browser.getControl(name='department').value = ['university']
-    >>> browser.getControl(name='location-0').value = "Vilniaus universitetas"
-    >>> browser.getControl('Department').value = "Ekonomikos fakultetas"
-    >>> browser.getControl('Book type').displayValue = ['Vadovėlis']
+    >>> browser.getControl('Comment').value = "A perfect book for evening"
+    >>> browser.getControl('Type').displayValue = ['Vadovėlis']
     >>> browser.getControl('City').displayValue = ['Vilnius']
     >>> browser.getControl(name='university_science_type').displayValue = ['Realiniai mokslai']
     >>> browser.getControl('Price').value = "50,00"
@@ -90,10 +86,3 @@ students, so let's go to the subtype instead:
     >>> browser.open('http://localhost/books/catalog/other')
     >>> browser.printCssQuery("h3.book-title")
     <h3 class="book-title">My beautiful book 2</h3>
-
-    >>> browser.open('http://localhost/books/catalog/other/science/5')
-    >>> browser.printCssQuery("h3.book-title")
-    <h3 class="book-title">My beautiful book 2</h3>
-
-    >>> browser.open('http://localhost/books/catalog/other/science/6')
-    >>> browser.printCssQuery("h3.book-title")

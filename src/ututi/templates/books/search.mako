@@ -8,7 +8,7 @@
   <div class="cbr"></div>
 
 <div class="inner">
-  <h2 class="portletTitle bold">Paieška</h2>
+  <h2 class="portletTitle bold">${_('Search')}</h2>
   <div class="search-controls">
     <form method="get" action="${url(controller='books', action='search')}" id="search_form">
       <div class="search-text-submit">
@@ -32,7 +32,7 @@
 </div>
 
 <div id="search_results_header">
-  <h2>Search results</h2>
+  <h2>${_('Search results')}</h2>
   <div id="city_select_dropdown">
     <form action="${url(controller='books', action='search', text=c.text)}">
     <label>

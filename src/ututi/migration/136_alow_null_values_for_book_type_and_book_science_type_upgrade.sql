@@ -1,0 +1,2 @@
+ALTER TABLE books ALTER COLUMN science_type_id DROP NOT NULL;;
+ALTER TABLE books ALTER COLUMN type_id DROP NOT NULL;;

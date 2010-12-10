@@ -77,7 +77,7 @@
         %if c.user.teaches(subject):
           ${h.button_to(_("Remove from my taught courses"), subject.url(action='unteach'), class_='btn btnNegative', method='GET')}
         %elif c.user.teacher_verified:
-          ${h.button_to(_("I teach this course"), subject.url(action='teach'), class_='btn', method='GET')}
+          ${h.button_to(_("I teach this course"), subject.url(action='teach'), class_='btnMedium btnTeacher', method='GET')}
         %endif
       %else:
         %if c.user.watches(subject):

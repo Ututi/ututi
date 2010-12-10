@@ -1273,9 +1273,13 @@ class Subject(ContentItem, FolderMixin, LimitedUploadMixin):
             all_recipients.extend(group.recipients(period))
 
         usms = meta.Session.query(UserSubjectMonitoring).\
+            join((User, UserSubjectMonitoring.user_id==User.id)).\
             filter(UserSubjectMonitoring.subject==self).\
+            join(User).\
             filter(User.receive_email_each==period).all()
+
         recipients = [usm.user for usm in usms]
+
         all_recipients.extend(recipients)
         return list(set(all_recipients))
 
@@ -2359,13 +2363,11 @@ class Book(ContentItem):
 
         return property(getDepartment, setDepartment)
 
-    def __init__(self, owner, title, price, city, type, science_type, department):
+    def __init__(self, owner, title, price, city, department):
         self.price = price
         self.title = title
         self.owner = owner
         self.city = city
-        self.type = type
-        self.science_type = science_type
         self.department = department
         self.reset_expiration_time()
 
@@ -2379,10 +2381,7 @@ class Book(ContentItem):
     @classmethod
     def get(cls, id):
         book = meta.Session.query(cls)
-        if isinstance(id, basestring):
-            book = book.filter_by(title=id.lower())
-        else:
-            book = book.filter_by(id=id)
+        book = book.filter_by(id=id)
         try:
             return book.one()
         except NoResultFound:

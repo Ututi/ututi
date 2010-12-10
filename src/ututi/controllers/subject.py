@@ -9,6 +9,7 @@ from formencode import Schema, validators, htmlfill
 
 from pylons import tmpl_context as c, request, url
 from pylons.controllers.util import redirect, abort
+from pylons.decorators import jsonify
 from pylons.i18n import _
 from pylons.templating import render_mako_def
 
@@ -16,10 +17,10 @@ from ututi.model import SearchItem
 from ututi.model import get_supporters
 from ututi.model import meta, LocationTag, Subject, File, SimpleTag
 from ututi.lib.security import ActionProtector, deny
-from ututi.lib.search import search
+from ututi.lib.search import search, search_query, _exclude_subjects
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.base import BaseController, render, u_cache
-from ututi.lib.validators import LocationTagsValidator, TagsValidator, validate
+from ututi.lib.validators import LocationTagsValidator, TagsValidator, validate, js_validate
 import ututi.lib.helpers as h
 
 log = logging.getLogger(__name__)
@@ -80,6 +81,23 @@ class SubjectForm(Schema):
                     LocationTagsValidator(not_empty=True))
 
     title = validators.UnicodeString(not_empty=True, strip=True)
+    lecturer = validators.UnicodeString(strip=True)
+    chained_validators = [
+        TagsValidator()
+        ]
+
+
+class SearchSubjectForm(Schema):
+    """An identical schema for searching subjects from subject create form."""
+
+    allow_extra_fields = True
+
+    pre_validators = [NestedVariables()]
+
+    location = Pipe(ForEach(validators.UnicodeString(strip=True, max=250)),
+                    LocationTagsValidator())
+
+    title = validators.UnicodeString(strip=True)
     lecturer = validators.UnicodeString(strip=True)
     chained_validators = [
         TagsValidator()
@@ -182,6 +200,44 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
                     action='home',
                     id=subj.subject_id,
                     tags=subj.location_path))
+
+    @ActionProtector("user")
+    @js_validate(schema=SearchSubjectForm, form='_add_form')
+    @jsonify
+    def js_search_similar(self):
+        """Returns subjects that are similar to the one
+        that is about to be created."""
+
+        # Construct search parameters
+        search_params = {}
+        search_params['obj_type'] = 'subject'
+
+        # Title is needed at least
+        if not self.form_result.get('title', False):
+            return dict(success=False)
+
+        search_params['text'] = self.form_result['title']
+
+        # Gather location tags
+        if 'location' in self.form_result:
+            location = self.form_result['location']
+            if location is not None:
+                search_params['tags'] = ', '.join(location.title_path)
+
+        # Exclude subjects already watched or taught by the user
+        if c.user.is_teacher:
+            sids = [s.id for s in c.user.taught_subjects]
+        else:
+            sids = [s.id for s in c.user.watched_subjects]
+
+        results = search_query(extra=_exclude_subjects(sids), **search_params).all()
+        if results:
+            return dict(success=True,
+                        search_results=render_mako_def('subject/teacher_add.mako',
+                                                       'list_similar_subjects',
+                                                        results=results))
+        else:
+            return dict(succes=False)
 
     def _edit_form(self):
         return render('subject/edit.mako')

@@ -35,17 +35,15 @@ ${h.link_to(_('Back to catalog'), url(controller="books", action="index"), class
 <div class="books-description">${c.book.description}</div>
 ${book_attribute(_('Author'), c.book.author)}
 ${book_attribute(_('Book department'),_(c.book.department.name))}
+%if c.book.department.name != 'other':
 ${book_attribute(_('Book type'), c.book.type.name)}
-%if c.book.department.name == 'university':
-  ${_('School')}:
-  %if c.book.location.parent:
-    ${c.book.location.parent.title_short}
-  %endif
-  ${c.book.location.title} ${c.book.course}
-%elif c.book.department.name == 'school':
-  ${_('School grade')}: ${c.book.school_grade.name}
 %endif
+%if c.book.department.name == 'school':
+${_('School grade')}: ${c.book.school_grade.name}
+%endif
+%if c.book.department.name != 'other':
 ${book_attribute(_('Science type'), c.book.science_type.name)}
+%endif
 ${book_attribute(_('City'), c.book.city.name)}
 ${book_attribute(_('Price'), c.book.price, class_="book-price")}
 <div class="owner-information">

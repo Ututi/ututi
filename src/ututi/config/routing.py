@@ -191,6 +191,7 @@ def make_map(config):
 
     # books
     map.connect('/books', controller='books', action='index')
+    map.connect('/books/{id}/update', controller='books', action='update')
     map.connect('/books/{id}/logo/{width}/{height}',
                 controller='books', action='logo')
     map.connect('/books/{id}/logo/{width}',

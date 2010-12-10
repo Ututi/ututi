@@ -22,8 +22,6 @@ fix that:
     >>> browser.getControl('Book title').value = "My physics book"
     >>> browser.getControl('Author').value = "Mr. God"
     >>> browser.getControl(name="department").value = ['other']
-    >>> browser.getControl('Book type').displayValue = ['Vadovėlis']
-    >>> browser.getControl(name='other_science_type').displayValue = ['Kita']
     >>> browser.getControl('City').displayValue = ['Vilnius']
     >>> browser.getControl('Save').click()
 
@@ -76,8 +74,6 @@ city, the widget should reflect that:
     >>> browser.getControl('Book title').value = "My other physics book"
     >>> browser.getControl('Author').value = "Mr. Good"
     >>> browser.getControl(name='department').value = ['other']
-    >>> browser.getControl('Book type').displayValue = ['Vadovėlis']
-    >>> browser.getControl(name='other_science_type').displayValue = ['Kita']
     >>> browser.getControl('City').displayValue = ['Vilnius']
     >>> browser.getControl('Save').click()
 
@@ -85,8 +81,6 @@ city, the widget should reflect that:
     >>> browser.getControl('Book title').value = "My other maths book"
     >>> browser.getControl('Author').value = "Goody good"
     >>> browser.getControl(name='department').value = ['other']
-    >>> browser.getControl('Book type').displayValue = ['Vadovėlis']
-    >>> browser.getControl(name='other_science_type').displayValue = ['Kita']
     >>> browser.getControl('City').displayValue = ['Kaunas']
     >>> browser.getControl('Save').click()
 

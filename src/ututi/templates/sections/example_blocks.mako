@@ -51,7 +51,13 @@
   <%def name="row(item)">
     Item ${item}
   </%def>
-  <%def name="last_row(item)">
-    Last item ${item}
+  <%def name="footer()">
+    Some controls, buttons, etc, if needed.
+  </%def>
+</%b:item_list>
+
+<%b:item_list title='Verry simple list of items' items="${range(3)}">
+  <%def name="row(item)">
+    Item ${item}
   </%def>
 </%b:item_list>

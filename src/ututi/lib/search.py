@@ -6,9 +6,7 @@ from sqlalchemy.sql import func, select
 from sqlalchemy.sql.expression import or_, not_
 from sqlalchemy.orm import aliased
 
-import pylons
-
-from ututi.model import meta, SearchItem, SimpleTag, LocationTag, ContentItem, TagSearchItem
+from ututi.model import meta, SearchItem, LocationTag, ContentItem, TagSearchItem
 from ututi.model import Group
 
 log = logging.getLogger(__name__)
@@ -199,7 +197,7 @@ def tag_search(text, count=5):
         query = query.limit(count)
     return query.all()
 
-def _filter_watched_subjects(sids):
+def _exclude_subjects(sids):
     """A modifier for the subjects query, which excludes subjects already being watched."""
     def _filter(query):
         return query.filter(not_(ContentItem.id.in_(sids)))

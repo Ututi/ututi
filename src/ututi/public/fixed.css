@@ -86,6 +86,111 @@
             font-size: 11px;
         }
 
+    .rounded-block .row,
+    .rounded-block .footer {
+        padding: 10px 15px 5px 15px;
+        position: relative;
+    }
+
+    .rounded-block .row {
+        border-bottom: 1px solid #ded8d8;
+    }
+
+        .rounded-block .row.last {
+            border-bottom: 0 none;
+        }
+
+        .rounded-block.with-footer .row.last {
+            border-bottom: 1px solid #ded8d8;
+        }
+
+/* SUBJECT ADD PAGE STYLE
+ * A lot of it should be later generalized for other views.
+ */
+
+#subject-add-page {
+    color: #4d4d4d;
+}
+
+    #subject-add-page .left-panel,
+    #subject-add-page .right-panel {
+        background: #f8f8f8;
+        border: 1px solid #ded8d8;
+        padding: 15px 20px;
+        margin: 20px 0px;
+        border-radius: 10px;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        min-height: 600px;
+    }
+
+    #subject-add-page .left-panel {
+        width: 480px;
+    }
+
+    #subject-add-page .right-panel {
+        width: 350px;
+    }
+
+    #subject-add-page .separator {
+        display: inline-block;
+        width: 24px;
+        height: 600px; /* equals min-height of left and right panels. */
+        margin: 10px;
+    }
+
+    #subject-add-page h1.page-title {
+        font-weight: bold;
+        font-size: 18px;
+        margin: 0;
+    }
+
+    #subject-add-page label {
+        font-weight: bold;
+        display: block;
+        margin-top: 10px;
+    }
+
+        #subject-add-page .check-field label {
+            font-weight: normal;
+        }
+
+    #subject-add-page input {
+        margin: 0;
+    }
+
+    #subject-add-page textarea#description {
+        width: 460px;
+    }
+
+    #subject-add-page #cke_description {
+        /* Fighting the RTE!
+         */
+        width: 470px !important;
+    }
+
+    #subject-add-page #similar-subjects,
+    #subject-add-page #warning-text {
+        display: none;
+    }
+
+    #subject-add-page #warning-text {
+        border: 1px dashed #D45500;
+        padding: 15px 20px;
+    }
+
+        #subject-add-page.with-similar-subjects #similar-subjects,
+        #subject-add-page.with-similar-subjects #warning-text {
+            display: block;
+        }
+
+        #subject-add-page.with-similar-subjects #default-text {
+            display: none;
+        }
+
+        #subject-add-page.with-similar-subjects .separator {
+            background: url(img/icons/arrows_right.png) no-repeat left center;
+        }
 
 /* SIMPLE LISTS
  * Simple list styles that provide bullet images and spacing.
