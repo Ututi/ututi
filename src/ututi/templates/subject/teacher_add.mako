@@ -3,7 +3,7 @@
 <%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*"/>
 <%namespace file="/sections/content_snippets.mako" import="item_location_full" />
 <%namespace file="/widgets/tags.mako" import="*"/>
-<%namespace file="/profile/watch_subjects.mako" import="search_subject" />
+<%namespace file="/sections/standard_objects.mako" import="subject_listitem_minimal" />
 <%namespace file="/search/index.mako" import="search_results" />
 
 <%def name="title()">
@@ -36,13 +36,9 @@ $(document).ready(function() {
 </%def>
 
 <%def name="list_similar_subjects(results)">
-  <div id="search-results-container">
-    <div id="search-results">
-      %for item in results:
-        ${search_subject(item)}
-      %endfor
-    </div>
-  </div>
+  %for n, item in enumerate(results):
+    ${subject_listitem_minimal(item.object, n)}
+  %endfor
 </%def>
 
 <%def name="form(action, personal=False)">
@@ -109,11 +105,16 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
   %endif
 
   <div id="warning-text">
-    <p>Dude, look right!</p>
+    <p>
+    ${_("Attention, please! Before creating new subject please ensure that it's not already there.")}
+    ${_("A list of similar subjects to the one you are about to create is shown on the right.")}
+    ${_("Please carefully read through the list and if you don't find your subject, create it.")}
+    </p>
   </div>
 
   <div>
-    ${h.input_submit(_('Save'))}
+    ${h.input_submit(_('Create subject'), class_='btnMedium', id='submit-button')}
+    <a id="cancel-button" href="c.referrer">${_("Cancel")}</a>
   </div>
 
   </fieldset>
@@ -160,6 +161,9 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
 
       <div id="similar-subjects">
         <h1 class="page-title">${_("Maybe here's what you're looking for?")}</h1>
+        <p>
+        ${_("Please make sure that the subject you are about to create is not in this list.")}
+        </p>
         <div id="subject-search-results">
           <!-- Search results will be here -->
         </div>

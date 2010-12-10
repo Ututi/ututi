@@ -145,6 +145,10 @@
         margin: 0;
     }
 
+    #subject-add-page p {
+        margin: 10px 0px;
+    }
+
     #subject-add-page label {
         font-weight: bold;
         display: block;
@@ -169,6 +173,16 @@
         width: 470px !important;
     }
 
+    #subject-add-page #submit-button {
+        margin-top: 20px;
+    }
+
+    #subject-add-page #cancel-button {
+        display: inline-block;
+        line-height: 26px; /* matches btnMedium height */
+        margin-left: 20px;
+    }
+
     #subject-add-page #similar-subjects,
     #subject-add-page #warning-text {
         display: none;
@@ -176,7 +190,8 @@
 
     #subject-add-page #warning-text {
         border: 1px dashed #D45500;
-        padding: 15px 20px;
+        padding: 5px 10px;
+        margin: 10px 0px;
     }
 
         #subject-add-page.with-similar-subjects #similar-subjects,
