@@ -59,8 +59,8 @@ We can add a subject at the url /subject/add
     >>> browser.open('http://localhost/subjects/add')
 
     >>> browser.getControl(name='location-1').value = 'vu'
-    >>> browser.getControl('Title').value = 'Test subject'
-    >>> browser.getControl('Save').click()
+    >>> browser.getControl('Subject title:').value = 'Test subject'
+    >>> browser.getControl('Create subject').click()
     >>> print browser.url
     http://localhost/subject/vu/test_subject
 
@@ -68,9 +68,9 @@ The id is checked for uniqueness.
 
     >>> browser.open('http://localhost/subjects/add')
     >>> browser.getControl(name='location-1').value = 'vu'
-    >>> browser.getControl('Title').value = 'Test subject'
-    >>> browser.getControl('Lecturer').value = 'Some guy'
-    >>> browser.getControl('Save').click()
+    >>> browser.getControl('Subject title:').value = 'Test subject'
+    >>> browser.getControl('Lecturer:').value = 'Some guy'
+    >>> browser.getControl('Create subject').click()
     >>> print browser.url
     http://localhost/subject/vu/test_subject-some_guy
 
@@ -114,10 +114,10 @@ When creating a subject, the user can select to watch it:
     'http://localhost/subjects/add'
 
     >>> browser.getControl(name='location-1').value = 'vu'
-    >>> browser.getControl('Title').value = 'Testing subject'
-    >>> browser.getControl('Lecturer').value = 'Some guy'
+    >>> browser.getControl('Subject title:').value = 'Testing subject'
+    >>> browser.getControl('Lecturer:').value = 'Some guy'
     >>> browser.getControl('Start watching this subject personally').selected = True
-    >>> browser.getControl('Save').click()
+    >>> browser.getControl('Create subject').click()
     >>> print browser.url
     http://localhost/subject/vu/testing_subject
 
@@ -136,9 +136,9 @@ Subject names with parentheses should not cause problems:
     'http://localhost/subjects/add'
 
     >>> browser.getControl(name='location-1').value = 'vu'
-    >>> browser.getControl('Title').value = 'Šiuolaikinė anglų kalba (akademinis skaitymas)'
-    >>> browser.getControl('Lecturer').value = 'Some guy'
+    >>> browser.getControl('Subject title:').value = 'Šiuolaikinė anglų kalba (akademinis skaitymas)'
+    >>> browser.getControl('Lecturer:').value = 'Some guy'
     >>> browser.getControl('Start watching this subject personally').selected = True
-    >>> browser.getControl('Save').click()
+    >>> browser.getControl('Create subject').click()
     >>> print browser.url
     http://localhost/subject/vu/siuolaikine_anglu_ka

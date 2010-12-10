@@ -168,15 +168,17 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
         return render('subject/home_pages.mako')
 
     def _add_form(self):
+        # XXX this need to be fixed. How do I check if we have
+        # proper referrer?
+        if request.referrer == url(controller='subject', action='add'):
+            c.cancel_url = url(controller='profile', action='home')
+        else:
+            c.cancel_url = request.referrer
         return render('subject/add.mako')
 
     @ActionProtector("user")
     def add(self):
         return self._add_form()
-
-    @ActionProtector("verified_teacher")
-    def teacher_add(self):
-        return render('subject/teacher_add.mako')
 
     @validate(schema=NewSubjectForm, form='_add_form')
     @ActionProtector("user")
@@ -233,7 +235,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
         results = search_query(extra=_exclude_subjects(sids), **search_params).all()
         if results:
             return dict(success=True,
-                        search_results=render_mako_def('subject/teacher_add.mako',
+                        search_results=render_mako_def('subject/add.mako',
                                                        'list_similar_subjects',
                                                         results=results))
         else:

@@ -7,5 +7,5 @@ Just visit the dashboard first.
     >>> browser.url
     'http://localhost/home'
 
-    >>> browser.printQuery("//a[@class='subject_title']/text()")
+    >>> browser.printQuery("//a[@class='subject-title']/text()")
     Matematinė analizė
