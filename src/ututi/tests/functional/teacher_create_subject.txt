@@ -22,17 +22,17 @@ Instead, a hidden value with teacher's name is silently submitted:
 The teacher hasn't specified his location yet, so location fields
 are displayed empty:
 
-    >>> browser.getControl('University').value
+    >>> browser.getControl('University:').value
     ''
 
-    >>> browser.getControl('Department').value
+    >>> browser.getControl('Department:').value
     ''
 
 Let's fill out the form to create the subject:
 
-    >>> browser.getControl('University').value = 'Vilniaus universitetas'
-    >>> browser.getControl('Department').value = 'Ekonomikos fakultetas'
-    >>> browser.getControl('Title').value = 'Never nude'
+    >>> browser.getControl('University:').value = 'Vilniaus universitetas'
+    >>> browser.getControl('Department:').value = 'Ekonomikos fakultetas'
+    >>> browser.getControl('Subject title:').value = 'Never nude'
     >>> browser.getControl('Save').click()
     >>> print browser.url
     http://localhost/subject/vu/ef/never_nude
@@ -60,15 +60,15 @@ If teacher now tries to add another subject, location fields will be prefilled
 by default (and hidden via CSS or javascript, he may edit them if he wants to):
 
     >>> browser.open('http://localhost/subject/teacher_add')
-    >>> browser.getControl('University').value
+    >>> browser.getControl('University:').value
     'Vilniaus universitetas'
 
-    >>> browser.getControl('Department').value
+    >>> browser.getControl('Department:').value
     'Ekonomikos fakultetas'
 
 Let's fill out the form to create the subject:
 
-    >>> browser.getControl('Title').value = 'Always naked'
+    >>> browser.getControl('Subject title:').value = 'Always naked'
     >>> browser.getControl('Save').click()
     >>> print browser.url
     http://localhost/subject/vu/ef/always_naked
