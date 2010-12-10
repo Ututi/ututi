@@ -218,22 +218,11 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
 
         search_params['text'] = self.form_result['title']
 
-        # Gather tags + location
-        tags = []
-        if 'tagsitem' in self.form_result:
-            tags = self.form_result.get('tagsitem', None)
-        elif 'tags' in self.form_result:
-            tags = self.form_result.get('tags', [])
-            if isinstance(tags, basestring):
-                tags = tags.split(', ')
-
+        # Gather location tags
         if 'location' in self.form_result:
             location = self.form_result['location']
             if location is not None:
-                tags.extend(location.title_path)
-
-        if tags:
-            search_params['tags'] = ', '.join(filter(bool, tags))
+                search_params['tags'] = ', '.join(location.title_path)
 
         # Exclude subjects already watched or taught by the user
         if c.user.is_teacher:
@@ -241,12 +230,14 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
         else:
             sids = [s.id for s in c.user.watched_subjects]
 
-        results = search_query(extra=_exclude_subjects(sids), **search_params)
-
-        return dict(success=True,
-                    search_results=render_mako_def('subject/teacher_add.mako',
-                                                   'list_similar_subjects',
-                                                    results=results))
+        results = search_query(extra=_exclude_subjects(sids), **search_params).all()
+        if results:
+            return dict(success=True,
+                        search_results=render_mako_def('subject/teacher_add.mako',
+                                                       'list_similar_subjects',
+                                                        results=results))
+        else:
+            return dict(succes=False)
 
     def _edit_form(self):
         return render('subject/edit.mako')
