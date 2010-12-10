@@ -47,6 +47,22 @@
   %endif
 </%def>
 
+<%def name="item_location_full(object)">
+  %if object.location:
+  <%
+    hierarchy_len = len(object.location.hierarchy())
+  %>
+  <span class="location">
+  %for index, tag in enumerate(object.location.hierarchy(True)):
+    ${tag.title}
+    %if index != hierarchy_len - 1:
+        |
+    %endif
+  %endfor
+  </span>
+  %endif
+</%def>
+
 <%def name="generic(object)">
   <div class="search-item snippet-generic">
     <a href="${object.url()}" title="${object.title}" class="item-title larger bold">${object.title}</a>
