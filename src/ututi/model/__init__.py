@@ -2378,10 +2378,7 @@ class Book(ContentItem):
     @classmethod
     def get(cls, id):
         book = meta.Session.query(cls)
-        if isinstance(id, basestring):
-            book = book.filter_by(title=id.lower())
-        else:
-            book = book.filter_by(id=id)
+        book = book.filter_by(id=id)
         try:
             return book.one()
         except NoResultFound:

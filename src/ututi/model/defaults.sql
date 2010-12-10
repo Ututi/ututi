@@ -1340,9 +1340,9 @@ CREATE TABLE books (
        type_id int8 REFERENCES book_types(id) on delete restrict,
        department_id int8 NOT NULL,
        school_grade_id int8 REFERENCES school_grades(id) on delete restrict,
-       owner_name varchar(50) DEFAULT '' NOT NULL,
-       owner_phone varchar(50) DEFAULT '' NOT NULL,
-       owner_email varchar(100) DEFAULT '' NOT NULL,
+       owner_name varchar(50) DEFAULT '',
+       owner_phone varchar(50) DEFAULT '',
+       owner_email varchar(100) DEFAULT '',
        valid_until timestamp not null default (now() at time zone 'UTC'),
        PRIMARY KEY (id)
 );;
