@@ -121,6 +121,7 @@
         border-radius: 10px;
         -moz-border-radius: 10px;
         -webkit-border-radius: 10px;
+        min-height: 600px;
     }
 
     #subject-add-page .left-panel {
@@ -129,6 +130,13 @@
 
     #subject-add-page .right-panel {
         width: 350px;
+    }
+
+    #subject-add-page .separator {
+        display: inline-block;
+        width: 24px;
+        height: 600px; /* equals min-height of left and right panels. */
+        margin: 10px;
     }
 
     #subject-add-page h1.page-title {
@@ -160,6 +168,29 @@
          */
         width: 470px !important;
     }
+
+    #subject-add-page #similar-subjects,
+    #subject-add-page #warning-text {
+        display: none;
+    }
+
+    #subject-add-page #warning-text {
+        border: 1px dashed #D45500;
+        padding: 15px 20px;
+    }
+
+        #subject-add-page.with-similar-subjects #similar-subjects,
+        #subject-add-page.with-similar-subjects #warning-text {
+            display: block;
+        }
+
+        #subject-add-page.with-similar-subjects #default-text {
+            display: none;
+        }
+
+        #subject-add-page.with-similar-subjects .separator {
+            background: url(img/icons/arrows_right.png) no-repeat left center;
+        }
 
 /* SIMPLE LISTS
  * Simple list styles that provide bullet images and spacing.

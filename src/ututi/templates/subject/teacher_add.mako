@@ -14,7 +14,6 @@ ${_('New subject')}
 <%newlocationtag:head_tags />
 <script type="text/javascript">
 $(document).ready(function() {
-  $('#subject-search-results').hide();
   $('#subject_add_form input').blur(function() {
     var search_url = $('#subject_add_form input#subject-search-url').attr('value');
     $.post(
@@ -23,12 +22,11 @@ $(document).ready(function() {
       function(data, status) {
         if (data.success) {
           $('#subject-search-results').html(data.search_results);
-          $('#subject-search-results').show();
-          $('#no-results-text').hide();
+          $('#subject-add-page').addClass('with-similar-subjects');
         }
         else {
-          $('#subject-search-results').hide();
-          $('#no-results-text').show();
+          $('#subject-search-results').empty();
+          $('.with-similar-subjects').removeClass('with-similar-subjects');
         }
       }
     );
@@ -110,6 +108,10 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
   </div>
   %endif
 
+  <div id="warning-text">
+    <p>Dude, look right!</p>
+  </div>
+
   <div>
     ${h.input_submit(_('Save'))}
   </div>
@@ -118,24 +120,51 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
 </form>
 </%def>
 
+<%def name="default_text_for_teacher()">
+  <h1 class="page-title">${_("Teacher, subjects are good!")}</h1>
+  <p>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis mi eu nibh dapibus lacinia sed eget enim. Curabitur lacus elit, mollis vitae bibendum a, consequat eget nibh. Vivamus accumsan rhoncus enim, eget viverra ligula pulvinar eget. Quisque dictum laoreet ultricies. Nam libero odio, elementum ac placerat id, porta quis lacus. Aliquam a lectus ac mauris eleifend varius vitae rhoncus erat. Nulla facilisi. Donec at porttitor tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec hendrerit, velit a posuere commodo, mauris quam posuere orci, ac mollis sem erat nec felis. Nullam luctus elementum hendrerit.
+  </p>
+  <p>
+  Proin et arcu sit amet lacus aliquam aliquam. Suspendisse convallis, mi id molestie rutrum, risus quam rhoncus libero, vel convallis massa quam in ipsum. Duis ullamcorper sollicitudin lectus ac viverra. In molestie diam ac nunc egestas laoreet gravida nisi sagittis. Donec eget felis eget arcu accumsan laoreet. Ut hendrerit elementum arcu, ac dapibus lectus vestibulum sed. Sed vitae lacus quam. Etiam eu ligula tellus, et rhoncus lorem. Sed hendrerit suscipit adipiscing. Cras ac tortor tellus. Integer eu augue quis neque tempor pretium. Phasellus hendrerit, quam nec vestibulum feugiat, libero erat volutpat nisl, eget rutrum massa orci eu arcu. Nam lectus dui, cursus non imperdiet at, viverra at lorem. Aliquam mauris turpis, sagittis vitae tincidunt pharetra, feugiat quis purus. Aenean fermentum vehicula tellus, sit amet adipiscing mi ornare sit amet. Donec nec magna sed velit semper adipiscing pulvinar eget massa. Nulla tempor tellus eu odio laoreet tincidunt. Ut ut quam arcu, eu dignissim ante. Duis commodo erat et est porttitor accumsan. 
+  </p>
+</%def>
+
+<%def name="default_text_for_user()">
+  <h1 class="page-title">${_("User, subjects are good!")}</h1>
+  <p>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis mi eu nibh dapibus lacinia sed eget enim. Curabitur lacus elit, mollis vitae bibendum a, consequat eget nibh. Vivamus accumsan rhoncus enim, eget viverra ligula pulvinar eget. Quisque dictum laoreet ultricies. Nam libero odio, elementum ac placerat id, porta quis lacus. Aliquam a lectus ac mauris eleifend varius vitae rhoncus erat. Nulla facilisi. Donec at porttitor tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec hendrerit, velit a posuere commodo, mauris quam posuere orci, ac mollis sem erat nec felis. Nullam luctus elementum hendrerit.
+  </p>
+  <p>
+  Proin et arcu sit amet lacus aliquam aliquam. Suspendisse convallis, mi id molestie rutrum, risus quam rhoncus libero, vel convallis massa quam in ipsum. Duis ullamcorper sollicitudin lectus ac viverra. In molestie diam ac nunc egestas laoreet gravida nisi sagittis. Donec eget felis eget arcu accumsan laoreet. Ut hendrerit elementum arcu, ac dapibus lectus vestibulum sed. Sed vitae lacus quam. Etiam eu ligula tellus, et rhoncus lorem. Sed hendrerit suscipit adipiscing. Cras ac tortor tellus. Integer eu augue quis neque tempor pretium. Phasellus hendrerit, quam nec vestibulum feugiat, libero erat volutpat nisl, eget rutrum massa orci eu arcu. Nam lectus dui, cursus non imperdiet at, viverra at lorem. Aliquam mauris turpis, sagittis vitae tincidunt pharetra, feugiat quis purus. Aenean fermentum vehicula tellus, sit amet adipiscing mi ornare sit amet. Donec nec magna sed velit semper adipiscing pulvinar eget massa. Nulla tempor tellus eu odio laoreet tincidunt. Ut ut quam arcu, eu dignissim ante. Duis commodo erat et est porttitor accumsan. 
+  </p>
+</%def>
+
 <div id="subject-add-page">
   <div class="two-panel-layout with-right-panel">
     <div class="left-panel">
       <h1 class="page-title">${_('Create subject you teach:')}</h1>
 
       <%self:form action="${url(controller='subject', action='create')}" personal="True"/>
-    </div>
 
-    <div class="right-panel">
+    ## Note, that here below affects rendering!
+    </div><div class="separator"></div><div class="right-panel">
 
-      <h1 class="page-title">${_("Maybe here's what you're looking for?")}</h1>
-
-      <div id="subject-search-results">
+      <div id="default-text">
+        %if c.user.is_teacher:
+          ${default_text_for_teacher()}
+        %else:
+          ${default_text_for_user()}
+        %endif
       </div>
 
-      <div id="no-results-text">
-        There really is no meaning to this and that!
+      <div id="similar-subjects">
+        <h1 class="page-title">${_("Maybe here's what you're looking for?")}</h1>
+        <div id="subject-search-results">
+          <!-- Search results will be here -->
+        </div>
       </div>
+
     </div>
   </div>
 </div>
