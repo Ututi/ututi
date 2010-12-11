@@ -136,7 +136,7 @@ ${h.javascript_link('/javascript/js-alternatives.js')|n}
   <label for="mailing_list_moderation" class="radio">
       <span class="labelText">
         ${_('Who can send messages to the mailing list')}
-        ${tooltip(_("If you select moderated, you can pick the people "
+        ${tooltip(_("If you select 'moderated', you can pick the people "
                     "who you want to allow to post to the mailing list."))}
       </span>
     ${h.radio("mailinglist_moderated", "members", label=_('Members only'))}

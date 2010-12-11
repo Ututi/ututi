@@ -25,8 +25,8 @@ ${parent.head_tags()}
 <div class="inner">
   <h2 class="portletTitle bold">${_('Welcome to Ututi!')}</h2>
   <div>
-    ${_('At the moment You are not confirmed as a teacher. Our administrators have been notified and will verify You shortly.'
-        ' Until then some restriction may apply to what You are allowed to do.')}
+    ${_('You have not been confirmed as a teacher yet. Our administrators will verify you shortly.'
+        'Until then, your profile rights may be limited.')}
   </div>
 </div>
 </%self:rounded_block>
