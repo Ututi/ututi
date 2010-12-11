@@ -43,7 +43,9 @@
 <%def name="ubooks_advicer()">
 <div id="what_is_ubooks">
   <h3>${_("U-Books - what's that?")}</h3>
-  ${h.button_to(_("Add book"), url(controller="books", action="add"))}
+  <form class="button-right" method="post" action="${url('/books/add')}">
+    <button class="btnMedium" type="submit" value="${_('Add book')}"><span>${_('Add book')}</span></button>
+  </form>
   <ul class="ubooks_explanation">
     <li>${_("It's school books exchange / selling place.")}</li>
     <li>${_("It's place where you can get cheap stydy book.")}</li>

@@ -261,3 +261,126 @@ a.order-criteria{
     font-size: 14px;
     font-weight: normal;
 }
+
+/* Books catalog + frontpage */
+#what_is_ubooks {
+    background: url("../images/books/books-welcome-background.png") no-repeat scroll left center transparent;
+    width: 610px;
+    height: 120px;
+    padding: 20px;
+}
+
+#what_is_ubooks h3 {
+    font-size: 24px;
+    color: #4d4d4d;
+    margin-bottom: 20px;
+}
+
+#what_is_ubooks .button-right {
+    text-align: right;
+    margin-top: -50px;
+    margin-right: 10px;
+}
+#what_is_ubooks .ubooks_explanation {
+    margin-left: 90px;
+    margin-top: 10px;
+    list-style: none;
+}
+
+#what_is_ubooks .ubooks_explanation li {
+    background: url("images/bullet_orange_small.png") no-repeat;
+    padding-left: 20px;
+    color: #666666;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* Buttons */
+
+button.btn,
+button.btnMedium,
+button.btnLarge {
+    position: relative;
+    font-family: arial, sans-serif;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    overflow: visible; /* removes extra side padding in IE */
+}
+
+button.btn::-moz-focus-inner,
+button.btnMedium::-moz-focus-inner,
+button.btnLarge::-moz-focus-inner {
+    border: none;  /* overrides extra padding in Firefox */
+    padding: 0;
+}
+
+button.btn span,
+button.btnMedium span,
+button.btnLarge span {
+    position: relative;
+    display: block;
+    transparent-space: nowrap;
+    color: #333;
+    white-space: nowrap;
+}
+
+button.btn:hover span,
+button.btnMedium:hover span,
+button.btnLarge:hover span {
+    color: black;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    /* Safari and Google Chrome only - fix margins */
+    button.btn span,
+    button.btnMedium span,
+    button.btnLarge span {
+        margin-top: -1px;
+    }
+}
+
+button.btn {
+    padding: 0 15px 0 0;
+    margin-right: 5px;
+    font-size: 13px;
+    text-align: center;
+    background: transparent url("img/buttons_bg_split.png") no-repeat right -110px;
+}
+
+button.btn span {
+    padding: 3px 0 0 15px;
+    height: 20px;
+    background: transparent url("img/buttons_bg_split.png") no-repeat left top;
+}
+
+/* * html button.btn span { height: 23px; } */
+
+button.btnMedium {
+    padding: 0 15px 0 0;
+    font-size: 16px;
+    text-align: center;
+    background: transparent url("img/buttons_bg_split.png") no-repeat right -138px;
+}
+
+button.btnMedium span {
+    padding: 7px 0 0 15px;
+    height: 26px;
+    background: transparent url("img/buttons_bg_split.png") no-repeat left -28px;
+}
+
+/* * html button.btnMedium span { height: 31px; } */
+
+button.btnLarge {
+    padding: 0 15px 0 0;
+    margin-right: 5px;
+    font-size: 20px;
+    text-align: center;
+    background: transparent url("img/buttons_bg_split.png") no-repeat right -180px;
+}
+
+button.btnLarge span {
+    padding: 6px 0 0 15px;
+    height: 32px;
+    background: transparent url("img/buttons_bg_split.png") no-repeat left -70px;
+}
