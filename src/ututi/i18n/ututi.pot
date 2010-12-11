@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-12-09 12:47+0200\n"
+"POT-Creation-Date: 2010-12-11 16:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1510,6 +1510,12 @@ msgstr ""
 msgid "Adminstration dashboard"
 msgstr ""
 
+msgid "Ututi controls:"
+msgstr ""
+
+msgid "Standard UI patterns/objects"
+msgstr ""
+
 #, python-format
 msgid "found %(count)s file"
 msgid_plural "found %(count)s files"
@@ -1887,25 +1893,25 @@ msgstr ""
 msgid "New entry"
 msgstr ""
 
-msgid "Image"
-msgstr ""
-
 msgid "Book title"
 msgstr ""
 
 msgid "Author"
 msgstr ""
 
-msgid "Comment"
-msgstr ""
-
-msgid "Course"
+msgid "Image"
 msgstr ""
 
 msgid "Price"
 msgstr ""
 
-msgid "Book type"
+msgid "Discipline"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Comment"
 msgstr ""
 
 msgid "Owner information"
@@ -1926,19 +1932,31 @@ msgstr ""
 msgid "My books"
 msgstr ""
 
+msgid "books"
+msgstr ""
+
 msgid "Catalog"
 msgstr ""
 
 msgid "Order by"
 msgstr ""
 
-msgid "Universities"
+msgid "Disciplines"
+msgstr ""
+
+msgid "All books"
 msgstr ""
 
 msgid "Edit book"
 msgstr ""
 
+msgid "Back to my books"
+msgstr ""
+
 msgid "Book cover"
+msgstr ""
+
+msgid "Delete image"
 msgstr ""
 
 msgid "more"
@@ -1971,13 +1989,16 @@ msgstr ""
 msgid "Search-btn"
 msgstr ""
 
+msgid "Search results"
+msgstr ""
+
 msgid "Filter"
 msgstr ""
 
 msgid "Back to catalog"
 msgstr ""
 
-msgid "School"
+msgid "Book type"
 msgstr ""
 
 msgid "Phone"
@@ -2479,7 +2500,7 @@ msgid "Who can send messages to the mailing list"
 msgstr ""
 
 msgid ""
-"If you select moderated, you can pick the people who you want to allow to "
+"If you select 'moderated', you can pick the people who you want to allow to "
 "post to the mailing list."
 msgstr ""
 
@@ -3444,12 +3465,6 @@ msgstr ""
 msgid "no, thanks"
 msgstr ""
 
-msgid "Files:"
-msgstr ""
-
-msgid "Wiki pages:"
-msgstr ""
-
 msgid "notification settings"
 msgstr ""
 
@@ -3586,9 +3601,8 @@ msgid "Welcome to Ututi!"
 msgstr ""
 
 msgid ""
-"At the moment You are not confirmed as a teacher. Our administrators have "
-"been notified and will verify You shortly. Until then some restriction may "
-"apply to what You are allowed to do."
+"You have not been confirmed as a teacher yet. Our administrators will verify "
+"you shortly.Until then, your profile rights may be limited."
 msgstr ""
 
 msgid "Please specify the courses you are teaching"
@@ -3852,6 +3866,12 @@ msgid ""
 "membership?"
 msgstr ""
 
+msgid "Files:"
+msgstr ""
+
+msgid "Wiki pages:"
+msgstr ""
+
 msgid "Group or user:"
 msgstr ""
 
@@ -4000,22 +4020,70 @@ msgstr ""
 msgid "Regions for locations"
 msgstr ""
 
-msgid "back to search"
+msgid "Subject title:"
 msgstr ""
 
-msgid "Lecturer"
+msgid "University / department:"
 msgstr ""
 
-msgid "Brief description of the subject"
+msgid "University:"
+msgstr ""
+
+msgid "Department:"
+msgstr ""
+
+msgid "Tags:"
+msgstr ""
+
+msgid "Subject description:"
 msgstr ""
 
 msgid "Start watching this subject personally"
+msgstr ""
+
+msgid ""
+"Attention, please! Before creating new subject please ensure that it's not "
+"already there."
+msgstr ""
+
+msgid ""
+"A list of similar subjects to the one you are about to create is shown on the"
+" right."
+msgstr ""
+
+msgid ""
+"Please carefully read through the list and if you don't find your subject, "
+"create it."
+msgstr ""
+
+msgid "Create subject"
+msgstr ""
+
+msgid "Teacher, subjects are good!"
+msgstr ""
+
+msgid "User, subjects are good!"
+msgstr ""
+
+msgid "Create subject you teach:"
+msgstr ""
+
+msgid "Maybe here's what you're looking for?"
+msgstr ""
+
+msgid "Please make sure that the subject you are about to create is not in this list."
 msgstr ""
 
 msgid "Edit subject"
 msgstr ""
 
 msgid "back to the subject"
+msgstr ""
+
+msgid "Lecturer"
+msgstr ""
+
+msgid "Brief description of the subject"
 msgstr ""
 
 #, python-format
@@ -4136,9 +4204,6 @@ msgid "Personal course notes written down during a lecture"
 msgstr ""
 
 msgid "Any text that you want to collaborate on with your classmates"
-msgstr ""
-
-msgid "Existing subjects"
 msgstr ""
 
 msgid "2. School"
