@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-12-09 12:46+0300\n"
+"PO-Revision-Date: 2010-12-11 16:26+0300\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
@@ -26,26 +26,32 @@ msgstr "Wątek usunięty."
 msgid "Blog snippet updated."
 msgstr "Aktualizacja wątku na blogu."
 
-msgid "Specify correct science type."
-msgstr "Określ właściwy typ nauki."
-
 msgid "Specify correct book department."
 msgstr "Podaj prawidłowy typ książki."
 
-msgid "Specify correct location."
-msgstr "Określ poprawną lokalizację."
+msgid "Specify book department."
+msgstr ""
 
-msgid "Specify book type."
-msgstr "Określ typ książki."
+msgid "Specify correct science type."
+msgstr "Określ właściwy typ nauki."
 
 msgid "Specify science type."
 msgstr "Określ typ nauki."
 
-msgid "Wrong science type specified."
-msgstr "Określono niewłaściwy typ nauki."
+msgid "Selected city is not valid."
+msgstr "Wybrane miasto jest nieprawidłowe."
 
-msgid "Specify city."
-msgstr "Określ miasta."
+msgid "Specify a city please."
+msgstr "Wybierz miasto"
+
+msgid "Selected book type is not valid."
+msgstr "Wybrany typ książki jest nieprawidłowy."
+
+msgid "Specify book type."
+msgstr "Określ typ książki."
+
+msgid "Selected school grade is not valid."
+msgstr "Wybrana klasa jest nieprawidłowa."
 
 msgid "Please specify school grade"
 msgstr "Proszę określić stopień szkoły"
@@ -59,8 +65,26 @@ msgstr "Tylko właściciel tej książki można wykonać wybraną czynność"
 msgid "Book was updated succesfully"
 msgstr "Książka została zaktualizowana"
 
+#, python-format
+msgid "All cities (%(book_count)s)"
+msgstr "Wszystkie miasta (%(book_count)s)"
+
+#, python-format
+msgid "%(city)s (%(book_count)s)city"
+msgstr "%(city)s (%(book_count)s)miasto"
+
 msgid "You don't have rights to make this action"
 msgstr "Nie masz uprawnień do wykonania tego działania"
+
+#, python-format
+msgid "%(ubooks_label)s: %(user_name)s asks about book %(book_title)s"
+msgstr "%(ubooks_label)s: %(user_name)s pyta o książkę %(book_title)s"
+
+msgid "uBooks"
+msgstr "uBooks"
+
+msgid "Message sent."
+msgstr "Wiadomość wysłana"
 
 #, python-format
 msgid "Document at %(url)s was not found, but maybe you are interested in something else?"
@@ -484,9 +508,6 @@ msgstr "Wiadomość %(link_to_message)s została odrzucona."
 msgid "Could not reject %(link_to_message)s as it was already approved."
 msgstr "Nie można odrzucić %(link_to_message)s ponieważ to zostało już zatwierdzone."
 
-msgid "Message sent."
-msgstr "Wiadomość wysłana"
-
 #, python-format
 msgid "Ututi news: %(changes)s"
 msgstr "Nowe na Ututi: %(changes)s"
@@ -564,17 +585,44 @@ msgstr "Przedmiot został dodany do listy obserwowanych przedmiotów."
 msgid "The subject has been removed from your watched subjects list."
 msgstr "Przedmiot został usunięty z listy obserwowanych przedmiotów."
 
+msgid "The course is already in your taught courses list."
+msgstr "Ten przedmiot jest już na liście przedmiotów, których uczysz."
+
+msgid "The course was not in your taught courses list."
+msgstr "Ten przedmiot nie był na liście przedmiotów, których uczysz."
+
 msgid "You have no right to delete this folder."
 msgstr "Nie możesz usunąć tej teczki."
 
 msgid "New page"
 msgstr "Nowa notatka"
 
+msgid "All teacher tools will be available to You once our team confirms You as a teacher. Thank You!"
+msgstr "Narzędzia nauczyciela będą dostępne, gdy nasz zespół potwierdzi, że jesteś nauczycielem. Dziękujemy!"
+
 msgid "This user profile is not public"
 msgstr "Profil tego użytkownika nie jest publiczny"
 
 msgid "Search"
 msgstr "Szukaj"
+
+msgid "Profile"
+msgstr "Profil"
+
+msgid "Contacts"
+msgstr "Kontakty"
+
+msgid "Password"
+msgstr "Hasło"
+
+msgid "Wall"
+msgstr "Tablica"
+
+msgid "Notifications"
+msgstr "Powiadomienia"
+
+msgid "Your wall settings have been updated."
+msgstr "Ustawienia (strony)  zostały zaktualizowane."
 
 msgid "Your Google account has been unlinked."
 msgstr "Twoje konto Google zostało odłączone"
@@ -604,6 +652,9 @@ msgstr "Twój e-mail %s został potwierdzony, dziękujemy."
 msgid "Could not confirm email: invalid confirmation key."
 msgstr "E-mail nie może zostać potwierdzony: błędny kod potwierdzający"
 
+msgid "Your university information has been updated."
+msgstr "Informacje o Twojej uczelni zostały zaktualizowane."
+
 msgid "I like it"
 msgstr "I like it"
 
@@ -621,9 +672,6 @@ msgstr "Znajdź swoją uczelnię na Ututi ;)"
 
 msgid "Where are your notes?"
 msgstr "Gdzie masz swoje notatki?"
-
-msgid "Your university information has been updated."
-msgstr "Informacje o Twojej uczelni zostały zaktualizowane."
 
 msgid "Your phone number has been updated."
 msgstr "Twój numer telefonu został zaktualizowany."
@@ -645,9 +693,6 @@ msgstr "Nieprawidłowy temat"
 
 msgid "Wiki page created."
 msgstr "Wiki strona została utworzona"
-
-msgid "Your wall settings have been updated."
-msgstr "Ustawienia (strony)  zostały zaktualizowane."
 
 #, python-format
 msgid "Member: %s (%s)"
@@ -1010,9 +1055,6 @@ msgstr "E-mail"
 
 msgid "Gadu gadu"
 msgstr "Gadu Gadu"
-
-msgid "Password"
-msgstr "Hasło"
 
 msgid "Repeat password"
 msgstr "Powtórz hasło"
@@ -1514,9 +1556,6 @@ msgstr "Treść powiadomienia"
 msgid "Content"
 msgstr "Zawartość"
 
-msgid "Notifications"
-msgstr "Powiadomienia"
-
 msgid "School grade"
 msgstr "Szkolna ocena"
 
@@ -1766,20 +1805,17 @@ msgstr "Wątki z bloga:"
 msgid "New entry"
 msgstr "Nowe odwiedziny"
 
-msgid "Book cover"
-msgstr "Okładka książki"
+msgid "Image"
+msgstr "Obrazek"
 
-msgid "Phone"
-msgstr "Telefon"
-
-msgid "Delete logo"
-msgstr "Usuń logo"
+msgid "Book title"
+msgstr "Tytuł książki"
 
 msgid "Author"
 msgstr "Autor"
 
-msgid "Brief description of the book"
-msgstr "Krótki opis książki"
+msgid "Comment"
+msgstr "Komentarz"
 
 msgid "Course"
 msgstr "Kurs (wiele znaczeń)"
@@ -1787,14 +1823,14 @@ msgstr "Kurs (wiele znaczeń)"
 msgid "Price"
 msgstr "Cena"
 
-msgid "Show my phone number"
-msgstr "Pokaż mój numer telefonu"
-
 msgid "Book type"
 msgstr "Typ książki"
 
-msgid "back to catalog"
-msgstr "powrót do katalogu"
+msgid "Owner information"
+msgstr "Informacje o właścicielu"
+
+msgid "Phone number"
+msgstr "Numer telefonu"
 
 msgid "New book"
 msgstr "Nowa książka"
@@ -1802,14 +1838,14 @@ msgstr "Nowa książka"
 msgid "About U-Books"
 msgstr "O U-Books"
 
-msgid "Catalog"
-msgstr "Katalog"
-
 msgid "Upload a Book"
 msgstr " Dodaj książkę"
 
 msgid "My books"
 msgstr "Moje ksiązki"
+
+msgid "Catalog"
+msgstr "Katalog"
 
 msgid "Order by"
 msgstr "Sortuj według"
@@ -1819,6 +1855,9 @@ msgstr "Uniwersytety"
 
 msgid "Edit book"
 msgstr "Edycja ksiązki"
+
+msgid "Book cover"
+msgstr "Okładka książki"
 
 msgid "more"
 msgstr "więcej"
@@ -1841,8 +1880,17 @@ msgstr "To miejsce, gdzie możesz znaleźć nowego właściciela dla Twojego sta
 msgid "Books added"
 msgstr "Książki dodał"
 
+msgid "Restore"
+msgstr "Przywróć"
+
 msgid "You haven't added any books yet."
 msgstr "Nie dodano jeszcze żadnych książek."
+
+msgid "Search-btn"
+msgstr "Szukaj"
+
+msgid "Filter"
+msgstr "Filtr"
 
 msgid "Back to catalog"
 msgstr "Powrót do katalogu"
@@ -1850,8 +1898,8 @@ msgstr "Powrót do katalogu"
 msgid "School"
 msgstr "Szkoła"
 
-msgid "Owner information"
-msgstr "Informacje o właścicielu"
+msgid "Phone"
+msgstr "Telefon"
 
 #, python-format
 msgid "We have received a request to confirm the ownership of this email by %(fullname)s on the Ututi system. If this email belongs to you, confirm it by clicking on this link:"
@@ -1995,12 +2043,12 @@ msgstr ""
 "U-team\n"
 
 #, python-format
-msgid "If you want to stop getting these emails - you can change your subscription settings in your <a href=\"%(url)s\">watched subject page</a>."
-msgstr "Jeżeli nie chcesz otrzymywać takich wiadomości - zmień ustawienia subskrypcji na <a href=\"%(url)s\">watched subject page</a>."
+msgid "If you want to stop getting these emails - you can change your subscription settings in your <a href=\"%(url)s\">notification settings page</a>."
+msgstr "Jeśli nie chcesz otrzymywać tych wiadomości możesz zmienić ustawienia subskrypcji na <a href=\"%(url)s\">stronie Ustawienia powiadomień</a>."
 
 #, python-format
-msgid "If you want to stop getting these emails - you can change your subscription settings in your watched subject page (%(url)s)."
-msgstr "Jeżeli nie chcesz otrzymywać takich wiadomości - zmień ustawienia subskrypcji na stronie obserwowanych przez Ciebie przedmiotów (%(url)s)."
+msgid "If you want to stop getting these emails - you can change your subscription settings in your notification settings page (%(url)s)."
+msgstr "Jeśli nie chcesz otrzymywać tych wiadomości możesz zmienić ustawienia subskrypcji na <a href=\"%(url)s\">stronie Ustawienia powiadomień</a>."
 
 msgid "We have received a request to reset Your password on the Ututi system. If You did not request the password to be recovered, please ignore this message."
 msgstr "Otrzymaliśmy zgłoszenie utraty hasła w systemie Ututi. Jeżeli nie zgłaszałeś utraty - zignoruj tę wiadomość."
@@ -2508,9 +2556,6 @@ msgstr "Czeka na potwierdzenie"
 msgid "User"
 msgstr "Użytkownik"
 
-msgid "Phone number"
-msgstr "Numer telefonu"
-
 msgid "Last seen"
 msgstr "Ostatnie logowanie"
 
@@ -2843,9 +2888,6 @@ msgstr "Wyświetl"
 msgid "Compare with previous"
 msgstr "Porównaj z poprzednim"
 
-msgid "Restore"
-msgstr "Przywróć"
-
 #, python-format
 msgid "You are viewing an old version of this page created by %(link_to_user)s on %(date)s"
 msgstr "Ogladasz starą wersję tej strony utworzoną przez %(link_to_user)s %(date)s"
@@ -3002,9 +3044,6 @@ msgstr "Wszędzie"
 msgid "in-Subjects"
 msgstr "Przedmioty"
 
-msgid "Search-btn"
-msgstr "Szukaj"
-
 msgid "University information"
 msgstr "Informacje o uczelni"
 
@@ -3041,6 +3080,9 @@ msgstr "Informacje o przedmiocie"
 msgid "Lecturer:"
 msgstr "Wykładowca:"
 
+msgid "Lecturers:"
+msgstr "Wykładowcy:"
+
 msgid "The subject is watched by:"
 msgstr "Przedmiot obserwuje/-ą:"
 
@@ -3061,14 +3103,20 @@ msgstr[2] "<span class='orange'>%(count)s</span> grup"
 msgid "There are no subject tags."
 msgstr "Przedmiot nie posiada tagów."
 
-msgid "Add to my subjects"
-msgstr "Dodaj do moich przedmiotów"
+msgid "Delete subject"
+msgstr "Usuń przedmiot"
+
+msgid "Remove from my taught courses"
+msgstr "Usuń z listy przedmiotów, których uczę"
+
+msgid "I teach this course"
+msgstr "Uczę tego przedmiotu"
 
 msgid "Remove from my subjects"
 msgstr "Usuń z moich przedmiotów"
 
-msgid "Delete subject"
-msgstr "Usuń przedmiot"
+msgid "Add to my subjects"
+msgstr "Dodaj do moich przedmiotów"
 
 msgid "edit subject information"
 msgstr "popraw informacje o przedmiocie"
@@ -3170,25 +3218,10 @@ msgstr "http://blog.ututi.pl"
 msgid "Read our blog"
 msgstr "Czytaj nasz blog"
 
-msgid "Profile settings"
-msgstr "Ustawienia profilu"
+msgid "back to home page"
+msgstr "strona główna"
 
-msgid "back to the profile"
-msgstr "wróć do profilu"
-
-msgid "Address of your website or blog"
-msgstr "Adres Twojej strony lub bloga"
-
-msgid "About yourself"
-msgstr "O Tobie"
-
-msgid "Show my profile to unregistered users and search engines"
-msgstr "Pokazuj mój profil niezarejestrowanym użytkownikom i wyszukiwarkom"
-
-msgid "Personal logo"
-msgstr "Twoje logo"
-
-msgid "Contact data"
+msgid "Contact information"
 msgstr "Dane kontaktowe"
 
 msgid "Your GG number"
@@ -3202,14 +3235,14 @@ msgstr "Wyślij kod ponownie"
 
 msgid ""
 "If you want to confirm your GaduGadu number,\n"
-"                         please enter the code that you have received\n"
-"                         in your GG. Also don't forget to add Ututi\n"
-"                        (<a href=\"gg:5437377\">5437377</a>) to your friends."
+"                     please enter the code that you have received\n"
+"                     in your GG. Also don't forget to add Ututi\n"
+"                    (<a href=\"gg:5437377\">5437377</a>) to your friends."
 msgstr ""
-"Jeżeli chcesz uzyskać potwierdzenie Twojego e-maila,\n"
-"                       wprowadź kod otrzymany \n"
-"                       na Twoje gg. Nie zapomnij też dodać UTUTI\n"
-"                        (<a href=\"gg:5437377\">5437377</a>) do listy znajomych."
+"Jeśli chcesz potwierdzić swój numer GaduGadu, \n"
+"                     wprowadź kod otrzymany na swoim GG. \n"
+"                     Nie zapomnij dodać Ututi\n"
+"                     (<a href=\"gg:5437377\">5437377</a>) do znajomych."
 
 msgid "Submit code"
 msgstr "Potwierdź kod"
@@ -3238,8 +3271,8 @@ msgstr "Zaktualizuj listę kontaktową"
 msgid "Unlink"
 msgstr "Nie łącz"
 
-msgid "Change your password"
-msgstr "Zmień hasło"
+msgid "Link to"
+msgstr "Połącz z"
 
 msgid "Current password"
 msgstr "Aktualne hasło"
@@ -3249,6 +3282,21 @@ msgstr "Nowe hasło"
 
 msgid "Repeat the new password"
 msgstr "Wpisz ponownie nowe hasło"
+
+msgid "Profile settings"
+msgstr "Ustawienia profilu"
+
+msgid "Address of your website or blog"
+msgstr "Adres Twojej strony lub bloga"
+
+msgid "About yourself"
+msgstr "O Tobie"
+
+msgid "Show my profile to unregistered users and search engines"
+msgstr "Pokazuj mój profil niezarejestrowanym użytkownikom i wyszukiwarkom"
+
+msgid "Personal logo"
+msgstr "Twoje logo"
 
 msgid "What's new?"
 msgstr "Powiadomienia"
@@ -3262,63 +3310,6 @@ msgstr "Edytuj pokazane aktualizacje"
 #, python-format
 msgid "This is the Ututi wall. Here you will find notifications about things that concern you such as changes in your groups and the subjects you are watching. Start by <a href=\"%(create_group_link)s\">creating</a> or <a href=\"%(groups_list_link)s\">joining</a> a group and watching some <a href=\"%(subjects_list_link)s\">subjects</a>."
 msgstr "To jest tablica Ututi. Tutaj znajdziesz powiadomienia o rzeczach, które dotyczą Ciebie, takie jak zmiany w Twoich grupach i przedmiotach, które obserwujesz. Zacznij od <a href=\"%(create_group_link)s\">tworzenia</a> lub <a href=\"%(groups_list_link)s\">dołączenia</a> do grupy i obserwowania niektórych <a href=\"%(subjects_list_link)s\">przedmiotów</a>."
-
-msgid "Filter by school:"
-msgstr "Szukaj według uczelni"
-
-msgid "Did not find the group you were looking for?"
-msgstr "Nie odnalazłeś grupy, której szukałeś?"
-
-msgid "New group"
-msgstr "Nowa grupa"
-
-msgid "Create your group!"
-msgstr "Utwórz Twoją grupę!"
-
-msgid "Go to my department"
-msgstr "Przejdź do mego wydziału"
-
-msgid "Tell us where you are studying"
-msgstr "Podaj nazwę swojej uczelni"
-
-msgid "save"
-msgstr "zachowaj"
-
-msgid "Please enter a university."
-msgstr "Wpisz nazwę uczelni"
-
-msgid "What's your phone number?"
-msgstr "Jaki jest Twój numer telefonu?"
-
-msgid "Mobile phone number: "
-msgstr "Numer telefonu komórkowego:"
-
-msgid "Please enter a phone number."
-msgstr "Wpisz, proszę, numer telefonu."
-
-msgid "The entered phone number is invalid."
-msgstr "Wprowadzony numer telefonu nie jest poprawny."
-
-msgid "(use the format +37067812345)"
-msgstr "(korzystaj z formatu +48123456789)"
-
-msgid "no, thanks"
-msgstr "nie, dzięki"
-
-msgid "Please confirm your phone number"
-msgstr "Potwierdź, proszę, Twój numer telefonu"
-
-msgid "Enter the confirmation code that you received by SMS to prove that this number belongs to you."
-msgstr "Wprowadź kod potwierdzający, wysłany przez SMS. Operacja zakończy proces weryfikacji Twojego numeru telefonu. "
-
-msgid "Confirmation code: "
-msgstr "Kod potwierdzający:"
-
-msgid "Please enter a confirmation key."
-msgstr "Wprowadź, proszę, kod potwierdzający."
-
-msgid "Invalid confirmation key."
-msgstr "Kod potwierdzający jest nieważny."
 
 msgid "Your phone has been confirmed. Thank you."
 msgstr "Twój numer telefonu został potwierdzony. Dziękujemy."
@@ -3347,20 +3338,8 @@ msgstr "To proste - musisz jedynie znać adresy e-mail kolegów z grupy!"
 msgid "Use the group's mailing list!"
 msgstr "Skorzystaj z listy mailingowej grupy!"
 
-msgid "Show subjects from my groups"
-msgstr "Pokaż przedmioty moich grup"
-
-msgid "notification settings"
-msgstr "ustawienia powiadomień"
-
-msgid "add subject"
-msgstr "dodaj przedmiot"
-
-msgid "Watch subject"
-msgstr "Obserwuj przedmiot"
-
-msgid "watch subjects"
-msgstr "obserwuj przedmioty"
+msgid "no, thanks"
+msgstr "nie, dzięki"
 
 msgid "Files:"
 msgstr "Pliki:"
@@ -3368,11 +3347,68 @@ msgstr "Pliki:"
 msgid "Wiki pages:"
 msgstr "Wiki:"
 
+msgid "notification settings"
+msgstr "ustawienia powiadomień"
+
+msgid "add subject"
+msgstr "dodaj przedmiot"
+
+msgid "Tell us where you are studying"
+msgstr "Podaj nazwę swojej uczelni"
+
+msgid "Show subjects from my groups"
+msgstr "Pokaż przedmioty moich grup"
+
 msgid "Ututi is Your university online. Here You and Your class mates can create your group online, use the mailing list for communication and the file storage for sharing information."
 msgstr "Ututi – to wirtualna przestrzeń komunikacyjna dla studentów. Służy do wygodnej i szybkiej wymiany informacji pomiędzy członkami grup akademickich, udostępnia platformę do komunikacji, zwłaszcza do wymiany notatek i materiałów naukowych."
 
 msgid "Share your thoughts about Ututi"
 msgstr "Podziel się myślami o Ututi"
+
+msgid "save"
+msgstr "zachowaj"
+
+msgid "Please enter a university."
+msgstr "Wpisz nazwę uczelni"
+
+msgid "Go to my department"
+msgstr "Przejdź do mego wydziału"
+
+msgid "What's your phone number?"
+msgstr "Jaki jest Twój numer telefonu?"
+
+msgid "Mobile phone number: "
+msgstr "Numer telefonu komórkowego:"
+
+msgid "Please enter a phone number."
+msgstr "Wpisz, proszę, numer telefonu."
+
+msgid "The entered phone number is invalid."
+msgstr "Wprowadzony numer telefonu nie jest poprawny."
+
+msgid "(use the format +37067812345)"
+msgstr "(korzystaj z formatu +48123456789)"
+
+msgid "Please confirm your phone number"
+msgstr "Potwierdź, proszę, Twój numer telefonu"
+
+msgid "Enter the confirmation code that you received by SMS to prove that this number belongs to you."
+msgstr "Wprowadź kod potwierdzający, wysłany przez SMS. Operacja zakończy proces weryfikacji Twojego numeru telefonu. "
+
+msgid "Confirmation code: "
+msgstr "Kod potwierdzający:"
+
+msgid "Please enter a confirmation key."
+msgstr "Wprowadź, proszę, kod potwierdzający."
+
+msgid "Invalid confirmation key."
+msgstr "Kod potwierdzający jest nieważny."
+
+msgid "Watch subject"
+msgstr "Obserwuj przedmiot"
+
+msgid "watch subjects"
+msgstr "obserwuj przedmioty"
 
 msgid "Very sad..."
 msgstr "Szkoda..."
@@ -3380,11 +3416,8 @@ msgstr "Szkoda..."
 msgid "We are very disappointed that you have decided not to support Ututi. We hope you will support us next time. Good luck!"
 msgstr "Szkoda, że nie zdecydowałeś się wesprzeć Ututi. Miejmy nadzieję, że uczynisz to w nie tak odległej przyszłości ;) Powodzenia!"
 
-msgid "What have I been doing?"
-msgstr "Moja aktywność"
-
-msgid "You haven't contributed much, have you?"
-msgstr "Za dużo tu raczej nie zdziałałeś..."
+msgid "back to the profile"
+msgstr "wróć do profilu"
 
 msgid "Watched subjects notification settings"
 msgstr "Ustawienia powiadomień o obserwowanych przedmiotach"
@@ -3392,15 +3425,24 @@ msgstr "Ustawienia powiadomień o obserwowanych przedmiotach"
 msgid "email notifications"
 msgstr "powiadomienia e-mailem"
 
-msgid "Add a subject"
-msgstr "Dodaj przedmiot"
+msgid "Group's mailing list"
+msgstr "Lista mailingowa grupy"
 
-msgid "Personally watched subjects"
-msgstr "Przedmioty obserwowane osobiście"
+msgid "Group's forum"
+msgstr "Forum grupy"
+
+msgid "Personally watched subjects' notifications"
+msgstr "Obejrzane powiadomienia o obserwowanych przedmiotach"
 
 #, python-format
-msgid "Group's %(group_title)s subjects"
-msgstr "Przedmioty grupy %(group_title)s"
+msgid "Group's %(group_title)s notifications"
+msgstr "Powiadomienia grupy %(group_title)s"
+
+msgid "What have I been doing?"
+msgstr "Moja aktywność"
+
+msgid "You haven't contributed much, have you?"
+msgstr "Za dużo tu raczej nie zdziałałeś..."
 
 msgid "Why we need support?"
 msgstr "Dlaczego potrzebujemy wsparcia"
@@ -3422,6 +3464,42 @@ msgstr "10 zlotych"
 
 msgid "50 litas"
 msgstr "50 złotych"
+
+msgid "Welcome to Ututi!"
+msgstr "Witaj na Ututi!"
+
+msgid "At the moment You are not confirmed as a teacher. Our administrators have been notified and will verify You shortly. Until then some restriction may apply to what You are allowed to do."
+msgstr "Jeszcze nie potwierdziliśmy, że jesteś nauczycielem. Nasi administratorzy zostali o tym powiadomieni i niedługo zweryfikują Twój status. Zanim to się stanie możesz nie mieć dotępu do wszystkich opcji."
+
+msgid "Please specify the courses you are teaching"
+msgstr "Podaj przedmioty, których uczysz."
+
+msgid "Get in touch with your students"
+msgstr "Skontaktuj się ze swoimi studentami"
+
+msgid "Share course materials easily"
+msgstr "Prosty sposób na dzielenie się notatkami"
+
+msgid "Find courses I teach"
+msgstr "Znajdź przedmioty, których uczę"
+
+msgid "find courses I teach"
+msgstr "znajdź przedmioty, których uczę"
+
+msgid "Add:"
+msgstr "Dodaj:"
+
+msgid "Create wiki page"
+msgstr "Stwórz stronę wiki"
+
+msgid "Tell us where you work"
+msgstr "Powiedz nam gdzie pracujesz"
+
+msgid "My courses"
+msgstr "Moje przedmioty"
+
+msgid "add courses"
+msgstr "dodaj przedmioty"
 
 msgid "Thank you for supporting Ututi!"
 msgstr "Dziękujemy za wsparcie Ututi!"
@@ -3480,8 +3558,11 @@ msgstr "Aktualizacja przedm"
 msgid "Which events do You want to see on Your wall?"
 msgstr "Jakie wydarzenia chcesz zobaczyć na swojej tablicy?"
 
-msgid "back to the wall"
-msgstr "Wróć do (strony)"
+msgid "Add a subject"
+msgstr "Dodaj przedmiot"
+
+msgid "Notification settings"
+msgstr "Ustawienia powiadomień"
 
 msgid "Pick your region"
 msgstr "Wybierz województwo"
@@ -3647,8 +3728,14 @@ msgstr "Podziel się z innymi"
 msgid "send a message"
 msgstr "wyślij wiadomość"
 
+msgid "You need to be a member of a group or have subjects that you are studying to be able to quickly upload files."
+msgstr "Musisz należeć do grupy lub podać przedmioty, których się uczysz, aby szybko dodać pliki."
+
 msgid "upload a file"
 msgstr "dodaj plik"
+
+msgid "You or your group need to have subjects that you are studying to be able to quickly create wiki notes in them."
+msgstr "Ty lub Twoja grupa musicie podać przedmioty, których się uczycie, aby móc szybko stworzyć w nich notatki wiki."
 
 msgid "create a wiki page"
 msgstr "utwórz wiki stronę"
@@ -3696,7 +3783,7 @@ msgstr "%(user_link)s opublikował nową wiadomość %(message_link)s do grupy %
 
 #, python-format
 msgid "%(user_link)s has posted a new message %(message_link)s to the group's %(group_link)s moderation queue."
-msgstr ""
+msgstr "Nowa wiadomość %(message_link)s w kolejce do moderacji w grupie %(group_link)s dodana przez użytkownika %(user_link)s "
 
 msgid "Moderate"
 msgstr "Moderuj"
@@ -3779,6 +3866,22 @@ msgstr "Edytuj przedmiot"
 
 msgid "back to the subject"
 msgstr "wróć do przedmiotu"
+
+#, python-format
+msgid "%(subject_link)s has been added to your watched subject list."
+msgstr "Przedmiot %(subject_link)s został dodany do Twojej listy obserwowanych przedmiotów."
+
+#, python-format
+msgid "%(subject_link)s has been removed from your watched subject list."
+msgstr "Przedmiot %(subject_link)s został usunięty z Twojej listy obserwowanych przedmiotów."
+
+#, python-format
+msgid "%(subject_link)s has been added to your taught courses list."
+msgstr "Przedmiot %(subject_link)s został dodany do Twojej listy nauczanych przedmiotów."
+
+#, python-format
+msgid "%(subject_link)s has been removed from your taught courses list."
+msgstr "Przedmiot %(subject_link)s został usunięty z Twojej listy nauczanych przedmiotów."
 
 msgid "Subject has been deleted, you can restore it if you want to."
 msgstr "Przedmiot został usunięty, ale możesz go jeszcze przywrócić."
@@ -3866,6 +3969,9 @@ msgstr "Prywatne notatki spisane podczas zajęć akademickich "
 
 msgid "Any text that you want to collaborate on with your classmates"
 msgstr "Dowolny tekst który chcesz opracować wspólnie z kolegami z grupy"
+
+msgid "Existing subjects"
+msgstr "Istniejące przedmioty"
 
 msgid "2. School"
 msgstr "2. Szkoła"

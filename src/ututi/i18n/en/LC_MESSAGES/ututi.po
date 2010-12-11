@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-12-01 16:41+0200\n"
+"PO-Revision-Date: 2010-12-09 12:47+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -26,25 +26,31 @@ msgstr ""
 msgid "Blog snippet updated."
 msgstr ""
 
-msgid "Specify correct science type."
-msgstr ""
-
 msgid "Specify correct book department."
 msgstr ""
 
-msgid "Specify correct location."
+msgid "Specify book department."
 msgstr ""
 
-msgid "Specify book type."
+msgid "Specify correct science type."
 msgstr ""
 
 msgid "Specify science type."
 msgstr ""
 
-msgid "Wrong science type specified."
+msgid "Selected city is not valid."
 msgstr ""
 
-msgid "Specify city."
+msgid "Specify a city please."
+msgstr ""
+
+msgid "Selected book type is not valid."
+msgstr ""
+
+msgid "Specify book type."
+msgstr ""
+
+msgid "Selected school grade is not valid."
 msgstr ""
 
 msgid "Please specify school grade"
@@ -59,7 +65,25 @@ msgstr ""
 msgid "Book was updated succesfully"
 msgstr ""
 
+#, python-format
+msgid "All cities (%(book_count)s)"
+msgstr ""
+
+#, python-format
+msgid "%(city)s (%(book_count)s)city"
+msgstr ""
+
 msgid "You don't have rights to make this action"
+msgstr ""
+
+#, python-format
+msgid "%(ubooks_label)s: %(user_name)s asks about book %(book_title)s"
+msgstr ""
+
+msgid "uBooks"
+msgstr ""
+
+msgid "Message sent."
 msgstr ""
 
 #, python-format
@@ -518,9 +542,6 @@ msgstr ""
 msgid "Could not reject %(link_to_message)s as it was already approved."
 msgstr ""
 
-msgid "Message sent."
-msgstr ""
-
 #, python-format
 msgid "Ututi news: %(changes)s"
 msgstr ""
@@ -595,6 +616,12 @@ msgstr ""
 msgid "The subject has been removed from your watched subjects list."
 msgstr ""
 
+msgid "The course is already in your taught courses list."
+msgstr ""
+
+msgid "The course was not in your taught courses list."
+msgstr ""
+
 msgid "You have no right to delete this folder."
 msgstr ""
 
@@ -658,6 +685,9 @@ msgstr ""
 msgid "Could not confirm email: invalid confirmation key."
 msgstr ""
 
+msgid "Your university information has been updated."
+msgstr ""
+
 msgid "I like it"
 msgstr ""
 
@@ -674,9 +704,6 @@ msgid "I found my University on Ututi ;)"
 msgstr ""
 
 msgid "Where are your notes?"
-msgstr ""
-
-msgid "Your university information has been updated."
 msgstr ""
 
 msgid "Your phone number has been updated."
@@ -1878,19 +1905,16 @@ msgstr ""
 msgid "New entry"
 msgstr ""
 
-msgid "Book cover"
+msgid "Image"
 msgstr ""
 
-msgid "Phone"
-msgstr ""
-
-msgid "Delete logo"
+msgid "Book title"
 msgstr ""
 
 msgid "Author"
 msgstr ""
 
-msgid "Brief description of the book"
+msgid "Comment"
 msgstr ""
 
 msgid "Course"
@@ -1899,13 +1923,13 @@ msgstr ""
 msgid "Price"
 msgstr ""
 
-msgid "Show my phone number"
-msgstr ""
-
 msgid "Book type"
 msgstr ""
 
-msgid "back to catalog"
+msgid "Owner information"
+msgstr ""
+
+msgid "Phone number"
 msgstr ""
 
 msgid "New book"
@@ -1932,6 +1956,9 @@ msgstr ""
 msgid "Edit book"
 msgstr ""
 
+msgid "Book cover"
+msgstr ""
+
 msgid "more"
 msgstr ""
 
@@ -1953,7 +1980,16 @@ msgstr ""
 msgid "Books added"
 msgstr ""
 
+msgid "Restore"
+msgstr ""
+
 msgid "You haven't added any books yet."
+msgstr ""
+
+msgid "Search-btn"
+msgstr "Search"
+
+msgid "Filter"
 msgstr ""
 
 msgid "Back to catalog"
@@ -1962,7 +1998,7 @@ msgstr ""
 msgid "School"
 msgstr ""
 
-msgid "Owner information"
+msgid "Phone"
 msgstr ""
 
 #, python-format
@@ -2073,14 +2109,14 @@ msgstr ""
 #, python-format
 msgid ""
 "If you want to stop getting these emails - you can change your "
-"subscription settings in your <a href=\"%(url)s\">watched subject "
+"subscription settings in your <a href=\"%(url)s\">notification settings "
 "page</a>."
 msgstr ""
 
 #, python-format
 msgid ""
 "If you want to stop getting these emails - you can change your "
-"subscription settings in your watched subject page (%(url)s)."
+"subscription settings in your notification settings page (%(url)s)."
 msgstr ""
 
 msgid ""
@@ -2607,9 +2643,6 @@ msgstr ""
 msgid "User"
 msgstr ""
 
-msgid "Phone number"
-msgstr ""
-
 msgid "Last seen"
 msgstr ""
 
@@ -2973,9 +3006,6 @@ msgstr ""
 msgid "Compare with previous"
 msgstr ""
 
-msgid "Restore"
-msgstr ""
-
 #, python-format
 msgid ""
 "You are viewing an old version of this page created by %(link_to_user)s "
@@ -3138,9 +3168,6 @@ msgstr ""
 msgid "in-Subjects"
 msgstr "Subjects"
 
-msgid "Search-btn"
-msgstr "Search"
-
 msgid "University information"
 msgstr ""
 
@@ -3174,6 +3201,9 @@ msgstr ""
 msgid "Lecturer:"
 msgstr ""
 
+msgid "Lecturers:"
+msgstr ""
+
 msgid "The subject is watched by:"
 msgstr ""
 
@@ -3192,13 +3222,19 @@ msgstr[1] ""
 msgid "There are no subject tags."
 msgstr ""
 
-msgid "Add to my subjects"
+msgid "Delete subject"
+msgstr ""
+
+msgid "Remove from my taught courses"
+msgstr ""
+
+msgid "I teach this course"
 msgstr ""
 
 msgid "Remove from my subjects"
 msgstr ""
 
-msgid "Delete subject"
+msgid "Add to my subjects"
 msgstr ""
 
 msgid "edit subject information"
@@ -3403,9 +3439,6 @@ msgid ""
 "href=\"%(subjects_list_link)s\">subjects</a>."
 msgstr ""
 
-msgid "Go to my department"
-msgstr ""
-
 msgid "Your phone has been confirmed. Thank you."
 msgstr ""
 
@@ -3444,13 +3477,16 @@ msgstr ""
 msgid "Wiki pages:"
 msgstr ""
 
-msgid "Show subjects from my groups"
-msgstr ""
-
 msgid "notification settings"
 msgstr ""
 
 msgid "add subject"
+msgstr ""
+
+msgid "Tell us where you are studying"
+msgstr ""
+
+msgid "Show subjects from my groups"
 msgstr ""
 
 msgid ""
@@ -3462,13 +3498,13 @@ msgstr ""
 msgid "Share your thoughts about Ututi"
 msgstr ""
 
-msgid "Tell us where you are studying"
-msgstr ""
-
 msgid "save"
 msgstr ""
 
 msgid "Please enter a university."
+msgstr ""
+
+msgid "Go to my department"
 msgstr ""
 
 msgid "What's your phone number?"
@@ -3526,20 +3562,17 @@ msgstr ""
 msgid "email notifications"
 msgstr ""
 
-msgid "Add a subject"
-msgstr ""
-
 msgid "Group's mailing list"
 msgstr ""
 
 msgid "Group's forum"
 msgstr ""
 
-msgid "Personally watched subjects"
+msgid "Personally watched subjects' notifications"
 msgstr ""
 
 #, python-format
-msgid "Group's %(group_title)s subjects"
+msgid "Group's %(group_title)s notifications"
 msgstr ""
 
 msgid "What have I been doing?"
@@ -3583,6 +3616,36 @@ msgid ""
 "At the moment You are not confirmed as a teacher. Our administrators have"
 " been notified and will verify You shortly. Until then some restriction "
 "may apply to what You are allowed to do."
+msgstr ""
+
+msgid "Please specify the courses you are teaching"
+msgstr ""
+
+msgid "Get in touch with your students"
+msgstr ""
+
+msgid "Share course materials easily"
+msgstr ""
+
+msgid "Find courses I teach"
+msgstr ""
+
+msgid "find courses I teach"
+msgstr ""
+
+msgid "Add:"
+msgstr ""
+
+msgid "Create wiki page"
+msgstr ""
+
+msgid "Tell us where you work"
+msgstr ""
+
+msgid "My courses"
+msgstr ""
+
+msgid "add courses"
 msgstr ""
 
 msgid "Thank you for supporting Ututi!"
@@ -3643,6 +3706,9 @@ msgid "Subject updates"
 msgstr ""
 
 msgid "Which events do You want to see on Your wall?"
+msgstr ""
+
+msgid "Add a subject"
 msgstr ""
 
 msgid "Notification settings"
@@ -3985,6 +4051,22 @@ msgstr ""
 msgid "back to the subject"
 msgstr ""
 
+#, python-format
+msgid "%(subject_link)s has been added to your watched subject list."
+msgstr ""
+
+#, python-format
+msgid "%(subject_link)s has been removed from your watched subject list."
+msgstr ""
+
+#, python-format
+msgid "%(subject_link)s has been added to your taught courses list."
+msgstr ""
+
+#, python-format
+msgid "%(subject_link)s has been removed from your taught courses list."
+msgstr ""
+
 msgid "Subject has been deleted, you can restore it if you want to."
 msgstr ""
 
@@ -4089,6 +4171,9 @@ msgid "Personal course notes written down during a lecture"
 msgstr ""
 
 msgid "Any text that you want to collaborate on with your classmates"
+msgstr ""
+
+msgid "Existing subjects"
 msgstr ""
 
 msgid "2. School"
