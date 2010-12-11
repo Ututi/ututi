@@ -2309,7 +2309,7 @@ class Notification(object):
 
 class Department(object):
 
-    names = ['university', 'school', 'other']
+    names = {'university': 'Students books', 'school': 'School books', 'other': 'Other books'}
     departments_by_id = {}
     departments_by_name = {}
 
@@ -2320,8 +2320,8 @@ class Department(object):
 
     @classmethod
     def initialize(cls):
-        for id, name in enumerate(cls.names):
-            department = Department(id, name, name.capitalize())
+        for id, name in enumerate(cls.names.keys()):
+            department = Department(id, name, cls.names[name])
             cls.departments_by_id[id] = department
             cls.departments_by_name[name] = department
 

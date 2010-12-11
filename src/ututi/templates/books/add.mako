@@ -64,7 +64,7 @@ function show_department(){
           %for department in c.book_departments:
           <label class="department-field-select-block">
             ${h.radio("department", department[0], class_="department_selection")}
-            ${department[1]}
+            ${_(department[1])}
           </label>
           %endfor
           <form:error name="department" />
