@@ -27,7 +27,7 @@ let's type in that url:
 The teacher is also shown a block that informs him he is not verified yet:
     >>> browser.printQuery("id('teacher_unverified')//text()")
     Welcome to Ututi!
-    At the moment You are not confirmed as a teacher. Our administrators have been notified and will verify You shortly. Until then some restriction may apply to what You are allowed to do.
+    You have not been confirmed as a teacher yet. Our administrators will verify you shortly.Until then, your profile rights may be limited.
 
 
 Teacher gets a confirmation email so he could approve his
