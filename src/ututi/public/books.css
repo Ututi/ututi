@@ -1,4 +1,10 @@
 
+h1 {
+    color: #4d4d4d;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
 #search_portlet-content input {
    width: 180px;
 }
@@ -138,7 +144,7 @@ label input.wide{
 /* Book information */
 
 .book-information{
-    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .book-information .book-title{

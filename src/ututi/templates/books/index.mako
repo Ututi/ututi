@@ -56,6 +56,7 @@
 
 <%self:ubooks_advicer />
 <div>
+<h1>${_('Newest books')}</h1>
 %for book in c.books:
     ${book_information(book)}
 %endfor
