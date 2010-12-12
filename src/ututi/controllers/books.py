@@ -226,7 +226,7 @@ class BooksController(BaseController):
 
 
     def index(self):
-        books = meta.Session.query(Book)
+        books = meta.Session.query(Book).order_by(desc(Book.valid_until))
         c.books = self._make_pages(books)
         return render('books/index.mako')
 
