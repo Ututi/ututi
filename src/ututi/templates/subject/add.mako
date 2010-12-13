@@ -105,11 +105,9 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
   %endif
 
   <div id="warning-text">
-    <p>
     ${_("Attention, please! Before creating new subject please ensure that it's not already there.")}
     ${_("A list of similar subjects to the one you are about to create is shown on the right.")}
     ${_("Please carefully read through the list and if you don't find your subject, create it.")}
-    </p>
   </div>
 
   <div>
@@ -122,23 +120,53 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
 </%def>
 
 <%def name="default_text_for_teacher()">
-  <h1 class="page-title">${_("Teacher, subjects are good!")}</h1>
-  <p>
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis mi eu nibh dapibus lacinia sed eget enim. Curabitur lacus elit, mollis vitae bibendum a, consequat eget nibh. Vivamus accumsan rhoncus enim, eget viverra ligula pulvinar eget. Quisque dictum laoreet ultricies. Nam libero odio, elementum ac placerat id, porta quis lacus. Aliquam a lectus ac mauris eleifend varius vitae rhoncus erat. Nulla facilisi. Donec at porttitor tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec hendrerit, velit a posuere commodo, mauris quam posuere orci, ac mollis sem erat nec felis. Nullam luctus elementum hendrerit.
-  </p>
-  <p>
-  Proin et arcu sit amet lacus aliquam aliquam. Suspendisse convallis, mi id molestie rutrum, risus quam rhoncus libero, vel convallis massa quam in ipsum. Duis ullamcorper sollicitudin lectus ac viverra. In molestie diam ac nunc egestas laoreet gravida nisi sagittis. Donec eget felis eget arcu accumsan laoreet. Ut hendrerit elementum arcu, ac dapibus lectus vestibulum sed. Sed vitae lacus quam. Etiam eu ligula tellus, et rhoncus lorem. Sed hendrerit suscipit adipiscing. Cras ac tortor tellus. Integer eu augue quis neque tempor pretium. Phasellus hendrerit, quam nec vestibulum feugiat, libero erat volutpat nisl, eget rutrum massa orci eu arcu. Nam lectus dui, cursus non imperdiet at, viverra at lorem. Aliquam mauris turpis, sagittis vitae tincidunt pharetra, feugiat quis purus. Aenean fermentum vehicula tellus, sit amet adipiscing mi ornare sit amet. Donec nec magna sed velit semper adipiscing pulvinar eget massa. Nulla tempor tellus eu odio laoreet tincidunt. Ut ut quam arcu, eu dignissim ante. Duis commodo erat et est porttitor accumsan. 
-  </p>
+  <h1 class="page-title">${_("What are my subjects?")}</h1>
+  <ul class="feature-list">
+    <li class="file-sharing">
+      <strong>${_("A place for course material sharing")}</strong>
+      - ${_("""Upload and share your course materials (presentations, documents, links, images) with your students,
+      entire school or all around the world.""")}
+    </li>
+    <li class="group">
+      <strong>${_("Easy way to inform your students")}</strong>
+      - ${_("when you update a subcet of or upload a new file, they will automatically get the notifications.")}
+    </li>
+    <li class="wiki">
+      <strong>${_("Monitoring wiki notes")}</strong>
+      - Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </li>
+    <li class="dialog">
+      <strong>${_("Subject forum")}</strong>
+      - Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </li>
+  </ul>
 </%def>
 
 <%def name="default_text_for_user()">
-  <h1 class="page-title">${_("User, subjects are good!")}</h1>
-  <p>
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis mi eu nibh dapibus lacinia sed eget enim. Curabitur lacus elit, mollis vitae bibendum a, consequat eget nibh. Vivamus accumsan rhoncus enim, eget viverra ligula pulvinar eget. Quisque dictum laoreet ultricies. Nam libero odio, elementum ac placerat id, porta quis lacus. Aliquam a lectus ac mauris eleifend varius vitae rhoncus erat. Nulla facilisi. Donec at porttitor tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec hendrerit, velit a posuere commodo, mauris quam posuere orci, ac mollis sem erat nec felis. Nullam luctus elementum hendrerit.
-  </p>
-  <p>
-  Proin et arcu sit amet lacus aliquam aliquam. Suspendisse convallis, mi id molestie rutrum, risus quam rhoncus libero, vel convallis massa quam in ipsum. Duis ullamcorper sollicitudin lectus ac viverra. In molestie diam ac nunc egestas laoreet gravida nisi sagittis. Donec eget felis eget arcu accumsan laoreet. Ut hendrerit elementum arcu, ac dapibus lectus vestibulum sed. Sed vitae lacus quam. Etiam eu ligula tellus, et rhoncus lorem. Sed hendrerit suscipit adipiscing. Cras ac tortor tellus. Integer eu augue quis neque tempor pretium. Phasellus hendrerit, quam nec vestibulum feugiat, libero erat volutpat nisl, eget rutrum massa orci eu arcu. Nam lectus dui, cursus non imperdiet at, viverra at lorem. Aliquam mauris turpis, sagittis vitae tincidunt pharetra, feugiat quis purus. Aenean fermentum vehicula tellus, sit amet adipiscing mi ornare sit amet. Donec nec magna sed velit semper adipiscing pulvinar eget massa. Nulla tempor tellus eu odio laoreet tincidunt. Ut ut quam arcu, eu dignissim ante. Duis commodo erat et est porttitor accumsan. 
-  </p>
+  <h1 class="page-title">${_("What are my subjects?")}</h1>
+  <ul class="feature-list">
+    <li class="file-sharing">
+      <strong>${_("A place for course material sharing")}</strong>
+      - ${_("""Upload and share your course materials (presentations, documents, links, images) with your students,
+      entire school or all around the world.""")}
+    </li>
+    <li class="group">
+      <strong>${_("Easy way to inform your students")}</strong>
+      - ${_("when you update a subcet of or upload a new file, they will automatically get the notifications.")}
+    </li>
+    <li class="wiki">
+      <strong>${_("Monitoring wiki notes")}</strong>
+      - Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </li>
+    <li class="dialog">
+      <strong>${_("Subject forum")}</strong>
+      - Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </li>
+  </ul>
 </%def>
 
 <div id="subject-add-page">

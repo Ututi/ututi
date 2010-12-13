@@ -41,7 +41,7 @@
       </dd>
       %if subject.lecturer:
       <dd class="lecturer">
-        ${_('Lect.')} <span class="orange" >${subject.lecturer}</span>
+        ${_('Lect.')} ${subject.lecturer}
       </dd>
       %endif
     </div>
