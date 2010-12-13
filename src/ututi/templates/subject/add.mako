@@ -71,13 +71,15 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
     </div>
     <script type="text/javascript">
     $(document).ready(function() {
-      $("#location-preview").show();
-      $("#location-edit").hide();
-      $("#location-edit-link").click(function() {
-        $("#location-preview").hide();
-        $("#location-edit").show();
-        return false;
-      });
+      if ($('#location-edit .error-message').size() == 0) {
+        $("#location-preview").show();
+        $("#location-edit").hide();
+        $("#location-edit-link").click(function() {
+          $("#location-preview").hide();
+          $("#location-edit").show();
+          return false;
+        });
+      }
     });
     </script>
     %else:
