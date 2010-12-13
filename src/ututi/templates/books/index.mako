@@ -10,7 +10,9 @@
     %endif
   </div>
   <div class="book-textual-info">
-    <h3 class="book-title">${book.title}</h3>
+    <h3 class="book-title">
+      ${h.link_to(book.title, url(controller="books", action="show", id=book.id))}
+    </h3>
     <div>
       <span class="book-author">${book.author}</span> <br />
       %if book.description is not None and book.description != "":

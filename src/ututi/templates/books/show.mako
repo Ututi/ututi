@@ -28,54 +28,78 @@
 </%def>
 
 ${h.link_to(_('Back to catalog'), url(controller="books", action="index"), class_="back-link")}
-<h2 class="title">${c.book.title}</h2>
-<div class="book-cover">
-  <img src="${url(controller='books', action='logo', id=c.book.id, width=150, height=200)}" alt="${_('Book cover')}" />
+<div class="book-info">
+  %if c.book.logo is not None:
+  <img class="book-cover" src="${url(controller='books', action='logo', id=c.book.id, width=150, height=200)}" alt="${_('Book cover')}" />
+  %else:
+  <img class="book-cover" src="${url('/images/books/default_book_icon.png')}" width=150 alt="${_('Book cover')}" />
+  %endif
+  <h1 class="title">${c.book.title}</h1>
+  ${book_attribute(_('Author'), c.book.author)}
+  <div class="book-attribute">
+    <span class="book-attribute-label">${_('Book type')}:</span>
+    <span class="book-attribute-value">
+      ${h.link_to(_(c.book.department.title),
+                 url(controller="books",
+                     action="catalog",
+                     books_department=c.book.department.name))}
+      %if c.book.department.name != 'other':
+         &gt; ${h.link_to(c.book.type.name,
+                          url(controller="books",
+                          action="catalog",
+                          books_department = c.book.department.name,
+                          books_type_name = c.book.type.name))}
+         &gt; ${h.link_to(c.book.science_type.name,
+                          url(controller="books",
+                          action="catalog",
+                          books_department = c.book.department.name,
+                          books_type_name = c.book.type.name,
+                          science_type_id = c.book.science_type.id))}
+      %endif
+    </span>
+  </div>
+  %if c.book.department.name == 'school':
+      ${book_attribute(_('School grade'), c.book.school_grade.name)}
+  %endif
+  ${book_attribute(_('City'), c.book.city.name)}
+
+  <div class="book-attribute">
+      <span class="book-price-label">${_('Price')}:</span>
+      <span class="book-price">
+        ${c.book.price}
+      </span>
+  </div>
+
+  <div class="books-description">${c.book.description}</div>
+
 </div>
-<div class="books-description">${c.book.description}</div>
-${book_attribute(_('Author'), c.book.author)}
-${book_attribute(_('Book department'),_(c.book.department.name))}
-%if c.book.department.name != 'other':
-${book_attribute(_('Book type'), c.book.type.name)}
-%endif
-%if c.book.department.name == 'school':
-${_('School grade')}: ${c.book.school_grade.name}
-%endif
-%if c.book.department.name != 'other':
-${book_attribute(_('Science type'), c.book.science_type.name)}
-%endif
-${book_attribute(_('City'), c.book.city.name)}
-${book_attribute(_('Price'), c.book.price, class_="book-price")}
 <div class="owner-information">
   <p>${_("Owner information")}</p>
-  <div class="profile ${'bottomLine' if c.book.created.description or c.book.created.site_url else ''}">
-    <div class="floatleft avatar">
+  <div class="profile">
       %if c.book.created.logo is not None:
-      <img src="${url(controller='user', action='logo', id=c.book.created.id, width=70, height=70)}" alt="logo" />
+      <img src="${url(controller='user', action='logo', id=c.book.created.id, width=70, height=70)}" alt="logo" class="floatleft" />
       %else:
       ${h.image('/img/profile-avatar.png', alt='logo')|n}\
       %endif
-    </div>
-    <div class="floatleft personal-data">
-      <div><h2>${c.book.created.fullname}</h2></div>
+      <div><h3>${c.book.created.fullname}</h3></div>
       <div><a href="mailto:${c.book.created.emails[0].email}">${c.book.created.emails[0].email}</a></div>
       %if c.book.created.phone_number is not None and c.book.created.phone_number != "":
       <div class="user-phone-number">
         ${_('Phone')}: ${c.book.created.phone_number}
       </div>
-    %endif
+      %endif
     <div class="medals" id="user-medals">
       %for medal in c.book.created.all_medals():
       ${medal.img_tag()}
       %endfor
     </div>
-    <div class="private-message-container">
-      <form action="${url(controller='books', action='private_message')}">
-        <input type="hidden" name="book_id" value="${c.book.id}" />
-        ${h.input_area("message", "Message")}
-        ${h.input_submit("Send message")}
-      </form>
-    </div>
     <div class="clear"></div>
+  </div>
+  <div id="private-message-container">
+    <form action="${url(controller='books', action='private_message')}">
+      <input type="hidden" name="book_id" value="${c.book.id}" />
+      ${h.input_area("message", "Write to owner:")}
+      <div style="margin-top: 5px;">${h.input_submit("Send message")}</div>
+    </form>
   </div>
 </div>
