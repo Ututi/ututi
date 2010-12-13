@@ -378,7 +378,7 @@ button.btnMedium.btnTeacher {
     background: #ffffff;
     padding-top: 8px;
     padding-right: 1em;
-    width: 47em;
+    width: 600px;
     border: 1px solid #e9e6e6;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -426,6 +426,9 @@ button.btnMedium.btnTeacher {
 }
 #loginForm button {
     top: -1px;
+}
+#loginForm input {
+    width: 170px;
 }
 #loginForm #rememberMe {
     display: inline-block;
