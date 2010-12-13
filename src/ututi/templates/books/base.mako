@@ -30,6 +30,9 @@ ${books_menu(c.selected_books_department)}
 <p class="a11y">${_('Main menu')}</p>
 <div class="head-nav">
   <ul>
+    <li id="ulogo"><a rel="nofollow" href="/books" title="Ututi">
+        <img src="/images/books/ubooks-logo.png" />
+    </a></li>
     <li><a href="${url(controller='books', action='index')}">${_('Home')}</a></li>
     <li><a href="${url(controller='books', action='about')}">${_('About U-Books')}</a></li>
     <li><a class="orange" href="${url(controller='books', action='add')}">${_('Upload a Book')}</a></li>
@@ -205,9 +208,6 @@ ${local.main_menu()}
 
     <div id="wrap">
       <div id="widthLimiter">
-        <div id="breadcrumb-container">
-          <div id="books-logo"><a rel="nofollow" href="/books" title="Ututi" id="ulogo">Ututi</a></div>
-        </div>
         %if c.user is None:
           ${self.anonymous_header()}
         %else:
