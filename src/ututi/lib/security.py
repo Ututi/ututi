@@ -1,3 +1,4 @@
+import re
 from random import Random
 import string
 
@@ -195,3 +196,14 @@ class ActionProtector(BaseActionProtector):
     def __init__(self, *crowds, **kwargs):
         self.predicate = CrowdPredicate(*crowds)
         self.denial_handler = kwargs.get('denial_handler', self.default_denial_handler)
+
+
+def bot_protect(method):
+    """Decorator to protect actions from bots. Currently works for googlebot."""
+    def _protected(self):
+        ua  = request.headers.get('user-agent')
+        bot = re.compile('googlebot', re.IGNORECASE)
+        if bot.search(ua):
+            abort(404)
+        return method(self)
+    return _protected

@@ -24,7 +24,7 @@ import ututi.lib.helpers as h
 from ututi.lib import gg
 from ututi.lib.emails import email_confirmation_request, email_password_reset
 from ututi.lib.messaging import EmailMessage
-from ututi.lib.security import ActionProtector, sign_in_user
+from ututi.lib.security import ActionProtector, sign_in_user, bot_protect
 from ututi.lib.validators import validate, UniqueEmail, TranslatedEmailValidator
 from ututi.model import meta, User, Region, Email, PendingInvitation, LocationTag, Payment, get_supporters
 from ututi.model import Subject, Group, SearchItem
@@ -560,6 +560,7 @@ class HomeController(UniversityListMixin, FederationMixin):
 
         return render('/login.mako')
 
+    @bot_protect
     def process_transaction(self):
         prefix = 'wp_'
         args = ['projectid',

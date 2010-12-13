@@ -10,6 +10,7 @@ from pylons.i18n import ungettext, _
 
 from ututi.lib.messaging import EmailMessage
 from ututi.lib.base import BaseController, render
+from ututi.lib.security import bot_protect
 from ututi.model.events import ModeratedPostCreated
 from ututi.model.events import FileUploadedEvent
 from ututi.model.events import PageCreatedEvent
@@ -179,9 +180,11 @@ class NewsController(BaseController):
                 self._send_out_of_space_notification(group)
                 meta.Session.commit()
 
+    @bot_protect
     def hourly(self):
         self._send_news('hour', hours=1)
 
+    @bot_protect
     def daily(self):
         self._send_news('day', days=1)
         self._send_group_space_reminders()
