@@ -4,8 +4,8 @@
 ## Renders appropriate action button.
 ## Probably not a good idea this implicit thing.
 
-  %if c.user.is_teacher:
-    %if c.user.teacher(subject):
+  %if c.user.is_teacher and c.user.teacher_verified:
+    %if c.user.teaches(subject):
       ${close_button(url(controller='profile', action='unteach_subject', subject_id=subject.id), class_='unteach-button')}
     %else:
       ${teach_button(url(controller='profile', action='teach_subject', subject_id=subject.id))}

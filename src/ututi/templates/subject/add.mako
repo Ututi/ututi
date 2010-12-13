@@ -152,7 +152,7 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
     </div><div class="separator"></div><div class="right-panel">
 
       <div id="default-text">
-        %if c.user.is_teacher:
+        %if c.user.is_teacher and c.user.teacher_verified:
           ${default_text_for_teacher()}
         %else:
           ${default_text_for_user()}

@@ -187,7 +187,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
         subj = self._create_subject()
         meta.Session.commit()
 
-        if c.user.is_teacher:
+        if c.user.is_teacher and c.user.teacher_verified:
             c.user.teach_subject(subj)
             meta.Session.commit()
 
