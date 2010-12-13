@@ -42,7 +42,7 @@ ${parent.head_tags()}
   </ul>
 </div>
 <div class="floatleft usergruperight">
-  <form action="${url(controller='profile', action='teach_subjects')}" method="GET"
+  <form action="${url(controller='subject', action='add')}" method="GET"
         style="float: none">
     <fieldset>
       <legend class="a11y">${_('Find courses I teach')}</legend>
@@ -140,7 +140,7 @@ ${self.location_nag(_('Tell us where you work'))}
         ##</span>
       </h2>
       <span class="group-but">
-        ${h.button_to(_('add courses'), url(controller='profile', action='teach_subjects'))}
+        ${h.button_to(_('add courses'), url(controller='subject', action='add'))}
       </span>
     </div>
     <div>
