@@ -19,5 +19,5 @@ ${h.button_to(_("Watch"), target_url, class_='btn ' + class_, id=id)}
 
 <%def name="teach_button(target_url, class_=None, id=None)">
 <% if class_ is None: class_ = '' %>
-${h.button_to(_("I teach this course"), target_url, class_='btnMedium btnTeacher ' + class_, id=id)}
+${h.button_to(_("I teach this"), target_url, class_='btnMedium btnTeacher ' + class_, id=id)}
 </%def>
