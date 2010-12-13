@@ -222,6 +222,33 @@ ul.teacher-list {
         margin: 2px 0px;
     }
 
+ul.feature-list {
+    list-style-type: none;
+    margin: 4px 8px;
+}
+
+    ul.feature-list li {
+        padding-left: 80px;
+        min-height: 40px;
+        margin: 20px 0px;
+    }
+
+    ul.feature-list li.wiki {
+        background: url(img/icons/features/wiki.png) no-repeat left center;
+    }
+
+    ul.feature-list li.group {
+        background: url(img/icons/features/group.png) no-repeat left center;
+    }
+
+    ul.feature-list li.file-sharing {
+        background: url(img/icons/features/file_sharing.png) no-repeat left center;
+    }
+
+    ul.feature-list li.dialog {
+        background: url(img/icons/features/dialog.png) no-repeat left center;
+    }
+
 /* SUBJECT DESCRIPTION
  */
 
