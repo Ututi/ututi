@@ -109,8 +109,8 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
   %endif
 
   <div id="warning-text">
-    ${_("Attention, please! Before creating new subject please ensure that it's not already there.")}
-    ${_("A list of similar subjects to the one you are about to create is shown on the right.")}
+    ${_("Before creating new subject please ensure that it has not been yet created.")}
+    ${_("A list of similar subjects is shown on the right.")}
     ${_("Please carefully read through the list and if you don't find your subject, create it.")}
   </div>
 
@@ -128,47 +128,43 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
   <ul class="feature-list">
     <li class="file-sharing">
       <strong>${_("A place for course material sharing")}</strong>
-      - ${_("""Upload and share your course materials (presentations, documents, links, images) with your students,
-      entire school or all around the world.""")}
+      - ${_("upload and share course material with students of your class, university or the entire world.")}
     </li>
     <li class="group">
-      <strong>${_("Easy way to inform your students")}</strong>
-      - ${_("when you update a subcet of or upload a new file, they will automatically get the notifications.")}
+      <strong>${_("Easy way to reach your students")}</strong>
+      - ${_("send messages to all of your students at once.")}
+      ${_("When you update subject information or upload a new file, your students will be notified automatically.")}
     </li>
     <li class="wiki">
       <strong>${_("Monitoring wiki notes")}</strong>
-      - Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      - ${_("create notes for your courses collaboratively with your students.")}
     </li>
     <li class="dialog">
       <strong>${_("Subject forum")}</strong>
-      - Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      - ${_("a place to discuss the learning matters. Subject forums bring you to your students closer than ever before!")}
     </li>
   </ul>
 </%def>
 
 <%def name="default_text_for_user()">
-  <h1 class="page-title">${_("What are my subjects?")}</h1>
+  <h1 class="page-title">${_("What are subjects?")}</h1>
   <ul class="feature-list">
     <li class="file-sharing">
       <strong>${_("A place for course material sharing")}</strong>
-      - ${_("""Upload and share your course materials (presentations, documents, links, images) with your students,
-      entire school or all around the world.""")}
+      - ${_("upload and share course material with students of your class, university or the entire world.")}
     </li>
     <li class="group">
-      <strong>${_("Easy way to inform your students")}</strong>
-      - ${_("when you update a subcet of or upload a new file, they will automatically get the notifications.")}
+      <strong>${_("Easy way to reach your university mates")}</strong>
+      - ${_("send messages to all of your group mates at once.")}
+      ${_("When someone updates subject information or uploads a new file, everyone watching the subject will be notified automatically.")}
     </li>
     <li class="wiki">
-      <strong>${_("Monitoring wiki notes")}</strong>
-      - Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      <strong>${_("Creating wiki notes")}</strong>
+      - ${_("create notes for your courses collaboratively with your group mates or even your teacher.")}
     </li>
     <li class="dialog">
       <strong>${_("Subject forum")}</strong>
-      - Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      - ${_("a place to discuss the learning matters!")}
     </li>
   </ul>
 </%def>
