@@ -37,7 +37,7 @@ I login and go to the book view, where I can see form for sending message to boo
     >>> user2 = Browser.logIn('user2@ututi.lt', 'password')
     >>> user2.open('http://localhost/books')
     >>> user2.click('more')
-    >>> user2.getControl('Message').value = "Hi, I will buy your book!"
+    >>> user2.getControl('Write to owner').value = "Hi, I will buy your book!"
     >>> user2.click('Send message')
 
 Book owner will get my message

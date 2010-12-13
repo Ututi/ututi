@@ -1275,7 +1275,6 @@ class Subject(ContentItem, FolderMixin, LimitedUploadMixin):
         usms = meta.Session.query(UserSubjectMonitoring).\
             join(User).\
             filter(UserSubjectMonitoring.subject==self).\
-            join(User).\
             filter(User.receive_email_each==period).all()
 
         recipients = [usm.user for usm in usms]

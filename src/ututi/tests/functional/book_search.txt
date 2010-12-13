@@ -29,7 +29,10 @@ Now let's go find it (empty search query returns all results):
 
     >>> browser.click('search')
     >>> browser.printCssQuery('.book-title')
-    <h3 class="book-title">My physics book</h3>
+    <h3 class="book-title">
+      <a href="/books/show/4">My physics book</a>
+    </h3>
+
 
 Let's type some string that will not match neither the book title nor
 the description:
@@ -47,7 +50,10 @@ Entering physics returns the book though:
     >>> browser.click('search')
 
     >>> browser.printCssQuery('.book-title')
-    <h3 class="book-title">My physics book</h3>
+    <h3 class="book-title">
+      <a href="/books/show/4">My physics book</a>
+    </h3>
+
 
 The search term is displayed in the search box:
 
@@ -119,7 +125,10 @@ We can also filter results by city:
 And we only see the book from Kaunas now:
 
     >>> browser.printCssQuery('.book-title')
-    <h3 class="book-title">My other maths book</h3>
+    <h3 class="book-title">
+      <a href="/books/show/6">My other maths book</a>
+    </h3>
+
 
 The list of cities still has the same items (there still are 2 books
 in Vilnius after all) but has Kaunas selected:
