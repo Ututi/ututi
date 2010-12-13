@@ -387,6 +387,7 @@ Hmm, now what happens if user2 starts ignoring the subject:
     >>> browser2.open('http://localhost/profile/edit/notifications')
     >>> browser2.getLink(url='ignore_subject').click()
 
+    >>> mail_queue[:] = []
     >>> browser.open('http://localhost/news/daily?date=2009-10-09')
     >>> printEmails()
     ['admin@ututi.lt']
