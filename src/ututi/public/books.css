@@ -226,7 +226,7 @@ h3.book-title a {
     margin-top: 10px;
 }
 
-.owner-information {
+.book-info .owner-information {
     background: url('../images/books/owner-background.png') no-repeat left top;
     display: table;
     width: 450px;
@@ -235,11 +235,11 @@ h3.book-title a {
     padding: 10px;
 }
 
-.owner-information p {
+.book-info .owner-information p {
     margin-bottom: 10px;
 }
 
-.owner-information .profile img {
+.book-info .owner-information .profile img {
     float: left;
     margin-right: 10px;
 }

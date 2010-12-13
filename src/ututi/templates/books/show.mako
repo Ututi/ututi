@@ -72,10 +72,9 @@ ${h.link_to(_('Back to catalog'), url(controller="books", action="index"), class
 
   <div class="books-description">${c.book.description}</div>
 
-</div>
-<div class="owner-information">
-  <p>${_("Owner information")}</p>
-  <div class="profile">
+  <div class="owner-information">
+    <p>${_("Owner information")}</p>
+    <div class="profile">
       %if c.book.created.logo is not None:
       <img src="${url(controller='user', action='logo', id=c.book.created.id, width=70, height=70)}" alt="logo" class="floatleft" />
       %else:
@@ -88,18 +87,20 @@ ${h.link_to(_('Back to catalog'), url(controller="books", action="index"), class
         ${_('Phone')}: ${c.book.created.phone_number}
       </div>
       %endif
-    <div class="medals" id="user-medals">
-      %for medal in c.book.created.all_medals():
-      ${medal.img_tag()}
-      %endfor
+      <div class="medals" id="user-medals">
+        %for medal in c.book.created.all_medals():
+        ${medal.img_tag()}
+        %endfor
+      </div>
+      <div class="clear"></div>
     </div>
-    <div class="clear"></div>
+    <div id="private-message-container">
+      <form action="${url(controller='books', action='private_message')}">
+        <input type="hidden" name="book_id" value="${c.book.id}" />
+        ${h.input_area("message", "Write to owner:")}
+        <div style="margin-top: 5px;">${h.input_submit("Send message")}</div>
+      </form>
+    </div>
   </div>
-  <div id="private-message-container">
-    <form action="${url(controller='books', action='private_message')}">
-      <input type="hidden" name="book_id" value="${c.book.id}" />
-      ${h.input_area("message", "Write to owner:")}
-      <div style="margin-top: 5px;">${h.input_submit("Send message")}</div>
-    </form>
-  </div>
+
 </div>
