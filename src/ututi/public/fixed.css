@@ -259,9 +259,13 @@ ul.feature-list {
 .subject-description {
     color: #666666;
     font-size: 11px;
-    padding: 10px 0px 10px 30px;
+    padding: 10px 15px 10px 30px;
     background: url("img/icons/dalykas-very-small.png") no-repeat 10px 10px;
 }
+
+    .subject-description.save-space-right {
+        padding-right: 0;
+    }
 
     .subject-description dt, .subject-description dd {
         display: inline;

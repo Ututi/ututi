@@ -8,7 +8,7 @@
     %if c.user.teaches(subject):
       ${close_button(url(controller='profile', action='unteach_subject', subject_id=subject.id), class_='unteach-button')}
     %else:
-      ${teach_button(subject.url(action='teach'))}
+      ${teach_button(url(controller='profile', action='teach_subject', subject_id=subject.id))}
     %endif
   %else:
     %if c.user.watches(subject):
@@ -70,10 +70,18 @@
   </div>
 </%def>
 
-<%def name="subject_listitem_minimal(subject, n, with_buttons=True)">
-  <div class="subject-description ${'with-top-line' if n else ''}">
+<%def name="subject_listitem_search_results(subject, n, with_buttons=True)">
+  <div class="subject-description save-space-right ${'with-top-line' if n else ''}">
     %if c.user is not None and with_buttons:
-      ${subject_listitem_button(subject)}
+      %if c.user.is_teacher and c.user.teacher_verified:
+        %if not c.user.teaches(subject):
+          ${teach_button(subject.url(action='teach'))}
+        %endif
+      %else:
+        %if not c.user.watches(subject):
+          ${watch_button(subject.url(action='watch'))}
+        %endif
+      %endif
     %endif
     <div>
       <dt>

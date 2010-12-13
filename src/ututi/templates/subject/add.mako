@@ -3,7 +3,7 @@
 <%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*"/>
 <%namespace file="/sections/content_snippets.mako" import="item_location_full" />
 <%namespace file="/widgets/tags.mako" import="*"/>
-<%namespace file="/sections/standard_objects.mako" import="subject_listitem_minimal" />
+<%namespace file="/sections/standard_objects.mako" import="subject_listitem_search_results" />
 <%namespace file="/search/index.mako" import="search_results" />
 
 <%def name="title()">
@@ -37,7 +37,7 @@ $(document).ready(function() {
 
 <%def name="list_similar_subjects(results)">
   %for n, item in enumerate(results):
-    ${subject_listitem_minimal(item.object, n)}
+    ${subject_listitem_search_results(item.object, n)}
   %endfor
 </%def>
 
