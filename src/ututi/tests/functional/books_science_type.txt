@@ -21,7 +21,7 @@ Admin can create science type.
 
     >>> browser.printQuery('id("science_types_list")//td/text()')
     Humanitariai mokslai
-    School
+    School books
 
 Admin can edit science type.
 
@@ -36,7 +36,7 @@ Admin can edit science type.
 
     >>> browser.printQuery('id("science_types_list")//td/text()')
     neHumanitariai mokslai
-    University
+    Students books
 
 Admin can delete city.
 
