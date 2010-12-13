@@ -139,6 +139,10 @@
         margin: 10px;
     }
 
+    #subject-add-page #location-preview {
+        display: none; /* initially hidden */
+    }
+
     #subject-add-page h1.page-title {
         font-weight: bold;
         font-size: 18px;
