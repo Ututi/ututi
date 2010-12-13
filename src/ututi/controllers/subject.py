@@ -168,14 +168,14 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
         return render('subject/home_pages.mako')
 
     def _add_form(self):
-        if request.referrer:
-            c.cancel_url = request.referrer
-        else:
-            c.cancel_url = url(controller='profile', action='home')
         return render('subject/add.mako')
 
     @ActionProtector("user")
     def add(self):
+        if request.referrer:
+            c.came_from = request.referrer
+        else:
+            c.came_from = url(controller='profile', action='home')
         return self._add_form()
 
     @validate(schema=NewSubjectForm, form='_add_form')

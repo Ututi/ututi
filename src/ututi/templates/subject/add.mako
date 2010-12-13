@@ -57,6 +57,8 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
     ${h.input_line('lecturer', _('Lecturer:'))}
   %endif
 
+  <input type="hidden" name="came_from" value="${c.came_from}" />
+
   <div class="formField">
     %if c.user.location is not None:
     <div id="location-preview">
@@ -114,7 +116,7 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
 
   <div>
     ${h.input_submit(_('Create subject'), class_='btnMedium', id='submit-button')}
-    <a id="cancel-button" href="${c.cancel_url}">${_("Cancel")}</a>
+    <a id="cancel-button" href="${c.came_from}">${_("Cancel")}</a>
   </div>
 
   </fieldset>
