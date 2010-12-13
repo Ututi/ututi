@@ -8,7 +8,7 @@
     %if c.user.teaches(subject):
       ${close_button(url(controller='profile', action='unteach_subject', subject_id=subject.id), class_='unteach-button')}
     %else:
-      ${teach_button(url(controller='profile', action='teach_subject', subject_id=subject.id))}
+      ${teach_button(subject.url(action='teach'))}
     %endif
   %else:
     %if c.user.watches(subject):
