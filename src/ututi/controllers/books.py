@@ -27,7 +27,7 @@ from ututi.lib.image import serve_logo
 from ututi.lib.forms import validate
 from ututi.lib.search import search_query
 from ututi.lib.security import ActionProtector
-from ututi.lib.base import BaseController, render
+from ututi.lib.base import BaseController, render, render_lang
 
 class ChainedSubFormValidator(validators.FormValidator):
 
@@ -494,3 +494,6 @@ class BooksController(BaseController):
             meta.Session.commit()
             h.flash(_('Message sent.'))
         return render('books/show.mako')
+
+    def about(self):
+        return render_lang('/books/about.mako')

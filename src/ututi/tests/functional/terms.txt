@@ -15,6 +15,7 @@ Testing Lithuanian pages.
     5. Sutikimas su licencija (licencijos priėmimas)
     >>> browser.open('http://localhost/about')
     >>> browser.open('http://localhost/advertising')
+    >>> browser.open('http://localhost/books/about')
 
 
 Testing Polish pages.
@@ -28,6 +29,7 @@ Testing Polish pages.
     3. Wyłączenie odpowiedzialności
     4. Akceptacja regulaminu
     >>> browser.open('http://localhost/about')
+    >>> browser.open('http://localhost/books/about')
 
 
 Testing English pages.
@@ -38,3 +40,4 @@ Testing English pages.
     >>> browser.open('http://localhost/terms')
     >>> browser.open('http://localhost/about')
     >>> browser.open('http://localhost/advertising')
+    >>> browser.open('http://localhost/books/about')
