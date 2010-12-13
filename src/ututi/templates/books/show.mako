@@ -63,7 +63,7 @@ ${h.link_to(_('Back to catalog'), url(controller="books", action="index"), class
   %endif
   ${book_attribute(_('City'), c.book.city.name)}
 
-  <div class="book-attribute">
+  <div class="book-attribute book-attribute-price">
       <span class="book-price-label">${_('Price')}:</span>
       <span class="book-price">
         ${c.book.price}

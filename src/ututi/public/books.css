@@ -6,7 +6,8 @@ h1 {
 }
 
 h1.title {
-    margin-top: 10px 0;
+    margin-top: 10px;
+    margin-bottom: 5px;
     font-size: 22px;
 }
 
@@ -201,9 +202,28 @@ h3.book-title a {
     font-weight: bold;
 }
 
-.book-information .book-price{
+.book-information .book-price,
+.book-attribute .book-price {
     color: #999999;
     font-size: 16px;
+}
+
+.book-attribute-label {
+    color: #4d4d4d;
+    font-weight: bold;
+    line-height: 1.5;
+}
+
+.book-attribute-value {
+    color: #4d4d4d;
+}
+
+.book-attribute-price {
+    margin-top: 40px;
+}
+
+.books-description {
+    margin-top: 10px;
 }
 
 .owner-information {
