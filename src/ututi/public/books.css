@@ -1,4 +1,3 @@
-
 h1 {
     color: #4d4d4d;
     margin-bottom: 10px;
@@ -10,6 +9,24 @@ h1.title {
     margin-bottom: 5px;
     font-size: 22px;
 }
+
+#books-logo {
+    margin-bottom: 15px;
+}
+
+#books-logo a {
+    background: url('../images/books/ubooks-logo.png') no-repeat left;
+    display: block;
+    height: 68px;
+    left: 0;
+    overflow: hidden;
+    padding-left: 150px;
+    position: absolute;
+    top: 4px;
+    width: 0;
+    margin-top: 10px;
+}
+
 
 #search_portlet-content input {
    width: 180px;
