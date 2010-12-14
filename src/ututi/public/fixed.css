@@ -135,7 +135,7 @@
     #subject-add-page .separator {
         display: inline-block;
         width: 24px;
-        height: 600px; /* equals min-height of left and right panels. */
+        min-height: 560px; /* equals min-height of left and right panels. */
         margin: 10px;
     }
 

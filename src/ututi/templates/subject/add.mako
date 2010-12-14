@@ -12,7 +12,13 @@ ${_('New subject')}
 
 <%def name="head_tags()">
 <%newlocationtag:head_tags />
+${h.javascript_link('/javascript/equalheights.js')}
 <script type="text/javascript">
+function equalHeights() {
+  // Ugne's madness
+  $('.two-panel-layout').equalHeights();
+  setTimeout("equalHeights()", 1000);
+}
 $(document).ready(function() {
   $('#subject_add_form input').blur(function() {
     var search_url = $('#subject_add_form input#subject-search-url').attr('value');
@@ -31,13 +37,23 @@ $(document).ready(function() {
       }
     );
   });
+  if ($('#location-edit .error-message').size() == 0) {
+    $("#location-preview").show();
+    $("#location-edit").hide();
+    $("#location-edit-link").click(function() {
+      $("#location-preview").hide();
+      $("#location-edit").show();
+      return false;
+    });
+  }
+  equalHeights();
 });
 </script>
 </%def>
 
 <%def name="list_similar_subjects(results)">
   %for n, item in enumerate(results):
-    ${subject_listitem_search_results(item.object, n)}
+    ${subject_listitem_search_results(item.object, 0)}
   %endfor
 </%def>
 
@@ -71,19 +87,6 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
       ${location_widget(2, titles=(_("University:"), _("Department:")),
         values=c.user.location.hierarchy(), add_new=(c.tpl_lang=='pl'))}
     </div>
-    <script type="text/javascript">
-    $(document).ready(function() {
-      if ($('#location-edit .error-message').size() == 0) {
-        $("#location-preview").show();
-        $("#location-edit").hide();
-        $("#location-edit-link").click(function() {
-          $("#location-preview").hide();
-          $("#location-edit").show();
-          return false;
-        });
-      }
-    });
-    </script>
     %else:
       ${location_widget(2, titles=(_("University:"), _("Department:")), add_new=(c.tpl_lang=='pl'))}
     %endif
