@@ -299,7 +299,7 @@ def trackEvent(obj, action, label, category='navigation'):
 def input_line(name, title, value='', explanation=None, **kwargs):
     expl = None
     if explanation is not None:
-        expl = HTML.div(class_='explanation', c=explanation)
+        expl = HTML.span(class_='helpText', c=explanation)
 
     from pylons import tmpl_context as c
     kwargs.setdefault('id', name)
@@ -310,13 +310,14 @@ def input_line(name, title, value='', explanation=None, **kwargs):
                             HTML.input(type='text', value=value, name_=name, **kwargs),
                             HTML.span(class_='edge')
                             ])]),
+                       expl,
                        HTML.literal('<form:error name="%s" />' % name)])
 
 
 def input_psw(name, title, value='', explanation=None, **kwargs):
     expl = None
     if explanation is not None:
-        expl = HTML.div(class_='explanation', c=explanation)
+        expl = HTML.span(class_='helpText', c=explanation)
     from pylons import tmpl_context as c
     kwargs.setdefault('id', name)
     return HTML.div(class_='formField',
@@ -326,13 +327,14 @@ def input_psw(name, title, value='', explanation=None, **kwargs):
                             HTML.input(type='password', name_=name, value='', **kwargs),
                             HTML.span(class_='edge')
                             ])]),
+                       expl,
                        HTML.literal('<form:error name="%s" />' % name)])
 
 
 def input_area(name, title, value='', cols='50', rows='5', explanation=None, disabled=False, **kwargs):
     expl = None
     if explanation is not None:
-        expl = HTML.div(class_='explanation', c=explanation)
+        expl = HTML.span(class_='helpText', c=explanation)
     kwargs = {}
     if disabled:
         kwargs['disabled'] = 'disabled'
@@ -343,8 +345,8 @@ def input_area(name, title, value='', cols='50', rows='5', explanation=None, dis
         HTML.span(class_='textField', c=[
             HTML.textarea(name_=name, id_=name, cols=cols, rows=rows, c=[value], **kwargs),
             HTML.span(class_='edgeTextArea'),
-            expl
             ]),
+        expl,
         HTML.literal('<form:error name="%s" />' % name)])
 
 
