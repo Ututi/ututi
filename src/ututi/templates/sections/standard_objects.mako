@@ -20,7 +20,7 @@
 </%def>
 
 <%def name="subject_listitem(subject, n, with_buttons=True)">
-  <div class="subject-description ${'with-top-line' if n else ''}">
+  <div class="u-object subject-description ${'with-top-line' if n else ''}">
     %if c.user is not None and with_buttons:
       ${subject_listitem_button(subject)}
     %endif
@@ -71,7 +71,7 @@
 </%def>
 
 <%def name="subject_listitem_search_results(subject, n, with_buttons=True)">
-  <div class="subject-description save-space-right ${'with-top-line' if n else ''}">
+  <div class="u-object subject-description save-space-right ${'with-top-line' if n else ''}">
     %if c.user is not None and with_buttons:
       %if c.user.is_teacher and c.user.teacher_verified:
         %if not c.user.teaches(subject):
@@ -104,8 +104,8 @@
   </div>
 </%def>
 
-<%def name="group_listitem(group, n)">
-  <div class="group-description ${'with-top-line' if n else ''}">
+<%def name="group_listitem_base(group, n)">
+  <%def name="title(group)">
     <div>
       <div class="logo">
         %if group.has_logo():
@@ -120,53 +120,98 @@
           <% n_members = h.group_members(group.id) %>
           (${ungettext("%(count)s member", "%(count)s members", n_members) % dict(count=n_members)})
         </dt>
-        <dd>
+        <div><dd>
           <a class="tiny-text grey-text" ${h.trackEvent(Null, 'groups', 'mailinglist', 'profile')} href="${url(controller='mailinglist', action='new_thread', id=group.group_id)}" title="${_('Mailing list address')}">
             ${group.group_id}@${c.mailing_list_host}
           </a>
-        </dd>
+        </dd></div>
       </div>
     </div>
-    <div class="group-actions">
-      %if group.mailinglist_enabled:
-        <dd class="messages">
-          <a ${h.trackEvent(Null, 'groups', 'write_message', 'profile')} href="${url(controller='mailinglist', action='new_thread', id=group.group_id)}" title="${_('Mailing list address')}">
-            ${_('Write message')}
-          </a>
-        </dd>
-        <dd class="messages">
-          <a ${h.trackEvent(Null, 'groups', 'messages_or_forum', 'profile')} href="${url(controller='mailinglist', action='index', id=group.group_id)}">
-            ${_('Group messages')}
-          </a>
-        </dd>
-        %else:
-        <dd class="messages">
-          <a  ${h.trackEvent(Null, 'groups', 'write_message', 'profile')} href="${url(controller='forum', action='new_thread', id=group.group_id, category_id=group.forum_categories[0].id)}">
-            ${_('Write message')}
-          </a>
-        </dd>
-        <dd class="messages">
-          <a ${h.trackEvent(Null, 'groups', 'messages_or_forum', 'profile')} href="${url(controller='forum', action='categories', id=group.group_id)}">
-            ${_('Group forum')}
-          </a>
-        </dd>
-        %endif
-
-        %if group.wants_to_watch_subjects:
-        <dd class="subjects">
-          <a ${h.trackEvent(Null, 'groups', 'subjects', 'profile')} href="${url(controller='group', action='subjects', id=group.group_id)}">
-            ${_('Group subjects')}
-          </a>
-        </dd>
-        %endif
-        %if group.has_file_area:
-        <dd class="files">
-          <a ${h.trackEvent(Null, 'groups', 'files', 'profile')} href="${url(controller='group', action='files', id=group.group_id)}">
-            ${_('Group files')}
-          </a>
-        </dd>
-        %endif
-      </ul>
-    </div>
+  </%def>
+  <div class="u-object group-description ${'with-top-line' if n else ''}">
+    %if hasattr(caller, 'title'):
+      ${caller.title(group)}
+    %else:
+      ${title(group)}
+    %endif
+    ${caller.body()}
   </div>
+</%def>
+
+<%def name="group_listitem(group, n)">
+  <%self:group_listitem_base group="${group}" n="${n}">
+  <div class="group-actions">
+      %if group.mailinglist_enabled:
+      <dd class="messages">
+        <a ${h.trackEvent(Null, 'groups', 'write_message', 'profile')} href="${url(controller='mailinglist', action='new_thread', id=group.group_id)}" title="${_('Mailing list address')}">
+          ${_('Write message')}
+        </a>
+      </dd>
+      <dd class="messages">
+        <a ${h.trackEvent(Null, 'groups', 'messages_or_forum', 'profile')} href="${url(controller='mailinglist', action='index', id=group.group_id)}">
+          ${_('Group messages')}
+        </a>
+      </dd>
+      %else:
+      <dd class="messages">
+        <a  ${h.trackEvent(Null, 'groups', 'write_message', 'profile')} href="${url(controller='forum', action='new_thread', id=group.group_id, category_id=group.forum_categories[0].id)}">
+          ${_('Write message')}
+        </a>
+      </dd>
+      <dd class="messages">
+        <a ${h.trackEvent(Null, 'groups', 'messages_or_forum', 'profile')} href="${url(controller='forum', action='categories', id=group.group_id)}">
+          ${_('Group forum')}
+        </a>
+      </dd>
+      %endif
+
+      %if group.wants_to_watch_subjects:
+      <dd class="subjects">
+        <a ${h.trackEvent(Null, 'groups', 'subjects', 'profile')} href="${url(controller='group', action='subjects', id=group.group_id)}">
+          ${_('Group subjects')}
+        </a>
+      </dd>
+      %endif
+      %if group.has_file_area:
+      <dd class="files">
+        <a ${h.trackEvent(Null, 'groups', 'files', 'profile')} href="${url(controller='group', action='files', id=group.group_id)}">
+          ${_('Group files')}
+        </a>
+      </dd>
+      %endif
+  </div>
+  </%self:group_listitem_base>
+</%def>
+
+<%def name="group_listitem_teacherdashboard(group)">
+  <%self:group_listitem_base group="${group}" n="${0}">
+    <%def name="title(group)">
+      <div>
+        <div class="logo">
+          <img src="/images/details/icon_group_large.png" width="35" heigh="35" alt="logo" />
+        </div>
+        <div class="group-title">
+          <dt>
+            ${group.title}
+          </dt>
+          %if group.group:
+          <dd class="location-tags">
+            %for index, tag in enumerate(group.group.location.hierarchy(True)):
+              %if n:
+                |
+              %endif
+            <a href="${tag.url()}" title="${tag.title}">${tag.title_short}</a>
+            %endfor
+          </dd>
+          %endif
+          <div><dd class="group-email">
+            ${group.email}
+          </dd></div>
+        </div>
+      </div>
+    </%def>
+
+  <div class="group-actions">
+  </div>
+  </%self:group_listitem_base>
 </%def>

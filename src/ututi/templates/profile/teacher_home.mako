@@ -1,5 +1,7 @@
 <%inherit file="/profile/home_base.mako" />
 <%namespace file="/sections/standard_buttons.mako" import="close_button" />
+<%namespace file="/sections/standard_blocks.mako" name="b" import="item_list"/>
+<%namespace file="/sections/standard_objects.mako" import="group_listitem_teacherdashboard"/>
 
 <%def name="head_tags()">
 ${parent.head_tags()}
@@ -32,8 +34,41 @@ ${parent.head_tags()}
 </%self:rounded_block>
 </%def>
 
+<%def name="teach_group_nag()">
+<%self:rounded_block id="teacher_groups_empty" class_="portletNewGroup">
+<div class="floatleft usergrupeleft">
+  <h2 class="portletTitle bold">${_('Enter the groups of your students')}</h2>
+  <ul id="prosList">
+    <li>${_('Send messages to Your students easily')}</li>
+  </ul>
+</div>
+<div class="floatleft usergruperight">
+  <form action="${url(controller='profile', action='add_student_group')}" method="GET"
+        style="float: none">
+    <fieldset>
+      <legend class="a11y">${_('Add a group')}</legend>
+      <label><button value="submit" class="btnMedium"><span>${_('Add a group')}</span></button>
+      </label>
+    </fieldset>
+  </form>
+  <div class="right_cross"><a id="hide_suggest_teach_group" href="">${_('no, thanks')}</a></div>
+</div>
+<br class="clear-left" />
+<script type="text/javascript">
+  //<![CDATA[
+    $('#hide_suggest_teach_group').click(function() {
+        $(this).closest('.portlet').hide();
+        $.post('${url(controller='profile', action='js_hide_element')}',
+               {type: 'suggest_teach_group'});
+        return false;
+    });
+  //]]>
+</script>
+</%self:rounded_block>
+</%def>
+
 <%def name="teach_course_nag()">
-<%self:rounded_block id="user_location" class_="portletNewDalykas">
+<%self:rounded_block id="teacher_courses_empty" class_="portletNewDalykas">
 <div class="floatleft usergrupeleft">
   <h2 class="portletTitle bold">${_('Please specify the courses you are teaching')}</h2>
   <ul id="prosList">
@@ -149,6 +184,21 @@ ${self.location_nag(_('Tell us where you work'))}
     </%self:rounded_block>
     %elif 'suggest_teach_course' not in c.user.hidden_blocks_list:
     ${self.teach_course_nag()}
+    %endif
+  </div>
+
+  <div id="groups_list">
+    %if c.user.student_groups:
+    <%b:item_list title="${_('Student groups')}" items="${c.user.student_groups}">
+      <%def name="header_button()">
+        ${h.button_to(_('Add a group'), url(controller='profile', action='add_student_group'))}
+      </%def>
+      <%def name="row(item)">
+        ${group_listitem_teacherdashboard(item)}
+      </%def>
+    </%b:item_list>
+    %elif 'suggest_teach_group' not in c.user.hidden_blocks_list:
+    ${self.teach_group_nag()}
     %endif
   </div>
 %endif

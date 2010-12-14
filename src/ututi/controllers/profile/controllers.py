@@ -26,10 +26,11 @@ from ututi.lib.validators import manual_validate
 
 from ututi.model.events import Event
 from ututi.model import get_supporters
-from ututi.model import LocationTag, BlogEntry
+from ututi.model import LocationTag, BlogEntry, TeacherGroup
 from ututi.model import meta, Email, User
 from ututi.controllers.profile.validators import HideElementForm
-from ututi.controllers.profile.validators import ContactForm, LocationForm, LogoUpload, PhoneConfirmationForm, PhoneForm, ProfileForm, PasswordChangeForm
+from ututi.controllers.profile.validators import ContactForm, LocationForm, LogoUpload, PhoneConfirmationForm,\
+    PhoneForm, ProfileForm, PasswordChangeForm, StudentGroupForm
 from ututi.controllers.profile.wall import WallMixin, WallSettingsForm
 from ututi.controllers.profile.subjects import WatchedSubjectsMixin
 from ututi.controllers.search import SearchSubmit, SearchBaseController
@@ -571,3 +572,15 @@ class TeacherProfileController(ProfileControllerBase):
     @ActionProtector("user")
     def register_welcome(self):
         return render('profile/teacher_home.mako')
+
+    @ActionProtector("teacher")
+    @validate(schema=StudentGroupForm, form='add_student_group')
+    def add_student_group(self):
+        if hasattr(self, 'form_result'):
+            grp = TeacherGroup(self.form_result['title'],
+                               self.form_result['email'])
+            c.user.student_groups.append(grp)
+            meta.Session.commit()
+            h.flash(_('Group added!'))
+            redirect(url(controller='profile', action='home'))
+        return render('profile/add_student_group.mako')

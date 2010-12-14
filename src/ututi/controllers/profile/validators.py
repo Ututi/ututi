@@ -136,3 +136,10 @@ class HideElementForm(Schema):
      """Ajax submit validator to hide welcome screen widgets."""
      allow_extra_fields = False
      type = validators.OneOf(['suggest_create_group', 'suggest_watch_subject', 'suggest_enter_phone'])
+
+
+class StudentGroupForm(Schema):
+    """Validating student group creation."""
+    allow_extra_fields = False
+    title = validators.String(not_empty=True)
+    email = TranslatedEmailValidator(not_empty=True)
