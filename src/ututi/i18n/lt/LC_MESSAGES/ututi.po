@@ -679,7 +679,7 @@ msgid "Wall"
 msgstr "Siena"
 
 msgid "Notifications"
-msgstr "Pranešimai"
+msgstr "Priminimai"
 
 msgid "Your wall settings have been updated."
 msgstr "Tavo sienos nustatymai pakeisti"
