@@ -55,7 +55,6 @@ def test_message_user():
         the text
 
         >>> config._pop_object(pylons.test.pylonsapp.config)
-
     """
 
 
@@ -112,6 +111,9 @@ def test_smsmessage_user():
         ('+37060000000', u'the message')
 
         >>> config._pop_object(pylons.test.pylonsapp.config)
+        >>> from ututi.lib.sms import sms_queue
+        >>> sms_queue.pop()
+        ('+37060000000', u'the message')
 
     """
 

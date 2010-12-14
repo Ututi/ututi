@@ -177,3 +177,6 @@ You need to specify an existing group:
     >>> make_request('group_message',
     ...              dict(sender='37067812345', message='foobar Hello!')).body
     'Invalid group: foobar'
+
+    >>> sms_queue.pop()
+    ('+37067812375', u'Hello!')
