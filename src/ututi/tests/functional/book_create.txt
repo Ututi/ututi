@@ -36,7 +36,7 @@ Setting up user profile information
     >>> browser.click('Settings')
     >>> browser.click('Contacts')
     >>> browser.getControl('Mobile phone number').value = ""
-    >>> browser.click('Update contacts')
+    >>> browser.click('Save')
     >>> browser.open('http://localhost/books/add')
 
 Then I enter my new school book information and confirm changes
@@ -83,7 +83,7 @@ Then I update my profile information and insert phone number
     >>> browser.click('Contacts')
     >>> browser.getControl('Mobile phone number').value = "+37067422222"
 
-    >>> browser.click('Update contacts')
+    >>> browser.click('Save')
 
 I get confirmation sms
 
