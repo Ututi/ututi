@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-12-14 12:31+0200\n"
+"PO-Revision-Date: 2010-12-15 01:58+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -639,13 +639,10 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-msgid "Profile"
+msgid "General information"
 msgstr ""
 
 msgid "Contacts"
-msgstr ""
-
-msgid "Password"
 msgstr ""
 
 msgid "Wall"
@@ -710,6 +707,9 @@ msgid "Your phone number has been updated."
 msgstr ""
 
 msgid "Your phone number has been confirmed."
+msgstr ""
+
+msgid "Group added!"
 msgstr ""
 
 msgid "This is not the confirmation code we sent you."
@@ -1102,6 +1102,9 @@ msgid "Email"
 msgstr ""
 
 msgid "Gadu gadu"
+msgstr ""
+
+msgid "Password"
 msgstr ""
 
 msgid "Repeat password"
@@ -3370,10 +3373,13 @@ msgstr ""
 msgid "Read our blog"
 msgstr ""
 
-msgid "back to home page"
+msgid "Add a student group"
 msgstr ""
 
-msgid "Contact information"
+msgid "Email address"
+msgstr ""
+
+msgid "back to home page"
 msgstr ""
 
 msgid "Your GG number"
@@ -3413,25 +3419,10 @@ msgstr ""
 msgid "email is confirmed"
 msgstr ""
 
-msgid "Update contacts"
-msgstr ""
-
 msgid "Unlink"
 msgstr ""
 
 msgid "Link to"
-msgstr ""
-
-msgid "Current password"
-msgstr ""
-
-msgid "New password"
-msgstr ""
-
-msgid "Repeat the new password"
-msgstr ""
-
-msgid "Profile settings"
 msgstr ""
 
 msgid "Address of your website or blog"
@@ -3444,6 +3435,15 @@ msgid "Show my profile to unregistered users and search engines"
 msgstr ""
 
 msgid "Personal logo"
+msgstr ""
+
+msgid "Current password"
+msgstr ""
+
+msgid "New password"
+msgstr ""
+
+msgid "Repeat the new password"
 msgstr ""
 
 msgid "What's new?"
@@ -3577,9 +3577,6 @@ msgstr ""
 msgid "back to the profile"
 msgstr ""
 
-msgid "Watched subjects notification settings"
-msgstr ""
-
 msgid "email notifications"
 msgstr ""
 
@@ -3587,6 +3584,9 @@ msgid "Group's mailing list"
 msgstr ""
 
 msgid "Group's forum"
+msgstr ""
+
+msgid "Watched subjects notification settings"
 msgstr ""
 
 msgid "Personally watched subjects' notifications"
@@ -3638,6 +3638,15 @@ msgid ""
 "verify you shortly.Until then, your profile rights may be limited."
 msgstr ""
 
+msgid "Enter the groups of your students"
+msgstr ""
+
+msgid "Send messages to Your students easily"
+msgstr ""
+
+msgid "Add a group"
+msgstr ""
+
 msgid "Please specify the courses you are teaching"
 msgstr ""
 
@@ -3668,6 +3677,9 @@ msgstr ""
 msgid "add courses"
 msgstr ""
 
+msgid "Student groups"
+msgstr ""
+
 msgid "Thank you for supporting Ututi!"
 msgstr ""
 
@@ -3675,9 +3687,6 @@ msgid ""
 "You have just contributed to the development of Ututi! A medal, "
 "signifying your Ututi supporter status, should soon appear in your "
 "profile. Good luck continuing to use Ututi!"
-msgstr ""
-
-msgid "Wall settings"
 msgstr ""
 
 msgid "Forum posts"
@@ -3723,6 +3732,9 @@ msgid "Watched group subjects"
 msgstr ""
 
 msgid "Subject updates"
+msgstr ""
+
+msgid "Wall settings"
 msgstr ""
 
 msgid "Which events do You want to see on Your wall?"

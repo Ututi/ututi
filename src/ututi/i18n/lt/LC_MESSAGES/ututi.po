@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-12-14 12:31+0200\n"
+"PO-Revision-Date: 2010-12-15 01:58+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -24,61 +24,61 @@ msgid "Blog snippet updated."
 msgstr "Blogo ištrauka atnaujinta."
 
 msgid "Specify correct book department."
-msgstr ""
+msgstr "Nurodykite tinkamą knygos paskirtį."
 
 msgid "Specify book department."
-msgstr ""
+msgstr "Nurodykite knygos paskirtį."
 
 msgid "Specify correct science type."
-msgstr ""
+msgstr "Nurodykite tinkamą mokslo šaką."
 
 msgid "Specify science type."
-msgstr ""
+msgstr "Nurodykite mokslo šaką."
 
 msgid "Selected city is not valid."
-msgstr ""
+msgstr "Pasirinktas miestas netinkamas."
 
 msgid "Specify a city please."
-msgstr ""
+msgstr "Nurodykite miestą."
 
 msgid "Selected book type is not valid."
-msgstr ""
+msgstr "Pasirinktas knygos tipas netinkamas."
 
 msgid "Specify book type."
-msgstr ""
+msgstr "Nurodykite knygos tipą."
 
 msgid "Selected school grade is not valid."
-msgstr ""
+msgstr "Pasirinkta klasė netinkama."
 
 msgid "Please specify school grade"
-msgstr ""
+msgstr "Nurodykite klasę"
 
 msgid "Book was added succesfully"
-msgstr ""
+msgstr "Knyga sukurta sėkmingai"
 
 msgid "Only owner of this book can do this action"
-msgstr ""
+msgstr "Tai gali daryti tik knygos savininkas"
 
 msgid "Book was updated succesfully"
-msgstr ""
+msgstr "Knyga atnaujinta sėkmingai"
 
 #, python-format
 msgid "All cities (%(book_count)s)"
-msgstr ""
+msgstr "Visi miestai (%(book_count)s)"
 
 #, python-format
 msgid "%(city)s (%(book_count)s)city"
-msgstr ""
+msgstr "%(city)s (%(book_count)s)"
 
 msgid "You don't have rights to make this action"
-msgstr ""
+msgstr "Neturite reikiamų teisių"
 
 #, python-format
 msgid "%(ubooks_label)s: %(user_name)s asks about book %(book_title)s"
-msgstr ""
+msgstr "%(ubooks_label)s: %(user_name)s teiraujasi dėl knygos %(book_title)s"
 
 msgid "uBooks"
-msgstr ""
+msgstr "uKnygos"
 
 msgid "Message sent."
 msgstr "Pranešimas išsiųstas."
@@ -644,10 +644,10 @@ msgid "The subject has been removed from your watched subjects list."
 msgstr "Dalykas ištrintas iš tavo dalykų sąrašo."
 
 msgid "The course is already in your taught courses list."
-msgstr ""
+msgstr "Šis dalykas jau yra Jūsų dėstomų kursų sąraše."
 
 msgid "The course was not in your taught courses list."
-msgstr ""
+msgstr "Šio dalyko nėra Jūsų dėstomų dalykų sąraše."
 
 msgid "You have no right to delete this folder."
 msgstr "Negali trinti šio katalogo."
@@ -659,6 +659,8 @@ msgid ""
 "All teacher tools will be available to You once our team confirms You as "
 "a teacher. Thank You!"
 msgstr ""
+"Visi dėstytojų įrankiai Jums bus prieinami, kai mūsų administratoriai Jus"
+" patvirtins. Ačiū!"
 
 msgid "This user profile is not public"
 msgstr "Šio naudotojo profilis nėra viešai prieinamas"
@@ -666,14 +668,11 @@ msgstr "Šio naudotojo profilis nėra viešai prieinamas"
 msgid "Search"
 msgstr "Paieška"
 
-msgid "Profile"
-msgstr "Profilis"
+msgid "General information"
+msgstr "Bendra informacija"
 
 msgid "Contacts"
 msgstr "Kontaktai"
-
-msgid "Password"
-msgstr "Slaptažodis"
 
 msgid "Wall"
 msgstr "Siena"
@@ -739,6 +738,9 @@ msgstr "Telefono numeris atnaujintas."
 msgid "Your phone number has been confirmed."
 msgstr "Telefono numeris patvirtintas."
 
+msgid "Group added!"
+msgstr "Grupė pridėta!"
+
 msgid "This is not the confirmation code we sent you."
 msgstr "Tai nėra tas patvirtinimo kodas, kurį mes Tau siuntėme."
 
@@ -781,7 +783,7 @@ msgid "Group space bought"
 msgstr "Grupės vietos pirkimas"
 
 msgid "Your account has been confirmed!"
-msgstr ""
+msgstr "Jūsų paskyra buvo patvirtinta!"
 
 msgid "New teacher!"
 msgstr "Naujas dėstytojas!"
@@ -1159,6 +1161,9 @@ msgstr "El. paštas"
 
 msgid "Gadu gadu"
 msgstr "Gadu gadu"
+
+msgid "Password"
+msgstr "Slaptažodis"
 
 msgid "Repeat password"
 msgstr "Pakartoti slaptažodį"
@@ -1621,19 +1626,19 @@ msgstr ""
 "naudotis Ututi (šoninių blokelių meniu)."
 
 msgid "Book_Type"
-msgstr ""
+msgstr "Knygos tipas"
 
 msgid "Editing"
 msgstr "Redagavimas"
 
 msgid "Name"
-msgstr ""
+msgstr "Vardas"
 
 msgid "Edit"
 msgstr "Keisti"
 
 msgid "Book types"
-msgstr ""
+msgstr "Knygų tipai"
 
 msgid "Add"
 msgstr "Pridėti"
@@ -1648,10 +1653,10 @@ msgid "Adminstration dashboard"
 msgstr "Administravimas"
 
 msgid "Ututi controls:"
-msgstr ""
+msgstr "Ututi valdymas:"
 
 msgid "Standard UI patterns/objects"
-msgstr ""
+msgstr "Standartiniai UI elementai ir objektai"
 
 #, python-format
 msgid "found %(count)s file"
@@ -1736,9 +1741,9 @@ msgstr "Dienų skaičius (neribotai vietai)"
 #, python-format
 msgid "found %(count)s group"
 msgid_plural "found %(count)s groups"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "rasta %(count)s grupė"
+msgstr[1] "rastos %(count)s grupės"
+msgstr[2] "rasta %(count)s grupių"
 
 msgid "CSV File"
 msgstr "CSV failas"
@@ -1780,19 +1785,19 @@ msgid "Content"
 msgstr "Turinys"
 
 msgid "School grade"
-msgstr ""
+msgstr "Klasė"
 
 msgid "School grades"
-msgstr ""
+msgstr "Klasės"
 
 msgid "Science type"
-msgstr ""
+msgstr "Mokslo šaka"
 
 msgid "Book department"
-msgstr ""
+msgstr "Knygos paskirtis"
 
 msgid "Science types"
-msgstr ""
+msgstr "Mokslo šakos"
 
 msgid "SMS messages"
 msgstr "SMS žinutės"
@@ -1869,26 +1874,26 @@ msgstr[1] "rasti %(count)s dalykai"
 msgstr[2] "rasta %(count)s dalykų"
 
 msgid "Fullname"
-msgstr ""
+msgstr "Vardas ir pavardė"
 
 msgid "University"
 msgstr "Universitetas"
 
 msgid "Make a teacher"
-msgstr ""
+msgstr "Padaryti dėstytoju"
 
 msgid "Unverified teachers"
-msgstr ""
+msgstr "Nepatvirtinti dėstytojai"
 
 #, python-format
 msgid "%(count)s teacher"
 msgid_plural "%(count)s teachers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%(count)s dėstytojas"
+msgstr[1] "%(count)s dėstytojai"
+msgstr[2] "%(count)s dėstytojų"
 
 msgid "Position"
-msgstr ""
+msgstr "Pareigos"
 
 msgid "Confirm"
 msgstr "Patvirtinti"
@@ -1897,16 +1902,16 @@ msgid "Deny"
 msgstr "Atmesti"
 
 msgid "Make any user a teacher:"
-msgstr ""
+msgstr "Paversti bet kurį vnarį dėstytoju:"
 
 msgid "User ID"
-msgstr ""
+msgstr "Nario ID"
 
 msgid "User name or email fragment"
-msgstr ""
+msgstr "Vardo arba el. pašto adreso fragmentas"
 
 msgid "Find"
-msgstr ""
+msgstr "Rasti"
 
 msgid "Ututi users:"
 msgstr "Ututi naudotojai:"
@@ -2055,28 +2060,28 @@ msgid "New entry"
 msgstr "Naujas įrašas"
 
 msgid "Book title"
-msgstr ""
+msgstr "Knygos pavadinimas"
 
 msgid "Author"
 msgstr "Autorius"
 
 msgid "Image"
-msgstr ""
+msgstr "Paveiksliukas"
 
 msgid "Price"
 msgstr "Kaina"
 
 msgid "Discipline"
-msgstr ""
+msgstr "Mokslo šaka"
 
 msgid "Type"
-msgstr ""
+msgstr "Tipas"
 
 msgid "Comment"
-msgstr ""
+msgstr "Pastabos"
 
 msgid "Owner information"
-msgstr ""
+msgstr "Savininko informacija"
 
 msgid "Phone number"
 msgstr "Telefono numeris"
@@ -2085,88 +2090,88 @@ msgid "New book"
 msgstr "Nauja knyga"
 
 msgid "Learning books market"
-msgstr ""
+msgstr "Mokslo knygų mugė"
 
 msgid "About U-Books"
-msgstr ""
+msgstr "Apie U-Knygas"
 
 msgid "Upload a Book"
-msgstr ""
+msgstr "Įkelti Knygą"
 
 msgid "My books"
-msgstr ""
+msgstr "Mano knygos"
 
 msgid "books"
-msgstr ""
+msgstr "knygos"
 
 msgid "Catalog"
-msgstr ""
+msgstr "Katalogas"
 
 msgid "Order by"
-msgstr ""
+msgstr "Rūšiuoti pagal"
 
 msgid "Disciplines"
-msgstr ""
+msgstr "Mokslo šakos"
 
 msgid "All books"
-msgstr ""
+msgstr "Visos knygos"
 
 msgid "Edit book"
-msgstr ""
+msgstr "Redaguoti knygą"
 
 msgid "Back to my books"
-msgstr ""
+msgstr "Grįžti į mano knygas"
 
 msgid "Book cover"
-msgstr ""
+msgstr "Knygos viršelis"
 
 msgid "Delete image"
-msgstr ""
+msgstr "Trinti paveiksliuką"
 
 msgid "more"
 msgstr "daugiau"
 
 msgid "U-Books - what's that?"
-msgstr ""
+msgstr "U-Knygos - kas tai?"
 
 msgid "Add book"
 msgstr "Įkelk knygą"
 
 msgid "It's school books exchange / selling place."
-msgstr ""
+msgstr "Tai mokslo knygų mainų / prekybos vieta."
 
 msgid "It's place where you can get cheap stydy book."
-msgstr ""
+msgstr "Tai vieta, kur gali rasti nebrangių knygų studijoms."
 
 msgid "It's place where you find new owner for you old good textbook."
-msgstr ""
+msgstr "Tai vieta, kur tavo senas vadovėlis gali rasti naują šeimininką."
 
 msgid "Newest books"
-msgstr ""
+msgstr "Naujausios knygos"
 
 msgid "Books added"
-msgstr ""
+msgstr "Pridėtos knygos"
 
 msgid "Restore"
 msgstr "Atstatyti"
 
 msgid "You haven't added any books yet."
-msgstr ""
+msgstr "Jūs dar neįkėlėte knygų."
 
 msgid "Search-btn"
 msgstr "Ieškok"
 
 msgid "Search results"
-msgstr ""
+msgstr "Paieškos rezultatai"
 
 msgid "Filter"
-msgstr ""
+msgstr "Filtruoti"
 
 msgid "Back to catalog"
-msgstr ""
+msgstr "Atgal į katalogą"
 
 msgid "Book type"
-msgstr ""
+msgstr "Knygos tipas"
 
 msgid "Phone"
 msgstr "Tel. numeris"
@@ -2334,12 +2339,16 @@ msgid ""
 "subscription settings in your <a href=\"%(url)s\">notification settings "
 "page</a>."
 msgstr ""
+"Jei norite nebegauti šių el. laiškų, galite pakeisti savo nustatymus <a "
+"href=\"%(url)s\">pranešimų nustatymų puslapyje</a>."
 
 #, python-format
 msgid ""
 "If you want to stop getting these emails - you can change your "
 "subscription settings in your notification settings page (%(url)s)."
 msgstr ""
+"Jei norite nebegauti šių el. laiškų, galite pakeisti savo nustatymus "
+"pranešimų nustatymų puslapyje (%(url)s)."
 
 msgid ""
 "We have received a request to reset Your password on the Ututi system. If"
@@ -2388,38 +2397,38 @@ msgid "If you would like to join Ututi now, please follow this link:"
 msgstr "Nori užsiregistruoti Ututi? Sek šia nuoroda:"
 
 msgid "Your request to join Ututi as a teacher has been confirmed!"
-msgstr ""
+msgstr "Jūsų pageidavimas prisijungti prie Ututi dėstytojų patvirtintas!"
 
 #, python-format
 msgid "You may now visit your Ututi dashboard here: %(url)s ."
-msgstr ""
+msgstr "Galite aplankyti savo Ututi puslapį čia: %(url)s ."
 
 msgid "At Ututi you will be able to:"
-msgstr ""
+msgstr "Ututi galėsite:"
 
 msgid "Create your own profile with all Your courses and materials."
-msgstr ""
+msgstr "Sukurti savo profilį su savo kursais ir studijų medžiaga."
 
 msgid ""
 "Easily publish Your lecture notes so that Your students can find and "
 "access them."
-msgstr ""
+msgstr "Lengvai paviešinti savo paskaitų užrašus savo studentams."
 
 msgid "Easily communicate with Your students."
-msgstr ""
+msgstr "Lengvai bendrauti su savo studentais."
 
 msgid "A new teacher has registered:"
-msgstr ""
+msgstr "Užsiregistravo naujas dėstytojas:"
 
 msgid "Ututi"
-msgstr ""
+msgstr "Ututi"
 
 msgid "Your request to join Ututi as a teacher has been rejected."
-msgstr ""
+msgstr "Jūsų prašymas prisijungti prie Ututi dėstytojų atmestas."
 
 #, python-format
 msgid "If this was a misunderstanding, please contact us directly at: %(email)s."
-msgstr ""
+msgstr "Jeigu tai nesusipratimas, susisiekite su mumis: %(email)s."
 
 msgid "No categories yet."
 msgstr "Kategorijų nėra"
@@ -2749,6 +2758,8 @@ msgid ""
 "If you select 'moderated', you can pick the people who you want to allow "
 "to post to the mailing list."
 msgstr ""
+"Pasirinkę 'moderuojama', galėsite nurodyti, kurie žmonės galės rašyti į "
+"el. pašto konferenciją."
 
 msgid "Members only"
 msgstr "Tik nariai"
@@ -3324,16 +3335,16 @@ msgid "Last edit: "
 msgstr "Paskutinis taisymas:"
 
 msgid "All Books"
-msgstr ""
+msgstr "Visos knygos"
 
 msgid "Books for school"
-msgstr ""
+msgstr "Knygos mokiniams"
 
 msgid "Books for students"
-msgstr ""
+msgstr "Knygos studentams"
 
 msgid "Other"
-msgstr ""
+msgstr "Kitkas"
 
 #, python-format
 msgid "<em>%(count)s</em> active poster"
@@ -3410,6 +3421,8 @@ msgid ""
 "The SMS costs <strong>7 Lt</strong> and will increase your file limit to "
 "<strong>7&nbsp;GB</strong> for another month."
 msgstr ""
+"SMS kainuoja <strong>7 Lt</strong> - už tai grupės failų limitas mėnesiui"
+" padidinamas iki <strong>7&nbsp;GB</strong>."
 
 #, python-format
 msgid "Your private file area is limited to 5&nbsp;GB until <strong>%s</strong>."
@@ -3510,7 +3523,7 @@ msgid "Lecturer:"
 msgstr "Dėstytojas:"
 
 msgid "Lecturers:"
-msgstr ""
+msgstr "Dėstytojai:"
 
 msgid "The subject is watched by:"
 msgstr "Dalyką stebi:"
@@ -3536,10 +3549,10 @@ msgid "Delete subject"
 msgstr "Trinti dalyką"
 
 msgid "Remove from my taught courses"
-msgstr ""
+msgstr "Išbraukti iš mano dėstomų dalykų"
 
 msgid "I teach this course"
-msgstr ""
+msgstr "Aš dėstau šį dalyką"
 
 msgid "Remove from my subjects"
 msgstr "Ištrinti iš mano dalykų"
@@ -3659,11 +3672,14 @@ msgstr "http://blog.ututi.lt"
 msgid "Read our blog"
 msgstr "Mūsų blogas"
 
-msgid "back to home page"
-msgstr ""
+msgid "Add a student group"
+msgstr "Pridėti studentų grupę"
 
-msgid "Contact information"
-msgstr ""
+msgid "Email address"
+msgstr "El. pašto adresas"
+
+msgid "back to home page"
+msgstr "grįžti į pradžią"
 
 msgid "Your GG number"
 msgstr "Tavo GG numeris"
@@ -3680,6 +3696,10 @@ msgid ""
 "                     in your GG. Also don't forget to add Ututi\n"
 "                    (<a href=\"gg:5437377\">5437377</a>) to your friends."
 msgstr ""
+"Jei norite patvirtinti savo GaduGadu numerį,\n"
+"įveskite per GG gautą kodą. Ir nepamirškite Ututi\n"
+"(<a href=\"gg:5437377\">5437377</a>) pridėti prie savo\n"
+"draugų."
 
 msgid "Submit code"
 msgstr "Patvirtinti"
@@ -3702,26 +3722,11 @@ msgstr "gauti patvirtinimo el. laišką"
 msgid "email is confirmed"
 msgstr "el. pašto adresas patvirtintas"
 
-msgid "Update contacts"
-msgstr "Atnaujinti kontaktus"
-
 msgid "Unlink"
 msgstr "Atsieti"
 
 msgid "Link to"
-msgstr ""
-
-msgid "Current password"
-msgstr "Dabartinis slaptažodis"
-
-msgid "New password"
-msgstr "Naujas slaptažodis"
-
-msgid "Repeat the new password"
-msgstr "Pakartok naują slaptažodį"
-
-msgid "Profile settings"
-msgstr "Profilio nustatymai"
+msgstr "Susieti su"
 
 msgid "Address of your website or blog"
 msgstr "Nuosavo puslapio arba blog'o adresas"
@@ -3734,6 +3739,15 @@ msgstr "Rodyti profilį neregistruotiems naudotojams ir paieškos varikliams"
 
 msgid "Personal logo"
 msgstr "Tavo nuotrauka"
+
+msgid "Current password"
+msgstr "Dabartinis slaptažodis"
+
+msgid "New password"
+msgstr "Naujas slaptažodis"
+
+msgid "Repeat the new password"
+msgstr "Pakartok naują slaptažodį"
 
 msgid "What's new?"
 msgstr "Kas naujo?"
@@ -3880,24 +3894,24 @@ msgstr ""
 msgid "back to the profile"
 msgstr "grįžti į profilį"
 
-msgid "Watched subjects notification settings"
-msgstr "Priminimų apie dalykus nustatymai"
-
 msgid "email notifications"
 msgstr "priminimai į el. paštą"
 
 msgid "Group's mailing list"
-msgstr ""
+msgstr "Grupės el. pašto konferencija"
 
 msgid "Group's forum"
-msgstr ""
+msgstr "Grupės forumas"
+
+msgid "Watched subjects notification settings"
+msgstr "Priminimų apie dalykus nustatymai"
 
 msgid "Personally watched subjects' notifications"
-msgstr ""
+msgstr "Asmeniškai stebimų dalykų pranešimai"
 
 #, python-format
 msgid "Group's %(group_title)s notifications"
-msgstr ""
+msgstr "Grupės %(group_title)s pranešimai"
 
 msgid "What have I been doing?"
 msgstr "Ir ką gi aš nuveikiau?"
@@ -3941,42 +3955,56 @@ msgid "50 litas"
 msgstr "50 litų"
 
 msgid "Welcome to Ututi!"
-msgstr ""
+msgstr "Sveiki prisijungę prie Ututi!"
 
 msgid ""
 "You have not been confirmed as a teacher yet. Our administrators will "
 "verify you shortly.Until then, your profile rights may be limited."
 msgstr ""
+"Jūs dar nesate patvirtintas kaip dėstytojas. Mūsų administratoriai tai "
+"greitai padarys. Iki tol Jūsų teisės bus apribotos."
+
+msgid "Enter the groups of your students"
+msgstr "Įveskite studentų grupes"
+
+msgid "Send messages to Your students easily"
+msgstr "Lengvai siųskite studentams žinutes"
+
+msgid "Add a group"
+msgstr "Pridėti grupę"
 
 msgid "Please specify the courses you are teaching"
-msgstr ""
+msgstr "Nurodykite kursus, kuriuos dėstote"
 
 msgid "Get in touch with your students"
-msgstr ""
+msgstr "Bendraukite su studentais"
 
 msgid "Share course materials easily"
-msgstr ""
+msgstr "Lengvai platinkite studijų medžiagą"
 
 msgid "Find courses I teach"
-msgstr ""
+msgstr "Rasti mano dėstomus kursus"
 
 msgid "find courses I teach"
-msgstr ""
+msgstr "rasti mano dėstomus kursus"
 
 msgid "Add:"
-msgstr ""
+msgstr "Pridėti:"
 
 msgid "Create wiki page"
-msgstr ""
+msgstr "Kurti wiki puslapį"
 
 msgid "Tell us where you work"
-msgstr ""
+msgstr "Pasakykite mums, kur dėstote"
 
 msgid "My courses"
-msgstr ""
+msgstr "Mano kursai"
 
 msgid "add courses"
-msgstr ""
+msgstr "pridėti kursus"
+
+msgid "Student groups"
+msgstr "Studentų grupės"
 
 msgid "Thank you for supporting Ututi!"
 msgstr "Ačiū, kad palaikai Ututi!"
@@ -3989,9 +4017,6 @@ msgstr ""
 "Tu ką tik prisidėjai prie Ututi tobulinimo! Už tai tavo profilyje "
 "neužilgo atsiras medalis,\n"
 "rodantis Ututi rėmėjo statusą. Sėkmės naudojantis Ututi!"
-
-msgid "Wall settings"
-msgstr "Sienos nustatymai"
 
 msgid "Forum posts"
 msgstr "Forumų pranešimai"
@@ -4038,6 +4063,9 @@ msgstr "Grupių stebimi dalykai"
 msgid "Subject updates"
 msgstr "Dalykų pokyčiai"
 
+msgid "Wall settings"
+msgstr "Sienos nustatymai"
+
 msgid "Which events do You want to see on Your wall?"
 msgstr "Kuriuos įvykius nori matyti savo sienoje?"
 
@@ -4045,7 +4073,7 @@ msgid "Add a subject"
 msgstr "Pridėti dalyką"
 
 msgid "Notification settings"
-msgstr ""
+msgstr "Pranešimų nustatymai"
 
 msgid "Pick your region"
 msgstr "Pasirinkite regioną"
@@ -4228,7 +4256,7 @@ msgstr ""
 "narystę?"
 
 msgid "I teach this"
-msgstr ""
+msgstr "Aš tai dėstau"
 
 msgid "Files:"
 msgstr "Failų: "
@@ -4249,6 +4277,8 @@ msgid ""
 "You need to be a member of a group or have subjects that you are studying"
 " to be able to quickly upload files."
 msgstr ""
+"Turite priklausyti grupei arba turėti stebimų dalykų, kad būtų galima "
+"įkelti failus."
 
 msgid "upload a file"
 msgstr "įkelk failą"
@@ -4257,6 +4287,8 @@ msgid ""
 "You or your group need to have subjects that you are studying to be able "
 "to quickly create wiki notes in them."
 msgstr ""
+"Tam, kad būtų galima kurti wiki užrašus, reikia stebėti dalykus arba "
+"priklausyti grupei, kuri turi stebimų dalykų."
 
 msgid "create a wiki page"
 msgstr "sukurk wiki užrašus"
@@ -4397,22 +4429,22 @@ msgid "Regions for locations"
 msgstr "Vietų regionai"
 
 msgid "Subject title:"
-msgstr ""
+msgstr "Dalyko pavadinimas:"
 
 msgid "University / department:"
-msgstr ""
+msgstr "Universitetas / fakultetas:"
 
 msgid "University:"
-msgstr ""
+msgstr "Universitetas:"
 
 msgid "Department:"
-msgstr ""
+msgstr "Fakultetas:"
 
 msgid "Tags:"
-msgstr ""
+msgstr "Žymės:"
 
 msgid "Subject description:"
-msgstr ""
+msgstr "Dalyko aprašymas:"
 
 msgid "Start watching this subject personally"
 msgstr "Noriu stebėti šį dalyką"
@@ -4420,90 +4452,98 @@ msgstr "Noriu stebėti šį dalyką"
 msgid ""
 "Before creating new subject please ensure that it has not been yet "
 "created."
-msgstr ""
+msgstr "Prieš kurdami naują dalyką, įsitikinkite, kad jis dar nėra sukurtas."
 
 msgid "A list of similar subjects is shown on the right."
-msgstr ""
+msgstr "Panašių dalykų sąrašas rodomas dešinėje."
 
 msgid ""
 "Please carefully read through the list and if you don't find your "
 "subject, create it."
-msgstr ""
+msgstr "Periūrėkite sąrašą ir, neradę savo dalyko, jį sukurkite."
 
 msgid "Create subject"
-msgstr ""
+msgstr "Kurti dalyką"
 
 msgid "What are my subjects?"
-msgstr ""
+msgstr "Kas yra mano kursai?"
 
 msgid "A place for course material sharing"
-msgstr ""
+msgstr "Vieta dalintis studijų medžiaga"
 
 msgid ""
 "upload and share course material with students of your class, university "
 "or the entire world."
 msgstr ""
+"įkelkite ir dalinkitės studijų medžiaga su savo grupiųm universiteto ar "
+"viso pasaulio studentais"
 
 msgid "Easy way to reach your students"
-msgstr ""
+msgstr "Lengva susisiekti su studentais"
 
 msgid "send messages to all of your students at once."
-msgstr ""
+msgstr "siųskite žinutes visiems savo studentams iš karto"
 
 msgid ""
 "When you update subject information or upload a new file, your students "
 "will be notified automatically."
 msgstr ""
+"Jums atnaujinus dalyko informaciją arba įkėlus naują failą, studentams "
+"bus automatiškai apie tai pranešta."
 
 msgid "Monitoring wiki notes"
-msgstr ""
+msgstr "Wiki užrašų stebėjimas"
 
 msgid "create notes for your courses collaboratively with your students."
-msgstr ""
+msgstr "kurkite savo kursų užrašus bendradarbiaudami su studentais"
 
 msgid "Subject forum"
-msgstr ""
+msgstr "Dalyko forumas"
 
 msgid ""
 "a place to discuss the learning matters. Subject forums bring you to your"
 " students closer than ever before!"
 msgstr ""
+"vieta aptarti studijų klausimams. Dalykų forumai leis lengvai bendrauti "
+"su studentais!"
 
 msgid "What are subjects?"
-msgstr ""
+msgstr "Kas yra kursai?"
 
 msgid "Easy way to reach your university mates"
-msgstr ""
+msgstr "Lengva susisiekti su kursiokais"
 
 msgid "send messages to all of your group mates at once."
-msgstr ""
+msgstr "siųskite žinutes visiems kursiokams iš karto."
 
 msgid ""
 "When someone updates subject information or uploads a new file, everyone "
 "watching the subject will be notified automatically."
 msgstr ""
+"Kam nors atnaujinus dalyko informaciją arba įkėlus naują failą, visiems "
+"bus pranešta automatiškai."
 
 msgid "Creating wiki notes"
-msgstr ""
+msgstr "Wiki užrašų kūrimas"
 
 msgid ""
 "create notes for your courses collaboratively with your group mates or "
 "even your teacher."
-msgstr ""
+msgstr "kurkit kursų užrašus kartu su grupiokais arba dėstytojais."
 
 msgid "a place to discuss the learning matters!"
-msgstr ""
+msgstr "vieta aptarti studijų klausimams!"
 
 msgid "Create subject you teach:"
-msgstr ""
+msgstr "Kurti dėstomą dalyką:"
 
 msgid "Maybe here's what you're looking for?"
-msgstr ""
+msgstr "Gal šito ieškojote?"
 
 msgid ""
 "Please make sure that the subject you are about to create is not in this "
 "list."
-msgstr ""
+msgstr "Įsitikinkite, kad kuriamo dalyko nėra šiame sąraše."
 
 msgid "Edit subject"
 msgstr "Redaguoti dalyką"
@@ -4519,19 +4559,19 @@ msgstr "Trumpas dalyko aprašymas"
 
 #, python-format
 msgid "%(subject_link)s has been added to your watched subject list."
-msgstr ""
+msgstr "Dalykas %(subject_link)s buvo pridėtas prie stebimų dalykų."
 
 #, python-format
 msgid "%(subject_link)s has been removed from your watched subject list."
-msgstr ""
+msgstr "Dalykas %(subject_link)s buvo išbrauktas iš stebimų dalykų."
 
 #, python-format
 msgid "%(subject_link)s has been added to your taught courses list."
-msgstr ""
+msgstr "Dalykas %(subject_link)s buvo pridėtas prie dėstomų dalykų."
 
 #, python-format
 msgid "%(subject_link)s has been removed from your taught courses list."
-msgstr ""
+msgstr "Dalykas %(subject_link)s buvo išbrauktas iš dėstomų dalykų."
 
 msgid "Subject has been deleted, you can restore it if you want to."
 msgstr "Dalykas buvo ištrintas. Jūs galite jį atstatyti."
@@ -4659,7 +4699,7 @@ msgid "Any text that you want to collaborate on with your classmates"
 msgstr "Bet koks tekstas, kurį norite ruošti kartu su grupės draugais"
 
 msgid "2. School"
-msgstr ""
+msgstr "2. Mokykla"
 
 msgid ""
 "Tell us where You teach, so that we can verify You. Additional schools "

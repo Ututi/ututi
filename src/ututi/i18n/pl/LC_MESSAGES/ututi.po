@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-12-14 12:31+0200\n"
+"PO-Revision-Date: 2010-12-15 01:58+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -686,14 +686,11 @@ msgstr "Profil tego użytkownika nie jest publiczny"
 msgid "Search"
 msgstr "Szukaj"
 
-msgid "Profile"
-msgstr "Profil"
+msgid "General information"
+msgstr ""
 
 msgid "Contacts"
 msgstr "Kontakty"
-
-msgid "Password"
-msgstr "Hasło"
 
 msgid "Wall"
 msgstr "Tablica"
@@ -758,6 +755,9 @@ msgstr "Twój numer telefonu został zaktualizowany."
 
 msgid "Your phone number has been confirmed."
 msgstr "Twój numer telefonu został potwierdzony."
+
+msgid "Group added!"
+msgstr ""
 
 msgid "This is not the confirmation code we sent you."
 msgstr "Błędny kod!"
@@ -1187,6 +1187,9 @@ msgstr "E-mail"
 
 msgid "Gadu gadu"
 msgstr "Gadu Gadu"
+
+msgid "Password"
+msgstr "Hasło"
 
 msgid "Repeat password"
 msgstr "Powtórz hasło"
@@ -3707,11 +3710,14 @@ msgstr "http://blog.ututi.pl"
 msgid "Read our blog"
 msgstr "Czytaj nasz blog"
 
+msgid "Add a student group"
+msgstr ""
+
+msgid "Email address"
+msgstr ""
+
 msgid "back to home page"
 msgstr "strona główna"
-
-msgid "Contact information"
-msgstr "Dane kontaktowe"
 
 msgid "Your GG number"
 msgstr "Twoje GG"
@@ -3754,26 +3760,11 @@ msgstr "uzyskaj potwierdzenie"
 msgid "email is confirmed"
 msgstr "e-mail został potwierdzony"
 
-msgid "Update contacts"
-msgstr "Zaktualizuj listę kontaktową"
-
 msgid "Unlink"
 msgstr "Nie łącz"
 
 msgid "Link to"
 msgstr "Połącz z"
-
-msgid "Current password"
-msgstr "Aktualne hasło"
-
-msgid "New password"
-msgstr "Nowe hasło"
-
-msgid "Repeat the new password"
-msgstr "Wpisz ponownie nowe hasło"
-
-msgid "Profile settings"
-msgstr "Ustawienia profilu"
 
 msgid "Address of your website or blog"
 msgstr "Adres Twojej strony lub bloga"
@@ -3786,6 +3777,15 @@ msgstr "Pokazuj mój profil niezarejestrowanym użytkownikom i wyszukiwarkom"
 
 msgid "Personal logo"
 msgstr "Twoje logo"
+
+msgid "Current password"
+msgstr "Aktualne hasło"
+
+msgid "New password"
+msgstr "Nowe hasło"
+
+msgid "Repeat the new password"
+msgstr "Wpisz ponownie nowe hasło"
 
 msgid "What's new?"
 msgstr "Powiadomienia"
@@ -3932,9 +3932,6 @@ msgstr ""
 msgid "back to the profile"
 msgstr "wróć do profilu"
 
-msgid "Watched subjects notification settings"
-msgstr "Ustawienia powiadomień o obserwowanych przedmiotach"
-
 msgid "email notifications"
 msgstr "powiadomienia e-mailem"
 
@@ -3943,6 +3940,9 @@ msgstr "Lista mailingowa grupy"
 
 msgid "Group's forum"
 msgstr "Forum grupy"
+
+msgid "Watched subjects notification settings"
+msgstr "Ustawienia powiadomień o obserwowanych przedmiotach"
 
 msgid "Personally watched subjects' notifications"
 msgstr "Obejrzane powiadomienia o obserwowanych przedmiotach"
@@ -4003,6 +4003,15 @@ msgstr ""
 " pewno zrobią to wkrótce. Do tego czasu Twoje prawa na profilu mogą być "
 "ograniczone."
 
+msgid "Enter the groups of your students"
+msgstr ""
+
+msgid "Send messages to Your students easily"
+msgstr ""
+
+msgid "Add a group"
+msgstr ""
+
 msgid "Please specify the courses you are teaching"
 msgstr "Podaj przedmioty, których uczysz."
 
@@ -4033,6 +4042,9 @@ msgstr "Moje przedmioty"
 msgid "add courses"
 msgstr "dodaj przedmioty"
 
+msgid "Student groups"
+msgstr ""
+
 msgid "Thank you for supporting Ututi!"
 msgstr "Dziękujemy za wsparcie Ututi!"
 
@@ -4044,9 +4056,6 @@ msgstr ""
 "Właśnie dołączyłeś do grona osób, które wsparły rozwój Ututi! Niedługo na"
 " Twoim profilu pojawi się odznaka donatora Ututi. Życzymy powodzenia w "
 "dalszym użytkowaniu Ututi!"
-
-msgid "Wall settings"
-msgstr "Ustawienia strony"
 
 msgid "Forum posts"
 msgstr "Posty na forach"
@@ -4092,6 +4101,9 @@ msgstr "Obserwuj przedmioty grupy"
 
 msgid "Subject updates"
 msgstr "Aktualizacja przedm"
+
+msgid "Wall settings"
+msgstr "Ustawienia strony"
 
 msgid "Which events do You want to see on Your wall?"
 msgstr "Jakie wydarzenia chcesz zobaczyć na swojej tablicy?"
