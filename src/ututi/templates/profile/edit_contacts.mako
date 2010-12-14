@@ -1,11 +1,10 @@
 <%inherit file="/profile/edit.mako" />
 
-<%def name="pagetitle()">
-${_('Contact information')}
-</%def>
-
 <form method="post" action="${url(controller='profile', action='update_contacts')}"
-      id="contacts_form" class="fullForm">
+      id="contacts_form" class="new-style-form">
+
+  <h1 class='pageTitle'>${_("Contacts")}:</h1>
+
   <fieldset>
     %if c.gg_enabled:
       <div>
@@ -90,7 +89,7 @@ ${_('Contact information')}
       %endif
     </div>
 
-    ${h.input_submit(_('Update contacts'), name='update_contacts', class_='btnMedium')}
+    ${h.input_submit(_('Save'), name='update_contacts', class_='btnMedium')}
   </fieldset>
 </form>
 

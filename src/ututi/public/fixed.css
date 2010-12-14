@@ -104,6 +104,27 @@
             border-bottom: 1px solid #ded8d8;
         }
 
+/* NEW STYLE FORMS
+ */
+
+.new-style-form {
+}
+
+    .new-style-form .labelText,
+    .new-style-form .inputField {
+        display: block;
+    }
+
+    .new-style-form .labelText {
+        font-weight: bold;
+        margin: 10px 0px 2px 0px;
+    }
+
+    .new-style-form button {
+        margin-top: 20px;
+    }
+
+
 /* SUBJECT ADD PAGE STYLE
  * A lot of it should be later generalized for other views.
  */

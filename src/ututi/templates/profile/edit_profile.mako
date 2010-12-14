@@ -1,10 +1,6 @@
 <%inherit file="/profile/edit.mako" />
 <%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*"/>
 
-<%def name="pagetitle()">
-${_('Profile settings')}
-</%def>
-
 <%def name="head_tags()">
   ${parent.head_tags()}
   ${h.javascript_link('/javascript/js-alternatives.js')|n}
@@ -53,7 +49,7 @@ ${_('Profile settings')}
   </script>
 </%def>
 
-<form method="post" action="${url(controller='profile', action='update')}" name="edit_profile_form" id="edit_profile_form" enctype="multipart/form-data" class="fullForm">
+<form method="post" action="${url(controller='profile', action='update')}" name="edit_profile_form" id="edit_profile_form" enctype="multipart/form-data" class="new-style-form">
   <div class="js-alternatives" id="user-logo">
     <img src="${url(controller='profile', action='logo', width='120', height='200')}" alt="User logo" id="user-logo-editable"/>
     <div>
@@ -67,6 +63,8 @@ ${_('Profile settings')}
       </label>
     </div>
   </div>
+
+  <h1 class="pageTitle">${_('General information')}:</h1>
 
   <div class="js-alternatives">
     <fieldset>

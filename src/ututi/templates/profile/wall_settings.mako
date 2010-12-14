@@ -1,11 +1,6 @@
 <%inherit file="/profile/edit.mako" />
 
-<%def name="title()">
-  ${c.user.fullname}
-</%def>
-
 <%def name="pagetitle()">
-  ${_('Wall settings')}
 </%def>
 
 <%
@@ -56,9 +51,10 @@ labels = {
   %endif
 </%def>
 
+<form method="POST" action="${url(controller='profile', action='wall_settings')}" class="new-style-form" id="wall_settings_form">
+<h1 class="pageTitle">${_('Wall settings')}:</h1>
 <div class="tip">${_('Which events do You want to see on Your wall?')}</div>
 <br />
-<form method="POST" action="${url(controller='profile', action='wall_settings')}" class="fullForm" id="wall_settings_form">
 %for key, item in c.event_types.items():
   ${form_item(item)}
 %endfor
