@@ -4,6 +4,7 @@ from pylons import request
 
 from ututi.lib.base import BaseController
 from ututi.lib.mailer import send_email
+from ututi.lib.security import bot_protect
 from ututi.model import SMS, meta
 
 from pylons import config
@@ -40,6 +41,7 @@ class SmsController(BaseController):
                    body=text)
         return '0;Message sent'
 
+    @bot_protect
     def status(self):
 
         sms_id = request.params.get('id')
