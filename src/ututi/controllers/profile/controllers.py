@@ -137,16 +137,12 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
         return defaults
 
     def _edit_profile_form(self):
-        self._set_settings_tabs(current_tab='profile')
+        self._set_settings_tabs(current_tab='general')
         return render('profile/edit_profile.mako')
 
     def _edit_contacts_form(self):
         self._set_settings_tabs(current_tab='contacts')
         return render('profile/edit_contacts.mako')
-
-    def _edit_password_form(self):
-        self._set_settings_tabs(current_tab='password')
-        return render('profile/edit_password.mako')
 
     def _wall_settings_form(self):
         c.event_types = event_types_grouped(Event.event_types())
@@ -156,15 +152,12 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
     def _set_settings_tabs(self, current_tab):
         c.current_tab = current_tab
         c.tabs = [
-            {'title': _("Profile"),
-             'name': 'profile',
+            {'title': _("General information"),
+             'name': 'general',
              'link': url(controller='profile', action='edit')},
             {'title': _("Contacts"),
              'name': 'contacts',
              'link': url(controller='profile', action='edit_contacts')},
-            {'title': _("Password"),
-             'name': 'password',
-             'link': url(controller='profile', action='edit_password')},
             {'title': _("Wall"),
              'name': 'wall',
              'link': url(controller='profile', action='wall_settings')},
@@ -180,11 +173,6 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
     @ActionProtector("user")
     def edit_contacts(self):
         return htmlfill.render(self._edit_contacts_form(),
-                               defaults=self._edit_form_defaults())
-
-    @ActionProtector("user")
-    def edit_password(self):
-        return htmlfill.render(self._edit_password_form(),
                                defaults=self._edit_form_defaults())
 
     @ActionProtector("user")
@@ -249,7 +237,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
         h.flash(_('Your Facebook account has been unlinked.'))
         redirect(url(controller='profile', action='edit_contacts'))
 
-    @validate(PasswordChangeForm, form='_edit_password_form',
+    @validate(PasswordChangeForm, form='_edit_profile_form',
               ignore_request=True, defaults=_edit_form_defaults)
     @ActionProtector("user")
     def password(self):
@@ -257,9 +245,9 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
             c.user.update_password(self.form_result['new_password'].encode('utf-8'))
             meta.Session.commit()
             h.flash(_('Your password has been changed!'))
-            redirect(url(controller='profile', action='edit_password'))
+            redirect(url(controller='profile', action='edit'))
         else:
-            redirect(url(controller='profile', action='edit_password'))
+            redirect(url(controller='profile', action='edit'))
 
     @validate(LogoUpload)
     @ActionProtector("user")

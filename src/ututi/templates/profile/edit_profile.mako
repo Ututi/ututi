@@ -49,48 +49,60 @@
   </script>
 </%def>
 
-<form method="post" action="${url(controller='profile', action='update')}" name="edit_profile_form" id="edit_profile_form" enctype="multipart/form-data" class="new-style-form">
-  <div class="js-alternatives" id="user-logo">
-    <img src="${url(controller='profile', action='logo', width='120', height='200')}" alt="User logo" id="user-logo-editable"/>
-    <div>
-      <div id="user-logo-button" >${_('Change logo')}</div>
+<div id="general-information-settings">
+  <form method="post" action="${url(controller='profile', action='update')}" name="edit_profile_form" enctype="multipart/form-data" class="new-style-form"> 
+    <div class="js-alternatives" id="user-logo">
+      <img src="${url(controller='profile', action='logo', width='120', height='200')}" alt="User logo" id="user-logo-editable"/>
+      <div>
+        <div id="user-logo-button" >${_('Change logo')}</div>
+      </div>
+      <br style="clear: left;" />
+      <div class="no-break">
+        <label for="logo_delete">
+          <input type="checkbox" class="checkbox" name="logo_delete" id="logo_delete" value="delete" />
+          ${_('Delete current logo')}
+        </label>
+      </div>
     </div>
-    <br style="clear: left;" />
-    <div class="no-break">
-      <label for="logo_delete">
-        <input type="checkbox" class="checkbox" name="logo_delete" id="logo_delete" value="delete" />
-        ${_('Delete current logo')}
-      </label>
+
+    <div class="js-alternatives" id="general-information-form">
+
+      <h1 class="pageTitle">${_('General information')}:</h1>
+
+      <fieldset>
+      ${h.input_line('fullname', _('Full name'))}
+      <div>
+        ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=False)}
+      </div>
+
+      ${h.input_line('site_url', _('Address of your website or blog'))}
+      ${h.input_area('description', _('About yourself'), rows='6', cols='50')}
+
+      <div style="padding-top: 5px">
+        <label for="profile_is_public">
+          <input type="checkbox" name="profile_is_public" class="checkbox"
+                 id="profile_is_public" />
+
+          ${_('Show my profile to unregistered users and search engines')}
+        </label>
+      </div>
+
+      <div class="non-js">
+        <label for="logo_upload">${_('Personal logo')}</label>
+        <input type="file" name="logo_upload" id="logo_upload" class="line" />
+      </div>
+      ${h.input_submit(class_="btnMedium")}
+      </fieldset>
     </div>
-  </div>
+  </form>
 
-  <h1 class="pageTitle">${_('General information')}:</h1>
-
-  <div class="js-alternatives">
+  <form method="post" action="${url(controller='profile', action='password')}" id="change-password-form" class="new-style-form">
+    <h1 class='pageTitle'>${_('Change password')}:</h1>
     <fieldset>
-    ${h.input_line('fullname', _('Full name'))}
-    <div>
-      ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=False)}
-    </div>
-
-    ${h.input_line('site_url', _('Address of your website or blog'))}
-    ${h.input_area('description', _('About yourself'), rows='6', cols='50')}
-
-    <div style="padding-top: 5px">
-      <label for="profile_is_public">
-        <input type="checkbox" name="profile_is_public" class="checkbox"
-               id="profile_is_public" />
-
-        ${_('Show my profile to unregistered users and search engines')}
-      </label>
-    </div>
-
-    <div class="non-js">
-      <label for="logo_upload">${_('Personal logo')}</label>
-      <input type="file" name="logo_upload" id="logo_upload" class="line" />
-    </div>
-    ${h.input_submit(class_="btnMedium")}
+    ${h.input_psw('password', _('Current password'))}
+    ${h.input_psw('new_password', _('New password'))}
+    ${h.input_psw('repeat_password', _('Repeat the new password'))}
+    ${h.input_submit(_('Change password'), class_='btnMedium')}
     </fieldset>
-  </div>
-
-</form>
+  </form>
+</div>

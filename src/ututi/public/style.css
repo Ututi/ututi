@@ -4428,9 +4428,18 @@ div#user-logo-button {
 
 /* edit profile */
 
-#edit_profile_form div#user-logo {
+#general-information-settings #user-logo {
     float: left;
     margin: 30px;
+}
+
+#general-information-settings #general-information-form {
+    margin-left: 200px;
+}
+
+#general-information-settings #change-password-form {
+    margin-left: 200px;
+    margin-top: 20px;
 }
 
 /* end edit profile */
