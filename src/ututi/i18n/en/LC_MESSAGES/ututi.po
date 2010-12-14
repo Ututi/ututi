@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-12-11 16:29+0200\n"
+"PO-Revision-Date: 2010-12-14 12:31+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -1941,6 +1941,9 @@ msgstr ""
 msgid "New book"
 msgstr ""
 
+msgid "Learning books market"
+msgstr ""
+
 msgid "About U-Books"
 msgstr ""
 
@@ -1993,6 +1996,9 @@ msgid "It's place where you can get cheap stydy book."
 msgstr ""
 
 msgid "It's place where you find new owner for you old good textbook."
+msgstr ""
+
+msgid "Newest books"
 msgstr ""
 
 msgid "Books added"
@@ -3893,6 +3899,9 @@ msgid ""
 "membership?"
 msgstr ""
 
+msgid "I teach this"
+msgstr ""
+
 msgid "Files:"
 msgstr ""
 
@@ -4075,13 +4084,11 @@ msgid "Start watching this subject personally"
 msgstr ""
 
 msgid ""
-"Attention, please! Before creating new subject please ensure that it's "
-"not already there."
+"Before creating new subject please ensure that it has not been yet "
+"created."
 msgstr ""
 
-msgid ""
-"A list of similar subjects to the one you are about to create is shown on"
-" the right."
+msgid "A list of similar subjects is shown on the right."
 msgstr ""
 
 msgid ""
@@ -4092,10 +4099,65 @@ msgstr ""
 msgid "Create subject"
 msgstr ""
 
-msgid "Teacher, subjects are good!"
+msgid "What are my subjects?"
 msgstr ""
 
-msgid "User, subjects are good!"
+msgid "A place for course material sharing"
+msgstr ""
+
+msgid ""
+"upload and share course material with students of your class, university "
+"or the entire world."
+msgstr ""
+
+msgid "Easy way to reach your students"
+msgstr ""
+
+msgid "send messages to all of your students at once."
+msgstr ""
+
+msgid ""
+"When you update subject information or upload a new file, your students "
+"will be notified automatically."
+msgstr ""
+
+msgid "Monitoring wiki notes"
+msgstr ""
+
+msgid "create notes for your courses collaboratively with your students."
+msgstr ""
+
+msgid "Subject forum"
+msgstr ""
+
+msgid ""
+"a place to discuss the learning matters. Subject forums bring you to your"
+" students closer than ever before!"
+msgstr ""
+
+msgid "What are subjects?"
+msgstr ""
+
+msgid "Easy way to reach your university mates"
+msgstr ""
+
+msgid "send messages to all of your group mates at once."
+msgstr ""
+
+msgid ""
+"When someone updates subject information or uploads a new file, everyone "
+"watching the subject will be notified automatically."
+msgstr ""
+
+msgid "Creating wiki notes"
+msgstr ""
+
+msgid ""
+"create notes for your courses collaboratively with your group mates or "
+"even your teacher."
+msgstr ""
+
+msgid "a place to discuss the learning matters!"
 msgstr ""
 
 msgid "Create subject you teach:"
