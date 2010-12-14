@@ -20,7 +20,7 @@ Now let's add some books:
     >>> browser.getControl('School grade').displayValue = ['1 kl.']
     >>> browser.getControl(name='school_science_type').displayValue = ['Fizika']
     >>> browser.getControl('Type').displayValue = ['Vadovėlis']
-    >>> browser.getControl('City').displayValue = ['Vilnius']
+    >>> browser.getControl('City').displayValue = ['Kaunas']
     >>> browser.getControl('Price').value = "1000.00"
     >>> browser.getControl('Save').click()
 
@@ -64,6 +64,9 @@ Then we go to the books catalog:
       <a href="/books/show/6">University book</a>
     </h3>
 
+    >>> browser.getControl(name='city').displayOptions
+    ['All cities (3)', 'Vilnius (2)', 'Kaunas (1)']
+
 We can't just go and see the whole category such as all the books for
 students, so let's go to the subtype instead:
 
@@ -72,6 +75,9 @@ students, so let's go to the subtype instead:
     <h3 class="book-title">
       <a href="/books/show/6">University book</a>
     </h3>
+
+    >>> browser.getControl(name='city').displayOptions
+    ['All cities (1)', 'Vilnius (1)']
 
     >>> browser.open('http://localhost/books/catalog/university/science/3')
     >>> browser.printCssQuery("h3.book-title")
@@ -88,6 +94,9 @@ students, so let's go to the subtype instead:
       <a href="/books/show/4">My physics book</a>
     </h3>
 
+    >>> browser.getControl(name='city').displayOptions
+    ['All cities (1)', 'Kaunas (1)']
+
     >>> browser.open('http://localhost/books/catalog/school/science/1')
     >>> browser.printCssQuery("h3.book-title")
     <h3 class="book-title">
@@ -102,3 +111,6 @@ students, so let's go to the subtype instead:
     <h3 class="book-title">
       <a href="/books/show/5">My beautiful book 2</a>
     </h3>
+
+    >>> browser.getControl(name='city').displayOptions
+    ['All cities (1)', 'Vilnius (1)']

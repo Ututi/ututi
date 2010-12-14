@@ -356,23 +356,19 @@ class BooksController(BaseController):
     def logo(self, id, width=None, height=None):
         return serve_logo('book', int(id), width=width, height=height)
 
-    def _load_cities(self):
-        c.selected_city_id = request.params.get('city', '')
-        c.selected_city = city_from_string(c.selected_city_id)
-        search_results = search_query(text="", obj_type='book')
+    def addFilterByCitiesQuery(self, query, selected_city):
+        if c.selected_city is not None:
+            return (query.join((Book, Book.id == SearchItem.content_item_id))
+                         .join(City).filter(City.id == c.selected_city.id))
+        return query
 
-        cities = meta.Session.query(City.id,
-                                    City.name,
-                                    func.count(Book.id.distinct()).label('book_count'))\
-            .join(Book, search_results.subquery()).filter(Book.id != None).group_by(City.name, City.id).order_by(desc('book_count')).all()
-
-        c.filter_cities = [('', _("All cities (%(book_count)s)") % {'book_count': search_results.count()})]
-
-        for city_id, city_name, book_count in cities:
-            c.filter_cities.append((city_id, _("%(city)s (%(book_count)s)" % {
+    def _format_cities_for_filter(self, books_by_cities, total):
+        filter_cities = [('', _("All cities (%(book_count)s)") % {'book_count': total})]
+        for city_id, city_name, book_count in books_by_cities:
+            filter_cities.append((city_id, _("%(city)s (%(book_count)s)" % {
                             'city': city_name,
                             'book_count': book_count})))
-
+        return filter_cities
 
     def search(self):
         c.search_text = request.params.get('text', '')
@@ -380,23 +376,14 @@ class BooksController(BaseController):
         c.selected_city = city_from_string(c.selected_city_id)
         search_results = search_query(text=c.search_text, obj_type='book')
 
-        books = search_results
-        if c.selected_city is not None:
-            books = (search_results
-                     .join((Book, Book.id == SearchItem.content_item_id))
-                     .join(City).filter(City.id == c.selected_city.id))
-
         cities = meta.Session.query(City.id,
                                     City.name,
                                     func.count(Book.id.distinct()).label('book_count'))\
-            .join(Book, search_results.subquery()).filter(Book.id != None).group_by(City.name, City.id).order_by(desc('book_count')).all()
+                                    .join(Book, search_results.subquery())
+        cities = cities.filter(Book.id != None).group_by(City.name, City.id).order_by(desc('book_count')).all()
+        c.filter_cities = self._format_cities_for_filter(cities, search_results.count())
 
-        c.filter_cities = [('', _("All cities (%(book_count)s)") % {'book_count': search_results.count()})]
-
-        for city_id, city_name, book_count in cities:
-            c.filter_cities.append((city_id, _("%(city)s (%(book_count)s)" % {
-                            'city': city_name,
-                            'book_count': book_count})))
+        books = self.addFilterByCitiesQuery(search_results, c.selected_city)
 
         c.books = self._make_pages(books)
         return render('books/search.mako')
@@ -407,7 +394,8 @@ class BooksController(BaseController):
         school_grade = None
         science_type = None
 
-        self._load_cities()
+        c.selected_city_id = request.params.get('city', '')
+        c.selected_city = city_from_string(c.selected_city_id)
 
         c.current_science_types = []
         c.book_department = None
@@ -433,6 +421,27 @@ class BooksController(BaseController):
 
         #book filtering:
         books = meta.Session.query(Book)
+        books = self.applyCatalogQuery(books, school_grade)
+
+        # City filter widget
+        books_by_city = meta.Session.query(City.id,
+                                    City.name,
+                                    func.count(Book.id.distinct()).label('book_count'))\
+                                    .join(Book)
+        books_by_city = self.applyCatalogQuery(books_by_city, school_grade)
+        books_by_city = books_by_city.filter(Book.id != None).group_by(City.name, City.id).order_by(desc('book_count')).all()
+        c.filter_cities = self._format_cities_for_filter(books_by_city, books.count())
+
+        if c.selected_city is not None:
+            books = books.filter(Book.city == c.selected_city)
+        c.books = self._make_pages(books)
+
+        defaults={
+            'city_id': c.selected_city_id
+            }
+        return render('books/catalog.mako')
+
+    def applyCatalogQuery(self, books, school_grade):
         if c.book_department is not None:
             books = books.filter(Book.department_id == c.book_department.id)
         if school_grade is not None:
@@ -441,15 +450,7 @@ class BooksController(BaseController):
             books = books.filter(Book.type == c.books_type)
         if c.science_type is not None:
             books = books.filter(Book.science_type == c.science_type)
-        if c.selected_city is not None:
-            books = books.filter(Book.city == c.selected_city)
-
-        c.books = self._make_pages(books)
-
-        defaults={
-            'city_id': c.selected_city_id
-            }
-        return render('books/catalog.mako')
+        return books
 
     @ActionProtector("user")
     def my_books(self):
