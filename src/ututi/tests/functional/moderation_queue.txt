@@ -15,6 +15,13 @@ not being on it, the email is just ignored:
     >>> browser.printQuery('//div[@class="no-messages"]/text()')
     No messages yet.
 
+We can't see the moderation queue button too:
+
+    >>> browser.printCssQuery('.single-title button', include_attributes=[''])
+    <button>
+      <span>New topic</span>
+    </button>
+
 Now if we go to the group settings page and set it so it would allow
 other people to post emails to our mailing list, a moderation queue
 get's enabled and all the emails that are sent to the group from
@@ -42,8 +49,16 @@ No email messages will be sent to group members either:
     0
 
 But we will see it in the moderation queue. Note here, that the button
-linking to the moderation queue also show the number of messages awaiting
-moderation:
+linking to the moderation queue also shows the number of messages
+awaiting moderation:
+
+    >>> browser.printCssQuery('.single-title button', include_attributes=[''])
+    <button>
+      <span>New topic</span>
+    </button>
+    <button>
+      <span>Moderation queue (1)</span>
+    </button>
 
     >>> browser.getControl('Moderation queue (1)').click()
     >>> browser.printQuery("id('single-messages')//div[contains(@class, 'm-on')]//text()")

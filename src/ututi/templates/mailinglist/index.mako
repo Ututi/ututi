@@ -10,7 +10,7 @@
         ${h.button_to(_("New topic"), url(controller='mailinglist', action='new_thread', id=c.group.group_id), method='get')}
       </div>
       % endif
-      % if h.check_crowds(['admin']):
+      % if h.check_crowds(['admin']) and c.group.mailinglist_moderated:
       <div style="float: right">
         <% class_ = 'btn bold' if c.moderation_count else 'btn' %>
         ${h.button_to(_("Moderation queue (%(moderation_count)s)") % dict(moderation_count=c.moderation_count),
