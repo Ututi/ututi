@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-12-15 01:58+0200\n"
+"PO-Revision-Date: 2010-12-15 13:35+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -757,6 +757,12 @@ msgid "Your phone number has been confirmed."
 msgstr "Twój numer telefonu został potwierdzony."
 
 msgid "Group added!"
+msgstr ""
+
+msgid "Group updated!"
+msgstr ""
+
+msgid "Group deleted."
 msgstr ""
 
 msgid "This is not the confirmation code we sent you."
@@ -3787,6 +3793,9 @@ msgstr "Nowe hasło"
 msgid "Repeat the new password"
 msgstr "Wpisz ponownie nowe hasło"
 
+msgid "Edit a student group"
+msgstr ""
+
 msgid "What's new?"
 msgstr "Powiadomienia"
 
@@ -3992,6 +4001,9 @@ msgstr "10 zlotych"
 msgid "50 litas"
 msgstr "50 złotych"
 
+msgid "Delete this group?"
+msgstr ""
+
 msgid "Welcome to Ututi!"
 msgstr "Witaj na Ututi!"
 
@@ -4023,9 +4035,6 @@ msgstr "Prosty sposób na dzielenie się notatkami"
 
 msgid "Find courses I teach"
 msgstr "Znajdź przedmioty, których uczę"
-
-msgid "find courses I teach"
-msgstr "znajdź przedmioty, których uczę"
 
 msgid "Add:"
 msgstr "Dodaj:"
@@ -4300,6 +4309,15 @@ msgstr "Pliki:"
 
 msgid "Wiki pages:"
 msgstr "Wiki:"
+
+msgid "Edit group"
+msgstr ""
+
+msgid "Edit this group"
+msgstr ""
+
+msgid "Delete this group"
+msgstr ""
 
 msgid "Group or user:"
 msgstr "Grupa lub użytkownik"

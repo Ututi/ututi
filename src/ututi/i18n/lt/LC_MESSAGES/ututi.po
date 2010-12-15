@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-12-15 01:58+0200\n"
+"PO-Revision-Date: 2010-12-15 13:35+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -591,9 +591,9 @@ msgstr "Ututi naujienos: %(file_changes)s ir %(page_changes)s"
 #, python-format
 msgid "%(message_count)d new message awaiting moderation"
 msgid_plural "%(message_count)d new messages awaiting moderation"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%(message_count)d nauja žinutė moderavimo eilėje"
+msgstr[1] "%(message_count)d naujos žinutės moderavimo eilėje"
+msgstr[2] "%(message_count)d naujų žinučių moderavimo eilėje"
 
 #, python-format
 msgid "The private space subscription for \"%s\" is about to expire"
@@ -740,6 +740,12 @@ msgstr "Telefono numeris patvirtintas."
 
 msgid "Group added!"
 msgstr "Grupė pridėta!"
+
+msgid "Group updated!"
+msgstr "Grupė atnaujinta!"
+
+msgid "Group deleted."
+msgstr "Grupė ištrinta!"
 
 msgid "This is not the confirmation code we sent you."
 msgstr "Tai nėra tas patvirtinimo kodas, kurį mes Tau siuntėme."
@@ -3749,6 +3755,9 @@ msgstr "Naujas slaptažodis"
 msgid "Repeat the new password"
 msgstr "Pakartok naują slaptažodį"
 
+msgid "Edit a student group"
+msgstr "Redaguoti grupę"
+
 msgid "What's new?"
 msgstr "Kas naujo?"
 
@@ -3954,6 +3963,9 @@ msgstr "10 litų"
 msgid "50 litas"
 msgstr "50 litų"
 
+msgid "Delete this group?"
+msgstr "Panaikinti šią grupę?"
+
 msgid "Welcome to Ututi!"
 msgstr "Sveiki prisijungę prie Ututi!"
 
@@ -3983,10 +3995,7 @@ msgid "Share course materials easily"
 msgstr "Lengvai platinkite studijų medžiagą"
 
 msgid "Find courses I teach"
-msgstr "Rasti mano dėstomus kursus"
-
-msgid "find courses I teach"
-msgstr "rasti mano dėstomus kursus"
+msgstr "Rasti mano kursus"
 
 msgid "Add:"
 msgstr "Pridėti:"
@@ -4263,6 +4272,15 @@ msgstr "Failų: "
 
 msgid "Wiki pages:"
 msgstr "Wiki užrašų:"
+
+msgid "Edit group"
+msgstr "Redaguoti grupę"
+
+msgid "Edit this group"
+msgstr "Redaguoti šią grupę"
+
+msgid "Delete this group"
+msgstr "Trinti šią grupę"
 
 msgid "Group or user:"
 msgstr "Grupė arba narys:"

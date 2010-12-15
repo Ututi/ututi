@@ -88,7 +88,7 @@ ${parent.head_tags()}
         style="float: none">
     <fieldset>
       <legend class="a11y">${_('Find courses I teach')}</legend>
-      <label><button value="submit" class="btnMedium"><span>${_('find courses I teach')}</span></button>
+      <label><button value="submit" class="btnMedium"><span>${_('Find courses I teach')}</span></button>
       </label>
     </fieldset>
   </form>
