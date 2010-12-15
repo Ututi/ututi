@@ -369,6 +369,16 @@ def input_submit(text=None, name=None, **kwargs):
     kwargs.setdefault('value', text)
     return HTML.button(c=[HTML.span(text)], **kwargs)
 
+def input_submit_text_button(text=None, name=None, **html_options):
+    if text is None:
+        from pylons.i18n import _
+        text = _('Save')
+    if name is not None:
+        html_options['name'] = name
+    from pylons import tmpl_context as c
+    html_options.setdefault('class_', "btn-text")
+    html_options.setdefault('value', text)
+    return HTML.button(c=[HTML.span(text)], **html_options)
 
 def link_to(label, url='', max_length=None, **attrs):
     if max_length is not None:

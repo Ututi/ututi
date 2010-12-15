@@ -104,26 +104,52 @@
             border-bottom: 1px solid #ded8d8;
         }
 
-/* NEW STYLE FORMS
+/* NEW STYLE FORMS.
+ * "new-style-form" is a namespace for now.
  */
 
 .new-style-form {
 }
 
-    .new-style-form .labelText,
-    .new-style-form .inputField {
+    .new-style-form span.labelText,
+    .new-style-form span.inputField,
+    .new-style-form span.helpText {
         display: block;
     }
 
-    .new-style-form .labelText {
+    .new-style-form span.labelText {
         font-weight: bold;
         margin: 10px 0px 2px 0px;
+    }
+
+    .new-style-form span.helpText {
+        color: #666;
+        font-size: 10px;
+    }
+
+    .new-style-form input[type='text'],
+    .new-style-form input[type='password'],
+    .new-style-form textarea,
+    .new-style-form span.helpText {
+        width: 300px;
     }
 
     .new-style-form button {
         margin-top: 20px;
     }
 
+    .new-style-form button.btn-text {
+        /* Pretending to look like simple link */
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #d45500;
+        font: 13px normal Arial, Helvetica, sans-serif; 
+    }
+
+    .new-style-form button.btn-text:hover span {
+        text-decoration: underline;
+    }
 
 /* SUBJECT ADD PAGE STYLE
  * A lot of it should be later generalized for other views.
