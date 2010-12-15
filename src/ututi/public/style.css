@@ -1087,7 +1087,7 @@ input.checkbox,
 #login-screen input.checkbox,
 #group_settings_form input.checkbox,
 .fullForm input.checkbox {
-    width: 1em;
+    width: 1em !important;
     margin: 0 5px 0 0;
 }
 
