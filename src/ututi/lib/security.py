@@ -203,7 +203,7 @@ def bot_protect(method):
     def _protected(self):
         ua  = request.headers.get('user-agent')
         bot = re.compile('googlebot', re.IGNORECASE)
-        if bot.search(ua):
+        if ua is not None and bot.search(ua):
             abort(404)
         return method(self)
     return _protected
