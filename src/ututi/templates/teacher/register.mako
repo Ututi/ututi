@@ -23,7 +23,7 @@
             ${location_widget(2, add_new=(c.tpl_lang=='pl'))}
           </div>
           ${h.input_line('position', _('Position'))}
-          <label id="agreeWithTOC"><input class="checkbox" type="checkbox" name="agree" value="true"/>${_('I agree to the ')} <a href="${url(controller='home', action='terms')}" rel="nofollow">${_('terms of use')}</a></label>
+          <label id="agreeWithTOC"><input class="checkbox" checked="checked" type="checkbox" name="agree" value="true"/>${_('I agree to the ')} <a href="${url(controller='home', action='terms')}" rel="nofollow">${_('terms of use')}</a></label>
           <form:error name="agree"/>
           <div style="margin-top: 10px;">
             ${h.input_submit(_('Register'))}

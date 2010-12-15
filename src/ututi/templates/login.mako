@@ -111,7 +111,7 @@
 
          ${h.input_psw('new_password', _('Password'))}
          ${h.input_psw('repeat_password', _('Repeat password'))}
-        <label id="agreeWithTOC"><input type="checkbox" name="agree" value="true"/>${_('I agree to the ')} <a href="${url(controller='home', action='terms')}" rel="nofollow">${_('terms of use')}</a></label>
+        <label id="agreeWithTOC"><input class="checkbox" type="checkbox" name="agree" checked="checked" value="true"/>${_('I agree to the ')} <a href="${url(controller='home', action='terms')}" rel="nofollow">${_('terms of use')}</a></label>
         <form:error name="agree"/>
         <div>
           ${h.input_submit(_('Register'))}

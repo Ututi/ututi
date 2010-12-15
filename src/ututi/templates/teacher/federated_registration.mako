@@ -72,7 +72,7 @@
 
         <div style="margin-top: 1em">
           <form:error name="agree"/>
-          <label id="agreeWithTOC"><input class="checkbox" type="checkbox" name="agree" value="true"/>${_('I agree to the ')} <a href="${url(controller='home', action='terms')}">${_('terms of use')}</a></label>
+          <label id="agreeWithTOC"><input class="checkbox" checked="checked" type="checkbox" name="agree" value="true"/>${_('I agree to the ')} <a href="${url(controller='home', action='terms')}">${_('terms of use')}</a></label>
         </div>
 
         <br />
