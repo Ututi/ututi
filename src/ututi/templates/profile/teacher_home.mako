@@ -18,6 +18,13 @@ ${parent.head_tags()}
       });
       return false;
     });
+
+    $('.delete_group').click(function() {
+        var answer = confirm("${_('Delete this group?')}");
+        if (! answer) {
+            return false;
+        }
+    });
   });
 </script>
 </%def>
@@ -191,7 +198,7 @@ ${self.location_nag(_('Tell us where you work'))}
     %if c.user.student_groups:
     <%b:item_list title="${_('Student groups')}" items="${c.user.student_groups}">
       <%def name="header_button()">
-        ${h.button_to(_('Add a group'), url(controller='profile', action='add_student_group'))}
+        ${h.button_to(_('Add a group'), url(controller='profile', action='add_student_group'), method='GET')}
       </%def>
       <%def name="row(item)">
         ${group_listitem_teacherdashboard(item)}

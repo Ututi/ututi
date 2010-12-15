@@ -10,6 +10,11 @@ from ututi.lib.validators import UserPasswordValidator, TranslatedEmailValidator
     LocationTagsValidator, PhoneNumberValidator, FileUploadTypeValidator
 
 
+class StudentGroupDeleteForm(Schema):
+    allow_extra_fields = True
+    group_id = validators.Int()
+
+
 class LocationForm(Schema):
     pre_validators = [NestedVariables()]
     allow_extra_fields = True

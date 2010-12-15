@@ -186,6 +186,21 @@
 <%def name="group_listitem_teacherdashboard(group)">
   <%self:group_listitem_base group="${group}" n="${0}">
     <%def name="title(group)">
+      <div class="hide_me">
+        <div style="float: right;">
+        <a href="${url(controller='profile', action='edit_student_group', id=group.id)}" class="edit_group" title="${_('Edit group')}">
+          ${h.image('/images/details/icon_edit.png', alt=_('Edit this group'))}
+        </a>
+        </div>
+        <div style="float: right;">
+        <form method="POST" action="${url(controller='profile', action='delete_student_group')}">
+          <div>
+            <input type="hidden" name="group_id" value="${group.id}" class="event_type"/>
+            <input type="image" src="/images/details/icon_delete.png" title="${_('Delete this group')}" class="delete_group" name="delete_group_${group.id}"/>
+          </div>
+        </form>
+        </div>
+      </div>
       <div>
         <div class="logo">
           <img src="/images/details/icon_group_large.png" width="35" heigh="35" alt="logo" />

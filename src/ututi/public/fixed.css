@@ -276,8 +276,25 @@ ul.feature-list {
 
 /* UTUTI OBJECT DESCRIPTION
 */
+.u-object {
+    position: relative;
+}
+
 .u-object dt, .u-object dd {
     display: inline;
+}
+
+.u-object .hide_me {
+  position: absolute;
+  right: -10px;
+  top: 10px;
+  display: none;
+  width: 15px;
+  height: 15px;
+}
+
+.row:hover .u-object .hide_me {
+  display: block;
 }
 
 
@@ -379,6 +396,10 @@ ul.feature-list {
         display: inline;
         font-size: 14px;
         margin-left: 10px;
+    }
+
+    .group-description  .edit_group {
+        cursor: pointer;
     }
 
     .group-description .group-actions dd {

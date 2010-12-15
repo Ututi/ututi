@@ -16,3 +16,15 @@ Let's add a group (since we have none at the moment):
 
     >>> browser.printQuery("//div[@class='group-title']/dt/text()")
     group A
+
+Let's edit the group:
+    >>> browser.getLink('Edit this group').click()
+    >>> browser.getControl('Title').value = 'Group A+'
+    >>> browser.getControl('Save').click()
+
+    >>> browser.printQuery("//div[@class='group-title']/dt/text()")
+    Group A+
+
+And delete it:
+    >>> browser.getControl(name='delete_group_1').click()
+    >>> browser.printQuery("//div[@class='group-title']/dt/text()")

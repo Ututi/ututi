@@ -30,7 +30,7 @@ from ututi.model import LocationTag, BlogEntry, TeacherGroup
 from ututi.model import meta, Email, User
 from ututi.controllers.profile.validators import HideElementForm
 from ututi.controllers.profile.validators import ContactForm, LocationForm, LogoUpload, PhoneConfirmationForm,\
-    PhoneForm, ProfileForm, PasswordChangeForm, StudentGroupForm
+    PhoneForm, ProfileForm, PasswordChangeForm, StudentGroupForm, StudentGroupDeleteForm
 from ututi.controllers.profile.wall import WallMixin, WallSettingsForm
 from ututi.controllers.profile.subjects import WatchedSubjectsMixin
 from ututi.controllers.search import SearchSubmit, SearchBaseController
@@ -562,7 +562,7 @@ class TeacherProfileController(ProfileControllerBase):
         return render('profile/teacher_home.mako')
 
     @ActionProtector("teacher")
-    @validate(schema=StudentGroupForm, form='add_student_group')
+    @validate(schema=StudentGroupForm, form='add_student_group', on_get=False)
     def add_student_group(self):
         if hasattr(self, 'form_result'):
             grp = TeacherGroup(self.form_result['title'],
@@ -572,3 +572,45 @@ class TeacherProfileController(ProfileControllerBase):
             h.flash(_('Group added!'))
             redirect(url(controller='profile', action='home'))
         return render('profile/add_student_group.mako')
+
+    @ActionProtector("teacher")
+    @validate(schema=StudentGroupForm, form='add_student_group', on_get=False)
+    def edit_student_group(self, id):
+
+        try:
+            group = TeacherGroup.get(int(id))
+        except ValueError:
+            abort(404)
+
+        if group is None or group.teacher != c.user:
+            abort(404)
+
+        c.student_group = group
+        defaults = {
+            'title' : group.title,
+            'email' : group.email,
+            'group_id' : group.id
+            }
+        if hasattr(self, 'form_result'):
+            group.title = self.form_result['title']
+            group.email = self.form_result['email']
+            group.update_binding()
+            meta.Session.commit()
+            h.flash(_('Group updated!'))
+            redirect(url(controller='profile', action='home'))
+        return htmlfill.render(self._edit_student_group(), defaults=defaults)
+
+    def _edit_student_group(self):
+        return render('profile/edit_student_group.mako')
+
+    @validate(schema=StudentGroupDeleteForm())
+    def delete_student_group(self):
+        if hasattr(self, 'form_result'):
+            group = TeacherGroup.get(int(self.form_result['group_id']))
+            if group is not None and group.teacher == c.user:
+                meta.Session.delete(group)
+                meta.Session.commit()
+                h.flash(_('Group deleted.'))
+            else:
+                abort(404)
+        redirect(url(controller='profile', action='home'))

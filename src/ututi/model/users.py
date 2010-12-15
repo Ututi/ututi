@@ -495,13 +495,25 @@ class GroupNotFoundException(Exception):
 
 class TeacherGroup(object):
     def __init__(self, title, email):
-        from ututi.model import Group
         self.title = title
         self.email = email
+        self.update_binding()
+
+    @classmethod
+    def get(cls, id):
+        try:
+            return meta.Session.query(cls).filter_by(id=id).one()
+        except NoResultFound:
+            return None
+
+    def update_binding(self):
+        from ututi.model import Group
         hostname = config.get('mailing_list_host', 'groups.ututi.lt')
-        if email.endswith(hostname):
-            group = Group.get(email[:-(len(hostname)+1)])
+        self.group = None
+        if self.email.endswith(hostname):
+            group = Group.get(self.email[:-(len(hostname)+1)])
             if group is not None:
                 self.group = group
             else:
                 raise GroupNotFoundException()
+

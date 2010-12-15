@@ -27,7 +27,7 @@
     <form method="POST" action="${url(controller='profile', action='hide_event')}">
       <div>
         <input type="hidden" name="event_type" value="${event.event_type}" class="event_type"/>
-        <input type="image" src="/images/details/icon_fail.png" title="${_('Ignore events like this')}" class="hide_event"/>
+        <input type="image" src="/images/details/icon_delete.png" title="${_('Ignore events like this')}" class="hide_event"/>
       </div>
     </form>
   </div>

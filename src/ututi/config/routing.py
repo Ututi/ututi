@@ -248,6 +248,7 @@ def make_map(config):
     map.connect('/profile/edit/wall', controller='profile', action='wall_settings')
     map.connect('/profile/edit/notifications', controller='profile', action='notifications')
     map.connect('/profile/{action}', controller='profile')
+    map.connect('/profile/{action}/{id}', controller='profile')
 
     # CUSTOM ROUTES HERE
     map.connect('/sitemap.xml', controller='sitemap', action='index')
