@@ -206,7 +206,7 @@ ${self.anonymous_menu()}
   % for message in messages:
   <div class="flash-message">
       <span class="close-link hide-parent">
-        ${h.image('/img/icons/bigX_15x15.png', alt=_('Close'))}
+        ${h.image('/images/details/icon_delete.png', alt=_('Close'))}
       </span>
       <span>${h.literal(unicode(message))}</span>
   </div>
@@ -228,7 +228,7 @@ ${self.anonymous_menu()}
            $('.user-notification').fadeOut();
          }
        })">
-      ${h.image('/img/icons/bigX_15x15.png', alt=_('No, thanks'))}
+      ${h.image('/images/details/icon_delete.png', alt=_('No, thanks'))}
     </a>
   </div>
 </div>
