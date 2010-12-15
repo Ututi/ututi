@@ -296,10 +296,10 @@ def trackEvent(obj, action, label, category='navigation'):
             label))
 
 
-def input_line(name, title, value='', explanation=None, **kwargs):
+def input_line(name, title, value='', help_text=None, **kwargs):
     expl = None
-    if explanation is not None:
-        expl = HTML.span(class_='helpText', c=explanation)
+    if help_text is not None:
+        expl = HTML.span(class_='helpText', c=help_text)
 
     from pylons import tmpl_context as c
     kwargs.setdefault('id', name)
@@ -314,10 +314,10 @@ def input_line(name, title, value='', explanation=None, **kwargs):
                        HTML.literal('<form:error name="%s" />' % name)])
 
 
-def input_psw(name, title, value='', explanation=None, **kwargs):
+def input_psw(name, title, value='', help_text=None, **kwargs):
     expl = None
-    if explanation is not None:
-        expl = HTML.span(class_='helpText', c=explanation)
+    if help_text is not None:
+        expl = HTML.span(class_='helpText', c=help_text)
     from pylons import tmpl_context as c
     kwargs.setdefault('id', name)
     return HTML.div(class_='formField',
@@ -331,10 +331,10 @@ def input_psw(name, title, value='', explanation=None, **kwargs):
                        HTML.literal('<form:error name="%s" />' % name)])
 
 
-def input_area(name, title, value='', cols='50', rows='5', explanation=None, disabled=False, **kwargs):
+def input_area(name, title, value='', cols='50', rows='5', help_text=None, disabled=False, **kwargs):
     expl = None
-    if explanation is not None:
-        expl = HTML.span(class_='helpText', c=explanation)
+    if help_text is not None:
+        expl = HTML.span(class_='helpText', c=help_text)
     kwargs = {}
     if disabled:
         kwargs['disabled'] = 'disabled'
