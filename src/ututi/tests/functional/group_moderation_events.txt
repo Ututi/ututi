@@ -5,9 +5,6 @@ Set Up:
 
     >>> browser = Browser.logIn('admin@ututi.lt', 'asdasd')
     >>> browser.getLink('Moderatoriai').click()
-    >>> browser.getLink('Edit').click()
-    >>> browser.getControl('Moderated').click()
-    >>> browser.getControl('Save').click()
 
     >>> from ututi.tests.functional import send_test_message
     >>> send_test_message('email_from_user2.txt', '33', to='moderators@groups.ututi.lt')
@@ -19,7 +16,7 @@ should not be visible to the other users. Let's check that it is
 actually so:
 
     >>> user3 = Browser.logIn('user3@ututi.lt', 'password')
-    >>> user3.getLink("News wall").click()
+    >>> user3.getLink("News wall (1)").click()
     >>> user3.printQuery('id("wall")//div[@class="description"]//text()')
     Adminas Adminovix has created the group Moderatoriai .
     Adminas Adminovix joined the group Moderatoriai .
@@ -27,7 +24,6 @@ actually so:
     Adminas Adminovix has created the subject Matematinė analizė .
 
 The administrator can see the messages:
-
     >>> browser.getLink("News wall").click()
     >>> browser.printQuery('id("wall")//div[@class="description"]//text()')
     Varlius <varlius@example.com> has posted a new message Hello from varlius to the group's Moderatoriai moderation queue.

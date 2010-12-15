@@ -5,15 +5,22 @@ The default setting allows only group members post emails to the
 mailing list, so if someone sends an email to the mailing list while
 not being on it, the email is just ignored:
 
+    >>> browser = Browser.logIn('admin@ututi.lt', 'asdasd')
+    >>> browser.getLink('Moderatoriai').click()
+
+Disable moderation first:
+    >>> browser.getLink('Edit').click()
+    >>> browser.getControl('Members only').click()
+    >>> browser.getControl('Save').click()
+
     >>> from ututi.tests.functional import send_test_message
     >>> send_test_message('email_from_user2.txt', '33', to='moderators@groups.ututi.lt')
     >>> send_test_message('email_from_non_ututi.txt', '42', to='moderators@groups.ututi.lt', subject='Hello from varlius')
 
-    >>> browser = Browser.logIn('admin@ututi.lt', 'asdasd')
-    >>> browser.getLink('Moderatoriai').click()
     >>> browser.getLink('Mailing List').click()
     >>> browser.printQuery('//div[@class="no-messages"]/text()')
     No messages yet.
+
 
 We can't see the moderation queue button too:
 

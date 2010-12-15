@@ -5,9 +5,6 @@ Set Up:
 
     >>> browser = Browser.logIn('admin@ututi.lt', 'asdasd')
     >>> browser.getLink('Moderatoriai').click()
-    >>> browser.getLink('Edit').click()
-    >>> browser.getControl('Moderated').click()
-    >>> browser.getControl('Save').click()
 
     >>> from ututi.tests.functional import send_test_message
     >>> send_test_message('email_from_user2.txt', '33', to='moderators@groups.ututi.lt')
