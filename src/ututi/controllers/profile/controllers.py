@@ -513,7 +513,7 @@ class UserProfileController(ProfileControllerBase):
             if c.user.phone_number:
                 sms.confirmation_request(c.user)
             meta.Session.commit()
-            return render_mako_def('/profile/home.mako', 'phone_updated')
+            return render_mako_def('/profile/home.mako', 'phone_confirmation_nag')
         except Invalid:
             return ''
 
