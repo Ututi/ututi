@@ -15,7 +15,7 @@
 
           %if c.user.gadugadu_uin:
               %if not c.user.gadugadu_confirmed:
-                <div class="field-status">${_('GG number is not confirmed')}</div>
+                <span class="field-status">${_('GG number is not confirmed')}</span>
                 ${h.input_line('gadugadu_confirmation_key',
                                _("Enter the code that you have received in your GG"),
                                help_text=h.literal(_("""
@@ -28,7 +28,7 @@
                                )}
               %else:
                 <input type="hidden"  name="gadugadu_confirmation_key" />
-                <div class="field-status confirmed"><div>${_('GG number is confirmed')}</div></div>
+                <span class="field-status confirmed">${_('GG number is confirmed')}</span>
                 <div class="no-break">
                   <label for="gadugadu_get_news">
                     <input type="checkbox" name="gadugadu_get_news" class="checkbox"
@@ -72,47 +72,57 @@
 
     %if c.user.isConfirmed:
       ${h.input_line('email', _('Your email address'))}
-      <div class="field-status confirmed"><div>${_('Email is confirmed')}</div></div>
+      <span class="field-status confirmed">${_('Email is confirmed')}</span>
     %else:
       ${h.input_line('email', _('Your email address'),
                      right_next= h.input_submit_text_button(_('Get confirmation email'), name='confirm_email'))}
-      <div class="field-status">${_('Email is not confirmed')}</div>
+      <span class="field-status">${_('Email is not confirmed')}</span>
     %endif
+
+    ## GOOGLE AND FACEBOOK
+
+    <div class="formField">
+      <span class="labelText">${"Link with Google and Facebook"}</span>
+      %if not c.user.openid:
+        <a href="${url(controller='profile', action='link_google')}">
+          ${h.image('/img/google-button-inactive.png', alt='Link Google')}
+        </a>
+      %else:
+        <a href="${url(controller='profile', action='unlink_google')}">
+          ${h.image('/img/google-button.png', alt='Unlink Google')}
+        </a>
+      %endif
+
+      %if not c.user.facebook_id:
+        <a id="fb-link-button" href="#link-facebook">
+          ${h.image('/img/facebook-button-inactive.png', alt='Link Facebook')}
+        </a>
+      %else:
+        <a href="${url(controller='profile', action='unlink_facebook')}">
+          ${h.image('/img/facebook-button.png', alt='Unlink Facebook')}
+        </a>
+      %endif
+      <span class="helpText" style="width:auto">${"Click the buttons to link/unlink your profile with Google and/or Facebook"}</span>
+    </div>
 
     ${h.input_submit(name='update_contacts', class_='btnMedium')}
 
   </fieldset>
 </form>
 
-<div style="margin-top: 30px">
-  %if c.user.openid:
-    ${_('Unlink')}
-    <a href="${url(controller='profile', action='unlink_google')}">
-      ${h.image('/img/google-logo.gif', alt='Google', class_='google-login')}
-    </a>
-  %else:
-    ${_('Link to')}
-    <a href="${url(controller='profile', action='link_google')}">
-      ${h.image('/img/google-logo.gif', alt='Google', class_='google-login')}
-    </a>
-  %endif
+<script>
+  $(document).ready(function() {
+    $('#fb-link-button').click(function() {
+        // attempt to login FB
+        FB.login(function(response) {
+            if (response.session && response.perms) {
+                // user is logged in and granted some permissions.
+                // perms is a comma separated list of granted permissions
+                window.location = '${url(controller='profile', action='link_facebook')}';
+            }
+        }, {perms:'email'});
 
-  <div id="fb-root"></div>
-  <script src="http://connect.facebook.net/lt_LT/all.js"></script>
-  <script>
-    FB.init({appId: '${c.facebook_app_id}', status: true,
-        cookie: true, xfbml: true});
-  </script>
-  %if c.user.facebook_id:
-    ${h.button_to(_('Unlink'), url(controller='profile', action='unlink_facebook'))}
-    ${_('Unlink')}
-    <fb:login-button perms="email"
-      onlogin="window.location = '${url(controller='profile', action='unlink_facebook')}'"
-     >${_('Connect')}</fb:login-button>
-  %else:
-    ${_('Link to')}
-    <fb:login-button perms="email"
-      onlogin="window.location = '${url(controller='profile', action='link_facebook')}'"
-     >${_('Connect')}</fb:login-button>
-  %endif
-</div>
+        return false;
+    });
+  });
+</script>
