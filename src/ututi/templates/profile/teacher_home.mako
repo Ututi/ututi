@@ -112,7 +112,7 @@ ${parent.head_tags()}
 <div class="subject-description-list">
   <dl>
     %for n, subject in enumerate(subjects):
-    <div class="subject-description ${'with-top-line' if n else ''}">
+    <div class="u-object subject-description ${'with-top-line' if n else ''}">
       ${close_button(url(controller='profile', action='unteach_subject', subject_id=subject.id), class_='unteach-button')}
       <div>
         <dt>
