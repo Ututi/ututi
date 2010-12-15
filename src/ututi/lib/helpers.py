@@ -296,10 +296,13 @@ def trackEvent(obj, action, label, category='navigation'):
             label))
 
 
-def input_line(name, title, value='', help_text=None, **kwargs):
+def input_line(name, title, value='', help_text=None, right_next=None, **kwargs):
     expl = None
     if help_text is not None:
         expl = HTML.span(class_='helpText', c=help_text)
+    next = None
+    if right_next is not None:
+        next = HTML.span(class_='rightNext', c=right_next)
 
     from pylons import tmpl_context as c
     kwargs.setdefault('id', name)
@@ -308,8 +311,8 @@ def input_line(name, title, value='', help_text=None, **kwargs):
                     HTML.span(class_='labelText', c=[title]),
                     HTML.span(class_='textField', c=[
                             HTML.input(type='text', value=value, name_=name, **kwargs),
-                            HTML.span(class_='edge')
-                            ])]),
+                            HTML.span(class_='edge')])]),
+                       next,
                        expl,
                        HTML.literal('<form:error name="%s" />' % name)])
 

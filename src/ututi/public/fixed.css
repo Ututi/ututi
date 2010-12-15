@@ -138,6 +138,14 @@
         margin-top: 20px;
     }
 
+    .new-style-form .rightNext {
+        margin-left: 15px;
+    }
+
+    .new-style-form .rightNext button {
+        margin-top: -1px;
+    }
+
     .new-style-form button.btn-text {
         /* Pretending to look like simple link */
         background: none;
