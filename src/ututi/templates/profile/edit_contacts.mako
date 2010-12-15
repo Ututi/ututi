@@ -6,30 +6,29 @@
   <h1 class='pageTitle'>${_("Contacts")}:</h1>
 
   <fieldset>
+
+    ## GADU GADU
+
     %if c.gg_enabled:
       <div>
         ${h.input_line('gadugadu_uin', _('Your GG number'))}
 
           %if c.user.gadugadu_uin:
               %if not c.user.gadugadu_confirmed:
-                <div class="field-status">${_('(unconfirmed)')}</div>
-                <div>
-                    ${h.input_submit(_('Send code again'), name='resend_gadugadu_code')}
-                </div>
-                ${_("""If you want to confirm your GaduGadu number,
-                     please enter the code that you have received
-                     in your GG. Also don't forget to add Ututi
-                    (<a href="gg:5437377">5437377</a>) to your friends.""")|n}
-                <br />
-                <div class="floatleft" style="width: 290px">
-                    ${h.input_line('gadugadu_confirmation_key', '')}
-                </div>
-                <div class="floatleft">
-                  ${h.input_submit(_('Submit code'), name='confirm_gadugadu')}
-                </div>
+                <div class="field-status">${_('GG number is not confirmed')}</div>
+                ${h.input_line('gadugadu_confirmation_key',
+                               _("Enter the code that you have received in your GG"),
+                               help_text=h.literal(_("""
+
+                      Should you not have received the code, please press "Send code again".
+                      Also don't forget to add Ututi (<a href="gg:5437377">5437377</a>) to your friends!""")),
+
+                               right_next=h.input_submit(_('Submit code'), name='confirm_gadugadu') + \
+                                          h.input_submit_text_button(_('Send code again'), name='resend_gadugadu_code')
+                               )}
               %else:
                 <input type="hidden"  name="gadugadu_confirmation_key" />
-                <div class="field-status confirmed"><div>${_('number is confirmed')}</div></div>
+                <div class="field-status confirmed"><div>${_('GG number is confirmed')}</div></div>
                 <div class="no-break">
                   <label for="gadugadu_get_news">
                     <input type="checkbox" name="gadugadu_get_news" class="checkbox"
@@ -48,48 +47,40 @@
       <input type="hidden" name="gadugadu_confirmation_key" />
     %endif
 
-    <div style="clear: left">
-      ${h.input_line('phone_number', _('Mobile phone number'))}
+    ## PHONE NUMBER
 
-      %if c.user.phone_number:
-        %if not c.user.phone_confirmed:
-          <div class="field-status">${_('(unconfirmed)')}</div>
-          <div>
-            ${h.input_submit(_('Send code again'), name='resend_phone_code')}
-          </div>
-          ${_("""Please enter the code that you should have received by SMS.""")}
-          <br />
-          <div class="floatleft" style="width: 290px">
-            ${h.input_line('phone_confirmation_key', '')}
-          </div>
-          <div class="floatleft">
-            ${h.input_submit(_('Submit code'), name='confirm_phone')}
-          </div>
-        %else:
-          <input type="hidden"  name="phone_confirmation_key" />
-          <div class="field-status confirmed"><div>${_('number is confirmed')}</div></div>
-        %endif
+    ${h.input_line('phone_number', _('Mobile phone number'))}
+
+    %if c.user.phone_number:
+      %if not c.user.phone_confirmed:
+        <span class="field-status">${_('Number is not confirmed')}</span>
+        ${h.input_line('phone_confirmation_key',
+                       _("Enter the code that you have received by SMS"),
+                       help_text=_('Should you not have received the code, please press "Send code again"'),
+                       right_next=h.input_submit(_('Submit code'), name='confirm_phone') + \
+                                  h.input_submit_text_button(_('Send code again'), name='resend_phone_code')
+                       )}
       %else:
-        <input type="hidden" name="phone_confirmation_key" />
+        <span class="field-status confirmed">${_('Number is confirmed')}</span>
+        <input type="hidden"  name="phone_confirmation_key" />
       %endif
-    </div>
+    %else:
+      <input type="hidden" name="phone_confirmation_key" />
+    %endif
 
-    <div style="clear: left">
+    ## E-MAIL
+
+    %if c.user.isConfirmed:
       ${h.input_line('email', _('Your email address'))}
-      %if not c.user.isConfirmed:
-      <div class="field-status">(unconfirmed)</div>
-      <div>
-        <input type="submit"
-               class="text_button"
-               value="${_('get confirmation email')}" name='confirm_email'
-               style="font-size: 13px;" />
-      </div>
-      %else:
-      <div class="field-status confirmed"><div>${_('email is confirmed')}</div></div>
-      %endif
-    </div>
+      <div class="field-status confirmed"><div>${_('Email is confirmed')}</div></div>
+    %else:
+      ${h.input_line('email', _('Your email address'),
+                     right_next= h.input_submit_text_button(_('Get confirmation email'), name='confirm_email'))}
+      <div class="field-status">${_('Email is not confirmed')}</div>
+    %endif
 
-    ${h.input_submit(_('Save'), name='update_contacts', class_='btnMedium')}
+    ${h.input_submit(name='update_contacts', class_='btnMedium')}
+
   </fieldset>
 </form>
 
