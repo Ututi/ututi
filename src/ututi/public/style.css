@@ -5220,15 +5220,15 @@ a.disabled, a.disabled:hover {
     display: block;
 }
 
-#google-and-facebook-buttons a#google-link-button,
-#google-and-facebook-buttons a#fb-link-button {
+#google-and-facebook-buttons a#google-unlink-button,
+#google-and-facebook-buttons a#fb-unlink-button {
     background: url("img/icons/tick_big.png") right center no-repeat;
     padding-right: 20px;
     margin-right: -20px;
 }
 
-#google-and-facebook-buttons a#google-link-button:hover,
-#google-and-facebook-buttons a#fb-link-button:hover {
+#google-and-facebook-buttons a#google-unlink-button:hover,
+#google-and-facebook-buttons a#fb-unlink-button:hover {
     background: url("img/icons/cross_big.png") right center no-repeat;
 }
 
