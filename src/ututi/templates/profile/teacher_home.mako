@@ -164,12 +164,6 @@ ${parent.head_tags()}
   ${teacher_unverified_nag()}
 %endif
 
-%if c.user.location is not None:
-${self.location_updated()}
-%else:
-${self.location_nag(_('Tell us where you work'))}
-%endif
-
 %if c.user.teacher_verified:
   <div id="subject_list">
     %if c.user.taught_subjects:
