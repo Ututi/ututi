@@ -297,6 +297,17 @@ ul.teacher-list {
         margin: 2px 0px;
     }
 
+ul.pros-list {
+    list-style-type: none;
+    margin: 4px 8px;
+}
+
+    ul.pros-list li {
+        background: url(img/icons/tick_big.png) no-repeat left center;
+        padding-left: 24px;
+        margin: 2px 0px;
+    }
+
 ul.feature-list {
     list-style-type: none;
     margin: 4px 8px;

@@ -12,6 +12,15 @@
 </ul>
 
 <br />
+<h3>Pros list</h3>
+
+<ul class="pros-list">
+  <li>One good thing</li>
+  <li>Another good thing</li>
+  <li>Last but not least...</li>
+</ul>
+
+<br />
 <h3>Feature list</h3>
 
 <ul class="feature-list">
