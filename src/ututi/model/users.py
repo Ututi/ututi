@@ -229,6 +229,7 @@ class User(object):
             .filter(gmt.c.user_id == self.id)
         return directly_watched_subjects.union(
             group_watched_subjects.except_(user_ignored_subjects))\
+            .order_by(Subject.title.asc())\
             .all()
 
     def _setWatchedSubject(self, subject, ignored):
