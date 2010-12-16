@@ -10,7 +10,16 @@ ${_('Home')}
 </%def>
 
 <h1 class="pageTitle">${self.pagetitle()}</h1>
-%if c.action:
+
+<% 
+  ## Now this is a bit ugly, but these tabs will go away soon anyhow.
+  show_tabs = true
+  if c.user.is_teacher:
+    if not c.user.taught_subjects and not c.user.student_groups:
+      show_tabs = false
+%>
+
+%if c.action and show_tabs:
 <ul class="moduleMenu">
   <li class="${'current' if c.action == 'home' else ''}"><a href="${url(controller='profile', action='home')}">${_('Start')}<span class="edge"></span></a></li>
   <li class="${'current' if c.action == 'feed' else ''}"><a href="${url(controller='profile', action='feed')}">${_("News wall")}
