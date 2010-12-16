@@ -11,12 +11,12 @@ ${_('Home')}
 
 <h1 class="pageTitle">${self.pagetitle()}</h1>
 
-<% 
+<%
   ## Now this is a bit ugly, but these tabs will go away soon anyhow.
-  show_tabs = true
+  show_tabs = True
   if c.user.is_teacher:
     if not c.user.taught_subjects and not c.user.student_groups:
-      show_tabs = false
+      show_tabs = False
 %>
 
 %if c.action and show_tabs:
