@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-12-15 13:35+0200\n"
+"POT-Creation-Date: 2010-12-16 09:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3366,23 +3366,28 @@ msgstr ""
 msgid "Your GG number"
 msgstr ""
 
-msgid "(unconfirmed)"
+msgid "GG number is not confirmed"
 msgstr ""
 
-msgid "Send code again"
+msgid "Enter the code that you have received in your GG"
 msgstr ""
 
 msgid ""
-"If you want to confirm your GaduGadu number,\n"
-"                     please enter the code that you have received\n"
-"                     in your GG. Also don't forget to add Ututi\n"
-"                    (<a href=\"gg:5437377\">5437377</a>) to your friends."
+"\n"
+"\n"
+"                      Should you not have received the code, please press "
+"\"Send code again\".\n"
+"                      Also don't forget to add Ututi (<a "
+"href=\"gg:5437377\">5437377</a>) to your friends!"
 msgstr ""
 
 msgid "Submit code"
 msgstr ""
 
-msgid "number is confirmed"
+msgid "Send code again"
+msgstr ""
+
+msgid "GG number is confirmed"
 msgstr ""
 
 msgid "Receive news into gg"
@@ -3391,19 +3396,25 @@ msgstr ""
 msgid "Mobile phone number"
 msgstr ""
 
-msgid "Please enter the code that you should have received by SMS."
+msgid "Number is not confirmed"
 msgstr ""
 
-msgid "get confirmation email"
+msgid "Enter the code that you have received by SMS"
 msgstr ""
 
-msgid "email is confirmed"
+msgid "Should you not have received the code, please press \"Send code again\""
 msgstr ""
 
-msgid "Unlink"
+msgid "Number is confirmed"
 msgstr ""
 
-msgid "Link to"
+msgid "Email is confirmed"
+msgstr ""
+
+msgid "Get confirmation email"
+msgstr ""
+
+msgid "Email is not confirmed"
 msgstr ""
 
 msgid "Address of your website or blog"
