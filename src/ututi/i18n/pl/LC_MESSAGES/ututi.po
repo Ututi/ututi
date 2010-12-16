@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-12-16 09:32+0200\n"
+"PO-Revision-Date: 2010-12-16 17:19+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -1400,6 +1400,9 @@ msgstr "szukaj"
 
 msgid "All groups"
 msgstr "Wszystkie grupy"
+
+msgid "inbox"
+msgstr ""
 
 msgid "Settings"
 msgstr "Ustawienia"
@@ -3779,6 +3782,26 @@ msgstr ""
 msgid "Email is not confirmed"
 msgstr ""
 
+msgid "Link with Google and Facebook"
+msgstr ""
+
+msgid "Link Google"
+msgstr ""
+
+msgid "Unlink Google"
+msgstr ""
+
+msgid "Link Facebook"
+msgstr ""
+
+msgid "Unlink Facebook"
+msgstr ""
+
+msgid ""
+"Click the buttons to link or unlink your profile with Google and/or "
+"Facebook"
+msgstr ""
+
 msgid "Address of your website or blog"
 msgstr "Adres Twojej strony lub bloga"
 
@@ -4048,9 +4071,6 @@ msgstr "Dodaj:"
 
 msgid "Create wiki page"
 msgstr "Stwórz stronę wiki"
-
-msgid "Tell us where you work"
-msgstr "Powiedz nam gdzie pracujesz"
 
 msgid "My courses"
 msgstr "Moje przedmioty"
