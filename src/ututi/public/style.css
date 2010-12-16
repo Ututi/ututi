@@ -5199,3 +5199,37 @@ a.disabled, a.disabled:hover {
 }
 
 /* End Teacher Home */
+
+/* Begin contact settings */
+
+#google-and-facebook-buttons {
+    width: 310px; /* equals standard form field width */
+}
+
+#google-and-facebook-buttons #google-link-button,
+#google-and-facebook-buttons #google-unlink-button {
+    float: left;
+}
+
+#google-and-facebook-buttons #fb-link-button,
+#google-and-facebook-buttons #fb-unlink-button {
+    float: right;
+}
+
+#google-and-facebook-buttons a {
+    display: block;
+}
+
+#google-and-facebook-buttons a#google-link-button,
+#google-and-facebook-buttons a#fb-link-button {
+    background: url("img/icons/tick_big.png") right center no-repeat;
+    padding-right: 20px;
+    margin-right: -20px;
+}
+
+#google-and-facebook-buttons a#google-link-button:hover,
+#google-and-facebook-buttons a#fb-link-button:hover {
+    background: url("img/icons/cross_big.png") right center no-repeat;
+}
+
+/* End contact settings */

@@ -83,26 +83,28 @@
 
     <div class="formField">
       <span class="labelText">${"Link with Google and Facebook"}</span>
-      %if not c.user.openid:
-        <a href="${url(controller='profile', action='link_google')}">
-          ${h.image('/img/google-button-inactive.png', alt='Link Google')}
-        </a>
-      %else:
-        <a href="${url(controller='profile', action='unlink_google')}">
-          ${h.image('/img/google-button.png', alt='Unlink Google')}
-        </a>
-      %endif
+      <div id="google-and-facebook-buttons">
+        %if not c.user.openid:
+          <a id="google-link-button" href="${url(controller='profile', action='link_google')}">
+            ${h.image('/img/google-button.png', alt='Link Google')}
+          </a>
+        %else:
+          <a id="google-unlink-button" href="${url(controller='profile', action='unlink_google')}">
+            ${h.image('/img/google-button.png', alt='Unlink Google')}
+          </a>
+        %endif
 
-      %if not c.user.facebook_id:
-        <a id="fb-link-button" href="#link-facebook">
-          ${h.image('/img/facebook-button-inactive.png', alt='Link Facebook')}
-        </a>
-      %else:
-        <a href="${url(controller='profile', action='unlink_facebook')}">
-          ${h.image('/img/facebook-button.png', alt='Unlink Facebook')}
-        </a>
-      %endif
-      <span class="helpText" style="width:auto">${"Click the buttons to link/unlink your profile with Google and/or Facebook"}</span>
+        %if not c.user.facebook_id:
+          <a id="fb-link-button" href="#link-facebook">
+            ${h.image('/img/facebook-button.png', alt='Link Facebook')}
+          </a>
+        %else:
+          <a id="fb-unlink-button" href="${url(controller='profile', action='unlink_facebook')}">
+            ${h.image('/img/facebook-button.png', alt='Unlink Facebook')}
+          </a>
+        %endif
+      </div>
+      <span class="helpText" style="width:auto; clear:both">${"Click the buttons to link or unlink your profile with Google and/or Facebook"}</span>
     </div>
 
     ${h.input_submit(name='update_contacts', class_='btnMedium')}
