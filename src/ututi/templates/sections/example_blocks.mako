@@ -10,7 +10,7 @@
   </div>
 </%b:rounded_block>
 
-<%b:rounded_block class="standard-portlet icon-subject-orange">
+<%b:rounded_block class_="standard-portlet icon-subject-orange">
   <h2>Some title</h2>
   <p><strong>It's pretty simple to have these kinds of blocks as well.</strong></p>
   <p>
