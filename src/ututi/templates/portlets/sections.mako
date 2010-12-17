@@ -7,7 +7,7 @@
 
 <%def name="teacher_sidebar(exclude=[])">
 <div id="sidebar">
-  ${user_information_portlet()}
+  ${teacher_information_portlet()}
 </div>
 </%def>
 
