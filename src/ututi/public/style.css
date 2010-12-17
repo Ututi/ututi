@@ -5073,34 +5073,8 @@ ul.universityMembersInfo li{
   width: 350px;
 }
 
-.dashboard_action_block .formField {
-  width: 500px;
-  margin: 5px 0;
-}
-
-.dashboard_action_block .formField label {
-  margin: 5px 0;
-  float: right;
-}
-
-.dashboard_action_block .labelText {
-  margin-right: 15px;
-}
-
-.dashboard_action_block textarea {
-  border: 1px solid #888;
-  background: white;
-  width: 500px;
-  margin: 5px 50px;
-}
-
 .dashboard_action_block .formArea {
   text-align: center;
-}
-
-.dashboard_action_block .formSubmit {
-  float: right;
-  margin: 5px 50px;
 }
 
 #upload_file_block .formSubmit {
@@ -5227,9 +5201,9 @@ a.disabled, a.disabled:hover {
     margin-right: -20px;
 }
 
-#google-and-facebook-buttons a#google-unlink-button:hover,
-#google-and-facebook-buttons a#fb-unlink-button:hover {
-    background: url("img/icons/cross_big.png") right center no-repeat;
+#google-and-facebook-buttons a#google-link-button:hover,
+#google-and-facebook-buttons a#fb-link-button:hover {
+    background: url("images/icons/cross_big.png") right center no-repeat;
 }
 
 /* End contact settings */

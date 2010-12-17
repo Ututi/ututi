@@ -5,6 +5,7 @@
 
 <%def name="head_tags()">
 ${parent.head_tags()}
+  ${h.javascript_link('/javascript/teacher_dashboard.js')}
 <script type="text/javascript">
   $(document).ready(function() {
     $('.unteach-button').click(function() {

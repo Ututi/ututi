@@ -577,6 +577,7 @@ ul.feature-list {
         .group-description dd.subjects {
             background: url('img/icons/dalykas-very-small.png') no-repeat left;
         }
+
 /* GENERAL TWO PANEL LAYOUT
  */
 
@@ -667,3 +668,47 @@ ul.feature-list {
         color: #333333;
     }
 
+
+/* IN-ELEMENT FORM
+   (a small form shown e.g. in dashboard actions)
+ */
+    .inelement-form .send-message {  }
+
+        .inelement-form .wide-input {
+            width: 350px;
+        }
+
+        .inelement-form .labelText {
+            margin-right: 15px;
+        }
+
+        .inelement-form .formField {
+            width: 500px;
+            margin: 5px 0;
+        }
+
+        .inelement-form .formField label {
+            margin: 5px 0;
+            float: right;
+        }
+
+        .inelement-form textarea {
+          border: 1px solid #888;
+          background: white;
+          width: 500px;
+          margin: 5px 50px;
+        }
+
+        .inelement-form .formSubmit {
+            float: right;
+            margin: 5px 50px;
+        }
+
+/* CLICK ACTION BLOCKS
+ a pattern-in-progress: click-action opens an associated click-action-block,
+  maintaining that one block of a group is shown at a time
+ */
+.click-action-block {
+    display: none;
+}
+    .click-action-block.open { display: block; }

@@ -28,3 +28,72 @@ Let's edit the group:
 And delete it:
     >>> browser.getControl(name='delete_group_1').click()
     >>> browser.printQuery("//div[@class='group-title']/dt/text()")
+
+Ok, let's add three groups: non-ututi, ututi (mailing list) and ututi (forum):
+
+    >>> browser.getControl('add groups').click()
+    >>> browser.getControl('Title').value = 'outsiders'
+    >>> browser.getControl('Email address').value = 'group@groups.google.com'
+    >>> browser.getControl('Save').click()
+
+    >>> browser.getControl('Add a group').click()
+    >>> browser.getControl('Title').value = 'insiders - mailing list'
+    >>> browser.getControl('Email address').value = 'moderators@fakehost.lt'
+    >>> browser.getControl('Save').click()
+
+    >>> browser.getControl('Add a group').click()
+    >>> browser.getControl('Title').value = 'insiders - forum'
+    >>> browser.getControl('Email address').value = 'testgroup@fakehost.lt'
+    >>> browser.getControl('Save').click()
+
+    >>> browser.printQuery("//div[@class='group-title']/dt/text()")
+    outsiders
+    insiders - mailing list
+    insiders - forum
+
+A message to the outsiders:
+
+    >>> browser.getControl(name='subject', index=0).value = 'a message to the group'
+    >>> browser.getControl(name='message', index=0).value = 'Hi, guys!'
+    >>> browser.getControl('Send', index=0).click()
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> print mail_queue.pop().payload()
+    The teacher Benas (http://localhost/user/5) sent a message to Your group:
+    Hi, guys!
+    If You reply to this message, the teacher will not get Your replies.
+
+A message to the ututi mailing list group:
+
+    >>> browser.getControl(name='subject', index=1).value = 'a message to the group'
+    >>> browser.getControl(name='message', index=1).value = 'Hi, guys!'
+    >>> browser.getControl('Send', index=1).click()
+
+    >>> browser2 = Browser.logIn()
+    >>> browser2.getLink('Moderatoriai').click()
+    >>> browser2.printQuery('id("wall")//div[@class="content"]//text()')
+
+    >>> len(mail_queue)
+    1
+
+    >>> print mail_queue.pop().payload()
+    The teacher Benas (http://localhost/user/5) sent a message to Your group:
+    Hi, guys!
+    If You reply to this message, the teacher will not get Your replies.
+
+    >>> mail_queue[:] = []
+
+A message to the ututi forum group - members of the group receive email messages:
+
+    >>> browser.getControl(name='subject', index=1).value = 'a message to the group'
+    >>> browser.getControl(name='message', index=1).value = 'Hi, guys!'
+    >>> browser.getControl('Send', index=1).click()
+
+    >>> len(mail_queue)
+    1
+
+    >>> print mail_queue.pop().payload()
+    The teacher Benas (http://localhost/user/5) sent a message to Your group:
+    Hi, guys!
+    If You reply to this message, the teacher will not get Your replies.
+

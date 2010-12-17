@@ -9,6 +9,7 @@ from formencode import htmlfill
 from formencode.api import Invalid
 
 from pylons import request, tmpl_context as c, url, config, session
+from pylons.decorators import jsonify
 from pylons.templating import render_mako_def
 from pylons.controllers.util import abort, redirect
 
@@ -21,16 +22,21 @@ from ututi.lib.events import event_types_grouped
 from ututi.lib.security import ActionProtector
 from ututi.lib.image import serve_logo
 from ututi.lib.forms import validate
+from ututi.lib.messaging import EmailMessage
+from ututi.lib.mailinglist import post_message
 from ututi.lib import gg, sms
+from ututi.lib.validators import js_validate
 from ututi.lib.validators import manual_validate
 
 from ututi.model.events import Event
+from ututi.model import ForumCategory
+from ututi.model import ForumPost
 from ututi.model import get_supporters
 from ututi.model import LocationTag, BlogEntry, TeacherGroup
 from ututi.model import meta, Email, User
 from ututi.controllers.profile.validators import HideElementForm
 from ututi.controllers.profile.validators import ContactForm, LocationForm, LogoUpload, PhoneConfirmationForm,\
-    PhoneForm, ProfileForm, PasswordChangeForm, StudentGroupForm, StudentGroupDeleteForm
+    PhoneForm, ProfileForm, PasswordChangeForm, StudentGroupForm, StudentGroupDeleteForm, StudentGroupMessageForm
 from ututi.controllers.profile.wall import WallMixin, WallSettingsForm
 from ututi.controllers.profile.subjects import WatchedSubjectsMixin
 from ututi.controllers.search import SearchSubmit, SearchBaseController
@@ -38,6 +44,18 @@ from ututi.controllers.home import sign_in_user
 from ututi.controllers.home import UniversityListMixin
 
 log = logging.getLogger(__name__)
+
+def group_teacher_action(method):
+    def _group_teacher_action(self, id=None):
+        if id is None:
+            redirect(url(controller='search', action='index'))
+        group = TeacherGroup.get(id)
+        if group is None:
+            abort(404)
+        c.security_context = group
+        c.group = group
+        return method(self, group)
+    return _group_teacher_action
 
 
 class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin, WatchedSubjectsMixin):
@@ -603,6 +621,7 @@ class TeacherProfileController(ProfileControllerBase):
     def _edit_student_group(self):
         return render('profile/edit_student_group.mako')
 
+    @ActionProtector("teacher")
     @validate(schema=StudentGroupDeleteForm())
     def delete_student_group(self):
         if hasattr(self, 'form_result'):
@@ -614,3 +633,53 @@ class TeacherProfileController(ProfileControllerBase):
             else:
                 abort(404)
         redirect(url(controller='profile', action='home'))
+
+    @group_teacher_action
+    @ActionProtector("group_teacher")
+    @validate(schema=StudentGroupMessageForm())
+    def studentgroup_send_message(self, group):
+        if hasattr(self, 'form_result'):
+            return self._studentgroup_send_message(group)
+
+    @group_teacher_action
+    @ActionProtector("group_teacher")
+    @js_validate(schema=StudentGroupMessageForm())
+    @jsonify
+    def studentgroup_send_message_js(self, group):
+        if hasattr(self, 'form_result'):
+            return self._studentgroup_send_message(group, js=True)
+
+    def _studentgroup_send_message(self, group, js=False):
+        if hasattr(self, 'form_result'):
+            subject = self.form_result['subject']
+            message = self.form_result['message']
+
+            #wrap the message with additional information
+            msg_text = render('/emails/teacher_message.mako',
+                              extra_vars={'teacher':c.user,
+                                          'subject':subject,
+                                          'message':message})
+
+            if group.group is not None:
+                recipient = group.group
+                if not recipient.mailinglist_enabled:
+                    category = meta.Session.query(ForumCategory)\
+                        .filter_by(group_id=recipient.id)\
+                        .first()
+                    post = ForumPost(subject, msg_text, category_id=category.id,
+                                     thread_id=None)
+                    meta.Session.add(post)
+                    meta.Session.commit()
+                else:
+                    msg = EmailMessage(_('Message from Your teacher: %s') % subject,
+                                       msg_text,
+                                       sender=group.group.list_address)
+            else:
+                msg = EmailMessage(subject, msg_text, sender=c.user.emails[0].email, force=True)
+                msg.send(group.email)
+
+            if js:
+                return {'success': True}
+            else:
+                h.flash(_('Message sent.'))
+                redirect(url(controller='profile', action='home'))

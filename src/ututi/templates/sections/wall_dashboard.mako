@@ -13,7 +13,7 @@
 <%def name="send_message_block(msg_recipients)">
   <%base:rounded_block id="send_message_block" class_="dashboard_action_block">
     <a class="${not active and 'inactive' or ''}" name="send-message"></a>
-    <form method="POST" action="${url(controller='profile', action='send_message')}" id="message_form">
+    <form method="POST" action="${url(controller='profile', action='send_message')}" id="message_form" class="inelement-form">
       <input id="message-rcpt-url" type="hidden" value="${url(controller='profile', action='message_rcpt_js')}" />
       <input id="message-send-url" type="hidden" value="${url(controller='profile', action='send_message_js')}" />
       <input type="hidden" name="rcpt_id" id="rcpt_id" value=""/>
@@ -41,7 +41,7 @@
 <%def name="upload_file_block(file_recipients)">
   <%base:rounded_block id="upload_file_block" class_="dashboard_action_block">
     <a class="${not active and 'inactive' or ''}" name="upload-file"></a>
-    <form id="file_form">
+    <form id="file_form" class="inelement-form">
       <input id="file-upload-url" type="hidden" value="${url(controller='profile', action='upload_file_js')}" />
       <div class="formField">
         <label for="file_rcpt_id">
@@ -63,7 +63,7 @@
 <%def name="create_wiki_block(wiki_recipients)">
   <%base:rounded_block id="create_wiki_block" class_="dashboard_action_block">
     <a class="${not active and 'inactive' or ''}" name="create-wiki"></a>
-    <form method="POST" action="${url(controller='profile', action='create_wiki')}" id="wiki_form">
+    <form method="POST" action="${url(controller='profile', action='create_wiki')}" id="wiki_form" class="inelement-form">
       <input id="create-wiki-url" type="hidden" value="${url(controller='profile', action='create_wiki_js')}" />
       <div class="formField">
         <label for="wiki_rcpt_id">
