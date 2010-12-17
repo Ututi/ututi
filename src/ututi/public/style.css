@@ -5007,10 +5007,10 @@ ul.universityMembersInfo li{
 
 /* Forms with grouped controls */
 
-.fullForm .collection div.children {
+.collection div.children {
   margin-bottom: 10px;
 }
-.fullForm .collection .expander {
+.collection .expander {
   float: left;
   width: 15px;
   height: 15px;
@@ -5019,15 +5019,15 @@ ul.universityMembersInfo li{
   cursor: pointer;
 }
 
-.fullForm .open .expander {
+.open .expander {
   background: url("../images/details/expand_down.png") center center no-repeat;
 }
 
-.fullForm .collection .children {
+.collection .children {
   padding-left: 15px;
 }
 
-.fullForm .form_item {
+.form_item {
   margin-left: 25px;
 }
 
