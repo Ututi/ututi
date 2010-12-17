@@ -109,7 +109,7 @@
 
 .standard-portlet {
     background-color: #f6f6f6;
-    padding: 10px 25px;
+    padding: 5px 25px;
     color: #666;
 }
 
@@ -122,9 +122,16 @@
         margin: 5px 0px;
     }
 
-    .standard-portlet.icon-books-orange {
-        background-image: url('img/icons/dalykai_new_orange.png');
+    .standard-portlet.icon-subject-orange {
+        background-image: url('images/details/icon_subject_orange.png');
         background-position: 10px 5px;
+        background-repeat: no-repeat;
+        padding-left: 70px;
+    }
+    
+    .standard-portlet.icon-group-gray {
+        background-image: url('images/details/icon_group_42x35.png');
+        background-position: 15px 5px;
         background-repeat: no-repeat;
         padding-left: 70px;
     }

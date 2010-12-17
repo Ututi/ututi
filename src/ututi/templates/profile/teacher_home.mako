@@ -1,6 +1,6 @@
 <%inherit file="/profile/home_base.mako" />
 <%namespace file="/sections/standard_buttons.mako" import="close_button" />
-<%namespace file="/sections/standard_blocks.mako" name="b" import="item_list"/>
+<%namespace file="/sections/standard_blocks.mako" name="b" import="rounded_block, item_list"/>
 <%namespace file="/sections/standard_objects.mako" import="group_listitem_teacherdashboard"/>
 
 <%def name="head_tags()">
@@ -42,70 +42,27 @@ ${parent.head_tags()}
 </%def>
 
 <%def name="teach_group_nag()">
-<%self:rounded_block id="teacher_groups_empty" class_="portletNewGroup">
-<div class="floatleft usergrupeleft">
-  <h2 class="portletTitle bold">${_('Enter the groups of your students')}</h2>
-  <ul id="prosList">
-    <li>${_('Send messages to Your students easily')}</li>
-  </ul>
+<%b:rounded_block class_="standard-portlet icon-group-gray">
+<div style="float:right">
+  ${h.button_to(_('add groups'), url(controller='profile', action='add_student_group'), class_='btnMedium', method='GET')}
 </div>
-<div class="floatleft usergruperight">
-  <form action="${url(controller='profile', action='add_student_group')}" method="GET"
-        style="float: none">
-    <fieldset>
-      <legend class="a11y">${_('Add a group')}</legend>
-      <label><button value="submit" class="btnMedium"><span>${_('Add a group')}</span></button>
-      </label>
-    </fieldset>
-  </form>
-  <div class="right_cross"><a id="hide_suggest_teach_group" href="">${_('no, thanks')}</a></div>
-</div>
-<br class="clear-left" />
-<script type="text/javascript">
-  //<![CDATA[
-    $('#hide_suggest_teach_group').click(function() {
-        $(this).closest('.portlet').hide();
-        $.post('${url(controller='profile', action='js_hide_element')}',
-               {type: 'suggest_teach_group'});
-        return false;
-    });
-  //]]>
-</script>
-</%self:rounded_block>
+<h2>${_('My student groups')}</h2>
+<p>Add student groups that you teach to.</p>
+<div style="clear:both"></div>
+</%b:rounded_block>
 </%def>
 
 <%def name="teach_course_nag()">
-<%self:rounded_block id="teacher_courses_empty" class_="portletNewDalykas">
-<div class="floatleft usergrupeleft">
-  <h2 class="portletTitle bold">${_('Please specify the courses you are teaching')}</h2>
-  <ul id="prosList">
-    <li>${_('Get in touch with your students')}</li>
-    <li>${_('Share course materials easily')}</li>
-  </ul>
-</div>
-<div class="floatleft usergruperight">
-  <form action="${url(controller='subject', action='add')}" method="GET"
-        style="float: none">
-    <fieldset>
-      <legend class="a11y">${_('Find courses I teach')}</legend>
-      <label><button value="submit" class="btnMedium"><span>${_('Find courses I teach')}</span></button>
-      </label>
-    </fieldset>
-  </form>
-  <div class="right_cross"><a id="hide_suggest_teach_course" href="">${_('no, thanks')}</a></div>
-</div>
-<br class="clear-left" />
-<script type="text/javascript">
-  //<![CDATA[
-    $('#hide_suggest_teach_course').click(function() {
-        $(this).closest('.portlet').hide();
-        $.post('${url(controller='profile', action='js_hide_element')}',
-               {type: 'suggest_teach_course'});
-        return false;
-    });
-  //]]>
-</script>
-</%self:rounded_block>
+<%b:rounded_block class_="standard-portlet icon-subject-orange">
+<h2>${_('Add courses you teach')}</h2>
+<p><strong>${_('Create subjects you teach, or find those that are already created:')}</strong></p>
+<ul class="pros-list">
+  <li>${_('Here you will be able to upload course material, and groups watching the subject will be notified automatically.')}</li>
+  <li>${_('You will be able to send messages to groups watching the subject.')}</li>
+  <li>${_('Some other killer argument: i.e. how did I live without Ututi all this time?')}</li>
+</ul>
+${h.button_to(_('add courses'), url(controller='subject', action='add'), class_='btnMedium', method='GET')}
+</%b:rounded_block>
 </%def>
 
 <%def name="subject_list(subjects)">

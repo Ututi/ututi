@@ -10,26 +10,25 @@
   </div>
 </%b:rounded_block>
 
-<%b:rounded_block>
-  <div class="standard-portlet icon-books-orange">
-    <h2>Some title</h2>
-    <p><strong>It's pretty simple to have these kinds of blocks as well.</strong></p>
-    <p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
-    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-    nisi ut aliquip ex ea commodo consequat.
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-    dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-    sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
-    <p>Some goodies follow:</p>
-    <ul class="pros-list">
-      <li>Smoking cigarettes</li>
-      <li>Watching Captain Kangaroo</li>
-    </ul>
-    ${h.button_to("Click me!", class_='btnMedium')}
-  </div>
+<%b:rounded_block class="standard-portlet icon-subject-orange">
+  <h2>Some title</h2>
+  <p><strong>It's pretty simple to have these kinds of blocks as well.</strong></p>
+  <p>
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+  nisi ut aliquip ex ea commodo consequat.
+  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+  dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+  sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </p>
+  <p>Some goodies follow:</p>
+  <ul class="pros-list">
+    <li>Smoking cigarettes</li>
+    <li>Watching Captain Kangaroo</li>
+    <li>List of possible icon options is in <tt>fixed.css</tt></li>
+  </ul>
+  ${h.button_to("Click me!", class_='btnMedium')}
 </%b:rounded_block>
 
 <%b:light_table title="Example light table" items="${range(5)}">
