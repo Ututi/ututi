@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-12-16 17:29+0300\n"
+"PO-Revision-Date: 2010-12-17 15:31+0300\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
@@ -3301,6 +3301,15 @@ msgstr "Ututi naujienos"
 msgid "More news"
 msgstr "Daugiau naujienų"
 
+msgid "Teacher's information"
+msgstr "Dėstytojo informacija"
+
+msgid "teacher"
+msgstr "dėstytojas"
+
+msgid "Phone:"
+msgstr "Tel.:"
+
 msgid "Friends of ututi"
 msgstr "Ututi draugai"
 
@@ -3589,26 +3598,32 @@ msgstr "Sveiki prisijungę prie Ututi!"
 msgid "You have not been confirmed as a teacher yet. Our administrators will verify you shortly.Until then, your profile rights may be limited."
 msgstr "Jūs dar nesate patvirtintas kaip dėstytojas. Mūsų administratoriai tai greitai padarys. Iki tol Jūsų teisės bus apribotos."
 
-msgid "Enter the groups of your students"
-msgstr "Įveskite studentų grupes"
+msgid "add groups"
+msgstr "pridėti grupes"
 
-msgid "Send messages to Your students easily"
-msgstr "Lengvai siųskite studentams žinutes"
+msgid "My student groups"
+msgstr "Mano studentų grupės"
 
-msgid "Add a group"
-msgstr "Pridėti grupę"
+msgid "Add student groups that you teach to."
+msgstr "Pasirinkite grupes, kurioms dėstote."
 
-msgid "Please specify the courses you are teaching"
-msgstr "Nurodykite kursus, kuriuos dėstote"
+msgid "Add courses you teach"
+msgstr "Pridėkite dėstomus kursus"
 
-msgid "Get in touch with your students"
-msgstr "Bendraukite su studentais"
+msgid "Create subjects you teach, or find those that are already created:"
+msgstr "Sukurkite savo dėstomą dalyką arba pridėkite jau sukurtą:"
 
-msgid "Share course materials easily"
-msgstr "Lengvai platinkite studijų medžiagą"
+msgid "Here you will be able to upload course material, and groups watching the subject will be notified automatically."
+msgstr "Čia galėsite įkelti kurso medžiagą, kurią matys dalyką stebinčios grupės."
 
-msgid "Find courses I teach"
-msgstr "Rasti mano kursus"
+msgid "You will be able to send messages to groups watching the subject."
+msgstr "Galėsite siųsti žinutes dalyką stebinčioms grupėms."
+
+msgid "Some other killer argument: i.e. how did I live without Ututi all this time?"
+msgstr "Dar koks nors geras argumentas, verčiantis susimąstyti: \"Ir kaip aš lig šiol gyvenau be Ututi?\""
+
+msgid "add courses"
+msgstr "pridėti kursus"
 
 msgid "Add:"
 msgstr "Pridėti:"
@@ -3619,11 +3634,11 @@ msgstr "Kurti wiki puslapį"
 msgid "My courses"
 msgstr "Mano kursai"
 
-msgid "add courses"
-msgstr "pridėti kursus"
-
 msgid "Student groups"
 msgstr "Studentų grupės"
+
+msgid "Add a group"
+msgstr "Pridėti grupę"
 
 msgid "Thank you for supporting Ututi!"
 msgstr "Ačiū, kad palaikai Ututi!"

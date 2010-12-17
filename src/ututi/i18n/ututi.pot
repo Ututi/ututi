@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-12-16 17:19+0200\n"
+"POT-Creation-Date: 2010-12-17 15:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3342,6 +3342,15 @@ msgstr ""
 msgid "More news"
 msgstr ""
 
+msgid "Teacher's information"
+msgstr ""
+
+msgid "teacher"
+msgstr ""
+
+msgid "Phone:"
+msgstr ""
+
 msgid "Friends of ututi"
 msgstr ""
 
@@ -3655,25 +3664,33 @@ msgid ""
 "you shortly.Until then, your profile rights may be limited."
 msgstr ""
 
-msgid "Enter the groups of your students"
+msgid "add groups"
 msgstr ""
 
-msgid "Send messages to Your students easily"
+msgid "My student groups"
 msgstr ""
 
-msgid "Add a group"
+msgid "Add student groups that you teach to."
 msgstr ""
 
-msgid "Please specify the courses you are teaching"
+msgid "Add courses you teach"
 msgstr ""
 
-msgid "Get in touch with your students"
+msgid "Create subjects you teach, or find those that are already created:"
 msgstr ""
 
-msgid "Share course materials easily"
+msgid ""
+"Here you will be able to upload course material, and groups watching the "
+"subject will be notified automatically."
 msgstr ""
 
-msgid "Find courses I teach"
+msgid "You will be able to send messages to groups watching the subject."
+msgstr ""
+
+msgid "Some other killer argument: i.e. how did I live without Ututi all this time?"
+msgstr ""
+
+msgid "add courses"
 msgstr ""
 
 msgid "Add:"
@@ -3685,10 +3702,10 @@ msgstr ""
 msgid "My courses"
 msgstr ""
 
-msgid "add courses"
+msgid "Student groups"
 msgstr ""
 
-msgid "Student groups"
+msgid "Add a group"
 msgstr ""
 
 msgid "Thank you for supporting Ututi!"

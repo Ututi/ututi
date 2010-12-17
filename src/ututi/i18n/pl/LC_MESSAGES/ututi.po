@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-12-16 17:19+0200\n"
+"PO-Revision-Date: 2010-12-17 15:30+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -3704,6 +3704,15 @@ msgstr "Nowe na Ututi"
 msgid "More news"
 msgstr "Więcej wiadomości"
 
+msgid "Teacher's information"
+msgstr ""
+
+msgid "teacher"
+msgstr ""
+
+msgid "Phone:"
+msgstr ""
+
 msgid "Friends of ututi"
 msgstr "Przyjaciele Ututi"
 
@@ -4045,26 +4054,36 @@ msgstr ""
 " pewno zrobią to wkrótce. Do tego czasu Twoje prawa na profilu mogą być "
 "ograniczone."
 
-msgid "Enter the groups of your students"
+msgid "add groups"
 msgstr ""
 
-msgid "Send messages to Your students easily"
+msgid "My student groups"
 msgstr ""
 
-msgid "Add a group"
+msgid "Add student groups that you teach to."
 msgstr ""
 
-msgid "Please specify the courses you are teaching"
-msgstr "Podaj przedmioty, których uczysz."
+msgid "Add courses you teach"
+msgstr ""
 
-msgid "Get in touch with your students"
-msgstr "Skontaktuj się ze swoimi studentami"
+msgid "Create subjects you teach, or find those that are already created:"
+msgstr ""
 
-msgid "Share course materials easily"
-msgstr "Prosty sposób na dzielenie się notatkami"
+msgid ""
+"Here you will be able to upload course material, and groups watching the "
+"subject will be notified automatically."
+msgstr ""
 
-msgid "Find courses I teach"
-msgstr "Znajdź przedmioty, których uczę"
+msgid "You will be able to send messages to groups watching the subject."
+msgstr ""
+
+msgid ""
+"Some other killer argument: i.e. how did I live without Ututi all this "
+"time?"
+msgstr ""
+
+msgid "add courses"
+msgstr "dodaj przedmioty"
 
 msgid "Add:"
 msgstr "Dodaj:"
@@ -4075,10 +4094,10 @@ msgstr "Stwórz stronę wiki"
 msgid "My courses"
 msgstr "Moje przedmioty"
 
-msgid "add courses"
-msgstr "dodaj przedmioty"
-
 msgid "Student groups"
+msgstr ""
+
+msgid "Add a group"
 msgstr ""
 
 msgid "Thank you for supporting Ututi!"

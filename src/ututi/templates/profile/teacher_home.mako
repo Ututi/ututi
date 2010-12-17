@@ -47,7 +47,7 @@ ${parent.head_tags()}
   ${h.button_to(_('add groups'), url(controller='profile', action='add_student_group'), class_='btnMedium', method='GET')}
 </div>
 <h2>${_('My student groups')}</h2>
-<p>Add student groups that you teach to.</p>
+<p>${_("Add student groups that you teach to.")}</p>
 <div style="clear:both"></div>
 </%b:rounded_block>
 </%def>
