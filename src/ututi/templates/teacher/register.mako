@@ -1,75 +1,71 @@
 <%inherit file="/ubase.mako" />
-<%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*"/>
 
-<%def name="head_tags()">
-    ${parent.head_tags()}
-    <%newlocationtag:head_tags />
-</%def>
-
-<table id="login-screen">
-  <td class="login-choice-box">
-    <div id="register-fields">
-      <div class="login-note">
-        ${_('Register as a teacher')}
-      </div>
-
-      <form id="teacher_registration_form" method="post" action="${url.current(action='register')}" class="fullForm">
+<div id="teacher-registration-page">
+  <div class="two-panel-layout with-right-panel">
+    <div class="left-panel">
+      <h1 class="page-title">${_("Register as teacher:")}</h1>
+      <form id="teacher_registration_form" method="post" action="${url.current(action='register')}" class="new-style-form">
         <fieldset>
           ${h.input_line('fullname', _('Full name'))}
-          ${h.input_line('email', _('Email'))}
+          ${h.input_line('email', _('Email'), 
+                         help_text=_("Please enter your university email. That way it will be easier to verify your identity."))}
           ${h.input_psw('new_password', _('Password'))}
-          ${h.input_psw('repeat_password', _('Repeat password'))}
-          <div class="formField">
-            ${location_widget(2, add_new=(c.tpl_lang=='pl'))}
-          </div>
-          ${h.input_line('position', _('Position'))}
-          <label id="agreeWithTOC"><input class="checkbox" checked="checked" type="checkbox" name="agree" value="true"/>${_('I agree to the ')} <a href="${url(controller='home', action='terms')}" rel="nofollow">${_('terms of use')}</a></label>
-          <form:error name="agree"/>
           <div style="margin-top: 10px;">
-            ${h.input_submit(_('Register'))}
+          <label><input class="checkbox" checked="checked" type="checkbox" name="agree" value="true"/>${_('I agree to the ')} <a href="${url(controller='home', action='terms')}" rel="nofollow">${_('terms of use')}</a></label>
+          </div>
+          <form:error name="agree" />
+            ${h.input_submit(_('Register'), class_='btnMedium')}
+          <div class="formField">
+            <p>${_("Register using your Google or Facebook account")}</p>
+            <div id="google-and-facebook-buttons">
+              <a id="google-link-button" href="${url(controller='federation', action='google_register', u_type='teacher')}">
+                ${h.image('/img/google-button.png', alt='Log in using Google')}
+              </a>
+              <a id="fb-link-button" href="#login-using-facebook">
+                ${h.image('/img/facebook-button.png', alt=_('Log in using Facebook'))}
+              </a>
+            </div>
           </div>
         </fieldset>
       </form>
-   </div>
-  </td>
-  <td class="login-choice-separator">
-  </td>
-  <td class="login-choice-box">
-    <div class="login-note">
-      ${_('Log in or register using your Google or Facebook account')}
-    </div>
-    <div id="federated-login-buttons">
-      <a href="${url(controller='federation', action='google_register', u_type='teacher')}" id="google-button">
-        ${h.image('/img/google-logo.gif', alt='Log in using Google', class_='google-login')}
-      </a>
-      <br />
-      ## We rely here on the fact that Facebook has been configured
-      ## by the login widget in the page header.
-      <fb:login-button perms="email"
-          onlogin="show_loading_message(); window.location = '${url(controller='federation', action='facebook_login', u_type='teacher')}'"
-       >${_('Connect')}</fb:login-button>
-    </div>
+      <script type="text/javascript">
+        $(document).ready(function() {
+          $('#fb-link-button').click(function() {
+              // attempt to login FB
+              FB.login(function(response) {
+                  if (response.session && response.perms) {
+                      // user is logged in and granted some permissions.
+                      // perms is a comma separated list of granted permissions
+                      show_loading_message();
+                      window.location = '${url(controller='federation', action='facebook_login', u_type='teacher')}';
+                  }
+              }, {perms:'email'});
 
-    <div style="margin-top: 30px;">
-      <div class="bullet">
-        ${_('Be patient')}
-        <div class="tip">
-          ${_('After registering, You will need to be confirmed as a teacher by our administrators.')}
-        </div>
-      </div>
-      <div class="bullet">
-        ${_('University email')}
-        <div class="tip">
-          ${_('Specify your university email address - this will make it easier to verify You as a teacher.')}
-        </div>
-      </div>
-      <div class="bullet">
-        ${_('Several universities?')}
-        <div class="tip">
-          ${_('If You teach at more than one university, specify Your primary one: You will be able to specify Your information in more detail once You'\
-          ' have registered.')}
-        </div>
-      </div>
+              return false;
+          });
+        });
+      </script>
     </div>
-  </td>
-</table>
+    <div class="right-panel">
+      <h1 class="page-title">${_("Advantages of teacher's profile:")}</h1>
+      <ul class="feature-list">
+        <li class="teacher-profile">
+          <strong>${_("Teacher profile")}</strong>
+          - ${_("submit your CV, thoughts, biography and academic papers.")}
+        </li>
+        <li class="file-sharing">
+          <strong>${_("Course material sharing")}</strong>
+          - ${_("upload and share course material with students of your class, university or the entire world.")}
+        </li>
+        <li class="contact-groups">
+          <strong>${_("Direct messaging")}</strong>
+          - ${_("create a private dialog with one or multiple students or groups.")}
+        </li>
+        <li class="sms">
+          <strong>${_("SMS")}</strong>
+          - ${_("send SMSs to your groups or friends. Get notifications and updates to your cell phone.")}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

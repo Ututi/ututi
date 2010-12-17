@@ -1,7 +1,6 @@
 
 from datetime import datetime
 
-from pylons import request
 from pylons import session
 from pylons import url
 from pylons.controllers.util import redirect
@@ -11,31 +10,21 @@ from pylons.i18n import _
 from formencode import validators
 from formencode.htmlfill_schemabuilder import htmlfill
 from formencode.variabledecode import NestedVariables
-from formencode.foreach import ForEach
-from formencode.compound import Pipe
 from formencode.compound import All
 from formencode.schema import Schema
 
 from ututi.lib.security import sign_in_user
 from ututi.lib.emails import email_confirmation_request, teacher_registered_email
-from ututi.lib.validators import LocationTagsValidator
 from ututi.lib.validators import validate
 from ututi.lib.validators import UniqueEmail
 from ututi.lib.validators import TranslatedEmailValidator
 from ututi.lib.base import BaseController, render
 from ututi.lib import helpers as h
-from ututi.model import PendingInvitation
 from ututi.model import meta
 from ututi.model.users import User
 from ututi.model.users import Email
 from ututi.model.users import Teacher
 from ututi.controllers.federation import FederatedRegistrationForm, FederationMixin
-
-class TeacherFederatedRegistrationForm(FederatedRegistrationForm):
-    location = Pipe(ForEach(validators.String(strip=True)),
-                    LocationTagsValidator(not_empty=True))
-
-    position = validators.String(strip=True, not_empty=True)
 
 
 class TeacherRegistrationForm(Schema):
@@ -58,20 +47,6 @@ class TeacherRegistrationForm(Schema):
            'tooShort': _(u"The password must be at least 5 symbols long.")}
     new_password = validators.String(
          min=5, not_empty=True, strip=True, messages=msg)
-    repeat_password = validators.String(
-         min=5, not_empty=True, strip=True, messages=msg)
-
-    location = Pipe(ForEach(validators.String(strip=True)),
-                    LocationTagsValidator(not_empty=True))
-
-    position = validators.String(strip=True, not_empty=True)
-
-    msg = {'invalid': _(u"Passwords do not match."),
-           'invalidNoMatch': _(u"Passwords do not match."),
-           'empty': _(u"Please enter your password to register.")}
-    chained_validators = [validators.FieldsMatch('new_password',
-                                                 'repeat_password',
-                                                 messages=msg)]
 
 
 class TeacherController(BaseController, FederationMixin):
@@ -85,15 +60,11 @@ class TeacherController(BaseController, FederationMixin):
             fullname = self.form_result['fullname']
             password = self.form_result['new_password']
             email = self.form_result['email']
-            location = self.form_result['location']
-            position = self.form_result['position']
 
             teacher = Teacher(fullname=fullname,
                               password=password,
                               gen_password=True)
-            teacher.teacher_position = position
             teacher.emails = [Email(email)]
-            teacher.location = location
             teacher.accepted_terms = datetime.utcnow()
             meta.Session.add(teacher)
             meta.Session.commit()
@@ -109,7 +80,7 @@ class TeacherController(BaseController, FederationMixin):
         c.email = session.get('confirmed_email', '').lower()
         return render('teacher/federated_registration.mako')
 
-    @validate(TeacherFederatedRegistrationForm, form='_federated_registration_form')
+    @validate(FederatedRegistrationForm, form='_federated_registration_form')
     def federated_registration(self):
         if not (session.get('confirmed_openid') or session.get('confirmed_facebook_id')):
             redirect(url(controller='home', action='index'))
@@ -124,12 +95,9 @@ class TeacherController(BaseController, FederationMixin):
                 self._bind_user(user, flash=False)
                 if user.facebook_id:
                     self._bind_facebook_invitations(user)
-                user.teacher_position = self.form_result['position']
                 user.accepted_terms = datetime.utcnow()
                 user.emails = [Email(c.email)]
                 user.emails[0].confirmed = True
-
-                user.location = self.form_result['location']
 
                 meta.Session.add(user)
                 meta.Session.commit()

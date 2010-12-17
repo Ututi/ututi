@@ -318,6 +318,49 @@
             background: url(img/icons/arrows_right.png) no-repeat left center;
         }
 
+/* TEACHER REGISTRATION PAGE
+ */
+
+#teacher-registration-page {
+    color: #4d4d4d;
+    padding: 50px 0px;
+}
+
+    #teacher-registration-page .two-panel-layout {
+        text-align: center;
+    }
+
+        #teacher-registration-page .two-panel-layout .left-panel,
+        #teacher-registration-page .two-panel-layout .right-panel {
+            background: url(img/faded-box-400px.png) no-repeat left bottom;
+            width: 320px;
+            min-height: 350px;
+            padding: 10px 40px;
+            text-align: left; /* Reset centering */
+        }
+
+        #teacher-registration-page .two-panel-layout.with-right-panel .left-panel {
+            border: none;
+            margin-right: 50px;
+        }
+
+    #teacher-registration-page h1.page-title {
+        font-weight: bold;
+        font-size: 18px;
+        margin: 0;
+    }
+
+    #teacher-registration-page p {
+        margin: 10px 0px;
+    }
+
+    #teacher-registration-page ul.feature-list li {
+        /* Diferrent than standard spacing. */
+        margin-bottom: 20px; 
+        padding-left: 80px;
+    }
+
+
 /* SIMPLE LISTS
  * Simple list styles that provide bullet images and spacing.
  */
@@ -369,6 +412,18 @@ ul.feature-list {
 
     ul.feature-list li.dialog {
         background: url(img/icons/features/dialog.png) no-repeat left 5px;
+    }
+
+    ul.feature-list li.contact-groups {
+        background: url(img/icons/features/contact_groups.png) no-repeat left 5px;
+    }
+
+    ul.feature-list li.sms {
+        background: url(img/icons/features/sms.png) no-repeat left 5px;
+    }
+
+    ul.feature-list li.teacher-profile {
+        background: url(img/icons/features/teacher_profile.png) no-repeat left 5px;
     }
 
 /* UTUTI OBJECT DESCRIPTION

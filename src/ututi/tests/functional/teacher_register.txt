@@ -10,10 +10,7 @@ let's type in that url:
     >>> form = browser.getForm(id='teacher_registration_form')
     >>> form.getControl('Full name').value = 'Mr. teacher'
     >>> form.getControl('Email').value = 'teacher@vu.lt'
-    >>> form.getControl('Position').value = 'Tutor'
     >>> form.getControl(name='new_password').value = 'mapassword'
-    >>> form.getControl(name='repeat_password').value = 'mapassword'
-    >>> form.getControl(name='location-0').value = 'Vilniaus universitetas'
     >>> form.getControl(name='agree').value = True
     >>> form.getControl('Register').click()
 
@@ -40,8 +37,6 @@ registration. And the team gets a notification:
     >>> print mail_queue.pop().payload()
     A new teacher has registered:
     Mr. teacher (teacher@vu.lt)
-    Vilniaus universitetas
-    Tutor
     Ututi
 
 
@@ -51,16 +46,12 @@ Teachers can also register using facebook:
     >>> browser.url
     'http://localhost/teacher/federated_registration'
     >>> browser.getControl(name='agree').value = True
-    >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
-    >>> browser.getControl('Position').value = 'Tutor'
     >>> browser.getControl('Register').click()
 
 The team is informed of this too:
     >>> print mail_queue.pop().payload()
     A new teacher has registered:
     John Smith (john.smith@example.com)
-    Vilniaus universitetas
-    Tutor
     Ututi
 
     >>> browser.url
