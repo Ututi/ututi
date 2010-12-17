@@ -216,7 +216,7 @@ test_migration: instance/var/run/.s.PGSQL.${PGPORT}
 
 .PHONY: dbdump
 dbdump: instance/var/run/.s.PGSQL.${PGPORT}
-	${PG_PATH}/bin/pg_dump --format=c -h ${PWD}/instance/var/run/ -d development > dbdump
+	${PG_PATH}/bin/pg_dump --format=c -h ${PWD}/instance/var/run/ development > dbdump
 
 .PHONY: test_migration_2
 test_migration_2: instance/var/run/.s.PGSQL.${PGPORT}
