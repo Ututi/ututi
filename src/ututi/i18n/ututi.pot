@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-12-17 15:30+0200\n"
+"POT-Creation-Date: 2010-12-17 19:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4342,39 +4342,47 @@ msgstr ""
 msgid "Any text that you want to collaborate on with your classmates"
 msgstr ""
 
-msgid "2. School"
+msgid "Register as teacher:"
+msgstr ""
+
+msgid "Please verify, that the data below is correct."
+msgstr ""
+
+msgid "Advantages of teacher's profile:"
+msgstr ""
+
+msgid "Teacher profile"
+msgstr ""
+
+msgid "submit your CV, thoughts, biography and academic papers."
+msgstr ""
+
+msgid "Course material sharing"
+msgstr ""
+
+msgid "Direct messaging"
+msgstr ""
+
+msgid "create a private dialog with one or multiple students or groups."
+msgstr ""
+
+msgid "SMS"
 msgstr ""
 
 msgid ""
-"Tell us where You teach, so that we can verify You. Additional schools can be"
-" added after registration."
-msgstr ""
-
-msgid "Register as a teacher"
-msgstr ""
-
-msgid "Be patient"
+"send SMSs to your groups or friends. Get notifications and updates to your "
+"cell phone."
 msgstr ""
 
 msgid ""
-"After registering, You will need to be confirmed as a teacher by our "
-"administrators."
+"Please enter your university email. That way it will be easier to verify your"
+" identity."
 msgstr ""
 
-msgid "University email"
+msgid "Register using your Google or Facebook account"
 msgstr ""
 
-msgid ""
-"Specify your university email address - this will make it easier to verify "
-"You as a teacher."
-msgstr ""
-
-msgid "Several universities?"
-msgstr ""
-
-msgid ""
-"If You teach at more than one university, specify Your primary one: You will "
-"be able to specify Your information in more detail once You have registered."
+msgid "Log in using Facebook"
 msgstr ""
 
 msgid "Member information"

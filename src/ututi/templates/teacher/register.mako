@@ -19,7 +19,7 @@
             <p>${_("Register using your Google or Facebook account")}</p>
             <div id="google-and-facebook-buttons">
               <a id="google-link-button" href="${url(controller='federation', action='google_register', u_type='teacher')}">
-                ${h.image('/img/google-button.png', alt='Log in using Google')}
+                ${h.image('/img/google-button.png', alt=_('Log in using Google'))}
               </a>
               <a id="fb-link-button" href="#login-using-facebook">
                 ${h.image('/img/facebook-button.png', alt=_('Log in using Facebook'))}
