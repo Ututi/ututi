@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-12-17 19:36+0200\n"
+"POT-Creation-Date: 2010-12-18 19:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -704,6 +704,10 @@ msgid "Group updated!"
 msgstr ""
 
 msgid "Group deleted."
+msgstr ""
+
+#, python-format
+msgid "Message from Your teacher: %s"
 msgstr ""
 
 msgid "This is not the confirmation code we sent you."
@@ -2193,6 +2197,13 @@ msgid ""
 msgstr ""
 
 msgid "Easily communicate with Your students."
+msgstr ""
+
+#, python-format
+msgid "The teacher %(teacher_name)s (%(teacher_url)s) sent a message to Your group:"
+msgstr ""
+
+msgid "If You reply to this message, the teacher will not get Your replies."
 msgstr ""
 
 msgid "A new teacher has registered:"
@@ -3762,6 +3773,12 @@ msgstr ""
 msgid "Subject updates"
 msgstr ""
 
+msgid "Moderated posts"
+msgstr ""
+
+msgid "New groups"
+msgstr ""
+
 msgid "Wall settings"
 msgstr ""
 
@@ -3955,6 +3972,12 @@ msgid "Edit this group"
 msgstr ""
 
 msgid "Delete this group"
+msgstr ""
+
+msgid "Send message"
+msgstr ""
+
+msgid "Your message was successfully sent."
 msgstr ""
 
 msgid "Group or user:"
@@ -4393,9 +4416,6 @@ msgid "What has %(user)s been up to?"
 msgstr ""
 
 msgid "Nothing yet."
-msgstr ""
-
-msgid "Send message"
 msgstr ""
 
 #, python-format

@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-12-17 19:36+0200\n"
+"PO-Revision-Date: 2010-12-18 19:05+0200\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -746,6 +746,10 @@ msgstr "Grupė atnaujinta!"
 
 msgid "Group deleted."
 msgstr "Grupė ištrinta!"
+
+#, python-format
+msgid "Message from Your teacher: %s"
+msgstr ""
 
 msgid "This is not the confirmation code we sent you."
 msgstr "Tai nėra tas patvirtinimo kodas, kurį mes Tau siuntėme."
@@ -2425,6 +2429,15 @@ msgstr "Lengvai paviešinti savo paskaitų užrašus savo studentams."
 
 msgid "Easily communicate with Your students."
 msgstr "Lengvai bendrauti su savo studentais."
+
+#, python-format
+msgid ""
+"The teacher %(teacher_name)s (%(teacher_url)s) sent a message to Your "
+"group:"
+msgstr ""
+
+msgid "If You reply to this message, the teacher will not get Your replies."
+msgstr ""
 
 msgid "A new teacher has registered:"
 msgstr "Užsiregistravo naujas dėstytojas:"
@@ -4125,6 +4138,12 @@ msgstr "Grupių stebimi dalykai"
 msgid "Subject updates"
 msgstr "Dalykų pokyčiai"
 
+msgid "Moderated posts"
+msgstr ""
+
+msgid "New groups"
+msgstr ""
+
 msgid "Wall settings"
 msgstr "Sienos nustatymai"
 
@@ -4334,6 +4353,12 @@ msgstr "Redaguoti šią grupę"
 
 msgid "Delete this group"
 msgstr "Trinti šią grupę"
+
+msgid "Send message"
+msgstr "Siųsti žinutę"
+
+msgid "Your message was successfully sent."
+msgstr ""
 
 msgid "Group or user:"
 msgstr "Grupė arba narys:"
@@ -4827,9 +4852,6 @@ msgstr "Ką nuveikė %(user)s?"
 
 msgid "Nothing yet."
 msgstr "Iki šiol nieko."
-
-msgid "Send message"
-msgstr "Siųsti žinutę"
 
 #, python-format
 msgid "Log in as %(user)s"
