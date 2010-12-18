@@ -118,33 +118,33 @@ ${h.javascript_link('/javascript/js-alternatives.js')|n}
         <label for="tags"><span class="labelText">${_('Tags')}</span></label>
         ${tags_widget([])}
 
-%if h.check_crowds(['root']):
-  <div class="form-field">
-    <label for="moderators">
-    % if c.group.moderators:
-       <input name="moderators" id="moderators" type="checkbox" value="true" checked="checked" />
-    % else:
-       <input name="moderators" id="moderators" type="checkbox" value="true" />
-    % endif
-       ${_("Moderators")}
-    </label>
-  </div>
-%endif
+        %if h.check_crowds(['root']):
+          <div class="form-field">
+            <label for="moderators">
+            % if c.group.moderators:
+               <input name="moderators" id="moderators" type="checkbox" value="true" checked="checked" />
+            % else:
+               <input name="moderators" id="moderators" type="checkbox" value="true" />
+            % endif
+               ${_("Moderators")}
+            </label>
+          </div>
+        %endif
 
-        ${access_settings()}
+                ${access_settings()}
 
-  <label for="mailing_list_moderation" class="radio">
-      <span class="labelText">
-        ${_('Who can send messages to the mailing list')}
-        ${tooltip(_("If you select 'moderated', you can pick the people "
-                    "who you want to allow to post to the mailing list."))}
-      </span>
-    ${h.radio("mailinglist_moderated", "members", label=_('Members only'))}
-    <br />
-    ${h.radio("mailinglist_moderated", "moderated", label=_('Moderated'))}
-  </label>
+          <label for="mailing_list_moderation" class="radio">
+              <span class="labelText">
+                ${_('Who can send messages to the mailing list')}
+              </span>
+            ${h.radio("mailinglist_moderated", "members", label=_('Members only'))}
+            <br />
+            ${h.radio("mailinglist_moderated", "moderated", label=_('Everybody (moderated)'))}
+            ${tooltip(_("If you select 'moderated', you can pick the people "
+                        "who you want to allow to post to the mailing list."))}
+          </label>
 
-        <br />
+          <br />
 
         ${h.input_submit()}
       </td>
