@@ -1,14 +1,10 @@
-# English translations for ututi.
-# Copyright (C) 2009 ORGANIZATION
-# This file is distributed under the same license as the ututi project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
-#
+
 msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-12-18 19:05+0200\n"
+"PO-Revision-Date: 2010-12-19 10:50+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -2805,16 +2801,16 @@ msgstr "Tagi"
 msgid "Who can send messages to the mailing list"
 msgstr "Kto może wysyłać wiadomości do listy mailingowej"
 
+msgid "Members only"
+msgstr "Tylko członkowie"
+
+msgid "Everybody (moderated)"
+msgstr ""
+
 msgid ""
 "If you select 'moderated', you can pick the people who you want to allow "
 "to post to the mailing list."
 msgstr ""
-
-msgid "Members only"
-msgstr "Tylko członkowie"
-
-msgid "Moderated"
-msgstr "Moderowane"
 
 msgid "Edit group front page"
 msgstr "Edytuj stronę startową grupy"
