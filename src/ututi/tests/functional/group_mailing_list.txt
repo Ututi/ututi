@@ -273,7 +273,7 @@ messages, but only if group is set to moderated:
 Let's allow non-group members to post messages to our mailing list:
 
     >>> browser.getLink('Edit').click()
-    >>> browser.getControl('Moderated').click()
+    >>> browser.getControl('Everybody (moderated)').click()
     >>> browser.getControl('Save').click()
 
 Now the user can see the link, and should be able to post a new
