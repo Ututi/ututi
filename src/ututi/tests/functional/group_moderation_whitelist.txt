@@ -14,6 +14,7 @@ As we have moderation turned on we can add emails of non-group members
 to the whitelist so that messages from those people would be accepted
 automatically:
 
+
     >>> browser.getLink('Mailing List').click()
     >>> browser.getControl('Moderation queue (2)').click()
     >>> browser.getControl('Email:').value = 'varlius@example.com'
