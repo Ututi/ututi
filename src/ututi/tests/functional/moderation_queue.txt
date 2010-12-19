@@ -30,7 +30,7 @@ non-group members will get posted into the queue.
 First we go to the settings page and set the value:
 
     >>> browser.getLink('Edit').click()
-    >>> browser.getControl('Moderated').click()
+    >>> browser.getControl('Everybody (moderated)').click()
     >>> browser.getControl('Save').click()
 
 This time if we post the email, we will still not get it in our
