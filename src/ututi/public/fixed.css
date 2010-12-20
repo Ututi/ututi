@@ -113,6 +113,12 @@
     color: #666;
 }
 
+    /* Fix color of bottom roundings */
+    .standard-portlet.rounded-block .cbl,
+    .standard-portlet.rounded-block .cbr {
+        background-image: url('img/portlets_bg_gray.png');
+    }
+
     .standard-portlet h2 {
         font-size: 20px;
         font-weight: bold;
