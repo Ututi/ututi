@@ -258,13 +258,13 @@ button.btnMedium {
     padding: 0 15px 0 0;
     font-size: 16px;
     text-align: center;
-    background: transparent url("img/buttons_bg_split.png") no-repeat right -140px;
+    background: transparent url("img/buttons_bg_split.png") no-repeat right -138px;
 }
 
 button.btnMedium span {
     padding: 7px 0 0 15px;
     height: 26px;
-    background: transparent url("img/buttons_bg_split.png") no-repeat left -30px;
+    background: transparent url("img/buttons_bg_split.png") no-repeat left -28px;
 }
 
 /* * html button.btnMedium span { height: 31px; } */
