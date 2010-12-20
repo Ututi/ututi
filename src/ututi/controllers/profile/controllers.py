@@ -28,7 +28,7 @@ from ututi.lib import gg, sms
 from ututi.lib.validators import js_validate
 from ututi.lib.validators import manual_validate
 
-from ututi.model.events import Event
+from ututi.model.events import Event, TeacherMessageEvent
 from ututi.model import ForumCategory
 from ututi.model import ForumPost
 from ututi.model import get_supporters
@@ -677,6 +677,12 @@ class TeacherProfileController(ProfileControllerBase):
             else:
                 msg = EmailMessage(subject, msg_text, sender=c.user.emails[0].email, force=True)
                 msg.send(group.email)
+                evt = TeacherMessageEvent()
+                evt.object_id = group.id
+                evt.data = '%s \n\n %s' % (subject, msg_text)
+                evt.user = c.user
+                meta.Session.add(evt)
+                meta.Session.commit()
 
             if js:
                 return {'success': True}

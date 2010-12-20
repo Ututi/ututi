@@ -232,6 +232,24 @@ class PostCreatedEventBase(Event):
         return link_to(info_dict['author']['title'], info_dict['author']['url'])
 
 
+class TeacherMessageEvent(Event):
+    """Event fired when a teacher posts a message to a group that has a forum.
+
+    Current implementation is that such group's members receive individual emails from the teacher.
+    We need to be able to show the teacher's message on the wall.
+
+    The message is stored in the 'data' attribute (text).
+    """
+
+    def render(self):
+        return _("Teacher %(link_to_author)s sent message to the group %(link_to_group)s.") % {
+            'link_to_author': link_to(self.user.fullname, self.user.url()),
+            'link_to_group': link_to(self.context.title, self.context.url())}
+
+    def snippet(self):
+        return render_mako_def('/sections/wall_snippets.mako', 'teachermessage_sent', event=self)
+
+
 class MailinglistPostCreatedEvent(PostCreatedEventBase):
     """Event fired when someone posts a message on the group mailing list.
 
@@ -437,6 +455,12 @@ def setup_orm(engine):
                polymorphic_identity='mailinglist_post_created',
                properties = {'message': relation(GroupMailingListMessage,
                                                  primaryjoin=group_mailing_list_messages_table.c.id==events_table.c.message_id)})
+
+    orm.mapper(TeacherMessageEvent,
+               inherits=event_mapper,
+               polymorphic_on=events_table.c.event_type,
+               polymorphic_identity='teacher_message',
+               )
 
     orm.mapper(ModeratedPostCreated,
                inherits=event_mapper,

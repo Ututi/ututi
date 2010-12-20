@@ -171,6 +171,19 @@
   </%self:wall_item>
 </%def>
 
+<%def name="teachermessage_sent(event)">
+  <%self:wall_item event="${event}">
+    <%def name="classes()">teacher_event teachermessage_sent</%def>
+    <%def name="content()">
+            <span class="truncated">${h.nl2br(event.data)}</span>
+    </%def>
+    <%def name="when()">${event.when()}</%def>
+    ${_("Teacher %(user_link)s sent a message to the group %(group_link)s.") % \
+       dict(user_link=h.object_link(event.user),
+            group_link=h.object_link(event.context)) | n}
+  </%self:wall_item>
+</%def>
+
 <%def name="moderated_post_created(event)">
   <%self:wall_item event="${event}">
     <%def name="classes()">message_event mailinglistpost_created</%def>

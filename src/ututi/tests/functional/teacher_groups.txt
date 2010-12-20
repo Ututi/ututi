@@ -97,3 +97,22 @@ A message to the ututi forum group - members of the group receive email messages
     Hi, guys!
     If You reply to this message, the teacher will not get Your replies.
 
+    >>> browser2.getLink('Testing group').click()
+    >>> browser2.printQuery('id("wall")//div[@class="description"]//text()')
+    Teacher
+    Benas
+    sent a message to the group
+    Testing group
+    .
+    Adminas Adminovix
+    has created the group
+    Testing group
+    .
+    Adminas Adminovix
+    joined the group
+    Testing group
+    .
+    Second user
+    joined the group
+    Testing group
+    .
