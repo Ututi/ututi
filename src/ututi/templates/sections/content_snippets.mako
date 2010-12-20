@@ -107,8 +107,8 @@
     <span class="verysmall">(${_('Subject rating:')} </span><span>${h.image('/images/details/stars%d.png' % object.rating(), alt='', class_='subject_rating')|n})</span>
     <div class="description">
       ${item_location(object)}
-      % if object.lecturer:
-       | ${object.lecturer}
+      % if object.teacher_repr:
+       | ${object.teacher_repr}
       % endif
       %if object.tags:
        | ${item_tags(object)}

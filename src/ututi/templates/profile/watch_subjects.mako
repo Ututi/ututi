@@ -109,8 +109,8 @@ ${search_form(text=c.text, obj_type='subject', tags=c.tags, parts=['text', 'tags
 
     <div class="description">
       ${item_location(object)}
-      % if object.lecturer:
-       | ${object.lecturer}
+      % if object.teacher_repr:
+       | ${object.teacher_repr}
       % endif
       %if object.tags:
        | ${item_tags(object)}

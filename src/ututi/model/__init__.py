@@ -38,6 +38,7 @@ from ututi.lib.messaging import SMSMessage
 from ututi.lib.emails import group_invitation_email, group_space_bought_email
 from ututi.lib.security import check_crowds
 from ututi.lib.group_payment_info import GroupPaymentInfo
+from ututi.lib.helpers import literal, link_to
 from nous.mailpost import copy_chunked
 
 from zope.cachedescriptors.property import Lazy
@@ -1320,6 +1321,13 @@ class Subject(ContentItem, FolderMixin, LimitedUploadMixin):
             location = location.parent
         return '/'.join(reversed(path))
 
+    @property
+    def teacher_repr(self):
+        if self.teachers:
+            return literal(', '.join([link_to(t.fullname, t.url()) for t in self.teachers]))
+        else:
+            return self.lecturer
+
     def url(self, controller='subject', action='home', **kwargs):
         return url(controller=controller,
                    action=action,
@@ -1403,6 +1411,7 @@ class Subject(ContentItem, FolderMixin, LimitedUploadMixin):
                 'title': self.title,
                 'url': self.url(),
                 'lecturer': self.lecturer,
+                'teachers': self.teacher_repr,
                 'file_cnt': len(self.files),
                 'page_cnt': len(self.pages),
                 'group_cnt': self.group_count(),
