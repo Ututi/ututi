@@ -4854,6 +4854,10 @@ body .ui-widget button.btnMedium {
   background-image: url("../img/icons/grupe-big-off.png");
 }
 
+.wall_item.teacher_event {
+  background-image: url("../img/icons/teacher-gray.png");
+}
+
 .wall_item.message_event,
 .wall_item.privatemessage_event {
   background-image: url("../img/icons/message-large.png");

@@ -140,7 +140,14 @@
 
 <%def name="mailinglistpost_created(event)">
   <%self:wall_item event="${event}">
-    <%def name="classes()">message_event mailinglistpost_created</%def>
+    <%def name="classes()">
+      %if event.user is not None and event.user.is_teacher:
+        teacher_event
+      %else:
+        message_event
+      %endif
+      mailinglistpost_created
+    </%def>
     <%def name="content()">
       <span class="truncated">${h.email_with_replies(event.message.body, True)}</span>
     </%def>
