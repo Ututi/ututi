@@ -38,12 +38,12 @@ Ok, let's add three groups: non-ututi, ututi (mailing list) and ututi (forum):
 
     >>> browser.getControl('Add a group').click()
     >>> browser.getControl('Title').value = 'insiders - mailing list'
-    >>> browser.getControl('Email address').value = 'moderators@fakehost.lt'
+    >>> browser.getControl('Email address').value = 'moderators@groups.ututi.lt'
     >>> browser.getControl('Save').click()
 
     >>> browser.getControl('Add a group').click()
     >>> browser.getControl('Title').value = 'insiders - forum'
-    >>> browser.getControl('Email address').value = 'testgroup@fakehost.lt'
+    >>> browser.getControl('Email address').value = 'testgroup@groups.ututi.lt'
     >>> browser.getControl('Save').click()
 
     >>> browser.printQuery("//div[@class='group-title']/dt/text()")
@@ -72,30 +72,44 @@ A message to the ututi mailing list group:
     >>> browser2 = Browser.logIn()
     >>> browser2.getLink('Moderatoriai').click()
     >>> browser2.printQuery('id("wall")//div[@class="content"]//text()')
-
-    >>> len(mail_queue)
-    1
-
-    >>> print mail_queue.pop().payload()
     The teacher Benas (http://localhost/user/5) sent a message to Your group:
     Hi, guys!
     If You reply to this message, the teacher will not get Your replies.
 
-    >>> mail_queue[:] = []
+    >>> len(mail_queue)
+    1
+
+    >>> msg = mail_queue.pop()
+    >>> print msg.payload()
+    The teacher Benas (http://localhost/user/5) sent a message to Your group:
+    Hi, guys!
+    If You reply to this message, the teacher will not get Your replies.
+    >>> msg.sender
+    'benas@ututi.lt'
+
+    >>> print msg.recipients
+    ['admin@ututi.lt']
 
 A message to the ututi forum group - members of the group receive email messages:
 
-    >>> browser.getControl(name='subject', index=1).value = 'a message to the group'
-    >>> browser.getControl(name='message', index=1).value = 'Hi, guys!'
-    >>> browser.getControl('Send', index=1).click()
+    >>> browser.getControl(name='subject', index=2).value = 'a message to the group'
+    >>> browser.getControl(name='message', index=2).value = 'Hi, guys!'
+    >>> browser.getControl('Send', index=2).click()
 
     >>> len(mail_queue)
-    1
+    2
 
-    >>> print mail_queue.pop().payload()
+    >>> msg = mail_queue.pop()
+    >>> print msg.payload()
     The teacher Benas (http://localhost/user/5) sent a message to Your group:
     Hi, guys!
     If You reply to this message, the teacher will not get Your replies.
+
+    >>> print msg.recipients
+    ['user2@ututi.lt']
+
+    >>> mail_queue.pop().recipients
+    ['admin@ututi.lt']
 
     >>> browser2.getLink('Testing group').click()
     >>> browser2.printQuery('id("wall")//div[@class="description"]//text()')

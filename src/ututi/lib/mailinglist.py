@@ -11,7 +11,7 @@ def _generateMessageId():
     host = config.get('mailing_list_host', '')
     return "%s@%s" % (choose_boundary(), host)
 
-def post_message(group, user, subject, message, reply_to=None):
+def post_message(group, user, subject, message, reply_to=None, force=False):
     msgstr = compose_email(user.emails[0].email,
                            group.list_address,
                            subject,
@@ -20,7 +20,7 @@ def post_message(group, user, subject, message, reply_to=None):
                            send_to=group.recipients_mailinglist(),
                            reply_to=reply_to,
                            list_id=group.list_address)
-    post = GroupMailingListMessage.fromMessageText(msgstr)
+    post = GroupMailingListMessage.fromMessageText(msgstr, force=force)
     post.group = group
     meta.Session.commit()
     if not post.in_moderation_queue:

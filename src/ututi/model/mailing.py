@@ -259,7 +259,7 @@ class GroupMailingListMessage(ContentItem):
         return email.message_from_string(message_text, UtutiEmail)
 
     @classmethod
-    def fromMessageText(cls, message_text):
+    def fromMessageText(cls, message_text, force=False):
         message = cls.parseMessage(message_text)
         message_id = message.getMessageId()
         g = message.getGroup()
@@ -280,7 +280,8 @@ class GroupMailingListMessage(ContentItem):
 
         whitelist = [i.email for i in g.whitelist]
         if not (author_address in whitelist or
-                author is not None and g.is_member(author)):
+                author is not None and g.is_member(author)
+                or force):
             if g.mailinglist_moderated:
                 in_moderation_queue = True
             else:

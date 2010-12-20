@@ -662,27 +662,27 @@ class TeacherProfileController(ProfileControllerBase):
 
             if group.group is not None:
                 recipient = group.group
-                if not recipient.mailinglist_enabled:
-                    category = meta.Session.query(ForumCategory)\
-                        .filter_by(group_id=recipient.id)\
-                        .first()
-                    post = ForumPost(subject, msg_text, category_id=category.id,
-                                     thread_id=None)
-                    meta.Session.add(post)
-                    meta.Session.commit()
+                if recipient.mailinglist_enabled:
+                    post = post_message(recipient,
+                                        c.user,
+                                        subject,
+                                        msg_text,
+                                        force=True)
                 else:
                     msg = EmailMessage(_('Message from Your teacher: %s') % subject,
                                        msg_text,
-                                       sender=group.group.list_address)
+                                       sender=recipient.list_address)
+                    msg.send(group.group)
+                    evt = TeacherMessageEvent()
+                    evt.context = group.group
+                    evt.data = '%s \n\n %s' % (subject, msg_text)
+                    evt.user = c.user
+                    meta.Session.add(evt)
+                    meta.Session.commit()
+
             else:
                 msg = EmailMessage(subject, msg_text, sender=c.user.emails[0].email, force=True)
                 msg.send(group.email)
-                evt = TeacherMessageEvent()
-                evt.object_id = group.id
-                evt.data = '%s \n\n %s' % (subject, msg_text)
-                evt.user = c.user
-                meta.Session.add(evt)
-                meta.Session.commit()
 
             if js:
                 return {'success': True}
