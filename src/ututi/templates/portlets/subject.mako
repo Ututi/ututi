@@ -42,7 +42,6 @@
           <ul class="teacher-list verysmall">
             <li>${subject.lecturer}</li>
           </ul>
-          <span class="orange verysmall"></span>
         %endif
     </div>
     <div class="dalyko-info">
