@@ -1084,6 +1084,7 @@ div.profileOptionLinks div.drop{
 }
 
 input.checkbox,
+#loginForm input.checkbox,
 #login-screen input.checkbox,
 #group_settings_form input.checkbox,
 .fullForm input.checkbox {
