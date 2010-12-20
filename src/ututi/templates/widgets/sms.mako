@@ -112,7 +112,7 @@
 
     %if user.can_send_sms(group):
     <div style="padding-top: 4px; float: left">
-      ${h.input_submit(_('Send'), class_='btn action_submit')}
+      ${h.input_submit(_('Send'), class_='btn')}
     </div>
     <div class="character-counter">
       <span id="sms_message_symbols">140</span> / <span id="sms_messages_num">1</span>
