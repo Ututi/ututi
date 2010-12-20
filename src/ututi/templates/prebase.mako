@@ -7,6 +7,9 @@ ${_('Student information online')}
 <%def name="head_tags()">
 </%def>
 
+<%def name="css()">
+</%def>
+
 <%def name="body_class()">
 </%def>
 
@@ -287,6 +290,9 @@ ${self.anonymous_menu()}
     ${h.javascript_link(h.path_with_hash('/javascript/hide_parent.js'))}
     ${h.javascript_link(h.path_with_hash('/javascript/forms.js'))}
     ${self.head_tags()}
+    <style type="text/css">
+      ${self.css()}
+    </style>
     <title>
       ${self.title()} - ${_('UTUTI')}
     </title>
