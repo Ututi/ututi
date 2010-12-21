@@ -3,6 +3,22 @@
 <%namespace file="/sections/standard_blocks.mako" name="b" import="rounded_block, item_list"/>
 <%namespace file="/sections/standard_objects.mako" import="group_listitem_teacherdashboard"/>
 
+<%def name="css()">
+.group-description .sms-widget #sms_message {
+    width: 420px;
+}
+
+.group-description .sms-widget .sms-box {
+    background: transparent;
+}
+
+.send_sms_block {
+    width: 450px;
+    margin-top: 10px;
+}
+
+</%def>
+
 <%def name="head_tags()">
 ${parent.head_tags()}
   ${h.javascript_link('/javascript/teacher_dashboard.js')}

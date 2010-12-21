@@ -601,6 +601,11 @@ ul.feature-list {
             background: url('img/icons/dalykas-very-small.png') no-repeat left;
         }
 
+        .group-description dd.sms {
+            background: url('img/icons/sms_small.png') no-repeat left;
+        }
+
+
 /* GENERAL TWO PANEL LAYOUT
  */
 

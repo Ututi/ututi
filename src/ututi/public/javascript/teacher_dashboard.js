@@ -45,4 +45,24 @@ $(document).ready(function() {
         }
         return false;
     });
+
+    //sms ajax send
+    $('.sms-box .send_button').click(function() {
+        var form = $(this).closest('form');
+        url = $(form).attr('action') + '?js=1';
+        $.post(url,
+               form.serialize(),
+               function(data, status) {
+                   return function() {
+                       $(form).find('input, textarea').val('');
+                       container = $(form).closest('.group-description');
+                       $('.send_sms', container).click();
+                       $('.sms-sent', container).removeClass('hidden');
+                   }(data, status, form)
+               }
+              );
+        return false;
+
+    });
+
 });

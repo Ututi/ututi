@@ -1,4 +1,5 @@
 <%namespace file="/sections/standard_buttons.mako" import="close_button, watch_button, teach_button" />
+<%namespace file="/widgets/sms.mako" import="sms_widget" />
 
 <%def name="subject_listitem_button(subject)">
 ## Renders appropriate action button.
@@ -235,6 +236,13 @@
           ${_('Send message')}
         </a>
       </dd>
+      %if group.group is not None:
+      <dd class="sms">
+        <a href="#" title="${_('Send SMS')}" class="send_sms click-action" id="send_sms_${group.id}">
+          ${_('Send SMS')}
+        </a>
+      </dd>
+      %endif
   </div>
   <div class="send_message_block click-action-block" id="send_message_${group.id}-block">
     <a class="${not active and 'inactive' or ''}" name="send-message"></a>
@@ -255,5 +263,13 @@
   <div class="message-sent hidden action-reply">
     ${_('Your message was successfully sent.')}
   </div>
+  %if group.group is not None:
+  <div class="send_sms_block click-action-block" id="send_sms_${group.id}-block">
+    ${sms_widget(user=c.user, group=group.group, text='', parts=[])}
+  </div>
+  <div class="sms-sent hidden action-reply">
+    ${_('Your SMS was successfully sent.')}
+  </div>
+  %endif
   </%self:group_listitem_base>
 </%def>

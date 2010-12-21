@@ -1,6 +1,6 @@
 <%namespace file="/sections/content_snippets.mako" import="tooltip" />
 
-<%def name="sms_widget(user=None, group=None)">
+<%def name="sms_widget(user=None, group=None, text=None, parts=['tip', 'buy_credits', 'phone_send'])">
 <%
     if user is None:
         user = c.user
@@ -9,20 +9,24 @@
 %>
 <div class="sms-widget">
 <div class="credits-remaining">
+  %if 'tip' in parts:
   <div class="sms-intro">
     ${_('Send an SMS message to all your classmates. The service is paid by SMS credits (1 credit = 1 SMS message to one person). The cost of an SMS message depends on the number of members in the group.')}
   </div>
+  %endif
 
   <div class="credit-info">
     <span class="credits-header">${_('Credits left:')}</span>
     <span class="num-credits-remaining ${'shortage' if not c.user.can_send_sms(group) else ''}">${user.sms_messages_remaining}</span>
+    %if 'buy_credits' in parts:
     <div style="float: right">
       <form>
         ${h.input_submit(_('Purchase credits'), id='purchase-credits-button')}
       </form>
     </div>
+    %endif
   </div>
-
+  %if 'buy_credits' in parts:
   <div id="purchase-credits-dialog" class="payment-dialog" style="display: none">
     <div class="description">
       ${_('SMS credits can be used to send SMS messages to members of a group. There are two ways to purchase SMS credits:')}
@@ -88,6 +92,7 @@
             });
         //]]>
   </script>
+  %endif
 </div>
 
 <div class="sms-box">
@@ -99,7 +104,11 @@
     <input type="hidden" name="current_url" value="${url.current()}" />
 
     %if user.can_send_sms(group):
-      ${h.input_area('sms_message', '', value="\n\n\n-- %s" % user.fullname, cols=35)}
+      <%
+          if text is None:
+              text = "\n\n\n-- %s" % user.fullname
+      %>
+      ${h.input_area('sms_message', '', value=text, cols=35)}
     %else:
       ${h.input_area('sms_message', '', _('You do not have enough SMS credits to send a message to this group.'), cols=35, disabled=True)}
     %endif
@@ -112,7 +121,7 @@
 
     %if user.can_send_sms(group):
     <div style="padding-top: 4px; float: left">
-      ${h.input_submit(_('Send'), class_='btn')}
+      ${h.input_submit(_('Send'), class_='btn send_button')}
     </div>
     <div class="character-counter">
       <span id="sms_message_symbols">140</span> / <span id="sms_messages_num">1</span>
@@ -176,7 +185,7 @@
 </div>
 
 <div class="clear-left"></div>
-
+%if 'phone_info' in parts:
 <div class="phone-message-block">
   <div class="block-head">
     ${_('Send a message from your phone!')}
@@ -189,5 +198,6 @@
   <div class="group-sms-content">
     TXT ${c.pylons_config.get('fortumo.group_message.code')} ${group.group_id} ${_('Your text')}</div>
 </div>
+%endif
 </div>
 </%def>
