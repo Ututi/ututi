@@ -1,7 +1,7 @@
 <%inherit file="/ubase-sidebar.mako" />
 <%namespace file="/portlets/user.mako" import="*"/>
 <%namespace file="/sections/content_snippets.mako" import="item_location" />
-<%namespace file="/sections/standard_objects.mako" import="subject_listitem" />
+<%namespace file="/sections/standard_objects.mako" import="subject_list" />
 
 <%def name="portlets()">
 </%def>
@@ -42,10 +42,15 @@
   background: #f8f8f8;
   margin-top: 5px 0;
   padding: 5px;
+  min-height: 22px;
 }
 
 #teacher-public-profile #actions form {
   display: inline-block;
+}
+
+#teacher-public-profile #taught-courses {
+  clear: both;
 }
 </%def>
 
@@ -67,12 +72,12 @@
         <div class="user-phone orange">${_("Phone:")} ${c.user_info.phone_number}</div>
       %endif
 
-      <div id="social-buttons">
-        ${_("Teacher online:")}
-        <br />
-        <a href="#"><img src="${url('/img/social/facebook_16.png')}" /></a>
-        <a href="#"><img src="${url('/img/social/twitter_16.png')}" /></a>
-      </div>
+      ## <div id="social-buttons">
+      ##   ${_("Teacher online:")}
+      ##   <br />
+      ##   <a href="#"><img src="${url('/img/social/facebook_16.png')}" /></a>
+      ##   <a href="#"><img src="${url('/img/social/twitter_16.png')}" /></a>
+      ## </div>
 
       %if c.user_info.site_url:
       <p class="user-link">
@@ -88,7 +93,7 @@
 
   <div id="actions">
     %if c.user is not None:
-      ${h.button_to(_('Watch teacher'), url('#'))}
+      ## ${h.button_to(_('Watch teacher'), url('#'))}
       <div style="float:right">
       ${h.button_to(_('Send message'), url(controller='messages', action='new_message', user_id=c.user_info.id))}
       </div>
@@ -100,13 +105,10 @@
     %endif
   </div>
 
-  %if c.user_info.taught_subjects:
   <div id="taught-courses">
-    <h2>${_("Taught courses")}</h2>
-    %for n, subject in enumerate(c.user_info.taught_subjects):
-      ${subject_listitem(subject, n)}
-    %endfor
-  </div>
+  %if c.user_info.taught_subjects:
+    ${subject_list(_("Taught courses"), c.user_info.taught_subjects, with_buttons=False)}
   %endif
+  </div>
 
 </div>

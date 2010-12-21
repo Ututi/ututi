@@ -489,6 +489,7 @@ ul.feature-list {
 
     .subject-description dd {
         margin-right: 15px;
+        display: inline-block; /* for width control */
     }
 
     .subject-description dd.location-tags {
@@ -503,6 +504,11 @@ ul.feature-list {
     .subject-description dd.pages {
         padding-left: 18px;
         background: url('img/icons/pages_13.png') no-repeat left center;
+    }
+
+    .subject-description dd.files,
+    .subject-description dd.pages {
+        min-width: 20px; /* makes icons line up nicely in lists */
     }
 
     .subject-description dd.watch-count {
