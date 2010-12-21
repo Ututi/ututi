@@ -19,7 +19,7 @@
   %endif
 </%def>
 
-<%def name="subject_listitem(subject, n, with_buttons=True)">
+<%def name="subject_listitem(subject, n=0, with_buttons=True)">
   <div class="u-object subject-description ${'with-top-line' if n else ''}">
     %if c.user is not None and with_buttons:
       ${subject_listitem_button(subject)}
@@ -60,7 +60,7 @@
   </div>
 </%def>
 
-<%def name="subject_listitem_search_results(subject, n, with_buttons=True)">
+<%def name="subject_listitem_search_results(subject, n=0, with_buttons=True)">
   <div class="u-object subject-description save-space-right ${'with-top-line' if n else ''}">
     %if c.user is not None and with_buttons:
       %if c.user.is_teacher and c.user.teacher_verified:
@@ -94,7 +94,7 @@
   </div>
 </%def>
 
-<%def name="group_listitem_base(group, n)">
+<%def name="group_listitem_base(group, n=0)">
   <%def name="title(group)">
     <div>
       <div class="logo">
@@ -128,7 +128,7 @@
   </div>
 </%def>
 
-<%def name="group_listitem(group, n)">
+<%def name="group_listitem(group, n=0)">
   <%self:group_listitem_base group="${group}" n="${n}">
   <div class="group-actions">
       %if group.mailinglist_enabled:

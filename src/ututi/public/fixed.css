@@ -63,44 +63,45 @@
         width: 5px;
     }
 
-    .rounded-block .large-header {
-        background: #f6f6f6;
-        border-bottom: 1px solid #ded8d8;
+/* STANDARD ITEM LIST
+ */
+
+.item-list { }
+
+    .item-list .large-header {
         height:40px;
         position:relative;
     }
 
-    .rounded-block .large-header h2 {
+    .item-list .large-header h2 {
         float: left;
         margin: 9px 0 0 10px;
     }
 
-        .rounded-block .large-header .header-button {
+        .item-list .large-header .header-button {
             position: absolute;
             right: 5px;
             top: 9px;
         }
 
-        .rounded-block .large-header .header-link {
+        .item-list .large-header .header-link {
             font-weight: normal;
             font-size: 11px;
         }
 
-    .rounded-block .row,
-    .rounded-block .footer {
-        padding: 10px 15px 5px 15px;
-        position: relative;
+    .item-list .row,
+    .item-list .footer {
     }
 
-    .rounded-block .row {
+    .item-list .row {
         border-bottom: 1px solid #ded8d8;
     }
 
-        .rounded-block .row.last {
+        .item-list .row.last {
             border-bottom: 0 none;
         }
 
-        .rounded-block.with-footer .row.last {
+        .item-list.with-footer .row.last {
             border-bottom: 1px solid #ded8d8;
         }
 
@@ -111,10 +112,6 @@
     padding: 5px 25px;
     color: #666;
 }
-
-    .standard-portlet.with-shade {
-        background-color: #f6f6f6;
-    }
 
         /* Fix color of bottom roundings */
         .standard-portlet.with-shade .cbl,
@@ -628,6 +625,10 @@ ul.feature-list {
 
 /* UTILITY CLASSES
  */
+
+.with-shade {
+    background-color: #f6f6f6;
+}
 
 .with-bottom-line {
     border-bottom: 1px solid #DED8D8;
