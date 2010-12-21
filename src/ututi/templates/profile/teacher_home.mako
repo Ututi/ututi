@@ -43,7 +43,7 @@ ${parent.head_tags()}
 </%def>
 
 <%def name="teach_group_nag()">
-<%b:rounded_block class_="standard-portlet icon-group-gray">
+<%b:rounded_block class_="standard-portlet with-shade icon-group-gray">
 <div style="float:right">
   ${h.button_to(_('add groups'), url(controller='profile', action='add_student_group'), class_='btnMedium', method='GET')}
 </div>
@@ -54,7 +54,7 @@ ${parent.head_tags()}
 </%def>
 
 <%def name="teach_course_nag()">
-<%b:rounded_block class_="standard-portlet icon-subject-orange">
+<%b:rounded_block class_="standard-portlet with-shade icon-subject-orange">
 <h2>${_('Add courses you teach')}</h2>
 <p><strong>${_('Create subjects you teach, or find those that are already created:')}</strong></p>
 <ul class="pros-list">
