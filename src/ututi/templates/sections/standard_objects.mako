@@ -60,6 +60,19 @@
   </div>
 </%def>
 
+<%def name="subject_list(title, subjects, with_buttons=True)">
+<div class="standard-portlet subject-list">
+  <div class="large-header">
+    <h2>${title}</h2>
+  </div>
+  <dl>
+  %for index, subject in enumerate(subjects):
+    ${subject_listitem(subject, index, with_buttons)}
+  %endfor
+  </dl>
+</div>
+</%def>
+
 <%def name="subject_listitem_search_results(subject, n=0, with_buttons=True)">
   <div class="u-object subject-description save-space-right ${'with-top-line' if n else ''}">
     %if c.user is not None and with_buttons:

@@ -432,6 +432,17 @@ ul.feature-list {
         background: url(img/icons/features/teacher_profile.png) no-repeat left 5px;
     }
 
+.subject-list {
+    background: url(img/icons/dalykas-off-big.png) no-repeat left top;
+    padding: 0px 0px 0px 35px;
+    margin: 10px 0px;
+}
+
+    .subject-list .subject-description {
+        padding: 5px 0px 5px 20px;
+        background-position: left 10px;
+    }
+
 /* UTUTI OBJECT DESCRIPTION
 */
 .u-object {

@@ -740,6 +740,7 @@ class AdminController(BaseController):
 
     @ActionProtector("root")
     def example_lists(self):
+        c.example_subjects = meta.Session.query(Subject).limit(5)
         return render('sections/example_lists.mako')
 
     @ActionProtector("root")
