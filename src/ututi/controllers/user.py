@@ -15,6 +15,7 @@ from ututi.lib.base import BaseController, render
 
 from ututi.model import meta, User, ContentItem, Medal
 from ututi.model.events import Event
+from ututi.model.users import Teacher
 
 log = logging.getLogger(__name__)
 
@@ -52,6 +53,10 @@ class UserController(BaseController):
             .limit(20).all()
 
         if user.is_teacher:
+            location_ids = [loc.id for loc in user.location.flatten]
+            c.all_teachers = meta.Session.query(Teacher)\
+                .filter(Teacher.location_id.in_(location_ids))\
+                .order_by(Teacher.fullname).all()
             return render('user/teacher_profile.mako')
         else:
             return render('user/index.mako')

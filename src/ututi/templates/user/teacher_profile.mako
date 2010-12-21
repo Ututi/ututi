@@ -1,9 +1,11 @@
 <%inherit file="/ubase-sidebar.mako" />
-<%namespace file="/portlets/user.mako" import="*"/>
+<%namespace file="/portlets/user.mako" import="teacher_list_portlet"/>
 <%namespace file="/sections/content_snippets.mako" import="item_location" />
 <%namespace file="/sections/standard_objects.mako" import="subject_list" />
 
 <%def name="portlets()">
+  <% title = ' '.join(c.user_info.location.title_path) + ' ' + _("teachers") %>
+  ${teacher_list_portlet(title, c.all_teachers)}
 </%def>
 
 <%def name="title()">
@@ -38,9 +40,8 @@
 }
 
 #teacher-public-profile #actions {
-  clear: both;
   background: #f8f8f8;
-  margin-top: 5px 0;
+  margin-top: 5px;
   padding: 5px;
   min-height: 22px;
 }
@@ -90,6 +91,8 @@
     <div id="about-self">${c.user_info.description}</div>
     %endif
   </div>
+
+  <div style="clear:both"></div>
 
   <div id="actions">
     %if c.user is not None:

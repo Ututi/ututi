@@ -338,3 +338,20 @@
 
   </%self:uportlet>
 </%def>
+
+<%def name="teacher_list_portlet(title, teachers)">
+  %if teachers:
+  <%self:uportlet id="teacher_list_portlet" portlet_class="MyProfile">
+    <%def name="header()">
+      ${title}
+    </%def>
+
+    <ul class="teacher-list">
+    %for teacher in teachers:
+      <li>${h.link_to(teacher.fullname, teacher.url())}</li>
+    %endfor
+    </ul>
+
+  </%self:uportlet>
+  %endif
+</%def>
