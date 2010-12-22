@@ -6,8 +6,10 @@
 
 <%def name="portlets()">
   ${share_portlet(c.user_info)}
+  %if c.user_info.location:
   <% title = ' '.join(c.user_info.location.title_path) + ' ' + _("teachers") %>
   ${teacher_list_portlet(title, c.all_teachers)}
+  %endif
 </%def>
 
 <%def name="title()">
