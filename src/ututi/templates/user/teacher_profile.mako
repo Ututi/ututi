@@ -1,9 +1,11 @@
 <%inherit file="/ubase-sidebar.mako" />
 <%namespace file="/portlets/user.mako" import="teacher_list_portlet"/>
+<%namespace file="/portlets/universal.mako" import="share_portlet"/>
 <%namespace file="/sections/content_snippets.mako" import="item_location" />
 <%namespace file="/sections/standard_objects.mako" import="subject_list" />
 
 <%def name="portlets()">
+  ${share_portlet(c.user_info)}
   <% title = ' '.join(c.user_info.location.title_path) + ' ' + _("teachers") %>
   ${teacher_list_portlet(title, c.all_teachers)}
 </%def>

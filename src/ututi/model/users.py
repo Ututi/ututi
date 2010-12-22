@@ -489,6 +489,17 @@ class Teacher(User):
         if self.teaches(subject):
             self.taught_subjects.remove(subject)
 
+    @property
+    def share_info(self):
+        if self.location:
+            caption = ' '.join(self.location.title_path) + ' ' + _("teacher")
+        else:
+            caption = _("Teacher")
+        return dict(title=self.fullname,
+                    caption=caption,
+                    link=self.url(qualified=True),
+                    description=self.description)
+
 
 class GroupNotFoundException(Exception):
     pass
