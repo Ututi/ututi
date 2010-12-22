@@ -66,3 +66,43 @@
   </%self:action_portlet>
 %endif
 </%def>
+
+<%def name="share_portlet(object)">
+  %if hasattr(object, 'share_info'):
+  <%
+    info = object.share_info
+  %>
+  <%self:uportlet id="share-portlet">
+    <%def name="header()">
+      ${_("Share with your friends")}
+    </%def>
+    <p>
+      ${_("Found it interesting? Share with your friends!")}
+    </p>
+    <ul id="share-portlet-action-list">
+      <li id="facebook-share"><a href="#share-on-facebook" id="facebook-share-link">Facebook</a></li>
+    </ul>
+
+    <script type="text/javascript">
+      //<![CDATA[
+      $(document).ready(function() {
+        $("#facebook-share-link").click(function() {
+          FB.ui(
+            {
+              method: 'feed',
+              name: '${info['title']}',
+              link: '${info['link']}',
+              %if 'caption' in info:
+              caption: '${info['caption']}',
+              %endif
+              description: '${info['description']}',
+              picture: '${url("/img/site_logo_collapsed.gif", qualified=True)}'
+            }
+          );
+        });
+      });
+      //]]>
+    </script>
+  </%self:uportlet>
+  %endif
+</%def>

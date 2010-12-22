@@ -722,6 +722,12 @@ class ContentItem(object):
                 return level
         return 0
 
+    @property
+    def share_info(self):
+        raise NotImplementedError("This method should be overridden by Ututi"
+                                  " objects to provide their link, title and"
+                                  " description.")
+
 
 class Folder(list):
 

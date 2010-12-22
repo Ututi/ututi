@@ -278,6 +278,7 @@ ${self.anonymous_menu()}
 
     ${h.stylesheet_link(h.path_with_hash('/style.css'))}
     ${h.stylesheet_link(h.path_with_hash('/fixed.css'))}
+    ${h.stylesheet_link(h.path_with_hash('/portlets.css'))}
     ${h.javascript_link('/javascript/jquery-1.4.3.min.js')}
     ${h.javascript_link('/javascript/ajaxupload.3.5.js')}
     ${h.javascript_link('/javascript/jquery.qtip.min.js')}

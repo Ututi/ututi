@@ -1,0 +1,18 @@
+/* This is the style file for portlet styles only.
+ */
+
+#share-portlet-content { }
+
+    #share-portlet-content ul#share-portlet-action-list { }
+
+        #share-portlet-content ul#share-portlet-action-list li {
+            list-style: none;
+            padding: 5px 5px 5px 20px;
+            background-repeat: no-repeat;
+            background-position: left center;
+        }
+
+        #share-portlet-content ul#share-portlet-action-list li#facebook-share {
+            background-image: url(img/social/facebook_16.png);
+        }
+
