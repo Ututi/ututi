@@ -54,8 +54,14 @@ Book owner will get my message
     >>> browser.click('uBooks: Second user asks about book My physics book')
     >>> browser.printCssQuery(".post-body")
 	<div class="post-body">
-      Second user sent you a private message, asking about book My physics book (http://localhost/books/show/4):<br />	  <br />
-      Hi, I will buy your book!
+    Second user sent you a private message, asking about book My physics book (http://localhost/books/show/4):<br />
+    <br />Hi, I will buy your book!<br />
 	</div>
-    >>> ##TODO: make test to check mails
-    >>> ##print mail_queue.pop()
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> len(mail_queue)
+    1
+
+    >>> print mail_queue.pop().payload()
+	Second user sent you a private message, asking about book My physics book (http://localhost/books/show/4):
+	Hi, I will buy your book!
