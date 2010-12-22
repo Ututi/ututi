@@ -68,7 +68,7 @@
 </%def>
 
 <%def name="share_portlet(object)">
-  %if hasattr(object, 'share_info'):
+  %if c.user is not None and hasattr(object, 'share_info'):
   <%
     info = object.share_info
   %>
