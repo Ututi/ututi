@@ -36,6 +36,8 @@ class EmailPasswordMatchValidator(validators.FormValidator):
         if not form_dict['new_password'] or not form_dict['email']:
             return
         user = User.get(form_dict['email'])
+        if user is None:
+            return
         if not user.checkPassword(form_dict['new_password'].encode('utf-8')):
             raise Invalid(self.message('taken', state),
                           form_dict, state,
@@ -78,7 +80,7 @@ class TeacherController(BaseController, FederationMixin):
 
             #check if this is an existing user
             existing = User.get(email)
-            if existing.checkPassword(password.encode('utf-8')):
+            if existing is not None and existing.checkPassword(password.encode('utf-8')):
                 teacher_request_email(existing)
                 h.flash(_('Thank You! Your request to become a teacher has been received. We will notify You once we grant You the rights of a teacher.'))
                 sign_in_user(existing)
