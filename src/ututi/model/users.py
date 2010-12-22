@@ -59,6 +59,12 @@ class User(object):
     """The User object - Ututi users."""
     is_teacher = False
 
+    def change_type(self, type, **kwargs):
+        from ututi.model import users_table
+        conn = meta.engine.connect()
+        upd = users_table.update().where(users_table.c.id==id).values(user_type=type, **kwargs)
+        conn.execute(upd)
+
     @property
     def email(self):
         email = self.emails[0]

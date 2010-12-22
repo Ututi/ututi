@@ -1,0 +1,45 @@
+Test if existing users can use the teacher registration form
+============================================================
+
+If an existing user goes throught the teacher registration form,
+entering his email address and actual ututi password, an email
+is sent to ututi admins, notifying them that the user wants to
+become a teacher.
+
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/teacher/register')
+    >>> form = browser.getForm(id='teacher_registration_form')
+    >>> form.getControl('Full name').value = 'Mr. teacher'
+    >>> form.getControl('Email').value = 'user@ututi.lt'
+    >>> form.getControl(name='new_password').value = 'password'
+    >>> form.getControl(name='agree').value = True
+    >>> form.getControl('Register').click()
+
+    >>> browser.url
+    'http://localhost/home'
+
+    >>> browser.printQuery("//div[@class='flash-message']//span/text()")
+    Thank You! Your request to become a teacher has been received. We will notify You once we grant You the rights of a teacher.
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> print mail_queue.pop().payload()
+    A user wants to become a teacher:
+    Alternative user (user@ututi.lt)
+    http://localhost/admin/teachers?user_id=2
+    Ututi
+
+If the passwords don't match, the user get an error message for the email (since it's taken):
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/teacher/register')
+    >>> form = browser.getForm(id='teacher_registration_form')
+    >>> form.getControl('Full name').value = 'Mr. teacher'
+    >>> form.getControl('Email').value = 'user@ututi.lt'
+    >>> form.getControl(name='new_password').value = 'notthepassword'
+    >>> form.getControl(name='agree').value = True
+    >>> form.getControl('Register').click()
+
+    >>> browser.url
+    'http://localhost/teacher/register'
+
+    >>> browser.printQuery("//span[@class='error-message']/text()")
+    This email address is already in use.
