@@ -34,7 +34,7 @@ from ututi.model import ForumPost
 from ututi.model import get_supporters
 from ututi.model import LocationTag, BlogEntry, TeacherGroup
 from ututi.model import meta, Email, User
-from ututi.controllers.profile.validators import HideElementForm
+from ututi.controllers.profile.validators import HideElementForm, MultiRcptEmailForm
 from ututi.controllers.profile.validators import ContactForm, LocationForm, LogoUpload, PhoneConfirmationForm,\
     PhoneForm, ProfileForm, PasswordChangeForm, StudentGroupForm, StudentGroupDeleteForm, StudentGroupMessageForm
 from ututi.controllers.profile.wall import WallMixin, WallSettingsForm
@@ -459,6 +459,19 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
         meta.Session.commit()
         location = meta.Session.query(LocationTag).filter_by(id=location_id).one()
         redirect(url(controller='structureview', action='index', path='/'.join(location.path)))
+
+    @ActionProtector("user")
+    @js_validate(schema=MultiRcptEmailForm())
+    @jsonify
+    def send_email_message_js(self):
+        if hasattr(self, 'form_result'):
+            msg = EmailMessage(self.form_result['subject'],
+                               self.form_result['message'],
+                               sender=c.user.emails[0].email,
+                               force=True)
+            for rcpt in self.form_result['recipients']:
+                msg.send(rcpt)
+            return {'success': True}
 
 
 class UserProfileController(ProfileControllerBase):

@@ -16,3 +16,11 @@
             background-image: url(img/social/facebook_16.png);
         }
 
+        #share-portlet-content ul#share-portlet-action-list li#email-share {
+            background-image: url(img/social/email_16.png);
+        }
+
+    #share-portlet-content #email-share-dialog {
+        display: none;
+    }
+

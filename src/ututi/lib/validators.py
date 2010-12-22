@@ -338,6 +338,25 @@ class GroupCouponValidator(validators.FancyValidator):
         if error is not None:
             raise Invalid(self.message(error, state), value, state)
 
+class CommaSeparatedListValidator(validators.FancyValidator):
+    """A validator splits form field value for further validation,
+    used for chaining comma separated list validation (e.g. emails)."""
+
+    messages = { 'empty': _(u"Please enter at least one value.") }
+
+    def _to_python(self, value, state):
+        print value
+        if not value:
+            raise Invalid(self.message('empty', state), value, state)
+
+        from string import strip
+
+        separated = filter(bool, map(strip, value.split(',')))
+        if len(separated) == 0:
+            raise Invalid(self.message('empty', state), value, state)
+
+        return separated
+
 def js_validate(schema=None, validators=None, form=None, variable_decode=False,
              dict_char='.', list_char='-', post_only=True, state=None,
              on_get=False, ignore_request=False, defaults=None, **htmlfill_kwargs):
@@ -446,3 +465,4 @@ def js_validate(schema=None, validators=None, form=None, variable_decode=False,
         return func(self, *args, **kwargs)
 
     return decorator(wrapper)
+
