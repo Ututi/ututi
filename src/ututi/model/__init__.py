@@ -2433,6 +2433,12 @@ class SchoolGrade(object):
         except NoResultFound:
             return None
 
+    def get_books(self, **kwargs):
+        books = meta.Session.query(Book).filter(Book.school_grade==self)
+        if kwargs:
+             books = books.filter_by(**kwargs)
+        return books.all()
+
 
 class ScienceType(object):
     """Representation of book science type"""
@@ -2457,6 +2463,12 @@ class ScienceType(object):
             return Department.get(self.book_department_id)
 
         return property(getDepartment, setDepartment)
+
+    def get_books(self, **kwargs):
+        books = meta.Session.query(Book).filter(Book.science_type==self)
+        if kwargs:
+             books = books.filter_by(**kwargs)
+        return books.all()
 
 
 class BookType(object):
