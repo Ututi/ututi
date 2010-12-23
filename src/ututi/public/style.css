@@ -2937,15 +2937,6 @@ li.file img.delete_button {
     cursor: pointer;
 }
 
-li.teacher.file .filename {
-    font-weight: bold;
-}
-
-li.teacher.file .author {
-    padding-left: 10px;
-    background: url(img/icons/teacher_small.png) no-repeat left center;
-}
-
 /* end files */
 
 /* folders */
@@ -5222,3 +5213,16 @@ a.disabled, a.disabled:hover {
 }
 
 /* End contact settings */
+
+/* Teacher's material specific stylings */
+
+.teacher-content .filename {
+    font-weight: bold;
+}
+
+.teacher-content .author {
+    padding-left: 10px;
+    background: url(img/icons/teacher_small.png) no-repeat left center;
+}
+
+/* End teacher's material specific stylings */

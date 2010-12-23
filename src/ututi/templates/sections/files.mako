@@ -395,7 +395,7 @@ $(document).ready(function(){
 
 <%def name="file(file, new_file=False, hidden=False)">
   %if file.deleted is None:
-            <li class="${file.created.is_teacher and 'teacher ' or ''}file${hidden and ' show' or ''}">
+            <li class="${file.created.is_teacher and 'teacher-content ' or ''}file${hidden and ' show' or ''}">
               %if new_file or file.created.is_teacher: ## catch eye
                 ${h.image('/images/details/icon_drag_file_orange.png', alt='file icon', class_='drag-target')}
               %else:
@@ -429,7 +429,7 @@ $(document).ready(function(){
               %endif
             </li>
   %else: ## deleted file
-            <li class="${file.created.is_teacher and 'teacher ' or ''}file">
+            <li class="${file.created.is_teacher and 'teacher-content ' or ''}file">
               %if file.created.is_teacher: ## catch eye
                 ${h.image('/images/details/icon_drag_file_orange.png', alt='file icon', class_='drag-target')}
               %else:
