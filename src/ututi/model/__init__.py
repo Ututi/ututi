@@ -1457,6 +1457,13 @@ class Page(ContentItem):
             raise AttributeError("This page has no versions!")
 
     @property
+    def original_version(self):
+        if self.versions:
+            return self.versions[-1]
+        else:
+            raise AttributeError("This page has no versions!")
+
+    @property
     def title(self):
         return self.last_version.title
 

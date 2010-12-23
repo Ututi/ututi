@@ -5225,4 +5225,8 @@ a.disabled, a.disabled:hover {
     background: url(img/icons/teacher_small.png) no-repeat left center;
 }
 
+.teacher-content.wiki-tekstas, .teacher-content.wiki-tekstas-last{
+    background: url('img/icons/wiki-very-small-orange.png') no-repeat 25px 10px;
+}
+
 /* End teacher's material specific stylings */
