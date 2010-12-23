@@ -24,3 +24,20 @@
         display: none;
     }
 
+        /* dialog pops out of #share-portlet-content */
+        #email-share-dialog #feedback-message {
+            display: none;
+            color: #D45500;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        #email-share-dialog.email-sent #feedback-message {
+            display: block;
+        }
+
+        #email-share-dialog.email-sent form {
+            display: none;
+        }
+
+

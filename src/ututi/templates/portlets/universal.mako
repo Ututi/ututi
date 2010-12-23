@@ -100,6 +100,7 @@
           ${h.input_submit(_("Send"), class_='btnMedium', id='email-submit-button')}
         </div>
       </form>
+      <p id="feedback-message">${_("Your email was successfully sent.")}</p>
     </div>
 
     <script type="text/javascript">
@@ -122,18 +123,20 @@
           return false;
         });
 
+        $('#email-share-dialog').dialog({
+            title: '${_("Send via email")}',
+            width: 350,
+            autoOpen: false
+        });
+
         $("#email-share-link").click(function() {
-          var dlg = $('#email-share-dialog').dialog({
-              title: '${_("Send via email")}',
-              width: 350
-          });
-          dlg.dialog("open");
+          $('#email-share-dialog').dialog('open');
           return false;
         });
 
         $('#email-submit-button').click(function(){
-            form = $(this).closest('form');
-            action_url = form.attr('action');
+            var form = $(this).closest('form');
+            var action_url = form.attr('action');
 
             $.post(action_url,
                    form.serialize(),
@@ -147,7 +150,14 @@
                            }
                        }
                        else {
-                           $('#email-share-dialog').dialog("close");
+                           // show feedback to user
+                           $('#email-share-dialog').addClass('email-sent').delay(1000).queue(function() {
+                             // close and clean up
+                             $(this).dialog('close');
+                             $(this).removeClass('email-sent');
+                             $(this).find('#recipients').val('');
+                             $(this).dequeue();
+                           });
                        }
                    },
                    "json");
