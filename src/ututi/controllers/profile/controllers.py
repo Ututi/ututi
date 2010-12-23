@@ -460,14 +460,13 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
         location = meta.Session.query(LocationTag).filter_by(id=location_id).one()
         redirect(url(controller='structureview', action='index', path='/'.join(location.path)))
 
-    @ActionProtector("user")
     @js_validate(schema=MultiRcptEmailForm())
     @jsonify
     def send_email_message_js(self):
         if hasattr(self, 'form_result'):
             msg = EmailMessage(self.form_result['subject'],
                                self.form_result['message'],
-                               sender=c.user.emails[0].email,
+                               sender=self.form_result['sender'],
                                force=True)
             for rcpt in self.form_result['recipients']:
                 msg.send(rcpt)

@@ -160,6 +160,7 @@ class StudentGroupDeleteForm(Schema):
 class MultiRcptEmailForm(Schema):
     allow_extra_fields = True
 
+    sender = validators.Email(not_empty=True)
     msg = {'empty': _(u"Please enter email subject.")}
     subject = validators.String(not_empty=True, messages=msg)
     msg = {'empty': _(u"Message can not be empty.")}

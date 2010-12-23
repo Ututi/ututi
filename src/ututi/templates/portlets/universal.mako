@@ -68,7 +68,7 @@
 </%def>
 
 <%def name="share_portlet(object)">
-  %if c.user is not None and hasattr(object, 'share_info'):
+  %if hasattr(object, 'share_info'):
   <%
     info = object.share_info
   %>
@@ -91,6 +91,11 @@
         message = "\n\n---\n\n%(title)s\n\n%(description)s\n\n%(link)s" % \
           dict(title=info['title'], description=info['description'], link=info['link'])
         %>
+        %if c.user is None:
+        ${h.input_line('sender', _("Your email"))}
+        %else:
+        <input type="hidden" name="sender" value="${c.user.emails[0].email}" />
+        %endif
         ${h.input_line('recipients', _("Recipients"),
                        help_text=_("Enter comma separated list of email addresses"))}
         ${h.input_line('subject', _("E-mail subject"), value=subject)}
@@ -155,6 +160,7 @@
                              // close and clean up
                              $(this).dialog('close');
                              $(this).removeClass('email-sent');
+                             $('.error-message').remove();
                              $(this).find('#recipients').val('');
                              $(this).dequeue();
                            });
