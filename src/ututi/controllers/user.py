@@ -56,6 +56,7 @@ class UserController(BaseController):
             if user.location:
                 location_ids = [loc.id for loc in user.location.flatten]
                 c.all_teachers = meta.Session.query(Teacher)\
+                    .filter(Teacher.id != user.id)\
                     .filter(Teacher.location_id.in_(location_ids))\
                     .order_by(Teacher.fullname).all()
             else:
