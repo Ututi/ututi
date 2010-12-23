@@ -36,7 +36,7 @@ class Message(object):
 
 class EmailMessage(Message):
     """Email message."""
-    def __init__(self, subject, text, html=None, sender=None, force=False, ignored_recipients=[]):
+    def __init__(self, subject, text, html=None, sender=None, force=False, ignored_recipients=[], attachments=[]):
         if sender is None:
             sender = config['ututi_email_from']
 
@@ -45,6 +45,7 @@ class EmailMessage(Message):
         self.subject = subject
         self.text = text
         self.html = html
+        self.attachments = attachments
 
     def send(self, recipient):
         if recipient in self.ignored_recipients:
@@ -55,7 +56,8 @@ class EmailMessage(Message):
                     EmailValidator.to_python(recipient)
                     recipient.encode('ascii')
                     send_email(self.sender, recipient, self.subject, self.text,
-                                 html_body=self.html)
+                               html_body=self.html,
+                               attachments=self.attachments)
                 except (Invalid, UnicodeEncodeError):
                     log.debug("Invalid email %(email)s" % dict(email=recipient))
             else:
