@@ -395,11 +395,11 @@ $(document).ready(function(){
 
 <%def name="file(file, new_file=False, hidden=False)">
   %if file.deleted is None:
-            <li class="file${hidden and ' show' or ''}">
-              %if new_file:
-                ${h.image('/images/details/icon_drag_file_new.png', alt='file icon', class_='drag-target')|n}
+            <li class="${file.created.is_teacher and 'teacher ' or ''}file${hidden and ' show' or ''}">
+              %if new_file or file.created.is_teacher: ## catch eye
+                ${h.image('/images/details/icon_drag_file_orange.png', alt='file icon', class_='drag-target')}
               %else:
-                ${h.image('/images/details/icon_drag_file.png', alt='file icon', class_='drag-target')|n}
+                ${h.image('/images/details/icon_drag_file.png', alt='file icon', class_='drag-target')}
               %endif
                 ${h.link_to(file.title, file.url(), class_='filename')}
               %if file.can_write():
@@ -429,8 +429,12 @@ $(document).ready(function(){
               %endif
             </li>
   %else: ## deleted file
-            <li class="file">
-              ${h.image('/images/details/icon_drag_file.png', alt='file icon', class_='drag-target')|n}
+            <li class="${file.created.is_teacher and 'teacher ' or ''}file">
+              %if file.created.is_teacher: ## catch eye
+                ${h.image('/images/details/icon_drag_file_orange.png', alt='file icon', class_='drag-target')}
+              %else:
+                ${h.image('/images/details/icon_drag_file.png', alt='file icon', class_='drag-target')}
+              %endif
               <span class="file_name">
                 ${file.title}
               </span>
@@ -439,7 +443,7 @@ $(document).ready(function(){
               %endif
               <span class="size">(${h.file_size(file.size)})</span>
               <span class="date">${_('deleted')} ${h.fmt_dt(file.deleted_on)}</span>,
-              <a href="${file.deleted.url()}" class="author">
+              <a href="${file.deleted.url()}" class="${'author' if file.deleted == file.created else 'deleted-by'}">
                 ${file.deleted.fullname}
               </a>
               <input class="move_url" type="hidden" value="${file.url(action='move')}" />
@@ -469,6 +473,8 @@ $(document).ready(function(){
         <input class="folder_name" id="file_folder_name-${section_id}-${fid}" type="hidden" value="${folder.title}" />
         <%
            files = [file for file in folder if file.deleted is None]
+           # show teacher files before the rest (python sort is stable)
+           files.sort(lambda x, y: int(y.created.is_teacher) - int(x.created.is_teacher))
            hidden = False
            file_count = len(files)
         %>
@@ -501,6 +507,8 @@ $(document).ready(function(){
         <%
            style = ''
            files = [file for file in folder if file.deleted is None]
+           # show teacher files before the rest (python sort is stable)
+           files.sort(lambda x, y: int(y.created.is_teacher) - int(x.created.is_teacher))
            file_count = len(files)
            is_open = file_count > 4
            if files:
@@ -697,6 +705,8 @@ $(document).ready(function(){
           files = [file for file in obj.files
                    if (file.deleted is not None and
                        not file.isNullFile())]
+          # show teacher files before the rest (python sort is stable)
+          files.sort(lambda x, y: int(y.created.is_teacher) - int(x.created.is_teacher))
           if not files: style = h.literal('style="display: none"')
       else:
           style = h.literal('style="display: none"')
@@ -708,9 +718,7 @@ $(document).ready(function(){
         %if files:
               <li style="display: none;" class="message">${_("There are no deleted files.")}</li>
               %for file in files:
-                %if file.deleted is not None:
                   <%self:file file="${file}" />
-                %endif
               %endfor
         %else:
               <li class="message">${_("There are no deleted files.")}</li>

@@ -2924,7 +2924,8 @@ li.file .date {
     color: #666;
 }
 
-li.file .author {
+li.file .author,
+li.file .deleted-by {
     font-size: 0.85em;
 }
 
@@ -2934,6 +2935,15 @@ li.file img.flag_button,
 li.file img.delete_button {
     vertical-align: middle;
     cursor: pointer;
+}
+
+li.teacher.file .filename {
+    font-weight: bold;
+}
+
+li.teacher.file .author {
+    padding-left: 10px;
+    background: url(img/icons/teacher_small.png) no-repeat left center;
 }
 
 /* end files */
