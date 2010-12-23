@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-12-22 00:25+0300\n"
+"PO-Revision-Date: 2010-12-23 12:10+0300\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
@@ -25,7 +25,7 @@ msgid "Specify correct book department."
 msgstr "Podaj prawidłowy typ książki."
 
 msgid "Specify book department."
-msgstr ""
+msgstr "Sprecyzuj tematykę książki."
 
 msgid "Specify correct science type."
 msgstr "Określ właściwy typ nauki."
@@ -602,7 +602,7 @@ msgid "Search"
 msgstr "Szukaj"
 
 msgid "General information"
-msgstr ""
+msgstr "Informacje ogólne"
 
 msgid "Contacts"
 msgstr "Kontakty"
@@ -672,17 +672,17 @@ msgid "Your phone number has been confirmed."
 msgstr "Twój numer telefonu został potwierdzony."
 
 msgid "Group added!"
-msgstr ""
+msgstr "Grupa została dodana!"
 
 msgid "Group updated!"
-msgstr ""
+msgstr "Grupa została zaktualizowana!"
 
 msgid "Group deleted."
-msgstr ""
+msgstr "Grupa została usunięta."
 
 #, python-format
 msgid "Message from Your teacher: %s"
-msgstr ""
+msgstr "Wiadomość od Twojego wykładowcy: %s"
 
 msgid "This is not the confirmation code we sent you."
 msgstr "Błędny kod!"
@@ -1257,7 +1257,7 @@ msgid "All groups"
 msgstr "Wszystkie grupy"
 
 msgid "inbox"
-msgstr ""
+msgstr "wiadomości"
 
 msgid "Settings"
 msgstr "Ustawienia"
@@ -1853,7 +1853,7 @@ msgid "New book"
 msgstr "Nowa książka"
 
 msgid "Learning books market"
-msgstr ""
+msgstr "Rynek podręczników"
 
 msgid "About U-Books"
 msgstr "O U-Books"
@@ -1910,7 +1910,7 @@ msgid "It's place where you find new owner for you old good textbook."
 msgstr "To miejsce, gdzie możesz znaleźć nowego właściciela dla Twojego starego, dobrego podręcznika."
 
 msgid "Newest books"
-msgstr ""
+msgstr "Najnowsze książki"
 
 msgid "Books added"
 msgstr "Książki dodał"
@@ -2135,10 +2135,10 @@ msgstr "Łatwa komunikacja z Twoimi studentami."
 
 #, python-format
 msgid "The teacher %(teacher_name)s (%(teacher_url)s) sent a message to Your group:"
-msgstr ""
+msgstr "Nauczyciel %(teacher_name)s (%(teacher_url)s) wysłał wiadomość Twojej grupie:"
 
 msgid "If You reply to this message, the teacher will not get Your replies."
-msgstr ""
+msgstr "Jeśli odpowiesz na tę wiadomość, nauczyciel nie dostanie Twoich odpowiedzi."
 
 msgid "A new teacher has registered:"
 msgstr "Nowy nauczyciel został zarejestrowany:"
@@ -2453,7 +2453,7 @@ msgid "Members only"
 msgstr "Tylko członkowie"
 
 msgid "Everybody (moderated)"
-msgstr ""
+msgstr "Wszyscy (moderowane)"
 
 msgid "If you select 'moderated', you can pick the people who you want to allow to post to the mailing list."
 msgstr ""
@@ -3249,13 +3249,13 @@ msgid "More news"
 msgstr "Więcej wiadomości"
 
 msgid "Teacher's information"
-msgstr ""
+msgstr "Informacje o nauczycielu"
 
 msgid "teacher"
-msgstr ""
+msgstr "nauczyciel"
 
 msgid "Phone:"
-msgstr ""
+msgstr "Numer telefonu:"
 
 msgid "Friends of ututi"
 msgstr "Przyjaciele Ututi"
@@ -3273,10 +3273,10 @@ msgid "Read our blog"
 msgstr "Czytaj nasz blog"
 
 msgid "Add a student group"
-msgstr ""
+msgstr "Dodaj grupę studencką"
 
 msgid "Email address"
-msgstr ""
+msgstr "Adres e-mail "
 
 msgid "back to home page"
 msgstr "strona główna"
@@ -3285,10 +3285,10 @@ msgid "Your GG number"
 msgstr "Twoje GG"
 
 msgid "GG number is not confirmed"
-msgstr ""
+msgstr "Numer GG nie jest potwierdzony."
 
 msgid "Enter the code that you have received in your GG"
-msgstr ""
+msgstr "Wpisz kod, który otrzymałeś na GG"
 
 msgid ""
 "\n"
@@ -3296,6 +3296,10 @@ msgid ""
 "                      Should you not have received the code, please press \"Send code again\".\n"
 "                      Also don't forget to add Ututi (<a href=\"gg:5437377\">5437377</a>) to your friends!"
 msgstr ""
+"\n"
+"\n"
+"                     Jeśli nie otrzymałeś jeszcze kodu potwierdzającego, kliknij \"Wyślij kod ponownie\".\n"
+"                     Nie zapomnij również dodać Ututi (<a href=\"gg:5437377\">5437377</a>) do znajomych!"
 
 msgid "Submit code"
 msgstr "Potwierdź kod"
@@ -3304,7 +3308,7 @@ msgid "Send code again"
 msgstr "Wyślij kod ponownie"
 
 msgid "GG number is confirmed"
-msgstr ""
+msgstr "Numer GG został potwierdzony."
 
 msgid "Receive news into gg"
 msgstr "Otrzymuj powiadomienia na gg"
@@ -3313,43 +3317,43 @@ msgid "Mobile phone number"
 msgstr "Numer telefonu komórkowego"
 
 msgid "Number is not confirmed"
-msgstr ""
+msgstr "Numer nie jest potwierdzony."
 
 msgid "Enter the code that you have received by SMS"
-msgstr ""
+msgstr "Wpisz kod, który otrzymałeś(-aś) SMSem."
 
 msgid "Should you not have received the code, please press \"Send code again\""
-msgstr ""
+msgstr "Jeśli nie otrzymałeś(-aś) jeszcze kodu potwierdzającego, kliknij \"Wyślij kod ponownie\"."
 
 msgid "Number is confirmed"
-msgstr ""
+msgstr "Numer został potwierdzony"
 
 msgid "Email is confirmed"
-msgstr ""
+msgstr "Adres e-mail został potwierdzony"
 
 msgid "Get confirmation email"
-msgstr ""
+msgstr "Otrzymaj e-mail z potwierdzeniem"
 
 msgid "Email is not confirmed"
-msgstr ""
+msgstr "Adres e-mail nie jest potwierdzony"
 
 msgid "Link with Google and Facebook"
-msgstr ""
+msgstr "Połącz z Google i Facebookiem"
 
 msgid "Link Google"
-msgstr ""
+msgstr "Połącz z Google"
 
 msgid "Unlink Google"
-msgstr ""
+msgstr "Zerwij połączenie z Google"
 
 msgid "Link Facebook"
-msgstr ""
+msgstr "Połącz z Facebookiem"
 
 msgid "Unlink Facebook"
-msgstr ""
+msgstr "Zerwij połączenie z Facebookiem"
 
 msgid "Click the buttons to link or unlink your profile with Google and/or Facebook"
-msgstr ""
+msgstr "Kliknij przyciski, aby połączyć się lub zerwać połączenie z Google i/lub Facebookiem"
 
 msgid "Address of your website or blog"
 msgstr "Adres Twojej strony lub bloga"
@@ -3373,7 +3377,7 @@ msgid "Repeat the new password"
 msgstr "Wpisz ponownie nowe hasło"
 
 msgid "Edit a student group"
-msgstr ""
+msgstr "Edytuj grupę studencką"
 
 msgid "What's new?"
 msgstr "Powiadomienia"
@@ -3537,7 +3541,7 @@ msgid "50 litas"
 msgstr "50 złotych"
 
 msgid "Delete this group?"
-msgstr ""
+msgstr "Chcesz usunąć tę grupę?"
 
 msgid "Welcome to Ututi!"
 msgstr "Witaj na Ututi!"
@@ -3546,28 +3550,28 @@ msgid "You have not been confirmed as a teacher yet. Our administrators will ver
 msgstr "Nasi administratorzy nie potwierdzili jeszcze, że jesteś nauczycielem. Na pewno zrobią to wkrótce. Do tego czasu Twoje prawa na profilu mogą być ograniczone."
 
 msgid "add groups"
-msgstr ""
+msgstr "dodaj grupy"
 
 msgid "My student groups"
-msgstr ""
+msgstr "Moje grupy studenckie"
 
 msgid "Add student groups that you teach to."
-msgstr ""
+msgstr "Dodaj grupy studenckie, które uczysz."
 
 msgid "Add courses you teach"
-msgstr ""
+msgstr "Dodaj przedmioty, których uczysz"
 
 msgid "Create subjects you teach, or find those that are already created:"
-msgstr ""
+msgstr "Stwórz przedmioty, których uczysz lub znajdź przedmioty, które już istnieją:"
 
 msgid "Here you will be able to upload course material, and groups watching the subject will be notified automatically."
-msgstr ""
+msgstr "Tutaj możesz dodać materiały dotyczące danego przedmiotu. Grupy obserwujące ten przedmiot będą o tym powiadomione automatycznie."
 
 msgid "You will be able to send messages to groups watching the subject."
-msgstr ""
+msgstr "Będziesz mógł wysyłać wiadomości do grup obserwujących przedmiot."
 
 msgid "Some other killer argument: i.e. how did I live without Ututi all this time?"
-msgstr ""
+msgstr "Jeszcze jeden niepodważalny argument: mianowicie, jak żyłem bez Ututi cały ten czas?"
 
 msgid "add courses"
 msgstr "dodaj przedmioty"
@@ -3582,10 +3586,10 @@ msgid "My courses"
 msgstr "Moje przedmioty"
 
 msgid "Student groups"
-msgstr ""
+msgstr "Grupy studenckie"
 
 msgid "Add a group"
-msgstr ""
+msgstr "Dodaj grupę"
 
 msgid "Thank you for supporting Ututi!"
 msgstr "Dziękujemy za wsparcie Ututi!"
@@ -3642,7 +3646,7 @@ msgid "Moderated posts"
 msgstr ""
 
 msgid "New groups"
-msgstr ""
+msgstr "Nowe grupy"
 
 msgid "Wall settings"
 msgstr "Ustawienia strony"
@@ -3812,7 +3816,7 @@ msgid "%(user)s wants to join the group %(group)s. Do you want to confirm this m
 msgstr "%(user)s chcą dołączyć do grupy %(group)s. Czy chcesz ich przyjąć do grupy?"
 
 msgid "I teach this"
-msgstr ""
+msgstr "Uczę tego"
 
 msgid "Files:"
 msgstr "Pliki:"
@@ -3821,13 +3825,13 @@ msgid "Wiki pages:"
 msgstr "Wiki:"
 
 msgid "Edit group"
-msgstr ""
+msgstr "Edytuj grupę"
 
 msgid "Edit this group"
-msgstr ""
+msgstr "Edytuj tę grupę"
 
 msgid "Delete this group"
-msgstr ""
+msgstr "Usuń tę grupę"
 
 msgid "Send message"
 msgstr "Wyślij wiadomość"
