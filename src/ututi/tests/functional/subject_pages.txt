@@ -122,7 +122,7 @@ We should see the page on the list of pages, even though it has been deleted:
             <a href="/subject/vu/mat_analize/page/4" title="How to be awesome!">How to be awesome!</a>
           </span>
           <span class="grey verysmall">...</span>
-          <span class="orange verysmall">
+          <span class="author verysmall">
             <a href="/user/1">Adminas Adminovix</a>
           </span>
         </p>
@@ -167,7 +167,7 @@ Now the page shows up in the index again without the "deleted" marker:
             <a href="/subject/vu/mat_analize/page/4" title="How to be awesome!">How to be awesome!</a>
           </span>
           <span class="grey verysmall">...</span>
-          <span class="orange verysmall">
+          <span class="author verysmall">
             <a href="/user/1">Adminas Adminovix</a>
           </span>
         </p>
