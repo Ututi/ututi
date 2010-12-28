@@ -2,6 +2,7 @@ from datetime import datetime
 import logging
 import facebook
 import random
+import simplejson
 
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql.expression import desc
@@ -652,10 +653,10 @@ class TeacherProfileController(ProfileControllerBase):
     @group_teacher_action
     @ActionProtector("group_teacher")
     @js_validate(schema=StudentGroupMessageForm())
-    @jsonify
     def studentgroup_send_message_js(self, group):
         if hasattr(self, 'form_result'):
-            return self._studentgroup_send_message(group, js=True)
+            output = self._studentgroup_send_message(group, js=True)
+            return simplejson.dumps(output)
 
     def _studentgroup_send_message(self, group, js=False):
         if hasattr(self, 'form_result'):
