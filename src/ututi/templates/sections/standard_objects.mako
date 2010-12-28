@@ -191,12 +191,12 @@
   <%self:group_listitem_base group="${group}" n="${0}">
     <%def name="title(group)">
       <div class="hide_me">
-        <div style="float: right;">
+        <div style="position: absolute; left: 0;">
         <a href="${url(controller='profile', action='edit_student_group', id=group.id)}" class="edit_group" title="${_('Edit group')}">
           ${h.image('/images/details/icon_edit.png', alt=_('Edit this group'))}
         </a>
         </div>
-        <div style="float: right;">
+        <div style="position: absolute; left: 15px;">
         <form method="POST" action="${url(controller='profile', action='delete_student_group')}">
           <div>
             <input type="hidden" name="group_id" value="${group.id}" class="event_type"/>
