@@ -24,24 +24,26 @@ $(document).ready(function() {
         message = $('.message', form).val();
 
         if ((subject != '') && (message != '')) {
-            $.post(message_send_url,
-                   $(this).closest('form').serialize(),
-                   function(data, status) {
-                       return function() {
-                           if (data.success != true) {
-                               for (var key in data.errors) {
-                                   var error = data.errors[key];
-                                   $('.'+key, form).parent().after($('<div class="error-message">'+error+'</div>'));
+            form.ajaxSubmit({
+                url: message_send_url,
+                iframe: true,
+                dataType: 'json',
+                success: function(data, status) {
+                           return function() {
+                               if (data.success != true) {
+                                   for (var key in data.errors) {
+                                       var error = data.errors[key];
+                                       $('.'+key, form).parent().after($('<div class="error-message">'+error+'</div>'));
+                                   }
+                               } else {
+                                   $(form).find('input[type!="hidden"], textarea').val('');
+                                   container = $(form).closest('.group-description');
+                                   $('.send_message', container).click();
+                                   $('.message-sent', container).removeClass('hidden');
                                }
-                           } else {
-                               $(form).find('input, textarea').val('');
-                               container = $(form).closest('.group-description');
-                               $('.send_message', container).click();
-                               $('.message-sent', container).removeClass('hidden');
-                           }
-                       }(data, status, form);
-                   }
-            );
+                           }(data, status, form);
+                }
+            });
         }
         return false;
     });

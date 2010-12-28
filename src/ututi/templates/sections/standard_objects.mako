@@ -246,7 +246,7 @@
   </div>
   <div class="send_message_block click-action-block" id="send_message_${group.id}-block">
     <a class="${not active and 'inactive' or ''}" name="send-message"></a>
-    <form method="POST" action="${url(controller='profile', action='studentgroup_send_message', id=group.id)}" class="inelement-form">
+    <form method="POST" action="${url(controller='profile', action='studentgroup_send_message', id=group.id)}" class="inelement-form group-message-form" enctype="multipart/form-data">
       <input type="hidden" name="message_send_url" class="message_send_url" value="${url(controller='profile', action='studentgroup_send_message_js', id=group.id)}" />
       ${h.input_line('subject', _('Message subject:'), class_='message_subject wide-input')}
       <div class="formArea">
@@ -254,10 +254,17 @@
           <textarea name="message" class="message" rows="5" rows="50"></textarea>
         </label>
       </div>
+      <div class="formField">
+        <label for="file">
+          <span class="labelText">${_('Attachment:')}</span>
+          <input type="file" name="file" />
+        </label>
+      </div>
+      <br class="clear-right" />
       <div class="formSubmit">
         ${h.input_submit(_('Send'), class_="btn message_send")}
       </div>
-      <br class="clearLeft" />
+      <br class="clear-right" />
     </form>
   </div>
   <div class="message-sent hidden action-reply">

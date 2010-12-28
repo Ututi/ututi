@@ -29,7 +29,7 @@ from ututi.lib.validators import js_validate
 from ututi.lib.validators import manual_validate
 
 from ututi.model.events import Event, TeacherMessageEvent
-from ututi.model import ForumCategory
+from ututi.model import ForumCategory, File
 from ututi.model import ForumPost
 from ututi.model import get_supporters
 from ututi.model import LocationTag, BlogEntry, TeacherGroup
@@ -671,20 +671,37 @@ class TeacherProfileController(ProfileControllerBase):
                               extra_vars={'teacher':c.user,
                                           'subject':subject,
                                           'message':message})
-
             if group.group is not None:
                 recipient = group.group
                 if recipient.mailinglist_enabled:
+                    attachments = []
+                    if self.form_result['file'] != '':
+                        file = self.form_result['file']
+                        f = File(file.filename, file.filename, mimetype=file.type)
+                        f.store(file.file)
+                        meta.Session.add(f)
+                        meta.Session.commit()
+                        attachments.append(f)
+
                     post = post_message(recipient,
                                         c.user,
                                         subject,
                                         msg_text,
-                                        force=True)
+                                        force=True,
+                                        attachments=attachments)
                 else:
+                    attachments = []
+                    if self.form_result['file'] != '':
+                        attachments = [{'filename': self.form_result['file'].filename,
+                                        'file': self.form_result['file'].file}]
+
                     msg = EmailMessage(_('Message from Your teacher: %s') % subject,
                                        msg_text,
-                                       sender=recipient.list_address)
+                                       sender=recipient.list_address,
+                                       attachments=attachments)
+
                     msg.send(group.group)
+
                     evt = TeacherMessageEvent()
                     evt.context = group.group
                     evt.data = '%s \n\n %s' % (subject, msg_text)
@@ -693,7 +710,12 @@ class TeacherProfileController(ProfileControllerBase):
                     meta.Session.commit()
 
             else:
-                msg = EmailMessage(subject, msg_text, sender=c.user.emails[0].email, force=True)
+                attachments = []
+                if self.form_result['file'] != '':
+                    attachments = [{'filename': self.form_result['file'].filename,
+                                    'file': self.form_result['file'].file}]
+
+                msg = EmailMessage(subject, msg_text, sender=c.user.emails[0].email, force=True, attachments=attachments)
                 msg.send(group.email)
 
             if js:

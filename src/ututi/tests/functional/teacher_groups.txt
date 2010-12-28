@@ -150,3 +150,30 @@ Let's try sending an sms:
 
     >>> print sms_queue.pop()
     ('+37067812375', u'Hi, guys! (sms 2)')
+
+And let's try sending messages with attachments:
+
+    >>> browser.getControl(name='subject', index=1).value = 'a message to the group with an attachment'
+    >>> browser.getControl(name='message', index=1).value = 'Hi, guys!'
+    >>> import cStringIO
+    >>> browser.getControl(name='file', index=1).add_file(cStringIO.StringIO('The contents of the file.'), 'text/plain', 'file.txt')
+    >>> browser.getControl('Send', index=1).click()
+    >>> len(mail_queue)
+    1
+    >>> print mail_queue.pop().payload()
+    The teacher Benas (http://localhost/user/5) sent a message to Your group:
+    Hi, guys!
+    If You reply to this message, the teacher will not get Your replies.
+    file.txt - http://localhost/group/moderators/mailinglist/file/6/5
+
+    >>> browser.getControl(name='subject', index=0).value = 'a message to the group with an attachment'
+    >>> browser.getControl(name='message', index=0).value = 'Hi, guys!'
+    >>> import cStringIO
+    >>> browser.getControl(name='file', index=0).add_file(cStringIO.StringIO('The contents of the file.'), 'text/plain', 'file.txt')
+    >>> browser.getControl('Send', index=0).click()
+    >>> len(mail_queue)
+    1
+    >>> print mail_queue.pop().payload()
+    The teacher Benas (http://localhost/user/5) sent a message to Your group:
+    Hi, guys!
+    If You reply to this message, the teacher will not get Your replies.
