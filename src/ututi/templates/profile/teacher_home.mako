@@ -17,6 +17,18 @@
     margin-top: 10px;
 }
 
+#groups_list div.large-header {
+    background: #f6f6f6 url("/images/details/icon_group_25x25.png") 10px 6px no-repeat;
+    padding-left: 35px;
+}
+
+#groups_list .group-description .logo {
+    width: 20px;
+}
+
+#groups_list .group-description .group-actions {
+    padding-left: 20px;
+}
 </%def>
 
 <%def name="head_tags()">
