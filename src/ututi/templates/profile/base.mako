@@ -5,18 +5,13 @@
 ${user_sidebar()}
 </%def>
 
-<%def name="pagetitle()">
-${_('Home')}
-</%def>
-
-<h1 class="pageTitle">${self.pagetitle()}</h1>
+%if hasattr(self, 'pagetitle'):
+  <h1 class="pageTitle">${self.pagetitle()}</h1>
+%endif
 
 <%
   ## Now this is a bit ugly, but these tabs will go away soon anyhow.
-  show_tabs = True
-  if c.user.is_teacher:
-    if not c.user.taught_subjects and not c.user.student_groups:
-      show_tabs = False
+  show_tabs = not c.user.is_teacher
 %>
 
 %if c.action and show_tabs:
