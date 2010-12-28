@@ -93,7 +93,7 @@ def compose_email(sender, recipient, subject, body, html_body=None,
         part = MIMEBase('application', "octet-stream")
         part.set_payload(f['file'].read())
         Encoders.encode_base64(part)
-        part.add_header('Content-Disposition', 'attachment; filename="%s"' % f['name'])
+        part.add_header('Content-Disposition', 'attachment; filename="%s"' % f['filename'])
         msg.attach(part)
 
     msg['From'] = formataddr((sender_name, sender_addr))

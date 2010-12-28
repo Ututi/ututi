@@ -64,7 +64,7 @@ def test_message_attachments():
         >>> config._push_object(pylons.test.pylonsapp.config)
         >>> import cStringIO
 
-        >>> msg = EmailMessage("the subject", 'The contents of the file.', attachments=[{'name': 'file.txt', 'file':cStringIO.StringIO('the content')}])
+        >>> msg = EmailMessage("the subject", 'The contents of the file.', attachments=[{'filename': 'file.txt', 'file':cStringIO.StringIO('the content')}])
 
         >>> msg.send('someemail@somehost.lt')
 
