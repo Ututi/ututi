@@ -81,7 +81,7 @@
         .item-list .large-header .header-button {
             position: absolute;
             right: 5px;
-            top: 9px;
+            top: 6px;
         }
 
         .item-list .large-header .header-link {
@@ -564,7 +564,7 @@ ul.feature-list {
 
     .group-description .group-actions {
         clear: left;
-        padding-top: 15px;
+        padding-top: 5px;
     }
 
     .group-description .location-tags {

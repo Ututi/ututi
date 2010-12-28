@@ -213,6 +213,7 @@
           <dt>
             ${group.title}
           </dt>
+          <dd class="group-email"> ${group.email} </dd>
           %if group.group:
           <dd class="location-tags">
             %for index, tag in enumerate(group.group.location.hierarchy(True)):
@@ -223,9 +224,6 @@
             %endfor
           </dd>
           %endif
-          <div><dd class="group-email">
-            ${group.email}
-          </dd></div>
         </div>
       </div>
     </%def>

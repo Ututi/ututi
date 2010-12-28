@@ -29,6 +29,24 @@
 #groups_list .group-description .group-actions {
     padding-left: 20px;
 }
+
+#groups_list .inelement-form .formField label {
+    float: left;
+}
+
+#groups_list .inelement-form textarea {
+    margin: 5px 0 0;
+}
+
+#groups_list .inelement-form .formSubmit {
+    clear: left;
+    margin: 5px 0;
+    float: none;
+}
+
+#groups_list .send_message_block {
+    padding-left: 20px;
+}
 </%def>
 
 <%def name="head_tags()">
