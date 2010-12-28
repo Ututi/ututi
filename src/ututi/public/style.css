@@ -1177,6 +1177,7 @@ input.checkbox,
 
 /* Portlets */
 .portlet, #SearchResults, .portletModule, .portlet-verysmall {
+    background: #f6f6f6;
     background-repeat: no-repeat;
     border-left: 1px solid #ded8d8;
     border-right: 1px solid #ded8d8;

@@ -76,18 +76,6 @@ ${parent.head_tags()}
 </script>
 </%def>
 
-<%def name="teacher_unverified_nag()">
-<%self:rounded_block id="teacher_unverified" class_="portletTeacherUnverified">
-<div class="inner">
-  <h2 class="portletTitle bold">${_('Welcome to Ututi!')}</h2>
-  <div>
-    ${_('You have not been confirmed as a teacher yet. Our administrators will verify you shortly.'
-        'Until then, your profile rights may be limited.')}
-  </div>
-</div>
-</%self:rounded_block>
-</%def>
-
 <%def name="teach_group_nag()">
 <%b:rounded_block class_="standard-portlet with-shade icon-group-gray">
 <div style="float:right">
@@ -163,10 +151,6 @@ ${h.button_to(_('add courses'), url(controller='subject', action='add'), class_=
   </dl>
 </div>
 </%def>
-
-%if not c.user.teacher_verified:
-  ${teacher_unverified_nag()}
-%endif
 
 %if c.user.teacher_verified:
   <div id="subject_list">

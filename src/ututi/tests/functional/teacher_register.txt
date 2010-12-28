@@ -22,9 +22,9 @@ let's type in that url:
     Your email (teacher@vu.lt) is not confirmed! Please confirm your email by clicking on the link sent to your address or
 
 The teacher is also shown a block that informs him he is not verified yet:
-    >>> browser.printQuery("id('teacher_unverified')//text()")
+    >>> browser.printQuery("id('unverified_teacher_block')//text()")
     Welcome to Ututi!
-    You have not been confirmed as a teacher yet. Our administrators will verify you shortly.Until then, your profile rights may be limited.
+    At the moment You are not confirmed as a teacher. Our administrators have been notified and will verify You shortly. Please be patient. Meanwhile please tell us more about yourself.
 
 
 Teacher gets a confirmation email so he could approve his

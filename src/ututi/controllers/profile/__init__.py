@@ -3,7 +3,7 @@ import logging
 from ututi.model.users import Teacher
 from ututi.lib.base import BaseController
 from ututi.lib.security import current_user
-from ututi.controllers.profile.controllers import UserProfileController, TeacherProfileController
+from ututi.controllers.profile.controllers import UserProfileController, TeacherProfileController, UnverifiedTeacherProfileController
 
 log = logging.getLogger(__name__)
 
@@ -15,6 +15,8 @@ def ProfileController():
     """
     user = current_user()
     if isinstance(user, Teacher):
+        if not user.teacher_verified:
+            return UnverifiedTeacherProfileController()
         return TeacherProfileController()
     else:
         return UserProfileController()

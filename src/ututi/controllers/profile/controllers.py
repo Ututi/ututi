@@ -587,10 +587,6 @@ class TeacherProfileController(ProfileControllerBase):
 
         return render('/profile/teacher_home.mako')
 
-    @ActionProtector("user")
-    def register_welcome(self):
-        return render('profile/teacher_home.mako')
-
     @ActionProtector("teacher")
     @validate(schema=StudentGroupForm, form='add_student_group', on_get=False)
     def add_student_group(self):
@@ -723,3 +719,34 @@ class TeacherProfileController(ProfileControllerBase):
             else:
                 h.flash(_('Message sent.'))
                 redirect(url(controller='profile', action='home'))
+
+
+class UnverifiedTeacherProfileController(ProfileControllerBase):
+
+    @ActionProtector("teacher")
+    def home(self):
+        return htmlfill.render(self._edit_profile_form(),
+                               defaults=self._edit_form_defaults())
+
+    def _edit_profile_form(self):
+        self._set_settings_tabs(current_tab='general')
+        return render('profile/unverified_teacher_edit.mako')
+
+    def _set_settings_tabs(self, current_tab):
+        c.current_tab = current_tab
+        c.tabs = [
+            {'title': _("General information"),
+             'name': 'general',
+             'link': url(controller='profile', action='edit')},
+            {'title': _("Contacts"),
+             'name': 'contacts',
+             'link': url(controller='profile', action='edit_contacts')}]
+
+    def _edit_contacts_form(self):
+        self._set_settings_tabs(current_tab='contacts')
+        return render('profile/unverified_teacher_edit_contacts.mako')
+
+    @ActionProtector("teacher")
+    def register_welcome(self):
+        return self.home()
+
