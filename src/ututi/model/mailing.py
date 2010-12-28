@@ -237,8 +237,11 @@ class GroupMailingListMessage(ContentItem):
             message.replace_header('Reply-To', address)
         except KeyError:
             message.add_header('Reply-To', address)
-        message.add_header('Errors-To', config.get('email_to', 'errors@ututi.lt'))
-        message.add_header('List-Id', address)
+
+        if not message.getHeader('Errors-To'):
+            message.add_header('Errors-To', config.get('email_to', 'errors@ututi.lt'))
+        if not message.getHeader('List-Id'):
+            message.add_header('List-Id', address)
 
         if footer:
             payload = self.body + footer
