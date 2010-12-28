@@ -97,7 +97,7 @@ def test_message_attachments():
         <BLANKLINE>
         dGhlIGNvbnRlbnQ=
         --===============0957416568342600015==--
-
+        >>> config._pop_object(pylons.test.pylonsapp.config)
 
     """
 
