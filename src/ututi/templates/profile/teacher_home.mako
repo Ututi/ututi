@@ -1,10 +1,57 @@
 <%inherit file="/profile/home_base.mako" />
 <%namespace file="/sections/standard_buttons.mako" import="close_button" />
-<%namespace file="/sections/standard_blocks.mako" name="b" import="item_list"/>
+<%namespace file="/sections/standard_blocks.mako" name="b" import="rounded_block, item_list"/>
 <%namespace file="/sections/standard_objects.mako" import="group_listitem_teacherdashboard"/>
+
+<%def name="css()">
+.group-description .sms-widget #sms_message {
+    width: 420px;
+}
+
+.group-description .sms-widget .sms-box {
+    background: transparent;
+}
+
+.send_sms_block {
+    width: 450px;
+    margin-top: 10px;
+}
+
+#groups_list div.large-header {
+    background: #f6f6f6 url("/images/details/icon_group_25x25.png") 10px 6px no-repeat;
+    padding-left: 35px;
+}
+
+#groups_list .group-description .logo {
+    width: 20px;
+}
+
+#groups_list .group-description .group-actions {
+    padding-left: 20px;
+}
+
+#groups_list .inelement-form .formField label {
+    float: left;
+}
+
+#groups_list .inelement-form textarea {
+    margin: 5px 0 0;
+}
+
+#groups_list .inelement-form .formSubmit {
+    clear: left;
+    margin: 5px 0;
+    float: none;
+}
+
+#groups_list .send_message_block {
+    padding-left: 20px;
+}
+</%def>
 
 <%def name="head_tags()">
 ${parent.head_tags()}
+  ${h.javascript_link('/javascript/teacher_dashboard.js')}
 <script type="text/javascript">
   $(document).ready(function() {
     $('.unteach-button').click(function() {
@@ -18,94 +65,45 @@ ${parent.head_tags()}
       });
       return false;
     });
+
+    $('.delete_group').click(function() {
+        var answer = confirm("${_('Delete this group?')}");
+        if (! answer) {
+            return false;
+        }
+    });
   });
 </script>
 </%def>
 
-<%def name="teacher_unverified_nag()">
-<%self:rounded_block id="teacher_unverified" class_="portletTeacherUnverified">
-<div class="inner">
-  <h2 class="portletTitle bold">${_('Welcome to Ututi!')}</h2>
-  <div>
-    ${_('You have not been confirmed as a teacher yet. Our administrators will verify you shortly.'
-        'Until then, your profile rights may be limited.')}
-  </div>
-</div>
-</%self:rounded_block>
-</%def>
-
 <%def name="teach_group_nag()">
-<%self:rounded_block id="teacher_groups_empty" class_="portletNewGroup">
-<div class="floatleft usergrupeleft">
-  <h2 class="portletTitle bold">${_('Enter the groups of your students')}</h2>
-  <ul id="prosList">
-    <li>${_('Send messages to Your students easily')}</li>
-  </ul>
+<%b:rounded_block class_="standard-portlet with-shade icon-group-gray">
+<div style="float:right">
+  ${h.button_to(_('add groups'), url(controller='profile', action='add_student_group'), class_='btnMedium', method='GET')}
 </div>
-<div class="floatleft usergruperight">
-  <form action="${url(controller='profile', action='add_student_group')}" method="GET"
-        style="float: none">
-    <fieldset>
-      <legend class="a11y">${_('Add a group')}</legend>
-      <label><button value="submit" class="btnMedium"><span>${_('Add a group')}</span></button>
-      </label>
-    </fieldset>
-  </form>
-  <div class="right_cross"><a id="hide_suggest_teach_group" href="">${_('no, thanks')}</a></div>
-</div>
-<br class="clear-left" />
-<script type="text/javascript">
-  //<![CDATA[
-    $('#hide_suggest_teach_group').click(function() {
-        $(this).closest('.portlet').hide();
-        $.post('${url(controller='profile', action='js_hide_element')}',
-               {type: 'suggest_teach_group'});
-        return false;
-    });
-  //]]>
-</script>
-</%self:rounded_block>
+<h2>${_('My student groups')}</h2>
+<p>${_("Add student groups that you teach to.")}</p>
+<div style="clear:both"></div>
+</%b:rounded_block>
 </%def>
 
 <%def name="teach_course_nag()">
-<%self:rounded_block id="teacher_courses_empty" class_="portletNewDalykas">
-<div class="floatleft usergrupeleft">
-  <h2 class="portletTitle bold">${_('Please specify the courses you are teaching')}</h2>
-  <ul id="prosList">
-    <li>${_('Get in touch with your students')}</li>
-    <li>${_('Share course materials easily')}</li>
-  </ul>
-</div>
-<div class="floatleft usergruperight">
-  <form action="${url(controller='subject', action='add')}" method="GET"
-        style="float: none">
-    <fieldset>
-      <legend class="a11y">${_('Find courses I teach')}</legend>
-      <label><button value="submit" class="btnMedium"><span>${_('find courses I teach')}</span></button>
-      </label>
-    </fieldset>
-  </form>
-  <div class="right_cross"><a id="hide_suggest_teach_course" href="">${_('no, thanks')}</a></div>
-</div>
-<br class="clear-left" />
-<script type="text/javascript">
-  //<![CDATA[
-    $('#hide_suggest_teach_course').click(function() {
-        $(this).closest('.portlet').hide();
-        $.post('${url(controller='profile', action='js_hide_element')}',
-               {type: 'suggest_teach_course'});
-        return false;
-    });
-  //]]>
-</script>
-</%self:rounded_block>
+<%b:rounded_block class_="standard-portlet with-shade icon-subject-orange">
+<h2>${_('Add courses you teach')}</h2>
+<p><strong>${_('Create subjects you teach, or find those that are already created:')}</strong></p>
+<ul class="pros-list">
+  <li>${_('Here you will be able to upload course material, and groups studying the subject will be notified automatically.')}</li>
+  <li>${_('All Your course materials with be organized in one place.')}</li>
+</ul>
+${h.button_to(_('add courses'), url(controller='subject', action='add'), class_='btnMedium', method='GET')}
+</%b:rounded_block>
 </%def>
 
 <%def name="subject_list(subjects)">
 <div class="subject-description-list">
   <dl>
     %for n, subject in enumerate(subjects):
-    <div class="subject-description ${'with-top-line' if n else ''}">
+    <div class="u-object subject-description ${'with-top-line' if n else ''}">
       ${close_button(url(controller='profile', action='unteach_subject', subject_id=subject.id), class_='unteach-button')}
       <div>
         <dt>
@@ -153,16 +151,6 @@ ${parent.head_tags()}
 </div>
 </%def>
 
-%if not c.user.teacher_verified:
-  ${teacher_unverified_nag()}
-%endif
-
-%if c.user.location is not None:
-${self.location_updated()}
-%else:
-${self.location_nag(_('Tell us where you work'))}
-%endif
-
 %if c.user.teacher_verified:
   <div id="subject_list">
     %if c.user.taught_subjects:
@@ -191,7 +179,7 @@ ${self.location_nag(_('Tell us where you work'))}
     %if c.user.student_groups:
     <%b:item_list title="${_('Student groups')}" items="${c.user.student_groups}">
       <%def name="header_button()">
-        ${h.button_to(_('Add a group'), url(controller='profile', action='add_student_group'))}
+        ${h.button_to(_('Add a group'), url(controller='profile', action='add_student_group'), method='GET')}
       </%def>
       <%def name="row(item)">
         ${group_listitem_teacherdashboard(item)}

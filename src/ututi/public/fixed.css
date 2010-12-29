@@ -63,67 +63,159 @@
         width: 5px;
     }
 
-    .rounded-block .large-header {
-        background: #f6f6f6;
-        border-bottom: 1px solid #ded8d8;
+/* STANDARD ITEM LIST
+ */
+
+.item-list { }
+
+    .item-list .large-header {
         height:40px;
         position:relative;
     }
 
-    .rounded-block .large-header h2 {
+    .item-list .large-header h2 {
         float: left;
         margin: 9px 0 0 10px;
     }
 
-        .rounded-block .large-header .header-button {
+        .item-list .large-header .header-button {
             position: absolute;
             right: 5px;
-            top: 9px;
+            top: 6px;
         }
 
-        .rounded-block .large-header .header-link {
+        .item-list .large-header .header-link {
             font-weight: normal;
             font-size: 11px;
         }
 
-    .rounded-block .row,
-    .rounded-block .footer {
-        padding: 10px 15px 5px 15px;
-        position: relative;
+    .item-list .row,
+    .item-list .footer {
     }
 
-    .rounded-block .row {
+    .item-list .row {
         border-bottom: 1px solid #ded8d8;
     }
 
-        .rounded-block .row.last {
+        .item-list .row.last {
             border-bottom: 0 none;
         }
 
-        .rounded-block.with-footer .row.last {
+        .item-list.with-footer .row.last {
             border-bottom: 1px solid #ded8d8;
         }
 
-/* NEW STYLE FORMS
+/* STANDARD PORTLETS.
+ */
+
+.standard-portlet {
+    padding: 5px 25px;
+    color: #666;
+}
+
+        /* Fix color of bottom roundings */
+        .standard-portlet.with-shade .cbl,
+        .standard-portlet.with-shade .cbr {
+            background-image: url('img/portlets_bg_gray.png');
+        }
+
+    .standard-portlet h2 {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .standard-portlet p {
+        margin: 5px 0px;
+    }
+
+    .standard-portlet.icon-subject-orange {
+        background-image: url('images/details/icon_subject_orange.png');
+        background-position: 10px 5px;
+        background-repeat: no-repeat;
+        padding-left: 70px;
+    }
+    
+    .standard-portlet.icon-group-gray {
+        background-image: url('images/details/icon_group_42x35.png');
+        background-position: 15px 5px;
+        background-repeat: no-repeat;
+        padding-left: 70px;
+    }
+    
+    .standard-portlet button {
+        margin-top: 10px;
+    }
+
+/* NEW STYLE FORMS.
+ * "new-style-form" is a namespace for now.
  */
 
 .new-style-form {
 }
 
-    .new-style-form .labelText,
-    .new-style-form .inputField {
+    .new-style-form span.labelText,
+    .new-style-form span.inputField,
+    .new-style-form span.helpText {
         display: block;
     }
 
-    .new-style-form .labelText {
+    .new-style-form span.labelText {
         font-weight: bold;
         margin: 10px 0px 2px 0px;
+    }
+
+    .new-style-form span.helpText {
+        color: #666;
+        font-size: 10px;
+    }
+
+    .new-style-form input[type='text'],
+    .new-style-form input[type='password'],
+    .new-style-form textarea,
+    .new-style-form span.helpText {
+        width: 300px;
     }
 
     .new-style-form button {
         margin-top: 20px;
     }
 
+    .new-style-form .rightNext {
+        margin-left: 15px;
+    }
+
+    .new-style-form .rightNext button {
+        margin-top: -1px;
+    }
+
+    .new-style-form button.btn-text {
+        /* pretending to look like simple link */
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #d45500;
+        font: 13px normal Arial, Helvetica, sans-serif; 
+    }
+
+    .new-style-form button.btn-text:hover span {
+        text-decoration: underline;
+    }
+
+    .new-style-form span.field-status {
+        display: block;
+        margin-top: 2px;
+        /* should attract attention */
+        color: #d45500;
+        font-size: 10px;
+    }
+
+    .new-style-form span.field-status.confirmed {
+        /* should bring peace  */
+        color: #666;
+        background: url(img/icons/tick_10.png) no-repeat left center;
+        padding-left: 12px;
+        font-style: italic;
+    }
 
 /* SUBJECT ADD PAGE STYLE
  * A lot of it should be later generalized for other views.
@@ -232,6 +324,49 @@
             background: url(img/icons/arrows_right.png) no-repeat left center;
         }
 
+/* TEACHER REGISTRATION PAGE
+ */
+
+#teacher-registration-page {
+    color: #4d4d4d;
+    padding: 50px 0px;
+}
+
+    #teacher-registration-page .two-panel-layout {
+        text-align: center;
+    }
+
+        #teacher-registration-page .two-panel-layout .left-panel,
+        #teacher-registration-page .two-panel-layout .right-panel {
+            background: url(img/faded-box-400px.png) no-repeat left bottom;
+            width: 320px;
+            min-height: 350px;
+            padding: 10px 40px;
+            text-align: left; /* Reset centering */
+        }
+
+        #teacher-registration-page .two-panel-layout.with-right-panel .left-panel {
+            border: none;
+            margin-right: 50px;
+        }
+
+    #teacher-registration-page h1.page-title {
+        font-weight: bold;
+        font-size: 18px;
+        margin: 0;
+    }
+
+    #teacher-registration-page p {
+        margin: 10px 0px;
+    }
+
+    #teacher-registration-page ul.feature-list li {
+        /* Diferrent than standard spacing. */
+        margin-bottom: 20px; 
+        padding-left: 80px;
+    }
+
+
 /* SIMPLE LISTS
  * Simple list styles that provide bullet images and spacing.
  */
@@ -244,6 +379,17 @@ ul.teacher-list {
     ul.teacher-list li {
         background: url(img/icons/teacher_small.png) no-repeat left center;
         padding-left: 12px;
+        margin: 2px 0px;
+    }
+
+ul.pros-list {
+    list-style-type: none;
+    margin: 4px 8px;
+}
+
+    ul.pros-list li {
+        background: url(img/icons/tick_big.png) no-repeat left center;
+        padding-left: 24px;
         margin: 2px 0px;
     }
 
@@ -274,10 +420,50 @@ ul.feature-list {
         background: url(img/icons/features/dialog.png) no-repeat left 5px;
     }
 
+    ul.feature-list li.contact-groups {
+        background: url(img/icons/features/contact_groups.png) no-repeat left 5px;
+    }
+
+    ul.feature-list li.sms {
+        background: url(img/icons/features/sms.png) no-repeat left 5px;
+    }
+
+    ul.feature-list li.teacher-profile {
+        background: url(img/icons/features/teacher_profile.png) no-repeat left 5px;
+    }
+
+.subject-list {
+    background: url(img/icons/dalykas-off-big.png) no-repeat left top;
+    padding: 0px 0px 0px 35px;
+    margin: 10px 0px;
+}
+
+    .subject-list .subject-description {
+        padding: 5px 0px 5px 20px;
+        background-position: left 10px;
+    }
+
 /* UTUTI OBJECT DESCRIPTION
 */
+.u-object {
+    position: relative;
+}
+
 .u-object dt, .u-object dd {
     display: inline;
+}
+
+.u-object .hide_me {
+  position: absolute;
+  right: 30px;
+  top: 10px;
+  display: none;
+  width: 15px;
+  height: 15px;
+}
+
+.row:hover .u-object .hide_me {
+  display: block;
 }
 
 
@@ -303,6 +489,7 @@ ul.feature-list {
 
     .subject-description dd {
         margin-right: 15px;
+        display: inline-block; /* for width control */
     }
 
     .subject-description dd.location-tags {
@@ -317,6 +504,11 @@ ul.feature-list {
     .subject-description dd.pages {
         padding-left: 18px;
         background: url('img/icons/pages_13.png') no-repeat left center;
+    }
+
+    .subject-description dd.files,
+    .subject-description dd.pages {
+        min-width: 20px; /* makes icons line up nicely in lists */
     }
 
     .subject-description dd.watch-count {
@@ -372,13 +564,17 @@ ul.feature-list {
 
     .group-description .group-actions {
         clear: left;
-        padding-top: 15px;
+        padding-top: 5px;
     }
 
     .group-description .location-tags {
         display: inline;
         font-size: 14px;
         margin-left: 10px;
+    }
+
+    .group-description  .edit_group {
+        cursor: pointer;
     }
 
     .group-description .group-actions dd {
@@ -404,6 +600,12 @@ ul.feature-list {
         .group-description dd.subjects {
             background: url('img/icons/dalykas-very-small.png') no-repeat left;
         }
+
+        .group-description dd.sms {
+            background: url('img/icons/sms_small.png') no-repeat left;
+        }
+
+
 /* GENERAL TWO PANEL LAYOUT
  */
 
@@ -446,6 +648,10 @@ ul.feature-list {
 /* UTILITY CLASSES
  */
 
+.with-shade {
+    background-color: #f6f6f6;
+}
+
 .with-bottom-line {
     border-bottom: 1px solid #DED8D8;
 }
@@ -465,3 +671,76 @@ ul.feature-list {
 .grey-text {
     color: #666;
 }
+
+/* FLASH MESSAGE
+ */
+/* flash messages */
+.flash-message,
+.action-reply {
+    border: 1px solid #FF7800;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    background: white url("../images/details/icon_usmall.png") 10px center no-repeat;
+    margin: 5px 0 0.8em;
+    padding: 0.6em 3em 0.6em 35px;
+    position: relative;
+    font-size: 14px;
+    color: #666;
+}
+
+    .flash-message .close-link {
+        position: absolute;
+        top: 5px; right: 10px;
+        color: black;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .message {
+        color: #333333;
+    }
+
+
+/* IN-ELEMENT FORM
+   (a small form shown e.g. in dashboard actions)
+ */
+    .inelement-form .send-message {  }
+
+        .inelement-form .wide-input {
+            width: 350px;
+        }
+
+        .inelement-form .labelText {
+            margin-right: 15px;
+        }
+
+        .inelement-form .formField {
+            width: 500px;
+            margin: 5px 0;
+        }
+
+        .inelement-form .formField label {
+            margin: 5px 0;
+            float: right;
+        }
+
+        .inelement-form textarea {
+          border: 1px solid #888;
+          background: white;
+          width: 500px;
+          margin: 5px 50px;
+        }
+
+        .inelement-form .formSubmit {
+            float: right;
+            margin: 5px 50px;
+        }
+
+/* CLICK ACTION BLOCKS
+ a pattern-in-progress: click-action opens an associated click-action-block,
+  maintaining that one block of a group is shown at a time
+ */
+.click-action-block {
+    display: none;
+}
+    .click-action-block.open { display: block; }

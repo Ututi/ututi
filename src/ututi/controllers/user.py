@@ -8,7 +8,6 @@ from routes.util import url_for
 
 from pylons.i18n import _
 
-import ututi.lib.helpers as h
 from ututi.controllers.home import sign_in_user
 from ututi.lib.security import ActionProtector, deny
 from ututi.lib.image import serve_logo
@@ -16,6 +15,7 @@ from ututi.lib.base import BaseController, render
 
 from ututi.model import meta, User, ContentItem, Medal
 from ututi.model.events import Event
+from ututi.model.users import Teacher
 
 log = logging.getLogger(__name__)
 
@@ -52,7 +52,18 @@ class UserController(BaseController):
             .order_by(desc(Event.created))\
             .limit(20).all()
 
-        return render('user/index.mako')
+        if user.is_teacher:
+            if user.location:
+                location_ids = [loc.id for loc in user.location.flatten]
+                c.all_teachers = meta.Session.query(Teacher)\
+                    .filter(Teacher.id != user.id)\
+                    .filter(Teacher.location_id.in_(location_ids))\
+                    .order_by(Teacher.fullname).all()
+            else:
+                c.all_teachers = []
+            return render('user/teacher_profile.mako')
+        else:
+            return render('user/index.mako')
 
     @profile_action
     @ActionProtector("root")

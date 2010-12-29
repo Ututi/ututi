@@ -77,6 +77,11 @@ class ReceivemailController(BaseController):
         for md5, mimetype, filename in zip(md5_list,
                                            mime_type_list,
                                            file_name_list):
+            if message.author is not None:
+                meta.Session.execute("SET ututi.active_user TO %d" % message.author.id)
+                request.environ['repoze.who.identity'] = message.author.id
+            else:
+                meta.Session.execute("SET ututi.active_user TO ''")
 
             # XXX we are not filtering nonsense files like small
             # images, pgp signatures, vcards and html bodies yet.

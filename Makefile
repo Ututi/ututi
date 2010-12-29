@@ -196,7 +196,7 @@ import_backup: instance/var/run/.s.PGSQL.${PGPORT}
 	droplang plpgsql development -h ${PWD}/instance/var/run/ || true
 	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
 	${PG_PATH}/bin/pg_restore -d development -h ${PWD}/instance/var/run --no-owner < backup/dbdump || true
-	psql -h ${PWD}/instance/var/run/ -d development -c "update users set password = '2M/gReXQLaGpx28PT7mBFLWS0sC04eClUH80' where id = 1"
+	psql -h ${PWD}/instance/var/run/ -d development -c "update users set password = '2M/gReXQLaGpx28PT7mBFLWS0sC04eClUH80'"
 
 .PHONY: download_backup_files
 download_backup_files:
@@ -216,7 +216,7 @@ test_migration: instance/var/run/.s.PGSQL.${PGPORT}
 
 .PHONY: dbdump
 dbdump: instance/var/run/.s.PGSQL.${PGPORT}
-	${PG_PATH}/bin/pg_dump --format=c -h ${PWD}/instance/var/run/ -d development > dbdump
+	${PG_PATH}/bin/pg_dump --format=c -h ${PWD}/instance/var/run/ development > dbdump
 
 .PHONY: test_migration_2
 test_migration_2: instance/var/run/.s.PGSQL.${PGPORT}
@@ -233,6 +233,7 @@ test_migration_2: instance/var/run/.s.PGSQL.${PGPORT}
 
 .PHONY: test_translations
 test_translations: bin/pofilter
+	bin/py setup.py update_catalog --ignore-obsolete=yes --no-fuzzy-matching
 	bin/pofilter --progress=none -t xmltags -t printf --nous ${PWD}/src/ututi/i18n/ -o ${PWD}/parts/test_translations/
 	diff -r -u ${PWD}/src/ututi/tests/expected_i18n_errors/lt ${PWD}/parts/test_translations/lt
 	diff -r -u ${PWD}/src/ututi/tests/expected_i18n_errors/pl ${PWD}/parts/test_translations/pl

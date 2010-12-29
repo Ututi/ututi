@@ -296,10 +296,13 @@ def trackEvent(obj, action, label, category='navigation'):
             label))
 
 
-def input_line(name, title, value='', explanation=None, **kwargs):
+def input_line(name, title, value='', help_text=None, right_next=None, **kwargs):
     expl = None
-    if explanation is not None:
-        expl = HTML.span(class_='helpText', c=explanation)
+    if help_text is not None:
+        expl = HTML.span(class_='helpText', c=help_text)
+    next = None
+    if right_next is not None:
+        next = HTML.span(class_='rightNext', c=right_next)
 
     from pylons import tmpl_context as c
     kwargs.setdefault('id', name)
@@ -308,16 +311,16 @@ def input_line(name, title, value='', explanation=None, **kwargs):
                     HTML.span(class_='labelText', c=[title]),
                     HTML.span(class_='textField', c=[
                             HTML.input(type='text', value=value, name_=name, **kwargs),
-                            HTML.span(class_='edge')
-                            ])]),
+                            HTML.span(class_='edge')])]),
+                       next,
                        expl,
                        HTML.literal('<form:error name="%s" />' % name)])
 
 
-def input_psw(name, title, value='', explanation=None, **kwargs):
+def input_psw(name, title, value='', help_text=None, **kwargs):
     expl = None
-    if explanation is not None:
-        expl = HTML.span(class_='helpText', c=explanation)
+    if help_text is not None:
+        expl = HTML.span(class_='helpText', c=help_text)
     from pylons import tmpl_context as c
     kwargs.setdefault('id', name)
     return HTML.div(class_='formField',
@@ -331,10 +334,10 @@ def input_psw(name, title, value='', explanation=None, **kwargs):
                        HTML.literal('<form:error name="%s" />' % name)])
 
 
-def input_area(name, title, value='', cols='50', rows='5', explanation=None, disabled=False, **kwargs):
+def input_area(name, title, value='', cols='50', rows='5', help_text=None, disabled=False, **kwargs):
     expl = None
-    if explanation is not None:
-        expl = HTML.span(class_='helpText', c=explanation)
+    if help_text is not None:
+        expl = HTML.span(class_='helpText', c=help_text)
     kwargs = {}
     if disabled:
         kwargs['disabled'] = 'disabled'
@@ -369,6 +372,16 @@ def input_submit(text=None, name=None, **kwargs):
     kwargs.setdefault('value', text)
     return HTML.button(c=[HTML.span(text)], **kwargs)
 
+def input_submit_text_button(text=None, name=None, **html_options):
+    if text is None:
+        from pylons.i18n import _
+        text = _('Save')
+    if name is not None:
+        html_options['name'] = name
+    from pylons import tmpl_context as c
+    html_options.setdefault('class_', "btn-text")
+    html_options.setdefault('value', text)
+    return HTML.button(c=[HTML.span(text)], **html_options)
 
 def link_to(label, url='', max_length=None, **attrs):
     if max_length is not None:

@@ -1,5 +1,5 @@
 <%inherit file="/portlets/base.mako"/>
-<%namespace file="/sections/content_snippets.mako" import="tooltip" />
+<%namespace file="/sections/content_snippets.mako" import="tooltip, item_location" />
 
 <%def name="user_subjects_portlet(user=None)">
   <%
@@ -292,5 +292,66 @@
       <a class="more" href="${_('ututi_blog_url')}">${_('More news')}</a>
     </div>
     </%self:uportlet>
+  %endif
+</%def>
+
+<%def name="teacher_information_portlet(user=None, full=True, title=None)">
+  <%
+     if user is None:
+         user = c.user
+
+     if title is None:
+         title = _("Teacher's information")
+  %>
+  <%self:uportlet id="user_information_portlet" portlet_class="MyProfile">
+    <%def name="header()">
+      ${title}
+    </%def>
+    <div class="profile ${'bottomLine' if user.description or user.site_url else ''}">
+        <div class="floatleft avatar">
+            %if user.logo is not None:
+              <img src="${url(controller='user', action='logo', id=user.id, width=70, height=70)}" alt="logo" />
+            %else:
+              ${h.image('/img/teacher_70x70.png', alt='logo')}
+            %endif
+        </div>
+        <div class="floatleft personal-data">
+            <div><h2>${user.fullname}</h2></div>
+            ${item_location(user)} | ${_("teacher")}
+            %if user.emails:
+              <div><a href="mailto:${user.emails[0].email}">${user.emails[0].email}</a></div>
+            %endif
+            %if user.phone_number and user.phone_confirmed:
+              <div class="user-phone orange">${_("Phone:")} ${user.phone_number}</div>
+            %endif
+            %if user.site_url:
+            <p class="user-link">
+              <a href="${user.site_url}">${user.site_url}</a>
+            </p>
+            %endif
+        </div>
+        <div class="clear"></div>
+    </div>
+    %if user.description:
+    <div class="about-self">${user.description}</div>
+    %endif
+
+  </%self:uportlet>
+</%def>
+
+<%def name="teacher_list_portlet(title, teachers)">
+  %if teachers:
+  <%self:uportlet id="teacher_list_portlet" portlet_class="MyProfile">
+    <%def name="header()">
+      ${title}
+    </%def>
+
+    <ul class="teacher-list">
+    %for teacher in teachers:
+      <li>${h.link_to(teacher.fullname, teacher.url())}</li>
+    %endfor
+    </ul>
+
+  </%self:uportlet>
   %endif
 </%def>

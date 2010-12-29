@@ -1,4 +1,5 @@
 <%inherit file="/ubase-width.mako" />
+<%namespace name="o" file="/sections/standard_objects.mako" />
 
 <h2>Standart Ututi lists</h2>
 
@@ -9,6 +10,15 @@
   <li>Teacher number one</li>
   <li>Teacher number two</li>
   <li>Teacher number three</li>
+</ul>
+
+<br />
+<h3>Pros list</h3>
+
+<ul class="pros-list">
+  <li>One good thing</li>
+  <li>Another good thing</li>
+  <li>Last but not least...</li>
 </ul>
 
 <br />
@@ -43,3 +53,8 @@
     and <code>dialog</code> classes.
   </li>
 </ul>
+
+<br />
+<h3>Subject list</h3>
+
+${o.subject_list("An example list", c.example_subjects)}

@@ -1,8 +1,8 @@
 <%def name="location_add_subform(index)">
 <div class="location-add-subform hidden" id="location-add-subform-${index}">
   <div class="error"></div>
-  ${h.input_line('newlocation-%d.title' % index, _('Title'), explanation=_('Full title'), class_='title')}
-  ${h.input_line('newlocation-%d.title_short' % index, _('Short title'), explanation=_('e.g. LKKA'), class_='title-short')}
+  ${h.input_line('newlocation-%d.title' % index, _('Title'), help_text=_('Full title'), class_='title')}
+  ${h.input_line('newlocation-%d.title_short' % index, _('Short title'), help_text=_('e.g. LKKA'), class_='title-short')}
   ${h.input_submit('Save')}
 </div>
 </%def>
@@ -157,7 +157,7 @@ $(document).ready(function() {
            parameters['parent-'+ii] = $(this).val();
         }
     });
-    if ((i == 0) || ((i > 1) && (parameters['parent-'+(i-1)] != ''))) {
+    if ((i == 0) || ((i >= 1) && (parameters['parent-'+(i-1)] != ''))) {
     jQuery.getJSON("${url(controller='structure', action='completions')}",
           parameters,
           function(jdata, status) {

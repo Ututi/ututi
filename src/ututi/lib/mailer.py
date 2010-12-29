@@ -6,8 +6,9 @@ from smtplib import SMTP
 from email.mime.multipart import MIMEMultipart
 from email.Header import Header
 from email.MIMEText import MIMEText
+from email.MIMEBase import MIMEBase
 from email.Utils import parseaddr, formataddr
-from email import message_from_string
+from email import message_from_string, Encoders
 from paste.util.converters import aslist
 from paste.util.converters import asbool
 from pylons import config
@@ -36,7 +37,7 @@ class EmailInfo(object):
 
 
 def compose_email(sender, recipient, subject, body, html_body=None,
-                  message_id=None, reply_to=None, send_to=None, list_id=None):
+                  message_id=None, reply_to=None, send_to=None, list_id=None, attachments=[]):
 
     # Header class is smart enough to try US-ASCII, then the charset we
     # provide, then fall back to UTF-8.
@@ -66,8 +67,11 @@ def compose_email(sender, recipient, subject, body, html_body=None,
         else:
             break
 
-    if body and html_body:
-        msg = MIMEMultipart('related')
+    if body and html_body or attachments:
+        if attachments:
+            msg = MIMEMultipart()
+        else:
+            msg = MIMEMultipart('related')
         msg.preamble = 'This is a multi-part message in MIME format.'
 
         msgAlternative = MIMEMultipart('alternative')
@@ -77,12 +81,20 @@ def compose_email(sender, recipient, subject, body, html_body=None,
         msgAlternative.attach(msgText)
         msgAlternative['Content-Disposition'] = 'inline'
 
-        msgText = MIMEText(html_body.encode(body_charset), 'html', body_charset)
-        msgAlternative.attach(msgText)
-        msgAlternative['Content-Disposition'] = 'inline'
+        if html_body:
+            msgText = MIMEText(html_body.encode(body_charset), 'html', body_charset)
+            msgAlternative.attach(msgText)
+            msgAlternative['Content-Disposition'] = 'inline'
     else:
         # Create the message ('plain' stands for Content-Type: text/plain)
         msg = MIMEText(body.encode(body_charset), 'plain', body_charset)
+
+    for f in attachments:
+        part = MIMEBase('application', "octet-stream")
+        part.set_payload(f['file'].read())
+        Encoders.encode_base64(part)
+        part.add_header('Content-Disposition', 'attachment; filename="%s"' % f['filename'])
+        msg.attach(part)
 
     msg['From'] = formataddr((sender_name, sender_addr))
     msg['To'] = formataddr((recipient_name, recipient_addr))
@@ -101,7 +113,8 @@ def compose_email(sender, recipient, subject, body, html_body=None,
 
 
 def send_email(sender, recipient, subject, body, html_body=None,
-               message_id=None, reply_to=None, send_to=None, list_id=None):
+               message_id=None, reply_to=None, send_to=None, list_id=None,
+               attachments=[]):
     """Send an email.
 
     All arguments should be Unicode strings (plain ASCII works as well).
@@ -116,7 +129,7 @@ def send_email(sender, recipient, subject, body, html_body=None,
     and UTF-8 that can represent all the characters occurring in the email.
     """
     msgstr = compose_email(sender, recipient, subject, body, html_body,
-                           message_id, reply_to, send_to, list_id)
+                           message_id, reply_to, send_to, list_id, attachments=attachments)
 
     if send_to is None:
         send_to = recipient

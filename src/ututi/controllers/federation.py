@@ -17,6 +17,7 @@ from pylons.controllers.util import redirect
 from pylons import tmpl_context as c
 from pylons.i18n import _
 
+from ututi.lib.emails import teacher_request_email
 from ututi.model.users import User
 from ututi.model import PendingInvitation
 from ututi.model import meta
@@ -204,6 +205,12 @@ class FederationController(BaseController, FederationMixin):
             user = User.get_byopenid(google_id)
         elif facebook_id:
             user = User.get_byfbid(facebook_id)
+
+        if user is not None and u_type == 'teacher'\
+                and user.user_type != 'teacher':
+            teacher_request_email(user)
+            h.flash(_('Thank You! Your request to become a teacher has been received. We will notify You once we grant You the rights of a teacher.'))
+
         if user is not None:
             # Existing user, log him in and proceed.
             if facebook_id and not user.logo:
@@ -246,6 +253,7 @@ class FederationController(BaseController, FederationMixin):
                     self._bind_facebook_invitations(user)
                     if not user.logo:
                         user.update_logo_from_facebook()
+
                 meta.Session.commit()
                 sign_in_user(user)
                 redirect(c.came_from or url(controller='home', action='index'))

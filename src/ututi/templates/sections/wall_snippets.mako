@@ -27,7 +27,7 @@
     <form method="POST" action="${url(controller='profile', action='hide_event')}">
       <div>
         <input type="hidden" name="event_type" value="${event.event_type}" class="event_type"/>
-        <input type="image" src="/images/details/icon_fail.png" title="${_('Ignore events like this')}" class="hide_event"/>
+        <input type="image" src="/images/details/icon_delete.png" title="${_('Ignore events like this')}" class="hide_event"/>
       </div>
     </form>
   </div>
@@ -140,7 +140,14 @@
 
 <%def name="mailinglistpost_created(event)">
   <%self:wall_item event="${event}">
-    <%def name="classes()">message_event mailinglistpost_created</%def>
+    <%def name="classes()">
+      %if event.user is not None and event.user.is_teacher:
+        teacher_event
+      %else:
+        message_event
+      %endif
+      mailinglistpost_created
+    </%def>
     <%def name="content()">
       <span class="truncated">${h.email_with_replies(event.message.body, True)}</span>
     </%def>
@@ -161,6 +168,19 @@
        dict(user_link=event.link_to_author(),
             group_link=h.object_link(event.context),
             message_link=h.object_link(event.message)) | n}
+  </%self:wall_item>
+</%def>
+
+<%def name="teachermessage_sent(event)">
+  <%self:wall_item event="${event}">
+    <%def name="classes()">teacher_event teachermessage_sent</%def>
+    <%def name="content()">
+            <span class="truncated">${h.nl2br(event.data)}</span>
+    </%def>
+    <%def name="when()">${event.when()}</%def>
+    ${_("Teacher %(user_link)s sent a message to the group %(group_link)s.") % \
+       dict(user_link=h.object_link(event.user),
+            group_link=h.object_link(event.context)) | n}
   </%self:wall_item>
 </%def>
 

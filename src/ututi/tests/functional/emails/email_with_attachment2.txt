@@ -1,0 +1,25 @@
+Return-Path: <admin@ututi.lt>
+Date: Mon, 15 Jun 2009 17:55:15 +0300
+From: Varlius <varlius2@example.com>
+To: %(to)s%(reply_to)s
+Subject: Also - an attachment
+Message-ID: <%(message_id)s>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="ZGiS0Q5IWpPtfppv"
+Content-Disposition: inline
+User-Agent: Mutt/1.5.18 (2008-05-17)
+
+
+--ZGiS0Q5IWpPtfppv
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+Also, I just wanted to send you this file:
+
+--ZGiS0Q5IWpPtfppv
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: attachment; filename="README.txt"
+
+I am a file!
+
+--ZGiS0Q5IWpPtfppv--

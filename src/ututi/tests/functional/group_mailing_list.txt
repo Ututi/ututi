@@ -268,13 +268,7 @@ messages, but only if group is set to moderated:
     >>> user2 = Browser.logIn('user2@ututi.lt', 'password')
     >>> user2.open('http://localhost/group/moderators')
     >>> 'moderators@groups.ututi.lt' not in user2.contents
-    True
-
-Let's allow non-group members to post messages to our mailing list:
-
-    >>> browser.getLink('Edit').click()
-    >>> browser.getControl('Everybody (moderated)').click()
-    >>> browser.getControl('Save').click()
+    False
 
 Now the user can see the link, and should be able to post a new
 message:

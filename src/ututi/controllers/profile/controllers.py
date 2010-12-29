@@ -2,6 +2,7 @@ from datetime import datetime
 import logging
 import facebook
 import random
+import simplejson
 
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql.expression import desc
@@ -9,6 +10,7 @@ from formencode import htmlfill
 from formencode.api import Invalid
 
 from pylons import request, tmpl_context as c, url, config, session
+from pylons.decorators import jsonify
 from pylons.templating import render_mako_def
 from pylons.controllers.util import abort, redirect
 
@@ -21,16 +23,21 @@ from ututi.lib.events import event_types_grouped
 from ututi.lib.security import ActionProtector
 from ututi.lib.image import serve_logo
 from ututi.lib.forms import validate
+from ututi.lib.messaging import EmailMessage
+from ututi.lib.mailinglist import post_message
 from ututi.lib import gg, sms
+from ututi.lib.validators import js_validate
 from ututi.lib.validators import manual_validate
 
-from ututi.model.events import Event
+from ututi.model.events import Event, TeacherMessageEvent
+from ututi.model import ForumCategory, File
+from ututi.model import ForumPost
 from ututi.model import get_supporters
 from ututi.model import LocationTag, BlogEntry, TeacherGroup
 from ututi.model import meta, Email, User
-from ututi.controllers.profile.validators import HideElementForm
+from ututi.controllers.profile.validators import HideElementForm, MultiRcptEmailForm
 from ututi.controllers.profile.validators import ContactForm, LocationForm, LogoUpload, PhoneConfirmationForm,\
-    PhoneForm, ProfileForm, PasswordChangeForm, StudentGroupForm
+    PhoneForm, ProfileForm, PasswordChangeForm, StudentGroupForm, StudentGroupDeleteForm, StudentGroupMessageForm
 from ututi.controllers.profile.wall import WallMixin, WallSettingsForm
 from ututi.controllers.profile.subjects import WatchedSubjectsMixin
 from ututi.controllers.search import SearchSubmit, SearchBaseController
@@ -38,6 +45,18 @@ from ututi.controllers.home import sign_in_user
 from ututi.controllers.home import UniversityListMixin
 
 log = logging.getLogger(__name__)
+
+def group_teacher_action(method):
+    def _group_teacher_action(self, id=None):
+        if id is None:
+            redirect(url(controller='search', action='index'))
+        group = TeacherGroup.get(id)
+        if group is None:
+            abort(404)
+        c.security_context = group
+        c.group = group
+        return method(self, group)
+    return _group_teacher_action
 
 
 class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin, WatchedSubjectsMixin):
@@ -442,6 +461,18 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
         location = meta.Session.query(LocationTag).filter_by(id=location_id).one()
         redirect(url(controller='structureview', action='index', path='/'.join(location.path)))
 
+    @js_validate(schema=MultiRcptEmailForm())
+    @jsonify
+    def send_email_message_js(self):
+        if hasattr(self, 'form_result'):
+            msg = EmailMessage(self.form_result['subject'],
+                               self.form_result['message'],
+                               sender=self.form_result['sender'],
+                               force=True)
+            for rcpt in self.form_result['recipients']:
+                msg.send(rcpt)
+            return {'success': True}
+
 
 class UserProfileController(ProfileControllerBase):
     """A controller for the user's personal information and actions."""
@@ -513,7 +544,7 @@ class UserProfileController(ProfileControllerBase):
             if c.user.phone_number:
                 sms.confirmation_request(c.user)
             meta.Session.commit()
-            return render_mako_def('/profile/home.mako', 'phone_updated')
+            return render_mako_def('/profile/home_base.mako', 'phone_confirmation_nag')
         except Invalid:
             return ''
 
@@ -557,12 +588,8 @@ class TeacherProfileController(ProfileControllerBase):
 
         return render('/profile/teacher_home.mako')
 
-    @ActionProtector("user")
-    def register_welcome(self):
-        return render('profile/teacher_home.mako')
-
     @ActionProtector("teacher")
-    @validate(schema=StudentGroupForm, form='add_student_group')
+    @validate(schema=StudentGroupForm, form='add_student_group', on_get=False)
     def add_student_group(self):
         if hasattr(self, 'form_result'):
             grp = TeacherGroup(self.form_result['title'],
@@ -572,3 +599,155 @@ class TeacherProfileController(ProfileControllerBase):
             h.flash(_('Group added!'))
             redirect(url(controller='profile', action='home'))
         return render('profile/add_student_group.mako')
+
+    @ActionProtector("teacher")
+    @validate(schema=StudentGroupForm, form='add_student_group', on_get=False)
+    def edit_student_group(self, id):
+
+        try:
+            group = TeacherGroup.get(int(id))
+        except ValueError:
+            abort(404)
+
+        if group is None or group.teacher != c.user:
+            abort(404)
+
+        c.student_group = group
+        defaults = {
+            'title' : group.title,
+            'email' : group.email,
+            'group_id' : group.id
+            }
+        if hasattr(self, 'form_result'):
+            group.title = self.form_result['title']
+            group.email = self.form_result['email']
+            group.update_binding()
+            meta.Session.commit()
+            h.flash(_('Group updated!'))
+            redirect(url(controller='profile', action='home'))
+        return htmlfill.render(self._edit_student_group(), defaults=defaults)
+
+    def _edit_student_group(self):
+        return render('profile/edit_student_group.mako')
+
+    @ActionProtector("teacher")
+    @validate(schema=StudentGroupDeleteForm())
+    def delete_student_group(self):
+        if hasattr(self, 'form_result'):
+            group = TeacherGroup.get(int(self.form_result['group_id']))
+            if group is not None and group.teacher == c.user:
+                meta.Session.delete(group)
+                meta.Session.commit()
+                h.flash(_('Group deleted.'))
+            else:
+                abort(404)
+        redirect(url(controller='profile', action='home'))
+
+    @group_teacher_action
+    @ActionProtector("group_teacher")
+    @validate(schema=StudentGroupMessageForm())
+    def studentgroup_send_message(self, group):
+        if hasattr(self, 'form_result'):
+            return self._studentgroup_send_message(group)
+
+    @group_teacher_action
+    @ActionProtector("group_teacher")
+    @js_validate(schema=StudentGroupMessageForm())
+    def studentgroup_send_message_js(self, group):
+        if hasattr(self, 'form_result'):
+            output = self._studentgroup_send_message(group, js=True)
+            return simplejson.dumps(output)
+
+    def _studentgroup_send_message(self, group, js=False):
+        if hasattr(self, 'form_result'):
+            subject = self.form_result['subject']
+            message = self.form_result['message']
+
+            #wrap the message with additional information
+            msg_text = render('/emails/teacher_message.mako',
+                              extra_vars={'teacher':c.user,
+                                          'subject':subject,
+                                          'message':message})
+            if group.group is not None:
+                recipient = group.group
+                if recipient.mailinglist_enabled:
+                    attachments = []
+                    if self.form_result['file'] != '':
+                        file = self.form_result['file']
+                        f = File(file.filename, file.filename, mimetype=file.type)
+                        f.store(file.file)
+                        meta.Session.add(f)
+                        meta.Session.commit()
+                        attachments.append(f)
+
+                    post = post_message(recipient,
+                                        c.user,
+                                        subject,
+                                        msg_text,
+                                        force=True,
+                                        attachments=attachments)
+                else:
+                    attachments = []
+                    if self.form_result['file'] != '':
+                        attachments = [{'filename': self.form_result['file'].filename,
+                                        'file': self.form_result['file'].file}]
+
+                    msg = EmailMessage(_('Message from Your teacher: %s') % subject,
+                                       msg_text,
+                                       sender=recipient.list_address,
+                                       attachments=attachments)
+
+                    msg.send(group.group)
+
+                    evt = TeacherMessageEvent()
+                    evt.context = group.group
+                    evt.data = '%s \n\n %s' % (subject, msg_text)
+                    evt.user = c.user
+                    meta.Session.add(evt)
+                    meta.Session.commit()
+
+            else:
+                attachments = []
+                if self.form_result['file'] != '':
+                    attachments = [{'filename': self.form_result['file'].filename,
+                                    'file': self.form_result['file'].file}]
+
+                msg = EmailMessage(subject, msg_text, sender=c.user.emails[0].email, force=True, attachments=attachments)
+                msg.send(group.email)
+
+            if js:
+                return {'success': True}
+            else:
+                h.flash(_('Message sent.'))
+                redirect(url(controller='profile', action='home'))
+
+
+class UnverifiedTeacherProfileController(ProfileControllerBase):
+
+    @ActionProtector("teacher")
+    def home(self):
+        return htmlfill.render(self._edit_profile_form(),
+                               defaults=self._edit_form_defaults())
+
+    def _edit_profile_form(self):
+        self._set_settings_tabs(current_tab='general')
+        return render('profile/unverified_teacher_edit.mako')
+
+    def _set_settings_tabs(self, current_tab):
+        c.current_tab = current_tab
+        c.tabs = [
+            {'title': _("General information"),
+             'name': 'general',
+             'link': url(controller='profile', action='edit')},
+            {'title': _("Contacts"),
+             'name': 'contacts',
+             'link': url(controller='profile', action='edit_contacts')}]
+
+    def _edit_contacts_form(self):
+        self._set_settings_tabs(current_tab='contacts')
+        return render('profile/unverified_teacher_edit_contacts.mako')
+
+    @ActionProtector("teacher")
+    def register_welcome(self):
+        return self.home()
+

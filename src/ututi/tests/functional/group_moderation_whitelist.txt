@@ -5,9 +5,6 @@ Set Up:
 
     >>> browser = Browser.logIn('admin@ututi.lt', 'asdasd')
     >>> browser.getLink('Moderatoriai').click()
-    >>> browser.getLink('Edit').click()
-    >>> browser.getControl('Everybody (moderated)').click()
-    >>> browser.getControl('Save').click()
 
     >>> from ututi.tests.functional import send_test_message
     >>> send_test_message('email_from_user2.txt', '33', to='moderators@groups.ututi.lt')
@@ -16,6 +13,7 @@ Set Up:
 As we have moderation turned on we can add emails of non-group members
 to the whitelist so that messages from those people would be accepted
 automatically:
+
 
     >>> browser.getLink('Mailing List').click()
     >>> browser.getControl('Moderation queue (2)').click()

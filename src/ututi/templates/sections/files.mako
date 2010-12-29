@@ -1,4 +1,5 @@
 <%namespace name="prebase" file="/prebase.mako" />
+<%namespace file="/sections/content_snippets.mako" import="tooltip" />
 
 <%def name="head_tags()">
 
@@ -395,59 +396,75 @@ $(document).ready(function(){
 
 <%def name="file(file, new_file=False, hidden=False)">
   %if file.deleted is None:
-            <li class="file${hidden and ' show' or ''}">
-              %if new_file:
-                ${h.image('/images/details/icon_drag_file_new.png', alt='file icon', class_='drag-target')|n}
-              %else:
-                ${h.image('/images/details/icon_drag_file.png', alt='file icon', class_='drag-target')|n}
-              %endif
-                ${h.link_to(file.title, file.url(), class_='filename')}
-              %if file.can_write():
-                <span class="file_rename_form hidden">
-                  <span class="file_rename_input_decorator">
-                    <input class="file_rename_input" type="text" />
+            <li class="${file.created.is_teacher and 'teacher-content ' or ''}file${hidden and ' show' or ''}">
+              <span class="tooltip-container">
+                %if file.created.is_teacher:
+                  <span class="teacher-tooltip">
+                  ${tooltip(_("Teacher's material"), img='/img/icons/teacher-cap.png')}
                   </span>
-                  ${h.input_submit(_('Rename'), class_='rename_confirm btn')}
-                </span>
-                <img src="${url('/images/details/icon_rename.png')}" alt="${_('edit file name')}" class="rename_button" />
-              %endif
-              <span class="size">(${h.file_size(file.size)})</span>
-              <span class="date">${h.fmt_dt(file.created_on)}</span>
-              <a href="${url(controller='user', action='index', id=file.created_by)}" class="author">
-                ${file.created.fullname}
-              </a>
-              <input class="move_url" type="hidden" value="${file.url(action='move')}" />
-              <input class="copy_url" type="hidden" value="${file.url(action='copy')}" />
-              <input class="delete_url" type="hidden" value="${file.url(action='delete')}" />
-              <input class="flag_url" type="hidden" value="${file.url(action='flag')}" />
-              <input class="rename_url" type="hidden" value="${file.url(action='rename')}" />
-              <input class="folder_title_value" type="hidden" value="${file.folder}" />
-              %if file.can_write():
-                <img src="${url('/images/delete.png')}" alt="${_('delete file')}" class="delete_button" />
-              %elif file.parent.flaggable_files:
-                <img src="${url('/img/icons/flag-small.png')}" alt="${_('flag as suspicious')}" class="flag_button" />
-              %endif
+                %endif
+              </span><span class="file-description">
+                %if new_file: ## catch eye
+                  ${h.image('/images/details/icon_drag_file_orange.png', alt='file icon', class_='drag-target')}
+                %else:
+                  ${h.image('/images/details/icon_drag_file.png', alt='file icon', class_='drag-target')}
+                %endif
+                  ${h.link_to(file.title, file.url(), class_='filename')}
+                %if file.can_write():
+                  <span class="file_rename_form hidden">
+                    <span class="file_rename_input_decorator">
+                      <input class="file_rename_input" type="text" />
+                    </span>
+                    ${h.input_submit(_('Rename'), class_='rename_confirm btn')}
+                  </span>
+                  <img src="${url('/images/details/icon_rename.png')}" alt="${_('edit file name')}" class="rename_button" />
+                %endif
+                <span class="size">(${h.file_size(file.size)})</span>
+                <span class="date">${h.fmt_dt(file.created_on)}</span>
+                <a href="${url(controller='user', action='index', id=file.created_by)}" class="author">
+                  ${file.created.fullname}
+                </a>
+                <input class="move_url" type="hidden" value="${file.url(action='move')}" />
+                <input class="copy_url" type="hidden" value="${file.url(action='copy')}" />
+                <input class="delete_url" type="hidden" value="${file.url(action='delete')}" />
+                <input class="flag_url" type="hidden" value="${file.url(action='flag')}" />
+                <input class="rename_url" type="hidden" value="${file.url(action='rename')}" />
+                <input class="folder_title_value" type="hidden" value="${file.folder}" />
+                %if file.can_write():
+                  <img src="${url('/images/delete.png')}" alt="${_('delete file')}" class="delete_button" />
+                %elif file.parent.flaggable_files:
+                  <img src="${url('/img/icons/flag-small.png')}" alt="${_('flag as suspicious')}" class="flag_button" />
+                %endif
+              </span>
             </li>
   %else: ## deleted file
-            <li class="file">
-              ${h.image('/images/details/icon_drag_file.png', alt='file icon', class_='drag-target')|n}
-              <span class="file_name">
-                ${file.title}
-              </span>
-              %if file.folder:
-              <span class="folder_title">(${file.folder})</span>
-              %endif
-              <span class="size">(${h.file_size(file.size)})</span>
-              <span class="date">${_('deleted')} ${h.fmt_dt(file.deleted_on)}</span>,
-              <a href="${file.deleted.url()}" class="author">
-                ${file.deleted.fullname}
-              </a>
-              <input class="move_url" type="hidden" value="${file.url(action='move')}" />
-              <input class="copy_url" type="hidden" value="${file.url(action='copy')}" />
-              <input class="restore_url" type="hidden" value="${file.url(action='restore')}" />
-              <input class="folder_title_value" type="hidden" value="${file.folder}" />
-              <span>
-                <img src="${url('/images/restore.png')}" alt="${_('restore file')}" class="restore_button" />
+            <li class="${file.created.is_teacher and 'teacher-content ' or ''}file">
+              <span class="tooltip-container">
+                %if file.created.is_teacher:
+                  <span class="teacher-tooltip">
+                  ${tooltip(_("Teacher's material"), img='/img/icons/teacher-cap.png')}
+                  </span>
+                %endif
+              </span><span class="file-description">
+                ${h.image('/images/details/icon_drag_file.png', alt='file icon', class_='drag-target')}
+                <span class="file_name">
+                  ${file.title}
+                </span>
+                %if file.folder:
+                <span class="folder_title">(${file.folder})</span>
+                %endif
+                <span class="size">(${h.file_size(file.size)})</span>
+                <span class="date">${_('deleted')} ${h.fmt_dt(file.deleted_on)}</span>,
+                <a href="${file.deleted.url()}" class="${'author' if file.deleted == file.created else 'deleted-by'}">
+                  ${file.deleted.fullname}
+                </a>
+                <input class="move_url" type="hidden" value="${file.url(action='move')}" />
+                <input class="copy_url" type="hidden" value="${file.url(action='copy')}" />
+                <input class="restore_url" type="hidden" value="${file.url(action='restore')}" />
+                <input class="folder_title_value" type="hidden" value="${file.folder}" />
+                <span>
+                  <img src="${url('/images/restore.png')}" alt="${_('restore file')}" class="restore_button" />
+                </span>
               </span>
             </li>
   %endif
@@ -469,6 +486,8 @@ $(document).ready(function(){
         <input class="folder_name" id="file_folder_name-${section_id}-${fid}" type="hidden" value="${folder.title}" />
         <%
            files = [file for file in folder if file.deleted is None]
+           # show teacher files before the rest (python sort is stable)
+           files.sort(lambda x, y: int(y.created.is_teacher) - int(x.created.is_teacher))
            hidden = False
            file_count = len(files)
         %>
@@ -501,6 +520,8 @@ $(document).ready(function(){
         <%
            style = ''
            files = [file for file in folder if file.deleted is None]
+           # show teacher files before the rest (python sort is stable)
+           files.sort(lambda x, y: int(y.created.is_teacher) - int(x.created.is_teacher))
            file_count = len(files)
            is_open = file_count > 4
            if files:
@@ -697,6 +718,8 @@ $(document).ready(function(){
           files = [file for file in obj.files
                    if (file.deleted is not None and
                        not file.isNullFile())]
+          # show teacher files before the rest (python sort is stable)
+          files.sort(lambda x, y: int(y.created.is_teacher) - int(x.created.is_teacher))
           if not files: style = h.literal('style="display: none"')
       else:
           style = h.literal('style="display: none"')
@@ -708,9 +731,7 @@ $(document).ready(function(){
         %if files:
               <li style="display: none;" class="message">${_("There are no deleted files.")}</li>
               %for file in files:
-                %if file.deleted is not None:
                   <%self:file file="${file}" />
-                %endif
               %endfor
         %else:
               <li class="message">${_("There are no deleted files.")}</li>

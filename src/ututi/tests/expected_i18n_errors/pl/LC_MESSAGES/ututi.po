@@ -1,25 +1,4 @@
 # (pofilter) xmltags: checks that XML/HTML tags have not been translated
-#, python-format
-msgid ""
-"If you want to stop getting these emails - you can change your "
-"subscription settings in your notification settings page (%(url)s)."
-msgstr ""
-"Jeśli nie chcesz otrzymywać tych wiadomości możesz zmienić ustawienia "
-"subskrypcji na <a href=\"%(url)s\">stronie Ustawienia powiadomień</a>."
-
-# (pofilter) xmltags: checks that XML/HTML tags have not been translated
-msgid ""
-"<p>In an e-mail conference all messages, sent to the group's address will"
-" be forwarded to all members.</p><p>In a forum there is the posibility to"
-" create subforums, and subscribed members get e-mail notifications about "
-"new messages, not the messages themselves.</p>"
-msgstr ""
-"<p>W konferencji e-mail wszystkie wiadomości wysyłane na adres grupy "
-"zostaną przekazane do wszystkich jej członków. </ p> W forum jest "
-"możliwości tworzenia poddziałów, i subskrybujący członkowie otrzymują "
-"powiadomienia e-mail o nowych wiadomościach, a nie same wiadomości. / p>"
-
-# (pofilter) xmltags: checks that XML/HTML tags have not been translated
 msgid ""
 "Calendaring. Read this <a href=\"http://blog.ututi.lt/2009/05/28"
 "/naudotoju-isradingumas/\">blog post</a> for more information."

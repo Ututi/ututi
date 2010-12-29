@@ -11,7 +11,7 @@
     books_department= c.books_department,
     science_type_id = science_type.id, **c.url_params))}
 
-    <div class="books-number">${len(science_type.books)} ${_('books')}</div>
+    <div class="books-number">${len(science_type.get_books(type=c.books_type))} ${_('books')}</div>
   </div>
   %endfor
 </div>
@@ -26,7 +26,7 @@
               action="catalog",
               books_department= c.books_department,
               school_grade_id = school_grade.id, **c.url_params))}
-    <div class="books-number">${len(school_grade.books)} ${_('books')}</div>
+    <div class="books-number">${len(school_grade.get_books(type=c.books_type))} ${_('books')}</div>
   </div>
   %endfor
 </div>

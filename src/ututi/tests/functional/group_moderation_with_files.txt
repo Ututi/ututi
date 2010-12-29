@@ -1,0 +1,37 @@
+Test moderated email messages with attachments
+==============================================
+
+    >>> from ututi.tests.functional import send_test_message
+    >>> send_test_message('email_with_attachment2.txt', '66', to='moderators@groups.ututi.lt')
+    >>> browser = Browser.logIn('admin@ututi.lt', 'asdasd')
+    >>> browser.getLink('Moderatoriai').click()
+    >>> browser.getLink('Mailing List').click()
+    >>> browser.getControl('Moderation queue (1)').click()
+    >>> browser.getLink('Also - an attachment').click()
+    >>> browser.printCssQuery('.post-attachments', include_attributes=[''])
+    <ul>
+      <li>
+        <a>README.txt</a>
+      </li>
+    </ul>
+
+Let's confirm the message:
+    >>> browser.getControl('Approve').click()
+
+The message is sent:
+    >>> from ututi.lib.mailer import mail_queue
+    >>> print mail_queue.pop().payload()
+    Also, I just wanted to send you this file:
+    README.txt - http://localhost/group/moderators/mailinglist/file/4/5
+
+    >>> browser.getLink('Moderatoriai').click()
+    >>> browser.getLink('Mailing List').click()
+
+The attachments should be retained:
+    >>> browser.getLink('Also - an attachment').click()
+    >>> browser.printCssQuery('.post-attachments', include_attributes=[''])
+    <ul>
+      <li>
+        <a>README.txt</a>
+      </li>
+    </ul>

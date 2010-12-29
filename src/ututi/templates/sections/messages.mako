@@ -6,7 +6,7 @@
 %if c.user and not c.user.isConfirmed:
 <div class="flash-message">
   <span class="close-link hide-parent">
-    ${h.image('/img/icons/bigX_15x15.png', alt=_('Close'))}
+    ${h.image('/images/details/icon_delete.png', alt=_('Close'))}
   </span>
   <span>
     ${_('Your email (%(email)s) is not confirmed! '
@@ -26,7 +26,7 @@
 %if c.user and c.gg_enabled and c.user.gadugadu_uin is not None and not c.user.gadugadu_confirmed:
 <div class="flash-message">
   <span class="close-link hide-parent">
-    ${h.image('/img/icons/bigX_15x15.png', alt=_('Close'))}
+    ${h.image('/images/details/icon_delete.png', alt=_('Close'))}
   </span>
   <span>
     ${_('Your <strong>gadu gadu number</strong> is not confirmed! Please <a href="%s">confirm</a> it by entering the code sent to you.') % url(controller='profile', action='edit')|n}
@@ -37,7 +37,7 @@
 %if c.user and c.gg_enabled and c.user.phone_number is not None and not c.user.phone_confirmed:
 <div class="flash-message" id="confirm-phone-flash-message">
   <span class="close-link hide-parent">
-    ${h.image('/img/icons/bigX_15x15.png', alt=_('Close'))}
+    ${h.image('/images/details/icon_delete.png', alt=_('Close'))}
   </span>
   <span>
     ${_('Your phone is not confirmed! Please <a href="%s">confirm</a> it by entering the code sent to you.') % url(controller='profile', action='edit')|n}

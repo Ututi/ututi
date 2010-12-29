@@ -1,3 +1,5 @@
+from textwrap import dedent
+
 from sqlalchemy import func
 
 from sqlalchemy.sql.expression import desc
@@ -15,6 +17,7 @@ from pylons.i18n import _
 
 from datetime import datetime
 
+from ututi.lib.messaging import EmailMessage
 from ututi.lib.validators import PhoneNumberValidator
 from ututi.lib.validators import FileUploadTypeValidator, TranslatedEmailValidator
 from ututi.model import PrivateMessage
@@ -480,9 +483,11 @@ class BooksController(BaseController):
             abort(404)
 
         if 'message' in request.params:
-            message_text = """%(user_name)s sent you a private message, asking about book %(book_title)s (%(book_url)s):
+            message_text = dedent("""\
+                                %(user_name)s sent you a private message, asking about book %(book_title)s (%(book_url)s):
 
-                           %(message)s""" % {"user_name" : c.user.fullname,
+                                %(message)s
+                                """) % {"user_name" : c.user.fullname,
                                 "book_url" : url(qualified=True, controller="books", action="show", id=c.book.id),
                                 "book_title" : c.book.title,
                                 "message" : request.params.get('message')}
@@ -492,6 +497,12 @@ class BooksController(BaseController):
                                      {"ubooks_label" : _('uBooks'), "user_name" : c.user.fullname, "book_title" : c.book.title},
                                   message_text)
             meta.Session.add(msg)
+
+            email = EmailMessage(_("%(ubooks_label)s: %(user_name)s asks about book %(book_title)s") %\
+                                     {"ubooks_label" : _('uBooks'), "user_name" : c.user.fullname, "book_title" : c.book.title},
+                                 message_text,
+                                 c.user.emails[0].email)
+            email.send(c.recipient)
             meta.Session.commit()
             h.flash(_('Message sent.'))
         return render('books/show.mako')

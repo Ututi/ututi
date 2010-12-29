@@ -7,7 +7,7 @@ from formencode.foreach import ForEach
 from formencode.api import Invalid
 from formencode.variabledecode import NestedVariables
 from ututi.lib.validators import UserPasswordValidator, TranslatedEmailValidator, UniqueEmail,\
-    LocationTagsValidator, PhoneNumberValidator, FileUploadTypeValidator
+    LocationTagsValidator, PhoneNumberValidator, FileUploadTypeValidator, CommaSeparatedListValidator
 
 
 class LocationForm(Schema):
@@ -143,3 +143,29 @@ class StudentGroupForm(Schema):
     allow_extra_fields = False
     title = validators.String(not_empty=True)
     email = TranslatedEmailValidator(not_empty=True)
+
+
+class StudentGroupMessageForm(Schema):
+    allow_extra_fields = True
+
+    subject = validators.String()
+    message = validators.String()
+
+
+class StudentGroupDeleteForm(Schema):
+    allow_extra_fields = True
+    group_id = validators.Int()
+
+
+class MultiRcptEmailForm(Schema):
+    allow_extra_fields = True
+
+    sender = validators.Email(not_empty=True)
+    msg = {'empty': _(u"Please enter email subject.")}
+    subject = validators.String(not_empty=True, messages=msg)
+    msg = {'empty': _(u"Message can not be empty.")}
+    message = validators.String(not_empty=True, messages=msg)
+    msg = {'empty': _(u"Please enter at least one value.")}
+    recipients = Pipe(validators.String(not_empty=True, messages=msg),
+                      CommaSeparatedListValidator(),
+                      ForEach(validators.Email(not_empty=True)))

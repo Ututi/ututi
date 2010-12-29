@@ -7,6 +7,9 @@ ${_('Student information online')}
 <%def name="head_tags()">
 </%def>
 
+<%def name="css()">
+</%def>
+
 <%def name="body_class()">
 </%def>
 
@@ -112,7 +115,7 @@ ${_('Student information online')}
     <label class="textField"><span class="overlay">${_('Password')}</span><input type="password" name="password" /><span class="edge"></span></label>
     <button class="btn" type="submit" value="${_('Login')}"><span>${_('Login')}</span></button><br />
     <a href="${url(controller='home', action='pswrecovery')}">${_('Forgotten password?')}</a>
-    <label id="rememberMe" for="remember"><input id="remember" name="remember" value="true" type="checkbox"/> ${_('Remember me')}</label>
+    <label id="rememberMe" for="remember"><input id="remember" name="remember" value="true" type="checkbox" class="checkbox"/> ${_('Remember me')}</label>
   </fieldset>
   <script type="text/javascript">
     $(document).ready(function(){$(".textField .overlay").labelOver('over');});
@@ -161,7 +164,14 @@ ${self.anonymous_menu()}
 <p class="a11y">${_('User menu')}</p>
 <div class="loggedin-nav" id="personal-data">
     <ul>
-        <li><a href="#" id="feedback-link">${_('feedback')}</a></li>
+        <li><a href="${url(controller='messages', action='index')}">
+          <% unread_messages = c.user.unread_messages() %>
+          %if unread_messages:
+           <strong>${_("inbox")} (${unread_messages})</strong>
+          %else:
+             ${_("inbox")}
+          %endif
+        </a></li>
         <li class="expandable profile-nav">
             <span class="fullname">${c.user.fullname}</span>
             <div>
@@ -206,7 +216,7 @@ ${self.anonymous_menu()}
   % for message in messages:
   <div class="flash-message">
       <span class="close-link hide-parent">
-        ${h.image('/img/icons/bigX_15x15.png', alt=_('Close'))}
+        ${h.image('/images/details/icon_delete.png', alt=_('Close'))}
       </span>
       <span>${h.literal(unicode(message))}</span>
   </div>
@@ -228,7 +238,7 @@ ${self.anonymous_menu()}
            $('.user-notification').fadeOut();
          }
        })">
-      ${h.image('/img/icons/bigX_15x15.png', alt=_('No, thanks'))}
+      ${h.image('/images/details/icon_delete.png', alt=_('No, thanks'))}
     </a>
   </div>
 </div>
@@ -268,6 +278,7 @@ ${self.anonymous_menu()}
 
     ${h.stylesheet_link(h.path_with_hash('/style.css'))}
     ${h.stylesheet_link(h.path_with_hash('/fixed.css'))}
+    ${h.stylesheet_link(h.path_with_hash('/portlets.css'))}
     ${h.javascript_link('/javascript/jquery-1.4.3.min.js')}
     ${h.javascript_link('/javascript/ajaxupload.3.5.js')}
     ${h.javascript_link('/javascript/jquery.qtip.min.js')}
@@ -280,6 +291,9 @@ ${self.anonymous_menu()}
     ${h.javascript_link(h.path_with_hash('/javascript/hide_parent.js'))}
     ${h.javascript_link(h.path_with_hash('/javascript/forms.js'))}
     ${self.head_tags()}
+    <style type="text/css">
+      ${self.css()}
+    </style>
     <title>
       ${self.title()} - ${_('UTUTI')}
     </title>

@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-12-15 01:58+0200\n"
+"PO-Revision-Date: 2010-12-29 18:04+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -153,6 +153,13 @@ msgstr "Tapatybės nustatymas nesėkmingas: %s"
 
 msgid "Wrong username or password!"
 msgstr "Neteisingas el. pašto adresas arba slaptažodis!"
+
+msgid ""
+"Thank You! Your request to become a teacher has been received. We will "
+"notify You once we grant You the rights of a teacher."
+msgstr ""
+"Ačiū! Jūsų prašymas tapti dėstytoju gautas. Pranešime Jums kai tiks "
+"suteiksime dėstytojo prieigą."
 
 msgid "Facebook did not provide your email address."
 msgstr "Facebook nepateikė jūsų el. pašto adreso."
@@ -591,9 +598,9 @@ msgstr "Ututi naujienos: %(file_changes)s ir %(page_changes)s"
 #, python-format
 msgid "%(message_count)d new message awaiting moderation"
 msgid_plural "%(message_count)d new messages awaiting moderation"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%(message_count)d nauja žinutė moderavimo eilėje"
+msgstr[1] "%(message_count)d naujos žinutės moderavimo eilėje"
+msgstr[2] "%(message_count)d naujų žinučių moderavimo eilėje"
 
 #, python-format
 msgid "The private space subscription for \"%s\" is about to expire"
@@ -654,6 +661,9 @@ msgstr "Negali trinti šio katalogo."
 
 msgid "New page"
 msgstr "Naujas puslapis"
+
+msgid "This email address is already in use."
+msgstr "Šis el. pašto adresas jau naudojamas."
 
 msgid ""
 "All teacher tools will be available to You once our team confirms You as "
@@ -741,11 +751,30 @@ msgstr "Telefono numeris patvirtintas."
 msgid "Group added!"
 msgstr "Grupė pridėta!"
 
+msgid "Group updated!"
+msgstr "Grupė atnaujinta!"
+
+msgid "Group deleted."
+msgstr "Grupė ištrinta!"
+
+#, python-format
+msgid "Message from Your teacher: %s"
+msgstr "Žinutė nuo dėstytojo: %s"
+
 msgid "This is not the confirmation code we sent you."
 msgstr "Tai nėra tas patvirtinimo kodas, kurį mes Tau siuntėme."
 
 msgid "This email is already in use."
 msgstr "Toks el. pašto adresas jau naudojamas."
+
+msgid "Please enter email subject."
+msgstr "Įveskite laiško temą."
+
+msgid "Message can not be empty."
+msgstr "Žinutė negali būti tuščia."
+
+msgid "Please enter at least one value."
+msgstr "Įveskite bent vieną reikšmę."
 
 msgid "The recipient is not specified."
 msgstr "Nenurodytas gavėjas"
@@ -787,6 +816,9 @@ msgstr "Jūsų paskyra buvo patvirtinta!"
 
 msgid "New teacher!"
 msgstr "Naujas dėstytojas!"
+
+msgid "Request to be come a teacher!"
+msgstr "Prašymas tapti dėstytoju!"
 
 msgid "Community"
 msgstr "Bendruomenė"
@@ -1016,6 +1048,10 @@ msgid "Subject %(link_to_subject)s was modified"
 msgstr "Dalykas %(link_to_subject)s buvo redaguotas."
 
 #, python-format
+msgid "Teacher %(link_to_author)s sent message to the group %(link_to_group)s."
+msgstr "Dėstytojas %(link_to_author)s atsiuntė žinutę grupei %(link_to_group)s."
+
+#, python-format
 msgid ""
 "New email post %(link_to_message)s was posted on %(link_to_group)s "
 "mailing list"
@@ -1117,6 +1153,12 @@ msgstr "Moderatorius"
 
 msgid "Group admin"
 msgstr "Grupės administratorius"
+
+msgid "teacher"
+msgstr "dėstytojas"
+
+msgid "Teacher"
+msgstr "Dėstytojas"
 
 msgid ""
 "You do not have the rights to see this page, or perform this action. Go "
@@ -1364,6 +1406,9 @@ msgstr "Ieškoti"
 
 msgid "All groups"
 msgstr "Visos grupės"
+
+msgid "inbox"
+msgstr "žinutės"
 
 msgid "Settings"
 msgstr "Nustatymai"
@@ -2417,6 +2462,15 @@ msgstr "Lengvai paviešinti savo paskaitų užrašus savo studentams."
 msgid "Easily communicate with Your students."
 msgstr "Lengvai bendrauti su savo studentais."
 
+#, python-format
+msgid ""
+"The teacher %(teacher_name)s (%(teacher_url)s) sent a message to Your "
+"group:"
+msgstr "Dėstytojas %(teacher_name)s (%(teacher_url)s) parašė žinutę Jūsų grupei:"
+
+msgid "If You reply to this message, the teacher will not get Your replies."
+msgstr "Atsakant į šią žinutę, dėstytojas atsakymų negaus."
+
 msgid "A new teacher has registered:"
 msgstr "Užsiregistravo naujas dėstytojas:"
 
@@ -2429,6 +2483,9 @@ msgstr "Jūsų prašymas prisijungti prie Ututi dėstytojų atmestas."
 #, python-format
 msgid "If this was a misunderstanding, please contact us directly at: %(email)s."
 msgstr "Jeigu tai nesusipratimas, susisiekite su mumis: %(email)s."
+
+msgid "A user wants to become a teacher:"
+msgstr "Narys nori tapti dėstytoju:"
 
 msgid "No categories yet."
 msgstr "Kategorijų nėra"
@@ -2754,18 +2811,18 @@ msgstr "Žymos"
 msgid "Who can send messages to the mailing list"
 msgstr "Kas gali siųsti laiškus į el. pašto konferenciją"
 
+msgid "Members only"
+msgstr "Tik nariai"
+
+msgid "Everybody (moderated)"
+msgstr "Visi (moderuojama)"
+
 msgid ""
 "If you select 'moderated', you can pick the people who you want to allow "
 "to post to the mailing list."
 msgstr ""
 "Pasirinkę 'moderuojama', galėsite nurodyti, kurie žmonės galės rašyti į "
 "el. pašto konferenciją."
-
-msgid "Members only"
-msgstr "Tik nariai"
-
-msgid "Moderated"
-msgstr "Moderuojama"
 
 msgid "Edit group front page"
 msgstr "Redaguoti grupės pagrindinį puslapį"
@@ -3575,6 +3632,33 @@ msgstr "įkelti failą į.."
 msgid "Quickly upload files to your groups and subjects."
 msgstr "Greitas failų įkėlimas į grupes ir dalykus."
 
+msgid "Share with your friends"
+msgstr "Dalinkis su draugais"
+
+msgid "Found it interesting? Share with your friends!"
+msgstr "Pasirodė įdomu? Pasidalink su draugais!"
+
+msgid "Here's what I've found in Ututi"
+msgstr "Štai ką radau Ututi"
+
+msgid "Your email"
+msgstr "El. pašto adresas"
+
+msgid "Recipients"
+msgstr "Gavėjai"
+
+msgid "Enter comma separated list of email addresses"
+msgstr "Įveskite kableliais atskirtų el. pašto adresų sąrašą"
+
+msgid "E-mail subject"
+msgstr "El. laiško tema"
+
+msgid "Your email was successfully sent."
+msgstr "El. laiškas sėkmingai išsiųstas"
+
+msgid "Send via email"
+msgstr "Siųsti el. paštu"
+
 msgid "Watched subjects"
 msgstr "Stebimi dalykai"
 
@@ -3657,6 +3741,12 @@ msgstr "Ututi naujienos"
 msgid "More news"
 msgstr "Daugiau naujienų"
 
+msgid "Teacher's information"
+msgstr "Dėstytojo informacija"
+
+msgid "Phone:"
+msgstr "Tel.:"
+
 msgid "Friends of ututi"
 msgstr "Ututi draugai"
 
@@ -3684,28 +3774,35 @@ msgstr "grįžti į pradžią"
 msgid "Your GG number"
 msgstr "Tavo GG numeris"
 
-msgid "(unconfirmed)"
-msgstr "(nepatvirtintas)"
+msgid "GG number is not confirmed"
+msgstr "GG numeris nepatvirtintas"
 
-msgid "Send code again"
-msgstr "Siųsti kodą dar kartą"
+msgid "Enter the code that you have received in your GG"
+msgstr "Įveskite kodą, kurį gavote savo GG"
 
 msgid ""
-"If you want to confirm your GaduGadu number,\n"
-"                     please enter the code that you have received\n"
-"                     in your GG. Also don't forget to add Ututi\n"
-"                    (<a href=\"gg:5437377\">5437377</a>) to your friends."
+"\n"
+"\n"
+"                      Should you not have received the code, please press"
+" \"Send code again\".\n"
+"                      Also don't forget to add Ututi (<a "
+"href=\"gg:5437377\">5437377</a>) to your friends!"
 msgstr ""
-"Jei norite patvirtinti savo GaduGadu numerį,\n"
-"įveskite per GG gautą kodą. Ir nepamirškite Ututi\n"
-"(<a href=\"gg:5437377\">5437377</a>) pridėti prie savo\n"
-"draugų."
+"\n"
+"\n"
+"                      Jei negavote kodo, spauskite press \"Siųsti kodą "
+"dar kartą\".\n"
+"                      Taip pat nepamirškite pridėti Ututi (<a "
+"href=\"gg:5437377\">5437377</a>) prie savo bičiulių!"
 
 msgid "Submit code"
 msgstr "Patvirtinti"
 
-msgid "number is confirmed"
-msgstr "numeris patvirtintas"
+msgid "Send code again"
+msgstr "Siųsti kodą dar kartą"
+
+msgid "GG number is confirmed"
+msgstr "GG numeris patvirtintas"
 
 msgid "Receive news into gg"
 msgstr "Gauti naujienas į GG"
@@ -3713,20 +3810,48 @@ msgstr "Gauti naujienas į GG"
 msgid "Mobile phone number"
 msgstr "Mobilaus telefono numeris"
 
-msgid "Please enter the code that you should have received by SMS."
-msgstr "Įveskite kodą, gautą SMS žinute."
+msgid "Number is not confirmed"
+msgstr "Numeris nepatvirtintas"
 
-msgid "get confirmation email"
-msgstr "gauti patvirtinimo el. laišką"
+msgid "Enter the code that you have received by SMS"
+msgstr "Įveskite kodą, kurį mes jums atsiuntėme SMS"
 
-msgid "email is confirmed"
-msgstr "el. pašto adresas patvirtintas"
+msgid "Should you not have received the code, please press \"Send code again\""
+msgstr "Jei negavote kodo, spauskite \"Siųsti kodą dar kartą\""
 
-msgid "Unlink"
-msgstr "Atsieti"
+msgid "Number is confirmed"
+msgstr "Numeris patvirtintas"
 
-msgid "Link to"
-msgstr "Susieti su"
+msgid "Email is confirmed"
+msgstr "El. pašto adresas patvirtintas"
+
+msgid "Get confirmation email"
+msgstr "Gauti patvirtinimo laišką"
+
+msgid "Email is not confirmed"
+msgstr "El. pašto adresas nepatvirtintas"
+
+msgid "Link with Google and Facebook"
+msgstr "Susieti paskyrą su Google ir Facebook"
+
+msgid "Link Google"
+msgstr "Susieti su Google"
+
+msgid "Unlink Google"
+msgstr "Atsieti nuo Google"
+
+msgid "Link Facebook"
+msgstr "Susieti su Facebook"
+
+msgid "Unlink Facebook"
+msgstr "Atsieti nuo Facebook"
+
+msgid ""
+"Click the buttons to link or unlink your profile with Google and/or "
+"Facebook"
+msgstr ""
+"Paspauskite mygtukus norėdami susieti arba atsieti savo paskyrą su Google"
+" ir/ar Facebook"
 
 msgid "Address of your website or blog"
 msgstr "Nuosavo puslapio arba blog'o adresas"
@@ -3748,6 +3873,9 @@ msgstr "Naujas slaptažodis"
 
 msgid "Repeat the new password"
 msgstr "Pakartok naują slaptažodį"
+
+msgid "Edit a student group"
+msgstr "Redaguoti grupę"
 
 msgid "What's new?"
 msgstr "Kas naujo?"
@@ -3954,39 +4082,36 @@ msgstr "10 litų"
 msgid "50 litas"
 msgstr "50 litų"
 
-msgid "Welcome to Ututi!"
-msgstr "Sveiki prisijungę prie Ututi!"
+msgid "Delete this group?"
+msgstr "Panaikinti šią grupę?"
+
+msgid "add groups"
+msgstr "pridėti grupes"
+
+msgid "My student groups"
+msgstr "Mano studentų grupės"
+
+msgid "Add student groups that you teach to."
+msgstr "Pasirinkite grupes, kurioms dėstote."
+
+msgid "Add courses you teach"
+msgstr "Pridėkite dėstomus kursus"
+
+msgid "Create subjects you teach, or find those that are already created:"
+msgstr "Sukurkite savo dėstomą dalyką arba pridėkite jau sukurtą:"
 
 msgid ""
-"You have not been confirmed as a teacher yet. Our administrators will "
-"verify you shortly.Until then, your profile rights may be limited."
+"Here you will be able to upload course material, and groups studying the "
+"subject will be notified automatically."
 msgstr ""
-"Jūs dar nesate patvirtintas kaip dėstytojas. Mūsų administratoriai tai "
-"greitai padarys. Iki tol Jūsų teisės bus apribotos."
+"Čia galėsite įkelti dėstomų dalykų medžiagą. Jūsų studentai pranešimus "
+"apie naują medžiagą gaus automatiškai."
 
-msgid "Enter the groups of your students"
-msgstr "Įveskite studentų grupes"
+msgid "All Your course materials with be organized in one place."
+msgstr "Visa Jūsų akademinė medžiaga bus sutelkta vienoje vietoje."
 
-msgid "Send messages to Your students easily"
-msgstr "Lengvai siųskite studentams žinutes"
-
-msgid "Add a group"
-msgstr "Pridėti grupę"
-
-msgid "Please specify the courses you are teaching"
-msgstr "Nurodykite kursus, kuriuos dėstote"
-
-msgid "Get in touch with your students"
-msgstr "Bendraukite su studentais"
-
-msgid "Share course materials easily"
-msgstr "Lengvai platinkite studijų medžiagą"
-
-msgid "Find courses I teach"
-msgstr "Rasti mano dėstomus kursus"
-
-msgid "find courses I teach"
-msgstr "rasti mano dėstomus kursus"
+msgid "add courses"
+msgstr "pridėti kursus"
 
 msgid "Add:"
 msgstr "Pridėti:"
@@ -3994,17 +4119,14 @@ msgstr "Pridėti:"
 msgid "Create wiki page"
 msgstr "Kurti wiki puslapį"
 
-msgid "Tell us where you work"
-msgstr "Pasakykite mums, kur dėstote"
-
 msgid "My courses"
 msgstr "Mano kursai"
 
-msgid "add courses"
-msgstr "pridėti kursus"
-
 msgid "Student groups"
 msgstr "Studentų grupės"
+
+msgid "Add a group"
+msgstr "Pridėti grupę"
 
 msgid "Thank you for supporting Ututi!"
 msgstr "Ačiū, kad palaikai Ututi!"
@@ -4017,6 +4139,18 @@ msgstr ""
 "Tu ką tik prisidėjai prie Ututi tobulinimo! Už tai tavo profilyje "
 "neužilgo atsiras medalis,\n"
 "rodantis Ututi rėmėjo statusą. Sėkmės naudojantis Ututi!"
+
+msgid "Welcome to Ututi!"
+msgstr "Sveiki prisijungę prie Ututi!"
+
+msgid ""
+"At the moment You are not confirmed as a teacher. Our administrators have"
+" been notified and will verify You shortly. Please be patient. Meanwhile "
+"please tell us more about yourself."
+msgstr ""
+"Šiuo metu Jūs nesate patvirtintas kaip dėstytojas. Mūsų administratoriai "
+"gavo pranešimą ir netrukus Jus patvirtins. Būkite kantrūs. Iki tol galite"
+" papasakoti mums daugiau apie save."
 
 msgid "Forum posts"
 msgstr "Forumų pranešimai"
@@ -4062,6 +4196,12 @@ msgstr "Grupių stebimi dalykai"
 
 msgid "Subject updates"
 msgstr "Dalykų pokyčiai"
+
+msgid "Moderated posts"
+msgstr "Moderuojami laiškai"
+
+msgid "New groups"
+msgstr "Naujos grupės"
 
 msgid "Wall settings"
 msgstr "Sienos nustatymai"
@@ -4135,6 +4275,9 @@ msgstr "Baigta"
 
 msgid "Suspicious file?"
 msgstr "Įtartinas failas?"
+
+msgid "Teacher's material"
+msgstr "Dėstytojo medžiaga"
 
 msgid "Rename"
 msgstr "Pervadinti"
@@ -4258,11 +4401,32 @@ msgstr ""
 msgid "I teach this"
 msgstr "Aš tai dėstau"
 
-msgid "Files:"
-msgstr "Failų: "
+msgid "Edit group"
+msgstr "Redaguoti grupę"
 
-msgid "Wiki pages:"
-msgstr "Wiki užrašų:"
+msgid "Edit this group"
+msgstr "Redaguoti šią grupę"
+
+msgid "Delete this group"
+msgstr "Trinti šią grupę"
+
+msgid "Contact the group:"
+msgstr "Susisiekite su grupe:"
+
+msgid "Send message"
+msgstr "Siųsti žinutę"
+
+msgid "Send SMS"
+msgstr "Siųsti SMS"
+
+msgid "Attachment:"
+msgstr "Prisegtukas:"
+
+msgid "Your message was successfully sent."
+msgstr "Žinutė išsiųsta."
+
+msgid "Your SMS was successfully sent."
+msgstr "SMS išsiųsta."
 
 msgid "Group or user:"
 msgstr "Grupė arba narys:"
@@ -4343,6 +4507,10 @@ msgid ""
 "%(user_link)s has posted a new message %(message_link)s to the group "
 "%(group_link)s."
 msgstr "%(user_link)s parašė naują žinutę %(message_link)s grupėje %(group_link)s."
+
+#, python-format
+msgid "Teacher %(user_link)s sent a message to the group %(group_link)s."
+msgstr "Dėstytojas %(user_link)s parašė žinutę grupei %(group_link)s."
 
 #, python-format
 msgid ""
@@ -4475,7 +4643,7 @@ msgid ""
 "upload and share course material with students of your class, university "
 "or the entire world."
 msgstr ""
-"įkelkite ir dalinkitės studijų medžiaga su savo grupiųm universiteto ar "
+"įkelkite ir dalinkitės studijų medžiaga su savo grupių, universiteto ar "
 "viso pasaulio studentais"
 
 msgid "Easy way to reach your students"
@@ -4698,49 +4866,54 @@ msgstr "Asmeniniai konspektai, užrašyti paskaitos metu"
 msgid "Any text that you want to collaborate on with your classmates"
 msgstr "Bet koks tekstas, kurį norite ruošti kartu su grupės draugais"
 
-msgid "2. School"
-msgstr "2. Mokykla"
+msgid "Register as teacher:"
+msgstr "Registruotis dėstytoju:"
+
+msgid "Please verify, that the data below is correct."
+msgstr "Patvirtinkite, kad pateikti duomenys yra teisingi."
+
+msgid "Advantages of teacher's profile:"
+msgstr "Dėstytojo profilio privalumai:"
+
+msgid "Teacher profile"
+msgstr "Dėstytojo profilis"
+
+msgid "submit your CV, thoughts, biography and academic papers."
+msgstr "pateikite savo mintis, CV, biografiją ir akademinius straipsnius."
+
+msgid "Course material sharing"
+msgstr "Kurso medžiagos platinimas"
+
+msgid "Direct messaging"
+msgstr "Tiesioginis bendravimas"
+
+msgid "create a private dialog with one or multiple students or groups."
+msgstr ""
+"užmegzkite privatų dialogą su vienu ar keliais studentais arba studentų "
+"grupėmis."
+
+msgid "SMS"
+msgstr "SMS"
 
 msgid ""
-"Tell us where You teach, so that we can verify You. Additional schools "
-"can be added after registration."
+"send SMSs to your groups or friends. Get notifications and updates to "
+"your cell phone."
 msgstr ""
-"Nurodykite, kur dėstote, kad galėtumėme Jus patvirtinti. Papildomus "
-"universitetus galėsite pridėti po registracijos."
-
-msgid "Register as a teacher"
-msgstr "Registruotis mokytoju"
-
-msgid "Be patient"
-msgstr "Kantrybės"
+"siųskite SMS žinutes jūsų studentų grupėms ar kolegoms. Gaukite "
+"priminimus ir naujienas tiesiai į mobilųjį telefoną."
 
 msgid ""
-"After registering, You will need to be confirmed as a teacher by our "
-"administrators."
+"Please enter your university email. That way it will be easier to verify "
+"your identity."
 msgstr ""
-"Po registracijos mūsų administratoriai turės patikrinti, ar tikrai esate "
-"dėstytojas."
+"Nurodykite savo universitetinį el. pašto adresą. Taip bus paprasčiau "
+"patvirtinti, kad esate dėstytojas."
 
-msgid "University email"
-msgstr "Universitetinis el. paštas"
+msgid "Register using your Google or Facebook account"
+msgstr "Prisijunkite arba registruokitės per savo Google ar Facebook paskyrą"
 
-msgid ""
-"Specify your university email address - this will make it easier to "
-"verify You as a teacher."
-msgstr ""
-"Nurodykite savo universitetinį el. pašto adresą - taip bus lengviau "
-"patikrinti, ar esate dėstytojas."
-
-msgid "Several universities?"
-msgstr "Keli universitetai?"
-
-msgid ""
-"If You teach at more than one university, specify Your primary one: You "
-"will be able to specify Your information in more detail once You have "
-"registered."
-msgstr ""
-"Jeigu dėstote daugiau universitetų, nurodykite pagrindinį: detaliau "
-"nurodyti savo informaciją galėsite po registracijos."
+msgid "Log in using Facebook"
+msgstr "Prisijungti per Facebook"
 
 msgid "Member information"
 msgstr "Apie naudotoją"
@@ -4751,9 +4924,6 @@ msgstr "Ką nuveikė %(user)s?"
 
 msgid "Nothing yet."
 msgstr "Iki šiol nieko."
-
-msgid "Send message"
-msgstr "Siųsti žinutę"
 
 #, python-format
 msgid "Log in as %(user)s"
@@ -4776,6 +4946,12 @@ msgstr "Apdovanoti medaliu"
 
 msgid "Award"
 msgstr "Apdovanojimas"
+
+msgid "teachers"
+msgstr "dėstytojai"
+
+msgid "Taught courses"
+msgstr "Dėstomi dalykai"
 
 msgid ""
 "Send an SMS message to all your classmates. The service is paid by SMS "

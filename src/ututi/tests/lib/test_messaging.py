@@ -58,6 +58,50 @@ def test_message_user():
     """
 
 
+def test_message_attachments():
+    """Tests for email attachments
+
+        >>> config._push_object(pylons.test.pylonsapp.config)
+        >>> import cStringIO
+
+        >>> msg = EmailMessage("the subject", 'The contents of the file.', attachments=[{'filename': 'file.txt', 'file':cStringIO.StringIO('the content')}])
+
+        >>> msg.send('someemail@somehost.lt')
+
+        >>> print mail_queue.pop().message
+        Content-Type: multipart/mixed; boundary="===============...=="
+        MIME-Version: 1.0
+        From: info@ututi.lt
+        To: someemail@somehost.lt
+        Subject: the subject
+        <BLANKLINE>
+        This is a multi-part message in MIME format.
+        --===============...==
+        Content-Type: multipart/alternative;
+        	boundary="===============...=="
+        MIME-Version: 1.0
+        Content-Disposition: inline
+        <BLANKLINE>
+        --===============...==
+        MIME-Version: 1.0
+        Content-Type: text/plain; charset="us-ascii"
+        Content-Transfer-Encoding: 7bit
+        <BLANKLINE>
+        The contents of the file.
+        --===============...==--
+        --===============...==
+        Content-Type: application/octet-stream
+        MIME-Version: 1.0
+        Content-Transfer-Encoding: base64
+        Content-Disposition: attachment; filename="file.txt"
+        <BLANKLINE>
+        dGhlIGNvbnRlbnQ=
+        --===============...==--
+        >>> config._pop_object(pylons.test.pylonsapp.config)
+
+    """
+
+
 def test_ggmessage_user():
     """Tests for gadugadu messaging.
 

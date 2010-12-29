@@ -75,7 +75,7 @@ page itself:
 
     >>> browser.printQuery("//div[@class='flash-message']/span")
     <span class="close-link hide-parent">
-      <img alt="Close" src="/img/icons/bigX_15x15.png" />
+      <img alt="Close" src="/images/details/icon_delete.png" />
     </span>
     <span>Document at http://localhost/admin/404 was not found, but maybe you are interested in something else?</span>
 

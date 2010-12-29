@@ -78,7 +78,7 @@ Restore all the other files:
     text_in_a_folder.txt
 
     >>> browser.open('http://localhost/group/moderators/files')
-    >>> browser.printQuery("//li[@class='file']/a/text()")
+    >>> browser.printQuery("//li[@class='file']//a/text()")
     text1.txt Adminas Adminovix
     text2.txt Adminas Adminovix
     text4.txt Adminas Adminovix

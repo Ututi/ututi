@@ -21,7 +21,10 @@ labels = {
    'grp_group_members': _('Group members'),
    'grp_page_events': _('Page changes'),
    'grp_group_watched_subjects': _('Watched group subjects'),
-   'grp_subjects': _('Subject updates')}
+   'grp_subjects': _('Subject updates'),
+   'moderated_post_created': _('Moderated posts'),
+   'group_created': _('New groups'),
+}
 %>
 
 <%def name="form_item(item)">

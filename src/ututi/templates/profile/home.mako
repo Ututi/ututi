@@ -1,6 +1,10 @@
 <%inherit file="/profile/home_base.mako" />
 <%namespace file="/sections/standard_objects.mako" import="subject_listitem" />
 
+<%def name="pagetitle()">
+${_('Home')}
+</%def>
+
 <%def name="head_tags()">
 ${parent.head_tags()}
 <script type="text/javascript">

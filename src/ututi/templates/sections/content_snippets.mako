@@ -107,8 +107,8 @@
     <span class="verysmall">(${_('Subject rating:')} </span><span>${h.image('/images/details/stars%d.png' % object.rating(), alt='', class_='subject_rating')|n})</span>
     <div class="description">
       ${item_location(object)}
-      % if object.lecturer:
-       | ${object.lecturer}
+      % if object.teacher_repr:
+       | ${object.teacher_repr}
       % endif
       %if object.tags:
        | ${item_tags(object)}
@@ -185,11 +185,9 @@
   </div>
 </%def>
 
-<%def name="tooltip(text, style=None)">
-  ${h.literal(h.image('/images/details/icon_question.png', 
-              alt=text,
-              class_='tooltip',
-              style=style))}
+<%def name="tooltip(text, style=None, img=None)">
+  <% if img is None: img = '/images/details/icon_question.png' %>
+  ${h.image(img, alt=text, class_='tooltip', style=style)}
 </%def>
 
 <%def name="tabs()">

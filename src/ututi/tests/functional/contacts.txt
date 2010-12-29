@@ -19,7 +19,7 @@ Functional tests for contacts form
     >>> form.getControl('Your email address').value
     'odmin@ututi.lt'
 
-    >>> form.getControl('get confirmation email').click()
+    >>> form.getControl('Get confirmation email').click()
 
     >>> print mail_queue.pop()
     <EmailInfo sender='info@ututi.lt' recipients=['odmin@ututi.lt']>

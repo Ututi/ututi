@@ -237,8 +237,11 @@ class GroupMailingListMessage(ContentItem):
             message.replace_header('Reply-To', address)
         except KeyError:
             message.add_header('Reply-To', address)
-        message.add_header('Errors-To', config.get('email_to', 'errors@ututi.lt'))
-        message.add_header('List-Id', address)
+
+        if not message.getHeader('Errors-To'):
+            message.add_header('Errors-To', config.get('email_to', 'errors@ututi.lt'))
+        if not message.getHeader('List-Id'):
+            message.add_header('List-Id', address)
 
         if footer:
             payload = self.body + footer
@@ -259,7 +262,7 @@ class GroupMailingListMessage(ContentItem):
         return email.message_from_string(message_text, UtutiEmail)
 
     @classmethod
-    def fromMessageText(cls, message_text):
+    def fromMessageText(cls, message_text, force=False):
         message = cls.parseMessage(message_text)
         message_id = message.getMessageId()
         g = message.getGroup()
@@ -280,7 +283,8 @@ class GroupMailingListMessage(ContentItem):
 
         whitelist = [i.email for i in g.whitelist]
         if not (author_address in whitelist or
-                author is not None and g.is_member(author)):
+                author is not None and g.is_member(author)
+                or force):
             if g.mailinglist_moderated:
                 in_moderation_queue = True
             else:

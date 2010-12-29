@@ -258,13 +258,13 @@ button.btnMedium {
     padding: 0 15px 0 0;
     font-size: 16px;
     text-align: center;
-    background: transparent url("img/buttons_bg_split.png") no-repeat right -140px;
+    background: transparent url("img/buttons_bg_split.png") no-repeat right -138px;
 }
 
 button.btnMedium span {
     padding: 7px 0 0 15px;
     height: 26px;
-    background: transparent url("img/buttons_bg_split.png") no-repeat left -30px;
+    background: transparent url("img/buttons_bg_split.png") no-repeat left -28px;
 }
 
 /* * html button.btnMedium span { height: 31px; } */
@@ -950,9 +950,9 @@ div.personal-data div .question{
     padding: 2px 0 0 86px;
 }
 div.MyProfile div.profile div.personal-data h2{
-    font-size: 14px;
+    font-size: 16px;
     color: #333;
-    font-weight: bold;
+    margin-bottom: 5px;
 }
 div.MyProfile div.profile div.personal-data h2.group-name{
     font-size: 18px;
@@ -1084,10 +1084,11 @@ div.profileOptionLinks div.drop{
 }
 
 input.checkbox,
+#loginForm input.checkbox,
 #login-screen input.checkbox,
 #group_settings_form input.checkbox,
 .fullForm input.checkbox {
-    width: 1em;
+    width: 1em !important;
     margin: 0 5px 0 0;
 }
 
@@ -1176,6 +1177,7 @@ input.checkbox,
 
 /* Portlets */
 .portlet, #SearchResults, .portletModule, .portlet-verysmall {
+    background: #f6f6f6;
     background-repeat: no-repeat;
     border-left: 1px solid #ded8d8;
     border-right: 1px solid #ded8d8;
@@ -2904,8 +2906,23 @@ li.file {
     margin: 3px 0;
 }
 
+    /* Fit tooltips on the left of file description. */
+
+    li.file span.tooltip-container,
+    li.file span.file-description {
+        display: inline-block;
+    }
+
+    li.file span.tooltip-container {
+        width: 25px;
+    }
+
 li.file img.drag-target {
     cursor: move;
+    vertical-align: middle;
+}
+
+li.file img.tooltip {
     vertical-align: middle;
 }
 
@@ -2923,7 +2940,8 @@ li.file .date {
     color: #666;
 }
 
-li.file .author {
+li.file .author,
+li.file .deleted-by {
     font-size: 0.85em;
 }
 
@@ -2961,10 +2979,6 @@ li.file img.delete_button {
 
 .subfolder {
     margin-top: 10px;
-}
-
-.subfolder .folder {
-    padding-left: 25px;
 }
 
 /* end folders */
@@ -4147,29 +4161,6 @@ div.search-item div.description {
     margin: 0.1em 0;
 }
 
-/* flash messages */
-.flash-message,
-.action-reply {
-    border: 1px dashed #FF7920;
-    background: white;
-    margin: 5px 0 0.8em;
-    padding: 0.3em 3em 0.6em 0.8em;
-    position: relative;
-    font-size: 12px;
-}
-
-.flash-message .close-link {
-    position: absolute;
-    top: 5px; right: 10px;
-    color: black;
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-.message {
-    color: #333333;
-}
-
 /* watched subjects */
 .personal_watched_subjects {
     padding-left: 10px;
@@ -4876,6 +4867,10 @@ body .ui-widget button.btnMedium {
   background-image: url("../img/icons/grupe-big-off.png");
 }
 
+.wall_item.teacher_event {
+  background-image: url("../img/icons/teacher-gray.png");
+}
+
 .wall_item.message_event,
 .wall_item.privatemessage_event {
   background-image: url("../img/icons/message-large.png");
@@ -5030,10 +5025,10 @@ ul.universityMembersInfo li{
 
 /* Forms with grouped controls */
 
-.fullForm .collection div.children {
+.collection div.children {
   margin-bottom: 10px;
 }
-.fullForm .collection .expander {
+.collection .expander {
   float: left;
   width: 15px;
   height: 15px;
@@ -5042,15 +5037,15 @@ ul.universityMembersInfo li{
   cursor: pointer;
 }
 
-.fullForm .open .expander {
+.open .expander {
   background: url("../images/details/expand_down.png") center center no-repeat;
 }
 
-.fullForm .collection .children {
+.collection .children {
   padding-left: 15px;
 }
 
-.fullForm .form_item {
+.form_item {
   margin-left: 25px;
 }
 
@@ -5096,34 +5091,8 @@ ul.universityMembersInfo li{
   width: 350px;
 }
 
-.dashboard_action_block .formField {
-  width: 500px;
-  margin: 5px 0;
-}
-
-.dashboard_action_block .formField label {
-  margin: 5px 0;
-  float: right;
-}
-
-.dashboard_action_block .labelText {
-  margin-right: 15px;
-}
-
-.dashboard_action_block textarea {
-  border: 1px solid #888;
-  background: white;
-  width: 500px;
-  margin: 5px 50px;
-}
-
 .dashboard_action_block .formArea {
   text-align: center;
-}
-
-.dashboard_action_block .formSubmit {
-  float: right;
-  margin: 5px 50px;
 }
 
 #upload_file_block .formSubmit {
@@ -5222,3 +5191,50 @@ a.disabled, a.disabled:hover {
 }
 
 /* End Teacher Home */
+
+/* Begin contact settings */
+
+#google-and-facebook-buttons {
+    width: 310px; /* equals standard form field width */
+}
+
+#google-and-facebook-buttons #google-link-button,
+#google-and-facebook-buttons #google-unlink-button {
+    float: left;
+}
+
+#google-and-facebook-buttons #fb-link-button,
+#google-and-facebook-buttons #fb-unlink-button {
+    float: right;
+}
+
+#google-and-facebook-buttons a {
+    display: block;
+}
+
+#google-and-facebook-buttons a#google-unlink-button,
+#google-and-facebook-buttons a#fb-unlink-button {
+    background: url("img/icons/tick_big.png") right center no-repeat;
+    padding-right: 20px;
+    margin-right: -20px;
+}
+
+#google-and-facebook-buttons a#google-link-button:hover,
+#google-and-facebook-buttons a#fb-link-button:hover {
+    background: url("images/icons/cross_big.png") right center no-repeat;
+}
+
+/* End contact settings */
+
+/* Teacher's material specific stylings */
+
+.teacher-content .filename {
+    font-weight: bold;
+}
+
+.teacher-content .author {
+    padding-left: 10px;
+    background: url(img/icons/teacher_small.png) no-repeat left center;
+}
+
+/* End teacher's material specific stylings */

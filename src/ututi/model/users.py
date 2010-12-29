@@ -59,6 +59,12 @@ class User(object):
     """The User object - Ututi users."""
     is_teacher = False
 
+    def change_type(self, type, **kwargs):
+        from ututi.model import users_table
+        conn = meta.engine.connect()
+        upd = users_table.update().where(users_table.c.id==id).values(user_type=type, **kwargs)
+        conn.execute(upd)
+
     @property
     def email(self):
         email = self.emails[0]
@@ -229,6 +235,7 @@ class User(object):
             .filter(gmt.c.user_id == self.id)
         return directly_watched_subjects.union(
             group_watched_subjects.except_(user_ignored_subjects))\
+            .order_by(Subject.title.asc())\
             .all()
 
     def _setWatchedSubject(self, subject, ignored):
@@ -488,6 +495,17 @@ class Teacher(User):
         if self.teaches(subject):
             self.taught_subjects.remove(subject)
 
+    @property
+    def share_info(self):
+        if self.location:
+            caption = ' '.join(self.location.title_path) + ' ' + _("teacher")
+        else:
+            caption = _("Teacher")
+        return dict(title=self.fullname,
+                    caption=caption,
+                    link=self.url(qualified=True),
+                    description=self.description)
+
 
 class GroupNotFoundException(Exception):
     pass
@@ -495,13 +513,25 @@ class GroupNotFoundException(Exception):
 
 class TeacherGroup(object):
     def __init__(self, title, email):
-        from ututi.model import Group
         self.title = title
         self.email = email
+        self.update_binding()
+
+    @classmethod
+    def get(cls, id):
+        try:
+            return meta.Session.query(cls).filter_by(id=id).one()
+        except NoResultFound:
+            return None
+
+    def update_binding(self):
+        from ututi.model import Group
         hostname = config.get('mailing_list_host', 'groups.ututi.lt')
-        if email.endswith(hostname):
-            group = Group.get(email[:-(len(hostname)+1)])
+        self.group = None
+        if self.email.endswith(hostname):
+            group = Group.get(self.email[:-(len(hostname)+1)])
             if group is not None:
                 self.group = group
             else:
                 raise GroupNotFoundException()
+

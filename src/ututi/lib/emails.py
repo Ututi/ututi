@@ -95,3 +95,9 @@ def teacher_registered_email(teacher):
     text = render('/emails/teacher_registered.mako', extra_vars={'teacher': teacher})
     msg = EmailMessage(_('New teacher!'), text, force=True)
     msg.send(config.get('ututi_email_from', 'info@ututi.pl'))
+
+def teacher_request_email(user):
+    """Notify team of a new teacher."""
+    text = render('/emails/teacher_request.mako', extra_vars={'user': user})
+    msg = EmailMessage(_('Request to be come a teacher!'), text, force=True)
+    msg.send(config.get('ututi_email_from', 'info@ututi.pl'))

@@ -6,30 +6,29 @@
   <h1 class='pageTitle'>${_("Contacts")}:</h1>
 
   <fieldset>
+
+    ## GADU GADU
+
     %if c.gg_enabled:
       <div>
         ${h.input_line('gadugadu_uin', _('Your GG number'))}
 
           %if c.user.gadugadu_uin:
               %if not c.user.gadugadu_confirmed:
-                <div class="field-status">${_('(unconfirmed)')}</div>
-                <div>
-                    ${h.input_submit(_('Send code again'), name='resend_gadugadu_code')}
-                </div>
-                ${_("""If you want to confirm your GaduGadu number,
-                     please enter the code that you have received
-                     in your GG. Also don't forget to add Ututi
-                    (<a href="gg:5437377">5437377</a>) to your friends.""")|n}
-                <br />
-                <div class="floatleft" style="width: 290px">
-                    ${h.input_line('gadugadu_confirmation_key', '')}
-                </div>
-                <div class="floatleft">
-                  ${h.input_submit(_('Submit code'), name='confirm_gadugadu')}
-                </div>
+                <span class="field-status">${_('GG number is not confirmed')}</span>
+                ${h.input_line('gadugadu_confirmation_key',
+                               _("Enter the code that you have received in your GG"),
+                               help_text=h.literal(_("""
+
+                      Should you not have received the code, please press "Send code again".
+                      Also don't forget to add Ututi (<a href="gg:5437377">5437377</a>) to your friends!""")),
+
+                               right_next=h.input_submit(_('Submit code'), name='confirm_gadugadu') + \
+                                          h.input_submit_text_button(_('Send code again'), name='resend_gadugadu_code')
+                               )}
               %else:
                 <input type="hidden"  name="gadugadu_confirmation_key" />
-                <div class="field-status confirmed"><div>${_('number is confirmed')}</div></div>
+                <span class="field-status confirmed">${_('GG number is confirmed')}</span>
                 <div class="no-break">
                   <label for="gadugadu_get_news">
                     <input type="checkbox" name="gadugadu_get_news" class="checkbox"
@@ -48,80 +47,84 @@
       <input type="hidden" name="gadugadu_confirmation_key" />
     %endif
 
-    <div style="clear: left">
-      ${h.input_line('phone_number', _('Mobile phone number'))}
+    ## PHONE NUMBER
 
-      %if c.user.phone_number:
-        %if not c.user.phone_confirmed:
-          <div class="field-status">${_('(unconfirmed)')}</div>
-          <div>
-            ${h.input_submit(_('Send code again'), name='resend_phone_code')}
-          </div>
-          ${_("""Please enter the code that you should have received by SMS.""")}
-          <br />
-          <div class="floatleft" style="width: 290px">
-            ${h.input_line('phone_confirmation_key', '')}
-          </div>
-          <div class="floatleft">
-            ${h.input_submit(_('Submit code'), name='confirm_phone')}
-          </div>
-        %else:
-          <input type="hidden"  name="phone_confirmation_key" />
-          <div class="field-status confirmed"><div>${_('number is confirmed')}</div></div>
-        %endif
+    ${h.input_line('phone_number', _('Mobile phone number'))}
+
+    %if c.user.phone_number:
+      %if not c.user.phone_confirmed:
+        <span class="field-status">${_('Number is not confirmed')}</span>
+        ${h.input_line('phone_confirmation_key',
+                       _("Enter the code that you have received by SMS"),
+                       help_text=_('Should you not have received the code, please press "Send code again"'),
+                       right_next=h.input_submit(_('Submit code'), name='confirm_phone') + \
+                                  h.input_submit_text_button(_('Send code again'), name='resend_phone_code')
+                       )}
       %else:
-        <input type="hidden" name="phone_confirmation_key" />
+        <span class="field-status confirmed">${_('Number is confirmed')}</span>
+        <input type="hidden"  name="phone_confirmation_key" />
       %endif
-    </div>
+    %else:
+      <input type="hidden" name="phone_confirmation_key" />
+    %endif
 
-    <div style="clear: left">
+    ## E-MAIL
+
+    %if c.user.isConfirmed:
       ${h.input_line('email', _('Your email address'))}
-      %if not c.user.isConfirmed:
-      <div class="field-status">(unconfirmed)</div>
-      <div>
-        <input type="submit"
-               class="text_button"
-               value="${_('get confirmation email')}" name='confirm_email'
-               style="font-size: 13px;" />
+      <span class="field-status confirmed">${_('Email is confirmed')}</span>
+    %else:
+      ${h.input_line('email', _('Your email address'),
+                     right_next= h.input_submit_text_button(_('Get confirmation email'), name='confirm_email'))}
+      <span class="field-status">${_('Email is not confirmed')}</span>
+    %endif
+
+    ## GOOGLE AND FACEBOOK
+
+    <div class="formField">
+      <span class="labelText">${_("Link with Google and Facebook")}</span>
+      <div id="google-and-facebook-buttons">
+        %if not c.user.openid:
+          <a id="google-link-button" href="${url(controller='profile', action='link_google')}">
+            ${h.image('/img/google-button.png', alt=_('Link Google'))}
+          </a>
+        %else:
+          <a id="google-unlink-button" href="${url(controller='profile', action='unlink_google')}">
+            ${h.image('/img/google-button.png', alt=_('Unlink Google'))}
+          </a>
+        %endif
+
+        %if not c.user.facebook_id:
+          <a id="fb-link-button" href="#link-facebook">
+            ${h.image('/img/facebook-button.png', alt=_('Link Facebook'))}
+          </a>
+        %else:
+          <a id="fb-unlink-button" href="${url(controller='profile', action='unlink_facebook')}">
+            ${h.image('/img/facebook-button.png', alt=_('Unlink Facebook'))}
+          </a>
+        %endif
       </div>
-      %else:
-      <div class="field-status confirmed"><div>${_('email is confirmed')}</div></div>
-      %endif
+      <span class="helpText" style="clear:both">${_("Click the buttons to link or unlink your profile with Google and/or Facebook")}</span>
     </div>
 
-    ${h.input_submit(_('Save'), name='update_contacts', class_='btnMedium')}
+    ${h.input_submit(name='update_contacts', class_='btnMedium')}
+
   </fieldset>
 </form>
 
-<div style="margin-top: 30px">
-  %if c.user.openid:
-    ${_('Unlink')}
-    <a href="${url(controller='profile', action='unlink_google')}">
-      ${h.image('/img/google-logo.gif', alt='Google', class_='google-login')}
-    </a>
-  %else:
-    ${_('Link to')}
-    <a href="${url(controller='profile', action='link_google')}">
-      ${h.image('/img/google-logo.gif', alt='Google', class_='google-login')}
-    </a>
-  %endif
+<script>
+  $(document).ready(function() {
+    $('#fb-link-button').click(function() {
+        // attempt to login FB
+        FB.login(function(response) {
+            if (response.session && response.perms) {
+                // user is logged in and granted some permissions.
+                // perms is a comma separated list of granted permissions
+                window.location = '${url(controller='profile', action='link_facebook')}';
+            }
+        }, {perms:'email'});
 
-  <div id="fb-root"></div>
-  <script src="http://connect.facebook.net/lt_LT/all.js"></script>
-  <script>
-    FB.init({appId: '${c.facebook_app_id}', status: true,
-        cookie: true, xfbml: true});
-  </script>
-  %if c.user.facebook_id:
-    ${h.button_to(_('Unlink'), url(controller='profile', action='unlink_facebook'))}
-    ${_('Unlink')}
-    <fb:login-button perms="email"
-      onlogin="window.location = '${url(controller='profile', action='unlink_facebook')}'"
-     >${_('Connect')}</fb:login-button>
-  %else:
-    ${_('Link to')}
-    <fb:login-button perms="email"
-      onlogin="window.location = '${url(controller='profile', action='link_facebook')}'"
-     >${_('Connect')}</fb:login-button>
-  %endif
-</div>
+        return false;
+    });
+  });
+</script>

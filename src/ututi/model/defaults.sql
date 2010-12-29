@@ -229,7 +229,7 @@ create table groups (
        private_files_lock_date timestamp default null,
        ending_period_notification_sent bool default false,
        out_of_space_notification_sent bool default false,
-       mailinglist_moderated bool not null default false,
+       mailinglist_moderated bool not null default true,
        primary key (id));;
 
 /* group mailinglist whitelist */
@@ -748,9 +748,11 @@ CREATE TRIGGER on_content_create BEFORE INSERT ON content_items
 /* a trigger to update the date and user who modified the object */
 CREATE FUNCTION on_content_update() RETURNS trigger AS $$
     BEGIN
-      IF CAST(current_setting('ututi.active_user') AS int8) > 0 THEN
-        NEW.modified_by = current_setting('ututi.active_user');
-        NEW.modified_on = (now() at time zone 'UTC');
+      IF (current_setting('ututi.active_user') <> '') THEN
+        IF CAST(current_setting('ututi.active_user') AS int8) > 0 THEN
+          NEW.modified_by = current_setting('ututi.active_user');
+          NEW.modified_on = (now() at time zone 'UTC');
+        END IF;
       END IF;
       RETURN NEW;
     END
@@ -775,6 +777,7 @@ create table events (
        post_id int8 references forum_posts(id) on delete cascade default null,
        sms_id int8 references outgoing_group_sms_messages(id) on delete cascade default null,
        private_message_id int8 references private_messages(id) on delete cascade default null,
+       data text default null,
        primary key (id));;
 
 create index events_author_id_idx on events(author_id);
@@ -788,7 +791,8 @@ $$ LANGUAGE plpgsql;;
 
 CREATE FUNCTION set_ci_modtime(content_item_id int8) RETURNS void AS $$
     BEGIN
-      IF CAST(current_setting('ututi.active_user') AS int8) > 0 THEN
+      IF (current_setting('ututi.active_user') <> '') AND
+         CAST(current_setting('ututi.active_user') AS int8) > 0 THEN
         UPDATE content_items SET modified_by = cast(current_setting('ututi.active_user') as int8),
           modified_on = (now() at time zone 'UTC') WHERE id = content_item_id;
       END IF;

@@ -113,6 +113,9 @@ def is_teacher(user, context=None):
 def is_verified_teacher(user, context=None):
     return user is not None and user.is_teacher and user.teacher_verified
 
+def is_group_teacher(user, context=None):
+    return is_verified_teacher(user, context) and context.teacher == user
+
 def is_owner(user, context=None):
     return context.created is user
 
@@ -138,6 +141,7 @@ crowd_checkers = {
     "user": is_user,
     "teacher": is_teacher,
     "verified_teacher": is_verified_teacher,
+    "group_teacher": is_group_teacher,
     "smallfile": is_smallfile,
     }
 
@@ -203,7 +207,7 @@ def bot_protect(method):
     def _protected(self):
         ua  = request.headers.get('user-agent')
         bot = re.compile('googlebot', re.IGNORECASE)
-        if bot.search(ua):
+        if ua is not None and bot.search(ua):
             abort(404)
         return method(self)
     return _protected

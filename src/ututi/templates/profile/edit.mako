@@ -10,7 +10,14 @@ ${user_sidebar()}
 ${c.user.fullname}
 </%def>
 
+<%def name="subheader()">
 <a class="back-link" href="${url(controller='profile', action='home')}">${_('back to home page')}</a>
+</%def>
+
+%if hasattr(self, 'subheader'):
+## a placeholder to put in a notification block for unverified teachers
+  ${self.subheader()}
+%endif
 
 ${tabs()}
 

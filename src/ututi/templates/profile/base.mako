@@ -5,12 +5,16 @@
 ${user_sidebar()}
 </%def>
 
-<%def name="pagetitle()">
-${_('Home')}
-</%def>
+%if hasattr(self, 'pagetitle'):
+  <h1 class="pageTitle">${self.pagetitle()}</h1>
+%endif
 
-<h1 class="pageTitle">${self.pagetitle()}</h1>
-%if c.action:
+<%
+  ## Now this is a bit ugly, but these tabs will go away soon anyhow.
+  show_tabs = not c.user.is_teacher
+%>
+
+%if c.action and show_tabs:
 <ul class="moduleMenu">
   <li class="${'current' if c.action == 'home' else ''}"><a href="${url(controller='profile', action='home')}">${_('Start')}<span class="edge"></span></a></li>
   <li class="${'current' if c.action == 'feed' else ''}"><a href="${url(controller='profile', action='feed')}">${_("News wall")}

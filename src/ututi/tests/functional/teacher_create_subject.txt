@@ -9,9 +9,9 @@ Let's login as a verified teacher:
     >>> form.getControl('Password').value = "password"
     >>> form.getControl('Login').click()
 
-We go directly to subject creation page:
+We click the big button to create the first subject:
 
-    >>> browser.open('http://localhost/subject/add')
+    >>> browser.getControl('add courses').click()
 
 Observe that the page doesn't show "Lecturer's" field.
 Instead, a hidden value with teacher's name is silently submitted:
@@ -50,16 +50,21 @@ This subject also appears on teacher's homepage:
     >>> browser.printQuery("id('subject_list')//div[@class='subject-description-list']//dt//text()")
     Never nude
 
-While on the home page, let's fill in location information:
+Let's go to the settings, to fill out the location information:
 
+    >>> browser.getLink('Settings').click()
     >>> browser.getControl('University').value = 'Vilniaus universitetas'
     >>> browser.getControl('Department').value = 'Ekonomikos fakultetas'
-    >>> browser.getControl('save').click()
+    >>> browser.getControl('Save').click()
 
-If teacher now tries to add another subject, location fields will be prefilled
-by default (and hidden via CSS or javascript, he may edit them if he wants to):
+Now back to home page and click to add another subject:
 
-    >>> browser.open('http://localhost/subject/add')
+    >>> browser.getLink('back to home page').click()
+    >>> browser.getControl('add courses').click()
+
+This time location fields will be prefilled by default 
+(and hidden via CSS or javascript, he may edit them if he wants to):
+
     >>> browser.getControl('University:').value
     'Vilniaus universitetas'
 

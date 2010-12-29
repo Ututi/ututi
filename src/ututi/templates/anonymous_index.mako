@@ -80,7 +80,7 @@
         </span>
       </label>
       <form:error name="agree"/>
-      <label id="agreeWithTOC"><input type="checkbox" name="agree" value="true"/>${_('I agree to the ')} <a rel="nofollow" id="terms_link" href="${url(controller='home', action='terms')}">${_('terms of use')}</a></label>
+      <label id="agreeWithTOC"><input class="checkbox" type="checkbox" checked="checked" name="agree" value="true"/>${_('I agree to the ')} <a rel="nofollow" id="terms_link" href="${url(controller='home', action='terms')}">${_('terms of use')}</a></label>
       <div style="text-align: center;">
         <button class="btnMedium" type="submit" value="${_('Register')}"><span>${_('Register')}</span></button>
       </div>

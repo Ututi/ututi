@@ -38,6 +38,7 @@ from ututi.lib.messaging import SMSMessage
 from ututi.lib.emails import group_invitation_email, group_space_bought_email
 from ututi.lib.security import check_crowds
 from ututi.lib.group_payment_info import GroupPaymentInfo
+from ututi.lib.helpers import literal, link_to
 from nous.mailpost import copy_chunked
 
 from zope.cachedescriptors.property import Lazy
@@ -721,6 +722,12 @@ class ContentItem(object):
                 return level
         return 0
 
+    @property
+    def share_info(self):
+        raise NotImplementedError("This method should be overridden by Ututi"
+                                  " objects to provide their link, title and"
+                                  " description.")
+
 
 class Folder(list):
 
@@ -1320,6 +1327,13 @@ class Subject(ContentItem, FolderMixin, LimitedUploadMixin):
             location = location.parent
         return '/'.join(reversed(path))
 
+    @property
+    def teacher_repr(self):
+        if self.teachers:
+            return literal(', '.join([link_to(t.fullname, t.url()) for t in self.teachers]))
+        else:
+            return self.lecturer
+
     def url(self, controller='subject', action='home', **kwargs):
         return url(controller=controller,
                    action=action,
@@ -1403,6 +1417,7 @@ class Subject(ContentItem, FolderMixin, LimitedUploadMixin):
                 'title': self.title,
                 'url': self.url(),
                 'lecturer': self.lecturer,
+                'teachers': self.teacher_repr,
                 'file_cnt': len(self.files),
                 'page_cnt': len(self.pages),
                 'group_cnt': self.group_count(),
@@ -1438,6 +1453,13 @@ class Page(ContentItem):
     def last_version(self):
         if self.versions:
             return self.versions[0]
+        else:
+            raise AttributeError("This page has no versions!")
+
+    @property
+    def original_version(self):
+        if self.versions:
+            return self.versions[-1]
         else:
             raise AttributeError("This page has no versions!")
 
@@ -2418,6 +2440,12 @@ class SchoolGrade(object):
         except NoResultFound:
             return None
 
+    def get_books(self, **kwargs):
+        books = meta.Session.query(Book).filter(Book.school_grade==self)
+        if kwargs:
+             books = books.filter_by(**kwargs)
+        return books.all()
+
 
 class ScienceType(object):
     """Representation of book science type"""
@@ -2442,6 +2470,12 @@ class ScienceType(object):
             return Department.get(self.book_department_id)
 
         return property(getDepartment, setDepartment)
+
+    def get_books(self, **kwargs):
+        books = meta.Session.query(Book).filter(Book.science_type==self)
+        if kwargs:
+             books = books.filter_by(**kwargs)
+        return books.all()
 
 
 class BookType(object):

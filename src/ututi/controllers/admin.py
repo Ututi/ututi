@@ -687,18 +687,20 @@ class AdminController(BaseController):
     @validate(schema=TeacherSearchForm, form='teachers')
     def teachers(self):
         c.teachers = meta.Session.query(Teacher).filter(Teacher.teacher_verified == False).all()
+        user_id = request.params.get('user_id', None)
+        user_name = None
         if hasattr(self, 'form_result'):
-            user_id = self.form_result.get('user_id', None)
+            user_id = self.form_result.get('user_id', user_id)
             user_name = self.form_result.get('user_name', None)
-            c.found_users = []
-            if user_id is not None or user_name is not None:
-                users = meta.Session.query(User).join(Email)
-                if user_id is not None:
-                    users = users.filter(User.id == user_id)
-                elif user_name is not None:
-                    users = users.filter(or_(User.fullname.ilike('%%%s%%' % user_name),
-                                             Email.email.ilike('%%%s%%' % user_name)))
-                c.found_users = users.all()
+        c.found_users = []
+        if user_id is not None or user_name is not None:
+            users = meta.Session.query(User).join(Email)
+            if user_id is not None:
+                users = users.filter(User.id == user_id)
+            elif user_name is not None:
+                users = users.filter(or_(User.fullname.ilike('%%%s%%' % user_name),
+                                         Email.email.ilike('%%%s%%' % user_name)))
+            c.found_users = users.all()
         return render('admin/teachers.mako')
 
     @ActionProtector("root")
@@ -740,6 +742,7 @@ class AdminController(BaseController):
 
     @ActionProtector("root")
     def example_lists(self):
+        c.example_subjects = meta.Session.query(Subject).limit(5)
         return render('sections/example_lists.mako')
 
     @ActionProtector("root")
