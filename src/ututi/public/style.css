@@ -2906,8 +2906,23 @@ li.file {
     margin: 3px 0;
 }
 
+    /* Fit tooltips on the left of file description. */
+
+    li.file span.tooltip-container,
+    li.file span.file-description {
+        display: inline-block;
+    }
+
+    li.file span.tooltip-container {
+        width: 25px;
+    }
+
 li.file img.drag-target {
     cursor: move;
+    vertical-align: middle;
+}
+
+li.file img.tooltip {
     vertical-align: middle;
 }
 
@@ -2964,10 +2979,6 @@ li.file img.delete_button {
 
 .subfolder {
     margin-top: 10px;
-}
-
-.subfolder .folder {
-    padding-left: 25px;
 }
 
 /* end folders */
