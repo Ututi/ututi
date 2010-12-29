@@ -185,11 +185,9 @@
   </div>
 </%def>
 
-<%def name="tooltip(text, style=None)">
-  ${h.literal(h.image('/images/details/icon_question.png', 
-              alt=text,
-              class_='tooltip',
-              style=style))}
+<%def name="tooltip(text, style=None, img=None)">
+  <% if img is None: img = '/images/details/icon_question.png' %>
+  ${h.image(img, alt=text, class_='tooltip', style=style)}
 </%def>
 
 <%def name="tabs()">
