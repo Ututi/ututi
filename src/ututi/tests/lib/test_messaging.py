@@ -69,34 +69,34 @@ def test_message_attachments():
         >>> msg.send('someemail@somehost.lt')
 
         >>> print mail_queue.pop().message
-        Content-Type: multipart/mixed; boundary="===============0957416568342600015=="
+        Content-Type: multipart/mixed; boundary="===============...=="
         MIME-Version: 1.0
         From: info@ututi.lt
         To: someemail@somehost.lt
         Subject: the subject
         <BLANKLINE>
         This is a multi-part message in MIME format.
-        --===============0957416568342600015==
+        --===============...==
         Content-Type: multipart/alternative;
-        	boundary="===============6286617673523193993=="
+        	boundary="===============...=="
         MIME-Version: 1.0
         Content-Disposition: inline
         <BLANKLINE>
-        --===============6286617673523193993==
+        --===============...==
         MIME-Version: 1.0
         Content-Type: text/plain; charset="us-ascii"
         Content-Transfer-Encoding: 7bit
         <BLANKLINE>
         The contents of the file.
-        --===============6286617673523193993==--
-        --===============0957416568342600015==
+        --===============...==--
+        --===============...==
         Content-Type: application/octet-stream
         MIME-Version: 1.0
         Content-Transfer-Encoding: base64
         Content-Disposition: attachment; filename="file.txt"
         <BLANKLINE>
         dGhlIGNvbnRlbnQ=
-        --===============0957416568342600015==--
+        --===============...==--
         >>> config._pop_object(pylons.test.pylonsapp.config)
 
     """
