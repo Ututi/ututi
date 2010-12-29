@@ -25,7 +25,11 @@
       % if not page.isDeleted() or h.check_crowds(['moderator']):
        <% teacher_class = 'teacher-content' if page.original_version.created.is_teacher else '' %>
        <div class="${teacher_class} ${'wiki-tekstas' if n < count - 1 else 'wiki-tekstas-last'}">
-         <p><span class="orange bold"><a href="${page.url()}" title="${page.title}">${page.title}</a></span>
+         <p>
+            %if page.original_version.created.is_teacher:
+              ${tooltip(_("Teacher's material"), img='/img/icons/teacher-cap.png')}
+            %endif
+           <span class="orange bold"><a href="${page.url()}" title="${page.title}">${page.title}</a></span>
            <span class="grey verysmall"> ${h.fmt_dt(page.last_version.created_on)} </span>
            <span class="author verysmall"><a href="${page.last_version.created.url()}">${page.last_version.created.fullname}</a></span>
          </p>
