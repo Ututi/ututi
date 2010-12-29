@@ -13,6 +13,7 @@ File upload:
     >>> print dedent(res.body)
     <BLANKLINE>
     <li class="file">
+      ...
       <img alt="file icon" class="drag-target" src="/images/details/icon_drag_file_orange.png" />
       <a class="filename" href="/subject/vu/mat_analize/file/4/get">text;for you.txt</a>
       <span class="file_rename_form hidden">
@@ -34,6 +35,7 @@ File upload:
       <input class="rename_url" type="hidden" value="/subject/vu/mat_analize/file/4/rename" />
       <input class="folder_title_value" type="hidden" value="" />
       <img src="/images/delete.png" alt="delete file" class="delete_button" />
+      ...
     </li>
     <BLANKLINE>
 
