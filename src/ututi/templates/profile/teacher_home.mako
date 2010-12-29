@@ -92,9 +92,8 @@ ${parent.head_tags()}
 <h2>${_('Add courses you teach')}</h2>
 <p><strong>${_('Create subjects you teach, or find those that are already created:')}</strong></p>
 <ul class="pros-list">
-  <li>${_('Here you will be able to upload course material, and groups watching the subject will be notified automatically.')}</li>
-  <li>${_('You will be able to send messages to groups watching the subject.')}</li>
-  <li>${_('Some other killer argument: i.e. how did I live without Ututi all this time?')}</li>
+  <li>${_('Here you will be able to upload course material, and groups studying the subject will be notified automatically.')}</li>
+  <li>${_('All Your course materials with be organized in one place.')}</li>
 </ul>
 ${h.button_to(_('add courses'), url(controller='subject', action='add'), class_='btnMedium', method='GET')}
 </%b:rounded_block>

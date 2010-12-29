@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-12-19 10:50+0200\n"
+"POT-Creation-Date: 2010-12-29 17:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -151,6 +151,11 @@ msgid "Authentication failed: %s"
 msgstr ""
 
 msgid "Wrong username or password!"
+msgstr ""
+
+msgid ""
+"Thank You! Your request to become a teacher has been received. We will notify"
+" You once we grant You the rights of a teacher."
 msgstr ""
 
 msgid "Facebook did not provide your email address."
@@ -616,6 +621,9 @@ msgstr ""
 msgid "New page"
 msgstr ""
 
+msgid "This email address is already in use."
+msgstr ""
+
 msgid ""
 "All teacher tools will be available to You once our team confirms You as a "
 "teacher. Thank You!"
@@ -716,6 +724,15 @@ msgstr ""
 msgid "This email is already in use."
 msgstr ""
 
+msgid "Please enter email subject."
+msgstr ""
+
+msgid "Message can not be empty."
+msgstr ""
+
+msgid "Please enter at least one value."
+msgstr ""
+
 msgid "The recipient is not specified."
 msgstr ""
 
@@ -755,6 +772,9 @@ msgid "Your account has been confirmed!"
 msgstr ""
 
 msgid "New teacher!"
+msgstr ""
+
+msgid "Request to be come a teacher!"
 msgstr ""
 
 msgid "Community"
@@ -970,6 +990,10 @@ msgid "Subject %(link_to_subject)s was modified"
 msgstr ""
 
 #, python-format
+msgid "Teacher %(link_to_author)s sent message to the group %(link_to_group)s."
+msgstr ""
+
+#, python-format
 msgid ""
 "New email post %(link_to_message)s was posted on %(link_to_group)s mailing "
 "list"
@@ -1054,6 +1078,12 @@ msgid "Moderator"
 msgstr ""
 
 msgid "Group admin"
+msgstr ""
+
+msgid "teacher"
+msgstr ""
+
+msgid "Teacher"
 msgstr ""
 
 msgid ""
@@ -2219,6 +2249,9 @@ msgstr ""
 msgid "If this was a misunderstanding, please contact us directly at: %(email)s."
 msgstr ""
 
+msgid "A user wants to become a teacher:"
+msgstr ""
+
 msgid "No categories yet."
 msgstr ""
 
@@ -3279,6 +3312,33 @@ msgstr ""
 msgid "Quickly upload files to your groups and subjects."
 msgstr ""
 
+msgid "Share with your friends"
+msgstr ""
+
+msgid "Found it interesting? Share with your friends!"
+msgstr ""
+
+msgid "Here's what I've found in Ututi"
+msgstr ""
+
+msgid "Your email"
+msgstr ""
+
+msgid "Recipients"
+msgstr ""
+
+msgid "Enter comma separated list of email addresses"
+msgstr ""
+
+msgid "E-mail subject"
+msgstr ""
+
+msgid "Your email was successfully sent."
+msgstr ""
+
+msgid "Send via email"
+msgstr ""
+
 msgid "Watched subjects"
 msgstr ""
 
@@ -3354,9 +3414,6 @@ msgid "More news"
 msgstr ""
 
 msgid "Teacher's information"
-msgstr ""
-
-msgid "teacher"
 msgstr ""
 
 msgid "Phone:"
@@ -3667,14 +3724,6 @@ msgstr ""
 msgid "Delete this group?"
 msgstr ""
 
-msgid "Welcome to Ututi!"
-msgstr ""
-
-msgid ""
-"You have not been confirmed as a teacher yet. Our administrators will verify "
-"you shortly.Until then, your profile rights may be limited."
-msgstr ""
-
 msgid "add groups"
 msgstr ""
 
@@ -3691,14 +3740,11 @@ msgid "Create subjects you teach, or find those that are already created:"
 msgstr ""
 
 msgid ""
-"Here you will be able to upload course material, and groups watching the "
+"Here you will be able to upload course material, and groups studying the "
 "subject will be notified automatically."
 msgstr ""
 
-msgid "You will be able to send messages to groups watching the subject."
-msgstr ""
-
-msgid "Some other killer argument: i.e. how did I live without Ututi all this time?"
+msgid "All Your course materials with be organized in one place."
 msgstr ""
 
 msgid "add courses"
@@ -3726,6 +3772,15 @@ msgid ""
 "You have just contributed to the development of Ututi! A medal, signifying "
 "your Ututi supporter status, should soon appear in your profile. Good luck "
 "continuing to use Ututi!"
+msgstr ""
+
+msgid "Welcome to Ututi!"
+msgstr ""
+
+msgid ""
+"At the moment You are not confirmed as a teacher. Our administrators have "
+"been notified and will verify You shortly. Please be patient. Meanwhile "
+"please tell us more about yourself."
 msgstr ""
 
 msgid "Forum posts"
@@ -3851,6 +3906,9 @@ msgstr ""
 msgid "Suspicious file?"
 msgstr ""
 
+msgid "Teacher's material"
+msgstr ""
+
 msgid "Rename"
 msgstr ""
 
@@ -3959,12 +4017,6 @@ msgstr ""
 msgid "I teach this"
 msgstr ""
 
-msgid "Files:"
-msgstr ""
-
-msgid "Wiki pages:"
-msgstr ""
-
 msgid "Edit group"
 msgstr ""
 
@@ -3974,10 +4026,22 @@ msgstr ""
 msgid "Delete this group"
 msgstr ""
 
+msgid "Contact the group:"
+msgstr ""
+
 msgid "Send message"
 msgstr ""
 
+msgid "Send SMS"
+msgstr ""
+
+msgid "Attachment:"
+msgstr ""
+
 msgid "Your message was successfully sent."
+msgstr ""
+
+msgid "Your SMS was successfully sent."
 msgstr ""
 
 msgid "Group or user:"
@@ -4050,6 +4114,10 @@ msgstr ""
 msgid ""
 "%(user_link)s has posted a new message %(message_link)s to the group "
 "%(group_link)s."
+msgstr ""
+
+#, python-format
+msgid "Teacher %(user_link)s sent a message to the group %(group_link)s."
 msgstr ""
 
 #, python-format
@@ -4438,6 +4506,12 @@ msgid "Award a medal"
 msgstr ""
 
 msgid "Award"
+msgstr ""
+
+msgid "teachers"
+msgstr ""
+
+msgid "Taught courses"
 msgstr ""
 
 msgid ""
