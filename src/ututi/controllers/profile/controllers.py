@@ -119,7 +119,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
 
     @ActionProtector("user")
     def feed(self):
-        c.breadcrumbs.append(self._actions('home'))
+        c.breadcrumbs.append(self._actions('feed'))
 
         c.events = self._user_events()
         c.action = 'feed'
@@ -484,6 +484,9 @@ class UserProfileController(ProfileControllerBase):
         """
         bcs = {
             'home':
+            {'title': _("Home"),
+             'link': url(controller='profile', action='home')},
+            'feed':
             {'title': _("What's New?"),
              'link': url(controller='profile', action='home')},
             'subjects':
@@ -575,7 +578,7 @@ class TeacherProfileController(ProfileControllerBase):
         """
         bcs = {
             'home':
-            {'title': _("What's New?"),
+            {'title': _("Home"),
              'link': url(controller='profile', action='home')},
             }
         if selected in bcs.keys():

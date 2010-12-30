@@ -49,6 +49,10 @@
 }
 </%def>
 
+<%def name="pagetitle()">
+  ${_("Home")}
+</%def>
+
 <%def name="head_tags()">
 ${parent.head_tags()}
   ${h.javascript_link('/javascript/teacher_dashboard.js')}
