@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-12-30 16:42+0200\n"
+"PO-Revision-Date: 2010-12-30 17:13+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -736,6 +736,9 @@ msgstr "E-mail nie może zostać potwierdzony: błędny kod potwierdzający"
 msgid "Your university information has been updated."
 msgstr "Informacje o Twojej uczelni zostały zaktualizowane."
 
+msgid "Home"
+msgstr "Home"
+
 msgid "I like it"
 msgstr "I like it"
 
@@ -1394,9 +1397,6 @@ msgstr "Studencka wiedza w sieci"
 
 msgid "Main menu"
 msgstr "Menu główne"
-
-msgid "Home"
-msgstr "Home"
 
 msgid "Browse"
 msgstr "Szukaj"
@@ -4163,8 +4163,8 @@ msgstr "Moje przedmioty"
 msgid "Student groups"
 msgstr "Grupy studenckie"
 
-msgid "Add a group"
-msgstr "Dodaj grupę"
+msgid "add a group"
+msgstr ""
 
 msgid "Thank you for supporting Ututi!"
 msgstr "Dziękujemy za wsparcie Ututi!"
@@ -4186,6 +4186,9 @@ msgid ""
 " been notified and will verify You shortly. Please be patient. Meanwhile "
 "please tell us more about yourself."
 msgstr ""
+
+msgid "Wall settings"
+msgstr "Ustawienia strony"
 
 msgid "Forum posts"
 msgstr "Posty na forach"
@@ -4237,9 +4240,6 @@ msgstr ""
 
 msgid "New groups"
 msgstr "Nowe grupy"
-
-msgid "Wall settings"
-msgstr "Ustawienia strony"
 
 msgid "Which events do You want to see on Your wall?"
 msgstr "Jakie wydarzenia chcesz zobaczyć na swojej tablicy?"

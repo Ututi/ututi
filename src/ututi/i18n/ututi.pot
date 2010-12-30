@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-12-30 16:42+0200\n"
+"POT-Creation-Date: 2010-12-30 17:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -681,6 +681,9 @@ msgstr ""
 msgid "Your university information has been updated."
 msgstr ""
 
+msgid "Home"
+msgstr ""
+
 msgid "I like it"
 msgstr ""
 
@@ -1285,9 +1288,6 @@ msgid "Student information online"
 msgstr ""
 
 msgid "Main menu"
-msgstr ""
-
-msgid "Home"
 msgstr ""
 
 msgid "Browse"
@@ -3762,7 +3762,7 @@ msgstr ""
 msgid "Student groups"
 msgstr ""
 
-msgid "Add a group"
+msgid "add a group"
 msgstr ""
 
 msgid "Thank you for supporting Ututi!"
@@ -3781,6 +3781,9 @@ msgid ""
 "At the moment You are not confirmed as a teacher. Our administrators have "
 "been notified and will verify You shortly. Please be patient. Meanwhile "
 "please tell us more about yourself."
+msgstr ""
+
+msgid "Wall settings"
 msgstr ""
 
 msgid "Forum posts"
@@ -3832,9 +3835,6 @@ msgid "Moderated posts"
 msgstr ""
 
 msgid "New groups"
-msgstr ""
-
-msgid "Wall settings"
 msgstr ""
 
 msgid "Which events do You want to see on Your wall?"
