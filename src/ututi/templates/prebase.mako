@@ -209,7 +209,7 @@ ${self.anonymous_menu()}
 <%def name="flash_messages()">
 <div id="flash-messages">
   % if c.serve_file:
-  <iframe style="display: none;" src="${c.serve_file.url()}"> </iframe>
+  <iframe style="display: none;" src="${c.serve_file.url(attachment=1)}"> </iframe>
   % endif
 
   <% messages = h.flash.pop_messages() %>
@@ -307,9 +307,6 @@ ${self.anonymous_menu()}
       $(document).ready(function(){$('#test_warning').click(function(){$(this).hide();})});
     </script>
     %endif
-  % if c.serve_file:
-  <iframe style="display: none;" src="${c.serve_file.url()}"> </iframe>
-  % endif
 
     <div id="wrap">
       <div id="widthLimiter">

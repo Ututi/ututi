@@ -35,11 +35,11 @@ class UndeleteForm(Schema):
     parent_id = ParentIdValidator()
 
 
-def serve_file(file):
+def serve_file(file, attachment=False):
     headers = [('Content-Disposition', 'attachment; filename="%s"' % file.filename.encode('utf-8'))]
     content_type, content_encoding = mimetypes.guess_type(file.filename.encode('utf-8'))
     kwargs = {'content_type': content_type}
-    if content_type in ['image/png', 'image/jpeg']:
+    if content_type in ['image/png', 'image/jpeg'] and not attachment:
         headers = [('Content-Disposition', 'inline; filename="%s"' % file.filename.encode('utf-8'))]
     return forward(FileApp(file.filepath(), headers=headers, **kwargs))
 
@@ -49,6 +49,8 @@ class BasefilesController(BaseController):
     def _get(self, file):
         if file.deleted is not None or file.isNullFile():
             abort(404)
+
+        attachment_mode = 'attachment' in request.params.keys()
         if c.user:
             range_start = None
             range_end = None
@@ -60,7 +62,7 @@ class BasefilesController(BaseController):
 
             c.user.download(file, range_start, range_end)
             meta.Session.commit()
-        return serve_file(file)
+        return serve_file(file, attachment_mode)
 
     def _delete(self, file):
         file.deleted = c.user
