@@ -206,9 +206,6 @@
         </div>
       </div>
       <div>
-        <div class="logo">
-          <img src="/img/icons/icon-group-tiny.png" widht="14" height="13" alt="logo" />
-        </div>
         <div class="group-title">
           <dt>
             ${group.title}
@@ -229,7 +226,9 @@
     </%def>
 
   <div class="group-actions">
-      <span style="padding-right: 15px;" class="gray">${_('Contact the group:')}</span>
+      <span class="tiny-text" style="margin-right: 5px">
+        ${_('Contact the group:')}
+      </span>
       <dd class="messages">
         <a href="#" title="${_('Send message')}" class="send_message click-action" id="send_message_${group.id}">
           ${_('Send message')}

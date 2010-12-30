@@ -22,14 +22,6 @@
     padding-left: 35px;
 }
 
-#groups_list .group-description .logo {
-    width: 20px;
-}
-
-#groups_list .group-description .group-actions {
-    padding-left: 20px;
-}
-
 #groups_list .inelement-form .formField label {
     float: left;
 }
@@ -183,7 +175,7 @@ ${h.button_to(_('add courses'), url(controller='subject', action='add'), class_=
     %if c.user.student_groups:
     <%b:item_list title="${_('Student groups')}" items="${c.user.student_groups}">
       <%def name="header_button()">
-        ${h.button_to(_('Add a group'), url(controller='profile', action='add_student_group'), method='GET')}
+        ${h.button_to(_('add a group'), url(controller='profile', action='add_student_group'), method='GET')}
       </%def>
       <%def name="row(item)">
         ${group_listitem_teacherdashboard(item)}

@@ -536,16 +536,12 @@ ul.feature-list {
 .group-description {
     color: #666666;
     font-size: 11px;
-    padding: 10px 15px 10px 15px;
+    padding: 10px 15px 10px 30px;
+    background: url("img/icons/icon-group-tiny.png") no-repeat 10px 10px;
 }
 
     .group-description dd {
        display: inline;
-    }
-
-    .group-description .logo {
-        float: left;
-        width: 45px;
     }
 
     .group-description .group-title {
@@ -553,7 +549,7 @@ ul.feature-list {
     }
 
     .group-description .group-title dt {
-        font-size: 16px;
+        font-size: 13px;
         font-weight: bold;
         color: #d45500;
     }
@@ -569,7 +565,6 @@ ul.feature-list {
 
     .group-description .location-tags {
         display: inline;
-        font-size: 14px;
         margin-left: 10px;
     }
 
