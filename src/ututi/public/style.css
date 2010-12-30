@@ -1580,13 +1580,13 @@ div.message-list-off, div.message-list-off1 {
 div.message-list-on div.m-on, div.message-list-off div.m-on,
 div.message-list-on1 div.m-on, div.message-list-off1 div.m-on {
     padding:6px 0 6px 45px;
-    width:440px;
+    width:400px;
 }
 div.message-list-on div.user, div.message-list-off div.user,
 div.message-list-on1 div.user, div.message-list-off1 div.user {
     padding: 6px 15px 6px 0px;
     text-align: right;
-    width: 130px;
+    width: 170px;
     background: url("img/icons/cross_small.png") no-repeat right 7px;
 }
 
