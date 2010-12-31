@@ -19,32 +19,94 @@ h1.title {
     padding-bottom: 10px;
     padding-top: 65px;
     position: relative;
-    width: 980px;
+    width: 1025px;
 }
 
 .head-nav {
     left: 0;
-    position: absotule;
-    top: 11px;
+    position: absolute;
+    top: 5px;
     z-index: 1000;
 }
 
+.head-nav a {
+     background-color: #E6E6E6;
+     color: #1a1a1a;
+     font-size: 14px;
+     text-align: center;
+}
+
+.head-nav a.current_item {
+    background: url("../images/books/current_item_bg.gif") no-repeat scroll left center transparent;
+}
+
+.head-nav a.item {
+    background: url("../images/books/item_bg.gif") no-repeat scroll left center transparent;
+}
+
+.head-nav a.upload {
+    color: #FFF;
+}
+
 .loggedin-nav {
-    position: absolute;
-    right: 5px;
-    top: 12px;
+    float: left;
+    top: 18px;
+    right: 0px;
     z-index: 100;
 }
 
-li#ulogo a {
-    background-color: white;
-    padding-top: 10px;
-    margin-top: -5px;
+.loggedin-nav .profile-nav {
+    color: #FFF;
+    background: none;
 }
 
+.loggedin-nav li {
+    border: none;
+}
 
-#search_portlet-content input {
-   width: 180px;
+.loggedin-nav li a:hover {
+    color: #95cd28;
+    font-size: 12px;
+}
+
+.loggedin-nav li a {
+    color: #95cd28;
+    font-size: 12px;
+    padding: 0 10px;
+}
+
+.loggedin-nav li span {
+    font-size: 12px;
+}
+
+.loggedin-nav li span.fullname {
+    padding-left: 0px;
+    padding-right: 20px;
+}
+
+.head-nav ul {
+    background-color: #333;
+}
+
+.head-nav li {
+    padding-top: 11px;
+    border-right: 5px solid #333;
+    height: 30px;
+    line-height: 30px;
+    width: 137px;
+}
+
+li#ulogo {
+    padding-top: 0px;
+    padding-right: 25px;
+    width: auto;
+}
+
+li#ulogo a {
+    background-color: #333;
+    padding-top: 0px;
+    margin-top: 0px;
+    padding-left: 10px;
 }
 
 .search_block, .book-form-block {
@@ -66,12 +128,13 @@ li#ulogo a {
 }
 
 #books-container #mainContent {
-    margin: 0 0 0 20px;
-    width: 656px;
+    margin: 0 0 0 27px;
+    width: 760px;
 }
 
 #books-container #aside {
     margin: 0px;
+    width: 230px;
 }
 
 .books-header, #search_results_header {
@@ -305,15 +368,91 @@ padding:3px 15px 0 30px;
 /* Books menu */
 div.action-portlet #button-to-school-books_content,
 div.action-portlet #button-to-university-books_content,
-div.action-portlet #button-to-other-books_content{
+div.action-portlet #button-to-other-books_content {
     padding: 0;
 }
 
-.book_types{
-    border: 2px solid gray;
+.blark {
+    font-size: 14px;
 }
+
+a.blark:hover {
+    color: #333;
+}
+
+div.action-portlet #button-to-school-books_content li:hover,
+div.action-portlet #button-to-university-books_content li:hover,
+div.action-portlet #button-to-other-books_content li:hover {
+    background-color: #ff9900;
+}
+
+div.action-portlet #button-to-school-books_content .header,
+div.action-portlet #button-to-school-books_content li,
+div.action-portlet #button-to-university-books_content .header,
+div.action-portlet #button-to-university-books_content li,
+div.action-portlet #button-to-other-books_content .header,
+div.action-portlet #button-to-other-books_content li {
+    padding-left: 10px;
+}
+
+div.action-portlet #button-to-school-books_content .header,
+div.action-portlet #button-to-university-books_content .header,
+div.action-portlet #button-to-other-books_content .header {
+    color: #333;
+    font-size: 14px;
+}
+
+div.action-portlet {
+    background: url("../images/books/books_menu_portlet_bg.png") no-repeat scroll center top transparent;
+    width: 230px;
+}
+
+div.action-portlet .content {
+    background: url("../images/books/books_menu_portlet_bg.png") no-repeat scroll center bottom transparent;
+}
+
+#search_portlet {
+    background: url("../images/books/search_portlet_bg.png") no-repeat scroll center top transparent;
+    width: 230px;
+    height: 54px;
+}
+
+#search_portlet .content {
+    padding-top: 17px;
+    padding-left: 7px;
+    padding-right: 7px;
+    text-align: center;
+}
+
+#search_portlet input {
+   width: 130px;
+   background: url("../images/books/search_input_bg.png") no-repeat scroll left top transparent;
+}
+
+#search_portlet .textField .edge {
+    background: url("../images/books/search_input_bg.png") no-repeat scroll right top transparent;
+}
+
+#search_portlet .btn {
+    background: url("../images/books/search_button_bg.png") no-repeat scroll right 0px transparent;
+    margin-right: 0px;
+    padding-right: 10px;
+}
+
+#search_portlet .btn span {
+    padding-left: 10px;
+    background: url("../images/books/search_button_bg.png") no-repeat scroll left top transparent;
+}
+
+.book_types {
+    border-left: 1px solid #d7d7d7;
+    border-right: 1px solid #d7d7d7;
+    border-style: none solid;
+    border-width: medium 1px;
+}
+
 ul.book_types li{
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid #d7d7d7;
     margin-left: 0;
     list-style: none outside none;
 }
@@ -323,8 +462,8 @@ ul.book_types li{
     background: white;
 }
 
-.book_types a{
-    color: darkGray;
+.book_types a {
+    color: #333;
 }
 
 
@@ -365,34 +504,57 @@ a.order-criteria{
 /* Books catalog + frontpage */
 #what_is_ubooks {
     background: url("../images/books/books-welcome-background.png") no-repeat scroll left center transparent;
-    width: 610px;
-    height: 120px;
-    padding: 20px;
+    height: 175px;
+    width: 735px;
 }
 
 #what_is_ubooks h3 {
-    font-size: 24px;
-    color: #4d4d4d;
+    color: #4D4D4D;
+    font-size: 25px;
+    font-weight: bold;
     margin-bottom: 20px;
+    padding-left: 19px;
+    padding-top: 9px;
+}
+#what_is_ubooks .button-right {
+    left: 480px;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: -70px;
+    position: relative;
+    text-align: center;
+    top: 68px;
+    width: 235px;
 }
 
-#what_is_ubooks .button-right {
-    text-align: right;
-    margin-top: -50px;
-    margin-right: 10px;
-}
 #what_is_ubooks .ubooks_explanation {
-    margin-left: 90px;
+    margin-left: 20px;
     margin-top: 10px;
     list-style: none;
 }
 
 #what_is_ubooks .ubooks_explanation li {
-    background: url("images/bullet_orange_small.png") no-repeat;
-    padding-left: 20px;
-    color: #666666;
+    background: url("../images/books/books_welcome_bullet.png") no-repeat;
+    padding-left: 40px;
+    color: #333333;
+    margin-right: 280px;
+    margin-top: 8px;
     font-size: 14px;
     line-height: 1.7;
+}
+
+#what_is_ubooks .btnMedium {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 0 22px 0 0;
+    background: url("../images/books/books_upload_button_bg.png") no-repeat scroll right 0px transparent;
+}
+
+#what_is_ubooks .btnMedium span {
+    color: #FFF;
+    height: 45px;
+    padding: 11px 0 0 25px;
+    background: url("../images/books/books_upload_button_bg.png") no-repeat scroll left 0px transparent;
 }
 
 /* Buttons */

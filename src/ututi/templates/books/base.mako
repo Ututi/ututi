@@ -33,9 +33,9 @@ ${books_menu(c.selected_books_department)}
     <li id="ulogo"><a rel="nofollow" href="/books" title="Ututi">
         <img src="/images/books/ubooks-logo.png" />
     </a></li>
-    <li><a href="${url(controller='books', action='index')}">${_('Home')}</a></li>
-    <li><a href="${url(controller='books', action='about')}">${_('About U-Books')}</a></li>
-    <li><a class="orange" href="${url(controller='books', action='add')}">${_('Upload a Book')}</a></li>
+    <li><a class="current_item" href="${url(controller='books', action='index')}">${_('Home')}</a></li>
+    <li><a class="item" href="${url(controller='books', action='about')}">${_('About U-Books')}</a></li>
+    <li><a class="item upload" href="${url(controller='books', action='add')}">${_('Upload a Book')}</a></li>
   </ul>
 </div>
 </%def>

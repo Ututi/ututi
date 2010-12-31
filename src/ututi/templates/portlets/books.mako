@@ -34,7 +34,7 @@
     </%def>
     <%self:book_types book_types="${c.book_types}" books_department="university" />
   </%self:action_portlet>
-  <%self:action_portlet id="button-to-other" expanding="True">
+  <%self:action_portlet id="button-to-other-books" expanding="True">
     <%def name="header()">
       ${_('Other')}
     </%def>
@@ -50,20 +50,20 @@
    //]]>
  </script>
  %endif
- <%self:uportlet id="search_portlet" portlet_class="orange">
-   <%def name="header()">
-     ${_('Search')}
-   </%def>
-   <form action="${url(controller='books', action='search')}">
-     <fieldset>
-       <legend class="a11y">${_('Search')}</legend>
-       <label class="textField">
-         <span class="a11y">${_('Search text')}</span>
-         <input type="text" name="text"/>
-         <span class="edge"></span>
-       </label>
-       ${h.input_submit(_('search_'))}
-     </fieldset>
-   </form>
- </%self:uportlet>
+
+ <div id="search_portlet">
+   <div id="search_portlet_content" class="content">
+     <form action="${url(controller='books', action='search')}">
+       <fieldset>
+         <legend class="a11y">${_('Search')}</legend>
+         <label class="textField">
+           <span class="a11y">${_('Search text')}</span>
+           <input type="text" name="text" />
+           <span class="edge"></span>
+         </label>
+         ${h.input_submit(_('search_'))}
+       </fieldset>
+     </form>
+   </div>
+ </div>
 </%def>
