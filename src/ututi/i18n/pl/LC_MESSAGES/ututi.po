@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-12-30 17:13+0200\n"
+"PO-Revision-Date: 2010-12-31 13:24+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -3842,6 +3842,9 @@ msgstr "Numer GG został potwierdzony."
 
 msgid "Receive news into gg"
 msgstr "Otrzymuj powiadomienia na gg"
+
+msgid "Use international format, +XXXXXXXXXXX"
+msgstr ""
 
 msgid "Mobile phone number"
 msgstr "Numer telefonu komórkowego"

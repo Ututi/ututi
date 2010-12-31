@@ -49,7 +49,14 @@
 
     ## PHONE NUMBER
 
-    ${h.input_line('phone_number', _('Mobile phone number'))}
+    <%
+    if c.user.phone_number and c.user.phone_confirmed:
+        phone_help = None
+    else:
+        phone_help = _('Use international format, +XXXXXXXXXXX')
+    %>
+
+    ${h.input_line('phone_number', _('Mobile phone number'), help_text=phone_help)}
 
     %if c.user.phone_number:
       %if not c.user.phone_confirmed:

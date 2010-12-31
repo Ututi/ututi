@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-12-30 17:14+0300\n"
+"PO-Revision-Date: 2010-12-31 13:25+0300\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
@@ -3431,6 +3431,9 @@ msgstr "GG numeris patvirtintas"
 
 msgid "Receive news into gg"
 msgstr "Gauti naujienas į GG"
+
+msgid "Use international format, +XXXXXXXXXXX"
+msgstr "Naudokite tarptautinį formatą, +370XXXXXXXX"
 
 msgid "Mobile phone number"
 msgstr "Mobilaus telefono numeris"
