@@ -380,6 +380,8 @@ class GroupController(BaseController, SubjectAddMixin, GroupWallMixin):
             if (self._check_handshakes(group, c.user) == 'invitation'
                 or not group.admins_approve_members):
                 group.add_member(c.user)
+                if c.user.location is None:
+                    c.user.location = group.location
                 self._clear_requests(group, c.user)
                 h.flash(_('You are now a member of the group %s!') % group.title)
             else:
@@ -477,6 +479,8 @@ class GroupController(BaseController, SubjectAddMixin, GroupWallMixin):
                 group.logo = logo.file.read()
 
             group.add_member(c.user, admin=True)
+            if c.user.location is None:
+                c.user.location = group.location
             self._apply_coupon(group, values)
             meta.Session.commit()
             redirect(url(controller='group', action='invite_members_step', id=values['id']))
@@ -515,6 +519,8 @@ class GroupController(BaseController, SubjectAddMixin, GroupWallMixin):
                 group.logo = logo.file.read()
 
             group.add_member(c.user, admin=True)
+            if c.user.location is None:
+                c.user.location = group.location
             self._apply_coupon(group, values)
             meta.Session.commit()
             redirect(url(controller='group', action='invite_members_step', id=values['id']))
@@ -561,6 +567,9 @@ class GroupController(BaseController, SubjectAddMixin, GroupWallMixin):
                 group.logo = logo.file.read()
 
             group.add_member(c.user, admin=True)
+            if c.user.location is None:
+                c.user.location = group.location
+
             self._apply_coupon(group, values)
             meta.Session.commit()
             redirect(url(controller='group', action='invite_members_step', id=values['id']))
@@ -1017,6 +1026,9 @@ class GroupController(BaseController, SubjectAddMixin, GroupWallMixin):
                     user = User.get(email)
                     if user is not None and self._check_handshakes(group, user) == 'request':
                         group.add_member(user)
+                        if user.location is None:
+                            user.location = group.location
+
                         self._clear_requests(group, c.user)
                         h.flash(_('New member %s added.') % user.fullname)
                     else:
@@ -1041,6 +1053,8 @@ class GroupController(BaseController, SubjectAddMixin, GroupWallMixin):
             if invitations:
                 if self.form_result.get('action', '') == 'accept':
                     group.add_member(c.user)
+                    if c.user.location is None:
+                        c.user.location = group.location
                     h.flash(_("Congratulations! You are now a member of the group '%s'") % group.title)
                 else:
                     h.flash(_("Invitation to group '%s' rejected.") % group.title)
@@ -1064,6 +1078,8 @@ class GroupController(BaseController, SubjectAddMixin, GroupWallMixin):
                 request = meta.Session.query(PendingRequest).filter_by(hash=self.form_result.get('hash_code', '')).one()
                 if (self.form_result.get('action', 'deny') == 'confirm'):
                     c.group.add_member(request.user)
+                    if request.user.location is None:
+                        request.user.location = c.group.location
                     group_confirmation_email(group, request.user, True)
                     h.flash(_(u"New member %s added.") % request.user.fullname)
                 else:
