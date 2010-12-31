@@ -73,6 +73,7 @@ ${_('Student information online')}
          ellipsis = [50]
     %>
     %for ind, breadcrumb in enumerate(breadcrumbs):
+       %if breadcrumb is not None:
        <%
           cls = 'first' if ind == 0 and not c.object_location else 'second'
        %>
@@ -85,6 +86,7 @@ ${_('Student information online')}
            ${h.ellipsis(breadcrumb.get('title'),ellipsis[ind])}
          %endif
        </li>
+       %endif
     %endfor
   %endif
   </ul>
