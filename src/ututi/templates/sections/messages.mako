@@ -57,7 +57,8 @@
     % if invitation.active:
       <div class="flash-message">
         <span>
-          ${_(u"%(author)s has sent you an invitation to group %(group)s. Do you want to become a member of this group?") % dict(author=invitation.author.fullname, group=invitation.group.title)}
+          ${_(u"%(author)s has sent you an invitation to group %(group)s. Do you want to become a member of this group?") %\
+             dict(author=h.object_link(invitation.author), group=h.object_link(invitation.group.title))}
         </span>
         <br />
         <form method="post"
@@ -96,7 +97,8 @@
   %for rq in user.group_requests():
   <div class="flash-message">
     <span>
-      ${_(u"%(user)s wants to join the group %(group)s. Do you want to confirm this membership?") % dict(user=rq.user.fullname, group=rq.group.title)}
+      ${_(u"%(user)s wants to join the group %(group)s. Do you want to confirm this membership?") % \
+        dict(user=h.object_link(rq.user), group=h.object_link(rq.group))|n}
     </span>
     <br />
     <form style="display: inline;" method="post" action="${url(controller='group', action='request', id=rq.group.group_id)}">
