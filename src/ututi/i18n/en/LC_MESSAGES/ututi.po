@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-12-31 13:24+0200\n"
+"PO-Revision-Date: 2010-12-31 16:23+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -2026,7 +2026,8 @@ msgstr ""
 msgid "Delete image"
 msgstr ""
 
-msgid "more"
+#. TRANSLATORS: translate this as a single word 'More'
+msgid "more_about_book"
 msgstr ""
 
 msgid "U-Books - what's that?"
@@ -3817,9 +3818,6 @@ msgid ""
 "please tell us more about yourself."
 msgstr ""
 
-msgid "Wall settings"
-msgstr ""
-
 msgid "Forum posts"
 msgstr ""
 
@@ -3869,6 +3867,9 @@ msgid "Moderated posts"
 msgstr ""
 
 msgid "New groups"
+msgstr ""
+
+msgid "Wall settings"
 msgstr ""
 
 msgid "Which events do You want to see on Your wall?"

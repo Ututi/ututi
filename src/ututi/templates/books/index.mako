@@ -10,14 +10,13 @@
     %endif
   </div>
   <div class="book-textual-info">
-    <h3 class="book-title">
-      ${h.link_to(book.title, url(controller="books", action="show", id=book.id))}
-    </h3>
+    <div style="height: 60px;">
+      <h3 class="book-title">
+        ${h.link_to(book.title, url(controller="books", action="show", id=book.id))}
+      </h3>
+      <span class="book-author">${book.author}</span>
+    </div>
     <div>
-      <span class="book-author">${book.author}</span> <br />
-      %if book.description is not None and book.description != "":
-      <span class="book-description">${h.ellipsis(book.description, 100)|n}</span><br />
-      %endif
       %if book.city:
           <span class="book-city-label">${_('City')}:</span>
           <span class="book-city-name"> ${book.city.name}</span>
@@ -27,19 +26,30 @@
       <span class="book-price">
         ${book.price}
       </span>
-      <br />
+    </div>
+    <div class="book-action-container">
       %if can_edit:
         %if c.user is book.created:
         <div class="edit-button-container">
-          ${h.button_to(_("Edit"), url(controller="books", action="edit", id=book.id))}
+          ${h.link_to(_("Edit"), url(controller="books", action="edit", id=book.id))}
         </div>
         %endif
       %else:
-      ${h.button_to(_("more"), url(controller="books", action="show", id=book.id))}
+      ## TRANSLATORS: translate this as a single word 'More'
+      ${h.link_to(_("more_about_book"), url(controller="books", action="show", id=book.id))}
       %endif
     </div>
   </div>
 </div>
+</%def>
+
+<%def name="list_of_books(books)">
+%for n, book in enumerate(books):
+    %if n and (n % 3 == 0):
+      <hr />
+    %endif
+    ${book_information(book)}
+%endfor
 </%def>
 
 <%def name="ubooks_advicer()">
@@ -59,9 +69,6 @@
 <%self:ubooks_advicer />
 <div>
 <h1>${_('Newest books')}</h1>
-%for book in c.books:
-    ${book_information(book)}
-%endfor
+  <%self:list_of_books books="${c.books}" />
   <div id="pager">${c.books.pager(format='~3~') }</div>
 </div>
-

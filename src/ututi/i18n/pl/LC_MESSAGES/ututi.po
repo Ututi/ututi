@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-12-31 13:24+0200\n"
+"PO-Revision-Date: 2010-12-31 16:23+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -2193,8 +2193,9 @@ msgstr "Okładka książki"
 msgid "Delete image"
 msgstr "Skasuj obrazek"
 
-msgid "more"
-msgstr "więcej"
+#. TRANSLATORS: translate this as a single word 'More'
+msgid "more_about_book"
+msgstr ""
 
 msgid "U-Books - what's that?"
 msgstr "U-Books - co to jest?"
@@ -4190,9 +4191,6 @@ msgid ""
 "please tell us more about yourself."
 msgstr ""
 
-msgid "Wall settings"
-msgstr "Ustawienia strony"
-
 msgid "Forum posts"
 msgstr "Posty na forach"
 
@@ -4243,6 +4241,9 @@ msgstr ""
 
 msgid "New groups"
 msgstr "Nowe grupy"
+
+msgid "Wall settings"
+msgstr "Ustawienia strony"
 
 msgid "Which events do You want to see on Your wall?"
 msgstr "Jakie wydarzenia chcesz zobaczyć na swojej tablicy?"
