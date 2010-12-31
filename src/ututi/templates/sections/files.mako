@@ -12,12 +12,12 @@ $(document).ready(function(){
 
     function folderReceive(event, ui) {
 
-          var move_url = ui.item.children('.move_url').val();
-          var copy_url = ui.item.children('.copy_url').val();
+          var move_url = ui.item.find('.move_url').val();
+          var copy_url = ui.item.find('.copy_url').val();
 
           var source_id = ui.sender.parents('.section').children('.container').children('.id').val();
           var target_id = ui.item.parents('.section').children('.container').children('.id').val();
-          var target_folder = ui.item.closest('.folder_file_area').children('.folder_name').val();
+          var target_folder = ui.item.closest('.folder_file_area').find('.folder_name').val();
           var target_is_trash = ui.item.closest('.folder').hasClass('.trash_folder');
           var source_is_trash = ui.sender.closest('.folder').hasClass('.trash_folder');
 
@@ -188,7 +188,7 @@ $(document).ready(function(){
     }
 
     function newFolder(target) {
-        var section_id = target.id.split('-')[1];
+        var section_id = $(target[0]).attr('id').split('-')[1];
         var folder_name = $('#new_folder_input-' + section_id).val();
         createFolder(section_id, folder_name)
     }
@@ -212,7 +212,7 @@ $(document).ready(function(){
 
     function deleteFile(event) {
         var folder = $(event.target).closest('.folder');
-        var url = $(event.target).closest('.file').children('.delete_url').val();
+        var url = $(event.target).closest('.file').find('.delete_url').val();
         var section = $(event.target).closest('.section');
         var section_area_id = section[0].id;
         var sid = section_area_id.split('-')[1];
@@ -221,7 +221,7 @@ $(document).ready(function(){
         $.ajax({type: "GET",
                 url: url,
                 success: function(msg){
-                    $(event.target).parent().remove();
+                    $(event.target).closest('.file').remove();
                     if ($('.file', folder).size() == 0) {
                         $('.message', folder).show();
                         folder.closest('.folder_file_area').find('.delete_folder_button').show();
@@ -237,7 +237,7 @@ $(document).ready(function(){
 
     function flagFile(event) {
         var folder = $(event.target).closest('.folder');
-        var url = $(event.target).closest('.file').children('.flag_url').val();
+        var url = $(event.target).closest('.file').find('.flag_url').val();
 
         $.ajax({type: "GET",
                 url: url,
@@ -267,7 +267,7 @@ $(document).ready(function(){
 
     function restoreFile(event) {
         var folder = $(event.target).closest('.folder');
-        var url = $(event.target).closest('.file').children('.restore_url').val();
+        var url = $(event.target).closest('.file').find('.restore_url').val();
         var section = $(event.target).closest('.section');
 
         $.ajax({type: "GET",
@@ -279,7 +279,7 @@ $(document).ready(function(){
                         folder.closest('.folder_file_area').find('.delete_folder_button').show();
                     }
                     var new_item = $(msg);
-                    var folder_name = $(msg).children('.folder_title_value').val();
+                    var folder_name = $(msg).find('.folder_title_value').val();
                     var target_folder_title_attr = section.contents().find('.folder_file_area .folder_name').filter(function (n) { return this.value == folder_name});
                     var target_folder = target_folder_title_attr.closest('.folder_file_area').children('.folder');
                     if (target_folder.size() == 0)
@@ -289,7 +289,7 @@ $(document).ready(function(){
                     else {
                         target_folder.append(new_item);
                         target_folder.show();
-                        new_item.parents('.folder').children('.message').hide();
+                        new_item.parents('.folder').find('.message').hide();
                         new_item.closest('.folder_file_area').find('.delete_folder_button').hide();
                         $('.delete_button', new_item).click(deleteFile);
                         $('.rename_button', new_item).click(renameFile);
@@ -325,8 +325,9 @@ $(document).ready(function(){
     }
 
     function performFileRename(event) {
-       var new_file_name = $(event.target).closest('.file_rename_form').find('.file_rename_input').val();
-       var url = $(event.target).closest('.file').children('.rename_url').val();
+       var trg = this;
+       var new_file_name = $(trg).closest('.file_rename_form').find('.file_rename_input').val();
+       var url = $(trg).closest('.file').find('.rename_url').val();
        $.ajax({type: "POST",
                url: url,
                data: ({new_file_name: new_file_name}),
