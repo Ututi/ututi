@@ -932,6 +932,8 @@ div#grupes-links span.mess{
 }
 div.MyProfile div.profile div.personal-data{
     padding: 0 0 5px 5px;
+    width: 180px;
+    word-wrap: break-word;
 }
 div.MyProfile div.about-self {
     padding-top: 5px;
