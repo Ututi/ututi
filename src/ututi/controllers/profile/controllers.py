@@ -333,7 +333,8 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
     @ActionProtector("user")
     def logo(self, width=None, height=None):
         return serve_logo('user', c.user.id, width=width, height=height,
-                default_img_path="public/images/user_ico.png")
+                          default_img_path="public/images/user_ico.png",
+                          cache=False)
 
     @ActionProtector("user")
     def set_receive_email_each(self):
