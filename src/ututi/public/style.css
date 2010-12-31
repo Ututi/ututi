@@ -2919,41 +2919,44 @@ li.file {
         width: 25px;
     }
 
-li.file img.drag-target {
-    cursor: move;
-    vertical-align: middle;
-}
+    li.file img.drag-target {
+        cursor: move;
+        vertical-align: middle;
+    }
+    li.file .file-description {
+        width: 590px;
+    }
 
-li.file img.tooltip {
-    vertical-align: middle;
-}
+    li.file img.tooltip {
+        vertical-align: middle;
+    }
 
-li.file a {
-    cursor: pointer;
-}
+    li.file a {
+        cursor: pointer;
+    }
 
-li.file .file_name {
-    color: #666;
-}
+    li.file .file_name {
+        color: #666;
+    }
 
-li.file .size,
-li.file .date {
-    font-size: 0.8em;
-    color: #666;
-}
+    li.file .size,
+    li.file .date {
+        font-size: 0.8em;
+        color: #666;
+    }
 
-li.file .author,
-li.file .deleted-by {
-    font-size: 0.85em;
-}
+    li.file .author,
+    li.file .deleted-by {
+        font-size: 0.85em;
+    }
 
-li.file img.restore_button,
-li.file img.rename_button,
-li.file img.flag_button,
-li.file img.delete_button {
-    vertical-align: middle;
-    cursor: pointer;
-}
+    li.file img.restore_button,
+    li.file img.rename_button,
+    li.file img.flag_button,
+    li.file img.delete_button {
+        vertical-align: middle;
+        cursor: pointer;
+    }
 
 /* end files */
 
