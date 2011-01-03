@@ -100,12 +100,20 @@ ${_('Student information online')}
   <div id="federatedLogin">
     <div id="federatedLoginHint">${_('Connect using')}</div>
     <div id="login-buttons">
-      <a href="${url(controller='federation', action='google_register')}" class="google-login"
+      <%
+         if c.came_from:
+           g_url = url(controller='federation', action='google_register', came_from=c.came_from)
+           fb_url = url(controller='federation', action='facebook_login', came_from=c.came_from)
+         else:
+           g_url = url(controller='federation', action='google_register')
+           fb_url = url(controller='federation', action='facebook_login')
+      %>
+      <a href="${g_url}" class="google-login"
           onclick="show_loading_message(); return true">
           ${h.image('/img/google.gif', alt=_('Log in using Google'))}
       </a>
       <fb:login-button size="icon" perms="email"
-        onlogin="show_loading_message(); window.location = '${url(controller='federation', action='facebook_login')}'"
+        onlogin="show_loading_message(); window.location = '${fb_url}'"
        >${_('Connect')}</fb:login-button>
     </div>
   </div>
