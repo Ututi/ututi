@@ -30,8 +30,7 @@ from ututi.lib.validators import js_validate
 from ututi.lib.validators import manual_validate
 
 from ututi.model.events import Event, TeacherMessageEvent
-from ututi.model import ForumCategory, File
-from ututi.model import ForumPost
+from ututi.model import File
 from ututi.model import get_supporters
 from ututi.model import LocationTag, BlogEntry, TeacherGroup
 from ututi.model import meta, Email, User
@@ -684,12 +683,12 @@ class TeacherProfileController(ProfileControllerBase):
                         meta.Session.commit()
                         attachments.append(f)
 
-                    post = post_message(recipient,
-                                        c.user,
-                                        subject,
-                                        msg_text,
-                                        force=True,
-                                        attachments=attachments)
+                    post_message(recipient,
+                                 c.user,
+                                 subject,
+                                 msg_text,
+                                 force=True,
+                                 attachments=attachments)
                 else:
                     attachments = []
                     if self.form_result['file'] != '':
