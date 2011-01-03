@@ -134,6 +134,24 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin
 
         return result
 
+    @ActionProtector("user")
+    def wall(self):
+        c.breadcrumbs.append(self._actions('home'))
+
+        c.events = self._user_events()
+        c.action = 'wall'
+
+        c.file_recipients = self._file_rcpt()
+        c.wiki_recipients = self._wiki_rcpt()
+
+        result = render('/profile/wall.mako')
+
+        # Register new news feed visit.
+        c.user.last_seen_feed = datetime.utcnow()
+        meta.Session.commit()
+
+        return result
+
     def _edit_form_defaults(self):
         defaults = {
             'email': c.user.emails[0].email,
