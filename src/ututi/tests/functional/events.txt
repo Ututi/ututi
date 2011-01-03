@@ -69,7 +69,7 @@ Let's see if deleted files show no link:
     >>> browser.open('http://localhost/profile/index')
     >>> browser.printQuery("id('event_list')/li")
     <li>
-          A new file text.txt for a group <a href="/group/moderators">Moderatoriai</a> was uploaded <span class="event_time">(0 seconds ago)</span>
+          A new file text.txt for a group <a href="/group/moderators">Moderatoriai</a> was uploaded <span class="event_time">(...)</span>
     </li>
     ...
 
@@ -84,7 +84,7 @@ Let's see if deleted files show no link:
           mailing list <span class="event_time">(...)</span>
     </li>
     <li>
-          A new file text.txt for a group <a href="/group/moderators">Moderatoriai</a> was uploaded <span class="event_time">(0 seconds ago)</span>
+          A new file text.txt for a group <a href="/group/moderators">Moderatoriai</a> was uploaded <span class="event_time">(...)</span>
     </li>
     <li>
           A new file <a href="/subject/vu/mat_analize/file/4/get">text.txt</a> for a subject
