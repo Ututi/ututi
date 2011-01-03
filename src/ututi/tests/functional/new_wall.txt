@@ -22,10 +22,10 @@ Right next to the title there's a link to wall settings:
 The wall currently lists several simple events:
 
     >>> first.printQuery("//div[contains(@class, 'wall-entry')]//text()")
-    Adminas Adminovix has created the group Moderatoriai .  1 second ago
-    Adminas Adminovix joined the group Moderatoriai .  1 second ago
-    Third user joined the group Moderatoriai .  1 second ago
-    Adminas Adminovix has created the subject Matematinė analizė .  1 second ago
+    Adminas Adminovix has created the group Moderatoriai .  ...
+    Adminas Adminovix joined the group Moderatoriai .  ...
+    Third user joined the group Moderatoriai .  ...
+    Adminas Adminovix has created the subject Matematinė analizė .  ...
 
 Let's use wall's action panel to send private message to the second user:
 
@@ -40,5 +40,5 @@ Now the second user logs in and finds the private message in his wall:
     >>> second = Browser.logIn('user@ututi.lt', 'password')
     >>> second.open('/profile/wall')
     >>> second.printQuery("//div[contains(@class, 'wall-entry')]//text()")
-    Third user has sent you a private message " This new wall is great!  ".  1 second ago
-    Hey, Alternative. I'm writing you from my wall!  1 second ago
+    Third user has sent you a private message " This new wall is great!  ".  ...
+    Hey, Alternative. I'm writing you from my wall!  ...
