@@ -40,7 +40,7 @@ ${dashboard.dashboard(None, c.file_recipients, c.wiki_recipients)}
         'or <a href="%(groups_list_link)s">joining</a> a group and watching '\
         'some <a href="%(subjects_list_link)s">subjects</a>.')\
         % dict(
-            create_group_link = url(controller = 'group', action = 'group_type'),
+            create_group_link = url(controller = 'group', action = 'create_academic'),
             groups_list_link = groups_list_link,
             subjects_list_link = subjects_list_link) | n}
   </%self:rounded_block>

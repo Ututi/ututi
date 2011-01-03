@@ -68,7 +68,7 @@
     <div class="footer">
       ${h.link_to(_('More groups'), url(controller='profile', action='search', obj_type='group'), class_="more")}
       <span>
-        ${h.button_to(_('Create group'), url(controller='group', action='group_type'))}
+        ${h.button_to(_('Create group'), url(controller='group', action='create_academic'))}
         ${tooltip(_('Create your group, invite your classmates and use the mailing list, upload private group files'))}
       </span>
     </div>
@@ -195,7 +195,7 @@
   %>
   <%self:action_portlet id="group_create_portlet">
     <%def name="header()">
-    <a class="blark" ${h.trackEvent(None, 'click', 'user_new_group', 'action_portlets')} href="${url(controller='group', action='group_type')}">${_('create new group')}</a>
+    <a class="blark" ${h.trackEvent(None, 'click', 'user_new_group', 'action_portlets')} href="${url(controller='group', action='create_academic')}">${_('create new group')}</a>
     ${tooltip(_("Communicate with your classmates, colleagues and friends, share files and news together!"),
               style='margin-top: 4px;')}
 

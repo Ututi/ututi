@@ -4,18 +4,13 @@ Tests editing of group's "Files" and "Subjects" options after the group is creat
 Let's log in to create a group:
 
     >>> browser = Browser.logIn()
-    >>> browser.getLink('create new group').click()
-    >>> browser.getControl(name='create-custom-group').click()
+    >>> browser.getLink('Create group').click()
 
 We specify group's title, e-mail address (identifier) and university.
-Since we're using "Custom create" form, we are able to specify that this group
-will not need subscription to subjects or file storage area:
 
     >>> browser.getControl('Group title').value = 'Belzebubai'
     >>> browser.getControl('Group e-mail address').value = 'belzebubai'
     >>> browser.getControl('University').value = 'Vilniaus Universitetas'
-    >>> browser.getControl(name='can_add_subjects').value = False
-    >>> browser.getControl(name='file_storage').value = False
     >>> browser.getControl('Continue').click()
 
 We are redirected to the member invitation and just click "Finish", without
@@ -24,6 +19,12 @@ inviting any members:
     >>> browser.printQuery('//h1/text()')
     Add group members
     >>> browser.getControl('Finish').click()
+
+Let's disable file storage and subject watching.
+    >>> browser.getLink('Edit').click()
+    >>> browser.getControl(name='can_add_subjects').value = False
+    >>> browser.getControl(name='file_storage').value = False
+    >>> browser.getControl('Save').click()
 
 Let's assert that "Files" and "Subjects" tabs are not available:
 

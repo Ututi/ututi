@@ -119,9 +119,9 @@
     </script>
   </div>
 </div><div id="homeCreateGroupBlock">
-    <h2><a class="frontpage-title-link" href="${url(controller='group', action='group_type')}">${_("Create a group")}</a></h2>
+    <h2><a class="frontpage-title-link" href="${url(controller='group', action='create_academic')}">${_("Create a group")}</a></h2>
 
-  <a class="home-link-to-create-group" href="${url(controller='group', action='group_type')}"></a>
+  <a class="home-link-to-create-group" href="${url(controller='group', action='create_academic')}"></a>
   <p>${_('Groups have')}</p>
   <ul>
     <li style="background-image: url('img/icons/comment_green_17.png');">${_('A mailing list or forum')}</li>
@@ -129,7 +129,7 @@
     <li style="background-image: url('img/icons/subjects_green_17.png');">${_('A list of studied subjects')}</li>
   </ul>
   <div class="homeCreateGroup">
-    ${h.button_to(_('Create group'), url(controller='group', action='group_type'),  method='GET', class_='btnPlus btnLarge')}
+    ${h.button_to(_('Create group'), url(controller='group', action='create_academic'),  method='GET', class_='btnPlus btnLarge')}
   </div>
 
 </div>

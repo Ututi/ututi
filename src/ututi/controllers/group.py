@@ -162,28 +162,11 @@ class CreateGroupFormBase(Schema):
                       validators.Empty())
 
 
-class CreatePublicGroupForm(CreateGroupFormBase):
-    """A schema for creating public groups."""
-
-
 class CreateAcademicGroupForm(CreateGroupFormBase):
     """A schema for creating academic groups."""
 
     year = validators.String()
     forum_type = validators.OneOf(['mailinglist', 'forum'])
-
-
-class CreateCustomGroupForm(CreateGroupFormBase):
-    """A schema for creating custom groups."""
-
-    year = validators.String()
-    can_add_subjects = validators.Bool()
-    file_storage = validators.Bool()
-
-    forum_type = validators.OneOf(['mailinglist', 'forum'])
-    approve_new_members = validators.OneOf(['none', 'admin'])
-    forum_visibility = validators.OneOf(['public', 'members'])
-    page_visibility = validators.OneOf(['public', 'members'])
 
 
 class GroupAddingForm(Schema):
@@ -442,9 +425,6 @@ class GroupController(BaseController, SubjectAddMixin, GroupWallMixin):
 
         return render('group/files.mako')
 
-    def group_type(self):
-        return render('group/group_type.mako')
-
     def _create_academic_form(self):
         c.current_year = date.today().year
         c.years = range(c.current_year - 10, c.current_year + 5)
@@ -486,99 +466,6 @@ class GroupController(BaseController, SubjectAddMixin, GroupWallMixin):
             redirect(url(controller='group', action='invite_members_step', id=values['id']))
 
         return htmlfill.render(self._create_academic_form())
-
-    def _create_public_form(self):
-        return render('group/create_public.mako')
-
-    @set_login_url
-    @validate(schema=CreatePublicGroupForm, form='_create_public_form')
-    @ActionProtector("user")
-    def create_public(self):
-        if hasattr(self, 'form_result'):
-            values = self.form_result
-
-            year = int(values.get('year') or '2010') # XXX
-            group = Group(group_id=values['id'],
-                          title=values['title'],
-                          description=values['description'],
-                          year=date(year, 1, 1))
-
-            tag = values.get('location', None)
-            group.location = tag
-
-            group.wants_to_watch_subjects = False
-            group.page_public = True
-            group.admins_approve_members = False
-            group.forum_is_public = True
-            group.mailinglist_enabled = False
-
-            meta.Session.add(group)
-
-            if values['logo_upload'] is not None:
-                logo = values['logo_upload']
-                group.logo = logo.file.read()
-
-            group.add_member(c.user, admin=True)
-            if c.user.location is None:
-                c.user.location = group.location
-            self._apply_coupon(group, values)
-            meta.Session.commit()
-            redirect(url(controller='group', action='invite_members_step', id=values['id']))
-        return htmlfill.render(self._create_public_form())
-
-    def _create_custom_form(self):
-        c.current_year = date.today().year
-        c.years = range(c.current_year - 10, c.current_year + 5)
-        c.forum_type = 'mailinglist'
-        c.forum_types = [('mailinglist', _('Mailing list')),
-                         ('forum', _('Web-based forum'))]
-        return render('group/create_custom.mako')
-
-    @set_login_url
-    @validate(schema=CreateCustomGroupForm, form='_create_custom_form')
-    @ActionProtector("user")
-    def create_custom(self):
-        if hasattr(self, 'form_result'):
-            values = self.form_result
-            year = int(values.get('year') or '2010') # XXX
-            group = Group(group_id=values['id'],
-                          title=values['title'],
-                          description=values['description'],
-                          year=date(year, 1, 1))
-            tag = values.get('location', None)
-            group.location = tag
-
-            group.wants_to_watch_subjects = bool(self.form_result['can_add_subjects'])
-            group.has_file_area = bool(self.form_result['file_storage'])
-
-            group.mailinglist_enabled = (self.form_result['forum_type'] == 'mailinglist')
-            group.admins_approve_members = (
-                    self.form_result['approve_new_members'] == 'admin')
-            group.forum_is_public = (
-                    self.form_result['forum_visibility'] == 'public')
-            group.mailinglist_moderated = False
-            group.page_public = (
-                    self.form_result['page_visibility'] == 'public')
-
-            meta.Session.add(group)
-
-            if values['logo_upload'] is not None:
-                logo = values['logo_upload']
-                group.logo = logo.file.read()
-
-            group.add_member(c.user, admin=True)
-            if c.user.location is None:
-                c.user.location = group.location
-
-            self._apply_coupon(group, values)
-            meta.Session.commit()
-            redirect(url(controller='group', action='invite_members_step', id=values['id']))
-        defaults = {'can_add_subjects': True,
-                    'file_storage': True,
-                    'approve_new_members': 'admin',
-                    'forum_visibility': 'public',
-                    'page_visibility': 'public'}
-        return htmlfill.render(self._create_custom_form(), defaults=defaults)
 
     @group_action
     @ActionProtector("member", "admin")

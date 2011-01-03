@@ -2609,64 +2609,6 @@ div.location-add-subform label {
 END OF NEW LOCATION WIDGET SECTION
  **************************************************************************/
 
-.XXXdisabled {
-    text-decoration: line-through;
-}
-
-
-table.group-type-choice {
-    padding: 0 auto;
-    border-spacing: 0 0;
-    padding-top: 2em;
-    margin: 0px;
-    width: 970px;
-}
-
-table.group-type-choice th, table.group-type-choice td {
-    padding: 5px;
-    margin: 0px;
-    width: 301px;
-    background: white url("../img/group_type_bg.png") no-repeat;
-}
-
-table.group-type-choice tr.group-type th {
-    height: 30px;
-}
-
-table.group-type-choice tr.group-type th img {
-    padding-top: 8px;
-    padding-left: 8px;
-}
-
-table.group-type-choice tr.group-type th h2 {
-    margin-top: -25px;
-    margin-left: 45px;
-}
-
-table.group-type-choice tr.features td {
-    background-position: 0px -30px;
-}
-
-table.group-type-choice tr.buttons td {
-    height: 75px;
-    background-position: 0px -160px;
-}
-
-table.group-type-choice th {
-    text-align: left;
-}
-
-table.group-type-choice p {
-    padding-top: 1em;
-    padding-left: 2em;
-}
-
-table.group-type-choice td.button {
-    padding: 1em;
-    text-align: center;
-    vertical-align: top;
-}
-
 #group_settings_form {
     display: inline-block;
 }

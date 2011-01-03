@@ -43,7 +43,7 @@ ${parent.head_tags()}
   <div class="GroupFiles GroupFilesGroups">
     <h2 class="portletTitle bold">${_('Groups')}</h2>
     <span class="group-but">
-      ${h.button_to(_('create group'), url(controller='group', action='group_type'), onclick="_gaq.push(['_trackEvent', 'profile', 'groups', 'create_group']);")}
+      ${h.button_to(_('create group'), url(controller='group', action='create_academic'), onclick="_gaq.push(['_trackEvent', 'profile', 'groups', 'create_group']);")}
     </span>
   </div>
   %for n, group in enumerate(groups):
@@ -124,7 +124,7 @@ ${parent.head_tags()}
   <p>${_("Use the group's mailing list!")}</p>
 </div>
 <div class="floatleft usergruperight">
-  <form action="${url(controller='group', action='group_type')}" method="GET"
+  <form action="${url(controller='group', action='create_academic')}" method="GET"
         style="float: none">
     <fieldset>
       <legend class="a11y">${_('Create group')}</legend>
