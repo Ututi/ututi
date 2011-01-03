@@ -61,7 +61,11 @@
     <%def name="classes()">file_uploaded subject_event</%def>
     <%def name="content()">
       <div class="file_link">
-        ${h.object_link(event.file)}
+        %if not event.file.isDeleted():
+          ${h.object_link(event.file)}
+        %else:
+          ${event.file.title}
+        %endif
       </div>
     </%def>
     <%def name="when()">${event.when()}</%def>
@@ -87,7 +91,11 @@
     <%def name="classes()">file_uploaded group_event</%def>
     <%def name="content()">
       <div class="file_link">
-        ${h.object_link(event.file)}
+        %if not event.file.isDeleted():
+          ${h.object_link(event.file)}
+        %else:
+          ${event.file.title}
+        %endif
       </div>
     </%def>
     <%def name="when()">${event.when()}</%def>

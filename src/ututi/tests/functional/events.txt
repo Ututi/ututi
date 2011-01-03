@@ -64,6 +64,14 @@ Events and watching
       <span class="event_time">(...)</span>
     </li>
 
+Let's see if deleted files show no link:
+    >>> res = app.get('/files/delete/5')
+    >>> browser.open('http://localhost/profile/index')
+    >>> browser.printQuery("id('event_list')/li")
+    <li>
+          A new file text.txt for a group <a href="/group/moderators">Moderatoriai</a> was uploaded <span class="event_time">(0 seconds ago)</span>
+    </li>
+    ...
 
     >>> from ututi.tests.functional import send_test_message
     >>> send_test_message('email_with_attachment.txt', '4', to='moderators@groups.ututi.lt')
@@ -76,8 +84,7 @@ Events and watching
           mailing list <span class="event_time">(...)</span>
     </li>
     <li>
-          A new file <a href="/group/moderators/file/5/get">text.txt</a> for a group
-          <a href="/group/moderators">Moderatoriai</a> was uploaded <span class="event_time">(...)</span>
+          A new file text.txt for a group <a href="/group/moderators">Moderatoriai</a> was uploaded <span class="event_time">(0 seconds ago)</span>
     </li>
     <li>
           A new file <a href="/subject/vu/mat_analize/file/4/get">text.txt</a> for a subject
