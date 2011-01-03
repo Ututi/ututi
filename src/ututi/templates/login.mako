@@ -1,7 +1,5 @@
 <%inherit file="/ubase.mako" />
 
-<%namespace file="/search/index.mako" import="search_form"/>
-
 <%def name="head_tags()">
   ${parent.head_tags()}
   <meta name="robots" content="noindex, nofollow" />
