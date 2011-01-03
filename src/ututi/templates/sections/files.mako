@@ -36,7 +36,6 @@ $(document).ready(function(){
                           $(ui.sender).sortable('cancel');
                           new_item.parents('.folder').children('.message').hide();
                           new_item.parents('.folder').closest('.folder_file_area').find('.delete_folder_button').hide();
-                          $('.delete_button', new_item).click(deleteFile);
                           updateSizeInformation($('.section.size_indicated'));
                       },
                       error: function(msg){
@@ -65,8 +64,6 @@ $(document).ready(function(){
                           }
                           if (target_is_trash || source_is_trash) {
                               var new_item = $(msg).insertAfter($(ui.item));
-                              $('.delete_button', new_item).click(deleteFile);
-                              $('.restore_button', new_item).click(restoreFile);
                               $(ui.item).remove();
                           }
                           updateSizeInformation($('.section.size_indicated'));
@@ -136,7 +133,6 @@ $(document).ready(function(){
                   iframe['progress_ticker'].text("${_('Done')}").parent().addClass('done');
                   window.clearInterval(iframe['interval']);
                   $('.folder', result_area).append(response);
-                  $('.delete_button', result_area).click(deleteFile);
                   $('.folder .message', result_area).hide();
                   $('.folder_file_area .delete_folder_button', result_area).hide();
                   updateSizeInformation($(result_area).parents('.section'));
@@ -171,7 +167,6 @@ $(document).ready(function(){
                       if (msg != '') {
                           // XXX find the old folder, insert new one after it, delete it
                           var area = $(msg).filter('.folder_file_area').insertBefore($('#file_section-' + section_id + ' .trash_folder_file_area'));
-                          area.find('.delete_button').click(deleteFile);
 
                           section = $('#file_upload_dropdown-' + section_id)
                           if (section.hasClass('open')) {
@@ -230,7 +225,6 @@ $(document).ready(function(){
                     trash_bin.show();
                     trash_bin.children('.folder').append(new_item);
                     new_item.parents('.folder').children('.message').hide();
-                    $('.restore_button', new_item).click(restoreFile);
                     updateSizeInformation($(folder).parents('.section'));
         }});
     }
@@ -291,17 +285,15 @@ $(document).ready(function(){
                         target_folder.show();
                         new_item.parents('.folder').find('.message').hide();
                         new_item.closest('.folder_file_area').find('.delete_folder_button').hide();
-                        $('.delete_button', new_item).click(deleteFile);
-                        $('.rename_button', new_item).click(renameFile);
                         updateSizeInformation($(folder).parents('.section'));
                     }
         }});
     }
 
-    $('.delete_button').click(deleteFile);
-    $('.flag_button').click(flagFile);
-    $('.restore_button').click(restoreFile);
-    $('.rename_button').click(renameFile);
+    $('.delete_button').live('click', deleteFile);
+    $('.flag_button').live('click', flagFile);
+    $('.restore_button').live('click', restoreFile);
+    $('.rename_button').live('click', renameFile);
 
     function renameFile(event) {
        var file_name = $(event.target).closest('.file').find('.filename');
@@ -343,9 +335,9 @@ $(document).ready(function(){
        }});
     }
 
-    $('.rename_confirm').click(performFileRename);
+    $('.rename_confirm').live('click', performFileRename);
 
-    $('.new_folder_button').click(function (event) {
+    $('.new_folder_button').live('click', function (event) {
         newFolder($(this));
         return false;
     });
