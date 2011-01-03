@@ -1,5 +1,4 @@
 import cgi
-import datetime
 
 from sqlalchemy.schema import Table
 from sqlalchemy.orm import backref
@@ -11,7 +10,7 @@ from pylons.i18n import ungettext, _
 from ututi.model.mailing import GroupMailingListMessage
 from ututi.model import Group, Subject, User, File, Page, ContentItem, ForumPost, OutgoingGroupSMSMessage, PrivateMessage
 from ututi.model import meta
-from ututi.lib.helpers import link_to, ellipsis
+from ututi.lib.helpers import link_to, ellipsis, when
 
 events_table = None
 
@@ -19,29 +18,8 @@ class Event(object):
     """Generic event class."""
 
     def when(self):
-        difference = datetime.datetime.utcnow() - self.created
-        if datetime.timedelta(seconds=60) > difference:
-            num = difference.seconds
-            return ungettext("%(num)s second ago",
-                             "%(num)s seconds ago",
-                             num) % {'num': num}
-        elif datetime.timedelta(seconds=3600) > difference:
-            num = difference.seconds / 60
-            return ungettext("%(num)s minute ago",
-                             "%(num)s minutes ago",
-                             num) % {'num': num}
-        elif datetime.timedelta(1) > difference:
-            num = difference.seconds / 3600
-            return ungettext("%(num)s hour ago",
-                             "%(num)s hours ago",
-                             num) % {'num': num}
-        elif datetime.timedelta(5) > difference:
-            num = difference.days
-            return ungettext("%(num)s day ago",
-                             "%(num)s days ago",
-                             num) % {'num': num}
-        else:
-            return self.created.strftime("%Y-%m-%d")
+        """This is deprecated. Apply helper method directly instead."""
+        return when(self.created)
 
     def isEmptyFile(object):
         return False

@@ -525,3 +525,31 @@ def object_link(object):
         return link_to(object.subject, object.url())
     elif isinstance(object, ForumPost):
         return link_to(object.title, object.url(new=True))
+
+def when(time):
+    """Formats now() - time in human readable format."""
+    import datetime
+    from pylons.i18n import ungettext
+    difference = datetime.datetime.utcnow() - time
+    if datetime.timedelta(seconds=60) > difference:
+        num = difference.seconds
+        return ungettext("%(num)s second ago",
+                         "%(num)s seconds ago",
+                         num) % {'num': num}
+    elif datetime.timedelta(seconds=3600) > difference:
+        num = difference.seconds / 60
+        return ungettext("%(num)s minute ago",
+                         "%(num)s minutes ago",
+                         num) % {'num': num}
+    elif datetime.timedelta(1) > difference:
+        num = difference.seconds / 3600
+        return ungettext("%(num)s hour ago",
+                         "%(num)s hours ago",
+                         num) % {'num': num}
+    elif datetime.timedelta(5) > difference:
+        num = difference.days
+        return ungettext("%(num)s day ago",
+                         "%(num)s days ago",
+                         num) % {'num': num}
+    else:
+        return self.created.strftime("%Y-%m-%d")
