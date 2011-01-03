@@ -1,0 +1,44 @@
+Functional test for the new wall
+================================
+
+Login and visit the wall. Currently there's no link, so we use direct url:
+
+    >>> first = Browser.logIn('user3@ututi.lt', 'password')
+    >>> first.open('/profile/wall')
+
+The page title should say "What's new?":
+
+    >>> first.printQuery("//h1[@class='pageTitle']/text()")
+    What's new?
+
+Right next to the title there's a link to wall settings:
+
+    >>> first.getLink("Wall settings").click()
+    >>> first.url
+    'http://localhost/profile/edit/wall'
+
+    >>> first.goBack()
+
+The wall currently lists several simple events:
+
+    >>> first.printQuery("//div[contains(@class, 'wall-entry')]//text()")
+    Adminas Adminovix has created the group Moderatoriai .  1 second ago
+    Adminas Adminovix joined the group Moderatoriai .  1 second ago
+    Third user joined the group Moderatoriai .  1 second ago
+    Adminas Adminovix has created the subject Matematinė analizė .  1 second ago
+
+Let's use wall's action panel to send private message to the second user:
+
+    >>> form = first.getForm(id='message_form')
+    >>> form.getControl('Group or user:').value = 'Alternative user'
+    >>> form.getControl(name='subject').value = 'This new wall is great!'
+    >>> form.getControl(name='message').value = "Hey, Alternative. I'm writing you from my wall!"
+    >>> form.getControl('Send').click()
+
+Now the second user logs in and finds the private message in his wall:
+
+    >>> second = Browser.logIn('user@ututi.lt', 'password')
+    >>> second.open('/profile/wall')
+    >>> second.printQuery("//div[contains(@class, 'wall-entry')]//text()")
+    Third user has sent you a private message " This new wall is great!  ".  1 second ago
+    Hey, Alternative. I'm writing you from my wall!  1 second ago
