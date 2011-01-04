@@ -27,6 +27,7 @@ from ututi.lib.sms import sms_cost
 from ututi.lib.base import BaseController, render, render_lang
 from ututi.lib.validators import HtmlSanitizeValidator, TranslatedEmailValidator, LocationTagsValidator, TagsValidator, GroupCouponValidator, FileUploadTypeValidator, validate
 
+from ututi.model import ForumCategory
 from ututi.model import GroupCoupon
 from ututi.model import LocationTag, User, GroupMember, GroupMembershipType, File, OutgoingGroupSMSMessage
 from ututi.model import meta, Group, SimpleTag, Subject, PendingInvitation, PendingRequest
@@ -581,6 +582,9 @@ class GroupController(BaseController, SubjectAddMixin, GroupWallMixin):
         group.mailinglist_moderated = (
                 self.form_result['mailinglist_moderated'] == 'moderated')
         group.mailinglist_enabled = (self.form_result['forum_type'] == 'mailinglist')
+
+        if not group.mailinglist_enabled and not group.forum_categories:
+            group.forum_categories.append(ForumCategory(_('General'), _('Discussions on anything and everything')))
 
         if not (group.is_watching_subjects() and \
                 group.wants_to_watch_subjects):
