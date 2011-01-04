@@ -205,10 +205,6 @@ ${local.main_menu()}
       $(document).ready(function(){$('#test_warning').click(function(){$(this).hide();})});
     </script>
     %endif
-  % if c.serve_file:
-  <iframe style="display: none;" src="${c.serve_file.url()}"> </iframe>
-  % endif
-
     <div id="wrap">
       <div id="widthLimiter">
         %if c.user is None:
@@ -230,14 +226,11 @@ ${local.main_menu()}
     </div>
 
     <div id="footer">
-      <%
-         nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '')
-      %>
       <p>Copyright © <a href="${_('ututi_link')}">${_(u'UAB „UTUTI“')}</a></p>
       <ul>
-        <li><a ${nofollow} href="${url(controller='home', action='about')}">${_('About ututi')}</a></li>
-        <li><a ${nofollow} href="${_('ututi_blog_url')}">${_('U-blog')}</a></li>
-        <li><a ${nofollow} href="${url(controller='home', action='terms')}">${_('Terms of use')}</a></li>
+        <li><a rel="nofollow" href="${url(controller='home', action='about')}">${_('About ututi')}</a></li>
+        <li><a rel="nofollow" href="${_('ututi_blog_url')}">${_('U-blog')}</a></li>
+        <li><a rel="nofollow" href="${url(controller='home', action='terms')}">${_('Terms of use')}</a></li>
         <li><a href="#" id="feedback-link">${_('Feedback')}</a></li>
       </ul>
       <div class="folow-us-icons">
