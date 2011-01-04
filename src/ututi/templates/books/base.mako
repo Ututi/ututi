@@ -68,14 +68,8 @@ ${local.main_menu()}
 ${local.main_menu()}
 <div class="loggedin-nav" id="personal-data">
     <ul>
-      <li class="expandable profile-nav">
+      <li class="profile-nav">
         <span class="fullname">${c.user.fullname}</span>
-        <div>
-          <ul>
-            <li class="action"><a href="${url(controller='profile', action='edit')}">${_('Settings')}</a></li>
-            <li class="action"><a href="${url(controller='user', action='index', id=c.user.id)}">${_('Public profile')}</a></li>
-          </ul>
-        </div>
       </li>
       <li><a href="${url(controller='books', action='logout')}">${_('log out')}</a></li>
     </ul>
