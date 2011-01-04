@@ -71,11 +71,13 @@ h1.title {
     border: none;
 }
 
+#footer ul li a:hover,
 .loggedin-nav li a:hover {
     color: #95cd28;
     font-size: 12px;
 }
 
+#footer ul li a,
 .loggedin-nav li a {
     color: #95cd28;
     font-size: 12px;
@@ -683,4 +685,26 @@ HR {
 
 table#login-screen {
     padding-left: 0px;
+}
+
+#footer {
+    background: none repeat scroll 0 0 #333;
+    border: none;
+    height: 33px;
+    margin: -50px auto 0;
+    padding: 5px 5px 8px;
+    position: relative;
+    text-align: center;
+    width: auto;
+}
+
+#footer a,
+#footer a:hover
+#footer {
+    font: 11px normal MS Trebuchet;
+}
+
+#footer p {
+    font-size: 12px;
+    color: #fff;
 }
