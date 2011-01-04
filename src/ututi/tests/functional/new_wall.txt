@@ -40,5 +40,37 @@ Now the second user logs in and finds the private message in his wall:
     >>> second = Browser.logIn('user@ututi.lt', 'password')
     >>> second.open('/profile/wall')
     >>> second.printQuery("//div[contains(@class, 'wall-entry')]//text()")
-    Third user has sent you a private message " This new wall is great!  ".  ...
+    Third user has sent you a private message " This new wall is great!  "  ...
     Hey, Alternative. I'm writing you from my wall!  ...
+
+He can reply using the wall reply box. (If not using javascript, user is
+directed to the thread page after he clicks 'Send'.)
+
+    >>> form = second.getForm(name='reply-form')
+    >>> form.getControl(name='message').value = 'Sure! I can reply easily and messages are threaded!'
+    >>> form.getControl("Send reply").click()
+    >>> second.url
+    'http://localhost/messages/thread/4'
+
+The first user can see the reply threaded along his message:
+
+    >>> first.open('/profile/wall')
+    >>> first.printQuery("//div[contains(@class, 'wall-entry')]//text()")
+    You have sent Alternative user a private message " This new wall is great!  "  ...
+    Hey, Alternative. I'm writing you from my wall!  ...
+    Alternative user : Sure! I can reply easily and messages are threaded! ...
+
+Let's reply again to see how messages are threaded in the wall:
+
+    >>> form = first.getForm(name='reply-form')
+    >>> form.getControl(name='message').value = "Here's my reply to your reply"
+    >>> form.getControl("Send reply").click()
+    >>> first.url
+    'http://localhost/messages/thread/4'
+
+    >>> second.open('/profile/wall')
+    >>> second.printQuery("//div[contains(@class, 'wall-entry')]//text()")
+    Third user has sent you a private message " This new wall is great!  "  ...
+    Hey, Alternative. I'm writing you from my wall!  ...
+    Alternative user : Sure! I can reply easily and messages are threaded! ...
+    Third user : Here's my reply to your reply ...

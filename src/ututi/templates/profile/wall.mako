@@ -18,41 +18,36 @@
         color: #4d4d4d;
     }
 
-        .wall .wall-entry .hide-button {
-            float: right;
-            margin: 5px 0px;
-            display: none;
-        }
-
-        .wall .wall-entry:hover .hide-button {
-            float: right;
-            display: block;
-        }
-
-        .wall .wall-entry .description {
+        .wall .wall-entry .event-heading {
             font-size: 11px;
             padding: 5px 5px 5px 20px;
             background: url("/images/details/icon_event.png") no-repeat left center;
         }
 
+            .wall .wall-entry .event-heading .hide-button {
+                float: right;
+                display: none;
+            }
+
+            .wall .wall-entry .event-heading:hover .hide-button {
+                display: block;
+            }
+
+
             /* Custom event icons:
              */
 
-            .wall .wall-entry.type-member-joined .description,
-            .wall .wall-entry.type-group-created .description {
+            .wall .wall-entry.type-member-joined .event-heading,
+            .wall .wall-entry.type-group-created .event-heading {
                 background-image: url("/img/icons/icon-group-tiny.png");
             }
 
-            .wall .wall-entry.type-subject-created .description {
+            .wall .wall-entry.type-subject-created .event-heading {
                 background-image: url("/img/icons/icon-subject-tiny.png");
             }
 
-            .wall .wall-entry.type-private-message-sent .description {
+            .wall .wall-entry.type-private-message-sent .event-heading {
                 background-image: url("/img/icons/icon-post-tiny.png");
-            }
-
-            .wall .wall-entry .description .event-time {
-                margin-left: 15px;
             }
 
         .wall .wall-entry .event-time {
@@ -62,17 +57,75 @@
             background: url("/img/icons/icon_time.png") no-repeat left center;
         }
 
-        .wall .wall-entry .content {
+            .wall .wall-entry .event-heading .event-time {
+                margin-left: 15px;
+            }
+
+        .wall .wall-entry .thread {
+            width: 100%;
+            overflow: auto; /* this clears the floats */
         }
 
-            .wall .wall-entry .content .logo {
-                padding-top: 5px;
+            .wall .wall-entry .thread .logo {
                 float: left;
             }
 
-            .wall .wall-entry .content .message {
-                padding: 5px 5px 5px 60px;
+            .wall .wall-entry .thread .content {
+                padding-left: 60px;
             }
+
+                .wall .wall-entry .thread .reply .content,
+                .wall .wall-entry .thread .reply-form-container .content {
+                    padding-left: 40px;
+                }
+
+                .wall .wall-entry .thread .content .closing {
+                    margin: 10px 0px;
+                    font-size: 11px;
+                }
+
+                    .wall .wall-entry .thread .content .reply .closing {
+                        margin: 5px 0px 0px 0px;
+                    }
+
+                    .wall .wall-entry .thread .content .reply .reply-author {
+                        color: #d45500; /* Ututi orange */
+                        margin-right: 5px;
+                    }
+
+            .wall .wall-entry .actions {
+                margin-left: 5px;
+            }
+
+                .wall .wall-entry .actions a {
+                    color: #668000;
+                }
+
+            .wall .wall-entry .reply {
+                background-color: #f6f6f6;
+                padding: 10px;
+                margin-bottom: 3px;
+            }
+
+            .wall .wall-entry .reply-form-container {
+                padding: 10px;
+                margin-bottom: 5px;
+            }
+
+                .wall .wall-entry .reply-form-container .cancel-button {
+                    font-size: 11px;
+                    margin-left: 5px;
+                }
+
+                .wall .wall-entry .reply-form-container textarea {
+                    border: 1px solid #ddd;
+                    margin-bottom: 5px;
+                    padding: 3px;
+                    border-radius: 3px;
+                    -moz-border-radius: 3px;
+                    -webkit-border-radius: 3px;
+                }
+
       
 </%def>
 
@@ -202,5 +255,7 @@
 ${dashboard(None, [], [])}
 
 %for event in c.events:
-  ${event.wall_entry()}
+  %if event.show_in_wall:
+    ${event.wall_entry()}
+  %endif
 %endfor

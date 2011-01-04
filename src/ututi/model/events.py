@@ -372,11 +372,35 @@ class PrivateMessageSentEvent(Event):
     def snippet(self):
         return render_mako_def('/sections/wall_snippets.mako', 'privatemessage_sent', event=self)
 
+    @property
+    def show_in_wall(self):
+        """Show event in wall only iff it represents last private message in the thread."""
+        this = self.private_message
+        orig = self.original_message
+        last = meta.Session.query(PrivateMessage
+              ).filter_by(thread_id=orig.id
+              ).order_by(PrivateMessage.id.desc()
+              ).first()
+        if last:
+            return this.id == last.id
+        else:
+            assert this.id == orig.id
+            return True
+
     def wall_entry(self):
         return render_mako_def('/sections/wall_entries.mako', 'privatemessage_sent', event=self)
 
     def message_text(self):
         return cgi.escape(self.private_message.content)
+
+    @property
+    def original_message(self):
+        """Get original message of the thread."""
+        this = self.private_message
+        if this.thread_id is None:
+            return this
+        else:
+            return PrivateMessage.get(this.thread_id)
 
 
 class GroupMemberJoinedEvent(Event):
