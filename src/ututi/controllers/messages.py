@@ -44,9 +44,10 @@ class MessagesController(BaseController):
             abort(404)
         recipient = original.sender if original.recipient.id == c.user.id else original.recipient
         original.is_read = True
+        thread_id = original.thread_id or original.id
         msg = PrivateMessage(c.user, recipient, original.subject,
                              request.params.get('message'),
-                             thread_id=original.id)
+                             thread_id=thread_id)
         meta.Session.add(msg)
         # Make sure this thread is unhidden on both sides.
         original.hidden_by_sender = False
@@ -55,7 +56,7 @@ class MessagesController(BaseController):
         if request.params.has_key('js'):
             return _('Message sent.')
         h.flash(_('Message sent.'))
-        redirect(url(controller='messages', action='thread', id=id))
+        redirect(url(controller='messages', action='thread', id=thread_id))
 
     @ActionProtector("user")
     def delete(self, id):

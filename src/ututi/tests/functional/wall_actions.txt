@@ -1,6 +1,9 @@
 Test user wall actions
 ======================
 
+First user logs in and sends a private message to second user
+using wall action panel:
+
    >>> browser = Browser.logIn('user@ututi.lt', 'password')
    >>> browser.getLink("News wall").click()
 
@@ -10,6 +13,9 @@ Test user wall actions
    >>> form.getControl(name='message').value = 'Booyah'
    >>> form.getControl('Send').click()
 
+Now when second user logs in he sees private message event
+among other events:
+
    >>> browser2 = Browser.logIn('user2@ututi.lt', 'password')
    >>> browser2.getLink('News wall').click()
    >>> browser2.printQuery('id("wall")//div[@class="description"]//text()')
@@ -17,6 +23,42 @@ Test user wall actions
    Adminas Adminovix has created the group Testing group .
    Adminas Adminovix joined the group Testing group .
    Second user joined the group Testing group .
+
+He can reply the first user directly from the wall:
+
+   >>> reply_form = browser2.getForm(id="message_reply_form")
+   >>> reply_form.getControl(name="message").value = "It is sure nice to reply to you from my wall too!"
+   >>> reply_form.getControl("Send reply").click()
+
+(If not using javascript, he gets directed to the thread page)
+
+   >>> browser2.url
+   'http://localhost/messages/thread/4'
+
+   >>> browser2.printQuery("//div[@class='post-body']/text()")
+   Booyah
+   It is sure nice to reply to you from my wall too!
+
+The first user can see this reply on his wall, and reply again:
+
+   >>> browser.getLink("News wall").click()
+   >>> browser.printQuery('id("wall")//div[@class="content"]//text()')
+   It is sure nice to reply to you from my wall too!
+   Booyah
+
+   >>> reply_form = browser.getForm(id="message_reply_form", index=0)
+   >>> reply_form.getControl(name="message").value = "Yep, wall is cool."
+   >>> reply_form.getControl("Send reply").click()
+
+   >>> browser.url
+   'http://localhost/messages/thread/4'
+
+   >>> browser.printQuery("//div[@class='post-body']/text()")
+   Booyah
+   It is sure nice to reply to you from my wall too!
+   Yep, wall is cool.
+
+The rest of the test is undocummented, but easy to follow:
 
    >>> browser = Browser.logIn('user3@ututi.lt', 'password')
    >>> browser.getLink("News wall").click()
