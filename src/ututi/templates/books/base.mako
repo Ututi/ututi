@@ -1,7 +1,7 @@
 <%namespace file="/sections/messages.mako" import="*"/>
 <%namespace file="/portlets/user.mako" import="*"/>
 <%namespace file="/portlets/banners/base.mako" import="*"/>
-<%namespace file="/portlets/books.mako" import="*"/>
+<%namespace file="/books/portlets.mako" import="*"/>
 
 <%def name="title()">
 ${_('Learning books market')}
