@@ -37,8 +37,8 @@ ${self.anonymous_menu()}
     </a></li>
     <li><a class="current_item" href="${url(controller='books', action='index')}">${_('Home')}</a></li>
     <li><a class="item" href="${url(controller='books', action='about')}">${_('About U-Books')}</a></li>
-    %if c.user is not None:
-    <li><a class="item" href="${url(controller='books', action='my_books')}">${_("My books")}</a></li>
+    %if c.user is not None and c.my_books.count():
+    <li><a class="item" href="${url(controller='books', action='my_books')}">${_("My books (%(book_count)d)") % dict(book_count=c.my_books.count())}</a></li>
     %endif
     <li><a class="item upload" href="${url(controller='books', action='add')}">${_('Upload a Book')}</a></li>
   </ul>

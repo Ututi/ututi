@@ -221,6 +221,8 @@ class BooksController(HomeController, BaseController):
         c.selected_books_department = None
         c.book = None
         c.book_types = meta.Session.query(BookType).all()
+        if c.user:
+            c.my_books = meta.Session.query(Book).filter(Book.created == c.user)
 
     def _make_pages(self, items):
         return paginate.Page(items,
