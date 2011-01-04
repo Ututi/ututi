@@ -37,6 +37,9 @@ ${self.anonymous_menu()}
     </a></li>
     <li><a class="current_item" href="${url(controller='books', action='index')}">${_('Home')}</a></li>
     <li><a class="item" href="${url(controller='books', action='about')}">${_('About U-Books')}</a></li>
+    %if c.user is not None:
+    <li><a class="item" href="${url(controller='books', action='my_books')}">${_("My books")}</a></li>
+    %endif
     <li><a class="item upload" href="${url(controller='books', action='add')}">${_('Upload a Book')}</a></li>
   </ul>
 </div>
@@ -65,7 +68,6 @@ ${local.main_menu()}
 ${local.main_menu()}
 <div class="loggedin-nav" id="personal-data">
     <ul>
-      <li>${h.link_to(_("My books"), url(controller="books", action="my_books"))}</li>
       <li class="expandable profile-nav">
         <span class="fullname">${c.user.fullname}</span>
         <div>
