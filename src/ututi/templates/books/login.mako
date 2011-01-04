@@ -5,6 +5,8 @@
   <meta name="robots" content="noindex, nofollow" />
 </%def>
 
+<%def name="portlets()"></%def>
+
 <%def name="body_class()">anonymous_index</%def>
 
 %if c.show_warning is not False:

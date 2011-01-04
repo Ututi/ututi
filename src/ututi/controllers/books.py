@@ -12,7 +12,7 @@ from webhelpers import paginate
 
 from pylons.controllers.util import  abort
 from pylons.controllers.util import redirect
-from pylons import request, tmpl_context as c, url
+from pylons import request, tmpl_context as c, url, session, response
 from pylons.i18n import _
 
 from datetime import datetime
@@ -531,3 +531,10 @@ class BooksController(HomeController, BaseController):
                                           url(controller='books', action='index'))))
         else:
             return render('/login.mako')
+
+    def logout(self):
+        if 'login' in session:
+            del session['login']
+        response.delete_cookie('ututi_session_lifetime')
+        session.save()
+        redirect(url(controller='books', action='index'))

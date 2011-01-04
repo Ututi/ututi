@@ -20,7 +20,9 @@ ${self.anonymous_menu()}
 </%def>
 
 <%def name="portlets()">
-${books_menu(c.selected_books_department)}
+<div id="aside">
+  ${books_menu(c.selected_books_department)}
+</div>
 </%def>
 
 <%def name="breadcrumbs(breadcrumbs)">
@@ -73,7 +75,7 @@ ${local.main_menu()}
           </ul>
         </div>
       </li>
-      <li><a href="${url(controller='home', action='logout')}">${_('log out')}</a></li>
+      <li><a href="${url(controller='books', action='logout')}">${_('log out')}</a></li>
     </ul>
 </div>
 <script type="text/javascript">
@@ -215,10 +217,8 @@ ${local.main_menu()}
           ${self.loggedin_header()}
         %endif
 
-        <div id ="books-container">
-          <div id="aside">
-            ${self.portlets()}
-          </div>
+        <div id="books-container">
+          ${self.portlets()}
           <div id="mainContent">
             ${self.flash_messages()}
             ${next.body()}
