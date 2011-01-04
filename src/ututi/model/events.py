@@ -30,6 +30,12 @@ class Event(object):
     def snippet(self):
         raise NotImplementedError()
 
+    @property
+    def show_in_wall(self):
+        """Some Event types may override this not to show every event 
+        instance in wall (e.g. when threading messages)."""
+        return True
+
     def wall_entry(self):
         """This is for the new wall, snippet() was used before and they should
         be merged after new wall is done."""
