@@ -49,7 +49,7 @@ ${self.anonymous_menu()}
     %if c.user is not None and c.my_books.count():
     <li><a class="item ${'current' if current_action == 'my_books' else ''}" href="${url(controller='books', action='my_books')}">${_("My books (%(book_count)d)") % dict(book_count=c.my_books.count())}</a></li>
     %endif
-    <li><a class="item upload ${'current' if current_action == 'add' else ''}" href="${url(controller='books', action='add')}">${_('Upload a Book')}</a></li>
+    <li><a class="item ${'current' if current_action == 'add' else 'upload'}" href="${url(controller='books', action='add')}">${_('Upload a Book')}</a></li>
   </ul>
 </div>
 </%def>
