@@ -4,6 +4,7 @@ from sqlalchemy.schema import Table
 from sqlalchemy.orm import backref
 from sqlalchemy.orm import relation
 from sqlalchemy import orm
+from pylons import url
 from pylons.templating import render_mako_def
 from pylons.i18n import ungettext, _
 
@@ -386,7 +387,7 @@ class SMSMessageSentEvent(Event):
         return cgi.escape(self.outgoing_sms.message_text)
 
 
-class PrivateMessageSentEvent(Event):
+class PrivateMessageSentEvent(Event, MessagingEventMixin):
     """Event fired when someone sends a private message to the user."""
 
     def render(self):
@@ -426,6 +427,15 @@ class PrivateMessageSentEvent(Event):
             return this
         else:
             return PrivateMessage.get(this.thread_id)
+
+    def message_list(self):
+        """MessagingEventMixin implementation."""
+        return [dict(author=m.sender, created=m.created_on, message=m.content)
+                for m in self.original_message.thread()]
+
+    def reply_action(self):
+        """MessagingEventMixin implementation."""
+        return url(controller='messages', action='reply', id=self.private_message.id)
 
 
 class GroupMemberJoinedEvent(Event):

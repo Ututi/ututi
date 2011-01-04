@@ -293,55 +293,7 @@
                 msg_link=h.object_link(msg)) | n}
       %endif
     </%def>
-    <%
-      thread = event.original_message.thread()
-      head, replies = thread[0], thread[1:]
-    %>
-    <div class="thread">
-      <div class="logo">
-        <img src="${url(controller='user', action='logo', id=head.sender.id, width=50)}" />
-      </div>
-      <div class="content">
-        ${head.content}
-        <div class="closing">
-          <span class="event-time">${h.when(head.created_on)}</span>
-          <span class="actions">
-            <a href="#">Reply</a>
-          </span>
-        </div>
-        %for reply in replies:
-        <div class="reply">
-          <div class="logo">
-            <img src="${url(controller='user', action='logo', id=reply.sender.id, width=30)}" />
-          </div>
-          <div class="content">
-            <span class="reply-author">${h.object_link(reply.sender)}:</span>
-            ${reply.content}
-            <div class="closing">
-              <span class="event-time">${h.when(reply.created_on)}</span>
-              <span class="actions">
-                <a href="#">Reply</a>
-              </span>
-            </div>
-          </div>
-        </div>
-        %endfor
-        <div class="reply-form-container">
-          <div class="logo">
-            <img src="${url(controller='user', action='logo', id=c.user.id, width=30)}" />
-          </div>
-          <div class="content">
-            <form name="reply-form" method="POST" action="${url(controller='messages', action='reply', id=event.private_message.id)}">
-              <textarea rows="3" cols="50" class="reply-text" name="message"></textarea>
-              <div>
-                ${h.input_submit(_('Send reply'), class_='btn reply-button')}
-                <a class="cancel-button" href="#cancel-reply">${_("Cancel")}</a>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+    <%self:event_message_thread event="${event}" />
   </%self:wall_entry>
 </%def>
 
