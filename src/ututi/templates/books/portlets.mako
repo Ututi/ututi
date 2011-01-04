@@ -22,23 +22,22 @@
     <a class="blark" href="${url(controller='books', action='catalog')}">${_('All Books')}</a>
     </%def>
   </%self:action_portlet>
-  <%self:action_portlet id="button-to-school-books" expanding="True">
+  <%self:action_portlet id="button-to-school-books" show_body="${c.books_department == 'school'}">
     <%def name="header()">
-      ${_('Books for school')}
+      <a class="blark" href="${url(controller='books', action='catalog', books_department='school')}">${_('Books for school')}</a>
     </%def>
     <%self:book_types book_types="${c.book_types}" books_department="school" />
   </%self:action_portlet>
-  <%self:action_portlet id="button-to-university-books" expanding="True">
+  <%self:action_portlet id="button-to-university-books" show_body="${c.books_department == 'university'}">
     <%def name="header()">
-      ${_('Books for students')}
+      <a class="blark" href="${url(controller='books', action='catalog', books_department='university')}">${_('Books for students')}</a>
     </%def>
     <%self:book_types book_types="${c.book_types}" books_department="university" />
   </%self:action_portlet>
-  <%self:action_portlet id="button-to-other-books" expanding="True">
+  <%self:action_portlet id="button-to-other-books">
     <%def name="header()">
-      ${_('Other')}
+      <a class="blark" href="${url(controller='books', action='catalog', books_department='other')}">${_('Other')}</a>
     </%def>
-    <%self:book_types book_types="${c.book_types}" books_department="other" />
   </%self:action_portlet>
 
  %if selected_books_department:

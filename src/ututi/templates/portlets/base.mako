@@ -22,9 +22,13 @@
 </div>
 </%def>
 
-<%def name="action_portlet(id, portlet_class='', expanding=False, label=None)">
+<%def name="action_portlet(id, portlet_class='', expanding=False, show_body=None, label=None)">
+<%
+if show_body is None:
+   show_body = expanding
+%>
 <div class="action-portlet ${portlet_class}" id="${id}">
-  <div class="content click2show" id="${id + '_content'}">
+  <div class="content ${'click2show' if expanding else ''}" id="${id + '_content'}">
     <div class="header ${expanding and 'click clickable' or ''}">
       ${caller.header()}
     </div>
@@ -37,7 +41,7 @@
     //]]>
     </script>
     %endif
-    %if expanding:
+    %if show_body:
       <div class="show body">
         ${caller.body()}
       </div>
