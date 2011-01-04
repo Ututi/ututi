@@ -253,7 +253,7 @@ class HomeController(UniversityListMixin, FederationMixin):
             return '\n'.join(robots)
 
     def login(self):
-        c.show_registration = None
+        c.show_registration = False
         email = request.POST.get('login')
         password = request.POST.get('password')
         remember = True if request.POST.get('remember', None) else False
@@ -266,24 +266,15 @@ class HomeController(UniversityListMixin, FederationMixin):
         if filename is not None:
             c.header = _('You have to be logged in to download a file!')
             c.message = _('After logging in you will be redirected to the download page of the file <strong>%(filename)s</strong> and the download will start automatically.') % dict(filename=filename)
-            c.show_login = True
         elif context_type == 'group_join':
             c.header = _('You have to log in or register to join a group!')
             c.message = _('After logging in or registering, your request to join the group will be sent.')
-            c.show_login = True
         elif context_type == 'support':
             c.header = _('Please log in to donate')
             c.message = _('Please log in before you donate so that we can associate the money you donate with your account.')
-            c.show_login = True
-        elif context_type == "books_login":
-            c.show_warning = False
-        elif context_type == "books_register":
-            c.show_login = True
-            c.show_warning = False
         else:
             c.header = _('Permission denied!')
             c.message = _('Only registered users can perform this action. Please log in, or register an account on our system.')
-            c.show_login = True
         c.final_msg = _('If this is your first time visiting <a href="%(url)s">Ututi</a>, please register first.') % dict(url=url('/', qualified=True))
 
         if password is not None:
@@ -341,7 +332,6 @@ class HomeController(UniversityListMixin, FederationMixin):
     @validate(schema=RegistrationForm(), form='register')
     def register(self, hash=None):
         c.hash = hash
-        c.show_login = False
         c.show_registration = True
         if hasattr(self, 'form_result'):
             # Form validation was successful.
@@ -382,7 +372,6 @@ class HomeController(UniversityListMixin, FederationMixin):
                 return render('/login.mako')
 
             self._get_unis()
-            (c.subjects, c.groups, c.universities) = (self._subjects(), self._groups(), self._universities(limit=10))
             return render('/login.mako')
 
     def _pswrecovery_form(self):

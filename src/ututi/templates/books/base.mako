@@ -46,12 +46,12 @@ ${local.main_menu()}
 <div class="loggedin-nav">
     <ul>
       <li>
-        <a href="${url(controller='home', action='login', context_type='books_login', came_from=url.current())}">
+        <a href="${url(controller='books', action='login', context_type='books_login', came_from=url.current())}">
           ${_('Login')}
         </a>
       </li>
       <li>
-        <a href="${url(controller='home', action='login', context_type='books_register', came_from=url.current())}">
+        <a href="${url(controller='books', action='login', context_type='books_register', came_from=url.current())}">
           ${_('Register')}
         </a>
       </li>

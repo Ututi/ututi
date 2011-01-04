@@ -17,6 +17,8 @@ from pylons.i18n import _
 
 from datetime import datetime
 
+from ututi.controllers.home import HomeController
+from ututi.controllers.home import RegistrationForm
 from ututi.lib.messaging import EmailMessage
 from ututi.lib.validators import PhoneNumberValidator
 from ututi.lib.validators import FileUploadTypeValidator, TranslatedEmailValidator
@@ -213,7 +215,7 @@ def book_action(method):
     return _book_action
 
 
-class BooksController(BaseController):
+class BooksController(HomeController, BaseController):
 
     def __before__(self):
         c.selected_books_department = None
@@ -509,3 +511,23 @@ class BooksController(BaseController):
 
     def about(self):
         return render_lang('/books/about.mako')
+
+    def login(self):
+        context_type = request.params.get('context_type', None)
+        if context_type == "books_login":
+            c.show_warning = False
+        elif context_type == "books_register":
+            c.show_registration = True
+            c.show_warning = False
+        return render('/books/login.mako')
+
+
+    @validate(schema=RegistrationForm(), form='register')
+    def register(self):
+        c.show_registration = True
+        if hasattr(self, 'form_result'):
+            user, email = self.__register_user(self.form_result)
+            redirect(str(request.POST.get('came_from',
+                                          url(controller='books', action='index'))))
+        else:
+            return render('/login.mako')

@@ -680,3 +680,7 @@ HR {
     padding-bottom: 12px;
     margin-right: 25px;
 }
+
+table#login-screen {
+    padding-left: 0px;
+}

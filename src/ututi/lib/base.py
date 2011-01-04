@@ -52,7 +52,6 @@ class BaseController(WSGIController):
         c.login_form_url = None
         c.final_msg = None
         c.message_class = None
-        c.show_login = None
         c.text = None
         c.tags = None
         c.login_error = None
