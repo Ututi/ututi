@@ -1,6 +1,6 @@
 <%namespace file="/sections/content_snippets.mako" import="tooltip" />
 
-<%def name="sms_widget(user=None, group=None, text=None, parts=['tip', 'buy_credits', 'phone_send'])">
+<%def name="sms_widget(user=None, group=None, text=None, parts=['tip', 'buy_credits', 'phone_send', 'phone_info'])">
 <%
     if user is None:
         user = c.user
@@ -42,7 +42,8 @@
       </div>
       <div class="sms-content">TXT ${c.pylons_config.get('fortumo.personal_sms_credits.code')} ${group.group_id}</div>
       <div>
-        ${_('The SMS costs <strong>5 Lt</strong> and <strong>50 credits</strong> will be added to your account (one credit is one SMS to a single person).')|n}
+        ${_('The SMS costs <strong>%(price).2f Lt</strong> and <strong>%(credits)d credits</strong> will be added to your account (one credit is one SMS to a single person).') %\
+          dict(price=float(c.pylons_config.get('fortumo.personal_sms_credits.price', 500.0))/100, credits=int(c.pylons_config.get('fortumo.personal_sms_credits.credits', 50)))|n}
       </div>
     </div>
 
@@ -192,7 +193,9 @@
   </div>
 
   <div>
-    ${_('You can send a message to your group directly from your phone. The message costs <strong>2 Lt</strong>, which pays for the delivery of the message to all recipients (your SMS credits will not be charged). Send the following text to number %(phone)s:') % dict(phone=c.pylons_config.get('fortumo.group_message.number', '1337')) |n}
+    ${_('You can send a message to your group directly from your phone. The message costs <strong>%(price).2f Lt</strong>, which pays for the delivery of the message to all recipients (your SMS credits will not be charged). Send the following text to number %(phone)s:') % \
+      dict(phone=c.pylons_config.get('fortumo.group_message.number', '1337'),
+           price=float(c.pylons_config.get('fortumo.group_message.price', 200))/100) |n}
   </div>
 
   <div class="group-sms-content">
