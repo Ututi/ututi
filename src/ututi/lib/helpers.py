@@ -552,4 +552,4 @@ def when(time):
                          "%(num)s days ago",
                          num) % {'num': num}
     else:
-        return self.created.strftime("%Y-%m-%d")
+        return time.strftime("%Y-%m-%d")
