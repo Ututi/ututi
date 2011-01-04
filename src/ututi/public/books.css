@@ -43,12 +43,12 @@ h1.title {
      text-align: center;
 }
 
-.head-nav a.current_item {
-    background: url("../images/books/current_item_bg.gif") no-repeat scroll left center transparent;
-}
-
 .head-nav a.item {
     background: url("../images/books/item_bg.gif") no-repeat scroll left center transparent;
+}
+
+.head-nav a.item.current {
+    background: url("../images/books/current_item_bg.gif") no-repeat scroll left center transparent;
 }
 
 .head-nav a.upload {

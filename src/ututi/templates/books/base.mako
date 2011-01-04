@@ -35,12 +35,21 @@ ${self.anonymous_menu()}
     <li id="ulogo"><a rel="nofollow" href="/books" title="Ututi">
         <img src="/images/books/ubooks-logo.png" />
     </a></li>
-    <li><a class="current_item" href="${url(controller='books', action='index')}">${_('Home')}</a></li>
-    <li><a class="item" href="${url(controller='books', action='about')}">${_('About U-Books')}</a></li>
+    <%
+       current_action = 'home'
+       if c.action == 'about':
+           current_action = 'about'
+       elif c.action in ('my_books', 'edit'):
+           current_action = 'my_books'
+       elif c.action =='add':
+           current_action = 'add'
+    %>
+    <li><a class="item ${'current' if current_action == 'home' else ''}" href="${url(controller='books', action='index')}">${_('Home')}</a></li>
+    <li><a class="item ${'current' if current_action == 'about' else ''}" href="${url(controller='books', action='about')}">${_('About U-Books')}</a></li>
     %if c.user is not None and c.my_books.count():
-    <li><a class="item" href="${url(controller='books', action='my_books')}">${_("My books (%(book_count)d)") % dict(book_count=c.my_books.count())}</a></li>
+    <li><a class="item ${'current' if current_action == 'my_books' else ''}" href="${url(controller='books', action='my_books')}">${_("My books (%(book_count)d)") % dict(book_count=c.my_books.count())}</a></li>
     %endif
-    <li><a class="item upload" href="${url(controller='books', action='add')}">${_('Upload a Book')}</a></li>
+    <li><a class="item upload ${'current' if current_action == 'add' else ''}" href="${url(controller='books', action='add')}">${_('Upload a Book')}</a></li>
   </ul>
 </div>
 </%def>

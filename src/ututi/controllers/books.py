@@ -220,6 +220,7 @@ class BooksController(HomeController, BaseController):
     def __before__(self):
         c.selected_books_department = None
         c.book = None
+        c.action = request.environ['pylons.routes_dict'].get('action')
         c.book_types = meta.Session.query(BookType).all()
         if c.user:
             c.my_books = meta.Session.query(Book).filter(Book.created == c.user)
