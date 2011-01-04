@@ -267,6 +267,7 @@ class PostCreatedEventBase(Event):
     """Base class for mailing list post related events.""" 
 
     def link_to_author(self):
+        """Should be deprecated, when the old wall is gone."""
         info_dict = self.message.info_dict()
         return link_to(info_dict['author']['title'], info_dict['author']['url'])
 
