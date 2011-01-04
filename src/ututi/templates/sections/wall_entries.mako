@@ -22,6 +22,62 @@
 </div>
 </%def>
 
+<%def name="event_message_thread(event)">
+  <%doc>
+    Renders message thread and reply action box.
+    Event must implement MessagingEventMixin.
+  </%doc>
+  <%
+    messages = event.message_list()
+    original = messages.pop(0)
+  %>
+  <div class="thread">
+    <div class="logo">
+      <img src="${url(controller='user', action='logo', id=original['author'].id, width=50)}" />
+    </div>
+    <div class="content">
+      ${original['message']}
+      <div class="closing">
+        <span class="event-time">${h.when(original['created'])}</span>
+        <span class="actions">
+          <a href="#">Reply</a>
+        </span>
+      </div>
+      %for msg in messages:
+      <div class="reply">
+        <div class="logo">
+          <img src="${url(controller='user', action='logo', id=msg['author'].id, width=30)}" />
+        </div>
+        <div class="content">
+          <span class="reply-author">${h.object_link(msg['author'])}:</span>
+          ${msg['message']}
+          <div class="closing">
+            <span class="event-time">${h.when(msg['created'])}</span>
+            <span class="actions">
+              <a href="#">Reply</a>
+            </span>
+          </div>
+        </div>
+      </div>
+      %endfor
+      <div class="reply-form-container">
+        <div class="logo">
+          <img src="${url(controller='user', action='logo', id=c.user.id, width=30)}" />
+        </div>
+        <div class="content">
+          <form name="reply-form" method="POST" action="${event.reply_action()}">
+            <textarea rows="3" cols="50" class="reply-text" name="message"></textarea>
+            <div>
+              ${h.input_submit(_('Send reply'), class_='btn reply-button')}
+              <a class="cancel-button" href="#cancel-reply">${_("Cancel")}</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</%def>
+
 <%def name="file_uploaded_subject(event)">
   <%self:wall_entry event="${event}">
     <%def name="classes()"></%def>

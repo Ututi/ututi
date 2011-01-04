@@ -46,6 +46,30 @@ class Event(object):
         types = meta.Session.query(events_table.c.event_type).distinct().all()
         return [evt[0] for evt in types]
 
+
+class MessagingEventMixin():
+    """This mixin defines common interface for messaging related events 
+    that are threaded and have messaging actions in the wall."""
+
+    def message_list():
+        """
+        Returns a simple dict list with post information:
+
+            {"author": User,
+             "created": datetime,
+             "message": message string}
+
+        Should be listed chronologically.
+        """
+        raise NotImplementedError()
+
+    def reply_action():
+        """
+        Returns reply action url.
+        """
+        raise NotImplementedError()
+
+
 class PageCreatedEvent(Event):
     """Event fired when a page is created.
 
