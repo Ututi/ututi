@@ -1,0 +1,67 @@
+Group forums
+============
+    >>> def create_thread(browser):
+    ...     browser.getControl('New topic').click()
+    ...     browser.getControl('Subject').value = 'Some topic'
+    ...     browser.getControl('Message').value = 'Some text'
+    ...     browser.getControl('Post').click()
+    ...     browser.getLink('Back to the topic list').click()
+
+    >>> def create_post(browser):
+    ...     form = browser.getForm(id='forum_reply_form')
+    ...     form.getControl(name='message').value = 'Some reply'
+    ...     form.getControl('Reply').click()
+
+First of all let's log in;
+
+    >>> browser = Browser.logIn()
+
+Let's find the group:
+
+    >>> browser.open('http://localhost/group/moderators')
+    >>> browser.url
+    'http://localhost/group/moderators/home'
+
+    >>> browser.getLink('Edit').click()
+
+    >>> browser.getControl('Forum type').value = ['forum']
+    >>> browser.getControl('Save').click()
+
+    >>> browser.url
+    'http://localhost/group/moderators/home'
+
+Let's enter the forum:
+
+    >>> browser.getLink('Forum').click()
+    >>> browser.getLink('General').click()
+
+And create some threads:
+
+    >>> for i in range(12):
+    ...     create_thread(browser)
+
+    >>> print browser.url
+    http://localhost/group/moderators/forum/3
+
+The pager should be there:
+
+    >>> browser.printCssQuery('#pager', include_attributes=[''])
+    <div>
+      <span>1</span>
+      <a>2</a>
+    </div>
+
+Let's test post paging:
+
+    >>> browser.getLink('Some topic', index=0).click()
+
+    >>> for i in range(25):
+    ...     create_post(browser)
+
+And there should be a pager now:
+
+    >>> browser.printCssQuery('#pager', include_attributes=[''])
+    <div>
+      <span>1</span>
+      <a>2</a>
+    </div>

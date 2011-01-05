@@ -4,9 +4,11 @@ from formencode import validators, htmlfill
 from ututi.lib.forums import make_forum_post
 from ututi.lib.base import BaseController
 from pylons.controllers.util import abort, redirect
-from pylons import request
+from pylons import request, config
 from pylons.i18n import _
 from pylons import tmpl_context as c, url
+
+from webhelpers import paginate
 
 from ututi.lib.security import ActionProtector, check_crowds
 from ututi.lib.base import render
@@ -199,17 +201,30 @@ class ForumController(BaseController):
     @category_action
     @protect_view
     def index(self, id, category_id):
+
+        c.threads = paginate.Page(
+            c.category.top_level_messages(),
+            page=int(request.params.get('page', 1)),
+            items_per_page = 10,
+            )
+
         return render('forum/index.mako')
 
     @thread_action
     @protect_view
     def thread(self, id, category_id, thread_id):
         c.can_manage_post = self.can_manage_post
-        c.forum_posts = meta.Session.query(ForumPost)\
+        forum_posts = meta.Session.query(ForumPost)\
             .filter_by(category_id=category_id,
                        thread_id=thread_id,
                        deleted_by=None)\
-            .order_by(ForumPost.created_on).all()
+            .order_by(ForumPost.created_on)
+        c.forum_posts = paginate.Page(
+            forum_posts,
+            page=int(request.params.get('page', 1)),
+            item_count = forum_posts.count(),
+            items_per_page = 20,
+            )
 
         subscription = SubscribedThread.get(thread_id, c.user)
         c.subscribed = subscription and subscription.active

@@ -6,7 +6,7 @@
   </div>
 % endif
 
-<%def name="forum_thread_list(category, n, class_='')">
+<%def name="forum_thread_list(category, n, messages=None, class_='', pager=False)">
 
   <div class="portlet portletSmall portletGroupFiles ${class_}">
     <div class="ctl"></div>
@@ -31,7 +31,9 @@
 
     <div class="single-messages">
 
-      <% messages = category.top_level_messages() %>
+      <% if messages is None:
+             messages = category.top_level_messages()
+      %>
 
       % for forum_post in messages[:n]:
         <%
@@ -82,7 +84,14 @@
 	% endif
     </div>
   </div>
+
+  % if pager and hasattr(messages, 'pager'):
+    <div id="pager">
+      ${messages.pager(format='~3~', controller='forum', action='index', id=c.group.group_id, category_id=category.id)}
+    </div>
+  % endif
+
 </%def>
 
-${forum_thread_list(c.category, n=10000, class_=('smallTopMargin' if c.group_id else 'mediumTopMargin'))}
+${forum_thread_list(c.category, messages=c.threads, n=10000, class_=('smallTopMargin' if c.group_id else 'mediumTopMargin'), pager=True)}
 <!-- TODO: pagination -->
