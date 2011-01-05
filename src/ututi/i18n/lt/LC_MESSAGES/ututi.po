@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2010-12-31 16:24+0200\n"
+"PO-Revision-Date: 2011-01-05 18:29+0200\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -82,6 +82,9 @@ msgstr "uKnygos"
 
 msgid "Message sent."
 msgstr "Pranešimas išsiųstas."
+
+msgid "The book has been successfully deleted"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -349,6 +352,12 @@ msgstr "Šalinti narį"
 
 msgid "What's New?"
 msgstr "Kas naujo?"
+
+msgid "General"
+msgstr "Bendras"
+
+msgid "Discussions on anything and everything"
+msgstr "Diskusijos apie viską ir visus"
 
 msgid "Group information and settings updated."
 msgstr "Grupės informacija ir nustatymai atnaujinti."
@@ -853,6 +862,34 @@ msgid "Save"
 msgstr "Saugoti"
 
 #, python-format
+msgid "%(num)s second ago"
+msgid_plural "%(num)s seconds ago"
+msgstr[0] "prieš %(num)s sekundę"
+msgstr[1] "prieš %(num)s sekundes"
+msgstr[2] "prieš %(num)s sekundžių"
+
+#, python-format
+msgid "%(num)s minute ago"
+msgid_plural "%(num)s minutes ago"
+msgstr[0] "prieš %(num)s minutę"
+msgstr[1] "prieš %(num)s minutes"
+msgstr[2] "prieš %(num)s minučių"
+
+#, python-format
+msgid "%(num)s hour ago"
+msgid_plural "%(num)s hours ago"
+msgstr[0] "prieš %(num)s valandą"
+msgstr[1] "prieš %(num)s valandas"
+msgstr[2] "prieš %(num)s valandų"
+
+#, python-format
+msgid "%(num)s day ago"
+msgid_plural "%(num)s days ago"
+msgstr[0] "prieš %(num)s dieną"
+msgstr[1] "prieš %(num)s dienas"
+msgstr[2] "prieš %(num)s dienų"
+
+#, python-format
 msgid "Ututi registration code: %s"
 msgstr "Ututi registracijos kodas: %s"
 
@@ -944,43 +981,9 @@ msgstr[0] "neribota grupės privačių failų vieta %(day_count)d dienai"
 msgstr[1] "neribota grupės privačių failų vieta %(day_count)d dienoms"
 msgstr[2] "neribota grupės privačių failų vieta %(day_count)d dienų"
 
-msgid "General"
-msgstr "Bendras"
-
-msgid "Discussions on anything and everything"
-msgstr "Diskusijos apie viską ir visus"
-
 #, python-format
 msgid "A new file has been uploaded for the %(title)s:"
 msgstr "%(title)s buvo įkeltas naujas failas:"
-
-#, python-format
-msgid "%(num)s second ago"
-msgid_plural "%(num)s seconds ago"
-msgstr[0] "prieš %(num)s sekundę"
-msgstr[1] "prieš %(num)s sekundes"
-msgstr[2] "prieš %(num)s sekundžių"
-
-#, python-format
-msgid "%(num)s minute ago"
-msgid_plural "%(num)s minutes ago"
-msgstr[0] "prieš %(num)s minutę"
-msgstr[1] "prieš %(num)s minutes"
-msgstr[2] "prieš %(num)s minučių"
-
-#, python-format
-msgid "%(num)s hour ago"
-msgid_plural "%(num)s hours ago"
-msgstr[0] "prieš %(num)s valandą"
-msgstr[1] "prieš %(num)s valandas"
-msgstr[2] "prieš %(num)s valandų"
-
-#, python-format
-msgid "%(num)s day ago"
-msgid_plural "%(num)s days ago"
-msgstr[0] "prieš %(num)s dieną"
-msgstr[1] "prieš %(num)s dienas"
-msgstr[2] "prieš %(num)s dienų"
 
 #, python-format
 msgid "Page %(page_title)s (%(page_url)s) was created."
@@ -2140,11 +2143,12 @@ msgstr "Mokslo knygų mugė"
 msgid "About U-Books"
 msgstr "Apie U-Knygas"
 
+#, python-format
+msgid "My books (%(book_count)d)"
+msgstr ""
+
 msgid "Upload a Book"
 msgstr "Įkelti Knygą"
-
-msgid "My books"
-msgstr "Mano knygos"
 
 msgid "books"
 msgstr "knygos"
@@ -2198,11 +2202,26 @@ msgstr "Naujausios knygos"
 msgid "Books added"
 msgstr "Pridėtos knygos"
 
-msgid "Restore"
-msgstr "Atstatyti"
+msgid "My books"
+msgstr "Mano knygos"
 
 msgid "You haven't added any books yet."
 msgstr "Jūs dar neįkėlėte knygų."
+
+msgid "Restore"
+msgstr "Atstatyti"
+
+msgid "All Books"
+msgstr "Visos knygos"
+
+msgid "Books for school"
+msgstr "Knygos mokiniams"
+
+msgid "Books for students"
+msgstr "Knygos studentams"
+
+msgid "Other"
+msgstr "Kitkas"
 
 msgid "Search-btn"
 msgstr "Ieškok"
@@ -2742,45 +2761,6 @@ msgstr ""
 "Grupės puslapis gali būti naudojamas naujienoms, grupės aprašymui, "
 "kalendoriams, tvarkaraščiams ir t. t."
 
-msgid "New custom group"
-msgstr "Nauja grupė su savais pasirinkimais"
-
-msgid "Create a custom group"
-msgstr "Sukurk grupę su savo pasirinkimais"
-
-msgid "Group data"
-msgstr "Grupės duomenys"
-
-msgid "Set up your own group"
-msgstr "Sukurkite grupę savaip"
-
-msgid "Choose the means of communication"
-msgstr "Pasirinkite bendravimo priemones"
-
-msgid "Choose the visibility of a group"
-msgstr "Pasirinkite grupės matomumą"
-
-msgid "Choose a way to register in this group"
-msgstr "Pasirinkite naujų narių registracijos procesą"
-
-msgid "New public group"
-msgstr "Nauja vieša grupė"
-
-msgid "Create a public group"
-msgstr "Sukurk viešą grupę"
-
-msgid "What can you do with public groups?"
-msgstr "Ką galima daryti su viešomis grupėmis?"
-
-msgid "Public group page"
-msgstr "Viešas grupės puslapis"
-
-msgid "News publishing"
-msgstr "Galimybė siųsti naujienas"
-
-msgid "No confirmation needed for membership"
-msgstr "Nėra narystės patvirtinimo"
-
 msgid "Back to group page"
 msgstr "Grįžti į grupės puslapį"
 
@@ -2837,30 +2817,6 @@ msgstr "Privatūs failai matomi TIK GRUPIOKAMS! Čia galite laikyti iki %s."
 
 msgid "Add more subjects"
 msgstr "Pridėk daugiau dalykų"
-
-msgid "Choose group type"
-msgstr "Pasirink grupės tipą"
-
-msgid "What kind of a group do you want to create?"
-msgstr "Kokią grupę nori sukurti?"
-
-msgid "Academic group"
-msgstr "Akademinė grupė"
-
-msgid "Public group"
-msgstr "Vieša grupė"
-
-msgid "Custom group"
-msgstr "Konfigūruojama grupė"
-
-msgid "Private file area"
-msgstr "Privatūs failai"
-
-msgid "Registration with university subjects"
-msgstr "Universitetinių dalykų pridėjimas"
-
-msgid "Pick the functionality you need yourself"
-msgstr "Sukurk grupę ir pasirink, kokias funkcijas nori turėti."
 
 msgid "Congratulations, you have created a new group!"
 msgstr "Sveikiname Tave sukūrus grupę!"
@@ -3392,18 +3348,6 @@ msgstr "ištrinti"
 msgid "Last edit: "
 msgstr "Paskutinis taisymas:"
 
-msgid "All Books"
-msgstr "Visos knygos"
-
-msgid "Books for school"
-msgstr "Knygos mokiniams"
-
-msgid "Books for students"
-msgstr "Knygos studentams"
-
-msgid "Other"
-msgstr "Kitkas"
-
 #, python-format
 msgid "<em>%(count)s</em> active poster"
 msgid_plural "<em>%(count)s</em> active posters"
@@ -3475,16 +3419,19 @@ msgstr ""
 "Siųskite SMS žinutę numeriu <span style=\"font-size: "
 "14px\">%(phone)s</span> su tokiu turiniu:"
 
+#, python-format
 msgid ""
-"The SMS costs <strong>7 Lt</strong> and will increase your file limit to "
-"<strong>7&nbsp;GB</strong> for another month."
+"The SMS costs <strong>%(price).2f Lt</strong> and will increase your file"
+" limit to <strong>%(limit)s</strong> for another month."
 msgstr ""
-"SMS kainuoja <strong>7 Lt</strong> - už tai grupės failų limitas mėnesiui"
-" padidinamas iki <strong>7&nbsp;GB</strong>."
+"SMS kainuoja <strong>%(price).2f Lt</strong> - už tai grupės failų "
+"limitas mėnesiui padidinamas iki <strong>%(limit)s</strong>."
 
 #, python-format
-msgid "Your private file area is limited to 5&nbsp;GB until <strong>%s</strong>."
-msgstr "Privačių failų sritis ribota iki 5&nbsp;GB iki <strong>%s</strong>."
+msgid ""
+"Your private file area is limited to %(limit)s until "
+"<strong>%(date)s</strong>."
+msgstr "Privačių failų sritis ribota iki %(limit)s iki <strong>%(date)s</strong>."
 
 msgid "E-banking"
 msgstr "E-bankai"
@@ -4156,6 +4103,38 @@ msgstr ""
 "gavo pranešimą ir netrukus Jus patvirtins. Būkite kantrūs. Iki tol galite"
 " papasakoti mums daugiau apie save."
 
+msgid "Group or user:"
+msgstr "Grupė arba narys:"
+
+msgid "Share with others"
+msgstr "Dalinkis su kitais"
+
+msgid "send a message"
+msgstr "išsiųsk žinutę"
+
+msgid ""
+"You need to be a member of a group or have subjects that you are studying"
+" to be able to quickly upload files."
+msgstr ""
+"Turite priklausyti grupei arba turėti stebimų dalykų, kad būtų galima "
+"įkelti failus."
+
+msgid "upload a file"
+msgstr "įkelk failą"
+
+msgid ""
+"You or your group need to have subjects that you are studying to be able "
+"to quickly create wiki notes in them."
+msgstr ""
+"Tam, kad būtų galima kurti wiki užrašus, reikia stebėti dalykus arba "
+"priklausyti grupei, kuri turi stebimų dalykų."
+
+msgid "create a wiki page"
+msgstr "sukurk wiki užrašus"
+
+msgid "Wall settings"
+msgstr "Sienos nustatymai"
+
 msgid "Forum posts"
 msgstr "Forumų pranešimai"
 
@@ -4206,9 +4185,6 @@ msgstr "Moderuojami laiškai"
 
 msgid "New groups"
 msgstr "Naujos grupės"
-
-msgid "Wall settings"
-msgstr "Sienos nustatymai"
 
 msgid "Which events do You want to see on Your wall?"
 msgstr "Kuriuos įvykius nori matyti savo sienoje?"
@@ -4432,38 +4408,6 @@ msgstr "Žinutė išsiųsta."
 msgid "Your SMS was successfully sent."
 msgstr "SMS išsiųsta."
 
-msgid "Group or user:"
-msgstr "Grupė arba narys:"
-
-msgid "Share with others"
-msgstr "Dalinkis su kitais"
-
-msgid "send a message"
-msgstr "išsiųsk žinutę"
-
-msgid ""
-"You need to be a member of a group or have subjects that you are studying"
-" to be able to quickly upload files."
-msgstr ""
-"Turite priklausyti grupei arba turėti stebimų dalykų, kad būtų galima "
-"įkelti failus."
-
-msgid "upload a file"
-msgstr "įkelk failą"
-
-msgid ""
-"You or your group need to have subjects that you are studying to be able "
-"to quickly create wiki notes in them."
-msgstr ""
-"Tam, kad būtų galima kurti wiki užrašus, reikia stebėti dalykus arba "
-"priklausyti grupei, kuri turi stebimų dalykų."
-
-msgid "create a wiki page"
-msgstr "sukurk wiki užrašus"
-
-msgid "More"
-msgstr "Daugiau"
-
 msgid "Ignore events like this"
 msgstr "Nerodyti tokių įvykių"
 
@@ -4500,8 +4444,8 @@ msgid "%(user_link)s has created the subject %(subject_link)s."
 msgstr "%(user_link)s sukūrė dalyką %(subject_link)s."
 
 #, python-format
-msgid "%(user_link)s has created the group %(subject_link)s."
-msgstr "%(user_link)s sukūrė grupę %(subject_link)s."
+msgid "%(user_link)s has created the group %(group_link)s."
+msgstr ""
 
 msgid "Send reply"
 msgstr "Siųsti atsakymą"
@@ -4578,6 +4522,13 @@ msgid ""
 "%(user_link)s has modified a page %(page_link)s in the subject "
 "%(subject_link)s."
 msgstr "%(user_link)s pakeitė puslapį %(page_link)s dalyke %(subject_link)s."
+
+msgid "More"
+msgstr "Daugiau"
+
+#, python-format
+msgid "%(user_link)s has created the group %(subject_link)s."
+msgstr "%(user_link)s sukūrė grupę %(subject_link)s."
 
 msgid "Region"
 msgstr "Regionas"
@@ -4978,12 +4929,15 @@ msgstr ""
 "SMS kreditai naudojami siųsti SMS žinutes grupės nariams. Yra du būdai "
 "nusipirkti SMS kreditų:"
 
+#, python-format
 msgid ""
-"The SMS costs <strong>5 Lt</strong> and <strong>50 credits</strong> will "
-"be added to your account (one credit is one SMS to a single person)."
+"The SMS costs <strong>%(price).2f Lt</strong> and <strong>%(credits)d "
+"credits</strong> will be added to your account (one credit is one SMS to "
+"a single person)."
 msgstr ""
-"SMS kainuoja <strong>5 Lt</strong>, jūsų paskyra bus papildyta <strong>50"
-" kreditų</strong>.(vienas kreditas - viena SMS vienam žmogui)."
+"SMS kainuoja <strong>%(price).2f Lt</strong>, jūsų paskyra bus papildyta "
+"<strong>%(credits)d kreditų</strong>.(vienas kreditas - viena SMS vienam "
+"žmogui)."
 
 msgid "If you pay by bank, <strong>a large discount applies</strong>."
 msgstr "Jei mokate banku, taikoma <strong>didelė nuolaida</strong>."
@@ -5026,14 +4980,14 @@ msgstr "Siųskite žinutę grupei iš telefono!"
 #, python-format
 msgid ""
 "You can send a message to your group directly from your phone. The "
-"message costs <strong>2 Lt</strong>, which pays for the delivery of the "
-"message to all recipients (your SMS credits will not be charged). Send "
-"the following text to number %(phone)s:"
+"message costs <strong>%(price).2f Lt</strong>, which pays for the "
+"delivery of the message to all recipients (your SMS credits will not be "
+"charged). Send the following text to number %(phone)s:"
 msgstr ""
 "Galite išsiųsti žinutę grupei tiesiai iš telefono. Žinutė kainuoja "
-"<strong>2 Lt</strong>. Į kainą itrauktas žinučių gavėjams išsiuntimas, "
-"todėl SMS kreditai nebus nuskaičiuojami. Siųskite šį tekstą numeriu "
-"%(phone)s:"
+"<strong>%(price).2f Lt</strong>. Į kainą itrauktas žinučių gavėjams "
+"išsiuntimas, todėl SMS kreditai nebus nuskaičiuojami. Siųskite šį tekstą "
+"numeriu %(phone)s:"
 
 msgid "Your text"
 msgstr "Tekstas"
