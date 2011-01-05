@@ -82,6 +82,7 @@ Now add some not expired books
     >>> browser.getControl('Save').click()
 
 Then I go to "my books" page to see all my uploaded books
+
     >>> browser.click("My books")
     >>> browser.printCssQuery(".book-title")
     <h3 class="book-title">
@@ -95,18 +96,25 @@ Then I go to "my books" page to see all my uploaded books
     <h3 class="book-title">My expired University book</h3>
 
 Some of them are shown as expired
+
     >>> browser.printCssQuery(".expired-book .book-title")
     <h3 class="book-title">My edited expired physics book</h3>
     <h3 class="book-title">My expired other book</h3>
     <h3 class="book-title">My expired University book</h3>
 
+I can expire a book by hand:
+
+    >>> browser.click('Delete')
+    >>> browser.printCssQuery(".expired-book .book-title")
+    <h3 class="book-title">My edited expired physics book</h3>
+    <h3 class="book-title">My expired other book</h3>
+    <h3 class="book-title">My expired University book</h3>
+    <h3 class="book-title">My physics book</h3>
+
 When I restore my expired book and I won't see it in expired books list
 
     >>> browser.click("Restore")
     >>> browser.printCssQuery(".book-title")
-    <h3 class="book-title">
-      <a href="/books/show/7">My physics book</a>
-    </h3>
     <h3 class="book-title">
       <a href="/books/show/8">My other book</a>
     </h3>
@@ -115,7 +123,9 @@ When I restore my expired book and I won't see it in expired books list
     </h3>
     <h3 class="book-title">My expired other book</h3>
     <h3 class="book-title">My expired University book</h3>
+    <h3 class="book-title">My physics book</h3>
 
     >>> browser.printCssQuery(".expired-book .book-title")
     <h3 class="book-title">My expired other book</h3>
     <h3 class="book-title">My expired University book</h3>
+    <h3 class="book-title">My physics book</h3>

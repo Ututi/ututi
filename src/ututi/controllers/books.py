@@ -541,3 +541,15 @@ class BooksController(HomeController, BaseController):
         response.delete_cookie('ututi_session_lifetime')
         session.save()
         redirect(url(controller='books', action='index'))
+
+    @ActionProtector("user")
+    def delete(self, id):
+        book = meta.Session.query(Book).filter(Book.id == id).one()
+        if book.created != c.user:
+            # XXX use some real security
+            h.flash(_('Only owner of this book can do this action'))
+            redirect(url(controller="books", action="index"))
+        book.valid_until = datetime.utcnow()
+        meta.Session.commit()
+        h.flash(_('The book has been successfully deleted'))
+        redirect(url(controller="books", action="my_books"))

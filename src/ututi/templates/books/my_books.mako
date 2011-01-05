@@ -7,7 +7,12 @@
   %if c.active_books:
   %for book in c.active_books:
   <%books:book_information book="${book}" can_edit="True" />
+  ${h.button_to(_("Delete"), url(controller="books", action="delete", id=book.id), id_="delete_book_%s" % book.id)}
   %endfor
+  %else:
+  ${_("You haven't added any books yet.")}
+  %endif
+
   %for book in c.expired_books:
   <div class="book-information expired-book">
     <div class="book-cover">
@@ -25,7 +30,4 @@
     </div>
   </div>
   %endfor
-  %else:
-  ${_("You haven't added any books yet.")}
-  %endif
 </div>
