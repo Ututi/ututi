@@ -54,13 +54,13 @@
     <div class="js-alternatives" id="user-logo">
       <img src="${url(controller='profile', action='logo', width='120', height='200')}" alt="User logo" id="user-logo-editable"/>
       <div>
-        <div id="user-logo-button" >${_('Change logo')}</div>
+        <div id="user-logo-button" >${_('Change picture')}</div>
       </div>
       <br style="clear: left;" />
       <div class="no-break">
         <label for="logo_delete">
           <input type="checkbox" class="checkbox" name="logo_delete" id="logo_delete" value="delete" />
-          ${_('Delete current logo')}
+          ${_('Delete current picture')}
         </label>
       </div>
     </div>
@@ -88,7 +88,7 @@
       </div>
 
       <div class="non-js">
-        <label for="logo_upload">${_('Personal logo')}</label>
+        <label for="logo_upload">${_('Picture')}</label>
         <input type="file" name="logo_upload" id="logo_upload" class="line" />
       </div>
       ${h.input_submit(class_="btnMedium")}
