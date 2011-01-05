@@ -89,7 +89,7 @@ ${parent.head_tags()}
 <p><strong>${_('Create subjects you teach, or find those that are already created:')}</strong></p>
 <ul class="pros-list">
   <li>${_('Here you will be able to upload course material, and groups studying the subject will be notified automatically.')}</li>
-  <li>${_('All Your course materials with be organized in one place.')}</li>
+  <li>${_('All your course materials with be organized in one place.')}</li>
 </ul>
 ${h.button_to(_('add courses'), url(controller='subject', action='add'), class_='btnMedium', method='GET')}
 </%b:rounded_block>

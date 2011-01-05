@@ -3562,7 +3562,7 @@ msgstr "Stwórz przedmioty, których uczysz lub znajdź przedmioty, które już 
 msgid "Here you will be able to upload course material, and groups studying the subject will be notified automatically."
 msgstr "Tutaj możesz dodać materiały do nauki, a grupy uczące się danego przedmiotu zostaną powiadomione automatycznie."
 
-msgid "All Your course materials with be organized in one place."
+msgid "All your course materials with be organized in one place."
 msgstr "Wszystkie Twoje materiały do nauki będą przechowywane w jednym miejscu."
 
 msgid "add courses"
@@ -4005,7 +4005,7 @@ msgstr "Opis przedmiotu:"
 msgid "Start watching this subject personally"
 msgstr "Rozpocznij śledzenie przedmiotu osobiście "
 
-msgid "Before creating new subject please ensure that it has not been yet created."
+msgid "Before creating a new subject please ensure that it has not been created yet."
 msgstr "Zanim dodasz nowy przedmiot, upewnij się, że jeszcze go tu nie ma."
 
 msgid "A list of similar subjects is shown on the right."
@@ -4195,10 +4195,10 @@ msgstr "Dowolny tekst który chcesz opracować wspólnie z kolegami z grupy"
 msgid "Register as teacher:"
 msgstr "Zarejestruj się jako wykładowca:"
 
-msgid "Please verify, that the data below is correct."
+msgid "Please verify that the data below is correct."
 msgstr "Prosimy o potwierdzenie poniższych danych."
 
-msgid "Advantages of teacher's profile:"
+msgid "Advantages of a teacher's profile:"
 msgstr "Zalety profilu nauczyciela:"
 
 msgid "Teacher profile"

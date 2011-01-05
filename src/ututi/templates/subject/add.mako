@@ -112,7 +112,7 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
   %endif
 
   <div id="warning-text">
-    ${_("Before creating new subject please ensure that it has not been yet created.")}
+    ${_("Before creating a new subject please ensure that it has not been created yet.")}
     ${_("A list of similar subjects is shown on the right.")}
     ${_("Please carefully read through the list and if you don't find your subject, create it.")}
   </div>

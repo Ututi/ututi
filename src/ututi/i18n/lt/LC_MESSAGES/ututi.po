@@ -4111,8 +4111,8 @@ msgstr ""
 "Čia galėsite įkelti dėstomų dalykų medžiagą. Jūsų studentai pranešimus "
 "apie naują medžiagą gaus automatiškai."
 
-msgid "All Your course materials with be organized in one place."
-msgstr "Visa Jūsų akademinė medžiaga bus sutelkta vienoje vietoje."
+msgid "All your course materials with be organized in one place."
+msgstr "Visa jūsų akademinė medžiaga bus sutelkta vienoje vietoje."
 
 msgid "add courses"
 msgstr "pridėti kursus"
@@ -4622,8 +4622,7 @@ msgid "Start watching this subject personally"
 msgstr "Noriu stebėti šį dalyką"
 
 msgid ""
-"Before creating new subject please ensure that it has not been yet "
-"created."
+"Before creating a new subject please ensure that it has not been created yet."
 msgstr "Prieš kurdami naują dalyką, įsitikinkite, kad jis dar nėra sukurtas."
 
 msgid "A list of similar subjects is shown on the right."
@@ -4873,10 +4872,10 @@ msgstr "Bet koks tekstas, kurį norite ruošti kartu su grupės draugais"
 msgid "Register as teacher:"
 msgstr "Registruotis dėstytoju:"
 
-msgid "Please verify, that the data below is correct."
+msgid "Please verify that the data below is correct."
 msgstr "Patvirtinkite, kad pateikti duomenys yra teisingi."
 
-msgid "Advantages of teacher's profile:"
+msgid "Advantages of a teacher's profile:"
 msgstr "Dėstytojo profilio privalumai:"
 
 msgid "Teacher profile"

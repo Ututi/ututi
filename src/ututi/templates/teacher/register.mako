@@ -47,7 +47,7 @@
       </script>
     </div>
     <div class="right-panel">
-      <h1 class="page-title">${_("Advantages of teacher's profile:")}</h1>
+      <h1 class="page-title">${_("Advantages of a teacher's profile:")}</h1>
       <ul class="feature-list">
         <li class="teacher-profile">
           <strong>${_("Teacher profile")}</strong>

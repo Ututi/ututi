@@ -6,7 +6,7 @@
       <h1 class="page-title">${_("Register as teacher:")}</h1>
       <form id="registration_form" method="post" action="${url(controller='teacher', action='federated_registration')}" class="new-style-form" style="margin-top: 50px">
         <fieldset>
-          <p>${_("Please verify, that the data below is correct.")}</p>
+          <p>${_("Please verify that the data below is correct.")}</p>
           <form:error name="invitation_hash"/>
           <input type="hidden" name="invitation_hash" value="" />
           %if c.came_from:
@@ -43,7 +43,7 @@
       </form>
     </div>
     <div class="right-panel">
-      <h1 class="page-title">${_("Advantages of teacher's profile:")}</h1>
+      <h1 class="page-title">${_("Advantages of a teacher's profile:")}</h1>
       <ul class="feature-list">
         <li class="teacher-profile">
           <strong>${_("Teacher profile")}</strong>
