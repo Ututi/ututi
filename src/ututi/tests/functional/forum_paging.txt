@@ -1,18 +1,38 @@
 Group forums
 ============
-    >>> def create_thread(browser):
-    ...     browser.getControl('New topic').click()
-    ...     browser.getControl('Subject').value = 'Some topic'
-    ...     browser.getControl('Message').value = 'Some text'
-    ...     browser.getControl('Post').click()
-    ...     browser.getLink('Back to the topic list').click()
 
-    >>> def create_post(browser):
-    ...     form = browser.getForm(id='forum_reply_form')
-    ...     form.getControl(name='message').value = 'Some reply'
-    ...     form.getControl('Reply').click()
+    >>> def create_threads(group_id):
+    ...     from ututi.model import meta, Group, ForumPost, User
+    ...     from ututi.lib.forums import make_forum_post
+    ...     gr = Group.get(group_id)
+    ...     cat = gr.forum_categories[0].id
+    ...     u = User.get('admin@ututi.lt')
+    ...     for i in range(12):
+    ...         meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+    ...         post = ForumPost(u'Some thread', u'Some text', category_id=cat,
+    ...                          thread_id=None)
+    ...         meta.Session.add(post)
+    ...     meta.Session.commit()
 
-First of all let's log in;
+    >>> def create_posts(group_id):
+    ...     from ututi.model import meta, Group, ForumPost, User
+    ...     from ututi.lib.forums import make_forum_post
+    ...     gr = Group.get(group_id)
+    ...     cat = gr.forum_categories[0].id
+    ...     u = User.get('admin@ututi.lt')
+    ...     meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+    ...     thr = ForumPost(u'Some thread', u'Some text', category_id=cat,
+    ...                     thread_id=None)
+    ...     meta.Session.add(thr)
+    ...     meta.Session.commit()
+    ...     meta.Session.refresh(thr)
+    ...     for i in range(21):
+    ...         meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+    ...         post = ForumPost(u'Some reply', u'Some text', category_id=cat,
+    ...                          thread_id=thr.id)
+    ...         meta.Session.add(post)
+    ...     meta.Session.commit()
+
 
     >>> browser = Browser.logIn()
 
@@ -33,33 +53,37 @@ Let's find the group:
 Let's enter the forum:
 
     >>> browser.getLink('Forum').click()
+
+Let's test post paging:
+
     >>> browser.getLink('General').click()
+    >>> browser.url
+    'http://localhost/group/moderators/forum/3'
 
-And create some threads:
+    >>> create_posts('moderators')
 
-    >>> for i in range(12):
-    ...     create_thread(browser)
+And there should be a pager now:
 
-    >>> print browser.url
-    http://localhost/group/moderators/forum/3
-
-The pager should be there:
-
+    >>> browser.reload()
+    >>> browser.getLink('Some thread').click()
     >>> browser.printCssQuery('#pager', include_attributes=[''])
     <div>
       <span>1</span>
       <a>2</a>
     </div>
 
-Let's test post paging:
+And create some threads:
 
-    >>> browser.getLink('Some topic', index=0).click()
+    >>> create_threads('moderators')
 
-    >>> for i in range(25):
-    ...     create_post(browser)
+    >>> browser.getLink('Forum').click()
+    >>> browser.getLink('General').click()
+    >>> print browser.url
+    http://localhost/group/moderators/forum/3
 
-And there should be a pager now:
+The pager should be there:
 
+    >>> browser.reload()
     >>> browser.printCssQuery('#pager', include_attributes=[''])
     <div>
       <span>1</span>

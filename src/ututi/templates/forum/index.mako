@@ -87,7 +87,7 @@
 
   % if pager and hasattr(messages, 'pager'):
     <div id="pager">
-      ${messages.pager(format='~3~', controller='forum', action='index', id=c.group.group_id, category_id=category.id)}
+      ${messages.pager(format='~3~', controller='forum', action='index', id=c.group_id, category_id=category.id)}
     </div>
   % endif
 

@@ -64,7 +64,7 @@
 % endfor
 </table>
 <div id="pager">
-  ${c.forum_posts.pager(format='~3~', controller='forum', action='thread', id=c.group.group_id, category_id=c.category.id, thread_id=c.thread.id)}
+  ${c.forum_posts.pager(format='~3~', controller='forum', action='thread', id=c.group_id, category_id=c.category.id, thread_id=c.thread.id)}
 </div>
 
 % if c.can_post(c.user):
