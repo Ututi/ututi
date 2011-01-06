@@ -782,6 +782,8 @@ create table events (
        primary key (id));;
 
 create index events_author_id_idx on events(author_id);
+CREATE INDEX events_parent_id_idx ON events(parent_id);
+CREATE INDEX events_created_idx ON events(created);
 
 CREATE FUNCTION add_event(event_id int8, evtype varchar) RETURNS void AS $$
     BEGIN

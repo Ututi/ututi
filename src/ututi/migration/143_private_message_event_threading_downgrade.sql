@@ -1,3 +1,6 @@
+DROP INDEX events_parent_id_idx;
+DROP INDEX events_created_idx;
+
 DROP FUNCTION get_private_message_event_parent(private_messages);;
 
 CREATE OR REPLACE FUNCTION private_message_event_trigger() RETURNS trigger AS $$

@@ -1,3 +1,6 @@
+CREATE INDEX events_parent_id_idx ON events(parent_id);
+CREATE INDEX events_created_idx ON events(created);
+
 CREATE OR REPLACE FUNCTION get_private_message_event_parent(private_messages) RETURNS int8 AS $$
     DECLARE
         obj ALIAS FOR $1;
