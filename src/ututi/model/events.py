@@ -31,12 +31,6 @@ class Event(object):
     def snippet(self):
         raise NotImplementedError()
 
-    @property
-    def show_in_wall(self):
-        """Some Event types may override this not to show every event 
-        instance in wall (e.g. when threading messages)."""
-        return True
-
     def wall_entry(self):
         """This is for the new wall, snippet() was used before and they should
         be merged after new wall is done."""
@@ -397,21 +391,6 @@ class PrivateMessageSentEvent(Event, MessagingEventMixin):
 
     def snippet(self):
         return render_mako_def('/sections/wall_snippets.mako', 'privatemessage_sent', event=self)
-
-    @property
-    def show_in_wall(self):
-        """Show event in wall only iff it represents last private message in the thread."""
-        this = self.private_message
-        orig = self.original_message
-        last = meta.Session.query(PrivateMessage
-              ).filter_by(thread_id=orig.id
-              ).order_by(PrivateMessage.id.desc()
-              ).first()
-        if last:
-            return this.id == last.id
-        else:
-            assert this.id == orig.id
-            return True
 
     def wall_entry(self):
         return render_mako_def('/sections/wall_entries.mako', 'privatemessage_sent', event=self)

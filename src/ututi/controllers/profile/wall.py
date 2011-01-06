@@ -275,6 +275,7 @@ class WallMixin(FileViewMixin):
             .filter(or_(Event.event_type != 'moderated_post_created',
                         Event.object_id.in_(user_is_admin_of_groups)))\
             .filter(~Event.event_type.in_(c.user.ignored_events_list))\
+            .filter(Event.parent == None)\
             .order_by(desc(Event.created))\
             .limit(20).all()
 

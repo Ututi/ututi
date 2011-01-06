@@ -255,7 +255,5 @@
 ${dashboard(None, [], [])}
 
 %for event in c.events:
-  %if event.show_in_wall:
-    ${event.wall_entry()}
-  %endif
+  ${event.wall_entry()}
 %endfor
