@@ -8,3 +8,6 @@ CREATE OR REPLACE FUNCTION private_message_event_trigger() RETURNS trigger AS $$
     END
 $$ LANGUAGE plpgsql;;
 
+UPDATE events
+  SET parent_id = NULL
+  WHERE events.event_type = 'private_message_sent';
