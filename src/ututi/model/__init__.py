@@ -2363,6 +2363,7 @@ class Department(object):
     def __init__(self, id, name, title):
         self.id = id
         self.name = name
+        self.title = title
 
     def __repr__(self):
         return '<ututi.model.Department %d: %s>' % (self.id, self.title)
