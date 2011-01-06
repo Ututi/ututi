@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2011-01-05 19:12+0200\n"
+"PO-Revision-Date: 2011-01-06 14:58+0200\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -84,7 +84,7 @@ msgid "Message sent."
 msgstr "Pranešimas išsiųstas."
 
 msgid "The book has been successfully deleted"
-msgstr ""
+msgstr "Jūs sėkmingai pašalinote knygą"
 
 #, python-format
 msgid ""
@@ -986,13 +986,13 @@ msgid "A new file has been uploaded for the %(title)s:"
 msgstr "%(title)s buvo įkeltas naujas failas:"
 
 msgid "Students books"
-msgstr ""
+msgstr "Knygos studentams"
 
 msgid "School books"
-msgstr ""
+msgstr "Knybos mokiniams"
 
 msgid "Other books"
-msgstr ""
+msgstr "Kitos knygos"
 
 #, python-format
 msgid "Page %(page_title)s (%(page_url)s) was created."
@@ -2154,7 +2154,7 @@ msgstr "Apie U-Knygas"
 
 #, python-format
 msgid "My books (%(book_count)d)"
-msgstr ""
+msgstr "Mano knygos (%(book_count)d)"
 
 msgid "Upload a Book"
 msgstr "Įkelti Knygą"
