@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2011-01-05 18:29+0200\n"
+"PO-Revision-Date: 2011-01-05 19:12+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -941,6 +941,15 @@ msgstr[1] ""
 
 #, python-format
 msgid "A new file has been uploaded for the %(title)s:"
+msgstr ""
+
+msgid "Students books"
+msgstr ""
+
+msgid "School books"
+msgstr ""
+
+msgid "Other books"
 msgstr ""
 
 #, python-format

@@ -34,7 +34,7 @@
 
 %if c.books_department:
 <div class="book-breadcrumbs">
-  ${_('Catalog')}: ${h.link_to(_(c.books_department.capitalize()),
+  ${_('Catalog')}: ${h.link_to(c.books_department_title,
                  url(controller="books",
                      action="catalog",
                      books_department=c.books_department))}

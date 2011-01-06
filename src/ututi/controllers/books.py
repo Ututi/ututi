@@ -399,6 +399,7 @@ class BooksController(HomeController, BaseController):
     def catalog(self, books_department=None, books_type_name=None, science_type_id=None, school_grade_id=None):
         c.selected_books_department = books_department
         c.books_department = books_department
+        c.books_department_title = Department.getByName(books_department).title
         school_grade = None
         science_type = None
 

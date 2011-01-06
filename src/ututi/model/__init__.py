@@ -44,7 +44,7 @@ from nous.mailpost import copy_chunked
 from zope.cachedescriptors.property import Lazy
 
 from pylons.i18n.translation import ungettext
-from pylons.i18n import _
+from pylons.i18n import _, lazy_ugettext as ugettext
 
 log = logging.getLogger(__name__)
 
@@ -2330,18 +2330,21 @@ class Notification(object):
 
 class Department(object):
 
-    names = {'university': 'Students books', 'school': 'School books', 'other': 'Other books'}
+    names = {'university': ugettext('Students books'),
+             'school': ugettext('School books'),
+             'other': ugettext('Other books')}
+    keys = ['university', 'school', 'other']
     departments_by_id = {}
     departments_by_name = {}
 
     @classmethod
     def values(cls):
         return [cls.getByName(name)
-                for name in cls.names]
+                for name in cls.keys]
 
     @classmethod
     def initialize(cls):
-        for id, name in enumerate(cls.names.keys()):
+        for id, name in enumerate(cls.keys):
             department = Department(id, name, cls.names[name])
             cls.departments_by_id[id] = department
             cls.departments_by_name[name] = department
@@ -2360,7 +2363,6 @@ class Department(object):
     def __init__(self, id, name, title):
         self.id = id
         self.name = name
-        self.title = title
 
     def __repr__(self):
         return '<ututi.model.Department %d: %s>' % (self.id, self.title)

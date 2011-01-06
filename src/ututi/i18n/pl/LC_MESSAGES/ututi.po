@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2010-12-31 16:23+0200\n"
+"PO-Revision-Date: 2011-01-05 18:29+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -82,6 +82,9 @@ msgstr "uBooks"
 
 msgid "Message sent."
 msgstr "Wiadomość wysłana"
+
+msgid "The book has been successfully deleted"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -358,6 +361,12 @@ msgstr "Usuń użytkownika"
 
 msgid "What's New?"
 msgstr "Co nowego?"
+
+msgid "General"
+msgstr "Ogólny"
+
+msgid "Discussions on anything and everything"
+msgstr "Dyskusje o wszystkim i niczym"
 
 msgid "Group information and settings updated."
 msgstr "Informacje o grupie oraz ustawienia zostały zaktualizowane."
@@ -865,6 +874,34 @@ msgid "Save"
 msgstr "Zachowaj"
 
 #, python-format
+msgid "%(num)s second ago"
+msgid_plural "%(num)s seconds ago"
+msgstr[0] "%(num)s s. temu"
+msgstr[1] "%(num)s s. temu"
+msgstr[2] "%(num)s s. temu"
+
+#, python-format
+msgid "%(num)s minute ago"
+msgid_plural "%(num)s minutes ago"
+msgstr[0] "%(num)s minuta temu"
+msgstr[1] "%(num)s minuty temu"
+msgstr[2] "%(num)s minut temu"
+
+#, python-format
+msgid "%(num)s hour ago"
+msgid_plural "%(num)s hours ago"
+msgstr[0] "%(num)s h. temu"
+msgstr[1] "%(num)s h. temu"
+msgstr[2] "%(num)s h. temu"
+
+#, python-format
+msgid "%(num)s day ago"
+msgid_plural "%(num)s days ago"
+msgstr[0] "%(num)s dzień temu"
+msgstr[1] "%(num)s dni temu"
+msgstr[2] "%(num)s dni temu"
+
+#, python-format
 msgid "Ututi registration code: %s"
 msgstr "Kod rejestracji na Ututi: %s"
 
@@ -954,43 +991,9 @@ msgstr[0] "nieograniczona liczba prywatnych plików grupy na %(day_count)d dzie�
 msgstr[1] "nieograniczona liczba prywatnych plików grupy na %(day_count)d dni"
 msgstr[2] "nieograniczona liczba prywatnych plików grupy na %(day_count)d dni"
 
-msgid "General"
-msgstr "Ogólny"
-
-msgid "Discussions on anything and everything"
-msgstr "Dyskusje o wszystkim i niczym"
-
 #, python-format
 msgid "A new file has been uploaded for the %(title)s:"
 msgstr "Do %(title)s został dodany nowy plik"
-
-#, python-format
-msgid "%(num)s second ago"
-msgid_plural "%(num)s seconds ago"
-msgstr[0] "%(num)s s. temu"
-msgstr[1] "%(num)s s. temu"
-msgstr[2] "%(num)s s. temu"
-
-#, python-format
-msgid "%(num)s minute ago"
-msgid_plural "%(num)s minutes ago"
-msgstr[0] "%(num)s minuta temu"
-msgstr[1] "%(num)s minuty temu"
-msgstr[2] "%(num)s minut temu"
-
-#, python-format
-msgid "%(num)s hour ago"
-msgid_plural "%(num)s hours ago"
-msgstr[0] "%(num)s h. temu"
-msgstr[1] "%(num)s h. temu"
-msgstr[2] "%(num)s h. temu"
-
-#, python-format
-msgid "%(num)s day ago"
-msgid_plural "%(num)s days ago"
-msgstr[0] "%(num)s dzień temu"
-msgstr[1] "%(num)s dni temu"
-msgstr[2] "%(num)s dni temu"
 
 #, python-format
 msgid "Page %(page_title)s (%(page_url)s) was created."
@@ -2160,11 +2163,12 @@ msgstr "Rynek podręczników"
 msgid "About U-Books"
 msgstr "O U-Books"
 
+#, python-format
+msgid "My books (%(book_count)d)"
+msgstr ""
+
 msgid "Upload a Book"
 msgstr " Dodaj książkę"
-
-msgid "My books"
-msgstr "Moje ksiązki"
 
 msgid "books"
 msgstr "książki"
@@ -2220,11 +2224,26 @@ msgstr "Najnowsze książki"
 msgid "Books added"
 msgstr "Książki dodał"
 
-msgid "Restore"
-msgstr "Przywróć"
+msgid "My books"
+msgstr "Moje ksiązki"
 
 msgid "You haven't added any books yet."
 msgstr "Nie dodano jeszcze żadnych książek."
+
+msgid "Restore"
+msgstr "Przywróć"
+
+msgid "All Books"
+msgstr "Wszystkie książki"
+
+msgid "Books for school"
+msgstr "Książki dla uczelni"
+
+msgid "Books for students"
+msgstr "Książki dla studentów"
+
+msgid "Other"
+msgstr "Inne"
 
 msgid "Search-btn"
 msgstr "Szukaj"
@@ -2765,45 +2784,6 @@ msgstr ""
 "Strona grupy może być miejscem na najnowsze informacje o grupie. Można tu"
 " zamieścić jej grupy, plan zajęć, ważne terminy itp. "
 
-msgid "New custom group"
-msgstr "Nowa grupa konfugurowana"
-
-msgid "Create a custom group"
-msgstr "Utwórz grupę konfigurowaną"
-
-msgid "Group data"
-msgstr "Twoje dane"
-
-msgid "Set up your own group"
-msgstr "Załóż własną grupę"
-
-msgid "Choose the means of communication"
-msgstr "Wybierz sposoby komunikacji"
-
-msgid "Choose the visibility of a group"
-msgstr "Wybierz widoczność Twojej grupy"
-
-msgid "Choose a way to register in this group"
-msgstr "Wybierz sposób dołączenia do tej grupy"
-
-msgid "New public group"
-msgstr "Nowa grupa publiczna"
-
-msgid "Create a public group"
-msgstr "Utwórz grupę publiczną"
-
-msgid "What can you do with public groups?"
-msgstr "Co można robić w publicznej grupie?"
-
-msgid "Public group page"
-msgstr "Publiczna strona grupy"
-
-msgid "News publishing"
-msgstr "Publikowanie nowości"
-
-msgid "No confirmation needed for membership"
-msgstr "Członkostwo bez potwierdzenia"
-
 msgid "Back to group page"
 msgstr "Powrót do strony grupy"
 
@@ -2862,30 +2842,6 @@ msgstr "Możesz przechowywać tu %s prywatnych plików grupy (n.p. zdjęć)"
 
 msgid "Add more subjects"
 msgstr "Dodaj więcej przedmiotów"
-
-msgid "Choose group type"
-msgstr "Wybierz rodzaj grupy"
-
-msgid "What kind of a group do you want to create?"
-msgstr "Jaki rodzaj grupy chcesz utworzyć?"
-
-msgid "Academic group"
-msgstr "Grupa akademicka"
-
-msgid "Public group"
-msgstr "Grupa publiczna"
-
-msgid "Custom group"
-msgstr "Grupa konfigurowana"
-
-msgid "Private file area"
-msgstr "Miejsce na pliki prywatne"
-
-msgid "Registration with university subjects"
-msgstr "Obserwowanie przedmiotów akademickich"
-
-msgid "Pick the functionality you need yourself"
-msgstr "Wybierz potrzebne Ci funkcje"
 
 msgid "Congratulations, you have created a new group!"
 msgstr "Gratulujemy utworzenia nowej grupy!"
@@ -3423,18 +3379,6 @@ msgstr "usuń"
 msgid "Last edit: "
 msgstr "Ostatnie zmiany:"
 
-msgid "All Books"
-msgstr "Wszystkie książki"
-
-msgid "Books for school"
-msgstr "Książki dla uczelni"
-
-msgid "Books for students"
-msgstr "Książki dla studentów"
-
-msgid "Other"
-msgstr "Inne"
-
 #, python-format
 msgid "<em>%(count)s</em> active poster"
 msgid_plural "<em>%(count)s</em> active posters"
@@ -3507,18 +3451,17 @@ msgstr ""
 "Wyślij wiadomość SMS pod numer <span style=\"font-size: "
 "14px\">%(phone)s</span>  o następującej treści:"
 
+#, python-format
 msgid ""
-"The SMS costs <strong>7 Lt</strong> and will increase your file limit to "
-"<strong>7&nbsp;GB</strong> for another month."
+"The SMS costs <strong>%(price).2f Lt</strong> and will increase your file"
+" limit to <strong>%(limit)s</strong> for another month."
 msgstr ""
-"SMS kosztuje <strong>7 Lt</strong> i zwiększy limit pliku "
-"<strong>7&nbsp;GB</strong> o kolejny miesiąc."
 
 #, python-format
-msgid "Your private file area is limited to 5&nbsp;GB until <strong>%s</strong>."
+msgid ""
+"Your private file area is limited to %(limit)s until "
+"<strong>%(date)s</strong>."
 msgstr ""
-"Przestrzeń na Twoje prywatne pliki wynosi  5&nbsp;GB do "
-"<strong>%s</strong>."
 
 msgid "E-banking"
 msgstr "Bankowość elektroniczna"
@@ -4191,6 +4134,38 @@ msgid ""
 "please tell us more about yourself."
 msgstr ""
 
+msgid "Group or user:"
+msgstr "Grupa lub użytkownik"
+
+msgid "Share with others"
+msgstr "Podziel się z innymi"
+
+msgid "send a message"
+msgstr "wyślij wiadomość"
+
+msgid ""
+"You need to be a member of a group or have subjects that you are studying"
+" to be able to quickly upload files."
+msgstr ""
+"Musisz należeć do grupy lub podać przedmioty, których się uczysz, aby "
+"szybko dodać pliki."
+
+msgid "upload a file"
+msgstr "dodaj plik"
+
+msgid ""
+"You or your group need to have subjects that you are studying to be able "
+"to quickly create wiki notes in them."
+msgstr ""
+"Ty lub Twoja grupa musicie podać przedmioty, których się uczycie, aby móc"
+" szybko stworzyć w nich notatki wiki."
+
+msgid "create a wiki page"
+msgstr "utwórz wiki stronę"
+
+msgid "Wall settings"
+msgstr "Ustawienia strony"
+
 msgid "Forum posts"
 msgstr "Posty na forach"
 
@@ -4241,9 +4216,6 @@ msgstr ""
 
 msgid "New groups"
 msgstr "Nowe grupy"
-
-msgid "Wall settings"
-msgstr "Ustawienia strony"
 
 msgid "Which events do You want to see on Your wall?"
 msgstr "Jakie wydarzenia chcesz zobaczyć na swojej tablicy?"
@@ -4465,38 +4437,6 @@ msgstr "Twoja wiadomość została wysłana."
 msgid "Your SMS was successfully sent."
 msgstr ""
 
-msgid "Group or user:"
-msgstr "Grupa lub użytkownik"
-
-msgid "Share with others"
-msgstr "Podziel się z innymi"
-
-msgid "send a message"
-msgstr "wyślij wiadomość"
-
-msgid ""
-"You need to be a member of a group or have subjects that you are studying"
-" to be able to quickly upload files."
-msgstr ""
-"Musisz należeć do grupy lub podać przedmioty, których się uczysz, aby "
-"szybko dodać pliki."
-
-msgid "upload a file"
-msgstr "dodaj plik"
-
-msgid ""
-"You or your group need to have subjects that you are studying to be able "
-"to quickly create wiki notes in them."
-msgstr ""
-"Ty lub Twoja grupa musicie podać przedmioty, których się uczycie, aby móc"
-" szybko stworzyć w nich notatki wiki."
-
-msgid "create a wiki page"
-msgstr "utwórz wiki stronę"
-
-msgid "More"
-msgstr "Więcej"
-
 msgid "Ignore events like this"
 msgstr "Ignoruj wydarzenia podobne do tego"
 
@@ -4533,8 +4473,8 @@ msgid "%(user_link)s has created the subject %(subject_link)s."
 msgstr "%(user_link)s stworzył przedmiot %(subject_link)s."
 
 #, python-format
-msgid "%(user_link)s has created the group %(subject_link)s."
-msgstr "%(user_link)s stworzył grupę %(subject_link)s."
+msgid "%(user_link)s has created the group %(group_link)s."
+msgstr ""
 
 msgid "Send reply"
 msgstr "Wyślij odpowiedź"
@@ -4621,6 +4561,13 @@ msgid ""
 msgstr ""
 "%(user_link)s zmodyfikował stronę %(page_link)s w przedmiociet "
 "%(subject_link)s."
+
+msgid "More"
+msgstr "Więcej"
+
+#, python-format
+msgid "%(user_link)s has created the group %(subject_link)s."
+msgstr "%(user_link)s stworzył grupę %(subject_link)s."
 
 msgid "Region"
 msgstr "Region"
@@ -5032,13 +4979,12 @@ msgstr ""
 "Punkty SMS można wymienić na wiadomości SMS do kolegów z grupy. Są dwa "
 "sposoby aby je zdobyć:"
 
+#, python-format
 msgid ""
-"The SMS costs <strong>5 Lt</strong> and <strong>50 credits</strong> will "
-"be added to your account (one credit is one SMS to a single person)."
+"The SMS costs <strong>%(price).2f Lt</strong> and <strong>%(credits)d "
+"credits</strong> will be added to your account (one credit is one SMS to "
+"a single person)."
 msgstr ""
-"Koszt jednego SMSa <strong>7.32 zł</strong>. <strong>50 punktów </strong>"
-" zostanie dodane na Twoje konto (za jeden punkt możesz wysłać jedną "
-"wiadomość SMS do jednego odbiorcy)."
 
 msgid "If you pay by bank, <strong>a large discount applies</strong>."
 msgstr "Płacąc przelewem, <strong> dostajesz rabat </strong>."
@@ -5082,14 +5028,10 @@ msgstr "Wyślij wiadomość ze swego telefonu!"
 #, python-format
 msgid ""
 "You can send a message to your group directly from your phone. The "
-"message costs <strong>2 Lt</strong>, which pays for the delivery of the "
-"message to all recipients (your SMS credits will not be charged). Send "
-"the following text to number %(phone)s:"
+"message costs <strong>%(price).2f Lt</strong>, which pays for the "
+"delivery of the message to all recipients (your SMS credits will not be "
+"charged). Send the following text to number %(phone)s:"
 msgstr ""
-"Możesz wysłać wiadomość do całej Twojej grupy ze swojej komórki. Koszt "
-"takiego SMSa <strong>2 zł</strong> (+ VAT). Kwoty tej wstarczy na "
-"wysłanie wiadomości do wszystkich odbiorców (punkty SMS nie zostaną "
-"potrącone). Wyślij wiadomość o następującej treści na numer %(phone)s:"
 
 msgid "Your text"
 msgstr "Twój tekst"

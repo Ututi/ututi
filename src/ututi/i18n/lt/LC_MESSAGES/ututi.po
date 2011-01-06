@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2011-01-05 18:29+0200\n"
+"PO-Revision-Date: 2011-01-05 19:12+0200\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -984,6 +984,15 @@ msgstr[2] "neribota grupės privačių failų vieta %(day_count)d dienų"
 #, python-format
 msgid "A new file has been uploaded for the %(title)s:"
 msgstr "%(title)s buvo įkeltas naujas failas:"
+
+msgid "Students books"
+msgstr ""
+
+msgid "School books"
+msgstr ""
+
+msgid "Other books"
+msgstr ""
 
 #, python-format
 msgid "Page %(page_title)s (%(page_url)s) was created."
