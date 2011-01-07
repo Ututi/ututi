@@ -186,11 +186,12 @@
       </%base:rounded_block>
     </%def>
     <%def name="heading()">
-      ${_("%(user_link)s has posted a new message %(message_link)s to the group %(group_link)s.") % \
-         dict(user_link=event.link_to_author(),
+      ${_("%(user_link)s has posted a new message %(message_link)s to the group %(group_link)s") % \
+         dict(user_link=h.object_link(event.message.author),
               group_link=h.object_link(event.context),
               message_link=h.object_link(event.message)) | n}
     </%def>
+    <%self:event_message_thread event="${event}" />
   </%self:wall_entry>
 </%def>
 

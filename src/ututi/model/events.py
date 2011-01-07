@@ -305,6 +305,16 @@ class MailinglistPostCreatedEvent(PostCreatedEventBase):
     def wall_entry(self):
         return render_mako_def('/sections/wall_entries.mako', 'mailinglistpost_created', event=self)
 
+    def message_list(self):
+        """MessagingEventMixin implementation."""
+        return [dict(author=m.author, created=m.sent, message=m.body)
+                for m in self.message.thread.posts]
+
+    def reply_action(self):
+        """MessagingEventMixin implementation."""
+        return url(controller='mailinglist', action='reply', 
+                   thread_id=self.message.thread.id, id=self.message.thread.group.group_id)
+
 
 class ModeratedPostCreated(PostCreatedEventBase):
     """Event fired when someone posts a message on the moderation queue.
