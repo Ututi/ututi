@@ -101,6 +101,10 @@
                     color: #668000;
                 }
 
+                .wall .wall-entry a.truncate_more_link {
+                    color: #668000;
+                }
+
             .wall .wall-entry .reply {
                 background-color: #f6f6f6;
                 padding: 10px;
@@ -248,6 +252,20 @@
 <%def name="head_tags()">
   ${h.javascript_link('/javascript/dashboard.js')}
   ${h.javascript_link('/javascript/ckeditor/ckeditor.js')}
+    ${h.javascript_link('/javascript/jquery.jtruncate.pack.js')}
+    <script type="text/javascript">
+    $(document).ready(function() {
+        /* Truncate texts. */
+        $('span.truncated').jTruncate({
+            length: 150,
+            minTrail: 50,
+            moreText: "${_('More')}",
+            lessText: "",
+            moreAni: 300,
+            lessAni: 200
+        });
+    });
+    </script>
 </%def>
 
 <a id="settings-link" href="${url(controller='profile', action='wall_settings')}">${_('Wall settings')}</a>

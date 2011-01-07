@@ -36,7 +36,7 @@
       <img src="${url(controller='user', action='logo', id=original['author'].id, width=50)}" />
     </div>
     <div class="content">
-      ${original['message']}
+      <span class="truncated">${original['message']}</span>
       <div class="closing">
         <span class="event-time">${h.when(original['created'])}</span>
         <span class="actions">
@@ -50,7 +50,7 @@
         </div>
         <div class="content">
           <span class="reply-author">${h.object_link(msg['author'])}:</span>
-          ${msg['message']}
+          <span class="truncated">${msg['message']}</span>
           <div class="closing">
             <span class="event-time">${h.when(msg['created'])}</span>
             <span class="actions">
