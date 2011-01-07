@@ -410,6 +410,7 @@ class PrivateMessageSentEvent(Event, MessagingEventMixin):
         return render_mako_def('/sections/wall_entries.mako', 'privatemessage_sent', event=self)
 
     def message_text(self):
+        """Deprecated."""
         return cgi.escape(self.private_message.content)
 
     def message_list(self):
