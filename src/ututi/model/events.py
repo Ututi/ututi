@@ -61,6 +61,10 @@ class MessagingEventMixin():
     def reply_action():
         """
         Returns reply action url.
+
+        Note: the posted parameter is always called 'message'.
+        This should be fixed so that this method explicitly returns
+        what parameter is being posted.
         """
         raise NotImplementedError()
 
