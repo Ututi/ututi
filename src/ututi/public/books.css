@@ -2,6 +2,28 @@ body {
     background: url("../images/books/body_bg.gif") repeat-x;
 }
 
+#wrap {
+    width: 1025px;
+}
+
+#widthLimiter {
+    background: none;
+    padding-bottom: 10px;
+    padding-top: 65px;
+    position: relative;
+    width: 1025px;
+}
+
+#books-container #mainContent {
+    margin: 0 0 0 27px;
+    width: 760px;
+}
+
+#books-container #aside {
+    margin: 0px;
+    width: 230px;
+}
+
 h1 {
     background: #4D4D4D;
     color: #FFFFFF;
@@ -19,14 +41,6 @@ h1.title {
     margin-top: 10px;
     margin-bottom: 5px;
     font-size: 22px;
-}
-
-#widthLimiter {
-    background: none;
-    padding-bottom: 10px;
-    padding-top: 65px;
-    position: relative;
-    width: 1025px;
 }
 
 .head-nav {
@@ -58,7 +72,7 @@ h1.title {
 .loggedin-nav {
     float: left;
     top: 18px;
-    right: 0px;
+    right: 15px;
     z-index: 100;
 }
 
@@ -85,7 +99,7 @@ h1.title {
 }
 
 .loggedin-nav li span {
-    font-size: 12px;
+    font-size: 11px;
 }
 
 .loggedin-nav li span.fullname {
@@ -134,16 +148,6 @@ li#ulogo a {
     position: absolute;
     right:0;
     top:17px;
-}
-
-#books-container #mainContent {
-    margin: 0 0 0 27px;
-    width: 760px;
-}
-
-#books-container #aside {
-    margin: 0px;
-    width: 230px;
 }
 
 .books-header, #search_results_header {
