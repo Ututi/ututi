@@ -1,4 +1,5 @@
 import cgi
+import logging
 
 from sqlalchemy.schema import Table
 from sqlalchemy.orm import backref
@@ -13,6 +14,7 @@ from ututi.model import Group, Subject, User, File, Page, ContentItem, ForumPost
 from ututi.model import meta
 from ututi.lib.helpers import link_to, ellipsis, when
 
+log = logging.getLogger(__name__)
 events_table = None
 
 class Event(object):
@@ -432,6 +434,7 @@ class PrivateMessageSentEvent(Event, MessagingEventMixin):
 
     def message_text(self):
         """Deprecated."""
+        log.warn('message_text of PrivateMessageSentEvent is deprecated.')
         return cgi.escape(self.private_message.content)
 
     def message_list(self):
