@@ -24,12 +24,12 @@
             background: url("/images/details/icon_event.png") no-repeat left center;
         }
 
-            .wall .wall-entry .event-heading .hide-button {
+            .wall .wall-entry .event-heading .hide-button-container {
                 float: right;
                 display: none;
             }
 
-            .wall .wall-entry .event-heading:hover .hide-button {
+            .wall .wall-entry .event-heading:hover .hide-button-container {
                 display: block;
             }
 
@@ -250,8 +250,9 @@
 </%def>
 
 <%def name="head_tags()">
-  ${h.javascript_link('/javascript/dashboard.js')}
-  ${h.javascript_link('/javascript/ckeditor/ckeditor.js')}
+    ${h.javascript_link('/javascript/wall.js')}
+    ${h.javascript_link('/javascript/dashboard.js')}
+    ${h.javascript_link('/javascript/ckeditor/ckeditor.js')}
     ${h.javascript_link('/javascript/jquery.jtruncate.pack.js')}
     <script type="text/javascript">
     $(document).ready(function() {

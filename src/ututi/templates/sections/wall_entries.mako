@@ -1,16 +1,16 @@
 <%def name="wall_entry(event)">
-<div class="wall-entry type-${event.event_type.replace('_', '-')}" id="wall-event-${event.id}">
+<div class="wall-entry type-${event.event_type.replace('_', '-')} type_${event.event_type}" id="wall-event-${event.id}">
   <div class="event-heading">
     ${caller.heading()}
     <span class="event-time">
       ${h.when(event.created)}
     </span>
     %if c.user is not None:
-    <div class="hide-button">
+    <div class="hide-button-container">
       <form method="POST" action="${url(controller='profile', action='hide_event')}">
         <div>
-          <input type="hidden" name="event_type" value="${event.event_type}" />
-          <input type="image" src="/images/details/icon_delete.png" title="${_('Ignore events like this')}" />
+          <input class="event-type" name="event_type" type="hidden" value="${event.event_type}" />
+          <input class="hide-button" type="image" src="/images/details/icon_delete.png" title="${_('Ignore events like this')}" />
         </div>
       </form>
     </div>

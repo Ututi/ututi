@@ -1,18 +1,17 @@
 $(document).ready(function(){
-    $('.hide_event').click(function() {
+
+    $('.event-heading .hide-button').click(function() {
         form = $(this).closest('form');
-        $.post(form.attr('action')+'?js=1',
+        $.post(form.attr('action') + '?js=1',
                form.serialize(),
-               function(data, status) {
-                   return function() {
-                       if (status == 'success') {
-                           type = $('input.event_type', form).val();
-                           $('.type_'+type).fadeOut(500);
-                       }
-                   }(data, status, form);
+               function(data) {
+                   type = $('input.event-type', form).val();
+                   $('.type_' + type).fadeOut(500);
                });
         return false;
     });
+
+    /*
     $('.action_submit').click(function(evt) {
         evt.stopPropagation();
         var form = $(this).closest('form');
@@ -44,4 +43,6 @@ $(document).ready(function(){
         }
         return false;
     });
+
+    */
 });
