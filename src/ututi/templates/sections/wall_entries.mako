@@ -254,6 +254,7 @@
               group_link=h.object_link(event.context),
               message_link=h.object_link(event.post)) | n}
     </%def>
+    <%self:event_message_thread event="${event}" />
   </%self:wall_entry>
 </%def>
 

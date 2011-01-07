@@ -376,6 +376,27 @@ class ForumPostCreatedEvent(Event):
     def wall_entry(self):
         return render_mako_def('/sections/wall_entries.mako', 'forumpost_created', event=self)
 
+    def message_list(self):
+        """MessagingEventMixin implementation."""
+        category_id = self.post.category_id
+        thread_id = self.post.thread_id
+        forum_posts = meta.Session.query(ForumPost)\
+            .filter_by(category_id=category_id,
+                       thread_id=thread_id,
+                       deleted_by=None)\
+            .order_by(ForumPost.created_on)\
+            .all()
+        return [dict(author=m.created, created=m.created_on, message=m.message)
+                for m in forum_posts]
+
+    def reply_action(self):
+        """MessagingEventMixin implementation."""
+        return url(controller='forum',
+                   action='reply',
+                   id=self.context.group_id,
+                   category_id=self.post.category_id,
+                   thread_id=self.post.thread_id)
+
 
 class SMSMessageSentEvent(Event):
     """Event fired when someone sends an SMS message to the group."""
