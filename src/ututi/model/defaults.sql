@@ -917,7 +917,7 @@ CREATE FUNCTION group_mailing_list_message_event_trigger() RETURNS trigger AS $$
         INSERT INTO events (object_id, author_id, event_type, message_id)
                VALUES (NEW.group_id, NEW.author_id, 'moderated_post_created', NEW.id);
       ELSE
-        pid := get_group_mailing_list_message_event_parent();
+        pid := get_group_mailing_list_message_event_parent(NEW);
         INSERT INTO events (object_id, author_id, event_type, message_id, parent_id)
                VALUES (NEW.group_id, NEW.author_id, 'mailinglist_post_created', NEW.id, pid);
       END IF;
