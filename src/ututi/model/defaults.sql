@@ -778,6 +778,7 @@ create table events (
        sms_id int8 references outgoing_group_sms_messages(id) on delete cascade default null,
        private_message_id int8 references private_messages(id) on delete cascade default null,
        data text default null,
+       parent_id int8 default null references events(id) on delete cascade,
        primary key (id));;
 
 create index events_author_id_idx on events(author_id);
@@ -973,11 +974,26 @@ $$ LANGUAGE plpgsql;;
 CREATE TRIGGER outgoing_group_sms_event_trigger AFTER INSERT ON outgoing_group_sms_messages
     FOR EACH ROW EXECUTE PROCEDURE outgoing_group_sms_event_trigger();;
 
+CREATE FUNCTION get_private_message_event_parent(private_messages) RETURNS int8 AS $$
+    DECLARE
+        obj ALIAS FOR $1;
+        id int8 := null;
+    BEGIN
+        IF obj.thread_id IS NULL THEN
+            RETURN null;
+        END IF;
+        SELECT INTO id evt.id FROM events evt WHERE evt.private_message_id = obj.thread_id;
+        RETURN id;
+    END
+$$ LANGUAGE plpgsql;;
 
 CREATE FUNCTION private_message_event_trigger() RETURNS trigger AS $$
+    DECLARE
+      pid int8 := NULL;
     BEGIN
-      INSERT INTO events (recipient_id, author_id, event_type, private_message_id)
-             VALUES (NEW.recipient_id, NEW.sender_id, 'private_message_sent', NEW.id);
+      pid := get_private_message_event_parent(NEW);
+      INSERT INTO events (recipient_id, author_id, event_type, private_message_id, parent_id)
+             VALUES (NEW.recipient_id, NEW.sender_id, 'private_message_sent', NEW.id, pid);
       RETURN NEW;
     END
 $$ LANGUAGE plpgsql;;

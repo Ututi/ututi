@@ -5,7 +5,7 @@ from sqlalchemy.sql.expression import desc
 from sqlalchemy.sql.expression import or_
 from paste.util.datetimeutil import parse_date
 
-from pylons import request
+from pylons import request, config
 from pylons.i18n import ungettext, _
 
 from ututi.lib.messaging import EmailMessage
@@ -159,7 +159,7 @@ class NewsController(BaseController):
     def _send_out_of_space_notification(self, group):
         """Send a notification to a group that it has run out of private space."""
         subject = _('The Ututi group "%s" has run out of private file space') % group.title
-        extra_vars = dict(group=group)
+        extra_vars = dict(group=group, size_limit=int(config.get('paid_group_file_limit')))
         text = render('/emails/group_space_full.mako', extra_vars=extra_vars)
         msg = EmailMessage(subject, text)
         group.send(msg)

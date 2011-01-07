@@ -70,7 +70,8 @@ ${next.body()}
           >${_("Congratulations! You have increased the group's private file limit.")}</div>
 
       <div style="padding-top: 1em; padding-bottom: 1em">
-        ${_("You can now store up to 5&nbsp;GB in your group's private area. Time period extension: %s.") % request.GET.get('paid_space') |n}
+        ${_("You can now store up to %(size)s in your group's private area. Time period extension: %(time)s.") % \
+            dict(time=request.GET.get('paid_space'), size=h.file_size(int(c.pylons_config.get('paid_group_file_limit')))) |n}
         ${_('Have fun using Ututi groups!')}
       </div>
 

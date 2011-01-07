@@ -314,7 +314,7 @@ for the service.
     >>> browser.getControl('Dummy pay 5 LTL').click()
     >>> browser.printQuery('id("got-space-dialog")/div/text()')
     Congratulations! You have increased the group's private file limit.
-    You can now store up to 5 GB in your group's private area. Time period extension: month.
+    You can now store up to 5 GB in your group's private area. Time period extension: month.
     Have fun using Ututi groups!
 
 

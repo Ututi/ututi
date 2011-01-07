@@ -17,7 +17,7 @@ class FortumoController(BaseController):
     """Payment by SMS."""
 
     def personal_sms_credits(self):
-        """Buy 100 personal SMS messages."""
+        """Buy personal SMS messages."""
         return self._receive_message('personal_sms_credits')
 
     def group_space(self):
@@ -68,13 +68,18 @@ class FortumoController(BaseController):
     def _handle_personal_sms_credits(self, msg):
         if msg.sender is None:
             return _('Your phone number (+%s) is not registered in Ututi.') % msg.sender_phone_number
-        msg.sender.purchase_sms_credits(100)
+        credit_count = int(config.get('fortumo.personal_sms_credits.credits', 50))
+        credit_price = float(config.get('fortumo.personal_sms_credits.price', 500)) / 100
+        msg.sender.purchase_sms_credits(credit_count)
         msg.success = True
         return ungettext(
-             'You have purchased 100 SMS messages for 10 Lt; you now have %(num)d credits.',
-             'You have purchased 100 SMS messages for 10 Lt; you now have %(num)d credits.',
-             msg.sender.sms_messages_remaining
-             ) % dict(num=msg.sender.sms_messages_remaining)
+             'You have purchased %(count)d SMS credit for %(price).2f Lt;',
+             'You have purchased %(count)d SMS credits for %(price).2f Lt;',
+             credit_count) % dict(count=credit_count, price=credit_price) + \
+           ungettext(
+             ' You now have %(count)d credit.',
+             ' You now have %(count)d credits.',
+             msg.sender.sms_messages_remaining) % dict(count=msg.sender.sms_messages_remaining)
 
     def _handle_group_space(self, msg):
         group_id = msg.message_text.strip()
