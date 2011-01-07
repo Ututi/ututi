@@ -277,7 +277,7 @@
 <%def name="privatemessage_sent(event)">
   <%self:wall_entry event="${event}">
     <%def name="heading()">
-      <% msg = event.original_message %>
+      <% msg = event.private_message %>
       %if msg.recipient == c.user:
         ${_("%(user_link)s has sent you a private message \"%(msg_link)s\"") % \
            dict(user_link=h.object_link(msg.sender),

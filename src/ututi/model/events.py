@@ -398,19 +398,15 @@ class PrivateMessageSentEvent(Event, MessagingEventMixin):
     def message_text(self):
         return cgi.escape(self.private_message.content)
 
-    @property
-    def original_message(self):
-        """Get original message of the thread."""
-        this = self.private_message
-        if this.thread_id is None:
-            return this
-        else:
-            return PrivateMessage.get(this.thread_id)
-
     def message_list(self):
         """MessagingEventMixin implementation."""
+        this = self.private_message
+        if this.thread_id is None:
+            root_message = this
+        else:
+            root_message = PrivateMessage.get(this.thread_id)
         return [dict(author=m.sender, created=m.created_on, message=m.content)
-                for m in self.original_message.thread()]
+                for m in root_message.thread()]
 
     def reply_action(self):
         """MessagingEventMixin implementation."""
