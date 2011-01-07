@@ -495,8 +495,10 @@ def setup_orm(engine):
                properties = {'context': relation(ContentItem, backref=backref('events', cascade='save-update, merge, delete')),
                              'user': relation(User, backref='events',
                                               primaryjoin=users_table.c.id==events_table.c.author_id),
-                             'parent': relation(Event, backref='children',
-                                                primaryjoin=events_table.c.parent_id==events_table.c.id)})
+                             'children': relation(Event,
+                                                  order_by=events_table.c.id.asc(),
+                                                  backref=backref('parent',
+                                                                  remote_side=events_table.c.id))})
 
     orm.mapper(PageCreatedEvent,
                inherits=event_mapper,
