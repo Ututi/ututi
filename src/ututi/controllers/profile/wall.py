@@ -11,6 +11,9 @@ from formencode.foreach import ForEach
 from formencode.schema import Schema
 from formencode import validators
 
+from sqlalchemy.orm.query import aliased
+from sqlalchemy.sql.expression import select
+from sqlalchemy.sql.expression import func
 from sqlalchemy.sql.expression import and_
 from sqlalchemy.sql.expression import desc
 from sqlalchemy.sql.expression import or_
@@ -20,6 +23,7 @@ from ututi.lib.security import ActionProtector
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.mailinglist import post_message
 from ututi.lib import helpers as h
+from ututi.model.events import events_table
 from ututi.model.events import Event
 from ututi.model import ForumPost, PrivateMessage, Page, User, Subject, meta, GroupMember, Group
 
@@ -266,6 +270,9 @@ class WallMixin(FileViewMixin):
         user_is_admin_of_groups = [membership.group_id
                                    for membership in c.user.memberships
                                    if membership.membership_type == 'administrator']
+        evt_child = aliased(Event)
+        child_creation_time = select([func.max(evt_child.created)], evt_child.parent_id==events_table.c.id).as_scalar()
+
         return meta.Session.query(Event)\
             .filter(or_(Event.object_id.in_([s.id for s in c.user.all_watched_subjects]),
                         Event.object_id.in_([m.group.id for m in c.user.memberships]),
@@ -276,7 +283,7 @@ class WallMixin(FileViewMixin):
                         Event.object_id.in_(user_is_admin_of_groups)))\
             .filter(~Event.event_type.in_(c.user.ignored_events_list))\
             .filter(Event.parent == None)\
-            .order_by(desc(Event.created))\
+            .order_by(func.coalesce(child_creation_time, Event.created).desc())\
             .limit(20).all()
 
     @ActionProtector("user")
