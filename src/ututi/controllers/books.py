@@ -158,17 +158,17 @@ class BookSubFormBase(Schema):
 
     allow_extra_fields = True
     logo = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
-    title = validators.UnicodeString(not_empty=True)
-    author = validators.UnicodeString(not_empty=True)
-    price = validators.UnicodeString()
+    title = validators.UnicodeString(not_empty=True, max=100)
+    author = validators.UnicodeString(not_empty=True, max=100)
+    price = validators.UnicodeString(max=25)
     description = validators.UnicodeString(not_empty=False)
     delete_logo = validators.Bool()
 
     city = CityValidator(not_empty=True)
 
-    owner_email = TranslatedEmailValidator(not_empty=False)
-    owner_name = validators.UnicodeString(not_empty=False)
-    owner_phone = PhoneNumberValidator(not_empty=False)
+    owner_email = TranslatedEmailValidator(not_empty=False, max=100)
+    owner_name = validators.UnicodeString(not_empty=False, max=50)
+    owner_phone = PhoneNumberValidator(not_empty=False, max=50)
 
     # XXX Setting default sub section values to None
     university_science_type = validators.Constant(None)
