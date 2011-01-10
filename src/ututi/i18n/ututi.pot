@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2011-01-05 19:12+0200\n"
+"POT-Creation-Date: 2011-01-10 13:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -183,8 +183,14 @@ msgid "Your phone number (+%s) is not registered in Ututi."
 msgstr ""
 
 #, python-format
-msgid "You have purchased 100 SMS messages for 10 Lt; you now have %(num)d credits."
-msgid_plural "You have purchased 100 SMS messages for 10 Lt; you now have %(num)d credits."
+msgid "You have purchased %(count)d SMS credit for %(price).2f Lt;"
+msgid_plural "You have purchased %(count)d SMS credits for %(price).2f Lt;"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid " You now have %(count)d credit."
+msgid_plural " You now have %(count)d credits."
 msgstr[0] ""
 msgstr[1] ""
 
@@ -2150,7 +2156,7 @@ msgid ""
 "If you want to use private group space further, please purchase a "
 "subscription\n"
 "on the group page at %(group_url)s, and the group file limit\n"
-"will be raised to 5 GB.\n"
+"will be raised to %(size)s.\n"
 "\n"
 "--\n"
 "The Ututi team\n"
@@ -2387,8 +2393,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"You can now store up to 5&nbsp;GB in your group's private area. Time period "
-"extension: %s."
+"You can now store up to %(size)s in your group's private area. Time period "
+"extension: %(time)s."
 msgstr ""
 
 msgid "Have fun using Ututi groups!"
@@ -3475,6 +3481,12 @@ msgstr ""
 msgid "Click the buttons to link or unlink your profile with Google and/or Facebook"
 msgstr ""
 
+msgid "Change picture"
+msgstr ""
+
+msgid "Delete current picture"
+msgstr ""
+
 msgid "Address of your website or blog"
 msgstr ""
 
@@ -3484,7 +3496,7 @@ msgstr ""
 msgid "Show my profile to unregistered users and search engines"
 msgstr ""
 
-msgid "Personal logo"
+msgid "Picture"
 msgstr ""
 
 msgid "Current password"
@@ -3704,7 +3716,7 @@ msgid ""
 "subject will be notified automatically."
 msgstr ""
 
-msgid "All Your course materials with be organized in one place."
+msgid "All your course materials with be organized in one place."
 msgstr ""
 
 msgid "add courses"
@@ -4032,6 +4044,9 @@ msgstr ""
 msgid "Ignore events like this"
 msgstr ""
 
+msgid "Send reply"
+msgstr ""
+
 #, python-format
 msgid "%(user_link)s has uploaded a new file in the subject %(subject_link)s."
 msgstr ""
@@ -4064,9 +4079,6 @@ msgstr ""
 msgid "%(user_link)s has created the group %(group_link)s."
 msgstr ""
 
-msgid "Send reply"
-msgstr ""
-
 #, python-format
 msgid ""
 "%(user_link)s has posted a new message %(message_link)s to the group "
@@ -4097,11 +4109,15 @@ msgid "%(user_link)s has sent an sms to the group %(group_link)s."
 msgstr ""
 
 #, python-format
-msgid "%(user_link)s has sent you a private message \"%(msg_link)s\"."
+msgid "%(user_link)s has sent you a private message \"%(msg_link)s\""
 msgstr ""
 
 #, python-format
-msgid "%(user_link)s has sent %(recipient_link)s a private message \"%(msg_link)s\"."
+msgid "You have sent %(user_link)s a private message \"%(msg_link)s\""
+msgstr ""
+
+#, python-format
+msgid "%(sender_link)s has sent %(recipient_link)s a private message \"%(msg_link)s\""
 msgstr ""
 
 #, python-format
@@ -4137,6 +4153,14 @@ msgstr ""
 
 #, python-format
 msgid "%(user_link)s has created the group %(subject_link)s."
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has sent you a private message \"%(msg_link)s\"."
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has sent %(recipient_link)s a private message \"%(msg_link)s\"."
 msgstr ""
 
 msgid "Region"
@@ -4181,7 +4205,7 @@ msgstr ""
 msgid "Start watching this subject personally"
 msgstr ""
 
-msgid "Before creating new subject please ensure that it has not been yet created."
+msgid "Before creating a new subject please ensure that it has not been created yet."
 msgstr ""
 
 msgid "A list of similar subjects is shown on the right."
@@ -4400,10 +4424,10 @@ msgstr ""
 msgid "Register as teacher:"
 msgstr ""
 
-msgid "Please verify, that the data below is correct."
+msgid "Please verify that the data below is correct."
 msgstr ""
 
-msgid "Advantages of teacher's profile:"
+msgid "Advantages of a teacher's profile:"
 msgstr ""
 
 msgid "Teacher profile"

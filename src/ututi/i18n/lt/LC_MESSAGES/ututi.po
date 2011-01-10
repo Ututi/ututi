@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2011-01-06 15:16+0200\n"
+"PO-Revision-Date: 2011-01-10 13:42+0200\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -190,15 +190,18 @@ msgid "Your phone number (+%s) is not registered in Ututi."
 msgstr "Telefono numeris (+%s) neregistruotas Ututi sistemoje."
 
 #, python-format
-msgid ""
-"You have purchased 100 SMS messages for 10 Lt; you now have %(num)d "
-"credits."
-msgid_plural ""
-"You have purchased 100 SMS messages for 10 Lt; you now have %(num)d "
-"credits."
-msgstr[0] "Nupirkote 100 SMS kreditų už 10 Lt, dabar turite %(num)d kreditą."
-msgstr[1] "Nupirkote 100 SMS kreditų už 10 Lt, dabar turite %(num)d kreditus."
-msgstr[2] "Nupirkote 100 SMS kreditų už 10 Lt, dabar turite %(num)d kreditų."
+msgid "You have purchased %(count)d SMS credit for %(price).2f Lt;"
+msgid_plural "You have purchased %(count)d SMS credits for %(price).2f Lt;"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, python-format
+msgid " You now have %(count)d credit."
+msgid_plural " You now have %(count)d credits."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #, python-format
 msgid "Invalid group: %s"
@@ -2327,20 +2330,11 @@ msgid ""
 "If you want to use private group space further, please purchase a "
 "subscription\n"
 "on the group page at %(group_url)s, and the group file limit\n"
-"will be raised to 5 GB.\n"
+"will be raised to %(size)s.\n"
 "\n"
 "--\n"
 "The Ututi team\n"
 msgstr ""
-"Sveiki,\n"
-"\n"
-"grupėje „%(group_title)s“ pasibaigė vieta privačioje failų srityje. Jei\n"
-"norite toliau naudotis privačia grupės vieta, užsakykite vietos išplėtimą"
-"\n"
-"grupės puslapyje: %(group_url)s . Riba bus pakelta iki 5 GB.\n"
-"\n"
-"--\n"
-"Ututi komanda\n"
 
 #, python-format
 msgid ""
@@ -2627,11 +2621,9 @@ msgstr "Sveikiname! Padidinote groupės privačių failų ribą."
 
 #, python-format
 msgid ""
-"You can now store up to 5&nbsp;GB in your group's private area. Time "
-"period extension: %s."
+"You can now store up to %(size)s in your group's private area. Time "
+"period extension: %(time)s."
 msgstr ""
-"Dabar grupės privačių failų zonoje galite laikyti iki 5 GB. Periodo "
-"pratęsimas: %s."
 
 msgid "Have fun using Ututi groups!"
 msgstr "Smagaus naudojimosi Ututi grupėmis!"
@@ -3813,6 +3805,12 @@ msgstr ""
 "Paspauskite mygtukus norėdami susieti arba atsieti savo paskyrą su Google"
 " ir/ar Facebook"
 
+msgid "Change picture"
+msgstr ""
+
+msgid "Delete current picture"
+msgstr ""
+
 msgid "Address of your website or blog"
 msgstr "Nuosavo puslapio arba blog'o adresas"
 
@@ -3822,8 +3820,8 @@ msgstr "Šiek tiek informacijos apie save"
 msgid "Show my profile to unregistered users and search engines"
 msgstr "Rodyti profilį neregistruotiems naudotojams ir paieškos varikliams"
 
-msgid "Personal logo"
-msgstr "Tavo nuotrauka"
+msgid "Picture"
+msgstr ""
 
 msgid "Current password"
 msgstr "Dabartinis slaptažodis"
@@ -4420,6 +4418,9 @@ msgstr "SMS išsiųsta."
 msgid "Ignore events like this"
 msgstr "Nerodyti tokių įvykių"
 
+msgid "Send reply"
+msgstr "Siųsti atsakymą"
+
 #, python-format
 msgid "%(user_link)s has uploaded a new file in the subject %(subject_link)s."
 msgstr "%(user_link)s įkėlė naują failą dalyke %(subject_link)s."
@@ -4456,9 +4457,6 @@ msgstr "%(user_link)s sukūrė dalyką %(subject_link)s."
 msgid "%(user_link)s has created the group %(group_link)s."
 msgstr ""
 
-msgid "Send reply"
-msgstr "Siųsti atsakymą"
-
 #, python-format
 msgid ""
 "%(user_link)s has posted a new message %(message_link)s to the group "
@@ -4491,14 +4489,18 @@ msgid "%(user_link)s has sent an sms to the group %(group_link)s."
 msgstr "%(user_link)s išsiuntė sms grupei %(group_link)s."
 
 #, python-format
-msgid "%(user_link)s has sent you a private message \"%(msg_link)s\"."
-msgstr "%(user_link)s atsiuntė tau privačią žinutę \"%(msg_link)s\"."
+msgid "%(user_link)s has sent you a private message \"%(msg_link)s\""
+msgstr ""
+
+#, python-format
+msgid "You have sent %(user_link)s a private message \"%(msg_link)s\""
+msgstr ""
 
 #, python-format
 msgid ""
-"%(user_link)s has sent %(recipient_link)s a private message "
-"\"%(msg_link)s\"."
-msgstr "%(user_link)s išsiuntė %(recipient_link)s privačią žinutę %(msg_link)s\"."
+"%(sender_link)s has sent %(recipient_link)s a private message "
+"\"%(msg_link)s\""
+msgstr ""
 
 #, python-format
 msgid "%(user_link)s joined the group %(group_link)s."
@@ -4538,6 +4540,16 @@ msgstr "Daugiau"
 #, python-format
 msgid "%(user_link)s has created the group %(subject_link)s."
 msgstr "%(user_link)s sukūrė grupę %(subject_link)s."
+
+#, python-format
+msgid "%(user_link)s has sent you a private message \"%(msg_link)s\"."
+msgstr "%(user_link)s atsiuntė tau privačią žinutę \"%(msg_link)s\"."
+
+#, python-format
+msgid ""
+"%(user_link)s has sent %(recipient_link)s a private message "
+"\"%(msg_link)s\"."
+msgstr "%(user_link)s išsiuntė %(recipient_link)s privačią žinutę %(msg_link)s\"."
 
 msgid "Region"
 msgstr "Regionas"
@@ -4582,7 +4594,8 @@ msgid "Start watching this subject personally"
 msgstr "Noriu stebėti šį dalyką"
 
 msgid ""
-"Before creating a new subject please ensure that it has not been created yet."
+"Before creating a new subject please ensure that it has not been created "
+"yet."
 msgstr "Prieš kurdami naują dalyką, įsitikinkite, kad jis dar nėra sukurtas."
 
 msgid "A list of similar subjects is shown on the right."
