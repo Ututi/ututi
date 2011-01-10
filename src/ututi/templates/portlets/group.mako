@@ -82,7 +82,7 @@
                       ${_('SMS message')}
                   </div>
                   <%
-                     limit_size = h.file_size(int(c.pylons_config.get('group_file_limit')))
+                     limit_size = h.file_size(int(c.pylons_config.get('paid_group_file_limit')))
                   %>
                   <div>
                     ${_('Send an SMS message to number <span style="font-size: 14px">%(phone)s</span> with the following content:') % dict(phone=c.pylons_config.get('fortumo.group_space.number', '1337')) |n}
