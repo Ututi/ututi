@@ -523,9 +523,8 @@ class BooksController(HomeController, BaseController):
 
     def login(self):
         context_type = request.params.get('context_type', None)
-        if context_type == "books_login":
-            c.show_warning = False
-        elif context_type == "books_register":
+        c.show_warning = False
+        if context_type == "books_register":
             c.show_registration = True
             c.show_warning = False
         return render('/books/login.mako')
