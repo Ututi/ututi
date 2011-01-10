@@ -34,6 +34,7 @@ from ututi.lib.search import search_query
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render, render_lang
 
+
 class ChainedSubFormValidator(validators.FormValidator):
 
     dispatch_on = None
@@ -222,6 +223,9 @@ class BooksController(HomeController, BaseController):
         c.book = None
         c.action = request.environ['pylons.routes_dict'].get('action')
         c.book_types = meta.Session.query(BookType).all()
+        c.login_form_url = url(controller='books',
+                               action='login',
+                               came_from=request.url)
         if c.user:
             c.my_books = meta.Session.query(Book).filter(Book.created == c.user)
 
