@@ -61,6 +61,10 @@
                 margin-left: 15px;
             }
 
+        .wall .wall-entry .file-list {
+            font-size: 11px; /* small font for attachment list */
+        }
+
         .wall .wall-entry .thread {
             width: 100%;
             overflow: auto; /* this clears the floats */

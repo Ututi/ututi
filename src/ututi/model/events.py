@@ -54,7 +54,8 @@ class MessagingEventMixin():
 
             {"author": User,
              "created": datetime,
-             "message": message string}
+             "message": message string,
+             "attachments": file list, may be omitted}
 
         Should be listed chronologically.
         """
@@ -313,7 +314,7 @@ class MailinglistPostCreatedEvent(PostCreatedEventBase):
 
     def message_list(self):
         """MessagingEventMixin implementation."""
-        return [dict(author=m.author, created=m.sent, message=m.body)
+        return [dict(author=m.author, created=m.sent, message=m.body, attachments=m.attachments)
                 for m in self.message.thread.posts]
 
     def reply_action(self):
