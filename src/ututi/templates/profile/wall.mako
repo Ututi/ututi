@@ -83,6 +83,15 @@
                     padding-left: 40px;
                 }
 
+                .wall .wall-entry .thread .reply .logo img {
+                    /* Cheap fix: tall images overlap each other.
+                     * A better solution would be to have image logo
+                     * squaring algorithm.
+                     */
+                    width: 30px;
+                    max-height: 50px;
+                }
+
                 .wall .wall-entry .thread .content .closing {
                     margin: 10px 0px;
                     font-size: 11px;
@@ -109,6 +118,7 @@
                     color: #668000;
                 }
 
+            .wall .wall-entry .hidden-messages,
             .wall .wall-entry .reply {
                 background-color: #f6f6f6;
                 padding: 10px;
@@ -118,6 +128,7 @@
             .wall .wall-entry .reply-form-container {
                 padding: 10px;
                 margin-bottom: 5px;
+                display: none; /* initialy hidden */
             }
 
                 .wall .wall-entry .reply-form-container .cancel-button {
