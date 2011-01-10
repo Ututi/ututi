@@ -372,6 +372,17 @@
  * Simple list styles that provide bullet images and spacing.
  */
 
+ul.file-list {
+    list-style-type: none;
+    margin: 4px 8px;
+}
+
+    ul.file-list li {
+        background: url(img/icons/icon-file-tiny.png) no-repeat left center;
+        padding-left: 15px;
+        margin: 2px 0px;
+    }
+
 ul.teacher-list {
     list-style-type: none;
     margin: 4px 8px;
