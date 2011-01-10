@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2011-01-10 13:41+0200\n"
+"PO-Revision-Date: 2011-01-10 13:48+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -2105,6 +2105,12 @@ msgstr ""
 msgid "Phone"
 msgstr ""
 
+msgid "Write to owner:"
+msgstr ""
+
+msgid "Send message"
+msgstr ""
+
 #, python-format
 msgid ""
 "We have received a request to confirm the ownership of this email by "
@@ -4051,9 +4057,6 @@ msgid "Delete this group"
 msgstr ""
 
 msgid "Contact the group:"
-msgstr ""
-
-msgid "Send message"
 msgstr ""
 
 msgid "Send SMS"

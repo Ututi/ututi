@@ -39,7 +39,7 @@ ${h.link_to(_('Back to catalog'), url(controller="books", action="index"), class
   <div class="book-attribute">
     <span class="book-attribute-label">${_('Book type')}:</span>
     <span class="book-attribute-value">
-      ${h.link_to(_(c.book.department.title),
+      ${h.link_to(c.book.department.title,
                  url(controller="books",
                      action="catalog",
                      books_department=c.book.department.name))}
@@ -97,8 +97,8 @@ ${h.link_to(_('Back to catalog'), url(controller="books", action="index"), class
     <div id="private-message-container">
       <form action="${url(controller='books', action='private_message')}">
         <input type="hidden" name="book_id" value="${c.book.id}" />
-        ${h.input_area("message", "Write to owner:")}
-        <div style="margin-top: 5px;">${h.input_submit("Send message")}</div>
+        ${h.input_area("message", _("Write to owner:"))}
+        <div style="margin-top: 5px;">${h.input_submit(_("Send message"))}</div>
       </form>
     </div>
   </div>
