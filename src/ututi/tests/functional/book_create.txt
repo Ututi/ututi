@@ -19,7 +19,7 @@ When I'm not logged in, I can't add book. Not logged user will be redirected to 
     >>> browser = Browser()
     >>> browser.open('http://localhost/books/add')
     >>> browser.url
-    'http://localhost/login?came_from=http%3A%2F%2Flocalhost%2Fbooks%2Fadd'
+    'http://localhost/books/login?came_from=http%3A%2F%2Flocalhost%2Fbooks%2Fadd'
 
 When I log in, I can enter add book area.
 

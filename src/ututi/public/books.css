@@ -9,7 +9,7 @@ body {
 #widthLimiter {
     background: none;
     padding-bottom: 10px;
-    padding-top: 65px;
+    padding-top: 70px;
     position: relative;
     width: 1025px;
 }
@@ -54,6 +54,8 @@ h1.title {
      background-color: #E6E6E6;
      color: #1a1a1a;
      font-size: 14px;
+     padding-left: 0px;
+     padding-right: 0px;
      text-align: center;
 }
 
@@ -72,7 +74,7 @@ h1.title {
 .loggedin-nav {
     float: left;
     top: 18px;
-    right: 15px;
+    right: 10px;
     z-index: 100;
 }
 
@@ -121,7 +123,7 @@ h1.title {
 
 li#ulogo {
     padding-top: 0px;
-    padding-right: 25px;
+    padding-right: 45px;
     width: auto;
 }
 
@@ -132,16 +134,82 @@ li#ulogo a {
     padding-left: 10px;
 }
 
-.search_block, .book-form-block {
-    background-color: #F6F6F6;
+.book-form-block {
+    background-color: #FFF;
     background-position: 23px 5px;
     margin-bottom: 24px;
-    margin-top: 15px;
+    margin-top: 5px;
     margin-right: 15px;
     padding-left: 25px;
     padding-bottom: 15px;
 }
 
+.search_block {
+    background-color: #FFF;
+    margin-bottom: 24px;
+    margin-top: 5px;
+    margin-right: 15px;
+    padding-left: 16px;
+    padding-bottom: 18px;
+}
+
+.search_block .search-controls .search-text input {
+    font-size: 22px;
+}
+
+.search_block .search-controls .search-text div {
+    background: url("../images/books/search-text-borders.png") no-repeat scroll right center transparent;
+    height: 30px;
+    line-height: 30px;
+}
+
+.search_block .search-controls .search-text {
+    background: url("../images/books/search-text-borders.png") no-repeat scroll left center transparent;
+    height: 32px;
+}
+
+.search_block .portletTitle {
+    color: #666666;
+    font-size: 26px;
+}
+
+.search_block .search-controls {
+    padding-top: 5px;
+}
+
+.search-controls .search-text {
+    margin-top: 1px;
+    margin-left: 4px;
+}
+
+.search_block .ctl,
+.search_block .ctr,
+.search_block .cbl,
+.search_block .cbr {
+    background-image: url("images/books/search_block_border.png");
+}
+
+.search_block .btnMedium {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0 15px 0 0;
+    background: url("../images/books/search_block_button_bg.png") no-repeat scroll right 0px transparent;
+}
+
+.search_block .btnMedium span {
+    color: #FFF;
+    height: 28px;
+    padding: 8px 0 0 20px;
+    background: url("../images/books/search_block_button_bg.png") no-repeat scroll left 0px transparent;
+}
+
+.search_block button.btnMedium:hover span {
+    color: #FFF;
+}
+
+#mainContent .search_block .search-controls .search-text-submit {
+    width: 460px;
+}
 
 /* Books base */
 #books-header-search {
@@ -151,15 +219,16 @@ li#ulogo a {
 }
 
 .books-header, #search_results_header {
-    background: #f1f1f1;
+    background: #4d4d4d;
     padding: 5px 10px 5px 10px;
     margin-right: 15px;
-    margin-bottom: 20px;
-    color: #4d4d4d;
+    margin-bottom: 10px;
+    color: #fff;
     font-size: 14px;
 }
 
 #search_results_header H2, .books-header h2 {
+    font-weight: bold;
     float: left;
 }
 
@@ -268,15 +337,47 @@ label input.wide{
     width: 235px;
 }
 
+.book-information-long {
+    clear: both;
+}
+
 .book-information .book-title {
     color:#006680;
     font-size: 12px;
     font-weight:bold;
 }
 
+.book-information-long .book-title {
+    color:#006680;
+    font-size: 16px;
+    font-weight:bold;
+}
+
 h3.book-title a {
     color:#006680;
     font-weight:bold;
+}
+
+h3.book-title a {
+    color:#006680;
+    font-weight:bold;
+}
+
+.book-information-long .book-action-container {
+    padding-top: 9px;
+}
+
+.book-action-container a,
+.book-action-container a:hover {
+    color: #006680;
+    font-size: 12px;
+}
+
+.book-information-long  .book-cover {
+    vertical-align:top;
+    width: 100px;
+    height: 120px;
+    float: left;
 }
 
 .book-information .book-cover {
@@ -289,6 +390,12 @@ h3.book-title a {
  img.book-cover {
     float: left;
     margin-right: 20px;
+}
+
+.book-information-long  .book-textual-info{
+    vertical-align:top;
+    float: left;
+    padding-bottom: 10px;
 }
 
 .book-information .book-textual-info{
@@ -304,13 +411,33 @@ h3.book-title a {
     bottom: 0px;
 }
 
-.book-information .book-author {
-    font-size: 11px;
-    color: #999999;
+.book-information-long .book-author {
+    font-size: 14px;
+    color: #4d4d4d;
+    font-weight: bold;
 }
 
+.book-information-long .book-description {
+    font-size: 12px;
+    min-height: 24px;
+    width: 600px;
+    color: #999999;
+    word-wrap: break-word;
+}
+
+.book-information .book-author {
+    font-size: 11px;
+    color: #4d4d4d;
+}
+
+.book-information-long .book-city-label,
 .book-information .book-city-label{
     font-weight: bold;
+}
+
+.book-information-long .book-city-label, .book-information-long .book-city-name{
+    font-size: 12px;
+    color: #4d4d4d;
 }
 
 .book-information .book-city-label, .book-information .book-city-name{
@@ -318,9 +445,22 @@ h3.book-title a {
     color: #4d4d4d;
 }
 
+.book-information-long .book-price-label {
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+}
+
+.book-information-long .book-price {
+    color: #999;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+
 .book-information .book-price-label,
 .book-attribute .book-price-label{
-    font-size: 11px;
+    font-size: 12px;
     color: #333;
     font-weight: bold;
 }
@@ -329,7 +469,7 @@ h3.book-title a {
 .book-attribute .book-price {
     color: #999;
     font-weight: bold;
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .book-attribute-label {
@@ -711,4 +851,8 @@ table#login-screen {
 #footer p {
     font-size: 12px;
     color: #fff;
+}
+
+.flash-message {
+    margin-right: 15px;
 }

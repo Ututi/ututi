@@ -559,6 +559,7 @@ def setup_orm(engine):
                         Column('title', Unicode(assert_unicode=True)),
                         Column('description', Unicode(assert_unicode=True)),
                         Column('author', Unicode(assert_unicode=True)),
+                        Column('owner_name', Unicode(assert_unicode=True)),
                         useexisting=True,
                         autoload=True,
                         autoload_with=engine)
@@ -2412,6 +2413,11 @@ class Book(ContentItem):
             return None
 
     logo = logo_property()
+
+    def logo_url(self, width=80, height=120):
+        if self.logo is None:
+            return url('/images/books/default_book_icon.png')
+        return url(controller='books', action='logo', id=self.id, width=width, height=height)
 
     def has_logo(self):
         return bool(meta.Session.query(Book).filter_by(id=self.id).filter(Book.raw_logo != None).count())

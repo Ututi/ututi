@@ -3,6 +3,46 @@
 <%namespace file="/portlets/banners/base.mako" import="*"/>
 <%namespace file="/books/portlets.mako" import="*"/>
 
+<%def name="book_information_long(book, can_edit=False)">
+<div class="book-information-long">
+  <div class="book-cover">
+    <img src="${book.logo_url()}" alt="${_('Book cover')}" />
+  </div>
+  <div class="book-textual-info">
+    <div>
+      <h3 class="book-title">
+        ${h.link_to(book.title, url(controller="books", action="show", id=book.id))}
+      </h3>
+      <div class="book-author">${book.author}</div>
+      <div class="book-description">${book.description}</div>
+    </div>
+    <div>
+      %if book.city:
+          <span class="book-city-label">${_('City')}:</span>
+          <span class="book-city-name"> ${book.city.name}</span>
+          <br />
+      %endif
+      <span class="book-price-label">${_('Price')}:</span>
+      <span class="book-price">
+        ${book.price}
+      </span>
+    </div>
+    <div class="book-action-container">
+      %if can_edit and c.user is book.created:
+        ${h.link_to(_("Edit"), url(controller="books", action="edit", id=book.id))}
+      %else:
+      ## TRANSLATORS: translate this as a single word 'More'
+      ${h.link_to(_("more_about_book"), url(controller="books", action="show", id=book.id))}
+      %endif
+    </div>
+  </div>
+  <div style="float: left;">
+    <a href="${url(controller='books', action='delete', id=book.id)}" ><img alt="${_('Delete')}" src="${url('/images/details/icon_delete.png')}" /></a>
+  </div>
+</div>
+<hr />
+</%def>
+
 <%def name="title()">
 ${_('Learning books market')}
 </%def>

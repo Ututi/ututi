@@ -114,3 +114,4 @@ students, so let's go to the subtype instead:
 
     >>> browser.getControl(name='city').displayOptions
     ['All cities (1)', 'Vilnius (1)']
+
