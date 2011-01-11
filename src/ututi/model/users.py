@@ -433,9 +433,9 @@ class AnonymousUser(object):
     def has_logo(self):
         return False
 
-    def url(self, controller='anonymoususer', action=None, **kwargs):
+    def url(self, controller='anonymous', action=None, **kwargs):
         if action is None:
-            return 'mailto:%s' % self.address
+            return 'mailto:%s' % self.email
         else:
             return url(controller=controller, action=action, **kwargs)
 
