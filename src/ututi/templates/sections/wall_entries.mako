@@ -51,7 +51,7 @@
   </div>
 </%def>
 
-<%def name="event_message_thread(event, controller)">
+<%def name="event_message_thread(event)">
   <%doc>
     Renders message thread and reply action box.
     Event must implement MessagingEventMixin.
@@ -109,7 +109,7 @@
           <img src="${url(controller='user', action='logo', id=c.user.id, width=30)}" />
         </div>
         <div class="content">
-          <form name="reply-form" method="POST" action="${event.reply_action(controller=controller)}">
+          <form name="reply-form" method="POST" action="${event.reply_action()}">
             <textarea rows="3" cols="50" class="reply-text" name="message"></textarea>
             <div>
               ${h.input_submit(_('Send reply'), class_='btn reply-button')}
@@ -211,7 +211,7 @@
   </%self:wall_entry>
 </%def>
 
-<%def name="mailinglistpost_created(event, controller)">
+<%def name="mailinglistpost_created(event)">
   <%self:wall_entry event="${event}">
     <%def name="classes()"></%def>
     <%def name="content()">
@@ -235,7 +235,7 @@
               group_link=h.object_link(event.context),
               message_link=h.object_link(event.message)) | n}
     </%def>
-    <%self:event_message_thread event="${event}" controller="${controller}"/>
+    <%self:event_message_thread event="${event}"/>
   </%self:wall_entry>
 </%def>
 
@@ -274,7 +274,7 @@
   </%self:wall_entry>
 </%def>
 
-<%def name="forumpost_created(event, controller)">
+<%def name="forumpost_created(event)">
   <%self:wall_entry event="${event}">
     <%def name="classes()"></%def>
     <%def name="content()">
@@ -298,7 +298,7 @@
               group_link=h.object_link(event.context),
               message_link=h.object_link(event.post)) | n}
     </%def>
-    <%self:event_message_thread event="${event}" controller="${controller}"/>
+    <%self:event_message_thread event="${event}"/>
   </%self:wall_entry>
 </%def>
 
@@ -320,7 +320,7 @@
   </%self:wall_entry>
 </%def>
 
-<%def name="privatemessage_sent(event, controller)">
+<%def name="privatemessage_sent(event)">
   <%self:wall_entry event="${event}">
     <%def name="heading()">
       <% msg = event.private_message %>
@@ -339,7 +339,7 @@
                 msg_link=h.object_link(msg)) | n}
       %endif
     </%def>
-    <%self:event_message_thread event="${event}" controller="${controller}"/>
+    <%self:event_message_thread event="${event}"/>
   </%self:wall_entry>
 </%def>
 
