@@ -68,7 +68,6 @@
     %endif
     <div class="content">
       <span class="truncated">${h.nl2br(original['message'])}</span>
-
       %if 'attachments' in original:
       <ul class="file-list">
         %for file in original['attachments']:
