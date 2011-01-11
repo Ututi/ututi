@@ -40,7 +40,7 @@
      if title is None:
        title = _('My groups')
   %>
-  <%self:uportlet id="group_portlet" portlet_class="inactive">
+  <%self:uportlet id="user-groups-portlet" portlet_class="inactive">
     <%def name="header()">
       ${title}
     </%def>
@@ -50,27 +50,35 @@
     <ul>
       % for membership in user.memberships:
       <li>
-        <div class="group-listing-item">
+        <dl class="group-listing-item">
           %if membership.group.logo is not None:
             <img class="group-logo" src="${url(controller='group', action='logo', id=membership.group.group_id, width=25, height=25)}" alt="logo" />
           %else:
             ${h.image('/images/details/icon_group_25x25.png', alt='logo', class_='group-logo')|n}
           %endif
-            <a href="${membership.group.url()}">${membership.group.title}</a>
-            (${ungettext("%(count)s member", "%(count)s members", len(membership.group.members)) % dict(count = len(membership.group.members))})
-            <br class="clear-left"/>
-        </div>
+            <dt class="group-title"><a href="${membership.group.url()}">${membership.group.title}</a></dt>
+            <dd class="member-count">(${ungettext("%(count)s member", "%(count)s members", len(membership.group.members)) % dict(count = len(membership.group.members))})</dd>
+            <div class="group-location">
+              <dd>
+                <a href="${membership.group.location.url()}">${' | '.join(membership.group.location.title_path)}</a>
+              </dd>
+            </div>
+        </dl>
       </li>
       % endfor
     </ul>
     %endif
     %if full:
     <div class="footer">
-      ${h.link_to(_('More groups'), url(controller='profile', action='search', obj_type='group'), class_="more")}
-      <span>
+      <div class="new-group">
         ${h.button_to(_('Create group'), url(controller='group', action='create_academic'))}
-        ${tooltip(_('Create your group, invite your classmates and use the mailing list, upload private group files'))}
+      </div>
+      ${tooltip(_('Create your group, invite your classmates and use the mailing list, upload private group files'))}
+
+      <span class="more-link">
+        ${h.link_to(_('More groups'), url(controller='profile', action='search', obj_type='group'), class_="right_arrow")}
       </span>
+      <br style="clear-both"/>
     </div>
 
     %endif

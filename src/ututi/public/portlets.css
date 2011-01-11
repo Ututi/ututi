@@ -1,6 +1,10 @@
 /* This is the style file for portlet styles only.
  */
 
+.portlet {
+    background-color: white !important;
+}
+
 #share-portlet-content { }
 
     #share-portlet-content ul#share-portlet-action-list { }
@@ -40,4 +44,41 @@
             display: none;
         }
 
+#user-groups-portlet-content {  }
 
+    #user-groups-portlet-content ul,
+    #user-groups-portlet-content li {
+        list-style-type: none;
+    }
+
+    #user-groups-portlet-content .group-listing-item {
+        clear: left;
+        padding: 5px 0 5px 30px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    #user-groups-portlet-content .group-title,
+    #user-groups-portlet-content .member-count {
+        display: inline;
+    }
+
+    #user-groups-portlet-content .group-listing-item img {
+        float: left;
+        margin-right: 5px;
+        margin-left: -30px;
+    }
+
+    #user-groups-portlet-content .footer {
+        padding-top: 5px;
+    }
+
+    #user-groups-portlet-content .footer .more-link {
+        float: right;
+    }
+    #user-groups-portlet-content .footer .new-group {
+        float: left;
+    }
+    #user-groups-portlet-content .footer .more-link,
+    #user-groups-portlet-content .footer .tooltip {
+        padding-top: 5px;
+    }
