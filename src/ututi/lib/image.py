@@ -11,7 +11,7 @@ from ututi.lib.cache import u_cache
 from ututi.model import Group, User, LocationTag, Book
 
 
-def serve_logo(obj_type, obj_id, width=None, height=None,
+def serve_logo(obj_type, obj_id=None, width=None, height=None,
                default_img_path=None, cache=True):
     if cache:
         img_data = prepare_logo_cached(obj_type, obj_id, width, height, default_img_path)
@@ -39,12 +39,12 @@ def prepare_logo_cached(obj_type, obj_id, width=None, height=None, default_img_p
 
 
 def prepare_logo(obj_type, obj_id, width=None, height=None, default_img_path=None):
-    obj_cls = {'book': Book, 'group': Group, 'user': User, 'locationtag': LocationTag}[obj_type]
-    obj = obj_cls.get(obj_id)
-    if obj is None:
-        return None
+    obj = None
+    if obj_id is not None:
+        obj_cls = {'book': Book, 'group': Group, 'user': User, 'locationtag': LocationTag}[obj_type]
+        obj = obj_cls.get(obj_id)
 
-    if obj.has_logo():
+    if obj is not None and obj.has_logo():
         return prepare_image(obj.logo, width, height)
     elif default_img_path is not None:
         stream = resource_stream("ututi", default_img_path).read()
