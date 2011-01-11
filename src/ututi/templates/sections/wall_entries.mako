@@ -51,7 +51,7 @@
   </div>
 </%def>
 
-<%def name="event_message_thread(event)">
+<%def name="event_message_thread(event, controller)">
   <%doc>
     Renders message thread and reply action box.
     Event must implement MessagingEventMixin.
@@ -63,7 +63,9 @@
   <div class="thread">
     %if original['author']:
     <div class="logo">
+      % if original['author']:
       <img src="${url(controller='user', action='logo', id=original['author'].id, width=50)}" />
+      % endif
     </div>
     %endif
     <div class="content">
@@ -82,7 +84,7 @@
         </span>
       </div>
       %if len(messages) > 3:
-        <% 
+        <%
         hidden = messages[:-3]
         messages = messages[-3:]
         %>
@@ -107,7 +109,7 @@
           <img src="${url(controller='user', action='logo', id=c.user.id, width=30)}" />
         </div>
         <div class="content">
-          <form name="reply-form" method="POST" action="${event.reply_action()}">
+          <form name="reply-form" method="POST" action="${event.reply_action(controller=controller)}">
             <textarea rows="3" cols="50" class="reply-text" name="message"></textarea>
             <div>
               ${h.input_submit(_('Send reply'), class_='btn reply-button')}
@@ -209,7 +211,7 @@
   </%self:wall_entry>
 </%def>
 
-<%def name="mailinglistpost_created(event)">
+<%def name="mailinglistpost_created(event, controller)">
   <%self:wall_entry event="${event}">
     <%def name="classes()"></%def>
     <%def name="content()">
@@ -233,7 +235,7 @@
               group_link=h.object_link(event.context),
               message_link=h.object_link(event.message)) | n}
     </%def>
-    <%self:event_message_thread event="${event}" />
+    <%self:event_message_thread event="${event}" controller="${controller}"/>
   </%self:wall_entry>
 </%def>
 
@@ -272,7 +274,7 @@
   </%self:wall_entry>
 </%def>
 
-<%def name="forumpost_created(event)">
+<%def name="forumpost_created(event, controller)">
   <%self:wall_entry event="${event}">
     <%def name="classes()"></%def>
     <%def name="content()">
@@ -296,7 +298,7 @@
               group_link=h.object_link(event.context),
               message_link=h.object_link(event.post)) | n}
     </%def>
-    <%self:event_message_thread event="${event}" />
+    <%self:event_message_thread event="${event}" controller="${controller}"/>
   </%self:wall_entry>
 </%def>
 
@@ -318,7 +320,7 @@
   </%self:wall_entry>
 </%def>
 
-<%def name="privatemessage_sent(event)">
+<%def name="privatemessage_sent(event, controller)">
   <%self:wall_entry event="${event}">
     <%def name="heading()">
       <% msg = event.private_message %>
@@ -337,7 +339,7 @@
                 msg_link=h.object_link(msg)) | n}
       %endif
     </%def>
-    <%self:event_message_thread event="${event}" />
+    <%self:event_message_thread event="${event}" controller="${controller}"/>
   </%self:wall_entry>
 </%def>
 

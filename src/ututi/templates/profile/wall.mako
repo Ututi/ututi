@@ -292,5 +292,5 @@
 ${dashboard(None, [], [])}
 
 %for event in c.events:
-  ${event.wall_entry()}
+  ${event.wall_entry(controller='profile')}
 %endfor

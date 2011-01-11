@@ -6,7 +6,10 @@ import simplejson
 
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql.expression import desc
+from formencode import validators
 from formencode import htmlfill
+from formencode.foreach import ForEach
+from formencode.schema import Schema
 from formencode.api import Invalid
 
 from pylons import request, tmpl_context as c, url, config, session
@@ -37,7 +40,7 @@ from ututi.model import meta, Email, User
 from ututi.controllers.profile.validators import HideElementForm, MultiRcptEmailForm
 from ututi.controllers.profile.validators import ContactForm, LocationForm, LogoUpload, PhoneConfirmationForm,\
     PhoneForm, ProfileForm, PasswordChangeForm, StudentGroupForm, StudentGroupDeleteForm, StudentGroupMessageForm
-from ututi.controllers.profile.wall import WallMixin, WallSettingsForm
+from ututi.controllers.profile.wall import ProfileWallController
 from ututi.controllers.profile.subjects import WatchedSubjectsMixin
 from ututi.controllers.search import SearchSubmit, SearchBaseController
 from ututi.controllers.home import sign_in_user
@@ -58,7 +61,13 @@ def group_teacher_action(method):
     return _group_teacher_action
 
 
-class ProfileControllerBase(SearchBaseController, UniversityListMixin, WallMixin, WatchedSubjectsMixin):
+class WallSettingsForm(Schema):
+    allow_extra_fields = True
+    filter_extra_fields = True
+    events = ForEach(validators.String())
+
+
+class ProfileControllerBase(SearchBaseController, UniversityListMixin, ProfileWallController, WatchedSubjectsMixin):
     def _actions(self, selected):
         raise NotImplementedError("This has to be implemented by the"
                                   " specific profile controller.")

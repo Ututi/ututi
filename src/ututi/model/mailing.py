@@ -315,6 +315,10 @@ class GroupMailingListMessage(ContentItem):
             g = Group.get(group_id)
             if g is None:
                 return None #??? is the way it is supposed to be?
+            if isinstance(message_id, (long, int)):
+                return meta.Session.query(cls).filter_by(id=message_id,
+                                                         group_id=g.id).one()
+
             return meta.Session.query(cls).filter_by(message_id=message_id,
                                                      group_id=g.id).one()
         except NoResultFound:
