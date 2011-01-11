@@ -33,7 +33,7 @@
       %if author:
       <span class="reply-author">${h.object_link(author)}:</span>
       %endif
-      <span class="truncated">${message}</span>
+      <span class="truncated">${h.nl2br(message)}</span>
       %if attachments:
       <ul class="file-list">
         %for file in attachments:
@@ -67,7 +67,7 @@
     </div>
     %endif
     <div class="content">
-      <span class="truncated">${original['message']}</span>
+      <span class="truncated">${h.nl2br(original['message'])}</span>
       %if 'attachments' in original:
       <ul class="file-list">
         %for file in original['attachments']:

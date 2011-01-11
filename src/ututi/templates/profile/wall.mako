@@ -116,9 +116,10 @@
 
                 .wall .wall-entry a.truncate_more_link {
                     color: #668000;
+                    outline: none;
                 }
 
-            .wall .wall-entry .hidden-messages,
+            .wall .wall-entry .hidden-messages .hide,
             .wall .wall-entry .reply {
                 background-color: #f6f6f6;
                 padding: 10px;
@@ -275,10 +276,12 @@
         $('span.truncated').jTruncate({
             length: 150,
             minTrail: 50,
-            moreText: "${_('More')}",
-            lessText: "",
-            moreAni: 300,
-            lessAni: 200
+            moreText: "${_('more')}",
+            lessText: "${_('less')}",
+            moreAni: 300
+            ## leave lessAni empty, to avoid jQuery show/hide quirks!
+            ## (after first hide it would the show element as inline-block,
+            ##  (instead of inline) affeting layout)
         });
     });
     </script>
