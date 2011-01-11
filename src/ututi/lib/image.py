@@ -5,11 +5,10 @@ import StringIO
 from pkg_resources import resource_stream
 
 from pylons import response
-from pylons.controllers.util import abort, etag_cache
-from sqlalchemy.orm.exc import NoResultFound
+from pylons.controllers.util import abort
 
 from ututi.lib.cache import u_cache
-from ututi.model import Group, User, LocationTag, meta, Book
+from ututi.model import Group, User, LocationTag, Book
 
 
 def serve_logo(obj_type, obj_id, width=None, height=None,
