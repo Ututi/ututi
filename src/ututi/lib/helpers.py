@@ -514,10 +514,11 @@ def coupons_available(user):
 def object_link(object):
     """Render a complete link to an object, dispatching on object type."""
     from ututi.model import Subject, Group, User, File, ForumPost, Page, PrivateMessage
+    from ututi.model.users import AnonymousUser
     from ututi.model.mailing import GroupMailingListMessage
     if type(object) in [Subject, Group, Page]:
         return link_to(object.title, object.url())
-    elif isinstance(object, User):
+    elif isinstance(object, (User, AnonymousUser)):
         return link_to(object.fullname, object.url())
     elif isinstance(object, File):
         return link_to(object.filename, object.url())

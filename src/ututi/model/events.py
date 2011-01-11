@@ -314,7 +314,8 @@ class MailinglistPostCreatedEvent(PostCreatedEventBase):
 
     def message_list(self):
         """MessagingEventMixin implementation."""
-        return [dict(author=m.author, created=m.sent, message=m.body, attachments=m.attachments)
+        return [dict(author=m.author_or_anonymous, created=m.sent,
+                     message=m.body, attachments=m.attachments)
                 for m in self.message.thread.posts]
 
     def reply_action(self):
