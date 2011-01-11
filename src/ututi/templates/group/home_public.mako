@@ -14,7 +14,6 @@
 <%def name="portlets()">
   ${group_info_portlet()}
   <br />
-  ${ututi_prizes_portlet()}
   ${user_support_portlet()}
 </%def>
 
