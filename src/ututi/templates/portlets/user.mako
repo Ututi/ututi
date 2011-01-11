@@ -48,19 +48,19 @@
       ${_('You are not a member of any.')}
     %else:
     <ul>
-      % for membership in user.memberships:
+      % for group in user.groups:
       <li>
         <dl class="group-listing-item">
-          %if membership.group.logo is not None:
-            <img class="group-logo" src="${url(controller='group', action='logo', id=membership.group.group_id, width=25, height=25)}" alt="logo" />
+          %if group.logo is not None:
+            <img class="group-logo" src="${url(controller='group', action='logo', id=group.group_id, width=25, height=25)}" alt="logo" />
           %else:
             ${h.image('/images/details/icon_group_25x25.png', alt='logo', class_='group-logo')|n}
           %endif
-            <dt class="group-title"><a href="${membership.group.url()}">${membership.group.title}</a></dt>
-            <dd class="member-count">(${ungettext("%(count)s member", "%(count)s members", len(membership.group.members)) % dict(count = len(membership.group.members))})</dd>
+            <dt class="group-title"><a href="${group.url()}">${group.title}</a></dt>
+            <dd class="member-count">(${ungettext("%(count)s member", "%(count)s members", len(group.members)) % dict(count = len(group.members))})</dd>
             <div class="group-location">
               <dd>
-                <a href="${membership.group.location.url()}">${' | '.join(membership.group.location.title_path)}</a>
+                <a href="${group.location.url()}">${' | '.join(group.location.title_path)}</a>
               </dd>
             </div>
         </dl>
