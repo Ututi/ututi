@@ -415,6 +415,31 @@ class User(object):
         self.ignored_events = ','.join(list(set(events)))
 
 
+class AnonymousUser(object):
+    """Helper class for dealing with anonymous users. No ORM."""
+
+    def __init__(self, name=None, email=None):
+        self.name = name
+        self.email = email
+
+    @property
+    def fullname(self):
+        name = self.name or _("Anonymous")
+        if self.email:
+            return '%s <%s>' % (name, self.email)
+        else:
+            return name
+
+    def has_logo(self):
+        return False
+
+    def url(self, controller='anonymoususer', action=None, **kwargs):
+        if action is None:
+            return 'mailto:%s' % self.address
+        else:
+            return url(controller=controller, action=action, **kwargs)
+
+
 class Email(object):
     """Class representing one email address of a user."""
 
