@@ -12,7 +12,7 @@
 
 <%def name="head_tags()">
   ${parent.head_tags()}
-  ${h.javascript_link('/javascript/mailinglist.js')|n}
+  ${h.javascript_link('/javascript/expquotes.js')|n}
 </%def>
 
 <%def name="render_message(message, post_class='thread-post', show_actions=True)">
