@@ -7,6 +7,9 @@ using wall action panel:
    >>> browser = Browser.logIn('user@ututi.lt', 'password')
    >>> browser.getLink("News wall").click()
 
+TODO: Going to the new style wall for now.
+   >>> browser.open('http://localhost/profile/wall')
+
    >>> form = browser.getForm(id='message_form')
    >>> form.getControl('Group or user:').value = 'Second user'
    >>> form.getControl(name='subject').value = 'Sending you a message from my wall!'
@@ -18,50 +21,69 @@ among other events:
 
    >>> browser2 = Browser.logIn('user2@ututi.lt', 'password')
    >>> browser2.getLink('News wall').click()
-   >>> browser2.printQuery('id("wall")//div[@class="description"]//text()')
-   Alternative user has sent you a private message " Sending you a message from my wall! ".
-   Adminas Adminovix has created the group Testing group .
-   Adminas Adminovix joined the group Testing group .
-   Second user joined the group Testing group .
+
+TODO: Going to the new style wall for now.
+   >>> browser2.open('http://localhost/profile/wall')
+
+   >>> browser2.printQuery('//div[contains(@class, "event-heading")]//text()')
+   Alternative user
+   has sent you a private message "
+   Sending you a message from my wall!
+   "
+   ...
+   Adminas Adminovix
+   has created the group
+   Testing group
+   .
+   ...
+   Adminas Adminovix
+   joined the group
+   Testing group
+   .
+   ...
+   Second user
+   joined the group
+   Testing group
+   .
+   ...
 
 He can reply the first user directly from the wall:
 
-   >>> reply_form = browser2.getForm(id="message_reply_form")
+   >>> reply_form = browser2.getForm(name="reply-form")
    >>> reply_form.getControl(name="message").value = "It is sure nice to reply to you from my wall too!"
    >>> reply_form.getControl("Send reply").click()
 
-(If not using javascript, he gets directed to the thread page)
-
    >>> browser2.url
-   'http://localhost/messages/thread/4'
-
-   >>> browser2.printQuery("//div[@class='post-body']/text()")
-   Booyah
-   It is sure nice to reply to you from my wall too!
+   'http://localhost/profile/wall'
 
 The first user can see this reply on his wall, and reply again:
 
    >>> browser.getLink("News wall").click()
-   >>> browser.printQuery('id("wall")//div[@class="content"]//text()')
-   It is sure nice to reply to you from my wall too!
-   Booyah
 
-   >>> reply_form = browser.getForm(id="message_reply_form", index=0)
+TODO: Going to the new style wall for now.
+   >>> browser.open('http://localhost/profile/wall')
+
+   >>> browser2.printQuery('//div[contains(@class, "event-heading")]//text()')
+   Alternative user
+   has sent you a private message "
+   Sending you a message from my wall!
+   "
+   ...
+
+   >>> reply_form = browser.getForm(name="reply-form", index=0)
    >>> reply_form.getControl(name="message").value = "Yep, wall is cool."
    >>> reply_form.getControl("Send reply").click()
 
    >>> browser.url
-   'http://localhost/messages/thread/4'
-
-   >>> browser.printQuery("//div[@class='post-body']/text()")
-   Booyah
-   It is sure nice to reply to you from my wall too!
-   Yep, wall is cool.
+   'http://localhost/profile/wall'
 
 The rest of the test is undocummented, but easy to follow:
 
    >>> browser = Browser.logIn('user3@ututi.lt', 'password')
    >>> browser.getLink("News wall").click()
+
+TODO: Going to the new style wall for now.
+   >>> browser.open('http://localhost/profile/wall')
 
    >>> form = browser.getForm(id='message_form')
    >>> form.getControl('Group or user:').value = 'moderatoriai'
@@ -71,6 +93,10 @@ The rest of the test is undocummented, but easy to follow:
 
    >>> browser2 = Browser.logIn()
    >>> browser2.getLink('News wall').click()
+
+TODO: Going to the new style wall for now.
+   >>> browser.open('http://localhost/profile/wall')
+
    >>> browser2.printQuery('id("wall")//div[@class="description"]//text()')
    Third user
    has posted a new message
@@ -109,10 +135,15 @@ The rest of the test is undocummented, but easy to follow:
 
    >>> browser = Browser.logIn('user3@ututi.lt', 'password')
    >>> browser.getLink("News wall").click()
+
+TODO: Going to the new style wall for now.
+   >>> browser.open('http://localhost/profile/wall')
+
    >>> form = browser.getForm(id='wiki_form')
    >>> form.getControl(name='page_title').value = 'A wiki page'
    >>> form.getControl(name='page_content').value = 'This wiki page was created from my wall!'
    >>> form.getControl('Save').click()
+
    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
    Wiki page created.
    ...

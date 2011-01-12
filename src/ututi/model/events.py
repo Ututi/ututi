@@ -386,8 +386,7 @@ class ForumPostCreatedEvent(Event):
         thread_id = self.post.thread_id
         forum_posts = meta.Session.query(ForumPost)\
             .filter_by(category_id=category_id,
-                       thread_id=thread_id,
-                       deleted_by=None)\
+                       thread_id=thread_id)\
             .order_by(ForumPost.created_on)\
             .all()
         return [dict(author=m.created, created=m.created_on, message=m.message)

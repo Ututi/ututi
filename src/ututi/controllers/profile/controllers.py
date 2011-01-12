@@ -148,6 +148,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, ProfileWa
         c.breadcrumbs.append(self._actions('home'))
 
         c.events = self._user_events()
+
         c.action = 'wall'
 
         c.file_recipients = self._file_rcpt()
