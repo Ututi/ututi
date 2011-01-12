@@ -1,4 +1,5 @@
-<%namespace file="/portlets/user.mako" import="*"/>
+<%namespace file="/portlets/user.mako" import="user_information_portlet, user_groups_portlet, user_create_group_portlet,
+                                               user_create_subject_portlet, user_recommend_portlet, user_support_portlet"/>
 <%namespace file="/portlets/group.mako" import="*"/>
 <%namespace file="/portlets/universal.mako" import="*"/>
 <%namespace file="/portlets/search.mako" import="*"/>
@@ -29,6 +30,7 @@
   %if not 'recommend' in exclude:
   ${user_recommend_portlet()}
   %endif
+  ${user_groups_portlet()}
   ${facebook_likebox_portlet()}
   ${user_support_portlet()}
 </div>

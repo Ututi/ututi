@@ -24,12 +24,12 @@
             background: url("/images/details/icon_event.png") no-repeat left center;
         }
 
-            .wall .wall-entry .event-heading .hide-button {
+            .wall .wall-entry .event-heading .hide-button-container {
                 float: right;
                 display: none;
             }
 
-            .wall .wall-entry .event-heading:hover .hide-button {
+            .wall .wall-entry .event-heading:hover .hide-button-container {
                 display: block;
             }
 
@@ -61,6 +61,10 @@
                 margin-left: 15px;
             }
 
+        .wall .wall-entry .file-list {
+            font-size: 11px; /* small font for attachment list */
+        }
+
         .wall .wall-entry .thread {
             width: 100%;
             overflow: auto; /* this clears the floats */
@@ -77,6 +81,15 @@
                 .wall .wall-entry .thread .reply .content,
                 .wall .wall-entry .thread .reply-form-container .content {
                     padding-left: 40px;
+                }
+
+                .wall .wall-entry .thread .reply .logo img {
+                    /* Cheap fix: tall images overlap each other.
+                     * A better solution would be to have image logo
+                     * squaring algorithm.
+                     */
+                    width: 30px;
+                    max-height: 50px;
                 }
 
                 .wall .wall-entry .thread .content .closing {
@@ -101,6 +114,12 @@
                     color: #668000;
                 }
 
+                .wall .wall-entry a.truncate_more_link {
+                    color: #668000;
+                    outline: none;
+                }
+
+            .wall .wall-entry .hidden-messages .hide,
             .wall .wall-entry .reply {
                 background-color: #f6f6f6;
                 padding: 10px;
@@ -110,6 +129,7 @@
             .wall .wall-entry .reply-form-container {
                 padding: 10px;
                 margin-bottom: 5px;
+                display: none; /* initialy hidden */
             }
 
                 .wall .wall-entry .reply-form-container .cancel-button {
@@ -246,8 +266,25 @@
 </%def>
 
 <%def name="head_tags()">
-  ${h.javascript_link('/javascript/dashboard.js')}
-  ${h.javascript_link('/javascript/ckeditor/ckeditor.js')}
+    ${h.javascript_link('/javascript/wall.js')}
+    ${h.javascript_link('/javascript/dashboard.js')}
+    ${h.javascript_link('/javascript/ckeditor/ckeditor.js')}
+    ${h.javascript_link('/javascript/jquery.jtruncate.pack.js')}
+    <script type="text/javascript">
+    $(document).ready(function() {
+        /* Truncate texts. */
+        $('span.truncated').jTruncate({
+            length: 150,
+            minTrail: 50,
+            moreText: "${_('more')}",
+            lessText: "${_('less')}",
+            moreAni: 300
+            ## leave lessAni empty, to avoid jQuery show/hide quirks!
+            ## (after first hide it would the show element as inline-block,
+            ##  (instead of inline) affeting layout)
+        });
+    });
+    </script>
 </%def>
 
 <a id="settings-link" href="${url(controller='profile', action='wall_settings')}">${_('Wall settings')}</a>
@@ -255,7 +292,5 @@
 ${dashboard(None, [], [])}
 
 %for event in c.events:
-  %if event.show_in_wall:
-    ${event.wall_entry()}
-  %endif
+  ${event.wall_entry()}
 %endfor

@@ -1,18 +1,33 @@
 $(document).ready(function(){
-    $('.hide_event').click(function() {
-        form = $(this).closest('form');
-        $.post(form.attr('action')+'?js=1',
+
+    /* Event hiding.
+     */
+    $('.wall .event-heading .hide-button').click(function() {
+        var form = $(this).closest('form');
+        $.post(form.attr('action') + '?js=1',
                form.serialize(),
-               function(data, status) {
-                   return function() {
-                       if (status == 'success') {
-                           type = $('input.event_type', form).val();
-                           $('.type_'+type).fadeOut(500);
-                       }
-                   }(data, status, form);
+               function(data) {
+                   type = $('input.event-type', form).val();
+                   $('.type_' + type).fadeOut(500);
                });
         return false;
     });
+
+    /* Show/hide reply forms.
+     */
+    $('.wall .wall-entry .thread .reply-link').click(function() {
+        var thread = $(this).closest('.thread');
+        $(thread).find('.reply-form-container').show();
+        $(thread).find('.reply-form-container .reply-text').focus();
+        return false;
+    });
+
+    $('.wall .wall-entry .thread .reply-cancel-button').click(function() {
+        $(this).closest('.reply-form-container').hide();
+        return false;
+    });
+
+    /*
     $('.action_submit').click(function(evt) {
         evt.stopPropagation();
         var form = $(this).closest('form');
@@ -44,4 +59,6 @@ $(document).ready(function(){
         }
         return false;
     });
+
+    */
 });

@@ -3,74 +3,127 @@ Functional test for the new wall
 
 Login and visit the wall. Currently there's no link, so we use direct url:
 
-    >>> first = Browser.logIn('user3@ututi.lt', 'password')
-    >>> first.open('/profile/wall')
+    >>> user3 = Browser.logIn('user3@ututi.lt', 'password')
+    >>> user3.open('/profile/wall')
 
 The page title should say "What's new?":
 
-    >>> first.printQuery("//h1[@class='pageTitle']/text()")
+    >>> user3.printQuery("//h1[@class='pageTitle']/text()")
     What's new?
 
 Right next to the title there's a link to wall settings:
 
-    >>> first.getLink("Wall settings").click()
-    >>> first.url
+    >>> user3.getLink("Wall settings").click()
+    >>> user3.url
     'http://localhost/profile/edit/wall'
 
-    >>> first.goBack()
+    >>> user3.goBack()
 
 The wall currently lists several simple events:
 
-    >>> first.printQuery("//div[contains(@class, 'wall-entry')]//text()")
+    >>> user3.printQuery("//div[contains(@class, 'wall-entry')]//text()")
     Adminas Adminovix has created the group Moderatoriai .  ...
     Adminas Adminovix joined the group Moderatoriai .  ...
     Third user joined the group Moderatoriai .  ...
     Adminas Adminovix has created the subject Matematinė analizė .  ...
 
-Let's use wall's action panel to send private message to the second user:
+Let's use wall's action panel to send private message to the user user:
 
-    >>> form = first.getForm(id='message_form')
+    >>> form = user3.getForm(id='message_form')
     >>> form.getControl('Group or user:').value = 'Alternative user'
-    >>> form.getControl(name='subject').value = 'This new wall is great!'
-    >>> form.getControl(name='message').value = "Hey, Alternative. I'm writing you from my wall!"
+    >>> form.getControl(name='subject').value = 'Private message title'
+    >>> form.getControl(name='message').value = 'Private message'
     >>> form.getControl('Send').click()
 
-Now the second user logs in and finds the private message in his wall:
+Now the user user logs in and finds the private message in his wall:
 
-    >>> second = Browser.logIn('user@ututi.lt', 'password')
-    >>> second.open('/profile/wall')
-    >>> second.printQuery("//div[contains(@class, 'wall-entry')]//text()")
-    Third user has sent you a private message " This new wall is great!  "  ...
-    Hey, Alternative. I'm writing you from my wall!  ...
+    >>> user = Browser.logIn('user@ututi.lt', 'password')
+    >>> user.open('/profile/wall')
+    >>> user.printQuery("//div[contains(@class, 'wall-entry')]//text()")
+    Third user has sent you a private message " Private message title "  ...
+    Private message ...
 
 He can reply using the wall reply box. (If not using javascript, user is
 directed to the thread page after he clicks 'Send'.)
 
-    >>> form = second.getForm(name='reply-form')
-    >>> form.getControl(name='message').value = 'Sure! I can reply easily and messages are threaded!'
+    >>> form = user.getForm(name='reply-form')
+    >>> form.getControl(name='message').value = 'Private message reply'
     >>> form.getControl("Send reply").click()
-    >>> second.url
+    >>> user.url
     'http://localhost/messages/thread/4'
 
-The first user can see the reply threaded along his message:
+The user3 user can see the reply threaded along his message:
 
-    >>> first.open('/profile/wall')
-    >>> first.printQuery("//div[contains(@class, 'wall-entry')]//text()")
-    You have sent Alternative user a private message " This new wall is great!  "  ...
-    Hey, Alternative. I'm writing you from my wall!  ...
-    Alternative user : Sure! I can reply easily and messages are threaded! ...
+    >>> user3.open('/profile/wall')
+    >>> user3.printQuery("//div[contains(@class, 'wall-entry')]//text()")
+    You have sent Alternative user a private message " Private message title "  ...
+    Private message ...
+    Alternative user : Private message reply ...
 
-Let's reply again to see how messages are threaded in the wall:
+The mailing list messaging works pretty same way in the wall. To test this,
+we will log in third user, that is in the same group as user:
 
-    >>> form = first.getForm(name='reply-form')
-    >>> form.getControl(name='message').value = "Here's my reply to your reply"
+    >>> admin = Browser.logIn('admin@ututi.lt', 'asdasd')
+    >>> admin.open('/profile/wall')
+    >>> form = admin.getForm(id='message_form')
+    >>> form.getControl('Group or user:').value = 'Moderatoriai'
+    >>> form.getControl(name='subject').value = 'Mailinglist message title'
+    >>> form.getControl(name='message').value = 'Mailinglist message'
+    >>> form.getControl('Send').click()
+
+He gets directed somewhere deprecated. This will be fixed:
+
+    >>> admin.url
+    'http://localhost/home/feed'
+
+User3 can see his message on his wall:
+
+    >>> user3.reload()
+    >>> user3.printQuery("//div[contains(@class, 'wall-entry')]//text()")
+    Adminas Adminovix has posted a new message Mailinglist message title to the group Moderatoriai
+    ...
+
+We can reply these messages the same way as private messages:
+
+    >>> form = user3.getForm(name='reply-form', index=0)
+    >>> form.getControl(name='message').value = 'Mailinglist message reply'
     >>> form.getControl("Send reply").click()
-    >>> first.url
+    >>> user3.url
+    'http://localhost/group/moderators/mailinglist/thread/6'
+
+    >>> admin.open('/profile/wall')
+    >>> admin.printQuery("//div[contains(@class, 'wall-entry')]//text()")
+    Adminas Adminovix has posted a new message Mailinglist message title to the group Moderatoriai ...
+    Mailinglist message ...
+    Third user : Mailinglist message reply
+    ...
+
+See how replying to an older thread lifts it in the wall. To test that,
+we will ask third user to reply to the private message:
+
+    >>> user3.open('/profile/wall')
+    >>> form = user3.getForm(name='reply-form', index=1)
+    >>> form.getControl(name='message').value = 'Private message reply 2'
+    >>> form.getControl("Send reply").click()
+    >>> user3.url
     'http://localhost/messages/thread/4'
 
-    >>> second.open('/profile/wall')
-    >>> second.printQuery("//div[contains(@class, 'wall-entry')]//text()")
-    Third user has sent you a private message " This new wall is great!  "  ...
-    Hey, Alternative. I'm writing you from my wall!  ...
-    Alternative user : Sure! I can reply easily and messages are threaded! ...
-    Third user : Here's my reply to your reply ...
+    >>> user3.open('/profile/wall')
+    >>> user3.printQuery("//div[contains(@class, 'wall-entry')]//text()")
+    You have sent Alternative user a private message " Private message title " ...
+    Private message ...
+    Alternative user : Private message reply ...
+    Third user : Private message reply 2 ...
+    Adminas Adminovix has posted a new message Mailinglist message title to the group Moderatoriai ...
+    Mailinglist message ...
+    Third user : Mailinglist message reply ...
+
+To test forum post threading we will use the group will forum enabled:
+
+    >>> form = admin.getForm(id='message_form')
+    >>> form.getControl('Group or user:').value = 'Testing group'
+    >>> form.getControl(name='subject').value = 'Forum post title'
+    >>> form.getControl(name='message').value = 'Forum post'
+    >>> form.getControl('Send').click()
+
+XXX need to fix this and continue testing forum post threading:

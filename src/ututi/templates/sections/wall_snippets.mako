@@ -16,7 +16,7 @@
           lessAni: 200});
     });
   </script>
-  ${h.javascript_link('/javascript/mailinglist.js')}
+  ${h.javascript_link('/javascript/expquotes.js')}
   ${h.javascript_link('/javascript/moderation.js')}
 </%def>
 

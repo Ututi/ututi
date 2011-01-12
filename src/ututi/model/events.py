@@ -1,4 +1,5 @@
 import cgi
+import logging
 
 from sqlalchemy.schema import Table
 from sqlalchemy.orm import backref
@@ -13,6 +14,7 @@ from ututi.model import Group, Subject, User, File, Page, ContentItem, ForumPost
 from ututi.model import meta
 from ututi.lib.helpers import link_to, ellipsis, when
 
+log = logging.getLogger(__name__)
 events_table = None
 
 class Event(object):
@@ -30,12 +32,6 @@ class Event(object):
 
     def snippet(self):
         raise NotImplementedError()
-
-    @property
-    def show_in_wall(self):
-        """Some Event types may override this not to show every event 
-        instance in wall (e.g. when threading messages)."""
-        return True
 
     def wall_entry(self):
         """This is for the new wall, snippet() was used before and they should
@@ -58,7 +54,8 @@ class MessagingEventMixin():
 
             {"author": User,
              "created": datetime,
-             "message": message string}
+             "message": message string,
+             "attachments": file list, may be omitted}
 
         Should be listed chronologically.
         """
@@ -67,6 +64,10 @@ class MessagingEventMixin():
     def reply_action():
         """
         Returns reply action url.
+
+        Note: the posted parameter is always called 'message'.
+        This should be fixed so that this method explicitly returns
+        what parameter is being posted.
         """
         raise NotImplementedError()
 
@@ -311,6 +312,16 @@ class MailinglistPostCreatedEvent(PostCreatedEventBase):
     def wall_entry(self):
         return render_mako_def('/sections/wall_entries.mako', 'mailinglistpost_created', event=self)
 
+    def message_list(self):
+        """MessagingEventMixin implementation."""
+        return [dict(author=m.author, created=m.sent, message=m.body, attachments=m.attachments)
+                for m in self.message.thread.posts]
+
+    def reply_action(self):
+        """MessagingEventMixin implementation."""
+        return url.current(action='mailinglist_reply',
+                           thread_id=self.message.thread.id, id=self.message.thread.group.group_id)
+
 
 class ModeratedPostCreated(PostCreatedEventBase):
     """Event fired when someone posts a message on the moderation queue.
@@ -368,6 +379,26 @@ class ForumPostCreatedEvent(Event):
     def wall_entry(self):
         return render_mako_def('/sections/wall_entries.mako', 'forumpost_created', event=self)
 
+    def message_list(self):
+        """MessagingEventMixin implementation."""
+        category_id = self.post.category_id
+        thread_id = self.post.thread_id
+        forum_posts = meta.Session.query(ForumPost)\
+            .filter_by(category_id=category_id,
+                       thread_id=thread_id,
+                       deleted_by=None)\
+            .order_by(ForumPost.created_on)\
+            .all()
+        return [dict(author=m.created, created=m.created_on, message=m.message)
+                for m in forum_posts]
+
+    def reply_action(self):
+        """MessagingEventMixin implementation."""
+        return url.current(action='forum_reply',
+                           id=self.context.group_id,
+                           category_id=self.post.category_id,
+                           thread_id=self.post.thread_id)
+
 
 class SMSMessageSentEvent(Event):
     """Event fired when someone sends an SMS message to the group."""
@@ -398,44 +429,27 @@ class PrivateMessageSentEvent(Event, MessagingEventMixin):
     def snippet(self):
         return render_mako_def('/sections/wall_snippets.mako', 'privatemessage_sent', event=self)
 
-    @property
-    def show_in_wall(self):
-        """Show event in wall only iff it represents last private message in the thread."""
-        this = self.private_message
-        orig = self.original_message
-        last = meta.Session.query(PrivateMessage
-              ).filter_by(thread_id=orig.id
-              ).order_by(PrivateMessage.id.desc()
-              ).first()
-        if last:
-            return this.id == last.id
-        else:
-            assert this.id == orig.id
-            return True
-
     def wall_entry(self):
         return render_mako_def('/sections/wall_entries.mako', 'privatemessage_sent', event=self)
 
     def message_text(self):
+        """Deprecated."""
+        log.warn('message_text of PrivateMessageSentEvent is deprecated.')
         return cgi.escape(self.private_message.content)
-
-    @property
-    def original_message(self):
-        """Get original message of the thread."""
-        this = self.private_message
-        if this.thread_id is None:
-            return this
-        else:
-            return PrivateMessage.get(this.thread_id)
 
     def message_list(self):
         """MessagingEventMixin implementation."""
+        this = self.private_message
+        if this.thread_id is None:
+            root_message = this
+        else:
+            root_message = PrivateMessage.get(this.thread_id)
         return [dict(author=m.sender, created=m.created_on, message=m.content)
-                for m in self.original_message.thread()]
+                for m in root_message.thread()]
 
     def reply_action(self):
         """MessagingEventMixin implementation."""
-        return url(controller='messages', action='reply', id=self.private_message.id)
+        return url.current(action='privatemessage_reply', id=self.private_message.id)
 
 
 class GroupMemberJoinedEvent(Event):
@@ -515,7 +529,11 @@ def setup_orm(engine):
                polymorphic_identity='generic',
                properties = {'context': relation(ContentItem, backref=backref('events', cascade='save-update, merge, delete')),
                              'user': relation(User, backref='events',
-                                              primaryjoin=users_table.c.id==events_table.c.author_id)})
+                                              primaryjoin=users_table.c.id==events_table.c.author_id),
+                             'children': relation(Event,
+                                                  order_by=events_table.c.id.asc(),
+                                                  backref=backref('parent',
+                                                                  remote_side=events_table.c.id))})
 
     orm.mapper(PageCreatedEvent,
                inherits=event_mapper,

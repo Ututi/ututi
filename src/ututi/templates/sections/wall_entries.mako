@@ -1,16 +1,16 @@
 <%def name="wall_entry(event)">
-<div class="wall-entry type-${event.event_type.replace('_', '-')}" id="wall-event-${event.id}">
+<div class="wall-entry type-${event.event_type.replace('_', '-')} type_${event.event_type}" id="wall-event-${event.id}">
   <div class="event-heading">
     ${caller.heading()}
     <span class="event-time">
       ${h.when(event.created)}
     </span>
     %if c.user is not None:
-    <div class="hide-button">
+    <div class="hide-button-container">
       <form method="POST" action="${url(controller='profile', action='hide_event')}">
         <div>
-          <input type="hidden" name="event_type" value="${event.event_type}" />
-          <input type="image" src="/images/details/icon_delete.png" title="${_('Ignore events like this')}" />
+          <input class="event-type" name="event_type" type="hidden" value="${event.event_type}" />
+          <input class="hide-button" type="image" src="/images/details/icon_delete.png" title="${_('Ignore events like this')}" />
         </div>
       </form>
     </div>
@@ -20,6 +20,35 @@
     ${caller.body()}
   </div>
 </div>
+</%def>
+
+<%def name="thread_reply(author, message, created, attachments=None)">
+  <div class="reply">
+    %if author:
+    <div class="logo">
+      <img src="${url(controller='user', action='logo', id=author.id, width=30)}" />
+    </div>
+    %endif
+    <div class="content">
+      %if author:
+      <span class="reply-author">${h.object_link(author)}:</span>
+      %endif
+      <span class="truncated">${h.nl2br(message)}</span>
+      %if attachments:
+      <ul class="file-list">
+        %for file in attachments:
+        <li><a href="${file.url()}">${file.title}</a></li>
+        %endfor
+      </ul>
+      %endif
+      <div class="closing">
+        <span class="event-time">${h.when(created)}</span>
+        <span class="actions">
+          <a href="#reply" class="reply-link">Reply</a>
+        </span>
+      </div>
+    </div>
+  </div>
 </%def>
 
 <%def name="event_message_thread(event)">
@@ -32,33 +61,48 @@
     original = messages.pop(0)
   %>
   <div class="thread">
+    %if original['author']:
     <div class="logo">
+      % if original['author']:
       <img src="${url(controller='user', action='logo', id=original['author'].id, width=50)}" />
+      % endif
     </div>
+    %endif
     <div class="content">
-      ${original['message']}
+      <span class="truncated">${h.nl2br(original['message'])}</span>
+      %if 'attachments' in original:
+      <ul class="file-list">
+        %for file in original['attachments']:
+        <li><a href="${file.url()}">${file.title}</a></li>
+        %endfor
+      </ul>
+      %endif
       <div class="closing">
         <span class="event-time">${h.when(original['created'])}</span>
         <span class="actions">
-          <a href="#">Reply</a>
+          <a href="#reply" class="reply-link">Reply</a>
         </span>
       </div>
-      %for msg in messages:
-      <div class="reply">
-        <div class="logo">
-          <img src="${url(controller='user', action='logo', id=msg['author'].id, width=30)}" />
-        </div>
-        <div class="content">
-          <span class="reply-author">${h.object_link(msg['author'])}:</span>
-          ${msg['message']}
-          <div class="closing">
-            <span class="event-time">${h.when(msg['created'])}</span>
-            <span class="actions">
-              <a href="#">Reply</a>
-            </span>
+      %if len(messages) > 3:
+        <%
+        hidden = messages[:-3]
+        messages = messages[-3:]
+        %>
+        <div class="click2show hidden-messages">
+          <div class="hide">
+            <a class="click">
+              ${_("Show older messages (%(message_count)s)") % dict(message_count=len(hidden))}
+            </a>
+          </div>
+          <div class="show">
+            %for msg in hidden:
+              ${thread_reply(**msg)}
+            %endfor
           </div>
         </div>
-      </div>
+      %endif
+      %for msg in messages:
+        ${thread_reply(**msg)}
       %endfor
       <div class="reply-form-container">
         <div class="logo">
@@ -69,7 +113,7 @@
             <textarea rows="3" cols="50" class="reply-text" name="message"></textarea>
             <div>
               ${h.input_submit(_('Send reply'), class_='btn reply-button')}
-              <a class="cancel-button" href="#cancel-reply">${_("Cancel")}</a>
+              <a class="reply-cancel-button" href="#cancel-reply">${_("Cancel")}</a>
             </div>
           </form>
         </div>
@@ -186,11 +230,12 @@
       </%base:rounded_block>
     </%def>
     <%def name="heading()">
-      ${_("%(user_link)s has posted a new message %(message_link)s to the group %(group_link)s.") % \
-         dict(user_link=event.link_to_author(),
+      ${_("%(user_link)s has posted a new message %(message_link)s to the group %(group_link)s") % \
+         dict(user_link=h.object_link(event.message.author),
               group_link=h.object_link(event.context),
               message_link=h.object_link(event.message)) | n}
     </%def>
+    <%self:event_message_thread event="${event}"/>
   </%self:wall_entry>
 </%def>
 
@@ -253,6 +298,7 @@
               group_link=h.object_link(event.context),
               message_link=h.object_link(event.post)) | n}
     </%def>
+    <%self:event_message_thread event="${event}"/>
   </%self:wall_entry>
 </%def>
 
@@ -277,7 +323,7 @@
 <%def name="privatemessage_sent(event)">
   <%self:wall_entry event="${event}">
     <%def name="heading()">
-      <% msg = event.original_message %>
+      <% msg = event.private_message %>
       %if msg.recipient == c.user:
         ${_("%(user_link)s has sent you a private message \"%(msg_link)s\"") % \
            dict(user_link=h.object_link(msg.sender),
@@ -293,7 +339,7 @@
                 msg_link=h.object_link(msg)) | n}
       %endif
     </%def>
-    <%self:event_message_thread event="${event}" />
+    <%self:event_message_thread event="${event}"/>
   </%self:wall_entry>
 </%def>
 

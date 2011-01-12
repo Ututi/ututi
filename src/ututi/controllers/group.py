@@ -21,6 +21,8 @@ from formencode.variabledecode import NestedVariables
 from sqlalchemy.orm.exc import NoResultFound
 
 import ututi.lib.helpers as h
+from ututi.lib.fileview import FileViewMixin
+from ututi.lib.wall import WallMixin
 from ututi.lib.image import serve_logo
 from ututi.lib.search import _exclude_subjects
 from ututi.lib.sms import sms_cost
@@ -31,7 +33,6 @@ from ututi.model import ForumCategory
 from ututi.model import GroupCoupon
 from ututi.model import LocationTag, User, GroupMember, GroupMembershipType, File, OutgoingGroupSMSMessage
 from ututi.model import meta, Group, SimpleTag, Subject, PendingInvitation, PendingRequest
-from ututi.controllers.profile.wall import WallMixin
 from ututi.controllers.subject import SubjectAddMixin
 from ututi.controllers.subject import NewSubjectForm
 from ututi.controllers.search import SearchSubmit
@@ -270,7 +271,7 @@ def group_menu_items():
         ]
     return bcs
 
-class GroupWallMixin(WallMixin):
+class GroupWallController(WallMixin, FileViewMixin):
 
     def _msg_rcpt(self):
         if c.group.mailinglist_enabled:
@@ -298,7 +299,7 @@ class GroupWallMixin(WallMixin):
         return url(controller='group', action='home', id=c.group.group_id)
 
 
-class GroupController(BaseController, SubjectAddMixin, GroupWallMixin):
+class GroupController(BaseController, SubjectAddMixin, GroupWallController):
     """Controller for group actions."""
 
     controller_name = 'forum'
