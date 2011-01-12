@@ -201,6 +201,8 @@ class WallMixin(object):
         """
         if isinstance(recipient, Group):
             if not recipient.mailinglist_enabled:
+                if category_id is None:
+                    category_id = recipient.forum_categories[0].id
                 post = ForumPost(subject, message, category_id=category_id,
                                  thread_id=None)
                 meta.Session.add(post)
@@ -350,8 +352,10 @@ class WallMixin(object):
 
     @ActionProtector("user")
     @validate(schema=WallReplyValidator())
-    def forum_reply(self, id, category_id, thread_id):
+    def forum_reply(self, id):
         group = Group.get(id)
+        category_id = request.params.get('category_id')
+        thread_id = request.params.get('thread_id')
         category = ForumCategory.get(category_id)
         thread = ForumPost.get(thread_id)
 

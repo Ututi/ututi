@@ -64,6 +64,8 @@ $(document).ready(function() {
                 });
                 if (sel.options.length > 1) {
                   $(sel).closest('.formField').show();
+                } else {
+                  self.options[0].selected = true;
                 }
             } else {
                 $(sel).hide();
