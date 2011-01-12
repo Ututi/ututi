@@ -274,9 +274,12 @@ class WallMixin(object):
                                    if membership.membership_type == 'administrator']
         evt_child = aliased(Event)
         child_creation_time = select([func.max(evt_child.created)], evt_child.parent_id==events_table.c.id).as_scalar()
+        subjects = c.user.all_watched_subjects
+        if c.user.is_teacher:
+            subjects += c.user.taught_subjects
 
         return meta.Session.query(Event)\
-            .filter(or_(Event.object_id.in_([s.id for s in c.user.all_watched_subjects]),
+            .filter(or_(Event.object_id.in_([s.id for s in subjects]),
                         Event.object_id.in_([m.group.id for m in c.user.memberships]),
                         Event.recipient_id == c.user.id,
                         and_(Event.event_type=='private_message_sent',
