@@ -27,4 +27,4 @@
         ${self.listThreads()}
     %endif
     </div>
- </%self:rounded_block>
+  </%self:rounded_block>

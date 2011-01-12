@@ -119,6 +119,10 @@
                     outline: none;
                 }
 
+            .wall .wall-entry .hidden-messages .hide {
+                text-align: center;
+            }
+
             .wall .wall-entry .hidden-messages .hide,
             .wall .wall-entry .reply {
                 background-color: #f6f6f6;

@@ -24,15 +24,11 @@
 
 <%def name="thread_reply(author, message, created, attachments=None)">
   <div class="reply">
-    %if author:
     <div class="logo">
-      <img src="${url(controller='user', action='logo', id=author.id, width=30)}" />
+      <img src="${author.url(action='logo', width=30)}" />
     </div>
-    %endif
     <div class="content">
-      %if author:
       <span class="reply-author">${h.object_link(author)}:</span>
-      %endif
       <span class="truncated">${h.nl2br(message)}</span>
       %if attachments:
       <ul class="file-list">
@@ -61,13 +57,9 @@
     original = messages.pop(0)
   %>
   <div class="thread">
-    %if original['author']:
     <div class="logo">
-      % if original['author']:
-      <img src="${url(controller='user', action='logo', id=original['author'].id, width=50)}" />
-      % endif
+      <img src="${original['author'].url(action='logo', width=50)}" />
     </div>
-    %endif
     <div class="content">
       <span class="truncated">${h.nl2br(original['message'])}</span>
       %if 'attachments' in original:

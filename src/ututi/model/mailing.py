@@ -15,13 +15,14 @@ from sqlalchemy.orm import relation, synonym
 from sqlalchemy import orm
 from StringIO import StringIO
 
-from pylons import config, url
+from pylons import config
 
-from nous.mailpost.MailBoxerTools import splitMail, parseaddr
+from nous.mailpost.MailBoxerTools import parseaddr
 
 from ututi.model import ContentItem
 from ututi.model import Group
-from ututi.model import meta, User, File
+from ututi.model import meta, User
+from ututi.model.users import AnonymousUser
 from ututi.lib.mailer import raw_send_email
 
 
@@ -171,27 +172,19 @@ class GroupMailingListMessage(ContentItem):
     def info_dict(self):
         return {'thread_id': self.id,
                 'send': self.sent,
-                'author': {'title': self.author_title,
-                           'url': self.author_url},
+                'author': {'title': self.author_or_anonymous.fullname,
+                           'url': self.author_or_anonymous.url()},
                 'body': self.body,
                 'reply_count': len(self.posts) - 1,
                 'subject': self.subject}
 
     @property
-    def author_url(self):
+    def author_or_anonymous(self):
         if self.author:
-            return self.author.url()
+            return self.author
         else:
-            author_name, author_address = parseaddr(self.mime_message['From'])
-            return 'mailto:%s' % author_address
-
-    @property
-    def author_title(self):
-        if self.author:
-            return self.author.fullname
-        else:
-            author_name, author_address = parseaddr(decode_and_join_header(self.mime_message['From']))
-            return '%s <%s>' % (author_name, author_address)
+            name, email = parseaddr(decode_and_join_header(self.mime_message['From']))
+            return AnonymousUser(name, email)
 
     def url(self, action=None):
         if self.in_moderation_queue:

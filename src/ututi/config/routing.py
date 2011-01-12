@@ -207,6 +207,14 @@ def make_map(config):
     map.connect('/books/catalog/{books_department}', controller="books", action="catalog")
 
 
+    # anonymous user logo actions
+    map.connect('/user/logo/{width}/{height}',
+                controller='anonymous',
+                action='logo')
+    map.connect('/user/logo/{width}',
+                controller='anonymous',
+                action='logo')
+
     # user profiles
     map.connect('/user/{id}', controller='user', action='index')
     map.connect('/user/{id}/{action}', controller='user')
