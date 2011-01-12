@@ -418,7 +418,7 @@ class SMSMessageSentEvent(Event):
         return cgi.escape(self.outgoing_sms.message_text)
 
     def sms_created(self):
-        return cgi.escape(self.outgoing_sms.created)
+        return self.outgoing_sms.created
 
 
 class PrivateMessageSentEvent(Event, MessagingEventMixin):
