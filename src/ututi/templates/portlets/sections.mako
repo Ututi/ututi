@@ -1,10 +1,11 @@
 <%namespace file="/portlets/user.mako" import="user_information_portlet, user_groups_portlet, user_create_group_portlet,
-                                               user_create_subject_portlet, user_recommend_portlet, user_support_portlet"/>
-<%namespace file="/portlets/group.mako" import="*"/>
-<%namespace file="/portlets/universal.mako" import="*"/>
-<%namespace file="/portlets/search.mako" import="*"/>
-<%namespace file="/portlets/banners/base.mako" import="*"/>
-<%namespace file="/portlets/facebook.mako" import="*"/>
+                                               user_create_subject_portlet, user_recommend_portlet, user_support_portlet,
+                                               teacher_information_portlet"/>
+<%namespace file="/portlets/group.mako" import="group_info_portlet, group_forum_post_portlet,
+                                                group_invite_member_portlet, group_sms_portlet,
+                                                group_members_portlet"/>
+<%namespace file="/portlets/universal.mako" import="quick_file_upload_portlet"/>
+<%namespace file="/portlets/facebook.mako" import="facebook_likebox_portlet"/>
 
 <%def name="teacher_sidebar(exclude=[])">
 <div id="sidebar">
