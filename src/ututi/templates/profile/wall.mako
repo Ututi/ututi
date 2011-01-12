@@ -110,6 +110,10 @@
                         margin-right: 5px;
                     }
 
+              .wall .wall-entry .thread ul.file-list {
+                  margin: 4px 0px;
+              }
+
             .wall .wall-entry .actions {
                 margin-left: 5px;
             }
@@ -123,20 +127,19 @@
                     outline: none;
                 }
 
-            .wall .wall-entry .hidden-messages .hide {
-                text-align: center;
-            }
-
             .wall .wall-entry .hidden-messages .hide,
             .wall .wall-entry .reply {
                 background-color: #f6f6f6;
-                padding: 10px;
+                padding: 5px 10px;
                 margin-bottom: 3px;
             }
 
             .wall .wall-entry .reply-form-container {
                 padding: 10px;
                 margin-bottom: 5px;
+            }
+
+            .wall .wall-entry .action-block {
                 display: none; /* initialy hidden */
             }
 
@@ -156,8 +159,8 @@
 
         .wall .wall-entry .file-description,
         .wall .wall-entry .page-description {
-            margin-left: 60px;
-            padding: 10px 40px;
+            margin: 0px 0px 10px 60px;
+            padding: 0px 10px 0px 40px;
         }
 
         .wall .wall-entry .file-description {
@@ -171,7 +174,6 @@
             .wall .wall-entry .file-description .title,
             .wall .wall-entry .page-description .title {
                 font-size: 14px;
-                font-weight: bold;
             }
 
             .wall .wall-entry .file-description .author,
@@ -184,6 +186,7 @@
         .wall .wall-entry.type_mailinglist_post_created .event-heading .event-time {
             display: none;
         }
+
 
 </%def>
 
