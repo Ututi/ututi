@@ -1,7 +1,7 @@
 import datetime
 import logging
 
-from sqlalchemy.sql.expression import desc
+from sqlalchemy.sql.expression import desc, asc
 from sqlalchemy.sql.expression import or_
 from paste.util.datetimeutil import parse_date
 
@@ -35,6 +35,7 @@ class NewsController(BaseController):
                         Event.page_id != None,
                         Event.event_type == 'moderated_post_created'))\
             .order_by(desc(Event.created))\
+            .order_by(asc(Event.id))\
             .all()
         return events
 
