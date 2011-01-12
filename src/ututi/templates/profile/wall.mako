@@ -37,17 +37,20 @@
             /* Custom event icons:
              */
 
-            .wall .wall-entry.type-member-joined .event-heading,
-            .wall .wall-entry.type-group-created .event-heading {
+            .wall .wall-entry.group-event .event-heading {
                 background-image: url("/img/icons/icon-group-tiny.png");
             }
 
-            .wall .wall-entry.type-subject-created .event-heading {
+            .wall .wall-entry.subject-event .event-heading {
                 background-image: url("/img/icons/icon-subject-tiny.png");
             }
 
-            .wall .wall-entry.type-private-message-sent .event-heading {
+            .wall .wall-entry.message-event .event-heading {
                 background-image: url("/img/icons/icon-post-tiny.png");
+            }
+
+            .wall .wall-entry.sms-event .event-heading {
+                background-image: url("/img/icons/icon-sms-tiny.png");
             }
 
         .wall .wall-entry .event-time {
@@ -76,6 +79,7 @@
 
             .wall .wall-entry .thread .content {
                 padding-left: 60px;
+                margin-bottom: 5px;
             }
 
                 .wall .wall-entry .thread .reply .content,
@@ -150,7 +154,37 @@
                     -webkit-border-radius: 3px;
                 }
 
-      
+        .wall .wall-entry .file-description,
+        .wall .wall-entry .page-description {
+            margin-left: 60px;
+            padding: 10px 40px;
+        }
+
+        .wall .wall-entry .file-description {
+            background: url("/img/icons/file-off-big.png") no-repeat left center;
+        }
+
+        .wall .wall-entry .page-description {
+            background: url("/img/icons/exams-off.png") no-repeat left center;
+        }
+
+            .wall .wall-entry .file-description .title,
+            .wall .wall-entry .page-description .title {
+                font-size: 14px;
+                font-weight: bold;
+            }
+
+            .wall .wall-entry .file-description .author,
+            .wall .wall-entry .page-description .author {
+                font-size: 11px;
+            }
+
+        /* Hide event time in some event types:
+         */
+        .wall .wall-entry.type_mailinglist_post_created .event-heading .event-time {
+            display: none;
+        }
+
 </%def>
 
 <%def name="send_message_block(msg_recipients)">
