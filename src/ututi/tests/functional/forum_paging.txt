@@ -33,6 +33,18 @@ Group forums
     ...         meta.Session.add(post)
     ...     meta.Session.commit()
 
+    >>> def create_community_threads():
+    ...     from ututi.model import meta, ForumPost, User
+    ...     from ututi.lib.forums import make_forum_post
+    ...     cat = 1
+    ...     u = User.get('admin@ututi.lt')
+    ...     for i in range(12):
+    ...         meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+    ...         post = ForumPost(u'Some thread', u'Some text', category_id=cat,
+    ...                          thread_id=None)
+    ...         meta.Session.add(post)
+    ...     meta.Session.commit()
+
 
     >>> browser = Browser.logIn()
 
@@ -71,6 +83,7 @@ And there should be a pager now:
       <span>1</span>
       <a>2</a>
     </div>
+    >>> browser.getLink('2').click()
 
 And create some threads:
 
@@ -89,3 +102,14 @@ The pager should be there:
       <span>1</span>
       <a>2</a>
     </div>
+    >>> browser.getLink('2').click()
+
+Test paging in community forum:
+    >>> create_community_threads()
+    >>> browser.getLink('Community').click()
+    >>> browser.printCssQuery('#pager', include_attributes=[''])
+    <div>
+      <span>1</span>
+      <a>2</a>
+    </div>
+    >>> browser.getLink('2').click()
