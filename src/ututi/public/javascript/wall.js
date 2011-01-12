@@ -1,8 +1,8 @@
 $(document).ready(function(){
 
-    /* Event hiding.
+    /* Event removal.
      */
-    $('.wall .event-heading .hide-button').click(function() {
+    $('.wall .wall-entry .event-heading .hide-button').click(function() {
         var form = $(this).closest('form');
         $.post(form.attr('action') + '?js=1',
                form.serialize(),
@@ -13,17 +13,34 @@ $(document).ready(function(){
         return false;
     });
 
+    /* Event hiding.
+     */
+    $('.wall .wall-entry .event-heading').click(function(event) {
+        if ($(event.target).is('a')) {
+            // default behavior if clicked on a link
+        }
+        else {
+            var body = $(this).closest('.wall-entry').find('.event-body');
+            if (body.is(':visible'))
+                body.slideUp('fast');
+            else
+                body.slideDown('fast');
+            return false;
+        }
+    });
+
     /* Show/hide reply forms.
      */
-    $('.wall .wall-entry .thread .reply-link').click(function() {
-        var thread = $(this).closest('.thread');
-        $(thread).find('.reply-form-container').show();
-        $(thread).find('.reply-form-container .reply-text').focus();
+    $('.wall .wall-entry .action-block-link').click(function() {
+        var entry = $(this).closest('.wall-entry');
+        $(entry).find('.action-block').show();
+        $(entry).find('.action-block textarea').focus();
         return false;
     });
 
-    $('.wall .wall-entry .thread .reply-cancel-button').click(function() {
-        $(this).closest('.reply-form-container').hide();
+    $('.wall .wall-entry .action-block-cancel').click(function() {
+        var entry = $(this).closest('.wall-entry');
+        $(entry).find('.action-block').hide();
         return false;
     });
 
