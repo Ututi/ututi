@@ -285,7 +285,8 @@ class WallMixin(object):
                         Event.object_id.in_(user_is_admin_of_groups)))\
             .filter(~Event.event_type.in_(c.user.ignored_events_list))\
             .filter(Event.parent == None)\
-            .order_by(func.coalesce(child_creation_time, Event.created).desc())\
+            .order_by(func.coalesce(child_creation_time, Event.created).desc(),
+                      Event.id.desc())\
             .limit(20).all()
 
     @ActionProtector("user")

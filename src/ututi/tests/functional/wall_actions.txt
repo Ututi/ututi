@@ -31,18 +31,18 @@ TODO: Going to the new style wall for now.
    Sending you a message from my wall!
    "
    ...
-   Adminas Adminovix
-   has created the group
-   Testing group
-   .
-   ...
-   Adminas Adminovix
-   joined the group
-   Testing group
-   .
-   ...
    Second user
    joined the group
+   Testing group
+   .
+   ...
+   Adminas Adminovix
+   joined the group
+   Testing group
+   .
+   ...
+   Adminas Adminovix
+   has created the group
    Testing group
    .
    ...
@@ -104,29 +104,29 @@ TODO: Going to the new style wall for now.
    to the group
    Moderatoriai
    .
-   Adminas Adminovix
+   Third user
    joined the group
-   Moderatoriai
-   .
-   Adminas Adminovix
-   has created the group
-   Testing group
-   .
-   Adminas Adminovix
-   has created the group
    Moderatoriai
    .
    Second user
    joined the group
    Testing group
    .
-   Third user
+   Adminas Adminovix
+   joined the group
+   Testing group
+   .
+   Adminas Adminovix
+   has created the group
+   Testing group
+   .
+   Adminas Adminovix
    joined the group
    Moderatoriai
    .
    Adminas Adminovix
-   joined the group
-   Testing group
+   has created the group
+   Moderatoriai
    .
 
    >>> from ututi.lib.mailer import mail_queue
