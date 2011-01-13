@@ -34,8 +34,7 @@ class NewsController(BaseController):
             .filter(or_(Event.file_id != None,
                         Event.page_id != None,
                         Event.event_type == 'moderated_post_created'))\
-            .order_by(desc(Event.created))\
-            .order_by(asc(Event.id))\
+            .order_by(desc(Event.created), desc(Event.id))\
             .all()
         return events
 

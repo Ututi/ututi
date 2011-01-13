@@ -272,10 +272,13 @@ class WallMixin(object):
                                    for membership in c.user.memberships
                                    if membership.membership_type == 'administrator']
         evt_child = aliased(Event)
-        child_creation_time = select([func.max(evt_child.created)], evt_child.parent_id==events_table.c.id).as_scalar()
+
         subjects = c.user.all_watched_subjects
         if c.user.is_teacher:
             subjects += c.user.taught_subjects
+
+        #query for ordering events by their last subevent
+        child_query = select([func.max(evt_child.created)], evt_child.parent_id==events_table.c.id).as_scalar()
 
         return meta.Session.query(Event)\
             .filter(or_(Event.object_id.in_([s.id for s in subjects]),
@@ -287,8 +290,8 @@ class WallMixin(object):
                         Event.object_id.in_(user_is_admin_of_groups)))\
             .filter(~Event.event_type.in_(c.user.ignored_events_list))\
             .filter(Event.parent == None)\
-            .order_by(func.coalesce(child_creation_time, Event.created).desc(),
-                      Event.id.desc())\
+            .order_by(func.coalesce(child_query, Event.created).desc(),
+                      Event.event_type)\
             .limit(20).all()
 
     @ActionProtector("user")

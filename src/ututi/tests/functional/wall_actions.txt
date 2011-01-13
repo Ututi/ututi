@@ -31,20 +31,16 @@ TODO: Going to the new style wall for now.
    Sending you a message from my wall!
    "
    ...
-   Second user
-   joined the group
-   Testing group
-   .
-   ...
-   Adminas Adminovix
-   joined the group
-   Testing group
-   .
-   ...
    Adminas Adminovix
    has created the group
    Testing group
-   .
+   ...
+   Adminas Adminovix
+   has joined the group
+   Testing group
+   ...
+   You have joined the group
+   Testing group
    ...
 
 He can reply the first user directly from the wall:
@@ -61,7 +57,7 @@ The first user can see this reply on his wall, and reply again:
    >>> browser.getLink("News wall").click()
 
 TODO: Going to the new style wall for now.
-   >>> browser.open('http://localhost/profile/wall')
+   >>> browser2.open('http://localhost/profile/wall')
 
    >>> browser2.printQuery('//div[contains(@class, "event-heading")]//text()')
    Alternative user
@@ -95,8 +91,8 @@ TODO: Going to the new style wall for now.
    >>> browser2.getLink('News wall').click()
 
 TODO: Going to the new style wall for now.
-   >>> browser.open('http://localhost/profile/wall')
-
+   >>> browser2.open('http://localhost/profile/wall')
+   
    >>> browser2.printQuery('id("wall")//div[@class="description"]//text()')
    Third user
    has posted a new message
@@ -104,29 +100,29 @@ TODO: Going to the new style wall for now.
    to the group
    Moderatoriai
    .
+   Adminas Adminovix
+   has created the group
+   Testing group
+   .
+   Adminas Adminovix
+   has created the group
+   Moderatoriai
+   .
    Third user
+   joined the group
+   Moderatoriai
+   .
+   Adminas Adminovix
+   joined the group
+   Testing group
+   .
+   Adminas Adminovix
    joined the group
    Moderatoriai
    .
    Second user
    joined the group
    Testing group
-   .
-   Adminas Adminovix
-   joined the group
-   Testing group
-   .
-   Adminas Adminovix
-   has created the group
-   Testing group
-   .
-   Adminas Adminovix
-   joined the group
-   Moderatoriai
-   .
-   Adminas Adminovix
-   has created the group
-   Moderatoriai
    .
 
    >>> from ututi.lib.mailer import mail_queue

@@ -27,10 +27,10 @@ Right next to the title there's a link to wall settings:
 The wall currently lists several simple events:
 
     >>> user3.printQuery("//div[contains(@class, 'wall-entry')]//text()")
-    Adminas Adminovix has created the subject Matematinė analizė ... ago
-    You have joined the group Moderatoriai ... ago
-    Adminas Adminovix has joined the group Moderatoriai ... ago
     Adminas Adminovix has created the group Moderatoriai ... ago
+    Adminas Adminovix has joined the group Moderatoriai ... ago
+    You have joined the group Moderatoriai ... ago
+    Adminas Adminovix has created the subject Matematinė analizė ... ago
 
 Let's use wall's action panel to send private message to the user user:
 
