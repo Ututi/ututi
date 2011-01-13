@@ -335,9 +335,12 @@ class WallMixin(object):
 
     @ActionProtector("user")
     @validate(schema=WallReplyValidator())
-    def mailinglist_reply(self, id):
-        thread_id = int(request.params['thread_id'])
+    def mailinglist_reply(self, id, thread_id):
         group = Group.get(id)
+        try:
+            thread_id = int(thread_id)
+        except ValueError:
+            abort(404)
         thread = GroupMailingListMessage.get(thread_id, group.id)
 
         if group is None or thread is None:
@@ -354,10 +357,13 @@ class WallMixin(object):
 
     @ActionProtector("user")
     @validate(schema=WallReplyValidator())
-    def forum_reply(self, id):
+    def forum_reply(self, id, category_id, thread_id):
         group = Group.get(id)
-        category_id = request.params.get('category_id')
-        thread_id = request.params.get('thread_id')
+        try:
+            thread_id = int(thread_id)
+            category_id = int(category_id)
+        except ValueError:
+            abort(404)
         category = ForumCategory.get(category_id)
         thread = ForumPost.get(thread_id)
 

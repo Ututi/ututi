@@ -206,7 +206,6 @@ def make_map(config):
     map.connect('/books/catalog/{books_department}/{books_type_name}', controller="books", action="catalog")
     map.connect('/books/catalog/{books_department}', controller="books", action="catalog")
 
-
     # anonymous user logo actions
     map.connect('/user/logo/{width}/{height}',
                 controller='anonymous',
@@ -246,6 +245,11 @@ def make_map(config):
     map.connect('/school/*path/groups_js', controller='structureview', action='groups_search_js')
     map.connect('/school/*path/subjects_js', controller='structureview', action='subjects_search_js')
     map.connect('/school/*path', controller='structureview', action='index')
+
+    # user's wall actions
+    map.connect('/profile/reply/mailinglist/{id}/{thread_id}', controller='profile', action='mailinglist_reply')
+    map.connect('/profile/reply/forum/{id}/{category_id}/{thread_id}', controller='profile', action='forum_reply')
+    map.connect('/profile/reply/privatemessage/{id}', controller='profile', action='privatemessage_reply')
 
     # other user views
     map.connect('/profile/confirm_emails', controller='profile', action='confirm_emails')
