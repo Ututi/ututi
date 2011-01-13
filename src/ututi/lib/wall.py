@@ -5,6 +5,7 @@ from pylons.controllers.util import redirect
 from pylons import request
 from pylons import tmpl_context as c
 from pylons.i18n import _
+from pylons.templating import render_mako_def
 
 from formencode.validators import String
 from formencode.api import Invalid
@@ -347,13 +348,21 @@ class WallMixin(object):
             abort(404)
 
         last_post = thread.posts[-1]
-        post = post_message(group,
+        msg = post_message(group,
                             c.user,
                             u"Re: %s" % thread.subject,
                             self.form_result['message'],
                             reply_to=last_post.message_id)
 
-        redirect(self._redirect_url())
+        if request.params.has_key('js'):
+            return render_mako_def('/sections/wall_entries.mako',
+                                   'thread_reply',
+                                   author=msg.author_or_anonymous,
+                                   message=msg.body,
+                                   created=msg.sent,
+                                   attachments=msg.attachments)
+        else:
+            redirect(self._redirect_url())
 
     @ActionProtector("user")
     @validate(schema=WallReplyValidator())
@@ -370,13 +379,20 @@ class WallMixin(object):
         if group is None or category is None or thread is None:
             abort(404)
 
-        make_forum_post(c.user, thread.title, self.form_result['message'],
-                        group_id=group.group_id, category_id=category_id,
-                        thread_id=thread_id, controller='forum')
+        post = make_forum_post(c.user, thread.title, self.form_result['message'],
+                               group_id=group.group_id, category_id=category_id,
+                               thread_id=thread_id, controller='forum')
 
         thread.mark_as_seen_by(c.user)
         meta.Session.commit()
-        redirect(self._redirect_url())
+        if request.params.has_key('js'):
+            return render_mako_def('/sections/wall_entries.mako',
+                                   'thread_reply',
+                                   author=post.created,
+                                   message=post.message,
+                                   created=post.created_on)
+        else:
+            redirect(self._redirect_url())
 
     @ActionProtector("user")
     @validate(schema=WallReplyValidator())
@@ -396,4 +412,11 @@ class WallMixin(object):
         original.hidden_by_sender = False
         original.hidden_by_recipient = False
         meta.Session.commit()
-        redirect(self._redirect_url())
+        if request.params.has_key('js'):
+            return render_mako_def('/sections/wall_entries.mako',
+                                   'thread_reply',
+                                   author=msg.sender,
+                                   message=msg.content,
+                                   created=msg.created_on)
+        else:
+            redirect(self._redirect_url())

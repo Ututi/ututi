@@ -2,7 +2,7 @@ $(document).ready(function(){
 
     /* Event removal.
      */
-    $('.wall .wall-entry .event-heading .hide-button').click(function() {
+    $('.wall .wall-entry .event-heading .hide-button').live('click', function() {
         var form = $(this).closest('form');
         $.post(form.attr('action') + '?js=1',
                form.serialize(),
@@ -15,7 +15,7 @@ $(document).ready(function(){
 
     /* Event hiding.
      */
-    $('.wall .wall-entry .event-heading').click(function(event) {
+    $('.wall .wall-entry .event-heading').live('click', function(event) {
         if ($(event.target).is('a')) {
             // default behavior if clicked on a link
         }
@@ -31,16 +31,36 @@ $(document).ready(function(){
 
     /* Show/hide reply forms.
      */
-    $('.wall .wall-entry .action-block-link').click(function() {
+    $('.wall .wall-entry .action-block-link').live('click', function() {
         var entry = $(this).closest('.wall-entry');
-        $(entry).find('.action-block').show();
-        $(entry).find('.action-block textarea').focus();
+        entry.find('.action-block').show();
+        entry.find('.action-block textarea').focus();
         return false;
     });
 
-    $('.wall .wall-entry .action-block-cancel').click(function() {
+    $('.wall .wall-entry .action-block-cancel').live('click', function() {
         var entry = $(this).closest('.wall-entry');
-        $(entry).find('.action-block').hide();
+        entry.find('.action-block').hide();
+        return false;
+    });
+
+    /* AJAX for reply actions.
+     */
+    $('.wall .wall-entry .reply-form-container .reply-button').click(function() {
+        var form = $(this).closest('form');
+        var text = form.find('.reply-text');
+        if ($.trim(text.val()) != '') {
+            $.post(
+                form.attr('action') + '?js=1',
+                form.serialize(),
+                function(content) {
+                    form.closest('.reply-form-container').hide();
+                    text.val('');
+                    var replies = form.closest('.wall-entry').find('.replies');
+                    $(content).hide().appendTo(replies).fadeIn('slow');
+                }
+            );
+        }
         return false;
     });
 

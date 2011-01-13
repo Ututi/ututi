@@ -78,27 +78,29 @@
           <a href="#reply" class="action-block-link">Reply</a>
         </span>
       </div>
-      %if len(messages) > 3:
-        <%
-        hidden = messages[:-3]
-        messages = messages[-3:]
-        %>
-        <div class="click2show hidden-messages">
-          <div class="hide">
-            <a class="click">
-              ${_("Show older messages (%(message_count)s)") % dict(message_count=len(hidden))}
-            </a>
+      <div class="replies">
+        %if len(messages) > 3:
+          <%
+          hidden = messages[:-3]
+          messages = messages[-3:]
+          %>
+          <div class="click2show hidden-messages">
+            <div class="hide">
+              <a class="click">
+                ${_("Show older messages (%(message_count)s)") % dict(message_count=len(hidden))}
+              </a>
+            </div>
+            <div class="show">
+              %for msg in hidden:
+                ${thread_reply(**msg)}
+              %endfor
+            </div>
           </div>
-          <div class="show">
-            %for msg in hidden:
-              ${thread_reply(**msg)}
-            %endfor
-          </div>
-        </div>
-      %endif
-      %for msg in messages:
-        ${thread_reply(**msg)}
-      %endfor
+        %endif
+        %for msg in messages:
+          ${thread_reply(**msg)}
+        %endfor
+      </div>
       <div class="reply-form-container action-block">
         <div class="logo">
           <img src="${url(controller='user', action='logo', id=c.user.id, width=30)}" />
