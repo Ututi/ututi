@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2011-01-10 18:59+0200\n"
+"PO-Revision-Date: 2011-01-13 18:51+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -805,23 +805,6 @@ msgstr "Wiadomość nie może być pusta."
 msgid "Please enter at least one value."
 msgstr "Proszę wpisać przynajmniej jedną wartość."
 
-msgid "The recipient is not specified."
-msgstr "Odbiorca  został nie określony."
-
-msgid "Invalid subject"
-msgstr "Nieprawidłowy temat"
-
-msgid "Wiki page created."
-msgstr "Wiki strona została utworzona"
-
-#, python-format
-msgid "Member: %s (%s)"
-msgstr "Użytkownik: %s (%s)"
-
-#, python-format
-msgid "Member: %s"
-msgstr "Użytkownik: %s"
-
 msgid "Confirm the email for Ututi"
 msgstr "Zaakceptuj e-mail Ututi"
 
@@ -988,6 +971,23 @@ msgstr "Taki kod już istnieje, wybierz inny."
 
 msgid "Such a coupon code does not exist."
 msgstr "Taki kod nie istnieje."
+
+msgid "The recipient is not specified."
+msgstr "Odbiorca  został nie określony."
+
+msgid "Invalid subject"
+msgstr "Nieprawidłowy temat"
+
+msgid "Wiki page created."
+msgstr "Wiki strona została utworzona"
+
+#, python-format
+msgid "Member: %s (%s)"
+msgstr "Użytkownik: %s (%s)"
+
+#, python-format
+msgid "Member: %s"
+msgstr "Użytkownik: %s"
 
 #, python-format
 msgid "unlimited group private files for %(day_count)d day"
@@ -1169,6 +1169,9 @@ msgstr "Grupa %(link_to_group)s przestała obserwować przedmiot %(link_to_subje
 
 msgid "(no subject)"
 msgstr "(brak tematu)"
+
+msgid "Anonymous"
+msgstr ""
 
 msgid "Admin"
 msgstr "Admin"
@@ -2171,6 +2174,13 @@ msgstr "Numer telefonu"
 msgid "New book"
 msgstr "Nowa książka"
 
+msgid "Book cover"
+msgstr "Okładka książki"
+
+#. TRANSLATORS: translate this as a single word 'More'
+msgid "more_about_book"
+msgstr ""
+
 msgid "Learning books market"
 msgstr "Rynek podręczników"
 
@@ -2205,15 +2215,8 @@ msgstr "Edycja ksiązki"
 msgid "Back to my books"
 msgstr "Wróć do moich książek"
 
-msgid "Book cover"
-msgstr "Okładka książki"
-
 msgid "Delete image"
 msgstr "Skasuj obrazek"
-
-#. TRANSLATORS: translate this as a single word 'More'
-msgid "more_about_book"
-msgstr ""
 
 msgid "U-Books - what's that?"
 msgstr "U-Books - co to jest?"
@@ -4182,6 +4185,12 @@ msgstr ""
 msgid "create a wiki page"
 msgstr "utwórz wiki stronę"
 
+msgid "more"
+msgstr ""
+
+msgid "less"
+msgstr ""
+
 msgid "Wall settings"
 msgstr "Ustawienia strony"
 
@@ -4456,8 +4465,195 @@ msgstr "Twój SMS został wysłany."
 msgid "Ignore events like this"
 msgstr "Ignoruj wydarzenia podobne do tego"
 
+#, python-format
+msgid "Show older messages (%(message_count)s)"
+msgstr ""
+
 msgid "Send reply"
 msgstr "Wyślij odpowiedź"
+
+#, python-format
+msgid "Deleted by %(user_link)s"
+msgstr ""
+
+#, python-format
+msgid "Uploaded by %(user_link)s"
+msgstr ""
+
+#, python-format
+msgid "Created by %(user_link)s"
+msgstr ""
+
+#, python-format
+msgid "You have uploaded a new file in the subject %(subject_link)s"
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has uploaded a new file in the subject %(subject_link)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"You have created a new folder %(folder_name)s in the subject "
+"%(subject_link)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"%(user_link)s has created a new folder %(folder_name)s in the subject "
+"%(subject_link)s"
+msgstr ""
+
+#, python-format
+msgid "You have uploaded a new file in the group %(group_link)s"
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has uploaded a new file in the group %(group_link)s"
+msgstr ""
+
+#, python-format
+msgid "You have created a new folder %(folder_name)s in the group %(group_link)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"%(user_link)s has created a new folder %(folder_name)s in the group "
+"%(group_link)s"
+msgstr ""
+
+#, python-format
+msgid "You have edited the subject %(subject_link)s"
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has edited the subject %(subject_link)s"
+msgstr ""
+
+#, python-format
+msgid "You have created the subject %(subject_link)s"
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has created the subject %(subject_link)s"
+msgstr ""
+
+#, python-format
+msgid "You have created the group %(group_link)s"
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has created the group %(group_link)s"
+msgstr ""
+
+#, python-format
+msgid "You have posted a new message %(message_link)s to the group %(group_link)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"%(user_link)s has posted a new message %(message_link)s to the group "
+"%(group_link)s"
+msgstr ""
+
+#, python-format
+msgid "You have sent a message to the group %(group_link)s"
+msgstr ""
+
+#, python-format
+msgid "Teacher %(user_link)s has sent a message to the group %(group_link)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"You have posted a new message %(message_link)s to the group's "
+"%(group_link)s moderation queue"
+msgstr ""
+
+#, python-format
+msgid ""
+"%(user_link)s has posted a new message %(message_link)s to the group's "
+"%(group_link)s moderation queue"
+msgstr ""
+
+#, python-format
+msgid "You have posted a new message %(message_link)s in the forum %(group_link)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"%(user_link)s has posted a new message %(message_link)s in the forum "
+"%(group_link)s"
+msgstr ""
+
+#, python-format
+msgid "You have sent an sms to the group %(group_link)s"
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has sent an sms to the group %(group_link)s"
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has sent you a private message \"%(msg_link)s\""
+msgstr ""
+
+#, python-format
+msgid "You have sent %(user_link)s a private message \"%(msg_link)s\""
+msgstr ""
+
+#, python-format
+msgid ""
+"%(sender_link)s has sent %(recipient_link)s a private message "
+"\"%(msg_link)s\""
+msgstr ""
+
+#, python-format
+msgid "You have joined the group %(group_link)s"
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has joined the group %(group_link)s"
+msgstr ""
+
+#, python-format
+msgid "You have left the group %(group_link)s"
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has left the group %(group_link)s"
+msgstr ""
+
+#, python-format
+msgid "The group %(group_link)s has started watching the subject %(subject_link)s"
+msgstr ""
+
+#, python-format
+msgid "The group %(group_link)s has stopped watching the subject %(subject_link)s"
+msgstr ""
+
+#, python-format
+msgid "You have created a page %(page_link)s in the subject %(subject_link)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"%(user_link)s has created a page %(page_link)s in the subject "
+"%(subject_link)s"
+msgstr ""
+
+#, python-format
+msgid "You have modified a page %(page_link)s in the subject %(subject_link)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"%(user_link)s has modified a page %(page_link)s in the subject "
+"%(subject_link)s"
+msgstr ""
+
+msgid "More"
+msgstr "Więcej"
 
 #, python-format
 msgid "%(user_link)s has uploaded a new file in the subject %(subject_link)s."
@@ -4492,8 +4688,8 @@ msgid "%(user_link)s has created the subject %(subject_link)s."
 msgstr "%(user_link)s stworzył przedmiot %(subject_link)s."
 
 #, python-format
-msgid "%(user_link)s has created the group %(group_link)s."
-msgstr ""
+msgid "%(user_link)s has created the group %(subject_link)s."
+msgstr "%(user_link)s stworzył grupę %(subject_link)s."
 
 #, python-format
 msgid ""
@@ -4531,18 +4727,16 @@ msgid "%(user_link)s has sent an sms to the group %(group_link)s."
 msgstr "%(user_link)s  wysłał wiadomość sms do grupy %(group_link)s."
 
 #, python-format
-msgid "%(user_link)s has sent you a private message \"%(msg_link)s\""
-msgstr ""
-
-#, python-format
-msgid "You have sent %(user_link)s a private message \"%(msg_link)s\""
-msgstr ""
+msgid "%(user_link)s has sent you a private message \"%(msg_link)s\"."
+msgstr "%(user_link)s wysłał(-a) wiadomość prywatną  \"%(msg_link)s\"."
 
 #, python-format
 msgid ""
-"%(sender_link)s has sent %(recipient_link)s a private message "
-"\"%(msg_link)s\""
+"%(user_link)s has sent %(recipient_link)s a private message "
+"\"%(msg_link)s\"."
 msgstr ""
+"%(user_link) s wysłał %(recipient_link)s prywatną wiadomość  "
+"\"%(msg_link)s \"."
 
 #, python-format
 msgid "%(user_link)s joined the group %(group_link)s."
@@ -4579,25 +4773,6 @@ msgid ""
 msgstr ""
 "%(user_link)s zmodyfikował stronę %(page_link)s w przedmiociet "
 "%(subject_link)s."
-
-msgid "More"
-msgstr "Więcej"
-
-#, python-format
-msgid "%(user_link)s has created the group %(subject_link)s."
-msgstr "%(user_link)s stworzył grupę %(subject_link)s."
-
-#, python-format
-msgid "%(user_link)s has sent you a private message \"%(msg_link)s\"."
-msgstr "%(user_link)s wysłał(-a) wiadomość prywatną  \"%(msg_link)s\"."
-
-#, python-format
-msgid ""
-"%(user_link)s has sent %(recipient_link)s a private message "
-"\"%(msg_link)s\"."
-msgstr ""
-"%(user_link) s wysłał %(recipient_link)s prywatną wiadomość  "
-"\"%(msg_link)s \"."
 
 msgid "Region"
 msgstr "Region"
