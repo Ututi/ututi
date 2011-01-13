@@ -122,13 +122,26 @@
 <%def name="file_description(file)">
   <div class="file-description">
     <div class="title">
-      ${h.object_link(file)}
+      %if file.isDeleted():
+        ${file.filename}
+      %else:
+        ${h.object_link(file)}
+      %endif
     </div>
-    %if file.created is not None:
-    <div class="author">
-      ${h.literal(_("Uploaded by %(author_link)s") % \
-        dict(author_link=h.object_link(file.created)))}
-    </div>
+    %if file.isDeleted():
+      %if file.deleted is not None:
+      <div class="author">
+        ${h.literal(_("Deleted by %(user_link)s") % \
+          dict(user_link=h.object_link(file.deleted)))}
+      </div>
+      %endif
+    %else:
+      %if file.created is not None:
+      <div class="author">
+        ${h.literal(_("Uploaded by %(user_link)s") % \
+          dict(user_link=h.object_link(file.created)))}
+      </div>
+      %endif
     %endif
   </div>
 </%def>
@@ -136,13 +149,26 @@
 <%def name="page_description(page)">
   <div class="page-description">
     <div class="title">
-      ${h.object_link(page)}
+      %if page.isDeleted():
+        ${page.title}
+      %else:
+        ${h.object_link(page)}
+      %endif
     </div>
-    %if page.created is not None:
-    <div class="author">
-      ${h.literal(_("Created by %(author_link)s") % \
-        dict(author_link=h.object_link(page.created)))}
-    </div>
+    %if page.isDeleted():
+      %if page.deleted is not None:
+      <div class="author">
+        ${h.literal(_("Deleted by %(user_link)s") % \
+          dict(user_link=h.object_link(page.deleted)))}
+      </div>
+      %endif
+    %else:
+      %if page.created is not None:
+      <div class="author">
+        ${h.literal(_("Created by %(user_link)s") % \
+          dict(user_link=h.object_link(page.created)))}
+      </div>
+      %endif
     %endif
   </div>
 </%def>
