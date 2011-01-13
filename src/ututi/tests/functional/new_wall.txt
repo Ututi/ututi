@@ -6,6 +6,9 @@ Functional test for the new wall
 Login and visit the wall. Currently there's no link, so we use direct url:
 
     >>> user3 = Browser.logIn('user3@ututi.lt', 'password')
+    >>> user3.url
+    'http://localhost/home'
+
     >>> user3.open('/profile/wall')
 
 The page title should say "What's new?":
@@ -24,10 +27,10 @@ Right next to the title there's a link to wall settings:
 The wall currently lists several simple events:
 
     >>> user3.printQuery("//div[contains(@class, 'wall-entry')]//text()")
-    Adminas Adminovix has created the subject Matematinė analizė .  ...
-    Third user joined the group Moderatoriai .  ...
-    Adminas Adminovix joined the group Moderatoriai .  ...
-    Adminas Adminovix has created the group Moderatoriai .  ...
+    Adminas Adminovix has created the subject Matematinė analizė ... ago
+    You have joined the group Moderatoriai ... ago
+    Adminas Adminovix has joined the group Moderatoriai ... ago
+    Adminas Adminovix has created the group Moderatoriai ... ago
 
 Let's use wall's action panel to send private message to the user user:
 
@@ -36,10 +39,15 @@ Let's use wall's action panel to send private message to the user user:
     >>> form.getControl(name='subject').value = 'Private message title'
     >>> form.getControl(name='message').value = 'Private message'
     >>> form.getControl('Send').click()
+    >>> user3.url
+    'http://localhost/profile/wall'
 
 Now the user user logs in and finds the private message in his wall:
 
     >>> user = Browser.logIn('user@ututi.lt', 'password')
+    >>> user.url
+    'http://localhost/home'
+
     >>> user.open('/profile/wall')
     >>> user.printQuery("//div[contains(@class, 'wall-entry')]//text()")
     Third user has sent you a private message " Private message title "  ...
@@ -88,8 +96,8 @@ The message is sent via email:
     >>> len(mail_queue)
     1
 
-    >>> print mail_queue.pop().payload()
-    Mailinglist message
+    >>> mail_queue.pop().payload()
+    'Mailinglist message'
 
 We can reply these messages the same way as private messages:
 
@@ -99,9 +107,13 @@ We can reply these messages the same way as private messages:
     >>> user3.url
     'http://localhost/profile/wall'
 
+If admin reloads his wall he will see this reply threaded to his original
+message. Note: admin.reload() here would cause admin repost his original message
+-- a bug in testbrowser?
+
     >>> admin.open('/profile/wall')
     >>> admin.printQuery("//div[contains(@class, 'wall-entry')]//text()")
-    Adminas Adminovix has posted a new message Mailinglist message title to the group Moderatoriai ...
+    You have posted a new message Mailinglist message title to the group Moderatoriai ...
     Mailinglist message ...
     Third user : Mailinglist message reply
     ...
@@ -112,14 +124,12 @@ We can reply these messages the same way as private messages:
 See how replying to an older thread lifts it in the wall. To test that,
 we will ask third user to reply to the private message:
 
-    >>> user3.open('/profile/wall')
     >>> form = user3.getForm(name='reply-form', index=1)
     >>> form.getControl(name='message').value = 'Private message reply 2'
     >>> form.getControl("Send reply").click()
     >>> user3.url
     'http://localhost/profile/wall'
 
-    >>> user3.open('/profile/wall')
     >>> user3.printQuery("//div[contains(@class, 'wall-entry')]//text()")
     You have sent Alternative user a private message " Private message title " ...
     Private message ...
@@ -137,4 +147,24 @@ To test forum post threading we will use the group will forum enabled:
     >>> form.getControl(name='message').value = 'Forum post'
     >>> form.getControl('Send').click()
 
-XXX need to fix this and continue testing forum post threading:
+    >>> admin.url
+    'http://localhost/profile/wall'
+
+    >>> admin.printQuery("//div[contains(@class, 'wall-entry')]//text()")
+    You have posted a new message Forum post title in the forum Testing group ...
+    Forum post ...
+
+Admin can immediately reply to this forum thread from his wall:
+
+    >>> form = admin.getForm(name='reply-form', index=0)
+    >>> form.getControl(name='message').value = 'Forum post reply'
+    >>> form.getControl("Send reply").click()
+    >>> admin.url
+    'http://localhost/profile/wall'
+
+    >>> admin.printQuery("//div[contains(@class, 'wall-entry')]//text()")
+    You have posted a new message Forum post title in the forum Testing group ...
+    Forum post ...
+    Adminas Adminovix : Forum post reply ...
+
+    >>> admin.serve()
