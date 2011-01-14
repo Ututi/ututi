@@ -566,7 +566,12 @@
 
         /* Hide event time in some event types:
          */
-        .wall .wall-entry.type_mailinglist_post_created .event-heading .event-time {
+        .wall .wall-entry.type_mailinglist_post_created .event-heading .event-time,
+        .wall .wall-entry.type_forum_post_created .event-heading .event-time,
+        .wall .wall-entry.type_private_message_sent .event-heading .event-time,
+        .wall .wall-entry.type_page_created .event-heading .event-time,
+        .wall .wall-entry.type_page_modified .event-heading .event-time,
+        .wall .wall-entry.type_file_uploaded .event-heading .event-time {
             display: none;
         }
 
