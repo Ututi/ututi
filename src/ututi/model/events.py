@@ -1,10 +1,11 @@
 import cgi
 import logging
 
+from sqlalchemy import orm, Column
 from sqlalchemy.schema import Table
 from sqlalchemy.orm import backref
 from sqlalchemy.orm import relation
-from sqlalchemy import orm
+from sqlalchemy.types import Unicode
 from pylons import url
 from pylons.templating import render_mako_def
 from pylons.i18n import ungettext, _
@@ -70,6 +71,11 @@ class MessagingEventMixin():
         what parameter is being posted.
         """
         raise NotImplementedError()
+
+
+class EventComment(ContentItem):
+    """Event comment ORM class."""
+    pass
 
 
 class PageCreatedEvent(Event):
@@ -516,13 +522,21 @@ class GroupStoppedWatchingSubjects(Event):
 
 
 def setup_orm(engine):
-    from ututi.model import files_table, pages_table, subjects_table
+    from ututi.model import content_items_table, files_table, pages_table, subjects_table
     from ututi.model import forum_posts_table, outgoing_group_sms_messages_table, private_messages_table, users_table
     from ututi.model.mailing import group_mailing_list_messages_table
     global events_table
     events_table = Table(
         "events",
         meta.metadata,
+        autoload=True,
+        autoload_with=engine)
+
+    global event_comments_table
+    event_comments_table = Table(
+        "event_comments",
+        meta.metadata,
+        Column('content', Unicode(assert_unicode=True)),
         autoload=True,
         autoload_with=engine)
 
@@ -537,6 +551,18 @@ def setup_orm(engine):
                                                   order_by=events_table.c.id.asc(),
                                                   backref=backref('parent',
                                                                   remote_side=events_table.c.id))})
+
+    orm.mapper(EventComment, event_comments_table,
+               inherits=ContentItem,
+               inherit_condition=event_comments_table.c.id==ContentItem.id,
+               polymorphic_identity='event_comment',
+               polymorphic_on=content_items_table.c.content_type,
+               properties = {
+                 'event': relation(Event,
+                      primaryjoin=event_comments_table.c.event_id==events_table.c.id,
+                      backref=backref("comments",
+                                      order_by=content_items_table.c.created_on.asc()))
+               })
 
     orm.mapper(PageCreatedEvent,
                inherits=event_mapper,
