@@ -502,6 +502,7 @@
 
                 .wall .wall-entry .actions a {
                     color: #668000;
+                    font-size: 11px;
                 }
 
                 .wall .wall-entry a.truncate_more_link {
