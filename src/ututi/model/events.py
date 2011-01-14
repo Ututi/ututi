@@ -5,6 +5,7 @@ from sqlalchemy import orm, Column
 from sqlalchemy.schema import Table
 from sqlalchemy.orm import backref
 from sqlalchemy.orm import relation
+from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.types import Unicode
 from pylons import url
 from pylons.templating import render_mako_def
@@ -20,6 +21,13 @@ events_table = None
 
 class Event(object):
     """Generic event class."""
+
+    @classmethod
+    def get(cls, id):
+        try:
+            return meta.Session.query(cls).filter_by(id=id).one()
+        except NoResultFound:
+            return None
 
     def when(self):
         """This is deprecated. Apply helper method directly instead."""
