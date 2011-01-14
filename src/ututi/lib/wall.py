@@ -271,16 +271,16 @@ class WallMixin(object):
         user_is_admin_of_groups = [membership.group_id
                                    for membership in c.user.memberships
                                    if membership.membership_type == 'administrator']
-        evt_child = aliased(Event)
+        e = aliased(Event)
 
         subjects = c.user.all_watched_subjects
         if c.user.is_teacher:
             subjects += c.user.taught_subjects
 
         #query for ordering events by their last subevent
-        child_query = select([func.max(evt_child.created)], evt_child.parent_id==events_table.c.id).as_scalar()
+        child_query = select([e.created], e.parent_id==Event.id, order_by=e.created.desc(), limit=1).label('last')
 
-        return meta.Session.query(Event)\
+        q = meta.Session.query(Event)\
             .filter(or_(Event.object_id.in_([s.id for s in subjects]),
                         Event.object_id.in_([m.group.id for m in c.user.memberships]),
                         Event.recipient_id == c.user.id,
@@ -291,8 +291,9 @@ class WallMixin(object):
             .filter(~Event.event_type.in_(c.user.ignored_events_list))\
             .filter(Event.parent == None)\
             .order_by(func.coalesce(child_query, Event.created).desc(),
-                      Event.event_type)\
-            .limit(20).all()
+                      Event.event_type)
+
+        return q.limit(20).all()
 
     @ActionProtector("user")
     @jsonify

@@ -56,15 +56,15 @@ The first user can see this reply on his wall, and reply again:
 
    >>> browser.getLink("News wall").click()
 
-TODO: Going to the new style wall for now.
-   >>> browser2.open('http://localhost/profile/wall')
-
    >>> browser2.printQuery('//div[contains(@class, "event-heading")]//text()')
    Alternative user
    has sent you a private message "
    Sending you a message from my wall!
    "
    ...
+
+TODO: Going to the new style wall for now.
+   >>> browser.open('http://localhost/profile/wall')
 
    >>> reply_form = browser.getForm(name="reply-form", index=0)
    >>> reply_form.getControl(name="message").value = "Yep, wall is cool."
@@ -92,38 +92,35 @@ TODO: Going to the new style wall for now.
 
 TODO: Going to the new style wall for now.
    >>> browser2.open('http://localhost/profile/wall')
-   
-   >>> browser2.printQuery('id("wall")//div[@class="description"]//text()')
+   >>> browser2.printQuery("//div[contains(@class, 'wall-entry')]//text()")
    Third user
    has posted a new message
    Sending my group a message from my wall!
    to the group
    Moderatoriai
-   .
-   Adminas Adminovix
-   has created the group
+   ...
+   Booyah
+   ...
+   You have created the group
    Testing group
-   .
-   Adminas Adminovix
-   has created the group
+   ...
+   You have created the group
    Moderatoriai
-   .
+   ...
    Third user
-   joined the group
+   has joined the group
    Moderatoriai
-   .
-   Adminas Adminovix
-   joined the group
+   ...
+   You have joined the group
    Testing group
-   .
-   Adminas Adminovix
-   joined the group
+   ...
+   You have joined the group
    Moderatoriai
-   .
+   ...
    Second user
-   joined the group
+   has joined the group
    Testing group
-   .
+   ...
 
    >>> from ututi.lib.mailer import mail_queue
    >>> mail_queue.pop().payload()
