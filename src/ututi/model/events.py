@@ -49,7 +49,7 @@ class MessagingEventMixin():
     """This mixin defines common interface for messaging related events 
     that are threaded and have messaging actions in the wall."""
 
-    def message_list():
+    def message_list(self):
         """
         Returns a simple dict list with post information:
 
@@ -62,7 +62,7 @@ class MessagingEventMixin():
         """
         raise NotImplementedError()
 
-    def reply_action():
+    def reply_action(self):
         """
         Returns reply action url.
 
