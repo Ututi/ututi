@@ -98,12 +98,22 @@ class MessagingEventMixin():
         raise NotImplementedError()
 
 
-class EventComment(ContentItem):
-    """Event comment ORM class."""
-    pass
+class Commentable(MessagingEventMixin):
+    """Standard implementation of MessagingEventMixin that lists event
+    comments and allows comment actions."""
+
+    def message_list(self):
+        """MessagingEventMixin implementation."""
+        return [dict(author=c.created,
+                     created=c.created_on,
+                     message=c.content) for c in self.comments]
+
+    def reply_action(self):
+        """MessagingEventMixin implementation."""
+        return url.current(action='eventcomment_reply', event_id=self.id)
 
 
-class PageCreatedEvent(Event):
+class PageCreatedEvent(Event, Commentable):
     """Event fired when a page is created.
 
     Has an attribute `page' pointing to the page that was added.
@@ -133,7 +143,7 @@ class PageCreatedEvent(Event):
         return render_mako_def('/sections/wall_entries.mako', 'page_created', event=self)
 
 
-class PageModifiedEvent(Event):
+class PageModifiedEvent(Event, Commentable):
     """Event fired when a page is modified.
 
     Has an attribute `page' pointing to the page that was modified.
@@ -176,7 +186,7 @@ class PageModifiedEvent(Event):
         return render_mako_def('/sections/wall_entries.mako', 'page_modified', event=self)
 
 
-class FileUploadedEvent(Event):
+class FileUploadedEvent(Event, Commentable):
     """Event fired when a new file is uploaded.
 
     Has an attribute `file' pointing to the file that was uploaded.
@@ -326,7 +336,7 @@ class TeacherMessageEvent(Event):
         return render_mako_def('/sections/wall_entries.mako', 'teachermessage_sent', event=self)
 
 
-class MailinglistPostCreatedEvent(PostCreatedEventBase):
+class MailinglistPostCreatedEvent(PostCreatedEventBase, MessagingEventMixin):
     """Event fired when someone posts a message on the group mailing list.
 
     Has an attribute `message' pointing to the message added.
@@ -394,7 +404,7 @@ class ModeratedPostCreated(PostCreatedEventBase):
         return render_mako_def('/sections/wall_entries.mako', 'moderated_post_created', event=self)
 
 
-class ForumPostCreatedEvent(Event):
+class ForumPostCreatedEvent(Event, MessagingEventMixin):
     """Event fired when someone posts a message on group forums.
 
     Has an attribute `post' pointing to the message added.
