@@ -47,10 +47,27 @@ class Event(object):
         be merged after new wall is done."""
         raise NotImplementedError()
 
+    def post_comment(self, comment):
+        # XXX: it should be checked if this user can post
+        # comment to this event. The following check is not
+        # very nice too.
+        if isinstance(self, Commentable):
+            # TODO: why doesn't the following work?
+            # self.comments.append(comment)
+            comment.event = self
+
     @classmethod
     def event_types(cls):
         types = meta.Session.query(events_table.c.event_type).distinct().all()
         return [evt[0] for evt in types]
+
+
+class EventComment(ContentItem):
+    """Event comment ORM class."""
+
+    def __init__(self, author, content):
+        self.created = author
+        self.content = content
 
 
 class MessagingEventMixin():
@@ -568,7 +585,7 @@ def setup_orm(engine):
                properties = {
                  'event': relation(Event,
                       primaryjoin=event_comments_table.c.event_id==events_table.c.id,
-                      backref=backref("comments",
+                      backref=backref('comments',
                                       order_by=content_items_table.c.created_on.asc()))
                })
 
