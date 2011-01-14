@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2011-01-13 18:50+0200\n"
+"POT-Creation-Date: 2011-01-14 17:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4063,16 +4063,8 @@ msgstr ""
 msgid "Send reply"
 msgstr ""
 
-#, python-format
-msgid "Deleted by %(user_link)s"
-msgstr ""
-
-#, python-format
-msgid "Uploaded by %(user_link)s"
-msgstr ""
-
-#, python-format
-msgid "Created by %(user_link)s"
+#. TRANSLATORS: translate this as a verb 'Comment'
+msgid "comment_on_wall"
 msgstr ""
 
 #, python-format
