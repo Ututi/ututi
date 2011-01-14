@@ -2376,6 +2376,9 @@ Department.initialize()
 class Book(ContentItem):
     """Book that can be shared by user"""
 
+    def url(self, controller='books', action='show', **kwargs):
+        return url(controller=controller, action=action, id=self.id, **kwargs)
+
     @apply
     def department():
         def setDepartment(self, value):
