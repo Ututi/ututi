@@ -250,6 +250,7 @@ def make_map(config):
     map.connect('/profile/reply/mailinglist/{id}/{thread_id}', controller='profile', action='mailinglist_reply')
     map.connect('/profile/reply/forum/{id}/{category_id}/{thread_id}', controller='profile', action='forum_reply')
     map.connect('/profile/reply/privatemessage/{id}', controller='profile', action='privatemessage_reply')
+    map.connect('/profile/reply/comment/{event_id}', controller='profile', action='eventcomment_reply')
 
     # other user views
     map.connect('/profile/confirm_emails', controller='profile', action='confirm_emails')

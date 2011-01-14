@@ -25,7 +25,7 @@ from ututi.lib.forums import make_forum_post
 from ututi.lib import helpers as h
 from ututi.model.mailing import GroupMailingListMessage
 from ututi.model.events import events_table
-from ututi.model.events import Event
+from ututi.model.events import Event, EventComment
 from ututi.model import ForumCategory
 from ututi.model import ForumPost, PrivateMessage, Page, User, Subject, meta, GroupMember, Group
 
@@ -422,5 +422,23 @@ class WallMixin(object):
                                    author=msg.sender,
                                    message=msg.content,
                                    created=msg.created_on)
+        else:
+            redirect(self._redirect_url())
+
+    @ActionProtector("user")
+    @validate(schema=WallReplyValidator())
+    def eventcomment_reply(self, event_id):
+        event = Event.get(event_id)
+        if event is None:
+            abort(404)
+        comment = EventComment(c.user, self.form_result['message'])
+        event.post_comment(comment)
+        meta.Session.commit()
+        if request.params.has_key('js'):
+            return render_mako_def('/sections/wall_entries.mako',
+                                   'thread_reply',
+                                   author=comment.created,
+                                   message=comment.content,
+                                   created=comment.created_on)
         else:
             redirect(self._redirect_url())
