@@ -25,60 +25,60 @@ And get to the group welcome page:
 
 In which we see a box suggesting us to invite more members:
 
-    >>> browser.printQuery("id('invite_members_block')")
-    <div class="portlet portletSmall portletInviteMembers" id="invite_members_block">
-      <div class="ctl"></div>
-      <div class="ctr"></div>
-      <div class="cbl"></div>
-      <div class="cbr"></div>
-      <div class="floatleft usergrupeleft">
-        <h2 class="portletTitle bold">Invite group members!</h2>
+    >>> browser.printCssQuery("#invite_members_block", include_attributes=[''])
+    <div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div>
+        <h2>Invite group members!</h2>
     <BLANKLINE>
     It's easy - you just have to know their email addresses! You can
     use the group mailing list together then!
     <BLANKLINE>
         </div>
-      <div class="floatright">
-        <form action="/group/test/members" class="button-to" method="post">
+      <div>
+        <form>
           <fieldset>
-            <button class="btnMedium" type="submit" value="Invite friends">
+            <button>
               <span>Invite friends</span>
             </button>
           </fieldset>
         </form>
       </div>
-      <br class="clear-left" />
+      <br />
     </div>
 
 Also we see a box that suggest us to watch some subjects:
 
-    >>> browser.printQuery("id('watch_subjects_block')")
-    <div class="portlet portletSmall portletNewDalykas" id="watch_subjects_block">
-      <div class="ctl"></div>
-      <div class="ctr"></div>
-      <div class="cbl"></div>
-      <div class="cbr"></div>
-      <div class="floatleft usergrupeleft">
-        <h2 class="portletTitle bold">Watch subjects you are studying!</h2>
-        <ul id="prosList">
+    >>> browser.printCssQuery("#watch_subjects_block", include_attributes=[''])
+    <div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div>
+        <h2>Watch subjects you are studying!</h2>
+        <ul>
           <li>Find materials shared by others</li>
           <li>Get notifications about changes</li>
         </ul>
       </div>
-      <div class="floatright">
-        <form action="/group/test/subjects" class="button-to" method="post">
+      <div>
+        <form>
           <fieldset>
-            <button class="btnMedium" type="submit" value="Watch subjects">
+            <button>
               <span>Watch subjects</span>
             </button>
           </fieldset>
         </form>
-        <br class="clear-left" />
+        <br />
         <span>
-          <a href="/group/test/home?do_not_watch=True" class="cancel_link">no, thank you</a>
+          <a>no, thank you</a>
         </span>
       </div>
-      <br class="clear-left" />
+      <br />
     </div>
 
 If we invite a member into the system, the member box should
@@ -93,10 +93,10 @@ disappear:
 When we go back to what's new, we only see the watch more subjects
 box:
 
-    >>> browser.printQuery("id('invite_members_block')")
+    >>> browser.printCssQuery("#invite_members_block", include_attributes=[''])
 
-    >>> browser.printQuery("id('watch_subjects_block')")
-    <div class="portlet portletSmall portletNewDalykas" id="watch_subjects_block">
+    >>> browser.printCssQuery("#watch_subjects_block", include_attributes=[''])
+    <div>
     ...
     </div>
 
@@ -115,7 +115,7 @@ Let's watch some subjects:
 
 And the subject watching box is gone:
 
-    >>> browser.printQuery("id('watch_subjects_block')")
+    >>> browser.printCssQuery("#watch_subjects_block", include_attributes=[''])
 
 If we stop watching the subject though, the box reappears:
 
@@ -123,15 +123,15 @@ If we stop watching the subject though, the box reappears:
     >>> browser.getLink(url='unwatch_subject').click()
     >>> browser.getLink("News wall", url='group').click()
 
-    >>> browser.printQuery("id('watch_subjects_block')")
-    <div class="portlet portletSmall portletNewDalykas" id="watch_subjects_block">
+    >>> browser.printCssQuery("#watch_subjects_block", include_attributes=[''])
+    <div>
     ...
     </div>
 
 But we can just cancel it by clicking the 'no, thanks' link:
 
     >>> browser.getLink('no, thank you').click()
-    >>> browser.printQuery("id('watch_subjects_block')")
+    >>> browser.printCssQuery("#watch_subjects_block", include_attributes=[''])
 
 And the box is no more.
 

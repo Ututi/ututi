@@ -98,37 +98,38 @@ Let's go back:
 
 We should see the page on the list of pages, even though it has been deleted:
 
-    >>> browser.printQuery("id('subject_pages')")
-    <div class="portlet portletSmall portletGroupFiles" id="subject_pages">
-      <div class="ctl"></div>
-      <div class="ctr"></div>
-      <div class="cbl"></div>
-      <div class="cbr"></div>
-      <div class="GroupFiles GroupFilesWiki">
-        <h2 class="portletTitle bold">Subject's Wiki Pages (0)</h2>
-        <span class="group-but">
-          <form action="/subject/vu/mat_analize/pages/add" class="button-to" method="get">
+    >>> browser.printCssQuery("#subject_pages", include_attributes=[''])
+    <div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div>
+        <h2>Subject's Wiki Pages (0)</h2>
+        <span>
+          <form>
             <fieldset>
-              <button class="btn" type="submit" value="Create a wiki document">
+              <button>
                 <span>Create a wiki document</span>
               </button>
             </fieldset>
           </form>
         </span>
       </div>
-      <div class="wiki-tekstas-last">
+      <div>
         <p>
-          <span class="orange bold">
-            <a href="/subject/vu/mat_analize/page/4" title="How to be awesome!">How to be awesome!</a>
+          <span>
+            <a>How to be awesome!</a>
           </span>
-          <span class="grey verysmall">...</span>
-          <span class="author verysmall">
-            <a href="/user/1">Adminas Adminovix</a>
+          <span>...</span>
+          <span>
+            <a>Adminas Adminovix</a>
           </span>
         </p>
         <p>Yeah! Being Awesome is very easy! $$\sum_{n=1}^\infty a_n$$</p>
       </div>
     </div>
+
 
 Now, visit the page and undelete:
 
@@ -143,39 +144,41 @@ We could delete it again if we wanted to:
 Now the page shows up in the index again without the "deleted" marker:
 
     >>> browser.getLink('Go back to Matematin\xc4\x97 analiz\xc4\x97').click()
-    >>> browser.printQuery("id('subject_pages')")
-    <div class="portlet portletSmall portletGroupFiles" id="subject_pages">
-      <div class="ctl"></div>
-      <div class="ctr"></div>
-      <div class="cbl"></div>
-      <div class="cbr"></div>
-      <div class="GroupFiles GroupFilesWiki">
-        <h2 class="portletTitle bold">Subject's Wiki Pages (1)</h2>
-        <span class="group-but">
-          <form action="/subject/vu/mat_analize/pages/add" class="button-to" method="get">
+    >>> browser.printCssQuery("#subject_pages", include_attributes=[''])
+    <div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div>
+        <h2>Subject's Wiki Pages (1)</h2>
+        <span>
+          <form>
             <fieldset>
-              <button class="btn" type="submit" value="Create a wiki document">
+              <button>
                 <span>Create a wiki document</span>
               </button>
             </fieldset>
           </form>
         </span>
       </div>
-      <div class="wiki-tekstas-last">
+      <div>
         <p>
-          <span class="orange bold">
-            <a href="/subject/vu/mat_analize/page/4" title="How to be awesome!">How to be awesome!</a>
+          <span>
+            <a>How to be awesome!</a>
           </span>
-          <span class="grey verysmall">...</span>
-          <span class="author verysmall">
-            <a href="/user/1">Adminas Adminovix</a>
+          <span>2011 Jan 14, 17:45</span>
+          <span>
+            <a>Adminas Adminovix</a>
           </span>
         </p>
         <p>Yeah! Being Awesome is very easy! $$\sum_{n=1}^\infty a_n$$</p>
       </div>
     </div>
 
+
 Confirming bug fix: requesting page with a non-integer as its id was resulting in a crash.
+
     >>> browser.open('http://localhost/subject/vu/mat_analize/page/abrakadabra')
     Traceback (most recent call last):
     ...
