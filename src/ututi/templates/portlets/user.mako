@@ -71,7 +71,7 @@
     %if full:
     <div class="footer">
       <div class="new-group">
-        ${h.button_to(_('Create group'), url(controller='group', action='create_academic'))}
+        ${h.button_to(_('Create group'), url(controller='group', action='create_academic'), method='GET')}
       </div>
       ${tooltip(_('Create your group, invite your classmates and use the mailing list, upload private group files'))}
 
