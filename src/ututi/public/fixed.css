@@ -2,6 +2,7 @@
  */
 
 .rounded-block {
+    background-color: #f6f6f6;
     background-repeat: no-repeat;
     border-left: 1px solid #ded8d8;
     border-right: 1px solid #ded8d8;
@@ -48,7 +49,7 @@
     }
 
     .rounded-block .cbl {
-        background-image: url('img/portlets_bg_white.png');
+        background-image: url('img/portlets_bg.png');
         background-position: left -5px;
         bottom: -5px;
         left: -1px;
@@ -56,7 +57,7 @@
     }
 
     .rounded-block .cbr {
-        background-image: url('img/portlets_bg_white.png');
+        background-image: url('img/portlets_bg.png');
         background-position: right -5px;
         bottom: -5px;
         right: -1px;
@@ -66,7 +67,23 @@
 /* STANDARD ITEM LIST
  */
 
+.light-table {}
+    .light-table.rounded-block .cbl,
+    .light-table.rounded-block .cbr {
+        background-image: url('img/portlets_bg_white.png');
+    }
+
+
+    .light-table table.content {
+        background: white;
+    }
+
 .item-list { }
+
+    .item-list.rounded-block .cbl,
+    .item-list.rounded-block .cbr {
+        background-image: url('img/portlets_bg_white.png');
+    }
 
     .item-list .large-header {
         height:40px;
@@ -91,6 +108,7 @@
 
     .item-list .row,
     .item-list .footer {
+        background-color: white;
     }
 
     .item-list .row {

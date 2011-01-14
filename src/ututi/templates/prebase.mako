@@ -428,7 +428,7 @@ ${self.anonymous_menu()}
 </html>
 
 <%def name="rounded_block(class_='', id=None, style=None)">
-<div class="portlet portletSmall ${class_}"
+<div class="rounded-block ${class_}"
      %if id is not None:
        id="${id}"
      %endif

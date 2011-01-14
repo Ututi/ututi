@@ -25,7 +25,7 @@
     </div>
     <div class="clear"></div>
   </div>
-  <table style="width: 100%">
+  <table style="width: 100%" class="content">
     %if items:
       %if hasattr(caller, 'header'):
       <tr>
