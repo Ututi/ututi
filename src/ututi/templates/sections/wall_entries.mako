@@ -43,41 +43,49 @@
       <div class="closing">
         <span class="event-time">${h.when(created)}</span>
         <span class="actions">
-          <a href="#reply" class="action-block-link">Reply</a>
+          <a href="#reply" class="action-block-link">${_('Reply')}</a>
         </span>
       </div>
     </div>
   </div>
 </%def>
 
-<%def name="event_conversation(event)">
+<%def name="event_conversation(event, head_message=True)">
   <%doc>
     Renders message thread and reply action box.
     Event must implement MessagingEventMixin.
+
+    If head_message is True, then the first (original) message
+    is displayed differently, with bigger logo and etc.
   </%doc>
   <%
     messages = event.message_list()
-    original = messages.pop(0)
+    if head_message:
+      original = messages.pop(0)
   %>
   <div class="thread">
+    %if head_message:
     <div class="logo">
       <img src="${original['author'].url(action='logo', width=50)}" />
     </div>
+    %endif
     <div class="content">
-      <span class="truncated">${h.nl2br(original['message'])}</span>
-      %if 'attachments' in original:
-      <ul class="file-list">
-        %for file in original['attachments']:
-        <li><a href="${file.url()}">${file.title}</a></li>
-        %endfor
-      </ul>
+      %if head_message:
+        <span class="truncated">${h.nl2br(original['message'])}</span>
+        %if 'attachments' in original:
+        <ul class="file-list">
+          %for file in original['attachments']:
+          <li><a href="${file.url()}">${file.title}</a></li>
+          %endfor
+        </ul>
+        %endif
+        <div class="closing">
+          <span class="event-time">${h.when(original['created'])}</span>
+          <span class="actions">
+            <a href="#reply" class="action-block-link">${_('Reply')}</a>
+          </span>
+        </div>
       %endif
-      <div class="closing">
-        <span class="event-time">${h.when(original['created'])}</span>
-        <span class="actions">
-          <a href="#reply" class="action-block-link">Reply</a>
-        </span>
-      </div>
       <div class="replies">
         %if len(messages) > 3:
           <%
@@ -128,21 +136,13 @@
         ${h.object_link(file)}
       %endif
     </div>
-    %if file.isDeleted():
-      %if file.deleted is not None:
-      <div class="author">
-        ${h.literal(_("Deleted by %(user_link)s") % \
-          dict(user_link=h.object_link(file.deleted)))}
-      </div>
-      %endif
-    %else:
-      %if file.created is not None:
-      <div class="author">
-        ${h.literal(_("Uploaded by %(user_link)s") % \
-          dict(user_link=h.object_link(file.created)))}
-      </div>
-      %endif
-    %endif
+    <span class="event-time">${h.when(file.created_on)}</span>
+    <span class="actions">
+      <a href="#reply" class="action-block-link">
+        ## TRANSLATORS: translate this as a verb 'Comment'
+        ${_('comment_on_wall')}
+      </a>
+    </span>
   </div>
 </%def>
 
@@ -155,21 +155,13 @@
         ${h.object_link(page)}
       %endif
     </div>
-    %if page.isDeleted():
-      %if page.deleted is not None:
-      <div class="author">
-        ${h.literal(_("Deleted by %(user_link)s") % \
-          dict(user_link=h.object_link(page.deleted)))}
-      </div>
-      %endif
-    %else:
-      %if page.created is not None:
-      <div class="author">
-        ${h.literal(_("Created by %(user_link)s") % \
-          dict(user_link=h.object_link(page.created)))}
-      </div>
-      %endif
-    %endif
+    <span class="event-time">${h.when(page.created_on)}</span>
+    <span class="actions">
+      <a href="#reply" class="action-block-link">
+        ## TRANSLATORS: translate this as a verb 'Comment'
+        ${_('comment_on_wall')}
+      </a>
+    </span>
   </div>
 </%def>
 
@@ -187,6 +179,7 @@
       %endif
     </%def>
     <%self:file_description file="${event.file}"/>
+    <%self:event_conversation event="${event}" head_message="${False}" />
   </%self:wall_entry>
 </%def>
 
@@ -222,6 +215,7 @@
       %endif
     </%def>
     <%self:file_description file="${event.file}"/>
+    <%self:event_conversation event="${event}" head_message="${False}" />
   </%self:wall_entry>
 </%def>
 
@@ -301,7 +295,7 @@
                 message_link=h.object_link(event.message)) | n}
       %else:
         ${_("%(user_link)s has posted a new message %(message_link)s to the group %(group_link)s") % \
-           dict(user_link=h.object_link(event.message.author),
+           dict(user_link=h.object_link(event.message.author_or_anonymous),
                 group_link=h.object_link(event.context),
                 message_link=h.object_link(event.message)) | n}
       %endif
@@ -426,7 +420,7 @@
         <div class="closing">
           <span class="event-time">${h.when(event.sms_created())}</span>
           <span class="actions">
-            <a href="#moderate" class="action-block-link">Reply</a>
+            <a href="#moderate" class="action-block-link">${_('Reply')}</a>
           </span>
         </div>
         <div class="action-block">
@@ -541,6 +535,7 @@
       %endif
     </%def>
     <%self:page_description page="${event.page}"/>
+    <%self:event_conversation event="${event}" head_message="${False}" />
   </%self:wall_entry>
 </%def>
 
@@ -560,5 +555,6 @@
       %endif
     </%def>
     <%self:page_description page="${event.page}"/>
+    <%self:event_conversation event="${event}" head_message="${False}" />
   </%self:wall_entry>
 </%def>
