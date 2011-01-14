@@ -802,6 +802,13 @@ CREATE FUNCTION set_ci_modtime(content_item_id int8) RETURNS void AS $$
     END
 $$ LANGUAGE plpgsql;;
 
+/* event comments */
+CREATE TABLE event_comments (id int8 references content_items(id),
+       event_id int8 not null references events(id) on delete cascade,
+       content text default '',
+       primary key (id));;
+
+CREATE INDEX event_comments_event_id_idx ON event_comments (event_id);;
 
 /* page events */
 CREATE FUNCTION page_modified_trigger() RETURNS trigger AS $$
