@@ -167,7 +167,7 @@ Now the page shows up in the index again without the "deleted" marker:
           <span>
             <a>How to be awesome!</a>
           </span>
-          <span>2011 Jan 14, 17:45</span>
+          <span>...</span>
           <span>
             <a>Adminas Adminovix</a>
           </span>
