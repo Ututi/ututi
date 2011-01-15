@@ -613,6 +613,11 @@ class TeacherProfileController(ProfileControllerBase):
             return bcs[selected]
 
     @ActionProtector("user")
+    def register_welcome(self):
+        #redirecting: the teacher has already been verified, hence passed registration
+        redirect(url(controller='profile', action='home'))
+
+    @ActionProtector("user")
     def home(self):
         c.breadcrumbs.append(self._actions('home'))
         c.action = 'home'
