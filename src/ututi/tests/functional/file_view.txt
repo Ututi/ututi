@@ -1,0 +1,39 @@
+Some tests for the file area
+============================
+
+    >>> res = app.post("/login",
+    ...                params={'login': 'admin@ututi.lt', 'password': 'asdasd'})
+
+Let's upload 4 files to check if folder file hiding works correctly:
+    >>> res = app.post("/subject/vu/mat_analize/upload_file",
+    ...                params={'folder': 'a'},
+    ...                upload_files=[("attachment", "text;for you.txt", "Test")])
+    >>> res = app.post("/subject/vu/mat_analize/upload_file",
+    ...                params={'folder': 'a'},
+    ...                upload_files=[("attachment", "text;for you.txt", "Test")])
+    >>> res = app.post("/subject/vu/mat_analize/upload_file",
+    ...                params={'folder': 'a'},
+    ...                upload_files=[("attachment", "text;for you.txt", "Test")])
+    >>> res = app.post("/subject/vu/mat_analize/upload_file",
+    ...                params={'folder': 'a'},
+    ...                upload_files=[("attachment", "text;for you.txt", "Test")])
+
+
+Let's check it - the fourth file should be prehidden ('show' class):
+
+    >>> browser = Browser.logIn()
+    >>> browser.open('http://localhost/subject/vu/mat_analize')
+    >>> browser.printCssQuery('li.file')
+    <li class="file">
+    ...
+    </li>
+    <li class="file">
+    ...
+    </li>
+    <li class="file">
+    ...
+    </li>
+    <li class="file show">
+    ...
+    </li>
+

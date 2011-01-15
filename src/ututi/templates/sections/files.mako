@@ -489,10 +489,10 @@ $(document).ready(function(){
               <li style="display: none;" class="message">${_("There are no files here, this folder is empty!")}</li>
               % for n, file in enumerate(files):
                 <%
-                    if n > 2 and file_count > 4:
+                    if n > 2 and file_count >= 4:
                         hidden = True
                 %>
-                %if n == 3 and file_count > 4:
+                %if n == 3 and file_count >= 4:
                     <li class="click hide files_more">
                       <span class="green verysmall">
                       ${ungettext("Show the other %(count)s file", "Show the other %(count)s files", file_count - n ) % dict(count = file_count - n)}
@@ -536,7 +536,7 @@ $(document).ready(function(){
               <li style="display: none;" class="message">${_("There are no files here, this folder is empty!")}</li>
               % for n, file in enumerate(files):
                 <%self:file file="${file}" hidden="${n > 2}"/>
-                %if n == 3 and file_count > 4:
+                %if n == 3 and file_count >= 4:
                     <li class="click hide files_more">
                       <span class="green verysmall">
                       ${ungettext("Show the other %(count)s file", "Show the other %(count)s files", file_count - n ) % dict(count = file_count - n)}
