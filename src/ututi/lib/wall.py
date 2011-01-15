@@ -12,10 +12,6 @@ from formencode.api import Invalid
 from formencode.schema import Schema
 from formencode import validators
 
-from sqlalchemy.orm.query import aliased
-from sqlalchemy.sql.expression import select
-from sqlalchemy.sql.expression import func
-from sqlalchemy.sql.expression import and_
 from sqlalchemy.sql.expression import or_
 
 from ututi.lib.validators import js_validate
@@ -24,7 +20,6 @@ from ututi.lib.mailinglist import post_message
 from ututi.lib.forums import make_forum_post
 from ututi.lib import helpers as h
 from ututi.model.mailing import GroupMailingListMessage
-from ututi.model.events import events_table
 from ututi.model.events import Event, EventComment
 from ututi.model import ForumCategory
 from ututi.model import ForumPost, PrivateMessage, Page, User, Subject, meta, GroupMember, Group
@@ -267,33 +262,9 @@ class WallMixin(object):
         meta.Session.commit()
         return page
 
-    def _user_events(self):
-        user_is_admin_of_groups = [membership.group_id
-                                   for membership in c.user.memberships
-                                   if membership.membership_type == 'administrator']
-        e = aliased(Event)
-
-        subjects = c.user.all_watched_subjects
-        if c.user.is_teacher:
-            subjects += c.user.taught_subjects
-
-        #query for ordering events by their last subevent
-        child_query = select([e.created], e.parent_id==Event.id, order_by=e.created.desc(), limit=1).label('last')
-
-        q = meta.Session.query(Event)\
-            .filter(or_(Event.object_id.in_([s.id for s in subjects]),
-                        Event.object_id.in_([m.group.id for m in c.user.memberships]),
-                        Event.recipient_id == c.user.id,
-                        and_(Event.event_type=='private_message_sent',
-                             Event.user == c.user)))\
-            .filter(or_(Event.event_type != 'moderated_post_created',
-                        Event.object_id.in_(user_is_admin_of_groups)))\
-            .filter(~Event.event_type.in_(c.user.ignored_events_list))\
-            .filter(Event.parent == None)\
-            .order_by(func.coalesce(child_query, Event.created).desc(),
-                      Event.event_type)
-
-        return q.limit(20).all()
+    def wall_events(self):
+        """Should be implemented by subclasses."""
+        return []
 
     @ActionProtector("user")
     @jsonify

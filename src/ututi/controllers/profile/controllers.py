@@ -122,14 +122,14 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, ProfileWa
 
     @ActionProtector("user")
     def feed_js(self):
-        events = self._user_events()
+        events = self.wall_events()
         return render_mako_def('/sections/wall_snippets.mako', 'render_events', events=events)
 
     @ActionProtector("user")
     def feed(self):
         c.breadcrumbs.append(self._actions('feed'))
 
-        c.events = self._user_events()
+        c.events = self.wall_events()
         c.action = 'feed'
 
         c.file_recipients = self._file_rcpt()
@@ -147,7 +147,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, ProfileWa
     def wall(self):
         c.breadcrumbs.append(self._actions('home'))
 
-        c.events = self._user_events()
+        c.events = self.wall_events()
 
         c.action = 'wall'
 
