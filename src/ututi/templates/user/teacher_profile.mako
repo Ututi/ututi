@@ -92,7 +92,7 @@
     </div>
 
     %if c.user_info.description:
-    <div id="about-self">${c.user_info.description}</div>
+    <div id="about-self">${h.html_cleanup(c.user_info.description)}</div>
     %endif
   </div>
 

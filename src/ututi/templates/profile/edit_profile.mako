@@ -3,6 +3,7 @@
 
 <%def name="head_tags()">
   ${parent.head_tags()}
+  ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
   ${h.javascript_link('/javascript/js-alternatives.js')|n}
   <%newlocationtag:head_tags />
   <script type="text/javascript">
@@ -76,7 +77,7 @@
       </div>
 
       ${h.input_line('site_url', _('Address of your website or blog'))}
-      ${h.input_area('description', _('About yourself'), rows='6', cols='50')}
+      ${h.input_wysiwyg('description', _('About yourself'))}
 
       <div style="padding-top: 5px">
         <label for="profile_is_public">
