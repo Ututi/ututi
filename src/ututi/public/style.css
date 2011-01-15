@@ -4047,6 +4047,10 @@ div.search-item {
     height:40px;
 }
 
+div.snippet-book {
+    background: white url("../images/books/book_icon_small.png") left 5px no-repeat;
+}
+
 div.snippet-page {
     background: white url("../images/details/icon_type_page.png") left 5px no-repeat;
 }

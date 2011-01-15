@@ -1,3 +1,7 @@
+<%doc>
+Snippets for rendering various content items, e.g. in search results.
+</%doc>
+
 <%def name="location_tag_link(tag)">
   <a class="tag" title="${tag.title}" href="${tag.url()}">
     ${tag.title}
@@ -184,6 +188,27 @@
     </div>
   </div>
 </%def>
+
+<%def name="book(object)">
+  <div class="search-item snippet-book">
+    <a href="${object.url()}" title="${object.title}" class="item-title larger bold">${object.title}</a> (${_('Book')})
+    <div class="description">
+      ${h.ellipsis(object.description, 200)}
+    </div>
+    <div class="description">
+      %if object.city:
+          <span class="book-city-label">${_('City')}:</span>
+          <span class="book-city-name"> ${object.city.name}</span>
+          <br />
+      %endif
+      <span class="book-price-label">${_('Price')}:</span>
+      <span class="book-price">
+        ${object.price}
+      </span>
+    </div>
+  </div>
+</%def>
+
 
 <%def name="tooltip(text, style=None, img=None)">
   <% if img is None: img = '/images/details/icon_question.png' %>

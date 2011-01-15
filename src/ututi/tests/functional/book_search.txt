@@ -140,3 +140,33 @@ in Vilnius after all) but has Kaunas selected:
 
     >>> browser.getControl(name='city').displayValue
     ['Kaunas (1)']
+
+Lets see if the book shows up in ututi search:
+
+    >>> browser.open('http://localhost/')
+    >>> browser.getControl(name='text').value = 'physics'
+    >>> browser.getControl('search').click()
+
+    >>> browser.printCssQuery('#search-results .snippet-book', include_attributes=[''])
+    <div>
+      <a>My physics book</a> (Book)
+        <div></div>
+      <div>
+        <span>City:</span>
+        <span>Vilnius</span>
+        <br />
+        <span>Price:</span>
+        <span></span>
+      </div>
+    </div>
+    <div>
+      <a>My other physics book</a> (Book)
+        <div></div>
+      <div>
+        <span>City:</span>
+        <span>Vilnius</span>
+        <br />
+        <span>Price:</span>
+        <span></span>
+      </div>
+    </div>
