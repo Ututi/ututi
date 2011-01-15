@@ -23,7 +23,7 @@ ${parent.head_tags()}
   </form>
 </div>
 
-% if request.referrer.startswith(url("/", qualified=True)):
+% if request.referrer is not None and request.referrer.startswith(url("/", qualified=True)):
     <a href="#" onclick="javascript: history.go(-1); return false;">${_('go back')}</a>
 % else:
     <a href="${url(controller='search', action='index')}">${_('go find something')}</a>

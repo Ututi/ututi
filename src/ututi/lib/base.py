@@ -91,7 +91,7 @@ class BaseController(WSGIController):
                 referrer = request.headers.get('referer', '')
                 r = re.compile('www\.google\.[a-zA-Z]{2,4}/[url|search]')
                 if r.search(referrer) is not None:
-                    response.set_cookie('camefromsearch', 'yes', expires=3600)
+                    response.set_cookie('camefromsearch', 'yes', max_age=3600)
                     c.came_from_search = True
                 else:
                     c.came_from_search = request.cookies.get('camefromsearch', None) == 'yes'
