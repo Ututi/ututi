@@ -91,9 +91,6 @@
   %endif
 </div>
 
-
-
-
 <div class="books-header">
   <h2>${_('All books')}</h2>
   <div id="city_select_dropdown">
@@ -102,13 +99,13 @@
       <form id="cities-select" action="${url(controller='books', action='catalog')}">
         ${h.select('city', [c.selected_city_id], c.filter_cities)}
       </form>
-      <script language="javascript" type="text/javascript">//<![CDATA[
+    </label>
+    <script language="javascript" type="text/javascript">//<![CDATA[
         $('#city').change(function(){
             $('form#cities-select').submit();
           });
       //]]></script>
-
-    </label>
+    <span class="a11y">${h.input_submit(_('Filter'))}</span>
   </div>
   <br style="clear: both;"/>
 </div>

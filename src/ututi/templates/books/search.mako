@@ -38,6 +38,11 @@
       <span class="a11y">${_('City')}</span>
       ${h.select('city', [c.selected_city_id], c.filter_cities)}
     </label>
+    <script language="javascript" type="text/javascript">//<![CDATA[
+        $('#city').change(function(){
+            $('form#cities-select').submit();
+          });
+      //]]></script>
     <span class="a11y">${h.input_submit(_('Filter'))}</span>
     </form>
   </div>
