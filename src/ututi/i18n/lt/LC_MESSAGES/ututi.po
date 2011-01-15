@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2011-01-10 18:59+0200\n"
+"PO-Revision-Date: 2011-01-15 21:08+0200\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -192,16 +192,16 @@ msgstr "Telefono numeris (+%s) neregistruotas Ututi sistemoje."
 #, python-format
 msgid "You have purchased %(count)d SMS credit for %(price).2f Lt;"
 msgid_plural "You have purchased %(count)d SMS credits for %(price).2f Lt;"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nusipirkote %(count)d SMS kreditą už %(price).2f Lt;"
+msgstr[1] "Nusipirkote %(count)d SMS kreditus už %(price).2f Lt;"
+msgstr[2] "Nusipirkote %(count)d SMS kreditų už %(price).2f Lt;"
 
 #, python-format
 msgid " You now have %(count)d credit."
 msgid_plural " You now have %(count)d credits."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] " Dabar turite %(count)d kreditą."
+msgstr[1] " Dabar turite %(count)d kreditus."
+msgstr[2] " Dabar turite %(count)d kreditų."
 
 #, python-format
 msgid "Invalid group: %s"
@@ -2149,6 +2149,13 @@ msgstr "Telefono numeris"
 msgid "New book"
 msgstr "Nauja knyga"
 
+msgid "Book cover"
+msgstr "Knygos viršelis"
+
+#. TRANSLATORS: translate this as a single word 'More'
+msgid "more_about_book"
+msgstr "Plačiau"
+
 msgid "Learning books market"
 msgstr "Mokslo knygų mugė"
 
@@ -2177,21 +2184,17 @@ msgstr "Mokslo šakos"
 msgid "All books"
 msgstr "Visos knygos"
 
+msgid "Filter"
+msgstr "Filtruoti"
+
 msgid "Edit book"
 msgstr "Redaguoti knygą"
 
 msgid "Back to my books"
 msgstr "Grįžti į mano knygas"
 
-msgid "Book cover"
-msgstr "Knygos viršelis"
-
 msgid "Delete image"
 msgstr "Trinti paveiksliuką"
-
-#. TRANSLATORS: translate this as a single word 'More'
-msgid "more_about_book"
-msgstr "Plačiau"
 
 msgid "U-Books - what's that?"
 msgstr "U-Knygos - kas tai?"
@@ -2240,9 +2243,6 @@ msgstr "Ieškok"
 
 msgid "Search results"
 msgstr "Paieškos rezultatai"
-
-msgid "Filter"
-msgstr "Filtruoti"
 
 msgid "Back to catalog"
 msgstr "Atgal į katalogą"
@@ -2341,6 +2341,15 @@ msgid ""
 "--\n"
 "The Ututi team\n"
 msgstr ""
+"Sveiki,\n"
+"\n"
+"jūsų grupės \"%(group_title)s\" failų vieta pasibaigė.\n"
+"Jeigu norite ir toliau naudotis privačia grupės failų sritimi,\n"
+"apmokėkite grupės vietą puslapyje adresu %(group_url)s - tada\n"
+"grupės failų vieta bus pakelta iki %(size)s.\n"
+"\n"
+"--\n"
+"Ututi komanda\n"
 
 #, python-format
 msgid ""
@@ -2630,6 +2639,8 @@ msgid ""
 "You can now store up to %(size)s in your group's private area. Time "
 "period extension: %(time)s."
 msgstr ""
+"Dabar galite laikyti iki %(size)s failų savo grupės privačioje srityje. "
+"Išplėtimo galiojimas: %(time)s."
 
 msgid "Have fun using Ututi groups!"
 msgstr "Smagaus naudojimosi Ututi grupėmis!"
@@ -3812,10 +3823,10 @@ msgstr ""
 " ir/ar Facebook"
 
 msgid "Change picture"
-msgstr ""
+msgstr "Pakeisti paveiksliuką"
 
 msgid "Delete current picture"
-msgstr ""
+msgstr "Ištrinti esamą paveiksliuką"
 
 msgid "Address of your website or blog"
 msgstr "Nuosavo puslapio arba blog'o adresas"
@@ -3827,7 +3838,7 @@ msgid "Show my profile to unregistered users and search engines"
 msgstr "Rodyti profilį neregistruotiems naudotojams ir paieškos varikliams"
 
 msgid "Picture"
-msgstr ""
+msgstr "Paveiksliukas"
 
 msgid "Current password"
 msgstr "Dabartinis slaptažodis"
@@ -4254,6 +4265,9 @@ msgstr "Nerasta jokių rezultatų."
 msgid "[DELETED]"
 msgstr "[PAŠALINTAS]"
 
+msgid "Book"
+msgstr "Knyga"
+
 msgid "The data"
 msgstr "Duomenys"
 
@@ -4458,7 +4472,7 @@ msgstr "%(user_link)s sukūrė dalyką %(subject_link)s."
 
 #, python-format
 msgid "%(user_link)s has created the group %(group_link)s."
-msgstr ""
+msgstr "%(user_link)s sukūrė grupę %(group_link)s."
 
 #, python-format
 msgid ""
@@ -4493,17 +4507,19 @@ msgstr "%(user_link)s išsiuntė sms grupei %(group_link)s."
 
 #, python-format
 msgid "%(user_link)s has sent you a private message \"%(msg_link)s\""
-msgstr ""
+msgstr "%(user_link)s atsiuntė privačią žinutę \"%(msg_link)s\""
 
 #, python-format
 msgid "You have sent %(user_link)s a private message \"%(msg_link)s\""
-msgstr ""
+msgstr "Tu išsiuntei %(user_link)s privačią žinutę \"%(msg_link)s\""
 
 #, python-format
 msgid ""
 "%(sender_link)s has sent %(recipient_link)s a private message "
 "\"%(msg_link)s\""
 msgstr ""
+"%(sender_link)s išsiuntė %(recipient_link)s privačią žinutę "
+"\"%(msg_link)s\""
 
 #, python-format
 msgid "%(user_link)s joined the group %(group_link)s."
@@ -4748,6 +4764,13 @@ msgid "Create wiki pages for a subject"
 msgstr "Kurti wiki užrašus dalykui"
 
 msgid ""
+"You can store Your lecture notes here, and share them with Your students."
+" Encourage them to contribute and coauthor the materials with You!"
+msgstr ""
+"Čia galite laikyti paskaitų užrašus ir dalintis jais su studentais. \n"
+"Paskatinkite juos prisidėti ir rašyti kurso medžiagą kartu!"
+
+msgid ""
 "Collecting course notes in Word? Writing things down on a computer during"
 " lectures? You can store your notes here, where they can be read and "
 "edited by your classmates."
@@ -4762,6 +4785,13 @@ msgstr "Sukurk wiki užrašus"
 
 msgid "Upload course files"
 msgstr "Siųsti dalyko failus"
+
+msgid ""
+"Upload Your slides, course notes, sample tasks and solutions here. Large "
+"files are supported - all for Your convenience!"
+msgstr ""
+"Įkelkite savo skaidres, paskaitų medžiagą, pavyzdines užduotis ir "
+"sprendimus. Jūsų patogumui palaikomi ir dideli failai!"
 
 msgid ""
 "You may upload course notes, sample tasks and solutions, coursework "
