@@ -534,7 +534,7 @@ class BooksController(HomeController, BaseController):
     def register(self):
         c.show_registration = True
         if hasattr(self, 'form_result'):
-            user, email = self.__register_user(self.form_result)
+            user, email = self._register_user(self.form_result)
             redirect(str(request.POST.get('came_from',
                                           url(controller='books', action='index'))))
         else:

@@ -295,7 +295,7 @@ class HomeController(UniversityListMixin, FederationMixin):
         session.save()
         redirect(url(controller='home', action='index'))
 
-    def __register_user(self, form, send_confirmation=True):
+    def _register_user(self, form, send_confirmation=True):
         fullname = self.form_result['fullname']
         password = self.form_result['new_password']
         email = self.form_result['email'].lower()
@@ -338,7 +338,7 @@ class HomeController(UniversityListMixin, FederationMixin):
             if hash is not None:
                 invitation = PendingInvitation.get(hash)
                 if invitation is not None and invitation.email.lower() == self.form_result['email'].lower():
-                    user, email = self.__register_user(self.form_result, False)
+                    user, email = self._register_user(self.form_result, False)
                     invitation.group.add_member(user)
                     meta.Session.delete(invitation)
                     meta.Session.commit()
@@ -353,7 +353,7 @@ class HomeController(UniversityListMixin, FederationMixin):
                     c.message = _('You can only use the email this invitation was sent for to register.')
                     return render('/login.mako')
             else:
-                user, email = self.__register_user(self.form_result)
+                user, email = self._register_user(self.form_result)
                 redirect(str(request.POST.get('came_from',
                                                  url(controller='profile',
                                                      action='register_welcome'))))
@@ -532,7 +532,7 @@ class HomeController(UniversityListMixin, FederationMixin):
     @validate(schema=RegistrationForm(), form='join')
     def join_register(self):
         if hasattr(self, 'form_result'):
-            user, email = self.__register_user(self.form_result)
+            user, email = self._register_user(self.form_result)
             redirect(c.came_from or url(controller='profile', action='home'))
 
     def join_login(self):
