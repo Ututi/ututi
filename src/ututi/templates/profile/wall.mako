@@ -123,6 +123,7 @@
     ${h.javascript_link('/javascript/dashboard.js')}
     ${h.javascript_link('/javascript/ckeditor/ckeditor.js')}
     ${h.javascript_link('/javascript/jquery.jtruncate.pack.js')}
+    ${h.stylesheet_link('/widgets.css')}
     <script type="text/javascript">
     $(document).ready(function() {
         /* Truncate texts. */

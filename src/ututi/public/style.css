@@ -4997,6 +4997,10 @@ ul.universityMembersInfo li{
 }
 
 /* Dashboard actions block */
+#dashboard_actions {
+  padding: 5px 10px;
+}
+
 #dashboard_actions .action {
   margin-right: 15px;
 }

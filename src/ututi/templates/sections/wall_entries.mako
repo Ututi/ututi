@@ -425,7 +425,7 @@
         </div>
         <div class="action-block">
           <div class="content">
-            ${sms.sms_widget(c.user, event.context)}
+            ${sms.sms_widget_tiny(c.user, event.context)}
           </div>
         </div>
       </div>
