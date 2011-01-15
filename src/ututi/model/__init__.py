@@ -2426,6 +2426,11 @@ class Book(ContentItem):
     def has_logo(self):
         return bool(meta.Session.query(Book).filter_by(id=self.id).filter(Book.raw_logo != None).count())
 
+    def snippet(self):
+        """Render a short snippet with the basic item's information. Used in search to render the results."""
+        return render_mako_def('/sections/content_snippets.mako','book', object=self)
+
+
 class City(object):
     """Class for representing cities"""
     def __init__(self, name):
