@@ -262,7 +262,7 @@ class WallMixin(object):
         meta.Session.commit()
         return page
 
-    def wall_events(self):
+    def _wall_events(self):
         """Should be implemented by subclasses."""
         return []
 

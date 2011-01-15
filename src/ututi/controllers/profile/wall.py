@@ -20,7 +20,7 @@ class ProfileWallController(WallMixin, FileViewMixin):
         return url(controller='profile', action='wall')
 
 
-    def wall_events(self):
+    def _wall_events(self):
         user_is_admin_of_groups = [membership.group_id
                                    for membership in c.user.memberships
                                    if membership.membership_type == 'administrator']
