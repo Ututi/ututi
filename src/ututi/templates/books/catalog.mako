@@ -64,7 +64,7 @@
     //]]>
   </script>
 
-  <div class="books-header">
+  <div class="books-header books-catalog-header">
     %if c.books_department or c.current_science_types:
     <span class="title">${_('Order by')}:</span>
     %endif
@@ -82,7 +82,7 @@
     ${science_list()}
   </div>
   %elif c.books_department == "university":
-  <div class="books-header">
+  <div class="books-header books-catalog-header">
     <span class="title">${_('Science types')}:</span>
   </div>
   <div>

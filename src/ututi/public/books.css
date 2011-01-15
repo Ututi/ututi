@@ -41,6 +41,8 @@ h1.title {
     margin-top: 10px;
     margin-bottom: 5px;
     font-size: 22px;
+    background: none;
+    color: #333333;
 }
 
 .head-nav {
@@ -225,6 +227,10 @@ li#ulogo a {
     margin-bottom: 10px;
     color: #fff;
     font-size: 14px;
+}
+
+.books-catalog-header {
+    background: #e6e6e6;
 }
 
 #search_results_header H2, .books-header h2 {
