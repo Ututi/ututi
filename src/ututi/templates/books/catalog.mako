@@ -11,7 +11,10 @@
     books_department= c.books_department,
     science_type_id = science_type.id, **c.url_params))}
 
-    <div class="books-number">${len(science_type.get_books(type=c.books_type))} ${_('books')}</div>
+    <div class="books-number">
+      <% cnt = len(science_type.get_books(type=c.books_type)) %>
+      ${ungettext('%d book', '%d books', cnt) % cnt}
+    </div>
   </div>
   %endfor
 </div>
@@ -26,7 +29,10 @@
               action="catalog",
               books_department= c.books_department,
               school_grade_id = school_grade.id, **c.url_params))}
-    <div class="books-number">${len(school_grade.get_books(type=c.books_type))} ${_('books')}</div>
+    <div class="books-number">
+      <% cnt = len(school_grade.get_books(type=c.books_type)) %>
+      ${ungettext('%d book', '%d books', cnt) % cnt}
+    </div>
   </div>
   %endfor
 </div>
