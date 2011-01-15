@@ -5,6 +5,18 @@
 ${_('Home')}
 </%def>
 
+<%def name="css()">
+.GroupFilesContent-line {
+   background: white;
+}
+
+.portletGroupFiles.rounded-block .cbl,
+.portletGroupFiles.rounded-block .cbr {
+    background-image: url('img/portlets_bg_white.png');
+}
+
+</%def>
+
 <%def name="head_tags()">
 ${parent.head_tags()}
 <script type="text/javascript">
@@ -138,7 +150,7 @@ ${parent.head_tags()}
 <script type="text/javascript">
   //<![CDATA[
       $('#hide_suggest_create_group').click(function() {
-          $(this).closest('.portlet').hide();
+          $(this).closest('.rounded-block').hide();
           $.post('${url(controller='profile', action='js_hide_element')}',
                  {type: 'suggest_create_group'});
           return false;
@@ -175,7 +187,7 @@ ${parent.head_tags()}
       ${h.button_to(_('add subject'), url(controller='profile', action='watch_subjects'))}
     </span>
   </div>
-  <div>
+  <div class="GroupFilesContent-line">
     ${self.subject_list(subjects)}
   </div>
   </%self:rounded_block>
@@ -192,7 +204,7 @@ ${self.location_nag(_('Tell us where you are studying'))}
 
 %if c.user.phone_number is None and not 'suggest_enter_phone' in c.user.hidden_blocks_list:
 ${self.phone_nag()}
-%elif not c.user.phone_confirmed:
+%elif not c.user.phone_confirmed and c.user.phone_number is not None:
 ${self.phone_confirmation_nag()}
 %endif
 

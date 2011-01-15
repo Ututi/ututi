@@ -79,7 +79,7 @@ ${parent.head_tags()}
 <script type="text/javascript">
   //<![CDATA[
     $('#hide_suggest_enter_phone').click(function() {
-        $(this).closest('.portlet').hide();
+        $(this).closest('.rounded-block').hide();
         $.post('${url(controller='profile', action='js_hide_element')}',
                {type: 'suggest_enter_phone'});
         return false;
@@ -184,7 +184,7 @@ ${parent.head_tags()}
 <script type="text/javascript">
   //<![CDATA[
     $('#hide_suggest_watch_subject').click(function() {
-        $(this).closest('.portlet').hide();
+        $(this).closest('.rounded-block').hide();
         $.post('${url(controller='profile', action='js_hide_element')}',
                {type: 'suggest_watch_subject'});
         return false;
