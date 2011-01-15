@@ -1,6 +1,28 @@
 <%namespace name="moderation" file="/mailinglist/administration.mako" />
 <%namespace name="sms" file="/widgets/sms.mako" />
 
+<%def name="head_tags()">
+  ${h.javascript_link('/javascript/wall.js')}
+  ${h.javascript_link('/javascript/jquery.jtruncate.pack.js')}
+  ${h.javascript_link('/javascript/moderation.js')}
+  <script type="text/javascript">
+  $(document).ready(function() {
+      /* Truncate texts. */
+      $('span.truncated').jTruncate({
+          length: 150,
+          minTrail: 50,
+          moreText: "${_('more')}",
+          lessText: "${_('less')}",
+          moreAni: 300
+          ## leave lessAni empty, to avoid jQuery show/hide quirks!
+          ## (after first hide it would the show element as inline-block,
+          ##  (instead of inline) affeting layout)
+      });
+  });
+  </script>
+  ${h.stylesheet_link('/widgets.css')}
+</%def>
+
 <%def name="wall_entry(event)">
 <div class="wall-entry ${caller.classes()} type_${event.event_type}" id="wall-event-${event.id}">
   <div class="event-heading">
