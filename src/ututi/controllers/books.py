@@ -529,6 +529,9 @@ class BooksController(HomeController, BaseController):
             c.show_warning = False
         return render('/books/login.mako')
 
+    def join_login(self):
+        self._join_login()
+        return render('/books/login.mako')
 
     @validate(schema=RegistrationForm(), form='register')
     def register(self):

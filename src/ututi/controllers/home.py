@@ -535,7 +535,7 @@ class HomeController(UniversityListMixin, FederationMixin):
             user, email = self._register_user(self.form_result)
             redirect(c.came_from or url(controller='profile', action='home'))
 
-    def join_login(self):
+    def _join_login(self):
         email = request.POST.get('login_username')
         password = request.POST.get('login_password')
 
@@ -547,6 +547,8 @@ class HomeController(UniversityListMixin, FederationMixin):
                 sign_in_user(user)
                 redirect(c.came_from or url(controller='profile', action='home'))
 
+    def join_login(self):
+        self._join_login()
         return render('/login.mako')
 
     @bot_protect

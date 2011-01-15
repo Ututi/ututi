@@ -55,7 +55,7 @@
         ${_('Log in directly to Ututi')}
       </div>
 
-      <form id="join_login_form" method="post" action="${url(controller='home', action='join_login')}" class="fullForm">
+      <form id="join_login_form" method="post" action="${url(controller='books', action='join_login')}" class="fullForm">
         %if c.came_from:
           <input type="hidden" name="came_from" value="${c.came_from}" />
         %endif
