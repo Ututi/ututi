@@ -64,7 +64,7 @@
     <ul class="subject-intro-message">
       <li>
         <span class="heading">${_('Create wiki pages for a subject')}</span>
-        %if c.user.is_teacher:
+        %if c.user and c.user.is_teacher:
           ${_('You can store Your lecture notes here, and share them with Your students.'
               ' Encourage them to contribute and coauthor the materials with You!')}
         %else:
@@ -75,7 +75,7 @@
       </li>
       <li>
       <span class="heading">${_('Upload course files')}</span>
-        %if c.user.is_teacher:
+        %if c.user and c.user.is_teacher:
           ${_('Upload Your slides, course notes, sample tasks and solutions here.'
               ' Large files are supported - all for Your convenience!')}
         %else:
