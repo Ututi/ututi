@@ -25,12 +25,12 @@ actually so:
 
 The administrator can see the messages:
     >>> browser.getLink("News wall").click()
-    >>> browser.printQuery('id("wall")//div[@class="description"]//text()')
-    Varlius <varlius@example.com> has posted a new message Hello from varlius to the group's Moderatoriai moderation queue.
-    Second user has posted a new message Hello to the group's Moderatoriai moderation queue.
-    Adminas Adminovix has created the group Moderatoriai .
-    Adminas Adminovix joined the group Moderatoriai .
-    Third user joined the group Moderatoriai .
+    >>> browser.printQuery("//div[contains(@class, 'wall-entry')]//text()")
+    Varlius <varlius@example.com> has posted a new message Hello from varlius to the group's Moderatoriai moderation queue ...
+    Second user has posted a new message Hello to the group's Moderatoriai moderation queue ...
+    You have created the group Moderatoriai ...
+    You have joined the group Moderatoriai ...
+    Third user has joined the group Moderatoriai ...
 
 There are links to the messages themselves and to their authors, the
 links are different depending on whether the author of the message has

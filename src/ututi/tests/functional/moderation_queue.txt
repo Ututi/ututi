@@ -117,11 +117,11 @@ only the first message is left:
 The corresponding event is removed from the wall as well:
 
     >>> browser.getLink("News wall").click()
-    >>> browser.printQuery('id("wall")//div[@class="description"]//text()')
-    Second user has posted a new message Hello to the group's Moderatoriai moderation queue.
-    Adminas Adminovix has created the group Moderatoriai .
-    Adminas Adminovix joined the group Moderatoriai .
-    Third user joined the group Moderatoriai .
+    >>> browser.printQuery("//div[contains(@class, 'event-heading')]//text()")
+    Second user has posted a new message Hello to the group's Moderatoriai moderation queue ... ago
+    You have created the group Moderatoriai ... ago
+    You have joined the group Moderatoriai ... ago
+    Third user has joined the group Moderatoriai ... ago
 
 Let's get back to the mailing list. Still no messages here:
 
@@ -149,11 +149,11 @@ Now the message should appear in the actual mailing list:
 The corresponding event is removed from wall:
 
     >>> browser.getLink('News wall').click()
-    >>> browser.printQuery('id("wall")//div[@class="description"]//text()')
-    Second user has posted a new message Hello to the group Moderatoriai .
-    Adminas Adminovix has created the group Moderatoriai .
-    Adminas Adminovix joined the group Moderatoriai .
-    Third user joined the group Moderatoriai .
+    >>> browser.printQuery("//div[contains(@class, 'event-heading')]//text()")
+    Second user has posted a new message Hello to the group Moderatoriai ... ago
+    You have created the group Moderatoriai ... ago
+    You have joined the group Moderatoriai ... ago
+    Third user has joined the group Moderatoriai ... ago
 
 Approved messages got sent to the members of the group:
 
