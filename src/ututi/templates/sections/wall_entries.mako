@@ -355,16 +355,15 @@
 
 <%def name="moderated_post_created(event)">
   <%self:wall_entry event="${event}">
-    <% msg = event.message %>
     <%def name="classes()">message-event</%def>
     <%def name="heading()">
-      %if c.user is not None and c.user == msg.author:
+      %if c.user is not None and c.user == event.message.author:
         ${_("You have posted a new message %(message_link)s to the group's %(group_link)s moderation queue") % \
              dict(group_link=h.object_link(event.context),
                   message_link=h.object_link(event.message)) | n}
       %else:
         ${_("%(user_link)s has posted a new message %(message_link)s to the group's %(group_link)s moderation queue") % \
-             dict(user_link=h.object_link(msg.author_or_anonymous),
+             dict(user_link=h.object_link(event.message.author_or_anonymous),
                   group_link=h.object_link(event.context),
                   message_link=h.object_link(event.message)) | n}
       %endif
@@ -372,6 +371,7 @@
     ## The following snippet is copied from event_conversation def.
     ## This markup should probably be shared but I don't know the
     ## best way to do that yet.
+    <% msg = event.message %>
     <div class="thread">
       <div class="logo">
         <img src="${msg.author_or_anonymous.url(action='logo', width=50)}" />
@@ -386,7 +386,8 @@
         </ul>
         %endif
         <div class="closing">
-          <span class="event-time">${h.when(msg.created)}</span>
+          ## XXX the msg.created was None at this point. Why is that so?
+          <span class="event-time">${h.when(event.created)}</span>
           <span class="actions">
             <a href="#moderate" class="action-block-link">Moderate</a>
           </span>
