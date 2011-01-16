@@ -8,6 +8,8 @@
   ${dashboard.head_tags()}
 </%def>
 
+<%def name="body_class()">wall</%def>
+
 %if c.welcome:
   <h1>${_('Congratulations, you have created a new group!')}</h1>
 
@@ -70,8 +72,6 @@ use the group mailing list together then!
 
 ${dashboard.dashboard(c.msg_recipient, c.file_recipients, c.wiki_recipients)}
 
-<div id="wall">
-% for event in c.events:
-  ${event.snippet()}
-% endfor
-</div>
+%for event in c.events:
+  ${event.wall_entry()}
+%endfor

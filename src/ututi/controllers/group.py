@@ -19,6 +19,8 @@ from formencode.foreach import ForEach
 from formencode.variabledecode import NestedVariables
 
 from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.orm.query import aliased
+from sqlalchemy.sql.expression import select, func, or_
 
 import ututi.lib.helpers as h
 from ututi.lib.fileview import FileViewMixin
@@ -298,6 +300,28 @@ class GroupWallController(WallMixin, FileViewMixin):
         """Override wall's dashboard action redirection url."""
         return url(controller='group', action='home', id=c.group.group_id)
 
+    def _wall_events(self):
+        from ututi.model.events import Event
+        e = aliased(Event)
+
+        #query for ordering events by their last subevent
+        child_query = select([e.created], e.parent_id==Event.id, order_by=e.created.desc(), limit=1).label('last')
+
+        user_is_admin_of_groups = [membership.group_id
+                                   for membership in c.user.memberships
+                                   if membership.membership_type == 'administrator']
+
+        q = meta.Session.query(Event)\
+                .filter(or_(Event.object_id.in_([s.id for s in c.group.watched_subjects]),
+                            Event.object_id == c.group.id))\
+                .filter(or_(Event.event_type != 'moderated_post_created',
+                            Event.object_id.in_(user_is_admin_of_groups)))\
+                .filter(Event.parent == None)\
+                .order_by(func.coalesce(child_query, Event.created).desc(),
+                          Event.event_type)
+
+        return q.limit(20).all()
+
 
 class GroupController(BaseController, SubjectAddMixin, GroupWallController):
     """Controller for group actions."""
@@ -313,7 +337,7 @@ class GroupController(BaseController, SubjectAddMixin, GroupWallController):
 
     def _set_home_variables(self, group):
         c.group_menu_current_item = 'home'
-        c.events = group.group_events
+        c.events = self._wall_events()
         c.has_to_invite_members = (len(group.members) == 1 and
                                    len(group.invitations) == 0)
         c.wants_to_watch_subjects = (len(group.watched_subjects) == 0 and
@@ -341,7 +365,7 @@ class GroupController(BaseController, SubjectAddMixin, GroupWallController):
     @group_action
     @ActionProtector("admin", "member")
     def feed_js(self, group):
-        events = group.group_events
+        events = self._wall_events()
         return render_mako_def('/sections/wall_snippets.mako', 'render_events', events=events)
 
     @group_action

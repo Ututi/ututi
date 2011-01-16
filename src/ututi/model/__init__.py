@@ -1104,21 +1104,6 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
         return len(self.watched_subjects) > 0
 
     @property
-    def group_events(self):
-        return self.filtered_events()
-
-    def filtered_events(self, types=[], limit=20):
-        from ututi.model.events import Event
-        events = meta.Session.query(Event)\
-            .filter(or_(Event.object_id.in_([s.id for s in self.watched_subjects]),
-                        Event.object_id == self.id))
-        if types != []:
-            events = events.filter(Event.event_type.in_(types))
-
-        events = events.order_by(Event.created.desc()).limit(limit).all()
-        return events
-
-    @property
     def message_count(self):
         from ututi.model.mailing import GroupMailingListMessage
         return meta.Session.query(GroupMailingListMessage)\
