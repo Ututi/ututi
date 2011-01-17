@@ -341,6 +341,7 @@ class GroupController(BaseController, SubjectAddMixin, GroupWallController):
     def _set_home_variables(self, group):
         c.group_menu_current_item = 'home'
         c.events = self._wall_events()
+        c.events_hidable = False
         c.has_to_invite_members = (len(group.members) == 1 and
                                    len(group.invitations) == 0)
         c.wants_to_watch_subjects = (len(group.watched_subjects) == 0 and

@@ -30,7 +30,7 @@
     <span class="event-time">
       ${h.when(event.created)}
     </span>
-    %if c.user is not None:
+    %if c.events_hidable and c.user is not None:
     <div class="hide-button-container">
       <form method="POST" action="${url(controller='profile', action='hide_event')}">
         <div>
