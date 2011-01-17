@@ -401,6 +401,7 @@ class WallMixin(object):
     @ActionProtector("user")
     @validate(schema=WallReplyValidator())
     def eventcomment_reply(self, event_id):
+        # parameter 'id' is ignored
         event = Event.get(event_id)
         if event is None:
             abort(404)

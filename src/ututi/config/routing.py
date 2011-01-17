@@ -157,6 +157,17 @@ def make_map(config):
     #act on group membership request
     map.connect('/group/{id}/request/{hash_code}/{do}', controller='group', action='request')
 
+    #group's wall actions
+    map.connect('/group/{id}/reply/mailinglist/{thread_id}',
+                controller='group',
+                action='mailinglist_reply')
+    map.connect('/group/{id}/reply/forum/{category_id}/{thread_id}',
+                controller='group',
+                action='forum_reply')
+    map.connect('/group/{id}/reply/comment/{event_id}',
+                controller='group',
+                action='eventcomment_reply')
+
     map.connect('/group/{id}/{action}', controller='group')
     map.connect('/group/{id}/logo/{width}/{height}', controller='group', action='logo')
     map.connect('/group/{id}/logo/{width}', controller='group', action='logo')
@@ -246,12 +257,6 @@ def make_map(config):
     map.connect('/school/*path/subjects_js', controller='structureview', action='subjects_search_js')
     map.connect('/school/*path', controller='structureview', action='index')
 
-    # user's wall actions
-    map.connect('/profile/reply/mailinglist/{id}/{thread_id}', controller='profile', action='mailinglist_reply')
-    map.connect('/profile/reply/forum/{id}/{category_id}/{thread_id}', controller='profile', action='forum_reply')
-    map.connect('/profile/reply/privatemessage/{id}', controller='profile', action='privatemessage_reply')
-    map.connect('/profile/reply/comment/{event_id}', controller='profile', action='eventcomment_reply')
-
     # other user views
     map.connect('/profile/confirm_emails', controller='profile', action='confirm_emails')
     map.connect('/confirm_user_email/{key}', controller='profile', action='confirm_user_email')
@@ -260,6 +265,21 @@ def make_map(config):
     map.connect('/profile/edit/password', controller='profile', action='edit_password')
     map.connect('/profile/edit/wall', controller='profile', action='wall_settings')
     map.connect('/profile/edit/notifications', controller='profile', action='notifications')
+
+    # user's wall actions
+    map.connect('/profile/reply/mailinglist/{id}/{thread_id}',
+                controller='profile',
+                action='mailinglist_reply')
+    map.connect('/profile/reply/forum/{id}/{category_id}/{thread_id}',
+                controller='profile',
+                action='forum_reply')
+    map.connect('/profile/reply/privatemessage/{id}',
+                controller='profile',
+                action='privatemessage_reply')
+    map.connect('/profile/reply/comment/{event_id}',
+                controller='profile',
+                action='eventcomment_reply')
+
     map.connect('/profile/{action}', controller='profile')
     map.connect('/profile/{action}/{id}', controller='profile')
 
