@@ -15,7 +15,7 @@ from mako.exceptions import TopLevelLookupException
 from paste.util.converters import asbool
 from pylons.decorators.cache import beaker_cache
 from pylons.controllers import WSGIController
-from pylons.templating import pylons_globals, render_mako as render
+from pylons.templating import pylons_globals, render_mako, render_mako_def
 from pylons import url
 from pylons import tmpl_context as c, config, request, response
 from pylons.i18n.translation import get_lang
@@ -25,6 +25,19 @@ from ututi.lib.security import current_user, sign_in_user
 from ututi.model import meta
 
 perflog = logging.getLogger('performance')
+
+def render(*args, **kwargs):
+    from ututi.views import render_view
+    kwargs.setdefault('extra_vars', {})
+    if kwargs['extra_vars'] is None:
+        kwargs['extra_vars'] = {}
+    kwargs['extra_vars']['v'] = render_view
+    return render_mako(*args, **kwargs)
+
+def render_def(*args, **kwargs):
+    from ututi.views import render_view
+    kwargs['v'] = render_view
+    return render_mako_def(*args, **kwargs)
 
 class BaseController(WSGIController):
 
@@ -156,7 +169,7 @@ def render_lang(template_name, extra_vars=None, cache_key=None,
 
     for n, template in templates:
         try:
-            return render(template, extra_vars, cache_key, cache_type, cache_expire)
+            return render(template, extra_vars=extra_vars, cache_key=cache_key, cache_type=cache_type, cache_expire=cache_expire)
         except TopLevelLookupException:
             if n > 0:
                 pass

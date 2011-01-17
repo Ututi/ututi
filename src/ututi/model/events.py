@@ -8,13 +8,13 @@ from sqlalchemy.orm import relation
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.types import Unicode
 from pylons import url
-from pylons.templating import render_mako_def
 from pylons.i18n import ungettext, _
 
 from ututi.model.mailing import GroupMailingListMessage
 from ututi.model import Group, Subject, User, File, Page, ContentItem, ForumPost, OutgoingGroupSMSMessage, PrivateMessage
 from ututi.model import meta
 from ututi.lib.helpers import link_to, ellipsis, when
+from ututi.lib.base import render_def
 
 log = logging.getLogger(__name__)
 events_table = None
@@ -137,10 +137,10 @@ class PageCreatedEvent(Event, Commentable):
             'link_to_page': link_to(self.page.title, self.page.url())}
 
     def snippet(self):
-        return render_mako_def('/sections/wall_snippets.mako', 'page_created', event=self)
+        return render_def('/sections/wall_snippets.mako', 'page_created', event=self)
 
     def wall_entry(self):
-        return render_mako_def('/sections/wall_entries.mako', 'page_created', event=self)
+        return render_def('/sections/wall_entries.mako', 'page_created', event=self)
 
 
 class PageModifiedEvent(Event, Commentable):
@@ -180,10 +180,10 @@ class PageModifiedEvent(Event, Commentable):
                 'link_to_page': link_to(self.page.title, self.page.url())}
 
     def snippet(self):
-        return render_mako_def('/sections/wall_snippets.mako', 'page_modified', event=self)
+        return render_def('/sections/wall_snippets.mako', 'page_modified', event=self)
 
     def wall_entry(self):
-        return render_mako_def('/sections/wall_entries.mako', 'page_modified', event=self)
+        return render_def('/sections/wall_entries.mako', 'page_modified', event=self)
 
 
 class FileUploadedEvent(Event, Commentable):
@@ -244,26 +244,26 @@ class FileUploadedEvent(Event, Commentable):
     def snippet(self):
         if self.file.md5 is not None:
             if isinstance(self.file.parent, Subject):
-                return render_mako_def('/sections/wall_snippets.mako', 'file_uploaded_subject', event=self)
+                return render_def('/sections/wall_snippets.mako', 'file_uploaded_subject', event=self)
             elif isinstance(self.file.parent, Group):
-                return render_mako_def('/sections/wall_snippets.mako', 'file_uploaded_group', event=self)
+                return render_def('/sections/wall_snippets.mako', 'file_uploaded_group', event=self)
         else:
             if isinstance(self.file.parent, Subject):
-                return render_mako_def('/sections/wall_snippets.mako', 'folder_created_subject', event=self)
+                return render_def('/sections/wall_snippets.mako', 'folder_created_subject', event=self)
             elif isinstance(self.file.parent, Group):
-                return render_mako_def('/sections/wall_snippets.mako', 'folder_created_group', event=self)
+                return render_def('/sections/wall_snippets.mako', 'folder_created_group', event=self)
 
     def wall_entry(self):
         if self.file.md5 is not None:
             if isinstance(self.file.parent, Subject):
-                return render_mako_def('/sections/wall_entries.mako', 'file_uploaded_subject', event=self)
+                return render_def('/sections/wall_entries.mako', 'file_uploaded_subject', event=self)
             elif isinstance(self.file.parent, Group):
-                return render_mako_def('/sections/wall_entries.mako', 'file_uploaded_group', event=self)
+                return render_def('/sections/wall_entries.mako', 'file_uploaded_group', event=self)
         else:
             if isinstance(self.file.parent, Subject):
-                return render_mako_def('/sections/wall_entries.mako', 'folder_created_subject', event=self)
+                return render_def('/sections/wall_entries.mako', 'folder_created_subject', event=self)
             elif isinstance(self.file.parent, Group):
-                return render_mako_def('/sections/wall_entries.mako', 'folder_created_group', event=self)
+                return render_def('/sections/wall_entries.mako', 'folder_created_group', event=self)
 
 
 class SubjectCreatedEvent(Event):
@@ -274,10 +274,10 @@ class SubjectCreatedEvent(Event):
             'link_to_subject': link_to(self.context.title, self.context.url())}
 
     def snippet(self):
-        return render_mako_def('/sections/wall_snippets.mako', 'subject_created', event=self)
+        return render_def('/sections/wall_snippets.mako', 'subject_created', event=self)
 
     def wall_entry(self):
-        return render_mako_def('/sections/wall_entries.mako', 'subject_created', event=self)
+        return render_def('/sections/wall_entries.mako', 'subject_created', event=self)
 
 class GroupCreatedEvent(Event):
     """Event fired when a new group is created."""
@@ -287,10 +287,10 @@ class GroupCreatedEvent(Event):
             'link_to_group': link_to(self.context.title, self.context.url())}
 
     def snippet(self):
-        return render_mako_def('/sections/wall_snippets.mako', 'group_created', event=self)
+        return render_def('/sections/wall_snippets.mako', 'group_created', event=self)
 
     def wall_entry(self):
-        return render_mako_def('/sections/wall_entries.mako', 'group_created', event=self)
+        return render_def('/sections/wall_entries.mako', 'group_created', event=self)
 
 
 class SubjectModifiedEvent(Event):
@@ -301,10 +301,10 @@ class SubjectModifiedEvent(Event):
             'link_to_subject': link_to(self.context.title, self.context.url())}
 
     def snippet(self):
-        return render_mako_def('/sections/wall_snippets.mako', 'subject_modified', event=self)
+        return render_def('/sections/wall_snippets.mako', 'subject_modified', event=self)
 
     def wall_entry(self):
-        return render_mako_def('/sections/wall_entries.mako', 'subject_modified', event=self)
+        return render_def('/sections/wall_entries.mako', 'subject_modified', event=self)
 
 class PostCreatedEventBase(Event):
     """Base class for mailing list post related events.""" 
@@ -330,10 +330,10 @@ class TeacherMessageEvent(Event):
             'link_to_group': link_to(self.context.title, self.context.url())}
 
     def snippet(self):
-        return render_mako_def('/sections/wall_snippets.mako', 'teachermessage_sent', event=self)
+        return render_def('/sections/wall_snippets.mako', 'teachermessage_sent', event=self)
 
     def wall_entry(self):
-        return render_mako_def('/sections/wall_entries.mako', 'teachermessage_sent', event=self)
+        return render_def('/sections/wall_entries.mako', 'teachermessage_sent', event=self)
 
 
 class MailinglistPostCreatedEvent(PostCreatedEventBase, MessagingEventMixin):
@@ -348,10 +348,10 @@ class MailinglistPostCreatedEvent(PostCreatedEventBase, MessagingEventMixin):
             'link_to_message': link_to(self.message.subject, self.message.url())}
 
     def snippet(self):
-        return render_mako_def('/sections/wall_snippets.mako', 'mailinglistpost_created', event=self)
+        return render_def('/sections/wall_snippets.mako', 'mailinglistpost_created', event=self)
 
     def wall_entry(self):
-        return render_mako_def('/sections/wall_entries.mako', 'mailinglistpost_created', event=self)
+        return render_def('/sections/wall_entries.mako', 'mailinglistpost_created', event=self)
 
     def message_list(self):
         """MessagingEventMixin implementation."""
@@ -398,10 +398,10 @@ class ModeratedPostCreated(PostCreatedEventBase):
             'link_to_message': link_to(self.message.subject, self.message.url())}
 
     def snippet(self):
-        return render_mako_def('/sections/wall_snippets.mako', 'moderated_post_created', event=self)
+        return render_def('/sections/wall_snippets.mako', 'moderated_post_created', event=self)
 
     def wall_entry(self):
-        return render_mako_def('/sections/wall_entries.mako', 'moderated_post_created', event=self)
+        return render_def('/sections/wall_entries.mako', 'moderated_post_created', event=self)
 
 
 class ForumPostCreatedEvent(Event, MessagingEventMixin):
@@ -416,10 +416,10 @@ class ForumPostCreatedEvent(Event, MessagingEventMixin):
             'link_to_message': link_to(self.post.title, self.post.url(new=True))}
 
     def snippet(self):
-        return render_mako_def('/sections/wall_snippets.mako', 'forumpost_created', event=self)
+        return render_def('/sections/wall_snippets.mako', 'forumpost_created', event=self)
 
     def wall_entry(self):
-        return render_mako_def('/sections/wall_entries.mako', 'forumpost_created', event=self)
+        return render_def('/sections/wall_entries.mako', 'forumpost_created', event=self)
 
     def message_list(self):
         """MessagingEventMixin implementation."""
@@ -450,10 +450,10 @@ class SMSMessageSentEvent(Event):
             'text': self.sms_text()}
 
     def snippet(self):
-        return render_mako_def('/sections/wall_snippets.mako', 'sms_sent', event=self)
+        return render_def('/sections/wall_snippets.mako', 'sms_sent', event=self)
 
     def wall_entry(self):
-        return render_mako_def('/sections/wall_entries.mako', 'sms_sent', event=self)
+        return render_def('/sections/wall_entries.mako', 'sms_sent', event=self)
 
     def sms_text(self):
         return cgi.escape(self.outgoing_sms.message_text)
@@ -471,10 +471,10 @@ class PrivateMessageSentEvent(Event, MessagingEventMixin):
             'text': self.message_text()}
 
     def snippet(self):
-        return render_mako_def('/sections/wall_snippets.mako', 'privatemessage_sent', event=self)
+        return render_def('/sections/wall_snippets.mako', 'privatemessage_sent', event=self)
 
     def wall_entry(self):
-        return render_mako_def('/sections/wall_entries.mako', 'privatemessage_sent', event=self)
+        return render_def('/sections/wall_entries.mako', 'privatemessage_sent', event=self)
 
     def message_text(self):
         """Deprecated."""
@@ -505,10 +505,10 @@ class GroupMemberJoinedEvent(Event):
             'link_to_user': link_to(self.user.fullname, self.user.url())}
 
     def snippet(self):
-        return render_mako_def('/sections/wall_snippets.mako', 'groupmember_joined', event=self)
+        return render_def('/sections/wall_snippets.mako', 'groupmember_joined', event=self)
 
     def wall_entry(self):
-        return render_mako_def('/sections/wall_entries.mako', 'groupmember_joined', event=self)
+        return render_def('/sections/wall_entries.mako', 'groupmember_joined', event=self)
 
 
 class GroupMemberLeftEvent(Event):
@@ -520,10 +520,10 @@ class GroupMemberLeftEvent(Event):
             'link_to_user': link_to(self.user.fullname, self.user.url())}
 
     def snippet(self):
-        return render_mako_def('/sections/wall_snippets.mako', 'groupmember_left', event=self)
+        return render_def('/sections/wall_snippets.mako', 'groupmember_left', event=self)
 
     def wall_entry(self):
-        return render_mako_def('/sections/wall_entries.mako', 'groupmember_left', event=self)
+        return render_def('/sections/wall_entries.mako', 'groupmember_left', event=self)
 
 
 class GroupStartedWatchingSubjects(Event):
@@ -535,10 +535,10 @@ class GroupStartedWatchingSubjects(Event):
             'link_to_subject': link_to(self.subject.title, self.subject.url())}
 
     def snippet(self):
-        return render_mako_def('/sections/wall_snippets.mako', 'groupsubject_start', event=self)
+        return render_def('/sections/wall_snippets.mako', 'groupsubject_start', event=self)
 
     def wall_entry(self):
-        return render_mako_def('/sections/wall_entries.mako', 'groupsubject_start', event=self)
+        return render_def('/sections/wall_entries.mako', 'groupsubject_start', event=self)
 
 
 class GroupStoppedWatchingSubjects(Event):
@@ -550,10 +550,10 @@ class GroupStoppedWatchingSubjects(Event):
             'link_to_subject': link_to(self.subject.title, self.subject.url())}
 
     def snippet(self):
-        return render_mako_def('/sections/wall_snippets.mako', 'groupsubject_stop', event=self)
+        return render_def('/sections/wall_snippets.mako', 'groupsubject_stop', event=self)
 
     def wall_entry(self):
-        return render_mako_def('/sections/wall_entries.mako', 'groupsubject_stop', event=self)
+        return render_def('/sections/wall_entries.mako', 'groupsubject_stop', event=self)
 
 
 def setup_orm(engine):
