@@ -12,9 +12,9 @@
   <div class="book-textual-info">
     <div style="height: 60px;">
       <h3 class="book-title">
-        ${h.link_to(book.title, url(controller="books", action="show", id=book.id))}
+        ${h.link_to(h.ellipsis(book.title, 40), url(controller="books", action="show", id=book.id), title=book.title)}
       </h3>
-      <span class="book-author">${book.author}</span>
+      <span class="book-author">${h.ellipsis(book.author, 40)}</span>
     </div>
     <div>
       %if book.city:

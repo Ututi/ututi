@@ -341,7 +341,7 @@
         <div class="clear"></div>
     </div>
     %if user.description:
-    <div class="about-self">${user.description}</div>
+    <div class="about-self">${h.html_cleanup(user.description)}</div>
     %endif
 
   </%self:uportlet>

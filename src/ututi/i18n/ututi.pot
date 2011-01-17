@@ -8,7 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+<<<<<<< HEAD
 "POT-Creation-Date: 2011-01-14 17:31+0200\n"
+=======
+"POT-Creation-Date: 2011-01-15 21:19+0200\n"
+>>>>>>> release
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2010,8 +2014,11 @@ msgstr ""
 msgid "Upload a Book"
 msgstr ""
 
-msgid "books"
-msgstr ""
+#, python-format
+msgid "%d book"
+msgid_plural "%d books"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "Catalog"
 msgstr ""
@@ -2025,12 +2032,18 @@ msgstr ""
 msgid "All books"
 msgstr ""
 
+msgid "Filter"
+msgstr ""
+
 msgid "Edit book"
 msgstr ""
 
+<<<<<<< HEAD
+=======
 msgid "Back to my books"
 msgstr ""
 
+>>>>>>> release
 msgid "Delete image"
 msgstr ""
 
@@ -2080,9 +2093,6 @@ msgid "Search-btn"
 msgstr ""
 
 msgid "Search results"
-msgstr ""
-
-msgid "Filter"
 msgstr ""
 
 msgid "Back to catalog"
@@ -3903,6 +3913,9 @@ msgstr ""
 msgid "[DELETED]"
 msgstr ""
 
+msgid "Book"
+msgstr ""
+
 msgid "The data"
 msgstr ""
 
@@ -4507,6 +4520,11 @@ msgid "Create wiki pages for a subject"
 msgstr ""
 
 msgid ""
+"You can store Your lecture notes here, and share them with Your students. "
+"Encourage them to contribute and coauthor the materials with You!"
+msgstr ""
+
+msgid ""
 "Collecting course notes in Word? Writing things down on a computer during "
 "lectures? You can store your notes here, where they can be read and edited by"
 " your classmates."
@@ -4516,6 +4534,11 @@ msgid "Create a wiki document"
 msgstr ""
 
 msgid "Upload course files"
+msgstr ""
+
+msgid ""
+"Upload Your slides, course notes, sample tasks and solutions here. Large "
+"files are supported - all for Your convenience!"
 msgstr ""
 
 msgid ""

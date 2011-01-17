@@ -11,7 +11,10 @@
     books_department= c.books_department,
     science_type_id = science_type.id, **c.url_params))}
 
-    <div class="books-number">${len(science_type.get_books(type=c.books_type))} ${_('books')}</div>
+    <div class="books-number">
+      <% cnt = len(science_type.get_books(type=c.books_type)) %>
+      ${ungettext('%d book', '%d books', cnt) % cnt}
+    </div>
   </div>
   %endfor
 </div>
@@ -26,7 +29,10 @@
               action="catalog",
               books_department= c.books_department,
               school_grade_id = school_grade.id, **c.url_params))}
-    <div class="books-number">${len(school_grade.get_books(type=c.books_type))} ${_('books')}</div>
+    <div class="books-number">
+      <% cnt = len(school_grade.get_books(type=c.books_type)) %>
+      ${ungettext('%d book', '%d books', cnt) % cnt}
+    </div>
   </div>
   %endfor
 </div>
@@ -91,9 +97,6 @@
   %endif
 </div>
 
-
-
-
 <div class="books-header">
   <h2>${_('All books')}</h2>
   <div id="city_select_dropdown">
@@ -102,13 +105,13 @@
       <form id="cities-select" action="${url(controller='books', action='catalog')}">
         ${h.select('city', [c.selected_city_id], c.filter_cities)}
       </form>
-      <script language="javascript" type="text/javascript">//<![CDATA[
+    </label>
+    <script language="javascript" type="text/javascript">//<![CDATA[
         $('#city').change(function(){
             $('form#cities-select').submit();
           });
       //]]></script>
-
-    </label>
+    <span class="a11y">${h.input_submit(_('Filter'))}</span>
   </div>
   <br style="clear: both;"/>
 </div>

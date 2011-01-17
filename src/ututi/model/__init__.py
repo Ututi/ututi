@@ -2445,8 +2445,9 @@ class SchoolGrade(object):
 
     def get_books(self, **kwargs):
         books = meta.Session.query(Book).filter(Book.school_grade==self)
-        if kwargs:
-             books = books.filter_by(**kwargs)
+        for key, value in kwargs.items():
+            if value is not None:
+                books = books.filter_by(**{key: value})
         return books.all()
 
 
@@ -2476,8 +2477,9 @@ class ScienceType(object):
 
     def get_books(self, **kwargs):
         books = meta.Session.query(Book).filter(Book.science_type==self)
-        if kwargs:
-             books = books.filter_by(**kwargs)
+        for key, value in kwargs.items():
+            if value is not None:
+                books = books.filter_by(**{key: value})
         return books.all()
 
 
