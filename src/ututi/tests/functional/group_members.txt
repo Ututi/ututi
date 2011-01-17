@@ -65,7 +65,7 @@ We need another member in the group, so let's join as the invited user.
 The user should be presented with a flash message inviting him to join the group.
 
     >>> browser2.printQuery("//div[@class='flash-message']/span/text()")
-    <a href="/user/1">Adminas Adminovix</a> has sent you an invitation to group None. Do you want to become a member of this group?
+    <a href="/user/1">Adminas Adminovix</a> has sent you an invitation to group <a href="/group/moderators">Moderatoriai</a>. Do you want to become a member of this group?
 
 Let's accept this invitation.
 
