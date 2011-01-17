@@ -39,7 +39,7 @@ There is a search form on this page and we should be able to use it.
     'http://localhost/school/vu/subjects?text=prof.&obj_type=subject%2Cfile%2Cpage'
 
     >>> browser.printQuery("//div[@class='search-item snippet-subject']/a/text()")
-    Matematinė analizė
+    Matematin&#279; analiz&#279;
 
 The information portlet should show the most important information about the university:
     >>> browser.printQuery("id('location_info_portlet-header')//h2/a/text()")

@@ -14,12 +14,12 @@ Group subject watching
 
 
     >>> browser.printQuery("id('search-results')//a/text()")
-    Matematinė analizė
+    Matematin&#279; analiz&#279;
     vu
 
     >>> browser.getLink('Watch', url='mat_analize').click()
     >>> browser.printQuery("id('watched_subjects')//a/text()")
-    Matematinė analizė
+    Matematin&#279; analiz&#279;
 
     >>> browser.printQuery("id('search-results')")
 
@@ -33,7 +33,7 @@ Group subject watching
     </ul>
 
     >>> browser.printQuery("id('search-results')//a/text()")
-    Matematinė analizė
+    Matematin&#279; analiz&#279;
     vu
 
 These actions should have left an event trail on the group home page:

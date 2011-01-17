@@ -19,7 +19,7 @@ Admin can create book type.
     'http://localhost/admin/book_types'
 
     >>> browser.printQuery('id("book_types_list")//td/text()')
-    Vadovėlis
+    Vadov&#279;lis
 
 
 Admin can edit book type.

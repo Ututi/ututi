@@ -28,7 +28,7 @@ the course page and a flash message is displayed:
     'http://localhost/subject/vu/mat_analize'
 
     >>> browser.printQuery("//div[@class='flash-message']/span//text()")
-    Matematinė analizė has been added to your taught courses list.
+    Matematin&#279; analiz&#279; has been added to your taught courses list.
 
 Also, the course information portlet now shows Benas as the main lecturer
 for the course (this is expected behavior, "static" lecturer is not shown
@@ -49,7 +49,7 @@ The selected course is now displayed in his home page:
 
     >>> browser.getLink('Home').click()
     >>> browser.printQuery("id('subject_list')//div[@class='subject-description-list']//dt//text()")
-    Matematinė analizė
+    Matematin&#279; analiz&#279;
 
 Teacher can click "Create wiki page" link to be directed straight to 
 page creation view:
@@ -79,7 +79,7 @@ Again, an appropriate flash message is displayed:
     'http://localhost/subject/vu/mat_analize'
 
     >>> browser.printQuery("//div[@class='flash-message']/span//text()")
-    Matematinė analizė has been removed from your taught courses list.
+    Matematin&#279; analiz&#279; has been removed from your taught courses list.
 
 It doesn't show in the home page as well:
 
@@ -96,9 +96,9 @@ appears. So let's again add and remove the course from taught courses list:
     'http://localhost/subject/vu/mat_analize'
 
     >>> browser.printQuery("//div[@class='flash-message']/span//text()")
-    Matematinė analizė has been added to your taught courses list.
+    Matematin&#279; analiz&#279; has been added to your taught courses list.
 
     >>> browser.getLink('Home').click()
     >>> browser.getLink(url='/profile/unteach_subject?subject_id=3').click()
     >>> browser.printQuery("//div[@class='flash-message']/span//text()")
-    Matematinė analizė has been removed from your taught courses list.
+    Matematin&#279; analiz&#279; has been removed from your taught courses list.

@@ -9,10 +9,11 @@ Testing Lithuanian pages.
     >>> browser.open('http://localhost/terms')
     >>> browser.printQuery('//h2/text()')
     1. Turinio licencija
-    2. Naudotojų atsakomybė ir teisės
+    2. Naudotoj&#371; atsakomyb&#279; ir teis&#279;s
     3. Garantijos atsisakymas
-    4. Atsakomybės ribojimas
-    5. Sutikimas su licencija (licencijos priėmimas)
+    4. Atsakomyb&#279;s ribojimas
+    5. Sutikimas su licencija (licencijos pri&#279;mimas)
+
     >>> browser.open('http://localhost/about')
     >>> browser.open('http://localhost/advertising')
     >>> browser.open('http://localhost/books/about')
@@ -24,10 +25,11 @@ Testing Polish pages.
     >>> browser = Browser()
     >>> browser.open('http://localhost/terms')
     >>> browser.printQuery('//h2/text()')
-    1. Licencja treści w serwisie
-    2. Odpowiedzialność i prawa użytkowników
-    3. Wyłączenie odpowiedzialności
+    1. Licencja tre&#347;ci w serwisie
+    2. Odpowiedzialno&#347;&#263; i prawa u&#380;ytkownik&#243;w
+    3. Wy&#322;&#261;czenie odpowiedzialno&#347;ci
     4. Akceptacja regulaminu
+
     >>> browser.open('http://localhost/about')
     >>> browser.open('http://localhost/books/about')
 

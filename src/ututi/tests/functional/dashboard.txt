@@ -8,4 +8,4 @@ Just visit the dashboard first.
     'http://localhost/home'
 
     >>> browser.printQuery("//a[@class='subject-title']/text()")
-    Matematinė analizė
+    Matematin&#279; analiz&#279;

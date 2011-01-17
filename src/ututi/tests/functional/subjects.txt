@@ -7,7 +7,7 @@ A list of all subjects is shown at /subjects.
 
     >>> browser.open('http://localhost/admin/subjects')
     >>> browser.printQuery("id('subject_list')//li/a[@class='subject-link']/text()")
-    Matematinė analizė
+    Matematin&#279; analiz&#279;
 
 The link of the subject leads to its home page.
 
@@ -27,7 +27,7 @@ From there we can edit the subject.
 The changed information should be visible in the sidebar block.
 
     >>> browser.printQuery('//div[@class="dalyko-info"]//text()')
-    Matematinė analizė
+    Matematin&#279; analiz&#279;
     vu
     Lecturer:
     Some other guy
@@ -90,7 +90,7 @@ You can import more subjects using the admin interface.
     Imported subject
     Test subject
     Test subject
-    Matematinė analizė
+    Matematin&#279; analiz&#279;
 
     >>> browser.getLink('Imported subject').click()
     >>> browser.queryHTML("id('subject_description')//div[@class='content']/text()")

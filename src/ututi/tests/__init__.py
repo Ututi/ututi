@@ -75,13 +75,13 @@ class UtutiBaseLayer(LayerBase):
 
 
 UtutiLayer = CompositeLayer(GrokLayer,
-                            PylonsTestBrowserLayer('test.ini', conf_dir),
+                            PylonsTestBrowserLayer('test.ini', conf_dir, meta),
                             UtutiBaseLayer(),
                             name='UtutiLayer')
 
 
 UtutiErrorsLayer = CompositeLayer(GrokLayer,
-                                  PylonsTestBrowserLayer('errors.ini', conf_dir),
+                                  PylonsTestBrowserLayer('errors.ini', conf_dir, meta),
                                   UtutiBaseLayer(),
                                   name='UtutiErrorsLayer')
 

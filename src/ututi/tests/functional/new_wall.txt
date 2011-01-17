@@ -30,7 +30,7 @@ The wall currently lists several simple events:
     Adminas Adminovix has created the group Moderatoriai ... ago
     Adminas Adminovix has joined the group Moderatoriai ... ago
     You have joined the group Moderatoriai ... ago
-    Adminas Adminovix has created the subject Matematinė analizė ... ago
+    Adminas Adminovix has created the subject Matematin&#279; analiz&#279; ... ago
 
 Let's use wall's action panel to send private message to the user user:
 
