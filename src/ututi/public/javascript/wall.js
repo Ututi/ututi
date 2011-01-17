@@ -64,6 +64,19 @@ $(document).ready(function(){
         return false;
     });
 
+    /* More events link.
+     */
+    $('.wall #events-more #events-more-link').live('click', function() {
+        var url = $('#events-more-url').attr('value');
+        $('#events-more').addClass('loading');
+        $.get(url, function(content) {
+            // TODO: apply truncation here,
+            // and truncation has to be i18nized. GREAT!
+            $(content).replaceAll('#events-more');
+        });
+        return false;
+    });
+
     /*
     $('.action_submit').click(function(evt) {
         evt.stopPropagation();

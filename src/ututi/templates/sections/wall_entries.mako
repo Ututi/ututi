@@ -23,6 +23,19 @@
   ${h.stylesheet_link('/widgets.css')}
 </%def>
 
+<%def name="wall_entries(events, older_events_link=True)">
+  %for event in events:
+    ${event.wall_entry()}
+  %endfor
+  %if events and older_events_link:
+    <% last_id = min([event.id for event in events]) %>
+    <div id="events-more">
+      <a id="events-more-link" href="#older-events">${_("See older events...")}</a>
+      <input type="hidden" id="events-more-url" value="${url.current(action='wall_js', last_id=last_id)}" />
+    </div>
+  %endif
+</%def>
+
 <%def name="wall_entry(event)">
 <div class="wall-entry ${caller.classes()} type_${event.event_type}" id="wall-event-${event.id}">
   <div class="event-heading">

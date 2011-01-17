@@ -18,7 +18,4 @@
 <a id="settings-link" href="${url(controller='profile', action='wall_settings')}">${_('Wall settings')}</a>
 
 ${dashboard.dashboard(None, c.file_recipients, c.wiki_recipients)}
-
-%for event in c.events:
-  ${event.wall_entry()}
-%endfor
+${wall.wall_entries(c.events)}

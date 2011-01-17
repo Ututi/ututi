@@ -162,6 +162,14 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, ProfileWa
 
         return result
 
+    @ActionProtector("user")
+    def wall_js(self, last_id=None):
+        events = self._wall_events(last_id=last_id)
+        c.events_hidable = True
+        return render_mako_def('/sections/wall_entries.mako',
+                               'wall_entries',
+                               events=events)
+
     def _edit_form_defaults(self):
         defaults = {
             'email': c.user.emails[0].email,

@@ -279,6 +279,12 @@ def make_map(config):
     map.connect('/profile/reply/comment/{event_id}',
                 controller='profile',
                 action='eventcomment_reply')
+    map.connect('/profile/wall_js/{last_id}',
+                controller='profile',
+                action='wall_js')
+    map.connect('/profile/wall_js/',
+                controller='profile',
+                action='wall_js')
 
     map.connect('/profile/{action}', controller='profile')
     map.connect('/profile/{action}/{id}', controller='profile')

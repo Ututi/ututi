@@ -574,6 +574,21 @@
             display: none;
         }
 
+    .wall #events-more {
+        margin: 5px;
+        text-align: center;
+    }
+
+        .wall #events-more.loading {
+            height: 25px;
+            background: url("../images/details/search-loader-small.gif") center center no-repeat;
+        }
+
+        .wall #events-more.loading #events-more-link {
+            display: none;
+        }
+
+
 
 /* SIMPLE LISTS
  * Simple list styles that provide bullet images and spacing.
