@@ -296,9 +296,8 @@ class GroupWallController(WallMixin, FileViewMixin):
         subjects = c.group.watched_subjects
         return[(subject.id, subject.title) for subject in subjects]
 
-    def _redirect_url(self):
-        """Override wall's dashboard action redirection url."""
-        return url(controller='group', action='home', id=c.group.group_id)
+    def _redirect_url(self, id=None):
+        return url(controller='group', action='home', id=id)
 
     def _wall_events(self, limit=20, last_id=None):
         from ututi.model.events import Event

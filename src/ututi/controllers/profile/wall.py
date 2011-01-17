@@ -14,9 +14,7 @@ from sqlalchemy.sql.expression import or_
 
 class ProfileWallController(WallMixin, FileViewMixin):
 
-    def _redirect_url(self):
-        """This is the default redirect url of wall methods.
-           Subclasses should override it."""
+    def _redirect_url(self, id=None):
         return url(controller='profile', action='wall')
 
 

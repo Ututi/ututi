@@ -306,9 +306,12 @@ class WallMixin(object):
         return [(subject.id, subject.title)
                 for subject in c.user.all_watched_subjects]
 
-    def _redirect_url(self):
+    def _redirect_url(self, id=None):
         """This is the default redirect url of wall methods.
-           Subclasses should override it."""
+           Subclasses should override it.
+
+           Some actions also pass the current url id parameter,
+           which defines the context."""
         raise NotImplementedError()
 
     @ActionProtector("user")
@@ -339,7 +342,7 @@ class WallMixin(object):
                                    created=msg.sent,
                                    attachments=msg.attachments)
         else:
-            redirect(self._redirect_url())
+            redirect(self._redirect_url(id))
 
     @ActionProtector("user")
     @validate(schema=WallReplyValidator())
@@ -369,7 +372,7 @@ class WallMixin(object):
                                    message=post.message,
                                    created=post.created_on)
         else:
-            redirect(self._redirect_url())
+            redirect(self._redirect_url(id))
 
     @ActionProtector("user")
     @validate(schema=WallReplyValidator())
@@ -400,8 +403,7 @@ class WallMixin(object):
 
     @ActionProtector("user")
     @validate(schema=WallReplyValidator())
-    def eventcomment_reply(self, event_id):
-        # parameter 'id' is ignored
+    def eventcomment_reply(self, event_id, id=None):
         event = Event.get(event_id)
         if event is None:
             abort(404)
@@ -415,4 +417,4 @@ class WallMixin(object):
                                    message=comment.content,
                                    created=comment.created_on)
         else:
-            redirect(self._redirect_url())
+            redirect(self._redirect_url(id))
