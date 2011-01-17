@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from zope.testing import doctest
+import doctest
 
 from ututi.tests import UtutiLayer
 from ututi.lib.latex import replace_latex_to_html

@@ -1,4 +1,4 @@
-from zope.testing import doctest
+import doctest
 
 from ututi.model import SMS, User, meta
 from ututi.tests import UtutiLayer

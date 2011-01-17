@@ -1,4 +1,4 @@
-from zope.testing import doctest
+import doctest
 from ututi.tests import UtutiLayer
 
 def test_sms():

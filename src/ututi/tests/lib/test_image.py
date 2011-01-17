@@ -1,4 +1,4 @@
-from zope.testing import doctest
+import doctest
 from ututi.tests import UtutiLayer
 
 from ututi.lib.image import resize_image

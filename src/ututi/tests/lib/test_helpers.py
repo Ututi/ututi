@@ -1,5 +1,5 @@
 import re
-from zope.testing import doctest
+import doctest
 
 from ututi.tests import UtutiLayer
 from ututi.lib.helpers import ellipsis

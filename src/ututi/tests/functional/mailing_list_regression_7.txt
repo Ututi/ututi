@@ -12,21 +12,19 @@ Regression test for group email being in cc
     >>> print len(mail_queue)
     1
 
-    >>> print mail_queue.pop().payload().decode('ISO-8859-2')
-    Witam przyjacielu,
-    <BLANKLINE>
-    narazie nie wiem skąd wziąć więcej polskich liter i dlaczego żaden list
-    nie trafia do celu, jednak coś w tym musi być ;)
-    <BLANKLINE>
-    ołówek łóżko łabędź, bąk
-    <BLANKLINE>
-    --
-    Jaro
-    <BLANKLINE>
+    >>> mail_queue.pop().payload().decode('ISO-8859-2').splitlines()
+    [u'Witam przyjacielu,',
+     u'',
+     u'narazie nie wiem sk\u0105d wzi\u0105\u0107 wi\u0119cej polskich liter i dlaczego \u017caden list ',
+     u'nie trafia do celu, jednak co\u015b w tym musi by\u0107 ;)',
+     u'',
+     u'o\u0142\xf3wek \u0142\xf3\u017cko \u0142ab\u0119d\u017a, b\u0105k',
+     u'',
+     u'--',
+     u'Jaro']
 
     >>> send_test_message('lithuanian_encoding_test.txt')
-    >>> print mail_queue.pop().payload().decode('ISO-8859-13')
-    Laiškas žalias ir ąžuolas šalia.
-    <BLANKLINE>
+    >>> mail_queue.pop().payload().decode('ISO-8859-13')
+    u'Lai\u0161kas \u017ealias ir \u0105\u017euolas \u0161alia.\n'
 
     >>> mail_queue[:] = []

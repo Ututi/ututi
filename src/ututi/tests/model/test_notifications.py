@@ -1,4 +1,4 @@
-from zope.testing import doctest
+import doctest
 import datetime
 
 from ututi.model import Notification, meta

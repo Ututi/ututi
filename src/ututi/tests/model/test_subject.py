@@ -1,4 +1,4 @@
-from zope.testing import doctest
+import doctest
 
 from ututi.model import User
 from ututi.model import LocationTag, Subject, meta

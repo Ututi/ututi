@@ -1,4 +1,4 @@
-from zope.testing import doctest
+import doctest
 from ututi.tests import UtutiLayer
 
 from sqlalchemy.sql.expression import select, literal_column

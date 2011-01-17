@@ -8,7 +8,7 @@ from datetime import date
 from pkg_resources import resource_string, resource_stream
 import pylons.test
 
-from zope.testing import doctest
+import doctest
 
 from nous.mailpost import processEmailAndPost
 

@@ -1,5 +1,5 @@
 from datetime import date
-from zope.testing import doctest
+import doctest
 
 from pylons import config
 

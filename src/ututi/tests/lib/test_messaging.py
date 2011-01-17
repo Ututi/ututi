@@ -1,6 +1,6 @@
 from datetime import date
 
-from zope.testing import doctest
+import doctest
 
 import pylons.test
 from pylons import config

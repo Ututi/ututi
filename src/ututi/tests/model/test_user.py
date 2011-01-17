@@ -1,6 +1,6 @@
 from datetime import date
 
-from zope.testing import doctest
+import doctest
 
 from ututi.model import Group
 from ututi.model import Subject, LocationTag
