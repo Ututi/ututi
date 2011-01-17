@@ -58,7 +58,7 @@
       <div class="flash-message">
         <span>
           ${_(u"%(author)s has sent you an invitation to group %(group)s. Do you want to become a member of this group?") %\
-             dict(author=h.object_link(invitation.author), group=h.object_link(invitation.group.title))}
+             dict(author=h.object_link(invitation.author), group=h.object_link(invitation.group))}
         </span>
         <br />
         <form method="post"
