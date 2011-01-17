@@ -154,7 +154,7 @@ To test forum post threading we will use the group will forum enabled:
     You have posted a new message Forum post title in the forum Testing group ...
     Forum post ...
 
-Admin can immediately reply to this forum thread from his wall:
+User can immediately reply to this forum thread from his wall:
 
     >>> form = admin.getForm(name='reply-form', index=0)
     >>> form.getControl(name='message').value = 'Forum post reply'
@@ -166,3 +166,58 @@ Admin can immediately reply to this forum thread from his wall:
     You have posted a new message Forum post title in the forum Testing group ...
     Forum post ...
     Adminas Adminovix : Forum post reply ...
+
+Group's mailinglist thread is also displayed in group's wall:
+
+    >>> admin.getLink("Moderatoriai").click()
+    >>> admin.printQuery("//div[contains(@class, 'wall-entry')]//text()")
+    You have posted a new message Mailinglist message title to the group Moderatoriai ... ago
+    Mailinglist message ... ago ...
+    Third user : Mailinglist message reply ... ago ...
+    You have created the group Moderatoriai ... ago
+    You have joined the group Moderatoriai ... ago
+    Third user has joined the group Moderatoriai ... ago
+
+User can also reply to these threads from group's wall:
+
+    >>> form = admin.getForm(name='reply-form', index=0)
+    >>> form.getControl(name='message').value = 'Mailinglist message reply from group wall'
+    >>> form.getControl("Send reply").click()
+    >>> admin.url
+    'http://localhost/group/moderators/home'
+
+    >>> admin.printQuery("//div[contains(@class, 'wall-entry')]//text()")
+    You have posted a new message Mailinglist message title to the group Moderatoriai ... ago
+    Mailinglist message ... ago ...
+    Third user : Mailinglist message reply ... ago ...
+    Adminas Adminovix : Mailinglist message reply from group wall ... ago
+    ...
+
+    >>> print mail_queue.pop().payload()
+    Mailinglist message reply from group wall
+
+The same applies to forums: thread is displayed in groups wall.
+The Testing group has forums enabled, so we will use this group to test this
+functionality:
+
+    >>> admin.getLink("Testing group").click()
+    >>> admin.printQuery("//div[contains(@class, 'wall-entry')]//text()")
+    You have posted a new message Forum post title in the forum Testing group ... ago
+    Forum post ... ago ...
+    Adminas Adminovix : Forum post reply ... ago ...
+    You have created the group Testing group ... ago
+    You have joined the group Testing group ... ago
+    Second user has joined the group Testing group ... ago
+
+    >>> form = admin.getForm(name='reply-form', index=0)
+    >>> form.getControl(name='message').value = 'Forum post reply from group wall'
+    >>> form.getControl("Send reply").click()
+    >>> admin.url
+    'http://localhost/group/testgroup/home'
+
+    >>> admin.printQuery("//div[contains(@class, 'wall-entry')]//text()")
+    You have posted a new message Forum post title in the forum Testing group ... ago
+    Forum post ... ago ...
+    Adminas Adminovix : Forum post reply ... ago ...
+    Adminas Adminovix : Forum post reply from group wall ... ago
+    ...
