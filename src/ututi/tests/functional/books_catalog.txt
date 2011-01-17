@@ -53,7 +53,7 @@ The book gets added and we get redirected to it's display view.
 Then we go to the books catalog:
 
     >>> browser.click('All Books')
-    >>> browser.printCssQuery("h3.book-title")
+    >>> browser.printCssQuery("h3.book-title", include_attributes=["class", "href"])
     <h3 class="book-title">
       <a href="/books/show/4">My physics book</a>
     </h3>
@@ -71,7 +71,7 @@ We can't just go and see the whole category such as all the books for
 students, so let's go to the subtype instead:
 
     >>> browser.open('http://localhost/books/catalog/university')
-    >>> browser.printCssQuery("h3.book-title")
+    >>> browser.printCssQuery("h3.book-title", include_attributes=["class", "href"])
     <h3 class="book-title">
       <a href="/books/show/6">University book</a>
     </h3>
@@ -80,7 +80,7 @@ students, so let's go to the subtype instead:
     ['All cities (1)', 'Vilnius (1)']
 
     >>> browser.open('http://localhost/books/catalog/university/science/3')
-    >>> browser.printCssQuery("h3.book-title")
+    >>> browser.printCssQuery("h3.book-title", include_attributes=["class", "href"])
     <h3 class="book-title">
       <a href="/books/show/6">University book</a>
     </h3>
@@ -89,7 +89,7 @@ students, so let's go to the subtype instead:
     >>> browser.printCssQuery("h3.book-title")
 
     >>> browser.open('http://localhost/books/catalog/school')
-    >>> browser.printCssQuery("h3.book-title")
+    >>> browser.printCssQuery("h3.book-title", include_attributes=["class", "href"])
     <h3 class="book-title">
       <a href="/books/show/4">My physics book</a>
     </h3>
@@ -98,7 +98,7 @@ students, so let's go to the subtype instead:
     ['All cities (1)', 'Kaunas (1)']
 
     >>> browser.open('http://localhost/books/catalog/school/science/1')
-    >>> browser.printCssQuery("h3.book-title")
+    >>> browser.printCssQuery("h3.book-title", include_attributes=["class", "href"])
     <h3 class="book-title">
       <a href="/books/show/4">My physics book</a>
     </h3>
@@ -107,7 +107,7 @@ students, so let's go to the subtype instead:
     >>> browser.printCssQuery("h3.book-title")
 
     >>> browser.open('http://localhost/books/catalog/other')
-    >>> browser.printCssQuery("h3.book-title")
+    >>> browser.printCssQuery("h3.book-title", include_attributes=["class", "href"])
     <h3 class="book-title">
       <a href="/books/show/5">My beautiful book 2</a>
     </h3>
