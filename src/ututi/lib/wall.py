@@ -262,8 +262,10 @@ class WallMixin(object):
         meta.Session.commit()
         return page
 
-    def _wall_events(self):
-        """Should be implemented by subclasses."""
+    def _wall_events(self, limit=20, last_id=None):
+        """Should be implemented by subclasses.
+        If last_id is given, events should be filtered Event.id < last_id
+        to retrieve older events."""
         return []
 
     @ActionProtector("user")

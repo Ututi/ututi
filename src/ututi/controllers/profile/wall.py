@@ -20,7 +20,7 @@ class ProfileWallController(WallMixin, FileViewMixin):
         return url(controller='profile', action='wall')
 
 
-    def _wall_events(self):
+    def _wall_events(self, limit=20, last_id=None):
         user_is_admin_of_groups = [membership.group_id
                                    for membership in c.user.memberships
                                    if membership.membership_type == 'administrator']
@@ -33,17 +33,21 @@ class ProfileWallController(WallMixin, FileViewMixin):
         #query for ordering events by their last subevent
         child_query = select([e.created], e.parent_id==Event.id, order_by=e.created.desc(), limit=1).label('last')
 
-        q = meta.Session.query(Event)\
-            .filter(or_(Event.object_id.in_([s.id for s in subjects]),
-                        Event.object_id.in_([m.group.id for m in c.user.memberships]),
-                        Event.recipient_id == c.user.id,
-                        and_(Event.event_type=='private_message_sent',
-                             Event.user == c.user)))\
-            .filter(or_(Event.event_type != 'moderated_post_created',
-                        Event.object_id.in_(user_is_admin_of_groups)))\
-            .filter(~Event.event_type.in_(c.user.ignored_events_list))\
-            .filter(Event.parent == None)\
-            .order_by(func.coalesce(child_query, Event.created).desc(),
-                      Event.event_type)
+        q = meta.Session.query(Event)
 
-        return q.limit(20).all()
+        if last_id is not None:
+            q = q.filter(Event.id < last_id)
+
+        q = q.filter(or_(Event.object_id.in_([s.id for s in subjects]),
+                         Event.object_id.in_([m.group.id for m in c.user.memberships]),
+                         Event.recipient_id == c.user.id,
+                         and_(Event.event_type=='private_message_sent',
+                              Event.user == c.user)))\
+             .filter(or_(Event.event_type != 'moderated_post_created',
+                         Event.object_id.in_(user_is_admin_of_groups)))\
+             .filter(~Event.event_type.in_(c.user.ignored_events_list))\
+             .filter(Event.parent == None)\
+             .order_by(func.coalesce(child_query, Event.created).desc(),
+                       Event.event_type)
+
+        return q.limit(limit).all()
