@@ -151,6 +151,7 @@ class WikiForm(Schema):
 class WallReplyValidator(Schema):
     message = String(not_empty=True)
 
+
 class WallMixin(object):
 
     def _redirect_url(self):
