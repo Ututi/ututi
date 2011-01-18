@@ -299,7 +299,7 @@ class GroupWallController(WallMixin, FileViewMixin):
     def _redirect_url(self, id=None):
         return url(controller='group', action='home', id=id)
 
-    def _wall_events(self, limit=20, last_id=None):
+    def _wall_events(self, limit=60):
         from ututi.model.events import Event
         e = aliased(Event)
 
@@ -310,17 +310,14 @@ class GroupWallController(WallMixin, FileViewMixin):
                                    for membership in c.user.memberships
                                    if membership.membership_type == 'administrator']
 
-        q = meta.Session.query(Event)
-        if last_id is not None:
-            q = q.filter(Event.id < last_id)
-
-        q = q.filter(or_(Event.object_id.in_([s.id for s in c.group.watched_subjects]),
-                         Event.object_id == c.group.id))\
-             .filter(or_(Event.event_type != 'moderated_post_created',
-                         Event.object_id.in_(user_is_admin_of_groups)))\
-             .filter(Event.parent == None)\
-             .order_by(func.coalesce(child_query, Event.created).desc(),
-                       Event.event_type)
+        q = meta.Session.query(Event)\
+                .filter(or_(Event.object_id.in_([s.id for s in c.group.watched_subjects]),
+                            Event.object_id == c.group.id))\
+                .filter(or_(Event.event_type != 'moderated_post_created',
+                            Event.object_id.in_(user_is_admin_of_groups)))\
+                .filter(Event.parent == None)\
+                .order_by(func.coalesce(child_query, Event.created).desc(),
+                          Event.event_type)
 
         return q.limit(limit).all()
 

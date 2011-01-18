@@ -163,8 +163,8 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, ProfileWa
         return result
 
     @ActionProtector("user")
-    def wall_js(self, last_id=None):
-        events = self._wall_events(last_id=last_id)
+    def wall_js(self):
+        events = self._wall_events()
         c.events_hidable = True
         return render_mako_def('/sections/wall_entries.mako',
                                'wall_entries',

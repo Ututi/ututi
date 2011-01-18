@@ -3586,12 +3586,10 @@ h2.overline {
     clear: both;
 }
 
-.click2show .show,
 .clickBlock .showBlock {
     display: none;
 }
 
-.click2show .click,
 .clickAction,
 .clickable {
     cursor: pointer;

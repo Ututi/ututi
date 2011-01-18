@@ -574,20 +574,12 @@
             display: none;
         }
 
-    .wall #events-more {
-        margin: 5px;
-        text-align: center;
-    }
-
-        .wall #events-more.loading {
-            height: 25px;
-            background: url("../images/details/search-loader-small.gif") center center no-repeat;
+        .wall .more-events .click {
+            display: block;
+            padding: 5px;
+            outline: none;
+            text-align: center;
         }
-
-        .wall #events-more.loading #events-more-link {
-            display: none;
-        }
-
 
 
 /* SIMPLE LISTS
@@ -973,3 +965,17 @@ ul.feature-list {
     display: none;
 }
     .click-action-block.open { display: block; }
+
+/* CLICK2SHOW styles
+ */
+
+.click2show .show,
+.click2fade .show {
+    display: none;
+}
+
+.click2show .click
+.click2fade .click {
+    cursor: pointer;
+}
+

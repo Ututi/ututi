@@ -10,4 +10,12 @@ $(document).ready(function() {
             return false;
         });
     });
+    $(".click2fade .click").click(function() {
+        /* Traversing children explicitly, because
+         * .clik2fade blocks may be nested.
+         */
+        var el = $(this).closest('.click2fade');
+        el.children('.hide').hide();
+        el.children('.show').fadeIn('slow');
+    });
 });
