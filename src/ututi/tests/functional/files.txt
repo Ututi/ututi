@@ -44,7 +44,7 @@ After the download of the file, the downloaded files count in the user list shou
 
 We print the second and the fifth columns of the table:
 
-    >>> browser.printCssQuery('th:nth-child(2), th:nth-child(5), td:nth-child(2), td:nth-child(5)', include_attributes=[''])
+    >>> browser.printCssQuery('th:nth-child(2), th:nth-child(5), td:nth-child(2), td:nth-child(5)', strip=True)
     <th>Name</th>                           <th>Downloads</th>
     <td> <a>Benas</a> </td>                 <td> 0 (0 B) <br /> 0 unique </td>
     <td> <a>Third user</a> </td>            <td> 0 (0 B) <br /> 0 unique </td>

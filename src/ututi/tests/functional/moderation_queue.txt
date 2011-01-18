@@ -24,7 +24,7 @@ Disable moderation first:
 
 We can't see the moderation queue button too:
 
-    >>> browser.printCssQuery('.single-title button', include_attributes=[''])
+    >>> browser.printCssQuery('.single-title button', strip=True)
     <button>
       <span>New topic</span>
     </button>
@@ -59,7 +59,7 @@ But we will see it in the moderation queue. Note here, that the button
 linking to the moderation queue also shows the number of messages
 awaiting moderation:
 
-    >>> browser.printCssQuery('.single-title button', include_attributes=[''])
+    >>> browser.printCssQuery('.single-title button', strip=True)
     <button>
       <span>New topic</span>
     </button>

@@ -97,7 +97,7 @@ Then I go to "my books" page to see all my uploaded books
 
 Some of them are shown as expired
 
-    >>> browser.printCssQuery(".book-information-expired .book-title", include_attributes=[''])
+    >>> browser.printCssQuery(".book-information-expired .book-title", strip=True)
     <h3>My edited expired physics book</h3>
     <h3>My expired other book</h3>
     <h3>My expired University book</h3>
@@ -105,7 +105,7 @@ Some of them are shown as expired
 I can expire a book by hand:
 
     >>> browser.click('Delete')
-    >>> browser.printCssQuery(".book-information-expired .book-title", include_attributes=[''])
+    >>> browser.printCssQuery(".book-information-expired .book-title", strip=True)
     <h3>My edited expired physics book</h3>
     <h3>My expired other book</h3>
     <h3>My expired University book</h3>
@@ -122,7 +122,7 @@ When I restore my expired book and I won't see it in expired books list
       <a href="/books/show/4">My edited expired physics book</a>
     </h3>
 
-    >>> browser.printCssQuery(".book-information-expired .book-title", include_attributes=[''])
+    >>> browser.printCssQuery(".book-information-expired .book-title", strip=True)
     <h3>My expired other book</h3>
     <h3>My expired University book</h3>
     <h3>My physics book</h3>

@@ -39,7 +39,7 @@ Let's fill out the form to create the subject:
 
 On the subject page Benas is listed as the lecturer:
 
-    >>> browser.printQuery(".dalyko-info .teacher-list li", selector='cssselect', include_attributes=[''])
+    >>> browser.printQuery(".dalyko-info .teacher-list li", selector='cssselect', strip=True)
     <li>
         <a>Benas</a>
     </li>

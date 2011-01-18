@@ -17,7 +17,7 @@ department's page. Benas visits subject's page directly:
 Currently portlet shows lecturer that was typed in when filling out
 subject's information:
 
-    >>> browser.printQuery(".dalyko-info .teacher-list li", selector='cssselect', include_attributes=[''])
+    >>> browser.printQuery(".dalyko-info .teacher-list li", selector='cssselect', strip=True)
     <li>prof. E. Misevi&#269;ius</li>
 
 Teacher can click "I teach this course" button. He is then stays on
@@ -34,7 +34,7 @@ Also, the course information portlet now shows Benas as the main lecturer
 for the course (this is expected behavior, "static" lecturer is not shown
 if there are ututi teachers for the subject):
 
-    >>> browser.printQuery(".dalyko-info .teacher-list li", selector='cssselect', include_attributes=[''])
+    >>> browser.printQuery(".dalyko-info .teacher-list li", selector='cssselect', strip=True)
     <li>
         <a>Benas</a>
     </li>

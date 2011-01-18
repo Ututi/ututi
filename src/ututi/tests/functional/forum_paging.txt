@@ -78,7 +78,7 @@ And there should be a pager now:
 
     >>> browser.reload()
     >>> browser.getLink('Some thread').click()
-    >>> browser.printCssQuery('#pager', include_attributes=[''])
+    >>> browser.printCssQuery('#pager', strip=True)
     <div>
       <span>1</span>
       <a>2</a>
@@ -97,7 +97,7 @@ And create some threads:
 The pager should be there:
 
     >>> browser.reload()
-    >>> browser.printCssQuery('#pager', include_attributes=[''])
+    >>> browser.printCssQuery('#pager', strip=True)
     <div>
       <span>1</span>
       <a>2</a>
@@ -107,7 +107,7 @@ The pager should be there:
 Test paging in community forum:
     >>> create_community_threads()
     >>> browser.getLink('Community').click()
-    >>> browser.printCssQuery('#pager', include_attributes=[''])
+    >>> browser.printCssQuery('#pager', strip=True)
     <div>
       <span>1</span>
       <a>2</a>

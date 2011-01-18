@@ -82,7 +82,7 @@ approved message has appeared:
 Now if user refreshes his wall, he sees the message at the top:
 
     >>> user3.reload()
-    >>> user3.printQuery('#wall .description', selector='cssselect', include_attributes=[''])
+    >>> user3.printQuery('#wall .description', selector='cssselect', strip=True)
     <div>
       <a>Varlius &lt;varlius@example.com&gt;</a> has posted a new message <a>Hello from varlius</a> to the group <a>Moderatoriai</a>.
     </div>

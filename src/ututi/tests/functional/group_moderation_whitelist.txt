@@ -124,7 +124,7 @@ Let's try half a whitelist:
 The other message is in the moderation queue, as expected:
 
     >>> browser.open(res.location)
-    >>> browser.printCssQuery('.m-on div', include_attributes=[''])
+    >>> browser.printCssQuery('.m-on div', strip=True)
     <div>
       <a>Hello</a>
     </div>

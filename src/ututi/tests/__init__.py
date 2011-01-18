@@ -121,6 +121,12 @@ class UtutiTestBrowser(NousTestBrowser):
     def printCssQuery(self, query, **kwargs):
         return self.printQuery(query, selector='cssselect', **kwargs)
 
+    def printQuery(self, query, **kwargs):
+        strip = kwargs.pop('strip', False)
+        if strip:
+            kwargs['include_attributes'] = ['']
+        return super(UtutiTestBrowser, self).printQuery(query, **kwargs)
+
     @classmethod
     def logIn(cls, email='admin@ututi.lt', password='asdasd'):
         browser = cls()

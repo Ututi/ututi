@@ -25,7 +25,7 @@ And get to the group welcome page:
 
 In which we see a box suggesting us to invite more members:
 
-    >>> browser.printCssQuery("#invite_members_block", include_attributes=[''])
+    >>> browser.printCssQuery("#invite_members_block", strip=True)
     <div>
       <div></div>
       <div></div>
@@ -52,7 +52,7 @@ In which we see a box suggesting us to invite more members:
 
 Also we see a box that suggest us to watch some subjects:
 
-    >>> browser.printCssQuery("#watch_subjects_block", include_attributes=[''])
+    >>> browser.printCssQuery("#watch_subjects_block", strip=True)
     <div>
       <div></div>
       <div></div>
@@ -93,9 +93,9 @@ disappear:
 When we go back to what's new, we only see the watch more subjects
 box:
 
-    >>> browser.printCssQuery("#invite_members_block", include_attributes=[''])
+    >>> browser.printCssQuery("#invite_members_block", strip=True)
 
-    >>> browser.printCssQuery("#watch_subjects_block", include_attributes=[''])
+    >>> browser.printCssQuery("#watch_subjects_block", strip=True)
     <div>
     ...
     </div>
@@ -115,7 +115,7 @@ Let's watch some subjects:
 
 And the subject watching box is gone:
 
-    >>> browser.printCssQuery("#watch_subjects_block", include_attributes=[''])
+    >>> browser.printCssQuery("#watch_subjects_block", strip=True)
 
 If we stop watching the subject though, the box reappears:
 
@@ -123,7 +123,7 @@ If we stop watching the subject though, the box reappears:
     >>> browser.getLink(url='unwatch_subject').click()
     >>> browser.getLink("News wall", url='group').click()
 
-    >>> browser.printCssQuery("#watch_subjects_block", include_attributes=[''])
+    >>> browser.printCssQuery("#watch_subjects_block", strip=True)
     <div>
     ...
     </div>
@@ -131,7 +131,7 @@ If we stop watching the subject though, the box reappears:
 But we can just cancel it by clicking the 'no, thanks' link:
 
     >>> browser.getLink('no, thank you').click()
-    >>> browser.printCssQuery("#watch_subjects_block", include_attributes=[''])
+    >>> browser.printCssQuery("#watch_subjects_block", strip=True)
 
 And the box is no more.
 
