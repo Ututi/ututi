@@ -133,7 +133,7 @@
           %>
           <div class="click2show hidden-messages">
             <div class="hide">
-              <a class="click">
+              <a class="click" href="#older-messages">
                 ${_("Show older messages (%(message_count)s)") % dict(message_count=len(hidden))}
               </a>
             </div>

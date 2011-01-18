@@ -17,5 +17,6 @@ $(document).ready(function() {
         var el = $(this).closest('.click2fade');
         el.children('.hide').hide();
         el.children('.show').fadeIn('slow');
+        return false;
     });
 });
