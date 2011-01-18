@@ -323,21 +323,21 @@ class GroupWallController(WallMixin, FileViewMixin):
 
     @ActionProtector("user")
     @validate(schema=WallReplyValidator())
-    def mailinglist_reply(self, id, thread_id):
-        return self._mailinglist_reply(id, thread_id,
-                    url(controller='group', action='home', id=id))
+    def mailinglist_reply(self, group_id, thread_id):
+        return self._mailinglist_reply(group_id, thread_id,
+                    url(controller='group', action='home', id=group_id))
 
     @ActionProtector("user")
     @validate(schema=WallReplyValidator())
-    def forum_reply(self, id, category_id, thread_id):
-        return self._forum_reply(id, category_id, thread_id,
-                    url(controller='group', action='home', id=id))
+    def forum_reply(self, group_id, category_id, thread_id):
+        return self._forum_reply(group_id, category_id, thread_id,
+                    url(controller='group', action='home', id=group_id))
 
     @ActionProtector("user")
     @validate(schema=WallReplyValidator())
-    def eventcomment_reply(self, id, event_id):
+    def eventcomment_reply(self, group_id, event_id):
         return self._eventcomment_reply(event_id,
-                    url(controller='group', action='home', id=id))
+                    url(controller='group', action='home', id=group_id))
 
 
 class GroupController(BaseController, SubjectAddMixin, GroupWallController):

@@ -158,13 +158,13 @@ def make_map(config):
     map.connect('/group/{id}/request/{hash_code}/{do}', controller='group', action='request')
 
     #group's wall actions
-    map.connect('/group/{id}/reply/mailinglist/{thread_id}',
+    map.connect('/group/{group_id}/reply/mailinglist/{thread_id}',
                 controller='group',
                 action='mailinglist_reply')
-    map.connect('/group/{id}/reply/forum/{category_id}/{thread_id}',
+    map.connect('/group/{group_id}/reply/forum/{category_id}/{thread_id}',
                 controller='group',
                 action='forum_reply')
-    map.connect('/group/{id}/reply/comment/{event_id}',
+    map.connect('/group/{group_id}/reply/comment/{event_id}',
                 controller='group',
                 action='eventcomment_reply')
 
