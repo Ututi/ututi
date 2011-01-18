@@ -267,13 +267,13 @@ def make_map(config):
     map.connect('/profile/edit/notifications', controller='profile', action='notifications')
 
     # user's wall actions
-    map.connect('/profile/reply/mailinglist/{id}/{thread_id}',
+    map.connect('/profile/reply/mailinglist/{group_id}/{thread_id}',
                 controller='profile',
                 action='mailinglist_reply')
-    map.connect('/profile/reply/forum/{id}/{category_id}/{thread_id}',
+    map.connect('/profile/reply/forum/{group_id}/{category_id}/{thread_id}',
                 controller='profile',
                 action='forum_reply')
-    map.connect('/profile/reply/privatemessage/{id}',
+    map.connect('/profile/reply/privatemessage/{msg_id}',
                 controller='profile',
                 action='privatemessage_reply')
     map.connect('/profile/reply/comment/{event_id}',

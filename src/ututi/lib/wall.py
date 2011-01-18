@@ -153,6 +153,11 @@ class WallReplyValidator(Schema):
 
 class WallMixin(object):
 
+    def _redirect_url(self):
+        """This is the default redirect url for wall methods.
+           Subclasses should override it."""
+        raise NotImplementedError()
+
     @ActionProtector("user")
     def hide_event(self):
         """Hide an event from the user's wall, add the event ttype to the ignored events list."""
@@ -306,18 +311,8 @@ class WallMixin(object):
         return [(subject.id, subject.title)
                 for subject in c.user.all_watched_subjects]
 
-    def _redirect_url(self, id=None):
-        """This is the default redirect url of wall methods.
-           Subclasses should override it.
-
-           Some actions also pass the current url id parameter,
-           which defines the context."""
-        raise NotImplementedError()
-
-    @ActionProtector("user")
-    @validate(schema=WallReplyValidator())
-    def mailinglist_reply(self, id, thread_id):
-        group = Group.get(id)
+    def _mailinglist_reply(self, group_id, thread_id, redirect_url):
+        group = Group.get(group_id)
         try:
             thread_id = int(thread_id)
         except ValueError:
@@ -342,12 +337,10 @@ class WallMixin(object):
                                    created=msg.sent,
                                    attachments=msg.attachments)
         else:
-            redirect(self._redirect_url(id))
+            redirect(redirect_url)
 
-    @ActionProtector("user")
-    @validate(schema=WallReplyValidator())
-    def forum_reply(self, id, category_id, thread_id):
-        group = Group.get(id)
+    def _forum_reply(self, group_id, category_id, thread_id, redirect_url):
+        group = Group.get(group_id)
         try:
             thread_id = int(thread_id)
             category_id = int(category_id)
@@ -372,12 +365,10 @@ class WallMixin(object):
                                    message=post.message,
                                    created=post.created_on)
         else:
-            redirect(self._redirect_url(id))
+            redirect(redirect_url)
 
-    @ActionProtector("user")
-    @validate(schema=WallReplyValidator())
-    def privatemessage_reply(self, id):
-        original = PrivateMessage.get(id)
+    def _privatemessage_reply(self, msg_id, redirect_url):
+        original = PrivateMessage.get(msg_id)
         if original is None or not (c.user == original.sender or c.user == original.recipient):
             abort(404)
 
@@ -399,11 +390,9 @@ class WallMixin(object):
                                    message=msg.content,
                                    created=msg.created_on)
         else:
-            redirect(self._redirect_url())
+            redirect(redirect_url)
 
-    @ActionProtector("user")
-    @validate(schema=WallReplyValidator())
-    def eventcomment_reply(self, event_id, id=None):
+    def _eventcomment_reply(self, event_id, redirect_url):
         event = Event.get(event_id)
         if event is None:
             abort(404)
@@ -417,4 +406,4 @@ class WallMixin(object):
                                    message=comment.content,
                                    created=comment.created_on)
         else:
-            redirect(self._redirect_url(id))
+            redirect(redirect_url)

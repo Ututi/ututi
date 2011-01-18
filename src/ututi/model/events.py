@@ -362,7 +362,7 @@ class MailinglistPostCreatedEvent(PostCreatedEventBase, MessagingEventMixin):
     def reply_action(self):
         """MessagingEventMixin implementation."""
         return url.current(action='mailinglist_reply',
-                           thread_id=self.message.thread.id, id=self.message.thread.group.group_id)
+                           thread_id=self.message.thread.id, group_id=self.message.thread.group.group_id)
 
 
 class ModeratedPostCreated(PostCreatedEventBase):
@@ -436,7 +436,7 @@ class ForumPostCreatedEvent(Event, MessagingEventMixin):
     def reply_action(self):
         """MessagingEventMixin implementation."""
         return url.current(action='forum_reply',
-                           id=self.context.group_id,
+                           group_id=self.context.group_id,
                            category_id=self.post.category_id,
                            thread_id=self.post.thread_id)
 
@@ -493,7 +493,7 @@ class PrivateMessageSentEvent(Event, MessagingEventMixin):
 
     def reply_action(self):
         """MessagingEventMixin implementation."""
-        return url.current(action='privatemessage_reply', id=self.private_message.id)
+        return url.current(action='privatemessage_reply', msg_id=self.private_message.id)
 
 
 class GroupMemberJoinedEvent(Event):

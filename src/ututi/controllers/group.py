@@ -24,7 +24,7 @@ from sqlalchemy.sql.expression import select, func, or_
 
 import ututi.lib.helpers as h
 from ututi.lib.fileview import FileViewMixin
-from ututi.lib.wall import WallMixin
+from ututi.lib.wall import WallMixin, WallReplyValidator
 from ututi.lib.image import serve_logo
 from ututi.lib.search import _exclude_subjects
 from ututi.lib.sms import sms_cost
@@ -275,6 +275,9 @@ def group_menu_items():
 
 class GroupWallController(WallMixin, FileViewMixin):
 
+    def _redirect_url(self):
+        return url(controller='group', action='home', id=c.group.id)
+
     def _msg_rcpt(self):
         if c.group.mailinglist_enabled:
             forum_categories = []
@@ -295,9 +298,6 @@ class GroupWallController(WallMixin, FileViewMixin):
     def _wiki_rcpt(self):
         subjects = c.group.watched_subjects
         return[(subject.id, subject.title) for subject in subjects]
-
-    def _redirect_url(self, id=None):
-        return url(controller='group', action='home', id=id)
 
     def _wall_events(self, limit=60):
         from ututi.model.events import Event
@@ -320,6 +320,24 @@ class GroupWallController(WallMixin, FileViewMixin):
                           Event.event_type)
 
         return q.limit(limit).all()
+
+    @ActionProtector("user")
+    @validate(schema=WallReplyValidator())
+    def mailinglist_reply(self, id, thread_id):
+        return self._mailinglist_reply(id, thread_id,
+                    url(controller='group', action='home', id=id))
+
+    @ActionProtector("user")
+    @validate(schema=WallReplyValidator())
+    def forum_reply(self, id, category_id, thread_id):
+        return self._forum_reply(id, category_id, thread_id,
+                    url(controller='group', action='home', id=id))
+
+    @ActionProtector("user")
+    @validate(schema=WallReplyValidator())
+    def eventcomment_reply(self, id, event_id):
+        return self._eventcomment_reply(event_id,
+                    url(controller='group', action='home', id=id))
 
 
 class GroupController(BaseController, SubjectAddMixin, GroupWallController):

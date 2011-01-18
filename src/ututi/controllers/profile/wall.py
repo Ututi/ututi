@@ -1,7 +1,9 @@
 from pylons import url
 from pylons import tmpl_context as c
-from ututi.lib.wall import WallMixin
+from pylons.decorators import validate
+from ututi.lib.wall import WallMixin, WallReplyValidator
 from ututi.lib.fileview import FileViewMixin
+from ututi.lib.security import ActionProtector
 
 from ututi.model import meta
 from ututi.model.events import Event
@@ -14,9 +16,8 @@ from sqlalchemy.sql.expression import or_
 
 class ProfileWallController(WallMixin, FileViewMixin):
 
-    def _redirect_url(self, id=None):
+    def _redirect_url(self):
         return url(controller='profile', action='wall')
-
 
     def _wall_events(self, limit=60):
         user_is_admin_of_groups = [membership.group_id
@@ -45,3 +46,27 @@ class ProfileWallController(WallMixin, FileViewMixin):
                        Event.event_type)
 
         return q.limit(limit).all()
+
+    @ActionProtector("user")
+    @validate(schema=WallReplyValidator())
+    def mailinglist_reply(self, group_id, thread_id):
+        return self._mailinglist_reply(group_id, thread_id,
+                                       url(controller='profile', action='wall'))
+
+    @ActionProtector("user")
+    @validate(schema=WallReplyValidator())
+    def forum_reply(self, group_id, category_id, thread_id):
+        return self._forum_reply(group_id, category_id, thread_id,
+                                 url(controller='profile', action='wall'))
+
+    @ActionProtector("user")
+    @validate(schema=WallReplyValidator())
+    def privatemessage_reply(self, msg_id):
+        return self._privatemessage_reply(msg_id,
+                                          url(controller='profile', action='wall'))
+
+    @ActionProtector("user")
+    @validate(schema=WallReplyValidator())
+    def eventcomment_reply(self, event_id):
+        return self._eventcomment_reply(event_id,
+                                        url(controller='profile', action='wall'))
