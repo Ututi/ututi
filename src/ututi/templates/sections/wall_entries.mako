@@ -43,7 +43,9 @@
 <%def name="wall_entry(event)">
 <div class="wall-entry ${caller.classes()} type_${event.event_type}" id="wall-event-${event.id}">
   <div class="event-heading">
-    ${caller.heading()}
+    <span class="event-title">
+      ${caller.heading()}
+    </span>
     <span class="event-time">
       ${h.when(event.created)}
     </span>
@@ -71,7 +73,7 @@
     </div>
     <div class="content">
       <span class="reply-author">${h.object_link(author)}:</span>
-      <span class="truncated">${h.nl2br(message)}</span>
+      <span class="event-content truncated">${h.nl2br(message)}</span>
       %if attachments:
       <ul class="file-list">
         %for file in attachments:
@@ -110,7 +112,7 @@
     %endif
     <div class="content">
       %if head_message:
-        <span class="truncated">${h.nl2br(original['message'])}</span>
+        <span class="event-content truncated">${h.nl2br(original['message'])}</span>
         %if 'attachments' in original:
         <ul class="file-list">
           %for file in original['attachments']:
@@ -364,7 +366,7 @@
         <img src="${event.user.url(action='logo', width=50)}" />
       </div>
       <div class="content">
-        <span class="truncated">${h.nl2br(event.data)}</span>
+        <span class="event-content truncated">${h.nl2br(event.data)}</span>
       </div>
     </div>
   </%self:wall_entry>
@@ -394,7 +396,7 @@
         <img src="${msg.author_or_anonymous.url(action='logo', width=50)}" />
       </div>
       <div class="content">
-        <span class="truncated">${h.nl2br(event.message.body)}</span>
+        <span class="event-content truncated">${h.nl2br(event.message.body)}</span>
         %if msg.attachments:
         <ul class="file-list">
           %for file in msg.attachments:
@@ -456,7 +458,7 @@
         <img src="${event.user.url(action='logo', width=50)}" />
       </div>
       <div class="content">
-        <span class="truncated">${h.nl2br(event.sms_text())}</span>
+        <span class="event-content truncated">${h.nl2br(event.sms_text())}</span>
         <div class="closing">
           <span class="event-time">${h.when(event.sms_created())}</span>
           <span class="actions">

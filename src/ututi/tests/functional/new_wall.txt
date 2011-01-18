@@ -3,6 +3,9 @@ Functional test for the new wall
 
     >>> from ututi.lib.mailer import mail_queue
 
+    >>> def printWallEvents(browser):
+    ...     browser.printCssQuery(".wall-entry .event-title, .wall-entry .event-content", include_attributes=['class'], include_classes=['event-content', 'event-title'])
+
 Login and visit the wall. Currently there's no link, so we use direct url:
 
     >>> user3 = Browser.logIn('user3@ututi.lt', 'password')
@@ -27,10 +30,10 @@ Right next to the title there's a link to wall settings:
 The wall currently lists several simple events:
 
     >>> user3.printQuery("//div[contains(@class, 'wall-entry')]//text()")
-    Adminas Adminovix has created the group Moderatoriai ... ago
-    Adminas Adminovix has joined the group Moderatoriai ... ago
-    You have joined the group Moderatoriai ... ago
-    Adminas Adminovix has created the subject Matematin&#279; analiz&#279; ... ago
+    Adminas Adminovix has created the group Moderatoriai 0 seconds ago
+    Adminas Adminovix has joined the group Moderatoriai 0 seconds ago
+    You have joined the group Moderatoriai 0 seconds ago
+    Adminas Adminovix has created the subject Matematin&#279; analiz&#279; 0 seconds ago
 
 Let's use wall's action panel to send private message to the user user:
 
@@ -49,9 +52,11 @@ Now the user user logs in and finds the private message in his wall:
     'http://localhost/home'
 
     >>> user.open('/profile/wall')
-    >>> user.printQuery("//div[contains(@class, 'wall-entry')]//text()")
-    Third user has sent you a private message " Private message title "  ...
-    Private message ...
+    >>> printWallEvents(user)
+    <span class="event-title">
+        <a>Third user</a> has sent you a private message "<a>Private message title</a>"
+    </span>
+    <span class="event-content">Private message</span>
 
 He can reply using the wall reply box. (If not using javascript, user is
 directed to the thread page after he clicks 'Send'.)
@@ -65,10 +70,13 @@ directed to the thread page after he clicks 'Send'.)
 The user3 user can see the reply threaded along his message:
 
     >>> user3.open('/profile/wall')
-    >>> user3.printQuery("//div[contains(@class, 'wall-entry')]//text()")
-    You have sent Alternative user a private message " Private message title "  ...
-    Private message ...
-    Alternative user : Private message reply ...
+    >>> printWallEvents(user3)
+    <span class="event-title">
+        You have sent <a>Alternative user</a> a private message "<a>Private message title</a>"
+    </span>
+    <span class="event-content">Private message</span>
+    <span class="event-content">Private message reply</span>
+    ...
 
 The mailing list messaging works pretty same way in the wall. To test this,
 we will log in third user, that is in the same group as user:
@@ -87,8 +95,10 @@ we will log in third user, that is in the same group as user:
 User3 can see his message on his wall:
 
     >>> user3.reload()
-    >>> user3.printQuery("//div[contains(@class, 'wall-entry')]//text()")
-    Adminas Adminovix has posted a new message Mailinglist message title to the group Moderatoriai
+    >>> printWallEvents(user3)
+    <span class="event-title">
+      <a>Adminas Adminovix</a> has posted a new message <a>Mailinglist message title</a> to the group <a>Moderatoriai</a>
+    </span>
     ...
 
 The message is sent via email:
@@ -112,10 +122,12 @@ message. Note: admin.reload() here would cause admin repost his original message
 -- a bug in testbrowser?
 
     >>> admin.open('/profile/wall')
-    >>> admin.printQuery("//div[contains(@class, 'wall-entry')]//text()")
-    You have posted a new message Mailinglist message title to the group Moderatoriai ...
-    Mailinglist message ...
-    Third user : Mailinglist message reply
+    >>> printWallEvents(admin)
+    <span class="event-title">
+        You have posted a new message <a>Mailinglist message title</a> to the group <a>Moderatoriai</a>
+    </span>
+    <span class="event-content">Mailinglist message</span>
+    <span class="event-content">Mailinglist message reply</span>
     ...
 
     >>> print mail_queue.pop().payload()
@@ -130,14 +142,19 @@ we will ask third user to reply to the private message:
     >>> user3.url
     'http://localhost/profile/wall'
 
-    >>> user3.printQuery("//div[contains(@class, 'wall-entry')]//text()")
-    You have sent Alternative user a private message " Private message title " ...
-    Private message ...
-    Alternative user : Private message reply ...
-    Third user : Private message reply 2 ...
-    Adminas Adminovix has posted a new message Mailinglist message title to the group Moderatoriai ...
-    Mailinglist message ...
-    Third user : Mailinglist message reply ...
+    >>> printWallEvents(user3)
+    <span class="event-title">
+        You have sent <a>Alternative user</a> a private message "<a>Private message title</a>"
+    </span>
+    <span class="event-content">Private message</span>
+    <span class="event-content">Private message reply</span>
+    <span class="event-content">Private message reply 2</span>
+    <span class="event-title">
+      <a>Adminas Adminovix</a> has posted a new message <a>Mailinglist message title</a> to the group <a>Moderatoriai</a>
+    </span>
+    <span class="event-content">Mailinglist message</span>
+    <span class="event-content">Mailinglist message reply</span>
+    ...
 
 To test forum post threading we will use the group will forum enabled:
 
@@ -150,9 +167,12 @@ To test forum post threading we will use the group will forum enabled:
     >>> admin.url
     'http://localhost/profile/wall'
 
-    >>> admin.printQuery("//div[contains(@class, 'wall-entry')]//text()")
-    You have posted a new message Forum post title in the forum Testing group ...
-    Forum post ...
+    >>> printWallEvents(admin)
+    <span class="event-title">
+        You have posted a new message <a>Forum post title</a> in the forum <a>Testing group</a>
+    </span>
+    <span class="event-content">Forum post</span>
+    ...
 
 User can immediately reply to this forum thread from his wall:
 
@@ -162,21 +182,32 @@ User can immediately reply to this forum thread from his wall:
     >>> admin.url
     'http://localhost/profile/wall'
 
-    >>> admin.printQuery("//div[contains(@class, 'wall-entry')]//text()")
-    You have posted a new message Forum post title in the forum Testing group ...
-    Forum post ...
-    Adminas Adminovix : Forum post reply ...
+    >>> printWallEvents(admin)
+    <span class="event-title">
+        You have posted a new message <a>Forum post title</a> in the forum <a>Testing group</a>
+    </span>
+    <span class="event-content">Forum post</span>
+    <span class="event-content">Forum post reply</span>
+    ...
 
 Group's mailinglist thread is also displayed in group's wall:
 
     >>> admin.getLink("Moderatoriai").click()
-    >>> admin.printQuery("//div[contains(@class, 'wall-entry')]//text()")
-    You have posted a new message Mailinglist message title to the group Moderatoriai ... ago
-    Mailinglist message ... ago ...
-    Third user : Mailinglist message reply ... ago ...
-    You have created the group Moderatoriai ... ago
-    You have joined the group Moderatoriai ... ago
-    Third user has joined the group Moderatoriai ... ago
+    >>> printWallEvents(admin)
+    <span class="event-title">
+        You have posted a new message <a>Mailinglist message title</a> to the group <a>Moderatoriai</a>
+    </span>
+    <span class="event-content">Mailinglist message</span>
+    <span class="event-content">Mailinglist message reply</span>
+    <span class="event-title">
+        You have created the group <a>Moderatoriai</a>
+    </span>
+    <span class="event-title">
+        You have joined the group <a>Moderatoriai</a>
+    </span>
+    <span class="event-title">
+      <a>Third user</a> has joined the group <a>Moderatoriai</a>
+    </span>
 
 User can also reply to these threads from group's wall:
 
@@ -186,11 +217,13 @@ User can also reply to these threads from group's wall:
     >>> admin.url
     'http://localhost/group/moderators/home'
 
-    >>> admin.printQuery("//div[contains(@class, 'wall-entry')]//text()")
-    You have posted a new message Mailinglist message title to the group Moderatoriai ... ago
-    Mailinglist message ... ago ...
-    Third user : Mailinglist message reply ... ago ...
-    Adminas Adminovix : Mailinglist message reply from group wall ... ago
+    >>> printWallEvents(admin)
+    <span class="event-title">
+        You have posted a new message <a>Mailinglist message title</a> to the group <a>Moderatoriai</a>
+    </span>
+    <span class="event-content">Mailinglist message</span>
+    <span class="event-content">Mailinglist message reply</span>
+    <span class="event-content">Mailinglist message reply from group wall</span>
     ...
 
     >>> print mail_queue.pop().payload()
@@ -201,13 +234,21 @@ The Testing group has forums enabled, so we will use this group to test this
 functionality:
 
     >>> admin.getLink("Testing group").click()
-    >>> admin.printQuery("//div[contains(@class, 'wall-entry')]//text()")
-    You have posted a new message Forum post title in the forum Testing group ... ago
-    Forum post ... ago ...
-    Adminas Adminovix : Forum post reply ... ago ...
-    You have created the group Testing group ... ago
-    You have joined the group Testing group ... ago
-    Second user has joined the group Testing group ... ago
+    >>> printWallEvents(admin)
+    <span class="event-title">
+      You have posted a new message <a>Forum post title</a> in the forum <a>Testing group</a>
+    </span>
+    <span class="event-content">Forum post</span>
+    <span class="event-content">Forum post reply</span>
+    <span class="event-title">
+      You have created the group <a>Testing group</a>
+    </span>
+    <span class="event-title">
+      You have joined the group <a>Testing group</a>
+    </span>
+    <span class="event-title">
+      <a>Second user</a> has joined the group <a>Testing group</a>
+    </span>
 
     >>> form = admin.getForm(name='reply-form', index=0)
     >>> form.getControl(name='message').value = 'Forum post reply from group wall'
@@ -215,9 +256,11 @@ functionality:
     >>> admin.url
     'http://localhost/group/testgroup/home'
 
-    >>> admin.printQuery("//div[contains(@class, 'wall-entry')]//text()")
-    You have posted a new message Forum post title in the forum Testing group ... ago
-    Forum post ... ago ...
-    Adminas Adminovix : Forum post reply ... ago ...
-    Adminas Adminovix : Forum post reply from group wall ... ago
+    >>> printWallEvents(admin)
+    <span class="event-title">
+        You have posted a new message <a>Forum post title</a> in the forum <a>Testing group</a>
+    </span>
+    <span class="event-content">Forum post</span>
+    <span class="event-content">Forum post reply</span>
+    <span class="event-content">Forum post reply from group wall</span>
     ...

@@ -14,16 +14,24 @@ Events and watching
     >>> browser.open('http://localhost/profile/index')
     >>> browser.printQuery("id('event_list')/li")
     <li>
-          A new file <a href="/subject/vu/mat_analize/file/4/get">text.txt</a> for a subject <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a>
-          was uploaded <span class="event_time">(...)</span>
+          A new file <a href="/subject/vu/mat_analize/file/4/get">text.txt</a> for a subject <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a> was uploaded <span class="event_time">(0 seconds ago)</span>
+    </li>
+    <li>
+          New group <a href="/group/moderators">Moderatoriai</a> was created <span class="event_time">(0 seconds ago)</span>
     </li>
     <li>
           Member <a href="/user/1">Adminas Adminovix</a> joined the group <a href="/group/moderators">Moderatoriai</a>
-      <span class="event_time">(...)</span>
+      <span class="event_time">(0 seconds ago)</span>
     </li>
     <li>
-          New subject <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a>
-           was created <span class="event_time">(...)</span>
+          New group <a href="/group/testgroup">Testing group</a> was created <span class="event_time">(0 seconds ago)</span>
+    </li>
+    <li>
+          Member <a href="/user/1">Adminas Adminovix</a> joined the group <a href="/group/testgroup">Testing group</a>
+      <span class="event_time">(0 seconds ago)</span>
+    </li>
+    <li>
+          New subject <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a> was created <span class="event_time">(0 seconds ago)</span>
     </li>
 
     >>> res = app.post("/group/moderators/upload_file",
@@ -34,34 +42,34 @@ Events and watching
     >>> browser.printQuery("id('event_list')/li")
     <li>
           A new file <a href="/group/moderators/file/5/get">text.txt</a> for a group
-          <a href="/group/moderators">Moderatoriai</a> was uploaded <span class="event_time">(...)</span>
+          <a href="/group/moderators">Moderatoriai</a> was uploaded <span class="event_time">(0 seconds ago)</span>
     </li>
     <li>
           A new file <a href="/subject/vu/mat_analize/file/4/get">text.txt</a> for a subject
           <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a> was uploaded 
-          <span class="event_time">(...)</span>
+          <span class="event_time">(0 seconds ago)</span>
     </li>
     <li>
           New group <a href="/group/testgroup">Testing group</a> was created
-          <span class="event_time">(...)</span>
+          <span class="event_time">(0 seconds ago)</span>
     </li>
     <li>
           New group <a href="/group/moderators">Moderatoriai</a> was created
-          <span class="event_time">(...)</span>
+          <span class="event_time">(0 seconds ago)</span>
     </li>
     <li>
           New subject <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a>
-          was created <span class="event_time">(...)</span>
+          was created <span class="event_time">(0 seconds ago)</span>
     </li>
     <li>
           Member <a href="/user/1">Adminas Adminovix</a> joined the group
           <a href="/group/testgroup">Testing group</a>
-      <span class="event_time">(...)</span>
+      <span class="event_time">(0 seconds ago)</span>
     </li>
     <li>
           Member <a href="/user/1">Adminas Adminovix</a> joined the group
           <a href="/group/moderators">Moderatoriai</a>
-      <span class="event_time">(...)</span>
+      <span class="event_time">(0 seconds ago)</span>
     </li>
 
 Let's see if deleted files show no link:
@@ -69,7 +77,7 @@ Let's see if deleted files show no link:
     >>> browser.open('http://localhost/profile/index')
     >>> browser.printQuery("id('event_list')/li")
     <li>
-          A new file text.txt for a group <a href="/group/moderators">Moderatoriai</a> was uploaded <span class="event_time">(...)</span>
+          A new file text.txt for a group <a href="/group/moderators">Moderatoriai</a> was uploaded <span class="event_time">(0 seconds ago)</span>
     </li>
     ...
 
@@ -81,36 +89,36 @@ Let's see if deleted files show no link:
     <li>
           New email post <a href="/group/moderators/mailinglist/thread/6">Also
           - an attachment</a> was posted on <a href="/group/moderators">Moderatoriai</a>
-          mailing list <span class="event_time">(...)</span>
+          mailing list <span class="event_time">(0 seconds ago)</span>
     </li>
     <li>
-          A new file text.txt for a group <a href="/group/moderators">Moderatoriai</a> was uploaded <span class="event_time">(...)</span>
+          A new file text.txt for a group <a href="/group/moderators">Moderatoriai</a> was uploaded <span class="event_time">(0 seconds ago)</span>
     </li>
     <li>
           A new file <a href="/subject/vu/mat_analize/file/4/get">text.txt</a> for a subject
-          <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a> was uploaded <span class="event_time">(...)</span>
+          <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a> was uploaded <span class="event_time">(0 seconds ago)</span>
     </li>
     <li>
           Member <a href="/user/1">Adminas Adminovix</a> joined the group
           <a href="/group/testgroup">Testing group</a>
-      <span class="event_time">(...)</span>
+      <span class="event_time">(0 seconds ago)</span>
     </li>
     <li>
           New group <a href="/group/moderators">Moderatoriai</a> was created
-          <span class="event_time">(...)</span>
+          <span class="event_time">(0 seconds ago)</span>
     </li>
     <li>
           New subject <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a>
-          was created <span class="event_time">(...)</span>
+          was created <span class="event_time">(0 seconds ago)</span>
     </li>
     <li>
           Member <a href="/user/1">Adminas Adminovix</a> joined the group
           <a href="/group/moderators">Moderatoriai</a>
-      <span class="event_time">(...)</span>
+      <span class="event_time">(0 seconds ago)</span>
     </li>
     <li>
           New group <a href="/group/testgroup">Testing group</a> was created
-          <span class="event_time">(...)</span>
+          <span class="event_time">(0 seconds ago)</span>
     </li>
 
     >>> from ututi.lib.mailer import mail_queue

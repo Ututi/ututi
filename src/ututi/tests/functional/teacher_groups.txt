@@ -73,10 +73,10 @@ A message to the ututi mailing list group:
     >>> browser2 = Browser.logIn()
     >>> browser2.getLink('Moderatoriai').click()
     >>> browser2.printQuery('//div[contains(@class, "wall-entry")]//text()')
-    Benas has posted a new message a message to the group to the group Moderatoriai ... ago
+    Benas has posted a new message a message to the group to the group Moderatoriai 0 seconds ago
     The teacher Benas (http://localhost/user/5) sent a message to Your group:
     Hi, guys!
-    If You reply to this message, the teacher will not get Your replies. ... ago
+    If You reply to this message, the teacher will not get Your replies. 0 seconds ago
     ...
 
 
@@ -117,10 +117,10 @@ A message to the ututi forum group - members of the group receive email messages
 
     >>> browser2.getLink('Testing group').click()
     >>> browser2.printQuery('//div[@class="event-heading"]//text()')
-    Teacher Benas has sent a message to the group Testing group ... ago
-    You have created the group Testing group ... ago
-    You have joined the group Testing group ... ago
-    Second user has joined the group Testing group ... ago
+    Teacher Benas has sent a message to the group Testing group 0 seconds ago
+    You have created the group Testing group 0 seconds ago
+    You have joined the group Testing group 0 seconds ago
+    Second user has joined the group Testing group 0 seconds ago
 
 Let's try sending an sms:
     >>> browser.getControl(name='sms_message', index=0).value = 'Hi, guys! (sms)'

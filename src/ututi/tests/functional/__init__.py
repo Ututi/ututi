@@ -1,27 +1,16 @@
 # -*- encoding: utf-8 -*-
 import os
 import unittest
+import re
 import subprocess
 import shutil
+from zope.testing.renormalizing import RENormalizing
 from datetime import date
 
 from pkg_resources import resource_string, resource_stream
 import pylons.test
 
 import doctest
-
-import manuel
-old_absolute_import = manuel.absolute_import
-def new_absolute_import(name):
-    if name == 'doctest':
-        return doctest
-    return old_absolute_import(name)
-
-manuel.absolute_import = new_absolute_import
-import manuel.codeblock
-import manuel.doctest
-import manuel.testing
-import manuel.capture
 
 from nous.mailpost import processEmailAndPost
 
@@ -118,17 +107,21 @@ def collect_ftests(package=None, level=None,
     if exclude is not None:
         for fn in exclude:
             filenames.remove(fn)
+    suites = []
+    checker = RENormalizing([
+            (re.compile('[0-9]*[.][0-9]* seconds'), '0.000 seconds'),
+            (re.compile('[0-9]* second[s]* ago'), '0 seconds ago'),
+            ])
     optionflags = (doctest.ELLIPSIS | doctest.REPORT_NDIFF |
                    doctest.NORMALIZE_WHITESPACE |
                    doctest.REPORT_ONLY_FIRST_FAILURE)
-    suites = []
-    m = manuel.doctest.Manuel(optionflags=optionflags)
-    m += manuel.codeblock.Manuel()
-    m += manuel.capture.Manuel()
     for filename in filenames:
-        suite = manuel.testing.TestSuite(m, filename,
-                                         setUp=ftest_setUp,
-                                         tearDown=ututi.tests.tearDown)
+        suite = doctest.DocFileSuite(filename,
+                                     package=package,
+                                     optionflags=optionflags,
+                                     checker=checker,
+                                     setUp=ftest_setUp,
+                                     tearDown=ututi.tests.tearDown)
         suite.layer = layer
         if level is not None:
             suite.level = level
