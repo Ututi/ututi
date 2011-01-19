@@ -24,7 +24,6 @@ from sqlalchemy.sql.expression import select, func, or_
 
 import ututi.lib.helpers as h
 from ututi.lib.fileview import FileViewMixin
-from ututi.lib.wall import WallMixin, WallReplyValidator
 from ututi.lib.image import serve_logo
 from ututi.lib.search import _exclude_subjects
 from ututi.lib.sms import sms_cost
@@ -273,10 +272,17 @@ def group_menu_items():
         ]
     return bcs
 
-class GroupWallController(WallMixin, FileViewMixin):
+class GroupController(BaseController, SubjectAddMixin, FileViewMixin):
+    """Controller for group actions."""
 
-    def _redirect_url(self):
-        return url(controller='group', action='home', id=c.group.id)
+    controller_name = 'forum'
+
+    @group_action
+    def index(self, group):
+        if check_crowds(["member", "admin"]):
+            redirect(url(controller='group', action=c.group.default_tab, id=group.group_id))
+        else:
+            redirect(url(controller='group', action='home', id=group.group_id))
 
     def _msg_rcpt(self):
         if c.group.mailinglist_enabled:
@@ -320,37 +326,6 @@ class GroupWallController(WallMixin, FileViewMixin):
                           Event.event_type)
 
         return q.limit(limit).all()
-
-    @ActionProtector("user")
-    @validate(schema=WallReplyValidator())
-    def mailinglist_reply(self, group_id, thread_id):
-        return self._mailinglist_reply(group_id, thread_id,
-                    url(controller='group', action='home', id=group_id))
-
-    @ActionProtector("user")
-    @validate(schema=WallReplyValidator())
-    def forum_reply(self, group_id, category_id, thread_id):
-        return self._forum_reply(group_id, category_id, thread_id,
-                    url(controller='group', action='home', id=group_id))
-
-    @ActionProtector("user")
-    @validate(schema=WallReplyValidator())
-    def eventcomment_reply(self, group_id, event_id):
-        return self._eventcomment_reply(event_id,
-                    url(controller='group', action='home', id=group_id))
-
-
-class GroupController(BaseController, SubjectAddMixin, GroupWallController):
-    """Controller for group actions."""
-
-    controller_name = 'forum'
-
-    @group_action
-    def index(self, group):
-        if check_crowds(["member", "admin"]):
-            redirect(url(controller='group', action=c.group.default_tab, id=group.group_id))
-        else:
-            redirect(url(controller='group', action='home', id=group.group_id))
 
     def _set_home_variables(self, group):
         c.group_menu_current_item = 'home'

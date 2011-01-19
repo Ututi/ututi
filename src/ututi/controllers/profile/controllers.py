@@ -6,6 +6,7 @@ import simplejson
 
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql.expression import desc
+
 from formencode import validators
 from formencode import htmlfill
 from formencode.foreach import ForEach
@@ -23,6 +24,7 @@ import ututi.lib.helpers as h
 from ututi.lib.base import render
 from ututi.lib.emails import email_confirmation_request
 from ututi.lib.events import event_types_grouped
+from ututi.lib.fileview import FileViewMixin
 from ututi.lib.security import ActionProtector
 from ututi.lib.image import serve_logo
 from ututi.lib.forms import validate
@@ -40,7 +42,7 @@ from ututi.model import meta, Email, User
 from ututi.controllers.profile.validators import HideElementForm, MultiRcptEmailForm
 from ututi.controllers.profile.validators import ContactForm, LocationForm, LogoUpload, PhoneConfirmationForm,\
     PhoneForm, ProfileForm, PasswordChangeForm, StudentGroupForm, StudentGroupDeleteForm, StudentGroupMessageForm
-from ututi.controllers.profile.wall import ProfileWallController
+from ututi.controllers.profile.wall import UserWallMixin
 from ututi.controllers.profile.subjects import WatchedSubjectsMixin
 from ututi.controllers.search import SearchSubmit, SearchBaseController
 from ututi.controllers.home import sign_in_user
@@ -67,7 +69,7 @@ class WallSettingsForm(Schema):
     events = ForEach(validators.String())
 
 
-class ProfileControllerBase(SearchBaseController, UniversityListMixin, ProfileWallController, WatchedSubjectsMixin):
+class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewMixin, WatchedSubjectsMixin, UserWallMixin):
     def _actions(self, selected):
         raise NotImplementedError("This has to be implemented by the"
                                   " specific profile controller.")
@@ -147,12 +149,8 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, ProfileWa
     def wall(self):
         c.breadcrumbs.append(self._actions('home'))
 
-        c.events = self._wall_events()
-        c.events_hidable = True
+        self._set_wall_variables(events_hidable=True)
         c.action = 'wall'
-
-        c.file_recipients = self._file_rcpt()
-        c.wiki_recipients = self._wiki_rcpt()
 
         result = render('/profile/wall.mako')
 

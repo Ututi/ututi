@@ -157,17 +157,6 @@ def make_map(config):
     #act on group membership request
     map.connect('/group/{id}/request/{hash_code}/{do}', controller='group', action='request')
 
-    #group's wall actions
-    map.connect('/group/{group_id}/reply/mailinglist/{thread_id}',
-                controller='group',
-                action='mailinglist_reply')
-    map.connect('/group/{group_id}/reply/forum/{category_id}/{thread_id}',
-                controller='group',
-                action='forum_reply')
-    map.connect('/group/{group_id}/reply/comment/{event_id}',
-                controller='group',
-                action='eventcomment_reply')
-
     map.connect('/group/{id}/{action}', controller='group')
     map.connect('/group/{id}/logo/{width}/{height}', controller='group', action='logo')
     map.connect('/group/{id}/logo/{width}', controller='group', action='logo')
@@ -266,25 +255,19 @@ def make_map(config):
     map.connect('/profile/edit/wall', controller='profile', action='wall_settings')
     map.connect('/profile/edit/notifications', controller='profile', action='notifications')
 
-    # user's wall actions
-    map.connect('/profile/reply/mailinglist/{group_id}/{thread_id}',
-                controller='profile',
-                action='mailinglist_reply')
-    map.connect('/profile/reply/forum/{group_id}/{category_id}/{thread_id}',
-                controller='profile',
-                action='forum_reply')
-    map.connect('/profile/reply/privatemessage/{msg_id}',
-                controller='profile',
-                action='privatemessage_reply')
-    map.connect('/profile/reply/comment/{event_id}',
-                controller='profile',
-                action='eventcomment_reply')
-    map.connect('/profile/wall_js/',
-                controller='profile',
-                action='wall_js')
-
     map.connect('/profile/{action}', controller='profile')
     map.connect('/profile/{action}/{id}', controller='profile')
+
+    # wall actions
+    map.connect('/wall/reply/mailinglist/{group_id}/{thread_id}',
+                controller='wall', action='mailinglist_reply')
+    map.connect('/wall/reply/forum/{group_id}/{category_id}/{thread_id}',
+                controller='wall', action='forum_reply')
+    map.connect('/wall/reply/privatemessage/{msg_id}',
+                controller='wall', action='privatemessage_reply')
+    map.connect('/wall/reply/comment/{event_id}',
+                controller='wall', action='eventcomment_reply')
+    map.connect('/wall/{action}', controller='wall')
 
     # CUSTOM ROUTES HERE
     map.connect('/sitemap.xml', controller='sitemap', action='index')

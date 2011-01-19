@@ -24,7 +24,7 @@
 <div class="wall_item click2show ${caller.classes()} type_${event.event_type}" id="wallevent-${event.id}">
   %if c.user is not None:
   <div class="hide_me">
-    <form method="POST" action="${url(controller='profile', action='hide_event')}">
+    <form method="POST" action="${url(controller='wall', action='hide_event')}">
       <div>
         <input type="hidden" name="event_type" value="${event.event_type}" class="event_type"/>
         <input type="image" src="/images/details/icon_delete.png" title="${_('Ignore events like this')}" class="hide_event"/>

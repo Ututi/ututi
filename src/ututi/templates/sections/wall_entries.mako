@@ -51,7 +51,7 @@
     </span>
     %if c.events_hidable and c.user is not None:
     <div class="hide-button-container">
-      <form method="POST" action="${url(controller='profile', action='hide_event')}">
+      <form method="POST" action="${url(controller='wall', action='hide_event')}">
         <div>
           <input class="event-type" name="event_type" type="hidden" value="${event.event_type}" />
           <input class="hide-button" type="image" src="/images/details/icon_delete.png" title="${_('Ignore events like this')}" />

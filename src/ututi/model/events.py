@@ -110,7 +110,7 @@ class Commentable(MessagingEventMixin):
 
     def reply_action(self):
         """MessagingEventMixin implementation."""
-        return url.current(action='eventcomment_reply', event_id=self.id)
+        return url(controller='wall', action='eventcomment_reply', event_id=self.id)
 
 
 class PageCreatedEvent(Event, Commentable):
@@ -361,8 +361,8 @@ class MailinglistPostCreatedEvent(PostCreatedEventBase, MessagingEventMixin):
 
     def reply_action(self):
         """MessagingEventMixin implementation."""
-        return url.current(action='mailinglist_reply',
-                           thread_id=self.message.thread.id, group_id=self.message.thread.group.group_id)
+        return url(controller='wall', action='mailinglist_reply',
+                   thread_id=self.message.thread.id, group_id=self.message.thread.group.group_id)
 
 
 class ModeratedPostCreated(PostCreatedEventBase):
@@ -435,10 +435,10 @@ class ForumPostCreatedEvent(Event, MessagingEventMixin):
 
     def reply_action(self):
         """MessagingEventMixin implementation."""
-        return url.current(action='forum_reply',
-                           group_id=self.context.group_id,
-                           category_id=self.post.category_id,
-                           thread_id=self.post.thread_id)
+        return url(controller='wall', action='forum_reply',
+                   group_id=self.context.group_id,
+                   category_id=self.post.category_id,
+                   thread_id=self.post.thread_id)
 
 
 class SMSMessageSentEvent(Event):
@@ -493,7 +493,8 @@ class PrivateMessageSentEvent(Event, MessagingEventMixin):
 
     def reply_action(self):
         """MessagingEventMixin implementation."""
-        return url.current(action='privatemessage_reply', msg_id=self.private_message.id)
+        return url(controller='wall', action='privatemessage_reply',
+                   msg_id=self.private_message.id)
 
 
 class GroupMemberJoinedEvent(Event):
