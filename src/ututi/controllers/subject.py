@@ -37,6 +37,9 @@ def set_login_url_to_referrer(method):
 
 def subject_menu_items():
     return [
+        {'title': _("Subject information"),
+         'name': 'info',
+         'link': c.subject.url(action='info')},
         {'title': _("Wall"),
          'name': 'wall',
          'link': c.subject.url(action='wall')},
@@ -74,6 +77,7 @@ def subject_action(method):
         c.tabs = subject_menu_items()
         return method(self, subject)
     return _subject_action
+
 
 class SubjectForm(Schema):
     """A schema for validating new subject forms."""
@@ -187,7 +191,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
         c.current_tab = 'pages'
         c.breadcrumbs = [{'link': subject.url(),
                           'title': subject.title}]
-        if  not c.subject.n_files(False) and not c.subject.pages:
+        if  not c.subject.n_files(include_deleted=False) and not c.subject.pages:
             redirect(subject.url(action= 'home'))
         return render('subject/home_pages.mako')
 
@@ -198,6 +202,13 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
                           'title': subject.title}]
         self._set_wall_variables()
         return render('subject/wall.mako')
+
+    @subject_action
+    def info(self, subject):
+        c.current_tab = 'info'
+        c.breadcrumbs = [{'link': subject.url(),
+                          'title': subject.title}]
+        return render('subject/info.mako')
 
     def _add_form(self):
         return render('subject/add.mako')
