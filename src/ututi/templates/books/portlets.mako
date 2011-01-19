@@ -65,4 +65,9 @@
      </form>
    </div>
  </div>
+ %if c.lang in ['lt']:
+ <div id="banner_portlet" style="padding-top: 15px;">
+   <a href="http://www.facebook.com/w2wvilnius"><img src="${url('/images/books/wok2walk.jpg')}" /></a>
+ </div>
+ %endif
 </%def>
