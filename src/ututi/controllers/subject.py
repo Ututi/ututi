@@ -16,11 +16,13 @@ from pylons.templating import render_mako_def
 from ututi.model import SearchItem
 from ututi.model import get_supporters
 from ututi.model import meta, LocationTag, Subject, File, SimpleTag
+from ututi.model.events import Event
 from ututi.lib.security import ActionProtector, deny
 from ututi.lib.search import search, search_query, _exclude_subjects
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.base import BaseController, render, u_cache
 from ututi.lib.validators import LocationTagsValidator, TagsValidator, validate, js_validate
+from ututi.lib.wall import WallMixin
 import ututi.lib.helpers as h
 
 log = logging.getLogger(__name__)
@@ -35,6 +37,9 @@ def set_login_url_to_referrer(method):
 
 def subject_menu_items():
     return [
+        {'title': _("Wall"),
+         'name': 'wall',
+         'link': c.subject.url(action='wall')},
         {'title': _("Files"),
          'name': 'home',
          'link': c.subject.url(action='home')},
@@ -142,7 +147,26 @@ class SubjectAddMixin(object):
         return subj
 
 
-class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
+class SubjectWallMixin(WallMixin):
+
+    def _wall_events_query(self):
+        """WallMixin implementation."""
+
+        query = meta.Session.query(Event)\
+             .filter(Event.object_id == c.subject.id)
+
+        return query
+
+    def _file_rcpt(self):
+        """WallMixin implementation."""
+        return [('s_%d' % c.subject.id, _('Subject: %s') % c.subject.title)]
+
+    def _wiki_rcpt(self):
+        """WallMixin implementation."""
+        return [(c.subject.id, c.subject.title)]
+
+
+class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectWallMixin):
     """A controller for subjects."""
 
     def __before__(self):
@@ -166,6 +190,14 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin):
         if  not c.subject.n_files(False) and not c.subject.pages:
             redirect(subject.url(action= 'home'))
         return render('subject/home_pages.mako')
+
+    @subject_action
+    def wall(self, subject):
+        c.current_tab = 'wall'
+        c.breadcrumbs = [{'link': subject.url(),
+                          'title': subject.title}]
+        self._set_wall_variables()
+        return render('subject/wall.mako')
 
     def _add_form(self):
         return render('subject/add.mako')
