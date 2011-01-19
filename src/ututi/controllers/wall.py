@@ -4,6 +4,7 @@ from pylons.controllers.util import abort
 from pylons.controllers.util import redirect
 from pylons import request
 from pylons import tmpl_context as c
+from pylons import url
 from pylons.i18n import _
 from pylons.templating import render_mako_def
 
@@ -106,6 +107,13 @@ class WallReplyValidator(Schema):
 
 class WallController(BaseController, FileViewMixin):
 
+    def _redirect(self):
+        if request.referrer:
+            redirect(request.referrer)
+        else:
+            redirect(url(controller='profile', action='wall'))
+
+
     @ActionProtector("user")
     def hide_event(self):
         """Hide an event from the user's wall, add the event ttype to the ignored events list."""
@@ -117,7 +125,7 @@ class WallController(BaseController, FileViewMixin):
         if request.params.has_key('js'):
             return 'ok'
         else:
-            redirect(request.referrer)
+            self._redirect()
 
     @ActionProtector("user")
     @js_validate(schema=MessageForm())
@@ -139,7 +147,7 @@ class WallController(BaseController, FileViewMixin):
             self.form_result['message'],
             self.form_result.get('category_id', None))
         h.flash(_('Message sent.'))
-        redirect(request.referrer)
+        self._redirect()
 
     def _send_message(self, recipient, subject, message, category_id=None):
         """
@@ -206,7 +214,7 @@ class WallController(BaseController, FileViewMixin):
             self.form_result['page_title'],
             self.form_result['page_content'])
         h.flash(_('Wiki page created.'))
-        redirect(request.referrer)
+        self._redirect()
 
     def _create_wiki_page(self, target, title, content):
         page = Page(title, content)
@@ -243,7 +251,7 @@ class WallController(BaseController, FileViewMixin):
                                    created=msg.sent,
                                    attachments=msg.attachments)
         else:
-            redirect(request.referrer)
+            self._redirect()
 
     @ActionProtector("user")
     @validate(schema=WallReplyValidator())
@@ -273,7 +281,7 @@ class WallController(BaseController, FileViewMixin):
                                    message=post.message,
                                    created=post.created_on)
         else:
-            redirect(request.referrer)
+            self._redirect()
 
     @ActionProtector("user")
     @validate(schema=WallReplyValidator())
@@ -300,7 +308,7 @@ class WallController(BaseController, FileViewMixin):
                                    message=msg.content,
                                    created=msg.created_on)
         else:
-            redirect(request.referrer)
+            self._redirect()
 
     @ActionProtector("user")
     @validate(schema=WallReplyValidator())
@@ -318,4 +326,4 @@ class WallController(BaseController, FileViewMixin):
                                    message=comment.content,
                                    created=comment.created_on)
         else:
-            redirect(request.referrer)
+            self._redirect()
