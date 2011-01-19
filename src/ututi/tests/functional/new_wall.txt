@@ -210,13 +210,16 @@ Group's mailinglist thread is also displayed in group's wall:
     </span>
 
 User can also reply to these threads from group's wall:
+(Note, we post the form and set referer manually, because testbrowser would lose it.)
 
     >>> form = admin.getForm(name='reply-form', index=0)
-    >>> form.getControl(name='message').value = 'Mailinglist message reply from group wall'
-    >>> form.getControl("Send reply").click()
-    >>> admin.url
-    'http://localhost/group/moderators/home'
+    >>> res = admin.app.post(form.action,
+    ...                      params={'message': 'Mailinglist message reply from group wall'},
+    ...                      headers=[('referer', admin.url)])
+    >>> print res.status, res.location
+    302 Found http://localhost/group/moderators/home
 
+    >>> admin.open(res.location)
     >>> printWallEvents(admin)
     <span class="event-title">
         You have posted a new message <a>Mailinglist message title</a> to the group <a>Moderatoriai</a>
@@ -251,11 +254,13 @@ functionality:
     </span>
 
     >>> form = admin.getForm(name='reply-form', index=0)
-    >>> form.getControl(name='message').value = 'Forum post reply from group wall'
-    >>> form.getControl("Send reply").click()
-    >>> admin.url
-    'http://localhost/group/testgroup/home'
+    >>> res = admin.app.post(form.action,
+    ...                      params={'message': 'Forum post reply from group wall'},
+    ...                      headers=[('referer', admin.url)])
+    >>> print res.status, res.location
+    302 Found http://localhost/group/testgroup/home
 
+    >>> admin.open(res.location)
     >>> printWallEvents(admin)
     <span class="event-title">
         You have posted a new message <a>Forum post title</a> in the forum <a>Testing group</a>
