@@ -19,8 +19,7 @@ from formencode.foreach import ForEach
 from formencode.variabledecode import NestedVariables
 
 from sqlalchemy.orm.exc import NoResultFound
-from sqlalchemy.orm.query import aliased
-from sqlalchemy.sql.expression import select, func, or_
+from sqlalchemy.sql.expression import or_
 
 import ututi.lib.helpers as h
 from ututi.lib.fileview import FileViewMixin
@@ -29,11 +28,13 @@ from ututi.lib.search import _exclude_subjects
 from ututi.lib.sms import sms_cost
 from ututi.lib.base import BaseController, render, render_lang
 from ututi.lib.validators import HtmlSanitizeValidator, TranslatedEmailValidator, LocationTagsValidator, TagsValidator, GroupCouponValidator, FileUploadTypeValidator, validate
+from ututi.lib.wall import WallMixin
 
 from ututi.model import ForumCategory
 from ututi.model import GroupCoupon
 from ututi.model import LocationTag, User, GroupMember, GroupMembershipType, File, OutgoingGroupSMSMessage
 from ututi.model import meta, Group, SimpleTag, Subject, PendingInvitation, PendingRequest
+from ututi.model.events import Event
 from ututi.controllers.subject import SubjectAddMixin
 from ututi.controllers.subject import NewSubjectForm
 from ututi.controllers.search import SearchSubmit
@@ -224,6 +225,47 @@ def group_action(method):
     return _group_action
 
 
+class GroupWallMixin(WallMixin):
+
+    def _wall_events_query(self):
+        """WallMixin implementation."""
+        user_is_admin_of_groups = [membership.group_id
+                                   for membership in c.user.memberships
+                                   if membership.membership_type == 'administrator']
+
+        query = meta.Session.query(Event)\
+                .filter(or_(Event.object_id.in_([s.id for s in c.group.watched_subjects]),
+                            Event.object_id == c.group.id))\
+                .filter(or_(Event.event_type != 'moderated_post_created',
+                            Event.object_id.in_(user_is_admin_of_groups)))
+
+        return query
+
+    def _file_rcpt(self):
+        """WallMixin implementation."""
+        items = []
+        if c.group.has_file_area:
+            items.append(('g_%d' % c.group.id, _('Group: %s') % c.group.title))
+        for subject in c.group.watched_subjects:
+            items.append(('s_%d' % subject.id, _('Subject: %s') % subject.title))
+        return items
+
+    def _wiki_rcpt(self):
+        """WallMixin implementation."""
+        subjects = c.group.watched_subjects
+        return[(subject.id, subject.title) for subject in subjects]
+
+    def _msg_rcpt(self):
+        """Deprecated: should use common WallMixin interface."""
+        if c.group.mailinglist_enabled:
+            forum_categories = []
+        else:
+            forum_categories= [(cat.id, cat.title)
+                               for cat in c.group.forum_categories]
+
+        return ('g_%d' % c.group.id, _('Group: %s') % c.group.title, forum_categories)
+
+
 def group_menu_items():
     """Generate a list of all possible actions."""
     if c.group.mailinglist_enabled:
@@ -272,7 +314,7 @@ def group_menu_items():
         ]
     return bcs
 
-class GroupController(BaseController, SubjectAddMixin, FileViewMixin):
+class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallMixin):
     """Controller for group actions."""
 
     controller_name = 'forum'
@@ -284,62 +326,17 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin):
         else:
             redirect(url(controller='group', action='home', id=group.group_id))
 
-    def _msg_rcpt(self):
-        if c.group.mailinglist_enabled:
-            forum_categories = []
-        else:
-            forum_categories= [(cat.id, cat.title)
-                               for cat in c.group.forum_categories]
-
-        return ('g_%d' % c.group.id, _('Group: %s') % c.group.title, forum_categories)
-
-    def _file_rcpt(self):
-        items = []
-        if c.group.has_file_area:
-            items.append(('g_%d' % c.group.id, _('Group: %s') % c.group.title))
-        for subject in c.group.watched_subjects:
-            items.append(('s_%d' % subject.id, _('Subject: %s') % subject.title))
-        return items
-
-    def _wiki_rcpt(self):
-        subjects = c.group.watched_subjects
-        return[(subject.id, subject.title) for subject in subjects]
-
-    def _wall_events(self, limit=60):
-        from ututi.model.events import Event
-        e = aliased(Event)
-
-        #query for ordering events by their last subevent
-        child_query = select([e.created], e.parent_id==Event.id, order_by=e.created.desc(), limit=1).label('last')
-
-        user_is_admin_of_groups = [membership.group_id
-                                   for membership in c.user.memberships
-                                   if membership.membership_type == 'administrator']
-
-        q = meta.Session.query(Event)\
-                .filter(or_(Event.object_id.in_([s.id for s in c.group.watched_subjects]),
-                            Event.object_id == c.group.id))\
-                .filter(or_(Event.event_type != 'moderated_post_created',
-                            Event.object_id.in_(user_is_admin_of_groups)))\
-                .filter(Event.parent == None)\
-                .order_by(func.coalesce(child_query, Event.created).desc(),
-                          Event.event_type)
-
-        return q.limit(limit).all()
-
     def _set_home_variables(self, group):
         c.group_menu_current_item = 'home'
-        c.events = self._wall_events()
-        c.events_hidable = False
         c.has_to_invite_members = (len(group.members) == 1 and
                                    len(group.invitations) == 0)
         c.wants_to_watch_subjects = (len(group.watched_subjects) == 0 and
                                      group.wants_to_watch_subjects)
 
         # wall's dashboard variables
-        c.file_recipients = self._file_rcpt()
-        c.wiki_recipients = self._wiki_rcpt()
-        c.msg_recipient = self._msg_rcpt()
+        self._set_wall_variables()
+        c.msg_recipient = self._msg_rcpt() # DEPRECATED: should use common
+                                           # WallMixin interface
 
     @group_action
     def home(self, group):
