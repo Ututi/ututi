@@ -1,11 +1,11 @@
 <%inherit file="/group/base.mako" />
-<%namespace name="dashboard" file="/group/wall_dashboard.mako" />
+<%namespace name="actions" file="/group/wall_actionblock.mako" />
 <%namespace name="wall" file="/sections/wall_entries.mako" />
 
 <%def name="head_tags()">
   ${parent.head_tags()}
   ${wall.head_tags()}
-  ${dashboard.head_tags()}
+  ${actions.head_tags()}
 </%def>
 
 <%def name="body_class()">wall</%def>
@@ -70,5 +70,5 @@ use the group mailing list together then!
   </%self:rounded_block>
 %endif
 
-${dashboard.dashboard(c.msg_recipient, c.file_recipients, c.wiki_recipients)}
+${actions.action_block(c.msg_recipient, c.file_recipients, c.wiki_recipients)}
 ${wall.wall_entries(c.events)}
