@@ -109,7 +109,7 @@
       <div class="click2show">
         <div class="right_arrow click"><a href="">${_("supporters")}</a></div>
         <ul id="supporter_list" class="show">
-          %for supporter in c.ututi_supporters:
+          %for supporter in h.get_supporters():
             <li>${h.link_to(supporter.fullname, supporter.url())}</li>
           %endfor
         </ul>

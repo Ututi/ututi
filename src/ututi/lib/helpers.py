@@ -554,3 +554,7 @@ def when(time):
                          num) % {'num': num}
     else:
         return time.strftime("%Y-%m-%d")
+
+def get_supporters():
+    from ututi.model import get_supporters
+    return get_supporters()

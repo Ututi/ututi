@@ -53,8 +53,18 @@
 <% blank_subject = not c.subject.n_files(include_deleted=False) and not c.subject.pages %>
 
 %if blank_subject:
+  %if c.subject.description:
+    <%self:rounded_block id="subject_description">
+      <div class="content">
+        ${h.html_cleanup(c.subject.description)}
+      </div>
+      %if c.user:
+        <div class="right_arrow1"><a href="${c.subject.url(action='edit')}">${_('Edit')}</a></div>
+      %endif
+    </%self:rounded_block>
+  %endif
   <%self:rounded_block class_='subject-intro-block' id="subject-intro-block">
-    %if c.user:
+    %if c.user and not c.subject.description:
       <div class="right_arrow1" style="float: right" ><a href="${c.subject.url(action='edit')}">${_('Edit')}</a></div>
     %endif
     <h2 style="margin-top: 5px">${_('What is a subject page?')}</h2>

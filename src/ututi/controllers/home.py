@@ -182,9 +182,6 @@ class HomeController(UniversityListMixin, FederationMixin):
     def fbchannel(self):
         return render('/fbchannel.mako')
 
-    def __before__(self):
-        c.ututi_supporters = get_supporters()
-
     def index(self):
         c.show_registration = False
         if c.user is not None:

@@ -91,7 +91,6 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
 
     def __before__(self):
         c.action = None
-        c.ututi_supporters = get_supporters()
         if c.user is not None:
             c.breadcrumbs = [{'title': c.user.fullname, 'link': url(controller='profile', action='home')}]
             c.blog_entries = meta.Session.query(BlogEntry).order_by(BlogEntry.created.desc()).limit(10).all()

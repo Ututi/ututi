@@ -10,7 +10,7 @@
 <%def name="body_class()">anonymous_index</%def>
 
 %if c.show_warning is not False:
-  %if not c.show_registration or c.hash:
+  %if not getattr(c, 'show_registration', False) or c.hash:
   <div style="font-size: 20px; padding-top: 7px">
     ${c.header}
   </div>
@@ -50,7 +50,7 @@
 
   <td class="login-choice-box">
 
-    <div id="login-fields" ${"style='display: none'" if c.show_registration else ''}>
+    <div id="login-fields" ${"style='display: none'" if getattr(c, 'show_registration', False) else ''}>
       <div class="login-note">
         ${_('Log in directly to Ututi')}
       </div>
@@ -81,7 +81,7 @@
       </div>
     </div>
 
-    <div id="register-fields" ${"style='display: none'" if not c.show_registration else ''}>
+    <div id="register-fields" ${"style='display: none'" if not getattr(c, 'show_registration', False) else ''}>
       <div class="login-note">
         ${_('Register as a new Ututi user')}
       </div>

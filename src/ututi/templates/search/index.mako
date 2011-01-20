@@ -55,7 +55,7 @@ ${_('Search')}
 <%def name="location_tag_results(results=None)">
 <%
    if results is None:
-       results = c.tag_search
+       results = getattr(c, 'tag_search', [])
 %>
 %if results:
 <div id="location-search" class="rounded">
@@ -171,7 +171,7 @@ ${h.javascript_link('/javascript/search.js')|n}
 %>
 %if results is not None:
 <div id="search-results-container">
-  %if c.page == 1:
+  %if getattr(c, 'page', 1) == 1:
     ${location_tag_results()}
   %endif
   <h3 class="underline search-results-title">

@@ -7,7 +7,6 @@ class PayController(BaseController):
     """Stub pay controller for payment testing."""
 
     def index(self):
-        c.ututi_supporters = []
         c.accepturl = request.params['accepturl']
         c.cancelurl = request.params['cancelurl']
         c.amount = int(request.params['amount']) / 100

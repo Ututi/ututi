@@ -4,7 +4,7 @@
 
 <%def name="head_tags()">
   ${parent.head_tags()}
-  %if c.page:
+  %if getattr(c, 'page', None):
     <meta property="og:title" content="${c.page.title}"/>
     <meta property="og:url" content="${c.page.url(qualified=True)}"/>
   %endif

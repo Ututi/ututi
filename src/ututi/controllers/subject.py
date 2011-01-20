@@ -173,9 +173,6 @@ class SubjectWallMixin(WallMixin):
 class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectWallMixin):
     """A controller for subjects."""
 
-    def __before__(self):
-        c.ututi_supporters = get_supporters()
-
     @subject_action
     def home(self, subject):
         c.current_tab = 'home'

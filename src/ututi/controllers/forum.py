@@ -116,7 +116,6 @@ class ForumController(BaseController):
     controller_name = 'forum'
 
     def __before__(self):
-        c.ututi_supporters = get_supporters()
         c.breadcrumbs = []
         c.controller = self.controller_name
         c.can_post = self.can_post

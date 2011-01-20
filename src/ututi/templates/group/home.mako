@@ -10,7 +10,7 @@
 
 <%def name="body_class()">wall</%def>
 
-%if c.welcome:
+%if getattr(c, 'welcome', None):
   <h1>${_('Congratulations, you have created a new group!')}</h1>
 
   <%self:rounded_block id="group-welcome-text">

@@ -118,7 +118,7 @@
 
 %if c.books_department=="school":
 <script language="javascript" type="text/javascript">//<![CDATA[
-    %if c.science_type or (c.locations and c.school_grades):
+    %if c.science_type:
     show_science_types();
     %else:
     show_department_list();
