@@ -1450,10 +1450,6 @@ class Page(ContentItem):
         return self.last_version.content
 
     @property
-    def author(self):
-        return self.last_version.author
-
-    @property
     def created(self):
         return self.last_version.created
 

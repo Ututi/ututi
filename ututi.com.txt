@@ -1,0 +1,86 @@
+# -*- mode: org -*-
+
+* Add global admin users, admin log in layer
+
+** Move some views from ututi admin into university admin views.
+
+* Fix up security crowds:
+
+  - Remove marketeers crowd
+  - Only allow confirmed emails to be counted as logged in users
+
+Suggestion is - replace the authenticated User object with a different
+object that is not directly tied to the database. That object will
+have a reference to the logged in user most of the time, but in case
+of admin users - he will not. Crowd checkers will be able to perform
+the crowd checks even without user object available.
+
+* Merge forum and mailinglist code and create dicussions content objects, wall snippets, etc.
+
+
+* Export/Import data
+
+        # metadata
+        # export all subjects
+        #   export pages on the subjects
+        #   export files on the subjects
+        # export all groups
+        #   do not export group pages
+        #   export group files
+        # collect all users from those groups
+        #   export users
+        # collect all users from this university
+        #
+        # collect all the events
+        # only one type of groups - discussions!
+
+        # tags - out
+        # discussion moderation queue for groups?
+        # discussions will have better email support than current forums!
+
+        # files - everything stays
+        # fortumo lieka, palaikys visas europos šalis
+        # paypalas - atsiras
+        # forumai lieka bet tik universitetams, galima followinti
+        # sms - bus
+        # geoip - bus
+        # group_default_tab - lieka
+        # group_join - lieka
+
+        # group_subject_watching - lieka
+        # medaliai - lieka, bus plečiami
+
+        # newsai - lieka
+        # private messages - lieka, exportuojam, tarp universitetinius leidžiam
+        # universitetų sąrašas ir statistika - lieka
+        # atsiras universiteto administravimo viewas!
+
+        # @ututi.com emailai
+
+        # search - lieka, bet keisis, atsiras privatumo nustatymai
+
+
+        # paremk ututi, rėmėjų sąrašas
+
+        # default useris studentas, gali upgradintis į teacherį, kas
+        # skirsis kai būsi universiteto adminas?
+        # teacherius reikia patvirtinti, juos tvirtina universiteto adminas
+
+
+        # group_welcome_page - lauk
+        # community and bugs forums - lauk
+        # group_coupons - lauk
+        # Blog - lauk
+        # Books - lauk, nebent nesunkiai prisukam prie universiteto
+
+
+
+* Helpful stats
+
+Users watching subjecs but without universities selected.
+
+select user_monitored_subjects.user_id, count(*) from user_monitored_subjects
+     left outer join group_members on user_monitored_subjects.user_id = group_members.user_id
+     left join users on users.id = user_monitored_subjects.user_id
+     where ignored = False and group_members.group_id is null and users.location_id is null
+     group by user_monitored_subjects.user_id;

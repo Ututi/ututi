@@ -298,6 +298,8 @@ def make_map(config):
 
     map.connect('/structure/completions/{text}', controller='structure', action='completions')
     map.connect('/structure', controller='structure', action='index')
+    map.connect('export_university', '/structure/{university_id}/export',
+                controller='admin', action='export_university')
     map.connect('/structure/{id}/logo/{width}/{height}',
                 controller='structure', action='logo')
     map.connect('/structure/{id}/logo/{width}',

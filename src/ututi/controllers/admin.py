@@ -1,7 +1,10 @@
+# -*- encoding: utf-8 -*-
 import csv
 import os
 import logging
 import datetime
+from cStringIO import StringIO
+import zipfile
 
 from pylons.controllers.util import redirect
 
@@ -22,8 +25,9 @@ from formencode.validators import String
 from babel.dates import parse_date
 from babel.dates import format_date
 
-from pylons import request, tmpl_context as c, config, url
+from pylons import request, tmpl_context as c, config, url, response
 
+from ututi.lib.image import prepare_image
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import PhoneNumberValidator, GroupCouponValidator, validate
@@ -751,3 +755,76 @@ class AdminController(BaseController):
         c.group = meta.Session.query(Group).first()
         return render('sections/example_objects.mako')
 
+    def _writerow(self, writer, row):
+        writer.writerow([(item or '').encode('utf-8')
+                         for item in row])
+
+    def _make_subjects_csv(self, university):
+        result = StringIO()
+        writer = csv.writer(result, delimiter=",")
+        for subject in meta.Session.query(Subject)\
+                .filter(Subject.location_id.in_([loc.id for loc in university.flatten]))\
+                .filter_by(deleted_by=None):
+            self._writerow(writer,
+                           ['/'.join(subject.location.path[1:]),
+                            subject.created.emails[0].email,
+                            subject.subject_id,
+                            subject.title,
+                            subject.lecturer,
+                            subject.description])
+        return result.getvalue()
+
+    def _make_groups_csv(self, university):
+        result = StringIO()
+        writer = csv.writer(result, delimiter=",")
+        for group in meta.Session.query(Group)\
+                .filter(Group.location_id.in_([loc.id for loc in university.flatten]))\
+                .filter_by(deleted_by=None):
+            self._writerow(writer,
+                           ['/'.join(group.location.path[1:]),
+                            group.created.emails[0].email,
+                            group.group_id,
+                            group.year.strftime('%Y'),
+                            group.title,
+                            group.page,
+                            str(group.moderators),
+                            str(group.wants_to_watch_subjects),
+                            str(group.admins_approve_members),
+                            group.private_files_lock_date.strftime('%Y-%m-%d') if group.private_files_lock_date else '',
+                            str(group.mailinglist_moderated)])
+        return result.getvalue()
+
+    def _make_subject_pages_csv(self, university):
+        result = StringIO()
+        writer = csv.writer(result, delimiter=",")
+        for subject in meta.Session.query(Subject)\
+                .filter(Subject.location_id.in_([loc.id for loc in university.flatten]))\
+                .filter_by(deleted_by=None):
+            for page in subject.pages:
+                self._writerow(writer,
+                               ['/'.join(subject.location.path[1:]),
+                                subject.subject_id,
+                                page.created.emails[0].email,
+                                page.title,
+                                page.content])
+        return result.getvalue()
+
+    @ActionProtector("root")
+    def export_university(self, university_id):
+        tag = LocationTag.get(int(university_id))
+        result = StringIO()
+        zf = zipfile.ZipFile(result, "a", zipfile.ZIP_DEFLATED, False)
+        if tag.logo:
+            zf.writestr('logo.png', prepare_image(tag.logo))
+        zf.writestr('subjects.csv', self._make_subjects_csv(tag))
+        zf.writestr('subject_pages.csv', self._make_subject_pages_csv(tag))
+        # subject files
+        zf.writestr('groups.csv', self._make_groups_csv(tag))
+        # group logos
+        # group members
+        zf.close()
+        response.headers['Content-Length'] = len(result.getvalue())
+        response.headers['Content-Disposition'] = 'attachment; filename="%s.zip"' % tag.title_short
+        response.headers['Content-Type'] = 'application/zip'
+        result.seek(0)
+        return result
