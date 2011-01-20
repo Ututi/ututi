@@ -10,7 +10,7 @@
 <%def name="portlets()">
 </%def>
 
-%if c.show_warning is not False:
+%if getattr(c, 'show_warning', False) is not False:
   %if not c.show_registration or c.hash:
   <div style="font-size: 20px; padding-top: 7px">
     ${c.header}

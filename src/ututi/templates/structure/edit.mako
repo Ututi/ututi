@@ -22,7 +22,8 @@
      <label for="region">${_('Region')}</label>
      <select id="region" name="region">
        <option value="0">${_('(none)')}</option>
-       %for region in c.regions:
+       ## XXX Probably a bug. Region list is not populated if there are errors in edit form
+       %for region in getattr(c, 'regions', []):
          <option value="${region.id}">${region.title}</option>
        %endfor
      </select>
