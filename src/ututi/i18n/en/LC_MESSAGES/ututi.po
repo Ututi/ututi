@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2011-01-14 17:31+0300\n"
+"PO-Revision-Date: 2011-01-20 18:43+0200\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -90,16 +90,22 @@ msgid "The book has been successfully deleted"
 msgstr ""
 
 #, python-format
-msgid "Document at %(url)s was not found, but maybe you are interested in something else?"
+msgid ""
+"Document at %(url)s was not found, but maybe you are interested in "
+"something else?"
 msgstr ""
 
-msgid "Monkeys are ashamed of what you said and are now working even harder to fix the problem. Until they do that, try to search for something else."
+msgid ""
+"Monkeys are ashamed of what you said and are now working even harder to "
+"fix the problem. Until they do that, try to search for something else."
 msgstr ""
 
 msgid "User kicked monkeys"
 msgstr ""
 
-msgid "Ouch! Monkeys were kicked and are trying to work harder.  Until they fix this, try to search for something else."
+msgid ""
+"Ouch! Monkeys were kicked and are trying to work harder.  Until they fix "
+"this, try to search for something else."
 msgstr ""
 
 msgid "Error message"
@@ -150,7 +156,9 @@ msgstr ""
 msgid "Wrong username or password!"
 msgstr ""
 
-msgid "Thank You! Your request to become a teacher has been received. We will notify You once we grant You the rights of a teacher."
+msgid ""
+"Thank You! Your request to become a teacher has been received. We will "
+"notify You once we grant You the rights of a teacher."
 msgstr ""
 
 msgid "Facebook did not provide your email address."
@@ -161,7 +169,9 @@ msgid "Your Google account \"%s\" has been linked to your existing Ututi account
 msgstr ""
 
 #, python-format
-msgid "Your Facebook account \"%s\" has been linked to your existing Ututi account."
+msgid ""
+"Your Facebook account \"%s\" has been linked to your existing Ututi "
+"account."
 msgstr ""
 
 msgid "Files"
@@ -224,7 +234,9 @@ msgstr ""
 msgid "Report Ututi bugs here."
 msgstr ""
 
-msgid "The web-based forum for this group has been disabled. Please use the mailing list instead."
+msgid ""
+"The web-based forum for this group has been disabled. Please use the "
+"mailing list instead."
 msgstr ""
 
 msgid "Reply sent"
@@ -233,10 +245,14 @@ msgstr ""
 msgid "Post updated."
 msgstr ""
 
-msgid "Unable to edit post, probably because somebody has already replied to your post."
+msgid ""
+"Unable to edit post, probably because somebody has already replied to "
+"your post."
 msgstr ""
 
-msgid "Unable to delete post, probably because somebody has already replied to your post."
+msgid ""
+"Unable to delete post, probably because somebody has already replied to "
+"your post."
 msgstr ""
 
 msgid "Post deleted."
@@ -260,6 +276,14 @@ msgstr ""
 msgid "The group identifier must be at least 4 characters long."
 msgstr ""
 
+#, python-format
+msgid "Group: %s"
+msgstr ""
+
+#, python-format
+msgid "Subject: %s"
+msgstr ""
+
 msgid "Mailing List"
 msgstr ""
 
@@ -278,14 +302,6 @@ msgstr ""
 msgid "Page"
 msgstr ""
 
-#, python-format
-msgid "Group: %s"
-msgstr ""
-
-#, python-format
-msgid "Subject: %s"
-msgstr ""
-
 msgid "You have to log in or register to request group membership."
 msgstr ""
 
@@ -293,7 +309,9 @@ msgstr ""
 msgid "You are now a member of the group %s!"
 msgstr ""
 
-msgid "Your request to join the group has been forwarded to the group's administrators. Thanks!"
+msgid ""
+"Your request to join the group has been forwarded to the group's "
+"administrators. Thanks!"
 msgstr ""
 
 msgid "You already are a member of this group."
@@ -397,7 +415,9 @@ msgstr ""
 msgid "Why would you want to send an empty SMS message?"
 msgstr ""
 
-msgid "Nobody received your message... No other group members have confirmed their phone numbers yet. Please encourage them to do so!"
+msgid ""
+"Nobody received your message... No other group members have confirmed "
+"their phone numbers yet. Please encourage them to do so!"
 msgstr ""
 
 #, python-format
@@ -427,32 +447,44 @@ msgid "You have to be logged in to download a file!"
 msgstr ""
 
 #, python-format
-msgid "After logging in you will be redirected to the download page of the file <strong>%(filename)s</strong> and the download will start automatically."
+msgid ""
+"After logging in you will be redirected to the download page of the file "
+"<strong>%(filename)s</strong> and the download will start automatically."
 msgstr ""
 
 msgid "You have to log in or register to join a group!"
 msgstr ""
 
-msgid "After logging in or registering, your request to join the group will be sent."
+msgid ""
+"After logging in or registering, your request to join the group will be "
+"sent."
 msgstr ""
 
 msgid "Please log in to donate"
 msgstr ""
 
-msgid "Please log in before you donate so that we can associate the money you donate with your account."
+msgid ""
+"Please log in before you donate so that we can associate the money you "
+"donate with your account."
 msgstr ""
 
 msgid "Permission denied!"
 msgstr ""
 
-msgid "Only registered users can perform this action. Please log in, or register an account on our system."
+msgid ""
+"Only registered users can perform this action. Please log in, or register"
+" an account on our system."
 msgstr ""
 
 #, python-format
-msgid "If this is your first time visiting <a href=\"%(url)s\">Ututi</a>, please register first."
+msgid ""
+"If this is your first time visiting <a href=\"%(url)s\">Ututi</a>, please"
+" register first."
 msgstr ""
 
-msgid "You seem to have entered your username and password wrong, please try again!"
+msgid ""
+"You seem to have entered your username and password wrong, please try "
+"again!"
 msgstr ""
 
 msgid "Invalid invitation!"
@@ -470,7 +502,9 @@ msgstr ""
 msgid "Please register!"
 msgstr ""
 
-msgid "Only registered users can become members of a group, please register first."
+msgid ""
+"Only registered users can become members of a group, please register "
+"first."
 msgstr ""
 
 msgid "Password recovery email sent. Please check your inbox."
@@ -500,7 +534,9 @@ msgstr ""
 msgid "Invalid emails: %s"
 msgstr ""
 
-msgid "The mailing list for this group has been disabled. Please use the web-based forum instead."
+msgid ""
+"The mailing list for this group has been disabled. Please use the web-"
+"based forum instead."
 msgstr ""
 
 msgid "Your message to the group was successfully sent."
@@ -583,6 +619,12 @@ msgstr ""
 msgid "Information updated."
 msgstr ""
 
+msgid "Subject information"
+msgstr ""
+
+msgid "Wall"
+msgstr ""
+
 msgid "Wiki notes"
 msgstr ""
 
@@ -611,10 +653,21 @@ msgstr ""
 msgid "This email address is already in use."
 msgstr ""
 
-msgid "All teacher tools will be available to You once our team confirms You as a teacher. Thank You!"
+msgid ""
+"All teacher tools will be available to You once our team confirms You as "
+"a teacher. Thank You!"
 msgstr ""
 
 msgid "This user profile is not public"
+msgstr ""
+
+msgid "The recipient is not specified."
+msgstr ""
+
+msgid "Invalid subject"
+msgstr ""
+
+msgid "Wiki page created."
 msgstr ""
 
 msgid "Search"
@@ -624,9 +677,6 @@ msgid "General information"
 msgstr ""
 
 msgid "Contacts"
-msgstr ""
-
-msgid "Wall"
 msgstr ""
 
 msgid "Notifications"
@@ -840,7 +890,9 @@ msgid "An email address must contain a single @"
 msgstr ""
 
 #, python-format
-msgid "The username portion of the email address is invalid (the portion before the @: %(username)s)"
+msgid ""
+"The username portion of the email address is invalid (the portion before "
+"the @: %(username)s)"
 msgstr ""
 
 #, python-format
@@ -848,11 +900,15 @@ msgid "An error occured when trying to connect to the server: %(error)s"
 msgstr ""
 
 #, python-format
-msgid "The domain portion of the email address is invalid (the portion after the @: %(domain)s)"
+msgid ""
+"The domain portion of the email address is invalid (the portion after the"
+" @: %(domain)s)"
 msgstr ""
 
 #, python-format
-msgid "The domain of the email address does not exist (the portion after the @: %(domain)s)"
+msgid ""
+"The domain of the email address does not exist (the portion after the @: "
+"%(domain)s)"
 msgstr ""
 
 msgid "The email already exists."
@@ -872,15 +928,6 @@ msgid "Such coupon code already exists, choose a different one."
 msgstr ""
 
 msgid "Such a coupon code does not exist."
-msgstr ""
-
-msgid "The recipient is not specified."
-msgstr ""
-
-msgid "Invalid subject"
-msgstr ""
-
-msgid "Wiki page created."
 msgstr ""
 
 #, python-format
@@ -955,7 +1002,9 @@ msgid "A new file %(link_to_file)s for a group %(link_to_group)s was uploaded"
 msgstr ""
 
 #, python-format
-msgid "A new folder '%(folder_title)s' for a subject %(link_to_subject)s was created"
+msgid ""
+"A new folder '%(folder_title)s' for a subject %(link_to_subject)s was "
+"created"
 msgstr ""
 
 #, python-format
@@ -979,23 +1028,35 @@ msgid "Teacher %(link_to_author)s sent message to the group %(link_to_group)s."
 msgstr ""
 
 #, python-format
-msgid "New email post %(link_to_message)s was posted on %(link_to_group)s mailing list"
+msgid ""
+"New email post %(link_to_message)s was posted on %(link_to_group)s "
+"mailing list"
 msgstr ""
 
 #, python-format
-msgid "There is %(number_of_messages)d message in the moderation queue (%(moderation_queue_link)s)"
-msgid_plural "There are %(number_of_messages)d messages in the moderation queue (%(moderation_queue_link)s)"
+msgid ""
+"There is %(number_of_messages)d message in the moderation queue "
+"(%(moderation_queue_link)s)"
+msgid_plural ""
+"There are %(number_of_messages)d messages in the moderation queue "
+"(%(moderation_queue_link)s)"
 msgstr[0] ""
 msgstr[1] ""
 
 #, python-format
-msgid "There is %(number_of_messages)d message waiting in the <a href=\"%(moderation_queue_link)s\">moderation queue</a>"
-msgid_plural "There are %(number_of_messages)d waiting in the <a href=\"%(moderation_queue_link)s\">moderation queue</a>"
+msgid ""
+"There is %(number_of_messages)d message waiting in the <a "
+"href=\"%(moderation_queue_link)s\">moderation queue</a>"
+msgid_plural ""
+"There are %(number_of_messages)d waiting in the <a "
+"href=\"%(moderation_queue_link)s\">moderation queue</a>"
 msgstr[0] ""
 msgstr[1] ""
 
 #, python-format
-msgid "New email post %(link_to_message)s was posted in %(link_to_group)s moderation queue"
+msgid ""
+"New email post %(link_to_message)s was posted in %(link_to_group)s "
+"moderation queue"
 msgstr ""
 
 #, python-format
@@ -1062,7 +1123,9 @@ msgstr ""
 msgid "Teacher"
 msgstr ""
 
-msgid "You do not have the rights to see this page, or perform this action. Go back or go to the search page please."
+msgid ""
+"You do not have the rights to see this page, or perform this action. Go "
+"back or go to the search page please."
 msgstr ""
 
 msgid "go back"
@@ -1125,7 +1188,9 @@ msgstr ""
 msgid "Connect"
 msgstr ""
 
-msgid "Here you and your classmates can use the file storage for sharing information and create group for communication."
+msgid ""
+"Here you and your classmates can use the file storage for sharing "
+"information and create group for communication."
 msgstr ""
 
 msgid "register"
@@ -1224,7 +1289,9 @@ msgstr ""
 msgid "go find something"
 msgstr ""
 
-msgid "Image from flickr: http://www.flickr.com/photos/orinrobertjohn/13069655/sizes/o/in/photostream/"
+msgid ""
+"Image from flickr: "
+"http://www.flickr.com/photos/orinrobertjohn/13069655/sizes/o/in/photostream/"
 msgstr ""
 
 msgid "Log in or register using your Google or Facebook account"
@@ -1311,7 +1378,9 @@ msgstr ""
 msgid "UTUTI"
 msgstr ""
 
-msgid "This is a testing version - this is just a copy of the information! Changes you make will not be persisted!"
+msgid ""
+"This is a testing version - this is just a copy of the information! "
+"Changes you make will not be persisted!"
 msgstr ""
 
 msgid "ututi_link"
@@ -1353,7 +1422,9 @@ msgstr ""
 msgid "Statistics by Region"
 msgstr ""
 
-msgid "Here you see information how many people are added information where they are study."
+msgid ""
+"Here you see information how many people are added information where they"
+" are study."
 msgstr ""
 
 msgid "Statistics by Geo location"
@@ -1383,7 +1454,9 @@ msgstr ""
 msgid "Ututi - your university on the web"
 msgstr ""
 
-msgid "Your academic groups and subjects containing related materials: files, notes and descriptions. "
+msgid ""
+"Your academic groups and subjects containing related materials: files, "
+"notes and descriptions. "
 msgstr ""
 
 msgid "All these things are combined in the handy Ututi system."
@@ -1392,64 +1465,106 @@ msgstr ""
 msgid "What groups can do: email"
 msgstr ""
 
-msgid "It is a communication tool for You and Your classmates. Ututi groups work just like mailing lists: every member can receive these messages in their email account and can reply to them from there (You do not have to log on to Ututi every time). "
+msgid ""
+"It is a communication tool for You and Your classmates. Ututi groups work"
+" just like mailing lists: every member can receive these messages in "
+"their email account and can reply to them from there (You do not have to "
+"log on to Ututi every time). "
 msgstr ""
 
-msgid "You can always choose not to receive these email messages in the group settings."
+msgid ""
+"You can always choose not to receive these email messages in the group "
+"settings."
 msgstr ""
 
 msgid "What groups can do: subjects"
 msgstr ""
 
-msgid "Every group studies subjects. Ututi also has a catalog of academic subjects. Here the subjects are classified by the university and faculty. Every group can mark the subjects it is studying in the \"subjects\" area."
+msgid ""
+"Every group studies subjects. Ututi also has a catalog of academic "
+"subjects. Here the subjects are classified by the university and faculty."
+" Every group can mark the subjects it is studying in the \"subjects\" "
+"area."
 msgstr ""
 
-msgid "Members of the group receive notifications about the changes in all watched subjects: what files were uploaded, pages created or descriptions changed."
+msgid ""
+"Members of the group receive notifications about the changes in all "
+"watched subjects: what files were uploaded, pages created or descriptions"
+" changed."
 msgstr ""
 
-msgid "You can find new subjects by using our search and if they do not exist - create them :)"
+msgid ""
+"You can find new subjects by using our search and if they do not exist - "
+"create them :)"
 msgstr ""
 
 msgid "What groups can do: files"
 msgstr ""
 
-msgid "Ututi makes it easy to share files. In the \"files\" area members of the group can see the private files of the group and all the files of the subjects the group is watching."
+msgid ""
+"Ututi makes it easy to share files. In the \"files\" area members of the "
+"group can see the private files of the group and all the files of the "
+"subjects the group is watching."
 msgstr ""
 
-msgid "Private files are kept in a separate folder. Their size is limited to 200 Mb."
+msgid ""
+"Private files are kept in a separate folder. Their size is limited to 200"
+" Mb."
 msgstr ""
 
-msgid "Public files are kept in the folders belonging to the subjects. The folders are visible in the group when it is watching these subjects. The size and amount of public files is not limited. What is more, files can be added to subjects not only by your group, but also by other groups and Ututi members. This makes it easy to share information."
+msgid ""
+"Public files are kept in the folders belonging to the subjects. The "
+"folders are visible in the group when it is watching these subjects. The "
+"size and amount of public files is not limited. What is more, files can "
+"be added to subjects not only by your group, but also by other groups and"
+" Ututi members. This makes it easy to share information."
 msgstr ""
 
 msgid "What groups can do: events"
 msgstr ""
 
-msgid "All the events of a groups: new members, files, subjects are visible in the \"whats new\" section."
+msgid ""
+"All the events of a groups: new members, files, subjects are visible in "
+"the \"whats new\" section."
 msgstr ""
 
 msgid "What members can do: subjects"
 msgstr ""
 
-msgid "Not only groups, but also single Ututi members can watch subjects. You can easily start watching a subject by visiting its page and clicking on the link \"start watching\"."
+msgid ""
+"Not only groups, but also single Ututi members can watch subjects. You "
+"can easily start watching a subject by visiting its page and clicking on "
+"the link \"start watching\"."
 msgstr ""
 
-msgid "You can view all the subjects You are watching in the \"files\" area of Your profile."
+msgid ""
+"You can view all the subjects You are watching in the \"files\" area of "
+"Your profile."
 msgstr ""
 
-msgid "Here You can also choose to ignore the subjects watched by Your group - by clicking on the \"eye\" icon next to a subject You will stop receiving notifications about its events, but other classmates will continue watching it. "
+msgid ""
+"Here You can also choose to ignore the subjects watched by Your group - "
+"by clicking on the \"eye\" icon next to a subject You will stop receiving"
+" notifications about its events, but other classmates will continue "
+"watching it. "
 msgstr ""
 
-msgid "What is more, You can specify how often You want to receive email notifications about events in Your watched subjects."
+msgid ""
+"What is more, You can specify how often You want to receive email "
+"notifications about events in Your watched subjects."
 msgstr ""
 
 msgid "What members can do: home"
 msgstr ""
 
-msgid "In Your home area You will see what is happening in Your group and the subjects either You or Your group are watching."
+msgid ""
+"In Your home area You will see what is happening in Your group and the "
+"subjects either You or Your group are watching."
 msgstr ""
 
-msgid "From here You can also easily create a subject, upload a file, invite people to use Ututi."
+msgid ""
+"From here You can also easily create a subject, upload a file, invite "
+"people to use Ututi."
 msgstr ""
 
 msgid "Book_Type"
@@ -1504,7 +1619,9 @@ msgstr ""
 msgid "Undelete"
 msgstr ""
 
-msgid "Parent id can be a path, e.g. subject/vu/matematika, group/matematikai, or a numeric id."
+msgid ""
+"Parent id can be a path, e.g. subject/vu/matematika, group/matematikai, "
+"or a numeric id."
 msgstr ""
 
 msgid "Create new"
@@ -1778,20 +1895,27 @@ msgid "What can you find here?"
 msgstr ""
 
 #, python-format
-msgid "Group mailing lists, <a href=\"%(link)s\" title=\"Subject list\">subjects</a> files and lecture notes."
+msgid ""
+"Group mailing lists, <a href=\"%(link)s\" title=\"Subject "
+"list\">subjects</a> files and lecture notes."
 msgstr ""
 
 msgid "What can you do here?"
 msgstr ""
 
 #, python-format
-msgid "Share <a href=\"%(subjects)s\" title=\"Subject list\">study materials</a>          create <a href=\"%(groups)s\" title=\"Group list\">academic groups</a>          and communicate with classmates."
+msgid ""
+"Share <a href=\"%(subjects)s\" title=\"Subject list\">study materials</a>"
+"          create <a href=\"%(groups)s\" title=\"Group list\">academic "
+"groups</a>          and communicate with classmates."
 msgstr ""
 
 msgid "presentation_url"
 msgstr ""
 
-msgid "A place where you can store your study materials and leave them for future generations."
+msgid ""
+"A place where you can store your study materials and leave them for "
+"future generations."
 msgstr ""
 
 msgid "Create your group"
@@ -1824,13 +1948,18 @@ msgstr ""
 msgid "What is Ututi?"
 msgstr ""
 
-msgid "It is a web system that enables students to easily and quickly find, upload, share study materials and information."
+msgid ""
+"It is a web system that enables students to easily and quickly find, "
+"upload, share study materials and information."
 msgstr ""
 
 msgid "What is new about Ututi?"
 msgstr ""
 
-msgid "Ututi offers students the tools they need in their studies: mailing lists, file storage, catalogues of academic subjects all in one place. This means You will not need to have a separate google group."
+msgid ""
+"Ututi offers students the tools they need in their studies: mailing "
+"lists, file storage, catalogues of academic subjects all in one place. "
+"This means You will not need to have a separate google group."
 msgstr ""
 
 msgid "New blog snippet:"
@@ -1898,8 +2027,11 @@ msgstr ""
 msgid "Upload a Book"
 msgstr ""
 
-msgid "books"
-msgstr ""
+#, python-format
+msgid "%d book"
+msgid_plural "%d books"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "Catalog"
 msgstr ""
@@ -1911,6 +2043,9 @@ msgid "Disciplines"
 msgstr ""
 
 msgid "All books"
+msgstr ""
+
+msgid "Filter"
 msgstr ""
 
 msgid "Edit book"
@@ -1970,9 +2105,6 @@ msgstr "Search"
 msgid "Search results"
 msgstr ""
 
-msgid "Filter"
-msgstr ""
-
 msgid "Back to catalog"
 msgstr ""
 
@@ -1989,7 +2121,10 @@ msgid "Send message"
 msgstr ""
 
 #, python-format
-msgid "We have received a request to confirm the ownership of this email by %(fullname)s on the Ututi system. If this email belongs to you, confirm it by clicking on this link:"
+msgid ""
+"We have received a request to confirm the ownership of this email by "
+"%(fullname)s on the Ututi system. If this email belongs to you, confirm "
+"it by clicking on this link:"
 msgstr ""
 
 msgid "Ututi team"
@@ -2047,7 +2182,8 @@ msgid ""
 "Hello,\n"
 "\n"
 "your group \"%(group_title)s\" has just run out of private group space.\n"
-"If you want to use private group space further, please purchase a subscription\n"
+"If you want to use private group space further, please purchase a "
+"subscription\n"
 "on the group page at %(group_url)s, and the group file limit\n"
 "will be raised to %(size)s.\n"
 "\n"
@@ -2090,14 +2226,22 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "If you want to stop getting these emails - you can change your subscription settings in your <a href=\"%(url)s\">notification settings page</a>."
+msgid ""
+"If you want to stop getting these emails - you can change your "
+"subscription settings in your <a href=\"%(url)s\">notification settings "
+"page</a>."
 msgstr ""
 
 #, python-format
-msgid "If you want to stop getting these emails - you can change your subscription settings in your notification settings page (%(url)s)."
+msgid ""
+"If you want to stop getting these emails - you can change your "
+"subscription settings in your notification settings page (%(url)s)."
 msgstr ""
 
-msgid "We have received a request to reset Your password on the Ututi system. If You did not request the password to be recovered, please ignore this message."
+msgid ""
+"We have received a request to reset Your password on the Ututi system. If"
+" You did not request the password to be recovered, please ignore this "
+"message."
 msgstr ""
 
 msgid "If You did forget Your password, follow this link to recover it:"
@@ -2107,14 +2251,21 @@ msgid "Hello!"
 msgstr ""
 
 #, python-format
-msgid "%(user_name)s has been using Ututi, a portal for students, for some time now and recommends you to try it."
+msgid ""
+"%(user_name)s has been using Ututi, a portal for students, for some time "
+"now and recommends you to try it."
 msgstr ""
 
-msgid "Ututi is a system for students that encourages collaboration and sharing of study materials. We provide tools that make storing lecture notes, sharing files and communicating with your classmates much, much easier."
+msgid ""
+"Ututi is a system for students that encourages collaboration and sharing "
+"of study materials. We provide tools that make storing lecture notes, "
+"sharing files and communicating with your classmates much, much easier."
 msgstr ""
 
 #, python-format
-msgid "If You would like to join Ututi now, please follow this <a href=\"%(link)s\">link</a>."
+msgid ""
+"If You would like to join Ututi now, please follow this <a "
+"href=\"%(link)s\">link</a>."
 msgstr ""
 
 msgid "Looking forward to meeting you,<br/>The Ututi team"
@@ -2136,14 +2287,18 @@ msgstr ""
 msgid "Create your own profile with all Your courses and materials."
 msgstr ""
 
-msgid "Easily publish Your lecture notes so that Your students can find and access them."
+msgid ""
+"Easily publish Your lecture notes so that Your students can find and "
+"access them."
 msgstr ""
 
 msgid "Easily communicate with Your students."
 msgstr ""
 
 #, python-format
-msgid "The teacher %(teacher_name)s (%(teacher_url)s) sent a message to Your group:"
+msgid ""
+"The teacher %(teacher_name)s (%(teacher_url)s) sent a message to Your "
+"group:"
 msgstr ""
 
 msgid "If You reply to this message, the teacher will not get Your replies."
@@ -2254,7 +2409,10 @@ msgid "Congratulations! You have purchased %s personal SMS credits."
 msgstr ""
 
 #, python-format
-msgid "You can use these credits to send %s messages. For example, if your group has 20 members with registered phone numbers, one message will cost 20 SMS credits."
+msgid ""
+"You can use these credits to send %s messages. For example, if your group"
+" has 20 members with registered phone numbers, one message will cost 20 "
+"SMS credits."
 msgstr ""
 
 msgid "Happy cat"
@@ -2267,7 +2425,9 @@ msgid "Congratulations! You have increased the group's private file limit."
 msgstr ""
 
 #, python-format
-msgid "You can now store up to %(size)s in your group's private area. Time period extension: %(time)s."
+msgid ""
+"You can now store up to %(size)s in your group's private area. Time "
+"period extension: %(time)s."
 msgstr ""
 
 msgid "Have fun using Ututi groups!"
@@ -2354,7 +2514,11 @@ msgstr ""
 msgid "Forum type"
 msgstr ""
 
-msgid "<p>In an e-mail conference all messages, sent to the group's address will be forwarded to all members.</p><p>In a forum there is the posibility to create subforums, and subscribed members get e-mail notifications about new messages, not the messages themselves.</p>"
+msgid ""
+"<p>In an e-mail conference all messages, sent to the group's address will"
+" be forwarded to all members.</p><p>In a forum there is the posibility to"
+" create subforums, and subscribed members get e-mail notifications about "
+"new messages, not the messages themselves.</p>"
 msgstr ""
 
 msgid "Moderators"
@@ -2390,7 +2554,9 @@ msgstr ""
 msgid "Group page visibility"
 msgstr ""
 
-msgid "The group page can be used for news, description of the group, calendaring, timetables, etc."
+msgid ""
+"The group page can be used for news, description of the group, "
+"calendaring, timetables, etc."
 msgstr ""
 
 msgid "Back to group page"
@@ -2408,10 +2574,14 @@ msgstr ""
 msgid "Default group tab"
 msgstr ""
 
-msgid "This setting cannot be disabled, because the group is currently watching some subjects."
+msgid ""
+"This setting cannot be disabled, because the group is currently watching "
+"some subjects."
 msgstr ""
 
-msgid "This setting cannot be disabled, because the group is currently storing some private files."
+msgid ""
+"This setting cannot be disabled, because the group is currently storing "
+"some private files."
 msgstr ""
 
 msgid "Tags"
@@ -2426,7 +2596,9 @@ msgstr ""
 msgid "Everybody (moderated)"
 msgstr ""
 
-msgid "If you select 'moderated', you can pick the people who you want to allow to post to the mailing list."
+msgid ""
+"If you select 'moderated', you can pick the people who you want to allow "
+"to post to the mailing list."
 msgstr ""
 
 msgid "Edit group front page"
@@ -2449,7 +2621,8 @@ msgstr ""
 msgid ""
 "\n"
 "Ututi groups are a communication tool for you and your friends. Here\n"
-"your group can use the <a href=\"%(link_to_forums)s\">forums</a> and store\n"
+"your group can use the <a href=\"%(link_to_forums)s\">forums</a> and "
+"store\n"
 "private files.\n"
 msgstr ""
 
@@ -2497,7 +2670,9 @@ msgid "Invite friends to %s"
 msgstr ""
 
 #, python-format
-msgid "Join our group <a href=\"%s\">%s</a> in Ututi, a system for exchanging study materials and information."
+msgid ""
+"Join our group <a href=\"%s\">%s</a> in Ututi, a system for exchanging "
+"study materials and information."
 msgstr ""
 
 msgid "Join group"
@@ -2551,17 +2726,23 @@ msgstr ""
 msgid "What is a group page and who sees it?"
 msgstr ""
 
-msgid "The group page is the face of the group. It may be public or visible only to group members, depending on configuration."
+msgid ""
+"The group page is the face of the group. It may be public or visible only"
+" to group members, depending on configuration."
 msgstr ""
 
 #, python-format
-msgid "You can change visibility settings in the <a href=\"%s\">group settings</a> screen."
+msgid ""
+"You can change visibility settings in the <a href=\"%s\">group "
+"settings</a> screen."
 msgstr ""
 
 msgid "What are the uses of a group page?"
 msgstr ""
 
-msgid "Calendaring. Read this <a href=\"http://blog.ututi.lt/2009/05/28/naudotoju-isradingumas/\">blog post</a> for more information."
+msgid ""
+"Calendaring. Read this <a href=\"http://blog.ututi.lt/2009/05/28"
+"/naudotoju-isradingumas/\">blog post</a> for more information."
 msgstr ""
 
 msgid "A news board for timetables and posters."
@@ -2579,7 +2760,10 @@ msgstr ""
 msgid "You have decided not to increase your group's file limit"
 msgstr ""
 
-msgid "We hope you did not increase uour group's file limit because you decided to store files in the public subject folders and share them with everybody :)"
+msgid ""
+"We hope you did not increase uour group's file limit because you decided "
+"to store files in the public subject folders and share them with "
+"everybody :)"
 msgstr ""
 
 msgid "back to the group's files"
@@ -2655,21 +2839,33 @@ msgid "Make your group's file space unlimited"
 msgstr ""
 
 #, python-format
-msgid "The amount of group's private files is limited to %(limit)s. This is so because Ututi encourages users to store their files in publicly accessible subjects where they can be shared with all the users. But if You want to keep more than %(limit)s of files, You can do this."
+msgid ""
+"The amount of group's private files is limited to %(limit)s. This is so "
+"because Ututi encourages users to store their files in publicly "
+"accessible subjects where they can be shared with all the users. But if "
+"You want to keep more than %(limit)s of files, You can do this."
 msgstr ""
 
-msgid "By paying Your group will be able to store an <strong>unlimited amount of files</strong>:"
+msgid ""
+"By paying Your group will be able to store an <strong>unlimited amount of"
+" files</strong>:"
 msgstr ""
 
 #, python-format
 msgid "%d Lt"
 msgstr ""
 
-msgid "The amount of group's private files is limited to 200 Mb. This is so because Ututi encourages users to store their files in publicly accessible subjects where they can be shared with all the users. But if You want to keep more than 200 Mb of files, You can do this."
+msgid ""
+"The amount of group's private files is limited to 200 Mb. This is so "
+"because Ututi encourages users to store their files in publicly "
+"accessible subjects where they can be shared with all the users. But if "
+"You want to keep more than 200 Mb of files, You can do this."
 msgstr ""
 
 #, python-format
-msgid "For <em>%d Lt</em> your group will be able to store an <em>unlimited amount of files</em>:"
+msgid ""
+"For <em>%d Lt</em> your group will be able to store an <em>unlimited "
+"amount of files</em>:"
 msgstr ""
 
 msgid "increase the limit"
@@ -2699,13 +2895,18 @@ msgstr ""
 msgid "2. School (optional)"
 msgstr ""
 
-msgid "Ututi is an application for students, so it is important for us to know where you study. These data can be changed later in your profile settings screen."
+msgid ""
+"Ututi is an application for students, so it is important for us to know "
+"where you study. These data can be changed later in your profile settings"
+" screen."
 msgstr ""
 
 msgid "3. Phone number (optional)"
 msgstr ""
 
-msgid "We need your phone number so that you could send and receive SMS messages from the group. Don't worry, we will never send advertisements."
+msgid ""
+"We need your phone number so that you could send and receive SMS messages"
+" from the group. Don't worry, we will never send advertisements."
 msgstr ""
 
 msgid "I am already a registered Ututi user"
@@ -2744,7 +2945,9 @@ msgstr ""
 msgid "School's members"
 msgstr ""
 
-msgid "This is a list of all the recent events in the subjects and groups of this university."
+msgid ""
+"This is a list of all the recent events in the subjects and groups of "
+"this university."
 msgstr ""
 
 msgid "Sorry, nothing new at the moment."
@@ -2765,7 +2968,9 @@ msgstr ""
 msgid "Create a new group"
 msgstr ""
 
-msgid "Create your group, invite your classmates and use the mailing list, upload private group files"
+msgid ""
+"Create your group, invite your classmates and use the mailing list, "
+"upload private group files"
 msgstr ""
 
 msgid "Message approved"
@@ -2780,7 +2985,9 @@ msgstr ""
 msgid "Working..."
 msgstr ""
 
-msgid "Error: could not reach server or this message was already moderated. Please try refreshing the page."
+msgid ""
+"Error: could not reach server or this message was already moderated. "
+"Please try refreshing the page."
 msgstr ""
 
 msgid "Approve"
@@ -2868,7 +3075,9 @@ msgid "Compare with previous"
 msgstr ""
 
 #, python-format
-msgid "You are viewing an old version of this page created by %(link_to_user)s on %(date)s"
+msgid ""
+"You are viewing an old version of this page created by %(link_to_user)s "
+"on %(date)s"
 msgstr ""
 
 #, python-format
@@ -2933,22 +3142,32 @@ msgid "Get more space"
 msgstr ""
 
 #, python-format
-msgid "The amount of group's private files is limited to %(limit)s. This is so because Ututi encourages users to store their files in publicly accessible subjects where they can be shared with all the users. But if you want to keep more than %(limit)s of files, you can do this."
+msgid ""
+"The amount of group's private files is limited to %(limit)s. This is so "
+"because Ututi encourages users to store their files in publicly "
+"accessible subjects where they can be shared with all the users. But if "
+"you want to keep more than %(limit)s of files, you can do this."
 msgstr ""
 
 msgid "SMS message"
 msgstr ""
 
 #, python-format
-msgid "Send an SMS message to number <span style=\"font-size: 14px\">%(phone)s</span> with the following content:"
+msgid ""
+"Send an SMS message to number <span style=\"font-size: "
+"14px\">%(phone)s</span> with the following content:"
 msgstr ""
 
 #, python-format
-msgid "The SMS costs <strong>%(price).2f Lt</strong> and will increase your file limit to <strong>%(limit)s</strong> for another month."
+msgid ""
+"The SMS costs <strong>%(price).2f Lt</strong> and will increase your file"
+" limit to <strong>%(limit)s</strong> for another month."
 msgstr ""
 
 #, python-format
-msgid "Your private file area is limited to %(limit)s until <strong>%(date)s</strong>."
+msgid ""
+"Your private file area is limited to %(limit)s until "
+"<strong>%(date)s</strong>."
 msgstr ""
 
 msgid "E-banking"
@@ -3033,9 +3252,6 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid "There are no groups yet."
-msgstr ""
-
-msgid "Subject information"
 msgstr ""
 
 msgid "Lecturer:"
@@ -3128,7 +3344,9 @@ msgstr ""
 msgid "More subjects"
 msgstr ""
 
-msgid "Add watched subjects to your watched subjects' list and receive notifications about changes in these subjects"
+msgid ""
+"Add watched subjects to your watched subjects' list and receive "
+"notifications about changes in these subjects"
 msgstr ""
 
 msgid "My groups"
@@ -3144,7 +3362,9 @@ msgid "Support us"
 msgstr ""
 
 #, python-format
-msgid "You like <a href=\"%(url)s\">Ututi</a> and you want to contribute? Support us!"
+msgid ""
+"You like <a href=\"%(url)s\">Ututi</a> and you want to contribute? "
+"Support us!"
 msgstr ""
 
 msgid "Support now"
@@ -3171,7 +3391,9 @@ msgstr ""
 msgid "create new group"
 msgstr ""
 
-msgid "Communicate with your classmates, colleagues and friends, share files and news together!"
+msgid ""
+"Communicate with your classmates, colleagues and friends, share files and"
+" news together!"
 msgstr ""
 
 msgid "recommend Ututi to your friends"
@@ -3231,8 +3453,10 @@ msgstr ""
 msgid ""
 "\n"
 "\n"
-"                      Should you not have received the code, please press \"Send code again\".\n"
-"                      Also don't forget to add Ututi (<a href=\"gg:5437377\">5437377</a>) to your friends!"
+"                      Should you not have received the code, please press"
+" \"Send code again\".\n"
+"                      Also don't forget to add Ututi (<a "
+"href=\"gg:5437377\">5437377</a>) to your friends!"
 msgstr ""
 
 msgid "Submit code"
@@ -3289,7 +3513,9 @@ msgstr ""
 msgid "Unlink Facebook"
 msgstr ""
 
-msgid "Click the buttons to link or unlink your profile with Google and/or Facebook"
+msgid ""
+"Click the buttons to link or unlink your profile with Google and/or "
+"Facebook"
 msgstr ""
 
 msgid "Change picture"
@@ -3325,14 +3551,21 @@ msgstr ""
 msgid "What's new?"
 msgstr ""
 
-msgid "This is a list of all the recent events in the subjects you are watching and the groups you belong to."
+msgid ""
+"This is a list of all the recent events in the subjects you are watching "
+"and the groups you belong to."
 msgstr ""
 
 msgid "Edit shown updates."
 msgstr ""
 
 #, python-format
-msgid "This is the Ututi wall. Here you will find notifications about things that concern you such as changes in your groups and the subjects you are watching. Start by <a href=\"%(create_group_link)s\">creating</a> or <a href=\"%(groups_list_link)s\">joining</a> a group and watching some <a href=\"%(subjects_list_link)s\">subjects</a>."
+msgid ""
+"This is the Ututi wall. Here you will find notifications about things "
+"that concern you such as changes in your groups and the subjects you are "
+"watching. Start by <a href=\"%(create_group_link)s\">creating</a> or <a "
+"href=\"%(groups_list_link)s\">joining</a> a group and watching some <a "
+"href=\"%(subjects_list_link)s\">subjects</a>."
 msgstr ""
 
 msgid "Your phone has been confirmed. Thank you."
@@ -3356,7 +3589,9 @@ msgstr ""
 msgid "Group files"
 msgstr ""
 
-msgid "It's simple - you only need to know the email addresses of your classmates!"
+msgid ""
+"It's simple - you only need to know the email addresses of your "
+"classmates!"
 msgstr ""
 
 msgid "Use the group's mailing list!"
@@ -3377,7 +3612,10 @@ msgstr ""
 msgid "Show subjects from my groups"
 msgstr ""
 
-msgid "Ututi is Your university online. Here You and Your class mates can create your group online, use the mailing list for communication and the file storage for sharing information."
+msgid ""
+"Ututi is Your university online. Here You and Your class mates can create"
+" your group online, use the mailing list for communication and the file "
+"storage for sharing information."
 msgstr ""
 
 msgid "Share your thoughts about Ututi"
@@ -3410,7 +3648,9 @@ msgstr ""
 msgid "Please confirm your phone number"
 msgstr ""
 
-msgid "Enter the confirmation code that you received by SMS to prove that this number belongs to you."
+msgid ""
+"Enter the confirmation code that you received by SMS to prove that this "
+"number belongs to you."
 msgstr ""
 
 msgid "Confirmation code: "
@@ -3431,7 +3671,9 @@ msgstr ""
 msgid "Very sad..."
 msgstr ""
 
-msgid "We are very disappointed that you have decided not to support Ututi. We hope you will support us next time. Good luck!"
+msgid ""
+"We are very disappointed that you have decided not to support Ututi. We "
+"hope you will support us next time. Good luck!"
 msgstr ""
 
 msgid "back to the profile"
@@ -3465,10 +3707,17 @@ msgstr ""
 msgid "Why we need support?"
 msgstr ""
 
-msgid "Ututi is just like wikipedia: every user can change, create, see and download the content for free.  But maintainance of servers, development and supervision requires recources.  So if Ututi has helped you pass an exam, write your thesis or you just like Ututi, we are asking you to contribute by making a small donation :)"
+msgid ""
+"Ututi is just like wikipedia: every user can change, create, see and "
+"download the content for free.  But maintainance of servers, development "
+"and supervision requires recources.  So if Ututi has helped you pass an "
+"exam, write your thesis or you just like Ututi, we are asking you to "
+"contribute by making a small donation :)"
 msgstr ""
 
-msgid "If you donate at least 50 Lt, you will receive a gift &mdash; an Ututi T-shirt. You can donate this amount in parts."
+msgid ""
+"If you donate at least 50 Lt, you will receive a gift &mdash; an Ututi "
+"T-shirt. You can donate this amount in parts."
 msgstr ""
 
 msgid "I want to donate:"
@@ -3501,7 +3750,9 @@ msgstr ""
 msgid "Create subjects you teach, or find those that are already created:"
 msgstr ""
 
-msgid "Here you will be able to upload course material, and groups studying the subject will be notified automatically."
+msgid ""
+"Here you will be able to upload course material, and groups studying the "
+"subject will be notified automatically."
 msgstr ""
 
 msgid "All your course materials with be organized in one place."
@@ -3528,40 +3779,19 @@ msgstr ""
 msgid "Thank you for supporting Ututi!"
 msgstr ""
 
-msgid "You have just contributed to the development of Ututi! A medal, signifying your Ututi supporter status, should soon appear in your profile. Good luck continuing to use Ututi!"
+msgid ""
+"You have just contributed to the development of Ututi! A medal, "
+"signifying your Ututi supporter status, should soon appear in your "
+"profile. Good luck continuing to use Ututi!"
 msgstr ""
 
 msgid "Welcome to Ututi!"
 msgstr ""
 
-msgid "At the moment You are not confirmed as a teacher. Our administrators have been notified and will verify You shortly. Please be patient. Meanwhile please tell us more about yourself."
-msgstr ""
-
-msgid "Group or user:"
-msgstr ""
-
-msgid "Share with others"
-msgstr ""
-
-msgid "send a message"
-msgstr ""
-
-msgid "You need to be a member of a group or have subjects that you are studying to be able to quickly upload files."
-msgstr ""
-
-msgid "upload a file"
-msgstr ""
-
-msgid "You or your group need to have subjects that you are studying to be able to quickly create wiki notes in them."
-msgstr ""
-
-msgid "create a wiki page"
-msgstr ""
-
-msgid "more"
-msgstr ""
-
-msgid "less"
+msgid ""
+"At the moment You are not confirmed as a teacher. Our administrators have"
+" been notified and will verify You shortly. Please be patient. Meanwhile "
+"please tell us more about yourself."
 msgstr ""
 
 msgid "Wall settings"
@@ -3672,6 +3902,9 @@ msgstr ""
 msgid "[DELETED]"
 msgstr ""
 
+msgid "Book"
+msgstr ""
+
 msgid "The data"
 msgstr ""
 
@@ -3748,7 +3981,9 @@ msgstr ""
 msgid "create"
 msgstr ""
 
-msgid "No more space for private files. We recommend moving files into subjects or upgrading the group."
+msgid ""
+"No more space for private files. We recommend moving files into subjects "
+"or upgrading the group."
 msgstr ""
 
 msgid "Trash"
@@ -3758,29 +3993,39 @@ msgid "There are no deleted files."
 msgstr ""
 
 #, python-format
-msgid "Your email (%(email)s) is not confirmed! Please confirm your email by clicking on the link sent to your address or "
+msgid ""
+"Your email (%(email)s) is not confirmed! Please confirm your email by "
+"clicking on the link sent to your address or "
 msgstr ""
 
 msgid "get another confirmation email"
 msgstr ""
 
 #, python-format
-msgid "Your <strong>gadu gadu number</strong> is not confirmed! Please <a href=\"%s\">confirm</a> it by entering the code sent to you."
+msgid ""
+"Your <strong>gadu gadu number</strong> is not confirmed! Please <a "
+"href=\"%s\">confirm</a> it by entering the code sent to you."
 msgstr ""
 
 #, python-format
-msgid "Your phone is not confirmed! Please <a href=\"%s\">confirm</a> it by entering the code sent to you."
+msgid ""
+"Your phone is not confirmed! Please <a href=\"%s\">confirm</a> it by "
+"entering the code sent to you."
 msgstr ""
 
 #, python-format
-msgid "%(author)s has sent you an invitation to group %(group)s. Do you want to become a member of this group?"
+msgid ""
+"%(author)s has sent you an invitation to group %(group)s. Do you want to "
+"become a member of this group?"
 msgstr ""
 
 msgid "Accept"
 msgstr ""
 
 #, python-format
-msgid "%(user)s wants to join the group %(group)s. Do you want to confirm this membership?"
+msgid ""
+"%(user)s wants to join the group %(group)s. Do you want to confirm this "
+"membership?"
 msgstr ""
 
 msgid "I teach this"
@@ -3810,6 +4055,40 @@ msgstr ""
 msgid "Your SMS was successfully sent."
 msgstr ""
 
+msgid "Group or user:"
+msgstr ""
+
+msgid "Share with others"
+msgstr ""
+
+msgid "send a message"
+msgstr ""
+
+msgid ""
+"You need to be a member of a group or have subjects that you are studying"
+" to be able to quickly upload files."
+msgstr ""
+
+msgid "upload a file"
+msgstr ""
+
+msgid ""
+"You or your group need to have subjects that you are studying to be able "
+"to quickly create wiki notes in them."
+msgstr ""
+
+msgid "create a wiki page"
+msgstr ""
+
+msgid "more"
+msgstr ""
+
+msgid "less"
+msgstr ""
+
+msgid "See older events..."
+msgstr ""
+
 msgid "Ignore events like this"
 msgstr ""
 
@@ -3833,11 +4112,15 @@ msgid "%(user_link)s has uploaded a new file in the subject %(subject_link)s"
 msgstr ""
 
 #, python-format
-msgid "You have created a new folder %(folder_name)s in the subject %(subject_link)s"
+msgid ""
+"You have created a new folder %(folder_name)s in the subject "
+"%(subject_link)s"
 msgstr ""
 
 #, python-format
-msgid "%(user_link)s has created a new folder %(folder_name)s in the subject %(subject_link)s"
+msgid ""
+"%(user_link)s has created a new folder %(folder_name)s in the subject "
+"%(subject_link)s"
 msgstr ""
 
 #, python-format
@@ -3853,7 +4136,9 @@ msgid "You have created a new folder %(folder_name)s in the group %(group_link)s
 msgstr ""
 
 #, python-format
-msgid "%(user_link)s has created a new folder %(folder_name)s in the group %(group_link)s"
+msgid ""
+"%(user_link)s has created a new folder %(folder_name)s in the group "
+"%(group_link)s"
 msgstr ""
 
 #, python-format
@@ -3885,7 +4170,9 @@ msgid "You have posted a new message %(message_link)s to the group %(group_link)
 msgstr ""
 
 #, python-format
-msgid "%(user_link)s has posted a new message %(message_link)s to the group %(group_link)s"
+msgid ""
+"%(user_link)s has posted a new message %(message_link)s to the group "
+"%(group_link)s"
 msgstr ""
 
 #, python-format
@@ -3897,11 +4184,15 @@ msgid "Teacher %(user_link)s has sent a message to the group %(group_link)s"
 msgstr ""
 
 #, python-format
-msgid "You have posted a new message %(message_link)s to the group's %(group_link)s moderation queue"
+msgid ""
+"You have posted a new message %(message_link)s to the group's "
+"%(group_link)s moderation queue"
 msgstr ""
 
 #, python-format
-msgid "%(user_link)s has posted a new message %(message_link)s to the group's %(group_link)s moderation queue"
+msgid ""
+"%(user_link)s has posted a new message %(message_link)s to the group's "
+"%(group_link)s moderation queue"
 msgstr ""
 
 #, python-format
@@ -3909,7 +4200,9 @@ msgid "You have posted a new message %(message_link)s in the forum %(group_link)
 msgstr ""
 
 #, python-format
-msgid "%(user_link)s has posted a new message %(message_link)s in the forum %(group_link)s"
+msgid ""
+"%(user_link)s has posted a new message %(message_link)s in the forum "
+"%(group_link)s"
 msgstr ""
 
 #, python-format
@@ -3929,7 +4222,9 @@ msgid "You have sent %(user_link)s a private message \"%(msg_link)s\""
 msgstr ""
 
 #, python-format
-msgid "%(sender_link)s has sent %(recipient_link)s a private message \"%(msg_link)s\""
+msgid ""
+"%(sender_link)s has sent %(recipient_link)s a private message "
+"\"%(msg_link)s\""
 msgstr ""
 
 #, python-format
@@ -3961,7 +4256,9 @@ msgid "You have created a page %(page_link)s in the subject %(subject_link)s"
 msgstr ""
 
 #, python-format
-msgid "%(user_link)s has created a page %(page_link)s in the subject %(subject_link)s"
+msgid ""
+"%(user_link)s has created a page %(page_link)s in the subject "
+"%(subject_link)s"
 msgstr ""
 
 #, python-format
@@ -3969,7 +4266,9 @@ msgid "You have modified a page %(page_link)s in the subject %(subject_link)s"
 msgstr ""
 
 #, python-format
-msgid "%(user_link)s has modified a page %(page_link)s in the subject %(subject_link)s"
+msgid ""
+"%(user_link)s has modified a page %(page_link)s in the subject "
+"%(subject_link)s"
 msgstr ""
 
 msgid "More"
@@ -3980,7 +4279,9 @@ msgid "%(user_link)s has uploaded a new file in the subject %(subject_link)s."
 msgstr ""
 
 #, python-format
-msgid "%(user_link)s has created a new folder %(folder_name)s in the subject %(subject_link)s."
+msgid ""
+"%(user_link)s has created a new folder %(folder_name)s in the subject "
+"%(subject_link)s."
 msgstr ""
 
 #, python-format
@@ -3988,7 +4289,9 @@ msgid "%(user_link)s has uploaded a new file in the group %(group_link)s."
 msgstr ""
 
 #, python-format
-msgid "%(user_link)s has created a new folder %(folder_name)s in the group %(group_link)s."
+msgid ""
+"%(user_link)s has created a new folder %(folder_name)s in the group "
+"%(group_link)s."
 msgstr ""
 
 #, python-format
@@ -4004,7 +4307,9 @@ msgid "%(user_link)s has created the group %(subject_link)s."
 msgstr ""
 
 #, python-format
-msgid "%(user_link)s has posted a new message %(message_link)s to the group %(group_link)s."
+msgid ""
+"%(user_link)s has posted a new message %(message_link)s to the group "
+"%(group_link)s."
 msgstr ""
 
 #, python-format
@@ -4012,14 +4317,18 @@ msgid "Teacher %(user_link)s sent a message to the group %(group_link)s."
 msgstr ""
 
 #, python-format
-msgid "%(user_link)s has posted a new message %(message_link)s to the group's %(group_link)s moderation queue."
+msgid ""
+"%(user_link)s has posted a new message %(message_link)s to the group's "
+"%(group_link)s moderation queue."
 msgstr ""
 
 msgid "Moderate"
 msgstr ""
 
 #, python-format
-msgid "%(user_link)s has posted a new message %(message_link)s in the forum %(group_link)s."
+msgid ""
+"%(user_link)s has posted a new message %(message_link)s in the forum "
+"%(group_link)s."
 msgstr ""
 
 #, python-format
@@ -4031,7 +4340,9 @@ msgid "%(user_link)s has sent you a private message \"%(msg_link)s\"."
 msgstr ""
 
 #, python-format
-msgid "%(user_link)s has sent %(recipient_link)s a private message \"%(msg_link)s\"."
+msgid ""
+"%(user_link)s has sent %(recipient_link)s a private message "
+"\"%(msg_link)s\"."
 msgstr ""
 
 #, python-format
@@ -4043,19 +4354,27 @@ msgid "%(user_link)s left the group %(group_link)s."
 msgstr ""
 
 #, python-format
-msgid "The group %(group_link)s has started watching the subject %(subject_link)s."
+msgid ""
+"The group %(group_link)s has started watching the subject "
+"%(subject_link)s."
 msgstr ""
 
 #, python-format
-msgid "The group %(group_link)s has stopped watching the subject %(subject_link)s."
+msgid ""
+"The group %(group_link)s has stopped watching the subject "
+"%(subject_link)s."
 msgstr ""
 
 #, python-format
-msgid "%(user_link)s has created a page %(page_link)s in the subject %(subject_link)s."
+msgid ""
+"%(user_link)s has created a page %(page_link)s in the subject "
+"%(subject_link)s."
 msgstr ""
 
 #, python-format
-msgid "%(user_link)s has modified a page %(page_link)s in the subject %(subject_link)s."
+msgid ""
+"%(user_link)s has modified a page %(page_link)s in the subject "
+"%(subject_link)s."
 msgstr ""
 
 msgid "Region"
@@ -4100,13 +4419,17 @@ msgstr ""
 msgid "Start watching this subject personally"
 msgstr ""
 
-msgid "Before creating a new subject please ensure that it has not been created yet."
+msgid ""
+"Before creating a new subject please ensure that it has not been created "
+"yet."
 msgstr ""
 
 msgid "A list of similar subjects is shown on the right."
 msgstr ""
 
-msgid "Please carefully read through the list and if you don't find your subject, create it."
+msgid ""
+"Please carefully read through the list and if you don't find your "
+"subject, create it."
 msgstr ""
 
 msgid "Create subject"
@@ -4118,7 +4441,9 @@ msgstr ""
 msgid "A place for course material sharing"
 msgstr ""
 
-msgid "upload and share course material with students of your class, university or the entire world."
+msgid ""
+"upload and share course material with students of your class, university "
+"or the entire world."
 msgstr ""
 
 msgid "Easy way to reach your students"
@@ -4127,7 +4452,9 @@ msgstr ""
 msgid "send messages to all of your students at once."
 msgstr ""
 
-msgid "When you update subject information or upload a new file, your students will be notified automatically."
+msgid ""
+"When you update subject information or upload a new file, your students "
+"will be notified automatically."
 msgstr ""
 
 msgid "Monitoring wiki notes"
@@ -4139,7 +4466,9 @@ msgstr ""
 msgid "Subject forum"
 msgstr ""
 
-msgid "a place to discuss the learning matters. Subject forums bring you to your students closer than ever before!"
+msgid ""
+"a place to discuss the learning matters. Subject forums bring you to your"
+" students closer than ever before!"
 msgstr ""
 
 msgid "What are subjects?"
@@ -4151,13 +4480,17 @@ msgstr ""
 msgid "send messages to all of your group mates at once."
 msgstr ""
 
-msgid "When someone updates subject information or uploads a new file, everyone watching the subject will be notified automatically."
+msgid ""
+"When someone updates subject information or uploads a new file, everyone "
+"watching the subject will be notified automatically."
 msgstr ""
 
 msgid "Creating wiki notes"
 msgstr ""
 
-msgid "create notes for your courses collaboratively with your group mates or even your teacher."
+msgid ""
+"create notes for your courses collaboratively with your group mates or "
+"even your teacher."
 msgstr ""
 
 msgid "a place to discuss the learning matters!"
@@ -4169,7 +4502,9 @@ msgstr ""
 msgid "Maybe here's what you're looking for?"
 msgstr ""
 
-msgid "Please make sure that the subject you are about to create is not in this list."
+msgid ""
+"Please make sure that the subject you are about to create is not in this "
+"list."
 msgstr ""
 
 msgid "Edit subject"
@@ -4206,13 +4541,17 @@ msgstr ""
 msgid "Restore subject"
 msgstr ""
 
-msgid "Subject has been deleted, it will soon disappear from your watched subjects list."
+msgid ""
+"Subject has been deleted, it will soon disappear from your watched "
+"subjects list."
 msgstr ""
 
 msgid "What is a subject page?"
 msgstr ""
 
-msgid "A subject page is a place for all information related to a particular course."
+msgid ""
+"A subject page is a place for all information related to a particular "
+"course."
 msgstr ""
 
 msgid "Where do I start?"
@@ -4221,7 +4560,15 @@ msgstr ""
 msgid "Create wiki pages for a subject"
 msgstr ""
 
-msgid "Collecting course notes in Word? Writing things down on a computer during lectures? You can store your notes here, where they can be read and edited by your classmates."
+msgid ""
+"You can store Your lecture notes here, and share them with Your students."
+" Encourage them to contribute and coauthor the materials with You!"
+msgstr ""
+
+msgid ""
+"Collecting course notes in Word? Writing things down on a computer during"
+" lectures? You can store your notes here, where they can be read and "
+"edited by your classmates."
 msgstr ""
 
 msgid "Create a wiki document"
@@ -4230,37 +4577,45 @@ msgstr ""
 msgid "Upload course files"
 msgstr ""
 
-msgid "You may upload course notes, sample tasks and solutions, coursework examples. You can also upload <strong>very</strong> large files (do not abuse this feature though, the moderators will promptly delete any inappropriate material)."
+msgid ""
+"Upload Your slides, course notes, sample tasks and solutions here. Large "
+"files are supported - all for Your convenience!"
+msgstr ""
+
+msgid ""
+"You may upload course notes, sample tasks and solutions, coursework "
+"examples. You can also upload <strong>very</strong> large files (do not "
+"abuse this feature though, the moderators will promptly delete any "
+"inappropriate material)."
 msgstr ""
 
 msgid "Upload files"
 msgstr ""
 
-msgid "Enter a subject description,"
-msgstr ""
-
-msgid "so that others would find their way around more easily."
-msgstr ""
-
-msgid "Create a subject description"
-msgstr ""
-
 msgid "Upload study material"
 msgstr ""
 
-msgid "You may upload course notes, solutions, examples, and everything else that does not violate copyright."
+msgid ""
+"You may upload course notes, solutions, examples, and everything else "
+"that does not violate copyright."
 msgstr ""
 
 msgid "Why is Ututi file storage superior to others?"
 msgstr ""
 
-msgid "Ututi files are associated with a specific course at a specific university, so they are much easier to find."
+msgid ""
+"Ututi files are associated with a specific course at a specific "
+"university, so they are much easier to find."
 msgstr ""
 
-msgid "Files may be uploaded and downloaded by anyone, so they are easier to share between all students taking a given course."
+msgid ""
+"Files may be uploaded and downloaded by anyone, so they are easier to "
+"share between all students taking a given course."
 msgstr ""
 
-msgid "You can upload <strong>very large</strong> files, so you do not need to worry about available space or delete old files to upload new ones."
+msgid ""
+"You can upload <strong>very large</strong> files, so you do not need to "
+"worry about available space or delete old files to upload new ones."
 msgstr ""
 
 msgid "Subject files"
@@ -4285,6 +4640,15 @@ msgid "Personal course notes written down during a lecture"
 msgstr ""
 
 msgid "Any text that you want to collaborate on with your classmates"
+msgstr ""
+
+msgid "Enter a subject description,"
+msgstr ""
+
+msgid "so that others would find their way around more easily."
+msgstr ""
+
+msgid "Create a subject description"
 msgstr ""
 
 msgid "Register as teacher:"
@@ -4314,10 +4678,14 @@ msgstr ""
 msgid "SMS"
 msgstr ""
 
-msgid "send SMSs to your groups or friends. Get notifications and updates to your cell phone."
+msgid ""
+"send SMSs to your groups or friends. Get notifications and updates to "
+"your cell phone."
 msgstr ""
 
-msgid "Please enter your university email. That way it will be easier to verify your identity."
+msgid ""
+"Please enter your university email. That way it will be easier to verify "
+"your identity."
 msgstr ""
 
 msgid "Register using your Google or Facebook account"
@@ -4364,29 +4732,16 @@ msgstr ""
 msgid "Taught courses"
 msgstr ""
 
-msgid "Send an SMS message to all your classmates. The service is paid by SMS credits (1 credit = 1 SMS message to one person). The cost of an SMS message depends on the number of members in the group."
+msgid ""
+"Send an SMS message to all your classmates. The service is paid by SMS "
+"credits (1 credit = 1 SMS message to one person). The cost of an SMS "
+"message depends on the number of members in the group."
 msgstr ""
 
 msgid "Credits left:"
 msgstr ""
 
 msgid "Purchase credits"
-msgstr ""
-
-msgid "SMS credits can be used to send SMS messages to members of a group. There are two ways to purchase SMS credits:"
-msgstr ""
-
-#, python-format
-msgid "The SMS costs <strong>%(price).2f Lt</strong> and <strong>%(credits)d credits</strong> will be added to your account (one credit is one SMS to a single person)."
-msgstr ""
-
-msgid "If you pay by bank, <strong>a large discount applies</strong>."
-msgstr ""
-
-msgid "credits"
-msgstr ""
-
-msgid "Purchase SMS credits"
 msgstr ""
 
 msgid "Message text:"
@@ -4407,17 +4762,45 @@ msgstr ""
 msgid "SMS credits"
 msgstr ""
 
-msgid "one SMS credit allows you to send one SMS message to a single recipient. When sending a message to a group, one credit is charged for every recipient."
+msgid ""
+"one SMS credit allows you to send one SMS message to a single recipient. "
+"When sending a message to a group, one credit is charged for every "
+"recipient."
 msgstr ""
 
 msgid "Send a message from your phone!"
 msgstr ""
 
 #, python-format
-msgid "You can send a message to your group directly from your phone. The message costs <strong>%(price).2f Lt</strong>, which pays for the delivery of the message to all recipients (your SMS credits will not be charged). Send the following text to number %(phone)s:"
+msgid ""
+"You can send a message to your group directly from your phone. The "
+"message costs <strong>%(price).2f Lt</strong>, which pays for the "
+"delivery of the message to all recipients (your SMS credits will not be "
+"charged). Send the following text to number %(phone)s:"
 msgstr ""
 
 msgid "Your text"
+msgstr ""
+
+msgid ""
+"SMS credits can be used to send SMS messages to members of a group. There"
+" are two ways to purchase SMS credits:"
+msgstr ""
+
+#, python-format
+msgid ""
+"The SMS costs <strong>%(price).2f Lt</strong> and <strong>%(credits)d "
+"credits</strong> will be added to your account (one credit is one SMS to "
+"a single person)."
+msgstr ""
+
+msgid "If you pay by bank, <strong>a large discount applies</strong>."
+msgstr ""
+
+msgid "credits"
+msgstr ""
+
+msgid "Purchase SMS credits"
 msgstr ""
 
 msgid "Full title"
