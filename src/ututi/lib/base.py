@@ -56,7 +56,6 @@ class BaseController(WSGIController):
         c.serve_file = None
         c.security_context = None
         c.obj_type = None
-        c.blog_entries = None
         c.results = None
         c.step = None
         c.searched = None

@@ -8,7 +8,7 @@ from pylons import request, tmpl_context as c, url
 from pylons.templating import render_mako_def
 
 from ututi.controllers.home import UniversityListMixin
-from ututi.model import BlogEntry, meta
+from ututi.model import meta
 from ututi.lib.base import BaseController, render
 from ututi.lib.search import search_query, search_query_count, tag_search
 from ututi.lib.validators import validate
@@ -62,7 +62,6 @@ class SearchController(SearchBaseController, UniversityListMixin):
 
     @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
     def index(self):
-        c.blog_entries = meta.Session.query(BlogEntry).order_by(BlogEntry.created.desc()).limit(10).all()
         if c.user is not None and self.form_result == {}:
             redirect(url(controller='profile', action='browse'))
 
@@ -71,7 +70,6 @@ class SearchController(SearchBaseController, UniversityListMixin):
         return render('/search/index.mako')
 
     def browse(self):
-        c.blog_entries = meta.Session.query(BlogEntry).order_by(BlogEntry.created.desc()).limit(10).all()
         self._get_unis()
         c.teaser = False
 

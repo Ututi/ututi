@@ -263,46 +263,6 @@
   </%self:action_portlet>
 </%def>
 
-<%def name="blog_portlet()">
-  <%def name="entry(entry)">
-    <div class="teaser">
-      ${entry.content|n}
-    </div>
-  </%def>
-  %if c.blog_entries:
-    <%self:uportlet id="blog_portlet" portlet_class="">
-      <%def name="header()">
-        ${_('Ututi news')}
-        <div style="float: right;">
-          <div class="blog_pager" id="blog_bk"></div>
-          <div class="blog_pager" id="blog_fwd"></div>
-        </div>
-      </%def>
-    <div id="entries">
-      %for blog_entry in c.blog_entries:
-      ${entry(blog_entry)}
-      %endfor
-    </div>
-
-    ${h.javascript_link('/javascript/jquery.cycle.all.js')|n}
-    <script type="text/javascript">
-    //<![CDATA[
-    $('#entries').cycle({
-        'fx': 'scrollHorz',
-        'next': '#blog_fwd',
-        'prev': '#blog_bk',
-        'timeout': 0,
-      });
-    //]]>
-    </script>
-
-    <div class="footer">
-      <a class="more" href="${_('ututi_blog_url')}">${_('More news')}</a>
-    </div>
-    </%self:uportlet>
-  %endif
-</%def>
-
 <%def name="teacher_information_portlet(user=None, full=True, title=None)">
   <%
      if user is None:

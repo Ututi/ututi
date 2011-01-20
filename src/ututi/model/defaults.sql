@@ -1072,14 +1072,6 @@ CREATE TABLE group_requests (
 create index group_requests_user_id_idx on group_requests(user_id);
 create index group_requests_group_id_idx on group_requests(group_id);
 
-/* blog entries */
-create table blog (
-       id bigserial not null,
-       content text not null default '',
-       created date not null default (now() at time zone 'UTC'),
-       primary key (id));;
-
-
 /* payments */
 create table payments (
        id bigserial not null,

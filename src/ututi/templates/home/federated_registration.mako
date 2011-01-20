@@ -7,7 +7,6 @@
 </%def>
 
 <%def name="portlets()">
-  ${blog_portlet()}
   ${user_support_portlet()}
 </%def>
 

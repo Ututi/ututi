@@ -36,8 +36,7 @@ from ututi.lib.validators import manual_validate
 
 from ututi.model.events import Event, TeacherMessageEvent
 from ututi.model import File
-from ututi.model import get_supporters
-from ututi.model import LocationTag, BlogEntry, TeacherGroup
+from ututi.model import LocationTag, TeacherGroup
 from ututi.model import meta, Email, User
 from ututi.controllers.profile.validators import HideElementForm, MultiRcptEmailForm
 from ututi.controllers.profile.validators import ContactForm, LocationForm, LogoUpload, PhoneConfirmationForm,\
@@ -93,7 +92,6 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         c.action = None
         if c.user is not None:
             c.breadcrumbs = [{'title': c.user.fullname, 'link': url(controller='profile', action='home')}]
-            c.blog_entries = meta.Session.query(BlogEntry).order_by(BlogEntry.created.desc()).limit(10).all()
 
     @ActionProtector("user")
     def browse(self):

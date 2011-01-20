@@ -476,15 +476,6 @@ def setup_orm(engine):
     orm.mapper(TagSearchItem, tag_search_items_table,
                properties={'tag' : relation(LocationTag)})
 
-    global blog_table
-    blog_table = Table("blog", meta.metadata,
-                       Column('content', Unicode(assert_unicode=True)),
-                       autoload=True,
-                       useexisting=True,
-                       autoload_with=engine)
-
-    orm.mapper(BlogEntry, blog_table)
-
     global payments_table
     payments_table = Table("payments", meta.metadata,
                            autoload=True,
@@ -2159,11 +2150,6 @@ class SubscribedThread(object):
             meta.Session.add(subscription)
             meta.Session.commit()
             return subscription
-
-
-blog_table = None
-class BlogEntry(object):
-    pass
 
 
 search_items_table = None

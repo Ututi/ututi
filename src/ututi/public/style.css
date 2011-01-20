@@ -3737,62 +3737,6 @@ div.action-portlet .textField textarea {
 }
 /* end ututi recommendation form */
 
-/* blog portlet */
-
-#blog_portlet-header.module-top {
-    margin-top: 10px;
-}
-
-#blog_portlet-header.module-top .blog_pager {
-    float: left;
-    width: 6px;
-    height: 10px;
-    background: url("../images/details/arrows.png") 0 0 no-repeat;
-    cursor: pointer;
-    margin: 3px;
-}
-
-#blog_portlet-header.module-top #blog_bk {
-    margin-left: 6px;
-    background-position: 0 0;
-}
-
-#blog_portlet-header.module-top #blog_fwd {
-    background-position: -6px 0;
-}
-
-#blog_portlet-content #entries {
-    font-size: 14px;
-    line-height: 14px;
-    height: 50px;
-    overflow: visible;
-    padding: 0;
-}
-
-#blog_portlet-content #entries .teaser {
-    height: 50px;
-    width: 270px;
-    margin: 0;
-    margin-top:5px;
-}
-
-#blog_portlet-content .teaser a {
-    color: #d45500;
-    font-size: 14px;
-}
-
-#blog_portlet-content .teaser a:hover {
-    color: #d45500;
-    text-decoration: underline;
-}
-
-#blog_portlet-content .footer {
-    text-align: right;
-    padding-bottom: 3px;
-}
-
-/* end blog portlet */
-
 input.text_button {
     background: transparent;
     border: 0;
