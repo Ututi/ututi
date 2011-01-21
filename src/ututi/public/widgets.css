@@ -23,3 +23,80 @@
         width: 500px;
         border: 1px solid #f6f6f6;
     }
+
+/* Fancy dropdown */
+.dropdown {
+  padding-right: 12px;
+  position: relative;
+  display: inline;
+}
+
+  .dropdown .current {
+    min-width: 60px;
+    float: left;
+  }
+
+  .dropdown-widget label {
+    font-weight: bold;
+    font-size: 14px;
+    float: left;
+    padding-right: 10px;
+    color: #666;
+  }
+
+  .dropdown span, .dropdown a, .dropdown .current {
+    padding-right:24px;
+    background-image: url("img/ico_expandable_0.gif");
+    background-repeat: no-repeat;
+    background-position: right 2px;
+    font-size: 14px;
+    color: #d45500;
+    cursor:pointer;
+  }
+
+  .dropdown div.items {
+    z-index: 100;
+    display:none;
+    position:absolute;
+    top: 15px;
+    right: 0;
+    padding-top:1px;
+    border:2px solid #CCC;
+    border-width:0 2px 1px;
+    background-color:#FFF;
+    background-image: url("img/ico_expandable_0.gif");
+    background-repeat: no-repeat;
+    background-position: right -139px;
+  }
+
+  .dropdown div.items a {
+    background:none !important;
+  }
+
+  .dropdown.expanded div.items {
+    display:block;
+  }
+
+  .dropdown.expanded li {
+    list-style-type: none;
+    float:none !important;
+    border:0;
+    height:1%;
+    line-height:1;
+    border-bottom:1px solid #CCC;
+    width: 160px;
+    padding: 5px;
+  }
+  .dropdown.expanded, .dropdown.expanded span, .dropdown.expanded a {
+    background-color:transparent !important;
+    background-position:right -78px;
+  }
+  .dropdown.expanded li span, .dropdown.expanded li a {
+    padding: 0 21px 0 0;
+    font-size: 14px;
+    font-weight:normal;
+    color:#D45500 !important;
+  }
+  .dropdown.expanded li a:hover {
+    text-decoration:underline;
+  }

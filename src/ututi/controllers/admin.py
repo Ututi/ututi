@@ -755,6 +755,10 @@ class AdminController(BaseController):
         c.group = meta.Session.query(Group).first()
         return render('sections/example_objects.mako')
 
+    @ActionProtector("root")
+    def example_widgets(self):
+        return render('sections/example_widgets.mako')
+
     def _writerow(self, writer, row):
         writer.writerow([(item or '').encode('utf-8')
                          for item in row])
