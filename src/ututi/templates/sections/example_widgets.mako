@@ -3,7 +3,6 @@
 
 <%def name="head_tags()">
   ${d.head_tags()}
-  ${d.js()}
 </%def>
 
 ${d.dropdown('ex', 'The widget',

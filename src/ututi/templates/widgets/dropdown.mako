@@ -1,8 +1,3 @@
-<%def name="head_tags()">
-  ${h.stylesheet_link(h.path_with_hash('/widgets.css'))}
-  ${h.javascript_link('/javascript/js-alternatives.js')}
-</%def>
-
 <%def name="js()">
 <script type="text/javascript">
   $(function(){
@@ -29,6 +24,12 @@
     });
   });
 </script>
+</%def>
+
+<%def name="head_tags()">
+  ${h.stylesheet_link(h.path_with_hash('/widgets.css'))}
+  ${h.javascript_link('/javascript/js-alternatives.js')}
+  ${self.js()}
 </%def>
 
 <%def name="dropdown(id, label, items)">
