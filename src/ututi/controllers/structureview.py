@@ -8,13 +8,12 @@ from pylons.i18n import _
 from pylons.templating import render_mako_def
 
 from ututi.model.events import Event
-from sqlalchemy.sql.expression import desc
 
 import ututi.lib.helpers as h
 from ututi.lib.base import render
 from ututi.lib.validators import LocationIdValidator, ShortTitleValidator, FileUploadTypeValidator, validate
+from ututi.lib.wall import WallMixin
 from ututi.model import Subject
-from ututi.model import Group
 from ututi.model import LocationTag, meta
 from ututi.controllers.home import UniversityListMixin
 from ututi.controllers.search import SearchSubmit, SearchBaseController
@@ -37,7 +36,7 @@ def location_action(method):
 
 def structure_menu_items():
     return [
-        {'title': _("Updates"),
+        {'title': _("News feed"),
          'name': 'index',
          'link': c.location.url(action='index')},
         {'title': _("Subjects"),
@@ -60,7 +59,32 @@ class LocationEditForm(Schema):
         ]
 
 
-class StructureviewController(SearchBaseController, UniversityListMixin):
+class StructureviewWallMixin(WallMixin):
+
+    def _message_rcpt(self, term, current_user):
+        """WallMixin implementation."""
+        return ([], [], [])
+
+    def _file_rcpt(self):
+        """WallMixin implementation."""
+        return []
+
+    def _wiki_rcpt(self):
+        """WallMixin implementation."""
+        return []
+
+    def _wall_events_query(self):
+        """WallMixin implementation."""
+
+        children = [child.id for child in c.location.flatten]
+        subj_events = meta.Session.query(Event)\
+            .join((Subject, Event.object_id == Subject.id))\
+            .filter(Subject.location_id.in_(children))
+
+        return subj_events
+
+
+class StructureviewController(SearchBaseController, UniversityListMixin, StructureviewWallMixin):
 
     def _breadcrumbs(self, location):
         c.breadcrumbs = []
@@ -85,24 +109,8 @@ class StructureviewController(SearchBaseController, UniversityListMixin):
     @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
     def index(self, location):
         c.current_tab = 'index'
-        children = [child.id for child in location.flatten]
-        subj_events = meta.Session.query(Event)\
-            .join((Subject, Event.object_id == Subject.id))\
-            .filter(Subject.location_id.in_(children))
 
-        if c.user is not None:
-            subj_events = subj_events.filter(~Event.event_type.in_(c.user.ignored_events_list))
-
-        grp_events = meta.Session.query(Event)\
-            .join((Group, Event.object_id == Group.id))\
-            .filter(Group.location_id.in_(children))\
-            .filter(Group.forum_is_public == True)
-
-        if c.user is not None:
-            grp_events = grp_events.filter(~Event.event_type.in_(c.user.ignored_events_list))
-
-        c.events = grp_events.union(subj_events).order_by(desc(Event.created))\
-            .limit(20).all()
+        self._set_wall_variables()
 
         self._breadcrumbs(location)
 
