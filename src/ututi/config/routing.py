@@ -176,7 +176,7 @@ def make_map(config):
     map.connect('/subject/*tags/{id}/file/{file_id}/{action}',
                 controller='subjectfile')
 
-    subject_actions = ['wall', 'edit', 'watch', 'js_watch', 'update', 'delete',
+    subject_actions = ['feed', 'edit', 'watch', 'js_watch', 'update', 'delete',
                        'undelete', 'flag', 'create_folder', 'delete_folder',
                        'js_create_folder', 'js_delete_folder', 'upload_file',
                        'upload_file_short', 'pages', 'teach', 'unteach', 'info']

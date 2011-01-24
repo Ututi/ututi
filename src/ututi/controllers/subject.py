@@ -40,9 +40,9 @@ def subject_menu_items():
         {'title': _("Subject information"),
          'name': 'info',
          'link': c.subject.url(action='info')},
-        {'title': _("Wall"),
-         'name': 'wall',
-         'link': c.subject.url(action='wall')},
+        {'title': _("News feed"),
+         'name': 'feed',
+         'link': c.subject.url(action='feed')},
         {'title': _("Files"),
          'name': 'home',
          'link': c.subject.url(action='home')},
@@ -193,12 +193,12 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
         return render('subject/home_pages.mako')
 
     @subject_action
-    def wall(self, subject):
-        c.current_tab = 'wall'
+    def feed(self, subject):
+        c.current_tab = 'feed'
         c.breadcrumbs = [{'link': subject.url(),
                           'title': subject.title}]
         self._set_wall_variables()
-        return render('subject/wall.mako')
+        return render('subject/feed.mako')
 
     @subject_action
     def info(self, subject):
