@@ -825,6 +825,11 @@ class AdminController(BaseController):
         # subject files
         zf.writestr('groups.csv', self._make_groups_csv(tag))
         # group logos
+        for group in meta.Session.query(Group)\
+                .filter(Group.location_id.in_([loc.id for loc in tag.flatten]))\
+                .filter_by(deleted_by=None):
+            if group.logo:
+                zf.writestr('group_logos/%s.png' % group.group_id, prepare_image(group.logo))
         # group members
         zf.close()
         response.headers['Content-Length'] = len(result.getvalue())

@@ -1,10 +1,12 @@
 import re
 import logging
 from datetime import date
+from cStringIO import StringIO
+import zipfile
 
 import facebook
 
-from pylons import tmpl_context as c, config, request, url
+from pylons import tmpl_context as c, config, request, url, response
 from pylons.templating import render_mako_def
 from pylons.controllers.util import redirect, abort
 from pylons.decorators import jsonify
@@ -1222,3 +1224,20 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
         coupon = GroupCoupon.get(code)
         available = coupon is not None and coupon.active()
         return render_mako_def('group/create_base.mako', 'coupon_check_response', coupon_code=code, available=available)
+
+    @group_action
+    @ActionProtector("member", "admin")
+    def get_all_files(self, group):
+        result = StringIO()
+        zf = zipfile.ZipFile(result, "a", zipfile.ZIP_DEFLATED, False)
+        for file in group.files:
+            file_name = file.title
+            if file.folder:
+                file_name = '%s/%s' % (file_name, file.folder)
+            zf.writestr(file_name, open(file.filepath()))
+        zf.close()
+        response.headers['Content-Length'] = len(result.getvalue())
+        response.headers['Content-Disposition'] = 'attachment; filename="%s_files.zip"' % group.group_id
+        response.headers['Content-Type'] = 'application/zip'
+        result.seek(0)
+        return result
