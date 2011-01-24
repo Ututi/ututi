@@ -11,7 +11,7 @@ TODO: Going to the new style wall for now.
    >>> browser.open('http://localhost/profile/wall')
 
    >>> form = browser.getForm(id='message_form')
-   >>> form.getControl('Group or user:').value = 'Second user'
+   >>> form.getControl('User:').value = 'Second user'
    >>> form.getControl(name='subject').value = 'Sending you a message from my wall!'
    >>> form.getControl(name='message').value = 'Booyah'
    >>> form.getControl('Send').click()
@@ -82,7 +82,7 @@ TODO: Going to the new style wall for now.
    >>> browser.open('http://localhost/profile/wall')
 
    >>> form = browser.getForm(id='message_form')
-   >>> form.getControl('Group or user:').value = 'moderatoriai'
+   >>> form.getControl(name='rcpt_group').displayValue = ['Moderatoriai']
    >>> form.getControl(name='subject').value = 'Sending my group a message from my wall!'
    >>> form.getControl(name='message').value = 'Booyah'
    >>> form.getControl('Send').click()

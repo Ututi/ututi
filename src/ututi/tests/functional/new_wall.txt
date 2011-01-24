@@ -38,12 +38,15 @@ The wall currently lists several simple events:
 Let's use wall's action panel to send private message to the user user:
 
     >>> form = user3.getForm(id='message_form')
-    >>> form.getControl('Group or user:').value = 'Alternative user'
+    >>> form.getControl('User:').value = 'Alternative user'
     >>> form.getControl(name='subject').value = 'Private message title'
+    >>> form.getControl(name='rcpt_group').value = ['select-pm']
     >>> form.getControl(name='message').value = 'Private message'
     >>> form.getControl('Send').click()
     >>> user3.url
     'http://localhost/profile/wall'
+
+    >>> user3.printCssQuery('.error-message')
 
 Now the user user logs in and finds the private message in his wall:
 
@@ -84,7 +87,7 @@ we will log in third user, that is in the same group as user:
     >>> admin = Browser.logIn('admin@ututi.lt', 'asdasd')
     >>> admin.open('/profile/wall')
     >>> form = admin.getForm(id='message_form')
-    >>> form.getControl('Group or user:').value = 'Moderatoriai'
+    >>> form.getControl(name='rcpt_group').displayValue = ['Moderatoriai']
     >>> form.getControl(name='subject').value = 'Mailinglist message title'
     >>> form.getControl(name='message').value = 'Mailinglist message'
     >>> form.getControl('Send').click()
@@ -159,7 +162,7 @@ we will ask third user to reply to the private message:
 To test forum post threading we will use the group will forum enabled:
 
     >>> form = admin.getForm(id='message_form')
-    >>> form.getControl('Group or user:').value = 'Testing group'
+    >>> form.getControl(name='rcpt_group').displayValue = ['Testing group']
     >>> form.getControl(name='subject').value = 'Forum post title'
     >>> form.getControl(name='message').value = 'Forum post'
     >>> form.getControl('Send').click()

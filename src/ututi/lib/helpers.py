@@ -98,7 +98,7 @@ def button_to(title, url='', **html_options):
         (Bottom line: Always validate your HTML before going public.)
 
     """
-    from pylons import tmpl_context as c
+
     if html_options:
         convert_boolean_attrs(html_options, ['disabled'])
 
@@ -304,9 +304,9 @@ def input_line(name, title, value='', help_text=None, right_next=None, **kwargs)
     if right_next is not None:
         next = HTML.span(class_='rightNext', c=right_next)
 
-    from pylons import tmpl_context as c
     kwargs.setdefault('id', name)
     return HTML.div(class_='formField',
+                    id='%s-field' % kwargs['id'],
                     c=[HTML.label(for_=name, c=[
                     HTML.span(class_='labelText', c=[title]),
                     HTML.span(class_='textField', c=[
@@ -321,9 +321,10 @@ def input_psw(name, title, value='', help_text=None, **kwargs):
     expl = None
     if help_text is not None:
         expl = HTML.span(class_='helpText', c=help_text)
-    from pylons import tmpl_context as c
+
     kwargs.setdefault('id', name)
     return HTML.div(class_='formField',
+                    id='%s-field' % kwargs['id'],
                     c=[HTML.label(for_=name, c=[
                     HTML.span(class_='labelText', c=[title]),
                     HTML.span(class_='textField', c=[
@@ -342,7 +343,6 @@ def input_area(name, title, value='', cols='50', rows='5', help_text=None, disab
     if disabled:
         kwargs['disabled'] = 'disabled'
 
-    from pylons import tmpl_context as c
     return HTML.label(c=[
         HTML.span(class_='labelText', c=[title]),
         HTML.span(class_='textField', c=[
@@ -367,7 +367,7 @@ def input_submit(text=None, name=None, **kwargs):
         text = _('Save')
     if name is not None:
         kwargs['name'] = name
-    from pylons import tmpl_context as c
+
     kwargs.setdefault('class_', "btn")
     kwargs.setdefault('value', text)
     return HTML.button(c=[HTML.span(text)], **kwargs)
@@ -378,7 +378,7 @@ def input_submit_text_button(text=None, name=None, **html_options):
         text = _('Save')
     if name is not None:
         html_options['name'] = name
-    from pylons import tmpl_context as c
+
     html_options.setdefault('class_', "btn-text")
     html_options.setdefault('value', text)
     return HTML.button(c=[HTML.span(text)], **html_options)

@@ -410,7 +410,7 @@ ${self.anonymous_menu()}
             });
         }
     </script>
-
+<!--
     <div id="fb-root"></div>
     %if c.lang == 'lt':
       <script src="http://connect.facebook.net/lt_LT/all.js"></script>
@@ -423,7 +423,7 @@ ${self.anonymous_menu()}
       FB.init({appId: '${c.facebook_app_id}', status: true,
           cookie: true, xfbml: true, channelUrl: '${url(controller='home', action='fbchannel', qualified=True)}'});
     </script>
-
+-->
   </body>
 </html>
 

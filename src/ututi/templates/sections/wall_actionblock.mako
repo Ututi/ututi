@@ -11,7 +11,7 @@
 
 <%def name="action_block()">
 
-  <%base:rounded_block id="dashboard_actions">
+  <%base:rounded_block id="dashboard_action_links">
 
   <div class="tip">${_('Share with others')}</div>
   ${caller.links()}

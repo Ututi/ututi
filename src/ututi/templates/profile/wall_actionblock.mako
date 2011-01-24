@@ -4,16 +4,29 @@
 
 <%namespace name="actions" file="/sections/wall_actionblock.mako" import="head_tags, action_block" />
 <%namespace name="base" file="/prebase.mako" import="rounded_block"/>
+<%namespace name="dropdown" file="/widgets/dropdown.mako" import="dropdown, head_tags"/>
 <%namespace file="/sections/content_snippets.mako" import="tooltip" />
+
+<%def name="css()">
+#rcpt_user-field { display: none; }
+</%def>
 
 <%def name="head_tags()">
   ${actions.head_tags()}
+  ${dropdown.head_tags()}
   <script type="text/javascript">
   $(function(){
     /* Send message actions.
      */
+    $('#rcpt_group .action a').click(function(){
+      if ($(this).attr('id') == 'select-pm') {
+        $('#rcpt_user-field').show();
+      } else {
+        $('#rcpt_user-field').hide();
+      }
+    });
     message_rcpt_url = $("#message-rcpt-url").val();
-    $('#rcpt').autocomplete({
+    $('#rcpt_user').autocomplete({
         source: function(request, response) {
             $.getJSON(message_rcpt_url,
                       request, function(data, status, xhr) {
@@ -22,22 +35,7 @@
         },
         minLength: 2,
         select: function(event, ui) {
-            $(this).closest('form').find('#rcpt_id').val(ui.item.id);
-            sel = $('#category_id');
-            sel = sel[0];
-            if (ui.item.hasOwnProperty('categories') && ui.item.categories != []) {
-                sel.options.length = 0;
-                $.each(ui.item.categories, function() {
-                    sel.options[sel.options.length] = new Option(this.title, this.value);
-                });
-                if (sel.options.length > 1) {
-                  $(sel).closest('.formField').show();
-                } else {
-                  self.options[0].selected = true;
-                }
-            } else {
-                $(sel).hide();
-            }
+            $(this).closest('form').find('#rcpt_user_id').val(ui.item.id);
         }
     });
 
@@ -159,24 +157,20 @@
     <form method="POST" action="${url(controller='wall', action='send_message')}" id="message_form" class="inelement-form">
       <input id="message-rcpt-url" type="hidden" value="${url(controller='profile', action='message_rcpt_js')}" />
       <input id="message-send-url" type="hidden" value="${url(controller='wall', action='send_message_js')}" />
-      <input type="hidden" name="rcpt_id" id="rcpt_id" value=""/>
-      ${h.input_line('rcpt', _('Group or user:'), id='rcpt')}
-      <div class="formField" style="display: none;">
-        <label for="default_tab">
-          <span class="labelText">${_('Category')}</span>
-          ${h.select("category_id", None, [], id='category_id')}
-        </label>
-      </div>
-      ${h.input_line('subject', _('Message subject:'), id="message_subject")}
+
+      ${dropdown.dropdown('rcpt_group', _('Write a message to:'), msg_recipients)}
+      <input type="hidden" name="rcpt_user_id" id="rcpt_user_id" value=""/>
+      ${h.input_line('rcpt_user', _('User:'), id='rcpt_user', class_='wide-input')}
+      ${h.input_line('subject', _('Message subject:'), id="message_subject", class_='wide-input')}
       <div class="formArea">
         <label>
+          <span class="labelText">${_('Message text:')}</span>
           <textarea name="message" id="message" rows="5" rows="50"></textarea>
         </label>
       </div>
       <div class="formSubmit">
         ${h.input_submit(_('Send'), id="message_send")}
       </div>
-      <br class="clearLeft" />
     </form>
   </%base:rounded_block>
 </%def>

@@ -18,13 +18,13 @@ $(document).ready(function() {
 
     /* Attach dashboard actions.
      */
-    $('#dashboard_actions a.action').filter(':not(.inactive)').click(function(){
+    $('#dashboard_action_links a.action').filter(':not(.inactive)').click(function(){
         var id = $(this).attr('id');
         if ($(this).hasClass('open')) {
             $(this).removeClass('open');
             $('#' + id + '_block').slideUp(300);
         } else {
-            $('#dashboard_actions a.open').each(function(){
+            $('#dashboard_action_links a.open').each(function(){
                 $(this).removeClass('open');
                 var cls_id = $(this).attr('id');
                 $('#' + cls_id + '_block').slideUp(300);

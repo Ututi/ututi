@@ -15,12 +15,6 @@ from ututi.model.events import Event
 def _message_rcpt(term, current_user):
     """Return list of possible recipients limited by the query term."""
 
-    groups = meta.Session.query(Group)\
-        .filter(or_(Group.group_id.ilike('%%%s%%' % term),
-                    Group.title.ilike('%%%s%%' % term)))\
-        .filter(Group.id.in_([g.group.id for g in current_user.memberships]))\
-        .all()
-
     classmates = meta.Session.query(User)\
         .filter(User.fullname.ilike('%%%s%%' % term))\
         .join(User.memberships)\
@@ -29,13 +23,13 @@ def _message_rcpt(term, current_user):
         .all()
 
     users = []
-    if len(groups) == 0 and len(classmates) == 0:
+    if len(classmates) == 0:
         users = meta.Session.query(User)\
             .filter(User.fullname.ilike('%%%s%%' % term))\
             .limit(10)\
             .all()
 
-    return (groups, classmates, users)
+    return (classmates, users)
 
 class WallMixin(object):
 
@@ -107,18 +101,10 @@ class WallMixin(object):
         if term is None or len(term) < 1:
             return {'data' : []}
 
-        (groups, classmates, others) = self._message_rcpt(term, c.user)
+        (classmates, others) = self._message_rcpt(term, c.user)
 
-        groups = [
-            dict(label=_('Group: %s') % group.title,
-                 id='g_%d' % group.id,
-                 categories=[dict(value=cat.id, title=cat.title)
-                             for cat in group.forum_categories]
-                             if not group.mailinglist_enabled else [])
-            for group in groups]
-
-        classmates = [dict(label=_('Member: %s (%s)') % (u.fullname, u.emails[0].email),
-                           id='u_%d'%u.id) for u in classmates]
-        users = [dict(label=_('Member: %s') % (u.fullname),
-                      id='u_%d' % u.id) for u in others]
-        return dict(data=groups+classmates+users)
+        classmates = [dict(label=_('%s (%s)') % (u.fullname, u.emails[0].email),
+                           id=u.id) for u in classmates]
+        users = [dict(label=_('%s') % (u.fullname),
+                      id=u.id) for u in others]
+        return dict(data=classmates+users)

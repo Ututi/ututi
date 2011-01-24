@@ -149,6 +149,9 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         self._set_wall_variables(events_hidable=True)
         c.action = 'wall'
 
+        c.msg_recipients = [(m.group.id, m.group.title) for m in c.user.memberships]
+        c.msg_recipients.append(('select-pm', _('Private message')))
+
         result = render('/profile/wall.mako')
 
         # Register new news feed visit.

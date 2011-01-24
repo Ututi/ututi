@@ -37,35 +37,23 @@ class MessageRcpt(validators.FormValidator):
     }
 
     def validate_python(self, form_dict, state):
-        recipient = form_dict['rcpt']
-        recipient_id = form_dict['rcpt_id']
+        rcpt_group = form_dict.get('rcpt_group')
+        rcpt_user = form_dict.get('rcpt_user_id')
+        rcpt_name = form_dict.get('rcpt_user')
 
         rcpt_obj = None
 
-        if recipient_id.startswith('g_'):
-            try:
-                id = int(recipient_id[2:])
-                rcpt_obj = Group.get(id)
-            except ValueError:
-                rcpt_obj = None
-
-        elif recipient_id.startswith('u_'):
-            try:
-                id = int(recipient_id[2:])
-                rcpt_obj = User.get(id)
-            except ValueError:
-                rcpt_obj = None
-
-        else:
-            (groups, classmates, users) = _message_rcpt(recipient, c.user)
-            collection = groups + classmates + users
-            if len(collection) == 1:
-                rcpt_obj = collection[0]
-
-        #check for group membership
-        if isinstance(rcpt_obj, Group):
+        if rcpt_user:
+            rcpt_obj = User.get(int(rcpt_user))
+        elif rcpt_group and rcpt_group != 'select-pm':
+            rcpt_obj = Group.get(int(rcpt_group))
             if not rcpt_obj.is_member(c.user):
                 rcpt_obj = None
+        elif rcpt_name:
+            alternatives = _message_rcpt(rcpt_name, c.user)
+            alternatives = alternatives[0] + alternatives[1]
+            if alternatives:
+                rcpt_obj = alternatives[0]
 
         if rcpt_obj is None:
             raise Invalid(self.message('invalid', state),
