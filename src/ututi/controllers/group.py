@@ -1231,6 +1231,8 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
         result = StringIO()
         zf = zipfile.ZipFile(result, "a", zipfile.ZIP_DEFLATED, False)
         for file in group.files:
+            if file.isNullFile():
+                continue
             file_name = file.title
             if file.folder:
                 file_name = '%s/%s' % (file_name, file.folder)
