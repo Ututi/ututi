@@ -1,9 +1,4 @@
 <%inherit file="/location/base_university.mako" />
-<%namespace file="/search/index.mako" import="search_form"/>
-<%namespace file="/search/index.mako" import="search_results"/>
-<%namespace file="/portlets/structure.mako" import="*"/>
-<%namespace file="/portlets/school.mako" import="*"/>
-<%namespace file="/anonymous_index/en.mako" import="*"/>
 <%namespace name="wall" file="/sections/wall_snippets.mako" import="head_tags"/>
 
 <%def name="head_tags()">

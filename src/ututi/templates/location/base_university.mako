@@ -1,6 +1,4 @@
 <%inherit file="/ubase-sidebar.mako" />
-<%namespace file="/search/index.mako" import="search_form"/>
-<%namespace file="/search/index.mako" import="search_results"/>
 <%namespace file="/portlets/structure.mako" import="*"/>
 <%namespace file="/portlets/school.mako" import="*"/>
 <%namespace file="/sections/content_snippets.mako" import="tabs"/>
