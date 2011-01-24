@@ -927,34 +927,40 @@ ul.feature-list {
  */
     .inelement-form .send-message {  }
 
-        .inelement-form .wide-input {
+        .inelement-form input.wide-input {
             width: 350px;
         }
 
         .inelement-form .labelText {
-            margin-right: 15px;
+            margin: 0.1em 0;
+            font-weight: bold;
+            color: #666;
+        }
+
+        .inelement-form .textField {
+            display: block;
+            width: 355px;
         }
 
         .inelement-form .formField {
             width: 500px;
-            margin: 5px 0;
+            padding: 5px 0;
+            clear: left;
         }
 
         .inelement-form .formField label {
             margin: 5px 0;
-            float: right;
         }
 
         .inelement-form textarea {
           border: 1px solid #888;
           background: white;
-          width: 500px;
-          margin: 5px 50px;
+          width: 100%;
+          margin: 0;
         }
 
         .inelement-form .formSubmit {
-            float: right;
-            margin: 5px 50px;
+            margin: 5px 0;
         }
 
 /* CLICK ACTION BLOCKS
@@ -979,3 +985,42 @@ ul.feature-list {
     cursor: pointer;
 }
 
+/* DASHBOARD ACTION BLOCKS */
+#dashboard_action_blocks { }
+
+  #dashboard_action_blocks .rounded-block {
+    padding: 5px 10px;
+  }
+
+  #dashboard_action_blocks .dashboard_action_block {
+      display: none; /* Initially hidden */
+  }
+
+  #dashboard_action_blocks .formField { clear: left; }
+
+#dashboard_action_links {
+  padding: 5px 10px;
+}
+
+  #dashboard_action_links .action {
+    margin-right: 15px;
+  }
+
+  #dashboard_action_links .action.inactive {
+    color: #888;
+  }
+
+  #dashboard_action_links #send_message {
+    padding-left: 20px;
+    background: url("../img/icons/message-off-very-small.png") left center no-repeat;
+  }
+  #dashboard_action_links #upload_file {
+    padding-left: 20px;
+    background: url("../img/icons/files_13.png") left center no-repeat;
+  }
+  #dashboard_action_links #create_wiki {
+    padding-left: 20px;
+    background: url("../img/icons/pages_13.png") left center no-repeat;
+  }
+
+  #upload-failed-error-message { display: none; }

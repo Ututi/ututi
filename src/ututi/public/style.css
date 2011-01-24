@@ -4942,65 +4942,6 @@ ul.universityMembersInfo li{
   margin-left: 25px;
 }
 
-/* Dashboard actions block */
-#dashboard_actions {
-  padding: 5px 10px;
-}
-
-#dashboard_actions .action {
-  margin-right: 15px;
-}
-#dashboard_actions .action.inactive {
-  color: #888;
-}
-
-#dashboard_actions #send_message {
-  padding-left: 20px;
-  background: url("../img/icons/message-off-very-small.png") left center no-repeat;
-}
-#dashboard_actions #upload_file {
-  padding-left: 20px;
-  background: url("../img/icons/files_13.png") left center no-repeat;
-}
-#dashboard_actions #create_wiki {
-  padding-left: 20px;
-  background: url("../img/icons/pages_13.png") left center no-repeat;
-}
-
-#upload-failed-error-message {
-    display: none;
-}
-
-.dashboard_action_block {
-    display: none; /* Initially hidden */
-}
-
-.dashboard_action_block form {
-  padding-bottom: 15px;
-}
-
-.dashboard_action_block #rcpt,
-.dashboard_action_block #file_rcpt_id,
-.dashboard_action_block #wiki_rcpt_id,
-.dashboard_action_block #page_title,
-.dashboard_action_block #message_subject,
-.dashboard_action_block #category_id {
-  width: 350px;
-}
-
-.dashboard_action_block .formArea {
-  text-align: center;
-}
-
-#upload_file_block .formSubmit {
-  margin: 10px 0 0 10px;
-  float: left;
-}
-
-#upload_file_block .formField {
-  float: left;
-}
-
 .clearboth {
   display: inline;
 }
