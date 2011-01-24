@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2011-01-20 18:43+0200\n"
+"PO-Revision-Date: 2011-01-24 18:15+0200\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -16,15 +16,6 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.5\n"
-
-msgid "Blog snippet created."
-msgstr ""
-
-msgid "Blog snippet deleted."
-msgstr ""
-
-msgid "Blog snippet updated."
-msgstr ""
 
 msgid "Specify correct book department."
 msgstr ""
@@ -607,7 +598,7 @@ msgstr ""
 msgid "The short title must contain no spaces"
 msgstr ""
 
-msgid "Updates"
+msgid "News feed"
 msgstr ""
 
 msgid "Groups"
@@ -620,9 +611,6 @@ msgid "Information updated."
 msgstr ""
 
 msgid "Subject information"
-msgstr ""
-
-msgid "Wall"
 msgstr ""
 
 msgid "Wiki notes"
@@ -673,10 +661,16 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
+msgid "Private message"
+msgstr ""
+
 msgid "General information"
 msgstr ""
 
 msgid "Contacts"
+msgstr ""
+
+msgid "Wall"
 msgstr ""
 
 msgid "Notifications"
@@ -931,11 +925,11 @@ msgid "Such a coupon code does not exist."
 msgstr ""
 
 #, python-format
-msgid "Member: %s (%s)"
+msgid "%s (%s)"
 msgstr ""
 
 #, python-format
-msgid "Member: %s"
+msgid "%s"
 msgstr ""
 
 #, python-format
@@ -1962,21 +1956,6 @@ msgid ""
 "This means You will not need to have a separate google group."
 msgstr ""
 
-msgid "New blog snippet:"
-msgstr ""
-
-msgid "Date"
-msgstr ""
-
-msgid "Update"
-msgstr ""
-
-msgid "Blog snippets:"
-msgstr ""
-
-msgid "New entry"
-msgstr ""
-
 msgid "Book title"
 msgstr ""
 
@@ -2717,6 +2696,9 @@ msgstr ""
 msgid "unconfirmed"
 msgstr ""
 
+msgid "Update"
+msgstr ""
+
 msgid "Delete group"
 msgstr ""
 
@@ -2830,6 +2812,25 @@ msgid "File upload failed."
 msgstr ""
 
 msgid "Subject:"
+msgstr ""
+
+msgid "send a message"
+msgstr ""
+
+msgid ""
+"You need to be a member of a group or have subjects that you are studying"
+" to be able to quickly upload files."
+msgstr ""
+
+msgid "upload a file"
+msgstr ""
+
+msgid ""
+"You or your group need to have subjects that you are studying to be able "
+"to quickly create wiki notes in them."
+msgstr ""
+
+msgid "create a wiki page"
 msgstr ""
 
 msgid "Go to the group's files"
@@ -3405,12 +3406,6 @@ msgstr ""
 msgid "Send invitation"
 msgstr ""
 
-msgid "Ututi news"
-msgstr ""
-
-msgid "More news"
-msgstr ""
-
 msgid "Teacher's information"
 msgstr ""
 
@@ -3797,6 +3792,15 @@ msgstr ""
 msgid "Wall settings"
 msgstr ""
 
+msgid "Write a message to:"
+msgstr ""
+
+msgid "User:"
+msgstr ""
+
+msgid "Message text:"
+msgstr ""
+
 msgid "Forum posts"
 msgstr ""
 
@@ -4055,29 +4059,10 @@ msgstr ""
 msgid "Your SMS was successfully sent."
 msgstr ""
 
-msgid "Group or user:"
-msgstr ""
-
 msgid "Share with others"
 msgstr ""
 
-msgid "send a message"
-msgstr ""
-
-msgid ""
-"You need to be a member of a group or have subjects that you are studying"
-" to be able to quickly upload files."
-msgstr ""
-
-msgid "upload a file"
-msgstr ""
-
-msgid ""
-"You or your group need to have subjects that you are studying to be able "
-"to quickly create wiki notes in them."
-msgstr ""
-
-msgid "create a wiki page"
+msgid "Group or user:"
 msgstr ""
 
 msgid "more"
@@ -4742,9 +4727,6 @@ msgid "Credits left:"
 msgstr ""
 
 msgid "Purchase credits"
-msgstr ""
-
-msgid "Message text:"
 msgstr ""
 
 msgid "Recipients:"
