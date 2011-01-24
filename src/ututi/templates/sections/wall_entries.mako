@@ -83,9 +83,11 @@
       %endif
       <div class="closing">
         <span class="event-time">${h.when(created)}</span>
+        %if c.user is not None:
         <span class="actions">
           <a href="#reply" class="action-block-link">${_('Reply')}</a>
         </span>
+        %endif
       </div>
     </div>
   </div>
@@ -122,9 +124,11 @@
         %endif
         <div class="closing">
           <span class="event-time">${h.when(original['created'])}</span>
+          %if c.user is not None:
           <span class="actions">
             <a href="#reply" class="action-block-link">${_('Reply')}</a>
           </span>
+          %endif
         </div>
       %endif
       <div class="replies">
@@ -150,6 +154,7 @@
           ${thread_reply(**msg)}
         %endfor
       </div>
+      %if c.user is not None:
       <div class="reply-form-container action-block">
         <div class="logo">
           <img src="${url(controller='user', action='logo', id=c.user.id, width=30)}" />
@@ -164,6 +169,7 @@
           </form>
         </div>
       </div>
+      %endif
     </div>
   </div>
 </%def>
@@ -178,12 +184,14 @@
       %endif
     </div>
     <span class="event-time">${h.when(file.created_on)}</span>
+    %if c.user is not None:
     <span class="actions">
       <a href="#reply" class="action-block-link">
         ## TRANSLATORS: translate this as a verb 'Comment'
         ${_('comment_on_wall')}
       </a>
     </span>
+    %endif
   </div>
 </%def>
 
@@ -197,12 +205,14 @@
       %endif
     </div>
     <span class="event-time">${h.when(page.created_on)}</span>
+    %if c.user is not None:
     <span class="actions">
       <a href="#reply" class="action-block-link">
         ## TRANSLATORS: translate this as a verb 'Comment'
         ${_('comment_on_wall')}
       </a>
     </span>
+    %endif
   </div>
 </%def>
 
@@ -407,15 +417,19 @@
         <div class="closing">
           ## XXX the msg.created was None at this point. Why is that so?
           <span class="event-time">${h.when(event.created)}</span>
+          %if c.user is not None:
           <span class="actions">
             <a href="#moderate" class="action-block-link">Moderate</a>
           </span>
+          %endif
         </div>
+        %if c.user is not None:
         <div class="action-block">
           <div class="content">
             ${moderation.listThreadsActions(msg)}
           </div>
         </div>
+        %endif
       </div>
     </div>
   </%self:wall_entry>
@@ -461,15 +475,19 @@
         <span class="event-content truncated">${h.nl2br(event.sms_text())}</span>
         <div class="closing">
           <span class="event-time">${h.when(event.sms_created())}</span>
+          %if c.user is not None:
           <span class="actions">
             <a href="#moderate" class="action-block-link">${_('Reply')}</a>
           </span>
+          %endif
         </div>
+        %if c.user is not None:
         <div class="action-block">
           <div class="content">
             ${sms.sms_widget_tiny(c.user, event.context)}
           </div>
         </div>
+        %endif
       </div>
     </div>
   </%self:wall_entry>
@@ -533,7 +551,7 @@
 
 <%def name="groupsubject_start(event)">
   <%self:wall_entry event="${event}">
-    %if event.context in c.user.groups:
+    %if c.user is not None and event.context in c.user.groups:
     <%def name="classes()">group-event</%def>
     %else:
     <%def name="classes()">subject-event</%def>
@@ -548,7 +566,7 @@
 
 <%def name="groupsubject_stop(event)">
   <%self:wall_entry event="${event}">
-    %if event.context in c.user.groups:
+    %if c.user is not None and event.context in c.user.groups:
     <%def name="classes()">group-event</%def>
     %else:
     <%def name="classes()">subject-event</%def>
