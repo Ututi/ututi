@@ -14,7 +14,6 @@ from pylons.i18n import _
 from pylons.templating import render_mako_def
 
 from ututi.model import SearchItem
-from ututi.model import get_supporters
 from ututi.model import meta, LocationTag, Subject, File, SimpleTag
 from ututi.model.events import Event
 from ututi.lib.security import ActionProtector, deny
