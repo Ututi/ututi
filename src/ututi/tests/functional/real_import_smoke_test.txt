@@ -17,6 +17,8 @@ And upload all the files one by one:
     >>> import_csv(browser, 'import_groups', 'export_groups.csv')
     >>> import_csv(browser, 'import_group_members', 'export_group_members.csv')
 
+    >>> browser.open('http://localhost/structure/1/export')
+
     >>> from urllib2 import HTTPError
     >>> from pkg_resources import resource_string
     >>> from nous.mailpost import processEmailAndPost

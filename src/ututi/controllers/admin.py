@@ -763,28 +763,46 @@ class AdminController(BaseController):
         writer.writerow([(item or '').encode('utf-8')
                          for item in row])
 
-    def _make_subjects_csv(self, university):
-        result = StringIO()
-        writer = csv.writer(result, delimiter=",")
+    def _export_subjects(self, zf, university):
+        subjects_csv = StringIO()
+        subject_files_csv = StringIO()
+        subjects_writer = csv.writer(subjects_csv, delimiter=",")
+        subject_files_writer = csv.writer(subject_files_csv, delimiter=",")
         for subject in meta.Session.query(Subject)\
                 .filter(Subject.location_id.in_([loc.id for loc in university.flatten]))\
                 .filter_by(deleted_by=None):
-            self._writerow(writer,
+            self._writerow(subjects_writer,
                            ['/'.join(subject.location.path[1:]),
                             subject.created.emails[0].email,
                             subject.subject_id,
                             subject.title,
                             subject.lecturer,
                             subject.description])
-        return result.getvalue()
+            for file in subject.files:
+                if not file.isNullFile():
+                    self._writerow(subject_files_writer,
+                                   ['/'.join(subject.location.path[1:]),
+                                    subject.subject_id] + self._format_file_row(file))
+        zf.writestr('subjects.csv', subjects_csv.getvalue())
+        zf.writestr('subject_files.csv', subject_files_csv.getvalue())
 
-    def _make_groups_csv(self, university):
-        result = StringIO()
-        writer = csv.writer(result, delimiter=",")
+    def _format_file_row(self, file):
+        return [file.created.emails[0].email,
+                file.folder,
+                file.title,
+                file.md5]
+
+    def _export_groups(self, zf, university):
+        groups_csv = StringIO()
+        group_members_csv = StringIO()
+        group_files_csv = StringIO()
+        groups_writer = csv.writer(groups_csv, delimiter=",")
+        group_members_writer = csv.writer(group_members_csv, delimiter=",")
+        group_files_writer = csv.writer(group_files_csv, delimiter=",")
         for group in meta.Session.query(Group)\
                 .filter(Group.location_id.in_([loc.id for loc in university.flatten]))\
                 .filter_by(deleted_by=None):
-            self._writerow(writer,
+            self._writerow(groups_writer,
                            ['/'.join(group.location.path[1:]),
                             group.created.emails[0].email,
                             group.group_id,
@@ -796,44 +814,80 @@ class AdminController(BaseController):
                             str(group.admins_approve_members),
                             group.private_files_lock_date.strftime('%Y-%m-%d') if group.private_files_lock_date else '',
                             str(group.mailinglist_moderated)])
-        return result.getvalue()
+            for membership in group.members:
+                self._writerow(group_members_writer,
+                               ['/'.join(group.location.path[1:]),
+                                group.group_id,
+                                membership.user.emails[0].email])
+            for file in group.files:
+                if not file.isNullFile():
+                    self._writerow(group_files_writer,
+                                   ['/'.join(group.location.path[1:]),
+                                    group.group_id] + self._format_file_row(file))
+            if group.logo:
+                zf.writestr('group_logos/%s.png' % group.group_id,
+                            prepare_image(group.logo))
+        zf.writestr('groups.csv', groups_csv.getvalue())
+        zf.writestr('group_members.csv', group_members_csv.getvalue())
+        zf.writestr('group_files.csv', group_files_csv.getvalue())
 
-    def _make_subject_pages_csv(self, university):
-        result = StringIO()
-        writer = csv.writer(result, delimiter=",")
-        for subject in meta.Session.query(Subject)\
-                .filter(Subject.location_id.in_([loc.id for loc in university.flatten]))\
+    def _export_users(self, zf, university):
+        users = set()
+        for group in meta.Session.query(Group)\
+                .filter(Group.location_id.in_([loc.id for loc in university.flatten]))\
                 .filter_by(deleted_by=None):
-            for page in subject.pages:
-                self._writerow(writer,
-                               ['/'.join(subject.location.path[1:]),
-                                subject.subject_id,
-                                page.created.emails[0].email,
-                                page.title,
-                                page.content])
-        return result.getvalue()
+            for member in group.members:
+                users.add(member.user)
+        users.update(meta.Session.query(User).filter_by(location=university))
+        users_csv = StringIO()
+        users_writer = csv.writer(users_csv, delimiter=",")
+        for user in users:
+            self._writerow(users_writer,
+                           [user.emails[0].email,
+                            str(user.emails[0].confirmed),
+                            user.fullname,
+                            user.password,
+                            user.site_url,
+                            user.description,
+                            user.receive_email_each,
+                            user.phone_number if user.phone_number else '',
+                            str(user.phone_confirmed),
+                            str(user.sms_messages_remaining),
+                            user.gadugadu_uin if user.gadugadu_uin else '',
+                            str(user.gadugadu_confirmed),
+                            str(user.gadugadu_get_news),
+                            user.openid if user.openid else '',
+                            str(user.facebook_id) if user.facebook_id else '',
+                            str(user.profile_is_public),
+                            user.hidden_blocks,
+                            user.ignored_events,
+                            user.user_type,
+                            user.teacher_position,
+                            str(user.teacher_verified),
+                            ])
+            if user.logo:
+                zf.writestr('user_logos/%s.png' % user.emails[0].email, prepare_image(user.logo))
+        zf.writestr('users.csv', users_csv.getvalue())
+        #accepted_terms timestamp default null,
+        #last_seen_feed timestamp not null default (now() at time zone 'UTC'),
+        #location_country varchar(5) default null,
+        #location_city varchar(30) default null,
 
     @ActionProtector("root")
     def export_university(self, university_id):
-        tag = LocationTag.get(int(university_id))
+        university = LocationTag.get(int(university_id))
         result = StringIO()
         zf = zipfile.ZipFile(result, "a", zipfile.ZIP_DEFLATED, False)
-        if tag.logo:
-            zf.writestr('logo.png', prepare_image(tag.logo))
-        zf.writestr('subjects.csv', self._make_subjects_csv(tag))
-        zf.writestr('subject_pages.csv', self._make_subject_pages_csv(tag))
-        # subject files
-        zf.writestr('groups.csv', self._make_groups_csv(tag))
-        # group logos
-        for group in meta.Session.query(Group)\
-                .filter(Group.location_id.in_([loc.id for loc in tag.flatten]))\
-                .filter_by(deleted_by=None):
-            if group.logo:
-                zf.writestr('group_logos/%s.png' % group.group_id, prepare_image(group.logo))
-        # group members
+        if university.logo:
+            zf.writestr('logo.png', prepare_image(university.logo))
+
+        self._export_subjects(zf, university)
+        self._export_groups(zf, university)
+        self._export_users(zf, university)
+
         zf.close()
         response.headers['Content-Length'] = len(result.getvalue())
-        response.headers['Content-Disposition'] = 'attachment; filename="%s.zip"' % tag.title_short
+        response.headers['Content-Disposition'] = 'attachment; filename="%s.zip"' % university.title_short
         response.headers['Content-Type'] = 'application/zip'
         result.seek(0)
         return result
