@@ -69,5 +69,5 @@ use the group mailing list together then!
     <br class="clear-left" />
   </%self:rounded_block>
 %endif
-
+${actions.action_block(c.group)}
 ${wall.wall_entries(c.events)}

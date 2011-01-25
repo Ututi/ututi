@@ -10,37 +10,6 @@
   ${actions.head_tags()}
   <script type="text/javascript">
   $(function(){
-    /* Send message actions.
-     */
-    message_rcpt_url = $("#message-rcpt-url").val();
-    $('#rcpt').autocomplete({
-        source: function(request, response) {
-            $.getJSON(message_rcpt_url,
-                      request, function(data, status, xhr) {
-                          response(data.data);
-                      });
-        },
-        minLength: 2,
-        select: function(event, ui) {
-            $(this).closest('form').find('#rcpt_id').val(ui.item.id);
-            sel = $('#category_id');
-            sel = sel[0];
-            if (ui.item.hasOwnProperty('categories') && ui.item.categories != []) {
-                sel.options.length = 0;
-                $.each(ui.item.categories, function() {
-                    sel.options[sel.options.length] = new Option(this.title, this.value);
-                });
-                if (sel.options.length > 1) {
-                  $(sel).closest('.formField').show();
-                } else {
-                  self.options[0].selected = true;
-                }
-            } else {
-                $(sel).hide();
-            }
-        }
-    });
-
     message_send_url = $("#message-send-url").val();
     $('#message_send').click(function(){
         form = $(this).closest('form');
@@ -60,7 +29,7 @@
                        } else {
                            $('#message_form').find('input, textarea').val('');
                            $('#send_message').click();
-                           reload_wall();
+                           reload_wall(data.evt);
                        }
                    },
                    "json");
@@ -100,7 +69,7 @@
              },
              onComplete: function(file, response, iframe){
                  iframe['progress_indicator'].remove();
-                 if (response != 'UPLOAD_FAILED') {
+                  if (response != 'UPLOAD_FAILED') {
                      $('#file_upload_form').find('input, textarea').val('');
                      $('#upload_file').click();
                      $('#upload_file_block').removeClass('upload-failed');
@@ -116,69 +85,26 @@
         });
 
     }
-
-    /* Create wiki actions.
-     */
-    create_wiki_url = $("#create-wiki-url").val();
-    $('#wiki_create_send').click(function(){
-        form = $(this).closest('form');
-
-        for ( instance in CKEDITOR.instances )
-            CKEDITOR.instances[instance].updateElement();
-
-
-        title = $('#page_title', form).val();
-        content = $('#page_content', form).val();
-
-        if ((title != '') && (content != '')) {
-            $.post(create_wiki_url,
-                   $(this).closest('form').serialize(),
-                   function(data, status) {
-                       if (data.success != true) {
-                           for (var key in data.errors) {
-                               var error = data.errors[key];
-                               $('#'+key).parent().after($('<div class="error-message">'+error+'</div>'));
-                           }
-                       } else {
-                           $('#wiki_form').find('input, textarea').val('');
-                           $('#create_wiki').click();
-                           reload_wall();
-                       }
-                   },
-                   "json");
-        }
-        return false;
-    });
   });
   </script>
 </%def>
 
-<%def name="send_message_block(msg_recipient)">
-  <% group_id, group_title, forum_categories = msg_recipient %>
+<%def name="send_message_block(group)">
   <%base:rounded_block id="send_message_block" class_="dashboard_action_block">
     <a name="send-message"></a>
     <form method="POST" action="${url(controller='wall', action='send_message')}" id="message_form" class="inelement-form">
       <input id="message-send-url" type="hidden" value="${url(controller='wall', action='send_message_js')}" />
-      <input type="hidden" name="rcpt_id" id="rcpt_id" value="${group_id}"/>
-      <input type="hidden" name="rcpt" id="rcpt_id" value="${group_title}"/>
-      %if forum_categories:
-      <div class="formField">
-        <label for="default_tab">
-          <span class="labelText">${_('Category')}</span>
-          ${h.select("category_id", None, forum_categories, id='category_id')}
-        </label>
-      </div>
-      %endif
-      ${h.input_line('subject', _('Message subject:'), id="message_subject")}
+      <input type="hidden" name="rcpt_group" id="rcpt_id" value="${group.id}"/>
+      ${h.input_line('subject', _('Message subject:'), id="message_subject", class_='wide-input')}
       <div class="formArea">
         <label>
+          <span class="labelText">${_('Message text:')}</span>
           <textarea name="message" id="message" rows="5" rows="50"></textarea>
         </label>
       </div>
       <div class="formSubmit">
         ${h.input_submit(_('Send'), id="message_send")}
       </div>
-      <br class="clearLeft" />
     </form>
   </%base:rounded_block>
 </%def>
@@ -205,41 +131,15 @@
   </%base:rounded_block>
 </%def>
 
-<%def name="create_wiki_block(wiki_recipients)">
-  <%base:rounded_block id="create_wiki_block" class_="dashboard_action_block">
-    <a name="create-wiki"></a>
-    <form method="POST" action="${url(controller='wall', action='create_wiki')}" id="wiki_form" class="inelement-form">
-      <input id="create-wiki-url" type="hidden" value="${url(controller='wall', action='create_wiki_js')}" />
-      <div class="formField">
-        <label for="wiki_rcpt_id">
-          <span class="labelText">${_('Subject:')}</span>
-          <span class="textField">
-            ${h.select('wiki_rcpt_id', None, wiki_recipients)}
-          </span>
-        </label>
-      </div>
-      ${h.input_line('page_title', _('Title'), id='page_title')}
-      <div style="clear: right;">
-        ${h.input_wysiwyg('page_content', '')}
-      </div>
-      <div class="formSubmit">
-        ${h.input_submit(_('Save'), id="wiki_create_send")}
-      </div>
-      <br class="clearLeft" />
-    </form>
-  </%base:rounded_block>
-</%def>
-
 <%def name="wall_reload_url()">
   ## Hidden action url, used to ajax-refresh the wall.
   <input id="wall-reload-url" type="hidden" value="${url(controller='group', action='feed_js', id=c.group.group_id)}" />
 </%def>
 
-<%def name="action_block(msg_recipients, file_recipients, wiki_recipients)">
+<%def name="action_block(group)">
   <%
   show_messages = True
-  show_files = bool(len(file_recipients))
-  show_wiki = bool(len(wiki_recipients))
+  show_files = group.has_file_area and group.upload_status != group.LIMIT_REACHED
   %>
   <%actions:action_block>
     <%def name="links()">
@@ -248,15 +148,10 @@
       ${tooltip(_('You need to be a member of a group or have subjects that you are studying to be able to quickly upload files.'))}
       %endif
       <a class="action ${not show_files and 'inactive' or ''}" id="upload_file" href="#upload-file">${_('upload a file')}</a>
-      %if not show_wiki:
-      ${tooltip(_('You or your group need to have subjects that you are studying to be able to quickly create wiki notes in them.'))}
-      %endif
-      <a class="action ${not show_wiki and 'inactive' or ''}" id="create_wiki" href="#create-wiki">${_('create a wiki page')}</a>
     </%def>
 
-    ${self.send_message_block(msg_recipients)}
-    ${self.upload_file_block(file_recipients)}
-    ${self.create_wiki_block(wiki_recipients)}
+    ${self.send_message_block(group)}
+    ##${self.upload_file_block(file_recipients)}
 
   </%actions:action_block>
 </%def>
