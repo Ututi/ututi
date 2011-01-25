@@ -1363,6 +1363,10 @@ p.qu{
     background-position: 10px 5px;
     padding-left: 75px;
 }
+.portletGroupFiles .container {
+    background: white;
+}
+
 .portletGroupFiles, .portletGroupFiles-single  {
     background-color: #fff;
     background-image: none;

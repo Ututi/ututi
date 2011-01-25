@@ -2,6 +2,10 @@
 <%namespace file="/sections/content_snippets.mako" import="*"/>
 <%namespace name="files" file="/sections/files.mako" />
 
+<%def name="css()">
+div.wiki-tekstas, div.wiki-tekstas-last {background-color: white;}
+</%def>
+
 %if c.subject.n_pages():
   <%self:rounded_block class_='portletGroupFiles' id="subject_pages">
   <div class="GroupFiles GroupFilesWiki">
