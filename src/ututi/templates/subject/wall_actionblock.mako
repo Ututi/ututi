@@ -13,52 +13,81 @@
   $(function(){
     /* File upload actions.
      */
-    if ($("#upload_file_block").length > 0) {
+    file_upload_url = $("#file-upload-url").val();
+    $('#file_upload_submit').click(function(){return false;});
+    var file_upload = new AjaxUpload($('#file_upload_submit'),
+        {action: file_upload_url,
+         name: 'attachment',
+         data: {folder: $('#folder-select').val(), target_id: $('#file_rcpt').val()},
+         onSubmit: function(file, ext, iframe){
+             iframe['progress_indicator'] = $(document.createElement('div'));
+             $('#upload_file_block').append(iframe['progress_indicator']);
+             iframe['progress_indicator'].text(file);
+             iframe['progress_ticker'] = $(document.createElement('span'));
+             iframe['progress_ticker'].appendTo(iframe['progress_indicator']).text(' Uploading');
+             var progress_ticker = iframe['progress_ticker'];
+             var interval;
 
-        file_upload_url = $("#file-upload-url").val();
-        $('#file_upload_submit').click(function(){return false;});
-        var file_upload = new AjaxUpload($('#file_upload_submit'),
-            {action: file_upload_url,
-             name: 'attachment',
-             data: {folder: $('#folder-select').val(), target_id: $('#file_rcpt').val()},
-             onSubmit: function(file, ext, iframe){
-                 iframe['progress_indicator'] = $(document.createElement('div'));
-                 $('#upload_file_block').append(iframe['progress_indicator']);
-                 iframe['progress_indicator'].text(file);
-                 iframe['progress_ticker'] = $(document.createElement('span'));
-                 iframe['progress_ticker'].appendTo(iframe['progress_indicator']).text(' Uploading');
-                 var progress_ticker = iframe['progress_ticker'];
-                 var interval;
-
-                 // Uploding -> Uploading. -- Uploading...
-                 interval = window.setInterval(function(){
-                     var text = progress_ticker.text();
-                     if (text.length < 13){
-                         progress_ticker.text(text + '.');
-                     } else {
-                         progress_ticker.text('Uploading');
-                     }
-                 }, 200);
-                 iframe['interval'] = interval;
-             },
-             onComplete: function(file, response, iframe){
-                 iframe['progress_indicator'].remove();
-                  if (response != 'UPLOAD_FAILED') {
-                     $('#file_upload_form').find('input, textarea').val('');
-                     $('#upload_file').click();
-                     $('#upload_file_block').removeClass('upload-failed');
-                     reload_wall(response);
+             // Uploding -> Uploading. -- Uploading...
+             interval = window.setInterval(function(){
+                 var text = progress_ticker.text();
+                 if (text.length < 13){
+                     progress_ticker.text(text + '.');
                  } else {
-                     $('#upload-failed-error-message').fadeIn(500);
+                     progress_ticker.text('Uploading');
                  }
-                 window.clearInterval(iframe['interval']);
+             }, 200);
+             iframe['interval'] = interval;
+         },
+         onComplete: function(file, response, iframe){
+             iframe['progress_indicator'].remove();
+              if (response != 'UPLOAD_FAILED') {
+                 $('#file_upload_form').find('input, textarea').val('');
+                 $('#upload_file').click();
+                 $('#upload_file_block').removeClass('upload-failed');
+                 reload_wall(response);
+             } else {
+                 $('#upload-failed-error-message').fadeIn(500);
              }
-            });
-        $('#folder-select').change(function(){
-            file_upload.setData({folder: $(this).val(), target_id: $('#file_rcpt').val()});
+             window.clearInterval(iframe['interval']);
+         }
         });
+    $('#folder-select').change(function(){
+        file_upload.setData({folder: $(this).val(), target_id: $('#file_rcpt').val()});
+    });
 
-    }
+    /* Create wiki actions.
+     */
+    $('#wiki_create_send').click(function(){
+        create_wiki_url = $("#create-wiki-url").val();
+        form = $(this).closest('form');
+
+        for ( instance in CKEDITOR.instances )
+            CKEDITOR.instances[instance].updateElement();
+
+
+        title = $('#page_title', form).val();
+        content = $('#page_content', form).val();
+
+        if ((title != '') && (content != '')) {
+            $.post(create_wiki_url,
+                   $(this).closest('form').serialize(),
+                   function(data, status) {
+                       if (data.success != true) {
+                           for (var key in data.errors) {
+                               var error = data.errors[key];
+                               $('#'+key).parent().after($('<div class="error-message">'+error+'</div>'));
+                           }
+                       } else {
+                           $('#wiki_form').find('input, textarea').val('');
+                           $('#create_wiki').click();
+                           reload_wall(data.evt);
+                       }
+                   },
+                   "json");
+        }
+        return false;
+    });
   });
   </script>
 </%def>
@@ -88,13 +117,31 @@
   <div id="upload-failed-error-message" class="action-reply">${_('File upload failed.')}</div>
 </%def>
 
+<%def name="create_wiki_block(subject)">
+  <%base:rounded_block id="create_wiki_block" class_="dashboard_action_block">
+    <a class="${not active and 'inactive' or ''}" name="create-wiki"></a>
+    <form method="POST" action="${url(controller='wall', action='create_wiki')}" id="wiki_form" class="inelement-form">
+      <input id="create-wiki-url" type="hidden" value="${url(controller='wall', action='create_wiki_js')}" />
+      <input type="hidden" name="rcpt_wiki" value="${subject.id}" />
+      ${h.input_line('page_title', _('Title'), id='page_title', class_='wide-input')}
+      <div style="clear: right;">
+        ${h.input_wysiwyg('page_content', '')}
+      </div>
+      <div class="formSubmit">
+        ${h.input_submit(_('Save'), id="wiki_create_send")}
+      </div>
+    </form>
+  </%base:rounded_block>
+</%def>
+
 <%def name="action_block(subject)">
   <%actions:action_block>
     <%def name="links()">
       <a class="action" id="upload_file" href="#upload-file">${_('upload a file')}</a>
+      <a class="action" id="create_wiki" href="#create-wiki">${_('create a wiki page')}</a>
     </%def>
 
     ${self.upload_file_block(subject)}
-
+    ${self.create_wiki_block(subject)}
   </%actions:action_block>
 </%def>

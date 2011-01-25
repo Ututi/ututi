@@ -9,6 +9,7 @@
 </%def>
 
 <%def name="body_class()">wall</%def>
-
+%if c.user:
 ${actions.action_block(c.subject)}
+%endif
 ${wall.wall_entries(c.events)}
