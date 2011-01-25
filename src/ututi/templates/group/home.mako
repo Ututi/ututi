@@ -70,5 +70,4 @@ use the group mailing list together then!
   </%self:rounded_block>
 %endif
 
-${actions.action_block(c.msg_recipient, c.file_recipients, c.wiki_recipients)}
 ${wall.wall_entries(c.events)}

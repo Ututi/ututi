@@ -155,7 +155,7 @@
   <%base:rounded_block id="send_message_block" class_="dashboard_action_block">
     <a class="${not active and 'inactive' or ''}" name="send-message"></a>
     <form method="POST" action="${url(controller='wall', action='send_message')}" id="message_form" class="inelement-form">
-      <input id="message-rcpt-url" type="hidden" value="${url(controller='profile', action='message_rcpt_js')}" />
+      <input id="message-rcpt-url" type="hidden" value="${url(controller='wall', action='message_rcpt_js')}" />
       <input id="message-send-url" type="hidden" value="${url(controller='wall', action='send_message_js')}" />
 
       ${dropdown.dropdown('rcpt_group', _('Write a message to:'), msg_recipients)}

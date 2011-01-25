@@ -160,14 +160,6 @@ class SubjectWallMixin(WallMixin):
 
         return query
 
-    def _file_rcpt(self):
-        """WallMixin implementation."""
-        return [('s_%d' % c.subject.id, _('Subject: %s') % c.subject.title)]
-
-    def _wiki_rcpt(self):
-        """WallMixin implementation."""
-        return [(c.subject.id, c.subject.title)]
-
 
 class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectWallMixin):
     """A controller for subjects."""
@@ -196,7 +188,6 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
         c.current_tab = 'feed'
         c.breadcrumbs = [{'link': subject.url(),
                           'title': subject.title}]
-        self._set_wall_variables()
         return render('subject/feed.mako')
 
     @subject_action

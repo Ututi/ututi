@@ -19,13 +19,34 @@ from ututi.lib.security import ActionProtector
 from ututi.lib.mailinglist import post_message
 from ututi.lib.forums import make_forum_post
 from ututi.lib.fileview import FileViewMixin
-from ututi.lib.wall import _message_rcpt
 from ututi.lib import helpers as h
 from ututi.model.mailing import GroupMailingListMessage
 from ututi.model.events import Event, EventComment
+from ututi.model import GroupMember
 from ututi.model import ContentItem
 from ututi.model import ForumCategory
 from ututi.model import ForumPost, PrivateMessage, Page, User, Subject, meta, Group
+
+
+def _message_rcpt(term, current_user):
+    """Return list of possible recipients limited by the query term."""
+
+    classmates = meta.Session.query(User)\
+        .filter(User.fullname.ilike('%%%s%%' % term))\
+        .join(User.memberships)\
+        .join(GroupMember.group)\
+        .filter(Group.id.in_([g.group.id for g in current_user.memberships]))\
+        .all()
+
+    users = []
+    if len(classmates) == 0:
+        users = meta.Session.query(User)\
+            .filter(User.fullname.ilike('%%%s%%' % term))\
+            .limit(10)\
+            .all()
+
+    return (classmates, users)
+
 
 class MessageRcpt(validators.FormValidator):
     """
@@ -324,3 +345,18 @@ class WallController(BaseController, FileViewMixin):
                                    created=comment.created_on)
         else:
             self._redirect()
+
+    @ActionProtector("user")
+    @jsonify
+    def message_rcpt_js(self):
+        term = request.params.get('term', None)
+        if term is None or len(term) < 1:
+            return {'data' : []}
+
+        (classmates, others) = _message_rcpt(term, c.user)
+
+        classmates = [dict(label=_('%s (%s)') % (u.fullname, u.emails[0].email),
+                           id=u.id) for u in classmates]
+        users = [dict(label=_('%s') % (u.fullname),
+                      id=u.id) for u in others]
+        return dict(data=classmates+users)

@@ -131,8 +131,8 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         c.events = self._wall_events()
         c.action = 'feed'
 
-        c.file_recipients = self._file_rcpt()
-        c.wiki_recipients = self._wiki_rcpt()
+        c.file_recipients = []
+        c.wiki_recipients = []
 
         result = render('/profile/feed.mako')
 
@@ -146,7 +146,6 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
     def wall(self):
         c.breadcrumbs.append(self._actions('home'))
 
-        self._set_wall_variables(events_hidable=True)
         c.action = 'wall'
 
         c.msg_recipients = [(m.group.id, m.group.title) for m in c.user.memberships]
@@ -154,6 +153,10 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
 
         c.file_recipients = [(m.group.id, m.group.title) for m in c.user.memberships if m.group.has_file_area and m.group.upload_status != m.group.LIMIT_REACHED]
         c.file_recipients.extend([(s.id, s.title) for s in c.user.all_watched_subjects])
+
+        c.wiki_recipients =  [(subject.id, subject.title) for subject in c.user.all_watched_subjects]
+
+        self._set_wall_variables(True)
 
         result = render('/profile/wall.mako')
 
