@@ -134,8 +134,6 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
 
         c.wiki_recipients =  [(subject.id, subject.title) for subject in c.user.all_watched_subjects]
 
-        self._set_wall_variables(True)
-
         result = render('/profile/feed.mako')
 
         # Register new news feed visit.
