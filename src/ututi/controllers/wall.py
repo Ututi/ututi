@@ -174,6 +174,13 @@ class WallController(BaseController, FileViewMixin):
         try:
             target_id = int(target_id)
             target = ContentItem.get(target_id)
+
+            if isinstance(target, Group) and\
+                    (not target.is_member(c.user)\
+                         or not target.has_file_area\
+                         or target.upload_status == target.LIMIT_REACHED):
+                target = None
+
             if not isinstance(target, (Group, Subject)):
                 target = None
         except ValueError:
