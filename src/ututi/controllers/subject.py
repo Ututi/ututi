@@ -186,6 +186,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
     @subject_action
     def feed(self, subject):
         c.current_tab = 'feed'
+        self._set_wall_variables()
         c.breadcrumbs = [{'link': subject.url(),
                           'title': subject.title}]
         return render('subject/feed.mako')
