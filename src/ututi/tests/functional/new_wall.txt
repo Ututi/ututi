@@ -6,13 +6,13 @@ Functional test for the new wall
     >>> def printWallEvents(browser):
     ...     browser.printCssQuery(".wall-entry .event-title, .wall-entry .event-content", include_attributes=['class'], include_classes=['event-content', 'event-title'])
 
-Login and visit the wall. Currently there's no link, so we use direct url:
+Login and visit the wall.
 
     >>> user3 = Browser.logIn('user3@ututi.lt', 'password')
     >>> user3.url
     'http://localhost/home'
 
-    >>> user3.open('/profile/wall')
+    >>> user3.getLink('News feed').click()
 
 The page title should say "What's new?":
 
@@ -44,7 +44,7 @@ Let's use wall's action panel to send private message to the user user:
     >>> form.getControl(name='message').value = 'Private message'
     >>> form.getControl('Send').click()
     >>> user3.url
-    'http://localhost/profile/wall'
+    'http://localhost/home/feed'
 
     >>> user3.printCssQuery('.error-message')
 
@@ -54,7 +54,7 @@ Now the user user logs in and finds the private message in his wall:
     >>> user.url
     'http://localhost/home'
 
-    >>> user.open('/profile/wall')
+    >>> user.getLink('News feed').click()
     >>> printWallEvents(user)
     <span class="event-title">
         <a>Third user</a> has sent you a private message "<a>Private message title</a>"
@@ -68,11 +68,12 @@ directed to the thread page after he clicks 'Send'.)
     >>> form.getControl(name='message').value = 'Private message reply'
     >>> form.getControl("Send reply").click()
     >>> user.url
-    'http://localhost/profile/wall'
+    'http://localhost/home/feed'
 
-The user3 user can see the reply threaded along his message:
+The user3 user can see the reply threaded along his message, if he refreshes the page:
+(Note: here we click link instead of reload so that testbrowser does not resubmit the form.)
 
-    >>> user3.open('/profile/wall')
+    >>> user3.getLink('News feed').click()
     >>> printWallEvents(user3)
     <span class="event-title">
         You have sent <a>Alternative user</a> a private message "<a>Private message title</a>"
@@ -85,7 +86,7 @@ The mailing list messaging works pretty same way in the wall. To test this,
 we will log in third user, that is in the same group as user:
 
     >>> admin = Browser.logIn('admin@ututi.lt', 'asdasd')
-    >>> admin.open('/profile/wall')
+    >>> admin.getLink('News feed').click()
     >>> form = admin.getForm(id='message_form')
     >>> form.getControl(name='rcpt_group').displayValue = ['Moderatoriai']
     >>> form.getControl(name='subject').value = 'Mailinglist message title'
@@ -93,7 +94,7 @@ we will log in third user, that is in the same group as user:
     >>> form.getControl('Send').click()
 
     >>> admin.url
-    'http://localhost/profile/wall'
+    'http://localhost/home/feed'
 
 User3 can see his message on his wall:
 
@@ -118,13 +119,13 @@ We can reply these messages the same way as private messages:
     >>> form.getControl(name='message').value = 'Mailinglist message reply'
     >>> form.getControl("Send reply").click()
     >>> user3.url
-    'http://localhost/profile/wall'
+    'http://localhost/home/feed'
 
 If admin reloads his wall he will see this reply threaded to his original
-message. Note: admin.reload() here would cause admin repost his original message
--- a bug in testbrowser?
+message. (Note: here we click link instead of reload so that testbrowser
+does not resubmit the form.)
 
-    >>> admin.open('/profile/wall')
+    >>> admin.getLink('News feed').click()
     >>> printWallEvents(admin)
     <span class="event-title">
         You have posted a new message <a>Mailinglist message title</a> to the group <a>Moderatoriai</a>
@@ -143,7 +144,7 @@ we will ask third user to reply to the private message:
     >>> form.getControl(name='message').value = 'Private message reply 2'
     >>> form.getControl("Send reply").click()
     >>> user3.url
-    'http://localhost/profile/wall'
+    'http://localhost/home/feed'
 
     >>> printWallEvents(user3)
     <span class="event-title">
@@ -168,7 +169,7 @@ To test forum post threading we will use the group will forum enabled:
     >>> form.getControl('Send').click()
 
     >>> admin.url
-    'http://localhost/profile/wall'
+    'http://localhost/home/feed'
 
     >>> printWallEvents(admin)
     <span class="event-title">
@@ -183,7 +184,7 @@ User can immediately reply to this forum thread from his wall:
     >>> form.getControl(name='message').value = 'Forum post reply'
     >>> form.getControl("Send reply").click()
     >>> admin.url
-    'http://localhost/profile/wall'
+    'http://localhost/home/feed'
 
     >>> printWallEvents(admin)
     <span class="event-title">

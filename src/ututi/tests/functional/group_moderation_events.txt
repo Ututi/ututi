@@ -3,6 +3,9 @@ Tests for group mailing list moderation events
 
 Set Up:
 
+    >>> def printWallEvents(browser):
+    ...     browser.printCssQuery(".wall-entry .event-title, .wall-entry .event-content", include_attributes=['class'], include_classes=['event-content', 'event-title'])
+
     >>> browser = Browser.logIn('admin@ututi.lt', 'asdasd')
     >>> browser.getLink('Moderatoriai').click()
 
@@ -16,21 +19,50 @@ should not be visible to the other users. Let's check that it is
 actually so:
 
     >>> user3 = Browser.logIn('user3@ututi.lt', 'password')
-    >>> user3.getLink("News wall (1)").click()
-    >>> user3.printQuery('id("wall")//div[@class="description"]//text()')
-    Adminas Adminovix has created the group Moderatoriai .
-    Adminas Adminovix joined the group Moderatoriai .
-    Third user joined the group Moderatoriai .
-    Adminas Adminovix has created the subject Matematin&#279; analiz&#279; .
+    >>> user3.getLink("News feed (1)").click()
+    >>> printWallEvents(user3)
+    <span class="event-title">
+      <a>Adminas Adminovix</a> has created the group <a>Moderatoriai</a>
+    </span>
+    <span class="event-title">
+      <a>Adminas Adminovix</a> has joined the group <a>Moderatoriai</a>
+    </span>
+    <span class="event-title">
+            You have joined the group <a>Moderatoriai</a>
+    </span>
+    <span class="event-title">
+      <a>Adminas Adminovix</a> has created the subject <a>Matematin&#279; analiz&#279;</a>
+    </span>
+
 
 The administrator can see the messages:
-    >>> browser.getLink("News wall").click()
-    >>> browser.printQuery("//div[contains(@class, 'wall-entry')]//text()")
-    Varlius &lt;varlius@example.com&gt; has posted a new message Hello from varlius to the group's Moderatoriai moderation queue ...
-    Second user has posted a new message Hello to the group's Moderatoriai moderation queue ...
-    You have created the group Moderatoriai ...
-    You have joined the group Moderatoriai ...
-    Third user has joined the group Moderatoriai ...
+
+    >>> browser.getLink("News feed").click()
+    >>> printWallEvents(browser)
+    <span class="event-title">
+      <a>Varlius &lt;varlius@example.com&gt;</a> has posted a new message <a>Hello from varlius</a> to the group's <a>Moderatoriai</a> moderation queue
+    </span>
+    <span class="event-content">Confirm your varlius registration!<br />
+      <br />Click the link now!<br />
+      <br />Sincerely,<br />
+      <br />Varlius staff<br />
+    </span>
+    <span class="event-title">
+      <a>Second user</a> has posted a new message <a>Hello</a> to the group's <a>Moderatoriai</a> moderation queue
+        </span>
+    <span class="event-content">Hi, I am just writing to tell you how wonderful this system is.<br />
+      <br />User2<br />
+    </span>
+    <span class="event-title">
+            You have created the group <a>Moderatoriai</a>
+    </span>
+    <span class="event-title">
+            You have joined the group <a>Moderatoriai</a>
+    </span>
+    <span class="event-title">
+      <a>Third user</a> has joined the group <a>Moderatoriai</a>
+    </span>
+
 
 There are links to the messages themselves and to their authors, the
 links are different depending on whether the author of the message has
@@ -82,22 +114,16 @@ approved message has appeared:
 Now if user refreshes his wall, he sees the message at the top:
 
     >>> user3.reload()
-    >>> user3.printQuery('#wall .description', selector='cssselect', strip=True)
-    <div>
-      <a>Varlius &lt;varlius@example.com&gt;</a> has posted a new message <a>Hello from varlius</a> to the group <a>Moderatoriai</a>.
-    </div>
-    <div>
-      <a>Adminas Adminovix</a> has created the group <a>Moderatoriai</a>.
-    </div>
-    <div>
-      <a>Adminas Adminovix</a> joined the group <a>Moderatoriai</a>.
-    </div>
-    <div>
-      <a>Third user</a> joined the group <a>Moderatoriai</a>.
-    </div>
-    <div>
-      <a>Adminas Adminovix</a> has created the subject <a>Matematin&#279; analiz&#279;</a>.
-    </div>
+    >>> printWallEvents(user3)
+    <span class="event-title">
+      <a>Varlius &lt;varlius@example.com&gt;</a> has posted a new message <a>Hello from varlius</a> to the group <a>Moderatoriai</a>
+    </span>
+    <span class="event-content">Confirm your varlius registration!<br />
+      <br />Click the link now!<br />
+      <br />Sincerely,<br />
+      <br />Varlius staff<br />
+    </span>
+    ...
 
 All the emails for approved messages have been sent:
 
