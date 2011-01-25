@@ -15,7 +15,7 @@ $(document).ready(function(){
 
     /* Event hiding.
      */
-    $('.wall .wall-entry .event-heading').live('click', function(event) {
+    $('.wall .wall-entry.minimizable .event-heading').live('click', function(event) {
         if ($(event.target).is('a')) {
             // default behavior if clicked on a link
         }

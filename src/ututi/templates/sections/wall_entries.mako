@@ -224,7 +224,7 @@
 
 <%def name="file_uploaded_subject(event)">
   <%self:wall_entry event="${event}">
-    <%def name="classes()">subject-event</%def>
+    <%def name="classes()">minimizable subject-event</%def>
     <%def name="heading()">
       %if c.user is not None and c.user == event.user:
         ${_("You have uploaded a new file in the subject %(subject_link)s") % \
@@ -260,7 +260,7 @@
 
 <%def name="file_uploaded_group(event)">
   <%self:wall_entry event="${event}">
-    <%def name="classes()">group-event</%def>
+    <%def name="classes()">minimizable group-event</%def>
     <%def name="heading()">
       %if c.user is not None and c.user == event.user:
         ${_("You have uploaded a new file in the group %(group_link)s") % \
@@ -344,7 +344,7 @@
 
 <%def name="mailinglistpost_created(event)">
   <%self:wall_entry event="${event}">
-    <%def name="classes()">message-event</%def>
+    <%def name="classes()">minimizable message-event</%def>
     <%def name="heading()">
       %if c.user is not None and c.user == event.message.author:
         ${_("You have posted a new message %(message_link)s to the group %(group_link)s") % \
@@ -363,7 +363,7 @@
 
 <%def name="teachermessage_sent(event)">
   <%self:wall_entry event="${event}">
-    <%def name="classes()">message-event</%def>
+    <%def name="classes()">minimizable message-event</%def>
     <%def name="heading()">
       %if c.user is not None and c.user == event.user:
           ${_("You have sent a message to the group %(group_link)s") % \
@@ -390,7 +390,7 @@
 
 <%def name="moderated_post_created(event)">
   <%self:wall_entry event="${event}">
-    <%def name="classes()">message-event</%def>
+    <%def name="classes()">minimizable message-event</%def>
     <%def name="heading()">
       %if c.user is not None and c.user == event.message.author:
         ${_("You have posted a new message %(message_link)s to the group's %(group_link)s moderation queue") % \
@@ -443,7 +443,7 @@
 
 <%def name="forumpost_created(event)">
   <%self:wall_entry event="${event}">
-    <%def name="classes()">message-event</%def>
+    <%def name="classes()">minimizable message-event</%def>
     <%def name="heading()">
       %if c.user is not None and c.user == event.user:
         ${_("You have posted a new message %(message_link)s in the forum %(group_link)s") % \
@@ -462,7 +462,7 @@
 
 <%def name="sms_sent(event)">
   <%self:wall_entry event="${event}">
-    <%def name="classes()">sms-event</%def>
+    <%def name="classes()">minimizable sms-event</%def>
     <%def name="heading()">
       %if c.user is not None and c.user == event.user:
         ${_("You have sent an sms to the group %(group_link)s") % \
@@ -501,7 +501,7 @@
 
 <%def name="privatemessage_sent(event)">
   <%self:wall_entry event="${event}">
-    <%def name="classes()">message-event</%def>
+    <%def name="classes()">minimizable message-event</%def>
     <%def name="heading()">
       <% msg = event.private_message %>
       %if c.user is not None and c.user == msg.recipient:
@@ -587,7 +587,7 @@
 
 <%def name="page_created(event)">
   <%self:wall_entry event="${event}">
-    <%def name="classes()">subject-event</%def>
+    <%def name="classes()">minimizable subject-event</%def>
     <%def name="heading()">
       %if c.user is not None and c.user == event.user:
         ${_("You have created a page %(page_link)s in the subject %(subject_link)s") % \
@@ -607,7 +607,7 @@
 
 <%def name="page_modified(event)">
   <%self:wall_entry event="${event}">
-    <%def name="classes()">subject-event</%def>
+    <%def name="classes()">minimizable subject-event</%def>
     <%def name="heading()">
       %if c.user is not None and c.user == event.user:
         ${_("You have modified a page %(page_link)s in the subject %(subject_link)s") % \

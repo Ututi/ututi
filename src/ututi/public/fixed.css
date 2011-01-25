@@ -405,6 +405,10 @@
             background: url("/images/details/icon_event.png") no-repeat left center;
         }
 
+        .wall .wall-entry.minimizable .event-heading {
+            cursor: pointer; /* user can click heading to minimize event */
+        }
+
             .wall .wall-entry .event-heading .hide-button-container {
                 float: right;
                 display: none;
