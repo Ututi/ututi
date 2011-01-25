@@ -17,7 +17,6 @@ the crowd checks even without user object available.
 
 * Merge forum and mailinglist code and create dicussions content objects, wall snippets, etc.
 
-
 * Export/Import data
 
         # metadata
@@ -84,3 +83,190 @@ select user_monitored_subjects.user_id, count(*) from user_monitored_subjects
      left join users on users.id = user_monitored_subjects.user_id
      where ignored = False and group_members.group_id is null and users.location_id is null
      group by user_monitored_subjects.user_id;
+
+
+* Stories
+
+** DONE Countries
+
+We need some place to set prices and other per country settings.
+
+** DONE Universities
+*** University creation path
+*** Inivite levels (only uni email, invites only, public)
+*** University public page seen to unauthenticated users
+
+** DONE Export/import of all data
+** DONE Design and implement Discussions
+
+   - Add ability to edit records (mailing lists do not allow that)
+   - Add ability to delete records
+   - There will be no dedicated discussions tab yet.
+
+** DONE Redesign ututi.com admin authentication
+** DONE User authentication schema - user belongs to university
+** DONE Public subjects - search, comment
+** DONE Language selector
+** New design
+*** Invitation flow and portlets for groups and ututi
+*** User registration flow
+*** Add groups view in user home, have it 2 ways when you have groups and when you don't
+*** Flash messages
+*** Notifications (look like flash messages at the moment)
+*** New front page
+*** Error views
+*** Update Wall
+*** Update subjects to look
+*** Update Groups
+  - Groups work the same way they do now
+  - Remove Group page
+*** Update subjects
+  - Subjects will get an intermediate view that only displays their
+    wall
+  - Private/public switch
+  - Followers of the subject
+  - search -> subject tiesiai, ne per tarpinį žingsnį
+*** Update public Teacher profile and home
+*** Update public User profile and home
+ - Vardą Pavardę
+ - Medalius
+ - About me tekstuką (nedidelis)
+ - Dalykus kurios stebi
+ - Grupės kurioms priklauso.
+ - Mini statistika (kiek įkelta failu, wiki, kiek atsisiųsta failų).
+ - User'io department.
+ - Nuotrauka.
+ - Userio įkelti vieši failai (failai dalykuose ir viešuose grupėse.
+*** Public university view
+  - Department list
+  - Subject list
+  - Search
+  - List of teachers
+  - List of groups?
+  - Members
+*** Public department view
+*** Files, wiki, comments etc.
+
+** DONE University search
+** DONE People online portlet (nesvarbu)
+** DONE Actions performed portlet
+
+A portlet that displays actions that you should perform, like create
+group, fill in your profile information.
+
+** DONE Forumai neišsimeta, tiesiog persikelia prie universitetų
+ - Prisideda followinimas
+
+
+* Delta
+
+* beta.ututi.com
+** Add university export view
+** Add university import view
+** Add a table for admin users
+** Add admin login view
+** Make user records uniqued based on an email + location pair, not just email
+** Language switcher
+** Launch beta.ututi.com
+
+* User Acquisition
+** Add bases for new design
+** New registration views
+** Invitations into university, group
+** Make users who have not confirmed their emails unable to log in/acces anything
+** Extend email validation controls to only allow some kinds of emails in invite forms, profile edit forms, registration forms.
+
+** Add portlet that displays suggestions for actions you might want to perform
+  - Add predicates that detect whether you have performed those actions already
+  - Stroke out items that have been completed
+
+* University creation and management (functionality, detalization will come when applying design)
+** Add a way to create a university while creating an account
+** Change account creation so it would start from university selection
+This solves both:
+
+*** Fix up registration to perform more advanced validation after you select a university
+*** Update registration path so you could "join" a university instead of creating a new account
+
+
+
+** Impement University creation path
+  - Lot's of different features are in play here.
+
+
+** University management view for university administrators
+** Administration views for Countries
+  - most of the global settings from .ini file will have to be moved into the database
+
+** Filter items being searched by whether they are public or not
+
+* Discussions
+** Make it possible to remove posts from mailinglists (if there are no replies)
+** Make it possible to edit mailinglist posts
+** Remove dedicated mailinglist tab
+** Rename mailinglist -> discussions
+** Make it possible to remove wall comments
+** Make it possible to edit wall comments
+
+* Changes to existing views so they would have all the data required to apply the new design
+** User Home Navigation
+** User Home Wall
+** Subject Wall
+
+* Apply new design (html, css, functionality if detected should be moved out of here)
+** University home page (for students)
+** University home page (public)
+** Invitation flow and portlets for groups and ututi
+** Add groups view in user home, have it 2 ways when you have groups and when you don't
+** Flash messages
+** Notifications (look like flash messages at the moment, but have an 'x' sign)
+** New front page
+** Error views
+** Update Wall
+** Update Groups
+ - Groups work the same way they do now
+ - Remove Group page
+** Update subjects
+ - Subjects will get an intermediate view that only displays their
+   wall
+ - Private/public switch
+ - Followers of the subject
+ote: search -> subject tiesiai, ne per tarpinį žingsnį
+
+** Update public Teacher profile and home
+** Update public User profile and home
++ Vardą Pavardę
++ Medalius
+- About me tekstuką (nedidelis)
+- Dalykus kurios stebi
+- Grupės kurioms priklauso.
+- Mini statistika (kiek įkelta failu, wiki, kiek atsisiųsta failų).
+- User'io department.
++ Nuotrauka.
+- Userio įkelti vieši failai (failai dalykuose ir viešuose grupėse.
+
+** Public university view
+ - Department list
+ - Subject list
+ - Search
+ - List of teachers
+ - List of groups?
+ - Members
+** Public department view
+
+** Files, wiki, comments etc. ?
+
+
+* Low Priority
+
+** [#B] Switch stemming configurations based on universities you are searching in
+
+
+** [#B] Make forums only available for universities
+   - with a dedicated forums view and ability to follow only 1 thread
+   - emails? decide and design
+
+** [#B] Make it possible to follow forum categories
+
+
+** [#C] People online portlet
