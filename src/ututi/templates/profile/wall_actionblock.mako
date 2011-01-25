@@ -117,8 +117,8 @@
 
     /* Create wiki actions.
      */
-    create_wiki_url = $("#create-wiki-url").val();
     $('#wiki_create_send').click(function(){
+        create_wiki_url = $("#create-wiki-url").val();
         form = $(this).closest('form');
 
         for ( instance in CKEDITOR.instances )
@@ -195,22 +195,14 @@
     <a class="${not active and 'inactive' or ''}" name="create-wiki"></a>
     <form method="POST" action="${url(controller='wall', action='create_wiki')}" id="wiki_form" class="inelement-form">
       <input id="create-wiki-url" type="hidden" value="${url(controller='wall', action='create_wiki_js')}" />
-      <div class="formField">
-        <label for="wiki_rcpt_id">
-          <span class="labelText">${_('Subject:')}</span>
-          <span class="textField">
-            ${h.select('wiki_rcpt_id', None, wiki_recipients)}
-          </span>
-        </label>
-      </div>
-      ${h.input_line('page_title', _('Title'), id='page_title')}
+      ${dropdown.dropdown('rcpt_wiki', _('Create a note on:'), wiki_recipients)}
+      ${h.input_line('page_title', _('Title'), id='page_title', class_='wide-input')}
       <div style="clear: right;">
         ${h.input_wysiwyg('page_content', '')}
       </div>
       <div class="formSubmit">
         ${h.input_submit(_('Save'), id="wiki_create_send")}
       </div>
-      <br class="clearLeft" />
     </form>
   </%base:rounded_block>
 </%def>

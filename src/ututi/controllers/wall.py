@@ -87,7 +87,7 @@ class WikiForm(Schema):
     allow_extra_fields = True
     page_title = validators.UnicodeString(strip=True, not_empty=True)
     page_content = validators.UnicodeString(strip=True, not_empty=True)
-    wiki_rcpt_id = SubjectIdValidator()
+    rcpt_wiki = SubjectIdValidator()
 
 
 class WallReplyValidator(Schema):
@@ -188,7 +188,7 @@ class WallController(BaseController, FileViewMixin):
     @js_validate(schema=WikiForm())
     @jsonify
     def create_wiki_js(self):
-        target = Subject.get_by_id(self.form_result['wiki_rcpt_id'])
+        target = Subject.get_by_id(self.form_result['rcpt_wiki'])
         self._create_wiki_page(
             target,
             self.form_result['page_title'],
@@ -198,7 +198,7 @@ class WallController(BaseController, FileViewMixin):
     @ActionProtector("user")
     @validate(schema=WikiForm())
     def create_wiki(self):
-        target = Subject.get_by_id(self.form_result['wiki_rcpt_id'])
+        target = Subject.get_by_id(self.form_result['rcpt_wiki'])
         self._create_wiki_page(
             target,
             self.form_result['page_title'],
