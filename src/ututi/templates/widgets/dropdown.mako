@@ -20,7 +20,7 @@
           ev.preventDefault();
           $(this).closest('.dropdown').removeClass('expanded');
           id = $(this).attr('id')
-          $(this).closest('.dropdown-widget').find('select').val(id);
+          $(this).closest('.dropdown-widget').find('select').val(id).change();
           $(this).closest('.dropdown-widget').find('.current').text($(this).text());
       });
     });
