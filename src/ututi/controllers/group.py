@@ -330,14 +330,6 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
 
     @group_action
     @ActionProtector("admin", "member")
-    def feed_js(self, group):
-        events = self._wall_events()
-        return render_mako_def('/sections/wall_snippets.mako',\
-                               'render_events',\
-                               events=events)
-
-    @group_action
-    @ActionProtector("admin", "member")
     def welcome(self, group):
         self._set_home_variables(group)
         c.welcome = True
