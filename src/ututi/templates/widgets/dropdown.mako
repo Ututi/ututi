@@ -1,26 +1,28 @@
 <%def name="js()">
 <script type="text/javascript">
   $(function(){
-    var dd = $('.dropdown .current');
-    $(dd).text($('#'+$('.dropdown').attr('id')+'-select :selected').text());
-    $('.dropdown').toggle(function() {
-        $(this).addClass('expanded').find('div:last-child ul').show();
-    }, function(){
-        $(this).removeClass('expanded').find('div:last-child ul').hide();
-    }).click(function(){ // remove selection
-        if(document.selection && document.selection.empty) {
-            document.selection.empty() ;
-        } else if(window.getSelection) {
-            var s = window.getSelection();
-            if(s && s.removeAllRanges)
-                s.removeAllRanges();
-        }
-    }).find('li a').click(function(ev){
-        ev.preventDefault();
-        $(this).closest('.dropdown').removeClass('expanded');
-        id = $(this).attr('id')
-        $(this).closest('.dropdown-widget').find('select').val(id);
-        $(this).closest('.dropdown-widget').find('.current').text($(this).text());
+    $('.dropdown-widget').each(function(index, dropdown){
+      var dd = $('.dropdown .current', dropdown);
+      $(dd).text($('#'+$('.dropdown', dropdown).attr('id')+'-select :selected').text());
+      $('.dropdown', dropdown).toggle(function() {
+          $(this).addClass('expanded').find('div:last-child ul').show();
+      }, function(){
+          $(this).removeClass('expanded').find('div:last-child ul').hide();
+      }).click(function(){ // remove selection
+          if(document.selection && document.selection.empty) {
+              document.selection.empty() ;
+          } else if(window.getSelection) {
+              var s = window.getSelection();
+              if(s && s.removeAllRanges)
+                  s.removeAllRanges();
+          }
+      }).find('li a').click(function(ev){
+          ev.preventDefault();
+          $(this).closest('.dropdown').removeClass('expanded');
+          id = $(this).attr('id')
+          $(this).closest('.dropdown-widget').find('select').val(id);
+          $(this).closest('.dropdown-widget').find('.current').text($(this).text());
+      });
     });
   });
 </script>
