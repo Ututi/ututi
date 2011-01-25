@@ -75,7 +75,7 @@
         var file_upload = new AjaxUpload($('#file_upload_submit'),
             {action: file_upload_url,
              name: 'attachment',
-             data: {folder: '', target_id: $('#file_rcpt_id').val()},
+             data: {folder: '', target_id: $('#file_rcpt-select').val()},
              onSubmit: function(file, ext, iframe){
                  iframe['progress_indicator'] = $(document.createElement('div'));
                  $('#upload_file_block').append(iframe['progress_indicator']);
@@ -179,19 +179,12 @@
   <%base:rounded_block id="upload_file_block" class_="dashboard_action_block">
     <a class="${not active and 'inactive' or ''}" name="upload-file"></a>
     <form id="file_form" class="inelement-form">
-      <input id="file-upload-url" type="hidden" value="${url(controller='wall', action='upload_file_js')}" />
-      <div class="formField">
-        <label for="file_rcpt_id">
-          <span class="labelText">${_('Group or subject:')}</span>
-          <span class="textField">
-            ${h.select('file_rcpt_id', None, file_recipients)}
-          </span>
-        </label>
-      </div>
-      <div class="formSubmit">
+      <input id="file-upload-url" type="hidden" value="${url(controller='wall', action='upload_file_js', qualified=True)}" />
+      ${dropdown.dropdown('file_rcpt', _('Upload a file to:'), file_recipients)}
+      <div class="formSubmit" style="float: right;">
         ${h.input_submit(_('Upload file'), id="file_upload_submit")}
       </div>
-      <br class="clearLeft" />
+      <br class="clearBoth" />
     </form>
   </%base:rounded_block>
   <div id="upload-failed-error-message" class="action-reply">${_('File upload failed.')}</div>
@@ -242,9 +235,15 @@
       <a class="action ${not show_wiki and 'inactive' or ''}" id="create_wiki" href="#create-wiki">${_('create a wiki page')}</a>
     </%def>
 
-    ${self.send_message_block(msg_recipients)}
-    ${self.upload_file_block(file_recipients)}
-    ${self.create_wiki_block(wiki_recipients)}
+    %if show_messages:
+      ${self.send_message_block(msg_recipients)}
+    %endif
+    %if show_files:
+      ${self.upload_file_block(file_recipients)}
+    %endif
+    %if show_wiki:
+      ${self.create_wiki_block(wiki_recipients)}
+    %endif
 
   </%actions:action_block>
 </%def>

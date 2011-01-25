@@ -893,6 +893,16 @@ ul.feature-list {
     color: #666;
 }
 
+.clearLeft, .clearRight, .clearBoth {
+  font-size: 1px;
+  height: 1px;
+  line-height: 1px;
+}
+.clearLeft { clear: left; }
+.clearRight { clear: right; }
+.clearBoth { clear: both; }
+
+
 /* FLASH MESSAGE
  */
 /* flash messages */

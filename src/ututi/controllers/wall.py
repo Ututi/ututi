@@ -23,6 +23,7 @@ from ututi.lib.wall import _message_rcpt
 from ututi.lib import helpers as h
 from ututi.model.mailing import GroupMailingListMessage
 from ututi.model.events import Event, EventComment
+from ututi.model import ContentItem
 from ututi.model import ForumCategory
 from ututi.model import ForumPost, PrivateMessage, Page, User, Subject, meta, Group
 
@@ -170,12 +171,13 @@ class WallController(BaseController, FileViewMixin):
     def upload_file_js(self):
         target_id = request.params.get('target_id')
         target = None
-        if target_id.startswith('g_'):
-            target = Group.get(int(target_id[2:]))
-            if not target.is_member(c.user):
+        try:
+            target_id = int(target_id)
+            target = ContentItem.get(target_id)
+            if not isinstance(target, (Group, Subject)):
                 target = None
-        elif target_id.startswith('s_'):
-            target = Subject.get_by_id(int(target_id[2:]))
+        except ValueError:
+            target = None
 
         if target is None:
             return 'UPLOAD_FAILED'
