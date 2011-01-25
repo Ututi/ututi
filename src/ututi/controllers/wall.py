@@ -126,7 +126,7 @@ class WallController(BaseController, FileViewMixin):
         if request.referrer:
             redirect(request.referrer)
         else:
-            redirect(url(controller='profile', action='wall'))
+            redirect(url(controller='profile', action='feed'))
 
 
     @ActionProtector("user")
