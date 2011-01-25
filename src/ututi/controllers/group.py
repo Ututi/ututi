@@ -274,7 +274,7 @@ def group_menu_items():
         } if c.group.wants_to_watch_subjects else None
 
     bcs = [
-        {'title': _("News wall"),
+        {'title': _("News feed"),
          'name': 'home',
          'link': url(controller='group', action='home', id=c.group.group_id),
          'event': h.trackEvent(c.group, 'home', 'breadcrumb')},
@@ -311,7 +311,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
         c.wants_to_watch_subjects = (len(group.watched_subjects) == 0 and
                                      group.wants_to_watch_subjects)
 
-        # wall's dashboard variables
+        # wall's action block variables
         self._set_wall_variables()
 
     @group_action
@@ -332,7 +332,9 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
     @ActionProtector("admin", "member")
     def feed_js(self, group):
         events = self._wall_events()
-        return render_mako_def('/sections/wall_snippets.mako', 'render_events', events=events)
+        return render_mako_def('/sections/wall_snippets.mako',\
+                               'render_events',\
+                               events=events)
 
     @group_action
     @ActionProtector("admin", "member")
