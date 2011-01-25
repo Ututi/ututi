@@ -109,7 +109,7 @@
                  window.clearInterval(iframe['interval']);
              }
             });
-        $('#file_rcpt_id').change(function(){
+        $('#file_rcpt-select').change(function(){
             file_upload.setData({folder: '', target_id: $(this).val()});
         });
 
