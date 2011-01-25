@@ -29,7 +29,6 @@
 </%def>
 
 <%def name="head_tags()">
-  ${h.stylesheet_link(h.path_with_hash('/widgets.css'))}
   ${h.javascript_link('/javascript/js-alternatives.js')}
   ${self.js()}
 </%def>

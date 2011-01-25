@@ -4,10 +4,12 @@
 
 <%namespace name="actions" file="/sections/wall_actionblock.mako" import="head_tags, action_block" />
 <%namespace name="base" file="/prebase.mako" import="rounded_block"/>
+<%namespace name="dropdown" file="/widgets/dropdown.mako" import="dropdown, head_tags"/>
 <%namespace file="/sections/content_snippets.mako" import="tooltip" />
 
 <%def name="head_tags()">
   ${actions.head_tags()}
+  ${dropdown.head_tags()}
   <script type="text/javascript">
   $(function(){
     message_send_url = $("#message-send-url").val();
@@ -46,7 +48,7 @@
         var file_upload = new AjaxUpload($('#file_upload_submit'),
             {action: file_upload_url,
              name: 'attachment',
-             data: {folder: '', target_id: $('#file_rcpt_id').val()},
+             data: {folder: $('#folder-select').val(), target_id: $('#file_rcpt').val()},
              onSubmit: function(file, ext, iframe){
                  iframe['progress_indicator'] = $(document.createElement('div'));
                  $('#upload_file_block').append(iframe['progress_indicator']);
@@ -73,15 +75,15 @@
                      $('#file_upload_form').find('input, textarea').val('');
                      $('#upload_file').click();
                      $('#upload_file_block').removeClass('upload-failed');
-                     reload_wall();
+                     reload_wall(response);
                  } else {
                      $('#upload-failed-error-message').fadeIn(500);
                  }
                  window.clearInterval(iframe['interval']);
              }
             });
-        $('#file_rcpt_id').change(function(){
-            file_upload.setData({folder: '', target_id: $(this).val()});
+        $('#folder-select').change(function(){
+            file_upload.setData({folder: $(this).val(), target_id: $('#file_rcpt').val()});
         });
 
     }
@@ -109,26 +111,29 @@
   </%base:rounded_block>
 </%def>
 
-<%def name="upload_file_block(file_recipients)">
+<%def name="upload_file_block(group)">
   <%base:rounded_block id="upload_file_block" class_="dashboard_action_block">
     <a name="upload-file"></a>
     <form id="file_form" class="inelement-form">
       <input id="file-upload-url" type="hidden" value="${url(controller='wall', action='upload_file_js')}" />
-      <div class="formField">
-        <label for="file_rcpt_id">
-          <span class="labelText">${_('Group or subject:')}</span>
-          <span class="textField">
-            ${h.select('file_rcpt_id', None, file_recipients)}
-          </span>
-        </label>
-      </div>
+      <input id="file_rcpt" type="hidden" value="${group.id}"/>
+      %if len(group.folders) > 1:
+        <%
+           folders = [(f.title, f.title != '' and f.title or _('Root')) for f in group.folders]
+        %>
+        ${dropdown.dropdown('folder', _('Folder:'), folders)}
+      %else:
+        <input type='hidden' name='folder' value=''/>
+      %endif
+      <br class="clearBoth"/>
       <div class="formSubmit">
         ${h.input_submit(_('Upload file'), id="file_upload_submit")}
       </div>
-      <br class="clearLeft" />
-      <div id="upload-failed-error-message" class="action-reply">${_('File upload failed.')}</div>
+
     </form>
+
   </%base:rounded_block>
+  <div id="upload-failed-error-message" class="action-reply">${_('File upload failed.')}</div>
 </%def>
 
 <%def name="wall_reload_url()">
@@ -151,7 +156,7 @@
     </%def>
 
     ${self.send_message_block(group)}
-    ##${self.upload_file_block(file_recipients)}
+    ${self.upload_file_block(group)}
 
   </%actions:action_block>
 </%def>
