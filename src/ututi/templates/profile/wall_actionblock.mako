@@ -181,10 +181,10 @@
     <form id="file_form" class="inelement-form">
       <input id="file-upload-url" type="hidden" value="${url(controller='wall', action='upload_file_js', qualified=True)}" />
       ${dropdown.dropdown('file_rcpt', _('Upload a file to:'), file_recipients)}
-      <div class="formSubmit" style="float: right;">
+      <br class="clearBoth" />
+      <div class="formSubmit">
         ${h.input_submit(_('Upload file'), id="file_upload_submit")}
       </div>
-      <br class="clearBoth" />
     </form>
   </%base:rounded_block>
   <div id="upload-failed-error-message" class="action-reply">${_('File upload failed.')}</div>
