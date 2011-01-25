@@ -120,33 +120,11 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         return render_mako_def('/search/index.mako','search_results', results=c.results, controller='profile', action='search_js')
 
     @ActionProtector("user")
-    def feed_js(self):
-        events = self._wall_events()
-        return render_mako_def('/sections/wall_snippets.mako', 'render_events', events=events)
-
-    @ActionProtector("user")
     def feed(self):
         c.breadcrumbs.append(self._actions('feed'))
 
-        c.events = self._wall_events()
         c.action = 'feed'
-
-        c.file_recipients = []
-        c.wiki_recipients = []
-
-        result = render('/profile/feed.mako')
-
-        # Register new newsfeed visit.
-        c.user.last_seen_feed = datetime.utcnow()
-        meta.Session.commit()
-
-        return result
-
-    @ActionProtector("user")
-    def wall(self):
-        c.breadcrumbs.append(self._actions('home'))
-
-        c.action = 'wall'
+        self._set_wall_variables(events_hidable=True)
 
         c.msg_recipients = [(m.group.id, m.group.title) for m in c.user.memberships]
         c.msg_recipients.append(('select-pm', _('Private message')))
@@ -158,21 +136,13 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
 
         self._set_wall_variables(True)
 
-        result = render('/profile/wall.mako')
+        result = render('/profile/feed.mako')
 
         # Register new news feed visit.
         c.user.last_seen_feed = datetime.utcnow()
         meta.Session.commit()
 
         return result
-
-    @ActionProtector("user")
-    def wall_js(self):
-        events = self._wall_events()
-        c.events_hidable = True
-        return render_mako_def('/sections/wall_entries.mako',
-                               'wall_entries',
-                               events=events)
 
     def _edit_form_defaults(self):
         defaults = {
