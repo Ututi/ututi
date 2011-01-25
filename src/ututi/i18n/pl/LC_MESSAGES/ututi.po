@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2011-01-24 18:15+0200\n"
+"PO-Revision-Date: 2011-01-25 12:40+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -4189,6 +4189,9 @@ msgstr ""
 msgid "Message text:"
 msgstr "Treść wiadomości:"
 
+msgid "Upload a file to:"
+msgstr ""
+
 msgid "Forum posts"
 msgstr "Posty na forach"
 
@@ -4488,6 +4491,10 @@ msgstr "Wyślij odpowiedź"
 #. TRANSLATORS: translate this as a verb 'Comment'
 msgid "comment_on_wall"
 msgstr "dodaj komentarz"
+
+#. TRANSLATORS: translate this as a verb 'Edit'
+msgid "edit_on_wall"
+msgstr ""
 
 #, python-format
 msgid "You have uploaded a new file in the subject %(subject_link)s"

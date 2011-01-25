@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2011-01-24 18:18+0300\n"
+"PO-Revision-Date: 2011-01-25 12:41+0300\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
@@ -3703,6 +3703,9 @@ msgstr "Vartotojas:"
 msgid "Message text:"
 msgstr "Žinutės tekstas:"
 
+msgid "Upload a file to:"
+msgstr ""
+
 msgid "Forum posts"
 msgstr "Forumų pranešimai"
 
@@ -3983,6 +3986,10 @@ msgstr "Siųsti atsakymą"
 #. TRANSLATORS: translate this as a verb 'Comment'
 msgid "comment_on_wall"
 msgstr "Komentuoti"
+
+#. TRANSLATORS: translate this as a verb 'Edit'
+msgid "edit_on_wall"
+msgstr "Redaguoti"
 
 #, python-format
 msgid "You have uploaded a new file in the subject %(subject_link)s"

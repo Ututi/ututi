@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2011-01-24 18:14+0200\n"
+"POT-Creation-Date: 2011-01-25 12:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3774,6 +3774,9 @@ msgstr ""
 msgid "Message text:"
 msgstr ""
 
+msgid "Upload a file to:"
+msgstr ""
+
 msgid "Forum posts"
 msgstr ""
 
@@ -4059,6 +4062,10 @@ msgstr ""
 
 #. TRANSLATORS: translate this as a verb 'Comment'
 msgid "comment_on_wall"
+msgstr ""
+
+#. TRANSLATORS: translate this as a verb 'Edit'
+msgid "edit_on_wall"
 msgstr ""
 
 #, python-format

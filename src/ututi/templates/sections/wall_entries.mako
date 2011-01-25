@@ -211,6 +211,12 @@
         ## TRANSLATORS: translate this as a verb 'Comment'
         ${_('comment_on_wall')}
       </a>
+      %if not page.isDeleted():
+      <a href="${page.url(action='edit')}">
+        ## TRANSLATORS: translate this as a verb 'Edit'
+        ${_("edit_on_wall")}
+      </a>
+      %endif
     </span>
     %endif
   </div>
