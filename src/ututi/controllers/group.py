@@ -1236,7 +1236,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
             file_name = file.title
             if file.folder:
                 file_name = '%s/%s' % (file_name, file.folder)
-            zf.writestr(file_name, open(file.filepath()))
+            zf.writestr(file_name, open(file.filepath()).read())
         zf.close()
         response.headers['Content-Length'] = len(result.getvalue())
         response.headers['Content-Disposition'] = 'attachment; filename="%s_files.zip"' % group.group_id
