@@ -58,7 +58,7 @@
                        } else {
                            $('#message_form').find('input, textarea').val('');
                            $('#send_message').click();
-                           reload_wall();
+                           reload_wall(data.evt);
                        }
                    },
                    "json");
@@ -102,7 +102,7 @@
                      $('#file_upload_form').find('input, textarea').val('');
                      $('#upload_file').click();
                      $('#upload_file_block').removeClass('upload-failed');
-                     reload_wall();
+                     reload_wall(response);
                  } else {
                      $('#upload-failed-error-message').fadeIn(500);
                  }
@@ -140,7 +140,7 @@
                        } else {
                            $('#wiki_form').find('input, textarea').val('');
                            $('#create_wiki').click();
-                           reload_wall();
+                           reload_wall(data.evt);
                        }
                    },
                    "json");

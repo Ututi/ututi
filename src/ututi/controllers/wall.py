@@ -21,6 +21,11 @@ from ututi.lib.forums import make_forum_post
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib import helpers as h
 from ututi.model.mailing import GroupMailingListMessage
+from ututi.model.events import PageCreatedEvent
+from ututi.model.events import PrivateMessageSentEvent
+from ututi.model.events import MailinglistPostCreatedEvent
+from ututi.model.events import FileUploadedEvent
+from ututi.model.events import ForumPostCreatedEvent
 from ututi.model.events import Event, EventComment
 from ututi.model import GroupMember
 from ututi.model import ContentItem
@@ -141,12 +146,13 @@ class WallController(BaseController, FileViewMixin):
     @js_validate(schema=MessageForm())
     @jsonify
     def send_message_js(self):
-        self._send_message(
-            self.form_result['recipient'],
-            self.form_result['subject'],
-            self.form_result['message'],
-            self.form_result.get('category_id', None))
-        return {'success': True}
+        evt = self._send_message(
+                self.form_result['recipient'],
+                self.form_result['subject'],
+                self.form_result['message'],
+                self.form_result.get('category_id', None))
+        return {'success': True,
+                'evt': evt}
 
     @ActionProtector("user")
     @validate(schema=MessageForm())
@@ -172,13 +178,16 @@ class WallController(BaseController, FileViewMixin):
                                  thread_id=None)
                 meta.Session.add(post)
                 meta.Session.commit()
-                return post
+
+                evt = meta.Session.query(ForumPostCreatedEvent).filter_by(post_id=post.id).one().wall_entry()
+                return evt
             else:
                 post = post_message(recipient,
                                     c.user,
                                     subject,
                                     message)
-                return post
+                evt = meta.Session.query(MailinglistPostCreatedEvent).filter_by(message_id=post.id).one().wall_entry()
+                return evt
         elif isinstance(recipient, User):
             msg = PrivateMessage(c.user,
                                  recipient,
@@ -186,7 +195,8 @@ class WallController(BaseController, FileViewMixin):
                                  message)
             meta.Session.add(msg)
             meta.Session.commit()
-            return msg
+            evt = meta.Session.query(PrivateMessageSentEvent).filter_by(private_message_id=msg.id).one().wall_entry()
+            return evt
 
     @ActionProtector("user")
     def upload_file_js(self):
@@ -210,18 +220,24 @@ class WallController(BaseController, FileViewMixin):
         if target is None:
             return 'UPLOAD_FAILED'
 
-        return self._upload_file(target)
+        f = self._upload_file_basic(target)
+        if f is None:
+            return 'UPLOAD_FAILED'
+        else:
+            evt = meta.Session.query(FileUploadedEvent).filter_by(file_id=f.id).one().wall_entry()
+            return evt
 
     @ActionProtector("user")
     @js_validate(schema=WikiForm())
     @jsonify
     def create_wiki_js(self):
         target = Subject.get_by_id(self.form_result['rcpt_wiki'])
-        self._create_wiki_page(
-            target,
-            self.form_result['page_title'],
-            self.form_result['page_content'])
-        return dict(success=True)
+        page = self._create_wiki_page(
+                 target,
+                 self.form_result['page_title'],
+                 self.form_result['page_content'])
+        evt = meta.Session.query(PageCreatedEvent).filter_by(page_id=page.id).one().wall_entry()
+        return {'success':True, 'evt': evt}
 
     @ActionProtector("user")
     @validate(schema=WikiForm())
