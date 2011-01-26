@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2011-01-26 09:25+0200\n"
+"POT-Creation-Date: 2011-01-26 19:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -633,9 +633,6 @@ msgstr ""
 msgid "The recipient is not specified."
 msgstr ""
 
-msgid "Invalid subject"
-msgstr ""
-
 msgid "Wiki page created."
 msgstr ""
 
@@ -692,6 +689,9 @@ msgid "Your university information has been updated."
 msgstr ""
 
 msgid "Home"
+msgstr ""
+
+msgid "My subjects"
 msgstr ""
 
 msgid "I like it"
@@ -903,6 +903,9 @@ msgid "Such coupon code already exists, choose a different one."
 msgstr ""
 
 msgid "Such a coupon code does not exist."
+msgstr ""
+
+msgid "Invalid subject"
 msgstr ""
 
 #, python-format
@@ -2045,6 +2048,9 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
+msgid "Our friends"
+msgstr ""
+
 msgid "Search-btn"
 msgstr ""
 
@@ -2983,9 +2989,6 @@ msgstr ""
 msgid "Start"
 msgstr ""
 
-msgid "News wall"
-msgstr ""
-
 msgid "Inbox"
 msgstr ""
 
@@ -3380,6 +3383,17 @@ msgstr ""
 msgid "Read our blog"
 msgstr ""
 
+msgid "Ututi recommends"
+msgstr ""
+
+msgid "Virtual book market"
+msgstr ""
+
+msgid ""
+"Here you can buy study material cheaply or find a new owner for your good old"
+" textbook."
+msgstr ""
+
 msgid "Add a student group"
 msgstr ""
 
@@ -3494,61 +3508,10 @@ msgstr ""
 msgid "Edit a student group"
 msgstr ""
 
-msgid "What's new?"
-msgstr ""
-
-msgid "Wall settings"
+msgid "News feed settings"
 msgstr ""
 
 msgid "Your phone has been confirmed. Thank you."
-msgstr ""
-
-msgid "create group"
-msgstr ""
-
-msgid "Write message"
-msgstr ""
-
-msgid "Group messages"
-msgstr ""
-
-msgid "Group forum"
-msgstr ""
-
-msgid "Group subjects"
-msgstr ""
-
-msgid "Group files"
-msgstr ""
-
-msgid "It's simple - you only need to know the email addresses of your classmates!"
-msgstr ""
-
-msgid "Use the group's mailing list!"
-msgstr ""
-
-msgid "no, thanks"
-msgstr ""
-
-msgid "notification settings"
-msgstr ""
-
-msgid "add subject"
-msgstr ""
-
-msgid "Tell us where you are studying"
-msgstr ""
-
-msgid "Show subjects from my groups"
-msgstr ""
-
-msgid ""
-"Ututi is Your university online. Here You and Your class mates can create "
-"your group online, use the mailing list for communication and the file "
-"storage for sharing information."
-msgstr ""
-
-msgid "Share your thoughts about Ututi"
 msgstr ""
 
 msgid "save"
@@ -3575,6 +3538,9 @@ msgstr ""
 msgid "(use the format +37067812345)"
 msgstr ""
 
+msgid "no, thanks"
+msgstr ""
+
 msgid "Please confirm your phone number"
 msgstr ""
 
@@ -3596,6 +3562,36 @@ msgid "Watch subject"
 msgstr ""
 
 msgid "watch subjects"
+msgstr ""
+
+msgid "It's simple - you only need to know the email addresses of your classmates!"
+msgstr ""
+
+msgid "Use the group's mailing list!"
+msgstr ""
+
+msgid "create group"
+msgstr ""
+
+msgid "Tell us where you are studying"
+msgstr ""
+
+msgid ""
+"Ututi is Your university online.Here You and Your class mates can create your"
+" group online, use the mailing list for communication and the file storage "
+"for sharing information."
+msgstr ""
+
+msgid "Share your thoughts about Ututi"
+msgstr ""
+
+msgid "notification settings"
+msgstr ""
+
+msgid "add subject"
+msgstr ""
+
+msgid "Show subjects from my groups"
 msgstr ""
 
 msgid "Very sad..."
@@ -3795,7 +3791,7 @@ msgstr ""
 msgid "New groups"
 msgstr ""
 
-msgid "Which events do You want to see on Your wall?"
+msgid "Which events do You want to see in Your news feed?"
 msgstr ""
 
 msgid "Add a subject"
@@ -3976,6 +3972,21 @@ msgid ""
 msgstr ""
 
 msgid "I teach this"
+msgstr ""
+
+msgid "Write message"
+msgstr ""
+
+msgid "Group messages"
+msgstr ""
+
+msgid "Group forum"
+msgstr ""
+
+msgid "Group subjects"
+msgstr ""
+
+msgid "Group files"
 msgstr ""
 
 msgid "Edit group"
@@ -4207,106 +4218,6 @@ msgstr ""
 msgid ""
 "%(user_link)s has modified a page %(page_link)s in the subject "
 "%(subject_link)s"
-msgstr ""
-
-msgid "More"
-msgstr ""
-
-#, python-format
-msgid "%(user_link)s has uploaded a new file in the subject %(subject_link)s."
-msgstr ""
-
-#, python-format
-msgid ""
-"%(user_link)s has created a new folder %(folder_name)s in the subject "
-"%(subject_link)s."
-msgstr ""
-
-#, python-format
-msgid "%(user_link)s has uploaded a new file in the group %(group_link)s."
-msgstr ""
-
-#, python-format
-msgid ""
-"%(user_link)s has created a new folder %(folder_name)s in the group "
-"%(group_link)s."
-msgstr ""
-
-#, python-format
-msgid "%(user_link)s has edited the subject %(subject_link)s."
-msgstr ""
-
-#, python-format
-msgid "%(user_link)s has created the subject %(subject_link)s."
-msgstr ""
-
-#, python-format
-msgid "%(user_link)s has created the group %(subject_link)s."
-msgstr ""
-
-#, python-format
-msgid ""
-"%(user_link)s has posted a new message %(message_link)s to the group "
-"%(group_link)s."
-msgstr ""
-
-#, python-format
-msgid "Teacher %(user_link)s sent a message to the group %(group_link)s."
-msgstr ""
-
-#, python-format
-msgid ""
-"%(user_link)s has posted a new message %(message_link)s to the group's "
-"%(group_link)s moderation queue."
-msgstr ""
-
-msgid "Moderate"
-msgstr ""
-
-#, python-format
-msgid ""
-"%(user_link)s has posted a new message %(message_link)s in the forum "
-"%(group_link)s."
-msgstr ""
-
-#, python-format
-msgid "%(user_link)s has sent an sms to the group %(group_link)s."
-msgstr ""
-
-#, python-format
-msgid "%(user_link)s has sent you a private message \"%(msg_link)s\"."
-msgstr ""
-
-#, python-format
-msgid "%(user_link)s has sent %(recipient_link)s a private message \"%(msg_link)s\"."
-msgstr ""
-
-#, python-format
-msgid "%(user_link)s joined the group %(group_link)s."
-msgstr ""
-
-#, python-format
-msgid "%(user_link)s left the group %(group_link)s."
-msgstr ""
-
-#, python-format
-msgid "The group %(group_link)s has started watching the subject %(subject_link)s."
-msgstr ""
-
-#, python-format
-msgid "The group %(group_link)s has stopped watching the subject %(subject_link)s."
-msgstr ""
-
-#, python-format
-msgid ""
-"%(user_link)s has created a page %(page_link)s in the subject "
-"%(subject_link)s."
-msgstr ""
-
-#, python-format
-msgid ""
-"%(user_link)s has modified a page %(page_link)s in the subject "
-"%(subject_link)s."
 msgstr ""
 
 msgid "Region"

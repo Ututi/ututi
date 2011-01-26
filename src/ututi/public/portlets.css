@@ -82,3 +82,35 @@
     #user-groups-portlet-content .footer .tooltip {
         padding-top: 5px;
     }
+
+#ubooks-portlet-content {
+    padding-left: 135px;
+    min-height: 115px;
+    background: url(/images/bunners/ubooks.png) no-repeat 5px 5px;
+}
+
+    #ubooks-portlet-content p#virtual-book-market {
+        margin-top: 10px;
+        color: black;
+        font-size: 14px;
+        line-height: 14px;
+    }
+
+    #ubooks-portlet-content p#virtual-book-market a,
+    #ubooks-portlet-content p#virtual-book-market a:hover,
+    #ubooks-portlet-content p#virtual-book-market a:active {
+        color: black;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    #ubooks-portlet-content p#here-you-can-buy {
+        margin-top:10px;
+        font-size: 10px;
+        color: #888;
+    }
+
+    #ubooks-portlet-content p#ubooks-link {
+        text-align: right;
+    }
+

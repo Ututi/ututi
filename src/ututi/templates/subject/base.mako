@@ -6,7 +6,7 @@
 <%def name="portlets()">
   ${subject_info_portlet()}
   ${subject_similar_subjects_portlet()}
-  ${ututi_prizes_portlet()}
+  ${ubooks_portlet()}
   ${user_support_portlet()}
 </%def>
 
