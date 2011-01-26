@@ -1,9 +1,22 @@
 Subject and group tagging
 =========================
 
-Subjects can be tagged upon creation or when being edited.
+Set up
+------
+
+Create one subject
 
     >>> browser = Browser.logIn()
+    >>> browser.open('http://localhost/subjects/add')
+
+    >>> browser.getControl(name='location-0').value = 'vu'
+    >>> browser.getControl('Subject title:').value = u'Mat.analiz\u0117'.encode('utf-8')
+    >>> browser.getControl('Create subject').click()
+
+Test
+----
+
+Subjects can be tagged upon creation or when being edited.
 
     >>> browser.open('http://localhost/subjects/add')
 
@@ -40,4 +53,4 @@ Let's try changing the location of the subject to get a clash with another subje
     >>> browser.getControl(name='location-1').value = ''
     >>> browser.getControl('Save').click()
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize-4'
+    'http://localhost/subject/vu/mat_analize-2'

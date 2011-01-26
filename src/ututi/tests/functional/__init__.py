@@ -92,7 +92,8 @@ def ftest_setUp(test):
 
 def collect_ftests(package=None, level=None,
                    layer=ututi.tests.UtutiLayer,
-                   filenames=None, exclude=None):
+                   filenames=None, exclude=None,
+                   setUp=ftest_setUp, tearDown=ututi.tests.tearDown):
     """Collect all functional doctest files in a given package.
 
     If `package` is None, looks up the call stack for the right module.
@@ -120,8 +121,8 @@ def collect_ftests(package=None, level=None,
                                      package=package,
                                      optionflags=optionflags,
                                      checker=checker,
-                                     setUp=ftest_setUp,
-                                     tearDown=ututi.tests.tearDown)
+                                     setUp=setUp,
+                                     tearDown=tearDown)
         suite.layer = layer
         if level is not None:
             suite.level = level

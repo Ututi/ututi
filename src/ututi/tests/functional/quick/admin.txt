@@ -43,3 +43,4 @@ and even can see some actions:
     ...
 
     >>> browser.open('http://localhost/admin/events')
+
