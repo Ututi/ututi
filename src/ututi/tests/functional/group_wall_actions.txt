@@ -1,0 +1,32 @@
+Test subject wall action block
+==============================
+
+
+Pick a subject.
+    >>> browser = Browser.logIn()
+    >>> browser.getLink('Moderatoriai').click()
+
+    >>> browser.url
+    'http://localhost/group/moderators/home'
+
+Send a message from the action block:
+
+    >>> form = browser.getForm(id='message_form')
+    >>> form.getControl(name='subject').value = 'Sending a message from the group wall!'
+    >>> form.getControl(name='message').value = 'Booyah'
+    >>> form.getControl('Send').click()
+
+    >>> browser.getLink('Moderatoriai').click()
+    >>> browser.getLink('Mailing List').click()
+    >>> browser.printQuery("//div[@class='single-messages']//text()")
+    Sending a message from the group wall!
+    (0 replies)
+    Booyah
+    Adminas Adminovix
+    ...
+    <BLANKLINE>
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> mail_queue[:] = []
+
+

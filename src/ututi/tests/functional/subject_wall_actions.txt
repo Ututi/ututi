@@ -1,0 +1,29 @@
+Test subject wall action block
+==============================
+
+
+Pick a subject.
+    >>> browser = Browser.logIn()
+    >>> browser.open('http://localhost/admin/subjects')
+    >>> browser.getLink(u'Matematin\u0117 analiz\u0117'.encode('utf-8')).click()
+
+    >>> browser.url
+    'http://localhost/subject/vu/mat_analize'
+
+    >>> browser.getLink('News feed').click()
+    >>> browser.url
+    'http://localhost/subject/vu/mat_analize/feed'
+
+Create a wiki page from action block:
+
+    >>> form = browser.getForm(id='wiki_form')
+    >>> form.getControl(name='page_title').value = 'A wiki page'
+    >>> form.getControl(name='page_content').value = 'This wiki page was created from my wall!'
+    >>> form.getControl('Save').click()
+
+    >>> browser.open('http://localhost/subject/vu/mat_analize/pages')
+    >>> browser.printQuery("id('subject_pages')//p/span/a/text()")
+    A wiki page
+    Adminas Adminovix
+
+

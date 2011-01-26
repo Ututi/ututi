@@ -14,7 +14,7 @@ from formencode.schema import Schema
 from formencode import validators
 
 from ututi.lib.base import BaseController
-from ututi.lib.validators import js_validate
+from ututi.lib.validators import js_validate, SubjectIdValidator
 from ututi.lib.security import ActionProtector
 from ututi.lib.mailinglist import post_message
 from ututi.lib.forums import make_forum_post
@@ -96,16 +96,6 @@ class MessageForm(Schema):
     subject = validators.String(not_empty=True)
     message = validators.String(not_empty=True)
     chained_validators = [MessageRcpt()]
-
-class SubjectIdValidator(validators.OneOf):
-    """Validate subject id by list available in runtime."""
-    messages = {
-        'invalid': _("Invalid subject"),
-        'notIn': _("Invalid subject"),
-        }
-    def validate_python(self, value, state):
-        self.list = [str(s.id) for s in c.user.all_watched_subjects]
-        super(SubjectIdValidator, self).validate_python(value, state)
 
 
 class WikiForm(Schema):
@@ -242,6 +232,9 @@ class WallController(BaseController, FileViewMixin):
     @ActionProtector("user")
     @validate(schema=WikiForm())
     def create_wiki(self):
+        if not hasattr(self, 'form_result'):
+            self._redirect()
+
         target = Subject.get_by_id(self.form_result['rcpt_wiki'])
         self._create_wiki_page(
             target,

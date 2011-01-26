@@ -357,6 +357,20 @@ class CommaSeparatedListValidator(validators.FancyValidator):
 
         return separated
 
+
+class SubjectIdValidator(validators.FancyValidator):
+    """ A validator for subject ids"""
+    messages = { 'invalid': _("Invalid subject") }
+
+    def validate_python(self, value, state):
+        if value == '':
+            raise Invalid(self.message('invalid', state), value, state)
+
+        s = Subject.get_by_id(int(value))
+        if s is None:
+            raise Invalid(self.message('invalid', state), value, state)
+
+
 def js_validate(schema=None, validators=None, form=None, variable_decode=False,
              dict_char='.', list_char='-', post_only=True, state=None,
              on_get=False, ignore_request=False, defaults=None, **htmlfill_kwargs):
