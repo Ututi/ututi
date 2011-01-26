@@ -39,9 +39,5 @@ Oh, we can also lookup users by their names:
     Second user
     Third user
 
-    >>> browser2 = Browser.logIn('user2@ututi.lt', 'password')
-    >>> print browser2.url
-    http://localhost/home
-
 The teacher is immediately verified:
     >>> browser.printQuery("id('teacher_unverified')//text()")

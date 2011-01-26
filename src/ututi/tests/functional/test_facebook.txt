@@ -30,7 +30,7 @@ a single click away:
     >>> browser2.open('/federation/test_facebook_login')
 
     >>> browser2.url
-    'http://localhost/home'
+    'http://localhost/home/feed'
 
     >>> browser2.printQuery('id("personal-data")//span[@class="fullname"]/text()')
     John Smith
