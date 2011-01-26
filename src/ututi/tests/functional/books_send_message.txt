@@ -26,11 +26,7 @@ Initialy first user has no messages in inbox
 
     >>> browser.open('http://localhost')
     >>> browser.printQuery("id('inbox-link')")
-    <a id="inbox-link" href="/messages">
-		 Inbox
-	  <span class="edge"></span>
-	</a>
-
+    <a id="inbox-link" href="/messages">inbox</a>
 
 I login and go to the book view, where I can see form for sending message to book owner
 
@@ -44,11 +40,10 @@ Book owner will get my message
     >>> browser.open('http://localhost')
     >>> browser.printQuery("id('inbox-link')")
     <a id="inbox-link" href="/messages">
-	  <strong>Inbox (1)</strong>
-	  <span class="edge"></span>
-	</a>
+        <strong>inbox (1)</strong>
+    </a>
 
-    >>> browser.click('Inbox (1)')
+    >>> browser.click('inbox (1)')
     >>> browser.printCssQuery(".post-title")
     <a href="/messages/thread/5" class="post-title">uBooks: Second user asks about book My physics book</a>
     >>> browser.click('uBooks: Second user asks about book My physics book')

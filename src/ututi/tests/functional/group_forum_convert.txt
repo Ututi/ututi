@@ -19,4 +19,4 @@ Test converting a group from a mailing list to a forum
 
    >>> browser.getLink('Home').click()
    >>> browser.url
-   'http://localhost/home'
+   'http://localhost/home/feed'

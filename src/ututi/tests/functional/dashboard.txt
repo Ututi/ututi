@@ -5,7 +5,9 @@ Just visit the dashboard first.
 
     >>> browser = Browser.logIn('user3@ututi.lt', 'password')
     >>> browser.url
-    'http://localhost/home'
+    'http://localhost/home/feed'
+
+    >>> browser.getLink('My subjects').click()
 
     >>> browser.printQuery("//a[@class='subject-title']/text()")
     Matematin&#279; analiz&#279;
