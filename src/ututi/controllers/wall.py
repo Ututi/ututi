@@ -371,8 +371,8 @@ class WallController(BaseController, FileViewMixin):
 
         (classmates, others) = _message_rcpt(term, c.user)
 
-        classmates = [dict(label=_('%s (%s)') % (u.fullname, u.emails[0].email),
+        classmates = [dict(label='%s (%s)' % (u.fullname, u.emails[0].email),
                            id=u.id) for u in classmates]
-        users = [dict(label=_('%s') % (u.fullname),
+        users = [dict(label=u.fullname,
                       id=u.id) for u in others]
         return dict(data=classmates+users)
