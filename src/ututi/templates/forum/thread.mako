@@ -64,7 +64,7 @@
 % endfor
 </table>
 <div id="pager">
-  ${c.forum_posts.pager(format='~3~', controller=c.controller, action='thread', id=c.group_id, category_id=c.category.id, thread_id=c.thread.id)}
+  ${c.forum_posts.pager(format='~3~', controller=c.controller, action='thread', thread_id=c.thread.id, id=c.group_id, category_id=c.category.id)}
 </div>
 
 % if c.can_post(c.user):
@@ -72,7 +72,7 @@
     <a name="reply"></a>
     <h2>${_('Reply')}</h2>
     <br />
-    <form method="post" action="${url(controller=c.controller, action='reply', id=c.group_id, category_id=c.category_id, thread_id=c.thread_id)}"
+    <form method="post" action="${url(controller=c.controller, action='reply', category_id=c.category_id, thread_id=c.thread_id)}"
          id="forum_reply_form" class="fullForm" enctype="multipart/form-data">
       ${h.input_area('message', _('Message'))}
       <br />
