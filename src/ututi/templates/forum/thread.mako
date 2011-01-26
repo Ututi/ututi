@@ -72,7 +72,7 @@
     <a name="reply"></a>
     <h2>${_('Reply')}</h2>
     <br />
-    <form method="post" action="${url(controller=c.controller, action='reply', category_id=c.category_id, thread_id=c.thread_id)}"
+    <form method="post" action="${url(controller=c.controller, action='reply', id=c.group_id, category_id=c.category_id, thread_id=c.thread_id)}"
          id="forum_reply_form" class="fullForm" enctype="multipart/form-data">
       ${h.input_area('message', _('Message'))}
       <br />
