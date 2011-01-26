@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2011-01-25 12:40+0200\n"
+"POT-Creation-Date: 2011-01-26 09:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -265,14 +265,6 @@ msgstr ""
 msgid "The group identifier must be at least 4 characters long."
 msgstr ""
 
-#, python-format
-msgid "Group: %s"
-msgstr ""
-
-#, python-format
-msgid "Subject: %s"
-msgstr ""
-
 msgid "Mailing List"
 msgstr ""
 
@@ -282,7 +274,7 @@ msgstr ""
 msgid "Subjects"
 msgstr ""
 
-msgid "News wall"
+msgid "News feed"
 msgstr ""
 
 msgid "Members"
@@ -588,9 +580,6 @@ msgid "Choose a different short title"
 msgstr ""
 
 msgid "The short title must contain no spaces"
-msgstr ""
-
-msgid "News feed"
 msgstr ""
 
 msgid "Groups"
@@ -914,14 +903,6 @@ msgid "Such coupon code already exists, choose a different one."
 msgstr ""
 
 msgid "Such a coupon code does not exist."
-msgstr ""
-
-#, python-format
-msgid "%s (%s)"
-msgstr ""
-
-#, python-format
-msgid "%s"
 msgstr ""
 
 #, python-format
@@ -2776,22 +2757,22 @@ msgstr ""
 msgid "Subject rating:"
 msgstr ""
 
-msgid "Category"
-msgstr ""
-
 msgid "Message subject:"
 msgstr ""
 
-msgid "Group or subject:"
+msgid "Message text:"
+msgstr ""
+
+msgid "Root"
+msgstr ""
+
+msgid "Folder:"
 msgstr ""
 
 msgid "Upload file"
 msgstr ""
 
 msgid "File upload failed."
-msgstr ""
-
-msgid "Subject:"
 msgstr ""
 
 msgid "send a message"
@@ -2803,14 +2784,6 @@ msgid ""
 msgstr ""
 
 msgid "upload a file"
-msgstr ""
-
-msgid ""
-"You or your group need to have subjects that you are studying to be able to "
-"quickly create wiki notes in them."
-msgstr ""
-
-msgid "create a wiki page"
 msgstr ""
 
 msgid "Go to the group's files"
@@ -3008,6 +2981,9 @@ msgid "Message to the group"
 msgstr ""
 
 msgid "Start"
+msgstr ""
+
+msgid "News wall"
 msgstr ""
 
 msgid "Inbox"
@@ -3521,21 +3497,7 @@ msgstr ""
 msgid "What's new?"
 msgstr ""
 
-msgid ""
-"This is a list of all the recent events in the subjects you are watching and "
-"the groups you belong to."
-msgstr ""
-
-msgid "Edit shown updates."
-msgstr ""
-
-#, python-format
-msgid ""
-"This is the Ututi wall. Here you will find notifications about things that "
-"concern you such as changes in your groups and the subjects you are watching."
-" Start by <a href=\"%(create_group_link)s\">creating</a> or <a "
-"href=\"%(groups_list_link)s\">joining</a> a group and watching some <a "
-"href=\"%(subjects_list_link)s\">subjects</a>."
+msgid "Wall settings"
 msgstr ""
 
 msgid "Your phone has been confirmed. Thank you."
@@ -3762,19 +3724,24 @@ msgid ""
 "please tell us more about yourself."
 msgstr ""
 
-msgid "Wall settings"
-msgstr ""
-
 msgid "Write a message to:"
 msgstr ""
 
 msgid "User:"
 msgstr ""
 
-msgid "Message text:"
+msgid "Upload a file to:"
 msgstr ""
 
-msgid "Upload a file to:"
+msgid "Create a note on:"
+msgstr ""
+
+msgid ""
+"You or your group need to have subjects that you are studying to be able to "
+"quickly create wiki notes in them."
+msgstr ""
+
+msgid "create a wiki page"
 msgstr ""
 
 msgid "Forum posts"
@@ -4035,10 +4002,22 @@ msgstr ""
 msgid "Your SMS was successfully sent."
 msgstr ""
 
-msgid "Share with others"
+msgid "Share:"
 msgstr ""
 
 msgid "Group or user:"
+msgstr ""
+
+msgid "Category"
+msgstr ""
+
+msgid "Group or subject:"
+msgstr ""
+
+msgid "Subject:"
+msgstr ""
+
+msgid "Share with others"
 msgstr ""
 
 msgid "more"

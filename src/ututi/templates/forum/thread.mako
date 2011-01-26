@@ -1,5 +1,11 @@
 <%inherit file="/forum/base.mako" />
 
+<%def name="css()">
+.portletGroupMailingList {
+    background-color: white;
+}
+</%def>
+
 <div class="back-link">
   <a class="back-link" href="${url(controller=c.controller, action='index', id=c.group_id, category_id=c.category_id)}"
     >${_('Back to the topic list')}</a>
@@ -64,7 +70,7 @@
 % endfor
 </table>
 <div id="pager">
-  ${c.forum_posts.pager(format='~3~', controller=c.controller, action='thread', id=c.group_id, category_id=c.category.id, thread_id=c.thread.id)}
+  ${c.forum_posts.pager(format='~3~', controller=c.controller, action='thread', thread_id=c.thread.id, id=c.group_id, category_id=c.category.id)}
 </div>
 
 % if c.can_post(c.user):

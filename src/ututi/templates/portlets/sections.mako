@@ -32,7 +32,6 @@
   ${user_recommend_portlet()}
   %endif
   ${user_groups_portlet()}
-  ${facebook_likebox_portlet()}
   ${user_support_portlet()}
 </div>
 %endif

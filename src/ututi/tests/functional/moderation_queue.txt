@@ -116,7 +116,7 @@ only the first message is left:
 
 The corresponding event is removed from the wall as well:
 
-    >>> browser.getLink("News wall").click()
+    >>> browser.getLink("News feed").click()
     >>> browser.printQuery("//div[contains(@class, 'event-heading')]//text()")
     Second user has posted a new message Hello to the group's Moderatoriai moderation queue 0 seconds ago
     You have created the group Moderatoriai 0 seconds ago
@@ -148,7 +148,7 @@ Now the message should appear in the actual mailing list:
 
 The corresponding event is removed from wall:
 
-    >>> browser.getLink('News wall').click()
+    >>> browser.getLink('News feed').click()
     >>> browser.printQuery("//div[contains(@class, 'event-heading')]//text()")
     Second user has posted a new message Hello to the group Moderatoriai 0 seconds ago
     You have created the group Moderatoriai 0 seconds ago

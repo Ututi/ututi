@@ -2,11 +2,19 @@
 <%namespace file="/sections/content_snippets.mako" import="*"/>
 <%namespace name="files" file="/sections/files.mako" />
 
+<%def name="css()">
+div.wiki-tekstas, div.wiki-tekstas-last {background-color: white;}
+</%def>
+
 %if c.subject.n_pages():
   <%self:rounded_block class_='portletGroupFiles' id="subject_pages">
   <div class="GroupFiles GroupFilesWiki">
     <%
-       count = len([page for page in c.subject.pages if not page.isDeleted()])
+       if h.check_crowds(['moderator']):
+         pages = c.subject.pages
+       else:
+         pages = [page for page in c.subject.pages if not page.isDeleted()]
+       count = len(pages)
     %>
     <h2 class="portletTitle bold">${_("Subject's Wiki Pages")} (${count})</h2>
     %if c.user:
@@ -16,15 +24,15 @@
     </span>
     %endif
   </div>
-  % if c.subject.pages:
+  % if pages:
     ## show teacher notes before the rest (python sort is stable)
-    <% pages = sorted(c.subject.pages, lambda x, y: int(y.original_version.created.is_teacher) - \
+    <% pages = sorted(pages, lambda x, y: int(y.original_version.created.is_teacher) - \
                                                     int(x.original_version.created.is_teacher)) %>
 
     % for n, page in enumerate(pages):
       % if not page.isDeleted() or h.check_crowds(['moderator']):
        <% teacher_class = 'teacher-content' if page.original_version.created.is_teacher else '' %>
-       <div class="${teacher_class} ${'wiki-tekstas' if n < count - 1 else 'wiki-tekstas-last'}">
+       <div class="${teacher_class} ${'wiki-tekstas' if n < count else 'wiki-tekstas-last'}">
          <p>
             %if page.original_version.created.is_teacher:
               ${tooltip(_("Teacher's material"), img='/img/icons/teacher-cap.png')}

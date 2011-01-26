@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2011-01-25 12:40+0200\n"
+"PO-Revision-Date: 2011-01-26 09:25+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -286,14 +286,6 @@ msgstr "Podaj, proszę, nazwę grupy."
 msgid "The group identifier must be at least 4 characters long."
 msgstr "Nazwa zgrupy musi składać się conajmniej z 4 znaków."
 
-#, python-format
-msgid "Group: %s"
-msgstr "Grupa %s"
-
-#, python-format
-msgid "Subject: %s"
-msgstr "Przedmiot: %s"
-
 msgid "Mailing List"
 msgstr "Lista mailingowa"
 
@@ -303,8 +295,8 @@ msgstr "Forum"
 msgid "Subjects"
 msgstr "Przedmioty"
 
-msgid "News wall"
-msgstr "Tablica"
+msgid "News feed"
+msgstr "Aktualności"
 
 msgid "Members"
 msgstr "Użytkownicy"
@@ -642,9 +634,6 @@ msgstr "Wybierz inną nazwę skróconą"
 msgid "The short title must contain no spaces"
 msgstr "Skrócona nazwa nie powinna zawierać spacji"
 
-msgid "News feed"
-msgstr ""
-
 msgid "Groups"
 msgstr "Grupy"
 
@@ -708,7 +697,7 @@ msgid "Search"
 msgstr "Szukaj"
 
 msgid "Private message"
-msgstr ""
+msgstr "Wiadomości prywatne"
 
 msgid "General information"
 msgstr "Informacje ogólne"
@@ -977,14 +966,6 @@ msgstr "Taki kod już istnieje, wybierz inny."
 
 msgid "Such a coupon code does not exist."
 msgstr "Taki kod nie istnieje."
-
-#, python-format
-msgid "%s (%s)"
-msgstr ""
-
-#, python-format
-msgid "%s"
-msgstr ""
 
 #, python-format
 msgid "unlimited group private files for %(day_count)d day"
@@ -3084,23 +3065,23 @@ msgstr "nigdy"
 msgid "Subject rating:"
 msgstr "Popularność przedmiotu:"
 
-msgid "Category"
-msgstr "Kategoria"
-
 msgid "Message subject:"
 msgstr "Temat wiadomości:"
 
-msgid "Group or subject:"
-msgstr "Grupa lub przedmiot"
+msgid "Message text:"
+msgstr "Treść wiadomości:"
+
+msgid "Root"
+msgstr ""
+
+msgid "Folder:"
+msgstr ""
 
 msgid "Upload file"
 msgstr "Załaduj plik"
 
 msgid "File upload failed."
 msgstr "Plik nie został dodany."
-
-msgid "Subject:"
-msgstr "Temat"
 
 msgid "send a message"
 msgstr "wyślij wiadomość"
@@ -3114,16 +3095,6 @@ msgstr ""
 
 msgid "upload a file"
 msgstr "dodaj plik"
-
-msgid ""
-"You or your group need to have subjects that you are studying to be able "
-"to quickly create wiki notes in them."
-msgstr ""
-"Ty lub Twoja grupa musicie podać przedmioty, których się uczycie, aby móc"
-" szybko stworzyć w nich notatki wiki."
-
-msgid "create a wiki page"
-msgstr "utwórz wiki stronę"
 
 msgid "Go to the group's files"
 msgstr "Przejdź do plików grupy"
@@ -3345,6 +3316,9 @@ msgstr "Wiadomość do grupy"
 
 msgid "Start"
 msgstr "Start"
+
+msgid "News wall"
+msgstr "Tablica"
 
 msgid "Inbox"
 msgstr "Skrzynka odbiorcza"
@@ -3903,28 +3877,8 @@ msgstr "Edytuj grupę studencką"
 msgid "What's new?"
 msgstr "Powiadomienia"
 
-msgid ""
-"This is a list of all the recent events in the subjects you are watching "
-"and the groups you belong to."
-msgstr "Ostatnie zmiany w obserwowanych przez Ciebie przedmiotach i grupach."
-
-msgid "Edit shown updates."
-msgstr "Edytuj pokazane aktualizacje"
-
-#, python-format
-msgid ""
-"This is the Ututi wall. Here you will find notifications about things "
-"that concern you such as changes in your groups and the subjects you are "
-"watching. Start by <a href=\"%(create_group_link)s\">creating</a> or <a "
-"href=\"%(groups_list_link)s\">joining</a> a group and watching some <a "
-"href=\"%(subjects_list_link)s\">subjects</a>."
-msgstr ""
-"To jest tablica Ututi. Tutaj znajdziesz powiadomienia o rzeczach, które "
-"dotyczą Ciebie, takie jak zmiany w Twoich grupach i przedmiotach, które "
-"obserwujesz. Zacznij od <a href=\"%(create_group_link)s\">tworzenia</a> "
-"lub <a href=\"%(groups_list_link)s\">dołączenia</a> do grupy i "
-"obserwowania niektórych <a "
-"href=\"%(subjects_list_link)s\">przedmiotów</a>."
+msgid "Wall settings"
+msgstr "Ustawienia strony"
 
 msgid "Your phone has been confirmed. Thank you."
 msgstr "Twój numer telefonu został potwierdzony. Dziękujemy."
@@ -4177,20 +4131,27 @@ msgstr ""
 "administratorzy zostali powiadomieni i wkrótce go zweryfikują. Prosimy o "
 "cierpliwość. W międzyczasie powiedz nam więcej o sobie."
 
-msgid "Wall settings"
-msgstr "Ustawienia strony"
-
 msgid "Write a message to:"
-msgstr ""
+msgstr "Napisz wiadomość do:"
 
 msgid "User:"
-msgstr ""
-
-msgid "Message text:"
-msgstr "Treść wiadomości:"
+msgstr "Użytkownik"
 
 msgid "Upload a file to:"
+msgstr "Dodaj plik do:"
+
+msgid "Create a note on:"
 msgstr ""
+
+msgid ""
+"You or your group need to have subjects that you are studying to be able "
+"to quickly create wiki notes in them."
+msgstr ""
+"Ty lub Twoja grupa musicie podać przedmioty, których się uczycie, aby móc"
+" szybko stworzyć w nich notatki wiki."
+
+msgid "create a wiki page"
+msgstr "utwórz wiki stronę"
 
 msgid "Forum posts"
 msgstr "Posty na forach"
@@ -4463,11 +4424,23 @@ msgstr "Twoja wiadomość została wysłana."
 msgid "Your SMS was successfully sent."
 msgstr "Twój SMS został wysłany."
 
-msgid "Share with others"
-msgstr "Podziel się z innymi"
+msgid "Share:"
+msgstr ""
 
 msgid "Group or user:"
 msgstr "Grupa lub użytkownik"
+
+msgid "Category"
+msgstr "Kategoria"
+
+msgid "Group or subject:"
+msgstr "Grupa lub przedmiot"
+
+msgid "Subject:"
+msgstr "Temat"
+
+msgid "Share with others"
+msgstr "Podziel się z innymi"
 
 msgid "more"
 msgstr "więcej"
@@ -4494,7 +4467,7 @@ msgstr "dodaj komentarz"
 
 #. TRANSLATORS: translate this as a verb 'Edit'
 msgid "edit_on_wall"
-msgstr ""
+msgstr "Edytuj"
 
 #, python-format
 msgid "You have uploaded a new file in the subject %(subject_link)s"
@@ -5021,6 +4994,8 @@ msgid ""
 "You can store Your lecture notes here, and share them with Your students."
 " Encourage them to contribute and coauthor the materials with You!"
 msgstr ""
+"Tutaj można przechowywać swoje notatki i dzielić się nimi ze swoimi "
+"studentami. Zachęć ich aby współtworzyli materiały razem z wykładowcą!"
 
 msgid ""
 "Collecting course notes in Word? Writing things down on a computer during"
@@ -5041,6 +5016,9 @@ msgid ""
 "Upload Your slides, course notes, sample tasks and solutions here. Large "
 "files are supported - all for Your convenience!"
 msgstr ""
+"Tutaj można dodać swoje slajdy, notatki z przedmiotu, przykładowe zadania"
+" i ich rozwiązania. Dodawanie plików o dużych rozmiarach nie stanowi "
+"problemu."
 
 msgid ""
 "You may upload course notes, sample tasks and solutions, coursework "

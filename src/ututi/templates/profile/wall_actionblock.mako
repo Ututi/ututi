@@ -41,6 +41,7 @@
 
     message_send_url = $("#message-send-url").val();
     $('#message_send').click(function(){
+        _gaq.push(['_trackEvent', 'action block submit', 'profile wall', 'message send']);
         form = $(this).closest('form');
 
         subject = $('#message_subject', form).val();
@@ -58,7 +59,7 @@
                        } else {
                            $('#message_form').find('input, textarea').val('');
                            $('#send_message').click();
-                           reload_wall();
+                           reload_wall(data.evt);
                        }
                    },
                    "json");
@@ -69,7 +70,6 @@
     /* File upload actions.
      */
     if ($("#upload_file_block").length > 0) {
-
         file_upload_url = $("#file-upload-url").val();
         $('#file_upload_submit').click(function(){return false;});
         var file_upload = new AjaxUpload($('#file_upload_submit'),
@@ -77,6 +77,7 @@
              name: 'attachment',
              data: {folder: '', target_id: $('#file_rcpt-select').val()},
              onSubmit: function(file, ext, iframe){
+                 _gaq.push(['_trackEvent', 'action block submit', 'profile wall', 'file upload']);
                  iframe['progress_indicator'] = $(document.createElement('div'));
                  $('#upload_file_block').append(iframe['progress_indicator']);
                  iframe['progress_indicator'].text(file);
@@ -102,14 +103,14 @@
                      $('#file_upload_form').find('input, textarea').val('');
                      $('#upload_file').click();
                      $('#upload_file_block').removeClass('upload-failed');
-                     reload_wall();
+                     reload_wall(response);
                  } else {
                      $('#upload-failed-error-message').fadeIn(500);
                  }
                  window.clearInterval(iframe['interval']);
              }
             });
-        $('#file_rcpt_id').change(function(){
+        $('#file_rcpt-select').change(function(){
             file_upload.setData({folder: '', target_id: $(this).val()});
         });
 
@@ -117,8 +118,9 @@
 
     /* Create wiki actions.
      */
-    create_wiki_url = $("#create-wiki-url").val();
     $('#wiki_create_send').click(function(){
+        _gaq.push(['_trackEvent', 'action block submit', 'profile wall', 'wiki create']);
+        create_wiki_url = $("#create-wiki-url").val();
         form = $(this).closest('form');
 
         for ( instance in CKEDITOR.instances )
@@ -140,7 +142,7 @@
                        } else {
                            $('#wiki_form').find('input, textarea').val('');
                            $('#create_wiki').click();
-                           reload_wall();
+                           reload_wall(data.evt);
                        }
                    },
                    "json");
@@ -155,7 +157,7 @@
   <%base:rounded_block id="send_message_block" class_="dashboard_action_block">
     <a class="${not active and 'inactive' or ''}" name="send-message"></a>
     <form method="POST" action="${url(controller='wall', action='send_message')}" id="message_form" class="inelement-form">
-      <input id="message-rcpt-url" type="hidden" value="${url(controller='profile', action='message_rcpt_js')}" />
+      <input id="message-rcpt-url" type="hidden" value="${url(controller='wall', action='message_rcpt_js')}" />
       <input id="message-send-url" type="hidden" value="${url(controller='wall', action='send_message_js')}" />
 
       ${dropdown.dropdown('rcpt_group', _('Write a message to:'), msg_recipients)}
@@ -181,10 +183,10 @@
     <form id="file_form" class="inelement-form">
       <input id="file-upload-url" type="hidden" value="${url(controller='wall', action='upload_file_js', qualified=True)}" />
       ${dropdown.dropdown('file_rcpt', _('Upload a file to:'), file_recipients)}
-      <div class="formSubmit" style="float: right;">
+      <br class="clearBoth" />
+      <div class="formSubmit">
         ${h.input_submit(_('Upload file'), id="file_upload_submit")}
       </div>
-      <br class="clearBoth" />
     </form>
   </%base:rounded_block>
   <div id="upload-failed-error-message" class="action-reply">${_('File upload failed.')}</div>
@@ -195,22 +197,14 @@
     <a class="${not active and 'inactive' or ''}" name="create-wiki"></a>
     <form method="POST" action="${url(controller='wall', action='create_wiki')}" id="wiki_form" class="inelement-form">
       <input id="create-wiki-url" type="hidden" value="${url(controller='wall', action='create_wiki_js')}" />
-      <div class="formField">
-        <label for="wiki_rcpt_id">
-          <span class="labelText">${_('Subject:')}</span>
-          <span class="textField">
-            ${h.select('wiki_rcpt_id', None, wiki_recipients)}
-          </span>
-        </label>
-      </div>
-      ${h.input_line('page_title', _('Title'), id='page_title')}
+      ${dropdown.dropdown('rcpt_wiki', _('Create a note on:'), wiki_recipients)}
+      ${h.input_line('page_title', _('Title'), id='page_title', class_='wide-input')}
       <div style="clear: right;">
         ${h.input_wysiwyg('page_content', '')}
       </div>
       <div class="formSubmit">
         ${h.input_submit(_('Save'), id="wiki_create_send")}
       </div>
-      <br class="clearLeft" />
     </form>
   </%base:rounded_block>
 </%def>

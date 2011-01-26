@@ -243,30 +243,6 @@ class GroupWallMixin(WallMixin):
 
         return query
 
-    def _file_rcpt(self):
-        """WallMixin implementation."""
-        items = []
-        if c.group.has_file_area:
-            items.append(('g_%d' % c.group.id, _('Group: %s') % c.group.title))
-        for subject in c.group.watched_subjects:
-            items.append(('s_%d' % subject.id, _('Subject: %s') % subject.title))
-        return items
-
-    def _wiki_rcpt(self):
-        """WallMixin implementation."""
-        subjects = c.group.watched_subjects
-        return[(subject.id, subject.title) for subject in subjects]
-
-    def _msg_rcpt(self):
-        """Deprecated: should use common WallMixin interface."""
-        if c.group.mailinglist_enabled:
-            forum_categories = []
-        else:
-            forum_categories= [(cat.id, cat.title)
-                               for cat in c.group.forum_categories]
-
-        return ('g_%d' % c.group.id, _('Group: %s') % c.group.title, forum_categories)
-
 
 def group_menu_items():
     """Generate a list of all possible actions."""
@@ -298,7 +274,7 @@ def group_menu_items():
         } if c.group.wants_to_watch_subjects else None
 
     bcs = [
-        {'title': _("News wall"),
+        {'title': _("News feed"),
          'name': 'home',
          'link': url(controller='group', action='home', id=c.group.group_id),
          'event': h.trackEvent(c.group, 'home', 'breadcrumb')},
@@ -335,10 +311,8 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
         c.wants_to_watch_subjects = (len(group.watched_subjects) == 0 and
                                      group.wants_to_watch_subjects)
 
-        # wall's dashboard variables
+        # wall's action block variables
         self._set_wall_variables()
-        c.msg_recipient = self._msg_rcpt() # DEPRECATED: should use common
-                                           # WallMixin interface
 
     @group_action
     def home(self, group):
@@ -358,7 +332,9 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
     @ActionProtector("admin", "member")
     def feed_js(self, group):
         events = self._wall_events()
-        return render_mako_def('/sections/wall_snippets.mako', 'render_events', events=events)
+        return render_mako_def('/sections/wall_snippets.mako',\
+                               'render_events',\
+                               events=events)
 
     @group_action
     @ActionProtector("admin", "member")

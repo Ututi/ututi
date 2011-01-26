@@ -14,18 +14,44 @@ from formencode.schema import Schema
 from formencode import validators
 
 from ututi.lib.base import BaseController
-from ututi.lib.validators import js_validate
+from ututi.lib.validators import js_validate, SubjectIdValidator
 from ututi.lib.security import ActionProtector
 from ututi.lib.mailinglist import post_message
 from ututi.lib.forums import make_forum_post
 from ututi.lib.fileview import FileViewMixin
-from ututi.lib.wall import _message_rcpt
 from ututi.lib import helpers as h
 from ututi.model.mailing import GroupMailingListMessage
+from ututi.model.events import PageCreatedEvent
+from ututi.model.events import PrivateMessageSentEvent
+from ututi.model.events import MailinglistPostCreatedEvent
+from ututi.model.events import FileUploadedEvent
+from ututi.model.events import ForumPostCreatedEvent
 from ututi.model.events import Event, EventComment
+from ututi.model import GroupMember
 from ututi.model import ContentItem
 from ututi.model import ForumCategory
 from ututi.model import ForumPost, PrivateMessage, Page, User, Subject, meta, Group
+
+
+def _message_rcpt(term, current_user):
+    """Return list of possible recipients limited by the query term."""
+
+    classmates = meta.Session.query(User)\
+        .filter(User.fullname.ilike('%%%s%%' % term))\
+        .join(User.memberships)\
+        .join(GroupMember.group)\
+        .filter(Group.id.in_([g.group.id for g in current_user.memberships]))\
+        .all()
+
+    users = []
+    if len(classmates) == 0:
+        users = meta.Session.query(User)\
+            .filter(User.fullname.ilike('%%%s%%' % term))\
+            .limit(10)\
+            .all()
+
+    return (classmates, users)
+
 
 class MessageRcpt(validators.FormValidator):
     """
@@ -71,23 +97,13 @@ class MessageForm(Schema):
     message = validators.String(not_empty=True)
     chained_validators = [MessageRcpt()]
 
-class SubjectIdValidator(validators.OneOf):
-    """Validate subject id by list available in runtime."""
-    messages = {
-        'invalid': _("Invalid subject"),
-        'notIn': _("Invalid subject"),
-        }
-    def validate_python(self, value, state):
-        self.list = [str(s.id) for s in c.user.all_watched_subjects]
-        super(SubjectIdValidator, self).validate_python(value, state)
-
 
 class WikiForm(Schema):
     """Validate universal form for creating wiki pages from the dashboard."""
     allow_extra_fields = True
     page_title = validators.UnicodeString(strip=True, not_empty=True)
     page_content = validators.UnicodeString(strip=True, not_empty=True)
-    wiki_rcpt_id = SubjectIdValidator()
+    rcpt_wiki = SubjectIdValidator()
 
 
 class WallReplyValidator(Schema):
@@ -100,7 +116,7 @@ class WallController(BaseController, FileViewMixin):
         if request.referrer:
             redirect(request.referrer)
         else:
-            redirect(url(controller='profile', action='wall'))
+            redirect(url(controller='profile', action='feed'))
 
 
     @ActionProtector("user")
@@ -120,12 +136,13 @@ class WallController(BaseController, FileViewMixin):
     @js_validate(schema=MessageForm())
     @jsonify
     def send_message_js(self):
-        self._send_message(
-            self.form_result['recipient'],
-            self.form_result['subject'],
-            self.form_result['message'],
-            self.form_result.get('category_id', None))
-        return {'success': True}
+        evt = self._send_message(
+                self.form_result['recipient'],
+                self.form_result['subject'],
+                self.form_result['message'],
+                self.form_result.get('category_id', None))
+        return {'success': True,
+                'evt': evt}
 
     @ActionProtector("user")
     @validate(schema=MessageForm())
@@ -151,13 +168,16 @@ class WallController(BaseController, FileViewMixin):
                                  thread_id=None)
                 meta.Session.add(post)
                 meta.Session.commit()
-                return post
+
+                evt = meta.Session.query(ForumPostCreatedEvent).filter_by(post_id=post.id).one().wall_entry()
+                return evt
             else:
                 post = post_message(recipient,
                                     c.user,
                                     subject,
                                     message)
-                return post
+                evt = meta.Session.query(MailinglistPostCreatedEvent).filter_by(message_id=post.id).one().wall_entry()
+                return evt
         elif isinstance(recipient, User):
             msg = PrivateMessage(c.user,
                                  recipient,
@@ -165,7 +185,8 @@ class WallController(BaseController, FileViewMixin):
                                  message)
             meta.Session.add(msg)
             meta.Session.commit()
-            return msg
+            evt = meta.Session.query(PrivateMessageSentEvent).filter_by(private_message_id=msg.id).one().wall_entry()
+            return evt
 
     @ActionProtector("user")
     def upload_file_js(self):
@@ -174,6 +195,13 @@ class WallController(BaseController, FileViewMixin):
         try:
             target_id = int(target_id)
             target = ContentItem.get(target_id)
+
+            if isinstance(target, Group) and\
+                    (not target.is_member(c.user)\
+                         or not target.has_file_area\
+                         or target.upload_status == target.LIMIT_REACHED):
+                target = None
+
             if not isinstance(target, (Group, Subject)):
                 target = None
         except ValueError:
@@ -182,23 +210,32 @@ class WallController(BaseController, FileViewMixin):
         if target is None:
             return 'UPLOAD_FAILED'
 
-        return self._upload_file(target)
+        f = self._upload_file_basic(target)
+        if f is None:
+            return 'UPLOAD_FAILED'
+        else:
+            evt = meta.Session.query(FileUploadedEvent).filter_by(file_id=f.id).one().wall_entry()
+            return evt
 
     @ActionProtector("user")
     @js_validate(schema=WikiForm())
     @jsonify
     def create_wiki_js(self):
-        target = Subject.get_by_id(self.form_result['wiki_rcpt_id'])
-        self._create_wiki_page(
-            target,
-            self.form_result['page_title'],
-            self.form_result['page_content'])
-        return dict(success=True)
+        target = Subject.get_by_id(self.form_result['rcpt_wiki'])
+        page = self._create_wiki_page(
+                 target,
+                 self.form_result['page_title'],
+                 self.form_result['page_content'])
+        evt = meta.Session.query(PageCreatedEvent).filter_by(page_id=page.id).one().wall_entry()
+        return {'success':True, 'evt': evt}
 
     @ActionProtector("user")
     @validate(schema=WikiForm())
     def create_wiki(self):
-        target = Subject.get_by_id(self.form_result['wiki_rcpt_id'])
+        if not hasattr(self, 'form_result'):
+            self._redirect()
+
+        target = Subject.get_by_id(self.form_result['rcpt_wiki'])
         self._create_wiki_page(
             target,
             self.form_result['page_title'],
@@ -317,3 +354,18 @@ class WallController(BaseController, FileViewMixin):
                                    created=comment.created_on)
         else:
             self._redirect()
+
+    @ActionProtector("user")
+    @jsonify
+    def message_rcpt_js(self):
+        term = request.params.get('term', None)
+        if term is None or len(term) < 1:
+            return {'data' : []}
+
+        (classmates, others) = _message_rcpt(term, c.user)
+
+        classmates = [dict(label='%s (%s)' % (u.fullname, u.emails[0].email),
+                           id=u.id) for u in classmates]
+        users = [dict(label=u.fullname,
+                      id=u.id) for u in others]
+        return dict(data=classmates+users)

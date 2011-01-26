@@ -35,11 +35,12 @@ $(document).ready(function() {
         return false;
     });
 
-    /* Helper reload function.
-     */
-    wall_reload_url = $("#wall-reload-url").val();
-    function reload_wall() {
-        $('#wall').load(wall_reload_url);
-    };
-
 });
+
+/* Helper reload function.
+ */
+function reload_wall(event_snippet) {
+    $('.wall-entry:first').before(event_snippet);
+};
+
+

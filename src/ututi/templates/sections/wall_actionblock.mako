@@ -13,7 +13,7 @@
 
   <%base:rounded_block id="dashboard_action_links">
 
-  <div class="tip">${_('Share with others')}</div>
+  <span class="tip">${_('Share:')}</span>
   ${caller.links()}
   </%base:rounded_block>
 

@@ -203,6 +203,7 @@ class ForumController(BaseController):
 
         c.threads = paginate.Page(
             c.category.top_level_messages(),
+            url=url,
             page=int(request.params.get('page', 1)),
             items_per_page = 10,
             )
@@ -220,6 +221,7 @@ class ForumController(BaseController):
             .order_by(ForumPost.created_on)
         c.forum_posts = paginate.Page(
             forum_posts,
+            url=url,
             page=int(request.params.get('page', 1)),
             item_count = forum_posts.count(),
             items_per_page = 20,

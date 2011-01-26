@@ -61,18 +61,6 @@ class LocationEditForm(Schema):
 
 class StructureviewWallMixin(WallMixin):
 
-    def _message_rcpt(self, term, current_user):
-        """WallMixin implementation."""
-        return ([], [], [])
-
-    def _file_rcpt(self):
-        """WallMixin implementation."""
-        return []
-
-    def _wiki_rcpt(self):
-        """WallMixin implementation."""
-        return []
-
     def _wall_events_query(self):
         """WallMixin implementation."""
 
@@ -110,9 +98,8 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
     def index(self, location):
         c.current_tab = 'index'
 
-        self._set_wall_variables()
-
         self._breadcrumbs(location)
+        self._set_wall_variables()
 
         if location.parent is None:
             self._get_departments(location)

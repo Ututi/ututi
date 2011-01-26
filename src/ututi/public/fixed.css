@@ -1021,6 +1021,14 @@ ul.feature-list {
     margin-right: 15px;
   }
 
+  #dashboard_action_links .tip {
+    margin-right: 5px;
+    font-weight: bold;
+    font-size: 12px;
+  }
+
+  #dashboard_action_links img.tooltip { vertical-align: bottom; }
+
   #dashboard_action_links .action.inactive {
     color: #888;
   }
