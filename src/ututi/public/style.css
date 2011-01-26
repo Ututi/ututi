@@ -1381,6 +1381,12 @@ p.qu{
     padding-left: 50px;
     background: #f6f6f6 url("../img/icons/message-large.png") 15px center no-repeat;
 }
+
+.portletGroupMailingList .single-messages,
+.portletGroupMailingList .no-messages {
+    background: white;
+}
+
 .portletGroupMailingList .no-messages {
     font-size: small;
     padding-left: 12px;
