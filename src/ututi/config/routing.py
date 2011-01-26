@@ -228,6 +228,7 @@ def make_map(config):
     map.connect('/home', controller='profile', action='home')
     map.connect('/browse', controller='search', action='browse')
     map.connect('/home/feed', controller='profile', action='feed')
+    map.connect('/home/subjects', controller='profile', action='my_subjects')
 
     #user registration path
     map.connect('/welcome', controller='profile', action='welcome')

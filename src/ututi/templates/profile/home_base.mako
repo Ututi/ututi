@@ -1,9 +1,32 @@
-<%inherit file="/profile/base.mako" />
+<%inherit file="/ubase-sidebar.mako" />
 <%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*"/>
+<%namespace file="/sections/content_snippets.mako" import="tabs" />
+<%namespace file="/portlets/sections.mako" import="user_sidebar"/>
+
+<%def name="portlets()">
+${user_sidebar()}
+</%def>
 
 <%def name="head_tags()">
 ${parent.head_tags()}
 <%newlocationtag:head_tags />
+</%def>
+
+${tabs()}
+
+%if hasattr(self, 'pagetitle'):
+  <h1 class="pageTitle">${self.pagetitle()}</h1>
+%endif
+
+<%def name="phone_confirmed()">
+<div id="phone_confirmed">
+  <div class="wrapper">
+    <div class="inner" style="height: 50px; font-weight: bold;">
+      <br />
+      ${_('Your phone has been confirmed. Thank you.')}
+    </div>
+  </div>
+</div>
 </%def>
 
 <%def name="location_nag(message)">
@@ -195,5 +218,79 @@ ${parent.head_tags()}
 </%self:rounded_block>
 </%def>
 
+<%def name="create_group_nag()">
+<%self:rounded_block id="user_location" class_="portletNewGroup">
+<div class="floatleft usergrupeleft">
+  <h2 class="portletTitle bold">${_('Create a group')}</h2>
+  <p>${_("It's simple - you only need to know the email addresses of your classmates!")}</p>
+  <p>${_("Use the group's mailing list!")}</p>
+</div>
+<div class="floatleft usergruperight">
+  <form action="${url(controller='group', action='create_academic')}" method="GET"
+        style="float: none">
+    <fieldset>
+      <legend class="a11y">${_('Create group')}</legend>
+      <label><button value="submit" class="btnMedium"><span>${_('create group')}</span></button>
+      </label>
+    </fieldset>
+  </form>
+  <div class="right_cross"><a id="hide_suggest_create_group" href="">${_('no, thanks')}</a></div>
+</div>
+<br class="clear-left" />
+<script type="text/javascript">
+  //<![CDATA[
+      $('#hide_suggest_create_group').click(function() {
+          $(this).closest('.rounded-block').hide();
+          $.post('${url(controller='profile', action='js_hide_element')}',
+                 {type: 'suggest_create_group'});
+          return false;
+      });
+    //]]>
+</script>
+</%self:rounded_block>
+</%def>
+
+<%def name="homepage_nags_and_stuff()">
+
+  %if not c.user.groups and 'suggest_create_group' not in c.user.hidden_blocks_list:
+  ${self.create_group_nag()}
+  %endif
+
+  %if c.user.location is None:
+  ${self.location_nag(_('Tell us where you are studying'))}
+  %endif
+
+  %if c.user.phone_number is None and not 'suggest_enter_phone' in c.user.hidden_blocks_list:
+  ${self.phone_nag()}
+  %elif not c.user.phone_confirmed and c.user.phone_number is not None:
+  ${self.phone_confirmation_nag()}
+  %endif
+
+  %if c.fb_random_post:
+  <script type="text/javascript">
+      //<![CDATA[
+      $(document).ready(function() {
+          FB.ui({
+              method: 'stream.publish',
+              message: '${c.fb_random_post}',
+              attachment: {
+                  name: 'Ututi - your university online',
+                  description: (
+                      '${_("Ututi is Your university online."
+                           "Here You and Your class mates can create your group online,"
+                           " use the mailing list for communication and the file storage for sharing information.")}'
+                  ),
+                  href: '${url('/', qualified=True)}'
+               },
+               action_links: [ { text: 'Labas rytas', href: 'ututi.lt' } ],
+               user_message_prompt: '${_('Share your thoughts about Ututi')}'
+             },
+             function(response) { }
+         );
+      });
+      //]]>
+  </script>
+  %endif
+</%def>
 
 ${next.body()}
