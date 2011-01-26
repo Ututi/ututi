@@ -1,5 +1,11 @@
 <%inherit file="/forum/base.mako" />
 
+<%def name="css()">
+.portletGroupMailingList {
+    background-color: white;
+}
+</%def>
+
 <div class="back-link">
   <a class="back-link" href="${url(controller=c.controller, action='index', id=c.group_id, category_id=c.category_id)}"
     >${_('Back to the topic list')}</a>
