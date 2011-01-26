@@ -14,6 +14,7 @@
   $(function(){
     message_send_url = $("#message-send-url").val();
     $('#message_send').click(function(){
+        _gaq.push(['_trackEvent', 'action block submit', 'group wall', 'message send']);
         form = $(this).closest('form');
 
         subject = $('#message_subject', form).val();
@@ -50,6 +51,7 @@
              name: 'attachment',
              data: {folder: $('#folder-select').val(), target_id: $('#file_rcpt').val()},
              onSubmit: function(file, ext, iframe){
+                 _gaq.push(['_trackEvent', 'action block submit', 'group wall', 'file upload']);
                  iframe['progress_indicator'] = $(document.createElement('div'));
                  $('#upload_file_block').append(iframe['progress_indicator']);
                  iframe['progress_indicator'].text(file);

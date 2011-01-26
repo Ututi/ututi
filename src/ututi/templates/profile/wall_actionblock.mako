@@ -41,6 +41,7 @@
 
     message_send_url = $("#message-send-url").val();
     $('#message_send').click(function(){
+        _gaq.push(['_trackEvent', 'action block submit', 'profile wall', 'message send']);
         form = $(this).closest('form');
 
         subject = $('#message_subject', form).val();
@@ -69,7 +70,6 @@
     /* File upload actions.
      */
     if ($("#upload_file_block").length > 0) {
-
         file_upload_url = $("#file-upload-url").val();
         $('#file_upload_submit').click(function(){return false;});
         var file_upload = new AjaxUpload($('#file_upload_submit'),
@@ -77,6 +77,7 @@
              name: 'attachment',
              data: {folder: '', target_id: $('#file_rcpt-select').val()},
              onSubmit: function(file, ext, iframe){
+                 _gaq.push(['_trackEvent', 'action block submit', 'profile wall', 'file upload']);
                  iframe['progress_indicator'] = $(document.createElement('div'));
                  $('#upload_file_block').append(iframe['progress_indicator']);
                  iframe['progress_indicator'].text(file);
@@ -118,6 +119,7 @@
     /* Create wiki actions.
      */
     $('#wiki_create_send').click(function(){
+        _gaq.push(['_trackEvent', 'action block submit', 'profile wall', 'wiki create']);
         create_wiki_url = $("#create-wiki-url").val();
         form = $(this).closest('form');
 
