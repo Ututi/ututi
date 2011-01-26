@@ -14,14 +14,14 @@ Login and visit the wall.
 
     >>> user3.getLink('News feed').click()
 
-The page title should say "What's new?":
+The page title should say "News feed":
 
     >>> user3.printQuery("//h1[@class='pageTitle']/text()")
-    What's new?
+    News feed
 
 Right next to the title there's a link to wall settings:
 
-    >>> user3.getLink("Wall settings").click()
+    >>> user3.getLink("News feed settings").click()
     >>> user3.url
     'http://localhost/profile/edit/wall'
 

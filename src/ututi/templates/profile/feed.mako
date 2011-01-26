@@ -7,7 +7,7 @@
 <%def name="body_class()">wall</%def>
 
 <%def name="pagetitle()">
-  ${_("What's new?")}
+  ${_("News feed")}
 </%def>
 
 <%def name="head_tags()">
@@ -19,7 +19,7 @@
   ${actions.css()}
 </%def>
 
-<a id="settings-link" href="${url(controller='profile', action='wall_settings')}">${_('Wall settings')}</a>
+<a id="settings-link" href="${url(controller='profile', action='wall_settings')}">${_('News feed settings')}</a>
 
 ${actions.action_block(c.msg_recipients, c.file_recipients, c.wiki_recipients)}
 ${wall.wall_entries(c.events)}
