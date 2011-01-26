@@ -484,7 +484,7 @@ $(document).ready(function(){
            hidden = False
            file_count = len(files)
         %>
-          <ul class="folder${file_count > 4 and ' click2show' or ''}">
+          <ul class="folder${file_count >= 4 and ' click2show' or ''}">
         % if files:
               <li style="display: none;" class="message">${_("There are no files here, this folder is empty!")}</li>
               % for n, file in enumerate(files):
