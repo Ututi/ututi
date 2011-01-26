@@ -47,6 +47,7 @@
 
   .dropdown span, .dropdown a, .dropdown .current {
     padding-right:24px;
+    line-height: 18px;
     background-image: url("img/ico_expandable_0.gif");
     background-repeat: no-repeat;
     background-position: right 2px;
@@ -72,6 +73,7 @@
 
   .dropdown div.items a {
     background:none !important;
+    white-space: nowrap;
   }
 
   .dropdown.expanded div.items {
@@ -85,7 +87,7 @@
     height:1%;
     line-height:1;
     border-bottom:1px solid #CCC;
-    width: 160px;
+
     padding: 5px;
   }
   .dropdown.expanded, .dropdown.expanded span, .dropdown.expanded a {

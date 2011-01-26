@@ -289,6 +289,7 @@ ${self.anonymous_menu()}
     ${h.stylesheet_link(h.path_with_hash('/style.css'))}
     ${h.stylesheet_link(h.path_with_hash('/fixed.css'))}
     ${h.stylesheet_link(h.path_with_hash('/portlets.css'))}
+    ${h.stylesheet_link(h.path_with_hash('/widgets.css'))}
     ${h.javascript_link('/javascript/jquery-1.4.4.min.js')}
     ${h.javascript_link('/javascript/ajaxupload.3.5.js')}
     ${h.javascript_link('/javascript/jquery.qtip.min.js')}
@@ -410,7 +411,7 @@ ${self.anonymous_menu()}
             });
         }
     </script>
-<!--
+
     <div id="fb-root"></div>
     %if c.lang == 'lt':
       <script src="http://connect.facebook.net/lt_LT/all.js"></script>
@@ -423,7 +424,6 @@ ${self.anonymous_menu()}
       FB.init({appId: '${c.facebook_app_id}', status: true,
           cookie: true, xfbml: true, channelUrl: '${url(controller='home', action='fbchannel', qualified=True)}'});
     </script>
--->
   </body>
 </html>
 

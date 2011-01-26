@@ -20,7 +20,6 @@
       });
   });
   </script>
-  ${h.stylesheet_link('/widgets.css')}
 </%def>
 
 <%def name="wall_entries(events, per_page=20)">
