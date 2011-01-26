@@ -38,19 +38,17 @@
   <label>${label}</label>
   <div class="dropdown js" id="${id}">
     <div class="current">${items[0][1]}</div>
-    <div class="items">
-      <ul>
-        %for key, item in items:
-        <li class="action">
-          <a id="${key}"
-             href="#"
-             class='item'>
-            ${item}
-          </a>
-        </li>
-        %endfor
-      </ul>
-    </div>
+    <table class="items">
+      %for key, item in items:
+      <tr><td class="action">
+        <a id="${key}"
+           href="#"
+           class='item'>
+          ${item}
+        </a>
+      </td></tr>
+      %endfor
+    </table>
   </div>
   <div id="${id}-element" class="non-js">
     ${h.select(id,
