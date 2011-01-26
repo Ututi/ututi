@@ -15,6 +15,7 @@ import pylons.test
 
 from nous.pylons.testing.browser import NousTestBrowser, NousTestApp
 
+from ututi.model import LocationTag
 from ututi.model import teardown_db_defaults
 from ututi.model import initialize_db_defaults
 from ututi.model import meta
@@ -137,12 +138,30 @@ class UtutiTestBrowser(NousTestBrowser):
 
         browser.app = NousTestApp(pylons.test.pylonsapp)
         res = browser.app.post("/login", params={'login': email, 'password': password})
+
+        if email == 'admin@ututi.lt' and password == 'asdasd':
+            browser.open('http://localhost/admin/login')
+            browser.getControl('Username').value = email
+            browser.getControl('Password').value = password
+            browser.getControl('Login').click()
+            res = browser.app.post("/admin/join_login", params={'login_username': email,
+                                                           'login_password': password})
+        browser.open('http://localhost')
         return browser
 
 
 def setUp(test):
     test.globs['app'] = NousTestApp(pylons.test.pylonsapp)
     test.globs['Browser'] = UtutiTestBrowser
+    # Common test setup, here for backwards compatibility only, will
+    # get removed or moved later
+    meta.Session.execute("insert into users (fullname, password) values ('Adminas Adminovix', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7')")
+    meta.Session.execute("insert into emails (id, email, confirmed) values (1, 'admin@ututi.lt', true)")
+
+    l = LocationTag(u'Vilniaus universitetas', u'vu', u'Seniausias universitetas Lietuvoje.')
+    f = LocationTag(u'Ekonomikos fakultetas', u'ef', u'', l)
+    meta.Session.add(l)
+    meta.Session.add(f)
 
 
 def tearDown(test):

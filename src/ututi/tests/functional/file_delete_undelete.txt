@@ -1,44 +1,45 @@
 
-    >>> res = app.post("/login",
+
+    >>> browser = Browser.logIn()
+
+    >>> res = browser.app.post("/login",
     ...                params={'login': 'admin@ututi.lt', 'password': 'asdasd'})
 
-    >>> res = app.post("/group/moderators/upload_file",
+    >>> res = browser.app.post("/group/moderators/upload_file",
     ...                params={'folder': ''},
     ...                upload_files=[("attachment", "text1.txt", "Test Test")])
 
-    >>> res = app.post("/group/moderators/upload_file",
+    >>> res = browser.app.post("/group/moderators/upload_file",
     ...                params={'folder': ''},
     ...                upload_files=[("attachment", "text2.txt", "Test Test")])
 
-    >>> res = app.post("/subject/vu/mat_analize/upload_file",
+    >>> res = browser.app.post("/subject/vu/mat_analize/upload_file",
     ...                params={'folder': ''},
     ...                upload_files=[("attachment", "text3.txt", "Test")])
 
-    >>> res = app.post("/subject/vu/mat_analize/upload_file",
+    >>> res = browser.app.post("/subject/vu/mat_analize/upload_file",
     ...                params={'folder': ''},
     ...                upload_files=[("attachment", "text4.txt", "Test")])
 
 
-    >>> res = app.post("/subject/vu/mat_analize/upload_file",
+    >>> res = browser.app.post("/subject/vu/mat_analize/upload_file",
     ...                params={'folder': 'Foldah'},
     ...                upload_files=[("attachment", "text_in_a_folder.txt", "Test")])
 
-    >>> res = app.post("/subject/vu/mat_analize/upload_file",
+    >>> res = browser.app.post("/subject/vu/mat_analize/upload_file",
     ...                params={'folder': 'Foldah'},
     ...                upload_files=[("attachment", "text_in_a_folderr.txt", "Test")])
 
-    >>> browser = Browser.logIn()
-
 Deleting files:
 
-    >>> res = app.get('/files/delete/4')
-    >>> res = app.get('/files/delete/5')
-    >>> res = app.get('/files/delete/6')
-    >>> res = app.get('/files/delete/7')
-    >>> res = app.get('/files/delete/8')
+    >>> res = browser.app.get('/files/delete/4')
+    >>> res = browser.app.get('/files/delete/5')
+    >>> res = browser.app.get('/files/delete/6')
+    >>> res = browser.app.get('/files/delete/7')
+    >>> res = browser.app.get('/files/delete/8')
 
 Delete the folder too:
-    >>> res = app.get('/subject/vu/mat_analize/js_delete_folder?folder=Foldah')
+    >>> res = browser.app.get('/subject/vu/mat_analize/js_delete_folder?folder=Foldah')
 
 Try and restore the file:
 

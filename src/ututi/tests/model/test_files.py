@@ -68,7 +68,8 @@ def test_subject_files():
         >>> subject.files
         [<ututi.model.File object at ...>, <ututi.model.File object at ...>]
 
-Check if location is synchronized for files:
+    Check if location is synchronized for files:
+
         >>> res = meta.Session.execute("SET ututi.active_user TO 1")
         >>> [f.location_id for f in subject.files]
         [1L, 1L]

@@ -32,7 +32,7 @@ def ftest_setUp(test):
     meta.Session.add(r)
 
     u = User.get('admin@ututi.lt')
-    meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+    meta.Session.execute("SET LOCAL ututi.active_user TO %d" % u.id)
 
     g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date(date.today().year, 1, 1), u'U2ti moderatoriai.')
     meta.Session.add(g)

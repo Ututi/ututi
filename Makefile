@@ -78,6 +78,7 @@ reset_devdb: instance/var/run/.s.PGSQL.${PGPORT}
 	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
 	rm -rf ${PWD}/instance/uploads
 	bin/paster setup-app development.ini
+	psql -h ${PWD}/instance/var/run/ -d development < src/ututi/model/data.sql
 
 .PHONY: instance
 instance: instance/done

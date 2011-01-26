@@ -28,10 +28,12 @@ from babel.dates import format_date
 from pylons import request, tmpl_context as c, config, url, response
 
 from ututi.lib.image import prepare_image
+from ututi.lib.security import sign_in_admin_user
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import PhoneNumberValidator, GroupCouponValidator, validate
 from ututi.lib.emails import teacher_confirmed_email
+from ututi.model.users import AdminUser
 from ututi.model.events import Event
 from ututi.model import Department
 from ututi.model import Region
@@ -891,3 +893,17 @@ class AdminController(BaseController):
         response.headers['Content-Type'] = 'application/zip'
         result.seek(0)
         return result
+
+    def login(self):
+        return render('admin/login.mako')
+
+    def join_login(self):
+        email = request.POST.get('login_username')
+        password = request.POST.get('login_password')
+        if password is not None:
+            admin_user = AdminUser.authenticate(email, password.encode('utf-8'))
+            if admin_user:
+                sign_in_admin_user(admin_user)
+                redirect(url(controller='admin', action='index'))
+        return render('admin/login.mako')
+

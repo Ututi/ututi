@@ -3,6 +3,7 @@ import doctest
 from ututi.model import Page, Subject, SimpleTag, LocationTag, User
 from ututi.model import meta
 
+from ututi.tests import setUp
 from ututi.tests import UtutiLayer
 
 
@@ -88,6 +89,7 @@ def test_page_location():
 def test_suite():
     suite = doctest.DocTestSuite(
         optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |
-        doctest.NORMALIZE_WHITESPACE)
+        doctest.NORMALIZE_WHITESPACE,
+        setUp=setUp)
     suite.layer = UtutiLayer
     return suite

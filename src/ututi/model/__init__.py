@@ -31,7 +31,7 @@ from sqlalchemy.sql.expression import and_, or_
 from sqlalchemy.orm.interfaces import MapperExtension
 
 from ututi.migration import GreatMigrator
-from ututi.model.users import Medal, Email, UserSubjectMonitoring, User, Teacher, TeacherGroup
+from ututi.model.users import Medal, Email, UserSubjectMonitoring, User, Teacher, TeacherGroup, AdminUser
 from ututi.model.util import logo_property
 from ututi.model import meta
 from ututi.lib.messaging import SMSMessage
@@ -49,6 +49,7 @@ from pylons.i18n import _, lazy_ugettext as ugettext
 log = logging.getLogger(__name__)
 
 users_table = None
+admin_users_table = None
 user_monitored_subjects_table = None
 email_table = None
 teacher_groups_table = None
@@ -117,6 +118,14 @@ def setup_orm(engine):
                         autoload=True,
                         useexisting=True,
                         autoload_with=engine)
+
+    global admin_users_table
+    admin_users_table = Table("admin_users", meta.metadata,
+                              Column('id', Integer, Sequence('users_id_seq'), primary_key=True),
+                              Column('fullname', Unicode(assert_unicode=True)),
+                              autoload=True,
+                              useexisting=True,
+                              autoload_with=engine)
 
     global teacher_subjects_table
     teacher_subjects_table = Table("teacher_taught_subjects", meta.metadata,
@@ -276,6 +285,9 @@ def setup_orm(engine):
                properties = {'group' : relation(Group, lazy=True),
                              'teacher' : relation(Teacher,
                                                   backref='student_groups')})
+
+    admin_user_mapper = orm.mapper(AdminUser,
+                                   admin_users_table)
 
     orm.mapper(FileDownload,
                file_downloads_table,

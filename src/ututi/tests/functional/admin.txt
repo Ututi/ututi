@@ -9,9 +9,19 @@ login form:
     >>> browser.open('http://localhost/admin/import_csv')
     >>> browser.url
     'http://localhost/login?came_from=http%3A%2F%2Flocalhost%2Fadmin%2Fimport_csv'
+    >>> url = browser.url
 
 Now if I type in the admin credentials:
 
+# XXX Secret "sudo" form first
+
+    >>> browser.open('http://localhost/admin/login')
+    >>> form = browser.getForm('adminLoginForm')
+    >>> form.getControl('Username').value = "admin@ututi.lt"
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
+
+    >>> browser.open(url)
     >>> form = browser.getForm('loginForm')
     >>> form.getControl('Email').value = "admin@ututi.lt"
     >>> form.getControl('Password').value = "asdasd"

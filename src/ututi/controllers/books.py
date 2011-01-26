@@ -31,6 +31,7 @@ from ututi.model import User
 from ututi.lib.image import serve_logo
 from ututi.lib.forms import validate
 from ututi.lib.search import search_query
+from ututi.lib.security import sign_out_user
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render, render_lang
 
@@ -545,10 +546,7 @@ class BooksController(HomeController, BaseController):
             return render('/login.mako')
 
     def logout(self):
-        if 'login' in session:
-            del session['login']
-        response.delete_cookie('ututi_session_lifetime')
-        session.save()
+        sign_out_user()
         redirect(url(controller='books', action='index'))
 
     @ActionProtector("user")

@@ -1,3 +1,12 @@
+create table admin_users(
+       id bigserial not null,
+       email varchar(320),
+       fullname varchar(100),
+       password char(36),
+       last_seen timestamp not null default (now() at time zone 'UTC'));;
+
+/* Create first user=admin and password=asdasd */
+insert into admin_users (email, fullname, password) values ('admin@ututi.lt', 'Adminas Adminovix', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7');;
 
 create table users (
        id bigserial not null,
@@ -46,9 +55,6 @@ $$ LANGUAGE plpgsql;;
 CREATE TRIGGER check_gadugadu BEFORE INSERT OR UPDATE ON users
     FOR EACH ROW EXECUTE PROCEDURE check_gadugadu();;
 
-/* Create first user=admin and password=asdasd */
-insert into users (fullname, password) values ('Adminas Adminovix', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7');;
-
 /* Storing the emails of the users. */
 create table emails (id int8 not null references users(id),
        email varchar(320),
@@ -74,8 +80,6 @@ CREATE OR REPLACE FUNCTION get_users_by_email(email_address varchar) returns use
                  where emails.email=lower($1)
 $get_user_by_email$ LANGUAGE sql;;
 
-insert into emails (id, email, confirmed) values (1, 'admin@ututi.lt', true);;
-
 /* user medals */
 create table user_medals (
        id bigserial not null,
@@ -86,8 +90,6 @@ create table user_medals (
        unique(user_id, medal_type));;
 
 create index user_medals_user_id on user_medals(user_id);
-
-insert into user_medals (user_id, medal_type) values (1, 'admin2');
 
 /* A generic table for Ututi objects */
 create table content_items (id bigserial not null,
@@ -190,11 +192,6 @@ CREATE TRIGGER tag_title_lowercase BEFORE INSERT OR UPDATE ON tags
 create unique index parent_title_unique_idx on tags(coalesce(parent_id, 0), title_short);;
 
 alter table users add column location_id int8 default null references tags(id) on delete set null;;
-
-insert into tags (title, title_short, description, tag_type)
-       values ('Vilniaus universitetas', 'vu', 'Seniausias universitetas Lietuvoje.', 'location');;
-insert into tags (title, title_short, description, parent_id, tag_type)
-       values ('Ekonomikos fakultetas', 'ef', '', 1, 'location');;
 
 /* Add location field to the content item table */
 alter table content_items add column location_id int8 default null references tags(id) on delete set null;;

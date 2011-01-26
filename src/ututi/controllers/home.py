@@ -24,9 +24,10 @@ import ututi.lib.helpers as h
 from ututi.lib import gg
 from ututi.lib.emails import email_confirmation_request, email_password_reset
 from ututi.lib.messaging import EmailMessage
+from ututi.lib.security import sign_out_user
 from ututi.lib.security import ActionProtector, sign_in_user, bot_protect
 from ututi.lib.validators import validate, UniqueEmail, TranslatedEmailValidator
-from ututi.model import meta, User, Region, Email, PendingInvitation, LocationTag, Payment, get_supporters
+from ututi.model import meta, User, Region, Email, PendingInvitation, LocationTag, Payment
 from ututi.model import Subject, Group, SearchItem
 from ututi.model.events import Event
 from ututi.controllers.federation import FederationMixin, FederatedRegistrationForm
@@ -286,10 +287,7 @@ class HomeController(UniversityListMixin, FederationMixin):
         return render('/login.mako')
 
     def logout(self):
-        if 'login' in session:
-            del session['login']
-        response.delete_cookie('ututi_session_lifetime')
-        session.save()
+        sign_out_user()
         redirect(url(controller='home', action='index'))
 
     def _register_user(self, form, send_confirmation=True):

@@ -3,10 +3,7 @@ Events and watching
 
     >>> browser = Browser.logIn()
 
-    >>> res = app.post("/login",
-    ...                params={'login': 'admin@ututi.lt', 'password': 'asdasd'})
-
-    >>> res = app.post("/subject/vu/mat_analize/upload_file",
+    >>> res = browser.app.post("/subject/vu/mat_analize/upload_file",
     ...                params={'folder': ''},
     ...                upload_files=[("attachment", "text.txt", "Test")])
 
@@ -34,7 +31,7 @@ Events and watching
           New subject <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a> was created <span class="event_time">(0 seconds ago)</span>
     </li>
 
-    >>> res = app.post("/group/moderators/upload_file",
+    >>> res = browser.app.post("/group/moderators/upload_file",
     ...                params={'folder': ''},
     ...                upload_files=[("attachment", "text.txt", "Test")])
 
@@ -73,7 +70,8 @@ Events and watching
     </li>
 
 Let's see if deleted files show no link:
-    >>> res = app.get('/files/delete/5')
+
+    >>> res = browser.app.get('/files/delete/5')
     >>> browser.open('http://localhost/profile/index')
     >>> browser.printQuery("id('event_list')/li")
     <li>
