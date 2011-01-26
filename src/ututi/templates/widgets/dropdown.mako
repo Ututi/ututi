@@ -5,9 +5,9 @@
       var dd = $('.dropdown .current', dropdown);
       $(dd).text($('#'+$('.dropdown', dropdown).attr('id')+'-select :selected').text());
       $('.dropdown', dropdown).toggle(function() {
-          $(this).addClass('expanded').find('div:last-child ul').show();
+          $(this).addClass('expanded').find('div:last-child table').show();
       }, function(){
-          $(this).removeClass('expanded').find('div:last-child ul').hide();
+          $(this).removeClass('expanded').find('div:last-child table').hide();
       }).click(function(){ // remove selection
           if(document.selection && document.selection.empty) {
               document.selection.empty() ;
@@ -16,12 +16,12 @@
               if(s && s.removeAllRanges)
                   s.removeAllRanges();
           }
-      }).find('li a').click(function(ev){
+      }).find('.action a').click(function(ev){
           ev.preventDefault();
           $(this).closest('.dropdown').removeClass('expanded');
           id = $(this).attr('id')
           $(this).closest('.dropdown-widget').find('select').val(id).change();
-          $(this).closest('.dropdown-widget').find('.current').text($(this).text());
+          $(this).closest('.dropdown-widget').find('.current').text($(this).closest('.dropdown-widget').find('select :selected').text());
       });
     });
   });
@@ -44,7 +44,7 @@
         <a id="${key}"
            href="#"
            class='item'>
-          ${item}
+          ${h.ellipsis(item, 50)}
         </a>
       </td></tr>
       %endfor
