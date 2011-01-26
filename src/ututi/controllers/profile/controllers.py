@@ -534,13 +534,12 @@ class UserProfileController(ProfileControllerBase):
     def home(self):
         redirect(url(controller='profile', action='feed'))
 
-    @ActionProtector("user")
-    def feed(self):
-        # Override parent method to add tabs and breadcrumbs
+    def _feed_page(self):
+        # Overrides parent method to add tabs and breadcrumbs
         c.breadcrumbs.append(self._actions('feed'))
         c.tabs = self._tabs()
         c.current_tab = 'feed'
-        return self._feed_page()
+        return ProfileControllerBase._feed_page(self)
 
     @ActionProtector("user")
     def my_subjects(self):
@@ -560,7 +559,7 @@ class UserProfileController(ProfileControllerBase):
                                 _('Where are your notes?')]
             c.fb_random_post = random.choice(FB_POST_MESSAGES)
 
-        return render('profile/feed.mako')
+        return self._feed_page()
 
     @ActionProtector("user")
     @validate(schema=PhoneForm, form='home')
