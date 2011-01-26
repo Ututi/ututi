@@ -389,11 +389,6 @@
 
 .wall {}
 
-    .wall a#settings-link {
-        font-size: 11px;        /* title and settings link next to each other */
-        float: right;
-    }
-
     .wall .wall-entry {
         border-bottom: 1px solid #ddd;
         color: #4d4d4d;

@@ -77,7 +77,7 @@
       </div>
 
       ${h.input_line('site_url', _('Address of your website or blog'))}
-      ${h.input_wysiwyg('description', _('About yourself'))}
+      ${h.input_area('description', _('About yourself'), rows='5', col='40')}
 
       <div style="padding-top: 5px">
         <label for="profile_is_public">

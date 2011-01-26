@@ -12,7 +12,7 @@ Test nagging users to confirm their emails
        Your email (user3@ututi.lt) is not confirmed! Please confirm your email by clicking on the link sent to your address or
        <form method="post" action="/profile/confirm_emails" id="email_confirmation_request" class="inline-form">
        <div>
-         <input type="hidden" name="came_from" value="http://localhost/home" />
+         <input type="hidden" name="came_from" value="http://localhost/home/feed" />
          <input type="hidden" name="email" value="user3@ututi.lt" />
          <input type="submit" class="text_button" value="get another confirmation email" />
        </div>
@@ -33,7 +33,7 @@ Test nagging users to confirm their emails
        Your email (user3@ututi.lt) is not confirmed! Please confirm your email by clicking on the link sent to your address or
        <form method="post" action="/profile/confirm_emails" id="email_confirmation_request" class="inline-form">
        <div>
-         <input type="hidden" name="came_from" value="http://localhost/home" />
+         <input type="hidden" name="came_from" value="http://localhost/home/feed" />
          <input type="hidden" name="email" value="user3@ututi.lt" />
          <input type="submit" class="text_button" value="get another confirmation email" />
        </div>

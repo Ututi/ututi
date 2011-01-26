@@ -10,18 +10,16 @@ Login and visit the wall.
 
     >>> user3 = Browser.logIn('user3@ututi.lt', 'password')
     >>> user3.url
-    'http://localhost/home'
+    'http://localhost/home/feed'
 
-    >>> user3.getLink('News feed').click()
-
-The page title should say "What's new?":
+The page title should say "News feed":
 
     >>> user3.printQuery("//h1[@class='pageTitle']/text()")
-    What's new?
+    News feed
 
 Right next to the title there's a link to wall settings:
 
-    >>> user3.getLink("Wall settings").click()
+    >>> user3.getLink("News feed settings").click()
     >>> user3.url
     'http://localhost/profile/edit/wall'
 
@@ -46,15 +44,14 @@ Let's use wall's action panel to send private message to the user user:
     >>> user3.url
     'http://localhost/home/feed'
 
-    >>> user3.printCssQuery('.error-message')
+    >>> user3.printCssQuery('#dashboard_action_blocks .error-message')
 
 Now the user user logs in and finds the private message in his wall:
 
     >>> user = Browser.logIn('user@ututi.lt', 'password')
     >>> user.url
-    'http://localhost/home'
+    'http://localhost/home/feed'
 
-    >>> user.getLink('News feed').click()
     >>> printWallEvents(user)
     <span class="event-title">
         <a>Third user</a> has sent you a private message "<a>Private message title</a>"

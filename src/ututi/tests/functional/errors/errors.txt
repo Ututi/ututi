@@ -113,4 +113,4 @@ If a user gets a 404 page while not being logged-in and then logs in, he should 
     >>> form.getControl('Login').click()
 
     >>> browser.url
-    'http://localhost/home'
+    'http://localhost/home/feed'

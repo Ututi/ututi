@@ -16,7 +16,7 @@ become a teacher.
     >>> form.getControl('Register').click()
 
     >>> browser.url
-    'http://localhost/home'
+    'http://localhost/home/feed'
 
     >>> browser.printQuery("//div[@class='flash-message']//span/text()")
     Thank You! Your request to become a teacher has been received. We will notify You once we grant You the rights of a teacher.

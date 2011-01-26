@@ -89,7 +89,6 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
                                   " specific profile controller.")
 
     def __before__(self):
-        c.action = None
         if c.user is not None:
             c.breadcrumbs = [{'title': c.user.fullname, 'link': url(controller='profile', action='home')}]
 
@@ -119,11 +118,8 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         self._search()
         return render_mako_def('/search/index.mako','search_results', results=c.results, controller='profile', action='search_js')
 
-    @ActionProtector("user")
-    def feed(self):
-        c.breadcrumbs.append(self._actions('feed'))
-
-        c.action = 'feed'
+    def _feed_page(self):
+        """This method is reused in controllers implementing feed action."""
         self._set_wall_variables(events_hidable=True)
 
         c.msg_recipients = [(m.group.id, m.group.title) for m in c.user.memberships]
@@ -141,6 +137,10 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         meta.Session.commit()
 
         return result
+
+    @ActionProtector("user")
+    def feed(self):
+        return self._feed_page()
 
     def _edit_form_defaults(self):
         defaults = {
@@ -496,13 +496,25 @@ class UserProfileController(ProfileControllerBase):
              'link': url(controller='profile', action='home')},
             'feed':
             {'title': _("What's New?"),
-             'link': url(controller='profile', action='home')},
+             'link': url(controller='profile', action='feed')},
+            'my_subjects':
+            {'title': _("My subjects"),
+             'link': url(controller='profile', action='my_subjects')},
             'subjects':
             {'title': _("Subjects"),
              'link': url(controller='profile', action='watch_subjects')}
             }
         if selected in bcs.keys():
             return bcs[selected]
+
+    def _tabs(self):
+        return [
+            {'title': _("News feed"),
+             'name': 'feed',
+             'link': url(controller='profile', action='feed')},
+            {'title': _("My subjects"),
+             'name': 'my_subjects',
+             'link': url(controller='profile', action='my_subjects')}]
 
     @ActionProtector("user")
     def index(self):
@@ -520,10 +532,21 @@ class UserProfileController(ProfileControllerBase):
 
     @ActionProtector("user")
     def home(self):
-        c.breadcrumbs.append(self._actions('home'))
-        c.action = 'home'
+        redirect(url(controller='profile', action='feed'))
 
-        return render('/profile/home.mako')
+    def _feed_page(self):
+        # Overrides parent method to add tabs and breadcrumbs
+        c.breadcrumbs.append(self._actions('feed'))
+        c.tabs = self._tabs()
+        c.current_tab = 'feed'
+        return ProfileControllerBase._feed_page(self)
+
+    @ActionProtector("user")
+    def my_subjects(self):
+        c.breadcrumbs.append(self._actions('my_subjects'))
+        c.tabs = self._tabs()
+        c.current_tab = 'my_subjects'
+        return render('/profile/my_subjects.mako')
 
     @ActionProtector("user")
     def register_welcome(self):
@@ -536,7 +559,7 @@ class UserProfileController(ProfileControllerBase):
                                 _('Where are your notes?')]
             c.fb_random_post = random.choice(FB_POST_MESSAGES)
 
-        return render('profile/home.mako')
+        return self._feed_page()
 
     @ActionProtector("user")
     @validate(schema=PhoneForm, form='home')
@@ -574,7 +597,7 @@ class UserProfileController(ProfileControllerBase):
             return ''
         c.user.confirm_phone_number()
         meta.Session.commit()
-        return render_mako_def('/profile/home.mako', 'phone_confirmed')
+        return render_mako_def('/profile/home_base.mako', 'phone_confirmed')
 
 
 class TeacherProfileController(ProfileControllerBase):
@@ -588,6 +611,9 @@ class TeacherProfileController(ProfileControllerBase):
             'home':
             {'title': _("Home"),
              'link': url(controller='profile', action='home')},
+            'feed':
+            {'title': _("What's New?"),
+             'link': url(controller='profile', action='feed')},
             }
         if selected in bcs.keys():
             return bcs[selected]
@@ -600,7 +626,6 @@ class TeacherProfileController(ProfileControllerBase):
     @ActionProtector("user")
     def home(self):
         c.breadcrumbs.append(self._actions('home'))
-        c.action = 'home'
 
         return render('/profile/teacher_home.mako')
 

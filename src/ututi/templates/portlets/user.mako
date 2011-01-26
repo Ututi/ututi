@@ -56,7 +56,7 @@
           %else:
             ${h.image('/images/details/icon_group_25x25.png', alt='logo', class_='group-logo')|n}
           %endif
-            <dt class="group-title"><a href="${group.url()}">${group.title}</a></dt>
+            <dt class="group-title"><a href="${group.url()}" ${h.trackEvent(Null, 'groups', 'title', 'profile')}>${group.title}</a></dt>
             <dd class="member-count">(${ungettext("%(count)s member", "%(count)s members", len(group.members)) % dict(count = len(group.members))})</dd>
             <div class="group-location">
               <dd>

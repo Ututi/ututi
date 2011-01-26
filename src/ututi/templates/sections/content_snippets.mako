@@ -216,6 +216,7 @@ Snippets for rendering various content items, e.g. in search results.
 </%def>
 
 <%def name="tabs()">
+%if hasattr(c, 'tabs'):
 <ul class="moduleMenu tabs" id="moduleMenu">
     %for tab in c.tabs:
       <li class="${'current' if tab['name'] == c.current_tab else ''}">
@@ -224,4 +225,5 @@ Snippets for rendering various content items, e.g. in search results.
         </a></li>
     %endfor
 </ul>
+%endif
 </%def>

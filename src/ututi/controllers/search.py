@@ -5,6 +5,7 @@ from webhelpers import paginate
 
 from pylons.controllers.util import redirect
 from pylons import request, tmpl_context as c, url
+from pylons.controllers.util import abort
 from pylons.templating import render_mako_def
 
 from ututi.controllers.home import UniversityListMixin
@@ -43,7 +44,11 @@ class SearchBaseController(BaseController):
         if c.obj_type != '*':
             search_params['obj_type'] = c.obj_type
 
-        c.page = int(request.params.get('page', 1))
+        try:
+            page_no = int(request.params.get('page', 1))
+        except ValueError:
+            abort(404)
+        c.page = page_no
 
         if search_params != {}:
             query = search_query(**search_params)

@@ -17,12 +17,6 @@ The personal information portlet shows my name:
     >>> browser.printQuery('id("personal-data")//span[@class="fullname"]/text()')
     Adminas Adminovix
 
-Because it's our first time in the system we are in the welcome page
-and not the home page:
-
-    >>> browser.url
-    'http://localhost/home'
-
 As we have successfully logged in let's logout and make some typos:
 
     >>> browser.getLink('log out').click()

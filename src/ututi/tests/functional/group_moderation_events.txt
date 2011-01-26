@@ -19,7 +19,6 @@ should not be visible to the other users. Let's check that it is
 actually so:
 
     >>> user3 = Browser.logIn('user3@ututi.lt', 'password')
-    >>> user3.getLink("News feed (1)").click()
     >>> printWallEvents(user3)
     <span class="event-title">
       <a>Adminas Adminovix</a> has created the group <a>Moderatoriai</a>
@@ -113,7 +112,7 @@ approved message has appeared:
 
 Now if user refreshes his wall, he sees the message at the top:
 
-    >>> user3.reload()
+    >>> user3.getLink("News feed").click()
     >>> printWallEvents(user3)
     <span class="event-title">
       <a>Varlius &lt;varlius@example.com&gt;</a> has posted a new message <a>Hello from varlius</a> to the group <a>Moderatoriai</a>
