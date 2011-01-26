@@ -67,7 +67,9 @@
  </div>
  %if c.lang in ['lt']:
  <div id="banner_portlet" style="padding-top: 15px;">
+   <div class="title">${_('Our friends')}</div>
    <a href="http://www.facebook.com/w2wvilnius"><img src="${url('/images/books/wok2walk.jpg')}" /></a>
+   <a href="http://www.skalvija.lt"><img src="${url('/images/books/skalvija.jpg')}" /></a>
  </div>
  %endif
 </%def>
