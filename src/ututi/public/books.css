@@ -851,7 +851,9 @@ table#login-screen {
 #footer a,
 #footer a:hover
 #footer {
-    font: 11px normal MS Trebuchet;
+    font-size: 11px;
+    font-style: normal;
+    font-family: MS Trebuchet, Arial, Helvetica, sans-serif;
 }
 
 #footer p {
