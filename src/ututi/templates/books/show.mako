@@ -48,12 +48,12 @@ ${h.link_to(_('Back to catalog'), url(controller="books", action="index"), class
                           url(controller="books",
                           action="catalog",
                           books_department = c.book.department.name,
-                          books_type_name = c.book.type.name))}
+                          books_type_name = c.book.type.url_name))}
          &gt; ${h.link_to(c.book.science_type.name,
                           url(controller="books",
                           action="catalog",
                           books_department = c.book.department.name,
-                          books_type_name = c.book.type.name,
+                          books_type_name = c.book.type.url_name,
                           science_type_id = c.book.science_type.id))}
       %endif
     </span>

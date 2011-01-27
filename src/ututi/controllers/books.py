@@ -421,7 +421,7 @@ class BooksController(HomeController, BaseController):
         c.url_params = {}
         c.books_type = None
         if books_type_name is not None:
-            c.books_type = meta.Session.query(BookType).filter(BookType.name==books_type_name).one()
+            c.books_type = meta.Session.query(BookType).filter(BookType.url_name==books_type_name).one()
             c.url_params['books_type_name'] = books_type_name
 
         c.school_grades = None

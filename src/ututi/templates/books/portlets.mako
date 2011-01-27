@@ -7,7 +7,7 @@
     <li>${h.link_to(book_type.name,
                     url(controller="books",
                         action="catalog",
-                        books_type_name=book_type.name,
+                        books_type_name=book_type.url_name,
                         books_department=books_department)
           )}
     </li>

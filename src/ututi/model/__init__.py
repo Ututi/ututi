@@ -2467,8 +2467,9 @@ class ScienceType(object):
 
 class BookType(object):
     """Class for representing types of book, like test, literature, etc."""
-    def __init__(self, name):
+    def __init__(self, name, url_name):
         self.name = name
+        self.url_name = url_name
 
     def get(cls, id):
         book_type = meta.Session.query(cls)

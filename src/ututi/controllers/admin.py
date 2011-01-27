@@ -21,6 +21,7 @@ from formencode.validators import Constant
 from formencode.validators import DateConverter
 from formencode.validators import OneOf
 from formencode.validators import String
+from formencode.validators import Regex
 
 from babel.dates import parse_date
 from babel.dates import format_date
@@ -108,11 +109,12 @@ class SchoolGradeForm(Schema):
 class ScienceTypeForm(Schema):
     allow_extra_fields = True
     name = String(min=3)
-    department = BookDepartmentValidator(not_empty = True)
+    department = BookDepartmentValidator(not_empty=True)
 
 class BookTypeForm(Schema):
     allow_extra_fields = True
     name = String(min=1)
+    url_name = Regex(r'^[a-z-]+$', not_empty=True)
 
 
 class AdminController(BaseController):
@@ -654,7 +656,8 @@ class AdminController(BaseController):
     @validate(schema=BookTypeForm, form='book_types')
     def create_book_type(self):
         if hasattr(self, 'form_result'):
-            book_type = BookType(name=self.form_result['name'])
+            book_type = BookType(name=self.form_result['name'],
+                                 url_name=self.form_result['url_name'])
             meta.Session.add(book_type)
             meta.Session.commit()
         redirect(url(controller="admin", action="book_types"))
@@ -668,7 +671,8 @@ class AdminController(BaseController):
         c.book_type = meta.Session.query(BookType).filter(BookType.id == id).one()
         defaults = {
             'id': c.book_type.id,
-            'name': c.book_type.name}
+            'name': c.book_type.name,
+            'url_name': c.book_type.url_name}
         return htmlfill.render(self._edit_book_type_form(), defaults)
 
     @ActionProtector("root")
@@ -677,6 +681,7 @@ class AdminController(BaseController):
         book_type = meta.Session.query(BookType).filter(BookType.id == id).one()
         if hasattr(self, 'form_result'):
             book_type.name = self.form_result['name']
+            book_type.url_name = self.form_result['url_name']
             meta.Session.commit()
         redirect(url(controller="admin", action="book_types"))
 
