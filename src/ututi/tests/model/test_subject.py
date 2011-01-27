@@ -59,7 +59,7 @@ def test_subject_create():
 
         >>> s.description = u'New description'
         >>> meta.Session.commit()
-        >>> evt = meta.Session.query(Event).filter(Event.context == s).all()
+        >>> evt = meta.Session.query(Event).filter(Event.context == s).order_by(Event.created.asc()).all()
         >>> [e.render() for e in evt]
         [u'New subject ... was created', u'Subject ... was modified']
 

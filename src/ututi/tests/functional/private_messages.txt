@@ -44,7 +44,7 @@ The other user should have received the message
 
 There are no unread messages any more:
 
-    >>> browser2.getLink('Start').click()
+    >>> browser2.getLink('Home').click()
     >>> browser2.printQuery("id('inbox-link')")
     <a id="inbox-link" href="/messages">inbox</a>
 
