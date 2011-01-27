@@ -1,7 +1,10 @@
 import doctest
 
+from ututi.model import PageVersion
+from ututi.model import Page
 from ututi.model import meta, Subject, LocationTag
 from ututi.model.events import Event
+from ututi.model.events import PageModifiedEvent
 from ututi.model.events import SubjectModifiedEvent
 from ututi.tests import UtutiLayer
 
@@ -33,6 +36,27 @@ def test_grouping_subject_events():
         >>> events = meta.Session.query(SubjectModifiedEvent).all()
         >>> [(e.id, e.event_type, [c.id for c in e.children]) for e in events]
         [(3L, 'subject_modified', [1L, 2L]), (2L, 'subject_modified', [])]
+
+def test_grouping_page_events():
+    r"""Test grouping of page events
+
+        >>> res = meta.Session.execute("SET ututi.active_user TO 1")
+        >>> s = Subject('some_id', u'Subject title', LocationTag.get([u'vu']))
+        >>> meta.Session.add(s)
+        >>> page = Page(u'Some coursework', u'Some information about it.')
+        >>> s.pages.append(page)
+        >>> meta.Session.commit()
+
+    Let's update the page:
+        >>> res = meta.Session.execute("SET ututi.active_user TO 1")
+        >>> version = PageVersion(u'Some coursework (updated)',
+        ...                       u'Some more information about it.')
+        >>> page.versions.append(version)
+        >>> meta.Session.commit()
+
+        >>> events = meta.Session.query(PageModifiedEvent).all()
+        >>> [(e.id, e.event_type, [c.id for c in e.children]) for e in events]
+        [(3L, 'page_modified', [2L])]
 
     """
 
