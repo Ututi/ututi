@@ -615,7 +615,7 @@ class AdminController(BaseController):
 
     @ActionProtector("root")
     def _edit_science_type_form(self):
-        c.book_departments = [('', '')] + [(d.name, d.title) for d in Department.values()]
+        c.book_departments = [(d.name, d.title) for d in Department.values()]
         return render('admin/science_type_edit.mako')
 
     @ActionProtector("root")
@@ -624,7 +624,7 @@ class AdminController(BaseController):
         defaults = {
             'id': c.science_type.id,
             'name': c.science_type.name,
-            'department': c.science_type.book_department_id}
+            'department': Department.get(c.science_type.book_department_id).name}
         return htmlfill.render(self._edit_science_type_form(), defaults)
 
     @ActionProtector("root")
