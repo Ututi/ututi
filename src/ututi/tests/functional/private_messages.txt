@@ -86,7 +86,7 @@ swoop.  Let's add a message:
 
 There's one unread message:
 
-    >>> browser.getLink('Start').click()
+    >>> browser.reload()
     >>> browser.printQuery("id('inbox-link')")
     <a id="inbox-link" href="/messages">
       <strong>inbox (1)</strong>
@@ -99,7 +99,7 @@ We can mark it as read:
 
 There are no unread messages now:
 
-    >>> browser.getLink('Start').click()
+    >>> browser.reload()
     >>> browser.printQuery("id('inbox-link')")
     <a id="inbox-link" href="/messages">inbox</a>
 
