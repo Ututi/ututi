@@ -5,12 +5,3 @@ msgid ""
 msgstr ""
 "Kalendarium. Zapoznaj się z <a href=\"http://blog.ututi.pl/2010/10"
 "/grupowy-planer-na-ututi-prosze-bardzo/\">blog post</a>."
-
-# (pofilter) printf: checks whether printf format strings match
-#, python-format
-msgid ""
-"%(user_link)s has sent %(recipient_link)s a private message "
-"\"%(msg_link)s\"."
-msgstr ""
-"%(user_link) s wysłał %(recipient_link)s prywatną wiadomość  "
-"\"%(msg_link)s \"."
