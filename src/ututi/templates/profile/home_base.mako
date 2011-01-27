@@ -12,11 +12,11 @@ ${parent.head_tags()}
 <%newlocationtag:head_tags />
 </%def>
 
-${tabs()}
-
 %if hasattr(self, 'pagetitle'):
   <h1 class="pageTitle">${self.pagetitle()}</h1>
 %endif
+
+${tabs()}
 
 <%def name="phone_confirmed()">
 <div id="phone_confirmed">
