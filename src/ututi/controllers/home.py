@@ -459,7 +459,7 @@ class HomeController(UniversityListMixin, FederationMixin):
                 redirect(url(controller='profile', action='index'))
             else:
                 defaults={'recovery_key': key}
-
+            c.key = key
             return htmlfill.render(self._pswreset_form(), defaults=defaults)
         except NoResultFound:
             abort(404)

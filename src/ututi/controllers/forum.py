@@ -213,6 +213,8 @@ class ForumController(BaseController):
     @thread_action
     @protect_view
     def thread(self, id, category_id, thread_id):
+        c.thread_id = thread_id
+        c.category_id = category_id
         c.can_manage_post = self.can_manage_post
         forum_posts = meta.Session.query(ForumPost)\
             .filter_by(category_id=category_id,
@@ -259,6 +261,7 @@ class ForumController(BaseController):
     @category_action
     @ActionProtector("user")
     def new_thread(self, id, category_id):
+        c.category_id = category_id
         return htmlfill.render(self._new_thread_form())
 
     def _new_category_form(self):

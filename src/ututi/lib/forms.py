@@ -1,12 +1,9 @@
 import logging
 from decorator import decorator
 
-from webob import UnicodeMultiDict
 import formencode
 from formencode import htmlfill, variabledecode
 
-from pylons.decorators import encode_formencode_errors
-from pylons.decorators import determine_response_charset
 from pylons.decorators import PylonsFormEncodeState
 
 from ututi.lib.validators import u_error_formatter
@@ -90,7 +87,6 @@ def validate(schema=None, validators=None, form=None, variable_decode=False,
         else:
             params = request.params
 
-        is_unicode_params = isinstance(params, UnicodeMultiDict)
         params = params.mixed()
         if variable_decode:
             log.debug("Running variable_decode on params")
@@ -120,7 +116,7 @@ def validate(schema=None, validators=None, form=None, variable_decode=False,
             log.debug("Errors found in validation, parsing form with htmlfill "
                       "for errors")
             request.environ['REQUEST_METHOD'] = 'GET'
-            self._py_object.c.form_errors = errors
+            self._py_object.tmpl_context.form_errors = errors
 
             # If there's no form supplied, just continue with the current
             # function call.
@@ -141,30 +137,6 @@ def validate(schema=None, validators=None, form=None, variable_decode=False,
             # If the form_content is an exception response, return it
             if hasattr(form_content, '_exception'):
                 return form_content
-
-            # Ensure htmlfill can safely combine the form_content, params and
-            # errors variables (that they're all of the same string type)
-            if not is_unicode_params:
-                log.debug("Raw string form params: ensuring the '%s' form and "
-                          "FormEncode errors are converted to raw strings for "
-                          "htmlfill", form)
-                encoding = determine_response_charset(response)
-
-                # WSGIResponse's content may (unlikely) be unicode
-                if isinstance(form_content, unicode):
-                    form_content = form_content.encode(encoding,
-                                                       response.errors)
-
-                # FormEncode>=0.7 errors are unicode (due to being localized
-                # via ugettext). Convert any of the possible formencode
-                # unpack_errors formats to contain raw strings
-                errors = encode_formencode_errors(errors, encoding,
-                                                  response.errors)
-            elif not isinstance(form_content, unicode):
-                log.debug("Unicode form params: ensuring the '%s' form is "
-                          "converted to unicode for htmlfill", form)
-                encoding = determine_response_charset(response)
-                form_content = form_content.decode(encoding)
 
             if ignore_request:
                 params = {}
