@@ -912,6 +912,7 @@ CREATE FUNCTION subject_event_trigger() RETURNS trigger AS $$
       ELSE
          SELECT id INTO pid FROM events e WHERE e.event_type in ('subject_modified', 'subject_created')
              AND e.object_id = NEW.id
+             AND e.author_id = cast(current_setting('ututi.active_user') as int8)
              AND now() AT time zone 'UTC' - e.created < interval '15 minutes'
              AND e.parent_id IS NULL
              ORDER BY e.created DESC
