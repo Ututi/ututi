@@ -1030,15 +1030,15 @@ ul.feature-list {
 
   #dashboard_action_links #send_message {
     padding-left: 20px;
-    background: url("../img/icons/message-off-very-small.png") left center no-repeat;
+    background: transparent url("../img/icons/message-off-very-small.png") left center no-repeat;
   }
   #dashboard_action_links #upload_file {
     padding-left: 20px;
-    background: url("../img/icons/files_13.png") left center no-repeat;
+    background: transparent url("../img/icons/files_13.png") left center no-repeat;
   }
   #dashboard_action_links #create_wiki {
     padding-left: 20px;
-    background: url("../img/icons/pages_13.png") left center no-repeat;
+    background: transparent url("../img/icons/pages_13.png") left center no-repeat;
   }
 
   #upload-failed-error-message { display: none; }
