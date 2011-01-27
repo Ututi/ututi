@@ -55,8 +55,8 @@
               </div>
           %endif
       %endfor
-      <br class="clear-left" />
       </div>
+      <br class="clear-left" />
     </div>
     <ul class="uni-info universityMembersInfo">
      <li>

@@ -14,6 +14,7 @@
 <div id="sidebar">
   ${subject_info_portlet(c.subject)}
   ${subject_similar_subjects_portlet()}
+  ${ubooks_portlet()}
 </div>
 </%def>
 

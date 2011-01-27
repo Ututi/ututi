@@ -13,7 +13,7 @@ import ututi.lib.helpers as h
 from ututi.lib.base import render
 from ututi.lib.validators import LocationIdValidator, ShortTitleValidator, FileUploadTypeValidator, validate
 from ututi.lib.wall import WallMixin
-from ututi.model import Subject
+from ututi.model import Subject, Group
 from ututi.model import LocationTag, meta
 from ututi.controllers.home import UniversityListMixin
 from ututi.controllers.search import SearchSubmit, SearchBaseController
@@ -64,12 +64,17 @@ class StructureviewWallMixin(WallMixin):
     def _wall_events_query(self):
         """WallMixin implementation."""
 
-        children = [child.id for child in c.location.flatten]
-        subj_events = meta.Session.query(Event)\
-            .join((Subject, Event.object_id == Subject.id))\
-            .filter(Subject.location_id.in_(children))
+        locations = [loc.id for loc in c.location.flatten]
+        subjects = meta.Session.query(Subject)\
+            .filter(Subject.location_id.in_(locations))\
+            .all()
+        public_groups = meta.Session.query(Group)\
+            .filter(Group.location_id.in_(locations))\
+            .filter(Group.forum_is_public == True)\
+            .all()
+        ids = [obj.id for obj in subjects + public_groups]
 
-        return subj_events
+        return meta.Session.query(Event).filter(Event.object_id.in_(ids))
 
 
 class StructureviewController(SearchBaseController, UniversityListMixin, StructureviewWallMixin):

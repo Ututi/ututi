@@ -6,6 +6,7 @@
                                                 group_members_portlet"/>
 <%namespace file="/portlets/universal.mako" import="quick_file_upload_portlet"/>
 <%namespace file="/portlets/facebook.mako" import="facebook_likebox_portlet"/>
+<%namespace file="/portlets/banners/base.mako" import="ubooks_portlet"/>
 
 <%def name="teacher_sidebar(exclude=[])">
 <div id="sidebar">
@@ -55,6 +56,9 @@
     %if not 'sms' in exclude and c.group.is_member(c.user):
       ${group_sms_portlet()}
     %endif
+    <div style="padding-top: 1em">
+      ${ubooks_portlet()}
+    </div>
   %else:
     ${group_members_portlet()}
     ${user_support_portlet()}

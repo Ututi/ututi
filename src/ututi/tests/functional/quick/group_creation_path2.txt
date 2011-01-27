@@ -27,9 +27,7 @@ The screen will suggest watching subjects:
     >>> browser.printQuery('//h2/text()')
     Invite group members!
     Watch subjects you are studying!
-    <BLANKLINE>
-    Another test group
-    Send SMS message to group
+    ...
 
 Let's have a look at the settings:
 

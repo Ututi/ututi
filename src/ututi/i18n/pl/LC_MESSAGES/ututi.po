@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2011-01-26 09:25+0200\n"
+"PO-Revision-Date: 2011-01-26 19:26+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -687,9 +687,6 @@ msgstr "Profil tego użytkownika nie jest publiczny"
 msgid "The recipient is not specified."
 msgstr "Odbiorca  został nie określony."
 
-msgid "Invalid subject"
-msgstr "Nieprawidłowy temat"
-
 msgid "Wiki page created."
 msgstr "Wiki strona została utworzona"
 
@@ -747,6 +744,9 @@ msgstr "Informacje o Twojej uczelni zostały zaktualizowane."
 
 msgid "Home"
 msgstr "Home"
+
+msgid "My subjects"
+msgstr ""
 
 msgid "I like it"
 msgstr "I like it"
@@ -966,6 +966,9 @@ msgstr "Taki kod już istnieje, wybierz inny."
 
 msgid "Such a coupon code does not exist."
 msgstr "Taki kod nie istnieje."
+
+msgid "Invalid subject"
+msgstr "Nieprawidłowy temat"
 
 #, python-format
 msgid "unlimited group private files for %(day_count)d day"
@@ -2232,6 +2235,9 @@ msgstr "Książki dla studentów"
 msgid "Other"
 msgstr "Inne"
 
+msgid "Our friends"
+msgstr ""
+
 msgid "Search-btn"
 msgstr "Szukaj"
 
@@ -3317,9 +3323,6 @@ msgstr "Wiadomość do grupy"
 msgid "Start"
 msgstr "Start"
 
-msgid "News wall"
-msgstr "Tablica"
-
 msgid "Inbox"
 msgstr "Skrzynka odbiorcza"
 
@@ -3748,6 +3751,17 @@ msgstr "http://blog.ututi.pl"
 msgid "Read our blog"
 msgstr "Czytaj nasz blog"
 
+msgid "Ututi recommends"
+msgstr ""
+
+msgid "Virtual book market"
+msgstr ""
+
+msgid ""
+"Here you can buy study material cheaply or find a new owner for your good"
+" old textbook."
+msgstr ""
+
 msgid "Add a student group"
 msgstr "Dodaj grupę studencką"
 
@@ -3874,68 +3888,11 @@ msgstr "Wpisz ponownie nowe hasło"
 msgid "Edit a student group"
 msgstr "Edytuj grupę studencką"
 
-msgid "What's new?"
-msgstr "Powiadomienia"
-
-msgid "Wall settings"
-msgstr "Ustawienia strony"
+msgid "News feed settings"
+msgstr ""
 
 msgid "Your phone has been confirmed. Thank you."
 msgstr "Twój numer telefonu został potwierdzony. Dziękujemy."
-
-msgid "create group"
-msgstr "utwórz grupę"
-
-msgid "Write message"
-msgstr "Napisz wiadomość"
-
-msgid "Group messages"
-msgstr "Wiadomości grupy"
-
-msgid "Group forum"
-msgstr "Forum grupy"
-
-msgid "Group subjects"
-msgstr "Przedmioty grupy"
-
-msgid "Group files"
-msgstr "Pliki grupy"
-
-msgid ""
-"It's simple - you only need to know the email addresses of your "
-"classmates!"
-msgstr "To proste - musisz jedynie znać adresy e-mail kolegów z grupy!"
-
-msgid "Use the group's mailing list!"
-msgstr "Skorzystaj z listy mailingowej grupy!"
-
-msgid "no, thanks"
-msgstr "nie, dzięki"
-
-msgid "notification settings"
-msgstr "ustawienia powiadomień"
-
-msgid "add subject"
-msgstr "dodaj przedmiot"
-
-msgid "Tell us where you are studying"
-msgstr "Podaj nazwę swojej uczelni"
-
-msgid "Show subjects from my groups"
-msgstr "Pokaż przedmioty moich grup"
-
-msgid ""
-"Ututi is Your university online. Here You and Your class mates can create"
-" your group online, use the mailing list for communication and the file "
-"storage for sharing information."
-msgstr ""
-"Ututi – to wirtualna przestrzeń komunikacyjna dla studentów. Służy do "
-"wygodnej i szybkiej wymiany informacji pomiędzy członkami grup "
-"akademickich, udostępnia platformę do komunikacji, zwłaszcza do wymiany "
-"notatek i materiałów naukowych."
-
-msgid "Share your thoughts about Ututi"
-msgstr "Podziel się myślami o Ututi"
 
 msgid "save"
 msgstr "zachowaj"
@@ -3961,6 +3918,9 @@ msgstr "Wprowadzony numer telefonu nie jest poprawny."
 msgid "(use the format +37067812345)"
 msgstr "(korzystaj z formatu +48123456789)"
 
+msgid "no, thanks"
+msgstr "nie, dzięki"
+
 msgid "Please confirm your phone number"
 msgstr "Potwierdź, proszę, Twój numer telefonu"
 
@@ -3985,6 +3945,38 @@ msgstr "Obserwuj przedmiot"
 
 msgid "watch subjects"
 msgstr "obserwuj przedmioty"
+
+msgid ""
+"It's simple - you only need to know the email addresses of your "
+"classmates!"
+msgstr "To proste - musisz jedynie znać adresy e-mail kolegów z grupy!"
+
+msgid "Use the group's mailing list!"
+msgstr "Skorzystaj z listy mailingowej grupy!"
+
+msgid "create group"
+msgstr "utwórz grupę"
+
+msgid "Tell us where you are studying"
+msgstr "Podaj nazwę swojej uczelni"
+
+msgid ""
+"Ututi is Your university online.Here You and Your class mates can create "
+"your group online, use the mailing list for communication and the file "
+"storage for sharing information."
+msgstr ""
+
+msgid "Share your thoughts about Ututi"
+msgstr "Podziel się myślami o Ututi"
+
+msgid "notification settings"
+msgstr "ustawienia powiadomień"
+
+msgid "add subject"
+msgstr "dodaj przedmiot"
+
+msgid "Show subjects from my groups"
+msgstr "Pokaż przedmioty moich grup"
 
 msgid "Very sad..."
 msgstr "Szkoda..."
@@ -4204,8 +4196,8 @@ msgstr "Zmoderowane posty"
 msgid "New groups"
 msgstr "Nowe grupy"
 
-msgid "Which events do You want to see on Your wall?"
-msgstr "Jakie wydarzenia chcesz zobaczyć na swojej tablicy?"
+msgid "Which events do You want to see in Your news feed?"
+msgstr ""
 
 msgid "Add a subject"
 msgstr "Dodaj przedmiot"
@@ -4399,6 +4391,21 @@ msgstr ""
 
 msgid "I teach this"
 msgstr "Uczę tego"
+
+msgid "Write message"
+msgstr "Napisz wiadomość"
+
+msgid "Group messages"
+msgstr "Wiadomości grupy"
+
+msgid "Group forum"
+msgstr "Forum grupy"
+
+msgid "Group subjects"
+msgstr "Przedmioty grupy"
+
+msgid "Group files"
+msgstr "Pliki grupy"
 
 msgid "Edit group"
 msgstr "Edytuj grupę"
@@ -4658,128 +4665,6 @@ msgid ""
 msgstr ""
 "%(user_link)s modyfikował stronę %(page_link)s w przedmiocie "
 "%(subject_link)s"
-
-msgid "More"
-msgstr "Więcej"
-
-#, python-format
-msgid "%(user_link)s has uploaded a new file in the subject %(subject_link)s."
-msgstr "%(user_link)s  dodał nowy plik do przedmiotu %(subject_link)s."
-
-#, python-format
-msgid ""
-"%(user_link)s has created a new folder %(folder_name)s in the subject "
-"%(subject_link)s."
-msgstr ""
-"%(user_link)s  stworzył nowy folder %(folder_name)s w przedmiocie "
-"%(subject_link)s"
-
-#, python-format
-msgid "%(user_link)s has uploaded a new file in the group %(group_link)s."
-msgstr "%(user_link)s  dodał nowy plik do grupy %(group_link)s."
-
-#, python-format
-msgid ""
-"%(user_link)s has created a new folder %(folder_name)s in the group "
-"%(group_link)s."
-msgstr ""
-"%(user_link)s stworzył nowy folder %(folder_name)s w grupie "
-"%(group_link)s."
-
-#, python-format
-msgid "%(user_link)s has edited the subject %(subject_link)s."
-msgstr "%(user_link)s edytował przedmiot %(subject_link)s."
-
-#, python-format
-msgid "%(user_link)s has created the subject %(subject_link)s."
-msgstr "%(user_link)s stworzył przedmiot %(subject_link)s."
-
-#, python-format
-msgid "%(user_link)s has created the group %(subject_link)s."
-msgstr "%(user_link)s stworzył grupę %(subject_link)s."
-
-#, python-format
-msgid ""
-"%(user_link)s has posted a new message %(message_link)s to the group "
-"%(group_link)s."
-msgstr ""
-"%(user_link)s opublikował nową wiadomość %(message_link)s do grupy "
-"%(group_link)s."
-
-#, python-format
-msgid "Teacher %(user_link)s sent a message to the group %(group_link)s."
-msgstr "Wykładowca %(user_link)s wysłał wiadomość do grupy %(group_link)s."
-
-#, python-format
-msgid ""
-"%(user_link)s has posted a new message %(message_link)s to the group's "
-"%(group_link)s moderation queue."
-msgstr ""
-"Nowa wiadomość %(message_link)s w kolejce do moderacji w grupie "
-"%(group_link)s dodana przez użytkownika %(user_link)s "
-
-msgid "Moderate"
-msgstr "Moderuj"
-
-#, python-format
-msgid ""
-"%(user_link)s has posted a new message %(message_link)s in the forum "
-"%(group_link)s."
-msgstr ""
-"%(user_link)s opublikował nową wiadomość %(message_link)s na forum "
-"%(group_link)s."
-
-#, python-format
-msgid "%(user_link)s has sent an sms to the group %(group_link)s."
-msgstr "%(user_link)s  wysłał wiadomość sms do grupy %(group_link)s."
-
-#, python-format
-msgid "%(user_link)s has sent you a private message \"%(msg_link)s\"."
-msgstr "%(user_link)s wysłał(-a) wiadomość prywatną  \"%(msg_link)s\"."
-
-#, python-format
-msgid ""
-"%(user_link)s has sent %(recipient_link)s a private message "
-"\"%(msg_link)s\"."
-msgstr ""
-"%(user_link) s wysłał %(recipient_link)s prywatną wiadomość  "
-"\"%(msg_link)s \"."
-
-#, python-format
-msgid "%(user_link)s joined the group %(group_link)s."
-msgstr "%(user_link)s dołączył(-a) do grupy %(group_link)s."
-
-#, python-format
-msgid "%(user_link)s left the group %(group_link)s."
-msgstr "%(user_link)s opuścił(-a) grupę %(group_link)s."
-
-#, python-format
-msgid ""
-"The group %(group_link)s has started watching the subject "
-"%(subject_link)s."
-msgstr "Grupa %(group_link)s dodała do obserwowanych przedmiot  %(subject_link)s."
-
-#, python-format
-msgid ""
-"The group %(group_link)s has stopped watching the subject "
-"%(subject_link)s."
-msgstr "Grupa %(group_link)s przestała obserwować przedmiot %(subject_link)s."
-
-#, python-format
-msgid ""
-"%(user_link)s has created a page %(page_link)s in the subject "
-"%(subject_link)s."
-msgstr ""
-"%(user_link)s stworzył stronę %(page_link)s w przedmiocie "
-"%(subject_link)s."
-
-#, python-format
-msgid ""
-"%(user_link)s has modified a page %(page_link)s in the subject "
-"%(subject_link)s."
-msgstr ""
-"%(user_link)s zmodyfikował stronę %(page_link)s w przedmiociet "
-"%(subject_link)s."
 
 msgid "Region"
 msgstr "Region"

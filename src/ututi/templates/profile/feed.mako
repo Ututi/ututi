@@ -17,22 +17,21 @@
 
 <%def name="css()">
   ${actions.css()}
-  /* Align page title and wall settings link in this page. */
-  .wall .pageTitle {
-      display: inline;
-  }
   .wall a#settings-link {
-      margin-top: 10px;
+      margin-top: -5px;
+      display: block;
       font-size: 11px;
-      float: right;
+      text-align: right;
   }
 
 </%def>
 
-<a id="settings-link" href="${url(controller='profile', action='wall_settings')}">${_('News feed settings')}</a>
 %if not c.user.is_teacher:
   ${self.homepage_nags_and_stuff()}
 %endif
 
 ${actions.action_block(c.msg_recipients, c.file_recipients, c.wiki_recipients)}
+
+<a id="settings-link" href="${url(controller='profile', action='wall_settings')}">${_('News feed settings')}</a>
+
 ${wall.wall_entries(c.events)}
