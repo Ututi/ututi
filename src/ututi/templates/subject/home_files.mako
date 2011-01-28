@@ -1,10 +1,10 @@
-<%inherit file="/subject/home.mako" />
-<%namespace file="/sections/content_snippets.mako" import="*"/>
+<%inherit file="/subject/home_base.mako" />
 <%namespace name="files" file="/sections/files.mako" />
+<%namespace file="/sections/content_snippets.mako" import="tabs"/>
 
-<% blank_subject = not c.subject.n_files(False) and not c.subject.pages %>
+${tabs()}
 
-%if not c.subject.n_files(False) and not blank_subject:
+<%def name="upload_files_nag()">
 <%self:rounded_block class_='subject-intro-block' id="subject-intro-block-files">
   <h2 style="margin-top: 5px">${_('Upload study material')}</h2>
   <p>${_('You may upload course notes, solutions, examples, and everything else that does not violate copyright.')}</p>
@@ -24,6 +24,10 @@
     ${h.button_to(_('Upload files'), "", id='upload-files-button')}
   </ul>
 </%self:rounded_block>
+</%def>
+
+%if not c.subject.n_files(False):
+  ${upload_files_nag()}
 %endif
 
 <div id="file-browser" ${"style='display: none'" if not c.subject.n_files(False) else ''}>

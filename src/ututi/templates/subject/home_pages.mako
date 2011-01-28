@@ -1,9 +1,33 @@
-<%inherit file="/subject/home.mako" />
-<%namespace file="/sections/content_snippets.mako" import="*"/>
+<%inherit file="/subject/home_base.mako" />
 <%namespace name="files" file="/sections/files.mako" />
+<%namespace file="/sections/content_snippets.mako" import="tabs, tooltip"/>
+
+${tabs()}
 
 <%def name="css()">
 div.wiki-tekstas, div.wiki-tekstas-last {background-color: white;}
+</%def>
+
+<%def name="create_wiki_nag()">
+<div id="page-intro">
+<%self:rounded_block class_='subject-intro-block' id="subject-intro-block-pages">
+  <h2 style="margin-top: 5px">${_('Create wiki documents')}</h2>
+  <p>
+    ${_('Collecting course notes in Word? Writing things down on a computer during lectures? You can store your notes here, where they can be read and edited by your classmates.')}
+  </p>
+  <h2>${_('What can be a wiki document?')}</h2>
+  <ul class="subject-intro-message">
+    <li>${_('Shared course notes')}</li>
+    <li>${_('Personal course notes written down during a lecture')}</li>
+    <li>${_('Any text that you want to collaborate on with your classmates')}</li>
+  </ul>
+
+  <div style="margin-top: 10px; margin-left: 20px">
+    ${h.button_to(_('Create a wiki document'), url(controller='subjectpage', action='add', id=c.subject.subject_id, tags=c.subject.location_path),
+              method='GET')}
+  </div>
+</%self:rounded_block>
+</div>
 </%def>
 
 %if c.subject.n_pages():
@@ -54,27 +78,5 @@ div.wiki-tekstas, div.wiki-tekstas-last {background-color: white;}
   </%self:rounded_block>
 
 %else:
-
-    <div id="page-intro" ${"style='display: none'" if blank_subject else ''}>
-
-  <%self:rounded_block class_='subject-intro-block' id="subject-intro-block-pages">
-    <h2 style="margin-top: 5px">${_('Create wiki documents')}</h2>
-    <p>
-      ${_('Collecting course notes in Word? Writing things down on a computer during lectures? You can store your notes here, where they can be read and edited by your classmates.')}
-    </p>
-    <h2>${_('What can be a wiki document?')}</h2>
-    <ul class="subject-intro-message">
-      <li>${_('Shared course notes')}</li>
-      <li>${_('Personal course notes written down during a lecture')}</li>
-      <li>${_('Any text that you want to collaborate on with your classmates')}</li>
-    </ul>
-
-    <div style="margin-top: 10px; margin-left: 20px">
-      ${h.button_to(_('Create a wiki document'), url(controller='subjectpage', action='add', id=c.subject.subject_id, tags=c.subject.location_path),
-                method='GET')}
-    </div>
-  </%self:rounded_block>
-
-</div>
-
+  ${create_wiki_nag()}
 %endif

@@ -43,8 +43,8 @@ def subject_menu_items():
          'name': 'feed',
          'link': c.subject.url(action='feed')},
         {'title': _("Files"),
-         'name': 'home',
-         'link': c.subject.url(action='home')},
+         'name': 'files',
+         'link': c.subject.url(action='files')},
         {'title': _("Wiki notes"),
          'name': 'pages',
          'link': c.subject.url(action='pages')}]
@@ -74,6 +74,7 @@ def subject_action(method):
         c.subject = subject
         c.similar_subjects = find_similar_subjects(subject)
         c.tabs = subject_menu_items()
+        c.breadcrumbs = [{'link': subject.url(), 'title': subject.title}]
         return method(self, subject)
     return _subject_action
 
@@ -166,37 +167,35 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
 
     @subject_action
     def home(self, subject):
-        c.current_tab = 'home'
+        blank_subject = not subject.pages and not subject.n_files(include_deleted=False)
+        if not (subject.description or blank_subject):
+            redirect(subject.url(action='feed'))
+        c.current_tab = 'info'
+        return render('subject/info.mako')
+
+    @subject_action
+    def info(self, subject):
+        c.current_tab = 'info'
+        return render('subject/info.mako')
+
+    @subject_action
+    def files(self, subject):
+        c.current_tab = 'files'
         file_id = request.GET.get('serve_file')
         file = File.get(file_id)
         c.serve_file = file
-        c.breadcrumbs = [{'link': subject.url(),
-                          'title': subject.title}]
         return render('subject/home_files.mako')
 
     @subject_action
     def pages(self, subject):
         c.current_tab = 'pages'
-        c.breadcrumbs = [{'link': subject.url(),
-                          'title': subject.title}]
-        if  not c.subject.n_files(include_deleted=False) and not c.subject.pages:
-            redirect(subject.url(action= 'home'))
         return render('subject/home_pages.mako')
 
     @subject_action
     def feed(self, subject):
         c.current_tab = 'feed'
         self._set_wall_variables()
-        c.breadcrumbs = [{'link': subject.url(),
-                          'title': subject.title}]
         return render('subject/feed.mako')
-
-    @subject_action
-    def info(self, subject):
-        c.current_tab = 'info'
-        c.breadcrumbs = [{'link': subject.url(),
-                          'title': subject.title}]
-        return render('subject/info.mako')
 
     def _add_form(self):
         return render('subject/add.mako')
@@ -276,9 +275,6 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
     @subject_action
     @ActionProtector("user")
     def edit(self, subject):
-        c.breadcrumbs = [{'link': c.subject.url(),
-                          'title': c.subject.title}]
-
         defaults = {
             'id': subject.subject_id,
             'old_location': '/'.join(subject.location.path),
