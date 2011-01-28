@@ -137,7 +137,7 @@ You can import more subjects using the admin interface.
     Matematin&#279; analiz&#279;
 
     >>> browser.getLink('Imported subject').click()
-    >>> browser.queryHTML("id('subject_description')//div[@class='block-content']/text()")
+    >>> browser.queryHTML("id('subject_description')//div[contains(@class, 'block-content')]/text()")
     ['Description of the subject']
 
     >>> browser.printQuery("id('subject_info_portlet-content')//h2/text()")
