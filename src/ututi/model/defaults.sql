@@ -11,6 +11,7 @@ insert into admin_users (email, fullname, password) values ('admin@ututi.lt', 'A
 create table users (
        id bigserial not null,
        fullname varchar(100),
+       username varchar(320) not null,
        password char(36),
        site_url varchar(200) default null,
        description text default null,
@@ -60,7 +61,7 @@ create table emails (id int8 not null references users(id),
        email varchar(320),
        confirmed boolean default FALSE,
        confirmation_key char(32) default '',
-       primary key (email));;
+       primary key (id, email));;
 
 
 CREATE FUNCTION lowercase_email() RETURNS trigger AS $lowercase_email$
@@ -73,12 +74,6 @@ $lowercase_email$ LANGUAGE plpgsql;;
 
 CREATE TRIGGER lowercase_email BEFORE INSERT OR UPDATE ON emails
     FOR EACH ROW EXECUTE PROCEDURE lowercase_email();;
-
-
-CREATE OR REPLACE FUNCTION get_users_by_email(email_address varchar) returns users AS $get_user_by_email$
-        select users.* from users join emails on users.id = emails.id
-                 where emails.email=lower($1)
-$get_user_by_email$ LANGUAGE sql;;
 
 /* user medals */
 create table user_medals (
@@ -191,7 +186,9 @@ CREATE TRIGGER tag_title_lowercase BEFORE INSERT OR UPDATE ON tags
 
 create unique index parent_title_unique_idx on tags(coalesce(parent_id, 0), title_short);;
 
-alter table users add column location_id int8 default null references tags(id) on delete set null;;
+alter table users add column location_id int8 not null references tags(id) on delete cascade;;
+alter table users add column is_local_admin bool not null default false;
+alter table users add constraint user_unique_pair unique (location_id, username);
 
 /* Add location field to the content item table */
 alter table content_items add column location_id int8 default null references tags(id) on delete set null;;
