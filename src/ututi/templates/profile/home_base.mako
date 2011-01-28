@@ -276,9 +276,9 @@ ${tabs()}
               attachment: {
                   name: 'Ututi - your university online',
                   description: (
-                      '${_("Ututi is Your university online."
-                           "Here You and Your class mates can create your group online,"
-                           " use the mailing list for communication and the file storage for sharing information.")}'
+                      '${_("Ututi is Your university online. "
+                           "Here You and Your class mates can create your group online, "
+                           "use the mailing list for communication and the file storage for sharing information.")}'
                   ),
                   href: '${url('/', qualified=True)}'
                },

@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2011-01-26 19:26+0200\n"
+"PO-Revision-Date: 2011-01-28 12:37+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -1699,8 +1699,17 @@ msgstr "Edycja"
 msgid "Name"
 msgstr "Nazwa"
 
+msgid "URL name"
+msgstr ""
+
+msgid "Use only lowercase letters 'a' to 'z' and a dash '-'"
+msgstr ""
+
 msgid "Edit"
 msgstr "Popraw"
+
+msgid "Actions"
+msgstr ""
 
 msgid "Book types"
 msgstr "Typ książki"
@@ -3320,12 +3329,6 @@ msgstr "Powrót do kolejki do moderacji"
 msgid "Message to the group"
 msgstr "Wiadomość do grupy"
 
-msgid "Start"
-msgstr "Start"
-
-msgid "Inbox"
-msgstr "Skrzynka odbiorcza"
-
 msgid "You can send a new message to a user from his or her public profile page."
 msgstr ""
 "Możesz wysłać nową wiadomość do użytkownika przez jego lub jej publiczną "
@@ -3961,8 +3964,8 @@ msgid "Tell us where you are studying"
 msgstr "Podaj nazwę swojej uczelni"
 
 msgid ""
-"Ututi is Your university online.Here You and Your class mates can create "
-"your group online, use the mailing list for communication and the file "
+"Ututi is Your university online. Here You and Your class mates can create"
+" your group online, use the mailing list for communication and the file "
 "storage for sharing information."
 msgstr ""
 

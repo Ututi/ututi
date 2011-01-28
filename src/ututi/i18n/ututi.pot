@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2011-01-26 19:26+0200\n"
+"POT-Creation-Date: 2011-01-28 12:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1540,7 +1540,16 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
+msgid "URL name"
+msgstr ""
+
+msgid "Use only lowercase letters 'a' to 'z' and a dash '-'"
+msgstr ""
+
 msgid "Edit"
+msgstr ""
+
+msgid "Actions"
 msgstr ""
 
 msgid "Book types"
@@ -2986,12 +2995,6 @@ msgstr ""
 msgid "Message to the group"
 msgstr ""
 
-msgid "Start"
-msgstr ""
-
-msgid "Inbox"
-msgstr ""
-
 msgid "You can send a new message to a user from his or her public profile page."
 msgstr ""
 
@@ -3577,9 +3580,9 @@ msgid "Tell us where you are studying"
 msgstr ""
 
 msgid ""
-"Ututi is Your university online.Here You and Your class mates can create your"
-" group online, use the mailing list for communication and the file storage "
-"for sharing information."
+"Ututi is Your university online. Here You and Your class mates can create "
+"your group online, use the mailing list for communication and the file "
+"storage for sharing information."
 msgstr ""
 
 msgid "Share your thoughts about Ututi"
