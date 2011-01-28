@@ -15,6 +15,7 @@ import pylons.test
 
 from nous.pylons.testing.browser import NousTestBrowser, NousTestApp
 
+from ututi.model import LocationTag
 from ututi.model import teardown_db_defaults
 from ututi.model import initialize_db_defaults
 from ututi.model import meta
@@ -73,6 +74,53 @@ class UtutiBaseLayer(LayerBase):
         meta.Session.rollback()
         meta.Session.remove()
 
+class UtutiQuickLayerBase(LayerBase):
+
+    def setUp(self):
+        teardown_db_defaults(meta.engine, quiet=True)
+        initialize_db_defaults(meta.engine)
+
+    def tearDown(self):
+        try:
+            shutil.rmtree(pylons.test.pylonsapp.config['files_path'])
+        except OSError:
+            pass
+        teardown_db_defaults(meta.engine)
+
+    def testSetUp(self):
+        config = pylons.test.pylonsapp.config
+        config['tpl_lang'] = 'lt'
+        mail_queue[:] = []
+        sms_queue[:] = []
+        gg.sent_messages[:] = []
+        try:
+            shutil.rmtree(config['files_path'])
+        except OSError:
+            pass
+        os.makedirs(config['files_path'])
+        # Keep random stable in tests
+        random.seed(123)
+
+    def testTearDown(self):
+        config = pylons.test.pylonsapp.config
+        if len(gg.sent_messages) > 0:
+            print >> sys.stderr, "\n===\nGG queue is NOT EMPTY!"
+
+        if len(mail_queue) > 0:
+            print >> sys.stderr, "\n===\nMail queue is NOT EMPTY!"
+
+        if len(sms_queue) > 0:
+            print >> sys.stderr, "\n===\nSMS queue is NOT EMPTY!"
+
+        shutil.rmtree(config['files_path'])
+
+        # XXX Tear down database here
+        meta.Session.execute("SET ututi.active_user TO 0")
+        meta.Session.close()
+
+        meta.Session.rollback()
+        meta.Session.remove()
+
 
 UtutiLayer = CompositeLayer(GrokLayer,
                             PylonsTestBrowserLayer('test.ini', conf_dir, meta),
@@ -84,6 +132,12 @@ UtutiErrorsLayer = CompositeLayer(GrokLayer,
                                   PylonsTestBrowserLayer('errors.ini', conf_dir, meta),
                                   UtutiBaseLayer(),
                                   name='UtutiErrorsLayer')
+
+
+UtutiQuickLayer = CompositeLayer(GrokLayer,
+                                 PylonsTestBrowserLayer('test.ini', conf_dir, meta),
+                                 UtutiQuickLayerBase(),
+                                 name='UtutiQuickLayer')
 
 
 class UtutiTestBrowser(NousTestBrowser):
@@ -137,12 +191,30 @@ class UtutiTestBrowser(NousTestBrowser):
 
         browser.app = NousTestApp(pylons.test.pylonsapp)
         res = browser.app.post("/login", params={'login': email, 'password': password})
+
+        if email == 'admin@ututi.lt' and password == 'asdasd':
+            browser.open('http://localhost/admin/login')
+            browser.getControl('Username').value = email
+            browser.getControl('Password').value = password
+            browser.getControl('Login').click()
+            res = browser.app.post("/admin/join_login", params={'login_username': email,
+                                                           'login_password': password})
+        browser.open('http://localhost')
         return browser
 
 
 def setUp(test):
     test.globs['app'] = NousTestApp(pylons.test.pylonsapp)
     test.globs['Browser'] = UtutiTestBrowser
+    # Common test setup, here for backwards compatibility only, will
+    # get removed or moved later
+    meta.Session.execute("insert into users (fullname, password) values ('Adminas Adminovix', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7')")
+    meta.Session.execute("insert into emails (id, email, confirmed) values (1, 'admin@ututi.lt', true)")
+
+    l = LocationTag(u'Vilniaus universitetas', u'vu', u'Seniausias universitetas Lietuvoje.')
+    f = LocationTag(u'Ekonomikos fakultetas', u'ef', u'', l)
+    meta.Session.add(l)
+    meta.Session.add(f)
 
 
 def tearDown(test):

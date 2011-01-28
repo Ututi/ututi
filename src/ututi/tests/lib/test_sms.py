@@ -1,5 +1,5 @@
 import doctest
-from ututi.tests import UtutiLayer
+from ututi.tests import UtutiLayer, setUp
 
 def test_sms():
     """Test sms sending.
@@ -13,12 +13,14 @@ def test_sms():
 
         >>> [(sms.message_text, sms.sending_status) for sms in meta.Session.query(SMS).all()]
         [(u'Message text', None)]
+
     """
 
 
 def test_suite():
     suite = doctest.DocTestSuite(
         optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |
-        doctest.NORMALIZE_WHITESPACE)
+        doctest.NORMALIZE_WHITESPACE,
+        setUp=setUp)
     suite.layer = UtutiLayer
     return suite

@@ -34,8 +34,23 @@ def sign_in_user(user, long_session=False):
     response.set_cookie('ututi_session_lifetime', session['cookie_secret'], max_age = expiration_time)
     session.save()
 
+def sign_out_user():
+    if 'login' in session:
+        del session['login']
+    response.delete_cookie('ututi_session_lifetime')
+    session.save()
+
+def sign_in_admin_user(admin_user):
+    session['admin_login'] = admin_user.email
+    session.save()
+
+def sign_out_admin_user():
+    if 'admin_login' in session:
+        del session['admin_login']
+    session.save()
+
 def is_root(user, context=None):
-    return user is not None and user.id == 1
+    return bool(session.get('admin_login', None))
 
 def is_marketingist(user, context=None):
     if user is None:

@@ -156,6 +156,14 @@ Checking the 'remember me' checkbox should create an unlimited session:
     >>> form.getControl(name='remember').value = True
     >>> form.getControl('Login').click()
 
+Log in as superuser first to see the session info view:
+
+    >>> browser.open('http://localhost/admin/login')
+    >>> form = browser.getForm('adminLoginForm')
+    >>> form.getControl('Username').value = "admin@ututi.lt"
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
+
     >>> browser.open('http://localhost/profile/session_info')
     >>> print browser.contents
     _accessed_time => ...

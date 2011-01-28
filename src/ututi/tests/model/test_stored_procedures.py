@@ -1,4 +1,5 @@
 import doctest
+from ututi.tests import setUp
 from ututi.tests import UtutiLayer
 
 from sqlalchemy.sql.expression import select, literal_column
@@ -39,6 +40,7 @@ def test_get_users():
 def test_suite():
     suite = doctest.DocTestSuite(
         optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |
-        doctest.NORMALIZE_WHITESPACE)
+        doctest.NORMALIZE_WHITESPACE,
+        setUp=setUp)
     suite.layer = UtutiLayer
     return suite

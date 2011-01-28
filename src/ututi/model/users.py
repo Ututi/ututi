@@ -55,6 +55,30 @@ def validate_password(reference, password):
     return compare == reference
 
 
+class AdminUser(object):
+
+    @classmethod
+    def authenticate(cls, username, password):
+        user = cls.get(username)
+        if user is None:
+            return None
+        if validate_password(user.password, password):
+            return user
+        else:
+            return None
+
+    @classmethod
+    def get(cls, username):
+        """Get a user by his email or id."""
+        try:
+            if isinstance(username, (long, int)):
+                return meta.Session.query(cls).filter_by(id=username).one()
+            else:
+                return meta.Session.query(cls).filter_by(email=username.strip().lower()).one()
+        except NoResultFound:
+            return None
+
+
 class User(object):
     """The User object - Ututi users."""
     is_teacher = False

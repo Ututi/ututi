@@ -233,7 +233,7 @@ def test_setup(test):
     user.phone_confirmed = False
     meta.Session.commit()
 
-    meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+    meta.Session.execute("SET LOCAL ututi.active_user TO %d" % u.id)
 
     g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date.today(), u'U2ti moderatoriai.')
 
