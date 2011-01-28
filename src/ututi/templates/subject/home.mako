@@ -55,7 +55,7 @@
 %if blank_subject:
   %if c.subject.description:
     <%self:rounded_block id="subject_description">
-      <div class="content">
+      <div class="block-content">
         ${h.html_cleanup(c.subject.description)}
       </div>
       %if c.user:

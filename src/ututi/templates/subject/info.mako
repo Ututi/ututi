@@ -2,7 +2,7 @@
 
 %if c.subject.description:
   <%self:rounded_block id="subject_description">
-    <div class="content">
+    <div class="block-content">
       ${h.html_cleanup(c.subject.description)}
     </div>
     %if c.user:
@@ -24,7 +24,6 @@
         ${_('so that others would find their way around more easily.')}
         ${h.button_to(_('Create a subject description'), c.subject.url(action='edit'))}
       </li>
-
     </ul>
   </%self:rounded_block>
 %endif
