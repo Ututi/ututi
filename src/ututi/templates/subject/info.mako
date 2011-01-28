@@ -5,7 +5,7 @@ ${tabs()}
 
 %if c.subject.description:
   <%self:rounded_block id="subject_description">
-    <div class="block-content">
+    <div class="block-content wiki-page">
       ${h.html_cleanup(c.subject.description)}
     </div>
     %if c.user:

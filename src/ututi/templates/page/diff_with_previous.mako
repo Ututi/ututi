@@ -19,7 +19,7 @@
           ${h.button_to(_('Restore previous'), c.prev_version.url(action='restore'))}</span></a>
 		</div>
 	</div>
-    <div id="page_content">
+    <div id="page_content" class="wiki-page">
       ${c.diff}
     </div>
 </%self:rounded_block>

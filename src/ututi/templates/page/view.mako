@@ -40,7 +40,7 @@
           %endif
         </div>
     </div>
-    <div id="page_content">
+    <div id="page_content" class="wiki-page">
       ${h.latex_to_html(h.html_cleanup(c.page.content))}
     </div>
 </%self:rounded_block>

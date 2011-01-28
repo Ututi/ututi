@@ -1042,3 +1042,14 @@ ul.feature-list {
   }
 
   #upload-failed-error-message { display: none; }
+
+
+/* WIKI PAGE STYLING
+ */
+
+.wiki-page { }
+
+    .wiki-page h1, .wiki-page h2, .wiki-page h3, .wiki-page h4 {
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+    }
