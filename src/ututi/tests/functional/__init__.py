@@ -235,6 +235,7 @@ def setUpBooks(browser):
     browser.open('http://localhost/admin/book_types')
     form = browser.getForm('book_type_form')
     form.getControl('Name').value = 'Vadovėlis'
+    form.getControl('URL name').value = 'vadovelis'
     form.getControl('Save').click()
 
     # Add some cities

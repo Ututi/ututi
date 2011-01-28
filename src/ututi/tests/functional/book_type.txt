@@ -13,6 +13,7 @@ Admin can create book type.
 
     >>> form = browser.getForm('book_type_form')
     >>> form.getControl('Name').value = 'Vadovėlis'
+    >>> form.getControl('URL name').value = 'vadoveliai'
     >>> form.getControl('Save').click()
 
     >>> browser.url
@@ -20,6 +21,7 @@ Admin can create book type.
 
     >>> browser.printQuery('id("book_types_list")//td/text()')
     Vadov&#279;lis
+    vadoveliai
 
 
 Admin can edit book type.
@@ -27,11 +29,13 @@ Admin can edit book type.
     >>> browser.getLink('Edit').click()
     >>> form = browser.getForm('book_type_form')
     >>> form.getControl('Name').value = 'Pratybos'
+    >>> form.getControl('URL name').value = 'pratybos'
     >>> form.getControl('Edit').click()
     >>> browser.url
     'http://localhost/admin/book_types'
     >>> browser.printQuery('id("book_types_list")//td/text()')
     Pratybos
+    pratybos
 
 Admin can delete book type.
 
