@@ -172,7 +172,7 @@ And we continue uploading files:
     ...                params={'folder': ''},
     ...                upload_files=[("attachment", "f2.txt", "Test")])
 
-    >>> browser.open('http://localhost/subject/vu/mat_analize')
+    >>> browser.open('http://localhost/subject/vu/mat_analize/files')
     >>> browser.getControl(name='folder').value = 'A folder'
     >>> browser.getControl('create').click()
 
