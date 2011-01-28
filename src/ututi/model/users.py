@@ -142,8 +142,8 @@ class User(object):
                 ).all()
 
     @classmethod
-    def authenticate(cls, username, password):
-        user = cls.get(username)
+    def authenticate(cls, location, username, password):
+        user = cls.get(username, location)
         if user is None:
             return None
         if validate_password(user.password, password):
@@ -152,7 +152,23 @@ class User(object):
             return None
 
     @classmethod
-    def get(cls, username):
+    def get(cls, username, location):
+        q = meta.Session.query(cls)
+        try:
+            if isinstance(username, (long, int)):
+                q = q.filter_by(id=username)
+            else:
+                q = q.filter_by(username=username.strip().lower())
+            if isinstance(location, (long, int)):
+                q = q.filter_by(location_id=location)
+            else:
+                q = q.filter_by(location_id=location.id)
+            return q.one()
+        except NoResultFound:
+            return None
+
+    @classmethod
+    def get_global(cls, username):
         """Get a user by his email or id."""
         try:
             if isinstance(username, (long, int)):

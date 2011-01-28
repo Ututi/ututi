@@ -11,16 +11,19 @@ from ututi.model import meta
 def setUp(test):
     test.globs['app'] = NousTestApp(pylons.test.pylonsapp)
     test.globs['Browser'] = UtutiTestBrowser
-    res = meta.Session.execute("select * from users where id = 1")
-    if not list(res):
-        meta.Session.execute("insert into users (fullname, password) values ('Adminas Adminovix', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7')")
-        meta.Session.execute("insert into emails (id, email, confirmed)"
-                             " (select users.id, 'admin@ututi.lt', true from users where fullname = 'Adminas Adminovix')")
-
-    l = LocationTag(u'Vilniaus universitetas', u'vu', u'Seniausias universitetas Lietuvoje.')
-    f = LocationTag(u'Ekonomikos fakultetas', u'ef', u'', l)
+    l = LocationTag(u'U-niversity', u'uni', u'')
+    f = LocationTag(u'D-epartment', u'd', u'', l)
     meta.Session.add(l)
     meta.Session.add(f)
+    meta.Session.commit()
+
+    res = meta.Session.execute("select * from users where id = 1")
+    if not list(res):
+        meta.Session.execute("insert into users (location_id, username, fullname, password)"
+                             " (select tags.id, 'admin@uni.ututi.com', 'Administrator of the university', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7'"
+                             " from tags where title_short = 'uni');")
+        meta.Session.execute("insert into emails (id, email, confirmed)"
+                             " (select users.id, users.username, true from users where fullname = 'Administrator of the university')")
     meta.Session.commit()
 
 

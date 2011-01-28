@@ -190,3 +190,22 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
             meta.Session.commit()
             h.flash(_("Information updated."))
         redirect(url(controller='structureview', action='index', path='/'.join(location.path)))
+
+    @location_action
+    def login(self, location):
+        email = request.POST.get('login')
+        password = request.POST.get('password')
+        remember = True if request.POST.get('remember', None) else False
+        destination = c.came_from or location.url(action='index')
+        filename = request.params.get('context', None)
+
+        if password is not None:
+            from ututi.model.users import User
+            user = User.authenticate(location, email, password.encode('utf-8'))
+            c.header = _('Wrong username or password!')
+            c.message = _('You seem to have entered your username and password wrong, please try again!')
+
+            if user is not None:
+                from ututi.lib.security import sign_in_user
+                sign_in_user(user, long_session=remember)
+                redirect(str(destination))

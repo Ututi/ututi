@@ -1,21 +1,20 @@
 Log in form
 ===========
 
-Our system initially comes with one user, who is also a super
-user. Let's try logging in as him.
-
-If user is not logged in login form is shown. Let's fill it in:
-
+To log in to his university, the user first has to access that university's login form. Lets go there:
     >>> browser = Browser()
-    >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> browser.open('http://localhost/school/uni')
+
+And this is the login form:
+    >>> form = browser.getForm(id='loginForm')
+    >>> form.getControl('Email').value = "admin@uni.ututi.com"
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
 
 The personal information portlet shows my name:
 
     >>> browser.printQuery('id("personal-data")//span[@class="fullname"]/text()')
-    Adminas Adminovix
+    Administrator of the university
 
 As we have successfully logged in let's logout and make some typos:
 
@@ -26,28 +25,31 @@ As we have successfully logged in let's logout and make some typos:
 If we enter the username wrong - we get redirected back to the login
 form, but not logged in:
 
+    >>> browser.open('http://localhost/school/uni')
     >>> form = browser.getForm('loginForm')
     >>> form.getControl('Email').value = "odmin@ututi.lt"
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
 
     >>> browser.url
-    'http://localhost/login'
+    'http://localhost/school/uni/login'
 
 Let's enter the password wrong:
 
+    >>> browser.open('http://localhost/school/uni')
     >>> form = browser.getForm('loginForm')
     >>> form.getControl('Email').value = "admin@ututi.lt"
     >>> form.getControl('Password').value = "asd"
     >>> form.getControl('Login').click()
 
     >>> browser.url
-    'http://localhost/login'
+    'http://localhost/school/uni/login'
 
 Still permission is denied.
 
 Testing if a bug, where login emails where incorrectly stripped
     >>> browser = Browser()
+    >>> browser.open('http://localhost/school/uni')
     >>> browser.addHeader('X-Forwarded-For', '62.80.225.102')
     >>> form = browser.getForm('loginForm')
     >>> form.getControl('Email').value = "admin@ututi.lt "
