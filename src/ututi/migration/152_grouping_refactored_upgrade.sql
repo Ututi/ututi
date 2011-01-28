@@ -10,7 +10,7 @@ CREATE OR REPLACE FUNCTION add_event_r(event_id int8, evtype varchar) RETURNS ev
     END
 $$ LANGUAGE plpgsql;;
 
-CREATE FUNCTION event_set_group(evt events) RETURNS int8 as $$
+CREATE FUNCTION event_set_group(evt events) RETURNS void as $$
     DECLARE
       pid int8 := NULL;
     BEGIN
@@ -40,7 +40,6 @@ CREATE FUNCTION event_set_group(evt events) RETURNS int8 as $$
       IF evt.event_type IN ('subject_modified', 'page_modified') THEN
         UPDATE events SET parent_id = evt.id WHERE id = pid or parent_id = pid;
       END IF;
-      return pid;
     END;
 $$ LANGUAGE plpgsql;;
 
