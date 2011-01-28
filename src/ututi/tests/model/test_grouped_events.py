@@ -6,6 +6,7 @@ from ututi.model import meta, Subject, LocationTag
 from ututi.model.users import User
 from ututi.model.events import PageModifiedEvent
 from ututi.model.events import SubjectModifiedEvent
+from ututi.tests import setUp
 from ututi.tests import UtutiLayer
 
 def test_grouping_subject_events():
@@ -76,6 +77,7 @@ def test_grouping_page_events():
 def test_suite():
     suite = doctest.DocTestSuite(
         optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |
-        doctest.NORMALIZE_WHITESPACE)
+        doctest.NORMALIZE_WHITESPACE,
+        setUp=setUp)
     suite.layer = UtutiLayer
     return suite
