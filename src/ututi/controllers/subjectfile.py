@@ -19,7 +19,7 @@ def set_login_url(method):
     def _set_login_url(self, subject, file):
         c.login_form_url = url(controller='home',
                                action='login',
-                               came_from=subject.url(serve_file=file.id),
+                               came_from=subject.url(action='files', serve_file=file.id),
                                context=file.filename)
         return method(self, subject, file)
     return _set_login_url
