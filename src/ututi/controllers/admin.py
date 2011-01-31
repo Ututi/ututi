@@ -807,9 +807,11 @@ class AdminController(BaseController):
         groups_csv = StringIO()
         group_members_csv = StringIO()
         group_files_csv = StringIO()
+        group_subjects_csv = StringIO()
         groups_writer = csv.writer(groups_csv, delimiter=",")
         group_members_writer = csv.writer(group_members_csv, delimiter=",")
         group_files_writer = csv.writer(group_files_csv, delimiter=",")
+        group_subjects_writer = csv.writer(group_subjects_csv, delimiter=",")
         for group in meta.Session.query(Group)\
                 .filter(Group.location_id.in_([loc.id for loc in university.flatten]))\
                 .filter_by(deleted_by=None):
@@ -835,12 +837,20 @@ class AdminController(BaseController):
                     self._writerow(group_files_writer,
                                    ['/'.join(group.location.path[1:]),
                                     group.group_id] + self._format_file_row(file))
+            for subject in group.watched_subjects:
+                if not subject.isDeleted(): # skip deleted subjects
+                    self._writerow(group_subjects_writer,
+                                   ['/'.join(subject.location.path[1:]),
+                                    subject.subject_id,
+                                    '/'.join(group.location.path[1:]),
+                                    group.group_id])
             if group.logo:
                 zf.writestr('group_logos/%s.png' % group.group_id,
                             prepare_image(group.logo))
         zf.writestr('groups.csv', groups_csv.getvalue())
         zf.writestr('group_members.csv', group_members_csv.getvalue())
         zf.writestr('group_files.csv', group_files_csv.getvalue())
+        zf.writestr('group_subjects.csv', group_subjects_csv.getvalue())
 
     def _export_users(self, zf, university):
         users = set()
