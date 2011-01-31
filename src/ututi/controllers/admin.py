@@ -788,7 +788,7 @@ class AdminController(BaseController):
                             subject.lecturer,
                             subject.description])
             for file in subject.files:
-                if not file.isNullFile():
+                if not file.isNullFile() and not file.isDeleted():
                     self._writerow(subject_files_writer,
                                    ['/'.join(subject.location.path[1:]),
                                     subject.subject_id] + self._format_file_row(file))
@@ -801,9 +801,7 @@ class AdminController(BaseController):
                 file.folder,
                 file.title,
                 file.mimetype,
-                file.md5,
-                '' if file.deleted is None else file.deleted.emails[0].email,
-                '' if file.deleted is None else file.deleted_on.strftime(FMT_TIMESTAMP)]
+                file.md5]
 
     def _export_groups(self, zf, university):
         groups_csv = StringIO()
@@ -833,7 +831,7 @@ class AdminController(BaseController):
                                 group.group_id,
                                 membership.user.emails[0].email])
             for file in group.files:
-                if not file.isNullFile():
+                if not file.isNullFile() and not file.isDeleted():
                     self._writerow(group_files_writer,
                                    ['/'.join(group.location.path[1:]),
                                     group.group_id] + self._format_file_row(file))
