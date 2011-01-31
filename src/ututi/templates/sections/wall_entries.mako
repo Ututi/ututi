@@ -173,6 +173,35 @@
   </div>
 </%def>
 
+<%def name="grouped_files(event)">
+  <div class="wall-subentry">
+    <%self:file_description file="${event.file}"/>
+    <%self:event_conversation event="${event}" head_message="${False}" />
+  </div>
+  <% children = [ch for ch in event.children if not ch.isEmptyFile()] %>
+  %if children:
+    <div class="click2show">
+      <div class="click hide event_children_link">
+        <% cccount = event.children_comments() %>
+        (
+        ${ungettext("and %(count)s more file", "and %(count)s more files", len(children)) % dict(count=len(children))}
+        %if cccount:
+          ${ungettext("with %(count)s comment", "with %(count)s comments", cccount) % dict(count=cccount)}
+        %endif
+        )
+      </div>
+      <div class="show">
+        %for child in children:
+          <div class="wall-subentry">
+            <%self:file_description file="${child.file}"/>
+            <%self:event_conversation event="${child}" head_message="${False}" />
+          </div>
+        %endfor
+      </div>
+    </div>
+  %endif
+</%def>
+
 <%def name="file_description(file)">
   <div class="file-description">
     <div class="title">
@@ -234,31 +263,7 @@
                 subject_link=h.object_link(event.file.parent)) | n}
       %endif
     </%def>
-    <div class="wall-subentry">
-      <%self:file_description file="${event.file}"/>
-      <%self:event_conversation event="${event}" head_message="${False}" />
-    </div>
-    %if event.children:
-      <div class="click2show">
-        <div class="click hide event_children_link">
-          <% cccount = event.children_comments() %>
-          (
-          ${ungettext("and %(count)s more file", "and %(count)s more files", len(event.children)) % dict(count=len(event.children))}
-          %if cccount:
-            ${ungettext("with %(count)s comment", "with %(count)s comments", cccount) % dict(count=cccount)}
-          %endif
-          )
-        </div>
-        <div class="show">
-          %for child in event.children:
-            <div class="wall-subentry">
-              <%self:file_description file="${child.file}"/>
-              <%self:event_conversation event="${child}" head_message="${False}" />
-            </div>
-          %endfor
-        </div>
-      </div>
-    %endif
+    <%self:grouped_files event="${event}" />
   </%self:wall_entry>
 </%def>
 
@@ -293,31 +298,7 @@
                 group_link=h.object_link(event.file.parent)) | n}
       %endif
     </%def>
-    <div class="wall-subentry">
-      <%self:file_description file="${event.file}"/>
-      <%self:event_conversation event="${event}" head_message="${False}" />
-    </div>
-    %if event.children:
-      <div class="click2show">
-        <div class="click hide event_children_link">
-          <% cccount = event.children_comments() %>
-          (
-          ${ungettext("and %(count)s more file", "and %(count)s more files", len(event.children)) % dict(count=len(event.children))}
-          %if cccount:
-            ${ungettext("with %(count)s comment", "with %(count)s comments", cccount) % dict(count=cccount)}
-          %endif
-          )
-        </div>
-        <div class="show">
-          %for child in event.children:
-            <div class="wall-subentry">
-              <%self:file_description file="${child.file}"/>
-              <%self:event_conversation event="${child}" head_message="${False}" />
-            </div>
-          %endfor
-        </div>
-      </div>
-    %endif
+    <%self:grouped_files event="${event}" />
   </%self:wall_entry>
 </%def>
 
