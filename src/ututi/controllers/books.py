@@ -420,19 +420,22 @@ class BooksController(HomeController, BaseController):
 
         c.url_params = {}
         c.books_type = None
-        if books_type_name is not None:
-            c.books_type = meta.Session.query(BookType).filter(BookType.url_name==books_type_name).one()
-            c.url_params['books_type_name'] = books_type_name
+        try:
+            if books_type_name is not None:
+                c.books_type = meta.Session.query(BookType).filter(BookType.url_name==books_type_name).one()
+                c.url_params['books_type_name'] = books_type_name
 
-        c.school_grades = None
-        if books_department == "school":
-            c.school_grades = meta.Session.query(SchoolGrade)
-            if school_grade_id is not None:
-                school_grade = meta.Session.query(SchoolGrade).filter(SchoolGrade.id == school_grade_id).one()
+            c.school_grades = None
+            if books_department == "school":
+                c.school_grades = meta.Session.query(SchoolGrade)
+                if school_grade_id is not None:
+                    school_grade = meta.Session.query(SchoolGrade).filter(SchoolGrade.id == school_grade_id).one()
 
-        c.science_type = None
-        if science_type_id is not None:
-            c.science_type = meta.Session.query(ScienceType).filter(ScienceType.id == science_type_id).one()
+            c.science_type = None
+            if science_type_id is not None:
+                c.science_type = meta.Session.query(ScienceType).filter(ScienceType.id == science_type_id).one()
+        except NoResultFound:
+            abort(404)
 
         #book filtering:
         books = meta.Session.query(Book)

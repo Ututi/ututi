@@ -115,3 +115,8 @@ students, so let's go to the subtype instead:
     >>> browser.getControl(name='city').displayOptions
     ['All cities (1)', 'Vilnius (1)']
 
+Oh, and let's not go down in flames when a mistyped url is requested:
+    >>> browser.open('http://localhost/books/catalog/university/sience')
+    Traceback (most recent call last):
+    ...
+    HTTPError: HTTP Error 404: Not Found
