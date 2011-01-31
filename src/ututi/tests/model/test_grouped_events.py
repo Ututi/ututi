@@ -1,9 +1,17 @@
 import doctest
 
+from datetime import date
+
+from ututi.model import LocationTag
+from ututi.model import File
+from ututi.model import GroupMember
+from ututi.model import GroupMembershipType
+from ututi.model import Group
 from ututi.model import PageVersion
 from ututi.model import Page
 from ututi.model import meta, Subject, LocationTag
 from ututi.model.users import User
+from ututi.model.events import FileUploadedEvent
 from ututi.model.events import PageModifiedEvent
 from ututi.model.events import SubjectModifiedEvent
 from ututi.tests import UtutiLayer
@@ -25,7 +33,7 @@ def test_grouping_subject_events():
 
         >>> events = meta.Session.query(SubjectModifiedEvent).all()
         >>> [(e.id, e.event_type, [c.id for c in e.children]) for e in events]
-        [(2L, 'subject_modified', [1L])]
+        [(4L, 'subject_modified', [3L])]
 
     Let's update the subject again and see if the newest event is really the parent:
 
@@ -35,7 +43,7 @@ def test_grouping_subject_events():
 
         >>> events = meta.Session.query(SubjectModifiedEvent).all()
         >>> [(e.id, e.event_type, [c.id for c in e.children]) for e in events]
-        [(3L, 'subject_modified', [1L, 2L]), (2L, 'subject_modified', [])]
+        [(5L, 'subject_modified', [3L, 4L]), (4L, 'subject_modified', [])]
 
     Only modifications by the same user are grouped.
         >>> petras = User(u'Petras', 'qwerty', gen_password=True)
@@ -47,7 +55,7 @@ def test_grouping_subject_events():
         >>> meta.Session.commit()
         >>> events = meta.Session.query(SubjectModifiedEvent).all()
         >>> [(e.id, e.event_type, [c.id for c in e.children]) for e in events]
-        [(3L, 'subject_modified', [1L, 2L]), (2L, 'subject_modified', []), (4L, 'subject_modified', [])]
+        [(5L, 'subject_modified', [3L, 4L]), (4L, 'subject_modified', []), (6L, 'subject_modified', [])]
     """
 
 def test_grouping_page_events():
@@ -69,13 +77,55 @@ def test_grouping_page_events():
 
         >>> events = meta.Session.query(PageModifiedEvent).all()
         >>> [(e.id, e.event_type, [c.id for c in e.children]) for e in events]
-        [(3L, 'page_modified', [2L])]
+        [(5L, 'page_modified', [4L])]
 
     """
+
+def test_grouping_file_events():
+    r"""Test if file events are being grouped correctly
+
+    Let's upload a couple of files to a group:
+        >>> group = Group.get("moderators")
+        >>> f = File(u"some.txt", u'A Text file', mimetype='text/plain', data="Wassup?")
+        >>> f.folder = u"some folder"
+        >>> group.files.append(f)
+        >>> meta.Session.commit()
+
+        >>> res = meta.Session.execute("SET ututi.active_user TO 1")
+        >>> f = File(u"some.txt", u'A Text file', mimetype='text/plain', data="Wassup?")
+        >>> f.folder = u"some folder"
+        >>> group.files.append(f)
+        >>> meta.Session.commit()
+
+        >>> events = meta.Session.query(FileUploadedEvent).all()
+        >>> [(e.id, e.event_type, [c.id for c in e.children]) for e in events]
+        [(4L, 'file_uploaded', [3L]), (3L, 'file_uploaded', [])]
+
+     """
+
 
 def test_suite():
     suite = doctest.DocTestSuite(
         optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |
-        doctest.NORMALIZE_WHITESPACE)
+        doctest.NORMALIZE_WHITESPACE,
+        setUp=test_setup)
     suite.layer = UtutiLayer
     return suite
+
+def test_setup(test):
+    """Create some models for the test."""
+    u = User.get('admin@ututi.lt')
+    meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+
+    g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date.today(), u'U2ti moderatoriai.')
+
+    role = GroupMembershipType.get('administrator')
+    gm = GroupMember()
+    gm.user = u
+    gm.group = g
+    gm.role = role
+    meta.Session.add(g)
+    meta.Session.add(gm)
+    meta.Session.commit()
+    meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+
