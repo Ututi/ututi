@@ -574,6 +574,14 @@
             display: none;
         }
 
+        .wall .wall-entry .event_children_link {
+            color: #668000;
+            margin-left: 60px;
+            font-size: 10px;
+            cursor: pointer;
+            padding-bottom: 10px;
+        }
+
         .wall .more-events .click {
             display: block;
             padding: 5px;
