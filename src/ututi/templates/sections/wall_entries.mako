@@ -551,33 +551,83 @@
 
 <%def name="groupmember_joined(event)">
   <%self:wall_entry event="${event}">
-    <%def name="classes()">group-event</%def>
+    <%def name="classes()">group-event ${event.children and 'click2show' or ''}</%def>
     <%def name="heading()">
-      %if c.user is not None and c.user == event.user:
-        ${_("You have joined the group %(group_link)s") % \
-           dict(group_link=h.object_link(event.context)) | n}
+      %if event.children:
+          %if c.user is not None and c.user == event.user:
+            ${ungettext("You have and %(count)s more person have joined the group %(group_link)s",
+                        "You have and %(count)s more people have joined the group %(group_link)s",
+                        len(event.children)) % \
+               dict(group_link=h.object_link(event.context),
+                    count=len(event.children)) | n}
+          %else:
+            ${ungettext("%(user_link)s and %(count)s more person have joined the group %(group_link)s",
+                        "%(user_link)s and %(count)s more people have joined the group %(group_link)s",
+                        len(event.children)) % \
+               dict(user_link=h.object_link(event.user),
+                    group_link=h.object_link(event.context),
+                    count=len(event.children)) | n}
+          %endif
+          <span class="click hide event_children_link">${_("show all")}</span>
       %else:
-        ${_("%(user_link)s has joined the group %(group_link)s") % \
-           dict(user_link=h.object_link(event.user),
-                group_link=h.object_link(event.context)) | n}
+        %if c.user is not None and c.user == event.user:
+          ${_("You have joined the group %(group_link)s") % \
+             dict(group_link=h.object_link(event.context)) | n}
+        %else:
+          ${_("%(user_link)s has joined the group %(group_link)s") % \
+             dict(user_link=h.object_link(event.user),
+                  group_link=h.object_link(event.context)) | n}
+        %endif
       %endif
     </%def>
+    %if event.children:
+      <div class="show other_members">
+        %for ch in event.children:
+          ${h.object_link(ch.user)}
+        %endfor
+      </div>
+    %endif
   </%self:wall_entry>
 </%def>
 
 <%def name="groupmember_left(event)">
   <%self:wall_entry event="${event}">
-    <%def name="classes()">group-event</%def>
+    <%def name="classes()">group-event ${event.children and 'click2show' or ''}</%def>
     <%def name="heading()">
-      %if c.user is not None and c.user == event.user:
-        ${_("You have left the group %(group_link)s") % \
-           dict(group_link=h.object_link(event.context)) | n}
+      %if event.children:
+        %if c.user is not None and c.user == event.user:
+          ${ungettext("You have and %(count)s more person have left the group %(group_link)s",
+                      "You have and %(count)s more people have left the group %(group_link)s",
+                      len(event.children)) % \
+             dict(group_link=h.object_link(event.context),
+                  count=len(event.children)) | n}
+        %else:
+          ${ungettext("%(user_link)s and %(count)s more person have left the group %(group_link)s",
+                      "%(user_link)s and %(count)s more people have left the group %(group_link)s",
+                      len(event.children)) % \
+             dict(user_link=h.object_link(event.user),
+                  group_link=h.object_link(event.context),
+                  count=len(event.children)) | n}
+        %endif
+        <span class="click hide event_children_link">${_("show all")}</span>
       %else:
-        ${_("%(user_link)s has left the group %(group_link)s") % \
-           dict(user_link=h.object_link(event.user),
-                group_link=h.object_link(event.context)) | n}
+        %if c.user is not None and c.user == event.user:
+          ${_("You have left the group %(group_link)s") % \
+             dict(group_link=h.object_link(event.context)) | n}
+        %else:
+          ${_("%(user_link)s has left the group %(group_link)s") % \
+             dict(user_link=h.object_link(event.user),
+                  group_link=h.object_link(event.context)) | n}
+        %endif
       %endif
     </%def>
+    %if event.children:
+      <div class="show other_members">
+        %for ch in event.children:
+          ${h.object_link(ch.user)}
+        %endfor
+      </div>
+    %endif
   </%self:wall_entry>
 </%def>
 

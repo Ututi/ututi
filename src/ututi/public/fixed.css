@@ -563,6 +563,12 @@
                 font-size: 11px;
             }
 
+        .wall .wall-entry .other_members {
+            padding-left: 20px;
+            font-size: 10px;
+        }
+
+
         /* Hide event time in some event types:
          */
         .wall .wall-entry.type_mailinglist_post_created .event-heading .event-time,
@@ -576,9 +582,12 @@
 
         .wall .wall-entry .event_children_link {
             color: #668000;
-            margin-left: 60px;
             font-size: 10px;
             cursor: pointer;
+        }
+
+        .wall .wall-entry.type_file_uploaded .event_children_link {
+            margin-left: 60px;
             padding-bottom: 10px;
         }
 
@@ -588,7 +597,6 @@
             outline: none;
             text-align: center;
         }
-
 
 /* SIMPLE LISTS
  * Simple list styles that provide bullet images and spacing.

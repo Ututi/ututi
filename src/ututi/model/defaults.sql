@@ -926,8 +926,26 @@ CREATE FUNCTION event_set_group(evt events) RETURNS void as $$
              AND e.created < evt.created
              ORDER BY e.created DESC
              LIMIT 1;
+      ELSIF evt.event_type = 'member_joined' THEN
+         SELECT id INTO pid FROM events e WHERE e.event_type = evt.event_type
+             AND e.object_id = evt.object_id
+             AND evt.created - e.created < interval '15 minutes'
+             AND e.parent_id IS NULL
+             AND e.id <> evt.id
+             AND e.created < evt.created
+             ORDER BY e.created DESC
+             LIMIT 1;
+      ELSIF evt.event_type = 'member_left' THEN
+         SELECT id INTO pid FROM events e WHERE e.event_type = evt.event_type
+             AND e.object_id = evt.object_id
+             AND evt.created - e.created < interval '15 minutes'
+             AND e.parent_id IS NULL
+             AND e.id <> evt.id
+             AND e.created < evt.created
+             ORDER BY e.created DESC
+             LIMIT 1;
       END IF;
-      IF evt.event_type IN ('subject_modified', 'page_modified', 'file_uploaded') AND NOT pid IS null THEN
+      IF evt.event_type IN ('subject_modified', 'page_modified', 'file_uploaded', 'member_joined', 'member_left') AND NOT pid IS null THEN
         UPDATE events SET parent_id = evt.id WHERE id = pid or parent_id = pid;
       END IF;
     END;
@@ -1037,14 +1055,19 @@ CREATE TRIGGER group_forum_message_event_trigger AFTER INSERT OR UPDATE ON forum
 
 
 CREATE FUNCTION member_group_event_trigger() RETURNS trigger AS $$
+    DECLARE
+      evt events;
     BEGIN
       IF TG_OP = 'DELETE' THEN
         INSERT INTO events (object_id, author_id, event_type)
-               VALUES (OLD.group_id, OLD.user_id, 'member_left');
+               VALUES (OLD.group_id, OLD.user_id, 'member_left')
+               RETURNING * INTO evt;
       ELSIF TG_OP = 'INSERT' THEN
         INSERT INTO events (object_id, author_id, event_type)
-               VALUES (NEW.group_id, NEW.user_id, 'member_joined');
+               VALUES (NEW.group_id, NEW.user_id, 'member_joined')
+               RETURNING * INTO evt;
       END IF;
+      EXECUTE event_set_group(evt);
       RETURN NEW;
     END
 $$ LANGUAGE plpgsql;;
