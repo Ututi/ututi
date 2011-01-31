@@ -41,7 +41,7 @@
 
     message_send_url = $("#message-send-url").val();
     $('#message_send').click(function(){
-        _gaq.push(['_trackEvent', 'action block submit', 'profile wall', 'message send']);
+        _gaq.push(['_trackEvent', 'profile wall', 'action block submit', 'message send']);
         form = $(this).closest('form');
 
         subject = $('#message_subject', form).val();
@@ -77,7 +77,7 @@
              name: 'attachment',
              data: {folder: '', target_id: $('#file_rcpt-select').val()},
              onSubmit: function(file, ext, iframe){
-                 _gaq.push(['_trackEvent', 'action block submit', 'profile wall', 'file upload']);
+                 _gaq.push(['_trackEvent', 'profile wall', 'action block submit', 'file upload']);
                  iframe['progress_indicator'] = $(document.createElement('div'));
                  $('#upload_file_block').append(iframe['progress_indicator']);
                  iframe['progress_indicator'].text(file);
@@ -119,7 +119,7 @@
     /* Create wiki actions.
      */
     $('#wiki_create_send').click(function(){
-        _gaq.push(['_trackEvent', 'action block submit', 'profile wall', 'wiki create']);
+        _gaq.push(['_trackEvent', 'profile wall', 'action block submit', 'wiki create']);
         create_wiki_url = $("#create-wiki-url").val();
         form = $(this).closest('form');
 
