@@ -117,6 +117,10 @@ class BookTypeForm(Schema):
     url_name = Regex(r'^[a-z-]+$', not_empty=True)
 
 
+FMT_DATE = '%Y-%m-%d'
+FMT_TIMESTAMP = '%Y-%m-%d %H:%M:%S.%f'
+
+
 class AdminController(BaseController):
     """Controler for system administration."""
 
@@ -793,9 +797,13 @@ class AdminController(BaseController):
 
     def _format_file_row(self, file):
         return [file.created.emails[0].email,
+                file.created_on.strftime(FMT_TIMESTAMP),
                 file.folder,
                 file.title,
-                file.md5]
+                file.mimetype,
+                file.md5,
+                '' if file.deleted is None else file.deleted.emails[0].email,
+                '' if file.deleted is None else file.deleted_on.strftime(FMT_TIMESTAMP)]
 
     def _export_groups(self, zf, university):
         groups_csv = StringIO()
@@ -817,7 +825,7 @@ class AdminController(BaseController):
                             str(group.moderators),
                             str(group.wants_to_watch_subjects),
                             str(group.admins_approve_members),
-                            group.private_files_lock_date.strftime('%Y-%m-%d') if group.private_files_lock_date else '',
+                            group.private_files_lock_date.strftime(FMT_DATE) if group.private_files_lock_date else '',
                             str(group.mailinglist_moderated)])
             for membership in group.members:
                 self._writerow(group_members_writer,
