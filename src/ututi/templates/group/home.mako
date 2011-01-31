@@ -8,7 +8,7 @@
   ${actions.head_tags()}
 </%def>
 
-<%def name="body_class()">wall</%def>
+<%def name="body_class()">wall group-wall</%def>
 
 %if getattr(c, 'welcome', None):
   <h1>${_('Congratulations, you have created a new group!')}</h1>

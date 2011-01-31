@@ -4,7 +4,7 @@
 <%namespace name="actions" file="/profile/wall_actionblock.mako" import="action_block, head_tags, css"/>
 <%namespace name="wall" file="/sections/wall_entries.mako" />
 
-<%def name="body_class()">wall</%def>
+<%def name="body_class()">wall profile-wall</%def>
 
 <%def name="pagetitle()">
   ${_("News feed")}

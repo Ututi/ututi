@@ -61,8 +61,37 @@ $(document).ready(function(){
                 }
             );
         }
+        fire_analytics_event(this);
         return false;
     });
+
+    function fire_analytics_event(button_clicked) {
+        /* Fire Google Analytics event with
+         * parameters extracted via reflection.
+         */
+        var category = 'wall';
+        var action = 'reply/comment';
+        var label = 'undefined';
+
+        // pick category
+        if ($(button_clicked).closest('.profile-wall').length)
+            category = 'profile wall';
+        else if ($(button_clicked).closest('.subject-wall').length)
+            category = 'subject wall';
+        else if ($(button_clicked).closest('.group-wall').length)
+            category = 'group wall';
+        else if ($(button_clicked).closest('.location-wall').length)
+            category = 'location wall';
+
+        // pick label
+        var entry = $(button_clicked).closest('.wall-entry');
+        classes = entry.attr('class').split(' ');
+        for (var i = 0; i < classes.length; i++)
+            if (classes[i].substr(0, 5) == 'type_')
+                label = classes[i];
+
+        _gaq.push(['_trackEvent', category, action, label]);
+    }
 
     /*
     $('.action_submit').click(function(evt) {
