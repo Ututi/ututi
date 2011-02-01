@@ -4,7 +4,6 @@ import os
 import logging
 import datetime
 from cStringIO import StringIO
-import zipfile
 
 from pylons.controllers.util import redirect
 
@@ -908,15 +907,16 @@ class AdminController(BaseController):
             pass
         university = LocationTag.get(university_id)
         result = StringIO()
-        zf = zipfile.ZipFile(result, "a", zipfile.ZIP_DEFLATED, False)
+        from zipfile import ZipFile, ZIP_DEFLATED
+        zf = ZipFile(result, "a", ZIP_DEFLATED, False)
         if university.logo:
             zf.writestr('logo.png', prepare_image(university.logo))
 
         self._export_subjects(zf, university)
         self._export_groups(zf, university)
         self._export_users(zf, university)
-
         zf.close()
+
         response.headers['Content-Length'] = len(result.getvalue())
         response.headers['Content-Disposition'] = 'attachment; filename="%s.zip"' %\
                 university.title_short.encode('transliterate').encode('ascii', 'ignore')
