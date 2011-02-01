@@ -176,10 +176,11 @@ shell: bin/paster instance/done instance/var/run/.s.PGSQL.${PGPORT}
 	bin/paster --plugin=Pylons shell development.ini
 
 export BUILD_ID ?= `date +%Y-%m-%d_%H-%M-%S`
+export BRANCH ?= master
 
 .PHONY: package_release
 package_release:
-	git archive --prefix=ututi${BUILD_ID}/ HEAD | gzip > ututi${BUILD_ID}.tar.gz
+	git archive --prefix=ututi${BUILD_ID}/ HEAD | gzip > ututi_${BRANCH}_${BUILD_ID}.tar.gz
 
 .PHONY: download_backup
 download_backup:
