@@ -51,6 +51,10 @@ class Event(object):
             # self.comments.append(comment)
             comment.event = self
 
+    def children_comments(self):
+        """Count the number of comments, children of this event have."""
+        return sum([len(child.comments) for child in self.children])
+
     @classmethod
     def event_types(cls):
         types = meta.Session.query(events_table.c.event_type).distinct().all()

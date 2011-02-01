@@ -563,6 +563,12 @@
                 font-size: 11px;
             }
 
+        .wall .wall-entry .other_members {
+            padding-left: 20px;
+            font-size: 10px;
+        }
+
+
         /* Hide event time in some event types:
          */
         .wall .wall-entry.type_mailinglist_post_created .event-heading .event-time,
@@ -574,13 +580,23 @@
             display: none;
         }
 
+        .wall .wall-entry .event_children_link {
+            color: #668000;
+            font-size: 10px;
+            cursor: pointer;
+        }
+
+        .wall .wall-entry.type_file_uploaded .event_children_link {
+            margin-left: 60px;
+            padding-bottom: 10px;
+        }
+
         .wall .more-events .click {
             display: block;
             padding: 5px;
             outline: none;
             text-align: center;
         }
-
 
 /* SIMPLE LISTS
  * Simple list styles that provide bullet images and spacing.
@@ -1042,3 +1058,18 @@ ul.feature-list {
   }
 
   #upload-failed-error-message { display: none; }
+
+
+/* WIKI PAGE STYLING
+ */
+
+.wiki-page { }
+
+    .wiki-page h1, .wiki-page h2, .wiki-page h3, .wiki-page h4 {
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+    }
+
+    .wiki-page ul, .wiki-page ol {
+        list-style-position: inside;
+    }

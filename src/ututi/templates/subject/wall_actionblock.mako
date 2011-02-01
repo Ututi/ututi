@@ -20,7 +20,7 @@
          name: 'attachment',
          data: {folder: $('#folder-select').val(), target_id: $('#file_rcpt').val()},
          onSubmit: function(file, ext, iframe){
-             _gaq.push(['_trackEvent', 'action block submit', 'subject wall', 'file upload']);
+             _gaq.push(['_trackEvent', 'subject wall', 'action block submit', 'file upload']);
              iframe['progress_indicator'] = $(document.createElement('div'));
              $('#upload_file_block').append(iframe['progress_indicator']);
              iframe['progress_indicator'].text(file);
@@ -60,7 +60,7 @@
     /* Create wiki actions.
      */
     $('#wiki_create_send').click(function(){
-        _gaq.push(['_trackEvent', 'action block submit', 'subject wall', 'wiki create']);
+        _gaq.push(['_trackEvent', 'subject wall', 'action block submit', 'wiki create']);
         create_wiki_url = $("#create-wiki-url").val();
         form = $(this).closest('form');
 

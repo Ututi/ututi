@@ -121,7 +121,7 @@ But not larger ones:
     >>> browser.open('http://localhost/subject/vu/mat_analize')
     >>> browser.getLink('text2.txt').click()
     >>> browser.url
-    'http://localhost/login?came_from=%2Fsubject%2Fvu%2Fmat_analize%3Fserve_file%3D5&context=text2.txt'
+    'http://localhost/login?came_from=%2Fsubject%2Fvu%2Fmat_analize%2Ffiles%3Fserve_file%3D5&context=text2.txt'
 
     >>> form = browser.getForm('loginForm')
     >>> form.getControl('Email').value = "user@ututi.lt"
@@ -129,7 +129,7 @@ But not larger ones:
     >>> form.getControl('Login').click()
 
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize?serve_file=5'
+    'http://localhost/subject/vu/mat_analize/files?serve_file=5'
 
     >>> browser.getLink('log out').click()
 

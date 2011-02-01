@@ -8,7 +8,9 @@
 
 <div id="page_content">
   %if c.group.page != '':
+    <div class="wiki-page">
     ${h.html_cleanup(c.group.page)}
+    </div>
   %else:
     <%self:rounded_block id="page-placeholder-frame">
       <div id="page-placeholder" class="content">

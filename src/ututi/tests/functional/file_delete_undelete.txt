@@ -73,7 +73,7 @@ Restore all the other files:
     >>> browser.getControl('Undelete', index=1).click()
     >>> browser.getControl('Undelete', index=1).click()
 
-    >>> browser.open('http://localhost/subject/vu/mat_analize')
+    >>> browser.open('http://localhost/subject/vu/mat_analize/files')
     >>> browser.printQuery("//a[@class='filename']/text()")
     text3.txt
     text_in_a_folder.txt

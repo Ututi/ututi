@@ -9,7 +9,15 @@ A list of all subjects is shown at /subjects.
     >>> browser.printQuery("id('subject_list')//li/a[@class='subject-link']/text()")
     Matematin&#279; analiz&#279;
 
-The link of the subject leads to its home page.
+The link of the subject leads to its home page...
+Well, let's explore how this actually works.
+1) if the subject has no description, files or wiki,
+   homepage asks user to create content,
+2) if subject has a description, homepage always displays
+   this description,
+3) if subject has no description, but other content (files or wiki),
+   user is directed to the feed page, so he can see the activity.
+Let's check that it is actually so!
 
     >>> browser.getLink('Matematinė analizė').url
     'http://localhost/subject/vu/mat_analize'
@@ -18,11 +26,47 @@ The link of the subject leads to its home page.
     >>> browser.url
     'http://localhost/subject/vu/mat_analize'
 
-From there we can edit the subject.
+    >>> browser.printQuery("id('subject-intro-block')//text()")
+    Edit
+    What is a subject page?
+    ...
+
+We can edit the subject from here, add description and some other info.
 
     >>> browser.open('http://localhost/subject/vu/mat_analize/edit')
     >>> browser.getControl('Lecturer').value = 'Some other guy'
+    >>> browser.getControl('Brief description of the subject').value = 'This is the subject description'
     >>> browser.getControl('Save').click()
+
+Home page now displays this page description:
+
+    >>> browser.url
+    'http://localhost/subject/vu/mat_analize'
+
+    >>> browser.printQuery("id('subject_description')//text()")
+    This is the subject description
+    Edit
+
+Lets remove the description, add a wiki page, and assert that
+homepage will redirect us to the subject feed:
+
+    >>> browser.open('http://localhost/subject/vu/mat_analize/edit')
+    >>> browser.getControl('Brief description of the subject').value = ''
+    >>> browser.getControl('Save').click()
+    >>> browser.url
+    'http://localhost/subject/vu/mat_analize'
+
+    >>> browser.getLink('Wiki notes').click()
+    >>> browser.getControl('Create a wiki document').click()
+    >>> browser.getControl('Title').value = 'Wiki document title'
+    >>> browser.getControl('Content').value = 'Wiki document content'
+    >>> browser.getControl('Save').click()
+    >>> browser.url
+    'http://localhost/subject/vu/mat_analize/page/4'
+
+    >>> browser.open('http://localhost/subject/vu/mat_analize')
+    >>> browser.url
+    'http://localhost/subject/vu/mat_analize/feed'
 
 The changed information should be visible in the sidebar block.
 
@@ -93,7 +137,7 @@ You can import more subjects using the admin interface.
     Matematin&#279; analiz&#279;
 
     >>> browser.getLink('Imported subject').click()
-    >>> browser.queryHTML("id('subject_description')//div[@class='content']/text()")
+    >>> browser.queryHTML("id('subject_description')//div[contains(@class, 'block-content')]/text()")
     ['Description of the subject']
 
     >>> browser.printQuery("id('subject_info_portlet-content')//h2/text()")

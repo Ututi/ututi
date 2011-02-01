@@ -170,7 +170,7 @@ Deleting folders:
 Both folders should be gone:
 
     >>> browser = Browser.logIn()
-    >>> browser.open('http://localhost/subject/vu/mat_analize')
+    >>> browser.open('http://localhost/subject/vu/mat_analize/files')
     >>> browser.printQuery('id("mainContent")//h4')
     <h4 class="">
       <span class="cont">

@@ -27,8 +27,8 @@ We should get redirected to the index view of the page we just created.
     >>> browser.printQuery("//h2[@class='portletTitle bold']/text()")
     How to be awesome!
 
-    >>> browser.printQuery("id('page_content')")
-    <div id="page_content">Being Awesome is easy!</div>
+    >>> browser.printCssQuery("#page_content", strip=True)
+    <div>Being Awesome is easy!</div>
 
 Let's edit the page now.
 
@@ -44,8 +44,9 @@ And see how it works.
     >>> browser.printQuery("//h2[@class='portletTitle bold']/text()")
     How to be awesome!
 
-    >>> browser.printQuery("id('page_content')")
-    <div id="page_content">Being Awesome is very easy!</div>
+    >>> browser.printCssQuery("#page_content", strip=True)
+    <div>Being Awesome is very easy!</div>
+
 
 What about our brand new embedded latex syntax:
 
@@ -54,7 +55,7 @@ What about our brand new embedded latex syntax:
     >>> browser.getControl('Save').click()
 
     >>> browser.printQuery("id('page_content')")
-    <div id="page_content">
+    <div id="page_content" class="wiki-page">
       Being Awesome is very easy!
       <img class="latex" alt="\sum_{n=1}^\infty a_n" src="http://l.wordpress.com/latex.php?bg=ffffff&amp;fg=000000&amp;s=0&amp;latex=%5Cdisplaystyle+%5Csum_%7Bn%3D1%7D%5E%5Cinfty+a_n" />
     </div>
@@ -80,8 +81,8 @@ We can also look at the previous version:
           You are viewing an old version of this page created by <a href="/user/1">Adminas Adminovix</a> on ...
     </div>
 
-    >>> browser.printQuery("id('page_content')")
-    <div id="page_content">Being Awesome is very easy!</div>
+    >>> browser.printCssQuery("#page_content", strip=True)
+    <div>Being Awesome is very easy!</div>
 
     >>> browser.getLink('Go back to history').click()
     >>> browser.getLink('Go back to page').click()

@@ -22,7 +22,7 @@ Let's upload 4 files to check if folder file hiding works correctly:
 Let's check it - the fourth file should be prehidden ('show' class):
 
     >>> browser = Browser.logIn()
-    >>> browser.open('http://localhost/subject/vu/mat_analize')
+    >>> browser.open('http://localhost/subject/vu/mat_analize/files')
     >>> browser.printCssQuery('li.file')
     <li class="file">
     ...

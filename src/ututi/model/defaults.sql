@@ -861,7 +861,9 @@ CREATE TRIGGER subject_page_event_trigger AFTER INSERT OR UPDATE ON subject_page
 
 
 CREATE FUNCTION file_event_trigger() RETURNS trigger AS $$
-    DECLARE parent_type varchar(20) := NULL;
+    DECLARE
+      parent_type varchar(20) := NULL;
+      evt events;
     BEGIN
       IF NOT NEW.parent_id is NULL THEN
         IF TG_OP = 'UPDATE' THEN
@@ -872,7 +874,9 @@ CREATE FUNCTION file_event_trigger() RETURNS trigger AS $$
         SELECT content_type INTO parent_type FROM content_items WHERE id = NEW.parent_id;
         IF parent_type in ('subject', 'group') THEN
           INSERT INTO events (object_id, author_id, event_type, file_id)
-                 VALUES (NEW.parent_id, cast(current_setting('ututi.active_user') as int8), 'file_uploaded', NEW.id);
+                 VALUES (NEW.parent_id, cast(current_setting('ututi.active_user') as int8), 'file_uploaded', NEW.id)
+                 RETURNING * INTO evt;
+          EXECUTE event_set_group(evt);
         END IF;
       END IF;
       RETURN NEW;
@@ -898,8 +902,7 @@ CREATE FUNCTION event_set_group(evt events) RETURNS void as $$
              AND e.created < evt.created
              ORDER BY e.created DESC
              LIMIT 1;
-      END IF;
-      IF evt.event_type = 'page_modified' THEN
+      ELSIF evt.event_type = 'page_modified' THEN
          SELECT id INTO pid FROM events e WHERE e.event_type in ('page_modified', 'page_created')
              AND e.object_id = evt.object_id
              AND e.page_id = evt.page_id
@@ -910,8 +913,36 @@ CREATE FUNCTION event_set_group(evt events) RETURNS void as $$
              AND e.created < evt.created
              ORDER BY e.created DESC
              LIMIT 1;
+      ELSIF evt.event_type = 'file_uploaded' THEN
+         SELECT id INTO pid FROM events e WHERE e.event_type = 'file_uploaded'
+             AND e.object_id = evt.object_id
+             AND e.author_id = evt.author_id
+             AND evt.created - e.created < interval '15 minutes'
+             AND e.parent_id IS NULL
+             AND e.id <> evt.id
+             AND e.created < evt.created
+             ORDER BY e.created DESC
+             LIMIT 1;
+      ELSIF evt.event_type = 'member_joined' THEN
+         SELECT id INTO pid FROM events e WHERE e.event_type = evt.event_type
+             AND e.object_id = evt.object_id
+             AND evt.created - e.created < interval '15 minutes'
+             AND e.parent_id IS NULL
+             AND e.id <> evt.id
+             AND e.created < evt.created
+             ORDER BY e.created DESC
+             LIMIT 1;
+      ELSIF evt.event_type = 'member_left' THEN
+         SELECT id INTO pid FROM events e WHERE e.event_type = evt.event_type
+             AND e.object_id = evt.object_id
+             AND evt.created - e.created < interval '15 minutes'
+             AND e.parent_id IS NULL
+             AND e.id <> evt.id
+             AND e.created < evt.created
+             ORDER BY e.created DESC
+             LIMIT 1;
       END IF;
-      IF evt.event_type IN ('subject_modified', 'page_modified') THEN
+      IF evt.event_type IN ('subject_modified', 'page_modified', 'file_uploaded', 'member_joined', 'member_left') AND NOT pid IS null THEN
         UPDATE events SET parent_id = evt.id WHERE id = pid or parent_id = pid;
       END IF;
     END;
@@ -1021,14 +1052,19 @@ CREATE TRIGGER group_forum_message_event_trigger AFTER INSERT OR UPDATE ON forum
 
 
 CREATE FUNCTION member_group_event_trigger() RETURNS trigger AS $$
+    DECLARE
+      evt events;
     BEGIN
       IF TG_OP = 'DELETE' THEN
         INSERT INTO events (object_id, author_id, event_type)
-               VALUES (OLD.group_id, OLD.user_id, 'member_left');
+               VALUES (OLD.group_id, OLD.user_id, 'member_left')
+               RETURNING * INTO evt;
       ELSIF TG_OP = 'INSERT' THEN
         INSERT INTO events (object_id, author_id, event_type)
-               VALUES (NEW.group_id, NEW.user_id, 'member_joined');
+               VALUES (NEW.group_id, NEW.user_id, 'member_joined')
+               RETURNING * INTO evt;
       END IF;
+      EXECUTE event_set_group(evt);
       RETURN NEW;
     END
 $$ LANGUAGE plpgsql;;

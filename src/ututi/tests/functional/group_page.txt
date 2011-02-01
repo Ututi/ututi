@@ -28,7 +28,7 @@ We can edit it of course:
     >>> browser.getControl('Content').value = 'This is our group'
     >>> browser.getControl('Save').click()
 
-    >>> browser.printQuery('id("page_content")/text()')
+    >>> browser.printQuery('id("page_content")//text()')
     This is our group
 
 We can specify that the group's page is public, shown on the front page.
