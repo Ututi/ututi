@@ -265,3 +265,14 @@ def booksExpirationDates():
     for book in meta.Session.query(Book).all():
        expiration_date.append(book.valid_until)
     return expiration_date
+
+def setup_university_export():
+    uni = LocationTag(u'U-niversity', u'uni', u'U-niversity description')
+    meta.Session.add(uni)
+
+    for i in ('1', '2', '3'):
+        f = LocationTag(u'Faculty ' + i, u'f' + i, u'U-niversity faculty ' + i, uni)
+        meta.Session.add(f)
+
+    meta.Session.commit()
+    meta.Session.execute("SET ututi.active_user TO 0")

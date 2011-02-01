@@ -297,6 +297,8 @@ def make_map(config):
     map.connect('/admin/example_blocks', controller='admin', action='example_blocks')
 
     map.connect('/admin/teacher_status/{command}/{id}', controller='admin', action='teacher_status')
+    map.connect('/admin/{action}/{id}', controller='admin')
+    map.connect('/admin/{action}', controller='admin')
 
     map.connect('/structure/completions/{text}', controller='structure', action='completions')
     map.connect('/structure', controller='structure', action='index')
