@@ -8,13 +8,15 @@ from ututi.model import Group
 from ututi.model import meta
 
 from ututi.tests import UtutiLayer
+from ututi.tests.model import setUpUser
+
 import ututi
 
 def test_create_teacher():
     r"""Test creation of the teacher type.
 
        >>> from ututi.model.users import Teacher
-       >>> teacher = Teacher(fullname=u'Petras', password='qwerty', gen_password=True)
+       >>> teacher = Teacher(fullname=u'Petras', username='petras', location=LocationTag.get('uni'), password='qwerty', gen_password=True)
        >>> meta.Session.add(teacher)
        >>> meta.Session.commit()
        >>> meta.Session.flush()
@@ -38,7 +40,7 @@ def test_teacher_subjects():
 
        >>> from ututi.model.users import Teacher
        >>> from ututi.model import Subject
-       >>> teacher = Teacher(fullname=u'Petras', password='qwerty', gen_password=True)
+       >>> teacher = Teacher(fullname=u'Petras', username='petras', location=LocationTag.get('uni'), password='qwerty', gen_password=True)
        >>> meta.Session.add(teacher)
        >>> meta.Session.commit()
 
@@ -63,7 +65,7 @@ def test_teacher_groups():
 
        >>> from ututi.model.users import Teacher, TeacherGroup
        >>> from ututi.model import Subject
-       >>> teacher = Teacher(fullname=u'Petras', password='qwerty', gen_password=True)
+       >>> teacher = Teacher(fullname=u'Petras', username='petras', location=LocationTag.get('uni'), password='qwerty', gen_password=True)
        >>> meta.Session.add(teacher)
        >>> meta.Session.commit()
 
@@ -104,8 +106,9 @@ def test_suite():
 def test_setup(test):
     """Create some models needed for the tests."""
     ututi.tests.setUp(test)
+    setUpUser()
     meta.Session.execute("SET ututi.active_user TO 1")
-    g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date.today(), u'U2ti moderatoriai.')
+    g = Group('moderators', u'Moderators', LocationTag.get(u'uni'), date.today(), u'Moderators')
     meta.Session.add(g)
     meta.Session.commit()
     meta.Session.execute("SET ututi.active_user TO 1")
