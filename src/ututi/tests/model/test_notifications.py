@@ -1,16 +1,18 @@
 import doctest
 import datetime
 
+from ututi.model import LocationTag
 from ututi.model import Notification, meta
 from ututi.model.users import User
 from ututi.tests import UtutiLayer
+from ututi.tests.model import setUpUser
 
 import ututi
 
 def test_notifications():
     """A simple test to see if the notifications work.
 
-        >>> admin = User.get('admin@ututi.lt')
+        >>> admin = User.get('admin@uni.ututi.com', LocationTag.get(u'uni'))
         >>> notification = Notification(u'hey!', datetime.date(2020, 10, 01))
         >>> meta.Session.add(notification)
         >>> meta.Session.commit()
@@ -39,3 +41,4 @@ def test_suite():
 def test_setup(test):
     """Create some models needed for the tests."""
     ututi.tests.setUp(test)
+    setUpUser()
