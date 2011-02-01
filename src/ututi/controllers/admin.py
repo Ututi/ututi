@@ -902,7 +902,11 @@ class AdminController(BaseController):
 
     @ActionProtector("root")
     def export_university(self, university_id):
-        university = LocationTag.get(int(university_id))
+        try:
+            university_id = int(university_id)
+        except ValueError:
+            pass
+        university = LocationTag.get(university_id)
         result = StringIO()
         zf = zipfile.ZipFile(result, "a", zipfile.ZIP_DEFLATED, False)
         if university.logo:
