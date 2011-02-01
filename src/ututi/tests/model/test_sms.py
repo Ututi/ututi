@@ -1,7 +1,9 @@
 import doctest
 
+from ututi.model import LocationTag
 from ututi.model import SMS, User, meta
 from ututi.tests import UtutiLayer
+from ututi.tests.model import setUpUser
 
 import ututi
 
@@ -9,7 +11,7 @@ import ututi
 def test_messages():
     """A simple test to see if the SNMS model works.
 
-        >>> admin = User.get('admin@ututi.lt')
+        >>> admin = User.get('admin@uni.ututi.com', LocationTag.get(u'uni'))
         >>> sms = SMS(sender=admin, recipient=admin, recipient_number='+37060000000', message_text=u'Test message.')
         >>> meta.Session.add(sms)
         >>> meta.Session.commit()
@@ -35,3 +37,4 @@ def test_suite():
 def test_setup(test):
     """Create some models needed for the tests."""
     ututi.tests.setUp(test)
+    setUpUser()
