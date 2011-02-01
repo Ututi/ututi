@@ -1,0 +1,38 @@
+Test university export for Ututi 2 feature
+==========================================
+
+Set up
+------
+
+    >>> from ututi.tests.functional import setup_university_export
+    >>> setup_university_export()
+
+Log in as admin:
+
+    >>> browser = Browser.logIn()
+
+Export feature has no interface yet, action url must be entered manually:
+
+    >>> browser.open('http://localhost/structure/uni/export')
+
+It returns a ZIP file download:
+
+    >>> print browser.headers
+    Pragma: no-cache
+    Cache-Control: no-cache
+    Content-Disposition: attachment; filename="uni.zip"
+    Content-Type: application/zip
+
+Let's assert first that the ZIP file contains all needed entries:
+
+    >>> from cStringIO import StringIO
+    >>> from zipfile import ZipFile, ZIP_DEFLATED
+    >>> zf = ZipFile(StringIO(browser.contents), 'r', ZIP_DEFLATED, False)
+    >>> print '\n'.join(sorted(zf.namelist()))
+    group_files.csv
+    group_members.csv
+    group_subjects.csv
+    groups.csv
+    subject_files.csv
+    subjects.csv
+    users.csv
