@@ -10,6 +10,8 @@ from ututi.model import meta
 from ututi.model import GroupMembershipType, GroupMember
 
 from ututi.tests import UtutiLayer
+from ututi.tests.model import setUpUser
+
 import ututi
 
 
@@ -95,8 +97,8 @@ def test_User():
 
     Let's create a couple of users:
 
-        >>> petras = User(u'Petras', 'qwerty', gen_password=True)
-        >>> jonas = User(u'Jonas', '7jN1UP/WkmnVv/XZb28pFYf9flmlcIxUcoa1', gen_password=False)
+        >>> petras = User(u'Petras', 'petras', LocationTag.get('uni'),'qwerty', gen_password=True)
+        >>> jonas = User(u'Jonas', 'jonas', LocationTag.get('uni'), '7jN1UP/WkmnVv/XZb28pFYf9flmlcIxUcoa1', gen_password=False)
 
         >>> meta.Session.add(petras)
         >>> meta.Session.flush()
@@ -134,52 +136,35 @@ def test_User_get():
     the time. As our clean database contains one user by default,
     let's try and get him:
 
-        >>> admin = User.get('admin@ututi.lt')
+        >>> admin = User.get('admin@uni.ututi.com', LocationTag.get('uni'))
 
         >>> admin
         <ututi.model.users.User object at ...>
 
         >>> admin.fullname
-        u'Adminas Adminovix'
+        u'Administrator of the university'
 
     If we pass an email that does not exist, we should get None:
 
-        >>> User.get('admin@ututi.com') is None
+        >>> User.get('admin@luni.ututi.com', LocationTag.get('uni')) is None
         True
 
     Let's see if it still works when we have more than one user in our
     database:
 
-        >>> petras = User(u'Petras', 'asdasd', gen_password=True)
+        >>> petras = User(u'Petras', 'petras', LocationTag.get('uni'), 'asdasd', gen_password=True)
         >>> meta.Session.add(petras)
         >>> meta.Session.commit()
 
-        >>> User.get('admin@ututi.lt') is admin
+        >>> User.get('admin@uni.ututi.com', LocationTag.get('uni')) is admin
         True
         >>> meta.Session.commit()
         >>> meta.Session.remove()
 
-    Hmm, what happens if 2 users have the same email, but one of them
-    has not confirmed it yet:
-
-        >>> petras = User.get_byid(2)
-        >>> petras.emails.append(Email("admin@ututi.lt"))
-
-        >>> meta.Session.commit()
-        Traceback (most recent call last):
-        ...
-        IntegrityError: (IntegrityError) duplicate key value violates unique constraint "emails_pkey"
-          'INSERT INTO emails (id, email) VALUES (%(id)s, %(email)s)' {...}
-
-    XXX Argh, we have no idea which of the two possible errors we will get.
-
-    Well - it fails, and it should get fixed XXX
-
     We also have a function that gets users by their unique ids:
 
-        >>> meta.Session.rollback()
-        >>> User.get_byid(2) is petras
-        True
+        >>> User.get_byid(2).fullname
+        u'Petras'
 
     """
 
@@ -187,9 +172,9 @@ def test_User_get():
 def test_user_subject_watching():
     r"""Test for user subject watching and unwatching.
 
-        >>> user = User.get('admin@ututi.lt')
+        >>> user = User.get('admin@uni.ututi.com', LocationTag.get('uni'))
         >>> res = meta.Session.execute("SET ututi.active_user TO %s" % user.id)
-        >>> location = LocationTag.get([u'vu', u'ef'])
+        >>> location = LocationTag.get([u'uni', u'dep'])
         >>> subjects = []
         >>> for i in range(5):
         ...     subject = Subject('subject%d' % i, u'Subject %d' % i, location)
@@ -287,11 +272,12 @@ def test_suite():
 def test_setup(test):
     """Create some models needed for the tests."""
     ututi.tests.setUp(test)
+    setUpUser()
 
-    u = User.get('admin@ututi.lt')
+    u = User.get('admin@uni.ututi.com', LocationTag.get('uni'))
     meta.Session.execute("SET ututi.active_user TO %d" % u.id)
 
-    g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date.today(), u'U2ti moderatoriai.')
+    g = Group('moderators', u'Moderatoriai', LocationTag.get(u'uni'), date.today(), u'U2ti moderatoriai.')
     role = GroupMembershipType.get('administrator')
     gm = GroupMember()
     gm.user = u
