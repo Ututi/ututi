@@ -14,11 +14,14 @@ from ututi.lib.geoip import set_geolocation
 
 def current_user():
     from ututi.model import User
-    login = session.get('login', '')
     try:
-        location = int(session.get('location_id', ''))
+        login = session.get('login', None)
+        if login is None:
+            return None
+        login = int(login)
     except ValueError:
         return None
+
     session_secret = session.get('cookie_secret', None)
     cookie_secret = request.cookies.get('ututi_session_lifetime', None)
 
@@ -26,13 +29,13 @@ def current_user():
         session.delete()
         response.delete_cookie('ututi_session_lifetime')
         return None
-    return User.get(login, location)
+
+    return User.get_byid(login)
 
 def sign_in_user(user, long_session=False):
     set_geolocation(user)
 
-    session['login'] = user.username
-    session['location_id'] = user.location_id
+    session['login'] = user.id
     session['cookie_secret'] = ''.join(Random().sample(string.ascii_lowercase, 20))
     expiration_time = 3600*24*30 if long_session else None
     response.set_cookie('ututi_session_lifetime', session['cookie_secret'], max_age = expiration_time)
