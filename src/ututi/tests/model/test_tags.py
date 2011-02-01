@@ -5,6 +5,7 @@ from ututi.model import meta
 
 from ututi.tests import setUp
 from ututi.tests import UtutiLayer
+from ututi.tests.model import setUpUser
 
 
 def test_page_tags():
@@ -14,7 +15,7 @@ def test_page_tags():
 
     Create a subject, add a page to it.
 
-        >>> u = User.get('admin@ututi.lt')
+        >>> u = User.get('admin@uni.ututi.com', LocationTag.get(u'uni'))
         >>> res = meta.Session.execute("SET ututi.active_user TO %d" % u.id)
 
         >>> s = Subject(u'subj_id', u'Test subject', LocationTag.get(u'VU'))
@@ -22,7 +23,7 @@ def test_page_tags():
         >>> meta.Session.add(t)
         >>> s.tags.append(t)
         >>> meta.Session.add(s)
-        >>> u = User.get(u'admin@ututi.lt')
+        >>> u = User.get(u'admin@uni.ututi.com', LocationTag.get('uni'))
         >>> p = Page(u'page title', u'Page text')
         >>> meta.Session.add(p)
         >>> s.pages.append(p)
@@ -58,10 +59,10 @@ def test_page_location():
     """Test the synchronization between page locations and the locations of the subjects
     the pages belong to.
 
-        >>> u = User.get('admin@ututi.lt')
+        >>> u = User.get('admin@uni.ututi.com', LocationTag.get(u'uni'))
         >>> res = meta.Session.execute("SET ututi.active_user TO %d" % u.id)
 
-        >>> s = Subject(u'subj_id', u'Test subject', LocationTag.get(u'VU'))
+        >>> s = Subject(u'subj_id', u'Test subject', LocationTag.get(u'uni'))
         >>> meta.Session.add(s)
         >>> p = Page(u'page title', u'Page text')
         >>> meta.Session.add(p)
@@ -73,15 +74,15 @@ def test_page_location():
         >>> res = meta.Session.execute("SET ututi.active_user TO %d" % u.id)
         >>> p = Page.get(p.id)
         >>> p.location.title
-        u'Vilniaus universitetas'
+        u'U-niversity'
 
     Let's change the subject's location and see what the page does:
 
-        >>> s.location = LocationTag.get(u'vu/ef')
+        >>> s.location = LocationTag.get(u'uni/dep')
         >>> meta.Session.commit()
         >>> p = Page.get(p.id)
         >>> p.location.title
-        u'Ekonomikos fakultetas'
+        u'D-epartment'
 
     """
 
@@ -90,6 +91,15 @@ def test_suite():
     suite = doctest.DocTestSuite(
         optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |
         doctest.NORMALIZE_WHITESPACE,
-        setUp=setUp)
+        setUp=test_setup)
     suite.layer = UtutiLayer
     return suite
+
+def test_setup(test):
+    setUp(test)
+    setUpUser()
+
+    uni = LocationTag.get(u'uni')
+    dep = LocationTag(u'D-epartment', u'dep', u'', uni)
+    meta.Session.add(dep)
+    meta.Session.commit()
