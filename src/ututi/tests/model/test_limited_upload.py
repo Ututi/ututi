@@ -8,6 +8,7 @@ from ututi.model import LocationTag, Group, File, meta
 from ututi.model.users import User
 
 from ututi.tests import UtutiLayer
+from ututi.tests.model import setUpUser
 import ututi
 
 def test_group_uploadstatus():
@@ -46,12 +47,12 @@ def test_suite():
 def test_setup(test):
     """Create some models needed for the tests."""
     ututi.tests.setUp(test)
-
-    u = User.get('admin@ututi.lt')
+    setUpUser()
+    u = User.get('admin@uni.ututi.com', LocationTag.get(u'uni'))
     meta.Session.execute("SET ututi.active_user TO %d" % u.id)
 
     g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date.today(), u'U2ti moderatoriai.')
-
     meta.Session.add(g)
     meta.Session.commit()
+
     meta.Session.execute("SET ututi.active_user TO %d" % u.id)
