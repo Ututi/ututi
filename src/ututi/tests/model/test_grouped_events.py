@@ -14,8 +14,10 @@ from ututi.model.users import User
 from ututi.model.events import FileUploadedEvent
 from ututi.model.events import PageModifiedEvent
 from ututi.model.events import SubjectModifiedEvent
+
 from ututi.tests import setUp
 from ututi.tests import UtutiLayer
+from ututi.tests.model import setUpUser
 
 def test_grouping_subject_events():
     r"""Test grouping of subject events
@@ -47,7 +49,7 @@ def test_grouping_subject_events():
         [(5L, 'subject_modified', [3L, 4L]), (4L, 'subject_modified', [])]
 
     Only modifications by the same user are grouped.
-        >>> petras = User(u'Petras', 'qwerty', gen_password=True)
+        >>> petras = User(u'Petras', 'petras', LocationTag.get(u'uni'), 'qwerty', gen_password=True)
         >>> meta.Session.add(petras)
         >>> meta.Session.commit()
 
@@ -115,7 +117,8 @@ def test_suite():
 
 def test_setup(test):
     """Create some models for the test."""
-    u = User.get('admin@ututi.lt')
+    setUpUser()
+    u = User.get('admin@uni.ututi.com', LocationTag.get(u'uni'))
     meta.Session.execute("SET ututi.active_user TO %d" % u.id)
 
     g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date.today(), u'U2ti moderatoriai.')

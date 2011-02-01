@@ -5,6 +5,7 @@ from ututi.model import LocationTag, GroupMembershipType, GroupMember, Group, Fi
 from ututi.model.users import User
 
 from ututi.tests import UtutiLayer
+from ututi.tests.model import setUpUser
 import ututi
 
 
@@ -98,20 +99,10 @@ def test_suite():
 def test_setup(test):
     """Create some models needed for the tests."""
     ututi.tests.setUp(test)
-    # Common test setup, here for backwards compatibility only, will
-    # get removed or moved later
-    uni = LocationTag(u'U-niversity', u'uni', u'')
+    setUpUser()
+    uni = LocationTag.get(u'uni')
     dep = LocationTag(u'department', u'dep', u'', uni)
-
-    meta.Session.add(uni)
     meta.Session.add(dep)
-    meta.Session.commit()
-
-    meta.Session.execute("insert into users (location_id, username, fullname, password)"
-                         " (select tags.id, 'admin@uni.ututi.com', 'Administrator of the university', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7'"
-                         " from tags where title_short = 'uni');")
-    meta.Session.execute("insert into emails (id, email, confirmed)"
-                         " (select users.id, users.username, true from users where fullname = 'Administrator of the university')")
     meta.Session.commit()
 
     u = User.get('admin@uni.ututi.com', uni)
