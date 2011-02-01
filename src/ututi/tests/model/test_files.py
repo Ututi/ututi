@@ -52,7 +52,7 @@ def test_group_files():
 def test_subject_files():
     """Test subject file management.
 
-        >>> subject = Subject.get(LocationTag.get(u'vu'), "mat_analize")
+        >>> subject = Subject.get(LocationTag.get(u'uni'), "subject")
 
         >>> f = File(u"some.txt", u'A Text file', mimetype='text/plain', data="Wassup?")
         >>> f.folder = u"some folder"
@@ -63,7 +63,7 @@ def test_subject_files():
 
         >>> meta.Session.commit()
 
-        >>> subject = Subject.get(LocationTag.get(u'vu'), "mat_analize")
+        >>> subject = Subject.get(LocationTag.get(u'uni'), "subject")
 
         >>> subject.files
         [<ututi.model.File object at ...>, <ututi.model.File object at ...>]
@@ -74,7 +74,7 @@ def test_subject_files():
         >>> [f.location_id for f in subject.files]
         [1L, 1L]
 
-        >>> subject.location_id = LocationTag.get(u'vu/ef').id
+        >>> subject.location_id = LocationTag.get(u'uni/dep').id
         >>> meta.Session.commit()
 
         >>> [f.location_id for f in subject.files]
@@ -98,8 +98,23 @@ def test_suite():
 def test_setup(test):
     """Create some models needed for the tests."""
     ututi.tests.setUp(test)
+    # Common test setup, here for backwards compatibility only, will
+    # get removed or moved later
+    uni = LocationTag(u'U-niversity', u'uni', u'')
+    dep = LocationTag(u'department', u'dep', u'', uni)
 
-    u = User.get('admin@ututi.lt')
+    meta.Session.add(uni)
+    meta.Session.add(dep)
+    meta.Session.commit()
+
+    meta.Session.execute("insert into users (location_id, username, fullname, password)"
+                         " (select tags.id, 'admin@uni.ututi.com', 'Administrator of the university', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7'"
+                         " from tags where title_short = 'uni');")
+    meta.Session.execute("insert into emails (id, email, confirmed)"
+                         " (select users.id, users.username, true from users where fullname = 'Administrator of the university')")
+    meta.Session.commit()
+
+    u = User.get('admin@uni.ututi.com', uni)
     meta.Session.execute("SET ututi.active_user TO %d" % u.id)
 
     g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date.today(), u'U2ti moderatoriai.')
@@ -111,6 +126,8 @@ def test_setup(test):
     gm.role = role
     meta.Session.add(g)
     meta.Session.add(gm)
-    meta.Session.add(Subject(u'mat_analize', u'Matematin\u0117 analiz\u0117', LocationTag.get(u'vu'), u'prof. E. Misevi\u010dius'))
+
+    meta.Session.add(Subject(u'subject', u'A Generic subject', uni, u''))
     meta.Session.commit()
+
     meta.Session.execute("SET ututi.active_user TO %d" % u.id)

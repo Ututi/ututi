@@ -206,15 +206,6 @@ class UtutiTestBrowser(NousTestBrowser):
 def setUp(test):
     test.globs['app'] = NousTestApp(pylons.test.pylonsapp)
     test.globs['Browser'] = UtutiTestBrowser
-    # Common test setup, here for backwards compatibility only, will
-    # get removed or moved later
-    meta.Session.execute("insert into users (fullname, password) values ('Adminas Adminovix', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7')")
-    meta.Session.execute("insert into emails (id, email, confirmed) values (1, 'admin@ututi.lt', true)")
-
-    l = LocationTag(u'Vilniaus universitetas', u'vu', u'Seniausias universitetas Lietuvoje.')
-    f = LocationTag(u'Ekonomikos fakultetas', u'ef', u'', l)
-    meta.Session.add(l)
-    meta.Session.add(f)
 
 
 def tearDown(test):
