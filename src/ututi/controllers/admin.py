@@ -914,7 +914,8 @@ class AdminController(BaseController):
 
         zf.close()
         response.headers['Content-Length'] = len(result.getvalue())
-        response.headers['Content-Disposition'] = 'attachment; filename="%s.zip"' % university.title_short
+        response.headers['Content-Disposition'] = 'attachment; filename="%s.zip"' %\
+                university.title_short.encode('transliterate').encode('ascii', 'ignore')
         response.headers['Content-Type'] = 'application/zip'
         result.seek(0)
         return result
