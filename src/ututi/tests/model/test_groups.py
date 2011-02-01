@@ -6,6 +6,7 @@ from ututi.model.users import User
 from ututi.model.events import Event
 
 from ututi.tests import UtutiLayer
+from ututi.tests.model import setUpUser
 import ututi
 
 
@@ -112,7 +113,7 @@ def test_invitations():
 
     Let's say a user wants to join a group.
         >>> g = Group.get("moderators")
-        >>> u = User.get("admin@ututi.lt")
+        >>> u = User.get("admin@uni.ututi.com", LocationTag.get(u'uni'))
         >>> g.request_join(u)
         <ututi.model.PendingRequest object ...>
 
@@ -140,18 +141,14 @@ def test_suite():
 def test_setup(test):
     """Create some models needed for the tests."""
     ututi.tests.setUp(test)
+    setUpUser()
 
-    u = User.get('admin@ututi.lt')
+    u = User.get('admin@uni.ututi.com', LocationTag.get(u'uni'))
     meta.Session.execute("SET ututi.active_user TO %d" % u.id)
 
     g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date.today(), u'U2ti moderatoriai.')
-
-    role = GroupMembershipType.get('administrator')
-    gm = GroupMember()
-    gm.user = u
-    gm.group = g
-    gm.role = role
+    g.add_member(u, True)
     meta.Session.add(g)
-    meta.Session.add(gm)
     meta.Session.commit()
+
     meta.Session.execute("SET ututi.active_user TO %d" % u.id)
