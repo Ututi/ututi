@@ -33,7 +33,7 @@ from ututi.lib.forms import validate
 from ututi.lib.search import search_query
 from ututi.lib.security import sign_out_user
 from ututi.lib.security import ActionProtector
-from ututi.lib.base import BaseController, render, render_lang
+from ututi.lib.base import BaseController, render
 
 
 class ChainedSubFormValidator(validators.FormValidator):
@@ -524,7 +524,7 @@ class BooksController(HomeController, BaseController):
         return render('books/show.mako')
 
     def about(self):
-        return render_lang('/books/about.mako')
+        return render('/books/about.mako')
 
     def login(self):
         context_type = request.params.get('context_type', None)

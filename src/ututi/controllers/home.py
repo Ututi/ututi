@@ -19,7 +19,7 @@ from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql import func
 from sqlalchemy.sql.expression import desc
 
-from ututi.lib.base import BaseController, render, render_lang, u_cache
+from ututi.lib.base import BaseController, render, u_cache
 import ututi.lib.helpers as h
 from ututi.lib import gg
 from ututi.lib.emails import email_confirmation_request, email_password_reset
@@ -197,10 +197,10 @@ class HomeController(UniversityListMixin, FederationMixin):
             return render('/anonymous_index.mako')
 
     def about(self):
-        return render_lang('/about.mako')
+        return render('/about.mako')
 
     def advertising(self):
-        return render_lang('/advertising.mako')
+        return render('/advertising.mako')
 
     @ActionProtector("marketingist")
     def statistics(self):
@@ -233,7 +233,7 @@ class HomeController(UniversityListMixin, FederationMixin):
         return render('/statistics.mako')
 
     def terms(self):
-        return render_lang('/terms.mako')
+        return render('/terms.mako')
 
     def robots(self):
         response.headers['Content-Type'] = 'text/plain'

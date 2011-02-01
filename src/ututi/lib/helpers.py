@@ -19,7 +19,7 @@ from webhelpers.html.builder import literal
 from webhelpers.html import HTML
 from webhelpers.html.tags import convert_boolean_attrs
 
-from ututi.lib.base import render_lang, u_cache
+from ututi.lib.base import u_cache
 from ututi.lib.latex import replace_latex_to_html as latex_to_html
 
 from pylons.i18n import _

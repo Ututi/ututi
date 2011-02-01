@@ -2,7 +2,7 @@
 
 <%def name="ututi_banners_portlet()">
 <%
-   content = h.render_lang('portlets/banners.mako')
+   content = h.render('portlets/banners.mako')
 %>
 %if content != '':
   <%self:portlet id="banners_portlet" portlet_class="border-less">

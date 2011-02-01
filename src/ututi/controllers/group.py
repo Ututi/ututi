@@ -28,7 +28,7 @@ from ututi.lib.fileview import FileViewMixin
 from ututi.lib.image import serve_logo
 from ututi.lib.search import _exclude_subjects
 from ututi.lib.sms import sms_cost
-from ututi.lib.base import BaseController, render, render_lang
+from ututi.lib.base import BaseController, render
 from ututi.lib.validators import HtmlSanitizeValidator, TranslatedEmailValidator, LocationTagsValidator, TagsValidator, GroupCouponValidator, FileUploadTypeValidator, validate
 from ututi.lib.wall import WallMixin
 
@@ -1152,7 +1152,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
     @ActionProtector("member", "admin")
     def pay(self, group):
         c.group_menu_current_item = 'home'
-        return render_lang('group/pay.mako')
+        return render('group/pay.mako')
 
     @group_action
     @ActionProtector("member", "admin")
