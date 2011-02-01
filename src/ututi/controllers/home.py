@@ -598,3 +598,11 @@ class HomeController(UniversityListMixin, FederationMixin):
 
     def tour(self):
         return render('tour.mako')
+
+    def switch_language(self):
+        language = request.params.get('language', 'en')
+        # TODO validate
+        # TODO store on user if user is logged in
+        session['language'] = language
+        session.save()
+        redirect(c.came_from or url('/'))

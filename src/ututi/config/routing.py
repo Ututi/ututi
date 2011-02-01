@@ -349,6 +349,8 @@ def make_map(config):
     map.connect('/bugs/thread/{thread_id}/unsubscribe',
                 controller='bugs', action='unsubscribe', id=None, category_id=2)
 
+    map.connect('switch_language', '/switch_language', controller='home', action='switch_language')
+
     map.connect('/{controller}', action='index')
     map.connect('/{controller}/{action}')
     map.connect('/{controller}/{action}/{id}')

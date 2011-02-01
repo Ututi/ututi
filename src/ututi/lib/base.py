@@ -16,9 +16,9 @@ from paste.util.converters import asbool
 from pylons.decorators.cache import beaker_cache
 from pylons.controllers import WSGIController
 from pylons.templating import pylons_globals, render_mako, render_mako_def
-from pylons import url
+from pylons import url, session
 from pylons import tmpl_context as c, config, request, response
-from pylons.i18n.translation import get_lang
+from pylons.i18n.translation import set_lang
 
 from ututi.lib.cache import u_cache # reexport
 from ututi.lib.security import current_user, sign_in_user
@@ -81,11 +81,9 @@ class BaseController(WSGIController):
         c.came_from = request.params.get('came_from', '')
         c.came_from_search = False #if the user came from google search
 
-        lang = get_lang()
-        if not lang:
-            c.lang = 'lt'
-        else:
-            c.lang = lang[0]
+        lang = session.get('language', 'en')
+        set_lang(lang)
+        c.lang = lang
 
         succeeded = False
         try:

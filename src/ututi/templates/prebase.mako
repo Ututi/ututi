@@ -338,6 +338,15 @@ ${self.anonymous_menu()}
          nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '')
       %>
       <p>Copyright © <a href="${_('ututi_link')}">${_(u'UAB „UTUTI“')}</a></p>
+      <form action="${url('switch_language')}">
+        <input name="came_from" type="hidden" value="${request.url}" />
+        <select name="language">
+          <option value="en">${_('English')}</option>
+          <option value="lt">${_('Lithuanian')}</option>
+          <option value="pl">${_('Polish')}</option>
+        </select>
+        <input type="submit" value="${_('Select')}" />
+      </form>
       <ul>
         <li><a ${nofollow} href="${url(controller='home', action='about')}">${_('About ututi')}</a></li>
         <li><a ${nofollow} href="${_('ututi_blog_url')}">${_('U-blog')}</a></li>
