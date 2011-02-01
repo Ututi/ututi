@@ -359,8 +359,11 @@ class User(object):
         medals.sort(key=lambda m: order.index(m.medal_type))
         return medals
 
-    def __init__(self, fullname, password, gen_password=True):
+    def __init__(self, fullname, username, location, password, gen_password=True):
         self.fullname = fullname
+        self.location = location
+        self.username = username
+        self.password = password
         self.update_password(password, gen_password)
 
     def update_password(self, password, gen_password=True):
