@@ -174,7 +174,7 @@ class User(object):
             if isinstance(username, (long, int)):
                 return meta.Session.query(cls).filter_by(id=username).one()
             else:
-                return meta.Session.query(Email).filter_by(email=username.strip().lower()).one().user
+                return meta.Session.query(cls).filter_by(username=username.strip().lower()).one()
         except NoResultFound:
             return None
 
