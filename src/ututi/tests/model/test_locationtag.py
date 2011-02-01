@@ -1,15 +1,15 @@
 import doctest
 
 from ututi.model import LocationTag, meta
-from ututi.tests import setUp
 from ututi.tests import UtutiLayer
+import ututi
 
 def test_LocationTag_flatten():
     """Test if location tags are flattened correctly.
 
-        >>> tag = LocationTag.get(u'vu')
+        >>> tag = LocationTag.get(u'uni')
         >>> [t.title for t in tag.flatten]
-        [u'Vilniaus universitetas', u'Ekonomikos fakultetas']
+        [u'U-niversity', u'D-epartment']
 
     """
 
@@ -19,15 +19,15 @@ def test_LocationTag_getbytitle():
     LocationTag has a classmethod get_by_title, which can retrieve
     tags by their full title.
 
-        >>> tag = LocationTag.get_by_title(u'Vilniaus universitetas')
+        >>> tag = LocationTag.get_by_title(u'U-niversity')
         >>> tag.title
-        u'Vilniaus universitetas'
+        u'U-niversity'
 
     Tags can also be retrieved by traversing the hierarchy.
 
-        >>> tag = LocationTag.get_by_title([u'Vilniaus universitetas', u'Ekonomikos fakultetas'])
+        >>> tag = LocationTag.get_by_title([u'U-niversity', u'D-epartment'])
         >>> tag.title_short, tag.title
-        (u'ef', u'Ekonomikos fakultetas')
+        (u'dep', u'D-epartment')
 
     """
 
@@ -38,32 +38,32 @@ def test_LocationTag_get():
     The defualt LocationTag getter retrieves location tags by their
     short title. (a parent == None is assumed)
 
-        >>> tag = LocationTag.get(u'vu')
+        >>> tag = LocationTag.get(u'uni')
         >>> tag.title
-        u'Vilniaus universitetas'
+        u'U-niversity'
 
     Or if passed a list of tags, the first tag is considered to be a
     parent, of the second one and so on...
 
-        >>> tag = LocationTag.get([u'vu', u'ef'])
+        >>> tag = LocationTag.get([u'uni', u'dep'])
         >>> tag.title_short, tag.title
-        (u'ef', u'Ekonomikos fakultetas')
+        (u'dep', u'D-epartment')
 
     The lookup is case insensitive.
 
-        >>> tag = LocationTag.get([u'Vu', u'eF'])
+        >>> tag = LocationTag.get([u'Uni', u'DeP'])
         >>> tag.title_short, tag.title
-        (u'ef', u'Ekonomikos fakultetas')
+        (u'dep', u'D-epartment')
 
     Even though tags themselves can have varying cases in their short
     titles:
 
-        >>> meta.Session.add(LocationTag(u'Kauno Technologijos Universitetas', u'KTU', u''))
+        >>> meta.Session.add(LocationTag(u'Libre University', u'Luni', u''))
         >>> meta.Session.commit()
 
-        >>> tag = LocationTag.get(u'ktu')
+        >>> tag = LocationTag.get(u'luni')
         >>> tag.title_short, tag.title
-        (u'ktu', u'Kauno Technologijos Universitetas')
+        (u'luni', u'Libre University')
 
     """
 
@@ -85,6 +85,15 @@ def test_suite():
     suite = doctest.DocTestSuite(
         optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |
         doctest.NORMALIZE_WHITESPACE,
-        setUp=setUp)
+        setUp=test_setup)
     suite.layer = UtutiLayer
     return suite
+
+def test_setup(test):
+    ututi.tests.setUp(test)
+    uni = LocationTag(u'U-niversity', u'uni', u'')
+    meta.Session.add(uni)
+    dep = LocationTag(u'D-epartment', u'dep', u'', uni)
+    meta.Session.add(dep)
+
+    meta.Session.commit()
