@@ -4,27 +4,20 @@ from ututi.model import User
 from ututi.model import LocationTag, Subject, meta
 from ututi.model.events import Event
 from ututi.tests import UtutiLayer
+from ututi.tests.model import setUpUser
+
 import ututi
 
 
 def test_Subject_get():
     r"""Tests for subject retrieval from the database.
 
-    Subject get classmethod returns subjects by their id, the id at
-    the moment is a string that is shown in the subject url.
+    Subject get classmethod returns subjects by their id and location tag,
+    the id at the moment is a string that is shown in the subject url.
 
-        >>> subject = Subject.get(LocationTag.get([u'vu']), 'mat_analize')
+        >>> subject = Subject.get(LocationTag.get(u'uni'), 'subject')
         >>> subject.subject_id, subject.title
-        ('mat_analize', u'Matematin\u0117 analiz\u0117')
-
-    In the future though, a subject will be uniquely identified by a
-    location tag as well which will look like this:
-
-        >> Subject.get('vu', 'mif', 'mat_analize')
-
-    or this:
-
-        >> Subject.get(LocationTag.get('vu', 'mif'), 'mat_analize')
+        ('subject', u'Subject')
 
     Which will open a whole can of AmbiguityError kind of errors,
     because we will have to limit tag names and subject names so they
@@ -83,14 +76,13 @@ def test_suite():
 def test_setup(test):
     """Create some models needed for the tests."""
     ututi.tests.setUp(test)
-
-    u = User.get('admin@ututi.lt')
+    setUpUser()
+    u = User.get('admin@uni.ututi.com', LocationTag.get(u'uni'))
     meta.Session.execute("SET ututi.active_user TO %d" % u.id)
-
-    meta.Session.add(Subject(u'mat_analize', u'Matematin\u0117 analiz\u0117', LocationTag.get(u'vu'), u'prof. E. Misevi\u010dius'))
-
+    meta.Session.add(Subject(u'subject', u'Subject',
+                             LocationTag.get(u'uni'),
+                             u''))
     meta.Session.commit()
 
-    u = User.get('admin@ututi.lt')
     meta.Session.execute("SET ututi.active_user TO %d" % u.id)
 
