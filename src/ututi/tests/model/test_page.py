@@ -4,6 +4,7 @@ from ututi.model import LocationTag
 from ututi.model import Subject
 from ututi.model import Page, PageVersion, User, meta
 from ututi.tests import UtutiLayer
+from ututi.tests.model import setUpUser
 
 import ututi
 
@@ -14,7 +15,7 @@ def test_pages():
     Pages are created by passing the title of the page, the content
     and the author to it's constructor:
 
-        >>> admin = User.get('admin@ututi.lt')
+        >>> admin = User.get('admin@uni.ututi.com', LocationTag.get(u'uni'))
         >>> page = Page(u'Some coursework', u'Some information about it.')
         >>> meta.Session.add(page)
         >>> meta.Session.commit()
@@ -101,7 +102,7 @@ def test_subject_pages():
 
     We get our subject
 
-        >>> subject = Subject.get(LocationTag.get([u'vu']), 'mat_analize')
+        >>> subject = Subject.get(LocationTag.get(u'uni'), 'subject')
 
     But initially it has no pages:
 
@@ -116,7 +117,7 @@ def test_subject_pages():
 
     The page should appear in the pages list of this subject now:
 
-        >>> subject = Subject.get(LocationTag.get([u'vu']), 'mat_analize')
+        >>> subject = Subject.get(LocationTag.get(u'uni'), 'subject')
         >>> len(subject.pages)
         1
         >>> subject.pages[0].title
@@ -140,11 +141,13 @@ def test_suite():
 def test_setup(test):
     """Create some models needed for the tests."""
     ututi.tests.setUp(test)
+    setUpUser()
 
-    u = User.get('admin@ututi.lt')
+    u = User.get('admin@uni.ututi.com', LocationTag.get(u'uni'))
     meta.Session.execute("SET ututi.active_user TO %d" % u.id)
 
-    meta.Session.add(Subject(u'mat_analize', u'Matematin\u0117 analiz\u0117', LocationTag.get(u'vu'), u'prof. E. Misevi\u010dius'))
-
+    meta.Session.add(Subject(u'subject', u'Subject',
+                             LocationTag.get(u'uni'),
+                             u''))
     meta.Session.commit()
     meta.Session.execute("SET ututi.active_user TO %d" % u.id)
