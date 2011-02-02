@@ -382,18 +382,20 @@ class HomeController(UniversityListMixin, FederationMixin):
             redirect(url(controller='home', action='index'))
         c.email = session.get('confirmed_email').lower()
         if hasattr(self, 'form_result'):
-            user = User.get(c.email)
+            user = User.get(c.email, self.form_result['location'])
             if not user:
                 # Make sure that such a user does not exist.
-                user = User(self.form_result['fullname'], None, gen_password=False)
+                user = User(fullname=self.form_result['fullname'],
+                            username=c.email,
+                            location=self.form_result['location'],
+                            password=None,
+                            gen_password=False)
                 self._bind_user(user, flash=False)
                 if user.facebook_id:
                     self._bind_facebook_invitations(user)
                 user.accepted_terms = datetime.utcnow()
                 user.emails = [Email(c.email)]
                 user.emails[0].confirmed = True
-
-                user.location = self.form_result['location']
                 user.phone_number = self.form_result['phone']
                 meta.Session.add(user)
                 meta.Session.commit()
