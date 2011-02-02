@@ -26,6 +26,7 @@ from babel.dates import format_date
 
 from pylons import request, tmpl_context as c, config, url
 
+from ututi.lib.security import sign_in_admin_user
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import PhoneNumberValidator, GroupCouponValidator, validate
@@ -119,6 +120,19 @@ class BookTypeForm(Schema):
 
 class AdminController(BaseController, UniversityExportMixin):
     """Controler for system administration."""
+
+    def login(self):
+        return render('admin/login.mako')
+
+    def join_login(self):
+        email = request.POST.get('login_username')
+        password = request.POST.get('login_password')
+        if password is not None:
+            admin_user = AdminUser.authenticate(email, password.encode('utf-8'))
+            if admin_user:
+                sign_in_admin_user(admin_user)
+                redirect(url(controller='admin', action='index'))
+        return render('admin/login.mako')
 
     def _stripAndDecode(self, rows):
         return [[column.strip().decode('utf-8') for column in row]
