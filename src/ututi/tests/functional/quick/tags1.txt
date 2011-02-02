@@ -6,8 +6,6 @@ Set up
 
 Create one subject
 
-    >>> import pdb; pdb.set_trace()
-
     >>> browser = Browser.logIn()
     >>> browser.open('http://localhost/subjects/add')
 
