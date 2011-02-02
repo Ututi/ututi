@@ -15,7 +15,6 @@ import pylons.test
 
 from nous.pylons.testing.browser import NousTestBrowser, NousTestApp
 
-from ututi.model import LocationTag
 from ututi.model import teardown_db_defaults
 from ututi.model import initialize_db_defaults
 from ututi.model import meta
