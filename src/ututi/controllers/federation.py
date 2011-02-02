@@ -91,7 +91,7 @@ class FederationController(BaseController, FederationMixin):
         openid = GOOGLE_OPENID
         try:
             authrequest = cons.begin(openid)
-        except DiscoveryFailure, e:
+        except DiscoveryFailure:
             h.flash(_('Authentication failed, please try again.'))
             redirect(c.came_from or url(controller='home', action='index'))
 
