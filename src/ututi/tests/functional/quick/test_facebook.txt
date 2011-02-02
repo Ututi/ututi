@@ -11,6 +11,7 @@ to the federated registration page
 
 They can fill out the form and register here:
 
+    >>> browser.getControl(name='location-0').value = 'U-niversity'
     >>> browser.getControl(name='agree').value = True
     >>> browser.getControl('Register').click()
 

@@ -20,7 +20,7 @@ There should be a portlet with a form that let's us enter email addresses the re
    [u'somenewuser@example.com']
    Hello!
    <BLANKLINE>
-   Adminas Adminovix has been using Ututi, a portal for students, for some time now and recommends you to try it.
+   Administrator of the university has been using Ututi, a portal for students, for some time now and recommends you to try it.
    <BLANKLINE>
    Ututi is a system for students that encourages collaboration and sharing of study materials. We provide tools that make storing lecture notes, sharing files and communicating with your classmates much, much easier.
    <BLANKLINE>
@@ -54,7 +54,7 @@ What if some of the emails were mistyped?
    [u'someneweruser@example.com']
    Hello!
    <BLANKLINE>
-   Adminas Adminovix has been using Ututi, a portal for students, for some time now and recommends you to try it.
+   Administrator of the university has been using Ututi, a portal for students, for some time now and recommends you to try it.
    <BLANKLINE>
    Ututi is a system for students that encourages collaboration and sharing of study materials. We provide tools that make storing lecture notes, sharing files and communicating with your classmates much, much easier.
    <BLANKLINE>
@@ -66,7 +66,7 @@ What if some of the emails were mistyped?
    [u'user@example.com']
    Hello!
    <BLANKLINE>
-   Adminas Adminovix has been using Ututi, a portal for students, for some time now and recommends you to try it.
+   Administrator of the university has been using Ututi, a portal for students, for some time now and recommends you to try it.
    <BLANKLINE>
    Ututi is a system for students that encourages collaboration and sharing of study materials. We provide tools that make storing lecture notes, sharing files and communicating with your classmates much, much easier.
    <BLANKLINE>
@@ -85,7 +85,7 @@ What if some of the emails were mistyped?
 -------------------------
 What if some of the emails belong to people already using ututi?
    >>> form = browser.getForm(id='ututi_recommendation_form')
-   >>> form.getControl('Enter the emails of your classmates, separated by commas or new lines.').value = 'admin@ututi.lt'
+   >>> form.getControl('Enter the emails of your classmates, separated by commas or new lines.').value = 'admin@uni.ututi.com'
    >>> form.getControl('Send invitation').click()
    >>> print len(mail_queue)
    0

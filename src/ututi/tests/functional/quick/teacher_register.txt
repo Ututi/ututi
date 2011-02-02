@@ -9,7 +9,7 @@ let's type in that url:
     >>> browser.open('http://localhost/teacher/register')
     >>> form = browser.getForm(id='teacher_registration_form')
     >>> form.getControl('Full name').value = 'Mr. teacher'
-    >>> form.getControl('Email').value = 'teacher@vu.lt'
+    >>> form.getControl('Email').value = 'teacher@uni.ututi.com'
     >>> form.getControl(name='new_password').value = 'mapassword'
     >>> form.getControl(name='agree').value = True
     >>> form.getControl('Register').click()
@@ -19,7 +19,7 @@ let's type in that url:
 
     >>> browser.printQuery("//div[@class='flash-message']//span/text()")
     All teacher tools will be available to You once our team confirms You as a teacher. Thank You!
-    Your email (teacher@vu.lt) is not confirmed! Please confirm your email by clicking on the link sent to your address or
+    Your email (teacher@uni.ututi.com) is not confirmed! Please confirm your email by clicking on the link sent to your address or
 
 The teacher is also shown a block that informs him he is not verified yet:
     >>> browser.printQuery("id('unverified_teacher_block')//text()")
@@ -29,14 +29,17 @@ The teacher is also shown a block that informs him he is not verified yet:
 
 Teacher gets a confirmation email so he could approve his
 registration. And the team gets a notification:
+(Note: teacher has been assigned to the default university,
+this is not how things supposed to work in real registration flow)
 
     >>> from ututi.lib.mailer import mail_queue
     >>> mail_queue.pop()
-    <EmailInfo sender='info@ututi.lt' recipients=[u'teacher@vu.lt']>
+    <EmailInfo sender='info@ututi.lt' recipients=[u'teacher@uni.ututi.com']>
 
     >>> print mail_queue.pop().payload()
     A new teacher has registered:
-    Mr. teacher (teacher@vu.lt)
+    Mr. teacher (teacher@uni.ututi.com)
+    U-niversity
     Ututi
 
 
@@ -49,9 +52,12 @@ Teachers can also register using facebook:
     >>> browser.getControl('Register').click()
 
 The team is informed of this too:
+(Note: teacher has been assigned to the default university,
+this is not how things supposed to work in real registration flow)
     >>> print mail_queue.pop().payload()
     A new teacher has registered:
     John Smith (john.smith@example.com)
+    U-niversity
     Ututi
 
     >>> browser.url

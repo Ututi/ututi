@@ -9,8 +9,8 @@ Create one subject
     >>> browser = Browser.logIn()
     >>> browser.open('http://localhost/subjects/add')
 
-    >>> browser.getControl(name='location-0').value = 'vu'
-    >>> browser.getControl('Subject title:').value = u'Mat.analiz\u0117'.encode('utf-8')
+    >>> browser.getControl(name='location-0').value = 'uni'
+    >>> browser.getControl('Subject title:').value = 'Math'
     >>> browser.getControl('Create subject').click()
 
 Test
@@ -20,14 +20,14 @@ Subjects can be tagged upon creation or when being edited.
 
     >>> browser.open('http://localhost/subjects/add')
 
-    >>> browser.getControl(name='location-0').value = 'vu'
-    >>> browser.getControl(name='location-1').value = 'ef'
-    >>> browser.getControl('Subject title:').value = u'Mat.analiz\u0117'.encode('utf-8')
+    >>> browser.getControl(name='location-0').value = 'uni'
+    >>> browser.getControl(name='location-1').value = 'dep'
+    >>> browser.getControl('Subject title:').value = 'Math'
     >>> browser.getControl('Tags:').value = 'tag1, tag2, tag 3'
     >>> browser.getControl('Create subject').click()
 
     >>> browser.url
-    'http://localhost/subject/vu/ef/mat_analize'
+    'http://localhost/subject/uni/dep/math'
 
 Let's open the edit view and see if the tags were saved:
 
@@ -38,7 +38,7 @@ Let's open the edit view and see if the tags were saved:
     >>> browser.getControl('Save').click()
 
     >>> browser.url
-    'http://localhost/subject/vu/ef/mat_analize'
+    'http://localhost/subject/uni/dep/math'
 
 Once again, to check if the tags were saved:
 
@@ -48,9 +48,9 @@ Once again, to check if the tags were saved:
 
 Let's try changing the location of the subject to get a clash with another subject:
 
-    >>> browser.getControl('Title').value = 'mat_analize'
-    >>> browser.getControl(name='location-0').value = 'vu'
+    >>> browser.getControl('Title').value = 'math'
+    >>> browser.getControl(name='location-0').value = 'uni'
     >>> browser.getControl(name='location-1').value = ''
     >>> browser.getControl('Save').click()
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize-2'
+    'http://localhost/subject/uni/math-2'

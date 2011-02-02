@@ -164,17 +164,18 @@ Bug fix confirm: passwords with non-ascii chars would crash the registration.
     >>> form.getControl(name='agree').value = True
     >>> form.getControl('Register').click()
 
-A newly registered user will not have his location set, so he will be shown a form to set it:
+A newly registered user will have his location set, so he will not be shown a form to set it:
+(Note: this test may be removed once ututi.com registration flow is finished)
 
     >>> form = browser.getForm('update-location-form')
-    >>> form.getControl(name='location-0').value = 'Vilniaus universitetas'
-    >>> form.getControl('save').click()
-    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
-    Your university information has been updated.
-    Your email (jonas_new@example.com) is not confirmed! Please confirm your email by clicking on the link sent to your address or
+    Traceback (most recent call last):
+    ...
+    LookupError
 
-After setting his location, he will not be shown the form again:
-    >>> browser.printQuery("id('page-content')//h2/text()")
+A newly registered user will be reminded to confirm hist email:
+
+    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
+    Your email (jonas_new@example.com) is not confirmed! Please confirm your email by clicking on the link sent to your address or
 
     >>> email = mail_queue.pop()
 
@@ -182,10 +183,10 @@ After setting his location, he will not be shown the form again:
 Test a curiuos case: if a logged-in user fills in a registration form, specifying his own email, uniqueness is not tested.
 
     >>> browser = Browser.logIn()
-    >>> browser.open('http://localhost/join?came_from=%2Fschool%2Fvu')
+    >>> browser.open('http://localhost/join?came_from=%2Fschool%2Funi')
     >>> form = browser.getForm('join_registration_form')
     >>> form.getControl('Full name').value = 'domas'
-    >>> form.getControl('Email').value = 'admin@ututi.lt'
+    >>> form.getControl('Email').value = 'admin@uni.ututi.com'
     >>> form.getControl('Password').value = 'asdfgh'
     >>> form.getControl('Repeat password').value = 'asdfgh'
     >>> form.getControl(name='agree').value = True

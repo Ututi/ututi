@@ -9,7 +9,7 @@ When there are no available coupons, the coupon code input field should be invis
     >>> browser2.getControl('Group e-mail address').value = 'test2'
     >>> browser2.getControl('Group title').value = 'Another test group'
     >>> browser2.getControl('Year').value = ['2010']
-    >>> browser2.getControl(name='location-0').value = 'Vilniaus universitetas'
+    >>> browser2.getControl(name='location-0').value = 'U-niversity'
     >>> browser2.getControl('Gift coupon code')
     Traceback (most recent call last):
     ...
@@ -58,7 +58,7 @@ Entering an invalid coupon code should give us an error:
     >>> browser2.getControl('Group e-mail address').value = 'test2'
     >>> browser2.getControl('Group title').value = 'Another test group'
     >>> browser2.getControl('Year').value = ['2010']
-    >>> browser2.getControl(name='location-0').value = 'Vilniaus universitetas'
+    >>> browser2.getControl(name='location-0').value = 'U-niversity'
     >>> browser2.getControl('Gift coupon code').value = 'abcdef'
     >>> browser2.getControl('Continue').click()
 
@@ -73,7 +73,7 @@ Using the coupon code is simple:
     >>> browser2.getControl('Group e-mail address').value = 'test2'
     >>> browser2.getControl('Group title').value = 'Another test group'
     >>> browser2.getControl('Year').value = ['2010']
-    >>> browser2.getControl(name='location-0').value = 'Vilniaus universitetas'
+    >>> browser2.getControl(name='location-0').value = 'U-niversity'
     >>> browser2.getControl('Gift coupon code').value = 'abcd'
     >>> browser2.getControl('Continue').click()
 
@@ -88,7 +88,7 @@ And once again, having used the coupon, since there are no more coupons availabl
     >>> browser2.getControl('Group e-mail address').value = 'test2'
     >>> browser2.getControl('Group title').value = 'Another test group'
     >>> browser2.getControl('Year').value = ['2010']
-    >>> browser2.getControl(name='location-0').value = 'Vilniaus universitetas'
+    >>> browser2.getControl(name='location-0').value = 'U-niversity'
     >>> browser2.getControl('Gift coupon code')
     Traceback (most recent call last):
     ...
