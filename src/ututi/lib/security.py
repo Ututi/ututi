@@ -169,15 +169,11 @@ crowd_checkers = {
 
 
 def check_crowds(crowds, user=None, context=None):
+    # TODO: log crowd checking to see if it is run that often
     if context is None:
         context = c.security_context
     if user is None:
         user = c.user
-    return cached_check_crowds(crowds, user, context)
-
-
-@u_cache(expire=5, query_args=True, invalidate_on_startup=True)
-def cached_check_crowds(crowds, user, context):
     for crowd in crowds:
         if crowd_checkers[crowd](user, context):
             return True

@@ -11,6 +11,8 @@ login form:
     'http://localhost/login?came_from=http%3A%2F%2Flocalhost%2Fadmin%2Fimport_csv'
     >>> url = browser.url
 
+# TODO: admin access denied should redirect to admin login view (or maybe not)
+
 Now if I type in the admin credentials:
 
 # XXX Secret "sudo" form first
@@ -21,26 +23,11 @@ Now if I type in the admin credentials:
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
 
-    >>> browser.open(url)
-    >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value = "admin@ututi.lt"
-    >>> form.getControl('Password').value = "asdasd"
-    >>> form.getControl('Login').click()
 
-I'd get redirected back to where I was trying to go:
-
+Now I can open the admin-restricted view.
+    >>> browser.open('http://localhost/admin/import_csv')
     >>> browser.url
     'http://localhost/admin/import_csv'
-
-and even can see some actions:
-
-    >>> browser.printQuery("//h1")
-    <h1 id="siteName">
-      <a rel="nofollow" onclick="_gaq.push(['_trackEvent', 'navigation', 'user_search', 'logo']);" href="/profile/browse" title="Ututi" id="ulogo">Ututi</a>
-    </h1>
-    <h1>User import</h1>
-    <h1>Structure import</h1>
-    ...
 
     >>> browser.open('http://localhost/admin/events')
 
