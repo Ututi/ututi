@@ -182,8 +182,9 @@ class UtutiTestBrowser(NousTestBrowser):
         return super(UtutiTestBrowser, self).printQuery(query, **kwargs)
 
     @classmethod
-    def logIn(cls, email='admin@ututi.lt', password='asdasd'):
+    def logIn(cls, email='admin@ututi.lt', password='asdasd', location='uni'):
         browser = cls()
+        browser.open('http://localhost/school/%s' % location)
         form = browser.getForm('loginForm')
         form.getControl('Email').value = email
         form.getControl('Password').value = password
