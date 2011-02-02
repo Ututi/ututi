@@ -97,7 +97,7 @@ class LocationTagsValidator(validators.FancyValidator):
         return LocationTag.get_by_title(value) or self._notfoundmarker
 
     def validate_python(self, value, state):
-        if value is None and self.not_empty:
+        if value is None:
             raise Invalid(self.message('empty', state), value, state)
         elif value is self._notfoundmarker:
             raise Invalid(self.message('badTag', state), value, state)

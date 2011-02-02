@@ -45,7 +45,7 @@ class FederatedRegistrationForm(Schema):
     gadugadu = validators.Int()
 
     location = Pipe(ForEach(validators.String(strip=True)),
-                    LocationTagsValidator(not_empty=False))
+                    LocationTagsValidator())
 
     phone = PhoneNumberValidator(not_empty=False)
 

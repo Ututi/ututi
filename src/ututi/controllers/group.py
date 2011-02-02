@@ -131,7 +131,7 @@ class EditGroupForm(GroupForm):
     mailinglist_moderated = validators.OneOf(['members', 'moderated'])
     forum_type = validators.OneOf(['mailinglist', 'forum'])
     location = Pipe(ForEach(validators.String(strip=True)),
-                    LocationTagsValidator(not_empty=True))
+                    LocationTagsValidator())
     can_add_subjects = validators.Bool()
     file_storage = validators.Bool()
 
@@ -142,7 +142,7 @@ class NewGroupForm(GroupForm):
 
     pre_validators = [variabledecode.NestedVariables()]
     location = Pipe(ForEach(validators.String(strip=True)),
-                    LocationTagsValidator(not_empty=True))
+                    LocationTagsValidator())
 
     id = Pipe(validators.String(strip=True, min=4, max=20), GroupIdValidator())
 
@@ -157,7 +157,7 @@ class CreateGroupFormBase(Schema):
     msg = {'empty': _(u"Please enter a title.")}
     title = validators.UnicodeString(not_empty=True, messages=msg)
     location = Pipe(ForEach(validators.String(strip=True)),
-                    LocationTagsValidator(not_empty=True))
+                    LocationTagsValidator())
     msg = {'empty': _(u"Please enter a group identifier."),
            'tooShort': _(u"The group identifier must be at least 4 characters long.")}
     id = Pipe(validators.String(strip=True, min=4, max=20, messages=msg),
