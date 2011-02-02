@@ -1,3 +1,4 @@
+import logging
 
 from datetime import datetime
 
@@ -20,11 +21,13 @@ from ututi.lib.validators import validate
 from ututi.lib.validators import TranslatedEmailValidator
 from ututi.lib.base import BaseController, render
 from ututi.lib import helpers as h
-from ututi.model import meta
+from ututi.model import meta, LocationTag
 from ututi.model.users import User
 from ututi.model.users import Email
 from ututi.model.users import Teacher
 from ututi.controllers.federation import FederatedRegistrationForm, FederationMixin
+
+log = logging.getLogger(__name__)
 
 class EmailPasswordMatchValidator(validators.FormValidator):
 
@@ -35,7 +38,7 @@ class EmailPasswordMatchValidator(validators.FormValidator):
     def validate_python(self, form_dict, state):
         if not form_dict['new_password'] or not form_dict['email']:
             return
-        user = User.get(form_dict['email'])
+        user = User.get_global(form_dict['email'])
         if user is None:
             return
         if not user.checkPassword(form_dict['new_password'].encode('utf-8')):
@@ -78,8 +81,13 @@ class TeacherController(BaseController, FederationMixin):
             password = self.form_result['new_password']
             email = self.form_result['email']
 
+            # TODO: in real registration flow, university
+            # is specified explicitly
+            location = LocationTag.get('uni')
+            log.warn('Using default U-niversity for user registration')
+
             #check if this is an existing user
-            existing = User.get(email)
+            existing = User.get(email, location)
             if existing is not None and existing.checkPassword(password.encode('utf-8')):
                 teacher_request_email(existing)
                 h.flash(_('Thank You! Your request to become a teacher has been received. We will notify You once we grant You the rights of a teacher.'))
@@ -87,6 +95,8 @@ class TeacherController(BaseController, FederationMixin):
                 redirect(url(controller='profile', action='home'))
 
             teacher = Teacher(fullname=fullname,
+                              username=email,
+                              location=location,
                               password=password,
                               gen_password=True)
             teacher.emails = [Email(email)]
@@ -109,12 +119,20 @@ class TeacherController(BaseController, FederationMixin):
     def federated_registration(self):
         if not (session.get('confirmed_openid') or session.get('confirmed_facebook_id')):
             redirect(url(controller='home', action='index'))
+
         c.email = session.get('confirmed_email').lower()
         if hasattr(self, 'form_result'):
-            user = User.get(c.email)
+            # TODO: in real registration flow, university
+            # is specified explicitly
+            location = LocationTag.get('uni')
+            log.warn('Using default U-niversity for user registration')
+
+            user = User.get(c.email, location)
             if not user:
                 # Make sure that such a user does not exist.
                 user = Teacher(fullname=self.form_result['fullname'],
+                               username=c.email,
+                               location=location,
                                password=None,
                                gen_password=False)
                 self._bind_user(user, flash=False)

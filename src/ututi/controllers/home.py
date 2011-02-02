@@ -295,7 +295,12 @@ class HomeController(UniversityListMixin, FederationMixin):
         password = self.form_result['new_password']
         email = self.form_result['email'].lower()
 
-        user = User.get(email)
+        # TODO: in real registration flow, university
+        # is specified explicitly
+        location = LocationTag.get('uni')
+        log.warn('Using default U-niversity for user registration')
+
+        user = User.get(email, location)
         if user:
             # A user with this email exists, just sign them in.
             sign_in_user(user)
@@ -303,7 +308,10 @@ class HomeController(UniversityListMixin, FederationMixin):
 
         gadugadu_uin = self.form_result['gadugadu']
 
-        user = User(fullname, password)
+        user = User(fullname=fullname,
+                    username=email,
+                    location=location,
+                    password=password)
         user.emails = [Email(email)]
         user.accepted_terms = datetime.utcnow()
         #all newly registered users are marked when they agree to the terms of use

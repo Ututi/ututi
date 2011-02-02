@@ -228,7 +228,7 @@ class FederationController(BaseController, FederationMixin):
                     redirect(c.came_from or url(controller='home', action='index'))
 
             # This user has never logged in using FB/Google before.
-            user = User.get(email)
+            user = User.get_global(email)
             if user is None:
                 # New user?
                 session['confirmed_openid'] = google_id
