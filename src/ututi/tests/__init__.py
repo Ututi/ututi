@@ -181,7 +181,7 @@ class UtutiTestBrowser(NousTestBrowser):
         return super(UtutiTestBrowser, self).printQuery(query, **kwargs)
 
     @classmethod
-    def logIn(cls, email='admin@ututi.lt', password='asdasd', location='uni'):
+    def logIn(cls, email='admin@uni.ututi.com', password='asdasd', location='uni'):
         browser = cls()
         browser.open('http://localhost/school/%s' % location)
         form = browser.getForm('loginForm')
@@ -190,15 +190,18 @@ class UtutiTestBrowser(NousTestBrowser):
         form.getControl('Login').click()
 
         browser.app = NousTestApp(pylons.test.pylonsapp)
-        res = browser.app.post("/login", params={'login': email, 'password': password})
+        browser.app.post('http://localhost/school/%s' % location,
+                         params={'login': email, 'password': password})
 
-        if email == 'admin@ututi.lt' and password == 'asdasd':
+        if email == 'admin@uni.ututi.com' and password == 'asdasd':
+            admin_email = 'admin@ututi.lt'
             browser.open('http://localhost/admin/login')
-            browser.getControl('Username').value = email
-            browser.getControl('Password').value = password
-            browser.getControl('Login').click()
-            res = browser.app.post("/admin/join_login", params={'login_username': email,
-                                                           'login_password': password})
+            form = browser.getForm('adminLoginForm')
+            form.getControl('Username').value = admin_email
+            form.getControl('Password').value = password
+            form.getControl('Login').click()
+            browser.app.post("/admin/join_login", params={'login_username': admin_email,
+                                                          'login_password': password})
         browser.open('http://localhost')
         return browser
 
