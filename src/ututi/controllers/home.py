@@ -276,7 +276,7 @@ class HomeController(UniversityListMixin, FederationMixin):
         c.final_msg = _('If this is your first time visiting <a href="%(url)s">Ututi</a>, please register first.') % dict(url=url('/', qualified=True))
 
         if password is not None:
-            user = User.authenticate(email, password.encode('utf-8'))
+            user = User.authenticate_global(email, password.encode('utf-8'))
             c.header = _('Wrong username or password!')
             c.message = _('You seem to have entered your username and password wrong, please try again!')
 
@@ -545,7 +545,7 @@ class HomeController(UniversityListMixin, FederationMixin):
         password = request.POST.get('login_password')
 
         if password is not None:
-            user = User.authenticate(email, password.encode('utf-8'))
+            user = User.authenticate_global(email, password.encode('utf-8'))
             c.login_error = _('Wrong username or password!')
 
             if user is not None:
