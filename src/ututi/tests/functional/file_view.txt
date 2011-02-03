@@ -1,27 +1,24 @@
 Some tests for the file area
 ============================
 
-    >>> res = app.post("/login",
-    ...                params={'login': 'admin@ututi.lt', 'password': 'asdasd'})
+    >>> browser = Browser.logIn()
 
 Let's upload 4 files to check if folder file hiding works correctly:
-    >>> res = app.post("/subject/vu/mat_analize/upload_file",
-    ...                params={'folder': 'a'},
-    ...                upload_files=[("attachment", "text;for you.txt", "Test")])
-    >>> res = app.post("/subject/vu/mat_analize/upload_file",
-    ...                params={'folder': 'a'},
-    ...                upload_files=[("attachment", "text;for you.txt", "Test")])
-    >>> res = app.post("/subject/vu/mat_analize/upload_file",
-    ...                params={'folder': 'a'},
-    ...                upload_files=[("attachment", "text;for you.txt", "Test")])
-    >>> res = app.post("/subject/vu/mat_analize/upload_file",
-    ...                params={'folder': 'a'},
-    ...                upload_files=[("attachment", "text;for you.txt", "Test")])
-
+    >>> res = browser.app.post("/subject/vu/mat_analize/upload_file",
+    ...                        params={'folder': 'a'},
+    ...                        upload_files=[("attachment", "text;for you.txt", "Test")])
+    >>> res = browser.app.post("/subject/vu/mat_analize/upload_file",
+    ...                        params={'folder': 'a'},
+    ...                        upload_files=[("attachment", "text;for you.txt", "Test")])
+    >>> res = browser.app.post("/subject/vu/mat_analize/upload_file",
+    ...                        params={'folder': 'a'},
+    ...                        upload_files=[("attachment", "text;for you.txt", "Test")])
+    >>> res = browser.app.post("/subject/vu/mat_analize/upload_file",
+    ...                        params={'folder': 'a'},
+    ...                        upload_files=[("attachment", "text;for you.txt", "Test")])
 
 Let's check it - the fourth file should be prehidden ('show' class):
 
-    >>> browser = Browser.logIn()
     >>> browser.open('http://localhost/subject/vu/mat_analize/files')
     >>> browser.printCssQuery('li.file')
     <li class="file">
