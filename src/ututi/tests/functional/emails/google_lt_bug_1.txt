@@ -33,7 +33,7 @@ Date: Fri, 21 Aug 2009 03:11:53 +0300
 X-Google-Sender-Auth: ef0ea838d0c18bd4
 Message-ID: <cc0c36330908201711g32cd65eavca93a1777a7b11c7@mail.gmail.com>
 Subject: =?ISO-8859-13?Q?Re=3A_Sveiki_visi=2E_Bandau_Lietuvi=F8_kalb=E0_subjecte?=
-From: Admin <admin@ututi.lt>
+From: Admin <admin@uni.ututi.com>
 To: %(to)s
 Content-Type: text/plain; charset=ISO-8859-13
 Content-Transfer-Encoding: quoted-printable
