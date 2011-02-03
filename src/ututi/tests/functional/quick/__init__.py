@@ -28,6 +28,6 @@ def setUp(test):
 
 
 def tearDown(test):
-    meta.Session.execute("truncate tags cascade")
-    meta.Session.execute("truncate content_items cascade")
+    meta.Session.execute("truncate tags restart identity cascade")
+    meta.Session.execute("truncate content_items restart identity cascade")
     meta.Session.commit()
