@@ -17,7 +17,7 @@ SETING UP
     >>> form.getControl('Short title').value = 'vgtu'
     >>> form.getControl('Description').value = ''
     >>> form.getControl('Parent').displayOptions
-    ['Select a parent', 'Vilniaus universitetas']
+    ['Select a parent', 'U-niversity', 'Vilniaus universitetas']
     >>> form.getControl('Parent').value = ['0']
     >>> browser.getControl('Logo').add_file(*make_file('test_logo.png'))
     >>> form.getControl('Create').click()
@@ -26,8 +26,8 @@ SETING UP
     >>> form.getControl('Short title').value = 'af'
     >>> form.getControl('Description').value = ''
     >>> form.getControl('Parent').displayOptions
-    ['Select a parent', 'Vilniaus universitetas', 'Vilniaus Gedimino Technikos Universitetas']
-    >>> form.getControl('Parent').value = ['5']
+    ['Select a parent', 'U-niversity', 'Vilniaus universitetas', 'Vilniaus Gedimino Technikos Universitetas']
+    >>> form.getControl('Parent').value = ['7']
     >>> form.getControl('Create').click()
 
 END OF SETTING UP
@@ -44,40 +44,25 @@ But he can't see button "I study here"
 
     >>> browser.printQuery("//form[@id='i_study_here']")
 
-Logged user can see button "I study here" in university and faculty portlet, when he has no LocationTag
+Logged user should not see "I study here" button in university and faculty portlet,
+because he already has his LocationTag set:
 
     >>> browser = Browser.logIn()
-    >>> browser.open('http://localhost/school/vu')
-    >>> browser.printQuery("//form[@id='i_study_here_form']")
-    <form id="i_study_here_form" method="post" action="/profile/set_location?location_id=1">
-      <button class="btn" value="I study here">
-        <span>I study here</span>
-      </button>
-    </form>
-
-    >>> browser.open('http://localhost/school/vu/ef')
-    >>> browser.printQuery("//form[@id='i_study_here_form']")
-    <form id="i_study_here_form" method="post" action="/profile/set_location?location_id=2">
-      <button class="btn" value="I study here">
-        <span>I study here</span>
-      </button>
-    </form>
-
-Logged user can join university by clicking button
-
-     >>> browser.open('http://localhost/school/vu')
-     >>> browser.getControl('I study here').click()
-     >>> browser.printQuery("//form[@id='i_study_here_form']")
-
-If logged user is joined university, he sees "I study here" button only in that university faculties
-
     >>> browser.open('http://localhost/school/vu')
     >>> browser.printQuery("//form[@id='i_study_here_form']")
 
     >>> browser.open('http://localhost/school/vgtu')
     >>> browser.printQuery("//form[@id='i_study_here_form']")
 
+    >>> browser.open('http://localhost/school/uni')
+    >>> browser.printQuery("//form[@id='i_study_here_form']")
+
     >>> browser.open('http://localhost/school/vu/ef')
+    >>> browser.printQuery("//form[@id='i_study_here_form']")
+
+But he sees "I study here" button in HIS university faculties:
+
+    >>> browser.open('http://localhost/school/uni/dep')
     >>> browser.printQuery("//form[@id='i_study_here_form']")
     <form id="i_study_here_form" method="post" action="/profile/set_location?location_id=2">
       <button class="btn" value="I study here">
@@ -85,24 +70,24 @@ If logged user is joined university, he sees "I study here" button only in that 
       </button>
     </form>
 
-If logged user is joined university, he does't sees "I study here" button only in other university faculties
+If user is joined faculty, he doesn't see "I study here" at all
 
-   >>> browser.open('http://localhost/school/vgtu/af')
-   >>> browser.printQuery("//form[@id='i_study_here_form']")
+    >>> browser.getControl('I study here').click()
 
-If user is joined falulty, he doesn't sees "I study here" at all
+    >>> browser.open('http://localhost/school/vgtu')
+    >>> browser.printQuery("//form[@id='i_study_here_form']")
 
-     >>> browser.open('http://localhost/school/vu/ef')
-     >>> browser.getControl('I study here').click()
+    >>> browser.open('http://localhost/school/vu/')
+    >>> browser.printQuery("//form[@id='i_study_here_form']")
 
-     >>> browser.open('http://localhost/school/vgtu')
-     >>> browser.printQuery("//form[@id='i_study_here_form']")
+    >>> browser.open('http://localhost/school/vgtu/af')
+    >>> browser.printQuery("//form[@id='i_study_here_form']")
 
-     >>> browser.open('http://localhost/school/vu/')
-     >>> browser.printQuery("//form[@id='i_study_here_form']")
+    >>> browser.open('http://localhost/school/vu/ef')
+    >>> browser.printQuery("//form[@id='i_study_here_form']")
 
-     >>> browser.open('http://localhost/school/vgtu/af')
-     >>> browser.printQuery("//form[@id='i_study_here_form']")
+    >>> browser.open('http://localhost/school/uni')
+    >>> browser.printQuery("//form[@id='i_study_here_form']")
 
-     >>> browser.open('http://localhost/school/vu/ef')
-     >>> browser.printQuery("//form[@id='i_study_here_form']")
+    >>> browser.open('http://localhost/school/uni/dep')
+    >>> browser.printQuery("//form[@id='i_study_here_form']")
