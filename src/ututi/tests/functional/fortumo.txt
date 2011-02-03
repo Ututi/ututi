@@ -38,8 +38,8 @@ We'll define a helper:
 
 Also, we will register a user with a mobile phone:
 
-    >>> from ututi.model import User, meta
-    >>> user = User.get('user@ututi.lt')
+    >>> from ututi.model import User, LocationTag, meta
+    >>> user = User.get('user@ututi.lt', LocationTag.get('uni'))
     >>> user.phone_number = '+37067812345'
     >>> user.phone_confirmed = True
     >>> meta.Session.commit()
@@ -138,7 +138,7 @@ This should send an email:
     >>> msg.payload()
     "Space for private files was bought for 'Testing group' group.\n\nUtuti team\n"
     >>> msg.recipients
-    ['admin@ututi.lt']
+    ['admin@uni.ututi.com']
 
 If you specify an invalid group id, you will get an error:
 
