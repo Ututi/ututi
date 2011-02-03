@@ -82,7 +82,7 @@
       </div>
     </div>
 
-    <div id="register-fields" ${"style='display: none'" if not getattr(c, 'show_registration') else ''}>
+    <div id="register-fields" ${"style='display: none'" if not getattr(c, 'show_registration', False) else ''}>
       <div class="login-note">
         ${_('Register as a new Ututi user')}
       </div>
