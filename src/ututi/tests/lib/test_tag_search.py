@@ -1,6 +1,6 @@
 import doctest
 
-from ututi.model import LocationTag, User, meta
+from ututi.model import LocationTag, meta
 
 from ututi.tests import UtutiLayer
 import ututi
@@ -36,18 +36,14 @@ def test_setup(test):
     """Create some models needed for the tests."""
     ututi.tests.setUp(test)
 
-    u = User.get(u'admin@ututi.lt')
     from ututi.model import initialize_dictionaries
     initialize_dictionaries(meta.engine)
-    meta.Session.execute("SET ututi.active_user TO %d" % u.id)
-    meta.Session.execute("SET default_text_search_config TO 'public.lt'")
 
     l = LocationTag(u'Kauno technologijos universitetas', u'ktu', u'')
     f = LocationTag(u'Ekologijos fakultetas', u'ef', u'', l)
     meta.Session.add(l)
     meta.Session.add(f)
 
-    meta.Session.commit()
     meta.Session.execute("SET default_text_search_config TO 'public.lt'")
 
 
