@@ -50,7 +50,7 @@ A notification to subscribed group members has been sent by email:
     >>> from ututi.lib.mailer import mail_queue
     >>> msg = mail_queue.pop()
     >>> msg.recipients
-    ['admin@ututi.lt']
+    ['admin@uni.ututi.com']
     >>> print msg.payload()
     Third user posted on the 'Moderatoriai' forum:
     <BLANKLINE>
@@ -143,7 +143,7 @@ The resulting email notification was sent to the admin user and not to us:
 
     >>> msg = mail_queue.pop()
     >>> msg.recipients
-    ['admin@ututi.lt']
+    ['admin@uni.ututi.com']
 
 Now, if, say, the admin posts a message, we will receive an email:
 
@@ -166,7 +166,7 @@ Now any further replies will not be sent to us.
     >>> ubrowser.getForm(id="forum_reply_form").submit()
 
     >>> mail_queue.pop()
-    <EmailInfo sender='info@ututi.lt' recipients=['admin@ututi.lt']>
+    <EmailInfo sender='info@ututi.lt' recipients=['admin@uni.ututi.com']>
 
 Since we unsubscribed explicitly, we will not be automatically resubscribed
 again:
