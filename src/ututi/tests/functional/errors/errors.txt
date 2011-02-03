@@ -42,7 +42,8 @@ After that user will be redirected to "search" area and the flash message will b
      >>> browser.printQuery("//div[@class='flash-message']/span/text()")
      Monkeys are ashamed of what you said and are now working even harder to fix the problem. Until they do that, try to search for something else.
 
-User can send constant error message (no matter what he types in "shout message") by clicking on "Kick monkeys"
+For user's satisfaction "Kick monkeys" button is also available.
+It adds a constant error message to what user has typed:
 
     >>> browser.open('http://localhost/admin/error')
     Traceback (most recent call last):
@@ -53,8 +54,9 @@ User can send constant error message (no matter what he types in "shout message"
     >>> browser.getControl('kick').click()
     >>> from ututi.lib.mailer import mail_queue
 
-    >>> mail_queue.pop().payload()
-    'User kicked monkeys'
+    >>> print mail_queue.pop().payload()
+    User kicked monkeys
+    Bad bad monkeys
 
 After that user will be redirected to "search" area and the flash message will be shown
 
@@ -100,7 +102,8 @@ different error message:
       <a href="/search">go find something else</a>
     </div>
 
-If a user gets a 404 page while not being logged-in and then logs in, he should be redirected to the frontpage.
+If a user gets a 404 page while not being logged-in and then logs in, he should be redirected to his homepage (feed).
+
     >>> browser = Browser()
     >>> browser.open('http://localhost/asdfasdf')
     Traceback (most recent call last):
@@ -108,7 +111,7 @@ If a user gets a 404 page while not being logged-in and then logs in, he should 
     HTTPError: HTTP Error 404: Not Found
 
     >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value = "admin@ututi.lt "
+    >>> form.getControl('Email').value = "admin@uni.ututi.com"
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
 
