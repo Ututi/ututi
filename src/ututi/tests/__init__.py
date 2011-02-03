@@ -190,7 +190,7 @@ class UtutiTestBrowser(NousTestBrowser):
         form.getControl('Login').click()
 
         browser.app = NousTestApp(pylons.test.pylonsapp)
-        browser.app.post('http://localhost/school/%s' % location,
+        browser.app.post('http://localhost/school/%s/login' % location,
                          params={'login': email, 'password': password})
 
         if email == 'admin@uni.ututi.com' and password == 'asdasd':
