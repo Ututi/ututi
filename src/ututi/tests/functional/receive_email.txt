@@ -24,9 +24,9 @@ ututi:
     >>> from ututi.lib.mailer import mail_queue
     >>> email = mail_queue.pop()
     >>> print email.message
-    Return-Path: <admin@ututi.lt>
+    Return-Path: <admin@uni.ututi.com>
     Date: Mon, 15 Jun 2009 17:05:31 +0300
-    From: Admin <admin@ututi.lt>
+    From: Admin <admin@uni.ututi.com>
     To: moderators@groups.ututi.lt
     Reply-To: moderators@groups.ututi.lt
     Subject: Hello
@@ -43,7 +43,7 @@ ututi:
     Admin
 
     >>> print email.recipients
-    ['admin@ututi.lt']
+    ['admin@uni.ututi.com']
 
 As the email had no attachments, we have no new files in our upload directory:
 
@@ -73,9 +73,9 @@ link to the file on our system:
     >>> email = mail_queue.pop()
 
     >>> print email.message
-    Return-Path: <admin@ututi.lt>
+    Return-Path: <admin@uni.ututi.com>
     Date: Mon, 15 Jun 2009 17:55:15 +0300
-    From: Admin <admin@ututi.lt>
+    From: Admin <admin@uni.ututi.com>
     To: moderators@groups.ututi.lt
     Subject: Also - an attachment
     Message-ID: <20090615145515.GA13471@my_pc>
@@ -105,7 +105,7 @@ link to the file on our system:
     README.txt - http://localhost/group/moderators/mailinglist/file/5/6
 
     >>> print email.recipients
-    ['admin@ututi.lt']
+    ['admin@uni.ututi.com']
 
 If we upload the same file twice - we should see it two times in the
 mailing list, but still only have 1 copy of the file in the files
@@ -129,9 +129,9 @@ list of files:
 
     >>> email = mail_queue.pop()
     >>> print email.message
-    Return-Path: <admin@ututi.lt>
+    Return-Path: <admin@uni.ututi.com>
     Date: Mon, 15 Jun 2009 17:55:15 +0300
-    From: Admin <admin@ututi.lt>
+    From: Admin <admin@uni.ututi.com>
     To: moderators@groups.ututi.lt
     Subject: Also - an attachment
     Message-ID: <20090615145515.GA13472@my_pc>
