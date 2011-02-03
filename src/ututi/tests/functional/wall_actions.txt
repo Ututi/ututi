@@ -93,19 +93,19 @@ The rest of the test is undocummented, but easy to follow:
    You have created the group
    Moderatoriai
    ...
-   Third user
-   has joined the group
+   You have joined the group
    Moderatoriai
    ...
    You have joined the group
    Testing group
-   ...
-   You have joined the group
-   Moderatoriai
    ...
    Second user
    has joined the group
    Testing group
+   ...
+   Third user
+   has joined the group
+   Moderatoriai
    ...
 
    >>> from ututi.lib.mailer import mail_queue
