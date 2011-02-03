@@ -1,7 +1,6 @@
 from pylons import request, tmpl_context as c
 import ututi.lib.helpers as h
 
-from ututi.model import get_supporters
 from ututi.lib.base import render
 from ututi.lib.mailer import send_email
 
