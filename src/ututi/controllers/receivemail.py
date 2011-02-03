@@ -4,7 +4,6 @@ from pylons import request
 
 from ututi.lib.forums import make_forum_post
 from ututi.lib.base import BaseController
-from ututi.model import Group
 from ututi.model import GroupMailingListMessage
 from ututi.model import File
 from ututi.model import meta
