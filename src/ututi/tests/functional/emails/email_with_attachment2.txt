@@ -1,4 +1,4 @@
-Return-Path: <admin@ututi.lt>
+Return-Path: <admin@uni.ututi.com>
 Date: Mon, 15 Jun 2009 17:55:15 +0300
 From: Varlius <varlius2@example.com>
 To: %(to)s%(reply_to)s

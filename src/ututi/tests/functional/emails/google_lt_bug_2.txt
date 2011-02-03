@@ -9,7 +9,7 @@ Delivered-To: ignas.mikalajunas@gmail.com
 X-Google-Sender-Auth: 232d9a82efc55670
 Message-ID: <cc0c36330909040611j7c4d3169h2d58c1dd1d7e6adf@mail.gmail.com>
 Subject: Re: Sveiki
-From: Admin <admin@ututi.lt>
+From: Admin <admin@uni.ututi.com>
 To: %(to)s
 Content-Type: multipart/mixed; boundary=0016e6dab50ecfd3d60472c03bc0
 

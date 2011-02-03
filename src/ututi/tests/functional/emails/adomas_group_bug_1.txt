@@ -8,7 +8,7 @@ Received: by 10.86.240.9 with SMTP id n9mr5039477fgh.70.1252074393727; Fri, 04
 Date: Fri, 4 Sep 2009 17:26:33 +0300
 Message-ID: <cd6dfc240909040726l6d29cc0eha14f76cd066cacdc@mail.gmail.com>
 Subject: Sveiki
-From: Adminas <admin@ututi.lt>
+From: Adminas <admin@uni.ututi.com>
 To: domas@monkus.lt, domas.m@gmail.com
 Cc: ignas@pow.lt, Ignas Mikalajunas <ignas.mikalajunas@gmail.com>, Ututi moderatoriai <moderators@lists.ututi.lt>
 Content-Type: text/plain; charset=UTF-8

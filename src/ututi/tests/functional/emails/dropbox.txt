@@ -1,9 +1,9 @@
-From: Dropbox <admin@ututi.lt>
+From: Dropbox <admin@uni.ututi.com>
 To: Ututi moderatoriai <moderators@lists.ututi.lt>
 MIME-Version: 1.0
 Subject: Jacek Gurziński invited you to Dropbox
 Date: Wed, 10 Nov 2010 13:22:05 +0000
-Reply-To: Dropbox <admin@ututi.lt>
+Reply-To: Dropbox <admin@uni.ututi.com>
 Message-Id: <20101110132206.001793F7A32@mailman-2.dropboxmail.com>
 Content-Type: text/plain; charset=UTF-8
 

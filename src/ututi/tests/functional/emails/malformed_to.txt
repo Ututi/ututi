@@ -8,7 +8,7 @@ Received: from cable-14-2.cgates.lt (cable-14-2.cgates.lt [80.240.14.2]) by
 	webmail.vu.lt (Horde Framework) with HTTP; Mon, 24 May 2010 18:15:39 +0300
 Message-ID: <20100524181539.1944485dv6u5hyww@webmail.vu.lt>
 Date: Mon, 24 May 2010 18:15:39 +0300
-From: Ignas <admin@ututi.lt>
+From: Ignas <admin@uni.ututi.com>
 To: moderators@lists.ututi.lt,
         =?utf-8?b?QWlzdMSXIA==?=
 	=?utf-8?b?S3XEjWluc2tpZW7Elw==?= <aiste.kucinskiene@gmail.com>

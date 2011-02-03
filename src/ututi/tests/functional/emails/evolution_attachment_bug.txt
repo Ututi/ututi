@@ -1,7 +1,7 @@
-From admin@ututi.lt Sun Sep  6 18:32:30 2009
+From admin@uni.ututi.com Sun Sep  6 18:32:30 2009
 Subject: Lists
-From: Ignas <admin@ututi.lt>
-Reply-To: admin@ututi.lt
+From: Ignas <admin@uni.ututi.com>
+Reply-To: admin@uni.ututi.com
 To: moderators@lists.ututi.lt
 Content-Type: multipart/mixed; boundary="=-AiCycqkJF+NJt7Ar8KJW"
 Message-Id: <111251946.148542.56.camel@angliukas>
