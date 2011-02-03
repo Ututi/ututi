@@ -899,12 +899,9 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
                 try:
                     TranslatedEmailValidator.to_python(email)
                     email.encode('ascii')
-                    user = User.get(email)
+                    user = User.get(email, group.location.root)
                     if user is not None and self._check_handshakes(group, user) == 'request':
                         group.add_member(user)
-                        if user.location is None:
-                            user.location = group.location
-
                         self._clear_requests(group, c.user)
                         h.flash(_('New member %s added.') % user.fullname)
                     else:

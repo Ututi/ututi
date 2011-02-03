@@ -987,7 +987,7 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
         return url(controller=controller, action=action, id=self.group_id, **kwargs)
 
     def invite_user(self, email, author):
-        user = User.get(email)
+        user = User.get(email, self.location.root)
         if user is None or not self.is_member(user):
             try:
                 invitation = meta.Session.query(PendingInvitation
@@ -1224,7 +1224,7 @@ class PendingInvitation(object):
             self.group = group
 
         if email:
-            user = User.get(email)
+            user = User.get_global(email)
             if user is not None:
                 self.user = user
 
