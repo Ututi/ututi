@@ -11,7 +11,7 @@ Regression test for group attachment handling in evolution generated emails
     >>> from ututi.lib.mailer import mail_queue
     >>> print mail_queue[0].message
     Subject: Lists
-    From: Ignas <admin@ututi.lt>
+    From: Ignas <admin@uni.ututi.com>
     Reply-To: moderators@groups.ututi.lt
     To: moderators@lists.ututi.lt
     Content-Type: multipart/mixed; boundary="=-AiCycqkJF+NJt7Ar8KJW"

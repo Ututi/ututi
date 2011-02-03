@@ -92,7 +92,7 @@ A message to the ututi mailing list group:
     'benas@ututi.lt'
 
     >>> print msg.recipients
-    ['admin@ututi.lt']
+    ['admin@uni.ututi.com']
 
 A message to the ututi forum group - members of the group receive email messages:
 
@@ -113,7 +113,7 @@ A message to the ututi forum group - members of the group receive email messages
     ['user2@ututi.lt']
 
     >>> mail_queue.pop().recipients
-    ['admin@ututi.lt']
+    ['admin@uni.ututi.com']
 
     >>> browser2.getLink('Testing group').click()
     >>> browser2.printQuery('//div[@class="event-heading"]//text()')

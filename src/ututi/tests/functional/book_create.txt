@@ -54,7 +54,7 @@ Then I enter my new school book information and confirm changes
     >>> browser.getControl(name='owner_name').value
     'Adminas Adminovix'
     >>> browser.getControl(name='owner_email').value
-    'admin@ututi.lt'
+    'admin@uni.ututi.com'
 
 Couse I haven't filled my phone number it should by empty
 

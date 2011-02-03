@@ -3,7 +3,7 @@ Test moderated email messages with attachments
 
     >>> from ututi.tests.functional import send_test_message
     >>> send_test_message('email_with_attachment2.txt', '66', to='moderators@groups.ututi.lt')
-    >>> browser = Browser.logIn('admin@ututi.lt', 'asdasd')
+    >>> browser = Browser.logIn('admin@uni.ututi.com', 'asdasd')
     >>> browser.getLink('Moderatoriai').click()
     >>> browser.getLink('Mailing List').click()
     >>> browser.getControl('Moderation queue (1)').click()

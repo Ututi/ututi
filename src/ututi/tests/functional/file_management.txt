@@ -4,7 +4,7 @@ Tests for ajax file management views
 File upload:
 
     >>> res = app.post("/login",
-    ...                params={'login': 'admin@ututi.lt', 'password': 'asdasd'})
+    ...                params={'login': 'admin@uni.ututi.com', 'password': 'asdasd'})
 
     >>> from textwrap import dedent
     >>> res = app.post("/subject/vu/mat_analize/upload_file",
@@ -224,7 +224,7 @@ An email should have been sent:
     parent: Matematinė analizė
     parent URL: http://localhost:80/subject/vu/mat_analize
     <BLANKLINE>
-    reporter: admin@ututi.lt
+    reporter: admin@uni.ututi.com
     <BLANKLINE>
     reason:
     Copyright violation

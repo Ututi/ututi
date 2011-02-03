@@ -96,7 +96,7 @@ The email gets sent to all the members of the group:
     MIME-Version: 1.0
     Content-Type: text/plain; charset="us-ascii"
     Content-Transfer-Encoding: 7bit
-    From: admin@ututi.lt
+    From: admin@uni.ututi.com
     To: moderators@groups.ututi.lt
     Subject: Hi mom
     Message-ID: <...@groups.ututi.lt>
@@ -107,7 +107,7 @@ The email gets sent to all the members of the group:
     I am doing fine. Send more cash.
 
     >>> msg.recipients
-    ['admin@ututi.lt']
+    ['admin@uni.ututi.com']
 
 And we get redirected to our newly created thread
 
@@ -155,7 +155,7 @@ The email gets sent.
     MIME-Version: 1.0
     Content-Type: text/plain; charset="us-ascii"
     Content-Transfer-Encoding: 7bit
-    From: admin@ututi.lt
+    From: admin@uni.ututi.com
     To: moderators@groups.ututi.lt
     Subject: Re: Hi mom
     Message-ID: <...@groups.ututi.lt>
@@ -220,7 +220,7 @@ email:
     MIME-Version: 1.0
     Content-Type: text/plain; charset="us-ascii"
     Content-Transfer-Encoding: 7bit
-    From: admin@ututi.lt
+    From: admin@uni.ututi.com
     To: moderators@groups.ututi.lt
     Subject: Re: Hi mom
     Message-ID: <...@groups.ututi.lt>
@@ -232,7 +232,7 @@ email:
     Let's welcome our new member!
 
     >>> msg.recipients
-    ['admin@ututi.lt', 'user@ututi.lt']
+    ['admin@uni.ututi.com', 'user@ututi.lt']
 
 Now let's unsubscribe from the mailing list as an administrator:
 
@@ -244,7 +244,7 @@ Now let's unsubscribe from the mailing list as an administrator:
 
     >>> action_url = browser.getControl('Do not get email').mech_form.action
     >>> res = app.post("/login",
-    ...                params={'login': 'admin@ututi.lt', 'password': 'asdasd'})
+    ...                params={'login': 'admin@uni.ututi.com', 'password': 'asdasd'})
     >>> res = app.post(action_url)
 
 And post one more message:

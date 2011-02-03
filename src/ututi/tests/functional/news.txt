@@ -117,7 +117,7 @@ And look at the emails:
     >>> browser.open('http://localhost/news/daily?date=2009-10-10')
 
     >>> printEmails()
-    ['admin@ututi.lt']
+    ['admin@uni.ututi.com']
     Ututi news: 2 new pages
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
@@ -154,7 +154,7 @@ And look at the emails:
 Now let's upload a couple of files:
 
     >>> res = app.post("/login",
-    ...                params={'login': 'admin@ututi.lt', 'password': 'asdasd'})
+    ...                params={'login': 'admin@uni.ututi.com', 'password': 'asdasd'})
 
     >>> res = app.post("/subject/vu/mat_analize/upload_file",
     ...                params={'folder': ''},
@@ -180,7 +180,7 @@ And we continue uploading files:
     >>> browser.open('http://localhost/news/daily?date=2009-10-10')
 
     >>> printEmails()
-    ['admin@ututi.lt']
+    ['admin@uni.ututi.com']
     Ututi news: 2 new pages
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
@@ -255,7 +255,7 @@ XXX Uncomment these tests and fix failures.  FWIW, the test started failing
 after commit 5d21e3cdb91863d7843dfc80cd6dd72284dd931d.
 
     ##>>> printEmails()
-    ['admin@ututi.lt']
+    ['admin@uni.ututi.com']
     Ututi news: 2 new pages
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
@@ -319,7 +319,7 @@ welcome portlet is taking me to the notification view...
     >>> browser.open('http://localhost/news/daily?date=2009-10-09')
 
     >>> printEmails()
-    ['admin@ututi.lt']
+    ['admin@uni.ututi.com']
     Ututi news: 2 new pages
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
@@ -391,7 +391,7 @@ Hmm, now what happens if user2 starts ignoring the subject:
     >>> mail_queue[:] = []
     >>> browser.open('http://localhost/news/daily?date=2009-10-09')
     >>> printEmails()
-    ['admin@ututi.lt']
+    ['admin@uni.ututi.com']
     Ututi news: 2 new pages
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
@@ -462,7 +462,7 @@ Three days is right:
     >>> browser.open('http://localhost/news/daily?date=2009-10-12')
     >>> msg = mail_queue.pop() # Pop one copy of the message.
     >>> printEmails()
-    ['admin@ututi.lt']
+    ['admin@uni.ututi.com']
     Hello,
     <BLANKLINE>
     the private space subscription for the Ututi group "Testing group"
@@ -486,7 +486,7 @@ We'll add an over-limit file to the group:
 
     >>> attachment = 'x' * 100
     >>> res = app.post("/login",
-    ...                params={'login': 'admin@ututi.lt', 'password': 'asdasd'})
+    ...                params={'login': 'admin@uni.ututi.com', 'password': 'asdasd'})
     >>> res = app.post("/group/testgroup/upload_file",
     ...                params={'folder': ''},
     ...                upload_files=[('attachment', "somefile.txt", attachment)])
@@ -500,7 +500,7 @@ And, here are the notifications:
     >>> browser.open('http://localhost/news/daily?date=2009-10-10')
     >>> msg = mail_queue.pop() # Pop one copy of the message.
     >>> printEmails()
-    ['admin@ututi.lt']
+    ['admin@uni.ututi.com']
     Hello,
     <BLANKLINE>
     your group "Testing group" has just run out of private group space.

@@ -28,7 +28,7 @@ I am the only member of that group
     >>> browser.printQuery("//td[@class='member-info']")
     <td class="member-info">
       <a href="/user/1" title="Adminas Adminovix">Adminas Adminovix</a>
-      <div>admin@ututi.lt</div>
+      <div>admin@uni.ututi.com</div>
     </td>
 
 I create a forum topic

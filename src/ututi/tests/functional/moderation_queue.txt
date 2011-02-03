@@ -5,7 +5,7 @@ The default setting allows only group members post emails to the
 mailing list, so if someone sends an email to the mailing list while
 not being on it, the email is just ignored:
 
-    >>> browser = Browser.logIn('admin@ututi.lt', 'asdasd')
+    >>> browser = Browser.logIn('admin@uni.ututi.com', 'asdasd')
     >>> browser.getLink('Moderatoriai').click()
 
 Disable moderation first:
@@ -100,7 +100,7 @@ app.post is used because of the bug in TestBrowser redirection behaviour.
 
     >>> action_url = browser.getControl('Reject', index=1).mech_form.action
     >>> res = app.post("/login",
-    ...                params={'login': 'admin@ututi.lt', 'password': 'asdasd'})
+    ...                params={'login': 'admin@uni.ututi.com', 'password': 'asdasd'})
     >>> res = app.post(action_url,
     ...                headers=[('referer', browser.url)])
     >>> print res.status, res.location

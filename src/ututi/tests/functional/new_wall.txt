@@ -82,7 +82,7 @@ The user3 user can see the reply threaded along his message, if he refreshes the
 The mailing list messaging works pretty same way in the wall. To test this,
 we will log in third user, that is in the same group as user:
 
-    >>> admin = Browser.logIn('admin@ututi.lt', 'asdasd')
+    >>> admin = Browser.logIn('admin@uni.ututi.com', 'asdasd')
     >>> admin.getLink('News feed').click()
     >>> form = admin.getForm(id='message_form')
     >>> form.getControl(name='rcpt_group').displayValue = ['Moderatoriai']

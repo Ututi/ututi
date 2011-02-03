@@ -96,7 +96,7 @@ A couple of email notifications about the forum posts have been sent:
 
     >>> from ututi.lib.mailer import mail_queue
     >>> mail_queue
-    [<EmailInfo sender='info@ututi.lt' recipients=['admin@ututi.lt']>]
+    [<EmailInfo sender='info@ututi.lt' recipients=['admin@uni.ututi.com']>]
 
     >>> print mail_queue[0].payload()
     Second user posted on the 'Bugs' forum:

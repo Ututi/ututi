@@ -12,7 +12,7 @@ Visiting a profile-related page should not crash if the user is not logged in.
 
     >>> browser = Browser()
     >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Email').value = "admin@uni.ututi.com"
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
 
@@ -29,7 +29,7 @@ Note that user is being redirected to news feed after.
 -------------------------
 
     >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Email').value = "admin@uni.ututi.com"
     >>> form.getControl('Password').value = "asd"
     >>> form.getControl('Login').click()
 
@@ -38,7 +38,7 @@ Note that user is being redirected to news feed after.
 
     >>> form = browser.getForm('loginForm')
     >>> form.getControl('Email').value
-    'admin@ututi.lt'
+    'admin@uni.ututi.com'
 
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
@@ -52,7 +52,7 @@ Note that user is being redirected to news feed after.
     'http://localhost/login?came_from=http%3A%2F%2Flocalhost%2Fgroup%2Fmoderators%2Fmembers'
 
     >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Email').value = "admin@uni.ututi.com"
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
 
@@ -63,7 +63,7 @@ Note that user is being redirected to news feed after.
 
     >>> browser.open('http://localhost/search')
     >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Email').value = "admin@uni.ututi.com"
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
 
@@ -76,7 +76,7 @@ Note that user is being redirected to news feed after.
 
     >>> browser.open('http://localhost/search')
     >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Email').value = "admin@uni.ututi.com"
     >>> form.getControl('Password').value = "asd"
     >>> form.getControl('Login').click()
 
@@ -96,7 +96,7 @@ Note that user is being redirected to news feed after.
 -------------------------
 
     >>> res = app.post("/login",
-    ...                params={'login': 'admin@ututi.lt', 'password': 'asdasd'})
+    ...                params={'login': 'admin@uni.ututi.com', 'password': 'asdasd'})
 
     >>> from textwrap import dedent
     >>> res = app.post("/subject/vu/mat_analize/upload_file",
@@ -151,7 +151,7 @@ Checking the 'remember me' checkbox should create an unlimited session:
 
     >>> browser = Browser()
     >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value = "admin@ututi.lt"
+    >>> form.getControl('Email').value = "admin@uni.ututi.com"
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl(name='remember').value = True
     >>> form.getControl('Login').click()
@@ -160,7 +160,7 @@ Log in as superuser first to see the session info view:
 
     >>> browser.open('http://localhost/admin/login')
     >>> form = browser.getForm('adminLoginForm')
-    >>> form.getControl('Username').value = "admin@ututi.lt"
+    >>> form.getControl('Username').value = "admin@uni.ututi.com"
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
 
@@ -169,4 +169,4 @@ Log in as superuser first to see the session info view:
     _accessed_time => ...
     _creation_time => ...
     cookie_secret => ...
-    login => admin@ututi.lt
+    login => admin@uni.ututi.com

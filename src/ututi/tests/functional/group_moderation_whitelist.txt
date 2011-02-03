@@ -3,7 +3,7 @@ Group mailing list whitelist
 
 Set Up:
 
-    >>> browser = Browser.logIn('admin@ututi.lt', 'asdasd')
+    >>> browser = Browser.logIn('admin@uni.ututi.com', 'asdasd')
     >>> browser.getLink('Moderatoriai').click()
 
     >>> from ututi.tests.functional import send_test_message
@@ -93,11 +93,11 @@ whitelis, it will get approved automatically:
 
     >>> from ututi.tests.functional import printEmails
     >>> printEmails()
-    ['admin@ututi.lt']
+    ['admin@uni.ututi.com']
     Hi, I am just writing to tell you how wonderful this system is.
     User2
     <BLANKLINE>
-    ['admin@ututi.lt']
+    ['admin@uni.ututi.com']
     Confirm your varlius registration!
     Click the link now!
     Sincerely,
@@ -113,7 +113,7 @@ Let's try half a whitelist:
     >>> send_test_message('email_from_non_ututi.txt', '47', to='moderators@groups.ututi.lt', subject='Hello from varlius 3')
 
     >>> printEmails()
-    ['admin@ututi.lt']
+    ['admin@uni.ututi.com']
     Confirm your varlius registration!
     Click the link now!
     Sincerely,
