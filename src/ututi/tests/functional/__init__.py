@@ -23,68 +23,100 @@ from ututi.model import (Group, meta, LocationTag, SimpleTag, User, Teacher,
 def ftest_setUp(test):
     ututi.tests.setUp(test)
 
-    l = LocationTag.get(u'vu')
-    f = LocationTag(u'Geografijos fakultetas', u'gf', u'', l)
-    meta.Session.add(f)
+    # U-niversity and D-epartment
+    # should be used in writing new functional tests
 
+    uni = LocationTag(u'U-niversity', u'uni', u'')
+    dep = LocationTag(u'D-epartment', u'dep', u'', uni)
+    meta.Session.add(uni)
+    meta.Session.add(dep)
+    meta.Session.commit()
 
-    r = Region(u'Mazowieckie', u'lt')
-    meta.Session.add(r)
+    # Admin user, named 'Adminas Adminovix' for backward compatibility
 
-    u = User.get('admin@ututi.lt')
-    meta.Session.execute("SET LOCAL ututi.active_user TO %d" % u.id)
+    meta.Session.execute("insert into users (location_id, username, fullname, password)"
+                         " (select tags.id, 'admin@uni.ututi.com', 'Adminas Adminovix', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7'"
+                         " from tags where title_short = 'uni');")
+    meta.Session.execute("insert into emails (id, email, confirmed)"
+                         " (select users.id, users.username, true from users where fullname = 'Adminas Adminovix')")
 
-    g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date(date.today().year, 1, 1), u'U2ti moderatoriai.')
-    meta.Session.add(g)
-    g.add_member(u, True)
+    # Below are old locations, users, groups and subjects for backward compatibility
+    # Note: objects that didn't have their location specified are now assigned to U-niversity
 
-    g2 = Group('testgroup', u'Testing group', LocationTag.get(u'vu'), date(date.today().year, 1, 1), u'Testing group')
-    meta.Session.add(g2)
-    g2.add_member(u, True)
+    vu = LocationTag(u'Vilniaus universitetas', u'vu', u'Seniausias universitetas Lietuvoje.')
+    ef = LocationTag(u'Ekonomikos fakultetas', u'ef', u'', vu)
+    gf = LocationTag(u'Geografijos fakultetas', u'gf', u'', vu)
+    meta.Session.add(vu)
+    meta.Session.add(ef)
+    meta.Session.add(gf)
 
-    #add an alternative user
-    alt_user = User(u'Alternative user', 'password', True)
-    meta.Session.add(alt_user)
+    region = Region(u'Mazowieckie', u'lt')
+    meta.Session.add(region)
+
+    # Users:
+
+    first = User(u'Alternative user', 'user@ututi.lt', uni, 'password', True)
+    meta.Session.add(first)
     email = Email('user@ututi.lt')
     email.confirmed = True
-    alt_user.emails.append(email)
+    first.emails.append(email)
 
-    #and a second one
-    alt_user = User(u'Second user', 'password', True)
-    meta.Session.add(alt_user)
+    second = User(u'Second user', 'user2@ututi.lt', uni, 'password', True)
+    meta.Session.add(second)
     email = Email('user2@ututi.lt')
     email.confirmed = True
-    alt_user.emails.append(email)
-    alt_user.phone_number = '+37067412345'
-    alt_user.phone_confirmed = True
-    g2.add_member(alt_user)
-    g2.mailinglist_enabled = False
+    second.emails.append(email)
+    second.phone_number = '+37067412345'
+    second.phone_confirmed = True
 
-    u.phone_number = '+37067812375'
-    u.phone_confirmed = True
+    admin = User.get('admin@uni.ututi.com', uni)
+    admin.phone_number = '+37067812375'
+    admin.phone_confirmed = True
 
-    #and a third one with an uncofirmed email
-    alt_user = User(u'Third user', 'password', True)
-    meta.Session.add(alt_user)
+    # Third user has hist email uncofirmed
+    third = User(u'Third user', 'user3@ututi.lt', uni, 'password', True)
+    meta.Session.add(third)
     email = Email('user3@ututi.lt')
     email.confirmed = False
-    alt_user.emails.append(email)
-    g.add_member(alt_user)
+    third.emails.append(email)
 
-    subj = Subject(u'mat_analize', u'Matematin\u0117 analiz\u0117', LocationTag.get(u'vu'), u'prof. E. Misevi\u010dius')
-    meta.Session.add(subj)
-    alt_user.watchSubject(subj)
-
-    t = SimpleTag(u'simple_tag')
-    meta.Session.add(t)
-
-    #add a verified teacher Benas
-    mr_teacher = Teacher(fullname=u'Benas', password='password', gen_password=True)
-    mr_teacher.teacher_verified = True
-    meta.Session.add(mr_teacher)
+    # A verified teacher Benas
+    benas = Teacher(fullname=u'Benas',
+                    username='benas@ututi.lt',
+                    location=uni,
+                    password='password',
+                    gen_password=True)
+    benas.teacher_verified = True
+    meta.Session.add(benas)
     email = Email('benas@ututi.lt')
     email.confirmed = True
-    mr_teacher.emails.append(email)
+    benas.emails.append(email)
+
+    # Groups:
+
+    meta.Session.execute("SET LOCAL ututi.active_user TO %d" % admin.id)
+
+    moderators = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date(date.today().year, 1, 1), u'U2ti moderatoriai.')
+    meta.Session.add(moderators)
+    moderators.add_member(admin, True)
+    moderators.add_member(third)
+
+    testgroup = Group('testgroup', u'Testing group', LocationTag.get(u'vu'), date(date.today().year, 1, 1), u'Testing group')
+    meta.Session.add(testgroup)
+    testgroup.mailinglist_enabled = False
+    testgroup.add_member(admin, True)
+    testgroup.add_member(second)
+
+    # Subjects:
+
+    math = Subject(u'mat_analize', u'Matematin\u0117 analiz\u0117', LocationTag.get(u'vu'), u'prof. E. Misevi\u010dius')
+    meta.Session.add(math)
+    third.watchSubject(math)
+
+    # Tags:
+
+    tag = SimpleTag(u'simple_tag')
+    meta.Session.add(tag)
 
     meta.Session.commit()
     meta.Session.execute("SET ututi.active_user TO 0")
