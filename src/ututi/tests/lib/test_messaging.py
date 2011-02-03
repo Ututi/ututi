@@ -19,7 +19,7 @@ def test_message_user():
 
         >>> config._push_object(pylons.test.pylonsapp.config)
 
-        >>> user = User.get("somebloke@somehost.com")
+        >>> user = User.get("somebloke@somehost.com", LocationTag.get('uni'))
         >>> group = meta.Session.query(Group).first()
 
         >>> msg = EmailMessage("the subject", "the text")
@@ -107,7 +107,7 @@ def test_ggmessage_user():
 
         >>> config._push_object(pylons.test.pylonsapp.config)
 
-        >>> user = User.get("somebloke@somehost.com")
+        >>> user = User.get("somebloke@somehost.com", LocationTag.get('uni'))
 
         >>> msg = GGMessage("the message")
 
@@ -133,7 +133,7 @@ def test_smsmessage_user():
 
         >>> config._push_object(pylons.test.pylonsapp.config)
 
-        >>> user = User.get("somebloke@somehost.com")
+        >>> user = User.get("somebloke@somehost.com", LocationTag.get('uni'))
 
         >>> msg = SMSMessage(u"the message", sender=user)
 
@@ -211,7 +211,7 @@ def test_message_group():
         Content-Type: text/plain; charset="us-ascii"
         Content-Transfer-Encoding: 7bit
         From: info@ututi.lt
-        To: admin@ututi.lt
+        To: admin@uni.ututi.com
         Subject: the subject
         <BLANKLINE>
         the text
@@ -223,8 +223,24 @@ def test_message_group():
 def test_setup(test):
     """Create some models for this test."""
     ututi.tests.setUp(test)
-    u = User.get('admin@ututi.lt')
-    user = User(u"a new user", "his password")
+
+    # The following c&p from model tests. Maybe should be put to base set up.
+
+    #a user needs a university
+    uni = LocationTag(u'U-niversity', u'uni', u'')
+    meta.Session.add(uni)
+    meta.Session.commit()
+
+    #the user
+    meta.Session.execute("insert into users (location_id, username, fullname, password)"
+                         " (select tags.id, 'admin@uni.ututi.com', 'Administrator of the university', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7'"
+                         " from tags where title_short = 'uni');")
+    meta.Session.execute("insert into emails (id, email, confirmed)"
+                         " (select users.id, users.username, true from users where fullname = 'Administrator of the university')")
+    meta.Session.commit()
+
+    u = User.get('admin@uni.ututi.com', uni)
+    user = User(u"a new user", "somebloke@somehost.com", uni, "his password")
     meta.Session.add(user)
     user.emails.append(Email("somebloke@somehost.com"))
     user.gadugadu_uin = '345665'

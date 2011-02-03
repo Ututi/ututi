@@ -107,12 +107,22 @@ def test_suite():
 def test_setup(test):
     """Create some models needed for the tests."""
     ututi.tests.setUp(test)
-
-    u = User.get(u'admin@ututi.lt')
     from ututi.model import initialize_dictionaries
     initialize_dictionaries(meta.engine)
-    meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+
+    vu = LocationTag(u'Vilniaus universitetas', u'vu', u'')
+    ef = LocationTag(u'Ekonomikos fakultetas', u'ef', u'', vu)
+
+    meta.Session.add(vu)
+    meta.Session.add(ef)
+
+    # We need someone who can create subjects and groups
+    user = User(u'User', 'user@vu.ututi.com', vu, 'password')
+    meta.Session.add(user)
+    meta.Session.commit()
+
     meta.Session.execute("SET default_text_search_config TO 'public.lt'")
+    meta.Session.execute('SET ututi.active_user TO %d' % user.id)
 
     l = LocationTag(u'Kauno technologijos universitetas', u'ktu', u'')
     f = LocationTag(u'Ekologijos fakultetas', u'ef', u'', l)
