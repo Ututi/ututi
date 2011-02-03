@@ -1621,6 +1621,15 @@ class LocationTag(Tag):
             location = location.parent
         return list(reversed(path))
 
+    @property
+    def root(self, full=False):
+        """Return root location of this location tag.
+        If tag has no parent, will return this tag itself."""
+        root = self
+        while root.parent:
+            root = root.parent
+        return root
+
     def hierarchy(self, full=False):
         """Return a list of titles (or the full tags) of all the parents of the tag, including the tag itself."""
         location = self
