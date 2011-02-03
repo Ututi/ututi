@@ -25,6 +25,7 @@ become a teacher.
     >>> print mail_queue.pop().payload()
     A user wants to become a teacher:
     Alternative user (user@ututi.lt)
+    U-niversity
     http://localhost/admin/teachers?user_id=2
     Ututi
 
