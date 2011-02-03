@@ -152,6 +152,16 @@ class User(object):
             return None
 
     @classmethod
+    def authenticate_global(cls, username, password):
+        user = cls.get_global(username)
+        if user is None:
+            return None
+        if validate_password(user.password, password):
+            return user
+        else:
+            return None
+
+    @classmethod
     def get(cls, username, location):
         q = meta.Session.query(cls)
         try:
