@@ -160,7 +160,7 @@ Log in as superuser first to see the session info view:
 
     >>> browser.open('http://localhost/admin/login')
     >>> form = browser.getForm('adminLoginForm')
-    >>> form.getControl('Username').value = "admin@uni.ututi.com"
+    >>> form.getControl('Username').value = "admin@ututi.lt"
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
 
@@ -168,5 +168,6 @@ Log in as superuser first to see the session info view:
     >>> print browser.contents
     _accessed_time => ...
     _creation_time => ...
+    admin_login => admin@ututi.lt
     cookie_secret => ...
-    login => admin@uni.ututi.com
+    login => 1
