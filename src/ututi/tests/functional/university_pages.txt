@@ -3,7 +3,7 @@ University and faculty pages
 
     >>> from pkg_resources import resource_stream
     >>> def make_file(filename):
-    ...     stream = resource_stream("ututi.tests.functional.import", filename)
+    ...     stream = resource_stream("ututi.tests.functional.files", filename)
     ...     return (stream, 'text/plain', filename)
 
 Let's log in first.
@@ -12,6 +12,8 @@ Let's log in first.
     >>> browser.open('http://localhost/structure')
 
     >>> browser.printQuery("id('location_structure')//li/a[@class='tag_link']/text()")
+    U-niversity
+    D-epartment
     Vilniaus universitetas
     Ekonomikos fakultetas
     Geografijos fakultetas
@@ -123,7 +125,7 @@ They need to be unique.
 Oh, and we can upload logos too
 
     >>> browser.printQuery("id('structure-logo')")
-    <img class="portlet-logo" id="structure-logo" src="/structure/3/logo/70/70" alt="logo" />
+    <img class="portlet-logo" id="structure-logo" src="/structure/5/logo/70/70" alt="logo" />
 
 University and department pages have tabs from now on:
     >>> browser = Browser()
