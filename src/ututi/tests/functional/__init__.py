@@ -197,13 +197,6 @@ def make_file(filename, upload_name=None):
     return (stream, 'text/plain', upload_name)
 
 
-def import_csv(browser, formname, filename):
-    browser.open('http://localhost/admin/import_csv')
-    form = browser.getForm(name=formname)
-    form.getControl('CSV File').add_file(*make_file(filename))
-    form.getControl('Upload').click()
-
-
 def dump_database():
     executable = "/usr/lib/postgresql/8.3/bin/pg_dump"
     path = os.path.join(pylons.test.pylonsapp.config['global_conf']['here'], 'instance/var/run')
