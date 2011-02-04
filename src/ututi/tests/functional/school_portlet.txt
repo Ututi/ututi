@@ -6,7 +6,7 @@ SETING UP
 
     >>> from pkg_resources import resource_stream
     >>> def make_file(filename):
-    ...     stream = resource_stream("ututi.tests.functional.import", filename)
+    ...     stream = resource_stream("ututi.tests.functional.files", filename)
     ...     return (stream, 'text/plain', filename)
 
     >>> browser = Browser.logIn()
