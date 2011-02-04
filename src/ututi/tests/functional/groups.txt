@@ -3,7 +3,7 @@ Group adding and import
 
     >>> from pkg_resources import resource_stream
     >>> def make_file(filename):
-    ...     stream = resource_stream("ututi.tests.functional.import", filename)
+    ...     stream = resource_stream("ututi.tests.functional.files", filename)
     ...     return (stream, 'text/plain', filename)
 
 A list of all groups is shown at /groups.
@@ -106,20 +106,3 @@ And plus signs for that matter
     >>> browser.getControl('Continue').click()
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Id cannot be used as an email address.
-
-You can import more groups using the admin interface.
-
-    >>> browser.open('http://localhost/admin/import_csv')
-    >>> form = browser.getForm(name='import_groups')
-    >>> csv_data = 'exgroup, Imported group, Group imported from the old system, 2008, mf, vu'
-    >>> import cStringIO
-    >>> form.getControl('CSV File').add_file(cStringIO.StringIO(csv_data),
-    ...                                      'text/plain',
-    ...                                       'users.csv')
-    >>> form.getControl('Upload').click()
-    >>> browser.open('http://localhost/admin/groups')
-    >>> browser.printQuery("id('groups_list')//td/a/text()")
-    Imported group (0)
-    Test group (1)
-    Testing group (2)
-    Ututi moderatoriai (2)
