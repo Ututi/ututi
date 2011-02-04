@@ -2,11 +2,11 @@ Group forums
 ============
 
     >>> def create_threads(group_id):
-    ...     from ututi.model import meta, Group, ForumPost, User
+    ...     from ututi.model import meta, Group, ForumPost, User, LocationTag
     ...     from ututi.lib.forums import make_forum_post
     ...     gr = Group.get(group_id)
     ...     cat = gr.forum_categories[0].id
-    ...     u = User.get('admin@uni.ututi.com')
+    ...     u = User.get('admin@uni.ututi.com', LocationTag.get('uni'))
     ...     for i in range(12):
     ...         meta.Session.execute("SET ututi.active_user TO %d" % u.id)
     ...         post = ForumPost(u'Some thread', u'Some text', category_id=cat,
@@ -15,11 +15,11 @@ Group forums
     ...     meta.Session.commit()
 
     >>> def create_posts(group_id):
-    ...     from ututi.model import meta, Group, ForumPost, User
+    ...     from ututi.model import meta, Group, ForumPost, User, LocationTag
     ...     from ututi.lib.forums import make_forum_post
     ...     gr = Group.get(group_id)
     ...     cat = gr.forum_categories[0].id
-    ...     u = User.get('admin@uni.ututi.com')
+    ...     u = User.get('admin@uni.ututi.com', LocationTag.get('uni'))
     ...     meta.Session.execute("SET ututi.active_user TO %d" % u.id)
     ...     thr = ForumPost(u'Some thread', u'Some text', category_id=cat,
     ...                     thread_id=None)
@@ -34,10 +34,10 @@ Group forums
     ...     meta.Session.commit()
 
     >>> def create_community_threads():
-    ...     from ututi.model import meta, ForumPost, User
+    ...     from ututi.model import meta, Group, ForumPost, User, LocationTag
     ...     from ututi.lib.forums import make_forum_post
     ...     cat = 1
-    ...     u = User.get('admin@uni.ututi.com')
+    ...     u = User.get('admin@uni.ututi.com', LocationTag.get('uni'))
     ...     for i in range(12):
     ...         meta.Session.execute("SET ututi.active_user TO %d" % u.id)
     ...         post = ForumPost(u'Some thread', u'Some text', category_id=cat,
