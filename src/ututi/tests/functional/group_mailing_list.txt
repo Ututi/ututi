@@ -206,9 +206,9 @@ And our new message should be in the list:
 If there is more than one member in the group, all of them get the
 email:
 
-    >>> from ututi.model import Group, User, meta
+    >>> from ututi.model import Group, User, LocationTag, meta
     >>> group = Group.get('moderators')
-    >>> user = User.get('user@ututi.lt')
+    >>> user = User.get('user@ututi.lt', LocationTag.get('uni'))
     >>> group.add_member(user)
     >>> meta.Session.commit()
 
