@@ -41,8 +41,11 @@ def prepare_logo_cached(obj_type, obj_id, width=None, height=None, default_img_p
 def prepare_logo(obj_type, obj_id, width=None, height=None, default_img_path=None):
     obj = None
     if obj_id is not None:
-        obj_cls = {'book': Book, 'group': Group, 'user': User, 'locationtag': LocationTag}[obj_type]
-        obj = obj_cls.get(obj_id)
+        if obj_type == 'user':
+            obj = User.get_global(obj_id)
+        else:
+            obj_cls = {'book': Book, 'group': Group, 'locationtag': LocationTag}[obj_type]
+            obj = obj_cls.get(obj_id)
 
     if obj is not None and obj.has_logo():
         return prepare_image(obj.logo, width, height)
