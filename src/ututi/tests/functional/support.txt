@@ -53,7 +53,7 @@ visible in the dummy payment page:
     >>> browser.getControl(name='10lt').click()
     >>> url = browser.getLink('Process payment').url
     >>> url
-    'http://localhost/process_transaction?wp_lang=LIT&wp_paytext=Remiam%20remiam&wp_name=Jonas&wp_projectid=&wp_orderid=support_1&wp_amount=1000&wp_status=1&wp_currency=LTL&wp_surename=Petraitis&wp_error=&wp_test=1&wp__ss1=&wp__ss2=&wp_p_email=admin%40ututi.lt'
+    'http://localhost/process_transaction?wp_lang=LIT&wp_paytext=Remiam%20remiam&wp_name=Jonas&wp_projectid=&wp_orderid=support_1&wp_amount=1000&wp_status=1&wp_currency=LTL&wp_surename=Petraitis&wp_error=&wp_test=1&wp__ss1=&wp__ss2=&wp_p_email=admin%40uni.ututi.com'
 
     >>> url_fail = url.replace('wp_error=', 'wp_error=0x6')
 
@@ -89,7 +89,7 @@ Let's click it, and register the payment in the database:
     'http://localhost/pay'
 
     >>> print payment.query_string
-    wp_lang=LIT&wp_paytext=Remiam%20remiam&wp_name=Jonas&wp_projectid=&wp_orderid=support_1&wp_amount=1000&wp_status=1&wp_currency=LTL&wp_surename=Petraitis&wp_error=&wp_test=1&wp__ss1=&wp__ss2=&wp_p_email=admin%40ututi.lt
+    wp_lang=LIT&wp_paytext=Remiam%20remiam&wp_name=Jonas&wp_projectid=&wp_orderid=support_1&wp_amount=1000&wp_status=1&wp_currency=LTL&wp_surename=Petraitis&wp_error=&wp_test=1&wp__ss1=&wp__ss2=&wp_p_email=admin%40uni.ututi.com
 
     >>> url.endswith(payment.query_string)
     True
