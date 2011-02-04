@@ -301,8 +301,8 @@ def booksExpirationDates():
     return expiration_date
 
 def setup_university_export():
-    uni = LocationTag(u'U-niversity', u'uni', u'U-niversity description')
-    meta.Session.add(uni)
+    uni = LocationTag.get('uni')
+    uni.description = u'U-niversity description'
 
     for i in ('1', '2', '3'):
         f = LocationTag(u'Faculty ' + i, u'f' + i, u'U-niversity faculty ' + i, uni)
