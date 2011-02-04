@@ -437,7 +437,8 @@ class HomeController(UniversityListMixin, FederationMixin):
     def pswrecovery(self):
         if hasattr(self, 'form_result'):
             email = self.form_result.get('email', None)
-            user = User.get(email)
+            # TODO: this needs to be resolved, get_global is wrong here:
+            user = User.get_global(email)
             if user is not None:
                 if not user.recovery_key:
                     user.recovery_key = ''.join(Random().sample(string.ascii_lowercase, 8))
