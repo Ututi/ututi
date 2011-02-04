@@ -3,7 +3,7 @@ University and faculty structure
 
     >>> from pkg_resources import resource_stream
     >>> def make_file(filename):
-    ...     stream = resource_stream("ututi.tests.functional.import", filename)
+    ...     stream = resource_stream("ututi.tests.functional.files", filename)
     ...     return (stream, 'text/plain', filename)
 
 First we log in to be able to see the user list.
@@ -14,6 +14,8 @@ First we log in to be able to see the user list.
 There is one university and one faculty:
 
     >>> browser.printQuery("id('location_structure')//li/a[@class='tag_link']/text()")
+    U-niversity
+    D-epartment
     Vilniaus universitetas
     Ekonomikos fakultetas
     Geografijos fakultetas
@@ -25,7 +27,7 @@ Let's try to add a new element.
     >>> form.getControl('Short title').value = 'vgtu'
     >>> form.getControl('Description').value = ''
     >>> form.getControl('Parent').displayOptions
-    ['Select a parent', 'Vilniaus universitetas']
+    ['Select a parent', 'U-niversity', 'Vilniaus universitetas']
     >>> form.getControl('Parent').value = ['0']
     >>> browser.getControl('Logo').add_file(*make_file('test_logo.png'))
     >>> form.getControl('Create').click()
@@ -33,6 +35,8 @@ Let's try to add a new element.
 The new university is now shown.
 
     >>> browser.printQuery("id('location_structure')//li/a[@class='tag_link']/text()")
+    U-niversity
+    D-epartment
     Vilniaus universitetas
     Ekonomikos fakultetas
     Geografijos fakultetas
@@ -43,11 +47,13 @@ The new university is now shown.
     >>> form.getControl('Short title').value = 'af'
     >>> form.getControl('Description').value = ''
     >>> form.getControl('Parent').displayOptions
-    ['Select a parent', 'Vilniaus universitetas', 'Vilniaus Gedimino Technikos Universitetas']
-    >>> form.getControl('Parent').value = ['5']
+    ['Select a parent', 'U-niversity', 'Vilniaus universitetas', 'Vilniaus Gedimino Technikos Universitetas']
+    >>> form.getControl('Parent').value = ['7']
     >>> form.getControl('Create').click()
 
     >>> browser.printQuery("id('location_structure')//li/a[@class='tag_link']/text()")
+    U-niversity
+    D-epartment
     Vilniaus universitetas
     Ekonomikos fakultetas
     Geografijos fakultetas
@@ -56,7 +62,7 @@ The new university is now shown.
 
 Now we shall try to edit a structural element.
 
-    >>> browser.getLink(text='[Edit]').click()
+    >>> browser.getLink(text='[Edit]', index=2).click()
 
     >>> form = browser.getForm(name='edit_structure_form')
     >>> print form.getControl('Title').value
@@ -69,14 +75,14 @@ Now we shall try to edit a structural element.
     Seniausias universitetas Lietuvoje.
     >>> form.getControl('Description').value = u'Nebeegzistuojantis fakultetas'
     >>> form.getControl('Parent').displayOptions
-    ['Select a parent', 'Vilniaus Gedimino Technikos Universitetas']
-    >>> form.getControl('Parent').value = ['5']
+    ['Select a parent', 'U-niversity', 'Vilniaus Gedimino Technikos Universitetas']
+    >>> form.getControl('Parent').value = ['7']
 
     >>> form.getControl('Save').click()
 
 Let's try to enter a title that is way too long:
 
-    >>> browser.getLink(text='[Edit]').click()
+    >>> browser.getLink(text='[Edit]', index=2).click()
 
     >>> form = browser.getForm(name='edit_structure_form')
     >>> form.getControl('Title').value = u'40 characters are not that much text rly'*10
@@ -84,54 +90,31 @@ Let's try to enter a title that is way too long:
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Enter a value less than 250 characters long
 
-
 Let's look at the list:
 
     >>> browser.open('http://localhost/structure')
     >>> browser.printQuery("id('location_structure')//li/a[@class='tag_link']/text()")
+    U-niversity
+    D-epartment
     Vilniaus Gedimino Technikos Universitetas
     Architekturos fakultetas
     Vinco Kapsuko universitetas
     Ekonomikos fakultetas
     Geografijos fakultetas
 
-You can import the structure tags from csv too:
-
-    >>> browser.open('http://localhost/admin/import_csv')
-    >>> form = browser.getForm(name='import_structure')
-    >>> import cStringIO
-    >>> from textwrap import dedent
-
-Let's import a csv file with some universities:
-
-    >>> csv_file = dedent("""\
-    ... VU, Vilniaus Universitetas, , , ,
-    ... gmf, Gamtos Mokslu Fakultetas, , vu, ,
-    ... """)
-
-    >>> form.getControl('CSV File').add_file(cStringIO.StringIO(csv_file), 'text/plain', 'structure.csv')
-    >>> form.getControl('Upload').click()
-
-
-    >>> browser.open('http://localhost/structure')
-    >>> browser.printQuery("id('location_structure')//li/a[@class='tag_link']/text()")
-    Vilniaus Gedimino Technikos Universitetas
-    Architekturos fakultetas
-    Vinco Kapsuko universitetas
-    Ekonomikos fakultetas
-    Geografijos fakultetas
-    Vilniaus Universitetas
-    Gamtos Mokslu Fakultetas
-
-Let's delete one item:
+If we delete one item, all its children should be gone too:
 
     >>> browser.getLink(text='[Edit]', index=2).click()
     >>> browser.getControl('Delete', index=1).click()
-
-Its children should be gone too:
-
     >>> browser.printQuery("id('location_structure')//li/a[@class='tag_link']/text()")
-    Vilniaus Gedimino Technikos Universitetas
-    Architekturos fakultetas
-    Vilniaus Universitetas
-    Gamtos Mokslu Fakultetas
+    U-niversity
+    D-epartment
+
+Note: if we try to delete location tag that has user's within it,
+integrity exception occurs:
+
+    >>> browser.getLink(text='[Edit]', index=0).click()
+    >>> browser.getControl('Delete', index=1).click()
+    Traceback (most recent call last):
+    ...
+    IntegrityError: (IntegrityError) null value in column "location_id" violates not-null constraint ...
