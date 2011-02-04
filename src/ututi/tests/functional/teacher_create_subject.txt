@@ -19,11 +19,11 @@ Instead, a hidden value with teacher's name is silently submitted:
     >>> browser.getControl(name="lecturer").value
     'Benas'
 
-The teacher hasn't specified his location yet, so location fields
-are displayed empty:
+The teacher has been assigned to default location (U-niversity),
+so so location fields are prefilled:
 
     >>> browser.getControl('University:').value
-    ''
+    'U-niversity'
 
     >>> browser.getControl('Department:').value
     ''
@@ -32,10 +32,10 @@ Let's fill out the form to create the subject:
 
     >>> browser.getControl('University:').value = 'Vilniaus universitetas'
     >>> browser.getControl('Department:').value = 'Ekonomikos fakultetas'
-    >>> browser.getControl('Subject title:').value = 'Never nude'
+    >>> browser.getControl('Subject title:').value = 'Math'
     >>> browser.getControl('Create subject').click()
     >>> print browser.url
-    http://localhost/subject/vu/ef/never_nude
+    http://localhost/subject/vu/ef/math
 
 On the subject page Benas is listed as the lecturer:
 
@@ -48,9 +48,9 @@ This subject also appears on teacher's homepage:
 
     >>> browser.getLink('Home').click()
     >>> browser.printQuery("id('subject_list')//div[@class='subject-description-list']//dt//text()")
-    Never nude
+    Math
 
-Let's go to the settings, to fill out the location information:
+Let's go to the settings and change our location information:
 
     >>> browser.getLink('Settings').click()
     >>> browser.getControl('University').value = 'Vilniaus universitetas'
@@ -62,7 +62,7 @@ Now back to home page and click to add another subject:
     >>> browser.getLink('back to home page').click()
     >>> browser.getControl('add courses').click()
 
-This time location fields will be prefilled by default 
+This time both location fields will be prefilled by default 
 (and hidden via CSS or javascript, he may edit them if he wants to):
 
     >>> browser.getControl('University:').value
@@ -73,14 +73,14 @@ This time location fields will be prefilled by default
 
 Let's fill out the form to create the subject:
 
-    >>> browser.getControl('Subject title:').value = 'Always naked'
+    >>> browser.getControl('Subject title:').value = 'Literature'
     >>> browser.getControl('Create subject').click()
     >>> print browser.url
-    http://localhost/subject/vu/ef/always_naked
+    http://localhost/subject/vu/ef/literature
 
 This subject also appears on teacher's homepage:
 
     >>> browser.getLink('Home').click()
     >>> browser.printQuery("id('subject_list')//div[@class='subject-description-list']//dt//text()")
-    Never nude
-    Always naked
+    Math
+    Literature
