@@ -1,0 +1,24 @@
+User registration flow
+======================
+
+A new Ututi user can start his registration on university page,
+by clicking 'Register' button:
+
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/')
+    >>> browser.getLink('U-niversity').click()
+    >>> browser.url
+    'http://localhost/school/uni'
+
+    >>> browser.getControl('Register').click()
+    >>> browser.url
+    'http://localhost/school/uni/register'
+
+Here user is asked to type in his email address:
+
+    >>> browser.printCssQuery('p#invitation-message', strip=True)
+    <p>Enter your email here to start registration:</p>
+
+User types in his email address to start registration:
+
+    >>> browser.getControl('Enter your email here:').value = 'user@example.com'

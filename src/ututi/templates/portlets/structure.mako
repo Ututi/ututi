@@ -49,6 +49,9 @@
       </li>
 
     </ul>
+    %if c.user is None:
+    ${h.button_to(_("Register"), location.url(action='register'))}
+    %endif
     %if h.check_crowds(['moderator']):
       <div class="right_arrow"><a href="${location.url(action='edit')}">${_('Edit')}</a></div>
     %endif

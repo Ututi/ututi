@@ -208,3 +208,7 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
                 from ututi.lib.security import sign_in_user
                 sign_in_user(user, long_session=remember)
                 redirect(str(destination))
+
+    @location_action
+    def register(self, location):
+        return render('location/registration/start.mako')
