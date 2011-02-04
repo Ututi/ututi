@@ -5,7 +5,7 @@ User profiles
     >>> def make_file(filename, upload_name=None):
     ...     if upload_name is None:
     ...         upload_name = filename
-    ...     stream = resource_stream("ututi.tests.functional.import", filename)
+    ...     stream = resource_stream("ututi.tests.functional.files", filename)
     ...     return (stream, 'text/plain', upload_name)
 
 Each user will have a profile that is accessible via the url /profile/{id}.
