@@ -101,8 +101,7 @@ We can add a subject at the url /subject/add
     <SubmitControl name=None type='submitbutton'>
 
     >>> browser.open('http://localhost/subjects/add')
-
-    >>> browser.getControl(name='location-1').value = 'vu'
+    >>> browser.getControl(name='location-0').value = 'vu'
     >>> browser.getControl('Subject title:').value = 'Test subject'
     >>> browser.getControl('Create subject').click()
     >>> print browser.url
@@ -111,37 +110,12 @@ We can add a subject at the url /subject/add
 The id is checked for uniqueness.
 
     >>> browser.open('http://localhost/subjects/add')
-    >>> browser.getControl(name='location-1').value = 'vu'
+    >>> browser.getControl(name='location-0').value = 'vu'
     >>> browser.getControl('Subject title:').value = 'Test subject'
     >>> browser.getControl('Lecturer:').value = 'Some guy'
     >>> browser.getControl('Create subject').click()
     >>> print browser.url
     http://localhost/subject/vu/test_subject-some_guy
-
-You can import more subjects using the admin interface.
-
-    >>> browser.open('http://localhost/admin/import_csv')
-    >>> form = browser.getForm(name='import_subjects_without_ids')
-    >>> csv_data = '"Imported subject","Some Professor",,"VU","Description of the subject","imported, subject"'
-    >>> import cStringIO
-    >>> form.getControl('CSV File').add_file(cStringIO.StringIO(csv_data),
-    ...                                      'text/plain',
-    ...                                       'subjects.csv')
-    >>> form.getControl('Upload').click()
-    >>> browser.url
-    'http://localhost/admin/subjects'
-    >>> browser.printQuery("id('subject_list')//li/a[@class='subject-link']/text()")
-    Imported subject
-    Test subject
-    Test subject
-    Matematin&#279; analiz&#279;
-
-    >>> browser.getLink('Imported subject').click()
-    >>> browser.queryHTML("id('subject_description')//div[contains(@class, 'block-content')]/text()")
-    ['Description of the subject']
-
-    >>> browser.printQuery("id('subject_info_portlet-content')//h2/text()")
-    Imported subject
 
 Bug fix confirmation: going to subjects/create directly (e.g. refreshing a failed subject form)
 would cause a crash
@@ -157,7 +131,7 @@ When creating a subject, the user can select to watch it:
     >>> browser.url
     'http://localhost/subjects/add'
 
-    >>> browser.getControl(name='location-1').value = 'vu'
+    >>> browser.getControl(name='location-0').value = 'vu'
     >>> browser.getControl('Subject title:').value = 'Testing subject'
     >>> browser.getControl('Lecturer:').value = 'Some guy'
     >>> browser.getControl('Start watching this subject personally').selected = True
@@ -179,7 +153,7 @@ Subject names with parentheses should not cause problems:
     >>> browser.url
     'http://localhost/subjects/add'
 
-    >>> browser.getControl(name='location-1').value = 'vu'
+    >>> browser.getControl(name='location-0').value = 'vu'
     >>> browser.getControl('Subject title:').value = 'Šiuolaikinė anglų kalba (akademinis skaitymas)'
     >>> browser.getControl('Lecturer:').value = 'Some guy'
     >>> browser.getControl('Start watching this subject personally').selected = True
