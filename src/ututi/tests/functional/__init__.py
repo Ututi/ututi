@@ -190,9 +190,11 @@ def send_test_message(email_file, message_id='', to='', reply_to=None, subject='
                         pylons.test.pylonsapp.config['files_path'])
 
 
-def make_file(filename):
-    stream = resource_stream("ututi.tests.functional.import", filename)
-    return (stream, 'text/plain', filename)
+def make_file(filename, upload_name=None):
+    if upload_name is None:
+        upload_name = filename
+    stream = resource_stream("ututi.tests.functional.files", filename)
+    return (stream, 'text/plain', upload_name)
 
 
 def import_csv(browser, formname, filename):

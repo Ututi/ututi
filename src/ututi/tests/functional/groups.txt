@@ -2,9 +2,7 @@ Group adding and import
 =======================
 
     >>> from pkg_resources import resource_stream
-    >>> def make_file(filename):
-    ...     stream = resource_stream("ututi.tests.functional.files", filename)
-    ...     return (stream, 'text/plain', filename)
+    >>> from ututi.tests.functional import make_file
 
 A list of all groups is shown at /groups.
 

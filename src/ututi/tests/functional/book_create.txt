@@ -5,14 +5,11 @@ Set up
 ------
 
     >>> browser = Browser.logIn()
-    >>> from ututi.tests.functional import setUpBooks
+    >>> from ututi.tests.functional import setUpBooks, make_file
     >>> setUpBooks(browser)
     >>> browser.open('http://localhost/books/')
 
     >>> from pkg_resources import resource_stream
-    >>> def make_file(filename):
-    ...     stream = resource_stream("ututi.tests.functional.files", filename)
-    ...     return (stream, 'text/plain', filename)
 
 When I'm not logged in, I can't add book. Not logged user will be redirected to login path
 

@@ -5,9 +5,7 @@ School portlet tests
 SETING UP
 
     >>> from pkg_resources import resource_stream
-    >>> def make_file(filename):
-    ...     stream = resource_stream("ututi.tests.functional.files", filename)
-    ...     return (stream, 'text/plain', filename)
+    >>> from ututi.tests.functional import make_file
 
     >>> browser = Browser.logIn()
     >>> browser.open('http://localhost/structure')
