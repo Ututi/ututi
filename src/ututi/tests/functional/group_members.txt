@@ -80,7 +80,7 @@ Let's accept this invitation.
 
     >>> browser2.getLink('Settings').click()
     >>> browser2.getControl(name="location-0").value
-    'Vilniaus universitetas'
+    'U-niversity'
 
     >>> browser2.getLink('Moderatoriai').click()
     >>> browser2.getLink('Members').click()
