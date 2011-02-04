@@ -28,6 +28,11 @@ def setUp(test):
 
 
 def tearDown(test):
-    meta.Session.execute("truncate tags restart identity cascade")
-    meta.Session.execute("truncate content_items restart identity cascade")
+    meta.Session.execute("truncate tags cascade")
+    meta.Session.execute("truncate content_items cascade")
+    relnames = meta.Session.query('relname').from_statement(
+               "select relname from pg_class where relkind = 'S'")
+    for name, in relnames:
+        if not name.startswith('admin_users'):
+            meta.Session.execute('alter sequence %s restart with 1' % name)
     meta.Session.commit()
