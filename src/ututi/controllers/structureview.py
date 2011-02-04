@@ -197,7 +197,6 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
         password = request.POST.get('password')
         remember = True if request.POST.get('remember', None) else False
         destination = c.came_from or location.url(action='index')
-        filename = request.params.get('context', None)
 
         if password is not None:
             from ututi.model.users import User
