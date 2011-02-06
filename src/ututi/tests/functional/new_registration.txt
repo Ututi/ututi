@@ -21,3 +21,11 @@ User types existing email address, so we will redirect him to login form:
     >>> browser.getControl('Register').click()
     >>> browser.url
     'http://localhost/school/uni/login'
+
+User come back to registration view ant types new email:
+
+    >>> browser.open('http://localhost/school/uni/register')
+    >>> browser.getControl('Enter your email here:').value = 'user@example.com'
+    >>> browser.getControl('Register').click()
+    >>> browser.printQuery("//div[@class='text']/text()")
+    We need to approve if you are owner of this email. You have received a confirmation code to user@example.com.

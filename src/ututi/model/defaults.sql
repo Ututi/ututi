@@ -75,6 +75,7 @@ $lowercase_email$ LANGUAGE plpgsql;;
 CREATE TRIGGER lowercase_email BEFORE INSERT OR UPDATE ON emails
     FOR EACH ROW EXECUTE PROCEDURE lowercase_email();;
 
+
 /* user medals */
 create table user_medals (
        id bigserial not null,
@@ -1531,3 +1532,13 @@ create table teacher_groups (
        email varchar(320) not null,
        group_id int8 default null references groups(id) on delete cascade,
        primary key (id));;
+
+/* Table for storing confirmation codes sended to new users */
+CREATE TABLE user_confirmations (
+       created timestamp not null default (now() at time zone 'UTC'),
+       email varchar(320) default null,
+       location_id int8 not null references tags(id) on delete cascade,
+       hash varchar(32) not null unique,
+       primary key (hash),
+       unique(location_id, email));;
+

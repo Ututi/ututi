@@ -214,6 +214,9 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
     @location_action
     def register(self, location):
         email = request.POST.get('email')
+        c.location_title = location.title
+
+        # TODO: check email. Valid or not?
 
         if email is not None:
             user = User.get(email, location)
@@ -223,5 +226,12 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
                 redirect(str(request.POST.get('came_from',
                                           location.url(action='login'))))
 
-        c.location_title = location.title
+            else:
+                # Creating confirmation code and sending to new user.
+                from ututi.model.users import PendingConfirmation
+                confirmation = PendingConfirmation(email, location.id)
+                meta.Session.add(confirmation)
+                return render('location/registration/email_approve.mako',
+                              extra_vars={'email':email,})
+
         return render('location/registration/start.mako')
