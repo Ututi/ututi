@@ -9,6 +9,15 @@ from ututi.lib.base import render
 from ututi.model import meta
 from ututi.lib.messaging import EmailMessage
 
+def send_email_confirmation_code(email, url, hash):
+    link = '%s/%s' % (url, hash)
+    text = render('/emails/confirm_email.mako',
+                  extra_vars={'link': link,
+                              'html': False})
+
+    msg = EmailMessage(_('Confirm the email for Ututi'), text, force=True)
+    msg.send(email)
+
 def email_confirmation_request(user, email):
     for user_email in user.emails:
         if email.strip() == user_email.email.strip():

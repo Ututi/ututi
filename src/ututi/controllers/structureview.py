@@ -231,6 +231,11 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
                 from ututi.model.users import PendingConfirmation
                 confirmation = PendingConfirmation(email, location.id)
                 meta.Session.add(confirmation)
+                meta.Session.commit()
+                send_email_confirmation_code(email,
+                                             location.url(action='register',
+                                                          qualified=True),
+                                             confirmation.hash)
                 return render('location/registration/email_approve.mako',
                               extra_vars={'email':email,})
 
