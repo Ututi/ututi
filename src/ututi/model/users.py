@@ -10,8 +10,8 @@ from binascii import a2b_base64, b2a_base64
 import binascii
 import urllib
 import hashlib
-import string
-from random import Random
+from datetime import datetime
+
 
 from ututi.model.util import logo_property
 from ututi.model import meta
@@ -621,7 +621,8 @@ class PendingConfirmation(object):
     """Pending registration confirmations."""
 
     def __init__(self, email=None, location=None):
-        self.hash = ''.join(Random().sample(string.ascii_lowercase, 8))
+        self.hash = hashlib.md5(datetime.now().isoformat() + email).hexdigest()
+
         if location is not None:
             self.location_id = location
         if email:

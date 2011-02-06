@@ -11,11 +11,12 @@ from ututi.model.events import Event
 
 import ututi.lib.helpers as h
 from ututi.lib.base import render
+from ututi.lib.emails import send_email_confirmation_code
 from ututi.lib.validators import LocationIdValidator, ShortTitleValidator, FileUploadTypeValidator, validate
 from ututi.lib.wall import WallMixin
 from ututi.model import Subject, Group
 from ututi.model import LocationTag, meta
-from ututi.model.users import User
+from ututi.model.users import User, PendingConfirmation
 from ututi.controllers.home import UniversityListMixin
 from ututi.controllers.search import SearchSubmit, SearchBaseController
 
@@ -211,24 +212,38 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
 
         return render('location/login.mako')
 
-    @location_action
-    def register(self, location):
+    def register(self, path, hash=None):
+        # I don't use @location_action decorator here because i want to get hash code and don't want change decorator.
+        location = LocationTag.get(path)
+        if location is None:
+            abort(404)
+
         email = request.POST.get('email')
-        c.location_title = location.title
+        c.location = location
+        c.registration_error = None
+
+        if hash is not None:
+            confirmation = PendingConfirmation.get(hash)
+            if confirmation is not None and confirmation.location_id==location.id:
+                email = confirmation.email
+                meta.Session.delete(confirmation)
+                meta.Session.commit()
+                return render('location/registration/university_information.mako',
+                              extra_vars={'email':email,})
+            else:
+                c.registration_error = _('Bad confirmation code. Please check code and try again.')
+                return render('location/registration/start.mako')
 
         # TODO: check email. Valid or not?
-
         if email is not None:
             user = User.get(email, location)
             if user:
                 # A username with this email exists, just render login form.
                 # redirect(str(location.url(action=='login')))
                 redirect(str(request.POST.get('came_from',
-                                          location.url(action='login'))))
-
+                                              location.url(action='login'))))
             else:
                 # Creating confirmation code and sending to new user.
-                from ututi.model.users import PendingConfirmation
                 confirmation = PendingConfirmation(email, location.id)
                 meta.Session.add(confirmation)
                 meta.Session.commit()

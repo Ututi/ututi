@@ -29,3 +29,29 @@ User come back to registration view ant types new email:
     >>> browser.getControl('Register').click()
     >>> browser.printQuery("//div[@class='text']/text()")
     We need to approve if you are owner of this email. You have received a confirmation code to user@example.com.
+
+User must receive email with confirmation url.
+
+    >>> from ututi.lib.mailer import mail_queue
+
+    >>> msg = mail_queue.pop()
+    >>> print msg.payload()
+    We have received a request to confirm the ownership of this email on the Ututi system. If this email belongs to you, confirm it by clicking on this link:
+    <BLANKLINE>
+    http://localhost/school/uni/register/...
+    <BLANKLINE>
+    Ututi team
+
+   >>> msg.recipients
+   [u'user@example.com']
+
+
+After clicking on confirmation URL user will see registration form.
+
+   >>> from ututi.lib.helpers import get_urls
+   >>> urls = get_urls(msg.payload())
+   >>> browser = Browser()
+   >>> browser.open(urls[0])
+
+   >>> browser.printQuery(".text", selector='cssselect', strip=True)
+   <div>You are registered to <strong>U-niversity</strong> network.</div>

@@ -36,8 +36,8 @@ An email, requesting the confirmation of the email address entered is sent:
     Subject: Confirm the email for Ututi
     <BLANKLINE>
     We have received a request to confirm the ownership of this email
-    by Jonas Petraitis Petrauskas on the Ututi system. If this email
-    belongs to you, confirm it by clicking on this link:
+    on the Ututi system. If this email belongs to you, confirm it by
+    clicking on this link:
     <BLANKLINE>
     http://localhost/confirm_user_email/...
     <BLANKLINE>
