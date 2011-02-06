@@ -15,6 +15,7 @@ from ututi.lib.validators import LocationIdValidator, ShortTitleValidator, FileU
 from ututi.lib.wall import WallMixin
 from ututi.model import Subject, Group
 from ututi.model import LocationTag, meta
+from ututi.model.users import User
 from ututi.controllers.home import UniversityListMixin
 from ututi.controllers.search import SearchSubmit, SearchBaseController
 
@@ -199,7 +200,6 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
         destination = c.came_from or location.url(action='index')
 
         if password is not None:
-            from ututi.model.users import User
             user = User.authenticate(location, email, password.encode('utf-8'))
             c.header = _('Wrong username or password!')
             c.message = _('You seem to have entered your username and password wrong, please try again!')
@@ -213,5 +213,15 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
 
     @location_action
     def register(self, location):
+        email = request.POST.get('email')
+
+        if email is not None:
+            user = User.get(email, location)
+            if user:
+                # A username with this email exists, just render login form.
+                # redirect(str(location.url(action=='login')))
+                redirect(str(request.POST.get('came_from',
+                                          location.url(action='login'))))
+
         c.location_title = location.title
         return render('location/registration/start.mako')
