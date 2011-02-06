@@ -1,0 +1,23 @@
+<%inherit file="/base.mako" />
+
+<h1>Login</h1>
+
+<form id="login_form" method="post" action="${c.location_url}">
+    %if c.came_from:
+    <input type="hidden" name="came_from" value="${c.came_from}" />
+    %endif
+    %if c.login_error:
+    <div class="error">${c.login_error}</div>
+    %endif
+    ${h.input_line('login', _('Your email address'), value=request.params.get('login'))}
+    ${h.input_psw('password', _('Password'))}
+
+    <label id="rememberMe" for="remember"><input id="remember" name="remember" value="true" type="checkbox" class="checkbox"/> ${_('Keep me logged in on this computer')}</label>
+    <div>
+      <a href="${url(controller='home', action='pswrecovery')}">${_('Forgotten password?')}</a>
+    </div>
+
+    <div>
+    ${h.input_submit(_('Login'))}
+    </div>
+</form>

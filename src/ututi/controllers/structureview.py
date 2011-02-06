@@ -209,6 +209,9 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
                 sign_in_user(user, long_session=remember)
                 redirect(str(destination))
 
+        c.location_url = location.url(action='login')
+        return render('location/login.mako')
+
     @location_action
     def register(self, location):
         return render('location/registration/start.mako')

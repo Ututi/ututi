@@ -164,6 +164,7 @@ class User(object):
     @classmethod
     def get(cls, username, location):
         q = meta.Session.query(cls)
+
         try:
             if isinstance(username, (long, int)):
                 q = q.filter_by(id=username)
