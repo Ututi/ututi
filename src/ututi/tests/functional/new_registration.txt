@@ -15,7 +15,17 @@ by clicking 'Register' button:
     >>> browser.url
     'http://localhost/school/uni/register'
 
-User types existing email address, so we will redirect him to login form:
+User has to type in a valid email address to initiate registration:
+
+    >>> browser.getControl('Enter your email here:').value = 'what ever@example.com'
+    >>> browser.getControl('Register').click()
+    >>> browser.url
+    'http://localhost/school/uni/register'
+
+    >>> browser.printCssQuery('#registration_form .error-message', strip=True)
+    <span>The username portion of the email address is invalid (the portion before the @: what ever)</span>
+
+If user types in an existing email address, he will be redirected to login form:
 
     >>> browser.getControl('Enter your email here:').value = 'admin@uni.ututi.com'
     >>> browser.getControl('Register').click()

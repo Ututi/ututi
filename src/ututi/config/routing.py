@@ -241,7 +241,7 @@ def make_map(config):
     map.connect('/school/*path/update', controller='structureview', action='update')
     map.connect('/school/*path/login', controller='structureview', action='login')
     map.connect('/school/*path/register', controller='structureview', action='register')
-    map.connect('/school/*path/register/{hash}', controller='structureview', action='register')
+    map.connect('/school/*path/register/{hash}', controller='structureview', action='register_hash')
     map.connect('/school/*path/edit', controller='structureview', action='edit')
     map.connect('/school/*path/search_js', controller='structureview', action='search_js')
     map.connect('/school/*path/groups', controller='structureview', action='groups')

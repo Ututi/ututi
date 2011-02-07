@@ -12,7 +12,8 @@ from ututi.model.events import Event
 import ututi.lib.helpers as h
 from ututi.lib.base import render
 from ututi.lib.emails import send_email_confirmation_code
-from ututi.lib.validators import LocationIdValidator, ShortTitleValidator, FileUploadTypeValidator, validate
+from ututi.lib.validators import LocationIdValidator, ShortTitleValidator, \
+        FileUploadTypeValidator, validate, TranslatedEmailValidator
 from ututi.lib.wall import WallMixin
 from ututi.model import Subject, Group
 from ututi.model import LocationTag, meta
@@ -77,6 +78,12 @@ class StructureviewWallMixin(WallMixin):
         ids = [obj.id for obj in subjects + public_groups]
 
         return meta.Session.query(Event).filter(Event.object_id.in_(ids))
+
+
+class RegistrationStartForm(Schema):
+
+    email = TranslatedEmailValidator(not_empty=True, strip=True)
+
 
 
 class StructureviewController(SearchBaseController, UniversityListMixin, StructureviewWallMixin):
@@ -212,36 +219,16 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
 
         return render('location/login.mako')
 
-    def register(self, path, hash=None):
-        # I don't use @location_action decorator here because i want to get hash code and don't want change decorator.
-        location = LocationTag.get(path)
-        if location is None:
-            abort(404)
-
-        email = request.POST.get('email')
-        c.location = location
+    @location_action
+    @validate(schema=RegistrationStartForm(), form='register')
+    def register(self, location):
         c.registration_error = None
-
-        if hash is not None:
-            confirmation = PendingConfirmation.get(hash)
-            if confirmation is not None and confirmation.location_id==location.id:
-                email = confirmation.email
-                meta.Session.delete(confirmation)
-                meta.Session.commit()
-                return render('location/registration/university_information.mako',
-                              extra_vars={'email':email,})
-            else:
-                c.registration_error = _('Bad confirmation code. Please check code and try again.')
-                return render('location/registration/start.mako')
-
-        # TODO: check email. Valid or not?
+        email = request.POST.get('email')
         if email is not None:
             user = User.get(email, location)
             if user:
                 # A username with this email exists, just render login form.
-                # redirect(str(location.url(action=='login')))
-                redirect(str(request.POST.get('came_from',
-                                              location.url(action='login'))))
+                redirect(location.url(action='login'))
             else:
                 # Creating confirmation code and sending to new user.
                 confirmation = PendingConfirmation(email, location.id)
@@ -255,3 +242,22 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
                               extra_vars={'email':email,})
 
         return render('location/registration/start.mako')
+
+    def register_hash(self, path, hash=None):
+        location = LocationTag.get(path)
+        if location is None:
+            abort(404)
+
+        c.location = location
+
+        if hash is not None:
+            confirmation = PendingConfirmation.get(hash)
+            if confirmation is not None and confirmation.location_id==location.id:
+                email = confirmation.email
+                meta.Session.delete(confirmation)
+                meta.Session.commit()
+                return render('location/registration/university_information.mako',
+                              extra_vars={'email':email,})
+            else:
+                c.registration_error = _('Bad confirmation code. Please check code and try again.')
+                return render('location/registration/start.mako')
