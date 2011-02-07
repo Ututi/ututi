@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2011-01-31 21:39+0300\n"
+"PO-Revision-Date: 2011-02-07 15:56+0300\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
@@ -1459,16 +1459,16 @@ msgid "Name"
 msgstr "Nazwa"
 
 msgid "URL name"
-msgstr ""
+msgstr "nazwa URL"
 
 msgid "Use only lowercase letters 'a' to 'z' and a dash '-'"
-msgstr ""
+msgstr "Używaj tylko małych liter od 'a' do 'z' i myślnika '-'"
 
 msgid "Edit"
 msgstr "Popraw"
 
 msgid "Actions"
-msgstr ""
+msgstr "Czynności"
 
 msgid "Book types"
 msgstr "Typ książki"
@@ -3281,10 +3281,10 @@ msgid "Ututi recommends"
 msgstr "Ututi rekomenduje"
 
 msgid "Virtual book market"
-msgstr ""
+msgstr "Wirtualny rynek książek"
 
 msgid "Here you can buy study material cheaply or find a new owner for your good old textbook."
-msgstr ""
+msgstr "Tutaj możesz kupić tanie materiały do nauki lub znaleźć nowego właściciela Twojej starej książki."
 
 msgid "Add a student group"
 msgstr "Dodaj grupę studencką"
@@ -3469,7 +3469,7 @@ msgid "Tell us where you are studying"
 msgstr "Podaj nazwę swojej uczelni"
 
 msgid "Ututi is Your university online. Here You and Your class mates can create your group online, use the mailing list for communication and the file storage for sharing information."
-msgstr ""
+msgstr "Ututi to Twój uniwersytet online. Tutaj razem ze swoimi znajomymi z roku możecie utworzyć grupę online, komunikować się za pomocą listy mailingowej i dzielić się informacjami dzięki magazynowi plików."
 
 msgid "Share your thoughts about Ututi"
 msgstr "Podziel się myślami o Ututi"
@@ -3662,7 +3662,7 @@ msgid "New groups"
 msgstr "Nowe grupy"
 
 msgid "Which events do You want to see in Your news feed?"
-msgstr ""
+msgstr "Jakie wydarzenia chcesz widzieć w swoim kanale informacyjnym RSS?"
 
 msgid "Add a subject"
 msgstr "Dodaj przedmiot"
