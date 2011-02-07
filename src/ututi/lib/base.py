@@ -84,6 +84,9 @@ class BaseController(WSGIController):
         lang = session.get('language', 'en')
         set_lang(lang)
         c.lang = lang
+        # XXX get these from db
+        c.timezone = 'UTC'
+        c.locale = 'en'
 
         succeeded = False
         try:

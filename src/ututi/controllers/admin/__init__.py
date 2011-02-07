@@ -119,7 +119,7 @@ class AdminController(BaseController, UniversityExportMixin):
 
     @ActionProtector("root")
     def users(self):
-        locale = config.get('locale')
+        locale = c.locale
         c.from_time_str = request.params.get('from_time')
         if not c.from_time_str:
             c.from_time_str = format_date(datetime.date.today() - datetime.timedelta(7),

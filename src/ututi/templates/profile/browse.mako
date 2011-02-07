@@ -3,7 +3,7 @@
 <%namespace file="/widgets/tags.mako" import="*"/>
 <%namespace file="/search/index.mako" import="search_form"/>
 
-<%namespace file="/anonymous_index/en.mako" import="*"/>
+<%namespace file="/anonymous_index.mako" import="*"/>
 
 <%def name="portlets()">
   ${user_sidebar(['search'])}

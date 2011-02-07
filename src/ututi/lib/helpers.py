@@ -172,14 +172,14 @@ def marked_list(items):
 
 
 def get_timezone():
-    from pylons import config
-    tz = config.get('timezone')
+    from pylons import tmpl_context
+    tz = tmpl_context.timezone
     return pytz.timezone(tz)
 
 
 def get_locale():
-    from pylons import config
-    return config.get('locale')
+    from pylons import tmpl_context
+    return tmpl_context.locale
 
 
 def fmt_dt(dt):

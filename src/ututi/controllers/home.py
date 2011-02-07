@@ -209,7 +209,7 @@ class HomeController(UniversityListMixin, FederationMixin):
         c.geo_locations = meta.Session.query(User.location_city, func.count(User.id)).group_by(User.location_city).order_by(desc(func.count(User.id))).all()
 
         # Getting last week date range
-        locale = config.get('locale')
+        locale = c.locale
         from_time_str = format_date(date.today() - timedelta(7),
                                     format="short",
                                     locale=locale)

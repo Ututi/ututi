@@ -1,6 +1,6 @@
 <%inherit file="/ubase-sidebar.mako" />
 <%namespace file="/portlets/facebook.mako" import="*"/>
-<%namespace file="/anonymous_index/en.mako" import="universities_section"/>
+<%namespace file="/anonymous_index.mako" import="universities_section"/>
 <%namespace file="/search/index.mako" import="search_form"/>
 
 <%def name="head_tags()">
