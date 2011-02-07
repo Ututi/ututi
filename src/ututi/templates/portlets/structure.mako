@@ -50,7 +50,7 @@
 
     </ul>
     %if c.user is None:
-    ${h.button_to(_("Register"), location.url(action='register'))}
+    ${h.button_to(_("Register"), url(controller='registration', action='index', path='/'.join(location.path)))}
     %endif
     %if h.check_crowds(['moderator']):
       <div class="right_arrow"><a href="${location.url(action='edit')}">${_('Edit')}</a></div>

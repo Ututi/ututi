@@ -316,6 +316,12 @@ def input_line(name, title, value='', help_text=None, right_next=None, **kwargs)
                        expl,
                        HTML.literal('<form:error name="%s" />' % name)])
 
+def input_hidden(name, value='', **kwargs):
+    kwargs.setdefault('id', name)
+    return HTML.div(class_='formField',
+                    id='%s-field' % kwargs['id'],
+                    c=[HTML.input(type='hidden', value=value, name_=name, **kwargs),
+                       HTML.literal('<form:error name="%s" />' % name)])
 
 def input_psw(name, title, value='', help_text=None, **kwargs):
     expl = None

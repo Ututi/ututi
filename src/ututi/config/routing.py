@@ -234,14 +234,18 @@ def make_map(config):
     map.connect('/welcome', controller='profile', action='welcome')
     map.connect('/register/welcome', controller='profile', action='register_welcome')
 
+    #new user registration path
+    map.connect('/*path/registration', controller='registration', action='index')
+    map.connect('/registration/start', controller='registration', action='start')
+    map.connect('/registration/approve', controller='registration', action='approve')
+    map.connect('/registration/approve/{hash}', controller='registration', action='approve')
+
     map.connect('/profile/logo/{width}/{height}',
                 controller='profile',
                 action='logo')
 
     map.connect('/school/*path/update', controller='structureview', action='update')
     map.connect('/school/*path/login', controller='structureview', action='login')
-    map.connect('/school/*path/register', controller='structureview', action='register')
-    map.connect('/school/*path/register/{hash}', controller='structureview', action='register_hash')
     map.connect('/school/*path/edit', controller='structureview', action='edit')
     map.connect('/school/*path/search_js', controller='structureview', action='search_js')
     map.connect('/school/*path/groups', controller='structureview', action='groups')
