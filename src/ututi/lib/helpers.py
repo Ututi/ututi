@@ -22,6 +22,8 @@ from webhelpers.html.tags import convert_boolean_attrs
 from ututi.lib.base import u_cache
 from ututi.lib.latex import replace_latex_to_html as latex_to_html
 
+from ututi.model.i18n import LanguageText
+
 from pylons.i18n import _
 
 import pytz
@@ -564,3 +566,12 @@ def when(time):
 def get_supporters():
     from ututi.model import get_supporters
     return get_supporters()
+
+def get_i18n_text(text_id):
+    from pylons import tmpl_context as c
+    text_obj = LanguageText.get(text_id, c.lang)
+    if text_obj is None:
+        text_obj = LanguageText.get(text_id, 'en')
+    if text_obj is None:
+        return ''
+    return literal(text_obj.text)
