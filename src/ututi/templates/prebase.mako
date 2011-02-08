@@ -338,7 +338,7 @@ ${self.anonymous_menu()}
          nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '')
       %>
       <p>Copyright © <a href="${_('ututi_link')}">${_(u'UAB „UTUTI“')}</a></p>
-      <form action="${url('switch_language')}">
+      <form id="language-switch-form" action="${url('switch_language')}">
         <input name="came_from" type="hidden" value="${request.url}" />
         <select name="language">
           <option value="en">${_('English')}</option>
