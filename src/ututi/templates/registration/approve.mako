@@ -2,4 +2,12 @@
 
 <h1>Email approval</h1>
 
-<div class="text">${_('We need to approve if you are owner of this email. You have received a confirmation code to %(email)s.') % dict(email=email)}</div>
+%if hasattr(c, 'error_message'):
+  <p class="error-message">
+    ${c.error_message}
+  </p>
+%endif
+
+<div id="confirmation-instruction">
+  <p>${_('Please enter the confirmation code, or continue registration by following the link that was sent to your email.')}</p>
+</div>

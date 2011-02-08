@@ -1,4 +1,4 @@
-from formencode import Schema, htmlfill
+from formencode import Schema, htmlfill, validators
 
 from pylons import tmpl_context as c, url
 from pylons.controllers.util import redirect, abort
@@ -6,7 +6,7 @@ from pylons.i18n import _
 
 from ututi.lib.base import BaseController, render
 from ututi.lib.emails import send_email_confirmation_code
-from ututi.lib.validators import validate, TranslatedEmailValidator, LocationTagsValidator
+from ututi.lib.validators import validate, TranslatedEmailValidator
 
 from ututi.model import meta, LocationTag
 from ututi.model.users import User, UserRegistration
@@ -15,7 +15,23 @@ from ututi.model.users import User, UserRegistration
 class RegistrationStartForm(Schema):
 
     email = TranslatedEmailValidator(not_empty=True, strip=True)
-    location = LocationTagsValidator()
+
+
+class EmailApproveForm(Schema):
+
+    hash = validators.String(min=32, max=32, strip=True)
+
+
+def location_action(method):
+    def _location_action(self, path):
+        location = LocationTag.get(path)
+
+        if location is None:
+            abort(404)
+
+        c.location = location
+        return method(self, location)
+    return _location_action
 
 
 def registration_action(method):
@@ -32,21 +48,17 @@ def registration_action(method):
 
 class RegistrationController(BaseController):
 
-    def index(self, path):
-        c.location = LocationTag.get(path)
-        if c.location is None:
-            abort(404)
-
-        return htmlfill.render(self._start_form(),
-                               defaults=dict(location=c.location.title))
-
     def _start_form(self):
         return render('registration/start.mako')
 
+    @location_action
     @validate(schema=RegistrationStartForm(), form='_start_form')
-    def start(self):
+    def start(self, location):
+
+        if not hasattr(self, 'form_result'):
+            return htmlfill.render(self._start_form())
+
         email = self.form_result['email']
-        location = self.form_result['location']
 
         if User.get(email, location):
             # User with this email exists in this location.
@@ -64,19 +76,19 @@ class RegistrationController(BaseController):
         send_email_confirmation_code(email,
                                      url(controller='registration',
                                          action='approve_email',
+                                         hash=registration.hash,
                                          qualified=True),
                                      registration.hash)
 
-        return render('registration/approve.mako', extra_vars=dict(email=email))
+        redirect(url(controller='registration', action='approve_email'))
 
 
     def approve_email(self, hash=None):
         if hash is not None:
             registration = UserRegistration.get(hash)
-            if registration is not None:
-                email = registration.email
-                meta.Session.delete(registration)
-                meta.Session.commit()
+            if registration is None:
+                c.error_message = _('Bad confirmation code. Please check code and try again.')
             else:
-                c.registration_error = _('Bad confirmation code. Please check code and try again.')
-        return render('registration/approve.mako', extra_vars=dict(email=email))
+                c.error_message = _('Good confirmation code.')
+
+        return render('registration/approve.mako')

@@ -13,12 +13,14 @@ by clicking 'Register' button:
 
     >>> browser.getControl('Register').click()
     >>> browser.url
-    'http://localhost/uni/registration'
+    'http://localhost/registration/uni/start'
 
 User has to type in a valid email address to initiate registration:
 
     >>> browser.getControl('Enter your email here:').value = 'what ever'
     >>> browser.getControl('Register').click()
+    >>> browser.url
+    'http://localhost/registration/uni/start'
     >>> browser.printCssQuery('#registration_form .error-message', strip=True)
     <span>An email address must contain a single @</span>
     >>> browser.getControl('Enter your email here:').value = 'what ever@example.com'
@@ -35,13 +37,16 @@ If user types in an existing email address, he will be redirected to login form:
 
 User come back to registration view ant types new email:
 
-    >>> browser.open('http://localhost/uni/registration')
+    >>> browser.open('http://localhost/registration/uni/start')
     >>> browser.getControl('Enter your email here:').value = 'user@example.com'
     >>> browser.getControl('Register').click()
-    >>> browser.printQuery("//div[@class='text']/text()")
-    We need to approve if you are owner of this email. You have received a confirmation code to user@example.com.
 
-User must receive email with confirmation url.
+A confirmation code is sent to user's email, and the page states so:
+
+    >>> browser.printCssQuery('#confirmation-instruction', strip=True)
+    <div>
+    <p>Please enter the confirmation code, or continue registration by following the link that was sent to your email.</p>
+    </div>
 
     >>> from ututi.lib.mailer import mail_queue
 
@@ -62,6 +67,3 @@ After clicking on confirmation URL user will see registration form.
    >>> urls = get_urls(msg.payload())
    >>> browser = Browser()
    >>> browser.open(urls[0])
-
-   # >>> browser.printQuery(".text", selector='cssselect', strip=True)
-   # <div>You are registered to <strong>U-niversity</strong> network.</div>
