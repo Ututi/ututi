@@ -119,9 +119,28 @@ TODO: the "Contact us" link does not take us anywhere yet:
     >>> browser.printCssQuery('a#contact-link')
     <a href="#" id="contact-link">Contact us</a>.
 
-The "Next" button does not take us anywhere yet:
+The "Next" takes user to "Personal information" step:
 
     >>> browser.getControl("Next").click()
-    Traceback (most recent call last):
-    ...
-    NotImplementedError: Action u'personal_info' is not implemented
+    >>> browser.printCssQuery('h2', strip=True)
+    <h2>Personal information</h2>
+
+Before going next, user has to fill in his full name and password:
+
+    >>> browser.getControl("Next").click()
+    >>> browser.printCssQuery('h2', strip=True)
+    <h2>Personal information</h2>
+
+    >>> browser.printCssQuery('.error-message', strip=True)
+    <span>Please enter your password.</span>
+    <span>Please enter your full name.</span>
+
+    >>> form = browser.getForm('personal-info-form')
+    >>> form.getControl('Full name:').value = 'User'
+    >>> form.getControl('Password:').value = 'password'
+    >>> form.getControl('Next').click()
+
+This takes user to the third step: "Add your photo":
+
+    >>> browser.printCssQuery('h2', strip=True)
+    <h2>Add your photo</h2>

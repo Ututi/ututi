@@ -1577,6 +1577,8 @@ CREATE TABLE user_registrations (
        hash varchar(32) not null unique,
        email varchar(320) default null,
        email_confirmed boolean default false,
+       fullname varchar(100) default null,
+       password char(36) default null,
        location_id int8 not null references tags(id) on delete cascade,
        primary key (hash),
        unique(location_id, email));;

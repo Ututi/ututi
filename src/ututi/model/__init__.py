@@ -310,6 +310,7 @@ def setup_orm(engine):
 
     global user_registrations_table
     user_registrations_table = Table("user_registrations", meta.metadata,
+                                    Column('fullname', Unicode(assert_unicode=True)),
                                     autoload=True,
                                     autoload_with=engine)
 

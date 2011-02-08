@@ -239,6 +239,8 @@ def make_map(config):
     map.connect('/registration/resend', controller='registration', action='resend_code')
     map.connect('/registration/{hash}/confirm', controller='registration', action='confirm_email')
     map.connect('/registration/{hash}/university', controller='registration', action='university_info')
+    map.connect('/registration/{hash}/personal_info', controller='registration', action='personal_info')
+    map.connect('/registration/{hash}/add_photo', controller='registration', action='add_photo')
 
     map.connect('/profile/logo/{width}/{height}',
                 controller='profile',

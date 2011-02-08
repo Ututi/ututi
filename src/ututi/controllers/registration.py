@@ -2,6 +2,7 @@ from formencode import Schema, htmlfill, validators
 
 from pylons import tmpl_context as c, url
 from pylons.controllers.util import redirect, abort
+from pylons.i18n import _
 
 from ututi.lib.base import BaseController, render
 from ututi.lib.emails import send_email_confirmation_code
@@ -19,6 +20,16 @@ class RegistrationStartForm(Schema):
 class EmailApproveForm(Schema):
 
     hash = validators.String(min=32, max=32, strip=True)
+
+
+class PersonalInfoForm(Schema):
+
+    msg = {'empty': _(u"Please enter your full name.")}
+    fullname = validators.String(not_empty=True, strip=True, messages=msg)
+    msg = {'empty': _(u"Please enter your password."),
+           'tooShort': _(u"Password must be at least 5 characters long.")}
+    password = validators.String(
+         min=5, not_empty=True, strip=True, messages=msg)
 
 
 def location_action(method):
@@ -129,3 +140,23 @@ class RegistrationController(BaseController):
             c.users = with_logo + and_other[:count - len(with_logo)]
 
         return render('registration/university_info.mako')
+
+    @registration_action
+    @validate(schema=PersonalInfoForm(), form='personal_info')
+    def personal_info(self, registration):
+        if hasattr(self, 'form_result'):
+            registration.fullname = self.form_result['fullname']
+            registration.update_password(self.form_result['password'])
+            meta.Session.commit()
+            redirect(url(controller='registration', action='add_photo',
+                         hash=registration.hash))
+
+        defaults = {
+            'fullname': registration.fullname,
+        }
+        return htmlfill.render(render('registration/personal_info.mako'),
+                               defaults=defaults)
+
+    @registration_action
+    def add_photo(self, registration):
+        return render('registration/add_photo.mako')

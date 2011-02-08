@@ -640,5 +640,7 @@ class UserRegistration(object):
         except NoResultFound:
             return None
 
+    def update_password(self, password_plain):
+        self.password = generate_password(password_plain)
 
 user_registrations_table = None
