@@ -24,6 +24,8 @@
   <li>${h.link_to('Book science types', url(controller='admin', action='science_types'))}</li>
   <li>${h.link_to('Book types', url(controller='admin', action='book_types'))}</li>
   <li>${h.link_to('Teachers', url(controller='admin', action='teachers'))}</li>
+  <li>${h.link_to('Languages', url(controller='admin', action='languages'))}</li>
+  <li>${h.link_to('I18n texts', url(controller='admin', action='i18n_texts'))}</li>
 </ul>
 
 <h2>${_('Standard UI patterns/objects')}</h2>

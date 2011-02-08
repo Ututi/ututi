@@ -17,6 +17,7 @@ from pylons.decorators import validate as old_validate
 from ututi.model import GroupCoupon
 from ututi.model import meta, Email
 from ututi.model import Subject, Group, ContentItem, LocationTag
+from ututi.model.i18n import Language
 
 
 def u_error_formatter(error):
@@ -246,6 +247,46 @@ class UniqueEmail(validators.FancyValidator):
             if existing is not None:
                 if self.completelyUnique or existing.user.id != id:
                     raise Invalid(self.message("non_unique", state), value, state)
+
+
+class LanguageIdValidator(validators.FancyValidator):
+
+    messages = {
+        'empty': _(u"Enter a valid language."),
+        'duplicate': _(u"Language with this id already exists."),
+        }
+
+    def _to_python(self, value, state):
+        return value.strip().lower()
+
+    def validate_python(self, value, state):
+        if value == '':
+            raise Invalid(self.message('empty', state), value, state)
+        else:
+            existing = meta.Session.query(Language).filter_by(id=value).first()
+            if existing is not None:
+                raise Invalid(self.message("duplicate", state), value, state)
+
+
+class LanguageValidator(validators.FancyValidator):
+
+    messages = {
+        'empty': _(u"Enter a valid language."),
+        'bad_lang': _(u"Language does not exist."),
+        }
+
+    _notfoundmarker = object()
+
+    def _to_python(self, value, state):
+        if not value:
+            return None
+        return Language.get(value) or self._notfoundmarker
+
+    def validate_python(self, value, state):
+        if value is None:
+            raise Invalid(self.message('empty', state), value, state)
+        elif value is self._notfoundmarker:
+            raise Invalid(self.message('bad_lang', state), value, state)
 
 
 def manual_validate(schema, **state_kwargs):

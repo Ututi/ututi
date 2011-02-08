@@ -26,7 +26,8 @@ from pylons import request, tmpl_context as c, config, url
 from ututi.lib.security import sign_in_admin_user
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
-from ututi.lib.validators import PhoneNumberValidator, GroupCouponValidator, validate
+from ututi.lib.validators import PhoneNumberValidator, GroupCouponValidator, validate, \
+    LanguageIdValidator, LanguageValidator
 from ututi.lib.emails import teacher_confirmed_email
 from ututi.model.users import AdminUser
 from ututi.model.events import Event
@@ -36,6 +37,7 @@ from ututi.model import SMS, GroupCoupon
 from ututi.model import (meta, User, Email, Group, Subject,
                          File, PrivateMessage, Teacher)
 from ututi.model import Notification, City, ScienceType, SchoolGrade, BookType
+from ututi.model.i18n import Language, LanguageText
 from ututi.controllers.admin.export import UniversityExportMixin
 from ututi.controllers.books import BookDepartmentValidator
 
@@ -91,6 +93,22 @@ class BookTypeForm(Schema):
     allow_extra_fields = True
     name = String(min=1)
     url_name = Regex(r'^[a-z-]+$', not_empty=True)
+
+
+class LanguageAddForm(Schema):
+    id = LanguageIdValidator()
+    title = String(min=1, max=100, not_empty=True)
+
+
+class LanguageEditForm(Schema):
+    id = String(min=1, max=100, not_empty=True)
+    title = String(min=1, max=100, not_empty=True)
+
+
+class LanguageTextForm(Schema):
+    id = String(min=1, max=100, not_empty=True)
+    language = LanguageValidator()
+    text = String(not_empty=True)
 
 
 class AdminController(BaseController, UniversityExportMixin):
@@ -606,3 +624,83 @@ class AdminController(BaseController, UniversityExportMixin):
     @ActionProtector("root")
     def example_widgets(self):
         return render('sections/example_widgets.mako')
+
+    @ActionProtector("root")
+    def languages(self):
+        c.languages = meta.Session.query(Language).order_by(Language.title.asc()).all()
+        return render('admin/languages.mako')
+
+    @ActionProtector("root")
+    @validate(schema=LanguageAddForm, form='languages')
+    def add_language(self):
+        if hasattr(self, 'form_result'):
+            language = Language(id=self.form_result['id'],
+                                title=self.form_result['title'])
+            meta.Session.add(language)
+            meta.Session.commit()
+        redirect(url(controller='admin', action='languages'))
+
+    @ActionProtector("root")
+    def _edit_language_form(self):
+        return render('admin/language_edit.mako')
+
+    @ActionProtector("root")
+    def edit_language(self, id):
+        c.language  = Language.get(id)
+        defaults = {
+            'id': c.language.id,
+            'title': c.language.title
+        }
+        return htmlfill.render(self._edit_language_form(), defaults)
+
+    @ActionProtector("root")
+    @validate(schema=LanguageEditForm, form='_edit_language_form')
+    def update_language(self):
+        if hasattr(self, 'form_result'):
+            language = Language.get(self.form_result['id'])
+            language.title = self.form_result['title']
+            meta.Session.commit()
+        redirect(url(controller='admin', action='languages'))
+
+    @ActionProtector("root")
+    def i18n_texts(self):
+        c.texts = meta.Session.query(LanguageText).\
+                order_by(LanguageText.id.asc(),
+                         LanguageText.language_id.asc()).all()
+        return render('admin/i18n_texts.mako')
+
+    @ActionProtector("root")
+    @validate(schema=LanguageTextForm, form='languages')
+    def add_i18n_text(self):
+        if hasattr(self, 'form_result'):
+            text = LanguageText(self.form_result['id'],
+                                self.form_result['language'],
+                                self.form_result['text'])
+            meta.Session.add(text)
+            meta.Session.commit()
+        redirect(url(controller='admin', action='i18n_texts'))
+
+    @ActionProtector("root")
+    def _edit_i18n_text_form(self):
+        return render('admin/i18n_text_edit.mako')
+
+    @ActionProtector("root")
+    def edit_i18n_text(self, id, lang):
+        c.text = LanguageText.get(id, lang)
+        defaults = {
+            'id': c.text.id,
+            'language': c.text.language_id,
+            'text': c.text.text
+        }
+        return htmlfill.render(self._edit_i18n_text_form(), defaults)
+
+    @ActionProtector("root")
+    @validate(schema=LanguageTextForm, form='_edit_language_form')
+    def update_i18n_text(self):
+        if hasattr(self, 'form_result'):
+            id = self.form_result['id']
+            lang = self.form_result['language']
+            text = LanguageText.get(id, lang)
+            text.text = self.form_result['text']
+            meta.Session.commit()
+        redirect(url(controller='admin', action='i18n_texts'))

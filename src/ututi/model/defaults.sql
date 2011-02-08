@@ -12,16 +12,15 @@ insert into languages (title, id) values
 create table language_texts (
        id varchar(100) not null,
        language_id varchar(100) not null references languages(id),
-       title varchar(100) not null,
        text text not null default '',
        primary key (id, language_id));;
 
-insert into language_texts (id, language_id, title, text) values
-       ('about_books', 'en', 'About books', ''),
-       ('about', 'en', 'About ututi', ''),
-       ('advertising', 'en', 'Advertising', ''),
-       ('group_pay', 'en', 'Pay', ''),
-       ('banners', 'en', 'Banners', '');;
+insert into language_texts (id, language_id, text) values
+       ('about_books', 'en', ''),
+       ('about', 'en', ''),
+       ('advertising', 'en', ''),
+       ('group_pay', 'en', ''),
+       ('banners', 'en', '');;
 
 
 create table countries (
