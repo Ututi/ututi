@@ -617,14 +617,14 @@ class TeacherGroup(object):
                 raise GroupNotFoundException()
 
 
-class PendingConfirmation(object):
+class UserRegistration(object):
     """Pending registration confirmations."""
 
     def __init__(self, email=None, location=None):
         self.hash = hashlib.md5(datetime.now().isoformat() + email).hexdigest()
 
         if location is not None:
-            self.location_id = location
+            self.location = location
         if email:
             self.email = email
 
@@ -636,4 +636,4 @@ class PendingConfirmation(object):
             return None
 
 
-user_confirmations_table = None
+user_registrations_table = None

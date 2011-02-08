@@ -1571,12 +1571,12 @@ create table teacher_groups (
        group_id int8 default null references groups(id) on delete cascade,
        primary key (id));;
 
-/* Table for storing confirmation codes sended to new users */
-CREATE TABLE user_confirmations (
+/* a table for storing user registration data */
+CREATE TABLE user_registrations (
        created timestamp not null default (now() at time zone 'UTC'),
+       hash varchar(32) not null unique,
        email varchar(320) default null,
        location_id int8 not null references tags(id) on delete cascade,
-       hash varchar(32) not null unique,
        primary key (hash),
        unique(location_id, email));;
 

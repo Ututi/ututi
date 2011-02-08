@@ -9,7 +9,7 @@ from ututi.lib.emails import send_email_confirmation_code
 from ututi.lib.validators import validate, TranslatedEmailValidator, LocationTagsValidator
 
 from ututi.model import meta, LocationTag
-from ututi.model.users import User, PendingConfirmation
+from ututi.model.users import User, UserRegistration
 
 
 class RegistrationStartForm(Schema):
@@ -37,31 +37,33 @@ class RegistrationController(BaseController):
 
         if User.get(email, location):
             # User with this email exists in this location.
-            # TODO: should display a message.
+            # TODO: here we should display a message, and
+            # ask user if he wants us to remember his password.
             redirect(location.url(action='login'))
 
-        # Create confirmation code and send it to new user.
+        # Otherwise create registration entry and
+        # send confirmation code it to user.
 
-        confirmation = PendingConfirmation(email, location.id)
-        meta.Session.add(confirmation)
+        registration = UserRegistration(email, location)
+        meta.Session.add(registration)
         meta.Session.commit()
+
         send_email_confirmation_code(email,
                                      url(controller='registration',
-                                         action='approve',
+                                         action='approve_email',
                                          qualified=True),
-                                     confirmation.hash)
-        return render('registration/approve.mako',
-                      extra_vars=dict(email=email))
+                                     registration.hash)
+
+        return render('registration/approve.mako', extra_vars=dict(email=email))
 
 
-    def approve(self, hash=None):
+    def approve_email(self, hash=None):
         if hash is not None:
-            confirmation = PendingConfirmation.get(hash)
-            if confirmation is not None:
-                email = confirmation.email
-                meta.Session.delete(confirmation)
+            registration = UserRegistration.get(hash)
+            if registration is not None:
+                email = registration.email
+                meta.Session.delete(registration)
                 meta.Session.commit()
             else:
                 c.registration_error = _('Bad confirmation code. Please check code and try again.')
-        return render('registration/approve.mako',
-                      extra_vars=dict(email=email))
+        return render('registration/approve.mako', extra_vars=dict(email=email))

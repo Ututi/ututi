@@ -32,7 +32,7 @@ from sqlalchemy.orm.interfaces import MapperExtension
 
 from ututi.migration import GreatMigrator
 from ututi.model.users import Medal, Email, UserSubjectMonitoring, User
-from ututi.model.users import Teacher, TeacherGroup, AdminUser, PendingConfirmation
+from ututi.model.users import Teacher, TeacherGroup, AdminUser, UserRegistration
 from ututi.model.util import logo_property
 from ututi.model import meta
 from ututi.lib.messaging import SMSMessage
@@ -308,12 +308,13 @@ def setup_orm(engine):
     orm.mapper(Medal, user_medals_table)
 
 
-    global user_confirmations_table
-    user_confirmations_table = Table("user_confirmations", meta.metadata,
+    global user_registrations_table
+    user_registrations_table = Table("user_registrations", meta.metadata,
                                     autoload=True,
                                     autoload_with=engine)
-    orm.mapper(PendingConfirmation, user_confirmations_table,
-               properties = {'location': relation(Tag, backref=backref('confirmations', cascade='save-update, merge, delete'))})
+
+    orm.mapper(UserRegistration, user_registrations_table,
+               properties = {'location': relation(Tag)})
 
 
     global subject_pages_table

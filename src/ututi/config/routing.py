@@ -237,8 +237,8 @@ def make_map(config):
     #new user registration path
     map.connect('/*path/registration', controller='registration', action='index')
     map.connect('/registration/start', controller='registration', action='start')
-    map.connect('/registration/approve', controller='registration', action='approve')
-    map.connect('/registration/approve/{hash}', controller='registration', action='approve')
+    map.connect('/registration/approve', controller='registration', action='approve_email')
+    map.connect('/registration/approve/{hash}', controller='registration', action='approve_email')
 
     map.connect('/profile/logo/{width}/{height}',
                 controller='profile',
