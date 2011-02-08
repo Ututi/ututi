@@ -645,6 +645,9 @@ def setup_orm(engine):
     from ututi.model import events
     events.setup_orm(engine)
 
+    from ututi.model import i18n
+    i18n.setup_orm(engine)
+
 
 def reset_db(engine):
     connection = meta.engine.connect()
