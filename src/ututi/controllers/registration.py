@@ -17,6 +17,19 @@ class RegistrationStartForm(Schema):
     email = TranslatedEmailValidator(not_empty=True, strip=True)
     location = LocationTagsValidator()
 
+
+def registration_action(method):
+    def _registration_action(self, hash):
+        registration = UserRegistration.get(hash)
+
+        if registration is None:
+            abort(404)
+
+        c.registration = registration
+        return method(self, registration)
+    return _registration_action
+
+
 class RegistrationController(BaseController):
 
     def index(self, path):
