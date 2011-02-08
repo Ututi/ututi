@@ -1,0 +1,118 @@
+Test admin interface of adding languages and internationalized texts
+====================================================================
+
+Let's login as admin and visit the languages view.
+The link is available in the dashboard:
+
+    >>> browser = Browser.logIn()
+    >>> browser.open('http://localhost/admin')
+    >>> browser.getLink('Languages').click()
+
+The table lists languages already available:
+
+    >>> browser.printQuery('id("languages_list")//td/text()')
+    en English
+    lt Lithuanian
+    pl Polish
+
+Let's add one more:
+
+    >>> form = browser.getForm('language_form')
+    >>> form.getControl('Language id').value = 'kr'
+    >>> form.getControl('Language title').value = 'Korean'
+    >>> form.getControl('Save').click()
+    >>> browser.printQuery('id("languages_list")//td/text()')
+    en English
+    kr Korean
+    lt Lithuanian
+    pl Polish
+
+The language add form does not allow adding duplicates:
+
+    >>> form = browser.getForm('language_form')
+    >>> form.getControl('Language id').value = 'en'
+    >>> form.getControl('Language title').value = 'Pirate english'
+    >>> form.getControl('Save').click()
+    >>> browser.printQuery('id("languages_list")//td/text()')
+    en English
+    kr Korean
+    lt Lithuanian
+    pl Polish
+
+    >>> browser.printCssQuery('.error-message', strip=True)
+    <span>Language with this id already exists.</span>
+
+Let's edit english:
+
+    >>> browser.getLink('Edit', index=0).click()
+    >>> browser.url
+    'http://localhost/admin/edit_language/en'
+
+    >>> form = browser.getForm('language_form')
+    >>> form.getControl('Language title').value = 'Pirate english'
+    >>> form.getControl('Save').click()
+    >>> browser.url
+    'http://localhost/admin/languages'
+
+    >>> browser.printQuery('id("languages_list")//td/text()')
+    kr Korean
+    lt Lithuanian
+    en Pirate english
+    pl Polish
+
+Now let's visit i18n texts view:
+
+    >>> browser.open('http://localhost/admin')
+    >>> browser.getLink('I18n texts').click()
+    >>> browser.url
+    'http://localhost/admin/i18n_texts'
+
+Currently table lists few i18n texts in "Pirate english":
+
+    >>> browser.printQuery('id("texts_list")//td/text()')
+    about Pirate english 
+    about_books Pirate english
+    advertising Pirate english
+    banners Pirate english
+    group_pay Pirate english
+
+Let's add "Terms of use" texts in two different languages:
+
+    >>> form = browser.getForm('text_form')
+    >>> form.getControl('Text id').value = 'terms'
+    >>> form.getControl('Text language').value = 'lt'
+    >>> form.getControl(name='text').value = 'Terms of use <b>LT</b> content'
+    >>> form.getControl('Save').click()
+
+    >>> form = browser.getForm('text_form')
+    >>> form.getControl('Text id').value = 'terms'
+    >>> form.getControl('Text language').value = 'pl'
+    >>> form.getControl(name='text').value = 'Terms of use <b>PL</b> content'
+    >>> form.getControl('Save').click()
+
+    >>> browser.printQuery('id("texts_list")//td/text()')
+    about Pirate english 
+    about_books Pirate english
+    advertising Pirate english
+    banners Pirate english
+    group_pay Pirate english
+    terms Lithuanian
+    terms Polish
+
+Let's check if these texts appear in /terms in correct language:
+
+    >>> form = browser.getForm('language-switch-form')
+    >>> form.getControl(name='language').value = ['lt']
+    >>> form.getControl('Select').click()
+    >>> browser.open('http://localhost/terms')
+    >>> browser.printCssQuery('#terms-of-use-text', strip=True)
+    <div> Terms of use <b>LT</b> content </div>
+
+If we switch language, text should be displayed in the new language:
+
+    >>> form = browser.getForm('language-switch-form')
+    >>> form.getControl(name='language').value = ['pl']
+    >>> form.getControl('Select').click()
+    >>> browser.open('http://localhost/terms')
+    >>> browser.printCssQuery('#terms-of-use-text', strip=True)
+    <div> Terms of use <b>PL</b> content </div>
