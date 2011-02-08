@@ -305,82 +305,12 @@ for the service.
     >>> browser.url
     'http://localhost/group/moderators/pay'
 
-    >>> browser.getControl('5 Lt', index=0).click()
-    >>> browser.url
-    'http://localhost/pay'
-
-    >>> cancel = browser.getLink('Go back').url
-    >>> process = browser.getLink('Process payment').url
-    >>> browser.getControl('Dummy pay 5 LTL').click()
-    >>> browser.printQuery('id("got-space-dialog")/div/text()')
-    Congratulations! You have increased the group's private file limit.
-    You can now store up to 5 GB in your group's private area. Time period extension: month.
-    Have fun using Ututi groups!
-
-
-What if we had decided to cancel the payment?
-    >>> browser.open(cancel)
-    >>> browser.printQuery('id("cancelled-space-dialog")/div/text()')
-    You have decided not to increase your group's private file limit.
-    Perhaps you will change your mind later?
-    Have fun using Ututi groups!
-
-Anyway, let's process the payment:
-
-    >>> browser.open(process)
-    >>> print browser.contents
-    OK
-
-Check if an email to group members is being sent:
-    >>> from ututi.lib.mailer import mail_queue
-    >>> print len(mail_queue)
-    1
-
-    >>> mail_queue.pop().payload()
-    "Space for private files was bought for 'Moderatoriai' group.\n\nUtuti team\n"
+    >>> browser.printCssQuery('.static-content', strip=True)
+    <div>The amount of group's private files is limited to 20 B.
+    This is so because Ututi encourages users to store their files
+    in publicly accessible subjects where they can be shared with
+    all the users. But if You want to keep more than 20 B of files,
+    You can do this.</div>
+    <div>There are no ways to pay for additional group space at the moment.</div>
 
     >>> browser.open('http://localhost/group/moderators/files')
-
-Once the group has been paid for and the payment has been processed,
-uploading is enabled again:
-
-    >>> browser.printQuery('//div[@class="upload_control no_upload"]')
-
-    >>> browser.printQuery('//div[@class="show target_list file_upload_dropdown"]')
-    <div class="show target_list file_upload_dropdown" id="file_upload_dropdown-0">
-      <div class="target_item first">
-        <div class="upload target" id="file_upload_button-0-0">Here</div>
-      </div>
-      <div class="target_item">
-        <div class="upload target" id="file_upload_button-0-1">Also a folder</div>
-      </div>
-      <div class="target_item last">
-        <div class="upload target" id="file_upload_button-0-2">Uga Buga</div>
-      </div>
-    </div>
-
-    >>> res = app.post("/group/moderators/upload_file",
-    ...                params={'folder': ''},
-    ...                upload_files=[("attachment", "over.txt", "over the limit")])
-    >>> print dedent(res.body)
-    <li class="file">
-    ...
-      <a class="filename" href="/group/moderators/file/13/get">over.txt</a>
-    ...
-    </li>
-
-Oh, and since payments are not possible for the polish version, there is a page
-that explains it once the user has clicked on the payment button.
-
-    >>> import pylons.test
-    >>> pylons.test.pylonsapp.config['tpl_lang'] = 'pl'
-
-    >>> browser.open('http://localhost/group/moderators/pay')
-    >>> browser.getLink('increase the limit').click()
-    >>> browser.url
-    'http://localhost/group/moderators/payment_deferred'
-
-    >>> browser.open('http://localhost/group/moderators/payment_deferred')
-    >>> browser.printQuery('//h1/text()')
-    Moderatoriai
-    Paying for the group is not possible at the moment

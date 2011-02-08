@@ -16,20 +16,7 @@
   "You can do this.") % dict(limit = h.file_size(c.group.group_file_limit()))}
 </div>
 <div class="static-content">
-  ${_('By paying Your group will be able to store an <strong>unlimited amount of files</strong>:')|n}
+  ${_('There are no ways to pay for additional group space at the moment.')|n}
 </div>
 
-%for period, amount, form in c.group.filearea_payments():
-<div style="margin: 5px; float: left;">
-  <form action="${form.action}" method="POST">
-    %for key, val in form.fields:
-    <input type="hidden" name="${key}" value="${val}" />
-    %endfor
-    ${h.input_submit(_('%d Lt') % (int(amount) / 100), class_='btnLarge')}
-    <span class="larger">
-      - ${period}
-    </span>
-  </form>
-</div>
-%endfor
 <br class="clear-left" />

@@ -102,33 +102,10 @@
                 <div class="title">
                   ${_('E-banking')}
                 </div>
+
                 <div class="description">
-                  ${_('If you pay by bank, a discount applies.')|n}
+                  ${_('There are no possibility to pay for additional group space by bank at the moment.')}
                 </div>
-
-                <table>
-
-                  %for period, amount, form in c.group.filearea_payments():
-                    <tr>
-                      <td>
-                      <form action="${form.action}" method="POST">
-                        %for key, val in form.fields:
-                          <input type="hidden" name="${key}" value="${val}" />
-                        %endfor
-                        ${h.input_submit(_('%d Lt') % (int(amount) / 100), class_='btnMedium')}
-                      </form>
-                      </td>
-                      <td>
-                        <span class="larger">
-                          - ${period}
-                        </span>
-                      </td>
-                    </tr>
-
-                  %endfor
-
-                </table>
-
               </div>
           </div>
 
