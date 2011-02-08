@@ -84,7 +84,7 @@ Let's check the emails:
     >>> print msg1.payload()
     We have received a request to confirm the ownership of this email on the Ututi system.
     If this email belongs to you, confirm it by clicking on this link:
-    http://localhost/registration/approve/...
+    http://localhost/registration/.../approve
     Ututi team
 
     >>> msg1.recipients
@@ -96,5 +96,32 @@ When user clicks on confirmation link, he starts his registration process:
 
     >>> from ututi.lib.helpers import get_urls
     >>> urls = get_urls(msg1.payload())
-    >>> browser = Browser()
     >>> browser.open(urls[0])
+
+The first registration step is "University information" step:
+
+    >>> browser.printCssQuery('h2', strip=True)
+    <h2>University information</h2>
+
+It displays some people from this university:
+
+    >>> browser.printCssQuery('#people-box .person .name', strip=True)
+    <div>Adminas Adminovix</div>
+    <div>Benas</div>
+    <div>Second user</div>
+    <div>Third user</div>
+    <div>Alternative user</div>
+
+
+TODO: the "Contact us" link does not take us anywhere yet:
+(Also this test exposes a bug of css selector.)
+
+    >>> browser.printCssQuery('a#contact-link')
+    <a href="#" id="contact-link">Contact us</a>.
+
+The "Next" button does not take us anywhere yet:
+
+    >>> browser.getControl("Next").click()
+    Traceback (most recent call last):
+    ...
+    NotImplementedError: Action u'personal_info' is not implemented

@@ -2,7 +2,6 @@ from formencode import Schema, htmlfill, validators
 
 from pylons import tmpl_context as c, url
 from pylons.controllers.util import redirect, abort
-from pylons.i18n import _
 
 from ututi.lib.base import BaseController, render
 from ututi.lib.emails import send_email_confirmation_code
@@ -104,12 +103,27 @@ class RegistrationController(BaseController):
             self._send_confirmation(registration)
             return render('registration/email_approval.mako')
 
-    def approve_email(self, hash=None):
+    def approve_email(self, hash):
         if hash is not None:
             registration = UserRegistration.get(hash)
             if registration is None:
-                c.error_message = _('Bad confirmation code. Please check code and try again.')
+                abort(404)
             else:
-                c.error_message = _('Good confirmation code.')
+                redirect(url(controller='registration', action='university_info',
+                             hash=registration.hash))
 
-        return render('registration/approve.mako')
+    @registration_action
+    def university_info(self, registration):
+        # this may have to be rewritten
+        from random import shuffle
+        count = 14
+        all_users = registration.location.users
+        with_logo = [u for u in all_users if u.has_logo()]
+        and_other = [u for u in all_users if not u.has_logo()]
+        shuffle(with_logo)
+        if len(with_logo) >= count:
+            c.users = with_logo[:count]
+        else:
+            c.users = with_logo + and_other[:count - len(with_logo)]
+
+        return render('registration/university_info.mako')
