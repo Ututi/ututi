@@ -10,12 +10,11 @@ from ututi.model import meta
 from ututi.lib.messaging import EmailMessage
 
 def send_email_confirmation_code(email, url, hash):
-    link = '%s/%s' % (url, hash)
     text = render('/emails/confirm_email.mako',
-                  extra_vars={'link': link,
+                  extra_vars={'link': url,
                               'html': False})
 
-    msg = EmailMessage(_('Confirm the email for Ututi'), text, force=True)
+    msg = EmailMessage(_('Confirm your email for Ututi'), text, force=True)
     msg.send(email)
 
 def email_confirmation_request(user, email):
