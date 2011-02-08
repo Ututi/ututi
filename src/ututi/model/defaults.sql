@@ -1576,6 +1576,7 @@ CREATE TABLE user_registrations (
        created timestamp not null default (now() at time zone 'UTC'),
        hash varchar(32) not null unique,
        email varchar(320) default null,
+       email_confirmed boolean default false,
        location_id int8 not null references tags(id) on delete cascade,
        primary key (hash),
        unique(location_id, email));;

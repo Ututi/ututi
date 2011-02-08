@@ -54,7 +54,7 @@ class RegistrationController(BaseController):
         """Shorthand method."""
         send_email_confirmation_code(registration.email,
                                      url(controller='registration',
-                                         action='approve_email',
+                                         action='confirm_email',
                                          hash=registration.hash,
                                          qualified=True),
                                      registration.hash)
@@ -103,12 +103,14 @@ class RegistrationController(BaseController):
             self._send_confirmation(registration)
             return render('registration/email_approval.mako')
 
-    def approve_email(self, hash):
+    def confirm_email(self, hash):
         if hash is not None:
             registration = UserRegistration.get(hash)
             if registration is None:
                 abort(404)
             else:
+                registration.email_confirmed = True
+                meta.Session.commit()
                 redirect(url(controller='registration', action='university_info',
                              hash=registration.hash))
 
