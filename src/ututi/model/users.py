@@ -620,18 +620,23 @@ class TeacherGroup(object):
 class UserRegistration(object):
     """Pending registration confirmations."""
 
-    def __init__(self, email=None, location=None):
-        self.hash = hashlib.md5(datetime.now().isoformat() + email).hexdigest()
-
-        if location is not None:
-            self.location = location
-        if email:
-            self.email = email
+    def __init__(self, email, location):
+        self.location = location
+        self.email = email
+        self.hash = hashlib.md5(datetime.now().isoformat() + \
+                                email).hexdigest()
 
     @classmethod
     def get(cls, hash):
         try:
             return meta.Session.query(cls).filter(cls.hash == hash).one()
+        except NoResultFound:
+            return None
+
+    @classmethod
+    def get_by_email(cls, email):
+        try:
+            return meta.Session.query(cls).filter(cls.email == email).one()
         except NoResultFound:
             return None
 

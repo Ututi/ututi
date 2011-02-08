@@ -43,27 +43,58 @@ User come back to registration view ant types new email:
 
 A confirmation code is sent to user's email, and the page states so:
 
+    >>> browser.printCssQuery('h2', strip=True)
+    <h2>Email approval</h2>
+
     >>> browser.printCssQuery('#confirmation-instruction', strip=True)
     <div>
-    <p>Please enter the confirmation code, or continue registration by following the link that was sent to your email.</p>
+        <p>We need to approve that you are the owner of this email address.
+        You have received a confirmation code to user@example.com.</p>
+        <p>Did not get the confirmation code? Press "Send again" button.</p>
     </div>
+
+User can click the "Send again" button, and the code is sent again:
+
+    >>> browser.getControl("Send again").click()
+    >>> browser.url
+    'http://localhost/registration/resend'
+
+    >>> browser.printCssQuery('h2', strip=True)
+    <h2>Email approval</h2>
+
+The same thing happens if the user simply restarts the registration process:
+
+    >>> browser.open('http://localhost/registration/uni/start')
+    >>> browser.getControl('Enter your email here:').value = 'user@example.com'
+    >>> browser.getControl('Register').click()
+    >>> browser.printCssQuery('h2', strip=True)
+    <h2>Email approval</h2>
+
+Let's check the emails:
 
     >>> from ututi.lib.mailer import mail_queue
 
-    >>> msg = mail_queue.pop()
-    >>> print msg.payload()
+    >>> len(mail_queue)
+    3
+
+    >>> msg1, msg2, msg3 = mail_queue
+    >>> msg1.payload() == msg2.payload() == msg3.payload()
+    True
+
+    >>> print msg1.payload()
     We have received a request to confirm the ownership of this email on the Ututi system.
     If this email belongs to you, confirm it by clicking on this link:
     http://localhost/registration/approve/...
     Ututi team
 
-   >>> msg.recipients
-   [u'user@example.com']
+    >>> msg1.recipients
+    ['user@example.com']
 
+    >>> mail_queue[:] = []
 
-After clicking on confirmation URL user will see registration form.
+When user clicks on confirmation link, he starts his registration process:
 
-   >>> from ututi.lib.helpers import get_urls
-   >>> urls = get_urls(msg.payload())
-   >>> browser = Browser()
-   >>> browser.open(urls[0])
+    >>> from ututi.lib.helpers import get_urls
+    >>> urls = get_urls(msg1.payload())
+    >>> browser = Browser()
+    >>> browser.open(urls[0])

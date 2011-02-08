@@ -51,6 +51,16 @@ class RegistrationController(BaseController):
     def _start_form(self):
         return render('registration/start.mako')
 
+    def _send_confirmation(self, registration):
+        """Shorthand method."""
+        send_email_confirmation_code(registration.email,
+                                     url(controller='registration',
+                                         action='approve_email',
+                                         hash=registration.hash,
+                                         qualified=True),
+                                     registration.hash)
+
+
     @location_action
     @validate(schema=RegistrationStartForm(), form='_start_form')
     def start(self, location):
@@ -66,22 +76,33 @@ class RegistrationController(BaseController):
             # ask user if he wants us to remember his password.
             redirect(location.url(action='login'))
 
-        # Otherwise create registration entry and
+        # Otherwise lookup/create registration entry and
         # send confirmation code it to user.
 
-        registration = UserRegistration(email, location)
-        meta.Session.add(registration)
-        meta.Session.commit()
+        registration = UserRegistration.get_by_email(email)
+        if registration is None:
+            registration = UserRegistration(email, location)
+            meta.Session.add(registration)
+            meta.Session.commit()
 
-        send_email_confirmation_code(email,
-                                     url(controller='registration',
-                                         action='approve_email',
-                                         hash=registration.hash,
-                                         qualified=True),
-                                     registration.hash)
+        self._send_confirmation(registration)
 
-        redirect(url(controller='registration', action='approve_email'))
+        c.email = email
+        return render('registration/email_approval.mako')
 
+    @validate(schema=RegistrationStartForm(), form='resend_code')
+    def resend_code(self):
+        if not hasattr(self, 'form_result'):
+            abort(404)
+
+        email = self.form_result['email']
+        registration = UserRegistration.get_by_email(email)
+        if registration is None:
+            abort(404)
+        else:
+            c.email = email
+            self._send_confirmation(registration)
+            return render('registration/email_approval.mako')
 
     def approve_email(self, hash=None):
         if hash is not None:

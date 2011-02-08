@@ -236,6 +236,7 @@ def make_map(config):
 
     #new user registration path
     map.connect('/registration/*path/start', controller='registration', action='start')
+    map.connect('/registration/resend', controller='registration', action='resend_code')
     map.connect('/registration/approve', controller='registration', action='approve_email')
     map.connect('/registration/approve/{hash}', controller='registration', action='approve_email')
 
