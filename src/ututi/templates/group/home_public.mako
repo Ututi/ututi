@@ -15,7 +15,6 @@
   ${group_info_portlet()}
   <br />
   ${ubooks_portlet()}
-  ${user_support_portlet()}
 </%def>
 
 <div class="group_description">

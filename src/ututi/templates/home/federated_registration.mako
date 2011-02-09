@@ -7,7 +7,6 @@
 </%def>
 
 <%def name="portlets()">
-  ${user_support_portlet()}
 </%def>
 
 <%def name="head_tags()">

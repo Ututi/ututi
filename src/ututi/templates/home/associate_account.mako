@@ -7,7 +7,6 @@
 </%def>
 
 <%def name="portlets()">
-  ${user_support_portlet()}
 </%def>
 
 <h1>${_('Associate an existing Ututi account')}</h1>

@@ -85,40 +85,6 @@
   </%self:uportlet>
 </%def>
 
-<%def name="user_support_portlet(user=None, title=None, full=True)">
-  %if c.tpl_lang == 'lt':
-    <%
-       if user is None:
-           user = c.user
-
-       if title is None:
-         title = _('Support us')
-    %>
-    <%self:uportlet id="support_portlet" portlet_class="orange">
-      <%def name="header()">
-        ${title}
-      </%def>
-
-      <p class="blark">
-        ${h.literal(_('You like <a href="%(url)s">Ututi</a> and you want to contribute? Support us!') % dict(url=url('/')))}
-      </p>
-      <div style="margin-top: 10px;">
-      ${h.button_to(_('Support now'), url(controller='profile', action='support'), class_="btnMedium", method="GET")}
-      </div>
-      <br class="clear-left" />
-      <div class="click2show">
-        <div class="right_arrow click"><a href="">${_("supporters")}</a></div>
-        <ul id="supporter_list" class="show">
-          %for supporter in h.get_supporters():
-            <li>${h.link_to(supporter.fullname, supporter.url())}</li>
-          %endfor
-        </ul>
-      </div>
-    </%self:uportlet>
-  %endif
-</%def>
-
-
 <%def name="user_information_portlet(user=None, full=True, title=None)">
   <%
      if user is None:
