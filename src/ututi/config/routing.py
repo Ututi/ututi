@@ -241,6 +241,9 @@ def make_map(config):
     map.connect('/registration/{hash}/university', controller='registration', action='university_info')
     map.connect('/registration/{hash}/personal_info', controller='registration', action='personal_info')
     map.connect('/registration/{hash}/add_photo', controller='registration', action='add_photo')
+    map.connect('/registration/{hash}/link_google', controller='registration', action='link_google')
+    map.connect('/registration/{hash}/unlink_google', controller='registration', action='unlink_google')
+    map.connect('/registration/{hash}/google_verify', controller='registration', action='google_verify')
 
     map.connect('/profile/logo/{width}/{height}',
                 controller='profile',

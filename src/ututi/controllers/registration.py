@@ -1,15 +1,24 @@
+import cgi
+
 from formencode import Schema, htmlfill, validators
 
-from pylons import tmpl_context as c, url
+from pylons import tmpl_context as c, url, session, request
 from pylons.controllers.util import redirect, abort
 from pylons.i18n import _
 
 from ututi.lib.base import BaseController, render
 from ututi.lib.emails import send_email_confirmation_code
 from ututi.lib.validators import validate, TranslatedEmailValidator
+import ututi.lib.helpers as h
 
 from ututi.model import meta, LocationTag
 from ututi.model.users import User, UserRegistration
+
+from openid.consumer import consumer
+from openid.consumer.consumer import Consumer, DiscoveryFailure
+from openid.extensions import ax
+
+from xml.sax.saxutils import quoteattr
 
 
 class RegistrationStartForm(Schema):
@@ -56,7 +65,104 @@ def registration_action(method):
     return _registration_action
 
 
-class RegistrationController(BaseController):
+class FederationMixin(object):
+
+    @registration_action
+    def link_google(self, registration):
+        openid_session = session.get("openid_session", {})
+        openid_store = None # stateless
+        cons = Consumer(openid_session, openid_store)
+
+        GOOGLE_OPENID = 'https://www.google.com/accounts/o8/id'
+        try:
+            authrequest = cons.begin(GOOGLE_OPENID)
+        except DiscoveryFailure:
+            h.flash(_('Authentication failed, please try again.'))
+            redirect(url(controller='registration',
+                         action='personal_info',
+                         hash=registration.hash))
+
+        ax_req = ax.FetchRequest()
+        ax_req.add(ax.AttrInfo('http://axschema.org/namePerson/first',
+                               alias='firstname', required=True))
+        ax_req.add(ax.AttrInfo('http://axschema.org/namePerson/last',
+                               alias='lastname', required=True))
+        ax_req.add(ax.AttrInfo('http://schema.openid.net/contact/email',
+                               alias='email', required=True))
+        authrequest.addExtension(ax_req)
+
+        session['openid_session'] = openid_session
+        session.save()
+
+        realm = url(controller='home', action='index', qualified=True)
+        return_to = url(controller='registration', action='google_verify',
+                        hash=registration.hash, qualified=True)
+
+        redirect(authrequest.redirectURL(realm, return_to))
+
+    @registration_action
+    def google_verify(self, registration):
+        openid_session = session.get("openid_session", {})
+        openid_store = None # stateless
+        cons = Consumer(openid_session, openid_store)
+
+        current_url = url(controller='registration', action='google_verify',
+                         hash=registration.hash, qualified=True)
+        info = cons.complete(request.params, current_url)
+
+        display_identifier = info.getDisplayIdentifier()
+
+        if info.status == consumer.SUCCESS:
+            identity_url = info.identity_url
+            if User.get_byopenid(identity_url, registration.location):
+                message = _('This Google account is already linked to another Ututi account.')
+            else:
+                registration.openid = identity_url
+                if not registration.fullname:
+                    registration.fullname = '%s %s' % (
+                        request.params.get('openid.ext1.value.firstname'),
+                        request.params.get('openid.ext1.value.lastname'))
+                email = request.params.get('openid.ext1.value.email')
+                if registration.email != email:
+                    # TODO: we probably want to store user's email
+                    pass
+                meta.Session.commit()
+                message = _('Linked to Google account.')
+        elif info.status == consumer.FAILURE and display_identifier:
+            # In the case of failure, if info is non-None, it is the
+            # URL that we were verifying. We include it in the error
+            # message to help the user figure out what happened.
+            fmt = _("Verification of %s failed: %s")
+            message = fmt % (display_identifier, cgi.escape(info.message))
+        elif info.status == consumer.CANCEL:
+            message = _('Verification cancelled')
+        elif info.status == consumer.SETUP_NEEDED:
+            if info.setup_url:
+                message = _('<a href=%s>Setup needed</a>') % quoteattr(info.setup_url),
+            else:
+                # This means auth didn't succeed, but you're welcome to try
+                # non-immediate mode.
+                message = _('Setup needed')
+        else:
+            message = _('Authentication failed: %s') % info.message
+            # TODO: log info.status and info.message
+
+        h.flash(message)
+        redirect(url(controller='registration',
+                     action='personal_info',
+                     hash=registration.hash))
+
+    @registration_action
+    def unlink_google(self, registration):
+        c.registration.openid = None
+        meta.Session.commit()
+        h.flash(_('Unlinked from Google account.'))
+        redirect(url(controller='registration',
+                     action='personal_info',
+                     hash=registration.hash))
+
+
+class RegistrationController(BaseController, FederationMixin):
 
     def _start_form(self):
         return render('registration/start.mako')
