@@ -144,3 +144,31 @@ This takes user to the third step: "Add your photo":
 
     >>> browser.printCssQuery('h2', strip=True)
     <h2>Add your photo</h2>
+
+Adding photo is mandatory:
+
+    >>> browser.getLink('Skip').click()
+    >>> browser.printCssQuery('h2', strip=True)
+    <h2>Invite friends</h2>
+
+However, the 'Next' button raises an error:
+
+    >>> browser.goBack()
+
+    >>> browser.getControl('Next').click()
+    >>> browser.printCssQuery('.error-message', strip=True)
+    <span>Please select your photo.</span>
+
+Personally, I think this is a bug and there should be only one button.
+
+Let's upload the photo:
+
+    >>> from ututi.tests.functional import make_file
+    >>> form = browser.getForm('add-photo-form')
+    >>> form.getControl(name='photo').add_file(*make_file('test_logo.png'))
+    >>> browser.getControl('Next').click()
+
+This automatically takes user to the next step:
+
+    >>> browser.printCssQuery('h2', strip=True)
+    <h2>Invite friends</h2>

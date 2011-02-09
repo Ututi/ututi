@@ -8,7 +8,8 @@ from pylons.i18n import _
 
 from ututi.lib.base import BaseController, render
 from ututi.lib.emails import send_email_confirmation_code
-from ututi.lib.validators import validate, TranslatedEmailValidator
+from ututi.lib.validators import validate, TranslatedEmailValidator, \
+        FileUploadTypeValidator
 import ututi.lib.helpers as h
 
 from ututi.model import meta, LocationTag
@@ -39,6 +40,15 @@ class PersonalInfoForm(Schema):
            'tooShort': _(u"Password must be at least 5 characters long.")}
     password = validators.String(
          min=5, not_empty=True, strip=True, messages=msg)
+
+
+class AddPhotoForm(Schema):
+
+    allowed_types = ('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif')
+    msg = {'empty': _(u"Please select your photo.")}
+    photo = FileUploadTypeValidator(allowed_types=allowed_types,
+                                    not_empty=True,
+                                    messages=msg)
 
 
 def location_action(method):
@@ -264,5 +274,21 @@ class RegistrationController(BaseController, FederationMixin):
                                defaults=defaults)
 
     @registration_action
+    @validate(schema=AddPhotoForm(), form='add_photo')
     def add_photo(self, registration):
+        if hasattr(self, 'form_result'):
+            photo = self.form_result['photo']
+            registration.photo= photo.file.read()
+            meta.Session.commit()
+            if request.params.has_key('js'):
+                return 'OK'
+            else:
+                redirect(url(controller='registration',
+                             action='invite_friends',
+                             hash=registration.hash))
+
         return render('registration/add_photo.mako')
+
+    @registration_action
+    def invite_friends(self, registration):
+        return render('registration/invite_friends.mako')
