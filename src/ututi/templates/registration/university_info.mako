@@ -1,4 +1,4 @@
-<%inherit file="/base.mako" />
+<%inherit file="/registration/base.mako" />
 
 <h2>${_("University information")}</h2>
 

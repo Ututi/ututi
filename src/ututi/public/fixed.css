@@ -1,3 +1,48 @@
+/* CSS RESET
+ */
+
+* {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+
+}
+
+/* GENERAL STYLES
+ */
+
+body {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 12px;
+    color: #333333;
+}
+
+h1 {
+    font-family: Verdana, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    color: #333333;
+}
+
+p {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 12px;
+    color: #333333;
+    margin: 10px 0px;
+}
+
+/* LAYOUT ELEMENTS
+ */
+
+h1.page-title {
+    margin: 25px 0px;
+}
+
 /* ROUNDED BLOCKS
  */
 
@@ -204,6 +249,16 @@
 
     .new-style-form .rightNext button {
         margin-top: -1px;
+    }
+
+    form button.submit {
+        font-size: 12px;
+        color: #ffffff;
+        background: #333333;
+        border: 1px solid #969696;
+        padding: 0px 5px;
+        margin-top: 10px;
+        cursor: pointer;
     }
 
     .new-style-form button.btn-text {

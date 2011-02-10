@@ -1,6 +1,6 @@
-<%inherit file="/base.mako" />
+<%inherit file="/registration/base.mako" />
 
-<h2>${_("Email approval")}</h2>
+<%def name="pagetitle()">${_("Email approval")}</%def>
 
 %if hasattr(c, 'error_message'):
   <p class="error-message">
