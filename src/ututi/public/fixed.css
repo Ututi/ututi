@@ -1073,3 +1073,28 @@ ul.feature-list {
     .wiki-page ul, .wiki-page ol {
         list-style-position: inside;
     }
+
+/*** UTUTI.COM CSS ***/
+
+/* Login form */
+#login_form label {
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+
+#login_form label .labelText {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#login_form label .textField {
+    display: inline-block;
+    padding-right: 5px;
+    position: relative;
+    vertical-align: top;
+}
+
+/* End Login form */
