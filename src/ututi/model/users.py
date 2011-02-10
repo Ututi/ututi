@@ -625,8 +625,8 @@ class UserRegistration(object):
     """Pending registration confirmations."""
 
     def __init__(self, email, location):
-        self.location = location
         self.email = email
+        self.location = location
         self.hash = hashlib.md5(datetime.now().isoformat() + \
                                 email).hexdigest()
 

@@ -133,9 +133,7 @@ class FederationMixin(object):
                         request.params.get('openid.ext1.value.firstname'),
                         request.params.get('openid.ext1.value.lastname'))
                 email = request.params.get('openid.ext1.value.email')
-                if registration.email != email:
-                    # TODO: we probably want to store user's email
-                    pass
+                registration.openid_email = email
                 meta.Session.commit()
                 message = _('Linked to Google account.')
         elif info.status == consumer.FAILURE and display_identifier:

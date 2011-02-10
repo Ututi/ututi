@@ -1579,7 +1579,8 @@ CREATE TABLE user_registrations (
        email_confirmed boolean default false,
        fullname varchar(100) default null,
        password char(36) default null,
-       openid varchar(200) default null unique,
+       openid varchar(200) default null,
+       openid_email varchar(320) default null,
        location_id int8 not null references tags(id) on delete cascade,
        primary key (hash),
        unique(location_id, email));;
