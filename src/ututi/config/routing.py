@@ -245,6 +245,7 @@ def make_map(config):
     map.connect('/registration/{hash}/unlink_google', controller='registration', action='unlink_google')
     map.connect('/registration/{hash}/google_verify', controller='registration', action='google_verify')
     map.connect('/registration/{hash}/invite_friends', controller='registration', action='invite_friends')
+    map.connect('/registration/{hash}/finish', controller='registration', action='finish')
 
     map.connect('/profile/logo/{width}/{height}',
                 controller='profile',

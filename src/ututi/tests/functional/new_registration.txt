@@ -179,3 +179,52 @@ This automatically takes user to the next step:
 
     >>> browser.printCssQuery('h2', strip=True)
     <h2>Invite friends</h2>
+
+User can enter 0 to 5 emails. The suffix is automatically added and
+is the same as this user's. Emails are validated properly:
+
+    >>> form = browser.getForm('invite-friends-form')
+    >>> form.getControl(name='email1').value = 'one'
+    >>> form.getControl(name='email2').value = 't w o'
+    >>> form.getControl(name='email3').value = 'three'
+    >>> form.getControl(name='email4').value = '     '
+    >>> form.getControl(name='email5').value = 'fi@ve'
+    >>> browser.getControl('Finish').click()
+
+    >>> browser.printCssQuery('.error-message', strip=True)
+    <span>The username portion of the email address is invalid (the portion before the @: t w o)</span>
+    <span>The domain portion of the email address is invalid (the portion after the @: ve@example.com)</span>
+
+    >>> form = browser.getForm('invite-friends-form')
+    >>> form.getControl(name='email1').value
+    'one'
+    >>> form.getControl(name='email2').value
+    't w o'
+    >>> form.getControl(name='email3').value
+    'three'
+    >>> form.getControl(name='email4').value
+    '     '
+    >>> form.getControl(name='email5').value
+    'fi@ve'
+
+If correct email addresses are submitted, user is taken to the "Welcome" page,
+and invitation are sent:
+
+    >>> form.getControl(name='email2').value = 'two'
+    >>> form.getControl(name='email5').value = 'five'
+    >>> browser.getControl('Finish').click()
+
+    >>> browser.printCssQuery('h2', strip=True)
+    <h2>Welcome to Ututi!</h2>
+
+    >>> len(mail_queue)
+    4
+
+TODO: check that flash messages are displayed:
+
+    >>> browser.printQuery("//div[@class='flash-message']//text()")
+
+    >>> [msg.recipients for msg in mail_queue]
+    [['one@example.com'], ['two@example.com'], ['three@example.com'], ['five@example.com']]
+
+    >>> mail_queue[:] = []

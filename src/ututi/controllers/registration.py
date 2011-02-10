@@ -1,6 +1,8 @@
 import cgi
 
 from formencode import Schema, htmlfill, validators
+from formencode.foreach import ForEach
+from formencode.compound import Pipe
 
 from pylons import tmpl_context as c, url, session, request
 from pylons.controllers.util import redirect, abort
@@ -9,7 +11,7 @@ from pylons.i18n import _
 from ututi.lib.base import BaseController, render
 from ututi.lib.emails import send_email_confirmation_code
 from ututi.lib.validators import validate, TranslatedEmailValidator, \
-        FileUploadTypeValidator
+        FileUploadTypeValidator, CommaSeparatedListValidator
 import ututi.lib.helpers as h
 
 from ututi.model import meta, LocationTag
@@ -49,6 +51,31 @@ class AddPhotoForm(Schema):
     photo = FileUploadTypeValidator(allowed_types=allowed_types,
                                     not_empty=True,
                                     messages=msg)
+
+
+class EmailAddSuffix(validators.FancyValidator):
+
+    def _to_python(self, value, state):
+        if isinstance(value, basestring):
+            value = value.strip()
+        if value:
+            _, _, suffix = c.registration.email.partition('@')
+            value = '%s@%s' % (value, suffix)
+        return value
+
+
+class InviteFriendsForm(Schema):
+    """There are two variants of the form, this schema handles both."""
+
+    email1 = Pipe(EmailAddSuffix(), TranslatedEmailValidator())
+    email2 = Pipe(EmailAddSuffix(), TranslatedEmailValidator())
+    email3 = Pipe(EmailAddSuffix(), TranslatedEmailValidator())
+    email4 = Pipe(EmailAddSuffix(), TranslatedEmailValidator())
+    email5 = Pipe(EmailAddSuffix(), TranslatedEmailValidator())
+
+    emails = Pipe(validators.String(),
+                  CommaSeparatedListValidator(),
+                  ForEach(validators.Email()))
 
 
 def location_action(method):
@@ -288,5 +315,48 @@ class RegistrationController(BaseController, FederationMixin):
         return render('registration/add_photo.mako')
 
     @registration_action
+    @validate(schema=InviteFriendsForm(), form='invite_friends')
     def invite_friends(self, registration):
+        if hasattr(self, 'form_result'):
+            emails = [self.form_result['email1'],
+                      self.form_result['email2'],
+                      self.form_result['email3'],
+                      self.form_result['email4'],
+                      self.form_result['email5']] + self.form_result['emails']
+
+            self._send_invitations(registration, emails)
+
+            redirect(url(controller='registration', action='finish',
+                         hash=registration.hash))
+
+        _, _, suffix = registration.email.partition('@')
+        c.email_suffix = '@' + suffix
         return render('registration/invite_friends.mako')
+
+    def _send_invitations(self, registration, emails):
+        already = []
+        invited = []
+        for email in filter(bool, emails):
+            if User.get(email, registration.location):
+                already.append(email)
+            else:
+                invitee = UserRegistration.get_by_email(email)
+                if invitee is None:
+                    invitee = UserRegistration(email, registration.location)
+                    meta.Session.add(invitee)
+                invitee.inviter = email
+                meta.Session.commit()
+                self._send_confirmation(invitee)
+                invited.append(email)
+
+        if already:
+            h.flash(_("%(email_list)s already using Ututi!") % \
+                    dict(email_list=', '.join(already)))
+
+        if invited:
+            h.flash(_("Invitations sent to %(email_list)s") % \
+                    dict(email_list=', '.join(invited)))
+
+    @registration_action
+    def finish(self, registration):
+        return render('registration/finish.mako')

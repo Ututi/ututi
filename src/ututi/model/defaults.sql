@@ -1581,6 +1581,9 @@ CREATE TABLE user_registrations (
        password char(36) default null,
        openid varchar(200) default null,
        openid_email varchar(320) default null,
+       inviter varchar(320) default null, /* email address of user who
+                                           * invited for this registration
+                                           */
        location_id int8 not null references tags(id) on delete cascade,
        primary key (hash),
        unique(location_id, email));;
