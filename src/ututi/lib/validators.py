@@ -221,11 +221,21 @@ class TranslatedEmailValidator(validators.Email):
         'empty': _('Please enter an email address'),
         'noAt': _('An email address must contain a single @'),
         'badUsername': _('The username portion of the email address is invalid (the portion before the @: %(username)s)'),
+        'nonAscii': _('Email address cannot contain unicode characters'),
         'socketError': _('An error occured when trying to connect to the server: %(error)s'),
         'badDomain': _('The domain portion of the email address is invalid (the portion after the @: %(domain)s)'),
         'domainDoesNotExist': _('The domain of the email address does not exist (the portion after the @: %(domain)s)'),
         'non_unique': _(u"The email already exists."),
     }
+
+    def validate_python(self, value, state):
+        """Added extra validation here. Thus the class should be renamed to EmailValidation.
+           A real fix would be to write custum Ututi email validator."""
+        validators.Email.validate_python(self, value, state)
+        try:
+            value.encode('ascii')
+        except UnicodeEncodeError:
+            raise Invalid(self.message('nonAscii', state), value, state)
 
 class UniqueEmail(validators.FancyValidator):
 
