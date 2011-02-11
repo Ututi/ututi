@@ -61,12 +61,8 @@ because he already has his LocationTag set:
 But he sees "I study here" button in HIS university faculties:
 
     >>> browser.open('http://localhost/school/uni/dep')
-    >>> browser.printQuery("//form[@id='i_study_here_form']")
-    <form id="i_study_here_form" method="post" action="/profile/set_location?location_id=2">
-      <button class="btn" value="I study here">
-        <span>I study here</span>
-      </button>
-    </form>
+    >>> browser.printCssQuery("form#i_study_here_form button")
+    <button class="submit" value="I study here">I study here</button>
 
 If user is joined faculty, he doesn't see "I study here" at all
 

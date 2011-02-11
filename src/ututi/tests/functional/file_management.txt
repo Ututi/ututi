@@ -20,7 +20,7 @@ File upload:
         <span class="file_rename_input_decorator">
           <input class="file_rename_input" type="text" />
         </span>
-        <button class="rename_confirm btn" value="Rename"><span>Rename</span></button>
+        <button class="rename_confirm btn" value="Rename">Rename</button>
       </span>
       <img src="/images/details/icon_rename.png" alt="edit file name" class="rename_button" />
       <span class="size">(4 B)</span>
@@ -204,7 +204,7 @@ Flagging files:
     <form method="post" action="." class="fullForm fileFlagForm">
       <div>
         <label><span class="labelText">Please state the reason why the file 'text;for you.txt' is inappropriate:</span><span class="textField"><textarea cols="30" id="reason" name="reason" rows="5"></textarea><span class="edgeTextArea"></span></span></label>
-        <button class="btn" value="Submit"><span>Submit</span></button>
+        <button class="submit" value="Submit">Submit</button>
       </div>
     </form>
 

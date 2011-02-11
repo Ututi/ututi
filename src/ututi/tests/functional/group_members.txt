@@ -60,17 +60,20 @@ There is also a table listing all the group's members:
 
 We need another member in the group, so let's join as the invited user.
 
+    >>> browser2 = Browser()
     >>> browser2 = Browser.logIn("user@ututi.lt", "password")
 
 The user should be presented with a flash message inviting him to join the group.
 
-    >>> browser2.printCssQuery(".flash-message span")
+    >>> browser2.printCssQuery(".flash-message span", strip=True)
     <span>
-      <a href="/user/1">Adminas Adminovix</a> has sent you an invitation to group
-        <a href="/group/moderators">Moderatoriai</a>. Do you want to become a member of this group?
+      <a>Adminas Adminovix</a> has sent you an invitation to group
+      <a>Moderatoriai</a>. Do you want to become a member of this group?
     </span>
-    <span>Reject</span>
-    <span>Accept</span>
+
+    >>> browser2.printCssQuery(".flash-message button", strip=True)
+    <button>Reject</button>
+    <button>Accept</button>
 
 Let's accept this invitation.
 
