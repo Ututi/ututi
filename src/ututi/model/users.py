@@ -203,9 +203,13 @@ class User(object):
             return None
 
     @classmethod
-    def get_byopenid(cls, openid):
+    def get_byopenid(cls, openid, location=None):
+        q = meta.Session.query(cls)
         try:
-            return meta.Session.query(cls).filter_by(openid=openid).one()
+            q = q.filter_by(openid=openid)
+            if location is not None:
+                q = q.filter_by(location_id=location.id)
+            return q.one()
         except NoResultFound:
             return None
 
