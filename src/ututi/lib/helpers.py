@@ -322,8 +322,8 @@ def input_psw(name, title, value='', help_text=None, **kwargs):
                     HTML.span(class_='textField', c=[
                             HTML.input(type='password', name_=name, value='', **kwargs),
                             ])]),
-                       expl,
-                       HTML.literal('<form:error name="%s" />' % name)])
+                       HTML.literal('<form:error name="%s" />' % name),
+                       expl])
 
 
 def input_area(name, title, value='', cols='50', rows='5', help_text=None, disabled=False, **kwargs):
