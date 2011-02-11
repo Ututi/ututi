@@ -253,6 +253,7 @@ class RegistrationController(BaseController, FederationMixin):
         else:
             c.email = email
             self._send_confirmation(registration)
+            h.flash(_("Your confirmation code was resent."))
             return render('registration/email_approval.mako')
 
     def confirm_email(self, hash):
