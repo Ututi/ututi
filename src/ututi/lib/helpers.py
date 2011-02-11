@@ -298,9 +298,9 @@ def input_line(name, title, value='', help_text=None, right_next=None, **kwargs)
                     HTML.span(class_='textField', c=[
                             HTML.input(type='text', value=value, name_=name, **kwargs),
                             ])]),
+                       HTML.literal('<form:error name="%s" />' % name),
                        next,
-                       expl,
-                       HTML.literal('<form:error name="%s" />' % name)])
+                       expl])
 
 def input_hidden(name, value='', **kwargs):
     kwargs.setdefault('id', name)

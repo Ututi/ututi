@@ -141,6 +141,10 @@ The "Next" takes user to "Personal information" step:
     >>> browser.printCssQuery('h1.page-title', strip=True)
     <h1>Personal information</h1>
 
+Regression test: no error messages are displayed when user enters this page:
+
+    >>> browser.printCssQuery('.error-message', strip=True)
+
 Before going next, user has to fill in his full name and password:
 
     >>> browser.getControl("Next").click()
