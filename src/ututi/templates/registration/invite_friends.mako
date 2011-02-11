@@ -1,6 +1,6 @@
 <%inherit file="/registration/base.mako" />
 
-<h2>${_("Invite friends")}</h2>
+<%def name="pagetitle()">${_("Invite friends")}</%def>
 
 <form id="invite-friends-form"
       action="${url(controller='registration', action='invite_friends', hash=c.registration.hash)}"

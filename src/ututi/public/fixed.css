@@ -32,8 +32,22 @@ h1 {
 p {
     font-family: Verdana, Arial, sans-serif;
     font-size: 12px;
-    color: #333333;
+    color: #000000;
     margin: 10px 0px;
+}
+
+a {
+    color: #3d617a;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a.inactive:hover {
+    text-decoration: none;
+    color: inherit;
 }
 
 /* LAYOUT ELEMENTS
@@ -215,15 +229,16 @@ h1.page-title {
 .new-style-form {
 }
 
-    .new-style-form span.labelText,
-    .new-style-form span.inputField,
-    .new-style-form span.helpText {
+    form span.labelText,
+    form span.inputField,
+    form span.helpText {
         display: block;
     }
 
-    .new-style-form span.labelText {
+    form span.labelText {
+        font-size: 12px;
         font-weight: bold;
-        margin: 10px 0px 2px 0px;
+        margin: 10px 0px 3px 0px;
     }
 
     .new-style-form span.helpText {
@@ -232,11 +247,16 @@ h1.page-title {
         margin-top: 2px;
     }
 
-    .new-style-form input[type='text'],
-    .new-style-form input[type='password'],
-    .new-style-form textarea,
-    .new-style-form span.helpText {
-        width: 300px;
+    .textField input,
+    form input[type='text'],
+    form input[type='password'],
+    form textarea,
+    form span.helpText {
+        font-size: 11px;
+        width: 200px;
+        height: 20px;
+        border: 1px solid #666666;
+        background: none;
     }
 
     .new-style-form button {
@@ -252,12 +272,32 @@ h1.page-title {
     }
 
     form button.submit {
+        background: #ff9900;
+        border: 1px solid #666666;
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 2px 8px;
+        cursor: pointer;
+        margin-top: 25px;
+        /*
+         * Gray version:
         font-size: 12px;
         color: #ffffff;
         background: #333333;
         border: 1px solid #969696;
-        padding: 0px 5px;
-        margin-top: 10px;
+        padding: 0px 8px;
+        cursor: pointer;
+         */
+    }
+
+    form.button-to button {
+        background: #ff9900;
+        border: 1px solid #666666;
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 2px 8px;
         cursor: pointer;
     }
 

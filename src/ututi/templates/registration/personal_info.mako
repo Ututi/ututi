@@ -1,6 +1,6 @@
 <%inherit file="/registration/base.mako" />
 
-<h2>${_("Personal information")}</h2>
+<%def name="pagetitle()">${_("Personal information")}</%def>
 
 <p><strong>${c.registration.email}</strong></p>
 

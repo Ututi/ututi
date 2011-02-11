@@ -1,6 +1,6 @@
 <%inherit file="/registration/base.mako" />
 
-<h2>${_("Add your photo")}</h2>
+<%def name="pagetitle()">${_("Add your photo")}</%def>
 
 <div id="photo-preview">
 </div>

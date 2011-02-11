@@ -50,8 +50,8 @@ User come back to registration view ant types new email:
 
 A confirmation code is sent to user's email, and the page states so:
 
-    >>> browser.printCssQuery('h2', strip=True)
-    <h2>Email approval</h2>
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>Email approval</h1>
 
     >>> browser.printCssQuery('#confirmation-instruction', strip=True)
     <div>
@@ -66,16 +66,18 @@ User can click the "Send again" button, and the code is sent again:
     >>> browser.url
     'http://localhost/registration/resend'
 
-    >>> browser.printCssQuery('h2', strip=True)
-    <h2>Email approval</h2>
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>Email approval</h1>
+
+TODO: test that flash message appears
 
 The same thing happens if the user simply restarts the registration process:
 
     >>> browser.open('http://localhost/registration/uni/start')
     >>> browser.getControl('Enter your email here:').value = 'user@example.com'
     >>> browser.getControl('Register').click()
-    >>> browser.printCssQuery('h2', strip=True)
-    <h2>Email approval</h2>
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>Email approval</h1>
 
 Let's check the emails:
 
@@ -107,17 +109,17 @@ When user clicks on confirmation link, he starts his registration process:
 
 The first registration step is "University information" step:
 
-    >>> browser.printCssQuery('h2', strip=True)
-    <h2>University information</h2>
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>University information</h1>
 
 It displays some people from this university:
 
-    >>> browser.printCssQuery('#people-box .person .name', strip=True)
-    <div>Adminas Adminovix</div>
-    <div>Benas</div>
-    <div>Second user</div>
-    <div>Third user</div>
-    <div>Alternative user</div>
+    >>> browser.printCssQuery('#people-box .name', strip=True)
+    <td> <a>Adminas Adminovix</a> </td>
+    <td> <a>Benas</a> </td>
+    <td> <a>Second user</a> </td>
+    <td> <a>Third user</a> </td>
+    <td> <a>Alternative user</a> </td>
 
 
 TODO: the "Contact us" link does not take us anywhere yet:
@@ -129,14 +131,14 @@ TODO: the "Contact us" link does not take us anywhere yet:
 The "Next" takes user to "Personal information" step:
 
     >>> browser.getControl("Next").click()
-    >>> browser.printCssQuery('h2', strip=True)
-    <h2>Personal information</h2>
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>Personal information</h1>
 
 Before going next, user has to fill in his full name and password:
 
     >>> browser.getControl("Next").click()
-    >>> browser.printCssQuery('h2', strip=True)
-    <h2>Personal information</h2>
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>Personal information</h1>
 
     >>> browser.printCssQuery('.error-message', strip=True)
     <span>Please enter your password.</span>
@@ -149,14 +151,14 @@ Before going next, user has to fill in his full name and password:
 
 This takes user to the third step: "Add your photo":
 
-    >>> browser.printCssQuery('h2', strip=True)
-    <h2>Add your photo</h2>
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>Add your photo</h1>
 
 Adding photo is mandatory:
 
     >>> browser.getLink('Skip').click()
-    >>> browser.printCssQuery('h2', strip=True)
-    <h2>Invite friends</h2>
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>Invite friends</h1>
 
 However, the 'Next' button raises an error:
 
@@ -177,8 +179,8 @@ Let's upload the photo:
 
 This automatically takes user to the next step:
 
-    >>> browser.printCssQuery('h2', strip=True)
-    <h2>Invite friends</h2>
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>Invite friends</h1>
 
 User can enter 0 to 5 emails. The suffix is automatically added and
 is the same as this user's. Emails are validated properly:
@@ -214,8 +216,8 @@ and invitation are sent:
     >>> form.getControl(name='email5').value = 'five'
     >>> browser.getControl('Finish').click()
 
-    >>> browser.printCssQuery('h2', strip=True)
-    <h2>Welcome to Ututi!</h2>
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>Welcome to Ututi!</h1>
 
     >>> len(mail_queue)
     4
