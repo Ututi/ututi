@@ -148,8 +148,8 @@ Before going next, user has to fill in his full name and password:
     <h1>Personal information</h1>
 
     >>> browser.printCssQuery('.error-message', strip=True)
-    <span>Please enter your password.</span>
     <span>Please enter your full name.</span>
+    <span>Please enter your password.</span>
 
     >>> form = browser.getForm('personal-info-form')
     >>> form.getControl('Full name:').value = 'User'

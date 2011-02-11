@@ -283,8 +283,11 @@ class RegistrationController(BaseController, FederationMixin):
 
         return render('registration/university_info.mako')
 
+    def _personal_info_form(self):
+        return render('registration/personal_info.mako')
+
     @registration_action
-    @validate(schema=PersonalInfoForm(), form='personal_info')
+    @validate(schema=PersonalInfoForm(), form='_personal_info_form')
     def personal_info(self, registration):
         if hasattr(self, 'form_result'):
             registration.fullname = self.form_result['fullname']
@@ -296,8 +299,7 @@ class RegistrationController(BaseController, FederationMixin):
         defaults = {
             'fullname': registration.fullname,
         }
-        return htmlfill.render(render('registration/personal_info.mako'),
-                               defaults=defaults)
+        return htmlfill.render(self._personal_info_form(), defaults=defaults)
 
     @registration_action
     @validate(schema=AddPhotoForm(), form='add_photo')
