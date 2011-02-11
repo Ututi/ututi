@@ -243,6 +243,8 @@ def make_map(config):
     map.connect('/registration/{hash}/add_photo', controller='registration', action='add_photo')
     map.connect('/registration/{hash}/link_google', controller='registration', action='link_google')
     map.connect('/registration/{hash}/unlink_google', controller='registration', action='unlink_google')
+    map.connect('/registration/{hash}/link_facebook', controller='registration', action='link_facebook')
+    map.connect('/registration/{hash}/unlink_facebook', controller='registration', action='unlink_facebook')
     map.connect('/registration/{hash}/google_verify', controller='registration', action='google_verify')
     map.connect('/registration/{hash}/invite_friends', controller='registration', action='invite_friends')
     map.connect('/registration/{hash}/finish', controller='registration', action='finish')
