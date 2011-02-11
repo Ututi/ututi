@@ -297,7 +297,7 @@ def input_line(name, title, value='', help_text=None, right_next=None, **kwargs)
                     HTML.span(class_='labelText', c=[title]),
                     HTML.span(class_='textField', c=[
                             HTML.input(type='text', value=value, name_=name, **kwargs),
-                            HTML.span(class_='edge')])]),
+                            ])]),
                        next,
                        expl,
                        HTML.literal('<form:error name="%s" />' % name)])
@@ -321,7 +321,6 @@ def input_psw(name, title, value='', help_text=None, **kwargs):
                     HTML.span(class_='labelText', c=[title]),
                     HTML.span(class_='textField', c=[
                             HTML.input(type='password', name_=name, value='', **kwargs),
-                            HTML.span(class_='edge')
                             ])]),
                        expl,
                        HTML.literal('<form:error name="%s" />' % name)])
