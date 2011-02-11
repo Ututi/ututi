@@ -69,7 +69,10 @@ User can click the "Send again" button, and the code is sent again:
     >>> browser.printCssQuery('h1.page-title', strip=True)
     <h1>Email approval</h1>
 
-TODO: test that flash message appears
+A flash message is displayed:
+
+    >>> browser.printQuery("//div[@class='flash-message']//text()")
+    Your confirmation code was resent.
 
 The same thing happens if the user simply restarts the registration process:
 
@@ -78,6 +81,10 @@ The same thing happens if the user simply restarts the registration process:
     >>> browser.getControl('Register').click()
     >>> browser.printCssQuery('h1.page-title', strip=True)
     <h1>Email approval</h1>
+
+But no flash message here:
+
+    >>> browser.printQuery("//div[@class='flash-message']//text()")
 
 Let's check the emails:
 
@@ -222,9 +229,10 @@ and invitation are sent:
     >>> len(mail_queue)
     4
 
-TODO: check that flash messages are displayed:
+A flash message is displayed, indicating that emails were sent.
 
     >>> browser.printQuery("//div[@class='flash-message']//text()")
+    Invitations sent to one@example.com, two@example.com, three@example.com, five@example.com
 
     >>> [msg.recipients for msg in mail_queue]
     [['one@example.com'], ['two@example.com'], ['three@example.com'], ['five@example.com']]

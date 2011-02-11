@@ -1,4 +1,4 @@
-<%inherit file="/base.mako" />
+<%inherit file="/ubase.mako" />
 
 <%def name="body_class()">registration</%def>
 <%def name="pagetitle()">${_("Registration")}</%def>
