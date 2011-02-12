@@ -1,4 +1,4 @@
-<%inherit file="/prebase.mako" />
+<%inherit file="/base.mako" />
 <%def name="anonymous_menu()"></%def>
 <%def name="body_class()">
   noMenu

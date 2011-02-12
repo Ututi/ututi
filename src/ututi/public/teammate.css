@@ -1,0 +1,46 @@
+#widthLimiter {
+    width: 980px;
+    position: relative;
+    padding-top: 30px;
+    padding-bottom: 10px;
+}
+
+.head-nav{ position:absolute; top:0px; left:0; z-index: 1000;}
+.loggedin-nav{ position: absolute; top:0px; right:5px; z-index: 100; }
+
+#header {
+    width: 980px;
+    height: 50px;
+}
+
+#header img {
+    margin-left: 10px;
+}
+
+#searchForm button.submit {
+    background: #ff9900;
+    border: 2px solid #969696;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 8px;
+    cursor: pointer;
+    margin-top: 0;
+}
+
+.textField input, .textField textarea {
+    background: None;
+    height: 18px;
+    padding-top: 2px;
+    line-height: 18px;
+    padding-left: 5px;
+}
+
+.textField .edge, .textField .edgeTextArea {
+    background: None;
+    height: 20px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 5px;
+}

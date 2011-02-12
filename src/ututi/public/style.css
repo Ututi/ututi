@@ -1,7 +1,7 @@
 /* Common styles */
 
-body.noMenu {
-    background-image: url('img/body_bg_nomenu.gif');
+body {
+    background: url('/img/header_bg.gif') repeat-x scroll center top #FFFFFF;
 }
 * html #wrap {
     height: 100%;
@@ -22,12 +22,12 @@ body.noMenu {
 }
 
 #widthLimiter {
-    background: url('img/header_bg.gif') no-repeat top;
     width: 980px;
     position: relative;
     padding-top: 109px;
     padding-bottom: 10px;
 }
+
 body.noMenu #widthLimiter {
     padding-top: 81px;
 }
@@ -170,7 +170,6 @@ select {
 
 /* Header */
 #siteName a, #siteName2 a{
-    background: url('img/site_logo.gif') no-repeat left;
     display: block;
     height: 68px;
     left: 0;
@@ -319,7 +318,7 @@ select {
     padding: 13px;
     position: absolute;
     right: 0;
-    top: 17px;
+    top: -45px;
     width: 276px;
 }
 
