@@ -1,7 +1,6 @@
-from datetime import date
 import doctest
 
-from ututi.model import LocationTag, GroupMembershipType, GroupMember, Group, File, meta
+from ututi.model import LocationTag, Group, File, meta
 from ututi.model.users import User
 from ututi.model.events import Event
 
@@ -26,7 +25,7 @@ def test_group_create():
 
     Add event, when creating group:
 
-        >>> g = Group('testgroup', u'Testing group', LocationTag.get(u'vu'), date(date.today().year, 1, 1), u'Testing group')
+        >>> g = Group('testgroup', u'Testing group', LocationTag.get(u'vu'), u'Testing group')
         >>> meta.Session.add(g)
         >>> meta.Session.commit()
         >>> res = meta.Session.execute("SET ututi.active_user TO 1")
@@ -146,7 +145,7 @@ def test_setup(test):
     u = User.get('admin@uni.ututi.com', LocationTag.get(u'uni'))
     meta.Session.execute("SET ututi.active_user TO %d" % u.id)
 
-    g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date.today(), u'U2ti moderatoriai.')
+    g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), u'U2ti moderatoriai.')
     g.add_member(u, True)
     meta.Session.add(g)
     meta.Session.commit()

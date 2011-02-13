@@ -9,8 +9,6 @@ This time, let's try creating an academic group:
 
     >>> browser.getControl('Group e-mail address').value = 'test2'
     >>> browser.getControl('Group title').value = 'Another test group'
-    >>> browser.getControl('Year').value = ['2010']
-    >>> browser.getControl(name='location-0').value = 'U-niversity'
     >>> browser.getControl('Continue').click()
 
 After creating the group, we are redirected to the member invitation step:
@@ -50,8 +48,6 @@ Let's create academic group with forum:
 
     >>> browser.getControl('Group e-mail address').value = 'test2_with_forum'
     >>> browser.getControl('Group title').value = 'Another test group'
-    >>> browser.getControl('Year').value = ['2009']
-    >>> browser.getControl(name='location-0').value = 'U-niversity'
     >>> browser.getControl('Forum type').value = ['forum']
     >>> browser.getControl('Continue').click()
     >>> browser.getControl("Finish").click()

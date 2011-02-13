@@ -248,7 +248,6 @@ create table groups (
        id int8 references content_items(id),
        group_id varchar(250) not null unique,
        title varchar(250) not null,
-       year date not null,
        description text,
        page text not null default '',
        logo bytea default null,

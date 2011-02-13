@@ -251,7 +251,7 @@ def test_setup(test):
 
     meta.Session.execute("SET LOCAL ututi.active_user TO %d" % u.id)
 
-    g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date.today(), u'U2ti moderatoriai.')
+    g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), u'U2ti moderatoriai.')
 
     role = GroupMembershipType.get('administrator')
     gm = GroupMember()
@@ -271,4 +271,3 @@ def test_suite():
         setUp=test_setup)
     suite.layer = UtutiLayer
     return suite
-

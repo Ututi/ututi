@@ -43,8 +43,6 @@ Let's add a new group:
     >>> abrowser.getLink('Create group').click()
     >>> abrowser.getControl('Group e-mail address').value = 'test'
     >>> abrowser.getControl('Group title').value = 'Test group'
-    >>> abrowser.getControl('Year').value = ['2009']
-    >>> abrowser.getControl(name='location-0').value = 'Vilniaus universitetas'
     >>> abrowser.getControl('Continue').click()
 
 We won't invite anyone for now:

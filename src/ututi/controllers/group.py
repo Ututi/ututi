@@ -99,7 +99,6 @@ class GroupForm(Schema):
     allow_extra_fields = True
     title = validators.UnicodeString(not_empty=True)
     description = validators.UnicodeString()
-    year = validators.String()
 
     moderators = validators.StringBoolean(if_missing=False)
     logo_upload = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
@@ -116,7 +115,6 @@ class GroupLiveSearchForm(Schema):
     """A schema for validating group edits and submits."""
     pre_validators = [NestedVariables()]
     allow_extra_fields = True
-    year = validators.String()
     location = Pipe(ForEach(validators.String(strip=True)),
                     LocationTagsValidator())
 
@@ -170,8 +168,6 @@ class CreateGroupFormBase(Schema):
 
 class CreateAcademicGroupForm(CreateGroupFormBase):
     """A schema for creating academic groups."""
-
-    year = validators.String()
     forum_type = validators.OneOf(['mailinglist', 'forum'])
 
 
@@ -412,8 +408,6 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
         return render('group/files.mako')
 
     def _create_academic_form(self):
-        c.current_year = date.today().year
-        c.years = range(c.current_year - 10, c.current_year + 5)
         c.forum_type = 'mailinglist'
         c.forum_types = [('mailinglist', _('Mailing list')),
                          ('forum', _('Web-based forum'))]
@@ -427,11 +421,9 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
             # TODO: refactor; see create_public()
             values = self.form_result
 
-            year = int(values.get('year') or '2010') # XXX
             group = Group(group_id=values['id'],
                           title=values['title'],
-                          description=values['description'],
-                          year=date(year, 1, 1))
+                          description=values['description'],)
 
             group.mailinglist_enabled = (self.form_result['forum_type'] == 'mailinglist')
             group.location = c.user.location
@@ -489,8 +481,6 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
         return roles
 
     def _edit_form(self):
-        c.current_year = date.today().year
-        c.years = range(c.current_year - 10, c.current_year + 5)
         forum_link = (('mailinglist', _('Mailing List'))
                       if c.group.mailinglist_enabled
                       else ('forum', _('Forum')))
@@ -516,7 +506,6 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
             'title': group.title,
             'description': group.description,
             'tags': ', '.join([tag.title for tag in c.group.tags]),
-            'year': group.year.year,
             'default_tab': group.default_tab,
             'can_add_subjects': group.wants_to_watch_subjects,
             'file_storage': group.has_file_area,
@@ -550,8 +539,6 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
     def update(self, group):
         values = self.form_result
         group.title = values['title']
-        if values['year']:
-            group.year = date(int(values['year']), 1, 1)
         group.description = values['description']
         group.default_tab = values['default_tab']
         group.admins_approve_members = (
@@ -1107,12 +1094,9 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
         """Group live search in group creation view."""
         if hasattr(self, 'form_result'):
             location = self.form_result.get('location', None)
-            year = self.form_result['year']
             groups = meta.Session.query(Group)
             if location is not None:
                 groups = groups.filter(Group.location_id.in_([loc.id for loc in location.flatten]))
-            if year != '':
-                groups = groups.filter(Group.year == date(int(year), 1, 1))
             return render_mako_def('group/create_base.mako', 'live_search', groups=groups.all())
         else:
             abort(404)

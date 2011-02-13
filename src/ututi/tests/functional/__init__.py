@@ -96,20 +96,21 @@ def ftest_setUp(test):
 
     meta.Session.execute("SET LOCAL ututi.active_user TO %d" % admin.id)
 
-    moderators = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date(date.today().year, 1, 1), u'U2ti moderatoriai.')
+    moderators = Group('moderators', u'Moderatoriai', LocationTag.get(u'uni'), u'U2ti moderatoriai.')
     meta.Session.add(moderators)
     moderators.add_member(admin, True)
     moderators.add_member(third)
 
-    testgroup = Group('testgroup', u'Testing group', LocationTag.get(u'vu'), date(date.today().year, 1, 1), u'Testing group')
+    testgroup = Group('testgroup', u'Testing group', LocationTag.get(u'vu'), u'Testing group')
     meta.Session.add(testgroup)
+
     testgroup.mailinglist_enabled = False
     testgroup.add_member(admin, True)
     testgroup.add_member(second)
 
     # Subjects:
 
-    math = Subject(u'mat_analize', u'Matematin\u0117 analiz\u0117', LocationTag.get(u'vu'), u'prof. E. Misevi\u010dius')
+    math = Subject(u'mat_analize', u'Matematin\u0117 analiz\u0117', LocationTag.get(u'uni'), u'prof. E. Misevi\u010dius')
     meta.Session.add(math)
     third.watchSubject(math)
 

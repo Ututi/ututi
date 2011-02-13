@@ -1037,14 +1037,11 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
         """Render the group's information."""
         return render_mako_def('/sections/content_snippets.mako','group', object=self)
 
-    def __init__(self, group_id, title=u'', location=None, year=None, description=u''):
+    def __init__(self, group_id, title=u'', location=None, description=u''):
         self.group_id = group_id.strip().lower()
         self.title = title
         self.location = location
         self.page = u''
-        if year is None:
-            year = date(date.today().year, 1, 1)
-        self.year = year
         self.description = description
 
         # Add a default forum category.

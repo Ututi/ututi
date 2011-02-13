@@ -10,7 +10,6 @@ We specify group's title, e-mail address (identifier) and university.
 
     >>> browser.getControl('Group title').value = 'Belzebubai'
     >>> browser.getControl('Group e-mail address').value = 'belzebubai'
-    >>> browser.getControl('University').value = 'Vilniaus Universitetas'
     >>> browser.getControl('Continue').click()
 
 We are redirected to the member invitation and just click "Finish", without

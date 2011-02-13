@@ -108,7 +108,7 @@ def test_setup(test):
     ututi.tests.setUp(test)
     setUpUser()
     meta.Session.execute("SET ututi.active_user TO 1")
-    g = Group('moderators', u'Moderators', LocationTag.get(u'uni'), date.today(), u'Moderators')
+    g = Group('moderators', u'Moderators', LocationTag.get(u'uni'), u'Moderators')
     meta.Session.add(g)
     meta.Session.commit()
     meta.Session.execute("SET ututi.active_user TO 1")

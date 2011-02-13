@@ -86,7 +86,6 @@ ${h.javascript_link('/javascript/js-alternatives.js')|n}
         ${description_field()}
 
         ${logo_field()}
-        ${year_field()}
 
         ${location_field(live_search=False)}
 

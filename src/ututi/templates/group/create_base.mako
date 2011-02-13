@@ -108,17 +108,6 @@
   ${h.input_line('title', _('Group title'))}
 </%def>
 
-<%def name="year_field()">
-  <label for="year"><span class="labelText">${_("Year")}</span></label>
-  <form:error name="year" />
-  <select name="year" id="year" class="group_live_search">
-    <option value="">${_('Select the year')}</option>
-    %for year in c.years:
-      <option value="${year}">${year}</option>
-    %endfor
-  </select>
-</%def>
-
 <%def name="web_address_field()">
   <label for="group-id-field">
     <span class="labelText">${_("Group address on the web")}</span>
@@ -333,8 +322,7 @@
   $(document).ready(function() {
     $('select.group_live_search').change(function() {
       parameters = {'location-0': $('#location-0-0').val(),
-                    'location-1': $('#location-0-1').val(),
-                    'year': $('#year').val()}
+                    'location-1': $('#location-0-1').val()}
       $('div.group-type-info').hide();
       $('#sidebar').load(
           '${url(controller="group", action="js_group_search")}',

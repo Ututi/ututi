@@ -1,6 +1,7 @@
 Group subject watching
 ======================
 
+
     >>> browser = Browser.logIn()
 
     >>> browser.open('http://localhost/group/moderators')
@@ -12,10 +13,10 @@ Group subject watching
       <li id="empty_subjects_msg" class="empty_msg">Your group is not watching any subjects. Add them by searching.</li>
     </ul>
 
-
     >>> browser.printQuery("id('search-results')//a/text()")
     Matematin&#279; analiz&#279;
-    vu
+    uni
+
 
     >>> browser.getLink('Watch', url='mat_analize').click()
     >>> browser.printQuery("id('watched_subjects')//a/text()")
@@ -34,9 +35,10 @@ Group subject watching
 
     >>> browser.printQuery("id('search-results')//a/text()")
     Matematin&#279; analiz&#279;
-    vu
+    uni
 
 These actions should have left an event trail on the group home page:
+
 
     >>> browser.getLink("News feed", url='group').click()
     >>> browser.printQuery(".wall .wall-entry .event-heading .event-title", selector='cssselect', strip=True)

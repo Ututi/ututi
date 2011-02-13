@@ -8,8 +8,6 @@ When I login, I go to groups creation to create public group
 
     >>> browser.getControl('title').value = "testing one two tree"
     >>> browser.getControl('Group address on the web').value = "testing-one-two-tree"
-    >>> browser.getControl('University').value = "Vilniaus universitetas"
-    >>> browser.getControl('Department').value = "Ekonomikos fakultetas"
     >>> browser.getControl('Forum type').value = ['forum']
     >>> browser.getControl('Continue').click()
 
