@@ -15,13 +15,12 @@
           id="group_settings_form" enctype="multipart/form-data">
 
       <fieldset>
-        ${self.location_field()}
-        ${self.year_field()}
+        ${self.group_title_field()}
         ${self.forum_type_and_id()}
         <div style="height: 5px"></div>
-        ${self.group_title_field()}
-        ${self.logo_field()}
         ${self.description_field()}
+        ${self.year_field()}
+        ${self.logo_field()}
         ${self.coupon_field()}
         ${h.input_submit(_('Continue'), class_='btnMedium', id="continue-button")}
       </fieldset>

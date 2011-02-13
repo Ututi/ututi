@@ -434,9 +434,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
                           year=date(year, 1, 1))
 
             group.mailinglist_enabled = (self.form_result['forum_type'] == 'mailinglist')
-
-            tag = values.get('location', None)
-            group.location = tag
+            group.location = c.user.location
 
             meta.Session.add(group)
 
@@ -445,8 +443,6 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
                 group.logo = logo.file.read()
 
             group.add_member(c.user, admin=True)
-            if c.user.location is None:
-                c.user.location = group.location
             self._apply_coupon(group, values)
             meta.Session.commit()
             redirect(url(controller='group', action='invite_members_step', id=values['id']))
