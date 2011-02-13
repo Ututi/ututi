@@ -434,4 +434,6 @@ class RegistrationController(BaseController, FederationMixin):
     @registration_action
     def finish(self, registration):
         user, email = self._register_user(registration)
+        meta.Session.delete(registration)
+        meta.Session.commit()
         redirect(url(controller='profile', action='register_welcome'))
