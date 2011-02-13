@@ -408,11 +408,22 @@ class RegistrationController(BaseController, FederationMixin):
         user = User(fullname=registration.fullname,
                     username=email,
                     location=location,
-                    password=registration.password)
-        user.emails = [Email(email)]
+                    password=registration.password
+                    )
+
+        if registration.openid_email:
+            # Add openid email as a second user's mail.
+            # In future this email will be accesable by user.emails[1].email
+            user.emails = [Email(email), Email(registration.openid_email)]
+            user.emails[0].confirmed = True
+            user.emails[1].confirmed = True
+        else:
+            user.emails = [Email(email)]
+            user.emails[0].confirmed = True
+
         user.accepted_terms = datetime.utcnow()
         user.inviter = registration.inviter
-        #all newly registered users are marked when they agree to the terms of use
+        user.openid = registration.openid
 
         meta.Session.add(user)
         meta.Session.commit()
