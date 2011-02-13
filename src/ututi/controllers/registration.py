@@ -434,4 +434,4 @@ class RegistrationController(BaseController, FederationMixin):
     @registration_action
     def finish(self, registration):
         user, email = self._register_user(registration)
-        return render('registration/finish.mako')
+        redirect(url(controller='profile', action='register_welcome'))
