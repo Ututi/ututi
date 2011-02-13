@@ -411,6 +411,7 @@ class RegistrationController(BaseController, FederationMixin):
                     password=registration.password)
         user.emails = [Email(email)]
         user.accepted_terms = datetime.utcnow()
+        user.inviter = registration.inviter
         #all newly registered users are marked when they agree to the terms of use
 
         meta.Session.add(user)
