@@ -77,6 +77,7 @@ create table users (
        user_type varchar(10) not null default 'user',
        teacher_verified boolean default null,
        teacher_position varchar(200) default null,
+       inviter varchar(320) default null,
        primary key (id));;
 
 CREATE FUNCTION check_gadugadu() RETURNS trigger AS $$

@@ -391,6 +391,49 @@ class RegistrationController(BaseController, FederationMixin):
             h.flash(_("Invitations sent to %(email_list)s") % \
                     dict(email_list=', '.join(invited)))
 
+    def _register_user(self, registration):
+        from ututi.lib.security import sign_in_user
+        from ututi.model import Email
+        from datetime import datetime
+
+        email = registration.email
+        location = registration.location
+
+        user = User.get(email, location)
+        if user:
+            # A user with this email exists, just sign them in.
+            sign_in_user(user)
+            return (user, email)
+
+        user = User(fullname=registration.fullname,
+                    username=email,
+                    location=location,
+                    password=registration.password
+                    )
+
+        if registration.openid_email:
+            # Add openid email as a second user's mail.
+            # In future this email will be accesable by user.emails[1].email
+            user.emails = [Email(email), Email(registration.openid_email)]
+            user.emails[0].confirmed = True
+            user.emails[1].confirmed = True
+        else:
+            user.emails = [Email(email)]
+            user.emails[0].confirmed = True
+
+        user.accepted_terms = datetime.utcnow()
+        user.inviter = registration.inviter
+        user.openid = registration.openid
+
+        meta.Session.add(user)
+        meta.Session.commit()
+
+        sign_in_user(user)
+        return (user, email)
+
     @registration_action
     def finish(self, registration):
-        return render('registration/finish.mako')
+        user, email = self._register_user(registration)
+        meta.Session.delete(registration)
+        meta.Session.commit()
+        redirect(url(controller='profile', action='register_welcome'))
