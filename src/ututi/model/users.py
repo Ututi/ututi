@@ -651,4 +651,25 @@ class UserRegistration(object):
     def update_password(self, password_plain):
         self.password = generate_password(password_plain)
 
+    def create_user(self):
+        """Returns a User object filled with registration data."""
+        user = User(fullname=self.fullname,
+                    username=self.email,
+                    location=self.location,
+                    password=self.password)
+
+        email = Email(self.email)
+        email.confirmed = True
+        user.emails.append(email)
+        if self.openid_email:
+            # add openid email as a second user's mail.
+            email = Email(self.openid_email)
+            email.confirmed = True
+            user.emails.append(email)
+
+        user.accepted_terms = datetime.utcnow()
+        user.openid = self.openid
+        user.inviter = self.inviter
+        return user
+
 user_registrations_table = None
