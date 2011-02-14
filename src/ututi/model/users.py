@@ -656,7 +656,8 @@ class UserRegistration(object):
         user = User(fullname=self.fullname,
                     username=self.email,
                     location=self.location,
-                    password=self.password)
+                    password=self.password,
+                    gen_password=False)
 
         email = Email(self.email)
         email.confirmed = True
