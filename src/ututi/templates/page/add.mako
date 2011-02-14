@@ -9,7 +9,10 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
 ${_('New page')}
 </%def>
 
+% if getattr(c,'subject', None):
 <a class="back-link" href="${c.subject.url()}">${_('Back to %(subject_title)s') % dict(subject_title=c.subject.title)}</a>
+% endif
+
 
 <h1>${_('New page')}</h1>
 

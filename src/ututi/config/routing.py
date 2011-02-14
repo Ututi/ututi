@@ -141,6 +141,16 @@ def make_map(config):
     map.connect('/group/{id}/file/{file_id}/{action}',
                 controller='groupfile')
 
+    map.connect('/group/{id}/pages/{action}',
+                controller='grouppage')
+
+    map.connect('/group/{id}/page/{page_id}',
+                controller='grouppage', action='index')
+
+    map.connect('/group/{id}/page/{page_id}/{action}',
+                controller='grouppage')
+
+
     # Backwards compatibility.
     map.connect('/group/{id}/forum/thread/{thread_id}',
                 controller='forum',

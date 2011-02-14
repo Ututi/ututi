@@ -218,7 +218,7 @@ def group_action(method):
         c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
         c.group_menu_items = group_menu_items()
         c.group_id = c.group.group_id
-        c.controller = self.controller_name
+        c.controller = getattr(self, 'controller_name', '')
         return method(self, group)
     return _group_action
 
@@ -285,6 +285,11 @@ def group_menu_items():
          'name': 'page',
          'link': url(controller='group', action='page', id=c.group.group_id),
          'event': h.trackEvent(c.group, 'page', 'breadcrumb')},
+        ] + [
+        {'title': _("Wiki notes"),
+         'name': 'pages',
+         'link': url(controller='group', action='pages', id=c.group.group_id),
+         'event': h.trackEvent(c.group, 'wiki', 'breadcrumb')}
         ]
     return bcs
 
@@ -321,7 +326,6 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
         else:
             c.breadcrumbs = [{'title': group.title,
                               'link': url(controller='group', action='home', id=c.group.group_id)}]
-
             return render('group/home_public.mako')
 
     @group_action
@@ -440,6 +444,12 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
             redirect(url(controller='group', action='invite_members_step', id=values['id']))
 
         return htmlfill.render(self._create_academic_form())
+
+    @group_action
+    @ActionProtector("member", "admin")
+    def pages(self, group):
+        c.group_menu_current_item = 'pages'
+        return render('group/pages.mako')
 
     @group_action
     @ActionProtector("member", "admin")

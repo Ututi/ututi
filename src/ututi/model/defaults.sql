@@ -338,6 +338,11 @@ create table subject_pages (
        page_id int8 not null references pages(id) on delete cascade,
        primary key (subject_id, page_id));;
 
+create table group_pages (
+       group_id int8 not null references groups(id) on delete cascade,
+       page_id int8 not null references pages(id) on delete cascade,
+       primary key (group_id, page_id));;
+
 /* A table that tracks subjects watched by a group  */
 
 create table group_watched_subjects (

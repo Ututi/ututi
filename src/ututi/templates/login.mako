@@ -10,23 +10,6 @@
 <%def name="portlets()">
 </%def>
 
-%if getattr(c, 'show_warning', False) is not False:
-  %if not c.show_registration or c.hash:
-  <div style="font-size: 20px; padding-top: 7px">
-    ${c.header}
-  </div>
-
-  <div id="login_message" class="${c.message_class or 'permission-denied'}">
-    ${c.message|n}
-    %if c.final_msg:
-    <p>
-      ${c.final_msg|n}
-    </p>
-    %endif
-  </div>
-  %endif
-%endif
-
 <table id="login-screen">
   <td class="login-choice-box">
     <div class="login-note">
@@ -53,7 +36,7 @@
 
     <div id="login-fields" ${"style='display: none'" if getattr(c, 'show_registration', False) else ''}>
       <div class="login-note">
-        ${_('Log in directly to Ututi')}
+        ${_('Log in directly to TeamMate')}
       </div>
 
       <form id="join_login_form" method="post" action="${url(controller='home', action='join_login')}" class="fullForm">
@@ -84,7 +67,7 @@
 
     <div id="register-fields" ${"style='display: none'" if not getattr(c, 'show_registration', False) else ''}>
       <div class="login-note">
-        ${_('Register as a new Ututi user')}
+        ${_('Register as a new TeamMate user')}
       </div>
 
       <form id="join_registration_form" method="post" action="${url.current(action='register')}" class="fullForm">

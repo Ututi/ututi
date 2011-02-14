@@ -323,6 +323,11 @@ def setup_orm(engine):
                                 autoload=True,
                                 autoload_with=engine)
 
+    global group_pages_table
+    group_pages_table = Table("group_pages", meta.metadata,
+                                autoload=True,
+                                autoload_with=engine)
+
     global pages_table
     pages_table = Table("pages", meta.metadata,
                         autoload=True,
@@ -384,7 +389,6 @@ def setup_orm(engine):
                                                                order_by=group_members_table.c.membership_type.asc())),
                              'role': relation(GroupMembershipType)})
 
-
     global groups_table
     groups_table = Table("groups", meta.metadata,
                          Column('title', Unicode(assert_unicode=True)),
@@ -423,7 +427,10 @@ def setup_orm(engine):
                properties ={'watched_subjects': relation(Subject,
                                                          backref=backref("watching_groups", lazy=True),
                                                          secondary=group_watched_subjects_table),
-                            'raw_logo': deferred(groups_table.c.logo)})
+                            'raw_logo': deferred(groups_table.c.logo),
+                            'pages': relation(Page,
+                                              secondary=group_pages_table,
+                                              backref="group")})
 
     orm.mapper(GroupWhitelistItem, group_whitelist_table,
                properties = {'group': relation(Group,
@@ -1172,6 +1179,19 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
             return GroupWhitelistItem(self, email)
         return None
 
+    def n_pages(self):
+        return len(self.pages)
+
+    @property
+    def location_path(self):
+        location = self.location
+        path = []
+        while location:
+            path.append(location.title_short)
+            location = location.parent
+        return '/'.join(reversed(path))
+
+
 group_whitelist_table = None
 
 class GroupWhitelistItem(object):
@@ -1478,12 +1498,20 @@ class Page(ContentItem):
         return self.last_version.created
 
     def url(self, controller='subjectpage', action='index', **kwargs):
-        return url(controller=controller,
-                   action=action,
-                   page_id=self.id,
-                   id=self.subject[0].subject_id,
-                   tags=self.subject[0].location_path,
-                   **kwargs)
+ 
+        if controller == 'subjectpage':
+            return url(controller=controller,
+                       action=action,
+                       page_id=self.id,
+                       id=self.subject[0].subject_id,
+                       tags=self.subject[0].location_path,
+                       **kwargs)
+        else:
+            return url(controller=controller,
+                       action=action,
+                       page_id=self.id,
+                       id=self.group[0].group_id,
+                       **kwargs)
 
     def snippet(self):
         """Render a short snippet with the basic item's information. Used in search to render the results."""
@@ -1506,14 +1534,21 @@ class PageVersion(ContentItem):
         return ' '.join(texts)
 
     def url(self, controller='subjectpage', action='show_version', **kwargs):
-        return url(controller=controller,
-                   action=action,
-                   id=self.page.subject[0].subject_id,
-                   tags=self.page.subject[0].location_path,
-                   page_id=self.page_id,
-                   version_id=self.id,
-                   **kwargs)
-
+        if controller == 'subjectpage':
+            return url(controller=controller,
+                       action=action,
+                       id=self.page.subject[0].subject_id,
+                       tags=self.page.subject[0].location_path,
+                       page_id=self.page_id,
+                       version_id=self.id,
+                       **kwargs)
+        else:
+            return url(controller=controller,
+                       action=action,
+                       id=self.page.subject[0].subject_id,
+                       page_id=self.page_id,
+                       version_id=self.id,
+                       **kwargs)
 
 content_tags_table = None
 class Tag(object):
