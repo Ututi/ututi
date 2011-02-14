@@ -40,6 +40,7 @@ from ututi.model.events import Event
 from ututi.controllers.subject import SubjectAddMixin
 from ututi.controllers.subject import NewSubjectForm
 from ututi.controllers.search import SearchSubmit
+from ututi.lib.security import bot_protect
 from ututi.lib.security import is_root, check_crowds, deny
 from ututi.lib.security import ActionProtector
 from ututi.lib.search import search_query, search_query_count
@@ -1171,6 +1172,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
     def payment_deferred(self, group):
         return render('group/payment_deferred.mako')
 
+    @bot_protect
     def js_check_id(self):
         group_id = request.params.get('id')
         is_email = request.params.get('is_email', '') == 'true'
