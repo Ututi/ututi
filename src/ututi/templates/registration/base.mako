@@ -18,9 +18,14 @@
   ul#registration-steps {
     width: 845px !important;
     height: 40px !important;
-    background: url('/img/registration_steps_bg.png') no-repeat top center;
+    background-image: url('/img/registration_steps_bg.png');
+    background-repeat: no-repeat;
     list-style: none;
   }
+  ul.step-1 { background-position: center    0px; }
+  ul.step-2 { background-position: center  -50px; }
+  ul.step-3 { background-position: center -100px; }
+  ul.step-4 { background-position: center -150px; }
   ul#registration-steps li {
     width: 211px !important;
     height: 35px !important;
@@ -29,13 +34,16 @@
     margin-top: 5px;
     text-align: center;
   }
-  ul#registration-steps li span {
-    display: block;
+  ul#registration-steps li.active {
+    color: white;
+    font-weight: bold;
   }
   ul#registration-steps li span.step-number {
+    display: block;
     font-weight: bold;
   }
   ul#registration-steps li span.step-title {
+    display: block;
     font-size: 10px;
   }
 </%def>
@@ -43,9 +51,13 @@
 <div id="registration-page-container">
 
   %if hasattr(c, 'steps') and hasattr(c, 'active_step') and c.active_step:
-  <ul id="registration-steps">
-    %for n, step in enumerate(c.steps, 1):
-      <% id, title = step %>
+  <%
+  active_num = 0
+  for n, (id, title) in enumerate(c.steps, 1):
+    if id == c.active_step: active_num = n
+  %>
+  <ul id="registration-steps" class="step-${active_num}">
+    %for n, (id, title) in enumerate(c.steps, 1):
       %if id == c.active_step:
       <li class="active">
       %else:

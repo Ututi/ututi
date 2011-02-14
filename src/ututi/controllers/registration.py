@@ -320,6 +320,7 @@ class RegistrationController(BaseController, FederationMixin):
         return render('registration/university_info.mako')
 
     def _personal_info_form(self):
+        c.active_step = 'personal_info'
         return render('registration/personal_info.mako')
 
     @registration_action
@@ -332,7 +333,6 @@ class RegistrationController(BaseController, FederationMixin):
             redirect(url(controller='registration', action='add_photo',
                          hash=registration.hash))
 
-        c.active_step = 'personal_info'
         defaults = {
             'fullname': registration.fullname,
         }
