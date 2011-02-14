@@ -92,7 +92,7 @@ def location_action(method):
 
 
 def registration_action(method):
-    def _registration_action(self, hash):
+    def _registration_action(self, hash, *args):
         registration = UserRegistration.get_by_hash(hash)
 
         if registration is None:
@@ -109,7 +109,7 @@ def registration_action(method):
 
         c.active_step = None
 
-        return method(self, registration)
+        return method(self, registration, *args)
     return _registration_action
 
 
