@@ -1574,6 +1574,7 @@ create table teacher_groups (
 
 /* a table for storing user registration data */
 CREATE TABLE user_registrations (
+       id bigserial not null,
        created timestamp not null default (now() at time zone 'UTC'),
        hash varchar(32) not null unique,
        email varchar(320) default null,
@@ -1587,6 +1588,6 @@ CREATE TABLE user_registrations (
                                            * invited for this registration
                                            */
        location_id int8 not null references tags(id) on delete cascade,
-       primary key (hash),
+       primary key (id),
        unique(location_id, email));;
 

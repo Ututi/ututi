@@ -93,7 +93,7 @@ def location_action(method):
 
 def registration_action(method):
     def _registration_action(self, hash):
-        registration = UserRegistration.get(hash)
+        registration = UserRegistration.get_by_hash(hash)
 
         if registration is None:
             abort(404)
@@ -293,7 +293,7 @@ class RegistrationController(BaseController, FederationMixin):
 
     def confirm_email(self, hash):
         if hash is not None:
-            registration = UserRegistration.get(hash)
+            registration = UserRegistration.get_by_hash(hash)
             if registration is None:
                 abort(404)
             else:

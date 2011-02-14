@@ -19,6 +19,13 @@ def test_init():
         >>> registration.hash is not None
         True
 
+    When added to session and committed, registration also gets an id:
+
+        >>> meta.Session.add(registration)
+        >>> meta.Session.commit()
+        >>> registration.id
+        1L
+
     """
 
 def test_create_user():

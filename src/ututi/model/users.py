@@ -639,7 +639,14 @@ class UserRegistration(object):
                                 email).hexdigest()
 
     @classmethod
-    def get(cls, hash):
+    def get(cls, id):
+        try:
+            return meta.Session.query(cls).filter(cls.id == id).one()
+        except NoResultFound:
+            return None
+
+    @classmethod
+    def get_by_hash(cls, hash):
         try:
             return meta.Session.query(cls).filter(cls.hash == hash).one()
         except NoResultFound:
