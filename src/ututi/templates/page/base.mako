@@ -7,7 +7,7 @@
   %if getattr(c, 'page', None) and getattr(c, 'subject', None):
     <meta property="og:title" content="${c.page.title}"/>
     <meta property="og:url" content="${c.page.url(qualified=True)}"/>
-  %else:
+  %elif getattr(c, 'page', None):
     <meta property="og:title" content="${c.page.title}"/>
     <meta property="og:url" content="${c.page.url('grouppage', qualified=True)}"/>
   %endif

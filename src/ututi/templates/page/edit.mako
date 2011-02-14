@@ -8,7 +8,14 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
 <%def name="title()">
 ${_('Edit page')}
 </%def>
-<a class="back-link" href="${c.page.url()}">${_('Back to %(page_title)s') % dict(page_title=c.page.title)}</a>
+%if getattr(c, 'subject', None):
+<a class="back-link" href="${c.page.url()}">
+%else:
+<a class="back-link" href="${c.page.url('grouppage')}">
+%endif
+  ${_('Back to %(page_title)s') % dict(page_title=c.page.title)}
+</a>
+
 <h1>${_('Edit page')}</h1>
 
 <form method="post" action="${h.url_for(action='update')}"

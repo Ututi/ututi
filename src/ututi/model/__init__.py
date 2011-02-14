@@ -1499,7 +1499,6 @@ class Page(ContentItem):
         return self.last_version.created
 
     def url(self, controller='subjectpage', action='index', **kwargs):
- 
         if controller == 'subjectpage':
             return url(controller=controller,
                        action=action,
