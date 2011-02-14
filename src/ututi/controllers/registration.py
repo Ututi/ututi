@@ -99,6 +99,16 @@ def registration_action(method):
             abort(404)
 
         c.registration = registration
+
+        c.steps = [
+            ('university_info', _("University information")),
+            ('personal_info', _("Personal information")),
+            ('add_photo', _("Add your photo")),
+            ('invite_friends', _("Invite friends")),
+        ]
+
+        c.active_step = None
+
         return method(self, registration)
     return _registration_action
 
@@ -306,6 +316,7 @@ class RegistrationController(BaseController, FederationMixin):
         else:
             c.users = with_logo + and_other[:count - len(with_logo)]
 
+        c.active_step = 'university_info'
         return render('registration/university_info.mako')
 
     def _personal_info_form(self):
@@ -321,6 +332,7 @@ class RegistrationController(BaseController, FederationMixin):
             redirect(url(controller='registration', action='add_photo',
                          hash=registration.hash))
 
+        c.active_step = 'personal_info'
         defaults = {
             'fullname': registration.fullname,
         }
@@ -340,6 +352,7 @@ class RegistrationController(BaseController, FederationMixin):
                              action='invite_friends',
                              hash=registration.hash))
 
+        c.active_step = 'add_photo'
         return render('registration/add_photo.mako')
 
     @registration_action
@@ -359,6 +372,7 @@ class RegistrationController(BaseController, FederationMixin):
 
         _, _, suffix = registration.email.partition('@')
         c.email_suffix = '@' + suffix
+        c.active_step = 'invite_friends'
         return render('registration/invite_friends.mako')
 
     def _send_invitations(self, registration, emails):
