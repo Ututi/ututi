@@ -9,7 +9,6 @@ div.wiki-tekstas, div.wiki-tekstas-last {background-color: white;}
 
 <%def name="create_wiki_nag()">
 <div id="page-intro">
-<%self:rounded_block class_='subject-intro-block' id="subject-intro-block-pages">
   <h2 style="margin-top: 5px">${_('Create wiki documents')}</h2>
   <p>
     ${_('Collecting notes in Word? You can store your notes here, where they can be read and edited by your classmates.')}
@@ -25,13 +24,11 @@ div.wiki-tekstas, div.wiki-tekstas-last {background-color: white;}
     ${h.button_to(_('Create a wiki document'), url(controller='grouppage', action='add', id=c.group.group_id),
               method='GET')}
   </div>
-</%self:rounded_block>
 </div>
 </%def>
 
 %if c.group.n_pages():
-  <%self:rounded_block class_='portletGroupFiles' id="subject_pages">
-  <div class="GroupFiles GroupFilesWiki">
+  <div class="GroupWiki">
     <%
        if h.check_crowds(['moderator']):
          pages = c.group.pages
@@ -39,7 +36,7 @@ div.wiki-tekstas, div.wiki-tekstas-last {background-color: white;}
          pages = [page for page in c.group.pages if not page.isDeleted()]
        count = len(pages)
     %>
-    <h2 class="portletTitle bold">${_("Group's Wiki Pages")} (${count})</h2>
+    <h2 class="portletTitle">${_("Group's Wiki Pages")} (${count})</h2>
     %if c.user:
     <span class="subject-but">
         ${h.button_to(_('Create a wiki document'), url(controller='grouppage', action='add', id=c.group.group_id, tags=c.group.location_path),
@@ -74,7 +71,6 @@ div.wiki-tekstas, div.wiki-tekstas-last {background-color: white;}
     <br />
     <span class="notice">${_('The group has no pages yet - create one!')}</span>
   % endif
-  </%self:rounded_block>
 
 %else:
   ${create_wiki_nag()}

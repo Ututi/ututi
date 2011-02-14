@@ -44,3 +44,16 @@
     top: 0;
     width: 5px;
 }
+
+div.GroupWiki {
+    background: None;
+}
+
+.GroupWiki h2 {
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.GroupWiki .subject-but {
+    float: right;
+}
