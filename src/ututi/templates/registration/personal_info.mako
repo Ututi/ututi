@@ -48,7 +48,7 @@
                       if (response.session && response.perms) {
                           // user is logged in and granted some permissions.
                           // perms is a comma separated list of granted permissions
-                          window.location = '${url(controller='registration', action='link_facebook')}';
+                          window.location = '${url(controller='registration', action='link_facebook', hash=c.registration.hash)}';
                       }
                   }, {perms:'email'});
 
@@ -57,12 +57,12 @@
             });
           </script>
         %else:
-          <a id="fb-unlink-button" href="${url(controller='registration', action='unlink_facebook')}">
+          <a id="fb-unlink-button" href="${url(controller='registration', action='unlink_facebook', hash=c.registration.hash)}">
             ${h.image('/img/facebook-button.png', alt=_('Unlink Facebook'))}
           </a>
         %endif
       </div>
-      <div style="clear: both"></div>
+      <span class="helpText" style="clear:both">${_("Click the buttons to link or unlink your profile with Google and/or Facebook")}</span>
   </div>
 
   ## TODO: FACEBOOK BUTTON

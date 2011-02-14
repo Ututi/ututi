@@ -655,6 +655,10 @@ class UserRegistration(object):
     def update_password(self, password_plain):
         self.password = generate_password(password_plain)
 
+    def update_logo_from_facebook(self):
+        """TODO: implement this."""
+        pass
+
     def create_user(self):
         """Returns a User object filled with registration data."""
         user = User(fullname=self.fullname,

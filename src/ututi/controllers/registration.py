@@ -198,34 +198,28 @@ class FederationMixin(object):
                      hash=registration.hash))
 
     @registration_action
-    def link_facebook(self):
-        """
+    def link_facebook(self, registration):
         fb_user = facebook.get_user_from_cookie(request.cookies,
                          config['facebook.appid'], config['facebook.secret'])
         if not fb_user:
             h.flash(_("Failed to link Facebook account"))
         else:
             facebook_id = int(fb_user['uid'])
-            if not User.get_byfbid(facebook_id):
-                c.user.facebook_id = facebook_id
-                c.user.update_logo_from_facebook()
+            if not User.get_byfbid(facebook_id, registration.location):
+                registration.facebook_id = facebook_id
+                registration.update_logo_from_facebook()
                 meta.Session.commit()
                 h.flash(_("Linked to Facebook account."))
             else:
-                h.flash(_('This Facebook account is already linked to another Ututi account.'))
-        redirect(url(controller='profile', action='edit_contacts'))
-        """
-        pass
+                h.flash(_('This Facebook account is already linked to another user.'))
+        redirect(url(controller='registration', action='personal_info', hash=registration.hash))
 
     @registration_action
     def unlink_facebook(self, registration):
-        """
         registration.facebook_id = None
         meta.Session.commit()
-        h.flash(_('Facebook account has been unlinked.'))
+        h.flash(_('Unlinked from Facebook account.'))
         redirect(url(controller='registration', action='personal_info', hash=registration.hash))
-        """
-        pass
 
 
 class RegistrationController(BaseController, FederationMixin):
