@@ -686,7 +686,6 @@ class UserRegistration(object):
         user.accepted_terms = datetime.utcnow()
         user.openid = self.openid
         user.facebook_id = self.facebook_id
-        user.inviter = self.inviter
         return user
 
 user_registrations_table = None

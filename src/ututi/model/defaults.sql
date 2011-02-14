@@ -77,7 +77,6 @@ create table users (
        user_type varchar(10) not null default 'user',
        teacher_verified boolean default null,
        teacher_position varchar(200) default null,
-       inviter varchar(320) default null,
        primary key (id));;
 
 CREATE FUNCTION check_gadugadu() RETURNS trigger AS $$
@@ -1587,6 +1586,7 @@ CREATE TABLE user_registrations (
        inviter varchar(320) default null, /* email address of user who
                                            * invited for this registration
                                            */
+       completed boolean default false,
        location_id int8 not null references tags(id) on delete cascade,
        primary key (id),
        unique(location_id, email));;

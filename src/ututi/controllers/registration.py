@@ -95,7 +95,7 @@ def registration_action(method):
     def _registration_action(self, hash, *args):
         registration = UserRegistration.get_by_hash(hash)
 
-        if registration is None:
+        if registration is None or registration.completed:
             abort(404)
 
         c.registration = registration
@@ -291,16 +291,12 @@ class RegistrationController(BaseController, FederationMixin):
             h.flash(_("Your confirmation code was resent."))
             return render('registration/email_approval.mako')
 
-    def confirm_email(self, hash):
-        if hash is not None:
-            registration = UserRegistration.get_by_hash(hash)
-            if registration is None:
-                abort(404)
-            else:
-                registration.email_confirmed = True
-                meta.Session.commit()
-                redirect(url(controller='registration', action='university_info',
-                             hash=registration.hash))
+    @registration_action
+    def confirm_email(self, registration):
+        registration.email_confirmed = True
+        meta.Session.commit()
+        redirect(url(controller='registration', action='university_info',
+                     hash=registration.hash))
 
     @registration_action
     def university_info(self, registration):
@@ -404,7 +400,7 @@ class RegistrationController(BaseController, FederationMixin):
         from ututi.lib.security import sign_in_user
         user = registration.create_user()
         meta.Session.add(user)
-        meta.Session.delete(registration)
+        registration.completed = True
         meta.Session.commit()
         sign_in_user(user)
         redirect(url(controller='profile', action='register_welcome'))
