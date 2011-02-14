@@ -60,9 +60,9 @@ div.wiki-tekstas, div.wiki-tekstas-last {background-color: white;}
             %if page.original_version.created.is_teacher:
               ${tooltip(_("Teacher's material"), img='/img/icons/teacher-cap.png')}
             %endif
-           <span class="orange bold"><a href="${page.url()}" title="${page.title}">${page.title}</a></span>
-           <span class="grey verysmall">${h.fmt_dt(page.last_version.created_on)} </span>
-           <span class="author verysmall"><a href="${page.last_version.created.url()}">${page.last_version.created.fullname}</a></span>
+           <span class="orange bold"><a href="${page.url('grouppage')}" title="${page.title}">${page.title}</a></span>
+           <span class="grey verysmall">${h.fmt_dt(page.last_version.created_on)}</span>
+           <span class="author verysmall"><a href="${page.last_version.created.url('grouppage')}">${page.last_version.created.fullname}</a></span>
          </p>
          <p>
            ${h.ellipsis(page.last_version.plain_text, 250)}
