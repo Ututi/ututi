@@ -214,9 +214,13 @@ class User(object):
             return None
 
     @classmethod
-    def get_byfbid(cls, facebook_id):
+    def get_byfbid(cls, facebook_id, location=None):
+        q = meta.Session.query(cls)
         try:
-            return meta.Session.query(cls).filter_by(facebook_id=facebook_id).one()
+            q = q.filter_by(facebook_id=facebook_id)
+            if location is not None:
+                q = q.filter_by(location_id=location.id)
+            return q.one()
         except NoResultFound:
             return None
 
