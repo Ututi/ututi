@@ -315,7 +315,8 @@ def setup_orm(engine):
                                     autoload_with=engine)
 
     orm.mapper(UserRegistration, user_registrations_table,
-               properties = {'location': relation(Tag)})
+               properties = {'location': relation(Tag),
+                             'raw_logo': deferred(users_table.c.logo)})
 
 
     global subject_pages_table

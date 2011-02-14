@@ -22,7 +22,7 @@ def test_init():
     When added to session and committed, registration also gets an id:
 
         >>> meta.Session.add(registration)
-        >>> meta.Session.commit()
+        >>> meta.Session.flush()
         >>> registration.id
         1L
 

@@ -662,6 +662,12 @@ class UserRegistration(object):
     def update_password(self, password_plain):
         self.password = generate_password(password_plain)
 
+    logo = logo_property()
+
+    def has_logo(self):
+        return self.logo is not None
+        # return bool(meta.Session.query(UserRegistration).filter_by(id=self.id).filter(UserRegistration.raw_logo != None).count())
+
     def update_logo_from_facebook(self):
         """TODO: implement this."""
         pass
@@ -686,6 +692,7 @@ class UserRegistration(object):
         user.accepted_terms = datetime.utcnow()
         user.openid = self.openid
         user.facebook_id = self.facebook_id
+        user.logo = self.logo
         return user
 
 user_registrations_table = None

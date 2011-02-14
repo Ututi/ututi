@@ -11,6 +11,7 @@ from pylons.i18n import _
 
 from ututi.lib.base import BaseController, render
 from ututi.lib.emails import send_email_confirmation_code
+from ututi.lib.image import serve_logo
 from ututi.lib.validators import validate, TranslatedEmailValidator, \
         FileUploadTypeValidator, CommaSeparatedListValidator
 import ututi.lib.helpers as h
@@ -339,7 +340,7 @@ class RegistrationController(BaseController, FederationMixin):
     def add_photo(self, registration):
         if hasattr(self, 'form_result'):
             photo = self.form_result['photo']
-            registration.photo= photo.file.read()
+            registration.logo = photo.file.read()
             meta.Session.commit()
             if request.params.has_key('js'):
                 return 'OK'
@@ -404,3 +405,8 @@ class RegistrationController(BaseController, FederationMixin):
         meta.Session.commit()
         sign_in_user(user)
         redirect(url(controller='profile', action='register_welcome'))
+
+    def logo(self, id, size):
+        return serve_logo('registration', id, width=size, height=size,
+                          default_img_path="public/img/user_default.png",
+                          cache=False)
