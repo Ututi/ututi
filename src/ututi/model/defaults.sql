@@ -77,7 +77,6 @@ create table users (
        user_type varchar(10) not null default 'user',
        teacher_verified boolean default null,
        teacher_position varchar(200) default null,
-       inviter varchar(320) default null,
        primary key (id));;
 
 CREATE FUNCTION check_gadugadu() RETURNS trigger AS $$
@@ -1578,19 +1577,22 @@ create table teacher_groups (
 
 /* a table for storing user registration data */
 CREATE TABLE user_registrations (
+       id bigserial not null,
        created timestamp not null default (now() at time zone 'UTC'),
        hash varchar(32) not null unique,
        email varchar(320) default null,
        email_confirmed boolean default false,
        fullname varchar(100) default null,
        password char(36) default null,
+       logo bytea default null,
        openid varchar(200) default null,
        openid_email varchar(320) default null,
        facebook_id bigint default null,
        inviter varchar(320) default null, /* email address of user who
                                            * invited for this registration
                                            */
+       completed boolean default false,
        location_id int8 not null references tags(id) on delete cascade,
-       primary key (hash),
+       primary key (id),
        unique(location_id, email));;
 

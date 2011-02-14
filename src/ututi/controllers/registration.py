@@ -11,6 +11,7 @@ from pylons.i18n import _
 
 from ututi.lib.base import BaseController, render
 from ututi.lib.emails import send_email_confirmation_code
+from ututi.lib.image import serve_logo
 from ututi.lib.validators import validate, TranslatedEmailValidator, \
         FileUploadTypeValidator, CommaSeparatedListValidator
 import ututi.lib.helpers as h
@@ -92,14 +93,24 @@ def location_action(method):
 
 
 def registration_action(method):
-    def _registration_action(self, hash):
-        registration = UserRegistration.get(hash)
+    def _registration_action(self, hash, *args):
+        registration = UserRegistration.get_by_hash(hash)
 
-        if registration is None:
+        if registration is None or registration.completed:
             abort(404)
 
         c.registration = registration
-        return method(self, registration)
+
+        c.steps = [
+            ('university_info', _("University information")),
+            ('personal_info', _("Personal information")),
+            ('add_photo', _("Add your photo")),
+            ('invite_friends', _("Invite friends")),
+        ]
+
+        c.active_step = None
+
+        return method(self, registration, *args)
     return _registration_action
 
 
@@ -198,34 +209,28 @@ class FederationMixin(object):
                      hash=registration.hash))
 
     @registration_action
-    def link_facebook(self):
-        """
+    def link_facebook(self, registration):
         fb_user = facebook.get_user_from_cookie(request.cookies,
                          config['facebook.appid'], config['facebook.secret'])
         if not fb_user:
             h.flash(_("Failed to link Facebook account"))
         else:
             facebook_id = int(fb_user['uid'])
-            if not User.get_byfbid(facebook_id):
-                c.user.facebook_id = facebook_id
-                c.user.update_logo_from_facebook()
+            if not User.get_byfbid(facebook_id, registration.location):
+                registration.facebook_id = facebook_id
+                registration.update_logo_from_facebook()
                 meta.Session.commit()
                 h.flash(_("Linked to Facebook account."))
             else:
-                h.flash(_('This Facebook account is already linked to another Ututi account.'))
-        redirect(url(controller='profile', action='edit_contacts'))
-        """
-        pass
+                h.flash(_('This Facebook account is already linked to another user.'))
+        redirect(url(controller='registration', action='personal_info', hash=registration.hash))
 
     @registration_action
     def unlink_facebook(self, registration):
-        """
         registration.facebook_id = None
         meta.Session.commit()
-        h.flash(_('Facebook account has been unlinked.'))
+        h.flash(_('Unlinked from Facebook account.'))
         redirect(url(controller='registration', action='personal_info', hash=registration.hash))
-        """
-        pass
 
 
 class RegistrationController(BaseController, FederationMixin):
@@ -287,16 +292,12 @@ class RegistrationController(BaseController, FederationMixin):
             h.flash(_("Your confirmation code was resent."))
             return render('registration/email_approval.mako')
 
-    def confirm_email(self, hash):
-        if hash is not None:
-            registration = UserRegistration.get(hash)
-            if registration is None:
-                abort(404)
-            else:
-                registration.email_confirmed = True
-                meta.Session.commit()
-                redirect(url(controller='registration', action='university_info',
-                             hash=registration.hash))
+    @registration_action
+    def confirm_email(self, registration):
+        registration.email_confirmed = True
+        meta.Session.commit()
+        redirect(url(controller='registration', action='university_info',
+                     hash=registration.hash))
 
     @registration_action
     def university_info(self, registration):
@@ -312,9 +313,11 @@ class RegistrationController(BaseController, FederationMixin):
         else:
             c.users = with_logo + and_other[:count - len(with_logo)]
 
+        c.active_step = 'university_info'
         return render('registration/university_info.mako')
 
     def _personal_info_form(self):
+        c.active_step = 'personal_info'
         return render('registration/personal_info.mako')
 
     @registration_action
@@ -337,7 +340,7 @@ class RegistrationController(BaseController, FederationMixin):
     def add_photo(self, registration):
         if hasattr(self, 'form_result'):
             photo = self.form_result['photo']
-            registration.photo= photo.file.read()
+            registration.logo = photo.file.read()
             meta.Session.commit()
             if request.params.has_key('js'):
                 return 'OK'
@@ -346,6 +349,7 @@ class RegistrationController(BaseController, FederationMixin):
                              action='invite_friends',
                              hash=registration.hash))
 
+        c.active_step = 'add_photo'
         return render('registration/add_photo.mako')
 
     @registration_action
@@ -365,6 +369,7 @@ class RegistrationController(BaseController, FederationMixin):
 
         _, _, suffix = registration.email.partition('@')
         c.email_suffix = '@' + suffix
+        c.active_step = 'invite_friends'
         return render('registration/invite_friends.mako')
 
     def _send_invitations(self, registration, emails):
@@ -391,49 +396,17 @@ class RegistrationController(BaseController, FederationMixin):
             h.flash(_("Invitations sent to %(email_list)s") % \
                     dict(email_list=', '.join(invited)))
 
-    def _register_user(self, registration):
-        from ututi.lib.security import sign_in_user
-        from ututi.model import Email
-        from datetime import datetime
-
-        email = registration.email
-        location = registration.location
-
-        user = User.get(email, location)
-        if user:
-            # A user with this email exists, just sign them in.
-            sign_in_user(user)
-            return (user, email)
-
-        user = User(fullname=registration.fullname,
-                    username=email,
-                    location=location,
-                    password=registration.password
-                    )
-
-        if registration.openid_email:
-            # Add openid email as a second user's mail.
-            # In future this email will be accesable by user.emails[1].email
-            user.emails = [Email(email), Email(registration.openid_email)]
-            user.emails[0].confirmed = True
-            user.emails[1].confirmed = True
-        else:
-            user.emails = [Email(email)]
-            user.emails[0].confirmed = True
-
-        user.accepted_terms = datetime.utcnow()
-        user.inviter = registration.inviter
-        user.openid = registration.openid
-
-        meta.Session.add(user)
-        meta.Session.commit()
-
-        sign_in_user(user)
-        return (user, email)
-
     @registration_action
     def finish(self, registration):
-        user, email = self._register_user(registration)
-        meta.Session.delete(registration)
+        from ututi.lib.security import sign_in_user
+        user = registration.create_user()
+        meta.Session.add(user)
+        registration.completed = True
         meta.Session.commit()
+        sign_in_user(user)
         redirect(url(controller='profile', action='register_welcome'))
+
+    def logo(self, id, size):
+        return serve_logo('registration', id, width=size, height=size,
+                          default_img_path="public/img/user_default.png",
+                          cache=False)

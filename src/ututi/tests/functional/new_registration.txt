@@ -112,7 +112,8 @@ When user clicks on confirmation link, he starts his registration process:
 
     >>> from ututi.lib.helpers import get_urls
     >>> urls = get_urls(msg1.payload())
-    >>> browser.open(urls[0])
+    >>> registration_url = urls[0]
+    >>> browser.open(registration_url)
 
 The first registration step is "University information" step:
 
@@ -242,3 +243,11 @@ A flash message is displayed, indicating that emails were sent.
     [['one@example.com'], ['two@example.com'], ['three@example.com'], ['five@example.com']]
 
     >>> mail_queue[:] = []
+
+User can not go back to registration, it is invalidated:
+
+    >>> browser.open(registration_url)
+    Traceback (most recent call last):
+    ...
+    HTTPError: HTTP Error 404: Not Found
+

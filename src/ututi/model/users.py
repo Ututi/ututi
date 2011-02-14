@@ -214,9 +214,13 @@ class User(object):
             return None
 
     @classmethod
-    def get_byfbid(cls, facebook_id):
+    def get_byfbid(cls, facebook_id, location=None):
+        q = meta.Session.query(cls)
         try:
-            return meta.Session.query(cls).filter_by(facebook_id=facebook_id).one()
+            q = q.filter_by(facebook_id=facebook_id)
+            if location is not None:
+                q = q.filter_by(location_id=location.id)
+            return q.one()
         except NoResultFound:
             return None
 
@@ -384,13 +388,13 @@ class User(object):
         self.fullname = fullname
         self.location = location
         self.username = username
-        self.password = password
         self.update_password(password, gen_password)
 
     def update_password(self, password, gen_password=True):
-        self.password = password
         if gen_password:
             self.password = generate_password(password)
+        else:
+            self.password = password
 
     def update_logo_from_facebook(self):
         if self.logo:
@@ -635,7 +639,14 @@ class UserRegistration(object):
                                 email).hexdigest()
 
     @classmethod
-    def get(cls, hash):
+    def get(cls, id):
+        try:
+            return meta.Session.query(cls).filter(cls.id == id).one()
+        except NoResultFound:
+            return None
+
+    @classmethod
+    def get_by_hash(cls, hash):
         try:
             return meta.Session.query(cls).filter(cls.hash == hash).one()
         except NoResultFound:
@@ -650,5 +661,38 @@ class UserRegistration(object):
 
     def update_password(self, password_plain):
         self.password = generate_password(password_plain)
+
+    logo = logo_property()
+
+    def has_logo(self):
+        return self.logo is not None
+        # return bool(meta.Session.query(UserRegistration).filter_by(id=self.id).filter(UserRegistration.raw_logo != None).count())
+
+    def update_logo_from_facebook(self):
+        """TODO: implement this."""
+        pass
+
+    def create_user(self):
+        """Returns a User object filled with registration data."""
+        user = User(fullname=self.fullname,
+                    username=self.email,
+                    location=self.location,
+                    password=self.password,
+                    gen_password=False)
+
+        email = Email(self.email)
+        email.confirmed = True
+        user.emails.append(email)
+        if self.openid_email:
+            # add openid email as a second user's mail.
+            email = Email(self.openid_email)
+            email.confirmed = True
+            user.emails.append(email)
+
+        user.accepted_terms = datetime.utcnow()
+        user.openid = self.openid
+        user.facebook_id = self.facebook_id
+        user.logo = self.logo
+        return user
 
 user_registrations_table = None
