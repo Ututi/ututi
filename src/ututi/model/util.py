@@ -1,6 +1,24 @@
 import PIL
 from PIL import Image
 import StringIO
+import urllib
+
+def read_facebook_logo(facebook_id):
+    """Attempts to read user logo from FB. Returns None on failure."""
+    if not facebook_id:
+        return None
+    photo_url = 'https://graph.facebook.com/%s/picture?type=large' % facebook_id
+    try:
+        logo = urllib.urlopen(photo_url).read()
+    except IOError:
+        pass
+    else:
+        try:
+            # test that image opens correctly
+            Image.open(StringIO.StringIO(logo))
+            return logo
+        except IOError:
+            pass
 
 def _adjust_size(image):
     max_width = max_height = 500
@@ -58,7 +76,6 @@ def process_logo(value, crop_square=False):
     size, result = min((len(png_result), png_result),
                        (len(orig_result), orig_result))
     return result
-
 
 def logo_property(square=False):
     def get(self):

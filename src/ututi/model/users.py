@@ -8,12 +8,11 @@ from sqlalchemy.orm.exc import NoResultFound
 from random import randrange
 from binascii import a2b_base64, b2a_base64
 import binascii
-import urllib
 import hashlib
 from datetime import datetime
 
 
-from ututi.model.util import logo_property
+from ututi.model.util import logo_property, read_facebook_logo
 from ututi.model import meta
 from ututi.lib.helpers import image
 
@@ -397,20 +396,8 @@ class User(object):
             self.password = password
 
     def update_logo_from_facebook(self):
-        if self.logo:
-            return # Never overwrite a custom logo.
-        if not self.facebook_id:
-            return
-        photo_url = 'https://graph.facebook.com/%s/picture?type=large' % self.facebook_id
-        try:
-            logo = urllib.urlopen(photo_url).read()
-        except IOError:
-            pass
-        else:
-            try:
-                self.logo = logo
-            except IOError:
-                pass
+        if self.logo is None: # Never overwrite a custom logo.
+            self.logo = read_facebook_logo(self.facebook_id)
 
     def download(self, file, range_start=None, range_end=None):
         from ututi.model import FileDownload
