@@ -10,9 +10,9 @@ Log in first.
 
 The subject:
 
-    >>> browser.open('http://localhost/subject/vu/mat_analize')
+    >>> browser.open('http://localhost/subject/uni/mat_analize')
     >>> browser.printQuery('id("BreadLinks")//li/a/text()')
-    vu
+    uni
 
 The group:
 

@@ -11,7 +11,8 @@ Visiting a profile-related page should not crash if the user is not logged in.
 -------------------------
 
     >>> browser = Browser()
-    >>> form = browser.getForm('loginForm')
+    >>> browser.open('http://localhost/login')
+    >>> form = browser.getForm('join-login-form')
     >>> form.getControl('Email').value = "admin@uni.ututi.com"
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()

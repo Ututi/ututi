@@ -12,7 +12,7 @@ Let's login as a verified teacher:
 XXX now there should be a way to find subjects for adding, even from
 department's page. Benas visits subject's page directly:
 
-    >>> browser.open('http://localhost/subject/vu/mat_analize')
+    >>> browser.open('http://localhost/subject/uni/mat_analize')
 
 Currently portlet shows lecturer that was typed in when filling out
 subject's information:
@@ -25,7 +25,7 @@ the course page and a flash message is displayed:
 
     >>> browser.getControl("I teach this course").click()
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize'
+    'http://localhost/subject/uni/mat_analize'
 
     >>> browser.printQuery("//div[@class='flash-message']/span//text()")
     Matematin&#279; analiz&#279; has been added to your taught courses list.
@@ -56,7 +56,7 @@ page creation view:
 
     >>> browser.getLink("Create wiki page").click()
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize/pages/add'
+    'http://localhost/subject/uni/mat_analize/pages/add'
 
 As for files, there is no "add file" view available, and subjects home
 page is responsible for that functionality, so teacher is directed there:
@@ -64,7 +64,7 @@ page is responsible for that functionality, so teacher is directed there:
     >>> browser.goBack()
     >>> browser.getLink("Upload file").click()
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize'
+    'http://localhost/subject/uni/mat_analize'
 
 He can click the link to visit some course's home page:
 
@@ -76,7 +76,7 @@ Again, an appropriate flash message is displayed:
 
     >>> browser.getControl("Remove from my taught courses").click()
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize'
+    'http://localhost/subject/uni/mat_analize'
 
     >>> browser.printQuery("//div[@class='flash-message']/span//text()")
     Matematin&#279; analiz&#279; has been removed from your taught courses list.
@@ -90,10 +90,10 @@ Teacher can also say that he is no longer teaching a course directly from his
 home page. If he clicks the button, he stays on the home page and flash message
 appears. So let's again add and remove the course from taught courses list:
 
-    >>> browser.open('http://localhost/subject/vu/mat_analize')
+    >>> browser.open('http://localhost/subject/uni/mat_analize')
     >>> browser.getControl("I teach this course").click()
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize'
+    'http://localhost/subject/uni/mat_analize'
 
     >>> browser.printQuery("//div[@class='flash-message']/span//text()")
     Matematin&#279; analiz&#279; has been added to your taught courses list.

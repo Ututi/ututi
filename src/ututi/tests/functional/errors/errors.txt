@@ -109,11 +109,3 @@ If a user gets a 404 page while not being logged-in and then logs in, he should 
     Traceback (most recent call last):
     ...
     HTTPError: HTTP Error 404: Not Found
-
-    >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value = "admin@uni.ututi.com"
-    >>> form.getControl('Password').value = "asdasd"
-    >>> form.getControl('Login').click()
-
-    >>> browser.url
-    'http://localhost/home/feed'

@@ -11,7 +11,7 @@ Events and watching
     >>> browser.open('http://localhost/profile/index')
     >>> browser.printQuery("id('event_list')/li")
     <li>
-          A new file <a href="/subject/vu/mat_analize/file/4/get">text.txt</a> for a subject <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a> was uploaded <span class="event_time">(0 seconds ago)</span>
+          A new file <a href="/subject/uni/mat_analize/file/4/get">text.txt</a> for a subject <a href="/subject/uni/mat_analize">Matematin&#279; analiz&#279;</a> was uploaded <span class="event_time">(0 seconds ago)</span>
     </li>
     <li>
           New group <a href="/group/moderators">Moderatoriai</a> was created <span class="event_time">(0 seconds ago)</span>
@@ -28,7 +28,7 @@ Events and watching
       <span class="event_time">(0 seconds ago)</span>
     </li>
     <li>
-          New subject <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a> was created <span class="event_time">(0 seconds ago)</span>
+          New subject <a href="/subject/uni/mat_analize">Matematin&#279; analiz&#279;</a> was created <span class="event_time">(0 seconds ago)</span>
     </li>
 
     >>> res = browser.app.post("/group/moderators/upload_file",
@@ -42,8 +42,8 @@ Events and watching
           <a href="/group/moderators">Moderatoriai</a> was uploaded <span class="event_time">(0 seconds ago)</span>
     </li>
     <li>
-          A new file <a href="/subject/vu/mat_analize/file/4/get">text.txt</a> for a subject
-          <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a> was uploaded 
+          A new file <a href="/subject/uni/mat_analize/file/4/get">text.txt</a> for a subject
+          <a href="/subject/uni/mat_analize">Matematin&#279; analiz&#279;</a> was uploaded 
           <span class="event_time">(0 seconds ago)</span>
     </li>
     <li>
@@ -55,7 +55,7 @@ Events and watching
           <span class="event_time">(0 seconds ago)</span>
     </li>
     <li>
-          New subject <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a>
+          New subject <a href="/subject/uni/mat_analize">Matematin&#279; analiz&#279;</a>
           was created <span class="event_time">(0 seconds ago)</span>
     </li>
     <li>
@@ -93,8 +93,8 @@ Let's see if deleted files show no link:
           A new file text.txt for a group <a href="/group/moderators">Moderatoriai</a> was uploaded <span class="event_time">(0 seconds ago)</span>
     </li>
     <li>
-          A new file <a href="/subject/vu/mat_analize/file/4/get">text.txt</a> for a subject
-          <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a> was uploaded <span class="event_time">(0 seconds ago)</span>
+          A new file <a href="/subject/uni/mat_analize/file/4/get">text.txt</a> for a subject
+          <a href="/subject/uni/mat_analize">Matematin&#279; analiz&#279;</a> was uploaded <span class="event_time">(0 seconds ago)</span>
     </li>
     <li>
           Member <a href="/user/1">Adminas Adminovix</a> joined the group
@@ -106,7 +106,7 @@ Let's see if deleted files show no link:
           <span class="event_time">(0 seconds ago)</span>
     </li>
     <li>
-          New subject <a href="/subject/vu/mat_analize">Matematin&#279; analiz&#279;</a>
+          New subject <a href="/subject/uni/mat_analize">Matematin&#279; analiz&#279;</a>
           was created <span class="event_time">(0 seconds ago)</span>
     </li>
     <li>

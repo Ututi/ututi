@@ -22,7 +22,7 @@ And add a page for it.
 We should get redirected to the index view of the page we just created.
 
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize/page/4'
+    'http://localhost/subject/uni/mat_analize/page/4'
 
     >>> browser.printQuery("//h2[@class='portletTitle bold']/text()")
     How to be awesome!
@@ -39,7 +39,7 @@ Let's edit the page now.
 And see how it works.
 
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize/page/4'
+    'http://localhost/subject/uni/mat_analize/page/4'
 
     >>> browser.printQuery("//h2[@class='portletTitle bold']/text()")
     How to be awesome!
@@ -91,14 +91,10 @@ As an admin, we can delete the page:
 
     >>> browser.getControl('delete').click()
 
-Let's go back:
-
-    >>> browser.getLink('Go back to Matematin\xc4\x97 analiz\xc4\x97').click()
-    >>> browser.url
-    'http://localhost/subject/vu/mat_analize/pages'
 
 We should see the page on the list of pages, even though it has been deleted:
 
+    >>> browser.open('http://localhost/subject/uni/mat_analize/pages')
     >>> browser.printCssQuery("#subject_pages", strip=True)
     <div>
       <div></div>
@@ -144,7 +140,7 @@ We could delete it again if we wanted to:
 
 Now the page shows up in the index again without the "deleted" marker:
 
-    >>> browser.getLink('Go back to Matematin\xc4\x97 analiz\xc4\x97').click()
+    >>> browser.open('http://localhost/subject/uni/mat_analize/pages')
     >>> browser.printCssQuery("#subject_pages", strip=True)
     <div>
       <div></div>
@@ -180,7 +176,7 @@ Now the page shows up in the index again without the "deleted" marker:
 
 Confirming bug fix: requesting page with a non-integer as its id was resulting in a crash.
 
-    >>> browser.open('http://localhost/subject/vu/mat_analize/page/abrakadabra')
+    >>> browser.open('http://localhost/subject/uni/mat_analize/page/abrakadabra')
     Traceback (most recent call last):
     ...
     HTTPError: HTTP Error 404: Not Found

@@ -1,6 +1,8 @@
 <%inherit file="/ubase-sidebar.mako" />
 <%namespace file="/portlets/subject.mako" import="*"/>
 <%namespace file="/portlets/banners/base.mako" import="*"/>
+<%namespace file="/portlets/sections.mako" import="*"/>
+
 
 <%def name="head_tags()">
   ${parent.head_tags()}
@@ -13,6 +15,7 @@
   %endif
  </%def>
 
+
 <%def name="portlets()">
 % if getattr(c,'subject', None):
 <div id="sidebar">
@@ -20,6 +23,8 @@
   ${subject_similar_subjects_portlet()}
   ${ubooks_portlet()}
 </div>
+% else:
+  ${group_sidebar()}
 % endif
 </%def>
 

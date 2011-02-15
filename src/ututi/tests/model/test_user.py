@@ -277,7 +277,7 @@ def test_setup(test):
     u = User.get('admin@uni.ututi.com', LocationTag.get('uni'))
     meta.Session.execute("SET ututi.active_user TO %d" % u.id)
 
-    g = Group('moderators', u'Moderatoriai', LocationTag.get(u'uni'), date.today(), u'U2ti moderatoriai.')
+    g = Group('moderators', u'Moderatoriai', LocationTag.get(u'uni'), u'U2ti moderatoriai.')
     role = GroupMembershipType.get('administrator')
     gm = GroupMember()
     gm.user = u

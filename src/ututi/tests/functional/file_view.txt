@@ -4,22 +4,22 @@ Some tests for the file area
     >>> browser = Browser.logIn()
 
 Let's upload 4 files to check if folder file hiding works correctly:
-    >>> res = browser.app.post("/subject/vu/mat_analize/upload_file",
+    >>> res = browser.app.post("/subject/uni/mat_analize/upload_file",
     ...                        params={'folder': 'a'},
     ...                        upload_files=[("attachment", "text;for you.txt", "Test")])
-    >>> res = browser.app.post("/subject/vu/mat_analize/upload_file",
+    >>> res = browser.app.post("/subject/uni/mat_analize/upload_file",
     ...                        params={'folder': 'a'},
     ...                        upload_files=[("attachment", "text;for you.txt", "Test")])
-    >>> res = browser.app.post("/subject/vu/mat_analize/upload_file",
+    >>> res = browser.app.post("/subject/uni/mat_analize/upload_file",
     ...                        params={'folder': 'a'},
     ...                        upload_files=[("attachment", "text;for you.txt", "Test")])
-    >>> res = browser.app.post("/subject/vu/mat_analize/upload_file",
+    >>> res = browser.app.post("/subject/uni/mat_analize/upload_file",
     ...                        params={'folder': 'a'},
     ...                        upload_files=[("attachment", "text;for you.txt", "Test")])
 
 Let's check it - the fourth file should be prehidden ('show' class):
 
-    >>> browser.open('http://localhost/subject/vu/mat_analize/files')
+    >>> browser.open('http://localhost/subject/uni/mat_analize/files')
     >>> browser.printCssQuery('li.file')
     <li class="file">
     ...

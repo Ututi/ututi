@@ -7,7 +7,7 @@ File upload:
     ...                params={'login': 'admin@uni.ututi.com', 'password': 'asdasd'})
 
     >>> from textwrap import dedent
-    >>> res = app.post("/subject/vu/mat_analize/upload_file",
+    >>> res = app.post("/subject/uni/mat_analize/upload_file",
     ...                params={'folder': ''},
     ...                upload_files=[("attachment", "text;for you.txt", "Test")])
     >>> print dedent(res.body)
@@ -15,7 +15,7 @@ File upload:
     <li class="file">
       ...
       <img alt="file icon" class="drag-target" src="/images/details/icon_drag_file_orange.png" />
-      <a class="filename" href="/subject/vu/mat_analize/file/4/get">text;for you.txt</a>
+      <a class="filename" href="/subject/uni/mat_analize/file/4/get">text;for you.txt</a>
       <span class="file_rename_form hidden">
         <span class="file_rename_input_decorator">
           <input class="file_rename_input" type="text" />
@@ -28,24 +28,24 @@ File upload:
       <a href="/user/1" class="author">
         Adminas Adminovix
       </a>
-      <input class="move_url" type="hidden" value="/subject/vu/mat_analize/file/4/move" />
-      <input class="copy_url" type="hidden" value="/subject/vu/mat_analize/file/4/copy" />
-      <input class="delete_url" type="hidden" value="/subject/vu/mat_analize/file/4/delete" />
-      <input class="flag_url" type="hidden" value="/subject/vu/mat_analize/file/4/flag" />
-      <input class="rename_url" type="hidden" value="/subject/vu/mat_analize/file/4/rename" />
+      <input class="move_url" type="hidden" value="/subject/uni/mat_analize/file/4/move" />
+      <input class="copy_url" type="hidden" value="/subject/uni/mat_analize/file/4/copy" />
+      <input class="delete_url" type="hidden" value="/subject/uni/mat_analize/file/4/delete" />
+      <input class="flag_url" type="hidden" value="/subject/uni/mat_analize/file/4/flag" />
+      <input class="rename_url" type="hidden" value="/subject/uni/mat_analize/file/4/rename" />
       <input class="folder_title_value" type="hidden" value="" />
       <img src="/images/delete.png" alt="delete file" class="delete_button" />
       ...
     </li>
     <BLANKLINE>
 
-    >>> res = app.post("/subject/vu/mat_analize/upload_file",
+    >>> res = app.post("/subject/uni/mat_analize/upload_file",
     ...                params={'folder': 'Some folder'},
     ...                upload_files=[("attachment", r"c:\My Home\image.png", "Tst")])
     >>> print dedent(res.body)
     <li class="file">
       ...
-      <a class="filename" href="/subject/vu/mat_analize/file/5/get">image.png</a>
+      <a class="filename" href="/subject/uni/mat_analize/file/5/get">image.png</a>
       ...
     </li>
 
@@ -91,7 +91,7 @@ File upload:
 
 Empty folder creation:
 
-    >>> res = app.post("/subject/vu/mat_analize/js_create_folder",
+    >>> res = app.post("/subject/uni/mat_analize/js_create_folder",
     ...                params={'folder': 'Buga Buga',
     ...                        'section_id': '7'})
     >>> print dedent(res.body)
@@ -102,7 +102,7 @@ Empty folder creation:
             <span class="cont">
               Buga Buga
               <span class="small">(0 files)</span>
-                <a  href="/subject/vu/mat_analize/delete_folder?folder=Buga+Buga" id="delete_folder_button..." class="delete_folder_button">(Delete)</a>
+                <a  href="/subject/uni/mat_analize/delete_folder?folder=Buga+Buga" id="delete_folder_button..." class="delete_folder_button">(Delete)</a>
             </span>
           </h4>
           <ul class="folder">
@@ -111,7 +111,7 @@ Empty folder creation:
         </div>
 
     >>> browser = Browser.logIn()
-    >>> browser.open('http://localhost/subject/vu/mat_analize/file/8/get')
+    >>> browser.open('http://localhost/subject/uni/mat_analize/file/8/get')
     Traceback (most recent call last):
     ...
     HTTPError: HTTP Error 404: Not Found
@@ -137,13 +137,13 @@ Empty folder creation:
 
 Deleting folders:
 
-    >>> res = app.post("/subject/vu/mat_analize/upload_file",
+    >>> res = app.post("/subject/uni/mat_analize/upload_file",
     ...                params={'folder': 'Folder to delete'},
     ...                upload_files=[("attachment", "image.png", "T")])
     >>> print dedent(res.body)
     <li class="file">
       ...
-      <a class="filename" href="/subject/vu/mat_analize/file/.../get">image.png</a>
+      <a class="filename" href="/subject/uni/mat_analize/file/.../get">image.png</a>
       ...
     </li>
 
@@ -157,7 +157,7 @@ Deleting folders:
       ...
     </li>
 
-    >>> res = app.post("/subject/vu/mat_analize/js_delete_folder",
+    >>> res = app.post("/subject/uni/mat_analize/js_delete_folder",
     ...                params={'folder': 'Folder to delete'})
     >>> res.status
     '200 OK'
@@ -170,7 +170,7 @@ Deleting folders:
 Both folders should be gone:
 
     >>> browser = Browser.logIn()
-    >>> browser.open('http://localhost/subject/vu/mat_analize/files')
+    >>> browser.open('http://localhost/subject/uni/mat_analize/files')
     >>> browser.printQuery('id("mainContent")//h4')
     <h4 class="">
       <span class="cont">
@@ -200,7 +200,7 @@ Both folders should be gone:
 
 Flagging files:
 
-    >>> print app.get('/subject/vu/mat_analize/file/4/flag').body
+    >>> print app.get('/subject/uni/mat_analize/file/4/flag').body
     <form method="post" action="." class="fullForm fileFlagForm">
       <div>
         <label><span class="labelText">Please state the reason why the file 'text;for you.txt' is inappropriate:</span><span class="textField"><textarea cols="30" id="reason" name="reason" rows="5"></textarea><span class="edgeTextArea"></span></span></label>
@@ -208,7 +208,7 @@ Flagging files:
       </div>
     </form>
 
-    >>> app.post('/subject/vu/mat_analize/file/4/flag',
+    >>> app.post('/subject/uni/mat_analize/file/4/flag',
     ...           params={'reason': 'Copyright violation'}).status
     '200 OK'
 
@@ -219,10 +219,10 @@ An email should have been sent:
     A file has been flagged as inappropriate.
     <BLANKLINE>
     filename: 'text;for you.txt'
-    file URL: http://localhost:80/subject/vu/mat_analize/file/4/get
+    file URL: http://localhost:80/subject/uni/mat_analize/file/4/get
     <BLANKLINE>
     parent: Matematinė analizė
-    parent URL: http://localhost:80/subject/vu/mat_analize
+    parent URL: http://localhost:80/subject/uni/mat_analize
     <BLANKLINE>
     reporter: admin@uni.ututi.com
     <BLANKLINE>
@@ -230,10 +230,10 @@ An email should have been sent:
     Copyright violation
 
 Partial requests:
-    >>> app.get('/subject/vu/mat_analize/file/4/get', expect_errors=True).body
+    >>> app.get('/subject/uni/mat_analize/file/4/get', expect_errors=True).body
     'Test'
 
-    >>> app.get('/subject/vu/mat_analize/file/4/get', expect_errors=True, headers={'Range':'bytes=2-3'}).body
+    >>> app.get('/subject/uni/mat_analize/file/4/get', expect_errors=True, headers={'Range':'bytes=2-3'}).body
     'st'
 
 Check if the partial download ranges were recorded:
@@ -243,13 +243,13 @@ Check if the partial download ranges were recorded:
 
 Deleting files:
 
-    >>> app.get('/subject/vu/mat_analize/file/4/delete').status
+    >>> app.get('/subject/uni/mat_analize/file/4/delete').status
     '200 OK'
 
     >>> app.get('/group/moderators/file/6/delete').status
     '200 OK'
 
-    >>> app.get('/subject/vu/mat_analize/file/4/get', expect_errors=True).status
+    >>> app.get('/subject/uni/mat_analize/file/4/get', expect_errors=True).status
     '404 Not Found'
 
     >>> app.get('/group/moderators/file/6/get', expect_errors=True).status

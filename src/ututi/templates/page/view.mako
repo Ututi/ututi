@@ -1,10 +1,30 @@
 <%inherit file="/page/base.mako" />
-<%inherit file="/group/base.mako" />
 
 %if getattr(c, 'subject', None):
-<%def name="title()">${h.ellipsis(c.page.title,30)} - ${h.ellipsis(c.subject.title, 30)}</%def>
+        <%def name="title()">${h.ellipsis(c.page.title,30)} - ${h.ellipsis(c.subject.title, 30)}</%def>
 %else:
-<%def name="title()">${h.ellipsis(c.page.title,30)} - ${h.ellipsis(c.group.title, 30)}</%def>
+        <%def name="title()">${h.ellipsis(c.page.title,30)}</%def>
+        %if show_title:
+          <h1 class="pageTitle">
+            ${self.title()}
+            %if not c.group.is_member(c.user):
+              <div style="float: right;">
+                ${h.button_to(_('become a member'), url(controller='group', action='request_join', id=c.group.group_id))}
+              </div>
+            %endif
+          </h1>
+        %endif
+
+        %if c.group.is_member(c.user) or c.security_context and h.check_crowds(['admin', 'moderator']):
+        <ul class="moduleMenu" id="moduleMenu">
+            %for menu_item in c.group_menu_items:
+              <li class="${'current' if menu_item['name'] == getattr(c, 'group_menu_current_item', None) else ''}">
+                <a href="${menu_item['link']}">${menu_item['title']}
+                    <span class="edge"></span>
+                </a></li>
+            %endfor
+        </ul>
+        %endif
 %endif
 
 

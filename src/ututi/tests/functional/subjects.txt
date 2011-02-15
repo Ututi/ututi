@@ -20,11 +20,11 @@ Well, let's explore how this actually works.
 Let's check that it is actually so!
 
     >>> browser.getLink('Matematinė analizė').url
-    'http://localhost/subject/vu/mat_analize'
+    'http://localhost/subject/uni/mat_analize'
 
     >>> browser.getLink('Matematinė analizė').click()
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize'
+    'http://localhost/subject/uni/mat_analize'
 
     >>> browser.printQuery("id('subject-intro-block')//text()")
     Edit
@@ -33,7 +33,7 @@ Let's check that it is actually so!
 
 We can edit the subject from here, add description and some other info.
 
-    >>> browser.open('http://localhost/subject/vu/mat_analize/edit')
+    >>> browser.open('http://localhost/subject/uni/mat_analize/edit')
     >>> browser.getControl('Lecturer').value = 'Some other guy'
     >>> browser.getControl('Brief description of the subject').value = 'This is the subject description'
     >>> browser.getControl('Save').click()
@@ -41,7 +41,7 @@ We can edit the subject from here, add description and some other info.
 Home page now displays this page description:
 
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize'
+    'http://localhost/subject/uni/mat_analize'
 
     >>> browser.printQuery("id('subject_description')//text()")
     This is the subject description
@@ -50,11 +50,11 @@ Home page now displays this page description:
 Lets remove the description, add a wiki page, and assert that
 homepage will redirect us to the subject feed:
 
-    >>> browser.open('http://localhost/subject/vu/mat_analize/edit')
+    >>> browser.open('http://localhost/subject/uni/mat_analize/edit')
     >>> browser.getControl('Brief description of the subject').value = ''
     >>> browser.getControl('Save').click()
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize'
+    'http://localhost/subject/uni/mat_analize'
 
     >>> browser.getLink('Wiki notes').click()
     >>> browser.getControl('Create a wiki document').click()
@@ -62,26 +62,11 @@ homepage will redirect us to the subject feed:
     >>> browser.getControl('Content').value = 'Wiki document content'
     >>> browser.getControl('Save').click()
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize/page/4'
+    'http://localhost/subject/uni/mat_analize/page/4'
 
-    >>> browser.open('http://localhost/subject/vu/mat_analize')
+    >>> browser.open('http://localhost/subject/uni/mat_analize')
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize/feed'
-
-The changed information should be visible in the sidebar block.
-
-    >>> browser.printQuery('//div[@class="dalyko-info"]//text()')
-    Matematin&#279; analiz&#279;
-    vu
-    Lecturer:
-    Some other guy
-    Subject rating:
-    The subject is watched by:
-    1
-    user,
-    0
-    groups
-    There are no subject tags.
+    'http://localhost/subject/uni/mat_analize/feed'
 
 The subject's portlet contains a link that can be used to start watching the subject.
 

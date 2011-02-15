@@ -18,7 +18,6 @@ ${_('Learning oriented social networks for higher education.')}
 <div class="head-nav">
   <ul>
     <li><a href="${url(controller='home', action='index', qualified=True)}">${_('Home')}</a></li>
-    <li><a href="${url(controller='search', action='browse', qualified=True)}">${_('Browse')}</a></li>
     <li><a href="${url(controller='home', action='about', qualified=True)}">${_('About')}</a></li>
     <li><a class="orange" href="${url(controller='home', action='register', qualified=True, came_from=url.current())}">${_('Join')}</a></li>
   </ul>
@@ -67,7 +66,6 @@ ${self.anonymous_menu()}
 <div class="head-nav">
   <ul>
     <li><a href="${url(controller='profile', action='home')}">${_('Home')}</a></li>
-    <li><a href="${url(controller='profile', action='browse')}">${_('Browse')}</a></li>
     <li class="expandable group-nav">
       <span>${_('Groups')}</span>
       <div>

@@ -81,7 +81,6 @@ class UniversityExportMixin(object):
                 groups.writerow(['/'.join(group.location.path[1:]),
                                  group.created.emails[0].email,
                                  group.group_id,
-                                 group.year.strftime('%Y'),
                                  group.title,
                                  group.page,
                                  str(group.moderators),

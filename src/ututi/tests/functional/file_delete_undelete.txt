@@ -13,20 +13,20 @@
     ...                params={'folder': ''},
     ...                upload_files=[("attachment", "text2.txt", "Test Test")])
 
-    >>> res = browser.app.post("/subject/vu/mat_analize/upload_file",
+    >>> res = browser.app.post("/subject/uni/mat_analize/upload_file",
     ...                params={'folder': ''},
     ...                upload_files=[("attachment", "text3.txt", "Test")])
 
-    >>> res = browser.app.post("/subject/vu/mat_analize/upload_file",
+    >>> res = browser.app.post("/subject/uni/mat_analize/upload_file",
     ...                params={'folder': ''},
     ...                upload_files=[("attachment", "text4.txt", "Test")])
 
 
-    >>> res = browser.app.post("/subject/vu/mat_analize/upload_file",
+    >>> res = browser.app.post("/subject/uni/mat_analize/upload_file",
     ...                params={'folder': 'Foldah'},
     ...                upload_files=[("attachment", "text_in_a_folder.txt", "Test")])
 
-    >>> res = browser.app.post("/subject/vu/mat_analize/upload_file",
+    >>> res = browser.app.post("/subject/uni/mat_analize/upload_file",
     ...                params={'folder': 'Foldah'},
     ...                upload_files=[("attachment", "text_in_a_folderr.txt", "Test")])
 
@@ -39,7 +39,7 @@ Deleting files:
     >>> res = browser.app.get('/files/delete/8')
 
 Delete the folder too:
-    >>> res = browser.app.get('/subject/vu/mat_analize/js_delete_folder?folder=Foldah')
+    >>> res = browser.app.get('/subject/uni/mat_analize/js_delete_folder?folder=Foldah')
 
 Try and restore the file:
 
@@ -73,7 +73,7 @@ Restore all the other files:
     >>> browser.getControl('Undelete', index=1).click()
     >>> browser.getControl('Undelete', index=1).click()
 
-    >>> browser.open('http://localhost/subject/vu/mat_analize/files')
+    >>> browser.open('http://localhost/subject/uni/mat_analize/files')
     >>> browser.printQuery("//a[@class='filename']/text()")
     text3.txt
     text_in_a_folder.txt
