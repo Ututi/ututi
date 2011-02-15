@@ -653,7 +653,6 @@ class UserRegistration(object):
 
     def has_logo(self):
         return self.logo is not None
-        # return bool(meta.Session.query(UserRegistration).filter_by(id=self.id).filter(UserRegistration.raw_logo != None).count())
 
     def update_logo_from_facebook(self):
         if self.logo is None: # Never overwrite a custom logo.
