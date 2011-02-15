@@ -618,13 +618,20 @@ class TeacherGroup(object):
 
 
 class UserRegistration(object):
-    """Pending registration confirmations."""
+    """User registration data."""
 
-    def __init__(self, email, location):
-        self.email = email
+    def __init__(self, location, email=None, facebook_id=None):
         self.location = location
-        self.hash = hashlib.md5(datetime.now().isoformat() + \
-                                email).hexdigest()
+        self.email = email
+        self.facebook_id = facebook_id
+        if email:
+            self.hash = hashlib.md5(datetime.now().isoformat() + \
+                                    email).hexdigest()
+        elif facebook_id:
+            self.hash = hashlib.md5(datetime.now().isoformat() + \
+                                    str(facebook_id)).hexdigest()
+        else:
+            self.hash = hashlib.md5(datetime.now().isoformat()).hexdigest()
 
     @classmethod
     def get(cls, id):
@@ -641,9 +648,24 @@ class UserRegistration(object):
             return None
 
     @classmethod
-    def get_by_email(cls, email):
+    def get_by_email(cls, email, location=None):
+        q = meta.Session.query(cls)
         try:
-            return meta.Session.query(cls).filter(cls.email == email).one()
+            q = q.filter_by(email=email)
+            if location is not None:
+                q = q.filter_by(location_id=location.id)
+            return q.one()
+        except NoResultFound:
+            return None
+
+    @classmethod
+    def get_by_fbid(cls, facebook_id, location=None):
+        q = meta.Session.query(cls)
+        try:
+            q = q.filter_by(facebook_id=facebook_id)
+            if location is not None:
+                q = q.filter_by(location_id=location.id)
+            return q.one()
         except NoResultFound:
             return None
 
@@ -675,5 +697,11 @@ class UserRegistration(object):
         user.facebook_id = self.facebook_id
         user.logo = self.logo
         return user
+
+    def url(self, controller='registration', action='confirm', **kwargs):
+        return url(controller=controller,
+                   action=action,
+                   hash=self.hash,
+                   **kwargs)
 
 user_registrations_table = None

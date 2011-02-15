@@ -7,7 +7,7 @@ from formencode.compound import Pipe
 
 from pylons import tmpl_context as c, url, session, request, config
 from pylons.controllers.util import redirect, abort
-from pylons.i18n import _
+from pylons.i18n import ungettext, _
 
 from ututi.lib.base import BaseController, render
 from ututi.lib.emails import send_email_confirmation_code
@@ -295,7 +295,7 @@ class RegistrationController(BaseController, FederationMixin):
 
         registration = UserRegistration.get_by_email(email)
         if registration is None:
-            registration = UserRegistration(email, location)
+            registration = UserRegistration(location, email)
             meta.Session.add(registration)
             meta.Session.commit()
 
@@ -388,7 +388,7 @@ class RegistrationController(BaseController, FederationMixin):
                       self.form_result['email4'],
                       self.form_result['email5']] + self.form_result['emails']
 
-            self._send_invitations(registration, emails)
+            self._send_email_invitations(registration, emails)
 
             redirect(url(controller='registration', action='finish',
                          hash=registration.hash))
@@ -398,18 +398,45 @@ class RegistrationController(BaseController, FederationMixin):
         c.active_step = 'invite_friends'
         return render('registration/invite_friends.mako')
 
-    def _send_invitations(self, registration, emails):
+    @registration_action
+    def invite_friends_fb(self, registration):
+        # handle facebook callback
+        ids = request.params.get('ids[]')
+        if ids:
+            ids = map(int, ids.split(','))
+            self._send_facebook_invitations(registration, ids)
+            redirect(registration.url(action='invite_friends'))
+
+        # render page
+        fb_user = facebook.get_user_from_cookie(request.cookies,
+                      config['facebook.appid'], config['facebook.secret'])
+        c.has_facebook = fb_user is not None
+        if c.has_facebook:
+            try:
+                graph = facebook.GraphAPI(fb_user['access_token'])
+                friends = graph.get_object("me/friends")
+                friend_ids = [f['id'] for f in friends['data']]
+                friend_users = meta.Session.query(User)\
+                        .filter(User.facebook_id.in_(friend_ids))\
+                        .filter(User.location == registration.location).all()
+                c.exclude_ids = ','.join(str(u.facebook_id) for u in friend_users)
+            except facebook.GraphAPIError:
+                c.has_facebook = False
+        c.active_step = 'invite_friends'
+        return render('registration/invite_friends_fb.mako')
+
+    def _send_email_invitations(self, registration, emails):
         already = []
         invited = []
         for email in filter(bool, emails):
             if User.get(email, registration.location):
                 already.append(email)
             else:
-                invitee = UserRegistration.get_by_email(email)
+                invitee = UserRegistration.get_by_email(email, registration.location)
                 if invitee is None:
-                    invitee = UserRegistration(email, registration.location)
+                    invitee = UserRegistration(registration.location, email)
                     meta.Session.add(invitee)
-                invitee.inviter = email
+                invitee.inviter = registration.email
                 meta.Session.commit()
                 self._send_confirmation(invitee)
                 invited.append(email)
@@ -421,6 +448,31 @@ class RegistrationController(BaseController, FederationMixin):
         if invited:
             h.flash(_("Invitations sent to %(email_list)s") % \
                     dict(email_list=', '.join(invited)))
+
+    def _send_facebook_invitations(self, registration, fb_ids):
+        already = []
+        invited = []
+        for facebook_id in fb_ids:
+            if User.get_byfbid(facebook_id, registration.location):
+                already.append(facebook_id)
+            else:
+                invitee = UserRegistration.get_by_fbid(facebook_id, registration.location)
+                if invitee is None:
+                    invitee = UserRegistration(registration.location, facebook_id=facebook_id)
+                    meta.Session.add(invitee)
+                invitee.inviter = registration.email
+                invited.append(facebook_id)
+                meta.Session.commit()
+
+        if already:
+            h.flash(ungettext('%(num)d of your friends is already using Ututi!',
+                              '%(num)d of your friends area already using Ututi!',
+                              len(already)) % dict(num=len(already)))
+
+        if invited:
+            h.flash(ungettext('Invited %(num)d friend.',
+                              'Invited %(num)d friends.',
+                              len(invited)) % dict(num=len(invited)))
 
     @registration_action
     def finish(self, registration):

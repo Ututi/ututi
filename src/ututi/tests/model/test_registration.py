@@ -12,7 +12,7 @@ def test_init():
 
     Let's create registration object:
 
-        >>> registration = UserRegistration('user@example.com', LocationTag.get('uni'))
+        >>> registration = UserRegistration(LocationTag.get('uni'), 'user@example.com')
 
     Registration hash is filled:
 
@@ -33,7 +33,7 @@ def test_create_user():
 
     Let's create registration object and fill it with data:
 
-        >>> registration = UserRegistration('user@example.com', LocationTag.get('uni'))
+        >>> registration = UserRegistration(LocationTag.get('uni'), 'user@example.com')
         >>> registration.update_password('password')
         >>> registration.fullname = u'Mr User'
         >>> registration.openid = 'some googlish url'
@@ -67,7 +67,7 @@ def test_create_user():
 
     Had we registered user without openid, he would only have single email:
 
-        >>> registration = UserRegistration('another@example.com', LocationTag.get('uni'))
+        >>> registration = UserRegistration(LocationTag.get('uni'), 'another@example.com')
         >>> user = registration.create_user()
         >>> [e.email for e in user.emails]
         ['another@example.com']
