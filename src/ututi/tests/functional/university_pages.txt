@@ -19,7 +19,7 @@ Let's log in first.
 We should be able to click on a link that leads us to the page of the faculty.
     >>> browser.getLink('Vilniaus universitetas').click()
     >>> browser.url
-    'http://localhost/school/vu'
+    'http://localhost/team/vu'
 
     >>> browser.printQuery('//h1/text()')
     Vilniaus universitetas

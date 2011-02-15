@@ -183,14 +183,14 @@ class UtutiTestBrowser(NousTestBrowser):
     @classmethod
     def logIn(cls, email='admin@uni.ututi.com', password='asdasd', location='uni'):
         browser = cls()
-        browser.open('http://localhost/school/%s/login' % location)
+        browser.open('http://localhost/team/%s/login' % location)
         form = browser.getForm('login_form')
         form.getControl('Your email address').value = email
         form.getControl('Password').value = password
         form.getControl('Login').click()
 
         browser.app = NousTestApp(pylons.test.pylonsapp)
-        browser.app.post('http://localhost/school/%s/login' % location,
+        browser.app.post('http://localhost/team/%s/login' % location,
                          params={'login': email, 'password': password})
 
         if email == 'admin@uni.ututi.com' and password == 'asdasd':

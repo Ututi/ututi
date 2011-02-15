@@ -32,7 +32,7 @@ END OF SETTING UP
 Not logged in user can see students number of university
 
     >>> browser = Browser()
-    >>> browser.open('http://localhost/school/vu')
+    >>> browser.open('http://localhost/team/vu')
     >>> browser.printQuery("//li[@class='studentsNumber']")
     <li class="studentsNumber">
       <span class="bold">0</span> students
@@ -46,21 +46,21 @@ Logged user should not see "I study here" button in university and faculty portl
 because he already has his LocationTag set:
 
     >>> browser = Browser.logIn()
-    >>> browser.open('http://localhost/school/vu')
+    >>> browser.open('http://localhost/team/vu')
     >>> browser.printQuery("//form[@id='i_study_here_form']")
 
-    >>> browser.open('http://localhost/school/vgtu')
+    >>> browser.open('http://localhost/team/vgtu')
     >>> browser.printQuery("//form[@id='i_study_here_form']")
 
-    >>> browser.open('http://localhost/school/uni')
+    >>> browser.open('http://localhost/team/uni')
     >>> browser.printQuery("//form[@id='i_study_here_form']")
 
-    >>> browser.open('http://localhost/school/vu/ef')
+    >>> browser.open('http://localhost/team/vu/ef')
     >>> browser.printQuery("//form[@id='i_study_here_form']")
 
 But he sees "I study here" button in HIS university faculties:
 
-    >>> browser.open('http://localhost/school/uni/dep')
+    >>> browser.open('http://localhost/team/uni/dep')
     >>> browser.printCssQuery("form#i_study_here_form button")
     <button class="submit" value="I study here">I study here</button>
 
@@ -68,20 +68,20 @@ If user is joined faculty, he doesn't see "I study here" at all
 
     >>> browser.getControl('I study here').click()
 
-    >>> browser.open('http://localhost/school/vgtu')
+    >>> browser.open('http://localhost/team/vgtu')
     >>> browser.printQuery("//form[@id='i_study_here_form']")
 
-    >>> browser.open('http://localhost/school/vu/')
+    >>> browser.open('http://localhost/team/vu/')
     >>> browser.printQuery("//form[@id='i_study_here_form']")
 
-    >>> browser.open('http://localhost/school/vgtu/af')
+    >>> browser.open('http://localhost/team/vgtu/af')
     >>> browser.printQuery("//form[@id='i_study_here_form']")
 
-    >>> browser.open('http://localhost/school/vu/ef')
+    >>> browser.open('http://localhost/team/vu/ef')
     >>> browser.printQuery("//form[@id='i_study_here_form']")
 
-    >>> browser.open('http://localhost/school/uni')
+    >>> browser.open('http://localhost/team/uni')
     >>> browser.printQuery("//form[@id='i_study_here_form']")
 
-    >>> browser.open('http://localhost/school/uni/dep')
+    >>> browser.open('http://localhost/team/uni/dep')
     >>> browser.printQuery("//form[@id='i_study_here_form']")

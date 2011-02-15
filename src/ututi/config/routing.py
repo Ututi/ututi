@@ -264,15 +264,15 @@ def make_map(config):
                 controller='profile',
                 action='logo')
 
-    map.connect('/school/*path/update', controller='structureview', action='update')
-    map.connect('/school/*path/login', controller='structureview', action='login')
-    map.connect('/school/*path/edit', controller='structureview', action='edit')
-    map.connect('/school/*path/search_js', controller='structureview', action='search_js')
-    map.connect('/school/*path/groups', controller='structureview', action='groups')
-    map.connect('/school/*path/subjects', controller='structureview', action='subjects')
-    map.connect('/school/*path/groups_js', controller='structureview', action='groups_search_js')
-    map.connect('/school/*path/subjects_js', controller='structureview', action='subjects_search_js')
-    map.connect('/school/*path', controller='structureview', action='index')
+    map.connect('/team/*path/update', controller='structureview', action='update')
+    map.connect('/team/*path/login', controller='structureview', action='login')
+    map.connect('/team/*path/edit', controller='structureview', action='edit')
+    map.connect('/team/*path/search_js', controller='structureview', action='search_js')
+    map.connect('/team/*path/groups', controller='structureview', action='groups')
+    map.connect('/team/*path/subjects', controller='structureview', action='subjects')
+    map.connect('/team/*path/groups_js', controller='structureview', action='groups_search_js')
+    map.connect('/team/*path/subjects_js', controller='structureview', action='subjects_search_js')
+    map.connect('/team/*path', controller='structureview', action='index')
 
     # other user views
     map.connect('/profile/confirm_emails', controller='profile', action='confirm_emails')
