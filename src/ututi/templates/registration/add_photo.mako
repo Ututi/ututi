@@ -33,7 +33,7 @@
     ${_("Select an image file on your computer:")}
   </p>
 
-  <input type="file" name="photo" class="line" />
+  <input type="file" name="photo" />
   <form:error name="photo" />
 
   <p id="file-status">
