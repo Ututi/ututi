@@ -301,7 +301,6 @@ class RegistrationController(BaseController, FederationMixin):
 
     @registration_action
     def university_info(self, registration):
-        # this may have to be rewritten
         from random import shuffle
         count = 14
         all_users = registration.location.users
