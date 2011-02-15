@@ -656,8 +656,8 @@ class UserRegistration(object):
         # return bool(meta.Session.query(UserRegistration).filter_by(id=self.id).filter(UserRegistration.raw_logo != None).count())
 
     def update_logo_from_facebook(self):
-        """TODO: implement this."""
-        pass
+        if self.logo is None: # Never overwrite a custom logo.
+            self.logo = read_facebook_logo(self.facebook_id)
 
     def create_user(self):
         """Returns a User object filled with registration data."""
