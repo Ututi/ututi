@@ -53,7 +53,7 @@ class UtutiEmail(email.message.Message):
 
     def getAuthor(self):
         author_name, author_address = parseaddr(self.getHeader("from"))
-        return User.get_global(author_address)
+        return User.get_byemail(author_address)
 
     def getBody(self):
         message = self
@@ -204,7 +204,7 @@ class GroupMailingListMessage(ContentItem):
 
     def getAuthor(self):
         author_name, author_address = parseaddr(self.mime_message['From'])
-        return User.get_global(author_address)
+        return User.get_byemail(author_address)
 
     @property
     def mime_message(self):
@@ -271,7 +271,8 @@ class GroupMailingListMessage(ContentItem):
 
         mime_message = mimetools.Message(StringIO(message_text))
         author_name, author_address = parseaddr(mime_message['From'])
-        author = User.get_global(author_address)
+        author = User.get_byemail(author_address)
+
         in_moderation_queue = False
 
         whitelist = [i.email for i in g.whitelist]

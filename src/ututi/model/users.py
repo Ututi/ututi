@@ -191,6 +191,17 @@ class User(object):
             return None
 
     @classmethod
+    def get_byemail(cls, email):
+        """Get a user by on of his emails."""
+        try:
+            if isinstance(email, (long, int)):
+                return meta.Session.query(cls).join(Email).filter_by(email=email, confirmed=True).one()
+            else:
+                return meta.Session.query(cls).join(Email).filter_by(email=email.strip().lower(), confirmed=True).one()
+        except NoResultFound:
+            return None
+
+    @classmethod
     def get_byid(cls, id, location=None):
         q = meta.Session.query(cls)
         try:
