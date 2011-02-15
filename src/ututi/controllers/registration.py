@@ -26,6 +26,23 @@ from openid.extensions import ax
 from xml.sax.saxutils import quoteattr
 
 
+class PasswordOrFederatedLogin(validators.String):
+    """Allow empty password if OpenID and/or FB are provided.
+       This is very specific and shouldn't be reused elsewhere."""
+    messages = {
+        'empty': _(u"Please enter your password."),
+        'tooShort': _(u"Password must be at least 5 characters long."),
+    }
+
+    def __init__(self):
+        validators.String.__init__(self, min=5, strip=True)
+
+    def to_python(self, value, state=None):
+        self.not_empty = c.registration.openid is None and \
+                         c.registration.facebook_id is None
+        return super(validators.String, self).to_python(value, state)
+
+
 class RegistrationStartForm(Schema):
 
     email = TranslatedEmailValidator(not_empty=True, strip=True)
@@ -40,10 +57,7 @@ class PersonalInfoForm(Schema):
 
     msg = {'empty': _(u"Please enter your full name.")}
     fullname = validators.String(not_empty=True, strip=True, messages=msg)
-    msg = {'empty': _(u"Please enter your password."),
-           'tooShort': _(u"Password must be at least 5 characters long.")}
-    password = validators.String(
-         min=5, not_empty=True, strip=True, messages=msg)
+    password = PasswordOrFederatedLogin()
 
 
 class AddPhotoForm(Schema):
