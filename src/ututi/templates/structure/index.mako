@@ -36,7 +36,6 @@
 
 <br />
 
-%if c.user:
 <h2>${_('Create new')}</h2>
 <form method="post" action="${url(controller='structure', action='create')}"
       name="new_structure_form" id="new_structure_form" class="fullForm"
@@ -80,4 +79,3 @@
    <br />
    ${h.input_submit(_('Create'))}
 </form>
-%endif
