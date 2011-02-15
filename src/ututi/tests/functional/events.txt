@@ -3,7 +3,7 @@ Events and watching
 
     >>> browser = Browser.logIn()
 
-    >>> res = browser.app.post("/subject/vu/mat_analize/upload_file",
+    >>> res = browser.app.post("/subject/uni/mat_analize/upload_file",
     ...                params={'folder': ''},
     ...                upload_files=[("attachment", "text.txt", "Test")])
 

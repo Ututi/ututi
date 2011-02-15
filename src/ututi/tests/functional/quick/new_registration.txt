@@ -6,10 +6,7 @@ A new Ututi user can start his registration on university page,
 by clicking 'Register' button:
 
     >>> browser = Browser()
-    >>> browser.open('http://localhost/')
-    >>> browser.getLink('U-niversity').click()
-    >>> browser.url
-    'http://localhost/school/uni'
+    >>> browser.open('http://localhost/school/uni')
 
     >>> browser.getControl('Register').click()
     >>> browser.url

@@ -11,8 +11,7 @@ Visiting a profile-related page should not crash if the user is not logged in.
 -------------------------
 
     >>> browser = Browser()
-    >>> browser.open('http://localhost/login')
-    >>> form = browser.getForm('join-login-form')
+    >>> form = browser.getForm('loginForm')
     >>> form.getControl('Email').value = "admin@uni.ututi.com"
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
@@ -29,113 +28,37 @@ Note that user is being redirected to news feed after.
 
 -------------------------
 
-    >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value = "admin@uni.ututi.com"
-    >>> form.getControl('Password').value = "asd"
-    >>> form.getControl('Login').click()
-
-    >>> browser.url
-    'http://localhost/login'
-
-    >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value
-    'admin@uni.ututi.com'
-
-    >>> form.getControl('Password').value = "asdasd"
-    >>> form.getControl('Login').click()
-
-    >>> browser.getLink('log out').click()
-
--------------------------
-
-    >>> browser.open('http://localhost/group/moderators/members')
-    >>> browser.url
-    'http://localhost/login?came_from=http%3A%2F%2Flocalhost%2Fgroup%2Fmoderators%2Fmembers'
-
-    >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value = "admin@uni.ututi.com"
-    >>> form.getControl('Password').value = "asdasd"
-    >>> form.getControl('Login').click()
-
-    >>> browser.getLink('log out').click()
-
-
--------------------------
-
-    >>> browser.open('http://localhost/search')
-    >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value = "admin@uni.ututi.com"
-    >>> form.getControl('Password').value = "asdasd"
-    >>> form.getControl('Login').click()
-
-    >>> browser.url
-    'http://localhost/profile/browse'
-
-    >>> browser.getLink('log out').click()
-
--------------------------
-
-    >>> browser.open('http://localhost/search')
-    >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value = "admin@uni.ututi.com"
-    >>> form.getControl('Password').value = "asd"
-    >>> form.getControl('Login').click()
-
-    # XXX which one do we want?
-    >>> browser.url
-    'http://localhost/login'
-
-    >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Password').value = "asdasd"
-    >>> form.getControl('Login').click()
-
-    >>> browser.url
-    'http://localhost/profile/browse'
-
-    >>> browser.getLink('log out').click()
-
--------------------------
-
     >>> res = app.post("/login",
     ...                params={'login': 'admin@uni.ututi.com', 'password': 'asdasd'})
 
     >>> from textwrap import dedent
-    >>> res = app.post("/subject/vu/mat_analize/upload_file",
+    >>> res = app.post("/subject/uni/mat_analize/upload_file",
     ...                params={'folder': ''},
     ...                upload_files=[("attachment", "text.txt", "Test")])
 
-    >>> res = app.post("/subject/vu/mat_analize/upload_file",
+    >>> res = app.post("/subject/uni/mat_analize/upload_file",
     ...                params={'folder': ''},
     ...                upload_files=[("attachment", "text2.txt", "Test test test test")])
 
 
-    >>> browser.open('http://localhost/subject/vu/mat_analize')
+    >>> browser.open('http://localhost/subject/uni/mat_analize')
 
 Anonymous users should be able to download small files (for testing: up to 10 bytes):
 
     >>> browser.getLink('text.txt').click()
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize/file/4/get'
+    'http://localhost/subject/uni/mat_analize/file/4/get'
 
 But not larger ones:
 
-    >>> browser.open('http://localhost/subject/vu/mat_analize')
+    >>> browser.open('http://localhost/subject/uni/mat_analize')
     >>> browser.getLink('text2.txt').click()
     >>> browser.url
-    'http://localhost/login?came_from=%2Fsubject%2Fvu%2Fmat_analize%2Ffiles%3Fserve_file%3D5&context=text2.txt'
-
-    >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value = "user@ututi.lt"
-    >>> form.getControl('Password').value = "password"
-    >>> form.getControl('Login').click()
-
-    >>> browser.url
-    'http://localhost/subject/vu/mat_analize/files?serve_file=5'
-
-    >>> browser.getLink('log out').click()
+    'http://localhost/login?came_from=%2Fsubject%2Funi%2Fmat_analize%2Ffiles%3Fserve_file%3D5&context=text2.txt'
 
 -------------------------
 
+    >>> browser.open('http://localhost/')
     >>> form = browser.getForm('loginForm')
     >>> form.getControl('Email').value = "user@ututi.lt"
     >>> form.getControl('Password').value = "password"
