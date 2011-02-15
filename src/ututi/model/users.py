@@ -662,7 +662,7 @@ class UserRegistration(object):
     def update_password(self, password_plain):
         self.password = generate_password(password_plain)
 
-    logo = logo_property()
+    logo = logo_property(square=True)
 
     def has_logo(self):
         return self.logo is not None
