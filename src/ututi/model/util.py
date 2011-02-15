@@ -2,53 +2,67 @@ import PIL
 from PIL import Image
 import StringIO
 
-def process_logo(value):
+def _adjust_size(image):
+    max_width = max_height = 500
+
+    width, height = image.size
+    if width <= max_width and height <= max_height:
+        return image
+
+    if width > max_width:
+        ratio = float(max_width) / width
+        width, height = width * ratio, height * ratio
+
+    if height > max_height:
+        ratio = float(max_height) / height
+        width, height = width * ratio, height * ratio
+
+    return image.resize((int(width), int(height)), PIL.Image.ANTIALIAS)
+
+def _crop_square(image):
+
+    width, height = image.size
+    if width > height:
+        x = (width - height) / 2
+        box = (x, 0, x + height, height)
+    else:
+        y = (height - width) / 2
+        box = (0, y, width, y + width)
+
+    return image.crop(box)
+
+def process_logo(value, crop_square=False):
 
     if value is None:
         return
 
     image = Image.open(StringIO.StringIO(value))
+    orig_format = image.format
 
-    width = height = 500
-    if image.size[0] < width and image.size[1] < height:
-        return value
+    if crop_square:
+        image = _crop_square(image)
 
-    width = min(width, image.size[0])
-    height = min(height, image.size[1])
+    image = _adjust_size(image)
 
-    width = float(width)
-    height = float(height)
-    limit_x = width / height
-
-    original_x = float(image.size[0]) / image.size[1]
-
-    if limit_x > original_x:
-        width = height * original_x
-    elif limit_x <= original_x:
-        height = width / original_x
-
-    new_image = image.resize((int(width), int(height)), PIL.Image.ANTIALIAS)
     # Try saving as png
     png_buffer = StringIO.StringIO()
-    new_image.save(png_buffer, "PNG")
+    image.save(png_buffer, "PNG")
     png_result = png_buffer.getvalue()
 
     # Try preserving original format (JPEG most of the time)
     orig_buffer = StringIO.StringIO()
-    new_image.save(orig_buffer, image.format)
+    image.save(orig_buffer, orig_format)
     orig_result = orig_buffer.getvalue()
 
-    # see which one is the smallest one, resized png, resized original
-    # or plain original
+    # see which one is the smallest one: resized png or resized original
     size, result = min((len(png_result), png_result),
-                       (len(orig_result), orig_result),
-                       (len(value), value))
+                       (len(orig_result), orig_result))
     return result
 
 
-def logo_property():
+def logo_property(square=False):
     def get(self):
         return self.raw_logo
     def set(self, value):
-        self.raw_logo = process_logo(value)
+        self.raw_logo = process_logo(value, square)
     return property(get, set)
