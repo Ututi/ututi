@@ -208,6 +208,13 @@ class FederationMixin(object):
                      action='personal_info',
                      hash=registration.hash))
 
+    def _facebook_name_and_email(self, facebook_id, fb_access_token):
+        graph = facebook.GraphAPI(fb_access_token)
+        user_profile = graph.get_object("me")
+        name = user_profile.get('name', '')
+        email = user_profile.get('email', '')
+        return name, email
+
     @registration_action
     def link_facebook(self, registration):
         fb_user = facebook.get_user_from_cookie(request.cookies,
@@ -216,9 +223,15 @@ class FederationMixin(object):
             h.flash(_("Failed to link Facebook account"))
         else:
             facebook_id = int(fb_user['uid'])
+            fb_access_token = fb_user['access_token']
             if not User.get_byfbid(facebook_id, registration.location):
                 registration.facebook_id = facebook_id
                 registration.update_logo_from_facebook()
+                name, email = self._facebook_name_and_email(facebook_id, fb_access_token)
+                if not registration.fullname:
+                    registration.fullname = name
+                registration.facebook_email = email
+
                 meta.Session.commit()
                 h.flash(_("Linked to Facebook account."))
             else:

@@ -498,8 +498,9 @@ class AnonymousUser(object):
 class Email(object):
     """Class representing one email address of a user."""
 
-    def __init__(self, email):
+    def __init__(self, email, confirmed=False):
         self.email = email.strip().lower()
+        self.confirmed = confirmed
 
     @classmethod
     def get(cls, email):
@@ -666,14 +667,8 @@ class UserRegistration(object):
                     password=self.password,
                     gen_password=False)
 
-        email = Email(self.email)
-        email.confirmed = True
-        user.emails.append(email)
-        if self.openid_email:
-            # add openid email as a second user's mail.
-            email = Email(self.openid_email)
-            email.confirmed = True
-            user.emails.append(email)
+        user.emails = [Email(email, confirmed=True) for email in \
+                       set(filter(bool, [self.email, self.openid_email, self.facebook_email]))]
 
         user.accepted_terms = datetime.utcnow()
         user.openid = self.openid

@@ -39,6 +39,7 @@ def test_create_user():
         >>> registration.openid = 'some googlish url'
         >>> registration.openid_email = 'user@gmail.com'
         >>> registration.facebook_id = 31337
+        >>> registration.facebook_email = 'user@facebook.com'
 
     Now we create user and test if all data was transfered:
 
@@ -52,8 +53,8 @@ def test_create_user():
         >>> user.location.title
         u'U-niversity'
 
-        >>> [e.email for e in user.emails]
-        ['user@example.com', 'user@gmail.com']
+        >>> sorted([e.email for e in user.emails])
+        ['user@example.com', 'user@facebook.com', 'user@gmail.com']
 
         >>> user.password == registration.password
         True

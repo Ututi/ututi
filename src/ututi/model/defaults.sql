@@ -1584,6 +1584,7 @@ CREATE TABLE user_registrations (
        openid varchar(200) default null,
        openid_email varchar(320) default null,
        facebook_id bigint default null,
+       facebook_email varchar(320) default null,
        inviter varchar(320) default null, /* email address of user who
                                            * invited for this registration
                                            */
