@@ -267,9 +267,6 @@ class FederationMixin(object):
 
 class RegistrationController(BaseController, FederationMixin):
 
-    def _start_form(self):
-        return render('registration/start.mako')
-
     def _send_confirmation(self, registration):
         """Shorthand method."""
         send_email_confirmation_code(registration.email,
@@ -281,6 +278,9 @@ class RegistrationController(BaseController, FederationMixin):
         redirect(url(controller='registration',
                      action='start',
                      path='/'.join(location.path)))
+
+    def _start_form(self):
+        return render('registration/start.mako')
 
     @location_action
     @validate(schema=RegistrationStartForm(), form='_start_form')
@@ -401,8 +401,12 @@ class RegistrationController(BaseController, FederationMixin):
         }
         return htmlfill.render(self._personal_info_form(), defaults=defaults)
 
+    def _add_photo_form(self):
+        c.active_step = 'add_photo'
+        return render('registration/add_photo.mako')
+
     @registration_action
-    @validate(schema=AddPhotoForm(), form='add_photo')
+    @validate(schema=AddPhotoForm(), form='_add_photo_form')
     def add_photo(self, registration):
         if hasattr(self, 'form_result'):
             photo = self.form_result['photo']
@@ -414,11 +418,16 @@ class RegistrationController(BaseController, FederationMixin):
             else:
                 redirect(registration.url(action='invite_friends'))
 
-        c.active_step = 'add_photo'
-        return render('registration/add_photo.mako')
+        return htmlfill.render(self._add_photo_form())
+
+    def _invite_friends_form(self):
+        _, _, suffix = c.registration.email.partition('@')
+        c.email_suffix = '@' + suffix
+        c.active_step = 'invite_friends'
+        return render('registration/invite_friends.mako')
 
     @registration_action
-    @validate(schema=InviteFriendsForm(), form='invite_friends')
+    @validate(schema=InviteFriendsForm(), form='_invite_friends_form')
     def invite_friends(self, registration):
         if hasattr(self, 'form_result'):
             emails = [self.form_result['email1'],
@@ -431,10 +440,7 @@ class RegistrationController(BaseController, FederationMixin):
 
             redirect(registration.url(action='finish'))
 
-        _, _, suffix = registration.email.partition('@')
-        c.email_suffix = '@' + suffix
-        c.active_step = 'invite_friends'
-        return render('registration/invite_friends.mako')
+        return htmlfill.render(self._invite_friends_form())
 
     @registration_action
     def invite_friends_fb(self, registration):
