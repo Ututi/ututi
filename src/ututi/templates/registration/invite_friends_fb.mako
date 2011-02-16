@@ -21,7 +21,10 @@
                                       'a system for exchanging study material and information.') % \
                                       dict(university_link=h.link_to(c.registration.location.title,
                                                                      c.registration.location.url(qualified=True)))}
-                         <fb:req-choice url='{url(controller='registration', action='fbstart', path='/'.join(location.path))}' label='${_('Join Ututi')}' />
+                         <fb:req-choice url='${url(controller='registration',
+                                                   action='start_fb',
+                                                   path='/'.join(c.registration.location.path),
+                                                   qualified=True)}' label='${_('Join Ututi')}' />
                          ">
           <fb:multi-friend-selector actiontext="${_('Invite your classmates to Ututi!')}"
                                     showborder="true" rows="7" cols="6" exclude_ids="${c.exclude_ids}">

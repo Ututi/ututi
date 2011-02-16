@@ -264,6 +264,10 @@ class RegistrationController(BaseController, FederationMixin):
                                                       qualified=True),
                                      registration.hash)
 
+    def _go_to_start(self, location):
+        redirect(url(controller='registration',
+                     action='start',
+                     path='/'.join(location.path)))
 
     @location_action
     @validate(schema=RegistrationStartForm(), form='_start_form')
@@ -294,6 +298,10 @@ class RegistrationController(BaseController, FederationMixin):
         c.email = email
         return render('registration/email_approval.mako')
 
+    @location_action
+    def start_fb(self, location):
+        return render('registration/start_fb.mako')
+
     @validate(schema=RegistrationStartForm(), form='resend_code')
     def resend_code(self):
         if not hasattr(self, 'form_result'):
@@ -314,6 +322,37 @@ class RegistrationController(BaseController, FederationMixin):
         registration.email_confirmed = True
         meta.Session.commit()
         redirect(registration.url(action='university_info'))
+
+    @location_action
+    def confirm_fb(self, location):
+        fb_user = facebook.get_user_from_cookie(request.cookies,
+                         config['facebook.appid'], config['facebook.secret'])
+
+        if not fb_user or 'uid' not in fb_user or 'access_token' not in fb_user:
+            h.flash(_("Failed to link Facebook account"))
+            self._go_to_start(location)
+
+        facebook_id = int(fb_user['uid'])
+        fb_access_token = fb_user['access_token']
+        registration = UserRegistration.get_by_fbid(facebook_id, location)
+
+        if registration is None:
+            h.flash(_("Your invitation has expired."))
+            self._go_to_start(location)
+
+        name, email = self._facebook_name_and_email(facebook_id, fb_access_token)
+        if not email:
+            h.flash(_("Facebook did not provide your email address."))
+            self._go_to_start(location)
+
+        registration.fullname = name
+        registration.email = registration.facebook_email = email
+        registration.email_confirmed = True
+        registration.update_logo_from_facebook()
+        meta.Session.commit()
+
+        redirect(registration.url(action='university_info'))
+
 
     @registration_action
     def university_info(self, registration):

@@ -236,9 +236,10 @@ def make_map(config):
 
     #new user registration path
     map.connect('/registration/*path/start', controller='registration', action='start')
-    map.connect('/registration/*path/fbstart', controller='registration', action='fbstart')
+    map.connect('/registration/*path/start_fb', controller='registration', action='start_fb')
     map.connect('/registration/resend', controller='registration', action='resend_code')
     map.connect('/registration/{hash}/confirm', controller='registration', action='confirm_email')
+    map.connect('/registration/*path/confirm_fb', controller='registration', action='confirm_fb')
     map.connect('/registration/{hash}/university', controller='registration', action='university_info')
     map.connect('/registration/{hash}/personal_info', controller='registration', action='personal_info')
     map.connect('/registration/{hash}/add_photo', controller='registration', action='add_photo')
