@@ -37,12 +37,17 @@
     ${_("Select an image file on your computer:")}
   </p>
 
-  <input type="file" name="photo" />
-  <form:error name="photo" />
+  <input type="file" name="photo" id="photo-field" />
+  <form:error name="photo-field" /> <!-- formencode errors container -->
+
+  <button id="choose-button" style="display: none">${_("Choose")}</button>
+  <span class="error-message"></span> <!-- js errors container -->
+
+  <% replace_photo_text = _("Select an image if you want to replace your photo") %>
 
   %if c.registration.has_logo():
   <p id="help-text">
-    ${_("Select an image if you want to replace your photo")}
+    ${replace_photo_text}
   </p>
   %else:
   <p id="help-text">
@@ -57,3 +62,32 @@
     </a>
   </div>
 </form>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    $('#photo-field').hide();
+    $('#choose-button').show();
+
+    new AjaxUpload('#choose-button', {
+        action: "${c.registration.url(action='add_photo')}" + "?js",
+        name: 'photo',
+        autoSubmit: true,
+        responseType: false,
+        onSubmit: function(file, extension) {
+            if (!(extension && /^(jpg|png|jpeg|gif|tiff|bmp)$/.test(extension))) {
+                $('.error-message').html('${_("This file type is not supported.")}');
+                return false;
+            }
+        },
+        onComplete: function(file, response) {
+            var image_src = "${url(controller='registration', action='logo', id=c.registration.id, size=140)}";
+            var timestamp = new Date().getTime();
+            $('#photo-preview img').attr('src', image_src + '?' + timestamp);
+            $('#help-text').html('${replace_photo_text}');
+            $('.error-message').html('');
+        }
+    });
+
+  });
+</script>
