@@ -186,6 +186,18 @@ This automatically takes user to the next step:
     >>> browser.printCssQuery('h1.page-title', strip=True)
     <h1>Invite friends</h1>
 
+In add photo form: if user has already set his logo,
+'Next' button does not raise error anymore:
+
+    >>> browser.goBack()
+
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>Add your photo</h1>
+
+    >>> browser.getControl('Next').click()
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>Invite friends</h1>
+
 User can enter 0 to 5 emails. The suffix is automatically added and
 is the same as this user's. Emails are validated properly:
 

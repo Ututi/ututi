@@ -7,7 +7,7 @@ from formencode.compound import Pipe
 
 from pylons import tmpl_context as c, url, session, request, config
 from pylons.controllers.util import redirect, abort
-from pylons.i18n import _
+from pylons.i18n import ungettext, _
 
 from ututi.lib.base import BaseController, render
 from ututi.lib.emails import send_email_confirmation_code
@@ -26,6 +26,40 @@ from openid.extensions import ax
 from xml.sax.saxutils import quoteattr
 
 
+class PasswordOrFederatedLogin(validators.String):
+    """Allow empty password if OpenID and/or FB are provided.
+       Requires context c.registration to be set."""
+    messages = {
+        'empty': _(u"Please enter your password."),
+        'tooShort': _(u"Password must be at least 5 characters long."),
+    }
+
+    def __init__(self):
+        validators.String.__init__(self, min=5, strip=True)
+
+    def to_python(self, value, state=None):
+        self.not_empty = c.registration.openid is None and \
+                         c.registration.facebook_id is None
+        return super(validators.String, self).to_python(value, state)
+
+
+class RegistrationPhotoValidator(FileUploadTypeValidator):
+    """Allow empty logo field if user has logo set.
+       Requires context c.registration to be set."""
+    messages = {
+       'empty': _(u"Please select your photo."),
+       'bad_type': _(u"Please upload JPEG, PNG or GIF image.")
+    }
+
+    def __init__(self):
+        allowed_types = ('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif')
+        FileUploadTypeValidator.__init__(self, allowed_types=allowed_types)
+
+    def to_python(self, value, state=None):
+        self.not_empty = not c.registration.has_logo()
+        return super(FileUploadTypeValidator, self).to_python(value, state)
+
+
 class RegistrationStartForm(Schema):
 
     email = TranslatedEmailValidator(not_empty=True, strip=True)
@@ -40,19 +74,12 @@ class PersonalInfoForm(Schema):
 
     msg = {'empty': _(u"Please enter your full name.")}
     fullname = validators.String(not_empty=True, strip=True, messages=msg)
-    msg = {'empty': _(u"Please enter your password."),
-           'tooShort': _(u"Password must be at least 5 characters long.")}
-    password = validators.String(
-         min=5, not_empty=True, strip=True, messages=msg)
+    password = PasswordOrFederatedLogin()
 
 
 class AddPhotoForm(Schema):
 
-    allowed_types = ('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif')
-    msg = {'empty': _(u"Please select your photo.")}
-    photo = FileUploadTypeValidator(allowed_types=allowed_types,
-                                    not_empty=True,
-                                    messages=msg)
+    photo = RegistrationPhotoValidator()
 
 
 class EmailAddSuffix(validators.FancyValidator):
@@ -127,9 +154,7 @@ class FederationMixin(object):
             authrequest = cons.begin(GOOGLE_OPENID)
         except DiscoveryFailure:
             h.flash(_('Authentication failed, please try again.'))
-            redirect(url(controller='registration',
-                         action='personal_info',
-                         hash=registration.hash))
+            redirect(registration.url(action='personal_info'))
 
         ax_req = ax.FetchRequest()
         ax_req.add(ax.AttrInfo('http://axschema.org/namePerson/first',
@@ -144,8 +169,7 @@ class FederationMixin(object):
         session.save()
 
         realm = url(controller='home', action='index', qualified=True)
-        return_to = url(controller='registration', action='google_verify',
-                        hash=registration.hash, qualified=True)
+        return_to = registration.url(action='google_verify', qualified=True)
 
         redirect(authrequest.redirectURL(realm, return_to))
 
@@ -155,8 +179,7 @@ class FederationMixin(object):
         openid_store = None # stateless
         cons = Consumer(openid_session, openid_store)
 
-        current_url = url(controller='registration', action='google_verify',
-                         hash=registration.hash, qualified=True)
+        current_url = registration.url(action='google_verify', qualified=True)
         info = cons.complete(request.params, current_url)
 
         display_identifier = info.getDisplayIdentifier()
@@ -195,18 +218,21 @@ class FederationMixin(object):
             # TODO: log info.status and info.message
 
         h.flash(message)
-        redirect(url(controller='registration',
-                     action='personal_info',
-                     hash=registration.hash))
+        redirect(registration.url(action='personal_info'))
 
     @registration_action
     def unlink_google(self, registration):
         registration.openid = None
         meta.Session.commit()
         h.flash(_('Unlinked from Google account.'))
-        redirect(url(controller='registration',
-                     action='personal_info',
-                     hash=registration.hash))
+        redirect(registration.url(action='personal_info'))
+
+    def _facebook_name_and_email(self, facebook_id, fb_access_token):
+        graph = facebook.GraphAPI(fb_access_token)
+        user_profile = graph.get_object("me")
+        name = user_profile.get('name', '')
+        email = user_profile.get('email', '')
+        return name, email
 
     @registration_action
     def link_facebook(self, registration):
@@ -216,37 +242,45 @@ class FederationMixin(object):
             h.flash(_("Failed to link Facebook account"))
         else:
             facebook_id = int(fb_user['uid'])
+            fb_access_token = fb_user['access_token']
             if not User.get_byfbid(facebook_id, registration.location):
                 registration.facebook_id = facebook_id
                 registration.update_logo_from_facebook()
+                name, email = self._facebook_name_and_email(facebook_id, fb_access_token)
+                if not registration.fullname:
+                    registration.fullname = name
+                registration.facebook_email = email
+
                 meta.Session.commit()
                 h.flash(_("Linked to Facebook account."))
             else:
                 h.flash(_('This Facebook account is already linked to another user.'))
-        redirect(url(controller='registration', action='personal_info', hash=registration.hash))
+        redirect(registration.url(action='personal_info'))
 
     @registration_action
     def unlink_facebook(self, registration):
         registration.facebook_id = None
         meta.Session.commit()
         h.flash(_('Unlinked from Facebook account.'))
-        redirect(url(controller='registration', action='personal_info', hash=registration.hash))
+        redirect(registration.url(action='personal_info'))
 
 
 class RegistrationController(BaseController, FederationMixin):
 
-    def _start_form(self):
-        return render('registration/start.mako')
-
     def _send_confirmation(self, registration):
         """Shorthand method."""
         send_email_confirmation_code(registration.email,
-                                     url(controller='registration',
-                                         action='confirm_email',
-                                         hash=registration.hash,
-                                         qualified=True),
+                                     registration.url(action='confirm_email',
+                                                      qualified=True),
                                      registration.hash)
 
+    def _go_to_start(self, location):
+        redirect(url(controller='registration',
+                     action='start',
+                     path='/'.join(location.path)))
+
+    def _start_form(self):
+        return render('registration/start.mako')
 
     @location_action
     @validate(schema=RegistrationStartForm(), form='_start_form')
@@ -268,7 +302,7 @@ class RegistrationController(BaseController, FederationMixin):
 
         registration = UserRegistration.get_by_email(email)
         if registration is None:
-            registration = UserRegistration(email, location)
+            registration = UserRegistration(location, email)
             meta.Session.add(registration)
             meta.Session.commit()
 
@@ -276,6 +310,10 @@ class RegistrationController(BaseController, FederationMixin):
 
         c.email = email
         return render('registration/email_approval.mako')
+
+    @location_action
+    def start_fb(self, location):
+        return render('registration/start_fb.mako')
 
     @validate(schema=RegistrationStartForm(), form='resend_code')
     def resend_code(self):
@@ -296,8 +334,38 @@ class RegistrationController(BaseController, FederationMixin):
     def confirm_email(self, registration):
         registration.email_confirmed = True
         meta.Session.commit()
-        redirect(url(controller='registration', action='university_info',
-                     hash=registration.hash))
+        redirect(registration.url(action='university_info'))
+
+    @location_action
+    def confirm_fb(self, location):
+        fb_user = facebook.get_user_from_cookie(request.cookies,
+                         config['facebook.appid'], config['facebook.secret'])
+
+        if not fb_user or 'uid' not in fb_user or 'access_token' not in fb_user:
+            h.flash(_("Failed to link Facebook account"))
+            self._go_to_start(location)
+
+        facebook_id = int(fb_user['uid'])
+        fb_access_token = fb_user['access_token']
+        registration = UserRegistration.get_by_fbid(facebook_id, location)
+
+        if registration is None:
+            h.flash(_("Your invitation has expired."))
+            self._go_to_start(location)
+
+        name, email = self._facebook_name_and_email(facebook_id, fb_access_token)
+        if not email:
+            h.flash(_("Facebook did not provide your email address."))
+            self._go_to_start(location)
+
+        registration.fullname = name
+        registration.email = registration.facebook_email = email
+        registration.email_confirmed = True
+        registration.update_logo_from_facebook()
+        meta.Session.commit()
+
+        redirect(registration.url(action='university_info'))
+
 
     @registration_action
     def university_info(self, registration):
@@ -326,33 +394,40 @@ class RegistrationController(BaseController, FederationMixin):
             registration.fullname = self.form_result['fullname']
             registration.update_password(self.form_result['password'])
             meta.Session.commit()
-            redirect(url(controller='registration', action='add_photo',
-                         hash=registration.hash))
+            redirect(registration.url(action='add_photo'))
 
         defaults = {
             'fullname': registration.fullname,
         }
         return htmlfill.render(self._personal_info_form(), defaults=defaults)
 
-    @registration_action
-    @validate(schema=AddPhotoForm(), form='add_photo')
-    def add_photo(self, registration):
-        if hasattr(self, 'form_result'):
-            photo = self.form_result['photo']
-            registration.logo = photo.file.read()
-            meta.Session.commit()
-            if request.params.has_key('js'):
-                return 'OK'
-            else:
-                redirect(url(controller='registration',
-                             action='invite_friends',
-                             hash=registration.hash))
-
+    def _add_photo_form(self):
         c.active_step = 'add_photo'
         return render('registration/add_photo.mako')
 
     @registration_action
-    @validate(schema=InviteFriendsForm(), form='invite_friends')
+    @validate(schema=AddPhotoForm(), form='_add_photo_form')
+    def add_photo(self, registration):
+        if hasattr(self, 'form_result'):
+            photo = self.form_result['photo']
+            if photo is not None:
+                registration.logo = photo.file.read()
+                meta.Session.commit()
+            if request.params.has_key('js'):
+                return 'OK'
+            else:
+                redirect(registration.url(action='invite_friends'))
+
+        return htmlfill.render(self._add_photo_form())
+
+    def _invite_friends_form(self):
+        _, _, suffix = c.registration.email.partition('@')
+        c.email_suffix = '@' + suffix
+        c.active_step = 'invite_friends'
+        return render('registration/invite_friends.mako')
+
+    @registration_action
+    @validate(schema=InviteFriendsForm(), form='_invite_friends_form')
     def invite_friends(self, registration):
         if hasattr(self, 'form_result'):
             emails = [self.form_result['email1'],
@@ -361,28 +436,51 @@ class RegistrationController(BaseController, FederationMixin):
                       self.form_result['email4'],
                       self.form_result['email5']] + self.form_result['emails']
 
-            self._send_invitations(registration, emails)
+            self._send_email_invitations(registration, emails)
 
-            redirect(url(controller='registration', action='finish',
-                         hash=registration.hash))
+            redirect(registration.url(action='finish'))
 
-        _, _, suffix = registration.email.partition('@')
-        c.email_suffix = '@' + suffix
+        return htmlfill.render(self._invite_friends_form())
+
+    @registration_action
+    def invite_friends_fb(self, registration):
+        # handle facebook callback
+        ids = request.params.get('ids[]')
+        if ids:
+            ids = map(int, ids.split(','))
+            self._send_facebook_invitations(registration, ids)
+            redirect(registration.url(action='invite_friends'))
+
+        # render page
+        fb_user = facebook.get_user_from_cookie(request.cookies,
+                      config['facebook.appid'], config['facebook.secret'])
+        c.has_facebook = fb_user is not None
+        if c.has_facebook:
+            try:
+                graph = facebook.GraphAPI(fb_user['access_token'])
+                friends = graph.get_object("me/friends")
+                friend_ids = [f['id'] for f in friends['data']]
+                friend_users = meta.Session.query(User)\
+                        .filter(User.facebook_id.in_(friend_ids))\
+                        .filter(User.location == registration.location).all()
+                c.exclude_ids = ','.join(str(u.facebook_id) for u in friend_users)
+            except facebook.GraphAPIError:
+                c.has_facebook = False
         c.active_step = 'invite_friends'
-        return render('registration/invite_friends.mako')
+        return render('registration/invite_friends_fb.mako')
 
-    def _send_invitations(self, registration, emails):
+    def _send_email_invitations(self, registration, emails):
         already = []
         invited = []
         for email in filter(bool, emails):
             if User.get(email, registration.location):
                 already.append(email)
             else:
-                invitee = UserRegistration.get_by_email(email)
+                invitee = UserRegistration.get_by_email(email, registration.location)
                 if invitee is None:
-                    invitee = UserRegistration(email, registration.location)
+                    invitee = UserRegistration(registration.location, email)
                     meta.Session.add(invitee)
-                invitee.inviter = email
+                invitee.inviter = registration.email
                 meta.Session.commit()
                 self._send_confirmation(invitee)
                 invited.append(email)
@@ -394,6 +492,31 @@ class RegistrationController(BaseController, FederationMixin):
         if invited:
             h.flash(_("Invitations sent to %(email_list)s") % \
                     dict(email_list=', '.join(invited)))
+
+    def _send_facebook_invitations(self, registration, fb_ids):
+        already = []
+        invited = []
+        for facebook_id in fb_ids:
+            if User.get_byfbid(facebook_id, registration.location):
+                already.append(facebook_id)
+            else:
+                invitee = UserRegistration.get_by_fbid(facebook_id, registration.location)
+                if invitee is None:
+                    invitee = UserRegistration(registration.location, facebook_id=facebook_id)
+                    meta.Session.add(invitee)
+                invitee.inviter = registration.email
+                invited.append(facebook_id)
+                meta.Session.commit()
+
+        if already:
+            h.flash(ungettext('%(num)d of your friends is already using Ututi!',
+                              '%(num)d of your friends area already using Ututi!',
+                              len(already)) % dict(num=len(already)))
+
+        if invited:
+            h.flash(ungettext('Invited %(num)d friend.',
+                              'Invited %(num)d friends.',
+                              len(invited)) % dict(num=len(invited)))
 
     @registration_action
     def finish(self, registration):

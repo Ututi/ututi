@@ -16,7 +16,7 @@
 <p><strong>${c.registration.email}</strong></p>
 
 <form id="personal-info-form"
-      action="${url(controller='registration', action='personal_info', hash=c.registration.hash)}"
+      action="${c.registration.url(action='personal_info')}"
       method="POST">
 
   ${h.input_line('fullname', _("Full name:"))}
@@ -27,11 +27,11 @@
       <span class="labelText">${_("Link Google or Facebook")}</span>
       <div id="google-and-facebook-buttons">
         %if not c.registration.openid:
-          <a id="google-link-button" href="${url(controller='registration', action='link_google', hash=c.registration.hash)}">
+          <a id="google-link-button" href="${c.registration.url(action='link_google')}">
             ${h.image('/img/google-button.png', alt=_('Link Google'))}
           </a>
         %else:
-          <a id="google-unlink-button" href="${url(controller='registration', action='unlink_google', hash=c.registration.hash)}">
+          <a id="google-unlink-button" href="${c.registration.url(action='unlink_google')}">
             ${h.image('/img/google-button.png', alt=_('Unlink Google'))}
           </a>
         %endif
@@ -40,7 +40,7 @@
           <a id="fb-link-button" href="#link-facebook">
             ${h.image('/img/facebook-button.png', alt=_('Link Facebook'))}
           </a>
-          <script>
+          <script type="text/javascript">
             $(document).ready(function() {
               $('#fb-link-button').click(function() {
                   // attempt to login FB
@@ -48,7 +48,7 @@
                       if (response.session && response.perms) {
                           // user is logged in and granted some permissions.
                           // perms is a comma separated list of granted permissions
-                          window.location = '${url(controller='registration', action='link_facebook', hash=c.registration.hash)}';
+                          window.location = '${c.registration.url(action='link_facebook')}';
                       }
                   }, {perms:'email'});
 
@@ -57,7 +57,7 @@
             });
           </script>
         %else:
-          <a id="fb-unlink-button" href="${url(controller='registration', action='unlink_facebook', hash=c.registration.hash)}">
+          <a id="fb-unlink-button" href="${c.registration.url(action='unlink_facebook')}">
             ${h.image('/img/facebook-button.png', alt=_('Unlink Facebook'))}
           </a>
         %endif

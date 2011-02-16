@@ -50,6 +50,15 @@ a.inactive:hover {
     color: inherit;
 }
 
+button {
+    font-size: 12px;
+    color: #ffffff;
+    background: #333333;
+    border: 1px solid #969696;
+    padding: 0px 8px;
+    cursor: pointer;
+}
+
 /* LAYOUT ELEMENTS
  */
 

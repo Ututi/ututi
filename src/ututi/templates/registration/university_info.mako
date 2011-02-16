@@ -76,6 +76,6 @@
 </p>
 
 ${h.button_to(_("Next"),
-              url(controller='registration', action='personal_info', hash=c.registration.hash),
+              c.registration.url(action='personal_info'),
               class_='next',
               method='GET')}

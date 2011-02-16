@@ -15,6 +15,10 @@
     margin-top: 30px;
   }
   #add-photo-form {
+    padding-top: 5px;
+  }
+  p#help-text {
+    color: #666666;
   }
 </%def>
 
@@ -25,7 +29,7 @@
 </div>
 
 <form id="add-photo-form"
-      action="${url(controller='registration', action='add_photo', hash=c.registration.hash)}"
+      action="${c.registration.url(action='add_photo')}"
       enctype="multipart/form-data"
       method="POST">
 
@@ -33,15 +37,57 @@
     ${_("Select an image file on your computer:")}
   </p>
 
-  <input type="file" name="photo" />
-  <form:error name="photo" />
+  <input type="file" name="photo" id="photo-field" />
+  <form:error name="photo-field" /> <!-- formencode errors container -->
 
-  <p id="file-status">
-    ${_("You have not chosen any picture yet")}
+  <button id="choose-button" style="display: none">${_("Choose")}</button>
+  <span class="error-message"></span> <!-- js errors container -->
+
+  <% replace_photo_text = _("Select an image if you want to replace your photo") %>
+
+  %if c.registration.has_logo():
+  <p id="help-text">
+    ${replace_photo_text}
   </p>
+  %else:
+  <p id="help-text">
+    ${_("You have not set your photo yet")}
+  </p>
+  %endif
 
-  ${h.input_submit(_("Next"))}
-  <a id="skip-link" href="${url(controller='registration', action='invite_friends', hash=c.registration.hash)}">
-    ${_("Skip")}
-  </a>
+  <div>
+    ${h.input_submit(_("Next"))}
+    <a id="skip-link" href="${c.registration.url(action='invite_friends')}">
+      ${_("Skip")}
+    </a>
+  </div>
 </form>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    $('#photo-field').hide();
+    $('#choose-button').show();
+
+    new AjaxUpload('#choose-button', {
+        action: "${c.registration.url(action='add_photo')}" + "?js",
+        name: 'photo',
+        autoSubmit: true,
+        responseType: false,
+        onSubmit: function(file, extension) {
+            if (!(extension && /^(jpg|png|jpeg|gif|tiff|bmp)$/.test(extension))) {
+                $('.error-message').html('${_("This file type is not supported.")}');
+                return false;
+            }
+        },
+        onComplete: function(file, response) {
+            var image_src = "${url(controller='registration', action='logo', id=c.registration.id, size=140)}";
+            var timestamp = new Date().getTime();
+            $('#photo-preview img').attr('src', image_src + '?' + timestamp);
+            $('#help-text').html('${replace_photo_text}');
+            $('.error-message').html('');
+        }
+    });
+
+  });
+</script>
