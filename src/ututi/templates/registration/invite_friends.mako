@@ -25,7 +25,7 @@
 <p>${_("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et")}</p>
 
 <form id="invite-friends-form"
-      action="${url(controller='registration', action='invite_friends', hash=c.registration.hash)}"
+      action="${c.registration.url(action='invite_friends')}"
       method="POST">
 
   <p class="invite-choice">${_('Invite friends via email')}</p>

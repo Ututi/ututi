@@ -25,7 +25,7 @@
 </div>
 
 <form id="add-photo-form"
-      action="${url(controller='registration', action='add_photo', hash=c.registration.hash)}"
+      action="${c.registration.url(action='add_photo')}"
       enctype="multipart/form-data"
       method="POST">
 
@@ -41,7 +41,7 @@
   </p>
 
   ${h.input_submit(_("Next"))}
-  <a id="skip-link" href="${url(controller='registration', action='invite_friends', hash=c.registration.hash)}">
+  <a id="skip-link" href="${c.registration.url(action='invite_friends')}">
     ${_("Skip")}
   </a>
 </form>

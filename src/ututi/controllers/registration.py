@@ -141,9 +141,7 @@ class FederationMixin(object):
             authrequest = cons.begin(GOOGLE_OPENID)
         except DiscoveryFailure:
             h.flash(_('Authentication failed, please try again.'))
-            redirect(url(controller='registration',
-                         action='personal_info',
-                         hash=registration.hash))
+            redirect(registration.url(action='personal_info'))
 
         ax_req = ax.FetchRequest()
         ax_req.add(ax.AttrInfo('http://axschema.org/namePerson/first',
@@ -158,8 +156,7 @@ class FederationMixin(object):
         session.save()
 
         realm = url(controller='home', action='index', qualified=True)
-        return_to = url(controller='registration', action='google_verify',
-                        hash=registration.hash, qualified=True)
+        return_to = registration.url(action='google_verify', qualified=True)
 
         redirect(authrequest.redirectURL(realm, return_to))
 
@@ -169,8 +166,7 @@ class FederationMixin(object):
         openid_store = None # stateless
         cons = Consumer(openid_session, openid_store)
 
-        current_url = url(controller='registration', action='google_verify',
-                         hash=registration.hash, qualified=True)
+        current_url = registration.url(action='google_verify', qualified=True)
         info = cons.complete(request.params, current_url)
 
         display_identifier = info.getDisplayIdentifier()
@@ -209,18 +205,14 @@ class FederationMixin(object):
             # TODO: log info.status and info.message
 
         h.flash(message)
-        redirect(url(controller='registration',
-                     action='personal_info',
-                     hash=registration.hash))
+        redirect(registration.url(action='personal_info'))
 
     @registration_action
     def unlink_google(self, registration):
         registration.openid = None
         meta.Session.commit()
         h.flash(_('Unlinked from Google account.'))
-        redirect(url(controller='registration',
-                     action='personal_info',
-                     hash=registration.hash))
+        redirect(registration.url(action='personal_info'))
 
     def _facebook_name_and_email(self, facebook_id, fb_access_token):
         graph = facebook.GraphAPI(fb_access_token)
@@ -250,14 +242,14 @@ class FederationMixin(object):
                 h.flash(_("Linked to Facebook account."))
             else:
                 h.flash(_('This Facebook account is already linked to another user.'))
-        redirect(url(controller='registration', action='personal_info', hash=registration.hash))
+        redirect(registration.url(action='personal_info'))
 
     @registration_action
     def unlink_facebook(self, registration):
         registration.facebook_id = None
         meta.Session.commit()
         h.flash(_('Unlinked from Facebook account.'))
-        redirect(url(controller='registration', action='personal_info', hash=registration.hash))
+        redirect(registration.url(action='personal_info'))
 
 
 class RegistrationController(BaseController, FederationMixin):
@@ -268,10 +260,8 @@ class RegistrationController(BaseController, FederationMixin):
     def _send_confirmation(self, registration):
         """Shorthand method."""
         send_email_confirmation_code(registration.email,
-                                     url(controller='registration',
-                                         action='confirm_email',
-                                         hash=registration.hash,
-                                         qualified=True),
+                                     registration.url(action='confirm_email',
+                                                      qualified=True),
                                      registration.hash)
 
 
@@ -323,8 +313,7 @@ class RegistrationController(BaseController, FederationMixin):
     def confirm_email(self, registration):
         registration.email_confirmed = True
         meta.Session.commit()
-        redirect(url(controller='registration', action='university_info',
-                     hash=registration.hash))
+        redirect(registration.url(action='university_info'))
 
     @registration_action
     def university_info(self, registration):
@@ -353,8 +342,7 @@ class RegistrationController(BaseController, FederationMixin):
             registration.fullname = self.form_result['fullname']
             registration.update_password(self.form_result['password'])
             meta.Session.commit()
-            redirect(url(controller='registration', action='add_photo',
-                         hash=registration.hash))
+            redirect(registration.url(action='add_photo'))
 
         defaults = {
             'fullname': registration.fullname,
@@ -371,9 +359,7 @@ class RegistrationController(BaseController, FederationMixin):
             if request.params.has_key('js'):
                 return 'OK'
             else:
-                redirect(url(controller='registration',
-                             action='invite_friends',
-                             hash=registration.hash))
+                redirect(registration.url(action='invite_friends'))
 
         c.active_step = 'add_photo'
         return render('registration/add_photo.mako')
@@ -390,8 +376,7 @@ class RegistrationController(BaseController, FederationMixin):
 
             self._send_email_invitations(registration, emails)
 
-            redirect(url(controller='registration', action='finish',
-                         hash=registration.hash))
+            redirect(registration.url(action='finish'))
 
         _, _, suffix = registration.email.partition('@')
         c.email_suffix = '@' + suffix
