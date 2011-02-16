@@ -28,7 +28,7 @@ from xml.sax.saxutils import quoteattr
 
 class PasswordOrFederatedLogin(validators.String):
     """Allow empty password if OpenID and/or FB are provided.
-       This is very specific and shouldn't be reused elsewhere."""
+       Requires context c.registration to be set."""
     messages = {
         'empty': _(u"Please enter your password."),
         'tooShort': _(u"Password must be at least 5 characters long."),
@@ -41,6 +41,23 @@ class PasswordOrFederatedLogin(validators.String):
         self.not_empty = c.registration.openid is None and \
                          c.registration.facebook_id is None
         return super(validators.String, self).to_python(value, state)
+
+
+class RegistrationPhotoValidator(FileUploadTypeValidator):
+    """Allow empty logo field if user has logo set.
+       Requires context c.registration to be set."""
+    messages = {
+       'empty': _(u"Please select your photo."),
+       'bad_type': _(u"Please upload JPEG, PNG or GIF image.")
+    }
+
+    def __init__(self):
+        allowed_types = ('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif')
+        FileUploadTypeValidator.__init__(self, allowed_types=allowed_types)
+
+    def to_python(self, value, state=None):
+        self.not_empty = not c.registration.has_logo()
+        return super(FileUploadTypeValidator, self).to_python(value, state)
 
 
 class RegistrationStartForm(Schema):
@@ -62,11 +79,7 @@ class PersonalInfoForm(Schema):
 
 class AddPhotoForm(Schema):
 
-    allowed_types = ('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif')
-    msg = {'empty': _(u"Please select your photo.")}
-    photo = FileUploadTypeValidator(allowed_types=allowed_types,
-                                    not_empty=True,
-                                    messages=msg)
+    photo = RegistrationPhotoValidator()
 
 
 class EmailAddSuffix(validators.FancyValidator):
@@ -393,8 +406,9 @@ class RegistrationController(BaseController, FederationMixin):
     def add_photo(self, registration):
         if hasattr(self, 'form_result'):
             photo = self.form_result['photo']
-            registration.logo = photo.file.read()
-            meta.Session.commit()
+            if photo is not None:
+                registration.logo = photo.file.read()
+                meta.Session.commit()
             if request.params.has_key('js'):
                 return 'OK'
             else:
