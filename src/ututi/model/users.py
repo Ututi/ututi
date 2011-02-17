@@ -681,6 +681,8 @@ class UserRegistration(object):
         if self.logo is None: # Never overwrite a custom logo.
             self.logo = read_facebook_logo(self.facebook_id)
 
+    university_logo = logo_property(square=True, logo_attr='raw_university_logo')
+
     def create_user(self):
         """Returns a User object filled with registration data."""
         user = User(fullname=self.fullname,

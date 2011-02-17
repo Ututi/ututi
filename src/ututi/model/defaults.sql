@@ -1571,6 +1571,8 @@ create table teacher_groups (
        group_id int8 default null references groups(id) on delete cascade,
        primary key (id));;
 
+CREATE TYPE university_member_policy AS ENUM ('RESTRICT_EMAIL', 'ALLOW_INVITES', 'PUBLIC');
+
 /* a table for storing user registration data */
 CREATE TABLE user_registrations (
        id bigserial not null,
@@ -1589,7 +1591,14 @@ CREATE TABLE user_registrations (
                                            * invited for this registration
                                            */
        completed boolean default false,
-       location_id int8 not null references tags(id) on delete cascade,
+       location_id int8 default null references tags(id) on delete cascade,
+       university_title varchar(100) default null,
+       university_country_id int8 default null references countries(id) on delete cascade,
+       university_website varchar(320) default null,
+       university_logo bytea default null,
+       university_member_policy university_member_policy default 'RESTRICT_EMAIL',
+       university_allowed_domains text default null,
+       university_has_departments boolean default true,
        primary key (id),
        unique(location_id, email));;
 

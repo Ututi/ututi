@@ -34,6 +34,7 @@ from ututi.migration import GreatMigrator
 from ututi.model.users import Medal, Email, UserSubjectMonitoring, User
 from ututi.model.users import Teacher, TeacherGroup, AdminUser, UserRegistration
 from ututi.model.util import logo_property
+from ututi.model.i18n import Country
 from ututi.model import meta
 from ututi.lib.messaging import SMSMessage
 from ututi.lib.emails import group_invitation_email, group_space_bought_email
@@ -311,12 +312,15 @@ def setup_orm(engine):
     global user_registrations_table
     user_registrations_table = Table("user_registrations", meta.metadata,
                                     Column('fullname', Unicode(assert_unicode=True)),
+                                    Column('university_title', Unicode(assert_unicode=True)),
                                     autoload=True,
                                     autoload_with=engine)
 
     orm.mapper(UserRegistration, user_registrations_table,
                properties = {'location': relation(Tag),
-                             'raw_logo': deferred(user_registrations_table.c.logo)})
+                             'raw_logo': deferred(user_registrations_table.c.logo),
+                             'university_country': relation(Country),
+                             'raw_university_logo': deferred(user_registrations_table.c.university_logo)})
 
 
     global subject_pages_table
