@@ -235,7 +235,9 @@ def make_map(config):
     map.connect('/register/welcome', controller='profile', action='register_welcome')
 
     #new user registration path
-    map.connect('/registration/*path/start', controller='registration', action='start')
+    map.connect('start_registration', '/registration/start', controller='home', action='start_registration')
+    map.connect('start_registration_with_location', '/registration/*path/start',
+                controller='registration', action='start_with_location')
     map.connect('/registration/*path/start_fb', controller='registration', action='start_fb')
     map.connect('/registration/resend', controller='registration', action='resend_code')
     map.connect('/registration/{hash}/confirm', controller='registration', action='confirm_email')
@@ -293,7 +295,7 @@ def make_map(config):
     # CUSTOM ROUTES HERE
     map.connect('/sitemap.xml', controller='sitemap', action='index')
     map.connect('/channel.html', controller='federation', action='fbchannel')
-    map.connect('/', controller='home', action='index')
+    map.connect('frontpage', '/', controller='home', action='index')
     map.connect('/login', controller='home', action='login')
     map.connect('/logout', controller='home', action='logout')
     map.connect('/join', controller='home', action='join')

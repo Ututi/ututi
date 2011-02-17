@@ -1,5 +1,10 @@
 <%inherit file="/ubase-nomenu.mako" />
 
+<form id="sign-up-form" method="POST" action="${url('start_registration')}">
+  ${h.input_line('email', _("Sign up to join your university's social network or create it yourself"))}
+  ${h.input_submit(_('Sign Up'))}
+</form>
+
 <%def name="location_tag(uni)">
 <div class="university_block">
   %if uni['has_logo']:

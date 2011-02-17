@@ -11,10 +11,10 @@ import binascii
 import hashlib
 from datetime import datetime
 
-
 from ututi.model.util import logo_property, read_facebook_logo
 from ututi.model import meta
 from ututi.lib.helpers import image
+from ututi.lib.emails import send_email_confirmation_code
 
 from pylons.i18n import _
 from pylons import config
@@ -620,7 +620,15 @@ class TeacherGroup(object):
 class UserRegistration(object):
     """User registration data."""
 
-    def __init__(self, location, email=None, facebook_id=None):
+    def __init__(self, location=None, email=None, facebook_id=None):
+        if location is None:
+            assert email is not None # user starts his location w/o university
+                                     # email is required
+        else:
+            assert email or facebook_id # one of these must be given
+
+        # XXX this should be an integrity check in db
+
         self.location = location
         self.email = email
         self.facebook_id = facebook_id
@@ -682,6 +690,12 @@ class UserRegistration(object):
             self.logo = read_facebook_logo(self.facebook_id)
 
     university_logo = logo_property(square=True, logo_attr='raw_university_logo')
+
+    def send_confirmation_email(self):
+        send_email_confirmation_code(self.email,
+                                     self.url(action='confirm_email',
+                                                      qualified=True),
+                                     self.hash)
 
     def create_user(self):
         """Returns a User object filled with registration data."""

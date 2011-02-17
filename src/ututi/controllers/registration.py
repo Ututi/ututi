@@ -10,7 +10,6 @@ from pylons.controllers.util import redirect, abort
 from pylons.i18n import ungettext, _
 
 from ututi.lib.base import BaseController, render
-from ututi.lib.emails import send_email_confirmation_code
 from ututi.lib.image import serve_logo
 from ututi.lib.validators import validate, TranslatedEmailValidator, \
         FileUploadTypeValidator, SeparatedListValidator
@@ -267,16 +266,8 @@ class FederationMixin(object):
 
 class RegistrationController(BaseController, FederationMixin):
 
-    def _send_confirmation(self, registration):
-        """Shorthand method."""
-        send_email_confirmation_code(registration.email,
-                                     registration.url(action='confirm_email',
-                                                      qualified=True),
-                                     registration.hash)
-
     def _go_to_start(self, location):
-        redirect(url(controller='registration',
-                     action='start',
+        redirect(url('start_registration_with_location',
                      path='/'.join(location.path)))
 
     def _start_form(self):
@@ -284,7 +275,7 @@ class RegistrationController(BaseController, FederationMixin):
 
     @location_action
     @validate(schema=RegistrationStartForm(), form='_start_form')
-    def start(self, location):
+    def start_with_location(self, location):
 
         if not hasattr(self, 'form_result'):
             return htmlfill.render(self._start_form())
@@ -298,7 +289,7 @@ class RegistrationController(BaseController, FederationMixin):
             redirect(location.url(action='login'))
 
         # Otherwise lookup/create registration entry and
-        # send confirmation code it to user.
+        # send confirmation code to user.
 
         registration = UserRegistration.get_by_email(email)
         if registration is None:
@@ -306,7 +297,7 @@ class RegistrationController(BaseController, FederationMixin):
             meta.Session.add(registration)
             meta.Session.commit()
 
-        self._send_confirmation(registration)
+        registration.send_confirmation_email()
 
         c.email = email
         return render('registration/email_approval.mako')
@@ -326,7 +317,7 @@ class RegistrationController(BaseController, FederationMixin):
             abort(404)
         else:
             c.email = email
-            self._send_confirmation(registration)
+            registration.send_confirmation_email()
             h.flash(_("Your confirmation code was resent."))
             return render('registration/email_approval.mako')
 
@@ -482,7 +473,7 @@ class RegistrationController(BaseController, FederationMixin):
                     meta.Session.add(invitee)
                 invitee.inviter = registration.email
                 meta.Session.commit()
-                self._send_confirmation(invitee)
+                invitee.send_confirmation_email()
                 invited.append(email)
 
         if already:
