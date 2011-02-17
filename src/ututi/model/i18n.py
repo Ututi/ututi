@@ -49,6 +49,13 @@ class LanguageText(object):
             return None
 
 
+countries_table = None
+class Country(object):
+
+    pass
+
+
+
 def setup_orm(engine):
     global languages_table
     languages_table = Table(
@@ -56,6 +63,7 @@ def setup_orm(engine):
         meta.metadata,
         Column('title', Unicode(assert_unicode=True)),
         autoload=True,
+        useexisting=True,
         autoload_with=engine)
 
     global language_texts_table
@@ -73,3 +81,19 @@ def setup_orm(engine):
                    'language': relation(Language,
                                         backref=backref('texts',
                                             order_by=language_texts_table.c.id.asc()))})
+
+    global countries_table
+    countries_table = Table(
+        "countries",
+        meta.metadata,
+        autoload=True,
+        useexisting=True,
+        autoload_with=engine)
+
+    orm.mapper(Country,
+               countries_table,
+               properties={
+                   'language': relation(Language,
+                                        backref=backref('countries',
+                                        order_by=countries_table.c.id.asc()))})
+
