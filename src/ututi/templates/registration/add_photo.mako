@@ -20,6 +20,9 @@
   p#help-text {
     color: #666666;
   }
+  #choose-button {
+    margin-right: 20px;
+  }
 </%def>
 
 <%def name="pagetitle()">${_("Add your photo")}</%def>
@@ -41,7 +44,6 @@
   <form:error name="photo-field" /> <!-- formencode errors container -->
 
   <button id="choose-button" style="display: none">${_("Choose")}</button>
-  <span class="error-message"></span> <!-- js errors container -->
 
   <% replace_photo_text = _("Select an image if you want to replace your photo") %>
 
@@ -76,7 +78,8 @@
         responseType: false,
         onSubmit: function(file, extension) {
             if (!(extension && /^(jpg|png|jpeg|gif|tiff|bmp)$/.test(extension))) {
-                $('.error-message').html('${_("This file type is not supported.")}');
+                $('.error-message').remove(); // remove old messages
+                $('#choose-button').after('<span class="error-message">This file type is not supported.</span>');
                 return false;
             }
         },
@@ -85,7 +88,7 @@
             var timestamp = new Date().getTime();
             $('#photo-preview img').attr('src', image_src + '?' + timestamp);
             $('#help-text').html('${replace_photo_text}');
-            $('.error-message').html('');
+            $('.error-message').remove();
         }
     });
 
