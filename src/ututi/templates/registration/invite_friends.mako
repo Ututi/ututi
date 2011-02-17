@@ -2,12 +2,6 @@
 
 <%def name="css()">
   ${parent.css()}
-  #invite-friends-form {
-    margin-top: 10px;
-    width: 450px;
-    float: left;
-    border-right: 1px solid #666666;
-  }
   #facebook-invite-box {
     margin-top: 10px;
     width: 390px;
@@ -17,6 +11,19 @@
   p.invite-choice {
     font-weight: bold;
     margin-top: 0px;
+  }
+  #invite-friends-form {
+    margin-top: 10px;
+    width: 450px;
+    float: left;
+    border-right: 1px solid #666666;
+  }
+  #invite-friends-form textarea#emails {
+    width: 350px;
+    height: 100px;
+  }
+  #invite-friends-form span.helpText {
+    width: 350px;
   }
 </%def>
 

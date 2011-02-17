@@ -269,6 +269,10 @@ h1.page-title {
         line-height: 20px;
     }
 
+    form .textarea span.error-message {
+        display: block;
+    }
+
     .textField input,
     form input[type='text'],
     form input[type='password'],
