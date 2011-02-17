@@ -117,6 +117,6 @@ class UserController(BaseController):
         if user is not None and user.is_teacher:
             default_img = 'public/images/details/icon_teacher.png'
         else:
-            default_img = 'public/images/details/icon_user.png'
+            default_img = 'public/img/user_default.png'
         return serve_logo('user', int(id), width=width, height=height,
                 default_img_path=default_img, cache=False)

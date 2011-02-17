@@ -340,7 +340,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
     @ActionProtector("user")
     def logo(self, width=None, height=None):
         return serve_logo('user', c.user.id, width=width, height=height,
-                          default_img_path="public/images/user_ico.png",
+                          default_img_path="public/img/user_default.png",
                           cache=False)
 
     @ActionProtector("user")
