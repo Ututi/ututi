@@ -1,7 +1,7 @@
 <%namespace file="/sections/messages.mako" import="*"/>
 
 <%def name="title()">
-${_('Learning oriented social networks for higher education.')}
+${_('Information sharing tool for small companies.')}
 </%def>
 
 <%def name="head_tags()">
