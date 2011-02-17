@@ -13,7 +13,7 @@ from ututi.lib.base import BaseController, render
 from ututi.lib.emails import send_email_confirmation_code
 from ututi.lib.image import serve_logo
 from ututi.lib.validators import validate, TranslatedEmailValidator, \
-        FileUploadTypeValidator, CommaSeparatedListValidator
+        FileUploadTypeValidator, SeparatedListValidator
 import ututi.lib.helpers as h
 
 from ututi.model import meta, LocationTag
@@ -103,7 +103,7 @@ class InviteFriendsForm(Schema):
     email5 = Pipe(EmailAddSuffix(), TranslatedEmailValidator())
 
     emails = Pipe(validators.String(),
-                  CommaSeparatedListValidator(),
+                  SeparatedListValidator(separators=','),
                   ForEach(validators.Email()))
 
 

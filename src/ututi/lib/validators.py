@@ -389,20 +389,38 @@ class GroupCouponValidator(validators.FancyValidator):
         if error is not None:
             raise Invalid(self.message(error, state), value, state)
 
-class CommaSeparatedListValidator(validators.FancyValidator):
+
+class SeparatedListValidator(validators.FancyValidator):
     """A validator splits form field value for further validation,
-    used for chaining comma separated list validation (e.g. emails)."""
+    used for chaining separated list validation (e.g. emails).
+    Whitespace characters are used as separators by default, unless
+    explicitly stated whitespace=False.
+    """
 
     messages = { 'empty': _(u"Please enter at least one value.") }
 
+    def __init__(self, separators='', whitespace=True, **kwargs):
+        self.separators = separators
+        if whitespace:
+            import string
+            self.separators += string.whitespace
+
+        validators.FancyValidator.__init__(self, **kwargs)
+
     def _to_python(self, value, state):
-        print value
         if not value:
             raise Invalid(self.message('empty', state), value, state)
 
-        from string import strip
+        tokens = [value]
+        for sep in self.separators:
+            new_tokens = []
+            for token in tokens:
+                new_tokens.extend(token.split(sep))
+            tokens[:] = new_tokens
 
-        separated = filter(bool, map(strip, value.split(',')))
+        from string import strip
+        separated = filter(bool, map(strip, tokens))
+
         if len(separated) == 0:
             raise Invalid(self.message('empty', state), value, state)
 
