@@ -113,33 +113,6 @@ div.error-message {
     z-index: 100;
 }
 
-.textField input, .textField textarea {
-    background: url('img/inputs_bg.png') no-repeat left top;
-    height: 18px;
-    padding-top: 2px;
-    line-height: 18px;
-    padding-left: 5px;
-}
-
-.textField textarea {
-    background: url('img/textarea_bg.png') no-repeat left top;
-    height: 88px;
-}
-.textField .edge, .textField .edgeTextArea {
-    background: url('img/inputs_bg.png') no-repeat right top;
-    height: 20px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 5px;
-    _top: 1px; /* IE6 */
-}
-
-.textField .edgeTextArea {
-    background: url('img/textarea_bg.png') no-repeat right top;
-    height: 90px;
-}
-
 .textFieldBig input {
     background-position: left -30px;
     height: 30px;
