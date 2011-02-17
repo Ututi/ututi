@@ -2,6 +2,13 @@
 
 <%def name="pagetitle()">${_("Invite friends")}</%def>
 
+<%def name="css()">
+  ${parent.css()}
+  #skip-link {
+    float: right;
+  }
+</%def>
+
 %if c.has_facebook:
   <%
   invitation_message = \
@@ -40,4 +47,7 @@
   <fb:login-button perms="email" onlogin="show_loading_message(); window.location = '${c.registration.url(action='invite_friends')}'">
     ${_('Connect')}
   </fb:login-button>
+  <a id="skip-link" href="${c.registration.url(action='invite_friends')}">
+    ${_("Skip")}
+  </a>
 %endif
