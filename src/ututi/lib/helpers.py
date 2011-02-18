@@ -323,6 +323,24 @@ def select_line(name, title, options, selected=[], help_text=None, right_next=No
                        HTML.literal('<form:error name="%s" />' % name),
                        expl])
 
+def select_radio(name, title, options, selected=[], help_text=None, **kwargs):
+    expl = None
+    if help_text is not None:
+        expl = HTML.span(class_='helpText', c=help_text)
+
+    radios = []
+    for value, label in options:
+        checked = value in selected
+        radios.append(radio(name, value, checked, label, **kwargs))
+
+    return HTML.div(class_='formField',
+                    id='%s-field' % name,
+                    c=[HTML.label(for_=name, c=[
+                    HTML.span(class_='labelText', c=[title]),
+                    HTML.span(class_='textField', c=radios)]),
+                       HTML.literal('<form:error name="%s" />' % name),
+                       expl])
+
 def input_hidden(name, value='', **kwargs):
     kwargs.setdefault('id', name)
     return HTML.div(class_='formField',
