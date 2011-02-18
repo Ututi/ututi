@@ -446,6 +446,21 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         except Invalid:
             abort(400)
 
+    @ActionProtector("user")
+    def transfer_vote(self):
+        c.user.has_voted = True
+        meta.Session.commit()
+        redirect(request.referrer)
+
+    @ActionProtector("user")
+    def js_transfer_vote(self):
+        try:
+            c.user.has_voted = True
+            meta.Session.commit()
+            meta.Session.commit()
+            return 'ok'
+        except Invalid:
+            abort(400)
 
     @ActionProtector("user")
     def thank_you(self):

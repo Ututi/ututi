@@ -1621,6 +1621,9 @@ class LocationTag(Tag):
             location = location.parent
         return list(reversed(path))
 
+    def top_parent(self):
+        return self.hierarchy(full=True)[0]
+
     @Lazy
     def flatten(self):
         """Return a list of the tag's children and the tag's children's children, etc."""
@@ -1749,6 +1752,15 @@ class LocationTag(Tag):
     def students_number(self):
         ids = [t.id for t in self.flatten]
         return meta.Session.query(User).filter(User.location_id.in_(ids)).count()
+
+    def vote_count(self):
+        parent = self.top_parent()
+        ids = [t.id for t in parent.flatten]
+        true_count = meta.Session.query(User).filter(User.location_id.in_(ids)).filter(User.has_voted == True).count()
+        #we don't want to show the users that their university has no votes yet
+        jinx = len(parent.title)
+        return true_count + jinx
+
 
 def cleanupFileName(filename):
     return filename.split('\\')[-1].split('/')[-1]

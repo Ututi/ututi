@@ -1083,3 +1083,35 @@ ul.feature-list {
     .wiki-page ul, .wiki-page ol {
         list-style-position: inside;
     }
+
+/* VOTING STAS PROGRESSBAR
+*/
+#voting-progress {
+  width: 335px;
+  height: 60px;
+  background-color: transparent;
+  background-image: url("images/voting.png");
+  background-repeat: no-repeat;
+  background-position: -335px center;
+  float: left;
+  position: relative;
+}
+
+  #voting-progress #voting-count {
+    color: #ff7800;
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+  }
+
+#vote-form {
+  float: right;
+  padding-top: 30px;
+}
+
+#voting-results {
+  color: #ff7800;
+  font-size: 16px;
+  font-weight: bold;
+}

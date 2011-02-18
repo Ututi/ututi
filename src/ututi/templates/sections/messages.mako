@@ -1,5 +1,6 @@
 <%namespace file="/prebase.mako" import="rounded_block" name="b"/>
 <%namespace file="/widgets/ulocationtag.mako" import="location_widget, head_tags" name="loc"/>
+<%namespace file="/widgets/vote.mako" name="v" import="voting_widget" />
 
 <%def name="confirmation_messages(user=None)">
 <%
@@ -176,6 +177,16 @@
         <br style="clear: both;"/>
       </div>
     %endif
+    %if not user.has_voted:
+      <%
+         votes = user.location.vote_count()
+      %>
+      ${v.voting_widget(votes)}
+      <br class="clear-both"/>
+    %endif
+    <div id="voting-results" style="${user.has_voted and '' or 'display: none;'}">
+      ${_('Thank You for voting, check out how Your university is doing!')}
+    </div>
   </div>
 </%b:rounded_block>
 </%def>
