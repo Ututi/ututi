@@ -19,6 +19,7 @@
       method="POST">
 
   ${h.input_line('title', _("Full University title:"))}
+  ${h.select_line('country', _("Country:"), c.countries)}
   ${h.input_line('site_url', _("University website:"))}
 
   <label for="logo-field">

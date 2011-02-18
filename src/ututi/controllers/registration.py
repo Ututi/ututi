@@ -12,11 +12,12 @@ from pylons.i18n import ungettext, _
 from ututi.lib.base import BaseController, render
 from ututi.lib.image import serve_logo
 from ututi.lib.validators import validate, TranslatedEmailValidator, \
-        FileUploadTypeValidator, SeparatedListValidator
+        FileUploadTypeValidator, SeparatedListValidator, CountryValidator
 import ututi.lib.helpers as h
 
 from ututi.model import meta, LocationTag
 from ututi.model.users import User, UserRegistration
+from ututi.model.i18n import Country
 
 from openid.consumer import consumer
 from openid.consumer.consumer import Consumer, DiscoveryFailure
@@ -73,8 +74,12 @@ class UniversityCreateForm(Schema):
 
     msg = {'empty': _(u"Please enter University title.")}
     title = validators.String(not_empty=True, strip=True, messages=msg)
+
+    country = CountryValidator()
+
     msg = {'empty': _(u"Please enter University web site.")}
     site_url = validators.String(not_empty=True, strip=True, messages=msg)
+
     msg = { 'empty': _(u"Please select your photo."),
             'bad_type': _(u"Please upload JPEG, PNG or GIF image.") }
     allowed_types = ('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif')
@@ -389,6 +394,9 @@ class RegistrationController(BaseController, FederationMixin):
         return render('registration/university_info.mako')
 
     def _university_create_form(self):
+        countries = meta.Session.query(Country).order_by(Country.name.asc()).all()
+        c.countries = [('', _("(Select country from list)"))] + \
+                [(country.id, country.name) for country in countries]
         c.active_step = 'university_info'
         return render('registration/university_create.mako')
 
@@ -396,7 +404,7 @@ class RegistrationController(BaseController, FederationMixin):
     @validate(schema=UniversityCreateForm(), form='_university_create_form')
     def university_create(self, registration):
         if not hasattr(self, 'form_result'):
-            # TODO: default site url
+            # TODO: default site url, default country?
             return htmlfill.render(self._university_create_form())
 
         registration.university_title = self.form_result['title']
