@@ -313,6 +313,7 @@ def setup_orm(engine):
     user_registrations_table = Table("user_registrations", meta.metadata,
                                     Column('fullname', Unicode(assert_unicode=True)),
                                     Column('university_title', Unicode(assert_unicode=True)),
+                                    Column('university_site_url', Unicode(assert_unicode=True)),
                                     autoload=True,
                                     autoload_with=engine)
 
@@ -1617,7 +1618,7 @@ class SimpleTag(Tag):
 class LocationTag(Tag):
     """Class representing the university and faculty tags."""
 
-    def __init__(self, title, title_short, description, parent=None, confirmed=True, region=None):
+    def __init__(self, title, title_short, description=None, parent=None, confirmed=True, region=None):
         self.parent = parent
         self.title = title
         self.title_short = title_short

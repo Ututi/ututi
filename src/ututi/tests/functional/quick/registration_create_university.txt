@@ -101,148 +101,145 @@ When user clicks on confirmation link, he starts his registration process:
     >>> urls = get_urls(msg1.payload())
     >>> registration_url = urls[0]
 
-#    >>> browser.open(registration_url)
-#
-#The first registration step is "University information" step:
-#
-#    >>> browser.printCssQuery('h1.page-title', strip=True)
-#    <h1>University information</h1>
-#
-#It displays some people from this university:
-#
-#    >>> browser.printCssQuery('#people-box .name', strip=True)
-#    <td> <a>Administrator of the university</a> </td>
-#
-#TODO: the "Contact us" link does not take us anywhere yet:
-#(Also this test exposes a bug of css selector.)
-#
-#    >>> browser.printCssQuery('a#contact-link')
-#    <a href="#" id="contact-link">Contact us</a>.
-#
-#The "Next" takes user to "Personal information" step:
-#
-#    >>> browser.getControl("Next").click()
-#    >>> browser.printCssQuery('h1.page-title', strip=True)
-#    <h1>Personal information</h1>
-#
-#Regression test: no error messages are displayed when user enters this page:
-#
-#    >>> browser.printCssQuery('.error-message', strip=True)
-#
-#Before going next, user has to fill in his full name and password:
-#
-#    >>> browser.getControl("Next").click()
-#    >>> browser.printCssQuery('h1.page-title', strip=True)
-#    <h1>Personal information</h1>
-#
-#    >>> browser.printCssQuery('.error-message', strip=True)
-#    <span>Please enter your full name.</span>
-#    <span>Please enter your password.</span>
-#
-#    >>> form = browser.getForm('personal-info-form')
-#    >>> form.getControl('Full name:').value = 'User'
-#    >>> form.getControl('Password:').value = 'password'
-#    >>> form.getControl('Next').click()
-#
-#This takes user to the third step: "Add your photo":
-#
-#    >>> browser.printCssQuery('h1.page-title', strip=True)
-#    <h1>Add your photo</h1>
-#
-#Adding photo is mandatory:
-#
-#    >>> browser.getLink('Skip').click()
-#    >>> browser.printCssQuery('h1.page-title', strip=True)
-#    <h1>Invite friends</h1>
-#
-#However, the 'Next' button raises an error:
-#
-#    >>> browser.goBack()
-#
-#    >>> browser.getControl('Next').click()
-#    >>> browser.printCssQuery('.error-message', strip=True)
-#    <span>Please select your photo.</span>
-#
-#Personally, I think this is a bug and there should be only one button.
-#
-#Let's upload the photo:
-#
-#    >>> from ututi.tests.functional import make_file
-#    >>> form = browser.getForm('add-photo-form')
-#    >>> form.getControl(name='photo').add_file(*make_file('test_logo.png'))
-#    >>> browser.getControl('Next').click()
-#
-#This automatically takes user to the next step:
-#
-#    >>> browser.printCssQuery('h1.page-title', strip=True)
-#    <h1>Invite friends</h1>
-#
-#In add photo form: if user has already set his logo,
-#'Next' button does not raise error anymore:
-#
-#    >>> browser.goBack()
-#
-#    >>> browser.printCssQuery('h1.page-title', strip=True)
-#    <h1>Add your photo</h1>
-#
-#    >>> browser.getControl('Next').click()
-#    >>> browser.printCssQuery('h1.page-title', strip=True)
-#    <h1>Invite friends</h1>
-#
-#User can enter 0 to 5 emails. The suffix is automatically added and
-#is the same as this user's. Emails are validated properly:
-#
-#    >>> form = browser.getForm('invite-friends-form')
-#    >>> form.getControl(name='email1').value = 'one'
-#    >>> form.getControl(name='email2').value = 't w o'
-#    >>> form.getControl(name='email3').value = 'three'
-#    >>> form.getControl(name='email4').value = '     '
-#    >>> form.getControl(name='email5').value = 'fi@ve'
-#    >>> browser.getControl('Finish').click()
-#
-#    >>> browser.printCssQuery('.error-message', strip=True)
-#    <span>The username portion of the email address is invalid (the portion before the @: t w o)</span>
-#    <span>The domain portion of the email address is invalid (the portion after the @: ve@example.com)</span>
-#
-#    >>> form = browser.getForm('invite-friends-form')
-#    >>> form.getControl(name='email1').value
-#    'one'
-#    >>> form.getControl(name='email2').value
-#    't w o'
-#    >>> form.getControl(name='email3').value
-#    'three'
-#    >>> form.getControl(name='email4').value
-#    '     '
-#    >>> form.getControl(name='email5').value
-#    'fi@ve'
-#
-#If correct email addresses are submitted, user is taken to the "Welcome" page,
-#and invitation are sent:
-#
-#    >>> form.getControl(name='email2').value = 'two'
-#    >>> form.getControl(name='email5').value = 'five'
-#    >>> browser.getControl('Finish').click()
-#
-#    >>> browser.printCssQuery('h1.pageTitle', strip=True)
-#    <h1>News feed</h1>
-#
-#    >>> len(mail_queue)
-#    4
-#
-#A flash message is displayed, indicating that emails were sent.
-#
-#    >>> browser.printQuery("//div[@class='flash-message']//text()")
-#    Invitations sent to one@example.com, two@example.com, three@example.com, five@example.com
-#
-#    >>> [msg.recipients for msg in mail_queue]
-#    [['one@example.com'], ['two@example.com'], ['three@example.com'], ['five@example.com']]
-#
-#    >>> mail_queue[:] = []
-#
-#User can not go back to registration, it is invalidated:
-#
-#    >>> browser.open(registration_url)
-#    Traceback (most recent call last):
-#    ...
-#    HTTPError: HTTP Error 404: Not Found
-#
+    >>> browser.open(registration_url)
+
+The first registration step is "University information" step, where user fills
+out University information he is about to create:
+
+    >>> browser.url
+    'http://localhost/registration/.../university_create'
+
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>University information</h1>
+
+    >>> from ututi.tests.functional import make_file
+    >>> form = browser.getForm('university-create-form')
+    >>> form.getControl('Full University title:').value = 'Example University'
+    >>> form.getControl('University website:').value = 'http://www.example.com'
+    >>> form.getControl('University logo:').add_file(*make_file('test_logo.png'))
+
+The "Next" takes user to "Personal information" step:
+
+    >>> browser.getControl("Next").click()
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>Personal information</h1>
+
+Regression test: no error messages are displayed when user enters this page:
+
+    >>> browser.printCssQuery('.error-message', strip=True)
+
+Before going next, user has to fill in his full name and password:
+
+    >>> browser.getControl("Next").click()
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>Personal information</h1>
+
+    >>> browser.printCssQuery('.error-message', strip=True)
+    <span>Please enter your full name.</span>
+    <span>Please enter your password.</span>
+
+    >>> form = browser.getForm('personal-info-form')
+    >>> form.getControl('Full name:').value = 'User'
+    >>> form.getControl('Password:').value = 'password'
+    >>> form.getControl('Next').click()
+
+This takes user to the third step: "Add your photo":
+
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>Add your photo</h1>
+
+Adding photo is mandatory:
+
+    >>> browser.getLink('Skip').click()
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>Invite friends</h1>
+
+However, the 'Next' button raises an error:
+
+    >>> browser.goBack()
+
+    >>> browser.getControl('Next').click()
+    >>> browser.printCssQuery('.error-message', strip=True)
+    <span>Please select your photo.</span>
+
+Personally, I think this is a bug and there should be only one button.
+
+Let's upload the photo:
+
+    >>> form = browser.getForm('add-photo-form')
+    >>> form.getControl(name='photo').add_file(*make_file('test_logo.png'))
+    >>> browser.getControl('Next').click()
+
+This automatically takes user to the next step:
+
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>Invite friends</h1>
+
+In add photo form: if user has already set his logo,
+'Next' button does not raise error anymore:
+
+    >>> browser.goBack()
+
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>Add your photo</h1>
+
+    >>> browser.getControl('Next').click()
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>Invite friends</h1>
+
+User can enter 0 to 5 emails. The suffix is automatically added and
+is the same as this user's. Emails are validated properly:
+
+    >>> form = browser.getForm('invite-friends-form')
+    >>> form.getControl(name='email1').value = 'one'
+    >>> form.getControl(name='email2').value = 't w o'
+    >>> form.getControl(name='email3').value = 'three'
+    >>> form.getControl(name='email4').value = '     '
+    >>> form.getControl(name='email5').value = 'fi@ve'
+    >>> browser.getControl('Finish').click()
+
+    >>> browser.printCssQuery('.error-message', strip=True)
+    <span>The username portion of the email address is invalid (the portion before the @: t w o)</span>
+    <span>The domain portion of the email address is invalid (the portion after the @: ve@example.com)</span>
+
+    >>> form = browser.getForm('invite-friends-form')
+    >>> form.getControl(name='email1').value
+    'one'
+    >>> form.getControl(name='email2').value
+    't w o'
+    >>> form.getControl(name='email3').value
+    'three'
+    >>> form.getControl(name='email4').value
+    '     '
+    >>> form.getControl(name='email5').value
+    'fi@ve'
+
+If correct email addresses are submitted, user is taken to the "Welcome" page,
+and invitation are sent:
+
+    >>> form.getControl(name='email2').value = 'two'
+    >>> form.getControl(name='email5').value = 'five'
+    >>> browser.getControl('Finish').click()
+
+    >>> browser.printCssQuery('h1.pageTitle', strip=True)
+    <h1>News feed</h1>
+
+    >>> len(mail_queue)
+    4
+
+A flash message is displayed, indicating that emails were sent.
+
+    >>> browser.printQuery("//div[@class='flash-message']//text()")
+    Invitations sent to one@example.com, two@example.com, three@example.com, five@example.com
+
+    >>> [msg.recipients for msg in mail_queue]
+    [['one@example.com'], ['two@example.com'], ['three@example.com'], ['five@example.com']]
+
+    >>> mail_queue[:] = []
+
+User can not go back to registration, it is invalidated:
+
+    >>> browser.open(registration_url)
+    Traceback (most recent call last):
+    ...
+    HTTPError: HTTP Error 404: Not Found

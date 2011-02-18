@@ -243,6 +243,7 @@ def make_map(config):
     map.connect('/registration/{hash}/confirm', controller='registration', action='confirm_email')
     map.connect('/registration/*path/confirm_fb', controller='registration', action='confirm_fb')
     map.connect('/registration/{hash}/university', controller='registration', action='university_info')
+    map.connect('/registration/{hash}/university_create', controller='registration', action='university_create')
     map.connect('/registration/{hash}/personal_info', controller='registration', action='personal_info')
     map.connect('/registration/{hash}/add_photo', controller='registration', action='add_photo')
     map.connect('/registration/{hash}/link_google', controller='registration', action='link_google')

@@ -69,6 +69,18 @@ class EmailApproveForm(Schema):
     hash = validators.String(min=32, max=32, strip=True)
 
 
+class UniversityCreateForm(Schema):
+
+    msg = {'empty': _(u"Please enter University title.")}
+    title = validators.String(not_empty=True, strip=True, messages=msg)
+    msg = {'empty': _(u"Please enter University web site.")}
+    site_url = validators.String(not_empty=True, strip=True, messages=msg)
+    msg = { 'empty': _(u"Please select your photo."),
+            'bad_type': _(u"Please upload JPEG, PNG or GIF image.") }
+    allowed_types = ('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif')
+    logo = FileUploadTypeValidator(allowed_types=allowed_types)
+
+
 class PersonalInfoForm(Schema):
 
     msg = {'empty': _(u"Please enter your full name.")}
@@ -357,9 +369,11 @@ class RegistrationController(BaseController, FederationMixin):
 
         redirect(registration.url(action='university_info'))
 
-
     @registration_action
     def university_info(self, registration):
+        if registration.location is None:
+            redirect(registration.url(action='university_create'))
+
         from random import shuffle
         count = 14
         all_users = registration.location.users
@@ -373,6 +387,23 @@ class RegistrationController(BaseController, FederationMixin):
 
         c.active_step = 'university_info'
         return render('registration/university_info.mako')
+
+    def _university_create_form(self):
+        c.active_step = 'university_info'
+        return render('registration/university_create.mako')
+
+    @registration_action
+    @validate(schema=UniversityCreateForm(), form='_university_create_form')
+    def university_create(self, registration):
+        if not hasattr(self, 'form_result'):
+            # TODO: default site url
+            return htmlfill.render(self._university_create_form())
+
+        registration.university_title = self.form_result['title']
+        registration.university_site_url = self.form_result['site_url']
+        registration.university_logo = self.form_result['logo'].file.read()
+        meta.Session.commit()
+        redirect(registration.url(action='personal_info'))
 
     def _personal_info_form(self):
         c.active_step = 'personal_info'
@@ -464,7 +495,7 @@ class RegistrationController(BaseController, FederationMixin):
         already = []
         invited = []
         for email in filter(bool, emails):
-            if User.get(email, registration.location):
+            if registration.location and User.get(email, registration.location):
                 already.append(email)
             else:
                 invitee = UserRegistration.get_by_email(email, registration.location)
@@ -513,6 +544,8 @@ class RegistrationController(BaseController, FederationMixin):
     def finish(self, registration):
         from ututi.lib.security import sign_in_user
         user = registration.create_user()
+        if not registration.location:
+            user.location = registration.create_university()
         meta.Session.add(user)
         registration.completed = True
         meta.Session.commit()

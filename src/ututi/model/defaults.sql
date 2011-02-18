@@ -1594,11 +1594,10 @@ CREATE TABLE user_registrations (
        location_id int8 default null references tags(id) on delete cascade,
        university_title varchar(100) default null,
        university_country_id int8 default null references countries(id) on delete cascade,
-       university_website varchar(320) default null,
+       university_site_url varchar(320) default null,
        university_logo bytea default null,
        university_member_policy university_member_policy default 'RESTRICT_EMAIL',
        university_allowed_domains text default null,
-       university_has_departments boolean default true,
        primary key (id),
        unique(location_id, email));;
 

@@ -297,6 +297,7 @@ h1.page-title {
     }
 
     form button.submit {
+        display: block;
         background: #ff9900;
         border: 2px solid #969696;
         color: #ffffff;

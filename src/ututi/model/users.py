@@ -714,6 +714,22 @@ class UserRegistration(object):
         user.logo = self.logo
         return user
 
+    def create_university(self):
+        from ututi.model import LocationTag
+        # TODO: parse short title from url
+        title_short = self.university_site_url
+        university = LocationTag(self.university_title, title_short, confirmed=False)
+
+        # fill out the rest of information
+        university.site_url = self.university_site_url
+        university.logo = self.university_logo
+
+        # TODO
+        # university.country = self.university_country
+        # university.member_policy = self.university_member_policy
+        # university.allowed_domains = self.university_allowed_domains
+        return university
+
     def url(self, controller='registration', action='confirm', **kwargs):
         return url(controller=controller,
                    action=action,
