@@ -81,6 +81,12 @@ class CountryValidator(validators.FancyValidator):
         except ValueError:
             return self._notfoundmarker
 
+    def _from_python(self, value, state):
+        if isinstance(value, Country):
+            return value.id
+        else:
+            return None
+
     def validate_python(self, value, state):
         if value is None:
             raise Invalid(self.message('empty', state), value, state)
