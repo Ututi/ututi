@@ -334,7 +334,7 @@ def input_area(name, title, value='', cols='50', rows='5', help_text=None, disab
     if disabled:
         kwargs['disabled'] = 'disabled'
 
-    return HTML.label(class_='textarea', c=[
+    return HTML.label(c=[
         HTML.span(class_='labelText', c=[title]),
         HTML.span(class_='textField', c=[
             HTML.textarea(name_=name, id_=name, cols=cols, rows=rows, c=[value], **kwargs),
