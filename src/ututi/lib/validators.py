@@ -2,7 +2,6 @@ import re
 
 from os.path import splitext
 
-from webob.multidict import UnicodeMultiDict
 from decorator import decorator
 from lxml.html.clean import Cleaner
 
@@ -299,21 +298,17 @@ class LanguageValidator(validators.FancyValidator):
             raise Invalid(self.message('bad_lang', state), value, state)
 
 
-def manual_validate(schema, **state_kwargs):
+def manual_validate(schema):
     """Validate a formencode schema.
     Works similar to the @validate decorator. On success return a dictionary
     of parameters from request.params. On failure throws a formencode.Invalid
     exception."""
-    # Create a state object if requested
-    if state_kwargs:
-        state = State(**state_kwargs)
-    else:
-       state = None
 
     # In case of validation errors an exception is thrown. This needs to
     # be caught elsewhere.
     from pylons import request
-    return schema.to_python(request.params, state)
+    return schema.to_python(request.params, PylonsFormEncodeState)
+
 
 class ParentIdValidator(validators.FancyValidator):
     """
@@ -515,7 +510,6 @@ def js_validate(schema=None, validators=None, form=None, variable_decode=False,
         else:
             params = request.params
 
-        is_unicode_params = isinstance(params, UnicodeMultiDict)
         params = params.mixed()
         if variable_decode:
             decoded = variabledecode.variable_decode(params, dict_char,
