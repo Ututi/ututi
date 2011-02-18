@@ -65,7 +65,6 @@
       <span class="helpText" style="clear:both">${_("Click the buttons to link or unlink your profile with Google and/or Facebook")}</span>
   </div>
 
-  ## TODO: FACEBOOK BUTTON
   ${h.input_submit(_("Next"))}
 </form>
 
