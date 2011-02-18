@@ -25,7 +25,17 @@
   <label for="logo-field">
     <span class="labelText">${_("University logo:")}</span>
     <input type="file" name="logo" id="logo-field" />
-    <form:error name="photo-field" /> <!-- formencode errors container -->
+    <form:error name="logo" /> <!-- formencode errors container -->
+  </label>
+
+  ${h.select_radio('member_policy', _("Accessibility:"), c.policies)}
+
+  <label for="allowed-emails">
+    <span class="labelText">${_("Allowed emails:")}</span>
+    <input type="text" name="allowed_emails" id="allowed-emails" />
+    <input type="text" name="allowed_emails" id="allowed-emails" />
+    <input type="text" name="allowed_emails" id="allowed-emails" />
+    <form:error name="allowed_emails" /> <!-- formencode errors container -->
   </label>
 
   ${h.input_submit(_("Next"))}

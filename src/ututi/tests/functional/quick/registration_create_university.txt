@@ -112,16 +112,28 @@ out University information he is about to create:
     >>> browser.printCssQuery('h1.page-title', strip=True)
     <h1>University information</h1>
 
+University title, country, web site URL, logo and member policy are required fields:
+
+    >>> browser.getControl("Next").click()
+    >>> browser.printCssQuery('.error-message', strip=True)
+    <span>Please enter University title.</span>
+    <span>Please select country.</span>
+    <span>Please enter University web site.</span>
+    <span>Please select logo.</span>
+    <span>Please specify member policy.</span>
+
     >>> from ututi.tests.functional import make_file
     >>> form = browser.getForm('university-create-form')
     >>> form.getControl('Full University title:').value = 'Example University'
     >>> form.getControl('Country:').displayValue = ['Lithuania']
     >>> form.getControl('University website:').value = 'http://www.example.com'
     >>> form.getControl('University logo:').add_file(*make_file('test_logo.png'))
+    >>> form.getControl(name='member_policy').value = ['RESTRICT_EMAIL']
 
 The "Next" takes user to "Personal information" step:
 
     >>> browser.getControl("Next").click()
+    >>> browser.printCssQuery('.error-message', strip=True)
     >>> browser.printCssQuery('h1.page-title', strip=True)
     <h1>Personal information</h1>
 

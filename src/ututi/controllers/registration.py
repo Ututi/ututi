@@ -25,6 +25,9 @@ from openid.extensions import ax
 
 from xml.sax.saxutils import quoteattr
 
+member_policies = [('RESTRICT_EMAIL', _("Only with University emails")),
+                   ('ALLOW_INVITES', _("Allow invites for non university emails (@gmail.com, @mail.ru, @yahoo.com, etc.)")),
+                   ('PUBLIC', _("No limitations"))]
 
 class PasswordOrFederatedLogin(validators.String):
     """Allow empty password if OpenID and/or FB are provided.
@@ -75,15 +78,23 @@ class UniversityCreateForm(Schema):
     msg = {'empty': _(u"Please enter University title.")}
     title = validators.String(not_empty=True, strip=True, messages=msg)
 
-    country = CountryValidator()
+    country = CountryValidator(not_empty=True)
 
     msg = {'empty': _(u"Please enter University web site.")}
     site_url = validators.String(not_empty=True, strip=True, messages=msg)
 
-    msg = { 'empty': _(u"Please select your photo."),
+    msg = { 'missing': _(u"Please select logo."),
+            'empty': _(u"Please select logo."),
             'bad_type': _(u"Please upload JPEG, PNG or GIF image.") }
     allowed_types = ('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif')
-    logo = FileUploadTypeValidator(allowed_types=allowed_types)
+    logo = FileUploadTypeValidator(allowed_types=allowed_types, not_empty=True, messages=msg)
+
+    msg = {'missing': _(u"Please specify member policy."),
+           'invalid': _(u"Invalid policy selected."),
+           'notIn': _(u"Invalid policy selected.") }
+    member_policy = validators.OneOf(dict(member_policies).keys(), messages=msg)
+
+    allowed_emails = ForEach(validators.String())
 
 
 class PersonalInfoForm(Schema):
@@ -397,6 +408,9 @@ class RegistrationController(BaseController, FederationMixin):
         countries = meta.Session.query(Country).order_by(Country.name.asc()).all()
         c.countries = [('', _("(Select country from list)"))] + \
                 [(country.id, country.name) for country in countries]
+
+        global member_policies
+        c.policies = member_policies
         c.active_step = 'university_info'
         return render('registration/university_create.mako')
 
@@ -410,6 +424,7 @@ class RegistrationController(BaseController, FederationMixin):
         registration.university_title = self.form_result['title']
         registration.university_site_url = self.form_result['site_url']
         registration.university_logo = self.form_result['logo'].file.read()
+        registration.university_member_policy = self.form_result['member_policy']
         meta.Session.commit()
         redirect(registration.url(action='personal_info'))
 
