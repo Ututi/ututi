@@ -429,6 +429,25 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
             abort(400)
 
     @ActionProtector("user")
+    @validate(schema=LocationForm, form='home')
+    def update_location_universal(self):
+        c.user.location = self.form_result.get('location', None)
+        meta.Session.commit()
+        h.flash(_('Your university information has been updated.'))
+        redirect(request.referrer)
+
+    @ActionProtector("user")
+    def js_update_location_universal(self):
+        try:
+            fields = manual_validate(LocationForm)
+            c.user.location = fields.get('location', None)
+            meta.Session.commit()
+            return 'ok'
+        except Invalid:
+            abort(400)
+
+
+    @ActionProtector("user")
     def thank_you(self):
         return render('/profile/thank_you.mako')
 

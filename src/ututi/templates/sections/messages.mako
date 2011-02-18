@@ -1,3 +1,6 @@
+<%namespace file="/prebase.mako" import="rounded_block" name="b"/>
+<%namespace file="/widgets/ulocationtag.mako" import="location_widget, head_tags" name="loc"/>
+
 <%def name="confirmation_messages(user=None)">
 <%
    if user is None and c.user is not None:
@@ -122,4 +125,57 @@
   </div>
   %endfor
 %endif
+</%def>
+
+<%def name="voting_message(user)">
+<%b:rounded_block id="transfer_voting" class_="orange-block">
+  <div class="content">
+    <h3>${_('Ututi is growing!')}</h3>
+    <div>
+    ${_("After two years of development and service here in Lithuania , Ututi is growing and changing."
+        " This March we are planning to release a new version, that will be not only a study material"
+        " exchange platform. Ututi will become Your university's social network and will connect not"
+        " only students but also teachers.")}
+    </div>
+    ${h.link_to(h.image('/img/transition.png', 'transition'), url(controller='home', action='dotcom'))}
+    <div>
+    ${_("Going in this new direction, we have decided to transition only the universities that have"
+        " an active community. If You want Your university to be a part of the new Ututi this March,"
+        " vote here. Only univerisites with 500 votes or more will be transfered.")}
+    </div>
+    %if user.location is None:
+      ${loc.head_tags()}
+      <script type="text/javascript">
+        $(function(){
+            $('#location-submit, #location-submit span').click(function(){
+                var form = $(this).closest('form');
+                var url = $(form).find('#js_url').val();
+                $.post(url,
+                       $(form).serialize(),
+                       function(data){
+                           alert('ok');
+                           $('#location-setting').hide();
+                       });
+                return false;
+            });
+        });
+      </script>
+      <div id="location-setting">
+        <form method="post" action="${url(controller='profile', action='update_location_universal')}">
+          <input type="hidden" id="js_url" name="js_url" value="${url(controller='profile', action='js_update_location_universal')}"/>
+          <div>
+            <span style="float: left; margin-right:5px;">${_('Choose Your university:')}</span>
+            <div style="float: left;">
+              ${loc.location_widget(1, titles=[''])}
+            </div>
+            <div style="float: right;">
+              ${h.input_submit(_('Confirm'), id='location-submit')}
+            </div>
+          </div>
+        </form>
+        <br style="clear: both;"/>
+      </div>
+    %endif
+  </div>
+</%b:rounded_block>
 </%def>

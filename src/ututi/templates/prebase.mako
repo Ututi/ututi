@@ -218,6 +218,13 @@ ${self.anonymous_menu()}
 
 <%def name="flash_messages()">
 <div id="flash-messages">
+  %if c.user:
+    %if not c.user.has_voted:
+    ${voting_message(c.user)}
+    %endif
+  %endif
+
+
   % if c.serve_file:
   <iframe style="display: none;" src="${c.serve_file.url(attachment=1)}"> </iframe>
   % endif

@@ -5087,3 +5087,22 @@ a.disabled, a.disabled:hover {
 }
 
 /* End teacher's material specific stylings */
+
+/* University transfer voting */
+#transfer_voting .content {
+  padding: 5px 20px 5px 40px;
+  background: transparent url("img/u_logo_small.png") 10px 5px no-repeat;
+}
+
+#transfer_voting .content h3 {
+  font-weight: bold;
+  margin-bottom: 1em;
+  font-size: 1.2em;
+}
+
+#transfer_voting #location-setting {
+  height: 30px;
+  padding: 20px 0 5px 60px;
+  background: transparent url("/img/icons/university.png") left center no-repeat;
+  vertical-align: bottom;
+}

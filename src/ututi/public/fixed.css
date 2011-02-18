@@ -48,7 +48,6 @@
     }
 
     .rounded-block .cbl {
-        background-image: url('img/portlets_bg.png');
         background-position: left -5px;
         bottom: -5px;
         left: -1px;
@@ -56,12 +55,23 @@
     }
 
     .rounded-block .cbr {
-        background-image: url('img/portlets_bg.png');
         background-position: right -5px;
         bottom: -5px;
         right: -1px;
         width: 5px;
     }
+
+    .rounded-block.orange-block {
+      border-left: 1px solid #ff7a04;
+      border-right: 1px solid #ff7a04;
+      background-color: white;
+    }
+      .rounded-block.orange-block .ctl,
+      .rounded-block.orange-block .ctr,
+      .rounded-block.orange-block .cbl,
+      .rounded-block.orange-block .cbr {
+          background-image: url('img/portlets_bg_orange.png');
+      }
 
 /* STANDARD ITEM LIST
  */
@@ -151,7 +161,7 @@
         background-repeat: no-repeat;
         padding-left: 70px;
     }
-    
+
     .standard-portlet.icon-group-gray {
         background-image: url('images/details/icon_group_42x35.png');
         background-position: 15px 5px;
