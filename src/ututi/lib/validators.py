@@ -16,7 +16,7 @@ from pylons.decorators import validate as old_validate
 from ututi.model import GroupCoupon
 from ututi.model import meta, Email
 from ututi.model import Subject, Group, ContentItem, LocationTag
-from ututi.model.i18n import Language
+from ututi.model.i18n import Language, Country
 
 
 def u_error_formatter(error):
@@ -59,6 +59,33 @@ def html_cleanup(input):
         )
     sane = cleaner.clean_html("<div>%s</div>"%input)
     return sane[len('<div>'):-len('</div>')]
+
+
+class CountryValidator(validators.FancyValidator):
+    """A validator that converts country id to Country.
+    Should normally be used to validate input from select box."""
+
+    messages = {
+        'bad_id': _(u"Country does not exist."),
+        'empty': _(u"Please select country."),
+        }
+
+    _notfoundmarker = object()
+
+    def _to_python(self, value, state):
+        if value is None:
+            return None
+        try:
+            id = int(value)
+            return Country.get(id) or self._notfoundmarker
+        except ValueError:
+            return self._notfoundmarker
+
+    def validate_python(self, value, state):
+        if value is None:
+            raise Invalid(self.message('empty', state), value, state)
+        elif value is self._notfoundmarker:
+            raise Invalid(self.message('bad_id', state), value, state)
 
 
 class HtmlSanitizeValidator(validators.FancyValidator):
