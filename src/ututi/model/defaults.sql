@@ -25,13 +25,13 @@ insert into language_texts (id, language_id, text) values
 
 create table countries (
        id bigserial not null,
-       title varchar(100) not null,
+       name varchar(100) not null,
        timezone varchar(100) default 'UTC' not null,
        locale varchar(30) not null,
        language_id varchar(100) not null references languages(id),
        primary key (id));;
 
-insert into countries (title, timezone, locale, language_id) values
+insert into countries (name, timezone, locale, language_id) values
        ('Lithuania', 'Europe/Vilnius', 'lt_LT', 'lt'),
        ('Poland', 'Europe/Warsaw', 'pl_PL', 'pl');;
 
