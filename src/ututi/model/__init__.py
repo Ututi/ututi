@@ -188,7 +188,8 @@ def setup_orm(engine):
                                                 order_by=LocationTag.title.asc(),
                                                 backref=backref('parent',
                                                                 remote_side=tags_table.c.id)),
-                           'region': relation(Region, backref='tags')})
+                           'region': relation(Region, backref='tags'),
+                           'country': relation(Country, backref='countries')})
 
     orm.mapper(SimpleTag,
                inherits=tag_mapper,

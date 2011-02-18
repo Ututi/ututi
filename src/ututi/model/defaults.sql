@@ -210,6 +210,7 @@ create table tags (id bigserial not null,
        confirmed bool default true,
        region_id int8 default null references regions(id) on delete restrict,
        parent_id int8 default null references tags(id) on delete cascade,
+       country_id int8 default null references countries(id) on delete cascade,
        primary key (id),
        unique(parent_id, title));;
 
