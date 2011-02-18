@@ -302,6 +302,27 @@ def input_line(name, title, value='', help_text=None, right_next=None, **kwargs)
                        HTML.literal('<form:error name="%s" />' % name),
                        expl])
 
+def select_line(name, title, options, selected=[], help_text=None, right_next=None, **kwargs):
+    expl = None
+    if help_text is not None:
+        expl = HTML.span(class_='helpText', c=help_text)
+    next = None
+    if right_next is not None:
+        next = HTML.span(class_='rightNext', c=right_next)
+
+    kwargs.setdefault('id', name)
+    field = select(name, selected, options, **kwargs)
+    return HTML.div(class_='formField',
+                    id='%s-field' % kwargs['id'],
+                    c=[HTML.label(for_=name, c=[
+                    HTML.span(class_='labelText', c=[title]),
+                    HTML.span(class_='textField', c=[
+                            field,
+                            ])]),
+                       next,
+                       HTML.literal('<form:error name="%s" />' % name),
+                       expl])
+
 def input_hidden(name, value='', **kwargs):
     kwargs.setdefault('id', name)
     return HTML.div(class_='formField',
