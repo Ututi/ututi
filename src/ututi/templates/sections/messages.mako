@@ -129,7 +129,8 @@
 </%def>
 
 <%def name="voting_message(user)">
-<%b:rounded_block id="transfer_voting" class_="orange-block">
+<div id="transfer_voting">
+<%b:rounded_block class_="orange-block">
   <div class="content">
     <h3>${_('Ututi is growing!')}</h3>
     <div>
@@ -154,8 +155,11 @@
                 $.post(url,
                        $(form).serialize(),
                        function(data){
-                           alert('ok');
                            $('#location-setting').hide();
+                           $.get("${url(controller='profile', action='voting_widget')}",
+                                 function(data) {
+                                   $('#transfer_voting').replaceWith(data);
+                                 });
                        });
                 return false;
             });
@@ -176,8 +180,7 @@
         </form>
         <br style="clear: both;"/>
       </div>
-    %endif
-    %if not user.has_voted:
+    %elif not user.has_voted:
       <%
          votes = user.location.vote_count()
       %>
@@ -189,4 +192,5 @@
     </div>
   </div>
 </%b:rounded_block>
+</div>
 </%def>

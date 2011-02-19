@@ -463,6 +463,10 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
             abort(400)
 
     @ActionProtector("user")
+    def voting_widget(self):
+        return render_mako_def('/sections/messages.mako', 'voting_message', user=c.user)
+
+    @ActionProtector("user")
     def thank_you(self):
         return render('/profile/thank_you.mako')
 
