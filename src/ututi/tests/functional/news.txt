@@ -239,7 +239,7 @@ See what notification intervals have been set:
     >>> browser.getControl(name='each', index=2).displayValue
     ['at the end of the day']
     >>> browser.getControl(name='each', index=2).displayValue = ['immediately']
-    >>> browser.getControl('Confirm', index=2).click()
+    >>> browser.getControl('Confirm', index=3).click()
 
 These should have changed:
     >>> browser.getControl(name='each', index=0).displayValue
@@ -359,11 +359,11 @@ If the user changes notification periods to 'never', he should not receive email
 
     >>> browser.open('http://localhost/profile/edit/notifications')
     >>> browser.getControl(name='each', index=0).displayValue = ['never']
-    >>> browser.getControl('Confirm', index=0).click()
-    >>> browser.getControl(name='each', index=1).displayValue = ['never']
     >>> browser.getControl('Confirm', index=1).click()
-    >>> browser.getControl(name='each', index=2).displayValue = ['never']
+    >>> browser.getControl(name='each', index=1).displayValue = ['never']
     >>> browser.getControl('Confirm', index=2).click()
+    >>> browser.getControl(name='each', index=2).displayValue = ['never']
+    >>> browser.getControl('Confirm', index=3).click()
     >>> mail_queue[:] = []
     >>> browser.open('http://localhost/news/daily?date=2009-10-09')
 
@@ -377,11 +377,11 @@ No emails for admin:
 And reset the values of notification periods to what they were:
     >>> browser.open('http://localhost/profile/edit/notifications')
     >>> browser.getControl(name='each', index=0).displayValue = ['at the end of the day']
-    >>> browser.getControl('Confirm', index=0).click()
-    >>> browser.getControl(name='each', index=1).displayValue = ['at the end of the day']
     >>> browser.getControl('Confirm', index=1).click()
-    >>> browser.getControl(name='each', index=2).displayValue = ['immediately']
+    >>> browser.getControl(name='each', index=1).displayValue = ['at the end of the day']
     >>> browser.getControl('Confirm', index=2).click()
+    >>> browser.getControl(name='each', index=2).displayValue = ['immediately']
+    >>> browser.getControl('Confirm', index=3).click()
 
 Hmm, now what happens if user2 starts ignoring the subject:
 

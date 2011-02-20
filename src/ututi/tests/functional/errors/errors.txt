@@ -15,11 +15,6 @@ and do something else:
     >>> browser.printQuery("id('error-message')/text()")
     Our highly trained monkeys are fixing this problem right now.
 
-    >>> browser.printQuery("//button/span/text()")
-    search
-    Shout!
-    Kick a monkey!
-
 
 User can send error message by clicking shout on monkeys
     >>> browser.open('http://localhost/admin/error')
@@ -94,7 +89,9 @@ different error message:
 
     >>> browser.printQuery("id('mainContent')")
     <div id="mainContent">
-      <div id="flash-messages"></div>
+      <div id="flash-messages">
+      ...
+      </div>
       <h1>Permission denied!</h1>
       <div>You do not have the rights to see this page, or perform this action. Go back or go to the search page please.</div>
       <a href="/search">go find something else</a>

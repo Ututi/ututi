@@ -68,7 +68,7 @@ The administrator should now see a request to confirm a teacher:
 Let's try and accept the second teacher:
     >>> browser2.getControl('Confirm', index=1).click()
     >>> print mail_queue.pop().payload()
-    John Smith,
+    Mr. teacher,
     Your request to join Ututi as a teacher has been confirmed!
     You may now visit your Ututi dashboard here: http://localhost/ .
     At Ututi you will be able to::
@@ -82,7 +82,7 @@ TODO: check if the user now can act as a teacher
 Let's also reject the first teacher:
     >>> browser2.getControl('Deny', index=0).click()
     >>> print mail_queue.pop().payload()
-    Mr. teacher,
+    John Smith,
     Your request to join Ututi as a teacher has been rejected.
     If this was a misunderstanding, please contact us directly at: info@ututi.lt.
     The Ututi team

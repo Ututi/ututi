@@ -7,11 +7,12 @@ Subjects can be tagged upon creation or when being edited.
 
     >>> browser.open('http://localhost/subjects/add')
 
-    >>> browser.getControl(name='location-0').value = 'vu'
-    >>> browser.getControl(name='location-1').value = 'ef'
-    >>> browser.getControl('Subject title:').value = u'Mat.analiz\u0117'.encode('utf-8')
-    >>> browser.getControl('Tags:').value = 'tag1, tag2, tag 3'
-    >>> browser.getControl('Create subject').click()
+    >>> form = browser.getForm(id='subject_add_form')
+    >>> form.getControl(name='location-0').value = 'vu'
+    >>> form.getControl(name='location-1').value = 'ef'
+    >>> form.getControl('Subject title:').value = u'Mat.analiz\u0117'.encode('utf-8')
+    >>> form.getControl('Tags:').value = 'tag1, tag2, tag 3'
+    >>> form.getControl('Create subject').click()
 
     >>> browser.url
     'http://localhost/subject/vu/ef/mat_analize'
@@ -35,9 +36,10 @@ Once again, to check if the tags were saved:
 
 Let's try changing the location of the subject to get a clash with another subject:
 
-    >>> browser.getControl('Title').value = 'mat_analize'
-    >>> browser.getControl(name='location-0').value = 'vu'
-    >>> browser.getControl(name='location-1').value = ''
-    >>> browser.getControl('Save').click()
+    >>> form = browser.getForm(id='subject_edit_form')
+    >>> form.getControl('Title').value = 'mat_analize'
+    >>> form.getControl(name='location-0').value = 'vu'
+    >>> form.getControl(name='location-1').value = ''
+    >>> form.getControl('Save').click()
     >>> browser.url
     'http://localhost/subject/vu/mat_analize-4'

@@ -54,12 +54,13 @@ There should be an email confirmation request in our inbox:
 We'll go to our profile edit page. And change our name as well as upload a logo.
 
     >>> browser.open('http://localhost/profile/edit')
-    >>> browser.getControl('Full name').value = 'Adminas Adminas'
-    >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
-    >>> browser.getControl('Address of your website or blog').value = 'http://ututi.lt'
-    >>> browser.getControl('About yourself').value = 'This is me'
-    >>> browser.getControl('Picture').add_file(*make_file('test_logo.png', 'test_logo.Png'))
-    >>> browser.getControl('Save').click()
+    >>> form = browser.getForm(name='edit_profile_form')
+    >>> form.getControl('Full name').value = 'Adminas Adminas'
+    >>> form.getControl(name='location-0').value = 'Vilniaus universitetas'
+    >>> form.getControl('Address of your website or blog').value = 'http://ututi.lt'
+    >>> form.getControl('About yourself').value = 'This is me'
+    >>> form.getControl('Picture').add_file(*make_file('test_logo.png', 'test_logo.Png'))
+    >>> form.getControl('Save').click()
 
     >>> browser.printQuery("id('personal-data')//span[@class='fullname']/text()")
     Adminas Adminas

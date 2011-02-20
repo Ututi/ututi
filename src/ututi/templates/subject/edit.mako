@@ -16,7 +16,7 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
 <h1>${_('Edit subject')}</h1>
 
 <form method="post" action="${url(controller='subject', action='update', id=c.subject.subject_id, tags=c.subject.location_path)}"
-     id="subject_add_form" enctype="multipart/form-data" class="fullForm">
+     id="subject_edit_form" enctype="multipart/form-data" class="fullForm">
   <fieldset>
   <input type="hidden" name="id" value=""/>
   <input type="hidden" name="old_location" value=""/>
