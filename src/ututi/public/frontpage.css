@@ -210,17 +210,19 @@ p{
 	text-align: left;
 	}
 .center{
-	margin: auto auto 20px auto;
-	clear: both;
-	}
+    margin: auto;
+    clear: both;
+}
+
 #learn-more{
-	height: 30px;
-	text-align: center;
-	color: #ffffff;
-	background-color: #ff9900; /* Orange */
-	border: 1px solid #666666;
-	font-size: 16px;
-	font-weight: 600;
-	padding: 0 20px;
-	min-width: 250px;
-	}
+    height: 30px;
+    text-align: center;
+    color: #ffffff;
+    background-color: #ff9900; /* Orange */
+    border: 1px solid #666666;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0 20px;
+    min-width: 250px;
+    margin: 15px 0;
+}
