@@ -4,11 +4,9 @@
   <h1>Sign up to join your university's social network or create it yourself</h1>
   <form id="sign-up-form" method="POST" action="${url('start_registration')}">
 	<div class="error"><span>Your email adress is not valid</span></div>
-  ${h.input_line('email', _("Sign up to join your university's social network or create it yourself"))}
-  ${h.input_submit(_('Sign Up'))}
 	<fieldset id="register-fieldset">
-	  <input class="email-input" type="text" name="email" value="Enter Your academic email" maxlength="320"/>
-	  <input class="sign-up" type="submit" value="Sign Up"/>
+      <input type="text" value="" name="email" id="email" class="email-input" />
+      ${h.input_submit(_('Sign Up'))}
 	</fieldset>
 	<div class="notice"> Only people with a verified university / college email address can join your network </div>
   </form>
