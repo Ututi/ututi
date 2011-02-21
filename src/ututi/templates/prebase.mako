@@ -97,66 +97,44 @@ ${_('Student information online')}
 </%def>
 
 <%def name="loggedin_header()">
-<form id="searchForm" action="${url(controller='profile', action='search')}">
-    <fieldset>
-        <legend class="a11y">${_('Search')}</legend>
-        <label class="textField">
-          <span class="a11y">${_('Search text')}</span>
-          <input type="text" name="text"/>
-          <span class="edge"></span>
-        </label>
-        ${h.input_submit(_('search_'))}
-    </fieldset>
-</form>
-<p class="a11y">${_('Main menu')}</p>
-<div class="head-nav">
-  <ul>
-    <li><a href="${url(controller='profile', action='home')}">${_('Home')}</a></li>
-    <li><a href="${url(controller='profile', action='browse')}">${_('Browse')}</a></li>
-    <li class="expandable group-nav">
-      <span>${_('Groups')}</span>
-      <div>
-        <ul>
-          %for group in c.user.groups:
-            <li>
-              <a href="${url(controller='group', action='index', id=group.group_id)}"
-                 ${h.trackEvent(None, 'group_home', 'top_menu')} title="${group.title}">
-                ${h.ellipsis(group.title, 18)}
-              </a>
-            </li>
-          %endfor
-          <li class="action"><a ${h.trackEvent(None, 'all_groups', 'menu')} href="${url(controller='search', action='index', obj_type='group')}">${_('All groups')}</a></li>
-          <li class="action"><a ${h.trackEvent(None, 'create_group', 'menu')} href="${url(controller='group', action='create_academic')}">${_('Create group')}</a></li>
-        </ul>
-      </div>
-    </li>
-    <li><a href="${url(controller='community', action='index')}">${_('Community')}</a></li>
-  </ul>
-</div>
-<p class="a11y">${_('User menu')}</p>
-<div class="loggedin-nav" id="personal-data">
-    <ul>
-        <li><a id="inbox-link" href="${url(controller='messages', action='index')}">
-          <% unread_messages = c.user.unread_messages() %>
-          %if unread_messages:
-           <strong>${_("inbox")} (${unread_messages})</strong>
-          %else:
-             ${_("inbox")}
-          %endif
-        </a></li>
+<div id="header">
+  <div id="header-container">
+    <div id="logo">
+      <a href="${url('/')}"><img src="/img/Ututi_logo.png" alt="Ututi logo" title="Ututi logo" /></a>
+    </div>
+    <div id="top-panel">
+      <ul id="head-nav">
+        <li id="nav-home"><a href="${url(controller='profile', action='home')}">${_('Home')}</a></li>
+        <li id="nav-university"><a href="${c.user.location.url()}">${_('My University')}</a></li>
+        <li id="nav-catalog"><a href="${url(controller='profile', action='browse')}">${_('Catalog')}</a></li>
+      </ul>
+      <form id="search-form" action="${url(controller='profile', action='search')}">
+        <fieldset>
+          <legend class="a11y">${_('Search')}</legend>
+          <label class="text-field">
+            <span class="a11y">${_('Search text')}</span>
+            <input type="text" name="text"/>
+            <span class="edge"></span>
+          </label>
+          ${h.input_submit(_('search_'))}
+        </fieldset>
+      </form>
+      <ul id="user-menu">
         <li class="expandable profile-nav">
-            <span class="fullname">${c.user.fullname}</span>
-            <div>
-                <ul>
-                    <li class="action"><a href="${url(controller='profile', action='edit')}">${_('Settings')}</a></li>
-                    <li class="action"><a href="${url(controller='user', action='index', id=c.user.id)}">${_('Public profile')}</a></li>
-                </ul>
-            </div>
+          <span class="fullname">${c.user.fullname}</span>
+          <div>
+            <ul>
+              <li class="action"><a href="${url(controller='profile', action='edit')}">${_('Settings')}</a></li>
+              <li class="action"><a href="${url(controller='user', action='index', id=c.user.id)}">${_('Public profile')}</a></li>
+              <li class="action"><a href="${url(controller='home', action='logout')}">${_('Log out')}</a></li>
+            </ul>
+          </div>
         </li>
-        <li><a href="${url(controller='home', action='logout')}">${_('log out')}</a></li>
-    </ul>
-</div>
+      </ul>
+    </div>
 
+</div>
+</div>
 <script type="text/javascript">
     // nav ul li expandable
     $('ul li.expandable').toggle(function() {
