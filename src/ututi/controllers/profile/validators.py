@@ -135,7 +135,7 @@ class LogoUpload(Schema):
 class HideElementForm(Schema):
      """Ajax submit validator to hide welcome screen widgets."""
      allow_extra_fields = False
-     type = validators.OneOf(['suggest_create_group', 'suggest_watch_subject', 'suggest_enter_phone'])
+     type = validators.OneOf(['suggest_create_group', 'suggest_watch_subject', 'suggest_enter_phone', 'transfer_vote'])
 
 
 class StudentGroupForm(Schema):

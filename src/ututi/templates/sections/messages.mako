@@ -129,9 +129,24 @@
 </%def>
 
 <%def name="voting_message(user)">
+%if 'transfer_vote' not in user.hidden_blocks_list:
 <div id="transfer_voting">
 <%b:rounded_block class_="orange-block">
   <div class="content">
+    <div class="hide-button-container">
+      <a id="transfer_vote_hide" href="#">${h.image('/images/details/icon_delete.png', alt="_('No, thanks')")}</a>
+      <script type="text/javascript">
+        $(function(){
+          $('#transfer_vote_hide').click(function(){
+            $(this).closest('.rounded-block').fadeOut();
+            $.post('${url(controller='profile', action='js_hide_element')}',
+                  {type: 'transfer_vote'});
+            return false;
+          });
+        });
+      </script>
+    </div>
+
     <h3>${_('Ututi is growing!')}</h3>
     <div>
     ${_("After two years of development and service here in Lithuania , Ututi is growing and changing."
@@ -193,4 +208,5 @@
   </div>
 </%b:rounded_block>
 </div>
+%endif
 </%def>
