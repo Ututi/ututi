@@ -81,7 +81,7 @@ p{
     display: inline;
     margin: 0px 10px;
 }
-#header-links-bold {
+#login-link {
     font-weight: bold;
 }
 #nav a {
@@ -149,9 +149,9 @@ p{
     color: #ffffff;
     background-color: #ff9900; /* Orange */
     border: 1px solid #666666;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 0 20px;
+    font-size: 20px !important;
+    font-weight: bold !important;
+    padding: 0 20px !important;
     margin: 0 0 0 20px !important;
     letter-spacing: 1px;
 }
