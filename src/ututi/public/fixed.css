@@ -1219,3 +1219,48 @@ ul.feature-list {
 }
 
 /* End Login form */
+
+/* Footer styling */
+
+#footer {
+    height: 60px;
+    width: 960px;
+    text-align: center;
+    margin: auto;
+    font-size: 12px;
+    color: #666;
+}
+
+#footer div {
+    margin-top: 14px;
+    text-align: left;
+    width: 320px;
+    float: left;
+    position: relative;
+    width: 320px;
+    height: auto;
+    margin-top: 15px;
+}
+
+.left {
+    text-align: left !important;
+}
+
+.right {
+    text-align: right !important;
+}
+
+.middle {
+    text-align: center !important;
+}
+
+#language-select{
+    display: inline;
+    float: left;
+}
+#middle{
+    display: inline;
+    float: left;
+}
+
+/* End of footer */

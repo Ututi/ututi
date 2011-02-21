@@ -8,27 +8,10 @@ ${_('Student information online')}
 </%def>
 
 <%def name="css()">
+
 </%def>
 
 <%def name="body_class()">
-</%def>
-
-<%def name="anonymous_menu()">
-<p class="a11y">${_('Main menu')}</p>
-<div class="head-nav">
-  <ul>
-    <li><a href="${url(controller='home', action='index', qualified=True)}">${_('Home')}</a></li>
-    <li><a href="${url(controller='search', action='browse', qualified=True)}">${_('Browse')}</a></li>
-    <li><a href="${url(controller='home', action='about', qualified=True)}">${_('About')}</a></li>
-    <li><a class="orange" href="${url(controller='home', action='register', qualified=True, came_from=url.current())}">${_('Join')}</a></li>
-  </ul>
-</div>
-<p class="a11y">${_('User menu')}</p>
-<div class="loggedin-nav" id="personal-data">
-    <ul>
-        <li><a href="#" id="feedback-link">${_('feedback')}</a></li>
-    </ul>
-</div>
 </%def>
 
 <%def name="breadcrumbs(breadcrumbs)">
@@ -95,43 +78,21 @@ ${_('Student information online')}
 </%def>
 
 <%def name="anonymous_header()">
-<form method="post" id="loginForm" action="${url('/login')}">
-
-  <div id="federatedLogin">
-    <div id="federatedLoginHint">${_('Connect using')}</div>
-    <div id="login-buttons">
-      <%
-         if c.came_from:
-           g_url = url(controller='federation', action='google_register', came_from=c.came_from)
-           fb_url = url(controller='federation', action='facebook_login', came_from=c.came_from)
-         else:
-           g_url = url(controller='federation', action='google_register')
-           fb_url = url(controller='federation', action='facebook_login')
-      %>
-      <a href="${g_url}" class="google-login"
-          onclick="show_loading_message(); return true">
-          ${h.image('/img/google.gif', alt=_('Log in using Google'))}
-      </a>
-      <fb:login-button size="icon" perms="email"
-        onlogin="show_loading_message(); window.location = '${fb_url}'"
-       >${_('Connect')}</fb:login-button>
+<div id="header">
+  <div id="header-container">
+    <div id="logo">
+      <div id="logo">
+        <a href="#" ><img src="img/Ututi_logo_big.png" alt="Ututi logo" title="Ututi logo"/></a>
+        <h1>Bringing students and teachers together</h1>
+      </div>
+      <ul id="nav">
+        <li class="header-links"><a href="#">What is Ututi?</a></li>
+        <li class="header-links"><a href="#">Contact us</a></li>
+        <li id="header-links-bold" class="header-links"><a href="#">Log In</a></li>
+      </ul>
     </div>
   </div>
-
-  <fieldset>
-    <input type="hidden" name="came_from" value="${c.came_from or request.url}" />
-    <legend class="a11y">${_('Join!')}</legend>
-    <label class="textField"><span class="overlay">${_('Email')}:</span><input type="text" name="login" value="${request.params.get('login')}"/><span class="edge"></span></label>
-    <label class="textField"><span class="overlay">${_('Password')}</span><input type="password" name="password" /><span class="edge"></span></label>
-    <button class="btn" type="submit" value="${_('Login')}"><span>${_('Login')}</span></button><br />
-    <a href="${url(controller='home', action='pswrecovery')}">${_('Forgotten password?')}</a>
-    <label id="rememberMe" for="remember"><input id="remember" name="remember" value="true" type="checkbox" class="checkbox"/> ${_('Remember me')}</label>
-  </fieldset>
-  <script type="text/javascript">
-    $(document).ready(function(){$(".textField .overlay").labelOver('over');});
-  </script>
-</form>
-${self.anonymous_menu()}
+</div>
 </%def>
 
 <%def name="loggedin_header()">
@@ -288,6 +249,9 @@ ${self.anonymous_menu()}
 
     ${h.stylesheet_link(h.path_with_hash('/style.css'))}
     ${h.stylesheet_link(h.path_with_hash('/fixed.css'))}
+    %if c.user is None:
+       ${h.stylesheet_link(h.path_with_hash('/frontpage.css'))}
+    %endif
     ${h.stylesheet_link(h.path_with_hash('/portlets.css'))}
     ${h.stylesheet_link(h.path_with_hash('/widgets.css'))}
     ${h.javascript_link('/javascript/jquery-1.4.4.min.js')}
@@ -309,7 +273,7 @@ ${self.anonymous_menu()}
       ${self.title()} - ${_('UTUTI')}
     </title>
   </head>
-  <body class="${self.body_class()}">
+  <body>
     %if c.testing:
     <div style="width: 200px; position: absolute; top: 0; left: 0; z-index: 1000; background: #f7ff00; padding: 5px;" id="test_warning">
       ${_('This is a testing version - this is just a copy of the information! Changes you make will not be persisted!')}
@@ -319,52 +283,39 @@ ${self.anonymous_menu()}
     </script>
     %endif
 
-    <div id="wrap">
-      <div id="widthLimiter">
-        ${breadcrumbs(c.breadcrumbs)}
-        %if c.user is None:
-          ${self.anonymous_header()}
-        %else:
-          ${self.loggedin_header()}
-        %endif
+    %if c.user is None:
+    ${self.anonymous_header()}
+    %else:
+    ${self.loggedin_header()}
+    %endif
 
+    <div id="wrap">
         ${next.body()}
-      </div>
-      <div class="push"></div>
     </div>
 
     <div id="footer">
       <%
          nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '')
       %>
-      <p>Copyright © <a href="${_('ututi_link')}">${_(u'UAB „UTUTI“')}</a></p>
-      <form id="language-switch-form" action="${url('switch_language')}">
-        <input name="came_from" type="hidden" value="${request.url}" />
-        <select name="language">
-          <option value="en">${_('English')}</option>
-          <option value="lt">${_('Lithuanian')}</option>
-          <option value="pl">${_('Polish')}</option>
-        </select>
-        <input type="submit" value="${_('Select')}" />
-      </form>
-      <ul>
-        <li><a ${nofollow} href="${url(controller='home', action='about')}">${_('About ututi')}</a></li>
-        <li><a ${nofollow} href="${_('ututi_blog_url')}">${_('U-blog')}</a></li>
-        <li><a ${nofollow} href="${url(controller='home', action='terms')}">${_('Terms of use')}</a></li>
-        <li><a href="#" id="feedback-link">${_('Feedback')}</a></li>
-      </ul>
-      <div class="folow-us-icons">
-      <a href="${config.get('folow_us_facebook', 'http://www.facebook.com/ututi')}">
-        ${h.image('/img/social/facebook_32.png', alt=_('Follow us on Facebook'))}
-      </a>
-      <a href="${config.get('folow_us_twitter', 'http://twitter.com/ututi')}">
-        ${h.image('/img/social/twitter_32.png', alt=_('Follow us on Twitter'))}
-      </a>
-      <a href="${config.get('folow_us_ublog', 'http://blog.ututi.lt')}">
-        ${h.image('/img/social/ublog_32.png', alt=_('Read about us in blog'))}
-      </a>
-
-      </div>
+      <!-- TODO: Fix language widget -->
+	  <div class="left">
+        <form id="language-switch-form" action="${url('switch_language')}">
+          <input name="came_from" type="hidden" value="${request.url}" />
+          <select name="language">
+            <option value="en">${_('English')}</option>
+            <option value="lt">${_('Lithuanian')}</option>
+            <option value="pl">${_('Polish')}</option>
+          </select>
+          <input type="submit" value="${_('Select')}" />
+        </form>
+	  </div>
+	  <div class="middle">Copyright © <a href="${_('ututi_link')}">${_(u'UAB „UTUTI“')}</a></div>
+	  <div class="right">
+        <a ${nofollow} href="${url(controller='home', action='about')}">${_('About')}</a>  |  
+		<a ${nofollow} href="${url(controller='home', action='terms')}">${_('Terms')}</a>  |  
+		<a href="#" >Contact Us</a>  |  
+		<a href="#" id="feedback-link">${_('Feedback')}</a>
+	  </div>
     </div>
     %if c.lang in ['lt', 'en', 'pl']:
     ${h.javascript_link('/javascript/uservoice.js')|n}
