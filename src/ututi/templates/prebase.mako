@@ -81,10 +81,8 @@ ${_('Student information online')}
 <div id="header">
   <div id="header-container">
     <div id="logo">
-      <div id="logo">
         <a href="#" ><img src="img/Ututi_logo_big.png" alt="Ututi logo" title="Ututi logo"/></a>
-        <h1>Bringing students and teachers together</h1>
-      </div>
+        <span id="slogan">Bringing students and teachers together</span>
       <ul id="nav">
         <li class="header-links"><a href="#">What is Ututi?</a></li>
         <li class="header-links"><a href="#">Contact us</a></li>

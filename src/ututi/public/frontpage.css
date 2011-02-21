@@ -3,6 +3,7 @@ body {
     margin: 0px;
     background: #f2f2f2;
 }
+
 h1 {
     font-size:18px;
     font-weight: 700;
@@ -11,15 +12,24 @@ h1 {
     width: 100%;
     text-align: center;
 }
+
 img {
     border: 0;
 }
+
 a {
     text-decoration: none;
     color: #3d617a;
 }
+
 a:hover {
     color: #6099cc;
+}
+
+p{
+    text-align: left;
+    color: #666;
+    font-size: 13px;
 }
 
 
@@ -50,7 +60,7 @@ a:hover {
     border: 0px;
     display: inline;
 }
-#logo h1{
+#slogan {
     color: #ff9900;
     font-size: 16px;
     display: inline;
@@ -66,20 +76,20 @@ a:hover {
     display: inline;
 }
 .header-links {
-	color: #fff;
-	font-size: 13px;
-	display: inline;
-	margin: 0px 10px;
+    color: #fff;
+    font-size: 13px;
+    display: inline;
+    margin: 0px 10px;
 }
 #header-links-bold {
-	font-weight: bold;
+    font-weight: bold;
 }
 #nav a {
- 	text-decoration: none;
- 	color: #fff;
+    text-decoration: none;
+    color: #fff;
 }
 #nav a:hover {
-	color: #ff9900;	
+    color: #ff9900;
 }
 
 /* MAIN AREA */
@@ -112,16 +122,16 @@ a:hover {
     padding-top: 20px;
     padding-bottom: 10px;
 }
-#register{
+#sign-up-form {
     margin: 5px auto;
     border: 0px;
     width: 620px;
 }
-#register-fieldset{
+#register-fieldset {
     border: 0px;
     padding: 5px 0 12px 0;
 }
-.email-input{
+.email-input {
     border: 1px solid #999 !important;
     height: 40px !important;
     width: 370px !important;
@@ -132,19 +142,19 @@ a:hover {
     display: inline;
     float: left;
 }
-.sign-up{
-	float: left;
-	height: 42px;
-	width: auto;
-	color: #ffffff;
-	background-color: #ff9900; /* Orange */
-	border: 1px solid #666666;
-	font-size: 20px;
-	font-weight: bold;
-	padding: 0 20px;
-	margin: 0 0 0 20px;
-	letter-spacing: 1px;
-	}
+.submit {
+    float: left;
+    height: 42px;
+    width: auto;
+    color: #ffffff;
+    background-color: #ff9900; /* Orange */
+    border: 1px solid #666666;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 0 20px;
+    margin: 0 0 0 20px !important;
+    letter-spacing: 1px;
+}
 .notice { 
 	text-align: left;
 	background-image: url("img/important.png");
@@ -156,12 +166,7 @@ a:hover {
 	margin-bottom: 20px;
 	font-size: 13px;
 }
-p{ 
-	text-align: left;
-	color: #666;
-	font-size: 13px;
-	}
-/*
+
 .text {
 	margin-top: 0px;
 	float:right;
