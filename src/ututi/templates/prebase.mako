@@ -78,15 +78,18 @@ ${_('Student information online')}
 </%def>
 
 <%def name="anonymous_header()">
+<%
+   nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '')
+%>
 <div id="header">
   <div id="header-container">
     <div id="logo">
-        <a href="#" ><img src="img/Ututi_logo_big.png" alt="Ututi logo" title="Ututi logo"/></a>
-        <span id="slogan">Bringing students and teachers together</span>
+      <a href="${url('/')}"><img src="img/Ututi_logo_big.png" alt="Ututi logo" title="Ututi logo"/></a>
+      <span id="slogan">${_("Bringing students and teachers together")}</span>
       <ul id="nav">
         <li class="header-links"><a href="#">What is Ututi?</a></li>
         <li class="header-links"><a href="#">Contact us</a></li>
-        <li id="header-links-bold" class="header-links"><a href="#">Log In</a></li>
+        <li id="login-link" class="header-links"><a ${nofollow} href="${url(controller='home', action='login')}">${_('Log In')}</a></li>
       </ul>
     </div>
   </div>
