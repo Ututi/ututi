@@ -199,6 +199,8 @@ create table regions (id bigserial not null,
        country varchar(2) not null,
        primary key (id));;
 
+CREATE TYPE university_member_policy AS ENUM ('RESTRICT_EMAIL', 'ALLOW_INVITES', 'PUBLIC');
+
 /* A table for tags (location and simple tags) */
 create table tags (id bigserial not null,
        title varchar(250) not null,
@@ -208,6 +210,8 @@ create table tags (id bigserial not null,
        tag_type varchar(10) default null,
        site_url varchar(200) default null,
        confirmed bool default true,
+       member_policy university_member_policy default 'RESTRICT_EMAIL',
+       email_domains text default null, /* comma-separated list of allowed email domains */
        region_id int8 default null references regions(id) on delete restrict,
        parent_id int8 default null references tags(id) on delete cascade,
        country_id int8 default null references countries(id) on delete cascade,
@@ -1571,8 +1575,6 @@ create table teacher_groups (
        email varchar(320) not null,
        group_id int8 default null references groups(id) on delete cascade,
        primary key (id));;
-
-CREATE TYPE university_member_policy AS ENUM ('RESTRICT_EMAIL', 'ALLOW_INVITES', 'PUBLIC');
 
 /* a table for storing user registration data */
 CREATE TABLE user_registrations (

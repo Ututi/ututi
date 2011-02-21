@@ -337,7 +337,7 @@ def select_radio(name, title, options, selected=[], help_text=None, **kwargs):
                     id='%s-field' % name,
                     c=[HTML.label(for_=name, c=[
                     HTML.span(class_='labelText', c=[title]),
-                    HTML.span(class_='textField', c=radios)]),
+                    HTML.span(class_='radioField', c=radios)]),
                        HTML.literal('<form:error name="%s" />' % name),
                        expl])
 

@@ -5,11 +5,25 @@
 <%def name="css()">
   ${parent.css()}
   form .textField input,
-  form span.helpText {
+  form span.helpText,
+  form select {
     width: 300px;
   }
   form button.submit {
     margin-top: 35px;
+  }
+  .allowed-domains-field {
+    margin: 2px 0px;
+  }
+  form .allowed-domains-field input {
+    width: 150px;
+  }
+  #add-more-link { /* hack placement of add-more link */
+    display: block;
+    margin-left: 175px; /* width of input field */
+    margin-top:  -20px; /* height of input field */
+    font-size: 11px;
+    outline: none;
   }
 </%def>
 
@@ -30,13 +44,28 @@
 
   ${h.select_radio('member_policy', _("Accessibility:"), c.policies)}
 
-  <label for="allowed-emails">
+  <label for="allowed-domains">
     <span class="labelText">${_("Allowed emails:")}</span>
-    <input type="text" name="allowed_emails" id="allowed-emails" />
-    <input type="text" name="allowed_emails" id="allowed-emails" />
-    <input type="text" name="allowed_emails" id="allowed-emails" />
-    <form:error name="allowed_emails" /> <!-- formencode errors container -->
+    @${c.user_domain} <br />
+    <input type="hidden" name="allowed_domains-1" value="${c.user_domain}" />
+    %for i in range(2, c.max_allowed_domains + 1):
+      <div class="allowed-domains-field ${i == 2 or 'hidable'}">
+        @<input type="text" name="allowed_domains-${i}" />
+      </div>
+    %endfor
+    <a href="#add-more" id="add-more-link">${_("Add more")}</a>
   </label>
+
+  <script type="text/javascript">
+    $('.allowed-domains-field.hidable input').each(function() {
+        if ($(this).val().length == 0)
+            $(this).closest('.allowed-domains-field').hide();
+    });
+    $('#add-more-link').click(function() {
+        $('.allowed-domains-field:hidden').first().show();
+        return false;
+    });
+  </script>
 
   ${h.input_submit(_("Next"))}
 </form>
