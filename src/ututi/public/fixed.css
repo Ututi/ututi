@@ -241,6 +241,7 @@ h1.page-title {
 
     form span.labelText,
     form span.inputField,
+    form span.radioField,
     form span.helpText {
         display: block;
     }
@@ -256,6 +257,15 @@ h1.page-title {
         color: #666;
         font-size: 11px;
         margin-top: 2px;
+    }
+
+    form span.radioField label {
+        display: block;
+        margin: 2px 0px;
+    }
+
+    form span.radioField label input {
+        margin-right: 2px;
     }
 
     form div.error-container {
@@ -277,7 +287,8 @@ h1.page-title {
     .textField input,
     form input[type='text'],
     form input[type='password'],
-    form textarea {
+    form textarea,
+    form select {
         width: 200px;
         font-size: 11px;
         height: 20px;

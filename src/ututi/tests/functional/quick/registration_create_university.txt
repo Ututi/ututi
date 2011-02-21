@@ -126,7 +126,7 @@ University title, country, web site URL, logo and member policy are required fie
     >>> form = browser.getForm('university-create-form')
     >>> form.getControl('Full University title:').value = 'Example University'
     >>> form.getControl('Country:').displayValue = ['Lithuania']
-    >>> form.getControl('University website:').value = 'http://www.example.com'
+    >>> form.getControl('University website:').value = 'www.example.com'
     >>> form.getControl('University logo:').add_file(*make_file('test_logo.png'))
     >>> form.getControl(name='member_policy').value = ['RESTRICT_EMAIL']
 

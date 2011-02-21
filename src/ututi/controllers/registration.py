@@ -1,14 +1,13 @@
 import cgi
 import facebook
 
-from formencode import Schema, htmlfill, validators
+from formencode import Schema, htmlfill, validators, variabledecode
 from formencode.foreach import ForEach
 from formencode.compound import Pipe
 
 from pylons import tmpl_context as c, url, session, request, config
 from pylons.controllers.util import redirect, abort
 from pylons.i18n import ungettext, _
-
 from ututi.lib.base import BaseController, render
 from ututi.lib.image import serve_logo
 from ututi.lib.validators import validate, TranslatedEmailValidator, \
@@ -75,13 +74,15 @@ class EmailApproveForm(Schema):
 
 class UniversityCreateForm(Schema):
 
+    pre_validators = [variabledecode.NestedVariables()]
+
     msg = {'empty': _(u"Please enter University title.")}
     title = validators.String(not_empty=True, strip=True, messages=msg)
 
     country = CountryValidator(not_empty=True)
 
     msg = {'empty': _(u"Please enter University web site.")}
-    site_url = validators.String(not_empty=True, strip=True, messages=msg)
+    site_url = validators.URL(not_empty=True, messages=msg)
 
     msg = { 'missing': _(u"Please select logo."),
             'empty': _(u"Please select logo."),
@@ -94,7 +95,7 @@ class UniversityCreateForm(Schema):
            'notIn': _(u"Invalid policy selected.") }
     member_policy = validators.OneOf(dict(member_policies).keys(), messages=msg)
 
-    allowed_emails = ForEach(validators.String())
+    allowed_domains = ForEach(validators.String(strip=True))
 
 
 class PersonalInfoForm(Schema):
@@ -412,6 +413,8 @@ class RegistrationController(BaseController, FederationMixin):
         global member_policies
         c.policies = member_policies
         c.active_step = 'university_info'
+        c.max_allowed_domains = 50
+        c.user_domain = c.registration.email.split('@')[1]
         return render('registration/university_create.mako')
 
     @registration_action
@@ -419,12 +422,17 @@ class RegistrationController(BaseController, FederationMixin):
     def university_create(self, registration):
         if not hasattr(self, 'form_result'):
             # TODO: default site url, default country?
-            return htmlfill.render(self._university_create_form())
+            defaults = {
+                'allowed_domains-1': c.registration.email.split('@')[1],
+            }
+            return htmlfill.render(self._university_create_form(), defaults=defaults)
 
         registration.university_title = self.form_result['title']
         registration.university_site_url = self.form_result['site_url']
         registration.university_logo = self.form_result['logo'].file.read()
         registration.university_member_policy = self.form_result['member_policy']
+        allowed_domains = filter(bool, self.form_result['allowed_domains'])
+        registration.university_allowed_domains = ','.join(allowed_domains)
         meta.Session.commit()
         redirect(registration.url(action='personal_info'))
 
