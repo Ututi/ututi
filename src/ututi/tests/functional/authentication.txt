@@ -10,9 +10,8 @@ Visiting a profile-related page should not crash if the user is not logged in.
 
 -------------------------
 
-    >>> browser = Browser()
-    >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value = "admin@uni.ututi.com"
+    >>> form = browser.getForm('login-form')
+    >>> form.getControl('Your email address').value = "admin@uni.ututi.com"
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
 
@@ -21,77 +20,30 @@ Note that user is being redirected to news feed after.
     >>> browser.url
     'http://localhost/home/feed'
 
-    >>> browser.getLink('log out').click()
+    >>> browser.getLink('Log out').click()
     >>> browser.url
     'http://localhost/'
 
 
 -------------------------
 
-    >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value = "admin@uni.ututi.com"
+    >>> browser.open('http://localhost/school/uni/login')
+    >>> form = browser.getForm('login-form')
+    >>> form.getControl('Your email address').value = "admin@uni.ututi.com"
     >>> form.getControl('Password').value = "asd"
     >>> form.getControl('Login').click()
 
     >>> browser.url
-    'http://localhost/login'
+    'http://localhost/school/uni/login'
 
-    >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value
+    >>> form = browser.getForm('login-form')
+    >>> form.getControl('Your email address').value
     'admin@uni.ututi.com'
 
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
 
-    >>> browser.getLink('log out').click()
-
--------------------------
-
-    >>> browser.open('http://localhost/group/moderators/members')
-    >>> browser.url
-    'http://localhost/login?came_from=http%3A%2F%2Flocalhost%2Fgroup%2Fmoderators%2Fmembers'
-
-    >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value = "admin@uni.ututi.com"
-    >>> form.getControl('Password').value = "asdasd"
-    >>> form.getControl('Login').click()
-
-    >>> browser.getLink('log out').click()
-
-
--------------------------
-
-    >>> browser.open('http://localhost/search')
-    >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value = "admin@uni.ututi.com"
-    >>> form.getControl('Password').value = "asdasd"
-    >>> form.getControl('Login').click()
-
-    >>> browser.url
-    'http://localhost/profile/browse'
-
-    >>> browser.getLink('log out').click()
-
--------------------------
-
-    >>> browser.open('http://localhost/search')
-    >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value = "admin@uni.ututi.com"
-    >>> form.getControl('Password').value = "asd"
-    >>> form.getControl('Login').click()
-
-    # XXX which one do we want?
-    >>> browser.url
-    'http://localhost/login'
-
-    >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Password').value = "asdasd"
-    >>> form.getControl('Login').click()
-
-    >>> browser.url
-    'http://localhost/profile/browse'
-
-    >>> browser.getLink('log out').click()
+    >>> browser.getLink('Log out').click()
 
 -------------------------
 
@@ -123,20 +75,21 @@ But not larger ones:
     >>> browser.url
     'http://localhost/login?came_from=%2Fsubject%2Fvu%2Fmat_analize%2Ffiles%3Fserve_file%3D5&context=text2.txt'
 
-    >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value = "user@ututi.lt"
+    >>> form = browser.getForm('login-form')
+    >>> form.getControl('Your email address').value = "user@ututi.lt"
     >>> form.getControl('Password').value = "password"
     >>> form.getControl('Login').click()
 
     >>> browser.url
     'http://localhost/subject/vu/mat_analize/files?serve_file=5'
 
-    >>> browser.getLink('log out').click()
+    >>> browser.getLink('Log out').click()
 
 -------------------------
 
-    >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value = "user@ututi.lt"
+    >>> browser.open('http://localhost/school/uni/login')
+    >>> form = browser.getForm('login-form')
+    >>> form.getControl('Your email address').value = "user@ututi.lt"
     >>> form.getControl('Password').value = "password"
     >>> form.getControl('Login').click()
 
@@ -150,8 +103,9 @@ But not larger ones:
 Checking the 'remember me' checkbox should create an unlimited session:
 
     >>> browser = Browser()
-    >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value = "admin@uni.ututi.com"
+    >>> browser.open('http://localhost/school/uni/login')
+    >>> form = browser.getForm('login-form')
+    >>> form.getControl('Your email address').value = "admin@uni.ututi.com"
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl(name='remember').value = True
     >>> form.getControl('Login').click()
