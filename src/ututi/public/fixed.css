@@ -1210,20 +1210,20 @@ ul.feature-list {
 /*** UTUTI.COM CSS ***/
 
 /* Login form */
-#login_form label {
+#login-form label {
     margin-top: 10px;
     font-size: 13px;
     font-weight: bold;
 }
 
 
-#login_form label .labelText {
+#login-form label .labelText {
     display: block;
     font-size: 13px;
     font-weight: bold;
 }
 
-#login_form label .textField {
+#login-form label .textField {
     display: inline-block;
     padding-right: 5px;
     position: relative;

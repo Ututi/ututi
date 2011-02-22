@@ -2,7 +2,7 @@
 
 <h1>Login</h1>
 
-<form id="login_form" method="post" action="${url.current()}">
+<form id="login-form" method="post" action="${url.current()}">
     %if c.came_from:
     <input type="hidden" name="came_from" value="${c.came_from}" />
     %endif
