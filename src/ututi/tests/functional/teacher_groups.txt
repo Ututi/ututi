@@ -115,6 +115,7 @@ A message to the ututi forum group - members of the group receive email messages
     >>> mail_queue.pop().recipients
     ['admin@uni.ututi.com']
 
+    >>> browser2.getLink('Home').click()
     >>> browser2.getLink('Testing group').click()
     >>> browser2.printQuery('//div[@class="event-heading"]//text()')
     Teacher Benas has sent a message to the group Testing group 0 seconds ago

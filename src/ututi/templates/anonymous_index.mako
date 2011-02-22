@@ -1,4 +1,4 @@
-<%inherit file="/ubase-nomenu.mako" />
+<%inherit file="/ubase.mako" />
 
 <%def name="location_tag(uni)">
 <div class="university_block">

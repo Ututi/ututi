@@ -1,4 +1,4 @@
-<%inherit file="/base.mako" />
+<%inherit file="/ubase.mako" />
 
 <h1>Login</h1>
 

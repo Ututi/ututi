@@ -46,7 +46,6 @@
     $(document).ready(function(){$(".textField .overlay").labelOver('over');});
   </script>
 </form>
-${self.anonymous_menu()}
 </%def>
 
 <div class="tip">
