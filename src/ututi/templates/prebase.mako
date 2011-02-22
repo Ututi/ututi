@@ -89,7 +89,7 @@ ${_('Student information online')}
       <ul id="nav">
         <li class="header-links"><a href="#">What is Ututi?</a></li>
         <li class="header-links"><a href="#">Contact us</a></li>
-        <li id="login-link" class="header-links"><a ${nofollow} href="${url(controller='home', action='login')}">${_('Log In')}</a></li>
+        <li id="login-link" class="header-links"><a ${nofollow} href="${url(controller='home', action='login')}">${_('Log in')}</a></li>
       </ul>
     </div>
   </div>
