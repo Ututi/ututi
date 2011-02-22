@@ -11,14 +11,16 @@ And this is the login form:
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
 
+    >>> browser.open('http://localhost/')
+
 The personal information portlet shows my name:
 
-    >>> browser.printQuery('id("personal-data")//span[@class="fullname"]/text()')
-    Administrator of the university
+    >>> browser.printCssQuery('.personal-data h2', strip=True)
+    <h2>Administrator of the university</h2>
 
 As we have successfully logged in let's logout and make some typos:
 
-    >>> browser.getLink('log out').click()
+    >>> browser.getLink('Log out').click()
     >>> browser.url
     'http://localhost/'
 
