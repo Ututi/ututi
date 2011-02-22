@@ -121,8 +121,8 @@ ${_('Student information online')}
       </form>
       <ul id="user-menu">
         <li class="expandable profile-nav">
-          <span class="fullname">${c.user.fullname}</span>
-          <div>
+          <div class="fullname">${c.user.fullname}</div>
+          <div class="expandable-items">
             <ul>
               <li class="action"><a href="${url(controller='profile', action='edit')}">${_('Settings')}</a></li>
               <li class="action"><a href="${url(controller='user', action='index', id=c.user.id)}">${_('Public profile')}</a></li>

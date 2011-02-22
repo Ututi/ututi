@@ -1234,12 +1234,14 @@ ul.feature-list {
 
 
 /* Header styling */
+
 #header {
     background: #333;
     height: 40px;
     width:100%;
     min-width: 960px;
 }
+
 #header #header-container {
     height: 30px;
     width: 960px;
@@ -1338,38 +1340,47 @@ ul#user-menu {
     color: #ffffff;
     padding-right: 10px;
 }
-ul#user-menu span.fullname {
-    line-height: 20px;
-}
+
 ul#user-menu li.expandable {
     position:relative;
     margin-right:12px;
 }
-ul#user-menu li.expandable span.fullname {
-    padding: 3px 20px 3px 5px;
+
+ul#user-menu li.expandable div.fullname {
+    padding: 0px 20px 3px 5px;
     background-image: url('img/icons/header_arrow.png');
     background-repeat: no-repeat;
     background-position: right center;
     cursor:pointer;
+    line-height: 20px;
+    height: 20px !important; /* Don't screw up menu if username is too long */
+    overflow: hidden;
 }
-ul#user-menu li.expanded span.fullname {
+
+ul#user-menu li.expanded div.fullname {
     background-color: #f2f2f2;
     background-image: url('img/icons/header_arrow_active.png');
     color: #6d6d6d;
 }
-li.expandable div {
+
+li.expandable div.expandable-items {
     background-color: #f2f2f2;
-    display:none;
-    position:absolute;
+    display: none;
+    position: absolute;
     top:20px; right: -1px;
     width: 100%;
     border: 1px solid #6d6d6d;
     border-top: none;
 }
-li.expanded div{ display:block; }
+
+li.expanded div.expandable-items {
+    display: block;
+}
+
 li.expanded ul {
     list-style: none;
 }
+
 li.expanded li {
     float:none !important;
     border:0;
@@ -1377,6 +1388,7 @@ li.expanded li {
     line-height: 20px;
     width: 120px;
 }
+
 li.expanded li span,
 li.expanded li a {
     padding:6px 21px 6px 6px;
