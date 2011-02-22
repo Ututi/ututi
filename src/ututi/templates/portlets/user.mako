@@ -14,6 +14,16 @@
         %endif
       </a>
     </li>
+    % if c.user.memberships:
+    <li>
+      ${_("My groups:")}
+      <ul>
+        % for group in c.user.groups:
+        <li> ${h.object_link(group)} </li>
+        % endfor
+      </ul>
+    </li>
+    %endif
   </ul>
 </%def>
 

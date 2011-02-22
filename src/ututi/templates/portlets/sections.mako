@@ -40,6 +40,8 @@
 
 <%def name="group_sidebar(exclude=[])">
 <div id="sidebar">
+  ${user_information_portlet()}
+  ${user_menu_portlet()}
   %if not 'info' in exclude:
     ${group_info_portlet()}
   %endif
