@@ -2,6 +2,9 @@
 <%namespace file="/widgets/vote.mako" import="voting_bar, voting_widget" />
 <%namespace file="/portlets/base.mako" import="uportlet" name="p"/>
 
+<%def name="flash_messages()">
+</%def>
+
 <%def name="css()">
 .feature_block {
   padding-left: 70px;
