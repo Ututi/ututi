@@ -12,7 +12,7 @@
 ##  <a class="back-link" href="${url(controller='profile', action='home')}">${_('Back to profile')}</a>
 ##</div>
 
-<div class="portlet portletSmall portletGroupFiles">
+<div class="portlet portletSmall portletGroupFiles" id="message-container">
   <div class="ctl"></div>
   <div class="ctr"></div>
   <div class="cbl"></div>
