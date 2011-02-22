@@ -39,7 +39,7 @@
     <label class="textField"><span class="overlay">${_('Email')}:</span><input type="text" name="login" value="${request.params.get('login')}"/><span class="edge"></span></label>
     <label class="textField"><span class="overlay">${_('Password')}</span><input type="password" name="password" /><span class="edge"></span></label>
     <button class="btn" type="submit" value="${_('Login')}"><span>${_('Login')}</span></button><br />
-    <a href="${url(controller='home', action='pswrecovery')}">${_('Forgotten password?')}</a>
+    <a href="${url(controller='home', action='pswrecovery')}">${_('Forgot password?')}</a>
     <label id="rememberMe" for="remember"><input id="remember" name="remember" value="true" type="checkbox" class="checkbox"/> ${_('Remember me')}</label>
   </fieldset>
   <script type="text/javascript">

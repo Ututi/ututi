@@ -1284,7 +1284,7 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-msgid "Forgotten password?"
+msgid "Forgot password?"
 msgstr ""
 
 msgid "First time here?"

@@ -14,7 +14,7 @@
 
     <label id="rememberMe" for="remember"><input id="remember" name="remember" value="true" type="checkbox" class="checkbox"/> ${_('Keep me logged in on this computer')}</label>
     <div>
-      <a href="${url(controller='home', action='pswrecovery')}">${_('Forgotten password?')}</a>
+      <a href="${url(controller='home', action='pswrecovery')}">${_('Forgot password?')}</a>
     </div>
 
     <div>
