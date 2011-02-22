@@ -1644,6 +1644,10 @@ class LocationTag(Tag):
         return list(reversed(path))
 
     @property
+    def url_path(self):
+        return '/'.join(self.path)
+
+    @property
     def root(self, full=False):
         """Return root location of this location tag.
         If tag has no parent, will return this tag itself."""
@@ -1735,7 +1739,7 @@ class LocationTag(Tag):
     def url(self, controller='structureview', action='index', **kwargs):
         return url(controller=controller,
                    action=action,
-                   path='/'.join(self.path),
+                   path=self.url_path,
                    **kwargs)
 
     def count(self, obj=Subject):
