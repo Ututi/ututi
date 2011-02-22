@@ -13,7 +13,7 @@
 
 <div>${_('Enter the user name and password for your existing Ututi account.')}</div>
 
-<form id="join_login_form" method="post" action="${url(controller='home', action='associate_account')}" class="fullForm">
+<form id="login-form" method="post" action="${url(controller='home', action='associate_account')}" class="fullForm">
     %if c.came_from:
       <input type="hidden" name="came_from" value="${c.came_from}" />
     %endif

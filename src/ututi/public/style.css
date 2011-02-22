@@ -3113,12 +3113,12 @@ table#login-screen {
     margin-bottom: 1em;
 }
 
-#login-screen #join_login_form, #login-screen #join_registration_form {
+#login-screen #login-form, #login-screen #join_registration_form {
     padding-left: 2em;
     padding-top: 2em;
 }
 
-#login-screen #join_login_form {
+#login-screen #login-form {
     padding-bottom: 1em;
 }
 
