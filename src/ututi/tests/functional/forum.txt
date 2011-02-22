@@ -2,7 +2,7 @@ Basic forum test
 ================
 
     >>> browser = Browser.logIn()
-    >>> browser.getLink('Community').click()
+    >>> browser.open('http://localhost/community')
 
     >>> browser.getControl('New topic').click()
     >>> browser.getControl('Subject').value = 'Hello!'
@@ -48,7 +48,7 @@ The bugs forum works just fine too:
 
     >>> browser.open('http://localhost/bugs')
 
-    >>> browser.getControl('New topic', index=0).click()
+    >>> browser.getControl('New topic', index=1).click()
     >>> browser.url
     'http://localhost/bugs/new_thread'
 
