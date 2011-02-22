@@ -106,7 +106,7 @@ The pager should be there:
 
 Test paging in community forum:
     >>> create_community_threads()
-    >>> browser.getLink('Community').click()
+    >>> browser.open('http://localhost/community')
     >>> browser.printCssQuery('#pager', strip=True)
     <div>
       <span>1</span>
