@@ -1,5 +1,58 @@
 <%inherit file="/ubase-sidebar.mako" />
 <%namespace file="/widgets/vote.mako" import="voting_bar, voting_widget" />
+<%namespace file="/portlets/base.mako" import="uportlet" name="p"/>
+
+<%def name="css()">
+.feature_block {
+  padding-left: 70px;
+  background-position: left top;
+  background-repeat: no-repeat;
+  color: #333;
+  margin-top: 10px;
+}
+</%def>
+
+<%def name="portlets()">
+  <%p:uportlet id="share_portlet">
+    <%def name="header()">
+    ${_('Recommend to a friend')}
+    </%def>
+    <iframe src="http://www.facebook.com/plugins/like.php?href=www.ututi.lt%2Fvoting&amp;layout=box_count&amp;show_faces=false&amp;width=120&amp;action=recommend&amp;colorscheme=light&amp;height=65" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:120px; height:65px;" allowTransparency="true"></iframe>
+    %if c.user and c.user.location is not None:
+    <div style="margin-top: 10px; border-top: 1px solid #ddd; padding-top: 5px;">
+      <%
+         count = 500 - c.user.location.vote_count
+      %>
+      ${ungettext('Your university needs <strong>%(count)d more vote</strong>.', 'Your university needs <strong>%(count)d more votes.</strong>', count) % dict(count=count)|n}
+    </div>
+    %endif
+  </%p:uportlet>
+  <%p:uportlet id="features_portlet" portlet_class="orange">
+    <%def name="header()">
+    ${_('About the new Ututi')}
+    </%def>
+    <div class="feature_block" style="background-image: url('/images/details/icon_feature_network.png');">
+      <strong>${_('Social network for Your university')}</strong>
+      <p>
+        ${_('Communicate in the virtual space of Your university, join groups, exchange information.')}
+      </p>
+    </div>
+    <div class="feature_block" style="background-image: url('/images/details/icon_feature_teacher.png');">
+      <strong>${_('Teacher profiles')}</strong>
+      <p>
+        ${_('Teachers will have their profiles on Ututi, will be able to upload course materials and '
+            'easily communicate with their students.')}
+      </p>
+    </div>
+    <div class="feature_block" style="background-image: url('/images/details/icon_feature_communication.png');">
+      <strong>${_('Discussions')}</strong>
+      <p>
+        ${_('Discuss not only within groups, but also comment on subjects and uploaded files.')}
+      </p>
+    </div>
+    <div class="right_arrow"><a href="${url(controller='home', action='new_ututi')}">${_('find out more')}</a></div>
+  </%p:uportlet>
+</%def>
 
 <h2>${_('Vote for your university!')}</h2>
 <br/>
@@ -28,6 +81,10 @@ ${voting_widget(votes)}
 </div>
 %endif
 
+<h2>${_('Voting results')}</h2>
+
+<%self:rounded_block>
+<div style="padding-left: 20px;">
 %for uni in c.universities:
 <div class="university_block" style="width:270px; margin: 10px 0;">
   %if uni['has_logo']:
@@ -48,4 +105,6 @@ ${voting_widget(votes)}
   </div>
 </div>
 %endfor
-
+<br style="clear: left;"/>
+</div>
+</%self:rounded_block>
