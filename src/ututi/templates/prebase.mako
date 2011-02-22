@@ -252,7 +252,7 @@ ${_('Student information online')}
       ${self.title()} - ${_('UTUTI')}
     </title>
   </head>
-  <body>
+  <body class="${self.body_class()}">
     %if c.testing:
     <div style="width: 200px; position: absolute; top: 0; left: 0; z-index: 1000; background: #f7ff00; padding: 5px;" id="test_warning">
       ${_('This is a testing version - this is just a copy of the information! Changes you make will not be persisted!')}
