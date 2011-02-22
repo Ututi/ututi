@@ -88,11 +88,11 @@ disappear:
     >>> emails = 'user@ututi.lt'
     >>> browser.getControl(name='emails').value = emails
     >>> browser.getControl('Invite').click()
-    >>> browser.getLink('Test group').click()
 
 When we go back to what's new, we only see the watch more subjects
 box:
 
+    >>> browser.getLink('News feed').click()
     >>> browser.printCssQuery("#invite_members_block", strip=True)
 
     >>> browser.printCssQuery("#watch_subjects_block", strip=True)
