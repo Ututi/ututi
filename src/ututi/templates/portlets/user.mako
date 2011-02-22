@@ -1,6 +1,22 @@
 <%inherit file="/portlets/base.mako"/>
 <%namespace file="/sections/content_snippets.mako" import="tooltip, item_location" />
 
+<%def name="user_menu_portlet()">
+  <ul id="user-sidebar-menu">
+    <li>
+      <% unread_messages = c.user.unread_messages() %>
+      <a id="inbox-link" href="${url(controller='messages', action='index')}">
+        %if unread_messages:
+         <strong>${ungettext("Messages (%(count)s new)", "Messages (%(count)s new)",
+                             unread_messages) % dict(count=unread_messages)}</strong>
+        %else:
+           ${_("Messages")}
+        %endif
+      </a>
+    </li>
+  </ul>
+</%def>
+
 <%def name="user_subjects_portlet(user=None)">
   <%
      if user is None:
