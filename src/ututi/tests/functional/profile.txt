@@ -15,8 +15,8 @@ Now we'll try editing our profile information. First we need to log in.
 
     >>> browser = Browser.logIn()
 
-    >>> browser.printQuery("id('personal-data')//span[@class='fullname']/text()")
-    Adminas Adminovix
+    >>> browser.printCssQuery('.personal-data h2', strip=True)
+    <h2>Adminas Adminovix</h2>
 
 The user should be able to change his email:
 
@@ -57,8 +57,8 @@ We'll go to our profile edit page. And change our name as well as upload a logo.
     >>> browser.getControl('Picture').add_file(*make_file('test_logo.png', 'test_logo.Png'))
     >>> browser.getControl('Save').click()
 
-    >>> browser.printQuery("id('personal-data')//span[@class='fullname']/text()")
-    Adminas Adminas
+    >>> browser.printCssQuery('.personal-data h2', strip=True)
+    <h2>Adminas Adminas</h2>
 
 Let's check out the logo.
 
