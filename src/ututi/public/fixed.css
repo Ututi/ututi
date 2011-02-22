@@ -1251,10 +1251,9 @@ ul.feature-list {
 #header #header-container #logo {
     display: inline;
     float: left;
-    width: 180px;
+    width: 175px;
     text-align: left;
-    margin-top: 0px;
-    padding-bottom: 3px;
+    padding: 0px 0px 3px 5px;
     border: 0px;
 }
 
