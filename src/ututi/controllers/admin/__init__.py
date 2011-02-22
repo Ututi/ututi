@@ -626,6 +626,10 @@ class AdminController(BaseController, UniversityExportMixin):
         return render('sections/example_widgets.mako')
 
     @ActionProtector("root")
+    def example_layouts(self):
+        return render('sections/example_layouts.mako')
+
+    @ActionProtector("root")
     def languages(self):
         c.languages = meta.Session.query(Language).order_by(Language.title.asc()).all()
         return render('admin/languages.mako')
