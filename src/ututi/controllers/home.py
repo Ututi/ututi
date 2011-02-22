@@ -21,8 +21,7 @@ from sqlalchemy.sql.expression import desc
 
 from ututi.lib.base import BaseController, render, u_cache
 import ututi.lib.helpers as h
-from ututi.lib import gg
-from ututi.lib.emails import email_confirmation_request, email_password_reset
+from ututi.lib.emails import email_password_reset
 from ututi.lib.messaging import EmailMessage
 from ututi.lib.security import sign_out_user
 from ututi.lib.security import ActionProtector, sign_in_user, bot_protect
@@ -291,93 +290,6 @@ class HomeController(UniversityListMixin, FederationMixin):
     def logout(self):
         sign_out_user()
         redirect(url(controller='home', action='index'))
-
-    def _register_user(self, form, send_confirmation=True):
-        fullname = self.form_result['fullname']
-        password = self.form_result['new_password']
-        email = self.form_result['email'].lower()
-
-        # TODO: in real registration flow, university
-        # is specified explicitly
-        location = LocationTag.get('uni')
-        log.warn('Using default U-niversity for user registration')
-
-        user = User.get(email, location)
-        if user:
-            # A user with this email exists, just sign them in.
-            sign_in_user(user)
-            return (user, email)
-
-        gadugadu_uin = self.form_result['gadugadu']
-
-        user = User(fullname=fullname,
-                    username=email,
-                    location=location,
-                    password=password)
-        user.emails = [Email(email)]
-        user.accepted_terms = datetime.utcnow()
-        #all newly registered users are marked when they agree to the terms of use
-
-        meta.Session.add(user)
-        meta.Session.commit()
-        if send_confirmation:
-            email_confirmation_request(user, email)
-        else:
-            user.emails[0].confirmed = True
-            meta.Session.commit()
-
-        if gadugadu_uin:
-            user.gadugadu_uin = gadugadu_uin
-            gg.confirmation_request(user)
-            meta.Session.commit()
-
-        sign_in_user(user)
-        return (user, email)
-
-    @validate(schema=RegistrationForm(), form='register')
-    def register(self, hash=None):
-        c.hash = hash
-        c.show_registration = True
-        if hasattr(self, 'form_result'):
-            # Form validation was successful.
-            if hash is not None:
-                invitation = PendingInvitation.get(hash)
-                if invitation is not None and invitation.email.lower() == self.form_result['email'].lower():
-                    user, email = self._register_user(self.form_result, False)
-                    invitation.group.add_member(user)
-                    meta.Session.delete(invitation)
-                    meta.Session.commit()
-                    redirect(url(controller='group', action='home', id=invitation.group.group_id))
-                elif invitation is None:
-                    c.header = _('Invalid invitation!')
-                    c.message = _('The invitation link you have followed was either already used or invalid.')
-                    return render('/login.mako')
-                else:
-                    c.email = invitation.email
-                    c.header = _('Invalid email!')
-                    c.message = _('You can only use the email this invitation was sent for to register.')
-                    return render('/login.mako')
-            else:
-                user, email = self._register_user(self.form_result)
-                redirect(str(request.POST.get('came_from',
-                                                 url(controller='profile',
-                                                     action='register_welcome'))))
-        else:
-            # Form validation failed.
-            if hash is not None:
-                invitation = PendingInvitation.get(hash)
-                if invitation is not None:
-                    c.email = invitation.email
-                    c.message_class = 'please-register'
-                    c.header = _('Please register!')
-                    c.message = _('Only registered users can become members of a group, please register first.')
-                else:
-                    c.header = _('Invalid invitation!')
-                    c.message = _('The invitation link you have followed was either already used or invalid.')
-                return render('/login.mako')
-
-            self._get_unis()
-            return render('/login.mako')
 
     def _pswrecovery_form(self):
         return render('home/recoveryform.mako')
