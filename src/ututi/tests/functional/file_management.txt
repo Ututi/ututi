@@ -171,7 +171,7 @@ Both folders should be gone:
 
     >>> browser = Browser.logIn()
     >>> browser.open('http://localhost/subject/vu/mat_analize/files')
-    >>> browser.printQuery('id("mainContent")//h4')
+    >>> browser.printQuery('id("main-content")//h4')
     <h4 class="">
       <span class="cont">
                 Buga Buga ...

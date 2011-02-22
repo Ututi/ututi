@@ -268,33 +268,31 @@ ${_('Student information online')}
     ${self.loggedin_header()}
     %endif
 
-    <div id="wrap">
-        ${next.body()}
-    </div>
+    ${next.body()}
 
     <div id="footer">
       <%
          nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '')
       %>
       <!-- TODO: Fix language widget -->
-	  <div class="left">
-        <form id="language-switch-form" action="${url('switch_language')}">
-          <input name="came_from" type="hidden" value="${request.url}" />
-          <select name="language">
-            <option value="en">${_('English')}</option>
-            <option value="lt">${_('Lithuanian')}</option>
-            <option value="pl">${_('Polish')}</option>
-          </select>
-          <input type="submit" value="${_('Select')}" />
-        </form>
-	  </div>
-	  <div class="middle">Copyright © <a href="${_('ututi_link')}">${_(u'UAB „UTUTI“')}</a></div>
-	  <div class="right">
-        <a ${nofollow} href="${url(controller='home', action='about')}">${_('About')}</a>  |  
-		<a ${nofollow} href="${url(controller='home', action='terms')}">${_('Terms')}</a>  |  
-		<a href="#" >Contact Us</a>  |  
-		<a href="#" id="feedback-link">${_('Feedback')}</a>
-	  </div>
+        <div class="left">
+          <form id="language-switch-form" action="${url('switch_language')}">
+            <input name="came_from" type="hidden" value="${request.url}" />
+            <select name="language">
+              <option value="en">${_('English')}</option>
+              <option value="lt">${_('Lithuanian')}</option>
+              <option value="pl">${_('Polish')}</option>
+            </select>
+            <input type="submit" value="${_('Select')}" />
+          </form>
+        </div>
+        <div class="middle">Copyright © <a href="${_('ututi_link')}">${_(u'UAB „UTUTI“')}</a></div>
+        <div class="right">
+          <a ${nofollow} href="${url(controller='home', action='about')}">${_('About')}</a>  |
+          <a ${nofollow} href="${url(controller='home', action='terms')}">${_('Terms')}</a>  |
+          <a href="#" >Contact Us</a>  |
+          <a href="#" id="feedback-link">${_('Feedback')}</a>
+        </div>
     </div>
     %if c.lang in ['lt', 'en', 'pl']:
     ${h.javascript_link('/javascript/uservoice.js')|n}

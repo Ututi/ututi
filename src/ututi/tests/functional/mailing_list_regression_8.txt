@@ -7,7 +7,7 @@ Regression test for utf-8 characters in email subject
 
     >>> send_test_message('dropbox.txt')
     >>> browser.open("http://localhost/group/moderators/mailinglist/thread/4")
-    >>> browser.printQuery("""id('mainContent')//div[@class="single-title"]//h2/text()""")
+    >>> browser.printQuery("""id('main-content')//div[@class="single-title"]//h2/text()""")
     Jacek Gurzi&#324;ski invited you to Dropbox
 
     >>> from ututi.lib.mailer import mail_queue

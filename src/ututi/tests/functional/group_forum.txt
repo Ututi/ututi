@@ -85,7 +85,7 @@ And all the way up to the category list:
 
     >>> browser.getLink('Back to category list').click()
 
-    >>> browser.printQuery('id("mainContent")//h2/a')
+    >>> browser.printQuery('id("main-content")//h2/a')
     <a href="/group/moderators/forum/..." class="grey">General</a>
     <a class="edit-category" href="/group/moderators/forum/.../edit">Edit category</a>
 

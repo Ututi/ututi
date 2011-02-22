@@ -1,5 +1,7 @@
 <%inherit file="/prebase.mako" />
 
-${self.flash_messages()}
-${next.body()}
+<div id="layout-wrap">
+  ${self.flash_messages()}
+  ${next.body()}
+</div>
 

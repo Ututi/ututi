@@ -1,4 +1,4 @@
-<%inherit file="/prebase.mako" />
+<%inherit file="/ubase-width.mako" />
 
 <div id="statsContent">
 
