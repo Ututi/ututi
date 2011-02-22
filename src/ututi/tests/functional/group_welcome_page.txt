@@ -34,8 +34,8 @@ In which we see a box suggesting us to invite more members:
       <div>
         <h2>Invite group members!</h2>
     <BLANKLINE>
-    It's easy - you just have to know their email addresses! You can
-    use the group mailing list together then!
+    <p>It's easy - you just have to know their email addresses! You can
+    use the group mailing list together then!</p>
     <BLANKLINE>
         </div>
       <div>
