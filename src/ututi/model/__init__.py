@@ -1740,6 +1740,7 @@ class LocationTag(Tag):
                 'parent_has_logo': self.parent is not None and self.parent.logo is not None,
                 'url': self.url(),
                 'title': self.title,
+                'vote_count': self.vote_count,
                 'n_subjects': self.count('subject'),
                 'n_groups': self.count('group'),
                 'n_files': self.count('file')}
@@ -1753,6 +1754,7 @@ class LocationTag(Tag):
         ids = [t.id for t in self.flatten]
         return meta.Session.query(User).filter(User.location_id.in_(ids)).count()
 
+    @property
     def vote_count(self):
         parent = self.top_parent()
         ids = [t.id for t in parent.flatten]

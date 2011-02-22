@@ -1084,26 +1084,41 @@ ul.feature-list {
         list-style-position: inside;
     }
 
-/* VOTING STAS PROGRESSBAR
+/* VOTING PROGRESSBAR
 */
 #transfer_voting {  }
-  #voting-progress {
+  .voting-progress {
     width: 335px;
     height: 60px;
     background-color: transparent;
     background-image: url("images/voting.png");
     background-repeat: no-repeat;
-    background-position: -335px center;
+    background-position: -335px bottom;
     float: left;
     position: relative;
   }
+    .voting-progress.voting-progress-small {
+      height: 15px;
+      width: 167px;
+      background-position: -224px bottom;
+      background-image: url("images/voting_small.png");
+    }
 
-    #voting-progress #voting-count {
+    .voting-progress .voting-count {
       color: #ff7800;
       font-size: 16px;
       font-weight: bold;
       position: absolute;
       top: 10px;
+    }
+
+    .voting-count-small {
+      color: #ff7800;
+      float: left;
+      height: 15px;
+      font-size: 12px;
+      font-weight: bold;
+      vertical-align: bottom;
     }
 
   #vote-form {
@@ -1126,3 +1141,6 @@ ul.feature-list {
     top: 5px;
     right: 10px;
   }
+
+/* VOTING STATS PAGE
+*/

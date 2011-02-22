@@ -13,5 +13,6 @@ ${d.dropdown('ex', 'The widget',
    ('aaa', 'aaa asdf adsf saf asdf a')])}
 
 %for votes in range(0, 501, 50):
-${v.voting_widget(votes)}
+<br style="clear: both;"/>
+${v.voting_bar(votes, large=True)}
 %endfor

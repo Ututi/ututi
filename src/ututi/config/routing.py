@@ -290,6 +290,7 @@ def make_map(config):
     map.connect('/recovery', controller='home', action='recovery')
     map.connect('/register/{hash}', controller='home', action='register')
     map.connect('/tour', controller='home', action='tour')
+    map.connect('/voting', controller='home', action='voting')
 
     map.connect('/got_mail', controller='receivemail', action='index')
     map.connect('/admin', controller='admin', action='index')
