@@ -595,3 +595,6 @@ class HomeController(UniversityListMixin, FederationMixin):
         c.universities = [u.info_dict() for u in sorted(universities, cmp=lambda x,y: cmp(y.vote_count, x.vote_count))]
 
         return render('/home/voting.mako')
+
+    def new_ututi(self):
+        return render('/home/new_ututi.mako')

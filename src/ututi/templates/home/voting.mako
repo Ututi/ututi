@@ -43,7 +43,7 @@
     <div class="feature_block" style="background-image: url('/images/details/icon_feature_teacher.png');">
       <strong>${_('Teacher profiles')}</strong>
       <p>
-        ${_('Teachers will have their profiles on Ututi, will be able to upload course materials and '
+        ${_('Teacher profiles on Ututi, will be able to upload course materials and '
             'easily communicate with their students.')}
       </p>
     </div>
