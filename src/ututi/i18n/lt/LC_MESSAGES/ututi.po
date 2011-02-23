@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2011-02-01 11:49+0200\n"
+"PO-Revision-Date: 2011-02-23 17:44+0200\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -1172,6 +1172,17 @@ msgstr "atgal"
 
 msgid "go find something else"
 msgstr "Ieškok ko nors kito"
+
+#, python-format
+msgid "Changes are coming to %s!"
+msgstr "%s keičiasi!"
+
+msgid ""
+"See if <a href=\"/voting\">Your university has gathered enough votes</a> "
+"to be transfered to the new UTUTI!"
+msgstr ""
+"Žvilgtelėk, ar <a href=\"/voting\">surinko pakankamai balsų</a>, kad būtų"
+" perkeltas į naująjį UTUTI!"
 
 msgid "Search for notes"
 msgstr "Ieškok konspektų"
@@ -3173,6 +3184,42 @@ msgstr ""
 msgid "I am already a registered Ututi user"
 msgstr "Aš jau esu registruotas Ututi narys"
 
+msgid "Social network for Your university"
+msgstr "Socialinis tinklas tavo universitetui"
+
+msgid ""
+"Communicate in the virtual space of your university - with your "
+"classmates and your teachers.Join groups and participate in discussions, "
+"share information and knowledge."
+msgstr ""
+"Bendrauk virtualioje universiteto erdvėje - su grupiokais ir dėstytojais."
+" Prisijunk prie grupių ir bendrauk diskusijose, dalinkis informacija bei "
+"žiniomis."
+
+msgid "Teacher profiles"
+msgstr "Dėstytojų paskyros"
+
+msgid ""
+"Teacher profiles on Ututi - a clean and simple way to have personal "
+"homepages for teachers.Easy to use tools for communication with students "
+"and for publishing lecture notes."
+msgstr ""
+"Dėstytojų paskyros UTUTI - aiškus ir paprastas būdas turėti asmeninę "
+"dėstytojo svetainę. Įrankiai paprastam bendravimui su studentais bei "
+"studijų medžiagos publikavimui."
+
+msgid "Discussions"
+msgstr "Diskusijos"
+
+msgid ""
+"Discuss any topic not only with Your classmates, but with all students "
+"and teachers at your university.In Ututi everything is a starting point "
+"for a discussion - from an uploaded file to a new wiki note."
+msgstr ""
+"Diskutuokite bet kokia tema - ne tik su grupiokais, bet su visais savo "
+"universiteto studentais ir dėstytojais. UTUTI bet kas gali būti "
+"diskusijos pradžios tašku - net įkeltas failas ar sukurtas wiki užrašas."
+
 msgid "Reset your password"
 msgstr "Atkurti slaptažodį"
 
@@ -3193,6 +3240,74 @@ msgstr "Įveskite savo el. pašto adresą"
 
 msgid "Recover password"
 msgstr "Atstatyti slaptažodį"
+
+msgid "Recommend to a friend"
+msgstr "Rekomenduok draugui"
+
+#, python-format
+msgid "Your university needs <strong>%(count)d more vote</strong>."
+msgid_plural "Your university needs <strong>%(count)d more votes.</strong>"
+msgstr[0] "Tavo universitetui trūksta <strong>%(count)d balso.</strong>"
+msgstr[1] "Tavo universitetui trūksta <strong>%(count)d balsų.</strong>"
+msgstr[2] "Tavo universitetui trūksta <strong>%(count)d balsų.</strong><"
+
+msgid "About the new Ututi"
+msgstr "Apie naująjį UTUTI"
+
+msgid ""
+"Communicate in the virtual space of Your university, join groups, "
+"exchange information."
+msgstr ""
+"Bendrauk virtualioje savo universiteto erdvėje, prisijunk prie grupių, "
+"dalinkis informacija."
+
+msgid ""
+"Teacher profiles on Ututi, will be able to upload course materials and "
+"easily communicate with their students."
+msgstr ""
+"Dėstytojų paskyros Ututi - dėstytojai galės patogiai bendrauti su savo "
+"studentais bei publikuoti studijų medžiagą."
+
+msgid ""
+"Discuss not only within groups, but also comment on subjects and uploaded"
+" files."
+msgstr "Diskuotuok ne tik grupėse, bet ir dalykuose bei prie įkeltų failų."
+
+msgid "find out more"
+msgstr "sužinok daugiau"
+
+msgid "Vote for your university!"
+msgstr "Balsuok už savo universitetą!"
+
+msgid "Ututi is growing!"
+msgstr "Ututi auga!"
+
+msgid ""
+"After two years of development and service here in Lithuania , Ututi is "
+"growing and changing. This March we are planning to release a new "
+"version, that will be not only a study material exchange platform. Ututi "
+"will become Your university's social network and will connect not only "
+"students but also teachers."
+msgstr ""
+"Po dviejų metų plėtojimo ir veikimo Lietuvoje, Ututi auga ir keičiasi. Šį"
+" balandį planuojame paleisti naują versiją, kuri  bus daugiau nei studijų"
+" medžiagos mainų ir studentų bendravimo portalas. Ututi tampa tavo "
+"universiteto socialiniu tinklu, įtrauksiančiu ne tik studentus, bet ir "
+"dėstytojus."
+
+msgid ""
+"Going in this new direction, we have decided to transition only the "
+"universities that have an active community. If You want Your university "
+"to be a part of the new Ututi this March, vote here. Only univerisites "
+"with 500 votes or more will be transfered."
+msgstr ""
+"Sukdami šia nauja kryptimi, mes nusprendėme perkelti tik universitetus, "
+"kuriuose susibūrė aktyvios bendruomenės. Jeigu nori, kad tavo "
+"universitetas būtų naujojo Ututi dalimi šį balandė, balsuok čia. Tik "
+"universitetai, surinkę 500 balsų, bus perkelti."
+
+msgid "Voting results"
+msgstr "Balsavimo rezultatai"
 
 msgid "Faculty's members"
 msgstr "Fakulteto nariai"
@@ -4354,6 +4469,15 @@ msgstr ""
 "%(user)s nori prisijungti prie grupės %(group)s. Ar norite patvirtinti "
 "narystę?"
 
+msgid "Choose Your university:"
+msgstr "Pasirinki universitetą:"
+
+msgid "Thank You for voting!"
+msgstr "Ačiū, kad balsavai!"
+
+msgid "Check out how Your university is doing!"
+msgstr "Pasižiūrėk, kaip sekasi tavo universitetui!"
+
 msgid "I teach this"
 msgstr "Aš tai dėstau"
 
@@ -5162,4 +5286,14 @@ msgstr "Sukurk fakultetą"
 
 msgid "Add section"
 msgstr "Sukurk katedrą"
+
+#, python-format
+msgid "%(count)d vote"
+msgid_plural "%(count)d votes"
+msgstr[0] "%(count)d balsas"
+msgstr[1] "%(count)d balsai"
+msgstr[2] "%(count)d balsų"
+
+msgid "Vote!"
+msgstr "Balsuoti!"
 

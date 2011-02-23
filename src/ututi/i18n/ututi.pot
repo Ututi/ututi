@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2011-01-31 16:36+0200\n"
+"POT-Creation-Date: 2011-02-23 17:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1100,6 +1100,15 @@ msgid "go back"
 msgstr ""
 
 msgid "go find something else"
+msgstr ""
+
+#, python-format
+msgid "Changes are coming to %s!"
+msgstr ""
+
+msgid ""
+"See if <a href=\"/voting\">Your university has gathered enough votes</a> to "
+"be transfered to the new UTUTI!"
 msgstr ""
 
 msgid "Search for notes"
@@ -2880,6 +2889,33 @@ msgstr ""
 msgid "I am already a registered Ututi user"
 msgstr ""
 
+msgid "Social network for Your university"
+msgstr ""
+
+msgid ""
+"Communicate in the virtual space of your university - with your classmates "
+"and your teachers.Join groups and participate in discussions, share "
+"information and knowledge."
+msgstr ""
+
+msgid "Teacher profiles"
+msgstr ""
+
+msgid ""
+"Teacher profiles on Ututi - a clean and simple way to have personal homepages"
+" for teachers.Easy to use tools for communication with students and for "
+"publishing lecture notes."
+msgstr ""
+
+msgid "Discussions"
+msgstr ""
+
+msgid ""
+"Discuss any topic not only with Your classmates, but with all students and "
+"teachers at your university.In Ututi everything is a starting point for a "
+"discussion - from an uploaded file to a new wiki note."
+msgstr ""
+
 msgid "Reset your password"
 msgstr ""
 
@@ -2899,6 +2935,60 @@ msgid "Enter your email:"
 msgstr ""
 
 msgid "Recover password"
+msgstr ""
+
+msgid "Recommend to a friend"
+msgstr ""
+
+#, python-format
+msgid "Your university needs <strong>%(count)d more vote</strong>."
+msgid_plural "Your university needs <strong>%(count)d more votes.</strong>"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "About the new Ututi"
+msgstr ""
+
+msgid ""
+"Communicate in the virtual space of Your university, join groups, exchange "
+"information."
+msgstr ""
+
+msgid ""
+"Teacher profiles on Ututi, will be able to upload course materials and easily"
+" communicate with their students."
+msgstr ""
+
+msgid ""
+"Discuss not only within groups, but also comment on subjects and uploaded "
+"files."
+msgstr ""
+
+msgid "find out more"
+msgstr ""
+
+msgid "Vote for your university!"
+msgstr ""
+
+msgid "Ututi is growing!"
+msgstr ""
+
+msgid ""
+"After two years of development and service here in Lithuania , Ututi is "
+"growing and changing. This March we are planning to release a new version, "
+"that will be not only a study material exchange platform. Ututi will become "
+"Your university's social network and will connect not only students but also "
+"teachers."
+msgstr ""
+
+msgid ""
+"Going in this new direction, we have decided to transition only the "
+"universities that have an active community. If You want Your university to be"
+" a part of the new Ututi this March, vote here. Only univerisites with 500 "
+"votes or more will be transfered."
+msgstr ""
+
+msgid "Voting results"
 msgstr ""
 
 msgid "Faculty's members"
@@ -3974,6 +4064,15 @@ msgid ""
 "membership?"
 msgstr ""
 
+msgid "Choose Your university:"
+msgstr ""
+
+msgid "Thank You for voting!"
+msgstr ""
+
+msgid "Check out how Your university is doing!"
+msgstr ""
+
 msgid "I teach this"
 msgstr ""
 
@@ -4697,5 +4796,14 @@ msgid "Add department"
 msgstr ""
 
 msgid "Add section"
+msgstr ""
+
+#, python-format
+msgid "%(count)d vote"
+msgid_plural "%(count)d votes"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Vote!"
 msgstr ""
 
