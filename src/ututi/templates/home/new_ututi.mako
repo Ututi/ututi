@@ -9,6 +9,7 @@
     background: transparent url("/images/features_bg.png") left top no-repeat;
     position: relative;
   }
+  .feature_block {width: 400px;}
   .feature_block p { margin-top: 10px; }
 </%def>
 
