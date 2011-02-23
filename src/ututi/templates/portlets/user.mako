@@ -90,11 +90,7 @@
         <img src="${url(controller='user', action='logo', id=user.id, width=60)}" alt="logo" />
       </div>
       <div class="user-fullname break-word">
-        %if h.check_crowds(['root']):
-        <a href="mailto:${user.emails[0].email}">${user.fullname}</a>
-        %else:
         ${user.fullname}
-        %endif
       </div>
       %if user is c.user:
       <div class="edit-profile-link break-word">
