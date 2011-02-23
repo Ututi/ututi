@@ -20,7 +20,13 @@
     <%def name="header()">
     ${_('Recommend to a friend')}
     </%def>
+    <div style="float: left;">
     <iframe src="http://www.facebook.com/plugins/like.php?href=www.ututi.lt%2Fvoting&amp;layout=box_count&amp;show_faces=false&amp;width=120&amp;action=recommend&amp;colorscheme=light&amp;height=65" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:120px; height:65px;" allowTransparency="true"></iframe>
+    </div>
+    <div style="float: left;">
+    <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.ututi.lt/voting" data-text="UTUTI - balsuojam už savo universitetą" data-count="vertical">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    </div>
+    <br style="clear: left;"/>
     %if c.user and c.user.location is not None:
     <div style="margin-top: 10px; border-top: 1px solid #ddd; padding-top: 5px;">
       <%
