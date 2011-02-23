@@ -32,46 +32,35 @@
 </%def>
 
 <%def name="user_subjects_portlet(user=None)">
-  <%
-     if user is None:
-         user = c.user
-  %>
-  <%self:portlet id="subject_portlet" portlet_class="inactive">
+  <% if user is None: user = c.user %>
+  <%self:portlet id="user-subjects-portlet">
     <%def name="header()">
-      ${_('Watched subjects')}
+      ${_('My subjects:')}
     </%def>
     %if not user.watched_subjects:
-      ${_('You are not watching any subjects.')}
-    %else:
-    <ul id="user-subjects" class="subjects-list">
-      % for subject in user.watched_subjects[:5]:
-      <li>
+      <p>${_('You are not watching any subjects.')}</p>
+    %endif
+    <ul class="icon-list">
+      %for subject in user.watched_subjects:
+      <li class="icon-subject">
         <a href="${subject.url()}" title="${subject.title}">${h.ellipsis(subject.title, 35)}</a>
       </li>
-      % endfor
+      %endfor
+      <li class="icon-subject">
+        ${h.link_to(_('Find subjects'), url(controller='profile', action='search', obj_type='subject'))}
+      </li>
+      <li class="icon-add">
+        ${h.link_to(_('Create new subject'), url(controller='subject', action='add'))}
+      </li>
     </ul>
-    %endif
-
-    ${h.link_to(_('More subjects'), url(controller='profile', action='search', obj_type='subject'), class_="more")}
-    <span>
-      ${h.button_to(_('Watch subjects'), url(controller='profile', action='watch_subjects', id=user.id))}
-      ${tooltip(_("Add watched subjects to your watched subjects' list and receive notifications "
-                  "about changes in these subjects"))}
-    </span>
-
   </%self:portlet>
 </%def>
 
-<%def name="user_groups_portlet(user=None, title=None, full=True)">
-  <%
-     if user is None:
-         user = c.user
-     if title is None:
-       title = _('My groups:')
-  %>
+<%def name="user_groups_portlet(user=None)">
+  <% if user is None: user = c.user %>
   <%self:portlet id="user-groups-portlet">
     <%def name="header()">
-      ${title}
+      ${_('My groups:')}
     </%def>
     %if not user.memberships:
       <p>${_('You are not a member of any group.')}</p>

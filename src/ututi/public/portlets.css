@@ -71,6 +71,14 @@
         font-size: 11px;
     }
 
+#user-subjects-portlet { }
+
+    #user-subjects-portlet .header {
+        text-transform: uppercase;
+        font-weight: normal;
+        font-size: 11px;
+    }
+
 #share-portlet-content { }
 
     #share-portlet-content ul#share-portlet-action-list { }

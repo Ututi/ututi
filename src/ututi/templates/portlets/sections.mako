@@ -20,6 +20,7 @@
   ${user_information_portlet()}
   ${user_menu_portlet()}
   ${user_groups_portlet()}
+  ${user_subjects_portlet()}
 %endif
 </%def>
 
