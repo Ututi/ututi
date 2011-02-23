@@ -6,7 +6,7 @@ mailing list, so if someone sends an email to the mailing list while
 not being on it, the email is just ignored:
 
     >>> browser = Browser.logIn('admin@uni.ututi.com', 'asdasd')
-    >>> browser.getLink('Moderatoriai').click()
+    >>> browser.getLink('Moderatoriai', url='/group/moderators').click()
 
 Disable moderation first:
     >>> browser.getLink('Edit').click()

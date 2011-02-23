@@ -193,7 +193,7 @@ User can immediately reply to this forum thread from his wall:
 
 Group's mailinglist thread is also displayed in group's wall:
 
-    >>> admin.getLink("Moderatoriai").click()
+    >>> admin.getLink("Moderatoriai", url='/group/moderators').click()
     >>> printWallEvents(admin)
     <span class="event-title">
         You have posted a new message <a>Mailinglist message title</a> to the group <a>Moderatoriai</a>

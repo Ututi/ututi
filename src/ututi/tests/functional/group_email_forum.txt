@@ -4,7 +4,7 @@ Tests for group mailing list moderation events
 Set Up:
 
     >>> browser = Browser.logIn('admin@uni.ututi.com', 'asdasd')
-    >>> browser.getLink('Moderatoriai').click()
+    >>> browser.getLink('Moderatoriai', url='/group/moderators').click()
     >>> browser.getLink('Edit').click()
     >>> browser.getControl('Forum type').value = ['forum']
     >>> browser.getControl('Save').click()

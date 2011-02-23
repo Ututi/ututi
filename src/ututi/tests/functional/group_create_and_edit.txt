@@ -4,7 +4,7 @@ Tests editing of group's "Files" and "Subjects" options after the group is creat
 Let's log in to create a group:
 
     >>> browser = Browser.logIn()
-    >>> browser.getLink('Create group').click()
+    >>> browser.getLink('Create new group').click()
 
 We specify group's title, e-mail address (identifier) and university.
 

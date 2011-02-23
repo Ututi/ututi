@@ -6,7 +6,7 @@ ${parent.head_tags()}
 
 <h1>${_('Permission denied!')}</h1>
 
-  <div>
+  <div id="permission-denied-message">
   %if c.reason:
     ${c.reason}
   %else:

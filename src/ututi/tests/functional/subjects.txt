@@ -127,7 +127,7 @@ would cause a crash
 When creating a subject, the user can select to watch it:
 
     >>> browser.open('/home')
-    >>> browser.getLink('create new subject').click()
+    >>> browser.getLink('Create new subject').click()
     >>> browser.url
     'http://localhost/subjects/add'
 
@@ -149,7 +149,7 @@ When creating a subject, the user can select to watch it:
 Subject names with parentheses should not cause problems:
 
     >>> browser.open('/home')
-    >>> browser.getLink('create new subject').click()
+    >>> browser.getLink('Create new subject').click()
     >>> browser.url
     'http://localhost/subjects/add'
 

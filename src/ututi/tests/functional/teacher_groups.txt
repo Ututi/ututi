@@ -71,7 +71,7 @@ A message to the ututi mailing list group:
     >>> browser.getControl('Send', index=1).click()
 
     >>> browser2 = Browser.logIn()
-    >>> browser2.getLink('Moderatoriai').click()
+    >>> browser2.getLink('Moderatoriai', url='/group/moderators').click()
     >>> browser2.printQuery('//div[contains(@class, "wall-entry")]//text()')
     Benas has posted a new message a message to the group to the group Moderatoriai 0 seconds ago
     The teacher Benas (http://localhost/user/5) sent a message to Your group:
@@ -116,7 +116,7 @@ A message to the ututi forum group - members of the group receive email messages
     ['admin@uni.ututi.com']
 
     >>> browser2.getLink('Home').click()
-    >>> browser2.getLink('Testing group').click()
+    >>> browser2.getLink('Testing group', url='/group/test').click()
     >>> browser2.printQuery('//div[@class="event-heading"]//text()')
     Teacher Benas has sent a message to the group Testing group 0 seconds ago
     You have created the group Testing group 0 seconds ago

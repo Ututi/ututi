@@ -7,7 +7,7 @@ First of all let's log in;
 
 We can add a group at the url /groups/add.
 
-    >>> browser.getLink('Create group').click()
+    >>> browser.getLink('Create new group').click()
     >>> browser.getControl('Group e-mail address').value = 'test'
     >>> browser.getControl('Group title').value = 'Test group'
     >>> browser.getControl('Year').value = ['2009']
