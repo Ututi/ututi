@@ -1,4 +1,4 @@
-<%namespace file="/portlets/user.mako" import="user_information_portlet, user_groups_portlet,
+<%namespace file="/portlets/user.mako" import="profile_portlet, user_information_portlet, user_groups_portlet,
                                                user_subjects_portlet, teacher_information_portlet, user_menu_portlet"/>
 <%namespace file="/portlets/group.mako" import="group_info_portlet, group_forum_post_portlet,
                                                 group_invite_member_portlet, group_sms_portlet,
@@ -17,7 +17,7 @@
 %if c.user.is_teacher:
   ${teacher_sidebar(exclude)}
 %else:
-  ${user_information_portlet()}
+  ${profile_portlet()}
   ${user_menu_portlet()}
   ${user_groups_portlet()}
   ${user_subjects_portlet()}
@@ -26,7 +26,7 @@
 
 <%def name="group_sidebar(exclude=[])">
 <div id="sidebar">
-  ${user_information_portlet()}
+  ${profile_portlet()}
   ${user_menu_portlet()}
   %if not 'info' in exclude:
     ${group_info_portlet()}
