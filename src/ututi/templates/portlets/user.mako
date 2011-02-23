@@ -2,7 +2,10 @@
 <%namespace file="/sections/content_snippets.mako" import="tooltip, item_location" />
 
 <%def name="user_menu_portlet()">
+  <%self:portlet id="user-menu-portlet">
   <ul id="user-sidebar-menu">
+    <li> <a href="${url(controller='profile', action='feed')}">${_("My feed")}</a> </li>
+    <li> <a href="${c.user.location.url()}">${_("My university feed")}</a> </li>
     <li>
       <% unread_messages = c.user.unread_messages() %>
       <a id="inbox-link" href="${url(controller='messages', action='index')}">
@@ -14,17 +17,18 @@
         %endif
       </a>
     </li>
-    % if c.user.memberships:
+    %if c.user.memberships:
     <li>
       ${_("My groups:")}
       <ul>
-        % for group in c.user.groups:
+        %for group in c.user.groups:
         <li> ${h.object_link(group)} </li>
-        % endfor
+        %endfor
       </ul>
     </li>
     %endif
   </ul>
+  </%self:portlet>
 </%def>
 
 <%def name="user_subjects_portlet(user=None)">

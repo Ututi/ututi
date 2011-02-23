@@ -31,6 +31,12 @@
         margin-left: 70px;
     }
 
+#user-menu-portlet { }
+
+    #user-menu-portlet ul {
+        list-style: none;
+    }
+
 #share-portlet-content { }
 
     #share-portlet-content ul#share-portlet-action-list { }
