@@ -34,4 +34,5 @@
   <li>${h.link_to('Standard lists', url(controller='admin', action='example_lists'))}</li>
   <li>${h.link_to('Standard objects', url(controller='admin', action='example_objects'))}</li>
   <li>${h.link_to('Standard widgets', url(controller='admin', action='example_widgets'))}</li>
+  <li>${h.link_to('Standard layouts', url(controller='admin', action='example_layouts'))}</li>
 </ol>
