@@ -16,20 +16,22 @@
     <div class="feature_block" style="position: absolute; top: 40px; left: 270px;">
       <strong>${_('Social network for Your university')}</strong>
       <p>
-        ${_('Communicate in the virtual space of Your university, join groups, exchange information.')}
+        ${_('Communicate in the virtual space of your university - with your classmates and your teachers.'
+            'Join groups and participate in discussions, share information and knowledge.')}
       </p>
     </div>
     <div class="feature_block" style="position: absolute; top: 190px; left: 370px;">
       <strong>${_('Teacher profiles')}</strong>
       <p>
-        ${_('Teacher profiles on Ututi, will be able to upload course materials and '
-            'easily communicate with their students.')}
+        ${_('Teacher profiles on Ututi - a clean and simple way to have personal homepages for teachers.'
+            'Easy to use tools for communication with students and for publishing lecture notes.')}
       </p>
     </div>
     <div class="feature_block" style="position: absolute; top: 340px; left: 270px;">
       <strong>${_('Discussions')}</strong>
       <p>
-        ${_('Discuss not only within groups, but also comment on subjects and uploaded files.')}
+        ${_('Discuss any topic not only with Your classmates, but with all students and teachers at your university.'
+            'In Ututi everything is a starting point for a discussion - from an uploaded file to a new wiki note.')}
       </p>
     </div>
 
