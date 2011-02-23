@@ -233,6 +233,9 @@ ${_('Student information online')}
     %endif
     ${h.stylesheet_link(h.path_with_hash('/portlets.css'))}
     ${h.stylesheet_link(h.path_with_hash('/widgets.css'))}
+    <!--[if IE]>
+    ${h.stylesheet_link(h.path_with_hash('/ie.css'))}
+    <![endif]-->
     ${h.javascript_link('/javascript/jquery-1.4.4.min.js')}
     ${h.javascript_link('/javascript/ajaxupload.3.5.js')}
     ${h.javascript_link('/javascript/jquery.qtip.min.js')}

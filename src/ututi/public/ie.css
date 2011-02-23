@@ -1,0 +1,8 @@
+/* This stylesheet is applied only to IE browsers
+ * via conditional comments, so it is safe to assume,
+ * that we're dealing with IE here.
+ */
+
+.clearfix {
+    zoom: 1;            /* triggers hasLayout */
+}
