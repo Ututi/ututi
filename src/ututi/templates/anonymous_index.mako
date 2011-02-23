@@ -9,6 +9,11 @@
 }
 </%def>
 
+<div id="vote_link">
+  ${_('Changes are coming to %s!') % h.link_to('UTUTI', url(controller='home', action='new_ututi'))|n}
+  ${_('See if <a href="/voting">Your university has gathered enough votes</a> to be transfered to the new UTUTI!')|n}
+</div>
+
 <div id="homeSearchNotesBlock">
   <h2>
     <a href="${url(controller='search', action='index', obj_type='subject')}" class="frontpage-title-link">${_('Search for notes')}</a>
@@ -141,10 +146,6 @@
     ${h.button_to(_('Create group'), url(controller='group', action='create_academic'),  method='GET', class_='btnPlus btnLarge')}
   </div>
 
-</div>
-<div id="vote_link">
-  ${_('Changes are coming to %s!') % h.link_to('UTUTI', url(controller='home', action='new_ututi'))|n}
-  ${_('See if <a href="/voting">Your university has gathered enough votes</a> to be transfered to the new UTUTI!')|n}
 </div>
 <div id="homePopularSubjects">
   <h2>${_('Popular subjects')}</h2>
