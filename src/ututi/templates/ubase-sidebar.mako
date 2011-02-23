@@ -1,6 +1,6 @@
 <%inherit file="/prebase.mako" />
 
-<%def name="portlets_left()"></%def>
+<%def name="portlets()"></%def>
 <%def name="portlets_right()"></%def>
 
 <div id="layout-wrap" class="with-left-sidebar with-right-sidebar clearfix">
@@ -12,7 +12,7 @@
   </div>
   <div id="left-sidebar">
     <div class="sidebar-inner">
-      ${self.portlets_left()}
+      ${self.portlets()}
     </div>
   </div>
   <div id="right-sidebar">

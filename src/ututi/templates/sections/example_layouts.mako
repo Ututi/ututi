@@ -1,6 +1,6 @@
 <%inherit file="/ubase-sidebar.mako" />
 
-<%def name="portlets_left()">
+<%def name="portlets()">
   Here will be important portlets.
 </%def>
 
