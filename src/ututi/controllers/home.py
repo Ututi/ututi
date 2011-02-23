@@ -3,7 +3,7 @@ from random import Random
 import string
 from datetime import datetime, date, timedelta
 
-from formencode import Schema, validators, Invalid, All, htmlfill
+from formencode import Schema, validators, All, htmlfill
 from webhelpers import paginate
 
 from babel.dates import format_date
@@ -12,7 +12,7 @@ from babel.dates import parse_date
 from paste.util.converters import asbool
 from pylons import request, tmpl_context as c, url, session, config, response
 from pylons.controllers.util import abort, redirect
-from pylons.i18n import _, ungettext
+from pylons.i18n import _
 from pylons.templating import render_mako_def
 
 from sqlalchemy.orm.exc import NoResultFound
@@ -22,7 +22,6 @@ from sqlalchemy.sql.expression import desc
 from ututi.lib.base import BaseController, render, u_cache
 import ututi.lib.helpers as h
 from ututi.lib.emails import email_password_reset
-from ututi.lib.messaging import EmailMessage
 from ututi.lib.security import sign_out_user
 from ututi.lib.security import ActionProtector, sign_in_user, bot_protect
 from ututi.lib.validators import validate, UniqueEmail, TranslatedEmailValidator
@@ -88,13 +87,6 @@ class RegistrationForm(Schema):
     chained_validators = [validators.FieldsMatch('new_password',
                                                  'repeat_password',
                                                  messages=msg)]
-
-
-class RecommendationForm(Schema):
-    """A schema for validating ututi recommendation submissions"""
-    allow_extra_fields = True
-    recommend_emails = validators.UnicodeString(not_empty=False)
-    came_from = validators.URL(require_tld=False)
 
 
 class UniversityListMixin(BaseController):
@@ -388,63 +380,6 @@ class HomeController(UniversityListMixin, FederationMixin):
             return htmlfill.render(self._pswreset_form(), defaults=defaults)
         except NoResultFound:
             abort(404)
-
-    @validate(schema=RecommendationForm)
-    @ActionProtector("user")
-    def send_recommendations(self):
-        if hasattr(self, 'form_result'):
-            count = 0
-            failed = []
-            rcpt = []
-            using = [] #already members of ututi
-
-            #constructing the message
-            extra_vars = {'user_name': c.user.fullname}
-            text = render('/emails/recommendation_text.mako',
-                          extra_vars=extra_vars)
-            html = render('/emails/recommendation_html.mako',
-                          extra_vars=extra_vars)
-            msg = EmailMessage(_('%(fullname)s wants you to join Ututi') % dict(fullname = c.user.fullname), text, html)
-
-            emails = self.form_result.get('recommend_emails', '').split()
-            for line in emails:
-                for email in filter(bool, line.split(',')):
-                    try:
-                        TranslatedEmailValidator.to_python(email)
-                        exists = meta.Session.query(Email).filter(Email.email == email).first()
-                        if exists is None:
-                            count = count + 1
-                            rcpt.append(email)
-                        else:
-                            using.append(email)
-                    except Invalid:
-                        failed.append(email)
-            if rcpt != []:
-                msg.send(rcpt)
-
-            status = {}
-            if count > 0:
-                status['ok'] = ungettext('%(count)d invitation sent.',
-                                         '%(count)d invitations sent.', count) % {'count': count}
-
-            if len(using) > 0:
-                status['members'] = _('Already using ututi: %s.') % ', '.join(using)
-
-            if len(failed) > 0:
-                status['fail'] = _('Invalid emails: %s') % ', '.join(failed)
-
-            if request.params.has_key('js'):
-                for k in status:
-                    status[k] = '<div class="%(cls)s">%(val)s</div>' % dict(cls=k, val=status[k])
-                return ''.join([v for v in status.values()])
-            else:
-                for v in status.values():
-                    h.flash(v)
-                came_from = self.form_result.get('came_from', None)
-                if came_from is None:
-                    redirect(url(controller='profile', action='index'))
-                else:
-                    redirect(came_from.encode('utf-8'))
 
     def join(self):
         redirect(url(controller='home', action='login', came_from=c.came_from))

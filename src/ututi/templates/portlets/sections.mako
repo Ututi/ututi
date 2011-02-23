@@ -1,6 +1,5 @@
-<%namespace file="/portlets/user.mako" import="user_information_portlet, user_groups_portlet, user_create_group_portlet,
-                                               user_create_subject_portlet, user_recommend_portlet,
-                                               teacher_information_portlet, user_menu_portlet"/>
+<%namespace file="/portlets/user.mako" import="user_information_portlet, user_groups_portlet,
+                                               user_subjects_portlet, teacher_information_portlet, user_menu_portlet"/>
 <%namespace file="/portlets/group.mako" import="group_info_portlet, group_forum_post_portlet,
                                                 group_invite_member_portlet, group_sms_portlet,
                                                 group_members_portlet"/>
@@ -18,23 +17,9 @@
 %if c.user.is_teacher:
   ${teacher_sidebar(exclude)}
 %else:
-<div id="sidebar">
   ${user_information_portlet()}
   ${user_menu_portlet()}
-  %if not 'files' in exclude:
-  ${quick_file_upload_portlet(c.user.groups_uploadable + c.user.watched_subjects, label='user_files')}
-  %endif
-  %if not 'create_group' in exclude:
-  ${user_create_group_portlet()}
-  %endif
-  %if not 'create_subject' in exclude:
-  ${user_create_subject_portlet()}
-  %endif
-  %if not 'recommend' in exclude:
-  ${user_recommend_portlet()}
-  %endif
   ${user_groups_portlet()}
-</div>
 %endif
 </%def>
 
