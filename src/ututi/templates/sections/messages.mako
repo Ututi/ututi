@@ -154,7 +154,7 @@
         " exchange platform. Ututi will become Your university's social network and will connect not"
         " only students but also teachers.")}
     </div>
-    ${h.link_to(h.image('/img/transition.png', 'transition'), url(controller='home', action='dotcom'))}
+    ${h.link_to(h.image('/img/transition.png', 'transition'), url(controller='home', action='new_ututi'))}
     <div>
     ${_("Going in this new direction, we have decided to transition only the universities that have"
         " an active community. If You want Your university to be a part of the new Ututi this March,"
