@@ -3,11 +3,11 @@
 
 <%def name="user_menu_portlet()">
   <%self:portlet id="user-menu-portlet">
-  <ul id="user-sidebar-menu">
-    <li> <a href="${url(controller='profile', action='feed')}">${_("My feed")}</a> </li>
-    <li> <a href="${c.user.location.url()}">${_("My university feed")}</a> </li>
-    <li>
-      <% unread_messages = c.user.unread_messages() %>
+  <ul id="user-sidebar-menu" class="icon-list">
+    <li class="icon-feed"> <a href="${url(controller='profile', action='feed')}">${_("My feed")}</a> </li>
+    <li class="icon-university"> <a href="${c.user.location.url()}">${_("My university feed")}</a> </li>
+    <% unread_messages = c.user.unread_messages() %>
+    <li class="icon-message ${'active' if unread_messages else ''}">
       <a id="inbox-link" href="${url(controller='messages', action='index')}">
         %if unread_messages:
          <strong>${ungettext("Messages (%(count)s new)", "Messages (%(count)s new)",
@@ -18,7 +18,7 @@
       </a>
     </li>
     %if c.user.memberships:
-    <li>
+    <li class="icon-group">
       ${_("My groups:")}
       <ul>
         %for group in c.user.groups:
@@ -66,53 +66,32 @@
   <%
      if user is None:
          user = c.user
-
      if title is None:
-       title = _('My groups')
+       title = _('My groups:')
   %>
-  <%self:uportlet id="user-groups-portlet" portlet_class="inactive">
+  <%self:portlet id="user-groups-portlet">
     <%def name="header()">
       ${title}
     </%def>
-    % if not user.memberships:
-      ${_('You are not a member of any.')}
-    %else:
-    <ul>
-      % for group in user.groups:
-      <li>
-        <dl class="group-listing-item">
-          %if group.logo is not None:
-            <img class="group-logo" src="${url(controller='group', action='logo', id=group.group_id, width=25, height=25)}" alt="logo" />
-          %else:
-            ${h.image('/images/details/icon_group_25x25.png', alt='logo', class_='group-logo')|n}
-          %endif
-            <dt class="group-title"><a href="${group.url()}" ${h.trackEvent(Null, 'groups', 'title', 'profile')}>${group.title}</a></dt>
-            <dd class="member-count">(${ungettext("%(count)s member", "%(count)s members", len(group.members)) % dict(count = len(group.members))})</dd>
-            <div class="group-location">
-              <dd>
-                <a href="${group.location.url()}">${' | '.join(group.location.title_path)}</a>
-              </dd>
-            </div>
-        </dl>
+    %if not user.memberships:
+      <p>${_('You are not a member of any group.')}</p>
+    %endif
+    <ul class="icon-list">
+      %for group in user.groups:
+      <li class="icon-group">
+        <a href="${group.url()}" ${h.trackEvent(Null, 'groups', 'title', 'profile')}>
+          ${group.title}
+        </a>
       </li>
-      % endfor
+      %endfor
+      <li class="icon-group">
+        ${h.link_to(_('Find groups'), url(controller='profile', action='search', obj_type='group'))}
+      </li>
+      <li class="icon-add">
+        ${h.link_to(_('Create new group'), url(controller='group', action='create_academic'))}
+      </li>
     </ul>
-    %endif
-    %if full:
-    <div class="footer">
-      <div class="new-group">
-        ${h.link_to(_('Create group'), url(controller='group', action='create_academic'), method='GET')}
-      </div>
-      ${tooltip(_('Create your group, invite your classmates and use the mailing list, upload private group files'))}
-
-      <span class="more-link">
-        ${h.link_to(_('More groups'), url(controller='profile', action='search', obj_type='group'), class_="right_arrow")}
-      </span>
-      <br style="clear-both"/>
-    </div>
-
-    %endif
-  </%self:uportlet>
+  </%self:portlet>
 </%def>
 
 <%def name="user_information_portlet(user=None)">
