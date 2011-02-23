@@ -79,7 +79,7 @@ ${_("Going in this new direction, we have decided to transition only the univers
     " vote here. Only univerisites with 500 votes or more will be transfered.")}
 </div>
 
-%if not c.user.has_voted and c.user.location is not None:
+%if c.user and not c.user.has_voted and c.user.location is not None:
 <div style="margin: 20px 0; width: 500px;">
 <%
    votes = c.user.location.vote_count
