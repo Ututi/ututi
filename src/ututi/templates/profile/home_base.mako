@@ -3,7 +3,7 @@
 <%namespace file="/sections/content_snippets.mako" import="tabs" />
 <%namespace file="/portlets/sections.mako" import="user_sidebar"/>
 
-<%def name="portlets()">
+<%def name="portlets_left()">
 ${user_sidebar()}
 </%def>
 

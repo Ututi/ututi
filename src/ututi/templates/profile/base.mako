@@ -1,7 +1,7 @@
 <%inherit file="/ubase-sidebar.mako" />
 <%namespace file="/portlets/sections.mako" import="user_sidebar"/>
 
-<%def name="portlets()">
+<%def name="portlets_left()">
 ${user_sidebar()}
 </%def>
 
