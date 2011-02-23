@@ -13,6 +13,24 @@
         border-bottom: 1px solid #eeeeee;
     }
 
+#user-information-portlet { }
+
+    #user-information-portlet .user-logo {
+        float: left;
+        margin-top: 5px;
+    }
+
+    #user-information-portlet .user-fullname {
+        margin-left: 70px;
+        font-size: 13px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    #user-information-portlet .edit-profile-link {
+        margin-left: 70px;
+    }
+
 #share-portlet-content { }
 
     #share-portlet-content ul#share-portlet-action-list { }
