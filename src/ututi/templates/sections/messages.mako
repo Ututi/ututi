@@ -202,7 +202,7 @@
       ${v.voting_widget(votes)}
       <br class="clear-both"/>
     %endif
-    <div id="voting-results" style="${user.has_voted and '' or 'display: none;'}">
+    <div id="voting-results" style="${user.has_voted and ' ' or 'display: none;'}">
       ${_('Thank You for voting!')}
       ${h.link_to(_('Check out how Your university is doing!'), url(controller='home', action='voting'))}
     </div>

@@ -38,7 +38,7 @@
               $.post(url,
                      $(form).serialize(),
                      function(data){
-                         $('#voting-widget').hide();
+                         $('#vote-form').hide();
                          $('#voting-results').show();
                      });
               return false;

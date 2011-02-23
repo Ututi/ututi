@@ -1,11 +1,13 @@
 <%inherit file="/ubase-sidebar.mako" />
 <%namespace file="/widgets/vote.mako" import="voting_bar, voting_widget" />
 <%namespace file="/portlets/base.mako" import="uportlet" name="p"/>
+<%namespace file="/widgets/ulocationtag.mako" import="location_widget, head_tags" name="loc"/>
 
 <%def name="flash_messages()">
 </%def>
 
 <%def name="css()">
+#voting-results { margin: 20px 0; }
 .feature_block {
   padding-left: 70px;
   background-position: left top;
@@ -79,15 +81,46 @@ ${_("Going in this new direction, we have decided to transition only the univers
     " vote here. Only univerisites with 500 votes or more will be transfered.")}
 </div>
 
-%if c.user and not c.user.has_voted and c.user.location is not None:
-<div style="margin: 20px 0; width: 500px;">
-<%
-   votes = c.user.location.vote_count
-%>
-${voting_widget(votes)}
-<br class="clear-both"/>
-<h3>${c.user.location.title}</h3>
-</div>
+%if c.user:
+  %if c.user.location is None:
+    ${loc.head_tags()}
+    <br/>
+    <div id="location-setting">
+      <form method="post" action="${url(controller='profile', action='update_location_universal')}">
+        <input type="hidden" id="js_url" name="js_url" value="${url(controller='profile', action='js_update_location_universal')}"/>
+        <div>
+          <span style="float: left; margin-right:5px;">${_('Choose Your university:')}</span>
+          <div style="float: left;">
+            ${loc.location_widget(1, titles=[''])}
+          </div>
+          <div style="float: right;">
+            ${h.input_submit(_('Confirm'), id='location-submit')}
+          </div>
+        </div>
+      </form>
+      <br style="clear: both;"/>
+    </div>
+  %elif not c.user.has_voted:
+  <div style="margin: 20px 0; width: 500px;">
+  <%
+     votes = c.user.location.vote_count
+  %>
+  ${voting_widget(votes)}
+  <br class="clear-both"/>
+  <h3>${c.user.location.title}</h3>
+  </div>
+  %endif
+
+  <div id="voting-results" style="${c.user.has_voted and ' ' or 'display: none;'}">
+      ${_('Thank You for voting!')}
+  </div>
+%else:
+  <form style="padding-top: 30px; margin-left: 200px;" method="get" action="${url(controller='home', action='login')}">
+    <div>
+      <input type="hidden" name="came_from" value="${url(controller='home', action='voting')}"/>
+      ${h.input_submit(_('Vote!'), class_="btnMedium", id="vote-submit")}
+    </div>
+  </form>
 %endif
 
 <h2>${_('Voting results')}</h2>
