@@ -11,6 +11,11 @@
 <%def name="portlet(id, portlet_class='')">
 <div class="portlet ${portlet_class}" id="${id}">
   <div class="portlet-inner clearfix">
+    %if hasattr(caller, 'header'):
+      <div class="header">
+        ${caller.header()}
+      </div>
+    %endif
     ${caller.body()}
   </div>
 </div>
