@@ -1,0 +1,75 @@
+/* UTUTI LAYOUT STYLESHEET.
+ * Describes styles of main page content area, sidebars, header and footer.
+ */
+
+/* Content container.
+ */
+
+#layout-wrap {
+    background: #fff;
+    border: solid 1px #bbb;
+    border-top: none;
+    width: 960px;
+    margin: auto;
+}
+
+#layout-wrap #main-content {
+    float: left;
+    width: 960px;
+    padding: 0;
+}
+
+/* Left sidebar.
+ */
+
+#layout-wrap.with-left-sidebar #main-content {
+    float: left;
+    width: 780px;
+    margin-left: 180px;
+    margin-right: -960px;
+    border-left: 1px solid #eeeeee;
+}
+
+#layout-wrap #left-sidebar {
+    display: none; /* so you don't forget to add .with-left-sidebar */
+}
+
+#layout-wrap.with-left-sidebar #left-sidebar {
+    display: block;
+    float: left;
+    width: 180px;
+    margin-left: 0px;
+    margin-right: -180px;
+    border-right: 1px solid #eeeeee;
+    padding: 0;
+}
+
+/* Right sidebar.
+ */
+
+#layout-wrap #right-sidebar {
+    display: none; /* so you don't forget to add .with-right-sidebar */
+}
+
+#layout-wrap.with-right-sidebar #main-content {
+    width: 600px;
+}
+
+#layout-wrap.with-right-sidebar #right-sidebar {
+    display: block;
+    float: left;
+    width: 180px;
+    margin-left: 780px;
+    margin-right: -960px;
+    padding: 0;
+}
+
+/* Content paddings */
+
+.content-inner {
+    padding: 20px 10px;
+}
+
+.sidebar-inner {
+    padding: 20px 7px;
+}

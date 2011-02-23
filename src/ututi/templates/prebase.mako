@@ -227,6 +227,7 @@ ${_('Student information online')}
     </script>
 
     ${h.stylesheet_link(h.path_with_hash('/style.css'))}
+    ${h.stylesheet_link(h.path_with_hash('/layout.css'))}
     ${h.stylesheet_link(h.path_with_hash('/fixed.css'))}
     %if c.user is None:
        ${h.stylesheet_link(h.path_with_hash('/frontpage.css'))}
