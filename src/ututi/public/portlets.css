@@ -3,7 +3,15 @@
 
 .portlet {
     background-color: white !important;
+    padding-bottom: 7px;
+    width: 165px;
+    font-size: 11px;
 }
+
+    .portlet .portlet-inner {
+        padding-bottom: 7px;
+        border-bottom: 1px solid #eeeeee;
+    }
 
 #share-portlet-content { }
 
