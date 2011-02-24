@@ -13,7 +13,7 @@ from ututi.lib.image import serve_logo
 from ututi.lib.validators import validate, TranslatedEmailValidator, \
         FileUploadTypeValidator, SeparatedListValidator, CountryValidator
 import ututi.lib.helpers as h
-from ututi.lib.invitations import make_email_invitations, make_facebook_invitations
+from ututi.lib.invitations import make_facebook_invitations
 
 from ututi.model import meta, LocationTag
 from ututi.model.users import User, UserRegistration
@@ -490,9 +490,8 @@ class RegistrationController(BaseController, FederationMixin):
                       self.form_result['email4'],
                       self.form_result['email5']] + self.form_result['emails']
 
-            make_email_invitations(emails, registration.location,
-                                   registration.email)
-
+            registration.invited_emails = ','.join(filter(bool, emails))
+            meta.Session.commit()
             redirect(registration.url(action='finish'))
 
         return htmlfill.render(self._invite_friends_form())
@@ -502,10 +501,9 @@ class RegistrationController(BaseController, FederationMixin):
         # handle facebook callback
         ids = request.params.get('ids[]')
         if ids:
-            ids = map(int, ids.split(','))
-            make_facebook_invitations(ids, registration.location,
-                                      registration.email)
-            redirect(registration.url(action='invite_friends'))
+            registration.invited_fb_ids = ids
+            meta.Session.commit()
+            redirect(registration.url(action='finish'))
 
         # render page
         fb_user = facebook.get_user_from_cookie(request.cookies,
@@ -522,18 +520,24 @@ class RegistrationController(BaseController, FederationMixin):
                 c.exclude_ids = ','.join(str(u.facebook_id) for u in friend_users)
             except facebook.GraphAPIError:
                 c.has_facebook = False
+
         c.active_step = 'invite_friends'
         return render('registration/invite_friends_fb.mako')
 
     @registration_action
     def finish(self, registration):
         from ututi.lib.security import sign_in_user
-        user = registration.create_user()
         if not registration.location:
-            user.location = registration.create_university()
+            registration.location = registration.create_university()
+        user = registration.create_user()
         meta.Session.add(user)
-        registration.completed = True
         meta.Session.commit()
+        # TODO: handle any integrity errors here
+
+        registration.completed = True
+        registration.process_invitations()
+        meta.Session.commit()
+
         sign_in_user(user)
         redirect(url(controller='profile', action='register_welcome'))
 

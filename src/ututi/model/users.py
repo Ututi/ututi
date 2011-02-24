@@ -697,6 +697,20 @@ class UserRegistration(object):
                                                       qualified=True),
                                      self.hash)
 
+    def process_invitations(self):
+            from ututi.lib.invitations import make_email_invitations, \
+                                              make_facebook_invitations
+
+            if self.invited_emails:
+                emails = self.invited_emails.split(',')
+                make_email_invitations(emails, self.location,
+                                       inviter_email=self.email)
+
+            if self.invited_fb_ids:
+                ids = map(int, self.invited_fb_ids.split(','))
+                make_facebook_invitations(ids, self.location,
+                                          inviter_email=self.email)
+
     def create_user(self):
         """Returns a User object filled with registration data."""
         user = User(fullname=self.fullname,
