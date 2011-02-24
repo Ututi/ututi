@@ -38,6 +38,10 @@
         background-image: url('img/icons.com/add_small_orange.png');
         background-position: 2px center;
     }
+    .portlet ul.icon-list li.icon-find {
+        background-image: url('img/icons.com/search_small.png');
+        background-position: 1px center;
+    }
     .portlet ul.icon-list li.icon-feed { background-image: url('img/icons.com/feed_small_grey.png'); }
     .portlet ul.icon-list li.icon-university { background-image: url('img/icons.com/university_small_grey.png'); }
     .portlet ul.icon-list li.icon-message { background-image: url('img/icons.com/message_small_grey.png'); }

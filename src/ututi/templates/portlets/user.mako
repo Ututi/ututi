@@ -46,7 +46,7 @@
         <a href="${subject.url()}" title="${subject.title}">${h.ellipsis(subject.title, 35)}</a>
       </li>
       %endfor
-      <li class="icon-subject">
+      <li class="icon-find">
         ${h.link_to(_('Find subjects'), url(controller='profile', action='search', obj_type='subject'))}
       </li>
       <li class="icon-add">
@@ -73,7 +73,7 @@
         </a>
       </li>
       %endfor
-      <li class="icon-group">
+      <li class="icon-find">
         ${h.link_to(_('Find groups'), url(controller='profile', action='search', obj_type='group'))}
       </li>
       <li class="icon-add">
