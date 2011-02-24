@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2011-02-23 17:44+0200\n"
+"PO-Revision-Date: 2011-02-24 12:19+0200\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -1181,8 +1181,8 @@ msgid ""
 "See if <a href=\"/voting\">Your university has gathered enough votes</a> "
 "to be transfered to the new UTUTI!"
 msgstr ""
-"Žvilgtelėk, ar Tavo universitetas <a href=\"/voting\">surinko pakankamai balsų</a>,"
-" kad būtų perkeltas į naująjį UTUTI!"
+"Žvilgtelėk, ar Tavo universitetas <a href=\"/voting\">surinko pakankamai "
+"balsų</a>, kad būtų perkeltas į naująjį UTUTI!"
 
 msgid "Search for notes"
 msgstr "Ieškok konspektų"
@@ -3306,6 +3306,15 @@ msgstr ""
 "universitetas būtų naujojo Ututi dalimi šį balandė, balsuok čia. Tik "
 "universitetai, surinkę 500 balsų, bus perkelti."
 
+msgid "Choose Your university:"
+msgstr "Pasirinki universitetą:"
+
+msgid "Thank You for voting!"
+msgstr "Ačiū, kad balsavai!"
+
+msgid "Vote!"
+msgstr "Balsuoti!"
+
 msgid "Voting results"
 msgstr "Balsavimo rezultatai"
 
@@ -3617,6 +3626,12 @@ msgstr "visur"
 
 msgid "in-Subjects"
 msgstr "dalykai"
+
+msgid "Ututi voting is in progress!"
+msgstr "Jau vyksta UTUTI balsavimas!"
+
+msgid "Vote for Your university!"
+msgstr "Balsuok už savo universitetą!"
 
 msgid "University information"
 msgstr "Universiteto informacija"
@@ -4469,12 +4484,6 @@ msgstr ""
 "%(user)s nori prisijungti prie grupės %(group)s. Ar norite patvirtinti "
 "narystę?"
 
-msgid "Choose Your university:"
-msgstr "Pasirinki universitetą:"
-
-msgid "Thank You for voting!"
-msgstr "Ačiū, kad balsavai!"
-
 msgid "Check out how Your university is doing!"
 msgstr "Pasižiūrėk, kaip sekasi tavo universitetui!"
 
@@ -5293,7 +5302,4 @@ msgid_plural "%(count)d votes"
 msgstr[0] "%(count)d balsas"
 msgstr[1] "%(count)d balsai"
 msgstr[2] "%(count)d balsų"
-
-msgid "Vote!"
-msgstr "Balsuoti!"
 

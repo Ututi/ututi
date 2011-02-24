@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2011-02-23 17:43+0200\n"
+"POT-Creation-Date: 2011-02-24 12:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2988,6 +2988,15 @@ msgid ""
 "votes or more will be transfered."
 msgstr ""
 
+msgid "Choose Your university:"
+msgstr ""
+
+msgid "Thank You for voting!"
+msgstr ""
+
+msgid "Vote!"
+msgstr ""
+
 msgid "Voting results"
 msgstr ""
 
@@ -3277,6 +3286,12 @@ msgid "Everywhere"
 msgstr ""
 
 msgid "in-Subjects"
+msgstr ""
+
+msgid "Ututi voting is in progress!"
+msgstr ""
+
+msgid "Vote for Your university!"
 msgstr ""
 
 msgid "University information"
@@ -4064,12 +4079,6 @@ msgid ""
 "membership?"
 msgstr ""
 
-msgid "Choose Your university:"
-msgstr ""
-
-msgid "Thank You for voting!"
-msgstr ""
-
 msgid "Check out how Your university is doing!"
 msgstr ""
 
@@ -4803,7 +4812,4 @@ msgid "%(count)d vote"
 msgid_plural "%(count)d votes"
 msgstr[0] ""
 msgstr[1] ""
-
-msgid "Vote!"
-msgstr ""
 

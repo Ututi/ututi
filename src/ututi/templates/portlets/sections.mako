@@ -7,6 +7,8 @@
 <%namespace file="/portlets/universal.mako" import="quick_file_upload_portlet"/>
 <%namespace file="/portlets/facebook.mako" import="facebook_likebox_portlet"/>
 <%namespace file="/portlets/banners/base.mako" import="ubooks_portlet"/>
+<%namespace file="/widgets/vote.mako" import="voting_bar, voting_widget" />
+<%namespace file="/portlets/base.mako" import="uportlet" name="p"/>
 
 <%def name="teacher_sidebar(exclude=[])">
 <div id="sidebar">
@@ -33,7 +35,26 @@
   ${user_recommend_portlet()}
   %endif
   ${user_groups_portlet()}
-  ${user_support_portlet()}
+  <%p:uportlet id="voting_portlet" portlet_class="orange">
+    <%def name="header()">
+    ${_('Ututi voting is in progress!')}
+    </%def>
+    %if c.user.location is not None:
+    <%
+      count = c.user.location.vote_count
+      count_needed = 500 - count
+    %>
+    ${voting_bar(count, large=false)}
+    <div style="clear: left; padding: 10px 0;">
+    <strong>
+    ${ungettext('Your university needs <strong>%(count)d more vote</strong>.', 'Your university needs <strong>%(count)d more votes.</strong>', count_needed) % dict(count=count_needed)|n}
+    </strong>
+    </div>
+    %else:
+    <a href="${url(controller='home', action='voting')}"><strong>${_('Vote for Your university!')}</strong></a>
+    %endif
+    <div class="right_arrow"><a href="${url(controller='home', action='voting')}">${_('find out more')}</a></div>
+  </%p:uportlet>
 </div>
 %endif
 </%def>
