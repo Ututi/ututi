@@ -7,12 +7,13 @@ from formencode.compound import Pipe
 
 from pylons import tmpl_context as c, url, session, request, config
 from pylons.controllers.util import redirect, abort
-from pylons.i18n import ungettext, _
+from pylons.i18n import _
 from ututi.lib.base import BaseController, render
 from ututi.lib.image import serve_logo
 from ututi.lib.validators import validate, TranslatedEmailValidator, \
         FileUploadTypeValidator, SeparatedListValidator, CountryValidator
 import ututi.lib.helpers as h
+from ututi.lib.invitations import make_email_invitations, make_facebook_invitations
 
 from ututi.model import meta, LocationTag
 from ututi.model.users import User, UserRegistration
@@ -489,7 +490,8 @@ class RegistrationController(BaseController, FederationMixin):
                       self.form_result['email4'],
                       self.form_result['email5']] + self.form_result['emails']
 
-            self._send_email_invitations(registration, emails)
+            make_email_invitations(emails, registration.location,
+                                   registration.email)
 
             redirect(registration.url(action='finish'))
 
@@ -501,7 +503,8 @@ class RegistrationController(BaseController, FederationMixin):
         ids = request.params.get('ids[]')
         if ids:
             ids = map(int, ids.split(','))
-            self._send_facebook_invitations(registration, ids)
+            make_facebook_invitations(ids, registration.location,
+                                      registration.email)
             redirect(registration.url(action='invite_friends'))
 
         # render page
@@ -521,55 +524,6 @@ class RegistrationController(BaseController, FederationMixin):
                 c.has_facebook = False
         c.active_step = 'invite_friends'
         return render('registration/invite_friends_fb.mako')
-
-    def _send_email_invitations(self, registration, emails):
-        already = []
-        invited = []
-        for email in filter(bool, emails):
-            if registration.location and User.get(email, registration.location):
-                already.append(email)
-            else:
-                invitee = UserRegistration.get_by_email(email, registration.location)
-                if invitee is None:
-                    invitee = UserRegistration(registration.location, email)
-                    meta.Session.add(invitee)
-                invitee.inviter = registration.email
-                meta.Session.commit()
-                invitee.send_confirmation_email()
-                invited.append(email)
-
-        if already:
-            h.flash(_("%(email_list)s already using Ututi!") % \
-                    dict(email_list=', '.join(already)))
-
-        if invited:
-            h.flash(_("Invitations sent to %(email_list)s") % \
-                    dict(email_list=', '.join(invited)))
-
-    def _send_facebook_invitations(self, registration, fb_ids):
-        already = []
-        invited = []
-        for facebook_id in fb_ids:
-            if User.get_byfbid(facebook_id, registration.location):
-                already.append(facebook_id)
-            else:
-                invitee = UserRegistration.get_by_fbid(facebook_id, registration.location)
-                if invitee is None:
-                    invitee = UserRegistration(registration.location, facebook_id=facebook_id)
-                    meta.Session.add(invitee)
-                invitee.inviter = registration.email
-                invited.append(facebook_id)
-                meta.Session.commit()
-
-        if already:
-            h.flash(ungettext('%(num)d of your friends is already using Ututi!',
-                              '%(num)d of your friends area already using Ututi!',
-                              len(already)) % dict(num=len(already)))
-
-        if invited:
-            h.flash(ungettext('Invited %(num)d friend.',
-                              'Invited %(num)d friends.',
-                              len(invited)) % dict(num=len(invited)))
 
     @registration_action
     def finish(self, registration):
