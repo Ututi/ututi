@@ -46,7 +46,7 @@ We can edit the group's information.
 We can add a group:
 
    >>> browser.open('http://localhost/')
-   >>> browser.getLink('Create group').click()
+   >>> browser.getLink('Create new group').click()
    >>> browser.getControl('Group e-mail address').value = 'test'
    >>> browser.getControl('Group title').value = 'Test group'
    >>> browser.getControl('Year').value = ['2009']

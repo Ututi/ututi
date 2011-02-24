@@ -5,7 +5,7 @@ Group creation path
 
 This time, let's try creating an academic group:
 
-    >>> browser.getLink('Create group').click()
+    >>> browser.getLink('Create new group').click()
 
     >>> browser.getControl('Group e-mail address').value = 'test2'
     >>> browser.getControl('Group title').value = 'Another test group'
@@ -46,7 +46,7 @@ Let's have a look at the settings:
 Let's create academic group with forum:
 
     >>> browser.getLink('Home').click()
-    >>> browser.getLink('Create group').click()
+    >>> browser.getLink('Create new group').click()
 
     >>> browser.getControl('Group e-mail address').value = 'test2_with_forum'
     >>> browser.getControl('Group title').value = 'Another test group'

@@ -48,7 +48,7 @@ The bugs forum works just fine too:
 
     >>> browser.open('http://localhost/bugs')
 
-    >>> browser.getControl('New topic', index=1).click()
+    >>> browser.getControl('New topic', index=0).click()
     >>> browser.url
     'http://localhost/bugs/new_thread'
 

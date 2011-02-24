@@ -12,7 +12,7 @@ We log in:
 
 Let's invite a couple of users into our group:
 
-    >>> browser.getLink('Moderatoriai').click()
+    >>> browser.getLink('Moderatoriai', url='/group/moderators').click()
     >>> browser.getLink('Members').click()
     >>> browser.getControl(name='emails').value = ('user@ututi.lt\nuser2@ututi.lt')
     >>> browser.getControl('Invite').click()
