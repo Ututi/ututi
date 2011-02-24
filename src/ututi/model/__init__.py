@@ -321,6 +321,10 @@ def setup_orm(engine):
     orm.mapper(UserRegistration, user_registrations_table,
                properties = {'location': relation(Tag),
                              'raw_logo': deferred(user_registrations_table.c.logo),
+                             'inviter': relation(User,
+                                                 primaryjoin=user_registrations_table.c.inviter_id==users_table.c.id),
+                             'user': relation(User,
+                                              primaryjoin=user_registrations_table.c.user_id==users_table.c.id),
                              'university_country': relation(Country),
                              'raw_university_logo': deferred(user_registrations_table.c.university_logo)})
 

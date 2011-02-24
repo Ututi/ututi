@@ -694,22 +694,20 @@ class UserRegistration(object):
     def send_confirmation_email(self):
         send_email_confirmation_code(self.email,
                                      self.url(action='confirm_email',
-                                                      qualified=True),
-                                     self.hash)
+                                                      qualified=True))
 
     def process_invitations(self):
+        if self.user is not None:
             from ututi.lib.invitations import make_email_invitations, \
                                               make_facebook_invitations
 
             if self.invited_emails:
                 emails = self.invited_emails.split(',')
-                make_email_invitations(emails, self.location,
-                                       inviter_email=self.email)
+                make_email_invitations(emails, self.user)
 
             if self.invited_fb_ids:
                 ids = map(int, self.invited_fb_ids.split(','))
-                make_facebook_invitations(ids, self.location,
-                                          inviter_email=self.email)
+                make_facebook_invitations(ids, self.user)
 
     def create_user(self):
         """Returns a User object filled with registration data."""
@@ -726,6 +724,8 @@ class UserRegistration(object):
         user.openid = self.openid
         user.facebook_id = self.facebook_id
         user.logo = self.logo
+        self.user = user # store reference
+
         return user
 
     def create_university(self):

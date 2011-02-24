@@ -1610,17 +1610,16 @@ CREATE TABLE user_registrations (
        facebook_email varchar(320) default null,
        invited_emails text default null,  /* comma-separated emails */
        invited_fb_ids text default null,  /* comma-separated FB ids */
-       inviter varchar(320) default null, /* email address of user who
-                                           * invited for this registration
-                                           */
+       inviter_id int8 default null references users(id) on delete set null,
        completed boolean default false,
-       location_id int8 default null references tags(id) on delete cascade,
+       location_id int8 default null references tags(id) on delete set null,
        university_title varchar(100) default null,
-       university_country_id int8 default null references countries(id) on delete cascade,
+       university_country_id int8 default null references countries(id) on delete set null,
        university_site_url varchar(320) default null,
        university_logo bytea default null,
        university_member_policy university_member_policy default 'RESTRICT_EMAIL',
        university_allowed_domains text default null,
+       user_id int8 default null references users(id) on delete set null,
        primary key (id),
        unique(location_id, email));;
 
