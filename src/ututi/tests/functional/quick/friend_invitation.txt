@@ -8,16 +8,16 @@ Testing ututi recommendation letters sent to friends
    ...         print email.payload()
 
    >>> browser = Browser.logIn()
-   >>> browser.open('http://localhost/profile/feed')
    >>> browser.url
-   'http://localhost/profile/feed'
+   'http://localhost/home/feed'
 
 There should be a portlet with a form that let's us enter email addresses the recommendations will be sent to:
-   >>> form = browser.getForm(id='ututi_recommendation_form')
-   >>> form.getControl('Enter the emails of your classmates, separated by commas or new lines.').value = 'somenewuser@example.com'
+
+   >>> form = browser.getForm(id='invite-email-form')
+   >>> form.getControl('Recipients:').value = 'somenewuser@example.com'
    >>> form.getControl('Send invitation').click()
    >>> printEmails()
-   [u'somenewuser@example.com']
+   ['somenewuser@example.com']
    Hello!
    <BLANKLINE>
    Administrator of the university has been using Ututi, a portal for students, for some time now and recommends you to try it.
@@ -25,7 +25,7 @@ There should be a portlet with a form that let's us enter email addresses the re
    Ututi is a system for students that encourages collaboration and sharing of study materials. We provide tools that make storing lecture notes, sharing files and communicating with your classmates much, much easier.
    <BLANKLINE>
    If you would like to join Ututi now, please follow this link:
-   http://localhost/
+   http://localhost/registration/.../confirm
    <BLANKLINE>
    The Ututi team
    <BLANKLINE>
@@ -35,23 +35,59 @@ There should be a portlet with a form that let's us enter email addresses the re
 And after all this we are redirected back to where we came from.
 
    >>> browser.url
-   'http://localhost/profile/feed'
+   'http://localhost/home/feed'
 
 Plus, a status message is displayed:
    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
-   1 invitation sent.
+   Invitations sent to somenewuser@example.com
+
+--------------------------
+
+User can add personal message to the invitation that is sent:
+
+   >>> form = browser.getForm(id='invite-email-form')
+   >>> form.getControl('Recipients:').value = 'someotheruser@example.com'
+   >>> form.getControl('Add personal message (optional):').value = 'Hey, come and try Ututi. I found it rather nice.'
+   >>> form.getControl('Send invitation').click()
+   >>> printEmails()
+   ['someotheruser@example.com']
+   Hey, come and try Ututi. I found it rather nice.
+   ---
+   <BLANKLINE>
+   Hello!
+   <BLANKLINE>
+   Administrator of the university has been using Ututi, a portal for students, for some time now and recommends you to try it.
+   <BLANKLINE>
+   Ututi is a system for students that encourages collaboration and sharing of study materials. We provide tools that make storing lecture notes, sharing files and communicating with your classmates much, much easier.
+   <BLANKLINE>
+   If you would like to join Ututi now, please follow this link:
+   http://localhost/registration/.../confirm
+   <BLANKLINE>
+   The Ututi team
+   <BLANKLINE>
+
+   >>> mail_queue[:] = []
+
+And after all this we are redirected back to where we came from.
+
+   >>> browser.url
+   'http://localhost/home/feed'
+
+Plus, a status message is displayed:
+   >>> browser.printQuery("//div[@class='flash-message']/span/text()")
+   Invitations sent to someotheruser@example.com
 
 -----------------------------------
 What if some of the emails were mistyped?
 
-   >>> form = browser.getForm(id='ututi_recommendation_form')
-   >>> form.getControl('Enter the emails of your classmates, separated by commas or new lines.').value = 'someneweruser@example.com, abra, bram /n user@example.com'
+   >>> form = browser.getForm(id='invite-email-form')
+   >>> form.getControl('Recipients:').value = 'someneweruser@example.com, abra, bram /n, user@example.com'
    >>> form.getControl('Send invitation').click()
    >>> print len(mail_queue)
    2
 
    >>> printEmails()
-   [u'someneweruser@example.com']
+   ['someneweruser@example.com']
    Hello!
    <BLANKLINE>
    Administrator of the university has been using Ututi, a portal for students, for some time now and recommends you to try it.
@@ -59,11 +95,11 @@ What if some of the emails were mistyped?
    Ututi is a system for students that encourages collaboration and sharing of study materials. We provide tools that make storing lecture notes, sharing files and communicating with your classmates much, much easier.
    <BLANKLINE>
    If you would like to join Ututi now, please follow this link:
-   http://localhost/
+   http://localhost/registration/.../confirm
    <BLANKLINE>
    The Ututi team
    <BLANKLINE>
-   [u'user@example.com']
+   ['user@example.com']
    Hello!
    <BLANKLINE>
    Administrator of the university has been using Ututi, a portal for students, for some time now and recommends you to try it.
@@ -71,21 +107,21 @@ What if some of the emails were mistyped?
    Ututi is a system for students that encourages collaboration and sharing of study materials. We provide tools that make storing lecture notes, sharing files and communicating with your classmates much, much easier.
    <BLANKLINE>
    If you would like to join Ututi now, please follow this link:
-   http://localhost/
+   http://localhost/registration/.../confirm
    <BLANKLINE>
    The Ututi team
    <BLANKLINE>
 
    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
-   Invalid emails: abra, bram, /n
-   2 invitations sent.
+   Invalid email addresses: abra, bram /n
+   Invitations sent to someneweruser@example.com, user@example.com
 
    >>> mail_queue[:] = []
 
 -------------------------
 What if some of the emails belong to people already using ututi?
-   >>> form = browser.getForm(id='ututi_recommendation_form')
-   >>> form.getControl('Enter the emails of your classmates, separated by commas or new lines.').value = 'admin@uni.ututi.com'
+   >>> form = browser.getForm(id='invite-email-form')
+   >>> form.getControl('Recipients:').value = 'admin@uni.ututi.com'
    >>> form.getControl('Send invitation').click()
    >>> print len(mail_queue)
    0

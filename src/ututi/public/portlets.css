@@ -30,6 +30,7 @@
 
     .portlet ul.icon-list li {
         padding-left: 15px;
+        margin: 3px 0;
         background-position: left center;
         background-repeat: no-repeat;
     }
@@ -48,6 +49,14 @@
     .portlet ul.icon-list li.icon-message.active { background-image: url('img/icons.com/message_small_orange.png'); }
     .portlet ul.icon-list li.icon-group { background-image: url('img/icons.com/group2_small_grey.png'); }
     .portlet ul.icon-list li.icon-subject { background-image: url('img/icons.com/subject_small_grey.png'); }
+    .portlet ul.icon-list li.icon-email {
+        background-image: url('img/icons.com/email.png');
+        padding-left: 22px;
+    }
+    .portlet ul.icon-list li.icon-facebook {
+        background-image: url('img/icons.com/FB.png');
+        padding-left: 22px;
+    }
 
 #user-information-portlet { }
 
@@ -82,6 +91,38 @@
         font-weight: normal;
         font-size: 11px;
     }
+
+#invite-friends-portlet { }
+
+    #invite-friends-portlet #invite-email-dialog {
+        display: none;
+    }
+
+        /* dialog pops out of #invite-friends-portlet */
+        #invite-email-dialog #invitation-feedback-message {
+            display: none;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        #invite-email-dialog form input,
+        #invite-email-dialog form textarea,
+        #invite-email-dialog form .helpText {
+            width: 300px;
+        }
+
+        #invite-email-dialog form button {
+            display: block;
+        }
+
+        #invite-email-dialog.email-sent #invitation-feedback-message {
+            display: block;
+        }
+
+        #invite-email-dialog.email-sent form {
+            display: none;
+        }
+
 
 #share-portlet-content { }
 

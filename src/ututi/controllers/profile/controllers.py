@@ -28,6 +28,7 @@ from ututi.lib.fileview import FileViewMixin
 from ututi.lib.security import ActionProtector
 from ututi.lib.image import serve_logo
 from ututi.lib.forms import validate
+from ututi.lib.invitations import make_email_invitations
 from ututi.lib.messaging import EmailMessage
 from ututi.lib.mailinglist import post_message
 from ututi.lib import gg, sms
@@ -38,7 +39,8 @@ from ututi.model.events import Event, TeacherMessageEvent
 from ututi.model import File
 from ututi.model import LocationTag, TeacherGroup
 from ututi.model import meta, Email, User
-from ututi.controllers.profile.validators import HideElementForm, MultiRcptEmailForm
+from ututi.controllers.profile.validators import HideElementForm, MultiRcptEmailForm, FriendsInvitationForm, \
+    FriendsInvitationJSForm
 from ututi.controllers.profile.validators import ContactForm, LocationForm, LogoUpload, PhoneConfirmationForm,\
     PhoneForm, ProfileForm, PasswordChangeForm, StudentGroupForm, StudentGroupDeleteForm, StudentGroupMessageForm
 from ututi.controllers.profile.wall import UserWallMixin
@@ -480,6 +482,33 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
             for rcpt in self.form_result['recipients']:
                 msg.send(rcpt)
             return {'success': True}
+
+    @validate(schema=FriendsInvitationForm())
+    def invite_friends_email(self):
+        if hasattr(self, 'form_result'):
+            emails = self.form_result['recipients'].split(',')
+            message = self.form_result['message']
+            invited, invalid = make_email_invitations(emails, c.user, message)
+            if invalid:
+                h.flash(_("Invalid email addresses: %(email_list)s") % \
+                        dict(email_list=', '.join(invalid)))
+            if invited:
+                h.flash(_("Invitations sent to %(email_list)s") % \
+                        dict(email_list=', '.join(invited)))
+
+        if request.referrer:
+            redirect(request.referrer)
+        else:
+            redirect(url(controller='profile', action='home'))
+
+    @js_validate(schema=FriendsInvitationJSForm())
+    @jsonify
+    def invite_friends_email_js(self):
+        if hasattr(self, 'form_result'):
+            emails = self.form_result['recipients']
+            message = self.form_result['message']
+            make_email_invitations(emails, c.user, message)
+        return {'success': True }
 
 
 class UserProfileController(ProfileControllerBase):

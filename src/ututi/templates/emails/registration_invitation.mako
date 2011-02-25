@@ -1,6 +1,7 @@
-${message}
-
----
+%if message:
+${"%s\n---\n\n" % message}
+%endif
+${_('Hello!')}
 
 ${_('%(user_name)s has been using Ututi, a portal for students, for some time now and recommends you to try it.') % dict(user_name=inviter.fullname)}
 

@@ -100,6 +100,97 @@
   </%self:portlet>
 </%def>
 
+<%def name="invite_friends_portlet(user=None)">
+  <% if user is None: user = c.user %>
+  <%self:portlet id="invite-friends-portlet">
+    <%def name="header()">
+      ${_("Invite friends:")}
+    </%def>
+    <ul class="icon-list">
+      <li class="icon-facebook">
+        <a href="#invite-facebook" id="invite-facebook-link">${"Via facebook"}</a>
+      </li>
+      <li class="icon-email">
+        <a href="#invite-email" id="invite-email-link">${"Via e-mail"}</a>
+      </li>
+    </ul>
+
+    <div id="invite-email-dialog">
+      <form action="${url(controller='profile', action='invite_friends_email')}" method="POST" class="new-style-form" id="invite-email-form">
+        ${h.input_line('recipients', _("Recipients:"),
+                       help_text=_("Enter comma separated list of email addresses"))}
+        ${h.input_area('message', _("Add personal message (optional):"))}
+        ${h.input_submit(_("Send invitation"), id='invite-submit-button', class_='dark')}
+      </form>
+      <p id="invitation-feedback-message">${_("Your invitations were successfully sent.")}</p>
+    </div>
+
+    <script type="text/javascript">
+      //<![CDATA[
+      $(document).ready(function() {
+        $('#invite-email-dialog').dialog({
+            title: '${_("Invite friends via email")}',
+            width: 330,
+            autoOpen: false,
+            resizable: false
+        });
+
+        $("#invite-email-link").click(function() {
+          $('#invite-email-dialog').dialog('open');
+          return false;
+        });
+
+        $('#invite-submit-button').click(function(){
+            $.post("${url(controller='profile', action='invite_friends_email_js')}",
+                   $(this).closest('form').serialize(),
+                   function(data, status) {
+                       if (data.success != true) {
+                           // remove older error messages
+                           $('.error-message').remove();
+                           for (var key in data.errors) {
+                               var error = data.errors[key];
+                               $('#' + key).parent().after($('<div class="error-message">' + error + '</div>'));
+                           }
+                       }
+                       else {
+                           // show feedback to user
+                           $('#invite-email-dialog').addClass('email-sent').delay(1000).queue(function() {
+                               // close and clean up
+                               $(this).dialog('close');
+                               $(this).removeClass('email-sent');
+                               $('.error-message').remove();
+                               $(this).find('#recipients').val('');
+                               $(this).dequeue();
+                           });
+                       }
+                   },
+                   "json");
+
+            return false;
+        });
+
+        $("#invite-facebook-link").click(function() {
+          FB.ui(
+            {
+              method: 'feed',
+              name: 'TODO title',
+              link: 'TODO link',
+              caption: 'TODO caption',
+              message: "${_("Here's what I've found in Ututi")}" + '!',
+              description: 'TODO description',
+              picture: '${url("/img/site_logo_collapsed.gif", qualified=True)}'
+            }
+          );
+          return false;
+        });
+
+
+      });
+      //]]>
+    </script>
+  </%self:portlet>
+</%def>
+
 <%def name="user_information_portlet(user=None, full=True, title=None)">
   <%
      if user is None:

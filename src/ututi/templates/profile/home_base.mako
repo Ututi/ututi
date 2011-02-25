@@ -1,10 +1,14 @@
 <%inherit file="/ubase-sidebar.mako" />
 <%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*"/>
 <%namespace file="/sections/content_snippets.mako" import="tabs" />
-<%namespace file="/portlets/sections.mako" import="user_sidebar"/>
+<%namespace file="/portlets/sections.mako" import="user_sidebar, user_right_sidebar"/>
 
 <%def name="portlets()">
 ${user_sidebar()}
+</%def>
+
+<%def name="portlets_right()">
+${user_right_sidebar()}
 </%def>
 
 <%def name="head_tags()">
