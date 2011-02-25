@@ -130,9 +130,9 @@ create table content_items (id bigserial not null,
        content_type varchar(20) not null default '',
        created_by int8 references users(id) on delete set null,
        created_on timestamp not null default (now() at time zone 'UTC'),
-       modified_by int8 references users(id) default null on delete set null,
+       modified_by int8 references users(id) on delete set null default null,
        modified_on timestamp not null default (now() at time zone 'UTC'),
-       deleted_by int8 references users(id) default null on delete cascade,
+       deleted_by int8 references users(id) on delete cascade default null,
        deleted_on timestamp default null,
        primary key (id));;
 
@@ -293,7 +293,7 @@ create table group_membership_types (
 /* A table that tracks user membership in groups */
 create table group_members (
        group_id int8 references groups(id) on delete cascade not null,
-       user_id int8 references users(id) not null on delete cascade,
+       user_id int8 references users(id) on delete cascade not null,
        membership_type varchar(20) not null references group_membership_types(membership_type) on delete cascade,
        subscribed bool default true,
        receive_email_each varchar(30) default 'day',
@@ -319,7 +319,7 @@ create table subjects (id int8 not null references content_items(id) on delete c
 /* A table that tracks subjects watched and ignored by a user */
 
 create table user_monitored_subjects (
-       user_id int8 references users(id) not null on delete cascade,
+       user_id int8 references users(id) on delete cascade not null,
        subject_id int8 not null references subjects(id) on delete cascade,
        ignored bool default false,
        primary key (user_id, subject_id, ignored));;
@@ -1192,7 +1192,7 @@ CREATE TRIGGER private_message_event_trigger AFTER INSERT ON private_messages
 CREATE TABLE group_invitations (
        created timestamp not null default (now() at time zone 'UTC'),
        email varchar(320) default null,
-       user_id int8 references users(id) default null on delete cascade,
+       user_id int8 references users(id) on delete cascade default null,
        group_id int8 not null references groups(id) on delete cascade,
        author_id int8 not null references users(id) on delete cascade,
        hash varchar(32) not null unique,
@@ -1208,7 +1208,7 @@ create index group_invitations_author_id_idx on group_invitations(author_id);
 /* Table for storing requests to join a group */
 CREATE TABLE group_requests (
        created timestamp not null default (now() at time zone 'UTC'),
-       user_id int8 references users(id) default null on delete cascade,
+       user_id int8 references users(id) on delete cascade default null,
        group_id int8 not null references groups(id) on delete cascade,
        hash char(8) not null unique,
        primary key (hash));;
@@ -1581,14 +1581,14 @@ CREATE TRIGGER update_book_search AFTER INSERT OR UPDATE ON books
 
 /* a table for linking subjects with teachers */
 create table teacher_taught_subjects (
-       user_id int8 references users(id) not null on delete cascade,
+       user_id int8 references users(id) on delete cascade not null,
        subject_id int8 not null references subjects(id) on delete cascade,
        primary key (user_id, subject_id));;
 
 /* a table for linking teachers with their groups: ututi groups and other */
 create table teacher_groups (
        id bigserial NOT NULL,
-       user_id int8 references users(id) not null on delete cascade,
+       user_id int8 references users(id) on delete cascade not null,
        title varchar(500) not null,
        email varchar(320) not null,
        group_id int8 default null references groups(id) on delete cascade,
