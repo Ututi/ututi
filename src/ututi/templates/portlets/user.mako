@@ -109,6 +109,28 @@
   %endif
 </%def>
 
+<%def name="todo_portlet()">
+  <%
+  all_done = True
+  for item in c.todo_items:
+    all_done = all_done and item['done']
+  %>
+  %if not all_done:
+  <%self:portlet id="todo-portlet">
+    <%def name="header()">
+      ${_("What to do next?")}
+    </%def>
+    %for n, item in enumerate(c.todo_items, 1):
+      %if item['done']:
+        <p class="done">${"%d. %s" % (n, item['title'])}</p>
+      %else:
+        <p><a href="${item['link']}">${"%d. %s" % (n, item['title'])}</a></p>
+      %endif
+    %endfor
+  </%self:portlet>
+  %endif
+</%def>
+
 <%def name="invite_friends_portlet(user=None)">
   <% if user is None: user = c.user %>
   <%self:portlet id="invite-friends-portlet">
