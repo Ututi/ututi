@@ -95,7 +95,7 @@ CREATE TRIGGER check_gadugadu BEFORE INSERT OR UPDATE ON users
     FOR EACH ROW EXECUTE PROCEDURE check_gadugadu();;
 
 /* Storing the emails of the users. */
-create table emails (id int8 not null references users(id),
+create table emails (id int8 not null references users(id) on delete cascade,
        email varchar(320),
        confirmed boolean default FALSE,
        confirmation_key char(32) default '',
@@ -117,7 +117,7 @@ CREATE TRIGGER lowercase_email BEFORE INSERT OR UPDATE ON emails
 /* user medals */
 create table user_medals (
        id bigserial not null,
-       user_id int8 default null references users(id),
+       user_id int8 default null references users(id) on delete cascade,
        medal_type varchar(30) not null,
        awarded_on timestamp not null default (now() at time zone 'UTC'),
        primary key (id),
@@ -128,11 +128,11 @@ create index user_medals_user_id on user_medals(user_id);
 /* A generic table for Ututi objects */
 create table content_items (id bigserial not null,
        content_type varchar(20) not null default '',
-       created_by int8 references users(id),
+       created_by int8 references users(id) on delete set null,
        created_on timestamp not null default (now() at time zone 'UTC'),
-       modified_by int8 references users(id) default null,
+       modified_by int8 references users(id) default null on delete set null,
        modified_on timestamp not null default (now() at time zone 'UTC'),
-       deleted_by int8 references users(id) default null,
+       deleted_by int8 references users(id) default null on delete cascade,
        deleted_on timestamp default null,
        primary key (id));;
 
@@ -152,9 +152,9 @@ CREATE TRIGGER set_deleted_on BEFORE UPDATE ON content_items
     FOR EACH ROW EXECUTE PROCEDURE set_deleted_on();;
 
 /* private messages */
-CREATE TABLE private_messages (id int8 references content_items(id),
-       sender_id int8 not null references users(id),
-       recipient_id int8 not null references users(id),
+CREATE TABLE private_messages (id int8 references content_items(id) on delete cascade,
+       sender_id int8 not null references users(id) on delete cascade,
+       recipient_id int8 not null references users(id) on delete cascade,
        thread_id int8 default null references private_messages(id),
        subject varchar(500) not null,
        content text default '',
@@ -167,7 +167,7 @@ CREATE INDEX sender_id ON private_messages (sender_id);;
 CREATE INDEX recipient_id ON private_messages (recipient_id);;
 
 /* A table for files */
-create table files (id int8 references content_items(id),
+create table files (id int8 references content_items(id) on delete cascade,
        md5 char(32),
        folder varchar(255) default '' not null,
        mimetype varchar(255) default 'application/octet-stream',
@@ -182,7 +182,7 @@ create index files_parent_id_idx on files(parent_id);
 create index md5 on files (md5);;
 
 create table file_downloads (file_id int8 references files(id) on delete cascade,
-       user_id int8 references users(id),
+       user_id int8 references users(id) on delete cascade,
        download_time timestamp not null default (now() at time zone 'UTC'),
        range_start int8 default null,
        range_end int8 default null,
@@ -249,7 +249,7 @@ create table group_coupons (
 
 /* A table for groups */
 create table groups (
-       id int8 references content_items(id),
+       id int8 references content_items(id) on delete cascade,
        group_id varchar(250) not null unique,
        title varchar(250) not null,
        year date not null,
@@ -281,7 +281,7 @@ create table group_whitelist (
 create table coupon_usage (
        coupon_id varchar(20) not null references group_coupons(id),
        group_id int8 default null references groups(id) on delete cascade,
-       user_id int8 not null references users(id),
+       user_id int8 not null references users(id) on delete cascade,
        primary key (coupon_id, user_id));;
 
 /* An enumerator for membership types in groups */
@@ -293,7 +293,7 @@ create table group_membership_types (
 /* A table that tracks user membership in groups */
 create table group_members (
        group_id int8 references groups(id) on delete cascade not null,
-       user_id int8 references users(id) not null,
+       user_id int8 references users(id) not null on delete cascade,
        membership_type varchar(20) not null references group_membership_types(membership_type) on delete cascade,
        subscribed bool default true,
        receive_email_each varchar(30) default 'day',
@@ -309,7 +309,7 @@ insert into group_membership_types (membership_type)
                       values ('member');;
 
 /* A table for subjects */
-create table subjects (id int8 not null references content_items(id),
+create table subjects (id int8 not null references content_items(id) on delete cascade,
        subject_id varchar(150) default null,
        title varchar(500) not null,
        lecturer varchar(500) default null,
@@ -319,7 +319,7 @@ create table subjects (id int8 not null references content_items(id),
 /* A table that tracks subjects watched and ignored by a user */
 
 create table user_monitored_subjects (
-       user_id int8 references users(id) not null,
+       user_id int8 references users(id) not null on delete cascade,
        subject_id int8 not null references subjects(id) on delete cascade,
        ignored bool default false,
        primary key (user_id, subject_id, ignored));;
@@ -327,10 +327,10 @@ create table user_monitored_subjects (
 /* A table for pages */
 
 create table pages (
-       id int8 not null references content_items(id),
+       id int8 not null references content_items(id) on delete cascade,
        primary key(id));;
 
-create table page_versions(id int8 not null references content_items(id),
+create table page_versions(id int8 not null references content_items(id) on delete cascade,
        page_id int8 not null references pages(id) on delete cascade,
        title varchar(255) not null default '',
        content text not null default '',
@@ -361,15 +361,15 @@ create table group_mailing_list_messages (
        reply_to_group_id int8 references groups(id) on delete cascade default null,
        thread_message_id varchar(320) not null,
        thread_group_id int8 references groups(id) on delete cascade not null,
-       author_id int8 references users(id),
+       author_id int8 references users(id) on delete set null,
        subject varchar(500) not null,
        original bytea not null,
        sent timestamp not null,
        in_moderation_queue boolean default false,
        constraint reply_to
-       foreign key (reply_to_message_id, reply_to_group_id) references group_mailing_list_messages(message_id, group_id),
+       foreign key (reply_to_message_id, reply_to_group_id) references group_mailing_list_messages(message_id, group_id) on delete set null,
        constraint thread
-       foreign key (thread_message_id, thread_group_id) references group_mailing_list_messages(message_id, group_id),
+       foreign key (thread_message_id, thread_group_id) references group_mailing_list_messages(message_id, group_id) on delete cascade,
        primary key (message_id, group_id));;
 
 
@@ -453,7 +453,7 @@ INSERT INTO forum_categories (group_id, title, description)
 
 
 CREATE TABLE forum_posts (
-       id int8 not null references content_items(id),
+       id int8 not null references content_items(id) on delete cascade,
        thread_id int8 not null references forum_posts on delete cascade,
        title varchar(500) not null,
        message text not null,
@@ -467,13 +467,13 @@ CREATE INDEX forum_posts_category_id ON forum_posts(category_id);
 
 CREATE TABLE seen_threads (
        thread_id int8 not null references forum_posts on delete cascade,
-       user_id int8 not null references users(id),
+       user_id int8 not null references users(id) on delete cascade,
        visited_on timestamp not null default '2000-01-01',
        primary key(thread_id, user_id));;
 
 CREATE TABLE subscribed_threads (
        thread_id int8 not null references forum_posts on delete cascade,
-       user_id int8 not null references users(id),
+       user_id int8 not null references users(id) on delete cascade,
        active boolean default true,
        primary key(thread_id, user_id));;
 
@@ -804,8 +804,8 @@ CREATE TRIGGER on_content_update BEFORE UPDATE ON content_items
 create table events (
        id bigserial not null,
        object_id int8 default null references content_items(id) on delete cascade,
-       author_id int8 references users(id),
-       recipient_id int8 default null references users(id),
+       author_id int8 references users(id) on delete cascade,
+       recipient_id int8 default null references users(id) on delete cascade,
        created timestamp not null default (now() at time zone 'UTC'),
        event_type varchar(30),
        file_id int8 references files(id) on delete cascade default null,
@@ -854,7 +854,7 @@ $$ LANGUAGE plpgsql;;
 
 
 /* event comments */
-CREATE TABLE event_comments (id int8 references content_items(id),
+CREATE TABLE event_comments (id int8 references content_items(id) on delete cascade,
        event_id int8 not null references events(id) on delete cascade,
        content text default '',
        primary key (id));;
@@ -1091,12 +1091,20 @@ $$ LANGUAGE plpgsql;;
 CREATE TRIGGER group_forum_message_event_trigger AFTER INSERT OR UPDATE ON forum_posts
     FOR EACH ROW EXECUTE PROCEDURE group_forum_message_event_trigger();;
 
-
 CREATE FUNCTION member_group_event_trigger() RETURNS trigger AS $$
     DECLARE
       evt events;
+      temp_id int8;
     BEGIN
       IF TG_OP = 'DELETE' THEN
+        SELECT u.id into temp_id FROM users u where u.id = OLD.user_id;
+        IF NOT FOUND THEN
+          RETURN NEW;
+        END IF;
+        SELECT g.id into temp_id FROM groups g where g.id = OLD.group_id;
+        IF NOT FOUND THEN
+          RETURN NEW;
+        END IF;
         INSERT INTO events (object_id, author_id, event_type)
                VALUES (OLD.group_id, OLD.user_id, 'member_left')
                RETURNING * INTO evt;
@@ -1115,8 +1123,18 @@ CREATE TRIGGER member_group_event_trigger AFTER INSERT OR DELETE ON group_member
     FOR EACH ROW EXECUTE PROCEDURE member_group_event_trigger();;
 
 CREATE FUNCTION group_subject_event_trigger() RETURNS trigger AS $$
+    DECLARE
+      temp_id int8;
     BEGIN
       IF TG_OP = 'DELETE' THEN
+        SELECT g.id into temp_id FROM groups g where g.id = OLD.group_id;
+        IF NOT FOUND THEN
+          RETURN NEW;
+        END IF;
+        SELECT s.id into temp_id FROM subjects s where s.id = OLD.subject_id;
+        IF NOT FOUND THEN
+          RETURN NEW;
+        END IF;
         INSERT INTO events (object_id, subject_id, author_id, event_type)
                VALUES (OLD.group_id, OLD.subject_id, cast(current_setting('ututi.active_user') as int8), 'group_stopped_watching_subject');
       ELSIF TG_OP = 'INSERT' THEN
@@ -1174,9 +1192,9 @@ CREATE TRIGGER private_message_event_trigger AFTER INSERT ON private_messages
 CREATE TABLE group_invitations (
        created timestamp not null default (now() at time zone 'UTC'),
        email varchar(320) default null,
-       user_id int8 references users(id) default null,
+       user_id int8 references users(id) default null on delete cascade,
        group_id int8 not null references groups(id) on delete cascade,
-       author_id int8 not null references users(id),
+       author_id int8 not null references users(id) on delete cascade,
        hash varchar(32) not null unique,
        facebook_id int8 default null,
        active boolean default true,
@@ -1190,7 +1208,7 @@ create index group_invitations_author_id_idx on group_invitations(author_id);
 /* Table for storing requests to join a group */
 CREATE TABLE group_requests (
        created timestamp not null default (now() at time zone 'UTC'),
-       user_id int8 references users(id) default null,
+       user_id int8 references users(id) default null on delete cascade,
        group_id int8 not null references groups(id) on delete cascade,
        hash char(8) not null unique,
        primary key (hash));;
@@ -1202,7 +1220,7 @@ create index group_requests_group_id_idx on group_requests(group_id);
 create table payments (
        id bigserial not null,
        group_id int8 default null references groups(id),
-       user_id int8 default null references users(id),
+       user_id int8 default null references users(id) on delete set null,
        payment_type varchar(30),
        amount int8 default 0,
        valid bool default False,
@@ -1476,7 +1494,7 @@ CREATE TABLE notifications (
 /* notification - user relationship*/
 
 CREATE TABLE notifications_viewed (
-       user_id int8 NOT NULL REFERENCES users(id),
+       user_id int8 NOT NULL REFERENCES users(id) on delete cascade,
        notification_id int8 NOT NULL REFERENCES notifications(id)
 );;
 
@@ -1511,7 +1529,7 @@ create table book_types (
 );;
 
 CREATE TABLE books (
-       id int8 references content_items(id),
+       id int8 references content_items(id) on delete cascade,
        title varchar(100) NOT NULL,
        description text,
        author varchar(100),
@@ -1563,14 +1581,14 @@ CREATE TRIGGER update_book_search AFTER INSERT OR UPDATE ON books
 
 /* a table for linking subjects with teachers */
 create table teacher_taught_subjects (
-       user_id int8 references users(id) not null,
+       user_id int8 references users(id) not null on delete cascade,
        subject_id int8 not null references subjects(id) on delete cascade,
        primary key (user_id, subject_id));;
 
 /* a table for linking teachers with their groups: ututi groups and other */
 create table teacher_groups (
        id bigserial NOT NULL,
-       user_id int8 references users(id) not null,
+       user_id int8 references users(id) not null on delete cascade,
        title varchar(500) not null,
        email varchar(320) not null,
        group_id int8 default null references groups(id) on delete cascade,

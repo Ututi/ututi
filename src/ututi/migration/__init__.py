@@ -5,19 +5,19 @@ import pkg_resources
 
 from martian.scan import module_info_from_dotted_name
 
-MIN_VERSION = 161
+MIN_VERSION = 162
 
 def sql_migrate(name):
     base_name = name.split('.')[-1]
     upgrade_file = "%s_upgrade.sql" % base_name
     downgrade_file = "%s_downgrade.sql" % base_name
 
-    def upgrade(engine, lang):
+    def upgrade(engine):
         connection = engine.connect()
         statements = pkg_resources.resource_string('ututi.migration', upgrade_file)
         connection.execute(statements)
 
-    def downgrade(engine, lang):
+    def downgrade(engine):
         connection = engine.connect()
         statements = pkg_resources.resource_string('ututi.migration', downgrade_file)
         connection.execute(statements)
@@ -37,9 +37,8 @@ class GreatMigrator(object):
 
     min_version = MIN_VERSION
 
-    def __init__(self, engine, language=None):
+    def __init__(self, engine):
         self.engine = engine
-        self.language = language
 
     @property
     def evolution_scripts(self):
@@ -100,13 +99,10 @@ class GreatMigrator(object):
     def run_scripts(self, start, end):
         connection = self.engine.connect()
         tx = connection.begin()
-        res = list(connection.execute("select * from pg_ts_config where cfgname='%s'" % self.language))
-        if res:
-            connection.execute("SET default_text_search_config TO 'public.%s'" % self.language)
 
         for script in self.evolution_scripts[start:end]:
             print "Running:", script.title
-            script.upgrade(connection, self.language)
+            script.upgrade(connection)
 
         print "Setting database version to:", end
         connection.execute("update db_versions set version=%d" % end)
@@ -122,7 +118,7 @@ class GreatMigrator(object):
 
         script = self.evolution_scripts[start-1]
         print "Running:", script.title
-        script.downgrade(connection, self.language)
+        script.downgrade(connection)
 
         print "Setting database version to:", down
         connection.execute("update db_versions set version=%d" % down)
@@ -165,7 +161,7 @@ def main():
     engine = engine_from_config(dict(clo.parser.items('app:main')))
 
     # XXX Avoid circular import
-    migrator = GreatMigrator(engine, language=clo.parser.get('app:main', 'lang'))
+    migrator = GreatMigrator(engine)
 
     if action == 'upgrade':
         migrator.upgrade_min()
