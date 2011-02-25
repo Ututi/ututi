@@ -431,10 +431,13 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
     @ActionProtector("user")
     @validate(schema=LocationForm, form='home')
     def update_location_universal(self):
-        c.user.location = self.form_result.get('location', None)
-        meta.Session.commit()
-        h.flash(_('Your university information has been updated.'))
-        redirect(request.referrer)
+        if hasattr(self, 'form_result'):
+            c.user.location = self.form_result.get('location', None)
+            meta.Session.commit()
+            h.flash(_('Your university information has been updated.'))
+            redirect(request.referrer)
+        else:
+            redirect(url(controller='home', action='voting'))
 
     @ActionProtector("user")
     def js_update_location_universal(self):
@@ -450,7 +453,8 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
     def transfer_vote(self):
         c.user.has_voted = True
         meta.Session.commit()
-        redirect(request.referrer)
+        if request.referrer:
+            redirect(request.referrer)
 
     @ActionProtector("user")
     def js_transfer_vote(self):

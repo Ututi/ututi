@@ -84,7 +84,7 @@ ${_("Going in this new direction, we have decided to transition only the univers
 %if c.user:
   %if c.user.location is None:
     ${loc.head_tags()}
-    <br/>
+    <br />
     <div id="location-setting">
       <form method="post" action="${url(controller='profile', action='update_location_universal')}">
         <input type="hidden" id="js_url" name="js_url" value="${url(controller='profile', action='js_update_location_universal')}"/>

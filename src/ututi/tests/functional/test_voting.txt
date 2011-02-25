@@ -1,0 +1,47 @@
+Test voting functionality
+=========================
+
+There should be a link on the front page pointing us to the voting results page:
+   >>> browser = Browser()
+   >>> browser.open('http://localhost/')
+   >>> browser.getLink('Your university has gathered enough votes').click()
+
+   >>> browser.url
+   'http://localhost/voting'
+
+Vote counts should be visible.
+Ab initio none are zero - they are padded with the length of the university's title.
+
+   >>> browser.printCssQuery('.voting-count-small', include_attributes=[''])
+   <div>22 votes</div>
+
+The vote button is visible even to anonymous users:
+   >>> browser.getControl('Vote!').click()
+
+But users need to login first:
+   >>> browser.url
+   'http://localhost/login?came_from=%2Fvoting'
+
+    >>> form = browser.getForm('loginForm')
+    >>> form.getControl('Email').value = "user@ututi.lt"
+    >>> form.getControl('Password').value = "password"
+    >>> form.getControl('Login').click()
+
+    >>> browser.url
+    'http://localhost/voting'
+
+Once the user has the chance to vote, he first needs to set his location tag:
+    >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
+    >>> browser.getControl('Confirm').click()
+
+    >>> browser.url
+    'http://localhost/voting'
+
+Now we can vote:
+    >>> browser.getControl('Vote!').click()
+    >>> browser.url
+    'http://localhost/profile/transfer_vote'
+
+    >>> browser.open('http://localhost/voting')
+    >>> browser.printCssQuery('.voting-count-small', include_attributes=[''])
+    <div>23 votes</div>
