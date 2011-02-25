@@ -1,6 +1,6 @@
 <%namespace file="/portlets/user.mako" import="profile_portlet, user_information_portlet, invite_friends_portlet,
                                                user_groups_portlet, user_subjects_portlet, teacher_information_portlet,
-                                               user_menu_portlet"/>
+                                               user_menu_portlet, user_description_portlet"/>
 <%namespace file="/portlets/group.mako" import="group_info_portlet, group_forum_post_portlet,
                                                 group_invite_member_portlet, group_sms_portlet,
                                                 group_members_portlet"/>
@@ -26,6 +26,7 @@
 </%def>
 
 <%def name="user_right_sidebar(exclude=[])">
+  ${user_description_portlet()}
   ${invite_friends_portlet()}
 </%def>
 

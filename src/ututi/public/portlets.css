@@ -10,6 +10,7 @@
 
     .portlet .header {
         font-weight: bold;
+        text-transform: uppercase;
         font-size: 10px;
         color: #6d6d6d;
     }
@@ -76,20 +77,10 @@
         margin-left: 70px;
     }
 
-#user-groups-portlet { }
+#user-description-portlet { }
 
-    #user-groups-portlet .header {
-        text-transform: uppercase;
-        font-weight: normal;
-        font-size: 11px;
-    }
-
-#user-subjects-portlet { }
-
-    #user-subjects-portlet .header {
-        text-transform: uppercase;
-        font-weight: normal;
-        font-size: 11px;
+    #user-description-portlet p {
+        font-size: 10px;
     }
 
 #invite-friends-portlet { }

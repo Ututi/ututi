@@ -100,6 +100,15 @@
   </%self:portlet>
 </%def>
 
+<%def name="user_description_portlet(user=None)">
+  <% if user is None: user = c.user %>
+  %if user.description:
+  <%self:portlet id="user-description-portlet">
+    <p>${user.description}</p>
+  </%self:portlet>
+  %endif
+</%def>
+
 <%def name="invite_friends_portlet(user=None)">
   <% if user is None: user = c.user %>
   <%self:portlet id="invite-friends-portlet">
