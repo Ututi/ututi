@@ -1340,6 +1340,7 @@ ul#user-menu {
     float: right;
     list-style: none;
     max-width: 190px;
+    min-width: 100px;
     color: #ffffff;
     padding-right: 10px;
 }
