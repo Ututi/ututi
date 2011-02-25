@@ -41,10 +41,10 @@
   </fb:serverFbml>
 %else:
   <p>
-    You have to log in to Facebook in order to use this invitation form.
+    ${_("You have to log in to Facebook in order to use this invitation form.")}
   </p>
 
-  <fb:login-button perms="email" onlogin="show_loading_message(); window.location = '${c.registration.url(action='invite_friends')}'">
+  <fb:login-button perms="email" onlogin="show_loading_message(); window.location = '${c.registration.url(action='invite_friends_fb')}'">
     ${_('Connect')}
   </fb:login-button>
   <a id="skip-link" href="${c.registration.url(action='invite_friends')}">
