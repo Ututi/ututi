@@ -81,45 +81,6 @@ div#pager {
 }
 
 /* Form controls */
-span.error-message {
-        color: red;
-        margin-top: -5px;
-        font-size: 10px;
-}
-
-div.error-message {
-    color: red;
-    font-size: 10px;
-}
-
-.fullForm span.error-message {
-    margin-top: 0;
-}
-.textField {
-    display: inline-block;
-    padding-right: 5px;
-    position: relative;
-    vertical-align: top;
-    *display: inline; /* IE7 */
-    *zoom: 1; /* IE7 */
-}
-
-.textField .overlay {
-    position: absolute;
-    left: 5px;
-    top: 2px;
-    bottom: 2px;
-    color: #8c8c8c;
-    z-index: 100;
-}
-
-.textFieldBig input {
-    background-position: left -30px;
-    height: 30px;
-    line-height: 30px;
-    font-size: 18px;
-}
-
 #mainContent label.ieskok input {
     width: 300px;
 }
