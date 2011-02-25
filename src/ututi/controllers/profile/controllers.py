@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import logging
 import facebook
 import random
@@ -125,6 +125,12 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
             'link': url(controller='profile', action='edit'),
             'done': profile_complete
         })
+
+        five_mins = timedelta(0, 300)
+        c.users_online = meta.Session.query(User)\
+                .filter(User.id != c.user.id)\
+                .filter(User.last_seen > datetime.utcnow() - five_mins)\
+                .limit(12).all()
 
 
     @ActionProtector("user")

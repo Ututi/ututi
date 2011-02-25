@@ -1,5 +1,25 @@
 <%inherit file="/portlets/base.mako"/>
 
+<%def name="users_online_portlet()">
+  <%doc>Requires context variable c.users_online</%doc>
+  %if hasattr(c, 'users_online') and c.users_online:
+    <%self:portlet id="users-online-portlet">
+      <%def name="header()">
+        ${_("People online:")}
+      </%def>
+      <div class="clearfix">
+      %for user in c.users_online:
+        <a href="${user.url()}" class="user-logo">
+          <img src="${user.url(action='logo', width=30)}"
+               alt="${user.fullname}"
+               title="${user.fullname}" />
+        </a>
+      %endfor
+    </div>
+    </%self:portlet>
+  %endif
+</%def>
+
 <%def name="quick_file_upload_portlet(targets, label=None)">
 %if len(targets) > 0:
   <%self:action_portlet id="file_upload_portlet" expanding="True" label='${label}'>

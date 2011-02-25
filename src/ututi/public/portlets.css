@@ -94,6 +94,13 @@
         color: #666666;
     }
 
+#users-online-portlet { }
+
+    #users-online-portlet a.user-logo img {
+        width: 30px;
+        margin: 2px 8px 0 0;
+    }
+
 #invite-friends-portlet { }
 
     #invite-friends-portlet #invite-email-dialog {

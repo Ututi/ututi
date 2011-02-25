@@ -4,7 +4,7 @@
 <%namespace file="/portlets/group.mako" import="group_info_portlet, group_forum_post_portlet,
                                                 group_invite_member_portlet, group_sms_portlet,
                                                 group_members_portlet"/>
-<%namespace file="/portlets/universal.mako" import="quick_file_upload_portlet"/>
+<%namespace file="/portlets/universal.mako" import="quick_file_upload_portlet, users_online_portlet"/>
 <%namespace file="/portlets/facebook.mako" import="facebook_likebox_portlet"/>
 <%namespace file="/portlets/banners/base.mako" import="ubooks_portlet"/>
 
@@ -29,6 +29,7 @@
   ${user_description_portlet()}
   ${todo_portlet()}
   ${invite_friends_portlet()}
+  ${users_online_portlet()}
 </%def>
 
 <%def name="group_sidebar(exclude=[])">
