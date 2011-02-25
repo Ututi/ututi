@@ -240,11 +240,6 @@ and invitation are sent:
     >>> len(mail_queue)
     4
 
-A flash message is displayed, indicating that emails were sent.
-
-    >>> browser.printQuery("//div[@class='flash-message']//text()")
-    Invitations sent to one@example.com, two@example.com, three@example.com, five@example.com
-
     >>> [msg.recipients for msg in mail_queue]
     [['one@example.com'], ['two@example.com'], ['three@example.com'], ['five@example.com']]
 

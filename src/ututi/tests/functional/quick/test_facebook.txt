@@ -33,5 +33,5 @@ a single click away:
     >>> browser2.url
     'http://localhost/home/feed'
 
-    >>> browser2.printCssQuery('.personal-data h2')
-    <h2>John Smith</h2>
+    >>> browser2.printCssQuery('.user-fullname', strip=True)
+    <div>John Smith</div>
