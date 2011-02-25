@@ -37,18 +37,12 @@
     <%def name="header()">
       ${_('My subjects:')}
     </%def>
-    %if not user.watched_subjects:
-      <p>${_('You are not watching any subjects.')}</p>
-    %endif
     <ul class="icon-list">
       %for subject in user.watched_subjects:
       <li class="icon-subject">
         <a href="${subject.url()}" title="${subject.title}">${h.ellipsis(subject.title, 35)}</a>
       </li>
       %endfor
-      <li class="icon-find">
-        ${h.link_to(_('Find subjects'), url(controller='profile', action='search', obj_type='subject'))}
-      </li>
       <li class="icon-add">
         ${h.link_to(_('Create new subject'), url(controller='subject', action='add'))}
       </li>
@@ -62,9 +56,6 @@
     <%def name="header()">
       ${_('My groups:')}
     </%def>
-    %if not user.memberships:
-      <p>${_('You are not a member of any group.')}</p>
-    %endif
     <ul class="icon-list">
       %for group in user.groups:
       <li class="icon-group">
