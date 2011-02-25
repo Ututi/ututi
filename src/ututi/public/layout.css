@@ -73,3 +73,7 @@
 .sidebar-inner {
     padding: 20px 7px;
 }
+
+#left-sidebar .sidebar-inner {
+    padding-left: 12px;
+}
