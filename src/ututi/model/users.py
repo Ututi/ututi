@@ -427,7 +427,7 @@ class User(object):
     def isConfirmed(self):
         return self.emails[0].confirmed
 
-    logo = logo_property()
+    logo = logo_property(square=True)
 
     def has_logo(self):
         return bool(meta.Session.query(User).filter_by(id=self.id).filter(User.raw_logo != None).count())
