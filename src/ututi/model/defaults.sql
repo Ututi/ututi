@@ -11,7 +11,7 @@ insert into languages (title, id) values
 
 create table language_texts (
        id varchar(100) not null,
-       language_id varchar(100) not null references languages(id),
+       language_id varchar(100) not null references languages(id) on delete cascade,
        text text not null default '',
        primary key (id, language_id));;
 
@@ -28,7 +28,7 @@ create table countries (
        name varchar(100) not null,
        timezone varchar(100) default 'UTC' not null,
        locale varchar(30) not null,
-       language_id varchar(100) not null references languages(id),
+       language_id varchar(100) not null references languages(id) on delete cascade,
        primary key (id));;
 
 insert into countries (name, timezone, locale, language_id) values
