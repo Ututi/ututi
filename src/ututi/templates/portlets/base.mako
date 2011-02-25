@@ -16,7 +16,9 @@
         ${caller.header()}
       </div>
     %endif
-    ${caller.body()}
+      <div class="content">
+        ${caller.body()}
+      </div>
   </div>
 </div>
 </%def>
