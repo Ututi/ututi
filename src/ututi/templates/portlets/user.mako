@@ -44,7 +44,7 @@
       </li>
       %endfor
       <li class="icon-add">
-        ${h.link_to(_('Create new subject'), url(controller='subject', action='add'))}
+        ${h.link_to(_('Add subject'), url(controller='subject', action='add'))}
       </li>
     </ul>
   </%self:portlet>
