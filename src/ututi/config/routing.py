@@ -231,7 +231,6 @@ def make_map(config):
     map.connect('/home/subjects', controller='profile', action='my_subjects')
 
     #user registration path
-    map.connect('/welcome', controller='profile', action='welcome')
     map.connect('/register/welcome', controller='profile', action='register_welcome')
 
     #new user registration path
