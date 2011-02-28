@@ -1,4 +1,4 @@
-<%inherit file="/ubase-width.mako" />
+<%inherit file="/ubase.mako" />
 <%namespace file="/widgets/dropdown.mako" name="d" import="dropdown, head_tags, js" />
 
 <%def name="head_tags()">

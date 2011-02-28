@@ -1,4 +1,4 @@
-<%inherit file="/ubase-width.mako" />
+<%inherit file="/ubase.mako" />
 <%namespace name="b" file="standard_blocks.mako" />
 
 <%b:rounded_block>

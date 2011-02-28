@@ -1,3 +1,3 @@
-<%inherit file="/ubase-width.mako" />
+<%inherit file="/ubase.mako" />
 
 ${next.body()}
