@@ -20,5 +20,5 @@
 
 <form action="${url(controller='registration', action='resend_code')}" method="POST">
   ${h.input_hidden('email', c.email)}
-  ${h.input_submit(_("Send again"))}
+  ${h.input_submit(_("Send again"), class_='dark')}
 </form>

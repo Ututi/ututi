@@ -31,25 +31,27 @@
 
 <p>${_("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et")}</p>
 
-<form id="invite-friends-form"
-      action="${c.registration.url(action='invite_friends')}"
-      method="POST">
+<div class="clearfix" id="invitation-choice">
 
-  <p class="invite-choice">${_('Invite friends via email')}</p>
-  ${h.input_line('email1', None, right_next=c.email_suffix)}
-  ${h.input_line('email2', None, right_next=c.email_suffix)}
-  ${h.input_line('email3', None, right_next=c.email_suffix)}
-  ${h.input_line('email4', None, right_next=c.email_suffix)}
-  ${h.input_line('email5', None, right_next=c.email_suffix)}
+  <form id="invite-friends-form"
+        action="${c.registration.url(action='invite_friends')}"
+        method="POST">
 
-  ${h.input_submit(_("Finish"))}
-</form>
+    <p class="invite-choice">${_('Invite friends via email')}</p>
+    ${h.input_line('email1', None, right_next=c.email_suffix)}
+    ${h.input_line('email2', None, right_next=c.email_suffix)}
+    ${h.input_line('email3', None, right_next=c.email_suffix)}
+    ${h.input_line('email4', None, right_next=c.email_suffix)}
+    ${h.input_line('email5', None, right_next=c.email_suffix)}
 
-<div id="facebook-invite-box">
-  <p class="invite-choice">${_('Invite friends via facebook')}</p>
-  <a id="facebook-button" href="${c.registration.url(action='invite_friends_fb', qualified=True)}">
-    ${h.image('/img/facebook-button.png', alt=_('Facebook'))}
-  </a>
+    ${h.input_submit(_("Finish"))}
+  </form>
+
+  <div id="facebook-invite-box">
+    <p class="invite-choice">${_('Invite friends via facebook')}</p>
+    <a id="facebook-button" href="${c.registration.url(action='invite_friends_fb', qualified=True)}">
+      ${h.image('/img/facebook-button.png', alt=_('Facebook'))}
+    </a>
+  </div>
+
 </div>
-
-<div style="clear: both" />

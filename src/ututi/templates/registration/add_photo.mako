@@ -12,7 +12,7 @@
   }
   #skip-link {
     float: right;
-    margin-top: 30px;
+    margin-top: -10px;
   }
   #add-photo-form {
     padding-top: 5px;
@@ -43,7 +43,7 @@
   <input type="file" name="photo" id="photo-field" />
   <form:error name="photo-field" /> <!-- formencode errors container -->
 
-  <button id="choose-button" style="display: none">${_("Choose")}</button>
+  <button id="choose-button" class="dark" style="display: none">${_("Choose")}</button>
 
   <% replace_photo_text = _("Select an image if you want to replace your photo") %>
 
