@@ -22,12 +22,17 @@ marked as done:
     >>> browser.printCssQuery('#todo-portlet p.done', strip=True)
     <p>4. Write a wall post</p>
 
-"Invite others to join" does not link anywhere yet (TODO):
+"Invite others to join" takes user to FB invitation view:
 
-    >>> browser.printCssQuery('#todo-portlet a[href="#"]')
-    <a href="#">1. Invite others to join</a>
+    >>> browser.getLink('Invite others to join').click()
+    >>> browser.url
+    'http://localhost/invite_friends'
 
-However, if user sends an invitation to somebody, this item is correctly
+However, we will use email invitations to test this todo item:
+
+    >>> browser.goBack()
+
+If user sends an invitation to somebody, this item is correctly
 marked as done. We will use friend invitation portlet for that matter:
 
     >>> form = browser.getForm(id='invite-email-form')

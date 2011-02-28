@@ -100,7 +100,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         invited_count = meta.Session.query(UserRegistration).filter_by(inviter=c.user).count()
         c.todo_items.append({
             'title': _("Invite others to join"),
-            'link': '#',
+            'link': url(controller='profile', action='invite_friends_fb'),
             'done': invited_count > 0
         })
         c.todo_items.append({
