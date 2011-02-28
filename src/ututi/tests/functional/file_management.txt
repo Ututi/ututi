@@ -20,7 +20,7 @@ File upload:
         <span class="file_rename_input_decorator">
           <input class="file_rename_input" type="text" />
         </span>
-        <button class="rename_confirm btn" value="Rename">Rename</button>
+        <button class="rename_confirm btn submit" value="Rename">Rename</button>
       </span>
       <img src="/images/details/icon_rename.png" alt="edit file name" class="rename_button" />
       <span class="size">(4 B)</span>
