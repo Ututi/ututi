@@ -232,7 +232,7 @@ and invitation are sent:
     >>> form.getControl(name='email5').value = 'five'
     >>> browser.getControl('Finish').click()
 
-    >>> browser.printCssQuery('h1.pageTitle', strip=True)
+    >>> browser.printCssQuery('h1.page-title', strip=True)
     <h1>News feed</h1>
 
     >>> len(mail_queue)

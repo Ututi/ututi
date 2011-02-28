@@ -5,7 +5,7 @@
 <%namespace file="/sections/content_snippets.mako" import="tooltip" />
 
 <%def name="group_menu()">
-  <h1 class="pageTitle">${self.title()}</h1>
+  <h1 class="page-title">${self.title()}</h1>
   <div class="back-link">
     <a class="back-link" href="${c.group.url()}">${_('Back to group page')}</a>
   </div>

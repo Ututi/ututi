@@ -3,7 +3,7 @@
 <form method="post" action="${url(controller='profile', action='update_contacts')}"
       id="contacts_form" class="new-style-form">
 
-  <h1 class='pageTitle'>${_("Contacts")}:</h1>
+  <h1 class='page-title'>${_("Contacts")}:</h1>
 
   <fieldset>
 

@@ -15,7 +15,7 @@
   %else:
   <div>
   %endif
-    <h1 class="pageTitle">${c.location.title}</h1>
+    <h1 class="page-title">${c.location.title}</h1>
   </div>
 </%def>
 

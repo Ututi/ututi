@@ -18,7 +18,7 @@
   <fb:like width="90" layout="button_count" show_faces="false" url="${c.subject.url(qualified=True)}"></fb:like>
 </div>
 
-<h1 class="pageTitle">${c.subject.title}</h1>
+<h1 class="page-title">${c.subject.title}</h1>
 
 %if c.subject.deleted:
 <div id="note" style="margin-bottom: 25px; margin-top: 6px;">

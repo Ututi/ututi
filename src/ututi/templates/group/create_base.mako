@@ -288,7 +288,7 @@
 </%def>
 
 <%def name="live_search(groups)">
-<h1 class="pageTitle">
+<h1 class="page-title">
   ${_('Recommended groups')}
 </h1>
 %if len(groups) > 0:
@@ -348,7 +348,7 @@
 <%def name="right_pane(title, sidebar=True)">
   <div id="CreatePublicGroupRight">
     <div class="group-type-info">
-      <h1 class="pageTitle">${title}</h1>
+      <h1 class="page-title">${title}</h1>
         ${caller.body()}
 
     </div>

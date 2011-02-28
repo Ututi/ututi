@@ -17,7 +17,7 @@ ${parent.head_tags()}
 </%def>
 
 %if hasattr(self, 'pagetitle'):
-  <h1 class="pageTitle">${self.pagetitle()}</h1>
+  <h1 class="page-title">${self.pagetitle()}</h1>
 %endif
 
 ${tabs()}

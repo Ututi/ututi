@@ -9,7 +9,7 @@ ${user_sidebar()}
 ${_('Home')}
 </%def>
 
-<h1 class="pageTitle">${self.pagetitle()}</h1>
+<h1 class="page-title">${self.pagetitle()}</h1>
 
 ${next.body()}
 

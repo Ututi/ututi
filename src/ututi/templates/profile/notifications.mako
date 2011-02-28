@@ -198,7 +198,7 @@ $(document).ready(function(){
 </%def>
 
 <div id="subject_settings">
-<h1 class="pageTitle">${_('Watched subjects notification settings')}:</h1>
+<h1 class="page-title">${_('Watched subjects notification settings')}:</h1>
 
 ${subjects_block(_("Personally watched subjects' notifications"), url(controller='profile', action='set_receive_email_each'), c.user.receive_email_each, c.subjects)}
 
