@@ -20,7 +20,7 @@ Note that user is being redirected to news feed after.
     >>> browser.url
     'http://localhost/home/feed'
 
-    >>> browser.getLink('Log out').click()
+    >>> browser.getLink('Logout').click()
     >>> browser.url
     'http://localhost/'
 
@@ -43,7 +43,7 @@ Note that user is being redirected to news feed after.
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
 
-    >>> browser.getLink('Log out').click()
+    >>> browser.getLink('Logout').click()
 
 -------------------------
 
@@ -83,7 +83,7 @@ But not larger ones:
     >>> browser.url
     'http://localhost/subject/vu/mat_analize/files?serve_file=5'
 
-    >>> browser.getLink('Log out').click()
+    >>> browser.getLink('Logout').click()
 
 -------------------------
 

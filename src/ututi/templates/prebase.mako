@@ -126,7 +126,7 @@ ${_('Student information online')}
             <ul>
               <li class="action"><a href="${url(controller='profile', action='edit')}">${_('Settings')}</a></li>
               <li class="action"><a href="${url(controller='user', action='index', id=c.user.id)}">${_('Public profile')}</a></li>
-              <li class="action"><a href="${url(controller='home', action='logout')}">${_('Log out')}</a></li>
+              <li class="action"><a href="${url(controller='home', action='logout')}">${_('Logout')}</a></li>
             </ul>
           </div>
         </li>

@@ -20,7 +20,7 @@ The personal information portlet shows my name:
 
 As we have successfully logged in let's logout and make some typos:
 
-    >>> browser.getLink('Log out').click()
+    >>> browser.getLink('Logout').click()
     >>> browser.url
     'http://localhost/'
 
