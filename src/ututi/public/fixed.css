@@ -55,28 +55,29 @@ a.inactive:hover {
  */
 
 button {
+    /* default button look */
     cursor: pointer;
     font-size: 12px;
-    padding: 0px 8px;
-    border: 1px solid #969696;
-}
-
-button.dark {
-    color: #ffffff;
-    background: #333333;
-}
-
-button.light,
-button.submit {
-    display: block;
     background: #ff9900;
     border: 2px solid #969696;
     color: #ffffff;
-    font-size: 12px;
     font-weight: bold;
     padding: 2px 8px;
-    cursor: pointer;
+}
+
+button.submit {
+    /* don't inline submit buttons */
+    display: block;
     margin-top: 25px;
+}
+
+button.dark {
+    /* dark version of the button */
+    color: #ffffff;
+    padding: 0px 8px;
+    border: 1px solid #969696;
+    font-weight: normal;
+    background: #333333;
 }
 
 button.btn-text {

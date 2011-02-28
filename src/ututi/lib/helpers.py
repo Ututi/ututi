@@ -397,7 +397,10 @@ def input_submit(text=None, name=None, **kwargs):
     if name is not None:
         kwargs['name'] = name
 
-    kwargs.setdefault('class_', "submit")
+    if 'class_' in kwargs:
+        kwargs['class_'] += ' submit'
+    else:
+        kwargs['class_'] = 'submit'
     kwargs.setdefault('value', text)
     return HTML.button(c=text, **kwargs)
 
