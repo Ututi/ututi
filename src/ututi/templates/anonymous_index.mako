@@ -1,10 +1,5 @@
 <%inherit file="/ubase.mako" />
 
-<%def name="head_tags()">
-  ${parent.head_tags()}
-  ${h.stylesheet_link(h.path_with_hash('/frontpage.css'))}
-</%def>
-
 <%def name="location_tag(uni)">
 <div class="university_block">
   %if uni['has_logo']:
