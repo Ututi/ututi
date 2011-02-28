@@ -133,7 +133,7 @@
     </%def>
     <ul class="icon-list">
       <li class="icon-facebook">
-        <a href="#invite-facebook" id="invite-facebook-link">${"Via facebook"}</a>
+        <a href="${url(controller='profile', action='invite_friends_fb')}" id="invite-fb-link">${"Via facebook"}</a>
       </li>
       <li class="icon-email">
         <a href="#invite-email" id="invite-email-link">${"Via e-mail"}</a>
@@ -150,6 +150,9 @@
       <p id="invitation-feedback-message">${_("Your invitations were successfully sent.")}</p>
     </div>
 
+    <div id="invite-fb-dialog">
+    </div>
+
     <script type="text/javascript">
       //<![CDATA[
       $(document).ready(function() {
@@ -158,6 +161,29 @@
             width: 330,
             autoOpen: false,
             resizable: false
+        });
+
+        $('#invite-fb-dialog').dialog({
+            title: '${_("Invite friends via Facebook")}',
+            width: 550,
+            autoOpen: false,
+            resizable: false
+        });
+
+        $("#invite-fb-link").click(function() {
+          var dialog = $('#invite-fb-dialog');
+          dialog.dialog('open');
+          if ($.trim(dialog.html()) == '') {
+            $.get(
+              "${url(controller='profile', action='invite_friends_fb', js=1)}",
+              function (data) {
+                dialog.html(data);
+                FB.init({appId: '${c.facebook_app_id}', status: true,
+                    cookie: true, xfbml: true, channelUrl: '${url(controller='home', action='fbchannel', qualified=True)}'});
+              }
+            );
+          }
+          return false;
         });
 
         $("#invite-email-link").click(function() {
@@ -193,22 +219,6 @@
 
             return false;
         });
-
-        $("#invite-facebook-link").click(function() {
-          FB.ui(
-            {
-              method: 'feed',
-              name: 'TODO title',
-              link: 'TODO link',
-              caption: 'TODO caption',
-              message: "${_("Here's what I've found in Ututi")}" + '!',
-              description: 'TODO description',
-              picture: '${url("/img/site_logo_collapsed.gif", qualified=True)}'
-            }
-          );
-          return false;
-        });
-
 
       });
       //]]>

@@ -103,7 +103,8 @@
 
 #invite-friends-portlet { }
 
-    #invite-friends-portlet #invite-email-dialog {
+    #invite-friends-portlet #invite-email-dialog,
+    #invite-friends-portlet #invite-fb-dialog {
         display: none;
     }
 

@@ -18,7 +18,7 @@ from pylons.decorators import jsonify
 from pylons.templating import render_mako_def
 from pylons.controllers.util import abort, redirect
 
-from pylons.i18n import _
+from pylons.i18n import _, ungettext
 
 import ututi.lib.helpers as h
 from ututi.lib.base import render
@@ -28,7 +28,7 @@ from ututi.lib.fileview import FileViewMixin
 from ututi.lib.security import ActionProtector
 from ututi.lib.image import serve_logo
 from ututi.lib.forms import validate
-from ututi.lib.invitations import make_email_invitations
+from ututi.lib.invitations import make_email_invitations, make_facebook_invitations
 from ututi.lib.messaging import EmailMessage
 from ututi.lib.mailinglist import post_message
 from ututi.lib import gg, sms
@@ -71,6 +71,7 @@ class WallSettingsForm(Schema):
 
 
 class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewMixin, WatchedSubjectsMixin, UserWallMixin):
+
     def _actions(self, selected):
         raise NotImplementedError("This has to be implemented by the"
                                   " specific profile controller.")
@@ -548,7 +549,43 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
             emails = self.form_result['recipients']
             message = self.form_result['message']
             make_email_invitations(emails, c.user, message)
-        return {'success': True }
+
+        return {'success': True}
+
+    def invite_friends_fb(self):
+        # handle facebook callback
+        ids = request.params.get('ids[]')
+        if ids:
+            ids = map(int, ids.split(','))
+            invited = make_facebook_invitations(ids, c.user)
+            if invited:
+                h.flash(ungettext('Invited %(num)d friend.',
+                                  'Invited %(num)d friends.',
+                                  len(invited)) % dict(num=len(invited)))
+
+            redirect(url(controller='profile', action='home'))
+
+        # render page
+        fb_user = facebook.get_user_from_cookie(request.cookies,
+                      config['facebook.appid'], config['facebook.secret'])
+        c.has_facebook = fb_user is not None
+        if c.has_facebook:
+            try:
+                graph = facebook.GraphAPI(fb_user['access_token'])
+                friends = graph.get_object("me/friends")
+                friend_ids = [f['id'] for f in friends['data']]
+                friend_users = meta.Session.query(User)\
+                        .filter(User.facebook_id.in_(friend_ids))\
+                        .filter(User.location == c.user.location).all()
+                c.exclude_ids = ','.join(str(u.facebook_id) for u in friend_users)
+            except facebook.GraphAPIError:
+                c.has_facebook = False
+
+        if request.params.has_key('js'):
+            return render_mako_def('profile/invite_friends_fb.mako',
+                                   'fb_invite_box')
+        else:
+            return render('profile/invite_friends_fb.mako')
 
 
 class UserProfileController(ProfileControllerBase):
@@ -672,6 +709,7 @@ class UserProfileController(ProfileControllerBase):
 
 
 class TeacherProfileController(ProfileControllerBase):
+
     def _actions(self, selected):
         """Generate a list of all possible actions.
 
