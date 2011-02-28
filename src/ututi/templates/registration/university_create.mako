@@ -44,23 +44,39 @@
 
   ${h.select_radio('member_policy', _("Accessibility:"), c.policies)}
 
-  <label for="allowed-domains">
-    <span class="labelText">${_("Allowed emails:")}</span>
-    @${c.user_domain} <br />
-    <input type="hidden" name="allowed_domains-1" value="${c.user_domain}" />
-    %for i in range(2, c.max_allowed_domains + 1):
-      <div class="allowed-domains-field ${i == 2 or 'hidable'}">
-        @<input type="text" name="allowed_domains-${i}" />
-      </div>
-    %endfor
-    <a href="#add-more" id="add-more-link">${_("Add more")}</a>
-  </label>
+  <div id="allowed-domains-container">
+    <label for="allowed-domains">
+      <span class="labelText">${_("Allowed emails:")}</span>
+      @${c.user_domain} <br />
+      <input type="hidden" name="allowed_domains-1" value="${c.user_domain}" />
+      %for i in range(2, c.max_allowed_domains + 1):
+        <div class="allowed-domains-field ${i == 2 or 'hidable'}">
+          @<input type="text" name="allowed_domains-${i}" />
+        </div>
+      %endfor
+      <a href="#add-more" id="add-more-link">${_("Add more")}</a>
+    </label>
+  </div>
 
   <script type="text/javascript">
     $('.allowed-domains-field.hidable input').each(function() {
         if ($(this).val().length == 0)
             $(this).closest('.allowed-domains-field').hide();
     });
+    function toggle_domain_fields() {
+        if ($('input#member_policy_restrict_email').is(':checked') ||
+            $('input#member_policy_allow_invites').is(':checked'))
+        {
+            $('#allowed-domains-container').show();
+        }
+        else {
+            $('#allowed-domains-container').hide();
+        }
+    }
+    /* Hide email fields if PUBLIC is checked. */
+    toggle_domain_fields();
+    /* Trigger these fields if other options are set. */
+    $(".radioField input").click(toggle_domain_fields);
     $('#add-more-link').click(function() {
         $('.allowed-domains-field:hidden').first().show();
         return false;
