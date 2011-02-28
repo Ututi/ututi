@@ -230,7 +230,7 @@ ${_('Student information online')}
     ${h.stylesheet_link(h.path_with_hash('/layout.css'))}
     ${h.stylesheet_link(h.path_with_hash('/fixed.css'))}
     %if c.user is None:
-       ${h.stylesheet_link(h.path_with_hash('/frontpage.css'))}
+       ${h.stylesheet_link(h.path_with_hash('/anonymous.css'))}
     %endif
     ${h.stylesheet_link(h.path_with_hash('/portlets.css'))}
     ${h.stylesheet_link(h.path_with_hash('/widgets.css'))}
