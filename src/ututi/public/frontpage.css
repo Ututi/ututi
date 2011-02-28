@@ -156,60 +156,61 @@ p{
     margin: 0 0 0 20px !important;
     letter-spacing: 1px;
 }
-.notice { 
-	text-align: left;
-	background-image: url("img/important.png");
-	background-position: 0% 0%;
-	background-repeat: no-repeat;
-	clear: both;
-	color: #666666;
-	padding-left: 25px;
-	margin-bottom: 20px;
-	font-size: 13px;
+.notice {
+    text-align: left;
+    background-image: url("img/important.png");
+    background-position: 0% 0%;
+    background-repeat: no-repeat;
+    clear: both;
+    color: #666666;
+    padding-left: 25px;
+    margin-bottom: 20px;
+    font-size: 13px;
 }
 
 .text {
-	margin-top: 0px;
-	float:right;
-	text-align: bottom;
-	}
+    margin-top: 0px;
+    float:right;
+    text-align: bottom;
+    }
 
-.forma{
-	height: 100px;
-	border: 1px solid #666;
-	}*/
-#feature-area{
-	width: 960px;
-	height: auto;
-	clear: both;
-	}
-.column{ 
-	float: left;
-	position: relative;
-	width: 280px;
-	height: auto;
-	margin-top: 20px;
-	}
-#social-discussions {
-	background: url("img/social_discussions.png") no-repeat top center;
-	padding: 100px 20px 0 20px;
+    .forma {
+        height: 100px;
+        border: 1px solid #666;
+    }
+    #feature-area{
+        width: 960px;
+        height: auto;
+        clear: both;
+    }
+    .column{
+        float: left;
+        position: relative;
+        width: 280px;
+        height: auto;
+        margin-top: 20px;
+    }
+    #social-discussions {
+        background: url("img/social_discussions.png") no-repeat top center;
+        padding: 100px 20px 0 20px;
 }
 #network {
-	background: url("img/network.png") no-repeat top center;
-	padding: 100px 20px 0 20px;
+    background: url("img/network.png") no-repeat top center;
+    padding: 100px 20px 0 20px;
 }
 #teachers-profile {
-	background: url("img/teachers_profile.png") no-repeat top center;
-	padding: 100px 20px 0 20px;
+    background: url("img/teachers_profile.png") no-repeat top center;
+    padding: 100px 20px 0 20px;
 }
 .column h1 {
-	font-size:18px;
+    font-size:18px;
     font-weight:bold;
     color:#333;
     margin-bottom:1px;
     width: 100%;
-	text-align: left;
-	}
+    text-align: left;
+    }
+
 .center{
     margin: auto;
     clear: both;
