@@ -629,6 +629,7 @@ class UserProfileController(ProfileControllerBase):
                                 _('Where are your notes?')]
             c.fb_random_post = random.choice(FB_POST_MESSAGES)
 
+        self._set_home_variables()
         return self._feed_page()
 
     @ActionProtector("user")

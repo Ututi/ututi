@@ -15,7 +15,7 @@ let's type in that url:
     >>> form.getControl('Register').click()
 
     >>> browser.url
-    'http://localhost/register/welcome'
+    'http://localhost/welcome'
 
     >>> browser.printQuery("//div[@class='flash-message']//span/text()")
     All teacher tools will be available to You once our team confirms You as a teacher. Thank You!
@@ -61,7 +61,7 @@ this is not how things supposed to work in real registration flow)
     Ututi
 
     >>> browser.url
-    'http://localhost/register/welcome?fb=True'
+    'http://localhost/welcome?fb=True'
 
 The administrator should now see a request to confirm a teacher:
     >>> browser2 = Browser.logIn()
