@@ -59,7 +59,7 @@ button {
     cursor: pointer;
     font-size: 12px;
     background: #ff9900;
-    border: 2px solid #969696;
+    border: 1px solid #666666;
     color: #ffffff;
     font-weight: bold;
     padding: 2px 8px;
@@ -75,7 +75,7 @@ button.dark {
     /* dark version of the button */
     color: #ffffff;
     padding: 0px 8px;
-    border: 1px solid #969696;
+    border: 1px solid #666666;
     font-weight: normal;
     background: #333333;
 }

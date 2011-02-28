@@ -69,13 +69,6 @@
 
 /* MAIN AREA */
 
-.error {
-    color: #990000;
-    font-size: 12px;
-    text-align: left;
-    height: 12px;
-}
-
 .error span {
     display: none;
 }
@@ -89,6 +82,13 @@
     padding-top: 20px;
     padding-bottom: 10px;
 }
+
+    #sign-in-area .error-message {
+        color: #990000;
+        font-size: 12px;
+        text-align: left;
+        height: 12px;
+    }
 
     #sign-in-area h1 {
         text-align: center;
