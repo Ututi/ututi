@@ -581,11 +581,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
             except facebook.GraphAPIError:
                 c.has_facebook = False
 
-        if request.params.has_key('js'):
-            return render_mako_def('profile/invite_friends_fb.mako',
-                                   'fb_invite_box')
-        else:
-            return render('profile/invite_friends_fb.mako')
+        return render('profile/invite_friends_fb.mako')
 
 
 class UserProfileController(ProfileControllerBase):

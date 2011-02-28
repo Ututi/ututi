@@ -163,29 +163,6 @@
             resizable: false
         });
 
-        $('#invite-fb-dialog').dialog({
-            title: '${_("Invite friends via Facebook")}',
-            width: 550,
-            autoOpen: false,
-            resizable: false
-        });
-
-        $("#invite-fb-link").click(function() {
-          var dialog = $('#invite-fb-dialog');
-          dialog.dialog('open');
-          if ($.trim(dialog.html()) == '') {
-            $.get(
-              "${url(controller='profile', action='invite_friends_fb', js=1)}",
-              function (data) {
-                dialog.html(data);
-                FB.init({appId: '${c.facebook_app_id}', status: true,
-                    cookie: true, xfbml: true, channelUrl: '${url(controller='home', action='fbchannel', qualified=True)}'});
-              }
-            );
-          }
-          return false;
-        });
-
         $("#invite-email-link").click(function() {
           $('#invite-email-dialog').dialog('open');
           return false;
