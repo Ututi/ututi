@@ -291,6 +291,7 @@ def make_map(config):
     map.connect('/register/{hash}', controller='home', action='register')
     map.connect('/tour', controller='home', action='tour')
     map.connect('/voting', controller='home', action='voting')
+    map.connect('/voting/real', controller='home', action='voting', real=True)
     map.connect('/new_ututi', controller='home', action='new_ututi')
 
     map.connect('/got_mail', controller='receivemail', action='index')

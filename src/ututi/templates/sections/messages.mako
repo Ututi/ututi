@@ -197,7 +197,7 @@
       </div>
     %elif not user.has_voted:
       <%
-         votes = user.location.vote_count
+         votes = user.location.vote_count_padded
       %>
       ${v.voting_widget(votes)}
       <br class="clear-both"/>

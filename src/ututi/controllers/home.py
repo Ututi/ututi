@@ -591,12 +591,13 @@ class HomeController(UniversityListMixin, FederationMixin):
         return render('tour.mako')
 
     @u_cache(expire=300, query_args=True, invalidate_on_startup=True)
-    def _university_votes(self):
+    def _university_votes(self, real):
         universities = meta.Session.query(LocationTag).filter(LocationTag.parent == None).order_by(LocationTag.title_short.desc()).all()
-        return [u.info_dict() for u in sorted(universities, cmp=lambda x,y: cmp(y.vote_count, x.vote_count))]
+        universities = [u.info_dict(real_votes=real) for u in universities]
+        return sorted(universities, cmp=lambda x,y: cmp(y['vote_count'], x['vote_count']))
 
-    def voting(self):
-        c.universities = self._university_votes()
+    def voting(self, real=False):
+        c.universities = self._university_votes(real)
         return render('/home/voting.mako')
 
     def new_ututi(self):

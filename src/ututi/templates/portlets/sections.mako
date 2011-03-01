@@ -41,7 +41,7 @@
     </%def>
     %if c.user.location is not None:
     <%
-      count = c.user.location.vote_count
+      count = c.user.location.vote_count_padded
       count_needed = 500 - count
     %>
     ${voting_bar(count, large=false)}

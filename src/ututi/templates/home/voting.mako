@@ -32,7 +32,7 @@
     %if c.user and c.user.location is not None:
     <div style="margin-top: 10px; border-top: 1px solid #ddd; padding-top: 5px;">
       <%
-         count = 500 - c.user.location.vote_count
+         count = 500 - c.user.location.vote_count_padded
       %>
       ${ungettext('Your university needs <strong>%(count)d more vote</strong>.', 'Your university needs <strong>%(count)d more votes.</strong>', count) % dict(count=count)|n}
     </div>
@@ -103,7 +103,7 @@ ${_("Going in this new direction, we have decided to transition only the univers
   %elif not c.user.has_voted:
   <div style="margin: 20px 0; width: 500px;">
   <%
-     votes = c.user.location.vote_count
+     votes = c.user.location.vote_count_padded
   %>
   ${voting_widget(votes)}
   <br class="clear-both"/>

@@ -1732,15 +1732,19 @@ class LocationTag(Tag):
         grps =  meta.Session.query(Group).filter(Group.location_id.in_(ids)).order_by(Group.created_on.desc()).limit(5).all()
         return grps
 
-    def info_dict(self):
+    def info_dict(self, real_votes=False):
         """Cacheable dict containing essential info about this subject."""
+        vote_count_padded = self.vote_count_padded
+        vote_count_real = self.vote_count
         return {'has_logo': bool(self.logo is not None),
                 'id': self.id,
                 'parent_id': self.parent_id,
                 'parent_has_logo': self.parent is not None and self.parent.logo is not None,
                 'url': self.url(),
                 'title': self.title,
-                'vote_count': self.vote_count,
+                'vote_count_padded': vote_count_padded,
+                'vote_count_real': vote_count_real,
+                'vote_count': vote_count_real if real_votes else vote_count_padded,
                 'n_subjects': self.count('subject'),
                 'n_groups': self.count('group'),
                 'n_files': self.count('file')}
@@ -1759,10 +1763,14 @@ class LocationTag(Tag):
         parent = self.top_parent()
         ids = [t.id for t in parent.flatten]
         true_count = meta.Session.query(User).filter(User.location_id.in_(ids)).filter(User.has_voted == True).count()
+        return true_count
+
+    @property
+    def vote_count_padded(self):
+        parent = self.top_parent()
         #we don't want to show the users that their university has no votes yet
         jinx = len(parent.title)
-        return true_count + jinx
-
+        return self.vote_count + jinx
 
 def cleanupFileName(filename):
     return filename.split('\\')[-1].split('/')[-1]
