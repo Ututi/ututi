@@ -1,22 +1,26 @@
 <%inherit file="/portlets/base.mako"/>
 
+<%def name="user_box(title, users, id, with_names=False, size=30)">
+  <%self:portlet id="${id}">
+    <%def name="header()">
+      ${title}
+    </%def>
+    <div class="clearfix people-box-portlet">
+    %for user in users:
+      <a href="${user.url()}" class="user-logo">
+        <img src="${user.url(action='logo', width=30)}"
+             alt="${user.fullname}"
+             title="${user.fullname}" />
+      </a>
+    %endfor
+    </div>
+  </%self:portlet>
+</%def>
+
 <%def name="users_online_portlet()">
   <%doc>Requires context variable c.users_online</%doc>
   %if hasattr(c, 'users_online') and c.users_online:
-    <%self:portlet id="users-online-portlet">
-      <%def name="header()">
-        ${_("People online:")}
-      </%def>
-      <div class="clearfix">
-      %for user in c.users_online:
-        <a href="${user.url()}" class="user-logo">
-          <img src="${user.url(action='logo', width=30)}"
-               alt="${user.fullname}"
-               title="${user.fullname}" />
-        </a>
-      %endfor
-    </div>
-    </%self:portlet>
+    ${user_box(_("People online:"), c.users_online, 'users-online-portlet')}
   %endif
 </%def>
 

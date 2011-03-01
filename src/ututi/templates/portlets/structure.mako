@@ -1,4 +1,5 @@
-<%inherit file="/portlets/base.mako"/>
+<%inherit file="/portlets/base.mako" />
+<%namespace file="/portlets/universal.mako" import="user_box" />
 
 <%def name="location_logo_portlet(location=None)">
   <% if location is None: location = c.location %>
@@ -8,6 +9,63 @@
       <img src="${url(controller='structure', action='logo', id=location.id, width=140)}" alt="${location.title}" />
     </div>
   </%self:portlet>
+  %endif
+</%def>
+
+<%def name="location_info_portlet(location=None)">
+  <% if location is None: location = c.location %>
+  <%self:portlet id="location-info-portlet">
+    <%def name="header()">
+      ${_("Info:")}
+    </%def>
+    <ul class="icon-list">
+      %if location.site_url is not None:
+      <li class="icon-contact">
+        <a href="${location.site_url}">${location.site_url}</a>
+      </li>
+      %endif
+      <li class="icon-subject">
+        <% cnt = h.location_count(location.id, 'subject') %>
+        ${ungettext("%(count)s Subject", "%(count)s Subjects", cnt) % dict(count = cnt)}
+      </li>
+      <li class="icon-group">
+        <% cnt = h.location_count(location.id, 'group') %>
+        ${ungettext("%(count)s Group", "%(count)s Groups", cnt) % dict(count = cnt)}
+      </li>
+      <li class="icon-user member-count">
+        <% cnt = location.member_count() %>
+        ${ungettext("%(count)s Member", "%(count)s Members", cnt) % dict(count = cnt)}
+      </li>
+      <li class="icon-file">
+        <% cnt = h.location_count(location.id, 'file') %>
+        ${ungettext("%(count)s File", "%(count)s Files", cnt) % dict(count = cnt)}
+      </li>
+    </ul>
+  </%self:portlet>
+</%def>
+
+<%def name="location_admin_portlet(location=None)">
+  <% if location is None: location = c.location %>
+  %if h.check_crowds(['moderator']):
+    <%self:portlet id="location-admin-portlet">
+      <%def name="header()">
+        ${_("Administration:")}
+      </%def>
+      <a href="${location.url(action='edit')}">${_('Edit information')}</a>
+    </%self:portlet>
+  %endif
+</%def>
+
+<%def name="location_register_portlet(location=None)">
+  <% if location is None: location = c.location %>
+  %if c.user is None:
+    <%self:portlet id="location-register-portlet">
+      ${h.button_to(_("I study here"),
+                    url('start_registration_with_location',
+                        path='/'.join(location.path)),
+                    id='i-study-here-button',
+                    class_='dark')}
+    </%self:portlet>
   %endif
 </%def>
 
@@ -122,6 +180,41 @@ google_ad_height = 250;
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script> 
 %endif
+</%def>
 
 
+<%def name="user_logo_link(user, style=None)">
+<div class="user-logo-link"
+%if style is not None:
+     style = ${style}
+%endif
+>
+  <div class="user-logo">
+    <a href="${url(controller="user", action="index", id=user.id)}"
+       title="${user.fullname}">
+      %if user.logo is not None:
+      <img src="${url(controller='user', action='logo', id=user.id, width=45, height=45)}" alt="logo" />
+      %else:
+      ${h.image('/img/avatar-light-small.png', alt='logo')}
+      %endif
+    </a>
+  </div>
+  <div>
+    <a href="${url(controller="user", action="index", id=user.id)}" title="${user.fullname}" class="link-to-user-profile">
+      ${h.wraped_text(user.fullname, 10)|n}
+    </a>
+  </div>
+</div>
+</%def>
+
+<%def name="location_members_portlet(location=None, count=None)">
+  <%
+  if location is None: location = c.location
+  if count is None: count = 6
+  members = location.get_members(count)
+  total = location.member_count()
+  %>
+  %if members:
+    ${user_box(_("Members:"), members, 'location-members-portlet')}
+  %endif
 </%def>

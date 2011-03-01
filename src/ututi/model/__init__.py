@@ -1792,12 +1792,14 @@ class LocationTag(Tag):
                 'n_groups': self.count('group'),
                 'n_files': self.count('file')}
 
-    def get_students(self, limit=None):
+    def get_members(self, count=None):
         ids = [t.id for t in self.flatten]
-        students = meta.Session.query(User).filter(User.location_id.in_(ids)).order_by(User.last_seen.desc()).limit(limit).all()
-        return students
+        query = meta.Session.query(User).filter(User.location_id.in_(ids)).order_by(User.last_seen.desc())
+        if count is not None:
+            query = query.limit(count)
+        return query.all()
 
-    def students_number(self):
+    def member_count(self):
         ids = [t.id for t in self.flatten]
         return meta.Session.query(User).filter(User.location_id.in_(ids)).count()
 

@@ -8,7 +8,7 @@ by clicking 'Register' button:
     >>> browser = Browser()
     >>> browser.open('http://localhost/school/uni')
 
-    >>> browser.getControl('Register').click()
+    >>> browser.getControl('I study here').click()
     >>> browser.url
     'http://localhost/registration/uni/start'
 

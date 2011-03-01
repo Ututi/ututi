@@ -1,22 +1,30 @@
 <%inherit file="/ubase-sidebar.mako" />
+<%namespace file="/portlets/structure.mako" import="location_logo_portlet, location_info_portlet,
+                                                    location_admin_portlet, location_register_portlet,
+                                                    location_members_portlet, struct_groups_portlet"/>
 <%namespace file="/portlets/structure.mako" import="*"/>
-<%namespace file="/portlets/school.mako" import="*"/>
 <%namespace file="/location/base_university.mako" import="*"/>
 <%namespace file="/sections/content_snippets.mako" import="tabs"/>
 
 <%def name="portlets()">
-<div id="sidebar">
-  ${struct_info_portlet()}
-  ${school_members_portlet(_("Faculty's members"))}
+  ${location_logo_portlet()}
+  ${location_admin_portlet()}
+  ${location_info_portlet()}
+  ${location_register_portlet()}
+  ${location_members_portlet(count=6)}
   ${struct_groups_portlet()}
-</div>
 </%def>
 
 <%def name="title()">
-  ${c.location.parent.title_short} ${c.location.title} - ${_('subjects list')}
+  ${c.location.title}
 </%def>
 
-${location_title()}
+<%def name="pagetitle()">
+  ${c.location.title}
+</%def>
+
+<h1 class="page-title">${self.pagetitle()}</h1>
+
 ${tabs()}
 
 ${next.body()}

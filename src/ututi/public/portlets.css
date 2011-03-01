@@ -44,6 +44,14 @@
         background-image: url('img/icons.com/search_small.png');
         background-position: 1px center;
     }
+    .portlet ul.icon-list li.icon-user {
+        background-image: url('img/icons.com/user_small_grey.png');
+        background-position: 1px center;
+    }
+    .portlet ul.icon-list li.icon-file {
+        background-image: url('img/icons.com/file_small_grey.png');
+        background-position: 2px center;
+    }
     .portlet ul.icon-list li.icon-feed { background-image: url('img/icons.com/feed_small_grey.png'); }
     .portlet ul.icon-list li.icon-university { background-image: url('img/icons.com/university_small_grey.png'); }
     .portlet ul.icon-list li.icon-message { background-image: url('img/icons.com/message_small_grey.png'); }
@@ -58,6 +66,7 @@
         background-image: url('img/icons.com/FB.png');
         padding-left: 22px;
     }
+    .portlet ul.icon-list li.icon-contact { background-image: url('img/icons.com/contact_small.png'); }
 
 #user-information-portlet { }
 
@@ -94,9 +103,11 @@
         color: #666666;
     }
 
-#users-online-portlet { }
+.people-box-portlet {
+    margin-top: 10px;
+}
 
-    #users-online-portlet a.user-logo img {
+    .people-box-portlet a.user-logo img {
         width: 30px;
         margin: 2px 8px 0 0;
     }
