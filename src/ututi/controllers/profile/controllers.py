@@ -606,7 +606,7 @@ class UserProfileController(ProfileControllerBase):
     @ActionProtector("user")
     @validate(schema=PhoneForm, form='home')
     def update_phone(self):
-        c.user.location = self.form_result.get('phone_number', None)
+        c.user.phone_number = self.form_result.get('phone_number', None)
         meta.Session.commit()
         h.flash(_('Your phone number has been updated.'))
         redirect(url(controller='profile', action='home'))
@@ -627,7 +627,7 @@ class UserProfileController(ProfileControllerBase):
     @ActionProtector("user")
     @validate(schema=PhoneConfirmationForm, form='home')
     def confirm_phone(self):
-        c.user.location = self.form_result.get('phone_confirmation_key', None)
+        c.user.phone_confirmation_key = self.form_result.get('phone_confirmation_key', None)
         meta.Session.commit()
         h.flash(_('Your phone number has been confirmed.'))
         redirect(url(controller='profile', action='home'))
