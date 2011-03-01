@@ -93,19 +93,14 @@
 
 <%def name="share_portlet(object)">
   %if hasattr(object, 'share_info'):
-  <%
-    info = object.share_info
-  %>
-  <%self:uportlet id="share-portlet">
+  <% info = object.share_info %>
+  <%self:portlet id="share-portlet">
     <%def name="header()">
-      ${_("Share with your friends")}
+      ${_("Share with your friends:")}
     </%def>
-    <p>
-      ${_("Found it interesting? Share with your friends!")}
-    </p>
-    <ul id="share-portlet-action-list">
-      <li id="facebook-share"><a href="#share-via-facebook" id="facebook-share-link">${"Via facebook"}</a></li>
-      <li id="email-share"><a href="#share-via-email" id="email-share-link">${"Via e-mail"}</a></li>
+    <ul class="icon-list">
+      <li class="icon-facebook"><a href="#share-via-facebook" id="facebook-share-link">${"Via facebook"}</a></li>
+      <li class="icon-email"><a href="#share-via-email" id="email-share-link">${"Via e-mail"}</a></li>
     </ul>
 
     <div id="email-share-dialog">
@@ -198,6 +193,6 @@
       });
       //]]>
     </script>
-  </%self:uportlet>
+  </%self:portlet>
   %endif
 </%def>

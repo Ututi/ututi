@@ -3,6 +3,7 @@
 <%namespace file="/portlets/structure.mako" import="location_logo_portlet, location_info_portlet,
                                                     location_admin_portlet, location_register_portlet,
                                                     location_members_portlet"/>
+<%namespace file="/portlets/universal.mako" import="share_portlet" />
 <%namespace file="/sections/content_snippets.mako" import="tabs"/>
 <%namespace file="/anonymous_index.mako" import="universities_section"/>
 
@@ -19,6 +20,7 @@
   ${location_admin_portlet()}
   ${location_info_portlet()}
   ${location_register_portlet()}
+  ${share_portlet(c.location)}
   ${location_members_portlet(count=6)}
 </%def>
 

@@ -147,23 +147,6 @@
 
 #share-portlet-content { }
 
-    #share-portlet-content ul#share-portlet-action-list { }
-
-        #share-portlet-content ul#share-portlet-action-list li {
-            list-style: none;
-            padding: 5px 5px 5px 20px;
-            background-repeat: no-repeat;
-            background-position: left center;
-        }
-
-        #share-portlet-content ul#share-portlet-action-list li#facebook-share {
-            background-image: url(img/social/facebook_16.png);
-        }
-
-        #share-portlet-content ul#share-portlet-action-list li#email-share {
-            background-image: url(img/social/email_16.png);
-        }
-
     #share-portlet-content #email-share-dialog {
         display: none;
     }
@@ -171,7 +154,6 @@
         /* dialog pops out of #share-portlet-content */
         #email-share-dialog #feedback-message {
             display: none;
-            color: #D45500;
             font-weight: bold;
             text-align: center;
         }

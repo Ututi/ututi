@@ -1803,6 +1803,14 @@ class LocationTag(Tag):
         ids = [t.id for t in self.flatten]
         return meta.Session.query(User).filter(User.location_id.in_(ids)).count()
 
+    @property
+    def share_info(self):
+        return dict(title=self.title,
+                    caption=self.title_short,
+                    link=self.url(qualified=True),
+                    description=self.description)
+
+
 def cleanupFileName(filename):
     return filename.split('\\')[-1].split('/')[-1]
 
