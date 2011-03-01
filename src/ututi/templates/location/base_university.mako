@@ -1,6 +1,6 @@
 <%inherit file="/ubase-sidebar.mako" />
-<%namespace file="/portlets/structure.mako" import="*"/>
-<%namespace file="/portlets/school.mako" import="*"/>
+<%namespace file="/portlets/structure.mako" import="location_logo_portlet, struct_info_portlet"/>
+<%namespace file="/portlets/school.mako" import="school_members_portlet" />
 <%namespace file="/sections/content_snippets.mako" import="tabs"/>
 <%namespace file="/anonymous_index.mako" import="universities_section"/>
 
@@ -13,10 +13,9 @@
 </%def>
 
 <%def name="portlets()">
-<div id="sidebar">
+  ${location_logo_portlet()}
   ${struct_info_portlet()}
   ${school_members_portlet(_("School's members"))}
-</div>
 </%def>
 
 <h1 class="page-title">${self.pagetitle()}</h1>

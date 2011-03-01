@@ -243,3 +243,15 @@
         text-align: right;
     }
 
+#location-logo-portlet { }
+
+    #location-logo-portlet .logo-container {
+        margin: 10px auto 20px auto;
+        width: 140px;
+    }
+
+    #location-logo-portlet .logo-container img {
+        display: block;
+        margin-left: -5px; /* compensate sidebar left padding, so
+                            * it looks properly centered. */
+    }

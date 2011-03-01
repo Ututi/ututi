@@ -1,5 +1,16 @@
 <%inherit file="/portlets/base.mako"/>
 
+<%def name="location_logo_portlet(location=None)">
+  <% if location is None: location = c.location %>
+  %if location.has_logo():
+  <%self:portlet id="location-logo-portlet">
+    <div class="logo-container">
+      <img src="${url(controller='structure', action='logo', id=location.id, width=140)}" alt="${location.title}" />
+    </div>
+  </%self:portlet>
+  %endif
+</%def>
+
 <%def name="struct_info_portlet(location=None)">
   <%
      if location is None:
