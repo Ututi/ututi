@@ -8,15 +8,8 @@
   ${c.location.title}
 </%def>
 
-<%def name="location_title()">
-  %if c.location.logo is not None:
-  <div class="title-with-logo">
-    <img class="portlet-logo" id="structure-logo" src="${url(controller='structure', action='logo', id=c.location.id, width=70, height=70)}" alt="logo" />
-  %else:
-  <div>
-  %endif
-    <h1 class="page-title">${c.location.title}</h1>
-  </div>
+<%def name="pagetitle()">
+  ${c.location.title}
 </%def>
 
 <%def name="portlets()">
@@ -26,7 +19,8 @@
 </div>
 </%def>
 
-${location_title()}
+<h1 class="page-title">${self.pagetitle()}</h1>
+
 ${universities_section(c.departments, c.location.url(), collapse=True, collapse_text=_('More departments'))}
 ${tabs()}
 
