@@ -5,7 +5,7 @@
 <%namespace file="/anonymous_index.mako" import="universities_section"/>
 
 <%def name="title()">
-  ${c.location.title} (${c.location.title_short}) - ${_('department list')}
+  ${c.location.title}
 </%def>
 
 <%def name="location_title()">
