@@ -1,17 +1,34 @@
 <%inherit file="/portlets/base.mako"/>
 
-<%def name="user_box(title, users, id, with_names=False, size=30)">
+<%def name="user_box(title, users, id, with_names=False)">
+  <%
+  size = 45 if with_names else 30
+  per_row = 3 if with_names else 4
+  rows = [users[i:i + per_row] for i in range(0, len(users), per_row)]
+  %>
   <%self:portlet id="${id}">
     <%def name="header()">
       ${title}
     </%def>
-    <div class="clearfix people-box-portlet">
-    %for user in users:
-      <a href="${user.url()}" class="user-logo">
-        <img src="${user.url(action='logo', width=30)}"
-             alt="${user.fullname}"
-             title="${user.fullname}" />
-      </a>
+    <div class="people-box-portlet ${'with-names' if with_names else ''}">
+    %for row in rows:
+      <div class="person-row clearfix">
+        %for user in row:
+        <div class="person">
+          <a href="${user.url()}">
+            <img src="${user.url(action='logo', width=size)}"
+                 class="person-logo"
+                 alt="${user.fullname}"
+                 title="${user.fullname}" />
+            %if with_names:
+            <div class="person-name">
+              ${user.fullname}
+            </div>
+            %endif
+          </a>
+        </div>
+        %endfor
+      </div>
     %endfor
     </div>
   </%self:portlet>

@@ -107,9 +107,23 @@
     margin-top: 10px;
 }
 
-    .people-box-portlet a.user-logo img {
+    .people-box-portlet .person {
+        float: left;
         width: 30px;
         margin: 2px 8px 0 0;
+    }
+
+    .people-box-portlet.with-names .person {
+        width: 45px;
+    }
+
+    .people-box-portlet img.person-logo {
+        display: block;
+    }
+
+    .people-box-portlet .person-name {
+        font-size: 10px;
+        word-wrap: break-word;
     }
 
 #invite-friends-portlet { }

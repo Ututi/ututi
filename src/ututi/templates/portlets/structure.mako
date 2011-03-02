@@ -216,6 +216,6 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
   total = location.member_count()
   %>
   %if members:
-    ${user_box(_("Members:"), members, 'location-members-portlet')}
+    ${user_box(_("Members:"), members, 'location-members-portlet', with_names=True)}
   %endif
 </%def>
