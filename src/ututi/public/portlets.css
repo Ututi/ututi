@@ -15,6 +15,10 @@
         color: #6d6d6d;
     }
 
+    .portlet .footer {
+        margin-top: 5px;
+    }
+
     .portlet p {
         font-size: 11px;
         margin: 5px 0px;

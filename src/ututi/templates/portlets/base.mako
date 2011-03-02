@@ -19,6 +19,11 @@
       <div class="content">
         ${caller.body()}
       </div>
+    %if hasattr(caller, 'footer'):
+      <div class="footer">
+        ${caller.footer()}
+      </div>
+    %endif
   </div>
 </div>
 </%def>

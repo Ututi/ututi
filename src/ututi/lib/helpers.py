@@ -457,17 +457,17 @@ def location_members(location_id, limit=6):
             for member in members]
 
 @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
-def location_latest_groups(location_id, limit=5):
+def location_latest_groups(location_id, limit=6):
     from ututi.model import Tag, Group, meta
     location = Tag.get(int(location_id))
     ids = [t.id for t in location.flatten]
-    grps =  meta.Session.query(Group).filter(Group.location_id.in_(ids)).order_by(Group.created_on.desc()).limit(limit).all()
-    return [{'logo': group.logo,
-             'url': group.url(),
+    groups =  meta.Session.query(Group).filter(Group.location_id.in_(ids)).order_by(Group.created_on.desc()).limit(limit).all()
+    return [{'id': group.group_id,
              'title': group.title,
-             'group_id': group.group_id,
-             'member_count': len(group.members)}
-            for group in grps]
+             'url': group.url(),
+             'logo_url': group.url(action='logo', width=45),
+             'logo_small_url': group.url(action='logo', width=30)}
+            for group in groups]
 
 
 @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)

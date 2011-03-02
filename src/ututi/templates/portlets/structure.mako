@@ -70,45 +70,23 @@
   %endif
 </%def>
 
-<%def name="struct_groups_portlet(location=None)">
+<%def name="location_groups_portlet(location=None)">
   <%
-     if location is None:
-         location = c.location
+  if location is None: location = c.location
+  groups = h.location_latest_groups(location.id, 6)
   %>
-  <%self:uportlet id="group_portlet">
+  %if groups:
+  <%self:portlet id="location-groups-portlet">
     <%def name="header()">
-      ${_('Latest groups')}
+      ${_('Latest groups:')}
     </%def>
-    <%
-       groups = h.location_latest_groups(location.id, 5)
-    %>
-    % if not groups:
-      ${_('There are no groups yet.')}
-    %else:
-    <ul class="group-listing">
-      % for group in groups:
-      <li>
-        <div>
-          %if group['logo'] is not None:
-            <img class="group-logo" src="${url(controller='group', action='logo', id=group['group_id'], width=35, height=35)}" alt="logo" />
-          %else:
-            ${h.image('/images/details/icon_group_35x35.png', alt='logo', class_='group-logo')|n}
-          %endif
-            <span>
-              <a href="${group['url']}" >${group['title']}</a>
-              (${ungettext("%(count)s member", "%(count)s members", group['member_count']) % dict(count = group['member_count'])})
-            </span>
-            <br class="clear-left"/>
-        </div>
-      </li>
-      % endfor
-    </ul>
-    %endif
-    <div class="footer" style="margin-top: 10px">
-      ${h.link_to(_('All groups'), location.url(obj_type='group'), class_="right_arrow floatright")}
+    ${item_box(groups, with_titles=True)}
+    <%def name="footer()">
+      ${h.link_to(_('All groups'), location.url(obj_type='group'))}
       ${h.link_to(_('Create group'), url(controller='group', action='create_academic'), method='GET')}
-    </div>
-  </%self:uportlet>
+    </%def>
+  </%self:portlet>
+  %endif
 </%def>
 
 <%def name="location_members_portlet(location=None, count=None)">
