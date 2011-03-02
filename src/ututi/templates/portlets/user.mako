@@ -101,7 +101,6 @@
 </%def>
 
 <%def name="todo_portlet()">
-  <%doc>Requires context variable c.users_online</%doc>
   %if hasattr(c, 'todo_items'):
     <%
     all_done = True
