@@ -64,7 +64,8 @@
                     url('start_registration_with_location',
                         path='/'.join(location.path)),
                     id='i-study-here-button',
-                    class_='dark')}
+                    class_='dark',
+                    method='GET')}
     </%self:portlet>
   %endif
 </%def>
