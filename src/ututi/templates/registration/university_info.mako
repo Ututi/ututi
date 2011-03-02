@@ -29,7 +29,7 @@
       table#people-box td.name {
         vertical-align: top;
         font-size: 9px;
-        word-wrap: wrap;
+        word-wrap: break-word;
       }
 </%def>
 
