@@ -9,8 +9,8 @@ by clicking 'Register' button:
     >>> browser.open('http://localhost/school/uni')
 
     >>> browser.getControl('I study here').click()
-    >>> browser.url
-    'http://localhost/registration/uni/start'
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>Registration to U-niversity</h1>
 
 User has to type in a valid email address to initiate registration:
 
