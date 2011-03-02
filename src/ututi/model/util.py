@@ -81,7 +81,7 @@ def logo_property(square=False, logo_attr='raw_logo', inherit=False):
 
     def get(self):
         logo = getattr(self, logo_attr)
-        if logo is None and inherit:
+        if logo is None and inherit and self.parent is not None:
             return self.parent.logo
         else:
             return logo
