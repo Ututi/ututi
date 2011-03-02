@@ -109,20 +109,6 @@
       ${h.link_to(_('Create group'), url(controller='group', action='create_academic'), method='GET')}
     </div>
   </%self:uportlet>
-
-%if c.user is None:
-<script type="text/javascript"><!--
-google_ad_client = "pub-1809251984220343";
-/* Universities portlet 300x250 */
-google_ad_slot = "4000532165";
-google_ad_width = 300;
-google_ad_height = 250;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script> 
-%endif
 </%def>
 
 <%def name="location_members_portlet(location=None, count=None)">

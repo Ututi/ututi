@@ -213,3 +213,20 @@
   </%self:portlet>
   %endif
 </%def>
+
+<%def name="google_ads_portlet()">
+  <%self:portlet id="google-ads-portlet">
+  %if c.user is None:
+    <script type="text/javascript">
+      <!--
+      google_ad_client = "pub-1809251984220343";
+      google_ad_slot = "4000532165";
+      google_ad_width = 165;
+      google_ad_height = 250;
+      //-->
+    </script>
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+  %endif
+  </%self:portlet>
+</%def>
+
